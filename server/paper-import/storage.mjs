@@ -24,6 +24,8 @@ const clozeAnalysisFileName = 'cloze-analysis-v1.json'
 const grammarFillAnalysisFileName = 'grammar-fill-analysis-v1.json'
 const writingAnalysisFileName = 'writing-analysis-v1.json'
 const listeningAnalysisFileName = 'listening-analysis-v1.json'
+const paragraphSummariesFileName = 'paragraph-summaries-v1.json'
+const publicSearchMetadataFileName = 'public-search-metadata-v1.json'
 const analysisArtifacts = Object.freeze([
   ['readingAnalysis', readingChoiceAnalysisFileName],
   ['scAnalysis', sevenChoicesAnalysisFileName],
@@ -340,6 +342,12 @@ function makeVersionedArtifacts(packageData, version) {
     grammarFillAnalysis,
     writingAnalysis,
     listeningAnalysis,
+    paragraphSummariesBytes: packageData.paragraphSummariesBytes
+      ? Buffer.from(packageData.paragraphSummariesBytes)
+      : null,
+    publicSearchMetadataBytes: packageData.publicSearchMetadataBytes
+      ? Buffer.from(packageData.publicSearchMetadataBytes)
+      : null,
     normalizedGroupsSidecar,
     paginationPlan,
   }
@@ -399,6 +407,38 @@ export function assertPaperImportAnalysisSidecars({ baseDir, packageData, versio
   return digestJson(actual)
 }
 
+export function assertPaperImportParagraphSummaries({ baseDir, packageData }) {
+  if (!packageData.paragraphSummariesBytes) {
+    throw new Error('Public-paper publication requires paragraph summaries')
+  }
+  const filePath = path.join(baseDir, paragraphSummariesFileName)
+  if (!existsSync(filePath)) throw new Error('Published paragraph summaries are missing')
+  const actual = readFileSync(filePath)
+  const expected = Buffer.from(packageData.paragraphSummariesBytes)
+  if (!actual.equals(expected)) {
+    throw new Error('Published paragraph summaries differ from Review projection')
+  }
+  return `sha256:${createHash('sha256').update(actual).digest('hex')}`
+}
+
+export function assertPaperImportPublicSearchMetadata({ baseDir, packageData }) {
+  if (!packageData.publicSearchMetadataBytes) {
+    throw new Error('Public-paper publication requires public search metadata')
+  }
+  const filePath = path.join(baseDir, publicSearchMetadataFileName)
+  if (!existsSync(filePath)) throw new Error('Published public search metadata is missing')
+  const actual = readFileSync(filePath)
+  const expected = Buffer.from(packageData.publicSearchMetadataBytes)
+  if (!actual.equals(expected)) {
+    throw new Error('Published public search metadata differs from Review projection')
+  }
+  // One durable receipt value binds both required public-profile artifacts.
+  return digestJson({
+    paragraphSummariesDigest: assertPaperImportParagraphSummaries({ baseDir, packageData }),
+    publicSearchMetadataDigest: `sha256:${createHash('sha256').update(actual).digest('hex')}`,
+  })
+}
+
 export function writePaperImportVersion({
   paperAssetsDir,
   packageData,
@@ -436,6 +476,12 @@ export function writePaperImportVersion({
       throw new Error('Forced version-write failure')
     }
     writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
+    if (artifacts.paragraphSummariesBytes) {
+      writeFileSync(path.join(tempDir, paragraphSummariesFileName), artifacts.paragraphSummariesBytes)
+    }
+    if (artifacts.publicSearchMetadataBytes) {
+      writeFileSync(path.join(tempDir, publicSearchMetadataFileName), artifacts.publicSearchMetadataBytes)
+    }
     writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
     if (artifacts.paginationPlan) {
       writeJson(path.join(tempDir, 'pagination-plan.json'), artifacts.paginationPlan)
@@ -592,6 +638,20 @@ export function swapPaperImportLatest({
   mkdirSync(tempLatest, { recursive: true })
   for (const fileName of ['paper-asset.json', 'answer-key.json', 'import-meta.json']) {
     writeFileSync(path.join(tempLatest, fileName), readFileSync(path.join(versionDir, fileName)))
+  }
+  const paragraphSummariesPath = path.join(versionDir, paragraphSummariesFileName)
+  if (existsSync(paragraphSummariesPath)) {
+    writeFileSync(
+      path.join(tempLatest, paragraphSummariesFileName),
+      readFileSync(paragraphSummariesPath),
+    )
+  }
+  const publicSearchMetadataPath = path.join(versionDir, publicSearchMetadataFileName)
+  if (existsSync(publicSearchMetadataPath)) {
+    writeFileSync(
+      path.join(tempLatest, publicSearchMetadataFileName),
+      readFileSync(publicSearchMetadataPath),
+    )
   }
   const paginationPlanPath = path.join(versionDir, 'pagination-plan.json')
   if (existsSync(paginationPlanPath)) {

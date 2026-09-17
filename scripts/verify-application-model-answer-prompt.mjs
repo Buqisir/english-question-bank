@@ -8,6 +8,7 @@ import {
   buildApplicationModelAnswerMessages,
   buildApplicationStagedAnalysisContract,
   buildCompleteApplicationTaskText,
+  validateApplicationModelAnswer,
 } from '../server/paper-import-ai/applicationWritingWorkflow.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -56,5 +57,22 @@ assert.match(stagedPrompt, /actual count \(including one or three\)/)
 assert.doesNotMatch(stagedPrompt, /"highlightExpressions"\s*:/)
 assert.match(stagedPrompt, /exactly\s+these top-level keys and no others/)
 assert.equal(buildApplicationStagedAnalysisContract(), `${v3Prompt}\n\n${stagedPrompt}`)
+
+assert.match(v3Prompt, /110词左右为目标，推荐100—120词/)
+assert.doesNotMatch(v3Prompt, /85—100|约105词/)
+assert.match(doctrine, /约80词任务以110词左右为编辑目标/)
+const given = writingTask.applicationGiven
+const candidate = (count) => [...given.top, Array(count).fill('word').join(' '), ...given.bottom].join('\n')
+for (const [count, status] of [[80, 'accepted'], [99, 'accepted'], [100, 'recommended'], [110, 'recommended'], [116, 'recommended'], [120, 'recommended']]) {
+  assert.deepEqual(validateApplicationModelAnswer({ modelAnswer: candidate(count), writingTask, groupPassage: null }), {
+    studentWordCount: count, wordCountStatus: status,
+  })
+}
+for (const count of [79, 121]) {
+  assert.throws(() => validateApplicationModelAnswer({ modelAnswer: candidate(count), writingTask, groupPassage: null }), /outside the accepted range \[80, 120\]/)
+}
+const otherTask = { ...writingTask, wordCountTarget: 100 }
+assert.equal(validateApplicationModelAnswer({ modelAnswer: candidate(130), writingTask: otherTask, groupPassage: null }).studentWordCount, 130)
+assert.throws(() => validateApplicationModelAnswer({ modelAnswer: candidate(131), writingTask: otherTask, groupPassage: null }), /outside the accepted range \[80, 130\]/)
 
 console.log('PASS application model-answer workflow loads production V3 plus the shared teaching doctrine and complete reconstructed task; the staged one-pass contract is tracked and composed; V2 remains inactive')

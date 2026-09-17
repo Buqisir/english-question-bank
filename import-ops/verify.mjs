@@ -543,6 +543,16 @@ assert.match(client, /认可不是部署授权/, 'approval UI states the deploym
 assert.match(client, /data-external-listening-check="playback"/, 'OPS UI requires explicit playback matching')
 assert.match(client, /data-external-listening-check="cohesion"/, 'OPS UI requires complete Listening cohesion')
 assert.match(client, /data-external-listening-check="safety"/, 'OPS UI requires actual-content safety review')
+assert.match(
+  client,
+  /我只检查并认可 Screen、Student Print、Teacher Print 与 PDF 的最终版式；未人工审核原题语义、来源答案、答案映射或逐段摘要。/,
+  'public-paper approval explicitly limits Owner review to final layout',
+)
+assert.match(client, /approvalScope: 'layout_only'/, 'public-paper approval submits the layout-only receipt scope')
+assert.match(client, /AI 派生的中文摘要，仅供参考。可展开查看，但不属于本次人工认可范围。/,
+  'public summaries remain informational rather than required review content')
+assert.match(client, /<details>[\s\S]*<summary>查看逐段摘要<\/summary>/,
+  'public summaries are collapsible')
 assert.match(reviewRoutes, /\/approve[\s\S]{0,500}requireOwner\(response, context\)/,
   'the approval route rejects import_agent authority before store approval')
 assert.doesNotMatch(client, /pull-run-push|deploy\(/, 'review UI has no deployment action')
@@ -621,8 +631,8 @@ assert.match(
 )
 assert.match(
   importSkill,
-  /a1\.xxlarge[\s\S]*availableParallelism/,
-  'skill documents the dedicated high-compute Orb and verifies actual CPU capacity',
+  /a1\.medium[\s\S]*availableParallelism/,
+  'skill preserves the Owner-selected Medium Orb and verifies actual CPU capacity',
 )
 assert.match(
   importSkill,

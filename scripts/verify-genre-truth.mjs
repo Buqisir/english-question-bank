@@ -11,10 +11,9 @@
  *      of the old question-type-name values (reading/cloze/sevenChoices/
  *      grammarFill/writing). Tested in isolated SQLite; --db <path> additionally
  *      audits a selected corpus read-only, including applied decision equality.
- *   4. publisher 源不再向 discourse_type 写题型名 — source-level regression
- *      guard: publisher.mjs's ON CONFLICT branch never assigns discourse_type
- *      (so re-publishing a paper can't stomp real genre truth), and the INSERT
- *      branch writes NULL for new passages (never group.groupType).
+ *   4. publisher genre projection follows the current contract: validated compact
+ *      public metadata supplies genre; absent legacy metadata preserves an existing
+ *      value on conflict; group.groupType is never used as genre.
  */
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs'
@@ -136,39 +135,41 @@ if (args.db) {
 console.log()
 
 // ─── Req 4: publisher source regression guard ─────────────────────────────────
-console.log('=== Req 4: publisher.mjs no longer writes question-type-name into discourse_type ===')
+console.log('=== Req 4: publisher.mjs projects public genre and preserves legacy genre ===')
 {
   const publisherSrc = readFileSync(path.join(rootDir, 'server/paper-import/publisher.mjs'), 'utf8')
-
-  // The ON CONFLICT DO UPDATE SET clause for the passages upsert must not assign
-  // discourse_type = excluded.discourse_type (that's what let re-publishing stomp
-  // real genre truth back to the question-type name).
-  const upsertMatch = publisherSrc.match(/INSERT INTO passages[\s\S]*?ON CONFLICT\(id\) DO UPDATE SET([\s\S]*?)`/)
+  const upsertMatch = publisherSrc.match(/db\.prepare\(\s*`(\s*INSERT INTO passages[\s\S]*?ON CONFLICT\(id\) DO UPDATE SET[\s\S]*?)`\s*,?\s*\)\.run\(/)
   assert('Req4: passages upsert block found', Boolean(upsertMatch))
   if (upsertMatch) {
     assert(
-      'Req4: ON CONFLICT branch does not assign discourse_type',
-      !/discourse_type\s*=\s*excluded\.discourse_type/.test(upsertMatch[1]),
-      'found discourse_type = excluded.discourse_type in the conflict-update clause',
+      'Req4: conflict branch preserves existing genre only when incoming genre is absent',
+      /discourse_type\s*=\s*CASE\s+WHEN excluded\.discourse_type IS NULL THEN passages\.discourse_type\s+ELSE excluded\.discourse_type\s+END/s.test(upsertMatch[1]),
+      'expected NULL-preserving public genre replacement rule',
     )
+
+    const sqlDb = new DatabaseSync(':memory:')
+    try {
+      sqlDb.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
+      sqlDb.exec("INSERT INTO sources (id, source_type) VALUES ('publisher-fixture', 'self_made')")
+      const statement = sqlDb.prepare(upsertMatch[1])
+      const args = (genre) => ['publisher-passage', 'publisher-fixture', 'Title', 'Text', 'Summary', '', genre, 1, 'medium', 'fixture']
+      statement.run(...args('记叙'))
+      statement.run(...args('说明'))
+      assert('Req4: validated compact metadata genre replaces an existing genre', sqlDb.prepare("SELECT discourse_type FROM passages WHERE id = 'publisher-passage'").get().discourse_type === '说明')
+      statement.run(...args(null))
+      assert('Req4: absent legacy metadata preserves the existing genre', sqlDb.prepare("SELECT discourse_type FROM passages WHERE id = 'publisher-passage'").get().discourse_type === '说明')
+    } finally {
+      sqlDb.close()
+    }
   }
 
-  // The INSERT VALUES side must never pass group.groupType as the discourse_type
-  // param (the original bug) — the .run(...) call site must pass a literal null.
-  const runCallMatch = publisherSrc.match(/\.run\(\s*passageId,\s*sourceId,\s*groupTitle,\s*materialText,\s*summary,\s*'',([\s\S]*?)materialText\.split/)
-  assert('Req4: passages .run(...) call site found', Boolean(runCallMatch))
+  const runCallMatch = publisherSrc.match(/\.run\(\s*passageId,\s*sourceId,\s*groupTitle,\s*materialText,\s*summary,\s*'',([\s\S]*?)publicMetadata\?\.counts/)
+  assert('Req4: passages .run(...) genre argument found', Boolean(runCallMatch))
   if (runCallMatch) {
-    // Strip `//` comment lines before checking — the surrounding explanatory
-    // comment legitimately mentions "group.groupType" in prose (describing the
-    // bug it fixes); only the executable code lines matter for this assertion.
-    const codeOnly = runCallMatch[1]
-      .split('\n')
-      .filter((line) => !line.trim().startsWith('//'))
-      .join('\n')
     assert(
-      'Req4: discourse_type param is a literal null (not group.groupType)',
-      /^\s*null\s*,\s*$/m.test(codeOnly) && !/group\.groupType/.test(codeOnly),
-      `run() args (code only) before word_count: ${codeOnly.trim()}`,
+      'Req4: genre comes from public metadata and never group.groupType',
+      /publicMetadata\?\.genre\s*\|\|\s*null/.test(runCallMatch[1]) && !/group\.groupType/.test(runCallMatch[1]),
+      `genre argument: ${runCallMatch[1].trim()}`,
     )
   }
 }

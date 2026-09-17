@@ -54,7 +54,16 @@ export function createOrderedResultFlusher(flush) {
 }
 
 export function verificationSchedulingPolicy(script, source) {
-  const declaredRenderResource = /^\/\/\s*verify-resource:\s*browser-render\s*$/mu.test(source)
+  const declaredResources = new Set(
+    [...source.matchAll(/^\/\/\s*verify-resource:\s*([a-z0-9][a-z0-9:-]*)\s*$/gmu)]
+      .map((match) => match[1]),
+  )
+  for (const resource of declaredResources) {
+    if (!['browser-render', 'source-only-import-ledger'].includes(resource)) {
+      throw new Error(`Unknown verify-resource ${resource} in ${script}`)
+    }
+  }
+  const declaredRenderResource = declaredResources.has('browser-render')
   const renderResource = declaredRenderResource
     || /(?:chromium\.launch|withChromiumPage|chromiumPool|vivliostyle|\bsoffice\b|libreoffice)/iu.test(source)
   const fixedPorts = new Set([
@@ -65,7 +74,10 @@ export function verificationSchedulingPolicy(script, source) {
     script,
     exclusive: false,
     resourceKeys: [
-      ...(renderResource ? ['browser-render'] : []),
+      ...new Set([
+        ...declaredResources,
+        ...(renderResource ? ['browser-render'] : []),
+      ]),
       ...[...fixedPorts].sort().map((port) => `port:${port}`),
     ],
   }

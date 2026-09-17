@@ -182,6 +182,13 @@ export function reviewBundleDigest(input) {
     candidateDigest: input.candidateDigest,
     visibleStructureDigest: input.visibleStructureDigest,
     ...(input.analysisDigest ? { analysisDigest: input.analysisDigest } : {}),
+    ...(input.importProfile ? { importProfile: input.importProfile } : {}),
+    ...(input.paragraphSummariesDigest
+      ? { paragraphSummariesDigest: input.paragraphSummariesDigest }
+      : {}),
+    ...(input.publicSearchMetadataDigest
+      ? { publicSearchMetadataDigest: input.publicSearchMetadataDigest }
+      : {}),
     producerBuildId: input.producerBuildId,
     files: input.files.map(fileDescriptor).sort((a, b) => a.path.localeCompare(b.path)),
   })
@@ -201,7 +208,7 @@ export function ocrReviewBundleDigest(input) {
 }
 
 export function validateReviewBundleManifest(input) {
-  if (input?.schemaVersion !== 'web-import-review-bundle-v1') {
+  if (!['web-import-review-bundle-v1', 'web-import-review-bundle-v2'].includes(input?.schemaVersion)) {
     throw storeError('IMPORT_REVIEW_SCHEMA_INVALID', 'Unsupported review bundle schema', 400)
   }
   const paperId = requiredString(input.paperId, 'paperId', 160)
@@ -218,6 +225,7 @@ export function validateReviewBundleManifest(input) {
   if (files.reduce((sum, file) => sum + file.byteLength, 0) > MAX_BUNDLE_BYTES) {
     throw storeError('IMPORT_REVIEW_SIZE_INVALID', 'Review bundle is too large', 413)
   }
+  const publicPaper = input.schemaVersion === 'web-import-review-bundle-v2'
   const manifest = {
     schemaVersion: input.schemaVersion,
     paperId,
@@ -238,7 +246,24 @@ export function validateReviewBundleManifest(input) {
       'visibleStructureDigest',
       160,
     ),
-    analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160),
+    ...(publicPaper
+      ? {
+          importProfile: requiredString(input.importProfile, 'importProfile', 100),
+          paragraphSummariesDigest: requiredString(
+            input.paragraphSummariesDigest,
+            'paragraphSummariesDigest',
+            160,
+          ),
+          publicSearchMetadataDigest: requiredString(
+            input.publicSearchMetadataDigest,
+            'publicSearchMetadataDigest',
+            160,
+          ),
+          ...(input.analysisDigest
+            ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
+            : {}),
+        }
+      : { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }),
     producerBuildId: requiredString(input.producerBuildId, 'producerBuildId', 200),
     files,
     resolvesIssueIds: Array.isArray(input.resolvesIssueIds)
@@ -249,11 +274,16 @@ export function validateReviewBundleManifest(input) {
     manifest.sourceDigest,
     manifest.candidateDigest,
     manifest.visibleStructureDigest,
-    manifest.analysisDigest,
+    ...(manifest.analysisDigest ? [manifest.analysisDigest] : []),
+    ...(manifest.paragraphSummariesDigest ? [manifest.paragraphSummariesDigest] : []),
+    ...(manifest.publicSearchMetadataDigest ? [manifest.publicSearchMetadataDigest] : []),
   ]) {
     if (!SHA256.test(digest)) {
       throw storeError('IMPORT_REVIEW_DIGEST_INVALID', 'Review identity digest is invalid', 400)
     }
+  }
+  if (publicPaper && manifest.importProfile !== 'public-paper-v1') {
+    throw storeError('IMPORT_REVIEW_PROFILE_INVALID', 'Unsupported public-paper import profile', 400)
   }
   const computed = reviewBundleDigest(manifest)
   if (input.bundleDigest !== computed) {
@@ -538,8 +568,59 @@ function shippingGuardRow(row) {
   }
 }
 
-function promotionRow(row) {
+function promotionRow(db, row) {
   if (!row) return null
+  const revision = db.prepare(`
+    SELECT manifest_json, approval_receipt_json
+    FROM import_review_revisions WHERE id = ? AND paper_id = ?
+  `).get(row.revision_id, row.paper_id)
+  const manifest = parseJson(revision?.manifest_json, {})
+  const approval = parseJson(revision?.approval_receipt_json)
+  const exactApproval = approval?.approvalId === row.approval_id
+    && approval?.revisionId === row.revision_id
+    && approval?.paperId === row.paper_id
+    ? approval
+    : null
+  const publicPaper = manifest.schemaVersion === 'web-import-review-bundle-v2'
+  if (publicPaper) {
+    if (
+      manifest.importProfile !== 'public-paper-v1'
+      || !SHA256.test(manifest.paragraphSummariesDigest || '')
+      || !SHA256.test(manifest.publicSearchMetadataDigest || '')
+    ) {
+      throw storeError(
+        'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
+        'Promotion public profile does not match its immutable revision manifest',
+      )
+    }
+    const immutableIdentity = {
+      sourceDigest: row.source_digest,
+      candidateDigest: row.candidate_digest,
+      visibleStructureDigest: row.visible_structure_digest,
+      analysisDigest: row.analysis_digest || undefined,
+      bundleDigest: row.bundle_digest,
+      importProfile: manifest.importProfile,
+      paragraphSummariesDigest: manifest.paragraphSummariesDigest,
+      publicSearchMetadataDigest: manifest.publicSearchMetadataDigest,
+    }
+    for (const key of [
+      'sourceDigest',
+      'candidateDigest',
+      'visibleStructureDigest',
+      'analysisDigest',
+      'bundleDigest',
+      'importProfile',
+      'paragraphSummariesDigest',
+      'publicSearchMetadataDigest',
+    ]) {
+      if (!exactApproval || manifest[key] !== immutableIdentity[key] || approval[key] !== immutableIdentity[key]) {
+        throw storeError(
+          'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
+          `Promotion ${key} does not match its immutable public approval`,
+        )
+      }
+    }
+  }
   return {
     schemaVersion: 'web-import-review-promotion-v1',
     promotionId: row.id,
@@ -549,7 +630,14 @@ function promotionRow(row) {
     sourceDigest: row.source_digest,
     candidateDigest: row.candidate_digest,
     visibleStructureDigest: row.visible_structure_digest,
-    analysisDigest: row.analysis_digest,
+    ...(publicPaper
+      ? {
+          importProfile: manifest.importProfile,
+          paragraphSummariesDigest: manifest.paragraphSummariesDigest,
+          publicSearchMetadataDigest: manifest.publicSearchMetadataDigest,
+          ...(manifest.analysisDigest ? { analysisDigest: manifest.analysisDigest } : {}),
+        }
+      : { analysisDigest: row.analysis_digest }),
     bundleDigest: row.bundle_digest,
     guardId: row.guard_id,
     state: row.state,
@@ -559,7 +647,9 @@ function promotionRow(row) {
     assetVersion: row.asset_version == null ? null : Number(row.asset_version),
     versionName: row.version_name,
     canonicalPublicationDigest: row.canonical_publication_digest,
-    analysisPublicationDigest: row.analysis_publication_digest,
+    ...(publicPaper
+      ? { paragraphSummariesPublicationDigest: row.analysis_publication_digest }
+      : { analysisPublicationDigest: row.analysis_publication_digest }),
     failureCode: row.failure_code,
     failureMessage: row.failure_message,
     failedAt: row.failed_at,
@@ -790,6 +880,14 @@ export function createImportReviewStore({
   }
 
   function assertProjectionIdentity(projection, revision) {
+    const projectedPublicProfile = projection.importProfile === 'public-paper-v1'
+    const manifestPublicProfile = revision.manifest.schemaVersion === 'web-import-review-bundle-v2'
+    if (projectedPublicProfile !== manifestPublicProfile) {
+      throw storeError(
+        'IMPORT_REVIEW_PROJECTION_MISMATCH',
+        'importProfile does not match server-derived source truth',
+      )
+    }
     const identities = revision.reviewKind === 'ocr'
       ? [
           [projection.paperId, revision.paperId, 'paperId'],
@@ -804,6 +902,13 @@ export function createImportReviewStore({
           [projection.visibleStructureDigest, revision.visibleStructureDigest, 'visibleStructureDigest'],
           ...(revision.manifest.analysisDigest
             ? [[projection.analysisDigest, revision.manifest.analysisDigest, 'analysisDigest']]
+            : []),
+          ...(revision.manifest.paragraphSummariesDigest
+            ? [
+                [projection.importProfile, revision.manifest.importProfile, 'importProfile'],
+                [projection.paragraphSummariesDigest, revision.manifest.paragraphSummariesDigest, 'paragraphSummariesDigest'],
+                [projection.publicSearchMetadataDigest, revision.manifest.publicSearchMetadataDigest, 'publicSearchMetadataDigest'],
+              ]
             : []),
         ]
     for (const [actual, expected, label] of identities) {
@@ -1438,6 +1543,13 @@ export function createImportReviewStore({
         if (input?.bundleDigest !== revision.bundleDigest) {
           throw storeError('IMPORT_REVIEW_STALE_REVISION', 'Browser revision digest is stale')
         }
+        if (revision.manifest.importProfile && input?.approvalScope !== 'layout_only') {
+          throw storeError(
+            'IMPORT_REVIEW_APPROVAL_SCOPE_INVALID',
+            'Public-paper approval requires approvalScope layout_only',
+            400,
+          )
+        }
         const unresolvedCount = Number(db.prepare(`
           SELECT COUNT(*) AS count FROM import_review_issues
           WHERE paper_id = ? AND state IN ('open', 'fixed_pending_review')
@@ -1448,7 +1560,7 @@ export function createImportReviewStore({
         assertStoredRevisionFiles(revision, db)
         const projection = projectRevision(revisionDirectory(revision.id), {
           reviewKind: revision.reviewKind,
-          requireAnalyses: true,
+          requireAnalyses: !revision.manifest.importProfile,
         })
         assertProjectionIdentity(projection, revision)
         const externalAudio = projection?.listeningReview?.audio?.state
@@ -1511,6 +1623,14 @@ export function createImportReviewStore({
           candidateDigest: revision.candidateDigest,
           visibleStructureDigest: revision.visibleStructureDigest,
           analysisDigest: revision.manifest.analysisDigest,
+          ...(revision.manifest.importProfile
+            ? {
+                importProfile: revision.manifest.importProfile,
+                paragraphSummariesDigest: revision.manifest.paragraphSummariesDigest,
+                publicSearchMetadataDigest: revision.manifest.publicSearchMetadataDigest,
+                approvalScope: 'layout_only',
+              }
+            : {}),
           bundleDigest: revision.bundleDigest,
           producerBuildId: revision.producerBuildId,
           rendererBuildId: revision.rendererBuildId,
@@ -1619,6 +1739,7 @@ export function createImportReviewStore({
   }
 
   function promotionIdentity(input) {
+    const publicPaper = input?.importProfile === 'public-paper-v1'
     return {
       approvalId: requiredString(input?.approvalId, 'approvalId', 100),
       revisionId: requiredString(input?.revisionId, 'revisionId', 100),
@@ -1629,7 +1750,24 @@ export function createImportReviewStore({
         'visibleStructureDigest',
         160,
       ),
-      analysisDigest: requiredString(input?.analysisDigest, 'analysisDigest', 160),
+      ...(publicPaper
+        ? {
+            importProfile: input.importProfile,
+            paragraphSummariesDigest: requiredString(
+              input?.paragraphSummariesDigest,
+              'paragraphSummariesDigest',
+              160,
+            ),
+            publicSearchMetadataDigest: requiredString(
+              input?.publicSearchMetadataDigest,
+              'publicSearchMetadataDigest',
+              160,
+            ),
+            ...(input?.analysisDigest
+              ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
+              : {}),
+          }
+        : { analysisDigest: requiredString(input?.analysisDigest, 'analysisDigest', 160) }),
       bundleDigest: requiredString(input?.bundleDigest, 'bundleDigest', 160),
     }
   }
@@ -1641,7 +1779,8 @@ export function createImportReviewStore({
       'sourceDigest',
       'candidateDigest',
       'visibleStructureDigest',
-      'analysisDigest',
+      ...(expected.importProfile ? ['importProfile', 'paragraphSummariesDigest', 'publicSearchMetadataDigest'] : []),
+      ...(expected.analysisDigest ? ['analysisDigest'] : []),
       'bundleDigest',
     ]) {
       if (promotion[key] !== expected[key]) {
@@ -1680,7 +1819,10 @@ export function createImportReviewStore({
       'sourceDigest',
       'candidateDigest',
       'visibleStructureDigest',
-      'analysisDigest',
+      ...(expected.importProfile
+        ? ['importProfile', 'paragraphSummariesDigest', 'publicSearchMetadataDigest']
+        : ['analysisDigest']),
+      ...(expected.importProfile && expected.analysisDigest ? ['analysisDigest'] : []),
       'bundleDigest',
     ]) {
       if (approval[key] !== expected[key]) {
@@ -1702,7 +1844,7 @@ export function createImportReviewStore({
   }
 
   function latestPromotion(paperId) {
-    return withDb(false, (db) => promotionRow(db.prepare(`
+    return withDb(false, (db) => promotionRow(db, db.prepare(`
       SELECT * FROM import_review_promotions
       WHERE paper_id = ?
       ORDER BY requested_at DESC, rowid DESC
@@ -1721,7 +1863,7 @@ export function createImportReviewStore({
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
-        const existing = promotionRow(db.prepare(`
+        const existing = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE approval_id = ?
         `).get(expected.approvalId))
         if (existing) {
@@ -1794,7 +1936,7 @@ export function createImportReviewStore({
                 failed_at = NULL, updated_at = ?
             WHERE id = ?
           `).run(guardId, requestedBy, requestedAt, existing.promotionId)
-          const promotion = promotionRow(db.prepare(`
+          const promotion = promotionRow(db, db.prepare(`
             SELECT * FROM import_review_promotions WHERE id = ?
           `).get(existing.promotionId))
           db.exec('COMMIT')
@@ -1836,14 +1978,14 @@ export function createImportReviewStore({
           approval.sourceDigest,
           approval.candidateDigest,
           approval.visibleStructureDigest,
-          approval.analysisDigest,
+          approval.analysisDigest || '',
           approval.bundleDigest,
           guardId,
           requestedBy,
           requestedAt,
           requestedAt,
         )
-        const promotion = promotionRow(db.prepare(`
+        const promotion = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ?
         `).get(promotionId))
         db.exec('COMMIT')
@@ -1874,7 +2016,7 @@ export function createImportReviewStore({
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
-        const promotion = promotionRow(db.prepare(`
+        const promotion = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ? AND paper_id = ?
         `).get(promotionId, paperId))
         if (!promotion || promotion.state !== 'publishing') {
@@ -1912,7 +2054,7 @@ export function createImportReviewStore({
           updatedAt,
           promotionId,
         )
-        const updated = promotionRow(db.prepare(`
+        const updated = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ?
         `).get(promotionId))
         db.exec('COMMIT')
@@ -1925,24 +2067,31 @@ export function createImportReviewStore({
   }
 
   function markPromotionPublished(paperId, promotionId, input) {
-    const analysisPublicationDigest = requiredString(
-      input?.analysisPublicationDigest,
-      'analysisPublicationDigest',
-      160,
-    )
-    if (!SHA256.test(analysisPublicationDigest)) {
-      throw storeError('IMPORT_REVIEW_DIGEST_INVALID', 'Published analysis digest is invalid', 400)
-    }
     const publishedAt = nowIso()
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
-        const promotion = promotionRow(db.prepare(`
+        const promotion = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ? AND paper_id = ?
         `).get(promotionId, paperId))
         if (!promotion) throw storeError('IMPORT_REVIEW_PROMOTION_NOT_FOUND', 'Promotion not found', 404)
+        const publicationDigest = requiredString(
+          promotion.importProfile
+            ? input?.paragraphSummariesPublicationDigest
+            : input?.analysisPublicationDigest,
+          promotion.importProfile
+            ? 'paragraphSummariesPublicationDigest'
+            : 'analysisPublicationDigest',
+          160,
+        )
+        if (!SHA256.test(publicationDigest)) {
+          throw storeError('IMPORT_REVIEW_DIGEST_INVALID', 'Published artifact digest is invalid', 400)
+        }
         if (promotion.state === 'published') {
-          if (promotion.analysisPublicationDigest !== analysisPublicationDigest) {
+          const storedDigest = promotion.importProfile
+            ? promotion.paragraphSummariesPublicationDigest
+            : promotion.analysisPublicationDigest
+          if (storedDigest !== publicationDigest) {
             throw storeError(
               'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
               'Published analysis digest differs from immutable receipt',
@@ -1969,10 +2118,10 @@ export function createImportReviewStore({
           UPDATE import_review_promotions
           SET state = 'published', analysis_publication_digest = ?, published_at = ?, updated_at = ?
           WHERE id = ?
-        `).run(analysisPublicationDigest, publishedAt, publishedAt, promotionId)
+        `).run(publicationDigest, publishedAt, publishedAt, promotionId)
         db.prepare(`DELETE FROM import_review_shipping_guards WHERE id = ?`)
           .run(promotion.guardId)
-        const updated = promotionRow(db.prepare(`
+        const updated = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ?
         `).get(promotionId))
         db.exec('COMMIT')
@@ -1991,7 +2140,7 @@ export function createImportReviewStore({
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
-        const promotion = promotionRow(db.prepare(`
+        const promotion = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ? AND paper_id = ?
         `).get(promotionId, paperId))
         if (!promotion) throw storeError('IMPORT_REVIEW_PROMOTION_NOT_FOUND', 'Promotion not found', 404)
@@ -2015,7 +2164,7 @@ export function createImportReviewStore({
         `).run(failureCode, failureMessage, failedAt, failedAt, promotionId)
         db.prepare(`DELETE FROM import_review_shipping_guards WHERE id = ?`)
           .run(promotion.guardId)
-        const updated = promotionRow(db.prepare(`
+        const updated = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ?
         `).get(promotionId))
         db.exec('COMMIT')
@@ -2058,6 +2207,7 @@ export function createImportReviewStore({
   }
 
   function acquireShippingGuard(paperId, input, actor) {
+    const publicPaper = input?.importProfile === 'public-paper-v1'
     const expected = {
       approvalId: requiredString(input?.approvalId, 'approvalId', 100),
       revisionId: requiredString(input?.revisionId, 'revisionId', 100),
@@ -2068,7 +2218,16 @@ export function createImportReviewStore({
         'visibleStructureDigest',
         160,
       ),
-      analysisDigest: requiredString(input?.analysisDigest, 'analysisDigest', 160),
+      ...(publicPaper
+        ? {
+            importProfile: input.importProfile,
+            paragraphSummariesDigest: requiredString(input?.paragraphSummariesDigest, 'paragraphSummariesDigest', 160),
+            publicSearchMetadataDigest: requiredString(input?.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
+            ...(input?.analysisDigest
+              ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
+              : {}),
+          }
+        : { analysisDigest: requiredString(input?.analysisDigest, 'analysisDigest', 160) }),
       bundleDigest: requiredString(input?.bundleDigest, 'bundleDigest', 160),
     }
     const acquiredAt = nowIso()
@@ -2102,7 +2261,10 @@ export function createImportReviewStore({
           'sourceDigest',
           'candidateDigest',
           'visibleStructureDigest',
-          'analysisDigest',
+          ...(expected.importProfile
+            ? ['importProfile', 'paragraphSummariesDigest', 'publicSearchMetadataDigest']
+            : ['analysisDigest']),
+          ...(expected.importProfile && expected.analysisDigest ? ['analysisDigest'] : []),
           'bundleDigest',
         ]) {
           if (approval[key] !== expected[key]) {
@@ -2167,7 +2329,7 @@ export function createImportReviewStore({
             403,
           )
         }
-        const promotion = promotionRow(db.prepare(`
+        const promotion = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions
           WHERE guard_id = ? AND state = 'publishing'
         `).get(guardId))
@@ -2185,7 +2347,7 @@ export function createImportReviewStore({
             promotion.promotionId,
           )
           db.prepare('DELETE FROM import_review_shipping_guards WHERE id = ?').run(guardId)
-          const updated = promotionRow(db.prepare(`
+          const updated = promotionRow(db, db.prepare(`
             SELECT * FROM import_review_promotions WHERE id = ?
           `).get(promotion.promotionId))
           db.exec('COMMIT')

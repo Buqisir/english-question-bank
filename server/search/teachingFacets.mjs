@@ -55,8 +55,103 @@ export const analysisConfigs = [
   },
 ]
 
+const PUBLIC_METADATA_FILE = 'public-search-metadata-v1.json'
+const DIGEST = /^sha256:[a-f0-9]{64}$/
+const PUBLIC_FAMILY_TO_GROUP_TYPE = {
+  reading: 'reading',
+  'seven-choices': 'sevenChoices',
+  cloze: 'cloze',
+  'grammar-fill': 'grammarFill',
+  'application-writing': 'writing',
+  'continuation-writing': 'writing',
+}
+const RETRIEVAL_GROUP_TYPES = new Set(['reading', 'sevenChoices', 'cloze', 'grammarFill'])
+// This is the compatibility mapping owned by analyzeReading.mjs. Public
+// metadata deliberately stores the newer profile vocabulary, while search's
+// established facet API and scorer still consume skill.primary.
+const READING_PRIMARY_SKILL = {
+  detail: 'detail',
+  'paragraph-main-idea': 'mainIdea',
+  'passage-main-idea': 'mainIdea',
+  'best-title': 'title',
+  'detail-inference': 'inference',
+  attitude: 'attitude',
+  'writing-purpose': 'authorPurpose',
+  'character-trait': 'inference',
+  source: 'inference',
+  'word-meaning': 'wordMeaning',
+  reference: 'wordMeaning',
+  'writing-method': 'structure',
+}
+
 function readJsonFile(filePath) {
   return JSON.parse(readFileSync(filePath, 'utf8'))
+}
+
+/** Read the compact public retrieval sidecar as legacy-shaped facet entries.
+ * An absent sidecar returns null for legacy fallback. A present malformed,
+ * foreign, stale, or ownership-inconsistent sidecar throws so callers skip
+ * the whole paper rather than silently exposing conflicting legacy analysis.
+ */
+export function readPublicFacetEntries({ baseDir, paperId, questionToGroup }) {
+  const filePath = path.join(baseDir, PUBLIC_METADATA_FILE)
+  if (!existsSync(filePath)) return null
+  const sidecar = readJsonFile(filePath)
+  const invalid = (reason) => { throw new Error(`Invalid published public search metadata: ${reason}`) }
+  if (sidecar?.schemaVersion !== 'public-search-metadata-v1' || sidecar.paperId !== paperId
+    || !DIGEST.test(sidecar.sourceDigest || '') || !DIGEST.test(sidecar.candidateDigest || '')
+    || !Array.isArray(sidecar.groups)) invalid('shape or identity')
+
+  const importMetaPath = path.join(baseDir, 'import-meta.json')
+  if (!existsSync(importMetaPath)) invalid('import-meta.json binding is missing')
+  const binding = readJsonFile(importMetaPath)?.paginationPlanBinding
+  if (!binding || binding.sourceDigest !== sidecar.sourceDigest
+    || binding.candidateDigest !== sidecar.candidateDigest) invalid('pagination plan binding does not match')
+
+  const entries = new Map()
+  const groupIds = new Set()
+  for (const group of sidecar.groups) {
+    const groupType = PUBLIC_FAMILY_TO_GROUP_TYPE[group?.family]
+    if (!groupType || typeof group.groupId !== 'string' || groupIds.has(group.groupId)
+      || !Array.isArray(group.questionIds)
+      || !group.metadata || typeof group.metadata !== 'object') invalid('group shape')
+    const expected = [...questionToGroup].filter(([, owner]) => owner.groupId === group.groupId && owner.groupType === groupType)
+      .map(([questionId]) => questionId).sort()
+    const declared = group.questionIds.map(String).sort()
+    if (declared.length !== new Set(declared).size || JSON.stringify(expected) !== JSON.stringify(declared)) invalid('group ownership')
+    if (!RETRIEVAL_GROUP_TYPES.has(groupType)) {
+      groupIds.add(group.groupId) // writing remains persisted for its later consumer
+      continue
+    }
+    const items = group.metadata.questions
+    if (expected.length === 0 || !Array.isArray(items)) invalid('question metadata')
+    const itemIds = items.map((item) => String(item?.questionId || '')).sort()
+    if (itemIds.length !== new Set(itemIds).size || JSON.stringify(itemIds) !== JSON.stringify(expected)) invalid('question ownership')
+
+    for (const item of items) {
+      let projected
+      if (groupType === 'reading') {
+        const profile = item?.similarityProfile
+        const primary = READING_PRIMARY_SKILL[profile?.subtype] || READING_PRIMARY_SKILL[profile?.family]
+        if (!primary) invalid('reading profile')
+        projected = { skill: { primary } }
+      } else if (groupType === 'grammarFill') {
+        if (typeof item?.facetKey !== 'string' || typeof item?.blankType !== 'string'
+          || !item.derived || typeof item.derived !== 'object' || Array.isArray(item.derived)) invalid('grammar profile')
+        projected = { facetKey: item.facetKey, blankType: item.blankType, role: item.role, ...item.derived }
+      } else if (groupType === 'sevenChoices') {
+        if (![item?.roleFacet, item?.positionFacet, item?.primaryMechanismFacet]
+          .every((value) => typeof value === 'string' && value.length > 0)) invalid('seven-choices profile')
+        projected = { roleFacet: item.roleFacet, positionFacet: item.positionFacet, primaryMechanismFacet: item.primaryMechanismFacet }
+      } else {
+        if (typeof item?.pos !== 'string' || !(item.signatureFacet === null || typeof item.signatureFacet === 'string')) invalid('cloze profile')
+        projected = { pos: item.pos, signatureFacet: item.signatureFacet }
+      }
+      entries.set(String(item.questionId), { groupId: group.groupId, groupType, ...projected })
+    }
+    groupIds.add(group.groupId)
+  }
+  return { entries, groupIds }
 }
 
 // ─── Step 1: Per-type facet extractor ────────────────────────────────────────
@@ -248,6 +343,20 @@ export function createTeachingFacetIndex({ paperAssetsDir, warn = console.warn }
           }
         }
 
+        // Public retrieval metadata is authoritative when present. Aggregate
+        // it through the same extractors without manufacturing an analysis.
+        const publicFacets = readPublicFacetEntries({ baseDir, paperId, questionToGroup })
+        if (publicFacets) {
+          for (const raw of publicFacets.entries.values()) {
+            if (!index.has(raw.groupId)) index.set(raw.groupId, { ...createEmptyFacetBucket(), groupType: raw.groupType })
+            const bucket = index.get(raw.groupId)
+            if (raw.groupType === 'grammarFill') extractGrammarFillFacets(bucket, raw)
+            else if (raw.groupType === 'sevenChoices') extractSevenChoicesFacets(bucket, raw)
+            else if (raw.groupType === 'cloze') extractClozeFacets(bucket, raw)
+            else if (raw.groupType === 'reading') extractReadingFacets(bucket, raw)
+          }
+        }
+
         // Walk each analysis config
         for (const config of analysisConfigs) {
           const analysisPath = path.join(baseDir, 'analyses', config.fileName)
@@ -262,6 +371,7 @@ export function createTeachingFacetIndex({ paperAssetsDir, warn = console.warn }
           const groupFacets = extractGroupFacets(config.groupType, analysis, questionToGroup)
 
           for (const [groupId, facets] of groupFacets) {
+            if (publicFacets?.groupIds.has(groupId)) continue
             // Tag with groupType for query filtering
             index.set(groupId, { ...facets, groupType: config.groupType })
           }

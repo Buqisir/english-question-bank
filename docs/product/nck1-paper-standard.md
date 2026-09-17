@@ -1,8 +1,19 @@
 # 新课标一卷标准(NCK1 Paper Standard)v1(owner 2026-07-08 拍板)
 
+> 产品更新（2026-09-17）：[公共题库与个人解析](public-papers-personal-analysis.md)
+> 已确认。全库完整教学解析不再是目标供题前提；个人内容和精选人工审核参考分开。
+> 本文题面、结构、来源答案、媒体及原子发布要求不降级。全量解析/schema/发布门禁
+> 只为历史无 profile / external analyzed package 保留，不是新 raw-source 的生产目标。
+
 一切进入题库的试卷,先洗成本标准的结构与题号,再入库。本标准是
 导题工序的**数据契约**;排版视觉标准另见
 `docs/product/exam-paper-format-standards.md`(互补,不重叠)。
+
+新 raw-source 导入使用 `public-paper-v1`：本标准规定的完整题面、源答案、题号、媒体和
+source locator 全部保留，并为 prose body paragraph 提供 digest-bound 中文摘要；不要求
+九份教学解析；另产出 `public-search-metadata-v1.json` 的紧凑检索分类，不生成讲评、高亮、
+Embedding 或合同外语义标签。历史无 profile 和外部
+analyzed package 仍按既有严格合同，恢复与听力补件不得迁移 profile。
 
 标准模子 = 2026 年新课标 I 卷(owner 2026-07-08 拍板)。任何 agent、
 任何模型执行导题,均以本标准为准;发布闸按本标准校验,不合格不入库。
@@ -115,7 +126,9 @@ gate 覆盖不到的项,按格式补 verify 锁,不得靠人眼。
   (`givenSkeleton.presence = provided`)。格式①历史卷给定语可
   `omitted`,不得用本条去改已入库真题。排版细节见
   `exam-paper-format-standards.md` §8。
-- **九题组讲评齐**:Review `push` 前交齐 4×阅读、七选五、完形、语法、
+- **按 profile 闭合派生内容**:`public-paper-v1` 在 Review `push` 前须提供逐个 prose body
+  paragraph 的 digest-bound 中文摘要和经 `verify-search-metadata` 验证的紧凑检索元数据，
+  完整、唯一覆盖，不生成讲评、高亮、Embedding 或合同外语义标签。仅历史无 profile / external analyzed package 继续要求 4×阅读、七选五、完形、语法、
   应用文、续写九份 staged analysis，绑定进不可变 revision；阅读 / 七选五 /
   完形 / 语法随发布包落地;写作两节
   必须写入 `analyses/writing-analysis-v1.json`(应用文 V3:`modelAnswer`

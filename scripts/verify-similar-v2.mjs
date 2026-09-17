@@ -85,7 +85,7 @@ process.once('exit', () => rmSync(paperAssetsDir, { recursive: true, force: true
 const assetsByPaperId = new Map()
 
 function ensurePaper(paperId) {
-  if (!assetsByPaperId.has(paperId)) assetsByPaperId.set(paperId, { groups: {}, analyses: {} })
+  if (!assetsByPaperId.has(paperId)) assetsByPaperId.set(paperId, { groups: {}, analyses: {}, publicGroups: [] })
   return assetsByPaperId.get(paperId)
 }
 
@@ -102,6 +102,18 @@ function addAnalysisEntries(paperId, facetType, entriesById) {
   Object.assign(paper.analyses[config.fileName][config.entryMapKey], entriesById)
 }
 
+function addPublicReadingGroup(paperId, groupId, questionId, profile) {
+  const paper = ensurePaper(paperId)
+  paper.groups[groupId] = { groupType: 'reading', questionIds: [questionId], title: groupId }
+  paper.publicGroups.push({
+    groupId, family: 'reading', paragraphIds: [], questionIds: [questionId],
+    counts: { paragraphCount: 0, questionCount: 1, taskCount: 0, wordCount: 0,
+      wordCountAlgorithm: 'latin-words-v1', wordCountParagraphIds: [] },
+    topicLabels: ['人与社会'], genre: '说明',
+    metadata: { slot: 'A', questions: [{ questionId, similarityProfile: profile }] },
+  })
+}
+
 function flushAssets() {
   for (const [paperId, paper] of assetsByPaperId) {
     const paperDir = path.join(paperAssetsDir, paperId)
@@ -115,6 +127,22 @@ function flushAssets() {
       for (const [fileName, analysisJson] of Object.entries(paper.analyses)) {
         writeFileSync(path.join(paperDir, 'analyses', fileName), JSON.stringify(analysisJson))
       }
+    }
+    if (paper.publicGroups.length) {
+      const sourceDigest = `sha256:${'a'.repeat(64)}`
+      const candidateDigest = `sha256:${'b'.repeat(64)}`
+      const sourceAssetDigest = `sha256:${'c'.repeat(64)}`
+      writeFileSync(path.join(paperDir, 'public-search-metadata-v1.json'), JSON.stringify({
+        schemaVersion: 'public-search-metadata-v1', paperId, sourceDigest,
+        candidateDigest, groups: paper.publicGroups,
+      }))
+      writeFileSync(path.join(paperDir, 'import-meta.json'), JSON.stringify({
+        paginationPlanBinding: { sourceDigest, candidateDigest, canonicalSourceDigest: sourceAssetDigest },
+      }))
+      mkdirSync(path.join(paperDir, 'canonical'), { recursive: true })
+      writeFileSync(path.join(paperDir, 'canonical', 'canonical-paper-publication-v1.json'), JSON.stringify({
+        paperId, sourceAssetDigest,
+      }))
     }
   }
 }
@@ -404,6 +432,29 @@ buildGroup({
   entries: { 'q-sq-reading-cand-miss-1': { skill: { primary: 'main-idea' } } },
 })
 
+// Metadata-only assets: no analyses directory. The profile family/subtype is
+// projected through analyzeReading's established primary-skill mapping.
+for (const fixture of [
+  { paperId: 'meta-reading-seed', groupId: 'group-meta-reading-seed', questionId: 'q-meta-reading-seed', topics: ['topic-meta'], year: 2024 },
+  { paperId: 'meta-reading-hit-topic', groupId: 'group-meta-reading-hit-topic', questionId: 'q-meta-reading-hit-topic', topics: ['topic-meta'], year: 2022 },
+  { paperId: 'meta-reading-hit-no-topic', groupId: 'group-meta-reading-hit-no-topic', questionId: 'q-meta-reading-hit-no-topic', topics: [], year: 2025 },
+  { paperId: 'meta-reading-stale-candidate', groupId: 'group-meta-reading-stale-candidate', questionId: 'q-meta-reading-stale-candidate', topics: ['topic-meta'], year: 2026 },
+]) {
+  const sourceId = nextId('src')
+  const passageId = nextId('pas')
+  insertSource(sourceId, { sourceType: 'real_exam', year: fixture.year, paperName: fixture.paperId })
+  insertPassage(passageId, { sourceId })
+  insertGroup(fixture.groupId, { passageId, groupType: 'reading' })
+  insertQuestion(fixture.questionId, { groupId: fixture.groupId })
+  for (const topic of fixture.topics) insertTopicLabel(fixture.groupId, topic)
+  addPublicReadingGroup(fixture.paperId, fixture.groupId, fixture.questionId, {
+    family: 'inference', subtype: 'attitude', detailScope: null, technique: null,
+  })
+}
+addAnalysisEntries('meta-reading-stale-candidate', 'reading', {
+  'q-meta-reading-stale-candidate': { skill: { primary: 'inference' } },
+})
+
 // ═══════════════════════════════════════════════════════════════════════
 // Fixture data — small-question endpoint: grammarFill finite-verb vector
 // ═══════════════════════════════════════════════════════════════════════
@@ -594,6 +645,10 @@ for (const sourceType of ['seed', 'real_exam', 'mock_exam', 'self_made', 'other'
 }
 
 flushAssets()
+const staleImportMetaPath = path.join(paperAssetsDir, 'meta-reading-stale-candidate', 'import-meta.json')
+const staleImportMeta = JSON.parse(readFileSync(staleImportMetaPath, 'utf8'))
+staleImportMeta.paginationPlanBinding.candidateDigest = `sha256:${'d'.repeat(64)}`
+writeFileSync(staleImportMetaPath, JSON.stringify(staleImportMeta))
 
 // ═══════════════════════════════════════════════════════════════════════
 // Wire the real store against the fixture
@@ -781,6 +836,26 @@ assert(
     const r = findResult(readingSqResult, 'group-sq-reading-cand-hit')
     return r.matchedQuestionIds.includes('q-sq-reading-cand-hit-1') && !r.matchedQuestionIds.includes('q-sq-reading-cand-hit-2')
   })(),
+)
+
+const metadataOnlyResult = store.findSimilar(db, { seeds: [{ questionId: 'q-meta-reading-seed' }], limit: 10 })
+assert(
+  '小题相似(reading): metadata-only assets 精确命中两项并按话题层优先排序',
+  JSON.stringify(metadataOnlyResult.results.map((result) => result.groupId)) === JSON.stringify([
+    'group-meta-reading-hit-topic', 'group-meta-reading-hit-no-topic',
+  ]),
+  JSON.stringify(metadataOnlyResult.results.map((result) => [result.groupId, result.score])),
+)
+assert(
+  '小题相似(reading): stale candidate with same source is rejected atomically without legacy-analysis fallback',
+  !findResult(metadataOnlyResult, 'group-meta-reading-stale-candidate'),
+)
+assert(
+  '小题相似(reading): metadata-only matchedQuestionIds 精确属于各候选',
+  JSON.stringify(metadataOnlyResult.results.map((result) => result.matchedQuestionIds)) === JSON.stringify([
+    ['q-meta-reading-hit-topic'], ['q-meta-reading-hit-no-topic'],
+  ]),
+  JSON.stringify(metadataOnlyResult.results),
 )
 
 // ═══ §2: grammarFill — finite verb vector 7>6>4>2>1>0 ═════════════════════

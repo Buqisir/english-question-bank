@@ -34,14 +34,10 @@ Reason carefully internally about:
 
 But output only the JSON object.
 
-Priority order:
-
-1. JSON structure and enum values must be valid.
-2. `evidence.signalText` must be an exact substring of the passage.
-3. `answer` must equal the answer key.
-4. Chinese explanation quality comes after structure and signal accuracy.
-
-If you are unsure, preserve valid structure and exact signal text first.
+Required together: valid JSON and enums, exact passage substrings in
+`evidence.signalText`, an answer accepted by the authoritative key, and an
+explanation supported by the sentence structure. Plain Chinese is acceptable;
+a correct answer does not make an inaccurate explanation acceptable.
 
 ## Teaching Model
 
@@ -134,6 +130,14 @@ Write `reason` by walking the actual sentence:
 Simple blanks may combine these into one sentence. A difficult blank may use up
 to three. Do not expand a simple article or preposition blank into a general
 grammar lecture, and do not invent distractors for a task with no options.
+
+Keep only the relation that determines the form: what the word modifies,
+completes or agrees with, and the needed inflection or word class. Prefer
+“作……的表语/修饰……” to an unnecessary claim about being before or after a word.
+Distinguish printed word order from a restored sentence skeleton; label any
+reordering as a reconstruction. Add a position statement only when word order
+itself explains the answer, as in inversion. Stop after deriving the form and
+any necessary local verification; do not append a general usage lesson.
 
 Prefer concrete wording such as:
 

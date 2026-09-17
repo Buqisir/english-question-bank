@@ -14,6 +14,8 @@ import {
 } from '../paper-import/publisher.mjs'
 import {
   assertPaperImportAnalysisSidecars,
+  assertPaperImportParagraphSummaries,
+  assertPaperImportPublicSearchMetadata,
   assertPaperImportPaginationPlan,
 } from '../paper-import/storage.mjs'
 import {
@@ -108,16 +110,20 @@ function inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData 
     promotion.versionName,
   )
   const latestDir = path.join(paperAssetsDir, promotion.paperId, 'latest')
-  const versionAnalysisDigest = assertPaperImportAnalysisSidecars({
-    baseDir: versionDir,
-    packageData,
-    version: promotion.assetVersion,
-  })
-  const latestAnalysisDigest = assertPaperImportAnalysisSidecars({
-    baseDir: latestDir,
-    packageData,
-    version: promotion.assetVersion,
-  })
+  const versionPublicationDigest = promotion.importProfile
+    ? assertPaperImportPublicSearchMetadata({ baseDir: versionDir, packageData })
+    : assertPaperImportAnalysisSidecars({
+        baseDir: versionDir,
+        packageData,
+        version: promotion.assetVersion,
+      })
+  const latestPublicationDigest = promotion.importProfile
+    ? assertPaperImportPublicSearchMetadata({ baseDir: latestDir, packageData })
+    : assertPaperImportAnalysisSidecars({
+        baseDir: latestDir,
+        packageData,
+        version: promotion.assetVersion,
+      })
   const versionPlanDigest = assertPaperImportPaginationPlan({ baseDir: versionDir, packageData })
   const latestPlanDigest = assertPaperImportPaginationPlan({ baseDir: latestDir, packageData })
   if (versionPlanDigest !== latestPlanDigest) {
@@ -126,10 +132,10 @@ function inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData 
       'Version and latest pagination plans disagree',
     )
   }
-  if (versionAnalysisDigest !== latestAnalysisDigest) {
+  if (versionPublicationDigest !== latestPublicationDigest) {
     throw promotionError(
-      'IMPORT_REVIEW_PROMOTION_ANALYSIS_IDENTITY_CONFLICT',
-      'Version and latest analysis digests disagree',
+      'IMPORT_REVIEW_PROMOTION_ARTIFACT_IDENTITY_CONFLICT',
+      'Version and latest publication artifact digests disagree',
     )
   }
   const latestAsset = readJson(path.join(latestDir, 'paper-asset.json'), 'latest paper asset')
@@ -146,7 +152,9 @@ function inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData 
     ref: expected,
     store: createFileSystemCanonicalPublicationStore({ rootDir: paperAssetsDir, db }),
   })
-  return { analysisPublicationDigest: versionAnalysisDigest, consumers }
+  return promotion.importProfile
+    ? { paragraphSummariesPublicationDigest: versionPublicationDigest, consumers }
+    : { analysisPublicationDigest: versionPublicationDigest, consumers }
 }
 
 function failureFromResult(result) {
@@ -206,6 +214,8 @@ export function createSinglePaperPromotionService({
         sourceProvenance: projection.sourceProvenance,
         sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
         analysisSidecars: projection.analysisSidecars,
+        paragraphSummariesBytes: projection.paragraphSummariesBytes,
+        publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
         paginationPlan: projection.paginationPlan,
         paginationBindingIdentity: projection,
       })
@@ -227,11 +237,16 @@ export function createSinglePaperPromotionService({
                 path.join(paperAssetsDir, paperId, 'versions', promotion.versionName),
                 path.join(paperAssetsDir, paperId, 'latest'),
               ]) {
-                assertPaperImportAnalysisSidecars({
-                  baseDir,
-                  packageData,
-                  version: promotion.assetVersion,
-                })
+                if (projection.importProfile) {
+                  assertPaperImportParagraphSummaries({ baseDir, packageData })
+                  assertPaperImportPublicSearchMetadata({ baseDir, packageData })
+                } else {
+                  assertPaperImportAnalysisSidecars({
+                    baseDir,
+                    packageData,
+                    version: promotion.assetVersion,
+                  })
+                }
                 assertPaperImportPaginationPlan({ baseDir, packageData })
               }
             },
@@ -253,14 +268,21 @@ export function createSinglePaperPromotionService({
           packageData,
         })
         if (committed) {
-          const receipt = store.markPromotionPublished(paperId, promotion.promotionId, {
-            analysisPublicationDigest: committed.analysisPublicationDigest,
-          })
+          const receipt = store.markPromotionPublished(paperId, promotion.promotionId, committed)
           return { status: 'idempotent', promotion: receipt, consumers: committed.consumers }
         }
         const result = publish({
           reviewRootDir,
-          approvedIdentity: promotion,
+          approvedIdentity: {
+            ...promotion,
+            ...(projection.importProfile
+              ? {
+                  importProfile: projection.importProfile,
+                  paragraphSummariesDigest: projection.paragraphSummariesDigest,
+                  publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+                }
+              : {}),
+          },
           canonicalRequest: materialized.request,
           externalListeningReviewProof,
           db,
@@ -295,9 +317,11 @@ export function createSinglePaperPromotionService({
             'Publisher returned success without the exact committed promotion target',
           )
         }
-        const receipt = store.markPromotionPublished(paperId, promotion.promotionId, {
-          analysisPublicationDigest: committedAfterPublish.analysisPublicationDigest,
-        })
+        const receipt = store.markPromotionPublished(
+          paperId,
+          promotion.promotionId,
+          committedAfterPublish,
+        )
         return {
           status: result.status === 'idempotent' ? 'idempotent' : 'published',
           promotion: receipt,

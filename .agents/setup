@@ -4,6 +4,12 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+if [[ $# -gt 1 || ( $# -eq 1 && "$1" != --analysis-only && "$1" != --import-tools-only ) ]]; then
+  echo 'Usage: .agents/setup [--analysis-only|--import-tools-only]' >&2
+  exit 2
+fi
+analysis_only="${1:-}"
+
 step() {
   local label="$1"
   shift
@@ -11,6 +17,9 @@ step() {
   time "$@"
 }
 
+# The analysis-only preparation lane must not depend on Desktop, OCR, databases,
+# CI users or renderer installation. Full setup preserves its existing checks.
+if [[ "$analysis_only" != --analysis-only ]]; then
 required_packages=(
   ffmpeg
   fonts-liberation
@@ -21,6 +30,9 @@ required_packages=(
   poppler-utils
   python3-venv
   sqlite3
+  tesseract-ocr
+  tesseract-ocr-chi-sim
+  tesseract-ocr-eng
   unzip
   util-linux
   zip
@@ -40,9 +52,6 @@ else
   echo "[orb-setup] system tools already installed"
 fi
 
-step "checking the temporary Waymote first-frame compatibility patch" \
-  bash .agents/scripts/install-waymote-first-frame.sh
-
 if ! command -v magick >/dev/null 2>&1; then
   echo "[orb-setup] installing ImageMagick 6 compatibility command"
   sudo tee /usr/local/bin/magick >/dev/null <<'EOF'
@@ -60,6 +69,7 @@ image_magick_policy="$(find /etc/ImageMagick-* -name policy.xml -print -quit 2>/
 if [[ -n "$image_magick_policy" ]] && grep -Fq 'rights="none" pattern="PDF"' "$image_magick_policy"; then
   step "enabling verification-only ImageMagick PDF policy" \
     sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$image_magick_policy"
+fi
 fi
 
 node_home="$HOME/.local/node-24"
@@ -91,6 +101,46 @@ EOF
 fi
 export PATH="$node_home/bin:$PATH"
 
+if [[ "$analysis_only" == --analysis-only ]]; then
+  step "installing locked analysis dependencies" npm ci --prefix server --no-audit --no-fund
+  step "checking the project Ajv 2020 runtime" node --input-type=module -e \
+    "import {createRequire} from 'node:module'; const r=createRequire(new URL('./server/package.json', import.meta.url)); const Ajv=r('ajv/dist/2020.js').default; new Ajv().compile({type:'object'}); console.log('Ajv '+r('ajv/package.json').version+' ready');"
+  echo "[orb-setup] analysis ready: $(node --version); full OCR/ASR/rendering setup not run"
+  exit 0
+fi
+
+listening_asr_home="$HOME/.local/share/eqbank-listening-asr"
+listening_asr_python="$listening_asr_home/bin/python"
+listening_asr_version="1.2.1"
+ctranslate2_version="4.8.2"
+listening_asr_model="Systran/faster-whisper-small.en"
+listening_asr_revision="d1d751a5f8271d482d14ca55d9e2deeebbae577f"
+if ! "$listening_asr_python" -c \
+  "import importlib.metadata; assert importlib.metadata.version('faster-whisper') == '$listening_asr_version'; assert importlib.metadata.version('ctranslate2') == '$ctranslate2_version'" \
+  >/dev/null 2>&1; then
+  rm -rf "$listening_asr_home"
+  step "creating the listening ASR Python environment" python3 -m venv "$listening_asr_home"
+  step "installing locked listening ASR dependencies" \
+    "$listening_asr_home/bin/pip" install --disable-pip-version-check \
+      "faster-whisper==$listening_asr_version" "ctranslate2==$ctranslate2_version"
+else
+  echo "[orb-setup] faster-whisper $listening_asr_version and ctranslate2 $ctranslate2_version already installed"
+fi
+step "caching the pinned default listening ASR model" "$listening_asr_python" -c \
+  "from pathlib import Path; from huggingface_hub import snapshot_download; p=Path(snapshot_download('$listening_asr_model', revision='$listening_asr_revision')); r=p.parent.parent/'refs'/'main'; r.parent.mkdir(exist_ok=True); r.write_text('$listening_asr_revision')"
+step "checking offline loading of the default listening ASR model" env HF_HUB_OFFLINE=1 "$listening_asr_python" -c \
+  "from faster_whisper import WhisperModel; WhisperModel('small.en', device='cpu', compute_type='int8', local_files_only=True); print('small.en offline cache ready')"
+step "checking English and Simplified Chinese OCR data" bash -c \
+  "tesseract --list-langs 2>/dev/null | grep -Fxq eng && tesseract --list-langs 2>/dev/null | grep -Fxq chi_sim"
+
+if [[ "$analysis_only" == --import-tools-only ]]; then
+  step "installing locked import dependencies" npm ci --prefix server --no-audit --no-fund
+  step "checking import runtime modules" node --input-type=module -e \
+    "await import('./server/paper-import-ai/publicSearchMetadata.mjs'); await import('./server/import-review/revisionProjection.mjs'); console.log('import runtime ready');"
+  echo "[orb-setup] import tools ready: OCR eng+chi_sim; ASR model $listening_asr_model@$listening_asr_revision"
+  exit 0
+fi
+
 ci_user="eqb-ci"
 ci_root="/var/tmp/eqb-amp-ci"
 if ! id -u "$ci_user" >/dev/null 2>&1; then
@@ -114,21 +164,6 @@ step "activating pnpm 10.28.1" corepack enable
 step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
 step "installing app dependencies" pnpm -C app install --frozen-lockfile
 step "installing server dependencies" npm ci --prefix server
-
-listening_asr_home="$HOME/.local/share/eqbank-listening-asr"
-listening_asr_python="$listening_asr_home/bin/python"
-listening_asr_version="1.2.1"
-if ! "$listening_asr_python" -c \
-  "import importlib.metadata; assert importlib.metadata.version('faster-whisper') == '$listening_asr_version'" \
-  >/dev/null 2>&1; then
-  rm -rf "$listening_asr_home"
-  step "creating the listening ASR Python environment" python3 -m venv "$listening_asr_home"
-  step "installing faster-whisper $listening_asr_version" \
-    "$listening_asr_home/bin/pip" install --disable-pip-version-check \
-      "faster-whisper==$listening_asr_version"
-else
-  echo "[orb-setup] faster-whisper $listening_asr_version already installed"
-fi
 
 if compgen -G "$HOME/.cache/ms-playwright/chromium-*/chrome-linux*/chrome" >/dev/null; then
   step "checking Playwright Chromium" pnpm -C app exec playwright install --no-shell chromium

@@ -34,7 +34,7 @@ Reason carefully internally about:
 
 - each blank's part of speech (verb / noun / adjective / adverb / phrase / other)
 - Collocation Fit: does the correct option collocate in its sentence
-- each distractor in the current event: what it means here, why it is tempting,
+- each distractor in the current event: what it means in the complete sentence
   and what concrete part of the context makes it fail
 - optional POS Signature: only when collocation alone does not lock the answer
 - exact, highlightable evidence substrings that prove the reasoning
@@ -42,13 +42,12 @@ Reason carefully internally about:
 
 But output only the JSON object.
 
-Priority order:
-
-1. JSON structure and enum values must be valid.
-2. `evidence.signalText` must be an exact substring of the source.
-3. Chinese explanation quality comes after structure and signal accuracy.
-
-If you are unsure, preserve valid structure and exact signal text first. Do not write prettier prose at the cost of wrong fields or non-locatable signals.
+Required together: valid JSON and enums, exact source substrings in
+`evidence.signalText`, and explanations supported by the complete sentence and
+context. Plain Chinese is acceptable; a false reason is not a stylistic weakness.
+The authoritative answer fixes the choice, not the truth of any proposed reason.
+When unsure about a claim, narrow it to what the source supports rather than
+inventing a grammar rule or a missing event to justify the answer.
 
 ## Teaching Model
 
@@ -76,9 +75,11 @@ Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when n
 `correctFit.reason` that restores the immediate scene and explains the decisive
 context relation. Every distractor uses the existing
 `distractorGlosses[].meaning` field for one compact contextual discrimination:
-what the word or phrase would mean here, why a student might consider it, and
+what the word or phrase would mean here and
 why it does not describe this event or complete this sentence. The field name is
 kept for schema compatibility; its content is no longer a bare dictionary gloss.
+Explaining why a distractor is tempting is optional, never required. Include it
+only when supported by the source; do not invent a student's motive.
 
 Internal labels such as Collocation Fit, POS Signature, semantic field, action
 sequence, and affective consistency are for classification. Do not lead
@@ -163,7 +164,7 @@ Every `blanks[questionId]` MUST include:
   `optionLabel` is recommended and MUST match the supplied answer key when present
 - `distractorGlosses` — array; one entry per non-answer option, each with
   `optionLabel`, `optionText`, `meaning`; `meaning` must combine contextual
-  meaning, temptation, and concrete mismatch rather than stop at translation
+  meaning and concrete mismatch rather than stop at translation
 - `evidence` — array with ≥1 item; MUST include ≥1 `collocation-partner` item
 
 `signatureFacet` is OPTIONAL. Include it only when a POS Signature genuinely applies. When present, it MUST be one of the five leaf keys listed in the table above, and its POS prefix MUST match `pos`.
@@ -270,20 +271,27 @@ One entry per non-answer option. For a standard 4-option blank with correct answ
 Each entry: `optionLabel`, `optionText` (the option text from the input),
 `meaning` (one compact Chinese contextual discrimination).
 
-Write `meaning` in this order when all three steps are useful:
+Write `meaning` in this order:
 
 1. the word or phrase's meaning in this sentence;
-2. the nearby word, familiar collocation, or partial event that makes it tempting;
-3. the exact action, object, contrast, cause, or story direction it fails to express.
+2. the exact action, object, contrast, cause, or story direction it fails to express.
 
-For an obvious distractor, steps 2 and 3 may be merged into one short clause.
+Before writing, substitute each option into the complete construction. Preserve
+who acts, who receives the action, and what each possessive or preposition links.
+Write only the contextual meaning and one decisive mismatch with a stated
+event or comparison. Stop once that difference is clear. Prefer “这里说的是……，
+不是……” over claims about what the word can never mean or must always take.
+Do not add a usage lesson, imagined motive or broader rule to make a short
+explanation look complete. A grammatical sentence can still miss this context.
+
+For an obvious distractor, both steps may fit in one short clause.
 Do not invent a difference merely to make every line equally long. Never give
 only a reusable dictionary gloss such as `优势、好处` or `贡献`.
 
 Good shape:
 
 ```text
-“贡献”；它看似也能表示正面结果，但这里比较的是作者完成 15 英里与对方准备
+“贡献”；放入句中指作者作出的贡献，但这里比较的是作者完成 15 英里与对方准备
 52.4 英里的成绩大小，不是在说作者为别人作了什么贡献。
 ```
 

@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 const MODEL = 'xai/grok-4.6'
 const REASONING_EFFORT = 'xhigh'
 const RESULT_SCHEMA_VERSION = 'nck1-analysis-agent-result-v1'
+const MAX_OUTPUT_TOKENS = 16_384
 const MAX_REQUEST_BYTES = 220_000
 const MAX_CONTRACT_CHARS = 80_000
 const MAX_DOCTRINE_CHARS = 40_000
@@ -264,21 +265,14 @@ export function stampNck1AnalysisAgentMeta(analysis) {
 }
 
 export default async function nck1AnalysisAgentPlugin(amp) {
-  const agent = amp.createAgent({
-    name: 'NCK1 staged analysis generator',
-    model: MODEL,
-    reasoningEffort: REASONING_EFFORT,
-    tools: [],
-    features: [],
-    instructions: [
+  const system = [
       'You generate one and only one NCK1 staged teaching-analysis JSON object per run.',
       'Use only the source group, immutable authoritative answers, output contract, and teaching doctrine supplied in the user message.',
       'Never solve again or alter an authoritative answer. Never assume facts from another passage, cloze, writing story, or previous run.',
       'Keep the structured fields required for matching and QA, while writing student-visible explanations in concise veteran-teacher language.',
       'Do not invent a runtime model name, reviewer identity, or review timestamp; the plugin stamps real runtime provenance.',
       'Return a single JSON object only. Do not use markdown and do not add commentary outside the object.',
-    ].join(' '),
-  })
+    ].join(' ')
 
   amp.registerTool({
     name: 'nck1_analyze_group',
@@ -287,7 +281,7 @@ export default async function nck1AnalysisAgentPlugin(amp) {
       active: '正在生成单个题组解析',
       complete: '已生成单个题组解析',
     },
-    description: 'Generate exactly one NCK1 staged-analysis JSON object in a fresh pinned Grok 4.6 XHigh context. Supply only the target source group, authoritative answers, its output contract, and the shared teaching doctrine. The tool never writes files, is safe to invoke concurrently for disjoint groups, and leaves validation and serial persistence to the paper coordinator.',
+    description: 'Generate exactly one NCK1 staged-analysis JSON object with a single Grok 4.6 XHigh completion capped at 16384 output tokens. Supply only the target source group, authoritative answers, its output contract, and the shared teaching doctrine. No child agent, tools, automatic retries, or file writes. The envelope threadID identifies the billing/routing thread, not a child. The paper coordinator validates and persists results serially.',
     inputSchema: {
       type: 'object',
       additionalProperties: false,
@@ -330,19 +324,23 @@ export default async function nck1AnalysisAgentPlugin(amp) {
     },
     async execute(input, ctx) {
       const request = validateNck1AnalysisGroupInput(input)
-      const result = await agent.run(buildNck1AnalysisAgentMessage(request), {
-        parentThreadID: ctx.thread.id,
-        timeoutMs: 600_000,
+      const text = await amp.ai.generate({
+        prompt: buildNck1AnalysisAgentMessage(request),
+        system,
+        model: MODEL,
+        reasoningEffort: REASONING_EFFORT,
+        maxTokens: MAX_OUTPUT_TOKENS,
+        threadID: ctx.thread.id,
       })
       const analysis = stampNck1AnalysisAgentMeta(
-        parseAgentJson(result.text, request.group, result.threadID),
+        parseAgentJson(text, request.group, ctx.thread.id),
       )
       return JSON.stringify({
         schemaVersion: RESULT_SCHEMA_VERSION,
         group: request.group,
         model: MODEL,
         reasoningEffort: REASONING_EFFORT,
-        threadID: result.threadID,
+        threadID: ctx.thread.id,
         analysis,
       })
     },

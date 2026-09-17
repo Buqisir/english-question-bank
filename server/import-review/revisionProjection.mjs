@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
+import Ajv from 'ajv/dist/2020.js'
 
 import {
   compileNck1MaterializationCandidatePreview,
@@ -20,6 +21,8 @@ import {
   NCK1_STAGED_ANALYSIS_FILES,
 } from './nck1AnalysisProjection.mjs'
 import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
+import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummaries.mjs'
+import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
@@ -44,6 +47,52 @@ import {
 
 export const NCK1_ANALYZED_PACKAGE_REVIEW_MANIFEST_SCHEMA_VERSION =
   'nck1-analyzed-package-review-source-v1'
+export const PUBLIC_PAPER_IMPORT_PROFILE = 'public-paper-v1'
+export const PARAGRAPH_SUMMARIES_FILE_NAME = 'paragraph-summaries-v1.json'
+export const PUBLIC_SEARCH_METADATA_FILE_NAME = 'public-search-metadata-v1.json'
+
+const paragraphSummariesSchema = JSON.parse(readFileSync(path.join(
+  import.meta.dirname,
+  '../../schemas/paper-import/paragraph-summaries-v1.schema.json',
+), 'utf8'))
+const validateParagraphSummariesSchema = new Ajv({ allErrors: true, strict: false })
+  .compile(paragraphSummariesSchema)
+
+export function nck1ImportProfile(config, { externalPackage = false } = {}) {
+  const profile = config?.importProfile
+  if (profile === undefined) return null
+  if (externalPackage || profile !== PUBLIC_PAPER_IMPORT_PROFILE) {
+    fail(`Unsupported NCK1 import profile: ${String(profile)}`, 'IMPORT_REVIEW_PROFILE_INVALID')
+  }
+  return profile
+}
+
+function loadParagraphSummaries(rootDir, loaded, sourceDigest, candidateDigest) {
+  const filePath = resolveReviewFile(rootDir, PARAGRAPH_SUMMARIES_FILE_NAME)
+  const sidecar = readJson(filePath, PARAGRAPH_SUMMARIES_FILE_NAME)
+  if (!validateParagraphSummariesSchema(sidecar)) {
+    fail(`Paragraph summaries schema invalid: ${validateParagraphSummariesSchema.errors?.[0]?.message || 'invalid'}`, 'PARAGRAPH_SUMMARIES_SCHEMA_INVALID')
+  }
+  const issues = validateParagraphSummaries({
+    sidecar,
+    materialization: loaded.materialization,
+    sourceDigest,
+    candidateDigest,
+  })
+  if (issues.length > 0) fail(`${issues[0].code}: ${issues[0].message}`, issues[0].code)
+  const bytes = new Uint8Array(readFileSync(filePath))
+  return { sidecar, bytes, digest: sha256(bytes) }
+}
+
+function loadPublicSearchMetadata(rootDir, loaded, sourceDigest, candidateDigest) {
+  const filePath = resolveReviewFile(rootDir, PUBLIC_SEARCH_METADATA_FILE_NAME)
+  if (!existsSync(filePath)) fail('public-paper-v1 requires public-search-metadata-v1.json')
+  const bytes = readFileSync(filePath)
+  const sidecar = JSON.parse(bytes.toString('utf8'))
+  const issues = validatePublicSearchMetadata({ sidecar, materialization: loaded.materialization, sourceDigest, candidateDigest })
+  if (issues.length) fail(`${issues[0].code}: ${issues[0].message}`)
+  return { sidecar, bytes, digest: sha256(bytes) }
+}
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
   const error = new Error(message)
@@ -464,6 +513,9 @@ function primarySourceType(materialization, analyzedPackage = false) {
 export function reviewBundleFilePaths(rootDir) {
   const loaded = loadNck1ReviewSource(rootDir)
   const { manifest, materialization } = loaded
+  const importProfile = nck1ImportProfile(loaded.config, {
+    externalPackage: Boolean(loaded.analyzedPackage),
+  })
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config: loaded.config,
     materialization,
@@ -475,7 +527,7 @@ export function reviewBundleFilePaths(rootDir) {
     rootDir,
     materialization,
     paperAsset,
-    required: true,
+    required: !importProfile,
     requireTeachingContent: Boolean(loaded.analyzedPackage),
   })
   const sourceFiles = loaded.analyzedPackage
@@ -545,11 +597,22 @@ export function reviewBundleFilePaths(rootDir) {
       role: 'source_manifest',
     },
     ...sourceFiles,
-    ...NCK1_STAGED_ANALYSIS_FILES.map(({ path: relativePath, role }) => ({
+    ...NCK1_STAGED_ANALYSIS_FILES
+      .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
+      .map(({ path: relativePath, role }) => ({
       path: relativePath,
       mediaType: 'application/json',
       role,
     })),
+    ...(importProfile ? [{
+      path: PARAGRAPH_SUMMARIES_FILE_NAME,
+      mediaType: 'application/json',
+      role: 'paragraph_summaries',
+    }, {
+      path: PUBLIC_SEARCH_METADATA_FILE_NAME,
+      mediaType: 'application/json',
+      role: 'public_search_metadata',
+    }] : []),
     ...(existsSync(resolveReviewFile(rootDir, NCK1_LISTENING_STAGED_ANALYSIS.path))
       ? [{
           path: NCK1_LISTENING_STAGED_ANALYSIS.path,
@@ -1240,6 +1303,8 @@ export function buildNck1CompatibilityPackage({
   sourceProvenance = null,
   sourceAssetVersion = 1,
   analysisSidecars = {},
+  paragraphSummariesBytes = null,
+  publicSearchMetadataBytes = null,
   paginationPlan = null,
   paginationBindingIdentity = null,
 }) {
@@ -1310,6 +1375,8 @@ export function buildNck1CompatibilityPackage({
     grammarFillAnalysis: analysisSidecars['grammar-fill-analysis-v1.json'] || null,
     writingAnalysis: analysisSidecars['writing-analysis-v1.json'] || null,
     listeningAnalysis: analysisSidecars['listening-analysis-v1.json'] || null,
+    paragraphSummariesBytes,
+    publicSearchMetadataBytes,
     importMeta: {
       schemaVersion: 'import-meta-v1',
       paperId: materialization.paperId,
@@ -1359,6 +1426,9 @@ export function buildNck1ReviewProjection(rootDir, {
     preview.candidate,
     preview.compilation,
   )
+  const importProfile = nck1ImportProfile(loaded.config, {
+    externalPackage: Boolean(loaded.analyzedPackage),
+  })
   const mediaDerivations = mediaDerivationProjection(
     preview.compilation.artifacts.sourceCapture,
   )
@@ -1377,11 +1447,17 @@ export function buildNck1ReviewProjection(rootDir, {
     materialization: loaded.materialization,
     paperAsset,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
-    required: requireAnalyses,
+    required: requireAnalyses && !importProfile,
     analysisProfile,
     requireTeachingContent: Boolean(loaded.analyzedPackage),
   })
   const sourceVisuals = sourceVisualProjection(loaded)
+  const paragraphSummaries = importProfile
+    ? loadParagraphSummaries(rootDir, loaded, preview.candidate.source.sha256, preview.candidate.candidateDigest)
+    : null
+  const publicSearchMetadata = importProfile
+    ? loadPublicSearchMetadata(rootDir, loaded, preview.candidate.source.sha256, preview.candidate.candidateDigest)
+    : null
   const slotBindings = paginationSlotBindings(consumption)
   const paginationPlan = loadPaperPaginationPlan(rootDir, {
     paperId: loaded.materialization.paperId,
@@ -1413,6 +1489,13 @@ export function buildNck1ReviewProjection(rootDir, {
     ),
     analysisSidecars: analysisProjection?.sidecars || {},
     analysisDigest: analysisProjection?.digest || null,
+    importProfile,
+    paragraphSummaries: paragraphSummaries?.sidecar || null,
+    paragraphSummariesBytes: paragraphSummaries?.bytes || null,
+    paragraphSummariesDigest: paragraphSummaries?.digest || null,
+    publicSearchMetadata: publicSearchMetadata?.sidecar || null,
+    publicSearchMetadataBytes: publicSearchMetadata?.bytes || null,
+    publicSearchMetadataDigest: publicSearchMetadata?.digest || null,
     paginationPlan: paginationPlan?.plan || null,
     paginationPlanDigest: paginationPlan?.digest || null,
     paginationSlotBindings: slotBindings,

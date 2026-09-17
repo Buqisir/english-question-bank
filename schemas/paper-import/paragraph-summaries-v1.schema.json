@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paragraph-summaries-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paperId", "sourceDigest", "candidateDigest", "groups"],
+  "properties": {
+    "schemaVersion": { "const": "paragraph-summaries-v1" },
+    "paperId": { "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$", "type": "string" },
+    "sourceDigest": { "$ref": "#/$defs/digest" },
+    "candidateDigest": { "$ref": "#/$defs/digest" },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["groupId", "paragraphs"],
+        "properties": {
+          "groupId": { "type": "string", "minLength": 1 },
+          "paragraphs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["paragraphId", "summary"],
+              "properties": {
+                "paragraphId": { "type": "string", "minLength": 1 },
+                "summary": { "type": "string", "pattern": "\\S" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

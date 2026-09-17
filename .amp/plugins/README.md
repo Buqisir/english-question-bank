@@ -45,19 +45,28 @@ plugin, never reload the CI plugin to enable it. Verify with
 
 ## NCK1 staged-analysis agent
 
+The Owner-selected B flow now uses normal Low + fast threads in
+`english-question-bank-import`, not this experimental Grok tool. Do not invoke
+or reload it for imports. Follow `docs/import/agent-contract.md` for bounded
+file transfer, formal validation and completion. The implementation below is
+retained experimental context, not the active generation instruction.
+
 `nck1-analysis-agent.js` registers `nck1_analyze_group` for the paper-import
 coordinator. It deliberately fixes one worker configuration instead of reusing
 one conversation:
 
 - model: `xai/grok-4.6`;
 - reasoning effort: `xhigh`;
-- tools: none;
-- context: one new child thread per invocation;
+- execution: one `amp.ai.generate` completion, no child agent or tools;
+- maximum output: 16,384 tokens; truncated or non-JSON output fails without retry;
+- context: only the supplied system instructions and single-group prompt;
 - input: one source group, that group's authoritative answers, its tracked
   output contract, and the shared teaching doctrine;
 - output: a small provenance envelope whose `analysis` member is the generated
-  JSON object; actual model identity is stamped and invented reviewer/time
-  fields are removed; the tool never writes files.
+  JSON object; configured model identity is stamped and invented reviewer/time
+  fields are removed; `threadID` is the calling billing/routing thread, not a
+  child execution ID. The tool never writes files. Actual subscription/provider
+  usage requires runtime evidence; this envelope is not a billing receipt.
 
 Application and Continuation calls must use the tracked composed contracts from
 `buildApplicationStagedAnalysisContract` and
@@ -77,10 +86,12 @@ after changing this boundary.
 SQLite remains authoritative: a missed, duplicated, or delayed webhook cannot create a second
 active claim or a second bound worker.
 
-New coordinators explicitly use `xai/grok-4.6` with `xhigh` reasoning, inheriting
-Medium's orchestration prompt and tools, not its automatic model selection.
-Neither plugin implements a fallback model. Provider routing and subscription
-billing remain Amp-controlled and need a real-run usage check. Existing bound
+New coordinators inherit the built-in `medium` mode, including its current Amp-controlled
+model selection; the plugin does not pin a provider, model, or reasoning effort. They
+delegate staged generation to normal Low + fast project threads, without
+Oracle or the experimental Grok analysis tool. This change does not switch the
+mode of existing claims or move them. Provider routing and subscription billing
+remain Amp-controlled and need a real-run usage check. Existing bound
 threads resume unchanged; this configuration applies to newly created workers.
 
 The plugin is inert by default. Activating it is a separate shared-state operation and requires
@@ -105,12 +116,20 @@ bound thread. `scripts/import-pipeline/source-intake.mjs` sends `AMP_THREAD_ID` 
 lease operation. The Agent token cannot approve Review content or promote a paper. No import runs
 inside the 30-second webhook handler.
 
+The enabled plugin fails closed unless `AMP_PROJECT_ID` is exactly
+`72c5d9ea-c2e7-42e8-b51e-0b22b9b23732`, the project ref
+`user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import`. The current plugin API does not
+accept a `project` option on `createThread`; project threads inherit the project that owns the
+webhook registration. A mismatch is rejected before agent creation, webhook registration, reserve,
+or worker creation. Deployment must still verify the live capability URL is registered by that
+project; repository code alone cannot prove current URL ownership.
+
 ### Import worker Orb size
 
 The plugin API's `createThread` contract accepts `executor: 'orb'` but no per-thread `orbSize`.
 Automatic import workers therefore inherit the Amp Project's default Orb size. Run this plugin in
-a dedicated import Project whose default is `a1.xxlarge` when scanned PDFs and ordered page images
-are expected; changing the default affects only new threads and does not resize an existing worker.
+a dedicated `english-question-bank-import` Project with the Owner's `a1.medium` default;
+changing the default affects only new threads and does not resize an existing worker.
 Keep the import Project separate from the dedicated CI and deployment Orbs so their credentials,
 lifecycle, and workload remain isolated. The `importing-nck1-papers` skill checks actual processor
 capacity and uses bounded parallelism only for independent page work; paper state transitions stay

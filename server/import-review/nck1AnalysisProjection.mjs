@@ -16,6 +16,7 @@ import {
   validateNarrativeContinuationAnalysis,
 } from '../paper-import-ai/analyzeNarrativeContinuation.mjs'
 import { validateWritingAnalysisCandidate } from '../writing-analysis/writingAnalysisBackfillService.mjs'
+import { validateApplicationModelAnswer } from '../paper-import-ai/applicationWritingWorkflow.mjs'
 import { isApplicationReviewCardV2 } from '../../shared/writing/applicationReviewCard.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -24,6 +25,7 @@ import {
   LISTENING_ANALYSIS_PROFILE,
   LISTENING_STAGED_ANALYSIS_FILE_NAME,
   validateListeningAnalysis,
+  validateListeningAnalysisInput,
 } from '../paper-import-ai/analyzeListening.mjs'
 
 const readingSchema = JSON.parse(readFileSync(path.join(
@@ -274,6 +276,84 @@ function withOfficialModelAnswer(analysis, materializationGroup) {
   return { ...analysis, officialModelAnswer: sourceAnswer }
 }
 
+// Local, single-shard acceptance using the same validators and closure checks
+// as the full projection. Never mutate the worker's raw result or source.
+export function validateNck1StagedAnalysis(request, raw) {
+  const key = request.group
+  if (request.sourceGroup?.groupKey !== key) fail('Request groupKey mismatch')
+  const material = request.sourceGroup.material
+  const authority = request.authoritativeAnswers
+  if (!authority || typeof authority !== 'object' || Array.isArray(authority)) {
+    fail('Request authoritativeAnswers must be an object')
+  }
+  const analysis = structuredClone(raw)
+  if (key === 'listening-unit') {
+    const questions = material.materials.flatMap((segment) => segment.questions)
+    if (!questions.length) fail('Listening unit must contain questions')
+    exactKeys(authority, questions.map(({ questionId }) => questionId), 'listening authority')
+    for (const question of questions) {
+      if (authority[question.questionId] !== question.officialAnswer) fail('Listening source and authority disagree')
+    }
+    return validateListeningAnalysisInput(analysis, material)
+  }
+  if (!NCK1_STAGED_ANALYSIS_FILES.some((item) => item.key === key)) fail(`Unsupported staged group: ${key}`)
+  const { paper, group } = material
+  if (!paper?.paperId || !Number.isInteger(paper.sourceAssetVersion) || paper.sourceAssetVersion < 1 || !group?.groupId) {
+    fail('Request requires paper identity, sourceAssetVersion and groupId')
+  }
+  if (key === 'application' || key === 'continuation') {
+    const { writingTask } = material
+    if (writingTask?.taskType !== key || writingTask.groupId !== group.groupId || analysis.taskType !== key) {
+      fail('Writing task identity mismatch')
+    }
+    exactKeys(authority, ['officialModelAnswer'], 'writing authority')
+    if (authority.officialModelAnswer !== (writingTask.officialModelAnswer ?? null)) {
+      fail('Writing source and authority disagree')
+    }
+    const writing = withOfficialModelAnswer(projectNck1StagedWritingAnalysis(analysis), {
+      groupId: group.groupId, writingTask: { officialModelAnswer: authority.officialModelAnswer },
+    })
+    const envelope = { schemaVersion: 'writing-analysis-v1', paperId: paper.paperId,
+      groups: { [group.groupId]: { writing } } }
+    if (!validateWritingSchema(envelope)) fail(`Writing analysis schema invalid: ${formatSchemaErrors(validateWritingSchema.errors)}`)
+    validateWritingAnalysisCandidate(writing)
+    if (key === 'continuation') validateNarrativeContinuationAnalysis(writing.continuationAnalysis, { writingTask })
+    else validateApplicationModelAnswer({ modelAnswer: writing.modelAnswer, writingTask, groupPassage: group })
+    return { ok: true, warnings: [] }
+  }
+  const answers = Object.values(authority)
+  exactKeys(Object.fromEntries(answers.map((answer) => [answer.questionId, true])),
+    group.questions.map(({ id }) => id), 'objective authority')
+  if (!group.questions.length || answers.length !== group.questions.length) fail('Objective authority must identify each question exactly once')
+  for (const question of group.questions) {
+    if (answers.find((answer) => answer.questionId === question.id)?.answer !== question.answerKey) {
+      fail('Objective source and authority disagree')
+    }
+  }
+  exactKeys(analysis.groups, [group.groupId], 'analysis groups')
+  assertSourceVersion(analysis, paper.sourceAssetVersion, group.groupId)
+  const options = { paper, group, requireFullTranslation: true,
+    requireSelectedLongSentences: true, requireTeachingContent: true }
+  if (key.startsWith('reading-')) {
+    if (!validateReadingSchema(analysis)) fail(`Reading analysis schema invalid: ${formatSchemaErrors(validateReadingSchema.errors)}`)
+    validateReadingAnalysisShape(analysis, options)
+    assertReadingOptionClosure(analysis, group)
+  } else {
+    if (key === 'grammar') stampGrammarFillDerivedFields(analysis)
+    const validator = { seven: validateSevenChoicesShape, cloze: validateClozeShape, grammar: validateGrammarFillShape }[key]
+    validator(analysis, options)
+    const collection = key === 'seven' ? 'questions' : 'blanks'
+    const answerAt = key === 'seven' ? (item) => item.optionFit?.correctOptionLabel
+      : key === 'cloze' ? (item) => item.correctFit?.optionLabel : (item) => item.answer
+    assertBlankIdClosure(analysis, group, collection)
+    assertAnswerClosure(analysis, group, collection, answerAt)
+    // Grammar's validator above owns its frozen alternative/normalization rules.
+    // Exact label equality remains required for multiple-choice groups.
+    if (key !== 'grammar') assertAnswerAgreement(analysis, group, collection, answerAt)
+  }
+  return { ok: true, warnings: [] }
+}
+
 export function buildNck1AnalysisProjection({
   rootDir,
   materialization,
@@ -400,7 +480,8 @@ export function buildNck1AnalysisProjection({
     item.optionFit?.correctOptionLabel)
   assertAnswerAgreement(raw.cloze, cloze, 'blanks', (item) =>
     item.correctFit?.optionLabel)
-  assertAnswerAgreement(raw.grammar, grammar, 'blanks', (item) => item.answer)
+  // validateGrammarFillShape already checks membership in the official answers;
+  // a second literal comparison would reject valid slash-separated alternatives.
 
   const applicationWriting = withOfficialModelAnswer(
     projectNck1StagedWritingAnalysis(raw.application),

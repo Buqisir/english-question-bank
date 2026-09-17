@@ -4,6 +4,8 @@ const SCHEMA_VERSION = 'eqbank-source-intake-wakeup-v1'
 const SUBMISSION_ID = /^submission-[a-f0-9-]{36}$/
 const SUBMISSION_DIGEST = /^sha256:[a-f0-9]{64}$/
 const EXPECTED_KEYS = ['event', 'schemaVersion', 'submissionDigest', 'submissionId']
+const IMPORT_PROJECT_ID = '72c5d9ea-c2e7-42e8-b51e-0b22b9b23732'
+const IMPORT_PROJECT_REF = 'user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import'
 
 export const description = 'Creates or resumes one private project Orb for a verified source intake.'
 
@@ -44,12 +46,13 @@ export function sourceIntakeAgentPrompt({ submissionId, submissionDigest }) {
     `Expected submission digest: ${submissionDigest}`,
     '',
     'Work in this project Orb repository checkout and preserve unrelated changes.',
-    'Use scripts/import-pipeline/source-intake.mjs to list, atomically claim, download, and recheck this submission before following docs/import/agent-contract.md.',
+    'First run source-intake.mjs status <submissionId> --paper-id <paperId>, then use its explicit continue command to perform only verified claim/download/init/source-materialization steps. Read the single JSON result and stop at its blocker or source_ready state.',
     'The CLI sends this thread’s AMP_THREAD_ID on every lease operation; never copy the source files or claim receipt to another thread.',
-    'If the material is incomplete or ambiguous, release it with the needs-owner command and a concise structured reason.',
+    'Do not send needs-owner or handoff merely because automation stopped; report the exact pending decision unless this task explicitly includes and semantically justifies that remote transition.',
     'After download, inspect the immutable submission snapshot mode. For listening_supplement, use its exact targetPaperId and hydrate that existing Review paper; never invent a new paperId. For analyzed_package corrections use the exact targetPaperId; for a new package or new_paper choose a valid new paperId.',
-    'Run the explicit source-intake init command. analyzed_package mode must use the deterministic package preparation path and must never invoke OCR, extraction, or Sol/AI fallback. Complete any raw-source listening transcript review requested for other modes, continue through the existing NCK1 import contract, and call source-intake handoff only after the local paper workspace has been initialized.',
-    'Do not edit the Owner draft, invent answers, approve review, publish locally, ship, deploy, mutate production, or create another thread.',
+    'The continue command must keep analyzed_package on deterministic package preparation and must never invoke OCR, extraction, or model fallback. Stop for any raw-source listening or visual source review it reports.',
+    'New raw-source workspaces use public-paper-v1: do not dispatch the nine teaching analyses. After source review, prepare and verify both paragraph-summaries-v1.json and public-search-metadata-v1.json with review.mjs prepare-summaries/verify-summaries and prepare-search-metadata/finalize-search-metadata/verify-search-metadata. For either explicit generation request, use one normal Medium thread with features: [] and only that request. Never transfer claim receipts or submission workspaces.',
+    'Do not edit the Owner draft, invent answers, approve review, publish locally, ship, deploy, mutate production, or create a replacement coordinator thread.',
   ].join('\n')
 }
 
@@ -118,12 +121,14 @@ export default async function sourceIntakeWakeupPlugin(amp) {
     amp.logger.log('Source-intake wakeup is enabled but its private Import Ops settings are missing.')
     return
   }
+  if (String(process.env.AMP_PROJECT_ID || '').trim() !== IMPORT_PROJECT_ID) {
+    amp.logger.log(`Source-intake wakeup requires Amp Project ${IMPORT_PROJECT_REF}; no webhook or worker agent was created.`)
+    return
+  }
 
   const agent = amp.createAgent({
     extends: 'medium',
-    model: 'xai/grok-4.6',
-    reasoningEffort: 'xhigh',
-    instructions: 'Use nck1_analyze_group for staged analyses. Do not switch to Auto, Medium, GPT, or another model on failure; report the blocker instead.',
+    instructions: 'Follow docs/import/agent-contract.md. New raw sources use public-paper-v1 with paragraph summaries and compact public search metadata, never the nine teaching analyses. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
   })
   const registration = await amp.createWebhook({
     key: 'eqbank-source-intake-queued-v1',

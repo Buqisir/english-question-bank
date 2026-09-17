@@ -9,6 +9,7 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
+  symlinkSync,
   writeFileSync,
 } from 'node:fs'
 import { createServer } from 'node:http'
@@ -67,6 +68,11 @@ import {
 } from './import-pipeline/listening-audio.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
+import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
+import {
+  finalizePublicSearchMetadata,
+  preparePublicSearchMetadataRequest,
+} from '../server/paper-import-ai/publicSearchMetadata.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const paperId = 'paper-mock-contract-2026-m1'
@@ -76,6 +82,22 @@ const officialContinuationSample = 'Official continuation sample from the suppli
 function writeJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true })
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`)
+}
+
+function publicMetadataFixture(materialization, sourceDigest, candidateDigest) {
+  const binding = { materialization, sourceDigest, candidateDigest }
+  const prepared = preparePublicSearchMetadataRequest(binding)
+  const groups = prepared.sourceGroups.map((group) => {
+    let metadata
+    if (group.family === 'reading') metadata = { slot: group.slotId.split('.')[1].toUpperCase(), questions: group.questions.map(({ questionId }) => ({ questionId, similarityProfile: { family: 'detail', subtype: 'general-detail', detailScope: 'single', technique: null } })) }
+    if (group.family === 'seven-choices') metadata = { questions: group.questions.map(({ questionId }) => ({ questionId, positionFacet: 'seven-choices.position.paragraph-middle', roleFacet: 'seven-choices.role.cohesion', primaryMechanismFacet: 'seven-choices.cohesion.grammatical.logical-connector' })) }
+    if (group.family === 'cloze') metadata = { questions: group.questions.map(({ questionId }) => ({ questionId, pos: 'verb', signatureFacet: 'cloze.signature.verb.action-sequence' })) }
+    if (group.family === 'grammar-fill') metadata = { questions: group.questions.map(({ questionId, prompt }) => ({ questionId, facetKey: prompt ? 'grammar-fill.given.verb.finite' : 'grammar-fill.no-hint.article', role: null, similarityProfile: { route: prompt ? 'present-stable-description' : 'the-anaphoric', features: [] }, contextParagraphIds: prepared.deterministic.find((item) => item.groupId === group.groupId).paragraphIds })) }
+    if (group.family === 'application-writing') metadata = { writingTaskId: `writing-task:${group.groupId}`, form: 'email', function: 'communicate' }
+    if (group.family === 'continuation-writing') metadata = { writingTaskId: `writing-task:${group.groupId}`, situation: 'A situation develops.', conflict: 'A problem is resolved.', relationships: [] }
+    return { groupId: group.groupId, family: group.family, topicLabels: ['人与社会-社会服务与人际沟通-合作'], genre: '记叙', metadata }
+  })
+  return finalizePublicSearchMetadata({ authored: { groups }, ...binding })
 }
 
 function continuationAnalysis() {
@@ -179,7 +201,7 @@ function continuationAnalysis() {
   }
 }
 
-function objectiveFixtureGroup(group, answerByQuestionId) {
+export function objectiveFixtureGroup(group, answerByQuestionId) {
   const questionNoByBlankId = new Map(group.questions
     .filter(({ blankId }) => blankId)
     .map(({ blankId, canonicalNumber }) => [blankId, canonicalNumber]))
@@ -219,7 +241,7 @@ function objectiveFixtureGroup(group, answerByQuestionId) {
   }
 }
 
-function writeStagedAnalyses(reviewRoot, materialization) {
+export function writeStagedAnalyses(reviewRoot, materialization) {
   const bySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
   const answerByQuestionId = new Map(materialization.answers.map(({ questionId, value }) => [questionId, value]))
   for (const letter of ['a', 'b', 'c', 'd']) {
@@ -818,7 +840,14 @@ function approvedIdentity(projection) {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
-    analysisDigest: projection.analysisDigest,
+    ...(projection.importProfile
+      ? {
+          importProfile: projection.importProfile,
+          paragraphSummariesDigest: projection.paragraphSummariesDigest,
+          publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+          ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
+        }
+      : { analysisDigest: projection.analysisDigest }),
   }
 }
 
@@ -854,13 +883,22 @@ function reviewManifestFor(reviewRoot, projection) {
     }
   })
   const manifest = {
-    schemaVersion: 'web-import-review-bundle-v1',
+    schemaVersion: projection.importProfile
+      ? 'web-import-review-bundle-v2'
+      : 'web-import-review-bundle-v1',
     paperId: projection.paperId,
     paperName: projection.paperName,
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
-    analysisDigest: projection.analysisDigest,
+    ...(projection.importProfile
+      ? {
+          importProfile: projection.importProfile,
+          paragraphSummariesDigest: projection.paragraphSummariesDigest,
+          publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+          ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
+        }
+      : { analysisDigest: projection.analysisDigest }),
     producerBuildId: 'single-paper-promotion-verifier',
     files,
     resolvesIssueIds: [],
@@ -872,12 +910,51 @@ function makeOnlinePromotionContext(
   label,
   fixturePaperId = paperId,
   paginationBreaks = null,
-  { listening = false, analyzedPackage = false } = {},
+  {
+    listening = false,
+    analyzedPackage = false,
+    publicPaper = false,
+    preservePublicAnalyses = false,
+  } = {},
 ) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), `eqb-single-paper-promotion-${label}-`))
   const fixture = makeReviewRoot(tempRoot, fixturePaperId, undefined, { listening })
   if (analyzedPackage) {
     convertToAnalyzedPackageReviewSource(fixture.reviewRoot)
+    fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
+  }
+  if (publicPaper) {
+    const configPath = path.join(fixture.reviewRoot, 'config.json')
+    writeJson(configPath, {
+      ...JSON.parse(readFileSync(configPath, 'utf8')),
+      importProfile: 'public-paper-v1',
+    })
+    if (!preservePublicAnalyses) {
+      for (const name of readdirSync(fixture.reviewRoot)) {
+        if (name.startsWith('analysis-') && name.endsWith('.json')) {
+          rmSync(path.join(fixture.reviewRoot, name))
+        }
+      }
+    }
+    const targets = enumerateParagraphSummaryTargets(fixture.projection.materialization)
+    writeJson(path.join(fixture.reviewRoot, 'paragraph-summaries-v1.json'), {
+      schemaVersion: 'paragraph-summaries-v1',
+      paperId: fixturePaperId,
+      sourceDigest: fixture.projection.sourceDigest,
+      candidateDigest: fixture.projection.candidateDigest,
+      groups: [...Map.groupBy(targets, ({ groupId }) => groupId)].map(([groupId, values]) => ({
+        groupId,
+        paragraphs: values.map(({ paragraphId }) => ({ paragraphId, summary: `摘要 ${paragraphId}` })),
+      })),
+    })
+    writeJson(
+      path.join(fixture.reviewRoot, 'public-search-metadata-v1.json'),
+      publicMetadataFixture(
+        fixture.projection.materialization,
+        fixture.projection.sourceDigest,
+        fixture.projection.candidateDigest,
+      ),
+    )
     fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
   }
   if (paginationBreaks) {
@@ -907,11 +984,26 @@ function makeOnlinePromotionContext(
     })
   }
   const revision = reviewStore.finalizeRevision(created.revision.id)
+  if (fixture.projection.importProfile) {
+    for (const [label, approvalScope] of [['omitted', undefined], ['mismatched', 'full_content']]) {
+      assert.throws(
+        () => reviewStore.approveRevision(
+          fixturePaperId,
+          revision.id,
+          { bundleDigest: revision.bundleDigest, ...(approvalScope ? { approvalScope } : {}) },
+          'synthetic-owner',
+        ),
+        (error) => error.code === 'IMPORT_REVIEW_APPROVAL_SCOPE_INVALID',
+        `public approval scope ${label} must be rejected`,
+      )
+    }
+  }
   const approval = reviewStore.approveRevision(
     fixturePaperId,
     revision.id,
     {
       bundleDigest: revision.bundleDigest,
+      ...(fixture.projection.importProfile ? { approvalScope: 'layout_only' } : {}),
       ...(fixture.projection.listeningReview?.audio?.state === 'pending_external_playback_review'
         ? { externalListeningReview: {
             audioSha256: fixture.projection.listeningReview.audio.playbackAudioSha256,
@@ -923,6 +1015,9 @@ function makeOnlinePromotionContext(
     },
     'synthetic-owner',
   )
+  if (fixture.projection.importProfile) {
+    assert.equal(approval.approvalScope, 'layout_only', 'public approval receipt records exact layout-only scope')
+  }
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const setupDb = new DatabaseSync(dbPath)
   setupDb.exec(readFileSync(path.join(root, 'data/sql/schema.sql'), 'utf8'))
@@ -938,6 +1033,7 @@ function makeOnlinePromotionContext(
     reviewStore,
     revision,
     approval,
+    importReviewDbPath: path.join(tempRoot, 'import-review.sqlite'),
     dbPath,
     openDatabase,
     paperAssetsDir: path.join(tempRoot, 'paper-assets'),
@@ -952,7 +1048,14 @@ function promotionRequest(approval, intent = 'ship') {
     sourceDigest: approval.sourceDigest,
     candidateDigest: approval.candidateDigest,
     visibleStructureDigest: approval.visibleStructureDigest,
-    analysisDigest: approval.analysisDigest,
+    ...(approval.importProfile
+      ? {
+          importProfile: approval.importProfile,
+          paragraphSummariesDigest: approval.paragraphSummariesDigest,
+          publicSearchMetadataDigest: approval.publicSearchMetadataDigest,
+          ...(approval.analysisDigest ? { analysisDigest: approval.analysisDigest } : {}),
+        }
+      : { analysisDigest: approval.analysisDigest }),
     bundleDigest: approval.bundleDigest,
   }
 }
@@ -1622,6 +1725,136 @@ try {
 } finally {
   close(listeningPublication)
 }
+
+const publicOnly = makeContext('public-only')
+const publicConfigPath = path.join(publicOnly.reviewRoot, 'config.json')
+const publicConfig = JSON.parse(readFileSync(publicConfigPath, 'utf8'))
+publicConfig.importProfile = 'public-paper-v1'
+writeJson(publicConfigPath, publicConfig)
+for (const name of readdirSync(publicOnly.reviewRoot)) {
+  if (name.startsWith('analysis-') && name.endsWith('.json')) rmSync(path.join(publicOnly.reviewRoot, name))
+}
+const summaryTargets = enumerateParagraphSummaryTargets(publicOnly.projection.materialization)
+const summariesPath = path.join(publicOnly.reviewRoot, 'paragraph-summaries-v1.json')
+const publicSummary = {
+  schemaVersion: 'paragraph-summaries-v1',
+  paperId,
+  sourceDigest: publicOnly.projection.sourceDigest,
+  candidateDigest: publicOnly.projection.candidateDigest,
+  groups: [...Map.groupBy(summaryTargets, ({ groupId }) => groupId)].map(([groupId, targets]) => ({
+    groupId,
+    paragraphs: targets.map(({ paragraphId }) => ({ paragraphId, summary: `段落 ${paragraphId} 摘要。` })),
+  })),
+}
+writeJson(summariesPath, publicSummary)
+writeJson(
+  path.join(publicOnly.reviewRoot, 'public-search-metadata-v1.json'),
+  publicMetadataFixture(
+    publicOnly.projection.materialization,
+    publicOnly.projection.sourceDigest,
+    publicOnly.projection.candidateDigest,
+  ),
+)
+publicOnly.projection = buildNck1ReviewProjection(publicOnly.reviewRoot, { requireAnalyses: true })
+assert.equal(publicOnly.projection.analysisDigest, null)
+assert.equal(publicOnly.projection.importProfile, 'public-paper-v1')
+const approvedPublicIdentity = approvedIdentity(publicOnly.projection)
+rmSync(summariesPath)
+assert.throws(
+  () => buildNck1ReviewProjection(publicOnly.reviewRoot, { requireAnalyses: true }),
+  /paragraph-summaries-v1.json is missing/,
+)
+const cliPaperRoot = path.join(import.meta.dirname, 'import-pipeline/papers', paperId)
+const summaryRequestPath = path.join(publicOnly.tempRoot, 'paragraph-summary-request.json')
+assert.equal(existsSync(cliPaperRoot), false, 'CLI request fixture paperId must not collide')
+symlinkSync(publicOnly.reviewRoot, cliPaperRoot, 'dir')
+try {
+  const sourceVerify = JSON.parse(execFileSync(process.execPath, [
+    path.join(import.meta.dirname, 'import-pipeline/universal-nck1.mjs'),
+    'verify', paperId,
+  ], { encoding: 'utf8' }))
+  assert.equal(sourceVerify.ok, true, 'documented source verify runs before summaries exist')
+  assert.equal(sourceVerify.importProfile, 'public-paper-v1')
+  const prepared = JSON.parse(execFileSync(process.execPath, [
+    path.join(import.meta.dirname, 'import-pipeline/review.mjs'),
+    'prepare-summaries', paperId, '--output', summaryRequestPath,
+  ], { encoding: 'utf8' }))
+  const request = JSON.parse(readFileSync(summaryRequestPath, 'utf8'))
+  assert.equal(request.schemaVersion, 'paragraph-summaries-request-v1')
+  assert.equal(request.sourceDigest, prepared.sourceDigest)
+  assert.equal(request.candidateDigest, prepared.candidateDigest)
+  assert.equal(request.outputSchema.$id, 'paragraph-summaries-v1')
+  assert.match(request.prompt, /Return JSON only/)
+  assert.ok(request.groups.every((group) => group.sourceGroup && group.authoritativeAnswers && Array.isArray(group.targets)))
+} finally {
+  rmSync(cliPaperRoot)
+}
+writeJson(summariesPath, { ...publicSummary, sourceDigest: `sha256:${'0'.repeat(64)}` })
+assert.throws(() => buildNck1ReviewProjection(publicOnly.reviewRoot), /SUMMARY_BINDING_STALE/)
+writeJson(summariesPath, { ...publicSummary, candidateDigest: `sha256:${'1'.repeat(64)}` })
+assert.throws(() => buildNck1ReviewProjection(publicOnly.reviewRoot), /SUMMARY_BINDING_STALE/)
+writeJson(summariesPath, publicSummary)
+const publicPublication = publishUniversalNck1Import({
+  reviewRootDir: publicOnly.reviewRoot,
+  approvedIdentity: approvedPublicIdentity,
+  canonicalRequest: loadCanonicalImportRequest(publicOnly.requestPath),
+  db: publicOnly.db,
+  paperAssetsDir: publicOnly.paperAssetsDir,
+})
+assert.equal(publicPublication.ok, true)
+assert.deepEqual(
+  readFileSync(path.join(publicOnly.paperAssetsDir, paperId, 'latest/paragraph-summaries-v1.json')),
+  readFileSync(summariesPath),
+  'public-paper publication preserves exact approved summary bytes',
+)
+const changedPublicSummary = `${readFileSync(summariesPath, 'utf8')} `
+writeFileSync(summariesPath, changedPublicSummary)
+const changedAfterApproval = publishUniversalNck1Import({
+  reviewRootDir: publicOnly.reviewRoot,
+  approvedIdentity: approvedPublicIdentity,
+  canonicalRequest: loadCanonicalImportRequest(publicOnly.requestPath),
+  db: publicOnly.db,
+  paperAssetsDir: publicOnly.paperAssetsDir,
+})
+assert.equal(changedAfterApproval.ok, false)
+assert.equal(changedAfterApproval.canonicalAdmission.diagnostics[0].code, 'IMPORT_REVIEW_APPROVAL_IDENTITY_MISMATCH')
+close(publicOnly)
+
+const publicRollback = makeContext('public-rollback')
+const rollbackConfigPath = path.join(publicRollback.reviewRoot, 'config.json')
+writeJson(rollbackConfigPath, {
+  ...JSON.parse(readFileSync(rollbackConfigPath, 'utf8')),
+  importProfile: 'public-paper-v1',
+})
+for (const name of readdirSync(publicRollback.reviewRoot)) {
+  if (name.startsWith('analysis-') && name.endsWith('.json')) rmSync(path.join(publicRollback.reviewRoot, name))
+}
+const rollbackTargets = enumerateParagraphSummaryTargets(publicRollback.projection.materialization)
+writeJson(path.join(publicRollback.reviewRoot, 'paragraph-summaries-v1.json'), {
+  schemaVersion: 'paragraph-summaries-v1', paperId,
+  sourceDigest: publicRollback.projection.sourceDigest,
+  candidateDigest: publicRollback.projection.candidateDigest,
+  groups: [...Map.groupBy(rollbackTargets, ({ groupId }) => groupId)].map(([groupId, targets]) => ({
+    groupId,
+    paragraphs: targets.map(({ paragraphId }) => ({ paragraphId, summary: '有效摘要。' })),
+  })),
+})
+writeJson(
+  path.join(publicRollback.reviewRoot, 'public-search-metadata-v1.json'),
+  publicMetadataFixture(
+    publicRollback.projection.materialization,
+    publicRollback.projection.sourceDigest,
+    publicRollback.projection.candidateDigest,
+  ),
+)
+publicRollback.projection = buildNck1ReviewProjection(publicRollback.reviewRoot)
+assert.throws(
+  () => publish(publicRollback, { forceDbFailure: true }),
+  /Forced C7 DB failure/,
+)
+assert.equal(existsSync(path.join(publicRollback.paperAssetsDir, paperId, 'latest')), false)
+assert.equal(publishedVersionCount(publicRollback), 0)
+close(publicRollback)
 
 const incomplete = makeContext('incomplete')
 try {
@@ -2578,7 +2811,7 @@ try {
   online.reviewStore.approveRevision(
     paperId,
     nextRevision.id,
-    { bundleDigest: nextRevision.bundleDigest },
+    { bundleDigest: nextRevision.bundleDigest, approvalScope: 'layout_only' },
     'synthetic-owner',
   )
   await reviewPage.reload()
@@ -2807,6 +3040,153 @@ try {
   recoveredDb.close()
 } finally {
   rmSync(committedWithoutReceipt.tempRoot, { recursive: true, force: true })
+}
+
+const publicCommittedWithoutReceipt = makeOnlinePromotionContext(
+  'public-committed-without-receipt',
+  paperId,
+  null,
+  { publicPaper: true },
+)
+try {
+  assert.equal(publicCommittedWithoutReceipt.revision.manifest.schemaVersion, 'web-import-review-bundle-v2')
+  const interrupted = createSinglePaperPromotionService({
+    getStore: () => publicCommittedWithoutReceipt.reviewStore,
+    openDatabase: publicCommittedWithoutReceipt.openDatabase,
+    paperAssetsDir: publicCommittedWithoutReceipt.paperAssetsDir,
+    afterPublish() { throw new Error('forced public receipt crash') },
+  })
+  assert.throws(
+    () => interrupted.promote(
+      paperId,
+      promotionRequest(publicCommittedWithoutReceipt.approval),
+      'ship-authorizer-token',
+    ),
+    /forced public receipt crash/,
+  )
+  const durable = publicCommittedWithoutReceipt.reviewStore.latestPromotion(paperId)
+  assert.equal(durable.importProfile, 'public-paper-v1')
+  assert.equal(
+    durable.paragraphSummariesDigest,
+    publicCommittedWithoutReceipt.approval.paragraphSummariesDigest,
+  )
+  const latestSummaryPath = path.join(
+    publicCommittedWithoutReceipt.paperAssetsDir,
+    paperId,
+    'latest/paragraph-summaries-v1.json',
+  )
+  const exactSummaryBytes = readFileSync(latestSummaryPath)
+  writeFileSync(latestSummaryPath, Buffer.concat([exactSummaryBytes, Buffer.from(' ')]))
+  const resume = () => createSinglePaperPromotionService({
+    getStore: () => publicCommittedWithoutReceipt.reviewStore,
+    openDatabase: publicCommittedWithoutReceipt.openDatabase,
+    paperAssetsDir: publicCommittedWithoutReceipt.paperAssetsDir,
+    publish() { throw new Error('publisher must not run during public recovery') },
+  }).promote(
+    paperId,
+    promotionRequest(publicCommittedWithoutReceipt.approval, 'retry_ship'),
+    'ship-authorizer-token',
+  )
+  assert.throws(resume, /paragraph summar|digest|byte/i, 'committed public recovery rejects byte drift')
+  writeFileSync(latestSummaryPath, exactSummaryBytes)
+  const resumed = resume()
+  assert.equal(resumed.status, 'idempotent')
+  assert.equal(resumed.promotion.state, 'published')
+  assert.equal(
+    /^sha256:[a-f0-9]{64}$/.test(resumed.promotion.paragraphSummariesPublicationDigest),
+    true,
+  )
+} finally {
+  rmSync(publicCommittedWithoutReceipt.tempRoot, { recursive: true, force: true })
+}
+
+const publicApprovalIdentity = makeOnlinePromotionContext(
+  'public-approval-identity',
+  paperId,
+  null,
+  { publicPaper: true },
+)
+try {
+  publicApprovalIdentity.reviewStore.beginPromotion(
+    paperId,
+    promotionRequest(publicApprovalIdentity.approval),
+    'ship-authorizer-token',
+  )
+  const original = publicApprovalIdentity.approval
+  const receiptDb = new DatabaseSync(publicApprovalIdentity.importReviewDbPath)
+  const writeReceipt = (receipt) => receiptDb.prepare(`
+    UPDATE import_review_revisions SET approval_receipt_json = ? WHERE id = ?
+  `).run(JSON.stringify(receipt), original.revisionId)
+  for (const [label, mutate] of [
+    ['missing public approval profile', (receipt) => { delete receipt.importProfile }],
+    ['altered public approval profile', (receipt) => { receipt.importProfile = 'legacy' }],
+    ['missing paragraph summaries digest', (receipt) => { delete receipt.paragraphSummariesDigest }],
+    ['altered paragraph summaries digest', (receipt) => {
+      receipt.paragraphSummariesDigest = `sha256:${'0'.repeat(64)}`
+    }],
+  ]) {
+    const receipt = structuredClone(original)
+    mutate(receipt)
+    writeReceipt(receipt)
+    assert.throws(
+      () => publicApprovalIdentity.reviewStore.latestPromotion(paperId),
+      (error) => error.code === 'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
+      `${label} must fail closed instead of projecting a legacy promotion`,
+    )
+  }
+  writeReceipt(original)
+  receiptDb.close()
+  assert.equal(publicApprovalIdentity.reviewStore.latestPromotion(paperId).importProfile, 'public-paper-v1')
+} finally {
+  rmSync(publicApprovalIdentity.tempRoot, { recursive: true, force: true })
+}
+
+const publicOptionalAnalyses = makeOnlinePromotionContext(
+  'public-optional-analyses',
+  paperId,
+  null,
+  { publicPaper: true, preservePublicAnalyses: true },
+)
+try {
+  assert(publicOptionalAnalyses.projection.analysisDigest, 'fixture has complete optional analyses')
+  assert.equal(
+    publicOptionalAnalyses.revision.manifest.analysisDigest,
+    publicOptionalAnalyses.projection.analysisDigest,
+    'v2 manifest normalization preserves the digest of actual complete optional analyses',
+  )
+  assert.equal(
+    publicOptionalAnalyses.approval.analysisDigest,
+    publicOptionalAnalyses.projection.analysisDigest,
+    'v2 approval preserves optional analysis identity',
+  )
+  const begun = publicOptionalAnalyses.reviewStore.beginPromotion(
+    paperId,
+    promotionRequest(publicOptionalAnalyses.approval),
+    'ship-authorizer-token',
+  )
+  assert.equal(begun.promotion.analysisDigest, publicOptionalAnalyses.projection.analysisDigest)
+  const identityDb = new DatabaseSync(publicOptionalAnalyses.importReviewDbPath)
+  const originalManifest = publicOptionalAnalyses.revision.manifest
+  const writeManifest = (manifest) => identityDb.prepare(`
+    UPDATE import_review_revisions SET manifest_json = ? WHERE id = ?
+  `).run(JSON.stringify(manifest), publicOptionalAnalyses.approval.revisionId)
+  for (const mutate of [
+    (manifest) => { delete manifest.analysisDigest },
+    (manifest) => { manifest.analysisDigest = `sha256:${'0'.repeat(64)}` },
+  ]) {
+    const manifest = structuredClone(originalManifest)
+    mutate(manifest)
+    writeManifest(manifest)
+    assert.throws(
+      () => publicOptionalAnalyses.reviewStore.latestPromotion(paperId),
+      (error) => error.code === 'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
+      'optional analysis presence and value stay bound to the durable promotion',
+    )
+  }
+  writeManifest(originalManifest)
+  identityDb.close()
+} finally {
+  rmSync(publicOptionalAnalyses.tempRoot, { recursive: true, force: true })
 }
 
 const committedJournal = makeOnlinePromotionContext('committed-journal')

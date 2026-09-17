@@ -2,7 +2,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { defineRoute } from '../router/index.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
-import { analysisConfigs } from './teachingFacets.mjs'
+import { analysisConfigs, readPublicFacetEntries } from './teachingFacets.mjs'
 
 /**
  * similar-engine v2 (E5, docs/cuts/similar-v2-engine/plan.md).
@@ -115,12 +115,14 @@ function buildRawFacetIndex(paperAssetsDir) {
       const paperTitle = String(asset?.paper?.title || '').trim()
 
       const questionToGroup = new Map()
+      const paperQuestionFacets = new Map()
+      const paperGroupMeta = new Map()
       const groups = asset?.content?.groups
       if (groups && typeof groups === 'object') {
         for (const [groupId, group] of Object.entries(groups)) {
           const gid = String(groupId)
           const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
-          paperMetaByGroupId.set(gid, {
+          paperGroupMeta.set(gid, {
             paperId,
             paperTitle,
             groupTitle: String(group?.title || '').trim(),
@@ -130,6 +132,14 @@ function buildRawFacetIndex(paperAssetsDir) {
             questionToGroup.set(qid, { groupId: gid, groupType: group.groupType })
           }
         }
+      }
+
+
+      // Compact public metadata is the primary retrieval source. Legacy
+      // teaching analyses below only fill questions not supplied by it.
+      const publicFacets = readPublicFacetEntries({ baseDir, paperId, questionToGroup })
+      if (publicFacets) {
+        for (const [questionId, facet] of publicFacets.entries) paperQuestionFacets.set(questionId, facet)
       }
 
       for (const config of analysisConfigs) {
@@ -144,6 +154,7 @@ function buildRawFacetIndex(paperAssetsDir) {
 
         for (const [questionId, entry] of Object.entries(entryMap)) {
           const qidStr = String(questionId)
+          if (paperQuestionFacets.has(qidStr)) continue
           const groupEntry = questionToGroup.get(qidStr)
           if (!groupEntry) continue
           if (groupEntry.groupType !== config.groupType) continue
@@ -151,9 +162,11 @@ function buildRawFacetIndex(paperAssetsDir) {
           // Data-contract lock (PA MF-2): whatever fields D1 adds to the
           // blank entry (tense/voice/agreementSensitive/role/form/facetKey/
           // ...) flow through untouched via this spread. No sidecar merge.
-          questionFacetById.set(qidStr, { groupId: groupEntry.groupId, groupType: config.groupType, ...entry })
+          paperQuestionFacets.set(qidStr, { groupId: groupEntry.groupId, groupType: config.groupType, ...entry })
         }
       }
+      for (const [groupId, meta] of paperGroupMeta) paperMetaByGroupId.set(groupId, meta)
+      for (const [questionId, facet] of paperQuestionFacets) questionFacetById.set(questionId, facet)
     } catch {
       // Ignore invalid paper-asset dirs — import validation owns that error,
       // this engine just skips what it cannot read (mirrors teachingFacets.mjs).
@@ -430,7 +443,7 @@ function findSimilarPassages(db, input, { getTeachingFacetIndex, getRawIndex }) 
 
   const facetIndex = getTeachingFacetIndex()
   if (!facetIndex.get(groupId)) {
-    throw new SimilarQuestionsError('该篇暂无教学维度解析数据，无法配相似篇章')
+    throw new SimilarQuestionsError('该篇暂无检索标注数据，无法配相似篇章')
   }
 
   const rawIndex = getRawIndex()
@@ -754,7 +767,7 @@ function findSimilar(db, input, { getTeachingFacetIndex, getRawIndex }) {
   const facetIndex = getTeachingFacetIndex()
   for (const row of seedRows) {
     if (!facetIndex.get(row.group_id)) {
-      throw new SimilarQuestionsError(`题目所在题组暂无教学维度解析数据，无法配相似`)
+      throw new SimilarQuestionsError(`题目所在题组暂无检索标注数据，无法配相似`)
     }
   }
 

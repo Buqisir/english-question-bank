@@ -18,6 +18,9 @@ import { assertListeningAudioManifest } from '../../server/paper-import/listenin
 import { prepareNck1AnalyzedPackageReview } from '../../server/paper-import/analyzedPackage.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { inspectNck1Materialization } from './nck1-docx-materialize.mjs'
+import { invalidateParagraphSummariesForListeningSupplement } from './paragraph-summary-rebinding.mjs'
+import { acquireSourceIntakeLock, maintainSourceIntakeLease, runSourceIntakeChild } from './source-intake-lease.mjs'
 
 const inboxRoot = path.join(import.meta.dirname, 'source-intake-inbox')
 const universalCli = path.join(import.meta.dirname, 'universal-nck1.mjs')
@@ -80,7 +83,9 @@ function writePrivateJson(filePath, value) {
   const directory = path.dirname(filePath)
   mkdirSync(directory, { recursive: true, mode: 0o700 })
   chmodSync(directory, 0o700)
-  writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, { mode: 0o600 })
+  const temporaryPath = `${filePath}.${process.pid}.tmp`
+  writeFileSync(temporaryPath, `${JSON.stringify(value, null, 2)}\n`, { mode: 0o600 })
+  renameSync(temporaryPath, filePath)
   chmodSync(filePath, 0o600)
 }
 
@@ -94,6 +99,10 @@ function readClaim(submissionId) {
     || !claim.leaseToken
     || (claim.ampThreadId != null && !ampThreadIdPattern.test(claim.ampThreadId))
   ) fail(`Claim receipt is invalid: ${submissionId}`)
+  const runtimeThreadId = ampThreadId()
+  if (claim.ampThreadId && claim.ampThreadId !== runtimeThreadId) {
+    fail(`Claim receipt belongs to another Amp thread: ${submissionId}`)
+  }
   return claim
 }
 
@@ -186,6 +195,7 @@ async function heartbeat(submissionId, seconds = 1800) {
     `/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}/heartbeat`,
     {
       method: 'POST',
+      signal: AbortSignal.timeout(15_000),
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ leaseSeconds: seconds }),
     },
@@ -266,12 +276,33 @@ function readDownloadManifest(submissionId) {
   const filePath = manifestPath(submissionId)
   if (!existsSync(filePath)) fail(`Download manifest is missing: ${submissionId}`)
   const manifest = JSON.parse(readFileSync(filePath, 'utf8'))
+  const claim = readClaim(submissionId)
   if (
     manifest.submission?.id !== submissionId
+    || manifest.ampThreadId !== claim.ampThreadId
     || !Array.isArray(manifest.files)
     || manifest.files.length < 1
   ) fail(`Download manifest is incomplete: ${submissionId}`)
   assertSubmissionDigest(manifest.submission)
+  const expectedFiles = (manifest.submission.snapshot.files || []).map((file) => ({
+    id: file.id,
+    role: file.role,
+    fileName: file.fileName,
+    mediaType: file.mediaType,
+    sha256: file.sha256,
+    byteLength: file.byteLength,
+  })).sort((left, right) => left.id.localeCompare(right.id))
+  const downloadedFiles = manifest.files.map((file) => ({
+    id: file.id,
+    role: file.role,
+    fileName: file.fileName,
+    mediaType: file.mediaType,
+    sha256: file.sha256,
+    byteLength: file.byteLength,
+  })).sort((left, right) => left.id.localeCompare(right.id))
+  if (JSON.stringify(downloadedFiles) !== JSON.stringify(expectedFiles)) {
+    fail(`Download manifest does not contain the complete submission snapshot: ${submissionId}`)
+  }
   for (const file of manifest.files) {
     if (
       !existsSync(file.localPath)
@@ -280,6 +311,210 @@ function readDownloadManifest(submissionId) {
     ) fail(`Downloaded source file changed: ${file.localPath}`)
   }
   return manifest
+}
+
+function progressPath(submissionId) {
+  return path.join(submissionDirectory(submissionId), 'automation-progress.json')
+}
+
+function readProgress(submissionId) {
+  const filePath = progressPath(submissionId)
+  return existsSync(filePath) ? readLocalJson(filePath, 'Automation progress') : { operations: {} }
+}
+
+function recordOperation(submissionId, operation, state, extra = {}) {
+  const progress = readProgress(submissionId)
+  writePrivateJson(progressPath(submissionId), {
+    schemaVersion: 'source-intake-automation-progress-v1',
+    submissionId,
+    operations: {
+      ...(progress.operations || {}),
+      [operation]: { state, at: new Date().toISOString(), ...extra },
+    },
+  })
+}
+
+function verifiedMaterialization(paperId) {
+  const paperDirectory = path.join(papersRoot, paperId)
+  const manifest = readLocalJson(path.join(paperDirectory, 'universal-source-manifest.json'), 'Universal source manifest')
+  return inspectNck1Materialization({ paperDir: paperDirectory, manifest })
+}
+
+async function automationStatus(submissionId, paperId) {
+  if (!paperIdPattern.test(paperId || '')) fail('status requires --paper-id paper-…')
+  const steps = []
+  const progress = readProgress(submissionId)
+  for (const [step, entry] of Object.entries(progress.operations || {})) {
+    if (entry.state === 'unknown') return { submissionId, paperId, steps, blocked: { step, reason: 'operation_outcome_unknown', detail: entry.detail }, next: 'Reconcile the preserved outcome before clearing the failure record; do not replay automatically.' }
+  }
+  const claimFile = receiptPath(submissionId)
+  if (!existsSync(claimFile)) {
+    if (Object.keys(progress.operations || {}).length > 0
+      || existsSync(manifestPath(submissionId))
+      || existsSync(initializationReceiptPath(paperId))) {
+      return { submissionId, paperId, steps, blocked: { step: 'claim', reason: 'claim_outcome_unknown' }, next: 'Confirm the claim in the read-only source ledger before replaying.' }
+    }
+    const queue = await api('/api/import-agent-source-intakes')
+    const queued = queue.submissions?.find((item) => item.submissionId === submissionId)
+    if (!queued) return { submissionId, paperId, steps, blocked: { step: 'claim', reason: 'submission_not_visible_in_queue' }, next: 'Inspect the source ledger state; do not claim automatically.' }
+    steps.push({ step: 'claim', state: 'pending', submissionDigest: queued.submissionDigest })
+    return { submissionId, paperId, steps, next: 'claim' }
+  }
+  const claimReceipt = readClaim(submissionId)
+  for (const [operation, entry] of Object.entries(progress.operations || {})) {
+    if (entry.paperId && entry.paperId !== paperId) {
+      return { submissionId, paperId, steps, blocked: { step: operation, reason: 'progress_paper_mismatch' }, next: 'Inspect the preserved workspace; do not reuse it for another paper.' }
+    }
+  }
+  const current = assertSubmissionDigest((await api(
+    `/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}`,
+    {}, { lease: claimReceipt.leaseToken },
+  )).submission)
+  steps.push({ step: 'claim', state: 'verified', submissionDigest: current.submissionDigest })
+  let manifest
+  try {
+    manifest = readDownloadManifest(submissionId)
+    if (manifest.submission.submissionDigest !== current.submissionDigest) fail('Downloaded submission digest drifted')
+    steps.push({ step: 'download', state: 'verified' })
+  } catch (error) {
+    const rawManifest = existsSync(manifestPath(submissionId))
+      ? readLocalJson(manifestPath(submissionId), 'Download manifest') : null
+    const legalPlaceholder = rawManifest
+      && rawManifest.submission?.id === submissionId
+      && rawManifest.submission?.submissionDigest === current.submissionDigest
+      && rawManifest.ampThreadId === claimReceipt.ampThreadId
+      && Array.isArray(rawManifest.files) && rawManifest.files.length === 0
+      && !(rawManifest.submission.snapshot.files || []).some((file, index) =>
+        existsSync(path.join(submissionDirectory(submissionId), safeLocalFileName(file, index))))
+      && !progress.operations?.download
+    if (progress.operations?.download?.state === 'started') return { submissionId, paperId, steps, blocked: { step: 'download', reason: 'download_outcome_unknown', detail: error.message }, next: 'Preserve the partial download and inspect it before replaying.' }
+    if (legalPlaceholder) return { submissionId, paperId, steps, next: 'download' }
+    return { submissionId, paperId, steps, blocked: { step: 'download', reason: 'download_evidence_invalid', detail: error.message }, next: 'Inspect the preserved download; do not overwrite it.' }
+  }
+  try {
+    initializationReceipt(manifest, paperId)
+    steps.push({ step: 'init', state: 'verified' })
+  } catch (error) {
+    if (
+      progress.operations?.init?.state === 'completed'
+      && manifest.files.some(({ role }) => role === 'listening_audio')
+    ) {
+      // A progress marker cannot replace the finalized source/audio evidence.
+      return { submissionId, paperId, steps, blocked: { step: 'listening_review', reason: 'awaiting_agent_content_review', detail: error.message }, next: 'Inspect staged audio and source identity; materialize the authoritative dialogue if needed, then explicitly finalize listening. Do not rerun init or ASR.' }
+    }
+    if (progress.operations?.init?.state === 'started') return { submissionId, paperId, steps, blocked: { step: 'init', reason: 'initialization_outcome_unknown', detail: error.message }, next: 'Inspect the preserved workspace before replaying initialization.' }
+    const existingReceipt = existsSync(initializationReceiptPath(paperId))
+      ? readLocalJson(initializationReceiptPath(paperId), 'Source-intake initialization receipt') : null
+    if (progress.operations?.init?.state === 'completed' || existingReceipt?.submissionId === submissionId) return { submissionId, paperId, steps, blocked: { step: 'init', reason: 'initialization_evidence_invalid', detail: error.message }, next: 'Inspect completed initialization evidence; do not reinstall the workspace.' }
+    const paperDirectory = path.join(papersRoot, paperId)
+    if (manifest.submission.snapshot.mode !== 'analyzed_package' && existsSync(paperDirectory)) return { submissionId, paperId, steps, blocked: { step: 'init', reason: 'initialization_evidence_invalid', detail: error.message }, next: 'Inspect the existing workspace; do not overwrite it.' }
+    return { submissionId, paperId, steps, next: 'init' }
+  }
+  const mode = manifest.submission.snapshot.mode
+  if (mode === 'analyzed_package') return { submissionId, paperId, steps, state: 'source_ready', next: 'stop_before_analysis_dispatch' }
+  const materialization = verifiedMaterialization(paperId)
+  if (!materialization) {
+    if (progress.operations?.materialize?.state === 'started') return { submissionId, paperId, steps, blocked: { step: 'materialize', reason: 'materialization_outcome_unknown' }, next: 'Inspect producer evidence before replaying the expensive operation.' }
+    return { submissionId, paperId, steps, next: 'materialize' }
+  }
+  steps.push({ step: 'materialize', state: 'verified', ...materialization })
+  if (materialization.outputState === 'agent_modified') return { submissionId, paperId, steps, blocked: { step: 'source_review', reason: 'agent_modified' }, next: 'Review the modified materialization; automation will not overwrite it.' }
+  if (materialization.disposition !== 'ready_for_verification') return { submissionId, paperId, steps, blocked: { step: 'source_review', reason: materialization.disposition || 'manual_source_review_required' }, next: 'Complete the required source/OCR visual review; automation will not assert it.' }
+  const config = readLocalJson(path.join(papersRoot, paperId, 'config.json'), 'Paper config')
+  return {
+    submissionId,
+    paperId,
+    steps,
+    state: 'source_ready',
+    importProfile: config.importProfile || null,
+    next: config.importProfile === 'public-paper-v1'
+      ? `node scripts/import-pipeline/review.mjs prepare-summaries ${paperId} --output <request.json>`
+      : 'stop_before_analysis_dispatch',
+  }
+}
+
+function runCaptured(args, signal) {
+  const script = path.isAbsolute(args[0] || '') ? args.shift() : import.meta.filename
+  return runSourceIntakeChild([script, ...args], {
+    cwd: path.resolve(import.meta.dirname, '../..'), signal,
+  })
+}
+
+async function continueAutomation(submissionId, paperId) {
+  if (!paperIdPattern.test(paperId || '')) fail('continue requires --paper-id paper-…')
+  const directory = submissionDirectory(submissionId)
+  mkdirSync(directory, { recursive: true, mode: 0o700 })
+  const lockPath = path.join(directory, 'continue.lock')
+  const paperLockPath = path.join(inboxRoot, `${paperId}.continue.lock`)
+  let lock
+  let paperLock
+  let leaseKeeper = null
+  try {
+    try { lock = await acquireSourceIntakeLock(lockPath) } catch (error) {
+      if (error.message.includes('flock executable is unavailable')) throw error
+      fail(`Another continue is active: ${submissionId}`)
+    }
+    try { paperLock = await acquireSourceIntakeLock(paperLockPath) } catch (error) {
+      if (error.message.includes('flock executable is unavailable')) throw error
+      fail(`Another continue is active for paper: ${paperId}`)
+    }
+    let status = await automationStatus(submissionId, paperId)
+    if (status.blocked || status.state === 'source_ready') return status
+    const runStep = async (step, args) => {
+      recordOperation(submissionId, step, 'started', { paperId })
+      try {
+        const result = await runCaptured(args, leaseKeeper?.signal)
+        if (result.stderr.trim()) console.error(result.stderr.trim())
+        if (leaseKeeper) {
+          await leaseKeeper.stop()
+          if (leaseKeeper.failure) throw leaseKeeper.failure
+          leaseKeeper = null
+        }
+        recordOperation(submissionId, step, 'completed', { paperId })
+      } catch (error) {
+        if (leaseKeeper) {
+          await leaseKeeper.stop()
+          error = leaseKeeper.failure || error
+          leaseKeeper = null
+        }
+        recordOperation(submissionId, step, 'unknown', { paperId, detail: error.message })
+        return { failed: { step, reason: 'step_failed', detail: error.message } }
+      }
+      return null
+    }
+    if (status.next === 'claim') {
+      const failure = await runStep('claim', ['claim', submissionId])
+      if (failure) return { submissionId, paperId, ...failure, next: 'Inspect the claim outcome before replaying.' }
+      status = await automationStatus(submissionId, paperId)
+    }
+    if (status.next === 'download') {
+      const failure = await runStep('download', ['download', submissionId])
+      if (failure) return { submissionId, paperId, ...failure, next: 'Inspect the download outcome before replaying.' }
+      status = await automationStatus(submissionId, paperId)
+    }
+    const maintainLease = () => maintainSourceIntakeLease(() => heartbeat(submissionId))
+    if (status.next === 'init') {
+      try { leaseKeeper = await maintainLease() } catch (error) {
+        return { submissionId, paperId, blocked: { step: 'lease', reason: 'heartbeat_failed', detail: error.message }, next: 'Confirm the lease before any write.' }
+      }
+      const failure = await runStep('init', ['init', submissionId, '--paper-id', paperId])
+      if (failure) return { submissionId, paperId, ...failure, next: 'Inspect initialization evidence before replaying.' }
+      status = await automationStatus(submissionId, paperId)
+    }
+    if (status.next === 'materialize') {
+      try { leaseKeeper = await maintainLease() } catch (error) {
+        return { submissionId, paperId, blocked: { step: 'lease', reason: 'heartbeat_failed', detail: error.message }, next: 'Confirm the lease before any write.' }
+      }
+      const failure = await runStep('materialize', [universalCli, 'materialize', paperId])
+      if (failure) return { submissionId, paperId, ...failure, next: 'Inspect producer evidence before replaying.' }
+      status = await automationStatus(submissionId, paperId)
+    }
+    return status
+  } finally {
+    if (leaseKeeper) await leaseKeeper.stop()
+    if (paperLock) await paperLock.release()
+    if (lock) await lock.release()
+  }
 }
 
 function initializationReceiptPath(paperId, paperDirectory = path.join(papersRoot, paperId)) {
@@ -568,6 +803,7 @@ async function initialize(submissionId, paperId) {
       [reviewCli, 'hydrate', paperId],
       { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
     )
+    invalidateParagraphSummariesForListeningSupplement(path.join(papersRoot, paperId))
   } else {
     const args = [
       universalCli,
@@ -604,7 +840,7 @@ async function initialize(submissionId, paperId) {
       paperId,
       state: 'awaiting_agent_content_review',
       next: supplement
-        ? `Review the opening ASR sample and its scope (later content unchecked), then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`
+        ? `Review the opening ASR sample and its scope (later content unchecked), then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>; after final materialization regenerate and verify paragraph-summaries-v1.json and public-search-metadata-v1.json before Review push`
         : `Run universal-nck1.mjs materialize ${paperId} for the authoritative question 1 dialogue; review the opening ASR sample and its scope (later content unchecked); then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`,
     }, null, 2))
     return
@@ -705,12 +941,28 @@ async function main() {
     await needsOwner(validSubmissionId(submissionId))
   } else if (command === 'handoff') {
     await handoff(validSubmissionId(submissionId), option('--paper-id'))
+  } else if (command === 'status') {
+    console.log(JSON.stringify(await automationStatus(
+      validSubmissionId(submissionId),
+      option('--paper-id'),
+    ), null, 2))
+  } else if (command === 'continue') {
+    console.log(JSON.stringify(await continueAutomation(
+      validSubmissionId(submissionId),
+      option('--paper-id'),
+    ), null, 2))
   } else {
-    fail('Usage: source-intake.mjs list|claim|download|heartbeat|init|finalize-listening|needs-owner|handoff ...')
+    fail('Usage: source-intake.mjs list|status|continue|claim|download|heartbeat|init|finalize-listening|needs-owner|handoff ...')
   }
 }
 
 main().catch((error) => {
-  console.error(error.message)
+  if (['status', 'continue'].includes(process.argv[2])) {
+    console.log(JSON.stringify({
+      submissionId: process.argv[3],
+      failed: { step: 'inspect', reason: 'state_inspection_failed', detail: error.message },
+      next: 'Preserve current evidence and resolve the inspection failure before continuing.',
+    }, null, 2))
+  } else console.error(error.message)
   process.exitCode = 1
 })

@@ -17,6 +17,78 @@ import {
 import { createSourceIntakeNotifier } from '../server/source-intake/sourceIntakeNotifier.mjs'
 import { createSourceIntakeRoutes } from '../server/source-intake/sourceIntakeRoutes.mjs'
 import { createSourceIntakeStore } from '../server/source-intake/sourceIntakeStore.mjs'
+import { acquireSourceIntakeLock, maintainSourceIntakeLease, runSourceIntakeChild } from './import-pipeline/source-intake-lease.mjs'
+
+// Drive the renewal boundary without a wall-clock sleep or production test flag.
+for (const failRenewal of [false, true]) {
+  let tick
+  let schedules = 0
+  let calls = 0
+  let finishRenewal
+  const keeper = await maintainSourceIntakeLease(async () => {
+    calls += 1
+    if (calls === 1) return
+    await new Promise((resolve) => { finishRenewal = resolve })
+    if (failRenewal) throw new Error('lease lost during work')
+  }, {
+    schedule(callback) { schedules += 1; tick = callback; return schedules },
+    cancel() {},
+  })
+  tick()
+  await Promise.resolve()
+  assert.equal(calls, 2)
+  assert.equal(schedules, 1, 'no overlapping renewal while the request is pending')
+  let stopped = false
+  const stopping = keeper.stop().then(() => { stopped = true })
+  await Promise.resolve()
+  assert.equal(stopped, false, 'stop must wait for the pending renewal')
+  finishRenewal()
+  await stopping
+  assert.equal(schedules, 1, 'no renewal after stop')
+  assert.equal(keeper.failure?.message ?? null, failRenewal ? 'lease lost during work' : null)
+}
+await assert.rejects(maintainSourceIntakeLease(async () => {
+  throw new Error('initial lease lost')
+}, { schedule() { assert.fail('must not schedule after initial failure') } }), /initial lease lost/)
+console.log('PASS lease renewal serializes requests, drains on stop, and retains failures')
+
+const leaseTestRoot = mkdtempSync(path.join(tmpdir(), 'eqb-lease-child-'))
+const originalPath = process.env.PATH
+try {
+  process.env.PATH = path.join(leaseTestRoot, 'missing-bin')
+  await assert.rejects(
+    acquireSourceIntakeLock(path.join(leaseTestRoot, 'missing-flock.lock')),
+    /Required util-linux flock executable is unavailable/,
+  )
+  process.env.PATH = originalPath
+
+  const marker = path.join(leaseTestRoot, 'running.json')
+  let tick
+  let renewals = 0
+  const keeper = await maintainSourceIntakeLease(async () => {
+    if (++renewals > 1) throw new Error('lost lease while child running')
+  }, { schedule(callback) { tick = callback; return 1 }, cancel() {} })
+  const result = runSourceIntakeChild(['-e', `
+    require('node:fs').writeFileSync(${JSON.stringify(marker)}, String(process.pid));
+    setInterval(() => {}, 1000);
+  `], { signal: keeper.signal })
+  const rejected = assert.rejects(result, /lost lease while child running/)
+  const deadline = Date.now() + 5000
+  while (!existsSync(marker) && Date.now() < deadline) {
+    await new Promise((resolve) => setTimeout(resolve, 10))
+  }
+  assert.ok(existsSync(marker), 'child actually started before lease failure')
+  const childPid = Number(readFileSync(marker, 'utf8'))
+  tick()
+  await rejected
+  await keeper.stop()
+  assert.throws(() => process.kill(childPid, 0), { code: 'ESRCH' })
+  assert.equal(renewals, 2, 'failed renewal is not retried')
+  console.log('PASS lease failure terminates the running child before returning')
+} finally {
+  process.env.PATH = originalPath
+  rmSync(leaseTestRoot, { recursive: true, force: true })
+}
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-source-intake-'))
 const dbPath = path.join(tempRoot, 'import-ops.sqlite')
@@ -336,8 +408,14 @@ function makeValidAnalyzedPackageZip(parent, paperId) {
 const store = createSourceIntakeStore({ dbPath, filesRoot, now: () => clock })
 const notifier = createSourceIntakeNotifier()
 const routes = createSourceIntakeRoutes({ getStore: () => store, notifier, agentToken })
+let stalledHeartbeatSubmission = null
 const server = createServer(async (incoming, response) => {
   const url = new URL(incoming.url || '/', `http://${incoming.headers.host}`)
+  if (stalledHeartbeatSubmission
+    && url.pathname === `/api/import-agent-source-intakes/${stalledHeartbeatSubmission}/heartbeat`) {
+    incoming.resume()
+    return // Deliberately never reply; the real CLI must bound this request.
+  }
   const session = sessionFor(incoming)
   const handled = await runRoutes(routes, {
     request: incoming,
@@ -1130,6 +1208,35 @@ try {
     assert.equal(downloadedManifest.submission.id, cliSubmissionId)
     assert.equal(downloadedManifest.ampThreadId, orbThreadId)
     assert.equal(downloadedManifest.files[0].sha256, digest(cliPdf))
+    const manifestFile = path.join(cliInbox, 'manifest.json')
+    const manifestBytes = readFileSync(manifestFile)
+    const statusBeforeInit = JSON.parse(await runSourceIntakeCli(origin, [
+      'status', cliSubmissionId, '--paper-id', cliPaperId,
+    ]))
+    assert.equal(statusBeforeInit.next, 'init')
+    assert.deepEqual(readFileSync(manifestFile), manifestBytes, 'status is read-only')
+    stalledHeartbeatSubmission = cliSubmissionId
+    try {
+      const timeoutResult = JSON.parse(await runSourceIntakeCli(origin, [
+        'continue', cliSubmissionId, '--paper-id', cliPaperId,
+      ]))
+      assert.equal(timeoutResult.blocked.reason, 'heartbeat_failed')
+      assert.equal(existsSync(cliPaperDirectory), false, 'timed-out renewal must not start initialization')
+    } finally {
+      stalledHeartbeatSubmission = null
+    }
+    writeFileSync(manifestFile, `${JSON.stringify({ ...downloadedManifest, files: [] }, null, 2)}\n`)
+    const incompleteStatus = JSON.parse(await runSourceIntakeCli(origin, [
+      'status', cliSubmissionId, '--paper-id', cliPaperId,
+    ]))
+    assert.equal(incompleteStatus.blocked.reason, 'download_evidence_invalid')
+    writeFileSync(manifestFile, manifestBytes)
+    await assert.rejects(
+      runSourceIntakeCli(origin, [
+        'status', cliSubmissionId, '--paper-id', cliPaperId,
+      ], { ampThreadId: 'T-22222222-2222-4222-8222-222222222222' }),
+      /another Amp thread/,
+    )
     const initOutput = await runSourceIntakeCli(origin, [
       'init',
       cliSubmissionId,
@@ -1168,6 +1275,125 @@ try {
   } finally {
     rmSync(cliInbox, { recursive: true, force: true })
     rmSync(cliPaperDirectory, { recursive: true, force: true })
+  }
+
+  const automaticCreated = await request(origin, '/api/source-intakes', {
+    method: 'POST', role: 'owner', body: {
+      paperName: 'CLI 自动串联验证卷',
+      sources: [{ platform: 'teacher_group', sourceName: '自动串联教师群' }],
+    },
+  })
+  await registerAndUpload(origin, automaticCreated.json.intake.id,
+    'question_and_answers', 'automatic-combined.pdf', cliPdf)
+  const automaticSubmitted = await request(
+    origin,
+    `/api/source-intakes/${automaticCreated.json.intake.id}/submit`,
+    { method: 'POST', role: 'owner' },
+  )
+  const automaticSubmissionId = automaticSubmitted.json.submission.id
+  const automaticPaperId = `paper-source-intake-automatic-${process.pid}`
+  const automaticInbox = path.resolve(import.meta.dirname,
+    `import-pipeline/source-intake-inbox/${automaticSubmissionId}`)
+  const automaticPaperDirectory = path.resolve(import.meta.dirname,
+    `import-pipeline/papers/${automaticPaperId}`)
+  try {
+    const completed = JSON.parse(await runSourceIntakeCli(origin, [
+      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+    ]))
+    assert.equal(completed.blocked.reason, 'needs_agent_review', JSON.stringify(completed))
+    assert.equal(completed.steps.at(-1).step, 'materialize')
+    assert.equal(JSON.parse(readFileSync(path.join(automaticPaperDirectory, 'config.json'))).importProfile, 'public-paper-v1')
+    assert.throws(() => execFileSync(process.execPath, [
+      path.resolve(import.meta.dirname, 'import-pipeline/review.mjs'),
+      'verify-analyses', automaticPaperId,
+    ], { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8', stdio: 'pipe' }), /public-paper-v1 does not use teaching analyses/)
+    const progressBefore = readFileSync(path.join(automaticInbox, 'automation-progress.json'))
+    const materializationBefore = readFileSync(path.join(
+      automaticPaperDirectory, 'materialization/nck1-source-materialization-v1.json'))
+    const repeated = JSON.parse(await runSourceIntakeCli(origin, [
+      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+    ]))
+    assert.equal(repeated.blocked.reason, 'needs_agent_review')
+    assert.deepEqual(readFileSync(path.join(automaticInbox, 'automation-progress.json')), progressBefore)
+    assert.deepEqual(readFileSync(path.join(
+      automaticPaperDirectory, 'materialization/nck1-source-materialization-v1.json')),
+    materializationBefore)
+    const reviewFile = path.join(automaticPaperDirectory,
+      'materialization/nck1-pdf-materialization-review-v1.json')
+    const reviewBytes = readFileSync(reviewFile)
+    rmSync(reviewFile)
+    await assert.rejects(runSourceIntakeCli(origin, [
+      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+    ]), /Partial materialization evidence/)
+    assert.equal(existsSync(reviewFile), false, 'continue must not regenerate partial evidence')
+    writeFileSync(reviewFile, reviewBytes)
+    const lockFile = path.join(automaticInbox, 'continue.lock')
+    const progressFile = path.join(automaticInbox, 'automation-progress.json')
+    const killedProgress = JSON.stringify({
+      schemaVersion: 'source-intake-automation-progress-v1',
+      submissionId: automaticSubmissionId,
+      operations: {
+        materialize: {
+          state: 'unknown', paperId: automaticPaperId, at: new Date().toISOString(),
+          detail: 'producer outcome was not reconciled before coordinator death',
+        },
+      },
+    })
+    const lockOwner = spawn(process.execPath, ['--input-type=module', '-e', `
+      import { writeFileSync } from 'node:fs'
+      import { acquireSourceIntakeLock } from ${JSON.stringify(new URL('./import-pipeline/source-intake-lease.mjs', import.meta.url).href)}
+      await acquireSourceIntakeLock(${JSON.stringify(lockFile)})
+      writeFileSync(${JSON.stringify(progressFile)}, ${JSON.stringify(killedProgress)})
+      process.stdout.write('READY\\n')
+      await new Promise(() => {})
+    `], { stdio: ['ignore', 'pipe', 'pipe'] })
+    await new Promise((resolve, reject) => {
+      let output = ''
+      lockOwner.once('error', reject)
+      lockOwner.once('close', (code) => reject(new Error(`lock owner exited early: ${code}`)))
+      lockOwner.stdout.on('data', (chunk) => {
+        output += chunk
+        if (output.includes('READY\n')) resolve()
+      })
+    })
+    await assert.rejects(runSourceIntakeCli(origin, [
+      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+    ]), /Another continue is active/)
+    lockOwner.kill('SIGKILL')
+    await new Promise((resolve) => lockOwner.once('close', resolve))
+    const afterDeath = JSON.parse(await runSourceIntakeCli(origin, [
+      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+    ]))
+    assert.equal(afterDeath.blocked.reason, 'operation_outcome_unknown')
+    assert.equal(afterDeath.blocked.step, 'materialize')
+    assert.equal(readFileSync(progressFile, 'utf8'), killedProgress,
+      'kernel lock recovery must not clear or replay unknown operation evidence')
+    writeFileSync(progressFile, progressBefore)
+    const paperLockFile = path.join(path.dirname(automaticInbox), `${automaticPaperId}.continue.lock`)
+    const heldPaperLock = await acquireSourceIntakeLock(paperLockFile)
+    try {
+      await assert.rejects(runSourceIntakeCli(origin, [
+        'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+      ]), /Another continue is active for paper/)
+      const submissionLockAfterFailure = await acquireSourceIntakeLock(lockFile)
+      await submissionLockAfterFailure.release()
+    } finally {
+      await heldPaperLock.release()
+    }
+    const claimFile = path.join(automaticInbox, 'claim.json')
+    const claimBytes = readFileSync(claimFile)
+    rmSync(claimFile)
+    const unknownClaim = JSON.parse(await runSourceIntakeCli(origin, [
+      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+    ]))
+    assert.equal(unknownClaim.blocked.reason, 'claim_outcome_unknown')
+    assert.equal(existsSync(claimFile), false, 'unknown claim must not be replayed')
+    writeFileSync(claimFile, claimBytes)
+    assert.deepEqual(readFileSync(path.join(automaticInbox, 'automation-progress.json')), progressBefore)
+    console.log('PASS new raw-source CLI selects public-paper-v1 and rejects teaching-analysis verification')
+  } finally {
+    rmSync(automaticInbox, { recursive: true, force: true })
+    rmSync(automaticPaperDirectory, { recursive: true, force: true })
   }
 
   const audioCliCreated = await request(origin, '/api/source-intakes', {
@@ -1454,10 +1680,10 @@ try {
     await runSourceIntakeCli(origin, ['claim', correctionSubmission.id])
     await runSourceIntakeCli(origin, ['download', correctionSubmission.id])
     const initialized = JSON.parse(await runSourceIntakeCli(origin, [
-      'init', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+      'continue', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
     ]))
-    assert.equal(initialized.state, 'initialized_locally')
-    assert.equal(initialized.idempotent, undefined)
+    assert.equal(initialized.state, 'source_ready')
+    assert.equal(initialized.next, 'stop_before_analysis_dispatch')
     const backupFile = path.join(correctionInbox, 'previous-workspace/previous.txt')
     assert.deepEqual(readFileSync(backupFile), oldWorkspaceBytes)
     const receiptPath = path.join(
@@ -1469,9 +1695,9 @@ try {
     assert.equal(receipt.preparedIdentity.archiveSha256, digest(validPackageBytes))
     assert.equal(receipt.previousWorkspaceBackup, path.dirname(backupFile))
     const repeatedInit = JSON.parse(await runSourceIntakeCli(origin, [
-      'init', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+      'continue', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
     ]))
-    assert.equal(repeatedInit.idempotent, true)
+    assert.equal(repeatedInit.state, 'source_ready')
     assert.deepEqual(readFileSync(backupFile), oldWorkspaceBytes)
 
     const analysisPath = path.join(correctionPaperDirectory, 'analysis-reading-a.json')

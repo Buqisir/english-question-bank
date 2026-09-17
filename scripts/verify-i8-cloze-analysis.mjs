@@ -81,9 +81,10 @@ function assertPromptContract() {
     assert(`prompt names evidence type: ${type}`, prompt.includes(type))
   }
 
-  // Contextual distractor analysis must cover meaning, temptation, and mismatch.
+  // Contextual distractor analysis requires meaning and mismatch, not temptation.
   assert('prompt asks for distractor contextual meaning', prompt.includes('what the word or phrase would mean here'))
-  assert('prompt asks why a distractor is tempting', prompt.includes('why a student might consider it'))
+  assert('prompt makes distractor temptation optional', prompt.includes('Explaining why a distractor is tempting is optional, never required.'))
+  assert('prompt removes mandatory temptation', !prompt.includes('meaning, temptation, and concrete mismatch') && !prompt.includes('why a student might consider it'))
   assert('prompt asks why a distractor fails in this context', prompt.includes('放回当前语境为何不成立'))
   assert('prompt removes the old distractor prohibition', !prompt.includes('NEVER argue why a distractor is wrong') && !prompt.includes('Do NOT explain why it is wrong'))
 

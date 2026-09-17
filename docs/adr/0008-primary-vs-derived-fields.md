@@ -1,5 +1,10 @@
 # Primary source data is import-gated; derived teaching dimensions are backfillable
 
+> Product update recorded 2026-09-17: [public papers and personal analysis](../product/public-papers-personal-analysis.md)
+> supersedes the target policy that every paper needs complete platform teaching explanations.
+> Primary-data integrity and backfillable dimensions remain. The base-analysis publication gate
+> described below is still implemented and must be explicitly migrated, not bypassed.
+
 Status: accepted (PM grill 2026-06-03, PO 黄学伟)
 
 Context: Ahead of importing whole exam papers in bulk, we needed to decide which

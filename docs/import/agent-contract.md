@@ -1,16 +1,97 @@
 # Agent Import Contract (NCK1)
 
+> 新 raw-source 导入的当前主合同是 `public-paper-v1`。本分支已接线完整源卷和逐段摘要，
+> AI OCR/提取校对、源答案抄录检查和必要的结构化检索元数据仍是硬门禁；当前 CLI 已实现
+> metadata 的 prepare/finalize/verify，不能用九份教学解析或假空字段代替。无 profile 的历史工作区和
+> external `analyzed_package` 继续原九份分析合同，恢复时不得迁移身份。
+
 任意 Amp Project Orb 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
 项目级 `importing-nck1-papers` skill 会在导题、继续某卷、审核返工、状态查询和
 认可后上线准备任务中自动触发；Owner 不需要记命令。Agent 每次先运行只读
 `review.mjs preflight <paperId>`，再从返回的唯一状态恢复。
 
-所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③：
+所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③。`init` 为新 raw source 写入
+`config.importProfile: "public-paper-v1"`；listening supplement hydration、历史工作区和
+analyzed package 保留已有 config/profile：
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
-- 统一入口：先运行 `node scripts/import-pipeline/universal-nck1.mjs preflight`，一次性确认 magick、ffmpeg、soffice、PDF 工具、unzip 的可执行与动态链接健康；处理中途禁止安装或升级依赖。`init` 也会先执行同一检查。对于一份试题 DOCX + 一份权威答案 DOCX，`materialize <paperId>` 用受测 producer 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要；Agent 必须生产并验证 4× reading、seven、cloze、grammar、application、continuation 共九份教学分析，才可由 `review.mjs push` 上传绑定全部原始 bytes 和 `analysisDigest` 的不可变审核 revision。Owner 在 `/ops/?view=review` 真实 Screen/Print/PDF 审核并认可精确摘要后，Agent 停下；认可不公开。只有 Owner 后来在当前对话明确说“上线 <paperId>”，Agent 才用独立 shipping credential 调 `review.mjs promote`，由生产服务端从同一不可变 revision 原子发布这一卷。完整命令见 `scripts/import-pipeline/README.md`。
+- 统一入口：先运行 `node scripts/import-pipeline/universal-nck1.mjs preflight`。`materialize`
+  从不可变源生成 `nck1-source-materialization-v1`，完整保存题面、源答案、题号映射、
+  source locators、表格与媒体。源冲突、缺答案或视觉待审仍失败关闭，摘要不能补题或改答案。
+  材料确认后运行 `review.mjs prepare-summaries`；请求在摘要不存在时即可生成，内含精确
+  paper/source/candidate IDs、输出 schema、版本化 prompt、全部目标 group、权威答案及每个
+  paragraph ID/content。生成后用 `verify-summaries` 检查绑定、严格 schema 和完整且唯一覆盖。
+  `review.mjs push` 上传原始 bytes、summary sidecar 和 digest 进入不可变 Review revision。
+  Owner 明确 Review，认可不公开；只有后来明确“上线 <paperId>”才可 promote。摘要是
+  AI-derived 辅助信息，不是源权威、教学解析或语义准确性认证。
+
+### 当前公共卷增量与消费者
+
+新卷在进入 Review revision 前还必须完成 compact search metadata 与既有自动事实门禁。
+metadata sidecar 已贯穿不可变 revision、Review store、promotion、发布存储和公共检索消费；
+写作相似题 UI 仍未实现。具体字段、生产者/消费者和阶段见计划。核心边界如下：
+
+- Owner 只审核最终 Screen/Student Print/Teacher Print/PDF 版式。认可 receipt 的精确字段是
+  `approvalScope: 'layout_only'`，不得表达人工检查了摘要、主题、语义、原题准确性或答案映射。
+- OCR/提取、proofreading、source-answer transcription check 及自动 source/schema/coverage/
+  answer validation 仍由既有程序/AI 导入路径完成。缺失或冲突来源通过既有 Materialization
+  issues、source-answer checks 和 validation gates 失败关闭，不得塞进 layout review，也不新增
+  factual-exception schema/receipt/workflow。源答案 variants 保持既有权威文本，不另造 alternative
+  schema；其 provenance 与平台人工 review 分离。
+- 摘要继续逐正文段落生产；另存多值 `topicLabels`，每个值都是受控 taxonomy 的 canonical
+  label，publisher 按表解析为 `theme/themeGroup/subtopic`（一级仅人与自我/人与社会/人与自然），
+  并写入真实 genre（记叙/说明/议论/应用/新闻）。genre 不是题型。
+  题型检索字段严格复用 `similar-question-dimensions.md` 和现有 schema 的 reading
+  family/subtype/detailScope/technique + 程序 A–D 篇位、七选五 position/role/primary mechanism、
+  完形 pos/signatureFacet、语法 hint/source facts + facet/role/route/features 与程序答案形式、
+  应用文 form/function/theme、续写最小 situation/conflict/relationships。
+- 公共路径不把受控的多值 `topicLabels` 当作“额外标签”禁止。仍禁止产生新 difficulty/CEFR、
+  翻译、教学 prose、证据 coordinate spans、Embedding/Jev、范文或虚构续写结局。不得把段落
+  摘要复制成长 emotion/event 表；写作相似题 UI 的缺口必须如实报告。
+- `wordCount` 由程序统计指定正文 paragraph IDs 中匹配 `[A-Za-z]+(?:['’-][A-Za-z]+)*` 的
+  英文 lexical tokens（缩写或连字符形式各计一个），
+  排除题号/空号、提示词、选项、chrome、答案和范文；`paragraphCount` 只数合格正文结构 ID；
+  `questionCount` 数该组 question IDs；写作是 `questionCount: 0`、`taskCount: 1`。保存算法版本和 scope IDs。
+  所有归属使用结构 ID，不使用高亮坐标。语法 `contextParagraphIds` 被 sidecar 保留和校验；
+  当前不宣称 standalone renderer 已消费它。
+- 语法单空练习提供所在完整段；确有跨段依赖时只加入最小、按源顺序且有据的上下文，不能
+  盲取上一段。分值由程序按 §1 现行 NCK1 标准派生，源写作字数/格式/段首约束原样保留。
+- revision 必须绑定 source/candidate/summary/metadata/validation/render digests；promotion 仍需
+  Owner 后续明确上线。旧 reviewed 资产不得自动回填、改 profile、改 approval identity。
+
+```bash
+node scripts/import-pipeline/review.mjs prepare-summaries <paperId> --output /abs/summary-request.json
+# 若需要模型：普通 Medium，features=[]；只传上述请求，不在本任务自动调用
+node scripts/import-pipeline/review.mjs verify-summaries <paperId>
+node scripts/import-pipeline/review.mjs prepare-search-metadata <paperId> --output /abs/metadata-request.json
+# 若需要模型：普通 Medium，features=[]；只传 metadata request
+node scripts/import-pipeline/review.mjs finalize-search-metadata <paperId> --input /abs/authored-metadata.json
+node scripts/import-pipeline/review.mjs verify-search-metadata <paperId>
+node scripts/import-pipeline/review.mjs push <paperId>
+```
+
+摘要只覆盖 prose body paragraphs（含 continuation 的来源叙事正文及结构化列中的阅读正文）；
+不覆盖标题、选项、说明、听力稿、表格/媒体或续写给定段首。七选五/完形/语法填空可用
+权威答案理解补全语篇，但不得修改公开源。通常一至两句中文；不得添加教学策略、逐题解释、
+高亮、Embedding、taxonomy 外标签，或虚构性别、动机、因果和后续情节。
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
+
+Webhook worker 接卷后按程序边界操作：对通知的 submission ID + paperId 先运行只读
+`source-intake.mjs status`，再显式运行 `source-intake.mjs continue`。程序串行完成并恢复
+claim、download、init 及普通源 materialize/preflight，只复用摘要绑定的完整收据；返回
+`source_ready` 或确切 blocker 后停止。不要用模型手工复制下载、摘要校验、文档提取、OCR
+或音频检查。`init` 返回歧义、缺件或 `needs_owner` 时即停并报告确切待办；除非当前任务
+明确涵盖且语义已经确认，不执行远端 `needs-owner`；不得猜源文件角色。`analyzed_package` 只走
+`init` 的确定性完整包准备器，禁止 OCR、提取或模型 fallback。普通 raw source 才继续使用
+`universal-nck1.mjs` 的 preflight/materialize 及既有 OCR、媒体和听力程序。
+只读 status 不安装、不 heartbeat、不写 receipt。未知 claim/远端结果、半成品、源漂移、
+paper/thread 错绑或 lease 丢失都失败关闭且不自动重放；continue 自身不发送 needs-owner、
+handoff 或任何 Review 终态。听力内容与 OCR/页面视觉判断仍是明确人工待办。
+
+新 Orb 的完整导题工具可用 `bash .agents/setup --import-tools-only` 安全准备和检查：它不碰
+Desktop 或数据库，安装英/简中 OCR，并缓存 `transcribe-listening.py` 实际默认使用的固定
+small.en ASR 模型。Desktop 可用性不是接卷前置；失败不得阻断上述程序路径。
 
 导题审核使用独立 Review DB 与文件目录作为 QA 事实源；Candidate 不进入正式题库。
 消费端网站不导题，`/ops/` 只做人工审核与 Agent 反馈，不运行 LLM。
@@ -96,18 +177,76 @@ Import Agent 凭据读取目标 Paper，核对 snapshot 的 `baseRevisionId` 仍
 实际 prepared projection digests、base revision 和备份路径。同一 submission 重跑 init
 只核对 receipt 与当前 workspace，不再次替换。后续 Review upload 把 receipt 的 base
 revision 纳入 bundle identity，服务端再次以当前 revision 比对，冲突即拒绝。
+以下 B 路径与九份教学分析规则只适用于历史 absent-profile 工作区和 external
+`analyzed_package` 的既有分析合同，不适用于 `public-paper-v1`。这部分教学方法与实验
+材料继续保留，不能据此给新 raw-source 卷补分析、Embedding 或语义标签。
+
 九份教学分析必须按 staged contract 拆给聚焦任务：阅读 A—D 各自独立，七选五、完形、语法填空、应用文、读后续写各自独立；不要让一个模型上下文包办整卷。该卷唯一 writer 负责汇总，同一工作树内默认逐份写入；并行只能做纯读取，或使用独立工作树和不重叠写面。九份齐全后统一跑确定性 projection，再由一个只验不写的任务检查串题、非精确证据、答案/ID 漂移、模板化复读和不恰当篇幅。不得以多 writer 绕过 Materialization、revision 或认可合同。
 
-正式生成每一份 staged analysis 时，唯一 writer 调项目插件 `.amp/plugins/nck1-analysis-agent.js` 注册的 `nck1_analyze_group`：模型固定为 `xai/grok-4.6`、reasoning effort 固定为 `xhigh`、worker tools 为空，每次调用新建一个 child context。一次只传一个 group 的源材料、该组权威答案、对应输出合同和共享讲解规范；禁止把整卷或另一组材料塞入同一次调用。工具只返回带 model / thread 身份的 envelope，不写工作树；writer 取其中 `analysis`，先跑现有题型 validator，再依次写对应文件。语法填空是唯一的前置规范化例外：须先调用 `stampGrammarFillDerivedFields`，由程序根据权威答案补时态、语态、一致敏感性和答案形式，再交给 validator；禁止让模型填写这些字段。失败时不得静默换模型、续聊旧 child thread 或回退 Auto/Medium/GPT，应报告阻断原因；任何模型或重试策略调整都另行明确修改并验证。Webhook 新建协调线程同样固定为 Grok 4.6 XHigh；已绑定旧线程的恢复不自动切换模型。
+### B 路径：Low 直接解析，项目内正式校验
+
+采用 Owner 选择的 B：每组由新的普通 Low 线程直接生成，启用 fast，不调用 Oracle、
+`nck1_analyze_group`、`amp.ai.generate` 或其他模型。不再使用旧 Grok 解析插件。
+Webhook 新建协调线程继承内置 Medium 模式，不再硬绑 Grok 或 reasoning effort；
+已绑定 coordinator/lease 不迁移，恢复时保持原线程。
+
+Owner 当前速度约定：导题协调、解析或校对若使用 Medium，使用普通速度，不启用
+fast。通过 `create_thread` 派发 Medium 时显式传 `features: []`，避免继承父线程的
+fast；这不是切换默认生成模式、项目路由或迁移既有 coordinator/lease 的授权。
+
+协调者用 `create_thread`，显式设置 `agent_mode: low`、`features: [fast]`、
+`project: user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import`。
+使用完整 Project ref，不以仓库名或项目短名替代。禁止使用 `no-project` 空 Orb；不传 `orb_size`，
+继承 Owner 配置的项目规格。Low 是模式与路由选择，不是 Terra 的不可变模型保证；
+实际 model/provider/usage 另行核验，不能从线程标题推断。失败不自动升档或换模型。
+
+新线程只接收该组不可变请求（`group`、`sourceGroup`、`authoritativeAnswers`、
+`outputContract`、`teachingDoctrine`），不得接收整卷、submission inbox、claim receipt
+或其他组结果。使用文件传递工具，不假定跨 Orb 共享文件、未提交代码或本地 main。
+两边必须具有同版合同和校验代码；尚未进入 origin/main 的代码须明确传递，不能仅发送 SHA。
+协调者在文件就绪后才发开始消息，并记录任务起点。
+
+Worker 在接收题组开始生成前，先确认 Node 24 和项目 Ajv 可用。若新 Orb 的完整 setup
+曾失败，由环境准备阶段执行 `bash .agents/setup --analysis-only`；它只准备 Node 24 和
+锁定的 server 依赖，不执行 Desktop/OCR/ASR/数据库步骤，也不宣称完整导题环境已通过。
+准备后重新确认依赖，再接收开始指令。十个单组均使用同一个正式校验入口：
+
+```bash
+node scripts/import-pipeline/validate-analysis.mjs request.json analysis-reading-b.json
+```
+
+文件名按题组替换；支持 `reading-a` 至 `reading-d`、`seven`、`cloze`、`grammar`、
+`application`、`continuation`、`listening-unit`。它只读输入，不写文件；语法填空仅在
+内存副本上执行既有 `stampGrammarFillDerivedFields`，再正式校验，与全卷路径一致。
+非零退出就是 FAIL，禁止用自编基本检查或 `jq` 替代。请求格式见
+`scripts/import-pipeline/README.md`；必须保留同一单组源材料和答案权威。
+阅读只有数值坐标错误时，允许另行输出新文件：
+
+```bash
+node scripts/import-pipeline/derive-reading-ranges.mjs request.json raw-analysis.json prepared-analysis.json
+```
+
+必须保留原稿；阅读修复程序只依据唯一精确引文派生位置，不能改文字、答案或关联，
+不适用于其他题型。全卷写入后，协调者必须运行 `review.mjs verify-analyses <paperId>`；
+任何单组 PASS 都不代替它。应用文校验还检查题目给定格式和字数，续写检查材料证据；
+程序不判断教学质量，也不替代 Owner Review。
+
+Worker 完成或失败都主动回报文件路径、字节数、SHA256、正式校验结果与限制，然后 final
+结束，不等确认、不无限打磨；回报工具不可用时在 final 给出交付信息并停止。协调者取回
+文件核对摘要、复跑校验后串行接纳；出现阻断保留证据，不自动重试或恢复旧失败线程。
+没有请求时不加顾问或第二遍模型润色。教师内容审核与 Owner Review 继续保留。
+
+项目 `.agents/setup` 使用 `npm ci --prefix server` 安装锁文件中的 Ajv；必须检查实际安装
+结果，不能仅凭脚本存在认定成功。不另装 Python jsonschema。缺依赖时报告环境阻断，
+由环境准备阶段修复，不在解析生成中途安装或改 validator。
 
 ## Orb 算力边界
 
 自动 source-intake worker 使用私有 Project Orb，并继承专用导题 Amp Project 的默认 Orb
 规格；当前 plugin `createThread` 接口只选择 `executor: 'orb'`，不能逐任务传 `orbSize`。
-扫描/部分文本层 PDF、有序图片页、逐页 raster/OCR evidence、媒体提取和多面渲染验证
-使用默认 `a1.xxlarge` 的高算力 lane；原生 DOCX 和可靠文本层 PDF 属普通 lane。Agent
-开工时记录 `os.availableParallelism()`；16 表示预期 16 核可用。少于 16 只作效率告警，
-不得因此放宽内容门禁、转移已绑定 claim 或重复导入。
+专用 `english-question-bank-import` 项目使用 Owner 配置的 `a1.medium` 默认规格；
+Low 模型模式不等于 Small Orb。扫描/OCR、ASR 与渲染前记录实际 CPU、内存和耗时，
+只有实测资源不足才提出调整，不自动升到 xxlarge。不得因此放宽门禁、转移 claim 或重复导入。
 
 可并行的只有互不写同一状态、输出路径唯一的逐页读取/转换/复核工作；并发必须有界并
 给 Agent 与系统工具留余量。Materialization、`verify`、`build`、revision、lease、handoff
@@ -121,7 +260,8 @@ revision 纳入 bundle identity，服务端再次以当前 revision 比对，冲
 | 信号 | 路径 | 含义 |
 | --- | --- | --- |
 | 进入 `materializing` | `config.json` | 已开局 |
-| 教学分析中 | 4× `analysis-reading-{a,b,c,d}.json` + `analysis-seven.json` + `analysis-cloze.json` + `analysis-grammar.json` + `analysis-application.json` + `analysis-continuation.json` | 通用新卷九份全部是 `review.mjs push` 硬前置；原始 bytes 进入不可变 revision |
+| 公共卷逐段摘要中 | `paragraph-summaries-v1.json` | `public-paper-v1` 的 `review.mjs push` 硬前置；须逐正文段落完整覆盖并绑定 source/candidate digest |
+| 旧分析合同处理中 | 4× `analysis-reading-{a,b,c,d}.json` + `analysis-seven.json` + `analysis-cloze.json` + `analysis-grammar.json` + `analysis-application.json` + `analysis-continuation.json` | 仅历史 absent-profile / external `analyzed_package`；九份原始 bytes 进入不可变 revision |
 | 答案复核过 | `signals/ai-answer-check.json` | AI Answer Transcription Check 已过 |
 | 卡死 | `signals/blocked.json` | 硬停；见原因码 |
 | 要人裁决（非例行 QA） | `signals/help-needed.json` | 例如非记叙型续写、格式不在白名单 |
@@ -250,12 +390,12 @@ promotion 命令。
 
 新卷先走统一材料化缝。导题过程中**不改** `nck1-paper-standard.md` 来过闸（标准修订须 owner 另拍板后落档）。不绕闸。同一门禁最多自动修 **2** 次，仍红 → 写 `signals/blocked.json`（`gate_failed`）并停。
 
-0. 先运行环境 `preflight`，再生成 `materialization/nck1-source-materialization-v1.json`。已知 NCK1 结构的 DOCX pair 运行 `node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>`：producer 确定性解析段落、表格、题号、section、blank 与权威答案，生成逐段 locator、候选骨架和 `nck1-docx-materialization-review-v1.json`。它绝不解题补答案；语义不唯一时 `disposition` 为 `needs_agent_review`，只在 `review.required` 留结构化异常，Materialization `issues` 非空并失败关闭。Agent 审这些异常并生产全部九份教学分析，不再逐段从零建模。任何分析中的正确项只能抄自该 Materialization 的权威答案；AI 只解释，绝不解题补答案。producer receipt 绑定版本与全部 source digest；源未变时直接 resume，若 Agent 已编辑 Materialization 则标记 `agent_modified` 且不覆盖。源字节漂移必须新建 Source Capture。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；其他载体按原规则处理。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`。当前媒体助手只允许确定性提取/裁剪；清晰图只裁准和摆准。未来低清图若启用AI辅助候选，必须保留原图、禁止擦水印，绑定原图/候选digest，经`/ops/`并排及overlay/闪烁逐项人工确认后，才可由三面共同引用同一候选；该确认gate实现前仍不得生成式重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
+0. 先运行环境 `preflight`，再生成 `materialization/nck1-source-materialization-v1.json`。已知 NCK1 结构的 DOCX pair 运行 `node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>`：producer 确定性解析段落、表格、题号、section、blank 与权威答案，生成逐段 locator、候选骨架和 `nck1-docx-materialization-review-v1.json`。它绝不解题补答案；语义不唯一时 `disposition` 为 `needs_agent_review`，只在 `review.required` 留结构化异常，Materialization `issues` 非空并失败关闭。Agent 审这些异常；`public-paper-v1` 随后生产逐正文段落摘要，只有历史 absent-profile / external `analyzed_package` 才按既有合同生产九份教学分析。任何派生内容中的正确项只能抄自该 Materialization 的权威答案；AI 绝不解题补答案。producer receipt 绑定版本与全部 source digest；源未变时直接 resume，若 Agent 已编辑 Materialization 则标记 `agent_modified` 且不覆盖。源字节漂移必须新建 Source Capture。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；其他载体按原规则处理。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`。当前媒体助手只允许确定性提取/裁剪；清晰图只裁准和摆准。未来低清图若启用AI辅助候选，必须保留原图、禁止擦水印，绑定原图/候选digest，经`/ops/`并排及overlay/闪烁逐项人工确认后，才可由三面共同引用同一候选；该确认gate实现前仍不得生成式重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
 1. `node scripts/import-pipeline/universal-nck1.mjs verify <paperId>`。缺页、缺答案、答案冲突、未闭合表格、重复/漂移媒体或 Materialization `issues` 非空均写 `signals/blocked.json` 并停。
 2. `node scripts/import-pipeline/universal-nck1.mjs build <paperId>`，产生 digest-bound Candidate 摘要与 `confirmed: false` 的 Teacher Confirmation 模板。
-3. 生成九份 staged analysis 后运行 `node scripts/import-pipeline/review.mjs verify-analyses <paperId>`。它复用现有 schema、adapter、validator，检查 4 组 reading/15 题、seven/cloze/grammar 的 question/blank closure、45 个权威 objective answer closure 和两份写作分析，并确定性投影 Screen 的 `reading-choice`、`seven-choices`、`cloze`、`grammar-fill`、`writing` 五份 sidecar。缺项、冲突或不完整一律失败关闭。
-4. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。push 会再次执行同一 analysis gate；不可变 bundle 绑定九份原始 bytes，manifest / bundle 绑定 `analysisDigest`。网页 revision finalize 后不可修改；Agent 停下等待 Owner 在 `/ops/` 真实 Screen 审核讲评。旧 revision 不会因后来补文件而获得 sidecar。
-5. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 或 analysis 后重新 `verify` / `build` / `verify-analyses`，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
+3. `public-paper-v1` 依次运行 `prepare-summaries` / `verify-summaries` 与 `prepare-search-metadata` / `finalize-search-metadata` / `verify-search-metadata`，得到 `paragraph-summaries-v1.json` 和 `public-search-metadata-v1.json`。既有 Materialization issues、source-answer checks 或 validation gates 有未决项即失败关闭，不新增独立 factual-exception receipt。仅历史 absent-profile / external `analyzed_package` 生成九份 staged analysis 并运行 `verify-analyses`。各 profile 门禁缺项、冲突或绑定不完整即失败关闭。
+4. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。push 按 profile 重跑摘要与 metadata 门禁或旧 `verify-analyses`，并将 metadata 绑定不可变 revision/store。网页 revision finalize 后不可修改；Owner 在 `/ops/` 只审核最终 Screen/Student Print/Teacher Print/PDF 版式，认可 receipt 使用 `approvalScope: 'layout_only'`。旧 revision 不会因后来补文件而获得新 sidecar。
+5. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 或当前 profile 的派生文件后重新 `verify` / `build` 与对应摘要/分析门禁，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
    若问题仅属于 `pdf` 的 `friendly8` 或 `friendly10` edition，不改 Source、Materialization、
    题目或分析。运行 `review.mjs pagination-qa <paperId> --edition <edition> --auto`
    获取真实 PDF、逐页 PNG、slot/page 报告与有界建议；只用 `--break-slots` 和允许的
@@ -266,12 +406,12 @@ promotion 命令。
    fallback，会在 plan 中保存 `allowSplitOptionBank: true` 并由显式重放保持一致；8 页禁止。
    自动规划失败仍非零退出，但必须使用独立 diagnostic PDF/逐页图片和结构化失败报告继续
    修复，且不得保存 plan；`--auto` 不得与显式 break/cover 编辑参数混用。
-6. Owner 在网页认可后，Review API 保存绑定 source/Candidate/visible structure/analysis/files/bundle 的 approval；Agent 停下。无需在 Orb 生成本地 QA/发布收据，且不得因认可自动上线。
-7. 只有 Owner 后来在当前对话明确说 `上线 <paperId>`，才运行 `node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship`。命令先用低权限 Agent token 读取最新认可，再用**只在本次上线动作中提供**的独立 ship token 请求生产服务。服务端从不可变 Review bytes 重建 Teacher Confirmation、Canonical request 与五份 sidecar，调用共享 publisher 原子写单卷正式 rows、Canonical current、`versions/vN`、`latest` 和媒体。不得从 Orb 上传整个 SQLite 或 broad assets。
+6. Owner 在网页认可后，Review API 保存绑定 source/Candidate/visible structure、当前 profile 的摘要或分析、files/bundle 的 approval；Agent 停下。无需在 Orb 生成本地 QA/发布收据，且不得因认可自动上线。
+7. 只有 Owner 后来在当前对话明确说 `上线 <paperId>`，才运行 `node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship`。命令先用低权限 Agent token 读取最新认可，再用**只在本次上线动作中提供**的独立 ship token 请求生产服务。服务端从不可变 Review bytes 重建 Teacher Confirmation、Canonical request 与当前 profile 的 sidecar，调用共享 publisher 原子写单卷正式 rows、Canonical current、`versions/vN`、`latest` 和媒体。不得从 Orb 上传整个 SQLite 或 broad assets。
 
 `materialize`、`verify` 与 `build` 都不会创建认可、approve、publish 或 ship。Teacher Confirmation、不可变 Review revision、Owner 网页认可和上线口令边界保持不变。
 
-以下旧格式编号步骤仅供已经登记的存量入口继续复现；新卷从分析、发布 dry-run 和 QA 公共门禁继续，不再执行旧切卷/producer：
+以下旧格式编号步骤（包括分析、发布 dry-run 与 QA 门禁）仅供已经登记的存量入口继续复现；`public-paper-v1` 新卷不执行这些步骤：
 
 1. 切卷：格式① `node scripts/import-pipeline/01-split.mjs papers/<id>/config.json`；格式② `node scripts/import-pipeline/pdf-extract.mjs <paperId>`（先按 runbook 填 `CONTENT`）；格式③ `node scripts/import-pipeline/03-split-docx-pair.mjs papers/<id>/config.json`（试题 DOCX + 答案解析 DOCX，从解析抄 `answerKey`）。
 2. 7× `node scripts/import-pipeline/validate-one.mjs papers/<id>/config.json <key>`，key 同上。无子代理时**同一会话串行**写 7 组。禁止把别的 `paperId` 的分析 remap 当本卷交付。
@@ -296,7 +436,7 @@ promotion 命令。
 ## 停点
 
 - **不对答案（人）。** 答案随解析字段做全；托底是 AI Answer Transcription Check。
-- **网页 QA（人）必留。** Owner 在 `/ops/?view=review` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的 Screen，包括九份 staged analysis 确定性投影出的完整讲评，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。AI-derived analysis 必须由 Owner 在真实 Screen 审核；出现“解析未发布”就是失败，不是可认可的 graceful success。问题绑定 revision 与语义对象；网页认可写服务端精确 approval，但不发布。
+- **网页 QA（人）必留。** Owner 在 `/ops/?view=review` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的真实 Screen，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。对 `public-paper-v1`，Owner 只认可最终渲染版式，不逐项核对摘要、metadata、原题准确性或答案映射；这些由前置自动门禁闭合。认可 receipt 必须明确该限制。历史 absent-profile / external `analyzed_package` 保持原审核合同，不能静默改类。问题绑定 immutable revision；网页认可写服务端精确 approval，但不发布。
 - **上线。** 网页认可后停。导题后台无生产按钮。Owner 必须**当前**另说「上线 <paperId>」之后，才按下一节执行服务端单卷 promotion。
 
 ## 上线
@@ -365,20 +505,22 @@ QA 之后 Owner 必须另说“上线”（当前口头，不是历史聊天里�
 1. 目标是生产 `eqbank.cc` 的 Review-backed 单卷 promotion；先读 go-live record。
 2. 精确 `paperId`、approvalId、revisionId 与六个 digest。
 3. 只改这一卷；不传 SQLite，不同步 broad assets，不包含 Orb 其他本地改动。
-4. publisher 会写目标 vN、正式 rows、Canonical current、五份分析、latest 与媒体；旧
+4. publisher 会写目标 vN、正式 rows、Canonical current、当前 profile 的摘要或五份分析 sidecar、latest 与媒体；旧
    immutable version 保留供 rollback。
 5. R2 不同步完成；只会由生产现有定时任务在下一次快照覆盖。
 
 ### 收据
 
 - `promotion.state=publishing`：guard 已持有；目标 vN 可能尚未写或正在恢复。
-- `promotion.state=published`：精确 Review identity、vN、Canonical digest、五份分析 digest
+- `promotion.state=published`：精确 Review identity、vN、Canonical digest、当前 profile 的摘要或分析 digest
   与时间已落 Review DB。
 - `promotion.state=failed`：已知拒绝或明确 abort；重试仍需新 Owner 口令。
 
-## 写作分析（新卷必交）
+## 写作分析（旧分析合同必交）
 
-权威在本仓库。新卷必须按下面交稿，不要发明替代合同，也不要只改当前这一套。消费端讲评已能展示应用文 ReviewCard 与续写 `continuationAnalysis`；旧卷迁移仍是后续工作。
+权威在本仓库。以下仅适用于历史 absent-profile / external `analyzed_package`，不适用于
+`public-paper-v1`；保留其教学 doctrine 与实验材料，不要删除或改写成公共卷摘要合同。
+适用卷必须按下面交稿，不要发明替代合同，也不要只改当前这一套。消费端讲评已能展示应用文 ReviewCard 与续写 `continuationAnalysis`；旧卷迁移仍是后续工作。
 
 - **应用文**：先读 `docs/product/application-writing-doctrine-v1.md` 与 `prompts/application-writing-model-answer-v3.md`（agent 入口：`prompts/application-writing-agent-entrypoint.md`）。落盘 `modelAnswer` + 完整 ReviewCard（11 项：`form` `topic` `reader` `person` `tense` `type` 两个 `points` `readerWho` `readerCares` `readerWants` `value`）+ 源有则 `officialModelAnswer`。交际对象推演是生成决策，不新增 ReviewCard 字段。新卷不要求亮点。完整 payload 时点击答题框打开讲评：框内按顺序叠放「AI 参考范文」与可选「官方范文」，右栏只 ReviewCard。不新增 tab，不按 2022-i / 2024-i 白名单决定入口。
 - **读后续写**：先读 `docs/product/continuation-writing-analysis-contract-v1.md` 与 `prompts/continuation-analysis-v1.md`。落盘 `continuationAnalysis` / `continuation-analysis-v1` 五段（`storyUnderstanding`、`continuationContract`、`narrativeDevelopment`、`languageAlignment`、`paragraphBlueprint`）+ `modelAnswer`。形状闸：`node scripts/verify-continuation-analysis-v1.mjs` 所锁的 schema（`schemas/paper-import/continuation-analysis-v1.schema.json`）。只覆盖记叙型；说明 / 议论型停，写 `signals/blocked.json`（`continuation_non_narrative`）或 `help-needed.json`。旧 `continuationDesign` 只认历史资产。

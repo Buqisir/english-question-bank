@@ -1,5 +1,11 @@
 # Writing import: zero-question groups, group-keyed analysis, six-family completeness
 
+> Product update recorded 2026-09-17: [public papers and personal analysis](../product/public-papers-personal-analysis.md).
+> Writing Task identity and whole-paper question-family completeness remain unchanged.
+> Complete platform explanations for all families are no longer the target admission requirement;
+> current analysis publication gates still apply until explicitly migrated. Do not confuse missing
+> teaching prose with a missing writing prompt, continuation starter, or source question group.
+
 Status: accepted (PM grill 2026-05-29, PO 黄学伟)
 
 Context: I5 adds writing import (应用文 application + 读后续写 continuation) to the AI

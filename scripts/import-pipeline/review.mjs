@@ -29,10 +29,21 @@ import {
 import {
   buildNck1OcrReviewProjection,
   buildNck1ReviewProjection,
+  loadNck1ReviewSource,
   ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
   resolveReviewFile,
 } from '../../server/import-review/revisionProjection.mjs'
+import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
+import {
+  enumerateParagraphSummaryTargets,
+  validateParagraphSummaries,
+} from '../../server/paper-import-ai/paragraphSummaries.mjs'
+import {
+  finalizePublicSearchMetadata,
+  preparePublicSearchMetadataRequest,
+  validatePublicSearchMetadata,
+} from '../../server/paper-import-ai/publicSearchMetadata.mjs'
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
@@ -183,7 +194,9 @@ function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = p
     fail('Source-intake initialization receipt paperId does not match the Review workspace')
   }
   const manifest = {
-    schemaVersion: 'web-import-review-bundle-v1',
+    schemaVersion: projection.importProfile
+      ? 'web-import-review-bundle-v2'
+      : 'web-import-review-bundle-v1',
     paperId: projection.paperId,
     paperName: projection.paperName,
     ...(initialization?.baseRevisionId
@@ -192,7 +205,14 @@ function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = p
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
-    analysisDigest: projection.analysisDigest,
+    ...(projection.importProfile
+      ? {
+          importProfile: projection.importProfile,
+          paragraphSummariesDigest: projection.paragraphSummariesDigest,
+          publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+          ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
+        }
+      : { analysisDigest: projection.analysisDigest }),
     producerBuildId: buildId,
     files: fileDescriptors(paperDir),
     resolvesIssueIds,
@@ -458,12 +478,20 @@ async function hydrate(paperId) {
       writeFileSync(filePath, downloaded.bytes)
     }
     const projection = buildNck1ReviewProjection(temporary, { requireAnalyses: false })
-    for (const [key, value] of Object.entries({
+    const identity = {
       sourceDigest: projection.sourceDigest,
       candidateDigest: projection.candidateDigest,
       visibleStructureDigest: projection.visibleStructureDigest,
-      analysisDigest: projection.analysisDigest,
-    })) {
+      ...(projection.importProfile
+        ? {
+            importProfile: projection.importProfile,
+            paragraphSummariesDigest: projection.paragraphSummariesDigest,
+            publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+            ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
+          }
+        : { analysisDigest: projection.analysisDigest }),
+    }
+    for (const [key, value] of Object.entries(identity)) {
       if (revision.manifest[key] !== value) {
         fail(`Hydrated Review ${key} does not match its finalized manifest`)
       }
@@ -571,6 +599,10 @@ async function preflight(paperId) {
 }
 
 function verifyAnalyses(paperId) {
+  const config = requiredJson(path.join(paperDirectory(paperId), 'config.json'), 'config.json')
+  if (config.importProfile === 'public-paper-v1') {
+    fail('public-paper-v1 does not use teaching analyses; run verify-summaries instead')
+  }
   const projection = buildNck1ReviewProjection(
     paperDirectory(paperId),
     { requireAnalyses: true },
@@ -582,6 +614,107 @@ function verifyAnalyses(paperId) {
     analysisDigest: projection.analysisDigest,
     status: 'ready_for_review_push',
   }, null, 2))
+}
+
+function summaryCandidate(paperDir) {
+  const loaded = loadNck1ReviewSource(paperDir)
+  if (loaded.config.importProfile !== 'public-paper-v1' || loaded.analyzedPackage) {
+    fail('Paragraph summaries are only available for raw-source public-paper-v1 workspaces')
+  }
+  const imported = importCanonicalCandidate(loaded.sourceInput)
+  if (!imported.candidate || imported.issues.length) {
+    const issue = imported.issues[0]
+    fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
+  }
+  return { loaded, candidate: imported.candidate }
+}
+
+function prepareSummaries(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const output = option('--output')
+  if (!output) fail('prepare-summaries requires --output <request.json>')
+  const outputPath = path.resolve(output)
+  if (existsSync(outputPath)) fail(`Summary request output already exists: ${outputPath}`)
+  const { loaded, candidate } = summaryCandidate(paperDir)
+  const targets = enumerateParagraphSummaryTargets(loaded.materialization)
+  const targetGroups = new Set(targets.map(({ groupId }) => groupId))
+  const request = {
+    schemaVersion: 'paragraph-summaries-request-v1',
+    paperId,
+    sourceDigest: candidate.source.sha256,
+    candidateDigest: candidate.candidateDigest,
+    outputFile: 'paragraph-summaries-v1.json',
+    outputSchema: requiredJson(path.join(root, 'schemas/paper-import/paragraph-summaries-v1.schema.json'), 'paragraph summaries schema'),
+    prompt: readFileSync(path.join(root, 'prompts/paragraph-summaries-v1.md'), 'utf8'),
+    groups: loaded.materialization.groups
+      .filter(({ groupId }) => targetGroups.has(groupId))
+      .map((group) => ({
+        groupId: group.groupId,
+        sourceGroup: structuredClone(group),
+        authoritativeAnswers: structuredClone(loaded.materialization.answers),
+        targets: targets.filter((target) => target.groupId === group.groupId),
+      })),
+  }
+  mkdirSync(path.dirname(outputPath), { recursive: true })
+  writeFileSync(outputPath, `${JSON.stringify(request, null, 2)}\n`, { flag: 'wx' })
+  console.log(JSON.stringify({ paperId, sourceDigest: request.sourceDigest, candidateDigest: request.candidateDigest, targetCount: targets.length, output: outputPath }, null, 2))
+}
+
+function verifySummaries(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const { loaded, candidate } = summaryCandidate(paperDir)
+  const sidecar = requiredJson(path.join(paperDir, 'paragraph-summaries-v1.json'), 'paragraph-summaries-v1.json')
+  const issues = validateParagraphSummaries({ sidecar, materialization: loaded.materialization, sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest })
+  if (issues.length) fail(`${issues[0].code}: ${issues[0].message}`)
+  const bytes = readFileSync(path.join(paperDir, 'paragraph-summaries-v1.json'))
+  console.log(JSON.stringify({ paperId, importProfile: loaded.config.importProfile, paragraphSummariesDigest: sha256(bytes), summaries: enumerateParagraphSummaryTargets(loaded.materialization).length, status: 'summaries_verified' }, null, 2))
+}
+
+function prepareSearchMetadata(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const output = option('--output')
+  if (!output) fail('prepare-search-metadata requires --output <request.json>')
+  const outputPath = path.resolve(output)
+  if (existsSync(outputPath)) fail(`Search metadata request output already exists: ${outputPath}`)
+  const { loaded, candidate } = summaryCandidate(paperDir)
+  const request = preparePublicSearchMetadataRequest({
+    materialization: loaded.materialization,
+    sourceDigest: candidate.source.sha256,
+    candidateDigest: candidate.candidateDigest,
+  })
+  request.prompt = readFileSync(path.join(root, 'prompts/public-search-metadata-v1.md'), 'utf8')
+  mkdirSync(path.dirname(outputPath), { recursive: true })
+  writeFileSync(outputPath, `${JSON.stringify(request, null, 2)}\n`, { flag: 'wx' })
+  console.log(JSON.stringify({ paperId, ...request.binding, groups: request.sourceGroups.length, output: outputPath }, null, 2))
+}
+
+function finalizeSearchMetadata(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const input = option('--input')
+  if (!input) fail('finalize-search-metadata requires --input <authored.json>')
+  const target = path.join(paperDir, 'public-search-metadata-v1.json')
+  if (existsSync(target)) fail(`Public search metadata already exists: ${target}`)
+  const { loaded, candidate } = summaryCandidate(paperDir)
+  const authored = requiredJson(path.resolve(input), 'authored search metadata')
+  const sidecar = finalizePublicSearchMetadata({
+    authored,
+    materialization: loaded.materialization,
+    sourceDigest: candidate.source.sha256,
+    candidateDigest: candidate.candidateDigest,
+  })
+  const bytes = Buffer.from(`${stableStringify(sidecar)}\n`)
+  writeFileSync(target, bytes, { flag: 'wx' })
+  console.log(JSON.stringify({ paperId, publicSearchMetadataDigest: sha256(bytes), groups: sidecar.groups.length, status: 'search_metadata_finalized' }, null, 2))
+}
+
+function verifySearchMetadata(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const { loaded, candidate } = summaryCandidate(paperDir)
+  const filePath = path.join(paperDir, 'public-search-metadata-v1.json')
+  const sidecar = requiredJson(filePath, 'public-search-metadata-v1.json')
+  const issues = validatePublicSearchMetadata({ sidecar, materialization: loaded.materialization, sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest })
+  if (issues.length) fail(`${issues[0].code}: ${issues[0].message}`)
+  console.log(JSON.stringify({ paperId, publicSearchMetadataDigest: sha256(readFileSync(filePath)), groups: sidecar.groups.length, status: 'search_metadata_verified' }, null, 2))
 }
 
 async function reply(paperId, issueId) {
@@ -630,7 +763,16 @@ async function approvedLocalReview(paperId) {
     [projection.sourceDigest, approval.sourceDigest, 'sourceDigest'],
     [projection.candidateDigest, approval.candidateDigest, 'candidateDigest'],
     [projection.visibleStructureDigest, approval.visibleStructureDigest, 'visibleStructureDigest'],
-    [projection.analysisDigest, approval.analysisDigest, 'analysisDigest'],
+    ...(projection.importProfile
+      ? [
+          [projection.importProfile, approval.importProfile, 'importProfile'],
+          [projection.paragraphSummariesDigest, approval.paragraphSummariesDigest, 'paragraphSummariesDigest'],
+          [projection.publicSearchMetadataDigest, approval.publicSearchMetadataDigest, 'publicSearchMetadataDigest'],
+          ...(projection.analysisDigest
+            ? [[projection.analysisDigest, approval.analysisDigest, 'analysisDigest']]
+            : []),
+        ]
+      : [[projection.analysisDigest, approval.analysisDigest, 'analysisDigest']]),
   ]) {
     if (actual !== expected) fail(`Local ${label} no longer matches web approval`)
   }
@@ -688,6 +830,13 @@ async function accept(paperId) {
     candidateDigest: approval.candidateDigest,
     visibleStructureDigest: approval.visibleStructureDigest,
     analysisDigest: approval.analysisDigest,
+    ...(approval.importProfile
+      ? {
+          importProfile: approval.importProfile,
+          paragraphSummariesDigest: approval.paragraphSummariesDigest,
+          publicSearchMetadataDigest: approval.publicSearchMetadataDigest,
+        }
+      : {}),
     bundleDigest: approval.bundleDigest,
   }, null, 2)}\n`)
   console.log(`ACCEPTED ${paperId}: exact web approval materialized; no publish or deployment was run`)
@@ -726,6 +875,13 @@ function assertAcceptedReceipts(paperDir, approval, projection) {
     [qaAccepted.candidateDigest, approval.candidateDigest, 'qa candidateDigest'],
     [qaAccepted.visibleStructureDigest, approval.visibleStructureDigest, 'qa visibleStructureDigest'],
     [qaAccepted.analysisDigest, approval.analysisDigest, 'qa analysisDigest'],
+    ...(approval.importProfile
+      ? [
+          [qaAccepted.importProfile, approval.importProfile, 'qa importProfile'],
+          [qaAccepted.paragraphSummariesDigest, approval.paragraphSummariesDigest, 'qa paragraphSummariesDigest'],
+          [qaAccepted.publicSearchMetadataDigest, approval.publicSearchMetadataDigest, 'qa publicSearchMetadataDigest'],
+        ]
+      : []),
     [qaAccepted.bundleDigest, approval.bundleDigest, 'qa bundleDigest'],
   ]) {
     if (actual !== expected) fail(`${label} no longer matches current web approval`)
@@ -763,6 +919,11 @@ function publicationReceiptMatchesApproval(receipt, approval) {
     && receipt.candidateDigest === approval.candidateDigest
     && receipt.visibleStructureDigest === approval.visibleStructureDigest
     && receipt.analysisDigest === approval.analysisDigest
+    && (!approval.importProfile || (
+      receipt.importProfile === approval.importProfile
+      && receipt.paragraphSummariesDigest === approval.paragraphSummariesDigest
+      && receipt.publicSearchMetadataDigest === approval.publicSearchMetadataDigest
+    ))
     && receipt.bundleDigest === approval.bundleDigest
     && Number.isInteger(receipt.assetVersion)
     && receipt.assetVersion > 0
@@ -825,6 +986,13 @@ async function publish(paperId) {
       candidateDigest: approval.candidateDigest,
       visibleStructureDigest: approval.visibleStructureDigest,
       analysisDigest: approval.analysisDigest,
+      ...(approval.importProfile
+        ? {
+            importProfile: approval.importProfile,
+            paragraphSummariesDigest: approval.paragraphSummariesDigest,
+            publicSearchMetadataDigest: approval.publicSearchMetadataDigest,
+          }
+        : {}),
       bundleDigest: approval.bundleDigest,
       assetVersion: result.publish.assetVersion,
       versionName: result.publish.versionName,
@@ -878,6 +1046,13 @@ async function promote(paperId) {
     candidateDigest: approval.candidateDigest,
     visibleStructureDigest: approval.visibleStructureDigest,
     analysisDigest: approval.analysisDigest,
+    ...(approval.importProfile
+      ? {
+          importProfile: approval.importProfile,
+          paragraphSummariesDigest: approval.paragraphSummariesDigest,
+          publicSearchMetadataDigest: approval.publicSearchMetadataDigest,
+        }
+      : {}),
     bundleDigest: approval.bundleDigest,
   }
   console.log(JSON.stringify({
@@ -914,6 +1089,11 @@ async function main() {
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
   else if (command === 'preflight') await preflight(paperId)
   else if (command === 'verify-analyses') verifyAnalyses(paperId)
+  else if (command === 'prepare-summaries') prepareSummaries(paperId)
+  else if (command === 'verify-summaries') verifySummaries(paperId)
+  else if (command === 'prepare-search-metadata') prepareSearchMetadata(paperId)
+  else if (command === 'finalize-search-metadata') finalizeSearchMetadata(paperId)
+  else if (command === 'verify-search-metadata') verifySearchMetadata(paperId)
   else if (command === 'status') await status(paperId)
   else if (command === 'reply') await reply(paperId, issueId)
   else if (command === 'accept') await accept(paperId)
@@ -924,7 +1104,7 @@ async function main() {
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
       + 'pagination-qa <paperId> --edition friendly8|friendly10 [--auto | --break-slots a,b --cover-gaps 54,54] [--save-plan] [--output dir] | hydrate <paperId> | '
       + 'push-ocr <paperId> | pull-ocr-confirmation <paperId> [--revision rev-id] | '
-      + 'preflight <paperId> | verify-analyses <paperId> | status <paperId> | '
+      + 'preflight <paperId> | verify-analyses <paperId> | prepare-summaries <paperId> --output <request.json> | verify-summaries <paperId> | prepare-search-metadata <paperId> --output <request.json> | finalize-search-metadata <paperId> --input <authored.json> | verify-search-metadata <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '
       + 'promote <paperId> --owner-said-ship|--owner-said-retry-ship | '
