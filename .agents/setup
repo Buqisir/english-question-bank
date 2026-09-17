@@ -134,6 +134,9 @@ step "checking English and Simplified Chinese OCR data" bash -c \
   "tesseract --list-langs 2>/dev/null | grep -Fxq eng && tesseract --list-langs 2>/dev/null | grep -Fxq chi_sim"
 
 if [[ "$analysis_only" == --import-tools-only ]]; then
+  step "installing locked import dependencies" npm ci --prefix server --no-audit --no-fund
+  step "checking import runtime modules" node --input-type=module -e \
+    "await import('./server/paper-import-ai/publicSearchMetadata.mjs'); await import('./server/import-review/revisionProjection.mjs'); console.log('import runtime ready');"
   echo "[orb-setup] import tools ready: OCR eng+chi_sim; ASR model $listening_asr_model@$listening_asr_revision"
   exit 0
 fi

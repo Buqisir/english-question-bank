@@ -47,8 +47,8 @@ function exact(value, keys) {
 
 function textOf(block) {
   if (block?.kind !== 'paragraph' || !Array.isArray(block.content)) return ''
-  // Preserve source runs, but do not let omitted inline nodes merge adjacent words.
-  return block.content.filter((item) => item?.kind === 'text').map((item) => item.text).join(' ')
+  // Adjacent formatting runs preserve exact text; omitted blanks separate words.
+  return block.content.map((item) => item?.kind === 'text' ? item.text : ' ').join('')
 }
 
 function proseParagraphs(materialization, group) {

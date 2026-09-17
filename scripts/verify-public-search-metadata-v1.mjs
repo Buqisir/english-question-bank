@@ -37,6 +37,10 @@ const independentlyCountedRuns = separatedRunBlock[0].content
 assert.equal(independentlyCountedRuns, 2)
 assert.equal(countPublicSourceWords(separatedRunBlock), independentlyCountedRuns,
   'a non-text inline boundary cannot merge adjacent source words')
+assert.equal(countPublicSourceWords([{ kind: 'paragraph', content: [
+  { kind: 'text', text: 'eco' }, { kind: 'text', text: 'friendly don' },
+  { kind: 'text', text: "'t well-" }, { kind: 'text', text: 'being' },
+] }]), 3, 'formatting boundaries preserve one word, a contraction and a hyphenated word')
 
 const preparedReading = prepared.sourceGroups.find((group) => group.groupId === reading.groupId)
 assert.equal(preparedReading.blocks[0].kind, 'framed_columns')

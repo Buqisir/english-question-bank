@@ -4,13 +4,11 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
   chmodSync,
-  closeSync,
   existsSync,
   mkdirSync,
   readFileSync,
   renameSync,
   rmSync,
-  openSync,
   statSync,
   writeFileSync,
 } from 'node:fs'
@@ -22,7 +20,7 @@ import { buildNck1ReviewProjection } from '../../server/import-review/revisionPr
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { inspectNck1Materialization } from './nck1-docx-materialize.mjs'
 import { invalidateParagraphSummariesForListeningSupplement } from './paragraph-summary-rebinding.mjs'
-import { maintainSourceIntakeLease, runSourceIntakeChild } from './source-intake-lease.mjs'
+import { acquireSourceIntakeLock, maintainSourceIntakeLease, runSourceIntakeChild } from './source-intake-lease.mjs'
 
 const inboxRoot = path.join(import.meta.dirname, 'source-intake-inbox')
 const universalCli = path.join(import.meta.dirname, 'universal-nck1.mjs')
@@ -447,13 +445,19 @@ async function continueAutomation(submissionId, paperId) {
   const directory = submissionDirectory(submissionId)
   mkdirSync(directory, { recursive: true, mode: 0o700 })
   const lockPath = path.join(directory, 'continue.lock')
-  let lock
-  try { lock = openSync(lockPath, 'wx', 0o600) } catch { fail(`Another continue is active: ${submissionId}`) }
   const paperLockPath = path.join(inboxRoot, `${paperId}.continue.lock`)
+  let lock
   let paperLock
   let leaseKeeper = null
   try {
-    try { paperLock = openSync(paperLockPath, 'wx', 0o600) } catch { fail(`Another continue is active for paper: ${paperId}`) }
+    try { lock = await acquireSourceIntakeLock(lockPath) } catch (error) {
+      if (error.message.includes('flock executable is unavailable')) throw error
+      fail(`Another continue is active: ${submissionId}`)
+    }
+    try { paperLock = await acquireSourceIntakeLock(paperLockPath) } catch (error) {
+      if (error.message.includes('flock executable is unavailable')) throw error
+      fail(`Another continue is active for paper: ${paperId}`)
+    }
     let status = await automationStatus(submissionId, paperId)
     if (status.blocked || status.state === 'source_ready') return status
     const runStep = async (step, args) => {
@@ -508,12 +512,8 @@ async function continueAutomation(submissionId, paperId) {
     return status
   } finally {
     if (leaseKeeper) await leaseKeeper.stop()
-    if (paperLock != null) {
-      closeSync(paperLock)
-      rmSync(paperLockPath, { force: true })
-    }
-    if (lock != null) closeSync(lock)
-    rmSync(lockPath, { force: true })
+    if (paperLock) await paperLock.release()
+    if (lock) await lock.release()
   }
 }
 

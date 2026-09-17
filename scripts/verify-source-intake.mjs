@@ -17,7 +17,7 @@ import {
 import { createSourceIntakeNotifier } from '../server/source-intake/sourceIntakeNotifier.mjs'
 import { createSourceIntakeRoutes } from '../server/source-intake/sourceIntakeRoutes.mjs'
 import { createSourceIntakeStore } from '../server/source-intake/sourceIntakeStore.mjs'
-import { maintainSourceIntakeLease, runSourceIntakeChild } from './import-pipeline/source-intake-lease.mjs'
+import { acquireSourceIntakeLock, maintainSourceIntakeLease, runSourceIntakeChild } from './import-pipeline/source-intake-lease.mjs'
 
 // Drive the renewal boundary without a wall-clock sleep or production test flag.
 for (const failRenewal of [false, true]) {
@@ -53,7 +53,15 @@ await assert.rejects(maintainSourceIntakeLease(async () => {
 console.log('PASS lease renewal serializes requests, drains on stop, and retains failures')
 
 const leaseTestRoot = mkdtempSync(path.join(tmpdir(), 'eqb-lease-child-'))
+const originalPath = process.env.PATH
 try {
+  process.env.PATH = path.join(leaseTestRoot, 'missing-bin')
+  await assert.rejects(
+    acquireSourceIntakeLock(path.join(leaseTestRoot, 'missing-flock.lock')),
+    /Required util-linux flock executable is unavailable/,
+  )
+  process.env.PATH = originalPath
+
   const marker = path.join(leaseTestRoot, 'running.json')
   let tick
   let renewals = 0
@@ -78,6 +86,7 @@ try {
   assert.equal(renewals, 2, 'failed renewal is not retried')
   console.log('PASS lease failure terminates the running child before returning')
 } finally {
+  process.env.PATH = originalPath
   rmSync(leaseTestRoot, { recursive: true, force: true })
 }
 
@@ -1319,21 +1328,57 @@ try {
     assert.equal(existsSync(reviewFile), false, 'continue must not regenerate partial evidence')
     writeFileSync(reviewFile, reviewBytes)
     const lockFile = path.join(automaticInbox, 'continue.lock')
-    writeFileSync(lockFile, 'another writer')
+    const progressFile = path.join(automaticInbox, 'automation-progress.json')
+    const killedProgress = JSON.stringify({
+      schemaVersion: 'source-intake-automation-progress-v1',
+      submissionId: automaticSubmissionId,
+      operations: {
+        materialize: {
+          state: 'unknown', paperId: automaticPaperId, at: new Date().toISOString(),
+          detail: 'producer outcome was not reconciled before coordinator death',
+        },
+      },
+    })
+    const lockOwner = spawn(process.execPath, ['--input-type=module', '-e', `
+      import { writeFileSync } from 'node:fs'
+      import { acquireSourceIntakeLock } from ${JSON.stringify(new URL('./import-pipeline/source-intake-lease.mjs', import.meta.url).href)}
+      await acquireSourceIntakeLock(${JSON.stringify(lockFile)})
+      writeFileSync(${JSON.stringify(progressFile)}, ${JSON.stringify(killedProgress)})
+      process.stdout.write('READY\\n')
+      await new Promise(() => {})
+    `], { stdio: ['ignore', 'pipe', 'pipe'] })
+    await new Promise((resolve, reject) => {
+      let output = ''
+      lockOwner.once('error', reject)
+      lockOwner.once('close', (code) => reject(new Error(`lock owner exited early: ${code}`)))
+      lockOwner.stdout.on('data', (chunk) => {
+        output += chunk
+        if (output.includes('READY\n')) resolve()
+      })
+    })
     await assert.rejects(runSourceIntakeCli(origin, [
       'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
     ]), /Another continue is active/)
-    assert.equal(readFileSync(lockFile, 'utf8'), 'another writer')
-    rmSync(lockFile)
+    lockOwner.kill('SIGKILL')
+    await new Promise((resolve) => lockOwner.once('close', resolve))
+    const afterDeath = JSON.parse(await runSourceIntakeCli(origin, [
+      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+    ]))
+    assert.equal(afterDeath.blocked.reason, 'operation_outcome_unknown')
+    assert.equal(afterDeath.blocked.step, 'materialize')
+    assert.equal(readFileSync(progressFile, 'utf8'), killedProgress,
+      'kernel lock recovery must not clear or replay unknown operation evidence')
+    writeFileSync(progressFile, progressBefore)
     const paperLockFile = path.join(path.dirname(automaticInbox), `${automaticPaperId}.continue.lock`)
-    writeFileSync(paperLockFile, 'different submission, same paper')
+    const heldPaperLock = await acquireSourceIntakeLock(paperLockFile)
     try {
       await assert.rejects(runSourceIntakeCli(origin, [
         'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
       ]), /Another continue is active for paper/)
-      assert.equal(readFileSync(paperLockFile, 'utf8'), 'different submission, same paper')
+      const submissionLockAfterFailure = await acquireSourceIntakeLock(lockFile)
+      await submissionLockAfterFailure.release()
     } finally {
-      rmSync(paperLockFile)
+      await heldPaperLock.release()
     }
     const claimFile = path.join(automaticInbox, 'claim.json')
     const claimBytes = readFileSync(claimFile)

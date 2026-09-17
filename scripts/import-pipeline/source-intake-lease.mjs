@@ -1,4 +1,58 @@
 import { spawn } from 'node:child_process'
+import { chmodSync, closeSync, openSync } from 'node:fs'
+
+// flock owns the lock in a separate process whose stdin is a pipe held by the
+// coordinator. If the coordinator is killed, the kernel closes the pipe, the
+// child exits, and the advisory lock is released without stale-PID cleanup.
+export async function acquireSourceIntakeLock(filePath) {
+  const file = openSync(filePath, 'a', 0o600)
+  closeSync(file)
+  chmodSync(filePath, 0o600)
+
+  const holder = spawn('flock', [
+    '--nonblock', filePath, process.execPath, '-e',
+    "process.stdout.write('LOCKED\\n'); process.stdin.resume()",
+  ], { stdio: ['pipe', 'pipe', 'pipe'] })
+  let stderr = ''
+  holder.stderr.on('data', (chunk) => { stderr += chunk })
+
+  await new Promise((resolve, reject) => {
+    let stdout = ''
+    const fail = (error) => {
+      if (error?.code === 'ENOENT') {
+        reject(new Error('Required util-linux flock executable is unavailable'))
+      } else {
+        reject(error || new Error(stderr.trim() || `Lock is already held: ${filePath}`))
+      }
+    }
+    holder.once('error', fail)
+    holder.once('close', (code) => fail(
+      code === 1 ? null : new Error(stderr.trim() || `flock exited ${code} before acquiring ${filePath}`),
+    ))
+    holder.stdout.on('data', (chunk) => {
+      stdout += chunk
+      if (stdout.includes('LOCKED\n')) {
+        holder.removeAllListeners('error')
+        holder.removeAllListeners('close')
+        resolve()
+      }
+    })
+  })
+
+  let released = false
+  return {
+    async release() {
+      if (released) return
+      released = true
+      const closed = new Promise((resolve, reject) => {
+        holder.once('error', reject)
+        holder.once('close', resolve)
+      })
+      holder.stdin.end()
+      await closed
+    },
+  }
+}
 
 // Keep renewals serial and drain the outstanding request before the caller
 // records a completed step. A failed renewal never schedules another attempt.
