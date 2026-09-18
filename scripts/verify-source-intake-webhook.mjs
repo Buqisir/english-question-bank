@@ -53,8 +53,11 @@ assert.match(prompt, /never invent a new paperId/)
 assert.match(prompt, /Do not edit the Owner draft/)
 assert.match(prompt, /public-paper-v1/)
 assert.match(prompt, /do not dispatch the nine teaching analyses/)
-assert.match(prompt, /eqbank-import-low thread \(Low with DeepSeek 4.1 pinned\) with features: \[\]/)
-assert.match(prompt, /do not substitute another model/)
+assert.match(prompt, /built-in Low thread with agent_mode: low, features: \[\], explicit Import project/)
+assert.match(prompt, /do not pin a model or reasoning effort/)
+assert.match(prompt, /do not substitute another mode/)
+assert.match(prompt, /Follow docs\/import\/agent-contract\.md/)
+assert.match(prompt, /stop on any validator failure/)
 assert.match(prompt, /genuine import_agent review/)
 assert.match(prompt, /OCR confirmation remains Owner-only/)
 assert.match(prompt, /Never transfer claim receipts or submission workspaces/)
@@ -68,8 +71,6 @@ const originalProjectId = process.env.AMP_PROJECT_ID
 const originalFetch = globalThis.fetch
 let registeredWebhook = null
 let registeredCommand = null
-let registeredMode = null
-const agentDefinition = { kind: 'agent-definition', verifier: true }
 let createdThreadOptions = null
 const apiCalls = []
 const appendedMessages = []
@@ -94,7 +95,7 @@ try {
   globalThis.fetch = async () => assert.fail('wrong project must not make a network request')
   await sourceIntakeWakeupPlugin({
     logger: { log(message) { assert.match(message, /english-question-bank-import/) } },
-    createAgent() { assert.fail('wrong project must not create an agent') },
+    getBuiltinAgent() { assert.fail('wrong project must not get an agent') },
     async createWebhook() { assert.fail('wrong project must not register a webhook') },
   })
   assert.equal(apiCalls.length, 0, 'wrong project must not call the worker API')
@@ -168,16 +169,11 @@ try {
         return resumedThread
       },
     },
-    createAgent(config) {
-      assert.deepEqual(config, {
-        extends: 'low',
-        model: 'deepseek/deepseek-v4.1-flash',
-        reasoningEffort: 'high',
-        features: [],
-        instructions: 'Follow docs/import/agent-contract.md. New raw sources use public-paper-v1 with paragraph summaries and compact public search metadata, never the nine teaching analyses. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
-      })
+    createAgent() { assert.fail('use built-in Low, not a custom model configuration') },
+    registerAgentMode() { assert.fail('do not register a duplicate Low mode') },
+    getBuiltinAgent(mode) {
+      assert.equal(mode, 'low')
       return {
-        definition: agentDefinition,
         async createThread(options) {
           createCount += 1
           createdThreadOptions = options
@@ -190,9 +186,6 @@ try {
         },
       }
     },
-    registerAgentMode(mode) {
-      registeredMode = mode
-    },
     async createWebhook(options) {
       registeredWebhook = options
       return { url: 'https://capability.invalid/private-verifier' }
@@ -204,8 +197,6 @@ try {
   assert.equal(registeredWebhook.key, 'eqbank-source-intake-queued-v1')
   assert.deepEqual(registeredWebhook.headers, ['x-eqbank-signature'])
   assert.equal(registeredCommand.id, 'source-intake-webhook-url')
-  assert.equal(registeredMode.key, 'eqbank-import-low')
-  assert.equal(registeredMode.agent, agentDefinition, 'children use the same pinned Low definition')
   const context = {
     logger: { log() {} },
     signal: new AbortController().signal,
@@ -292,4 +283,4 @@ try {
   globalThis.fetch = originalFetch
 }
 
-console.log('PASS source-intake webhook pinned Low/DeepSeek without fast, project guard, reserve, bind, resume, and crash-window contract')
+console.log('PASS source-intake webhook built-in Low without fast, project guard, reserve, bind, resume, and crash-window contract')

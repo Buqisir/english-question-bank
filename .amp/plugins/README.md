@@ -119,15 +119,22 @@ inside the 30-second webhook handler.
 The enabled plugin fails closed unless `AMP_PROJECT_ID` is exactly
 `72c5d9ea-c2e7-42e8-b51e-0b22b9b23732`, the project ref
 `user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import`. The current plugin API does not
-accept a `project` option on `createThread`; project threads inherit the project that owns the
-webhook registration. A mismatch is rejected before agent creation, webhook registration, reserve,
-or worker creation. Deployment must still verify the live capability URL is registered by that
-project; repository code alone cannot prove current URL ownership.
+accept a `project` option on `createThread`. The guard checks the controller, not the created
+worker: an observed Import-controller delivery produced a worker whose exported `meta.projectID`
+was the ordinary repository project. Do not assume registration ownership pins worker project.
+A controller mismatch is rejected before agent creation, webhook registration, reserve, or worker
+creation. Deployment must still verify live capability ownership; actual worker project selection
+remains unresolved and must be verified separately before resuming automated imports.
+
+The coordinator uses `getBuiltinAgent('low')`; summary/search requests use `agent_mode: low`.
+Both explicitly clear fast with `features: []`. Model and reasoning configuration come from
+Amp's built-in Low, not a custom DeepSeek pin or a registered duplicate mode. This mode change
+does not repair project selection or alter existing bound thread definitions.
 
 ### Import worker Orb size
 
 The plugin API's `createThread` contract accepts `executor: 'orb'` but no per-thread `orbSize`.
-Automatic import workers therefore inherit the Amp Project's default Orb size. Run this plugin in
+Do not infer the worker's project or size solely from the controller's project. Run this plugin in
 a dedicated `english-question-bank-import` Project with the Owner's `a1.medium` default;
 changing the default affects only new threads and does not resize an existing worker.
 Keep the import Project separate from the dedicated CI and deployment Orbs so their credentials,

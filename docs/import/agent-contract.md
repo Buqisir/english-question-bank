@@ -61,10 +61,10 @@ metadata sidecar 已贯穿不可变 revision、Review store、promotion、发布
 
 ```bash
 node scripts/import-pipeline/review.mjs prepare-summaries <paperId> --output /abs/summary-request.json
-# 若需要模型：eqbank-import-low（Low + DeepSeek 4.1），features=[]；只传上述请求
+# 若需要模型：内置 low，features=[]；只传上述请求
 node scripts/import-pipeline/review.mjs verify-summaries <paperId>
 node scripts/import-pipeline/review.mjs prepare-search-metadata <paperId> --output /abs/metadata-request.json
-# 若需要模型：eqbank-import-low（Low + DeepSeek 4.1），features=[]；只传 metadata request
+# 若需要模型：内置 low，features=[]；只传 metadata request
 node scripts/import-pipeline/review.mjs finalize-search-metadata <paperId> --input /abs/authored-metadata.json
 node scripts/import-pipeline/review.mjs verify-search-metadata <paperId>
 node scripts/import-pipeline/review.mjs push <paperId>
@@ -194,12 +194,11 @@ revision 纳入 bundle identity，服务端再次以当前 revision 比对，冲
 
 采用 Owner 选择的 B：每组由新的普通 Low 线程直接生成，启用 fast，不调用 Oracle、
 `nck1_analyze_group`、`amp.ai.generate` 或其他模型。不再使用旧 Grok 解析插件。
-Webhook 新建协调线程继承内置 Low 的 prompt/tools，显式绑定
-`deepseek/deepseek-v4.1-flash`，`features: []`；不使用 Grok 或全局默认模型路由。
-新 public-paper-v1 摘要与检索元数据使用同一插件注册的 `eqbank-import-low` 模式，
-`create_thread` 显式传 `agent_mode: eqbank-import-low`、`features: []` 和专用 Import Project。
-该模式只是 Low + DeepSeek 的固定配置，不是更高级的协调层；若不可用则停止，不回退到
-内置 Low/Medium、其他模型或 Oracle/Task。实际 provider/model/usage 仍须在首卷试点核实。
+Webhook 新建协调线程直接使用 `getBuiltinAgent('low')`，不覆盖 Low 的模型或推理档位，
+创建时显式 `features: []`。新 public-paper-v1 摘要与检索元数据同样使用内置 Low，
+`create_thread` 显式传 `agent_mode: low`、`features: []` 和专用 Import Project。
+不再注册自定义 Low 副本；Low 跟随 Amp 的模式配置，不保证固定为 DeepSeek。
+若 Low 不可用则停止，不切换模式或调用 Oracle/Task。实际 provider/model/usage 仍须实测。
 已绑定 coordinator/lease 不迁移，恢复时保持原线程。
 
 以下 Low + fast 仅适用旧解析合同，不覆盖上面的新 public-paper-v1 路径。
