@@ -1,0 +1,21 @@
+[Unit]
+Description=Cloudflare Tunnel for EQB Ops MCP only
+After=network-online.target eqb-ops-mcp.service
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=cloudflared
+Group=cloudflared
+ExecStart=/usr/bin/cloudflared tunnel --no-autoupdate run --token-file /etc/eqb-ops-mcp/tunnel.token
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/etc/eqb-ops-mcp
+# This unit must never replace or stop a shared cloudflared service.
+
+[Install]
+WantedBy=multi-user.target
