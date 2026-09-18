@@ -58,3 +58,48 @@ sudo /opt/eqb-ops/app/host/rollback-eqb-ops-mcp.sh
 - Tunnel `eqb-ops-mcp`
 
 **不要**停止共享 `cloudflared`、Caddy 或 `eqb.service`。
+
+## Commit identity and startup provenance
+
+`checkoutCommit` runs Git with a per-call `safe.directory` restricted to the
+configured checkout. It does not set global Git config or grant write access.
+The checkout user must already be able to read Git HEAD metadata. A private
+loose ref (for example `.git/refs/heads/main` mode 0600) still returns `unknown`
+with its error; safe.directory is not a filesystem permission bypass. Repair
+only the affected commit metadata after inspection, never the whole checkout.
+Future ref replacement/packing can change permissions again; keep that failure
+visible rather than treating a stale exported SHA as current checkout HEAD.
+
+`runningCommitProof` is now an object (or null), with source, path, service,
+PID, systemd InvocationID, physical source directory and timestamps. The
+read-only MCP tool has no fixed output schema; existing commit/reason fields
+remain unchanged. Missing or invalid proof never falls back to checkout HEAD,
+the current symlink, `/proc`, or lsof.
+
+The optional `host/install-running-provenance.sh` must be separately reviewed
+and run as the existing administrator. It verifies the known release service
+shape and installs only a root-owned Node preload and an eqb-specific drop-in.
+It does not alter the main unit, its deployment hash, Caddy or Ops privileges.
+The drop-in preserves ExecStart and adds RuntimeDirectory plus NODE_OPTIONS.
+Check beforehand that the application's env-file does not configure NODE_OPTIONS;
+the existing operator should confirm that key's absence without exposing values.
+The installer refuses existing systemd NODE_OPTIONS, EnvironmentFiles, drop-ins
+or helper destinations rather than overwriting them.
+
+The preload executes in the actual Node MainPID, reads the immutable marker
+from its physical working directory, then atomically records a 0444 JSON file
+in `/run/eqb-provenance` owned by the existing eqb user. It removes only its own
+NODE_OPTIONS flag before the application can spawn child Node processes.
+Preload errors are logged but do not prevent the website from starting. Ops
+requires active state, matching MainPID and InvocationID both before and after
+reading proof, plus a matching release marker. A switched current symlink cannot
+change a running process's SHA. A restart invalidates old proof immediately;
+systemd removes the runtime directory at stop. This is deployment provenance,
+not attestation against a compromised website process or root administrator.
+
+Installation alone cannot prove an already-running process. After normal
+production checks, restart eqb once to activate the preload, then verify the
+health endpoint and call server_overview. On rollback, remove only the newly
+installed `50-running-provenance.conf`, daemon-reload and restart eqb; keep the
+helper files until no process uses them. Ops then reports missing/stale proof as
+unknown. Never restart Caddy or change the tunnel for this procedure.

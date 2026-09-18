@@ -105,6 +105,7 @@ export function loadConfig(env = process.env) {
       'EQB_OPS_MCP_CHECKOUT',
       '/opt/eqb/english-question-bank',
     ),
+    provenancePath: absolutePath(env, 'EQB_OPS_MCP_PROVENANCE', '/run/eqb-provenance/running-commit.json'),
     logFile: absolutePath(env, 'EQB_OPS_MCP_LOG_FILE', '/var/lib/eqb-ops/eqb.log'),
     diskPath: absolutePath(env, 'EQB_OPS_MCP_DISK_PATH', '/opt/eqb'),
     allowedEmail,

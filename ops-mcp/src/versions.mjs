@@ -1,4 +1,4 @@
-import { existsSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs'
+import { lstatSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { runFixed } from './commands.mjs'
 
@@ -10,7 +10,7 @@ function unknown(reason) {
 
 export async function readCheckoutCommit({ checkoutPath, gitBin }) {
   try {
-    const { stdout } = await runFixed(gitBin, ['-C', checkoutPath, 'rev-parse', 'HEAD'])
+    const { stdout } = await runFixed(gitBin, ['-c', `safe.directory=${checkoutPath}`, '-C', checkoutPath, 'rev-parse', '--verify', 'HEAD'])
     const commit = stdout.trim()
     if (!SHA.test(commit)) return unknown('checkout git HEAD is not a 40-hex SHA')
     return { commit, reason: null }
@@ -19,29 +19,11 @@ export async function readCheckoutCommit({ checkoutPath, gitBin }) {
   }
 }
 
-export function readCurrentReleaseSha(releaseRoot) {
-  const currentPath = path.join(releaseRoot, 'current')
-  const stat = lstatSync(currentPath)
-  if (!stat.isSymbolicLink()) {
-    throw new Error('deployment current pointer is not a symlink')
-  }
-  const target = readlinkSync(currentPath)
-  const match = /^releases\/([a-f0-9]{40})$/u.exec(target)
-  if (!match) throw new Error('deployment current pointer does not name one release SHA')
-  const sha = match[1]
-  const markerPath = path.join(releaseRoot, 'releases', sha, '.eqb-release.json')
-  const marker = JSON.parse(readFileSync(markerPath, 'utf8'))
-  if (marker?.schemaVersion !== 'eqb-release-v1' || marker.sha !== sha) {
-    throw new Error('release marker is invalid')
-  }
-  return { sha, currentPath, releasePath: path.join(releaseRoot, 'releases', sha) }
-}
-
 export async function readServiceMainPid(systemctlBin, serviceName) {
   const { stdout } = await runFixed(systemctlBin, [
     'show',
     serviceName,
-    '--property=MainPID,ActiveState,ActiveEnterTimestamp',
+    '--property=MainPID,ActiveState,ActiveEnterTimestamp,InvocationID',
     '--no-page',
   ])
   const values = Object.fromEntries(
@@ -55,62 +37,61 @@ export async function readServiceMainPid(systemctlBin, serviceName) {
   )
   return {
     pid: Number(values.MainPID || 0),
+    invocationId: values.InvocationID || '',
     activeState: values.ActiveState || 'unknown',
     activeEnterTimestamp: values.ActiveEnterTimestamp || '',
   }
-}
-
-export async function readProcessCwd(pid) {
-  const cwdLink = `/proc/${pid}/cwd`
-  try {
-    return { cwd: readlinkSync(cwdLink), real: realpathSync(cwdLink) }
-  } catch {
-    const lsof = existsSync('/usr/sbin/lsof') ? '/usr/sbin/lsof' : '/usr/bin/lsof'
-    const { stdout } = await runFixed(lsof, ['-a', '-p', String(pid), '-d', 'cwd', '-Fn'])
-    const line = stdout.split('\n').find((entry) => entry.startsWith('n'))
-    if (!line) throw new Error(`process ${pid} cwd unread`)
-    const cwd = line.slice(1)
-    return { cwd, real: realpathSync(cwd) }
-  }
-}
-
-function processCwdMatchesRelease(cwdInfo, releasePath, currentPath) {
-  const realRelease = realpathSync(releasePath)
-  const realCurrent = realpathSync(currentPath)
-  return cwdInfo.cwd === releasePath
-    || cwdInfo.cwd === currentPath
-    || cwdInfo.real === realRelease
-    || cwdInfo.real === realCurrent
 }
 
 export async function readRunningCommit({
   releaseRoot,
   systemctlBin,
   eqbService,
-  processCwdReader = readProcessCwd,
+  provenancePath = '/run/eqb-provenance/running-commit.json',
 }) {
   try {
-    const current = readCurrentReleaseSha(releaseRoot)
-    const service = await readServiceMainPid(systemctlBin, eqbService)
-    if (!service.pid) {
-      return unknown('eqb MainPID is unavailable; directory SHA is not used as runningCommit')
+    const before = await readServiceMainPid(systemctlBin, eqbService)
+    if (before.activeState !== 'active' || !Number.isSafeInteger(before.pid) || before.pid <= 0) {
+      return unknown('eqb is not active with a valid MainPID')
     }
-    try {
-      const cwdInfo = await processCwdReader(service.pid)
-      if (!processCwdMatchesRelease(cwdInfo, current.releasePath, current.currentPath)) {
-        return unknown(`eqb pid ${service.pid} cwd does not match /opt/eqb/current; refusing to guess runningCommit`)
-      }
-    } catch (error) {
-      return unknown(`eqb process cwd unread: ${error.message}`)
+    if (!/^[a-f0-9]{32}$/u.test(before.invocationId)) {
+      return unknown('eqb systemd InvocationID is unavailable')
+    }
+    const state = lstatSync(provenancePath)
+    if (!state.isFile() || state.isSymbolicLink() || state.size > 4096 || (state.mode & 0o022)) {
+      return unknown('runtime provenance is not a bounded, non-group/world-writable regular file')
+    }
+    const proof = JSON.parse(readFileSync(provenancePath, 'utf8'))
+    if (proof.schemaVersion !== 'eqb-running-commit-v1' || !SHA.test(proof.commit || '')
+      || proof.pid !== before.pid || proof.invocationId !== before.invocationId
+      || proof.sourceDirectory !== path.join(releaseRoot, 'releases', proof.commit)
+      || !Number.isFinite(Date.parse(proof.recordedAt))) {
+      return unknown('runtime provenance is invalid or does not match the current service invocation')
+    }
+    const marker = JSON.parse(readFileSync(path.join(proof.sourceDirectory, '.eqb-release.json'), 'utf8'))
+    if (marker.schemaVersion !== 'eqb-release-v1' || marker.sha !== proof.commit) {
+      return unknown('runtime provenance release marker does not match its commit')
+    }
+    const after = await readServiceMainPid(systemctlBin, eqbService)
+    if (after.activeState !== 'active' || after.pid !== before.pid
+      || after.invocationId !== before.invocationId) {
+      return unknown('eqb service invocation changed while reading runtime provenance')
     }
     return {
-      commit: current.sha,
+      commit: proof.commit,
       reason: null,
-      proof: 'release-marker+process-cwd',
-      activeState: service.activeState,
-      activeEnterTimestamp: service.activeEnterTimestamp,
+      proof: {
+        source: 'runtime-provenance',
+        path: provenancePath,
+        service: eqbService,
+        pid: proof.pid,
+        invocationId: proof.invocationId,
+        sourceDirectory: proof.sourceDirectory,
+        recordedAt: proof.recordedAt,
+        startedAt: after.activeEnterTimestamp,
+      },
     }
   } catch (error) {
-    return unknown(error.message)
+    return unknown(`runtime provenance unavailable: ${error.message}`)
   }
 }
