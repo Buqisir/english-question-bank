@@ -27,7 +27,7 @@ jobs:
         id: plan
         run: |
           set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/eqb-export" "$RUNNER_TEMP/eqb-node-cache" "$RUNNER_TEMP/eqb-render-cache" "$RUNNER_TEMP/eqb-source-cache"
+          mkdir -p "$RUNNER_TEMP/eqb-export" "$RUNNER_TEMP/eqb-node-cache" "$RUNNER_TEMP/eqb-render-cache" "$RUNNER_TEMP/eqb-source-cache" "$RUNNER_TEMP/eqb-launcher-cache"
           python3 scripts/sandbox/bridge.py plan "$GITHUB_WORKSPACE" > "$RUNNER_TEMP/eqb-plan.json"
           cat "$RUNNER_TEMP/eqb-plan.json"
       - uses: actions/setup-node@v4
@@ -111,6 +111,15 @@ jobs:
           NODE_LAYER="$RUNNER_TEMP/eqb-node-layer" \
           OUTPUT="$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" \
           bash scripts/sandbox/build-render.sh
+      - uses: actions/cache@v4
+        if: steps.plan.outputs.profile == 'render'
+        id: launcher-cache
+        with:
+          path: ${{ runner.temp }}/eqb-launcher-cache
+          key: eqb-launcher-${{ steps.plan.outputs.launcherKey }}
+      - name: Build modern pinned PRoot with statx and clone3 support
+        if: steps.plan.outputs.profile == 'render' && steps.launcher-cache.outputs.cache-hit != 'true'
+        run: OUTPUT="$RUNNER_TEMP/eqb-launcher-cache/launcher.tar.gz" bash scripts/sandbox/build-launcher.sh
       - name: Write transport manifest (not a test success)
         id: transport
         run: |
@@ -120,6 +129,7 @@ jobs:
           cp "$RUNNER_TEMP/eqb-node-cache/node-deps.tar.gz" "$out/"
           if [ -f "$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" ]; then
             cp "$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" "$out/"
+            cp "$RUNNER_TEMP/eqb-launcher-cache/launcher.tar.gz" "$out/"
           fi
           python3 scripts/sandbox/bridge.py manifest "$RUNNER_TEMP/eqb-plan.json" "$out"
           python3 scripts/sandbox/transport.py split "$out"
@@ -168,6 +178,14 @@ jobs:
         with:
           name: sandbox-render-03-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
           path: ${{ runner.temp }}/eqb-export/render-rootfs.tar.gz.part03
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.plan.outputs.profile == 'render'
+        with:
+          name: sandbox-launcher-${{ steps.plan.outputs.launcherKey }}
+          path: ${{ runner.temp }}/eqb-export/launcher.tar.gz
           retention-days: 3
           compression-level: 0
           if-no-files-found: error

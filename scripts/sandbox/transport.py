@@ -31,7 +31,7 @@ def split_render(folder, chunk_bytes=CHUNK_BYTES):
     folder = Path(folder)
     manifest_path = folder / 'manifest.json'
     data = json.loads(manifest_path.read_text())
-    for key in ('source', 'node'):
+    for key in ('source', 'node', *(['launcher'] if 'launcher' in data['layers'] else [])):
         if data['layers'][key]['bytes'] > SAFE_ARTIFACT_BYTES:
             raise ValueError(key + ' layer exceeds the bounded connector payload size')
     parts = []

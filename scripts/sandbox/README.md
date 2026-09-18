@@ -31,7 +31,7 @@ Never print its temporary signed download URL. Verify each outer ZIP digest
 against GitHub's authenticated artifact metadata before extracting it. Artifact
 names alone are not authority; do not trust a manifest from an unrelated run.
 
-The manifest names three independent payloads:
+The manifest names independent payloads:
 
 * `source.bundle`: real Git objects and exact target/base refs, no checkout
   config, hooks, token, node_modules or untracked production files. Full reachable
@@ -42,9 +42,15 @@ The manifest names three independent payloads:
   the complete source tree to the key. Tests receive copies of node_modules.
 * `render-rootfs.tar.gz` (render only): Ubuntu 24.04 userspace, exact Playwright
   Chromium, LibreOffice, ImageMagick, Poppler, Ghostscript, FFmpeg, fonts, SQLite,
-  ZIP tools, and a private PRoot launcher. The resolved image digest, Playwright
+  ZIP tools. The resolved image digest, Playwright
   version, renderer recipe and weekly refresh separate incompatible caches.
   `/opt/eqb-system-packages.tsv` records the actual resolved package versions.
+* `launcher.tar.gz` (render only): PRoot v5.4.1 compiled from immutable upstream
+  commit `d4b49e2243dee34e41c13dfeca6a3d07e9cf0f00`, its ELF loader and libraries.
+  It replaces the rootfs distribution's old launcher, which was experimentally
+  shown to miss statx path translation. The small layer can be fixed without
+  rebuilding or redownloading the large renderer. The builder tests a bound-path
+  stat operation; receiver smoke also tests Node module/file resolution.
 
 Only download layers not already present with matching size and SHA-256; keep
 verified archives in a local cache. Source artifacts expire after one day;

@@ -25,9 +25,10 @@ import uuid
 REPO = 'Buqisir/english-question-bank'
 NODE = '24.21.0'
 PNPM = '10.28.1'
+PROOT = 'd4b49e2243dee34e41c13dfeca6a3d07e9cf0f00'
 SHA = re.compile(r'[a-f0-9]{40}')
 DIGEST = re.compile(r'[a-f0-9]{64}')
-FILES = {'source': 'source.bundle', 'node': 'node-deps.tar.gz', 'render': 'render-rootfs.tar.gz'}
+FILES = {'source': 'source.bundle', 'node': 'node-deps.tar.gz', 'render': 'render-rootfs.tar.gz', 'launcher': 'launcher.tar.gz'}
 
 
 def require(condition, message):
@@ -93,7 +94,8 @@ def plan(root):
               'playwrightVersion': pw, 'sourceKey': req['targetSha'] + '-' + req['baseSha'],
               'nodeKey': common + '-' + inputs.hexdigest()[:24],
               'renderKey': 'v2-ubuntu2404-x64-pw' + pw + '-' + render_recipe + '-' + time.strftime('%Y-W%W', time.gmtime()),
-              'policySha256': policy.hexdigest(), 'architecture': 'x86_64'}
+              'launcherKey': 'v1-ubuntu2404-x64-' + PROOT + '-' + digest(root / 'scripts/sandbox/build-launcher.sh')[:16],
+              'prootCommit': PROOT, 'policySha256': policy.hexdigest(), 'architecture': 'x86_64'}
     if os.environ.get('GITHUB_OUTPUT'):
         with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
             for k, v in result.items():
@@ -111,7 +113,7 @@ def manifest(plan_file, output):
     data['layers'] = {}
     for name, filename in FILES.items():
         p = Path(output) / filename
-        if name == 'render' and data['profile'] == 'node':
+        if name in ('render', 'launcher') and data['profile'] == 'node':
             continue
         require(p.is_file(), 'missing layer: ' + filename)
         data['layers'][name] = {'file': filename, 'sha256': digest(p), 'bytes': p.stat().st_size}
@@ -185,7 +187,9 @@ def validate_manifest(data, target, bridge, run_id, base, attempt):
     require(data.get('architecture') == 'x86_64' and platform.system() == 'Linux'
             and platform.machine() == 'x86_64', 'unsupported receiver platform')
     require(data.get('nodeVersion') == NODE and data.get('pnpmVersion') == PNPM, 'runtime version drift')
-    expected = {'source', 'node', 'render'} if data.get('profile') == 'render' else {'source', 'node'}
+    expected = {'source', 'node', 'render', 'launcher'} if data.get('profile') == 'render' else {'source', 'node'}
+    if data.get('profile') == 'render':
+        require(data.get('prootCommit') == PROOT, 'unsupported compatibility launcher')
     require(data.get('profile') in ('node', 'render') and set(data.get('layers', {})) == expected, 'incomplete layer set')
     for name, item in data['layers'].items():
         require(item.get('file') == FILES[name] and DIGEST.fullmatch(item.get('sha256', '')), 'bad layer descriptor')
@@ -204,7 +208,7 @@ def restore(args):
         p = Path(args.inputs) / item['file']
         require(p.is_file() and p.stat().st_size == item['bytes'] and digest(p) == item['sha256'], 'layer integrity failure: ' + name)
     paths = {}
-    for name in ('node', 'render'):
+    for name in ('node', 'render', 'launcher'):
         if name not in data['layers']:
             continue
         item = data['layers'][name]
@@ -262,8 +266,9 @@ def run(args):
     else:
         require('render' in state['layers'], 'render profile was not downloaded')
         rootfs = Path(state['layers']['render'])
-        loader = rootfs / 'opt/eqb-launcher/ld-linux-x86-64.so.2'
-        launcher = rootfs / 'opt/eqb-launcher'
+        launcher = Path(state['layers']['launcher'])
+        require((launcher / 'proot-source-sha').read_text().strip() == PROOT, 'launcher identity mismatch')
+        loader = launcher / 'ld-linux-x86-64.so.2'
         tooling = Path(__file__).resolve().parent
         command = [str(loader), '--library-path', str(launcher), str(launcher / 'proot'),
                    '-0', '-r', str(rootfs), '-b', '/dev', '-b', '/proc', '-b', '/sys',

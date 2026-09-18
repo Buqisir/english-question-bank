@@ -96,7 +96,7 @@ class Contracts(unittest.TestCase):
     def manifest(self):
         return {**self.request, 'repository': bridge.REPO, 'bridgeSha': 'c' * 40, 'runId': '123', 'runAttempt': '1',
                 'workflow': '.github/workflows/sandbox-source-bridge.yml', 'architecture': 'x86_64',
-                'nodeVersion': bridge.NODE, 'pnpmVersion': bridge.PNPM,
+                'nodeVersion': bridge.NODE, 'pnpmVersion': bridge.PNPM, 'prootCommit': bridge.PROOT,
                 'layers': {k: {'file': v, 'sha256': 'd' * 64, 'bytes': 100} for k, v in bridge.FILES.items()}}
 
     def test_exact_manifest_binding(self):
@@ -121,7 +121,7 @@ class Contracts(unittest.TestCase):
         p.write_bytes(b'after'); self.assertNotEqual(old, bridge.digest(p))
 
     def test_node_profile_does_not_require_render(self):
-        data = self.manifest(); data['profile'] = 'node'; del data['layers']['render']
+        data = self.manifest(); data['profile'] = 'node'; del data['layers']['render']; del data['layers']['launcher']
         bridge.validate_manifest(data, 'a' * 40, 'c' * 40, '123', 'b' * 40, '1')
 
     def test_native_nonzero_exit_is_not_success(self):

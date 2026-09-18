@@ -27,6 +27,11 @@ async function check(name, fn) {
     console.error(`FAIL ${name}: ${error}`)
   }
 }
+await check('bound paths support statx and realpath', () => {
+  assert(appRequire.resolve('./package.json').startsWith(root))
+  assert(command('stat', ['/workspace/app/package.json']).includes('package.json'))
+  assert(readFileSync('/opt/eqb-tooling/smoke.mjs', 'utf8').includes('bound paths support statx'))
+})
 await check('pinned Node and pnpm', () => {
   assert.equal(process.version, 'v24.21.0')
   assert.equal(command('pnpm', ['--version']).trim(), '10.28.1')
