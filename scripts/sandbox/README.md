@@ -53,9 +53,17 @@ not permanent storage. A new chat may have a fresh sandbox; the assistant repeat
 this retrieval itself. No user upload is required, but this is not an always-on
 mount. Artifact upload avoids double compression, and tar preserves modes/links.
 
+Renderer transport uses 256 MiB numbered chunks (up to four), below the
+connector's 512 MiB limit. Each chunk and the reassembled archive have independent
+SHA-256 checks. Source/node layers fail at the builder above 480 MiB rather than
+producing an undownloadable artifact. A missing/corrupt chunk never becomes a
+partially restored environment. Download only missing pieces; reuse the verified
+whole archive when present.
+
 After placing the manifest's files in one input directory:
 
 ```sh
+python3 transport.py assemble inputs
 python3 bridge.py restore --manifest inputs/manifest.json --inputs inputs \
   --target <verified-target-sha> --bridge <verified-bridge-sha> --run-id <verified-run> --attempt <verified-attempt> --base <verified-base-sha> \
   --destination /mnt/data/eqb-task --cache /mnt/data/eqb-layer-cache
@@ -67,7 +75,7 @@ python3 bridge.py run --state /mnt/data/eqb-task.bridge.json --engine render \
   --timeout 600 -- node scripts/verify-draft-pagination-renderer.mjs
 ```
 
-Use the bridge.py/smoke.mjs from the same verified manifest artifact. The restore
+Use bridge.py/transport.py/smoke.mjs from the same verified manifest artifact. The restore
 operation rejects wrong provenance, hashes, architecture and unsafe archives,
 refuses existing destinations, restores a real Git checkout, and creates an
 external `.bridge.json` state file. Do not edit that state to manufacture a tested

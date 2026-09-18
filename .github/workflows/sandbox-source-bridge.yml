@@ -112,6 +112,7 @@ jobs:
           OUTPUT="$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" \
           bash scripts/sandbox/build-render.sh
       - name: Write transport manifest (not a test success)
+        id: transport
         run: |
           set -euo pipefail
           out="$RUNNER_TEMP/eqb-export"
@@ -121,7 +122,8 @@ jobs:
             cp "$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" "$out/"
           fi
           python3 scripts/sandbox/bridge.py manifest "$RUNNER_TEMP/eqb-plan.json" "$out"
-          cp scripts/sandbox/{bridge.py,smoke.mjs,README.md} "$out/"
+          python3 scripts/sandbox/transport.py split "$out"
+          cp scripts/sandbox/{bridge.py,transport.py,smoke.mjs,README.md} "$out/"
           cp "$RUNNER_TEMP/eqb-plan.json" "$out/plan.json"
       - uses: actions/upload-artifact@v4
         with:
@@ -140,8 +142,32 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: steps.plan.outputs.profile == 'render'
         with:
-          name: sandbox-render-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
-          path: ${{ runner.temp }}/eqb-export/render-rootfs.tar.gz
+          name: sandbox-render-00-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
+          path: ${{ runner.temp }}/eqb-export/render-rootfs.tar.gz.part00
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.plan.outputs.profile == 'render' && fromJSON(steps.transport.outputs.renderPartCount) > 1
+        with:
+          name: sandbox-render-01-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
+          path: ${{ runner.temp }}/eqb-export/render-rootfs.tar.gz.part01
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.plan.outputs.profile == 'render' && fromJSON(steps.transport.outputs.renderPartCount) > 2
+        with:
+          name: sandbox-render-02-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
+          path: ${{ runner.temp }}/eqb-export/render-rootfs.tar.gz.part02
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.plan.outputs.profile == 'render' && fromJSON(steps.transport.outputs.renderPartCount) > 3
+        with:
+          name: sandbox-render-03-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
+          path: ${{ runner.temp }}/eqb-export/render-rootfs.tar.gz.part03
           retention-days: 3
           compression-level: 0
           if-no-files-found: error
@@ -153,6 +179,7 @@ jobs:
             ${{ runner.temp }}/eqb-export/plan.json
             ${{ runner.temp }}/eqb-export/renderer-image.txt
             ${{ runner.temp }}/eqb-export/bridge.py
+            ${{ runner.temp }}/eqb-export/transport.py
             ${{ runner.temp }}/eqb-export/smoke.mjs
             ${{ runner.temp }}/eqb-export/README.md
           retention-days: 1
