@@ -11,9 +11,24 @@ ChatGPT Web 通过现有 GitHub 连接看代码，通过 `https://mcp.eqbank.cc/
 | 日志导出 | `/var/lib/eqb-ops/eqb.log` |
 | MCP unit | `eqb-ops-mcp.service`（用户 `eqb-ops`，监听 `127.0.0.1:8790`） |
 | 日志导出 | `eqb-ops-mcp-log-export.timer` |
-| 独立 Tunnel | `cloudflared-eqb-ops.service`（token `/etc/eqb-ops-mcp/tunnel.token`） |
+| 独立 Tunnel | `cloudflared-eqb-ops.service`（用户 `cloudflared`，token `/etc/eqb-ops-mcp/tunnel.token`） |
+| Tunnel 权限 | `/etc/eqb-ops-mcp` `root:cloudflared 0750`；`tunnel.token` `root:cloudflared 0640` |
+| cloudflared | 二进制必须存在，版本 `>= 2025.4.0` |
 
 不要把 MCP 接到现有 Caddy `eqbank.cc` 站点。不要给 `eqb-ops` sudo。
+
+## Cloudflare API 权限
+
+`ops-mcp/host/configure-cloudflare.mjs` 在**任何写操作之前**校验 `EQB_OPS_MCP_OAUTH_REDIRECT_URI`（必须是 ChatGPT 界面给出的准确 https callback）。缺这个值会零修改退出。
+
+| 操作 | 所需权限 |
+| --- | --- |
+| 查询 `eqbank.cc` Zone | **Zone Read** |
+| 列出/更新 Access 应用与策略 | Access: Apps and Policies Read / Write |
+| 复用已有 One-time PIN IdP | Access: Apps and Policies Read（列出 identity providers） |
+| **创建** OTP Identity Provider | Access: Organizations, Identity Providers, and Groups Write |
+
+优先低权限路径：Owner 先在 Dashboard 建好 One-time PIN，脚本只复用，不创建 IdP。若同名/同域 Access App 已有非 Owner 邮箱的 Allow / Bypass / Service Auth 等策略，脚本 fail closed，不会追加 Owner 规则后保留其他策略。
 
 ## ChatGPT 连接
 

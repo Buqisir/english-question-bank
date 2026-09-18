@@ -9,11 +9,12 @@ import { exportJWK, generateKeyPair, SignJWT } from 'jose'
 import { loadConfig } from './src/config.mjs'
 import { createAccessVerifier } from './src/auth.mjs'
 import { sanitizeLogLine, pickHealthFields, redactText } from './src/redact.mjs'
-import { searchServiceLogs } from './src/logs.mjs'
+import { isErrorLine, searchServiceLogs } from './src/logs.mjs'
 import { probeHealth } from './src/health.mjs'
 import { createOpsHttpServer } from './src/index.mjs'
 import { collectOverview } from './src/overview.mjs'
 import { clampLogQuery } from './src/limits.mjs'
+import { runHostVerify } from './host/verify-host.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 let passed = 0
@@ -193,6 +194,9 @@ writeFileSync(logFile, [
   `${iso(10)} host eqb[9]: ERROR failed to render pdf`,
   `${iso(10)} host eqb[9]: Authorization: Bearer supersecretvalue1`,
   `${iso(10)} host eqb[9]: token=abcdefghijklmnopqrstuvwxyz0123456789ABCD`,
+  `${iso(9)} host eqb[9]: 500`,
+  `${iso(8)} host eqb[9]: timeout`,
+  `${iso(7)} host eqb[9]: sent 1500 bytes`,
   `${iso(3)} host eqb[9]: ERROR timeout talking to renderer`,
   `${iso(2000)} host eqb[9]: ERROR ancient`,
 ].join('\n'))
@@ -205,6 +209,12 @@ const errors = searchServiceLogs({
   now,
 })
 assert('recent errors include current EQB errors', errors.entries.some((entry) => entry.text.includes('failed to render pdf')))
+assert('recent errors include a bare 500', errors.entries.some((entry) => /(?:^|\s)500(?:\s|$)/u.test(entry.text)))
+assert('recent errors include timeout without ERROR prefix', errors.entries.some((entry) => entry.text.includes('timeout') && !entry.text.includes('ERROR timeout talking')))
+assert('recent errors do not treat 1500 as 500', !errors.entries.some((entry) => entry.text.includes('1500 bytes')))
+assert('isErrorLine accepts bare 500', isErrorLine('500') && isErrorLine('status:500'))
+assert('isErrorLine accepts timeout', isErrorLine('upstream timeout') && isErrorLine('timed out'))
+assert('isErrorLine rejects 1500 and .500 timestamps', !isErrorLine('sent 1500 bytes') && !isErrorLine('12:00:00.500Z ok'))
 assert('recent errors exclude ancient lines', !errors.entries.some((entry) => entry.text.includes('ancient')))
 assert('recent errors omit credential lines', !JSON.stringify(errors).includes('supersecretvalue1'))
 assert('search range is reported', errors.range.from && errors.range.to)
@@ -216,7 +226,7 @@ const searched = searchServiceLogs({
   keyword: 'timeout',
   now,
 })
-assert('keyword match is literal', searched.entries.length === 1 && searched.entries[0].text.includes('timeout'))
+assert('keyword match is literal', searched.entries.length >= 2 && searched.entries.every((entry) => entry.text.includes('timeout')))
 
 try {
   searchServiceLogs({ logFile: path.join(temp, 'missing.log'), minutes: 60, limit: 10, now })
@@ -228,6 +238,8 @@ try {
 throws('minutes below 5 are rejected', () => clampLogQuery({ minutes: 4, limit: 10 }), /5–1440/)
 throws('limit above 200 is rejected', () => clampLogQuery({ minutes: 60, limit: 201 }), /1–200/)
 throws('overlong keyword is rejected', () => clampLogQuery({ minutes: 60, limit: 10, keyword: 'x'.repeat(101) }), /ordinary characters/)
+
+await runHostVerify(assert, throws, throwsAsync, temp)
 
 const healthHit = await probeHealth('http://127.0.0.1/api/health', {
   fetchImpl: async () => ({
@@ -442,7 +454,11 @@ const unit = read('ops-mcp/host/eqb-ops-mcp.service')
 assert('unit runs as eqb-ops', /User=eqb-ops/.test(unit) && /NoNewPrivileges=true/.test(unit))
 assert('unit has no sudo', !/sudo/.test(unit))
 const install = read('ops-mcp/host/install-eqb-ops-mcp.sh')
-assert('install refuses Caddy and eqb.service edits', install.includes('refusing to touch') && install.includes('/etc/caddy/Caddyfile'))
+const hostChecks = read('ops-mcp/host/host-checks.sh')
+assert(
+  'install refuses Caddy and eqb.service edits',
+  install.includes('assert_install_destination') && hostChecks.includes('/etc/caddy/Caddyfile') && hostChecks.includes('/etc/systemd/system/eqb.service'),
+)
 assert('rollback does not stop shared cloudflared', read('ops-mcp/host/rollback-eqb-ops-mcp.sh').includes('Do not systemctl stop cloudflared unless'))
 assert('Caddyfile.release is untouched by this package', !read('deploy/Caddyfile.release').includes('mcp.eqbank.cc'))
 

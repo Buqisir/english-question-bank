@@ -16,8 +16,10 @@ function parseJournalTimestamp(line) {
   return Number.isFinite(ms) ? ms : null
 }
 
-function isErrorLine(line) {
-  return /\b(error|err|fatal|panic|exception|fail(?:ed|ure)?)\b/iu.test(line)
+export function isErrorLine(line) {
+  const text = String(line ?? '')
+  if (/(?:^|[\s:])500(?:\s|$)/u.test(text)) return true
+  return /\b(error|err|fatal|panic|exception|fail(?:ed|ure)?|timeout|timed\s*out)\b/iu.test(text)
 }
 
 function readTail(file, maxBytes) {
