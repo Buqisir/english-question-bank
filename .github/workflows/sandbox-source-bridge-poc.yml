@@ -1,0 +1,32 @@
+name: Sandbox Source Bridge PoC
+
+on:
+  push:
+    branches:
+      - 'sandbox-sync/**'
+
+permissions:
+  contents: read
+
+jobs:
+  export-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Bundle tracked source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git archive --format=tar.gz --output="$RUNNER_TEMP/eqb-source.tar.gz" HEAD
+          test -s "$RUNNER_TEMP/eqb-source.tar.gz"
+      - name: Upload source bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: sandbox-source-${{ github.sha }}
+          path: ${{ runner.temp }}/eqb-source.tar.gz
+          retention-days: 1
+          if-no-files-found: error
