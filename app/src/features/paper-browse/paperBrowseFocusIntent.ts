@@ -8,18 +8,6 @@ type PaperBrowseFocusIntentActions = {
   selectLectureQuestion: (groupId: string, questionId: string) => void
 }
 
-export function shouldClearLectureSelectionForActiveGroup(input: {
-  activeGroupId: string | null
-  selectedGroupId: string
-  selectedGroupVisible: boolean
-}): boolean {
-  return Boolean(
-    input.activeGroupId
-    && input.activeGroupId !== input.selectedGroupId
-    && !input.selectedGroupVisible
-  )
-}
-
 /**
  * Public behavior seam for PaperSurface focus requests. The scrollspy guard
  * and authoritative group must be committed before the selection because

@@ -19,20 +19,6 @@ export type BasketItemLike = {
   title?: string
 }
 
-export type PaperItemLike = {
-  itemId: string
-  score: number
-  questionGroup?: { title?: string } | null
-}
-
-export type QuestionNumberRange = {
-  blockId: string
-  type: PaperBlock['type']
-  startNum: number | null
-  endNum: number | null
-  questionGroupId?: string
-}
-
 // --- Block ID generation ---
 
 let _idCounter = 0
@@ -97,25 +83,6 @@ export function rebuildBlocks(oldBlocks: PaperBlock[], newItems: BasketItemLike[
   return result
 }
 
-// --- Compute question number ranges ---
-
-export function computeQuestionNumbers(
-  blocks: PaperBlock[],
-  startNum: number,
-  questionCountByGroupId: (groupId: string) => number,
-): QuestionNumberRange[] {
-  let qNum = Math.max(1, startNum || 1)
-  return blocks.map((block) => {
-    if (block.type === 'section_header' || block.type === 'page_break') {
-      return { blockId: block.id, type: block.type, startNum: null, endNum: null }
-    }
-    const count = questionCountByGroupId(block.questionGroupId)
-    const start = qNum
-    qNum += count
-    return { blockId: block.id, type: block.type, startNum: start, endNum: qNum - 1, questionGroupId: block.questionGroupId }
-  })
-}
-
 // --- Convert PaperBlock[] to PaperExportBlock[] ---
 
 export function toPaperExportBlocks(
@@ -134,53 +101,6 @@ export function toPaperExportBlocks(
       note: item?.note,
     }
   })
-}
-
-// --- Sanitize layout (same logic as server, for contract testing) ---
-
-export function sanitizeLayout(
-  rawBlocks: PaperBlock[],
-  validItems: PaperItemLike[],
-): { blocks: PaperBlock[]; warnings: string[] } {
-  const warnings: string[] = []
-  const itemByGroupId = new Map(validItems.filter((i) => i.questionGroup).map((i) => [i.itemId, i]))
-  const sanitizedBlocks: PaperBlock[] = []
-  const seenGroupIds = new Set<string>()
-
-  for (const block of rawBlocks) {
-    if (block.type === 'section_header' || block.type === 'page_break') {
-      // Fallback id format aligned with server: layout-block-{position}
-      const stableId = block.id || `layout-block-${sanitizedBlocks.length + 1}`
-      sanitizedBlocks.push({ ...block, id: stableId } as PaperBlock)
-    } else if (block.type === 'question_group') {
-      if (seenGroupIds.has(block.questionGroupId)) {
-        warnings.push(`布局中题组 ${block.questionGroupId} 重复出现，已移除多余块`)
-        continue
-      }
-      const item = itemByGroupId.get(block.questionGroupId)
-      if (item) {
-        const stableId = block.id || `block-${block.questionGroupId}`
-        sanitizedBlocks.push({ ...block, id: stableId, score: item.score })
-        seenGroupIds.add(block.questionGroupId)
-      } else {
-        warnings.push(`布局中题组 ${block.questionGroupId} 已不存在，已移除`)
-      }
-    }
-  }
-
-  for (const item of validItems) {
-    if (item.questionGroup && !seenGroupIds.has(item.itemId)) {
-      sanitizedBlocks.push({
-        id: `block-${item.itemId}`,
-        type: 'question_group' as const,
-        questionGroupId: item.itemId,
-        score: item.score,
-      })
-      warnings.push(`题组「${item.questionGroup.title || item.itemId}」不在布局中，已追加到末尾`)
-    }
-  }
-
-  return { blocks: sanitizedBlocks, warnings }
 }
 
 // --- Build full PaperSetLayout from current state ---

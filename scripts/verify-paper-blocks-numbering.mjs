@@ -1,30 +1,10 @@
 #!/usr/bin/env node
 /**
- * Verification: Paper block numbering is continuous across the entire paper.
- * section_header does NOT reset numbering.
+ * Verification: rebuildBlocks preserves non-group block interleaving
+ * (section_header / page_break stay in place) when the basket changes.
  *
- * Fixture: two reading question_groups (4 and 5 questions), start=21,
- * with a section_header between them.
- * Expected: group1 = 21-24, group2 = 25-29.
+ * Contract test: uses domain rebuildBlocks.
  */
-
-const blocks = [
-  { id: 'b1', type: 'question_group', questionGroupId: 'g1', score: 2, questionCount: 4 },
-  { id: 'b2', type: 'section_header', title: '第二节 七选五' },
-  { id: 'b3', type: 'question_group', questionGroupId: 'g2', score: 2.5, questionCount: 5 },
-]
-
-const questionNumberStart = 21
-
-// Contract test: uses domain computeQuestionNumbers as canonical implementation
-import { computeQuestionNumbers } from '../app/src/domain/paperLayout.ts'
-
-function computeBlockNumbers(blocks, start) {
-  const countMap = new Map(blocks.filter(b => b.type === 'question_group').map(b => [b.questionGroupId, b.questionCount]))
-  return computeQuestionNumbers(blocks, start, (gid) => countMap.get(gid) || 0)
-}
-
-const numbered = computeBlockNumbers(blocks, questionNumberStart)
 
 let passed = 0
 let failed = 0
@@ -34,32 +14,9 @@ function assert(name, condition, detail) {
   else { failed++; console.error(`  ✗ ${name}: ${detail}`) }
 }
 
-console.log('=== Paper Block Numbering Verification ===\n')
+console.log('=== Paper Block Layout Verification ===\n')
 
-const g1 = numbered.find(b => b.blockId === 'b1')
-const sh = numbered.find(b => b.blockId === 'b2')
-const g2 = numbered.find(b => b.blockId === 'b3')
-
-console.log('Test: Two reading groups, start=21, section_header between them')
-assert('group1 starts at 21', g1.startNum === 21, `got ${g1.startNum}`)
-assert('group1 ends at 24', g1.endNum === 24, `got ${g1.endNum}`)
-assert('section_header has no numbers', sh.startNum === null && sh.endNum === null, `got ${sh.startNum}-${sh.endNum}`)
-assert('group2 starts at 25 (not reset)', g2.startNum === 25, `got ${g2.startNum}`)
-assert('group2 ends at 29', g2.endNum === 29, `got ${g2.endNum}`)
-
-console.log('\nTest: page_break also does not reset')
-const blocksWithPB = [
-  { id: 'x1', type: 'question_group', questionGroupId: 'a', score: 2, questionCount: 3 },
-  { id: 'x2', type: 'page_break' },
-  { id: 'x3', type: 'question_group', questionGroupId: 'b', score: 2, questionCount: 2 },
-]
-const numbered2 = computeBlockNumbers(blocksWithPB, 1)
-const a = numbered2.find(b => b.blockId === 'x1')
-const b = numbered2.find(b => b.blockId === 'x3')
-assert('first group 1-3', a.startNum === 1 && a.endNum === 3, `got ${a.startNum}-${a.endNum}`)
-assert('second group 4-5 after page_break', b.startNum === 4 && b.endNum === 5, `got ${b.startNum}-${b.endNum}`)
-
-console.log('\nTest: rebuildBlocksFromBasket preserves interleaving')
+console.log('Test: rebuildBlocksFromBasket preserves interleaving')
 {
   // Contract test: uses domain rebuildBlocks
   const { rebuildBlocks: domainRebuild } = await import('../app/src/domain/paperLayout.ts')
