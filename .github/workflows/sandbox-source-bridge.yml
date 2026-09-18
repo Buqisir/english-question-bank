@@ -1,0 +1,78 @@
+name: Sandbox Source Bridge
+
+on:
+  push:
+    branches:
+      - 'sandbox-sync/source-bridge'
+
+permissions:
+  contents: read
+
+jobs:
+  export-runnable-kit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+
+      - name: Prepare exact parent workspace
+        id: target
+        shell: bash
+        run: |
+          set -euo pipefail
+          target_sha="$(git rev-parse HEAD^)"
+          [[ "$target_sha" =~ ^[a-f0-9]{40}$ ]]
+          workspace="$RUNNER_TEMP/eqb-workspace"
+          git worktree add --detach "$workspace" "$target_sha"
+          echo "sha=$target_sha" >> "$GITHUB_OUTPUT"
+          echo "workspace=$workspace" >> "$GITHUB_OUTPUT"
+
+      - name: Install runnable dependencies
+        shell: bash
+        env:
+          WORKSPACE: ${{ steps.target.outputs.workspace }}
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+          (
+            cd "$WORKSPACE/app"
+            pnpm install --frozen-lockfile
+          )
+          npm --prefix "$WORKSPACE/server" ci
+
+          # Make the copied runtime fully offline-capable in ChatGPT's sandbox.
+          npm install --global --force pnpm@10.28.1
+
+          node_bin="$(readlink -f "$(command -v node)")"
+          node_root="$(dirname "$(dirname "$node_bin")")"
+          cp -a "$node_root" "$WORKSPACE/.sandbox-node"
+          printf '%s\n' "${{ steps.target.outputs.sha }}" > "$WORKSPACE/.sandbox-target-sha"
+          node --version > "$WORKSPACE/.sandbox-node-version"
+          pnpm --version > "$WORKSPACE/.sandbox-pnpm-version"
+
+      - name: Bundle runnable workspace
+        shell: bash
+        env:
+          WORKSPACE: ${{ steps.target.outputs.workspace }}
+        run: |
+          set -euo pipefail
+          tar --exclude='./.git' -C "$WORKSPACE" -cf - . | gzip -1 > "$RUNNER_TEMP/eqb-sandbox-kit.tar.gz"
+          test -s "$RUNNER_TEMP/eqb-sandbox-kit.tar.gz"
+          sha256sum "$RUNNER_TEMP/eqb-sandbox-kit.tar.gz"
+
+      - name: Upload runnable kit
+        uses: actions/upload-artifact@v4
+        with:
+          name: sandbox-kit-${{ steps.target.outputs.sha }}
+          path: ${{ runner.temp }}/eqb-sandbox-kit.tar.gz
+          retention-days: 1
+          if-no-files-found: error
+          compression-level: 0
