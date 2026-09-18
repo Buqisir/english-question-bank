@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { spawn } from 'node:child_process'
-import { existsSync, mkdtempSync, mkdirSync, writeFileSync, chmodSync, readFileSync, symlinkSync, rmSync } from 'node:fs'
+import { spawn, execFileSync } from 'node:child_process'
+import { existsSync, realpathSync, mkdtempSync, mkdirSync, writeFileSync, chmodSync, readFileSync, symlinkSync, rmSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -14,6 +14,8 @@ import { probeHealth } from './src/health.mjs'
 import { createOpsHttpServer } from './src/index.mjs'
 import { collectOverview } from './src/overview.mjs'
 import { clampLogQuery } from './src/limits.mjs'
+import { recordRunningCommit } from './host/record-running-commit.mjs'
+import { readCheckoutCommit, readRunningCommit } from './src/versions.mjs'
 import { runHostVerify } from './host/verify-host.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -186,8 +188,8 @@ assert(
   Boolean(sanitizeLogLine('2026-09-18T00:00:00+00:00 host eqb[1]: failed to render pdf')),
 )
 
-const temp = mkdtempSync(path.join(tmpdir(), 'eqb-ops-mcp-'))
-const now = Date.parse('2026-09-18T12:00:00.000Z')
+const temp = realpathSync(mkdtempSync(path.join(tmpdir(), 'eqb-ops-mcp-')))
+const now = Math.floor(Date.now() / 1000) * 1000
 const iso = (offsetMinutes) => new Date(now - offsetMinutes * 60 * 1000).toISOString().replace('.000Z', '+00:00')
 const logFile = path.join(temp, 'eqb.log')
 writeFileSync(logFile, [
@@ -298,23 +300,104 @@ assert(
   unknownOverview.runningCommit === 'unknown' && Boolean(unknownOverview.runningCommitReason),
 )
 
-const sleeper = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], {
-  cwd: path.join(releaseRoot, 'releases', sha),
-  stdio: 'ignore',
-})
-writeFileSync(systemctlBin, `#!/bin/sh\necho MainPID=${sleeper.pid}\necho ActiveState=active\necho ActiveEnterTimestamp=Thu 2026-09-18 12:00:00 UTC\n`)
-chmodSync(systemctlBin, 0o755)
-const proven = await collectOverview({
-  checkoutPath: checkout,
-  gitBin,
-  releaseRoot,
-  systemctlBin,
-  eqbService: 'eqb',
-  caddyService: 'caddy',
-  diskPath: temp,
-})
-assert('runningCommit uses release marker plus process cwd', proven.runningCommit === sha)
-sleeper.kill()
+const provenancePath = path.join(temp, 'running-commit.json')
+const invocationId = 'd'.repeat(32)
+const pid = 12345
+const versionConfig = { checkoutPath: checkout, gitBin, releaseRoot, systemctlBin,
+  eqbService: 'eqb', caddyService: 'caddy', diskPath: temp, provenancePath }
+function serviceFixture({ active = 'active', processId = pid, invocation = invocationId } = {}) {
+  writeFileSync(systemctlBin, `#!/bin/sh\necho MainPID=${processId}\necho ActiveState=${active}\necho InvocationID=${invocation}\necho ActiveEnterTimestamp=2026-09-18T12:00:00Z\n`)
+  chmodSync(systemctlBin, 0o755)
+}
+function writeProof(overrides = {}) {
+  rmSync(provenancePath, { force: true })
+  const proof = recordRunningCommit({ cwd: path.join(releaseRoot, 'releases', sha),
+    releaseRoot, pid, invocationId, destination: provenancePath })
+  if (Object.keys(overrides).length) {
+    rmSync(provenancePath)
+    writeFileSync(provenancePath, JSON.stringify({ ...proof, ...overrides }), { mode: 0o444 })
+  }
+  return proof
+}
+serviceFixture()
+writeProof()
+const proven = await collectOverview(versionConfig)
+assert('runningCommit is startup release provenance', proven.runningCommit === sha)
+assert('running proof explains PID and invocation', proven.runningCommitProof.pid === pid
+  && proven.runningCommitProof.invocationId === invocationId)
+assert('checkout and running stay distinct', proven.checkoutCommit === checkoutSha
+  && proven.runningCommit === sha && checkoutSha !== sha)
+// Moving the deployment pointer must not change the running process proof.
+rmSync(path.join(releaseRoot, 'current'))
+symlinkSync('releases/' + 'b'.repeat(40), path.join(releaseRoot, 'current'))
+assert('current pointer movement does not rewrite running commit',
+  (await readRunningCommit(versionConfig)).commit === sha)
+serviceFixture({ active: 'inactive', processId: 0 })
+assert('inactive service rejects old provenance', (await readRunningCommit(versionConfig)).commit === 'unknown')
+serviceFixture({ invocation: 'e'.repeat(32) })
+assert('new invocation rejects old provenance even with same PID',
+  (await readRunningCommit(versionConfig)).commit === 'unknown')
+serviceFixture()
+rmSync(provenancePath)
+assert('missing provenance has reason', /ENOENT/.test((await readRunningCommit(versionConfig)).reason))
+writeFileSync(provenancePath, '{broken')
+assert('corrupt JSON does not fail overview', (await collectOverview(versionConfig)).runningCommit === 'unknown')
+writeProof({ commit: 'not-a-sha' })
+assert('invalid SHA is rejected', (await readRunningCommit(versionConfig)).commit === 'unknown')
+writeProof({ pid: pid + 1 })
+assert('different PID is rejected', (await readRunningCommit(versionConfig)).commit === 'unknown')
+writeProof()
+chmodSync(provenancePath, 0o666)
+assert('writable provenance is rejected', (await readRunningCommit(versionConfig)).commit === 'unknown')
+chmodSync(provenancePath, 0o444)
+// Git's test hook simulates a different owner without requiring root/chown.
+// Reset inherited safe.directory exceptions only inside this fixture. CI hosts
+// may trust broad temp paths; that must not invalidate the negative control.
+const ownershipTestEnv = {
+  GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
+  GIT_CONFIG_COUNT: '1',
+  GIT_CONFIG_KEY_0: 'safe.directory',
+  GIT_CONFIG_VALUE_0: '',
+  LC_ALL: 'C',
+}
+const oldOwnershipEnv = Object.fromEntries(Object.keys(ownershipTestEnv).map((key) => [key, process.env[key]]))
+Object.assign(process.env, ownershipTestEnv)
+try {
+  let rejected = false
+  try { execFileSync(gitBin, ['-C', checkout, 'rev-parse', 'HEAD'], { stdio: 'pipe' }) }
+  catch (error) { rejected = /dubious ownership/.test(String(error.stderr)) }
+  assert('different owner fixture actually triggers safe.directory', rejected)
+  assert('per-call safe.directory permits read-only HEAD',
+    (await readCheckoutCommit(versionConfig)).commit === checkoutSha)
+} finally {
+  for (const [key, value] of Object.entries(oldOwnershipEnv)) {
+    if (value === undefined) delete process.env[key]
+    else process.env[key] = value
+  }
+}
+const callCounter = path.join(temp, 'systemctl-calls')
+writeFileSync(systemctlBin, `#!/bin/sh
+if [ -f '${callCounter}' ]; then
+  echo InvocationID=${'e'.repeat(32)}
+else
+  touch '${callCounter}'
+  echo InvocationID=${invocationId}
+fi
+echo MainPID=${pid}
+echo ActiveState=active
+`)
+assert('restart during proof read is rejected',
+  /changed while reading/.test((await readRunningCommit(versionConfig)).reason))
+serviceFixture()
+throws('writer rejects mismatched startup marker', () => recordRunningCommit({
+  cwd: checkout, releaseRoot, pid, invocationId, destination: provenancePath,
+}), /not a versioned release/)
+assert('provenance drop-in preserves ExecStart', !read('ops-mcp/host/eqb-provenance.conf').includes('ExecStart'))
+assert('provenance installer never restarts services',
+  !/systemctl (?:restart|start|stop)/u.test(read('ops-mcp/host/install-running-provenance.sh')))
+assert('checkout failure keeps reason', Boolean((await readCheckoutCommit({
+  ...versionConfig, checkoutPath: path.join(temp, 'missing-checkout'),
+})).reason))
 
 const originHealth = createServer((req, res) => {
   res.writeHead(200, { 'content-type': 'application/json' })
