@@ -1,5 +1,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 
+// @amp-agent-mode {"key":"eqbank-import-low","label":"EQBank Import Low"}
+
 const SCHEMA_VERSION = 'eqbank-source-intake-wakeup-v1'
 const SUBMISSION_ID = /^submission-[a-f0-9-]{36}$/
 const SUBMISSION_DIGEST = /^sha256:[a-f0-9]{64}$/
@@ -50,8 +52,8 @@ export function sourceIntakeAgentPrompt({ submissionId, submissionDigest }) {
     'The CLI sends this thread’s AMP_THREAD_ID on every lease operation; never copy the source files or claim receipt to another thread.',
     'Do not send needs-owner or handoff merely because automation stopped; report the exact pending decision unless this task explicitly includes and semantically justifies that remote transition.',
     'After download, inspect the immutable submission snapshot mode. For listening_supplement, use its exact targetPaperId and hydrate that existing Review paper; never invent a new paperId. For analyzed_package corrections use the exact targetPaperId; for a new package or new_paper choose a valid new paperId.',
-    'The continue command must keep analyzed_package on deterministic package preparation and must never invoke OCR, extraction, or model fallback. Stop for any raw-source listening or visual source review it reports.',
-    'New raw-source workspaces use public-paper-v1: do not dispatch the nine teaching analyses. After source review, prepare and verify both paragraph-summaries-v1.json and public-search-metadata-v1.json with review.mjs prepare-summaries/verify-summaries and prepare-search-metadata/finalize-search-metadata/verify-search-metadata. For either explicit generation request, use one normal Medium thread with features: [] and only that request. Never transfer claim receipts or submission workspaces.',
+    'The continue command must keep analyzed_package on deterministic package preparation and must never invoke OCR, extraction, or model fallback. For raw-source listening review, inspect the bound ASR/content evidence and explicitly finalize-listening with a genuine import_agent review; never fabricate pass evidence. OCR confirmation remains Owner-only: report that precise access blocker, never impersonate the Owner or bypass confirmation.',
+    'New raw-source workspaces use public-paper-v1: do not dispatch the nine teaching analyses. After source review, prepare and verify both paragraph-summaries-v1.json and public-search-metadata-v1.json with review.mjs prepare-summaries/verify-summaries and prepare-search-metadata/finalize-search-metadata/verify-search-metadata. For either explicit generation request, use one eqbank-import-low thread (Low with DeepSeek 4.1 pinned) with features: [] and only that request. Never transfer claim receipts or submission workspaces. If the mode or model is unavailable, stop; do not substitute another model, enable fast, or call Oracle/Task for generation.',
     'Do not edit the Owner draft, invent answers, approve review, publish locally, ship, deploy, mutate production, or create a replacement coordinator thread.',
   ].join('\n')
 }
@@ -127,8 +129,16 @@ export default async function sourceIntakeWakeupPlugin(amp) {
   }
 
   const agent = amp.createAgent({
-    extends: 'medium',
+    extends: 'low',
+    model: 'deepseek/deepseek-v4.1-flash',
+    features: [],
     instructions: 'Follow docs/import/agent-contract.md. New raw sources use public-paper-v1 with paragraph summaries and compact public search metadata, never the nine teaching analyses. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
+  })
+  amp.registerAgentMode({
+    key: 'eqbank-import-low',
+    label: 'EQBank Import Low',
+    description: 'Low behavior with DeepSeek 4.1, without fast, for bounded import requests.',
+    agent: agent.definition,
   })
   const registration = await amp.createWebhook({
     key: 'eqbank-source-intake-queued-v1',
@@ -171,6 +181,7 @@ export default async function sourceIntakeWakeupPlugin(amp) {
 
       const thread = await agent.createThread({
         executor: 'orb',
+        features: [],
         multiplayerTTLSeconds: null,
         visibility: 'private',
       })

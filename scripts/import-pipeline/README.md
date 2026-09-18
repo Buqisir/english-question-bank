@@ -38,12 +38,18 @@ node scripts/import-pipeline/source-intake.mjs continue <submissionId> --paper-i
 `continue` 用 submission 和 paper 两级排他锁串行 claim → download → init → raw-source
 materialize/preflight，stdout 始终只有一份机器可读 JSON；子进程诊断进入 stderr。每个远端或
 昂贵步骤开始前写 mode-0600 原子进度记录；若没有完成收据，恢复返回 `*_outcome_unknown`
-而不自动重放。它不 handoff、不 needs-owner、不派解析、不完成听力/OCR 人工审核。
+而不自动重放。它不 handoff、不 needs-owner、不派解析、不自动断言听力/OCR 审查通过。
 `analyzed_package` 在确定性 init 后即 `source_ready`，不进入 OCR/materialize/model fallback。
 初始化与材料化期间每 30 秒串行续租，单次请求最多等待 15 秒；失败会终止步骤进程组，
 记录 unknown 并停止。中断遗留锁须先确认原进程已结束再人工处理，禁止删除活跃锁。
-听力 init 后尚无 finalized receipt 时只返回人工待办，不以进度记录代替音频证据；
+听力 init 后尚无 finalized receipt 时只返回 Agent 内容检查待办，不以进度记录代替音频证据；
 协调线程须核对源绑定，按待办运行材料化与内容 review，再显式 finalize。
+OCR web 确认仍有 Owner-only 权限门禁；Agent 不得伪造人工确认。这一限制尚未满足
+所有 OCR 卷只审最终版式的目标，必须准确报告，不得把听力 Agent 检查也归为人工待办。
+
+新协调与 public-paper-v1 摘要/检索生成统一使用 `eqbank-import-low`：Low prompt/tools、
+固定 `deepseek/deepseek-v4.1-flash`、`features: []`。模式不可用则停止，不自动换模型。
+下文 Low + fast 仅描述保留的旧解析路径，不适用于新公共卷。
 
 新 raw-source 初始化会明确写入 `public-paper-v1`。材料化与源审查完成后不派发九份教学
 分析，而是运行：
@@ -58,9 +64,9 @@ node scripts/import-pipeline/review.mjs verify-search-metadata <paperId>
 
 prepare 命令不依赖尚不存在的 summary sidecar，也不递归调用完整 Review projection；请求
 包含精确 IDs/digests、schema、prompt、每个目标的完整 group/source-answer context。
-需要模型时只把此请求交给普通 Medium（`features: []`），不自动调用、不生成教学 prose。
+需要模型时只把此请求交给 `eqbank-import-low`（`features: []`），不自动调用、不生成教学 prose。
 摘要输出保存为 paper 根目录 `paragraph-summaries-v1.json` 后验证。metadata prepare 同样可在
-sidecar 不存在时运行；只把该显式请求交给普通 Medium（`features: []`），再由 finalize
+sidecar 不存在时运行；只把该显式请求交给 `eqbank-import-low`（`features: []`），再由 finalize
 确定性补全/写入 `public-search-metadata-v1.json`，最后 verify。`verify-analyses` 对该 profile
 显式失败并指向 `verify-summaries`。历史 absent-profile、listening supplement hydration 与
 external analyzed_package 原合同不变，不得为恢复方便改 profile 或 approval identity。

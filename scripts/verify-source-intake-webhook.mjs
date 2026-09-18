@@ -53,7 +53,10 @@ assert.match(prompt, /never invent a new paperId/)
 assert.match(prompt, /Do not edit the Owner draft/)
 assert.match(prompt, /public-paper-v1/)
 assert.match(prompt, /do not dispatch the nine teaching analyses/)
-assert.match(prompt, /normal Medium thread with features: \[\]/)
+assert.match(prompt, /eqbank-import-low thread \(Low with DeepSeek 4.1 pinned\) with features: \[\]/)
+assert.match(prompt, /do not substitute another model/)
+assert.match(prompt, /genuine import_agent review/)
+assert.match(prompt, /OCR confirmation remains Owner-only/)
 assert.match(prompt, /Never transfer claim receipts or submission workspaces/)
 assert.match(prompt, /replacement coordinator thread/)
 
@@ -65,6 +68,8 @@ const originalProjectId = process.env.AMP_PROJECT_ID
 const originalFetch = globalThis.fetch
 let registeredWebhook = null
 let registeredCommand = null
+let registeredMode = null
+const agentDefinition = { kind: 'agent-definition', verifier: true }
 let createdThreadOptions = null
 const apiCalls = []
 const appendedMessages = []
@@ -165,10 +170,13 @@ try {
     },
     createAgent(config) {
       assert.deepEqual(config, {
-        extends: 'medium',
+        extends: 'low',
+        model: 'deepseek/deepseek-v4.1-flash',
+        features: [],
         instructions: 'Follow docs/import/agent-contract.md. New raw sources use public-paper-v1 with paragraph summaries and compact public search metadata, never the nine teaching analyses. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
       })
       return {
+        definition: agentDefinition,
         async createThread(options) {
           createCount += 1
           createdThreadOptions = options
@@ -181,6 +189,9 @@ try {
         },
       }
     },
+    registerAgentMode(mode) {
+      registeredMode = mode
+    },
     async createWebhook(options) {
       registeredWebhook = options
       return { url: 'https://capability.invalid/private-verifier' }
@@ -192,6 +203,8 @@ try {
   assert.equal(registeredWebhook.key, 'eqbank-source-intake-queued-v1')
   assert.deepEqual(registeredWebhook.headers, ['x-eqbank-signature'])
   assert.equal(registeredCommand.id, 'source-intake-webhook-url')
+  assert.equal(registeredMode.key, 'eqbank-import-low')
+  assert.equal(registeredMode.agent, agentDefinition, 'children use the same pinned Low definition')
   const context = {
     logger: { log() {} },
     signal: new AbortController().signal,
@@ -206,6 +219,7 @@ try {
   )
   assert.deepEqual(createdThreadOptions, {
     executor: 'orb',
+    features: [],
     multiplayerTTLSeconds: null,
     visibility: 'private',
   })
@@ -277,4 +291,4 @@ try {
   globalThis.fetch = originalFetch
 }
 
-console.log('PASS source-intake webhook medium inheritance, project guard, reserve, bind, resume, and crash-window contract')
+console.log('PASS source-intake webhook pinned Low/DeepSeek without fast, project guard, reserve, bind, resume, and crash-window contract')

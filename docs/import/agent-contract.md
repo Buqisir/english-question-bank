@@ -61,10 +61,10 @@ metadata sidecar 已贯穿不可变 revision、Review store、promotion、发布
 
 ```bash
 node scripts/import-pipeline/review.mjs prepare-summaries <paperId> --output /abs/summary-request.json
-# 若需要模型：普通 Medium，features=[]；只传上述请求，不在本任务自动调用
+# 若需要模型：eqbank-import-low（Low + DeepSeek 4.1），features=[]；只传上述请求
 node scripts/import-pipeline/review.mjs verify-summaries <paperId>
 node scripts/import-pipeline/review.mjs prepare-search-metadata <paperId> --output /abs/metadata-request.json
-# 若需要模型：普通 Medium，features=[]；只传 metadata request
+# 若需要模型：eqbank-import-low（Low + DeepSeek 4.1），features=[]；只传 metadata request
 node scripts/import-pipeline/review.mjs finalize-search-metadata <paperId> --input /abs/authored-metadata.json
 node scripts/import-pipeline/review.mjs verify-search-metadata <paperId>
 node scripts/import-pipeline/review.mjs push <paperId>
@@ -87,7 +87,14 @@ claim、download、init 及普通源 materialize/preflight，只复用摘要绑�
 `universal-nck1.mjs` 的 preflight/materialize 及既有 OCR、媒体和听力程序。
 只读 status 不安装、不 heartbeat、不写 receipt。未知 claim/远端结果、半成品、源漂移、
 paper/thread 错绑或 lease 丢失都失败关闭且不自动重放；continue 自身不发送 needs-owner、
-handoff 或任何 Review 终态。听力内容与 OCR/页面视觉判断仍是明确人工待办。
+handoff 或任何 Review 终态。
+听力内容检查由导题 Agent 审阅绑定的 ASR 与源材料证据，提交真实的
+`listening-audio-content-review-v1`（`reviewedBy: import_agent`），再显式运行
+`source-intake.mjs finalize-listening <submissionId> --paper-id <paperId> --review <review.json>`。
+程序负责比对与门禁；失败不能改写为 pass，也不因 CLI 暂停就把常规听力检查交给 Owner。
+OCR 提取校对仍由 Agent 完成，但当前 web `confirm-ocr` 接口明确拒绝 import_agent，
+只能拉取 Owner 确认收据。这是尚未消除的源证据权限限制，不是最终 layout_only 审核，
+不得冒充 Owner、伪造收据或宣称所有 OCR 卷已实现“Owner 只看版式”。源缺失或冲突须报告具体缺件。
 
 新 Orb 的完整导题工具可用 `bash .agents/setup --import-tools-only` 安全准备和检查：它不碰
 Desktop 或数据库，安装英/简中 OCR，并缓存 `transcribe-listening.py` 实际默认使用的固定
@@ -187,10 +194,16 @@ revision 纳入 bundle identity，服务端再次以当前 revision 比对，冲
 
 采用 Owner 选择的 B：每组由新的普通 Low 线程直接生成，启用 fast，不调用 Oracle、
 `nck1_analyze_group`、`amp.ai.generate` 或其他模型。不再使用旧 Grok 解析插件。
-Webhook 新建协调线程继承内置 Medium 模式，不再硬绑 Grok 或 reasoning effort；
+Webhook 新建协调线程继承内置 Low 的 prompt/tools，显式绑定
+`deepseek/deepseek-v4.1-flash`，`features: []`；不使用 Grok 或全局默认模型路由。
+新 public-paper-v1 摘要与检索元数据使用同一插件注册的 `eqbank-import-low` 模式，
+`create_thread` 显式传 `agent_mode: eqbank-import-low`、`features: []` 和专用 Import Project。
+该模式只是 Low + DeepSeek 的固定配置，不是更高级的协调层；若不可用则停止，不回退到
+内置 Low/Medium、其他模型或 Oracle/Task。实际 provider/model/usage 仍须在首卷试点核实。
 已绑定 coordinator/lease 不迁移，恢复时保持原线程。
 
-Owner 当前速度约定：导题协调、解析或校对若使用 Medium，使用普通速度，不启用
+以下 Low + fast 仅适用旧解析合同，不覆盖上面的新 public-paper-v1 路径。
+旧解析或校对若使用 Medium，使用普通速度，不启用
 fast。通过 `create_thread` 派发 Medium 时显式传 `features: []`，避免继承父线程的
 fast；这不是切换默认生成模式、项目路由或迁移既有 coordinator/lease 的授权。
 
