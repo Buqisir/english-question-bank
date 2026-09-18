@@ -1,78 +1,159 @@
 name: Sandbox Source Bridge
-
+run-name: Sandbox bridge ${{ github.sha }}
 on:
   push:
-    branches:
-      - 'sandbox-sync/source-bridge'
-
+    branches: [sandbox-sync/source-bridge]
+    paths:
+      - .github/sandbox-source-request.json
+      - .github/workflows/sandbox-source-bridge.yml
+      - scripts/sandbox/**
 permissions:
   contents: read
-
+concurrency:
+  group: sandbox-source-bridge-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   export-runnable-kit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
           persist-credentials: false
-
+      - name: Verify bridge contracts
+        run: python3 -m unittest discover -s scripts/sandbox -p 'test_*.py' -v
+      - name: Resolve immutable request and layer keys
+        id: plan
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/eqb-export" "$RUNNER_TEMP/eqb-node-cache" "$RUNNER_TEMP/eqb-render-cache" "$RUNNER_TEMP/eqb-source-cache"
+          python3 scripts/sandbox/bridge.py plan "$GITHUB_WORKSPACE" > "$RUNNER_TEMP/eqb-plan.json"
+          cat "$RUNNER_TEMP/eqb-plan.json"
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
-
-      - name: Prepare exact parent workspace
-        id: target
-        shell: bash
-        run: |
-          set -euo pipefail
-          target_sha="$(git rev-parse HEAD^)"
-          [[ "$target_sha" =~ ^[a-f0-9]{40}$ ]]
-          workspace="$RUNNER_TEMP/eqb-workspace"
-          git worktree add --detach "$workspace" "$target_sha"
-          echo "sha=$target_sha" >> "$GITHUB_OUTPUT"
-          echo "workspace=$workspace" >> "$GITHUB_OUTPUT"
-
-      - name: Install runnable dependencies
-        shell: bash
+      - name: Prepare requested source (not the bridge branch)
         env:
-          WORKSPACE: ${{ steps.target.outputs.workspace }}
+          TARGET: ${{ steps.plan.outputs.targetSha }}
+          BASE: ${{ steps.plan.outputs.baseSha }}
         run: |
           set -euo pipefail
-          corepack enable
-          corepack prepare pnpm@10.28.1 --activate
-          (
-            cd "$WORKSPACE/app"
-            pnpm install --frozen-lockfile
-          )
-          npm --prefix "$WORKSPACE/server" ci
-
-          # Make the copied runtime fully offline-capable in ChatGPT's sandbox.
-          npm install --global --force pnpm@10.28.1
-
-          node_bin="$(readlink -f "$(command -v node)")"
-          node_root="$(dirname "$(dirname "$node_bin")")"
-          cp -a "$node_root" "$WORKSPACE/.sandbox-node"
-          printf '%s\n' "${{ steps.target.outputs.sha }}" > "$WORKSPACE/.sandbox-target-sha"
-          node --version > "$WORKSPACE/.sandbox-node-version"
-          pnpm --version > "$WORKSPACE/.sandbox-pnpm-version"
-
-      - name: Bundle runnable workspace
-        shell: bash
-        env:
-          WORKSPACE: ${{ steps.target.outputs.workspace }}
-        run: |
-          set -euo pipefail
-          tar --exclude='./.git' -C "$WORKSPACE" -cf - . | gzip -1 > "$RUNNER_TEMP/eqb-sandbox-kit.tar.gz"
-          test -s "$RUNNER_TEMP/eqb-sandbox-kit.tar.gz"
-          sha256sum "$RUNNER_TEMP/eqb-sandbox-kit.tar.gz"
-
-      - name: Upload runnable kit
-        uses: actions/upload-artifact@v4
+          git worktree add --detach "$RUNNER_TEMP/eqb-workspace" "$TARGET"
+          git update-ref refs/heads/sandbox-target "$TARGET"
+          git update-ref refs/heads/sandbox-base "$BASE"
+      - uses: actions/cache@v4
+        id: source-cache
         with:
-          name: sandbox-kit-${{ steps.target.outputs.sha }}
-          path: ${{ runner.temp }}/eqb-sandbox-kit.tar.gz
+          path: ${{ runner.temp }}/eqb-source-cache
+          key: eqb-source-v2-${{ steps.plan.outputs.sourceKey }}
+      - name: Export real Git objects without credentials or host files
+        if: steps.source-cache.outputs.cache-hit != 'true'
+        run: git bundle create "$RUNNER_TEMP/eqb-source-cache/source.bundle" refs/heads/sandbox-target refs/heads/sandbox-base
+      - uses: actions/cache@v4
+        id: node-cache
+        with:
+          path: ${{ runner.temp }}/eqb-node-cache
+          key: eqb-node-${{ steps.plan.outputs.nodeKey }}
+      - name: Build offline Node/dependency layer only on cache miss
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          npm install --global --force pnpm@10.28.1
+          workspace="$RUNNER_TEMP/eqb-workspace"
+          pnpm -C "$workspace/app" install --frozen-lockfile
+          npm --prefix "$workspace/server" ci --no-audit --no-fund
+          test -z "$(git -C "$workspace" status --porcelain)"
+          layer="$RUNNER_TEMP/eqb-node-layer"
+          mkdir -p "$layer/app" "$layer/server"
+          node_bin="$(readlink -f "$(command -v node)")"
+          cp -a "$(dirname "$(dirname "$node_bin")")" "$layer/runtime"
+          cp -a "$workspace/app/node_modules" "$layer/app/"
+          cp -a "$workspace/server/node_modules" "$layer/server/"
+          tar -C "$layer" -cf - runtime app server | gzip -1 > "$RUNNER_TEMP/eqb-node-cache/node-deps.tar.gz"
+      - name: Restore Node layer for renderer build
+        if: steps.plan.outputs.profile == 'render'
+        run: |
+          set -euo pipefail
+          layer="$RUNNER_TEMP/eqb-node-layer"
+          if [ ! -d "$layer/runtime" ]; then
+            mkdir -p "$layer"
+            tar -xzf "$RUNNER_TEMP/eqb-node-cache/node-deps.tar.gz" -C "$layer"
+          fi
+          for part in app server; do
+            if [ ! -d "$RUNNER_TEMP/eqb-workspace/$part/node_modules" ]; then
+              cp -a "$layer/$part/node_modules" "$RUNNER_TEMP/eqb-workspace/$part/"
+            fi
+          done
+      - name: Resolve renderer base image by content digest
+        if: steps.plan.outputs.profile == 'render'
+        id: image
+        run: |
+          set -euo pipefail
+          docker pull ubuntu:24.04
+          image="$(docker image inspect ubuntu:24.04 --format '{{index .RepoDigests 0}}')"
+          [[ "$image" =~ ^ubuntu@sha256:[a-f0-9]{64}$ ]]
+          echo "image=$image" >> "$GITHUB_OUTPUT"
+          echo "digest=${image##*@sha256:}" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$image" > "$RUNNER_TEMP/eqb-export/renderer-image.txt"
+      - uses: actions/cache@v4
+        if: steps.plan.outputs.profile == 'render'
+        id: render-cache
+        with:
+          path: ${{ runner.temp }}/eqb-render-cache
+          key: eqb-render-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
+      - name: Build isolated offline renderer userspace
+        if: steps.plan.outputs.profile == 'render' && steps.render-cache.outputs.cache-hit != 'true'
+        env:
+          IMAGE: ${{ steps.image.outputs.image }}
+        run: |
+          WORKSPACE="$RUNNER_TEMP/eqb-workspace" \
+          NODE_LAYER="$RUNNER_TEMP/eqb-node-layer" \
+          OUTPUT="$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" \
+          bash scripts/sandbox/build-render.sh
+      - name: Write transport manifest (not a test success)
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/eqb-export"
+          cp "$RUNNER_TEMP/eqb-source-cache/source.bundle" "$out/"
+          cp "$RUNNER_TEMP/eqb-node-cache/node-deps.tar.gz" "$out/"
+          if [ -f "$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" ]; then
+            cp "$RUNNER_TEMP/eqb-render-cache/render-rootfs.tar.gz" "$out/"
+          fi
+          python3 scripts/sandbox/bridge.py manifest "$RUNNER_TEMP/eqb-plan.json" "$out"
+          cp scripts/sandbox/{bridge.py,smoke.mjs,README.md} "$out/"
+          cp "$RUNNER_TEMP/eqb-plan.json" "$out/plan.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sandbox-source-${{ steps.plan.outputs.sourceKey }}
+          path: ${{ runner.temp }}/eqb-export/source.bundle
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sandbox-node-${{ steps.plan.outputs.nodeKey }}
+          path: ${{ runner.temp }}/eqb-export/node-deps.tar.gz
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.plan.outputs.profile == 'render'
+        with:
+          name: sandbox-render-${{ steps.plan.outputs.renderKey }}-${{ steps.image.outputs.digest }}
+          path: ${{ runner.temp }}/eqb-export/render-rootfs.tar.gz
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sandbox-manifest-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/eqb-export/manifest.json
+            ${{ runner.temp }}/eqb-export/plan.json
+            ${{ runner.temp }}/eqb-export/renderer-image.txt
+            ${{ runner.temp }}/eqb-export/bridge.py
+            ${{ runner.temp }}/eqb-export/smoke.mjs
+            ${{ runner.temp }}/eqb-export/README.md
           retention-days: 1
           if-no-files-found: error
-          compression-level: 0
