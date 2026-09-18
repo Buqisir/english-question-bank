@@ -194,12 +194,43 @@ revision 纳入 bundle identity，服务端再次以当前 revision 比对，冲
 
 采用 Owner 选择的 B：每组由新的普通 Low 线程直接生成，启用 fast，不调用 Oracle、
 `nck1_analyze_group`、`amp.ai.generate` 或其他模型。不再使用旧 Grok 解析插件。
-Webhook 新建协调线程直接使用 `getBuiltinAgent('low')`，不覆盖 Low 的模型或推理档位，
-创建时显式 `features: []`。新 public-paper-v1 摘要与检索元数据同样使用内置 Low，
+Webhook 只唤醒固定 Import dispatcher；dispatcher 用 `create_thread` 显式指定 Import
+Project 与内置 Low，不覆盖 Low 的模型或推理档位，创建时显式 `features: []`。
+新 public-paper-v1 摘要与检索元数据同样使用内置 Low，
 `create_thread` 显式传 `agent_mode: low`、`features: []` 和专用 Import Project。
 不再注册自定义 Low 副本；Low 跟随 Amp 的模式配置，不保证固定为 DeepSeek。
 若 Low 不可用则停止，不切换模式或调用 Oracle/Task。实际 provider/model/usage 仍须实测。
 已绑定 coordinator/lease 不迁移，恢复时保持原线程。
+
+### Explicit-project dispatch procedure
+
+仅固定 controller `T-01a057c0-ecc9-745c-aaa7-a51dddb22306` 在 Import Project
+`72c5d9ea-c2e7-42e8-b51e-0b22b9b23732` 执行此流程。webhook 只提供 submission ID、
+不可变 digest 与 event ID；不携带源文件或 token。controller 本身不 claim 或导题。
+先确认本任务没有 Owner 暂停指令；旧失败或已绑定任务不因新通知自动恢复。
+先部署并只读验证新增的 `GET /api/import-agent-source-intakes/:id/orb-worker?submissionDigest=...`
+接口，再激活新入口；接口失败时停止，不用 reserve 代替只读查询。
+
+以下命令入口均为 `node scripts/import-pipeline/source-intake-dispatch.mjs`：
+
+1. `prepare <submissionId> --digest <digest> --event <eventId>`：私有 journal 先落盘，再 reserve 一次。
+   仅 `reserved` 可继续；已有绑定、busy、UNKNOWN 或其他状态只运行 `status <submissionId>` 后报告。
+2. `begin-create <submissionId>`：仅执行它返回的 `create_thread` request 一次，不改参数。
+   请求固定 `agent_mode: low`、`features: []`、`executor: orb` 和完整 Import project ref。
+   bootstrap turn 会运行，但没有导题任务；不要把它称作惰性或无 prompt 线程。
+3. 创建响应明确成功后运行 `bind <submissionId> --thread <threadId>`。CLI 先检查真实 thread export
+   的 project ID、private、Low、无 fast/自定义 agent，再绑定。失败不另建 worker。
+4. `status <submissionId>` 只读核对远端绑定；只有 `startable:true` 才运行 `take-assignment <submissionId>`。
+   它重新验证并在输出前记录 assignment 已签发。仅把输出的 assignment 通过 `send_thread_message`
+   发给输出的 `boundIdentity.ampThreadId` 一次，不自行重建 prompt，不复制 token 或 journal。
+5. 创建、绑定、签发或消息发送的响应丢失时停止，保留证据并只读核对。不得盲重试、清空 journal、
+   重建、rebind 或重放。已签发后重复 wakeup 不能再签发。恢复需单独裁决；不保证 exactly-once delivery。
+
+journal 位于 `.scratch/source-intake-dispatch/<submissionId>/`，目录 0700、记录 0600，
+含 reservation token，禁止输出、入 Git 或转移；更新 controller 时保留。失去该 Orb/journal
+不构成在新 controller 重建任务的授权。数据库的唯一绑定和 claim/lease 校验仍为最终权威。
+
+### 历史解析模式
 
 以下 Low + fast 仅适用旧解析合同，不覆盖上面的新 public-paper-v1 路径。
 旧解析或校对若使用 Medium，使用普通速度，不启用
@@ -255,7 +286,7 @@ Worker 完成或失败都主动回报文件路径、字节数、SHA256、正式�
 ## Orb 算力边界
 
 自动 source-intake worker 使用私有 Project Orb，并继承专用导题 Amp Project 的默认 Orb
-规格；当前 plugin `createThread` 接口只选择 `executor: 'orb'`，不能逐任务传 `orbSize`。
+规格；dispatcher 的 `create_thread` 显式选择 Import project，省略 `orb_size`。
 专用 `english-question-bank-import` 项目使用 Owner 配置的 `a1.medium` 默认规格；
 Low 模型模式不等于 Small Orb。扫描/OCR、ASR 与渲染前记录实际 CPU、内存和耗时，
 只有实测资源不足才提出调整，不自动升到 xxlarge。不得因此放宽门禁、转移 claim 或重复导入。

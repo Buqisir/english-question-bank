@@ -1026,6 +1026,25 @@ try {
   })
   const cliSubmissionId = cliSubmitted.json.submission.id
   const workerPath = `/api/import-agent-source-intakes/${cliSubmissionId}/orb-worker`
+  const workerStatusPath = `${workerPath}?submissionDigest=${encodeURIComponent(cliSubmitted.json.submission.submissionDigest)}`
+  assert.equal((await request(origin, workerStatusPath, { role: 'owner' })).status, 401)
+  const unreservedWorker = await request(origin, workerStatusPath, {
+    headers: { authorization: `Bearer ${agentToken}` },
+  })
+  assert.deepEqual(unreservedWorker.json.worker, {
+    state: 'unreserved',
+    submissionId: cliSubmissionId,
+    submissionDigest: cliSubmitted.json.submission.submissionDigest,
+    ampThreadId: null,
+    reservationExpiresAt: null,
+  })
+  assert.equal(JSON.stringify(unreservedWorker.json).includes('Token'), false)
+  const statusDigestMismatch = await request(origin,
+    `${workerPath}?submissionDigest=${encodeURIComponent(`sha256:${'f'.repeat(64)}`)}`, {
+      headers: { authorization: `Bearer ${agentToken}` },
+    })
+  assert.equal(statusDigestMismatch.status, 409)
+  assert.equal(statusDigestMismatch.json.code, 'SOURCE_INTAKE_SUBMISSION_DIGEST_MISMATCH')
   const ownerCannotReserve = await request(origin, `${workerPath}/reserve`, {
     method: 'POST',
     role: 'owner',
@@ -1071,6 +1090,10 @@ try {
   )
   const firstReservation = reservations.find((result) => result.json.worker.action === 'create')
     .json.worker
+  const reservedStatus = await request(origin, workerStatusPath, { role: 'import_agent' })
+  assert.equal(reservedStatus.json.worker.state, 'reserved')
+  assert.equal(reservedStatus.json.worker.ampThreadId, null)
+  assert.equal(JSON.stringify(reservedStatus.json).includes(firstReservation.reservationToken), false)
   clock = new Date('2026-08-30T01:05:01.000Z')
   const replacementReservation = await request(origin, `${workerPath}/reserve`, {
     method: 'POST',
@@ -1108,6 +1131,14 @@ try {
   })
   assert.equal(bound.status, 200)
   assert.equal(bound.json.worker.ampThreadId, orbThreadId)
+  const boundStatus = await request(origin, workerStatusPath, { role: 'import_agent' })
+  assert.deepEqual(boundStatus.json.worker, {
+    state: 'bound',
+    submissionId: cliSubmissionId,
+    submissionDigest: cliSubmitted.json.submission.submissionDigest,
+    ampThreadId: orbThreadId,
+    reservationExpiresAt: null,
+  })
   const resumed = await request(origin, `${workerPath}/reserve`, {
     method: 'POST',
     headers: { authorization: `Bearer ${agentToken}` },

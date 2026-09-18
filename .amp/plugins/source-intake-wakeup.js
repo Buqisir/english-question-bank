@@ -6,8 +6,9 @@ const SUBMISSION_DIGEST = /^sha256:[a-f0-9]{64}$/
 const EXPECTED_KEYS = ['event', 'schemaVersion', 'submissionDigest', 'submissionId']
 const IMPORT_PROJECT_ID = '72c5d9ea-c2e7-42e8-b51e-0b22b9b23732'
 const IMPORT_PROJECT_REF = 'user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import'
+const IMPORT_CONTROLLER_THREAD_ID = 'T-01a057c0-ecc9-745c-aaa7-a51dddb22306'
 
-export const description = 'Creates or resumes one private project Orb for a verified source intake.'
+export const description = 'Wakes the fixed Import dispatcher for verified source intake; never creates an Orb in the webhook.'
 
 export function parseSourceIntakeWakeup(body) {
   let payload
@@ -68,44 +69,15 @@ function importOpsSettings() {
   }
 }
 
-async function workerApi(settings, submissionId, operation, body, signal) {
-  const response = await fetch(
-    `${settings.origin}/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}`
-      + `/orb-worker/${operation}`,
-    {
-      method: 'POST',
-      headers: {
-        authorization: `Bearer ${settings.token}`,
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(body),
-      signal,
-    },
-  )
-  const result = await response.json().catch(() => null)
-  if (!response.ok) {
-    throw new Error(`Source-intake worker API ${operation} failed (${response.status} ${result?.code || 'unknown'})`)
-  }
-  return result?.worker
-}
-
-function assertWorkerResponse(worker, payload, expectedAction = null) {
-  if (
-    !worker
-    || worker.submissionId !== payload.submissionId
-    || worker.submissionDigest !== payload.submissionDigest
-    || (expectedAction && worker.action !== expectedAction)
-  ) {
-    throw new Error('Source-intake worker API returned a mismatched identity')
-  }
-  return worker
-}
-
-async function appendPrompt(thread, payload) {
-  await thread.appendUserMessage({
-    type: 'user-message',
-    content: sourceIntakeAgentPrompt(payload),
-  }, { steer: true })
+export function sourceIntakeDispatchPrompt(payload, eventId) {
+  return [
+    'Verified source-intake dispatch wakeup. This is not permission to import in the controller.',
+    JSON.stringify({ ...payload, webhookEventId: eventId }),
+    'Follow docs/import/agent-contract.md explicit-project dispatch procedure. Run source-intake-dispatch.mjs prepare with this submission/digest/event, then inspect status.',
+    'Only after begin-create returns a create_thread request may you execute that exact request once. It specifies built-in Low, features: [], and the Import project. The bootstrap receives no source assignment.',
+    'Bind the returned thread via the dispatch CLI, which verifies exported project/mode/privacy. Then run status; only startable:true permits take-assignment. Send the returned assignment once to its exact boundIdentity. A lost take-assignment or send response requires read-only reconciliation, not another send. Do not reconstruct an assignment manually.',
+    'On duplicate, busy, unknown, lost response, wrong project or paused task: stop and reconcile read-only. Never recreate/rebind a worker or replay a mutation. Respect existing Owner pauses. Do not claim, download, import or promote in this controller.',
+  ].join('\n')
 }
 
 export default async function sourceIntakeWakeupPlugin(amp) {
@@ -127,7 +99,10 @@ export default async function sourceIntakeWakeupPlugin(amp) {
     return
   }
 
-  const agent = amp.getBuiltinAgent('low')
+  if (process.env.AMP_THREAD_ID !== IMPORT_CONTROLLER_THREAD_ID) {
+    amp.logger.log('Source-intake wakeup is restricted to the fixed Import controller; no webhook registered.')
+    return
+  }
   const registration = await amp.createWebhook({
     key: 'eqbank-source-intake-queued-v1',
     headers: ['x-eqbank-signature'],
@@ -145,49 +120,10 @@ export default async function sourceIntakeWakeupPlugin(amp) {
         return
       }
 
-      const reserved = assertWorkerResponse(await workerApi(
-        settings,
-        payload.submissionId,
-        'reserve',
-        {
-          submissionDigest: payload.submissionDigest,
-          webhookEventId,
-        },
-        context.signal,
-      ), payload)
-      if (reserved.action === 'busy') return
-      if (reserved.action === 'resume') {
-        if (!reserved.ampThreadId) {
-          throw new Error('Bound source-intake worker has no Amp thread identity')
-        }
-        await appendPrompt(amp.threads.get(reserved.ampThreadId), payload)
-        return
-      }
-      if (reserved.action !== 'create' || !reserved.reservationToken) {
-        throw new Error('Source-intake worker reservation action is invalid')
-      }
-
-      const thread = await agent.createThread({
-        executor: 'orb',
-        features: [],
-        multiplayerTTLSeconds: null,
-        visibility: 'private',
-      })
-      const binding = assertWorkerResponse(await workerApi(
-        settings,
-        payload.submissionId,
-        'bind',
-        {
-          submissionDigest: payload.submissionDigest,
-          reservationToken: reserved.reservationToken,
-          ampThreadId: thread.id,
-        },
-        context.signal,
-      ), payload)
-      if (binding.ampThreadId !== thread.id || binding.state !== 'bound') {
-        throw new Error('Source-intake worker bind did not confirm the created Amp thread')
-      }
-      await appendPrompt(thread, payload)
+      await amp.threads.get(IMPORT_CONTROLLER_THREAD_ID).appendUserMessage({
+        type: 'user-message',
+        content: sourceIntakeDispatchPrompt(payload, webhookEventId),
+      }, { steer: true })
     },
   })
 

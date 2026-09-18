@@ -51,6 +51,13 @@ OCR web 确认仍有 Owner-only 权限门禁；Agent 不得伪造人工确认。
 模型与推理档位跟随 Amp 的 Low 配置，不在仓库固定。模式不可用则停止，不自动切换模式。
 下文 Low + fast 仅描述保留的旧解析路径，不适用于新公共卷。
 
+自动入口只唤醒固定 Import controller。它按 `docs/import/agent-contract.md` 的
+explicit-project dispatch procedure 使用 `source-intake-dispatch.mjs` 完成
+prepare → begin-create → 显式 project 的 `create_thread` → metadata 验证与 bind →
+只读 status → take-assignment → 单次消息发送。bootstrap 不携带导题任务；旧绑定不自动恢复。
+私有 journal 位于 `.scratch/source-intake-dispatch`，禁止输出、复制或删除以重试。
+新状态 API 必须先上线并验证，再激活入口；本地验证通过不等于生产已切换。
+
 新 raw-source 初始化会明确写入 `public-paper-v1`。材料化与源审查完成后不派发九份教学
 分析，而是运行：
 
