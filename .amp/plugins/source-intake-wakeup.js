@@ -131,6 +131,7 @@ export default async function sourceIntakeWakeupPlugin(amp) {
   const agent = amp.createAgent({
     extends: 'low',
     model: 'deepseek/deepseek-v4.1-flash',
+    reasoningEffort: 'high',
     features: [],
     instructions: 'Follow docs/import/agent-contract.md. New raw sources use public-paper-v1 with paragraph summaries and compact public search metadata, never the nine teaching analyses. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
   })
