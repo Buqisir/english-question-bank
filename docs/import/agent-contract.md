@@ -415,8 +415,8 @@ promotion 命令。
    `--cover-gaps` 试修，精确页数通过后显式 `--save-plan`。可选
    `pagination-plan.json` 绑定 source/Candidate 并进入 revision bundle；随后仍须
    `push --resolves <issueId>` 新建不可变 revision。不得手写 CSS、改版心／字体／行高，
-   不得为找“最优”继续扩大既有 24-render 上限。10 页自动方案若使用 PDF-only 的选项库
-   fallback，会在 plan 中保存 `allowSplitOptionBank: true` 并由显式重放保持一致；8 页禁止。
+   不得为找“最优”继续扩大既有 24-render 上限。8/10 页自动方案若使用 PDF-only 的选项库
+   fallback，会在 plan 中保存 `allowSplitOptionBank: true` 并由显式重放保持一致；单条选项仍不可拆。
    自动规划失败仍非零退出，但必须使用独立 diagnostic PDF/逐页图片和结构化失败报告继续
    修复，且不得保存 plan；`--auto` 不得与显式 break/cover 编辑参数混用。
 6. Owner 在网页认可后，Review API 保存绑定 source/Candidate/visible structure、当前 profile 的摘要或分析、files/bundle 的 approval；Agent 停下。无需在 Orb 生成本地 QA/发布收据，且不得因认可自动上线。
