@@ -8,10 +8,10 @@
  * 速览头 + 一张纸露一角. Covers:
  *
  *   1. Static — AnalysisDisclosure is fully retired from the detail page
- *      (spec 负空间①: 零挂载, zero import). The component still exists
- *      (verify-analysis-layering.mjs's own AnalysisDisclosure.tsx
- *      assertions are unaffected — it's a shared child component, not
- *      deleted, just no longer used here).
+ *      (spec 负空间①: 零挂载, zero import). The component itself has been
+ *      deleted as dead code (no production consumers remained after this
+ *      retirement); verify-analysis-layering.mjs's former AnalysisDisclosure
+ *      shape-check section was removed alongside.
  *   2. Static — the one PaperSurface mount is pinned to read-only lecture
  *      props: `lectureFocus={null}` + a no-op `onFocusIntent` (spec
  *      Verify §「PaperSurface 挂载 props 钉死只读形态」).

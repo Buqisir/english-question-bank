@@ -34,7 +34,7 @@ typography:
     fontSize: "14px"
     lineHeight: 1.5
   paper:
-    fontFamily: "'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif"
+    fontFamily: "'EQB Termes', 'EQB Source Han Serif', serif"
     fontSize: "16px"
     lineHeight: 1.7
   mono:
@@ -231,7 +231,7 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 ## 3. Typography
 
 **UI Font:** Inter + PingFang SC（回退 Hiragino Sans GB / system-ui）
-**Paper Font:** 'Times New Roman' / SimSun / 'Songti SC'（中英混排衬线，仅渲染卷面内容时用）
+**Paper Font:** 'EQB Termes' / 'EQB Source Han Serif'（中英混排衬线，仅渲染卷面内容时用）
 **Mono Font:** ui-monospace / SF Mono（代码、ID、技术字段）
 
 **Character:** 工具侧是一套调校良好的无衬线，靠字重与字号拉层级，不做 display/body 配对。渲染真题/解析的卷面切换到中英混排衬线。两套字体各守一层。工具界面 chrome **没有任何字号超过 20px**。
