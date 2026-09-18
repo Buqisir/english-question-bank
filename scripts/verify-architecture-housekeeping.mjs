@@ -179,6 +179,8 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['server/vocabulary/vocabularyRoutes.mjs', 'auth-persistence-migration', 'security'],
   ['.amp/plugins/github-ci-wakeup.js', 'auth-persistence-migration', 'security'],
   ['deploy/eqb-deploy-controller.mjs', 'auth-persistence-migration', 'security'],
+  ['ops-mcp/src/index.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/verify-ops-mcp.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/lib/ampOrbCICoordination.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/verify-amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],

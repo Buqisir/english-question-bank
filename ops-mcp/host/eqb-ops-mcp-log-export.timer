@@ -1,0 +1,12 @@
+[Unit]
+Description=Periodically export eqb.service logs for EQB Ops MCP
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=1min
+AccuracySec=15s
+Persistent=true
+Unit=eqb-ops-mcp-log-export.service
+
+[Install]
+WantedBy=timers.target

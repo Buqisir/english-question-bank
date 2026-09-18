@@ -1,0 +1,32 @@
+[Unit]
+Description=EQB read-only operations MCP
+After=network.target
+# Independent of eqb.service. Do not restart the website from this unit.
+
+[Service]
+Type=simple
+User=eqb-ops
+Group=eqb-ops
+WorkingDirectory=/opt/eqb-ops/app
+ExecStart=/usr/bin/node src/index.mjs
+EnvironmentFile=/etc/eqb-ops-mcp.env
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+LockPersonality=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+AmbientCapabilities=
+UMask=0027
+ReadOnlyPaths=/opt/eqb /opt/eqb-ops/app
+ReadWritePaths=/var/lib/eqb-ops
+# Node needs to JIT; do not set MemoryDenyWriteExecute.
+
+[Install]
+WantedBy=multi-user.target
