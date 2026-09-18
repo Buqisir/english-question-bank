@@ -189,7 +189,7 @@ assert(
 )
 
 const temp = realpathSync(mkdtempSync(path.join(tmpdir(), 'eqb-ops-mcp-')))
-const now = Date.parse('2026-09-18T12:00:00.000Z')
+const now = Math.floor(Date.now() / 1000) * 1000
 const iso = (offsetMinutes) => new Date(now - offsetMinutes * 60 * 1000).toISOString().replace('.000Z', '+00:00')
 const logFile = path.join(temp, 'eqb.log')
 writeFileSync(logFile, [
@@ -351,8 +351,17 @@ chmodSync(provenancePath, 0o666)
 assert('writable provenance is rejected', (await readRunningCommit(versionConfig)).commit === 'unknown')
 chmodSync(provenancePath, 0o444)
 // Git's test hook simulates a different owner without requiring root/chown.
-const oldTestOwner = process.env.GIT_TEST_ASSUME_DIFFERENT_OWNER
-process.env.GIT_TEST_ASSUME_DIFFERENT_OWNER = '1'
+// Reset inherited safe.directory exceptions only inside this fixture. CI hosts
+// may trust broad temp paths; that must not invalidate the negative control.
+const ownershipTestEnv = {
+  GIT_TEST_ASSUME_DIFFERENT_OWNER: '1',
+  GIT_CONFIG_COUNT: '1',
+  GIT_CONFIG_KEY_0: 'safe.directory',
+  GIT_CONFIG_VALUE_0: '',
+  LC_ALL: 'C',
+}
+const oldOwnershipEnv = Object.fromEntries(Object.keys(ownershipTestEnv).map((key) => [key, process.env[key]]))
+Object.assign(process.env, ownershipTestEnv)
 try {
   let rejected = false
   try { execFileSync(gitBin, ['-C', checkout, 'rev-parse', 'HEAD'], { stdio: 'pipe' }) }
@@ -361,8 +370,10 @@ try {
   assert('per-call safe.directory permits read-only HEAD',
     (await readCheckoutCommit(versionConfig)).commit === checkoutSha)
 } finally {
-  if (oldTestOwner === undefined) delete process.env.GIT_TEST_ASSUME_DIFFERENT_OWNER
-  else process.env.GIT_TEST_ASSUME_DIFFERENT_OWNER = oldTestOwner
+  for (const [key, value] of Object.entries(oldOwnershipEnv)) {
+    if (value === undefined) delete process.env[key]
+    else process.env[key] = value
+  }
 }
 const callCounter = path.join(temp, 'systemctl-calls')
 writeFileSync(systemctlBin, `#!/bin/sh
