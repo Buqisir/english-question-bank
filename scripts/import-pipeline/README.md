@@ -8,7 +8,8 @@
 
 任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
 项目级 `importing-nck1-papers` skill 会自动匹配导题、继续某卷、审核返工、状态查询
-和认可后的上线准备。默认 worker 是绑定 submission 的私有 Amp Project Orb。每次先运行：
+和认可后的上线准备。默认 worker 是绑定 submission 的私有 Amp Project Orb。
+已有卷或 source-intake handoff 后运行（新 submission 不需要先找 paperId）：
 
 ```bash
 node scripts/import-pipeline/review.mjs preflight <paperId>
@@ -30,9 +31,16 @@ node scripts/import-pipeline/source-intake.mjs handoff <submissionId> --paper-id
 新接卷/恢复优先使用两个有界入口：
 
 ```bash
-node scripts/import-pipeline/source-intake.mjs status <submissionId> --paper-id <paperId>
-node scripts/import-pipeline/source-intake.mjs continue <submissionId> --paper-id <paperId>
+node scripts/import-pipeline/source-intake.mjs status <submissionId>
+node scripts/import-pipeline/source-intake.mjs continue <submissionId>
 ```
+
+按返回的 `nextCommand` 执行；`--paper-id` 可选，不是 claim 前置条件。
+新 raw-source 默认使用 `paper-<submission UUID>`；新 analyzed package 从下载 ZIP 的
+`package.json.paperId` 取身份；补听力/修订使用不可变 `targetPaperId`，冲突即停止。
+初始化核验后按返回的 `handoffCommand` 显式交接，**先 handoff，再生成摘要/metadata、
+Review push 或等待审核**。handoff 结束 lease，不代表 OCR/source review 或发布获准。
+成功交接保留本地完成收据，后续 status/continue 转向 Review preflight，不再重领。
 
 `status` 只读远端队列/当前 lease，并重验本地摘要收据，不 heartbeat、不下载、不写文件。
 `continue` 用 submission 和 paper 两级排他锁串行 claim → download → init → raw-source
@@ -42,7 +50,9 @@ materialize/preflight，stdout 始终只有一份机器可读 JSON；子进程�
 `analyzed_package` 在确定性 init 后即 `source_ready`，不进入 OCR/materialize/model fallback。
 初始化与材料化期间每 30 秒串行续租，单次请求最多等待 15 秒；失败会终止步骤进程组，
 记录 unknown 并停止。中断遗留锁须先确认原进程已结束再人工处理，禁止删除活跃锁。
-听力 init 后尚无 finalized receipt 时只返回 Agent 内容检查待办，不以进度记录代替音频证据；
+源/音频检查前及持有 lease 期间至少每 10 分钟执行 `lease.renewalCommand`；过期只报告
+阻断，不自动重领。听力 init 后尚无 finalized receipt 时返回带命令与路径的 `tasks`，
+不以进度记录代替音频证据；
 协调线程须核对源绑定，按待办运行材料化与内容 review，再显式 finalize。
 OCR web 确认仍有 Owner-only 权限门禁；Agent 不得伪造人工确认。这一限制尚未满足
 所有 OCR 卷只审最终版式的目标，必须准确报告，不得把听力 Agent 检查也归为人工待办。

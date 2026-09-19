@@ -179,22 +179,32 @@ style imitation instructions in the repository. Distill teaching moves only.
 
 1. Read `docs/import/agent-contract.md` before changing import data.
 2. When the task names a source-ledger `submissionId`, use
-   `scripts/import-pipeline/source-intake.mjs`. Claim, download, initialize, and
-   hand off only that immutable submission. The CLI sends the runtime
+   `node scripts/import-pipeline/source-intake.mjs status <submissionId>`;
+   no `paperId` is needed before claim. Follow its `nextCommand` using bounded
+   `continue`; claim, download, initialize, and hand off only that immutable
+   submission. The CLI sends the runtime
    `AMP_THREAD_ID`; never move its claim receipt or source files to another
    thread.
 3. Recheck the downloaded byte length and SHA-256 against the server snapshot.
-   Keep the finite lease alive with `heartbeat`. If sources are incomplete or
-   ambiguous, call `needs-owner` with the factual blocker and stop.
-4. Read the immutable snapshot mode after download. For `new_paper`, choose a
-   new `paperId` only for a complete question and authoritative-answer source
-   set. For `listening_supplement`, use its exact `targetPaperId`; `init`
+   Use the returned `lease.renewalCommand` before source/audio review and at
+   least every 10 minutes while claimed. Expiry or unknown outcomes require
+   read-only reconciliation, not automatic reclaim. If sources are incomplete
+   or ambiguous, call `needs-owner` with the factual blocker and stop.
+4. Let the CLI resolve identity: raw `new_paper` defaults to `paper-<submission
+   UUID>`; a new analyzed package uses its own `package.json.paperId`; a
+   supplement/correction uses the immutable `targetPaperId`. Never hunt an
+   as-yet-uncreated paper in Review or choose a replacement ID on retry.
+   For `listening_supplement`, `init`
    hydrates the latest finalized Candidate from Review, and the supplement must
    contain exactly one MP3 and no duplicate question or answer documents.
-5. Run source-intake `init` and `handoff`. Both receipts must bind the same
-   submission id/digest, Amp thread id, and paper id. If `init` stages listening
-   audio, finish the listening check below before handoff.
-6. Once a `paperId` exists, run:
+5. Follow the offered `handoffCommand` after verified initialization, before
+   summary/metadata generation or Review push/waits. Handoff ends the lease;
+   it does not approve OCR, source evidence, or publication. Both receipts must
+   bind the same submission id/digest, Amp thread id, and paper id. If `init`
+   stages listening audio, follow the returned `tasks` and finish the listening
+   check below first. A completed handoff is retained locally; `status` and
+   `continue` then return the Review command without reclaiming.
+6. After handoff (or for an existing off-ledger paper), run:
 
    ```bash
    node scripts/import-pipeline/review.mjs preflight <paperId>

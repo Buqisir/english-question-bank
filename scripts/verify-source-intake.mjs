@@ -409,6 +409,7 @@ const store = createSourceIntakeStore({ dbPath, filesRoot, now: () => clock })
 const notifier = createSourceIntakeNotifier()
 const routes = createSourceIntakeRoutes({ getStore: () => store, notifier, agentToken })
 let stalledHeartbeatSubmission = null
+let lostHandoffResponseSubmission = null
 const server = createServer(async (incoming, response) => {
   const url = new URL(incoming.url || '/', `http://${incoming.headers.host}`)
   if (stalledHeartbeatSubmission
@@ -423,7 +424,15 @@ const server = createServer(async (incoming, response) => {
     url,
     context: {
       session,
-      sendJson,
+      sendJson: (...args) => {
+        if (lostHandoffResponseSubmission
+          && url.pathname === `/api/import-agent-source-intakes/${lostHandoffResponseSubmission}/handoff`) {
+          lostHandoffResponseSubmission = null
+          response.destroy()
+          return
+        }
+        sendJson(...args)
+      },
       readJsonBody: readJsonRouteBody,
     },
   })
@@ -1295,6 +1304,7 @@ try {
       submissionId: cliSubmissionId,
       state: 'handed_off',
       paperId: cliPaperId,
+      nextCommand: `node scripts/import-pipeline/review.mjs preflight ${cliPaperId}`,
     })
     assert.equal(existsSync(path.join(cliInbox, 'claim.json')), false)
     const handedOffDetail = await request(origin, `/api/source-intakes/${cliIntakeId}`, {
@@ -1322,17 +1332,25 @@ try {
     { method: 'POST', role: 'owner' },
   )
   const automaticSubmissionId = automaticSubmitted.json.submission.id
-  const automaticPaperId = `paper-source-intake-automatic-${process.pid}`
+  const automaticPaperId = `paper-${automaticSubmissionId.slice('submission-'.length)}`
   const automaticInbox = path.resolve(import.meta.dirname,
     `import-pipeline/source-intake-inbox/${automaticSubmissionId}`)
   const automaticPaperDirectory = path.resolve(import.meta.dirname,
     `import-pipeline/papers/${automaticPaperId}`)
   try {
+    const pending = JSON.parse(await runSourceIntakeCli(origin, ['status', automaticSubmissionId]))
+    assert.equal(pending.paperId, null, 'before claim, no speculative paper identity')
+    assert.equal(pending.nextCommand, `node scripts/import-pipeline/source-intake.mjs continue ${automaticSubmissionId}`)
+    assert.equal(existsSync(automaticInbox), false, 'first status creates no claim, journal or directory')
+    assert.match(await runSourceIntakeCli(origin, ['status', '--help']), /omit|only submissionId/)
     const completed = JSON.parse(await runSourceIntakeCli(origin, [
-      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+      'continue', automaticSubmissionId,
     ]))
+    assert.equal(completed.paperId, automaticPaperId)
     assert.equal(completed.blocked.reason, 'needs_agent_review', JSON.stringify(completed))
     assert.equal(completed.steps.at(-1).step, 'materialize')
+    assert.equal(completed.nextCommand, `node scripts/import-pipeline/source-intake.mjs handoff ${automaticSubmissionId} --paper-id ${automaticPaperId}`)
+    assert.equal(completed.lease.renewalCommand, `node scripts/import-pipeline/source-intake.mjs heartbeat ${automaticSubmissionId}`)
     assert.equal(JSON.parse(readFileSync(path.join(automaticPaperDirectory, 'config.json'))).importProfile, 'public-paper-v1')
     assert.throws(() => execFileSync(process.execPath, [
       path.resolve(import.meta.dirname, 'import-pipeline/review.mjs'),
@@ -1342,7 +1360,7 @@ try {
     const materializationBefore = readFileSync(path.join(
       automaticPaperDirectory, 'materialization/nck1-source-materialization-v1.json'))
     const repeated = JSON.parse(await runSourceIntakeCli(origin, [
-      'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
+      'continue', automaticSubmissionId,
     ]))
     assert.equal(repeated.blocked.reason, 'needs_agent_review')
     assert.deepEqual(readFileSync(path.join(automaticInbox, 'automation-progress.json')), progressBefore)
@@ -1406,6 +1424,10 @@ try {
       await assert.rejects(runSourceIntakeCli(origin, [
         'continue', automaticSubmissionId, '--paper-id', automaticPaperId,
       ]), /Another continue is active for paper/)
+      await assert.rejects(runSourceIntakeCli(origin, [
+        'handoff', automaticSubmissionId, '--paper-id', automaticPaperId,
+      ]), /Lock is already held/)
+      assert.deepEqual(readFileSync(progressFile), progressBefore, 'blocked handoff must not start an operation')
       const submissionLockAfterFailure = await acquireSourceIntakeLock(lockFile)
       await submissionLockAfterFailure.release()
     } finally {
@@ -1421,6 +1443,27 @@ try {
     assert.equal(existsSync(claimFile), false, 'unknown claim must not be replayed')
     writeFileSync(claimFile, claimBytes)
     assert.deepEqual(readFileSync(path.join(automaticInbox, 'automation-progress.json')), progressBefore)
+    const beforeExpiry = clock
+    clock = new Date(clock.getTime() + 31 * 60_000)
+    const expired = JSON.parse(await runSourceIntakeCli(origin, ['continue', automaticSubmissionId]))
+    assert.equal(expired.blocked.reason, 'claim_invalid_or_expired')
+    assert.equal(expired.nextCommand, null)
+    assert.equal(expired.lease.renewalCommand, null)
+    assert.deepEqual(readFileSync(claimFile), claimBytes, 'expired claims are never reacquired')
+    clock = beforeExpiry
+    const done = JSON.parse(await runSourceIntakeCli(origin, ['handoff', automaticSubmissionId, '--paper-id', automaticPaperId]))
+    assert.equal(done.state, 'handed_off')
+    const handoffProgress = readFileSync(path.join(automaticInbox, 'automation-progress.json'))
+    const afterHandoff = JSON.parse(await runSourceIntakeCli(origin, ['continue', automaticSubmissionId]))
+    assert.equal(afterHandoff.state, 'handed_off')
+    assert.equal(afterHandoff.nextCommand, `node scripts/import-pipeline/review.mjs preflight ${automaticPaperId}`)
+    assert.equal(afterHandoff.lease, undefined)
+    const duplicate = JSON.parse(await runSourceIntakeCli(origin, ['handoff', automaticSubmissionId, '--paper-id', automaticPaperId]))
+    assert.equal(duplicate.state, 'handed_off')
+    assert.deepEqual(readFileSync(path.join(automaticInbox, 'automation-progress.json')), handoffProgress)
+    await assert.rejects(runSourceIntakeCli(origin, ['status', automaticSubmissionId], {
+      ampThreadId: 'T-22222222-2222-4222-8222-222222222222',
+    }), /another Amp thread/)
     console.log('PASS new raw-source CLI selects public-paper-v1 and rejects teaching-analysis verification')
   } finally {
     rmSync(automaticInbox, { recursive: true, force: true })
@@ -1512,6 +1555,15 @@ try {
       audioAsrFixture,
     ], { ampThreadId: null })
     assert.match(initOutput, /awaiting_agent_content_review/)
+    const audioStatus = JSON.parse(await runSourceIntakeCli(origin,
+      ['status', audioSubmissionId], { ampThreadId: null }))
+    assert.equal(audioStatus.paperId, audioPaperId)
+    assert.equal(audioStatus.blocked.reason, 'awaiting_agent_content_review')
+    assert.equal(audioStatus.handoffCommand, undefined)
+    assert.equal(audioStatus.tasks[0].command, `node scripts/import-pipeline/universal-nck1.mjs materialize ${audioPaperId}`)
+    assert.equal(audioStatus.tasks[1].asrPath, path.join(audioPaperDirectory, 'materialization/listening-audio/asr-v1.json'))
+    assert.equal(audioStatus.tasks[2].command,
+      `node scripts/import-pipeline/source-intake.mjs finalize-listening ${audioSubmissionId} --paper-id ${audioPaperId} --review ${JSON.stringify(path.join(audioInbox, 'listening-content-review.json'))}`)
     assert.equal(
       existsSync(path.join(audioPaperDirectory, 'signals/source-intake-initialization.json')),
       false,
@@ -1558,13 +1610,21 @@ try {
     ))
     assert.equal(audioManifest.schemaVersion, 'universal-nck1-source-manifest-v2')
     assert.equal(audioManifest.attachments.length, 4)
-    const handoffOutput = await runSourceIntakeCli(origin, [
+    lostHandoffResponseSubmission = audioSubmissionId
+    await assert.rejects(runSourceIntakeCli(origin, [
       'handoff',
       audioSubmissionId,
       '--paper-id',
       audioPaperId,
-    ], { ampThreadId: null })
-    assert.equal(JSON.parse(handoffOutput).state, 'handed_off')
+    ], { ampThreadId: null }), /fetch failed/)
+    assert.equal(store.intakeDetail(audioCliCreated.json.intake.id).state, 'handed_off')
+    const lostResponse = JSON.parse(await runSourceIntakeCli(origin,
+      ['continue', audioSubmissionId], { ampThreadId: null }))
+    assert.equal(lostResponse.blocked.step, 'handoff')
+    assert.equal(lostResponse.blocked.reason, 'operation_outcome_unknown')
+    assert.equal(lostResponse.nextCommand, null)
+    await assert.rejects(runSourceIntakeCli(origin,
+      ['handoff', audioSubmissionId, '--paper-id', audioPaperId], { ampThreadId: null }), /Unresolved operation outcome/)
   } finally {
     rmSync(audioInbox, { recursive: true, force: true })
     rmSync(audioPaperDirectory, { recursive: true, force: true })
@@ -1576,7 +1636,7 @@ try {
   }, 'owner')
   const packagePath = path.join(tempRoot, 'complete.zip')
   execFileSync('python3', ['-c',
-    'import sys, zipfile\nwith zipfile.ZipFile(sys.argv[1], "w") as z: z.writestr("package.json", "{}")',
+    'import sys, zipfile\nwith zipfile.ZipFile(sys.argv[1], "w") as z: z.writestr("package.json", \'{"paperId":"paper-package-identity-fixture"}\')',
     packagePath,
   ])
   // Archive validation is not content approval. This fixture only exercises
@@ -1597,6 +1657,16 @@ try {
   assert.equal(packageSubmission.snapshot.mode, 'analyzed_package')
   assert.equal(packageSubmission.snapshot.files.length, 1)
   assert.equal(packageSubmission.snapshot.files[0].sha256, digest(packageBytes))
+  const packageInbox = path.resolve(import.meta.dirname, `import-pipeline/source-intake-inbox/${packageSubmission.id}`)
+  try {
+    await runSourceIntakeCli(origin, ['claim', packageSubmission.id])
+    await runSourceIntakeCli(origin, ['download', packageSubmission.id])
+    const packageStatus = JSON.parse(await runSourceIntakeCli(origin, ['status', packageSubmission.id]))
+    assert.equal(packageStatus.paperId, 'paper-package-identity-fixture')
+    assert.equal(packageStatus.next, 'init', 'identity discovery does not admit package content')
+    await assert.rejects(runSourceIntakeCli(origin,
+      ['status', packageSubmission.id, '--paper-id', 'paper-wrong-package']), /immutable target or package identity/)
+  } finally { rmSync(packageInbox, { recursive: true, force: true }) }
   assert.throws(() => store.submitIntake(packageIntake.id, 'owner'), /required before submission/)
   console.log('PASS analyzed package archive upload, replacement preservation, idempotent file registration and frozen dispatch')
 
@@ -1711,8 +1781,9 @@ try {
     await runSourceIntakeCli(origin, ['claim', correctionSubmission.id])
     await runSourceIntakeCli(origin, ['download', correctionSubmission.id])
     const initialized = JSON.parse(await runSourceIntakeCli(origin, [
-      'continue', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+      'continue', correctionSubmission.id,
     ]))
+    assert.equal(initialized.paperId, 'paper-2027-chengdu-opening')
     assert.equal(initialized.state, 'source_ready')
     assert.equal(initialized.next, 'stop_before_analysis_dispatch')
     const backupFile = path.join(correctionInbox, 'previous-workspace/previous.txt')
