@@ -173,6 +173,144 @@ async function openGroupDetailFromRow(page, card) {
   await page.getByRole('menuitem', { name: '详情' }).click()
 }
 
+// Exercise the real input/reset controls and hook, delaying only the AI HTTP
+// boundary. No external provider, API key, production data or arbitrary sleeps.
+async function verifySearchResetRaces(page) {
+  const statusPattern = '**/api/ai/status'
+  const stewardPattern = '**/api/ai/question-bank-steward'
+  const heldRoutes = new Set()
+  let receiveRoute
+  await page.route(statusPattern, route => route.fulfill({
+    json: { serverKeyAvailable: true, dailyLimit: { exceeded: false } },
+  }))
+  await page.route(stewardPattern, route => {
+    heldRoutes.add(route)
+    receiveRoute?.(route)
+  })
+
+  const input = page.getByRole('textbox', { name: '自然语言搜索' })
+  async function begin(query) {
+    let timer
+    const routed = new Promise((resolve, reject) => {
+      receiveRoute = resolve
+      timer = setTimeout(() => reject(new Error('Search did not reach the mocked steward')), 15_000)
+    })
+    routed.catch(() => {})
+    try {
+      await input.fill(query)
+      await page.getByRole('button', { name: '开始取题' }).click()
+      const route = await routed
+      await page.locator('.concierge-loading').waitFor({ timeout: 10_000 })
+      return route
+    } finally {
+      clearTimeout(timer)
+      receiveRoute = undefined
+    }
+  }
+
+  async function settle(route, json, status = 200) {
+    const received = page.waitForResponse(response => response.request() === route.request())
+    await route.fulfill({ status, json })
+    heldRoutes.delete(route)
+    await (await received).finished()
+    // Drain the completed response's promise chain and React commit before
+    // negative assertions about a discarded result.
+    await page.evaluate(() => new Promise(resolve => {
+      requestAnimationFrame(() => requestAnimationFrame(resolve))
+    }))
+  }
+
+  async function assertIdle(label) {
+    const stale = await page.locator([
+      '.concierge-assistant', '.concierge-notice', '.concierge-clarification',
+      '.concierge-loading', '.concierge-error', '.concierge-results .concierge-empty',
+      '.concierge-results .concierge-paper-list',
+    ].join(',')).count()
+    if (await input.inputValue() !== '' || stale !== 0
+      || !await page.getByRole('button', { name: /浏览题库与筛选/ }).isVisible()) {
+      fail(label, `stale search elements: ${stale}; input: ${await input.inputValue()}`)
+    }
+    pass(label)
+  }
+
+  try {
+    await page.reload({ waitUntil: 'networkidle' })
+    await waitForConciergeDeskReady(page)
+    const group = await page.evaluate(async id => {
+      const data = await fetch('/api/question-groups').then(response => response.json())
+      return data.questionGroups.find(item => item.id === id)
+    }, OWNER_GROUP_ID)
+    if (!group) fail('Search race fixture must be an actual listed question group')
+    const result = message => ({
+      assistantMessage: message,
+      needsClarification: false,
+      matches: [{ questionGroupId: group.id, questionGroup: group, score: 0.95, reason: message }],
+    })
+    const clarification = { needsClarification: true, clarificationQuestion: '你想找哪一类生态主题？' }
+    const firstQuery = '找一篇海洋生态保护的阅读'
+    const secondQuery = '找一篇太空农业的阅读'
+
+    const cleared = await begin(firstQuery)
+    await page.getByRole('button', { name: '清除搜索' }).click()
+    await settle(cleared, result('已被清除的旧搜索结果'))
+    await assertIdle('Clear during an in-flight search ignores its late results')
+
+    const escaped = await begin(firstQuery)
+    await input.press('Escape')
+    await settle(escaped, clarification)
+    await assertIdle('Escape during an in-flight search ignores its late clarification')
+
+    const failed = await begin(firstQuery)
+    await page.getByRole('button', { name: '清除搜索' }).click()
+    await settle(failed, { error: 'controlled unavailable provider' }, 503)
+    await assertIdle('A cleared search cannot restore the API-error fallback notice')
+
+    for (const oldFinishesFirst of [true, false]) {
+      const old = await begin(firstQuery)
+      await input.press('Escape')
+      const current = await begin(secondQuery)
+      if (oldFinishesFirst) {
+        await settle(old, result('过时结果'))
+        if (!(await page.locator('.concierge-loading').textContent())?.includes(secondQuery)) {
+          fail('Old response must not replace the newer loading state')
+        }
+      }
+      await settle(current, result('当前太空农业搜索结果'))
+      await page.getByText('当前太空农业搜索结果', { exact: true }).first().waitFor()
+      if (!oldFinishesFirst) await settle(old, clarification)
+      if (await input.inputValue() !== secondQuery
+        || await page.locator('.concierge-assistant').textContent() !== '当前太空农业搜索结果'
+        || await page.locator('.concierge-clarification').count() !== 0) {
+        fail('Latest search must retain both its input and results')
+      }
+      pass(oldFinishesFirst
+        ? 'An old response cannot overwrite a newer pending search'
+        : 'An old clarification cannot overwrite newer completed results')
+      await page.getByRole('button', { name: '清除搜索' }).click()
+    }
+
+    // Positive control: current clarification and its pending context survive.
+    const current = await begin(firstQuery)
+    await settle(current, clarification)
+    await page.locator('.concierge-clarification').waitFor()
+    const followUp = await begin('主旨概括')
+    const message = followUp.request().postDataJSON().message
+    if (!message.includes(firstQuery) || !message.includes('主旨概括')) {
+      fail('Current clarification must preserve its follow-up query context', message)
+    }
+    await settle(followUp, result('澄清后搜索结果'))
+    await page.locator('.concierge-assistant').getByText('澄清后搜索结果', { exact: true }).waitFor()
+    pass('Current clarification and follow-up remain functional')
+  } finally {
+    for (const route of heldRoutes) await route.abort().catch(() => {})
+    await page.unroute(stewardPattern)
+    await page.unroute(statusPattern)
+    // Restore real status/network behavior for the existing golden path.
+    await page.reload({ waitUntil: 'networkidle' })
+    await waitForConciergeDeskReady(page)
+  }
+}
+
 async function runOwnerFlow(browser) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 920 } })
   const page = await context.newPage()
@@ -201,6 +339,8 @@ async function runOwnerFlow(browser) {
     await page.waitForURL(`http://127.0.0.1:${vitePort}/`)
     await waitForConciergeDeskReady(page)
     pass('Correct password logs owner in and lands on the 找题面')
+
+    await verifySearchResetRaces(page)
 
     // C3: find -> expand -> detail. 详情 lives in the row 「更多操作」 menu
     // as a menuitem (href still carries ?view=detail&groupId=…).
