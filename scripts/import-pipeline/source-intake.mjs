@@ -4,8 +4,11 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
   chmodSync,
+  closeSync,
   existsSync,
+  fsyncSync,
   mkdirSync,
+  openSync,
   readFileSync,
   renameSync,
   rmSync,
@@ -16,6 +19,8 @@ import path from 'node:path'
 
 import { assertListeningAudioManifest } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import { prepareNck1AnalyzedPackageReview } from '../../server/paper-import/analyzedPackage.mjs'
+import { readAnalyzedPackageArchive } from '../../server/source-intake/analyzedPackageArchive.mjs'
+import { parseStrictPackageJson } from '../../server/paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { inspectNck1Materialization } from './nck1-docx-materialize.mjs'
@@ -85,8 +90,12 @@ function writePrivateJson(filePath, value) {
   chmodSync(directory, 0o700)
   const temporaryPath = `${filePath}.${process.pid}.tmp`
   writeFileSync(temporaryPath, `${JSON.stringify(value, null, 2)}\n`, { mode: 0o600 })
+  const file = openSync(temporaryPath, 'r')
+  try { fsyncSync(file) } finally { closeSync(file) }
   renameSync(temporaryPath, filePath)
   chmodSync(filePath, 0o600)
+  const parent = openSync(directory, 'r')
+  try { fsyncSync(parent) } finally { closeSync(parent) }
 }
 
 function readClaim(submissionId) {
@@ -340,18 +349,52 @@ function verifiedMaterialization(paperId) {
   return inspectNck1Materialization({ paperDir: paperDirectory, manifest })
 }
 
-async function automationStatus(submissionId, paperId) {
-  if (!paperIdPattern.test(paperId || '')) fail('status requires --paper-id paper-…')
+async function resolvePaperId(submissionId, requested, snapshot, manifest = null) {
+  const retained = [...new Set(Object.values(readProgress(submissionId).operations || {})
+    .map((entry) => entry.paperId).filter(Boolean))]
+  if (retained.length > 1 || (requested && retained.length && retained[0] !== requested)) {
+    fail('Progress paper identity conflicts; preserve the workspace, do not choose another ID')
+  }
+  let expected = snapshot?.targetPaperId || null
+  if (snapshot?.mode === 'analyzed_package' && !expected) {
+    if (!manifest) return requested || retained[0] || null
+    const archive = manifest.files.find((file) => file.role === 'analyzed_package')
+    if (!archive || manifest.files.length !== 1) fail('Expected exactly one analyzed-package ZIP')
+    await readAnalyzedPackageArchive(archive.localPath)
+    const bytes = execFileSync('python3', ['-c',
+      'import sys,zipfile; sys.stdout.buffer.write(zipfile.ZipFile(sys.argv[1]).read("package.json"))',
+      archive.localPath], { timeout: 60_000, maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] })
+    expected = parseStrictPackageJson(bytes).paperId
+    if (!paperIdPattern.test(expected || '')) fail('Analyzed package has no valid paperId')
+  }
+  const selected = requested || retained[0] || expected
+    || (snapshot && (!snapshot.mode || snapshot.mode === 'new_paper')
+      ? `paper-${submissionId.slice('submission-'.length)}` : null)
+  if (expected && selected !== expected) fail('paperId must equal the immutable target or package identity')
+  if (selected && !paperIdPattern.test(selected)) fail('A valid paperId is required')
+  return selected
+}
+
+async function inspectAutomation(submissionId, paperId) {
+  if (paperId && !paperIdPattern.test(paperId)) fail('Invalid --paper-id; omit it to resolve from the submission')
+  paperId = await resolvePaperId(submissionId, paperId)
   const steps = []
   const progress = readProgress(submissionId)
   for (const [step, entry] of Object.entries(progress.operations || {})) {
     if (entry.state === 'unknown') return { submissionId, paperId, steps, blocked: { step, reason: 'operation_outcome_unknown', detail: entry.detail }, next: 'Reconcile the preserved outcome before clearing the failure record; do not replay automatically.' }
   }
   const claimFile = receiptPath(submissionId)
+  const handedOff = progress.operations?.handoff
+  if (handedOff?.state === 'completed') {
+    if (handedOff.ampThreadId !== ampThreadId()) fail('Handoff receipt belongs to another Amp thread')
+    return { submissionId, paperId: handedOff.paperId, steps, state: 'handed_off', next: 'review_preflight' }
+  }
+  if (handedOff?.state === 'started') return { submissionId, paperId, steps,
+    blocked: { step: 'handoff', reason: 'operation_outcome_unknown' }, next: 'Reconcile handoff; do not replay.' }
   if (!existsSync(claimFile)) {
     if (Object.keys(progress.operations || {}).length > 0
       || existsSync(manifestPath(submissionId))
-      || existsSync(initializationReceiptPath(paperId))) {
+      || (paperId && existsSync(initializationReceiptPath(paperId)))) {
       return { submissionId, paperId, steps, blocked: { step: 'claim', reason: 'claim_outcome_unknown' }, next: 'Confirm the claim in the read-only source ledger before replaying.' }
     }
     const queue = await api('/api/import-agent-source-intakes')
@@ -361,15 +404,18 @@ async function automationStatus(submissionId, paperId) {
     return { submissionId, paperId, steps, next: 'claim' }
   }
   const claimReceipt = readClaim(submissionId)
-  for (const [operation, entry] of Object.entries(progress.operations || {})) {
-    if (entry.paperId && entry.paperId !== paperId) {
-      return { submissionId, paperId, steps, blocked: { step: operation, reason: 'progress_paper_mismatch' }, next: 'Inspect the preserved workspace; do not reuse it for another paper.' }
-    }
+  let current
+  try {
+    current = assertSubmissionDigest((await api(
+      `/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}`,
+      {}, { lease: claimReceipt.leaseToken },
+    )).submission)
+  } catch (error) {
+    if (!error.message.includes('SOURCE_INTAKE_CLAIM_INVALID')) throw error
+    return { submissionId, paperId, steps, blocked: { step: 'lease', reason: 'claim_invalid_or_expired' },
+      next: 'Reconcile the existing claim and binding read-only; never auto-reclaim or discard receipts.' }
   }
-  const current = assertSubmissionDigest((await api(
-    `/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}`,
-    {}, { lease: claimReceipt.leaseToken },
-  )).submission)
+  paperId = await resolvePaperId(submissionId, paperId, current.snapshot)
   steps.push({ step: 'claim', state: 'verified', submissionDigest: current.submissionDigest })
   let manifest
   try {
@@ -391,6 +437,8 @@ async function automationStatus(submissionId, paperId) {
     if (legalPlaceholder) return { submissionId, paperId, steps, next: 'download' }
     return { submissionId, paperId, steps, blocked: { step: 'download', reason: 'download_evidence_invalid', detail: error.message }, next: 'Inspect the preserved download; do not overwrite it.' }
   }
+  paperId = await resolvePaperId(submissionId, paperId, current.snapshot, manifest)
+  if (!paperId) fail('Submission does not define a supported paper identity')
   try {
     initializationReceipt(manifest, paperId)
     steps.push({ step: 'init', state: 'verified' })
@@ -433,6 +481,43 @@ async function automationStatus(submissionId, paperId) {
   }
 }
 
+async function automationStatus(submissionId, paperId) {
+  const status = await inspectAutomation(submissionId, paperId)
+  const id = status.paperId
+  const intake = `node scripts/import-pipeline/source-intake.mjs`
+  const review = `node scripts/import-pipeline/review.mjs`
+  status.nextCommand = null
+  if (!status.blocked && ['claim', 'download', 'init', 'materialize'].includes(status.next)) {
+    status.nextCommand = `${intake} continue ${submissionId}${id ? ` --paper-id ${id}` : ''}`
+  }
+  if (status.state === 'handed_off') status.nextCommand = `${review} preflight ${id}`
+  if (status.steps.some((step) => step.step === 'init' && step.state === 'verified')
+    && (!status.blocked || status.blocked.step === 'source_review')) {
+    status.handoffCommand = `${intake} handoff ${submissionId} --paper-id ${id}`
+    status.nextCommand = status.handoffCommand
+    status.afterHandoff = `${review} preflight ${id}`
+  }
+  if (existsSync(receiptPath(submissionId)) && status.state !== 'handed_off') {
+    const claim = readClaim(submissionId)
+    status.lease = { expiresAt: claim.leaseExpiresAt,
+      renewalCommand: status.blocked?.step === 'lease' ? null : `${intake} heartbeat ${submissionId}`,
+      instruction: 'Renew before source/audio review and at least every 10 minutes while claimed. After verified initialization, hand off before waiting for summary/metadata generation or Review. Never automatically reacquire an expired claim.' }
+  }
+  if (status.blocked?.reason === 'awaiting_agent_content_review') {
+    const paperDir = path.join(papersRoot, id)
+    const reviewPath = path.join(submissionDirectory(submissionId), 'listening-content-review.json')
+    status.tasks = [
+      { action: 'materialize_authoritative_dialogue_if_missing', command: `node scripts/import-pipeline/universal-nck1.mjs materialize ${id}` },
+      { action: 'review_audio_content', asrPath: path.join(paperDir, 'materialization/listening-audio/asr-v1.json'),
+        sourcePath: path.join(paperDir, 'materialization/nck1-source-materialization-v1.json'), outputPath: reviewPath,
+        instruction: 'Write a genuine listening-audio-content-review-v1 with import_agent identity, actual ASR digest and scope; never fabricate pass. Later audio remains unchecked.' },
+      { action: 'finalize_listening_after_review', command: `${intake} finalize-listening ${submissionId} --paper-id ${id} --review ${JSON.stringify(reviewPath)}` },
+      { action: 'recheck', command: `${intake} status ${submissionId}` },
+    ]
+  }
+  return status
+}
+
 function runCaptured(args, signal) {
   const script = path.isAbsolute(args[0] || '') ? args.shift() : import.meta.filename
   return runSourceIntakeChild([script, ...args], {
@@ -441,25 +526,30 @@ function runCaptured(args, signal) {
 }
 
 async function continueAutomation(submissionId, paperId) {
-  if (!paperIdPattern.test(paperId || '')) fail('continue requires --paper-id paper-…')
+  if (paperId && !paperIdPattern.test(paperId)) fail('Invalid --paper-id; omit it to resolve from the submission')
   const directory = submissionDirectory(submissionId)
   mkdirSync(directory, { recursive: true, mode: 0o700 })
   const lockPath = path.join(directory, 'continue.lock')
-  const paperLockPath = path.join(inboxRoot, `${paperId}.continue.lock`)
   let lock
   let paperLock
   let leaseKeeper = null
+  const lockPaper = async () => {
+    if (!paperId || paperLock) return
+    try { paperLock = await acquireSourceIntakeLock(path.join(inboxRoot, `${paperId}.continue.lock`)) } catch (error) {
+      if (error.message.includes('flock executable is unavailable')) throw error
+      fail(`Another continue is active for paper: ${paperId}`)
+    }
+  }
   try {
     try { lock = await acquireSourceIntakeLock(lockPath) } catch (error) {
       if (error.message.includes('flock executable is unavailable')) throw error
       fail(`Another continue is active: ${submissionId}`)
     }
-    try { paperLock = await acquireSourceIntakeLock(paperLockPath) } catch (error) {
-      if (error.message.includes('flock executable is unavailable')) throw error
-      fail(`Another continue is active for paper: ${paperId}`)
-    }
+    paperId = await resolvePaperId(submissionId, paperId)
+    await lockPaper()
     let status = await automationStatus(submissionId, paperId)
-    if (status.blocked || status.state === 'source_ready') return status
+    if (status.blocked || status.state === 'source_ready' || status.state === 'handed_off') return status
+    paperId = status.paperId
     const runStep = async (step, args) => {
       recordOperation(submissionId, step, 'started', { paperId })
       try {
@@ -486,12 +576,17 @@ async function continueAutomation(submissionId, paperId) {
       const failure = await runStep('claim', ['claim', submissionId])
       if (failure) return { submissionId, paperId, ...failure, next: 'Inspect the claim outcome before replaying.' }
       status = await automationStatus(submissionId, paperId)
+      paperId = status.paperId
     }
     if (status.next === 'download') {
       const failure = await runStep('download', ['download', submissionId])
       if (failure) return { submissionId, paperId, ...failure, next: 'Inspect the download outcome before replaying.' }
       status = await automationStatus(submissionId, paperId)
+      paperId = status.paperId
     }
+    if (status.blocked || status.state === 'handed_off') return status
+    if (!paperId) fail('Paper identity must be resolved before initialization')
+    await lockPaper()
     const maintainLease = () => maintainSourceIntakeLease(() => heartbeat(submissionId))
     if (status.next === 'init') {
       try { leaseKeeper = await maintainLease() } catch (error) {
@@ -835,6 +930,7 @@ async function initialize(submissionId, paperId) {
       args,
       { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
     )
+    recordOperation(submissionId, 'init', 'completed', { paperId })
     console.log(JSON.stringify({
       submissionId,
       paperId,
@@ -904,10 +1000,36 @@ async function needsOwner(submissionId) {
 
 async function handoff(submissionId, paperId) {
   if (!paperIdPattern.test(paperId || '')) fail('handoff requires --paper-id paper-…')
+  mkdirSync(submissionDirectory(submissionId), { recursive: true, mode: 0o700 })
+  const lock = await acquireSourceIntakeLock(path.join(submissionDirectory(submissionId), 'continue.lock'))
+  let paperLock
+  try {
+    paperLock = await acquireSourceIntakeLock(path.join(inboxRoot, `${paperId}.continue.lock`))
+    const previous = readProgress(submissionId).operations || {}
+    if (Object.values(previous).some((entry) => ['unknown', 'started'].includes(entry.state))) {
+      fail('Unresolved operation outcome; do not replay handoff')
+    }
+    if (previous.handoff?.state === 'completed') {
+      if (previous.handoff.paperId !== paperId || previous.handoff.ampThreadId !== ampThreadId()) {
+        fail('Handoff receipt identity mismatch')
+      }
+      console.log(JSON.stringify(await automationStatus(submissionId, paperId), null, 2))
+      return
+    }
+    await performHandoff(submissionId, paperId)
+  } finally {
+    if (paperLock) await paperLock.release()
+    await lock.release()
+  }
+}
+
+async function performHandoff(submissionId, paperId) {
   const claimReceipt = readClaim(submissionId)
   const downloadManifest = readDownloadManifest(submissionId)
   const initialization = initializationReceipt(downloadManifest, paperId)
-  const result = await api(
+  recordOperation(submissionId, 'handoff', 'started', { paperId, ampThreadId: ampThreadId() })
+  let result
+  try { result = await api(
     `/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}/handoff`,
     {
       method: 'POST',
@@ -915,18 +1037,29 @@ async function handoff(submissionId, paperId) {
       body: JSON.stringify({ paperId, initialization }),
     },
     { lease: claimReceipt.leaseToken },
-  )
+  ) } catch (error) {
+    recordOperation(submissionId, 'handoff', 'unknown', { paperId, detail: error.message })
+    throw error
+  }
+  if (result.intake?.state !== 'handed_off') fail('Handoff response did not confirm completion; reconcile before retrying')
+  recordOperation(submissionId, 'handoff', 'completed', { paperId, ampThreadId: ampThreadId(),
+    submissionDigest: downloadManifest.submission.submissionDigest })
   rmSync(receiptPath(submissionId), { force: true })
   console.log(JSON.stringify({
     submissionId,
     state: result.intake.state,
-    paperId: result.intake.handedOffPaperId,
+    paperId,
+    nextCommand: `node scripts/import-pipeline/review.mjs preflight ${paperId}`,
   }, null, 2))
 }
 
 async function main() {
   const command = process.argv[2]
   const submissionId = process.argv[3]
+  if (process.argv.includes('--help')) {
+    console.log('Usage: source-intake.mjs status|continue <submissionId> [--paper-id paper-…]\nStart with status using only submissionId; follow nextCommand. Identity is resolved from the immutable snapshot/download. handoff precedes Review push; no automatic approval, publication or reclaim.')
+    return
+  }
   if (command === 'list') await list()
   else if (command === 'claim') await claim(validSubmissionId(submissionId))
   else if (command === 'download') await download(validSubmissionId(submissionId))

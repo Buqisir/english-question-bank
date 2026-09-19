@@ -7,8 +7,10 @@
 
 任意 Amp Project Orb 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
 项目级 `importing-nck1-papers` skill 会在导题、继续某卷、审核返工、状态查询和
-认可后上线准备任务中自动触发；Owner 不需要记命令。Agent 每次先运行只读
-`review.mjs preflight <paperId>`，再从返回的唯一状态恢复。
+认可后上线准备任务中自动触发；Owner 不需要记命令。台账 submission 先运行只读
+`node scripts/import-pipeline/source-intake.mjs status <submissionId>`，无需 paperId。
+已有 off-ledger 卷或 handoff 后运行 `review.mjs preflight <paperId>`，
+再从返回的唯一状态恢复。
 
 所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③。`init` 为新 raw source 写入
 `config.importProfile: "public-paper-v1"`；listening supplement hydration、历史工作区和
@@ -77,8 +79,13 @@ node scripts/import-pipeline/review.mjs push <paperId>
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
 
-Webhook worker 接卷后按程序边界操作：对通知的 submission ID + paperId 先运行只读
-`source-intake.mjs status`，再显式运行 `source-intake.mjs continue`。程序串行完成并恢复
+Webhook worker 接卷后只凭 submission ID 运行只读 `source-intake.mjs status <submissionId>`，
+不搜索、猜测或向 Owner 索要 paperId。按返回的 `nextCommand` 显式运行 continue。
+claim 后从不可变 snapshot 确定身份：原始新卷固定使用 `paper-<submission UUID>`；
+补充/纠错使用 `targetPaperId`；新 analyzed_package 下载并校验归档后读取 `package.json.paperId`，
+仍需完整包准备器校验，不把身份发现当作内容验收。已有 progress 的 paperId 必须保留；
+`--paper-id` 仅用于兼容明确的既有工作区，不得用占位 ID 或覆盖 target/package 身份。
+程序串行完成并恢复
 claim、download、init 及普通源 materialize/preflight，只复用摘要绑定的完整收据；返回
 `source_ready` 或确切 blocker 后停止。不要用模型手工复制下载、摘要校验、文档提取、OCR
 或音频检查。`init` 返回歧义、缺件或 `needs_owner` 时即停并报告确切待办；除非当前任务
@@ -87,10 +94,19 @@ claim、download、init 及普通源 materialize/preflight，只复用摘要绑�
 `universal-nck1.mjs` 的 preflight/materialize 及既有 OCR、媒体和听力程序。
 只读 status 不安装、不 heartbeat、不写 receipt。未知 claim/远端结果、半成品、源漂移、
 paper/thread 错绑或 lease 丢失都失败关闭且不自动重放；continue 自身不发送 needs-owner、
-handoff 或任何 Review 终态。
+handoff 或任何 Review 终态。`next` 保留阶段名，`nextCommand` 才是可执行的下一步。
+本标准接卷任务包括 status 验证 initialization receipt 后提供的显式 `handoffCommand`：
+它必须在 Review push 和等待摘要/metadata 生成之前执行。handoff 仅结束领取租约并关联工作区，
+不是源审查通过、Review 认可或上线；即使尚有 source_review 待办也必须继续完成那些门禁。
+成功后 status/continue 返回 `handed_off` 和 Review preflight 命令，不重新 claim。
+handoff 响应丢失保留 started/unknown 证据，不重放，不通过删除记录恢复。
+领取期间 `lease` 返回 expiresAt 与 renewalCommand；在源/音频审阅前及每 10 分钟续租，
+暂停或过期后先核对，不自动重新领取。summary/metadata 与 Owner Review 在 handoff 后进行，
+不保持 source-intake 租约。听力尚未形成初始化收据前仍需有限租约；不得为提前 handoff 伪造审查。
 听力内容检查由导题 Agent 审阅绑定的 ASR 与源材料证据，提交真实的
 `listening-audio-content-review-v1`（`reviewedBy: import_agent`），再显式运行
 `source-intake.mjs finalize-listening <submissionId> --paper-id <paperId> --review <review.json>`。
+`status.tasks` 提供 ASR/源材料路径、真实内容审阅输出路径、finalize 命令和复查命令。
 程序负责比对与门禁；失败不能改写为 pass，也不因 CLI 暂停就把常规听力检查交给 Owner。
 OCR 提取校对仍由 Agent 完成，但当前 web `confirm-ocr` 接口明确拒绝 import_agent，
 只能拉取 Owner 确认收据。这是尚未消除的源证据权限限制，不是最终 layout_only 审核，

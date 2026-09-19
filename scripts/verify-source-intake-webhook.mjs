@@ -34,7 +34,9 @@ for (const text of [payload.submissionId, payload.submissionDigest, 'source-inta
   'do not substitute another mode', 'Follow docs/import/agent-contract.md',
   'stop on any validator failure', 'genuine import_agent review', 'OCR confirmation remains Owner-only',
   'Never transfer claim receipts or submission workspaces', 'replacement coordinator thread',
-  'Do not send needs-owner or handoff']) assert.ok(prompt.includes(text), text)
+  'Do not send needs-owner', 'with only the assigned submissionId', 'handoffCommand',
+  'lease.renewalCommand', 'validated archive package.json paperId']) assert.ok(prompt.includes(text), text)
+assert.ok(!prompt.includes('status <submissionId> --paper-id'), 'first status must not need an unknown paper ID')
 
 const env = {
   QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED: '1',
