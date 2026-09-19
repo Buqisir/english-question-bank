@@ -66,7 +66,46 @@ producing an undownloadable artifact. A missing/corrupt chunk never becomes a
 partially restored environment. Download only missing pieces; reuse the verified
 whole archive when present.
 
-After placing the manifest's files in one input directory:
+## Automatic receiver: no hand-built file list
+
+Fetch run metadata and artifact metadata using the authorized GitHub connector;
+save the run object as `run.json` and the `{"artifacts": [...]}` object as
+`artifacts.json`. These are trusted API responses, not a request to the Owner
+for copied files or credentials. Verify the small manifest ZIP against its
+GitHub artifact digest before extracting the tooling and `manifest.json`.
+
+```sh
+python3 transport.py needed inputs --run run.json --artifacts artifacts.json \
+  --target <verified-target-sha> --base <verified-base-sha> \
+  --bridge <verified-bridge-sha> --cache /mnt/data/eqb-archive-cache > download-plan.json
+```
+
+`required` contains only missing artifacts and their exact connector download
+arguments. `reused` and `downloadBytes` explain the transfer before any download.
+A complete local renderer avoids all three large chunk downloads. Run identity,
+repository, event, branch, workflow, attempt, expiration and artifact provenance
+are checked; missing or ambiguous metadata fails closed. Re-fetch the latest run
+before reuse: a saved snapshot is evidence of that read, not a permanent claim
+about the latest attempt.
+
+For each required entry, call `download_workflow_artifact` with the generated
+arguments, then use the actual mounted ZIP path returned by that call:
+
+```sh
+python3 transport.py ingest inputs --plan download-plan.json \
+  --artifact-id <requested-id> --archive <actual-mounted-zip> \
+  --cache /mnt/data/eqb-archive-cache
+```
+
+Ingest checks the outer ZIP digest and size, allows only its one expected regular
+member, then checks the inner payload digest and size. Traversal, symlinks, extra
+entries, stale plans and different existing files are rejected. Valid archives
+are cached by content digest. Copies, not writable hardlinks, keep changes to
+an input file from corrupting that archive cache. No signed URL or token is
+written into the plan; the receiver never makes its own authenticated HTTP calls.
+This is resumable on-demand retrieval, not a background service or persistent mount.
+
+After the receiver has staged the manifest's files in one input directory:
 
 ```sh
 python3 transport.py assemble inputs
@@ -99,7 +138,15 @@ so it also is not a VM or a claim of bit-identical hosted rendering.
 PRoot is NOT a security boundary for untrusted code. Run only owner-authorized
 repository work inside the existing ChatGPT isolation; never bind production,
 SSH directories or host credentials. The command gets a minimal environment,
-private HOME/TMP, bounded runtime and its own process group. Its own exit-code
+private HOME/TMP, bounded runtime and its own process group. Daily pack execution
+inside this receiver defaults to `VERIFY_CONCURRENCY=1`; an explicit `--jobs`
+argument can select another count. This serializes checks, not their assertions,
+and does not change hosted CI. Every command reports cgroup memory limits,
+current usage, CPU quota and before/after OOM-kill counters. These counters cover
+the entire sandbox, so an increment is evidence of resource pressure during the
+command, not independent proof that a specific process was killed. Missing
+cgroup data stays unknown. A resource warning never converts a failure to PASS.
+Its own exit-code
 receipt prevents a lingering child or PRoot's last-child status from masking
 failure. On completion/timeout only that group is terminated; no global pkill.
 
@@ -119,3 +166,22 @@ Bridge contract tests are `python3 -m unittest discover -s scripts/sandbox -v`.
 They are run by the bridge workflow only; they do not expand the daily registry.
 Changes to this workflow require high-risk review before merging into main.
 No main merge is necessary to use the already owner-authorized tooling branch.
+
+## Verified sandbox evidence (2026-09-19)
+
+The render profile from bridge commit `e8b223b6da80cc77b98c0e79ecbf335e3a6446d1`
+(run `35373365486`, attempt 1) was actually restored in ChatGPT on Linux x86_64
+with host glibc 2.41. Its exact source/base was
+`95881993c1eb7781878f66557134223938679c6b`. The 11 capability probes passed,
+including bundled Chromium 148.0.7778.96 click/screenshot/PDF, LibreOffice
+24.2.7.2 DOCX conversion, ImageMagick 6.9.12-98, Poppler, Ghostscript, FFmpeg,
+SQLite 3.45.1 and the native argon2 addon. The product source remained clean.
+This establishes receiver execution, not only successful Actions packaging.
+
+The automatic receiver was also exercised against those real artifacts: a
+complete local input set requested zero bytes; with only the launcher absent it
+selected just artifact `10559585863` (1,438,016 ZIP bytes), checked and ingested it,
+and then requested zero bytes. Unit tests additionally exercise bad provenance,
+corruption and archive attacks. Product/Full results must still be reported
+separately on the exact tested candidate; source transport never supplies merge
+or deployment authority.

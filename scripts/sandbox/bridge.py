@@ -250,9 +250,34 @@ def restore(args):
         raise
 
 
+def resource_snapshot(root='/sys/fs/cgroup'):
+    """Best-effort cgroup-v2 diagnostics. Counters cover this sandbox, not only our command."""
+    root = Path(root)
+    result = {'scope': 'sandbox-cgroup', 'memoryLimitBytes': None, 'memoryCurrentBytes': None,
+              'memoryEvents': {}, 'cpuQuota': None}
+    for name, key in [('memory.max', 'memoryLimitBytes'), ('memory.current', 'memoryCurrentBytes')]:
+        try:
+            value = (root / name).read_text().strip()
+            if value != 'max': result[key] = int(value)
+        except (OSError, ValueError):
+            pass
+    try:
+        result['memoryEvents'] = {name: int(value) for name, value in
+                                  (line.split() for line in (root / 'memory.events').read_text().splitlines())}
+    except (OSError, ValueError):
+        pass
+    try:
+        quota, period = (root / 'cpu.max').read_text().split()
+        if quota != 'max': result['cpuQuota'] = int(quota) / int(period)
+    except (OSError, ValueError, ZeroDivisionError):
+        pass
+    return result
+
+
 def run(args):
     state = json.loads(Path(args.state).read_text())
     require(args.command, 'missing command after --')
+    require(type(args.timeout) is int and 0 < args.timeout <= 7200, 'timeout must be 1..7200 seconds')
     work = Path(state['workspace']).resolve()
     runtime = Path(state['layers']['node']) / 'runtime'
     require(git(work, 'rev-parse', 'HEAD') == state['manifest']['targetSha'], 'HEAD changed; create a new state before changing commits')
@@ -260,7 +285,8 @@ def run(args):
     (session / 'home').mkdir(); (session / 'tmp').mkdir()
     receipt = session / 'exit-code'
     env = {'HOME': str(session / 'home'), 'TMPDIR': str(session / 'tmp'),
-           'PATH': str(runtime / 'bin') + ':/usr/local/bin:/usr/bin:/bin', 'LANG': 'C.UTF-8', 'TZ': 'UTC'}
+           'PATH': str(runtime / 'bin') + ':/usr/local/bin:/usr/bin:/bin', 'LANG': 'C.UTF-8', 'TZ': 'UTC',
+           'VERIFY_CONCURRENCY': '1'}
     if args.engine == 'native':
         command = args.command
     else:
@@ -277,9 +303,11 @@ def run(args):
                    '-b', str(session / 'tmp') + ':/tmp', '-b', str(tooling) + ':/opt/eqb-tooling',
                    '-w', '/workspace', '/usr/bin/env', '-i', 'HOME=/root', 'TMPDIR=/tmp',
                    'PATH=/runtime/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-                   'LANG=C.UTF-8', 'TZ=UTC', 'PLAYWRIGHT_BROWSERS_PATH=/opt/eqb-browsers',
+                   'LANG=C.UTF-8', 'TZ=UTC', 'VERIFY_CONCURRENCY=1', 'PLAYWRIGHT_BROWSERS_PATH=/opt/eqb-browsers',
                    '/bin/bash', '-c', '"$@"; rc=$?; printf "%s\\n" "$rc" > /opt/eqb-state/exit-code; exit "$rc"',
                    'eqb-command', *args.command]
+    resources_before = resource_snapshot()
+    print('SANDBOX_RESOURCES ' + json.dumps(resources_before), flush=True)
     started = time.monotonic()
     process = subprocess.Popen(command, cwd=work, env=env, start_new_session=True)
     result = 125
@@ -307,10 +335,16 @@ def run(args):
             if sig == signal.SIGTERM:
                 time.sleep(0.5)
         process.wait()
+        resources_after = resource_snapshot()
+        before_oom = resources_before['memoryEvents'].get('oom_kill')
+        after_oom = resources_after['memoryEvents'].get('oom_kill')
+        oom_delta = after_oom - before_oom if before_oom is not None and after_oom is not None else None
         report = {'engine': args.engine, 'targetSha': state['manifest']['targetSha'],
                   'command': args.command, 'exitCode': result,
                   'elapsedSeconds': round(time.monotonic() - started, 3),
-                  'host': platform.platform(),
+                  'host': platform.platform(), 'verifyConcurrencyDefault': 1,
+                  'resourcesBefore': resources_before, 'resourcesAfter': resources_after,
+                  'sandboxOOMKillDelta': oom_delta,
                   'worktreeStatus': git(work, 'status', '--porcelain'),
                   'trackedDiffSha256': hashlib.sha256(subprocess.check_output(['git', '-C', str(work), 'diff', '--binary', 'HEAD'])).hexdigest(),
                   'receipt': str(receipt) if receipt.exists() else None}
