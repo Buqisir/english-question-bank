@@ -86,13 +86,13 @@ after changing this boundary.
 SQLite remains authoritative: a missed, duplicated, or delayed webhook cannot create a second
 active claim or a second bound worker.
 
-New coordinators inherit the built-in `medium` mode, including its current Amp-controlled
-model selection; the plugin does not pin a provider, model, or reasoning effort. They
-delegate staged generation to normal Low + fast project threads, without
-Oracle or the experimental Grok analysis tool. This change does not switch the
-mode of existing claims or move them. Provider routing and subscription billing
-remain Amp-controlled and need a real-run usage check. Existing bound
-threads resume unchanged; this configuration applies to newly created workers.
+New intake workers use built-in `low` with `features: []` and an explicit Import project.
+The repository does not pin a provider, model, or reasoning effort. New public-paper
+summary/search generation follows the same native Low configuration; Low + fast applies
+only to the retained historical analysis profile. This change does not switch the mode
+of existing claims or move them. Provider routing and subscription billing remain
+Amp-controlled and need a real-run usage check. Existing bindings require a separate
+recovery decision; a webhook never automatically resumes them.
 
 The plugin is inert by default. Activating it is a separate shared-state operation and requires
 current Owner approval. Enable it only in the dedicated owning Orb thread, not in every local Amp
@@ -109,26 +109,39 @@ After an approved plugin reload, explicitly run the command-palette action
 private `QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_URL`; configure the same HMAC secret as
 `QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET`. Never commit or log any of those values.
 
-The server reserves each immutable submission before the plugin creates an empty private project
-Orb. The plugin durably binds the returned Amp thread id before appending the first prompt. A crash
-before bind therefore leaves only an inert, unprompted Orb; a repeated delivery resumes the one
-bound thread. `scripts/import-pipeline/source-intake.mjs` sends `AMP_THREAD_ID` on every claim and
-lease operation. The Agent token cannot approve Review content or promote a paper. No import runs
-inside the 30-second webhook handler.
+The webhook only appends a dispatch wakeup to the fixed Import controller
+`T-01a057c0-ecc9-745c-aaa7-a51dddb22306`. It never creates a worker or calls reserve/bind.
+The controller follows the explicit-project dispatch procedure in `docs/import/agent-contract.md`:
+reserve, persist the one-shot creation intent, call `create_thread` with an explicit project,
+verify exported metadata, bind, reconcile read-only, then issue the assignment once.
+The bootstrap turn runs, but has no source assignment; it is not an inert or unprompted Orb.
+`scripts/import-pipeline/source-intake.mjs` still sends `AMP_THREAD_ID` on every claim and lease
+operation. The Agent token cannot approve Review content or promote a paper.
 
 The enabled plugin fails closed unless `AMP_PROJECT_ID` is exactly
 `72c5d9ea-c2e7-42e8-b51e-0b22b9b23732`, the project ref
 `user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import`. The current plugin API does not
-accept a `project` option on `createThread`; project threads inherit the project that owns the
-webhook registration. A mismatch is rejected before agent creation, webhook registration, reserve,
-or worker creation. Deployment must still verify the live capability URL is registered by that
-project; repository code alone cannot prove current URL ownership.
+accept a `project` option on `createThread`. The guard checks the controller, not the created
+worker: an observed Import-controller delivery produced a worker whose exported `meta.projectID`
+was the ordinary repository project. Do not assume registration ownership pins worker project.
+A project or fixed-controller mismatch is rejected before webhook registration. Actual worker
+project selection uses the supported `create_thread` tool, not the plugin API. Before binding,
+the dispatcher checks the exported thread's exact project ID, native Low mode, empty features,
+private visibility, and absence of a custom agent definition.
+
+New workers and summary/search requests use `agent_mode: low`, explicit Import project,
+and `features: []`. Model and reasoning configuration come from
+Amp's built-in Low, not a custom DeepSeek pin or a registered duplicate mode. This mode change
+does not alter existing bound thread definitions. Existing bindings, paused work, and unknown
+operations are not automatically resumed or replaced. The private dispatch journal stays in
+`.scratch/source-intake-dispatch`; retain it across updates and never copy or delete it to retry.
+Deploy and verify the read-only worker-status endpoint before activating this new controller flow.
 
 ### Import worker Orb size
 
-The plugin API's `createThread` contract accepts `executor: 'orb'` but no per-thread `orbSize`.
-Automatic import workers therefore inherit the Amp Project's default Orb size. Run this plugin in
-a dedicated `english-question-bank-import` Project with the Owner's `a1.medium` default;
+The dispatcher leaves `orb_size` unset to use the explicitly selected Import project's default.
+Do not infer the worker's project or size solely from the controller's project. Run this plugin in
+the fixed controller of `english-question-bank-import` with the Owner's `a1.medium` default;
 changing the default affects only new threads and does not resize an existing worker.
 Keep the import Project separate from the dedicated CI and deployment Orbs so their credentials,
 lifecycle, and workload remain isolated. The `importing-nck1-papers` skill checks actual processor

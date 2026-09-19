@@ -1,15 +1,14 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 
-// @amp-agent-mode {"key":"eqbank-import-low","label":"EQBank Import Low"}
-
 const SCHEMA_VERSION = 'eqbank-source-intake-wakeup-v1'
 const SUBMISSION_ID = /^submission-[a-f0-9-]{36}$/
 const SUBMISSION_DIGEST = /^sha256:[a-f0-9]{64}$/
 const EXPECTED_KEYS = ['event', 'schemaVersion', 'submissionDigest', 'submissionId']
 const IMPORT_PROJECT_ID = '72c5d9ea-c2e7-42e8-b51e-0b22b9b23732'
 const IMPORT_PROJECT_REF = 'user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import'
+const IMPORT_CONTROLLER_THREAD_ID = 'T-01a057c0-ecc9-745c-aaa7-a51dddb22306'
 
-export const description = 'Creates or resumes one private project Orb for a verified source intake.'
+export const description = 'Wakes the fixed Import dispatcher for verified source intake; never creates an Orb in the webhook.'
 
 export function parseSourceIntakeWakeup(body) {
   let payload
@@ -48,12 +47,13 @@ export function sourceIntakeAgentPrompt({ submissionId, submissionDigest }) {
     `Expected submission digest: ${submissionDigest}`,
     '',
     'Work in this project Orb repository checkout and preserve unrelated changes.',
+    'Follow docs/import/agent-contract.md. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
     'First run source-intake.mjs status <submissionId> --paper-id <paperId>, then use its explicit continue command to perform only verified claim/download/init/source-materialization steps. Read the single JSON result and stop at its blocker or source_ready state.',
     'The CLI sends this thread’s AMP_THREAD_ID on every lease operation; never copy the source files or claim receipt to another thread.',
     'Do not send needs-owner or handoff merely because automation stopped; report the exact pending decision unless this task explicitly includes and semantically justifies that remote transition.',
     'After download, inspect the immutable submission snapshot mode. For listening_supplement, use its exact targetPaperId and hydrate that existing Review paper; never invent a new paperId. For analyzed_package corrections use the exact targetPaperId; for a new package or new_paper choose a valid new paperId.',
     'The continue command must keep analyzed_package on deterministic package preparation and must never invoke OCR, extraction, or model fallback. For raw-source listening review, inspect the bound ASR/content evidence and explicitly finalize-listening with a genuine import_agent review; never fabricate pass evidence. OCR confirmation remains Owner-only: report that precise access blocker, never impersonate the Owner or bypass confirmation.',
-    'New raw-source workspaces use public-paper-v1: do not dispatch the nine teaching analyses. After source review, prepare and verify both paragraph-summaries-v1.json and public-search-metadata-v1.json with review.mjs prepare-summaries/verify-summaries and prepare-search-metadata/finalize-search-metadata/verify-search-metadata. For either explicit generation request, use one eqbank-import-low thread (Low with DeepSeek 4.1 pinned) with features: [] and only that request. Never transfer claim receipts or submission workspaces. If the mode or model is unavailable, stop; do not substitute another model, enable fast, or call Oracle/Task for generation.',
+    'New raw-source workspaces use public-paper-v1: do not dispatch the nine teaching analyses. After source review, prepare and verify both paragraph-summaries-v1.json and public-search-metadata-v1.json with review.mjs prepare-summaries/verify-summaries and prepare-search-metadata/finalize-search-metadata/verify-search-metadata. For either explicit generation request, use one built-in Low thread with agent_mode: low, features: [], explicit Import project, and only that request. Use Low configuration as provided by Amp; do not pin a model or reasoning effort. Never transfer claim receipts or submission workspaces. If Low is unavailable, stop; do not substitute another mode, enable fast, or call Oracle/Task for generation.',
     'Do not edit the Owner draft, invent answers, approve review, publish locally, ship, deploy, mutate production, or create a replacement coordinator thread.',
   ].join('\n')
 }
@@ -69,44 +69,15 @@ function importOpsSettings() {
   }
 }
 
-async function workerApi(settings, submissionId, operation, body, signal) {
-  const response = await fetch(
-    `${settings.origin}/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}`
-      + `/orb-worker/${operation}`,
-    {
-      method: 'POST',
-      headers: {
-        authorization: `Bearer ${settings.token}`,
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(body),
-      signal,
-    },
-  )
-  const result = await response.json().catch(() => null)
-  if (!response.ok) {
-    throw new Error(`Source-intake worker API ${operation} failed (${response.status} ${result?.code || 'unknown'})`)
-  }
-  return result?.worker
-}
-
-function assertWorkerResponse(worker, payload, expectedAction = null) {
-  if (
-    !worker
-    || worker.submissionId !== payload.submissionId
-    || worker.submissionDigest !== payload.submissionDigest
-    || (expectedAction && worker.action !== expectedAction)
-  ) {
-    throw new Error('Source-intake worker API returned a mismatched identity')
-  }
-  return worker
-}
-
-async function appendPrompt(thread, payload) {
-  await thread.appendUserMessage({
-    type: 'user-message',
-    content: sourceIntakeAgentPrompt(payload),
-  }, { steer: true })
+export function sourceIntakeDispatchPrompt(payload, eventId) {
+  return [
+    'Verified source-intake dispatch wakeup. This is not permission to import in the controller.',
+    JSON.stringify({ ...payload, webhookEventId: eventId }),
+    'Follow docs/import/agent-contract.md explicit-project dispatch procedure. Run source-intake-dispatch.mjs prepare with this submission/digest/event, then inspect status.',
+    'Only after begin-create returns a create_thread request may you execute that exact request once. It specifies built-in Low, features: [], and the Import project. The bootstrap receives no source assignment.',
+    'Bind the returned thread via the dispatch CLI, which verifies exported project/mode/privacy. Then run status; only startable:true permits take-assignment. Send the returned assignment once to its exact boundIdentity. A lost take-assignment or send response requires read-only reconciliation, not another send. Do not reconstruct an assignment manually.',
+    'On duplicate, busy, unknown, lost response, wrong project or paused task: stop and reconcile read-only. Never recreate/rebind a worker or replay a mutation. Respect existing Owner pauses. Do not claim, download, import or promote in this controller.',
+  ].join('\n')
 }
 
 export default async function sourceIntakeWakeupPlugin(amp) {
@@ -128,19 +99,10 @@ export default async function sourceIntakeWakeupPlugin(amp) {
     return
   }
 
-  const agent = amp.createAgent({
-    extends: 'low',
-    model: 'deepseek/deepseek-v4.1-flash',
-    reasoningEffort: 'high',
-    features: [],
-    instructions: 'Follow docs/import/agent-contract.md. New raw sources use public-paper-v1 with paragraph summaries and compact public search metadata, never the nine teaching analyses. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
-  })
-  amp.registerAgentMode({
-    key: 'eqbank-import-low',
-    label: 'EQBank Import Low',
-    description: 'Low behavior with DeepSeek 4.1, without fast, for bounded import requests.',
-    agent: agent.definition,
-  })
+  if (process.env.AMP_THREAD_ID !== IMPORT_CONTROLLER_THREAD_ID) {
+    amp.logger.log('Source-intake wakeup is restricted to the fixed Import controller; no webhook registered.')
+    return
+  }
   const registration = await amp.createWebhook({
     key: 'eqbank-source-intake-queued-v1',
     headers: ['x-eqbank-signature'],
@@ -158,49 +120,10 @@ export default async function sourceIntakeWakeupPlugin(amp) {
         return
       }
 
-      const reserved = assertWorkerResponse(await workerApi(
-        settings,
-        payload.submissionId,
-        'reserve',
-        {
-          submissionDigest: payload.submissionDigest,
-          webhookEventId,
-        },
-        context.signal,
-      ), payload)
-      if (reserved.action === 'busy') return
-      if (reserved.action === 'resume') {
-        if (!reserved.ampThreadId) {
-          throw new Error('Bound source-intake worker has no Amp thread identity')
-        }
-        await appendPrompt(amp.threads.get(reserved.ampThreadId), payload)
-        return
-      }
-      if (reserved.action !== 'create' || !reserved.reservationToken) {
-        throw new Error('Source-intake worker reservation action is invalid')
-      }
-
-      const thread = await agent.createThread({
-        executor: 'orb',
-        features: [],
-        multiplayerTTLSeconds: null,
-        visibility: 'private',
-      })
-      const binding = assertWorkerResponse(await workerApi(
-        settings,
-        payload.submissionId,
-        'bind',
-        {
-          submissionDigest: payload.submissionDigest,
-          reservationToken: reserved.reservationToken,
-          ampThreadId: thread.id,
-        },
-        context.signal,
-      ), payload)
-      if (binding.ampThreadId !== thread.id || binding.state !== 'bound') {
-        throw new Error('Source-intake worker bind did not confirm the created Amp thread')
-      }
-      await appendPrompt(thread, payload)
+      await amp.threads.get(IMPORT_CONTROLLER_THREAD_ID).appendUserMessage({
+        type: 'user-message',
+        content: sourceIntakeDispatchPrompt(payload, webhookEventId),
+      }, { steer: true })
     },
   })
 

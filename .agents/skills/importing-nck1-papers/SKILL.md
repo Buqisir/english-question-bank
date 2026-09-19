@@ -15,19 +15,18 @@ questions, authoritative answers, numbering, media and locators. After source
 review, run `review.mjs prepare-summaries <paperId> --output <request.json>`.
 It works before the sidecar exists and emits exact IDs/digests, schema, prompt,
 full target groups, authoritative answers and paragraph targets. If generation
-is needed, send only this request to one `eqbank-import-low` thread with `features: []`;
+is needed, send only this request to one built-in `low` thread with `features: []`;
 do not make a model call implicitly. Save its JSON as `paragraph-summaries-v1.json`
 and run `review.mjs verify-summaries <paperId>`. Then run the implemented compact
 metadata sequence: `prepare-search-metadata <paperId> --output <request.json>`,
-send that explicit request to one `eqbank-import-low` thread with `features: []` when
+send that explicit request to one built-in `low` thread with `features: []` when
 generation is needed, `finalize-search-metadata <paperId> --input <authored.json>`,
 and `verify-search-metadata <paperId>`. The required files are
 `paragraph-summaries-v1.json` and `public-search-metadata-v1.json`.
 
-`eqbank-import-low` is the project plugin's Low prompt/tools configuration pinned
-to `deepseek/deepseek-v4.1-flash`, without fast. Use this mode for both requests,
-not unpinned built-in Low or Medium. Keep the explicit Import Project and
-`features: []`. If unavailable, stop without model fallback or Oracle/Task calls.
+Use Low's own Amp-provided model and reasoning configuration, without a custom
+model/effort pin or a duplicate agent mode. Keep the explicit Import Project and
+`features: []`. If Low is unavailable, stop without mode fallback or Oracle/Task calls.
 Existing bound coordinators retain their identity and configuration.
 
 The agent handles OCR transcription checks and listening content review. For a

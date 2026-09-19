@@ -1224,6 +1224,22 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     }))
   }
 
+  function orbWorkerStatus(submissionId, submissionDigest) {
+    return withDb(false, (db) => {
+      assertSubmissionForWorker(db, submissionId, submissionDigest)
+      const worker = workerRow(db.prepare(`
+        SELECT * FROM source_intake_orb_workers WHERE submission_id = ?
+      `).get(submissionId))
+      return {
+        state: worker?.state || 'unreserved',
+        submissionId,
+        submissionDigest,
+        ampThreadId: worker?.ampThreadId || null,
+        reservationExpiresAt: worker?.reservationExpiresAt || null,
+      }
+    })
+  }
+
   function bindOrbWorker(submissionId, input, actor) {
     const submissionDigest = requiredString(input?.submissionDigest, 'submissionDigest', 80)
     const reservationToken = requiredString(input?.reservationToken, 'reservationToken', 100)
@@ -1590,6 +1606,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     recordNotification,
     registerFile,
     reserveOrbWorker,
+    orbWorkerStatus,
     storedFilePath,
     submitIntake,
     updateIntake,

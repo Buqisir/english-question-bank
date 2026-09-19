@@ -264,6 +264,22 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
     context.sendJson(response, 200, { submissions: store.listQueue() })
   })))
 
+  routes.push(defineRoute('GET', /^\/api\/import-agent-source-intakes\/([^/]+)\/orb-worker$/, route(({
+    request,
+    response,
+    context,
+    match,
+    url,
+  }) => {
+    if (!agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    context.sendJson(response, 200, {
+      worker: store.orbWorkerStatus(match[1], url.searchParams.get('submissionDigest')),
+    })
+  })))
+
   routes.push(defineRoute('POST', /^\/api\/import-agent-source-intakes\/([^/]+)\/orb-worker\/reserve$/, route(async ({
     request,
     response,
