@@ -1,116 +1,69 @@
 #!/usr/bin/env node
-
-// chromiumPool lifecycle regression guard (Detail bug #368).
-//
-// getContext() must never let a live Chromium process become unreachable:
-//   - a connection-preserving newContext() failure (method-level CDP errors
-//     such as Target.createBrowserContext) leaves the browser connected with
-//     no context — the pool must close that browser, not keep a dead-end
-//     reference that the next acquire would overwrite;
-//   - the acquire after a failure must launch exactly one new browser and
-//     recover normally.
-//
-// playwright-core is stubbed at the module-cache seam: chromiumPool resolves
-// it via createRequire anchored inside server/, so patching the same cached
-// module object controls what launchBrowser() returns.
-
+// PR #455 / Detail #368: a newContext failure must not orphan a live browser.
+import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
-import path from 'node:path'
-import { fileURLToPath, pathToFileURL } from 'node:url'
-
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const require = createRequire(pathToFileURL(path.join(root, 'server', 'anchor.js')))
+const require = createRequire(new URL('../server/package.json', import.meta.url))
 const playwright = require('playwright-core')
-
+const originalChromium = playwright.chromium
+const launches = []
 let passed = 0
-function assert(name, condition, detail = '') {
-  if (!condition) {
-    throw new Error(`${name}${detail ? `\n${detail}` : ''}`)
-  }
+function check(name, condition) {
+  assert.ok(condition, name)
   passed += 1
   console.log(`ok - ${name}`)
 }
-
-function makeBrowser({ connectable = true, newContextImpl }) {
-  const stats = { newContextCalls: 0, closeCalls: 0 }
-  const browser = {
+function makeBrowser({ error = null, closeError = null } = {}) {
+  const stats = { contexts: 0, closes: 0 }
+  return {
     stats,
-    isConnected: () => connectable,
-    newContext: async () => {
-      stats.newContextCalls += 1
-      return newContextImpl()
+    isConnected: () => true,
+    on() {},
+    async newContext() {
+      stats.contexts += 1
+      if (error) throw error
+      return { newPage: async () => ({ close: async () => {} }) }
     },
-    on: () => {},
-    close: async () => {
-      stats.closeCalls += 1
+    async close() {
+      stats.closes += 1
+      if (closeError) throw closeError
     },
   }
-  return browser
 }
-
-const makeContext = () => ({
-  newPage: async () => ({ close: async () => {} }),
-})
-
-const launches = []
-const realLaunch = playwright.chromium.launch
-playwright.chromium = {
-  ...playwright.chromium,
-  launch: async () => {
-    const next = launches.shift()
-    if (!next) throw new Error('test exhausted its scripted launches')
-    return next
-  },
-}
-
+playwright.chromium = { launch: async () => {
+  const next = launches.shift()
+  assert.ok(next, 'no unexpected relaunch')
+  return next
+} }
 const { withChromiumPage, closeChromiumPool, isChromiumPoolWarm } =
   await import('../server/draft-paper/chromiumPool.mjs')
-
 try {
-  const firstBrowser = makeBrowser({
-    newContextImpl: async () => {
-      throw new Error('Target.createBrowserContext: method-level failure (connection preserved)')
-    },
-  })
-  const secondBrowser = makeBrowser({ newContextImpl: async () => makeContext() })
-  launches.push(firstBrowser, secondBrowser)
-
-  // Acquire 1: launch succeeds, newContext() rejects with the browser still
-  // connected — the connection-preserving failure class from the report.
-  let firstError = null
-  await withChromiumPage(() => {}).catch((error) => {
-    firstError = error
-  })
-  assert('connection-preserving newContext failure still reaches the caller', /createBrowserContext/u.test(firstError?.message || ''))
-  assert(
-    'the failed-acquire browser is closed, not orphaned',
-    firstBrowser.stats.closeCalls === 1,
-    `closeCalls=${firstBrowser.stats.closeCalls}`,
-  )
-  assert('pool reports cold after the torn-down acquire', !isChromiumPoolWarm())
-
-  // Acquire 2: the pool relaunches once and serves a working page.
+  const originalError = new Error('Target.createBrowserContext failed while connected')
+  const failed = makeBrowser({ error: originalError })
+  const recovered = makeBrowser()
+  launches.push(failed, recovered)
+  const caught = await withChromiumPage(() => {}).catch((error) => error)
+  check('the original context error reaches the caller', caught === originalError)
+  check('failed-acquire browser is closed exactly once', failed.stats.closes === 1)
+  check('pool is cold after context creation failure', !isChromiumPoolWarm())
   let taskRan = false
-  await withChromiumPage(() => {
-    taskRan = true
-  })
-  assert('next acquire relaunches exactly one browser', launches.length === 0)
-  assert('next acquire runs the render task', taskRan)
-  assert('pool is warm after recovery', isChromiumPoolWarm())
-  assert(
-    'the recovered browser is never closed by the retry',
-    secondBrowser.stats.closeCalls === 0,
-  )
-
-  // Acquire 3: the warm path reuses the resident context without relaunching.
+  await withChromiumPage(() => { taskRan = true })
+  check('the next acquire relaunches exactly once', launches.length === 0)
+  check('the recovered task runs', taskRan)
+  check('pool is warm after recovery', isChromiumPoolWarm())
+  check('recovered browser stays open', recovered.stats.closes === 0)
   await withChromiumPage(() => {})
-  assert('warm acquire reuses the resident context', secondBrowser.stats.newContextCalls === 1)
-
+  check('warm acquisition reuses the context', recovered.stats.contexts === 1)
   await closeChromiumPool()
-  assert('closeChromiumPool closes the resident browser', secondBrowser.stats.closeCalls === 1)
+  check('explicit pool shutdown closes the resident browser', recovered.stats.closes === 1)
+  // Integration hardening: cleanup rejection must not mask the original failure.
+  const cleanupFailed = makeBrowser({ error: originalError, closeError: new Error('close failed') })
+  launches.push(cleanupFailed)
+  const cleanupCaught = await withChromiumPage(() => {}).catch((error) => error)
+  check('cleanup rejection preserves the original context error', cleanupCaught === originalError)
+  check('cleanup is attempted exactly once despite close rejection', cleanupFailed.stats.closes === 1)
+  check('cleanup rejection cannot make the pool warm', !isChromiumPoolWarm())
 } finally {
-  playwright.chromium = { ...playwright.chromium, launch: realLaunch }
   await closeChromiumPool().catch(() => {})
+  playwright.chromium = originalChromium
 }
-
 console.log(`\nchromium-pool lifecycle verify PASSED: ${passed} checks`)
