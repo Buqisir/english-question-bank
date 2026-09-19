@@ -95,6 +95,12 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   const [state, setState] = useState<ConciergeDeskState>({ kind: 'empty' })
   const [expandedPaperKey, setExpandedPaperKey] = useState<string | null>(null)
   const [detailCache, setDetailCache] = useState<ConciergeDetailCache>({})
+  // Reset/new submissions revoke older requests, including their error paths.
+  // Keep this synchronous: clearing the input must win before a response settles.
+  const searchRequestRef = useRef(0)
+  useEffect(() => () => {
+    searchRequestRef.current += 1
+  }, [])
   // cut ai-key-server-fallback (MF-2 seam a): mount-time probe for whether the server
   // holds its own DeepSeek key. Defaults false — pre-fetch-resolution searches behave
   // exactly like before this cut (honest degradation, no loading gate; plan.md §3).
@@ -206,6 +212,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
 
   const runSearch = useCallback(
     async (rawIntent: string, pendingQuery: string | null) => {
+      const requestId = ++searchRequestRef.current
       const trimmed = rawIntent.trim()
       if (!trimmed) {
         setState({ kind: 'empty' })
@@ -225,6 +232,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
           dailyLimitExceeded,
           thinkingMode: input.thinkingMode ?? false,
         })
+        if (requestId !== searchRequestRef.current) return
         if (outcome.kind === 'clarification') {
           setState({
             kind: 'clarification',
@@ -246,6 +254,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
           fallbackReason: outcome.source === 'fallback' ? outcome.fallbackReason : undefined,
         })
       } catch (error) {
+        if (requestId !== searchRequestRef.current) return
         const message = error instanceof Error ? error.message : String(error)
         if (typeof console !== 'undefined' && console.warn) {
           console.warn('[concierge] desk submit failed:', message)
@@ -279,6 +288,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   )
 
   const reset = useCallback(() => {
+    searchRequestRef.current += 1
     setIntent('')
     setState({ kind: 'empty' })
     clearExpansion()
