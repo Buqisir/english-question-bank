@@ -2580,10 +2580,12 @@ try {
   assert(!existsSync(path.join(online.paperAssetsDir, paperId)))
   assert.equal(online.reviewStore.agentPaperStatus(paperId).promotion, null)
 
+  let afterPublishCalls = 0
   const promotionService = createSinglePaperPromotionService({
     getStore: () => online.reviewStore,
     openDatabase: online.openDatabase,
     paperAssetsDir: online.paperAssetsDir,
+    afterPublish: () => { afterPublishCalls += 1 },
   })
   const started = await startPromotionServer(online, promotionService)
   onlineServer = started.server
@@ -2676,6 +2678,17 @@ try {
     promotedBody.promotion.analysisPublicationDigest,
     analysisDigestAt(path.join(online.paperAssetsDir, paperId, 'versions/v1')),
   )
+  assert.equal(afterPublishCalls, 1, 'a real publish fires afterPublish exactly once')
+  // Detail #352: api.mjs must wire that hook to the process-lifetime read
+  // caches, otherwise promoted groups stay invisible to 配相似 until restart.
+  {
+    const apiSource = readFileSync(path.join(root, 'server/api.mjs'), 'utf8')
+    const wiring = apiSource.match(/createSinglePaperPromotionService\(\{[\s\S]*?\}\)/)?.[0] || ''
+    assert.match(wiring, /afterPublish/, 'api.mjs promotion service wires afterPublish')
+    assert.match(wiring, /similarQuestionsStore\.invalidate\(\)/, 'publish clears the similar-questions raw index cache')
+    assert.match(wiring, /teachingFacetIndex\.invalidate\(\)/, 'publish clears the teaching facet index')
+    assert.match(wiring, /paperSurfaceAnalysisAvailability\.invalidate\(\)/, 'publish clears the analysis-availability cache')
+  }
   await reviewPage.reload()
   const publishedRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
   await publishedRail.getByText('已上线', { exact: true }).waitFor()
@@ -2789,6 +2802,7 @@ try {
   )
   assert.match(promotedByCli.stdout, /"status": "idempotent"/)
   assert.match(promotedByCli.stdout, /R2 backup remains asynchronous/)
+  assert.equal(afterPublishCalls, 1, 'idempotent/failed promotions never re-fire afterPublish')
 
   const nextFixture = makeReviewRoot(
     path.join(online.tempRoot, 'next-approved-revision'),

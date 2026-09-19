@@ -143,6 +143,7 @@ const failureCases = [
   ['overlap', 'NCK1_PDF_READING_ORDER_AMBIGUOUS'],
   ['alignedNonTable', 'NCK1_PDF_READING_ORDER_AMBIGUOUS'],
   ['embeddedImage', 'NCK1_PDF_VISUAL_REVIEW_REQUIRED'],
+  ['stencilImage', 'NCK1_PDF_VISUAL_REVIEW_REQUIRED'],
 ]
 for (const [name, expectedCode] of failureCases) {
   const negative = fixture.negative[name]

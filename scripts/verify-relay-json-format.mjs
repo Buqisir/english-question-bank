@@ -10,7 +10,7 @@
 // fake fetchImpl — the analyze-layer verify scripts inject providerCallers stubs
 // that bypass this layer, which is how the relay regression went unnoticed.
 
-import { callChatCompletionsJson } from '../server/ai-providers/chatCompletions.mjs'
+import { callChatCompletionsJson, firstTextFromChatCompletion } from '../server/ai-providers/chatCompletions.mjs'
 import { callGptRelayJson } from '../server/ai-providers/gptRelay.mjs'
 import { extractFirstJsonObject } from '../server/paper-import-ai/extractJson.mjs'
 
@@ -122,11 +122,71 @@ function assertJsonExtraction() {
   assert('unterminated object yields null', extractFirstJsonObject('{"a":1') === null)
 }
 
+function assertFirstTextOrdering() {
+  // Detail bug: with array `content` AND non-empty `reasoning_content`, the old
+  // code returned reasoning and never reached its own array-content branch —
+  // the documented "prefer content" order was inverted on that path, so a
+  // reasoning-prose + array-JSON response deterministically broke JSON import.
+  const arrayJson = {
+    choices: [{
+      message: {
+        content: [{ type: 'text', text: '{"answer":"real-json-from-array-content"}' }],
+        reasoning_content: 'Let me think about this carefully...',
+      },
+    }],
+  }
+  assert(
+    'array content beats non-empty reasoning_content',
+    firstTextFromChatCompletion(arrayJson) === '{"answer":"real-json-from-array-content"}',
+  )
+  const stringContent = {
+    choices: [{
+      message: { content: '{"ok":true}', reasoning_content: 'reasoning prose' },
+    }],
+  }
+  assert(
+    'string content still beats reasoning_content',
+    firstTextFromChatCompletion(stringContent) === '{"ok":true}',
+  )
+  const reasoningOnly = {
+    choices: [{
+      message: { content: '', reasoning_content: '{"ok":true}' },
+    }],
+  }
+  assert(
+    'reasoning_content stays the fallback when content is empty',
+    firstTextFromChatCompletion(reasoningOnly) === '{"ok":true}',
+  )
+  const emptyArrayReasoning = {
+    choices: [{
+      message: { content: [], reasoning_content: '{"ok":true}' },
+    }],
+  }
+  assert(
+    'empty array content still falls back to reasoning_content',
+    firstTextFromChatCompletion(emptyArrayReasoning) === '{"ok":true}',
+  )
+  const multiPartArray = {
+    choices: [{
+      message: {
+        content: [{ type: 'text', text: '{"a":' }, { type: 'text', text: '1}' }],
+      },
+    }],
+  }
+  assert(
+    'multi-part array content still joins without reasoning_content',
+    firstTextFromChatCompletion(multiPartArray) === '{"a":1}',
+  )
+  const emptyAll = { choices: [{ message: {} }] }
+  assert('empty message yields empty string', firstTextFromChatCompletion(emptyAll) === '')
+}
+
 async function main() {
   await assertOpenAiCompatibleBody()
   await assertDeepSeekBodyUnchanged()
   await assertGptRelayWiring()
   assertJsonExtraction()
+  assertFirstTextOrdering()
 
   console.log(`\nrelay JSON format verify PASSED: ${passed} checks`)
 }
