@@ -204,7 +204,7 @@ function embeddedRasterImagePages(sourcePath) {
     maxBuffer,
   })
   return [...new Set(output.split(/\r?\n/u).flatMap((line) => {
-    const match = /^\s*(\d+)\s+\d+\s+(?:image|mask|smask)\b/u.exec(line)
+    const match = /^\s*(\d+)\s+\d+\s+(?:image|mask|smask|stencil)\b/u.exec(line)
     return match ? [Number(match[1])] : []
   }))]
 }
