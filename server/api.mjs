@@ -134,6 +134,11 @@ const singlePaperPromotionService = createSinglePaperPromotionService({
   getStore: getImportReviewStore,
   openDatabase,
   paperAssetsDir,
+  afterPublish() {
+    similarQuestionsStore.invalidate()
+    teachingFacetIndex.invalidate()
+    paperSurfaceAnalysisAvailability.invalidate()
+  },
 })
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
 const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
