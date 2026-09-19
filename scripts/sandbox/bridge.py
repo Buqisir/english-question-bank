@@ -274,6 +274,98 @@ def resource_snapshot(root='/sys/fs/cgroup'):
     return result
 
 
+def process_table():
+    """Read only process identities/parentage; never match global command names."""
+    result = {}
+    for entry in Path('/proc').glob('[0-9]*'):
+        try:
+            fields = (entry / 'stat').read_text().rsplit(')', 1)[1].split()
+            result[int(entry.name)] = (int(fields[1]), int(fields[19]))
+        except (OSError, ValueError, IndexError):
+            pass
+    return result
+
+
+def descendant_identities(root_pid, table):
+    pending = [root_pid]
+    result = {}
+    while pending:
+        parent = pending.pop()
+        for pid, (ppid, started) in table.items():
+            if ppid == parent and pid not in result:
+                result[pid] = started
+                pending.append(pid)
+    return result
+
+
+def child_subreaper(enabled):
+    """Adopt double-fork/setsid children inside this one receiver process only."""
+    import ctypes
+    libc = ctypes.CDLL(None, use_errno=True)
+    previous = ctypes.c_int()
+    require(libc.prctl(37, ctypes.byref(previous), 0, 0, 0) == 0,
+            'Linux child-subreaper inspection unavailable')
+    require(libc.prctl(36, int(enabled), 0, 0, 0) == 0,
+            'Linux child-subreaper configuration unavailable')
+    return previous.value
+
+
+def stop_command_scope(process, baseline):
+    """Stop our descendants, including detached groups; never touch sibling tasks."""
+    owner = os.getpid()
+    signaled = {}
+
+    def owned():
+        table = process_table()
+        identities = descendant_identities(owner, table)
+        # Preserve children that predate the command, plus their current children.
+        for pid, started in baseline.items():
+            if table.get(pid, (None, None))[1] == started:
+                identities.pop(pid, None)
+                for child in descendant_identities(pid, table):
+                    identities.pop(child, None)
+        return identities
+
+    def reap():
+        process.poll()
+        # Only adopted DIRECT children, never a pre-existing child/subprocess.
+        table = process_table()
+        for pid, started in owned().items():
+            if table.get(pid, (None, None))[0] == owner and pid != process.pid:
+                try:
+                    os.waitpid(pid, os.WNOHANG)
+                except ChildProcessError:
+                    pass
+
+    for sig, seconds in ((signal.SIGTERM, 1.0), (signal.SIGKILL, 3.0)):
+        until = time.monotonic() + seconds
+        while True:
+            reap()
+            targets = owned()
+            if not targets:
+                break
+            for pid, started in targets.items():
+                fd = None
+                try:
+                    # pidfd binds the signal to this process rather than a reused PID.
+                    fd = os.pidfd_open(pid, 0)
+                    if process_table().get(pid, (None, None))[1] != started:
+                        continue
+                    signal.pidfd_send_signal(fd, sig)
+                    signaled[pid] = started
+                except ProcessLookupError:
+                    pass
+                finally:
+                    if fd is not None:
+                        os.close(fd)
+            if time.monotonic() >= until:
+                break
+            time.sleep(0.05)
+    reap()
+    return {'method': 'linux-child-subreaper-pidfd', 'signaled': signaled,
+            'remaining': owned()}
+
+
 def run(args):
     state = json.loads(Path(args.state).read_text())
     require(args.command, 'missing command after --')
@@ -309,7 +401,14 @@ def run(args):
     resources_before = resource_snapshot()
     print('SANDBOX_RESOURCES ' + json.dumps(resources_before), flush=True)
     started = time.monotonic()
-    process = subprocess.Popen(command, cwd=work, env=env, start_new_session=True)
+    require(hasattr(os, 'pidfd_open') and hasattr(signal, 'pidfd_send_signal'), 'pidfd support required')
+    baseline = descendant_identities(os.getpid(), process_table())
+    previous_subreaper = child_subreaper(True)
+    try:
+        process = subprocess.Popen(command, cwd=work, env=env, start_new_session=True)
+    except BaseException:
+        child_subreaper(previous_subreaper)
+        raise
     result = 125
     try:
         while time.monotonic() - started < args.timeout:
@@ -326,15 +425,13 @@ def run(args):
         else:
             result = 124
     finally:
-        # Only our newly-created process group. No pkill/killall or host services.
-        for sig in (signal.SIGTERM, signal.SIGKILL):
-            try:
-                os.killpg(process.pid, sig)
-            except ProcessLookupError:
-                pass
-            if sig == signal.SIGTERM:
-                time.sleep(0.5)
-        process.wait()
+        # Child groups can detach (API/Chromium do): process-group kill alone leaks.
+        try:
+            cleanup = stop_command_scope(process, baseline)
+            if cleanup['remaining'] and result == 0:
+                result = 125
+        finally:
+            child_subreaper(previous_subreaper)
         resources_after = resource_snapshot()
         before_oom = resources_before['memoryEvents'].get('oom_kill')
         after_oom = resources_after['memoryEvents'].get('oom_kill')
@@ -343,6 +440,7 @@ def run(args):
                   'command': args.command, 'exitCode': result,
                   'elapsedSeconds': round(time.monotonic() - started, 3),
                   'host': platform.platform(), 'verifyConcurrencyDefault': 1,
+                  'processCleanup': cleanup,
                   'resourcesBefore': resources_before, 'resourcesAfter': resources_after,
                   'sandboxOOMKillDelta': oom_delta,
                   'worktreeStatus': git(work, 'status', '--porcelain'),

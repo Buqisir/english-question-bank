@@ -148,7 +148,13 @@ command, not independent proof that a specific process was killed. Missing
 cgroup data stays unknown. A resource warning never converts a failure to PASS.
 Its own exit-code
 receipt prevents a lingering child or PRoot's last-child status from masking
-failure. On completion/timeout only that group is terminated; no global pkill.
+failure. The receiver becomes a Linux child subreaper only for the command lifetime, so
+API/Chromium children that use setsid/double-fork cannot evade cleanup by leaving
+the original process group. Cleanup follows parentage and start-time identities,
+uses pidfd-bound signals, and reaps adopted children; pre-existing sibling tasks
+are excluded. The receipt records remaining descendants. A command with exit 0
+but incomplete cleanup returns 125, never a clean PASS. No global pkill/killall
+or process-name matching is used; the prior subreaper setting is restored.
 
 ## Evidence and limits
 
@@ -185,3 +191,14 @@ and then requested zero bytes. Unit tests additionally exercise bad provenance,
 corruption and archive attacks. Product/Full results must still be reported
 separately on the exact tested candidate; source transport never supplies merge
 or deployment authority.
+
+
+Receiver cleanup regression: actual repository E2Es were observed leaving detached
+`node server/api.mjs` and Chromium processes after the original group-only
+cleanup. This is fixed in the receiver, not by weakening the E2Es. Unit tests
+reproduce detached-child survival and preserve an unrelated pre-existing child.
+Before the repair, A3 failed/crashed and a diagnostic rerun timed out (240s);
+reorder also timed out (300s). Both latter runs recorded an increment of one in
+the sandbox-wide OOM-kill counter under a 4 GiB memory limit. These failures are
+retained; the cleanup repair alone does not establish that either full E2E now
+passes. A full-suite pass and hosted merge authority are not claimed here.
