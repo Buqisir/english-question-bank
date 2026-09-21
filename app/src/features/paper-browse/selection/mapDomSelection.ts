@@ -133,14 +133,22 @@ export function mapDomRangeToSegments(
     ? range.commonAncestorContainer
     : range.commonAncestorContainer.parentNode
   if (!walkRoot) return null
+  let crossedForbidden = false
   const walker = document.createTreeWalker(
     walkRoot,
-    NodeFilter.SHOW_TEXT,
+    NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT,
     {
       acceptNode(node) {
         if (!range.intersectsNode(node)) return NodeFilter.FILTER_REJECT
-        if (isForbidden(node)) return NodeFilter.FILTER_REJECT
-        return NodeFilter.FILTER_ACCEPT
+        if (isForbidden(node)) {
+          // Number/option labels are presentation-only, as before. A private or
+          // editable region is not: do not silently translate the remainder.
+          if (!closestElement(node)?.closest('.ps-question-no, .ps-option-label')) {
+            crossedForbidden = true
+          }
+          return NodeFilter.FILTER_REJECT
+        }
+        return node.nodeType === Node.TEXT_NODE ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP
       },
     },
   )
@@ -195,7 +203,7 @@ export function mapDomRangeToSegments(
     node = walker.nextNode()
   }
 
-  if (pieces.length === 0) return null
+  if (crossedForbidden || pieces.length === 0) return null
   const segments: MappedSegment[] = []
   for (const piece of pieces) {
     const last = segments[segments.length - 1]
@@ -217,7 +225,17 @@ export function mapDomRangeToSegments(
         selectedText: piece.text,
       })
     } else {
-      return null
+      // Only bridge the newline inserted by flushBody between adjacent leaves.
+      // An arbitrary offset gap, omitted leaf, or forbidden DOM region is NOT safe.
+      const stream = source.streams.find((item) => item.streamId === last.streamId)
+      const previousIndex = stream?.leaves.findIndex((leaf) => leaf.end === last.end) ?? -1
+      const previous = stream?.leaves[previousIndex]
+      const next = stream?.leaves[previousIndex + 1]
+      if (!stream || previousIndex < 0 || previous?.kind !== 'paragraph'
+        || next?.kind !== 'paragraph' || next.start !== piece.streamStart
+        || stream.text.slice(last.end, piece.streamStart) !== '\n') return null
+      last.end = piece.streamEnd
+      last.selectedText = stream.text.slice(last.start, last.end)
     }
   }
   if (segments.some((segment) => !segment.selectedText)) return null

@@ -1,12 +1,34 @@
 import { MAX_INFLIGHT_KEYS } from '../../shared/paper-selection/constants.mjs'
 
+function cancelledError() {
+  const error = new Error('Translation cancelled')
+  error.code = 'TRANSLATION_CANCELLED'
+  error.name = 'AbortError'
+  error.retryable = true
+  return error
+}
+
 export function createSingleFlight({ maxKeys = MAX_INFLIGHT_KEYS } = {}) {
   const inflight = new Map()
 
   function subscribe(key, work, signal) {
-    if (inflight.has(key)) {
-      return join(inflight.get(key), signal)
+    if (signal?.aborted) return Promise.reject(cancelledError())
+    const existing = inflight.get(key)
+    if (existing?.abortController.signal.aborted) {
+      // Do not resurrect a cancelled, not-yet-dispatched flight. Wait for its
+      // bounded queue cleanup, then claim a fresh flight for this new subscriber.
+      return new Promise((resolve, reject) => {
+        const onAbort = () => reject(cancelledError())
+        signal?.addEventListener('abort', onAbort, { once: true })
+        const resume = () => {
+          signal?.removeEventListener('abort', onAbort)
+          if (signal?.aborted) return reject(cancelledError())
+          subscribe(key, work, signal).then(resolve, reject)
+        }
+        existing.promise.then(resume, resume)
+      })
     }
+    if (existing) return join(existing, signal)
     if (inflight.size >= maxKeys && !inflight.has(key)) {
       const error = new Error('Too many in-flight translations')
       error.code = 'TRANSLATION_INFLIGHT_LIMIT'
@@ -44,19 +66,11 @@ export function createSingleFlight({ maxKeys = MAX_INFLIGHT_KEYS } = {}) {
       task.subscribers.add(subscriber)
       const onAbort = () => {
         task.subscribers.delete(subscriber)
-        const error = new Error('Translation cancelled')
-        error.code = 'TRANSLATION_CANCELLED'
-        error.name = 'AbortError'
-        reject(error)
+        reject(cancelledError())
         if (task.subscribers.size === 0 && !task.dispatched) {
           task.abortController.abort()
         }
       }
-      if (signal?.aborted) {
-        onAbort()
-        return
-      }
-      if (signal) signal.addEventListener('abort', onAbort, { once: true })
       task.promise.then(
         (value) => {
           if (signal) signal.removeEventListener('abort', onAbort)
@@ -73,6 +87,11 @@ export function createSingleFlight({ maxKeys = MAX_INFLIGHT_KEYS } = {}) {
           }
         },
       )
+      if (signal?.aborted) {
+        onAbort()
+        return
+      }
+      if (signal) signal.addEventListener('abort', onAbort, { once: true })
     })
   }
 

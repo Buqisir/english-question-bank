@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { createTranslationCacheStore } from '../server/paper-translation/cacheStore.mjs'
 import { createSingleFlight } from '../server/paper-translation/singleFlight.mjs'
-import { createUsageLedger } from '../server/paper-translation/usageLedger.mjs'
+import { createUsageLedger, initializeUsageLedger } from '../server/paper-translation/usageLedger.mjs'
 import { createPaperTranslationRuntime } from '../server/paper-translation/translateService.mjs'
 import { createTranslationScheduler } from '../server/paper-translation/scheduler.mjs'
 import { FLASH_MAX_INPUT_TOKENS } from '../shared/paper-selection/constants.mjs'
@@ -38,6 +38,7 @@ const source = {
 function enabledEnv(overrides = {}) {
   const dataDir = overrides.QUESTION_BANK_PAPER_TRANSLATION_DATA_DIR
     || path.join(temp, 'data', String(enabledEnv.seq = (enabledEnv.seq || 0) + 1))
+  initializeUsageLedger({ filePath: path.join(dataDir, 'translation-usage.sqlite') })
   return {
     QUESTION_BANK_PAPER_TRANSLATION_ENABLED: '1',
     QUESTION_BANK_PAPER_TRANSLATION_ALLOW_OPEN_AUTH: '1',
@@ -75,6 +76,7 @@ const requestBody = {
 
 {
   const usagePath = path.join(temp, 'usage.sqlite')
+  initializeUsageLedger({ filePath: usagePath })
   const ledger = createUsageLedger({ filePath: usagePath, monthlyBudgetCny: 10 })
   const receipt = ledger.reserve({ inputTokens: FLASH_MAX_INPUT_TOKENS, outputTokens: 256 })
   ledger.markDispatched(receipt.receiptId)
@@ -305,6 +307,8 @@ const requestBody = {
   )
   runtime.close()
 }
+
+await import('./verify-paper-translation-repair.mjs')
 
 rmSync(temp, { recursive: true, force: true })
 if (failed > 0) {

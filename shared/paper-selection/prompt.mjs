@@ -21,8 +21,6 @@ const TASK_SENTENCE = Object.freeze({
     'For complete sentences or longer text, translate the selected content faithfully.',
 })
 
-const DOMAINS_MAX = 4_000
-
 export function promptTemplateHash() {
   return createHash('sha256')
     .update(DOMAIN_RULES, 'utf8')
@@ -31,12 +29,6 @@ export function promptTemplateHash() {
     .update('\n', 'utf8')
     .update(TASK_SENTENCE[TASK_SELECTED_TEXT], 'utf8')
     .digest('hex')
-}
-
-function clip(text, max) {
-  if (typeof text !== 'string') return ''
-  if (text.length <= max) return text
-  return `${text.slice(0, max)}…`
 }
 
 export function buildTranslationDomains({
@@ -54,11 +46,13 @@ export function buildTranslationDomains({
   const domains = [
     DOMAIN_RULES,
     task,
-    `Context before: ${clip(beforeSelection, 1200)}`,
-    `Selected: ${clip(selectedText, 800)}`,
-    `Context after: ${clip(afterSelection, 1200)}`,
+    `Context before: ${beforeSelection ?? ''}`,
+    `Selected: ${selectedText ?? ''}`,
+    `Context after: ${afterSelection ?? ''}`,
   ].join(' ')
-  return clip(domains, DOMAINS_MAX)
+  // Preserve the complete authoritative window. translateService preflights the
+  // actual message plus these domains against Flash input limits before dispatch.
+  return domains
 }
 
 export function buildTranslationOptions(input) {

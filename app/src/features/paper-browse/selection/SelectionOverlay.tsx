@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
+import type { PaperTranslationResultItem } from '../../../services/paperTranslation'
 import { autoUpdate, computePosition, flip, inline, offset, shift, size } from '@floating-ui/react-dom'
 
 export type SelectionOverlayPhase = 'toolbar' | 'loading' | 'result' | 'error'
@@ -8,6 +9,7 @@ export type SelectionOverlayProps = {
   range: Range
   taskMode?: 'contextual-fragment' | 'selected-text'
   translation?: string
+  results?: readonly PaperTranslationResultItem[]
   errorMessage?: string
   liveMessage: string
   onTranslate: () => void
@@ -20,6 +22,7 @@ export function SelectionOverlay({
   range,
   taskMode,
   translation,
+  results = [],
   errorMessage,
   liveMessage,
   onTranslate,
@@ -69,6 +72,8 @@ export function SelectionOverlay({
   }, [range, phase])
 
   const kicker = taskMode === 'selected-text' ? '参考译文' : '本文参考译法'
+  const hasErrors = results.some((item) => item.status === 'error')
+  const partial = hasErrors && results.some((item) => item.status === 'ok')
 
   return (
     <div
@@ -96,16 +101,30 @@ export function SelectionOverlay({
           {phase === 'loading' ? (
             <p className="paper-selection-card-status">正在翻译…</p>
           ) : null}
-          {phase === 'result' ? (
+          {partial ? (
+            <p className="paper-selection-card-error">部分内容未完成，请重试失败段落。</p>
+          ) : null}
+          {results.map((item) => (
+            <div key={item.segmentIndex} data-selection-segment-index={item.segmentIndex}>
+              {item.status === 'ok' ? (
+                <p className="paper-selection-card-body">{item.translation}</p>
+              ) : (
+                <p className="paper-selection-card-error">
+                  第 {item.segmentIndex + 1} 段：{item.message || '暂时未能正确翻译'}
+                </p>
+              )}
+            </div>
+          ))}
+          {results.length === 0 && phase === 'result' ? (
             <p className="paper-selection-card-body">{translation}</p>
           ) : null}
-          {phase === 'error' ? (
-            <>
-              <p className="paper-selection-card-error">{errorMessage}</p>
-              <button type="button" className="paper-selection-retry" onClick={onRetry}>
-                重试
-              </button>
-            </>
+          {results.length === 0 && phase === 'error' ? (
+            <p className="paper-selection-card-error">{errorMessage}</p>
+          ) : null}
+          {phase !== 'loading' && (hasErrors || phase === 'error') ? (
+            <button type="button" className="paper-selection-retry" onClick={onRetry}>
+              {partial ? '重试失败段落' : '重试'}
+            </button>
           ) : null}
           {phase !== 'loading' ? (
             <p className="paper-selection-privacy">

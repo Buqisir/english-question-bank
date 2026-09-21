@@ -1,4 +1,4 @@
-import { mkdirSync } from 'node:fs'
+import { closeSync, mkdirSync, openSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { randomUUID } from 'node:crypto'
@@ -20,20 +20,8 @@ export function costMicroCny(tokens, yuanPerMillion) {
   return Math.ceil(tokens * yuanPerMillion)
 }
 
-export function createUsageLedger({
-  filePath,
-  monthlyBudgetCny,
-  rateVersion = RATE_VERSION,
-} = {}) {
-  mkdirSync(path.dirname(filePath), { recursive: true })
-  let db
-  try {
-    db = new DatabaseSync(filePath)
-    db.exec('PRAGMA journal_mode = WAL')
-    db.exec('PRAGMA busy_timeout = 3000')
-    db.exec('PRAGMA foreign_keys = ON')
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS translation_receipts (
+const LEDGER_SCHEMA = `
+      CREATE TABLE translation_receipts (
         receipt_id TEXT PRIMARY KEY,
         period TEXT NOT NULL,
         rate_version TEXT NOT NULL,
@@ -47,11 +35,73 @@ export function createUsageLedger({
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL
       );
-      CREATE INDEX IF NOT EXISTS idx_translation_receipts_period
+      CREATE INDEX idx_translation_receipts_period
         ON translation_receipts(period, status);
-    `)
+`
+
+// Normal service startup must never initialize a missing (or schema-less) ledger.
+// Keep the existing receipt schema readable: upgrading does not reset old costs.
+const LEDGER_COLUMNS = [
+  ['receipt_id', 'TEXT', 0, 1],
+  ['period', 'TEXT', 1, 0],
+  ['rate_version', 'TEXT', 1, 0],
+  ['status', 'TEXT', 1, 0],
+  ['reserved_input_tokens', 'INTEGER', 1, 0],
+  ['reserved_output_tokens', 'INTEGER', 1, 0],
+  ['reserved_micro_cny', 'INTEGER', 1, 0],
+  ['actual_input_tokens', 'INTEGER', 0, 0],
+  ['actual_output_tokens', 'INTEGER', 0, 0],
+  ['actual_micro_cny', 'INTEGER', 0, 0],
+  ['created_at', 'TEXT', 1, 0],
+  ['updated_at', 'TEXT', 1, 0],
+]
+
+function validateLedger(db) {
+  const columns = db.prepare('PRAGMA table_info(translation_receipts)').all()
+  if (!LEDGER_COLUMNS.every(([name, type, notnull, pk]) => columns.some((column) => (
+    column.name === name && column.type === type && column.notnull === notnull && column.pk === pk
+  )))) {
+    throw new Error('Translation usage ledger schema is missing or invalid')
+  }
+  const integrity = db.prepare('PRAGMA quick_check').all()
+  if (integrity.length !== 1 || integrity[0].quick_check !== 'ok') {
+    throw new Error('Translation usage ledger integrity check failed')
+  }
+}
+
+/** Explicit FIRST-TIME setup only; never call this from a request/startup path. */
+export function initializeUsageLedger({ filePath } = {}) {
+  mkdirSync(path.dirname(filePath), { recursive: true })
+  // Exclusive creation refuses to overwrite any existing ledger, including a bad one.
+  const fd = openSync(filePath, 'wx', 0o600)
+  closeSync(fd)
+  const db = new DatabaseSync(filePath)
+  try {
+    db.exec(`BEGIN IMMEDIATE; ${LEDGER_SCHEMA} COMMIT;`)
+    validateLedger(db)
+  } finally {
+    // On failure leave the file for inspection; runtime validation fails closed.
+    db.close()
+  }
+}
+
+export function createUsageLedger({
+  filePath,
+  monthlyBudgetCny,
+  rateVersion = RATE_VERSION,
+} = {}) {
+  let db
+  try {
+    const file = statSync(filePath)
+    if (!file.isFile() || file.size === 0) throw new Error('Translation usage ledger is missing or empty')
+    db = new DatabaseSync(filePath)
+    validateLedger(db)
+    db.exec('PRAGMA journal_mode = WAL')
+    db.exec('PRAGMA busy_timeout = 3000')
+    db.exec('PRAGMA foreign_keys = ON')
     db.prepare('SELECT COUNT(*) AS n FROM translation_receipts').get()
   } catch (error) {
+    try { db?.close() } catch { /* Preserve the original validation/open error. */ }
     error.code = 'TRANSLATION_LEDGER_UNAVAILABLE'
     throw error
   }

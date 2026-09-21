@@ -6,6 +6,7 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createServer } from '../app/node_modules/vite/dist/node/index.js'
+import { selectionControllerHarnessPlugin, verifySelectionController } from './paper-selection-controller-checks.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -108,7 +109,7 @@ const vite = await createServer({
     fs: { allow: [rootDir] },
   },
   appType: 'custom',
-  plugins: [{
+  plugins: [selectionControllerHarnessPlugin(rootDir), {
     name: 'selection-harness',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
@@ -203,6 +204,7 @@ try {
     getComputedStyle(node).display === 'none'
   ))
   check('print media hides the overlay', printHidden)
+  await verifySelectionController(page, `http://127.0.0.1:${port}`, check)
 } finally {
   await browser.close()
   await vite.close()

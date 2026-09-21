@@ -1,7 +1,7 @@
 export const SOURCE_PROJECTION_VERSION = 'paper-selection-source-v2'
 export const SEGMENTATION_VERSION = 'intl-segmenter-en-sentence-v1'
 export const CONTEXT_POLICY = 'adjacent-v1'
-export const PROMPT_VERSION = 'selection-prompt-v2'
+export const PROMPT_VERSION = 'selection-prompt-v3'
 export const CACHE_SCHEMA = 'qwen-selection-cache-v1'
 export const REQUEST_SCHEMA = 'paper-selection-request-v1'
 export const RESPONSE_SCHEMA = 'paper-selection-response-v2'

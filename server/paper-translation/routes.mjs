@@ -5,6 +5,7 @@ import { assertJsonContentType, assertSameOrigin } from './csrf.mjs'
 import { createPaperTranslationRuntime, userMessageFor } from './translateService.mjs'
 
 function sendPrivateJson(response, status, body) {
+  if (response.destroyed || response.writableEnded) return
   response.writeHead(status, {
     'cache-control': 'private, no-store',
     'content-type': 'application/json; charset=utf-8',
@@ -24,6 +25,16 @@ export function createPaperTranslationRoutes() {
     defineRoute('POST', /^\/api\/paper-translation\/translate$/, async ({ request, response, context }) => {
       const runtime = context.paperTranslation
       const requestId = randomUUID()
+      const controller = new AbortController()
+      const onAborted = () => controller.abort()
+      const onClose = () => {
+        // IncomingMessage "close" also fires after a NORMAL body read. Only a
+        // premature response close means the waiting HTTP subscriber went away.
+        if (!response.writableEnded) controller.abort()
+      }
+      request.once?.('aborted', onAborted)
+      response.once?.('close', onClose)
+      if (request.aborted || response.destroyed) controller.abort()
       try {
         assertSameOrigin(request, { publicOrigin: runtime.config.publicOrigin })
         assertJsonContentType(request)
@@ -45,6 +56,7 @@ export function createPaperTranslationRoutes() {
           context,
           requestId,
           userId,
+          signal: controller.signal,
         })
         sendPrivateJson(response, 200, result)
       } catch (error) {
@@ -55,6 +67,9 @@ export function createPaperTranslationRoutes() {
           requestId,
           retryable: Boolean(error.retryable),
         })
+      } finally {
+        request.off?.('aborted', onAborted)
+        response.off?.('close', onClose)
       }
     }),
   ]

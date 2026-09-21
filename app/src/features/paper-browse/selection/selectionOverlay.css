@@ -41,6 +41,8 @@
 }
 
 .paper-selection-card {
+  box-sizing: border-box;
+  overflow: auto;
   width: min(320px, calc(100vw - 24px));
   max-height: min(360px, 50vh);
   display: flex;

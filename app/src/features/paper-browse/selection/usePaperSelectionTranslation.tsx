@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { createLectureFocusGate } from '../../../../../shared/paper-selection/lectureFocusGate.mjs'
 import { buildSelectionSourceFromConsumption } from '../../../../../shared/paper-selection/sourceProjection.mjs'
@@ -7,6 +7,7 @@ import {
   fetchPaperTranslationStatus,
   requestPaperTranslation,
   type PaperTranslationStatus,
+  type PaperTranslationResultItem,
 } from '../../../services/paperTranslation.ts'
 import { createPageTranslationCache } from './pageCache'
 import { mapDomRangeToSegments, selectionRange } from './mapDomSelection'
@@ -39,6 +40,8 @@ type Snapshot = {
   range: Range
   sourceRevision: string
   paperId: string
+  policyKey: string
+  promptVersion: string
   segments: Array<{ streamId: string; start: number; end: number; selectedText: string }>
 }
 
@@ -55,10 +58,13 @@ export function usePaperSelectionTranslation({
   const [phase, setPhase] = useState<SelectionOverlayPhase | 'idle' | 'selecting'>('idle')
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null)
   const [translation, setTranslation] = useState('')
+  const [results, setResults] = useState<PaperTranslationResultItem[]>([])
   const [taskMode, setTaskMode] = useState<'contextual-fragment' | 'selected-text'>('contextual-fragment')
   const [errorMessage, setErrorMessage] = useState('')
   const [liveMessage, setLiveMessage] = useState('')
   const generationRef = useRef(0)
+  const snapshotRef = useRef<Snapshot | null>(null)
+  const bootstrappedStatusRef = useRef<PaperTranslationStatus | null | undefined>(undefined)
   const abortRef = useRef<AbortController | null>(null)
   const pointerInsideRef = useRef(false)
   const lastInputRef = useRef<'pointer' | 'keyboard'>('pointer')
@@ -79,16 +85,14 @@ export function usePaperSelectionTranslation({
     },
   }))
 
-  useEffect(() => {
-    pageCacheRef.current.clear()
-    setPhase('idle')
-    setSnapshot(null)
-  }, [paperId, consumption?.publicationDigest, status?.enabled])
-
   const close = useCallback(() => {
     generationRef.current += 1
     abortRef.current?.abort()
     abortRef.current = null
+    snapshotRef.current = null
+    pointerInsideRef.current = false
+    gateRef.current.cancelPending()
+    setResults([])
     setPhase('idle')
     setSnapshot(null)
     setTranslation('')
@@ -96,10 +100,26 @@ export function usePaperSelectionTranslation({
     setLiveMessage('')
   }, [])
 
+  useLayoutEffect(() => {
+    pageCacheRef.current.clear()
+    close()
+  }, [close, paperId, source?.sourceRevision, status?.enabled, status?.promptVersion, status?.contextPolicy])
+
+  useEffect(() => {
+    const gate = gateRef.current
+    return () => {
+      generationRef.current += 1
+      abortRef.current?.abort()
+      abortRef.current = null
+      snapshotRef.current = null
+      gate.cancelPending()
+    }
+  }, [])
+
   const updateFromSelection = useCallback(() => {
     const host = hostRef.current
     if (!host || !source) {
-      if (phase !== 'idle' && phase !== 'loading' && phase !== 'result' && phase !== 'error') {
+      if (phase !== 'idle') {
         close()
       }
       return
@@ -112,31 +132,44 @@ export function usePaperSelectionTranslation({
       return
     }
     if (status === null || !status.enabled) {
-      if (phase !== 'idle' && phase !== 'loading' && phase !== 'result' && phase !== 'error') {
+      if (phase !== 'idle') {
         close()
       }
       return
     }
     const range = selectionRange()
+    const overlay = document.querySelector('.paper-selection-overlay')
+    // Copying the result or moving focus to its button must not replace the snapshot.
+    if (range && overlay?.contains(range.commonAncestorContainer)) return
     if (!range || !host.contains(range.commonAncestorContainer)) {
-      if (!pointerInsideRef.current && (phase === 'toolbar' || phase === 'selecting')) close()
+      const focusInside = Boolean(overlay?.contains(document.activeElement))
+      if (!pointerInsideRef.current && !focusInside && (phase === 'toolbar' || phase === 'selecting')) close()
       return
     }
     const segments = mapDomRangeToSegments(range, source, host)
     if (!segments) {
-      if (phase === 'toolbar' || phase === 'selecting') close()
+      if (phase !== 'idle') close()
       return
     }
+    const previous = snapshotRef.current
+    if (previous?.paperId === paperId && previous.sourceRevision === source.sourceRevision
+      && previous.range.startContainer === range.startContainer && previous.range.startOffset === range.startOffset
+      && previous.range.endContainer === range.endContainer && previous.range.endOffset === range.endOffset) return
     generationRef.current += 1
     abortRef.current?.abort()
     abortRef.current = null
-    setSnapshot({
+    const next: Snapshot = {
       generation: generationRef.current,
       range: range.cloneRange(),
       sourceRevision: source.sourceRevision,
       paperId,
+      policyKey: JSON.stringify([status.promptVersion, status.contextPolicy, status.sourceProjectionVersion]),
+      promptVersion: status.promptVersion,
       segments,
-    })
+    }
+    snapshotRef.current = next
+    setSnapshot(next)
+    setResults([])
     setPhase('toolbar')
     setTranslation('')
     setErrorMessage('')
@@ -144,22 +177,22 @@ export function usePaperSelectionTranslation({
   }, [close, hostRef, paperId, phase, source, status])
 
   useEffect(() => {
-    if (status && status.enabled) updateFromSelection()
-  }, [status])
+    if (bootstrappedStatusRef.current === status) return
+    bootstrappedStatusRef.current = status
+    if (status?.enabled) updateFromSelection()
+  }, [status, updateFromSelection])
 
   useEffect(() => {
     function onSelectionChange() {
       gateRef.current.selectionChanged()
-      if (phase === 'loading' || phase === 'result' || phase === 'error') return
       updateFromSelection()
     }
     document.addEventListener('selectionchange', onSelectionChange)
     return () => document.removeEventListener('selectionchange', onSelectionChange)
-  }, [phase, updateFromSelection])
+  }, [updateFromSelection])
 
   useEffect(() => {
     const host = hostRef.current
-    if (!host) return undefined
     const gate = gateRef.current
     const onDown = (event: PointerEvent) => {
       lastInputRef.current = 'pointer'
@@ -170,15 +203,15 @@ export function usePaperSelectionTranslation({
       if (event.key === 'Escape') close()
       if (event.key === 'Enter' || event.key === ' ') lastInputRef.current = 'keyboard'
     }
-    host.addEventListener('pointerdown', onDown, true)
-    host.addEventListener('pointermove', onMove, true)
+    host?.addEventListener('pointerdown', onDown, true)
+    host?.addEventListener('pointermove', onMove, true)
     window.addEventListener('keydown', onKey, true)
     return () => {
-      host.removeEventListener('pointerdown', onDown, true)
-      host.removeEventListener('pointermove', onMove, true)
+      host?.removeEventListener('pointerdown', onDown, true)
+      host?.removeEventListener('pointermove', onMove, true)
       window.removeEventListener('keydown', onKey, true)
     }
-  }, [close, hostRef, paperId])
+  }, [close, hostRef, paperId, source?.sourceRevision])
 
   useEffect(() => {
     const host = hostRef.current
@@ -194,7 +227,7 @@ export function usePaperSelectionTranslation({
     const onPointerDown = (event: PointerEvent) => {
       const overlay = document.querySelector('.paper-selection-overlay')
       if (overlay && event.target instanceof Node && overlay.contains(event.target)) return
-      if (phase === 'toolbar') close()
+      close()
     }
     window.addEventListener('scroll', onScroll, true)
     window.addEventListener('resize', onResize)
@@ -208,58 +241,90 @@ export function usePaperSelectionTranslation({
 
   const runTranslate = useCallback(async (current: Snapshot) => {
     const generation = current.generation
-    const cacheKey = JSON.stringify({
-      paperId: current.paperId,
-      sourceRevision: current.sourceRevision,
-      segments: current.segments,
-    })
-    const cached = pageCacheRef.current.get<{
-      translation: string
-      taskMode: 'contextual-fragment' | 'selected-text'
-    }>(cacheKey)
-    if (cached) {
-      if (generationRef.current !== generation) return
-      setTranslation(cached.translation)
-      setTaskMode(cached.taskMode)
-      setPhase('result')
-      setLiveMessage('翻译完成')
-      return
-    }
+    if (snapshotRef.current !== current || generationRef.current !== generation) return
     abortRef.current?.abort()
     const controller = new AbortController()
     abortRef.current = controller
+    const isCurrent = () => !controller.signal.aborted
+      && generationRef.current === generation && abortRef.current === controller
+    const cacheKeys = current.segments.map((segment) => JSON.stringify({
+      paperId: current.paperId,
+      sourceRevision: current.sourceRevision,
+      policyKey: current.policyKey,
+      segment,
+    }))
+    // Successful segments, not whole partial responses, are the page-cache unit.
+    const items: PaperTranslationResultItem[] = current.segments.map((segment, segmentIndex) => {
+      const cached = pageCacheRef.current.get<PaperTranslationResultItem>(cacheKeys[segmentIndex])
+      return cached?.status === 'ok'
+        ? { ...cached, segmentIndex, selectedText: segment.selectedText }
+        : { segmentIndex, status: 'error', selectedText: segment.selectedText, retryable: true }
+    })
+    const pending = items.filter((item) => item.status !== 'ok').map((item) => item.segmentIndex)
+    const finish = () => {
+      if (!isCurrent()) return
+      const ok = items.filter((item) => item.status === 'ok')
+      const failed = items.filter((item) => item.status === 'error')
+      setResults(items.slice())
+      setTranslation(ok.map((item) => item.translation).join('\n'))
+      setTaskMode(ok.some((item) => item.taskMode === 'selected-text') ? 'selected-text' : 'contextual-fragment')
+      setErrorMessage(failed[0]?.message || '')
+      setPhase(ok.length > 0 ? 'result' : 'error')
+      setLiveMessage(failed.length === 0 ? '翻译完成' : (ok.length > 0 ? '部分翻译完成' : '翻译失败'))
+    }
+    if (pending.length === 0) {
+      finish()
+      abortRef.current = null
+      return
+    }
+    setResults(items.filter((item) => item.status === 'ok'))
     setPhase('loading')
     setLiveMessage('正在翻译')
     try {
       const response = await requestPaperTranslation({
         paperId: current.paperId,
         sourceRevision: current.sourceRevision,
-        segments: current.segments,
+        segments: pending.map((index) => current.segments[index]),
       }, fetch, controller.signal)
-      if (generationRef.current !== generation) return
-      const ok = response.results.filter((item) => item.status === 'ok')
-      const firstError = response.results.find((item) => item.status === 'error')
-      if (ok.length === 0) {
-        setPhase('error')
-        setErrorMessage(firstError?.message || '这段文字暂时未能正确翻译，请重试或重新选择')
-        setLiveMessage('翻译失败')
-        return
+      if (!isCurrent()) return
+      if (response.sourceRevision !== current.sourceRevision || !Array.isArray(response.results)) {
+        throw new Error('试卷来源或翻译响应已变化，请重新选择后再翻译')
       }
-      const text = ok.map((item) => item.translation).join('\n')
-      const mode = ok.some((item) => item.taskMode === 'selected-text')
-        ? 'selected-text'
-        : 'contextual-fragment'
-      pageCacheRef.current.set(cacheKey, { translation: text, taskMode: mode })
-      setTranslation(text)
-      setTaskMode(mode)
-      setPhase(response.partial ? 'result' : 'result')
-      setErrorMessage(response.partial ? (firstError?.message || '') : '')
-      setLiveMessage(response.partial ? '部分翻译完成' : '翻译完成')
+      for (const [requestIndex, segmentIndex] of pending.entries()) {
+        const matches = response.results.filter((item) => item.segmentIndex === requestIndex)
+        const item = matches.length === 1 ? matches[0] : undefined
+        const valid = item?.status === 'ok' && typeof item.translation === 'string' && item.translation.trim() !== ''
+        items[segmentIndex] = valid ? {
+          ...item,
+          status: 'ok',
+          segmentIndex,
+          selectedText: current.segments[segmentIndex].selectedText,
+        } : {
+          segmentIndex,
+          status: 'error',
+          selectedText: current.segments[segmentIndex].selectedText,
+          code: item?.code || 'TRANSLATION_INCOMPLETE',
+          message: item?.message || '这段文字暂时未能正确翻译，请重试或重新选择',
+          retryable: item?.retryable ?? true,
+        }
+        if (valid && response.promptVersion === current.promptVersion) {
+          pageCacheRef.current.set(cacheKeys[segmentIndex], items[segmentIndex])
+        }
+      }
+      finish()
     } catch (error) {
-      if (controller.signal.aborted || generationRef.current !== generation) return
-      setPhase('error')
-      setErrorMessage(error instanceof Error ? error.message : '这段文字暂时未能正确翻译，请重试或重新选择')
-      setLiveMessage('翻译失败')
+      if (!isCurrent()) return
+      for (const segmentIndex of pending) {
+        items[segmentIndex] = {
+          ...items[segmentIndex],
+          status: 'error',
+          message: error instanceof Error ? error.message : '这段文字暂时未能正确翻译，请重试或重新选择',
+          retryable: true,
+        }
+      }
+      finish()
+    } finally {
+      if (abortRef.current === controller) abortRef.current = null
     }
   }, [])
 
@@ -270,6 +335,7 @@ export function usePaperSelectionTranslation({
         range={snapshot.range}
         taskMode={taskMode}
         translation={translation}
+        results={results}
         errorMessage={errorMessage}
         liveMessage={liveMessage}
         onTranslate={() => {

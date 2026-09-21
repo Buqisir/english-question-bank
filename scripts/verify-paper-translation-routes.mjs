@@ -4,9 +4,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { createPaperTranslationRoutes, createPaperTranslationRuntime } from '../server/paper-translation/routes.mjs'
 import { createQwenMtFlashAdapter } from '../server/paper-translation/qwenMtFlash.mjs'
+import { initializeUsageLedger } from '../server/paper-translation/usageLedger.mjs'
 import { MODEL_ID, TRANSLATION_OPTIONS } from '../shared/paper-selection/constants.mjs'
 
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-translation-routes-'))
+initializeUsageLedger({ filePath: path.join(temp, 'data', 'translation-usage.sqlite') })
 let passed = 0
 let failed = 0
 function check(name, condition, details = '') {
