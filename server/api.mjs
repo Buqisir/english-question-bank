@@ -19,6 +19,7 @@ import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createCanonicalConsumerRuntime } from './paper-canonical/consumerRuntime.mjs'
 import { loadCanonicalSourceAssetRepresentation } from './paper-canonical/sourceAssetRepresentation.mjs'
 import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
+import { createPaperTranslationRoutes, createPaperTranslationRuntime } from './paper-translation/routes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { sendPaperAssetStatic } from './paper-import/paperAssetStatic.mjs'
@@ -483,6 +484,11 @@ serverContext.draftPaperStore = draftPaperStore
 // without importing auth.mjs directly (same post-hoc pattern as draftPaperStore above,
 // since resolveDataUserId is destructured/used before serverContext's later fields exist).
 serverContext.resolveDataUserId = resolveDataUserId
+const paperTranslationRuntime = createPaperTranslationRuntime({
+  rootDir,
+  loadCanonicalConsumption,
+})
+serverContext.paperTranslation = paperTranslationRuntime
 
 const serverRoutes = [
   ...h1Routes,
@@ -511,6 +517,7 @@ const serverRoutes = [
   ...createListeningMaterialProjectionRoutes(),
   ...createTopicLabelBackfillRoutes(),
   ...createVocabularyRoutes(),
+  ...createPaperTranslationRoutes(),
   // D1 (grammar-facets-v2): I16·C verb-profile sidecar + its backfill route
   // retired — tense/voice/agreementSensitive now live on the grammar-fill-
   // analysis-v2 blank entry itself (server/search/teachingFacets.mjs).

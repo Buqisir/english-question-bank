@@ -194,6 +194,10 @@ const registry = {
   'scripts/verify-launch-deploy.mjs',
   'scripts/verify-paper-assets-consistency.mjs',
   'scripts/verify-paper-browse.mjs',
+  'scripts/verify-paper-selection-source.mjs',
+  'scripts/verify-paper-translation-cache.mjs',
+  'scripts/verify-paper-translation-routes.mjs',
+  'scripts/verify-paper-selection-browser.mjs',
   'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
   'scripts/verify-section-chrome-on-solo-surface.mjs',
@@ -243,6 +247,8 @@ const securityScripts = [
   'scripts/verify-user-scope.mjs',
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-launch-deploy.mjs',
+  'scripts/verify-paper-translation-cache.mjs',
+  'scripts/verify-paper-translation-routes.mjs',
 ]
 const paperScriptPattern = /(?:paper|canonical|print|draft|export|docx|figure|cloze|grammar|seven-choices|writing|genre)/u
 const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
@@ -392,6 +398,7 @@ function changedPlan(files) {
     'server/vocabulary/vocabularyStore.mjs',
     'server/vocabulary/vocabularyRoutes.mjs',
     'server/vocabulary/vocabularyPrintJobs.mjs',
+    'server/paper-translation/',
   ]
   if (files.every((file) => touchesAny([file], paperDataPatterns))) {
     return { risk: 'known-shape-paper-data', pack: 'paper-data' }

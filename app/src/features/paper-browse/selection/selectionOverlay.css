@@ -1,0 +1,121 @@
+.paper-selection-overlay {
+  position: fixed;
+  z-index: 40;
+  box-sizing: border-box;
+  color: var(--eqb-color-text);
+  font-family: inherit;
+}
+
+.paper-selection-toolbar,
+.paper-selection-card {
+  background: var(--eqb-color-paper);
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 8px;
+  box-shadow: var(--eqb-shadow-floating);
+}
+
+.paper-selection-toolbar {
+  display: flex;
+  padding: 4px;
+}
+
+.paper-selection-translate {
+  appearance: none;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: var(--eqb-color-text-strong);
+  font: inherit;
+  font-size: var(--eqb-font-size-sm);
+  line-height: 1.2;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.paper-selection-translate:hover,
+.paper-selection-translate:focus-visible {
+  background: var(--eqb-color-desk);
+  outline: 2px solid var(--eqb-color-primary);
+  outline-offset: 1px;
+}
+
+.paper-selection-card {
+  width: min(320px, calc(100vw - 24px));
+  max-height: min(360px, 50vh);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px 10px;
+}
+
+.paper-selection-card-kicker {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--eqb-color-text-muted);
+}
+
+.paper-selection-card-body {
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--eqb-font-size-sm);
+  line-height: 1.55;
+}
+
+.paper-selection-card-status {
+  margin: 0;
+  font-size: var(--eqb-font-size-sm);
+  color: var(--eqb-color-text-secondary);
+}
+
+.paper-selection-card-error {
+  margin: 0;
+  font-size: var(--eqb-font-size-sm);
+  color: var(--eqb-color-danger);
+}
+
+.paper-selection-retry {
+  appearance: none;
+  margin: 10px 0 0;
+  align-self: flex-start;
+  border: 1px solid var(--eqb-color-border);
+  background: transparent;
+  color: var(--eqb-color-text-strong);
+  font: inherit;
+  font-size: var(--eqb-font-size-sm);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.paper-selection-retry:focus-visible {
+  outline: 2px solid var(--eqb-color-primary);
+  outline-offset: 1px;
+}
+
+.paper-selection-privacy {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: var(--eqb-color-text-faint);
+}
+
+.paper-selection-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-selection-overlay {
+    transition: none;
+  }
+}
+
+@media print {
+  .paper-selection-overlay {
+    display: none !important;
+  }
+}
