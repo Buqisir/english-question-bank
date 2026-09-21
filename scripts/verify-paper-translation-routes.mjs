@@ -162,10 +162,11 @@ check('POST translate is defined', Boolean(routeBy(routes, 'POST', '/api/paper-t
     context: makeContext(runtime),
   })
   check('valid selection translates', response.statusCode === 200 && response.parsed.results[0].translation === '处理')
-  check('upstream prompt is a single user message shape built on the server', (
+  check('upstream request translates the selected text with a domains hint', (
     capturedUpstream.length === 1
-    && capturedUpstream[0].prompt.startsWith('Translate only selected_text')
-    && capturedUpstream[0].prompt.includes('"selected_text":"address"')
+    && capturedUpstream[0].selectedText === 'address'
+    && typeof capturedUpstream[0].translationOptions?.domains === 'string'
+    && capturedUpstream[0].translationOptions.domains.includes('Selected: address')
   ))
   runtime.close()
 }
@@ -278,19 +279,27 @@ check('POST translate is defined', Boolean(routeBy(routes, 'POST', '/api/paper-t
     },
   })
   const result = await adapter.translateSelection({
-    prompt: 'Translate only selected_text',
-    maxTokens: 256,
     selectedText: 'address',
+    maxTokens: 256,
+    translationOptions: {
+      source_lang: TRANSLATION_OPTIONS.source_lang,
+      target_lang: TRANSLATION_OPTIONS.target_lang,
+      domains: 'High-school English exam paper. Selected: address',
+    },
   })
   const body = JSON.parse(sent.init.body)
   check('Flash request uses the official workspace endpoint', sent.url.endsWith('/compatible-mode/v1/chat/completions'))
+  check('Flash user message is the selected text, not the instruction prompt', (
+    body.messages.length === 1
+    && body.messages[0].role === 'user'
+    && body.messages[0].content === 'address'
+  ))
   check('Flash request is a single user message with top-level translation_options', (
     body.model === MODEL_ID
-    && body.messages.length === 1
-    && body.messages[0].role === 'user'
     && body.stream === false
     && body.temperature === 0
     && body.translation_options.source_lang === TRANSLATION_OPTIONS.source_lang
+    && body.translation_options.domains.includes('Selected: address')
     && !Object.hasOwn(body, 'tools')
     && !Object.hasOwn(body, 'response_format')
   ))
@@ -307,7 +316,7 @@ check('POST translate is defined', Boolean(routeBy(routes, 'POST', '/api/paper-t
     },
   })
   try {
-    await adapter.translateSelection({ prompt: 'x', maxTokens: 16, selectedText: 'x' })
+    await adapter.translateSelection({ selectedText: 'x', maxTokens: 16 })
     check('non-allowlisted endpoint is rejected', false)
   } catch (error) {
     check('non-allowlisted endpoint is rejected', error.code === 'TRANSLATION_ENDPOINT_INVALID')

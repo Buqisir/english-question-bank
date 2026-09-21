@@ -13,6 +13,11 @@ function slidingCount(timestamps, windowMs, now) {
   return timestamps.length
 }
 
+function pruneReserved(reservedTokens, windowMs, now) {
+  const cutoff = now - windowMs
+  while (reservedTokens.length > 0 && reservedTokens[0].at < cutoff) reservedTokens.shift()
+}
+
 export function createTranslationScheduler({
   now = () => Date.now(),
 } = {}) {
@@ -52,7 +57,7 @@ export function createTranslationScheduler({
   function admitGlobalDispatch(reservedTokenCount) {
     const at = now()
     slidingCount(globalHits, 60_000, at)
-    slidingCount(reservedTokens, 60_000, at)
+    pruneReserved(reservedTokens, 60_000, at)
     const tokenSum = reservedTokens.reduce((sum, item) => sum + item.tokens, 0)
     if (globalHits.length >= GLOBAL_RPM || tokenSum + reservedTokenCount > GLOBAL_RESERVED_TPM) {
       const error = new Error('Translation is at capacity')

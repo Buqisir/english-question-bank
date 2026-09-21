@@ -15,9 +15,9 @@ import {
 import { promptMeta } from './prompt.mjs'
 import { SEGMENTATION_VERSION } from './segmentation.mjs'
 
-export function stableRequestOptions({ maxTokens, temperature = 0 }) {
+export function stableRequestOptions({ maxTokens, temperature = 0, translationOptions = TRANSLATION_OPTIONS }) {
   return {
-    translation_options: TRANSLATION_OPTIONS,
+    translation_options: translationOptions,
     max_tokens: maxTokens,
     temperature,
     stream: false,

@@ -6,6 +6,7 @@ import { createTranslationCacheStore } from '../server/paper-translation/cacheSt
 import { createSingleFlight } from '../server/paper-translation/singleFlight.mjs'
 import { createUsageLedger } from '../server/paper-translation/usageLedger.mjs'
 import { createPaperTranslationRuntime } from '../server/paper-translation/translateService.mjs'
+import { createTranslationScheduler } from '../server/paper-translation/scheduler.mjs'
 import { FLASH_MAX_INPUT_TOKENS } from '../shared/paper-selection/constants.mjs'
 
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-translation-cache-'))
@@ -234,6 +235,74 @@ const requestBody = {
     // still miss
   }
   check('failed translations are retried rather than cached as success', providerCalls === 2)
+  runtime.close()
+}
+
+{
+  let t = 0
+  const scheduler = createTranslationScheduler({ now: () => t })
+  scheduler.admitGlobalDispatch(20_000)
+  let secondCode = null
+  try {
+    scheduler.admitGlobalDispatch(20_000)
+  } catch (error) {
+    secondCode = error.code
+  }
+  check('a full reserved-TPM window rejects the next dispatch', secondCode === 'TRANSLATION_GLOBAL_RATE_LIMIT')
+  t = 60_001
+  let expiredCode = null
+  try {
+    scheduler.admitGlobalDispatch(20_000)
+  } catch (error) {
+    expiredCode = error.code
+  }
+  check('reserved TPM expires after one minute', expiredCode == null)
+}
+
+{
+  let providerCalls = 0
+  const runtime = createPaperTranslationRuntime({
+    rootDir: path.join(temp, 'rpm'),
+    env: enabledEnv(),
+    loadSource: () => source,
+    adapter: {
+      async translateSelection(input) {
+        providerCalls += 1
+        return {
+          translation: `「${input.selectedText}」`,
+          finishReason: 'stop',
+          usage: { promptTokens: 40, completionTokens: 2, totalTokens: 42 },
+          model: 'qwen-mt-flash',
+        }
+      },
+    },
+  })
+  const words = ['road', 'closed', 'They', 'problem', 'began']
+  const codes = []
+  for (const word of words) {
+    const start = EXAMPLE.indexOf(word)
+    const result = await runtime.translate({
+      body: {
+        schemaVersion: 'paper-selection-request-v1',
+        paperId: 'paper-example',
+        sourceRevision: source.sourceRevision,
+        segments: [{
+          streamId: 'group-example/passage/body',
+          start,
+          end: start + word.length,
+          selectedText: word,
+        }],
+      },
+      context: { authMode: 'open' },
+      userId: 'user-a',
+    }).then((value) => value, (error) => error)
+    codes.push(result.code || result.results?.[0]?.status || 'ok')
+  }
+  check(
+    'five short selections in one minute are not globally rate-limited',
+    providerCalls === 5 && codes.every((code) => code === 'ok'),
+    codes.join(','),
+  )
   runtime.close()
 }
 

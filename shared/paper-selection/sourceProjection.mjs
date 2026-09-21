@@ -59,8 +59,9 @@ function flushBody(streams, buffer) {
       end,
     }
   })
+  const firstId = buffer.leaves[0].id
   pushStream(streams, {
-    streamId: buffer.streamId,
+    streamId: firstId ? `${buffer.streamId}/${firstId}` : buffer.streamId,
     text,
     role: buffer.role,
     groupId: buffer.groupId,

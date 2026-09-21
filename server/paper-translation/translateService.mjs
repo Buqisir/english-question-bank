@@ -19,13 +19,13 @@ import {
 } from '../../shared/paper-selection/constants.mjs'
 import { cacheKeyFromInput, stableRequestOptions } from '../../shared/paper-selection/cacheKey.mjs'
 import { maxTokensForSelection } from '../../shared/paper-selection/maxTokens.mjs'
-import { buildSelectionPrompt, promptMeta } from '../../shared/paper-selection/prompt.mjs'
+import { buildTranslationOptions, promptMeta } from '../../shared/paper-selection/prompt.mjs'
 import {
   buildSelectionSourceFromConsumption,
   computeSourceRevision,
   validateTranslateSegments,
 } from '../../shared/paper-selection/sourceProjection.mjs'
-import { promptFitsFlashInput } from '../../shared/paper-selection/tokenEstimate.mjs'
+import { conservativeInputTokenEstimate, promptFitsFlashInput } from '../../shared/paper-selection/tokenEstimate.mjs'
 import { createBoundedLru } from './boundedLru.mjs'
 import { createTranslationCacheStore } from './cacheStore.mjs'
 import { readPaperTranslationConfig } from './config.mjs'
@@ -201,19 +201,20 @@ export function createPaperTranslationRuntime({
 
   async function translateOne(prepared, { signal, userId, requestId }) {
     const { adjacent } = prepared
-    const prompt = buildSelectionPrompt({
+    const translationOptions = buildTranslationOptions({
       taskMode: adjacent.taskMode,
       beforeSelection: adjacent.beforeSelection,
       selectedText: adjacent.selectedText,
       afterSelection: adjacent.afterSelection,
     })
+    const prompt = `${adjacent.selectedText}\n${translationOptions.domains}`
     if (!promptFitsFlashInput(prompt)) {
       serviceError('SELECTION_TOKEN_LIMIT', 'Prompt exceeds the Flash input token limit', {
         status: 413,
       })
     }
     const maxTokens = maxTokensForSelection(adjacent.selectedText, adjacent.taskMode, prompt)
-    const requestOptions = stableRequestOptions({ maxTokens })
+    const requestOptions = stableRequestOptions({ maxTokens, translationOptions })
     const cacheKey = cacheKeyFromInput({
       region: config.region,
       deploymentScope: config.workspaceId || 'unscoped',
@@ -243,7 +244,7 @@ export function createPaperTranslationRuntime({
       })
       let dispatched = false
       try {
-        scheduler.admitGlobalDispatch(FLASH_MAX_INPUT_TOKENS + maxTokens)
+        scheduler.admitGlobalDispatch(conservativeInputTokenEstimate(prompt) + maxTokens)
         const releaseSlot = await scheduler.acquireSlot()
         try {
           if (!hasSubscribers() && flightSignal.aborted) {
@@ -255,9 +256,9 @@ export function createPaperTranslationRuntime({
           dispatched = true
           const started = now()
           const result = await provider.translateSelection({
-            prompt,
-            maxTokens,
             selectedText: adjacent.selectedText,
+            translationOptions,
+            maxTokens,
           }, flightSignal)
           getLedger().settle(receipt.receiptId, result.usage)
           const record = {
@@ -343,12 +344,13 @@ export function createPaperTranslationRuntime({
     const misses = []
     for (const item of prepared) {
       const adjacent = item.adjacent
-      const prompt = buildSelectionPrompt({
+      const translationOptions = buildTranslationOptions({
         taskMode: adjacent.taskMode,
         beforeSelection: adjacent.beforeSelection,
         selectedText: adjacent.selectedText,
         afterSelection: adjacent.afterSelection,
       })
+      const prompt = `${adjacent.selectedText}\n${translationOptions.domains}`
       let maxTokens
       try {
         if (!promptFitsFlashInput(prompt)) {
@@ -364,7 +366,7 @@ export function createPaperTranslationRuntime({
         region: config.region,
         deploymentScope: config.workspaceId || 'unscoped',
         taskMode: adjacent.taskMode,
-        requestOptions: stableRequestOptions({ maxTokens }),
+        requestOptions: stableRequestOptions({ maxTokens, translationOptions }),
         contextText: adjacent.contextText,
         selectionInContext: adjacent.selectionInContext,
         selectedText: adjacent.selectedText,

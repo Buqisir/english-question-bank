@@ -13,10 +13,12 @@ function translationError(code, message, { retryable = false, status = 502 } = {
   return error
 }
 
-function looksLikeTemplateEcho(text) {
+export function looksLikeTemplateEcho(text) {
+  if (typeof text !== 'string') return false
   return /DATA:\s*\{/.test(text)
-    || /before_selection/.test(text)
-    && /selected_text/.test(text)
+    || (/before_selection/.test(text) && /selected_text/.test(text))
+    || /Context before:/.test(text)
+    || /Do not translate the context/.test(text)
 }
 
 export function createQwenMtFlashAdapter({
@@ -41,10 +43,17 @@ export function createQwenMtFlashAdapter({
         ? AbortSignal.any([signal, timeout])
         : timeout)
       : timeout
+    const selectedText = typeof input.selectedText === 'string' ? input.selectedText : ''
+    if (!selectedText) {
+      throw translationError('SELECTION_REQUEST_INVALID', 'selectedText is required')
+    }
+    const translationOptions = input.translationOptions && typeof input.translationOptions === 'object'
+      ? input.translationOptions
+      : TRANSLATION_OPTIONS
     const body = {
       model: MODEL_ID,
-      messages: [{ role: 'user', content: input.prompt }],
-      translation_options: TRANSLATION_OPTIONS,
+      messages: [{ role: 'user', content: selectedText }],
+      translation_options: translationOptions,
       stream: false,
       temperature: 0,
       max_tokens: input.maxTokens,
