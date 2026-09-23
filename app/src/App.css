@@ -14,6 +14,24 @@
   --ease-hover: ease;                             /* 颜色/hover；不用于位移类入场（那用 --ease-out） */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* 入场/位移（强）；不用于纯颜色过渡（那用 --ease-hover） */
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 在屏形变（强）；不用于一次性入场（那用 --ease-out） */
+  --ease-spring: cubic-bezier(0.34, 1.5, 0.64, 1); /* 点击释放回弹（图标/小控件）；带轻微过冲，不用于入场/大位移 */
+}
+
+/* Icon tap（动势极省）：所有经 EqbIcon 渲染的图标带 .eqb-icon。可点控件里
+   的图标按下轻缩、松开按 --ease-spring 弹回。组件自带的 transform 过渡优先
+   （特异性更高会覆盖）；非交互场景不受影响。 */
+:where(button, [role='button'], a[href], summary, label) .eqb-icon {
+  transition: transform var(--motion-base) var(--ease-spring);
+}
+
+:where(button, [role='button'], a[href], summary, label):active .eqb-icon {
+  transform: scale(0.85);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(button, [role='button'], a[href], summary, label) .eqb-icon {
+    transition: none;
+  }
 }
 
 .app-shell {

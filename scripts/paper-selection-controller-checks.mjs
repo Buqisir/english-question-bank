@@ -188,7 +188,7 @@ export async function verifySelectionController(page, baseUrl, check) {
   await page.waitForFunction((n) => window.__selectionController.requests.length === n + 1, retryAgain)
   check('manual retry also excludes the already successful segment', await page.evaluate((n) => window.__selectionController.requests[n].body.segments.length === 1, retryAgain))
   await respond(retryAgain, [ok('second translated')])
-  const ordered = await page.locator('[data-selection-segment-index]').allTextContents()
+  const ordered = await page.locator('[data-selection-segment-index] .paper-selection-card-body').allTextContents()
   check('retry-local segment index is remapped to original display order', ordered.length === 2 && ordered[0] === 'first translated' && ordered[1] === 'second translated')
   await close()
   await select('controller-c1', 0, 'controller-c2')

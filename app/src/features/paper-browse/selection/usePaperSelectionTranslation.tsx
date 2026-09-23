@@ -35,6 +35,19 @@ function loadTranslationStatus() {
   return statusInflight
 }
 
+function teacherFacingError(error: unknown): string {
+  const message = error instanceof Error ? error.message : ''
+  if (
+    message === 'Failed to fetch'
+    || message === 'Load failed'
+    || message.startsWith('NetworkError')
+  ) {
+    return '服务没连上，请重试'
+  }
+  if (message === 'not_authenticated') return '请先登录后再翻译'
+  return message || '这段文字暂时未能正确翻译，请重试或重新选择'
+}
+
 type Snapshot = {
   generation: number
   range: Range
@@ -43,6 +56,7 @@ type Snapshot = {
   policyKey: string
   promptVersion: string
   segments: Array<{ streamId: string; start: number; end: number; selectedText: string }>
+  anchor: { x: number; y: number } | null
 }
 
 export function usePaperSelectionTranslation({
@@ -55,7 +69,7 @@ export function usePaperSelectionTranslation({
   hostRef: { current: HTMLElement | null }
 }) {
   const [status, setStatus] = useState<PaperTranslationStatus | null | undefined>(undefined)
-  const [phase, setPhase] = useState<SelectionOverlayPhase | 'idle' | 'selecting'>('idle')
+  const [phase, setPhase] = useState<SelectionOverlayPhase | 'idle'>('idle')
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null)
   const [translation, setTranslation] = useState('')
   const [results, setResults] = useState<PaperTranslationResultItem[]>([])
@@ -67,6 +81,8 @@ export function usePaperSelectionTranslation({
   const bootstrappedStatusRef = useRef<PaperTranslationStatus | null | undefined>(undefined)
   const abortRef = useRef<AbortController | null>(null)
   const pointerInsideRef = useRef(false)
+  const pointerSelectingRef = useRef(false)
+  const pendingAnchorRef = useRef<{ x: number; y: number } | null>(null)
   const lastInputRef = useRef<'pointer' | 'keyboard'>('pointer')
   const pageCacheRef = useRef(createPageTranslationCache())
   const source = useMemo(() => {
@@ -143,7 +159,7 @@ export function usePaperSelectionTranslation({
     if (range && overlay?.contains(range.commonAncestorContainer)) return
     if (!range || !host.contains(range.commonAncestorContainer)) {
       const focusInside = Boolean(overlay?.contains(document.activeElement))
-      if (!pointerInsideRef.current && !focusInside && (phase === 'toolbar' || phase === 'selecting')) close()
+      if (!pointerInsideRef.current && !focusInside && phase === 'toolbar') close()
       return
     }
     const segments = mapDomRangeToSegments(range, source, host)
@@ -154,7 +170,10 @@ export function usePaperSelectionTranslation({
     const previous = snapshotRef.current
     if (previous?.paperId === paperId && previous.sourceRevision === source.sourceRevision
       && previous.range.startContainer === range.startContainer && previous.range.startOffset === range.startOffset
-      && previous.range.endContainer === range.endContainer && previous.range.endOffset === range.endOffset) return
+      && previous.range.endContainer === range.endContainer && previous.range.endOffset === range.endOffset) {
+      pendingAnchorRef.current = null
+      return
+    }
     generationRef.current += 1
     abortRef.current?.abort()
     abortRef.current = null
@@ -166,7 +185,9 @@ export function usePaperSelectionTranslation({
       policyKey: JSON.stringify([status.promptVersion, status.contextPolicy, status.sourceProjectionVersion]),
       promptVersion: status.promptVersion,
       segments,
+      anchor: pendingAnchorRef.current,
     }
+    pendingAnchorRef.current = null
     snapshotRef.current = next
     setSnapshot(next)
     setResults([])
@@ -185,6 +206,7 @@ export function usePaperSelectionTranslation({
   useEffect(() => {
     function onSelectionChange() {
       gateRef.current.selectionChanged()
+      if (pointerSelectingRef.current) return
       updateFromSelection()
     }
     document.addEventListener('selectionchange', onSelectionChange)
@@ -197,6 +219,13 @@ export function usePaperSelectionTranslation({
     const onDown = (event: PointerEvent) => {
       lastInputRef.current = 'pointer'
       gate.pointerDown(event)
+      if (event.button === 0) pointerSelectingRef.current = true
+    }
+    const finishSelecting = (event: PointerEvent) => {
+      if (!pointerSelectingRef.current) return
+      pointerSelectingRef.current = false
+      pendingAnchorRef.current = { x: event.clientX, y: event.clientY }
+      updateFromSelection()
     }
     const onMove = (event: PointerEvent) => gate.pointerMove(event)
     const onKey = (event: KeyboardEvent) => {
@@ -205,21 +234,36 @@ export function usePaperSelectionTranslation({
     }
     host?.addEventListener('pointerdown', onDown, true)
     host?.addEventListener('pointermove', onMove, true)
+    window.addEventListener('pointerup', finishSelecting, true)
+    window.addEventListener('pointercancel', finishSelecting, true)
     window.addEventListener('keydown', onKey, true)
     return () => {
       host?.removeEventListener('pointerdown', onDown, true)
       host?.removeEventListener('pointermove', onMove, true)
+      window.removeEventListener('pointerup', finishSelecting, true)
+      window.removeEventListener('pointercancel', finishSelecting, true)
       window.removeEventListener('keydown', onKey, true)
     }
-  }, [close, hostRef, paperId, source?.sourceRevision])
+  }, [close, hostRef, paperId, source?.sourceRevision, updateFromSelection])
 
   useEffect(() => {
     const host = hostRef.current
     if (!host || phase === 'idle') return undefined
-    const onScroll = (event: Event) => {
-      const card = document.querySelector('.paper-selection-card')
-      if (card && event.target instanceof Node && card.contains(event.target)) return
-      close()
+    const onScroll = () => {
+      if (!snapshot?.range) return
+      if (!snapshot.range.startContainer.isConnected || !snapshot.range.endContainer.isConnected) {
+        close()
+        return
+      }
+      const rects = snapshot.range.getClientRects()
+      if (rects.length === 0) {
+        close()
+        return
+      }
+      const box = snapshot.range.getBoundingClientRect()
+      if (box.bottom < -200 || box.top > window.innerHeight + 200) {
+        close()
+      }
     }
     const onResize = () => {
       if (!snapshot?.range || snapshot.range.getClientRects().length === 0) close()
@@ -318,7 +362,7 @@ export function usePaperSelectionTranslation({
         items[segmentIndex] = {
           ...items[segmentIndex],
           status: 'error',
-          message: error instanceof Error ? error.message : '这段文字暂时未能正确翻译，请重试或重新选择',
+          message: teacherFacingError(error),
           retryable: true,
         }
       }
@@ -328,11 +372,12 @@ export function usePaperSelectionTranslation({
     }
   }, [])
 
-  const overlay = status?.enabled && snapshot && phase !== 'idle' && phase !== 'selecting'
+  const overlay = status?.enabled && snapshot && phase !== 'idle'
     ? createPortal(
       <SelectionOverlay
         phase={phase}
         range={snapshot.range}
+        anchor={snapshot.anchor}
         taskMode={taskMode}
         translation={translation}
         results={results}
@@ -344,6 +389,7 @@ export function usePaperSelectionTranslation({
         onRetry={() => {
           void runTranslate(snapshot)
         }}
+        onClose={close}
         onPointerInsideChange={(inside) => {
           pointerInsideRef.current = inside
         }}
