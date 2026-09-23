@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Human-in-the-loop reproduction loop.
-# Copy this file to a temporary location, edit the steps below, and run it.
+# Copy this file, edit the steps below, and run it.
 # The agent runs the script; the user follows prompts in their terminal.
 #
 # Usage:
@@ -11,7 +11,9 @@
 #   capture VAR "<question>"      → show question, read response into VAR
 #
 # At the end, captured values are printed as KEY=VALUE for the agent to parse.
-# `capture` echoes its value, so capture observations only; never capture secrets.
+#
+# `capture` prints its value back to the terminal, where the agent reads it,
+# so capture observations, and leave signing in to the user as a `step`.
 
 set -euo pipefail
 
@@ -29,11 +31,11 @@ capture() {
 
 # --- edit below ---------------------------------------------------------
 
-step "Open the prepared app URL and sign in."
+step "Open the app at http://localhost:3000 and sign in."
 
 capture ERRORED "Click the 'Export' button. Did it throw an error? (y/n)"
 
-capture ERROR_MSG "Paste the redacted error message (or 'none'):"
+capture ERROR_MSG "Paste the error message (or 'none'):"
 
 # --- edit above ---------------------------------------------------------
 
