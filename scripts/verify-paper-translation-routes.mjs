@@ -168,7 +168,10 @@ check('POST translate is defined', Boolean(routeBy(routes, 'POST', '/api/paper-t
     capturedUpstream.length === 1
     && capturedUpstream[0].selectedText === 'address'
     && typeof capturedUpstream[0].translationOptions?.domains === 'string'
-    && capturedUpstream[0].translationOptions.domains.includes('Selected: address')
+    && capturedUpstream[0].translationOptions.domains.includes('High-school English exam paper.')
+    && capturedUpstream[0].translationOptions.domains.includes('Occurrence: "')
+    && capturedUpstream[0].translationOptions.domains.includes('address')
+    && !capturedUpstream[0].translationOptions.domains.includes('Context after:')
   ))
   runtime.close()
 }

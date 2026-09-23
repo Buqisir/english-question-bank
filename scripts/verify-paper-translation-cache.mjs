@@ -4,10 +4,10 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { createTranslationCacheStore } from '../server/paper-translation/cacheStore.mjs'
 import { createSingleFlight } from '../server/paper-translation/singleFlight.mjs'
-import { createUsageLedger, initializeUsageLedger } from '../server/paper-translation/usageLedger.mjs'
-import { createPaperTranslationRuntime } from '../server/paper-translation/translateService.mjs'
+import { costMicroCny, createUsageLedger, initializeUsageLedger } from '../server/paper-translation/usageLedger.mjs'
+import { createPaperTranslationRuntime, userMessageFor } from '../server/paper-translation/translateService.mjs'
 import { createTranslationScheduler } from '../server/paper-translation/scheduler.mjs'
-import { FLASH_MAX_INPUT_TOKENS } from '../shared/paper-selection/constants.mjs'
+import { FLASH_MAX_INPUT_TOKENS, INPUT_YUAN_PER_MILLION, OUTPUT_YUAN_PER_MILLION } from '../shared/paper-selection/constants.mjs'
 
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-paper-translation-cache-'))
 let passed = 0
@@ -82,7 +82,9 @@ const requestBody = {
   ledger.markDispatched(receipt.receiptId)
   ledger.settle(receipt.receiptId, { promptTokens: 40, completionTokens: 6 })
   const used = ledger.usedMicro()
-  check('usage ledger records settled cost', used > 0)
+  ledger.settle(receipt.receiptId, null)
+  check('usage ledger records settled cost', used > 0 && used < receipt.reservedMicroCny)
+  check('a later empty settle does not replace the real cost with the reserve', ledger.usedMicro() === used)
   ledger.close()
   const reopened = createUsageLedger({ filePath: usagePath, monthlyBudgetCny: 10 })
   check('clearing result cache is not required to keep the budget ledger', reopened.usedMicro() === used)
@@ -200,11 +202,10 @@ const requestBody = {
   const result = await runtime.translate({ body: requestBody, context: { authMode: 'open' }, userId: 'user-a' })
     .then((value) => value, (error) => error)
   check('missing key does not dispatch upstream', providerCalls === 0)
-  check('missing key is cache-only or disabled for new work', (
-    result.code === 'TRANSLATION_CACHE_ONLY'
-    || result.code === 'TRANSLATION_DISABLED'
-    || result.body?.results?.[0]?.code === 'TRANSLATION_CACHE_ONLY'
-    || result.results?.[0]?.code === 'TRANSLATION_CACHE_ONLY'
+  check('missing key says translation is unavailable, not that the budget is gone', (
+    (result.code === 'TRANSLATION_UNAVAILABLE' || result.body?.results?.[0]?.code === 'TRANSLATION_UNAVAILABLE')
+    && (result.message === '翻译暂不可用' || result.body?.results?.[0]?.message === '翻译暂不可用')
+    && result.message !== '本月翻译额度已用完，已缓存的结果仍可查看'
   ))
   runtime.close()
 }
@@ -307,6 +308,54 @@ const requestBody = {
   )
   runtime.close()
 }
+
+{
+  const runtime = createPaperTranslationRuntime({
+    rootDir: path.join(temp, 'expand'),
+    env: enabledEnv(),
+    loadSource: () => source,
+    adapter: {
+      async translateSelection() {
+        return {
+          translation: '来自布宜诺斯艾利斯大学的研究人员成功地利用机器人导师，教会了南美洲的一种小型鸟类。',
+          finishReason: 'stop',
+          usage: { promptTokens: 40, completionTokens: 40, totalTokens: 80 },
+          model: 'qwen-mt-flash',
+        }
+      },
+    },
+  })
+  const start = EXAMPLE.indexOf('road')
+  const result = await runtime.translate({
+    body: {
+      schemaVersion: 'paper-selection-request-v1',
+      paperId: 'paper-example',
+      sourceRevision: source.sourceRevision,
+      segments: [{
+        streamId: 'group-example/passage/body',
+        start,
+        end: start + 'road'.length,
+        selectedText: 'road',
+      }],
+    },
+    context: { authMode: 'open' },
+    userId: 'user-a',
+  }).then((value) => value, (error) => error)
+  check(
+    'a fragment that returns a whole-paragraph translation is rejected',
+    result.code === 'TRANSLATION_TEMPLATE_ECHO' || result.results?.[0]?.code === 'TRANSLATION_TEMPLATE_ECHO',
+    result.code || result.results?.[0]?.code || 'none',
+  )
+  const actualMicro = costMicroCny(40, INPUT_YUAN_PER_MILLION) + costMicroCny(40, OUTPUT_YUAN_PER_MILLION)
+  check(
+    'a rejected fragment is billed at actual usage, not the 8192 reserve',
+    runtime.ledger.usedMicro() === actualMicro,
+    `used=${runtime.ledger.usedMicro()} actual=${actualMicro}`,
+  )
+  runtime.close()
+}
+check('a broken ledger is not described as an empty monthly budget', userMessageFor('TRANSLATION_LEDGER_UNAVAILABLE') === '翻译暂不可用')
+check('an unreachable service is not described as a bad translation', userMessageFor('TRANSLATION_UPSTREAM_UNREACHABLE') === '服务没连上，请重试')
 
 await import('./verify-paper-translation-repair.mjs')
 

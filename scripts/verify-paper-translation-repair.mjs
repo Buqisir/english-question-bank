@@ -91,18 +91,21 @@ try {
 
   const before = 'Earlier unrelated context '.repeat(60) + ' The doctor measured the '
   const after = ' of the patient. ' + 'Following context '.repeat(90)
-  await check('domains preserve the nearest pre-context and complete long after-context', () => {
+  await check('domains quote the full occurrence and do not glue the selection to the following words', () => {
     const domains = buildTranslationDomains({ taskMode: 'contextual-fragment', beforeSelection: before, selectedText: 'pulse', afterSelection: after })
-    assert.ok(domains.includes(`Context before: ${before}`))
+    assert.ok(domains.startsWith('High-school English exam paper.'))
     assert.ok(domains.includes('The doctor measured the '))
-    assert.ok(domains.endsWith(`Context after: ${after}`))
+    assert.ok(domains.includes(after.trim()))
+    assert.equal(domains.includes('Context after:'), false)
+    assert.equal(domains.includes('Selected: pulse'), false)
+    assert.equal(domains.includes('…'), false)
   })
-  await check('long selected text and Unicode are not silently clipped in domains', () => {
+  await check('long selected text stays inside the occurrence quote', () => {
     const selectedText = 'Selected text '.repeat(90) + '🧪'
     const domains = buildTranslationDomains({ taskMode: 'selected-text', beforeSelection: before, selectedText, afterSelection: after })
-    assert.ok(domains.includes(`Selected: ${selectedText}`))
-    assert.ok(domains.length > 4000)
-    assert.ok(!domains.includes('…'))
+    assert.ok(domains.includes('Selected text '))
+    assert.ok(domains.includes('🧪'))
+    assert.equal(domains.includes('…'), false)
   })
 
   await check('an already aborted single-flight subscriber starts no work', async () => {

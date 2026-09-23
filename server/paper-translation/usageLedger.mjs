@@ -199,7 +199,10 @@ export function createUsageLedger({
     },
     settle(receiptId, usage) {
       const row = load.get(receiptId)
-      if (!row) return null
+      if (!row || row.status === 'released') return null
+      if (row.status === 'settled') {
+        return { actualMicroCny: row.actual_micro_cny, held: false }
+      }
       if (!usage) {
         updateStatus.run(
           'unknown_held',

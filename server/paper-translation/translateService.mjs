@@ -9,6 +9,7 @@ import {
   MAX_SELECTED_UTF16,
   MODEL_ID,
   PROMPT_VERSION,
+  TASK_FRAGMENT,
   PROVIDER_ID,
   REQUEST_SCHEMA,
   RESPONSE_SCHEMA,
@@ -29,17 +30,56 @@ import { conservativeInputTokenEstimate, promptFitsFlashInput } from '../../shar
 import { createBoundedLru } from './boundedLru.mjs'
 import { createTranslationCacheStore } from './cacheStore.mjs'
 import { readPaperTranslationConfig } from './config.mjs'
-import { createQwenMtFlashAdapter } from './qwenMtFlash.mjs'
+import { createQwenMtFlashAdapter, looksLikeExpandedFragment } from './qwenMtFlash.mjs'
 import { createTranslationScheduler } from './scheduler.mjs'
 import { createSingleFlight } from './singleFlight.mjs'
 import { createUsageLedger, unavailableLedger } from './usageLedger.mjs'
 
-function serviceError(code, message, { status = 400, retryable = false } = {}) {
+function serviceError(code, message, { status = 400, retryable = false, usage = null } = {}) {
   const error = new Error(message)
   error.code = code
   error.status = status
   error.retryable = retryable
+  if (usage) error.usage = usage
   throw error
+}
+
+function denialFromReason(reason) {
+  switch (reason) {
+    case 'budget-exhausted':
+      return { code: 'TRANSLATION_BUDGET_EXHAUSTED', retryable: true }
+    case 'auth':
+      return { code: 'not_authenticated', retryable: false }
+    case 'disabled':
+      return { code: 'TRANSLATION_DISABLED', retryable: false }
+    default:
+      return { code: 'TRANSLATION_UNAVAILABLE', retryable: true }
+  }
+}
+
+function statusForTranslationCode(code) {
+  switch (code) {
+    case 'TRANSLATION_DISABLED':
+    case 'TRANSLATION_UNAVAILABLE':
+    case 'TRANSLATION_LEDGER_UNAVAILABLE':
+    case 'TRANSLATION_PROVIDER_AUTH':
+    case 'TRANSLATION_KEY_MISSING':
+      return 503
+    case 'TRANSLATION_BUDGET_EXHAUSTED':
+    case 'TRANSLATION_RATE_LIMITED':
+    case 'TRANSLATION_USER_RATE_LIMIT':
+    case 'TRANSLATION_GLOBAL_RATE_LIMIT':
+      return 429
+    case 'not_authenticated':
+      return 401
+    case 'SELECTION_TOKEN_LIMIT':
+    case 'SELECTION_LIMIT':
+      return 413
+    case 'TRANSLATION_TIMEOUT':
+      return 504
+    default:
+      return 502
+  }
 }
 
 function userMessageFor(code) {
@@ -51,8 +91,14 @@ function userMessageFor(code) {
     case 'SELECTION_TOKEN_LIMIT':
       return '选区过长，请缩短后再翻译'
     case 'TRANSLATION_BUDGET_EXHAUSTED':
-    case 'TRANSLATION_LEDGER_UNAVAILABLE':
       return '本月翻译额度已用完，已缓存的结果仍可查看'
+    case 'TRANSLATION_LEDGER_UNAVAILABLE':
+    case 'TRANSLATION_UNAVAILABLE':
+    case 'TRANSLATION_DISABLED':
+    case 'TRANSLATION_PROVIDER_AUTH':
+      return '翻译暂不可用'
+    case 'TRANSLATION_UPSTREAM_UNREACHABLE':
+      return '服务没连上，请重试'
     case 'TRANSLATION_RATE_LIMITED':
     case 'TRANSLATION_USER_RATE_LIMIT':
     case 'TRANSLATION_GLOBAL_RATE_LIMIT':
@@ -243,6 +289,7 @@ export function createPaperTranslationRuntime({
         outputTokens: maxTokens,
       })
       let dispatched = false
+      let settled = false
       try {
         scheduler.admitGlobalDispatch(conservativeInputTokenEstimate(prompt) + maxTokens)
         const releaseSlot = await scheduler.acquireSlot()
@@ -260,7 +307,20 @@ export function createPaperTranslationRuntime({
             translationOptions,
             maxTokens,
           }, flightSignal)
+          if (
+            adjacent.taskMode === TASK_FRAGMENT
+            && looksLikeExpandedFragment(adjacent.selectedText, result.translation)
+          ) {
+            getLedger().settle(receipt.receiptId, result.usage)
+            settled = true
+            serviceError('TRANSLATION_TEMPLATE_ECHO', 'Translation expanded beyond the selection', {
+              status: 502,
+              retryable: true,
+              usage: result.usage,
+            })
+          }
           getLedger().settle(receipt.receiptId, result.usage)
+          settled = true
           const record = {
             translation: result.translation,
             taskMode: adjacent.taskMode,
@@ -269,7 +329,11 @@ export function createPaperTranslationRuntime({
             contextCoverage: adjacent.contextCoverage,
             promptVersion: promptMeta().promptVersion,
           }
-          getCacheStore()?.set(cacheKey, record)
+          try {
+            getCacheStore()?.set(cacheKey, record)
+          } catch {
+            // The provider call is already settled. A cache miss must not rebill it.
+          }
           logEvent({
             requestId,
             code: 'ok',
@@ -289,8 +353,11 @@ export function createPaperTranslationRuntime({
           consecutiveAuthFailures += 1
           if (consecutiveAuthFailures >= 3) providerCircuitUntil = now() + 60_000
         }
-        if (!dispatched) getLedger().release(receipt.receiptId)
-        else getLedger().settle(receipt.receiptId, null)
+        if (!settled) {
+          const usage = error?.usage
+          if (dispatched && usage) getLedger().settle(receipt.receiptId, usage)
+          else getLedger().release(receipt.receiptId)
+        }
         throw error
       }
     }, signal)
@@ -390,13 +457,14 @@ export function createPaperTranslationRuntime({
     }
 
     if (misses.length > 0 && !cap.canRequestNew) {
+      const denial = denialFromReason(cap.reason)
       for (const miss of misses) {
         results[miss.item.segmentIndex] = {
           segmentIndex: miss.item.segmentIndex,
           status: 'error',
-          code: cap.reason === 'disabled' ? 'TRANSLATION_DISABLED' : 'TRANSLATION_CACHE_ONLY',
-          message: userMessageFor('TRANSLATION_BUDGET_EXHAUSTED'),
-          retryable: cap.reason === 'budget-exhausted',
+          code: denial.code,
+          message: userMessageFor(denial.code),
+          retryable: denial.retryable,
         }
       }
     } else if (misses.length > 0) {
@@ -457,11 +525,7 @@ export function createPaperTranslationRuntime({
 
     if (ok.length === 0) {
       const first = failed[0]
-      const status = first?.code === 'TRANSLATION_DISABLED' ? 503
-        : first?.code === 'TRANSLATION_BUDGET_EXHAUSTED' || first?.code === 'TRANSLATION_CACHE_ONLY' ? 429
-        : first?.code === 'SELECTION_TOKEN_LIMIT' || first?.code === 'SELECTION_LIMIT' ? 413
-        : first?.code === 'TRANSLATION_TIMEOUT' ? 504
-        : 502
+      const status = statusForTranslationCode(first?.code)
       const error = new Error(first?.message || 'Translation failed')
       error.code = first?.code || 'TRANSLATION_FAILED'
       error.status = status

@@ -35,6 +35,10 @@ export function splitSentences(text) {
   return sentences
 }
 
+function isBlank(text) {
+  return /^[\t\n\r ]*$/.test(text)
+}
+
 function coveringSentenceIndexes(sentences, start, end) {
   const indexes = []
   for (let i = 0; i < sentences.length; i += 1) {
@@ -77,8 +81,8 @@ export function buildAdjacentContext(streamText, start, end) {
     end: end - windowStart,
   }
   const coversCompleteSentences = covered.length > 0
-    && start === sentences[first].start
-    && end === sentences[last].end
+    && isBlank(streamText.slice(sentences[first].start, start))
+    && isBlank(streamText.slice(end, sentences[last].end))
   const atBoundary = windowStartIndex === 0 || windowEndIndex === sentences.length - 1
   const missingNeighbor = (first === 0 && sentences.length > 1)
     || (last === sentences.length - 1 && sentences.length > 1)

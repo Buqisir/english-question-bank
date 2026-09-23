@@ -5,11 +5,12 @@ import {
 } from '../../shared/paper-selection/constants.mjs'
 import { endpointAllowed } from './config.mjs'
 
-function translationError(code, message, { retryable = false, status = 502 } = {}) {
+function translationError(code, message, { retryable = false, status = 502, usage = null } = {}) {
   const error = new Error(message)
   error.code = code
   error.retryable = retryable
   error.status = status
+  if (usage) error.usage = usage
   return error
 }
 
@@ -19,6 +20,14 @@ export function looksLikeTemplateEcho(text) {
     || (/before_selection/.test(text) && /selected_text/.test(text))
     || /Context before:/.test(text)
     || /Do not translate the context/.test(text)
+}
+
+export function looksLikeExpandedFragment(selectedText, translation) {
+  const selected = typeof selectedText === 'string' ? selectedText.trim() : ''
+  const text = typeof translation === 'string' ? translation.trim() : ''
+  if (!selected || !text) return false
+  if (selected.length > 40) return false
+  return text.length > Math.max(24, selected.length * 4)
 }
 
 export function createQwenMtFlashAdapter({
@@ -116,17 +125,26 @@ export function createQwenMtFlashAdapter({
     if (payload?.model && payload.model !== MODEL_ID) {
       throw translationError('TRANSLATION_MODEL_MISMATCH', 'Translation provider returned an unexpected model')
     }
+    const observedUsage = usage && Number.isInteger(usage.prompt_tokens) && Number.isInteger(usage.completion_tokens)
+      ? {
+        promptTokens: usage.prompt_tokens,
+        completionTokens: usage.completion_tokens,
+        totalTokens: Number.isInteger(usage.total_tokens)
+          ? usage.total_tokens
+          : usage.prompt_tokens + usage.completion_tokens,
+      }
+      : null
     if (typeof content !== 'string' || content.trim() === '') {
-      throw translationError('TRANSLATION_EMPTY', 'Translation was empty')
+      throw translationError('TRANSLATION_EMPTY', 'Translation was empty', { usage: observedUsage })
     }
     if (finishReason === 'length') {
-      throw translationError('TRANSLATION_TRUNCATED', 'Translation was truncated')
+      throw translationError('TRANSLATION_TRUNCATED', 'Translation was truncated', { usage: observedUsage })
     }
     if (finishReason && finishReason !== 'stop') {
-      throw translationError('TRANSLATION_INCOMPLETE', 'Translation did not finish cleanly')
+      throw translationError('TRANSLATION_INCOMPLETE', 'Translation did not finish cleanly', { usage: observedUsage })
     }
     if (looksLikeTemplateEcho(content)) {
-      throw translationError('TRANSLATION_TEMPLATE_ECHO', 'Translation echoed the prompt')
+      throw translationError('TRANSLATION_TEMPLATE_ECHO', 'Translation echoed the prompt', { usage: observedUsage })
     }
     if (
       !usage
