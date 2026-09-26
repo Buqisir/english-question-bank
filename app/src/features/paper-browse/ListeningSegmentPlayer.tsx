@@ -137,9 +137,15 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     observer.observe(container)
     observer.observe(card)
     if (lecture) observer.observe(lecture)
+    // Text wrapping moves the absolutely positioned trail after resize without
+    // resizing the player. Reposition when that host commits its new anchor.
+    const trail = root.closest('.ps-text-trail')
+    const anchorObserver = new MutationObserver(place)
+    if (trail) anchorObserver.observe(trail, { attributes: true, attributeFilter: ['style'] })
     window.addEventListener('resize', place)
     return () => {
       observer.disconnect()
+      anchorObserver.disconnect()
       window.removeEventListener('resize', place)
     }
   }, [open, size, waveWidth])

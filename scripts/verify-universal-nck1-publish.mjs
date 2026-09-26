@@ -1473,6 +1473,9 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       await player.locator('.listening-player-trigger').click()
       for (const width of [390, 320, 1280]) {
         await screenPage.setViewportSize({ width, height: 900 })
+        // Let the text-trail ResizeObserver commit its new anchor position;
+        // checking before that commit can falsely accept the previous position.
+        await screenPage.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
         await screenPage.waitForFunction(() => {
           const card = document.querySelector('.listening-player-card')?.getBoundingClientRect()
           return card && card.left >= 7 && card.right <= document.documentElement.clientWidth - 7
