@@ -6,7 +6,7 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
-import { resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef58, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
@@ -23,6 +23,7 @@ import {
 import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
 import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummaries.mjs'
 import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
+import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
@@ -30,6 +31,7 @@ import {
 import {
   NCK1_OCR_EVIDENCE_FILE_NAME,
   NCK1_OCR_REVIEW_CODES,
+  nck1OcrSourceSetDigest,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
 } from '../paper-import/nck1OcrSourceEvidence.mjs'
@@ -257,7 +259,7 @@ function loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest) {
   }
 }
 
-export function loadNck1ReviewSource(rootDir) {
+export function loadNck1ReviewSource(rootDir, { preparingSpelling = false } = {}) {
   const config = readJson(resolveReviewFile(rootDir, 'config.json'), 'config.json')
   const manifest = readJson(
     resolveReviewFile(rootDir, 'universal-source-manifest.json'),
@@ -270,6 +272,7 @@ export function loadNck1ReviewSource(rootDir) {
     ![
       'universal-nck1-source-manifest-v1',
       'universal-nck1-source-manifest-v2',
+      'universal-nck1-source-manifest-v3',
     ].includes(manifest.schemaVersion)
     || manifest.paperId !== config.paperId
     || !Array.isArray(manifest.documents)
@@ -281,6 +284,7 @@ export function loadNck1ReviewSource(rootDir) {
           .map((descriptor) => structuredClone(descriptor)),
         asr: structuredClone(validatedListeningAudioEvidence.asr),
         check: structuredClone(validatedListeningAudioEvidence.check),
+        segments: structuredClone(validatedListeningAudioEvidence.segments),
       }
     : null
   const materializationPath = resolveReviewFile(
@@ -326,9 +330,11 @@ export function loadNck1ReviewSource(rootDir) {
       }),
     )
   }
+  const spellingReviewBytes = loadSpellingReview(rootDir, config, { preparing: preparingSpelling })
   const sourceInput = {
     kind: 'nck1-source-materialization',
     materializationBytes,
+    ...(spellingReviewBytes ? { spellingReviewBytes } : {}),
     ...(listeningAudio ? { listeningAudio } : {}),
     documents: materialization.documents.map((document) => {
       const sourcePath = documentPathById.get(document.documentId)
@@ -367,10 +373,19 @@ export function loadNck1ReviewSource(rootDir) {
       }
     }),
   }
+  const reviewedMaterialization = spellingReviewBytes
+    ? applySpellingReview(materializationBytes, spellingReviewBytes)
+    : materialization
+  if (spellingReviewBytes) {
+    verifyTerminalWhitespaceSourceEvidence(materializationBytes, spellingReviewBytes, sourceInput.documents)
+  }
   return {
     config,
     manifest,
-    materialization,
+    materialization: reviewedMaterialization,
+    spellingReviewSummary: spellingReviewBytes
+      ? summarizeSpellingReview(JSON.parse(new TextDecoder().decode(spellingReviewBytes)))
+      : null,
     sourceInput,
     listeningAudioEvidence,
     listeningAudioBytes: null,
@@ -596,6 +611,16 @@ export function reviewBundleFilePaths(rootDir) {
       mediaType: 'application/json',
       role: 'source_manifest',
     },
+    ...(existsSync(resolveReviewFile(rootDir, 'agent-ocr-correction-report-v2.json')) ? [{
+      path: 'agent-ocr-correction-report-v2.json',
+      mediaType: 'application/json',
+      role: 'agent_ocr_correction_report',
+    }] : []),
+    ...(loaded.sourceInput.spellingReviewBytes ? [{
+      path: SPELLING_REVIEW_FILE,
+      mediaType: 'application/json',
+      role: 'spelling_review',
+    }] : []),
     ...sourceFiles,
     ...NCK1_STAGED_ANALYSIS_FILES
       .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
@@ -646,10 +671,11 @@ export function loadNck1OcrReviewSource(rootDir) {
     'universal-source-manifest.json',
   )
   if (
-    manifest.schemaVersion !== 'universal-nck1-source-manifest-v1'
+    !['universal-nck1-source-manifest-v1', 'universal-nck1-source-manifest-v3'].includes(manifest.schemaVersion)
     || manifest.paperId !== config.paperId
     || !Array.isArray(manifest.documents)
   ) fail('Universal NCK1 OCR source manifest is incomplete')
+  assertListeningAudioManifest(rootDir, manifest)
   const documents = manifest.documents.map((document) => {
     const filePath = resolveReviewFile(
       rootDir,
@@ -710,6 +736,11 @@ export function ocrReviewBundleFilePaths(rootDir) {
       path: normalizedRelativePath(document.path, `document ${document.documentId}`),
       mediaType: document.mediaType,
       role: document.renditionOf ? 'source_rendition' : document.role,
+    })),
+    ...(manifest.attachments || []).map((attachment) => ({
+      path: normalizedRelativePath(attachment.path, `attachment ${attachment.attachmentId}`),
+      mediaType: attachment.mediaType,
+      role: attachment.role,
     })),
     ...manifest.documents.flatMap((document) =>
       (document.pages || []).map((page) => ({
@@ -800,13 +831,111 @@ export function validateNck1OcrReviewConfirmation(projection, confirmation) {
   return confirmation
 }
 
+export function buildAgentOcrCorrectionReport(projection, confirmation, notes) {
+  if (projection.config.importProfile !== 'public-paper-v1') {
+    fail('Agent proofreading requires public-paper-v1', 'IMPORT_REVIEW_AGENT_OCR_PROFILE_REQUIRED')
+  }
+  validateNck1OcrReviewConfirmation(projection, confirmation)
+  const invalid = (message) => fail(message, 'IMPORT_REVIEW_OCR_REPORT_INVALID')
+  if (!Array.isArray(notes)) invalid('correctionNotes must be an array, including when no corrections are needed')
+  const items = new Map()
+  for (const document of confirmation.documents) {
+    const evidenceDocument = projection.evidence.documents.find((entry) => entry.documentId === document.documentId)
+    for (const page of document.pages) {
+      const observations = evidenceDocument.pages.find((entry) => entry.page === page.page).observations
+      for (const item of page.orderedItems) {
+        items.set(item.itemId, {
+          documentId: document.documentId, page: page.page, itemId: item.itemId,
+          observationIds: item.observationIds,
+          ocrText: item.observationIds.map((id) => observations.find((entry) => entry.observationId === id).text).join('\n'),
+          correctedText: item.text,
+        })
+      }
+    }
+  }
+  const seen = new Set()
+  const entries = notes.map((note) => {
+    const item = items.get(note?.itemId)
+    if (!item || seen.has(note.itemId)
+      || !['ocr_repair', 'source_typo', 'uncertain'].includes(note.kind)
+      || typeof note.reason !== 'string' || !note.reason.trim()
+      || typeof note.sourceText !== 'string' || !note.sourceText.trim()) {
+      invalid('Every correction note needs a unique confirmed item, kind, sourceText and reason')
+    }
+    if (note.kind !== 'source_typo' && note.sourceText !== item.correctedText) {
+      invalid('OCR repairs and uncertain readings must preserve the transcribed source text')
+    }
+    seen.add(note.itemId)
+    return { ...item, kind: note.kind, sourceText: note.sourceText, reason: note.reason }
+  })
+  for (const item of items.values()) {
+    if (item.ocrText !== item.correctedText && !seen.has(item.itemId)) {
+      invalid(`Changed OCR item requires a correction note: ${item.itemId}`)
+    }
+  }
+  return {
+    schemaVersion: 'nck1-agent-proofreading-report-v1',
+    paperId: projection.paperId, sourceSetDigest: projection.sourceSetDigest,
+    evidenceDigest: projection.evidenceDigest, reviewedBy: 'import_agent', entries,
+  }
+}
+
+function jsonPointerValue(root, pointer) {
+  if (typeof pointer !== 'string' || !pointer.startsWith('/')) return undefined
+  let value = root
+  for (const raw of pointer.slice(1).split('/')) {
+    const key = raw.replace(/~1/g, '/').replace(/~0/g, '~')
+    if (value === null || typeof value !== 'object' || !Object.hasOwn(value, key)) return undefined
+    value = value[key]
+  }
+  return value
+}
+
+export function validateAgentOcrCorrectionSidecar(sidecar, { materialization, paperId, documents, sourceDocuments, sourceDigest, candidateDigest }) {
+  const invalid = (message) => fail(message, 'IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID')
+  if (sidecar?.schemaVersion !== 'agent-ocr-correction-report-v2'
+    || sidecar.paperId !== paperId
+    || typeof sidecar.ocrConfirmationId !== 'string'
+    || typeof sidecar.ocrRevisionId !== 'string'
+    || typeof sidecar.originalSourceSetDigest !== 'string'
+    || typeof sidecar.ocrEvidenceDigest !== 'string'
+    || !Array.isArray(sidecar.entries)) invalid('Agent OCR correction report identity is incomplete')
+  if (!sourceDigest || !candidateDigest || !documents
+    || sidecar.sourceDigest !== sourceDigest || sidecar.candidateDigest !== candidateDigest
+    || sidecar.originalSourceSetDigest !== nck1OcrSourceSetDigest(documents)) {
+    invalid('Correction report no longer binds the current Candidate and original documents')
+  }
+  const actualSources = new Map((sourceDocuments || []).map((document) => [document.documentId, document.bytes]))
+  if (documents.filter((document) => !document.renditionOf).some((document) => {
+    const bytes = actualSources.get(document.documentId)
+    return !(bytes instanceof Uint8Array) || bytes.byteLength !== document.byteLength || sha256(bytes) !== document.sha256
+  })) invalid('Correction report original document metadata differs from actual source bytes')
+  const allowed = new Set(['ocr_misrecognition', 'source_spelling_error', 'source_layout_error'])
+  for (const [index, entry] of sidecar.entries.entries()) {
+    if (!allowed.has(entry?.category)
+      || typeof entry.ocrItemId !== 'string'
+      || typeof entry.before !== 'string'
+      || typeof entry.after !== 'string'
+      || typeof entry.reason !== 'string' || !entry.reason.trim()
+      || typeof entry.sourceLocator?.documentId !== 'string'
+      || !Number.isInteger(entry.sourceLocator?.page)
+      || typeof entry.materializationTarget?.jsonPointer !== 'string') {
+      invalid(`Agent OCR correction report entry ${index} is incomplete`)
+    }
+    if (jsonPointerValue(materialization, entry.materializationTarget.jsonPointer) !== entry.after) {
+      invalid(`Agent OCR correction report entry ${index} no longer matches current Materialization`)
+    }
+  }
+  return sidecar
+}
+
 export function buildImportReviewProjection(
   rootDir,
-  { reviewKind = 'candidate', requireAnalyses = false } = {},
+  { reviewKind = 'candidate', requireAnalyses = false, expectedCandidateDigest = null } = {},
 ) {
   return reviewKind === 'ocr'
     ? buildNck1OcrReviewProjection(rootDir)
-    : buildNck1ReviewProjection(rootDir, { requireAnalyses })
+    : buildNck1ReviewProjection(rootDir, { requireAnalyses, expectedCandidateDigest })
 }
 
 function visibleStructure(projected) {
@@ -968,7 +1097,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54', '55'].includes(
+        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
@@ -1239,7 +1368,7 @@ function listeningReviewProjection(
     })),
     audio: analyzedPackage
       ? {
-          state: 'pending_external_playback_review',
+          state: 'included_in_candidate_review',
           durationSeconds: analyzedPackage.listeningAudio.durationSeconds,
           playbackAudioSha256: analyzedPackage.listeningAudio.sha256,
           mediaType: analyzedPackage.listeningAudio.mediaType,
@@ -1249,6 +1378,14 @@ function listeningReviewProjection(
           questionCount: materialization.listening.questions.length,
           answerCount: materialization.listening.answers.length,
         }
+      : listeningAudioEvidence?.segments
+        ? {
+            state: listeningAudioEvidence.segments.state,
+            durationSeconds: listeningAudioEvidence.segments.durationSeconds,
+            playbackAudioSha256: listeningAudioEvidence.segments.playbackAudioSha256,
+            contentValidation: 'not_performed',
+            candidates: structuredClone(listeningAudioEvidence.segments.candidates),
+          }
       : {
           durationSeconds: listeningAudioEvidence.asr.durationSeconds,
           engine: structuredClone(listeningAudioEvidence.asr.engine),
@@ -1410,9 +1547,21 @@ export function buildNck1CompatibilityPackage({
 export function buildNck1ReviewProjection(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
+  expectedCandidateDigest = null,
 } = {}) {
   const loaded = loadNck1ReviewSource(rootDir)
-  const imported = importCanonicalCandidate(loaded.sourceInput)
+  let imported = importCanonicalCandidate(loaded.sourceInput)
+  // Reconstruct a stored Review under the exact historical authority. A new
+  // default cannot silently change its digest or visual interpretation.
+  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
+    && !loaded.analyzedPackage) {
+    imported = importCanonicalCandidate(loaded.sourceInput, undefined, {
+      materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
+    })
+  }
+  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest) {
+    fail('Stored Candidate does not match a retained authority', 'IMPORT_REVIEW_PROJECTION_MISMATCH')
+  }
   if (!imported.candidate || imported.issues.length > 0) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
@@ -1466,6 +1615,21 @@ export function buildNck1ReviewProjection(rootDir, {
     slotBindings,
     sourceHasListening: slotBindings.some((entry) => entry.familyContractId === 'listening'),
   })
+  const correctionReportPath = resolveReviewFile(rootDir, 'agent-ocr-correction-report-v2.json')
+  const ocrCorrectionReport = existsSync(correctionReportPath)
+    ? validateAgentOcrCorrectionSidecar(
+        readJson(correctionReportPath, 'agent-ocr-correction-report-v2.json'),
+        {
+          materialization: loaded.sourceInput.spellingReviewBytes
+            ? JSON.parse(new TextDecoder().decode(loaded.sourceInput.materializationBytes))
+            : loaded.materialization,
+          paperId: loaded.materialization.paperId,
+          documents: loaded.manifest.documents,
+          sourceDocuments: loaded.sourceInput.documents,
+          sourceDigest: preview.candidate.source.sha256, candidateDigest: preview.candidate.candidateDigest,
+        },
+      )
+    : null
   return {
     ...loaded,
     paperId: loaded.materialization.paperId,
@@ -1496,6 +1660,7 @@ export function buildNck1ReviewProjection(rootDir, {
     publicSearchMetadata: publicSearchMetadata?.sidecar || null,
     publicSearchMetadataBytes: publicSearchMetadata?.bytes || null,
     publicSearchMetadataDigest: publicSearchMetadata?.digest || null,
+    ocrCorrectionReport,
     paginationPlan: paginationPlan?.plan || null,
     paginationPlanDigest: paginationPlan?.digest || null,
     paginationSlotBindings: slotBindings,

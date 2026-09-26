@@ -7,6 +7,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  renameSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -14,8 +15,10 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import {
+  compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
+import { validateInlineBlankTextBoundaries } from '../../shared/paper-canonical/inlineBlankBoundaries.mjs'
 import {
   sha256,
 } from '../../shared/paper-canonical/stable.mjs'
@@ -60,8 +63,10 @@ import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mj
 import {
   finalizeListeningAudio,
   stageListeningAudio,
+  stageSignalListeningAudio,
 } from './listening-audio.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
+import { loadSpellingReview, TEXT_REVIEW_POLICY } from '../../server/paper-import/spellingReview.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -97,15 +102,33 @@ function writeBlockedSignal(paperId, error) {
   }, null, 2)}\n`)
 }
 
+function retireRecoveredSpellingBlock(paperDir) {
+  const blockedPath = path.join(paperDir, 'signals', 'blocked.json')
+  if (!existsSync(blockedPath)) return
+  const bytes = readFileSync(blockedPath)
+  let blocked
+  try { blocked = JSON.parse(bytes.toString('utf8')) } catch { return }
+  if (blocked.code !== 'source_incomplete'
+    || !blocked.note?.startsWith('Spelling review:')) return
+  const historyDir = path.join(paperDir, 'signals', 'history')
+  const historyPath = path.join(historyDir, `blocked-${sha256(bytes)}.json`)
+  mkdirSync(historyDir, { recursive: true })
+  if (existsSync(historyPath)) throw new Error('Recovered blocker history already exists')
+  renameSync(blockedPath, historyPath)
+}
+
 function runPaperCommand(paperId, operation, { blockOnFailure = false } = {}) {
   const paperDir = paperDirFor(paperId)
   return withPaperWriterLock({ paperDir, paperId }, () => {
+    let result
     try {
-      return operation()
+      result = operation()
     } catch (error) {
       if (blockOnFailure) writeBlockedSignal(paperId, error)
       throw error
     }
+    if (process.argv[2] === 'verify') retireRecoveredSpellingBlock(paperDir)
+    return result
   })
 }
 
@@ -412,6 +435,7 @@ function initializeCompleteSourceSet({
     paperId,
     format: 'universal-nck1',
     importProfile: 'public-paper-v1',
+    spellingReview: TEXT_REVIEW_POLICY,
     provenance: { paperName, source: provenance },
     universalSourceManifestPath: 'universal-source-manifest.json',
     canonicalRequestPath: manifest.canonicalRequestPath,
@@ -782,9 +806,12 @@ function loadInput(paperId) {
     document.documentId,
     path.join(paperDir, document.path),
   ]))
+  const config = JSON.parse(readFileSync(path.join(paperDir, 'config.json'), 'utf8'))
+  const spellingReviewBytes = loadSpellingReview(paperDir, config)
   return {
     kind: 'nck1-source-materialization',
     materializationBytes,
+    ...(spellingReviewBytes ? { spellingReviewBytes } : {}),
     documents: materialization.documents.map((document) => {
       const sourcePath = documentPathById.get(document.documentId)
       if (!sourcePath || !existsSync(sourcePath)) fail(`Materialized document is unavailable: ${document.documentId}`)
@@ -819,6 +846,10 @@ function verify(paperId) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
   }
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  if (!preview.compilation) fail(JSON.stringify(preview.unresolvedIssues))
+  const boundaryIssues = validateInlineBlankTextBoundaries(preview.compilation.artifacts.canonicalPaper.questionGroups)
+  if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
   const { paperDir } = paperContext(paperId)
   const config = JSON.parse(readFileSync(path.join(paperDir, 'config.json'), 'utf8'))
   console.log(JSON.stringify({
@@ -866,6 +897,11 @@ function materialize(paperId) {
 
 function stageAudio(paperId) {
   const sourcePath = path.resolve(value('--audio') || '')
+  if (process.argv.includes('--signal-only')) {
+    const result = stageSignalListeningAudio({ paperDir: paperDirFor(paperId), paperId, sourcePath })
+    console.log(JSON.stringify({ ok: true, ...result }, null, 2))
+    return
+  }
   const result = stageListeningAudio({
     paperDir: paperDirFor(paperId),
     paperId,

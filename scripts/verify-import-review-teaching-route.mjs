@@ -2,7 +2,7 @@
 
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'
-import { mkdirSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { loadCompanionAnalysisSource } from '../server/exports/companionAnalysisRenderer.mjs'
@@ -164,11 +164,10 @@ const browser = await playwright.default.chromium.launch({ headless: true, chann
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 })
   await page.goto(`http://127.0.0.1:${address.port}/ops/?view=review`)
-  await page.getByRole('tab', { name: '教学解析' }).click()
-  await page.frameLocator('#review-frame').getByText(sentinels.listening).waitFor()
-  await page.frameLocator('#review-frame').getByText(sentinels.writing).waitFor()
-  mkdirSync(new URL('../.amp/in/artifacts', import.meta.url), { recursive: true })
-  await page.screenshot({ path: new URL('../.amp/in/artifacts/owner-teaching-tab.png', import.meta.url).pathname, fullPage: false })
+  await page.frameLocator('#review-frame').getByText('synthetic review screen').waitFor()
+  assert.deepEqual(await page.getByRole('tab').allTextContents(), ['Screen', 'PDF'])
+  assert.equal(await page.getByRole('tab', { name: '教学解析' }).count(), 0)
+  assert.equal(await page.getByRole('tab', { name: 'Screen', exact: true }).getAttribute('aria-selected'), 'true')
 } finally {
   await browser.close()
   await new Promise((resolve) => browserServer.close(resolve))

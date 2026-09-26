@@ -71,8 +71,8 @@ const nck1WritingChrome = Object.freeze({
     '阅读下面材料，根据其内容和所给段落开头语续写两段话，使之构成一篇完整的短文。',
 })
 const pianoRailWritingLabels = Object.freeze({
-  application: '第一节',
-  continuation: '第二节',
+  application: '应用文',
+  continuation: '续写',
 })
 const zhejiangWritingChrome = Object.freeze({
   part: '第四部分 写作（共两节，满分40分）',
@@ -1921,6 +1921,8 @@ async function assertContinuationMaterialWrap(page, canonical, label) {
       lineCount: range.getClientRects().length,
       textIndentPx: Number.parseFloat(getComputedStyle(element).textIndent),
       fontSizePx: Number.parseFloat(getComputedStyle(element).fontSize),
+      textAlign: getComputedStyle(element).textAlign,
+      textAlignLast: getComputedStyle(element).textAlignLast,
     }
   }))
   assert.deepEqual(
@@ -1938,6 +1940,12 @@ async function assertContinuationMaterialWrap(page, canonical, label) {
       Math.abs(textIndentPx - 2 * fontSizePx) <= 0.5),
     true,
     `${label} applies the unified 2em first-line indent to every ordinary material paragraph`,
+  )
+  assert.equal(
+    observed.every(({ textAlign, textAlignLast }) =>
+      textAlign === 'justify' && ['auto', 'start', 'left'].includes(textAlignLast)),
+    true,
+    `${label} justifies material paragraphs without stretching their final lines`,
   )
 }
 
@@ -2846,7 +2854,7 @@ if (persistActualArtifacts) {
 const printArtifacts = []
 for (const { label, consumption, canonical } of cases) {
   for (const versionType of ['student', 'teacher']) {
-    const html = buildPrintHtml({
+    const printArgs = {
       title: `Continuation ${label}`,
       versionType,
       printStyle: 'exam',
@@ -2861,6 +2869,11 @@ for (const { label, consumption, canonical } of cases) {
       }],
       questionNumberStart: 1,
       canonicalConsumption: consumption,
+    }
+    const historicalHtml = buildPrintHtml(printArgs)
+    const html = buildPrintHtml({
+      ...printArgs,
+      canonicalConsumption: { ...consumption, consumerContractRef: consumerContractRefs.print_pdf },
     })
     assert.equal(
       (html.match(/data-canonical-writing-semantic-signature=/g) || [])
@@ -2906,7 +2919,7 @@ for (const { label, consumption, canonical } of cases) {
       html,
       `Print HTML ${label}/${versionType}`,
     )
-    printArtifacts.push({ label, versionType, html, canonical })
+    printArtifacts.push({ label, versionType, html, historicalHtml, canonical })
     if (persistActualArtifacts) {
       writeFileSync(
         path.join(actualArtifactRoot, `print-${label}-${versionType}.html`),
@@ -4039,8 +4052,15 @@ async function assertBrowserArtifacts() {
       })
     }
 
-    for (const { label, versionType, html, canonical } of printArtifacts) {
+    for (const { label, versionType, html, historicalHtml, canonical } of printArtifacts) {
       const page = await browser.newPage()
+      await page.setContent(historicalHtml, { waitUntil: 'load' })
+      const historicalAlignment = await page.locator(
+        '[data-canonical-continuation-writing-rhythm-role="material_paragraph"]',
+      ).evaluateAll(nodes => nodes.map(node => getComputedStyle(node).textAlign))
+      assert(historicalAlignment.length > 0)
+      assert(historicalAlignment.every(value => value === 'start'),
+        'pre-contract Print retains its original alignment')
       await page.setContent(html, { waitUntil: 'load' })
       const response = page.locator(
         `[data-canonical-response-slot-id="${canonical.answerRegion.responseSlotId}"]`,
@@ -4227,6 +4247,10 @@ async function assertBrowserArtifacts() {
 
 await assertBrowserArtifacts()
 assertExecutedCoverage()
+
+// Shared paragraph/notice roles and heading chains must remain covered by the
+// existing Paper verification pack, not just an optional one-off command.
+await import('./verify-paper-golden-role-layout.mjs')
 
 console.log(
   'paper canonical Continuation Writing rendered behavior verification passed',

@@ -14,9 +14,12 @@ import path from 'node:path'
 
 import { embeddedPaperFontCss } from '../server/paper-fonts.mjs'
 import { paperFontStack, paperFontFaces } from '../shared/papersurface/paperFonts.mjs'
+import adaptiveTypography from '../standards/paper-canonical/rendering/paper-typography-v11.json' with { type: 'json' }
 import {
   abcdLayoutRules,
+  adaptiveAbcdLayoutRules,
   abcdPlacementSignature,
+  layoutAbcdOptionGroup,
   expectedAbcdRendererFontClosure,
   layoutAbcdOptionSet,
   layoutFixedFourColumnClozeOptionSet,
@@ -77,6 +80,101 @@ for (const fixture of gold) {
   assert.match(result.rulesetRef.shapingImplementationDigest, /^sha256:[0-9a-f]{64}$/)
   assert.match(result.rulesetRef.fontMetricsDigest, /^sha256:[0-9a-f]{64}$/)
 }
+
+// A left-heavy A/C pair may move one shared anchor right, provided B/D still
+// fit with the original 420-twip gutter and 20-twip end safety. The old
+// authority remains fixed at 4160 and must not inherit the new selection.
+const adaptivePair = optionSet('adaptive-pair', ['W'.repeat(19), 'W'.repeat(19), 'W'.repeat(19), 'W'.repeat(20)])
+const fixedPair = layoutAbcdOptionSet(adaptivePair)
+const movedPair = layoutAbcdOptionSet(adaptivePair, adaptiveAbcdLayoutRules.rulesetId)
+assert.equal(fixedPair.mode, 'one_column')
+assert.equal(movedPair.mode, 'two_by_two')
+assert.equal(movedPair.placements[1].startTwip, 4464)
+assert.equal(movedPair.placements[3].startTwip, 4464)
+assert.equal(movedPair.placements[0].advanceTwip + 420 + 20 <= 4464, true)
+assert.equal(movedPair.placements[2].advanceTwip + 420 + 20 <= 4464, true)
+assert.equal(movedPair.placements[3].advanceTwip <= movedPair.rowWidthTwip - 4464 - 20, true)
+const lowerRowDrivesAnchor = layoutAbcdOptionSet(
+  optionSet('lower-row-drives', ['W'.repeat(18), 'W'.repeat(19), 'W'.repeat(19), 'W'.repeat(20)]),
+  adaptiveAbcdLayoutRules.rulesetId,
+)
+assert.equal(lowerRowDrivesAnchor.mode, 'two_by_two')
+assert.equal(lowerRowDrivesAnchor.placements[1].startTwip, 4452)
+assert.equal(lowerRowDrivesAnchor.placements[3].startTwip, 4452)
+assert.equal(layoutAbcdOptionSet(
+  optionSet('too-wide-right', ['W'.repeat(20), 'W'.repeat(20), 'W'.repeat(20), 'W'.repeat(21)]),
+  adaptiveAbcdLayoutRules.rulesetId,
+).mode, 'one_column')
+assert.deepEqual(
+  translateAbcdPlanToPointPlacement(movedPair).columnStartsPt,
+  [0, 223.2],
+)
+assert.equal(adaptiveAbcdLayoutRules.optionRowWidthTwip,
+  adaptiveTypography.optionAnchorFramework.rowWidthTwip)
+assert.equal(adaptiveAbcdLayoutRules.fourColumnPitchTwip,
+  adaptiveTypography.optionAnchorFramework.reading.fourColumnStartsTwip[1])
+assert.equal(adaptiveAbcdLayoutRules.twoColumnSecondTabTwip,
+  adaptiveTypography.optionAnchorFramework.reading.twoColumnStartsTwip[1])
+assert.equal(adaptiveAbcdLayoutRules.questionStemAndOuterOptionBlockStartTwip,
+  adaptiveTypography.coordinates.questionStemAndOuterOptionBlockStartTwip)
+const passageSets = [
+  adaptivePair,
+  optionSet('short-left', ['short', 'W'.repeat(19), 'short', 'W'.repeat(20)]),
+  optionSet('tight-right', ['short', 'W'.repeat(21), 'short', 'W'.repeat(21)]),
+  optionSet('four-columns', ['a', 'b', 'c', 'd']),
+]
+const individualPassagePlans = passageSets.map((set) =>
+  layoutAbcdOptionSet(set, adaptiveAbcdLayoutRules.rulesetId))
+assert.equal(individualPassagePlans[1].placements[1].startTwip, 4160)
+assert.equal(individualPassagePlans[2].mode, 'two_by_two')
+const alignedPassagePlans = layoutAbcdOptionGroup(passageSets, adaptiveAbcdLayoutRules.rulesetId)
+assert.deepEqual(alignedPassagePlans.map((plan) => plan.mode), [
+  'two_by_two', 'two_by_two', 'one_column', 'four_columns',
+])
+assert.deepEqual(alignedPassagePlans.slice(0, 2).map((plan) =>
+  plan.placements[1].startTwip), [4464, 4464])
+assert.deepEqual(alignedPassagePlans[3].placements.map(({ startTwip }) => startTwip),
+  [0, 2080, 4464, 6240], 'four-column C shares the passage B/D anchor without moving A/B/D')
+assert.equal(alignedPassagePlans[3].placements[2].startTwip,
+  alignedPassagePlans[0].placements[1].startTwip)
+assert.deepEqual(translateAbcdPlanToPointPlacement(alignedPassagePlans[3]).columnStartsPt,
+  [0, 104, 223.2, 312])
+assert.equal(alignedPassagePlans[1].placements[3].advanceTwip
+  <= alignedPassagePlans[1].rowWidthTwip - 4464 - 20, true)
+const shiftedD = optionSet('shifted-D', ['a', 'b', 'W'.repeat(6), 'd'])
+assert.equal(layoutAbcdOptionSet(shiftedD, adaptiveAbcdLayoutRules.rulesetId).mode,
+  'four_columns', 'the short C fits the historical four-column track')
+const [alignedPair, shiftedFour] = layoutAbcdOptionGroup([adaptivePair, shiftedD],
+  adaptiveAbcdLayoutRules.rulesetId)
+assert.equal(alignedPair.placements[1].startTwip, 4464)
+assert.equal(shiftedFour.mode, 'four_columns')
+assert.deepEqual(shiftedFour.placements.map(({ startTwip }) => startTwip),
+  [0, 2080, 4464, 6339], 'D moves only as far as the measured C plus gutter and safety require')
+assert.equal(shiftedFour.placements[2].advanceTwip + 420 + 20,
+  shiftedFour.placements[3].startTwip - shiftedFour.placements[2].startTwip)
+const tightFour = optionSet('tight-four', ['a', 'b', 'W'.repeat(7), 'W'.repeat(10)])
+assert.equal(layoutAbcdOptionSet(tightFour, adaptiveAbcdLayoutRules.rulesetId).mode,
+  'four_columns', 'the original four-column tracks admit both C and D')
+const [, safeFallback] = layoutAbcdOptionGroup([adaptivePair, tightFour],
+  adaptiveAbcdLayoutRules.rulesetId)
+assert.equal(safeFallback.mode, 'two_by_two',
+  'four columns fall back when shifting D would leave too little right-hand width')
+assert.deepEqual(safeFallback.placements.map(({ startTwip }) => startTwip),
+  [0, 4464, 0, 4464])
+assert.equal(safeFallback.placements[2].advanceTwip > 6240 - 4464 - 420 - 20, true)
+assert.equal(safeFallback.placements[2].advanceTwip <= 4464 - 420 - 20, true)
+const initiallyTwo = optionSet('initially-two', ['a', 'b', 'W'.repeat(8), 'W'])
+assert.equal(layoutAbcdOptionSet(initiallyTwo, adaptiveAbcdLayoutRules.rulesetId).mode,
+  'two_by_two')
+assert.equal(layoutAbcdOptionGroup([adaptivePair, initiallyTwo],
+  adaptiveAbcdLayoutRules.rulesetId)[1].mode, 'two_by_two',
+  'passage alignment cannot unexpectedly promote an existing two-row question into four columns')
+assert.deepEqual(layoutAbcdOptionGroup(passageSets).map((plan) =>
+  plan.placementSignature), passageSets.map((set) =>
+  layoutAbcdOptionSet(set).placementSignature))
+assert.deepEqual(layoutAbcdOptionGroup([adaptivePair, passageSets[3]]).at(-1)
+  .placements.map(({ startTwip }) => startTwip), [0, 2080, 4160, 6240],
+  'the v1 historical four-column geometry does not move with the passage')
 
 assert.deepEqual(
   resolveAbcdRendererFontClosure({
@@ -491,7 +589,7 @@ function assertRenderedContent(pdfPath, outputRoot, placements, label) {
   const extracted = execFileSync('pdftotext', [pdfPath, '-'], { encoding: 'utf8' })
   for (const placement of placements) {
     for (const line of placement.renderedText.split('\n')) {
-      const probes = line.length > 100 ? [...new Set(line.split(/\s+/u))] : [line]
+      const probes = line.length > 100 ? [...new Set(line.split(/\s+/u))] : [line.trimEnd()]
       for (const probe of probes) {
         assert.equal(
           extracted.includes(probe),
@@ -676,8 +774,31 @@ async function verifyActualArtifacts() {
           content.map(({ text }) => text).join('')),
       })),
     ]
-    for (const { questionId, texts } of actualCases) {
-      const selected = layoutAbcdOptionSet(optionSet(questionId, texts))
+    if (process.env.EQB_ADAPTIVE_ABCD_SOURCE) {
+      const source = JSON.parse(readFileSync(process.env.EQB_ADAPTIVE_ABCD_SOURCE, 'utf8'))
+      const readingOptions = [32, 33, 34].map((number) => {
+        const question = source.groups.flatMap((group) => group.questions || [])
+          .find((entry) => entry.questionId.endsWith(`:${number}`))
+        assert(question, `Source question ${number} is present`)
+        return optionSet(`zj-${number}`, question.options.map(({ text }) => text))
+      })
+      const aligned = layoutAbcdOptionGroup(readingOptions, adaptiveAbcdLayoutRules.rulesetId)
+      assert.deepEqual(aligned.map((plan) => plan.mode), ['two_by_two', 'two_by_two', 'two_by_two'])
+      assert.equal(new Set(aligned.map((plan) => plan.placements[1].startTwip)).size, 1)
+      assert.equal(aligned[0].placements[1].startTwip, 4371)
+      for (const number of [32, 34]) {
+        const question = source.groups.flatMap((group) => group.questions || [])
+          .find((entry) => entry.questionId.endsWith(`:${number}`))
+        assert(question, `Source question ${number} is present`)
+        const texts = question.options.map(({ text }) => text)
+        const option = optionSet(`zj-${number}`, texts)
+        assert.equal(layoutAbcdOptionSet(option).mode, 'one_column')
+        assert.equal(layoutAbcdOptionSet(option, adaptiveAbcdLayoutRules.rulesetId).mode, 'two_by_two')
+        actualCases.push({ questionId: `zj-${number}`, texts, rulesetId: adaptiveAbcdLayoutRules.rulesetId })
+      }
+    }
+    for (const { questionId, texts, rulesetId } of actualCases) {
+      const selected = layoutAbcdOptionSet(optionSet(questionId, texts), rulesetId)
       const screen = translateAbcdPlanToPaperSurface(selected, actualFont.closure)
       const print = translateAbcdPlanToPrintPdf(selected, actualFont.closure)
       assert.equal(screen.placementSignature, print.placementSignature)
@@ -699,11 +820,13 @@ async function verifyActualArtifacts() {
       }
       const screenshot = await page.screenshot()
       assert.equal(screenshot.subarray(1, 4).toString(), 'PNG')
+      if (rulesetId) writeFileSync(`.amp/in/artifacts/${questionId}-adaptive-screen.png`, screenshot)
 
       await page.setContent(htmlFor(print))
       await page.evaluate(() => document.fonts.ready)
       const pdfPath = path.join(outputRoot, `${questionId}-print.pdf`)
       writeFileSync(pdfPath, await page.pdf({ format: 'A4', printBackground: true }))
+      if (rulesetId) writeFileSync(`.amp/in/artifacts/${questionId}-adaptive-print.pdf`, readFileSync(pdfPath))
       assert.equal(readFileSync(pdfPath).subarray(0, 4).toString(), '%PDF')
       assertPhysicalPlacement(
         selected.placements,

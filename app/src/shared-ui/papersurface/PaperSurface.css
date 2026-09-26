@@ -633,6 +633,10 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   font-weight: 700;
 }
 
+.ps-option-bank .ps-option-label {
+  font-weight: 400;
+}
+
 [data-canonical-group-type="reading"] .ps-question-no,
 [data-canonical-group-type="reading"] .ps-option-label,
 [data-canonical-group-type="reading"] .ps-option-text {
@@ -761,4 +765,24 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   color: var(--ps-muted);
   font-size: var(--ps-font-size);
   font-style: italic;
+}
+
+/* ─── Screen-only text trail (listening recording controls) ─────────
+   The anchor is an empty inline marker after the last glyph; the control is
+   laid over the page at that spot, so paper lines never reflow. Hosts become
+   positioning contexts only; their own geometry is unchanged. */
+.canonical-listening-surface .ps-listening-part,
+.canonical-listening-surface .ps-listening-segment-cue {
+  position: relative;
+}
+
+.ps-text-trail-anchor {
+  display: inline;
+}
+
+.ps-text-trail {
+  position: absolute;
+  z-index: 5;
+  transform: translate(0.3em, -50%);
+  line-height: 0;
 }

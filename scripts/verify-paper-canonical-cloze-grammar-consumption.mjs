@@ -152,8 +152,12 @@ async function readBrowserColumnStarts(page, rowSelector, optionSelector) {
   return page.locator(rowSelector).evaluateAll((rows, childSelector) =>
     rows.map((row) => {
       const root = row.getBoundingClientRect()
+      // Screen reading zoom changes viewport pixels, not paper-space pt anchors.
+      // Print has no zoom host. Keep the independent pt expectations unchanged.
+      const zoomHost = row.closest('.paper-browse-zoom')
+      const zoom = zoomHost ? Number.parseFloat(getComputedStyle(zoomHost).zoom) : 1
       return [...row.querySelectorAll(childSelector)].map((option) =>
-        (option.getBoundingClientRect().x - root.x) * 72 / 96)
+        (option.getBoundingClientRect().x - root.x) * 72 / 96 / zoom)
     }), optionSelector)
 }
 
@@ -378,6 +382,21 @@ async function assertActualPaperBrowseBoundary({
         '.ps-question-options-inline-item',
       ),
       'Screen',
+    )
+    // The check above covers the real reading zoom. Historical 1px ruling and
+    // paper geometry comparisons below require a controlled 100% proof scale:
+    // Chromium snaps a 1px border to 0.8 CSS px when rendered at 125% zoom.
+    await page.addStyleTag({ content: '.paper-browse-zoom { zoom: 1; }' })
+    assert.equal(await page.locator('.paper-browse-zoom').evaluate(
+      (node) => getComputedStyle(node).zoom,
+    ), '1', 'historical geometry is measured at 100% paper scale')
+    assertBrowserColumnGates(
+      await readBrowserColumnStarts(
+        page,
+        '.ps-question-options-inline--four_columns',
+        '.ps-question-options-inline-item',
+      ),
+      'Screen at 100%',
     )
     if (onReady) await onReady(page)
 
@@ -1764,6 +1783,7 @@ async function assertTicket35CompletePublication({ rootDir }) {
               '[data-canonical-media-sha256], [data-canonical-source-artifact-id]',
             )].map((node) => node.getAttributeNames().filter((name) => name.startsWith('data-canonical-'))),
             grammarRule: grammarBlank ? getComputedStyle(grammarBlank).backgroundImage : '',
+            grammarStroke: grammarBlank?.querySelector('.print-blank-rule path')?.getAttribute('stroke-width'),
             grammarPseudo: grammarBlank ? getComputedStyle(grammarBlank, '::after').content : null,
             clozeNumberOffset: clozeRow && clozeNumber ? clozeNumber.getBoundingClientRect().left - clozeRow.getBoundingClientRect().left : Number.NaN,
             clozeNumberToFirstLabelGap: clozeNumber && clozeFirstLabel
@@ -1806,7 +1826,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
         )
         assert.deepEqual(observation.figureCaptions, [], `v3 complete ${versionType} Print hides internal figure provenance captions`)
         assert.deepEqual(observation.publicProvenanceAttributes, [], `v3 complete ${versionType} Print emits no public provenance attributes`)
-        assert.equal(observation.grammarRule.includes('linear-gradient'), true, `v3 complete ${versionType} Print uses the shared inline blank rule for Grammar Fill`)
+        assert.equal(observation.grammarRule, 'none', `v3 complete ${versionType} PDF uses a vector rule rather than a background rectangle`)
+        assert.equal(observation.grammarStroke, '1', `v3 complete ${versionType} PDF retains the shared inline blank stroke`)
         assert.equal(observation.grammarPseudo, 'none', `v3 complete ${versionType} Print has no independent Grammar Fill rule lift`)
         assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, `v3 complete ${versionType} Print starts Cloze question labels at the passage boundary`)
         assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, `v3 complete ${versionType} Print aligns the Cloze qnum box with the passage continuation boundary`)
@@ -2156,6 +2177,62 @@ try {
       assert.equal(student.includes('teacher explanation'), false)
       assert.equal(teacher.includes('teacher supplement'), true)
       assert.equal((student.match(/class="print-blank-num"/g) || []).length, 25)
+      const oldContract = JSON.parse(readFileSync(new URL('../standards/paper-canonical/consumers/print-pdf-v44.json', import.meta.url), 'utf8'))
+      const historical = buildPrintHtml({
+        title: asset.paper.title, versionType: 'student', printStyle: 'exam', items, blocks,
+        questionNumberStart: 41, grammarFillChrome: studentGrammarFillChrome,
+        canonicalConsumption: { ...consumption, consumerContractRef: {
+          id: oldContract.consumerId, version: oldContract.version, digest: oldContract.contractDigest,
+        } },
+      })
+      const { chromium } = await import('../app/node_modules/playwright/index.mjs')
+      const spacingBrowser = await chromium.launch({ headless: true, channel: 'chromium' })
+      try {
+        const spacingPage = await spacingBrowser.newPage()
+        for (const [html, legacy] of [[student, false], [teacher, false], [historical, true]]) {
+          await spacingPage.setContent(html)
+          const measured = await spacingPage.locator('.print-blank-unit').evaluateAll(units => units.map(unit => {
+            const blank = unit.querySelector('.print-blank')
+            const hint = unit.querySelector('.print-blank-hint')
+            const rule = blank.querySelector('.print-blank-rule')
+            const stroke = rule?.querySelector('path')
+            return {
+              rule: rule ? {
+                thicknessPt: Number(stroke.getAttribute('stroke-width')) * stroke.getScreenCTM().d * 0.75,
+                bottomDifference: rule.getBoundingClientRect().bottom - blank.getBoundingClientRect().bottom,
+                widthDifference: rule.getBoundingClientRect().width - blank.getBoundingClientRect().width,
+                background: getComputedStyle(blank).backgroundImage,
+              } : null,
+              sourceSpacing: unit.dataset.blankSpacing,
+              grammar: unit.hasAttribute('data-canonical-grammar-fill-unit'),
+              hint: !!hint,
+              margin: [getComputedStyle(blank).marginLeft, getComputedStyle(blank).marginRight],
+              widthDifference: unit.getBoundingClientRect().width - blank.getBoundingClientRect().width,
+              gap: parseFloat(getComputedStyle(unit).columnGap),
+              fontSize: parseFloat(getComputedStyle(unit).fontSize),
+            }
+          }))
+          assert.equal(measured.length, 25)
+          if (legacy) {
+            assert(measured.every(row => row.rule === null), 'historical consumers retain their original ruling')
+            assert(measured.every(row => row.sourceSpacing === undefined))
+            assert(measured.every(row => row.margin.every(value => Math.abs(parseFloat(value) / row.fontSize - (row.grammar ? 0 : 0.15)) < 0.001)), 'old consumer keeps external margins')
+          } else {
+            assert(measured.every(row => row.rule && Math.abs(row.rule.thicknessPt - 0.5) < 0.001
+              && Math.abs(row.rule.bottomDifference) < 0.01 && Math.abs(row.rule.widthDifference) < 0.01
+              && row.rule.background === 'none'), 'each current blank has one bottom-aligned 0.5pt vector rule, not a snapped background rectangle')
+            assert(measured.every(row => row.sourceSpacing === 'source-text' && row.margin.every(value => value === '0px')))
+          }
+          const hintless = measured.filter(row => row.grammar && !row.hint)
+          const hinted = measured.filter(row => row.grammar && row.hint)
+          assert(hintless.length > 0 && hinted.length > 0, 'exercise both grammar states')
+          assert(hintless.every(row => Math.abs(row.widthDifference - (legacy ? row.fontSize * 0.5 : 0)) < 0.1
+            && Math.abs(row.gap - (legacy ? row.fontSize * 0.5 : 0)) < 0.1), 'hintless geometry follows the bound consumer, not latest policy')
+          assert(hinted.every(row => Math.abs(row.gap / row.fontSize - 0.5) < 0.001), 'real hint retains 0.5em gap')
+        }
+      } finally {
+        await spacingBrowser.close()
+      }
       assert.equal(
         (student.match(/data-canonical-placement-signature=/g) || []).length,
         15,

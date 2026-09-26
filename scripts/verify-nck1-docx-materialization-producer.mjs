@@ -16,9 +16,17 @@ import path from 'node:path'
 
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import {
+  extractDocxDocumentText,
+  extractDocxDocumentParagraphs,
+  extractDocxDocumentStructure,
+  extractDocxParagraphEmphasis,
+} from '../server/paper-canonical/docxSourceAdapter.mjs'
+import {
+  nck1DocxProducerSourceDigest,
   produceNck1DocxMaterialization,
 } from '../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import {
+  inspectNck1Materialization,
   paperWriterLockPath,
   runNck1DocxMaterializationJob,
   withPaperWriterLock,
@@ -35,6 +43,14 @@ const produced = produceNck1DocxMaterialization({
 
 assert.equal(produced.disposition, 'ready_for_verification')
 assert.deepEqual(produced.review.required, [])
+for (const group of produced.materialization.groups.filter(group => group.family === 'reading')) {
+  assert.equal(group.blocks[0].role, 'body', 'a passage slot marker does not make its first prose paragraph a title')
+  assert.match(group.blocks[0].content[0].text, /passage keeps one small promise\./u)
+}
+for (const block of produced.materialization.groups.find(group => group.family === 'seven-choices').blocks) {
+  assert.equal(block.content[0].text, 'A short guide has ', 'trim paragraph exterior, not the space facing the blank')
+  assert.equal(block.content.at(-1).text, ' for learners.', 'retain the source separator after the blank')
+}
 const chineseNoticeFixture = makeSyntheticNck1DocxFixture({ chineseNoticeNumbering: true })
 const chineseNoticeProduced = produceNck1DocxMaterialization({
   paperId: chineseNoticeFixture.paperId, documents: chineseNoticeFixture.sourceDocuments,
@@ -82,9 +98,11 @@ assert(paragraphLocators.every((selector) =>
 assert.equal(new Set(paragraphLocators).size, paragraphLocators.length)
 assert.deepEqual(
   produced.review.agentTasks.map((task) => task.kind),
-  ['writing_analysis', 'writing_analysis'],
-  'only writing analysis remains on the normal Agent reasoning path',
+  ['reading_source_roles', 'reading_source_roles', 'reading_source_roles', 'reading_source_roles', 'writing_analysis', 'writing_analysis'],
+  'source role review must precede summaries; paragraph order cannot establish titles',
 )
+assert.deepEqual(produced.review.agentTasks.slice(0, 4).map(task => task.slotId),
+  ['reading.a', 'reading.b', 'reading.c', 'reading.d'])
 assert(produced.review.agentTasks.every((task) => task.parallelizableRead === true))
 assert.equal(produced.review.singleWriter.paperId, fixture.paperId)
 
@@ -156,6 +174,39 @@ const importedMedia = importCanonicalCandidate({
 })
 assert.deepEqual(importedMedia.issues, [])
 assert.equal(importedMedia.candidate?.interpretation.groups[0].media.length, 3)
+
+// Drawing coordinates and field instructions are not visible Word text.
+// Keep identical numbers in w:t, XML entities, run separators and media intact.
+const drawingCoordinates = '<wp:positionH><wp:posOffset>-6350</wp:posOffset></wp:positionH><wp:positionV><wp:posOffset>1905</wp:posOffset></wp:positionV>'
+const fieldInstruction = '<w:instrText xml:space="preserve"> HYPERLINK "https://example.test/" </w:instrText>'
+const contaminatedFixture = makeSyntheticNck1DocxFixture({
+  mediaLayout: true,
+  transformXml: (xml) => xml
+    .replaceAll('<wp:inline>', `<wp:inline>${drawingCoordinates}`)
+    .replace('<w:t>Monday</w:t>', `${fieldInstruction}<w:t>Monday</w:t>`)
+    .replace('A passage keeps one small promise.', 'A passage keeps one </w:t></w:r><w:r><w:rPr><w:b/><w:u/></w:rPr>' + fieldInstruction + '<w:t>small</w:t></w:r><w:r><w:t> promise.'),
+})
+const contaminatedProduced = produceNck1DocxMaterialization({
+  paperId: contaminatedFixture.paperId, documents: contaminatedFixture.sourceDocuments,
+})
+assert.deepEqual(contaminatedProduced.materialization.groups, mediaProduced.materialization.groups,
+  'non-visible XML must not change paragraph/table materialization or media references')
+assert.deepEqual(contaminatedProduced.mediaFiles, mediaProduced.mediaFiles)
+const cleanBytes = mediaFixture.sourceDocuments[0].bytes
+const contaminatedBytes = contaminatedFixture.sourceDocuments[0].bytes
+assert.match(extractDocxDocumentText(contaminatedBytes), /-63501905/u,
+  'historical whole-document envelope extraction keeps its frozen bytes')
+assert.deepEqual(extractDocxDocumentParagraphs(contaminatedBytes), extractDocxDocumentParagraphs(cleanBytes))
+assert.deepEqual(extractDocxDocumentStructure(contaminatedBytes), extractDocxDocumentStructure(cleanBytes))
+const markedParagraph = extractDocxParagraphEmphasis(contaminatedBytes)
+  .find((paragraph) => paragraph.text === 'A passage keeps one small promise.')
+assert.equal(markedParagraph.exact, true)
+assert.deepEqual(markedParagraph.ranges, [{ start: 20, end: 25, marks: ['bold', 'underline'] }])
+const separatorFixture = makeSyntheticNck1DocxFixture({ transformXml: (xml) => xml.replace(
+  '<w:body>', '<w:body><w:p><w:r><w:t xml:space="preserve"> -6350 &amp; 1905 </w:t><w:tab/><w:t>&lt;visible&gt;</w:t><w:br/><w:t>next</w:t><w:cr/><w:t>&#x1F600;&#33;</w:t></w:r></w:p>',
+) })
+assert.equal(extractDocxDocumentParagraphs(separatorFixture.sourceDocuments[0].bytes)[0].text,
+  ' -6350 & 1905 \t<visible>\nnext\n😀!')
 
 const anchoredMedia = produceNck1DocxMaterialization({
   paperId: fixture.paperId,
@@ -303,6 +354,38 @@ try {
   assert.equal(readFileSync(outputPath).byteLength, firstBytes.byteLength + 1)
 
   const receiptBytes = readFileSync(first.receiptPath)
+  const reviewBytes = readFileSync(first.reviewPath)
+  const historicalVersion = 'nck1-docx-materialization-producer-v9'
+  const historicalDigest = nck1DocxProducerSourceDigest(fixture.sourceDocuments, { producerVersion: historicalVersion })
+  const historicalReceipt = { ...JSON.parse(receiptBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }
+  const historicalReview = { ...JSON.parse(reviewBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }
+  writeFileSync(first.receiptPath, JSON.stringify(historicalReceipt))
+  writeFileSync(first.reviewPath, JSON.stringify(historicalReview))
+  const historical = inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest })
+  assert.equal(historical.producerState, 'historical')
+  assert.equal(historical.outputState, 'agent_modified')
+  assert.throws(() => runNck1DocxMaterializationJob({ paperDir: tempRoot, manifest: fixture.manifest }), /refusing to overwrite/u)
+  assert.equal(readFileSync(outputPath).byteLength, firstBytes.byteLength + 1)
+  const changedReview = { ...historicalReview, required: [{ code: 'original-producer-issue' }] }
+  writeFileSync(first.reviewPath, JSON.stringify(changedReview))
+  const retainedPaths = [outputPath, first.receiptPath, first.reviewPath]
+  const retainedBytes = retainedPaths.map((file) => readFileSync(file))
+  const corrected = inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest })
+  assert.equal(corrected.producerState, 'historical')
+  assert.equal(corrected.outputState, 'agent_modified')
+  retainedPaths.forEach((file, index) => assert.deepEqual(readFileSync(file), retainedBytes[index]))
+  writeFileSync(outputPath, firstBytes)
+  assert.throws(() => inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest }), /does not bind the current issues/u)
+  writeFileSync(outputPath, retainedBytes[0])
+  writeFileSync(first.reviewPath, JSON.stringify(historicalReview))
+  for (const patch of [{ producerVersion: 'unknown' }, { sourceDigest: 'sha256:stale' }]) {
+    writeFileSync(first.receiptPath, JSON.stringify({ ...historicalReceipt, ...patch }))
+    assert.throws(() => inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest }), /not bound/u)
+  }
+  writeFileSync(first.receiptPath, JSON.stringify(historicalReceipt))
+  writeFileSync(first.reviewPath, reviewBytes)
+  assert.throws(() => inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest }), /not bound/u)
+  writeFileSync(first.receiptPath, receiptBytes)
   rmSync(first.receiptPath)
   assert.throws(
     () => runNck1DocxMaterializationJob({

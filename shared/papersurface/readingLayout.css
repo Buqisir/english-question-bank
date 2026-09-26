@@ -8,6 +8,15 @@
   container-type: inline-size;
 }
 
+[data-source-marks~="bold"] {
+  font-weight: 700;
+}
+
+[data-source-marks~="underline"] {
+  text-decoration-line: underline;
+  text-decoration-skip-ink: none;
+}
+
 :is(.ps-canonical-reading-paragraph, .ps-canonical-reading-title, .ps-canonical-reading-subtitle,
     .canonical-reading-body, .canonical-reading-title, .canonical-reading-subtitle) {
   margin: 0;
@@ -33,6 +42,14 @@
   vertical-align: top;
 }
 
+/* Current gold-reference tables allocate space to their content rather than
+ * forcing equal columns. Keep body type/baselines; compactness comes from fewer
+ * unnecessary wraps. Historical bindings retain their fixed-column layout. */
+[data-canonical-role-layout="golden_reference_v1"]
+  :is(.ps-canonical-reading-table, .canonical-reading-table) {
+  table-layout: auto;
+}
+
 :is(.ps-canonical-reading-table-media, .canonical-reading-table-media) {
   display: inline-block;
   max-width: 100%;
@@ -40,6 +57,11 @@
   height: auto;
   object-fit: contain;
   vertical-align: middle;
+}
+
+[data-canonical-role-layout="golden_reference_v1"]
+  :is(.ps-canonical-reading-table-media, .canonical-reading-table-media) {
+  margin-block: 0.2em;
 }
 
 :is(.ps-canonical-reading-table-media, .canonical-reading-table-media):is(
@@ -120,6 +142,12 @@
   border: 0;
   vertical-align: baseline;
   white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+[data-canonical-role-layout="golden_reference_v1"]
+  :is(.ps-canonical-reading-table, .canonical-reading-table) td {
+  vertical-align: middle;
   overflow-wrap: anywhere;
 }
 

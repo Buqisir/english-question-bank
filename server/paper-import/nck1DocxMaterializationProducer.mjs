@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v9'
+  'nck1-docx-materialization-producer-v11'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
@@ -145,6 +145,8 @@ function parseOptions(items, labels) {
 }
 
 function contentWithBlanks(text, blankBySourceNumber, issues, path, source) {
+  // Trim paragraph exterior only. Text-run edges adjoining a blank are prose.
+  text = trimEdgeSpaces(text)
   const matches = [...String(text).matchAll(BLANK)]
   const content = []
   let offset = 0
@@ -163,8 +165,6 @@ function contentWithBlanks(text, blankBySourceNumber, issues, path, source) {
   }
   const after = text.slice(offset)
   if (after) content.push({ kind: 'text', text: after })
-  if (content[0]?.kind === 'text') content[0].text = trimEdgeSpaces(content[0].text)
-  if (content.at(-1)?.kind === 'text') content.at(-1).text = trimEdgeSpaces(content.at(-1).text)
   return content.filter((item) => item.kind !== 'text' || normalized(item.text).length > 0)
 }
 
@@ -343,7 +343,8 @@ function readingGroups({ paperId, body, firstStart, secondStart, documentId, iss
       paperId, slotId, documentId, issues,
       role: 'body', blanks: new Map(),
     })
-    if (blocks[0]?.kind === 'paragraph') blocks[0].role = 'title'
+    // A–D identify passage slots, not titles. Source review assigns any
+    // actual title/subtitle; paragraph position alone is not evidence.
     return group(paperId, slotId, family, blocks, questions)
   })
 }
@@ -1048,9 +1049,9 @@ function referencedGroupMediaIds(groups) {
   return ids
 }
 
-export function nck1DocxProducerSourceDigest(documents) {
+export function nck1DocxProducerSourceDigest(documents, { producerVersion = NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION } = {}) {
   return digestJson({
-    producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+    producerVersion,
     documents: documents.map((document) => ({
       documentId: document.documentId,
       sha256: document.sha256,
@@ -1247,13 +1248,16 @@ export function produceNck1MaterializationFromStructures({
       sourceDigest,
       required,
       agentTasks: [
+        ...SLOT_SPECS.map(([slotId]) => ({
+          kind: 'reading_source_roles', slotId, parallelizableRead: true,
+        })),
         { kind: 'writing_analysis', slotId: 'writing.application', parallelizableRead: true },
         { kind: 'writing_analysis', slotId: 'writing.continuation', parallelizableRead: true },
       ],
       singleWriter: {
         paperId,
         policy: 'one_import_writer_per_paper',
-        parallelReadAllowed: ['writing.application', 'writing.continuation'],
+        parallelReadAllowed: [...SLOT_SPECS.map(([slotId]) => slotId), 'writing.application', 'writing.continuation'],
       },
     },
   }

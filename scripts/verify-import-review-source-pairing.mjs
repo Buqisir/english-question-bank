@@ -528,17 +528,20 @@ try {
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
+  const showSourceMaterials = async () => {
+    const summary = page.locator('summary').filter({ hasText: /^对照资料$/u })
+    if (await summary.locator('..').getAttribute('open') === null) await summary.click()
+  }
   await page.goto(`http://127.0.0.1:${address.port}/ops/?view=review`)
   const listeningQuestion = page.frameLocator('#review-frame')
     .locator(`[data-paper-question-id="${listeningQuestionId}"]`)
   await listeningQuestion.waitFor()
   assert.equal(await listeningQuestion.count(), 1)
   await listeningQuestion.click()
+  assert.equal(await page.locator('#listening-review-section').isVisible(), false,
+    'Listening evidence remains secondary until the Owner opens reference materials')
+  await showSourceMaterials()
   await page.getByText('听力核对 · 第 6 题').waitFor()
-  assert.equal(await page.locator('#listening-review-section').evaluate((section) => {
-    const rect = section.getBoundingClientRect()
-    return rect.top >= 0 && rect.bottom <= window.innerHeight
-  }), true, 'Listening selection keeps the evidence in view instead of jumping to issue entry')
   assert.equal(await page.locator('.listening-review-answer strong').textContent(), 'B')
   assert.match(
     await page.locator('.listening-review-transcript').textContent(),
@@ -621,6 +624,7 @@ try {
   await page.frameLocator('#review-frame')
     .locator(`[data-canonical-media-id="${iconTargetId}"]`).click()
   await page.getByText('这张候选图已确认').waitFor()
+  await showSourceMaterials()
   assert(capturedMediaConfirmation)
   assert.equal(capturedMediaConfirmation.mediaId, iconTargetId)
   assert.equal(
@@ -633,8 +637,7 @@ try {
   await page.getByRole('link', { name: '打开整份源文件' }).waitFor()
   await screenTable.click()
   await page.locator('.source-proof img').waitFor()
-  await page.getByRole('tab', { name: 'Teacher Print' }).click()
-  await page.locator('.source-proof img').waitFor()
+  assert.deepEqual(await page.getByRole('tab').allTextContents(), ['Screen', 'PDF'])
   await page.getByRole('button', { name: '定位 Screen' }).click()
   await waitForFocus(
     page.frameLocator('#review-frame').locator(`[data-canonical-block-id="${targetId}"]`),
@@ -650,6 +653,7 @@ try {
   assert.equal(capturedIssue.pageNumber, '1')
   assert.deepEqual(capturedIssue.rect, region)
   await page.getByRole('button', { name: '查看原卷定位' }).click()
+  await showSourceMaterials()
   await page.locator('.source-proof img').waitFor()
   assert.match(
     await page.locator('#issue-form .field-help').textContent(),

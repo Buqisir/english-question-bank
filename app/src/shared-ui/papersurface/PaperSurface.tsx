@@ -20,12 +20,13 @@
  *   - No evidence paint, no popover, no right panel.
  */
 
-import { Fragment, useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
+import { Fragment, useMemo, useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { PaperFontGate } from './PaperFontGate'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
 import { readingFigureOptionStyles, measuredReadingFigureStyles } from '../../../../shared/papersurface/readingFigureOptions.mjs'
+import { hasSourceBulletLines } from '../../../../shared/papersurface/readingParagraphLayout.mjs'
 import {
   applicationWritingNoticeLines,
   writingNoticeGroup,
@@ -140,6 +141,8 @@ type BlankFocusContext = LegacyBlankFocusContext
 type PaperSurfaceBlankFocusMode = 'rail' | 'in-passage' | 'paper-blank'
 type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly blankFocusMode?: PaperSurfaceBlankFocusMode
+  /** Derived from the exact consumer binding, absent on historical surfaces. */
+  readonly roleLayout?: 'golden_reference_v1'
   /**
    * lecture-rail-scroll-fix QA fix: supplemental blank-number →
    * questionId entries for compatibility surfaces whose `questions` prop
@@ -195,6 +198,10 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
       readonly text: string
     }>
   }>
+  /** Screen-only controls; never part of Canonical Paper or print meaning. */
+  readonly listeningPlayers?: Readonly<Record<string, ReactNode>>
+  /** Screen-only whole-recording control, placed after the listening part heading. */
+  readonly listeningPartPlayer?: ReactNode
   readonly listeningPresentation?: {
     readonly partHeading: string | null
     readonly transferNotice: string | null
@@ -228,6 +235,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
     readingFocusBySection: _readingFocusBySection,
     onFocusIntent,
     blankFocusMode = 'rail',
+    roleLayout,
     blankQuestionIdByNo,
     semanticParagraphs,
     canonicalGrammarFillScreenRuling,
@@ -244,6 +252,8 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
     canonicalApplicationPromptBlocks,
     canonicalContinuationMaterialBlocks,
     listeningPresentation,
+    listeningPlayers,
+    listeningPartPlayer,
   } = props
 
   if (semanticParagraphs !== undefined) {
@@ -396,6 +406,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
       className="ps-surface"
       style={surfaceStyle}
       data-ps-mode="lecture"
+      data-canonical-role-layout={roleLayout}
     >
       <article className="ps-page">
         {canonicalReadingBlocks && canonicalReadingPassageLetter && (
@@ -415,7 +426,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
             blocks={canonicalContinuationMaterialBlocks}
           />
         )}
-        {listeningPresentation && <CanonicalListeningChrome presentation={listeningPresentation} />}
+        {listeningPresentation && <CanonicalListeningChrome presentation={listeningPresentation} partPlayer={listeningPartPlayer} />}
         {!canonicalReadingBlocks
           && !canonicalApplicationPromptBlocks
           && !canonicalContinuationMaterialBlocks
@@ -468,6 +479,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
             readingFollowingSectionId={canonicalReadingFollowingSectionId}
             readingRhythmEnabled={canonicalReadingBlocks !== undefined}
             listeningSegmentCues={listeningPresentation?.segmentCues}
+            listeningPlayers={listeningPlayers}
           />
         )}
       </article>
@@ -475,11 +487,56 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
   )
 }
 
-function CanonicalListeningChrome({ presentation }: {
+/* Screen-only controls that follow a line of paper text without reflowing it:
+   an empty inline marker sits after the last glyph and the control is laid
+   over the page at that spot. The marker and control share the host's
+   positioning context (the host must be position: relative). */
+function useTextTrail(enabled: boolean): {
+  anchor: ReactNode
+  trail: (content: ReactNode) => ReactNode
+} {
+  const anchorRef = useRef<HTMLSpanElement>(null)
+  const [spot, setSpot] = useState<{ left: number; top: number } | null>(null)
+  useLayoutEffect(() => {
+    const anchor = anchorRef.current
+    if (!enabled || !anchor) return
+    const measure = () => setSpot({
+      left: anchor.offsetLeft,
+      top: anchor.offsetTop + anchor.offsetHeight / 2,
+    })
+    measure()
+    const observer = new ResizeObserver(measure)
+    if (anchor.offsetParent) observer.observe(anchor.offsetParent)
+    void document.fonts?.ready.then(measure)
+    return () => observer.disconnect()
+  }, [enabled])
+  return {
+    anchor: enabled ? <span ref={anchorRef} className="ps-text-trail-anchor" aria-hidden="true" /> : null,
+    trail: (content) => enabled
+      ? <span className="ps-text-trail" data-screen-only=""
+          style={spot ? { left: spot.left, top: spot.top } : { visibility: 'hidden' }}>{content}</span>
+      : null,
+  }
+}
+
+function CanonicalListeningPartHeading({ text, player }: { text: string; player?: ReactNode }): ReactNode {
+  const { anchor, trail } = useTextTrail(Boolean(player))
+  return <h2 className="ps-listening-part">{text}{anchor}{trail(player)}</h2>
+}
+
+function CanonicalListeningSegmentCue({ text, player }: { text: string; player?: ReactNode }): ReactNode {
+  const { anchor, trail } = useTextTrail(Boolean(player))
+  return <li className="ps-listening-segment-cue" data-canonical-listening-segment-cue="">
+    {text}{anchor}{trail(player)}
+  </li>
+}
+
+function CanonicalListeningChrome({ presentation, partPlayer }: {
   presentation: NonNullable<PaperSurfaceComponentProps['listeningPresentation']>
+  partPlayer?: ReactNode
 }): ReactNode {
   return <header className="ps-listening-chrome" data-canonical-listening-chrome="">
-    {presentation.partHeading && <h2 className="ps-listening-part">{presentation.partHeading}</h2>}
+    {presentation.partHeading && <CanonicalListeningPartHeading text={presentation.partHeading} player={partPlayer} />}
     {presentation.transferNotice && <p className="canonical-listening-transfer-notice">{presentation.transferNotice}</p>}
     <h3 className="ps-listening-section">{presentation.sectionHeading}</h3>
     <p className="ps-listening-instruction">{presentation.instruction}</p>
@@ -685,6 +742,7 @@ function renderCanonicalReadingInlines(
       <span
         key={inline.nodeId}
         data-canonical-content-node-id={inline.nodeId}
+        data-source-marks={inline.marks?.join(' ')}
       >
         {inline.text}
       </span>
@@ -713,6 +771,9 @@ function CanonicalReadingParagraph({
       data-canonical-block-id={block.nodeId}
       data-canonical-block-kind="paragraph"
       data-canonical-reading-role={block.role}
+      data-canonical-source-bullet-lines={
+        block.role === 'body' && hasSourceBulletLines(block.inlines) ? '' : undefined
+      }
       data-canonical-reading-rhythm-role={
         block.role === 'title'
           ? 'passage_title'
@@ -1289,6 +1350,7 @@ type PaperSurfaceQuestionListProps = {
   clozeRhythmEnabled?: boolean
   clozeFollowingSectionId?: string
   listeningSegmentCues?: ReadonlyArray<{ readonly beforeQuestionId: string; readonly text: string }>
+  listeningPlayers?: Readonly<Record<string, ReactNode>>
 }
 
 function PaperSurfaceQuestionList({
@@ -1301,6 +1363,7 @@ function PaperSurfaceQuestionList({
   clozeRhythmEnabled = false,
   clozeFollowingSectionId,
   listeningSegmentCues = [],
+  listeningPlayers,
 }: PaperSurfaceQuestionListProps): ReactNode {
   const sorted = useMemo(
     () => [...questions].sort((a, b) => a.order - b.order),
@@ -1312,12 +1375,16 @@ function PaperSurfaceQuestionList({
       {sorted.map((q, index) => (
         <Fragment key={q.id}>
         {listeningSegmentCues.find((cue) => cue.beforeQuestionId === q.id) && (
-          <li className="ps-listening-segment-cue" data-canonical-listening-segment-cue="">
-            {listeningSegmentCues.find((cue) => cue.beforeQuestionId === q.id)!.text}
-          </li>
+          <CanonicalListeningSegmentCue
+            text={listeningSegmentCues.find((cue) => cue.beforeQuestionId === q.id)!.text}
+            player={listeningPlayers?.[q.id]}
+          />
         )}
         <PaperSurfaceQuestionItem
           question={q}
+          listeningTrail={listeningSegmentCues.some((cue) => cue.beforeQuestionId === q.id)
+            ? undefined
+            : listeningPlayers?.[q.id]}
           isActive={lectureFocus?.questionId === q.id}
           onQuestionClick={onQuestionClick}
           readingSuccessorGroupId={
@@ -1355,10 +1422,13 @@ type PaperSurfaceQuestionItemProps = {
   readingRhythmEnabled: boolean
   clozeRhythmEnabled: boolean
   clozeFollowingSectionId?: string
+  /** Screen-only control shown right after the stem text. */
+  listeningTrail?: ReactNode
 }
 
 function PaperSurfaceQuestionItem({
   question,
+  listeningTrail,
   isActive,
   onQuestionClick,
   readingSuccessorGroupId,
@@ -1383,6 +1453,7 @@ function PaperSurfaceQuestionItem({
   //     surface for the question's focus delegate.
   const trimmedStem = question.stem.trim()
   const hasOptions = question.options.length > 0
+  const stemTrail = useTextTrail(Boolean(listeningTrail) && Boolean(trimmedStem))
 
   // Empty-stem policy (surface-question-policy cut) — mirrors the
   // Print/PDF policy (server/print-renderer.mjs's empty-stem
@@ -1535,8 +1606,10 @@ function PaperSurfaceQuestionItem({
                     </span>
                   ))
                 : question.stem}
+              {stemTrail.anchor}
             </span>
           </button>
+          {stemTrail.trail(listeningTrail)}
           {hasOptions && (
             <PaperSurfaceOptionList
               questionId={question.id}

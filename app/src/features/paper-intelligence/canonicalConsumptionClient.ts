@@ -15,6 +15,13 @@ export type WholePaperConsumption = {
     durationSeconds: number
     mediaType: 'audio/mpeg'
     url: string
+    segments?: ReadonlyArray<{
+      segmentId: string
+      questionNumbers: ReadonlyArray<number>
+      firstQuestionId: string
+      startSeconds: number
+      endSeconds: number
+    }>
   }
   authorityRef?: {
     manifestId: string

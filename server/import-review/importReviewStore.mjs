@@ -10,7 +10,9 @@ import { DatabaseSync } from 'node:sqlite'
 
 import { MEDIA_AI_CONFIRMATION_CHECKS } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import {
+  buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
   ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
@@ -78,23 +80,23 @@ function mintLiveExternalListeningReviewProof({ approval, revision, projection }
   const review = approval.externalListeningReview
   const audio = projection.listeningReview.audio
   const audioBytes = projection.listeningAudioBytes
+  const v1 = review?.schemaVersion === 'external-listening-owner-review-v1'
+  const v2 = review?.schemaVersion === 'external-listening-owner-review-v2'
   const exactReview = review
     && Object.keys(review).sort().join(',') === [
-      'actualAudioContentSuitableAndSafe',
-      'allSegmentsQuestionsAnswersBelongTogether',
       'audio',
-      'playbackMatchesSuppliedTranscript',
       'reviewMethod',
       'reviewedAt',
       'reviewedBy',
       'schemaVersion',
       'scope',
+      ...(v1 ? ['actualAudioContentSuitableAndSafe', 'allSegmentsQuestionsAnswersBelongTogether', 'playbackMatchesSuppliedTranscript'] : []),
     ].sort().join(',')
-    && review.schemaVersion === 'external-listening-owner-review-v1'
-    && review.reviewMethod === 'owner_playback_against_supplied_transcript'
-    && review.playbackMatchesSuppliedTranscript === true
-    && review.allSegmentsQuestionsAnswersBelongTogether === true
-    && review.actualAudioContentSuitableAndSafe === true
+    && ((v1 && review.reviewMethod === 'owner_playback_against_supplied_transcript'
+      && review.playbackMatchesSuppliedTranscript === true
+      && review.allSegmentsQuestionsAnswersBelongTogether === true
+      && review.actualAudioContentSuitableAndSafe === true)
+      || (v2 && review.reviewMethod === 'owner_screen_pdf_approval'))
     && Object.keys(review.scope || {}).sort().join(',')
       === 'answerCount,questionCount,transcriptSegmentCount'
     && Object.keys(review.audio || {}).sort().join(',')
@@ -112,7 +114,7 @@ function mintLiveExternalListeningReviewProof({ approval, revision, projection }
     || review.reviewedAt !== approval.approvedAt
     || review.reviewedBy !== approval.approvedBy
     || projection.sourceProvenance?.kind !== 'external_analyzed_package'
-    || audio.state !== 'pending_external_playback_review'
+    || !['pending_external_playback_review', 'included_in_candidate_review'].includes(audio.state)
     || !(audioBytes instanceof Uint8Array)
     || review.audio.sha256 !== audio.playbackAudioSha256
     || review.audio.sha256 !== sha256Bytes(audioBytes)
@@ -189,6 +191,9 @@ export function reviewBundleDigest(input) {
     ...(input.publicSearchMetadataDigest
       ? { publicSearchMetadataDigest: input.publicSearchMetadataDigest }
       : {}),
+    ...(input.ocrCorrectionReportDigest
+      ? { ocrCorrectionReportVersion: input.ocrCorrectionReportVersion, ocrCorrectionReportDigest: input.ocrCorrectionReportDigest }
+      : {}),
     producerBuildId: input.producerBuildId,
     files: input.files.map(fileDescriptor).sort((a, b) => a.path.localeCompare(b.path)),
   })
@@ -208,7 +213,7 @@ export function ocrReviewBundleDigest(input) {
 }
 
 export function validateReviewBundleManifest(input) {
-  if (!['web-import-review-bundle-v1', 'web-import-review-bundle-v2'].includes(input?.schemaVersion)) {
+  if (!['web-import-review-bundle-v1', 'web-import-review-bundle-v2', 'web-import-review-bundle-v3'].includes(input?.schemaVersion)) {
     throw storeError('IMPORT_REVIEW_SCHEMA_INVALID', 'Unsupported review bundle schema', 400)
   }
   const paperId = requiredString(input.paperId, 'paperId', 160)
@@ -225,7 +230,7 @@ export function validateReviewBundleManifest(input) {
   if (files.reduce((sum, file) => sum + file.byteLength, 0) > MAX_BUNDLE_BYTES) {
     throw storeError('IMPORT_REVIEW_SIZE_INVALID', 'Review bundle is too large', 413)
   }
-  const publicPaper = input.schemaVersion === 'web-import-review-bundle-v2'
+  const publicPaper = ['web-import-review-bundle-v2', 'web-import-review-bundle-v3'].includes(input.schemaVersion)
   const manifest = {
     schemaVersion: input.schemaVersion,
     paperId,
@@ -262,6 +267,10 @@ export function validateReviewBundleManifest(input) {
           ...(input.analysisDigest
             ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
             : {}),
+          ...(input.schemaVersion === 'web-import-review-bundle-v3' ? {
+            ocrCorrectionReportVersion: input.ocrCorrectionReportVersion,
+            ocrCorrectionReportDigest: requiredString(input.ocrCorrectionReportDigest, 'ocrCorrectionReportDigest', 160),
+          } : {}),
         }
       : { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }),
     producerBuildId: requiredString(input.producerBuildId, 'producerBuildId', 200),
@@ -277,6 +286,7 @@ export function validateReviewBundleManifest(input) {
     ...(manifest.analysisDigest ? [manifest.analysisDigest] : []),
     ...(manifest.paragraphSummariesDigest ? [manifest.paragraphSummariesDigest] : []),
     ...(manifest.publicSearchMetadataDigest ? [manifest.publicSearchMetadataDigest] : []),
+    ...(manifest.ocrCorrectionReportDigest ? [manifest.ocrCorrectionReportDigest] : []),
   ]) {
     if (!SHA256.test(digest)) {
       throw storeError('IMPORT_REVIEW_DIGEST_INVALID', 'Review identity digest is invalid', 400)
@@ -284,6 +294,10 @@ export function validateReviewBundleManifest(input) {
   }
   if (publicPaper && manifest.importProfile !== 'public-paper-v1') {
     throw storeError('IMPORT_REVIEW_PROFILE_INVALID', 'Unsupported public-paper import profile', 400)
+  }
+  if (input.schemaVersion === 'web-import-review-bundle-v3'
+    && manifest.ocrCorrectionReportVersion !== 'agent-ocr-correction-report-v2') {
+    throw storeError('IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID', 'Unsupported OCR correction report version', 400)
   }
   const computed = reviewBundleDigest(manifest)
   if (input.bundleDigest !== computed) {
@@ -466,6 +480,31 @@ function ensureShape(db) {
       published_at TEXT,
       updated_at TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS import_review_publication_requests (
+      id TEXT PRIMARY KEY,
+      paper_id TEXT NOT NULL REFERENCES import_review_papers(paper_id) ON DELETE CASCADE,
+      revision_id TEXT NOT NULL REFERENCES import_review_revisions(id),
+      approval_id TEXT,
+      source_digest TEXT NOT NULL,
+      candidate_digest TEXT NOT NULL,
+      visible_structure_digest TEXT NOT NULL,
+      analysis_digest TEXT NOT NULL,
+      bundle_digest TEXT NOT NULL,
+      renderer_build_id TEXT NOT NULL,
+      secret_hash TEXT NOT NULL,
+      requested_by TEXT NOT NULL,
+      amp_thread_id TEXT,
+      state TEXT NOT NULL CHECK (state IN ('pending', 'granted', 'consumed', 'revoked')),
+      created_at TEXT NOT NULL,
+      expires_at TEXT NOT NULL,
+      granted_by TEXT,
+      granted_at TEXT,
+      revoked_by TEXT,
+      revoked_at TEXT,
+      consumed_at TEXT,
+      promotion_id TEXT REFERENCES import_review_promotions(id),
+      updated_at TEXT NOT NULL
+    );
     CREATE INDEX IF NOT EXISTS idx_import_review_revisions_paper
       ON import_review_revisions(paper_id, revision_number DESC);
     CREATE INDEX IF NOT EXISTS idx_import_review_issues_paper
@@ -581,7 +620,7 @@ function promotionRow(db, row) {
     && approval?.paperId === row.paper_id
     ? approval
     : null
-  const publicPaper = manifest.schemaVersion === 'web-import-review-bundle-v2'
+  const publicPaper = ['web-import-review-bundle-v2', 'web-import-review-bundle-v3'].includes(manifest.schemaVersion)
   if (publicPaper) {
     if (
       manifest.importProfile !== 'public-paper-v1'
@@ -881,7 +920,8 @@ export function createImportReviewStore({
 
   function assertProjectionIdentity(projection, revision) {
     const projectedPublicProfile = projection.importProfile === 'public-paper-v1'
-    const manifestPublicProfile = revision.manifest.schemaVersion === 'web-import-review-bundle-v2'
+    const manifestPublicProfile = ['web-import-review-bundle-v2', 'web-import-review-bundle-v3']
+      .includes(revision.manifest.schemaVersion)
     if (projectedPublicProfile !== manifestPublicProfile) {
       throw storeError(
         'IMPORT_REVIEW_PROJECTION_MISMATCH',
@@ -967,8 +1007,56 @@ export function createImportReviewStore({
     const projection = projectRevision(directory, {
       reviewKind: status.revision.reviewKind,
       requireAnalyses: status.revision.reviewKind === 'candidate',
+      expectedCandidateDigest: status.revision.candidateDigest,
     })
     assertProjectionIdentity(projection, status.revision)
+    if (status.revision.reviewKind === 'candidate'
+      && projection.importProfile === 'public-paper-v1' && projection.manifest?.documents) {
+      const originalSourceDigest = nck1OcrSourceSetDigest(projection.manifest.documents)
+      const requiresReport = withDb(false, (db) => db.prepare(`
+        SELECT manifest_json, approval_receipt_json FROM import_review_revisions WHERE paper_id = ?
+      `).all(status.revision.paperId).some((row) => {
+        if (reviewKind(parseJson(row.manifest_json, {})) !== 'ocr') return false
+        const receipt = parseJson(row.approval_receipt_json)
+        return receipt?.candidateReportRequired === true && receipt.sourceSetDigest === originalSourceDigest
+      }))
+      if (requiresReport && status.revision.manifest.schemaVersion !== 'web-import-review-bundle-v3') {
+        throw storeError('IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID', 'This Agent proofreading receipt requires a Candidate correction report')
+      }
+    }
+    if (status.revision.manifest.schemaVersion === 'web-import-review-bundle-v3') {
+      const report = projection.ocrCorrectionReport
+      if (!report || digestJson(report) !== status.revision.manifest.ocrCorrectionReportDigest) {
+        throw storeError('IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID', 'Candidate OCR correction report is missing or stale')
+      }
+      const ocrRevision = withDb(false, (db) => revisionRow(db.prepare(`
+        SELECT * FROM import_review_revisions WHERE id = ? AND paper_id = ?
+      `).get(report.ocrRevisionId, status.revision.paperId)))
+      const receipt = ocrRevision?.approval
+      if (ocrRevision?.reviewKind !== 'ocr' || ocrRevision.state === 'uploading'
+        || receipt?.confirmationId !== report.ocrConfirmationId
+        || receipt?.reviewerKind !== 'import_agent'
+        || receipt?.sourceSetDigest !== report.originalSourceSetDigest
+        || receipt?.evidenceDigest !== report.ocrEvidenceDigest
+        || receipt?.correctionReport?.sourceSetDigest !== report.originalSourceSetDigest) {
+        throw storeError('IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID', 'Report does not match the exact server-held OCR receipt and original sources')
+      }
+      const confirmedItems = new Map(receipt.confirmation.documents.flatMap((document) =>
+        document.pages.flatMap((page) => page.orderedItems.map((item) =>
+          [item.itemId, { ...item, documentId: document.documentId, page: page.page }]))))
+      const ocrNotes = new Map(receipt.correctionReport.entries.map((entry) => [entry.itemId, entry]))
+      for (const entry of report.entries) {
+        const confirmed = confirmedItems.get(entry.ocrItemId)
+        const note = ocrNotes.get(entry.ocrItemId)
+        if (!confirmed || confirmed.documentId !== entry.sourceLocator.documentId
+          || confirmed.page !== entry.sourceLocator.page
+          || (entry.category === 'ocr_misrecognition'
+            ? (!note || note.ocrText !== entry.before || note.correctedText !== entry.after)
+            : entry.before !== (note?.sourceText || confirmed.text))) {
+          throw storeError('IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID', 'Report entry does not match its exact historical OCR item')
+        }
+      }
+    }
     if (projectRevision === buildImportReviewProjection) {
       const expectedFiles = (status.revision.reviewKind === 'ocr'
         ? ocrReviewBundleFilePaths(directory)
@@ -1153,6 +1241,23 @@ export function createImportReviewStore({
       listeningReview: latestProjection?.listeningReview || null,
       mediaConfirmations,
       ocrReview: latestProjection?.ocrReview || null,
+      ocrCorrectionReport: latestProjection?.ocrCorrectionReport || null,
+      historicalOcrReport: revisions.find((revision) =>
+        revision.id === latestProjection?.ocrCorrectionReport?.ocrRevisionId)?.approval?.correctionReport || null,
+      ocrCorrectionReportBinding: latestProjection?.ocrCorrectionReport ? {
+        historical: {
+          revisionId: latestProjection.ocrCorrectionReport.ocrRevisionId,
+          confirmationId: latestProjection.ocrCorrectionReport.ocrConfirmationId,
+          sourceSetDigest: latestProjection.ocrCorrectionReport.originalSourceSetDigest,
+          evidenceDigest: latestProjection.ocrCorrectionReport.ocrEvidenceDigest,
+        },
+        current: {
+          revisionId: latest.id,
+          sourceDigest: latest.sourceDigest,
+          candidateDigest: latest.candidateDigest,
+          bundleDigest: latest.bundleDigest,
+        },
+      } : null,
       promotion: latestPromotion(paperId),
       rendererStale,
       unresolvedCount: issues.filter((issue) => UNRESOLVED_ISSUE_STATES.has(issue.state)).length,
@@ -1169,7 +1274,7 @@ export function createImportReviewStore({
     if (!projectionCache.has(revisionId)) {
       const projection = projectRevision(
         revisionDirectory(revisionId),
-        { reviewKind: revision.reviewKind, requireAnalyses: false },
+        { reviewKind: revision.reviewKind, requireAnalyses: false, expectedCandidateDigest: revision.candidateDigest },
       )
       assertProjectionIdentity(projection, revision)
       projectionCache.set(revisionId, projection)
@@ -1507,11 +1612,23 @@ export function createImportReviewStore({
     return paperDetail(paperId)
   }
 
-  function approveRevision(paperId, revisionId, input, actor) {
+  function approveRevision(paperId, revisionId, input, actor, publicationRequestId = null) {
     const approvedAt = nowIso()
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
+        const request = publicationRequestId ? db.prepare(
+          'SELECT * FROM import_review_publication_requests WHERE id = ?',
+        ).get(publicationRequestId) : null
+        if (publicationRequestId) {
+          if (!request || request.paper_id !== paperId || request.revision_id !== revisionId
+            || request.state !== 'pending') {
+            throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_PENDING', 'Publication request is not pending')
+          }
+          if (Date.parse(request.expires_at) <= Date.now()) {
+            throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_EXPIRED', 'Publication request expired', 410)
+          }
+        }
         const rendererId = currentRendererBuildId()
         const paper = db.prepare(`
           SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?
@@ -1537,6 +1654,17 @@ export function createImportReviewStore({
             'Renderer changed; Agent must resubmit this bundle for a fresh review revision',
           )
         }
+        if (request && (request.renderer_build_id !== rendererId || request.bundle_digest !== revision.bundleDigest)) {
+          throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request identity changed')
+        }
+        if (request?.approval_id) {
+          if (revision.approval?.approvalId !== request.approval_id) {
+            throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request approval changed')
+          }
+          assertCurrentApprovedRevision(db, paperId, revision.approval)
+          db.exec('COMMIT')
+          return revision.approval
+        }
         if (!['awaiting_review', 'changes_requested'].includes(revision.state)) {
           throw storeError('IMPORT_REVIEW_REVISION_NOT_REVIEWABLE', 'Revision is not awaiting review')
         }
@@ -1561,37 +1689,24 @@ export function createImportReviewStore({
         const projection = projectRevision(revisionDirectory(revision.id), {
           reviewKind: revision.reviewKind,
           requireAnalyses: !revision.manifest.importProfile,
+          expectedCandidateDigest: revision.candidateDigest,
         })
         assertProjectionIdentity(projection, revision)
         const externalAudio = projection?.listeningReview?.audio?.state
-          === 'pending_external_playback_review'
+          === 'included_in_candidate_review'
         let externalListeningReview = null
         if (externalAudio) {
-          const confirmation = input?.externalListeningReview
-          if (
-            confirmation?.playbackMatchesSuppliedTranscript !== true
-            || confirmation?.allSegmentsQuestionsAnswersBelongTogether !== true
-            || confirmation?.actualAudioContentSuitableAndSafe !== true
-          ) {
+          if (input?.externalListeningReview !== undefined) {
             throw storeError(
-              'IMPORT_REVIEW_EXTERNAL_LISTENING_CONFIRMATION_REQUIRED',
-              'Approve only after confirming playback, complete Listening cohesion, and actual audio safety',
+              'IMPORT_REVIEW_EXTERNAL_LISTENING_NOT_APPLICABLE',
+              'Listening is included in ordinary Screen/PDF Candidate approval',
               400,
-            )
-          }
-          if (confirmation.audioSha256 !== projection.listeningReview.audio.playbackAudioSha256) {
-            throw storeError(
-              'IMPORT_REVIEW_EXTERNAL_LISTENING_AUDIO_STALE',
-              'Browser Listening audio digest is stale',
             )
           }
           const listening = projection.materialization.listening
           externalListeningReview = {
-            schemaVersion: 'external-listening-owner-review-v1',
-            reviewMethod: 'owner_playback_against_supplied_transcript',
-            playbackMatchesSuppliedTranscript: true,
-            allSegmentsQuestionsAnswersBelongTogether: true,
-            actualAudioContentSuitableAndSafe: true,
+            schemaVersion: 'external-listening-owner-review-v2',
+            reviewMethod: 'owner_screen_pdf_approval',
             scope: {
               transcriptSegmentCount: listening.transcript.length,
               questionCount: listening.questions.length,
@@ -1645,6 +1760,10 @@ export function createImportReviewStore({
         `).run(JSON.stringify(receipt), approvedAt, revisionId)
         db.prepare(`UPDATE import_review_papers SET updated_at = ? WHERE paper_id = ?`)
           .run(approvedAt, paperId)
+        if (request) {
+          db.prepare('UPDATE import_review_publication_requests SET approval_id = ?, updated_at = ? WHERE id = ?')
+            .run(receipt.approvalId, approvedAt, request.id)
+        }
         db.exec('COMMIT')
         return receipt
       } catch (error) {
@@ -1661,16 +1780,18 @@ export function createImportReviewStore({
       const projection = projectRevision(revisionDirectory(revision.id), {
         reviewKind: revision.reviewKind,
         requireAnalyses: true,
+        expectedCandidateDigest: revision.candidateDigest,
       })
       assertProjectionIdentity(projection, revision)
-      if (projection?.listeningReview?.audio?.state !== 'pending_external_playback_review') {
+      if (!['pending_external_playback_review', 'included_in_candidate_review']
+        .includes(projection?.listeningReview?.audio?.state)) {
         return null
       }
       return mintLiveExternalListeningReviewProof({ approval, revision, projection })
     })
   }
 
-  function confirmOcrRevision(paperId, revisionId, input, actor) {
+  function confirmOcrRevision(paperId, revisionId, input, actor, { reviewerKind = 'owner' } = {}) {
     const { revision, projection } = projectionForRevision(revisionId)
     if (revision.paperId !== paperId || revision.reviewKind !== 'ocr') {
       throw storeError('IMPORT_REVIEW_OCR_REQUIRED', 'OCR review revision not found', 404)
@@ -1682,6 +1803,9 @@ export function createImportReviewStore({
       projection,
       input?.confirmation,
     )
+    const correctionReport = reviewerKind === 'import_agent'
+      ? buildAgentOcrCorrectionReport(projection, confirmation, input?.correctionNotes)
+      : null
     const confirmedAt = nowIso()
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
@@ -1720,6 +1844,8 @@ export function createImportReviewStore({
           producerBuildId: current.producerBuildId,
           confirmedAt,
           confirmedBy: requiredString(actor, 'actor', 200),
+          reviewerKind,
+          ...(correctionReport ? { correctionReport, candidateReportRequired: true } : {}),
           confirmation,
         }
         db.prepare(`
@@ -1997,6 +2123,209 @@ export function createImportReviewStore({
     })
   }
 
+  function publicationRequestRow(db, row) {
+    if (!row) return null
+    const paper = db.prepare('SELECT paper_name FROM import_review_papers WHERE paper_id = ?').get(row.paper_id)
+    const revision = db.prepare('SELECT revision_number FROM import_review_revisions WHERE id = ?').get(row.revision_id)
+    const promotion = row.promotion_id ? promotionRow(db, db.prepare(
+      'SELECT * FROM import_review_promotions WHERE id = ?',
+    ).get(row.promotion_id)) : null
+    return {
+      requestId: row.id,
+      paperId: row.paper_id,
+      paperName: paper?.paper_name || row.paper_id,
+      revisionId: row.revision_id,
+      revisionNumber: revision?.revision_number || null,
+      approvalId: row.approval_id,
+      sourceDigest: row.source_digest,
+      candidateDigest: row.candidate_digest,
+      visibleStructureDigest: row.visible_structure_digest,
+      analysisDigest: row.analysis_digest,
+      bundleDigest: row.bundle_digest,
+      rendererBuildId: row.renderer_build_id,
+      requestedBy: row.requested_by,
+      ampThreadId: row.amp_thread_id,
+      state: row.state,
+      createdAt: row.created_at,
+      expiresAt: row.expires_at,
+      expired: Date.parse(row.expires_at) <= Date.now(),
+      grantedBy: row.granted_by,
+      grantedAt: row.granted_at,
+      revokedBy: row.revoked_by,
+      revokedAt: row.revoked_at,
+      consumedAt: row.consumed_at,
+      promotion,
+      updatedAt: row.updated_at,
+    }
+  }
+
+  function registerPublicationRequest(paperId, input, actor) {
+    const requestId = requiredString(input?.requestId, 'requestId', 100)
+    if (!/^publication-request-[0-9a-f-]{36}$/i.test(requestId)) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_ID_INVALID', 'Request ID is invalid', 400)
+    const secretHash = requiredString(input?.secretHash, 'secretHash', 80)
+    if (!SHA256.test(secretHash)) throw storeError('IMPORT_REVIEW_PUBLICATION_SECRET_INVALID', 'Request secret hash is invalid', 400)
+    const revisionId = requiredString(input?.revisionId, 'revisionId', 100)
+    const requestedBy = requiredString(actor, 'actor', 200)
+    const ampThreadId = optionalString(input?.ampThreadId, 200)
+    const ttlSeconds = input?.ttlSeconds === undefined ? 1800 : input.ttlSeconds
+    if (!Number.isInteger(ttlSeconds) || ttlSeconds < 60 || ttlSeconds > 3600) {
+      throw storeError('IMPORT_REVIEW_PUBLICATION_TTL_INVALID', 'ttlSeconds must be an integer from 60 through 3600', 400)
+    }
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const existing = db.prepare('SELECT * FROM import_review_publication_requests WHERE id = ?').get(requestId)
+        if (existing) {
+          const same = existing.paper_id === paperId && existing.revision_id === revisionId
+            && existing.secret_hash === secretHash && existing.requested_by === requestedBy
+          if (!same) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_CONFLICT', 'Request ID is already bound to another capability or target', 409)
+          const result = publicationRequestRow(db, existing)
+          db.exec('COMMIT')
+          return result
+        }
+        const paper = db.prepare('SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?').get(paperId)
+        if (!paper) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Paper not found', 404)
+        if (paper.latest_revision_id !== revisionId) throw storeError('IMPORT_REVIEW_STALE_REVISION', 'Publication request must name the latest exact revision')
+        const revision = revisionRow(db.prepare('SELECT * FROM import_review_revisions WHERE id = ? AND paper_id = ?').get(revisionId, paperId))
+        if (!revision || revision.reviewKind !== 'candidate' || !['awaiting_review', 'approved'].includes(revision.state)) {
+          throw storeError('IMPORT_REVIEW_REVISION_NOT_REVIEWABLE', 'Publication request requires the finalized awaiting-review or approved Candidate')
+        }
+        if (revision.rendererBuildId !== currentRendererBuildId()) throw storeError('IMPORT_REVIEW_RENDERER_STALE', 'Renderer changed; submit a fresh revision')
+        if (Number(db.prepare("SELECT COUNT(*) count FROM import_review_issues WHERE paper_id = ? AND state IN ('open','fixed_pending_review')").get(paperId).count)) {
+          throw storeError('IMPORT_REVIEW_ISSUES_UNRESOLVED', 'Unresolved issues block publication delegation')
+        }
+        const approval = revision.state === 'approved' ? revision.approval : null
+        const createdAt = nowIso()
+        const expiresAt = new Date(Date.parse(createdAt) + ttlSeconds * 1000).toISOString()
+        db.prepare(`INSERT INTO import_review_publication_requests (
+          id, paper_id, revision_id, approval_id, source_digest, candidate_digest,
+          visible_structure_digest, analysis_digest, bundle_digest, renderer_build_id,
+          secret_hash, requested_by, amp_thread_id, state, created_at, expires_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, ?, ?)`)
+          .run(requestId, paperId, revision.id, approval?.approvalId || null,
+            revision.sourceDigest, revision.candidateDigest, revision.visibleStructureDigest,
+            revision.manifest.analysisDigest || '', revision.bundleDigest,
+            revision.rendererBuildId, secretHash, requestedBy, ampThreadId,
+            createdAt, expiresAt, createdAt)
+        const result = publicationRequestRow(db, db.prepare(
+          'SELECT * FROM import_review_publication_requests WHERE id = ?',
+        ).get(requestId))
+        db.exec('COMMIT')
+        return result
+      } catch (error) { db.exec('ROLLBACK'); throw error }
+    })
+  }
+
+  function publicationRequest(requestId, actor = null) {
+    return withDb(false, (db) => {
+      const result = publicationRequestRow(db, db.prepare(
+        'SELECT * FROM import_review_publication_requests WHERE id = ?',
+      ).get(requestId))
+      if (!result) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_FOUND', 'Publication request not found', 404)
+      if (actor && result.requestedBy !== actor) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_FORBIDDEN', 'Publication request belongs to another Agent', 403)
+      return result
+    })
+  }
+
+  function grantPublicationRequest(requestId, actor) {
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const row = db.prepare('SELECT * FROM import_review_publication_requests WHERE id = ?').get(requestId)
+        if (!row) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_FOUND', 'Publication request not found', 404)
+        if (row.state !== 'pending') throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_PENDING', 'Publication request is not pending')
+        if (Date.parse(row.expires_at) <= Date.now()) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_EXPIRED', 'Publication request expired', 410)
+        const revision = revisionRow(db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(row.revision_id))
+        assertCurrentApprovedRevision(db, row.paper_id, revision.approval)
+        if (revision.rendererBuildId !== row.renderer_build_id || revision.bundleDigest !== row.bundle_digest
+          || revision.sourceDigest !== row.source_digest || revision.candidateDigest !== row.candidate_digest
+          || revision.visibleStructureDigest !== row.visible_structure_digest
+          || (revision.manifest.analysisDigest || '') !== row.analysis_digest
+          || !row.approval_id || revision.approval?.approvalId !== row.approval_id) {
+          throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request no longer matches the exact approval')
+        }
+        const timestamp = nowIso()
+        db.prepare(`UPDATE import_review_publication_requests SET state = 'granted',
+          approval_id = ?, granted_by = ?, granted_at = ?, updated_at = ? WHERE id = ? AND state = 'pending'`)
+          .run(revision.approval.approvalId, requiredString(actor, 'actor', 200), timestamp, timestamp, requestId)
+        const result = publicationRequestRow(db, db.prepare('SELECT * FROM import_review_publication_requests WHERE id = ?').get(requestId))
+        db.exec('COMMIT')
+        return result
+      } catch (error) { db.exec('ROLLBACK'); throw error }
+    })
+  }
+
+  function revokePublicationRequest(requestId, actor) {
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const row = db.prepare('SELECT * FROM import_review_publication_requests WHERE id = ?').get(requestId)
+        if (!row) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_FOUND', 'Publication request not found', 404)
+        if (!['pending', 'granted'].includes(row.state)) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_REVOCABLE', 'Publication request is not revocable')
+        const timestamp = nowIso()
+        const changed = db.prepare(`UPDATE import_review_publication_requests SET state = 'revoked',
+          revoked_by = ?, revoked_at = ?, updated_at = ? WHERE id = ? AND state IN ('pending','granted')`)
+          .run(requiredString(actor, 'actor', 200), timestamp, timestamp, requestId)
+        if (changed.changes !== 1) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_REVOCABLE', 'Publication request is not revocable')
+        const result = publicationRequestRow(db, db.prepare('SELECT * FROM import_review_publication_requests WHERE id = ?').get(requestId))
+        db.exec('COMMIT')
+        return result
+      } catch (error) { db.exec('ROLLBACK'); throw error }
+    })
+  }
+
+  function beginScopedPromotion(paperId, requestId, secretHash, actor) {
+    const principal = requiredString(actor, 'actor', 200)
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const row = db.prepare('SELECT * FROM import_review_publication_requests WHERE id = ?').get(requestId)
+        if (!row || row.paper_id !== paperId || row.requested_by !== principal || !SHA256.test(secretHash || '') || row.secret_hash !== secretHash) {
+          throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_FORBIDDEN', 'Publication request capability is invalid', 403)
+        }
+        if (row.state === 'consumed') {
+          const request = publicationRequestRow(db, row)
+          db.exec('COMMIT')
+          return { action: 'consumed', promotion: request.promotion }
+        }
+        if (row.state !== 'granted') throw storeError('IMPORT_REVIEW_PUBLICATION_GRANT_REQUIRED', 'Exact Owner publication grant is required', 403)
+        if (Date.parse(row.expires_at) <= Date.now()) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_EXPIRED', 'Publication request expired', 410)
+        const revision = revisionRow(db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(row.revision_id))
+        const expected = revision?.approval
+        if (!expected || expected.approvalId !== row.approval_id || revision.bundleDigest !== row.bundle_digest || revision.rendererBuildId !== row.renderer_build_id) {
+          throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request approval or renderer drifted')
+        }
+        assertPaperNotShipping(db, paperId)
+        const checked = assertCurrentApprovedRevision(db, paperId, expected)
+        const existing = db.prepare('SELECT id FROM import_review_promotions WHERE approval_id = ?').get(expected.approvalId)
+        if (existing) {
+          throw storeError('IMPORT_REVIEW_PUBLICATION_ALREADY_ATTEMPTED', 'This approval already has a retained promotion; inspect its status, do not create another attempt')
+        }
+        const timestamp = nowIso()
+        const promotionId = `promotion-${randomUUID()}`
+        const guardId = `ship-guard-${randomUUID()}`
+        db.prepare(`INSERT INTO import_review_shipping_guards
+          (id, paper_id, revision_id, approval_id, acquired_by, acquired_at) VALUES (?, ?, ?, ?, ?, ?)`)
+          .run(guardId, paperId, checked.revision.id, checked.approval.approvalId, `publication-request:${requestId}`, timestamp)
+        db.prepare(`INSERT INTO import_review_promotions (
+          id, paper_id, revision_id, approval_id, source_digest, candidate_digest,
+          visible_structure_digest, analysis_digest, bundle_digest, guard_id, state,
+          requested_by, requested_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'publishing', ?, ?, ?)`)
+          .run(promotionId, paperId, checked.revision.id, checked.approval.approvalId,
+            checked.approval.sourceDigest, checked.approval.candidateDigest,
+            checked.approval.visibleStructureDigest, checked.approval.analysisDigest || '',
+            checked.approval.bundleDigest, guardId, `publication-request:${requestId}`, timestamp, timestamp)
+        db.prepare(`UPDATE import_review_publication_requests SET state = 'consumed',
+          consumed_at = ?, promotion_id = ?, updated_at = ? WHERE id = ?`)
+          .run(timestamp, promotionId, timestamp, requestId)
+        const promotion = promotionRow(db, db.prepare('SELECT * FROM import_review_promotions WHERE id = ?').get(promotionId))
+        db.exec('COMMIT')
+        return { action: 'publish', promotion }
+      } catch (error) { db.exec('ROLLBACK'); throw error }
+    })
+  }
+
   function recordPromotionTarget(paperId, promotionId, input) {
     const assetVersion = Number(input?.assetVersion)
     const versionName = requiredString(input?.versionName, 'versionName', 30)
@@ -2191,6 +2520,9 @@ export function createImportReviewStore({
       sourceVisuals: detail.sourceVisuals,
       sourceProvenance: detail.sourceProvenance,
       ocrReview: detail.ocrReview,
+      ocrCorrectionReport: detail.ocrCorrectionReport,
+      historicalOcrReport: detail.historicalOcrReport,
+      ocrCorrectionReportBinding: detail.ocrCorrectionReportBinding,
       promotion: detail.promotion,
       rendererStale: detail.rendererStale,
       unresolvedCount: detail.unresolvedCount,
@@ -2369,6 +2701,7 @@ export function createImportReviewStore({
     approveRevision,
     agentPaperStatus,
     beginPromotion,
+    beginScopedPromotion,
     completeFileUpload,
     confirmOcrRevision,
     confirmMediaDerivation,
@@ -2385,6 +2718,10 @@ export function createImportReviewStore({
     mediaConfirmation,
     paperDetail,
     projectionForRevision,
+    publicationRequest,
+    grantPublicationRequest,
+    registerPublicationRequest,
+    revokePublicationRequest,
     recordPromotionTarget,
     releaseShippingGuard,
     revisionDirectory,

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import Ajv from 'ajv/dist/2020.js'
 
 import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
+import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { stampGrammarFillDerivedFields } from './analyzeGrammarFill.mjs'
 import { enumerateParagraphSummaryTargets } from './paragraphSummaries.mjs'
 
@@ -363,7 +364,7 @@ export function validatePublicSearchMetadata({ sidecar, materialization, sourceD
           stampGrammarFillDerivedFields(derivedHolder)
           const derived = derivedHolder.blanks[q.questionId]
           const expected = Object.fromEntries(['tense', 'voice', 'agreementSensitive', 'form', 'similarityForm'].filter((key) => Object.hasOwn(derived, key)).map((key) => [key, derived[key]]))
-          if (JSON.stringify(q.derived) !== JSON.stringify(expected)) push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'derived answer form/axes must match authoritative answer')
+          if (stableStringify(q.derived) !== stableStringify(expected)) push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'derived answer form/axes must match authoritative answer')
         } catch {
           push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'derived values cannot be computed from malformed classification')
         }

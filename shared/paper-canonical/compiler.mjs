@@ -2,6 +2,9 @@ import {
   canonicalAuthorityRef,
   nck1AnalyzedPackageCandidateAuthorityRef55,
   nck1MaterializationCandidateAuthorityRef,
+  nck1MaterializationHistoricalAuthorityRef54,
+  nck1MaterializationHistoricalAuthorityRef57,
+  nck1MaterializationHistoricalAuthorityRef58,
   resolveCanonicalAuthority,
   slotsForProfile,
   trustedDocxCandidateAuthorityRef,
@@ -497,7 +500,7 @@ function visitVisibleTextNodes(value, visit, seen = new Set()) {
   }
 }
 
-function appendVisibleTypographyTransformations(source, diagnostics) {
+function appendVisibleTypographyTransformations(source, diagnostics, ruleVersion = '2') {
   let transformationSequence = Math.max(
     0,
     ...(source.transformations || []).map((record) => record.sequence || 0),
@@ -516,7 +519,7 @@ function appendVisibleTypographyTransformations(source, diagnostics) {
       { content: group.content, variant: group.variant },
       (inline) => {
         const before = inline.text
-        const after = canonicalizeVisibleEnglishTypography(before)
+        const after = canonicalizeVisibleEnglishTypography(before, ruleVersion)
         if (after === before) return
         const targetKey = `content_node:${inline.nodeId}`
         const baseSourceSpanId =
@@ -566,7 +569,7 @@ function appendVisibleTypographyTransformations(source, diagnostics) {
           recordId,
           sequence: ++transformationSequence,
           ruleId: 'canonical-visible-typography',
-          ruleVersion: '2',
+          ruleVersion,
           target: {
             identity: inline.nodeId,
             path: 'content.text',
@@ -1033,6 +1036,7 @@ function appendContinuationWritingReferenceGroup({
   provenanceEntries,
   documents,
   diagnostics,
+  ruleVersion = '2',
 }) {
   if (source.groups.some((candidate) => candidate.slotId === 'writing.continuation')) return
   if (!continuationEntry) {
@@ -1258,7 +1262,7 @@ function appendContinuationWritingReferenceGroup({
     for (const inline of block.inlines || []) {
       if (inline.kind !== 'text') continue
       const before = inline.text
-      const after = canonicalizeVisibleEnglishTypography(before)
+      const after = canonicalizeVisibleEnglishTypography(before, ruleVersion)
       if (after === before) continue
       const observationId =
         `observation:visible-typography:${capture.group.groupId}:${inline.nodeId}`
@@ -1277,7 +1281,7 @@ function appendContinuationWritingReferenceGroup({
         recordId,
         sequence: ++transformationSequence,
         ruleId: 'canonical-visible-typography',
-        ruleVersion: '2',
+        ruleVersion,
         target: {
           identity: inline.nodeId,
           path: 'content.text',
@@ -1477,9 +1481,9 @@ function appendNck1ContinuationInstructionEvidence({
   source.transformations = transformations
 }
 
-function adaptReferenceFamilies(parsed, documents, diagnostics) {
+function adaptReferenceFamilies(parsed, documents, diagnostics, ruleVersion = '2') {
   const finish = () => {
-    appendVisibleTypographyTransformations(parsed.value, diagnostics)
+    appendVisibleTypographyTransformations(parsed.value, diagnostics, ruleVersion)
     return parsed
   }
   const structured = documents
@@ -1580,6 +1584,7 @@ function adaptReferenceFamilies(parsed, documents, diagnostics) {
     provenanceEntries,
     documents,
     diagnostics,
+    ruleVersion,
   })
   const currentAuthority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
   const activeProfile = currentAuthority.profiles.get(parsed.value.profileId)
@@ -2137,7 +2142,7 @@ function parseFixtureEvidence(documents, diagnostics, options = {}) {
   try {
     const parsed = JSON.parse(new TextDecoder().decode(source.bytes))
     if (!isRecordValue(parsed)) throw new TypeError('Fixture root is not an object')
-    return adaptReferenceFamilies({ source, value: parsed }, documents, diagnostics)
+    return adaptReferenceFamilies({ source, value: parsed }, documents, diagnostics, options.visibleTypographyVersion)
   } catch (error) {
     diagnostics.push(diagnostic('SOURCE_DOCUMENT_UNREADABLE', 'incomplete_source', '$.evidence.documents', `Fixture evidence is unreadable: ${error.message}`))
     return null
@@ -2232,16 +2237,15 @@ function validateCapture(capture, closure) {
     closure.schemas['source-capture-v1'],
     '$.sourceCapture',
   )
-  const registeredAdapters = new Map(
-    (closure.artifacts.adapter?.adapters || []).map((adapter) => [
-      adapter.adapterId,
-      adapter.version,
-    ]),
+  const registeredAdapters = new Set(
+    (closure.artifacts.adapter?.adapters || []).map((adapter) =>
+      JSON.stringify([adapter.adapterId, adapter.version])),
   )
   for (const [index, observation] of capture.observations.entries()) {
     if (
-      registeredAdapters.get(observation.extraction?.adapterId)
-      !== observation.extraction?.version
+      !registeredAdapters.has(JSON.stringify([
+        observation.extraction?.adapterId, observation.extraction?.version,
+      ]))
     ) {
       issues.push({
         code: 'SOURCE_ADAPTER_UNREGISTERED',
@@ -2534,6 +2538,7 @@ function continuationWritingSourceSpanRefs(variant, content, capture, target) {
 function validateInlines(inlines, blankIds, path, diagnostics, ids, {
   allowMediaRefs = false,
   mediaIds = new Set(),
+  allowSourceMarks = false,
 } = {}) {
   if (!Array.isArray(inlines)) {
     diagnostics.push(diagnostic('RICH_INLINE_INVALID', 'needs_review', path, 'Inlines must be ordered'))
@@ -2545,7 +2550,9 @@ function validateInlines(inlines, blankIds, path, diagnostics, ids, {
       && typeof inline.nodeId === 'string'
       && (
         (inline.kind === 'text'
-          && exactKeys(inline, ['kind', 'nodeId', 'text'])
+          && (exactKeys(inline, ['kind', 'nodeId', 'text'])
+            || (allowSourceMarks && exactKeys(inline, ['kind', 'nodeId', 'text', 'marks'])
+              && ['["bold"]', '["underline"]', '["bold","underline"]'].includes(JSON.stringify(inline.marks))))
           && typeof inline.text === 'string')
         || (inline.kind === 'blank_ref'
           && exactKeys(inline, ['kind', 'nodeId', 'blankId'])
@@ -2574,7 +2581,7 @@ function validateInlines(inlines, blankIds, path, diagnostics, ids, {
   }
 }
 
-function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, allowedKinds, richTableV1 = false) {
+function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, allowedKinds, richTableV1 = false, allowSourceMarks = false) {
   if (!isRecordValue(block) || typeof block.kind !== 'string' || typeof block.nodeId !== 'string' || ids.has(block.nodeId)) {
     diagnostics.push(diagnostic('RICH_BLOCK_INVALID', 'needs_review', path, 'Blocks need unique identities'))
     return
@@ -2593,7 +2600,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
   }
   if (block.kind === 'paragraph') {
     if (!exactKeys(block, ['kind', 'nodeId', 'inlines'])) diagnostics.push(diagnostic('RICH_BLOCK_SHAPE', 'needs_review', path, 'Paragraph fields are closed'))
-    validateInlines(block.inlines, blankIds, `${path}.inlines`, diagnostics, ids)
+    validateInlines(block.inlines, blankIds, `${path}.inlines`, diagnostics, ids, { allowSourceMarks })
     return
   }
   if (block.kind === 'figure') {
@@ -2682,6 +2689,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
         ids,
         FRAMED_COLUMNS_CHILD_KINDS,
         richTableV1,
+        allowSourceMarks,
       )
     }
     if (Object.hasOwn(column, 'columnHeading')) {
@@ -2693,7 +2701,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
   }
 }
 
-function validateRichContent(content, blankIds, mediaIds, richTableV1 = false) {
+function validateRichContent(content, blankIds, mediaIds, richTableV1 = false, allowSourceMarks = false) {
   const diagnostics = []
   const ids = new Set()
   if (!isRecordValue(content) || !exactKeys(content, ['blocks']) || !Array.isArray(content.blocks)) {
@@ -2709,6 +2717,7 @@ function validateRichContent(content, blankIds, mediaIds, richTableV1 = false) {
       ids,
       [ 'paragraph', 'table', 'figure', FRAMED_COLUMNS_KIND ],
       richTableV1,
+      allowSourceMarks,
     )
   }
   return diagnostics
@@ -2814,7 +2823,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48', '49', '50', '51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion),
+    ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(closure.authorityRef.manifestVersion),
+    family.familyContractId === 'reading' && closure.artifacts['rich-content']?.version === '2',
   ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
@@ -2822,7 +2832,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48', '49', '50', '51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion)
+    ? ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
@@ -2881,7 +2891,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48', '49', '50', '51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {
@@ -3325,16 +3335,18 @@ export function compileCanonicalPaper(
     request?.authority,
     { allowsHistoricalReplay },
   )
+  const authorityResolution = resolveCanonicalAuthority(request?.authority)
   const parsed = parseFixtureEvidence(documents, diagnostics, {
     legacySourceAdapterVersion: legacySourceAdapterVersionForAuthority(
       requestedLegacyAuthority,
       { allowsHistoricalReplay },
     ),
     ownerQaContentSuccessor,
+    visibleTypographyVersion: authorityResolution.closure?.artifacts.normalization.rules
+      .find(rule => rule.ruleId === 'canonical-visible-typography')?.version === '3' ? '3' : '2',
   })
   const capture = buildSourceCapture(documents, parsed, diagnostics)
   const reviewDecisions = normalizeReviewDecisions(request?.reviewDecisions, capture, diagnostics)
-  const authorityResolution = resolveCanonicalAuthority(request?.authority)
   if (!authorityResolution.ok) {
     diagnostics.push(...authorityResolution.issues.map((item) => diagnostic(item.code, 'unsupported', item.path, item.message)))
     return blockedResult(dispositionFor(diagnostics), capture, request?.authority || null, diagnostics, [], reviewDecisions)
@@ -3347,14 +3359,14 @@ export function compileCanonicalPaper(
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
   const acceptsNck1MaterializationCandidate = request?.[nck1MaterializationCandidateCompile] === true
-    && closure.authorityRef.manifestDigest
-      === nck1MaterializationCandidateAuthorityRef.manifestDigest
+    && [nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58]
+      .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
   const acceptsNck1AnalyzedPackageCandidate = request?.[nck1AnalyzedPackageCandidateCompile] === true
     && closure.authorityRef.manifestDigest
       === nck1AnalyzedPackageCandidateAuthorityRef55.manifestDigest
   const acceptsConfirmedNck1MaterializationRequest =
-    closure.authorityRef.manifestDigest
-      === nck1MaterializationCandidateAuthorityRef.manifestDigest
+    [nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58]
+      .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
     && isConfirmedNck1MaterializationRequest(request)
   const acceptsConfirmedNck1AnalyzedPackageRequest =
     closure.authorityRef.manifestDigest
@@ -3488,7 +3500,6 @@ function compileDocxPairCandidate(request) {
 function compileNck1MaterializationCandidate(request) {
   return compileCanonicalPaper({
     ...request,
-    authority: nck1MaterializationCandidateAuthorityRef,
     [nck1MaterializationCandidateCompile]: true,
   })
 }
@@ -4002,7 +4013,7 @@ function suppliedTrustedCandidateBody(candidate) {
 function nck1MaterializationCandidateBody(derivation) {
   return {
     schemaVersion: NCK1_MATERIALIZATION_CANDIDATE_SCHEMA_VERSION,
-    authority: nck1MaterializationCandidateAuthorityRef,
+    authority: derivation.request?.authority || nck1MaterializationCandidateAuthorityRef,
     source: nck1MaterializationSourceSummary(derivation),
     operatorChoices: {},
     interpretation: derivation.source,
@@ -4010,8 +4021,8 @@ function nck1MaterializationCandidateBody(derivation) {
   }
 }
 
-function nck1MaterializationCandidateFromInput(sourceInput) {
-  const derivation = deriveNck1MaterializationBundle(sourceInput)
+function nck1MaterializationCandidateFromInput(sourceInput, authority = nck1MaterializationCandidateAuthorityRef) {
+  const derivation = deriveNck1MaterializationBundle(sourceInput, authority)
   const body = nck1MaterializationCandidateBody(derivation)
   return {
     candidate: {
@@ -4099,8 +4110,10 @@ function isConfirmedNck1MaterializationRequest(request) {
       return false
     }
   }
+  const spellingDocument = byInputKey.get('spelling_review')
+  if (spellingDocument) sourceInput.spellingReviewBytes = spellingDocument.bytes
   if (!isNck1MaterializationInput(sourceInput)) return false
-  const rerun = nck1MaterializationCandidateFromInput(sourceInput)
+  const rerun = nck1MaterializationCandidateFromInput(sourceInput, request.authority)
   if (
     rerun.candidate.issues.length > 0
     || confirmation.candidateDigest !== rerun.candidate.candidateDigest
@@ -4189,7 +4202,7 @@ function candidateRoute(candidate, historicalReplayCapability = null) {
   }
   if (isNck1MaterializationCandidateShape(candidate)) {
     return {
-      rerun: () => nck1MaterializationCandidateFromInput(candidate.sourceInput),
+      rerun: () => nck1MaterializationCandidateFromInput(candidate.sourceInput, candidate.authority),
       compile: (rerun) => compileNck1MaterializationCandidate(rerun.derivation.request),
     }
   }
@@ -4248,7 +4261,7 @@ function candidateRoute(candidate, historicalReplayCapability = null) {
  * choices may name the source but cannot supply questions, answers, groups, or
  * a profile.
  */
-export function importCanonicalCandidate(sourceBytes, operatorChoices) {
+export function importCanonicalCandidate(sourceBytes, operatorChoices, { materializationAuthorityRef } = {}) {
   if (isNck1AnalyzedPackageInput(sourceBytes)) {
     if (operatorChoices !== undefined) {
       return { candidate: null, issues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'NCK1 analyzed package imports do not accept caller choices or Canonical semantic fields')] }
@@ -4260,7 +4273,15 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices) {
     if (operatorChoices !== undefined) {
       return { candidate: null, issues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'NCK1 Source Materialization imports do not accept caller choices or Canonical semantic fields')] }
     }
-    const result = nck1MaterializationCandidateFromInput(sourceBytes)
+    if (materializationAuthorityRef && ![
+      nck1MaterializationCandidateAuthorityRef,
+      nck1MaterializationHistoricalAuthorityRef58,
+    ].some(ref => ref.manifestDigest === materializationAuthorityRef.manifestDigest)) {
+      return { candidate: null, issues: [trustedDocxIssue('AUTHORITY_UNSUPPORTED', 'Materialization replay authority is not retained')] }
+    }
+    const result = nck1MaterializationCandidateFromInput(
+      sourceBytes, materializationAuthorityRef || nck1MaterializationCandidateAuthorityRef,
+    )
     return { candidate: result.candidate, issues: result.candidate.issues }
   }
   if (sourceBytes instanceof Uint8Array) {
@@ -4303,7 +4324,7 @@ export function compileNck1MaterializationCandidatePreview(candidate) {
   }
   const rerun = packageCandidate
     ? nck1AnalyzedPackageCandidateFromInput(candidate.sourceInput)
-    : nck1MaterializationCandidateFromInput(candidate.sourceInput)
+    : nck1MaterializationCandidateFromInput(candidate.sourceInput, candidate.authority)
   if (
     !rerun.candidate
     || rerun.candidate.candidateDigest !== candidate.candidateDigest

@@ -13,8 +13,16 @@ const detail = {
   latest: { id: revisionId, revisionNumber: 2, state: 'awaiting_review', reviewKind: 'candidate', bundleDigest: `sha256:${'a'.repeat(64)}` },
   revisions: [], issues: [], issueMessages: [], files: [], visibleStructure: [],
   sourceVisuals: [], mediaDerivations: [], mediaConfirmations: [], unresolvedCount: 0,
+  importProfile: 'public-paper-v1',
+  ocrCorrectionReport: { entries: [
+    { category: 'ocr_misrecognition', sourceLocator: { documentId: '试题原卷', page: 2 },
+      before: 'resrvation', after: 'reservation', reason: '测试示例：识别遗漏字母 e。' },
+    { category: 'source_layout_error', sourceLocator: { documentId: '试题原卷', page: 3 },
+      before: 'Tomorrowmorning.', after: 'Tomorrow morning.', reason: '测试示例：原题两词之间缺少空格。' },
+  ] },
 }
 let hasListening = true
+let hasProducts = false
 let metadataFailure = false
 let capturedIssue
 const send = (response, body, type = 'application/json', status = 200) => {
@@ -34,6 +42,8 @@ const server = createServer(async (request, response) => {
   if (url.pathname.endsWith('/pagination')) {
     if (metadataFailure) return send(response, { error: '测试：版式暂不可用' }, 'application/json', 503)
     return send(response, { editions: [
+      ...(hasProducts ? [{ edition: 'largeNoListening', mode: 'bounded_auto' }, { edition: 'economy8', mode: 'explicit' },
+        ...(hasListening ? [{ edition: 'largeComplete', mode: 'bounded_auto' }] : [])] : []),
       { edition: 'friendly8', mode: 'explicit' },
       ...(hasListening ? [{ edition: 'friendly10', mode: 'bounded_auto' }] : []),
     ] })
@@ -62,12 +72,57 @@ if (process.argv.includes('--serve')) {
     const errors = []
     page.on('pageerror', (error) => errors.push(error.message))
     await page.goto(`${origin}/ops/?view=review`)
+    await page.locator('#review-frame:not(.is-loading)').waitFor()
+    assert.deepEqual(await page.locator('[aria-label="审核表面"] [role="tab"]').allTextContents(), ['Screen', 'PDF'])
+    assert.equal(await page.locator('[data-external-listening-check], .paragraph-summaries-section').count(), 0)
+    const report = page.locator('details').filter({ has: page.locator(':scope > summary', { hasText: 'OCR 与原题校对报告' }) }).first()
+    await report.locator('summary').first().click()
+    assert.equal(await report.locator('.correction-list > li').count(), 2)
+    assert.match(await report.textContent(), /resrvation.*reservation/s)
+    mkdirSync(artifactDir, { recursive: true })
+    await report.scrollIntoViewIfNeeded()
+    await page.screenshot({ path: path.join(artifactDir, 'ops-correction-report.png') })
+    await page.evaluate(() => {
+      window.originalReviewFrame = document.querySelector('#review-frame')
+      window.originalReviewDocument = window.originalReviewFrame.contentDocument
+    })
+    await page.getByRole('button', { name: '沉浸查看', exact: true }).click()
+    assert.deepEqual(await page.locator('.surface-stage').evaluate((stage) => {
+      const rect = stage.getBoundingClientRect()
+      return [rect.x, rect.y, rect.width, rect.height]
+    }), [0, 0, 1920, 1000])
+    assert.equal(await page.locator('.right-rail').evaluate((rail) => rail.inert), true)
+    assert.equal(await page.locator('#toggle-immersive').getAttribute('aria-pressed'), 'true')
+    await page.evaluate(() => {
+      document.querySelector('#review-frame').contentDocument.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
+      )
+    })
+    assert.equal(await page.locator('#toggle-immersive').getAttribute('aria-pressed'), 'false')
+    assert.equal(await page.locator('.right-rail').evaluate((rail) => rail.inert), false)
+    assert.equal(await page.evaluate(() => document.activeElement.id), 'toggle-immersive')
+    assert.equal(await page.evaluate(() =>
+      window.originalReviewFrame === document.querySelector('#review-frame')
+      && window.originalReviewDocument === document.querySelector('#review-frame').contentDocument), true,
+    'enter/escape must preserve the iframe and its loaded document')
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.getByRole('button', { name: '沉浸查看', exact: true }).click()
+    assert.equal(await page.locator('.surface-stage').evaluate((stage) =>
+      stage.getBoundingClientRect().height), 844, 'mobile minimum stage height must not exceed the immersive viewport')
+    assert.equal(await page.locator('#toggle-immersive').evaluate((button) => {
+      const rect = button.getBoundingClientRect()
+      return rect.left >= 0 && rect.right <= innerWidth && rect.top >= 0 && rect.bottom <= innerHeight
+    }), true, 'immersive exit remains reachable on narrow screens')
+    await page.getByRole('button', { name: '退出沉浸 · Esc', exact: true }).click()
+    await page.setViewportSize({ width: 1920, height: 1000 })
     await page.getByRole('tab', { name: 'PDF', exact: true }).click()
     assert.equal(await page.getByLabel('交付版式').inputValue(), 'friendly10')
+    assert.deepEqual(await page.locator('#pdf-edition option').allTextContents(), ['8 页版', '10 页版', '教师 PDF'])
     assert.match(await page.locator('#review-frame').getAttribute('src'), /version=student&pageLayout=friendly10$/)
     await page.getByLabel('交付版式').selectOption('friendly8')
     assert.match(await page.locator('#review-frame').getAttribute('src'), /version=student&pageLayout=friendly8$/)
-    assert.match(await page.locator('#issue-form .field-help').textContent(), /R2.*8 页无听力学生卷/)
+    assert.match(await page.locator('#issue-form .field-help').textContent(), /R2.*8 页版/)
+    await page.getByText('精确定位（可选）', { exact: true }).click()
     await page.getByLabel('页码', { exact: true }).fill('2')
     await page.getByLabel('要 Agent 改什么').fill('B 篇请在第 2 页完整呈现，避免跨面。')
     await page.getByRole('button', { name: '记录这个问题', exact: true }).click()
@@ -75,7 +130,7 @@ if (process.argv.includes('--serve')) {
     assert.equal(capturedIssue.edition, 'friendly8')
     assert.equal(capturedIssue.revisionId, revisionId)
     assert.equal(capturedIssue.pageNumber, '2')
-    assert.match(await page.locator('.issue-meta').textContent(), /8 页无听力学生卷/)
+    assert.match(await page.locator('.issue-meta').textContent(), /8 页版/)
     mkdirSync(artifactDir, { recursive: true })
     await page.getByLabel('交付版式').scrollIntoViewIfNeeded()
     await page.screenshot({ path: path.join(artifactDir, 'review-desktop.png') })
@@ -90,8 +145,21 @@ if (process.argv.includes('--serve')) {
     await page.getByRole('tab', { name: 'PDF', exact: true }).click()
     assert.equal(await page.getByLabel('交付版式').inputValue(), 'friendly8')
     assert.equal(await page.locator('#pdf-edition option[value="friendly10"]').count(), 0)
-    await page.getByLabel('交付版式').selectOption('natural')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?version=teacher$/)
+    hasProducts = true
+    await page.reload()
+    await page.getByRole('tab', { name: 'PDF', exact: true }).click()
+    assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeNoListening')
+    await page.getByLabel('交付版式').selectOption('economy8')
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pageLayout=economy8$/)
+    assert.equal(await page.locator('#pdf-edition option[value="largeComplete"]').count(), 0)
+    await page.screenshot({ path: path.join(artifactDir, 'review-products-narrow.png') })
+    hasListening = true
+    await page.reload()
+    await page.getByRole('tab', { name: 'PDF', exact: true }).click()
+    assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeComplete')
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pageLayout=largeComplete$/)
+    await page.getByLabel('交付版式').selectOption('teacher')
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?version=teacher&pageLayout=natural$/)
     metadataFailure = true
     await page.reload()
     await page.getByRole('tab', { name: 'PDF', exact: true }).click()

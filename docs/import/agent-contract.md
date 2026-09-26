@@ -1,11 +1,227 @@
 # Agent Import Contract (NCK1)
 
+本文是导题操作入口，负责状态恢复、生产、验证、提交与返工，不另定义视觉数值。
+试卷规范总入口是[试卷格式标准](../product/exam-paper-format-standards.md)，
+数据产品要求见[NCK1标准](../product/nck1-paper-standard.md)；机器结构遵循
+适用版本的manifest闭包。源角色/答案正确与实际三面排版正确是两类证据，
+schema/digest通过不能替代源对照，合成HTML测试不能替代真实产物验收。
+
+## Current isolated rehearsal agreement
+
+The Owner's 2026-09-20 agreement is recorded in
+`docs/cuts/full-import-rehearsal/plan.md`. In this local experimental candidate,
+new `public-paper-v1` scanned imports use Agent proofreading, not intermediate
+Owner OCR work. After genuine page-by-page source comparison and `push-ocr`, run
+`review.mjs proofread-ocr <paperId> --revision <exact-revision> --input <review.json>`.
+Input contains the existing evidence-bound `confirmation` and `correctionNotes`:
+each note has `itemId`, `kind` (`ocr_repair`, `source_typo`, or `uncertain`),
+`sourceText` (faithful PDF transcription) and `reason`. Every changed ordered
+item needs a note. For OCR repairs/uncertainty, confirmed text must equal the
+source transcription; only clear source typos permit a different final text.
+Do not polish unidiomatic language, solve questions or silently change answers.
+Run the returned exact `pull-ocr-confirmation` command; the server records the
+real Agent identity and returns a source-bound correction report. No Owner
+receipt is authored by the worker. Final Candidate approval stays Owner-only.
+
+After pulling that immutable receipt, author only the publishable correction entries and run
+`review.mjs finalize-ocr-correction-report <paperId> --input <entries.json>`. Each entry has
+`ocrItemId`, `before`, `after`, `sourceLocator: { documentId, page }`,
+`materializationTarget: { jsonPointer }`, `reason`, and exactly one category:
+`ocr_misrecognition`, `source_spelling_error`, or `source_layout_error`. The latter two require
+positive source evidence; never infer a source error from a text delta and never include grammar,
+style, or other editorial corrections. The v2 sidecar is outside Materialization, is included in
+the Candidate bundle identity, binds the exact server-held OCR receipt/original source digest set,
+and verifies `after` against current Materialization so later layout edits cannot impersonate the
+historical OCR confirmation. Missing means no report exists; an empty `entries` array is a present,
+bound report. Legacy `source_typo` receipts remain historical evidence and are not reclassified.
+
+### Source-text preprocessing, without intermediate Owner approval
+
+New raw-source workspaces carry `config.spellingReview: "source-text-review-v3"`.
+Historical `spelling-only-v1` and `source-text-review-v2` records retain their exact replay rules.
+For an Owner-requested correction of an existing paper, preserve its finalized
+report/revision, set the working config to v3 and author a new complete review;
+never relabel an old attestation as a new review. CLI names and the sidecar filename
+remain compatible; `schemaVersion` identifies the applicable policy.
+After faithful materialization and before answer checks, summaries and metadata:
+
+1. Run `review.mjs prepare-spelling <paperId> --output <request.json>`.
+2. The import agent reviews every supplied target in source/group context and
+   completes the request's `report` object. This is a real spelling review, not
+   a blanket generated pass. No implicit model invocation or Owner checklist.
+3. Run `review.mjs finalize-spelling <paperId> --input <authored-report.json>`,
+   then `review.mjs verify-spelling <paperId>` and continue the normal import
+   through the complete Screen/PDF preview.
+
+Correct unambiguous misspellings, obvious grammar errors and repeated ordinary
+spaces between words, including questions, options, answer words and writing
+material. A real dictionary word can still be an evidenced typo in context.
+There is no presumed deliberate-misspelling exemption for distractors. Record
+categories `spelling`, `grammar`, `whitespace`, or `punctuation` with Chinese contextual reasons.
+Use whole-word spelling edits, minimal whole-word/phrase grammar edits, and only
+reduce internal runs of two or more ASCII spaces to one in `whitespace` edits.
+The v3 `punctuation` category permits only context-confirmed English dash typography
+(en dash with one ASCII space on each side), spacing between an exterior curly
+double quote and an English word, and removal of ordinary spaces inside curly
+double quotes. Keep closing quotes adjacent to punctuation, such as `In”?`.
+Use nonempty exact original spans; preserve letters, digits, other punctuation,
+meaning and answer identity. Do not normalize hyphens, numeric ranges, Chinese
+punctuation or ambiguous quote/dash usage. Do not polish awkward English, substitute uncertain
+word choices, spelling variants, unfamiliar names, or technical terms. Retain
+raw authoritative answers and separately show any applied correction; answer
+checks must compare against the evidence-backed corrected projection, not pretend
+the corrected answer is byte-identical to the original source.
+**Uncertainty is not a blocker:** preserve the doubtful word, mark `uncertain`
+with a brief note, and finish importing. A target may also contain independent,
+clear corrections. Send `nonBlockingDoubts` only with the final preview for the
+Owner to glance at; never pause midway for these judgments. No doubts means no
+extra Owner task. Approval/publication retain their existing separate boundary.
+The successful `push` result includes `spellingReview` with the retained doubts
+for this exact Candidate. Relay these in the same Amp message as the preview;
+do not create another website review page or require an extra approval. On
+resume, `verify-spelling` reconstructs the handoff from the retained report.
+
+### One final Owner report
+
+Deliver one **校正报告与预处理完成表**, containing all selected product PDF links, the exact
+Screen link, preprocessing statuses, applied corrections and retained doubts.
+Do not make the Owner reconstruct the handoff from multiple progress messages.
+Write all Owner-facing explanations in Chinese, including spelling notes,
+correction reasons and evidence `checks.*.detail`; retain the exact English
+source excerpts, identifiers and commands. Explain each retained observation's
+meaning, category and reason for leaving it unchanged, rather than presenting
+every observation as an error or an Owner confirmation task. Translating a
+historical handoff is presentation-only: retain the original bound evidence and
+spelling sidecar, and do not create a new Candidate or rerender PDFs for prose.
+Generate it with `review.mjs preprocessing-report <paperId> --evidence <evidence.json>
+--output <report.md>` after current Candidate/summary/metadata checks and preview QA.
+The output is a local Markdown artifact, not another website or an approval gate.
+
+Evidence uses `schemaVersion: "preprocessing-handoff-evidence-v1"` and exact
+`paperId`, `sourceDigest`, `candidateDigest`. `pdfs` is an array of
+`{edition, path, sha256}` with editions `cover8`, `cover10`, `no-cover8`,
+`no-cover10`. File paths resolve relative to the evidence JSON. `screen` contains
+`url` and `revisionId`; never put credentials in the URL.
+For the Owner-selected three-product line, use `preprocessing-handoff-evidence-v3`
+with `economy8` (exactly 8 pages), `largeNoListening` (at most 10), and
+`largeComplete` (at most 12). Complete delivery requires `pdfContent` and
+`pdfVisual` PASS records listing every delivered PDF's distinct bytes, path and
+SHA, as for v2 below. Report each selected font/line height explicitly, especially
+the economy fallback. Preserve separate QA evidence matching the selected plan,
+renderer and fresh revision to the protected PDF response; this Source/Candidate
+report does not by itself establish that binding or Owner approval. Historical
+v1/v2 reports and their edition meanings remain unchanged.
+For an explicitly selected long paper, use `preprocessing-handoff-evidence-v2`
+and editions `cover-long10`, `cover-long12`, `no-cover-long10`,
+`no-cover-long12` instead. The 10/12 counts are ceilings, not exact counts;
+report the real page count and do not pad. The four PDFs still require actual
+visual/content QA: the entire application prompt, including numbered notices,
+and the complete answer box must occupy one page. A diagnostic PDF that splits
+the prompt across pages is not an accepted edition even if its last fragment
+shares the answer-box page.
+For a complete v2 four-PDF handoff, `pdfContent` and `pdfVisual` must both be
+`pass` and list each distinct PDF's exact path and SHA among their retained
+files. The generator checks these bindings and page ceilings; the Agent's
+visual/content attestations still require real inspection and are not machine
+proof of listening completeness or same-page layout.
+The legacy v1 four-edition evidence is not reinterpreted or migrated.
+Optional `checks` keys are `sourceExtraction`, `answerTranscription`,
+`listeningPlayback`, `screenVisual`, `pdfContent`, `pdfVisual`, and `ocr`.
+Each has `status` (`pass`, `not_performed`, `not_applicable`) and truthful `detail`.
+`pass` additionally needs `checkedAt` and retained `files: [{path, sha256}]`.
+The generator validates current bindings, evidence bytes and actual PDF page
+counts; it labels source/visual checks as Agent attestations, not independently
+proved semantics. Missing checks remain explicitly incomplete. Spelling,
+summaries and metadata status comes from the validated current projection, never
+from a claim that generic code was implemented. Do not silently carry old PDF,
+Screen, answer-check or summary evidence across a changed Candidate.
+
+The original source bytes and faithful Materialization remain unchanged.
+`spelling-review-v1.json` records full target coverage, exact UTF-16 word ranges,
+before/after, source locators, reasons and retained doubts. Candidate derivation
+first verifies original source fidelity, then applies the bound spelling overlay;
+Review, summaries and metadata consume the same corrected view. The report is
+included in bundle/source identity and canonical evidence, including replay.
+Changing it invalidates downstream digest-bound checks and sidecars. The earlier
+OCR report still describes pre-overlay Materialization and must be finalized
+against the resulting Candidate, rather than relabeling spelling as OCR repair.
+Code verifies coverage, bindings and exact category-constrained edits; semantic
+spelling/grammar judgment is an import-agent attestation, not something these checks prove.
+`source-text-review-v4` is an explicit, opt-in extension of v3: only a complete
+terminal run of ASCII spaces/tabs in a Question option may be removed. Its
+`terminal_whitespace` correction records the actual native DOCX option paragraph
+in `sourceParagraphLocator`, since the inherited target locator can refer to
+the question stem. The validator checks the exact option path, original UTF-16
+span, entire terminal run and Chinese reason. The Candidate/Review replayer also
+opens the digest-bound original DOCX, checks the stated option paragraph exists
+and is the sole matching option line after the inherited question-stem paragraph
+(at most four paragraphs later); it rejects prose, a stem paragraph, a repeated
+match or absent/mismatched DOCX. The Agent still confirms the source
+meaning and explains the edit in Chinese. v3
+reports remain v3 and cannot use this deletion. Preserve the old sidecar in
+review history and rebuild Candidate-bound evidence under a new Review revision.
+Missing review or stale/corrupt evidence is an agent-side technical repair, not
+an Owner spelling-approval step. Historical workspaces without the policy remain
+compatible; adding a report explicitly opts their current Candidate into the
+overlay. Do not rewrite an existing finalized revision or claim it was reviewed.
+
+Owner-facing delivery now uses a direct exact-revision website Screen preview,
+not the OPS dashboard. Send the OCR report in the Amp conversation: source
+location, original recognition, corrected text and reason; distinguish OCR
+repairs from evidenced source spelling/layout errors. For long reports, give
+a concise summary and attach the full details. A separate report portal is not
+required. Keep current-version and historical OCR records distinct, and do not
+claim a complete or clean report when evidence is missing. Existing login,
+immutable Review records and Owner-only approval/publication gates remain;
+changing the preview entrypoint does not approve or publish the paper.
+
+New imports use the dedicated `english-question-bank-import` Amp Project, one
+paper per thread, with `.agents/import-pre-setup` selecting the fast import
+setup profile. Follow `importing-nck1-papers` for attachment intake, exact preview
+handoff and the default-off scoped publication commands. The authenticated Owner
+confirmation page is outside OPS; layout approval and publication delegation are
+separate actions. Plain chat is not server-authenticated authorization. See
+`docs/cuts/orb-import-single-paper-promotion/spec.md` for activation and recovery
+boundaries. Normal paper publication is a data operation; code/standard changes
+still require their own reviewed deployment transaction.
+
+Before any Review network access, bind the exact authorized API origin in the
+local `.amp/import-review-origin` file (one HTTP(S) origin, no credentials).
+Dedicated import-profile Orbs refuse Review access without this disk binding;
+any bound workspace refuses an environment origin that differs, before sending
+a request. For isolated rehearsal, bind only the verified local API origin,
+never infer the binding from inherited environment variables or replace it to
+make a mismatch pass. Production binding requires a production-scoped Goal.
+Do not wrap credential overrides in `bash -l`: login startup can replace them.
+Use a non-login process and fail-fast command chaining. Review rejects redirects.
+This guards accidental target changes; it does not grant authorization or stop
+a local writer from deliberately changing the binding. Source-intake and direct
+HTTP tools are separate surfaces and remain subject to the same Goal boundary.
+
+External analyzed-package audio is heard in the ordinary Candidate Screen review and covered by
+ordinary Screen/PDF approval. New approvals persist `external-listening-owner-review-v2` with
+`reviewMethod: owner_screen_pdf_approval`, exact counts/audio identity, actor, and time; there is no
+separate playback/cohesion/safety checklist. Historical v1 receipts remain valid and exact. Raw-source
+Listening evidence and quick-check gates are unchanged.
+
+For this rehearsal use `source-intake.mjs continue <submissionId> --signal-only`
+and the signal-only staging path, never ASR. Historical ASR/Owner-OCR instructions
+below describe the retained legacy paths, not a requirement to run them here.
+Finish all summaries and compact search metadata and deliver the real playable
+Paper, original PDF comparison and correction report before Owner review.
+These local changes have not been deployed or activated in the live controller.
+
 > 新 raw-source 导入的当前主合同是 `public-paper-v1`。本分支已接线完整源卷和逐段摘要，
 > AI OCR/提取校对、源答案抄录检查和必要的结构化检索元数据仍是硬门禁；当前 CLI 已实现
 > metadata 的 prepare/finalize/verify，不能用九份教学解析或假空字段代替。无 profile 的历史工作区和
 > external `analyzed_package` 继续原九份分析合同，恢复时不得迁移身份。
 
 任意 Amp Project Orb 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
+Owner 在 Amp 提供题源并明确发起导题；Amp 是唯一沟通与启动入口，不再由网站提交或
+webhook 自动接卷。新卷按下文 off-ledger 本地文件流程初始化，不伪造台账记录。
+预览确认与上线是两步：提供真实 Screen 和 8/10 页 PDF，确认后仍须 Owner 明确要求
+上线才可执行单卷 promotion。改标准/程序走 PR；修订卷子数据不因此要求另提代码 PR。
+现阶段继续使用既有服务器存储，不在本次迁移 COS/R2。
 项目级 `importing-nck1-papers` skill 会在导题、继续某卷、审核返工、状态查询和
 认可后上线准备任务中自动触发；Owner 不需要记命令。台账 submission 先运行只读
 `node scripts/import-pipeline/source-intake.mjs status <submissionId>`，无需 paperId。
@@ -16,7 +232,7 @@
 `config.importProfile: "public-paper-v1"`；listening supplement hydration、历史工作区和
 analyzed package 保留已有 config/profile：
 
-- 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
+- 数据产品要求：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）；可执行结构按规范总入口的适用机器绑定。
 - 统一入口：先运行 `node scripts/import-pipeline/universal-nck1.mjs preflight`。`materialize`
   从不可变源生成 `nck1-source-materialization-v1`，完整保存题面、源答案、题号映射、
   source locators、表格与媒体。源冲突、缺答案或视觉待审仍失败关闭，摘要不能补题或改答案。
@@ -33,7 +249,7 @@ analyzed package 保留已有 config/profile：
 metadata sidecar 已贯穿不可变 revision、Review store、promotion、发布存储和公共检索消费；
 写作相似题 UI 仍未实现。具体字段、生产者/消费者和阶段见计划。核心边界如下：
 
-- Owner 只审核最终 Screen/Student Print/Teacher Print/PDF 版式。认可 receipt 的精确字段是
+- Owner 只审核最终 Screen/PDF 版式；Print HTML 是 PDF 内部生成步骤，不是独立审核任务。认可 receipt 的精确字段是
   `approvalScope: 'layout_only'`，不得表达人工检查了摘要、主题、语义、原题准确性或答案映射。
 - OCR/提取、proofreading、source-answer transcription check 及自动 source/schema/coverage/
   answer validation 仍由既有程序/AI 导入路径完成。缺失或冲突来源通过既有 Materialization
@@ -79,7 +295,8 @@ node scripts/import-pipeline/review.mjs push <paperId>
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
 
-Webhook worker 接卷后只凭 submission ID 运行只读 `source-intake.mjs status <submissionId>`，
+以下仅用于 Owner 在 Amp 明确要求继续的历史台账任务，不能由旧 webhook 通知触发。
+原绑定 worker 只凭 submission ID 运行只读 `source-intake.mjs status <submissionId>`，
 不搜索、猜测或向 Owner 索要 paperId。按返回的 `nextCommand` 显式运行 continue。
 claim 后从不可变 snapshot 确定身份：原始新卷固定使用 `paper-<submission UUID>`；
 补充/纠错使用 `targetPaperId`；新 analyzed_package 下载并校验归档后读取 `package.json.paperId`，
@@ -108,9 +325,8 @@ handoff 响应丢失保留 started/unknown 证据，不重放，不通过删除�
 `source-intake.mjs finalize-listening <submissionId> --paper-id <paperId> --review <review.json>`。
 `status.tasks` 提供 ASR/源材料路径、真实内容审阅输出路径、finalize 命令和复查命令。
 程序负责比对与门禁；失败不能改写为 pass，也不因 CLI 暂停就把常规听力检查交给 Owner。
-OCR 提取校对仍由 Agent 完成，但当前 web `confirm-ocr` 接口明确拒绝 import_agent，
-只能拉取 Owner 确认收据。这是尚未消除的源证据权限限制，不是最终 layout_only 审核，
-不得冒充 Owner、伪造收据或宣称所有 OCR 卷已实现“Owner 只看版式”。源缺失或冲突须报告具体缺件。
+以下 Owner OCR 权限限制只描述旧流程；当前隔离演练按本节顶部的 Agent OCR receipt 与
+Candidate-bound v2 correction report 执行。不得冒充 Owner、伪造收据；源缺失或冲突须报告具体缺件。
 
 新 Orb 的完整导题工具可用 `bash .agents/setup --import-tools-only` 安全准备和检查：它不碰
 Desktop 或数据库，安装英/简中 OCR，并缓存 `transcribe-listening.py` 实际默认使用的固定
@@ -210,37 +426,23 @@ revision 纳入 bundle identity，服务端再次以当前 revision 比对，冲
 
 采用 Owner 选择的 B：每组由新的普通 Low 线程直接生成，启用 fast，不调用 Oracle、
 `nck1_analyze_group`、`amp.ai.generate` 或其他模型。不再使用旧 Grok 解析插件。
-Webhook 只唤醒固定 Import dispatcher；dispatcher 用 `create_thread` 显式指定 Import
-Project 与内置 Low，不覆盖 Low 的模型或推理档位，创建时显式 `features: []`。
+自动 webhook/dispatcher 已退休。Owner 明确发起的新导题若需要独立线程，
+用 `create_thread` 显式指定 Import Project 与内置 Low，不覆盖模型或推理档位，
+创建时显式 `features: []`；旧绑定仍保留，不自动创建替代线程。
 新 public-paper-v1 摘要与检索元数据同样使用内置 Low，
 `create_thread` 显式传 `agent_mode: low`、`features: []` 和专用 Import Project。
 不再注册自定义 Low 副本；Low 跟随 Amp 的模式配置，不保证固定为 DeepSeek。
 若 Low 不可用则停止，不切换模式或调用 Oracle/Task。实际 provider/model/usage 仍须实测。
 已绑定 coordinator/lease 不迁移，恢复时保持原线程。
 
-### Explicit-project dispatch procedure
+### 已退休的自动接卷与历史恢复
 
-仅固定 controller `T-01a057c0-ecc9-745c-aaa7-a51dddb22306` 在 Import Project
-`72c5d9ea-c2e7-42e8-b51e-0b22b9b23732` 执行此流程。webhook 只提供 submission ID、
-不可变 digest 与 event ID；不携带源文件或 token。controller 本身不 claim 或导题。
-先确认本任务没有 Owner 暂停指令；旧失败或已绑定任务不因新通知自动恢复。
-先部署并只读验证新增的 `GET /api/import-agent-source-intakes/:id/orb-worker?submissionDigest=...`
-接口，再激活新入口；接口失败时停止，不用 reserve 代替只读查询。
-
-以下命令入口均为 `node scripts/import-pipeline/source-intake-dispatch.mjs`：
-
-1. `prepare <submissionId> --digest <digest> --event <eventId>`：私有 journal 先落盘，再 reserve 一次。
-   仅 `reserved` 可继续；已有绑定、busy、UNKNOWN 或其他状态只运行 `status <submissionId>` 后报告。
-2. `begin-create <submissionId>`：仅执行它返回的 `create_thread` request 一次，不改参数。
-   请求固定 `agent_mode: low`、`features: []`、`executor: orb` 和完整 Import project ref。
-   bootstrap turn 会运行，但没有导题任务；不要把它称作惰性或无 prompt 线程。
-3. 创建响应明确成功后运行 `bind <submissionId> --thread <threadId>`。CLI 先检查真实 thread export
-   的 project ID、private、Low、无 fast/自定义 agent，再绑定。失败不另建 worker。
-4. `status <submissionId>` 只读核对远端绑定；只有 `startable:true` 才运行 `take-assignment <submissionId>`。
-   它重新验证并在输出前记录 assignment 已签发。仅把输出的 assignment 通过 `send_thread_message`
-   发给输出的 `boundIdentity.ampThreadId` 一次，不自行重建 prompt，不复制 token 或 journal。
-5. 创建、绑定、签发或消息发送的响应丢失时停止，保留证据并只读核对。不得盲重试、清空 journal、
-   重建、rebind 或重放。已签发后重复 wakeup 不能再签发。恢复需单独裁决；不保证 exactly-once delivery。
+自动通知、reserve/bind 和派单入口已退休，不得按 ADR-0019 的历史激活步骤重启。
+`node scripts/import-pipeline/source-intake-dispatch.mjs status <submissionId>` 仅供原
+controller 只读核对历史绑定，永远不返回可自动启动状态。旧任务仅在 Owner 于 Amp
+明确要求继续时，按既有 identity/claim/lease 规则恢复；不转移 lease 或替换绑定。
+本地源码退休不证明远端 capability 已注销。远端 controller 已停止自动派单；
+旧 handler/生产通知配置是否撤销，须独立核实，不能用 reload 或卸载推断注销成功。
 
 journal 位于 `.scratch/source-intake-dispatch/<submissionId>/`，目录 0700、记录 0600，
 含 reservation token，禁止输出、入 Git 或转移；更新 controller 时保留。失去该 Orb/journal
@@ -301,8 +503,8 @@ Worker 完成或失败都主动回报文件路径、字节数、SHA256、正式�
 
 ## Orb 算力边界
 
-自动 source-intake worker 使用私有 Project Orb，并继承专用导题 Amp Project 的默认 Orb
-规格；dispatcher 的 `create_thread` 显式选择 Import project，省略 `orb_size`。
+Owner 明确发起的独立导题线程使用私有 Project Orb，并继承专用导题 Amp Project 的默认 Orb
+规格；`create_thread` 显式选择 Import project，省略 `orb_size`。旧自动派单路径不得重新启用。
 专用 `english-question-bank-import` 项目使用 Owner 配置的 `a1.medium` 默认规格；
 Low 模型模式不等于 Small Orb。扫描/OCR、ASR 与渲染前记录实际 CPU、内存和耗时，
 只有实测资源不足才提出调整，不自动升到 xxlarge。不得因此放宽门禁、转移 claim 或重复导入。

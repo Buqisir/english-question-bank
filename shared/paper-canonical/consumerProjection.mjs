@@ -1,6 +1,8 @@
 import {
+  adaptiveAbcdLayoutRules,
   abcdPlacementSignature,
   layoutAbcdOptionSet,
+  layoutAbcdOptionGroup,
   layoutFixedFourColumnClozeOptionSet,
   layoutListeningOptionSet,
 } from './abcdLayout.mjs'
@@ -46,7 +48,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = ['51', '52', '54', '55'].includes(input.consumption.authorityRef?.manifestVersion)
+  const questionOnly = ['51', '52', '54', '55', '57', '58', '59'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -158,6 +160,11 @@ function decodeBase64Bytes(value) {
 
 function projectReadingConsumerGroup(input, occurrence) {
   const { groupId } = input
+  const authorityRef = input.consumption.authorityRef
+  const authority = authorityRef ? resolveCanonicalAuthority(authorityRef) : null
+  if (authority && !authority.ok) throw rejected('Canonical Reading placement authority is unavailable')
+  const rulesetId = authority?.closure.artifacts['renderer-typography']?.schemaVersion === 'renderer-typography-v11'
+    ? adaptiveAbcdLayoutRules.rulesetId : undefined
   const passageLetter = readingPassageLetterBySlotId[occurrence.slotId]
   if (
     !passageLetter
@@ -444,6 +451,16 @@ function projectReadingConsumerGroup(input, occurrence) {
     throw rejected(`Canonical Reading occurrence ${groupId} has invalid Question order`)
   }
 
+  const textOptionSets = occurrence.questions.filter((question) =>
+    Array.isArray(question.options) && !question.options.some((option) => option?.figure))
+    .map((question) => ({
+      owner: 'question',
+      questionId: question.questionId,
+      options: question.options,
+    }))
+  const layoutPlans = layoutAbcdOptionGroup(textOptionSets, rulesetId)
+  const layoutByQuestionId = new Map(textOptionSets.map((set, index) =>
+    [set.questionId, layoutPlans[index]]))
   const questions = occurrence.questions.map((question) => {
     if (
       !Array.isArray(question.stem)
@@ -493,11 +510,7 @@ function projectReadingConsumerGroup(input, occurrence) {
       text: textContent(option.content),
       content: structuredClone(option.content),
     }))
-    const layoutPlan = layoutAbcdOptionSet({
-      owner: 'question',
-      questionId: question.questionId,
-      options: question.options,
-    })
+    const layoutPlan = layoutByQuestionId.get(question.questionId)
     if (layoutPlan.status !== 'selected') {
       throw rejected(`Canonical A-D placement failed for ${question.questionId}`, [layoutPlan])
     }
@@ -1251,11 +1264,11 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51', '52', '54', '55'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51', '52', '54', '55'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1401,7 +1414,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51', '52', '54', '55'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

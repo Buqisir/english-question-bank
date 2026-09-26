@@ -118,7 +118,7 @@ function workflowStatus(intake) {
     if (intake.orbWorker?.state === 'reserved') return { label: '正在创建 Orb', tone: 'active' }
     if (intake.lastNotification?.state === 'failed') return { label: '通知失败', tone: 'danger' }
     if (intake.lastNotification?.state === 'sent') return { label: '已通知 Amp', tone: 'active' }
-    if (intake.lastNotification?.state === 'skipped') return { label: '等待通知 Amp', tone: 'warning' }
+    if (intake.lastNotification?.state === 'skipped') return { label: '待 Amp 指令', tone: 'neutral' }
   }
   if (intake.state === 'claimed') return { label: '正在导题', tone: 'active' }
   if (intake.state === 'handed_off') return { label: '等待审核', tone: 'success' }
@@ -132,7 +132,7 @@ function recentActivity(intake) {
   const candidates = [
     [intake.claim?.heartbeatAt, 'Orb 最近活动'],
     [intake.orbWorker?.updatedAt, intake.orbWorker?.ampThreadId ? 'Orb 线程已创建' : '正在创建 Orb'],
-    [intake.lastNotification?.createdAt, intake.lastNotification?.state === 'failed' ? '通知未送达' : '已通知 Amp'],
+    [intake.lastNotification?.createdAt, intake.lastNotification?.state === 'skipped' ? '仅保存记录' : intake.lastNotification?.state === 'failed' ? '通知未送达' : '已通知 Amp'],
     [intake.currentSubmission?.updatedAt, intake.state === 'handed_off' ? '已提交审核' : '提交已更新'],
     [intake.updatedAt, intake.state === 'needs_owner' ? '等待 Owner 确认' : '台账已更新'],
   ].filter(([value]) => value)
@@ -232,7 +232,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
   function actionFor(intake) {
     if (intake.state === 'ready_for_agent') {
       const submitting = state.submittingIntakeId === intake.id
-      return `<button class="ledger-action ledger-action--primary" type="button" data-submit-intake="${escapeHtml(intake.id)}" ${submitting ? 'disabled' : ''}>${submitting ? '正在提交…' : '提交给 Amp'}</button>`
+      return `<button class="ledger-action ledger-action--primary" type="button" data-submit-intake="${escapeHtml(intake.id)}" ${submitting ? 'disabled' : ''}>${submitting ? '正在保存…' : '保存材料快照'}</button>`
     }
     if (intake.state === 'awaiting_answers') {
       return `<button class="ledger-action" type="button" data-edit-intake="${escapeHtml(intake.id)}">上传答案</button>`
@@ -245,15 +245,14 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
       return `<span class="ledger-actions"><a class="ledger-action" href="/ops/?view=review">打开审核</a><button class="ledger-action" type="button" data-package-revision="${escapeHtml(intake.id)}">上传修正版包</button><button class="ledger-action" type="button" data-copy-text="${escapeHtml(command)}" data-copy-name="继续导题口令">复制继续口令</button></span>`
     }
     if (intake.state === 'queued' && intake.currentSubmission) {
-      const notifying = state.submittingIntakeId === intake.id
       const threadId = ampThreadIdFor(intake)
-      return `<span class="ledger-actions">${threadId ? `<a class="ledger-action" href="https://ampcode.com/threads/${encodeURIComponent(threadId)}" target="_blank" rel="noreferrer">打开 Amp 线程</a>` : ''}<button class="ledger-action" type="button" data-notify-intake="${escapeHtml(intake.id)}" data-submission-id="${escapeHtml(intake.currentSubmission.id)}" ${notifying ? 'disabled' : ''}>${notifying ? '正在通知…' : '再次通知 Amp'}</button></span>`
+      return `<span class="ledger-actions">${threadId ? `<a class="ledger-action" href="https://ampcode.com/threads/${encodeURIComponent(threadId)}" target="_blank" rel="noreferrer">打开 Amp 线程</a>` : '<span class="intake-muted">请在 Amp 发起导题</span>'}</span>`
     }
     const threadId = ampThreadIdFor(intake)
     if (threadId) {
       return `<a class="ledger-action" href="https://ampcode.com/threads/${encodeURIComponent(threadId)}" target="_blank" rel="noreferrer">打开 Amp 线程</a>`
     }
-    return '<span class="intake-muted">等待 Amp</span>'
+    return '<span class="intake-muted">请在 Amp 发起导题</span>'
   }
 
   function tableHtml() {
@@ -264,7 +263,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
         <h2 id="empty-title">还没有题源</h2>
         <p>从公众号、小红书或教师群发现试卷后，先记下来源并上传本地 DOCX / PDF。答案可以稍后补。</p>
         <button class="button button--primary intake-add" type="button">${plusIcon()}添加第一份题源</button>
-        <ol><li><span>1</span>记录来源</li><li><span>2</span>上传原文件</li><li><span>3</span>通知 Amp</li></ol>
+        <ol><li><span>1</span>记录来源</li><li><span>2</span>上传原文件</li><li><span>3</span>在 Amp 发起导题</li></ol>
         <small>原文件仅供后台导题使用，不会作为网站公开资源。</small>
       </section>`
     }
@@ -335,11 +334,11 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
               <section class="drawer-section"><h3>试卷</h3><label class="drawer-field"><span>试卷名称</span><input name="paperName" required maxlength="300" value="${escapeHtml(draft.paperName || '')}" placeholder="例如：2027 届高三开学考英语" /></label></section>
               <section class="drawer-section"><h3>来源</h3><div class="source-field-row"><label class="drawer-field"><span>平台</span><select name="platform"><option value="wechat_official" ${draft.platform === 'wechat_official' ? 'selected' : ''}>公众号</option><option value="xiaohongshu" ${draft.platform === 'xiaohongshu' ? 'selected' : ''}>小红书</option><option value="teacher_group" ${draft.platform === 'teacher_group' ? 'selected' : ''}>教师群</option><option value="other" ${draft.platform === 'other' ? 'selected' : ''}>其他</option></select></label><label class="drawer-field drawer-field--grow"><span>来源名称</span><input name="sourceName" required maxlength="300" value="${escapeHtml(draft.sourceName || '')}" placeholder="账号、群或老师名称" /></label></div><label class="drawer-field"><span>公开链接（选填）</span><input name="sourceUrl" type="url" maxlength="2000" value="${escapeHtml(draft.sourceUrl || '')}" placeholder="https://…" /></label></section>
               <section class="drawer-section drawer-files"><h3>交付方式</h3>${packageTarget ? '' : `<div class="file-mode" role="group" aria-label="试卷交付方式"><button type="button" data-file-mode="separate" aria-pressed="${!packageMode}">原始题源</button><button type="button" data-file-mode="package" aria-pressed="${packageMode}">完整解析包</button></div>`}
-                ${packageMode ? `<div class="upload-stack">${uploadBox('analyzed_package', '解析包')}</div><p class="drawer-help">一个 ZIP 包含题目、官方答案、完整解析、资源和原件。只校验和整合，不重新生成解析；不必另传题卷。</p>` : `<div class="file-mode" role="group" aria-label="文件组合方式"><button type="button" data-file-mode="separate" aria-pressed="${state.mode === 'separate'}">题目与答案分开</button><button type="button" data-file-mode="combined" aria-pressed="${state.mode === 'combined'}">题目和答案在同一文件</button></div><div class="upload-stack">${state.mode === 'combined' ? uploadBox('question_and_answers', '题目与答案') : `${uploadBox('question_source', '试题文件')}${uploadBox('official_answers', '官方答案')}`}${uploadBox('listening_audio', '听力音频（选填）', { audio: true })}</div><p class="drawer-help">暂时没有答案也能先保存；听力音频可以稍后再补。提交后由 Agent 导卷并生成解析。</p>`}
+                ${packageMode ? `<div class="upload-stack">${uploadBox('analyzed_package', '解析包')}</div><p class="drawer-help">一个 ZIP 包含题目、官方答案、完整解析、资源和原件。只校验和整合，不重新生成解析；不必另传题卷。</p>` : `<div class="file-mode" role="group" aria-label="文件组合方式"><button type="button" data-file-mode="separate" aria-pressed="${state.mode === 'separate'}">题目与答案分开</button><button type="button" data-file-mode="combined" aria-pressed="${state.mode === 'combined'}">题目和答案在同一文件</button></div><div class="upload-stack">${state.mode === 'combined' ? uploadBox('question_and_answers', '题目与答案') : `${uploadBox('question_source', '试题文件')}${uploadBox('official_answers', '官方答案')}`}${uploadBox('listening_audio', '听力音频（选填）', { audio: true })}</div><p class="drawer-help">暂时没有答案也能先保存；听力音频可以稍后再补。保存不会启动导题或生成教学解析。</p>`}
               </section>
             `}
           </div>
-          <footer class="drawer-footer"><p>${supplement ? '提交后，Agent 会把音频补进目标试卷的同一审核记录。' : packageMode ? '提交后锁定这一版解析包，校验通过后进入人工审核；不会自动上线。' : '提交后将锁定这一版文件，并通知 Amp 创建专用 Orb 线程开始导题。'}</p>${state.error ? `<div class="drawer-error" role="alert">${escapeHtml(state.error)}</div>` : ''}<div><button class="button drawer-draft" type="submit" data-save-mode="draft" ${state.busy ? 'disabled' : ''}>保存草稿</button><button class="button button--primary" type="submit" data-save-mode="submit" ${state.busy ? 'disabled' : ''}>${state.busy ? '正在保存…' : '保存并通知 Amp'}</button></div></footer>
+          <footer class="drawer-footer"><p>这里只保存材料快照，不会通知或启动 Agent。请在 Amp 明确发起或继续导题；预览确认后，另行要求上线。</p>${state.error ? `<div class="drawer-error" role="alert">${escapeHtml(state.error)}</div>` : ''}<div><button class="button drawer-draft" type="submit" data-save-mode="draft" ${state.busy ? 'disabled' : ''}>保存草稿</button><button class="button button--primary" type="submit" data-save-mode="submit" ${state.busy ? 'disabled' : ''}>${state.busy ? '正在保存…' : '保存材料快照'}</button></div></footer>
         </form>
       </aside>
     </div>`
@@ -348,8 +347,8 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
   function render() {
     root.innerHTML = `<div class="source-intake-app">
       <div class="sr-only" role="status" aria-live="polite" data-copy-feedback></div>
-      <header class="topbar source-topbar"><div class="brand"><div class="brand-mark" aria-hidden="true">EQ</div><div><h1>英语题库</h1><p>后台工作台</p></div></div><nav class="workspace-navigation" aria-label="后台工作台"><a href="/ops/" aria-current="page">题源台账</a><a href="/ops/?view=review">导题审核</a></nav><div class="account"><div class="account-copy"><strong>${escapeHtml(user.username)}</strong><span>Owner</span></div><span class="owner-avatar" aria-hidden="true">${escapeHtml(initials(user.username))}</span></div></header>
-      <main class="intake-page"><div class="intake-page-heading"><div><span class="intake-kicker">SOURCE INTAKE</span><h1>题源台账</h1><p>把人工发现的试卷和原文件记在这里，材料齐全后，提交给 Amp Orb 进入既有导题流程。</p></div><button class="button button--primary intake-add" type="button">${plusIcon()}添加题源</button></div>
+      <header class="topbar source-topbar"><div class="brand"><div class="brand-mark" aria-hidden="true">EQ</div><div><h1>英语题库</h1><p>后台工作台</p></div></div><nav class="workspace-navigation" aria-label="后台工作台"><a href="/ops/?view=sources" aria-current="page">题源记录</a><a href="/ops/?view=review">导题审核</a></nav><div class="account"><div class="account-copy"><strong>${escapeHtml(user.username)}</strong><span>Owner</span></div><span class="owner-avatar" aria-hidden="true">${escapeHtml(initials(user.username))}</span></div></header>
+      <main class="intake-page"><div class="intake-page-heading"><div><span class="intake-kicker">SOURCE RECORDS</span><h1>题源台账</h1><p>保留来源、材料和历史进度。导题由你在 Amp 发起，这里不会自动接卷。</p></div><button class="button button--primary intake-add" type="button">${plusIcon()}添加题源</button></div>
         <div class="ledger-tools"><div class="ledger-filters" role="group" aria-label="筛选题源">${[['all', '全部'], ['awaiting_answers', '待补答案'], ['ready_for_agent', '可提交'], ['agent', 'Amp 导题中'], ['needs_owner', '需确认']].map(([key, label]) => `<button type="button" data-filter="${key}" aria-pressed="${state.filter === key}">${label} <span>${count(key)}</span></button>`).join('')}</div><label class="ledger-search">${searchIcon()}<span class="sr-only">搜索试卷名或来源</span><input type="search" value="${escapeHtml(state.query)}" placeholder="搜索试卷名或来源" /></label></div>
         ${state.error && !state.drawerOpen ? `<div class="intake-page-error" role="alert">${escapeHtml(state.error)}。请刷新后重试。</div>` : ''}
         ${tableHtml()}
@@ -493,24 +492,6 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     }
   }
 
-  async function notifyAgent(intakeId, submissionId) {
-    if (state.submittingIntakeId) return
-    state.submittingIntakeId = intakeId
-    state.error = null
-    render()
-    try {
-      await request(
-        `/api/source-intakes/${encodeURIComponent(intakeId)}/submissions/${encodeURIComponent(submissionId)}/notify`,
-        { method: 'POST' },
-      )
-      await load()
-    } catch (error) {
-      state.error = error.message
-      state.submittingIntakeId = null
-      render()
-    }
-  }
-
   function bind() {
     bindClipboardButtons(root)
     document.querySelectorAll('.intake-add').forEach((button) =>
@@ -551,12 +532,6 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     })
     document.querySelectorAll('[data-submit-intake]').forEach((button) => {
       button.addEventListener('click', () => void submitReady(button.dataset.submitIntake))
-    })
-    document.querySelectorAll('[data-notify-intake]').forEach((button) => {
-      button.addEventListener('click', () => void notifyAgent(
-        button.dataset.notifyIntake,
-        button.dataset.submissionId,
-      ))
     })
     document.querySelector('.drawer-scrim')?.addEventListener('click', closeDrawer)
     document.querySelector('.drawer-close')?.addEventListener('click', closeDrawer)

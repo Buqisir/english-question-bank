@@ -10,6 +10,7 @@ import {
   canonicalAuthorityRef,
   nck1AnalyzedPackageCandidateAuthorityRef55,
   nck1MaterializationCandidateAuthorityRef,
+  nck1MaterializationHistoricalAuthorityRef54,
   paperPresentationAuthorityRef,
   resolveCanonicalAuthority,
 } from '../shared/paper-canonical/authority.mjs'
@@ -29,10 +30,10 @@ for (const [path, expected] of historicalBytes) {
 }
 
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '54')
-assert.equal(paperPresentationAuthorityRef.manifestVersion, '54')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '57')
+assert.equal(paperPresentationAuthorityRef.manifestVersion, '56')
 assert.equal(nck1AnalyzedPackageCandidateAuthorityRef55.manifestVersion, '55')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestDigest, digestJson(manifestV54))
+assert.equal(nck1MaterializationHistoricalAuthorityRef54.manifestDigest, digestJson(manifestV54))
 assert.equal(nck1AnalyzedPackageCandidateAuthorityRef55.manifestDigest, digestJson(manifestV55))
 const closure = resolveCanonicalAuthority(nck1AnalyzedPackageCandidateAuthorityRef55).closure
 for (const schemaId of [

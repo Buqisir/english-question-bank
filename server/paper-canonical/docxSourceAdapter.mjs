@@ -130,13 +130,24 @@ function decodeXml(value) {
 }
 
 function extractXmlText(xml) {
-  return decodeXml(
-    String(xml || '')
-      .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
-      .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
-      .replace(/<\/w:p>/g, '\n')
-      .replace(/<[^>]+>/g, ''),
-  )
+  // Only Word text and explicit separators are visible source text. Stripping
+  // all XML tags leaks drawing coordinates and field instructions into prose.
+  return [...String(xml || '').matchAll(
+    /<w:t(?:\s[^>]*)?>([\s\S]*?)<\/w:t>|<w:(tab|br|cr)(?=[\s/>])[^>]*>|<\/w:p>/gu,
+  )].map((match) => match[1] !== undefined
+    ? decodeXml(match[1])
+    : match[2] === 'tab' ? '\t' : '\n').join('')
+}
+
+// Frozen DOCX envelope authorities bind the original whole-document extraction
+// bytes. Their historical replay must not change when newer NCK1 structure
+// extraction excludes non-visible drawing and field metadata.
+function extractLegacyDocumentText(xml) {
+  return decodeXml(String(xml || '')
+    .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
+    .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
+    .replace(/<\/w:p>/g, '\n')
+    .replace(/<[^>]+>/g, ''))
 }
 
 function xmlElements(xml, tag) {
@@ -284,17 +295,13 @@ function embeddedParagraphMedia(paragraphXml, packageEntries, relationships, bod
     })
 }
 
-/**
- * Extract the textual body from one immutable DOCX without using a platform
- * converter. This intentionally preserves paragraph and hard-break boundaries
- * so a profile adapter may make its own deterministic structural decisions.
- */
+/** Frozen whole-document text for historical DOCX envelope authorities. */
 export function extractDocxDocumentText(docxBytes) {
   if (!(docxBytes instanceof Uint8Array) || docxBytes.byteLength === 0) {
     throw new TypeError('DOCX text extraction requires immutable DOCX bytes')
   }
   const xml = readDocxPackage(docxBytes).documentXml.text
-  return extractXmlText(xml)
+  return extractLegacyDocumentText(xml)
 }
 
 // Word often draws a numbered blank with underlined spaces/runs rather than
@@ -321,6 +328,49 @@ function textWithNumberedBlanks(paragraphXml) {
       && /^\p{Zs}*(3[6-9]|[45]\d|6[0-5])\p{Zs}*$/u.exec(run.text)
     return match ? `__${match[1]}__` : run.text
   }).join('')
+}
+
+// Opt-in source facts for lexical emphasis. Existing paragraph extraction and
+// numbered-blank interpretation deliberately retain their historical output.
+export function extractDocxParagraphEmphasis(docxBytes) {
+  const xml = readDocxPackage(docxBytes).documentXml.text
+  return [...xml.matchAll(/<w:p(?:\s[^>]*)?>[\s\S]*?<\/w:p>/gu)]
+    .map(([paragraphXml], index) => {
+      const text = extractXmlText(paragraphXml).replace(/\n$/u, '')
+      let offset = 0
+      const runs = [...paragraphXml.matchAll(/<w:r(?:\s[^>]*)?>[\s\S]*?<\/w:r>/gu)]
+        .map(([runXml]) => {
+          const value = extractXmlText(runXml)
+          const properties = /<w:rPr(?:\s[^>]*)?>([\s\S]*?)<\/w:rPr>/u
+            .exec(runXml.replace(/<w:rPrChange\b[\s\S]*?<\/w:rPrChange>/gu, ''))?.[1] || ''
+          const enabled = (name) => {
+            const tag = new RegExp(`<w:${name}(?=[\\s/>])[^>]*>`, 'u').exec(properties)?.[0]
+            return Boolean(tag) && !/w:val=["'](?:none|0|false|off)["']/u.test(tag)
+          }
+          const run = { start: offset, end: offset + value.length, text: value,
+            marks: ['bold', 'underline'].filter((mark) => enabled(mark === 'bold' ? 'b' : 'u')) }
+          offset = run.end
+          return run
+        })
+      if (runs.map((run) => run.text).join('') !== text) {
+        return { sourceIndex: index + 1, text, ranges: [], exact: false }
+      }
+      // Whole-paragraph styling belongs to the paragraph role, not lexical
+      // emphasis. Evaluate properties independently (a bold paragraph may
+      // still contain one genuinely underlined word).
+      const meaningful = runs.filter((run) => /\S/u.test(run.text))
+      const decorative = new Set(['bold', 'underline'].filter((mark) =>
+        meaningful.length > 0 && meaningful.every((run) => run.marks.includes(mark))))
+      const ranges = []
+      for (const run of runs) {
+        const marks = run.marks.filter((mark) => !decorative.has(mark))
+        if (!marks.length || !/\S/u.test(run.text)) continue
+        const previous = ranges.at(-1)
+        if (previous?.end === run.start && previous.marks.join() === marks.join()) previous.end = run.end
+        else ranges.push({ start: run.start, end: run.end, marks })
+      }
+      return { sourceIndex: index + 1, text, ranges, exact: true }
+    })
 }
 
 /**

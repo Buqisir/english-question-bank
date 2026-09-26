@@ -1389,15 +1389,15 @@ assert(
   'shell rule still constrains max-width — rail would stay centered, not edge-glued',
 )
 assert(
-  'paperBrowsePage.css: a min-width: 1200px breakpoint docks the lecture panel as a sticky grid column',
-  /@media \(min-width: 1200px\)\s*\{\s*\.paper-browse-lecture-panel\s*\{[^}]*position:\s*sticky/.test(
+  'paperBrowsePage.css: a min-width: 1440px breakpoint docks notes without squeezing the 794px paper',
+  /@media \(min-width: 1440px\)\s*\{\s*\.paper-browse-lecture-panel\s*\{[^}]*position:\s*sticky/.test(
     pageCssSrc,
   ),
   'missing the docked (sticky) desktop lecture panel rule',
 )
 assert(
-  'paperBrowsePage.css: a max-width: 1199.98px breakpoint turns the lecture panel into a fixed drawer with a backdrop',
-  /@media \(max-width: 1199\.98px\)\s*\{\s*\.paper-browse-lecture-panel\s*\{[^}]*position:\s*fixed/.test(
+  'paperBrowsePage.css: below 1440px the lecture panel is a fixed drawer with a backdrop',
+  /@media \(max-width: 1439\.98px\)\s*\{\s*\.paper-browse-lecture-panel\s*\{[^}]*position:\s*fixed/.test(
     pageCssSrc,
   ) && pageCssSrc.includes('.paper-browse-lecture-backdrop'),
   'missing the narrow-viewport fixed-drawer + backdrop rule',
@@ -1498,8 +1498,8 @@ assert(
   !existsSync(path.join(rootDir, 'app/src/features/paper-intelligence/paperIntelligencePaperSurfaceHarness.css')),
 )
 assert(
-  'paperBrowsePage.css hides the evidence line below the 1200px docked-三栏 breakpoint (drawer geometry is not meaningful)',
-  /@media \(max-width: 1199\.98px\)\s*\{\s*\.paper-browse-shell \.pi-line-overlay\s*\{\s*display:\s*none/.test(
+  'paperBrowsePage.css hides the evidence line below the 1440px docked breakpoint (drawer geometry is not meaningful)',
+  /@media \(max-width: 1439\.98px\)\s*\{\s*\.paper-browse-shell \.pi-line-overlay\s*\{\s*display:\s*none/.test(
     pageCssSrc,
   ),
   'missing the narrow-viewport display:none rule for .paper-browse-shell .pi-line-overlay',
@@ -1992,17 +1992,19 @@ assert(
   'the shared 88px directory surface, visible data-driven section heads, or existing rail reuse is missing',
 )
 assert(
-  '73. screen zoom uses ResizeObserver on shell with stepped clamp(1, available/794, 1.35)',
+  '73. ordinary and Review use the same adaptive zoom, while Print stays unscaled',
   /new ResizeObserver\(computeZoom\)/.test(pageSrc) &&
+    /const raw = Math\.max\(1, Math\.min\(1\.35, available \/ PAPER_BASE_WIDTH\)\)/.test(pageSrc) &&
     /Math\.floor\(raw \/ 0\.05\) \* 0\.05/.test(pageSrc) &&
     /\.paper-browse-zoom\s*\{[^}]*zoom:\s*var\(--paper-screen-zoom/.test(pageCssSrc) &&
     /@media print\s*\{[^}]*\.paper-browse-zoom\s*\{[^}]*zoom:\s*1/.test(pageCssSrc),
-  'missing shell ResizeObserver zoom, CSS zoom wrapper, or print guard',
+  'shared adaptive Screen zoom or Print guard is missing',
 )
 assert(
   'lecture toggle keeps the screen zoom and desktop content column independent of open state',
   !pageSrc.slice(pageSrc.indexOf('function computeZoom()'), pageSrc.indexOf('    computeZoom()')).includes('lectureOpen') &&
-    /@media screen and \(min-width: 1200px\)\s*\{\s*\.paper-browse-shell\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
+    /@media screen and \(min-width: 1440px\)\s*\{\s*\.paper-browse-shell\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
+    /const DOCKED_LECTURE_MIN_WIDTH = 1440/.test(pageSrc) &&
     /transition: transform var\(--motion-slow\) var\(--ease-out\)/.test(pageCssSrc),
   'lecture still resizes the paper instead of translating the fixed-width column',
 )
@@ -2145,6 +2147,26 @@ assert(
 // Owner-approved reading lecture header: execute the real display-title
 // function with adversarial metadata and render the real reading panel.
 // Extracting this local pure function avoids exporting a UI helper just for QA.
+const railLabelFunction = pageSrc.match(/function canonicalRailLabel\([\s\S]*?\n\}/)?.[0]
+const canonicalRailLabel = new Function(`${stripTypeScriptTypes(railLabelFunction)}; return canonicalRailLabel`)()
+for (const [slotId, expected] of [
+  ['reading.a', 'A篇'], ['reading.b', 'B篇'], ['reading.c', 'C篇'], ['reading.d', 'D篇'],
+  ['reading.seven-choices', '七选五'], ['language.cloze', '完形'], ['language.grammar-fill', '语法'],
+  ['writing.application', '应用文'], ['writing.continuation', '续写'],
+  ['listening.short-dialogue', '第一节'], ['listening.long-form', '第二节'],
+]) {
+  assert(`canonical rail labels ${slotId} without search cards or title parsing`,
+    canonicalRailLabel({ visibleStructure: [
+      { kind: 'group', groupId: 'other', slotId: 'reading.a' },
+      { kind: 'group', groupId: 'opaque-id', slotId },
+    ] }, 'opaque-id') === expected)
+}
+assert('canonical rail preserves fallback for absent and unknown slots',
+  canonicalRailLabel(null, 'missing') === null &&
+  canonicalRailLabel({ visibleStructure: [] }, 'missing') === null &&
+  canonicalRailLabel({ visibleStructure: [{ kind: 'group', groupId: 'x', slotId: 'future.slot' }] }, 'x') === null)
+assert('canonical rail labels take precedence over incomplete search cards',
+  pageSrc.includes('const displayTitle = canonicalTitle ?? railLectureShortLabel(fullTitle, card)'))
 const titleFunction = pageSrc.match(/function paperBrowseDisplayTitle\([\s\S]*?\n\}/)?.[0]
 const displayTitle = new Function(`${stripTypeScriptTypes(titleFunction)}; return paperBrowseDisplayTitle`)()
 const titleAsset = {

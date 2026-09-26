@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, Printer, RotateCcw, Save, Trash } from '../../icons'
+import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { useModalDialog } from '../../components/useModalDialog'
@@ -1252,7 +1252,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
-  async function exportPdf(mode: FileSaveMode = 'download', pageLayout: 'natural' | 'friendly8' | 'friendly10' = 'natural') {
+  async function exportPdf(mode: FileSaveMode = 'download', pageLayout: 'natural' | 'largeComplete' | 'largeNoListening' | 'economy8' = 'natural') {
     if (!draftPaper || draftPaper.items.length === 0) return
     setExportStatus('idle')
     setExportError('')
@@ -1265,18 +1265,19 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       })
       if (!target) return
       setExportStatus('exporting')
-      const { crossingGroupCount, splitOptionBankCount } = await downloadDraftPaperPdf(draftPaper.id, versionType, target, pageLayout)
+      const { crossingGroupCount, splitOptionBankCount, fontSizePt } = await downloadDraftPaperPdf(draftPaper.id, versionType, target, pageLayout)
       setExportStatus('exported')
       const savedMessage = target.kind === 'download'
         ? target.fallbackFromSaveAs ? '当前浏览器不支持系统另存为，已改为普通下载。' : 'PDF 已开始下载。'
         : 'PDF 已保存到所选位置。'
-      setExportSuccessMessage(savedMessage + (crossingGroupCount > 0
-        ? ` 已保持指定页数和正文版式，仍有 ${crossingGroupCount} 个题组跨 A3 正反面，请检查分页。` : '')
-        + (splitOptionBankCount > 0 ? ` 为保持指定页数，有 ${splitOptionBankCount} 个选项组跨页，单条选项保持完整，请检查。` : ''))
+      const longPaper = pageLayout === 'largeComplete' || pageLayout === 'largeNoListening'
+      setExportSuccessMessage(savedMessage + (fontSizePt ? ` 本卷采用${fontSizePt === 12 ? '小四（12pt）' : '五号（10.5pt）'}。` : '') + (crossingGroupCount > 0
+        ? ` ${longPaper ? '已满足长卷页数上限' : '已保持指定页数'}和正文版式，仍有 ${crossingGroupCount} 个题组跨 A3 正反面，请检查分页。` : '')
+        + (splitOptionBankCount > 0 ? ` ${longPaper ? '' : '为保持指定页数，'}有 ${splitOptionBankCount} 个选项组跨页，单条选项保持完整，请检查。` : ''))
     } catch (error) {
       setExportStatus('error')
       const fixedLayoutMessage = pageLayout !== 'natural' && error instanceof Error
-        && /^(无法生成指定页数的友好 PDF：|8／10 页版需要|10 页友好版需要完整|试卷内容超出排版区域：)/.test(error.message)
+        && /^(未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
         ? error.message : null
       setExportError(fixedLayoutMessage || describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
     }
@@ -1337,38 +1338,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceStatus('error')
       setSpaceMessage(describeError('保存到个人空间', error))
     }
-  }
-
-  // draft-desk-b step4 (owner 拍板 2026-07-12, plan.md "步4" — 浏览器打印并入):
-  // prints the same server-rendered, DOM-contract-tagged pagination HTML the A4
-  // preview iframe already shows (the `paginatedHtml` state this component fetches
-  // via fetchDraftPaperPagination — see the pagination-fetch effect above), not the
-  // old draftPaper.printHtml (a THIRD, independently-rendered HTML string built by
-  // server/print-renderer.mjs's buildPrintHtml, never run through paged.js). That
-  // old field was the last remaining "third pagination engine" parity gap this cut
-  // exists to close — this browser-print path, the on-screen preview, and the PDF
-  // download now all trace back to the SAME single paged.js render (paged.js's own
-  // @page rules + already-computed page boxes govern the print output; the
-  // `@media screen` card styling this component layers onto `paginatedHtml` for the
-  // on-screen iframe never applies during print — DP-1 acceptance check (d) already
-  // proved a serialized paged.js DOM prints consistently with what it displays).
-  // `draftPaper.printHtml` itself stays on the DraftPaper API/domain type (API
-  // surface unchanged) even though this was its last client-side consumer — see
-  // this cut's completion report.
-  function browserPrint() {
-    if (!paginatedHtml) return
-    const printWindow = window.open('', '_blank')
-    if (!printWindow) {
-      setExportStatus('error')
-      setExportError('浏览器阻止了打印窗口，请允许弹窗后重试。')
-      return
-    }
-    printWindow.opener = null
-    printWindow.document.open()
-    printWindow.document.write(paginatedHtml)
-    printWindow.document.close()
-    printWindow.focus()
-    printWindow.setTimeout(() => printWindow.print(), 250)
   }
 
   if (loadStatus === 'loading') {
@@ -1463,11 +1432,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             {versionType === 'teacher' ? <PaperCheck size={16} /> : <PaperStudent size={16} />} 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
           </button>
           {versionType === 'student' && <span className="draft-export-menu-divider" role="separator" />}
-          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly8') }}>
-            <PaperStudent size={16} /> 8 页友好版（无听力）
+          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'largeComplete') }}>
+            <PaperStudent size={16} /> 大字完整版（含听力，最多 12 页）
           </button>}
-          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly10') }}>
-            <PaperStudent size={16} /> 10 页友好版（含听力）
+          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'largeNoListening') }}>
+            <PaperStudent size={16} /> 大字无听力版（最多 10 页）
+          </button>}
+          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'economy8') }}>
+            <PaperStudent size={16} /> 省纸版（无听力 8 页，小四优先）
           </button>}
           {versionType === 'student' && <span className="draft-export-menu-divider" role="separator" />}
           <button
@@ -1480,17 +1452,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             }}
           >
             <Save size={16} /> 另存为 PDF…
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            disabled={draftPaper.items.length === 0}
-            onClick={() => {
-              setExportMenuOpen(false)
-              browserPrint()
-            }}
-          >
-            <Printer size={16} /> 浏览器打印
           </button>
           <button
             type="button"
@@ -1609,7 +1570,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     />
     <div className="draft-workbench-shell">
       {draftPaper.items.length === 0 && (
-        <p className="draft-empty-export" role="status">请先添加题组，再导出 PDF 或打印。</p>
+        <p className="draft-empty-export" role="status">请先添加题组，再下载 PDF 用于打印。</p>
       )}
       {migrationNotice && <p className="draft-warning" role="status">{migrationNotice}</p>}
       {exportStatus === 'error' && <p className="draft-error">{exportError}</p>}

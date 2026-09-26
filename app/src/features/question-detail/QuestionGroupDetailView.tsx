@@ -205,6 +205,7 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
     : undefined
   const surfaceEl = (
     <PaperSurface
+      roleLayout={surfaceData.roleLayout}
       textMap={surfaceData.textMap}
       mode="lecture"
       lectureFocus={null}

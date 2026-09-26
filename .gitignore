@@ -33,6 +33,8 @@ dist-ssr/
 *.log
 *.pid
 .amp/portals/*
+.amp/orb-profile
+.amp/import-review-origin
 server/logs/
 .playwright-cli/
 app/.playwright-cli/

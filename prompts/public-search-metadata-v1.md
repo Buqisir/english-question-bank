@@ -27,6 +27,13 @@ Family metadata shapes are closed:
   strings, not a closed invented vocabulary, and topic is represented only by group `topicLabels`
 - continuation-writing: `{writingTaskId,situation,conflict,relationships}`; relationships may be empty
 
+Reading profile fields are conditional, not independent labels. Choose `subtype`
+from the supplied values for that `family`. Set `detailScope` to `single` or
+`multiple` only for family `detail`; otherwise it must be `null`. Set `technique`
+to a supplied reading technique only for family `writing-method`; otherwise it
+must be `null`, including for `inference` / `writing-purpose`. Do not attach an
+extra technique merely because the source uses one.
+
 Do not output summaries, teaching notes, explanations, reasons, evidence/highlight coordinates,
 translations, essays, endings, difficulty, CEFR, embeddings, or unknown fields. Structural paragraph
 and blank ownership is identity, not evidence coordinates. Listening is not required when absent.

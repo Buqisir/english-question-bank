@@ -40,6 +40,7 @@ export type CanonicalSurfaceParagraph = {
 }
 
 export type CanonicalPaperGroupSurfaceData = {
+  readonly roleLayout?: 'golden_reference_v1'
   readonly textMap: PaperTextMap
   readonly semanticParagraphs: ReadonlyArray<CanonicalSurfaceParagraph>
   readonly grammarFillScreenRuling?: GrammarFillScreenRuling
@@ -51,6 +52,7 @@ export type CanonicalReadingSurfaceTextInline = {
   readonly kind: 'text'
   readonly nodeId: string
   readonly text: string
+  readonly marks?: ReadonlyArray<'bold' | 'underline'>
 }
 
 export type CanonicalMediaPresentation = {
@@ -222,6 +224,7 @@ export function buildCanonicalReadingConsumptionSurfaceData(input: {
   readonly richBlocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
   readonly anchors: Record<string, ReadonlyArray<string>>
   readonly surfaceData: {
+    readonly roleLayout?: 'golden_reference_v1'
     readonly textMap: PaperTextMap
     readonly questions: ReadonlyArray<PaperQuestion>
     readonly evidence: ReadonlyArray<PaperEvidence>
@@ -297,6 +300,7 @@ type CanonicalApplicationWritingSurfaceCommon = {
   readonly anchors: Record<string, ReadonlyArray<string> | string>
   readonly promptBlocks: ReadonlyArray<CanonicalWritingSourceBlock>
   readonly surfaceData: {
+    readonly roleLayout?: 'golden_reference_v1'
     readonly textMap: PaperTextMap
     readonly questions: ReadonlyArray<PaperQuestion>
     readonly evidence: ReadonlyArray<PaperEvidence>
@@ -357,6 +361,7 @@ type CanonicalContinuationWritingSurfaceCommon = {
   readonly anchors: Record<string, ReadonlyArray<string>>
   readonly materialBlocks: ReadonlyArray<CanonicalWritingSourceBlock>
   readonly surfaceData: {
+    readonly roleLayout?: 'golden_reference_v1'
     readonly textMap: PaperTextMap
     readonly questions: ReadonlyArray<PaperQuestion>
     readonly evidence: ReadonlyArray<PaperEvidence>

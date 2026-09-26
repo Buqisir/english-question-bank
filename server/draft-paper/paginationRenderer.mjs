@@ -133,6 +133,32 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
       await document.fonts.ready
     })
 
+    // New student products change body size, so source column hints must be
+    // remeasured with the loaded fonts. Historical rendering stays untouched.
+    const studentProduct = printHtml.includes('data-pdf-student-product=')
+    const measureOptions = (prepare) => {
+      const root = prepare ? document : document.querySelector('.pagedjs_pages')
+      const failures = []
+      for (const options of root.querySelectorAll('.canonical-options,.options-grid--listening')) {
+        let overflow = options.scrollWidth > options.clientWidth + 1
+        for (const cell of options.children) {
+          const box = cell.getBoundingClientRect()
+          const walker = document.createTreeWalker(cell, NodeFilter.SHOW_TEXT)
+          const range = document.createRange()
+          while (walker.nextNode()) {
+            if (!walker.currentNode.textContent.trim()) continue
+            range.selectNodeContents(walker.currentNode)
+            if ([...range.getClientRects()].some(rect => rect.left < box.left - 1 || rect.right > box.right + 1)) overflow = true
+          }
+        }
+        if (!overflow) continue
+        if (prepare) options.setAttribute('data-pdf-single-column', '')
+        else failures.push(options.closest('[data-canonical-question-id]')?.getAttribute('data-canonical-question-id') || 'options')
+      }
+      return failures
+    }
+    if (studentProduct) await page.evaluate(measureOptions, true)
+
     // Step 2: PagedConfig BEFORE step 3's polyfill injection — order is load-bearing,
     // see module header + spike-gate-dp1.md finding #3.
     await page.evaluate(() => {
@@ -199,6 +225,12 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
       throw Object.assign(new Error(`试卷内容超出排版区域：${layoutFailure.id || 'block'} (${layoutFailure.reason})`), {
         code: 'PAPER_LAYOUT_OVERFLOW',
         blockId: layoutFailure.id,
+      })
+    }
+    if (studentProduct) {
+      const failures = await page.evaluate(measureOptions, false)
+      if (failures.length) throw Object.assign(new Error(`选项文字超出列宽：${failures.join(', ')}`), {
+        code: 'PAPER_LAYOUT_OVERFLOW',
       })
     }
     const inspection = typeof inspect === 'function'

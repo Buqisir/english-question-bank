@@ -42,6 +42,7 @@ import { readFileSync } from 'node:fs'
 import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { readingFigureOptionStyles, measuredReadingFigureStyles } from '../shared/papersurface/readingFigureOptions.mjs'
+import { hasSourceBulletLines } from '../shared/papersurface/readingParagraphLayout.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
 import {
   grammarFillBlankRulingForRhythm,
@@ -96,6 +97,7 @@ import {
 } from './paper-canonical/consumerRuntime.mjs'
 import { continuationWritingPresentation } from '../shared/paper-canonical/writingPresentation.mjs'
 import { blankPresentationParagraphs } from '../shared/paper-canonical/blankPresentation.mjs'
+import { resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import {
   listeningOpening,
   ownsCompletePaperOpening,
@@ -258,7 +260,8 @@ function renderPassageLineWithBlanks(line, groupType, blankCounter) {
   return out
 }
 
-function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQuestionId) {
+function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQuestionId, consumerContractRef) {
+  const sourceSpacing = resolveConsumerPresentation(consumerContractRef)?.policy.inlineBlankSpacing === 'source_text_boundaries'
   const blankWidthClass =
     canonicalGroup.groupType === 'sevenChoices'
       ? 'print-blank--seven'
@@ -282,7 +285,9 @@ function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQues
         : isGrammarFill
           ? ` data-canonical-pair="${escapeHtml(`${node.questionId}:${node.blankId}`)}" data-canonical-question-id="${escapeHtml(node.questionId)}" data-canonical-blank-id="${escapeHtml(node.blankId)}" data-canonical-grammar-fill-rhythm-role="inline_blank_marker" data-canonical-grammar-fill-unit=""`
           : ''
-    return `<span class="print-blank-unit"${pairAttrs}><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span></span>${hint}</span>`
+    const spacingAttrs = sourceSpacing ? ` data-blank-spacing="source-text"${!hint ? ' data-blank-hint="absent"' : ''}` : ''
+    const rule = sourceSpacing ? '<svg class="print-blank-rule" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 5.5H100" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="butt"/></svg>' : ''
+    return `<span class="print-blank-unit"${pairAttrs}${spacingAttrs}><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span>${rule}</span>${hint}</span>`
   }).join('')
 }
 
@@ -577,7 +582,8 @@ function renderCanonicalInlineNodes(nodes) {
       const src = `data:${node.mediaArtifact.mimeType};base64,${node.mediaArtifact.encodedBytes}`
       return `<img class="canonical-reading-table-media" data-canonical-content-node-id="${escapeHtml(node.nodeId)}" data-canonical-media-id="${escapeHtml(node.mediaId)}"${canonicalMediaPresentationAttributes(node.media)} src="${escapeHtml(src)}" alt="${escapeHtml(node.alt)}">`
     }
-    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(node.text)}</span>`
+    const marks = node.marks ? ` data-source-marks="${escapeHtml(node.marks.join(' '))}"` : ''
+    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}"${marks}>${escapeHtml(node.text)}</span>`
   }).join('')
 }
 
@@ -630,7 +636,9 @@ function renderCanonicalReadingParagraph(block, { columnHeading = false } = {}) 
         ? 'passage_subtitle'
         : 'passage_body_line'
   const headingAttr = columnHeading ? ' data-canonical-column-heading=""' : ''
-  return `<${tag} class="${className}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}" data-canonical-reading-rhythm-role="${rhythmRole}"${headingAttr}>${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
+  const bulletAttr = block.role === 'body' && hasSourceBulletLines(block.inlines)
+    ? ' data-canonical-source-bullet-lines=""' : ''
+  return `<${tag} class="${className}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}" data-canonical-reading-rhythm-role="${rhythmRole}"${headingAttr}${bulletAttr}>${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
 }
 
 function renderCanonicalReadingTable(block) {
@@ -844,10 +852,11 @@ function renderCanonicalContinuationWriting(canonicalGroup, writingChrome, consu
     'continuation',
   )
   const material = renderCanonicalWritingBlocks(canonicalGroup.materialBlocks, 'continuation')
+  const justifyMaterial = resolveConsumerPresentation(consumerContractRef)?.policy.continuationMaterialAlignment === 'justify_except_last_line'
   const response = canonicalGroup.answerRegion
   const starters = response.starterLines.map((starter, index) =>
     `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderContinuationStarterInlineNodes(starter.inlines, index)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`).join('')
-  return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}"><div class="canonical-continuation-chrome">${chrome}</div><div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-continuation-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${continuationWritingRhythm.responseGeometry.widthMm}mm;height:${continuationWritingRhythm.responseGeometry.heightMm}mm;">${starters}</div></div>`
+  return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}"><div class="canonical-continuation-chrome">${chrome}</div><div class="passage canonical-continuation-material"${justifyMaterial ? ' data-canonical-continuation-material-alignment="justify"' : ''}>${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-continuation-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${continuationWritingRhythm.responseGeometry.widthMm}mm;height:${continuationWritingRhythm.responseGeometry.heightMm}mm;">${starters}</div></div>`
 }
 
 function renderCanonicalQuestionOptions(
@@ -1570,6 +1579,13 @@ export function buildPrintHtml({
 
   const sections = []
 
+  function roleLayoutAttribute(groupId) {
+    const source = canonicalSourceConsumptionForGroup(canonicalConsumption, groupId)
+    return resolveConsumerPresentation(source?.consumerContractRef)?.policy.roleLayout === 'golden_reference_v1'
+      ? ' data-canonical-role-layout="golden_reference_v1"'
+      : ''
+  }
+
   function renderOptions(options, groupType) {
     if (!options || options.length === 0) return ''
     if (groupType === 'listening') {
@@ -1588,6 +1604,10 @@ export function buildPrintHtml({
     let questionNum = startNum
     let groupNum = 0
     for (const [blockIndex, block] of blocks.entries()) {
+      // Chrome belongs to its following group, including in mixed-version drafts.
+      const chromeLayoutAttr = ['section_header', 'instruction'].includes(block.type)
+        ? roleLayoutAttribute(blocks.slice(blockIndex + 1).find(next => next.type === 'question_group')?.questionGroupId)
+        : ''
       if (
         canonicalListeningOwnsOpening
         && blockIndex <= listeningChromeEndBlockIndex
@@ -1689,7 +1709,7 @@ export function buildPrintHtml({
           && headingKind(blocks[blockIndex - 1].title) === 'part'
             ? ' data-canonical-part-first-section=""'
             : ''
-        sections.push(`<h2 class="section-header section-header--${kind}" id="${escapeHtml(headingId)}"${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${sevenChoicesBoundaryAttrs}${sevenChoicesFollowingAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${clozeFollowingAttrs}${grammarFillRhythmAttrs}${grammarFillPartContextAttrs}${grammarFillPredecessorAttrs}${grammarFillFollowingAttrs}${partFirstSectionAttrs}>${renderSectionHeadingText(visibleTitle)}</h2>`)
+        sections.push(`<h2 class="section-header section-header--${kind}" id="${escapeHtml(headingId)}"${chromeLayoutAttr}${rhythmRoleAttr}${readingPredecessorAttrs}${readingFollowingAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${sevenChoicesBoundaryAttrs}${sevenChoicesFollowingAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${clozeFollowingAttrs}${grammarFillRhythmAttrs}${grammarFillPartContextAttrs}${grammarFillPredecessorAttrs}${grammarFillFollowingAttrs}${partFirstSectionAttrs}>${renderSectionHeadingText(visibleTitle)}</h2>`)
       } else if (
         block.type === 'instruction'
         && block.text
@@ -1729,7 +1749,7 @@ export function buildPrintHtml({
           blockIndex === firstGrammarFillPredecessorBlockIndex
             ? ` data-canonical-grammar-fill-preceding-for="${escapeHtml(canonicalGrammarFillGroupIds[0])}" data-canonical-grammar-fill-previous-family-group-id="${escapeHtml(canonicalClozeGroupIds.at(-1) || '')}"`
             : ''
-        sections.push(`<p class="reading-meta-instruction"${readingRhythmAttrs}${readingPredecessorAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${grammarFillRhythmAttrs}${grammarFillPredecessorAttrs}>${escapeHtml(block.text)}</p>`)
+        sections.push(`<p class="reading-meta-instruction"${chromeLayoutAttr}${readingRhythmAttrs}${readingPredecessorAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${grammarFillRhythmAttrs}${grammarFillPredecessorAttrs}>${escapeHtml(block.text)}</p>`)
       } else if (block.type === 'page_break') {
         sections.push('<div class="page-break"></div>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -1812,7 +1832,7 @@ export function buildPrintHtml({
             ? ` data-canonical-grammar-fill-previous-family-group-id="${escapeHtml(canonicalClozeGroupIds.at(-1) || '')}"`
             : ''
         let groupHtml = canonicalGroup
-          ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}${collapsedSevenChoicesBoundaryAttr}${collapsedClozeBoundaryAttr}${collapsedGrammarFillBoundaryAttr}>`
+          ? `<section class="question-group"${roleLayoutAttribute(canonicalGroup.groupId)} data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}${collapsedSevenChoicesBoundaryAttr}${collapsedClozeBoundaryAttr}${collapsedGrammarFillBoundaryAttr}>`
           : '<section class="question-group">'
         const listeningPresentation = canonicalGroup?.groupType === 'listening'
           ? projectListeningGroupPresentation(canonicalGroup)
@@ -1897,6 +1917,7 @@ export function buildPrintHtml({
                     canonicalGroup,
                     paragraph,
                     displayNumberByQuestionId,
+                    canonicalSourceConsumptionForGroup(canonicalConsumption, canonicalGroup.groupId).consumerContractRef,
                   )}</p>`,
               )
               .join('')}</div>`
@@ -2959,6 +2980,32 @@ ${paperLayoutCss}
 
 .print-blank--short { width: ${clozeRhythm.blankGeometry.widthEm}em; }
 .print-blank--seven { width: ${paperBlankRuling.sevenChoices.width}; }
+
+/* New presentation overrides the historical margin/two-track rules above:
+   external gaps belong to source text; an absent hint contributes no geometry. */
+.print-blank-unit[data-blank-spacing="source-text"] > .print-blank {
+  margin-left: 0;
+  margin-right: 0;
+  position: relative;
+  /* A real PDF stroke avoids background-rectangle pixel snapping. The SVG
+     is out of flow and ends at the existing blank bottom; no baseline lift. */
+  background: none;
+}
+
+.print-blank-rule {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: ${sharedInlineBlankRuling.printLineWidthPt * 6}pt;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.print-blank-unit[data-blank-spacing="source-text"][data-canonical-grammar-fill-unit][data-blank-hint="absent"] {
+  grid-template-columns: ${activeGrammarFillRhythm.blankGeometry.widthEm}em;
+  column-gap: 0;
+}
 
 .print-blank-num {
   display: inline-block;

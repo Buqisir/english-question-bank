@@ -160,6 +160,10 @@ const server = createServer(async (request, response) => {
     json(response, 200, { intakes: inactiveOnly ? inactiveIntakes : activeIntakes })
     return
   }
+  if (url.pathname === '/api/import-reviews') {
+    json(response, 200, { papers: [] })
+    return
+  }
   json(response, 404, { error: 'not found' })
 })
 
@@ -187,7 +191,12 @@ try {
     })
   })
   await page.goto(`${origin}/ops/`)
+  await page.getByRole('heading', { name: '还没有可审核内容' }).waitFor()
+  assert.equal(listRequestCount, 0, 'default OPS route opens Review, not the legacy source ledger')
+  await page.getByRole('link', { name: '题源记录' }).click()
   await page.getByRole('heading', { name: '题源台账' }).waitFor()
+  assert.equal(await page.locator('[data-notify-intake]').count(), 0, 'automatic notification has no UI action')
+  assert.equal(await page.getByText('导题由你在 Amp 发起，这里不会自动接卷。', { exact: false }).count(), 1)
 
   for (const label of ['已通知 Amp', 'Orb 已创建', '正在导题', '通知失败', '需确认', '等待审核']) {
     assert.equal(
@@ -205,6 +214,8 @@ try {
 
   await page.getByRole('button', { name: '添加题源' }).click()
   const drawer = page.getByRole('dialog', { name: '添加题源' })
+  assert.equal(await drawer.getByRole('button', { name: '保存材料快照' }).count(), 1)
+  assert.equal(await drawer.getByText('这里只保存材料快照，不会通知或启动 Agent。', { exact: false }).count(), 1)
   assert.equal(
     await drawer.getByRole('button', { name: '新试卷' }).getAttribute('aria-pressed'),
     'true',

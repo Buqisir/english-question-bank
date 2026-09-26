@@ -10,7 +10,7 @@
  *
  * Layout model: 挑题态(默认) = quiet 目录 rail + 卷面居中，右侧 gutter
  * 放「加入」钮。讲评态 = rail / 卷面 / 讲评栏三栏并存。讲评栏固定宽度
- * 440px，≥1200px 视口时是常驻第三栏（独立滚动）；<1200px 视口时改为
+ * 440px，≥1440px 视口时是常驻第三栏（独立滚动）；<1440px 视口时改为
  * 右侧抽屉浮层（覆盖卷面，带背景蒙层可点击关闭）。讲评开关在顶栏。
  */
 
@@ -52,7 +52,7 @@
   background: var(--eqb-color-bg, #F3F5F1);
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1440px) {
   .paper-browse-shell {
     grid-template-columns: 72px minmax(0, 1fr) 440px;
   }
@@ -72,7 +72,7 @@
   }
 }
 
-@media screen and (min-width: 1200px) and (prefers-reduced-motion: no-preference) {
+@media screen and (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
   .paper-browse-content {
     transition: transform var(--motion-slow) var(--ease-out);
   }
@@ -116,7 +116,7 @@
   background: var(--desk-surface, #FAFCF8);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .paper-browse-shell--lecture-open .paper-browse-rail,
   .paper-browse-shell--lecture-open .paper-browse-rail-panel {
     width: 88px;
@@ -165,9 +165,9 @@
   width: 100%;
   background: none;
   border: none;
-  padding: 0 0 6px 12px;
+  padding: 0 6px 6px;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
   font: inherit;
 }
 
@@ -183,17 +183,18 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   background: transparent;
   border: none;
   border-radius: 8px;
   height: 32px;
-  padding: 0 6px 0 12px;
+  padding: 0 6px;
   font: inherit;
   font-size: 13px;
   color: var(--ink-soft, #4A4C48);
   cursor: pointer;
-  text-align: left;
+  text-align: center;
 }
 
 .paper-browse-rail-group-label {
@@ -279,10 +280,43 @@
   background: #fff;
   color: var(--ps-ink, #111);
   font-family: var(--ps-font-stack);
+  /* Match Print's base so cover notices and listening chrome inherit paper,
+     rather than application, typography. Explicit heading sizes stay intact. */
+  font-size: var(--ps-font-size);
   padding: var(--ps-page-margin-top, 79px) var(--ps-page-margin-x, 91px);
   /* DESIGN.md Shadow Vocabulary · Sheet 纸面 */
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
   position: relative;
+}
+
+.paper-browse-content .canonical-paper-cover-notices {
+  font-weight: 400;
+}
+
+.paper-browse-content .canonical-paper-cover-notices > strong {
+  font-family: var(--ps-font-stack-heading);
+  font-weight: 700;
+}
+
+/* Screen keeps the 10.5pt/18pt base and enlarges the whole paper through
+ * --paper-screen-zoom. PDF product typography is selected independently. */
+@media screen {
+  /* Print's column hints were measured at 10.5pt. Let longer screen options
+   * wrap inside their columns instead of overlapping the adjacent option. */
+  .paper-browse-content :is(.ps-option-list, .ps-question-options-inline) {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .paper-browse-content :is(.ps-option, .ps-option-text, .ps-question-options-inline-item) {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .paper-browse-content .ps-option-label {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
 }
 
 @media print {
@@ -347,14 +381,6 @@
   color: inherit;
 }
 
-.paper-browse-part-heading + .paper-browse-section-heading {
-  margin-top: calc(
-    var(--ps-part-to-first-section-gap)
-      - var(--pb-block-gap)
-      - var(--ps-part-to-first-section-glyph-overhang)
-  );
-}
-
 [data-canonical-section-heading-numeric-run] {
   position: relative;
   top: var(--ps-section-heading-numeric-shift);
@@ -380,15 +406,6 @@
   data-canonical-seven-choices-chrome
 ] {
   margin-bottom: var(--ps-seven-merged-instruction-margin-bottom);
-}
-
-.paper-browse-part-heading[
-  data-canonical-seven-choices-following-for
-],
-.paper-browse-section-heading[
-  data-canonical-seven-choices-following-for
-] {
-  margin-top: var(--ps-seven-following-section-margin-top-adjustment);
 }
 
 .paper-browse-zoom > [data-canonical-reading-chrome] {
@@ -422,12 +439,6 @@
   margin-block: var(--ps-cloze-baseline-step) 0;
   margin-right: 0;
   line-height: var(--ps-cloze-baseline-step);
-}
-
-.paper-browse-part-heading[
-  data-canonical-cloze-chrome
-][data-canonical-seven-choices-following-for] {
-  margin-top: var(--ps-seven-following-section-margin-top-adjustment);
 }
 
 .paper-browse-section-heading[data-canonical-cloze-chrome] {
@@ -501,35 +512,56 @@
   line-height: var(--ps-grammar-fill-baseline-step);
 }
 
-.paper-browse-group-card--writing:has(
-  .pi-writing-part[data-canonical-grammar-fill-following-for]
-) {
-  margin-top: var(--ps-grammar-fill-writing-margin-plain);
+/* Whole-sheet part boundaries own their spacing, regardless of question
+ * family, nested writing chrome, or lecture-panel state. The outer flex gap
+ * is counted once; no per-family negative compensation remains here. */
+.paper-browse-content .paper-browse-zoom > .paper-browse-part-heading,
+.paper-browse-zoom > .paper-browse-group-card:has(> .pi-writing-page > .pi-writing-part:first-child),
+.paper-browse-zoom > .paper-browse-section-heading[data-canonical-seven-choices-following-for] {
+  margin-top: calc(var(--pb-part-boundary-gap) - var(--pb-block-gap));
 }
 
-.paper-browse-shell--lecture-open
-  .paper-browse-group-card--writing:has(
-    .pi-writing-part[data-canonical-grammar-fill-following-for]
-  ) {
-  margin-top: var(--ps-grammar-fill-writing-margin-lecture);
+/* The accepted listening→reading boundary is three steps, not two (§3). */
+.paper-browse-zoom > [data-canonical-group-type="listening"]
+  ~ .paper-browse-part-heading[data-canonical-reading-rhythm-role="part_title"] {
+  --pb-part-boundary-gap: 36pt;
 }
 
-.paper-browse-content
-  > .paper-browse-part-heading
+.paper-browse-content .paper-browse-zoom > .paper-browse-part-heading:nth-child(1 of :not(.paper-browse-pagebreak, style)),
+.paper-browse-zoom > .paper-browse-group-card:nth-child(1 of :not(.paper-browse-pagebreak, style)):has(> .pi-writing-page > .pi-writing-part:first-child),
+.paper-browse-zoom > .paper-browse-section-heading[data-canonical-seven-choices-following-for]:nth-child(1 of :not(.paper-browse-pagebreak, style)) {
+  margin-top: 0;
+}
+
+.paper-browse-content .paper-browse-zoom > .paper-browse-part-heading,
+.paper-browse-content .pi-writing-part {
+  margin-bottom: 0;
+  line-height: var(--ps-section-heading-line-height);
+}
+
+.paper-browse-zoom > :is(
+  .paper-browse-part-heading,
+  .paper-browse-part-heading + .paper-browse-pagebreak
+)
   + .paper-browse-section-heading {
-  margin-top: calc(
-    var(--ps-part-to-first-section-gap)
-      - var(--pb-block-gap)
-      - var(--ps-part-to-first-section-glyph-overhang)
-  );
+  margin-top: calc(var(--ps-part-to-first-section-gap) - var(--pb-block-gap));
 }
 
-/* dashed-line-unify: 屏幕卷面是连续流，「分页」是纸的语义——线退役
-   （导出面分页纪律零触碰），元素保留为零高度锚免动 TSX 结构。此前这
-   条 0.25 暖墨虚线会冒充剪刀线（owner 报障：七选五选项池被夹）。 */
+.paper-browse-content .pi-writing-part + .pi-writing-section {
+  margin-top: calc(var(--ps-part-to-first-section-gap) - var(--application-writing-page-gap, 0px));
+}
+
+/* PDF-only hints have no box in a continuous Screen flow: even a zero-height
+ * flex child would insert an extra gap. Keep the semantic DOM marker only. */
 .paper-browse-pagebreak {
-  height: 0;
-  margin: 0;
+  display: none;
+}
+
+/* A trailing list whose inline-only questions all render null is not a
+ * content tail. Leave internal family rhythms (e.g. before a bank) alone. */
+.paper-browse-content .ps-page > .ps-question-list:last-child:empty,
+.paper-browse-content .ps-page > .ps-section:last-child > .ps-question-list:last-child:empty {
+  display: none;
 }
 
 /* ─── 剪刀线 + 选中态 — scissor-select-feel（owner 拍板 2026-07-09，原型
@@ -553,6 +585,14 @@
   border-top: 1px dashed rgba(var(--paper-ink-rgb), 0.18);
   opacity: 1;
   pointer-events: none;
+}
+
+/* Review is a paper proof, not the question-bank selection workspace.
+ * Include the content owner so the later normal writing cut-line rule cannot win. */
+.paper-browse-page--review .paper-browse-scissor-line,
+.paper-browse-page--review .paper-browse-group-card::after,
+.paper-browse-page--review .paper-browse-content .pi-writing-section + *::before {
+  display: none;
 }
 
 .paper-browse-group-card {
@@ -808,7 +848,7 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
   .paper-browse-lecture-panel {
     position: sticky;
     top: 24px;
@@ -1336,8 +1376,8 @@
   display: none;
 }
 
-/* <1200px: 讲评栏改抽屉浮层，覆盖卷面，带可点击关闭的背景蒙层。 */
-@media (max-width: 1199.98px) {
+/* Below 1440px, keep the paper width and show lecture notes as a drawer. */
+@media (max-width: 1439.98px) {
   .paper-browse-lecture-panel {
     position: fixed;
     top: 0;
@@ -1475,7 +1515,7 @@
  * 锚点漂在 fixed 抽屉里，target 锚点可能滚出视口之外）。owner 授权的取舍：
  * 收紧到 ≥1200px 常驻三栏态才画线，同断点也与讲评栏本身从"并排列"变成
  * "浮层"的断点一致。 */
-@media (max-width: 1199.98px) {
+@media (max-width: 1439.98px) {
   .paper-browse-shell .pi-line-overlay {
     display: none;
   }
@@ -1864,14 +1904,373 @@
   border-top: 1px dashed var(--paper-border);
 }
 
-.paper-browse-audio {
-  margin-bottom: 1em;
+/* ─── Listening player: headphone trigger after the paper text + floating card ─── */
+
+.listening-player {
+  position: relative;
+  display: inline-flex;
+  color: var(--paper-ink-muted);
+  font: 12px/1 Inter, "PingFang SC", "Hiragino Sans GB", ui-sans-serif, system-ui, sans-serif;
+  text-indent: 0;
+  font-weight: 400;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-.paper-browse-audio audio {
+.listening-player button {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.listening-player :focus-visible {
+  outline: 1.5px solid rgba(var(--paper-ink-strong-rgb), 0.4);
+  outline-offset: 2px;
+}
+
+.listening-player-trigger {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  transition:
+    color var(--motion-fast) var(--ease-hover),
+    background-color var(--motion-fast) var(--ease-hover),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.listening-player-trigger:active { transform: scale(0.94); }
+
+.listening-player[data-open] .listening-player-trigger,
+.listening-player[data-playing] .listening-player-trigger {
+  color: var(--paper-ink-strong);
+  background: rgba(var(--paper-ink-strong-rgb), 0.07);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .listening-player-trigger:hover {
+    color: var(--paper-ink-strong);
+    background: rgba(var(--paper-ink-strong-rgb), 0.07);
+  }
+}
+
+.listening-player-card {
+  --listening-card-shift: 0px;
+  position: absolute;
+  z-index: 20;
+  left: calc(-10px + var(--listening-card-shift));
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 8px;
+  border: 1px solid var(--paper-border);
+  border-radius: 12px;
+  background: var(--paper-bg);
+  box-shadow: 0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.06), 0 10px 28px rgba(var(--paper-ink-strong-rgb), 0.12);
+  color: var(--paper-ink-strong);
+  white-space: nowrap;
+  transition:
+    opacity var(--motion-base) var(--ease-out),
+    transform var(--motion-base) var(--ease-out);
+}
+
+.listening-player-card[data-placement="above"] {
+  bottom: calc(100% + 8px);
+  transform-origin: 20px 100%;
+}
+
+.listening-player-card[data-placement="below"] {
+  top: calc(100% + 8px);
+  transform-origin: 20px 0;
+}
+
+@starting-style {
+  .listening-player-card {
+    opacity: 0;
+    transform: scale(0.96) translateY(2px);
+  }
+}
+
+.listening-player-play {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  transition:
+    background-color var(--motion-fast) var(--ease-hover),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.listening-player-play:active { transform: scale(0.94); }
+
+/* Solid glyphs for the one ink-action control, like the reference transport. */
+.listening-player-play :is(path, rect) {
+  fill: currentColor;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .listening-player-play:hover { background: rgba(var(--paper-ink-strong-rgb), 0.07); }
+}
+
+.listening-player-time {
+  min-width: 2.8em;
+  color: var(--paper-ink);
+  font-family: var(--ps-font-stack, "Times New Roman", serif);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-align: center;
+}
+
+.listening-player-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Question segments over the whole recording. Each segment's number sits
+   centred over its own stretch of the waveform, with a small notch where the
+   segment begins; the segment playing now is set in ink. */
+.listening-player-marks {
+  position: relative;
+  height: 16px;
+}
+
+.listening-player .listening-player-mark {
+  position: absolute;
+  bottom: 0;
+  display: grid;
+  place-items: start center;
+  height: 16px;
+  padding: 0;
+  border-radius: 4px;
+  color: rgba(var(--paper-ink-rgb), 0.55);
+  font-family: var(--ps-font-stack, "Times New Roman", serif);
+  font-size: 10.5px;
+  line-height: 11px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
+  transition: color var(--motion-fast) var(--ease-hover);
+}
+
+/* The notch: a short hairline standing on the waveform's top edge. */
+.listening-player-mark::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(var(--paper-ink-rgb), 0.3);
+  content: "";
+}
+
+.listening-player-mark-label {
+  position: relative;
+  white-space: nowrap;
+}
+
+/* The segment playing now: ink, with a short ink rule under its number. */
+.listening-player .listening-player-mark[data-current] { color: var(--paper-ink-strong); }
+
+.listening-player-mark[data-current] .listening-player-mark-label::after {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 50%;
+  width: 8px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: var(--paper-ink-strong);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.listening-player-mark::after {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: var(--paper-ink-strong);
+  color: var(--paper-bg);
+  font-size: 12px;
+  line-height: 1.3;
+  letter-spacing: 0;
+  white-space: nowrap;
+  content: attr(data-label);
+  opacity: 0;
+  transform: translate(-50%, 2px);
+  pointer-events: none;
+  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .listening-player .listening-player-mark:hover { color: var(--paper-ink-strong); }
+
+  .listening-player-mark:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.listening-player .listening-player-mark:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.listening-player-wave {
+  position: relative;
+  height: 28px;
+  cursor: pointer;
+  touch-action: none;
+  border-radius: 4px;
+}
+
+.listening-player-bars {
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: rgba(var(--paper-ink-rgb), 0.3);
+  transition: fill var(--motion-slow) var(--ease-hover);
+}
+
+.listening-player-wave[data-loading] .listening-player-bars { fill: rgba(var(--paper-ink-rgb), 0.2); }
+
+.listening-player-bars--played { fill: var(--paper-ink-strong); }
+
+/* Bars rise from the ruled line once, when the real envelope arrives. */
+.listening-player-wave:not([data-loading]) .listening-player-bars rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: listening-bar-rise var(--motion-slow) var(--ease-out) both;
+  animation-delay: min(calc(var(--listening-bar-index) * 1.6ms), 200ms);
+}
+
+@keyframes listening-bar-rise {
+  from { transform: scaleY(0.2); opacity: 0.4; }
+}
+
+/* Playhead: a hairline, and one small down arrow pointing into the bar
+   that is playing now. */
+.listening-player-head {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.75px;
+  width: 1.5px;
+  border-radius: 999px;
+  background: var(--paper-ink-strong);
+  pointer-events: none;
+}
+
+.listening-player-wave[data-dragging] .listening-player-head { transition: none; }
+
+.listening-player-caret {
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: -3.25px;
+  width: 8px;
+  height: 6px;
+  overflow: visible;
+  fill: var(--paper-ink-strong);
+  stroke: var(--paper-ink-strong);
+  stroke-width: 2.25;
+  stroke-linejoin: round;
+}
+
+/* Speed: one small gauge. The needle's angle is the speed (left 0.75,
+   up 1, right 1.25); a click sweeps it to the next step. */
+.listening-player .listening-player-speed {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  color: var(--paper-ink-muted);
+  background: rgba(var(--paper-ink-strong-rgb), 0.05);
+  transition:
+    color var(--motion-fast) var(--ease-hover),
+    background-color var(--motion-fast) var(--ease-hover),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.listening-player .listening-player-speed:active { transform: scale(0.94); }
+
+/* Off the default speed, the gauge darkens as a reminder. */
+.listening-player .listening-player-speed[data-changed] { color: var(--paper-ink-strong); }
+
+.listening-player-needle {
+  transform-box: view-box;
+  transform-origin: 12px 14px;
+  transition: transform var(--motion-slow) var(--ease-in-out);
+}
+
+.listening-player-speed::after {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: var(--paper-ink-strong);
+  color: var(--paper-bg);
+  font-family: var(--ps-font-stack, "Times New Roman", serif);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+  content: attr(data-label);
+  opacity: 0;
+  transform: translate(-50%, 2px);
+  pointer-events: none;
+  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .listening-player .listening-player-speed:hover {
+    color: var(--paper-ink-strong);
+    background: rgba(var(--paper-ink-strong-rgb), 0.08);
+  }
+
+  .listening-player-speed:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.listening-player-speed:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listening-player-needle { transition: none; }
+}
+
+.listening-player-error {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 12px;
+  color: var(--eqb-color-danger);
+  font-size: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @starting-style {
+    .listening-player-card { transform: none; }
+  }
+
+  .listening-player-wave:not([data-loading]) .listening-player-bars rect { animation: none; }
 }
 
 @media print {
-  .paper-browse-audio { display: none; }
+  .ps-text-trail { display: none; }
 }

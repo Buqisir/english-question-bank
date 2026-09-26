@@ -6,8 +6,10 @@
 > 只为历史无 profile / external analyzed package 保留，不是新 raw-source 的生产目标。
 
 一切进入题库的试卷,先洗成本标准的结构与题号,再入库。本标准是
-导题工序的**数据契约**;排版视觉标准另见
-`docs/product/exam-paper-format-standards.md`(互补,不重叠)。
+导题工序的**数据产品要求**；试卷规范总入口及排版视觉要求见
+[试卷格式标准](exam-paper-format-standards.md)。可执行Canonical结构由该入口
+列出的适用版本机器合同拥有；本文不另定义Canonical Plan/Question Group结构。
+生产、校验、提交和返工按[导题合同](../import/agent-contract.md)执行。
 
 新 raw-source 导入使用 `public-paper-v1`：本标准规定的完整题面、源答案、题号、媒体和
 source locator 全部保留，并为 prose body paragraph 提供 digest-bound 中文摘要；不要求
@@ -51,9 +53,16 @@ cloze + grammar_cloze + writing×2)。导题源含完整听力且音频证据通
   从源提取/裁剪,不得 AI 重画。缺页、缺权威答案、来源矛盾或结构不确定
   必须 fail closed。旧格式①/②/③脚本只保留存量回退,停止新增登记。
 - **语义保真**:洗卷只动结构 / 题号 / 分值 / 排版,不改题干、选项、
-  篇章语义(与 exam-paper-format-standards.md 的
-  Import Normalization Principle 一致)。归一化可能改变语义时,
+  篇章语义。归一化可能改变语义时,
   停下来交 owner 裁决。
+- **内容角色保真**：`title`、`subtitle`、`body` 按源材料判定，不按段落序号猜测。
+  阅读A/B/C/D标记是篇位，不证明后面的首段是标题；无标题文章首段仍是正文，
+  应进入正文摘要和统计覆盖。角色不确定走已有materialization issues，不靠CSS
+  遮掩，也不把源事实判断转交最终layout-only审核。角色修复后按流程重建绑定和
+  派生内容，不静默改写已保存的sidecar或revision。
+- **题意标记保真**：源中用于指代词句的局部下划线、粗体属于题面信息，
+  不能在纯文本提取时静默丢弃，也不能根据题干猜测后补。当前 DOCX 阅读段落
+  支持范围、版本重放及无法精确映射时的阻断见格式标准 v58 说明；旧候选保持原样。
 
 ## 3. 答案红线(硬约束,gate 强制)
 
@@ -68,6 +77,12 @@ cloze + grammar_cloze + writing×2)。导题源含完整听力且音频证据通
   作为卷级资产附件保留(存法在刀②定,内容不得丢弃)。
 
 ## 4. 听力条款
+
+本节保留听力源内容与学生/教师投影要求。以下v51、ASR和单播放器描述对应
+历史路径，不代表所有后继版本；实际导入profile、证据方式及本地候选范围从
+[导题合同](../import/agent-contract.md)进入，消费者绑定从
+[规范总入口](exam-paper-format-standards.md)进入。不可用历史步骤覆盖已明确的
+signal-only演练，也不可把本地演练当成已部署能力。
 
 - 源卷**含**完整听力题、A–C 选项、权威答案和录音稿时,Universal NCK1
   Materialization 将它们绑定成两个 Canonical `listening` 题组:

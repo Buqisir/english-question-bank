@@ -22,6 +22,7 @@ import {
   buildNck1OcrReviewProjection,
   ocrReviewBundleFilePaths,
   resolveReviewFile,
+  validateAgentOcrCorrectionSidecar,
 } from '../server/import-review/revisionProjection.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
@@ -395,7 +396,9 @@ try {
       response,
       url,
       context: {
-        session: owner,
+        session: request.headers.authorization === `Bearer ${agentToken}`
+          ? { role: 'member', accountKind: 'import_agent', username: 'synthetic-agent' }
+          : owner,
         readJsonBody: readJsonRouteBody,
         sendJson(target, status, body) {
           send(target, status, JSON.stringify(body), 'application/json')
@@ -404,6 +407,9 @@ try {
     })
     if (!handled) send(response, 404, 'not found', 'text/plain')
   })
+  // Synchronous synthetic bundle finalization can exceed Node's default 5s
+  // keep-alive timeout while this in-process client cannot service its socket.
+  server.keepAliveTimeout = 60_000
   await new Promise((resolve, reject) => {
     server.once('error', reject)
     server.listen(0, '127.0.0.1', resolve)
@@ -443,32 +449,37 @@ try {
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
   await page.goto(`${origin}/ops/?view=review`)
-  const sourceImage = page.locator('.ocr-page-canvas img')
-  await sourceImage.waitFor()
-  assert.equal(await sourceImage.evaluate((image) => image.naturalWidth > 0), true)
-  await page.getByText('置信度 84%').waitFor()
-  await page.getByText(/备选：/u).waitFor()
+  await page.getByRole('heading', { name: 'OCR 校对报告' }).waitFor()
+  assert.equal(await page.locator('[data-ocr-text], #confirm-ocr').count(), 0,
+    'Owner sees a report, not transcription editing or confirmation controls')
   if (process.env.OCR_REVIEW_SCREENSHOT) {
     await page.screenshot({ path: process.env.OCR_REVIEW_SCREENSHOT })
   }
 
-  const originalText = await page.locator('[data-ocr-text]').first().inputValue()
-  await page.locator('[data-ocr-text]').first().fill(`${originalText} [owner checked]`)
-  await page.locator('[data-ocr-item]').first().getByRole('button', { name: '下移' }).click()
-  await page.getByRole('button', { name: '本页全部已核对' }).click()
-  await page.getByRole('tab', { name: '第 2 页' }).click()
-  const visualClassification = page.locator('[data-ocr-visual-classification]')
-  await visualClassification.selectOption('unsupported_content')
-  await page.locator('[data-ocr-visual-verified]').check()
-  await page.getByRole('button', { name: '本页全部已核对' }).click()
-  assert.equal(await page.locator('#confirm-ocr').isDisabled(), true)
-  await visualClassification.selectOption('furniture')
-  await page.getByRole('tab', { name: '答案图' }).click()
-  await page.getByRole('button', { name: '本页全部已核对' }).click()
-  await page.getByText('6 / 6 项已核对').waitFor()
-  assert.equal(await page.locator('#confirm-ocr').isEnabled(), true)
-  await page.getByRole('button', { name: '确认全部 OCR' }).click()
-  await page.getByRole('heading', { name: 'OCR 已确认' }).waitFor()
+  // Historical Owner receipts remain readable, but the web no longer asks
+  // the Owner to manufacture them. Exercise that retained API separately.
+  const legacyConfirmation = {
+    schemaVersion: NCK1_OCR_CONFIRMATION_SCHEMA_VERSION,
+    paperId, sourceSetDigest: fixture.evidence.sourceSetDigest,
+    evidenceDigest: fixture.evidence.evidenceDigest, confirmed: true,
+    documents: fixture.evidence.documents.map((document) => ({
+      documentId: document.documentId,
+      pages: document.pages.map((sourcePage) => ({
+        page: sourcePage.page,
+        orderedItems: sourcePage.observations.map((observation) => ({
+          itemId: `item:${observation.observationId}`, observationIds: [observation.observationId], text: observation.text,
+        })),
+        furnitureObservationIds: [],
+        visualClassifications: sourcePage.regions.filter((region) => region.kind === 'visual')
+          .map((region) => ({ regionId: region.regionId, classification: 'furniture' })),
+      })),
+    })),
+  }
+  legacyConfirmation.documents[0].pages[0].orderedItems[0].text += ' [owner checked]'
+  legacyConfirmation.documents[0].pages[0].orderedItems.reverse()
+  store.confirmOcrRevision(paperId, finalized.id, {
+    bundleDigest: finalized.bundleDigest, confirmation: legacyConfirmation,
+  }, 'owner')
 
   const confirmedRevision = store.getRevision(finalized.id)
   assert.equal(confirmedRevision.state, 'approved')
@@ -491,6 +502,91 @@ try {
     agentConfirmation.confirmation.evidenceDigest,
     fixture.evidence.evidenceDigest,
   )
+
+  const proofread = (revision, input, authenticated = true) => fetch(
+    `${origin}/api/import-agent-reviews/papers/${paperId}/revisions/${revision.id}/proofread-ocr`,
+    { method: 'POST', headers: { 'content-type': 'application/json',
+      ...(authenticated ? { authorization: `Bearer ${agentToken}` } : {}) },
+      body: JSON.stringify({ bundleDigest: revision.bundleDigest, ...input }) },
+  ).catch((cause) => { throw new Error(`proofread request failed (authenticated=${authenticated}, notes=${input.correctionNotes?.length})`, { cause }) })
+  const confirmation = agentConfirmation.confirmation
+  let result = await proofread(finalized, { confirmation, correctionNotes: [] })
+  assert.equal((await result.json()).code, 'IMPORT_REVIEW_AGENT_OCR_PROFILE_REQUIRED')
+  const configPath = path.join(stagingRoot, 'config.json')
+  const config = JSON.parse(readFileSync(configPath, 'utf8'))
+  writeFileSync(configPath, JSON.stringify({ ...config, importProfile: 'public-paper-v1' }))
+  const publicManifest = reviewManifest(stagingRoot)
+  const publicCreated = store.createRevision(publicManifest)
+  uploadRevision(store, publicCreated, stagingRoot, publicManifest.files)
+  const publicRevision = store.finalizeRevision(publicCreated.revision.id)
+  result = await proofread(publicRevision, { confirmation }, false)
+  assert.equal(result.status, 401, 'Owner session alone cannot act as the Agent')
+  result = await proofread(publicRevision, { confirmation, correctionNotes: [] })
+  assert.equal((await result.json()).code, 'IMPORT_REVIEW_OCR_REPORT_INVALID', 'changed text needs an audit note')
+  const editedItem = confirmedPage.orderedItems.find((item) => item.text.endsWith('[owner checked]'))
+  const correctionNotes = [{ itemId: editedItem.itemId, kind: 'ocr_repair',
+    sourceText: editedItem.text, reason: 'Synthetic pixel comparison correction' }]
+  result = await proofread(publicRevision, { confirmation, correctionNotes,
+    bundleDigest: `sha256:${'0'.repeat(64)}` })
+  assert.equal((await result.json()).code, 'IMPORT_REVIEW_STALE_REVISION')
+  result = await proofread(publicRevision, { confirmation, correctionNotes: [correctionNotes[0], correctionNotes[0]] })
+  assert.equal((await result.json()).code, 'IMPORT_REVIEW_OCR_REPORT_INVALID')
+  result = await proofread(publicRevision, { confirmation, correctionNotes })
+  assert.equal(result.status, 200)
+  const receipt = (await result.json()).receipt
+  assert.equal(receipt.reviewerKind, 'import_agent')
+  assert.equal(receipt.confirmedBy, 'synthetic-agent')
+  assert.equal(receipt.correctionReport.entries.length, 1)
+  assert.equal(receipt.correctionReport.entries[0].correctedText, editedItem.text)
+  assert.equal(receipt.correctionReport.entries[0].page, 1)
+  assert.equal(receipt.correctionReport.sourceSetDigest, fixture.evidence.sourceSetDigest)
+  assert.equal(receipt.correctionReport.entries[0].ocrText, editedItem.text.replace(' [owner checked]', ''))
+  const finalApproval = await fetch(
+    `${origin}/api/import-reviews/papers/${paperId}/revisions/${publicRevision.id}/approve`,
+    { method: 'POST', headers: { authorization: `Bearer ${agentToken}`, 'content-type': 'application/json' }, body: '{}' },
+  )
+  assert.equal(finalApproval.status, 403, 'Agent proofreading never grants final Owner approval')
+
+  const reportContext = {
+    paperId, documents: fixture.manifest.documents,
+    sourceDocuments: fixture.manifest.documents.map((document) => ({
+      documentId: document.documentId, bytes: readFileSync(path.join(stagingRoot, document.path)),
+    })),
+    sourceDigest: `sha256:${'a'.repeat(64)}`, candidateDigest: `sha256:${'b'.repeat(64)}`,
+    materialization: { text: 'Corrected text' },
+  }
+  const candidateReport = {
+    schemaVersion: 'agent-ocr-correction-report-v2', paperId,
+    ocrRevisionId: publicRevision.id, ocrConfirmationId: receipt.confirmationId,
+    originalSourceSetDigest: receipt.sourceSetDigest, ocrEvidenceDigest: receipt.evidenceDigest,
+    sourceDigest: reportContext.sourceDigest, candidateDigest: reportContext.candidateDigest,
+    entries: [{ ocrItemId: editedItem.itemId, category: 'source_spelling_error',
+      before: 'Correted text', after: 'Corrected text', reason: 'Source spelling error',
+      sourceLocator: { documentId: 'question-source-1', page: 1 },
+      materializationTarget: { jsonPointer: '/text' } }],
+  }
+  assert.doesNotThrow(() => validateAgentOcrCorrectionSidecar(candidateReport, reportContext))
+  for (const change of [
+    { candidateDigest: `sha256:${'c'.repeat(64)}` },
+    { sourceDigest: `sha256:${'d'.repeat(64)}` },
+    { documents: fixture.manifest.documents.map((document) => ({ ...document, sha256: `sha256:${'e'.repeat(64)}` })) },
+    { materialization: { text: 'Later edited text' } },
+    { sourceDocuments: reportContext.sourceDocuments.map((document) => ({ ...document, bytes: Buffer.from('different source') })) },
+  ]) assert.throws(() => validateAgentOcrCorrectionSidecar(candidateReport, { ...reportContext, ...change }),
+    (error) => error.code === 'IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID')
+  assert.throws(() => validateAgentOcrCorrectionSidecar({ ...candidateReport,
+    entries: [{ ...candidateReport.entries[0], category: 'grammar_error' }],
+  }, reportContext), /incomplete/)
+  assert.doesNotThrow(() => validateAgentOcrCorrectionSidecar({ ...candidateReport, entries: [] }, reportContext))
+  assert.throws(() => validateAgentOcrCorrectionSidecar(null, reportContext), /identity is incomplete/)
+
+  assert.equal(receipt.candidateReportRequired, true)
+  const nextOcrManifest = { ...publicManifest, producerBuildId: 'synthetic-ocr-review-successor' }
+  nextOcrManifest.bundleDigest = ocrReviewBundleDigest(nextOcrManifest)
+  const nextOcr = store.createRevision(nextOcrManifest)
+  uploadRevision(store, nextOcr, stagingRoot, nextOcrManifest.files)
+  assert.equal(store.finalizeRevision(nextOcr.revision.id).state, 'awaiting_review',
+    'Candidate report requirement must not block a later OCR-stage revision')
 
   console.log('verify-import-review-ocr-confirmation: PASS')
 } finally {

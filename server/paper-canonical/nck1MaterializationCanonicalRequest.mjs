@@ -1,6 +1,9 @@
 import {
   nck1AnalyzedPackageCandidateAuthorityRef55,
   nck1MaterializationCandidateAuthorityRef,
+  nck1MaterializationHistoricalAuthorityRef54,
+  nck1MaterializationHistoricalAuthorityRef57,
+  nck1MaterializationHistoricalAuthorityRef58,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
@@ -22,6 +25,7 @@ import {
   parseStrictPackageJson,
 } from './nck1AnalyzedPackageAdapter.mjs'
 import { externalListeningReviewProofIdentity } from '../import-review/importReviewStore.mjs'
+import { validateInlineBlankTextBoundaries } from '../../shared/paper-canonical/inlineBlankBoundaries.mjs'
 
 export const NCK1_MATERIALIZATION_REQUEST_FILE_NAME =
   'canonical-import-request.json'
@@ -67,10 +71,8 @@ function sameAuthority(left, right) {
 }
 
 export function isNck1MaterializationCanonicalImportRequest(request) {
-  if (!sameAuthority(
-    request?.authority,
-    nck1MaterializationCandidateAuthorityRef,
-  )) return false
+  if (![nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58]
+    .some(authority => sameAuthority(request?.authority, authority))) return false
   const documents = request?.evidence?.documents
   if (!Array.isArray(documents)) return false
   const sourceAssets = documents.filter((document) =>
@@ -157,6 +159,12 @@ function admitLiveConfirmedNck1Import(request, acceptsRequest) {
       first?.message || 'Confirmed NCK1 materialization did not derive one Canonical Paper',
     )
   }
+  const issues = validateInlineBlankTextBoundaries(compilation.artifacts.canonicalPaper.questionGroups)
+  if (issues.length) {
+    const error = requestError(issues[0].code, issues.map(issue => issue.message).join('; '))
+    error.diagnostics = issues
+    throw error
+  }
   const sourceAsset = nck1MaterializationPublicationSourceAsset(request)
   const confirmation = request.nck1MaterializationConfirmation
   const identity = Object.freeze({
@@ -217,6 +225,15 @@ export function isLiveConfirmedNck1MaterializationAdmission(admission) {
   return isLiveConfirmedNck1Admission(
     admission,
     nck1MaterializationCandidateAuthorityRef,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationHistoricalAuthorityRef54,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationHistoricalAuthorityRef57,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationHistoricalAuthorityRef58,
   )
 }
 
@@ -262,7 +279,13 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
       'NCK1 request materialization requires one exact immutable source bundle',
     )
   }
-  const imported = importCanonicalCandidate(sourceInput)
+  let imported = importCanonicalCandidate(sourceInput)
+  if (!analyzedPackage && confirmation?.candidateDigest !== imported.candidate?.candidateDigest) {
+    const historical = importCanonicalCandidate(sourceInput, undefined, {
+      materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
+    })
+    if (historical.candidate?.candidateDigest === confirmation?.candidateDigest) imported = historical
+  }
   if (!imported.candidate || imported.issues.length > 0) {
     const first = imported.issues[0]
     throw requestError(
@@ -294,11 +317,11 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
   }
   const derivation = analyzedPackage
     ? deriveNck1AnalyzedPackageBundle(sourceInput)
-    : deriveNck1MaterializationBundle(sourceInput)
+    : deriveNck1MaterializationBundle(sourceInput, imported.candidate.authority)
   const outputs = new Map()
   const authority = analyzedPackage
     ? nck1AnalyzedPackageCandidateAuthorityRef55
-    : nck1MaterializationCandidateAuthorityRef
+    : imported.candidate.authority
   const liveRequest = {
     authority,
     nck1MaterializationConfirmation: confirmation,

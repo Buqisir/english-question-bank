@@ -10,6 +10,7 @@ const state = {
   paperId: null,
   detail: null,
   surface: 'screen',
+  immersive: false,
   issueSurface: 'screen',
   pagination: null,
   paginationError: null,
@@ -24,9 +25,6 @@ const state = {
 
 const surfaceLabels = {
   screen: 'Screen',
-  teaching: '教学解析',
-  student_print: 'Student Print',
-  teacher_print: 'Teacher Print',
   pdf: 'PDF',
   source: '源文件',
 }
@@ -150,8 +148,9 @@ async function loadDetail(paperId, shouldRender = true) {
         try {
           state.pagination = await request(`/api/import-review-preview/revisions/${encodeURIComponent(state.detail.latestRevisionId)}/pagination`)
           if (state.detail.latestRevisionId !== previousRevisionId
-            || (state.pdfEdition !== 'natural' && !state.pagination.editions.some(({ edition }) => edition === state.pdfEdition))) {
-            state.pdfEdition = state.pagination.editions.at(-1)?.edition || 'natural'
+            || (!['natural', 'teacher'].includes(state.pdfEdition) && !state.pagination.editions.some(({ edition }) => edition === state.pdfEdition))) {
+            state.pdfEdition = ['largeComplete', 'largeNoListening', 'economy8', 'friendly10', 'friendly8']
+              .find(value => state.pagination.editions.some(({ edition }) => edition === value)) || 'natural'
           }
         } catch (error) {
           state.paginationError = error.message
@@ -220,14 +219,19 @@ function filesHtml() {
   const revisionId = state.detail?.latestRevisionId
   const files = sourceFiles()
   if (!revisionId || files.length === 0) return '<p class="empty-state">没有可读源文件。</p>'
-  return `<div class="file-list">${files.map((file) => {
+  const labels = { question_source: '试题原卷', official_answers: '官方答案', question_and_answers: '试题与答案', listening_audio: '原始听力', source_rendition: '原卷转换文件' }
+  const link = (file) => {
     const href = `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}`
       + `/files?path=${encodeURIComponent(file.path)}`
     return `<a class="file-link" href="${href}" target="_blank" rel="noreferrer">
-      <span>${escapeHtml(file.path)}</span>
-      <span class="file-role">${escapeHtml(file.role)} · ${escapeHtml(Math.ceil(file.byteLength / 1024))} KB</span>
+      <span>${escapeHtml(labels[file.role] || file.path.split('/').at(-1))}</span>
+      <span class="file-role">${escapeHtml(file.path.split('/').at(-1))} · ${escapeHtml(Math.ceil(file.byteLength / 1024))} KB</span>
     </a>`
-  }).join('')}</div>`
+  }
+  const originals = files.filter((file) => labels[file.role])
+  const evidence = files.filter((file) => !labels[file.role])
+  return `<div class="file-list">${originals.map(link).join('')}</div>
+    ${evidence.length ? `<details class="technical-record"><summary>导入证据与附件 · ${evidence.length}</summary><div class="file-list">${evidence.map(link).join('')}</div></details>` : ''}`
 }
 
 function isOcrReview() {
@@ -443,25 +447,35 @@ function leftRailHtml() {
       ${state.detail ? `
         <section class="rail-section">
           <h3>${escapeHtml(state.detail.paperName)}</h3>
-          <div class="copy-row"><code class="paper-meta">${escapeHtml(state.detail.paperId)}</code>${copyButton(state.detail.paperId, 'Paper ID')}</div>
-          ${latest ? `<p class="digest" title="${escapeHtml(latest.bundleDigest)}">当前摘要 ${escapeHtml(shortDigest(latest.bundleDigest))}</p>` : ''}
-          ${isOcrReview() ? '<p class="boundary-note">第一阶段：对照原图核准 OCR。确认后 Agent 才能生成真实 Screen revision。</p>' : ''}
-          ${state.detail.rendererStale ? '<p class="boundary-note">Screen / Print 渲染器已经更新。Agent 需重新提交同一 Candidate，生成新的审核 revision。</p>' : ''}
+          <p class="paper-meta">${latest ? `R${escapeHtml(latest.revisionNumber)} · ${escapeHtml(stateLabels[latest.state] || latest.state)}` : '等待提交'}</p>
+          ${isOcrReview() ? '<p class="muted">Agent 正在校对原文，无需逐项确认。</p>' : ''}
+          ${state.detail.rendererStale ? '<p class="boundary-note">版式已更新，等待 Agent 提交新版本。</p>' : ''}
         </section>
-        <section class="rail-section"><h3>修订历史</h3>${revisionsHtml()}</section>
-        ${isOcrReview() ? '' : `<details class="rail-section structure-section" ${window.matchMedia('(max-width: 760px)').matches ? '' : 'open'}>
+        ${isOcrReview() ? '' : `<details class="rail-section structure-section">
           <summary><h3>卷面结构</h3><span class="paper-meta">${escapeHtml((state.detail.visibleStructure || []).length)} 项</span></summary>
           ${structureHtml()}
         </details>`}
-        <section class="rail-section"><h3>源文件</h3>${filesHtml()}</section>
+        <details class="rail-section review-disclosure"><summary>源文件</summary>${filesHtml()}</details>
+        <details class="rail-section review-disclosure"><summary>版本记录</summary>
+          ${revisionsHtml()}
+          <details class="technical-record"><summary>版本标识</summary>
+            <div class="copy-row"><code class="paper-meta">${escapeHtml(state.detail.paperId)}</code>${copyButton(state.detail.paperId, 'Paper ID')}</div>
+            ${latest ? `<p class="digest">${escapeHtml(latest.bundleDigest)}</p>` : ''}
+          </details>
+          ${promotionHtml()}
+        </details>
       ` : ''}
     </aside>
   `
 }
 
 function pdfEditionLabel(edition = state.pdfEdition) {
-  return edition === 'friendly10' ? '10 页含听力学生卷'
-    : edition === 'friendly8' ? '8 页无听力学生卷' : '教师 PDF（自然分页）'
+  if (edition === 'largeComplete') return '大字完整版 · 含听力 · 最多 12 页'
+  if (edition === 'largeNoListening') return '大字无听力版 · 最多 10 页'
+  if (edition === 'economy8') return '省纸版 · 无听力 8 页 · 小四优先'
+  return edition === 'friendly10' ? '10 页版'
+    : edition === 'friendly8' ? '8 页版'
+      : edition === 'teacher' ? '教师 PDF' : '自然分页（参考）'
 }
 
 function surfaceUrl() {
@@ -482,7 +496,8 @@ function surfaceUrl() {
     return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/print?version=teacher`
   }
   if (state.surface === 'pdf') {
-    const query = state.pdfEdition === 'natural' ? 'version=teacher'
+    const query = ['natural', 'teacher'].includes(state.pdfEdition)
+      ? `version=${state.pdfEdition === 'teacher' ? 'teacher' : 'student'}&pageLayout=natural`
       : `version=student&pageLayout=${encodeURIComponent(state.pdfEdition)}`
     return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/pdf?${query}`
   }
@@ -495,8 +510,7 @@ function surfaceStageHtml() {
     <main class="surface-stage" aria-label="真实审核表面">
       <div class="surface-toolbar">
         <div class="surface-tabs" role="tablist" aria-label="审核表面">
-          ${Object.entries(surfaceLabels).filter(([key]) =>
-            key !== 'teaching' || (state.actor === 'owner' && state.detail.importProfile !== 'public-paper-v1')).map(([key, label]) => `
+          ${Object.entries(surfaceLabels).filter(([key]) => key === 'screen' || key === 'pdf').map(([key, label]) => `
             <button type="button" class="tab-button" data-surface="${key}" role="tab" aria-selected="${state.surface === key}">${label}</button>
           `).join('')}
         </div>
@@ -505,11 +519,13 @@ function surfaceStageHtml() {
             <label for="pdf-edition">交付版式</label>
             <select id="pdf-edition">
               ${(state.pagination?.editions || []).map(({ edition }) => `<option value="${escapeHtml(edition)}" ${state.pdfEdition === edition ? 'selected' : ''}>${escapeHtml(pdfEditionLabel(edition))}</option>`).join('')}
-              <option value="natural" ${state.pdfEdition === 'natural' ? 'selected' : ''}>${pdfEditionLabel('natural')}</option>
+              ${!state.pagination?.editions?.length ? `<option value="natural" ${state.pdfEdition === 'natural' ? 'selected' : ''}>${pdfEditionLabel('natural')}</option>` : ''}
+              <option value="teacher" ${state.pdfEdition === 'teacher' ? 'selected' : ''}>${pdfEditionLabel('teacher')}</option>
             </select>
-            <span class="paper-meta">${state.pdfEdition === 'natural' ? '非定页交付版' : state.pagination?.editions.find(({ edition }) => edition === state.pdfEdition)?.mode === 'explicit' ? '本卷分页方案' : '自动分页'}</span>
+            <span class="paper-meta">${['natural', 'teacher'].includes(state.pdfEdition) ? '自然分页' : `${['friendly10', 'long12', 'largeComplete'].includes(state.pdfEdition) ? '含听力' : '不含听力'} · ${state.pagination?.editions.find(({ edition }) => edition === state.pdfEdition)?.mode === 'explicit' ? '本卷分页方案' : '自动分页'}`}</span>
           </div>
         ` : `<span class="paper-meta">${state.surface === 'screen' ? '点击卷面内容可带回语义定位' : '由共享 Canonical Print seam 生成'}</span>`}
+        <button class="button" id="toggle-immersive" type="button" aria-controls="review-frame" aria-pressed="false">沉浸查看</button>
       </div>
       <div class="frame-shell">
         ${state.surface === 'pdf' && state.paginationError ? `<p class="pagination-error" role="alert">定页版式未加载：${escapeHtml(state.paginationError)}。请刷新重试，当前教师 PDF 不能代替定页 QA。</p>` : ''}
@@ -637,10 +653,7 @@ function listeningReviewSectionHtml() {
     </section>`
   }
   const audio = review.audio
-  if (audio.state === 'pending_external_playback_review') {
-    const revisionId = state.detail.latestRevisionId
-    const playbackHref = `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}`
-      + `/files?path=${encodeURIComponent(audio.path)}`
+  if (['pending_external_playback_review', 'included_in_candidate_review'].includes(audio.state)) {
     return `<section class="rail-section listening-review-section" id="listening-review-section">
       <h2>听力核对 · 第 ${escapeHtml(question.questionNo)} 题</h2>
       <div class="listening-review-answer"><span>官方答案</span><strong>${escapeHtml(question.officialAnswer)}</strong></div>
@@ -650,10 +663,9 @@ function listeningReviewSectionHtml() {
       </div>
       <div class="listening-audio-evidence">
         <div class="listening-evidence-statuses">
-          ${status('pending', '待 Owner 播放并核对外部音频')}
+          <span class="paper-meta">音频在 Screen 中播放</span>
         </div>
         <p class="paper-meta">真实 MP3 · 已测量 ${escapeHtml(formatDuration(audio.durationSeconds))}；未生成或伪造 ASR、比对及内容安全检查。</p>
-        <audio class="listening-review-player" controls preload="metadata" src="${escapeHtml(playbackHref)}">浏览器无法播放此音频。</audio>
         <p class="digest" title="${escapeHtml(audio.playbackAudioSha256)}">音频 ${escapeHtml(shortDigest(audio.playbackAudioSha256))}</p>
       </div>
     </section>`
@@ -766,14 +778,14 @@ function issueFormHtml() {
       <h2>记录问题</h2>
       <form class="issue-form" id="issue-form">
         ${targetSummaryHtml()}
-        <div class="field-grid">
+        <details class="technical-record"><summary>精确定位（可选）</summary><div class="field-grid">
           <label class="field"><span>题组 ID</span><input name="groupId" value="${escapeHtml(state.target?.groupId || '')}" placeholder="group:…" /></label>
           <label class="field"><span>题目 ID</span><input name="questionId" value="${escapeHtml(state.target?.questionId || '')}" placeholder="question:…" /></label>
           <label class="field"><span>段落 ID</span><input name="blockId" value="${escapeHtml(state.target?.blockId || '')}" placeholder="block:…" /></label>
           <label class="field"><span>媒体 ID</span><input name="mediaId" value="${escapeHtml(state.target?.mediaId || '')}" placeholder="media:…" /></label>
           <label class="field"><span>内容节点 ID</span><input name="contentNodeId" value="${escapeHtml(state.target?.contentNodeId || '')}" placeholder="media-ref:…" /></label>
-          <label class="field"><span>页码</span><input name="pageNumber" inputmode="numeric" value="${escapeHtml(sourcePage || '')}" placeholder="Print / PDF 可填" /></label>
-        </div>
+          <label class="field"><span>页码</span><input name="pageNumber" inputmode="numeric" value="${escapeHtml(sourcePage || '')}" placeholder="PDF 页码" /></label>
+        </div></details>
         <label class="field"><span>要 Agent 改什么</span><textarea name="message" required placeholder="说清发生了什么，以及正确结果应该是什么。"></textarea></label>
         <p class="field-help">问题会绑定 R${escapeHtml(state.detail.latest.revisionNumber)} · ${escapeHtml(state.issueSurface === 'pdf' ? pdfEditionLabel() : surfaceLabels[state.issueSurface])}，不会漂到别的 revision。</p>
         <button class="button button--primary" type="submit">记录这个问题</button>
@@ -886,7 +898,7 @@ function approvalHtml() {
       <div class="approval-box">
         ${status('approved')}
         <p class="digest">${escapeHtml(latest.approval.approvalId)}</p>
-        ${externalListeningReview ? `
+        ${externalListeningReview?.schemaVersion === 'external-listening-owner-review-v1' ? `
           <p class="muted">外部听力真人播放核验已绑定：原文一致、全部段落/题目/答案对应、实际内容适合且安全。</p>
           <p class="digest" title="${escapeHtml(externalListeningReview.audio.sha256)}">核验音频 ${escapeHtml(shortDigest(externalListeningReview.audio.sha256))}</p>
         ` : ''}
@@ -898,45 +910,16 @@ function approvalHtml() {
   const blocked = state.detail.unresolvedCount > 0
     || state.detail.rendererStale
     || !['awaiting_review', 'changes_requested'].includes(latest.state)
-  const externalAudio = state.detail.listeningReview?.audio?.state
-    === 'pending_external_playback_review'
-    ? state.detail.listeningReview.audio
-    : null
-  const externalPlaybackHref = externalAudio
-    ? `/api/import-review-preview/revisions/${encodeURIComponent(state.detail.latestRevisionId)}`
-      + `/files?path=${encodeURIComponent(externalAudio.path)}`
-    : null
   const publicPaper = state.detail.importProfile === 'public-paper-v1'
-  const externalListeningChecks = externalAudio ? `
-      <fieldset class="external-listening-approval" ${blocked ? 'disabled' : ''}>
-        <legend>外部听力 MP3 人工核验（必须逐项确认）</legend>
-        <p class="muted">这些确认只记录当前 revision 的真人播放结论，不会生成 ASR、相似度或自动安全分数。</p>
-        <audio class="listening-review-player" controls preload="metadata" src="${escapeHtml(externalPlaybackHref)}">浏览器无法播放此音频。</audio>
-        <label class="approval-check">
-          <input data-external-listening-check="playback" type="checkbox" />
-          <span>我已完整播放当前 MP3，并确认实际声音与所提供的听力原文一致。</span>
-        </label>
-        <label class="approval-check">
-          <input data-external-listening-check="cohesion" type="checkbox" />
-          <span>我已核对全部 ${escapeHtml(externalAudio.transcriptSegmentCount)} 段原文、${escapeHtml(externalAudio.questionCount)} 道题及 ${escapeHtml(externalAudio.answerCount)} 个官方答案，确认它们与这一个音频完整对应并属于同一套听力。</span>
-        </label>
-        <label class="approval-check">
-          <input data-external-listening-check="safety" type="checkbox" />
-          <span>我已根据实际播放内容确认该音频适合教学使用，且不含不安全或不当内容。</span>
-        </label>
-        <p class="digest" title="${escapeHtml(externalAudio.playbackAudioSha256)}">核验音频 ${escapeHtml(shortDigest(externalAudio.playbackAudioSha256))}</p>
-      </fieldset>` : ''
   return `<section class="rail-section">
-    <h2>认可 revision</h2>
+    <h2>完成审阅</h2>
     <div class="approval-box">
       <p class="muted">当前 R${escapeHtml(latest.revisionNumber)} · ${escapeHtml(state.detail.unresolvedCount)} 个未决问题</p>
-      <p class="digest">${escapeHtml(shortDigest(latest.bundleDigest))}</p>
-      ${externalListeningChecks}
       <label class="approval-check">
         <input id="approval-check" type="checkbox" ${blocked ? 'disabled' : ''} />
         <span>${publicPaper
-          ? '我只检查并认可 Screen、Student Print、Teacher Print 与 PDF 的最终版式；未人工审核原题语义、来源答案、答案映射或逐段摘要。'
-          : '我已检查 Screen、Student Print、Teacher Print 与 PDF，认可当前摘要对应的内容。'}</span>
+          ? '我已检查 Screen 与 PDF，认可当前版本的版式。'
+          : '我已检查 Screen 与 PDF，认可当前版本。'}</span>
       </label>
       <button class="button button--primary" id="approve-revision" type="button" disabled>认可这个 revision</button>
       ${blocked ? `<p class="field-help">${state.detail.rendererStale ? '渲染器已更新，请 Agent 先重新提交 Candidate。' : '先处理所有待处理和待验证问题。'}</p>` : ''}
@@ -987,42 +970,45 @@ function promotionHtml() {
   </section>`
 }
 
-function paragraphSummariesHtml() {
-  if (state.detail?.importProfile !== 'public-paper-v1') return ''
-  const groups = state.detail.paragraphSummaries?.groups || []
-  return `<section class="rail-section paragraph-summaries-section">
-    <h2>逐段摘要</h2>
-    <p class="boundary-note">AI 派生的中文摘要，仅供参考。可展开查看，但不属于本次人工认可范围。</p>
-    <div class="summary-binding" aria-label="摘要版本绑定">
-      <span class="digest" title="${escapeHtml(state.detail.paragraphSummaryBinding?.sourceDigest)}">来源 ${escapeHtml(shortDigest(state.detail.paragraphSummaryBinding?.sourceDigest))}</span>
-      <span class="digest" title="${escapeHtml(state.detail.paragraphSummaryBinding?.candidateDigest)}">候选 ${escapeHtml(shortDigest(state.detail.paragraphSummaryBinding?.candidateDigest))}</span>
-    </div>
-    <details>
-      <summary>查看逐段摘要</summary>
-      <div class="paragraph-summary-list">${groups.flatMap((group) =>
-      group.paragraphs.map((paragraph) => `<article class="paragraph-summary-item">
-        <div class="paragraph-summary-id"><span>${escapeHtml(group.groupId)}</span><code>${escapeHtml(paragraph.paragraphId)}</code></div>
-        <p class="paragraph-source" lang="en">${escapeHtml(paragraph.sourceText)}</p>
-        <p class="paragraph-summary"><strong>摘要</strong>${escapeHtml(paragraph.summary)}</p>
-        <button class="button" type="button" data-locate-summary="${escapeHtml(paragraph.paragraphId)}">在 Screen 定位原段</button>
-      </article>`)).join('')}</div>
-    </details>
-  </section>`
+function correctionReportHtml(historicalOnly = false) {
+  const current = !historicalOnly && state.detail?.ocrCorrectionReport
+  const historical = state.detail?.historicalOcrReport || state.detail?.latest?.approval?.correctionReport
+  const report = current || historical
+  if (!report) return `<p class="empty-state">${isOcrReview() && !state.detail.latest?.approval
+    ? 'Agent 正在对照原图校对，完成后显示报告。'
+    : '此版本未留存校对报告，不能据此判断为零处修改。'}</p>`
+  const labels = {
+    ocr_misrecognition: 'OCR 识别修正', source_spelling_error: '原题单词错误', source_layout_error: '原题排版错误',
+    ocr_repair: 'OCR 识别修正', source_typo: '原题问题（历史未分类）', uncertain: '识别存疑',
+  }
+  return `<div class="correction-report">
+    <p class="muted">${current ? '对应当前版本。仅报告识别、单词与排版修正，不处理语法等其他问题。' : 'OCR 阶段记录；校对结果不代表后续卷面的最终文字。'}</p>
+    ${report.entries.length ? `<ol class="correction-list">${report.entries.map((entry) => `<li>
+      <div class="correction-heading"><strong>${escapeHtml(labels[entry.category || entry.kind] || '校对记录')}</strong><span>${escapeHtml(entry.sourceLocator?.documentId || entry.documentId)} · 第 ${escapeHtml(entry.sourceLocator?.page || entry.page)} 页</span></div>
+      <dl class="correction-diff"><div><dt>${entry.category === 'ocr_misrecognition' || entry.kind === 'ocr_repair' ? '识别结果' : '修改前'}</dt><dd>${escapeHtml(entry.before ?? entry.ocrText)}</dd></div>
+      <div><dt>${current ? '当前结果' : 'OCR 校对结果'}</dt><dd>${escapeHtml(entry.after ?? entry.correctedText)}</dd></div></dl>
+      ${entry.sourceText ? `<p class="muted">原题文字：${escapeHtml(entry.sourceText)}</p>` : ''}
+      <p>${escapeHtml(entry.reason)}</p>
+    </li>`).join('')}</ol>` : '<p class="empty-state">报告已提交，没有记录修正项。</p>'}
+    ${current && historical ? `<details class="technical-record"><summary>查看 OCR 阶段记录</summary>${correctionReportHtml(true)}</details>` : ''}
+  </div>`
 }
 
 function rightRailHtml() {
   return `<aside class="right-rail" aria-label="QA 问题与认可">
-    ${paragraphSummariesHtml()}
-    ${listeningReviewSectionHtml()}
-    ${sourceVisualSectionHtml()}
-    ${mediaDerivationSectionHtml()}
     ${issueFormHtml()}
     <section class="rail-section">
       <h2>${state.actor === 'owner' ? 'QA 对话' : 'Owner 反馈'}</h2>
       ${issuesHtml()}
     </section>
-    ${promotionHtml()}
     ${approvalHtml()}
+    <details class="rail-section review-disclosure"><summary>OCR 与原题校对报告</summary>${correctionReportHtml()}</details>
+    ${mediaDerivationSectionHtml()}
+    <details class="rail-section review-disclosure"><summary>对照资料</summary>
+      <p class="muted">在卷面点选题目，查看对应原卷和听力资料。</p>
+      ${sourceVisualSectionHtml()}
+      ${listeningReviewSectionHtml()}
+    </details>
   </aside>`
 }
 
@@ -1045,7 +1031,7 @@ function render() {
         <div><h1>英语题库</h1><p>${state.actor === 'owner' ? '后台工作台' : 'Agent 待办箱'}</p></div>
       </div>
       ${state.actor === 'owner' ? `<nav class="workspace-navigation" aria-label="后台工作台">
-        <a href="/ops/">题源台账</a>
+        <a href="/ops/?view=sources">题源记录</a>
         <a href="/ops/?view=review" aria-current="page">导题审核</a>
       </nav>` : ''}
       <div class="account">
@@ -1056,13 +1042,39 @@ function render() {
     </header>
     <div class="workspace">
       ${leftRailHtml()}
-      ${state.detail ? (isOcrReview() ? ocrReviewStageHtml() : surfaceStageHtml()) : '<main class="surface-stage"><div class="surface-empty"><h2>还没有可审核内容</h2><p class="muted">Agent 提交 revision 后，从左侧打开。</p></div></main>'}
-      ${state.detail ? (isOcrReview() ? ocrReviewRailHtml() : rightRailHtml()) : '<aside class="right-rail"></aside>'}
+      ${state.detail ? (isOcrReview() ? `<main class="surface-stage correction-stage"><h1>OCR 校对报告</h1>${correctionReportHtml()}</main>` : surfaceStageHtml()) : '<main class="surface-stage"><div class="surface-empty"><h2>还没有可审核内容</h2><p class="muted">Agent 提交 revision 后，从左侧打开。</p></div></main>'}
+      ${state.detail && !isOcrReview() ? rightRailHtml() : '<aside class="right-rail"></aside>'}
     </div>
     ${state.error ? `<div class="error-banner" role="alert">${escapeHtml(state.error)}。刷新后重试。</div>` : ''}
   </div>`
   bind()
+  syncImmersiveView()
 }
+
+function syncImmersiveView() {
+  const stage = document.querySelector('.surface-stage')
+  const button = document.querySelector('#toggle-immersive')
+  const expanded = state.immersive && Boolean(button)
+  document.body.classList.toggle('review-immersive', expanded)
+  stage?.classList.toggle('is-immersive', expanded)
+  document.querySelectorAll('.topbar, .left-rail, .right-rail').forEach((element) => {
+    element.inert = expanded
+  })
+  if (button) {
+    button.textContent = expanded ? '退出沉浸 · Esc' : '沉浸查看'
+    button.setAttribute('aria-pressed', String(expanded))
+  }
+}
+
+function exitImmersiveOnEscape(event) {
+  if (event.key !== 'Escape' || !state.immersive) return
+  event.preventDefault()
+  state.immersive = false
+  syncImmersiveView()
+  document.querySelector('#toggle-immersive')?.focus({ preventScroll: true })
+}
+
+document.addEventListener('keydown', exitImmersiveOnEscape)
 
 function updateOcrCompletionUi() {
   const completion = ocrCompletion()
@@ -1212,6 +1224,7 @@ function applyScreenTarget(target) {
   form.elements.pageNumber.value = ''
   form.querySelector('.field-help').textContent =
     `问题会绑定 R${state.detail.latest.revisionNumber} · Screen，不会漂到别的 revision。`
+  if (state.immersive) return
   if (selectedListeningReviewQuestion()) {
     document.querySelector('#listening-review-section')?.scrollIntoView({ block: 'nearest' })
   } else {
@@ -1345,6 +1358,11 @@ function bindFrame() {
   const frameLoaded = () => {
     frame.classList.remove('is-loading')
     if (loading) loading.hidden = true
+    try {
+      frame.contentDocument?.addEventListener('keydown', exitImmersiveOnEscape)
+    } catch {
+      // The visible exit button also works for browser-owned PDF viewers.
+    }
     attachScreenTargeting()
     if (state.pendingScreenTargetId) {
       const targetId = state.pendingScreenTargetId
@@ -1357,6 +1375,11 @@ function bindFrame() {
 
 function bind() {
   bindClipboardButtons(root)
+  document.querySelector('#toggle-immersive')?.addEventListener('click', () => {
+    state.immersive = !state.immersive
+    // Keep the iframe mounted: resizing must not restart audio or lose reading position.
+    syncImmersiveView()
+  })
   document.querySelectorAll('[data-paper-id]').forEach((button) => {
     button.addEventListener('click', () => void loadDetail(button.dataset.paperId))
   })
@@ -1399,7 +1422,7 @@ function bind() {
           body: JSON.stringify({
             revisionId: state.detail.latestRevisionId,
             surface: state.issueSurface,
-            edition: state.issueSurface === 'pdf' && state.pdfEdition !== 'natural' ? state.pdfEdition : null,
+            edition: state.issueSurface === 'pdf' && state.pagination?.editions.some(({ edition }) => edition === state.pdfEdition) ? state.pdfEdition : null,
             groupId: String(data.get('groupId') || '').trim() || null,
             questionId: String(data.get('questionId') || '').trim() || null,
             blockId: String(data.get('blockId') || '').trim() || null,
@@ -1482,13 +1505,10 @@ function bind() {
   })
   const approvalCheck = document.querySelector('#approval-check')
   const approvalButton = document.querySelector('#approve-revision')
-  const externalListeningChecks = [...document.querySelectorAll('[data-external-listening-check]')]
   const updateApprovalButton = () => {
     approvalButton.disabled = !approvalCheck.checked
-      || externalListeningChecks.some((check) => !check.checked)
   }
   approvalCheck?.addEventListener('change', updateApprovalButton)
-  externalListeningChecks.forEach((check) => check.addEventListener('change', updateApprovalButton))
   approvalButton?.addEventListener('click', async () => {
     approvalButton.disabled = true
     try {
@@ -1503,14 +1523,6 @@ function bind() {
             ...(state.detail.importProfile === 'public-paper-v1'
               ? { approvalScope: 'layout_only' }
               : {}),
-            ...(externalListeningChecks.length ? {
-              externalListeningReview: {
-                audioSha256: state.detail.listeningReview.audio.playbackAudioSha256,
-                playbackMatchesSuppliedTranscript: true,
-                allSegmentsQuestionsAnswersBelongTogether: true,
-                actualAudioContentSuitableAndSafe: true,
-              },
-            } : {}),
           }),
         },
       )
@@ -1541,7 +1553,7 @@ async function boot() {
     state.user = me.user
     if (me.user.role === 'owner' && me.user.accountKind !== 'import_agent') {
       state.actor = 'owner'
-      if (new URLSearchParams(window.location.search).get('view') !== 'review') {
+      if (new URLSearchParams(window.location.search).get('view') === 'sources') {
         state.view = 'sources'
         const { mountSourceIntakes } = await import('./source-intakes.js')
         mountSourceIntakes({ root, user: state.user, request, accessHtml })
@@ -1562,7 +1574,7 @@ async function boot() {
 void boot()
 
 window.setInterval(() => {
-  if (state.view !== 'review') return
+  if (state.view !== 'review' || state.immersive) return
   const active = document.activeElement
   if (document.hidden || active?.matches('input, textarea, select')) return
   void loadPapers()

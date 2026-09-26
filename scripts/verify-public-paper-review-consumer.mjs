@@ -78,27 +78,23 @@ try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 })
   const origin = `http://127.0.0.1:${server.address().port}`
   await page.goto(`${origin}/ops/?view=review`)
-  await page.getByRole('heading', { name: '逐段摘要' }).waitFor()
-  await page.getByText('AI 派生的中文摘要，仅供参考。可展开查看，但不属于本次人工认可范围。').waitFor()
-  assert.equal(await page.locator('.paragraph-summaries-section details').evaluate((element) => element.open), false)
-  await page.getByText('查看逐段摘要').click()
-  await page.getByText('A source paragraph visible beside its summary.').waitFor()
+  await page.getByRole('heading', { name: baseDetail.paperName }).waitFor()
+  assert.equal(await page.getByRole('heading', { name: '逐段摘要' }).count(), 0)
+  assert.equal(await page.locator('.paragraph-summaries-section').count(), 0)
   assert.equal(await page.getByRole('tab', { name: '教学解析' }).count(), 0)
-  await page.getByRole('button', { name: '在 Screen 定位原段' }).click()
-  await page.waitForFunction(() => document.querySelector('#review-frame')?.contentDocument?.activeElement?.dataset.canonicalBlockId === 'paragraph:reading-a:1')
-  assert.match(await page.locator('.approval-check').last().innerText(), /我只检查并认可 Screen、Student Print、Teacher Print 与 PDF 的最终版式/)
-  assert.match(await page.locator('.approval-check').last().innerText(), /未人工审核原题语义、来源答案、答案映射或逐段摘要/)
+  assert.deepEqual(await page.getByRole('tab').allTextContents(), ['Screen', 'PDF'])
+  assert.equal(await page.locator('.approval-check').last().innerText(), '我已检查 Screen 与 PDF，认可当前版本的版式。')
   if (process.env.EQB_REVIEW_SCREENSHOT) await page.screenshot({ path: process.env.EQB_REVIEW_SCREENSHOT, fullPage: true })
 
   mode = 'old'
   await page.reload()
   await page.getByRole('heading', { name: '旧解析卷 fixture' }).waitFor()
   assert.equal(await page.getByRole('heading', { name: '逐段摘要' }).count(), 0)
-  assert.equal(await page.getByRole('tab', { name: '教学解析' }).count(), 1)
-  assert.doesNotMatch(await page.locator('.approval-check').last().innerText(), /我只检查并认可/)
+  assert.equal(await page.getByRole('tab', { name: '教学解析' }).count(), 0)
+  assert.equal(await page.locator('.approval-check').last().innerText(), '我已检查 Screen 与 PDF，认可当前版本。')
 } finally {
   await browser.close()
   await new Promise((resolve) => server.close(resolve))
 }
 
-console.log('PASS public-paper Owner Review keeps summaries informational, locates the real Screen paragraph, limits approval to layout, and preserves old analyzed UI')
+console.log('PASS public-paper summary bindings remain available internally; Owner Review hides summaries/teaching for public and historical papers and uses Screen/PDF approval')

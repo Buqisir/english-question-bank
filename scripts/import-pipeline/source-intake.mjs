@@ -592,7 +592,8 @@ async function continueAutomation(submissionId, paperId) {
       try { leaseKeeper = await maintainLease() } catch (error) {
         return { submissionId, paperId, blocked: { step: 'lease', reason: 'heartbeat_failed', detail: error.message }, next: 'Confirm the lease before any write.' }
       }
-      const failure = await runStep('init', ['init', submissionId, '--paper-id', paperId])
+      const failure = await runStep('init', ['init', submissionId, '--paper-id', paperId,
+        ...(process.argv.includes('--signal-only') ? ['--signal-only'] : [])])
       if (failure) return { submissionId, paperId, ...failure, next: 'Inspect initialization evidence before replaying.' }
       status = await automationStatus(submissionId, paperId)
     }
@@ -676,7 +677,7 @@ function assertInitializedWorkspace(
   const sourceDocuments = (sourceManifest.documents || [])
     .filter((document) => !document.renditionOf)
   const sourceArtifacts = [...sourceDocuments]
-  if (sourceManifest.schemaVersion === 'universal-nck1-source-manifest-v2') {
+  if (['universal-nck1-source-manifest-v2', 'universal-nck1-source-manifest-v3'].includes(sourceManifest.schemaVersion)) {
     assertListeningAudioManifest(paperDirectory, sourceManifest)
     const originalAudio = sourceManifest.attachments.find((attachment) =>
       attachment.role === 'listening_audio_original')
@@ -924,12 +925,19 @@ async function initialize(submissionId, paperId) {
       '--audio',
       audioFiles[0].localPath,
     ]
+    if (process.argv.includes('--signal-only')) args.push('--signal-only')
     if (option('--asr-fixture')) args.push('--asr-fixture', option('--asr-fixture'))
     execFileSync(
       process.execPath,
       args,
       { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
     )
+    if (process.argv.includes('--signal-only')) {
+      recordInitialization(manifest, paperId)
+      console.log(JSON.stringify({ submissionId, paperId, state: 'initialized_locally',
+        audioMode: 'signal_only', contentValidation: 'not_performed' }, null, 2))
+      return
+    }
     recordOperation(submissionId, 'init', 'completed', { paperId })
     console.log(JSON.stringify({
       submissionId,

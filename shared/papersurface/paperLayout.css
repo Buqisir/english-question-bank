@@ -11,6 +11,90 @@
   text-indent: var(--paper-passage-indent, var(--ps-passage-indent));
 }
 
+[data-canonical-continuation-material-alignment="justify"]
+  [data-canonical-continuation-writing-rhythm-role="material_paragraph"] {
+  text-align: justify;
+}
+
+/* Bound gold-reference roles override legacy .exam/.handout paragraph gaps
+ * and Screen's generic section spacing. Titles, notices, options and supplied
+ * answer-box text are deliberately not ordinary prose. Historical bindings
+ * emit no marker and keep their original layout. */
+:is(.ps-surface, .question-group)[data-canonical-role-layout="golden_reference_v1"] p:is(
+  [data-canonical-reading-role="body"],
+  [data-canonical-seven-choices-rhythm-role="passage_body_line"],
+  [data-canonical-cloze-rhythm-role="passage_body_line"],
+  [data-canonical-grammar-fill-rhythm-role="passage_body_line"],
+  [data-canonical-application-writing-rhythm-role="prompt_line"],
+  [data-canonical-continuation-writing-rhythm-role="material_paragraph"]
+) {
+  text-align: justify;
+  text-align-last: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* English prose justifies between words, not inside Chinese glosses. Keep
+ * Chinese application prompts and historical bindings on their existing policy. */
+:is(.ps-surface, .question-group)[data-canonical-role-layout="golden_reference_v1"] p:is(
+  [data-canonical-reading-role="body"],
+  [data-canonical-seven-choices-rhythm-role="passage_body_line"],
+  [data-canonical-cloze-rhythm-role="passage_body_line"],
+  [data-canonical-grammar-fill-rhythm-role="passage_body_line"],
+  [data-canonical-continuation-writing-rhythm-role="material_paragraph"]
+) {
+  text-justify: inter-word;
+}
+
+/* Canonical rich text contains semantic newlines, not raw PDF/OCR wrapping.
+ * Preserve these within reading paragraphs and native table cells, without
+ * changing text/IDs or turning every source line into a new paragraph. */
+[data-canonical-role-layout="golden_reference_v1"] :is(
+  [data-canonical-reading-role], [data-canonical-cell-id]
+) [data-canonical-content-node-id] {
+  white-space: pre-line;
+}
+
+[data-canonical-role-layout="golden_reference_v1"]
+  p[data-canonical-reading-role="body"][data-canonical-source-bullet-lines] {
+  text-indent: 0;
+}
+
+:is(.ps-surface, .question-group)[data-canonical-role-layout="golden_reference_v1"] p:is(
+  [data-canonical-application-writing-rhythm-role="notice_line"],
+  [data-canonical-continuation-writing-rhythm-role="notice_line"]
+) {
+  margin: 18pt 0 0;
+  text-align: left;
+  text-indent: 0;
+}
+
+[data-canonical-role-layout="golden_reference_v1"] :is(
+  [data-canonical-application-notice-line], [data-canonical-continuation-notice-line],
+  .ps-canonical-application-notice-line
+) {
+  text-indent: 0;
+}
+
+[data-canonical-role-layout="golden_reference_v1"] .canonical-continuation-material.ps-section {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Keep headings with their following content, not whole long passages. Both
+ * break spellings are needed by browser print and the paged PDF consumer.
+ * Paged's break handler splits selector lists without parsing :is() commas. */
+.section-header[data-canonical-role-layout="golden_reference_v1"],
+.reading-meta-instruction[data-canonical-role-layout="golden_reference_v1"],
+[data-canonical-role-layout="golden_reference_v1"] [data-canonical-reading-role="title"],
+[data-canonical-role-layout="golden_reference_v1"] [data-canonical-reading-role="subtitle"],
+[data-canonical-role-layout="golden_reference_v1"] [data-canonical-writing-chrome-role],
+[data-canonical-role-layout="golden_reference_v1"] [data-canonical-seven-choices-rhythm-role="passage_title"],
+[data-canonical-role-layout="golden_reference_v1"] [data-canonical-seven-choices-rhythm-role="passage_subtitle"] {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
 :is(.ps-paragraph, .question-group .passage p)[data-canonical-seven-choices-rhythm-role="passage_body_line"] {
   margin: 0;
   line-height: var(--paper-seven-baseline);
@@ -103,6 +187,15 @@
   line-height: var(--paper-listening-step, 18pt);
 }
 
+/* Listening numbers and option labels are ordinary exam text. Override
+ * Screen's generic .ps-question-no/.ps-option-label and Print's .qnum
+ * bold defaults on the owning surface; preserve the A/B/C geometry. */
+:is(.canonical-listening-surface .ps-question-no,
+    .canonical-listening-surface .ps-option-label,
+    .question-group[data-canonical-group-type="listening"] .qnum) {
+  font-weight: 400;
+}
+
 /* Listening owns its rhythm: override generic question/option spacing without
  * changing other families or the horizontal A/B/C geometry. */
 :is(.canonical-listening-surface .ps-question-list,
@@ -128,6 +221,9 @@
 
 :is(.ps-listening-part, .canonical-listening-part),
 :is(.ps-listening-section, .canonical-listening-section) { font-size: inherit; line-height: 18pt; }
+
+:is(.ps-listening-section, .canonical-listening-section) { font-weight: 400; }
+.canonical-listening-transfer-notice { text-indent: 2em; }
 
 :is(.ps-listening-instruction, .canonical-listening-instruction) { line-height: 18pt; text-indent: 2em; }
 
@@ -160,9 +256,9 @@
 }
 
 .canonical-paper-opening {
-  /* Provisional design bounds, not measurements from the gold image. PDF may
-     calibrate these two variables without changing the shared 18pt body rhythm. */
-  padding-top: var(--canonical-cover-page-top-to-title, 72pt);
+  /* Page padding already owns the top margin. Do not add a second cover margin.
+     Fixed-page plans may still explicitly adjust these shared cover gaps. */
+  padding-top: var(--canonical-cover-page-top-to-title, 0pt);
 }
 .canonical-paper-cover-title {
   margin: 0 0 var(--canonical-cover-title-to-notices, 72pt);
@@ -171,8 +267,9 @@
   line-height: 1;
 }
 .canonical-paper-cover-notices { line-height: 18pt; }
-.canonical-paper-cover-notices ol { margin: 0; padding-left: 2em; }
-.canonical-paper-cover-notices li { margin: 0; }
+.canonical-paper-cover-notices ol { margin: 0; padding: 0; list-style: none; counter-reset: cover-notice; }
+.canonical-paper-cover-notices li { margin: 0; text-indent: 2em; counter-increment: cover-notice; }
+.canonical-paper-cover-notices li::before { content: counter(cover-notice) ". "; }
 
 .canonical-paper-opening ~ :is(
   .paper-browse-part-heading,

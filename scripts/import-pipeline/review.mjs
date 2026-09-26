@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process'
+import { randomBytes, randomUUID } from 'node:crypto'
 import {
+  chmodSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
@@ -33,8 +35,23 @@ import {
   ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
   resolveReviewFile,
+  validateAgentOcrCorrectionSidecar,
 } from '../../server/import-review/revisionProjection.mjs'
-import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
+import { compileNck1MaterializationCandidatePreview, importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
+import { validateInlineBlankTextBoundaries } from '../../shared/paper-canonical/inlineBlankBoundaries.mjs'
+import { buildPreprocessingReport } from '../../server/paper-import/preprocessingReport.mjs'
+import {
+  prepareSpellingReview,
+  summarizeSpellingReview,
+  SPELLING_REVIEW_FILE,
+  SPELLING_REVIEW_INSTRUCTIONS,
+  TEXT_REVIEW_POLICY,
+  TEXT_REVIEW_INSTRUCTIONS,
+  TEXT_REVIEW_POLICY_V2,
+  TEXT_REVIEW_INSTRUCTIONS_V2,
+  TEXT_REVIEW_POLICY_V4,
+  TEXT_REVIEW_INSTRUCTIONS_V4,
+} from '../../server/paper-import/spellingReview.mjs'
 import {
   enumerateParagraphSummaryTargets,
   validateParagraphSummaries,
@@ -45,8 +62,9 @@ import {
   validatePublicSearchMetadata,
 } from '../../server/paper-import-ai/publicSearchMetadata.mjs'
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
-import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
+import { resolveReviewOrigin } from './review-target.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import {
   renderReviewDiagnosticEdition,
@@ -54,8 +72,10 @@ import {
 } from '../../server/import-review/reviewPagination.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 import { fixedPageLayoutPolicy } from '../../server/draft-paper/fixedPagePdfPlanner.mjs'
+import { STUDENT_PRODUCT_EDITIONS, studentProductPolicy } from '../../server/draft-paper/studentProductPdf.mjs'
 import { assertApplicationGivenOwnership } from './lib-nck1-new-paper-locks.mjs'
 import {
+  FIXED_PAGINATION_EDITIONS,
   PAPER_PAGINATION_PLAN_FILE_NAME,
   validatePaperPaginationPlan,
 } from '../../server/paper-import/paginationPlan.mjs'
@@ -80,11 +100,7 @@ function paperDirectory(paperId) {
 }
 
 function origin() {
-  const value = String(process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || '').replace(/\/$/, '')
-  if (!/^https?:\/\//.test(value)) {
-    fail('QUESTION_BANK_IMPORT_OPS_ORIGIN must be an http(s) origin')
-  }
-  return value
+  return resolveReviewOrigin(root)
 }
 
 function token() {
@@ -100,14 +116,39 @@ function shippingToken() {
   return value
 }
 
+function publicationCapabilityPath(paperId) {
+  if (!/^paper-[a-zA-Z0-9-]+$/.test(paperId || '')) fail('Publication requires a valid paperId')
+  return path.join(root, 'data', 'import-publication-requests', `${paperId}.json`)
+}
+
+function exactApprovalIdentity(approval, paperId) {
+  if (!approval || approval.paperId !== paperId) fail('The latest renderer-current Candidate has no exact Owner approval')
+  return {
+    approvalId: approval.approvalId,
+    revisionId: approval.revisionId,
+    sourceDigest: approval.sourceDigest,
+    candidateDigest: approval.candidateDigest,
+    visibleStructureDigest: approval.visibleStructureDigest,
+    analysisDigest: approval.analysisDigest,
+    ...(approval.importProfile ? {
+      importProfile: approval.importProfile,
+      paragraphSummariesDigest: approval.paragraphSummariesDigest,
+      publicSearchMetadataDigest: approval.publicSearchMetadataDigest,
+    } : {}),
+    bundleDigest: approval.bundleDigest,
+  }
+}
+
 async function api(
   pathname,
   init = {},
   { allowNotFound = false, binary = false, credential = 'agent' } = {},
 ) {
+  const targetOrigin = origin()
   const credentialToken = credential === 'shipping' ? shippingToken() : token()
-  const response = await fetch(`${origin()}${pathname}`, {
+  const response = await fetch(`${targetOrigin}${pathname}`, {
     ...init,
+    redirect: 'error',
     headers: {
       authorization: `Bearer ${credentialToken}`,
       ...(init.headers || {}),
@@ -195,7 +236,7 @@ function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = p
   }
   const manifest = {
     schemaVersion: projection.importProfile
-      ? 'web-import-review-bundle-v2'
+      ? (projection.ocrCorrectionReport ? 'web-import-review-bundle-v3' : 'web-import-review-bundle-v2')
       : 'web-import-review-bundle-v1',
     paperId: projection.paperId,
     paperName: projection.paperName,
@@ -211,6 +252,10 @@ function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = p
           paragraphSummariesDigest: projection.paragraphSummariesDigest,
           publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
           ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
+          ...(projection.ocrCorrectionReport ? {
+            ocrCorrectionReportVersion: projection.ocrCorrectionReport.schemaVersion,
+            ocrCorrectionReportDigest: digestJson(projection.ocrCorrectionReport),
+          } : {}),
         }
       : { analysisDigest: projection.analysisDigest }),
     producerBuildId: buildId,
@@ -230,6 +275,8 @@ function resolvedIssueIds() {
 async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
   const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+  const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
+  if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
   const manifest = reviewManifest(paperDir, projection, resolvedIssueIds())
   const finalized = await uploadReviewBundle(paperDir, manifest)
   console.log(JSON.stringify({
@@ -238,17 +285,20 @@ async function pushRevision(paperId) {
     revisionNumber: finalized.revision.revisionNumber,
     state: finalized.revision.state,
     bundleDigest: finalized.revision.bundleDigest,
+    ...(projection.spellingReviewSummary ? { spellingReview: projection.spellingReviewSummary } : {}),
   }, null, 2))
 }
 
 async function paginationQa(paperId) {
   const paperDir = paperDirectory(paperId)
   const edition = option('--edition')
-  if (!['friendly8', 'friendly10'].includes(edition)) {
-    fail('pagination-qa requires --edition friendly8|friendly10')
+  if (!FIXED_PAGINATION_EDITIONS.includes(edition)) {
+    fail(`pagination-qa requires --edition ${FIXED_PAGINATION_EDITIONS.join('|')}`)
   }
   const breakOption = option('--break-slots')
   const coverOption = option('--cover-gaps')
+  const product = STUDENT_PRODUCT_EDITIONS.includes(edition)
+  if (product && coverOption !== null) fail('New student products retain the title and omit administrative notices; --cover-gaps is not supported')
   const explicitEdit = breakOption !== null || coverOption !== null
   if (process.argv.includes('--auto') && explicitEdit) {
     fail('--auto cannot be combined with --break-slots or --cover-gaps')
@@ -277,20 +327,23 @@ async function paginationQa(paperId) {
       entry.familyContractId === 'listening')
     const listeningCount = projection.paginationSlotBindings.filter((entry) =>
       entry.familyContractId === 'listening').length
-    policy = fixedPageLayoutPolicy(edition, listeningCount, sourceHasListening)
+    const selectedPolicy = (product ? studentProductPolicy : fixedPageLayoutPolicy)(edition, listeningCount, sourceHasListening)
+    policy = { targetPages: selectedPolicy.targetPages, includeListening: selectedPolicy.includeListening, omitCover: selectedPolicy.omitCover }
     let candidatePlan = projection.paginationPlan
     if (explicitEdit) {
       const currentEdition = projection.paginationPlan?.editions?.[edition]
+      if (product && !currentEdition?.layout) fail('Run --auto --save-plan before editing product break slots')
       const breakSlotIds = breakOption === null
         ? currentEdition?.breakSlotIds || []
         : String(breakOption).split(',').map((value) => value.trim()).filter(Boolean)
-      const coverGapsPt = coverOption === null
-        ? currentEdition?.coverGapsPt ?? (policy.omitCover ? null : edition === 'friendly8' ? [0, 18] : [72, 72])
+      const coverGapsPt = product ? null : coverOption === null
+        ? currentEdition?.coverGapsPt ?? (policy.omitCover ? null : policy.targetPages === 8 ? [0, 18] : [72, 72])
         : coverOption === 'none' || policy.omitCover
           ? null
           : String(coverOption).split(',').map(Number)
       candidatePlan = {
-        schemaVersion: 'paper-pagination-plan-v1',
+        schemaVersion: product || projection.paginationPlan?.schemaVersion === 'paper-pagination-plan-v4' ? 'paper-pagination-plan-v4' : edition.startsWith('long') ? 'paper-pagination-plan-v2'
+          : projection.paginationPlan?.schemaVersion || 'paper-pagination-plan-v1',
         paperId: projection.paperId,
         sourceDigest: projection.sourceDigest,
         candidateDigest: projection.candidateDigest,
@@ -301,6 +354,7 @@ async function paginationQa(paperId) {
             coverGapsPt,
             breakSlotIds,
             allowSplitOptionBank: currentEdition?.allowSplitOptionBank ?? false,
+            ...(product ? { layout: currentEdition.layout } : {}),
           },
         },
       }
@@ -323,15 +377,18 @@ async function paginationQa(paperId) {
     slotByGroup = new Map(projection.paginationSlotBindings.map(({ groupId, slotId }) => [groupId, slotId]))
     const selectedEdition = useAuto ? {
       ...policy,
-      coverGapsPt: rendered.coverGapsPt,
+      coverGapsPt: product ? null : rendered.coverGapsPt,
       breakSlotIds: rendered.plannedBreakGroupIds.map((groupId) => slotByGroup.get(groupId)),
       allowSplitOptionBank: rendered.allowSplitOptionBank ?? false,
+      ...(product ? { layout: rendered.layout } : {}),
+      ...(rendered.answerBoxHeightsMm ? { answerBoxHeightsMm: rendered.answerBoxHeightsMm } : {}),
     } : {
       ...candidatePlan.editions[edition],
       allowSplitOptionBank: candidatePlan.editions[edition].allowSplitOptionBank ?? false,
     }
     const plan = validatePaperPaginationPlan({
-      schemaVersion: 'paper-pagination-plan-v1',
+      schemaVersion: product || candidatePlan?.schemaVersion === 'paper-pagination-plan-v4' ? 'paper-pagination-plan-v4' : edition.startsWith('long') ? 'paper-pagination-plan-v2'
+        : candidatePlan?.schemaVersion || 'paper-pagination-plan-v1',
       paperId: projection.paperId,
       sourceDigest: projection.sourceDigest,
       candidateDigest: projection.candidateDigest,
@@ -386,7 +443,7 @@ async function paginationQa(paperId) {
     let diagnosticError = null
     let pdf = null
     let screenshots = []
-    if (projection && policy) {
+    if (projection && policy && !product) {
       try {
         diagnostic = await renderReviewDiagnosticEdition(projection, edition, buildPrintHtml)
         const pdfPath = path.join(outputDir, `${paperId}-${edition}-diagnostic-natural.pdf`)
@@ -413,14 +470,14 @@ async function paginationQa(paperId) {
       sourceDigest: projection?.sourceDigest || null,
       candidateDigest: projection?.candidateDigest || null,
       edition,
-      targetPages: policy?.targetPages || (edition === 'friendly8' ? 8 : 10),
+      targetPages: policy?.targetPages ?? null,
       actualPages: error.actualPages ?? diagnostic?.pageCount ?? null,
       searchedCandidates: error.searchedCandidates ?? null,
       error: { code: error.code || null, message: error.message },
       diagnosticError,
       diagnosticPolicy: policy ? {
         ...policy,
-        coverGapsPt: policy.omitCover ? null : edition === 'friendly8' ? [0, 18] : [72, 72],
+        coverGapsPt: policy.omitCover ? null : policy.targetPages === 8 ? [0, 18] : [72, 72],
         allowSplitOptionBank: false,
       } : null,
       slotMapping: projection?.paginationSlotBindings || [],
@@ -535,6 +592,28 @@ async function pushOcrReview(paperId) {
   }, null, 2))
 }
 
+async function proofreadOcr(paperId) {
+  const revisionId = option('--revision')
+  const inputPath = option('--input')
+  if (!revisionId || !inputPath) fail('proofread-ocr requires --revision and --input')
+  const projection = buildNck1OcrReviewProjection(paperDirectory(paperId))
+  const input = JSON.parse(readFileSync(path.resolve(inputPath), 'utf8'))
+  const reviewStatus = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`)
+  if (reviewStatus.latestRevisionId !== revisionId) fail('Only the current exact OCR revision may be proofread')
+  const revision = reviewStatus.revisions.find((entry) => entry.id === revisionId)
+  if (!revision || revision.manifest.sourceSetDigest !== projection.sourceSetDigest
+    || revision.manifest.evidenceDigest !== projection.evidenceDigest) fail('OCR revision does not match local evidence')
+  const result = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/revisions/${encodeURIComponent(revisionId)}/proofread-ocr`,
+    { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ ...input, bundleDigest: revision.bundleDigest }) },
+  )
+  console.log(JSON.stringify({ paperId, revisionId, reviewerKind: result.receipt.reviewerKind,
+    confirmationId: result.receipt.confirmationId,
+    nextCommand: `node scripts/import-pipeline/review.mjs pull-ocr-confirmation ${paperId} --revision ${revisionId}`,
+  }, null, 2))
+}
+
 async function pullOcrConfirmation(paperId) {
   const paperDir = paperDirectory(paperId)
   const projection = buildNck1OcrReviewProjection(paperDir)
@@ -551,6 +630,15 @@ async function pullOcrConfirmation(paperId) {
     || result.receipt?.sourceSetDigest !== projection.sourceSetDigest
     || result.receipt?.evidenceDigest !== projection.evidenceDigest
   ) fail('Web OCR confirmation no longer matches the local immutable source evidence')
+  if (result.receipt.reviewerKind === 'import_agent') {
+    const reportPath = path.join(paperDir, 'signals', 'agent-proofreading-receipt.json')
+    mkdirSync(path.dirname(reportPath), { recursive: true })
+    const bytes = `${JSON.stringify(result.receipt, null, 2)}\n`
+    if (existsSync(reportPath) && readFileSync(reportPath, 'utf8') !== bytes) {
+      fail('Existing Agent proofreading receipt differs; preserve it and reconcile')
+    }
+    if (!existsSync(reportPath)) writeFileSync(reportPath, bytes, { flag: 'wx' })
+  }
   const temporaryRoot = mkdtempSync(path.join(tmpdir(), 'eqb-ocr-confirmation-'))
   try {
     const temporaryPath = path.join(temporaryRoot, 'confirmation.json')
@@ -563,6 +651,50 @@ async function pullOcrConfirmation(paperId) {
   } finally {
     rmSync(temporaryRoot, { recursive: true, force: true })
   }
+}
+
+function finalizeOcrCorrectionReport(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const inputPath = option('--input')
+  if (!inputPath) fail('finalize-ocr-correction-report requires --input <entries.json>')
+  const receiptPaths = [
+    path.join(paperDir, 'signals', 'agent-proofreading-receipt.json'),
+    path.join(paperDir, 'materialization', 'agent-proofreading-receipt.json'),
+  ]
+  const receiptPath = receiptPaths.find(existsSync)
+  if (!receiptPath) fail('Exact saved Agent OCR confirmation receipt is required')
+  const receipt = requiredJson(receiptPath, 'Agent OCR confirmation receipt')
+  if (receipt.reviewerKind !== 'import_agent' || !receipt.correctionReport) {
+    fail('Saved receipt is not an Agent OCR confirmation')
+  }
+  const authored = requiredJson(path.resolve(inputPath), 'authored OCR correction entries')
+  if (!Array.isArray(authored.entries)) fail('Authored OCR correction report requires entries[]')
+  const loaded = loadNck1ReviewSource(paperDir)
+  const imported = importCanonicalCandidate(loaded.sourceInput)
+  if (!imported.candidate || imported.issues.length) fail('Materialization must pass before preparing its report')
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  if (!preview.compilation) fail('Candidate must compile before preparing its report')
+  const report = {
+    schemaVersion: 'agent-ocr-correction-report-v2',
+    paperId,
+    sourceDigest: preview.candidate.source.sha256,
+    candidateDigest: preview.candidate.candidateDigest,
+    ocrRevisionId: receipt.revisionId,
+    ocrConfirmationId: receipt.confirmationId,
+    originalSourceSetDigest: receipt.sourceSetDigest,
+    ocrEvidenceDigest: receipt.evidenceDigest,
+    entries: authored.entries,
+  }
+  validateAgentOcrCorrectionSidecar(report, {
+    materialization: JSON.parse(new TextDecoder().decode(loaded.sourceInput.materializationBytes)),
+    paperId, documents: loaded.manifest.documents,
+    sourceDocuments: loaded.sourceInput.documents,
+    sourceDigest: report.sourceDigest, candidateDigest: report.candidateDigest,
+  })
+  const target = path.join(paperDir, 'agent-ocr-correction-report-v2.json')
+  if (existsSync(target)) fail(`OCR correction report already exists: ${target}`)
+  writeFileSync(target, `${stableStringify(report)}\n`, { flag: 'wx' })
+  console.log(JSON.stringify({ paperId, entries: report.entries.length, reportDigest: digestJson(report), output: target }, null, 2))
 }
 
 async function status(paperId) {
@@ -613,6 +745,80 @@ function verifyAnalyses(paperId) {
     previewSidecars: Object.keys(projection.analysisSidecars).sort(),
     analysisDigest: projection.analysisDigest,
     status: 'ready_for_review_push',
+  }, null, 2))
+}
+
+function spellingReview(paperId, command) {
+  const paperDir = paperDirectory(paperId)
+  const loaded = loadNck1ReviewSource(paperDir, { preparingSpelling: command !== 'verify-spelling' })
+  if (loaded.analyzedPackage) fail('Spelling preprocessing requires a raw-source workspace')
+  if (command === 'prepare-spelling') {
+    const output = option('--output')
+    if (!output) fail('prepare-spelling requires --output <request.json>')
+    writeFileSync(path.resolve(output), `${JSON.stringify({
+      instructions: loaded.config.spellingReview === TEXT_REVIEW_POLICY_V4 ? TEXT_REVIEW_INSTRUCTIONS_V4
+        : loaded.config.spellingReview === TEXT_REVIEW_POLICY ? TEXT_REVIEW_INSTRUCTIONS
+        : loaded.config.spellingReview === TEXT_REVIEW_POLICY_V2 ? TEXT_REVIEW_INSTRUCTIONS_V2 : SPELLING_REVIEW_INSTRUCTIONS,
+      paperId,
+      sourceManifest: loaded.manifest,
+      materialization: loaded.materialization,
+      report: prepareSpellingReview(loaded.sourceInput.materializationBytes, loaded.config.spellingReview),
+    }, null, 2)}\n`, { flag: 'wx' })
+    console.log(`PREPARED spelling review for ${paperId}; no review has been attested`)
+    return
+  }
+  if (command === 'finalize-spelling') {
+    const input = option('--input')
+    if (!input) fail('finalize-spelling requires --input <review.json>')
+    loaded.sourceInput.spellingReviewBytes = new Uint8Array(readFileSync(path.resolve(input)))
+    if (loaded.config.spellingReview && JSON.parse(new TextDecoder().decode(loaded.sourceInput.spellingReviewBytes)).schemaVersion !== loaded.config.spellingReview) {
+      fail('review policy differs from config')
+    }
+  }
+  if (!loaded.sourceInput.spellingReviewBytes) fail('No spelling review exists')
+  const imported = importCanonicalCandidate(loaded.sourceInput)
+  if (!imported.candidate || imported.issues.length) fail(imported.issues[0]?.message || 'Invalid spelling Candidate')
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  if (!preview.compilation) fail(preview.unresolvedIssues?.[0]?.message || 'Corrected Candidate does not compile')
+  if (command === 'finalize-spelling') {
+    const activePath = path.join(paperDir, SPELLING_REVIEW_FILE)
+    if (existsSync(activePath)) {
+      const previous = new Uint8Array(readFileSync(activePath))
+      const previousDigest = sha256(previous)
+      if (previousDigest !== sha256(loaded.sourceInput.spellingReviewBytes)) {
+        const historyDir = path.join(paperDir, 'spelling-review-history')
+        mkdirSync(historyDir, { recursive: true })
+        const historyPath = path.join(historyDir, `${previousDigest.slice('sha256:'.length)}.json`)
+        if (existsSync(historyPath)) {
+          if (sha256(new Uint8Array(readFileSync(historyPath))) !== previousDigest) fail('retained review history changed')
+        } else writeFileSync(historyPath, previous, { flag: 'wx' })
+      }
+    }
+    writeFileSync(activePath, loaded.sourceInput.spellingReviewBytes)
+  }
+  const report = JSON.parse(new TextDecoder().decode(loaded.sourceInput.spellingReviewBytes))
+  console.log(JSON.stringify({ status: 'PASS', paperId, targets: report.targets.length,
+    ...summarizeSpellingReview(report),
+    reviewDigest: sha256(loaded.sourceInput.spellingReviewBytes),
+    candidateDigest: imported.candidate.candidateDigest,
+    semanticJudgment: 'import_agent_attestation',
+    next: 'Rebuild answer checks, summaries and search metadata against this Candidate before Review.',
+  }, null, 2))
+}
+
+function preprocessingReport(paperId) {
+  const evidencePath = option('--evidence')
+  const output = option('--output')
+  if (!evidencePath || !output) fail('preprocessing-report requires --evidence <evidence.json> --output <report.md>')
+  const evidenceFile = path.resolve(evidencePath)
+  const projection = buildNck1ReviewProjection(paperDirectory(paperId))
+  const markdown = buildPreprocessingReport(projection, requiredJson(evidenceFile, 'handoff evidence'), {
+    baseDirectory: path.dirname(evidenceFile),
+  })
+  writeFileSync(path.resolve(output), markdown, { flag: 'wx' })
+  console.log(JSON.stringify({ paperId, candidateDigest: projection.candidateDigest,
+    report: path.resolve(output), reportDigest: sha256(new TextEncoder().encode(markdown)),
+    handoff: 'Deliver this single 校正报告与预处理完成表 to Owner; it contains preview links and retained doubts.',
   }, null, 2))
 }
 
@@ -1035,26 +1241,7 @@ async function promote(paperId) {
   const status = await api(
     `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
   )
-  const approval = status.approval
-  if (!approval || approval.paperId !== paperId) {
-    fail('The latest renderer-current Candidate has no exact Owner approval')
-  }
-  const identity = {
-    approvalId: approval.approvalId,
-    revisionId: approval.revisionId,
-    sourceDigest: approval.sourceDigest,
-    candidateDigest: approval.candidateDigest,
-    visibleStructureDigest: approval.visibleStructureDigest,
-    analysisDigest: approval.analysisDigest,
-    ...(approval.importProfile
-      ? {
-          importProfile: approval.importProfile,
-          paragraphSummariesDigest: approval.paragraphSummariesDigest,
-          publicSearchMetadataDigest: approval.publicSearchMetadataDigest,
-        }
-      : {}),
-    bundleDigest: approval.bundleDigest,
-  }
+  const identity = exactApprovalIdentity(status.approval, paperId)
   console.log(JSON.stringify({
     action: retry ? 'retry_ship' : 'ship',
     paperId,
@@ -1079,14 +1266,88 @@ async function promote(paperId) {
   }, null, 2))
 }
 
+async function requestPublication(paperId) {
+  const revisionId = option('--revision')
+  if (!revisionId) fail('request-publication requires --revision <exact preview revision ID>')
+  const status = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`)
+  if (status.latestRevisionId !== revisionId) fail('--revision must be the exact latest finalized preview revision')
+  const target = publicationCapabilityPath(paperId)
+  mkdirSync(path.dirname(target), { recursive: true, mode: 0o700 })
+  const lock = `${target}.lock`
+  try { mkdirSync(lock, { mode: 0o700 }) } catch (error) {
+    if (error.code === 'EEXIST') fail('Publication request is locked; reconcile the existing operation before clearing its lock')
+    throw error
+  }
+  try {
+  let capability
+  if (existsSync(target)) {
+    capability = readPublicationCapability(paperId)
+    if (process.argv.includes('--new-request')) {
+      const { request } = await api(`/api/import-agent-reviews/publication-requests/${encodeURIComponent(capability.requestId)}`)
+      const retired = request.state === 'revoked'
+        || (['pending', 'granted'].includes(request.state) && request.expired === true)
+        || (request.state === 'consumed' && request.promotion?.state === 'published')
+      if (!retired) throw new Error('Existing request is still live or its promotion is unresolved; preserve it and reconcile before renewal')
+      const archive = `${target}.${capability.requestId}`
+      if (existsSync(archive)) throw new Error('Capability archive already exists; reconcile without overwriting it')
+      renameSync(target, archive)
+      capability = null
+    } else if (capability.revisionId !== revisionId) {
+      throw new Error('Existing capability targets another revision; reconcile status then use --new-request after expiry, revocation or published completion')
+    }
+  }
+  if (!capability) {
+    capability = { paperId, revisionId, requestId: `publication-request-${randomUUID()}`,
+      requestSecret: randomBytes(32).toString('base64url') }
+    writeFileSync(target, `${JSON.stringify(capability, null, 2)}\n`, { flag: 'wx', mode: 0o600 })
+  }
+  chmodSync(target, 0o600)
+  const result = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/publication-requests`, {
+    method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ requestId: capability.requestId, revisionId,
+      secretHash: sha256(capability.requestSecret), ampThreadId: process.env.AMP_THREAD_ID || undefined }),
+  })
+  console.log(JSON.stringify({ request: result.request, confirmationUrl: `${origin()}/api/import-reviews/publication-requests/${result.request.requestId}/confirmation`, capabilityFile: target }, null, 2))
+  } finally {
+    rmSync(lock, { recursive: true })
+  }
+}
+
+function readPublicationCapability(paperId) {
+  const target = publicationCapabilityPath(paperId)
+  if (!existsSync(target)) fail(`No local publication capability for ${paperId}`)
+  const capability = JSON.parse(readFileSync(target, 'utf8'))
+  if (capability.paperId !== paperId || !/^publication-request-[0-9a-f-]{36}$/i.test(capability.requestId || '')
+    || !/^[A-Za-z0-9_-]{43}$/.test(capability.requestSecret || '')) fail('Invalid retained publication capability; preserve it for reconciliation')
+  return capability
+}
+
+async function publicationStatus(paperId) {
+  const capability = readPublicationCapability(paperId)
+  const result = await api(`/api/import-agent-reviews/publication-requests/${encodeURIComponent(capability.requestId)}`)
+  console.log(JSON.stringify(result, null, 2))
+}
+
+async function redeemPublication(paperId) {
+  const capability = readPublicationCapability(paperId)
+  const result = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/publication-requests/${encodeURIComponent(capability.requestId)}/redeem`, {
+    method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ requestSecret: capability.requestSecret }),
+  })
+  console.log(JSON.stringify({ ...result, backupBoundary: 'Production R2 backup remains asynchronous and is not part of this receipt.' }, null, 2))
+}
+
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
-  if (command !== 'promote') assertNotNck1SourceOnly(paperId, command)
+  if (!['promote', 'request-publication', 'publication-status', 'redeem-publication'].includes(command)) assertNotNck1SourceOnly(paperId, command)
   if (command === 'push') await pushRevision(paperId)
   else if (command === 'pagination-qa') await paginationQa(paperId)
   else if (command === 'hydrate') await hydrate(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
+  else if (command === 'proofread-ocr') await proofreadOcr(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
+  else if (command === 'finalize-ocr-correction-report') finalizeOcrCorrectionReport(paperId)
+  else if (['prepare-spelling', 'finalize-spelling', 'verify-spelling'].includes(command)) spellingReview(paperId, command)
+  else if (command === 'preprocessing-report') preprocessingReport(paperId)
   else if (command === 'preflight') await preflight(paperId)
   else if (command === 'verify-analyses') verifyAnalyses(paperId)
   else if (command === 'prepare-summaries') prepareSummaries(paperId)
@@ -1099,15 +1360,22 @@ async function main() {
   else if (command === 'accept') await accept(paperId)
   else if (command === 'publish') await publish(paperId)
   else if (command === 'promote') await promote(paperId)
+  else if (command === 'request-publication') await requestPublication(paperId)
+  else if (command === 'publication-status') await publicationStatus(paperId)
+  else if (command === 'redeem-publication') await redeemPublication(paperId)
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
-      + 'pagination-qa <paperId> --edition friendly8|friendly10 [--auto | --break-slots a,b --cover-gaps 54,54] [--save-plan] [--output dir] | hydrate <paperId> | '
-      + 'push-ocr <paperId> | pull-ocr-confirmation <paperId> [--revision rev-id] | '
+      + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b (requires saved layout)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> | '
+      + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | '
+      + 'finalize-ocr-correction-report <paperId> --input <entries.json> | '
+      + 'prepare-spelling <paperId> --output <request.json> | finalize-spelling <paperId> --input <review.json> | verify-spelling <paperId> | '
+      + 'preprocessing-report <paperId> --evidence <evidence.json> --output <report.md> | '
       + 'preflight <paperId> | verify-analyses <paperId> | prepare-summaries <paperId> --output <request.json> | verify-summaries <paperId> | prepare-search-metadata <paperId> --output <request.json> | finalize-search-metadata <paperId> --input <authored.json> | verify-search-metadata <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '
       + 'promote <paperId> --owner-said-ship|--owner-said-retry-ship | '
+      + 'request-publication <paperId> --revision <exact-preview-id> | publication-status <paperId> | redeem-publication <paperId> | '
       + 'release-ship-guard <paperId> <guardId> --owner-said-abort-ship',
   )
 }

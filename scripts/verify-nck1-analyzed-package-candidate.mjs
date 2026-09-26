@@ -111,7 +111,7 @@ assert.deepEqual(imported.issues, [])
 assert.equal(imported.candidate.schemaVersion, 'trusted-nck1-analyzed-package-import-candidate-v1')
 assert.deepEqual(imported.candidate.authority, nck1AnalyzedPackageCandidateAuthorityRef55)
 assert.equal(imported.candidate.authority.manifestVersion, '55')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '54')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '57')
 const derivedContent = deriveNck1AnalyzedPackageBundle(input).materialization
 assert.equal(derivedContent.schemaVersion, 'nck1-analyzed-package-content-v1')
 assert.equal(Object.hasOwn(derivedContent, 'documents'), false)
@@ -121,7 +121,7 @@ const rawAdapters = resolveCanonicalAuthority(
 ).closure.artifacts.adapter.adapters
 assert.equal(rawAdapters.some((adapter) =>
   adapter.adapterId === 'nck1-analyzed-package'), false,
-'immutable raw v54 adapter registry rejects analyzed-package extraction')
+'raw successor retains the immutable v54 adapter registry and rejects analyzed-package extraction')
 assert(imported.candidate.source.members.some((member) => member.role === 'analysis'))
 
 const reviewRoot = mkdtempSync(path.join(tmpdir(), 'eqb-analyzed-review-'))
@@ -218,6 +218,25 @@ assert.throws(() => sealCanonicalPublication({
 const admitted = admitLiveConfirmedNck1AnalyzedPackageImport(materialized.request)
 assert.deepEqual(admitted.sourceAsset, input.members[0].bytes,
   'publication sourceAsset is the actual captured content member')
+for (const [side, separator] of [['left', ''], ['right', ''], ['left', '\uFEFF']]) {
+  const missingInput = packageInput({ mutateContent(content) {
+    const inlines = content.groups.find(group => group.family === 'cloze').blocks[0].content
+    if (side === 'left') inlines[0].text = inlines[0].text.trimEnd() + separator
+    else inlines[2].text = inlines[2].text.trimStart()
+  } })
+  const missing = importCanonicalCandidate(missingInput)
+  assert.deepEqual(missing.issues, [], 'historical package derivation is unchanged')
+  const request = materializeNck1CanonicalRequest(missingInput, {
+    schemaVersion: 'teacher-confirmation-v1', confirmed: true,
+    candidateDigest: missing.candidate.candidateDigest,
+    sourceDigest: missing.candidate.source.sha256,
+  }).request
+  assert.equal(compileCanonicalPaper(request).disposition, 'ready')
+  assert.throws(() => admitLiveConfirmedNck1AnalyzedPackageImport(request),
+    error => error.code === (separator ? 'INLINE_BLANK_BOUNDARY_REVIEW_REQUIRED' : 'INLINE_BLANK_SEPARATOR_MISSING')
+      && error.diagnostics.some(issue => issue.side === side),
+    `fresh ${side}-missing package must fail the shared new-write gate`)
+}
 const alternateContentInput = packageInput({ contentMemberId: 'paper-content.v1' })
 const alternateCandidate = importCanonicalCandidate(alternateContentInput)
 assert.deepEqual(alternateCandidate.issues, [])
@@ -335,7 +354,7 @@ try {
     hasComparison: Object.hasOwn(listeningReview.audio, 'comparison'),
     hasCheck: Object.hasOwn(listeningReview.audio, 'check'),
   }, {
-    state: 'pending_external_playback_review',
+    state: 'included_in_candidate_review',
     path: 'analyzed-package/listening-audio.mp3',
     reviewRequired: true,
     hasEngine: false,

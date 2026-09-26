@@ -17,6 +17,9 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../shared/paper-canonical/compiler.mjs'
+import { validateInlineBlankTextBoundaries } from '../shared/paper-canonical/inlineBlankBoundaries.mjs'
+import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
@@ -218,6 +221,7 @@ const canonical = imported(confirmed)
 assert.deepEqual(canonical.issues, [])
 const preview = compileNck1MaterializationCandidatePreview(canonical.candidate)
 assert(preview.compilation, JSON.stringify(preview.unresolvedIssues, null, 2))
+assert.deepEqual(validateInlineBlankTextBoundaries(preview.compilation.artifacts.canonicalPaper.questionGroups), [], 'OCR source separators survive materialization across all three blank families')
 const captured = preview.compilation.artifacts.sourceCapture.documents
 for (const pages of fixture.pageSets) {
   for (const page of pages) {
@@ -296,7 +300,7 @@ try {
   }
 
   assert.match(run('materialize', paperId), /"disposition": "needs_agent_review"/u)
-  assert.match(runFailure('verify', paperId), /MATERIALIZATION_UNRESOLVED_ISSUES/u)
+  assert.match(runFailure('verify', paperId), /SPELLING_REVIEW_INVALID/u)
 
   const driftPage = bundleRecords[0].pages[0]
   const driftPath = path.join(cliPaperDir, driftPage.path)
@@ -326,7 +330,24 @@ try {
   assert.match(run('materialize', paperId), /"disposition": "needs_agent_review"/u)
   assert.match(run('confirm-ocr', paperId, confirmationPath), /"confirmedItems":/u)
   assert.match(run('materialize', paperId), /"disposition": "ready_for_verification"/u)
+  const spellingReview = prepareSpellingReview(new Uint8Array(readFileSync(path.join(cliPaperDir, manifest.materializationPath))), TEXT_REVIEW_POLICY)
+  spellingReview.reviewedBy = 'import_agent'
+  spellingReview.reviewedAt = '2026-09-21T00:00:00Z'
+  spellingReview.targets.forEach(target => { target.decision = 'unchanged' })
+  writeFileSync(path.join(cliPaperDir, SPELLING_REVIEW_FILE), JSON.stringify(spellingReview))
+  const blockedPath = path.join(cliPaperDir, 'signals/blocked.json')
+  const historicalBlock = `${JSON.stringify({
+    code: 'source_incomplete',
+    at: '2026-09-21T00:00:00Z',
+    note: 'Spelling review: required review is missing; run prepare-spelling',
+  })}\n`
+  writeFileSync(blockedPath, historicalBlock)
   assert.match(run('verify', paperId), /"groups": 9/u)
+  assert.equal(existsSync(blockedPath), false, 'successful verify retires its recovered spelling blocker')
+  const archivedBlockPath = path.join(cliPaperDir, 'signals/history',
+    `blocked-${sha256(Buffer.from(historicalBlock))}.json`)
+  assert.equal(readFileSync(archivedBlockPath, 'utf8'), historicalBlock,
+    'recovered blocker evidence remains byte-identical in history')
   assert.match(run('verify', paperId), /"assertions": 45/u)
   assert.match(run('build', paperId), /BUILT CANDIDATE/u)
   const summaryRequestPath = path.join(tempRoot, 'paragraph-summaries-request.json')
