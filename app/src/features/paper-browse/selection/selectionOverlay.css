@@ -592,7 +592,7 @@
 }
 
 .paper-dictionary-rare-toggle svg {
-  transition: transform var(--motion-fast, 120ms) var(--ease-out, ease-out);
+  transition: transform var(--motion-fast) var(--ease-out);
 }
 
 .paper-dictionary-rare-toggle[aria-expanded="true"] svg {
@@ -731,7 +731,7 @@
 }
 
 .paper-dictionary-credits-toggle svg {
-  transition: transform var(--motion-fast, 120ms) var(--ease-out, ease-out);
+  transition: transform var(--motion-fast) var(--ease-out);
 }
 
 .paper-dictionary-credits-toggle[aria-expanded="true"] svg {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Check } from '../../icons'
 import { addNotebookContext, enrichNotebookContext, fetchNotebookSelectionState } from '../../services/vocabularyNotebook.ts'
 
 type Segment = { streamId: string; start: number; end: number; selectedText: string }
@@ -57,7 +58,7 @@ export function NotebookAddButton({
 
   const label = state === 'checking' ? '正在检查…'
     : state === 'saving' ? '正在加入…'
-    : state === 'occurrence-exists' ? '✓ 已加入生词本'
+    : state === 'occurrence-exists' ? '已加入生词本'
     : state === 'entry-exists' ? '＋ 加入此语境'
     : state === 'failed' ? '加入失败，重试'
     : '＋ 加入生词本'
@@ -70,6 +71,7 @@ export function NotebookAddButton({
         disabled={state === 'checking' || state === 'saving' || state === 'occurrence-exists'}
         onClick={() => { if (state !== 'occurrence-exists') void add() }}
       >
+        {state === 'occurrence-exists' ? <Check size={14} aria-hidden="true" /> : null}
         {label}
       </button>
       {note ? <p className="paper-dictionary-note">{note}</p> : null}

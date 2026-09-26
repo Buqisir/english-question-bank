@@ -529,6 +529,12 @@ async function assertActualPaperSurface() {
           })
           assert.equal(await blank.count(), 1)
           await blank.click()
+          // 圈词把普通点击的讲评焦点推迟约 500ms，用来躲开拖选和双击。
+          await page.waitForFunction(
+            (el) => el instanceof HTMLElement && el.getAttribute('aria-pressed') === 'true',
+            await blank.elementHandle(),
+            { timeout: 1500 },
+          )
           assert.equal(await blank.getAttribute('aria-pressed'), 'true')
         }
       }
