@@ -60,6 +60,7 @@ import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, use
 import { BoardList, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
+import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
 // ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**
@@ -466,18 +467,14 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
         * sectionHeadingRuntime.screen.fontSizePx
       - sectionHeadingRuntime.screen.lineHeightPx,
     )}px`,
-  '--ps-part-to-first-section-glyph-overhang':
-    `${(
-      paperTypographyRuntime.partToFirstSectionGeometry
-        .visibleGlyphHeightToFontSizeRatio.screen
-      - 1
-    ) * sectionHeadingRuntime.screen.fontSizePx}px`,
   '--ps-group-instruction-indent':
     `${sectionHeadingRuntime.screen.groupInstructionFirstLineIndentEm}em`,
   '--ps-seven-merged-instruction-margin-bottom':
     `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.mergedInstructionMarginBottomPx}px`,
-  '--ps-seven-following-section-margin-top-adjustment':
-    `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.followingSectionMarginTopAdjustmentPx}px`,
+  // Ordinary part boundaries leave one empty line (two line-to-line steps).
+  // The sheet, not the preceding question family or lecture mode, owns it.
+  '--pb-part-boundary-gap':
+    `${sectionHeadingRuntime.screen.lineHeightPx}px`,
   '--ps-seven-adjacent-chrome-margin-top-adjustment':
     `${sevenChoicesRhythm.visibleGeometryAdjustments.screen.adjacentChromeMarginTopAdjustmentPx}px`,
   '--ps-cloze-baseline-step':
@@ -490,10 +487,6 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
     `${grammarFillRhythm.rendererMapping.screen.instructionMarginBottomPx}px`,
   '--ps-grammar-fill-following-section-margin-top':
     `${grammarFillRhythm.rendererMapping.screen.followingSectionMarginTopPx}px`,
-  '--ps-grammar-fill-writing-margin-plain':
-    `${grammarFillRhythm.rendererMapping.screen.writingCardMarginTopPx.plain}px`,
-  '--ps-grammar-fill-writing-margin-lecture':
-    `${grammarFillRhythm.rendererMapping.screen.writingCardMarginTopPx.lecture}px`,
   '--ps-passage-indent':
     `${sectionHeadingRuntime.screen.passageFirstLineIndentEm}em`,
   '--ps-page-margin-x': paperSurfaceTokens.pageMarginX,
@@ -506,7 +499,8 @@ const LECTURE_RAIL_WIDTH = 72
 const GUTTER_WIDTH = 140
 const PAPER_BASE_WIDTH = 794
 const GRID_GAP = 24
-const DOCKED_LECTURE_MIN_WIDTH = 1200
+// 794px paper + 440px notes + 72px rail + gaps and shell padding must fit.
+const DOCKED_LECTURE_MIN_WIDTH = 1440
 
 function railGroupLabel(title: string): string {
   const trimmed = title.trim()
@@ -518,6 +512,30 @@ function railGroupLabel(title: string): string {
 function readingLectureLabel(title: string): string {
   const label = railGroupLabel(title)
   return /^[A-D]$/.test(label) ? `阅读 ${label}` : title
+}
+
+function canonicalRailLabel(
+  consumption: WholePaperConsumption | null,
+  groupId: string,
+): string | null {
+  const node = consumption?.visibleStructure?.find(
+    (entry) => entry.kind === 'group' && entry.groupId === groupId,
+  )
+  if (node?.kind !== 'group') return null
+  const labels: Record<string, string> = {
+    'listening.short-dialogue': '第一节',
+    'listening.long-form': '第二节',
+    'reading.a': 'A篇',
+    'reading.b': 'B篇',
+    'reading.c': 'C篇',
+    'reading.d': 'D篇',
+    'reading.seven-choices': '七选五',
+    'language.cloze': '完形',
+    'language.grammar-fill': '语法',
+    'writing.application': '应用文',
+    'writing.continuation': '续写',
+  }
+  return labels[node.slotId] ?? null
 }
 
 function paperBrowseDisplayTitle(
@@ -717,6 +735,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [assetBase, setAssetBase] = useState<string | null>(null)
   const [canonicalConsumption, setCanonicalConsumption] =
     useState<WholePaperConsumption | null>(null)
+  const activeAudioRef = useRef<HTMLAudioElement | null>(null)
+  const activateAudio = useCallback((audio: HTMLAudioElement) => {
+    if (activeAudioRef.current !== audio) activeAudioRef.current?.pause()
+    activeAudioRef.current = audio
+  }, [])
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -2411,10 +2434,29 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
     if (entry.kind === 'listening') {
       const isPanelGroup = lectureOpen && panelGroupId === groupId
+      const audio = canonicalConsumption?.listeningAudio
+      const listeningPlayers = audio?.segments ? Object.fromEntries(audio.segments.map((segment) => [
+        segment.firstQuestionId,
+        <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
+          label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
+            : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
+          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} />,
+      ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
           <PaperSurface
             {...entry.model.surfaceData}
+            listeningPlayers={listeningPlayers}
+            listeningPartPlayer={audio && (
+              <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
+                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full"
+                marks={audio.segments?.map((segment) => ({
+                  startSeconds: segment.startSeconds,
+                  endSeconds: segment.endSeconds,
+                  label: segment.questionNumbers.length === 1 ? String(segment.questionNumbers[0])
+                    : `${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)}`,
+                }))} />
+            )}
             annotations={[]}
             mode="lecture"
             lectureFocus={
@@ -2491,6 +2533,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
     const surfaceEl = (
       <PaperSurface
+        roleLayout={'roleLayout' in surfaceData && surfaceData.roleLayout === 'golden_reference_v1'
+          ? surfaceData.roleLayout : undefined}
         textMap={surfaceData.textMap}
         semanticParagraphs={surfaceData.semanticParagraphs}
         canonicalGrammarFillScreenRuling={grammarFillScreenRulingFromSurfaceData(surfaceData)}
@@ -3860,16 +3904,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 // Writing groups read 「应用文 / 续写」 in both rail widths
                 // (owner 2026-09-15: one name, not 「第一节 / 第二节」 wide
                 // and 「应用文 / 续写」 narrow).
-                const fullTitle = (card && railWritingLabel(card)) ?? railGroupLabel(g.title)
-                const displayTitle = railLectureShortLabel(fullTitle, card)
+                const canonicalTitle = canonicalRailLabel(canonicalConsumption, g.anchor)
+                const fullTitle = canonicalTitle
+                  ?? (card && railWritingLabel(card)) ?? railGroupLabel(g.title)
+                const displayTitle = canonicalTitle ?? railLectureShortLabel(fullTitle, card)
                 const inCurrentDraft = card?.draftPaperButtonState === 'in_current_draft'
-                const ariaLabel = displayTitle === g.title
-                  ? inCurrentDraft
-                    ? `${fullTitle}，已在草稿卷`
-                    : undefined
-                  : inCurrentDraft
-                    ? `${g.title}，已在草稿卷`
-                    : g.title
+                const ariaLabel = inCurrentDraft
+                  ? `${displayTitle}，已在草稿卷`
+                  : displayTitle
                 return (
                   <button
                     key={g.anchor}
@@ -3880,7 +3922,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                     }`}
                     aria-current={isActive ? 'true' : undefined}
                     aria-label={ariaLabel}
-                    title={displayTitle === g.title ? undefined : g.title}
+                    title={displayTitle}
                     onClick={() => scrollToAnchor(g.anchor)}
                   >
                     <span className="paper-browse-rail-group-label">
@@ -4013,7 +4055,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       && asset.content.groups[block.groupId]?.groupType === 'listening',
   )
   return (
-    <div className="paper-browse-page">
+    <div className={`paper-browse-page${reviewRevision ? ' paper-browse-page--review' : ''}`}>
       <AppTopbar
         {...shellNav}
         pageTitle={displayTitle}
@@ -4041,13 +4083,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         </nav>
         {paperSelection.overlay}
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentMergedStyle}>
-          {canonicalConsumption?.listeningAudio && (
-            <div className="paper-browse-audio">
-              <audio controls preload="metadata" aria-label="整卷听力录音" src={canonicalConsumption.listeningAudio.url}>
-                浏览器不支持音频播放。
-              </audio>
-            </div>
-          )}
           <div className="paper-browse-zoom">
             {showListeningOpening && (
               <header className="canonical-paper-opening" data-canonical-paper-opening="">

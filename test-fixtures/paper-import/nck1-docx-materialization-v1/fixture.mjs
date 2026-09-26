@@ -155,13 +155,13 @@ function questionBlocks({
   circledNoticeNumbering = false,
 } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
-    paragraph(`A short guide has ${36 + index}._____ for learners.`))
+    paragraph(`  A short guide has ${36 + index}._____ for learners.  `))
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
     paragraph(`${label}. ${label} option sentence.`))
   const clozeText = Array.from({ length: 15 }, (_, index) =>
-    `${41 + index}._____`).join(' ')
+    `${41 + index}._____`).join(' and ')
   const grammarText = Array.from({ length: 10 }, (_, index) =>
-    `${56 + index}._____(${index % 2 === 0 ? 'learn' : 'word'})`).join(' ')
+    `${56 + index}._____(${index % 2 === 0 ? 'learn' : 'word'})`).join(' and ')
   return [
     paragraph('Synthetic NCK1 paper'),
     ...(listening ? [

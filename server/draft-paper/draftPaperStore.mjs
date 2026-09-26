@@ -22,12 +22,15 @@ import {
   loadGroupOfficialModelAnswers,
 } from './analysisText.mjs'
 import { renderPaginatedPaper } from './paginationRenderer.mjs'
+import { STUDENT_PRODUCT_EDITIONS, studentProductPolicy, planStudentProductPdf, renderExplicitStudentProductPdf } from './studentProductPdf.mjs'
 import {
   fixedPageLayoutPolicy,
   planFixedPagePdf,
+  planLongPaperPdf,
   renderExplicitFixedPagePdf,
 } from './fixedPagePdfPlanner.mjs'
 import {
+  FIXED_PAGINATION_EDITIONS,
   loadBoundPaperPaginationPlan,
   paginationPlanEdition,
   paginationSlotBindings,
@@ -1504,7 +1507,7 @@ export function createDraftPaperStore({
   async function exportDraftPaperPdf(userId, draftPaperId, { versionType = 'student', pageLayout = 'natural' } = {}) {
     requireUserId(userId)
     const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
-    if (!['natural', 'friendly8', 'friendly10'].includes(pageLayout)) throw new Error('pageLayout is invalid')
+    if (pageLayout !== 'natural' && !FIXED_PAGINATION_EDITIONS.includes(pageLayout)) throw new Error('pageLayout is invalid')
     if (pageLayout !== 'natural' && normalizedVersionType !== 'student') throw new Error('友好定页导出仅支持学生卷')
     let pagination
     if (pageLayout === 'natural') {
@@ -1519,14 +1522,15 @@ export function createDraftPaperStore({
         const canonicalConsumption = resolveDraftCanonicalConsumption(draftPaper)
         const sourceHasListening = canonicalConsumption?.selections?.some((selection) =>
           selection.mode === 'canonical' && selection.familyContractId === 'listening' && selection.groupIds?.length === 2) ?? false
-        const { includeListening, targetPages, omitCover } = fixedPageLayoutPolicy(pageLayout, listeningCount, sourceHasListening)
+        const product = STUDENT_PRODUCT_EDITIONS.includes(pageLayout)
+        const { includeListening, targetPages, omitCover } = (product ? studentProductPolicy : fixedPageLayoutPolicy)(pageLayout, listeningCount, sourceHasListening)
         const renderedGroupIds = draftPaper.items
           .filter((item) => includeListening || item.questionGroup?.groupType !== 'listening')
           .map((item) => item.groupId)
         if (draftPaper.items.some((item) => item.groupMissing)
           || !ownsCompletePaperOpening(canonicalConsumption, draftPaper.items.map((item) => item.groupId))
           || !ownsCompletePaperOpening(canonicalConsumption, renderedGroupIds)) {
-          throw new Error('8／10 页版需要按原顺序排列的同源完整试卷；部分题组或混编练习请使用普通 PDF 导出')
+          throw new Error('定页版需要按原顺序排列的同源完整试卷；部分题组或混编练习请使用普通 PDF 导出')
         }
         const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: 'student', includeListening, canonicalConsumption })
         const slotBindings = paginationSlotBindings(canonicalConsumption)
@@ -1545,8 +1549,10 @@ export function createDraftPaperStore({
         })
         const explicit = paginationPlanEdition(loadedPlan?.plan, pageLayout, slotBindings)
         const fixed = explicit
-          ? await renderExplicitFixedPagePdf(html, { ...explicit, render: renderPaginatedPaper })
-          : await planFixedPagePdf(html, { targetPages, omitCover, render: renderPaginatedPaper })
+          ? await (product ? renderExplicitStudentProductPdf : renderExplicitFixedPagePdf)(html, { ...explicit, render: renderPaginatedPaper })
+          : await (product ? planStudentProductPdf : pageLayout === 'long10' || pageLayout === 'long12' ? planLongPaperPdf : planFixedPagePdf)(html, {
+            targetPages, omitCover, edition: pageLayout, render: renderPaginatedPaper,
+          })
         pagination = { ...fixed, draftPaper, reused: false }
       } finally {
         userDb.close()
@@ -1556,7 +1562,12 @@ export function createDraftPaperStore({
     const draftPaper = pagination.draftPaper
     const safeTitle = String(draftPaper.title || '英语草稿卷').replace(/[\\/:*?"<>|]/g, '-')
     const versionLabel = normalizedVersionType === 'teacher' ? '教师卷' : '学生卷'
-    const layoutLabel = pageLayout === 'natural' ? '' : pageLayout === 'friendly10' ? '-10页含听力' : '-8页无听力'
+    const layoutLabel = pageLayout === 'natural' ? ''
+      : STUDENT_PRODUCT_EDITIONS.includes(pageLayout)
+        ? `-${pageLayout === 'economy8' ? '省纸版' : pageLayout === 'largeComplete' ? '大字完整版' : '大字无听力版'}-${pagination.fontSizePt === 12 ? '小四' : '五号'}-${pagination.pageCount}页`
+        : pageLayout === 'friendly10' ? '-10页含听力'
+        : pageLayout === 'friendly8' ? '-8页无听力'
+          : `-长卷${pageLayout === 'long12' ? '含听力' : '无听力'}-实${pagination.pageCount}页`
     const fileName = `${safeTitle}-${versionLabel}${layoutLabel}.pdf`
     // last_printed_at only ever bumps on an actual export (never on a bare preview
     // fetch) — kept as its own short-lived userDb connection here rather than folded
@@ -1569,6 +1580,7 @@ export function createDraftPaperStore({
       userDb.close()
     }
     return { body: pagination.pdfBytes, fileName, outputPath: '', draftPaper, reusedRecent: pagination.reused === true,
+      fontSizePt: pagination.fontSizePt,
       crossingGroupCount: pagination.crossingGroupIds?.length ?? 0,
       splitOptionBankCount: pagination.splitOptionBankCount ?? 0 }
   }

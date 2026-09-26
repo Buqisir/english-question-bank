@@ -4,6 +4,7 @@ import { translateAbcdPlanToPointPlacement } from '../paper-canonical/abcdLayout
 import { projectListeningGroupPresentation } from '../paper-canonical/listeningPresentation.mjs'
 import { continuationWritingPresentation } from '../paper-canonical/writingPresentation.mjs'
 import { blankPresentationParagraphs } from '../paper-canonical/blankPresentation.mjs'
+import { resolveConsumerPresentation } from '../paper-canonical/consumers.mjs'
 import {
   projectCanonicalConsumerGroup,
   projectCanonicalWritingChrome,
@@ -265,6 +266,7 @@ export function buildCanonicalConsumptionSurfaceData({
       (question) => question.placementSignature,
     ),
     surfaceData: {
+      roleLayout: resolveConsumerPresentation(consumption.consumerContractRef)?.policy.roleLayout,
       textMap: {
         paperId: canonicalGroup.paperId,
         paragraphs: paragraphModels.map((model) => model.textMapParagraph),
@@ -356,6 +358,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
     richBlocks: canonicalGroup.blocks,
     anchors: canonicalGroup.anchors,
     surfaceData: {
+      roleLayout: resolveConsumerPresentation(consumption.consumerContractRef)?.policy.roleLayout,
       textMap: {
         paperId: canonicalGroup.paperId,
         paragraphs: textMapParagraphs,
@@ -512,6 +515,7 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
       ],
     },
     surfaceData: {
+      roleLayout: resolveConsumerPresentation(consumption.consumerContractRef)?.policy.roleLayout,
       textMap: {
         paperId: canonicalGroup.paperId,
         paragraphs,
@@ -620,6 +624,7 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
       ],
     },
     surfaceData: {
+      roleLayout: resolveConsumerPresentation(consumption.consumerContractRef)?.policy.roleLayout,
       textMap: {
         paperId: canonicalGroup.paperId,
         paragraphs,

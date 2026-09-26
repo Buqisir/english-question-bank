@@ -1,10 +1,16 @@
 # Orb 导题与单卷生产发布闭环
 
-Status: repository implementation complete; production activation blocked
+Status: scoped delegation implemented default-off; production activation blocked
 Date: 2026-08-30
 Production activation: blocked on later direct Owner approval
 
 ## Outcome
+
+Current entrypoint: an explicit Owner conversation in the dedicated Import
+Project, one paper per thread. Webhook dispatch is retired; section 1 below
+preserves the historical binding/recovery contract, not an instruction to resume
+automatic intake. The Owner gets an exact ordinary-website preview and OCR report
+in Amp chat. No source-ledger or OPS navigation is required for new imports.
 
 Complete the generic loop without putting an LLM or deployment action in the
 website:
@@ -81,6 +87,85 @@ reservation, digest mismatch, and conflicting paper id all fail closed. The
 plugin remains inert until separately enabled and connected.
 
 ## 2. Single-paper promotion
+
+### Scoped publication delegation (default off)
+
+Dedicated import threads may use a second, bounded route without receiving the
+long-lived shipping credential. The server must be started with
+`QUESTION_BANK_SCOPED_PUBLICATION_ENABLED=true`; the Agent token by itself does
+not enable or authorize this route. This setting is intentionally not activated
+by this cut.
+
+For a reverse-proxied preview, configure `QUESTION_BANK_IMPORT_REVIEW_OWNER_ORIGIN`
+to the exact browser-visible managed portal origin. It defaults to
+`QUESTION_BANK_PUBLIC_ORIGIN`; a separate value keeps server-rendered asset
+fetches on the local app while validating browser POST origins independently.
+Neither arbitrary forwarded headers nor a wildcard origin supplies authority.
+
+Deployment also requires explicit approval for the new
+`import_review_publication_requests` Review database table: the existing store
+initialization creates it even while the HTTP feature is disabled. Default-off
+does not mean schema-free. Do not use an ordinary code-only deployment Goal for
+this cut; include the reviewed schema/configuration change and recovery boundary.
+
+1. `request-publication <paperId> --revision <exact-preview-id>` requires the
+   explicit latest finalized Candidate revision. It generates a client request
+   ID and random local capability, persists both mode 0600 under ignored
+   `data/import-publication-requests/` *before* registration, and registers only
+   the capability SHA-256. Registration is idempotent for that request ID and
+   exact target/hash. An existing capability is validated and reused; it is
+   never overwritten. The short-lived request binds paper, revision, source,
+   Candidate, visible structure, analysis, bundle, renderer, and authenticated
+   Agent principal. It may be created while awaiting review or after exact
+   approval. `AMP_THREAD_ID`, when present, is audit metadata only.
+2. The Owner opens the cookie-authenticated `/api/import-reviews/publication-requests/<requestId>/confirmation`
+   page. GET is read-only. For an awaiting-review Candidate, the first
+   authenticated same-origin + CSRF-protected action uses the existing
+   `approveRevision` gate to record layout approval. A separate second action
+   records publication delegation. Already-approved exact Candidates skip the
+   first action. Layout approval atomically binds the resulting approval ID to
+   the pending request. A lost response or reload retains that ID; a duplicate
+   exact approval returns it, without granting publication. Expired/revoked
+   requests cannot approve. A replacement approval requires a new request.
+3. `redeem-publication` presents Agent authentication plus the private request
+   secret. One `BEGIN IMMEDIATE` transaction revalidates latest approval and
+   renderer state, consumes the grant, and creates the durable shipping guard
+   and promotion. Competing redemption observes the one retained operation.
+4. A consumed replay returns retained status. It neither converts the request
+   to `retry_ship` nor invokes another publication. Existing explicit
+   retry/UNKNOWN/abort recovery and the legacy ship-token path are unchanged.
+5. The Owner can revoke pending/granted requests. Explicit `--new-request`
+   checks server status and archives the old private capability without deleting
+   it, only after expiry/revocation or published completion. It cannot replace a
+   consumed publishing/failed/UNKNOWN operation. A per-paper local lock excludes
+   concurrent renewal; interruption preserves the lock for reconciliation.
+
+The server fails closed for disabled configuration, missing Owner grant,
+expiry/revocation, wrong principal or capability, cross-paper use, and
+approval/revision/bundle/renderer drift. A normal Amp chat reply is not an
+authenticated Owner grant. Fully chat-only publication remains blocked until a
+trusted authenticated Amp-to-server bridge exists.
+
+Normal Agent commands are:
+
+```text
+node scripts/import-pipeline/review.mjs request-publication <paperId> --revision <exact-preview-id>
+node scripts/import-pipeline/review.mjs publication-status <paperId>
+node scripts/import-pipeline/review.mjs redeem-publication <paperId>
+```
+
+### Dedicated setup
+
+The Import Project uses `.agents/import-pre-setup` to select the ignored
+`.amp/orb-profile` marker. `.agents/setup --import` installs locked app/server
+dependencies, preview Chromium, OCR/document tools and signal-audio Python.
+It skips ASR model download/loading, CI user creation and development DB seeding;
+resume starts no service or dependency installation. Legacy setup modes remain.
+Keep the repository checkout intact; exact snapshots skip setup and stale
+snapshots retain package caches. Local warm runs measured 15.35s and 11.82s;
+an isolated shallow default-branch clone measured 8.37s. Neither measurement is
+an end-to-end cold-Orb launch measurement. Repository setup changes must
+reach the default branch before the Project selector can activate them.
 
 ### Authority and request
 

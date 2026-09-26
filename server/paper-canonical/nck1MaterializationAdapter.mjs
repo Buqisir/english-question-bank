@@ -6,6 +6,7 @@ import path from 'node:path'
 import {
   resolveCanonicalAuthority,
   nck1MaterializationCandidateAuthorityRef,
+  nck1MaterializationHistoricalAuthorityRef58,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   digestNck1SourceMaterialization,
@@ -18,8 +19,10 @@ import {
   exactKeys,
   sha256,
 } from '../../shared/paper-canonical/stable.mjs'
-import { extractDocxDocumentParagraphs } from './docxSourceAdapter.mjs'
+import { extractDocxDocumentParagraphs, extractDocxParagraphEmphasis } from './docxSourceAdapter.mjs'
+import { mapSourceEmphasisEdits, splitSourceEmphasis } from './sourceEmphasis.mjs'
 import { rasterPdfRegion } from './pdfRegionRaster.mjs'
+import { applySpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   nck1ImageExtension,
@@ -51,6 +54,10 @@ function cloneByteEntries(entries, idKey) {
 }
 
 export function isNck1MaterializationInput(value) {
+  if (value && Object.hasOwn(value, 'spellingReviewBytes')) {
+    const { spellingReviewBytes, ...original } = value
+    return spellingReviewBytes instanceof Uint8Array && isNck1MaterializationInput(original)
+  }
   return Boolean(
     value
     && (exactKeys(value, ['kind', 'materializationBytes', 'documents', 'media'])
@@ -90,6 +97,7 @@ export function cloneNck1MaterializationInput(value) {
     documents: cloneByteEntries(value.documents, 'documentId'),
     media: cloneByteEntries(value.media, 'mediaId'),
     ...(value.listeningAudio ? { listeningAudio: structuredClone(value.listeningAudio) } : {}),
+    ...(value.spellingReviewBytes ? { spellingReviewBytes: new Uint8Array(value.spellingReviewBytes) } : {}),
   }
 }
 
@@ -140,10 +148,11 @@ function parseMaterialization(bytes) {
   }
 }
 
-function bundleDigest(materializationBytes, documents, media, listeningAudio) {
+function bundleDigest(materializationBytes, documents, media, listeningAudio, spellingReviewBytes) {
   return digestJson({
     materialization: sha256(materializationBytes),
     ...(listeningAudio ? { listeningAudio } : {}),
+    ...(spellingReviewBytes ? { spellingReview: sha256(spellingReviewBytes) } : {}),
     documents: documents.map((entry) => ({
       documentId: entry.documentId,
       sha256: sha256(entry.bytes),
@@ -1069,8 +1078,8 @@ function observationForLocator(observationId, kind, locator, value, documentsByI
   }
 }
 
-function instructionEvidence(materialization, instructionDocument) {
-  const authority = resolveCanonicalAuthority(nck1MaterializationCandidateAuthorityRef)
+function instructionEvidence(materialization, instructionDocument, authorityRef) {
+  const authority = resolveCanonicalAuthority(authorityRef)
   const instruction = authority.closure.profiles.get('nck1')
     .instructions['writing.continuation.prompt']
   const continuation = materialization.groups.find((group) =>
@@ -1478,9 +1487,9 @@ export function deriveNck1SemanticSource(
   return source
 }
 
-function compilerDocuments(input, materialization, source, instructionDocument) {
+function compilerDocuments(input, materialization, source, instructionDocument, authorityRef) {
   const sourceBytes = textEncoder.encode(JSON.stringify(source))
-  const profileEvidence = instructionEvidence(materialization, instructionDocument)
+  const profileEvidence = instructionEvidence(materialization, instructionDocument, authorityRef)
   const documentsById = new Map(materialization.documents.map((document) => [
     document.documentId,
     document,
@@ -1508,6 +1517,12 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
         originalName: `${materialization.schemaVersion}.json`,
       },
     },
+    ...(input.spellingReviewBytes ? [{
+      inputKey: 'spelling_review',
+      roles: ['source_provenance'],
+      bytes: new Uint8Array(input.spellingReviewBytes),
+      declared: { mediaType: 'application/json', originalName: SPELLING_REVIEW_FILE },
+    }] : []),
     ...input.documents.flatMap((entry) => {
       const document = documentsById.get(entry.documentId)
       const sourceDocument = {
@@ -1579,15 +1594,70 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
   ]
 }
 
-export function deriveNck1MaterializationBundle(rawInput) {
+function appendReadingSourceEmphasis(source, raw, documentsById, review, issues) {
+  const paragraphsByDocument = new Map()
+  const corrections = new Map((review?.targets || []).map((target) => [target.jsonPointer, target.corrections]))
+  for (const [groupIndex, group] of raw.groups.entries()) {
+    if (group.family !== 'reading') continue
+    const derivedGroup = source.groups.find((item) => item.groupId === group.groupId)
+    const derivedBlocks = new Map(sourceOrderedParagraphEntries(derivedGroup.content.blocks, '')
+      .map(({ block }) => [block.nodeId, block]))
+    for (const { block, path: blockPath } of sourceOrderedParagraphEntries(group.blocks, `/groups/${groupIndex}/blocks`)) {
+      if (block.source.kind !== 'docx_part' || block.source.part !== 'word/document.xml') continue
+      try {
+        if (!paragraphsByDocument.has(block.source.documentId)) {
+          paragraphsByDocument.set(block.source.documentId,
+            extractDocxParagraphEmphasis(documentsById.get(block.source.documentId).bytes))
+        }
+        const matches = resolveDocxParagraphSelector(block.source.selector, paragraphsByDocument.get(block.source.documentId))
+        if (matches.length !== 1 || !matches[0].exact) throw new Error('Source emphasis needs one exact run-complete paragraph')
+        const paragraph = matches[0]
+        if (!paragraph.ranges.length) continue
+        const rawText = block.content.map((item) => item.kind === 'text' ? item.text : '').join('')
+        const leading = paragraph.text.length - paragraph.text.replace(/^\p{Zs}+/u, '').length
+        if (paragraph.text.slice(leading).replace(/\p{Zs}+$/u, '') !== rawText
+          || block.content.some((item) => item.kind !== 'text')) throw new Error('Source emphasis paragraph cannot map to literal text')
+        const derived = derivedBlocks.get(block.blockId)
+        let offset = 0
+        const inlines = []
+        for (const [index, item] of block.content.entries()) {
+          const ranges = paragraph.ranges.flatMap((range) => {
+            const start = Math.max(range.start - leading - offset, 0)
+            const end = Math.min(range.end - leading - offset, item.text.length)
+            return end > start ? [{ start, end, marks: range.marks }] : []
+          })
+          const pointer = `${blockPath.replace(/\[(\d+)\]/gu, '/$1').replaceAll('.', '/')}/content/${index}/text`
+          const mapped = mapSourceEmphasisEdits(item.text, ranges, corrections.get(pointer) || [])
+          if (derived.inlines[index].text !== mapped.text) throw new Error('Source emphasis editorial mapping differs from effective text')
+          inlines.push(...(ranges.length
+            ? splitSourceEmphasis(mapped.text, mapped.ranges, derived.inlines[index].nodeId)
+            : [derived.inlines[index]]))
+          offset += item.text.length
+        }
+        const observation = observationForLocator(`observation:source-emphasis:${block.blockId}`,
+          'source_reading_emphasis', block.source,
+          { blockId: block.blockId, ranges: paragraph.ranges }, documentsById)
+        observation.extraction.version = '3'
+        source.observations.push(observation)
+        derived.inlines = inlines
+        for (const inline of inlines) derivedGroup.sourceSpanRefsByTarget[`content_node:${inline.nodeId}`] = [`source-span:${observation.observationId}`]
+      } catch (error) {
+        issues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', error.message, blockPath))
+      }
+    }
+  }
+}
+
+export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1MaterializationCandidateAuthorityRef) {
   const input = cloneNck1MaterializationInput(rawInput)
   const sourceDigest = bundleDigest(
     input.materializationBytes,
     input.documents,
     input.media,
     input.listeningAudio,
+    input.spellingReviewBytes,
   )
-  const materialization = parseMaterialization(input.materializationBytes)
+  let materialization = parseMaterialization(input.materializationBytes)
   if (!materialization) {
     return {
       input,
@@ -1609,6 +1679,20 @@ export function deriveNck1MaterializationBundle(rawInput) {
       issues: validation.issues,
     }
   }
+  // Source fidelity (including exact native DOCX paragraphs) is checked above,
+  // before applying the separately bound, auditable editorial overlay.
+  const rawMaterialization = materialization
+  if (input.spellingReviewBytes) {
+    try {
+      materialization = applySpellingReview(input.materializationBytes, input.spellingReviewBytes)
+      verifyTerminalWhitespaceSourceEvidence(input.materializationBytes, input.spellingReviewBytes, input.documents)
+      const correctedIssues = validateNck1SourceMaterialization(materialization)
+      if (correctedIssues.length) throw new Error(correctedIssues[0].message)
+    } catch (error) {
+      return { input, sourceDigest, materialization, source: null, request: null,
+        issues: [adapterIssue('SPELLING_REVIEW_INVALID', error.message)] }
+    }
+  }
   const derivationIssues = []
   const source = deriveNck1SemanticSource(
     materialization,
@@ -1616,7 +1700,14 @@ export function deriveNck1MaterializationBundle(rawInput) {
     validation.mediaById,
     validation.instructionDocument,
     derivationIssues,
+    { authorityRef },
   )
+  if ([nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef58]
+    .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
+    appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
+      input.spellingReviewBytes ? JSON.parse(new TextDecoder().decode(input.spellingReviewBytes)) : null,
+      derivationIssues)
+  }
   if (derivationIssues.length > 0) {
     return {
       input,
@@ -1634,13 +1725,14 @@ export function deriveNck1MaterializationBundle(rawInput) {
     materializationDigest: digestNck1SourceMaterialization(materialization),
     source,
     request: {
-      authority: nck1MaterializationCandidateAuthorityRef,
+      authority: authorityRef,
       evidence: {
         documents: compilerDocuments(
           input,
           materialization,
           source,
           validation.instructionDocument,
+          authorityRef,
         ),
       },
     },
@@ -1654,8 +1746,12 @@ export function nck1MaterializationSourceSummary(derivation) {
     sha256: derivation.sourceDigest,
     byteLength:
       derivation.input.materializationBytes.byteLength
+      + (derivation.input.spellingReviewBytes?.byteLength ?? 0)
       + derivation.input.documents.reduce((total, entry) => total + entry.bytes.byteLength, 0)
       + derivation.input.media.reduce((total, entry) => total + entry.bytes.byteLength, 0),
+    ...(derivation.input.spellingReviewBytes ? {
+      spellingReview: { sha256: sha256(derivation.input.spellingReviewBytes), byteLength: derivation.input.spellingReviewBytes.byteLength },
+    } : {}),
     materialization: {
       sha256: sha256(derivation.input.materializationBytes),
       byteLength: derivation.input.materializationBytes.byteLength,

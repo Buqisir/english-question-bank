@@ -8,12 +8,14 @@ import screenV42 from '../../standards/paper-canonical/consumers/screen-v42.json
 import printPdfV43 from '../../standards/paper-canonical/consumers/print-pdf-v43.json' with { type: 'json' }
 import screenV43 from '../../standards/paper-canonical/consumers/screen-v43.json' with { type: 'json' }
 import printPdfV44 from '../../standards/paper-canonical/consumers/print-pdf-v44.json' with { type: 'json' }
+import screenV44 from '../../standards/paper-canonical/consumers/screen-v44.json' with { type: 'json' }
+import printPdfV45 from '../../standards/paper-canonical/consumers/print-pdf-v45.json' with { type: 'json' }
 
 import { authorityRefForManifestDigest, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
 
-const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43]
-const contracts = [screenV43, printPdfV44]
+const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43, screenV43, printPdfV44]
+const contracts = [screenV44, printPdfV45]
 const allContracts = [...historicalContracts, ...contracts]
 
 function validateContract(contract) {

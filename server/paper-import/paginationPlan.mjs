@@ -2,10 +2,11 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { FIXED_PAGE_COVER_GAPS_PT } from '../draft-paper/fixedPagePdfPlanner.mjs'
+import { FIXED_PAGE_COVER_GAPS_PT, validateAnswerBoxHeights } from '../draft-paper/fixedPagePdfPlanner.mjs'
+import { STUDENT_PRODUCT_EDITIONS, validateStudentProductLayout } from '../draft-paper/studentProductPdf.mjs'
 
 export const PAPER_PAGINATION_PLAN_FILE_NAME = 'pagination-plan.json'
-export const FIXED_PAGINATION_EDITIONS = ['friendly8', 'friendly10']
+export const FIXED_PAGINATION_EDITIONS = ['friendly8', 'friendly10', 'long10', 'long12', ...STUDENT_PRODUCT_EDITIONS]
 
 function invalid(message) {
   throw Object.assign(new Error(`Pagination plan is invalid: ${message}`), {
@@ -28,7 +29,7 @@ export function validatePaperPaginationPlan(plan, {
   sourceHasListening,
 } = {}) {
   exactKeys(plan, ['schemaVersion', 'paperId', 'sourceDigest', 'candidateDigest', 'editions'], 'root')
-  if (plan.schemaVersion !== 'paper-pagination-plan-v1') invalid('schemaVersion is unsupported')
+  if (!['paper-pagination-plan-v1', 'paper-pagination-plan-v2', 'paper-pagination-plan-v4'].includes(plan.schemaVersion)) invalid('schemaVersion is unsupported')
   if (plan.paperId !== paperId || plan.sourceDigest !== sourceDigest
     || plan.candidateDigest !== candidateDigest) invalid('source or Candidate identity is stale')
   exactKeys(plan.editions, Object.keys(plan.editions), 'editions')
@@ -39,8 +40,18 @@ export function validatePaperPaginationPlan(plan, {
   const order = new Map(slotBindings.map((entry, index) => [entry.slotId, index]))
   for (const edition of Object.keys(plan.editions)) {
     if (!FIXED_PAGINATION_EDITIONS.includes(edition)) invalid(`unknown edition ${edition}`)
+    if (plan.schemaVersion === 'paper-pagination-plan-v1' && edition.startsWith('long')) {
+      invalid(`${edition} requires paper-pagination-plan-v2`)
+    }
     const entry = plan.editions[edition]
-    const entryKeys = Object.keys(entry || {}).sort().join('\0')
+    const product = STUDENT_PRODUCT_EDITIONS.includes(edition)
+    if (product) {
+      if (plan.schemaVersion !== 'paper-pagination-plan-v4') invalid(`${edition} requires paper-pagination-plan-v4`)
+      try { validateStudentProductLayout(entry?.layout, edition) } catch (error) { invalid(error.message) }
+      if (entry.allowSplitOptionBank !== false || entry.omitCover !== false || entry.coverGapsPt !== null
+        || Object.hasOwn(entry, 'answerBoxHeightsMm')) invalid(`${edition} product policy was changed`)
+    } else if (Object.hasOwn(entry || {}, 'layout')) invalid(`${edition} cannot adopt a new product layout`)
+    const entryKeys = Object.keys(entry || {}).filter(key => key !== 'answerBoxHeightsMm' && key !== 'layout').sort().join('\0')
     const legacyKeys = ['targetPages', 'includeListening', 'omitCover', 'coverGapsPt', 'breakSlotIds']
       .sort().join('\0')
     const currentKeys = [
@@ -50,13 +61,19 @@ export function validatePaperPaginationPlan(plan, {
     if (entryKeys !== legacyKeys && entryKeys !== currentKeys) {
       invalid(`${edition} has unknown or missing fields`)
     }
-    const expectedTarget = edition === 'friendly8' ? 8 : 10
-    const expectedListening = edition === 'friendly10'
+    if (Object.hasOwn(entry, 'answerBoxHeightsMm')) {
+      if (edition.startsWith('long')) invalid(`${edition} cannot compress writing space`)
+      try { validateAnswerBoxHeights(entry.answerBoxHeightsMm) } catch (error) {
+        invalid(`${edition} ${error.message}`)
+      }
+    }
+    const expectedTarget = { friendly8: 8, friendly10: 10, long10: 10, long12: 12, economy8: 8, largeNoListening: 10, largeComplete: 12 }[edition]
+    const expectedListening = edition === 'friendly10' || edition === 'long12' || edition === 'largeComplete'
     if (entry.targetPages !== expectedTarget || entry.includeListening !== expectedListening) {
       invalid(`${edition} target/listening policy was changed`)
     }
-    if (edition === 'friendly10' && listeningSlotCount !== 2) {
-      invalid('friendly10 requires exactly two listening slots')
+    if (expectedListening && listeningSlotCount !== 2) {
+      invalid(`${edition} requires exactly two listening slots`)
     }
     // New plans retain the opening. Keep already-bound historical eight-page
     // listening-excluded plans replayable; never silently rewrite their digest.
@@ -67,7 +84,10 @@ export function validatePaperPaginationPlan(plan, {
       && typeof entry.allowSplitOptionBank !== 'boolean') {
       invalid(`${edition} allowSplitOptionBank must be boolean`)
     }
-    if (!(entry.omitCover ? [null] : FIXED_PAGE_COVER_GAPS_PT).some((value) =>
+    if (edition.startsWith('long') && entry.allowSplitOptionBank === true) {
+      invalid(`${edition} cannot split the option bank`)
+    }
+    if (!(entry.omitCover || product ? [null] : FIXED_PAGE_COVER_GAPS_PT).some((value) =>
       JSON.stringify(value) === JSON.stringify(entry.coverGapsPt))) {
       invalid(`${edition} cover gap is outside the bounded choices`)
     }

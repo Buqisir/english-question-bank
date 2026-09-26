@@ -59,6 +59,9 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v59.json',
+  'canonical-paper-publication-v58.json',
+  'canonical-paper-publication-v57.json',
   'canonical-paper-publication-v55.json',
   'canonical-paper-publication-v54.json',
   'canonical-paper-publication-v52.json',
@@ -413,7 +416,7 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
 }
 
 function capturedListeningAudio(sourceCapture, groups, closure) {
-  if (!['51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion)) return null
+  if (!['51', '52', '54', '55', '57', '58', '59'].includes(closure.authorityRef.manifestVersion)) return null
   const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
   const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
   if (!active && documents.length === 0) return null
@@ -1131,10 +1134,12 @@ function admissionFailure(compilation, error = null) {
   const diagnostics = Array.isArray(reportDiagnostics)
     && reportDiagnostics.length > 0
     ? reportDiagnostics
-    : [{
-      code: error?.code || 'CANONICAL_IMPORT_ADMISSION_INVALID',
-      message: error instanceof Error ? error.message : String(error),
-    }]
+    : Array.isArray(error?.diagnostics) && error.diagnostics.length > 0
+      ? error.diagnostics
+      : [{
+        code: error?.code || 'CANONICAL_IMPORT_ADMISSION_INVALID',
+        message: error instanceof Error ? error.message : String(error),
+      }]
   return {
     ok: false,
     status: 'admission_failed',
@@ -1601,7 +1606,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50', '51', '52', '54', '55'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1613,7 +1618,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50', '51', '52', '54', '55'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

@@ -40,6 +40,10 @@ const shortGroup = {
   questions: [{ questionId: 'q1', questionNo: 1 }], segments: [],
 }
 const twice = projectListeningGroupPresentation(shortGroup)
+assert.equal(twice.sectionHeading, '第一节 （共 5 小题；每小题 1.5 分，满分 7.5 分）')
+assert.equal(projectListeningGroupPresentation({
+  groupType: 'listening', questions: segmentQuestions, segments,
+}).sectionHeading, '第二节 （共 15 小题；每小题 1.5 分，满分 22.5 分）')
 assert.match(twice.instruction, /每段录音播放两遍/)
 assert.doesNotMatch(twice.instruction, /仅读一遍/)
 const historicalNoField = projectListeningGroupPresentation({

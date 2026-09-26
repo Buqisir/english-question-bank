@@ -61,12 +61,11 @@ OCR web 确认仍有 Owner-only 权限门禁；Agent 不得伪造人工确认。
 模型与推理档位跟随 Amp 的 Low 配置，不在仓库固定。模式不可用则停止，不自动切换模式。
 下文 Low + fast 仅描述保留的旧解析路径，不适用于新公共卷。
 
-自动入口只唤醒固定 Import controller。它按 `docs/import/agent-contract.md` 的
-explicit-project dispatch procedure 使用 `source-intake-dispatch.mjs` 完成
-prepare → begin-create → 显式 project 的 `create_thread` → metadata 验证与 bind →
-只读 status → take-assignment → 单次消息发送。bootstrap 不携带导题任务；旧绑定不自动恢复。
+自动接卷已退休；只接受 Owner 在 Amp 明确发起导题，按 `docs/import/agent-contract.md`
+的本地文件入口执行。`source-intake-dispatch.mjs` 仅保留原 controller 的只读 status，
+不再创建、绑定或派单。预览确认不等于上线，单卷 promotion 仍需后来明确授权。
 私有 journal 位于 `.scratch/source-intake-dispatch`，禁止输出、复制或删除以重试。
-新状态 API 必须先上线并验证，再激活入口；本地验证通过不等于生产已切换。
+本地代码停用不等于远端 webhook 已注销；须独立核实 live handler 与生产通知配置。
 
 新 raw-source 初始化会明确写入 `public-paper-v1`。材料化与源审查完成后不派发九份教学
 分析，而是运行：
@@ -302,11 +301,15 @@ node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<is
 ```bash
 node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition friendly8 --auto
 node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition friendly10 --auto
+# Owner 选定长卷后另跑：10／12 为上限，报告保留真实页数，不补页
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition long10 --auto
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition long12 --auto
 ```
 
 报告列出可复制的 canonical `slotId`、题组页码、跨正反面／题组选项库拆分警告和建议
-break。需要修复时只用参数试一个明确方案；命令会以同一原子校验器实际渲染一次，且
-必须精确达到目标页数。确认后才加 `--save-plan` 原子写入可选
+break。友好版必须精确达到目标页数；长卷版须在上限内，应用文题面和完整作答框
+同页，不压缩作答框或拆开选项库。需要修复时只用参数试一个明确方案；命令会以同一
+原子校验器实际渲染一次。确认后才加 `--save-plan` 原子写入可选
 `pagination-plan.json`，不允许 CSS、路径或任意几何：
 
 ```bash
@@ -314,6 +317,13 @@ node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition friend
   --break-slots reading.b,reading.d,language.cloze --cover-gaps 54,54 --save-plan
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <pdfIssueId>
 ```
+
+长卷方案保存为绑定当前 Source/Candidate 的 `paper-pagination-plan-v2`，不会将
+旧版 `friendly8/10` 迁移或更改语义。自动长卷只尝试批准的六档卷首留白，先用
+正常 65／57mm 写作框；如正常页数合格但应用文分离，每档至多加试一次在完整
+应用文题组前断页，仍不合格再试下一档（最多 12 次渲染）。全部失败
+则保持失败诊断，不能直接将自然 PDF 改名为合格长卷。Screen、自然版和教师版
+不受定页方案影响；旧版 v1 四 PDF 交付仍维持原来的精确 8／10 语义。
 
 新自动方案的 8/10 页均保留通用卷首。先比较 72/72、54/72、54/54、18/36、0/18、−25.5/18pt
 六档卷首位置的自然分页，再尝试题组起页；最后一档仅把卷首真实占位上移约9mm，

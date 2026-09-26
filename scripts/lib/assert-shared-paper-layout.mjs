@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 
 // Mutate the loaded shared rule itself, never a new high-specificity override.
 // This catches a consumer that imports the file but shadows its declarations.
-export async function assertSharedPaperLayout(page, rootSelector, required = []) {
+export async function assertSharedPaperLayout(page, rootSelector, required = [], listeningLineHeight = 24) {
   const listening = await page.locator(`${rootSelector} :is(.canonical-listening-surface .ps-question, .question-group[data-canonical-group-type="listening"] .question)`)
     .evaluateAll(questions => questions.map(question => {
       const stem = question.querySelector('.ps-question-stem-button, .stem')
@@ -12,12 +12,14 @@ export async function assertSharedPaperLayout(page, rootSelector, required = [])
       const style = getComputedStyle(options)
       return { text: stem.textContent, gap: (options.getBoundingClientRect().top - box.bottom) / scale,
         stemLine: parseFloat(getComputedStyle(stem).lineHeight), optionLine: parseFloat(style.lineHeight),
+        stemTextLine: parseFloat(getComputedStyle(stem.querySelector('.ps-question-stem') || stem).lineHeight),
         marginBottom: parseFloat(style.marginBottom), rowGap: parseFloat(style.rowGap) || 0 }
     }))
   if (required.includes('listening')) assert.ok(listening.length > 0, 'required listening questions are missing')
   for (const question of listening) {
-    assert.equal(question.stemLine, 24, 'listening stem line step is 18pt')
-    assert.equal(question.optionLine, 24, 'listening option line step is 18pt')
+    assert.equal(question.stemLine, listeningLineHeight, 'listening stem follows its surface line height')
+    assert.equal(question.stemTextLine, listeningLineHeight, 'listening inner stem must not retain a legacy line height')
+    assert.equal(question.optionLine, listeningLineHeight, 'listening options follow their surface line height')
     assert.ok(Math.abs(question.gap) < 0.5, `${rootSelector}: listening stem/options extra gap ${JSON.stringify(question)}`)
     assert.equal(question.marginBottom, 0, 'listening options must not add spacing before the next question')
     assert.equal(question.rowGap, 0, 'vertical listening options follow the normal line step')
@@ -34,12 +36,14 @@ export async function assertSharedPaperLayout(page, rootSelector, required = [])
         return { cue: element.hasAttribute('data-canonical-listening-segment-cue'),
           example: element.hasAttribute('data-canonical-listening-example'),
           actualGap: previousQuestion ? (box.top - previous.getBoundingClientRect().bottom) / (box.height / element.offsetHeight) : null,
+          lineHeight: parseFloat(style.lineHeight),
           top: parseFloat(style.marginTop), bottom: parseFloat(style.marginBottom) }
       }))
     if (required.includes('listening')) {
       assert.ok(rhythm.some(gap => gap.cue) && rhythm.some(gap => gap.example), 'required listening cue/example geometry is missing')
     }
     for (const gap of rhythm) {
+      assert.equal(gap.lineHeight, listeningLineHeight, 'listening cues, examples and transfer notice follow their surface line height')
       assert.equal(gap.top, gap.cue ? 24 : gap.example ? 12 : 0, 'listening extra space follows 18/9pt roles')
       assert.equal(gap.bottom, gap.example ? 24 : gap.cue ? 0 : 12, 'example/transfer trailing separation')
       if (gap.actualGap !== null) assert.ok(Math.abs(gap.actualGap - 24) < 0.5, 'material boundary has exactly one extra line, including parent layout')

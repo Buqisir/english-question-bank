@@ -12,6 +12,8 @@ import { buildCompanionAnalysisHtml } from '../exports/companionAnalysisRenderer
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
+import { sendListeningAudioFile } from '../paper-import/paperAssetStatic.mjs'
+import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
 import { resolveReviewFile } from './revisionProjection.mjs'
 import {
   renderReviewFixedEdition,
@@ -85,6 +87,22 @@ function sendHtml(response, html) {
     'content-type': 'text/html; charset=utf-8',
   })
   response.end(html)
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  })[character])
+}
+
+function requireSameOrigin(request, response, context, trustedPublicOrigin) {
+  const origin = String(request.headers.origin || '')
+  const host = String(request.headers.host || '')
+  const trusted = trustedPublicOrigin ? new URL(trustedPublicOrigin).origin : ''
+  if (request.headers['x-eqb-csrf'] === 'scoped-publication'
+    && origin && ((host && [`https://${host}`, `http://${host}`].includes(origin)) || origin === trusted)) return true
+  context.sendJson(response, 403, { error: 'same_origin_required' })
+  return false
 }
 
 function sendBinary(
@@ -206,6 +224,8 @@ export function createImportReviewRoutes({
   shipToken,
   buildPrintHtml,
   promotionService = null,
+  scopedPublicationEnabled = false,
+  trustedPublicOrigin = '',
 }) {
   if (agentToken && shipToken && agentToken === shipToken) {
     throw new Error('Import Review Agent and shipping tokens must be different')
@@ -218,6 +238,94 @@ export function createImportReviewRoutes({
     },
   })
   const routes = []
+
+  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/publication-requests$/, route(async ({ request, response, context, match }) => {
+    if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) { context.sendJson(response, 401, { error: 'agent_auth_required' }); return }
+    const input = await context.readJsonBody(request, { maxBytes: 4_096 })
+    context.sendJson(response, 201, { request: store.registerPublicationRequest(
+      decodeURIComponent(match[1]), input, actor,
+    ) })
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-agent-reviews\/publication-requests\/([^/]+)$/, route(({ request, response, context, match }) => {
+    if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) { context.sendJson(response, 401, { error: 'agent_auth_required' }); return }
+    context.sendJson(response, 200, { request: store.publicationRequest(match[1], actor) })
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/publication-requests\/([^/]+)\/redeem$/, route(async ({ request, response, context, match }) => {
+    if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) { context.sendJson(response, 401, { error: 'agent_auth_required' }); return }
+    if (!promotionService?.promoteScoped) throw reviewError('IMPORT_REVIEW_PROMOTION_UNAVAILABLE', 'Single-paper promotion service is unavailable', 503)
+    const input = await context.readJsonBody(request, { maxBytes: 1_024 })
+    if (!/^[A-Za-z0-9_-]{43}$/.test(String(input?.requestSecret || ''))) {
+      throw reviewError('IMPORT_REVIEW_PUBLICATION_SECRET_INVALID', 'Publication capability is invalid', 400)
+    }
+    const result = await promotionService.promoteScoped(
+      decodeURIComponent(match[1]), match[2], sha256(String(input?.requestSecret || '')), actor,
+    )
+    context.sendJson(response, result.status === 'published' ? 201 : 200, result)
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-reviews\/publication-requests\/([^/]+)\/confirmation$/, route(({ response, context, match }) => {
+    if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
+    if (!requireOwner(response, context)) return
+    const request = store.publicationRequest(match[1])
+    const expired = Date.parse(request.expiresAt) <= Date.now()
+    const disabled = expired || request.state !== 'pending'
+    const preview = `/?view=paper-browse&paperId=${encodeURIComponent(request.paperId)}&reviewRevision=${encodeURIComponent(request.revisionId)}`
+    sendHtml(response, `<!doctype html><html lang="zh-CN"><head>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>确认试卷与发布</title>
+<style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#F3F6F0;color:#191D18;font:14px/1.55 Inter,'PingFang SC',system-ui,sans-serif}.page{max-width:680px;margin:0 auto;padding:64px 24px 80px}.eyebrow{font-size:12px;color:#60665C}.sheet{margin-top:16px;padding:32px;background:#FAFCF8;border:1px solid #D5DACF;border-radius:12px}h1{font-size:24px;line-height:1.25;margin:8px 0}a{color:#191D18;text-underline-offset:3px}.steps{display:grid;gap:24px;margin-top:32px}.step{padding-top:24px;border-top:1px solid #E3E8DF}.step h2{font-size:16px;margin:0 0 8px}.muted{color:#60665C}button{font:inherit;font-weight:600;padding:9px 16px;border:1px solid #191D18;border-radius:8px;background:#191D18;color:#FAFCF8}button:disabled{border-color:#D5DACF;background:#E5EAE1;color:#60665C}details{margin-top:28px;color:#60665C}code{font-size:12px;overflow-wrap:anywhere}.state{margin-top:20px}#revoke{background:transparent;color:#60665C;border-color:#D5DACF}@media(max-width:560px){.page{padding:24px 16px}.sheet{padding:24px 20px}}</style>
+</head><body><main class="page"><div class="eyebrow">单卷确认</div><section class="sheet">
+<h1>${escapeHtml(request.paperName || request.paperId)}</h1>
+<p>R${escapeHtml(request.revisionNumber || request.revisionId)} · <a href="${escapeHtml(preview)}" target="_blank" rel="noopener">查看这个精确预览</a></p>
+<p class="muted">查看不会写入。版式认可与发布委托是两项独立确认。</p>
+<div class="steps"><section class="step"><h2>1. 认可版式</h2><p>确认网页预览与 PDF 中的这一版布局。</p>
+<button id="approve" ${request.approvalId || disabled ? 'disabled' : ''}>认可这个版式</button></section>
+<section class="step"><h2>2. 委托发布</h2><p>另行允许导题 Agent 仅发布上面这一份精确版本。</p>
+<button id="grant" ${!request.approvalId || disabled ? 'disabled' : ''}>授予这一次发布权限</button></section></div>
+<p class="state" id="result" role="status">${request.state === 'consumed' ? `权限已使用。发布状态：${escapeHtml(request.promotion?.state || '待核实')}。` : request.state === 'revoked' ? '权限已撤销。' : expired ? '请求已过期，不能再确认。' : request.state === 'granted' ? '发布权限已授予，等待 Agent 兑换。' : request.approvalId ? '版式已认可，等待单独的发布委托。' : '等待确认。'}</p>
+<button id="revoke" ${['pending', 'granted'].includes(request.state) ? '' : 'disabled hidden'}>撤销这次请求</button>
+<details><summary>技术绑定</summary><p><code>${escapeHtml(request.paperId)} · ${escapeHtml(request.revisionId)} · ${escapeHtml(request.bundleDigest)} · ${escapeHtml(request.rendererBuildId)}</code></p></details>
+</section></main><script>
+const result=document.querySelector('#result');
+async function act(kind){
+  document.querySelectorAll('button').forEach(b=>b.disabled=true);
+  try{
+    const r=await fetch('/api/import-reviews/publication-requests/${encodeURIComponent(request.requestId)}/'+kind,{method:'POST',headers:{'content-type':'application/json','x-eqb-csrf':'scoped-publication'},body:'{}'});
+    const v=await r.json();if(!r.ok)throw new Error(v.error||'确认失败');
+    window.location.reload();
+  }catch(e){result.textContent=e.message+'。请刷新页面核实状态，不要重复提交。'}
+}
+for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).onclick=()=>act(kind);
+</script></body></html>`)
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-reviews\/publication-requests\/([^/]+)\/approve$/, route(async ({ request, response, context, match }) => {
+    if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
+    if (!requireOwner(response, context) || !requireSameOrigin(request, response, context, trustedPublicOrigin)) return
+    const pending = store.publicationRequest(match[1])
+    const approval = store.approveRevision(pending.paperId, pending.revisionId,
+      { bundleDigest: pending.bundleDigest, approvalScope: 'layout_only' }, context.session.username, pending.requestId)
+    context.sendJson(response, 200, { approval })
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-reviews\/publication-requests\/([^/]+)\/grant$/, route(({ request, response, context, match }) => {
+    if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
+    if (!requireOwner(response, context) || !requireSameOrigin(request, response, context, trustedPublicOrigin)) return
+    context.sendJson(response, 200, { request: store.grantPublicationRequest(match[1], context.session.username) })
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-reviews\/publication-requests\/([^/]+)\/revoke$/, route(({ request, response, context, match }) => {
+    if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
+    if (!requireOwner(response, context) || !requireSameOrigin(request, response, context, trustedPublicOrigin)) return
+    context.sendJson(response, 200, { request: store.revokePublicationRequest(match[1], context.session.username) })
+  })))
 
   routes.push(defineRoute('GET', /^\/api\/import-agent-reviews$/, route(({
     request,
@@ -370,6 +478,20 @@ export function createImportReviewRoutes({
       return
     }
     context.sendJson(response, 200, { revision: store.finalizeRevision(match[1]) })
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/proofread-ocr$/, route(async ({
+    request, response, context, match,
+  }) => {
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    const input = await context.readJsonBody(request, { maxBytes: 5_000_000 })
+    context.sendJson(response, 200, { receipt: store.confirmOcrRevision(
+      decodeURIComponent(match[1]), match[2], input, actor, { reviewerKind: 'import_agent' },
+    ) })
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/ocr-confirmation$/, route(({
@@ -575,7 +697,28 @@ export function createImportReviewRoutes({
   }) => {
     if (!requireReviewer(response, context)) return
     const { projection } = candidateProjectionForRevision(store, match[1])
-    context.sendJson(response, 200, projection.consumption)
+    const audio = projection.listeningAudioEvidence?.segments
+    if (!audio) {
+      context.sendJson(response, 200, projection.consumption)
+      return
+    }
+    const transcript = [...projection.materialization.listening.transcript]
+      .sort((left, right) => Math.min(...left.questionNumbers) - Math.min(...right.questionNumbers))
+    const canMap = audio.state === 'candidate_segments' && transcript.length === audio.candidates.length
+    const playback = projection.listeningAudioEvidence.descriptors
+      .find((descriptor) => descriptor.role === 'listening_audio_playback')
+    context.sendJson(response, 200, { ...projection.consumption, listeningAudio: {
+      relativePath: 'listening/playback.mp3', sha256: playback.sha256, byteLength: playback.byteLength,
+      durationSeconds: audio.durationSeconds, mediaType: 'audio/mpeg',
+      url: `/api/import-review-preview/revisions/${encodeURIComponent(match[1])}/files?path=${encodeURIComponent(playback.path)}`,
+      segments: canMap ? transcript.map((segment, index) => ({
+        segmentId: segment.segmentId,
+        questionNumbers: segment.questionNumbers,
+        firstQuestionId: `question:listening:${Math.min(...segment.questionNumbers)}`,
+        startSeconds: audio.candidates[index].startSeconds,
+        endSeconds: audio.candidates[index].endSeconds,
+      })) : [],
+    } })
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/media\/([^/]+)\/(source|candidate)$/, route(({
@@ -840,8 +983,8 @@ export function createImportReviewRoutes({
       sendHtml(response, reviewPrintHtml(projection, url.searchParams.get('version'), buildPrintHtml))
       return
     }
-    if (!['friendly8', 'friendly10'].includes(pageLayout) || url.searchParams.get('version') !== 'student') {
-      throw reviewError('IMPORT_REVIEW_PAGE_LAYOUT_INVALID', 'Fixed editions require student friendly8 or friendly10', 400)
+    if (!FIXED_PAGINATION_EDITIONS.includes(pageLayout) || url.searchParams.get('version') !== 'student') {
+      throw reviewError('IMPORT_REVIEW_PAGE_LAYOUT_INVALID', 'Fixed editions require a supported student page layout', 400)
     }
     const rendered = await renderReviewFixedEdition(projection, pageLayout, buildPrintHtml)
     sendHtml(response, rendered.paginatedHtml)
@@ -858,14 +1001,16 @@ export function createImportReviewRoutes({
     const version = url.searchParams.get('version')
     const pageLayout = url.searchParams.get('pageLayout') || 'natural'
     if (pageLayout !== 'natural') {
-      if (!['friendly8', 'friendly10'].includes(pageLayout) || version !== 'student') {
-        throw reviewError('IMPORT_REVIEW_PAGE_LAYOUT_INVALID', 'Fixed editions require student friendly8 or friendly10', 400)
+      if (!FIXED_PAGINATION_EDITIONS.includes(pageLayout) || version !== 'student') {
+        throw reviewError('IMPORT_REVIEW_PAGE_LAYOUT_INVALID', 'Fixed editions require a supported student page layout', 400)
       }
       const rendered = await renderReviewFixedEdition(projection, pageLayout, buildPrintHtml)
-      sendBinary(response, rendered.pdfBytes, 'application/pdf', `${projection.paperId}-${pageLayout}.pdf`, 'inline', {
+      const fileName = `${projection.paperId}-${pageLayout}${rendered.fontSizePt ? `-${rendered.fontSizePt}pt-${rendered.pageCount}页` : pageLayout.startsWith('long') ? `-${rendered.pageCount}页` : ''}.pdf`
+      sendBinary(response, rendered.pdfBytes, 'application/pdf', fileName, 'inline', {
         'x-eqb-pagination-edition': pageLayout,
         'x-eqb-pagination-mode': rendered.mode,
         'x-eqb-pagination-pages': String(rendered.pageCount),
+        ...(rendered.fontSizePt ? { 'x-paper-font-size-pt': String(rendered.fontSizePt) } : {}),
         'x-eqb-pagination-plan-digest': projection.paginationPlanDigest || '',
       })
       return
@@ -903,6 +1048,10 @@ export function createImportReviewRoutes({
     const filePath = resolveReviewFile(store.revisionDirectory(match[1]), relativePath)
     if (!existsSync(filePath)) {
       context.sendJson(response, 404, { error: 'Review file not found' })
+      return
+    }
+    if (file.role === 'listening_audio_playback' && file.mediaType === 'audio/mpeg') {
+      sendListeningAudioFile(request, response, filePath, { cacheControl: 'private, no-store' })
       return
     }
     sendBinary(response, readFileSync(filePath), file.mediaType, path.basename(file.path))

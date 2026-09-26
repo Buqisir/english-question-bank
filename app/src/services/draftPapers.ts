@@ -234,8 +234,8 @@ export async function downloadDraftPaperPdf(
   draftPaperId: string,
   versionType: 'student' | 'teacher' = 'student',
   target: FileSaveTarget = directDownloadTarget(),
-  pageLayout: 'natural' | 'friendly8' | 'friendly10' = 'natural',
-): Promise<{ crossingGroupCount: number; splitOptionBankCount: number }> {
+  pageLayout: 'natural' | 'friendly8' | 'friendly10' | 'long10' | 'long12' | 'largeComplete' | 'largeNoListening' | 'economy8' = 'natural',
+): Promise<{ crossingGroupCount: number; splitOptionBankCount: number; fontSizePt: number }> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`), {
     body: JSON.stringify({ versionType, pageLayout }),
     headers: { 'content-type': 'application/json' },
@@ -249,6 +249,7 @@ export async function downloadDraftPaperPdf(
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
   await saveBlobToTarget(blob, fileName, target)
   return {
+    fontSizePt: Number(response.headers.get('x-paper-font-size-pt') || 0),
     crossingGroupCount: Number(response.headers.get('x-paper-crossing-group-count') || 0),
     splitOptionBankCount: Number(response.headers.get('x-paper-split-option-bank-count') || 0),
   }

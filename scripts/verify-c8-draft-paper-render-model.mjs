@@ -286,15 +286,7 @@ assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^
 // technical constraint + DraftPaperWorkbench.tsx's nativeContentHeight
 // state, read from the loaded iframe's own contentDocument).
 assert('preview iframe height is driven by measured content, not a fixed CSS pin', !workbenchCss.includes('height: 1188px') && workbench.includes('nativeContentHeight'))
-// draft-desk-b step4 (owner 拍板 2026-07-12, plan.md "步4" — 浏览器打印并入):
-// browser print now writes the same server-paginated `paginatedHtml` state the A4
-// preview iframe already renders (fetched via fetchDraftPaperPagination), not the
-// old `draftPaper.printHtml` — a third, independently-rendered HTML string that
-// never went through paged.js. That was the last remaining parity gap between
-// "what the teacher sees" / "what downloads as PDF" / "what prints" this whole
-// cut exists to close (DP-1 acceptance check (d) already proved a serialized
-// paged.js DOM prints consistently with what it displays).
-assert('browser print writes the server-paginated HTML (paged.js parity — draft-desk-b step4)', /document\.write\(paginatedHtml\)/.test(workbench))
+assert('workbench no longer opens a separate HTML print document', !/document\.write\(paginatedHtml\)/.test(workbench))
 assert('A4 preview has no edit callbacks inside iframe', !/iframe[\s\S]{0,200}onClick/.test(workbench))
 assert('rail extraction lives in its own component', workbench.includes("from './DraftPaperRail'") && workbench.includes('<DraftPaperRail'))
 // 裁点1 (plan.md): the rail is a pure list (title + count, no source
@@ -330,7 +322,7 @@ assert('suggestion badge click reuses the existing 前置分页 PATCH, not a sec
 assert('the preview iframe HTML itself still carries no suggestion markup (draftPaperPreviewHtml.ts stays presentational-only)', !previewHtml.includes('break-hint') && !previewHtml.includes('draft-group-suggestion'))
 assert('workbench no longer owns outline rendering details', !workbench.includes('compactSource(item)') && !workbench.includes('draft-outline-panel'))
 assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
-assert('workbench exposes browser print', workbench.includes('浏览器打印'))
+assert('workbench prints through PDF only', !workbench.includes('浏览器打印') && !workbench.includes('browserPrint') && !workbench.includes('printWindow'))
 assert('workbench has no answer export label', !workbench.includes('答案版'))
 assert('workbench has no explanation export label', !workbench.includes('解析版'))
 // C8 (trust-cracks) — undo toast 措辞: "题组已删除" → "题组已移出" (the remove

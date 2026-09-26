@@ -42,7 +42,7 @@ function fixtureProjection(rootDir) {
       },
       listeningAudioBytes: audioBytes,
       listeningReview: { audio: {
-        state: 'pending_external_playback_review',
+        state: 'included_in_candidate_review',
         playbackAudioSha256: sha256(audioBytes),
         mediaType: 'audio/mpeg',
         durationSeconds: 42.5,
@@ -456,13 +456,6 @@ try {
   const createdExternal = externalStore.createRevision(external.input)
   upload(externalStore, createdExternal, external.bytes)
   const finalizedExternal = externalStore.finalizeRevision(createdExternal.revision.id)
-  assert.throws(() => externalStore.approveRevision(
-    external.input.paperId,
-    finalizedExternal.id,
-    { bundleDigest: finalizedExternal.bundleDigest },
-    'owner',
-  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_CONFIRMATION_REQUIRED',
-  'unchecked external Listening cannot be approved')
   const listeningConfirmation = {
     audioSha256: external.audioDigest,
     playbackMatchesSuppliedTranscript: true,
@@ -480,8 +473,8 @@ try {
       },
     },
     'owner',
-  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_CONFIRMATION_REQUIRED',
-  'a partially checked external Listening review cannot be approved')
+  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_NOT_APPLICABLE',
+  'ordinary approval must not accept obsolete playback attestations')
   assert.throws(() => externalStore.approveRevision(
     external.input.paperId,
     finalizedExternal.id,
@@ -490,14 +483,13 @@ try {
       externalListeningReview: { ...listeningConfirmation, audioSha256: `sha256:${'f'.repeat(64)}` },
     },
     'owner',
-  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_AUDIO_STALE',
-  'cross-audio browser confirmation is rejected')
+  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_NOT_APPLICABLE',
+  'browser cannot supply an audio identity in place of verified Candidate bytes')
   const externalApproval = externalStore.approveRevision(
     external.input.paperId,
     finalizedExternal.id,
     {
       bundleDigest: finalizedExternal.bundleDigest,
-      externalListeningReview: listeningConfirmation,
     },
     'owner',
   )
@@ -507,6 +499,8 @@ try {
     answerCount: 20,
   })
   assert.equal(Object.hasOwn(externalApproval.externalListeningReview, 'engine'), false)
+  assert.equal(externalApproval.externalListeningReview.schemaVersion, 'external-listening-owner-review-v2')
+  assert.equal(Object.hasOwn(externalApproval.externalListeningReview, 'playbackMatchesSuppliedTranscript'), false)
   assert.equal(Object.hasOwn(externalApproval.externalListeningReview, 'comparison'), false)
   const restartedExternalStore = makeStore(tempRoot)
   assert.doesNotThrow(() => restartedExternalStore.mintExternalListeningPublicationProof(
@@ -540,19 +534,15 @@ assert.match(html, /<body>\s*<!--[\s\S]*THESIS:/, 'direction contract is the fir
 assert.match(client, /accountKind === 'import_agent'/, 'real import_agent account gets its own inbox mode')
 assert.match(client, /reviewRevision=/, 'review Screen URL binds the immutable revision')
 assert.match(client, /认可不是部署授权/, 'approval UI states the deployment boundary')
-assert.match(client, /data-external-listening-check="playback"/, 'OPS UI requires explicit playback matching')
-assert.match(client, /data-external-listening-check="cohesion"/, 'OPS UI requires complete Listening cohesion')
-assert.match(client, /data-external-listening-check="safety"/, 'OPS UI requires actual-content safety review')
+assert.doesNotMatch(client, /data-external-listening-check/, 'OPS does not duplicate Screen audio review')
 assert.match(
   client,
-  /我只检查并认可 Screen、Student Print、Teacher Print 与 PDF 的最终版式；未人工审核原题语义、来源答案、答案映射或逐段摘要。/,
+  /我已检查 Screen 与 PDF，认可当前版本的版式。/,
   'public-paper approval explicitly limits Owner review to final layout',
 )
 assert.match(client, /approvalScope: 'layout_only'/, 'public-paper approval submits the layout-only receipt scope')
-assert.match(client, /AI 派生的中文摘要，仅供参考。可展开查看，但不属于本次人工认可范围。/,
-  'public summaries remain informational rather than required review content')
-assert.match(client, /<details>[\s\S]*<summary>查看逐段摘要<\/summary>/,
-  'public summaries are collapsible')
+assert.doesNotMatch(client, /function paragraphSummariesHtml/, 'summaries are absent from Owner review')
+assert.match(client, /OCR 与原题校对报告/, 'correction evidence has a dedicated report')
 assert.match(reviewRoutes, /\/approve[\s\S]{0,500}requireOwner\(response, context\)/,
   'the approval route rejects import_agent authority before store approval')
 assert.doesNotMatch(client, /pull-run-push|deploy\(/, 'review UI has no deployment action')
@@ -580,8 +570,8 @@ assert.ok(
 )
 assert.match(css, /@media \(max-width: 760px\)/, 'mobile composition collapses structurally')
 const inboxSlot = client.indexOf('${leftRailHtml()}')
-const surfaceSlot = client.indexOf('${state.detail ? (isOcrReview() ? ocrReviewStageHtml() : surfaceStageHtml())')
-const issuesSlot = client.indexOf('${state.detail ? (isOcrReview() ? ocrReviewRailHtml() : rightRailHtml())')
+const surfaceSlot = client.indexOf('${state.detail ? (isOcrReview() ? `<main')
+const issuesSlot = client.indexOf('${state.detail && !isOcrReview() ? rightRailHtml()')
 assert.ok(
   inboxSlot >= 0 && inboxSlot < surfaceSlot && surfaceSlot < issuesSlot,
   'mobile DOM order remains inbox, surface, issues',

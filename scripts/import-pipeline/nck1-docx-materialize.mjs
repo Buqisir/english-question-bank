@@ -37,6 +37,7 @@ const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
 
 const DOCX_PRODUCER = Object.freeze({
   version: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+  historicalVersion: 'nck1-docx-materialization-producer-v9',
   sourceDigest: nck1DocxProducerSourceDigest,
   produce: produceNck1DocxMaterialization,
   reviewName: 'nck1-docx-materialization-review-v1.json',
@@ -46,6 +47,7 @@ const DOCX_PRODUCER = Object.freeze({
 
 const PDF_PRODUCER = Object.freeze({
   version: NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION,
+  historicalVersion: 'nck1-pdf-materialization-producer-v6',
   sourceDigest: nck1PdfProducerSourceDigest,
   produce: produceNck1PdfMaterialization,
   reviewName: 'nck1-pdf-materialization-review-v1.json',
@@ -55,6 +57,7 @@ const PDF_PRODUCER = Object.freeze({
 
 const OCR_PRODUCER = Object.freeze({
   version: NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
+  historicalVersion: 'nck1-ocr-materialization-producer-v6',
   sourceDigest: nck1OcrProducerSourceDigest,
   produce: produceNck1OcrMaterialization,
   reviewName: 'nck1-ocr-materialization-review-v1.json',
@@ -179,11 +182,11 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   if (![
     'universal-nck1-source-manifest-v1',
     'universal-nck1-source-manifest-v2',
+    'universal-nck1-source-manifest-v3',
   ].includes(manifest?.schemaVersion)) throw new Error('NCK1 materialization requires a universal Source Manifest')
   const documents = loadDocuments(paperDir, manifest)
   const producer = selectProducer(paperDir, documents)
   const producerInputs = producer.loadInputs?.(paperDir) || {}
-  const sourceDigest = producer.sourceDigest(documents, producerInputs)
   const outputPath = path.join(paperDir, manifest.materializationPath)
   const directory = path.dirname(outputPath)
   const receiptPath = path.join(directory, producer.receiptName)
@@ -195,21 +198,26 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   }
   const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
   const review = JSON.parse(readFileSync(reviewPath, 'utf8'))
+  // Read retained provenance; this does not authorize old output as a current cache.
+  const sourceDigest = producer.sourceDigest(documents, { ...producerInputs, producerVersion: receipt.producerVersion })
   if (receipt.schemaVersion !== producer.receiptSchemaVersion
-    || receipt.producerVersion !== producer.version
+    || ![producer.version, producer.historicalVersion].includes(receipt.producerVersion)
     || receipt.paperId !== manifest.paperId
     || receipt.sourceDigest !== sourceDigest
     || review.schemaVersion !== producer.reviewName.replace('.json', '')
     || review.paperId !== manifest.paperId
     || review.sourceDigest !== sourceDigest
-    || review.producerVersion !== producer.version
+    || review.producerVersion !== receipt.producerVersion
     || !Array.isArray(review.required)) {
     throw new Error('Materialization producer evidence is not bound to the current source and producer')
   }
   assertReceiptMediaFiles(paperDir, receipt)
-  const materialization = JSON.parse(readFileSync(outputPath, 'utf8'))
+  const outputBytes = readFileSync(outputPath)
+  const outputDigest = sha256(outputBytes)
+  const materialization = JSON.parse(outputBytes.toString('utf8'))
   if (!Array.isArray(materialization.issues)
-    || digestJson(review.required) !== digestJson(materialization.issues)) {
+    || (outputDigest === receipt.outputDigest
+      && digestJson(review.required) !== digestJson(materialization.issues))) {
     throw new Error('Materialization review does not bind the current issues')
   }
   const outputMediaDigests = (materialization.media || []).map((item) => item.sha256).sort()
@@ -217,9 +225,10 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   if (digestJson(outputMediaDigests) !== digestJson(receiptMediaDigests)) {
     throw new Error('Materialization receipt media does not close the output inventory')
   }
-  const outputDigest = sha256(readFileSync(outputPath))
   return {
     disposition: receipt.disposition,
+    producerVersion: receipt.producerVersion,
+    producerState: receipt.producerVersion === producer.version ? 'current' : 'historical',
     outputDigest: receipt.outputDigest,
     outputState: outputDigest === receipt.outputDigest ? 'producer_output_unchanged' : 'agent_modified',
     sourceDigest,
@@ -269,6 +278,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   if (![
     'universal-nck1-source-manifest-v1',
     'universal-nck1-source-manifest-v2',
+    'universal-nck1-source-manifest-v3',
   ].includes(manifest?.schemaVersion)) {
     throw new Error('NCK1 materialization requires a universal Source Manifest')
   }
@@ -310,6 +320,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     if (
       producer.allowSourceInputRevision
       && receipt.schemaVersion === producer.receiptSchemaVersion
+      && receipt.producerVersion === producer.version
       && receipt.paperId === manifest.paperId
       && receipt.sourceDigest !== sourceDigest
       && existsSync(reviewPath)

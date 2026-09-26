@@ -2,6 +2,7 @@
 
 import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'
+import { randomUUID } from 'node:crypto'
 import {
   existsSync,
   mkdirSync,
@@ -23,11 +24,13 @@ import {
   reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
+import { reviewPrintHtml } from '../server/import-review/reviewPagination.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { NCK1_STAGED_ANALYSIS_FILES } from '../server/import-review/nck1AnalysisProjection.mjs'
 import {
   buildNck1AnalyzedPackageReviewSourceManifest,
   buildNck1ReviewProjection,
+  buildNck1ReviewConsumption,
   loadNck1ReviewSource,
   reviewBundleFilePaths,
   resolveReviewFile,
@@ -56,9 +59,12 @@ import { assertPaperFonts } from './lib/assert-paper-fonts.mjs'
 import { assertSharedPaperLayout } from './lib/assert-shared-paper-layout.mjs'
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import { consumerContractRefs, resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
+import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
   nck1MaterializationCandidateAuthorityRef,
+  nck1MaterializationHistoricalAuthorityRef58,
   resolveCanonicalAuthority,
 } from '../shared/paper-canonical/authority.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
@@ -835,6 +841,79 @@ function makeContext(label, options = {}) {
   }
 }
 
+// A stored v58 Review must be rederived under its original Candidate authority,
+// while the existing consumer presentation stays unchanged for both versions.
+{
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-review-v58-replay-'))
+  try {
+    const { reviewRoot } = makeReviewRoot(root)
+    const loaded = loadNck1ReviewSource(reviewRoot)
+    const previous = importCanonicalCandidate(loaded.sourceInput, undefined, {
+      materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
+    })
+    assert.deepEqual(previous.issues, [])
+    const replayed = buildNck1ReviewProjection(reviewRoot, {
+      expectedCandidateDigest: previous.candidate.candidateDigest,
+    })
+    const current = buildNck1ReviewProjection(reviewRoot)
+    assert.equal(replayed.candidateDigest, previous.candidate.candidateDigest)
+    assert.equal(replayed.consumption.authorityRef.manifestVersion, '58')
+    assert.equal(replayed.consumption.consumerContractRef.version, '44')
+    assert.equal(current.consumption.authorityRef.manifestVersion, '59')
+    assert.equal(current.consumption.consumerContractRef.version, '44')
+    const readingId = replayed.consumption.selections
+      .find((selection) => selection.familyContractId === 'reading').groupIds[0]
+    for (const [projection, expectedRuleset] of [
+      [replayed, 'abcd-option-layout-v1'],
+      [current, 'abcd-option-layout-v2'],
+    ]) {
+      assert.equal(resolveConsumerPresentation(projection.consumption.consumerContractRef).policy.version, '3')
+      const rendered = projectCanonicalConsumerGroup({
+        consumption: projection.consumption,
+        familyContractId: 'reading',
+        groupId: readingId,
+      })
+      assert.equal(rendered.questions[0].layoutPlan.rulesetRef.id, expectedRuleset)
+    }
+    const materialization = JSON.parse(new TextDecoder().decode(loaded.sourceInput.materializationBytes))
+    const reading = materialization.groups.find((group) => group.slotId === 'reading.a')
+    const texts = [
+      ['W'.repeat(19), 'W'.repeat(19), 'W'.repeat(19), 'W'.repeat(20)],
+      ['short', 'W'.repeat(19), 'short', 'W'.repeat(20)],
+      ['short', 'W'.repeat(21), 'short', 'W'.repeat(21)],
+    ]
+    reading.questions.forEach((question, index) => question.options.forEach((option, optionIndex) => {
+      option.text = texts[index][optionIndex]
+    }))
+    const alignedCandidate = importCanonicalCandidate({
+      ...loaded.sourceInput,
+      materializationBytes: new TextEncoder().encode(JSON.stringify(materialization)),
+    })
+    assert.deepEqual(alignedCandidate.issues, [])
+    const alignedPreview = compileNck1MaterializationCandidatePreview(alignedCandidate.candidate)
+    assert(alignedPreview.compilation)
+    const alignedConsumption = buildNck1ReviewConsumption(alignedPreview.candidate, alignedPreview.compilation)
+    const alignedScreen = projectCanonicalConsumerGroup({
+      consumption: alignedConsumption, familyContractId: 'reading', groupId: readingId,
+    })
+    const alignedPrint = projectCanonicalConsumerGroup({
+      consumption: { ...alignedConsumption, consumerContractRef: consumerContractRefs.print_pdf },
+      familyContractId: 'reading', groupId: readingId,
+    })
+    assert.deepEqual(alignedScreen.questions.map((question) => question.layoutPlan.mode),
+      ['two_by_two', 'two_by_two', 'one_column'])
+    assert.deepEqual(alignedScreen.questions.slice(0, 2).map((question) =>
+      question.layoutPlan.placements[1].startTwip), [4464, 4464])
+    assert.deepEqual(alignedScreen.questions.map((question) => question.placementSignature),
+      alignedPrint.questions.map((question) => question.placementSignature))
+    assert.throws(() => buildNck1ReviewProjection(reviewRoot, {
+      expectedCandidateDigest: `sha256:${'0'.repeat(64)}`,
+    }), /Stored Candidate does not match a retained authority/)
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+}
+
 function approvedIdentity(projection) {
   return {
     sourceDigest: projection.sourceDigest,
@@ -1004,14 +1083,6 @@ function makeOnlinePromotionContext(
     {
       bundleDigest: revision.bundleDigest,
       ...(fixture.projection.importProfile ? { approvalScope: 'layout_only' } : {}),
-      ...(fixture.projection.listeningReview?.audio?.state === 'pending_external_playback_review'
-        ? { externalListeningReview: {
-            audioSha256: fixture.projection.listeningReview.audio.playbackAudioSha256,
-            playbackMatchesSuppliedTranscript: true,
-            allSegmentsQuestionsAnswersBelongTogether: true,
-            actualAudioContentSuitableAndSafe: true,
-          } }
-        : {}),
     },
     'synthetic-owner',
   )
@@ -1335,9 +1406,11 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await screenPage.locator('[data-paper-question-id="question:listening:1"]').click()
     await screenPage.locator('.listening-analysis-panel').waitFor()
     await assertPaperFonts(screenPage, '.paper-browse-listening')
-    await assertSharedPaperLayout(screenPage, '.paper-browse-listening', ['listening', 'listening-boundaries'])
+    await assertSharedPaperLayout(screenPage, '.paper-browse-listening', ['listening', 'listening-boundaries'], 24)
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
     assert.equal(await screenPage.locator('.paper-browse-listening .ps-question').count(), 20)
+    assert.deepEqual(await screenPage.locator('.paper-browse-listening .ps-question-no')
+      .evaluateAll(nodes => nodes.map(node => getComputedStyle(node).fontWeight)), Array(20).fill('400'))
     assert.deepEqual(
       await screenPage.locator('.paper-browse-listening .ps-question-no').allTextContents(),
       Array.from({ length: 20 }, (_, index) => `${index + 1}.`),
@@ -1351,32 +1424,76 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       'student exam column stays free of listening transcript and analysis',
     )
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
-    screenProjection = { ...listeningProjection, consumption: listeningPublished.screen }
+    // The sine fixture has no reviewed segmentation. Supply one synthetic cue
+    // only to this browser projection to exercise the optional segment player.
+    screenProjection = { ...listeningProjection, consumption: {
+      ...listeningPublished.screen,
+      listeningAudio: { ...listeningPublished.screen.listeningAudio, segments: [{
+        segmentId: 'fixture-q1', firstQuestionId: 'question:listening:1', questionNumbers: [1],
+        startSeconds: 0, endSeconds: 6,
+      }] },
+    } }
     await screenPage.goto(screenUrl.href)
-    const audio = screenPage.locator('audio')
-    await audio.waitFor()
+    const fullPlayer = screenPage.locator('.listening-player[data-size="full"]')
+    const trigger = fullPlayer.getByRole('button', { name: '整卷听力录音', exact: true })
+    const audio = fullPlayer.locator('audio')
+    await trigger.waitFor()
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
     await screenPage.locator('.listening-analysis-panel').waitFor()
     assert.equal(await audio.count(), 1)
-    assert.equal(await screenPage.locator('.paper-browse-zoom audio').count(), 0, 'Player stays outside A4 paper')
-    assert.equal(await audio.getAttribute('preload'), 'metadata')
+    assert.equal(await screenPage.locator('.ps-listening-part .ps-text-trail audio').count(), 1,
+      'Whole-recording control is a Screen-only overlay after the listening heading')
+    assert.equal(await audio.getAttribute('preload'), 'none')
+    assert.equal(await audio.getAttribute('controls'), null, 'The waveform UI replaces native audio controls')
+    await trigger.click()
     await screenPage.waitForFunction(() => document.querySelector('audio')?.readyState >= 1)
     assert.equal(await audio.evaluate((element) => Math.round(element.duration)), 12)
-    await audio.evaluate((element) => element.play())
     await screenPage.waitForFunction(() => document.querySelector('audio').currentTime > 0)
-    await audio.evaluate((element) => { element.pause(); element.currentTime = 8 })
+    await fullPlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    await fullPlayer.getByRole('slider').press('Home')
+    await fullPlayer.getByRole('slider').press('ArrowRight')
     await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
-    assert.equal(await audio.evaluate((element) => Math.round(element.currentTime)), 8)
+    assert.equal(await audio.evaluate((element) => Math.round(element.currentTime)), 5)
+    await fullPlayer.getByRole('button', { name: '播放速度 1 倍，点击切换', exact: true }).click()
+    assert.equal(await audio.evaluate((element) => element.playbackRate), 1.25)
+    await screenPage.emulateMedia({ media: 'print' })
+    assert.equal(await trigger.isVisible(), false, 'Screen-only listening control is hidden in print')
+    await screenPage.emulateMedia({ media: 'screen' })
     const columns = await screenPage.locator('.paper-browse-listening .ps-option-list').first()
       .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
     assert.equal(columns.length, 3)
     assert.ok(Math.max(...columns) - Math.min(...columns) < 1)
-    await audio.scrollIntoViewIfNeeded()
+    await trigger.scrollIntoViewIfNeeded()
     if (process.env.LISTENING_QA_ARTIFACT_DIR) {
       await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'listening-lecture-desktop.png') })
-      await screenPage.setViewportSize({ width: 390, height: 844 })
-      await screenPage.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
-      await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'listening-lecture-narrow.png') })
+    }
+    await screenPage.getByRole('button', { name: '讲评', exact: true }).click()
+    const segmentPlayer = screenPage.locator('.listening-player[data-size="segment"]').first()
+    for (const player of [segmentPlayer, fullPlayer]) {
+      await player.locator('.listening-player-trigger').click()
+      for (const width of [390, 320, 1280]) {
+        await screenPage.setViewportSize({ width, height: 900 })
+        await screenPage.waitForFunction(() => {
+          const card = document.querySelector('.listening-player-card')?.getBoundingClientRect()
+          return card && card.left >= 7 && card.right <= document.documentElement.clientWidth - 7
+        }, undefined, { timeout: 5000 }).catch(async error => {
+          const geometry = await screenPage.evaluate(() => ({
+            card: document.querySelector('.listening-player-card')?.getBoundingClientRect().toJSON(),
+            paper: document.querySelector('.paper-browse-zoom')?.getBoundingClientRect().toJSON(),
+            viewport: document.documentElement.clientWidth,
+            openPlayers: document.querySelectorAll('.listening-player[data-open]').length,
+          }))
+          throw new Error(`Listening popup at ${width}px: ${JSON.stringify(geometry)}`, { cause: error })
+        })
+        // No forced click: also proves that the visible controls are not covered.
+        await player.locator('.listening-player-speed').click()
+        assert.ok(await player.locator('.listening-player-wave').evaluate((element) => element.getBoundingClientRect().width > 80),
+          'fitting the popup must leave a usable seek track')
+        if (process.env.LISTENING_QA_ARTIFACT_DIR && width === 390) {
+          await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, `listening-${await player.getAttribute('data-size')}-narrow.png`) })
+        }
+      }
+      await player.locator('.listening-player-trigger').click()
     }
     await screenPage.close()
 
@@ -1403,6 +1520,18 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     const listeningAnswers = new Map(Object.entries(listeningProjection.paperAsset.answerKey.answers)
       .map(([questionId, answer]) => [questionId, answer.answer]))
     const listeningPayload = canonicalConsumptionPrintPayload(listeningPublished.print_pdf, listeningProjection.paperName, listeningAnswers)
+    const reviewProjection = { ...listeningProjection, consumption: listeningPublished.screen }
+    const originalConsumption = JSON.stringify(reviewProjection.consumption)
+    const eightHtml = reviewPrintHtml(reviewProjection, 'student', buildPrintHtml, { includeListening: false })
+    assert.equal([...eightHtml.matchAll(/<section\b[^>]*data-canonical-group-id=/g)].length, 9)
+    assert.doesNotMatch(eightHtml, /<section\b[^>]*data-canonical-group-type="listening"/)
+    assert.equal(JSON.stringify(reviewProjection.consumption), originalConsumption,
+      'deriving the eight-page view must not mutate the full-paper consumption')
+    assert.throws(() => reviewPrintHtml({ ...reviewProjection, consumption: {
+      ...reviewProjection.consumption, visibleStructureDigest: `sha256:${'0'.repeat(64)}`,
+    } }, 'student', buildPrintHtml, { includeListening: false }),
+    error => error.code === 'CANONICAL_CONSUMPTION_REJECTED',
+    'projection must validate its input before deriving a fresh view digest')
     for (const versionType of ['student', 'teacher']) {
       const html = buildPrintHtml({
         ...listeningPayload,
@@ -1418,6 +1547,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       await assertSharedPaperLayout(page, '.paper-print', versionType === 'student' ? ['listening', 'listening-boundaries'] : ['listening'])
       const questions = page.locator('[data-canonical-question-id^="question:listening:"]')
       assert.equal(await questions.count(), 20)
+      assert.deepEqual(await questions.locator('.qnum')
+        .evaluateAll(nodes => nodes.map(node => getComputedStyle(node).fontWeight)), Array(20).fill('400'))
       assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options > span').count(), 60)
       assert.equal(await questions.locator('.answer').count(), versionType === 'teacher' ? 20 : 0)
       assert.ok(await questions.evaluateAll((elements) => elements.every((element) => getComputedStyle(element).breakInside === 'avoid')))
@@ -2128,7 +2259,7 @@ const externalListeningPromotion = makeOnlinePromotionContext(
 try {
   assert.equal(
     externalListeningPromotion.approval.externalListeningReview.reviewMethod,
-    'owner_playback_against_supplied_transcript',
+    'owner_screen_pdf_approval',
   )
   assert.equal(
     Object.hasOwn(externalListeningPromotion.approval.externalListeningReview, 'engine'),
@@ -2609,12 +2740,13 @@ try {
   const fixedPdfResponse = await fetch(`${started.origin}/api/import-review-preview/revisions/${online.approval.revisionId}/pdf?version=student&pageLayout=friendly8`, {
     headers: { 'x-synthetic-owner': '1' },
   })
-  assert.equal(fixedPdfResponse.status, 200, 'Review fixed PDF must render through the real public route')
+  assert.equal(fixedPdfResponse.status, 200, `Review fixed PDF must render through the real public route${fixedPdfResponse.ok ? '' : `: ${await fixedPdfResponse.text()}`}`)
   assert.equal(fixedPdfResponse.headers.get('x-eqb-pagination-edition'), 'friendly8')
   assert.equal(fixedPdfResponse.headers.get('x-eqb-pagination-pages'), '8')
   const fixedPdfPath = path.join(online.tempRoot, 'review-fixed8.pdf')
   writeFileSync(fixedPdfPath, Buffer.from(await fixedPdfResponse.arrayBuffer()))
   assert.match(execFileSync('pdfinfo', [fixedPdfPath], { encoding: 'utf8' }), /Pages:\s+8\b/)
+  await reviewPage.locator('summary').filter({ hasText: /^版本记录$/u }).click()
   const promotionRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
   await promotionRail.getByText('已认可，未上线', { exact: true }).waitFor()
   await promotionRail.getByText(`上线 ${paperId}`, { exact: true }).waitFor()
@@ -2627,6 +2759,7 @@ try {
   assert.equal(await copyCommand.count(), 1)
   await copyCommand.click()
   assert.equal(await reviewPage.evaluate(() => window.__copiedReviewText), `上线 ${paperId}`)
+  await reviewPage.locator('summary').filter({ hasText: /^版本标识$/u }).click()
   const copyPaperId = reviewPage.getByRole('button', { name: '复制Paper ID' })
   assert.equal(await copyPaperId.count(), 1)
   await copyPaperId.click()
@@ -2690,6 +2823,7 @@ try {
     assert.match(wiring, /paperSurfaceAnalysisAvailability\.invalidate\(\)/, 'publish clears the analysis-availability cache')
   }
   await reviewPage.reload()
+  await reviewPage.locator('summary').filter({ hasText: /^版本记录$/u }).click()
   const publishedRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
   await publishedRail.getByText('已上线', { exact: true }).waitFor()
   assert.match(await publishedRail.textContent(), /R1 · v1 · 尝试 1/u)
@@ -2829,6 +2963,7 @@ try {
     'synthetic-owner',
   )
   await reviewPage.reload()
+  await reviewPage.locator('summary').filter({ hasText: /^版本记录$/u }).click()
   const nextApprovalRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
   await nextApprovalRail.getByText('已认可，未上线', { exact: true }).waitFor()
   await nextApprovalRail.getByText(`上线 ${paperId}`, { exact: true }).waitFor()
@@ -3070,14 +3205,24 @@ try {
     paperAssetsDir: publicCommittedWithoutReceipt.paperAssetsDir,
     afterPublish() { throw new Error('forced public receipt crash') },
   })
+  const scopedRequest = publicCommittedWithoutReceipt.reviewStore.registerPublicationRequest(paperId, {
+    requestId: `publication-request-${randomUUID()}`,
+    revisionId: publicCommittedWithoutReceipt.revision.id,
+    secretHash: sha256('synthetic-scoped-capability'),
+  }, 'synthetic-import-agent')
+  publicCommittedWithoutReceipt.reviewStore.grantPublicationRequest(scopedRequest.requestId, 'synthetic-owner')
   assert.throws(
-    () => interrupted.promote(
+    () => interrupted.promoteScoped(
       paperId,
-      promotionRequest(publicCommittedWithoutReceipt.approval),
-      'ship-authorizer-token',
+      scopedRequest.requestId,
+      sha256('synthetic-scoped-capability'),
+      'synthetic-import-agent',
     ),
     /forced public receipt crash/,
   )
+  const replay = interrupted.promoteScoped(paperId, scopedRequest.requestId,
+    sha256('synthetic-scoped-capability'), 'synthetic-import-agent')
+  assert.equal(replay.status, 'publishing', 'consumed replay reports retained UNKNOWN without invoking publisher again')
   const durable = publicCommittedWithoutReceipt.reviewStore.latestPromotion(paperId)
   assert.equal(durable.importProfile, 'public-paper-v1')
   assert.equal(

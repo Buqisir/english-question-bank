@@ -47,6 +47,46 @@ const identity = {
   sourceHasListening: false,
 }
 assert.deepEqual(validatePaperPaginationPlan(plan, identity), plan)
+const longPlan = { ...plan, schemaVersion: 'paper-pagination-plan-v2', editions: {
+  long10: { targetPages: 10, includeListening: false, omitCover: false,
+    coverGapsPt: [72, 72], breakSlotIds: [] },
+} }
+assert.deepEqual(validatePaperPaginationPlan(longPlan, identity), longPlan)
+assert.throws(() => validatePaperPaginationPlan({ ...longPlan, schemaVersion: 'paper-pagination-plan-v1' }, identity),
+  /requires paper-pagination-plan-v2/)
+assert.throws(() => validatePaperPaginationPlan({ ...longPlan, editions: { long10: {
+  ...longPlan.editions.long10, includeListening: true,
+} } }, identity), /target\/listening policy/)
+for (const forbidden of [
+  { answerBoxHeightsMm: { application: 24 } },
+  { allowSplitOptionBank: true },
+]) assert.throws(() => validatePaperPaginationPlan({
+  ...longPlan, editions: { long10: { ...longPlan.editions.long10, ...forbidden } },
+}, identity), /cannot compress writing space|cannot split the option bank/)
+const listeningBindings = [
+  ...reviewBindings,
+  { slotId: 'listening.one', groupId: 'l1', familyContractId: 'listening' },
+  { slotId: 'listening.two', groupId: 'l2', familyContractId: 'listening' },
+]
+const longListening = { ...longPlan, editions: { long12: {
+  ...longPlan.editions.long10, targetPages: 12, includeListening: true,
+} } }
+assert.deepEqual(validatePaperPaginationPlan(longListening, {
+  ...identity, slotBindings: listeningBindings,
+}), longListening)
+assert.throws(() => validatePaperPaginationPlan(longListening, identity), /exactly two listening slots/)
+const adaptivePlan = { ...plan, editions: { friendly8: {
+  ...plan.editions.friendly8, answerBoxHeightsMm: { application: 31, continuation: 44 },
+} } }
+assert.deepEqual(validatePaperPaginationPlan(adaptivePlan, identity), adaptivePlan)
+assert.deepEqual(paginationPlanEdition(adaptivePlan, 'friendly8', publishedBindings).answerBoxHeightsMm,
+  { application: 31, continuation: 44 })
+for (const answerBoxHeightsMm of [null, {}, { application: 23 }, { application: 66 },
+  { continuation: 39 }, { continuation: 58 }, { application: 30.5 }, { unknown: 30 }, { constructor: 30 }]) {
+  assert.throws(() => validatePaperPaginationPlan({ ...plan, editions: { friendly8: {
+    ...plan.editions.friendly8, answerBoxHeightsMm,
+  } } }, identity), /answerBoxHeightsMm/)
+}
 // Automatic eight-page plans retain notices even for a listening source;
 // old externally bound omit-cover plans remain replayable without mutation.
 for (const sourceHasListening of [false, true]) {
@@ -109,6 +149,38 @@ const result = await renderExplicitFixedPagePdf(html, {
 })
 assert.equal(renders, 1, 'an explicit plan renders exactly once')
 assert.equal(result.pageCount, 8)
+const longReplay = await renderExplicitFixedPagePdf(html, {
+  ...paginationPlanEdition(longPlan, 'long10', publishedBindings),
+  render: async () => ({ pageCount: 9, inspection: [{ id: 'application', pages: [9],
+    applicationPresent: true, applicationPromptPage: 9, applicationAnswerPage: 9 }] }),
+})
+assert.equal(longReplay.pageCount, 9, 'long plan replays an honest under-cap page count')
+await assert.rejects(() => renderExplicitFixedPagePdf(html, {
+  ...paginationPlanEdition(longPlan, 'long10', publishedBindings),
+  render: async () => ({ pageCount: 10, inspection: [{ id: 'application', pages: [9, 10],
+    applicationPresent: true, applicationPromptPage: 9, applicationAnswerPage: 10 }] }),
+}), /完整题面与作答框未处于同一页/)
+await assert.rejects(() => renderExplicitFixedPagePdf(html, {
+  ...paginationPlanEdition(longPlan, 'long10', publishedBindings),
+  render: async () => ({ pageCount: 9, inspection: [{ id: 'application', pages: [7, 8],
+    applicationPresent: true, applicationPromptPage: 8, applicationPromptPages: [7, 8],
+    applicationAnswerPage: 8, applicationAnswerPages: [8] }] }),
+}), /完整题面与作答框未处于同一页/)
+await assert.rejects(() => renderExplicitFixedPagePdf(html, {
+  ...paginationPlanEdition(longPlan, 'long10', publishedBindings),
+  render: async () => ({ pageCount: 11, inspection: [] }),
+}), /超过 10 页上限/)
+await assert.rejects(() => renderExplicitFixedPagePdf(html, {
+  ...paginationPlanEdition(longPlan, 'long10', publishedBindings),
+  answerBoxHeightsMm: { application: 24 },
+  render: async () => { throw new Error('must not render a compressed long paper') },
+}), /不能压缩写作答题框/)
+await assert.rejects(() => renderExplicitFixedPagePdf(html, {
+  ...paginationPlanEdition(longPlan, 'long10', publishedBindings),
+  render: async () => ({ pageCount: 9, inspection: [
+    { id: 'seven', pages: [5, 6], optionBankPages: [5, 6] },
+  ] }),
+}), /选项库跨页/)
 await assert.rejects(() => renderExplicitFixedPagePdf(html, {
   targetPages: 8,
   plannedBreakGroupIds: [],
@@ -183,6 +255,17 @@ try {
     baseDir: directory,
     packageData,
   }), /^sha256:/)
+  const longBinding = { ...paginationPlanBinding, planDigest: digestJson(longPlan) }
+  writeFileSync(path.join(directory, 'import-meta.json'), `${JSON.stringify({
+    paginationPlanBinding: { ...longBinding, sourceAssetVersion: 1 },
+  })}\n`)
+  writeFileSync(path.join(directory, 'pagination-plan.json'), `${JSON.stringify(longPlan)}\n`)
+  assert.equal(assertPaperImportPaginationPlan({ baseDir: directory, packageData: {
+    ...packageData, paginationPlan: longPlan, paginationPlanBinding: longBinding,
+  } }), longBinding.planDigest, 'v2 long-paper bytes retain the Review/publication commitment')
+  writeFileSync(path.join(directory, 'import-meta.json'), `${JSON.stringify({
+    paginationPlanBinding: { ...paginationPlanBinding, sourceAssetVersion: 1 },
+  })}\n`)
   writeFileSync(path.join(directory, 'pagination-plan.json'), `${JSON.stringify({ ...plan, paperId: 'paper-other' })}\n`)
   assert.throws(() => assertPaperImportPaginationPlan({
     baseDir: directory,

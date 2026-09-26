@@ -81,9 +81,9 @@ function questionHtml({ includeTable = true } = {}) {
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
     paragraph(`${label}. ${label} option sentence.`)).join('')
   const clozeText = Array.from({ length: 15 }, (_, index) =>
-    `${41 + index}._____`).join(' ')
+    `${41 + index}._____`).join(' and ')
   const grammarText = Array.from({ length: 10 }, (_, index) =>
-    `${56 + index}._____(${index % 2 === 0 ? 'learn' : 'word'})`).join(' ')
+    `${56 + index}._____(${index % 2 === 0 ? 'learn' : 'word'})`).join(' and ')
   return [
     paragraph('Synthetic NCK1 PDF paper'),
     paragraph('第二部分 阅读 (共两节，满分50分)'),

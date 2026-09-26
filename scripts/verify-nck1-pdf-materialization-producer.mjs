@@ -14,6 +14,7 @@ import path from 'node:path'
 
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
 import {
   produceNck1PdfMaterialization,
 } from '../server/paper-import/nck1PdfMaterializationProducer.mjs'
@@ -36,6 +37,10 @@ const produced = produceNck1PdfMaterialization({
 assert.equal(produced.disposition, 'ready_for_verification')
 assert.equal(produced.review.schemaVersion, 'nck1-pdf-materialization-review-v1')
 assert.deepEqual(produced.review.required, [])
+for (const block of produced.materialization.groups.find(group => group.family === 'seven-choices').blocks) {
+  assert.equal(block.content[0].text, 'A short guide has ')
+  assert.equal(block.content.at(-1).text, ' for learners.')
+}
 assert.deepEqual(
   produced.materialization.groups.map((group) => group.slotId),
   [
@@ -228,6 +233,15 @@ try {
   ), /INITIALIZED/u)
   const materializeOutput = run('materialize', cliPaperId)
   assert.match(materializeOutput, /"disposition": "ready_for_verification"/u)
+  assert.throws(() => run('verify', cliPaperId), /required review is missing/u)
+  // These authored synthetic fixture strings are known; no real-paper review
+  // or semantic model result is manufactured by this test.
+  assert.equal(JSON.parse(readFileSync(path.join(cliPaperDir, 'config.json'))).spellingReview, TEXT_REVIEW_POLICY)
+  const spellingReview = prepareSpellingReview(new Uint8Array(readFileSync(path.join(cliPaperDir, fixture.manifest.materializationPath))), TEXT_REVIEW_POLICY)
+  spellingReview.reviewedBy = 'import_agent'
+  spellingReview.reviewedAt = '2026-09-21T00:00:00Z'
+  spellingReview.targets.forEach(target => { target.decision = 'unchanged' })
+  writeFileSync(path.join(cliPaperDir, SPELLING_REVIEW_FILE), JSON.stringify(spellingReview))
   assert.match(run('verify', cliPaperId), /"groups": 9/u)
   assert.match(run('verify', cliPaperId), /"assertions": 45/u)
   assert.match(run('build', cliPaperId), /BUILT CANDIDATE/u)

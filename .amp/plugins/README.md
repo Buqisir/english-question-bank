@@ -80,7 +80,21 @@ not pass a whole paper to this tool. Model changes are explicit code changes,
 not per-call options. Run `node scripts/verify-nck1-analysis-agent-plugin.mjs`
 after changing this boundary.
 
-## Source-intake wakeup plugin
+## Source-intake wakeup — retired
+
+Owner starts imports explicitly in Amp. The current `source-intake-wakeup.js` is
+an inert compatibility entrypoint, even with old enable flags. The notifier never
+sends and dispatcher mutations are blocked; historical status remains read-only.
+Preserve private journals, bindings and failed/UNKNOWN work. Preview acceptance
+does not authorize publication. See `docs/import/agent-contract.md`.
+
+The live controller has paused automatic dispatch. This does not prove its durable
+webhook is unregistered: the current API exposes no unregister operation. Do not
+report source removal, plugin reload or controller pause as capability deletion.
+Production sender/configuration retirement needs its reviewed deployment boundary.
+
+<details>
+<summary>Historical setup (retired; do not activate)</summary>
 
 `source-intake-wakeup.js` is the optional wakeup layer for the Owner source-intake queue.
 SQLite remains authoritative: a missed, duplicated, or delayed webhook cannot create a second
@@ -151,6 +165,8 @@ bound source-intake claim to another thread.
 
 Creating the secrets, enabling/reloading the plugin, and configuring the webhook are shared-state
 operations that remain disabled until separately authorized by the Owner.
+
+</details>
 
 ## GitHub CI Orb
 

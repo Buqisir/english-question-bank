@@ -13,6 +13,7 @@ import {
   validatePublicSearchMetadata,
 } from '../server/paper-import-ai/publicSearchMetadata.mjs'
 import { buildNck1CompatibilityPackage } from '../server/import-review/revisionProjection.mjs'
+import { stableStringify } from '../shared/paper-canonical/stable.mjs'
 
 const materialization = makeFixture()
 const reading = materialization.groups.find((group) => group.slotId === 'reading.a')
@@ -96,6 +97,9 @@ assert.equal(grammar.metadata.questions[0].blankType, 'given')
 assert.ok(Object.hasOwn(grammar.metadata.questions[0], 'derived'), 'grammar derived fields are program-filled')
 assert.equal(Object.hasOwn(authored.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0], 'derived'), false)
 assert.deepEqual(validatePublicSearchMetadata({ sidecar: final, ...binding }), [])
+const persisted = JSON.parse(stableStringify(final))
+assert.deepEqual(validatePublicSearchMetadata({ sidecar: persisted, ...binding }), [],
+  'CLI canonical JSON persistence must not invalidate derived object fields')
 
 const schema = JSON.parse(readFileSync(new URL('../schemas/paper-import/public-search-metadata-v1.schema.json', import.meta.url)))
 const schemaValidate = new Ajv({ strict: true }).compile(schema)
@@ -109,6 +113,9 @@ assert.ok(codes((value) => { value.groups[0].metadata.questions = {} }).has('PUB
 assert.ok(codes((value) => { value.groups[0].metadata.questions = [null] }).has('PUBLIC_METADATA_READING_PROFILE_INVALID'))
 assert.ok(codes((value) => { value.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0].role = 'invented-role' }).has('PUBLIC_METADATA_GRAMMAR_ROLE_INVALID'))
 assert.ok(codes((value) => { value.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0].role = 'subject' }).has('PUBLIC_METADATA_GRAMMAR_ROLE_INVALID'))
+assert.ok(codes((value) => {
+  value.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0].derived.voice = 'wrong-voice'
+}).has('PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'), 'changed derived values must still fail')
 assert.ok(codes((value) => { value.groups.find((group) => group.family === 'application-writing').metadata.theme = labelA }).has('PUBLIC_METADATA_APPLICATION_INVALID'))
 assert.deepEqual(final.groups.find((group) => group.family === 'continuation-writing').metadata.relationships, [])
 assert.equal(final.groups.find((group) => group.family === 'application-writing').metadata.form, 'thank-you email')

@@ -235,20 +235,11 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
   routes.push(defineRoute('POST', /^\/api\/source-intakes\/([^/]+)\/submissions\/([^/]+)\/notify$/, route(async ({
     response,
     context,
-    match,
   }) => {
     if (!requireOwner(response, context)) return
-    const submission = store.assertQueuedForNotification(match[2])
-    if (submission.intakeId !== match[1]) {
-      const error = new Error('Submission does not belong to source intake')
-      error.code = 'SOURCE_INTAKE_SUBMISSION_NOT_FOUND'
-      error.status = 404
-      throw error
-    }
-    const notification = await notifySubmission(submission, context.session.username)
-    context.sendJson(response, 200, {
-      intake: store.intakeDetail(match[1]),
-      notification,
+    context.sendJson(response, 410, {
+      code: 'SOURCE_INTAKE_AUTOMATION_RETIRED',
+      error: 'Automatic intake is retired. Start imports explicitly in Amp.',
     })
   })))
 
@@ -280,37 +271,18 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
     })
   })))
 
-  routes.push(defineRoute('POST', /^\/api\/import-agent-source-intakes\/([^/]+)\/orb-worker\/reserve$/, route(async ({
+  routes.push(defineRoute('POST', /^\/api\/import-agent-source-intakes\/([^/]+)\/orb-worker\/(reserve|bind)$/, route(({
     request,
     response,
     context,
-    match,
   }) => {
-    const actor = agentIdentity(request, context, agentToken)
-    if (!actor) {
+    if (!agentIdentity(request, context, agentToken)) {
       context.sendJson(response, 401, { error: 'agent_auth_required' })
       return
     }
-    const input = await context.readJsonBody(request, { maxBytes: 5_000 })
-    context.sendJson(response, 200, {
-      worker: store.reserveOrbWorker(match[1], input, actor),
-    })
-  })))
-
-  routes.push(defineRoute('POST', /^\/api\/import-agent-source-intakes\/([^/]+)\/orb-worker\/bind$/, route(async ({
-    request,
-    response,
-    context,
-    match,
-  }) => {
-    const actor = agentIdentity(request, context, agentToken)
-    if (!actor) {
-      context.sendJson(response, 401, { error: 'agent_auth_required' })
-      return
-    }
-    const input = await context.readJsonBody(request, { maxBytes: 5_000 })
-    context.sendJson(response, 200, {
-      worker: store.bindOrbWorker(match[1], input, actor),
+    context.sendJson(response, 410, {
+      code: 'SOURCE_INTAKE_AUTOMATION_RETIRED',
+      error: 'Automatic intake is retired; existing worker bindings are retained.',
     })
   })))
 

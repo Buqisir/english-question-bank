@@ -44,7 +44,9 @@ export function projectListeningGroupPresentation(group) {
     transferNotice: short ? listeningOpening.transferNotice : null,
     sectionHeading: instruction(short
       ? 'section.listening.short-dialogue'
-      : 'section.listening.long-form'),
+      : 'section.listening.long-form')
+      .replace(/^(第[一二]节)\s*/u, '$1 ')
+      .replace(/\s*(\d+(?:\.\d+)?)\s*/gu, ' $1 '),
     instruction: short
       ? section1Instruction(group.firstSectionPlayback ?? 'twice_default')
       : instruction('listening.long-form.prompt'),

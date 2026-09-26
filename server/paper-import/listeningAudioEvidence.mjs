@@ -37,6 +37,13 @@ export const LISTENING_AUDIO_ATTACHMENTS = Object.freeze([
   },
 ])
 
+// Signal-only rehearsal evidence makes no transcript/content-safety assertion.
+export const LISTENING_SIGNAL_ATTACHMENTS = Object.freeze([
+  ...LISTENING_AUDIO_ATTACHMENTS.slice(0, 2),
+  { attachmentId: 'listening-audio-segments', role: 'listening_audio_segments',
+    path: 'materialization/listening-audio/segments-v1.json', mediaType: 'application/json' },
+])
+
 function fail(message) {
   const error = new Error(message)
   error.code = 'LISTENING_AUDIO_EVIDENCE_INVALID'
@@ -309,6 +316,12 @@ export function assertListeningAudioSource(evidence, listening) {
     return null
   }
   if (!evidence) fail('Captured Listening requires reviewed audio')
+  if (evidence.segments) {
+    const playback = evidence.descriptors.get('listening_audio_playback')
+    return { relativePath: 'listening/playback.mp3', sha256: playback.sha256,
+      byteLength: playback.byteLength, durationSeconds: evidence.segments.durationSeconds,
+      mediaType: 'audio/mpeg' }
+  }
   if (evidence.asr?.schemaVersion === 'listening-audio-asr-v2') {
     const dialogue = firstListeningDialogue(listening)
     if (digestJson(dialogue) !== digestJson(evidence.check.comparisonReference.dialogue)
@@ -357,14 +370,16 @@ export function assertListeningAudioManifest(rootDir, manifest) {
     }
     return null
   }
+  const signalOnly = manifest?.schemaVersion === 'universal-nck1-source-manifest-v3'
+  const expectedAttachments = signalOnly ? LISTENING_SIGNAL_ATTACHMENTS : LISTENING_AUDIO_ATTACHMENTS
   if (
-    manifest?.schemaVersion !== 'universal-nck1-source-manifest-v2'
+    (!signalOnly && manifest?.schemaVersion !== 'universal-nck1-source-manifest-v2')
     || !Array.isArray(manifest.attachments)
-    || manifest.attachments.length !== LISTENING_AUDIO_ATTACHMENTS.length
+    || manifest.attachments.length !== expectedAttachments.length
   ) fail('Universal Source Manifest has an unsupported attachment shape')
 
   const descriptors = new Map()
-  for (const expected of LISTENING_AUDIO_ATTACHMENTS) {
+  for (const expected of expectedAttachments) {
     const descriptor = manifest.attachments.find((item) => item?.role === expected.role)
     if (
       !descriptor
@@ -380,6 +395,30 @@ export function assertListeningAudioManifest(rootDir, manifest) {
       fail(`Listening attachment bytes changed: ${descriptor.path}`)
     }
     descriptors.set(descriptor.role, descriptor)
+  }
+  if (signalOnly) {
+    const segments = readJsonArtifact(rootDir, LISTENING_SIGNAL_ATTACHMENTS[2].path)
+    if (segments.schemaVersion !== 'listening-audio-segments-v1'
+      || segments.paperId !== manifest.paperId
+      || segments.originalAudioSha256 !== descriptors.get('listening_audio_original').sha256
+      || segments.playbackAudioSha256 !== descriptors.get('listening_audio_playback').sha256
+      || segments.contentValidation !== 'not_performed'
+      || !Number.isFinite(segments.durationSeconds) || segments.durationSeconds <= 0
+      || !Array.isArray(segments.candidates)
+      || !['candidate_segments', 'unsegmented'].includes(segments.state)
+      || (segments.state === 'candidate_segments') !== (segments.candidates.length === 10)) {
+      fail('Signal-only audio evidence is incomplete or not bound to its source/playback')
+    }
+    let previousEnd = 0
+    for (const [index, segment] of segments.candidates.entries()) {
+      if (segment.candidate !== index + 1 || !Number.isFinite(segment.startSeconds)
+        || !Number.isFinite(segment.endSeconds) || segment.startSeconds < previousEnd
+        || segment.endSeconds <= segment.startSeconds || segment.endSeconds > segments.durationSeconds) {
+        fail('Signal-only candidate boundaries are invalid or overlap')
+      }
+      previousEnd = segment.endSeconds
+    }
+    return { descriptors, segments }
   }
   const asr = validateAsr(
     readJsonArtifact(rootDir, LISTENING_AUDIO_PATHS.asr),

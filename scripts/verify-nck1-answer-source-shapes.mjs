@@ -11,6 +11,7 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
+import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
 import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
@@ -331,6 +332,13 @@ try {
     '--source', `question_and_answers=${combinedPath}`,
   ), /INITIALIZED/u)
   assert.match(run('materialize', cliPaperId), /"disposition": "ready_for_verification"/u)
+  assert.throws(() => run('verify', cliPaperId), /required review is missing/u)
+  // Complete the new preprocessing stage for known synthetic test content.
+  const spellingReview = prepareSpellingReview(new Uint8Array(readFileSync(path.join(cliPaperDir, 'materialization/nck1-source-materialization-v1.json'))), TEXT_REVIEW_POLICY)
+  spellingReview.reviewedBy = 'import_agent'
+  spellingReview.reviewedAt = '2026-09-21T00:00:00Z'
+  spellingReview.targets.forEach(target => { target.decision = 'unchanged' })
+  writeFileSync(path.join(cliPaperDir, SPELLING_REVIEW_FILE), JSON.stringify(spellingReview))
   assert.match(run('verify', cliPaperId), /"assertions": 45/u)
   assert.match(run('build', cliPaperId), /BUILT CANDIDATE/u)
   const materialization = JSON.parse(readFileSync(path.join(

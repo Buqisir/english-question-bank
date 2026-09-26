@@ -175,11 +175,12 @@ export function createSinglePaperPromotionService({
   publish = publishUniversalNck1Import,
   afterPublish = null,
 }) {
-  return {
-    promote(paperId, input, actor) {
+  function execute(paperId, begun) {
       const store = getStore()
-      const begun = store.beginPromotion(paperId, input, actor)
       let promotion = begun.promotion
+      if (begun.action === 'consumed') {
+        return { status: promotion?.state || 'consumed', promotion }
+      }
       const { revision } = store.projectionForRevision(promotion.revisionId)
       if (
         revision.paperId !== paperId
@@ -330,6 +331,15 @@ export function createSinglePaperPromotionService({
       } finally {
         db.close()
       }
+  }
+  return {
+    promote(paperId, input, actor) {
+      const store = getStore()
+      return execute(paperId, store.beginPromotion(paperId, input, actor))
+    },
+    promoteScoped(paperId, requestId, secretHash, actor) {
+      const store = getStore()
+      return execute(paperId, store.beginScopedPromotion(paperId, requestId, secretHash, actor))
     },
   }
 }

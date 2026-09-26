@@ -9,7 +9,7 @@ import {
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-pdf-materialization-producer-v6'
+  'nck1-pdf-materialization-producer-v8'
 
 const PDF = 'application/pdf'
 
@@ -23,9 +23,9 @@ function addIssue(issues, code, path, message, evidence = null) {
   issues.push({ code, path, message, source: evidence })
 }
 
-export function nck1PdfProducerSourceDigest(documents) {
+export function nck1PdfProducerSourceDigest(documents, { producerVersion = NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION } = {}) {
   return digestJson({
-    producerVersion: NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION,
+    producerVersion,
     documents: documents.map((document) => ({
       documentId: document.documentId,
       sha256: document.sha256,

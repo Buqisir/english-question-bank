@@ -95,6 +95,11 @@ function actualRendererBuildId() {
     path.join(rootDir, 'shared'),
     path.join(rootDir, 'server/figures'),
     path.join(rootDir, 'server/import-review/revisionProjection.mjs'),
+    path.join(rootDir, 'server/import-review/reviewPagination.mjs'),
+    path.join(rootDir, 'server/draft-paper/fixedPagePdfPlanner.mjs'),
+    path.join(rootDir, 'server/draft-paper/studentProductPdf.mjs'),
+    path.join(rootDir, 'server/draft-paper/paginationRenderer.mjs'),
+    path.join(rootDir, 'server/paper-import/paginationPlan.mjs'),
     path.join(rootDir, 'server/paper-canonical'),
     path.join(rootDir, 'server/print-renderer.mjs'),
   ]
@@ -130,10 +135,7 @@ function getSourceIntakeStore() {
   }
   return sourceIntakeStore
 }
-const sourceIntakeNotifier = createSourceIntakeNotifier({
-  webhookUrl: process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_URL || '',
-  webhookSecret: process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET || '',
-})
+const sourceIntakeNotifier = createSourceIntakeNotifier()
 const singlePaperPromotionService = createSinglePaperPromotionService({
   getStore: getImportReviewStore,
   openDatabase,
@@ -518,6 +520,9 @@ const serverRoutes = [
     shipToken: process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '',
     buildPrintHtml,
     promotionService: singlePaperPromotionService,
+    scopedPublicationEnabled: process.env.QUESTION_BANK_SCOPED_PUBLICATION_ENABLED === 'true',
+    trustedPublicOrigin: process.env.QUESTION_BANK_IMPORT_REVIEW_OWNER_ORIGIN
+      || process.env.QUESTION_BANK_PUBLIC_ORIGIN || '',
   }),
   ...createSourceIntakeRoutes({
     getStore: getSourceIntakeStore,

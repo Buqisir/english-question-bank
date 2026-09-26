@@ -427,7 +427,9 @@ async function assertActualPaperSurface() {
       { analysisCase: 'wrong-schema', lecture: true },
       { analysisCase: 'stale-paper', lecture: true },
     ]) {
-      const page = await browser.newPage()
+      // This loop exercises direct paper clicks beside docked lecture notes.
+      // At 1280px the notes intentionally use a drawer over the paper.
+      const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
       await page.route('**/api/paper-canonical/consumption?*', (route) =>
         route.fulfill({
           status: 200,
@@ -481,6 +483,9 @@ async function assertActualPaperSurface() {
       assert.equal(await page.locator('[data-canonical-pair]').count(), 5)
       assert.equal(await page.locator('[data-canonical-option-id]').count(), 7)
       assert.equal(await page.locator('[data-canonical-bank-id]').count(), 1)
+      assert.deepEqual(await page.locator('.ps-option-bank .ps-option-label').evaluateAll(labels =>
+        labels.map(label => getComputedStyle(label).fontWeight)), Array(7).fill('400'),
+      'seven-choice bank labels use ordinary body weight')
       for (const pair of group.questionBlankPairs) {
         assert.equal(
           await page.locator(
@@ -518,6 +523,13 @@ async function assertActualPaperSurface() {
         )
       }
       if (lecture) {
+        assert.equal(
+          await page.locator('.paper-browse-lecture-panel').evaluate(
+            (node) => getComputedStyle(node).position,
+          ),
+          'sticky',
+          'direct paper focus checks require the docked lecture layout',
+        )
         for (const pair of group.questionBlankPairs) {
           const question = group.questions.find(
             (candidate) => candidate.questionId === pair.questionId,

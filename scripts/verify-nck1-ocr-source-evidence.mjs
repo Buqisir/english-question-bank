@@ -14,7 +14,10 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
+import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
+import { inspectNck1Materialization } from './import-pipeline/nck1-docx-materialize.mjs'
 import {
+  nck1OcrProducerSourceDigest,
   produceNck1OcrMaterialization,
 } from '../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import {
@@ -363,6 +366,11 @@ try {
   assert.deepEqual(readFileSync(pdfReviewPath), pdfReviewBytes)
   assert.match(run('confirm-ocr', paperId, confirmationPath), /"confirmedItems":/u)
   assert.match(run('materialize', paperId), /"disposition": "ready_for_verification"/u)
+  const spellingReview = prepareSpellingReview(new Uint8Array(readFileSync(path.join(cliPaperDir, fixture.manifest.materializationPath))), TEXT_REVIEW_POLICY)
+  spellingReview.reviewedBy = 'import_agent'
+  spellingReview.reviewedAt = '2026-09-21T00:00:00Z'
+  spellingReview.targets.forEach(target => { target.decision = 'unchanged' })
+  writeFileSync(path.join(cliPaperDir, SPELLING_REVIEW_FILE), JSON.stringify(spellingReview))
   assert.match(run('verify', paperId), /"groups": 9/u)
   assert.match(run('verify', paperId), /"assertions": 45/u)
   assert.match(run('build', paperId), /BUILT CANDIDATE/u)
@@ -381,10 +389,24 @@ try {
   )
   const readyBytes = readFileSync(outputPath)
   const readyReceipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
-  writeFileSync(receiptPath, `${JSON.stringify({
-    ...readyReceipt,
-    producerVersion: `${readyReceipt.producerVersion}-previous`,
-  }, null, 2)}\n`)
+  const reviewPath = path.join(cliPaperDir, 'materialization/nck1-ocr-materialization-review-v1.json')
+  const readyReviewBytes = readFileSync(reviewPath)
+  const historicalVersion = 'nck1-ocr-materialization-producer-v6'
+  const historicalDigest = nck1OcrProducerSourceDigest(fixture.sourceDocuments, {
+    evidence: fixture.evidence, confirmation: fixture.confirmation, producerVersion: historicalVersion,
+  })
+  writeFileSync(receiptPath, JSON.stringify({ ...readyReceipt, producerVersion: historicalVersion, sourceDigest: historicalDigest }))
+  writeFileSync(reviewPath, JSON.stringify({ ...JSON.parse(readyReviewBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }))
+  const cliManifest = JSON.parse(readFileSync(path.join(cliPaperDir, 'universal-source-manifest.json')))
+  const historical = inspectNck1Materialization({ paperDir: cliPaperDir, manifest: cliManifest })
+  assert.equal(historical.producerState, 'historical')
+  assert.equal(historical.outputState, 'producer_output_unchanged')
+  const historicalBytes = [outputPath, receiptPath, reviewPath].map(file => readFileSync(file))
+  const refuseHistoricalWriter = () => {
+    assert.throws(() => run('materialize', paperId), error => /refusing to overwrite/u.test(String(error.stderr)))
+    for (const [index, file] of [outputPath, receiptPath, reviewPath].entries()) assert.deepEqual(readFileSync(file), historicalBytes[index])
+  }
+  refuseHistoricalWriter()
   const correctedEvidence = cloneJson(fixture.evidence)
   const correctedObservation = correctedEvidence.documents[0].pages[0].observations[5]
   correctedObservation.region.y += 0.001
@@ -396,12 +418,17 @@ try {
   correctedConfirmation.evidenceDigest = correctedEvidence.evidenceDigest
   writeFileSync(stagedEvidencePath, `${JSON.stringify(correctedEvidence, null, 2)}\n`)
   writeFileSync(stagedConfirmationPath, `${JSON.stringify(correctedConfirmation, null, 2)}\n`)
+  assert.throws(() => inspectNck1Materialization({ paperDir: cliPaperDir, manifest: cliManifest }), /not bound/u)
+  refuseHistoricalWriter()
+  // Only a same-version input correction may replace an untouched output.
+  writeFileSync(receiptPath, JSON.stringify(readyReceipt))
+  writeFileSync(reviewPath, readyReviewBytes)
   assert.match(run('materialize', paperId), /"cached": false/u)
   const correctedBytes = readFileSync(outputPath)
   const correctedReceipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
   assert.notDeepEqual(correctedBytes, readyBytes)
   assert.notEqual(correctedReceipt.sourceDigest, readyReceipt.sourceDigest)
-  assert.notEqual(correctedReceipt.producerVersion, `${readyReceipt.producerVersion}-previous`)
+  assert.equal(correctedReceipt.producerVersion, readyReceipt.producerVersion)
 
   const guardedEvidence = cloneJson(correctedEvidence)
   const guardedObservation = guardedEvidence.documents[0].pages[0].observations[5]

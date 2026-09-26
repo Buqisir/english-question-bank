@@ -13,6 +13,7 @@ import path from 'node:path'
 
 import {
   LISTENING_AUDIO_PATHS,
+  LISTENING_SIGNAL_ATTACHMENTS,
   assertListeningAudioManifest,
   listeningAudioAttachmentDescriptors,
   listeningOrderedBigramRecall,
@@ -202,6 +203,51 @@ function transcribe(playbackPath, fixturePath = null) {
       'LISTENING_AUDIO_ASR_FAILED',
     )
   }
+}
+
+export function stageSignalListeningAudio({ paperDir, paperId, sourcePath }) {
+  const manifestPath = path.join(paperDir, 'universal-source-manifest.json')
+  const manifest = readJson(manifestPath, 'Universal Source Manifest')
+  if (manifest.schemaVersion !== 'universal-nck1-source-manifest-v1' || manifest.paperId !== paperId) {
+    fail('Signal audio requires a fresh attachment-free source manifest')
+  }
+  const originalPath = artifactPath(paperDir, LISTENING_AUDIO_PATHS.original)
+  const playbackPath = artifactPath(paperDir, LISTENING_AUDIO_PATHS.playback)
+  if (LISTENING_SIGNAL_ATTACHMENTS.some(({ path: relative }) => existsSync(artifactPath(paperDir, relative)))) {
+    fail('Audio is already staged; preserve evidence rather than overwriting it')
+  }
+  // Check dependencies before creating an immutable partial workspace.
+  execFileSync('python3', ['-c', 'import numpy; import scipy.io; import scipy.signal; import scipy.ndimage'], { stdio: 'pipe' })
+  mkdirSync(path.dirname(originalPath), { recursive: true })
+  copyFileSync(sourcePath, originalPath)
+  const workDir = artifactPath(paperDir, 'materialization/listening-audio/signal-work')
+  execFileSync('python3', [path.join(import.meta.dirname, 'segment-listening.py'), originalPath, workDir], {
+    stdio: 'pipe', timeout: 120_000,
+  })
+  const result = readJson(path.join(workDir, 'candidates.json'), 'Signal segmentation')
+  // Encode the SAME fully decoded PCM used for timing, not another MP3 seek clock.
+  normalizePlayback(path.join(workDir, 'full.wav'), playbackPath)
+  const segments = {
+    schemaVersion: 'listening-audio-segments-v1', paperId,
+    originalAudioSha256: sha256(readFileSync(originalPath)),
+    playbackAudioSha256: sha256(readFileSync(playbackPath)),
+    durationSeconds: result.decodedDurationSeconds,
+    contentValidation: 'not_performed',
+    state: result.candidates.length === 10 ? 'candidate_segments' : 'unsegmented',
+    candidates: result.candidates,
+    method: result.method,
+    decodeWarnings: result.decodeWarnings,
+  }
+  atomicJson(artifactPath(paperDir, LISTENING_SIGNAL_ATTACHMENTS[2].path), segments)
+  const nextManifest = { ...manifest, schemaVersion: 'universal-nck1-source-manifest-v3',
+    attachments: LISTENING_SIGNAL_ATTACHMENTS.map((attachment) => {
+      const bytes = readFileSync(artifactPath(paperDir, attachment.path))
+      return { ...attachment, sha256: sha256(bytes), byteLength: bytes.length }
+    }) }
+  assertListeningAudioManifest(paperDir, nextManifest)
+  atomicJson(manifestPath, nextManifest)
+  return { paperId, state: segments.state, durationSeconds: segments.durationSeconds,
+    candidateCount: segments.candidates.length, contentValidation: 'not_performed' }
 }
 
 export function stageListeningAudio({ paperDir, paperId, sourcePath, asrFixturePath = null }) {

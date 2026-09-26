@@ -1,4 +1,5 @@
 import { defineRoute } from '../router/index.mjs'
+import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
 
 function routeError(error) {
   return error instanceof Error ? error.message : String(error)
@@ -329,7 +330,7 @@ export function createDraftPaperRoutes() {
           : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
         const pageLayout = input.pageLayout === undefined
           ? 'natural'
-          : requiredEnum(input.pageLayout, ['natural', 'friendly8', 'friendly10'], 'pageLayout')
+          : requiredEnum(input.pageLayout, ['natural', ...FIXED_PAGINATION_EDITIONS], 'pageLayout')
         // draft-desk-b step4 (MF-2/MF-7): exportDraftPaperPdf is now async (it
         // renders through the same Chromium/paged.js pipeline as the pagination
         // route, via getDraftPaperPagination — see draftPaperStore.mjs) where the
@@ -338,6 +339,7 @@ export function createDraftPaperRoutes() {
         if (pageLayout !== 'natural') {
           response.setHeader('x-paper-crossing-group-count', String(result.crossingGroupCount ?? 0))
           response.setHeader('x-paper-split-option-bank-count', String(result.splitOptionBankCount ?? 0))
+          if (result.fontSizePt) response.setHeader('x-paper-font-size-pt', String(result.fontSizePt))
         }
         context.sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {

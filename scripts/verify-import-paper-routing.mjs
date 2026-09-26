@@ -26,7 +26,7 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 30, 'import pack adds summary, search metadata and public Review consumer failure layers')
+assert(materialization.scripts.length <= 31, 'import pack includes Review target, summary, search metadata and public consumer failure layers')
 for (const required of [
   'scripts/verify-paragraph-summaries-v1.mjs',
   'scripts/verify-public-search-metadata-v1.mjs',
@@ -41,6 +41,7 @@ for (const required of [
   'scripts/verify-universal-nck1-source-only-intake.mjs',
   'scripts/verify-universal-nck1-source-only-boundaries.mjs',
   'scripts/verify-import-review-ocr-confirmation.mjs',
+  'scripts/verify-import-review-target.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
   'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',

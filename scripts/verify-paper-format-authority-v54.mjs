@@ -16,7 +16,7 @@ import presentationV2Schema from '../schemas/paper-canonical/paper-presentation-
 
 import {
   canonicalAuthorityRef,
-  nck1MaterializationCandidateAuthorityRef,
+  nck1MaterializationHistoricalAuthorityRef54,
   resolveCanonicalAuthority,
   validateJsonSchema,
 } from '../shared/paper-canonical/authority.mjs'
@@ -54,7 +54,7 @@ assert.equal(resolveConsumerPresentation(ref(screenV42)).policy.version, '2', 'v
 assert.equal(resolveConsumerPresentation(ref(printPdfV43)).policy.version, '2', 'v54 Print/PDF selects presentation v2')
 
 assert.equal(canonicalAuthorityRef.manifestVersion, '36', 'global accepted authority must not advance')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '54')
+assert.equal(nck1MaterializationHistoricalAuthorityRef54.manifestVersion, '54')
 assert.equal(resolveCanonicalAuthority({ manifestId: manifestV52.manifestId, manifestVersion: '52', manifestDigest: digestJson(manifestV52) }).ok, true)
 assert.equal(resolveCanonicalAuthority({ manifestId: manifestV53.manifestId, manifestVersion: '53', manifestDigest: digestJson(manifestV53) }).ok, true)
 assert.equal(resolveCanonicalAuthority({ manifestId: manifestV54.manifestId, manifestVersion: '54', manifestDigest: digestJson(manifestV54) }).ok, true)

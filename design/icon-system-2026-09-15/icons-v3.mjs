@@ -271,6 +271,13 @@ export const generic = {
     line: `${SOLAR_VOLUME}<path d="M20.2 8.2a4.6 4.6 0 0 1 0 7.6"/>`,
     fillShape: SOLAR_VOLUME,
   }),
+  // 听力录音的启动键：一条头梁 + 两只圆胖耳罩。三个形、无细节；耳罩是药丸，梁端落在耳罩顶边正中。
+  headphones: {
+    zh: '听力录音',
+    lucide: 'headphones',
+    line: `<path d="M5.25 12.25v-1a6.75 6.75 0 0 1 13.5 0v1"/>${rr(3, 12.25, 4.5, 7.5, 2.25)}${rr(16.5, 12.25, 4.5, 7.5, 2.25)}`,
+    fillShape: `${rr(3, 12.25, 4.5, 7.5, 2.25)}${rr(16.5, 12.25, 4.5, 7.5, 2.25)}`,
+  },
   shuffle: {
     zh: '随机',
     lucide: 'shuffle',

@@ -627,7 +627,7 @@ try {
   })
   assert.equal(submitted.status, 201)
   assert.equal(submitted.json.intake.state, 'queued')
-  assert.deepEqual(submitted.json.notification, { state: 'skipped', reason: 'not_configured' })
+  assert.deepEqual(submitted.json.notification, { state: 'skipped', reason: 'automatic_intake_retired' })
   const submissionId = submitted.json.submission.id
 
   const ownerCannotClaim = await request(
@@ -999,15 +999,8 @@ try {
     },
   })
   const webhookOutcome = await webhookNotifier.notify(submitted.json.submission)
-  assert.deepEqual(webhookOutcome, { state: 'sent' })
-  const webhookBody = JSON.parse(webhookRequest.body)
-  assert.deepEqual(Object.keys(webhookBody).sort(), [
-    'event',
-    'schemaVersion',
-    'submissionDigest',
-    'submissionId',
-  ])
-  assert.match(webhookRequest.headers['x-eqbank-signature'], /^sha256=[a-f0-9]{64}$/)
+  assert.deepEqual(webhookOutcome, { state: 'skipped', reason: 'automatic_intake_retired' })
+  assert.equal(webhookRequest, null, 'retained webhook settings cannot send notifications')
 
   const cliCreated = await request(origin, '/api/source-intakes', {
     method: 'POST',
@@ -1063,83 +1056,33 @@ try {
     },
   })
   assert.equal(ownerCannotReserve.status, 401)
-  const digestMismatch = await request(origin, `${workerPath}/reserve`, {
-    method: 'POST',
-    headers: { authorization: `Bearer ${agentToken}` },
-    body: {
-      submissionDigest: `sha256:${'f'.repeat(64)}`,
-      webhookEventId: 'webhook-wrong-digest',
-    },
-  })
-  assert.equal(digestMismatch.status, 409)
-  assert.equal(digestMismatch.json.code, 'SOURCE_INTAKE_SUBMISSION_DIGEST_MISMATCH')
+  const beforeRetiredCalls = store.intakeDetail(cliIntakeId)
+  for (const [pathname, role] of [
+    [`${workerPath}/reserve`, 'import_agent'],
+    [`${workerPath}/bind`, 'import_agent'],
+    [`/api/source-intakes/${cliIntakeId}/submissions/${cliSubmissionId}/notify`, 'owner'],
+  ]) {
+    const retired = await request(origin, pathname, { method: 'POST', role, body: {
+      submissionDigest: cliSubmitted.json.submission.submissionDigest,
+      webhookEventId: 'retired-delivery', ampThreadId: orbThreadId,
+    } })
+    assert.equal(retired.status, 410)
+    assert.equal(retired.json.code, 'SOURCE_INTAKE_AUTOMATION_RETIRED')
+  }
+  assert.deepEqual(store.intakeDetail(cliIntakeId), beforeRetiredCalls)
+  assert.equal((await request(origin, workerStatusPath, { role: 'import_agent' })).json.worker.state, 'unreserved')
 
-  const reservations = await Promise.all([
-    request(origin, `${workerPath}/reserve`, {
-      method: 'POST',
-      headers: { authorization: `Bearer ${agentToken}` },
-      body: {
-        submissionDigest: cliSubmitted.json.submission.submissionDigest,
-        webhookEventId: 'webhook-concurrent-delivery',
-      },
-    }),
-    request(origin, `${workerPath}/reserve`, {
-      method: 'POST',
-      role: 'import_agent',
-      body: {
-        submissionDigest: cliSubmitted.json.submission.submissionDigest,
-        webhookEventId: 'webhook-concurrent-delivery',
-      },
-    }),
-  ])
-  assert.deepEqual(
-    reservations.map((result) => result.json.worker.action).sort(),
-    ['busy', 'create'],
-    'concurrent duplicate deliveries receive only one create reservation',
-  )
-  const firstReservation = reservations.find((result) => result.json.worker.action === 'create')
-    .json.worker
-  const reservedStatus = await request(origin, workerStatusPath, { role: 'import_agent' })
-  assert.equal(reservedStatus.json.worker.state, 'reserved')
-  assert.equal(reservedStatus.json.worker.ampThreadId, null)
-  assert.equal(JSON.stringify(reservedStatus.json).includes(firstReservation.reservationToken), false)
+  // Seed a historical binding directly; the retired HTTP routes must never create one.
   clock = new Date('2026-08-30T01:05:01.000Z')
-  const replacementReservation = await request(origin, `${workerPath}/reserve`, {
-    method: 'POST',
-    headers: { authorization: `Bearer ${agentToken}` },
-    body: {
-      submissionDigest: cliSubmitted.json.submission.submissionDigest,
-      webhookEventId: 'webhook-after-create-bind-crash',
-    },
-  })
-  assert.equal(replacementReservation.status, 200)
-  assert.equal(replacementReservation.json.worker.action, 'create')
-  assert.notEqual(
-    replacementReservation.json.worker.reservationToken,
-    firstReservation.reservationToken,
-  )
-  const staleBind = await request(origin, `${workerPath}/bind`, {
-    method: 'POST',
-    headers: { authorization: `Bearer ${agentToken}` },
-    body: {
-      submissionDigest: cliSubmitted.json.submission.submissionDigest,
-      reservationToken: firstReservation.reservationToken,
-      ampThreadId: orbThreadId,
-    },
-  })
-  assert.equal(staleBind.status, 409)
-  assert.equal(staleBind.json.code, 'SOURCE_INTAKE_WORKER_RESERVATION_INVALID')
-  const bound = await request(origin, `${workerPath}/bind`, {
-    method: 'POST',
-    role: 'import_agent',
-    body: {
-      submissionDigest: cliSubmitted.json.submission.submissionDigest,
-      reservationToken: replacementReservation.json.worker.reservationToken,
-      ampThreadId: orbThreadId,
-    },
-  })
-  assert.equal(bound.status, 200)
-  assert.equal(bound.json.worker.ampThreadId, orbThreadId)
+  const historicalReservation = store.reserveOrbWorker(cliSubmissionId, {
+    submissionDigest: cliSubmitted.json.submission.submissionDigest,
+    webhookEventId: 'historical-fixture',
+  }, 'fixture')
+  store.bindOrbWorker(cliSubmissionId, {
+    submissionDigest: cliSubmitted.json.submission.submissionDigest,
+    reservationToken: historicalReservation.reservationToken,
+    ampThreadId: orbThreadId,
+  }, 'fixture')
   const boundStatus = await request(origin, workerStatusPath, { role: 'import_agent' })
   assert.deepEqual(boundStatus.json.worker, {
     state: 'bound',
@@ -1156,8 +1099,8 @@ try {
       webhookEventId: 'webhook-resume-delivery',
     },
   })
-  assert.equal(resumed.json.worker.action, 'resume')
-  assert.equal(resumed.json.worker.ampThreadId, orbThreadId)
+  assert.equal(resumed.status, 410, 'even historical bindings cannot automatically resume')
+  assert.deepEqual((await request(origin, workerStatusPath, { role: 'import_agent' })).json, boundStatus.json)
 
   const unboundClaim = await request(
     origin,

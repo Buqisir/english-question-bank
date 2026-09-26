@@ -775,7 +775,7 @@ function semanticMismatchForGroup({
           inlineText(block.inlines)))
           !== JSON.stringify(
             (task.continuationStarters || []).map(
-              canonicalizeVisibleEnglishTypography,
+              (text) => canonicalizeVisibleEnglishTypography(text),
             ),
           )
       )

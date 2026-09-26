@@ -1,5 +1,6 @@
 import metrics from '../papersurface/termes-source-han-metrics-v1.json' with { type: 'json' }
 import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v10.json' with { type: 'json' }
+import adaptiveRendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v11.json' with { type: 'json' }
 
 import { digestJson, sha256 } from './stable.mjs'
 
@@ -32,6 +33,12 @@ const RULES = Object.freeze({
     rendererTypography.coordinates.questionStemAndOuterOptionBlockStartTwip,
   rendererTypographyDigest: digestJson(rendererTypography),
 })
+const ADAPTIVE_RULES = Object.freeze({
+  ...RULES,
+  rulesetId: 'abcd-option-layout-v2',
+  rendererTypographyDigest: digestJson(adaptiveRendererTypography),
+})
+const RULESETS = new Map([[RULES.rulesetId, RULES], [ADAPTIVE_RULES.rulesetId, ADAPTIVE_RULES]])
 
 const READING_FOUR_COLUMN_STARTS_TWIP = Object.freeze([
   0,
@@ -156,19 +163,17 @@ function measureOption(option) {
   }
 }
 
-function capacities() {
+function capacities(rules = RULES, secondTabTwip = rules.twoColumnSecondTabTwip,
+  fourColumnStartsTwip = READING_FOUR_COLUMN_STARTS_TWIP) {
   return {
-    four: [
-      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.optionRowWidthTwip - RULES.fourColumnPitchTwip * 3 - RULES.fitSafetyTwip,
-    ],
+    four: fourColumnStartsTwip.map((start, index) =>
+      (fourColumnStartsTwip[index + 1] ?? rules.optionRowWidthTwip) - start
+      - (index === 3 ? 0 : rules.minimumGutterTwip) - rules.fitSafetyTwip),
     two: [
-      RULES.twoColumnSecondTabTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.optionRowWidthTwip - RULES.twoColumnSecondTabTwip - RULES.fitSafetyTwip,
-      RULES.twoColumnSecondTabTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.optionRowWidthTwip - RULES.twoColumnSecondTabTwip - RULES.fitSafetyTwip,
+      secondTabTwip - rules.minimumGutterTwip - rules.fitSafetyTwip,
+      rules.optionRowWidthTwip - secondTabTwip - rules.fitSafetyTwip,
+      secondTabTwip - rules.minimumGutterTwip - rules.fitSafetyTwip,
+      rules.optionRowWidthTwip - secondTabTwip - rules.fitSafetyTwip,
     ],
     one: RULES.optionRowWidthTwip - RULES.oneColumnHangingIndentTwip - RULES.fitSafetyTwip,
   }
@@ -183,7 +188,7 @@ function clozeFourColumnCapacities() {
   })
 }
 
-function placementFor(mode, option, measured, index, fourColumnStartsTwip) {
+function placementFor(mode, option, measured, index, fourColumnStartsTwip, secondTabTwip) {
   if (mode === 'four_columns' || mode === 'three_columns') {
     return {
       optionId: option.optionId,
@@ -204,7 +209,7 @@ function placementFor(mode, option, measured, index, fourColumnStartsTwip) {
       label: option.label,
       row: Math.floor(index / 2),
       column: index % 2,
-      startTwip: (index % 2) * RULES.twoColumnSecondTabTwip,
+      startTwip: (index % 2) * secondTabTwip,
       continuationStartTwip: null,
       hardBreaks: measured.hardBreaks,
       advanceTwip: measured.advanceTwip,
@@ -226,24 +231,24 @@ function placementFor(mode, option, measured, index, fourColumnStartsTwip) {
   }
 }
 
-function selectedPlan(mode, optionSet, measured, fourColumnStartsTwip) {
+function selectedPlan(mode, optionSet, measured, fourColumnStartsTwip, rules = RULES, secondTabTwip = rules.twoColumnSecondTabTwip) {
   const placements = optionSet.options.map((option, index) =>
-    placementFor(mode, option, measured[index], index, fourColumnStartsTwip))
+    placementFor(mode, option, measured[index], index, fourColumnStartsTwip, secondTabTwip))
   const plan = {
     status: 'selected',
     mode,
     rowCount: ['four_columns', 'three_columns'].includes(mode) ? 1 : mode === 'two_by_two' ? 2 : optionSet.options.length,
     columnCount: mode === 'four_columns' ? 4 : mode === 'three_columns' ? 3 : mode === 'two_by_two' ? 2 : 1,
     rulesetRef: {
-      id: RULES.rulesetId,
-      digest: RULESET_DIGEST,
-      shapingImplementationDigest: RULES.shapingImplementationDigest,
-      fontMetricsDigest: RULES.fontMetricsDigest,
-      rendererTypographyDigest: RULES.rendererTypographyDigest,
+      id: rules.rulesetId,
+      digest: rules === RULES ? RULESET_DIGEST : digestJson(rules),
+      shapingImplementationDigest: rules.shapingImplementationDigest,
+      fontMetricsDigest: rules.fontMetricsDigest,
+      rendererTypographyDigest: rules.rendererTypographyDigest,
     },
-    rowWidthTwip: RULES.optionRowWidthTwip,
+    rowWidthTwip: rules.optionRowWidthTwip,
     questionStemAndOuterOptionBlockStartTwip:
-      RULES.questionStemAndOuterOptionBlockStartTwip,
+      rules.questionStemAndOuterOptionBlockStartTwip,
     placements,
   }
   return {
@@ -257,7 +262,9 @@ function selectedPlan(mode, optionSet, measured, fourColumnStartsTwip) {
  * Canonical content enters by value; selected layout never mutates or returns
  * into canonical semantics.
  */
-export function layoutAbcdOptionSet(optionSet) {
+function selectAbcdOptionSet(optionSet, rulesetId, passageSecondTabTwip = 0, allowFourColumns = true) {
+  const rules = RULESETS.get(rulesetId)
+  if (!rules) throw new TypeError('Unknown A-D layout ruleset')
   if (
     optionSet?.owner !== 'question'
     || !Array.isArray(optionSet.options)
@@ -274,13 +281,25 @@ export function layoutAbcdOptionSet(optionSet) {
     }
   }
 
-  const cap = capacities()
+  const secondTabTwip = rules === ADAPTIVE_RULES
+    ? Math.max(rules.twoColumnSecondTabTwip,
+      passageSecondTabTwip,
+      measured[0].advanceTwip + rules.minimumGutterTwip + rules.fitSafetyTwip,
+      measured[2].advanceTwip + rules.minimumGutterTwip + rules.fitSafetyTwip)
+    : rules.twoColumnSecondTabTwip
+  const fourColumnStartsTwip = rules === ADAPTIVE_RULES && passageSecondTabTwip
+    ? [0, rules.fourColumnPitchTwip, secondTabTwip,
+      Math.max(rules.fourColumnPitchTwip * 3,
+        secondTabTwip + measured[2].advanceTwip + rules.minimumGutterTwip + rules.fitSafetyTwip)]
+    : READING_FOUR_COLUMN_STARTS_TWIP
+  const cap = capacities(rules, secondTabTwip, fourColumnStartsTwip)
   const hasHardBreak = measured.some(({ hardBreaks }) => hardBreaks > 0)
-  if (!hasHardBreak && measured.every(({ advanceTwip }, index) => advanceTwip <= cap.four[index])) {
-    return selectedPlan('four_columns', optionSet, measured)
+  if (allowFourColumns && !hasHardBreak
+    && measured.every(({ advanceTwip }, index) => advanceTwip <= cap.four[index])) {
+    return selectedPlan('four_columns', optionSet, measured, fourColumnStartsTwip, rules)
   }
   if (!hasHardBreak && measured.every(({ advanceTwip }, index) => advanceTwip <= cap.two[index])) {
-    return selectedPlan('two_by_two', optionSet, measured)
+    return selectedPlan('two_by_two', optionSet, measured, undefined, rules, secondTabTwip)
   }
   if (measured.some(({ unbreakableAdvanceTwip }) => unbreakableAdvanceTwip > cap.one)) {
     return {
@@ -288,7 +307,25 @@ export function layoutAbcdOptionSet(optionSet) {
       reason: 'one_column_contains_unrenderable_unbreakable_content',
     }
   }
-  return selectedPlan('one_column', optionSet, measured)
+  return selectedPlan('one_column', optionSet, measured, undefined, rules)
+}
+
+export function layoutAbcdOptionSet(optionSet, rulesetId = RULES.rulesetId) {
+  return selectAbcdOptionSet(optionSet, rulesetId)
+}
+
+/** Align the two-column B/D and fitting four-column C within one passage. */
+export function layoutAbcdOptionGroup(optionSets, rulesetId = RULES.rulesetId) {
+  const individual = optionSets.map((optionSet) => layoutAbcdOptionSet(optionSet, rulesetId))
+  if (rulesetId !== ADAPTIVE_RULES.rulesetId) return individual
+  const sharedSecondTabTwip = Math.max(ADAPTIVE_RULES.twoColumnSecondTabTwip,
+    ...individual.filter((plan) => plan.status === 'selected' && plan.mode === 'two_by_two')
+      .map((plan) => plan.placements[1].startTwip))
+  return individual.map((plan, index) => plan.status === 'selected'
+    && (plan.mode === 'two_by_two' || plan.mode === 'four_columns')
+    ? selectAbcdOptionSet(optionSets[index], rulesetId, sharedSecondTabTwip,
+      plan.mode === 'four_columns')
+    : plan)
 }
 
 /** Listening A-C is either one equal-origin row or one complete vertical set. */
@@ -355,13 +392,15 @@ function assertAuthoritativePlan(plan) {
   if (plan?.status !== 'selected') {
     throw new TypeError('A selected A-D layout plan is required')
   }
+  const rules = RULESETS.get(plan.rulesetRef?.id)
   if (
-    plan.rulesetRef?.id !== RULES.rulesetId
-    || plan.rulesetRef?.digest !== RULESET_DIGEST
-    || plan.rulesetRef?.rendererTypographyDigest
-      !== RULES.rendererTypographyDigest
+    !rules
+    || plan.rulesetRef?.digest !== (rules === RULES ? RULESET_DIGEST : digestJson(rules))
+    || plan.rulesetRef?.rendererTypographyDigest !== rules.rendererTypographyDigest
+    || plan.rulesetRef?.shapingImplementationDigest !== rules.shapingImplementationDigest
+    || plan.rulesetRef?.fontMetricsDigest !== rules.fontMetricsDigest
     || plan.questionStemAndOuterOptionBlockStartTwip
-      !== RULES.questionStemAndOuterOptionBlockStartTwip
+      !== rules.questionStemAndOuterOptionBlockStartTwip
     || plan.placementSignature !== abcdPlacementSignature(plan)
   ) {
     const error = new Error(
@@ -454,3 +493,4 @@ export function translateAbcdPlanToPrintPdf(plan, fontClosure) {
 }
 
 export const abcdLayoutRules = RULES
+export const adaptiveAbcdLayoutRules = ADAPTIVE_RULES

@@ -14,7 +14,7 @@ import {
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-ocr-materialization-producer-v6'
+  'nck1-ocr-materialization-producer-v7'
 
 const PDF = 'application/pdf'
 const FULL_PAGE = Object.freeze({ x: 0, y: 0, width: 1, height: 1 })
@@ -53,9 +53,9 @@ function closeIssueSource(item, document) {
   }
 }
 
-export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null } = {}) {
+export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null, producerVersion = NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION } = {}) {
   return digestJson({
-    producerVersion: NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
+    producerVersion,
     sourceSetDigest: nck1OcrSourceSetDigest(documents),
     evidenceDigest: evidence?.evidenceDigest || null,
     confirmationDigest: confirmation ? digestJson(confirmation) : null,

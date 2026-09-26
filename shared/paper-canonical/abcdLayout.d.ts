@@ -98,7 +98,14 @@ export type AbcdRendererFontMaterial = {
   readonly shapingImplementationDigest: string
 }
 
-export function layoutAbcdOptionSet(optionSet: AbcdOptionSet): AbcdLayoutResult
+export function layoutAbcdOptionSet(
+  optionSet: AbcdOptionSet,
+  rulesetId?: 'abcd-option-layout-v1' | 'abcd-option-layout-v2',
+): AbcdLayoutResult
+export function layoutAbcdOptionGroup(
+  optionSets: readonly AbcdOptionSet[],
+  rulesetId?: 'abcd-option-layout-v1' | 'abcd-option-layout-v2',
+): AbcdLayoutResult[]
 export function layoutFixedFourColumnClozeOptionSet(
   optionSet: AbcdOptionSet,
 ): AbcdLayoutResult
@@ -124,3 +131,4 @@ export function translateAbcdPlanToPrintPdf(
   fontClosure: VerifiedAbcdRendererFontClosure,
 ): object
 export const abcdLayoutRules: Readonly<Record<string, string | number>>
+export const adaptiveAbcdLayoutRules: Readonly<Record<string, string | number>>

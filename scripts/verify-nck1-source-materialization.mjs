@@ -37,14 +37,14 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
       blockId: `block:${tail}`,
       role: 'body',
       content: [
-        { kind: 'text', text: `${slotId} source text` },
+        { kind: 'text', text: `${slotId} source text${blankNumbers.length ? ' ' : ''}` },
         ...blankNumbers.flatMap((number) => [
           { kind: 'blank_ref', blankId: `blank:${number}` },
           {
             kind: 'text',
             text: family === 'grammar-fill' && number % 2 === 0
-              ? ' (word) after'
-              : ` after ${number}`,
+              ? ' (word) after '
+              : ` after ${number} `,
           },
         ]),
       ],
@@ -343,6 +343,7 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+await import('./verify-inline-blank-boundaries.mjs')
 const plain = makeFixture()
 assert.deepEqual(validateNck1SourceMaterialization(plain), [])
 for (const text of [
