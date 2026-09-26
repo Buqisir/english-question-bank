@@ -1,0 +1,11 @@
+export const NOTEBOOK_ADD_SCHEMA = 'vocabulary-notebook-add-v1'
+export const NOTEBOOK_SCHEMA = 'vocabulary-notebook-v1'
+export const NOTEBOOK_POLICY_VERSION = 'notebook-highlight-v1'
+export const NOTEBOOK_MUTATION_WINDOW_MS = 24 * 60 * 60 * 1000
+export const NOTEBOOK_SENTENCE_LIMIT = 8000
+export const NOTEBOOK_BODY_LIMIT = 8 * 1024
+export const NOTEBOOK_CONTEXT_QUOTA = 10000
+export const NOTEBOOK_PAGE_SIZE = 40
+export const GLOSS_STATUSES = ['empty', 'processing', 'ready', 'unavailable', 'failed']
+export const TRANSLATION_STATUSES = ['empty', 'processing', 'ready', 'unavailable', 'failed']
+export const ALIGNMENT_STATUSES = ['empty', 'ready', 'unavailable', 'failed']

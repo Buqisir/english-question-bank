@@ -19,6 +19,7 @@
     "verify:all": "node ../scripts/verify-ci.mjs"
   },
   "dependencies": {
+    "@floating-ui/react-dom": "^2.1.9",
     "lucide-react": "^1.14.0",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.5",

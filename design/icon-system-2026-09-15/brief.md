@@ -105,6 +105,42 @@
   §6 第 1 步已做（顶栏 14 → 16，管理激活态 fill）；题型六图标只导出未接线（§6 第 5 步待票）。
   `lucide-react` 依赖暂留，供本目录对照页读取。
 
+第七轮（Owner：学 Solar 有多全、学它的工艺数字、借它的骨架，2026-09-25）：
+
+- **词表**：新增 `vocabulary.md`。临时下载 `@iconify-json/solar@1.2.12` 确认了 37 个分类、Linear 风格 1396 个图标（与 Owner
+  原话「37 个分类、每种风格约 1200 个」对得上）。已有 62 个之外新提 61 个候选（总计 ≈ 123，落在 100–120 附近），
+  按用途分组写清了来源 Solar 分类、中文含义、选理由；C 层记了 3 个不相关分类不占名。只写名字和分类，
+  不画不结尾；候选能不能用、哪些要提前开工，待 Owner 定（见 `vocabulary.md` 末尾「待 Owner 定的事」）。
+- **借骨架**：6 个高频通用符号（`x`、`settings`、`download`、`save`、`trash`、`printer`）真的拿 Solar Linear 对应图标的路径
+  当底稿重画，不同于之前两批只把 Solar 当测量尺子。详细换算、取舍理由、最终数字写在 `craft-rules.md` §借骨架；
+  署名写在新增的 `ATTRIBUTION.md`（CC BY 4.0 要求明确署名，不能用之前对 Apache-2.0/MIT 参考集的旧思路含糊带过，
+  见 §5 授权）。直接搭 Solar 贝塞尔的 `download` 一度还易距 0.87、净空 0.95（都低于 R1/R4），改用自己的圆弧；
+  `settings`、`trash` 直接取 Solar 路径后用 `sized()`/`grow()` 收小或平移才达标，具体数字见 `craft-rules.md`。
+- **领域层复核**：抽查了尚未在前两批动过的 6 个（`paper`、`paper-check`、`board-check`、`board-list`、`card`、`scissors`），
+  全部已过 craft-rules R1/R4/R5，未改形。
+- **对照样张**：新增 `build-batch1.mjs` → `batch1.html`，将上述 6 个改形前后与 6 个已验证领域图标放在同一页，
+  供 Owner 判断两层是否融为一体。
+- 回写 `app/src/icons/generated`（`pnpm -C app icons:generate`，62 个），`tsc -b && vite build` 通过。未跑完整
+  `verify:changed`：本 worktree 当前还有其他未提交的不相关改动（词汇本、concierge desk 等），全量 verify 会把那些也拉进来，
+  与图标无关，不在本任务处理范围内。
+- **待 Owner 定**：1）`vocabulary.md` 的 61 个候选是否认可；2）6 个通用图标的 Solar 骨架借用（特别是 `settings` 齿轮形状
+  改变较大）是否认可；3）`bookmark`（通用）与 `book-marked`（领域）名字是否需要进一步区分。
+
+第八轮（接着把还是旧形的高频通用图标换骨架，2026-09-26）：
+
+- `search`、`pencil`、`eye`、`play` 直接取 Solar Linear 路径，`sized(0.962)` 把边距收到 1.25。
+  搜索的旧 joint 补丁拿掉：Solar 的手柄接在圆环上，2.25 描边自己并住。
+- `copy` 不直接搭贝塞尔（重叠处的洞只有 1.52）。后页改到左上，跟 Solar 同一叠法，两页错开后再放大。
+- `log-out` 用 Solar `logout-2` 的门框，左右翻转，箭头仍朝右。
+- `eye-off` 换上同一只新眼睛，斜杠不动。不用 Solar 的「闭上的眼睛」。
+- 词表里约 60 个还没画的名字继续不画。领域层不动。数字见 `craft-rules.md` §第四批。对照页 `batch2.html`。
+
+收口（2026-09-26）：通用层 45 个到此结束。又换了 `pause`、`link`、`volume`、`folder-plus` 四个。
+箭头、勾、加号、撤销、刷新、筛选、扫码、图钉、标签、推荐、格子、听写、已听写、讲评、个人空间留着，
+原因写在 `craft-rules.md` §收口。对照页 `batch3.html`。
+
+词表 B 的 57 个预留名同一天画进 `extended.mjs`。`bookmark` 与 `book-marked` 仍是两个词。C 层不画。
+
 ## 1. 参照与边界
 
 看过的开源集：MingCute（Apache-2.0，线/面双套，最全）、Hugeicons、Remix、Phosphor（六种粗细）、RuneIcons（Apache-2.0，24 网格 2px 圆头，WIP，无 npm 包）。
@@ -170,6 +206,11 @@ Owner 的 Figma 会员**现在不必要**，进入 B 层批量绘制和管线搭
 ## 5. 授权
 
 参考集都是 Apache-2.0 / MIT，可 fork 并保留声明。建议做法是**借规范不借矢量**：网格、描边、圆角、命名从它们来，字形重画。这样既独属又无需附带 NOTICE。若某些通用字形（箭头、勾）直接沿用 Lucide 路径再加粗，须在仓库保留 Lucide ISC 声明。
+
+2026-09-25 起多了一个不同的案例：Solar Icon Set 是 CC BY 4.0（不是 Apache-2.0/MIT），要求明确署名、注明有改动，
+不能用“借规范不借矢量”的旧思路含糊带过。当直接取它的路径当骨架时（目前 `x`、`settings`、`download`、`trash`、
+`printer` 五个，见 `craft-rules.md` §借骨架），在 `ATTRIBUTION.md` 里专门写来源、许可、哪些图标改了什么；
+只把 Solar 当测量尺子用（`craft-rules.md` 的 R1–R7 统计数字）不属于这个范围，不需要署名。
 
 ## 6. 迁移顺序（以后按票拆）
 

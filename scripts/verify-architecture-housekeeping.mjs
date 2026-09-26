@@ -126,9 +126,14 @@ assert(
   'architecture housekeeping remains in the stable suite',
   scripts.includes('scripts/verify-architecture-housekeeping.mjs'),
 )
+const frozenVocabularyScripts = scripts.filter((script) => (
+  /\/verify-gaokao-vocabulary-/.test(script)
+  || (/\/verify-vocabulary-/.test(script) && script !== 'scripts/verify-vocabulary-notebook.mjs')
+))
 assert(
   'frozen personal vocabulary verifiers remain outside the daily registry',
-  !scripts.some((script) => /\/verify-(?:gaokao-)?vocabulary-/.test(script)),
+  frozenVocabularyScripts.length === 0,
+  frozenVocabularyScripts.join('\n'),
 )
 const verifyReadme = read('scripts/README.md')
 const undocumentedScripts = scripts.filter(

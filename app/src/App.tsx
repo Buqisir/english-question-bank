@@ -36,6 +36,7 @@ import { AdminWorkbench } from './features/admin/AdminWorkbench'
 import { VocabularyReviewPage } from './features/vocabulary-review/VocabularyReviewPage'
 import { VocabularyPracticePage } from './features/vocabulary-practice/VocabularyPracticePage'
 import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-workbench/VocabularyDictationWorkbench'
+import { VocabularyNotebookPage } from './features/vocabulary-notebook/VocabularyNotebookPage.tsx'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
@@ -92,6 +93,14 @@ function App() {
   const [vocabularyReviewRouteActive, setVocabularyReviewRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'vocabulary-review'
+  })
+  const [vocabularyNotebookRoute, setVocabularyNotebookRoute] = useState(() => {
+    if (typeof window === 'undefined') return { active: false, paperId: null as string | null }
+    const params = new URLSearchParams(window.location.search)
+    return {
+      active: params.get('view') === 'vocabulary-notebook',
+      paperId: params.get('paperId'),
+    }
   })
   const [vocabularyDictationRouteActive, setVocabularyDictationRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
@@ -535,6 +544,7 @@ function App() {
     setBrowseRouteActive(false)
     setMySpaceRouteActive(false)
     setVocabularyReviewRouteActive(false)
+    setVocabularyNotebookRoute({ active: false, paperId: null })
     setVocabularyPracticeRoute({ active: false, setId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
     setDraftPaperRoute({
@@ -609,6 +619,7 @@ function App() {
     setBrowseRouteActive(false)
     setMySpaceRouteActive(false)
     setVocabularyReviewRouteActive(false)
+    setVocabularyNotebookRoute({ active: false, paperId: null })
     setVocabularyPracticeRoute({ active: false, setId: null })
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, reviewRevision: null, lecture, similar })
@@ -656,6 +667,7 @@ function App() {
     setAdminRouteActive(false)
     setBrowseRouteActive(false)
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
+    setVocabularyNotebookRoute({ active: false, paperId: null })
   }, [])
 
   // flow-panel 刀 3: Back/Forward support. Every `open*`/`*OnBackToWorkbench`
@@ -681,6 +693,10 @@ function App() {
       setAdminRouteActive(isOwnerView && view === 'admin')
       setMySpaceRouteActive(view === 'my-space')
       setVocabularyReviewRouteActive(view === 'vocabulary-review')
+      setVocabularyNotebookRoute({
+        active: view === 'vocabulary-notebook',
+        paperId: params.get('paperId'),
+      })
       setVocabularyDictationRouteActive(view === 'vocabulary-dictation-workbench')
       setVocabularyReviewSetId(view === 'vocabulary-review' ? params.get('setId') : null)
       setVocabularyPracticeRoute({
@@ -773,7 +789,30 @@ function App() {
     setVocabularyReviewRouteActive(false)
     setVocabularyDictationRouteActive(false)
     setVocabularyPracticeRoute({ active: false, setId: null })
+    setVocabularyNotebookRoute({ active: false, paperId: null })
     setMySpaceRouteActive(true)
+  }, [])
+
+  const openVocabularyNotebook = useCallback((nextPaperId?: string | null) => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'vocabulary-notebook')
+      if (nextPaperId) url.searchParams.set('paperId', nextPaperId)
+      else url.searchParams.delete('paperId')
+      for (const param of ['draftPaperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar', 'setId', 'mode']) {
+        url.searchParams.delete(param)
+      }
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setAdminRouteActive(false)
+    setMySpaceRouteActive(false)
+    setBrowseRouteActive(false)
+    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
+    setVocabularyPracticeRoute({ active: false, setId: null })
+    setVocabularyDictationRouteActive(false)
+    setVocabularyReviewRouteActive(false)
+    setVocabularyNotebookRoute({ active: true, paperId: nextPaperId || null })
   }, [])
 
   const openVocabularyReview = useCallback(() => {
@@ -795,6 +834,7 @@ function App() {
     setVocabularyPracticeRoute({ active: false, setId: null })
     setVocabularyDictationRouteActive(false)
     setVocabularyReviewSetId(null)
+    setVocabularyNotebookRoute({ active: false, paperId: null })
     setVocabularyReviewRouteActive(true)
   }, [])
 
@@ -816,6 +856,7 @@ function App() {
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
     setVocabularyPracticeRoute({ active: false, setId: null })
     setVocabularyReviewRouteActive(false)
+    setVocabularyNotebookRoute({ active: false, paperId: null })
     setVocabularyDictationRouteActive(true)
   }, [])
 
@@ -940,6 +981,7 @@ function App() {
     user: currentUser,
     onLogout: handleLogout,
     onOpenVocabularyReview: openVocabularyReview,
+    onOpenVocabularyNotebook: () => openVocabularyNotebook(null),
     onOpenMySpace: openMySpace,
   }
 
@@ -953,6 +995,18 @@ function App() {
         onDraftChanged={() => void refreshQuestionGroups()}
         shellNav={shellNav}
         questionGroupById={questionGroupById}
+      />
+    )
+  }
+
+  if (vocabularyNotebookRoute.active) {
+    return (
+      <VocabularyNotebookPage
+        paperId={vocabularyNotebookRoute.paperId}
+        shellNav={shellNav}
+        onBack={paperBrowseOnBackToWorkbench}
+        onOpenPaper={(nextPaperId) => openVocabularyNotebook(nextPaperId)}
+        onOpenList={() => openVocabularyNotebook(null)}
       />
     )
   }
@@ -1027,6 +1081,7 @@ function App() {
         variant="home"
         user={currentUser}
         onLogout={handleLogout}
+        onOpenVocabularyNotebook={() => openVocabularyNotebook(null)}
         onOpenVocabularyReview={openVocabularyReview}
         onOpenMySpace={openMySpace}
         showAdmin={isOwnerView}

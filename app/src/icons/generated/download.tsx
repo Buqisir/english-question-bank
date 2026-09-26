@@ -4,8 +4,8 @@ import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 export function Download({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
-      {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M3.5 15.5v3A2.5 2.5 0 0 0 6 21h12a2.5 2.5 0 0 0 2.5-2.5v-3" /><path d="M12 3.5V15" /><path d="m7.25 10.5 4.75 4.75 4.75-4.75" /></> : <><path d="M3.5 15.5v3A2.5 2.5 0 0 0 6 21h12a2.5 2.5 0 0 0 2.5-2.5v-3" /><path d="M12 3.5V15" /><path d="m7.25 10.5 4.75 4.75 4.75-4.75" /></>}
+      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M4.748 9.582 v6.285 a2.901 2.901 0 0 0 2.901 2.901 h8.703 a2.901 2.901 0 0 0 2.901 -2.901 v-6.285" /></g>}
+      {variant === 'fill' ? <><path d="M4.748 9.582 v6.285 a2.901 2.901 0 0 0 2.901 2.901 h8.703 a2.901 2.901 0 0 0 2.901 -2.901 v-6.285" /><path d="M12 2.33 v9.187" /><path d="m8.132 7.649 3.868 3.868 3.868 -3.868" /></> : <><path d="M4.748 9.582 v6.285 a2.901 2.901 0 0 0 2.901 2.901 h8.703 a2.901 2.901 0 0 0 2.901 -2.901 v-6.285" /><path d="M12 2.33 v9.187" /><path d="m8.132 7.649 3.868 3.868 3.868 -3.868" /></>}
     </EqbIcon>
   )
 }

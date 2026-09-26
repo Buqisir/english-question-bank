@@ -5,7 +5,7 @@ export function X({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="m6.5 6.5 11 11M17.5 6.5l-11 11" /></> : <><path d="m6.5 6.5 11 11M17.5 6.5l-11 11" /></>}
+      {variant === 'fill' ? <><path d="M19 5 5 19" /><path d="M19 19 5 5" /></> : <><path d="M19 5 5 19" /><path d="M19 19 5 5" /></>}
     </EqbIcon>
   )
 }

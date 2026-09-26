@@ -21,11 +21,13 @@ export function EqbIcon({
   strokeWidth,
   color,
   children,
+  className,
   ...svgProps
 }: EqbIconBaseProps) {
   return (
     <svg
       {...svgProps}
+      className={className ? `eqb-icon ${className}` : 'eqb-icon'}
       viewBox="0 0 24 24"
       width={size}
       height={size}

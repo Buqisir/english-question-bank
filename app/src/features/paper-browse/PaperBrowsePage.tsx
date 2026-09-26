@@ -187,6 +187,7 @@ import {
   type SimilarRailRequestState,
 } from './SimilarQuestionsRailView'
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
+import { usePaperSelectionTranslation } from './selection/usePaperSelectionTranslation'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -767,6 +768,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [similarSelectedGroupIds, setSimilarSelectedGroupIds] = useState<Set<string>>(new Set())
   const [similarToast, setSimilarToast] = useState<string | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
+  const paperSelection = usePaperSelectionTranslation({
+    paperId,
+    consumption: canonicalConsumption,
+    hostRef: scrollerRef,
+  })
   // CR D-MF1：活跃沉降巡检的退场把手——scrollToAnchor 重入时先退旧循环
   // 再起新的（桌面端连点 rail 项不触发 wheel/touch/keydown，若无此把手
   // 两个循环并存互抢滚动打 ping-pong）。
@@ -2312,6 +2318,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       suppressScrollspyClear,
       activateGroup: setActiveAnchor,
       selectLectureQuestion,
+      arbitrateLectureFocus: () => paperSelection.lectureFocusGate.arbitrateLectureFocus({
+        source: paperSelection.lastInputSource(),
+      }),
+      scheduleDeferredLectureFocus: (_waitMs, apply) => {
+        paperSelection.lectureFocusGate.scheduleDeferred(apply)
+      },
     })
   }
 
@@ -4027,6 +4039,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         >
           {renderQuietRail(dockedLecture)}
         </nav>
+        {paperSelection.overlay}
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentMergedStyle}>
           {canonicalConsumption?.listeningAudio && (
             <div className="paper-browse-audio">

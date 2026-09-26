@@ -327,11 +327,12 @@ async function assertActualPaperBrowseBoundary({
     qaUrl.searchParams.set('questionId', 'q-2026-i-041')
     await page.goto(qaUrl.href)
     try {
-      await page.locator('[data-paper-question-id]').first().waitFor()
+      // 整卷页面要先编译再挂上题号。全量包并行时 30 秒不够，页面还是空的。
+      await page.locator('[data-paper-question-id]').first().waitFor({ timeout: 90_000 })
     } catch (error) {
       throw new Error(
         `PaperBrowse did not mount canonical Cloze/Grammar: ${
-          await page.locator('body').innerText()
+          (await page.locator('body').innerText()).slice(0, 500)
         }`,
         { cause: error },
       )
@@ -340,7 +341,7 @@ async function assertActualPaperBrowseBoundary({
     await page.getByText(
       clozeAnalysis.blanks['q-2026-i-041'].correctFit.reason,
       { exact: true },
-    ).waitFor()
+    ).waitFor({ timeout: 30_000 })
     assert.equal(
       successfulAnalysisResponses,
       2,
