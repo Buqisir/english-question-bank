@@ -5,7 +5,7 @@ export function RotateCcw({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M4.00 12.00A8 8 0 1 0 5.87 6.86" /><path d="M10.34 8.48L5.87 6.86L5.87 2.11" /></> : <><path d="M4.00 12.00A8 8 0 1 0 5.87 6.86" /><path d="M10.34 8.48L5.87 6.86L5.87 2.11" /></>}
+      {variant === 'fill' ? <><path d="M4.24 12 A7.76 7.76 0 1 0 6.054 7.014" /><path d="M10.39 8.586 L6.054 7.014 L6.054 2.407" /></> : <><path d="M4.24 12 A7.76 7.76 0 1 0 6.054 7.014" /><path d="M10.39 8.586 L6.054 7.014 L6.054 2.407" /></>}
     </EqbIcon>
   )
 }

@@ -1,9 +1,10 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import type { PaperTranslationResultItem } from '../../../services/paperTranslation'
-import { autoUpdate, computePosition, flip, offset, shift, size } from '@floating-ui/react-dom'
-import { Translate, Copy, Check, X, RefreshCw } from '../../../icons'
+import { autoUpdate, computePosition, flip, offset, shift, size, type Placement } from '@floating-ui/react-dom'
+import type { ReactNode } from 'react'
+import { Translate, BookOpen, Copy, Check, X, RefreshCw } from '../../../icons'
 
-export type SelectionOverlayPhase = 'toolbar' | 'loading' | 'result' | 'error'
+export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary'
 
 export type SelectionOverlayProps = {
   phase: SelectionOverlayPhase
@@ -15,9 +16,12 @@ export type SelectionOverlayProps = {
   errorMessage?: string
   liveMessage: string
   onTranslate: () => void
+  onLookup?: () => void
   onRetry: () => void
   onClose?: () => void
   onPointerInsideChange: (inside: boolean) => void
+  dictionary?: ReactNode
+  focusLookup?: boolean
 }
 
 export function SelectionOverlay({
@@ -30,17 +34,22 @@ export function SelectionOverlay({
   errorMessage,
   liveMessage,
   onTranslate,
+  onLookup,
   onRetry,
   onClose,
   onPointerInsideChange,
+  dictionary,
+  focusLookup = false,
 }: SelectionOverlayProps) {
   const floatingRef = useRef<HTMLDivElement | null>(null)
   const [copied, setCopied] = useState(false)
   const copyTimeoutRef = useRef<number | null>(null)
+  const lockedPlacementRef = useRef<Placement | null>(null)
 
   useLayoutEffect(() => {
     const floating = floatingRef.current
     if (!floating) return undefined
+    lockedPlacementRef.current = null
     const virtual = {
       getBoundingClientRect: () => {
         const rects = [...range.getClientRects()]
@@ -53,12 +62,13 @@ export function SelectionOverlay({
       },
     }
     const update = () => {
+      const locked = lockedPlacementRef.current
       void computePosition(virtual, floating, {
         strategy: 'fixed',
-        placement: 'bottom-start',
+        placement: locked ?? 'bottom-start',
         middleware: [
           offset({ mainAxis: 6, crossAxis: 0 }),
-          flip({ padding: 12 }),
+          ...(locked ? [] : [flip({ padding: 12 })]),
           shift({ padding: 12 }),
           size({
             padding: 12,
@@ -71,6 +81,7 @@ export function SelectionOverlay({
           }),
         ],
       }).then(({ x, y, placement }) => {
+        lockedPlacementRef.current ??= placement
         floating.style.setProperty(
           '--paper-selection-origin',
           placement.startsWith('top') ? 'bottom left' : 'top left',
@@ -108,25 +119,38 @@ export function SelectionOverlay({
     <div
       ref={floatingRef}
       className="paper-selection-overlay"
-      role="region"
-      aria-label="选区翻译"
+      role={phase === 'dictionary' ? 'dialog' : 'region'}
+      aria-modal={phase === 'dictionary' ? false : undefined}
+      aria-label={phase === 'dictionary' || phase === 'lookup' ? '单词查词' : '选区翻译'}
       onMouseDown={(event) => event.preventDefault()}
       onPointerEnter={() => onPointerInsideChange(true)}
       onPointerLeave={() => onPointerInsideChange(false)}
     >
       <div className="paper-selection-live" aria-live="polite">{liveMessage}</div>
-      {phase === 'toolbar' ? (
+      {phase === 'toolbar' || phase === 'lookup' ? (
         <div className="paper-selection-toolbar">
-          <button
-            type="button"
-            className="paper-selection-translate"
-            onClick={onTranslate}
-          >
-            <Translate size={16} className="paper-selection-btn-icon" />
-            <span>翻译</span>
-          </button>
+          {phase === 'lookup' ? (
+            <button
+              type="button"
+              className="paper-selection-lookup"
+              autoFocus={focusLookup}
+              onClick={onLookup}
+            >
+              <BookOpen size={16} className="paper-selection-btn-icon" />
+              <span>查词</span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="paper-selection-translate"
+              onClick={onTranslate}
+            >
+              <Translate size={16} className="paper-selection-btn-icon" />
+              <span>翻译</span>
+            </button>
+          )}
         </div>
-      ) : (
+      ) : phase === 'dictionary' ? dictionary : (
         <div className="paper-selection-card">
           <div className="paper-selection-card-header">
             <span className="paper-selection-card-kicker">

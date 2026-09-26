@@ -198,6 +198,8 @@ const registry = {
   'scripts/verify-paper-translation-cache.mjs',
   'scripts/verify-paper-translation-routes.mjs',
   'scripts/verify-paper-selection-browser.mjs',
+  'scripts/verify-paper-dictionary.mjs',
+  'scripts/verify-vocabulary-notebook.mjs',
   'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
   'scripts/verify-section-chrome-on-solo-surface.mjs',

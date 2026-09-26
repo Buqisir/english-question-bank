@@ -4,8 +4,8 @@ import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 export function Printer({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
-      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M2.75 11.25a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v3.25a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3z" /></g>}
-      {variant === 'fill' ? <><path d="M6.5 17.5H5.75A3 3 0 0 1 2.75 14.5v-3.25a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v3.25a3 3 0 0 1-3 3h-.75" /><path d="M7 8.25V4.5A1.5 1.5 0 0 1 8.5 3h7A1.5 1.5 0 0 1 17 4.5v3.75" /><rect x="6.5" y="13.5" width="11" height="7.5" rx="2" /></> : <><path d="M6.5 17.5H5.75A3 3 0 0 1 2.75 14.5v-3.25a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v3.25a3 3 0 0 1-3 3h-.75" /><path d="M7 8.25V4.5A1.5 1.5 0 0 1 8.5 3h7A1.5 1.5 0 0 1 17 4.5v3.75" /><rect x="6.5" y="13.5" width="11" height="7.5" rx="2" /></>}
+      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><rect x="4.2" y="7.32" width="15.6" height="8.32" rx="2.6" /></g>}
+      {variant === 'fill' ? <><rect x="4.2" y="7.32" width="15.6" height="8.32" rx="2.6" /><path d="M8.36 7.32 V4.2 a1.56 1.56 0 0 1 1.56 -1.56 h4.16 a1.56 1.56 0 0 1 1.56 1.56 v3.12" /><rect x="6.8" y="15.64" width="10.4" height="6.24" rx="2.08" /></> : <><rect x="4.2" y="7.32" width="15.6" height="8.32" rx="2.6" /><path d="M8.36 7.32 V4.2 a1.56 1.56 0 0 1 1.56 -1.56 h4.16 a1.56 1.56 0 0 1 1.56 1.56 v3.12" /><rect x="6.8" y="15.64" width="10.4" height="6.24" rx="2.08" /></>}
     </EqbIcon>
   )
 }

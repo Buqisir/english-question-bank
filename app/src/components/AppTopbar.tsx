@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, BookMarked, LogOut, Pencil, Settings } from '../icons'
+import { Archive, ArrowLeft, BookMarked, BookOpen, LogOut, Pencil, Settings } from '../icons'
 import { FluidHoverList } from './FluidHoverList.tsx'
 
 function userInitials(username: string): string {
@@ -19,6 +19,7 @@ export type AppTopbarNav = {
   user: { username: string } | null
   onLogout: () => void
   onOpenVocabularyReview?: () => void
+  onOpenVocabularyNotebook?: () => void
   onOpenMySpace?: () => void
   showAdmin?: boolean
   adminActive?: boolean
@@ -161,6 +162,12 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
             <span className="topbar-actions-page">{props.actionsSlot}</span>
             <span aria-hidden="true" className="topbar-actions-divider" />
           </>
+        )}
+        {props.onOpenVocabularyNotebook && (
+          <button className="ghost-button" type="button" onClick={props.onOpenVocabularyNotebook}>
+            <BookOpen size={16} />
+            生词本
+          </button>
         )}
         {props.onOpenVocabularyReview && (
           <button className="ghost-button" type="button" onClick={props.onOpenVocabularyReview}>

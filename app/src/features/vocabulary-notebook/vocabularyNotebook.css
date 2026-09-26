@@ -1,0 +1,85 @@
+@import '../../../../shared/papersurface/paperLayout.css';
+
+.notebook-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--eqb-color-bg, #F3F5F1);
+}
+
+.notebook-main {
+  width: min(720px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 32px 0 64px;
+}
+
+.notebook-empty { color: var(--desk-muted, #6b6e68); }
+.notebook-main .home-row:hover { background: var(--desk-hover, #e9ece6); }
+.notebook-main .home-row:hover .home-row-icon { color: var(--desk-ink, #1f1f1d); }
+
+.notebook-desk {
+  padding: 24px 16px 64px;
+}
+
+.notebook-status {
+  text-align: center;
+  color: #6d645b;
+}
+
+.notebook-sheet {
+  --ps-page-width: 794px;
+  --ps-page-margin-top: 79px;
+  --ps-page-margin-x: 91px;
+  --ps-font-stack: "EQB Termes", "EQB Source Han Serif", serif;
+  --ps-font-size: 10.5pt;
+  --ps-line-height: 18pt;
+  width: 100%;
+  max-width: var(--ps-page-width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  background: #fff;
+  color: #111;
+  font-family: var(--ps-font-stack);
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+  padding: var(--ps-page-margin-top) var(--ps-page-margin-x) 72px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.notebook-sheet .canonical-paper-cover-title {
+  margin-bottom: 36pt;
+}
+
+.notebook-passage {
+  margin: 28pt 0 16pt;
+  text-align: center;
+  font-family: var(--ps-font-stack);
+  font-size: var(--ps-font-size);
+  font-weight: 400;
+  line-height: var(--ps-line-height);
+}
+
+.notebook-word { margin: 0 0 18pt; }
+.notebook-word p,
+.notebook-example p { margin: 0; overflow-wrap: anywhere; }
+.notebook-head { display: flex; flex-wrap: wrap; gap: 4pt 12px; align-items: baseline; }
+.notebook-head strong { font-size: 12pt; white-space: nowrap; }
+.notebook-example { margin-top: 6pt; }
+
+@media print {
+  .notebook-page { background: #fff; }
+  .notebook-page > header,
+  .notebook-status { display: none; }
+  .notebook-desk { padding: 0; }
+  .notebook-sheet {
+    max-width: none;
+    box-shadow: none;
+    padding: 18mm 20mm;
+  }
+}
+
+@media (max-width: 640px) {
+  .notebook-sheet {
+    padding: 28px 20px 48px;
+  }
+}

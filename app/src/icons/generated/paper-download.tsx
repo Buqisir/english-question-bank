@@ -5,7 +5,7 @@ export function PaperDownload({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M8 2.5h6.5L20 8v9.5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-11a4 4 0 0 1 4-4z" /></g>}
-      {variant === 'fill' ? <><path d="M8 2.5h6.5L20 8v9.5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-11a4 4 0 0 1 4-4z" /><path d="M13.5 2.5V7a2 2 0 0 0 2 2H20" /><path d="M12 11.25v6M9.5 14.75 12 17.25l2.5-2.5" /></> : <><path d="M8 2.5h6.5L20 8v9.5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-11a4 4 0 0 1 4-4z" /><path d="M13.5 2.5V7a2 2 0 0 0 2 2H20" /><path d="M12 11.25v6M9.5 14.75 12 17.25l2.5-2.5" /></>}
+      {variant === 'fill' ? <><path d="M8 2.5h6.5L20 8v9.5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-11a4 4 0 0 1 4-4z" /><path d="M13.25 2.5V7.25a2 2 0 0 0 2 2H20" /><path d="M12 12.25v5.25M9.5 15 12 17.5l2.5-2.5" /></> : <><path d="M8 2.5h6.5L20 8v9.5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-11a4 4 0 0 1 4-4z" /><path d="M13.25 2.5V7.25a2 2 0 0 0 2 2H20" /><path d="M12 12.25v5.25M9.5 15 12 17.5l2.5-2.5" /></>}
     </EqbIcon>
   )
 }

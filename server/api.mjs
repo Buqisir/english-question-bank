@@ -20,6 +20,9 @@ import { createCanonicalConsumerRuntime } from './paper-canonical/consumerRuntim
 import { loadCanonicalSourceAssetRepresentation } from './paper-canonical/sourceAssetRepresentation.mjs'
 import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
 import { createPaperTranslationRoutes, createPaperTranslationRuntime } from './paper-translation/routes.mjs'
+import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from './paper-dictionary/routes.mjs'
+import { createVocabularyNotebookRoutes } from './vocabulary-notebook/routes.mjs'
+import { createVocabularyNotebookRuntime } from './vocabulary-notebook/runtime.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { sendPaperAssetStatic } from './paper-import/paperAssetStatic.mjs'
@@ -489,6 +492,18 @@ const paperTranslationRuntime = createPaperTranslationRuntime({
   loadCanonicalConsumption,
 })
 serverContext.paperTranslation = paperTranslationRuntime
+const paperDictionaryRuntime = createPaperDictionaryRuntime({
+  rootDir,
+  loadCanonicalConsumption,
+})
+serverContext.paperDictionary = paperDictionaryRuntime
+const vocabularyNotebookRuntime = createVocabularyNotebookRuntime({
+  rootDir,
+  openUserDatabase,
+  loadCanonicalConsumption,
+  translate: (input) => paperTranslationRuntime.translate(input),
+})
+serverContext.vocabularyNotebook = vocabularyNotebookRuntime
 
 const serverRoutes = [
   ...h1Routes,
@@ -518,6 +533,8 @@ const serverRoutes = [
   ...createTopicLabelBackfillRoutes(),
   ...createVocabularyRoutes(),
   ...createPaperTranslationRoutes(),
+  ...createPaperDictionaryRoutes(),
+  ...createVocabularyNotebookRoutes(),
   // D1 (grammar-facets-v2): I16·C verb-profile sidecar + its backfill route
   // retired — tense/voice/agreementSensitive now live on the grammar-fill-
   // analysis-v2 blank entry itself (server/search/teachingFacets.mjs).

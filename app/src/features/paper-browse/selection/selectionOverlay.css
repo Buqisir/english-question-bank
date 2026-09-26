@@ -19,7 +19,8 @@
   transform-origin: var(--paper-selection-origin, top left);
 }
 
-.paper-selection-translate {
+.paper-selection-translate,
+.paper-selection-lookup {
   appearance: none;
   margin: 0;
   border: 0;
@@ -43,15 +44,18 @@
   flex-shrink: 0;
 }
 
-.paper-selection-translate:hover {
+.paper-selection-translate:hover,
+.paper-selection-lookup:hover {
   background: var(--desk-hover, #E5EAE1);
 }
 
-.paper-selection-translate:active {
+.paper-selection-translate:active,
+.paper-selection-lookup:active {
   transform: scale(0.96);
 }
 
-.paper-selection-translate:focus-visible {
+.paper-selection-translate:focus-visible,
+.paper-selection-lookup:focus-visible {
   outline: 2px solid var(--eqb-color-text-strong, #1f1f1d);
   outline-offset: 2px;
 }
@@ -67,10 +71,30 @@
   padding: 12px 14px 10px;
   background: var(--desk-raised, #FAFDF7);
   border: 1px solid var(--desk-line, #E3E8DF);
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
   animation: paper-selection-card-enter var(--motion-base) var(--ease-out);
   transform-origin: var(--paper-selection-origin, top left);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* 系统滚动条常驻时会压在圆角卡片右缘；平时隐形，指针进入卡片才浮出细条。 */
+.paper-selection-card:hover {
+  scrollbar-color: color-mix(in srgb, var(--eqb-color-text-strong, #1f1f1d) 18%, transparent) transparent;
+}
+
+.paper-selection-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.paper-selection-card::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+}
+
+.paper-selection-card:hover::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--eqb-color-text-strong, #1f1f1d) 18%, transparent);
 }
 
 .paper-selection-card-header {
@@ -306,12 +330,442 @@
   }
 }
 
+/* 词典卡英文词头、音标、词性缩写走卷面衬线字道（Owner 例外，DESIGN.md §3）；
+   字形经 PaperFontGate 注入 document.fonts，对 portal 同样生效。 */
+.paper-dictionary-card {
+  width: min(340px, calc(100vw - 24px));
+  padding: 16px 16px 12px;
+  --dict-serif: 'EQB Termes', 'EQB Source Han Serif', serif;
+  --dict-serif-ipa: 'EQB Termes', 'Times New Roman', 'Charis SIL', 'Doulos SIL', serif;
+}
+
+.paper-dictionary-card[data-loading] {
+  min-height: 180px;
+}
+
+.paper-dictionary-card .paper-selection-card-header {
+  top: -16px;
+  margin: -16px -16px 0;
+  padding: 16px 16px 0;
+}
+
+.paper-dictionary-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* 与「真题」徽章同一做法：软底、无描边、4px 圆角。 */
+.paper-dictionary-badge {
+  flex-shrink: 0;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--desk-hover, #E5EAE1);
+  color: var(--eqb-color-text-muted, #6b6e68);
+  font-family: inherit;
+  font-style: normal;
+  font-size: var(--eqb-font-size-xs, 12px);
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.paper-dictionary-entry-head .paper-dictionary-badge {
+  align-self: center;
+}
+
+.paper-dictionary-title {
+  margin: 0;
+  font-family: var(--dict-serif);
+  font-size: var(--eqb-font-size-lg, 20px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--eqb-color-text-strong, #1f1f1d);
+}
+
+.paper-dictionary-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-top: 4px;
+}
+
+.paper-dictionary-surface {
+  color: var(--eqb-color-text-muted, #6b6e68);
+  font-size: var(--eqb-font-size-xs, 12px);
+  line-height: 1.45;
+}
+
+.paper-dictionary-note {
+  margin: 4px 0 0;
+  color: var(--eqb-color-text-muted, #6b6e68);
+  font-size: var(--eqb-font-size-xs, 12px);
+  line-height: 1.45;
+}
+
+.paper-dictionary-missing {
+  margin: 4px 0;
+  color: var(--eqb-color-text-muted, #6b6e68);
+  font-size: var(--eqb-font-size-sm, 14px);
+  line-height: 1.45;
+}
+
+.paper-dictionary-entry + .paper-dictionary-entry {
+  margin-top: 16px;
+}
+
+.paper-dictionary-entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  margin-bottom: 6px;
+}
+
+.paper-dictionary-headword {
+  margin: 0;
+  font-family: var(--dict-serif);
+  font-size: var(--eqb-font-size-sm, 14px);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--eqb-color-text-strong, #1f1f1d);
+}
+
+.paper-dictionary-pos + .paper-dictionary-pos {
+  margin-top: 12px;
+}
+
+.paper-dictionary-pronunciations {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-pronunciation {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.paper-dictionary-ipa + .paper-dictionary-dialect,
+.paper-dictionary-ipa + .paper-dictionary-play {
+  margin-left: 2px;
+}
+
+.paper-dictionary-dialect {
+  font-size: var(--eqb-font-size-xs, 12px);
+  font-weight: 400;
+}
+
+.paper-dictionary-ipa {
+  font-family: var(--dict-serif-ipa);
+  font-size: var(--eqb-font-size-sm, 14px);
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.paper-dictionary-play,
+.paper-dictionary-more {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0;
+}
+
+.paper-dictionary-play {
+  align-self: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  gap: 2px;
+  justify-content: center;
+  border-radius: 4px;
+  color: var(--eqb-color-text-muted, #6b6e68);
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-dictionary-play:hover {
+  background: var(--desk-hover, #E5EAE1);
+}
+
+.paper-dictionary-play:hover,
+.paper-dictionary-more:hover {
+  color: var(--eqb-color-text-strong, #1f1f1d);
+}
+
+.paper-dictionary-play:focus-visible,
+.paper-dictionary-more:focus-visible {
+  outline: 2px solid var(--eqb-color-text-strong, #1f1f1d);
+  outline-offset: 2px;
+}
+
+/* 词性作组头，后接一条发丝线划出组界；义项号悬挂在左列，
+   保证各组、单义项与多义项的释义都从同一左缘起排。 */
+.paper-dictionary-pos-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 2px;
+  font-size: var(--eqb-font-size-sm, 14px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-pos-form {
+  font-size: var(--eqb-font-size-xs, 12px);
+}
+
+.paper-dictionary-pos-abbr {
+  font-family: var(--dict-serif);
+  font-style: italic;
+}
+
+.paper-dictionary-pos-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--desk-line, #E3E8DF);
+}
+
+.paper-dictionary-senses {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.paper-dictionary-sense {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: 6px;
+  align-items: baseline;
+}
+
+.paper-dictionary-sense + .paper-dictionary-sense {
+  margin-top: 3px;
+}
+
+.paper-dictionary-gloss {
+  grid-column: 2;
+  margin: 0;
+  font-size: var(--eqb-font-size-sm, 14px);
+  line-height: 1.5;
+  color: var(--eqb-color-text-strong, #1f1f1d);
+}
+
+.paper-dictionary-gloss-sep {
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-gloss-num {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: right;
+  font-size: var(--eqb-font-size-xs, 12px);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-more {
+  margin-top: 4px;
+  border-radius: 4px;
+  color: var(--eqb-color-text-muted, #6b6e68);
+  font-size: var(--eqb-font-size-xs, 12px);
+}
+
+/* 「其他义项」与释义左缘对齐（16px 号列 + 6px 列距）；卡级「详细解释」不受此缩进。 */
+.paper-dictionary-rare-toggle {
+  margin-left: 22px;
+}
+
+.paper-dictionary-rare-toggle svg {
+  transition: transform var(--motion-fast, 120ms) var(--ease-out, ease-out);
+}
+
+.paper-dictionary-rare-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.paper-dictionary-detail-toggle {
+  margin-top: 12px;
+}
+
+.paper-dictionary-explanation {
+  grid-column: 2;
+  margin: 1px 0 2px;
+  color: var(--eqb-color-text-muted, #6b6e68);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* 本文义是这张卡的主角：紧跟词头，不加底色，靠位置和字重领先于下面的词典义项。 */
+.paper-dictionary-sense-block {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.paper-dictionary-sense-label {
+  flex-shrink: 0;
+  font-size: var(--eqb-font-size-xs, 12px);
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-sense-text {
+  font-size: var(--eqb-font-size-sm, 14px);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--eqb-color-text-strong, #1f1f1d);
+}
+
+.paper-dictionary-context-dot {
+  position: relative;
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: var(--eqb-color-text-strong, #1f1f1d);
+  vertical-align: middle;
+}
+
+.paper-dictionary-sense-note {
+  font-size: var(--eqb-font-size-xs, 12px);
+  line-height: 1.45;
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-sense-error {
+  color: var(--eqb-color-danger, #dc2626);
+}
+
+.paper-dictionary-sense-retry {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin-left: 6px;
+  font: inherit;
+  color: var(--eqb-color-text-strong, #1f1f1d);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.paper-dictionary-sense-skeleton-row {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--eqb-font-size-sm, 14px);
+  line-height: 1.45;
+}
+
+.paper-dictionary-sense-skeleton {
+  display: inline-block;
+  width: 40%;
+  height: 0.9em;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--eqb-color-text-strong, #1f1f1d) 10%, transparent);
+  vertical-align: middle;
+}
+
+.paper-dictionary-skeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.paper-dictionary-skeleton-line {
+  height: 12px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--eqb-color-text-strong, #1f1f1d) 10%, transparent);
+}
+
+.paper-dictionary-skeleton-line:nth-child(2) {
+  width: 82%;
+}
+
+.paper-dictionary-skeleton-line:nth-child(3) {
+  width: 58%;
+}
+
+.paper-dictionary-machine {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: var(--eqb-font-size-xs, 12px);
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: 16px;
+  font-size: var(--eqb-font-size-xs, 12px);
+  line-height: 1.45;
+  color: var(--eqb-color-text-muted, #6b6e68);
+}
+
+.paper-dictionary-source {
+  white-space: nowrap;
+}
+
+.paper-dictionary-credits-toggle {
+  margin: 0;
+  color: var(--eqb-color-text-muted, #6b6e68);
+  font-size: var(--eqb-font-size-xs, 12px);
+}
+
+.paper-dictionary-credits-toggle svg {
+  transition: transform var(--motion-fast, 120ms) var(--ease-out, ease-out);
+}
+
+.paper-dictionary-credits-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.paper-dictionary-credits-body {
+  grid-column: 1 / -1;
+}
+
+.paper-dictionary-credits-body[hidden] {
+  display: none;
+}
+
+.paper-dictionary-attribution {
+  margin: 6px 0 0;
+}
+
+.paper-dictionary-credits-body .paper-dictionary-note {
+  margin: 4px 0 0;
+}
+
+.paper-dictionary-credits-body a {
+  color: inherit;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .paper-selection-overlay,
   .paper-selection-toolbar,
   .paper-selection-card,
   .paper-selection-spinner,
-  .paper-selection-kicker-icon circle {
+  .paper-selection-kicker-icon circle,
+  .paper-dictionary-credits-toggle svg,
+  .paper-dictionary-rare-toggle svg {
     animation: none !important;
     transition: none !important;
   }
