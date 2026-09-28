@@ -23,6 +23,8 @@ import { createPaperTranslationRoutes, createPaperTranslationRuntime } from './p
 import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from './paper-dictionary/routes.mjs'
 import { createVocabularyNotebookRoutes } from './vocabulary-notebook/routes.mjs'
 import { createVocabularyNotebookRuntime } from './vocabulary-notebook/runtime.mjs'
+import { createPersonalPaperLayerRoutes } from './personal-paper-layer/routes.mjs'
+import { createPersonalPaperLayerRuntime } from './personal-paper-layer/runtime.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { sendPaperAssetStatic } from './paper-import/paperAssetStatic.mjs'
@@ -506,6 +508,10 @@ const vocabularyNotebookRuntime = createVocabularyNotebookRuntime({
   translate: (input) => paperTranslationRuntime.translate(input),
 })
 serverContext.vocabularyNotebook = vocabularyNotebookRuntime
+serverContext.personalPaperLayer = createPersonalPaperLayerRuntime({
+  openUserDatabase,
+  loadCanonicalConsumption,
+})
 
 const serverRoutes = [
   ...h1Routes,
@@ -540,6 +546,7 @@ const serverRoutes = [
   ...createPaperTranslationRoutes(),
   ...createPaperDictionaryRoutes(),
   ...createVocabularyNotebookRoutes(),
+  ...createPersonalPaperLayerRoutes(),
   // D1 (grammar-facets-v2): I16·C verb-profile sidecar + its backfill route
   // retired — tense/voice/agreementSensitive now live on the grammar-fill-
   // analysis-v2 blank entry itself (server/search/teachingFacets.mjs).

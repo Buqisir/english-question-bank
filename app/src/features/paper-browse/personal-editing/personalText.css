@@ -1,0 +1,80 @@
+/* Personal text: the teacher's own words, scoped so paper and UI fonts stay untouched. */
+.eqb-personal-text {
+  color: var(--desk-ink, #191D18);
+  overflow-wrap: anywhere;
+}
+
+.eqb-personal-text p,
+.eqb-personal-text blockquote,
+.eqb-personal-text ul,
+.eqb-personal-text ol {
+  margin: 0;
+}
+
+.eqb-personal-text ul,
+.eqb-personal-text ol {
+  padding-left: 1.4em;
+}
+
+.eqb-personal-text blockquote {
+  padding-left: 0.8em;
+  border-left: 1px solid var(--desk-border, #D5DACF);
+  color: var(--desk-muted, #60665C);
+}
+
+.eqb-personal-text--editor {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eqb-personal-text__tools {
+  display: flex;
+  gap: 4px;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+}
+
+.eqb-personal-text__tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665C);
+  cursor: pointer;
+}
+
+.eqb-personal-text__tool:hover {
+  background: var(--desk-hover, #E5EAE1);
+}
+
+.eqb-personal-text__tool.is-active {
+  background: var(--desk-hover, #E5EAE1);
+  color: var(--desk-ink, #191D18);
+}
+
+.eqb-personal-text__tool:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.eqb-personal-text__input {
+  min-height: 1.45em;
+  outline: none;
+}
+
+.eqb-personal-text--editor:not(.is-readonly) .eqb-personal-text__input:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.eqb-personal-text__error {
+  margin: 0;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--eqb-color-danger);
+}
