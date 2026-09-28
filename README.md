@@ -1,57 +1,125 @@
-# 英语题库工作台
+# EQ Bank · 带题库的教育 Agent
 
-面向英语教师的语篇中心题库与组卷工作台，已上线 https://eqbank.cc
-（邀请制登录，owner 策展、member 消费）。
+**EQ Bank 的长期定位是一个带题库的教育 Agent：在持续对话中理解教学目标，调用专业资源与工具，把教育工作真正做完。**
 
-核心模型：`Source -> Passage -> Question Group -> Question -> Paper Set -> Export`。
+我们从英语题库与教师备课工作台出发，逐步把题目、来源资料、讲评、试卷和教学工具连接起来。题库不是将来要替换掉的过渡产品，而是 Agent 持续积累的专业资源基础；Agent 则负责围绕人的目标使用这些资源、完成任务，并在交流中继续修改成果。
 
-生产 / 消费分界（ADR-0015 / ADR-0016）：**内容生产在后台 Agent**
-（`scripts/import-pipeline/` 离线导题、出题 skill、backfill 脚本），
-**网站只做消费**（找题 → 看题 → 组卷 → 导出学生版 / 教师版）。
-网站端没有导题入口，这是产品决策，不是缺失。
+现有工作台入口：[eqbank.cc](https://eqbank.cc)（邀请制登录）。当前首先服务英语教师的备课与讲评；学生伴学和家长协作是后续探索方向。
 
-## 目录
+> 本文区分长期定位、已有基础与待建设能力。教育 Agent 的完整体验是演进目标，不代表下文提到的工具、课件、记忆或多角色能力已经实现或上线。具体实现范围以对应 Spec、PR 与代码为准，线上状态需另行核验。
+
+## 我们希望实现的体验
+
+老师可以围绕真实教学任务与 Agent 持续交流，例如：
+
+> “围绕这篇阅读，找几道考查同类能力、难度稍低的题，整理讲评，再做成几页课件。”
+> “第二道不适合我的学生，换一道；这一页换一种讲法，保留我刚刚改过的内容。”
+
+目标不只是回答建议，也不只是一次性自动生成，而是把对话与操作连起来：
 
 ```text
-app/      # 前端 (React + Vite) 与本地开发入口
-server/   # Node API（SQLite，双库：共享题库 + 用户数据）
+理解教学意图 → 查找题目与资料 → 调用专业工具 → 形成可检查、可编辑的成果
+      ↑                                                ↓
+      └──────── 教师反馈、调整目标、继续修改 ──────────────┘
+```
+
+**既能交流，也能做事；成果留在题库、试卷、讲评和课件等真实工作界面里，而不是只留在聊天记录里。**
+
+## 当前基础与演进方向
+
+| 层次 | 内容 |
+| --- | --- |
+| 已有基础 | 面向英语教师的语篇中心题库与组卷工作台；来源与题目结构、找题看题、组卷、学生版／教师版导出，以及后台内容生产管线。 |
+| 逐步建设 | 把现有业务能力开放为受控的 Agent 工具，围绕找题、相似题、组卷和讲评打通小而完整的任务；支持对话中的检查与修改。个人解析等能力按各自任务落地，不因写入愿景而视为已完成。 |
+| 后续扩展 | 课件制作与编辑、学科可视化、连续学习支持，以及学生和家长场景。按真实需求与实验结果推进，不在第一轮一次性建设。 |
+
+当前切入点仍是老师每天需要的找题、备课与讲评。未来可扩展到其他学科，但不把英语的语篇模型强加给所有学科。
+
+## 资源、工具与 Agent 的关系
+
+以下是演进方向，不是现有模块已经全部接通的架构声明：
+
+- **专业资源层**：题目、完整语篇、来源、教师确认的信息和教学资料。内容需要可追溯，公共资料与个人内容保持清晰边界。
+- **工具与能力层**：把检索、相似题、组卷、讲评编辑、导出、课件和可视化等能力按需封装，让 Agent 使用现有业务能力，而不是另造一套相互冲突的数据与操作入口。
+- **Agent 与交互层**：理解目标与上下文，选择工具、检查结果、处理失败，并根据反馈继续修改。老师仍可直接操作工作台，不必每一步都通过聊天。
+
+Agent 基础以 [pi](https://github.com/earendil-works/pi) 为参考与复用方向，教育领域的工具、上下文和行为由 EQ Bank 自己定义。[OpenMAIC](https://github.com/THU-MAIC/OpenMAIC) 是课件与互动教学能力的参考来源：优先评估适配、组件或 SDK 级复用，不预设整体 Fork，也不把它的整套产品当成我们的产品。
+
+这些方向不等于要求立即引入全部依赖；具体选型、许可、集成方式和成本在对应任务中核验。
+
+## 面向 Agent 的能力设计原则
+
+工具要让 Agent 知道“有什么、何时用、怎么用、不能做什么”。新增能力应有清楚的用途、输入输出、限制、错误说明和示例，并按任务需要暴露或加载，而不是一次塞入所有工具和资料。
+
+Agent 调用与人工操作应遵守同一套业务规则、权限和数据归属。写入类操作按风险提供预览、必要的确认与可恢复机制；失败不能被包装成成功，也不能绕过公共内容审核或覆盖其他人的工作。
+
+我们通过真实教师任务与固定实验案例比较效果，观察工具调用、结果、耗时、费用和失败原因。模型、提示词或工具调整是否有效，需要证据，而不是只看一次演示。
+
+## 当前产品边界
+
+英语题库继续保持语篇中心的领域关系：
+
+```text
+Source → Passage → Question Group → Question → Paper Set → Export
+```
+
+这是领域关系概览，不是要求每个对象都走同一条执行流水线；具体题型与例外以 [CONTEXT.md](CONTEXT.md) 为准。
+
+公共题库的导入与发布仍在后台管线，网站不恢复公共导题入口。已确认的个人解析方向允许用户围绕已有卷子生成、编辑、保存自己的讲评，但不改公共题库，也不等于官方审核；具体实现范围见 [公共题库、个人解析与精选官方参考](docs/product/public-papers-personal-analysis.md)。
+
+公共源内容保留确认边界，精选官方参考解析需要人工审核；个人内容与公共内容隔离。学生版不暴露答案和解析，教师版按对应产品合同展示。Agent 能力扩展不授予无限写入、公共发布或生产运维权限。
+
+## 代码目录
+
+```text
+app/      # 前端（React + Vite）与本地开发入口
+server/   # Node API（SQLite，共享题库 + 用户数据）
 shared/   # PaperSurface 等前后端共享模块
 schemas/  # 数据契约 schema
-scripts/  # verify 脚本、导入管线、部署/备份/搬库运维脚本
-deploy/   # Caddyfile、systemd unit（生产拓扑）
+scripts/  # 验证、导入管线、部署与备份等脚本
+deploy/   # Caddyfile、systemd unit 等部署配置
 data/     # 本地数据库与运行数据
-docs/     # ADR、steering 规则、cut 记录、产品文档
-design/   # open-design 视觉原型（不进产品代码路径）
+docs/     # 产品文档、架构决策、开发规则与阶段记录
+design/   # 视觉原型（不进产品代码路径）
 ```
 
-## 本地开发
+## 本地开发与验证
+
+先阅读 [AGENTS.md](AGENTS.md)。在已经准备好 Git、Node、pnpm 和 npm 的本地仓库／worktree 中：
 
 ```bash
-cd app
-pnpm install
-pnpm dev   # 初始化本地 SQLite 后同时起 API (8787) 和 Vite 前端
+bash scripts/setup-worktree.sh
+pnpm -C app dev
 ```
 
-验证：`pnpm -C app run verify:all`（委托 `scripts/verify-ci.mjs`，
-与 GitHub Actions 同源）。选最窄的脚本看 `scripts/README.md`。
+`app/` 使用 pnpm，`server/` 使用 npm；初始化脚本分别安装两侧依赖。脚本会在已有本地主 checkout 数据库可用时复制它们，不会自动获取生产数据库或题库资产。
+
+按改动范围选择验证，不把命令完成或测试跳过视为功能通过：
+
+```bash
+pnpm -C app verify:changed
+# 完整验证在相应最终门禁需要时运行：
+pnpm -C app verify:all
+```
+
+验证入口见 [scripts/README.md](scripts/README.md)，任务分支、PR 与自然 GitHub Actions 门禁以 [AGENTS.md](AGENTS.md) 为准。
+
+需要在 ChatGPT 沙盒执行仓库代码时，先读取专用分支上的 [sandbox bridge README](https://github.com/Buqisir/english-question-bank/blob/sandbox-sync/source-bridge/scripts/sandbox/README.md)，按既有流程恢复指定 SHA；不要将本地开发命令当成沙盒源码获取流程。
 
 ## 部署与运维
 
-- 首次上机手册：`docs/cuts/launch-deploy/runbook.md`
-- 服务器实况记录：`docs/cuts/launch-deploy/go-live-record.md`
-- 日常代码发布：`scripts/deploy.sh`；R2 备份：`scripts/backup-to-r2.sh`；
-  Review-backed 内容上线走服务端单卷 promotion；`scripts/pull-run-push.mjs` 只保留
-  pull/manifest 与历史维护兼容
+部署需要明确授权，并遵循 [AGENTS.md 的 Dedicated Deployment Orb 规则](AGENTS.md#dedicated-deployment-orb)。更新文档、合并 PR 或测试通过都不等于网站已经部署，也不授予数据库、R2 或生产配置变更权限。
 
-## 文档地图
+首次上机与历史实况可查阅 [runbook](docs/cuts/launch-deploy/runbook.md) 和 [go-live record](docs/cuts/launch-deploy/go-live-record.md)；历史操作记录不能替代当前部署规则。
 
-- Agent / 流程规则唯一入口：`AGENTS.md`
-- 当前状态单页：`docs/STATUS.md`
-- 领域语言：`CONTEXT.md`；架构决策：`docs/adr/`
-- 产品原则与试卷格式硬规则：`PRODUCT.md`、`docs/product/`
+## 文档地图与协作
 
-## 项目原则
+- [PRODUCT.md](PRODUCT.md)：长期产品定位、当前教师场景与产品边界。
+- [CONTEXT.md](CONTEXT.md) 与 [docs/adr/](docs/adr/)：领域语言、数据含义与架构决策。
+- [AGENTS.md](AGENTS.md)：开发 Agent 的操作入口；它不等于面向用户的教育 Agent 功能说明。
+- [docs/STATUS.md](docs/STATUS.md)：阶段状态记录，使用时注意记录日期与对应提交。
+- [docs/product/](docs/product/)：具体产品合同、试卷格式与内容规则。
 
-- 语篇中心：阅读、完形、七选五都围绕完整材料建模。
-- 教学可用：服务找题、组题、讲评和训练，不做 AI 数据面板。
-- 人工把关：AI 可以建议，不替代教师判断；学生版永不露答案。
+需要交给其他 Agent 实现的 Spec，通过 GitHub Issue 传递；README 描述方向，不自动授权展开全部路线图。开发任务应有明确范围、验收标准与非目标。
+
+**用业务理解决定值得做什么，用技术理解和实验判断怎样把它做好。**
