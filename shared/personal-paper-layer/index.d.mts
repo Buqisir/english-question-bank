@@ -256,3 +256,28 @@ export function createPersonalLayerSession(options: {
   retryDelaysMs?: number[]
   timers?: TimerHost
 }): PersonalLayerSession
+
+export type PersonalLayerHistoryStep =
+  | { ok: true; operations: PersonalOperation[]; commit(): void }
+  | { ok: false; code: 'HISTORY_EMPTY' | 'HISTORY_STALE' }
+export type PersonalLayerHistory = {
+  record(objects: PersonalObject[], operations: PersonalOperation[], options?: { mergeKey?: string | null }): void
+  seal(): void
+  undo(objects: PersonalObject[]): PersonalLayerHistoryStep
+  redo(objects: PersonalObject[]): PersonalLayerHistoryStep
+  currentId(id: string): string
+  clear(): void
+  readonly canUndo: boolean
+  readonly canRedo: boolean
+}
+export function personalTextAnchorToInput(anchor: PersonalTextAnchor): PersonalTextAnchorInput
+export function personalObjectToCreateInput(object: PersonalObject, id?: string): PersonalObjectInput
+export function createPersonalLayerHistory(options?: { createId?: () => string; limit?: number }): PersonalLayerHistory
+
+export type PersonalCommentaryTargets = {
+  questions: ReadonlyArray<{ groupId: string; questionId: string }>
+  writingTasks: readonly string[]
+}
+export type PersonalLayerSource = PaperSelectionSource & { commentaryTargets?: PersonalCommentaryTargets }
+export function buildPersonalLayerSource(consumption: unknown): PersonalLayerSource & { commentaryTargets: PersonalCommentaryTargets }
+export function personalCommentaryTargetExists(source: PersonalLayerSource, target: PersonalCommentaryTarget | null | undefined): boolean

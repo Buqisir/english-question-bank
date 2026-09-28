@@ -17,6 +17,14 @@ export type SelectionOverlayProps = {
   liveMessage: string
   onTranslate: () => void
   onLookup?: () => void
+  /** False when the translation service is off; the translate button hides. */
+  translateEnabled?: boolean
+  /** Personal annotations (#489): local-only actions, no paid calls. */
+  annotationActions?: {
+    onHighlight: () => void
+    onUnderline: () => void
+    onNote: () => void
+  }
   onRetry: () => void
   onClose?: () => void
   onPointerInsideChange: (inside: boolean) => void
@@ -35,6 +43,8 @@ export function SelectionOverlay({
   liveMessage,
   onTranslate,
   onLookup,
+  translateEnabled = true,
+  annotationActions,
   onRetry,
   onClose,
   onPointerInsideChange,
@@ -139,7 +149,7 @@ export function SelectionOverlay({
               <BookOpen size={16} className="paper-selection-btn-icon" />
               <span>查词</span>
             </button>
-          ) : (
+          ) : translateEnabled ? (
             <button
               type="button"
               className="paper-selection-translate"
@@ -148,7 +158,14 @@ export function SelectionOverlay({
               <Translate size={16} className="paper-selection-btn-icon" />
               <span>翻译</span>
             </button>
-          )}
+          ) : null}
+          {annotationActions ? (
+            <div className="paper-selection-annotations" role="group" aria-label="我的批注">
+              <button type="button" onClick={annotationActions.onHighlight}>高亮</button>
+              <button type="button" onClick={annotationActions.onUnderline}>下划线</button>
+              <button type="button" onClick={annotationActions.onNote}>批注</button>
+            </div>
+          ) : null}
         </div>
       ) : phase === 'dictionary' ? dictionary : (
         <div className="paper-selection-card">

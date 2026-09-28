@@ -189,6 +189,10 @@ import {
 } from './SimilarQuestionsRailView'
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import { usePaperSelectionTranslation } from './selection/usePaperSelectionTranslation'
+import { usePersonalAnnotations } from './personal-editing/usePersonalAnnotations'
+import { PersonalAnnotationLayer } from './personal-editing/PersonalAnnotationLayer'
+import { PersonalSaveStatus } from './personal-editing/PersonalSaveStatus'
+import { PersonalCommentary } from './personal-editing/PersonalCommentary'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -365,6 +369,8 @@ type SimilarSeedSnapshot = {
 
 export type PaperBrowsePageProps = {
   paperId: string
+  /** Signed-in account id; personal annotations (#489) stay off without it. */
+  personalAccountKey?: string | null
   /** Import review only: read the immutable Candidate revision through the
    * reviewer API while keeping this exact Screen renderer. */
   reviewRevision?: string | null
@@ -716,6 +722,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
+    personalAccountKey,
     reviewRevision,
     focusGroupId,
     questionId,
@@ -791,10 +798,24 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [similarSelectedGroupIds, setSimilarSelectedGroupIds] = useState<Set<string>>(new Set())
   const [similarToast, setSimilarToast] = useState<string | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
+  // #489 个人批注：阅读态的高亮/下划线/旁注/讲评。未登录或评审历史版本时关闭。
+  const personalAnnotations = usePersonalAnnotations({
+    accountKey: personalAccountKey ?? null,
+    paperId,
+    consumption: canonicalConsumption,
+    enabled: !reviewRevision,
+  })
   const paperSelection = usePaperSelectionTranslation({
     paperId,
     consumption: canonicalConsumption,
     hostRef: scrollerRef,
+    annotationActions: personalAnnotations.canEdit
+      ? {
+          enabled: true,
+          createMark: personalAnnotations.createMark,
+          startNote: personalAnnotations.startNote,
+        }
+      : null,
   })
   // CR D-MF1：活跃沉降巡检的退场把手——scrollToAnchor 重入时先退旧循环
   // 再起新的（桌面端连点 rail 项不触发 wheel/touch/keydown，若无此把手
@@ -3478,6 +3499,17 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             activeOptionLabel,
           })}
         </div>
+        <PersonalCommentary
+          api={personalAnnotations}
+          target={activeQuestionId
+            ? { kind: 'question', groupId, questionId: activeQuestionId }
+            : { kind: 'writing-task', groupId }}
+          label={activeQuestionId
+            ? (asset.content.questions[activeQuestionId]?.questionNo
+              ? `第 ${asset.content.questions[activeQuestionId].questionNo} 题`
+              : '这道题')
+            : (lectureTitle ?? group.title)}
+        />
         {/* similar-rail (E2/E6), 已拍板设计 1: 当前选中题的解析下方「配相似」
             /「相似篇章」CTA——无选中题不渲染；只对 v2 引擎支持的四个题型
             (program.md Q5) 渲染，写作/听力题组即便被选中也不出现这个按钮。
@@ -3949,6 +3981,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
   const topbarActionsSlot = !reviewRevision ? (
     <>
+      <PersonalSaveStatus api={personalAnnotations} />
       <button
         type="button"
         ref={lectureToggleRef}
@@ -4133,6 +4166,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               </div>
             )}
           </div>
+          {personalAnnotations.active && (
+            <PersonalAnnotationLayer api={personalAnnotations} hostRef={scrollerRef} />
+          )}
         </div>
         {lectureOpen && (
           <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>

@@ -21,7 +21,7 @@ import {
 import { DictionaryCard, dictionaryCopyText, type DictionarySenseState } from './DictionaryCard'
 import { stopDictionaryAudio } from './dictionaryAudio'
 import { createPageTranslationCache } from './pageCache'
-import { mapDomRangeToSegments, selectionRange } from './mapDomSelection'
+import { mapDomRangeToSegments, selectionRange, type MappedSegment } from './mapDomSelection'
 import { SelectionOverlay, type SelectionOverlayPhase } from './SelectionOverlay'
 import { NotebookAddButton } from '../../vocabulary-notebook/NotebookAddButton.tsx'
 import './selectionOverlay.css'
@@ -83,15 +83,19 @@ function teacherFacingError(error: unknown): string {
 
 type SelectionAction = 'dictionary' | 'lookup' | 'toolbar'
 
+type SnapshotSegment = { streamId: string; start: number; end: number; selectedText: string }
+
 type Snapshot = {
   generation: number
   action: SelectionAction
   range: Range
+  // The selection as dragged, before a complete word is expanded for lookup.
+  selectionSegments: SnapshotSegment[]
   sourceRevision: string
   paperId: string
   policyKey: string
   promptVersion: string
-  segments: Array<{ streamId: string; start: number; end: number; selectedText: string }>
+  segments: SnapshotSegment[]
   anchor: { x: number; y: number } | null
 }
 
@@ -118,14 +122,22 @@ function chooseAction({
   return 'none'
 }
 
+export type SelectionAnnotationActions = {
+  enabled: boolean
+  createMark: (type: 'highlight' | 'underline', segments: MappedSegment[], point: { x: number; y: number }) => void
+  startNote: (segments: MappedSegment[]) => void
+}
+
 export function usePaperSelectionTranslation({
   paperId,
   consumption,
   hostRef,
+  annotationActions,
 }: {
   paperId: string
   consumption: WholePaperConsumption | null
   hostRef: { current: HTMLElement | null }
+  annotationActions?: SelectionAnnotationActions | null
 }) {
   const [status, setStatus] = useState<PaperTranslationStatus | null | undefined>(undefined)
   const [dictionaryStatus, setDictionaryStatus] = useState<PaperDictionaryStatus | null | undefined>(undefined)
@@ -466,11 +478,14 @@ export function usePaperSelectionTranslation({
     }
     const translationEnabled = Boolean(status && status.enabled)
     const dictionaryAvailable = Boolean(dictionaryStatus?.available)
-    if (status === undefined && dictionaryStatus === undefined) return
-    if (!translationEnabled && !dictionaryAvailable) {
-      if (status === undefined || dictionaryStatus === undefined) return
-      if (phase !== 'idle') close()
-      return
+    const annotationsAvailable = Boolean(annotationActions?.enabled)
+    if (!annotationsAvailable) {
+      if (status === undefined && dictionaryStatus === undefined) return
+      if (!translationEnabled && !dictionaryAvailable) {
+        if (status === undefined || dictionaryStatus === undefined) return
+        if (phase !== 'idle') close()
+        return
+      }
     }
     const range = selectionRange()
     const overlay = document.querySelector('.paper-selection-overlay')
@@ -510,15 +525,19 @@ export function usePaperSelectionTranslation({
         }]
       }
     }
-    const action = chooseAction({
+    let action = chooseAction({
       word,
       translationEnabled,
       dictionaryAvailable,
     })
     if (action === 'lookup' && status === undefined) return
     if (action === 'none') {
-      if (phase !== 'idle') close()
-      return
+      // 高亮/下划线/批注 need no translation or dictionary status.
+      if (!annotationsAvailable) {
+        if (phase !== 'idle') close()
+        return
+      }
+      action = 'toolbar'
     }
     const previous = snapshotRef.current
     const sameRange = Boolean(previous?.paperId === paperId && previous.sourceRevision === source.sourceRevision
@@ -542,6 +561,7 @@ export function usePaperSelectionTranslation({
       generation: generationRef.current,
       action,
       range: range.cloneRange(),
+      selectionSegments: mapped,
       sourceRevision: source.sourceRevision,
       paperId,
       policyKey: status
@@ -572,14 +592,15 @@ export function usePaperSelectionTranslation({
       void runLookup(next)
       return
     }
-  }, [clearSenseTimer, close, dictionaryStatus, hostRef, paperId, phase, runLookup, source, status])
+  }, [annotationActions?.enabled, clearSenseTimer, close, dictionaryStatus, hostRef, paperId, phase, runLookup, source, status])
 
   const updateFromSelectionRef = useRef(updateFromSelection)
   updateFromSelectionRef.current = updateFromSelection
+  const annotationsEnabled = Boolean(annotationActions?.enabled)
   useEffect(() => {
-    if (status === undefined && dictionaryStatus === undefined) return
+    if (status === undefined && dictionaryStatus === undefined && !annotationsEnabled) return
     updateFromSelectionRef.current()
-  }, [dictionaryStatus, status])
+  }, [annotationsEnabled, dictionaryStatus, status])
 
   useEffect(() => {
     if (phase !== 'dictionary' || !snapshot || snapshot.action !== 'dictionary') return undefined
@@ -694,8 +715,17 @@ export function usePaperSelectionTranslation({
     void runLookup(opened)
   }, [dictionaryResult, lookupError, runLookup])
 
+  const finishAnnotation = (run: (current: Snapshot, point: { x: number; y: number }) => void) => {
+    const current = snapshotRef.current
+    if (!current) return
+    const rects = [...current.range.getClientRects()]
+    const last = rects.at(-1) ?? current.range.getBoundingClientRect()
+    run(current, { x: last.right, y: last.bottom })
+    window.getSelection()?.removeAllRanges()
+    close()
+  }
   const overlay = snapshot && phase !== 'idle' && (
-    phase === 'dictionary' || phase === 'lookup' || status?.enabled
+    phase === 'dictionary' || phase === 'lookup' || status?.enabled || annotationActions?.enabled
   )
     ? createPortal(
       <SelectionOverlay
@@ -712,6 +742,12 @@ export function usePaperSelectionTranslation({
           void runTranslate(snapshot)
         }}
         onLookup={openLookup}
+        translateEnabled={Boolean(status && status.enabled)}
+        annotationActions={annotationActions?.enabled ? {
+          onHighlight: () => finishAnnotation((current, point) => annotationActions.createMark('highlight', current.selectionSegments, point)),
+          onUnderline: () => finishAnnotation((current, point) => annotationActions.createMark('underline', current.selectionSegments, point)),
+          onNote: () => finishAnnotation((current) => annotationActions.startNote(current.selectionSegments)),
+        } : undefined}
         onRetry={() => {
           void runTranslate(snapshot)
         }}

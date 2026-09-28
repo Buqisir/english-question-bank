@@ -17,6 +17,7 @@ import {
   PERSONAL_UNDERLINE_INKS,
 } from './constants.mjs'
 import { personalLayerError } from './errors.mjs'
+import { personalCommentaryTargetExists } from './source.mjs'
 
 const LAYOUT_REF_PATTERN = /^[A-Za-z0-9_.:/-]{1,128}$/u
 
@@ -116,18 +117,6 @@ function normalizeStyle(type, input) {
   return { ink: input.ink }
 }
 
-function sourceHasQuestion(source, groupId, questionId) {
-  return source.streams.some((stream) => stream.groupId === groupId && stream.leaves.some(
-    (leaf) => (leaf.kind === 'question-stem' && leaf.id === questionId)
-      || (leaf.kind === 'option' && leaf.id.startsWith(`${questionId}:`)),
-  ))
-}
-
-function sourceHasWritingTask(source, groupId) {
-  return source.streams.some((stream) => stream.groupId === groupId
-    && (stream.role === 'writing-prompt' || stream.role === 'writing-material'))
-}
-
 function normalizeCommentaryTarget(source, input) {
   if (!isRecord(input) || typeof input.groupId !== 'string') {
     throw personalLayerError('PERSONAL_TARGET_INVALID', 'commentary target is malformed')
@@ -136,14 +125,14 @@ function normalizeCommentaryTarget(source, input) {
     if (
       !onlyKeys(input, ['kind', 'groupId', 'questionId'])
       || typeof input.questionId !== 'string'
-      || !sourceHasQuestion(source, input.groupId, input.questionId)
+      || !personalCommentaryTargetExists(source, input)
     ) {
       throw personalLayerError('PERSONAL_TARGET_INVALID', 'commentary question is not in this paper')
     }
     return { kind: 'question', groupId: input.groupId, questionId: input.questionId }
   }
   if (input.kind === 'writing-task') {
-    if (!onlyKeys(input, ['kind', 'groupId']) || !sourceHasWritingTask(source, input.groupId)) {
+    if (!onlyKeys(input, ['kind', 'groupId']) || !personalCommentaryTargetExists(source, input)) {
       throw personalLayerError('PERSONAL_TARGET_INVALID', 'commentary writing task is not in this paper')
     }
     return { kind: 'writing-task', groupId: input.groupId }

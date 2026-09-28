@@ -28,6 +28,7 @@ import {
 import {
   PERSONAL_LAYER_MAX_OPERATIONS,
   applyPersonalLayerOperations,
+  buildPersonalLayerSource,
   createEmptyPersonalLayerState,
   createPersonalLayerSnapshot,
   normalizeTextAnchor,
@@ -329,6 +330,50 @@ updated.state.objects[0].style.color = 'green'
 check('layer snapshot is frozen and unaffected by later edits', layerSnapshot.objects[0].style.color === 'pink'
   && Object.isFrozen(layerSnapshot.objects[0]) && layerSnapshot.layerVersion === 2
   && layerSnapshot.objectsDigest === digestBefore)
+
+// ---- commentary targets from a real Canonical publication -------------------
+
+{
+  const { mkdtempSync, rmSync } = await import('node:fs')
+  const { tmpdir } = await import('node:os')
+  const { DatabaseSync } = await import('node:sqlite')
+  const { publishCanonicalPaperPublication } = await import('../server/paper-canonical/publication.mjs')
+  const { createCanonicalConsumerRuntime } = await import('../server/paper-canonical/consumerRuntime.mjs')
+  const { makeClozeGrammarCanonicalReferenceFixture } = await import('../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs')
+  const fixture = makeClozeGrammarCanonicalReferenceFixture()
+  const publicationDir = mkdtempSync(path.join(tmpdir(), 'eqb-personal-source-'))
+  const db = new DatabaseSync(path.join(publicationDir, 'publication.sqlite'))
+  try {
+    publishCanonicalPaperPublication({ rootDir: publicationDir, db, request: fixture.request, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset })
+    const consumption = createCanonicalConsumerRuntime({ rootDir: publicationDir, db }).load({ paperId: fixture.source.paperId, consumerId: 'screen' })
+    const paperSource = buildPersonalLayerSource(consumption)
+    const textQuestionIds = new Set(paperSource.streams.flatMap((stream) => stream.leaves
+      .filter((leaf) => leaf.kind === 'question-stem' || leaf.kind === 'option')
+      .map((leaf) => (leaf.kind === 'option' ? leaf.id.slice(0, leaf.id.lastIndexOf(':')) : leaf.id))))
+    const blankOnly = paperSource.commentaryTargets.questions.filter((target) => !textQuestionIds.has(target.questionId))
+    check('grammar-fill and seven-choice questions without visible stems are commentary targets',
+      blankOnly.some((target) => target.groupId.includes('grammar-fill'))
+      && blankOnly.some((target) => target.groupId.includes('seven-choices')), JSON.stringify(blankOnly.slice(0, 2)))
+    check('writing groups are writing-task targets, not questions',
+      paperSource.commentaryTargets.writingTasks.length === 2
+      && !paperSource.commentaryTargets.questions.some((target) => paperSource.commentaryTargets.writingTasks.includes(target.groupId)))
+    const blank = blankOnly[0]
+    const withBlank = applyPersonalLayerOperations(createEmptyPersonalLayerState(paperSource), [
+      { op: 'create', object: { id: 'cm_blank_001', type: 'commentary', target: { kind: 'question', ...blank }, document: note } },
+      { op: 'create', object: { id: 'cm_write_001', type: 'commentary', target: { kind: 'writing-task', groupId: paperSource.commentaryTargets.writingTasks[0] }, document: note } },
+    ], { source: paperSource, now })
+    check('commentary binds to a blank-only question and a writing task', withBlank.state.objects.length === 2)
+    check('a question from another group is refused', codeOf(() => applyPersonalLayerOperations(createEmptyPersonalLayerState(paperSource), [
+      { op: 'create', object: { id: 'cm_cross_001', type: 'commentary', target: { kind: 'question', groupId: paperSource.commentaryTargets.writingTasks[0], questionId: blank.questionId }, document: note } },
+    ], { source: paperSource, now })) === 'PERSONAL_TARGET_INVALID')
+    check('a writing group cannot pose as a question-less objective group', codeOf(() => applyPersonalLayerOperations(createEmptyPersonalLayerState(paperSource), [
+      { op: 'create', object: { id: 'cm_cross_002', type: 'commentary', target: { kind: 'writing-task', groupId: blank.groupId }, document: note } },
+    ], { source: paperSource, now })) === 'PERSONAL_TARGET_INVALID')
+  } finally {
+    db.close()
+    rmSync(publicationDir, { recursive: true, force: true })
+  }
+}
 
 console.log(failed === 0 ? '\nverify-personal-paper-layer: all checks passed' : `\nverify-personal-paper-layer: ${failed} failed`)
 process.exit(failed === 0 ? 0 : 1)

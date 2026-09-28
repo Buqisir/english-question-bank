@@ -1,10 +1,10 @@
 import { createHash } from 'node:crypto'
 import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { buildSelectionSourceFromConsumption } from '../../shared/paper-selection/sourceProjection.mjs'
 import {
   PERSONAL_ID_PATTERN,
   PERSONAL_LAYER_API_SCHEMA,
   PERSONAL_LAYER_SCHEMA_VERSION,
+  buildPersonalLayerSource,
   createEmptyPersonalLayerState,
   resolveTextAnchor,
 } from '../../shared/personal-paper-layer/index.mjs'
@@ -68,7 +68,7 @@ export function createPersonalPaperLayerRuntime({
     }
     try {
       if (loadSourceOverride) return loadSourceOverride(paperId)
-      return buildSelectionSourceFromConsumption(
+      return buildPersonalLayerSource(
         loadCanonicalConsumption({ paperId, consumerId: 'screen' }),
       )
     } catch (error) {

@@ -110,6 +110,16 @@ export function PersonalTextEditor({
     editor?.setEditable(!readOnly, false)
   }, [editor, readOnly])
 
+  // Tiptap's own autofocus fires before EditorContent attaches the view, so
+  // it silently misses; focus once the view is in the page.
+  useEffect(() => {
+    if (!autoFocus || !editor || readOnly) return undefined
+    const frame = requestAnimationFrame(() => {
+      if (!editor.isDestroyed && !editor.isFocused) editor.commands.focus('end')
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [autoFocus, editor, readOnly])
+
   // Adopt outside changes (undo at host level, restore, server merge) without
   // resetting the caret on every keystroke echo.
   useEffect(() => {

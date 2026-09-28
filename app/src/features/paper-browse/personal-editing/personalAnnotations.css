@@ -1,0 +1,364 @@
+/* Personal annotation layer (#489): the teacher's marks on the reading view.
+ * Mark colors are this feature's local tokens (spec §3.2), not chrome accents. */
+.paper-personal-layer {
+  --personal-highlight-yellow: #f9e08a;
+  --personal-highlight-green: #c9e7b8;
+  --personal-highlight-blue: #bcd9f2;
+  --personal-highlight-pink: #f2c3d6;
+  --personal-ink: #1f1f1d;
+  --personal-ink-red: #c0392b;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.paper-personal-marks {
+  position: absolute;
+  inset: 0;
+}
+
+.paper-personal-mark {
+  position: absolute;
+  border-radius: 0;
+}
+
+.paper-personal-mark--highlight {
+  mix-blend-mode: multiply;
+}
+
+.paper-personal-mark--highlight[data-color='yellow'] { background: var(--personal-highlight-yellow); }
+.paper-personal-mark--highlight[data-color='green'] { background: var(--personal-highlight-green); }
+.paper-personal-mark--highlight[data-color='blue'] { background: var(--personal-highlight-blue); }
+.paper-personal-mark--highlight[data-color='pink'] { background: var(--personal-highlight-pink); }
+
+.paper-personal-mark--underline[data-ink='ink'] { border-bottom: 2px solid var(--personal-ink); }
+.paper-personal-mark--underline[data-ink='red'] { border-bottom: 2px solid var(--personal-ink-red); }
+
+.paper-personal-mark--anchored-note {
+  border-bottom: 2px dotted var(--personal-ink);
+}
+
+.paper-personal-mark.is-selected {
+  outline: 2px solid var(--personal-ink);
+  outline-offset: 1px;
+}
+
+/* Numbered badge at the end of a note's anchor. */
+.paper-personal-note-badge {
+  position: absolute;
+  pointer-events: auto;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 999px;
+  background: var(--desk-surface, #fafcf8);
+  color: var(--desk-muted, #60665c);
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.paper-personal-note-badge:hover,
+.paper-personal-note-badge.is-open {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-note-badge:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.paper-personal-note-cards {
+  position: absolute;
+  inset: 0;
+}
+
+.paper-personal-note-slot {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.paper-personal-note-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--desk-surface, #fafcf8);
+  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
+  font-size: 13px;
+}
+
+.paper-personal-note-card.is-editing {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.paper-personal-note-card.is-selected {
+  outline: 2px solid var(--personal-ink);
+  outline-offset: 1px;
+}
+
+.paper-personal-note-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.paper-personal-note-card__label {
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-note-card__view {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: text;
+}
+
+.paper-personal-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  cursor: pointer;
+}
+
+.paper-personal-icon-button:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-icon-button:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* Mark popover (portaled to body). */
+.paper-personal-popover {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-popover__hint {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-popover__choice,
+.paper-personal-popover__back,
+.paper-personal-popover__action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.paper-personal-popover__choice:hover,
+.paper-personal-popover__back:hover,
+.paper-personal-popover__action:hover {
+  background: var(--desk-hover, #e5eae1);
+}
+
+.paper-personal-popover__back {
+  color: var(--desk-muted, #60665c);
+  font-size: 12px;
+}
+
+.paper-personal-popover__action--danger:hover {
+  color: var(--eqb-color-danger);
+}
+
+.paper-personal-popover__editor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.paper-personal-popover__type {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-popover__swatches {
+  display: flex;
+  gap: 4px;
+}
+
+.paper-personal-swatch {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid rgba(30, 30, 28, 0.12);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.paper-personal-swatch[data-color='yellow'] { background: var(--personal-highlight-yellow); }
+.paper-personal-swatch[data-color='green'] { background: var(--personal-highlight-green); }
+.paper-personal-swatch[data-color='blue'] { background: var(--personal-highlight-blue); }
+.paper-personal-swatch[data-color='pink'] { background: var(--personal-highlight-pink); }
+
+.paper-personal-swatch--ink[data-ink='ink'] { background: var(--personal-ink); }
+.paper-personal-swatch--ink[data-ink='red'] { background: var(--personal-ink-red); }
+
+.paper-personal-swatch[aria-pressed='true'] {
+  outline: 2px solid var(--personal-ink);
+  outline-offset: 1px;
+}
+
+.paper-personal-swatch:focus-visible,
+.paper-personal-popover__choice:focus-visible,
+.paper-personal-popover__back:focus-visible,
+.paper-personal-popover__action:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* Save status in the topbar. */
+.paper-personal-status {
+  font-size: 12px;
+  color: var(--desk-muted, #60665c);
+  white-space: nowrap;
+}
+
+.paper-personal-status.is-quiet {
+  color: var(--eqb-color-ink-faint, #9a9d97);
+}
+
+.paper-personal-notice {
+  font-size: 12px;
+  color: var(--eqb-color-danger);
+  white-space: nowrap;
+}
+
+.paper-personal-conflict {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 70;
+  max-width: 320px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-conflict p {
+  margin: 0 0 8px;
+}
+
+.paper-personal-conflict__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.paper-personal-conflict__actions button {
+  padding: 6px 12px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 999px;
+  background: var(--desk-surface, #fafcf8);
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.paper-personal-conflict__actions button:hover {
+  background: var(--desk-hover, #e5eae1);
+}
+
+/* Personal commentary inside the lecture column. */
+.paper-personal-commentary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--desk-border-subtle, #e3e8df);
+}
+
+.paper-personal-commentary__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.paper-personal-commentary__title {
+  margin: 0;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-commentary__edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.paper-personal-commentary__edit:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-commentary__view {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: text;
+}
+
+.paper-personal-commentary .eqb-personal-text {
+  font-size: 13px;
+}
