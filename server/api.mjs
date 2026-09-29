@@ -25,6 +25,7 @@ import { createVocabularyNotebookRoutes } from './vocabulary-notebook/routes.mjs
 import { createVocabularyNotebookRuntime } from './vocabulary-notebook/runtime.mjs'
 import { createPersonalPaperLayerRoutes } from './personal-paper-layer/routes.mjs'
 import { createPersonalPaperLayerRuntime } from './personal-paper-layer/runtime.mjs'
+import { createPersonalPaperLayoutRuntime } from './personal-paper-layer/layout.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { sendPaperAssetStatic } from './paper-import/paperAssetStatic.mjs'
@@ -511,6 +512,10 @@ serverContext.vocabularyNotebook = vocabularyNotebookRuntime
 serverContext.personalPaperLayer = createPersonalPaperLayerRuntime({
   openUserDatabase,
   loadCanonicalConsumption,
+})
+serverContext.personalPaperLayout = createPersonalPaperLayoutRuntime({
+  loadCanonicalConsumption,
+  draftPaperStore,
 })
 
 const serverRoutes = [
