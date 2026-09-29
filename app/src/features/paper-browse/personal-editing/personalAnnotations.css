@@ -552,6 +552,8 @@
  * 时候点击穿透到 iframe。 */
 .paper-personal-text-box-layer {
   --personal-ink: #1f1f1d;
+  /* Muted selection hairline: --desk-muted at the weight of a pencil line. */
+  --personal-frame: rgba(96, 102, 92, 0.55);
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -570,13 +572,32 @@
  * 溢出提醒在框被选中时让位。 */
 .paper-personal-text-box[data-overflow='true'] {
   outline: 1px dashed var(--eqb-color-warning, #E8901A);
-  outline-offset: 2px;
+  outline-offset: 4px;
 }
 
-.paper-personal-text-box:focus-visible,
+/* Selection is a soft frame around the teacher's words, not an input box:
+ * a muted hairline with breathing room and a badge-radius corner. */
+.paper-personal-text-box {
+  border-radius: 4px;
+}
+
 .paper-personal-text-box.is-selected {
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+/* Explicit-Cascade: overrides the resting selected frame; editing and keyboard
+ * focus deserve the full ink so the teacher knows where keys will land. */
+.paper-personal-text-box.is-editing,
+.paper-personal-text-box:focus-visible {
   outline: 1px solid var(--personal-ink);
-  outline-offset: 2px;
+  outline-offset: 4px;
+}
+
+/* Explicit-Cascade: overrides personalText.css's input focus ring; on paper the
+ * box's own editing frame already marks focus, and two rings read as a heavy box. */
+.paper-personal-text-box .eqb-personal-text--editor:not(.is-readonly) .eqb-personal-text__input:focus-visible {
+  outline: none;
 }
 
 /* Explicit-Cascade: 编辑中的框压过其余框（工具条浮出纸面），因编辑器工具条
@@ -627,7 +648,7 @@
 .paper-personal-text-box .eqb-personal-text__tools,
 .paper-personal-text-box__strip {
   position: absolute;
-  bottom: calc(100% + 6px);
+  bottom: calc(100% + 10px);
   left: 0;
   z-index: 3;
   padding: 4px;
@@ -656,16 +677,50 @@
   white-space: nowrap;
 }
 
+.paper-personal-strip-divider {
+  flex: none;
+  width: 1px;
+  height: 16px;
+  margin: 0 4px;
+  background: var(--desk-border, #d5dacf);
+}
+
+.paper-personal-text-box__strip > .paper-personal-strip-divider:first-child {
+  display: none;
+}
+
+/* Native select keeps its keyboard/menu behavior; only its chrome is replaced
+ * so it reads like the size and action buttons beside it. */
+.paper-personal-text-box__font {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-text-box__font svg {
+  position: absolute;
+  right: 8px;
+  pointer-events: none;
+  color: var(--desk-muted, #60665c);
+}
+
 .paper-personal-text-box__font-select {
+  appearance: none;
   height: 28px;
-  padding: 0 8px;
-  border: 1px solid var(--desk-border, #d5dacf);
+  padding: 0 28px 0 8px;
+  border: 0;
   border-radius: 8px;
-  background: var(--desk-surface, #fafcf8);
+  background: transparent;
   color: inherit;
   font-family: inherit;
   font-size: 13px;
   cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-text-box__font-select:hover {
+  background: var(--desk-hover, #e5eae1);
 }
 
 .paper-personal-text-box__sizes {
@@ -725,6 +780,10 @@
   color: var(--desk-ink, #191d18);
 }
 
+.paper-personal-text-box__strip-action--danger:hover {
+  color: var(--eqb-color-danger);
+}
+
 .paper-personal-text-box__font-select:focus-visible,
 .paper-personal-text-box__size-option:focus-visible,
 .paper-personal-text-box__strip-action:focus-visible {
@@ -736,7 +795,8 @@
 .paper-personal-text-box__resize-handle {
   position: absolute;
   top: 50%;
-  right: -4px;
+  /* Sits on the selection frame (outline-offset 4px), not on the text. */
+  right: -8px;
   width: 8px;
   height: 8px;
   border: 1px solid var(--personal-ink, #1f1f1d);

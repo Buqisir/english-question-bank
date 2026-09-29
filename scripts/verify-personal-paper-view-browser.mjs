@@ -679,7 +679,7 @@ try {
   // (f) 复制文字框 duplicates into a second box with its own id.
   await page.locator('.paper-personal-text-box').first().click()
   await page.waitForSelector('.paper-personal-text-box__strip', { timeout: 10_000 })
-  await page.click('.paper-personal-text-box__strip-action:has-text("复制文字框")')
+  await page.click('.paper-personal-text-box__strip-action[aria-label="复制文字框"]')
   await flushAutosave()
   const duplicated = await storedTextBoxes()
   check('复制文字框 creates two boxes with distinct ids',
