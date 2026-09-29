@@ -2,6 +2,9 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, typ
 import { createPortal } from 'react-dom'
 import {
   createPersonalMutationId,
+  inkFreeRect,
+  placeNoteNearAnchor,
+  type NoteSlot,
   type PersonalObject,
 } from '../../../../../shared/personal-paper-layer/index.mjs'
 import {
@@ -13,7 +16,6 @@ import { PersonalTextEditor } from './PersonalTextEditor'
 import { PersonalTextView } from './PersonalTextView'
 import { TextBoxPresentationControls, type TextBoxPresentationChange } from './PaperTextBoxStrip'
 import { BookMarked, AlertTriangle, ArrowDown, Copy, Trash } from '../../../icons'
-import { placeNoteNearAnchor, type NoteSlot } from './paperNotePlacement'
 import { clampPlacement, frameAtPoint, mmToPx, pxToMm, roundMm, type PaperPageFrame, MM_TO_PX } from './paperPlacement'
 import { usePaperContentBoxes } from './usePaperContentBoxes'
 import { scrollContainerOf } from './paperScroll'
@@ -33,8 +35,6 @@ const PROBE_GRID_PX = 12
 
 // 「回到原文」锚线闪烁：class 挂这么久，动画本身只跑两个 motion-slow 脉冲。
 const FLASH_MS = 900
-
-const SVG_NAMESPACE = 'http://www.w3.org/2000/svg'
 
 type AnchoredNoteObject = Extract<PersonalObject, { type: 'anchored-note' }>
 
@@ -107,17 +107,6 @@ type NoteClipboard = {
   textAnchor: AnchoredNoteObject['textAnchor']
   document: PersonalTextDocumentV1
   placement: NotePlacement
-}
-
-// An element carries print ink when it is an image, part of an SVG, or
-// directly holds non-blank text — text nested one level down belongs to the
-// child element, which the probe hits in the same stack anyway.
-function carriesInk(element: Element): boolean {
-  if (element.tagName === 'IMG' || element.namespaceURI === SVG_NAMESPACE) return true
-  for (const node of element.childNodes) {
-    if (node.nodeType === Node.TEXT_NODE && (node.nodeValue ?? '').trim() !== '') return true
-  }
-  return false
 }
 
 // The page frame placeNoteNearAnchor resolves against: same sort key and +1
@@ -253,27 +242,14 @@ export function PaperNoteLayer({
     })
   }, [frameByPageId])
 
-  const probe = useCallback((rect: { left: number; top: number; width: number; height: number }): boolean => {
-    const doc = iframe?.contentDocument
-    if (!doc) return true
-    const xs: number[] = []
-    for (let x = 0; x < rect.width; x += PROBE_GRID_PX) xs.push(x)
-    xs.push(rect.width)
-    const ys: number[] = []
-    for (let y = 0; y < rect.height; y += PROBE_GRID_PX) ys.push(y)
-    ys.push(rect.height)
-    for (const dx of xs) {
-      for (const dy of ys) {
-        // The iframe is exactly the full paper height and never scrolls, so
-        // elementsFromPoint's viewport coords are the document coords the
-        // rects and frames were measured in.
-        for (const element of doc.elementsFromPoint(rect.left + dx, rect.top + dy)) {
-          if (carriesInk(element)) return false
-        }
-      }
-    }
-    return true
-  }, [iframe])
+  // The iframe is exactly the full paper height and never scrolls, so
+  // elementsFromPoint's viewport coords are the document coords the rects and
+  // frames were measured in; a missing document is treated as free.
+  const probe = useCallback(
+    (rect: { left: number; top: number; width: number; height: number }): boolean =>
+      inkFreeRect(iframe?.contentDocument ?? null, rect, PROBE_GRID_PX),
+    [iframe],
+  )
 
   // Per-page content-area edges for margin placement, re-measured with the
   // anchor geometry (shared hook, same measureKey cadence).

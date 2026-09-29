@@ -46,6 +46,42 @@ export type AppendixEntry = {
 }
 export function orderAppendixEntries(entries: AppendixEntry[]): string[]
 
+export type NoteSlot = 'margin' | 'flow'
+export type NoteRect = { left: number; top: number; width: number; height: number }
+export type NotePageFrame = { pageId: string; leftPx: number; topPx: number; widthMm: number; heightMm: number }
+export type NoteHeightMm = { margin: number; flow: number }
+export type NoteCandidate = {
+  pageId: string
+  xMm: number
+  yMm: number
+  widthMm: number
+  slot: NoteSlot
+  /** True when the probe found the spot free of print ink and other cards. */
+  fits: boolean
+}
+export function placeNoteNearAnchor(input: {
+  /** Anchor glyph rects in document px (unsorted is fine). */
+  anchorRects: readonly NoteRect[]
+  frames: readonly NotePageFrame[]
+  /** Flow card width (56mm); margin cards use the margin's own width instead. */
+  flowWidthMm: number
+  /** Estimated card heights, per slot (margin cards are narrow → taller). */
+  heightMm: NoteHeightMm
+  /** Reports whether the rect (document px) is free of print ink. */
+  probe: (rect: NoteRect) => boolean
+  /** The anchor page's content-area left/right edges, document px. */
+  contentBox?: { leftPx: number; rightPx: number }
+  /** Rects (document px) of cards already placed; candidates must clear them. */
+  occupied?: readonly NoteRect[]
+}): NoteCandidate | null
+
+/** Samples a grid (document px, `elementsFromPoint`) over the rect; true when no point hits print ink. */
+export function inkFreeRect(
+  doc: Document | null | undefined,
+  rect: NoteRect,
+  gridPx: number,
+): boolean
+
 export type PersonalCommentaryTarget =
   | { kind: 'question'; groupId: string; questionId: string }
   | { kind: 'writing-task'; groupId: string }

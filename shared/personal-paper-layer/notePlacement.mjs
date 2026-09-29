@@ -1,19 +1,24 @@
-import { MM_TO_PX, mmToPx, type PaperPageFrame } from './paperPlacement'
-import type { LayerRect } from './markGeometry'
+/*
+ * Deterministic auto-near-anchor note placement (#489 4c). Pure data in, pure
+ * data out: px/mm constants live here and the ink probe is injected by the
+ * caller, so the paper editing view and the server-side export measure pass
+ * resolve note spots through the same code.
+ */
 
-export type NoteSlot = 'margin' | 'flow'
+// The paper view renders at CSS 96dpi; mm↔px conversions here share that.
+export const MM_TO_PX = 96 / 25.4
 
-export type NoteCandidate = {
-  pageId: string
-  xMm: number
-  yMm: number
-  widthMm: number
-  slot: NoteSlot
-  /** True when the probe found the spot free of print ink and other cards. */
-  fits: boolean
+export function mmToPx(mm) {
+  return mm * MM_TO_PX
 }
 
-export type NoteHeightMm = { margin: number; flow: number }
+/**
+ * @typedef {'margin' | 'flow'} NoteSlot
+ * @typedef {{ left: number, top: number, width: number, height: number }} RectPx
+ * @typedef {{ pageId: string, leftPx: number, topPx: number, widthMm: number, heightMm: number }} PaperPageFrame
+ * @typedef {{ pageId: string, xMm: number, yMm: number, widthMm: number, slot: NoteSlot, fits: boolean }} NoteCandidate
+ * @typedef {{ margin: number, flow: number }} NoteHeightMm
+ */
 
 const EDGE_MM = 2
 const GAP_MM = 2
@@ -28,25 +33,13 @@ const MAX_MARGIN_WIDTH_MM = 30
 // A candidate must clear every already-placed card by this much.
 const OCCUPIED_GAP_MM = 1
 
-type RectPx = { left: number; top: number; width: number; height: number }
-
-type PlaceInput = {
-  /** Anchor glyph rects in iframe-document px (unsorted is fine). */
-  anchorRects: readonly LayerRect[]
-  frames: readonly PaperPageFrame[]
-  /** Flow card width (56mm); margin cards use the margin's own width instead. */
-  flowWidthMm: number
-  /** Estimated card heights, per slot (margin cards are narrow → taller). */
-  heightMm: NoteHeightMm
-  /** Reports whether the rect (iframe-document px) is free of print ink. */
-  probe: (rect: RectPx) => boolean
-  /** The anchor page's content-area left/right edges, document px. */
-  contentBox?: { leftPx: number; rightPx: number }
-  /** Rects (document px) of cards already placed; candidates must clear them. */
-  occupied?: readonly RectPx[]
-}
-
-function frameOfPoint(frames: readonly PaperPageFrame[], xPx: number, yPx: number): PaperPageFrame | null {
+/**
+ * @param {readonly PaperPageFrame[]} frames
+ * @param {number} xPx
+ * @param {number} yPx
+ * @returns {PaperPageFrame | null}
+ */
+function frameOfPoint(frames, xPx, yPx) {
   for (const frame of frames) {
     if (
       xPx >= frame.leftPx && xPx < frame.leftPx + mmToPx(frame.widthMm)
@@ -56,7 +49,11 @@ function frameOfPoint(frames: readonly PaperPageFrame[], xPx: number, yPx: numbe
   return null
 }
 
-function collides(rect: RectPx, occupied: readonly RectPx[]): boolean {
+/**
+ * @param {RectPx} rect
+ * @param {readonly RectPx[]} occupied
+ */
+function collides(rect, occupied) {
   const gapPx = OCCUPIED_GAP_MM * MM_TO_PX
   for (const other of occupied) {
     if (
@@ -69,26 +66,28 @@ function collides(rect: RectPx, occupied: readonly RectPx[]): boolean {
   return false
 }
 
-/*
- * Deterministic auto-near-anchor placement (#489 4c). Candidate order:
- * (a) the page side margins — the nearest available area around a dense
- *     content column and the teacher's handwritten-note habit — nearest side
- *     to the anchor first, stepping down then up from the anchor's first line;
- * (b) the flow under then above the anchor, at the flow width.
+/**
+ * Candidate order: (a) the page side margins — the nearest available area
+ * around a dense content column and the teacher's handwritten-note habit —
+ * nearest side to the anchor first, stepping down then up from the anchor's
+ * first line; (b) the flow under then above the anchor, at the flow width.
  * Every candidate must pass the ink probe and clear the occupied cards.
  * `fits` reflects those checks; when nothing fits the caller must not cover
  * body text silently — it surfaces the no-space notice and lets the teacher
  * place the note by hand.
+ *
+ * @param {{
+ *   anchorRects: readonly RectPx[],
+ *   frames: readonly PaperPageFrame[],
+ *   flowWidthMm: number,
+ *   heightMm: NoteHeightMm,
+ *   probe: (rect: RectPx) => boolean,
+ *   contentBox?: { leftPx: number, rightPx: number },
+ *   occupied?: readonly RectPx[],
+ * }} input
+ * @returns {NoteCandidate | null}
  */
-export function placeNoteNearAnchor({
-  anchorRects,
-  frames,
-  flowWidthMm,
-  heightMm,
-  probe,
-  contentBox,
-  occupied = [],
-}: PlaceInput): NoteCandidate | null {
+export function placeNoteNearAnchor({ anchorRects, frames, flowWidthMm, heightMm, probe, contentBox, occupied = [] }) {
   if (anchorRects.length === 0) return null
   const sorted = [...anchorRects].sort((a, b) => a.top - b.top || a.left - b.left)
   const first = sorted[0]
@@ -101,8 +100,14 @@ export function placeNoteNearAnchor({
   const pageTopMm = frame.topPx / MM_TO_PX
   const pageBottomMm = pageTopMm + frame.heightMm
 
-  const freeAt = (slot: NoteSlot, widthMm: number, xMm: number, yMm: number): boolean => {
-    const rect: RectPx = {
+  /**
+   * @param {NoteSlot} slot
+   * @param {number} widthMm
+   * @param {number} xMm
+   * @param {number} yMm
+   */
+  const freeAt = (slot, widthMm, xMm, yMm) => {
+    const rect = {
       left: xMm * MM_TO_PX,
       top: yMm * MM_TO_PX,
       width: widthMm * MM_TO_PX,
@@ -118,12 +123,12 @@ export function placeNoteNearAnchor({
     const rightUsableMm = (frame.leftPx + mmToPx(frame.widthMm) - contentBox.rightPx) / MM_TO_PX - 2 * EDGE_MM
     const anchorCenterMm = (first.left + first.width / 2) / MM_TO_PX
     const sides = [
-      { side: 'left' as const, widthMm: Math.min(MAX_MARGIN_WIDTH_MM, leftUsableMm) },
-      { side: 'right' as const, widthMm: Math.min(MAX_MARGIN_WIDTH_MM, rightUsableMm) },
+      { side: 'left', widthMm: Math.min(MAX_MARGIN_WIDTH_MM, leftUsableMm) },
+      { side: 'right', widthMm: Math.min(MAX_MARGIN_WIDTH_MM, rightUsableMm) },
     ]
       .filter((side) => side.widthMm >= MIN_MARGIN_WIDTH_MM)
       .sort((a, b) => {
-        const centerOf = (side: 'left' | 'right', widthMm: number): number => side === 'left'
+        const centerOf = (side, widthMm) => side === 'left'
           ? frame.leftPx / MM_TO_PX + EDGE_MM + widthMm / 2
           : (frame.leftPx + mmToPx(frame.widthMm)) / MM_TO_PX - EDGE_MM - widthMm / 2
         return Math.abs(centerOf(a.side, a.widthMm) - anchorCenterMm) - Math.abs(centerOf(b.side, b.widthMm) - anchorCenterMm)
@@ -155,7 +160,7 @@ export function placeNoteNearAnchor({
   const maxXMm = frame.leftPx / MM_TO_PX + frame.widthMm - widthMm - EDGE_MM
   const xMm = Math.min(Math.max(first.left / MM_TO_PX, minXMm), Math.max(minXMm, maxXMm))
 
-  const fitsAt = (yMm: number): boolean => freeAt('flow', widthMm, xMm, yMm)
+  const fitsAt = (yMm) => freeAt('flow', widthMm, xMm, yMm)
 
   const belowStart = lineBottom / MM_TO_PX + GAP_MM
   for (let yMm = belowStart; yMm + hMm <= pageBottomMm - EDGE_MM; yMm += STEP_MM) {

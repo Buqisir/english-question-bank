@@ -33,6 +33,7 @@ import {
   createPersonalLayerSnapshot,
   normalizeTextAnchor,
   orderAppendixEntries,
+  placeNoteNearAnchor,
   resolveTextAnchor,
 } from '../shared/personal-paper-layer/index.mjs'
 
@@ -407,6 +408,59 @@ check('appendix sends unpositioned entries last in id order', appendixOrder([
   const shuffled = [entries[2], entries[0], entries[3], entries[1]]
   check('appendix ordering is input-order independent', JSON.stringify(orderAppendixEntries(entries))
     === JSON.stringify(orderAppendixEntries(shuffled)))
+}
+
+// ---- note placement (#489 4c, shared module) --------------------------------
+
+{
+  const MM = 96 / 25.4
+  const frame = { pageId: 'p1', leftPx: 0, topPx: 0, widthMm: 210, heightMm: 297 }
+  // Margins 30mm both sides → 26mm-wide margin cards; the anchor sits right of
+  // the page centre, so the right margin is the near side.
+  const contentBox = { leftPx: 30 * MM, rightPx: 180 * MM }
+  const anchorRects = [{ left: 120 * MM, top: 100 * MM, width: 40 * MM, height: 5 * MM }]
+  const heights = { margin: 20, flow: 24 }
+  const freeEverywhere = () => true
+  const inkedEverywhere = () => false
+
+  const marginPlacement = placeNoteNearAnchor({
+    anchorRects, frames: [frame], flowWidthMm: 56, heightMm: heights, probe: freeEverywhere, contentBox,
+  })
+  check('note placement prefers the side margin over the flow',
+    marginPlacement?.slot === 'margin' && marginPlacement?.fits === true
+    && Math.abs(marginPlacement.xMm - 182) < 0.01 && Math.abs(marginPlacement.yMm - 100) < 0.01,
+    JSON.stringify(marginPlacement))
+
+  const nearSide = placeNoteNearAnchor({
+    anchorRects: [{ ...anchorRects[0], left: 40 * MM }], frames: [frame], flowWidthMm: 56, heightMm: heights, probe: freeEverywhere, contentBox,
+  })
+  check('note placement picks the margin side nearer the anchor',
+    nearSide?.slot === 'margin' && Math.abs(nearSide.xMm - 2) < 0.01,
+    JSON.stringify(nearSide))
+
+  // Occupy the near margin's first candidate rect exactly: the 1mm gap rule
+  // must push the card down in 4mm steps to the first clearing strip.
+  const occupied = [{ left: 182 * MM, top: 100 * MM, width: 26 * MM, height: 20 * MM }]
+  const dodged = placeNoteNearAnchor({
+    anchorRects, frames: [frame], flowWidthMm: 56, heightMm: heights, probe: freeEverywhere, contentBox, occupied,
+  })
+  check('note placement dodges occupied cards with a 1mm gap',
+    dodged?.slot === 'margin' && Math.abs(dodged.yMm - 124) < 0.01,
+    JSON.stringify(dodged))
+
+  const nowhere = placeNoteNearAnchor({
+    anchorRects, frames: [frame], flowWidthMm: 56, heightMm: heights, probe: inkedEverywhere, contentBox,
+  })
+  check('note placement reports fits:false when every strip is inked',
+    nowhere?.fits === false && nowhere?.slot === 'flow',
+    JSON.stringify(nowhere))
+
+  const noContentBox = placeNoteNearAnchor({
+    anchorRects, frames: [frame], flowWidthMm: 56, heightMm: heights, probe: freeEverywhere,
+  })
+  check('note placement skips the margin without a content box',
+    noContentBox?.slot === 'flow' && Math.abs(noContentBox.xMm - 120) < 0.01 && noContentBox.yMm === 107,
+    JSON.stringify(noContentBox))
 }
 
 console.log(failed === 0 ? '\nverify-personal-paper-layer: all checks passed' : `\nverify-personal-paper-layer: ${failed} failed`)
