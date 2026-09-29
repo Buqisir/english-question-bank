@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// verify-resource: browser-render
 // Foundation checks for the #489 personal-export pipeline (5a): the shared
 // overlay browser bundle (esbuild → IIFE on __eqbPersonalOverlay) and the
 // personal-font @font-face data-URI builder, both exercised in a real

@@ -15,16 +15,19 @@
  *   - compose: the callback for renderPaginatedPaper's compose hook
  *     (paginationRenderer.mjs step 5.5). It re-verifies that the freshly
  *     paginated base is still the layout the plan was measured against
- *     (page count, per-page size, per-page text digests), refuses a changed
- *     base, then draws the plan's marks, cards and appendix markers onto the
- *     pages as absolutely-positioned, pointer-inert overlays. It never
- *     re-paginates and never touches the base content.
+ *     (page count, per-page size, per-page text digests, and each mark's
+ *     first rect re-measured through the plan's own shared anchor code),
+ *     refuses a changed base, then draws the plan's marks, cards and appendix
+ *     markers onto the pages as absolutely-positioned, pointer-inert
+ *     overlays. It never re-paginates and never touches the base content.
  *
  * A plan that still carries diagnostics is refused before anything renders —
  * the upper layer is expected to refuse as well (double gate).
  */
 import { createHash } from 'node:crypto'
-import { personalFontFaceCss } from './personalFonts.mjs'
+import { installPersonalFontRoute, personalFontFaceUrlCss } from './personalFonts.mjs'
+import { personalOverlayBrowserScript } from './browserBundle.mjs'
+import { measureAnchorRectsInPage } from './anchorMeasureDom.mjs'
 import { personalTextStyle } from '../../shared/personal-text/index.mjs'
 import {
   PERSONAL_OVERLAY_STYLE_VERSION,
@@ -37,6 +40,9 @@ const PX_PER_MM = 96 / 25.4
 
 // Same size tolerance as the measure pass's layout verification.
 const SIZE_TOLERANCE_MM = 0.1
+// A plan mark's re-measured rect must land within this of the plan's; past it
+// the base moved under the annotations (same-text shifts included).
+const POSITION_TOLERANCE_MM = 0.2
 
 function fail(code, message, details) {
   const error = new Error(message)
@@ -133,7 +139,7 @@ function collectPresetIds(plan) {
 
 function renderExportStyleBlock(plan, { withAppendix }) {
   const presetIds = collectPresetIds(plan)
-  const personalFonts = presetIds.length > 0 ? personalFontFaceCss({ presetIds }) : null
+  const personalFonts = presetIds.length > 0 ? personalFontFaceUrlCss({ presetIds }) : null
   const parts = [
     // Fonts come first so the faces exist before any text is measured.
     ...(personalFonts?.css ? [personalFonts.css] : []),
@@ -146,7 +152,7 @@ function renderExportStyleBlock(plan, { withAppendix }) {
   return `<style data-eqb-personal-export="${PERSONAL_OVERLAY_STYLE_VERSION}">\n${parts.join('\n')}\n</style>`
 }
 
-export function composePersonalExport({ printHtml, plan, layoutRef }) {
+export function composePersonalExport({ printHtml, plan, layoutRef, source, objects }) {
   if (typeof printHtml !== 'string' || !printHtml.trim()) {
     throw fail('PERSONAL_EXPORT_COMPOSE_INVALID', 'composePersonalExport 需要基础 printHtml')
   }
@@ -158,6 +164,9 @@ export function composePersonalExport({ printHtml, plan, layoutRef }) {
   }
   if (!Array.isArray(layoutRef?.pages) || layoutRef.pages.length !== plan.pageCount) {
     throw fail('PERSONAL_EXPORT_PLAN_INVALID', 'layoutRef 与批注导出计划的页面数不一致')
+  }
+  if (plan.marks.length > 0 && (!source || !Array.isArray(objects))) {
+    throw fail('PERSONAL_EXPORT_COMPOSE_INVALID', 'composePersonalExport 需要来源与批注对象以复核标记位置')
   }
 
   const appendixHtml = plan.appendix.length > 0 ? renderAppendixSection(plan) : null
@@ -226,7 +235,7 @@ export function composePersonalExport({ printHtml, plan, layoutRef }) {
   }
 
   const presetIds = collectPresetIds(plan)
-  const fontFaces = presetIds.length > 0 ? personalFontFaceCss({ presetIds }).faces : []
+  const fontFaces = presetIds.length > 0 ? personalFontFaceUrlCss({ presetIds }).faces : []
 
   const compose = async (page) => {
     // a. 基底完整性核对：页数、每页尺寸、每页正文摘要必须与量测时的基准
@@ -297,6 +306,62 @@ export function composePersonalExport({ printHtml, plan, layoutRef }) {
       }, fontFaces)
       if (failedFaces.length > 0) {
         throw fail('PERSONAL_EXPORT_FONT_FAILED', '个人字体加载失败，无法导出批注版', failedFaces)
+      }
+    }
+
+    // b2. 位置完整性：用与量测遍同一份共享锚点代码重新量测每个计划标记的
+    // 首个矩形——基底哪怕只挪动 1mm（文字内容不变也在内），批注就会画错位
+    // 置，直接拒绝导出。
+    if (plan.marks.length > 0) {
+      const bundle = await personalOverlayBrowserScript()
+      await page.addScriptTag({ content: bundle.code })
+      await page.evaluate((installed) => {
+        window.__eqbPersonalSource = installed
+      }, source)
+      const frames = await page.evaluate(() => (
+        [...document.querySelectorAll('.pagedjs_pages > .pagedjs_page')].map((element) => {
+          const box = element.getBoundingClientRect()
+          return { leftPx: box.left + window.scrollX, topPx: box.top + window.scrollY }
+        })
+      ))
+      const objectsById = new Map(objects.map((object) => [object.id, object]))
+      const rectsByObjectId = new Map()
+      for (const mark of plan.marks) {
+        if (rectsByObjectId.has(mark.objectId)) continue
+        const segments = objectsById.get(mark.objectId)?.textAnchor?.segments
+        const rects = segments ? await page.evaluate(measureAnchorRectsInPage, segments) : null
+        rectsByObjectId.set(mark.objectId, rects ?? [])
+      }
+      const positionMismatches = []
+      for (const mark of plan.marks) {
+        const pageIndex = pageIndexById.get(mark.pageId)
+        const frame = Number.isInteger(pageIndex) ? frames[pageIndex] : null
+        const expected = mark.rectsMm[0]
+        // Same page-assignment rule as the measure pass: a rect's page is the
+        // page containing its centre.
+        const onPage = (rectsByObjectId.get(mark.objectId) ?? []).filter((rect) => {
+          if (!frame) return false
+          const centreX = rect.left + rect.width / 2
+          const centreY = rect.top + rect.height / 2
+          return centreX >= frame.leftPx && centreX < frame.leftPx + layoutRef.pages[pageIndex].widthMm * PX_PER_MM
+            && centreY >= frame.topPx && centreY < frame.topPx + layoutRef.pages[pageIndex].heightMm * PX_PER_MM
+        })
+        const measured = onPage[0]
+        const deltas = frame && measured && expected
+          ? {
+              xMm: (measured.left - frame.leftPx) / PX_PER_MM - expected.xMm,
+              yMm: (measured.top - frame.topPx) / PX_PER_MM - expected.yMm,
+              widthMm: measured.width / PX_PER_MM - expected.widthMm,
+              heightMm: measured.height / PX_PER_MM - expected.heightMm,
+            }
+          : null
+        if (!deltas || Math.abs(deltas.xMm) > POSITION_TOLERANCE_MM || Math.abs(deltas.yMm) > POSITION_TOLERANCE_MM
+          || Math.abs(deltas.widthMm) > POSITION_TOLERANCE_MM || Math.abs(deltas.heightMm) > POSITION_TOLERANCE_MM) {
+          positionMismatches.push(`mark ${mark.objectId} on page ${mark.pageId} no longer sits at its measured rect`)
+        }
+      }
+      if (positionMismatches.length > 0) {
+        throw fail('PERSONAL_EXPORT_BASE_CHANGED', '卷面标记位置与量测时不一致，已拒绝导出', positionMismatches)
       }
     }
 

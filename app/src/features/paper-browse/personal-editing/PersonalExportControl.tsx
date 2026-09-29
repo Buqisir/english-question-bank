@@ -148,7 +148,7 @@ export function PersonalExportControl({
     }) | null
     if (response.ok && isExportSuccess(payload)) return payload
     throw Object.assign(
-      new Error(typeof payload?.error === 'string' && payload.error ? payload.error : '导出没有完成，请稍后再试'),
+      new Error(typeof payload?.error === 'string' && payload.error ? payload.error : '导出没有完成，稍后再试'),
       {
         status: response.status,
         code: typeof payload?.code === 'string' ? payload.code : null,
@@ -175,7 +175,7 @@ export function PersonalExportControl({
         return
       }
     }
-    setNotice({ kind: 'text', text: error instanceof Error && error.message ? error.message : '导出没有完成，请稍后再试' })
+    setNotice({ kind: 'text', text: error instanceof Error && error.message ? error.message : '导出没有完成，稍后再试' })
   }, [])
 
   const runExport = useCallback(async () => {
@@ -318,7 +318,7 @@ export function PersonalExportControl({
       {buttonTarget && notice?.kind === 'diagnostics' ? createPortal((
         <div className="paper-personal-export-diagnostics" role="alert">
           <div className="paper-personal-export-diagnostics__header">
-            <span className="paper-personal-export-diagnostics__title">这些批注没有导出</span>
+            <span className="paper-personal-export-diagnostics__title">导出没有完成：先处理这些批注</span>
             <button type="button" className="paper-personal-export-diagnostics__action" onClick={closeDiagnostics}>关闭</button>
           </div>
           <ul className="paper-personal-export-diagnostics__rows">

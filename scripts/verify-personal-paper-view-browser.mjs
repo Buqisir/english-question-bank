@@ -1895,7 +1895,7 @@ try {
   await diagnosticsPanel.waitFor({ timeout: 5_000 })
   check('a 422 opens a floating panel listing one row per problem object with a human reason',
     await diagnosticsPanel.count() === 1
-    && (await diagnosticsPanel.textContent()).includes('这些批注没有导出')
+    && (await diagnosticsPanel.textContent()).includes('导出没有完成：先处理这些批注')
     && (await diagnosticsPanel.textContent()).includes('文字框：找不到对应的原文位置'),
     JSON.stringify({ count: await diagnosticsPanel.count(), text: await diagnosticsPanel.textContent() }))
   check('the diagnostics panel never shifts the toolbar or the paper',

@@ -9,7 +9,7 @@
 // cards and the 附页 sheet with its 附N entries are extractable, and the
 // pages rasterize).
 import { execFileSync } from 'node:child_process'
-import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { accessSync, constants, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -19,12 +19,13 @@ import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consum
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
-import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { closeChromiumPool, withChromiumPage } from '../server/draft-paper/chromiumPool.mjs'
+import { installPersonalFontRoute } from '../server/personal-paper-layer/personalFonts.mjs'
 import {
   createPersonalPaperLayoutRuntime,
   stablePaginatedHtmlDigest,
 } from '../server/personal-paper-layer/layout.mjs'
-import { measurePersonalExportPlan, withChromiumPage } from '../server/personal-paper-layer/exportPlan.mjs'
+import { measurePersonalExportPlan } from '../server/personal-paper-layer/exportPlan.mjs'
 import { composePersonalExport } from '../server/personal-paper-layer/exportComposer.mjs'
 import {
   APPENDIX_MARKER_HEIGHT_MM,
@@ -39,8 +40,20 @@ import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/pape
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 
-const PDFTOTEXT = '/opt/homebrew/bin/pdftotext'
-const PDFTOPPM = '/opt/homebrew/bin/pdftoppm'
+// Resolve poppler tools from PATH; a missing tool fails loudly naming the
+// package, never a hard-coded /opt/homebrew path.
+function requirePopplerTool(name) {
+  for (const dir of (process.env.PATH || '').split(path.delimiter).filter(Boolean)) {
+    const candidate = path.join(dir, name)
+    try {
+      accessSync(candidate, constants.X_OK)
+      return candidate
+    } catch { /* keep scanning */ }
+  }
+  throw new Error(`verify-personal-export-pdf 需要 ${name}（poppler-utils 提供）。请安装 poppler-utils 后重试。`)
+}
+const PDFTOTEXT = requirePopplerTool('pdftotext')
+const PDFTOPPM = requirePopplerTool('pdftoppm')
 
 let passed = 0
 let failed = 0
@@ -337,7 +350,7 @@ try {
     JSON.stringify(diagnosticPlan.diagnostics))
   // 本步在脚本里直接断言：diagnostics 非空时脚本不调用成品遍（模拟上层拒导）。
   let diagnosticsGate = null
-  try { composePersonalExport({ printHtml, plan: diagnosticPlan, layoutRef: layout.layoutRef }) } catch (error) { diagnosticsGate = error }
+  try { composePersonalExport({ printHtml, plan: diagnosticPlan, layoutRef: layout.layoutRef, source, objects }) } catch (error) { diagnosticsGate = error }
   check('composePersonalExport refuses a plan with diagnostics (PERSONAL_EXPORT_HAS_DIAGNOSTICS)',
     diagnosticsGate?.code === 'PERSONAL_EXPORT_HAS_DIAGNOSTICS',
     JSON.stringify(diagnosticsGate && { code: diagnosticsGate.code, message: diagnosticsGate.message }))
@@ -350,7 +363,7 @@ try {
     source,
     objects: objects.filter((object) => object.type === 'highlight' || object.type === 'underline'),
   })
-  const marksOnlyComposed = composePersonalExport({ printHtml, plan: marksOnlyPlan, layoutRef: layout.layoutRef })
+  const marksOnlyComposed = composePersonalExport({ printHtml, plan: marksOnlyPlan, layoutRef: layout.layoutRef, source, objects })
   check('a marks-only plan leaves the print HTML byte-identical (no appendix, no text cards)',
     marksOnlyComposed.printHtml === printHtml)
   const plain = await renderPaginatedPaper(printHtml)
@@ -361,7 +374,7 @@ try {
 
   // ---- the real composed render (the collision fixture rides along, so the
   // page PNGs show the dodged marker next to the parked note card) -----------
-  const composed = composePersonalExport({ printHtml, plan: collisionPlan, layoutRef: layout.layoutRef })
+  const composed = composePersonalExport({ printHtml, plan: collisionPlan, layoutRef: layout.layoutRef, source, objects })
   check('an appendix-bearing plan appends the appendix sheet and style block before </body>',
     composed.printHtml !== printHtml
     && composed.printHtml.trimEnd().endsWith('</html>')
@@ -370,7 +383,7 @@ try {
     `base ${printHtml.length} bytes -> composed ${composed.printHtml.length} bytes`)
 
   const renderStartedAt = Date.now()
-  const rendered = await renderPaginatedPaper(composed.printHtml, { compose: composed.compose })
+  const rendered = await renderPaginatedPaper(composed.printHtml, { compose: composed.compose, prepare: installPersonalFontRoute })
   const renderMs = Date.now() - renderStartedAt
   const composedPageCount = (rendered.paginatedHtml.match(/<div class="[^"]*\bpagedjs_page\b[^"]*"/g) || []).length
   const appendixPageCount = composedPageCount - collisionPlan.pageCount
@@ -576,15 +589,88 @@ try {
   check('the 200dpi crop of the highlighted line is kept as highlight-zoom.png',
     statSync(cropPath).size > 0)
 
+  // ---- S3 negative: a same-text 1mm vertical shift refuses the export -------
+  // The digest check cannot see a pure reposition (text bytes unchanged), so
+  // the compose pass re-measures every plan mark's first rect and refuses.
+  const shiftedComposed = composePersonalExport({ printHtml, plan: collisionPlan, layoutRef: layout.layoutRef, source, objects })
+  let shifted = null
+  try {
+    await renderPaginatedPaper(shiftedComposed.printHtml, {
+      compose: async (page) => {
+        await page.addStyleTag({ content: '.pagedjs_page_content { transform: translateY(1mm); }' })
+        await shiftedComposed.compose(page)
+      },
+      prepare: installPersonalFontRoute,
+    })
+  } catch (error) { shifted = error }
+  check('a 1mm vertical shift of the same text is refused with PERSONAL_EXPORT_BASE_CHANGED',
+    shifted?.code === 'PERSONAL_EXPORT_BASE_CHANGED',
+    JSON.stringify(shifted && { code: shifted.code, details: shifted.details }))
+
+  // ---- S1: handwriting presets really print, with the render cost on record -
+  // Xiaolai rides as a ~22MB base64 data URI in the composed HTML; these cases
+  // prove the bytes actually print and record what an export costs.
+  const PRESET_NOTES = [
+    { id: 'pdf-note-xiaolai', presetId: 'xiaolai-sc', text: '小赖手写旁注，随卷导出。' },
+    { id: 'pdf-note-fuzzy', presetId: 'fuzzy-xiaolai', text: 'Fuzzy手写旁注，随卷导出。' },
+  ]
+  const presetObjects = PRESET_NOTES.map((note) => normalizePersonalObjectInput(source, {
+    id: note.id,
+    type: 'anchored-note',
+    document: createPersonalTextDocumentFromPlainText(note.text, { fontPresetId: note.presetId, sizePresetId: 'normal' }),
+    textAnchor: anchorText('as a whole different world'),
+    placement: {
+      kind: 'page-position',
+      layoutId: layout.layoutId,
+      pageId: pageOne,
+      xMm: 20,
+      yMm: 120 + PRESET_NOTES.findIndex((item) => item.id === note.id) * 45,
+      widthMm: 56,
+    },
+  }))
+  const presetPlan = await measurePersonalExportPlan({
+    paginatedHtml: layout.paginatedHtml,
+    layoutId: layout.layoutId,
+    layoutRef: layout.layoutRef,
+    source,
+    objects: presetObjects,
+  })
+  check('the handwriting-preset plan carries no diagnostics and both cards',
+    presetPlan.diagnostics.length === 0 && presetPlan.cards.length === 2,
+    JSON.stringify(presetPlan.diagnostics))
+  const presetComposed = composePersonalExport({ printHtml, plan: presetPlan, layoutRef: layout.layoutRef, source, objects: presetObjects })
+  const nodeRssBeforePreset = process.resourceUsage().maxRSS
+  const presetRenderStartedAt = Date.now()
+  const presetRendered = await renderPaginatedPaper(presetComposed.printHtml, {
+    compose: presetComposed.compose,
+    prepare: installPersonalFontRoute,
+  })
+  const presetRenderMs = Date.now() - presetRenderStartedAt
+  const presetMaxRss = process.resourceUsage().maxRSS
+  const presetPdfPath = path.join(evidenceDir, 'personal-export-preset.pdf')
+  writeFileSync(presetPdfPath, presetRendered.pdfBytes)
+  console.log(`INFO S1 handwriting-preset export (xiaolai-sc + fuzzy-xiaolai):`
+    + ` render ${presetRenderMs} ms (limit 20000 ms),`
+    + ` Node peak RSS ${(presetMaxRss / 1024).toFixed(0)} MiB (resourceUsage().maxRSS, KiB;`
+    + ` before this render ${(nodeRssBeforePreset / 1024).toFixed(0)} MiB),`
+    + ` PDF ${(presetRendered.pdfBytes.length / 1024 / 1024).toFixed(2)} MiB, ${presetRendered.pageCount} pages`)
+  const presetTxtPath = path.join(evidenceDir, 'personal-export-preset.txt')
+  execFileSync(PDFTOTEXT, ['-enc', 'UTF-8', presetPdfPath, presetTxtPath])
+  const presetPdfText = readFileSync(presetTxtPath, 'utf8')
+  const flatPreset = presetPdfText.replace(/\s+/gu, '')
+  check('pdftotext finds the xiaolai-sc note text in the preset PDF', flatPreset.includes(flat('小赖手写旁注，随卷导出。')))
+  check('pdftotext finds the fuzzy-xiaolai note text in the preset PDF', flatPreset.includes(flat('Fuzzy手写旁注，随卷导出。')))
+  writeFileSync(path.join(evidenceDir, 'preset-plan.json'), JSON.stringify(presetPlan, null, 2))
+
   // ---- negative: a tampered base digest refuses to export ---------------------
   const tampered = {
     ...collisionPlan,
     basePageTextDigests: collisionPlan.basePageTextDigests.map((digest, index) => (
       index === 0 ? `sha256:${'0'.repeat(64)}` : digest)),
   }
-  const tamperedComposed = composePersonalExport({ printHtml, plan: tampered, layoutRef: layout.layoutRef })
+  const tamperedComposed = composePersonalExport({ printHtml, plan: tampered, layoutRef: layout.layoutRef, source, objects })
   let baseChanged = null
-  try { await renderPaginatedPaper(tamperedComposed.printHtml, { compose: tamperedComposed.compose }) } catch (error) { baseChanged = error }
+  try { await renderPaginatedPaper(tamperedComposed.printHtml, { compose: tamperedComposed.compose, prepare: installPersonalFontRoute }) } catch (error) { baseChanged = error }
   check('a tampered base digest is refused with PERSONAL_EXPORT_BASE_CHANGED',
     baseChanged?.code === 'PERSONAL_EXPORT_BASE_CHANGED',
     JSON.stringify(baseChanged && { code: baseChanged.code, details: baseChanged.details }))

@@ -13,6 +13,10 @@
 // HARD CONTRACT (spike-gate-dp1.md DP-1 evidence, all four acceptance
 // checks passed): pagination and the PDF are produced from ONE Chromium
 // page object, in this exact order:
+//   0. prepare(page) — optional caller hook (options.prepare) run before
+//      step 1's setContent, so request routes (the personal-export font
+//      delivery) exist before the page's first fetch. May only prepare the
+//      page (routes, bindings); it never navigates or changes the document.
 //   1. page.setContent(printHtml) — load the caller's HTML verbatim
 //   2. set window.PagedConfig BEFORE injecting the paged.js polyfill — the
 //      polyfill reads window.PagedConfig SYNCHRONOUSLY at script-eval time
@@ -112,13 +116,18 @@ function stripScriptTags(html) {
 // the paged.js polyfill script stripped) plus a same-source PDF and page
 // count. See module header for the locked render order this function
 // implements.
-export async function renderPaginatedPaper(printHtml, { inspect = null, compose = null } = {}) {
+export async function renderPaginatedPaper(printHtml, { inspect = null, compose = null, prepare = null } = {}) {
   if (typeof printHtml !== 'string' || !printHtml.trim()) {
     throw new Error('renderPaginatedPaper: printHtml must be a non-empty string')
   }
   const polyfillPath = resolvePagedjsPolyfillPath()
 
   return withChromiumPage(async (page) => {
+    // Optional caller hook, run before setContent so request routes (e.g. the
+    // personal-export font delivery) exist before the page's first fetch.
+    // Like compose, it may not change the print HTML's pagination; it runs
+    // before the document exists, so it can only prepare the page itself.
+    if (typeof prepare === 'function') await prepare(page)
     await page.setContent(printHtml, { waitUntil: 'load' })
 
     // Planned exports move a group with its immediately preceding chrome.

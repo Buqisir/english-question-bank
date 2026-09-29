@@ -21,7 +21,7 @@ function sendError(response, error, requestId) {
   const status = tooLarge ? 413 : badJson ? 400 : (error?.status || 500)
   // Unexpected failures never echo internals or personal text back to the client.
   const message = status >= 500
-    ? (error?.code === 'PERSONAL_LAYOUT_RENDER_FAILED' ? error.message : '批注服务暂时出错')
+    ? (error?.code === 'PERSONAL_LAYOUT_RENDER_FAILED' ? error.message : '批注服务暂时出错，稍后重试')
     : (tooLarge ? '这批修改太大' : error.message)
   send(response, status, {
     error: message,

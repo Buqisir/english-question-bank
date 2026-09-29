@@ -26,7 +26,8 @@ import {
 } from '../../shared/personal-paper-layer/index.mjs'
 import { PERSONAL_EXPORT_PLAN_VERSION, measurePersonalExportPlan } from './exportPlan.mjs'
 import { composePersonalExport } from './exportComposer.mjs'
-import { PERSONAL_FONT_REGISTRY_DIGEST } from './personalFonts.mjs'
+import { personalOverlayBrowserScript } from './browserBundle.mjs'
+import { PERSONAL_FONT_REGISTRY_DIGEST, installPersonalFontRoute } from './personalFonts.mjs'
 import { personalLayerOwnerKey } from './runtime.mjs'
 import { renderPaginatedPaper } from '../draft-paper/paginationRenderer.mjs'
 import { createPersonalPaperLayerStore } from './store.mjs'
@@ -89,6 +90,11 @@ export function createPersonalPaperExportRuntime({
 
   function throttle(userId, nowMs) {
     const windowStart = nowMs - 60_000
+    // Evict entries whose whole window has drained so the map cannot grow
+    // with one stale entry per user forever.
+    for (const [id, at] of exportWindows) {
+      if (!at.some((time) => time > windowStart)) exportWindows.delete(id)
+    }
     const recent = (exportWindows.get(userId) || []).filter((at) => at > windowStart)
     if (recent.length >= EXPORTS_PER_MINUTE) {
       throw fail('PERSONAL_EXPORT_RATE_LIMITED', '导出太频繁，稍后再试', 429)
@@ -182,7 +188,8 @@ export function createPersonalPaperExportRuntime({
     }
   }
 
-  function cacheKeyFor({ userId, paperId, layout, snapshot }) {
+  async function cacheKeyFor({ userId, paperId, layout, snapshot }) {
+    const bundle = await personalOverlayBrowserScript()
     return `sha256:${createHash('sha256').update(stableStringify({
       scope: 'eqb-personal-export-file-v1',
       userId,
@@ -194,6 +201,7 @@ export function createPersonalPaperExportRuntime({
       planVersion: PERSONAL_EXPORT_PLAN_VERSION,
       overlayStyleVersion: PERSONAL_OVERLAY_STYLE_VERSION,
       rendererVersion: PERSONAL_EXPORT_RENDERER_VERSION,
+      browserBundleDigest: bundle.digest,
     })).digest('hex')}`
   }
 
@@ -236,8 +244,12 @@ export function createPersonalPaperExportRuntime({
       error.diagnostics = plan.diagnostics
       throw error
     }
-    const composed = compose({ printHtml, plan, layoutRef: layout.layoutRef })
-    const rendered = await render(composed.printHtml, { compose: composed.compose })
+    const composed = compose({ printHtml, plan, layoutRef: layout.layoutRef, source, objects: snapshot.objects })
+    const rendered = await render(composed.printHtml, {
+      compose: composed.compose,
+      // The font route must exist before the render page's first font fetch.
+      prepare: installPersonalFontRoute,
+    })
 
     const fileId = randomUUID()
     // Per-user subdirectory keyed like the layer's owner key: derived from the
@@ -247,8 +259,11 @@ export function createPersonalPaperExportRuntime({
     mkdirSync(path.dirname(filePath), { recursive: true })
     writeFileSync(filePath, rendered.pdfBytes)
 
-    const db = openUserDatabase({ readOnly: false })
+    const prunedFilePaths = []
+    let db = null
+    let saved = null
     try {
+      db = openUserDatabase({ readOnly: false })
       ensureExportCacheShape(db)
       // A concurrent identical export may have finished while this one was
       // rendering; keep exactly one file per cache key and drop this twin.
@@ -259,24 +274,45 @@ export function createPersonalPaperExportRuntime({
       }
       const title = safeFileTitle(resolvePaperTitle(paperId) || paperId)
       const fileName = `${title}-我的批注版.pdf`
-      db.prepare(`
-        INSERT INTO personal_paper_export_files
-          (cache_key, user_id, paper_id, file_id, file_name, file_path, layer_version, source_revision, layout_id, page_count, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `).run(
-        cacheKey,
-        userId,
-        paperId,
-        fileId,
-        fileName,
-        relativePath,
-        snapshot.layerVersion,
-        layout.sourceRevision,
-        layout.layoutId,
-        rendered.pageCount,
-        now().toISOString(),
-      )
-      return {
+      // The insert and the retention prune share one transaction, so a row is
+      // never counted twice (or lost) against the newest-3 cap.
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        db.prepare(`
+          INSERT INTO personal_paper_export_files
+            (cache_key, user_id, paper_id, file_id, file_name, file_path, layer_version, source_revision, layout_id, page_count, created_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `).run(
+          cacheKey,
+          userId,
+          paperId,
+          fileId,
+          fileName,
+          relativePath,
+          snapshot.layerVersion,
+          layout.sourceRevision,
+          layout.layoutId,
+          rendered.pageCount,
+          now().toISOString(),
+        )
+        prunedFilePaths.push(...db.prepare(`
+          SELECT file_path AS filePath FROM personal_paper_export_files
+          WHERE user_id = ? AND paper_id = ? AND rowid NOT IN (
+            SELECT rowid FROM personal_paper_export_files
+            WHERE user_id = ? AND paper_id = ?
+            ORDER BY created_at DESC, rowid DESC LIMIT 3
+          )
+        `).all(userId, paperId, userId, paperId).map((row) => row.filePath))
+        for (const prunedPath of prunedFilePaths) {
+          db.prepare('DELETE FROM personal_paper_export_files WHERE file_path = ? AND user_id = ? AND paper_id = ?')
+            .run(prunedPath, userId, paperId)
+        }
+        db.exec('COMMIT')
+      } catch (transactionError) {
+        db.exec('ROLLBACK')
+        throw transactionError
+      }
+      saved = {
         fileId,
         fileName,
         pageCount: rendered.pageCount,
@@ -286,8 +322,13 @@ export function createPersonalPaperExportRuntime({
       rmSync(filePath, { force: true })
       throw error
     } finally {
-      db.close()
+      db?.close()
     }
+    // Files of pruned rows go only after the commit they belong to.
+    for (const prunedPath of prunedFilePaths) {
+      rmSync(resolveStoredExportPath(filesRoot, prunedPath), { force: true })
+    }
+    return saved
   }
 
   async function create(userId, paperId, body) {
@@ -318,11 +359,20 @@ export function createPersonalPaperExportRuntime({
         // Frozen copy taken before any Chromium work: edits made while the
         // render runs change the stored layer, never this snapshot.
         snapshot = createPersonalLayerSnapshot(stored ?? createEmptyPersonalLayerState(source))
-        cacheKey = cacheKeyFor({ userId, paperId, layout, snapshot })
+        cacheKey = await cacheKeyFor({ userId, paperId, layout, snapshot })
         const cached = cachedExport(db, userId, cacheKey)
         if (cached) {
           logExport({ event: 'export', userId, paperId, cached: true, fileId: cached.fileId })
-          return { ...cached, downloadUrl: downloadUrl(cached.fileId, paperId), cached: true }
+          // The cached file's bytes are identical, but the response metadata
+          // is the request's, exactly like the render path below.
+          return {
+            ...cached,
+            layerVersion: body.layerVersion,
+            sourceRevision: layout.sourceRevision,
+            layoutId: layout.layoutId,
+            downloadUrl: downloadUrl(cached.fileId, paperId),
+            cached: true,
+          }
         }
       } finally {
         db.close()

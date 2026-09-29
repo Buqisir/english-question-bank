@@ -6,7 +6,7 @@
 // artifact store and re-authenticated on download, the user-scoped file
 // cache (cache hit without a second render, cross-user isolation) and the
 // never-log-personal-text rule.
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import http from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -242,6 +242,9 @@ async function download(pathname, user) {
       contentType: response.headers.get('content-type'),
       fileName: response.headers.get('x-file-name'),
       disposition: response.headers.get('content-disposition'),
+      cacheControl: response.headers.get('cache-control'),
+      xContentTypeOptions: response.headers.get('x-content-type-options'),
+      accessControlAllowOrigin: response.headers.get('access-control-allow-origin'),
     }
   } finally {
     sessionUser = previous
@@ -364,6 +367,15 @@ try {
       && ownerDownload.fileName === encodeURIComponent(`${PAPER_TITLE}-我的批注版.pdf`)
       && ownerDownload.disposition.includes(`filename*=UTF-8''${encodeURIComponent(`${PAPER_TITLE}-我的批注版.pdf`)}`),
     ownerDownload.disposition ?? '')
+  check('the attachment download is private: no-store, nosniff and no cross-origin allow',
+    ownerDownload.cacheControl === 'private, no-store'
+      && ownerDownload.xContentTypeOptions === 'nosniff'
+      && ownerDownload.accessControlAllowOrigin === null,
+    JSON.stringify({
+      cacheControl: ownerDownload.cacheControl,
+      xContentTypeOptions: ownerDownload.xContentTypeOptions,
+      accessControlAllowOrigin: ownerDownload.accessControlAllowOrigin,
+    }))
 
   const otherDownload = await download(first.json.downloadUrl, 'bob')
   check("user B gets the same 404 as a missing file for user A's file id, not a 403",
@@ -385,6 +397,23 @@ try {
   check('a second identical export is a cache hit with no second render and an identical payload',
     sameExceptCached && measureCount === measureBeforeCached && renderCount === rendersBeforeCached,
     `measure ${measureCount - measureBeforeCached}, render ${renderCount - rendersBeforeCached}`)
+
+  // The raw v1 object rows, taken while the layer is still at version 1: the
+  // undo-back test below restores them byte-identically (revision/updatedAt
+  // included) so the v3 objects digest equals v1's.
+  const v1ObjectRows = (() => {
+    const db = openUserDatabase({ readOnly: true })
+    try {
+      return db.prepare(`
+        SELECT o.object_id AS objectId, o.body_json AS bodyJson
+        FROM personal_paper_objects o JOIN personal_paper_layers l ON l.id = o.layer_id
+        WHERE l.user_id = 'alice' AND l.paper_id = ? AND l.source_revision = ?
+        ORDER BY o.object_id
+      `).all(paperId, currentRevision)
+    } finally {
+      db.close()
+    }
+  })()
 
   // ---- isolation: the same paper exports a different file per user ----------
   const bobExport = await call(`/api/personal-paper-layers/${paperId}/exports`, {
@@ -420,6 +449,90 @@ try {
   check('the new version exports a new file', second.status === 200 && second.json?.cached === false
     && second.json?.fileId !== first.json.fileId && renderCount > rendersBeforeSecond,
     second.text.slice(0, 200))
+
+  // ---- a cache hit reports the request's version, not the stored row's ------
+  // Undoing the edit lands the layer back on the exact v1 objects under a new
+  // version 3 — the same objectsDigest, so the cache key matches the first
+  // export, but the response must say version 3, not the stored row's version.
+  const undoDb = openUserDatabase({ readOnly: false })
+  try {
+    const layer = undoDb.prepare(`
+      SELECT id FROM personal_paper_layers
+      WHERE user_id = 'alice' AND paper_id = ? AND source_revision = ?
+    `).get(paperId, currentRevision)
+    for (const row of v1ObjectRows) {
+      undoDb.prepare('UPDATE personal_paper_objects SET body_json = ? WHERE layer_id = ? AND object_id = ?')
+        .run(row.bodyJson, layer.id, row.objectId)
+    }
+    undoDb.prepare('UPDATE personal_paper_layers SET version = 3 WHERE id = ?').run(layer.id)
+  } finally {
+    undoDb.close()
+  }
+  const reverted = await call(`/api/personal-paper-layers/${paperId}/exports`, {
+    method: 'POST', headers: exportHeaders, payload: exportBody({ layerVersion: 3 }),
+  })
+  check('undoing back to identical objects cache-hits and reports the request layerVersion',
+    reverted.status === 200 && reverted.json?.cached === true
+      && reverted.json?.layerVersion === 3
+      && reverted.json?.fileId === first.json.fileId
+      && reverted.json?.sourceRevision === currentRevision
+      && reverted.json?.layoutId === layout.layoutId,
+    reverted.text.slice(0, 300))
+
+  // ---- retention: the newest 3 exports per (user, paper) survive -------------
+  // Two more distinct exports make four rows; the oldest (the first export)
+  // must be pruned together with its file.
+  commitLayer('alice', 3, [
+    { op: 'update', objectId: 'rt-box-0001', patch: { document: createPersonalTextDocumentFromPlainText(`${SENTINEL} 第三版文字框。`) } },
+  ], 5)
+  const fourth = await call(`/api/personal-paper-layers/${paperId}/exports`, {
+    method: 'POST', headers: exportHeaders, payload: exportBody({ layerVersion: 4 }),
+  })
+  check('the fourth distinct export succeeds', fourth.status === 200 && fourth.json?.cached === false,
+    fourth.text.slice(0, 200))
+  commitLayer('alice', 4, [
+    { op: 'update', objectId: 'rt-box-0001', patch: { document: createPersonalTextDocumentFromPlainText(`${SENTINEL} 第四版文字框。`) } },
+  ], 6)
+  const fifth = await call(`/api/personal-paper-layers/${paperId}/exports`, {
+    method: 'POST', headers: exportHeaders, payload: exportBody({ layerVersion: 5 }),
+  })
+  check('the fifth distinct export succeeds', fifth.status === 200 && fifth.json?.cached === false,
+    fifth.text.slice(0, 200))
+  const retentionDb = openUserDatabase({ readOnly: true })
+  let rowCount = null
+  let remainingPaths = []
+  try {
+    rowCount = retentionDb.prepare(`
+      SELECT COUNT(*) AS n FROM personal_paper_export_files WHERE user_id = 'alice' AND paper_id = ?
+    `).get(paperId).n
+    remainingPaths = retentionDb.prepare(`
+      SELECT file_path FROM personal_paper_export_files WHERE user_id = 'alice' AND paper_id = ?
+    `).all(paperId)
+  } finally {
+    retentionDb.close()
+  }
+  const countPdfFiles = (dir) => {
+    try {
+      return readdirSync(dir, { recursive: true }).filter((name) => name.endsWith('.pdf')).length
+    } catch {
+      return -1
+    }
+  }
+  check('four distinct exports leave exactly 3 rows and 3 files for the user+paper',
+    rowCount === 3
+      && remainingPaths.length === 3
+      && remainingPaths.every((row) => existsSync(path.join(userSpaceFilesDir, row.file_path))),
+    JSON.stringify({ rowCount, remainingPaths }))
+  const aliceExportFiles = countPdfFiles(path.join(userSpaceFilesDir, 'personal-exports'))
+  check('the personal-exports root holds 3 alice files plus bob\'s one', aliceExportFiles === 4,
+    `files: ${aliceExportFiles}`)
+  const prunedDownload = await download(first.json.downloadUrl, 'alice')
+  check('the oldest export download is gone after the prune (404)', prunedDownload.status === 404,
+    `status=${prunedDownload.status}`)
+  const survivorDownload = await download(second.json.downloadUrl, 'alice')
+  check('a surviving export still downloads after the prune', survivorDownload.status === 200
+    && survivorDownload.buffer.subarray(0, 5).toString('latin1') === '%PDF-',
+    `status=${survivorDownload.status}`)
 
   // ---- 422 with per-object diagnostics --------------------------------------
   commitLayer('carol', 0, [

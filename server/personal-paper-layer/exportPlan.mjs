@@ -9,10 +9,13 @@
  * 0.01mm; the plan carries no px, viewport or DOM references.
  */
 import { createHash } from 'node:crypto'
-import { createRequire } from 'node:module'
 import { inlinePaperFontsForServer } from './layout.mjs'
+// Same serialized resident pool as every other server-side render (the measure
+// pass must never launch its own Chromium per export).
+import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
 import { personalOverlayBrowserScript } from './browserBundle.mjs'
-import { personalFontFaceCss } from './personalFonts.mjs'
+import { installPersonalFontRoute, personalFontFaceUrlCss } from './personalFonts.mjs'
+import { measureAnchorRectsInPage } from './anchorMeasureDom.mjs'
 import {
   appendixMarkerPosition,
   appendixSourceLabel,
@@ -44,17 +47,6 @@ function fail(code, message, details) {
 }
 
 const roundMm = (value) => Math.round(value * 100) / 100
-
-export async function withChromiumPage(run) {
-  const requireFromApp = createRequire(new URL('../../app/package.json', import.meta.url))
-  const { chromium } = requireFromApp('playwright')
-  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
-  try {
-    return await run(await browser.newPage())
-  } finally {
-    await browser.close()
-  }
-}
 
 function sha256Text(value) {
   return createHash('sha256').update(value).digest('hex')
@@ -100,6 +92,9 @@ export async function measurePersonalExportPlan({
   const html = inlinePaperFontsForServer(paginatedHtml)
 
   return withPage(async (page) => {
+    // Personal fonts are served from the vendored files through page.route —
+    // data URIs of Xiaolai's size do not survive paged.js's stylesheet replay.
+    await installPersonalFontRoute(page)
     await page.setContent(html, { waitUntil: 'load' })
     const bundle = await personalOverlayBrowserScript()
     await page.addScriptTag({ content: bundle.code })
@@ -115,7 +110,7 @@ export async function measurePersonalExportPlan({
     const presetIds = [...new Set(textObjects.map((object) => object.document.presentation.fontPresetId))]
     let fontFaces = []
     if (presetIds.length > 0) {
-      const personalFonts = personalFontFaceCss({ presetIds })
+      const personalFonts = personalFontFaceUrlCss({ presetIds })
       if (personalFonts.css) await page.addStyleTag({ content: personalFonts.css })
       fontFaces = personalFonts.faces
     }
@@ -223,29 +218,7 @@ export async function measurePersonalExportPlan({
     const anchorRectsByObjectId = new Map()
     for (const object of objects) {
       if (!('textAnchor' in object)) continue
-      const rects = await page.evaluate((segments) => {
-        const overlay = window.__eqbPersonalOverlay
-        const anchorSource = window.__eqbPersonalSource
-        const ranges = []
-        for (const segment of segments) {
-          const segmentRanges = overlay.printSegmentToDomRanges(document, anchorSource, segment)
-          if (!segmentRanges) return null
-          ranges.push(...segmentRanges)
-        }
-        const rects = []
-        for (const range of ranges) {
-          for (const rect of overlay.textRects(range)) {
-            if (rect.width < 0.5 || rect.height < 0.5) continue
-            rects.push({
-              left: rect.left + window.scrollX,
-              top: rect.top + window.scrollY,
-              width: rect.width,
-              height: rect.height,
-            })
-          }
-        }
-        return rects.length > 0 ? overlay.mergeLineRects(rects) : null
-      }, object.textAnchor.segments)
+      const rects = await page.evaluate(measureAnchorRectsInPage, object.textAnchor.segments)
       if (rects) anchorRectsByObjectId.set(object.id, rects)
     }
 
