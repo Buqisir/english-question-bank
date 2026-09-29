@@ -57,7 +57,7 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { BoardList, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
+import { BoardList, BookOpen, Paper, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
@@ -190,6 +190,7 @@ import {
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import { usePaperSelectionTranslation } from './selection/usePaperSelectionTranslation'
 import { usePersonalAnnotations } from './personal-editing/usePersonalAnnotations'
+import { PaperEditingView } from './personal-editing/PaperEditingView'
 import { PersonalAnnotationLayer } from './personal-editing/PersonalAnnotationLayer'
 import { PersonalSaveStatus } from './personal-editing/PersonalSaveStatus'
 import { PersonalCommentary } from './personal-editing/PersonalCommentary'
@@ -505,6 +506,8 @@ const LECTURE_RAIL_WIDTH = 72
 const GUTTER_WIDTH = 140
 const PAPER_BASE_WIDTH = 794
 const GRID_GAP = 24
+// #489 纸张视图缩放档位：只作用在 iframe 外层 scale（内容不回流），纯视图态。
+const PAPER_ZOOM_LEVELS: ReadonlyArray<number> = [0.75, 1, 1.25, 1.5]
 // 794px paper + 440px notes + 72px rail + gaps and shell padding must fit.
 const DOCKED_LECTURE_MIN_WIDTH = 1440
 
@@ -775,6 +778,13 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // useState(false) 是因为它必须在首次渲染就反映入口态，不能等一拍 effect
   // 才翻开（会闪一下挑题态）。
   const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
+  // #489 4b-1: 纸张视图开关 —— 页内 state + URL `paperView=paper`（页内互动
+  // 一律 replaceState 的既有惯例）。入口只对有批注资格的登录账号显示。
+  const [paperEditingOpen, setPaperEditingOpen] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('paperView') === 'paper'
+  })
+  const [paperEditingZoom, setPaperEditingZoom] = useState<number | 'fit'>('fit')
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
   const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
     Record<string, LectureAnalysisEntry>
@@ -805,6 +815,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     consumption: canonicalConsumption,
     enabled: !reviewRevision,
   })
+  // 纸张视图入口与第 3 阶段个人批注同一资格判定：登录账号 + 非评审历史版本。
+  const personalEntryAvailable = Boolean(personalAccountKey) && !reviewRevision
+  // 纸张视图实际可见性：state 与资格同时成立——资格被撤（切账号/评审历史
+  // 版本）时渲染层直接回落阅读视图，不需要额外 effect 回写 state。
+  const paperViewActive = paperEditingOpen && personalEntryAvailable
   const paperSelection = usePaperSelectionTranslation({
     paperId,
     consumption: canonicalConsumption,
@@ -952,13 +967,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           url.searchParams.delete('similar')
         }
       }
+      // #489 4b-1: 纸张视图也走同一份 replaceState 同步；URL 是刷新/分享的
+      // 镜像，state 仍是权威。
+      if (paperViewActive) {
+        url.searchParams.set('paperView', 'paper')
+      } else {
+        url.searchParams.delete('paperView')
+      }
       const nextSearch = url.searchParams.toString()
       const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
       window.history.replaceState(window.history.state, '', nextUrl)
     } catch {
       /* URL sync is best-effort — state above is the authoritative UI change. */
     }
-  }, [lectureOpen, lectureSelection, similarView, similarSeed])
+  }, [lectureOpen, lectureSelection, similarView, similarSeed, paperViewActive])
 
   useEffect(() => {
     let cancelled = false
@@ -2353,6 +2375,21 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
   function toggleLecturePanel(): void {
     setLectureOpen((open) => !open)
+  }
+
+  // #489 4b-1: 纸张视图切换。state 先行，URL replaceState 只是刷新/分享的
+  // 镜像（同讲评开合惯例，不产生历史条目）。
+  function setPaperView(open: boolean): void {
+    setPaperEditingOpen(open)
+    try {
+      const url = new URL(window.location.href)
+      if (open) url.searchParams.set('paperView', 'paper')
+      else url.searchParams.delete('paperView')
+      const nextSearch = url.searchParams.toString()
+      window.history.replaceState(window.history.state, '', `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`)
+    } catch {
+      /* URL sync is best-effort — state above is the authoritative UI change. */
+    }
   }
 
   function handleGroupFocusIntent(groupId: string, intent: PaperSurfaceFocusIntent): void {
@@ -3982,28 +4019,41 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const topbarActionsSlot = !reviewRevision ? (
     <>
       <PersonalSaveStatus api={personalAnnotations} />
-      <button
-        type="button"
-        ref={lectureToggleRef}
-        className={`ghost-button paper-browse-lecture-toggle${
-          lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
-        }`}
-        onClick={toggleLecturePanel}
-        aria-pressed={lectureOpen}
-        aria-expanded={lectureOpen}
-      >
-        <Presentation size={14} aria-hidden="true" />
-        讲评
-      </button>
-      <button
-        className="ghost-button"
-        type="button"
-        disabled={analysisPdfBusy}
-        onClick={() => void downloadCompanionAnalysis()}
-      >
-        <PaperDownload size={16} />
-        {analysisPdfBusy ? '生成解析中…' : '下载配套解析'}
-      </button>
+      {/* 纸张视图入口（阅读态）——安静的 ghost 项；进入纸张视图后入口移到
+          纸张视图工具条左侧的 阅读/纸张 切换里。讲评/下载是阅读态动作，
+          纸张视图下不出现。 */}
+      {personalEntryAvailable && !paperViewActive && (
+        <button type="button" className="ghost-button" onClick={() => setPaperView(true)}>
+          <Paper size={16} aria-hidden="true" />
+          纸张
+        </button>
+      )}
+      {!paperViewActive && (
+        <>
+          <button
+            type="button"
+            ref={lectureToggleRef}
+            className={`ghost-button paper-browse-lecture-toggle${
+              lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
+            }`}
+            onClick={toggleLecturePanel}
+            aria-pressed={lectureOpen}
+            aria-expanded={lectureOpen}
+          >
+            <Presentation size={14} aria-hidden="true" />
+            讲评
+          </button>
+          <button
+            className="ghost-button"
+            type="button"
+            disabled={analysisPdfBusy}
+            onClick={() => void downloadCompanionAnalysis()}
+          >
+            <PaperDownload size={16} />
+            {analysisPdfBusy ? '生成解析中…' : '下载配套解析'}
+          </button>
+        </>
+      )}
     </>
   ) : (
     <button
@@ -4096,9 +4146,60 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         actionsSlot={topbarActionsSlot}
       />
       {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
+      {paperViewActive && (
+        <div className="paper-browse-editing-toolbar">
+          <div className="paper-browse-view-switch" role="group" aria-label="视图切换">
+            <button
+              type="button"
+              className={`paper-browse-view-switch__option${
+                paperViewActive ? '' : ' paper-browse-view-switch__option--active'
+              }`}
+              aria-pressed={!paperViewActive}
+              onClick={() => setPaperView(false)}
+            >
+              <BookOpen size={16} aria-hidden="true" />
+              阅读
+            </button>
+            <button
+              type="button"
+              className={`paper-browse-view-switch__option${
+                paperViewActive ? ' paper-browse-view-switch__option--active' : ''
+              }`}
+              aria-pressed={paperViewActive}
+              onClick={() => setPaperView(true)}
+            >
+              <Paper size={16} aria-hidden="true" />
+              纸张
+            </button>
+          </div>
+          <div className="paper-browse-zoom-controls" role="group" aria-label="缩放">
+            {PAPER_ZOOM_LEVELS.map((level) => (
+              <button
+                key={level}
+                type="button"
+                className="paper-browse-zoom-option"
+                aria-pressed={paperEditingZoom === level}
+                onClick={() => setPaperEditingZoom(level)}
+              >
+                {Math.round(level * 100)}%
+              </button>
+            ))}
+            <button
+              type="button"
+              className="paper-browse-zoom-option"
+              aria-pressed={paperEditingZoom === 'fit'}
+              onClick={() => setPaperEditingZoom('fit')}
+            >
+              适应宽度
+            </button>
+          </div>
+        </div>
+      )}
       <div
         className={`paper-browse-shell${
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''
+        }${
+          paperViewActive ? ' paper-browse-shell--paper-view' : ''
         }`}
         ref={shellRef}
         role="main"
@@ -4166,11 +4267,19 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               </div>
             )}
           </div>
-          {personalAnnotations.active && (
+          {personalAnnotations.active && !paperViewActive && (
             <PersonalAnnotationLayer api={personalAnnotations} hostRef={scrollerRef} />
           )}
         </div>
-        {lectureOpen && (
+        {/* #489 4b-1: 纸张编辑视图骨架 —— 只渲染与加载；批注编辑是后续子任务。 */}
+        {paperViewActive && (
+          <PaperEditingView
+            paperId={paperId}
+            sourceRevision={personalAnnotations.source?.sourceRevision ?? null}
+            zoom={paperEditingZoom}
+          />
+        )}
+        {lectureOpen && !paperViewActive && (
           <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>
             {renderLecturePanel()}
           </aside>
@@ -4188,6 +4297,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           卷面上，见 paperBrowsePage.css 里同断点的 display:none 收紧。
         */}
         {lectureOpen
+          && !paperViewActive
           && panelGroupModel?.kind === 'reading'
           && readingEvidenceAnchorReadyId === readingEvidenceLineContext.evidenceId
           && (

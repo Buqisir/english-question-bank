@@ -209,6 +209,7 @@ const registry = {
   'scripts/verify-personal-paper-layer-history.mjs',
   'scripts/verify-personal-annotations-browser.mjs',
   'scripts/verify-personal-paper-layout.mjs',
+  'scripts/verify-personal-paper-view-browser.mjs',
   'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
   'scripts/verify-section-chrome-on-solo-surface.mjs',

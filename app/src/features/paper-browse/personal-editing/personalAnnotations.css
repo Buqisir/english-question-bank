@@ -362,3 +362,146 @@
 .paper-personal-commentary .eqb-personal-text {
   font-size: 13px;
 }
+
+/* Paper editing view (#489 4b-1): the paginated A4 base in an iframe.
+ * 纸张视图是个人批注的后续编辑面，样式随个人批注走这一份 CSS。 */
+
+/* 纸张视图下目录 rail 与阅读卷面退场，纸张视图占据整个内容列。
+ * Explicit-Cascade: 本条覆盖 paperBrowsePage.css 的 1440px 媒体查询三列
+ * 模板（72px minmax(0,1fr) 440px），因纸张视图占满整行——双类选择器
+ * （0-2-0）稳赢媒体查询里的单类规则，不靠文件顺序。 */
+.paper-browse-shell.paper-browse-shell--paper-view {
+  grid-template-columns: 1fr;
+}
+
+.paper-browse-shell.paper-browse-shell--paper-view .paper-browse-rail,
+.paper-browse-shell.paper-browse-shell--paper-view .paper-browse-content {
+  display: none;
+}
+
+/* 工具条：左 阅读/纸张 切换，右缩放档位。 */
+.paper-browse-editing-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px 0;
+}
+
+.paper-browse-view-switch,
+.paper-browse-zoom-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.paper-browse-view-switch__option,
+.paper-browse-zoom-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-browse-view-switch__option:hover:not([aria-pressed='true']),
+.paper-browse-zoom-option:hover:not([aria-pressed='true']) {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+/* Explicit-Cascade: 选中态墨底白字压过 hover 浅底——同权 hover 规则在
+ * 前面，选中规则靠后取胜；墨底悬停变浅由下一条承担。 */
+.paper-browse-view-switch__option--active,
+.paper-browse-zoom-option[aria-pressed='true'] {
+  background: var(--action, #1f1f1d);
+  color: #fff;
+}
+
+.paper-browse-view-switch__option--active:hover,
+.paper-browse-zoom-option[aria-pressed='true']:hover {
+  background: var(--action-hover, #3a3a37);
+  color: #fff;
+}
+
+.paper-browse-view-switch__option:focus-visible,
+.paper-browse-zoom-option:focus-visible,
+.paper-personal-retry:focus-visible {
+  outline: 2px solid var(--eqb-color-action, #1f1f1d);
+  outline-offset: 2px;
+}
+
+.paper-personal-paper-view {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  /* 双保险：即使网格列模板被上游改动，纸张视图也横跨全部列、占满宽度。 */
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.paper-personal-paper-state {
+  padding: 32px 24px;
+  font-size: 14px;
+  color: var(--desk-muted, #60665c);
+  text-align: center;
+}
+
+.paper-personal-paper-state p {
+  margin: 0 0 12px;
+}
+
+.paper-personal-paper-state--error {
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-retry {
+  padding: 6px 12px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 999px;
+  background: var(--desk-surface, #fafcf8);
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  transition: background var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-retry:hover {
+  background: var(--desk-hover, #e5eae1);
+}
+
+.paper-personal-paper-zoom {
+  flex: none;
+}
+
+.paper-personal-paper-canvas {
+  position: relative;
+  /* 缩放只发生在这一层（transform 不回流）：iframe 恒按 100% 布局宽度渲染。 */
+  transform-origin: 0 0;
+}
+
+/* sandbox 只授 allow-same-origin（父页面核对页面盒尺寸需要），脚本与表单
+ * 全关——分页 HTML 本就没有脚本。 */
+.paper-personal-paper-iframe {
+  display: block;
+  border: 0;
+  background: #fff;
+}
+
+.paper-personal-paper-overlays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 批注叠加挂载点：一个容器 = 一页的页面盒子（px 定位），页内批注坐标用
+ * mm（原点在页面左上，96/25.4 换算），由后续子任务填充。 */
+.paper-personal-paper-page-overlay {
+  position: absolute;
+}
