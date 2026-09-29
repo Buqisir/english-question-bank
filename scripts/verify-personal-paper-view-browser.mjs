@@ -900,6 +900,376 @@ try {
     await page.locator('.paper-personal-paper-mark.paper-personal-mark--underline').count() === 0)
   await flushAutosave()
 
+  // ---- anchored-note cards on the paper view (#489 step 4) -------------------------
+  // Same fixture and anchor texts as .scratch/ui-shot-4c.mjs. Each group seeds
+  // what it needs through the operations endpoint and cleans up with undo or
+  // delete, like the sections above; nothing here weakens earlier checks.
+  const noteStream = source.streams.find((item) => item.role === 'passage-body' && item.text.length > 260)
+  if (!noteStream) throw new Error('no long passage-body stream for note anchors')
+  const noteAnchor = (text) => {
+    const start = noteStream.text.indexOf(text)
+    if (start < 0) throw new Error(`note anchor text missing: ${text}`)
+    return {
+      paperId,
+      sourceRevision: source.sourceRevision,
+      sourceProjectionVersion: source.sourceProjectionVersion,
+      segments: [{ streamId: noteStream.streamId, start, end: start + text.length, exactText: text }],
+    }
+  }
+  const storedNotes = async () => (await readLayer()).layer?.objects?.filter((object) => object.type === 'anchored-note') ?? []
+  const seedNotes = async (notes) => {
+    const current = await readLayer()
+    const response = await fetch(`http://127.0.0.1:${apiPort}/api/personal-paper-layers/${paperId}/operations`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        cookie: `eqb_session=${token}`,
+        origin: `http://127.0.0.1:${apiPort}`,
+      },
+      body: JSON.stringify({
+        schemaVersion: PERSONAL_LAYER_API_SCHEMA,
+        paperId,
+        sourceRevision,
+        expectedVersion: current.layer?.version ?? 0,
+        clientMutationId: `verify-notes-${Date.now()}`,
+        operations: notes.map((object) => ({ op: 'create', object })),
+      }),
+    })
+    if (response.status !== 200) throw new Error(`note seed failed: ${response.status} ${await response.text()}`)
+  }
+  const noteCard = (noteId) => page.locator(`.paper-personal-paper-note[data-note-key="${noteId}"]`)
+  const selectNote = async (noteId) => {
+    const card = noteCard(noteId)
+    await card.scrollIntoViewIfNeeded()
+    const box = await card.boundingBox()
+    if (!box) throw new Error(`note card not visible: ${noteId}`)
+    await page.mouse.click(box.x + 8, box.y + 8)
+    await page.waitForFunction(
+      (id) => document.querySelector(`.paper-personal-paper-note[data-note-key="${id}"]`)?.classList.contains('is-selected'),
+      noteId,
+      { timeout: 5_000 },
+    )
+    // A second real click lands on the already-selected card, whose pointerdown
+    // is the drag guard; the card must still take focus for Enter-to-edit.
+    await page.mouse.click(box.x + 8, box.y + 8)
+    await page.waitForFunction(
+      (id) => document.activeElement?.matches?.(`.paper-personal-paper-note[data-note-key="${id}"]`),
+      noteId,
+      { timeout: 5_000 },
+    )
+  }
+
+  await seedNotes([
+    {
+      id: 'verify-note-1',
+      type: 'anchored-note',
+      document: createPersonalTextDocumentFromPlainText('这是正式测试旁注一。'),
+      textAnchor: noteAnchor('as a whole different world'),
+      placement: { kind: 'auto-near-anchor' },
+    },
+    {
+      id: 'verify-note-2',
+      type: 'anchored-note',
+      document: createPersonalTextDocumentFromPlainText('这是正式测试旁注二。'),
+      textAnchor: noteAnchor('most of my classmates thought of Ohio'),
+      placement: { kind: 'auto-near-anchor' },
+    },
+  ])
+  await openPaperView()
+  await page.waitForFunction(() => document.querySelectorAll('.paper-personal-paper-note[data-note-key]').length >= 2, undefined, { timeout: 15_000 })
+
+  check('auto-near-anchor note cards render with the margin slot',
+    await noteCard('verify-note-1').getAttribute('data-note-slot') === 'margin'
+    && await noteCard('verify-note-2').getAttribute('data-note-slot') === 'margin')
+
+  // Sample every 8px inside each card rect and ask the iframe document what
+  // sits under the card: no element there may directly own non-whitespace
+  // text, i.e. the card never covers body text. Main-page px map to iframe
+  // document px by subtracting the iframe rect and dividing out the canvas
+  // scale (getBoundingClientRect already carries the transform).
+  await page.evaluate(() => {
+    const card = document.querySelector('.paper-personal-paper-note[data-note-key="verify-note-1"]')
+    if (card) card.scrollIntoView({ block: 'center' })
+  })
+  await page.waitForTimeout(200)
+  const coveredTextSamples = await page.evaluate(() => {
+    const iframe = document.querySelector('.paper-personal-paper-iframe')
+    const doc = iframe?.contentDocument
+    if (!doc || !iframe) return null
+    const frameRect = iframe.getBoundingClientRect()
+    const scale = frameRect.width / iframe.offsetWidth
+    const ownsText = (node) => [...node.childNodes].some((child) => child.nodeType === 3 && /\S/.test(child.textContent ?? ''))
+    const samples = []
+    for (const card of document.querySelectorAll('.paper-personal-paper-note[data-note-key]')) {
+      const box = card.getBoundingClientRect()
+      for (let x = box.left + 4; x < box.right; x += 8) {
+        for (let y = box.top + 4; y < box.bottom; y += 8) samples.push([x, y])
+      }
+    }
+    const hits = []
+    for (const [px, py] of samples) {
+      const cx = (px - frameRect.left) / scale
+      const cy = (py - frameRect.top) / scale
+      const stack = doc.elementsFromPoint(cx, cy)
+      if (stack.some((element) => ownsText(element))) hits.push(`${Math.round(px)},${Math.round(py)}`)
+    }
+    return { samples: samples.length, hits }
+  })
+  check('note cards never cover body text (8px elementsFromPoint grid under every card)',
+    coveredTextSamples !== null && coveredTextSamples.samples > 0 && coveredTextSamples.hits.length === 0,
+    JSON.stringify(coveredTextSamples))
+
+  const noteRects = await page.evaluate(() => {
+    // Cards live in one layer above the page stack, so a card's page is the
+    // overlay whose top interval contains the card's style.top (both in
+    // unscaled canvas px).
+    const pageOf = (card) => {
+      const top = parseFloat(card.style.top)
+      const overlay = [...document.querySelectorAll('[data-paper-page-overlay]')]
+        .find((node) => top >= parseFloat(node.style.top) && top < parseFloat(node.style.top) + node.offsetHeight)
+      return overlay?.getAttribute('data-paper-page-overlay') ?? null
+    }
+    return [...document.querySelectorAll('.paper-personal-paper-note[data-note-key]')].map((card) => ({
+      id: card.getAttribute('data-note-key'),
+      page: pageOf(card),
+      box: card.getBoundingClientRect(),
+    }))
+  })
+  const overlaps = noteRects.flatMap((a, i) => noteRects.slice(i + 1).flatMap((b) => {
+    if (a.page !== b.page || a.page === null) return []
+    const width = Math.min(a.box.right, b.box.right) - Math.max(a.box.left, b.box.left)
+    const height = Math.min(a.box.bottom, b.box.bottom) - Math.max(a.box.top, b.box.top)
+    return width > 0.5 && height > 0.5 ? [`${a.id}~${b.id}`] : []
+  }))
+  check('same-page note card rects do not intersect',
+    noteRects.length >= 2 && overlaps.length === 0,
+    `${JSON.stringify(noteRects.map(({ id, page, box }) => ({ id, page, w: Math.round(box.width), h: Math.round(box.height) })))} overlaps=${JSON.stringify(overlaps)}`)
+
+  // A 40-line auto note has no margin slot big enough: no card, pending notice,
+  // then 逐个摆放 + one blank-page click re-homes it to page-position.
+  await seedNotes([{
+    id: 'verify-note-3',
+    type: 'anchored-note',
+    document: createPersonalTextDocumentFromPlainText(Array.from({ length: 40 }, (_, line) => `第四条旁注第${line + 1}行`).join('\n')),
+    textAnchor: noteAnchor('as a whole different world'),
+    placement: { kind: 'auto-near-anchor' },
+  }])
+  await openPaperView()
+  const notePendingNotice = page.locator('.paper-personal-paper-notice:has-text("条旁注在纸上没有空位")')
+  await notePendingNotice.waitFor({ timeout: 15_000 })
+  check('a 40-line auto note renders no card and shows the no-room notice',
+    await noteCard('verify-note-3').count() === 0 && (await notePendingNotice.textContent()).includes('1 条旁注在纸上没有空位'),
+    await notePendingNotice.textContent())
+  // Both the text-box layer and the note layer can show a 逐个摆放 notice at
+  // once; pin the click to the note notice's own copy.
+  await page.click('.paper-personal-paper-notice:has-text("条旁注在纸上没有空位") button:has-text("逐个摆放")')
+  await page.waitForFunction(() => document.querySelector('.paper-personal-paper-note-layer')?.classList.contains('is-placing'), undefined, { timeout: 5_000 })
+  await clickOnPageAt(400, 150)
+  await page.waitForSelector('.paper-personal-paper-note[data-note-key="verify-note-3"]', { timeout: 5_000 })
+  await flushAutosave()
+  const placedNote3 = (await storedNotes()).find((object) => object.id === 'verify-note-3')
+  check('逐个摆放 + one page click re-homes the pending note to page-position',
+    placedNote3?.placement.kind === 'page-position'
+    && placedNote3?.placement.layoutId === layout.layoutId
+    && placedNote3?.placement.pageId === 'p1'
+    && Math.abs(placedNote3?.placement.xMm - 400 / MM_TO_PX) < 1
+    && Math.abs(placedNote3?.placement.yMm - 150 / MM_TO_PX) < 1,
+    JSON.stringify(placedNote3?.placement))
+  check('the no-room notice is gone once every note is placed',
+    await page.locator('.paper-personal-paper-notice:has-text("条旁注在纸上没有空位")').count() === 0)
+
+  // Opening a note card closes an open mark popover and shows the strip.
+  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--highlight')
+  await page.waitForSelector('.paper-personal-popover', { timeout: 5_000 })
+  await selectNote('verify-note-1')
+  check('selecting a note card closes the mark popover and opens the note strip',
+    await page.locator('.paper-personal-popover').count() === 0
+    && await page.locator('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip[aria-label="旁注操作"]').count() === 1)
+
+  // Enter edits in place; Escape commits; emptying the document keeps the note.
+  await page.keyboard.press('Enter')
+  await page.waitForSelector('.paper-personal-paper-note.is-editing [contenteditable="true"]', { timeout: 5_000 })
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
+  await page.keyboard.type(' 追加正式测试')
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  await flushAutosave()
+  const editedNote = (await storedNotes()).find((object) => object.id === 'verify-note-1')
+  check('Enter + typing + Escape commits the edited note document',
+    JSON.stringify(editedNote?.document ?? null).includes('追加正式测试'),
+    JSON.stringify(editedNote?.document ?? null))
+  await selectNote('verify-note-1')
+  await page.keyboard.press('Enter')
+  await page.waitForSelector('.paper-personal-paper-note.is-editing [contenteditable="true"]', { timeout: 5_000 })
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
+  await page.keyboard.press('ControlOrMeta+a')
+  await page.keyboard.press('Delete')
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  await flushAutosave()
+  const emptiedNotes = await storedNotes()
+  const emptiedNote = emptiedNotes.find((object) => object.id === 'verify-note-1')
+  // A blank exit commits nothing: the note survives with its pre-edit text.
+  check('emptying a note and exiting keeps the note and restores its text',
+    emptiedNote !== undefined
+    && await noteCard('verify-note-1').count() === 1
+    && JSON.stringify(emptiedNote.document).includes('追加正式测试'),
+    `server notes=${emptiedNotes.length} dom=${await page.locator('.paper-personal-paper-note').count()} doc=${JSON.stringify(emptiedNote?.document ?? null)}`)
+
+  // Drag: one version bump, auto -> page-position, rendered width preserved.
+  await selectNote('verify-note-1')
+  const versionBeforeNoteDrag = await storedVersion()
+  const noteWidthMmBefore = await noteCard('verify-note-1').evaluate((node, mmToPx) => parseFloat(node.style.width) / mmToPx, MM_TO_PX)
+  const noteDragBox = await noteCard('verify-note-1').boundingBox()
+  await page.mouse.move(noteDragBox.x + noteDragBox.width / 2, noteDragBox.y + noteDragBox.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(noteDragBox.x + noteDragBox.width / 2 + 60, noteDragBox.y + noteDragBox.height / 2 + 40, { steps: 10 })
+  await page.mouse.up()
+  await flushAutosave()
+  const draggedNote = (await storedNotes()).find((object) => object.id === 'verify-note-1')
+  check('dragging a note commits one version bump, page-position, and the rendered width',
+    (await storedVersion()) === versionBeforeNoteDrag + 1
+    && draggedNote?.placement.kind === 'page-position'
+    && Math.abs(draggedNote.placement.widthMm - noteWidthMmBefore) < 0.1,
+    `version ${versionBeforeNoteDrag} -> ${await storedVersion()}, widthMm ${draggedNote?.placement.widthMm} vs rendered ${noteWidthMmBefore}`)
+  await page.keyboard.press('ControlOrMeta+z')
+  await flushAutosave()
+  const undoneNoteDrag = (await storedNotes()).find((object) => object.id === 'verify-note-1')
+  check('undo after a note drag restores the auto-near-anchor placement',
+    undoneNoteDrag?.placement.kind === 'auto-near-anchor',
+    JSON.stringify(undoneNoteDrag?.placement))
+
+  // Arrow keys: 1mm steps merged into one version; Shift moves 10mm.
+  await selectNote('verify-note-1')
+  const versionBeforeNoteNudge = await storedVersion()
+  // style.left carries the page offset too, but the +3mm delta cancels it.
+  const noteXBefore = await noteCard('verify-note-1').evaluate((node, mmToPx) => parseFloat(node.style.left) / mmToPx, MM_TO_PX)
+  for (let nudge = 0; nudge < 3; nudge += 1) {
+    await page.keyboard.press('ArrowRight')
+    await page.waitForTimeout(80)
+  }
+  await flushAutosave()
+  const nudgedNote = (await storedNotes()).find((object) => object.id === 'verify-note-1')
+  check('ArrowRight x3 nudges the note +3mm in one merged version',
+    (await storedVersion()) === versionBeforeNoteNudge + 1
+    && Math.abs(nudgedNote?.placement.xMm - (noteXBefore + 3)) < 0.05,
+    `version ${versionBeforeNoteNudge} -> ${await storedVersion()}, xMm ${noteXBefore} -> ${nudgedNote?.placement.xMm}`)
+  await page.keyboard.press('Shift+ArrowDown')
+  await flushAutosave()
+  const shiftedNote = (await storedNotes()).find((object) => object.id === 'verify-note-1')
+  check('Shift+ArrowDown nudges the note +10mm',
+    (await storedVersion()) === versionBeforeNoteNudge + 2
+    && Math.abs(shiftedNote?.placement.yMm - (nudgedNote?.placement.yMm + 10)) < 0.05,
+    `yMm ${nudgedNote?.placement.yMm} -> ${shiftedNote?.placement.yMm}`)
+
+  // 复制 duplicates with the same anchor at +5mm/+5mm.
+  await selectNote('verify-note-1')
+  await page.waitForSelector('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip', { timeout: 5_000 })
+  await page.click('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip-action[aria-label="复制旁注"]')
+  await flushAutosave()
+  const notesAfterCopy = await storedNotes()
+  const originalNote = notesAfterCopy.find((object) => object.id === 'verify-note-1')
+  const copiedNote = notesAfterCopy.find((object) => object.id === 'verify-note-1-copy')
+    ?? notesAfterCopy.find((object) => object.id !== 'verify-note-1' && object.id !== 'verify-note-2' && object.id !== 'verify-note-3')
+  check('复制旁注 adds one note with the same anchor at +5mm/+5mm',
+    notesAfterCopy.length === 4
+    && copiedNote
+    && JSON.stringify(copiedNote.textAnchor) === JSON.stringify(originalNote.textAnchor)
+    && Math.abs(copiedNote.placement.xMm - (originalNote.placement.xMm + 5)) < 0.05
+    && Math.abs(copiedNote.placement.yMm - (originalNote.placement.yMm + 5)) < 0.05,
+    JSON.stringify({ count: notesAfterCopy.length, copied: copiedNote?.placement }))
+
+  // Resize +20px: width grows and stores at the server's 0.01mm precision.
+  await selectNote('verify-note-1')
+  const versionBeforeNoteResize = await storedVersion()
+  const widthBeforeResize = await noteCard('verify-note-1').evaluate((node, mmToPx) => parseFloat(node.style.width) / mmToPx, MM_TO_PX)
+  const handle = page.locator('.paper-personal-paper-note[data-note-key="verify-note-1"].is-selected .paper-personal-text-box__resize-handle')
+  const handleBox = await handle.boundingBox()
+  if (!handleBox) throw new Error('note resize handle not visible')
+  await page.mouse.move(handleBox.x + handleBox.width / 2, handleBox.y + handleBox.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(handleBox.x + handleBox.width / 2 + 20, handleBox.y + handleBox.height / 2, { steps: 5 })
+  await page.mouse.up()
+  await flushAutosave()
+  const resizedNote = (await storedNotes()).find((object) => object.id === 'verify-note-1')
+  const resizedWidth = resizedNote?.placement.widthMm ?? 0
+  check('the note resize handle grows the width and stores two-decimal mm',
+    (await storedVersion()) === versionBeforeNoteResize + 1
+    && resizedWidth > widthBeforeResize && resizedWidth - widthBeforeResize < 6.5
+    && Math.abs(resizedWidth * 100 - Math.round(resizedWidth * 100)) < 1e-6,
+    `version ${versionBeforeNoteResize} -> ${await storedVersion()}, widthMm ${widthBeforeResize} -> ${resizedWidth}`)
+
+  // 删除 + undo. Undo re-creates the deleted object under a fresh server id
+  // (same restore semantics as the text-box layer's undo), so the restored
+  // note is found by its pre-delete placement from here on.
+  const notesBeforeDelete = await storedNotes()
+  const note1BeforeDelete = notesBeforeDelete.find((object) => object.id === 'verify-note-1')
+  await page.click('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip-action[aria-label="删除旁注"]')
+  await flushAutosave()
+  const notesAfterDelete = await storedNotes()
+  check('删除旁注 removes the selected note',
+    notesAfterDelete.length === notesBeforeDelete.length - 1 && !notesAfterDelete.some((object) => object.id === 'verify-note-1'),
+    `${notesBeforeDelete.length} -> ${notesAfterDelete.length}`)
+  await page.keyboard.press('ControlOrMeta+z')
+  await flushAutosave()
+  const notesAfterUndoDelete = await storedNotes()
+  const restoredNote = notesAfterUndoDelete.find((object) => object.id !== 'verify-note-1'
+    && JSON.stringify(object.placement) === JSON.stringify(note1BeforeDelete?.placement ?? null))
+  check('undo restores the deleted note',
+    restoredNote !== undefined && notesAfterUndoDelete.length === notesBeforeDelete.length,
+    JSON.stringify(notesAfterUndoDelete.map((object) => object.id)))
+
+  // 回到原文 flashes the note's anchor mark on the paper.
+  const restoredNoteId = restoredNote?.id ?? null
+  await selectNote(restoredNoteId)
+  await page.click('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip-action[aria-label="回到原文"]')
+  await page.waitForFunction(
+    (noteId) => document.querySelector(`.paper-personal-paper-mark[data-paper-mark-id="${noteId}"]`)?.classList.contains('is-flash'),
+    restoredNoteId,
+    { timeout: 5_000 },
+  )
+  check('回到原文 flashes the note anchor mark with is-flash',
+    await page.locator(`.paper-personal-paper-mark[data-paper-mark-id="${restoredNoteId}"].is-flash`).count() === 1)
+
+  // Zoom 75%: stored mm, version, and the rendered page-relative position stay.
+  const zoomedNotePlacement = async () => (await storedNotes()).find((object) => object.id === restoredNoteId)?.placement ?? null
+  const restoredNotePageId = restoredNote?.placement.pageId ?? null
+  const zoomedNoteOffsetPx = () => page.evaluate(({ noteId, pageId }) => {
+    const card = document.querySelector(`.paper-personal-paper-note[data-note-key="${noteId}"]`)
+    // Cards live in one layer above the page stack; the page overlay is found
+    // by the placement's pageId, not by DOM containment.
+    const overlay = pageId ? document.querySelector(`[data-paper-page-overlay="${pageId}"]`) : null
+    if (!card || !overlay) return null
+    const cardBox = card.getBoundingClientRect()
+    const overlayBox = overlay.getBoundingClientRect()
+    const scale = overlayBox.width / overlay.offsetWidth
+    return { x: (cardBox.left - overlayBox.left) / scale, y: (cardBox.top - overlayBox.top) / scale }
+  }, { noteId: restoredNoteId, pageId: restoredNotePageId })
+  const zoomedNoteStyle = () => noteCard(restoredNoteId).evaluate((node) => ({ left: node.style.left, top: node.style.top, width: node.style.width }))
+  const noteZoomBefore = {
+    version: await storedVersion(),
+    placement: await zoomedNotePlacement(),
+    style: await zoomedNoteStyle(),
+    offsetPx: await zoomedNoteOffsetPx(),
+  }
+  await setZoom('75%', 'scale(0.75)')
+  const noteZoomAfter = {
+    version: await storedVersion(),
+    placement: await zoomedNotePlacement(),
+    style: await zoomedNoteStyle(),
+    offsetPx: await zoomedNoteOffsetPx(),
+  }
+  check('zoom 75% keeps the note placement mm, version, and page-relative position',
+    noteZoomBefore.placement !== null
+    && noteZoomAfter.version === noteZoomBefore.version
+    && JSON.stringify(noteZoomAfter.placement) === JSON.stringify(noteZoomBefore.placement)
+    && JSON.stringify(noteZoomAfter.style) === JSON.stringify(noteZoomBefore.style)
+    && noteZoomBefore.offsetPx !== null && noteZoomAfter.offsetPx !== null
+    && Math.abs(noteZoomAfter.offsetPx.x - noteZoomBefore.offsetPx.x) < 1
+    && Math.abs(noteZoomAfter.offsetPx.y - noteZoomBefore.offsetPx.y) < 1,
+    JSON.stringify({ before: noteZoomBefore, after: noteZoomAfter }))
+  await setZoom('100%', 'scale(1)')
+
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()
   await anonymousPage.route('**/paper-assets/**/paper-asset.json', (route) => route.fulfill({

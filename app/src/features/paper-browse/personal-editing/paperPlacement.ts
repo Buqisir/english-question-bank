@@ -25,7 +25,9 @@ export function mmToPx(mm: number): number {
   return mm * MM_TO_PX
 }
 
-function roundMm(value: number): number {
+// Mm values round to 2 decimals, matching the server's own mm measurement
+// precision; shared with the note card layer's resize commit.
+export function roundMm(value: number): number {
   return Math.round(value * 100) / 100
 }
 

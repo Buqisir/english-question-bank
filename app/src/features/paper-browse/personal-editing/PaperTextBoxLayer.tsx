@@ -388,6 +388,8 @@ export function PaperTextBoxLayer({
     const point = canvasPoint(event, scale)
     if (!point) return
     event.preventDefault()
+    // preventDefault above also blocks the native focus move, which Enter-to-edit needs.
+    event.currentTarget.focus({ preventScroll: true })
     event.currentTarget.setPointerCapture(event.pointerId)
     setInteractionState({
       kind: 'move',

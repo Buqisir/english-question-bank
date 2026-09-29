@@ -14,7 +14,7 @@ import { PersonalTextView } from './PersonalTextView'
 import { TextBoxPresentationControls, type TextBoxPresentationChange } from './PaperTextBoxStrip'
 import { BookMarked, Copy, Trash } from '../../../icons'
 import { placeNoteNearAnchor, type NoteSlot } from './paperNotePlacement'
-import { clampPlacement, frameAtPoint, MM_TO_PX, mmToPx, pxToMm, type PaperPageFrame } from './paperPlacement'
+import { clampPlacement, frameAtPoint, mmToPx, pxToMm, roundMm, type PaperPageFrame, MM_TO_PX } from './paperPlacement'
 import { DRAG_THRESHOLD_PX, PASTE_OFFSET_MM, isEditableTarget, isMac } from './PaperTextBoxLayer'
 import type { LayerRect } from './markGeometry'
 import type { PaperAnchorGeometry } from './usePaperAnchorGeometry'
@@ -541,6 +541,8 @@ export function PaperNoteLayer({
     const point = canvasPoint(event, scale)
     if (!point) return
     event.preventDefault()
+    // preventDefault above also blocks the native focus move, which Enter-to-edit needs.
+    event.currentTarget.focus({ preventScroll: true })
     event.currentTarget.setPointerCapture(event.pointerId)
     setInteractionState({
       kind: 'move',
@@ -602,10 +604,12 @@ export function PaperNoteLayer({
       setInteractionState({ ...current, placement: current.placement, moved })
     } else {
       const deltaMm = pxToMm((event.clientX - current.startClientX) / current.scale)
-      current.widthMm = Math.min(
+      // Round to the server's 0.01mm precision — the resize commit bypasses
+      // clampPlacement, which is what rounds the drag/nudge/duplicate paths.
+      current.widthMm = roundMm(Math.min(
         current.pageWidthMm - current.xMm,
         Math.max(NOTE_MIN_WIDTH_MM, current.startWidthMm + deltaMm),
-      )
+      ))
       const moved = current.moved || Math.abs(event.clientX - current.startClientX) >= DRAG_THRESHOLD_PX
       setInteractionState({ ...current, widthMm: current.widthMm, moved })
     }
