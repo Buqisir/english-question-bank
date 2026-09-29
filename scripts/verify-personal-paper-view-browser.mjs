@@ -21,7 +21,8 @@ import { publishCanonicalPaperPublication } from '../server/paper-canonical/publ
 import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { buildSelectionSourceFromConsumption } from '../shared/paper-selection/sourceProjection.mjs'
-import { PERSONAL_LAYER_API_SCHEMA } from '../shared/personal-paper-layer/index.mjs'
+import { buildPersonalLayerSource, PERSONAL_LAYER_API_SCHEMA } from '../shared/personal-paper-layer/index.mjs'
+import { measurePersonalExportPlan } from '../server/personal-paper-layer/exportPlan.mjs'
 import { createPersonalTextDocumentFromPlainText } from '../shared/personal-text/index.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 
@@ -1570,6 +1571,135 @@ try {
     scrollAreaAtEnd.scrollWidth <= Math.max(scrollBaseline.scrollWidth, scrollAreaAtEnd.clientWidth) + 1
     && scrollAreaAtEnd.scrollLeft === 0,
     `scrollWidth ${scrollBaseline.scrollWidth} -> ${scrollAreaAtEnd.scrollWidth}, scrollLeft ${scrollAreaAtEnd.scrollLeft}`)
+
+  // ---- 5b alignment: the export measure pass agrees with the preview -----------
+  // The spec's strongest guarantee: the same paginatedHtml and the same
+  // stored objects run through measurePersonalExportPlan must place cards,
+  // markers and highlight rects within a fraction of a millimetre of the
+  // preview the teacher is looking at.
+  const exportPlan = await measurePersonalExportPlan({
+    paginatedHtml: layout.paginatedHtml,
+    layoutId: layout.layoutId,
+    layoutRef: layout.layoutRef,
+    source: buildPersonalLayerSource(consumption),
+    objects: (await readLayer()).layer.objects,
+  })
+  const previewGeometry = await page.evaluate(({ mmToPx }) => {
+    const overlays = [...document.querySelectorAll('[data-paper-page-overlay]')].map((node) => ({
+      pageId: node.getAttribute('data-paper-page-overlay'),
+      left: parseFloat(node.style.left),
+      top: parseFloat(node.style.top),
+      width: node.offsetWidth,
+      height: node.offsetHeight,
+    }))
+    // Card style.left/top carry the page offset (document px); the page is
+    // the overlay whose interval contains the point. offsetHeight/offsetWidth
+    // are unscaled layout px at every zoom level.
+    const rel = (node) => {
+      const left = parseFloat(node.style.left)
+      const top = parseFloat(node.style.top)
+      const overlay = overlays.find((o) => top >= o.top && top < o.top + o.height
+        && left >= o.left && left < o.left + o.width)
+      if (!overlay) return null
+      return {
+        pageId: overlay.pageId,
+        xMm: (left - overlay.left) / mmToPx,
+        yMm: (top - overlay.top) / mmToPx,
+        widthMm: parseFloat(node.style.width) / mmToPx,
+        heightMm: node.offsetHeight / mmToPx,
+      }
+    }
+    return {
+      cards: [...document.querySelectorAll('.paper-personal-paper-note[data-note-key], .paper-personal-text-box[data-box-key]')]
+        .map((node) => ({ objectId: node.getAttribute('data-note-key') ?? node.getAttribute('data-box-key'), box: rel(node) })),
+      markers: [...document.querySelectorAll('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker]')]
+        .map((node) => ({ objectId: node.getAttribute('data-paper-appendix-marker'), label: node.textContent, box: rel(node) })),
+      marks: [...document.querySelectorAll('.paper-personal-paper-mark[data-paper-mark-id]')]
+        .map((node) => ({ objectId: node.getAttribute('data-paper-mark-id'), box: rel(node) })),
+    }
+  }, { mmToPx: MM_TO_PX })
+
+  const cardDrift = { pos: 0, height: 0 }
+  const missingCards = []
+  for (const previewCard of previewGeometry.cards) {
+    const planCard = exportPlan.cards.find((card) => card.objectId === previewCard.objectId)
+    if (!previewCard.box || !planCard) {
+      missingCards.push(previewCard.objectId)
+      continue
+    }
+    cardDrift.pos = Math.max(
+      cardDrift.pos,
+      Math.abs(planCard.xMm - previewCard.box.xMm),
+      Math.abs(planCard.yMm - previewCard.box.yMm),
+      Math.abs(planCard.widthMm - previewCard.box.widthMm),
+    )
+    cardDrift.height = Math.max(cardDrift.height, Math.abs(planCard.heightMm - previewCard.box.heightMm))
+  }
+  check('every preview card appears in the export plan at the same page',
+    previewGeometry.cards.length > 0 && missingCards.length === 0
+    && previewGeometry.cards.every((card) => card.box != null)
+    && previewGeometry.cards.every((card) => exportPlan.cards.find((plan) => plan.objectId === card.objectId)?.pageId === card.box.pageId),
+    JSON.stringify({ preview: previewGeometry.cards.map((card) => card.objectId), plan: exportPlan.cards.map((card) => card.objectId), missing: missingCards }))
+  check('export plan cards match the preview within 0.2mm (height 0.5mm)',
+    cardDrift.pos <= 0.2 && cardDrift.height <= 0.5,
+    `max pos/width Δ ${cardDrift.pos.toFixed(3)}mm, height Δ ${cardDrift.height.toFixed(3)}mm\n${previewGeometry.cards.map((card) => {
+      const planCard = exportPlan.cards.find((plan) => plan.objectId === card.objectId)
+      return `${card.objectId}: preview=${JSON.stringify(card.box && { w: card.box.widthMm, h: card.box.heightMm })} plan=${planCard ? JSON.stringify({ w: planCard.widthMm, h: planCard.heightMm }) : 'MISSING'}`
+    }).join('\n')}`)
+
+  const markerDrift = { pos: 0, numbers: [] }
+  const missingMarkers = []
+  for (const previewMarker of previewGeometry.markers) {
+    const planMarker = exportPlan.markers.find((marker) => marker.objectId === previewMarker.objectId)
+    if (!previewMarker.box || !planMarker) {
+      missingMarkers.push(previewMarker.objectId)
+      continue
+    }
+    markerDrift.pos = Math.max(
+      markerDrift.pos,
+      Math.abs(planMarker.xMm - previewMarker.box.xMm),
+      Math.abs(planMarker.yMm - previewMarker.box.yMm),
+    )
+    if (Number(previewMarker.label?.slice(1)) !== planMarker.number) {
+      markerDrift.numbers.push(`${previewMarker.label} vs 附${planMarker.number}`)
+    }
+  }
+  check('export plan markers match the preview markers within 0.2mm and same numbers',
+    previewGeometry.markers.length > 0 && missingMarkers.length === 0
+      && markerDrift.pos <= 0.2 && markerDrift.numbers.length === 0,
+    JSON.stringify({ missing: missingMarkers, ...markerDrift }))
+
+  const previewMarksByObject = new Map()
+  for (const mark of previewGeometry.marks) {
+    if (!mark.box) continue
+    if (!previewMarksByObject.has(mark.objectId)) previewMarksByObject.set(mark.objectId, [])
+    previewMarksByObject.get(mark.objectId).push(mark.box)
+  }
+  const markDrift = { pos: 0, countMismatches: [] }
+  const comparedMarks = []
+  for (const planMark of exportPlan.marks) {
+    const previewRects = (previewMarksByObject.get(planMark.objectId) ?? [])
+      .sort((a, b) => a.yMm - b.yMm || a.xMm - b.xMm)
+    const planRects = [...planMark.rectsMm].sort((a, b) => a.yMm - b.yMm || a.xMm - b.xMm)
+    if (previewRects.length !== planRects.length) {
+      markDrift.countMismatches.push(`${planMark.objectId}: preview ${previewRects.length} vs plan ${planRects.length}`)
+      continue
+    }
+    comparedMarks.push(planMark.objectId)
+    for (const [index, planRect] of planRects.entries()) {
+      markDrift.pos = Math.max(
+        markDrift.pos,
+        Math.abs(planRect.xMm - previewRects[index].xMm),
+        Math.abs(planRect.yMm - previewRects[index].yMm),
+        Math.abs(planRect.widthMm - previewRects[index].widthMm),
+        Math.abs(planRect.heightMm - previewRects[index].heightMm),
+      )
+    }
+  }
+  check('export plan mark rects match the preview fragments within 0.2mm',
+    comparedMarks.length > 0 && markDrift.pos <= 0.2 && markDrift.countMismatches.length === 0,
+    JSON.stringify({ compared: comparedMarks, ...markDrift }))
+  console.log(`export-plan alignment: cards/markers/marks max Δ ${Math.max(cardDrift.pos, markerDrift.pos, markDrift.pos).toFixed(3)}mm`)
 
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()

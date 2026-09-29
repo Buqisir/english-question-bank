@@ -1,5 +1,6 @@
 import { useCallback, type ReactNode } from 'react'
-import { frameAtPoint, mmToPx, type PaperPageFrame } from './paperPlacement'
+import { appendixMarkerPosition } from '../../../../../shared/personal-paper-layer/index.mjs'
+import { frameAtPoint, mmToPx, pxToMm, type PaperPageFrame } from './paperPlacement'
 import { scrollElementToVerticalCenter } from './paperScroll'
 import { usePaperContentBoxes } from './usePaperContentBoxes'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
@@ -27,7 +28,8 @@ export type AppendixPlanEntry = {
 type MarkerPosition = { left: number; top: number; centered: boolean }
 
 // 自由文字框：编号挂在 origin（页内 mm）。旁注：锚点首行起点更近的一侧页边，
-// 水平居中于该页边，顶端对齐首行 top。算不出位置的条目不画标记。
+// 水平居中于该页边，顶端对齐首行 top。位置算法在 shared/personal-paper-layer/
+// appendix.mjs（导出量测遍共用）；这里只做画布 px ↔ 页内 mm 的换算。
 function markerPosition(
   entry: AppendixPlanEntry,
   frames: readonly PaperPageFrame[],
@@ -36,22 +38,25 @@ function markerPosition(
   if (entry.origin) {
     const frame = frames.find((candidate) => candidate.pageId === entry.origin?.pageId)
     if (!frame) return null
-    return {
-      left: frame.leftPx + mmToPx(entry.origin.xMm),
-      top: frame.topPx + mmToPx(entry.origin.yMm),
-      centered: false,
-    }
+    const position = appendixMarkerPosition({ origin: { xMm: entry.origin.xMm, yMm: entry.origin.yMm } })
+    if (!position) return null
+    return { left: frame.leftPx + mmToPx(position.xMm), top: frame.topPx + mmToPx(position.yMm), centered: position.centered }
   }
   if (!entry.anchorRect) return null
   const frame = frameAtPoint(frames, entry.anchorRect.left + 1, entry.anchorRect.top + 1)
   const box = contentBoxes.find((candidate) => candidate.pageId === frame?.pageId)
   if (!frame || !box) return null
-  const pageLeft = frame.leftPx
-  const pageRight = frame.leftPx + mmToPx(frame.widthMm)
-  const inLeftMargin = entry.anchorRect.left - pageLeft < pageRight - entry.anchorRect.left
-  const marginStart = inLeftMargin ? pageLeft : box.rightPx
-  const marginEnd = inLeftMargin ? box.leftPx : pageRight
-  return { left: (marginStart + marginEnd) / 2, top: entry.anchorRect.top, centered: true }
+  const position = appendixMarkerPosition({
+    anchorRectMm: {
+      leftMm: pxToMm(entry.anchorRect.left - frame.leftPx),
+      topMm: pxToMm(entry.anchorRect.top - frame.topPx),
+    },
+    contentBoxLeftMm: pxToMm(box.leftPx - frame.leftPx),
+    contentBoxRightMm: pxToMm(box.rightPx - frame.leftPx),
+    pageWidthMm: frame.widthMm,
+  })
+  if (!position) return null
+  return { left: frame.leftPx + mmToPx(position.xMm), top: frame.topPx + mmToPx(position.yMm), centered: position.centered }
 }
 
 /*

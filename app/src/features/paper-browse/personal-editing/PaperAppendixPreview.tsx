@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from 'react'
 import type { PersonalObject } from '../../../../../shared/personal-paper-layer/index.mjs'
+import { appendixSourceLabel } from '../../../../../shared/personal-paper-layer/index.mjs'
 import {
   isPersonalTextDocumentBlank,
   type PersonalTextDocumentV1,
@@ -30,13 +31,14 @@ type AppendixEditing = {
   document: PersonalTextDocumentV1
 }
 
-// 出处行：旁注「第 N 页 · “首段前 24 字”」，文字框「第 N 页 · 文字框」；页码未知时省略前缀。
+// 出处行：旁注「第 N 页 · “首段前 24 字”」，文字框「第 N 页 · 文字框」——
+// 拼法在 shared/personal-paper-layer/appendix.mjs，导出计划用同一段。
 function sourceLine(item: AppendixEntry): string {
-  const pagePrefix = item.entry.pageIndex != null ? `第 ${item.entry.pageIndex + 1} 页 · ` : ''
-  if (item.object.type === 'text-box') return `${pagePrefix}文字框`
-  const text = item.object.textAnchor.segments[0]?.exactText ?? ''
-  const quoted = text.length > 24 ? `${text.slice(0, 24)}…` : text
-  return `${pagePrefix}“${quoted}”`
+  return appendixSourceLabel({
+    type: item.object.type,
+    pageIndex: item.entry.pageIndex,
+    exactText: item.object.type === 'anchored-note' ? item.object.textAnchor.segments[0]?.exactText ?? '' : undefined,
+  })
 }
 
 /*

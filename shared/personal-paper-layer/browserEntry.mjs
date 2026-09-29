@@ -5,5 +5,6 @@
  */
 export { printSegmentToDomRanges } from './printDomAnchor.mjs'
 export { placeNoteNearAnchor } from './notePlacement.mjs'
-export { orderAppendixEntries } from './appendix.mjs'
+export { orderAppendixEntries, appendixSourceLabel, appendixMarkerPosition } from './appendix.mjs'
 export { inkFreeRect } from './inkProbe.mjs'
+export { textRects, mergeLineRects } from './markGeometry.mjs'

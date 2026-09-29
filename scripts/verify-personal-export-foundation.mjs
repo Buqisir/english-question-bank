@@ -57,6 +57,12 @@ check('every registered personal font face has one @font-face',
   && registeredFaces.every((face) => fontCss.includes(`'${face.family}'`)),
   `${registeredFaces.length} faces`)
 check('the font registry digest is a stable sha256', fontDigest.startsWith('sha256:') && fontDigest === personalFontFaceCss().digest)
+check('the 常规 preset alone embeds no personal font faces',
+  !personalFontFaceCss({ presetIds: ['default'] }).css.includes('Xiaolai')
+  && (personalFontFaceCss({ presetIds: ['default'] }).css.match(/@font-face/gu) || []).length === 0)
+check('the Fuzzy Bubbles preset pulls its Xiaolai fallback in',
+  personalFontFaceCss({ presetIds: ['fuzzy-xiaolai'] }).css.includes('EQB Xiaolai SC')
+  && personalFontFaceCss({ presetIds: ['fuzzy-xiaolai'] }).css.includes('EQB Fuzzy Bubbles'))
 console.log(`font css: ${(fontCss.length / 1024 / 1024).toFixed(2)} MB, digest ${fontDigest}`)
 check('tampered font bytes fail the registry sha check',
   codeOf(() => assertPersonalFontAsset(registeredFaces[0], 'tampered bytes')) === 'PERSONAL_FONT_ASSET_MISMATCH')

@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { computeSourceRevision } from '../../shared/paper-selection/sourceProjection.mjs'
 import { paperFontFaces } from '../../shared/papersurface/paperFonts.mjs'
@@ -153,6 +154,33 @@ export function servePaperFontsFromAppOrigin(html) {
   return html.replace(/url\((["']?)data:font\/otf;base64,([A-Za-z0-9+/=]+)\1\)/gu, (match, _quote, base64) => {
     const fontPath = bySha.get(sha256(Buffer.from(base64, 'base64')))
     return fontPath ? `url("${PERSONAL_BASE_PAPER_FONT_URL_PREFIX}${fontPath}")` : match
+  })
+}
+
+const inlineFontBytesByPath = new Map()
+
+/*
+ * The reverse of servePaperFontsFromAppOrigin: the stage-5 measure pass runs
+ * the cached paginated HTML in a bare Chromium page with no app origin, so
+ * the /fonts/paper/ URLs must become data URIs again before setContent.
+ * Bytes are read (and sha-checked) once per face; unknown paths stay as-is.
+ */
+export function inlinePaperFontsForServer(html) {
+  const byPath = new Map(paperFontFaces.map((face) => [face.path, face]))
+  return html.replace(/url\((["']?)\/fonts\/paper\/([^)"']+)\1\)/gu, (match, _quote, fontPath) => {
+    const face = byPath.get(fontPath)
+    if (!face) return match
+    let bytes = inlineFontBytesByPath.get(fontPath)
+    if (!bytes) {
+      bytes = readFileSync(new URL(`../../app/public/fonts/paper/${fontPath}`, import.meta.url))
+      if (sha256(bytes) !== face.sha256) {
+        const error = new Error(`Paper font integrity mismatch: ${fontPath}`)
+        error.code = 'PERSONAL_FONT_ASSET_MISMATCH'
+        throw error
+      }
+      inlineFontBytesByPath.set(fontPath, bytes)
+    }
+    return `url("data:font/otf;base64,${bytes.toString('base64')}")`
   })
 }
 

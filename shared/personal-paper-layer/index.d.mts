@@ -46,6 +46,27 @@ export type AppendixEntry = {
 }
 export function orderAppendixEntries(entries: AppendixEntry[]): string[]
 
+export function appendixSourceLabel(input: {
+  type: 'anchored-note' | 'text-box'
+  pageIndex: number | null
+  exactText?: string
+}): string
+
+export function appendixMarkerPosition(input: {
+  origin?: { xMm: number; yMm: number } | null
+  anchorRectMm?: { leftMm: number; topMm: number } | null
+  contentBoxLeftMm?: number | null
+  contentBoxRightMm?: number | null
+  pageWidthMm?: number | null
+}): { xMm: number; yMm: number; centered: boolean } | null
+
+/** Per-text-node client rects of a Range, so marks never paint whole element boxes. */
+export function textRects(range: Range): { left: number; top: number; width: number; height: number }[]
+/** Joins same-line fragments so a mark is one shape per line. */
+export function mergeLineRects(
+  rects: readonly { left: number; top: number; width: number; height: number }[],
+): { left: number; top: number; width: number; height: number }[]
+
 export type NoteSlot = 'margin' | 'flow'
 export type NoteRect = { left: number; top: number; width: number; height: number }
 export type NotePageFrame = { pageId: string; leftPx: number; topPx: number; widthMm: number; heightMm: number }
