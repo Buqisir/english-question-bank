@@ -152,6 +152,8 @@ export async function measurePersonalExportPlan({
           height: box.height,
           contentLeft: areaBox ? areaBox.left + window.scrollX : null,
           contentRight: areaBox ? areaBox.right + window.scrollX : null,
+          contentTop: areaBox ? areaBox.top + window.scrollY : null,
+          contentBottom: areaBox ? areaBox.bottom + window.scrollY : null,
         }
       }),
     }))
@@ -188,6 +190,8 @@ export async function measurePersonalExportPlan({
         pageId: layoutPages[index].pageId,
         leftPx: rendered.contentLeft,
         rightPx: rendered.contentRight,
+        topPx: rendered.contentTop,
+        bottomPx: rendered.contentBottom,
       })
       .filter(Boolean)
     const frameByPageId = new Map(frames.map((frame) => [frame.pageId, frame]))
@@ -570,6 +574,15 @@ export async function measurePersonalExportPlan({
       id: objectId, pageIndex, yMm, xMm,
     })))
     const rawByObjectId = new Map(appendixRaw.map((entry) => [entry.objectId, entry]))
+    // Markers dodge the page's placed cards and the markers already placed:
+    // occupied rects accumulate in appendix-number order, so the result is
+    // deterministic and two markers on one line never overlap.
+    const occupiedByPage = new Map()
+    const pushOccupied = (pageId, rectMm) => {
+      if (!occupiedByPage.has(pageId)) occupiedByPage.set(pageId, [])
+      occupiedByPage.get(pageId).push(rectMm)
+    }
+    for (const card of cards) pushOccupied(card.pageId, { xMm: card.xMm, yMm: card.yMm, widthMm: card.widthMm, heightMm: card.heightMm })
     const markers = []
     const appendix = []
     for (const [index, entryId] of orderedIds.entries()) {
@@ -577,20 +590,21 @@ export async function measurePersonalExportPlan({
       const raw = rawByObjectId.get(entryId)
       const object = objects.find((candidate) => candidate.id === entryId)
       if (raw.pageId) {
+        const frame = frameByPageId.get(raw.pageId)
+        const box = contentBoxes.find((candidate) => candidate.pageId === raw.pageId)
         const position = appendixMarkerPosition({
           origin: raw.origin,
           anchorRectMm: raw.anchorRectMm,
-          contentBoxLeftMm: (() => {
-            const box = contentBoxes.find((candidate) => candidate.pageId === raw.pageId)
-            return box ? roundMm((box.leftPx - frameByPageId.get(raw.pageId).leftPx) / PX_PER_MM) : null
-          })(),
-          contentBoxRightMm: (() => {
-            const box = contentBoxes.find((candidate) => candidate.pageId === raw.pageId)
-            return box ? roundMm((box.rightPx - frameByPageId.get(raw.pageId).leftPx) / PX_PER_MM) : null
-          })(),
-          pageWidthMm: frameByPageId.get(raw.pageId)?.widthMm ?? null,
+          contentBoxLeftMm: box ? roundMm((box.leftPx - frame.leftPx) / PX_PER_MM) : null,
+          contentBoxRightMm: box ? roundMm((box.rightPx - frame.leftPx) / PX_PER_MM) : null,
+          contentBoxTopMm: box ? roundMm((box.topPx - frame.topPx) / PX_PER_MM) : null,
+          contentBoxBottomMm: box ? roundMm((box.bottomPx - frame.topPx) / PX_PER_MM) : null,
+          pageWidthMm: frame?.widthMm ?? null,
+          occupiedRectsMm: occupiedByPage.get(raw.pageId) ?? [],
         })
         if (position) {
+          // blocked stays on the marker (position kept, collision reported) —
+          // never a diagnostic, which would refuse the whole export.
           markers.push({
             objectId: entryId,
             number,
@@ -598,7 +612,10 @@ export async function measurePersonalExportPlan({
             xMm: roundMm(position.xMm),
             yMm: roundMm(position.yMm),
             centered: position.centered,
+            moved: position.moved,
+            blocked: position.blocked,
           })
+          pushOccupied(raw.pageId, position.rectMm)
         }
       }
       appendix.push({
@@ -620,7 +637,23 @@ export async function measurePersonalExportPlan({
       overlayStyleVersion: PERSONAL_OVERLAY_STYLE_VERSION,
       layoutId,
       pageCount: frames.length,
-      pages: frames.map((frame) => ({ pageId: frame.pageId, widthMm: frame.widthMm, heightMm: frame.heightMm })),
+      // Content-box offsets (page-internal mm) ride along: the composer draws
+      // highlight underlays inside .pagedjs_page_content (origin = content
+      // box, not page box), and the PDF verifier's pixel checks bound their
+      // unhighlighted control bands by the text column.
+      pages: frames.map((frame) => {
+        const box = contentBoxes.find((candidate) => candidate.pageId === frame.pageId)
+        return {
+          pageId: frame.pageId,
+          widthMm: frame.widthMm,
+          heightMm: frame.heightMm,
+          ...(box ? {
+            contentLeftMm: roundMm((box.leftPx - frame.leftPx) / PX_PER_MM),
+            contentRightMm: roundMm((box.rightPx - frame.leftPx) / PX_PER_MM),
+            contentTopMm: roundMm((box.topPx - frame.topPx) / PX_PER_MM),
+          } : {}),
+        }
+      }),
       basePageTextDigests,
       marks,
       cards,

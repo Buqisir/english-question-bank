@@ -395,7 +395,12 @@ try {
     plan.planVersion === PERSONAL_EXPORT_PLAN_VERSION
     && plan.layoutId === layout.layoutId
     && plan.pageCount === layout.pages.length
-    && JSON.stringify(plan.pages) === JSON.stringify(layout.pages.map(({ pageId, widthMm, heightMm }) => ({ pageId, widthMm, heightMm })))
+    && plan.pages.every((page, index) => page.pageId === layout.pages[index].pageId
+      && page.widthMm === layout.pages[index].widthMm && page.heightMm === layout.pages[index].heightMm
+      // Content-box offsets: finite, inside the page, and the column is wide
+      // enough to be the real printable area.
+      && page.contentLeftMm > 0 && page.contentRightMm < page.widthMm && page.contentLeftMm < page.contentRightMm
+      && page.contentTopMm >= 0)
     && !/P[px]\b|viewport|getElement|querySelector/.test(planJson.replace(/planVersion|pageCount/g, '')),
     planJson.slice(0, 200))
   check('base page digests cover every page',

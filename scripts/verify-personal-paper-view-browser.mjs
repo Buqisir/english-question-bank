@@ -1572,6 +1572,82 @@ try {
     && scrollAreaAtEnd.scrollLeft === 0,
     `scrollWidth ${scrollBaseline.scrollWidth} -> ${scrollAreaAtEnd.scrollWidth}, scrollLeft ${scrollAreaAtEnd.scrollLeft}`)
 
+  // (m) an appendix marker whose margin spot is taken by a remaining note
+  // card dodges the card instead of stacking on it (5c fix). Measure the
+  // marker's resting rect first, park a note card exactly on it, then the
+  // marker must re-render clear of that card.
+  await seedObjects([{
+    id: 'verify-appendix-marker-dodge',
+    type: 'anchored-note',
+    document: createPersonalTextDocumentFromPlainText('标记默认位被占的旁注。'),
+    textAnchor: noteAnchor('most of my classmates thought of Ohio'),
+    placement: { kind: 'appendix', origin: null },
+  }])
+  await openPaperView()
+  const restingMarkerRect = await page.evaluate(({ mmToPx }) => {
+    const marker = document.querySelector('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-marker-dodge"]')
+    if (!marker) return null
+    // Page-internal mm via the marker's own page overlay (the anchor can sit
+    // on any page; document px alone would point at the wrong one).
+    const overlays = [...document.querySelectorAll('[data-paper-page-overlay]')].map((node) => ({
+      pageId: node.getAttribute('data-paper-page-overlay'),
+      left: parseFloat(node.style.left),
+      top: parseFloat(node.style.top),
+      width: node.offsetWidth,
+      height: node.offsetHeight,
+    }))
+    const left = parseFloat(marker.style.left)
+    const top = parseFloat(marker.style.top)
+    const overlay = overlays.find((o) => top >= o.top && top < o.top + o.height && left >= o.left && left < o.left + o.width)
+    if (!overlay) return null
+    return {
+      pageId: overlay.pageId,
+      xMm: (left - overlay.left) / mmToPx,
+      yMm: (top - overlay.top) / mmToPx,
+    }
+  }, { mmToPx: MM_TO_PX })
+  if (!restingMarkerRect) throw new Error('dodge marker did not render a resting rect')
+  // The parked card starts at the marker rect's left/top and is far bigger
+  // than the chip, so the un-avoided marker sits fully inside it.
+  await seedObjects([{
+    id: 'verify-note-marker-block',
+    type: 'anchored-note',
+    document: createPersonalTextDocumentFromPlainText('占住标记默认位的旁注。'),
+    textAnchor: noteAnchor('as a whole different world'),
+    placement: { kind: 'page-position', layoutId: layout.layoutId, pageId: restingMarkerRect.pageId, xMm: restingMarkerRect.xMm, yMm: restingMarkerRect.yMm, widthMm: 56 },
+  }])
+  await openPaperView()
+  const dodgeState = await page.evaluate(({ mmToPx }) => {
+    const marker = document.querySelector('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-marker-dodge"]')
+    const card = document.querySelector('.paper-personal-paper-note[data-note-key="verify-note-marker-block"]')
+    if (!marker || !card) return null
+    const overlays = [...document.querySelectorAll('[data-paper-page-overlay]')].map((node) => ({
+      pageId: node.getAttribute('data-paper-page-overlay'),
+      left: parseFloat(node.style.left),
+      top: parseFloat(node.style.top),
+      width: node.offsetWidth,
+      height: node.offsetHeight,
+    }))
+    // Both rects on the card's own page (its data-page-id), unscaled layout
+    // px, 1mm clearance on all sides.
+    const overlay = overlays.find((o) => o.pageId === card.getAttribute('data-page-id'))
+    if (!overlay) return null
+    const gapPx = mmToPx
+    const m = { left: parseFloat(marker.style.left), top: parseFloat(marker.style.top), width: marker.offsetWidth, height: marker.offsetHeight }
+    const c = { left: card.offsetLeft, top: card.offsetTop, width: card.offsetWidth, height: card.offsetHeight }
+    const clear = m.left + m.width + gapPx <= c.left || c.left + c.width + gapPx <= m.left
+      || m.top + m.height + gapPx <= c.top || c.top + c.height + gapPx <= m.top
+    return {
+      clear,
+      markerMm: { xMm: (m.left - overlay.left) / mmToPx, yMm: (m.top - overlay.top) / mmToPx },
+      cardMm: { xMm: (c.left - overlay.left) / mmToPx, yMm: (c.top - overlay.top) / mmToPx, widthMm: c.width / mmToPx, heightMm: c.height / mmToPx },
+    }
+  }, { mmToPx: MM_TO_PX })
+  check('an appendix marker whose spot a note card occupies renders clear of that card',
+    dodgeState != null && dodgeState.clear
+    && (dodgeState.markerMm.yMm !== restingMarkerRect.yMm || dodgeState.markerMm.xMm !== restingMarkerRect.xMm),
+    JSON.stringify({ resting: restingMarkerRect, ...dodgeState }))
+
   // ---- 5b alignment: the export measure pass agrees with the preview -----------
   // The spec's strongest guarantee: the same paginatedHtml and the same
   // stored objects run through measurePersonalExportPlan must place cards,

@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import type { PaperPageFrame } from './paperPlacement'
 
-export type PaperContentBox = { pageId: string; leftPx: number; rightPx: number }
+export type PaperContentBox = { pageId: string; leftPx: number; rightPx: number; topPx: number; bottomPx: number }
 
 /*
- * Per-page content-area left/right edges (document px) — the printable area
+ * Per-page content-area edges (document px) — the printable area
  * inside the page margins. Paged.js structure: .pagedjs_page > … >
  * .pagedjs_area (the pagebox grid's center cell, i.e. inside the page
  * margins) > .pagedjs_page_content; prefer the area, fall back to the page
@@ -31,7 +31,13 @@ export function usePaperContentBoxes(
       const area = page.querySelector('.pagedjs_area') ?? page.querySelector('.pagedjs_page_content')
       if (!area) continue
       const box = area.getBoundingClientRect()
-      boxes.push({ pageId: frame.pageId, leftPx: box.left + win.scrollX, rightPx: box.right + win.scrollX })
+      boxes.push({
+        pageId: frame.pageId,
+        leftPx: box.left + win.scrollX,
+        rightPx: box.right + win.scrollX,
+        topPx: box.top + win.scrollY,
+        bottomPx: box.bottom + win.scrollY,
+      })
     }
     return boxes
   }, [iframe, frames, measureKey])

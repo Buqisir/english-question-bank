@@ -21,6 +21,16 @@
 //   3. inject the paged.js polyfill (page.addScriptTag) — this starts
 //      pagination automatically once the document is interactive
 //   4. wait for pagination to finish (the PagedConfig.after callback)
+//   5.5 compose(page) — optional caller callback (options.compose): runs
+//      after step 4's pagination and every layout check (and after the
+//      inspect callback), BEFORE the DOM is serialized for step 5 and
+//      printed in step 6. This is the sole entry point for
+//      private-annotation composition (the personal PDF export draws its
+//      marks, note cards and appendix sheet here); a compose callback may
+//      add content to the paginated DOM but must not change the base
+//      pagination of the underlying print HTML. Omitted (default) = the
+//      render is byte-for-byte what this module produced before the
+//      callback existed.
 //   5. serialize the paginated DOM from THIS SAME page (page.content()),
 //      then strip every <script> tag from the returned HTML string —
 //      page.content() re-serializes the injected ~900KB paged.js polyfill
@@ -102,7 +112,7 @@ function stripScriptTags(html) {
 // the paged.js polyfill script stripped) plus a same-source PDF and page
 // count. See module header for the locked render order this function
 // implements.
-export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
+export async function renderPaginatedPaper(printHtml, { inspect = null, compose = null } = {}) {
   if (typeof printHtml !== 'string' || !printHtml.trim()) {
     throw new Error('renderPaginatedPaper: printHtml must be a non-empty string')
   }
@@ -236,6 +246,11 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
     const inspection = typeof inspect === 'function'
       ? await inspect(page)
       : null
+
+    // Step 5.5: the caller's composition hook — see the module header
+    // contract. Runs before serialization so whatever it draws appears in
+    // both the returned paginated HTML and the step-6 PDF.
+    if (typeof compose === 'function') await compose(page)
 
     // Step 5: serialize from THIS SAME page, then strip every <script> tag —
     // see module header for why an un-stripped replay double-paginates.

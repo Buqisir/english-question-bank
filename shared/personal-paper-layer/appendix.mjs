@@ -6,6 +6,8 @@
  * the appendix preview must render from the same call so their numbers agree.
  * Pure and DOM-free; the stage-5 PDF export reuses it.
  */
+import { OCCUPIED_GAP_MM, rectsOverlapWithGap } from './notePlacement.mjs'
+
 export function orderAppendixEntries(entries) {
   const positioned = []
   const unpositioned = []
@@ -39,16 +41,76 @@ export function appendixSourceLabel({ type, pageIndex, exactText }) {
  * anchor's first line — the nearer page margin, horizontally centered in
  * that margin, top aligned with the first line. Returns null when no spot
  * is computable (the preview and the export plan both skip the marker).
+ *
+ * The marker also dodges the page's occupied rects (placed note cards, text
+ * boxes, markers already placed — page-internal mm, `occupiedRectsMm`): it
+ * keeps its horizontal position and steps down from the anchor line in
+ * MARKER_STEP_MM steps until clear by OCCUPIED_GAP_MM; past the content
+ * box's bottom it steps up from the anchor line instead. When no free spot
+ * exists the original position is kept and `blocked` reports it — the
+ * marker is never silently hidden. Callers place markers in appendix-number
+ * order and feed each placed marker's own `rectMm` back in as occupied, so
+ * two markers on one line cannot overlap.
  */
-export function appendixMarkerPosition({ origin, anchorRectMm, contentBoxLeftMm, contentBoxRightMm, pageWidthMm }) {
+
+// The chip's own footprint, slightly generous over the rendered ~8.5×4.8mm
+// chip (11px font, 16px line-height, 4px side padding, 1px border): pure
+// placement cannot measure a DOM chip, so both surfaces dodge with these
+// constants and the chip never outgrows its reserved rect.
+export const APPENDIX_MARKER_WIDTH_MM = 9
+export const APPENDIX_MARKER_HEIGHT_MM = 5
+
+// Dodge steps, same cadence as the note cards' 4mm search.
+const MARKER_STEP_MM = 4
+
+export function appendixMarkerPosition({
+  origin,
+  anchorRectMm,
+  contentBoxLeftMm,
+  contentBoxRightMm,
+  pageWidthMm,
+  contentBoxTopMm = 0,
+  contentBoxBottomMm = null,
+  occupiedRectsMm = [],
+}) {
+  let base = null
   if (origin) {
     if (origin.xMm == null || origin.yMm == null) return null
-    return { xMm: origin.xMm, yMm: origin.yMm, centered: false }
+    base = { xMm: origin.xMm, yMm: origin.yMm, centered: false }
+  } else if (anchorRectMm && anchorRectMm.leftMm != null && anchorRectMm.topMm != null) {
+    if (contentBoxLeftMm == null || contentBoxRightMm == null || pageWidthMm == null) return null
+    const inLeftMargin = anchorRectMm.leftMm < pageWidthMm - anchorRectMm.leftMm
+    const marginStartMm = inLeftMargin ? 0 : contentBoxRightMm
+    const marginEndMm = inLeftMargin ? contentBoxLeftMm : pageWidthMm
+    base = { xMm: (marginStartMm + marginEndMm) / 2, yMm: anchorRectMm.topMm, centered: true }
   }
-  if (!anchorRectMm || anchorRectMm.leftMm == null || anchorRectMm.topMm == null) return null
-  if (contentBoxLeftMm == null || contentBoxRightMm == null || pageWidthMm == null) return null
-  const inLeftMargin = anchorRectMm.leftMm < pageWidthMm - anchorRectMm.leftMm
-  const marginStartMm = inLeftMargin ? 0 : contentBoxRightMm
-  const marginEndMm = inLeftMargin ? contentBoxLeftMm : pageWidthMm
-  return { xMm: (marginStartMm + marginEndMm) / 2, yMm: anchorRectMm.topMm, centered: true }
+  if (!base) return null
+
+  // The centered marker's x is the margin midpoint (the chip translates
+  // itself -50%); the reserved rect starts half a chip to the left.
+  const rectAt = (yMm) => ({
+    xMm: base.centered ? base.xMm - APPENDIX_MARKER_WIDTH_MM / 2 : base.xMm,
+    yMm,
+    widthMm: APPENDIX_MARKER_WIDTH_MM,
+    heightMm: APPENDIX_MARKER_HEIGHT_MM,
+  })
+  const asRect = ({ xMm, yMm, widthMm, heightMm }) => ({ left: xMm, top: yMm, width: widthMm, height: heightMm })
+  const freeAt = (yMm) => !occupiedRectsMm.some((other) => rectsOverlapWithGap(asRect(rectAt(yMm)), asRect(other), OCCUPIED_GAP_MM))
+  const spot = (yMm, moved, blocked) => ({ xMm: base.xMm, yMm, centered: base.centered, rectMm: rectAt(yMm), moved, blocked })
+
+  if (freeAt(base.yMm)) return spot(base.yMm, null, false)
+
+  // Downward first, until the marker's bottom would cross the content box.
+  const bottomLimitMm = contentBoxBottomMm == null ? null : contentBoxBottomMm - APPENDIX_MARKER_HEIGHT_MM
+  if (bottomLimitMm != null) {
+    for (let yMm = base.yMm + MARKER_STEP_MM; yMm <= bottomLimitMm + 1e-9; yMm += MARKER_STEP_MM) {
+      if (freeAt(yMm)) return spot(yMm, 'down', false)
+    }
+  }
+  for (let yMm = base.yMm - MARKER_STEP_MM; yMm >= contentBoxTopMm - 1e-9; yMm -= MARKER_STEP_MM) {
+    if (freeAt(yMm)) return spot(yMm, 'up', false)
+  }
+  // No free strip in either direction: stay visible at the original spot and
+  // let the caller report the collision.
+  return spot(base.yMm, null, true)
 }

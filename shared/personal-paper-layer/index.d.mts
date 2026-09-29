@@ -58,7 +58,26 @@ export function appendixMarkerPosition(input: {
   contentBoxLeftMm?: number | null
   contentBoxRightMm?: number | null
   pageWidthMm?: number | null
-}): { xMm: number; yMm: number; centered: boolean } | null
+  /** Vertical search bounds, page-internal mm (default: 0 / no downward bound). */
+  contentBoxTopMm?: number | null
+  contentBoxBottomMm?: number | null
+  /** Page-internal mm rects (cards, text boxes, placed markers) to dodge with a 1mm gap. */
+  occupiedRectsMm?: ReadonlyArray<{ xMm: number; yMm: number; widthMm: number; heightMm: number }>
+}): {
+  xMm: number
+  yMm: number
+  centered: boolean
+  /** The chip's reserved rect (centered markers start widthMm/2 left of xMm). */
+  rectMm: { xMm: number; yMm: number; widthMm: number; heightMm: number }
+  /** 'down' | 'up' when the spot moved to clear an occupied rect, else null. */
+  moved: 'down' | 'up' | null
+  /** True when every strip was occupied and the original spot was kept. */
+  blocked: boolean
+} | null
+
+/** The 「附N」 chip's reserved footprint (mm) used by every dodge computation. */
+export const APPENDIX_MARKER_WIDTH_MM: number
+export const APPENDIX_MARKER_HEIGHT_MM: number
 
 /** Per-text-node client rects of a Range, so marks never paint whole element boxes. */
 export function textRects(range: Range): { left: number; top: number; width: number; height: number }[]

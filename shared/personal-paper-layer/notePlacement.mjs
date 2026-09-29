@@ -30,8 +30,23 @@ const STEP_MM = 4
 const MIN_MARGIN_WIDTH_MM = 16
 const MAX_MARGIN_WIDTH_MM = 30
 
-// A candidate must clear every already-placed card by this much.
-const OCCUPIED_GAP_MM = 1
+// A candidate must clear every already-placed card by this much. The appendix
+// markers dodge the same cards with the same gap (appendix.mjs).
+export const OCCUPIED_GAP_MM = 1
+
+/**
+ * Unit-agnostic AABB test (px or mm, both sides in the same unit): true when
+ * the two rects overlap or sit closer than `gap`. The single collision rule
+ * for note cards and appendix markers alike.
+ * @param {{ left: number, top: number, width: number, height: number }} a
+ * @param {{ left: number, top: number, width: number, height: number }} b
+ */
+export function rectsOverlapWithGap(a, b, gap) {
+  return a.left - gap < b.left + b.width
+    && a.left + a.width + gap > b.left
+    && a.top - gap < b.top + b.height
+    && a.top + a.height + gap > b.top
+}
 
 /**
  * @param {readonly PaperPageFrame[]} frames
@@ -55,15 +70,7 @@ function frameOfPoint(frames, xPx, yPx) {
  */
 function collides(rect, occupied) {
   const gapPx = OCCUPIED_GAP_MM * MM_TO_PX
-  for (const other of occupied) {
-    if (
-      rect.left - gapPx < other.left + other.width
-      && rect.left + rect.width + gapPx > other.left
-      && rect.top - gapPx < other.top + other.height
-      && rect.top + rect.height + gapPx > other.top
-    ) return true
-  }
-  return false
+  return occupied.some((other) => rectsOverlapWithGap(rect, other, gapPx))
 }
 
 /**

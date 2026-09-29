@@ -463,5 +463,75 @@ check('appendix sends unpositioned entries last in id order', appendixOrder([
     JSON.stringify(noContentBox))
 }
 
+// ---- appendix marker placement (#489 5c, shared module) ---------------------
+
+{
+  const { appendixMarkerPosition, rectsOverlapWithGap } = await import('../shared/personal-paper-layer/index.mjs')
+  // Anchor right of the page centre? No — left of it (40 < 170), so the
+  // marker centers in the left margin (0..30mm) at the anchor's first line.
+  const base = {
+    anchorRectMm: { leftMm: 40, topMm: 100 },
+    contentBoxLeftMm: 30,
+    contentBoxRightMm: 180,
+    pageWidthMm: 210,
+    contentBoxTopMm: 0,
+    contentBoxBottomMm: 257,
+  }
+  const asRect = ({ xMm, yMm, widthMm, heightMm }) => ({ left: xMm, top: yMm, width: widthMm, height: heightMm })
+
+  const resting = appendixMarkerPosition({ ...base })
+  check('appendix marker keeps its margin-centered spot when nothing is occupied',
+    resting && resting.centered === true && resting.moved === null && resting.blocked === false
+    && Math.abs(resting.xMm - 15) < 0.01 && Math.abs(resting.yMm - 100) < 0.01
+    && Math.abs(resting.rectMm.xMm - 10.5) < 0.01 && resting.rectMm.widthMm > 0 && resting.rectMm.heightMm > 0,
+    JSON.stringify(resting))
+
+  // Occupy the marker's resting rect exactly with a 20mm-tall card: the 1mm
+  // gap rule must step the marker down in 4mm steps to the first clear strip.
+  const blockedCard = { xMm: 10.5, yMm: 100, widthMm: 9, heightMm: 20 }
+  const dodged = appendixMarkerPosition({ ...base, occupiedRectsMm: [blockedCard] })
+  check('appendix marker dodges an occupied card downward with a 1mm gap',
+    dodged && dodged.moved === 'down' && dodged.blocked === false && Math.abs(dodged.yMm - 124) < 0.01
+    && !rectsOverlapWithGap(asRect(dodged.rectMm), asRect(blockedCard), 1),
+    JSON.stringify(dodged))
+
+  // Anchor near the page bottom: downward has no room below the content box,
+  // so the search falls back upward from the anchor line.
+  const nearBottom = { ...base, anchorRectMm: { leftMm: 40, topMm: 250 } }
+  const bottomCard = { xMm: 10.5, yMm: 250, widthMm: 9, heightMm: 20 }
+  const upward = appendixMarkerPosition({ ...nearBottom, occupiedRectsMm: [bottomCard] })
+  check('appendix marker falls back upward near the page bottom',
+    upward && upward.moved === 'up' && upward.blocked === false && Math.abs(upward.yMm - 242) < 0.01
+    && !rectsOverlapWithGap(asRect(upward.rectMm), asRect(bottomCard), 1)
+    && upward.yMm >= base.contentBoxTopMm,
+    JSON.stringify(upward))
+
+  const first = appendixMarkerPosition({ ...base })
+  const second = appendixMarkerPosition({ ...base, occupiedRectsMm: [first.rectMm] })
+  check('two appendix markers on the same line do not overlap',
+    first && second && second.moved === 'down' && Math.abs(second.yMm - 108) < 0.01
+    && !rectsOverlapWithGap(asRect(first.rectMm), asRect(second.rectMm), 1),
+    JSON.stringify({ first: first.rectMm, second: second.rectMm }))
+
+  const originResting = appendixMarkerPosition({ origin: { xMm: 30, yMm: 40 } })
+  check('a text-box marker keeps its stored origin when nothing is occupied',
+    originResting && originResting.centered === false && originResting.moved === null && originResting.blocked === false
+    && originResting.xMm === 30 && originResting.yMm === 40,
+    JSON.stringify(originResting))
+  const originCard = { xMm: 30, yMm: 40, widthMm: 20, heightMm: 20 }
+  const originDodged = appendixMarkerPosition({ origin: { xMm: 30, yMm: 40 }, contentBoxBottomMm: 257, occupiedRectsMm: [originCard] })
+  check('an occupied origin applies the same downward search at the same x',
+    originDodged && originDodged.centered === false && originDodged.moved === 'down'
+    && originDodged.xMm === 30 && Math.abs(originDodged.yMm - 64) < 0.01
+    && !rectsOverlapWithGap(asRect(originDodged.rectMm), asRect(originCard), 1),
+    JSON.stringify(originDodged))
+
+  const nowhere = appendixMarkerPosition({ ...base, occupiedRectsMm: [{ xMm: 0, yMm: 0, widthMm: 210, heightMm: 297 }] })
+  check('a fully occupied page keeps the original marker spot and reports blocked',
+    nowhere && nowhere.moved === null && nowhere.blocked === true
+    && Math.abs(nowhere.xMm - 15) < 0.01 && Math.abs(nowhere.yMm - 100) < 0.01,
+    JSON.stringify(nowhere))
+}
+
 console.log(failed === 0 ? '\nverify-personal-paper-layer: all checks passed' : `\nverify-personal-paper-layer: ${failed} failed`)
 process.exit(failed === 0 ? 0 : 1)
