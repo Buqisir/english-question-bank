@@ -12,9 +12,11 @@ import {
 import { PersonalTextEditor } from './PersonalTextEditor'
 import { PersonalTextView } from './PersonalTextView'
 import { TextBoxPresentationControls, type TextBoxPresentationChange } from './PaperTextBoxStrip'
-import { BookMarked, Copy, Trash } from '../../../icons'
+import { BookMarked, ArrowDown, Copy, Trash } from '../../../icons'
 import { placeNoteNearAnchor, type NoteSlot } from './paperNotePlacement'
 import { clampPlacement, frameAtPoint, mmToPx, pxToMm, roundMm, type PaperPageFrame, MM_TO_PX } from './paperPlacement'
+import { usePaperContentBoxes } from './usePaperContentBoxes'
+import { scrollContainerOf } from './paperScroll'
 import { DRAG_THRESHOLD_PX, PASTE_OFFSET_MM, isEditableTarget, isMac } from './PaperTextBoxLayer'
 import type { LayerRect } from './markGeometry'
 import type { PaperAnchorGeometry } from './usePaperAnchorGeometry'
@@ -47,8 +49,6 @@ type PlacedNote = {
 }
 
 type CardRectPx = { left: number; top: number; width: number; height: number }
-
-type PageContentBox = { pageId: string; leftPx: number; rightPx: number }
 
 // The note being edited. Like the text box: the draft reserves its mergeKey up
 // front so the whole editing session (typed text + presentation tweaks) is one
@@ -139,18 +139,6 @@ function interactionPlacement(interaction: NoteInteraction): NotePlacement {
     yMm: interaction.yMm,
     widthMm: interaction.widthMm,
   }
-}
-
-// First scrollable ancestor of the overlay layer (the paper view scrolls inside
-// the app shell, not the window); null falls back to window scrolling.
-function scrollContainerOf(element: Element): HTMLElement | null {
-  let node: HTMLElement | null = element.parentElement
-  while (node) {
-    const overflowY = getComputedStyle(node).overflowY
-    if ((overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay') && node.scrollHeight > node.clientHeight) return node
-    node = node.parentElement
-  }
-  return null
 }
 
 /*
@@ -255,28 +243,9 @@ export function PaperNoteLayer({
     return true
   }, [iframe])
 
-  // Per-page content-area left/right edges (document px) for margin placement.
-  // Paged.js structure: .pagedjs_page > … > .pagedjs_area (the pagebox grid's
-  // center cell, i.e. inside the page margins) > .pagedjs_page_content; prefer
-  // the area, fall back to the page content, and give a page with neither no
-  // margin candidates. Re-measured with the anchor geometry (same measureKey
-  // cadence) so the boxes track re-layouts and font settles.
-  const contentBoxes = useMemo<PageContentBox[]>(() => {
-    const doc = iframe?.contentDocument
-    const win = iframe?.contentWindow
-    if (!doc || !win) return []
-    const pages = doc.querySelectorAll('.pagedjs_page')
-    const boxes: PageContentBox[] = []
-    for (const [index, frame] of frames.entries()) {
-      const page = pages[index]
-      if (!page) continue
-      const area = page.querySelector('.pagedjs_area') ?? page.querySelector('.pagedjs_page_content')
-      if (!area) continue
-      const box = area.getBoundingClientRect()
-      boxes.push({ pageId: frame.pageId, leftPx: box.left + win.scrollX, rightPx: box.right + win.scrollX })
-    }
-    return boxes
-  }, [iframe, frames, anchorGeometry])
+  // Per-page content-area edges for margin placement, re-measured with the
+  // anchor geometry (shared hook, same measureKey cadence).
+  const contentBoxes = usePaperContentBoxes(iframe, frames, anchorGeometry)
 
   const { placed, pending } = useMemo(() => {
     const placed: PlacedNote[] = []
@@ -691,6 +660,35 @@ export function PaperNoteLayer({
     pasteCopiedNote()
   }, [copySelectedNote, pasteCopiedNote])
 
+  // 转到附页: one update op to the appendix placement, keeping the current
+  // rendered spot as the origin (rounded to the server's 0.01mm precision) so
+  // 回到原处 and a later 移回卷面 know where the card came from. A card that
+  // never rendered (no fit, foreign layout) goes without an origin.
+  const moveNoteToAppendix = useCallback((objectId: string) => {
+    const note = placed.find((item) => item.object.id === objectId)
+    if (!note || !canEdit) return
+    seal()
+    resetNudgeRun()
+    apply([{
+      op: 'update',
+      objectId,
+      patch: {
+        placement: {
+          kind: 'appendix',
+          origin: {
+            kind: 'page-position',
+            layoutId,
+            pageId: note.frame.pageId,
+            xMm: roundMm(note.xMm),
+            yMm: roundMm(note.yMm),
+            widthMm: roundMm(note.widthMm),
+          },
+        },
+      },
+    }])
+    setSelectedId(null)
+  }, [apply, canEdit, layoutId, placed, resetNudgeRun, seal, setSelectedId])
+
   const commitFirstPending = useCallback((frame: PaperPageFrame, xMm: number, yMm: number) => {
     const target = pending[0]
     if (!target || !canEdit) return
@@ -901,6 +899,19 @@ export function PaperNoteLayer({
                 >
                   <BookMarked size={16} />
                   回到原文
+                </button>
+                <button
+                  type="button"
+                  className="paper-personal-text-box__strip-action"
+                  aria-label="转到附页"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setPopover(null)
+                    moveNoteToAppendix(object.id)
+                  }}
+                >
+                  <ArrowDown size={16} />
+                  转到附页
                 </button>
                 <button
                   type="button"

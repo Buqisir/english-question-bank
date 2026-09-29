@@ -484,6 +484,9 @@
 
 .paper-personal-paper-view {
   display: flex;
+  /* 附页预览与纸张同宽，仍放不进同一行——换行排到纸张下方。Explicit-Cascade:
+   * 单子项（纸张或错误态）时 wrap 不改变现有布局。 */
+  flex-wrap: wrap;
   justify-content: center;
   min-width: 0;
   /* 双保险：即使网格列模板被上游改动，纸张视图也横跨全部列、占满宽度。 */
@@ -965,3 +968,157 @@
   transform-origin: right bottom;
 }
 
+
+/* ---- 附页（#489 §8 4d-A）：纸面「附N」标记 + 附页预览 ---- */
+
+/* 纸面标记层：覆盖整卷画布，标记自身可点（点 → 滚到附页条目并选中）。 */
+.paper-personal-paper-appendix-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 编号标记：纸面与附页条目同款。卷面衬线字道，11px/16px 小而可认。 */
+.paper-personal-appendix-marker {
+  flex-shrink: 0;
+  font-family: 'EQB Termes', 'EQB Source Han Serif', serif;
+  font-size: 11px;
+  line-height: 16px;
+  padding: 0 4px;
+  color: var(--paper-ink-strong);
+  background: #fff;
+  border: 1px solid var(--paper-border);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* 纸面标记是绝对定位的控件；附页条目里的标签是流内悬挂列。 */
+.paper-personal-paper-appendix-layer .paper-personal-appendix-marker {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* 页边标记按页边中点落位，自身再左移半宽取中。 */
+.paper-personal-paper-appendix-layer .paper-personal-appendix-marker.is-centered {
+  transform: translateX(-50%);
+}
+
+.paper-personal-paper-appendix-layer .paper-personal-appendix-marker.is-selected {
+  outline: 1px solid var(--personal-frame, rgba(96, 102, 92, 0.55));
+  outline-offset: 2px;
+}
+
+/* Explicit-Cascade: 同一条闪烁动画也给附页标记——「回到原处」滚到纸面后
+ * 用同一对 motion-slow 脉冲指位。 */
+.paper-personal-paper-mark.is-flash,
+.paper-personal-appendix-marker.is-flash {
+  animation: paper-mark-flash var(--motion-slow, 220ms) ease-in-out 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-personal-paper-mark.is-flash,
+  .paper-personal-appendix-marker.is-flash {
+    animation: none;
+  }
+}
+
+/* 附页预览：外层盒与纸张 zoom 块同宽（换行后同样被 flex 居中，纸缘自然对
+ * 齐），高度用实测高 × scale 撑开占位；纸体在盒内绝对定位到 frames[0]
+ * 左缘——不让容器 scrollWidth 变大。 */
+.paper-personal-appendix-preview {
+  position: relative;
+  margin-top: 24px;
+}
+
+.paper-personal-appendix-sheet-outer {
+  position: absolute;
+  top: 0;
+}
+
+.paper-personal-appendix-sheet {
+  padding: 17mm 24mm;
+  background: #fff;
+  /* box-shadow 由 PaperAppendixPreview 内联 PAPER_SHEET_BOX_SHADOW——与纸张
+   * iframe 注入的是同一条常量，这里不重复写字面量。 */
+  transform-origin: left top;
+  --personal-frame: rgba(96, 102, 92, 0.55);
+}
+
+.paper-personal-appendix-title {
+  margin: 0 0 8mm;
+  font-family: 'EQB Termes', 'EQB Source Han Serif', serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--paper-ink-strong);
+}
+
+.paper-personal-appendix-hint {
+  margin: 0 0 8mm;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  text-align: center;
+  color: var(--paper-ink-muted);
+}
+
+.paper-personal-appendix-entries {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+/* 条目：悬挂编号 + 右侧正文；右上角安静文字按钮。点击空白处选中。 */
+.paper-personal-appendix-entry {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 2mm;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.paper-personal-appendix-entry.is-selected {
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+.paper-personal-appendix-entry-body {
+  flex: 1;
+  min-width: 0;
+  padding-right: 96px;
+}
+
+.paper-personal-appendix-entry-source {
+  margin: 0 0 1mm;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--paper-ink-muted);
+}
+
+.paper-personal-appendix-entry-actions {
+  position: absolute;
+  top: 2mm;
+  right: 2mm;
+  display: flex;
+  gap: 4px;
+}
+
+.paper-personal-appendix-entry-action {
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--desk-muted, #60665C);
+  cursor: pointer;
+}
+
+.paper-personal-appendix-entry-action:hover {
+  background: var(--desk-hover, #E5EAE1);
+}

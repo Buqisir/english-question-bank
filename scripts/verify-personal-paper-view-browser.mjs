@@ -1270,6 +1270,26 @@ try {
     JSON.stringify({ before: noteZoomBefore, after: noteZoomAfter }))
   await setZoom('100%', 'scale(1)')
 
+  // The appendix preview must never widen the paper view's scroll area (the
+  // horizontal-scroll regression the 4d-A screenshots caught). The shell's
+  // own chrome can already overflow the viewport on this QA page, so the
+  // assertion is relative: the scroll width must not grow when the appendix
+  // appears, and no horizontal scroll may be left behind.
+  const scrollAreaState = () => page.evaluate(() => {
+    // The paper view scrolls on the document (no inner scrollable ancestor).
+    const element = document.scrollingElement
+    return { scrollWidth: element?.scrollWidth ?? 0, clientWidth: element?.clientWidth ?? 0, scrollLeft: element?.scrollLeft ?? 0 }
+  })
+  await selectNote(restoredNoteId)
+  const scrollBeforeAppendix = await scrollAreaState()
+  await page.click('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip-action[aria-label="转到附页"]')
+  await page.waitForSelector('.paper-personal-appendix-preview', { timeout: 5_000 })
+  const scrollAfterAppendix = await scrollAreaState()
+  check('the appendix preview never widens the paper view scroll area',
+    scrollAfterAppendix.scrollWidth <= Math.max(scrollBeforeAppendix.scrollWidth, scrollAfterAppendix.clientWidth) + 1
+    && scrollAfterAppendix.scrollLeft === 0,
+    `scrollWidth ${scrollBeforeAppendix.scrollWidth} -> ${scrollAfterAppendix.scrollWidth}, clientWidth ${scrollAfterAppendix.clientWidth}, scrollLeft ${scrollAfterAppendix.scrollLeft}`)
+
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()
   await anonymousPage.route('**/paper-assets/**/paper-asset.json', (route) => route.fulfill({

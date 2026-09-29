@@ -32,6 +32,7 @@ import {
   createEmptyPersonalLayerState,
   createPersonalLayerSnapshot,
   normalizeTextAnchor,
+  orderAppendixEntries,
   resolveTextAnchor,
 } from '../shared/personal-paper-layer/index.mjs'
 
@@ -373,6 +374,39 @@ check('layer snapshot is frozen and unaffected by later edits', layerSnapshot.ob
     db.close()
     rmSync(publicationDir, { recursive: true, force: true })
   }
+}
+
+// ---- appendix ordering (#489 §8) -------------------------------------------
+
+const appendixEntry = (id, pageIndex, yMm, xMm) => ({ id, pageIndex, yMm, xMm })
+const appendixOrder = (entries) => JSON.stringify(orderAppendixEntries(entries))
+check('appendix orders positioned entries by page, y, then x', appendixOrder([
+  appendixEntry('b', 0, 200, 10),
+  appendixEntry('a', 1, 10, 10),
+  appendixEntry('c', 0, 10, 20),
+  appendixEntry('d', 0, 10, 10),
+]) === JSON.stringify(['d', 'c', 'b', 'a']))
+check('appendix breaks position ties by id', appendixOrder([
+  appendixEntry('n2', 0, 10, 10),
+  appendixEntry('n1', 0, 10, 10),
+  appendixEntry('n3', 0, 10, 10),
+]) === JSON.stringify(['n1', 'n2', 'n3']))
+check('appendix sends unpositioned entries last in id order', appendixOrder([
+  appendixEntry('z', null, null, null),
+  appendixEntry('a', 2, 10, 10),
+  appendixEntry('m', null, 10, 10),
+  appendixEntry('b', 0, 10, 10),
+]) === JSON.stringify(['b', 'a', 'm', 'z']))
+{
+  const entries = [
+    appendixEntry('e3', 1, 40, 0),
+    appendixEntry('e1', 0, 90, 5),
+    appendixEntry('e2', 0, 20, 1),
+    appendixEntry('e4', null, null, null),
+  ]
+  const shuffled = [entries[2], entries[0], entries[3], entries[1]]
+  check('appendix ordering is input-order independent', JSON.stringify(orderAppendixEntries(entries))
+    === JSON.stringify(orderAppendixEntries(shuffled)))
 }
 
 console.log(failed === 0 ? '\nverify-personal-paper-layer: all checks passed' : `\nverify-personal-paper-layer: ${failed} failed`)

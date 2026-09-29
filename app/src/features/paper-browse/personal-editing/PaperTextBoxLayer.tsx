@@ -546,6 +546,23 @@ export function PaperTextBoxLayer({
     pasteCopiedBox()
   }, [copySelectedBox, pasteCopiedBox])
 
+  // 转到附页: one update op to the appendix placement. The current page
+  // position rides along as the origin — it is what the appendix numbering
+  // and a later 移回卷面 read back.
+  const moveSelectedBoxToAppendix = useCallback(() => {
+    const selected = selectedBox
+    if (!selected || selected.placement.kind !== 'page-position') return
+    seal()
+    resetNudgeRun()
+    setInteractionState(null)
+    apply([{
+      op: 'update',
+      objectId: selected.id,
+      patch: { placement: { kind: 'appendix', origin: { ...selected.placement } } },
+    }])
+    setSelectedId(null)
+  }, [apply, resetNudgeRun, seal, selectedBox, setSelectedId, setInteractionState])
+
   const deleteSelectedBox = useCallback(() => {
     if (!selectedBox) return
     resetNudgeRun()
@@ -769,6 +786,7 @@ export function PaperTextBoxLayer({
               <TextBoxSelectionStrip
                 document={document}
                 onPresentationChange={(patch) => applySelectedPresentation(objectId, patch)}
+                onMoveToAppendix={moveSelectedBoxToAppendix}
                 onDuplicate={duplicateSelectedBox}
                 onDelete={deleteSelectedBox}
               />

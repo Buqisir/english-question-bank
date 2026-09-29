@@ -7,7 +7,7 @@ import {
   type PersonalSizePresetId,
   type PersonalTextDocumentV1,
 } from '../../../../../shared/personal-text/index.mjs'
-import { ChevronDown, Copy, Trash } from '../../../icons'
+import { ArrowDown, ChevronDown, Copy, Trash } from '../../../icons'
 
 export type TextBoxPresentationChange = {
   fontPresetId?: PersonalFontPresetId
@@ -75,11 +75,13 @@ export function TextBoxPresentationControls({
 export function TextBoxSelectionStrip({
   document,
   onPresentationChange,
+  onMoveToAppendix,
   onDuplicate,
   onDelete,
 }: {
   document: PersonalTextDocumentV1
   onPresentationChange: (patch: TextBoxPresentationChange) => void
+  onMoveToAppendix: () => void
   onDuplicate: () => void
   onDelete: () => void
 }): ReactNode {
@@ -87,6 +89,15 @@ export function TextBoxSelectionStrip({
     <div className="paper-personal-text-box__strip" role="toolbar" aria-label="文字框操作">
       <TextBoxPresentationControls document={document} onChange={onPresentationChange} />
       <span className="paper-personal-strip-divider" aria-hidden="true" />
+      <button
+        type="button"
+        className="paper-personal-text-box__strip-action"
+        aria-label="转到附页"
+        onClick={onMoveToAppendix}
+      >
+        <ArrowDown size={16} />
+        转到附页
+      </button>
       <button
         type="button"
         className="paper-personal-text-box__strip-action"

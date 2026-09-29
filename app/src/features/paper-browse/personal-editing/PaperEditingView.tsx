@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { MM_TO_PX, type PaperPageFrame } from './paperPlacement'
+import { orderAppendixEntries } from '../../../../../shared/personal-paper-layer/index.mjs'
+import { frameAtPoint, MM_TO_PX, pxToMm, type PaperPageFrame } from './paperPlacement'
+import { PaperAppendixLayer, type AppendixPlanEntry } from './PaperAppendixLayer'
+import { PaperAppendixPreview } from './PaperAppendixPreview'
 import { PaperMarkLayer } from './PaperMarkLayer'
 import { PaperNoteLayer } from './PaperNoteLayer'
 import { PaperTextBoxLayer } from './PaperTextBoxLayer'
@@ -11,19 +14,21 @@ import { usePersonalPaperLayout } from './usePersonalPaperLayout'
 // 不应超过 2px。超过即视为渲染结果与批注基准不一致，宁可报错不将错就错。
 const GEOMETRY_TOLERANCE_PX = 2
 
+// 整卷纸的 Sheet 阴影（DESIGN.md §4 owner 验收标准）；附页预览的纸用同一条。
+export const PAPER_SHEET_BOX_SHADOW = '0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08)'
+
 // 显示层修饰（思路同 server 侧 servePaperFontsFromAppOrigin，但在前端做）：
-// 给 srcdoc 注入一段仅屏幕生效的样式——整卷纸的 Sheet 阴影（DESIGN.md §4
-// owner 验收标准）、页间留白、页面栈底透明（桌面底色透出来）。box-shadow 与
-// margin 不改变 .pagedjs_page 的页面盒尺寸与分页几何（版式核对的 2px 容差
-// 断言不受影响）；这段样式不进 layoutRef，第 5 阶段 PDF 合成用的是服务端
-// 原始 paginatedHtml，不经过这里。
+// 给 srcdoc 注入一段仅屏幕生效的样式——整卷纸的 Sheet 阴影、页间留白、页面
+// 栈底透明（桌面底色透出来）。box-shadow 与 margin 不改变 .pagedjs_page 的
+// 页面盒尺寸与分页几何（版式核对的 2px 容差断言不受影响）；这段样式不进
+// layoutRef，第 5 阶段 PDF 合成用的是服务端原始 paginatedHtml，不经过这里。
 const PAPER_SHEET_SCREEN_STYLE = `<style data-eqb-paper-screen-only>
 @media screen {
   html, body { background: transparent; }
   .pagedjs_pages { background: transparent; }
   .pagedjs_page {
     background: #fff;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+    box-shadow: ${PAPER_SHEET_BOX_SHADOW};
   }
   .pagedjs_page + .pagedjs_page { margin-top: 24px; }
 }
@@ -57,6 +62,9 @@ export type PaperEditingViewProps = {
 }
 
 type PaperCanvasStyle = CSSProperties & Record<`--${string}`, string | number>
+
+// 附页条目的排序输入：plan 条目去掉编号（编号由 orderAppendixEntries 给出）。
+type AppendixOrderInput = Omit<AppendixPlanEntry, 'number'>
 
 export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextArmed, onAddTextPlaced, noticeTarget }: PaperEditingViewProps): ReactNode {
   const { state, reload } = usePersonalPaperLayout({
@@ -160,6 +168,49 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
     measured ? `${layout.layoutId}:${geometry.frames.map((frame) => `${frame.leftPx},${frame.topPx}`).join('|')}` : '',
   )
 
+  // 附页编号与落点（#489 §8）：一次计算，纸面标记与附页预览共用，编号恒一致。
+  // 旁注按锚点首行定位；文字框按 origin（仅限当前 layout）；算不出位置的排
+  // 最后（orderAppendixEntries），不画标记。
+  const appendixEntries = useMemo<AppendixPlanEntry[]>(() => {
+    if (!layout || geometry.status !== 'ok') return []
+    const frames = geometry.frames
+    const raw = api.objects.flatMap<AppendixOrderInput>((object) => {
+      const unpositioned: AppendixOrderInput = {
+        id: object.id, pageIndex: null, yMm: null, xMm: null, anchorRect: null, origin: null,
+      }
+      if (object.type === 'anchored-note' && object.placement.kind === 'appendix') {
+        const rects = anchorGeometry.rectsByObjectId.get(object.id)
+        const first = rects ? [...rects].sort((a, b) => a.top - b.top || a.left - b.left)[0] ?? null : null
+        const frame = first ? frameAtPoint(frames, first.left + 1, first.top + 1) : null
+        if (!first || !frame) return [unpositioned]
+        return [{
+          id: object.id,
+          pageIndex: frames.indexOf(frame),
+          yMm: pxToMm(first.top - frame.topPx),
+          xMm: pxToMm(first.left - frame.leftPx),
+          anchorRect: { left: first.left, top: first.top },
+          origin: null,
+        }]
+      }
+      if (object.type === 'text-box' && object.placement.kind === 'appendix') {
+        const origin = object.placement.origin
+        if (!origin || origin.layoutId !== layout.layoutId) return [unpositioned]
+        const pageIndex = frames.findIndex((frame) => frame.pageId === origin.pageId)
+        if (pageIndex < 0) return [unpositioned]
+        return [{
+          id: object.id,
+          pageIndex,
+          yMm: origin.yMm,
+          xMm: origin.xMm,
+          anchorRect: null,
+          origin: { pageId: origin.pageId, xMm: origin.xMm, yMm: origin.yMm },
+        }]
+      }
+      return []
+    })
+    return orderAppendixEntries(raw).map((id, index) => ({ ...raw.find((entry) => entry.id === id)!, number: index + 1 }))
+  }, [api.objects, anchorGeometry, geometry, layout])
+
   if (state.status === 'error') {
     return (
       <div className="paper-personal-paper-view" ref={containerRef}>
@@ -237,6 +288,12 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
                   iframe={iframeRef.current}
                   noticeTarget={noticeTarget}
                 />
+                <PaperAppendixLayer
+                  api={api}
+                  iframe={iframeRef.current}
+                  frames={geometry.frames}
+                  entries={appendixEntries}
+                />
                 <PaperTextBoxLayer
                   api={api}
                   frames={geometry.frames}
@@ -263,6 +320,15 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
           </div>
         </div>
       )}
+      {/* 附页预览与纸张同宽同缩放，左缘对齐纸张页面；没有转附页对象时不渲染。 */}
+      <PaperAppendixPreview
+        api={api}
+        entries={appendixEntries}
+        contentWidthPx={contentWidthPx}
+        pageWidthPx={pageWidthPx}
+        leftPx={geometry.status === 'ok' ? geometry.frames[0]?.leftPx ?? 0 : 0}
+        scale={scale}
+      />
     </div>
   )
 }

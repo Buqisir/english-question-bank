@@ -38,6 +38,13 @@ export type PersonalPlacement =
   | { kind: 'auto-near-anchor' }
   | PersonalPagePosition
   | { kind: 'appendix'; origin: PersonalPagePosition | null }
+export type AppendixEntry = {
+  id: string
+  pageIndex: number | null
+  yMm: number | null
+  xMm: number | null
+}
+export function orderAppendixEntries(entries: AppendixEntry[]): string[]
 
 export type PersonalCommentaryTarget =
   | { kind: 'question'; groupId: string; questionId: string }
