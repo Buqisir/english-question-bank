@@ -786,6 +786,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   })
   const [paperEditingZoom, setPaperEditingZoom] = useState<number | 'fit'>('fit')
   const [paperNoticeTarget, setPaperNoticeTarget] = useState<HTMLDivElement | null>(null)
+  // #489 5d-2: 「导出我的批注版」按钮的 portal 槽（工具条左侧按钮组末尾）。
+  const [paperExportTarget, setPaperExportTarget] = useState<HTMLDivElement | null>(null)
   // #489 纸张视图「添加文字」：armed 时下一次页面点击布一个文字框草稿。
   const [addTextArmed, setAddTextArmed] = useState(false)
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
@@ -4200,6 +4202,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               <Pencil size={16} aria-hidden="true" />
               添加文字
             </button>
+            <div className="paper-browse-editing-toolbar__actions" ref={setPaperExportTarget} />
           </div>
           {/* 文字框静默提示（溢出 / 旧版式）挂在工具条中段：出现或消失都不推动纸张。 */}
           <div className="paper-browse-editing-toolbar__notices" ref={setPaperNoticeTarget} />
@@ -4307,6 +4310,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           <PaperEditingView
             paperId={paperId}
             noticeTarget={paperNoticeTarget}
+            exportTarget={paperExportTarget}
             sourceRevision={personalAnnotations.source?.sourceRevision ?? null}
             zoom={paperEditingZoom}
             api={personalAnnotations}

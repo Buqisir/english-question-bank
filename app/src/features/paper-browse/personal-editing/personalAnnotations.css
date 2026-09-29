@@ -436,7 +436,8 @@
  * 固定 5 颗，不能混入工具开关。 */
 .paper-browse-view-switch__option,
 .paper-browse-zoom-option,
-.paper-browse-add-text-option {
+.paper-browse-add-text-option,
+.paper-browse-export-option {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -453,7 +454,8 @@
 
 .paper-browse-view-switch__option:hover:not([aria-pressed='true']),
 .paper-browse-zoom-option:hover:not([aria-pressed='true']),
-.paper-browse-add-text-option:hover:not([aria-pressed='true']):not([disabled]) {
+.paper-browse-add-text-option:hover:not([aria-pressed='true']):not([disabled]),
+.paper-browse-export-option:hover:not([disabled]) {
   background: var(--desk-hover, #e5eae1);
   color: var(--desk-ink, #191d18);
 }
@@ -477,6 +479,7 @@
 .paper-browse-view-switch__option:focus-visible,
 .paper-browse-zoom-option:focus-visible,
 .paper-browse-add-text-option:focus-visible,
+.paper-browse-export-option:focus-visible,
 .paper-personal-retry:focus-visible {
   outline: 2px solid var(--eqb-color-action, #1f1f1d);
   outline-offset: 2px;
@@ -535,6 +538,15 @@
   white-space: nowrap;
 }
 
+/* 「导出我的批注版」按钮的 portal 槽：与左侧其它按钮同一排，也是诊断浮层
+ * 的定位锚（浮层 absolute 挂在槽下缘，不占布局高度）。 */
+.paper-browse-editing-toolbar__actions {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
 .paper-personal-paper-notice {
   display: inline-flex;
   align-items: center;
@@ -542,6 +554,79 @@
   margin: 0;
   font-size: 13px;
   color: var(--desk-muted, #60665c);
+}
+
+/* 导出诊断浮层：desk raised 面 + Floating 阴影（DESIGN.md §4），锚在导出
+ * 按钮下缘、脱离文档流——出现与关闭不改变工具条与纸张的任何位置。 */
+.paper-personal-export-diagnostics {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: max-content;
+  max-width: 360px;
+  padding: 12px 16px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
+  text-align: left;
+}
+
+.paper-personal-export-diagnostics__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.paper-personal-export-diagnostics__title {
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.paper-personal-export-diagnostics__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paper-personal-export-diagnostics__rows li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-export-diagnostics__action {
+  flex: none;
+  height: 24px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-size: 13px;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-export-diagnostics__action:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-export-diagnostics__action:focus-visible {
+  outline: 2px solid var(--eqb-color-action, #1f1f1d);
+  outline-offset: 2px;
 }
 
 .paper-personal-paper-notice .paper-personal-retry {
@@ -952,7 +1037,7 @@
 
 /* 回到原文：锚线透明度脉冲两个来回（motion-slow × 2）。 */
 .paper-personal-paper-mark.is-flash {
-  animation: paper-mark-flash var(--motion-slow, 220ms) ease-in-out 2;
+  animation: paper-mark-flash var(--motion-slow) var(--ease-in-out) 2;
 }
 
 @keyframes paper-mark-flash {
@@ -1021,7 +1106,7 @@
  * 用同一对 motion-slow 脉冲指位。 */
 .paper-personal-paper-mark.is-flash,
 .paper-personal-appendix-marker.is-flash {
-  animation: paper-mark-flash var(--motion-slow, 220ms) ease-in-out 2;
+  animation: paper-mark-flash var(--motion-slow) var(--ease-in-out) 2;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -7,6 +7,7 @@ import { PaperMarkLayer } from './PaperMarkLayer'
 import { PaperNoteLayer } from './PaperNoteLayer'
 import { PaperTextBoxLayer } from './PaperTextBoxLayer'
 import { usePaperAnchorGeometry } from './usePaperAnchorGeometry'
+import { PersonalExportControl } from './PersonalExportControl'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
 import { usePersonalPaperLayout } from './usePersonalPaperLayout'
 
@@ -59,6 +60,8 @@ export type PaperEditingViewProps = {
   onAddTextPlaced: () => void
   /** Host toolbar slot for the quiet text-box notices, outside the zoom transform. */
   noticeTarget: HTMLElement | null
+  /** Host toolbar slot for the 「导出我的批注版」 button (left button group). */
+  exportTarget: HTMLElement | null
 }
 
 type PaperCanvasStyle = CSSProperties & Record<`--${string}`, string | number>
@@ -66,7 +69,7 @@ type PaperCanvasStyle = CSSProperties & Record<`--${string}`, string | number>
 // 附页条目的排序输入：plan 条目去掉编号（编号由 orderAppendixEntries 给出）。
 type AppendixOrderInput = Omit<AppendixPlanEntry, 'number'>
 
-export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextArmed, onAddTextPlaced, noticeTarget }: PaperEditingViewProps): ReactNode {
+export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextArmed, onAddTextPlaced, noticeTarget, exportTarget }: PaperEditingViewProps): ReactNode {
   const { state, reload } = usePersonalPaperLayout({
     paperId,
     sourceRevision,
@@ -329,6 +332,18 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
         leftPx={geometry.status === 'ok' ? geometry.frames[0]?.leftPx ?? 0 : 0}
         scale={scale}
       />
+      {/* 导出入口与它的提示经 portal 挂进工具条；layout 就绪才挂（导出要带 layoutId）。 */}
+      {layout ? (
+        <PersonalExportControl
+          api={api}
+          paperId={paperId}
+          layoutId={layout.layoutId}
+          sourceRevision={layout.sourceRevision}
+          reloadLayout={reload}
+          buttonTarget={exportTarget}
+          noticeTarget={noticeTarget}
+        />
+      ) : null}
     </div>
   )
 }

@@ -1777,6 +1777,172 @@ try {
     JSON.stringify({ compared: comparedMarks, ...markDrift }))
   console.log(`export-plan alignment: cards/markers/marks max Δ ${Math.max(cardDrift.pos, markerDrift.pos, markDrift.pos).toFixed(3)}mm`)
 
+  // ---- 5d-2 export button flow -------------------------------------------------
+  // 导出前先等自动保存落定（绝不悄悄导出较旧的已保存版本），成功触发真实下
+  // 载并报出文件对应的版本；离线阻止导出；422 逐对象诊断可以「查看」跳回对象。
+  const exportPosts = []
+  page.on('request', (request) => {
+    if (request.method() === 'POST' && /\/api\/personal-paper-layers\/[^/]+\/exports$/.test(new URL(request.url()).pathname)) {
+      exportPosts.push(JSON.parse(request.postData() ?? '{}'))
+    }
+  })
+  const exportButton = page.locator('.paper-browse-export-option')
+  check('the paper view toolbar shows 导出我的批注版', await exportButton.count() === 1)
+
+  // 工具条高度与纸张首页顶部（文档坐标）在任何导出提示出现前后都必须一致。
+  const toolbarMetrics = () => page.evaluate(() => {
+    const toolbar = document.querySelector('.paper-browse-editing-toolbar')?.getBoundingClientRect()
+    const firstPage = document.querySelector('[data-paper-page-overlay]')?.getBoundingClientRect()
+    const scrolling = document.scrollingElement
+    return {
+      toolbarHeight: toolbar?.height ?? null,
+      pageTop: firstPage && scrolling ? firstPage.top + scrolling.scrollTop : null,
+    }
+  })
+  const metricsClose = (a, b) => a !== null && b !== null
+    && Math.abs(a.toolbarHeight - b.toolbarHeight) < 0.5
+    && Math.abs(a.pageTop - b.pageTop) < 1
+
+  // The undo checks deliberately left a foreign-layout box in the layer; the
+  // export refuses it by design (layout-mismatch). Remove it so the happy
+  // path below can produce a file, and reload to drop the old-layout notice.
+  await deleteObjects((await readLayer()).layer.objects.filter((object) => object.placement?.layoutId === 'old-layout-1990'))
+  await openPaperView()
+
+  // An unsaved edit is flushed first: the nudge is still inside the autosave
+  // debounce when the export starts, so the POST must carry versionAtClick + 1.
+  await page.locator('.paper-personal-paper-note[data-note-key]').first().click()
+  const versionAtClick = await storedVersion()
+  await page.keyboard.press('ArrowRight')
+  const metricsIdle = await toolbarMetrics()
+  const downloadPromise = page.waitForEvent('download', { timeout: 120_000 })
+  await exportButton.click()
+  const download = await downloadPromise
+  check('exporting fires a real download whose file name ends with 我的批注版.pdf',
+    download.suggestedFilename().endsWith('我的批注版.pdf'), download.suggestedFilename())
+  const exportBodySent = exportPosts.at(-1)
+  check('the export POST carries the flushed layerVersion, sourceRevision and layoutId',
+    exportBodySent
+    && exportBodySent.layerVersion === versionAtClick + 1
+    && exportBodySent.sourceRevision === sourceRevision
+    && exportBodySent.layoutId === layout.layoutId,
+    JSON.stringify({ sent: exportBodySent, versionAtClick }))
+  const successNotice = page.locator('.paper-personal-paper-notice:has-text("已导出第")')
+  await successNotice.waitFor({ timeout: 10_000 })
+  const successVersion = (await successNotice.textContent())?.match(/已导出第 (\d+) 版批注/)?.[1]
+  check('the success notice names the saved version',
+    successVersion != null && Number(successVersion) === await storedVersion(),
+    await successNotice.textContent())
+  check('the one-line success notice does not shift the toolbar or the paper',
+    metricsClose(metricsIdle, await toolbarMetrics()),
+    JSON.stringify({ idle: metricsIdle, withSuccess: await toolbarMetrics() }))
+
+  // An edit after the export must leave the notice without claiming currency.
+  await page.locator('.paper-personal-paper-note[data-note-key]').first().click()
+  await page.keyboard.press('ArrowRight')
+  const staleExportNotice = page.locator('.paper-personal-paper-notice:has-text("不含之后的修改")')
+  await staleExportNotice.waitFor({ timeout: 5_000 })
+  check('an edit after the export rewords the notice to an earlier version',
+    await staleExportNotice.count() === 1
+    && (await staleExportNotice.textContent()).includes(`第 ${successVersion} 版`),
+    await staleExportNotice.textContent())
+  await flushAutosave()
+
+  // Offline blocks the export before any POST (the nudge below is unsaved).
+  await context.setOffline(true)
+  await page.locator('.paper-personal-paper-note[data-note-key]').first().click()
+  await page.keyboard.press('ArrowRight')
+  const exportPostsBeforeOffline = exportPosts.length
+  await exportButton.click()
+  const offlineNotice = page.locator('.paper-personal-paper-notice:has-text("网络已断开")')
+  await offlineNotice.waitFor({ timeout: 5_000 })
+  check('offline blocks the export with a next-step notice and no POST',
+    await offlineNotice.count() === 1 && exportPosts.length === exportPostsBeforeOffline,
+    JSON.stringify({
+      noticeCount: await offlineNotice.count(),
+      noticeText: await offlineNotice.textContent(),
+      posts: exportPosts.length,
+      before: exportPostsBeforeOffline,
+    }))
+  await context.setOffline(false)
+  await flushAutosave()
+
+  // 422 diagnostics: a floating panel under the export button lists one row
+  // per object with a human reason, 查看 selects the object and scrolls it
+  // into view (vertical only), Escape closes and refocuses the button, and
+  // nothing in the toolbar row moves while the panel is open.
+  const lastPageId = layout.pages[layout.pages.length - 1].pageId
+  await seedObjects([{
+    id: 'verify-export-diag',
+    type: 'text-box',
+    document: createPersonalTextDocumentFromPlainText('导出诊断定位用文字框'),
+    placement: { kind: 'page-position', layoutId: layout.layoutId, pageId: lastPageId, xMm: 30, yMm: 40, widthMm: 60 },
+  }])
+  await openPaperView()
+  await page.route('**/api/personal-paper-layers/**/exports', (route) => route.fulfill({
+    status: 422,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      error: '批注存在未解出的问题，已拒绝导出',
+      code: 'PERSONAL_EXPORT_HAS_DIAGNOSTICS',
+      diagnostics: [{ objectId: 'verify-export-diag', code: 'anchor-unresolved' }],
+    }),
+  }))
+  await page.evaluate(() => window.scrollTo(0, 0))
+  const metricsBeforePanel = await toolbarMetrics()
+  await exportButton.click()
+  const diagnosticsPanel = page.locator('.paper-personal-export-diagnostics')
+  await diagnosticsPanel.waitFor({ timeout: 5_000 })
+  check('a 422 opens a floating panel listing one row per problem object with a human reason',
+    await diagnosticsPanel.count() === 1
+    && (await diagnosticsPanel.textContent()).includes('这些批注没有导出')
+    && (await diagnosticsPanel.textContent()).includes('文字框：找不到对应的原文位置'),
+    JSON.stringify({ count: await diagnosticsPanel.count(), text: await diagnosticsPanel.textContent() }))
+  check('the diagnostics panel never shifts the toolbar or the paper',
+    metricsClose(metricsBeforePanel, await toolbarMetrics()),
+    JSON.stringify({ before: metricsBeforePanel, withPanel: await toolbarMetrics() }))
+  await page.click('.paper-personal-export-diagnostics button:has-text("查看")')
+  await page.waitForFunction(() => document.querySelector('[data-box-key="verify-export-diag"]')?.classList.contains('is-selected'), undefined, { timeout: 5_000 })
+  await page.waitForFunction(() => (document.scrollingElement?.scrollTop ?? 0) > 0, undefined, { timeout: 5_000 })
+  check('查看 selects the object and scrolls vertically only',
+    await page.evaluate(() => document.scrollingElement?.scrollLeft ?? 0) === 0,
+    JSON.stringify(await page.evaluate(() => ({ top: document.scrollingElement?.scrollTop, left: document.scrollingElement?.scrollLeft }))))
+  await page.evaluate(() => window.scrollTo(0, 0))
+  await page.keyboard.press('Escape')
+  await page.waitForFunction(() => document.querySelectorAll('.paper-personal-export-diagnostics').length === 0, undefined, { timeout: 5_000 })
+  check('Escape closes the diagnostics panel and refocuses the export button',
+    await page.evaluate(() => document.activeElement?.classList.contains('paper-browse-export-option') ?? false))
+  await page.unroute('**/api/personal-paper-layers/**/exports')
+
+  // 409 layout mismatch: the notice names what changed and 重新加载 walks the
+  // existing layout reload path (fresh layout GET, view recovers).
+  await page.route('**/api/personal-paper-layers/**/exports', (route) => route.fulfill({
+    status: 409,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      error: '卷子或纸张版已经变化，请重新核对批注位置',
+      code: 'PERSONAL_EXPORT_LAYOUT_MISMATCH',
+      details: { currentLayoutId: layout.layoutId },
+    }),
+  }))
+  await exportButton.click()
+  const mismatchNotice = page.locator('.paper-personal-paper-notice:has-text("纸张版式已经变化")')
+  await mismatchNotice.waitFor({ timeout: 5_000 })
+  check('a 409 layout mismatch tells the teacher the paper layout changed',
+    await mismatchNotice.count() === 1, await mismatchNotice.textContent())
+  const layoutRequestsBeforeReload = layoutRequests.length
+  await page.click('.paper-personal-paper-notice button:has-text("重新加载")')
+  for (let waited = 0; layoutRequests.length === layoutRequestsBeforeReload && waited < 10_000; waited += 200) {
+    await page.waitForTimeout(200)
+  }
+  await page.waitForSelector('[data-paper-page-overlay]', { timeout: 90_000 })
+  check('重新加载 reloads the layout through the existing path',
+    layoutRequests.length > layoutRequestsBeforeReload
+    && await page.locator('.paper-personal-paper-notice:has-text("纸张版式已经变化")').count() === 0,
+    `layout requests ${layoutRequestsBeforeReload} -> ${layoutRequests.length}`)
+  await page.unroute('**/api/personal-paper-layers/**/exports')
+
+
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()
   await anonymousPage.route('**/paper-assets/**/paper-asset.json', (route) => route.fulfill({
