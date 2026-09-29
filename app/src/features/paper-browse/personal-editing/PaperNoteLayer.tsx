@@ -1,6 +1,9 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import type { PersonalObject } from '../../../../../shared/personal-paper-layer/index.mjs'
+import {
+  createPersonalMutationId,
+  type PersonalObject,
+} from '../../../../../shared/personal-paper-layer/index.mjs'
 import {
   isPersonalTextDocumentBlank,
   type PersonalTextDocumentV1,
@@ -9,9 +12,10 @@ import {
 import { PersonalTextEditor } from './PersonalTextEditor'
 import { PersonalTextView } from './PersonalTextView'
 import { TextBoxPresentationControls, type TextBoxPresentationChange } from './PaperTextBoxStrip'
-import { BookMarked, Trash } from '../../../icons'
+import { BookMarked, Copy, Trash } from '../../../icons'
 import { placeNoteNearAnchor, type NoteSlot } from './paperNotePlacement'
 import { clampPlacement, frameAtPoint, MM_TO_PX, mmToPx, pxToMm, type PaperPageFrame } from './paperPlacement'
+import { DRAG_THRESHOLD_PX, PASTE_OFFSET_MM, isEditableTarget, isMac } from './PaperTextBoxLayer'
 import type { LayerRect } from './markGeometry'
 import type { PaperAnchorGeometry } from './usePaperAnchorGeometry'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
@@ -56,6 +60,55 @@ type NoteEditing = {
   document: PersonalTextDocumentV1
 }
 
+// A card's live placement (page-internal mm) — the stored placement for
+// page-position notes, the resolved candidate for auto notes, and the
+// transient pointer position while dragging.
+type NotePlacement = { pageId: string; xMm: number; yMm: number; widthMm: number }
+
+// Nudges use 10mm steps (5mm for text boxes): note positions are coarser, the
+// card jumps between margin and content, not glyph-aligned text.
+const NUDGE_STEP_MM = 1
+const NUDGE_FAST_STEP_MM = 10
+
+// A note card never shrinks below the margin-slot minimum width.
+const NOTE_MIN_WIDTH_MM = 16
+
+// Transient pointer state: the live placement lives here (never in an op)
+// until release commits exactly one update {placement}.
+type MoveInteraction = {
+  kind: 'move'
+  pointerId: number
+  objectId: string
+  scale: number
+  startClient: { x: number; y: number }
+  grabOffsetMm: { x: number; y: number }
+  placement: NotePlacement
+  moved: boolean
+}
+type ResizeInteraction = {
+  kind: 'resize'
+  pointerId: number
+  objectId: string
+  scale: number
+  startClientX: number
+  startWidthMm: number
+  pageId: string
+  pageWidthMm: number
+  xMm: number
+  yMm: number
+  widthMm: number
+  moved: boolean
+}
+type NoteInteraction = MoveInteraction | ResizeInteraction
+
+// In-memory duplicate buffer: deliberately not the system clipboard and not
+// storage — a note only pastes back into this layer session.
+type NoteClipboard = {
+  textAnchor: AnchoredNoteObject['textAnchor']
+  document: PersonalTextDocumentV1
+  placement: NotePlacement
+}
+
 // An element carries print ink when it is an image, part of an SVG, or
 // directly holds non-blank text — text nested one level down belongs to the
 // child element, which the probe hits in the same stack anyway.
@@ -74,6 +127,18 @@ function anchorFrameOf(anchorRects: readonly LayerRect[], frames: readonly Paper
   const sorted = [...anchorRects].sort((a, b) => a.top - b.top || a.left - b.left)
   const first = sorted[0]
   return frameAtPoint(frames, first.left + 1, first.top + 1)
+}
+
+// Live placement of an interacting card: move carries the full placement,
+// resize overrides only the width.
+function interactionPlacement(interaction: NoteInteraction): NotePlacement {
+  if (interaction.kind === 'move') return interaction.placement
+  return {
+    pageId: interaction.pageId,
+    xMm: interaction.xMm,
+    yMm: interaction.yMm,
+    widthMm: interaction.widthMm,
+  }
 }
 
 // First scrollable ancestor of the overlay layer (the paper view scrolls inside
@@ -124,7 +189,12 @@ export function PaperNoteLayer({
   // first pending note as a page-position placement.
   const [placing, setPlacing] = useState(false)
   const [editing, setEditing] = useState<NoteEditing | null>(null)
+  const [interaction, setInteraction] = useState<NoteInteraction | null>(null)
   const flashTimeoutRef = useRef<number | null>(null)
+  const clipboardRef = useRef<NoteClipboard | null>(null)
+  // Consecutive nudges share one mergeKey; any other edit resets it first.
+  const nudgeMergeKeyRef = useRef<string | null>(null)
+  const nudgeSeqRef = useRef(0)
 
   const { canEdit, selectedId, setSelectedId, setPopover, apply, seal } = api
 
@@ -132,6 +202,31 @@ export function PaperNoteLayer({
   // the close guards below must not read a stale editing state.
   const editingRef = useRef<NoteEditing | null>(null)
   editingRef.current = editing
+  const interactionRef = useRef<NoteInteraction | null>(null)
+  interactionRef.current = interaction
+
+  // Synchronous mirror: pointer events can race the next render (e.g. a
+  // pointerdown right after pointerup), and the gesture guards must not read
+  // a stale interaction.
+  const setInteractionState = useCallback((next: NoteInteraction | null) => {
+    interactionRef.current = next
+    setInteraction(next)
+  }, [])
+
+  const resetNudgeRun = useCallback(() => {
+    nudgeMergeKeyRef.current = null
+  }, [])
+
+  // A new layout invalidates transient pointer state (page ids change).
+  useEffect(() => {
+    setInteractionState(null)
+    nudgeMergeKeyRef.current = null
+  }, [layoutId, setInteractionState])
+
+  // Consecutive nudges share one mergeKey; any other edit resets it first.
+  useEffect(() => {
+    nudgeMergeKeyRef.current = null
+  }, [selectedId])
 
   const frameByPageId = useMemo(
     () => new Map(frames.map((frame) => [frame.pageId, frame])),
@@ -297,6 +392,7 @@ export function PaperNoteLayer({
     const object = api.objectById.get(objectId)
     if (!object || object.type !== 'anchored-note' || !canEdit) return
     seal()
+    resetNudgeRun()
     const mergeKey = api.nextEditKey()
     const state: NoteEditing = {
       key: `note-${mergeKey}`,
@@ -306,7 +402,7 @@ export function PaperNoteLayer({
     }
     editingRef.current = state
     setEditing(state)
-  }, [api, canEdit, seal])
+  }, [api, canEdit, resetNudgeRun, seal])
 
   // Exit editing: one {document} update when the content actually changed.
   // A note emptied while editing is NOT deleted (deletion is explicit) — the
@@ -400,6 +496,197 @@ export function PaperNoteLayer({
     flashAnchor(objectId)
   }, [flashAnchor, scrollAnchorIntoView])
 
+  const layerScale = useCallback(() => {
+    const layer = layerRef.current
+    if (!layer || layer.offsetWidth === 0) return 1
+    return layer.getBoundingClientRect().width / layer.offsetWidth
+  }, [])
+
+  // Card-relative point (unscaled px + mm) from a pointer event.
+  const canvasPoint = useCallback((event: ReactPointerEvent, scale: number) => {
+    const layer = layerRef.current
+    if (!layer) return null
+    const rect = layer.getBoundingClientRect()
+    const xPx = (event.clientX - rect.left) / scale
+    const yPx = (event.clientY - rect.top) / scale
+    return { xPx, yPx, xMm: pxToMm(xPx), yMm: pxToMm(yPx) }
+  }, [])
+
+  // One op per completed gesture: drag and resize both end here. The commit
+  // always writes page-position at the current layoutId — an auto card the
+  // teacher moved by hand is user-placed from then on (its rendered width is
+  // kept, so a margin card does not jump back to 56mm).
+  const commitPlacement = useCallback((objectId: string, placement: NotePlacement) => {
+    const object = api.objectById.get(objectId)
+    if (!object || object.type !== 'anchored-note') return
+    const stored = object.placement.kind === 'page-position' ? object.placement : null
+    if (
+      stored
+      && stored.pageId === placement.pageId
+      && stored.xMm === placement.xMm
+      && stored.yMm === placement.yMm
+      && stored.widthMm === placement.widthMm
+    ) return
+    seal()
+    resetNudgeRun()
+    apply([{ op: 'update', objectId, patch: { placement: { kind: 'page-position', layoutId, ...placement } } }])
+  }, [api.objectById, apply, layoutId, resetNudgeRun, seal])
+
+  const startMove = useCallback((event: ReactPointerEvent<HTMLDivElement>, objectId: string, placement: NotePlacement) => {
+    if (editingRef.current || interactionRef.current || event.button !== 0) return
+    if (!canEdit || selectedId !== objectId) return
+    // Strip and resize handle clicks belong to their own controls.
+    if (event.target instanceof Element && event.target.closest('.paper-personal-text-box__strip, .paper-personal-text-box__resize-handle')) return
+    const scale = layerScale()
+    const point = canvasPoint(event, scale)
+    if (!point) return
+    event.preventDefault()
+    event.currentTarget.setPointerCapture(event.pointerId)
+    setInteractionState({
+      kind: 'move',
+      pointerId: event.pointerId,
+      objectId,
+      scale,
+      startClient: { x: event.clientX, y: event.clientY },
+      grabOffsetMm: { x: point.xMm - placement.xMm, y: point.yMm - placement.yMm },
+      placement: { ...placement },
+      moved: false,
+    })
+  }, [canEdit, canvasPoint, layerScale, selectedId, setInteractionState])
+
+  const startResize = useCallback((event: ReactPointerEvent<HTMLDivElement>, objectId: string, placement: NotePlacement) => {
+    event.stopPropagation()
+    if (editingRef.current || interactionRef.current || event.button !== 0) return
+    if (!canEdit || selectedId !== objectId) return
+    const scale = layerScale()
+    event.preventDefault()
+    event.currentTarget.setPointerCapture(event.pointerId)
+    setInteractionState({
+      kind: 'resize',
+      pointerId: event.pointerId,
+      objectId,
+      scale,
+      startClientX: event.clientX,
+      startWidthMm: placement.widthMm,
+      pageId: placement.pageId,
+      pageWidthMm: frameByPageId.get(placement.pageId)?.widthMm ?? 0,
+      xMm: placement.xMm,
+      yMm: placement.yMm,
+      widthMm: placement.widthMm,
+      moved: false,
+    })
+  }, [canEdit, frameByPageId, layerScale, selectedId, setInteractionState])
+
+  const updateInteraction = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const current = interactionRef.current
+    if (!current || current.pointerId !== event.pointerId) return
+    if (current.kind === 'move') {
+      const point = canvasPoint(event, current.scale)
+      if (point) {
+        // Over a page: follow the pointer and re-home to that page. Between
+        // pages: keep the last valid transient position. No ink probe here —
+        // the teacher may deliberately place a note over the body text.
+        const frame = frameAtPoint(frames, point.xPx, point.yPx)
+        if (frame) {
+          const next = clampPlacement(
+            point.xMm - current.grabOffsetMm.x,
+            point.yMm - current.grabOffsetMm.y,
+            current.placement.widthMm,
+            frame,
+          )
+          current.placement = { pageId: frame.pageId, ...next }
+        }
+      }
+      const moved = current.moved
+        || Math.hypot(event.clientX - current.startClient.x, event.clientY - current.startClient.y) >= DRAG_THRESHOLD_PX
+      setInteractionState({ ...current, placement: current.placement, moved })
+    } else {
+      const deltaMm = pxToMm((event.clientX - current.startClientX) / current.scale)
+      current.widthMm = Math.min(
+        current.pageWidthMm - current.xMm,
+        Math.max(NOTE_MIN_WIDTH_MM, current.startWidthMm + deltaMm),
+      )
+      const moved = current.moved || Math.abs(event.clientX - current.startClientX) >= DRAG_THRESHOLD_PX
+      setInteractionState({ ...current, widthMm: current.widthMm, moved })
+    }
+  }, [canvasPoint, frames, setInteractionState])
+
+  const finishInteraction = useCallback(() => {
+    const current = interactionRef.current
+    if (!current) return
+    setInteractionState(null)
+    if (!current.moved) return
+    if (current.kind === 'move') {
+      commitPlacement(current.objectId, current.placement)
+    } else {
+      commitPlacement(current.objectId, {
+        pageId: current.pageId,
+        xMm: current.xMm,
+        yMm: current.yMm,
+        widthMm: current.widthMm,
+      })
+    }
+  }, [commitPlacement, setInteractionState])
+
+  const applyNudge = useCallback((dxMm: number, dyMm: number) => {
+    const note = placed.find((item) => item.object.id === selectedId)
+    if (!note || editingRef.current || interactionRef.current) return
+    const next = clampPlacement(note.xMm + dxMm, note.yMm + dyMm, note.widthMm, note.frame)
+    if (next.xMm === note.xMm && next.yMm === note.yMm) return
+    if (!nudgeMergeKeyRef.current) {
+      seal()
+      nudgeSeqRef.current += 1
+      nudgeMergeKeyRef.current = `note-nudge-${nudgeSeqRef.current}`
+    }
+    apply(
+      [{ op: 'update', objectId: note.object.id, patch: { placement: { kind: 'page-position', layoutId, pageId: note.frame.pageId, ...next } } }],
+      { mergeKey: nudgeMergeKeyRef.current },
+    )
+  }, [apply, layoutId, placed, seal, selectedId])
+
+  const copySelectedNote = useCallback(() => {
+    const note = placed.find((item) => item.object.id === selectedId)
+    if (!note) return
+    clipboardRef.current = {
+      textAnchor: structuredClone(note.object.textAnchor),
+      document: structuredClone(note.object.document),
+      placement: { pageId: note.frame.pageId, xMm: note.xMm, yMm: note.yMm, widthMm: note.widthMm },
+    }
+  }, [placed, selectedId])
+
+  const pasteCopiedNote = useCallback(() => {
+    const clipboard = clipboardRef.current
+    if (!clipboard || !canEdit) return
+    const frame = frameByPageId.get(clipboard.placement.pageId)
+    if (!frame) return
+    const next = clampPlacement(
+      clipboard.placement.xMm + PASTE_OFFSET_MM,
+      clipboard.placement.yMm + PASTE_OFFSET_MM,
+      clipboard.placement.widthMm,
+      frame,
+    )
+    const id = createPersonalMutationId()
+    seal()
+    resetNudgeRun()
+    const result = apply([{
+      op: 'create',
+      object: {
+        id,
+        type: 'anchored-note',
+        textAnchor: structuredClone(clipboard.textAnchor),
+        document: structuredClone(clipboard.document),
+        placement: { kind: 'page-position', layoutId, pageId: frame.pageId, ...next },
+      },
+    }])
+    if (result.ok) setSelectedId(id)
+  }, [apply, canEdit, frameByPageId, layoutId, resetNudgeRun, seal, setSelectedId])
+
+  // 复制旁注 = copy + paste immediately: one duplicate down-right of the original.
+  const duplicateSelectedNote = useCallback(() => {
+    copySelectedNote()
+    pasteCopiedNote()
+  }, [copySelectedNote, pasteCopiedNote])
+
   const commitFirstPending = useCallback((frame: PaperPageFrame, xMm: number, yMm: number) => {
     const target = pending[0]
     if (!target || !canEdit) return
@@ -441,35 +728,81 @@ export function PaperNoteLayer({
     if (placing && pending.length === 0) setPlacing(false)
   }, [placing, pending.length])
 
+  // One window listener for everything the layer owns; bails early whenever
+  // the state does not apply (editing, editable focus, no note selection). The
+  // text-box layer listens on the same window: this layer mounts first so its
+  // handler runs first, and it only preventDefaults when the selection is a
+  // note — a text-box selection falls through to that layer untouched.
   useEffect(() => {
-    if (!placing) return undefined
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
+      if (interactionRef.current) {
+        if (event.key === 'Escape') {
+          event.preventDefault()
+          setInteractionState(null)
+        }
+        return
+      }
+      if (event.key === 'Escape' && placing) {
+        event.preventDefault()
+        setPlacing(false)
+        return
+      }
+      if (event.defaultPrevented || event.isComposing || event.keyCode === 229) return
+      if (editingRef.current || isEditableTarget(event.target) || !canEdit) return
+      const selected = selectedId ? api.objectById.get(selectedId) : null
+      if (!selected || selected.type !== 'anchored-note') return
+      const mod = isMac() ? event.metaKey : event.ctrlKey
+      const key = event.key.toLowerCase()
+      if (mod && !event.altKey && !event.shiftKey && key === 'c') {
+        // A real text selection elsewhere keeps its native copy behavior.
+        const selection = window.getSelection()
+        if (selection && !selection.isCollapsed) return
+        event.preventDefault()
+        copySelectedNote()
+        return
+      }
+      if (mod && !event.altKey && !event.shiftKey && key === 'v') {
+        event.preventDefault()
+        pasteCopiedNote()
+        return
+      }
+      if (mod || event.altKey) return
+      if (event.key === 'ArrowLeft') applyNudge(event.shiftKey ? -NUDGE_FAST_STEP_MM : -NUDGE_STEP_MM, 0)
+      else if (event.key === 'ArrowRight') applyNudge(event.shiftKey ? NUDGE_FAST_STEP_MM : NUDGE_STEP_MM, 0)
+      else if (event.key === 'ArrowUp') applyNudge(0, event.shiftKey ? -NUDGE_FAST_STEP_MM : -NUDGE_STEP_MM)
+      else if (event.key === 'ArrowDown') applyNudge(0, event.shiftKey ? NUDGE_FAST_STEP_MM : NUDGE_STEP_MM)
+      else return
       event.preventDefault()
-      setPlacing(false)
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [placing])
+  }, [api.objectById, applyNudge, canEdit, copySelectedNote, pasteCopiedNote, placing, selectedId, setInteractionState])
 
   const renderNote = (note: PlacedNote): ReactNode => {
-    const { object, frame, xMm, yMm, widthMm, slot, auto } = note
+    const { object, slot, auto } = note
+    // Live placement during a gesture: move carries the full placement, resize
+    // overrides only the width; otherwise the resting placement.
+    const cardInteraction = interaction?.objectId === object.id ? interaction : null
+    const live: NotePlacement = cardInteraction
+      ? interactionPlacement(cardInteraction)
+      : { pageId: note.frame.pageId, xMm: note.xMm, yMm: note.yMm, widthMm: note.widthMm }
+    const liveFrame = cardInteraction ? frameByPageId.get(live.pageId) ?? note.frame : note.frame
     const editingState = editing?.objectId === object.id ? editing : null
     const editingNow = editingState != null
     const selected = selectedId === object.id && !editingNow
-    const showStrip = selected && canEdit
+    const showStrip = selected && canEdit && !cardInteraction
     // A right-side margin card's strip and editing toolbar would run past the
     // page's right edge anchored at the card's left edge — anchor them at the
     // right edge instead.
-    const rightSide = slot === 'margin' && xMm + widthMm / 2 > frame.widthMm / 2
+    const rightSide = slot === 'margin' && note.xMm + note.widthMm / 2 > note.frame.widthMm / 2
     return (
       <div
         key={object.id}
-        className={`paper-personal-paper-note${selected ? ' is-selected' : ''}${editingNow ? ' is-editing' : ''}${rightSide ? ' is-strip-right' : ''}`}
+        className={`paper-personal-paper-note${selected ? ' is-selected' : ''}${editingNow ? ' is-editing' : ''}${rightSide ? ' is-strip-right' : ''}${cardInteraction ? ' is-dragging' : ''}`}
         style={{
-          left: frame.leftPx + mmToPx(xMm),
-          top: frame.topPx + mmToPx(yMm),
-          width: mmToPx(widthMm),
+          left: liveFrame.leftPx + mmToPx(live.xMm),
+          top: liveFrame.topPx + mmToPx(live.yMm),
+          width: mmToPx(live.widthMm),
         }}
         tabIndex={0}
         aria-label="旁注"
@@ -500,6 +833,24 @@ export function PaperNoteLayer({
           const next = event.relatedTarget
           if (next instanceof Node && event.currentTarget.contains(next)) return
           closeEditing(editingState)
+        }}
+        onPointerDown={(event) => {
+          if (editingState) return
+          startMove(event, object.id, live)
+        }}
+        onPointerMove={(event) => {
+          if (cardInteraction) updateInteraction(event)
+        }}
+        onPointerUp={() => {
+          if (cardInteraction) finishInteraction()
+        }}
+        onPointerCancel={() => {
+          if (cardInteraction) setInteractionState(null)
+        }}
+        onLostPointerCapture={() => {
+          // Capture lost without pointerup (rare): commit what moved so far;
+          // no-op when the gesture already finished or was cancelled.
+          finishInteraction()
         }}
       >
         {editingState ? (
@@ -549,11 +900,26 @@ export function PaperNoteLayer({
                 </button>
                 <button
                   type="button"
+                  className="paper-personal-text-box__strip-action"
+                  aria-label="复制旁注"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    setPopover(null)
+                    resetNudgeRun()
+                    duplicateSelectedNote()
+                  }}
+                >
+                  <Copy size={16} />
+                  复制
+                </button>
+                <button
+                  type="button"
                   className="paper-personal-text-box__strip-action paper-personal-text-box__strip-action--danger"
                   aria-label="删除旁注"
                   onClick={(event) => {
                     event.stopPropagation()
                     setPopover(null)
+                    resetNudgeRun()
                     api.deleteObject(object.id)
                   }}
                 >
@@ -561,6 +927,14 @@ export function PaperNoteLayer({
                   删除
                 </button>
               </div>
+            ) : null}
+            {/* The handle stays mounted through its own gesture: unmounting a
+             * pointer-captured element mid-drag loses the capture. */}
+            {selected && canEdit ? (
+              <div
+                className="paper-personal-text-box__resize-handle"
+                onPointerDown={(event) => startResize(event, object.id, live)}
+              />
             ) : null}
           </>
         )}

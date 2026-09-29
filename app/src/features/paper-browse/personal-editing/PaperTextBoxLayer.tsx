@@ -28,10 +28,12 @@ import './personalAnnotations.css'
 const DEFAULT_WIDTH_MM = 60
 
 // Pointer movement below this screen distance is a click, not a drag.
-const DRAG_THRESHOLD_PX = 3
+// Exported for the note card layer's identical drag gesture.
+export const DRAG_THRESHOLD_PX = 3
 
 // Copy/paste duplicates offset by this much so the copy is visibly separate.
-const PASTE_OFFSET_MM = 5
+// Exported for the note card layer's identical duplicate flow.
+export const PASTE_OFFSET_MM = 5
 
 // Page-box checks compare server-measured mm against iframe-rendered px; the
 // same 2px geometry tolerance as the layout check, in mm, absorbs that drift
@@ -110,13 +112,15 @@ type BoxClipboard = {
   placement: BoxPlacement
 }
 
+// Shared with the note card layer's window keydown handling (same guard
+// semantics, no behavior of its own here).
 const EDITABLE_SELECTOR = 'input, textarea, select, [contenteditable="true"], [contenteditable=""]'
 
-function isEditableTarget(target: EventTarget | null) {
+export function isEditableTarget(target: EventTarget | null) {
   return target instanceof Element && Boolean(target.closest(EDITABLE_SELECTOR))
 }
 
-function isMac() {
+export function isMac() {
   return typeof navigator !== 'undefined' && /Mac|iPhone|iPad/u.test(navigator.platform)
 }
 
