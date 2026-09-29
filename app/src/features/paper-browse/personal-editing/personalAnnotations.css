@@ -388,6 +388,13 @@
   padding: 16px 24px 0;
 }
 
+.paper-browse-editing-toolbar__left {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
 .paper-browse-view-switch,
 .paper-browse-zoom-controls {
   display: inline-flex;
@@ -395,8 +402,12 @@
   gap: 8px;
 }
 
+/* 「添加文字」开关与缩放档位同一颗按钮的观感：样式走同一组选择器，类名
+ * 分开——verify-personal-paper-view-browser 数 .paper-browse-zoom-option
+ * 固定 5 颗，不能混入工具开关。 */
 .paper-browse-view-switch__option,
-.paper-browse-zoom-option {
+.paper-browse-zoom-option,
+.paper-browse-add-text-option {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -412,7 +423,8 @@
 }
 
 .paper-browse-view-switch__option:hover:not([aria-pressed='true']),
-.paper-browse-zoom-option:hover:not([aria-pressed='true']) {
+.paper-browse-zoom-option:hover:not([aria-pressed='true']),
+.paper-browse-add-text-option:hover:not([aria-pressed='true']):not([disabled]) {
   background: var(--desk-hover, #e5eae1);
   color: var(--desk-ink, #191d18);
 }
@@ -420,19 +432,22 @@
 /* Explicit-Cascade: 选中态墨底白字压过 hover 浅底——同权 hover 规则在
  * 前面，选中规则靠后取胜；墨底悬停变浅由下一条承担。 */
 .paper-browse-view-switch__option--active,
-.paper-browse-zoom-option[aria-pressed='true'] {
+.paper-browse-zoom-option[aria-pressed='true'],
+.paper-browse-add-text-option[aria-pressed='true'] {
   background: var(--action, #1f1f1d);
   color: #fff;
 }
 
 .paper-browse-view-switch__option--active:hover,
-.paper-browse-zoom-option[aria-pressed='true']:hover {
+.paper-browse-zoom-option[aria-pressed='true']:hover,
+.paper-browse-add-text-option[aria-pressed='true']:hover {
   background: var(--action-hover, #3a3a37);
   color: #fff;
 }
 
 .paper-browse-view-switch__option:focus-visible,
 .paper-browse-zoom-option:focus-visible,
+.paper-browse-add-text-option:focus-visible,
 .paper-personal-retry:focus-visible {
   outline: 2px solid var(--eqb-color-action, #1f1f1d);
   outline-offset: 2px;
@@ -505,3 +520,190 @@
 .paper-personal-paper-page-overlay {
   position: absolute;
 }
+
+/* 纸张视图文字框（#489 step A）：位置由层组件按 mm 换算成 px，高度随内容；
+ * 透明无底无边，直接浮在纸面上。点击布点只在 armed 时接管（hit 面），其余
+ * 时候点击穿透到 iframe。 */
+.paper-personal-text-box-layer {
+  --personal-ink: #1f1f1d;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paper-personal-text-box {
+  position: absolute;
+  z-index: 1;
+  pointer-events: auto;
+  background: transparent;
+  border: 0;
+}
+
+.paper-personal-text-box:focus-visible,
+.paper-personal-text-box.is-selected {
+  outline: 1px solid var(--personal-ink);
+  outline-offset: 2px;
+}
+
+/* Explicit-Cascade: 编辑中的框压过其余框（工具条浮出纸面），因编辑器工具条
+ * 可能盖到相邻框，须保证自己在最上层。 */
+.paper-personal-text-box.is-editing {
+  z-index: 2;
+}
+
+/* armed 时的整页点击面：放在框的下一层，点空白处布点，点框仍命中框。 */
+.paper-personal-text-box-hit {
+  position: absolute;
+  z-index: 0;
+}
+
+/* Unarmed hit surfaces exist only while a box is selected or edited: the
+ * paper iframe runs without scripts and swallows clicks, so this is what lets
+ * a click on blank paper deselect. */
+.paper-personal-text-box-hit {
+  pointer-events: auto;
+}
+
+.paper-personal-text-box-layer.is-armed .paper-personal-text-box-hit {
+  cursor: text;
+}
+
+/* 选中框可整只拖动；拖动中禁止正文被顺手选中。 */
+.paper-personal-text-box.is-selected:not(.is-editing) {
+  cursor: move;
+}
+
+.paper-personal-text-box.is-dragging {
+  user-select: none;
+}
+
+/* 编辑中：工具条浮出框顶（--desk-raised 面板），不再把正文往下顶——
+ * 编辑态与静止态文字逐像素同位。 */
+.paper-personal-text-box .eqb-personal-text--editor {
+  /* Explicit-Cascade: 本条压过 personalText.css 的编辑器列间距（gap: 4px），
+   * 因工具条改为绝对定位浮出框外，列间距会把正文下推 1px 以上。 */
+  gap: 0;
+}
+
+.paper-personal-text-box .eqb-personal-text__tools,
+.paper-personal-text-box__strip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  z-index: 3;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  /* UI chrome, not paper: cancel the canvas zoom so controls stay 13px/28px at every zoom level. */
+  transform: scale(calc(1 / var(--paper-zoom, 1)));
+  transform-origin: left bottom;
+}
+
+.paper-personal-text-box .eqb-personal-text__tools > *,
+.paper-personal-text-box__strip > * {
+  flex-shrink: 0;
+}
+
+/* 选中态操作条：字体、字号、复制、删除，与编辑工具条同一浮层语言。 */
+.paper-personal-text-box__strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--desk-ink, #191d18);
+  white-space: nowrap;
+}
+
+.paper-personal-text-box__font-select {
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 8px;
+  background: var(--desk-surface, #fafcf8);
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.paper-personal-text-box__sizes {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.paper-personal-text-box__size-option {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-text-box__size-option:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-text-box__size-option[aria-pressed='true'] {
+  background: var(--action, #1f1f1d);
+  color: #fff;
+}
+
+.paper-personal-text-box__size-option[aria-pressed='true']:hover {
+  background: var(--action-hover, #3a3a37);
+  color: #fff;
+}
+
+.paper-personal-text-box__strip-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-text-box__strip-action:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-text-box__font-select:focus-visible,
+.paper-personal-text-box__size-option:focus-visible,
+.paper-personal-text-box__strip-action:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* 宽度手柄：右缘垂直居中的 8px 圆点，拖动改 widthMm。 */
+.paper-personal-text-box__resize-handle {
+  position: absolute;
+  top: 50%;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--personal-ink, #1f1f1d);
+  border-radius: 50%;
+  background: #fff;
+  transform: translateY(-50%) scale(calc(1 / var(--paper-zoom, 1)));
+  cursor: ew-resize;
+}
+

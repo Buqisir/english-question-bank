@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { MM_TO_PX, type PaperPageFrame } from './paperPlacement'
+import { PaperTextBoxLayer } from './PaperTextBoxLayer'
+import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
 import { usePersonalPaperLayout } from './usePersonalPaperLayout'
 
-// Layout pages are measured server-side in mm; the iframe renders them at
-// CSS 96dpi, so every mm value converts with this factor (page box checks and
-// the per-page overlay mount points below share it).
-const MM_TO_PX = 96 / 25.4
 // 版式核对容差：Paged.js 的 mm→px 取整与服务器测量的两位小数舍入，累计
 // 不应超过 2px。超过即视为渲染结果与批注基准不一致，宁可报错不将错就错。
 const GEOMETRY_TOLERANCE_PX = 2
@@ -34,17 +33,9 @@ function injectScreenSheetStyle(paginatedHtml: string): string {
     : `${paginatedHtml}${PAPER_SHEET_SCREEN_STYLE}`
 }
 
-type PageFrame = {
-  pageId: string
-  leftPx: number
-  topPx: number
-  widthMm: number
-  heightMm: number
-}
-
 type GeometryState =
   | { status: 'pending' }
-  | { status: 'ok'; frames: PageFrame[]; contentWidthPx: number; contentHeightPx: number }
+  | { status: 'ok'; frames: PaperPageFrame[]; contentWidthPx: number; contentHeightPx: number }
   | { status: 'failed' }
 
 export type PaperEditingViewProps = {
@@ -53,11 +44,16 @@ export type PaperEditingViewProps = {
   sourceRevision: string | null
   /** 'fit' or a fixed factor. View state only — never persisted. */
   zoom: number | 'fit'
+  /** Host's personal-layer api; the text-box layer reads objects and applies edits through it. */
+  api: PersonalAnnotationsApi
+  /** 「添加文字」armed state: the next click on a page places a new text box. */
+  addTextArmed: boolean
+  onAddTextPlaced: () => void
 }
 
 type PaperCanvasStyle = CSSProperties & Record<`--${string}`, string | number>
 
-export function PaperEditingView({ paperId, sourceRevision, zoom }: PaperEditingViewProps): ReactNode {
+export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextArmed, onAddTextPlaced }: PaperEditingViewProps): ReactNode {
   const { state, reload } = usePersonalPaperLayout({
     paperId,
     sourceRevision,
@@ -90,7 +86,7 @@ export function PaperEditingView({ paperId, sourceRevision, zoom }: PaperEditing
     if (!doc || !win) return false
     const rendered = [...doc.querySelectorAll('.pagedjs_page')]
     if (rendered.length !== layout.pages.length) return false
-    const frames: PageFrame[] = []
+    const frames: PaperPageFrame[] = []
     for (const [index, element] of rendered.entries()) {
       const meta = layout.pages[index]
       const box = element.getBoundingClientRect()
@@ -192,7 +188,8 @@ export function PaperEditingView({ paperId, sourceRevision, zoom }: PaperEditing
                 // 缩放只发生在这一层：iframe 恒按 100% 布局宽度渲染，
                 // 绝不因缩放重新排版。
                 transform: `scale(${scale})`,
-              } satisfies PaperCanvasStyle
+                '--paper-zoom': scale,
+              } as PaperCanvasStyle
             }
           >
             {/*
@@ -210,8 +207,15 @@ export function PaperEditingView({ paperId, sourceRevision, zoom }: PaperEditing
               style={{ width: contentWidthPx, height: contentHeightPx }}
               onLoad={handleIframeLoad}
             />
-            {geometry.status === 'ok' && (
+            {layout && geometry.status === 'ok' && (
               <div className="paper-personal-paper-overlays">
+                <PaperTextBoxLayer
+                  api={api}
+                  frames={geometry.frames}
+                  layoutId={layout.layoutId}
+                  armed={addTextArmed && api.canEdit}
+                  onPlaced={onAddTextPlaced}
+                />
                 {geometry.frames.map((frame) => (
                   <div
                     key={frame.pageId}

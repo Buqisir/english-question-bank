@@ -57,7 +57,7 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { BoardList, BookOpen, Paper, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
+import { BoardList, BookOpen, Paper, PaperDownload, Pencil, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
@@ -785,6 +785,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return new URLSearchParams(window.location.search).get('paperView') === 'paper'
   })
   const [paperEditingZoom, setPaperEditingZoom] = useState<number | 'fit'>('fit')
+  // #489 纸张视图「添加文字」：armed 时下一次页面点击布一个文字框草稿。
+  const [addTextArmed, setAddTextArmed] = useState(false)
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
   const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
     Record<string, LectureAnalysisEntry>
@@ -820,6 +822,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // 纸张视图实际可见性：state 与资格同时成立——资格被撤（切账号/评审历史
   // 版本）时渲染层直接回落阅读视图，不需要额外 effect 回写 state。
   const paperViewActive = paperEditingOpen && personalEntryAvailable
+  // 「添加文字」布点随 Escape 退出；离开纸张视图一并复位。焦点在文字框编辑
+  // 器内时，编辑器的 stopPropagation 挡住 window 监听，Escape 只关闭编辑器。
+  useEffect(() => {
+    if (!paperViewActive) {
+      setAddTextArmed(false)
+      return undefined
+    }
+    if (!addTextArmed) return undefined
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && !event.isComposing) setAddTextArmed(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [addTextArmed, paperViewActive])
   const paperSelection = usePaperSelectionTranslation({
     paperId,
     consumption: canonicalConsumption,
@@ -4148,28 +4164,40 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
       {paperViewActive && (
         <div className="paper-browse-editing-toolbar">
-          <div className="paper-browse-view-switch" role="group" aria-label="视图切换">
+          <div className="paper-browse-editing-toolbar__left">
+            <div className="paper-browse-view-switch" role="group" aria-label="视图切换">
+              <button
+                type="button"
+                className={`paper-browse-view-switch__option${
+                  paperViewActive ? '' : ' paper-browse-view-switch__option--active'
+                }`}
+                aria-pressed={!paperViewActive}
+                onClick={() => setPaperView(false)}
+              >
+                <BookOpen size={16} aria-hidden="true" />
+                阅读
+              </button>
+              <button
+                type="button"
+                className={`paper-browse-view-switch__option${
+                  paperViewActive ? ' paper-browse-view-switch__option--active' : ''
+                }`}
+                aria-pressed={paperViewActive}
+                onClick={() => setPaperView(true)}
+              >
+                <Paper size={16} aria-hidden="true" />
+                纸张
+              </button>
+            </div>
             <button
               type="button"
-              className={`paper-browse-view-switch__option${
-                paperViewActive ? '' : ' paper-browse-view-switch__option--active'
-              }`}
-              aria-pressed={!paperViewActive}
-              onClick={() => setPaperView(false)}
+              className="paper-browse-add-text-option"
+              aria-pressed={addTextArmed}
+              disabled={!personalAnnotations.canEdit}
+              onClick={() => setAddTextArmed((value) => !value)}
             >
-              <BookOpen size={16} aria-hidden="true" />
-              阅读
-            </button>
-            <button
-              type="button"
-              className={`paper-browse-view-switch__option${
-                paperViewActive ? ' paper-browse-view-switch__option--active' : ''
-              }`}
-              aria-pressed={paperViewActive}
-              onClick={() => setPaperView(true)}
-            >
-              <Paper size={16} aria-hidden="true" />
-              纸张
+              <Pencil size={16} aria-hidden="true" />
+              添加文字
             </button>
           </div>
           <div className="paper-browse-zoom-controls" role="group" aria-label="缩放">
@@ -4271,12 +4299,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             <PersonalAnnotationLayer api={personalAnnotations} hostRef={scrollerRef} />
           )}
         </div>
-        {/* #489 4b-1: 纸张编辑视图骨架 —— 只渲染与加载；批注编辑是后续子任务。 */}
+        {/* #489 4b-1: 纸张编辑视图 —— 加载分页纸张并承载文字框批注层。 */}
         {paperViewActive && (
           <PaperEditingView
             paperId={paperId}
             sourceRevision={personalAnnotations.source?.sourceRevision ?? null}
             zoom={paperEditingZoom}
+            api={personalAnnotations}
+            addTextArmed={addTextArmed}
+            onAddTextPlaced={() => setAddTextArmed(false)}
           />
         )}
         {lectureOpen && !paperViewActive && (

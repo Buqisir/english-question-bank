@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { EditorContent, useEditor, useEditorState, type Editor } from '@tiptap/react'
 import { Fragment, Slice } from '@tiptap/pm/model'
 import StarterKit from '@tiptap/starter-kit'
@@ -22,6 +22,8 @@ type PersonalTextEditorProps = {
   autoFocus?: boolean
   onChange: (document: PersonalTextDocumentV1) => void
   onInvalid?: (errors: PersonalTextValidationError[]) => void
+  /** Extra controls rendered at the end of the formatting toolbar. */
+  toolbarExtra?: ReactNode
 }
 
 function contentKey(content: PersonalTextContent) {
@@ -44,6 +46,7 @@ export function PersonalTextEditor({
   autoFocus = false,
   onChange,
   onInvalid,
+  toolbarExtra,
 }: PersonalTextEditorProps) {
   const valueRef = useRef(value)
   const onChangeRef = useRef(onChange)
@@ -167,6 +170,7 @@ export function PersonalTextEditor({
               </button>
             )
           })}
+          {toolbarExtra}
         </div>
       ) : null}
       <EditorContent editor={editor} />
