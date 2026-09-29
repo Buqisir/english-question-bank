@@ -849,6 +849,54 @@ try {
   check('no unplaced-mark notice for mappable anchors',
     await page.locator('.paper-personal-paper-notice:has-text("找不到原文")').count() === 0)
 
+  // ---- paper marks open the shared popover (#489 4c-2) -----------------------------
+  // The mark rects live in the parent-document overlay, so a real mouse click
+  // on the first fragment's center must reach the div itself (pointer-events
+  // re-enabled per fragment) and open the same popover the reading view uses.
+  const clickMarkCenter = async (selector) => {
+    const mark = page.locator(selector).first()
+    await mark.scrollIntoViewIfNeeded()
+    const box = await mark.boundingBox()
+    if (!box) throw new Error(`mark not visible: ${selector}`)
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2)
+  }
+
+  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--highlight')
+  await page.waitForSelector('.paper-personal-popover', { timeout: 5_000 })
+  check('clicking a paper highlight opens its popover',
+    await page.locator('.paper-personal-popover').count() === 1
+    && await page.locator('.paper-personal-popover .paper-personal-swatch[aria-label="改成黄色"]').count() === 1)
+  await page.click('.paper-personal-popover .paper-personal-swatch[aria-label="改成绿色"]')
+  await page.waitForFunction(
+    () => {
+      const marks = [...document.querySelectorAll('.paper-personal-paper-mark.paper-personal-mark--highlight')]
+      return marks.length >= 1 && marks.every((node) => node.dataset.color === 'green')
+    },
+    undefined,
+    { timeout: 5_000 },
+  )
+  check('the popover recolors the paper mark',
+    await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-color="green"]').count() >= 1)
+  await flushAutosave()
+
+  const toolbarBox = await page.locator('.paper-browse-editing-toolbar').boundingBox()
+  await page.mouse.click(toolbarBox.x + 4, toolbarBox.y + toolbarBox.height / 2)
+  await page.waitForFunction(() => document.querySelectorAll('.paper-personal-popover').length === 0, undefined, { timeout: 5_000 })
+  check('clicking outside closes the popover',
+    await page.locator('.paper-personal-popover').count() === 0)
+
+  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--underline')
+  await page.waitForSelector('.paper-personal-popover', { timeout: 5_000 })
+  await page.click('.paper-personal-popover button:has-text("删除")')
+  await page.waitForFunction(
+    () => document.querySelectorAll('.paper-personal-paper-mark.paper-personal-mark--underline').length === 0,
+    undefined,
+    { timeout: 5_000 },
+  )
+  check('deleting from the popover removes the paper mark',
+    await page.locator('.paper-personal-paper-mark.paper-personal-mark--underline').count() === 0)
+  await flushAutosave()
+
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()
   await anonymousPage.route('**/paper-assets/**/paper-asset.json', (route) => route.fulfill({

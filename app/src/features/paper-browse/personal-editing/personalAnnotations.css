@@ -1,8 +1,10 @@
 /* Personal annotation layer (#489): the teacher's marks on the reading view.
  * Mark colors are this feature's local tokens (spec §3.2), not chrome accents.
- * One token home covers both mark containers: reading view and paper view. */
+ * One token home covers every surface the marks show on: the reading layer,
+ * the paper-view layer, and the popover (portaled to body, outside both). */
 .paper-personal-layer,
-.paper-personal-paper-marks {
+.paper-personal-paper-marks,
+.paper-personal-popover {
   --personal-highlight-yellow: #f9e08a;
   --personal-highlight-green: #c9e7b8;
   --personal-highlight-blue: #bcd9f2;
@@ -49,6 +51,9 @@
 .paper-personal-paper-marks {
   position: absolute;
   inset: 0;
+  /* 容器关闭指针（4c-1 静止层）。pointer-events 可继承，子元素拿到的也是
+   * none——可交互标注（4c-2）在 PaperMarkLayer 里对每个 rect 内联
+   * pointer-events:auto 重新打开，无需此处再写子元素规则。 */
   pointer-events: none;
 }
 
@@ -177,6 +182,10 @@
   flex-direction: column;
   gap: 4px;
   min-width: 180px;
+  /* Shrink-to-fit stopped at min-width and squeezed the type label onto two
+   * lines; the popover sizes to its widest row instead. */
+  width: max-content;
+  max-width: min(320px, calc(100vw - 24px));
   padding: 8px;
   border-radius: 12px;
   background: var(--desk-raised, #fafdf7);
@@ -234,6 +243,7 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--desk-muted, #60665c);
+  white-space: nowrap;
 }
 
 .paper-personal-popover__swatches {
@@ -244,6 +254,7 @@
 .paper-personal-swatch {
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
   padding: 0;
   border: 1px solid rgba(30, 30, 28, 0.12);
   border-radius: 50%;
