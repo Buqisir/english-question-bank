@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { defineRoute, readJsonRouteBody } from '../router/index.mjs'
 import { assertJsonContentType, assertSameOrigin } from '../paper-translation/csrf.mjs'
 import { resolveDataUserId } from '../auth/auth.mjs'
+import { sendUserSpacePdf } from '../my-space/mySpace.mjs'
 import { PERSONAL_LAYER_MAX_REQUEST_BYTES } from '../../shared/personal-paper-layer/index.mjs'
 
 function send(response, status, body, headers = {}) {
@@ -26,6 +27,9 @@ function sendError(response, error, requestId) {
     error: message,
     code: tooLarge ? 'PERSONAL_LAYER_LIMIT' : badJson ? 'PERSONAL_LAYER_REQUEST_INVALID' : (error?.code || 'PERSONAL_LAYER_FAILED'),
     details: status < 500 && error?.details !== undefined && !Array.isArray(error.details) ? error.details : undefined,
+    // Per-object export refusals (422) list ids and codes only; the array
+    // shape is deliberate so bulk details never leak through `details`.
+    diagnostics: status < 500 && Array.isArray(error?.diagnostics) ? error.diagnostics : undefined,
     requestId,
   })
 }
@@ -37,6 +41,14 @@ function publicOrigin(context) {
 function paperIdFrom(match) {
   try {
     return decodeURIComponent(match[1])
+  } catch {
+    return ''
+  }
+}
+
+function fileIdFrom(match) {
+  try {
+    return decodeURIComponent(match[2])
   } catch {
     return ''
   }
@@ -81,6 +93,39 @@ export function createPersonalPaperLayerRoutes() {
         assertJsonContentType(request)
         const body = await readJsonRouteBody(request, { maxBytes: PERSONAL_LAYER_MAX_REQUEST_BYTES })
         send(response, 200, context.personalPaperLayer.commit(resolveDataUserId(context), paperIdFrom(match), body))
+      } catch (error) {
+        sendError(response, error, requestId)
+      }
+    }),
+    defineRoute('POST', /^\/api\/personal-paper-layers\/([^/]+)\/exports$/, async ({ request, response, context, match }) => {
+      const requestId = randomUUID()
+      try {
+        // Same CSRF and auth seams as the layer routes above: the owner comes
+        // from the session, never from the body.
+        assertSameOrigin(request, { publicOrigin: publicOrigin(context) })
+        assertJsonContentType(request)
+        const body = await readJsonRouteBody(request, { maxBytes: PERSONAL_LAYER_MAX_REQUEST_BYTES })
+        send(response, 200, await context.personalPaperExport.create(resolveDataUserId(context), paperIdFrom(match), body))
+      } catch (error) {
+        sendError(response, error, requestId)
+      }
+    }),
+    defineRoute('GET', /^\/api\/personal-paper-layers\/([^/]+)\/exports\/([^/]+)\.pdf$/, async ({ response, context, match }) => {
+      const requestId = randomUUID()
+      try {
+        // Same auth seam as the POST above: the file is looked up by the
+        // session's user id, the paperId in the path AND the file id — any
+        // other combination is the same 404 (no existence leak).
+        const file = context.personalPaperExport.resolveDownload(
+          resolveDataUserId(context),
+          paperIdFrom(match),
+          fileIdFrom(match),
+        )
+        if (!file) {
+          send(response, 404, { error: 'PDF file not found', code: 'PERSONAL_EXPORT_FILE_NOT_FOUND', requestId })
+          return
+        }
+        sendUserSpacePdf(response, file.body, file.fileName, { disposition: 'attachment' })
       } catch (error) {
         sendError(response, error, requestId)
       }

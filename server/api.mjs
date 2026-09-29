@@ -26,6 +26,7 @@ import { createVocabularyNotebookRuntime } from './vocabulary-notebook/runtime.m
 import { createPersonalPaperLayerRoutes } from './personal-paper-layer/routes.mjs'
 import { createPersonalPaperLayerRuntime } from './personal-paper-layer/runtime.mjs'
 import { createPersonalPaperLayoutRuntime } from './personal-paper-layer/layout.mjs'
+import { createPersonalPaperExportRuntime } from './personal-paper-layer/exportRuntime.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { sendPaperAssetStatic } from './paper-import/paperAssetStatic.mjs'
@@ -517,6 +518,15 @@ serverContext.personalPaperLayout = createPersonalPaperLayoutRuntime({
   loadCanonicalConsumption,
   draftPaperStore,
 })
+serverContext.personalPaperExport = createPersonalPaperExportRuntime({
+  openUserDatabase,
+  personalPaperLayer: serverContext.personalPaperLayer,
+  personalPaperLayout: serverContext.personalPaperLayout,
+  filesRoot: userSpaceFilesDir,
+  // The annotated-edition file name carries the real paper title, read from
+  // the same published paper asset the detail/header views name the paper by.
+  resolvePaperTitle: resolvePublishedPaperTitle,
+})
 
 const serverRoutes = [
   ...h1Routes,
@@ -632,6 +642,25 @@ function withCanonicalConsumerRuntime(callback) {
 
 function loadCanonicalConsumption(input) {
   return withCanonicalConsumerRuntime((runtime) => runtime.load(input))
+}
+// The published paper's display title (asset.paper.title), read from the same
+// latest asset the paper views use; empty when the asset is missing or
+// unreadable — callers fall back to the paperId.
+function resolvePublishedPaperTitle(paperId) {
+  try {
+    const { assetPath } = resolvePaperAssetReadPaths(paperAssetsDir, paperId)
+    if (!existsSync(assetPath)) return ''
+    const sourceAsset = readJsonFile(assetPath)
+    const { asset } = loadCanonicalSourceAssetRepresentation({
+      sourceAsset,
+      versionDir: path.dirname(assetPath),
+      reject: (message) => { throw new Error(message) },
+      label: 'Canonical paper-asset title source',
+    })
+    return String(asset?.paper?.title || '').trim()
+  } catch {
+    return ''
+  }
 }
 
 function resolveCanonicalConsumption(input) {

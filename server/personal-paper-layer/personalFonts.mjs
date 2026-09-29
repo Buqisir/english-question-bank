@@ -59,6 +59,10 @@ const registryIdentity = Object.freeze(
 )
 const registryDigest = `sha256:${createHash('sha256').update(stableStringify(registryIdentity)).digest('hex')}`
 
+// The cache key for a rendered personal export digests this so a registry
+// change invalidates every cached file without re-rendering probes.
+export const PERSONAL_FONT_REGISTRY_DIGEST = registryDigest
+
 const cache = new Map()
 
 export function personalFontFaceCss({ presetIds } = {}) {

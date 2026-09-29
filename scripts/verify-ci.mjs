@@ -207,6 +207,7 @@ const registry = {
   'scripts/verify-personal-paper-layer-server.mjs',
   'scripts/verify-personal-paper-layer-autosave.mjs',
   'scripts/verify-personal-paper-layer-history.mjs',
+  'scripts/verify-personal-export-route.mjs',
   'scripts/verify-personal-annotations-browser.mjs',
   'scripts/verify-personal-paper-layout.mjs',
   'scripts/verify-personal-paper-view-browser.mjs',

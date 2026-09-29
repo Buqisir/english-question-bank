@@ -172,5 +172,8 @@ export function createPersonalPaperLayerRuntime({
     },
     read,
     commit,
+    // The export route reuses the same validated source gate (404/400 for
+    // unknown or malformed paper ids) instead of a second loader.
+    loadSource,
   }
 }
