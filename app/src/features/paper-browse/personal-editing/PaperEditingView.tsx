@@ -49,11 +49,13 @@ export type PaperEditingViewProps = {
   /** 「添加文字」armed state: the next click on a page places a new text box. */
   addTextArmed: boolean
   onAddTextPlaced: () => void
+  /** Host toolbar slot for the quiet text-box notices, outside the zoom transform. */
+  noticeTarget: HTMLElement | null
 }
 
 type PaperCanvasStyle = CSSProperties & Record<`--${string}`, string | number>
 
-export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextArmed, onAddTextPlaced }: PaperEditingViewProps): ReactNode {
+export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextArmed, onAddTextPlaced, noticeTarget }: PaperEditingViewProps): ReactNode {
   const { state, reload } = usePersonalPaperLayout({
     paperId,
     sourceRevision,
@@ -215,6 +217,7 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
                   layoutId={layout.layoutId}
                   armed={addTextArmed && api.canEdit}
                   onPlaced={onAddTextPlaced}
+                  noticeTarget={noticeTarget}
                 />
                 {geometry.frames.map((frame) => (
                   <div

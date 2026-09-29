@@ -491,6 +491,32 @@
   background: var(--desk-hover, #e5eae1);
 }
 
+/* 文字框静默提示（溢出 / 旧版式）：工具条中段，空时不占高度也不推动纸张。 */
+.paper-browse-editing-toolbar__notices {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.paper-personal-paper-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-paper-notice .paper-personal-retry {
+  font-size: 12px;
+  padding: 3px 10px;
+}
+
 .paper-personal-paper-zoom {
   flex: none;
 }
@@ -539,6 +565,14 @@
   border: 0;
 }
 
+/* 溢出框：1px 虚线提醒。Explicit-Cascade: 本条必须排在下方选中态 outline
+ * 规则之前——两个规则同权（0-2-0）时后写者获胜，选中是更强的用户意图，
+ * 溢出提醒在框被选中时让位。 */
+.paper-personal-text-box[data-overflow='true'] {
+  outline: 1px dashed var(--eqb-color-warning, #E8901A);
+  outline-offset: 2px;
+}
+
 .paper-personal-text-box:focus-visible,
 .paper-personal-text-box.is-selected {
   outline: 1px solid var(--personal-ink);
@@ -566,6 +600,11 @@
 
 .paper-personal-text-box-layer.is-armed .paper-personal-text-box-hit {
   cursor: text;
+}
+
+/* 「逐个摆放」中：整个纸面成为落点选择器。 */
+.paper-personal-text-box-layer.is-replacing .paper-personal-text-box-hit {
+  cursor: crosshair;
 }
 
 /* 选中框可整只拖动；拖动中禁止正文被顺手选中。 */

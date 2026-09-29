@@ -785,6 +785,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return new URLSearchParams(window.location.search).get('paperView') === 'paper'
   })
   const [paperEditingZoom, setPaperEditingZoom] = useState<number | 'fit'>('fit')
+  const [paperNoticeTarget, setPaperNoticeTarget] = useState<HTMLDivElement | null>(null)
   // #489 纸张视图「添加文字」：armed 时下一次页面点击布一个文字框草稿。
   const [addTextArmed, setAddTextArmed] = useState(false)
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
@@ -4200,6 +4201,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               添加文字
             </button>
           </div>
+          {/* 文字框静默提示（溢出 / 旧版式）挂在工具条中段：出现或消失都不推动纸张。 */}
+          <div className="paper-browse-editing-toolbar__notices" ref={setPaperNoticeTarget} />
           <div className="paper-browse-zoom-controls" role="group" aria-label="缩放">
             {PAPER_ZOOM_LEVELS.map((level) => (
               <button
@@ -4303,6 +4306,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         {paperViewActive && (
           <PaperEditingView
             paperId={paperId}
+            noticeTarget={paperNoticeTarget}
             sourceRevision={personalAnnotations.source?.sourceRevision ?? null}
             zoom={paperEditingZoom}
             api={personalAnnotations}

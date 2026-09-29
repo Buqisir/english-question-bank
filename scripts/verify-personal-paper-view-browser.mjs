@@ -20,6 +20,9 @@ import { DatabaseSync } from 'node:sqlite'
 import { publishCanonicalPaperPublication } from '../server/paper-canonical/publication.mjs'
 import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import { buildSelectionSourceFromConsumption } from '../shared/paper-selection/sourceProjection.mjs'
+import { PERSONAL_LAYER_API_SCHEMA } from '../shared/personal-paper-layer/index.mjs'
+import { createPersonalTextDocumentFromPlainText } from '../shared/personal-text/index.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -288,7 +291,9 @@ try {
     { headers: { cookie: `eqb_session=${token}` } },
   )
   if (consumptionResponse.status !== 200) throw new Error(`consumption failed: ${consumptionResponse.status} ${await consumptionResponse.text()}`)
-  const browserAsset = plannedBrowserAsset(seeded.committedAsset, await consumptionResponse.json())
+  const consumption = await consumptionResponse.json()
+  const sourceRevision = buildSelectionSourceFromConsumption(consumption).sourceRevision
+  const browserAsset = plannedBrowserAsset(seeded.committedAsset, consumption)
 
   process.env.QUESTION_BANK_API_PORT = String(apiPort)
   const { createServer } = await import('../app/node_modules/vite/dist/node/index.js')
@@ -478,6 +483,289 @@ try {
     loadingWidth > 1000, `clientWidth=${loadingWidth}`)
   await page.unroute('**/api/personal-paper-layers/**/layout*')
   await page.waitForSelector('[data-paper-page-overlay]', { timeout: 90_000 })
+
+  // ---- text boxes on the paper view (#489 step C) ---------------------------------
+  // Real interaction pack: arm + click + type, zoom invariance, drag/undo/redo,
+  // nudge merging, duplicate, deselect, overflow warning and the old-layout
+  // re-place flow. Same patterns as .scratch/ui-shot-4b2.mjs.
+
+  // Autosave debounces 600ms; a fixed wait covers one flush plus round trip.
+  const flushAutosave = () => page.waitForTimeout(2500)
+
+  const readLayer = async () => {
+    const response = await fetch(
+      `http://127.0.0.1:${apiPort}/api/personal-paper-layers/${paperId}?sourceRevision=${encodeURIComponent(sourceRevision)}`,
+      { headers: { cookie: `eqb_session=${token}` } },
+    )
+    if (response.status !== 200) throw new Error(`layer read failed: ${response.status}`)
+    return response.json()
+  }
+  const storedTextBoxes = async () => (await readLayer()).layer?.objects?.filter((object) => object.type === 'text-box') ?? []
+  const storedVersion = async () => (await readLayer()).layer?.version ?? null
+
+  const armAddText = async () => {
+    await page.click('.paper-browse-add-text-option')
+    await page.waitForFunction(() => document.querySelector('.paper-personal-text-box-layer')?.classList.contains('is-armed'))
+  }
+
+  const setZoom = async (label, transform) => {
+    await page.click(`.paper-browse-zoom-option:has-text("${label}")`)
+    await page.waitForFunction((expected) => document.querySelector('.paper-personal-paper-canvas')?.style.transform === expected, transform)
+  }
+
+  // Viewport-safe page click: bring the point over the page into the middle of
+  // the viewport, then mouse.click it (off-screen clicks silently do nothing).
+  const clickOnPageAt = async (offsetXpx, offsetYpx) => {
+    await page.evaluate(([ox, oy]) => {
+      const overlay = document.querySelector('[data-paper-page-overlay="p1"]')
+      const scrolling = document.scrollingElement
+      if (!overlay || !scrolling) return
+      const top = overlay.getBoundingClientRect().top + scrolling.scrollTop
+      scrolling.scrollTo(0, top + oy - window.innerHeight / 2)
+    }, [offsetXpx, offsetYpx])
+    const box = await page.locator('[data-paper-page-overlay="p1"]').boundingBox()
+    if (!box) throw new Error('p1 overlay not found')
+    const x = box.x + offsetXpx
+    const y = box.y + offsetYpx
+    if (x < 0 || x > 1440 || y < 0 || y > 900) throw new Error(`click point (${x}, ${y}) outside the 1440x900 viewport`)
+    await page.mouse.click(x, y)
+  }
+
+  // Seeds a text box from a defunct layout straight into the server layer, as
+  // another device would have left it behind (expectedVersion + unique id).
+  const seedForeignTextBox = async () => {
+    const current = await readLayer()
+    const response = await fetch(`http://127.0.0.1:${apiPort}/api/personal-paper-layers/${paperId}/operations`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        cookie: `eqb_session=${token}`,
+        // Same-origin guard accepts the API host itself as Origin.
+        origin: `http://127.0.0.1:${apiPort}`,
+      },
+      body: JSON.stringify({
+        schemaVersion: PERSONAL_LAYER_API_SCHEMA,
+        paperId,
+        sourceRevision,
+        expectedVersion: current.layer?.version ?? 0,
+        clientMutationId: `verify-foreign-${Date.now()}`,
+        operations: [{
+          op: 'create',
+          object: {
+            id: `foreign-box-${Date.now()}`,
+            type: 'text-box',
+            document: createPersonalTextDocumentFromPlainText('旧版式文字框'),
+            placement: { kind: 'page-position', layoutId: 'old-layout-1990', pageId: 'p1', xMm: 30, yMm: 30, widthMm: 60 },
+          },
+        }],
+      }),
+    })
+    if (response.status !== 200) throw new Error(`foreign seed failed: ${response.status} ${await response.text()}`)
+  }
+
+  const openPaperView = async () => {
+    await page.goto(`http://127.0.0.1:${appPort}/canonical-consumption-qa.html?paperId=${paperId}&personalAccount=verify-paper-view-owner`, { waitUntil: 'domcontentloaded' })
+    await page.waitForSelector('[data-paper-paragraph-id]', { timeout: 90_000 })
+    await page.click('button.ghost-button:has-text("纸张")')
+    await page.waitForSelector('[data-paper-page-overlay]', { timeout: 90_000 })
+    await setZoom('100%', 'scale(1)')
+  }
+
+  await openPaperView()
+
+  // (a) create a box by arming + click + typing; the server stores it on the
+  // current layout within 1mm of the click point.
+  await armAddText()
+  await clickOnPageAt(300, 200)
+  await page.waitForSelector('.paper-personal-text-box.is-editing [contenteditable="true"]', { timeout: 10_000 })
+  // Tiptap focuses through a rAF after mount; wait so the keystrokes land.
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
+  await page.keyboard.type('Hello 纸上的字')
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  await flushAutosave()
+  const storedA = await storedTextBoxes()
+  check('a created text box lands on the current layout within 1mm of the click',
+    storedA.length === 1
+    && storedA[0].placement.layoutId === layout.layoutId
+    && storedA[0].placement.pageId === 'p1'
+    && Math.abs(storedA[0].placement.xMm - 300 / MM_TO_PX) < 1
+    && Math.abs(storedA[0].placement.yMm - 200 / MM_TO_PX) < 1,
+    JSON.stringify(storedA.map((object) => object.placement)))
+
+  // (b) arm + click + Escape without typing: nothing is saved.
+  await armAddText()
+  await clickOnPageAt(500, 320)
+  await page.waitForSelector('.paper-personal-text-box.is-editing [contenteditable="true"]', { timeout: 10_000 })
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  await flushAutosave()
+  const storedB = await storedTextBoxes()
+  check('arm + click + Escape without typing saves zero text boxes',
+    storedB.length === 1 && await page.locator('.paper-personal-text-box').count() === 1,
+    `server=${storedB.length} dom=${await page.locator('.paper-personal-text-box').count()} ${JSON.stringify(storedB.map((object) => object.placement))}`)
+
+  // (c) zoom 150% then 75%: stored mm and the layer version stay untouched.
+  const placementBeforeZoom = await storedTextBoxes()
+  const versionBeforeZoom = await storedVersion()
+  await setZoom('150%', 'scale(1.5)')
+  await setZoom('75%', 'scale(0.75)')
+  const placementAfterZoom = await storedTextBoxes()
+  const versionAfterZoom = await storedVersion()
+  check('zoom changes never touch stored mm or the layer version',
+    placementBeforeZoom.length === 1 && placementAfterZoom.length === 1
+    && placementAfterZoom[0].placement.xMm === placementBeforeZoom[0].placement.xMm
+    && placementAfterZoom[0].placement.yMm === placementBeforeZoom[0].placement.yMm
+    && placementAfterZoom[0].placement.widthMm === placementBeforeZoom[0].placement.widthMm
+    && versionAfterZoom === versionBeforeZoom,
+    `version ${versionBeforeZoom} -> ${versionAfterZoom}`)
+  await setZoom('100%', 'scale(1)')
+
+  // (d) drag +60px/+40px at 100%: exactly one version bump with the matching
+  // mm delta, then undo/redo restores and reapplies.
+  await page.locator('.paper-personal-text-box').first().click()
+  const versionBeforeDrag = await storedVersion()
+  const boxBeforeDrag = await page.locator('.paper-personal-text-box').first().boundingBox()
+  await page.mouse.move(boxBeforeDrag.x + boxBeforeDrag.width / 2, boxBeforeDrag.y + 10)
+  await page.mouse.down()
+  await page.mouse.move(boxBeforeDrag.x + boxBeforeDrag.width / 2 + 60, boxBeforeDrag.y + 10 + 40, { steps: 10 })
+  await page.mouse.up()
+  await flushAutosave()
+  const dragged = (await storedTextBoxes())[0]?.placement
+  check('a drag commits exactly one version bump with the mm delta of px/MM_TO_PX',
+    (await storedVersion()) === versionBeforeDrag + 1
+    && dragged
+    && Math.abs(dragged.xMm - (placementBeforeZoom[0].placement.xMm + 60 / MM_TO_PX)) < 0.5
+    && Math.abs(dragged.yMm - (placementBeforeZoom[0].placement.yMm + 40 / MM_TO_PX)) < 0.5,
+    `version ${versionBeforeDrag} -> ${await storedVersion()}, placement ${JSON.stringify(dragged)}`)
+  await page.keyboard.press('ControlOrMeta+z')
+  await flushAutosave()
+  const undoneDrag = (await storedTextBoxes())[0]?.placement
+  check('Cmd/Ctrl+Z restores the pre-drag placement',
+    (await storedVersion()) === versionBeforeDrag + 2
+    && undoneDrag?.xMm === placementBeforeZoom[0].placement.xMm
+    && undoneDrag?.yMm === placementBeforeZoom[0].placement.yMm,
+    JSON.stringify(undoneDrag))
+  await page.keyboard.press('Shift+ControlOrMeta+z')
+  await flushAutosave()
+  const redone = (await storedTextBoxes())[0]?.placement
+  check('Shift+Cmd/Ctrl+Z reapplies the drag',
+    (await storedVersion()) === versionBeforeDrag + 3
+    && redone?.xMm === dragged?.xMm && redone?.yMm === dragged?.yMm,
+    JSON.stringify(redone))
+
+  // (e) ArrowRight x3 merges into one +3mm version; one undo reverts all three.
+  await page.locator('.paper-personal-text-box').first().click()
+  const versionBeforeNudge = await storedVersion()
+  const xBeforeNudge = (await storedTextBoxes())[0]?.placement.xMm
+  for (let nudge = 0; nudge < 3; nudge += 1) {
+    await page.keyboard.press('ArrowRight')
+    // Let each nudge's re-render land so the next press reads fresh state.
+    await page.waitForTimeout(80)
+  }
+  await flushAutosave()
+  const nudged = (await storedTextBoxes())[0]?.placement
+  check('ArrowRight x3 nudges +3mm in one merged version',
+    (await storedVersion()) === versionBeforeNudge + 1
+    && Math.abs(nudged.xMm - (xBeforeNudge + 3)) < 0.05,
+    `version ${versionBeforeNudge} -> ${await storedVersion()}, xMm ${xBeforeNudge} -> ${nudged?.xMm}`)
+  await page.keyboard.press('ControlOrMeta+z')
+  await flushAutosave()
+  const undoneNudge = (await storedTextBoxes())[0]?.placement
+  check('one undo reverts all three nudges',
+    (await storedVersion()) === versionBeforeNudge + 2 && undoneNudge?.xMm === xBeforeNudge,
+    JSON.stringify(undoneNudge))
+
+  // (f) 复制文字框 duplicates into a second box with its own id.
+  await page.locator('.paper-personal-text-box').first().click()
+  await page.waitForSelector('.paper-personal-text-box__strip', { timeout: 10_000 })
+  await page.click('.paper-personal-text-box__strip-action:has-text("复制文字框")')
+  await flushAutosave()
+  const duplicated = await storedTextBoxes()
+  check('复制文字框 creates two boxes with distinct ids',
+    duplicated.length === 2
+      && duplicated[0].id !== duplicated[1].id
+      && duplicated.every((object) => object.placement.layoutId === layout.layoutId),
+    JSON.stringify(duplicated.map((object) => object.placement)))
+
+  // (g) clicking blank paper deselects.
+  await clickOnPageAt(40, 30)
+  await page.waitForTimeout(300)
+  check('clicking blank paper deselects the selected box',
+    await page.locator('.paper-personal-text-box.is-selected').count() === 0)
+
+  // (h) many typed lines in a box near the page bottom overflow the page.
+  await page.locator('.paper-personal-text-box').first().click()
+  // Shift+Arrow = 5mm: nudge the box toward the page bottom. Each press must
+  // observe the previous render's placement, so poll until it sits below the
+  // 280mm line instead of counting a fixed number of presses (fast presses
+  // can otherwise compute from a stale placement and stall partway).
+  const nudgeTargetPx = await page.evaluate((mmToPx) => {
+    const overlay = document.querySelector('[data-paper-page-overlay="p1"]')
+    return overlay ? parseFloat(overlay.style.top) + 280 * mmToPx : Number.POSITIVE_INFINITY
+  }, MM_TO_PX)
+  for (let nudge = 0; nudge < 120; nudge += 1) {
+    const topPx = await page.locator('.paper-personal-text-box').first().evaluate((node) => parseFloat(node.style.top))
+    if (topPx >= nudgeTargetPx) break
+    await page.keyboard.press('Shift+ArrowDown')
+    await page.waitForTimeout(40)
+  }
+  await page.keyboard.press('Enter')
+  await page.waitForSelector('.paper-personal-text-box.is-editing [contenteditable="true"]', { timeout: 10_000 })
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
+  await page.keyboard.type('第一行长一点的文字内容\n第二行也很长\n第三行继续加长\n第四行再加一段')
+  await page.keyboard.press('Escape')
+  await page.waitForSelector('.paper-personal-text-box[data-overflow="true"]', { timeout: 5_000 })
+  check('a box grown past the page bottom is flagged data-overflow',
+    await page.locator('.paper-personal-text-box[data-overflow="true"]').count() === 1)
+  const overflowNotice = page.locator('.paper-personal-paper-notice:has-text("超出纸张")')
+  check('the overflow notice appears above the paper', (await overflowNotice.count()) === 1 && (await overflowNotice.textContent()).includes('有 1 个'),
+    await overflowNotice.count() ? await overflowNotice.textContent() : 'notice missing')
+  check('the overflow box never clips its text',
+    await page.locator('.paper-personal-text-box[data-overflow="true"]').evaluate((node) => getComputedStyle(node).overflow) !== 'hidden')
+  // Clean up for the old-layout section: the overflowing box stays selected.
+  await page.keyboard.press('Delete')
+  await flushAutosave()
+
+  // (i) a box from an old layout is never rendered and asks to be re-placed.
+  await seedForeignTextBox()
+  await openPaperView()
+  const foreignNotice = page.locator('.paper-personal-paper-notice:has-text("旧的纸张版式")')
+  await foreignNotice.waitFor({ timeout: 15_000 })
+  check('a foreign-layout box shows the old-layout notice',
+    (await foreignNotice.count()) === 1 && (await foreignNotice.textContent()).includes('1 个文字框属于旧的纸张版式'),
+    await foreignNotice.textContent())
+  check('the old-layout box does not render on the current paper',
+    await page.locator('.paper-personal-text-box').count() === 1)
+  await page.click('.paper-personal-paper-notice button:has-text("逐个摆放")')
+  await page.waitForSelector('.paper-personal-text-box-hit', { timeout: 5_000 })
+  check('re-place mode turns the page hit surfaces into crosshairs',
+    await page.locator('.paper-personal-text-box-hit').evaluateAll((nodes) => nodes.length > 0 && nodes.every((node) => getComputedStyle(node).cursor === 'crosshair')))
+  await page.keyboard.press('Escape')
+  check('Escape cancels re-place mode but keeps the notice',
+    await page.locator('.paper-personal-text-box-hit').count() === 0
+    && (await foreignNotice.count()) === 1)
+  await page.click('.paper-personal-paper-notice button:has-text("逐个摆放")')
+  await clickOnPageAt(400, 150)
+  await flushAutosave()
+  const foreignBox = (await storedTextBoxes()).find((object) => object.id.startsWith('foreign-box-'))
+  check('逐个摆放 + one page click re-homes the box to the current layout',
+    foreignBox
+    && foreignBox.placement.layoutId === layout.layoutId
+    && foreignBox.placement.pageId === 'p1'
+    && Math.abs(foreignBox.placement.xMm - 400 / MM_TO_PX) < 1
+    && Math.abs(foreignBox.placement.yMm - 150 / MM_TO_PX) < 1
+    && foreignBox.placement.widthMm === 60,
+    JSON.stringify(foreignBox?.placement))
+  check('the old-layout notice is gone once every box is re-homed',
+    await page.locator('.paper-personal-paper-notice:has-text("旧的纸张版式")').count() === 0)
+  await page.keyboard.press('ControlOrMeta+z')
+  await flushAutosave()
+  const undoneForeign = (await storedTextBoxes()).find((object) => object.id.startsWith('foreign-box-'))
+  check('undo after re-homing restores the old foreign placement',
+    undoneForeign?.placement.layoutId === 'old-layout-1990'
+    && undoneForeign?.placement.xMm === 30 && undoneForeign?.placement.yMm === 30,
+    JSON.stringify(undoneForeign?.placement))
 
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()

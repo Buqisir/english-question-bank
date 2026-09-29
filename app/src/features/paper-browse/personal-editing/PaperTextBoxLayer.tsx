@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import {
   createPersonalMutationId,
   PERSONAL_PLACEMENT_MAX_WIDTH_MM,
@@ -13,6 +14,7 @@ import {
 } from '../../../../../shared/personal-text/index.mjs'
 import { PersonalTextEditor } from './PersonalTextEditor'
 import { PersonalTextView } from './PersonalTextView'
+import { AlertTriangle } from '../../../icons'
 import {
   TextBoxPresentationControls,
   TextBoxSelectionStrip,
@@ -31,6 +33,11 @@ const DRAG_THRESHOLD_PX = 3
 // Copy/paste duplicates offset by this much so the copy is visibly separate.
 const PASTE_OFFSET_MM = 5
 
+// Page-box checks compare server-measured mm against iframe-rendered px; the
+// same 2px geometry tolerance as the layout check, in mm, absorbs that drift
+// so a box flush against the clamp limit is not flagged as overflowing.
+const OVERFLOW_TOLERANCE_MM = 1
+
 type TextBoxObject = Extract<PersonalObject, { type: 'text-box' }>
 type PagePositionedTextBox = TextBoxObject & {
   placement: Extract<TextBoxObject['placement'], { kind: 'page-position' }>
@@ -41,6 +48,14 @@ function isPageTextBox(object: PersonalObject, layoutId: string): object is Page
   return object.type === 'text-box'
     && object.placement.kind === 'page-position'
     && object.placement.layoutId === layoutId
+}
+
+// A text box placed under a previous layout: still page-positioned, just not
+// this layout, so it renders nowhere until the teacher re-homes it.
+function isForeignPageTextBox(object: PersonalObject, layoutId: string): object is PagePositionedTextBox {
+  return object.type === 'text-box'
+    && object.placement.kind === 'page-position'
+    && object.placement.layoutId !== layoutId
 }
 
 /*
@@ -117,16 +132,25 @@ export function PaperTextBoxLayer({
   layoutId,
   armed,
   onPlaced,
+  noticeTarget,
 }: {
   api: PersonalAnnotationsApi
   frames: readonly PaperPageFrame[]
   layoutId: string
   armed: boolean
   onPlaced: () => void
+  /** Mount point for the quiet notices above the paper (outside the zoom transform). */
+  noticeTarget: HTMLElement | null
 }): ReactNode {
   const layerRef = useRef<HTMLDivElement | null>(null)
   const [editing, setEditing] = useState<TextBoxEditing | null>(null)
   const [interaction, setInteraction] = useState<BoxInteraction | null>(null)
+  // Keys (object id, or the draft key while editing) of boxes whose rendered
+  // bottom/right edge leaves their page box.
+  const [overflowKeys, setOverflowKeys] = useState<ReadonlySet<string>>(new Set())
+  // 「逐个摆放」 armed: hit surfaces turn crosshair and the next page click
+  // re-homes the first old-layout box.
+  const [rePlacing, setRePlacing] = useState(false)
   const clipboardRef = useRef<BoxClipboard | null>(null)
   const nudgeMergeKeyRef = useRef<string | null>(null)
   const nudgeSeqRef = useRef(0)
@@ -159,6 +183,15 @@ export function PaperTextBoxLayer({
     () => (selectedId ? boxes.find((object) => object.id === selectedId) ?? null : null),
     [boxes, selectedId],
   )
+  // Boxes placed under a previous layout: never rendered, never moved or
+  // deleted automatically — the teacher re-homes them one by one.
+  const foreignBoxes = useMemo(
+    () => api.objects.filter((object) => isForeignPageTextBox(object, layoutId)),
+    [api.objects, layoutId],
+  )
+  const rePlaceTarget = rePlacing ? foreignBoxes[0] ?? null : null
+  const rePlaceTargetRef = useRef<typeof rePlaceTarget>(null)
+  rePlaceTargetRef.current = rePlaceTarget
 
   // A new layout invalidates transient pointer state (page ids change).
   useEffect(() => {
@@ -256,12 +289,36 @@ export function PaperTextBoxLayer({
     setEditing(state)
   }, [api, canEdit, resetNudgeRun, seal, setInteractionState])
 
+  // Re-place commit: ONE update op at the click point, keeping the box's own
+  // width (clamped to the new page). The old layoutId only survives in undo
+  // history, so Cmd/Ctrl+Z puts the box back into the old-layout set.
+  const reHomeBox = useCallback((target: TextBoxObject, frame: PaperPageFrame, xMm: number, yMm: number) => {
+    if (target.placement.kind !== 'page-position') return
+    seal()
+    resetNudgeRun()
+    apply([{
+      op: 'update',
+      objectId: target.id,
+      patch: {
+        placement: {
+          kind: 'page-position',
+          layoutId,
+          pageId: frame.pageId,
+          ...clampPlacement(xMm, yMm, target.placement.widthMm, frame),
+        },
+      },
+    }])
+  }, [apply, layoutId, resetNudgeRun, seal])
+
   // Armed click on the page stack starts a draft at the click point (an open
   // editor is closed first); box clicks stopPropagation before reaching here.
+  // While 「逐个摆放」 is armed the click re-homes the first old-layout box
+  // instead — re-place takes priority over placing a new draft.
   const handleLayerClick = useCallback((event: MouseEvent<HTMLDivElement>) => {
     if (event.button !== 0) return
     if (event.target instanceof Element && event.target.closest('.paper-personal-text-box')) return
-    if (!armed) {
+    const rePlaceTarget = rePlaceTargetRef.current
+    if (!rePlaceTarget && !armed) {
       setSelectedId(null)
       if (editingRef.current) closeEditing(editingRef.current)
       return
@@ -275,11 +332,16 @@ export function PaperTextBoxLayer({
     const xPx = (event.clientX - rect.left) / scale
     const yPx = (event.clientY - rect.top) / scale
     const frame = frameAtPoint(frames, xPx, yPx)
+    if (rePlaceTarget) {
+      if (!frame) return
+      reHomeBox(rePlaceTarget, frame, pxToMm(xPx - frame.leftPx), pxToMm(yPx - frame.topPx))
+      return
+    }
     if (!frame) return
     if (editingRef.current) closeEditing(editingRef.current)
     setSelectedId(null)
     placeDraft(frame, pxToMm(xPx - frame.leftPx), pxToMm(yPx - frame.topPx))
-  }, [armed, canEdit, closeEditing, frames, placeDraft, setSelectedId])
+  }, [armed, canEdit, closeEditing, frames, placeDraft, reHomeBox, setSelectedId])
 
   // One op per completed gesture: drag, resize and nudge all end here.
   const commitPlacement = useCallback((objectId: string, placement: BoxPlacement) => {
@@ -512,6 +574,55 @@ export function PaperTextBoxLayer({
     saveEditingDocument(state, document)
   }, [saveEditingDocument])
 
+  // Boxes carry data-box-key/data-page-id so the measured node maps back to
+  // its page frame; offset* values are layout px, untouched by the canvas
+  // zoom transform, and the layer aligns with the iframe document the frames
+  // were measured in.
+  const measureOverflow = useCallback(() => {
+    const layer = layerRef.current
+    if (!layer) return
+    const next = new Set<string>()
+    for (const node of layer.querySelectorAll<HTMLElement>('.paper-personal-text-box[data-box-key]')) {
+      const frame = frameByPageId.get(node.dataset.pageId ?? '')
+      const key = node.dataset.boxKey ?? ''
+      if (!frame || !key) continue
+      const bottomMm = pxToMm(node.offsetTop + node.offsetHeight - frame.topPx)
+      const rightMm = pxToMm(node.offsetLeft + node.offsetWidth - frame.leftPx)
+      if (
+        bottomMm > frame.heightMm + OVERFLOW_TOLERANCE_MM
+        || rightMm > frame.widthMm + OVERFLOW_TOLERANCE_MM
+      ) next.add(key)
+    }
+    setOverflowKeys((current) => {
+      if (current.size === next.size && [...next].every((key) => current.has(key))) return current
+      return next
+    })
+  }, [frameByPageId])
+
+  // Cheap enough to run after every render (a handful of boxes), which covers
+  // object changes, font/size changes and live drag positions in one place.
+  useEffect(() => {
+    measureOverflow()
+  })
+
+  // Font loading and typing change a box's rendered height without an objects
+  // change: watch the elements themselves, and re-check once fonts settle.
+  useEffect(() => {
+    const layer = layerRef.current
+    if (!layer) return undefined
+    const observer = new ResizeObserver(() => measureOverflow())
+    for (const node of layer.querySelectorAll('.paper-personal-text-box')) observer.observe(node)
+    return () => observer.disconnect()
+  }, [measureOverflow, boxes, editing])
+
+  useEffect(() => {
+    let cancelled = false
+    document.fonts.ready.then(() => {
+      if (!cancelled) measureOverflow()
+    }).catch(() => {})
+    return () => { cancelled = true }
+  }, [measureOverflow])
+
   // One window listener for everything the layer owns; bails early whenever
   // the state does not apply (editing, editable focus, no selection).
   useEffect(() => {
@@ -521,6 +632,11 @@ export function PaperTextBoxLayer({
           event.preventDefault()
           setInteractionState(null)
         }
+        return
+      }
+      if (event.key === 'Escape' && rePlaceTargetRef.current) {
+        event.preventDefault()
+        setRePlacing(false)
         return
       }
       if (event.defaultPrevented || event.isComposing || event.keyCode === 229) return
@@ -565,6 +681,9 @@ export function PaperTextBoxLayer({
     const editingNow = editingState != null
     const selected = objectId != null && selectedId === objectId && !editingNow
     const showStrip = selected && !interacting && canEdit
+    // The draft has no object id yet; its editing key is stable per draft.
+    const measureKey = objectId ?? editingState?.key ?? ''
+    const overflowing = overflowKeys.has(measureKey)
     return (
       <div
         key={key}
@@ -576,6 +695,9 @@ export function PaperTextBoxLayer({
         }}
         tabIndex={0}
         aria-label="文字框"
+        data-box-key={measureKey}
+        data-page-id={placement.pageId}
+        data-overflow={overflowing ? 'true' : undefined}
         onClick={(event) => {
           event.stopPropagation()
           if (objectId) setSelectedId(objectId)
@@ -659,38 +781,62 @@ export function PaperTextBoxLayer({
     )
   }
 
+  const overflowCount = overflowKeys.size
+  const foreignCount = foreignBoxes.length
   return (
-    <div
-      ref={layerRef}
-      className={`paper-personal-text-box-layer${armed ? ' is-armed' : ''}`}
-      onClick={handleLayerClick}
-    >
-      {/* The open editor keeps its draft key after the first save, so focus and text history survive. */}
-      {boxes.map((object) => renderBox(
-        editing?.objectId === object.id ? editing.key : object.id,
-        object.id,
-        interaction?.objectId === object.id ? interactionPlacement(interaction) : object.placement,
-        object.document,
-        editing?.objectId === object.id ? editing : null,
-        interaction?.objectId === object.id ? interaction : null,
-      ))}
-      {editing && !editing.objectId
-        ? renderBox(editing.key, null, editing.placement, editing.document, editing, null)
-        : null}
-      {(armed || selectedBox || editing) && frames.map((frame) => (
-        <div
-          key={`hit-${frame.pageId}`}
-          className="paper-personal-text-box-hit"
-          style={{
-            left: frame.leftPx,
-            top: frame.topPx,
-            width: mmToPx(frame.widthMm),
-            height: mmToPx(frame.heightMm),
-          }}
-          aria-hidden="true"
-        />
-      ))}
-    </div>
+    <>
+      <div
+        ref={layerRef}
+        className={`paper-personal-text-box-layer${armed ? ' is-armed' : ''}${rePlaceTarget ? ' is-replacing' : ''}`}
+        onClick={handleLayerClick}
+      >
+        {/* The open editor keeps its draft key after the first save, so focus and text history survive. */}
+        {boxes.map((object) => renderBox(
+          editing?.objectId === object.id ? editing.key : object.id,
+          object.id,
+          interaction?.objectId === object.id ? interactionPlacement(interaction) : object.placement,
+          object.document,
+          editing?.objectId === object.id ? editing : null,
+          interaction?.objectId === object.id ? interaction : null,
+        ))}
+        {editing && !editing.objectId
+          ? renderBox(editing.key, null, editing.placement, editing.document, editing, null)
+          : null}
+        {(armed || rePlaceTarget || selectedBox || editing) && frames.map((frame) => (
+          <div
+            key={`hit-${frame.pageId}`}
+            className="paper-personal-text-box-hit"
+            style={{
+              left: frame.leftPx,
+              top: frame.topPx,
+              width: mmToPx(frame.widthMm),
+              height: mmToPx(frame.heightMm),
+            }}
+            aria-hidden="true"
+          />
+        ))}
+      </div>
+      {/* Notices live in the host toolbar, outside the zoom transform, so they stay
+       * quiet 13px UI at every zoom level. */}
+      {noticeTarget && (overflowCount > 0 || foreignCount > 0) ? createPortal((
+        <>
+          {overflowCount > 0 ? (
+            <p className="paper-personal-paper-notice" role="status">
+              <AlertTriangle size={16} />
+              有 {overflowCount} 个文字框超出纸张，调整位置、宽度或字号。
+            </p>
+          ) : null}
+          {foreignCount > 0 ? (
+            <p className="paper-personal-paper-notice" role="status">
+              {foreignCount} 个文字框属于旧的纸张版式，需要重新摆放。
+              {canEdit ? (
+                <button type="button" className="paper-personal-retry" onClick={() => setRePlacing(true)}>逐个摆放</button>
+              ) : null}
+            </p>
+          ) : null}
+        </>
+      ), noticeTarget) : null}
+    </>
   )
 }
 
