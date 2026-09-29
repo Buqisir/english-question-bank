@@ -835,3 +835,44 @@
   cursor: ew-resize;
 }
 
+/* 纸张视图锚定旁注卡（#489 4c-2）；内衬走 mm，与页面几何同单位。 */
+.paper-personal-paper-note-layer {
+  /* Same selection-frame tokens as the text-box layer. */
+  --personal-ink: #1f1f1d;
+  --personal-frame: rgba(96, 102, 92, 0.55);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paper-personal-paper-note {
+  position: absolute;
+  z-index: 1;
+  pointer-events: auto;
+  padding: 2mm 3mm;
+  /* 旁注是纸上的笔迹而非浮起的控件：无阴影，只一层暖墨淡底 + 暖纸发丝边。 */
+  border: 1px solid var(--paper-border, #e6e2d7);
+  border-radius: 4px;
+  background: rgba(var(--paper-ink-rgb, 74, 68, 56), 0.035);
+}
+
+/* 选中态复用文字框选中框：弱墨发丝 + 呼吸位。 */
+.paper-personal-paper-note.is-selected {
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+/* 页边卡（margin slot）：更窄的竖条卡，内衬收一档。 */
+.paper-personal-paper-note[data-note-slot='margin'] {
+  padding: 1.5mm 2mm;
+}
+
+/* 「逐个摆放」armed 的整页点击面：只在 placing 时渲染（同文字框层
+ * is-replacing 的 crosshair 语言）。 */
+.paper-personal-paper-note-hit {
+  position: absolute;
+  z-index: 0;
+  pointer-events: auto;
+  cursor: crosshair;
+}
+

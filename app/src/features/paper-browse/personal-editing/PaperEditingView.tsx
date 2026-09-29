@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { MM_TO_PX, type PaperPageFrame } from './paperPlacement'
 import { PaperMarkLayer } from './PaperMarkLayer'
+import { PaperNoteLayer } from './PaperNoteLayer'
 import { PaperTextBoxLayer } from './PaperTextBoxLayer'
+import { usePaperAnchorGeometry } from './usePaperAnchorGeometry'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
 import { usePersonalPaperLayout } from './usePersonalPaperLayout'
 
@@ -150,6 +152,14 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
   const contentWidthPx = geometry.status === 'ok' ? geometry.contentWidthPx : Math.ceil(pageWidthPx)
   const contentHeightPx = geometry.status === 'ok' ? geometry.contentHeightPx : Math.ceil(pageHeightSumPx)
 
+  const measured = layout != null && geometry.status === 'ok'
+  const anchorGeometry = usePaperAnchorGeometry(
+    api.objects,
+    api.source,
+    measured ? iframeRef.current : null,
+    measured ? `${layout.layoutId}:${geometry.frames.map((frame) => `${frame.leftPx},${frame.topPx}`).join('|')}` : '',
+  )
+
   if (state.status === 'error') {
     return (
       <div className="paper-personal-paper-view" ref={containerRef}>
@@ -216,8 +226,15 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
                  * interactive chrome that must stay clickable on top. */}
                 <PaperMarkLayer
                   api={api}
+                  anchorGeometry={anchorGeometry}
+                  noticeTarget={noticeTarget}
+                />
+                <PaperNoteLayer
+                  api={api}
+                  anchorGeometry={anchorGeometry}
+                  frames={geometry.frames}
+                  layoutId={layout.layoutId}
                   iframe={iframeRef.current}
-                  measureKey={`${layout.layoutId}:${geometry.frames.map((frame) => `${frame.leftPx},${frame.topPx}`).join('|')}`}
                   noticeTarget={noticeTarget}
                 />
                 <PaperTextBoxLayer

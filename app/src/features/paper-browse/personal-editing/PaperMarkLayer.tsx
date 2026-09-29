@@ -1,8 +1,9 @@
-import { useEffect, useLayoutEffect, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import { printSegmentToDomRanges, type PersonalObject } from '../../../../../shared/personal-paper-layer/index.mjs'
-import { mergeLineRects, textRects, type LayerRect } from './markGeometry'
+import type { PersonalObject } from '../../../../../shared/personal-paper-layer/index.mjs'
+import type { LayerRect } from './markGeometry'
 import { PersonalMarkPopover } from './PersonalMarkPopover'
+import type { PaperAnchorGeometry } from './usePaperAnchorGeometry'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
 
 type AnchoredMarkObject = Extract<PersonalObject, { textAnchor: unknown }>
@@ -31,76 +32,34 @@ function isAnchoredMarkType(type: PersonalObject['type']): type is AnchoredMarkO
  */
 export function PaperMarkLayer({
   api,
-  iframe,
-  measureKey,
+  anchorGeometry,
   noticeTarget,
 }: {
   api: PersonalAnnotationsApi
-  iframe: HTMLIFrameElement | null
-  /** Changes whenever the page geometry is re-measured (layout refresh, fonts.ready). */
-  measureKey: string
+  anchorGeometry: PaperAnchorGeometry
   /** Mount point for the quiet notices above the paper (outside the zoom transform). */
   noticeTarget: HTMLElement | null
 }): ReactNode {
-  const [marks, setMarks] = useState<PaperMark[]>([])
-  const [unplacedCount, setUnplacedCount] = useState(0)
-  const { objects, source } = api
+  const { objects } = api
+  const { rectsByObjectId, unplacedIds } = anchorGeometry
+  const unplacedCount = unplacedIds.length
 
-  useLayoutEffect(() => {
-    const doc = iframe?.contentDocument
-    const win = iframe?.contentWindow
-    if (!source || !iframe || !doc || !win) {
-      setMarks([])
-      setUnplacedCount(0)
-      return
-    }
+  const marks = useMemo(() => {
     const next: PaperMark[] = []
-    let unplaced = 0
     for (const object of objects) {
       if (!('textAnchor' in object)) continue
-      const ranges: Range[] = []
-      let placed = true
-      for (const segment of object.textAnchor.segments) {
-        const segmentRanges = printSegmentToDomRanges(doc, source, segment)
-        if (!segmentRanges) {
-          placed = false
-          break
-        }
-        ranges.push(...segmentRanges)
-      }
-      if (!placed) {
-        unplaced += 1
-        continue
-      }
-      const rects: LayerRect[] = []
-      for (const range of ranges) {
-        for (const rect of textRects(range)) {
-          if (rect.width < 0.5 || rect.height < 0.5) continue
-          rects.push({
-            // getClientRects are iframe-viewport coords; the overlay lives in
-            // iframe-document coords (the same space the page frames use).
-            left: rect.left + win.scrollX,
-            top: rect.top + win.scrollY,
-            width: rect.width,
-            height: rect.height,
-          })
-        }
-      }
-      if (rects.length === 0) {
-        unplaced += 1
-        continue
-      }
+      const rects = rectsByObjectId.get(object.id)
+      if (!rects) continue
       next.push({
         id: object.id,
         type: object.type,
         color: object.type === 'highlight' ? object.style.color : undefined,
         ink: object.type === 'underline' ? object.style.ink : undefined,
-        rects: mergeLineRects(rects),
+        rects,
       })
     }
-    setMarks(next)
-    setUnplacedCount(unplaced)
-  }, [iframe, measureKey, objects, source])
+    return next
+  }, [objects, rectsByObjectId])
 
   // Clicking anywhere else (toolbar, gutter, chrome) closes the popover again,
   // mirroring the reading view. Clicks inside the iframe never reach this

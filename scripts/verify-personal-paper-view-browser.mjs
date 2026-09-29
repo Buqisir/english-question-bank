@@ -652,6 +652,9 @@ try {
   await armAddText()
   await clickOnPageAt(500, 320)
   await page.waitForSelector('.paper-personal-text-box.is-editing [contenteditable="true"]', { timeout: 10_000 })
+  // Same rAF-autofocus wait as (a): without it Escape can land on BODY (where
+  // the editing draft intentionally stays open) and flake the DOM count.
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
   await page.keyboard.press('Escape')
   await page.waitForTimeout(300)
   await flushAutosave()
