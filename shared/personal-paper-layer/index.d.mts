@@ -281,3 +281,9 @@ export type PersonalCommentaryTargets = {
 export type PersonalLayerSource = PaperSelectionSource & { commentaryTargets?: PersonalCommentaryTargets }
 export function buildPersonalLayerSource(consumption: unknown): PersonalLayerSource & { commentaryTargets: PersonalCommentaryTargets }
 export function personalCommentaryTargetExists(source: PersonalLayerSource, target: PersonalCommentaryTarget | null | undefined): boolean
+
+export function printSegmentToDomRanges(
+  doc: Document,
+  source: PaperSelectionSource,
+  segment: { streamId: string; start: number; end: number },
+): Range[] | null

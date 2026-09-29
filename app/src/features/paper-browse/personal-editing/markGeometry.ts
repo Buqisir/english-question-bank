@@ -13,15 +13,17 @@ export type AnchorGeometry = {
  * fully inside it, which would paint blocks over headings or option labels.
  * Measuring per text node keeps every rect on glyphs.
  */
-function textRects(range: Range): DOMRect[] {
+export function textRects(range: Range): DOMRect[] {
   const root = range.commonAncestorContainer
   if (root.nodeType === Node.TEXT_NODE) return [...range.getClientRects()]
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+  // Ranges may live in the paper view's iframe document, not the host window.
+  const doc = range.startContainer.ownerDocument ?? document
+  const walker = doc.createTreeWalker(root, NodeFilter.SHOW_TEXT)
   const rects: DOMRect[] = []
   let node = walker.nextNode() as Text | null
   while (node) {
     if (range.intersectsNode(node) && node.data.length > 0) {
-      const part = document.createRange()
+      const part = doc.createRange()
       part.setStart(node, node === range.startContainer ? range.startOffset : 0)
       part.setEnd(node, node === range.endContainer ? range.endOffset : node.data.length)
       if (!part.collapsed) rects.push(...part.getClientRects())
@@ -32,7 +34,7 @@ function textRects(range: Range): DOMRect[] {
 }
 
 // Joins fragments of one line so a mark is one shape per line, not per text node.
-function mergeLineRects(rects: LayerRect[]): LayerRect[] {
+export function mergeLineRects(rects: LayerRect[]): LayerRect[] {
   const sorted = [...rects].sort((a, b) => a.top - b.top || a.left - b.left)
   const merged: LayerRect[] = []
   for (const rect of sorted) {

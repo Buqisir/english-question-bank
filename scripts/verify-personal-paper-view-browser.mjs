@@ -292,7 +292,8 @@ try {
   )
   if (consumptionResponse.status !== 200) throw new Error(`consumption failed: ${consumptionResponse.status} ${await consumptionResponse.text()}`)
   const consumption = await consumptionResponse.json()
-  const sourceRevision = buildSelectionSourceFromConsumption(consumption).sourceRevision
+  const source = buildSelectionSourceFromConsumption(consumption)
+  const sourceRevision = source.sourceRevision
   const browserAsset = plannedBrowserAsset(seeded.committedAsset, consumption)
 
   process.env.QUESTION_BANK_API_PORT = String(apiPort)
@@ -563,6 +564,60 @@ try {
     if (response.status !== 200) throw new Error(`foreign seed failed: ${response.status} ${await response.text()}`)
   }
 
+  // Seeds one highlight + one underline through the same operations endpoint,
+  // anchored to the first long passage-body stream, as another device would
+  // have left them. Returns the anchored text so the over-words check can
+  // compare against the real passage characters.
+  let markStreamText = null
+  const seedMarks = async () => {
+    const stream = source.streams.find((item) => item.role === 'passage-body' && item.text.length > 40)
+    if (!stream) throw new Error('no passage-body stream long enough to seed marks')
+    markStreamText = stream.text
+    const current = await readLayer()
+    const anchor = (start, end) => ({
+      paperId,
+      sourceRevision: source.sourceRevision,
+      sourceProjectionVersion: source.sourceProjectionVersion,
+      segments: [{ streamId: stream.streamId, start, end, exactText: stream.text.slice(start, end) }],
+    })
+    const response = await fetch(`http://127.0.0.1:${apiPort}/api/personal-paper-layers/${paperId}/operations`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        cookie: `eqb_session=${token}`,
+        origin: `http://127.0.0.1:${apiPort}`,
+      },
+      body: JSON.stringify({
+        schemaVersion: PERSONAL_LAYER_API_SCHEMA,
+        paperId,
+        sourceRevision,
+        expectedVersion: current.layer?.version ?? 0,
+        clientMutationId: `verify-marks-${Date.now()}`,
+        operations: [
+          {
+            op: 'create',
+            object: {
+              id: `verify-hl-${Date.now()}`,
+              type: 'highlight',
+              style: { color: 'yellow' },
+              textAnchor: anchor(0, 20),
+            },
+          },
+          {
+            op: 'create',
+            object: {
+              id: `verify-ul-${Date.now()}`,
+              type: 'underline',
+              style: { ink: 'red' },
+              textAnchor: anchor(25, 40),
+            },
+          },
+        ],
+      }),
+    })
+    if (response.status !== 200) throw new Error(`mark seed failed: ${response.status} ${await response.text()}`)
+  }
+
   const openPaperView = async () => {
     await page.goto(`http://127.0.0.1:${appPort}/canonical-consumption-qa.html?paperId=${paperId}&personalAccount=verify-paper-view-owner`, { waitUntil: 'domcontentloaded' })
     await page.waitForSelector('[data-paper-paragraph-id]', { timeout: 90_000 })
@@ -766,6 +821,33 @@ try {
     undoneForeign?.placement.layoutId === 'old-layout-1990'
     && undoneForeign?.placement.xMm === 30 && undoneForeign?.placement.yMm === 30,
     JSON.stringify(undoneForeign?.placement))
+
+  // ---- stored marks are drawn over the paper view's words (#489 4c-1) -------------
+  await seedMarks()
+  await openPaperView()
+  await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight').first().waitFor({ timeout: 15_000 })
+  check('a stored highlight is drawn on the paper view',
+    await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight').count() >= 1
+    && await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-color="yellow"]').count() >= 1)
+  // Mark rects are iframe-document px; elementFromPoint wants viewport coords,
+  // so the center is offset by the iframe's own scroll first.
+  const highlightHit = await page.evaluate(() => {
+    const mark = document.querySelector('.paper-personal-paper-mark.paper-personal-mark--highlight')
+    const iframe = document.querySelector('.paper-personal-paper-iframe')
+    const doc = iframe?.contentDocument
+    const win = iframe?.contentWindow
+    if (!mark || !doc || !win) return null
+    const cx = parseFloat(mark.style.left) + parseFloat(mark.style.width) / 2 - win.scrollX
+    const cy = parseFloat(mark.style.top) + parseFloat(mark.style.height) / 2 - win.scrollY
+    return doc.elementFromPoint(cx, cy)?.textContent ?? null
+  })
+  check('the highlight sits over its words',
+    typeof highlightHit === 'string' && highlightHit.includes(markStreamText.slice(2, 12)),
+    JSON.stringify(typeof highlightHit === 'string' ? highlightHit.slice(0, 60) : highlightHit))
+  check('a stored underline is drawn with its ink',
+    await page.locator('.paper-personal-paper-mark.paper-personal-mark--underline[data-ink="red"]').count() >= 1)
+  check('no unplaced-mark notice for mappable anchors',
+    await page.locator('.paper-personal-paper-notice:has-text("找不到原文")').count() === 0)
 
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()

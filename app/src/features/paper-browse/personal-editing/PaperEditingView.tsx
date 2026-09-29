@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { MM_TO_PX, type PaperPageFrame } from './paperPlacement'
+import { PaperMarkLayer } from './PaperMarkLayer'
 import { PaperTextBoxLayer } from './PaperTextBoxLayer'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
 import { usePersonalPaperLayout } from './usePersonalPaperLayout'
@@ -211,6 +212,14 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
             />
             {layout && geometry.status === 'ok' && (
               <div className="paper-personal-paper-overlays">
+                {/* Marks sit under text boxes: marks are paper ink, boxes are
+                 * interactive chrome that must stay clickable on top. */}
+                <PaperMarkLayer
+                  api={api}
+                  iframe={iframeRef.current}
+                  measureKey={`${layout.layoutId}:${geometry.frames.map((frame) => `${frame.leftPx},${frame.topPx}`).join('|')}`}
+                  noticeTarget={noticeTarget}
+                />
                 <PaperTextBoxLayer
                   api={api}
                   frames={geometry.frames}
