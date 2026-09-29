@@ -1,7 +1,13 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from 'react'
 import type { PersonalObject } from '../../../../../shared/personal-paper-layer/index.mjs'
+import {
+  isPersonalTextDocumentBlank,
+  type PersonalTextDocumentV1,
+} from '../../../../../shared/personal-text/index.mjs'
 import { PAPER_SHEET_BOX_SHADOW } from './PaperEditingView'
+import { PersonalTextEditor } from './PersonalTextEditor'
 import { PersonalTextView } from './PersonalTextView'
+import { TextBoxPresentationControls } from './PaperTextBoxStrip'
 import type { AppendixPlanEntry } from './PaperAppendixLayer'
 import { scrollElementToVerticalCenter } from './paperScroll'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
@@ -13,6 +19,15 @@ const FLASH_MS = 900
 type AppendixEntry = {
   entry: AppendixPlanEntry
   object: Extract<PersonalObject, { type: 'anchored-note' | 'text-box' }>
+}
+
+// The entry being edited. Like the note card: seal at entry, one mergeKey for
+// the whole session; changes stay local until the editor closes.
+type AppendixEditing = {
+  key: string
+  mergeKey: string
+  objectId: string
+  document: PersonalTextDocumentV1
 }
 
 // 出处行：旁注「第 N 页 · “首段前 24 字”」，文字框「第 N 页 · 文字框」；页码未知时省略前缀。
@@ -48,8 +63,44 @@ export function PaperAppendixPreview({
 }): ReactNode {
   const sheetRef = useRef<HTMLDivElement | null>(null)
   const [sheetHeight, setSheetHeight] = useState(0)
+  const [editing, setEditing] = useState<AppendixEditing | null>(null)
   const flashTimeoutRef = useRef<number | null>(null)
   const flashedRef = useRef<Element | null>(null)
+  // Synchronous mirror: blur can race the next render, and the close guard
+  // must not read a stale editing state.
+  const editingRef = useRef<AppendixEditing | null>(null)
+  editingRef.current = editing
+
+  // Same flow as the note card editor: seal at entry, one mergeKey for the
+  // session, changes stay local until the editor closes.
+  const openEntryEditor = (objectId: string) => {
+    const object = api.objectById.get(objectId)
+    if (!object || (object.type !== 'anchored-note' && object.type !== 'text-box') || !api.canEdit) return
+    api.seal()
+    const mergeKey = api.nextEditKey()
+    const state: AppendixEditing = {
+      key: `appendix-${mergeKey}`,
+      mergeKey,
+      objectId,
+      document: structuredClone(object.document),
+    }
+    editingRef.current = state
+    setEditing(state)
+  }
+
+  // Exit editing: one {document} update when the content actually changed. An
+  // entry emptied while editing is NOT deleted (deletion is explicit) — the
+  // untouched stored document simply stays, which restores the pre-edit text.
+  const closeEntryEditing = (state: AppendixEditing) => {
+    if (editingRef.current?.key !== state.key) return
+    editingRef.current = null
+    setEditing(null)
+    const object = api.objectById.get(state.objectId)
+    if (!object || (object.type !== 'anchored-note' && object.type !== 'text-box')) return
+    if (JSON.stringify(state.document) === JSON.stringify(object.document)) return
+    if (isPersonalTextDocumentBlank(state.document)) return
+    api.apply([{ op: 'update', objectId: state.objectId, patch: { document: state.document } }], { mergeKey: state.mergeKey })
+  }
 
   // The sheet's height is content-driven; the ResizeObserver feeds the scaled
   // outer box so the preview reserves its real footprint.
@@ -118,47 +169,98 @@ export function PaperAppendixPreview({
         <div
           ref={sheetRef}
           className="paper-personal-appendix-sheet"
-          style={{ width: pageWidthPx, transform: `scale(${scale})`, boxShadow: PAPER_SHEET_BOX_SHADOW }}
+          style={{ width: pageWidthPx, transform: `scale(${scale})`, boxShadow: PAPER_SHEET_BOX_SHADOW, '--paper-zoom': scale } as CSSProperties}
         >
           <h2 className="paper-personal-appendix-title">附页</h2>
           <p className="paper-personal-appendix-hint">导出「我的批注版」时排在卷末，页数以导出结果为准</p>
           <ol className="paper-personal-appendix-entries">
             {visible.map((item) => {
-              const selected = api.selectedId === item.object.id
+              const editingState = editing?.objectId === item.object.id ? editing : null
+              const editingNow = editingState != null
+              const selected = api.selectedId === item.object.id && !editingNow
               return (
                 <li
                   key={item.object.id}
-                  className={`paper-personal-appendix-entry${selected ? ' is-selected' : ''}`}
+                  className={`paper-personal-appendix-entry${selected ? ' is-selected' : ''}${editingNow ? ' is-editing' : ''}`}
                   data-appendix-entry={item.object.id}
+                  tabIndex={0}
+                  aria-label="附页条目"
                   onClick={() => api.setSelectedId(item.object.id)}
+                  onDoubleClick={() => {
+                    if (!editingNow) openEntryEditor(item.object.id)
+                  }}
+                  onKeyDown={(event: ReactKeyboardEvent<HTMLLIElement>) => {
+                    if (event.key === 'Enter' && !editingNow) openEntryEditor(item.object.id)
+                  }}
+                  onKeyDownCapture={(event) => {
+                    if (!editingState || event.key !== 'Escape' || event.nativeEvent.isComposing) return
+                    event.preventDefault()
+                    event.stopPropagation()
+                    closeEntryEditing(editingState)
+                  }}
+                  onBlur={(event) => {
+                    if (!editingState) return
+                    const next = event.relatedTarget
+                    if (next instanceof Node && event.currentTarget.contains(next)) return
+                    closeEntryEditing(editingState)
+                  }}
                 >
                   <span className="paper-personal-appendix-marker" aria-hidden="true">附{item.entry.number}</span>
                   <div className="paper-personal-appendix-entry-body">
                     <p className="paper-personal-appendix-entry-source">{sourceLine(item)}</p>
-                    <PersonalTextView document={item.object.document} />
+                    {editingState ? (
+                      <PersonalTextEditor
+                        documentKey={editingState.key}
+                        value={editingState.document}
+                        ariaLabel="附页条目内容"
+                        autoFocus
+                        toolbarExtra={api.canEdit ? (
+                          <TextBoxPresentationControls
+                            document={editingState.document}
+                            subject={item.object.type === 'anchored-note' ? '旁注' : '文字框'}
+                            onChange={(patch) => {
+                              // Presentation changes ride the session's mergeKey via
+                              // the close-time diff — no store write per click.
+                              const document: PersonalTextDocumentV1 = {
+                                ...editingState.document,
+                                presentation: { ...editingState.document.presentation, ...patch },
+                              }
+                              setEditing((current) => (current?.key === editingState.key ? { ...current, document } : current))
+                            }}
+                          />
+                        ) : null}
+                        onChange={(next) => {
+                          setEditing((current) => (current?.key === editingState.key ? { ...current, document: next } : current))
+                        }}
+                      />
+                    ) : (
+                      <PersonalTextView document={item.object.document} />
+                    )}
                   </div>
-                  <div className="paper-personal-appendix-entry-actions">
-                    <button
-                      type="button"
-                      className="paper-personal-appendix-entry-action"
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        scrollToOriginSpot(item.object.id)
-                      }}
-                    >
-                      回到原处
-                    </button>
-                    <button
-                      type="button"
-                      className="paper-personal-appendix-entry-action"
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        moveBackToPaper(item)
-                      }}
-                    >
-                      移回卷面
-                    </button>
-                  </div>
+                  {editingNow ? null : (
+                    <div className="paper-personal-appendix-entry-actions">
+                      <button
+                        type="button"
+                        className="paper-personal-appendix-entry-action"
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          scrollToOriginSpot(item.object.id)
+                        }}
+                      >
+                        回到原处
+                      </button>
+                      <button
+                        type="button"
+                        className="paper-personal-appendix-entry-action"
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          moveBackToPaper(item)
+                        }}
+                      >
+                        移回卷面
+                      </button>
+                    </div>
+                  )}
                 </li>
               )
             })}

@@ -38,7 +38,8 @@ export const PASTE_OFFSET_MM = 5
 // Page-box checks compare server-measured mm against iframe-rendered px; the
 // same 2px geometry tolerance as the layout check, in mm, absorbs that drift
 // so a box flush against the clamp limit is not flagged as overflowing.
-const OVERFLOW_TOLERANCE_MM = 1
+// Exported for the note card layer's identical overflow check.
+export const OVERFLOW_TOLERANCE_MM = 1
 
 type TextBoxObject = Extract<PersonalObject, { type: 'text-box' }>
 type PagePositionedTextBox = TextBoxObject & {
@@ -548,20 +549,32 @@ export function PaperTextBoxLayer({
 
   // 转到附页: one update op to the appendix placement. The current page
   // position rides along as the origin — it is what the appendix numbering
-  // and a later 移回卷面 read back.
-  const moveSelectedBoxToAppendix = useCallback(() => {
-    const selected = selectedBox
-    if (!selected || selected.placement.kind !== 'page-position') return
+  // and a later 移回卷面 read back. Shared by the strip (selected box) and
+  // the overflow notice (first overflowing box).
+  const moveBoxToAppendix = useCallback((objectId: string) => {
+    const object = api.objectById.get(objectId)
+    if (!object || object.type !== 'text-box' || object.placement.kind !== 'page-position') return
     seal()
     resetNudgeRun()
     setInteractionState(null)
     apply([{
       op: 'update',
-      objectId: selected.id,
-      patch: { placement: { kind: 'appendix', origin: { ...selected.placement } } },
+      objectId,
+      patch: { placement: { kind: 'appendix', origin: { ...object.placement } } },
     }])
-    setSelectedId(null)
-  }, [apply, resetNudgeRun, seal, selectedBox, setSelectedId, setInteractionState])
+    setSelectedId((current) => (current === objectId ? null : current))
+  }, [api.objectById, apply, resetNudgeRun, seal, setSelectedId, setInteractionState])
+
+  const moveSelectedBoxToAppendix = useCallback(() => {
+    if (selectedBox) moveBoxToAppendix(selectedBox.id)
+  }, [moveBoxToAppendix, selectedBox])
+
+  // Notice action: the first overflowing box goes to the appendix — same
+  // implementation as the strip's 转到附页.
+  const moveFirstOverflowingBoxToAppendix = useCallback(() => {
+    const target = boxes.find((object) => overflowKeys.has(object.id))
+    if (target) moveBoxToAppendix(target.id)
+  }, [boxes, moveBoxToAppendix, overflowKeys])
 
   const deleteSelectedBox = useCallback(() => {
     if (!selectedBox) return
@@ -848,6 +861,9 @@ export function PaperTextBoxLayer({
             <p className="paper-personal-paper-notice" role="status">
               <AlertTriangle size={16} />
               有 {overflowCount} 个文字框超出纸张，调整位置、宽度或字号。
+              {canEdit ? (
+                <button type="button" className="paper-personal-retry" onClick={moveFirstOverflowingBoxToAppendix}>转到附页</button>
+              ) : null}
             </p>
           ) : null}
           {foreignCount > 0 ? (

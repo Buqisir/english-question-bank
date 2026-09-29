@@ -502,6 +502,33 @@ try {
     return response.json()
   }
   const storedTextBoxes = async () => (await readLayer()).layer?.objects?.filter((object) => object.type === 'text-box') ?? []
+  // Server-side writes race the page's own autosave flushes; re-read the
+  // version and retry a few times on the conflict response.
+  const postOperations = async (operations, tag) => {
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      const current = await readLayer()
+      const response = await fetch(`http://127.0.0.1:${apiPort}/api/personal-paper-layers/${paperId}/operations`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          cookie: `eqb_session=${token}`,
+          origin: `http://127.0.0.1:${apiPort}`,
+        },
+        body: JSON.stringify({
+          schemaVersion: PERSONAL_LAYER_API_SCHEMA,
+          paperId,
+          sourceRevision,
+          expectedVersion: current.layer?.version ?? 0,
+          clientMutationId: `${tag}-${Date.now()}-${attempt}`,
+          operations,
+        }),
+      })
+      if (response.status === 200) return
+      if (response.status !== 409) throw new Error(`${tag} failed: ${response.status} ${await response.text()}`)
+      await new Promise((resolve) => setTimeout(resolve, 500))
+    }
+    throw new Error(`${tag} kept hitting version conflicts`)
+  }
   const storedVersion = async () => (await readLayer()).layer?.version ?? null
 
   const armAddText = async () => {
@@ -917,25 +944,8 @@ try {
     }
   }
   const storedNotes = async () => (await readLayer()).layer?.objects?.filter((object) => object.type === 'anchored-note') ?? []
-  const seedNotes = async (notes) => {
-    const current = await readLayer()
-    const response = await fetch(`http://127.0.0.1:${apiPort}/api/personal-paper-layers/${paperId}/operations`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        cookie: `eqb_session=${token}`,
-        origin: `http://127.0.0.1:${apiPort}`,
-      },
-      body: JSON.stringify({
-        schemaVersion: PERSONAL_LAYER_API_SCHEMA,
-        paperId,
-        sourceRevision,
-        expectedVersion: current.layer?.version ?? 0,
-        clientMutationId: `verify-notes-${Date.now()}`,
-        operations: notes.map((object) => ({ op: 'create', object })),
-      }),
-    })
-    if (response.status !== 200) throw new Error(`note seed failed: ${response.status} ${await response.text()}`)
+  const seedObjects = async (objects) => {
+    await postOperations(objects.map((object) => ({ op: 'create', object })), 'verify-notes')
   }
   const noteCard = (noteId) => page.locator(`.paper-personal-paper-note[data-note-key="${noteId}"]`)
   const selectNote = async (noteId) => {
@@ -959,7 +969,7 @@ try {
     )
   }
 
-  await seedNotes([
+  await seedObjects([
     {
       id: 'verify-note-1',
       type: 'anchored-note',
@@ -1047,7 +1057,7 @@ try {
 
   // A 40-line auto note has no margin slot big enough: no card, pending notice,
   // then 逐个摆放 + one blank-page click re-homes it to page-position.
-  await seedNotes([{
+  await seedObjects([{
     id: 'verify-note-3',
     type: 'anchored-note',
     document: createPersonalTextDocumentFromPlainText(Array.from({ length: 40 }, (_, line) => `第四条旁注第${line + 1}行`).join('\n')),
@@ -1289,6 +1299,277 @@ try {
     scrollAfterAppendix.scrollWidth <= Math.max(scrollBeforeAppendix.scrollWidth, scrollAfterAppendix.clientWidth) + 1
     && scrollAfterAppendix.scrollLeft === 0,
     `scrollWidth ${scrollBeforeAppendix.scrollWidth} -> ${scrollAfterAppendix.scrollWidth}, clientWidth ${scrollAfterAppendix.clientWidth}, scrollLeft ${scrollAfterAppendix.scrollLeft}`)
+
+  // ---- appendix finish-up (#489 4d-B) ----------------------------------------
+  // Both strips' 转到附页, the notice shortcuts, entry editing, numbering,
+  // return flows and undo — against the real server like every section above.
+  // The 4d-A check left one appendix object behind; start from an empty
+  // appendix so entry numbers are deterministic.
+  const storedAppendix = async () => (await readLayer()).layer?.objects?.filter((object) => object.placement?.kind === 'appendix') ?? []
+  const deleteObjects = async (objects) => {
+    if (objects.length === 0) return
+    await postOperations(objects.map((object) => ({ op: 'delete', objectId: object.id })), 'verify-cleanup')
+  }
+  // The 4d-A check's 转到附页 op may still ride the autosave debounce; flush
+  // before reading the appendix, or the cleanup below misses it.
+  await flushAutosave()
+  await deleteObjects(await storedAppendix())
+  const scrollBaseline = await scrollAreaState()
+
+  // (a) the note strip's 转到附页.
+  await seedObjects([{
+    id: 'verify-appendix-note-1',
+    type: 'anchored-note',
+    document: createPersonalTextDocumentFromPlainText('转附页测试旁注。'),
+    textAnchor: noteAnchor('as a whole different world'),
+    placement: { kind: 'auto-near-anchor' },
+  }])
+  await openPaperView()
+  await selectNote('verify-appendix-note-1')
+  await page.click('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip-action[aria-label="转到附页"]')
+  await page.waitForSelector('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-note-1"]', { timeout: 5_000 })
+  await flushAutosave()
+  const appendixNote = (await storedNotes()).find((object) => object.id === 'verify-appendix-note-1')
+  check('the note strip 转到附页 stores an appendix placement with a page-position origin',
+    appendixNote?.placement.kind === 'appendix' && appendixNote?.placement.origin?.kind === 'page-position',
+    JSON.stringify(appendixNote?.placement))
+  check('转到附页 removes the paper card and leaves the 附1 marker',
+    await noteCard('verify-appendix-note-1').count() === 0
+    && (await page.locator('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-note-1"]').textContent()) === '附1')
+  check('the appendix preview shows exactly one entry numbered 附1',
+    await page.locator('.paper-personal-appendix-preview').count() === 1
+    && await page.locator('.paper-personal-appendix-entry').count() === 1
+    && (await page.locator('.paper-personal-appendix-entry > .paper-personal-appendix-marker').textContent()) === '附1')
+
+  // (b) the text-box strip's 转到附页 keeps the whole placement as the origin;
+  // the paper marker sits at that origin.
+  await seedObjects([{
+    id: 'verify-appendix-box-1',
+    type: 'text-box',
+    document: createPersonalTextDocumentFromPlainText('转附页测试文字框'),
+    placement: { kind: 'page-position', layoutId: layout.layoutId, pageId: 'p1', xMm: 30, yMm: 40, widthMm: 60 },
+  }])
+  await openPaperView()
+  await page.locator('.paper-personal-text-box[data-box-key="verify-appendix-box-1"]').click()
+  await page.waitForSelector('.paper-personal-text-box.is-selected .paper-personal-text-box__strip', { timeout: 5_000 })
+  await page.click('.paper-personal-text-box.is-selected .paper-personal-text-box__strip-action[aria-label="转到附页"]')
+  await page.waitForSelector('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-box-1"]', { timeout: 5_000 })
+  await flushAutosave()
+  const appendixBox = (await storedTextBoxes()).find((object) => object.id === 'verify-appendix-box-1')
+  check('the text-box strip 转到附页 keeps the whole placement as the origin',
+    appendixBox?.placement.kind === 'appendix'
+    && appendixBox?.placement.origin?.layoutId === layout.layoutId
+    && appendixBox?.placement.origin?.pageId === 'p1'
+    && appendixBox?.placement.origin?.xMm === 30
+    && appendixBox?.placement.origin?.yMm === 40
+    && appendixBox?.placement.origin?.widthMm === 60,
+    JSON.stringify(appendixBox?.placement))
+  const boxMarkerMm = await page.evaluate(({ mmToPx }) => {
+    const marker = document.querySelector('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-box-1"]')
+    const overlay = document.querySelector('[data-paper-page-overlay="p1"]')
+    if (!marker || !overlay) return null
+    return {
+      xMm: (parseFloat(marker.style.left) - parseFloat(overlay.style.left)) / mmToPx,
+      yMm: (parseFloat(marker.style.top) - parseFloat(overlay.style.top)) / mmToPx,
+    }
+  }, { mmToPx: MM_TO_PX })
+  check('the text-box appendix marker sits at the confirmed origin (±1mm)',
+    boxMarkerMm !== null && Math.abs(boxMarkerMm.xMm - 30) < 1 && Math.abs(boxMarkerMm.yMm - 40) < 1,
+    JSON.stringify(boxMarkerMm))
+
+  // (c) numbering follows the sources' page order and renumbers live.
+  const pageTwoId = layout.pages[1]?.pageId
+  if (!pageTwoId) throw new Error('fixture layout has fewer than two pages')
+  await seedObjects([{
+    id: 'verify-appendix-box-2',
+    type: 'text-box',
+    document: createPersonalTextDocumentFromPlainText('第二条附页文字框'),
+    placement: { kind: 'appendix', origin: { kind: 'page-position', layoutId: layout.layoutId, pageId: pageTwoId, xMm: 30, yMm: 40, widthMm: 60 } },
+  }])
+  await openPaperView()
+  const entryNumber = async (objectId) => {
+    const label = await page.locator(`[data-appendix-entry="${objectId}"] > .paper-personal-appendix-marker`).textContent()
+    return Number((label ?? '').slice(1))
+  }
+  const appendixNumber1 = await entryNumber('verify-appendix-box-1')
+  const appendixNumber2 = await entryNumber('verify-appendix-box-2')
+  check('appendix numbering follows the page order of the source placements',
+    appendixNumber1 >= 1 && appendixNumber2 > appendixNumber1,
+    `box-1=附${appendixNumber1} box-2=附${appendixNumber2}`)
+
+  // (d) 移回卷面: box → origin placement, note → auto-near-anchor; the numbers
+  // renumber live and the empty appendix dismisses the preview.
+  await page.click('[data-appendix-entry="verify-appendix-box-1"] button:has-text("移回卷面")')
+  await flushAutosave()
+  const movedBackBox = (await storedTextBoxes()).find((object) => object.id === 'verify-appendix-box-1')
+  check('移回卷面 puts the text box back at its origin placement',
+    movedBackBox?.placement.kind === 'page-position'
+    && movedBackBox?.placement.layoutId === layout.layoutId
+    && movedBackBox?.placement.pageId === 'p1'
+    && movedBackBox?.placement.xMm === 30
+    && movedBackBox?.placement.yMm === 40
+    && movedBackBox?.placement.widthMm === 60,
+    JSON.stringify(movedBackBox?.placement))
+  const renumbered = await entryNumber('verify-appendix-box-2')
+  check('移回卷面 renumbers the remaining entries',
+    renumbered === appendixNumber2 - 1 && renumbered >= 1,
+    `box-2 附${appendixNumber2} -> 附${renumbered}`)
+  await page.click('[data-appendix-entry="verify-appendix-note-1"] button:has-text("移回卷面")')
+  await flushAutosave()
+  const movedBackNote = (await storedNotes()).find((object) => object.id === 'verify-appendix-note-1')
+  check('移回卷面 restores the note as auto-near-anchor and the card reappears',
+    movedBackNote?.placement.kind === 'auto-near-anchor'
+    && await noteCard('verify-appendix-note-1').count() === 1,
+    JSON.stringify(movedBackNote?.placement))
+  check('the last remaining entry renumbers to 附1',
+    (await page.locator('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-box-2"]').textContent()) === '附1')
+  await page.click('[data-appendix-entry="verify-appendix-box-2"] button:has-text("移回卷面")')
+  await flushAutosave()
+  const movedBackBox2 = (await storedTextBoxes()).find((object) => object.id === 'verify-appendix-box-2')
+  check('the second box returns to its origin placement too',
+    movedBackBox2?.placement.kind === 'page-position' && movedBackBox2?.placement.pageId === pageTwoId
+    && movedBackBox2?.placement.xMm === 30 && movedBackBox2?.placement.yMm === 40,
+    JSON.stringify(movedBackBox2?.placement))
+  check('an empty appendix dismisses the preview',
+    await page.locator('.paper-personal-appendix-preview').count() === 0
+    && (await storedAppendix()).length === 0)
+
+  // (e) 转到附页 is one undoable placement op.
+  const boxPlacement = async () => (await storedTextBoxes()).find((object) => object.id === 'verify-appendix-box-1')?.placement ?? null
+  await page.locator('.paper-personal-text-box[data-box-key="verify-appendix-box-1"]').click()
+  await page.waitForSelector('.paper-personal-text-box.is-selected .paper-personal-text-box__strip', { timeout: 5_000 })
+  await page.click('.paper-personal-text-box.is-selected .paper-personal-text-box__strip-action[aria-label="转到附页"]')
+  await flushAutosave()
+  check('转到附页 stores the appendix placement again', (await boxPlacement())?.kind === 'appendix', JSON.stringify(await boxPlacement()))
+  await page.keyboard.press('ControlOrMeta+z')
+  await flushAutosave()
+  const undoneAppendix = await boxPlacement()
+  check('undo reverts 转到附页 to the origin placement',
+    undoneAppendix?.kind === 'page-position'
+    && undoneAppendix?.layoutId === layout.layoutId && undoneAppendix?.pageId === 'p1'
+    && undoneAppendix?.xMm === 30 && undoneAppendix?.yMm === 40 && undoneAppendix?.widthMm === 60,
+    JSON.stringify(undoneAppendix))
+  await page.keyboard.press('Shift+ControlOrMeta+z')
+  await flushAutosave()
+  check('redo reapplies 转到附页', (await boxPlacement())?.kind === 'appendix', JSON.stringify(await boxPlacement()))
+
+  // (f) clicking the paper marker selects the preview entry, vertical only.
+  await page.evaluate((objectId) => {
+    const marker = document.querySelector(`.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="${objectId}"]`)
+    if (!marker) return
+    const rect = marker.getBoundingClientRect()
+    window.scrollTo({ top: window.scrollY + rect.top - window.innerHeight / 2 })
+  }, 'verify-appendix-box-1')
+  const appendixMarkerBox = await page.locator('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-box-1"]').boundingBox()
+  if (!appendixMarkerBox) throw new Error('appendix marker not visible')
+  await page.mouse.click(appendixMarkerBox.x + appendixMarkerBox.width / 2, appendixMarkerBox.y + appendixMarkerBox.height / 2)
+  await page.waitForFunction(() => document.querySelector('[data-appendix-entry="verify-appendix-box-1"]')?.classList.contains('is-selected'), undefined, { timeout: 5_000 })
+  check('clicking the paper marker selects the preview entry without horizontal scroll',
+    await page.locator('[data-appendix-entry="verify-appendix-box-1"].is-selected').count() === 1
+    && await page.evaluate(() => document.scrollingElement?.scrollLeft ?? 0) === 0)
+
+  // (g) 回到原处 flashes the paper marker.
+  await page.click('[data-appendix-entry="verify-appendix-box-1"] button:has-text("回到原处")')
+  await page.waitForFunction((objectId) => document.querySelector(`.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="${objectId}"]`)?.classList.contains('is-flash'), 'verify-appendix-box-1', { timeout: 5_000 })
+  check('回到原处 flashes the paper marker with is-flash',
+    await page.locator('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-box-1"].is-flash').count() === 1)
+
+  // (h) in-place entry editing: double-click opens, Escape commits, emptying
+  // the editor restores the stored text.
+  await page.click('[data-appendix-entry="verify-appendix-box-1"] .paper-personal-appendix-entry-body', { clickCount: 2 })
+  await page.waitForSelector('.paper-personal-appendix-entry.is-editing [contenteditable="true"]', { timeout: 5_000 })
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
+  await page.keyboard.type('附页增补测试')
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  await flushAutosave()
+  const editedAppendixBox = (await storedTextBoxes()).find((object) => object.id === 'verify-appendix-box-1')
+  check('double-click opens the entry editor and Escape commits the text',
+    JSON.stringify(editedAppendixBox?.document ?? null).includes('附页增补测试'),
+    JSON.stringify(editedAppendixBox?.document ?? null))
+  await page.click('[data-appendix-entry="verify-appendix-box-1"] .paper-personal-appendix-entry-body', { clickCount: 2 })
+  await page.waitForSelector('.paper-personal-appendix-entry.is-editing [contenteditable="true"]', { timeout: 5_000 })
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
+  await page.keyboard.press('ControlOrMeta+a')
+  await page.keyboard.press('Delete')
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  await flushAutosave()
+  const emptiedAppendixBox = (await storedTextBoxes()).find((object) => object.id === 'verify-appendix-box-1')
+  check('emptying the entry editor and exiting restores the stored text',
+    emptiedAppendixBox !== undefined
+    && JSON.stringify(emptiedAppendixBox.document).includes('附页增补测试')
+    && await page.locator('[data-appendix-entry="verify-appendix-box-1"]').count() === 1,
+    JSON.stringify(emptiedAppendixBox?.document ?? null))
+
+  // (i) Delete removes the selected appendix object with its marker and entry.
+  await page.click('[data-appendix-entry="verify-appendix-box-1"] .paper-personal-appendix-entry-body')
+  await page.waitForFunction(() => document.querySelector('[data-appendix-entry="verify-appendix-box-1"]')?.classList.contains('is-selected'), undefined, { timeout: 5_000 })
+  await page.keyboard.press('Delete')
+  await flushAutosave()
+  check('Delete removes the selected appendix entry and its paper marker',
+    !(await storedTextBoxes()).some((object) => object.id === 'verify-appendix-box-1')
+    && await page.locator('[data-appendix-entry="verify-appendix-box-1"]').count() === 0
+    && await page.locator('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-appendix-box-1"]').count() === 0)
+
+  // (j) a hand-placed note past the page bottom gets the overflow flag and
+  // notice; the notice's 转到附页 moves the first overflowing note.
+  await seedObjects([{
+    id: 'verify-note-overflow',
+    type: 'anchored-note',
+    document: createPersonalTextDocumentFromPlainText(Array.from({ length: 12 }, (_, line) => `溢出旁注第${line + 1}行，这一行故意写得比较长以便撑高卡片。`).join('\n')),
+    textAnchor: noteAnchor('as a whole different world'),
+    placement: { kind: 'page-position', layoutId: layout.layoutId, pageId: 'p1', xMm: 20, yMm: 275, widthMm: 56 },
+  }])
+  await openPaperView()
+  const noteOverflowNotice = page.locator('.paper-personal-paper-notice:has-text("条旁注超出纸张")')
+  await noteOverflowNotice.waitFor({ timeout: 15_000 })
+  check('a page-position note past the page bottom is flagged and counted',
+    await page.locator('.paper-personal-paper-note[data-note-key="verify-note-overflow"][data-overflow="true"]').count() === 1
+    && (await noteOverflowNotice.textContent()).includes('1 条旁注超出纸张'),
+    await noteOverflowNotice.textContent())
+  await page.click('.paper-personal-paper-notice:has-text("条旁注超出纸张") button:has-text("转到附页")')
+  await flushAutosave()
+  await page.waitForFunction(() => !(document.querySelector('.paper-personal-paper-notice')?.textContent ?? '').includes('条旁注超出纸张'), undefined, { timeout: 5_000 })
+  const movedOverflowNote = (await storedNotes()).find((object) => object.id === 'verify-note-overflow')
+  check('the overflow notice 转到附页 moves the first overflowing note to the appendix',
+    movedOverflowNote?.placement.kind === 'appendix'
+    && movedOverflowNote?.placement.origin?.kind === 'page-position'
+    && await page.locator('.paper-personal-paper-note[data-overflow="true"]').count() === 0
+    && await noteOverflowNotice.count() === 0,
+    JSON.stringify(movedOverflowNote?.placement))
+
+  // (k) the no-room notice's 转到附页 moves the first pending note without an
+  // origin; the anchor still maps, so the marker and page number stay.
+  await seedObjects([{
+    id: 'verify-note-pending',
+    type: 'anchored-note',
+    document: createPersonalTextDocumentFromPlainText(Array.from({ length: 40 }, (_, line) => `没有空位旁注第${line + 1}行`).join('\n')),
+    textAnchor: noteAnchor('most of my classmates thought of Ohio'),
+    placement: { kind: 'auto-near-anchor' },
+  }])
+  await openPaperView()
+  const pendingNoticeAgain = page.locator('.paper-personal-paper-notice:has-text("条旁注在纸上没有空位")')
+  await pendingNoticeAgain.waitFor({ timeout: 15_000 })
+  await page.click('.paper-personal-paper-notice:has-text("条旁注在纸上没有空位") button:has-text("转到附页")')
+  await flushAutosave()
+  await page.waitForFunction(() => !(document.querySelector('.paper-personal-paper-notice')?.textContent ?? '').includes('条旁注在纸上没有空位'), undefined, { timeout: 5_000 })
+  const movedPendingNote = (await storedNotes()).find((object) => object.id === 'verify-note-pending')
+  check('the no-room notice 转到附页 moves the first pending note with a null origin',
+    movedPendingNote?.placement.kind === 'appendix' && movedPendingNote?.placement.origin === null,
+    JSON.stringify(movedPendingNote?.placement))
+  const pendingSourceLine = await page.locator('[data-appendix-entry="verify-note-pending"] .paper-personal-appendix-entry-source').textContent()
+  check('the no-origin appendix note still gets a marker and a page number from its anchor',
+    await page.locator('.paper-personal-paper-appendix-layer .paper-personal-appendix-marker[data-paper-appendix-marker="verify-note-pending"]').count() === 1
+    && /^第 \d+ 页/.test(pendingSourceLine ?? ''),
+    `source=${JSON.stringify(pendingSourceLine)}`)
+
+  // (l) the appendix preview still never widens the paper view scroll area.
+  const scrollAreaAtEnd = await scrollAreaState()
+  check('the appendix preview still never widens the paper view scroll area',
+    scrollAreaAtEnd.scrollWidth <= Math.max(scrollBaseline.scrollWidth, scrollAreaAtEnd.clientWidth) + 1
+    && scrollAreaAtEnd.scrollLeft === 0,
+    `scrollWidth ${scrollBaseline.scrollWidth} -> ${scrollAreaAtEnd.scrollWidth}, scrollLeft ${scrollAreaAtEnd.scrollLeft}`)
 
   // ---- without a personal account there is no entry and no switch ------------------
   const anonymousPage = await context.newPage()

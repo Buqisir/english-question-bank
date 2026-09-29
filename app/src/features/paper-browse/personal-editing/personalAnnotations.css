@@ -864,6 +864,14 @@
     #fff;
 }
 
+/* 溢出卡：与文字框同款 1px 虚线提醒（只标手摆的 page-position 卡，auto 摆位
+ * 不会溢出）。Explicit-Cascade: 本条必须排在下方选中态 outline 规则之前——
+ * 两个规则同权时后写者获胜，选中是更强的用户意图，溢出提醒在选中时让位。 */
+.paper-personal-paper-note[data-overflow='true'] {
+  outline: 1px dashed var(--eqb-color-warning, #E8901A);
+  outline-offset: 4px;
+}
+
 /* 选中态复用文字框选中框：弱墨发丝 + 呼吸位；浮到其它旁注之上，
  * 重叠时（如刚复制）调宽手柄仍可点到。 */
 .paper-personal-paper-note.is-selected {
@@ -1121,4 +1129,46 @@
 
 .paper-personal-appendix-entry-action:hover {
   background: var(--desk-hover, #E5EAE1);
+}
+
+/* 条目就地编辑（4d-B）：照抄旁注卡编辑态——条目背景保持纸白，外框用弱墨
+ * 发丝表达焦点（编辑器自带的 2px 焦点环在下方关掉），工具条浮出条目上方
+ * 单行、反缩放保持控件原尺寸。 */
+.paper-personal-appendix-entry.is-editing {
+  z-index: 1;
+  background: #fff;
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+.paper-personal-appendix-entry .eqb-personal-text--editor {
+  /* Explicit-Cascade: 本条压过 personalText.css 的编辑器列间距（gap: 4px），
+   * 因工具条改为绝对定位浮出条目外，列间距会把正文下推 1px 以上。 */
+  gap: 0;
+}
+
+.paper-personal-appendix-entry .eqb-personal-text__tools {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 3;
+  width: max-content;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  /* UI chrome, not paper: cancel the sheet zoom so controls stay 13px/28px at every zoom level. */
+  transform: scale(calc(1 / var(--paper-zoom, 1)));
+  transform-origin: left bottom;
+}
+
+.paper-personal-appendix-entry .eqb-personal-text__tools > * {
+  flex-shrink: 0;
+}
+
+/* Explicit-Cascade: overrides personalText.css's input focus ring; the entry's
+ * own editing frame already marks focus, and two rings read as a heavy box. */
+.paper-personal-appendix-entry .eqb-personal-text--editor:not(.is-readonly) .eqb-personal-text__input:focus-visible {
+  outline: none;
 }

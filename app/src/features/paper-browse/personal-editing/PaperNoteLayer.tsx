@@ -12,12 +12,12 @@ import {
 import { PersonalTextEditor } from './PersonalTextEditor'
 import { PersonalTextView } from './PersonalTextView'
 import { TextBoxPresentationControls, type TextBoxPresentationChange } from './PaperTextBoxStrip'
-import { BookMarked, ArrowDown, Copy, Trash } from '../../../icons'
+import { BookMarked, AlertTriangle, ArrowDown, Copy, Trash } from '../../../icons'
 import { placeNoteNearAnchor, type NoteSlot } from './paperNotePlacement'
 import { clampPlacement, frameAtPoint, mmToPx, pxToMm, roundMm, type PaperPageFrame, MM_TO_PX } from './paperPlacement'
 import { usePaperContentBoxes } from './usePaperContentBoxes'
 import { scrollContainerOf } from './paperScroll'
-import { DRAG_THRESHOLD_PX, PASTE_OFFSET_MM, isEditableTarget, isMac } from './PaperTextBoxLayer'
+import { DRAG_THRESHOLD_PX, OVERFLOW_TOLERANCE_MM, PASTE_OFFSET_MM, isEditableTarget, isMac } from './PaperTextBoxLayer'
 import type { LayerRect } from './markGeometry'
 import type { PaperAnchorGeometry } from './usePaperAnchorGeometry'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
@@ -178,6 +178,10 @@ export function PaperNoteLayer({
   const [placing, setPlacing] = useState(false)
   const [editing, setEditing] = useState<NoteEditing | null>(null)
   const [interaction, setInteraction] = useState<NoteInteraction | null>(null)
+  // Page-position cards whose rendered bottom/right edge leaves their page
+  // box. Auto cards never overflow (the placement already fits them inside
+  // the page), so they are not measured.
+  const [overflowKeys, setOverflowKeys] = useState<ReadonlySet<string>>(new Set())
   const flashTimeoutRef = useRef<number | null>(null)
   const clipboardRef = useRef<NoteClipboard | null>(null)
   // Consecutive nudges share one mergeKey; any other edit resets it first.
@@ -220,6 +224,34 @@ export function PaperNoteLayer({
     () => new Map(frames.map((frame) => [frame.pageId, frame])),
     [frames],
   )
+
+  // Same page-box check as the text boxes: a card's bottom/right edge in page
+  // mm against its frame, with the same tolerance for px↔mm rounding. Cards
+  // carry data-page-id/data-note-key so the measured node maps back to its
+  // frame; offset* values are layout px, untouched by the canvas zoom.
+  const measureOverflow = useCallback(() => {
+    const layer = layerRef.current
+    if (!layer) return
+    const next = new Set<string>()
+    for (const node of layer.querySelectorAll<HTMLElement>('.paper-personal-paper-note[data-note-key][data-page-id]')) {
+      // Auto-placed cards always fit inside their page (the placement search
+      // guarantees it); only hand-placed cards can leave the page box.
+      if (node.dataset.noteAuto === 'true') continue
+      const frame = frameByPageId.get(node.dataset.pageId ?? '')
+      const key = node.dataset.noteKey ?? ''
+      if (!frame || !key) continue
+      const bottomMm = pxToMm(node.offsetTop + node.offsetHeight - frame.topPx)
+      const rightMm = pxToMm(node.offsetLeft + node.offsetWidth - frame.leftPx)
+      if (
+        bottomMm > frame.heightMm + OVERFLOW_TOLERANCE_MM
+        || rightMm > frame.widthMm + OVERFLOW_TOLERANCE_MM
+      ) next.add(key)
+    }
+    setOverflowKeys((current) => {
+      if (current.size === next.size && [...next].every((key) => current.has(key))) return current
+      return next
+    })
+  }, [frameByPageId])
 
   const probe = useCallback((rect: { left: number; top: number; width: number; height: number }): boolean => {
     const doc = iframe?.contentDocument
@@ -333,6 +365,31 @@ export function PaperNoteLayer({
     }
     return { placed, pending }
   }, [api.objects, anchorGeometry, contentBoxes, frameByPageId, frames, layoutId, measuredHeights, probe])
+
+  // Cheap enough to run after every render (a handful of cards), which covers
+  // object changes and live drag positions in one place.
+  useEffect(() => {
+    measureOverflow()
+  })
+
+  // Typing and font loading change a card's rendered height without an
+  // objects change: watch the elements themselves, and re-check once fonts
+  // settle.
+  useEffect(() => {
+    const layer = layerRef.current
+    if (!layer) return undefined
+    const observer = new ResizeObserver(() => measureOverflow())
+    for (const node of layer.querySelectorAll('.paper-personal-paper-note')) observer.observe(node)
+    return () => observer.disconnect()
+  }, [measureOverflow, placed, editing])
+
+  useEffect(() => {
+    let cancelled = false
+    document.fonts.ready.then(() => {
+      if (!cancelled) measureOverflow()
+    }).catch(() => {})
+    return () => { cancelled = true }
+  }, [measureOverflow])
 
   // Cards' real height feeds back into placement once: the estimate only
   // steers the ink probe; when the rendered height differs by more than 1mm,
@@ -689,6 +746,13 @@ export function PaperNoteLayer({
     setSelectedId(null)
   }, [apply, canEdit, layoutId, placed, resetNudgeRun, seal, setSelectedId])
 
+  // Notice action: the first overflowing hand-placed card goes to the appendix
+  // — same path as the strip's 转到附页, origin = its current rendered spot.
+  const moveFirstOverflowingNoteToAppendix = useCallback(() => {
+    const note = placed.find((item) => !item.auto && overflowKeys.has(item.object.id))
+    if (note) moveNoteToAppendix(note.object.id)
+  }, [moveNoteToAppendix, overflowKeys, placed])
+
   const commitFirstPending = useCallback((frame: PaperPageFrame, xMm: number, yMm: number) => {
     const target = pending[0]
     if (!target || !canEdit) return
@@ -699,6 +763,16 @@ export function PaperNoteLayer({
       patch: { placement: { kind: 'page-position', layoutId, pageId: frame.pageId, ...clampPlacement(xMm, yMm, NOTE_WIDTH_MM, frame) } },
     }])
   }, [apply, canEdit, layoutId, pending, seal])
+
+  // Notice action: the first pending note has no rendered spot, so it goes to
+  // the appendix without an origin — the entry keeps only the anchor reference.
+  const moveFirstPendingToAppendix = useCallback(() => {
+    const target = pending[0]
+    if (!target || !canEdit) return
+    seal()
+    resetNudgeRun()
+    apply([{ op: 'update', objectId: target.id, patch: { placement: { kind: 'appendix', origin: null } } }])
+  }, [apply, canEdit, pending, resetNudgeRun, seal])
 
   // Armed click on the page stack: same conversion as the text-box layer's
   // re-place (getBoundingClientRect is scaled by the canvas transform,
@@ -811,6 +885,8 @@ export function PaperNoteLayer({
         data-note-key={object.id}
         data-note-slot={slot}
         data-note-auto={auto ? 'true' : undefined}
+        data-page-id={live.pageId}
+        data-overflow={overflowKeys.has(object.id) ? 'true' : undefined}
         onClick={(event) => {
           event.stopPropagation()
           setSelectedId(object.id)
@@ -987,7 +1063,19 @@ export function PaperNoteLayer({
         <p className="paper-personal-paper-notice" role="status">
           {pending.length} 条旁注在纸上没有空位
           {canEdit ? (
-            <button type="button" className="paper-personal-retry" onClick={() => setPlacing(true)}>逐个摆放</button>
+            <>
+              <button type="button" className="paper-personal-retry" onClick={() => setPlacing(true)}>逐个摆放</button>
+              <button type="button" className="paper-personal-retry" onClick={moveFirstPendingToAppendix}>转到附页</button>
+            </>
+          ) : null}
+        </p>
+      ), noticeTarget) : null}
+      {overflowKeys.size > 0 && noticeTarget ? createPortal((
+        <p className="paper-personal-paper-notice" role="status">
+          <AlertTriangle size={16} />
+          {overflowKeys.size} 条旁注超出纸张
+          {canEdit ? (
+            <button type="button" className="paper-personal-retry" onClick={moveFirstOverflowingNoteToAppendix}>转到附页</button>
           ) : null}
         </p>
       ), noticeTarget) : null}
