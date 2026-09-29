@@ -867,12 +867,85 @@
   padding: 1.5mm 2mm;
 }
 
-/* 「逐个摆放」armed 的整页点击面：只在 placing 时渲染（同文字框层
- * is-replacing 的 crosshair 语言）。 */
+/* 「逐个摆放」armed 的整页点击面；旁注选中/编辑时也渲染（点纸面空白取消
+ * 选中、退出编辑）。crosshair 只在 placing 时——平时是普通取消点击。 */
 .paper-personal-paper-note-hit {
   position: absolute;
   z-index: 0;
   pointer-events: auto;
+}
+
+.paper-personal-paper-note-layer.is-placing .paper-personal-paper-note-hit {
   cursor: crosshair;
+}
+
+/* 编辑中：卡片浮到最上层，背景改不透明（暖墨淡底叠白底），编辑加长后不与
+ * 下层卡片文字相叠；外框用与选中态同款弱墨发丝——编辑器输入区自带的 2px
+ * 焦点环在下方关掉，焦点由卡片外框表达。 */
+.paper-personal-paper-note.is-editing {
+  z-index: 2;
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+  background: linear-gradient(rgba(var(--paper-ink-rgb, 74, 68, 56), 0.035), rgba(var(--paper-ink-rgb, 74, 68, 56), 0.035)), #fff;
+}
+
+/* 编辑态工具条照抄文字框层（#489 4b）：绝对定位浮出卡片上方、单行
+ * max-content（页边卡 20mm 也放得下）、反缩放保持控件原尺寸。 */
+.paper-personal-paper-note .eqb-personal-text--editor {
+  /* Explicit-Cascade: 本条压过 personalText.css 的编辑器列间距（gap: 4px），
+   * 因工具条改为绝对定位浮出卡片外，列间距会把正文下推 1px 以上。 */
+  gap: 0;
+}
+
+.paper-personal-paper-note .eqb-personal-text__tools {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 3;
+  width: max-content;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  /* UI chrome, not paper: cancel the canvas zoom so controls stay 13px/28px at every zoom level. */
+  transform: scale(calc(1 / var(--paper-zoom, 1)));
+  transform-origin: left bottom;
+}
+
+.paper-personal-paper-note .eqb-personal-text__tools > * {
+  flex-shrink: 0;
+}
+
+/* Explicit-Cascade: overrides personalText.css's input focus ring; on paper the
+ * card's own editing frame already marks focus, and two rings read as a heavy box. */
+.paper-personal-paper-note .eqb-personal-text--editor:not(.is-readonly) .eqb-personal-text__input:focus-visible {
+  outline: none;
+}
+
+/* 回到原文：锚线透明度脉冲两个来回（motion-slow × 2）。 */
+.paper-personal-paper-mark.is-flash {
+  animation: paper-mark-flash var(--motion-slow, 220ms) ease-in-out 2;
+}
+
+@keyframes paper-mark-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-personal-paper-mark.is-flash {
+    animation: none;
+  }
+}
+
+/* 页面右半的页边卡：操作条与编辑工具条改为右对齐（锚卡片右缘），不伸出
+ * 页面右缘。Explicit-Cascade: 压过上方浮层规则的 left: 0 /
+ * transform-origin: left bottom，因页边卡贴页面右缘。 */
+.paper-personal-paper-note.is-strip-right .paper-personal-text-box__strip,
+.paper-personal-paper-note.is-strip-right .eqb-personal-text__tools {
+  left: auto;
+  right: 0;
+  transform-origin: right bottom;
 }
 

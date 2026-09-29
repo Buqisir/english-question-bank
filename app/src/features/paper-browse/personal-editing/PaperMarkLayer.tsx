@@ -64,12 +64,15 @@ export function PaperMarkLayer({
   // Clicking anywhere else (toolbar, gutter, chrome) closes the popover again,
   // mirroring the reading view. Clicks inside the iframe never reach this
   // window, so the popover just stays there — acceptable, same as before.
+  // Pointerdowns inside a paper note card (its strip buttons especially) also
+  // keep the selection: the card is chrome of the selected object itself, and
+  // clearing here would unmount the strip before its click ever lands.
   useEffect(() => {
     if (!api.popover && !api.selectedId) return undefined
     const onPointerDown = (event: PointerEvent) => {
       const target = event.target
       if (target instanceof Element
-        && (target.closest('.paper-personal-popover') || target.closest('.paper-personal-paper-marks'))) return
+        && (target.closest('.paper-personal-popover') || target.closest('.paper-personal-paper-marks') || target.closest('.paper-personal-paper-note'))) return
       api.setPopover(null)
       const selected = api.selectedId ? api.objectById.get(api.selectedId) : null
       if (selected && isAnchoredMarkType(selected.type)) api.setSelectedId(null)

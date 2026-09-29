@@ -21,14 +21,17 @@ const SIZE_LABELS: Record<PersonalSizePresetId, string> = { small: '小', normal
 /*
  * Font and size controls shared by the selected-box strip and the editing
  * toolbar (both float above the box). Each change is one presentation update
- * op applied by the caller.
+ * op applied by the caller. `subject` only names the aria labels; the note
+ * layer passes 旁注 while the text box keeps the default.
  */
 export function TextBoxPresentationControls({
   document,
   onChange,
+  subject = '文字框',
 }: {
   document: PersonalTextDocumentV1
   onChange: (patch: TextBoxPresentationChange) => void
+  subject?: string
 }): ReactNode {
   return (
     <>
@@ -36,7 +39,7 @@ export function TextBoxPresentationControls({
       <span className="paper-personal-text-box__font">
         <select
           className="paper-personal-text-box__font-select"
-          aria-label="文字框字体"
+          aria-label={`${subject}字体`}
           value={document.presentation.fontPresetId}
           onChange={(event) => onChange({ fontPresetId: event.target.value as PersonalFontPresetId })}
         >
@@ -46,7 +49,7 @@ export function TextBoxPresentationControls({
         </select>
         <ChevronDown size={16} aria-hidden="true" />
       </span>
-      <div className="paper-personal-text-box__sizes" role="group" aria-label="文字框字号">
+      <div className="paper-personal-text-box__sizes" role="group" aria-label={`${subject}字号`}>
         {PERSONAL_SIZE_PRESET_IDS.map((id) => (
           <button
             key={id}
