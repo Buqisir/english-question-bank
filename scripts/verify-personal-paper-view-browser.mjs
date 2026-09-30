@@ -1084,7 +1084,7 @@ try {
   // mark count comes from the store and the view must draw at least that many.
   const storedGreen = ((await readLayer()).layer?.objects ?? [])
     .filter((object) => object.type === 'highlight' && object.style?.color === 'green').length
-  const readingGreenSpans = await page.locator('.paper-personal-layer .paper-personal-mark--highlight[data-color="green"]').count()
+  const readingGreenSpans = await page.locator('.paper-personal-fills .paper-personal-mark--highlight[data-color="green"]').count()
   check('the reading view has no palette and shows the same pen highlights',
     await page.locator('.paper-tool-palette').count() === 0 && storedGreen === 2 && readingGreenSpans >= 2,
     `stored green=${storedGreen} reading spans=${readingGreenSpans}`)

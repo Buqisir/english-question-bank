@@ -289,6 +289,29 @@ try {
   await page.click('.paper-selection-annotations button:nth-child(1)')
   await page.waitForSelector('.paper-personal-mark--highlight', { timeout: 10_000 })
   check('高亮 draws over the selected words', true)
+  // Pixel proof that the words stay readable: an opaque fill (multiply
+  // trapped in an isolated stacking context) leaves no dark text pixels.
+  {
+    const box = await page.locator('.paper-personal-mark--highlight').first().boundingBox()
+    const shot = await page.screenshot({ clip: box })
+    const darkPixels = await page.evaluate(async (base64) => {
+      const image = new Image()
+      image.src = `data:image/png;base64,${base64}`
+      await image.decode()
+      const canvas = document.createElement('canvas')
+      canvas.width = image.width
+      canvas.height = image.height
+      const context = canvas.getContext('2d')
+      context.drawImage(image, 0, 0)
+      const { data } = context.getImageData(0, 0, image.width, image.height)
+      let dark = 0
+      for (let index = 0; index < data.length; index += 4) {
+        if (data[index] + data[index + 1] + data[index + 2] < 3 * 110) dark += 1
+      }
+      return dark
+    }, shot.toString('base64'))
+    check('the highlighted words stay visible through the fill', darkPixels > 20, `darkPixels=${darkPixels}`)
+  }
   await waitSaved(page)
   check('the highlight is confirmed saved', true)
 

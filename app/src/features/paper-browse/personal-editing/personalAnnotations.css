@@ -3,6 +3,7 @@
  * One token home covers every surface the marks show on: the reading layer,
  * the paper-view layer, and the popover (portaled to body, outside both). */
 .paper-personal-layer,
+.paper-personal-fills,
 .paper-personal-paper-marks,
 .paper-personal-popover,
 .paper-tool-palette {
@@ -24,6 +25,14 @@
 .paper-personal-marks {
   position: absolute;
   inset: 0;
+}
+
+/* No z-index here: a stacking context would isolate the multiply blend from
+ * the paper text underneath (see PersonalAnnotationLayer). */
+.paper-personal-fills {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .paper-personal-mark {

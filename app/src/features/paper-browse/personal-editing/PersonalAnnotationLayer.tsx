@@ -257,71 +257,82 @@ export function PersonalAnnotationLayer({
     return wide ? rects[0].top : last.top + last.height + 6
   }
 
+  const markSpans = (items: AnchoredObject[]) => items.map((object) => geometry.anchors.get(object.id)!.map((rect, index) => (
+    <span
+      key={`${object.id}-${index}`}
+      className={`paper-personal-mark paper-personal-mark--${object.type}${selectedId === object.id ? ' is-selected' : ''}`}
+      data-color={object.type === 'highlight' ? object.style.color : undefined}
+      data-ink={object.type === 'underline' ? object.style.ink : undefined}
+      style={{ left: rect.left, top: rect.top, width: rect.width, height: rect.height }}
+    />
+  )))
+
   return (
-    <div className="paper-personal-layer" data-personal-layer="">
-      <div className="paper-personal-marks" aria-hidden="true">
-        {marks.map((object) => geometry.anchors.get(object.id)!.map((rect, index) => (
-          <span
-            key={`${object.id}-${index}`}
-            className={`paper-personal-mark paper-personal-mark--${object.type}${selectedId === object.id ? ' is-selected' : ''}`}
-            data-color={object.type === 'highlight' ? object.style.color : undefined}
-            data-ink={object.type === 'underline' ? object.style.ink : undefined}
-            style={{ left: rect.left, top: rect.top, width: rect.width, height: rect.height }}
-          />
-        )))}
+    <>
+      {/* Highlight fills sit outside .paper-personal-layer on purpose: its
+       * z-index makes it a stacking context, an isolated blend group, so
+       * multiply inside it never reaches the words and paints opaque blocks.
+       * This sibling has no z-index and blends with the paper text itself. */}
+      <div className="paper-personal-fills" aria-hidden="true">
+        {markSpans(marks.filter((object) => object.type === 'highlight'))}
       </div>
-      {notes.map((note) => {
-        const rects = geometry.anchors.get(note.id)!
-        const last = rects[rects.length - 1]
-        const index = noteIndex.get(note.id)!
-        return (
-          <button
-            key={`badge-${note.id}`}
-            type="button"
-            className={`paper-personal-note-badge${noteEditor?.objectId === note.id ? ' is-open' : ''}`}
-            style={{ left: last.left + last.width + 2, top: last.top - 6 }}
-            aria-label={`打开旁注 ${index}`}
-            aria-expanded={noteEditor?.objectId === note.id}
-            onClick={() => (noteEditor?.objectId === note.id ? api.closeNote(noteEditor) : api.openNote(note.id))}
-          >
-            {index}
-          </button>
-        )
-      })}
-      <div className="paper-personal-note-cards" ref={cardsRef}>
-        {wide ? notes.filter((note) => note.id !== noteEditor?.objectId).map((note) => {
+      <div className="paper-personal-layer" data-personal-layer="">
+        <div className="paper-personal-marks" aria-hidden="true">
+          {markSpans(marks.filter((object) => object.type !== 'highlight'))}
+        </div>
+        {notes.map((note) => {
           const rects = geometry.anchors.get(note.id)!
+          const last = rects[rects.length - 1]
+          const index = noteIndex.get(note.id)!
           return (
-            <div
-              key={note.id}
-              className="paper-personal-note-slot"
-              data-card-top={rects[0].top}
-              style={cardStyle(rects)}
+            <button
+              key={`badge-${note.id}`}
+              type="button"
+              className={`paper-personal-note-badge${noteEditor?.objectId === note.id ? ' is-open' : ''}`}
+              style={{ left: last.left + last.width + 2, top: last.top - 6 }}
+              aria-label={`打开旁注 ${index}`}
+              aria-expanded={noteEditor?.objectId === note.id}
+              onClick={() => (noteEditor?.objectId === note.id ? api.closeNote(noteEditor) : api.openNote(note.id))}
             >
-              <NoteCard api={api} note={note} editor={null} index={noteIndex.get(note.id) ?? null} draftDocument={draftDocument} />
-            </div>
+              {index}
+            </button>
           )
-        }) : null}
-        {/* The open editor keeps one slot and key from draft to saved note, so focus survives the first save. */}
-        {noteEditor && editingRects ? (
-          <div
-            key={noteEditor.key}
-            className="paper-personal-note-slot"
-            data-card-top={floatingCardTop(editingRects)}
-            style={cardStyle(editingRects)}
-          >
-            <NoteCard
-              api={api}
-              note={noteEditor.objectId ? (api.objectById.get(noteEditor.objectId) as AnchoredObject | undefined) ?? null : null}
-              editor={noteEditor}
-              index={noteEditor.objectId ? noteIndex.get(noteEditor.objectId) ?? null : null}
-              draftDocument={draftDocument}
-            />
-          </div>
-        ) : null}
+        })}
+        <div className="paper-personal-note-cards" ref={cardsRef}>
+          {wide ? notes.filter((note) => note.id !== noteEditor?.objectId).map((note) => {
+            const rects = geometry.anchors.get(note.id)!
+            return (
+              <div
+                key={note.id}
+                className="paper-personal-note-slot"
+                data-card-top={rects[0].top}
+                style={cardStyle(rects)}
+              >
+                <NoteCard api={api} note={note} editor={null} index={noteIndex.get(note.id) ?? null} draftDocument={draftDocument} />
+              </div>
+            )
+          }) : null}
+          {/* The open editor keeps one slot and key from draft to saved note, so focus survives the first save. */}
+          {noteEditor && editingRects ? (
+            <div
+              key={noteEditor.key}
+              className="paper-personal-note-slot"
+              data-card-top={floatingCardTop(editingRects)}
+              style={cardStyle(editingRects)}
+            >
+              <NoteCard
+                api={api}
+                note={noteEditor.objectId ? (api.objectById.get(noteEditor.objectId) as AnchoredObject | undefined) ?? null : null}
+                editor={noteEditor}
+                index={noteEditor.objectId ? noteIndex.get(noteEditor.objectId) ?? null : null}
+                draftDocument={draftDocument}
+              />
+            </div>
+          ) : null}
+        </div>
+        {api.popover ? createPortal(<PersonalMarkPopover api={api} />, document.body) : null}
       </div>
-      {api.popover ? createPortal(<PersonalMarkPopover api={api} />, document.body) : null}
-    </div>
+    </>
   )
 }
 
