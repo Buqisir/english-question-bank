@@ -1,4 +1,4 @@
-import { useEffect, useMemo, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import type { PersonalObject } from '../../../../../shared/personal-paper-layer/index.mjs'
 import type { LayerRect } from './markGeometry'
@@ -33,10 +33,13 @@ function isAnchoredMarkType(type: PersonalObject['type']): type is AnchoredMarkO
 export function PaperMarkLayer({
   api,
   anchorGeometry,
+  iframe,
   noticeTarget,
 }: {
   api: PersonalAnnotationsApi
   anchorGeometry: PaperAnchorGeometry
+  /** The paper iframe; highlight fills are painted inside its document. */
+  iframe: HTMLIFrameElement | null
   /** Mount point for the quiet notices above the paper (outside the zoom transform). */
   noticeTarget: HTMLElement | null
 }): ReactNode {
@@ -83,9 +86,64 @@ export function PaperMarkLayer({
 
   const interactive = api.canEdit
 
+  // Highlight fills live inside the iframe document, not on this overlay:
+  // mix-blend-mode cannot reach into an iframe that the browser composites on
+  // its own layer (embedded Chromium/Electron panes do), and the fill then
+  // paints as an opaque block over the words. Blending inside the same
+  // document keeps the text readable everywhere. The overlay rects stay as
+  // transparent click targets and carry the selection outline.
+  const marksRef = useRef<HTMLDivElement | null>(null)
+  const [fillHost, setFillHost] = useState<HTMLElement | null>(null)
+  const [fillColors, setFillColors] = useState<Record<string, string>>({})
+  useEffect(() => {
+    const doc = iframe?.contentDocument
+    if (!doc?.body) return undefined
+    const host = doc.createElement('div')
+    host.setAttribute('data-eqb-personal-highlight-fills', '')
+    host.style.cssText = 'position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;'
+    doc.body.appendChild(host)
+    setFillHost(host)
+    return () => {
+      host.remove()
+      setFillHost(null)
+    }
+  }, [iframe])
+  useEffect(() => {
+    const element = marksRef.current
+    if (!element) return
+    // Tokens are defined on the overlay in the app stylesheet, which the
+    // iframe document does not load; resolve them here and pass them down.
+    const style = getComputedStyle(element)
+    const next: Record<string, string> = {}
+    for (const color of ['yellow', 'green', 'blue', 'pink']) {
+      next[color] = style.getPropertyValue(`--personal-highlight-${color}`).trim()
+    }
+    setFillColors(next)
+  }, [])
+
+  const highlightFills = fillHost ? createPortal(
+    marks.filter((mark) => mark.type === 'highlight').flatMap((mark) => mark.rects.map((rect, index) => (
+      <div
+        key={`${mark.id}-${index}`}
+        data-paper-mark-fill={mark.id}
+        style={{
+          position: 'absolute',
+          left: rect.left,
+          top: rect.top,
+          width: rect.width,
+          height: rect.height,
+          background: fillColors[mark.color ?? ''] ?? 'transparent',
+          mixBlendMode: 'multiply',
+        }}
+      />
+    ))),
+    fillHost,
+  ) : null
+
   return (
     <>
-      <div className="paper-personal-paper-marks" aria-hidden={interactive ? undefined : true}>
+      {highlightFills}
+      <div ref={marksRef} className="paper-personal-paper-marks" aria-hidden={interactive ? undefined : true}>
         {marks.flatMap((mark) => mark.rects.map((rect, index) => (
           <div
             key={`${mark.id}-${index}`}

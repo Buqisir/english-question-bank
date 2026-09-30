@@ -1107,6 +1107,24 @@ try {
   check('a stored highlight is drawn on the paper view',
     await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]').count() >= 1
     && await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"][data-color="yellow"]').count() >= 1)
+  // The fill must blend inside the iframe document: a parent-document overlay
+  // cannot multiply into an iframe composited on its own layer (embedded
+  // Chromium panes), where it paints as an opaque block over the words.
+  const fillPlacement = await page.evaluate(() => {
+    const mark = document.querySelector('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]')
+    const doc = document.querySelector('.paper-personal-paper-iframe')?.contentDocument
+    const fill = doc?.querySelector(`[data-paper-mark-fill="${CSS.escape(mark?.dataset.paperMarkId ?? '')}"]`)
+    return {
+      overlayBackground: mark ? getComputedStyle(mark).backgroundColor : null,
+      fillBackground: fill ? fill.ownerDocument.defaultView.getComputedStyle(fill).backgroundColor : null,
+      fillBlend: fill ? fill.style.mixBlendMode : null,
+    }
+  })
+  check('the paper highlight fill is painted inside the iframe with multiply',
+    fillPlacement.fillBackground === 'rgb(249, 224, 138)' && fillPlacement.fillBlend === 'multiply',
+    JSON.stringify(fillPlacement))
+  check('the parent-document highlight overlay is a transparent click target',
+    fillPlacement.overlayBackground === 'rgba(0, 0, 0, 0)', JSON.stringify(fillPlacement))
   // Mark rects are iframe-document px; elementFromPoint wants viewport coords,
   // so the center is offset by the iframe's own scroll first.
   const highlightHit = await page.evaluate(() => {

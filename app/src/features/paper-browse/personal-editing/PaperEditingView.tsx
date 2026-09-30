@@ -328,6 +328,7 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, tool, hig
                 <PaperMarkLayer
                   api={api}
                   anchorGeometry={anchorGeometry}
+                  iframe={iframeRef.current}
                   noticeTarget={noticeTarget}
                 />
                 <PaperNoteLayer

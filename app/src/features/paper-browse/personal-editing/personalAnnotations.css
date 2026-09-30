@@ -63,6 +63,13 @@
   border-bottom-width: 1.5px;
 }
 
+/* Explicit-Cascade: 压过上方 [data-color] 的底色与 multiply，因纸张视图的
+ * 高亮填色画在 iframe 文档内（PaperMarkLayer），这里只留透明点击区与选中描边。 */
+.paper-personal-paper-mark.paper-personal-mark--highlight {
+  background: transparent;
+  mix-blend-mode: normal;
+}
+
 .paper-personal-mark.is-selected {
   outline: 2px solid var(--personal-ink);
   outline-offset: 1px;
