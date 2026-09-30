@@ -993,6 +993,24 @@ try {
     await noteCard('verify-note-1').getAttribute('data-note-slot') === 'margin'
     && await noteCard('verify-note-2').getAttribute('data-note-slot') === 'margin')
 
+  // The 常规 preset renders with the bundled paper faces: PaperFontGate has
+  // loaded and sha-verified the pinned bytes before the page mounted, so the
+  // default-preset card's computed font must name both families — never a
+  // host fallback, or the preview would measure different glyphs than the
+  // export.
+  const defaultNoteFont = await page.evaluate(() => {
+    const text = document.querySelector('.paper-personal-paper-note[data-note-key="verify-note-1"] .eqb-personal-text')
+    return {
+      computed: text ? getComputedStyle(text).fontFamily : null,
+      termes: document.fonts.check('16px "EQB Termes"'),
+      hanSerif: document.fonts.check('16px "EQB Source Han Serif"'),
+    }
+  })
+  check('a default-preset note card resolves to the bundled paper faces, loaded in the page',
+    Boolean(defaultNoteFont.computed?.includes('EQB Termes') && defaultNoteFont.computed?.includes('EQB Source Han Serif'))
+    && defaultNoteFont.termes && defaultNoteFont.hanSerif,
+    JSON.stringify(defaultNoteFont))
+
   // Sample every 8px inside each card rect and ask the iframe document what
   // sits under the card: no element there may directly own non-whitespace
   // text, i.e. the card never covers body text. Main-page px map to iframe

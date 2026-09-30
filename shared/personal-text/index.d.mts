@@ -33,6 +33,8 @@ export type PersonalTextValidationResult = { ok: boolean; errors: PersonalTextVa
 export type PersonalFontAsset = {
   family: string
   file: string
+  /** Folder under app/public/fonts/ the file lives in. */
+  root: 'personal' | 'paper'
   weight: number
   style: 'normal' | 'italic'
   sha256: string

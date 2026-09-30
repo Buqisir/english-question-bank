@@ -109,7 +109,7 @@ const APPENDIX_SHEET_CSS = `
 
 .personal-appendix-source {
   margin: 0 0 1.5mm;
-  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'EQB Termes', 'EQB Source Han Serif', serif;
   font-size: 12px;
   color: #6f6a60;
 }
@@ -139,7 +139,11 @@ function collectPresetIds(plan) {
 
 function renderExportStyleBlock(plan, { withAppendix }) {
   const presetIds = collectPresetIds(plan)
-  const personalFonts = presetIds.length > 0 ? personalFontFaceUrlCss({ presetIds }) : null
+  // The print HTML embeds the paper faces, so the 常规 preset's paper-rooted
+  // faces are reused, not re-declared (see personalFontFaceUrlCss).
+  const personalFonts = presetIds.length > 0
+    ? personalFontFaceUrlCss({ presetIds, paperFacesDeclared: true })
+    : null
   const parts = [
     // Fonts come first so the faces exist before any text is measured.
     ...(personalFonts?.css ? [personalFonts.css] : []),
@@ -235,7 +239,9 @@ export function composePersonalExport({ printHtml, plan, layoutRef, source, obje
   }
 
   const presetIds = collectPresetIds(plan)
-  const fontFaces = presetIds.length > 0 ? personalFontFaceUrlCss({ presetIds }).faces : []
+  const fontFaces = presetIds.length > 0
+    ? personalFontFaceUrlCss({ presetIds, paperFacesDeclared: true }).faces
+    : []
 
   const compose = async (page) => {
     // a. 基底完整性核对：页数、每页尺寸、每页正文摘要必须与量测时的基准

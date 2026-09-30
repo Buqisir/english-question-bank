@@ -110,7 +110,10 @@ export async function measurePersonalExportPlan({
     const presetIds = [...new Set(textObjects.map((object) => object.document.presentation.fontPresetId))]
     let fontFaces = []
     if (presetIds.length > 0) {
-      const personalFonts = personalFontFaceUrlCss({ presetIds })
+      // The paginated HTML above already embeds the paper faces inline, so the
+      // 常规 preset's paper-rooted faces are reused, not re-declared; the
+      // returned faces list still carries them for the load check below.
+      const personalFonts = personalFontFaceUrlCss({ presetIds, paperFacesDeclared: true })
       if (personalFonts.css) await page.addStyleTag({ content: personalFonts.css })
       fontFaces = personalFonts.faces
     }

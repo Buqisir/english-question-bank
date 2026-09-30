@@ -6,7 +6,12 @@
  * sha before use; a mismatch fails the export rather than measuring a
  * fallback face. Preset fallbacks written into cssFamily (Fuzzy Bubbles →
  * Xiaolai) pull their faces in too, so a measured page never renders a
- * system fallback where the preview renders a registered face.
+ * system fallback where the preview renders a registered face. The 常规
+ * preset's faces are the bundled paper faces; export pages always render the
+ * paginated paper HTML (which already declares them), so those paper-rooted
+ * faces are passed as already declared there and reused instead of
+ * re-declared — the returned faces list still carries them so the load
+ * verification runs.
  */
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
@@ -20,6 +25,14 @@ for (const preset of Object.values(PERSONAL_FONT_PRESETS)) {
     if (!facesByFamily.has(asset.family)) facesByFamily.set(asset.family, asset)
   }
 }
+
+function personalFontAssetPath(face) {
+  return new URL(`../../app/public/fonts/${face.root}/${face.file}`, import.meta.url)
+}
+
+const fontFormatByFile = (file) => (file.endsWith('.otf')
+  ? { cssFormat: 'opentype', contentType: 'font/otf' }
+  : { cssFormat: 'truetype', contentType: 'font/ttf' })
 
 /**
  * The deduplicated face records a set of presets needs (its own assets plus
@@ -65,16 +78,18 @@ export const PERSONAL_FONT_REGISTRY_DIGEST = registryDigest
 
 const cache = new Map()
 
-export function personalFontFaceCss({ presetIds } = {}) {
-  const key = presetIds === undefined ? 'all' : [...presetIds].sort().join('|')
+export function personalFontFaceCss({ presetIds, paperFacesDeclared = false } = {}) {
+  const key = `${presetIds === undefined ? 'all' : [...presetIds].sort().join('|')}|${paperFacesDeclared}`
   const cached = cache.get(key)
   if (cached) return cached
   const faces = personalFontFacesForPresets({ presetIds })
-  const css = faces.map((face) => {
-    const bytes = readFileSync(new URL(`../../app/public/fonts/personal/${face.file}`, import.meta.url))
-    assertPersonalFontAsset(face, bytes)
-    return `@font-face { font-family: '${face.family}'; src: url("data:font/ttf;base64,${bytes.toString('base64')}") format('truetype'); font-weight: ${face.weight}; font-style: ${face.style}; }`
-  }).join('\n')
+  const css = faces.filter((face) => !(paperFacesDeclared && face.root === 'paper'))
+    .map((face) => {
+      const bytes = readFileSync(personalFontAssetPath(face))
+      assertPersonalFontAsset(face, bytes)
+      const { cssFormat, contentType } = fontFormatByFile(face.file)
+      return `@font-face { font-family: '${face.family}'; src: url("data:${contentType};base64,${bytes.toString('base64')}") format('${cssFormat}'); font-weight: ${face.weight}; font-style: ${face.style}; }`
+    }).join('\n')
   const result = { css, digest: registryDigest, faces: faces.map(({ family, weight }) => ({ family, weight })) }
   cache.set(key, result)
   return result
@@ -112,18 +127,20 @@ const fontBytesByFile = new Map()
 function personalFontAssetBytes(face) {
   let bytes = fontBytesByFile.get(face.file)
   if (!bytes) {
-    bytes = readFileSync(new URL(`../../app/public/fonts/personal/${face.file}`, import.meta.url))
+    bytes = readFileSync(personalFontAssetPath(face))
     assertPersonalFontAsset(face, bytes)
     fontBytesByFile.set(face.file, bytes)
   }
   return bytes
 }
 
-export function personalFontFaceUrlCss({ presetIds } = {}) {
+export function personalFontFaceUrlCss({ presetIds, paperFacesDeclared = false } = {}) {
   const faces = personalFontFacesForPresets({ presetIds })
-  const css = faces.map((face) => (
-    `@font-face { font-family: '${face.family}'; src: url("${PERSONAL_FONT_URL_BASE}${face.sha256}/${encodeURIComponent(face.file)}") format('truetype'); font-weight: ${face.weight}; font-style: ${face.style}; }`
-  )).join('\n')
+  const css = faces.filter((face) => !(paperFacesDeclared && face.root === 'paper'))
+    .map((face) => {
+      const { cssFormat } = fontFormatByFile(face.file)
+      return `@font-face { font-family: '${face.family}'; src: url("${PERSONAL_FONT_URL_BASE}${face.sha256}/${encodeURIComponent(face.file)}") format('${cssFormat}'); font-weight: ${face.weight}; font-style: ${face.style}; }`
+    }).join('\n')
   return { css, digest: registryDigest, faces: faces.map(({ family, weight }) => ({ family, weight })) }
 }
 
@@ -141,7 +158,8 @@ export async function installPersonalFontRoute(page) {
         .match(/^\/eqb-personal-fonts\/([0-9a-f]{64})\/(.+)$/u)
       const face = match ? facesBySha.get(match[1]) : null
       if (face && face.file === decodeURIComponent(match[2])) {
-        await route.fulfill({ status: 200, contentType: 'font/ttf', body: personalFontAssetBytes(face) })
+        const { contentType } = fontFormatByFile(face.file)
+        await route.fulfill({ status: 200, contentType, body: personalFontAssetBytes(face) })
         return
       }
       await route.fulfill({ status: 404, contentType: 'text/plain', body: 'personal font not found' })

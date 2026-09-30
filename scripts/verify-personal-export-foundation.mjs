@@ -9,7 +9,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { personalOverlayBrowserScript } from '../server/personal-paper-layer/browserBundle.mjs'
-import { assertPersonalFontAsset, personalFontFaceCss } from '../server/personal-paper-layer/personalFonts.mjs'
+import { assertPersonalFontAsset, personalFontFaceCss, personalFontFaceUrlCss } from '../server/personal-paper-layer/personalFonts.mjs'
 import { PERSONAL_FONT_PRESETS } from '../shared/personal-text/fontRegistry.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -58,17 +58,34 @@ check('every registered personal font face has one @font-face',
   && registeredFaces.every((face) => fontCss.includes(`'${face.family}'`)),
   `${registeredFaces.length} faces`)
 check('the font registry digest is a stable sha256', fontDigest.startsWith('sha256:') && fontDigest === personalFontFaceCss().digest)
-check('the 常规 preset alone embeds no personal font faces',
+const defaultPreset = PERSONAL_FONT_PRESETS.default
+check('the 常规 preset uses the bundled paper fonts with real bold faces',
+  defaultPreset.requiresAssets === true && defaultPreset.syntheticBold === false
+  && defaultPreset.cssFamily === "'EQB Termes', 'EQB Source Han Serif', serif"
+  && defaultPreset.assets.length === 4
+  && defaultPreset.assets.every((entry) => entry.root === 'paper'),
+  JSON.stringify(defaultPreset))
+check('the 常规 preset alone embeds exactly the bundled paper faces (no host fallback)',
   !personalFontFaceCss({ presetIds: ['default'] }).css.includes('Xiaolai')
-  && (personalFontFaceCss({ presetIds: ['default'] }).css.match(/@font-face/gu) || []).length === 0)
+  && !personalFontFaceCss({ presetIds: ['default'] }).css.includes('Fuzzy')
+  && (personalFontFaceCss({ presetIds: ['default'] }).css.match(/@font-face/gu) || []).length === defaultPreset.assets.length,
+  personalFontFaceCss({ presetIds: ['default'] }).css.slice(0, 200))
+check('export pages reuse the paper-declared 常规 faces but still verify them',
+  personalFontFaceUrlCss({ presetIds: ['default'], paperFacesDeclared: true }).css === ''
+  && JSON.stringify(personalFontFaceUrlCss({ presetIds: ['default'], paperFacesDeclared: true }).faces.map((face) => [face.family, face.weight]).sort())
+    === JSON.stringify(defaultPreset.assets.map((entry) => [entry.family, entry.weight]).sort()),
+  JSON.stringify(personalFontFaceUrlCss({ presetIds: ['default'], paperFacesDeclared: true }).faces))
 check('the Fuzzy Bubbles preset pulls its Xiaolai fallback in',
   personalFontFaceCss({ presetIds: ['fuzzy-xiaolai'] }).css.includes('EQB Xiaolai SC')
   && personalFontFaceCss({ presetIds: ['fuzzy-xiaolai'] }).css.includes('EQB Fuzzy Bubbles'))
 console.log(`font css: ${(fontCss.length / 1024 / 1024).toFixed(2)} MB, digest ${fontDigest}`)
 check('tampered font bytes fail the registry sha check',
   codeOf(() => assertPersonalFontAsset(registeredFaces[0], 'tampered bytes')) === 'PERSONAL_FONT_ASSET_MISMATCH')
-check('genuine font bytes pass the registry sha check',
-  codeOf(() => assertPersonalFontAsset(registeredFaces[0], readFileSync(path.join(rootDir, 'app/public/fonts/personal', registeredFaces[0].file)))) !== 'PERSONAL_FONT_ASSET_MISMATCH')
+check('genuine font bytes pass the registry sha check in every asset root',
+  registeredFaces.every((face) => codeOf(() => assertPersonalFontAsset(
+    face,
+    readFileSync(path.join(rootDir, 'app/public/fonts', face.root, face.file)),
+  )) !== 'PERSONAL_FONT_ASSET_MISMATCH'))
 
 // ---- the bundle and the fonts run in a real page ----------------------------
 

@@ -365,6 +365,22 @@ try {
   check('marks and the note survive a reload', true)
   check('the deleted underline stays deleted', (await page.locator('.paper-personal-mark--underline').count()) === 0)
 
+  // The 常规 preset renders with the bundled paper faces: PaperFontGate loads
+  // and sha-verifies the pinned bytes before the page mounts, so the gutter
+  // note card's computed font must name both families — never a host fallback.
+  const noteFont = await page.evaluate(() => {
+    const text = document.querySelector('.paper-personal-note-card .eqb-personal-text')
+    return {
+      computed: text ? getComputedStyle(text).fontFamily : null,
+      termes: document.fonts.check('16px "EQB Termes"'),
+      hanSerif: document.fonts.check('16px "EQB Source Han Serif"'),
+    }
+  })
+  check('the reading-view default-preset note renders with the bundled paper faces loaded',
+    Boolean(noteFont.computed?.includes('EQB Termes') && noteFont.computed?.includes('EQB Source Han Serif'))
+    && noteFont.termes && noteFont.hanSerif,
+    JSON.stringify(noteFont))
+
   // ---- per-question commentary in the lecture panel --------------------------------
   await openLecture(page)
   await page.locator('[data-paper-question-id]').first().click()

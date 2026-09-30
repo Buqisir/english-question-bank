@@ -1,3 +1,5 @@
+import { paperFontFaces } from '../papersurface/paperFonts.mjs'
+
 export const PERSONAL_FONT_REGISTRY_VERSION = 'eqb-personal-fonts-v1'
 export const PERSONAL_TEXT_STYLE_VERSION = 'eqb-personal-text-style-v1'
 
@@ -6,11 +8,13 @@ export const SUPPORTED_STYLE_VERSIONS = Object.freeze([PERSONAL_TEXT_STYLE_VERSI
 
 const CJK_FALLBACK = "'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif"
 
-// Paths are relative to app/public/fonts/personal/; see its README for provenance.
+// Paths are relative to app/public/fonts/<root>/<file>: root 'personal' holds
+// the annotation-only faces, root 'paper' the bundled paper faces; see each
+// folder's README for provenance and license.
 export const PERSONAL_FONT_ASSET_ROOT = '/fonts/personal/'
 
-function asset(family, file, weight, sha256, bytes, source) {
-  return Object.freeze({ family, file, weight, style: 'normal', sha256, bytes, source, license: 'OFL-1.1' })
+function asset(family, file, weight, sha256, bytes, source, license, root = 'personal') {
+  return Object.freeze({ family, file, weight, style: 'normal', sha256, bytes, source, license, root })
 }
 
 const XIAOLAI_SC_REGULAR = asset(
@@ -38,6 +42,44 @@ const FUZZY_BUBBLES_BOLD = asset(
   'https://github.com/google/fonts/blob/a60a77e14f28abd4ef243a1b5dfc48df0cec5205/ofl/fuzzybubbles/FuzzyBubbles-Bold.ttf',
 )
 
+// The 常规 preset renders personal text with the bundled paper faces — the
+// same pinned Termes / Source Han Serif bytes the paper layer declares — so a
+// note measures and prints identically on every host. No host CJK fallback may
+// precede the bundled faces: the old Inter/PingFang stack measured different
+// glyphs in the macOS preview and the Linux export. Family, weight and sha256
+// come from the paper font policy so the two registries cannot drift; the
+// Termes italics stay unregistered because personal text has no italic mark.
+function paperAsset(path, bytes, source, license) {
+  const face = paperFontFaces.find((candidate) => candidate.path === path && candidate.style === 'normal')
+  if (!face) throw new Error(`Paper font face missing from the paper font policy: ${path}`)
+  return asset(face.family, face.path, Number(face.weight), face.sha256, bytes, source, license, 'paper')
+}
+
+const TERMES_REGULAR = paperAsset(
+  'termes/texgyretermes-regular.otf',
+  198_648,
+  'https://www.gust.org.pl/projects/e-foundry/tex-gyre/termes/tg_termes-otf-2_609-31_03_2026.zip',
+  'GUST-Font-License',
+)
+const TERMES_BOLD = paperAsset(
+  'termes/texgyretermes-bold.otf',
+  197_864,
+  'https://www.gust.org.pl/projects/e-foundry/tex-gyre/termes/tg_termes-otf-2_609-31_03_2026.zip',
+  'GUST-Font-License',
+)
+const SOURCE_HAN_SERIF_REGULAR = paperAsset(
+  'source-han-serif/SourceHanSerifCN-Regular.otf',
+  11_626_108,
+  'https://github.com/adobe-fonts/source-han-serif/commit/7889f11bf31170b5d092a083b357c8c8130f89e0',
+  'OFL-1.1',
+)
+const SOURCE_HAN_SERIF_BOLD = paperAsset(
+  'source-han-serif/SourceHanSerifCN-Bold.otf',
+  12_094_680,
+  'https://github.com/adobe-fonts/source-han-serif/commit/7889f11bf31170b5d092a083b357c8c8130f89e0',
+  'OFL-1.1',
+)
+
 /*
  * Exact-layout preview/export must load and verify every asset of the chosen
  * preset before measuring; it must fail rather than measure a fallback face.
@@ -46,10 +88,18 @@ export const PERSONAL_FONT_PRESETS = Object.freeze({
   default: Object.freeze({
     id: 'default',
     label: '常规',
-    cssFamily: `Inter, ${CJK_FALLBACK}`,
+    // Paper stack order (DESIGN.md Paper Font): Termes first, Source Han Serif
+    // second; only the generic serif may follow the bundled faces.
+    cssFamily: `'EQB Termes', 'EQB Source Han Serif', serif`,
+    // Real 400/700 faces exist for both families.
     syntheticBold: false,
-    requiresAssets: false,
-    assets: Object.freeze([]),
+    requiresAssets: true,
+    assets: Object.freeze([
+      TERMES_REGULAR,
+      TERMES_BOLD,
+      SOURCE_HAN_SERIF_REGULAR,
+      SOURCE_HAN_SERIF_BOLD,
+    ]),
   }),
   'xiaolai-sc': Object.freeze({
     id: 'xiaolai-sc',

@@ -140,23 +140,49 @@ check('render snapshot is an independent frozen copy', snapshot.document.content
   && snapshot.size.fontSizePt === 12 && snapshot.contentDigest.length > 16)
 check('every font preset has its assets registered', PERSONAL_FONT_PRESET_IDS.every(personalFontAssetsReady)
   && !personalFontAssetsReady('comic-sans'))
-const fontRoot = path.join(rootDir, 'app/public', PERSONAL_FONT_ASSET_ROOT)
+check('the 常规 preset renders with the bundled paper fonts and real bold faces',
+  PERSONAL_FONT_PRESETS.default.requiresAssets === true
+  && PERSONAL_FONT_PRESETS.default.syntheticBold === false
+  && PERSONAL_FONT_PRESETS.default.cssFamily === "'EQB Termes', 'EQB Source Han Serif', serif"
+  && JSON.stringify(PERSONAL_FONT_PRESETS.default.assets.map((entry) => [entry.family, entry.weight]))
+    === JSON.stringify([['EQB Termes', 400], ['EQB Termes', 700], ['EQB Source Han Serif', 400], ['EQB Source Han Serif', 700]])
+  && PERSONAL_FONT_PRESETS.default.assets.every((entry) => entry.root === 'paper'),
+  JSON.stringify(PERSONAL_FONT_PRESETS.default))
+// Assets are rooted at app/public/fonts/<root>/<file>: the personal folder
+// holds the annotation-only faces, the paper folder the bundled paper faces.
+const fontRootByRoot = new Map([
+  ['personal', path.join(rootDir, 'app/public', PERSONAL_FONT_ASSET_ROOT)],
+  ['paper', path.join(rootDir, 'app/public/fonts/paper')],
+])
 const registeredAssets = new Map(Object.values(PERSONAL_FONT_PRESETS)
   .flatMap((preset) => preset.assets).map((entry) => [entry.file, entry]))
 const assetDrift = [...registeredAssets.values()].filter((entry) => {
-  const bytes = readFileSync(path.join(fontRoot, entry.file))
+  const bytes = readFileSync(path.join(fontRootByRoot.get(entry.root), entry.file))
   return bytes.length !== entry.bytes || createHash('sha256').update(bytes).digest('hex') !== entry.sha256
 }).map((entry) => entry.file)
-const sums = new Map(readFileSync(path.join(fontRoot, 'SHA256SUMS'), 'utf8').trim().split('\n')
-  .map((line) => line.split(/\s+/u)).map(([hash, file]) => [file, hash]))
-const fontCss = readFileSync(path.join(fontRoot, 'fonts.css'), 'utf8')
-check('registered font bytes match the registry and SHA256SUMS', assetDrift.length === 0
-  && [...registeredAssets.values()].every((entry) => sums.get(entry.file) === entry.sha256), assetDrift.join(','))
-check('fonts.css declares exactly the registered faces without local() lookup', !/local\(/u.test(fontCss)
-  && [...registeredAssets.values()].every((entry) => fontCss.includes(`url('./${entry.file}')`))
-  && (fontCss.match(/@font-face/gu) || []).length === registeredAssets.size)
-check('font licences ship next to the fonts', existsSync(path.join(fontRoot, 'xiaolai/License.txt'))
-  && existsSync(path.join(fontRoot, 'fuzzy-bubbles/OFL.txt')))
+const sumsByRoot = new Map([...fontRootByRoot].map(([root, dir]) => [root, new Map(
+  readFileSync(path.join(dir, 'SHA256SUMS'), 'utf8').trim().split('\n')
+    .map((line) => line.split(/\s+/u)).map(([hash, file]) => [file, hash]),
+)]))
+const fontCssByRoot = new Map([...fontRootByRoot].map(([root, dir]) => [root, readFileSync(path.join(dir, 'fonts.css'), 'utf8')]))
+// The paper fonts.css documents its no-local() policy in a comment; judge
+// only the declarations.
+const cssWithoutComments = (css) => css.replace(/\/\*[^*]*\*\//gu, '')
+check('registered font bytes match the registry and each root SHA256SUMS', assetDrift.length === 0
+  && [...registeredAssets.values()].every((entry) => sumsByRoot.get(entry.root).get(entry.file) === entry.sha256), assetDrift.join(','))
+// The paper folder legitimately declares extra faces (the Termes italics the
+// personal model cannot use); every registered face must still be declared
+// there, and the personal folder declares exactly its own registered faces.
+check('each root fonts.css declares its registered faces without local() lookup',
+  [...fontCssByRoot.values()].every((css) => !/local\(/u.test(cssWithoutComments(css)))
+  && [...registeredAssets.values()].every((entry) => fontCssByRoot.get(entry.root).includes(`url('./${entry.file}')`))
+  && (fontCssByRoot.get('personal').match(/@font-face/gu) || []).length
+    === [...registeredAssets.values()].filter((entry) => entry.root === 'personal').length)
+check('font licences ship next to the fonts',
+  existsSync(path.join(fontRootByRoot.get('personal'), 'xiaolai/License.txt'))
+  && existsSync(path.join(fontRootByRoot.get('personal'), 'fuzzy-bubbles/OFL.txt'))
+  && existsSync(path.join(fontRootByRoot.get('paper'), 'termes/GUST-FONT-LICENSE.txt'))
+  && existsSync(path.join(fontRootByRoot.get('paper'), 'source-han-serif/LICENSE.txt')))
 
 // ---- editor schema parity and Tiptap round trip ----------------------------
 

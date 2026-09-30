@@ -54,6 +54,7 @@ function requirePopplerTool(name) {
 }
 const PDFTOTEXT = requirePopplerTool('pdftotext')
 const PDFTOPPM = requirePopplerTool('pdftoppm')
+const PDFFONTS = requirePopplerTool('pdffonts')
 
 let passed = 0
 let failed = 0
@@ -431,6 +432,23 @@ try {
     autoCardText !== '' && flat(autoCardText).includes(flat('第一条成品旁注。')),
     JSON.stringify({ card: autoCard && { pageId: autoCard.pageId, xMm: autoCard.xMm, yMm: autoCard.yMm, widthMm: autoCard.widthMm, heightMm: autoCard.heightMm }, text: autoCardText.slice(0, 120) }))
   check('pdftotext finds the text box text in the PDF', flatPdf.includes(flat('成品文字框')))
+  // The 常规 preset (fixed note, text box, appendix entries) must print with
+  // the bundled paper faces — the owner's cross-host metric guarantee — and
+  // never a host UI/CJK font. The note page's only CJK face is Source Han
+  // Serif, so a host fallback (PingFang etc.) would necessarily show up here.
+  const notePageFonts = execFileSync(PDFFONTS, ['-f', '1', '-l', '1', pdfPath]).toString()
+  check('pdffonts embeds the bundled Termes and Source Han Serif on the default-preset note page',
+    /TeXGyreTermes/i.test(notePageFonts) && /SourceHanSerifCN/i.test(notePageFonts),
+    notePageFonts)
+  check('pdffonts embeds no host font (PingFang, Hiragino, Inter, Noto) on the default-preset note page',
+    !/PingFang|Hiragino|Inter|Noto/i.test(notePageFonts),
+    notePageFonts)
+  // The appendix sheet (title, 出处 line, entries) prints in the same lane, so
+  // the whole document embeds only the bundled faces.
+  const documentFonts = execFileSync(PDFFONTS, [pdfPath]).toString()
+  check('pdffonts embeds no host font anywhere in the document, appendix sheet included',
+    !/PingFang|Hiragino|Inter|Noto/i.test(documentFonts),
+    documentFonts)
   check('pdftotext finds the appendix body and the 附页 footer',
     flatPdf.includes(flat('转附页旁注。')) && /附页\s*\d+/.test(pdfText),
     pdfText.slice(-300).replace(/\n+/gu, ' | '))

@@ -1188,7 +1188,8 @@
 
 .paper-personal-appendix-entry-source {
   margin: 0 0 1mm;
-  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  /* Printed on the exported appendix sheet, so it stays in the bundled paper lane. */
+  font-family: 'EQB Termes', 'EQB Source Han Serif', serif;
   font-size: 12px;
   color: var(--paper-ink-muted);
 }
