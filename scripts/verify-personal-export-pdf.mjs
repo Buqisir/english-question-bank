@@ -682,4 +682,5 @@ try {
 
 console.log(`\nevidence kept in ${evidenceDir}`)
 console.log(failed === 0 ? 'verify-personal-export-pdf: all checks passed' : `verify-personal-export-pdf: ${failed} failed (${passed} passed)`)
-process.exit(failed === 0 ? 0 : 1)
+// Natural exit, not process.exit(): see verify-personal-export-foundation.mjs.
+process.exitCode = failed === 0 ? 0 : 1

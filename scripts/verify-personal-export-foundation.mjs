@@ -112,4 +112,7 @@ try {
 }
 
 console.log(failed === 0 ? '\nverify-personal-export-foundation: all checks passed' : `\nverify-personal-export-foundation: ${failed} failed`)
-process.exit(failed === 0 ? 0 : 1)
+// Let Node exit on its own once Chromium's child processes are gone: an
+// immediate process.exit() leaves exiting helpers in the process group, and
+// the verify-ci reaper's kill(-pgid) then fails with EPERM on macOS.
+process.exitCode = failed === 0 ? 0 : 1
