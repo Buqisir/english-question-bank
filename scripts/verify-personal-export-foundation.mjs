@@ -10,7 +10,9 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { personalOverlayBrowserScript } from '../server/personal-paper-layer/browserBundle.mjs'
 import { assertPersonalFontAsset, personalFontFaceCss, personalFontFaceUrlCss } from '../server/personal-paper-layer/personalFonts.mjs'
+import { inlinePaperFontsForServer, servePaperFontsFromAppOrigin } from '../server/personal-paper-layer/layout.mjs'
 import { PERSONAL_FONT_PRESETS } from '../shared/personal-text/fontRegistry.mjs'
+import { paperFontFaces } from '../shared/papersurface/paperFonts.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const appRequire = createRequire(path.join(rootDir, 'app/package.json'))
@@ -86,6 +88,27 @@ check('genuine font bytes pass the registry sha check in every asset root',
     face,
     readFileSync(path.join(rootDir, 'app/public/fonts', face.root, face.file)),
   )) !== 'PERSONAL_FONT_ASSET_MISMATCH'))
+
+// ---- paper-font URL swap survives multi-MB data URIs ------------------------
+// Regression: the old regex-callback replace blew V8's stack on the real
+// paginated HTML under Node 24 (CI RangeError). The scan must handle genuine
+// faces, unknown data URIs and quoted/unquoted URLs without recursion.
+{
+  const face = paperFontFaces[0]
+  const genuine = readFileSync(new URL(`../app/public/fonts/paper/${face.path}`, import.meta.url)).toString('base64')
+  const unknown = Buffer.from('not a registered face').toString('base64')
+  const html = `<style>@font-face{src:url("data:font/otf;base64,${genuine}")}</style>`
+    + `<style>@font-face{src:url(data:font/otf;base64,${unknown})}</style>`
+    + `<p>tail</p>`
+  const swapped = servePaperFontsFromAppOrigin(html)
+  check('multi-MB data URIs swap to app-origin font URLs without a stack overflow',
+    swapped.includes(`url("/fonts/paper/${face.path}")`)
+    && swapped.includes(`url(data:font/otf;base64,${unknown})`)
+    && swapped.endsWith('<p>tail</p>'),
+    `${(html.length / 1024 / 1024).toFixed(1)} MB in`)
+  check('the server inline pass restores the data URIs byte for byte',
+    inlinePaperFontsForServer(swapped) === html)
+}
 
 // ---- the bundle and the fonts run in a real page ----------------------------
 

@@ -148,13 +148,43 @@ function paperFontPathBySha() {
  * The renderer embeds the paper fonts as data URIs (tens of MB). The app
  * already serves those exact files from /fonts/paper/, so the iframe copy
  * points there instead; only faces whose bytes match the manifest are swapped.
+ *
+ * Hand-rolled scan, not String.replace with a callback: V8 builds the result
+ * of a global regex replace recursively per match and blows the stack on
+ * multi-MB base64 matches (Node 24 on CI: RangeError Maximum call stack size
+ * exceeded). Slicing never recurses. Same rule for the reverse direction.
  */
 export function servePaperFontsFromAppOrigin(html) {
   const bySha = paperFontPathBySha()
-  return html.replace(/url\((["']?)data:font\/otf;base64,([A-Za-z0-9+/=]+)\1\)/gu, (match, _quote, base64) => {
+  const marker = 'data:font/otf;base64,'
+  const parts = []
+  let rest = html
+  let at = rest.indexOf(marker)
+  while (at >= 0) {
+    const quote = rest[at - 1]
+    const quoted = quote === '"' || quote === "'"
+    const open = quoted ? `url(${quote}` : 'url('
+    const start = at - open.length
+    const isFontUrl = start >= 0 && rest.startsWith(open, start)
+    const end = rest.indexOf(quoted ? quote : ')', at + marker.length)
+    const closesCleanly = end >= 0 && (!quoted || rest[end + 1] === ')')
+    const base64 = closesCleanly ? rest.slice(at + marker.length, end) : ''
+    if (!isFontUrl || !closesCleanly || !/^[A-Za-z0-9+/=]+$/u.test(base64)) {
+      // Not a whole data-font URL we own; keep it verbatim and continue.
+      parts.push(rest.slice(0, at + marker.length))
+      rest = rest.slice(at + marker.length)
+      at = rest.indexOf(marker)
+      continue
+    }
+    const after = end + (quoted ? 2 : 1)
     const fontPath = bySha.get(sha256(Buffer.from(base64, 'base64')))
-    return fontPath ? `url("${PERSONAL_BASE_PAPER_FONT_URL_PREFIX}${fontPath}")` : match
-  })
+    parts.push(rest.slice(0, start))
+    parts.push(fontPath ? `url("${PERSONAL_BASE_PAPER_FONT_URL_PREFIX}${fontPath}")` : rest.slice(start, after))
+    rest = rest.slice(after)
+    at = rest.indexOf(marker)
+  }
+  parts.push(rest)
+  return parts.join('')
 }
 
 const inlineFontBytesByPath = new Map()
@@ -167,9 +197,26 @@ const inlineFontBytesByPath = new Map()
  */
 export function inlinePaperFontsForServer(html) {
   const byPath = new Map(paperFontFaces.map((face) => [face.path, face]))
-  return html.replace(/url\((["']?)\/fonts\/paper\/([^)"']+)\1\)/gu, (match, _quote, fontPath) => {
-    const face = byPath.get(fontPath)
-    if (!face) return match
+  const marker = '/fonts/paper/'
+  const parts = []
+  let rest = html
+  let at = rest.indexOf(marker)
+  while (at >= 0) {
+    const quote = rest[at - 1]
+    const quoted = quote === '"' || quote === "'"
+    const open = quoted ? `url(${quote}` : 'url('
+    const start = at - open.length
+    const isFontUrl = start >= 0 && rest.startsWith(open, start)
+    const end = rest.indexOf(quoted ? quote : ')', at + marker.length)
+    const closesCleanly = end >= 0 && (!quoted || rest[end + 1] === ')')
+    const fontPath = closesCleanly ? rest.slice(at + marker.length, end) : ''
+    const face = closesCleanly ? byPath.get(fontPath) : undefined
+    if (!isFontUrl || !face) {
+      parts.push(rest.slice(0, at + marker.length))
+      rest = rest.slice(at + marker.length)
+      at = rest.indexOf(marker)
+      continue
+    }
     let bytes = inlineFontBytesByPath.get(fontPath)
     if (!bytes) {
       bytes = readFileSync(new URL(`../../app/public/fonts/paper/${fontPath}`, import.meta.url))
@@ -180,8 +227,14 @@ export function inlinePaperFontsForServer(html) {
       }
       inlineFontBytesByPath.set(fontPath, bytes)
     }
-    return `url("data:font/otf;base64,${bytes.toString('base64')}")`
-  })
+    const after = end + (quoted ? 2 : 1)
+    parts.push(rest.slice(0, start))
+    parts.push(`url("data:font/otf;base64,${bytes.toString('base64')}")`)
+    rest = rest.slice(after)
+    at = rest.indexOf(marker)
+  }
+  parts.push(rest)
+  return parts.join('')
 }
 
 // Replays the base render. Stage-5 composition passes its own render here so
