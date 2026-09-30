@@ -1,0 +1,1360 @@
+/* Personal annotation layer (#489): the teacher's marks on the reading view.
+ * Mark colors are this feature's local tokens (spec §3.2), not chrome accents.
+ * One token home covers every surface the marks show on: the reading layer,
+ * the paper-view layer, and the popover (portaled to body, outside both). */
+.paper-personal-layer,
+.paper-personal-fills,
+.paper-personal-paper-marks,
+.paper-personal-popover,
+.paper-tool-palette {
+  --personal-highlight-yellow: #f9e08a;
+  --personal-highlight-green: #c9e7b8;
+  --personal-highlight-blue: #bcd9f2;
+  --personal-highlight-pink: #f2c3d6;
+  --personal-ink: #1f1f1d;
+  --personal-ink-red: #c0392b;
+}
+
+.paper-personal-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.paper-personal-marks {
+  position: absolute;
+  inset: 0;
+}
+
+/* No z-index here: a stacking context would isolate the multiply blend from
+ * the paper text underneath (see PersonalAnnotationLayer). */
+.paper-personal-fills {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paper-personal-mark {
+  position: absolute;
+  border-radius: 0;
+}
+
+.paper-personal-mark--highlight {
+  mix-blend-mode: multiply;
+}
+
+.paper-personal-mark--highlight[data-color='yellow'] { background: var(--personal-highlight-yellow); }
+.paper-personal-mark--highlight[data-color='green'] { background: var(--personal-highlight-green); }
+.paper-personal-mark--highlight[data-color='blue'] { background: var(--personal-highlight-blue); }
+.paper-personal-mark--highlight[data-color='pink'] { background: var(--personal-highlight-pink); }
+
+.paper-personal-mark--underline[data-ink='ink'] { border-bottom: 2px solid var(--personal-ink); }
+.paper-personal-mark--underline[data-ink='red'] { border-bottom: 2px solid var(--personal-ink-red); }
+
+.paper-personal-mark--anchored-note {
+  border-bottom: 2px dotted var(--personal-ink);
+}
+
+/* 纸张视图（#489 4c-1）：印刷字号比阅读视图小，下划线从 2px 收窄到 1.5px。
+ * Explicit-Cascade: 与上方 [data-ink] 规则同权（0-2-0），必须排在后面取胜。 */
+.paper-personal-paper-marks {
+  position: absolute;
+  inset: 0;
+  /* 容器关闭指针（4c-1 静止层）。pointer-events 可继承，子元素拿到的也是
+   * none——可交互标注（4c-2）在 PaperMarkLayer 里对每个 rect 内联
+   * pointer-events:auto 重新打开，无需此处再写子元素规则。 */
+  pointer-events: none;
+}
+
+.paper-personal-paper-mark.paper-personal-mark--underline,
+.paper-personal-paper-mark.paper-personal-mark--anchored-note {
+  border-bottom-width: 1.5px;
+}
+
+/* Explicit-Cascade: 压过上方 [data-color] 的底色与 multiply，因纸张视图的
+ * 高亮填色画在 iframe 文档内（PaperMarkLayer），这里只留透明点击区与选中描边。 */
+.paper-personal-paper-mark.paper-personal-mark--highlight {
+  background: transparent;
+  mix-blend-mode: normal;
+}
+
+.paper-personal-mark.is-selected {
+  outline: 2px solid var(--personal-ink);
+  outline-offset: 1px;
+}
+
+/* Numbered badge at the end of a note's anchor. */
+.paper-personal-note-badge {
+  position: absolute;
+  pointer-events: auto;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 999px;
+  background: var(--desk-surface, #fafcf8);
+  color: var(--desk-muted, #60665c);
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.paper-personal-note-badge:hover,
+.paper-personal-note-badge.is-open {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-note-badge:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.paper-personal-note-cards {
+  position: absolute;
+  inset: 0;
+}
+
+.paper-personal-note-slot {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.paper-personal-note-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--desk-surface, #fafcf8);
+  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
+  font-size: 13px;
+}
+
+.paper-personal-note-card.is-editing {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.paper-personal-note-card.is-selected {
+  outline: 2px solid var(--personal-ink);
+  outline-offset: 1px;
+}
+
+.paper-personal-note-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.paper-personal-note-card__label {
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-note-card__view {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: text;
+}
+
+.paper-personal-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  cursor: pointer;
+}
+
+.paper-personal-icon-button:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-icon-button:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* Mark popover (portaled to body). */
+.paper-personal-popover {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+  /* Shrink-to-fit stopped at min-width and squeezed the type label onto two
+   * lines; the popover sizes to its widest row instead. */
+  width: max-content;
+  max-width: min(320px, calc(100vw - 24px));
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-popover__hint {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-popover__choice,
+.paper-personal-popover__back,
+.paper-personal-popover__action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.paper-personal-popover__choice:hover,
+.paper-personal-popover__back:hover,
+.paper-personal-popover__action:hover {
+  background: var(--desk-hover, #e5eae1);
+}
+
+.paper-personal-popover__back {
+  color: var(--desk-muted, #60665c);
+  font-size: 12px;
+}
+
+.paper-personal-popover__action--danger:hover {
+  color: var(--eqb-color-danger);
+}
+
+.paper-personal-popover__editor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.paper-personal-popover__type {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--desk-muted, #60665c);
+  white-space: nowrap;
+}
+
+.paper-personal-popover__swatches {
+  display: flex;
+  gap: 4px;
+}
+
+.paper-personal-swatch {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid rgba(30, 30, 28, 0.12);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.paper-personal-swatch[data-color='yellow'] { background: var(--personal-highlight-yellow); }
+.paper-personal-swatch[data-color='green'] { background: var(--personal-highlight-green); }
+.paper-personal-swatch[data-color='blue'] { background: var(--personal-highlight-blue); }
+.paper-personal-swatch[data-color='pink'] { background: var(--personal-highlight-pink); }
+
+.paper-personal-swatch--ink[data-ink='ink'] { background: var(--personal-ink); }
+.paper-personal-swatch--ink[data-ink='red'] { background: var(--personal-ink-red); }
+
+.paper-personal-swatch[aria-pressed='true'] {
+  outline: 2px solid var(--personal-ink);
+  outline-offset: 1px;
+}
+
+.paper-personal-swatch:focus-visible,
+.paper-personal-popover__choice:focus-visible,
+.paper-personal-popover__back:focus-visible,
+.paper-personal-popover__action:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* Save status in the topbar. */
+.paper-personal-status {
+  font-size: 12px;
+  color: var(--desk-muted, #60665c);
+  white-space: nowrap;
+}
+
+.paper-personal-status.is-quiet {
+  color: var(--eqb-color-ink-faint, #9a9d97);
+}
+
+.paper-personal-notice {
+  font-size: 12px;
+  color: var(--eqb-color-danger);
+  white-space: nowrap;
+}
+
+.paper-personal-conflict {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 70;
+  max-width: 320px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-conflict p {
+  margin: 0 0 8px;
+}
+
+.paper-personal-conflict__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.paper-personal-conflict__actions button {
+  padding: 6px 12px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 999px;
+  background: var(--desk-surface, #fafcf8);
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.paper-personal-conflict__actions button:hover {
+  background: var(--desk-hover, #e5eae1);
+}
+
+/* Personal commentary inside the lecture column. */
+.paper-personal-commentary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--desk-border-subtle, #e3e8df);
+}
+
+.paper-personal-commentary__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.paper-personal-commentary__title {
+  margin: 0;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-commentary__edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.paper-personal-commentary__edit:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-commentary__view {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: text;
+}
+
+.paper-personal-commentary .eqb-personal-text {
+  font-size: 13px;
+}
+
+/* Paper editing view (#489 4b-1): the paginated A4 base in an iframe.
+ * 纸张视图是个人批注的后续编辑面，样式随个人批注走这一份 CSS。 */
+
+/* 纸张视图下目录 rail 与阅读卷面退场，纸张视图占据整个内容列。
+ * Explicit-Cascade: 本条覆盖 paperBrowsePage.css 的 1440px 媒体查询三列
+ * 模板（72px minmax(0,1fr) 440px），因纸张视图占满整行——双类选择器
+ * （0-2-0）稳赢媒体查询里的单类规则，不靠文件顺序。 */
+.paper-browse-shell.paper-browse-shell--paper-view {
+  grid-template-columns: 1fr;
+}
+
+.paper-browse-shell.paper-browse-shell--paper-view .paper-browse-rail,
+.paper-browse-shell.paper-browse-shell--paper-view .paper-browse-content {
+  display: none;
+}
+
+/* 工具条：左 阅读/纸张 切换，右缩放档位。 */
+.paper-browse-editing-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px 0;
+}
+
+.paper-browse-editing-toolbar__left {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.paper-browse-view-switch,
+.paper-browse-zoom-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 缩放档位与「导出我的批注版」同一颗按钮的观感。批注工具收进了纸张视图
+ * 右侧的固定浮板（.paper-tool-palette），工具条里不再有工具开关。 */
+.paper-browse-view-switch__option,
+.paper-browse-zoom-option,
+.paper-browse-export-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-browse-view-switch__option:hover:not([aria-pressed='true']),
+.paper-browse-zoom-option:hover:not([aria-pressed='true']),
+.paper-browse-export-option:hover:not([disabled]) {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+/* Explicit-Cascade: 选中态墨底白字压过 hover 浅底——同权 hover 规则在
+ * 前面，选中规则靠后取胜；墨底悬停变浅由下一条承担。 */
+.paper-browse-view-switch__option--active,
+.paper-browse-zoom-option[aria-pressed='true'] {
+  background: var(--action, #1f1f1d);
+  color: #fff;
+}
+
+.paper-browse-view-switch__option--active:hover,
+.paper-browse-zoom-option[aria-pressed='true']:hover {
+  background: var(--action-hover, #3a3a37);
+  color: #fff;
+}
+
+.paper-browse-view-switch__option:focus-visible,
+.paper-browse-zoom-option:focus-visible,
+.paper-browse-export-option:focus-visible,
+.paper-personal-retry:focus-visible {
+  outline: 2px solid var(--eqb-color-action, #1f1f1d);
+  outline-offset: 2px;
+}
+
+.paper-personal-paper-view {
+  display: flex;
+  /* 附页预览与纸张同宽，仍放不进同一行——换行排到纸张下方。Explicit-Cascade:
+   * 单子项（纸张或错误态）时 wrap 不改变现有布局。 */
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 0;
+  /* 双保险：即使网格列模板被上游改动，纸张视图也横跨全部列、占满宽度。 */
+  grid-column: 1 / -1;
+  width: 100%;
+  /* 右侧永久让出「批注工具浮板宽 + 24px」的空档（浮板 fixed 贴视口右缘）：
+   * 纸张居中在这个内容盒里，任何缩放档位都坐不进浮板之下；fit 宽度用
+   * ResizeObserver 的 contentRect（不含 padding），自动减去了这条空档。 */
+  padding-right: calc(64px + 24px);
+}
+
+/* ---- 批注工具浮板（#489 palette）：纸张视图右侧的固定竖排工具条 ---- */
+
+.paper-tool-palette {
+  position: fixed;
+  /* 顶栏（48px）+ 工具条（约 44px）之下起排，不与两者相接。 */
+  top: 116px;
+  right: 12px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
+}
+
+.paper-tool-palette__slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.paper-tool-palette__tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 56px;
+  padding: 8px 0 6px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-tool-palette__tool:hover:not(.is-active):not(:disabled) {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+/* Explicit-Cascade: 激活工具是选中态墨底白字，压过同权的整块 hover 浅底；
+ * 墨底悬停变浅由下一条承担（DESIGN 墨做动作）。 */
+.paper-tool-palette__tool.is-active {
+  background: var(--action, #1f1f1d);
+  color: #fff;
+}
+
+.paper-tool-palette__tool.is-active:hover {
+  background: var(--action-hover, #3a3a37);
+  color: #fff;
+}
+
+.paper-tool-palette__tool:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.paper-tool-palette__tool:focus-visible {
+  outline: 2px solid var(--eqb-color-action, #1f1f1d);
+  outline-offset: 2px;
+}
+
+.paper-tool-palette__label {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* 取色点竖排在工具下方；点色只换记忆色，不替工具。 */
+.paper-tool-palette__swatches {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 2px 0 4px;
+}
+
+.paper-tool-palette__swatch {
+  width: 14px;
+  height: 14px;
+}
+
+.paper-personal-paper-state {
+  padding: 32px 24px;
+  font-size: 14px;
+  color: var(--desk-muted, #60665c);
+  text-align: center;
+}
+
+.paper-personal-paper-state p {
+  margin: 0 0 12px;
+}
+
+.paper-personal-paper-state--error {
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-retry {
+  padding: 6px 12px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 999px;
+  background: var(--desk-surface, #fafcf8);
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  transition: background var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-retry:hover {
+  background: var(--desk-hover, #e5eae1);
+}
+
+/* 文字框静默提示（溢出 / 旧版式）：工具条中段，空时不占高度也不推动纸张。 */
+.paper-browse-editing-toolbar__notices {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* 「导出我的批注版」按钮的 portal 槽：与左侧其它按钮同一排，也是诊断浮层
+ * 的定位锚（浮层 absolute 挂在槽下缘，不占布局高度）。 */
+.paper-browse-editing-toolbar__actions {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.paper-personal-paper-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--desk-muted, #60665c);
+}
+
+/* 导出诊断浮层：desk raised 面 + Floating 阴影（DESIGN.md §4），锚在导出
+ * 按钮下缘、脱离文档流——出现与关闭不改变工具条与纸张的任何位置。 */
+.paper-personal-export-diagnostics {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: max-content;
+  max-width: 360px;
+  padding: 12px 16px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
+  text-align: left;
+}
+
+.paper-personal-export-diagnostics__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.paper-personal-export-diagnostics__title {
+  color: var(--desk-ink, #191d18);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.paper-personal-export-diagnostics__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paper-personal-export-diagnostics__rows li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-export-diagnostics__action {
+  flex: none;
+  height: 24px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-size: 13px;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-export-diagnostics__action:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-export-diagnostics__action:focus-visible {
+  outline: 2px solid var(--eqb-color-action, #1f1f1d);
+  outline-offset: 2px;
+}
+
+.paper-personal-paper-notice .paper-personal-retry {
+  font-size: 12px;
+  padding: 3px 10px;
+}
+
+.paper-personal-paper-zoom {
+  flex: none;
+}
+
+.paper-personal-paper-canvas {
+  position: relative;
+  /* 缩放只发生在这一层（transform 不回流）：iframe 恒按 100% 布局宽度渲染。 */
+  transform-origin: 0 0;
+}
+
+/* sandbox 只授 allow-same-origin（父页面核对页面盒尺寸需要），脚本与表单
+ * 全关——分页 HTML 本就没有脚本。 */
+.paper-personal-paper-iframe {
+  display: block;
+  border: 0;
+  background: #fff;
+}
+
+.paper-personal-paper-overlays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 批注叠加挂载点：一个容器 = 一页的页面盒子（px 定位），页内批注坐标用
+ * mm（原点在页面左上，96/25.4 换算），由后续子任务填充。 */
+.paper-personal-paper-page-overlay {
+  position: absolute;
+}
+
+/* 纸张视图文字框（#489 step A）：位置由层组件按 mm 换算成 px，高度随内容；
+ * 透明无底无边，直接浮在纸面上。点击布点只在 armed 时接管（hit 面），其余
+ * 时候点击穿透到 iframe。 */
+.paper-personal-text-box-layer {
+  --personal-ink: #1f1f1d;
+  /* Muted selection hairline: --desk-muted at the weight of a pencil line. */
+  --personal-frame: rgba(96, 102, 92, 0.55);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paper-personal-text-box {
+  position: absolute;
+  z-index: 1;
+  pointer-events: auto;
+  background: transparent;
+  border: 0;
+}
+
+/* 溢出框：1px 虚线提醒。Explicit-Cascade: 本条必须排在下方选中态 outline
+ * 规则之前——两个规则同权（0-2-0）时后写者获胜，选中是更强的用户意图，
+ * 溢出提醒在框被选中时让位。 */
+.paper-personal-text-box[data-overflow='true'] {
+  outline: 1px dashed var(--eqb-color-warning, #E8901A);
+  outline-offset: 4px;
+}
+
+/* Selection is a soft frame around the teacher's words, not an input box:
+ * a muted hairline with breathing room and a badge-radius corner. */
+.paper-personal-text-box {
+  border-radius: 4px;
+}
+
+.paper-personal-text-box.is-selected {
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+/* Explicit-Cascade: overrides the resting selected frame; editing and keyboard
+ * focus deserve the full ink so the teacher knows where keys will land. */
+.paper-personal-text-box.is-editing,
+.paper-personal-text-box:focus-visible {
+  outline: 1px solid var(--personal-ink);
+  outline-offset: 4px;
+}
+
+/* Explicit-Cascade: overrides personalText.css's input focus ring; on paper the
+ * box's own editing frame already marks focus, and two rings read as a heavy box. */
+.paper-personal-text-box .eqb-personal-text--editor:not(.is-readonly) .eqb-personal-text__input:focus-visible {
+  outline: none;
+}
+
+/* Explicit-Cascade: 编辑中的框压过其余框（工具条浮出纸面），因编辑器工具条
+ * 可能盖到相邻框，须保证自己在最上层。 */
+.paper-personal-text-box.is-editing {
+  z-index: 2;
+}
+
+/* armed 时的整页点击面：放在框的下一层，点空白处布点，点框仍命中框。 */
+.paper-personal-text-box-hit {
+  position: absolute;
+  z-index: 0;
+}
+
+/* Unarmed hit surfaces exist only while a box is selected or edited: the
+ * paper iframe runs without scripts and swallows clicks, so this is what lets
+ * a click on blank paper deselect. */
+.paper-personal-text-box-hit {
+  pointer-events: auto;
+}
+
+.paper-personal-text-box-layer.is-armed .paper-personal-text-box-hit {
+  cursor: crosshair;
+}
+
+/* 「逐个摆放」中：整个纸面成为落点选择器。 */
+.paper-personal-text-box-layer.is-replacing .paper-personal-text-box-hit {
+  cursor: crosshair;
+}
+
+/* 选中框可整只拖动；拖动中禁止正文被顺手选中。 */
+.paper-personal-text-box.is-selected:not(.is-editing) {
+  cursor: move;
+}
+
+.paper-personal-text-box.is-dragging {
+  user-select: none;
+}
+
+/* 编辑中：工具条浮出框顶（--desk-raised 面板），不再把正文往下顶——
+ * 编辑态与静止态文字逐像素同位。 */
+.paper-personal-text-box .eqb-personal-text--editor {
+  /* Explicit-Cascade: 本条压过 personalText.css 的编辑器列间距（gap: 4px），
+   * 因工具条改为绝对定位浮出框外，列间距会把正文下推 1px 以上。 */
+  gap: 0;
+}
+
+.paper-personal-text-box .eqb-personal-text__tools,
+.paper-personal-text-box__strip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 3;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  /* UI chrome, not paper: cancel the canvas zoom so controls stay 13px/28px at every zoom level. */
+  transform: scale(calc(1 / var(--paper-zoom, 1)));
+  transform-origin: left bottom;
+}
+
+.paper-personal-text-box .eqb-personal-text__tools > *,
+.paper-personal-text-box__strip > * {
+  flex-shrink: 0;
+}
+
+/* 选中态操作条：字体、字号、复制、删除，与编辑工具条同一浮层语言。 */
+.paper-personal-text-box__strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--desk-ink, #191d18);
+  white-space: nowrap;
+}
+
+.paper-personal-strip-divider {
+  flex: none;
+  width: 1px;
+  height: 16px;
+  margin: 0 4px;
+  background: var(--desk-border, #d5dacf);
+}
+
+.paper-personal-text-box__strip > .paper-personal-strip-divider:first-child {
+  display: none;
+}
+
+/* Native select keeps its keyboard/menu behavior; only its chrome is replaced
+ * so it reads like the size and action buttons beside it. */
+.paper-personal-text-box__font {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-text-box__font svg {
+  position: absolute;
+  right: 8px;
+  pointer-events: none;
+  color: var(--desk-muted, #60665c);
+}
+
+.paper-personal-text-box__font-select {
+  appearance: none;
+  height: 28px;
+  padding: 0 28px 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-text-box__font-select:hover {
+  background: var(--desk-hover, #e5eae1);
+}
+
+.paper-personal-text-box__sizes {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.paper-personal-text-box__size-option {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-text-box__size-option:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-text-box__size-option[aria-pressed='true'] {
+  background: var(--action, #1f1f1d);
+  color: #fff;
+}
+
+.paper-personal-text-box__size-option[aria-pressed='true']:hover {
+  background: var(--action-hover, #3a3a37);
+  color: #fff;
+}
+
+.paper-personal-text-box__strip-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-personal-text-box__strip-action:hover {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+.paper-personal-text-box__strip-action--danger:hover {
+  color: var(--eqb-color-danger);
+}
+
+.paper-personal-text-box__font-select:focus-visible,
+.paper-personal-text-box__size-option:focus-visible,
+.paper-personal-text-box__strip-action:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* 宽度手柄：右缘垂直居中的 8px 圆点，拖动改 widthMm。 */
+.paper-personal-text-box__resize-handle {
+  position: absolute;
+  top: 50%;
+  /* Sits on the selection frame (outline-offset 4px), not on the text. */
+  right: -8px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--personal-ink, #1f1f1d);
+  border-radius: 50%;
+  background: #fff;
+  transform: translateY(-50%) scale(calc(1 / var(--paper-zoom, 1)));
+  cursor: ew-resize;
+}
+
+/* 纸张视图锚定旁注卡（#489 4c-2）；内衬走 mm，与页面几何同单位。 */
+.paper-personal-paper-note-layer {
+  /* Same selection-frame tokens as the text-box layer. */
+  --personal-ink: #1f1f1d;
+  --personal-frame: rgba(96, 102, 92, 0.55);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.paper-personal-paper-note {
+  position: absolute;
+  z-index: 1;
+  pointer-events: auto;
+  padding: 2mm 3mm;
+  /* 旁注是纸上的笔迹而非浮起的控件：无阴影，只一层暖墨淡底 + 暖纸发丝边。 */
+  border: 1px solid var(--paper-border, #e6e2d7);
+  border-radius: 4px;
+  /* Opaque on purpose: the teacher may drag a note over body text, and a
+   * see-through card would interleave both texts. On blank paper it looks
+   * the same as a translucent tint. */
+  background:
+    linear-gradient(rgba(var(--paper-ink-rgb, 74, 68, 56), 0.035), rgba(var(--paper-ink-rgb, 74, 68, 56), 0.035)),
+    #fff;
+}
+
+/* 溢出卡：与文字框同款 1px 虚线提醒（只标手摆的 page-position 卡，auto 摆位
+ * 不会溢出）。Explicit-Cascade: 本条必须排在下方选中态 outline 规则之前——
+ * 两个规则同权时后写者获胜，选中是更强的用户意图，溢出提醒在选中时让位。 */
+.paper-personal-paper-note[data-overflow='true'] {
+  outline: 1px dashed var(--eqb-color-warning, #E8901A);
+  outline-offset: 4px;
+}
+
+/* 选中态复用文字框选中框：弱墨发丝 + 呼吸位；浮到其它旁注之上，
+ * 重叠时（如刚复制）调宽手柄仍可点到。 */
+.paper-personal-paper-note.is-selected {
+  z-index: 2;
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+/* 页边卡（margin slot）：更窄的竖条卡，内衬收一档。 */
+.paper-personal-paper-note[data-note-slot='margin'] {
+  padding: 1.5mm 2mm;
+}
+
+/* 「逐个摆放」armed 的整页点击面；旁注选中/编辑时也渲染（点纸面空白取消
+ * 选中、退出编辑）。crosshair 只在 placing 时——平时是普通取消点击。 */
+.paper-personal-paper-note-hit {
+  position: absolute;
+  z-index: 0;
+  pointer-events: auto;
+}
+
+.paper-personal-paper-note-layer.is-placing .paper-personal-paper-note-hit {
+  cursor: crosshair;
+}
+
+/* 选中卡可整只拖动；拖动中禁止正文被顺手选中。（同文字框层） */
+.paper-personal-paper-note.is-selected:not(.is-editing) {
+  cursor: move;
+}
+
+.paper-personal-paper-note.is-dragging {
+  user-select: none;
+}
+
+/* 编辑中：卡片浮到最上层，背景改不透明（暖墨淡底叠白底），编辑加长后不与
+ * 下层卡片文字相叠；外框用与选中态同款弱墨发丝——编辑器输入区自带的 2px
+ * 焦点环在下方关掉，焦点由卡片外框表达。 */
+.paper-personal-paper-note.is-editing {
+  z-index: 2;
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+  background: linear-gradient(rgba(var(--paper-ink-rgb, 74, 68, 56), 0.035), rgba(var(--paper-ink-rgb, 74, 68, 56), 0.035)), #fff;
+}
+
+/* 编辑态工具条照抄文字框层（#489 4b）：绝对定位浮出卡片上方、单行
+ * max-content（页边卡 20mm 也放得下）、反缩放保持控件原尺寸。 */
+.paper-personal-paper-note .eqb-personal-text--editor {
+  /* Explicit-Cascade: 本条压过 personalText.css 的编辑器列间距（gap: 4px），
+   * 因工具条改为绝对定位浮出卡片外，列间距会把正文下推 1px 以上。 */
+  gap: 0;
+}
+
+.paper-personal-paper-note .eqb-personal-text__tools {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 3;
+  width: max-content;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  /* UI chrome, not paper: cancel the canvas zoom so controls stay 13px/28px at every zoom level. */
+  transform: scale(calc(1 / var(--paper-zoom, 1)));
+  transform-origin: left bottom;
+}
+
+.paper-personal-paper-note .eqb-personal-text__tools > * {
+  flex-shrink: 0;
+}
+
+/* Explicit-Cascade: overrides personalText.css's input focus ring; on paper the
+ * card's own editing frame already marks focus, and two rings read as a heavy box. */
+.paper-personal-paper-note .eqb-personal-text--editor:not(.is-readonly) .eqb-personal-text__input:focus-visible {
+  outline: none;
+}
+
+/* 回到原文：锚线透明度脉冲两个来回（motion-slow × 2）。 */
+.paper-personal-paper-mark.is-flash {
+  animation: paper-mark-flash var(--motion-slow) var(--ease-in-out) 2;
+}
+
+@keyframes paper-mark-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-personal-paper-mark.is-flash {
+    animation: none;
+  }
+}
+
+/* 页面右半的页边卡：操作条与编辑工具条改为右对齐（锚卡片右缘），不伸出
+ * 页面右缘。Explicit-Cascade: 压过上方浮层规则的 left: 0 /
+ * transform-origin: left bottom，因页边卡贴页面右缘。 */
+.paper-personal-paper-note.is-strip-right .paper-personal-text-box__strip,
+.paper-personal-paper-note.is-strip-right .eqb-personal-text__tools {
+  left: auto;
+  right: 0;
+  transform-origin: right bottom;
+}
+
+
+/* ---- 附页（#489 §8 4d-A）：纸面「附N」标记 + 附页预览 ---- */
+
+/* 纸面标记层：覆盖整卷画布，标记自身可点（点 → 滚到附页条目并选中）。 */
+.paper-personal-paper-appendix-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* 编号标记：纸面与附页条目同款。卷面衬线字道，11px/16px 小而可认。 */
+.paper-personal-appendix-marker {
+  flex-shrink: 0;
+  font-family: 'EQB Termes', 'EQB Source Han Serif', serif;
+  font-size: 11px;
+  line-height: 16px;
+  padding: 0 4px;
+  color: var(--paper-ink-strong);
+  background: #fff;
+  border: 1px solid var(--paper-border);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* 纸面标记是绝对定位的控件；附页条目里的标签是流内悬挂列。 */
+.paper-personal-paper-appendix-layer .paper-personal-appendix-marker {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* 页边标记按页边中点落位，自身再左移半宽取中。 */
+.paper-personal-paper-appendix-layer .paper-personal-appendix-marker.is-centered {
+  transform: translateX(-50%);
+}
+
+.paper-personal-paper-appendix-layer .paper-personal-appendix-marker.is-selected {
+  outline: 1px solid var(--personal-frame, rgba(96, 102, 92, 0.55));
+  outline-offset: 2px;
+}
+
+/* Explicit-Cascade: 同一条闪烁动画也给附页标记——「回到原处」滚到纸面后
+ * 用同一对 motion-slow 脉冲指位。 */
+.paper-personal-paper-mark.is-flash,
+.paper-personal-appendix-marker.is-flash {
+  animation: paper-mark-flash var(--motion-slow) var(--ease-in-out) 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-personal-paper-mark.is-flash,
+  .paper-personal-appendix-marker.is-flash {
+    animation: none;
+  }
+}
+
+/* 附页预览：外层盒与纸张 zoom 块同宽（换行后同样被 flex 居中，纸缘自然对
+ * 齐），高度用实测高 × scale 撑开占位；纸体在盒内绝对定位到 frames[0]
+ * 左缘——不让容器 scrollWidth 变大。 */
+.paper-personal-appendix-preview {
+  position: relative;
+  margin-top: 24px;
+}
+
+.paper-personal-appendix-sheet-outer {
+  position: absolute;
+  top: 0;
+}
+
+.paper-personal-appendix-sheet {
+  padding: 17mm 24mm;
+  background: #fff;
+  /* box-shadow 由 PaperAppendixPreview 内联 PAPER_SHEET_BOX_SHADOW——与纸张
+   * iframe 注入的是同一条常量，这里不重复写字面量。 */
+  transform-origin: left top;
+  --personal-frame: rgba(96, 102, 92, 0.55);
+}
+
+.paper-personal-appendix-title {
+  margin: 0 0 8mm;
+  font-family: 'EQB Termes', 'EQB Source Han Serif', serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--paper-ink-strong);
+}
+
+.paper-personal-appendix-hint {
+  margin: 0 0 8mm;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  text-align: center;
+  color: var(--paper-ink-muted);
+}
+
+.paper-personal-appendix-entries {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+/* 条目：悬挂编号 + 右侧正文；右上角安静文字按钮。点击空白处选中。 */
+.paper-personal-appendix-entry {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 2mm;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.paper-personal-appendix-entry.is-selected {
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+.paper-personal-appendix-entry-body {
+  flex: 1;
+  min-width: 0;
+  padding-right: 96px;
+}
+
+.paper-personal-appendix-entry-source {
+  margin: 0 0 1mm;
+  /* Printed on the exported appendix sheet, so it stays in the bundled paper lane. */
+  font-family: 'EQB Termes', 'EQB Source Han Serif', serif;
+  font-size: 12px;
+  color: var(--paper-ink-muted);
+}
+
+.paper-personal-appendix-entry-actions {
+  position: absolute;
+  top: 2mm;
+  right: 2mm;
+  display: flex;
+  gap: 4px;
+}
+
+.paper-personal-appendix-entry-action {
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  font-family: Inter, 'PingFang SC', ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  color: var(--desk-muted, #60665C);
+  cursor: pointer;
+}
+
+.paper-personal-appendix-entry-action:hover {
+  background: var(--desk-hover, #E5EAE1);
+}
+
+/* 条目就地编辑（4d-B）：照抄旁注卡编辑态——条目背景保持纸白，外框用弱墨
+ * 发丝表达焦点（编辑器自带的 2px 焦点环在下方关掉），工具条浮出条目上方
+ * 单行、反缩放保持控件原尺寸。 */
+.paper-personal-appendix-entry.is-editing {
+  z-index: 1;
+  background: #fff;
+  outline: 1px solid var(--personal-frame);
+  outline-offset: 4px;
+}
+
+.paper-personal-appendix-entry .eqb-personal-text--editor {
+  /* Explicit-Cascade: 本条压过 personalText.css 的编辑器列间距（gap: 4px），
+   * 因工具条改为绝对定位浮出条目外，列间距会把正文下推 1px 以上。 */
+  gap: 0;
+}
+
+.paper-personal-appendix-entry .eqb-personal-text__tools {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 0;
+  z-index: 3;
+  width: max-content;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
+  /* UI chrome, not paper: cancel the sheet zoom so controls stay 13px/28px at every zoom level. */
+  transform: scale(calc(1 / var(--paper-zoom, 1)));
+  transform-origin: left bottom;
+}
+
+.paper-personal-appendix-entry .eqb-personal-text__tools > * {
+  flex-shrink: 0;
+}
+
+/* Explicit-Cascade: overrides personalText.css's input focus ring; the entry's
+ * own editing frame already marks focus, and two rings read as a heavy box. */
+.paper-personal-appendix-entry .eqb-personal-text--editor:not(.is-readonly) .eqb-personal-text__input:focus-visible {
+  outline: none;
+}

@@ -1059,6 +1059,7 @@ function App() {
     return (
       <PaperBrowsePage
         paperId={paperBrowseRoute.paperId}
+        personalAccountKey={currentUser?.id ?? null}
         reviewRevision={paperBrowseRoute.reviewRevision}
         focusGroupId={paperBrowseRoute.focusGroupId}
         questionId={paperBrowseRoute.questionId}

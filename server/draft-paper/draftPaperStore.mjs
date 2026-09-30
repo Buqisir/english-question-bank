@@ -903,6 +903,116 @@ export function createDraftPaperStore({
     return inlineFigureImages(html, images)
   }
 
+  // Draft fixed-page export builds its product from this; the published-paper
+  // personal base layout uses the natural student pipeline below instead.
+  function prepareFixedPaginationEdition(draftPaper, pageLayout) {
+    const listeningCount = draftPaper.items.filter((item) => !item.groupMissing && item.questionGroup?.groupType === 'listening').length
+    const canonicalConsumption = resolveDraftCanonicalConsumption(draftPaper)
+    const sourceHasListening = canonicalConsumption?.selections?.some((selection) =>
+      selection.mode === 'canonical' && selection.familyContractId === 'listening' && selection.groupIds?.length === 2) ?? false
+    const product = STUDENT_PRODUCT_EDITIONS.includes(pageLayout)
+    const { includeListening, targetPages, omitCover } = (product ? studentProductPolicy : fixedPageLayoutPolicy)(pageLayout, listeningCount, sourceHasListening)
+    const renderedGroupIds = draftPaper.items
+      .filter((item) => includeListening || item.questionGroup?.groupType !== 'listening')
+      .map((item) => item.groupId)
+    if (draftPaper.items.some((item) => item.groupMissing)
+      || !ownsCompletePaperOpening(canonicalConsumption, draftPaper.items.map((item) => item.groupId))
+      || !ownsCompletePaperOpening(canonicalConsumption, renderedGroupIds)) {
+      throw new Error('定页版需要按原顺序排列的同源完整试卷；部分题组或混编练习请使用普通 PDF 导出')
+    }
+    const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: 'student', includeListening, canonicalConsumption })
+    const slotBindings = paginationSlotBindings(canonicalConsumption)
+    const versionDir = path.join(
+      paperAssetsDir,
+      canonicalConsumption.paperId,
+      'versions',
+      `v${canonicalConsumption.sourceAssetVersion}`,
+    )
+    const loadedPlan = loadBoundPaperPaginationPlan(versionDir, {
+      paperId: canonicalConsumption.paperId,
+      sourceAssetVersion: canonicalConsumption.sourceAssetVersion,
+      sourceDigest: canonicalConsumption.sourceAssetDigest,
+      slotBindings,
+      sourceHasListening,
+    })
+    const explicit = paginationPlanEdition(loadedPlan?.plan, pageLayout, slotBindings)
+    return {
+      pageLayout,
+      product,
+      html,
+      explicit,
+      planDigest: loadedPlan?.digest ?? null,
+      policy: { includeListening, targetPages, omitCover },
+      renderedGroupIds,
+      canonicalConsumption,
+    }
+  }
+
+  async function renderPreparedFixedEdition(prepared, { render = renderPaginatedPaper } = {}) {
+    const { pageLayout, html, explicit, product, policy: { targetPages, omitCover } } = prepared
+    const result = explicit
+      ? await (product ? renderExplicitStudentProductPdf : renderExplicitFixedPagePdf)(html, { ...explicit, render })
+      : await (product ? planStudentProductPdf : pageLayout === 'long10' || pageLayout === 'long12' ? planLongPaperPdf : planFixedPagePdf)(html, {
+        targetPages, omitCover, edition: pageLayout, render,
+      })
+    return result
+  }
+
+  async function renderFixedPaginationEdition(draftPaper, pageLayout, options) {
+    const prepared = prepareFixedPaginationEdition(draftPaper, pageLayout)
+    return { prepared, result: await renderPreparedFixedEdition(prepared, options) }
+  }
+
+  // An in-memory, never-persisted draft-shaped value holding one published
+  // paper in its canonical order; no Draft Paper row is created or read.
+  function publishedPaperDraftShape(canonicalConsumption, { title } = {}) {
+    const groupIds = (canonicalConsumption?.visibleStructure || [])
+      .filter((node) => node?.kind === 'group' && typeof node.groupId === 'string')
+      .map((node) => node.groupId)
+    const items = groupIds.map((groupId, index) => {
+      const detail = getQuestionGroupDetail(groupId)
+      return {
+        id: `published-item-${index + 1}`,
+        groupId,
+        sourcePaperId: canonicalConsumption.paperId,
+        orderIndex: index,
+        pageBreakBefore: false,
+        groupMissing: !detail,
+        questionGroup: detail ? { groupType: detail.groupType, defaultScore: detail.defaultScore } : null,
+      }
+    })
+    return { id: null, title: title || canonicalConsumption.paperId, items, printForm: 'a4' }
+  }
+
+  // The published-paper personal base layout renders the same natural student
+  // A4 print HTML the draft's default PDF export uses — no page-count target
+  // and no writing check — with listening always included (a natural student
+  // version is the whole paper).
+  function preparePublishedPaperNaturalStudent(canonicalConsumption, { title } = {}) {
+    const draftPaper = publishedPaperDraftShape(canonicalConsumption, { title })
+    const renderedGroupIds = draftPaper.items.map((item) => item.groupId)
+    if (draftPaper.items.some((item) => item.groupMissing)
+      || !ownsCompletePaperOpening(canonicalConsumption, renderedGroupIds)) {
+      throw new Error('定页版需要按原顺序排列的同源完整试卷；部分题组或混编练习请使用普通 PDF 导出')
+    }
+    const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: 'student', includeListening: true, canonicalConsumption })
+    assertSamePublication(canonicalConsumption, { canonicalConsumption: resolveDraftCanonicalConsumption(draftPaper) })
+    return { html, canonicalConsumption, renderedGroupIds, draftPaper }
+  }
+
+  async function renderPreparedNaturalStudent(prepared, { render = renderPaginatedPaper } = {}) {
+    return render(prepared.html)
+  }
+
+  function assertSamePublication(expected, prepared) {
+    if (prepared.canonicalConsumption?.publicationDigest !== expected.publicationDigest
+      || prepared.canonicalConsumption?.sourceAssetDigest !== expected.sourceAssetDigest) {
+      throw Object.assign(new Error('Canonical publication changed while preparing the paper'), {
+        code: 'CANONICAL_PUBLICATION_CHANGED',
+      })
+    }
+  }
+
   function rowToDraftPaperSummary(row, itemRows = []) {
     return {
       id: row.id,
@@ -1518,42 +1628,8 @@ export function createDraftPaperStore({
       try {
         const draftPaper = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
         if (!draftPaper?.items.length) throw new Error(draftPaper ? '请先添加题组' : 'Draft paper not found')
-        const listeningCount = draftPaper.items.filter((item) => !item.groupMissing && item.questionGroup?.groupType === 'listening').length
-        const canonicalConsumption = resolveDraftCanonicalConsumption(draftPaper)
-        const sourceHasListening = canonicalConsumption?.selections?.some((selection) =>
-          selection.mode === 'canonical' && selection.familyContractId === 'listening' && selection.groupIds?.length === 2) ?? false
-        const product = STUDENT_PRODUCT_EDITIONS.includes(pageLayout)
-        const { includeListening, targetPages, omitCover } = (product ? studentProductPolicy : fixedPageLayoutPolicy)(pageLayout, listeningCount, sourceHasListening)
-        const renderedGroupIds = draftPaper.items
-          .filter((item) => includeListening || item.questionGroup?.groupType !== 'listening')
-          .map((item) => item.groupId)
-        if (draftPaper.items.some((item) => item.groupMissing)
-          || !ownsCompletePaperOpening(canonicalConsumption, draftPaper.items.map((item) => item.groupId))
-          || !ownsCompletePaperOpening(canonicalConsumption, renderedGroupIds)) {
-          throw new Error('定页版需要按原顺序排列的同源完整试卷；部分题组或混编练习请使用普通 PDF 导出')
-        }
-        const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: 'student', includeListening, canonicalConsumption })
-        const slotBindings = paginationSlotBindings(canonicalConsumption)
-        const versionDir = path.join(
-          paperAssetsDir,
-          canonicalConsumption.paperId,
-          'versions',
-          `v${canonicalConsumption.sourceAssetVersion}`,
-        )
-        const loadedPlan = loadBoundPaperPaginationPlan(versionDir, {
-          paperId: canonicalConsumption.paperId,
-          sourceAssetVersion: canonicalConsumption.sourceAssetVersion,
-          sourceDigest: canonicalConsumption.sourceAssetDigest,
-          slotBindings,
-          sourceHasListening,
-        })
-        const explicit = paginationPlanEdition(loadedPlan?.plan, pageLayout, slotBindings)
-        const fixed = explicit
-          ? await (product ? renderExplicitStudentProductPdf : renderExplicitFixedPagePdf)(html, { ...explicit, render: renderPaginatedPaper })
-          : await (product ? planStudentProductPdf : pageLayout === 'long10' || pageLayout === 'long12' ? planLongPaperPdf : planFixedPagePdf)(html, {
-            targetPages, omitCover, edition: pageLayout, render: renderPaginatedPaper,
-          })
-        pagination = { ...fixed, draftPaper, reused: false }
+        const { result } = await renderFixedPaginationEdition(draftPaper, pageLayout)
+        pagination = { ...result, draftPaper, reused: false }
       } finally {
         userDb.close()
         bankDb.close()
@@ -1704,6 +1780,9 @@ export function createDraftPaperStore({
     markCurrentDraftPaper,
     migrateAssemblyBasketToDraftPaper,
     patchDraftPaperItem,
+    preparePublishedPaperNaturalStudent,
+    renderPreparedFixedEdition,
+    renderPreparedNaturalStudent,
     restoreDraftPaperItem,
     updateDraftPaper,
   }

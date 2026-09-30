@@ -391,6 +391,15 @@ async function main() {
       `got status=${privateVocabularyBundle.status} body=${JSON.stringify(privateVocabularyBundle.json)}`,
     )
 
+    const personalLayerRead = await req('/api/personal-paper-layers/paper-2021-i')
+    const personalLayerWrite = await req('/api/personal-paper-layers/paper-2021-i/operations', { method: 'POST' })
+    assert(
+      '(c) forced mode: personal annotation layers are unreadable and unwritable without a cookie',
+      personalLayerRead.status === 401 && personalLayerRead.json?.error === 'not_authenticated'
+        && personalLayerWrite.status === 401 && personalLayerWrite.json?.error === 'not_authenticated',
+      `got read=${personalLayerRead.status} write=${personalLayerWrite.status}`,
+    )
+
     const privateHandwritingFont = await req('/api/vocabulary/print-assets/hengshui.ttf')
     assert(
       '(c) forced mode: private handwriting font remains protected without a cookie',

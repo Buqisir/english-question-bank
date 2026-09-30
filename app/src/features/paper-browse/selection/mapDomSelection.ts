@@ -37,6 +37,7 @@ const FORBIDDEN_SELECTOR = [
   '.ps-question-no',
   '.ps-option-label',
   '[data-paper-annotation-id]',
+  '.paper-personal-layer',
 ].join(',')
 
 function closestElement(node: Node): Element | null {

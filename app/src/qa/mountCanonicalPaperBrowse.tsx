@@ -8,6 +8,7 @@ const paperId = search.get('paperId') ?? ''
 createRoot(document.getElementById('root')!).render(
   <PaperBrowsePage
     paperId={paperId}
+    personalAccountKey={search.get('personalAccount') ?? undefined}
     reviewRevision={search.get('reviewRevision') ?? undefined}
     focusGroupId={search.get('focusGroupId') ?? undefined}
     questionId={search.get('questionId') ?? undefined}

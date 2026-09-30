@@ -6,6 +6,7 @@ import {
   renameMySpaceFolder,
   resolveMySpaceArtifactForDownload,
   saveMySpaceArtifact,
+  sendUserSpacePdf,
 } from './mySpace.mjs'
 import { defineRoute } from '../router/index.mjs'
 
@@ -43,13 +44,7 @@ function sendMySpaceArtifactStatic(response, urlPath, context) {
       context.sendJson(response, 404, { error: 'PDF file not found' })
       return
     }
-    response.writeHead(200, {
-      'access-control-allow-origin': '*',
-      'content-disposition': `inline; filename="${encodeURIComponent(artifact.fileName)}"; filename*=UTF-8''${encodeURIComponent(artifact.fileName)}`,
-      'content-type': 'application/pdf',
-      'x-file-name': encodeURIComponent(artifact.fileName),
-    })
-    response.end(artifact.body)
+    sendUserSpacePdf(response, artifact.body, artifact.fileName)
   } finally {
     db.close()
   }
