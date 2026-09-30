@@ -129,21 +129,20 @@ export function isMac() {
  * Free text boxes on the paper view: renders every text-box of the current
  * layout on its page, hosts the in-place editor, and owns selection
  * interactions (drag to move, resize width, keyboard nudge, copy/paste).
- * Placed at the click point while 「添加文字」 is armed.
+ * Placed at the click point while the 文字 tool is armed (the tool stays
+ * armed — the palette owns tool state).
  */
 export function PaperTextBoxLayer({
   api,
   frames,
   layoutId,
   armed,
-  onPlaced,
   noticeTarget,
 }: {
   api: PersonalAnnotationsApi
   frames: readonly PaperPageFrame[]
   layoutId: string
   armed: boolean
-  onPlaced: () => void
   /** Mount point for the quiet notices above the paper (outside the zoom transform). */
   noticeTarget: HTMLElement | null
 }): ReactNode {
@@ -266,8 +265,7 @@ export function PaperTextBoxLayer({
     }
     editingRef.current = state
     setEditing(state)
-    onPlaced()
-  }, [api, canEdit, onPlaced, resetNudgeRun, seal])
+  }, [api, canEdit, resetNudgeRun, seal])
 
   const openBoxEditor = useCallback((objectId: string) => {
     const object = api.objectById.get(objectId)
@@ -318,15 +316,32 @@ export function PaperTextBoxLayer({
   // Armed click on the page stack starts a draft at the click point (an open
   // editor is closed first); box clicks stopPropagation before reaching here.
   // While 「逐个摆放」 is armed the click re-homes the first old-layout box
-  // instead — re-place takes priority over placing a new draft.
+  // instead — re-place takes priority over placing a new draft. With the
+  // sticky 文字 tool, a click on blank paper while an editor is open only
+  // closes/commits that editor; the next blank click places the next box.
+  // The press on blank paper blurs an open editor, which closes it before the
+  // click arrives; remember that an editor was open so the click still only
+  // closes it instead of placing the next box.
+  const editorOpenAtPressRef = useRef(false)
+  const handleLayerPointerDownCapture = useCallback(() => {
+    editorOpenAtPressRef.current = editingRef.current != null
+  }, [])
   const handleLayerClick = useCallback((event: MouseEvent<HTMLDivElement>) => {
+    const editorWasOpen = editorOpenAtPressRef.current
+    editorOpenAtPressRef.current = false
     if (event.button !== 0) return
     if (event.target instanceof Element && event.target.closest('.paper-personal-text-box')) return
     const rePlaceTarget = rePlaceTargetRef.current
-    if (!rePlaceTarget && !armed) {
-      setSelectedId(null)
-      if (editingRef.current) closeEditing(editingRef.current)
-      return
+    if (!rePlaceTarget) {
+      if (editingRef.current || editorWasOpen) {
+        if (editingRef.current) closeEditing(editingRef.current)
+        setSelectedId(null)
+        return
+      }
+      if (!armed) {
+        setSelectedId(null)
+        return
+      }
     }
     const layer = layerRef.current
     if (!layer || !canEdit) return
@@ -343,7 +358,6 @@ export function PaperTextBoxLayer({
       return
     }
     if (!frame) return
-    if (editingRef.current) closeEditing(editingRef.current)
     setSelectedId(null)
     placeDraft(frame, pxToMm(xPx - frame.leftPx), pxToMm(yPx - frame.topPx))
   }, [armed, canEdit, closeEditing, frames, placeDraft, reHomeBox, setSelectedId])
@@ -825,6 +839,7 @@ export function PaperTextBoxLayer({
       <div
         ref={layerRef}
         className={`paper-personal-text-box-layer${armed ? ' is-armed' : ''}${rePlaceTarget ? ' is-replacing' : ''}`}
+        onPointerDownCapture={handleLayerPointerDownCapture}
         onClick={handleLayerClick}
       >
         {/* The open editor keeps its draft key after the first save, so focus and text history survive. */}

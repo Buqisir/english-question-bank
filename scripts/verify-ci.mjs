@@ -212,6 +212,7 @@ const registry = {
   'scripts/verify-personal-export-plan.mjs',
   'scripts/verify-personal-export-pdf.mjs',
   'scripts/verify-personal-annotations-browser.mjs',
+  'scripts/verify-personal-print-anchor-roundtrip.mjs',
   'scripts/verify-personal-paper-layout.mjs',
   'scripts/verify-personal-paper-view-browser.mjs',
   'scripts/verify-list-groups-perf.mjs',

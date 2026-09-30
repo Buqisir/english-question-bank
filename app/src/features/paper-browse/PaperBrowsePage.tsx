@@ -57,7 +57,9 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { BoardList, BookOpen, Paper, PaperDownload, Pencil, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
+import { BoardList, BookOpen, Paper, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
+import { PERSONAL_DEFAULT_HIGHLIGHT_COLOR, PERSONAL_DEFAULT_UNDERLINE_INK } from '../../../../shared/personal-paper-layer/index.mjs'
+import { PaperToolPalette, type PaperTool } from './personal-editing/PaperToolPalette'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
@@ -788,8 +790,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [paperNoticeTarget, setPaperNoticeTarget] = useState<HTMLDivElement | null>(null)
   // #489 5d-2: 「导出我的批注版」按钮的 portal 槽（工具条左侧按钮组末尾）。
   const [paperExportTarget, setPaperExportTarget] = useState<HTMLDivElement | null>(null)
-  // #489 纸张视图「添加文字」：armed 时下一次页面点击布一个文字框草稿。
-  const [addTextArmed, setAddTextArmed] = useState(false)
+  // #489 批注工具浮板：纸张视图的当前工具（选择/高亮/下划线/批注/文字）与
+  // 页面会话内记忆的笔色。笔式工具握住不放——Esc 或点「选择」才回选择态，
+  // 离开纸张视图一并复位。
+  const [paperTool, setPaperTool] = useState<PaperTool>('select')
+  const [paperHighlightColor, setPaperHighlightColor] = useState(PERSONAL_DEFAULT_HIGHLIGHT_COLOR)
+  const [paperUnderlineInk, setPaperUnderlineInk] = useState(PERSONAL_DEFAULT_UNDERLINE_INK)
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
   const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
     Record<string, LectureAnalysisEntry>
@@ -825,20 +831,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // 纸张视图实际可见性：state 与资格同时成立——资格被撤（切账号/评审历史
   // 版本）时渲染层直接回落阅读视图，不需要额外 effect 回写 state。
   const paperViewActive = paperEditingOpen && personalEntryAvailable
-  // 「添加文字」布点随 Escape 退出；离开纸张视图一并复位。焦点在文字框编辑
-  // 器内时，编辑器的 stopPropagation 挡住 window 监听，Escape 只关闭编辑器。
+  // 工具复位：离开纸张视图回「选择」；笔式工具下按 Escape 也回「选择」。
+  // 焦点在文字框编辑器内时，编辑器的 stopPropagation 挡住 window 监听，
+  // Escape 只关闭编辑器。
   useEffect(() => {
-    if (!paperViewActive) {
-      setAddTextArmed(false)
-      return undefined
-    }
-    if (!addTextArmed) return undefined
+    if (!paperViewActive) setPaperTool('select')
+  }, [paperViewActive])
+  useEffect(() => {
+    if (!paperViewActive || paperTool === 'select') return undefined
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && !event.isComposing) setAddTextArmed(false)
+      if (event.key === 'Escape' && !event.isComposing) setPaperTool('select')
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [addTextArmed, paperViewActive])
+  }, [paperTool, paperViewActive])
   const paperSelection = usePaperSelectionTranslation({
     paperId,
     consumption: canonicalConsumption,
@@ -4192,16 +4198,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 纸张
               </button>
             </div>
-            <button
-              type="button"
-              className="paper-browse-add-text-option"
-              aria-pressed={addTextArmed}
-              disabled={!personalAnnotations.canEdit}
-              onClick={() => setAddTextArmed((value) => !value)}
-            >
-              <Pencil size={16} aria-hidden="true" />
-              添加文字
-            </button>
             <div className="paper-browse-editing-toolbar__actions" ref={setPaperExportTarget} />
           </div>
           {/* 文字框静默提示（溢出 / 旧版式）挂在工具条中段：出现或消失都不推动纸张。 */}
@@ -4314,8 +4310,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             sourceRevision={personalAnnotations.source?.sourceRevision ?? null}
             zoom={paperEditingZoom}
             api={personalAnnotations}
-            addTextArmed={addTextArmed}
-            onAddTextPlaced={() => setAddTextArmed(false)}
+            tool={paperTool}
+            highlightColor={paperHighlightColor}
+            underlineInk={paperUnderlineInk}
+          />
+        )}
+        {paperViewActive && (
+          <PaperToolPalette
+            tool={paperTool}
+            onToolChange={setPaperTool}
+            highlightColor={paperHighlightColor}
+            onHighlightColorChange={setPaperHighlightColor}
+            underlineInk={paperUnderlineInk}
+            onUnderlineInkChange={setPaperUnderlineInk}
+            canEdit={personalAnnotations.canEdit}
           />
         )}
         {lectureOpen && !paperViewActive && (

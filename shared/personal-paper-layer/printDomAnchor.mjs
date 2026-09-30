@@ -158,6 +158,114 @@ function groupScopes(root, groupId) {
   return [...root.querySelectorAll(`[data-canonical-group-id="${cssAttr(groupId)}"]`)]
 }
 
+/*
+ * The exact inverse of printSegmentToDomRanges for one continuous DOM range
+ * (the paper view iframe's text selection): returns MappedSegment[] shaped
+ * input for createMark/startNote, or null when the range cannot be translated
+ * safely. A range maps only when every glyph it covers belongs to exactly one
+ * resolvable leaf text run; presentation-only labels (question numbers,
+ * option label elements) are excluded from the glyph sets and so are skipped,
+ * while inline label characters in front of a leaf's text (listening "A.")
+ * count as uncovered glyphs and fail the range.
+ */
+export function printDomRangeToSegments(doc, source, range) {
+  if (!range || range.collapsed) return null
+  const root = pagesRoot(doc)
+  if (!root) return null
+
+  // Glyph containment uses half-open boundaries: a glyph [p, p+1) is inside
+  // the range exactly when p >= start and p+1 <= end. comparePoint is
+  // boundary-inclusive on both sides, so "< -1"/"> 1" never happen and these
+  // two comparisons express the half-open rule exactly.
+  const covers = (glyph) => range.comparePoint(glyph.node, glyph.offset) >= 0
+    && range.comparePoint(glyph.node, glyph.offset + 1) <= 0
+
+  // A glyph claimed twice would mean two leaves resolving the same character;
+  // that ambiguity must never become a mark.
+  const claimed = new Map()
+  const claim = (glyph) => {
+    let offsets = claimed.get(glyph.node)
+    if (!offsets) {
+      offsets = new Set()
+      claimed.set(glyph.node, offsets)
+    }
+    if (offsets.has(glyph.offset)) return false
+    offsets.add(glyph.offset)
+    return true
+  }
+
+  const pieces = []
+  for (const stream of source.streams) {
+    const scopes = groupScopes(root, stream.groupId)
+    if (scopes.length === 0) continue
+    for (const leaf of stream.leaves) {
+      const leafText = stream.text.slice(leaf.start, leaf.end)
+      if (!compact(leafText)) continue
+      const roots = leafRoots(root, scopes, leaf, leafText)
+      const domGlyphs = roots.length > 0 ? glyphs(doc, roots) : []
+      const domText = domGlyphs.map((glyph) => glyph.char).join('')
+      const wanted = compact(leafText)
+      // Same uniqueness rule as the forward mapping; an unresolvable leaf
+      // simply contributes no run, and its glyphs fail the coverage rule
+      // below when the range covers them.
+      const base = domText.indexOf(wanted)
+      const resolvable = base >= 0 && domText.indexOf(wanted, base + 1) < 0
+      let runFirst = -1
+      let runLast = -1
+      for (let index = 0; index < domGlyphs.length; index += 1) {
+        const glyph = domGlyphs[index]
+        if (!covers(glyph)) continue
+        // Glyphs outside the leaf's own text window are presentation residue
+        // (a label prefix inside the same element) and fail the range.
+        if (!resolvable || index < base || index >= base + wanted.length || !claim(glyph)) return null
+        if (runFirst < 0) runFirst = index
+        runLast = index
+      }
+      if (runFirst < 0) continue
+      // Glyph index -> stream offset through the leaf text's non-whitespace
+      // positions: within the window, glyph i is the (i - base)-th
+      // non-whitespace character of leafText.
+      const nonWs = []
+      for (let index = 0; index < leafText.length; index += 1) {
+        if (!WHITESPACE.test(leafText[index])) nonWs.push(index)
+      }
+      const startOffset = nonWs[runFirst - base]
+      const endOffset = nonWs[runLast - base]
+      if (startOffset === undefined || endOffset === undefined) return null
+      pieces.push({ stream, leaf, start: leaf.start + startOffset, end: leaf.start + endOffset + 1 })
+    }
+  }
+  if (pieces.length === 0) return null
+
+  // Merge the leaf runs into MappedSegments under the same safety rule as the
+  // reading view's mapDomSelection: only adjacent text, plus the single
+  // newline the source projection inserts between adjacent paragraph leaves.
+  const segments = []
+  let lastLeaf = null
+  for (const piece of pieces) {
+    const last = segments[segments.length - 1]
+    if (last && last.streamId === piece.stream.streamId) {
+      const gap = piece.stream.text.slice(last.end, piece.start)
+      const bridgeable = gap === ''
+        || (gap === '\n'
+          && lastLeaf?.kind === 'paragraph' && piece.leaf.kind === 'paragraph')
+      if (last.end > piece.start || !bridgeable) return null
+      last.end = piece.end
+      last.selectedText = piece.stream.text.slice(last.start, last.end)
+      lastLeaf = piece.leaf
+      continue
+    }
+    segments.push({
+      streamId: piece.stream.streamId,
+      start: piece.start,
+      end: piece.end,
+      selectedText: piece.stream.text.slice(piece.start, piece.end),
+    })
+    lastLeaf = piece.leaf
+  }
+  return segments
+}
+
 export function printSegmentToDomRanges(doc, source, segment) {
   const stream = source.streams.find((item) => item.streamId === segment.streamId)
   if (!stream) return null

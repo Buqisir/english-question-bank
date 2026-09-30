@@ -6,8 +6,10 @@ import {
   placeNoteNearAnchor,
   type NoteSlot,
   type PersonalObject,
+  type PersonalTextAnchorInput,
 } from '../../../../../shared/personal-paper-layer/index.mjs'
 import {
+  createEmptyPersonalTextDocument,
   isPersonalTextDocumentBlank,
   type PersonalTextDocumentV1,
   type PersonalTextPresentation,
@@ -58,7 +60,12 @@ type NoteEditing = {
   mergeKey: string
   objectId: string
   document: PersonalTextDocumentV1
+  /** Created blank by the 批注 pen for this session: closing it still blank removes it. */
+  fresh?: boolean
 }
+
+/** The 批注 pen's request to start a new note on a mapped selection; seq makes repeats distinct. */
+export type PenNoteRequest = { seq: number; textAnchor: PersonalTextAnchorInput }
 
 // A card's live placement (page-internal mm) — the stored placement for
 // page-position notes, the resolved candidate for auto notes, and the
@@ -146,6 +153,7 @@ export function PaperNoteLayer({
   layoutId,
   iframe,
   noticeTarget,
+  penNoteRequest = null,
 }: {
   api: PersonalAnnotationsApi
   anchorGeometry: PaperAnchorGeometry
@@ -154,6 +162,7 @@ export function PaperNoteLayer({
   iframe: HTMLIFrameElement | null
   /** Mount point for the quiet notices above the paper (outside the zoom transform). */
   noticeTarget: HTMLElement | null
+  penNoteRequest?: PenNoteRequest | null
 }): ReactNode {
   const layerRef = useRef<HTMLDivElement | null>(null)
   // Measured card heights (mm), keyed `${id}:${slot}`: the one-round
@@ -415,10 +424,39 @@ export function PaperNoteLayer({
     setEditing(null)
     const object = api.objectById.get(state.objectId)
     if (!object || object.type !== 'anchored-note') return
+    if (state.fresh && isPersonalTextDocumentBlank(state.document)) {
+      // Same mergeKey as the create: cancelling a pen note leaves no empty shell and no undo step.
+      apply([{ op: 'delete', objectId: state.objectId }], { mergeKey: state.mergeKey })
+      return
+    }
     if (JSON.stringify(state.document) === JSON.stringify(object.document)) return
     if (isPersonalTextDocumentBlank(state.document)) return
     apply([{ op: 'update', objectId: state.objectId, patch: { document: state.document } }], { mergeKey: state.mergeKey })
   }, [api.objectById, apply])
+
+  // The 批注 pen: the card needs a stored object to be placed near its anchor,
+  // so the note is created blank and opened at once; closeEditing removes it
+  // again if nothing was typed.
+  const handledPenSeqRef = useRef<number | null>(null)
+  useEffect(() => {
+    if (!penNoteRequest || handledPenSeqRef.current === penNoteRequest.seq || !canEdit) return
+    handledPenSeqRef.current = penNoteRequest.seq
+    if (editingRef.current) closeEditing(editingRef.current)
+    seal()
+    resetNudgeRun()
+    const mergeKey = api.nextEditKey()
+    const id = createPersonalMutationId()
+    const document = createEmptyPersonalTextDocument()
+    const result = apply([{
+      op: 'create',
+      object: { id, type: 'anchored-note', textAnchor: penNoteRequest.textAnchor, document, placement: { kind: 'auto-near-anchor' } },
+    }], { mergeKey })
+    if (!result.ok) return
+    setSelectedId(id)
+    const state: NoteEditing = { key: `note-${mergeKey}`, mergeKey, objectId: id, document: structuredClone(document), fresh: true }
+    editingRef.current = state
+    setEditing(state)
+  }, [api, apply, canEdit, closeEditing, penNoteRequest, resetNudgeRun, seal, setSelectedId])
 
   // Selected (not editing) presentation changes go straight to the store, one
   // op per change, same as the text-box strip.

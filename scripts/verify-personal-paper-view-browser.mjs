@@ -332,12 +332,19 @@ try {
     )
   }
   check('the reading view opens for a signed-in teacher with the 纸张 entry', await page.locator('button.ghost-button:has-text("纸张")').count() === 1)
+  check('the reading view has no annotation tool palette', await page.locator('.paper-tool-palette').count() === 0)
 
   // ---- enter the paper view ---------------------------------------------------
   await page.click('button.ghost-button:has-text("纸张")')
   await page.waitForSelector('.paper-browse-editing-toolbar', { timeout: 10_000 })
   check('the paper view toolbar shows the 阅读/纸张 switch', await page.locator('.paper-browse-view-switch button').count() === 2)
   check('the paper view toolbar shows the zoom levels', await page.locator('.paper-browse-zoom-option').count() === 5)
+  check('the paper view shows the floating tool palette on the right',
+    await page.locator('.paper-tool-palette').count() === 1
+    && await page.locator('.paper-tool-palette').evaluate((node) => getComputedStyle(node).position === 'fixed'))
+  check('the palette is a vertical toolbar with 选择 pressed by default',
+    await page.locator('.paper-tool-palette[role="toolbar"][aria-label="批注工具"][aria-orientation="vertical"]').count() === 1
+    && await page.locator('.paper-tool-palette button[aria-pressed="true"]:has-text("选择")').count() === 1)
 
   // First server render is real Paged.js pagination — allow up to a minute.
   try {
@@ -377,7 +384,12 @@ try {
     if (!view || !canvas) return null
     return { viewWidth: view.clientWidth, canvasWidth: canvas.getBoundingClientRect().width }
   })
-  check('适应宽度 fills the content column with the paper', fitFill !== null && Math.abs(fitFill.canvasWidth - fitFill.viewWidth) < 8, JSON.stringify(fitFill))
+  // 适应宽度填的是扣掉右侧批注工具浮板空档（浮板 64px + 24px，见
+  // personalAnnotations.css 的 .paper-personal-paper-view padding-right）之后的
+  // 内容宽，不是整个列宽——纸张永不坐进浮板之下。
+  const PALETTE_GUTTER_PX = 88
+  check('适应宽度 fills the content column minus the palette gutter with the paper',
+    fitFill !== null && Math.abs(fitFill.canvasWidth - (fitFill.viewWidth - PALETTE_GUTTER_PX)) < 8, JSON.stringify(fitFill))
 
   // 字体是异步 @font-face，等 iframe 里 EQB Termes 真正就位再断言。
   await page.waitForFunction(() => {
@@ -533,8 +545,13 @@ try {
   const storedVersion = async () => (await readLayer()).layer?.version ?? null
 
   const armAddText = async () => {
-    await page.click('.paper-browse-add-text-option')
+    await page.click('.paper-tool-palette button:has-text("文字")')
     await page.waitForFunction(() => document.querySelector('.paper-personal-text-box-layer')?.classList.contains('is-armed'))
+  }
+
+  const chooseSelectTool = async () => {
+    await page.click('.paper-tool-palette button:has-text("选择")')
+    await page.waitForFunction(() => !document.querySelector('.paper-personal-text-box-layer')?.classList.contains('is-armed'))
   }
 
   const setZoom = async (label, transform) => {
@@ -690,6 +707,8 @@ try {
   check('arm + click + Escape without typing saves zero text boxes',
     storedB.length === 1 && await page.locator('.paper-personal-text-box').count() === 1,
     `server=${storedB.length} dom=${await page.locator('.paper-personal-text-box').count()} ${JSON.stringify(storedB.map((object) => object.placement))}`)
+  // The 文字 tool is sticky now; the select-mode flows below need it off.
+  await chooseSelectTool()
 
   // (c) zoom 150% then 75%: stored mm and the layer version stay untouched.
   const placementBeforeZoom = await storedTextBoxes()
@@ -853,17 +872,245 @@ try {
     && undoneForeign?.placement.xMm === 30 && undoneForeign?.placement.yMm === 30,
     JSON.stringify(undoneForeign?.placement))
 
+  // ---- floating annotation tool palette (#489 palette) -----------------------------
+  // Sticky pen tools over the paper-view iframe: the reverse anchor mapping
+  // feeds createMark/startNote directly, no popover in the pen flow.
+  await openPaperView()
+
+  // (1) geometry: right side, below the toolbars; paper never under the palette.
+  const toolbarRect = await page.locator('.paper-browse-editing-toolbar').boundingBox()
+  const paletteBox = await page.locator('.paper-tool-palette').boundingBox()
+  check('the palette floats on the right below the toolbars',
+    paletteBox != null && toolbarRect != null
+    && paletteBox.x > 1440 * 0.75
+    && paletteBox.y >= toolbarRect.y + toolbarRect.height
+    && paletteBox.width <= 80,
+    JSON.stringify({ toolbarRect, paletteBox }))
+
+  const palettePageOverlap = () => page.evaluate(() => {
+    const palette = document.querySelector('.paper-tool-palette')
+    const iframe = document.querySelector('.paper-personal-paper-iframe')
+    if (!palette || !iframe?.contentDocument) return null
+    const paletteRect = palette.getBoundingClientRect()
+    const iframeBox = iframe.getBoundingClientRect()
+    return [...iframe.contentDocument.querySelectorAll('.pagedjs_page')].some((element) => {
+      const rect = element.getBoundingClientRect()
+      const left = iframeBox.left + rect.left
+      const top = iframeBox.top + rect.top
+      return left < paletteRect.right && left + rect.width > paletteRect.left
+        && top < paletteRect.bottom && top + rect.height > paletteRect.top
+    })
+  })
+  await setZoom('100%', 'scale(1)')
+  check('at 100% no paper page sits under the palette', await palettePageOverlap() === false)
+  await page.click('.paper-browse-zoom-option:has-text("适应宽度")')
+  await page.waitForTimeout(600)
+  check('at 适应宽度 no paper page sits under the palette', await palettePageOverlap() === false)
+  await setZoom('100%', 'scale(1)')
+
+  // Pen-drag driver: a real press/move/release through CDP Input, so the
+  // browser itself builds the selection inside the iframe. Playwright's
+  // page.mouse is not used here: with a button held, its drag manager runs a
+  // script in the target frame, which never answers in this no-scripts
+  // sandbox="allow-same-origin" srcdoc iframe, so mouse.move hangs.
+  const inputSession = await context.newCDPSession(page)
+  const dragGlyphs = async ({ fromEnd = 0, from, to } = {}) => {
+    // The pen mouseup listener re-attaches through a passive effect after the
+    // tool click; give it a beat before the drag.
+    await page.waitForTimeout(250)
+    const target = await page.evaluate(([fromEnd, from, to]) => {
+      const iframe = document.querySelector('.paper-personal-paper-iframe')
+      const doc = iframe.contentDocument
+      const paragraphs = [...doc.querySelectorAll('[data-canonical-paragraph-id]')]
+        .filter((node) => !node.closest('table'))
+        .filter((node) => (node.textContent ?? '').replace(/\s+/gu, '').length > 120)
+      const para = paragraphs[paragraphs.length - 1 - fromEnd]
+      if (!para) return null
+      para.scrollIntoView({ block: 'center' })
+      const points = []
+      const walker = doc.createTreeWalker(para, NodeFilter.SHOW_TEXT)
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        for (let offset = 0; offset < node.data.length; offset += 1) {
+          if (!/\s/u.test(node.data[offset])) points.push({ node, offset })
+        }
+      }
+      const clamp = (index) => Math.min(points.length - 1, Math.max(0, index))
+      const first = points[clamp(Math.floor(points.length * from))]
+      const last = points[clamp(Math.floor(points.length * to))]
+      const glyphRect = (point) => {
+        const range = doc.createRange()
+        range.setStart(point.node, point.offset)
+        range.setEnd(point.node, point.offset + 1)
+        return range.getBoundingClientRect()
+      }
+      // Iframe-viewport px -> page-viewport px through the zoom transform.
+      const box = iframe.getBoundingClientRect()
+      const scale = box.width / iframe.offsetWidth
+      const a = glyphRect(first)
+      const b = glyphRect(last)
+      const range = doc.createRange()
+      range.setStart(first.node, first.offset)
+      range.setEnd(last.node, last.offset + 1)
+      return {
+        start: { x: box.left + (a.left + 1) * scale, y: box.top + (a.top + a.height / 2) * scale },
+        end: { x: box.left + (b.right - 1) * scale, y: box.top + (b.top + b.height / 2) * scale },
+        text: range.toString(),
+      }
+    }, [fromEnd, from, to])
+    if (!target) return null
+    const send = (type, x, y, buttons) => inputSession.send('Input.dispatchMouseEvent', {
+      type, x, y, button: 'left', buttons, clickCount: 1,
+    })
+    await send('mouseMoved', target.start.x, target.start.y, 0)
+    await send('mousePressed', target.start.x, target.start.y, 1)
+    for (let step = 1; step <= 8; step += 1) {
+      await send('mouseMoved',
+        target.start.x + ((target.end.x - target.start.x) * step) / 8,
+        target.start.y + ((target.end.y - target.start.y) * step) / 8,
+        1)
+    }
+    await send('mouseReleased', target.end.x, target.end.y, 0)
+    return target.text
+  }
+  const compactText = (text) => text.replace(/\s+/gu, '')
+  const greenMarkIds = () => page.evaluate(() =>
+    new Set([...document.querySelectorAll('.paper-personal-mark--highlight[data-color="green"]')]
+      .map((node) => node.dataset.paperMarkId)).size)
+
+  // (2) 高亮 pen: remembered color applies, no popover, tool stays pressed.
+  await page.click('.paper-tool-palette button:has-text("高亮")')
+  await page.click('.paper-tool-palette .paper-personal-swatch[data-color="green"]')
+  const dragOnePhrase = await dragGlyphs({ from: 0.05, to: 0.2 })
+  await page.locator('.paper-personal-mark--highlight[data-color="green"]').first().waitFor({ timeout: 10_000 })
+  const dragOneHit = await page.evaluate(() => {
+    const mark = document.querySelector('.paper-personal-mark--highlight[data-color="green"]')
+    const iframe = document.querySelector('.paper-personal-paper-iframe')
+    const doc = iframe.contentDocument
+    const win = iframe.contentWindow
+    const cx = parseFloat(mark.style.left) + parseFloat(mark.style.width) / 2 - win.scrollX
+    const cy = parseFloat(mark.style.top) + parseFloat(mark.style.height) / 2 - win.scrollY
+    return doc.elementFromPoint(cx, cy)?.textContent ?? null
+  })
+  check('the highlight pen draws a green mark over the dragged words',
+    typeof dragOneHit === 'string'
+    && compactText(dragOneHit).includes(compactText(dragOnePhrase).slice(0, 12)),
+    JSON.stringify({ hit: dragOneHit?.slice(0, 80), phrase: dragOnePhrase }))
+  check('the pen flow opens no popover', await page.locator('.paper-personal-popover').count() === 0)
+  check('the 高亮 tool stays pressed after a pen placement',
+    await page.locator('.paper-tool-palette button[aria-pressed="true"]:has-text("高亮")').count() === 1)
+  await dragGlyphs({ from: 0.25, to: 0.4 })
+  await flushAutosave()
+  check('a second pen drag adds a second green highlight', await greenMarkIds() === 2,
+    `greenMarkIds=${await greenMarkIds()}`)
+
+  // (3) 下划线 pen with the remembered red ink.
+  await page.click('.paper-tool-palette button:has-text("下划线")')
+  await page.click('.paper-tool-palette .paper-personal-swatch--ink[data-ink="red"]')
+  await dragGlyphs({ from: 0.45, to: 0.6 })
+  await page.locator('.paper-personal-mark--underline[data-ink="red"]').first().waitFor({ timeout: 10_000 })
+  await flushAutosave()
+  const redUnderlineIds = await page.evaluate(() =>
+    new Set([...document.querySelectorAll('.paper-personal-mark--underline[data-ink="red"]')]
+      .map((node) => node.dataset.paperMarkId)).size)
+  check('the 下划线 pen draws a red underline', redUnderlineIds === 1, `redUnderlineIds=${redUnderlineIds}`)
+
+  // (4) 批注 pen opens the note editor; the tool survives saving.
+  await page.click('.paper-tool-palette button:has-text("批注")')
+  await dragGlyphs({ from: 0.65, to: 0.8 })
+  await page.waitForSelector('.paper-personal-paper-note.is-editing .eqb-personal-text__input', { timeout: 10_000 })
+  // Tiptap focuses through a rAF after mount; wait so the keystrokes land.
+  await page.waitForFunction(() => document.activeElement?.classList.contains('eqb-personal-text__input'), undefined, { timeout: 5_000 })
+  await page.keyboard.type('纸张批注测试')
+  await flushAutosave()
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  check('the 批注 pen opens the note editor and the tool survives saving',
+    await page.locator('.paper-personal-paper-note').count() >= 1
+    && await page.locator('.paper-tool-palette button[aria-pressed="true"]:has-text("批注")').count() === 1)
+
+  // (5) unmappable selection: a question-number-only range maps to nothing.
+  await page.evaluate(() => {
+    const iframe = document.querySelector('.paper-personal-paper-iframe')
+    const doc = iframe.contentDocument
+    const label = doc.querySelector('.qnum')
+    if (!label) throw new Error('no .qnum in the print DOM')
+    const range = doc.createRange()
+    range.selectNodeContents(label)
+    const selection = doc.getSelection()
+    selection.removeAllRanges()
+    selection.addRange(range)
+    doc.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
+  })
+  const penNotice = page.locator('.paper-browse-editing-toolbar__notices .paper-personal-paper-notice:has-text("这段文字不能标记")')
+  await penNotice.waitFor({ timeout: 5_000 })
+  check('an unmappable selection shows 这段文字不能标记 and creates nothing',
+    (await penNotice.count()) === 1
+    && await page.locator('.paper-personal-paper-note.is-editing').count() === 0)
+
+  // (6) 文字 tool: two boxes without re-clicking; an open editor swallows the
+  // first blank click (close/commit only).
+  const boxesBeforePen = (await storedTextBoxes()).length
+  await page.click('.paper-tool-palette button:has-text("文字")')
+  await page.waitForFunction(() => document.querySelector('.paper-personal-text-box-layer')?.classList.contains('is-armed'))
+  await clickOnPageAt(620, 700)
+  await page.waitForSelector('.paper-personal-text-box.is-editing [contenteditable="true"]', { timeout: 10_000 })
+  await page.waitForFunction(() => document.activeElement?.closest?.('.paper-personal-text-box.is-editing'), undefined, { timeout: 5_000 })
+  await page.keyboard.type('浮板文字一')
+  await clickOnPageAt(200, 860)
+  await page.waitForTimeout(300)
+  check('with an editor open the first blank click only closes it',
+    await page.locator('.paper-personal-text-box.is-editing').count() === 0)
+  await clickOnPageAt(200, 860)
+  await page.waitForSelector('.paper-personal-text-box.is-editing [contenteditable="true"]', { timeout: 10_000 })
+  await page.waitForFunction(() => document.activeElement?.closest?.('.paper-personal-text-box.is-editing'), undefined, { timeout: 5_000 })
+  await page.keyboard.type('浮板文字二')
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(300)
+  await flushAutosave()
+  check('the 文字 tool places two boxes in a row without re-clicking it',
+    (await storedTextBoxes()).length === boxesBeforePen + 2,
+    `before=${boxesBeforePen} after=${(await storedTextBoxes()).length}`)
+
+  // (7) Esc returns to 选择; leaving the paper view resets it too.
+  await page.keyboard.press('Escape')
+  await page.waitForTimeout(200)
+  check('Escape returns the palette to 选择',
+    await page.locator('.paper-tool-palette button[aria-pressed="true"]:has-text("选择")').count() === 1
+    && await page.locator('.paper-tool-palette button[aria-pressed="true"]:has-text("文字")').count() === 0)
+  await page.click('.paper-tool-palette button:has-text("高亮")')
+  await page.click('.paper-browse-view-switch button:has-text("阅读")')
+  await page.waitForSelector('.paper-personal-mark--highlight[data-color="green"]', { timeout: 15_000 })
+  // Reading-view marks draw one span per line rect (no id attribute), so the
+  // mark count comes from the store and the view must draw at least that many.
+  const storedGreen = ((await readLayer()).layer?.objects ?? [])
+    .filter((object) => object.type === 'highlight' && object.style?.color === 'green').length
+  const readingGreenSpans = await page.locator('.paper-personal-layer .paper-personal-mark--highlight[data-color="green"]').count()
+  check('the reading view has no palette and shows the same pen highlights',
+    await page.locator('.paper-tool-palette').count() === 0 && storedGreen === 2 && readingGreenSpans >= 2,
+    `stored green=${storedGreen} reading spans=${readingGreenSpans}`)
+  await page.click('button.ghost-button:has-text("纸张")')
+  await page.waitForSelector('.paper-tool-palette', { timeout: 15_000 })
+  check('returning to the paper view resets the tool to 选择',
+    await page.locator('.paper-tool-palette button[aria-pressed="true"]:has-text("选择")').count() === 1)
+
+  // (8) pen highlights persist across a reload.
+  await openPaperView()
+  await page.locator('.paper-personal-mark--highlight[data-color="green"]').first().waitFor({ timeout: 15_000 })
+  check('the pen highlights persist after a reload', await greenMarkIds() === 2)
+
   // ---- stored marks are drawn over the paper view's words (#489 4c-1) -------------
+  // The pen-flow checks above created their own green/red marks; scope the
+  // seeded assertions to the verify-hl-/verify-ul- ids they control.
   await seedMarks()
   await openPaperView()
-  await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight').first().waitFor({ timeout: 15_000 })
+  await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]').first().waitFor({ timeout: 15_000 })
   check('a stored highlight is drawn on the paper view',
-    await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight').count() >= 1
-    && await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-color="yellow"]').count() >= 1)
+    await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]').count() >= 1
+    && await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"][data-color="yellow"]').count() >= 1)
   // Mark rects are iframe-document px; elementFromPoint wants viewport coords,
   // so the center is offset by the iframe's own scroll first.
   const highlightHit = await page.evaluate(() => {
-    const mark = document.querySelector('.paper-personal-paper-mark.paper-personal-mark--highlight')
+    const mark = document.querySelector('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]')
     const iframe = document.querySelector('.paper-personal-paper-iframe')
     const doc = iframe?.contentDocument
     const win = iframe?.contentWindow
@@ -892,7 +1139,7 @@ try {
     await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2)
   }
 
-  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--highlight')
+  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]')
   await page.waitForSelector('.paper-personal-popover', { timeout: 5_000 })
   check('clicking a paper highlight opens its popover',
     await page.locator('.paper-personal-popover').count() === 1
@@ -900,14 +1147,14 @@ try {
   await page.click('.paper-personal-popover .paper-personal-swatch[aria-label="改成绿色"]')
   await page.waitForFunction(
     () => {
-      const marks = [...document.querySelectorAll('.paper-personal-paper-mark.paper-personal-mark--highlight')]
+      const marks = [...document.querySelectorAll('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]')]
       return marks.length >= 1 && marks.every((node) => node.dataset.color === 'green')
     },
     undefined,
     { timeout: 5_000 },
   )
   check('the popover recolors the paper mark',
-    await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-color="green"]').count() >= 1)
+    await page.locator('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"][data-color="green"]').count() >= 1)
   await flushAutosave()
 
   const toolbarBox = await page.locator('.paper-browse-editing-toolbar').boundingBox()
@@ -916,16 +1163,16 @@ try {
   check('clicking outside closes the popover',
     await page.locator('.paper-personal-popover').count() === 0)
 
-  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--underline')
+  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--underline[data-paper-mark-id^="verify-ul-"]')
   await page.waitForSelector('.paper-personal-popover', { timeout: 5_000 })
   await page.click('.paper-personal-popover button:has-text("删除")')
   await page.waitForFunction(
-    () => document.querySelectorAll('.paper-personal-paper-mark.paper-personal-mark--underline').length === 0,
+    () => document.querySelectorAll('.paper-personal-paper-mark.paper-personal-mark--underline[data-paper-mark-id^="verify-ul-"]').length === 0,
     undefined,
     { timeout: 5_000 },
   )
   check('deleting from the popover removes the paper mark',
-    await page.locator('.paper-personal-paper-mark.paper-personal-mark--underline').count() === 0)
+    await page.locator('.paper-personal-paper-mark.paper-personal-mark--underline[data-paper-mark-id^="verify-ul-"]').count() === 0)
   await flushAutosave()
 
   // ---- anchored-note cards on the paper view (#489 step 4) -------------------------
@@ -1108,7 +1355,7 @@ try {
     await page.locator('.paper-personal-paper-notice:has-text("条旁注在纸上没有空位")').count() === 0)
 
   // Opening a note card closes an open mark popover and shows the strip.
-  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--highlight')
+  await clickMarkCenter('.paper-personal-paper-mark.paper-personal-mark--highlight[data-paper-mark-id^="verify-hl-"]')
   await page.waitForSelector('.paper-personal-popover', { timeout: 5_000 })
   await selectNote('verify-note-1')
   check('selecting a note card closes the mark popover and opens the note strip',
@@ -1192,16 +1439,17 @@ try {
     `yMm ${nudgedNote?.placement.yMm} -> ${shiftedNote?.placement.yMm}`)
 
   // 复制 duplicates with the same anchor at +5mm/+5mm.
+  // Notes made earlier (e.g. by the 批注 pen) are excluded by id, not assumed absent.
+  const noteIdsBeforeCopy = new Set((await storedNotes()).map((object) => object.id))
   await selectNote('verify-note-1')
   await page.waitForSelector('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip', { timeout: 5_000 })
   await page.click('.paper-personal-paper-note.is-selected .paper-personal-text-box__strip-action[aria-label="复制旁注"]')
   await flushAutosave()
   const notesAfterCopy = await storedNotes()
   const originalNote = notesAfterCopy.find((object) => object.id === 'verify-note-1')
-  const copiedNote = notesAfterCopy.find((object) => object.id === 'verify-note-1-copy')
-    ?? notesAfterCopy.find((object) => object.id !== 'verify-note-1' && object.id !== 'verify-note-2' && object.id !== 'verify-note-3')
+  const copiedNote = notesAfterCopy.find((object) => !noteIdsBeforeCopy.has(object.id))
   check('复制旁注 adds one note with the same anchor at +5mm/+5mm',
-    notesAfterCopy.length === 4
+    notesAfterCopy.length === noteIdsBeforeCopy.size + 1
     && copiedNote
     && JSON.stringify(copiedNote.textAnchor) === JSON.stringify(originalNote.textAnchor)
     && Math.abs(copiedNote.placement.xMm - (originalNote.placement.xMm + 5)) < 0.05

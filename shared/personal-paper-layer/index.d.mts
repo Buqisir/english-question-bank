@@ -370,3 +370,16 @@ export function printSegmentToDomRanges(
   source: PaperSelectionSource,
   segment: { streamId: string; start: number; end: number },
 ): Range[] | null
+
+export type PersonalMarkStyleInput = { color?: PersonalHighlightColor; ink?: PersonalUnderlineInk }
+
+export function printDomRangeToSegments(
+  doc: Document,
+  source: PaperSelectionSource,
+  range: Range,
+): {
+  streamId: string
+  start: number
+  end: number
+  selectedText: string
+}[] | null

@@ -6,11 +6,13 @@ import {
   createPersonalLayerHistory,
   createPersonalMutationId,
   personalTextAnchorToInput,
+  type PersonalHighlightColor,
   type PersonalLayerApplyResult,
   type PersonalLayerSource,
   type PersonalObject,
   type PersonalOperation,
   type PersonalTextAnchorInput,
+  type PersonalUnderlineInk,
 } from '../../../../../shared/personal-paper-layer/index.mjs'
 import {
   isPersonalTextDocumentBlank,
@@ -187,12 +189,20 @@ export function usePersonalAnnotations({
     }
   }, [apply, history, objectById])
 
-  const createMark = useCallback((type: PersonalMarkType, segments: readonly MappedSegment[], point: { x: number; y: number }) => {
+  const createMark = useCallback((
+    type: PersonalMarkType,
+    segments: readonly MappedSegment[],
+    point: { x: number; y: number },
+    // 纸张视图的笔式创建传入记忆的颜色；阅读视图不带（走默认色并开弹层）。
+    style: { color?: PersonalHighlightColor; ink?: PersonalUnderlineInk } = {},
+    options: { openPopover?: boolean } = {},
+  ) => {
     if (!source || !canEdit) return
     history?.seal()
     const existing = objects.find((object) => object.type === type && coversExactly(object, segments))
     if (existing) {
       // Same range, same kind: edit the object that is already there.
+      if (options.openPopover === false) return
       setSelectedId(existing.id)
       setPopover({ ids: [existing.id], activeId: existing.id, point })
       return
@@ -200,10 +210,10 @@ export function usePersonalAnnotations({
     const id = createPersonalMutationId()
     const textAnchor = mappedSegmentsToAnchorInput(source, segments)
     const operation: PersonalOperation = type === 'highlight'
-      ? { op: 'create', object: { id, type, textAnchor, style: { color: PERSONAL_DEFAULT_HIGHLIGHT_COLOR } } }
-      : { op: 'create', object: { id, type, textAnchor, style: { ink: PERSONAL_DEFAULT_UNDERLINE_INK } } }
+      ? { op: 'create', object: { id, type, textAnchor, style: { color: style.color ?? PERSONAL_DEFAULT_HIGHLIGHT_COLOR } } }
+      : { op: 'create', object: { id, type, textAnchor, style: { ink: style.ink ?? PERSONAL_DEFAULT_UNDERLINE_INK } } }
     const result = apply([operation])
-    if (result.ok) {
+    if (result.ok && options.openPopover !== false) {
       setSelectedId(id)
       setPopover({ ids: [id], activeId: id, point })
     }

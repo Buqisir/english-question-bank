@@ -4,7 +4,8 @@
  * the paper-view layer, and the popover (portaled to body, outside both). */
 .paper-personal-layer,
 .paper-personal-paper-marks,
-.paper-personal-popover {
+.paper-personal-popover,
+.paper-tool-palette {
   --personal-highlight-yellow: #f9e08a;
   --personal-highlight-green: #c9e7b8;
   --personal-highlight-blue: #bcd9f2;
@@ -431,12 +432,10 @@
   gap: 8px;
 }
 
-/* 「添加文字」开关与缩放档位同一颗按钮的观感：样式走同一组选择器，类名
- * 分开——verify-personal-paper-view-browser 数 .paper-browse-zoom-option
- * 固定 5 颗，不能混入工具开关。 */
+/* 缩放档位与「导出我的批注版」同一颗按钮的观感。批注工具收进了纸张视图
+ * 右侧的固定浮板（.paper-tool-palette），工具条里不再有工具开关。 */
 .paper-browse-view-switch__option,
 .paper-browse-zoom-option,
-.paper-browse-add-text-option,
 .paper-browse-export-option {
   display: inline-flex;
   align-items: center;
@@ -454,7 +453,6 @@
 
 .paper-browse-view-switch__option:hover:not([aria-pressed='true']),
 .paper-browse-zoom-option:hover:not([aria-pressed='true']),
-.paper-browse-add-text-option:hover:not([aria-pressed='true']):not([disabled]),
 .paper-browse-export-option:hover:not([disabled]) {
   background: var(--desk-hover, #e5eae1);
   color: var(--desk-ink, #191d18);
@@ -463,22 +461,19 @@
 /* Explicit-Cascade: 选中态墨底白字压过 hover 浅底——同权 hover 规则在
  * 前面，选中规则靠后取胜；墨底悬停变浅由下一条承担。 */
 .paper-browse-view-switch__option--active,
-.paper-browse-zoom-option[aria-pressed='true'],
-.paper-browse-add-text-option[aria-pressed='true'] {
+.paper-browse-zoom-option[aria-pressed='true'] {
   background: var(--action, #1f1f1d);
   color: #fff;
 }
 
 .paper-browse-view-switch__option--active:hover,
-.paper-browse-zoom-option[aria-pressed='true']:hover,
-.paper-browse-add-text-option[aria-pressed='true']:hover {
+.paper-browse-zoom-option[aria-pressed='true']:hover {
   background: var(--action-hover, #3a3a37);
   color: #fff;
 }
 
 .paper-browse-view-switch__option:focus-visible,
 .paper-browse-zoom-option:focus-visible,
-.paper-browse-add-text-option:focus-visible,
 .paper-browse-export-option:focus-visible,
 .paper-personal-retry:focus-visible {
   outline: 2px solid var(--eqb-color-action, #1f1f1d);
@@ -495,6 +490,95 @@
   /* 双保险：即使网格列模板被上游改动，纸张视图也横跨全部列、占满宽度。 */
   grid-column: 1 / -1;
   width: 100%;
+  /* 右侧永久让出「批注工具浮板宽 + 24px」的空档（浮板 fixed 贴视口右缘）：
+   * 纸张居中在这个内容盒里，任何缩放档位都坐不进浮板之下；fit 宽度用
+   * ResizeObserver 的 contentRect（不含 padding），自动减去了这条空档。 */
+  padding-right: calc(64px + 24px);
+}
+
+/* ---- 批注工具浮板（#489 palette）：纸张视图右侧的固定竖排工具条 ---- */
+
+.paper-tool-palette {
+  position: fixed;
+  /* 顶栏（48px）+ 工具条（约 44px）之下起排，不与两者相接。 */
+  top: 116px;
+  right: 12px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 12px;
+  background: var(--desk-raised, #fafdf7);
+  box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
+}
+
+.paper-tool-palette__slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.paper-tool-palette__tool {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 56px;
+  padding: 8px 0 6px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--desk-muted, #60665c);
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.paper-tool-palette__tool:hover:not(.is-active):not(:disabled) {
+  background: var(--desk-hover, #e5eae1);
+  color: var(--desk-ink, #191d18);
+}
+
+/* Explicit-Cascade: 激活工具是选中态墨底白字，压过同权的整块 hover 浅底；
+ * 墨底悬停变浅由下一条承担（DESIGN 墨做动作）。 */
+.paper-tool-palette__tool.is-active {
+  background: var(--action, #1f1f1d);
+  color: #fff;
+}
+
+.paper-tool-palette__tool.is-active:hover {
+  background: var(--action-hover, #3a3a37);
+  color: #fff;
+}
+
+.paper-tool-palette__tool:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.paper-tool-palette__tool:focus-visible {
+  outline: 2px solid var(--eqb-color-action, #1f1f1d);
+  outline-offset: 2px;
+}
+
+.paper-tool-palette__label {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* 取色点竖排在工具下方；点色只换记忆色，不替工具。 */
+.paper-tool-palette__swatches {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 2px 0 4px;
+}
+
+.paper-tool-palette__swatch {
+  width: 14px;
+  height: 14px;
 }
 
 .paper-personal-paper-state {
@@ -737,7 +821,7 @@
 }
 
 .paper-personal-text-box-layer.is-armed .paper-personal-text-box-hit {
-  cursor: text;
+  cursor: crosshair;
 }
 
 /* 「逐个摆放」中：整个纸面成为落点选择器。 */

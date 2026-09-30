@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { orderAppendixEntries } from '../../../../../shared/personal-paper-layer/index.mjs'
+import { createPortal } from 'react-dom'
+import { orderAppendixEntries, printDomRangeToSegments, type PersonalHighlightColor, type PersonalUnderlineInk } from '../../../../../shared/personal-paper-layer/index.mjs'
 import { frameAtPoint, MM_TO_PX, pxToMm, type PaperPageFrame } from './paperPlacement'
 import { PaperAppendixLayer, type AppendixPlanEntry } from './PaperAppendixLayer'
 import { PaperAppendixPreview } from './PaperAppendixPreview'
 import { PaperMarkLayer } from './PaperMarkLayer'
-import { PaperNoteLayer } from './PaperNoteLayer'
+import { PaperNoteLayer, type PenNoteRequest } from './PaperNoteLayer'
+import { mappedSegmentsToAnchorInput } from './anchorDomRange'
 import { PaperTextBoxLayer } from './PaperTextBoxLayer'
+import type { PaperTool } from './PaperToolPalette'
 import { usePaperAnchorGeometry } from './usePaperAnchorGeometry'
 import { PersonalExportControl } from './PersonalExportControl'
 import type { PersonalAnnotationsApi } from './usePersonalAnnotations'
@@ -55,9 +58,11 @@ export type PaperEditingViewProps = {
   zoom: number | 'fit'
   /** Host's personal-layer api; the text-box layer reads objects and applies edits through it. */
   api: PersonalAnnotationsApi
-  /** 「添加文字」armed state: the next click on a page places a new text box. */
-  addTextArmed: boolean
-  onAddTextPlaced: () => void
+  /** Active annotation tool: pen tools keep their state (sticky) until the host resets them. */
+  tool: PaperTool
+  /** Remembered pen colors for this page session. */
+  highlightColor: PersonalHighlightColor
+  underlineInk: PersonalUnderlineInk
   /** Host toolbar slot for the quiet text-box notices, outside the zoom transform. */
   noticeTarget: HTMLElement | null
   /** Host toolbar slot for the 「导出我的批注版」 button (left button group). */
@@ -69,7 +74,7 @@ type PaperCanvasStyle = CSSProperties & Record<`--${string}`, string | number>
 // 附页条目的排序输入：plan 条目去掉编号（编号由 orderAppendixEntries 给出）。
 type AppendixOrderInput = Omit<AppendixPlanEntry, 'number'>
 
-export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextArmed, onAddTextPlaced, noticeTarget, exportTarget }: PaperEditingViewProps): ReactNode {
+export function PaperEditingView({ paperId, sourceRevision, zoom, api, tool, highlightColor, underlineInk, noticeTarget, exportTarget }: PaperEditingViewProps): ReactNode {
   const { state, reload } = usePersonalPaperLayout({
     paperId,
     sourceRevision,
@@ -164,6 +169,48 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
   const contentHeightPx = geometry.status === 'ok' ? geometry.contentHeightPx : Math.ceil(pageHeightSumPx)
 
   const measured = layout != null && geometry.status === 'ok'
+
+  // 笔式工具（高亮/下划线/批注）的 iframe 选区翻译：mouseup 落定一次非塌陷
+  // 选区就立即成标注（笔不逐次询问）——高亮/下划线用记忆色直接创建、不开弹
+  // 层，批注照常打开旁注编辑器；译不出的选区给一条 5 秒的静默提示。
+  const penTool = tool === 'highlight' || tool === 'underline' || tool === 'note' ? tool : null
+  const penActive = penTool != null && api.canEdit
+  const [penNotice, setPenNotice] = useState<string | null>(null)
+  useEffect(() => {
+    if (!penNotice) return undefined
+    const timer = window.setTimeout(() => setPenNotice(null), 5000)
+    return () => window.clearTimeout(timer)
+  }, [penNotice])
+
+  const { createMark, source: layerSource } = api
+  const [penNoteRequest, setPenNoteRequest] = useState<PenNoteRequest | null>(null)
+  useEffect(() => {
+    if (!penActive || !penTool || !layerSource || geometry.status !== 'ok') return undefined
+    const doc = iframeRef.current?.contentDocument
+    if (!doc) return undefined
+    const onMouseUp = () => {
+      const selection = doc.getSelection()
+      if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return
+      const range = selection.getRangeAt(0)
+      const segments = printDomRangeToSegments(doc, layerSource, range)
+      if (!segments) {
+        setPenNotice('这段文字不能标记')
+        return
+      }
+      if (penTool === 'note') {
+        const textAnchor = mappedSegmentsToAnchorInput(layerSource, segments)
+        setPenNoteRequest((current) => ({ seq: (current?.seq ?? 0) + 1, textAnchor }))
+      } else {
+        createMark(penTool, segments, { x: 0, y: 0 },
+          penTool === 'highlight' ? { color: highlightColor } : { ink: underlineInk },
+          { openPopover: false })
+      }
+      selection.removeAllRanges()
+    }
+    doc.addEventListener('mouseup', onMouseUp)
+    return () => doc.removeEventListener('mouseup', onMouseUp)
+  }, [createMark, geometry.status, highlightColor, penActive, penTool, underlineInk, layerSource])
+
   const anchorGeometry = usePaperAnchorGeometry(
     api.objects,
     api.source,
@@ -290,6 +337,7 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
                   layoutId={layout.layoutId}
                   iframe={iframeRef.current}
                   noticeTarget={noticeTarget}
+                  penNoteRequest={penNoteRequest}
                 />
                 <PaperAppendixLayer
                   api={api}
@@ -301,8 +349,7 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
                   api={api}
                   frames={geometry.frames}
                   layoutId={layout.layoutId}
-                  armed={addTextArmed && api.canEdit}
-                  onPlaced={onAddTextPlaced}
+                  armed={tool === 'text' && api.canEdit}
                   noticeTarget={noticeTarget}
                 />
                 {geometry.frames.map((frame) => (
@@ -323,6 +370,11 @@ export function PaperEditingView({ paperId, sourceRevision, zoom, api, addTextAr
           </div>
         </div>
       )}
+      {/* 笔式工具译不出选区的静默提示：挂在工具条中段槽，5 秒自清。 */}
+      {penNotice && noticeTarget ? createPortal(
+        <p className="paper-personal-paper-notice" role="status">{penNotice}</p>,
+        noticeTarget,
+      ) : null}
       {/* 附页预览与纸张同宽同缩放，左缘对齐纸张页面；没有转附页对象时不渲染。 */}
       <PaperAppendixPreview
         api={api}
