@@ -28,7 +28,7 @@ type ExportFailure = Error & { status?: number; code?: string; payload?: { diagn
 
 type ExportNotice =
   | { kind: 'blocked'; text: string }
-  | { kind: 'success'; version: number }
+  | { kind: 'success'; version: number; empty: boolean }
   | { kind: 'stale-version' }
   | { kind: 'layout-mismatch' }
   | { kind: 'diagnostics'; rows: ExportDiagnosticRow[] }
@@ -222,7 +222,9 @@ export function PersonalExportControl({
       }
       if (!result) return
       triggerDownload(result.downloadUrl)
-      setNotice({ kind: 'success', version: result.layerVersion })
+      // settle 之后本地快照就是刚导出的那一版，空层照样导出一份原卷。
+      const empty = (session.getSnapshot().layer?.objects.length ?? 0) === 0
+      setNotice({ kind: 'success', version: result.layerVersion, empty })
     } finally {
       setRunning(false)
     }
@@ -284,7 +286,7 @@ export function PersonalExportControl({
         <p className="paper-personal-paper-notice" role="status">
           {successStale
             ? `已导出的文件是第 ${notice.version} 版，不含之后的修改`
-            : `已导出第 ${notice.version} 版批注`}
+            : notice.empty ? '已导出卷子，还没有批注' : `已导出第 ${notice.version} 版批注`}
         </p>
       ), noticeTarget) : null}
       {noticeTarget && notice?.kind === 'blocked' ? createPortal((
