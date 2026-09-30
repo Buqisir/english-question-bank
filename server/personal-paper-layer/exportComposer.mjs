@@ -53,6 +53,22 @@ function fail(code, message, details) {
 
 const sha256Text = (value) => `sha256:${createHash('sha256').update(value).digest('hex')}`
 
+/*
+ * Case-insensitive `</tag>` search without regex: the composed paper carries
+ * multi-MB font data URIs, and Irregexp exhausts its backtracking stack on
+ * subjects that size (Node 24 reports it as RangeError "Maximum call stack
+ * size exceeded"), so no regex touches this string. See layout.mjs.
+ */
+function indexOfClosingTag(html, tag) {
+  let at = html.indexOf('</')
+  while (at >= 0) {
+    if (html.slice(at + 2, at + 2 + tag.length).toLowerCase() === tag
+      && html[at + 2 + tag.length] === '>') return at
+    at = html.indexOf('</', at + 2)
+  }
+  return -1
+}
+
 function escapeHtml(value) {
   return value.replace(/[&<>"']/g, (char) => ({
     '&': '&amp;',
@@ -186,13 +202,15 @@ export function composePersonalExport({ printHtml, plan, layoutRef, source, obje
     // joins the flow at the end of <body>.
     let composed = printHtml
     if (styleBlock) {
-      composed = /<\/head>/i.test(composed)
-        ? composed.replace(/<\/head>/i, () => `${styleBlock}\n</head>`)
+      const at = indexOfClosingTag(composed, 'head')
+      composed = at >= 0
+        ? `${composed.slice(0, at)}${styleBlock}\n${composed.slice(at)}`
         : styleBlock + composed
     }
     if (appendixHtml) {
-      composed = /<\/body>/i.test(composed)
-        ? composed.replace(/<\/body>/i, () => `${appendixHtml}\n</body>`)
+      const at = indexOfClosingTag(composed, 'body')
+      composed = at >= 0
+        ? `${composed.slice(0, at)}${appendixHtml}\n${composed.slice(at)}`
         : composed + appendixHtml
     }
     composedPrintHtml = composed

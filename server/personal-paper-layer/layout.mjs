@@ -149,11 +149,26 @@ function paperFontPathBySha() {
  * already serves those exact files from /fonts/paper/, so the iframe copy
  * points there instead; only faces whose bytes match the manifest are swapped.
  *
- * Hand-rolled scan, not String.replace with a callback: V8 builds the result
- * of a global regex replace recursively per match and blows the stack on
- * multi-MB base64 matches (Node 24 on CI: RangeError Maximum call stack size
- * exceeded). Slicing never recurses. Same rule for the reverse direction.
+ * Hand-rolled scan with indexOf/slice only: every regex is banned here.
+ * Irregexp exhausts its backtracking stack on multi-MB subjects and reports
+ * it as RangeError "Maximum call stack size exceeded" (Node 24 on CI, both
+ * for String.replace with a callback and for a /^[base64]+$/ test). The same
+ * rule applies to the reverse direction below.
  */
+// Irregexp runs on a bounded backtracking stack and reports exhaustion as
+// RangeError "Maximum call stack size exceeded" — a char-class test over a
+// multi-MB base64 string overflows it on Node 24 (CI). A charCode loop
+// touches no regexp stack at all. Every regex stays out of this pipeline.
+function isBase64Text(value) {
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index)
+    const ok = (code >= 65 && code <= 90) || (code >= 97 && code <= 122)
+      || (code >= 48 && code <= 57) || code === 43 || code === 47 || code === 61
+    if (!ok) return false
+  }
+  return value.length > 0
+}
+
 export function servePaperFontsFromAppOrigin(html) {
   const bySha = paperFontPathBySha()
   const marker = 'data:font/otf;base64,'
@@ -169,7 +184,7 @@ export function servePaperFontsFromAppOrigin(html) {
     const end = rest.indexOf(quoted ? quote : ')', at + marker.length)
     const closesCleanly = end >= 0 && (!quoted || rest[end + 1] === ')')
     const base64 = closesCleanly ? rest.slice(at + marker.length, end) : ''
-    if (!isFontUrl || !closesCleanly || !/^[A-Za-z0-9+/=]+$/u.test(base64)) {
+    if (!isFontUrl || !closesCleanly || !isBase64Text(base64)) {
       // Not a whole data-font URL we own; keep it verbatim and continue.
       parts.push(rest.slice(0, at + marker.length))
       rest = rest.slice(at + marker.length)
