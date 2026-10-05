@@ -1,5 +1,7 @@
 import { useId, useState, type ReactNode } from 'react'
-import { ChevronDown, Copy, Check, Volume, X } from '../../../icons'
+import { ChevronDown, Volume, X } from '../../../icons'
+import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
+import { iconMotionInput } from '../../../icons/motionInput'
 import type {
   PaperDictionaryEntry,
   PaperDictionaryPosGroup,
@@ -320,6 +322,8 @@ export function DictionaryCard({
   onPlayError,
   onCopy,
   copied,
+  copyState,
+  copyError,
   onClose,
   notebook,
 }: {
@@ -333,6 +337,8 @@ export function DictionaryCard({
   onPlayError: (pronunciationId: string) => void
   onCopy: () => void
   copied: boolean
+  copyState?: 'idle' | 'pending' | 'done'
+  copyError?: string
   onClose?: () => void
   notebook?: ReactNode
 }) {
@@ -368,10 +374,13 @@ export function DictionaryCard({
           <button
             type="button"
             className="paper-selection-action-btn"
+            {...iconMotionInput}
             onClick={onCopy}
+            disabled={copyState === 'pending'}
+            aria-busy={copyState === 'pending'}
             aria-label={copied ? '已复制' : '复制词条'}
           >
-            {copied ? <Check size={16} /> : <Copy size={16} />}
+            <CopyFeedbackIcon size={16} state={copyState ?? (copied ? 'done' : 'idle')} />
           </button>
           {onClose ? (
             <button type="button" className="paper-selection-action-btn" onClick={onClose} aria-label="关闭">
@@ -380,6 +389,8 @@ export function DictionaryCard({
           ) : null}
         </div>
       </div>
+
+      {copyError && <p className="paper-selection-card-error" role="alert">{copyError}</p>}
 
       {showSurface || singlePronunciations.length > 0 ? (
         <div className="paper-dictionary-meta">

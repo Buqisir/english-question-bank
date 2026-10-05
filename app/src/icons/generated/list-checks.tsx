@@ -1,11 +1,13 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
 import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 
-export function ListChecks({ variant = 'line', ...props }: EqbIconProps) {
+export function ListChecks({ size = 24, variant = 'line', ...props }: EqbIconProps) {
+  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
+  const isSmall = Number.isFinite(numericSize) && numericSize < 24
   return (
-    <EqbIcon {...props}>
+    <EqbIcon size={size} {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M12.75 6.5h7.75M12.75 12h7.75M12.75 17.5h7.75" /><path d="m3.5 6.75 1.75 1.75L8.75 5M3.5 17.75l1.75 1.75 3.5-3.5" /></> : <><path d="M12.75 6.5h7.75M12.75 12h7.75M12.75 17.5h7.75" /><path d="m3.5 6.75 1.75 1.75L8.75 5M3.5 17.75l1.75 1.75 3.5-3.5" /></>}
+      {variant === 'fill' ? <><rect strokeWidth={isSmall ? 2.1 : 2.5} x="3.25" y="4.25" width="5.5" height="5.5" rx="1.4" /><rect strokeWidth={isSmall ? 2.1 : 2.5} x="3.25" y="14.25" width="5.5" height="5.5" rx="1.4" /><path d="M13.25 7 H20.75 M13.25 17 H18.75" /></> : <><rect strokeWidth={isSmall ? 2.1 : 2.5} x="3.25" y="4.25" width="5.5" height="5.5" rx="1.4" /><rect strokeWidth={isSmall ? 2.1 : 2.5} x="3.25" y="14.25" width="5.5" height="5.5" rx="1.4" /><path d="M13.25 7 H20.75 M13.25 17 H18.75" /></>}
     </EqbIcon>
   )
 }

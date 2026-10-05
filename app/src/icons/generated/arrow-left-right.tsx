@@ -5,7 +5,7 @@ export function ArrowLeftRight({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M3.5 12h17" /><path d="m8 7.5-4.5 4.5L8 16.5M16 7.5l4.5 4.5L16 16.5" /></> : <><path d="M3.5 12h17" /><path d="m8 7.5-4.5 4.5L8 16.5M16 7.5l4.5 4.5L16 16.5" /></>}
+      {variant === 'fill' ? <><path d="M3.5 12h17" /><path d="M7.5 8 L3.5 12 L7.5 16 M16.5 8 L20.5 12 L16.5 16" /></> : <><path d="M3.5 12h17" /><path d="M7.5 8 L3.5 12 L7.5 16 M16.5 8 L20.5 12 L16.5 16" /></>}
     </EqbIcon>
   )
 }

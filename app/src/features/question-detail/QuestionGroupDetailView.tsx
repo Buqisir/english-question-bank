@@ -28,7 +28,7 @@
 import { useEffect, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import {
   ArrowLeft,
-  BookOpen,
+  ReadingAnalysis,
   Check,
   ChevronDown,
   ChevronUp,
@@ -606,7 +606,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   onOpenPaperBrowseLecture(selectedDetail)
                 }}
               >
-                <BookOpen size={16} />
+                <ReadingAnalysis size={16} />
                 {selectedDetail.paperSurfaceLabel}
               </a>
             )}

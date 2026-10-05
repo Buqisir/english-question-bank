@@ -5,7 +5,7 @@ export function Crop({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M4 9V4h5M15 4h5v5M4 15v5h5M15 20h5v-5" /></> : <><path d="M4 9V4h5M15 4h5v5M4 15v5h5M15 20h5v-5" /></>}
+      {variant === 'fill' ? <><path d="M7 3.6v11.4a2 2 0 0 0 2 2h11.4M3.6 7h11.4a2 2 0 0 1 2 2v11.4" /></> : <><path d="M7 3.6v11.4a2 2 0 0 0 2 2h11.4M3.6 7h11.4a2 2 0 0 1 2 2v11.4" /></>}
     </EqbIcon>
   )
 }

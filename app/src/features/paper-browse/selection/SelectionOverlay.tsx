@@ -1,8 +1,11 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import type { PaperTranslationResultItem } from '../../../services/paperTranslation'
 import { autoUpdate, computePosition, flip, offset, shift, size, type Placement } from '@floating-ui/react-dom'
 import type { ReactNode } from 'react'
-import { Translate, BookOpen, Copy, Check, X, RefreshCw } from '../../../icons'
+import { Translate, DictionaryLookup, X, RefreshCw } from '../../../icons'
+import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
+import { iconMotionInput } from '../../../icons/motionInput'
+import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 
 export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary'
 
@@ -17,14 +20,6 @@ export type SelectionOverlayProps = {
   liveMessage: string
   onTranslate: () => void
   onLookup?: () => void
-  /** False when the translation service is off; the translate button hides. */
-  translateEnabled?: boolean
-  /** Personal annotations (#489): local-only actions, no paid calls. */
-  annotationActions?: {
-    onHighlight: () => void
-    onUnderline: () => void
-    onNote: () => void
-  }
   onRetry: () => void
   onClose?: () => void
   onPointerInsideChange: (inside: boolean) => void
@@ -43,8 +38,6 @@ export function SelectionOverlay({
   liveMessage,
   onTranslate,
   onLookup,
-  translateEnabled = true,
-  annotationActions,
   onRetry,
   onClose,
   onPointerInsideChange,
@@ -52,8 +45,8 @@ export function SelectionOverlay({
   focusLookup = false,
 }: SelectionOverlayProps) {
   const floatingRef = useRef<HTMLDivElement | null>(null)
-  const [copied, setCopied] = useState(false)
-  const copyTimeoutRef = useRef<number | null>(null)
+  const clipboard = useClipboardCopy()
+  const copied = clipboard.copied
   const lockedPlacementRef = useRef<Placement | null>(null)
 
   useLayoutEffect(() => {
@@ -113,17 +106,13 @@ export function SelectionOverlay({
   const canCopy = phase === 'result'
     || (results.length > 0 && results.some((item) => item.status === 'ok'))
 
-  const handleCopy = useCallback(() => {
+  const handleCopy = () => {
     const textToCopy = results.length > 0
       ? results.filter((item) => item.status === 'ok').map((item) => item.translation).join('\n')
       : (translation ?? '')
     if (!textToCopy) return
-    void navigator.clipboard.writeText(textToCopy).then(() => {
-      setCopied(true)
-      if (copyTimeoutRef.current) window.clearTimeout(copyTimeoutRef.current)
-      copyTimeoutRef.current = window.setTimeout(() => setCopied(false), 1800)
-    })
-  }, [results, translation])
+    void clipboard.copy(textToCopy)
+  }
 
   return (
     <div
@@ -146,10 +135,10 @@ export function SelectionOverlay({
               autoFocus={focusLookup}
               onClick={onLookup}
             >
-              <BookOpen size={16} className="paper-selection-btn-icon" />
+              <DictionaryLookup size={16} className="paper-selection-btn-icon" />
               <span>查词</span>
             </button>
-          ) : translateEnabled ? (
+          ) : (
             <button
               type="button"
               className="paper-selection-translate"
@@ -158,14 +147,7 @@ export function SelectionOverlay({
               <Translate size={16} className="paper-selection-btn-icon" />
               <span>翻译</span>
             </button>
-          ) : null}
-          {annotationActions ? (
-            <div className="paper-selection-annotations" role="group" aria-label="我的批注">
-              <button type="button" onClick={annotationActions.onHighlight}>高亮</button>
-              <button type="button" onClick={annotationActions.onUnderline}>下划线</button>
-              <button type="button" onClick={annotationActions.onNote}>批注</button>
-            </div>
-          ) : null}
+          )}
         </div>
       ) : phase === 'dictionary' ? dictionary : (
         <div className="paper-selection-card">
@@ -179,11 +161,14 @@ export function SelectionOverlay({
                 <button
                   type="button"
                   className="paper-selection-action-btn"
+                  {...iconMotionInput}
                   onClick={handleCopy}
+                  disabled={clipboard.state === 'pending'}
+                  aria-busy={clipboard.state === 'pending'}
                   title={copied ? '已复制' : '复制译文'}
                   aria-label={copied ? '已复制' : '复制译文'}
                 >
-                  {copied ? <Check size={16} className="paper-selection-copied-icon" /> : <Copy size={16} />}
+                  <CopyFeedbackIcon size={16} state={clipboard.state} />
                 </button>
               )}
               {onClose && (
@@ -199,6 +184,8 @@ export function SelectionOverlay({
               )}
             </div>
           </div>
+
+          {clipboard.error && <p className="paper-selection-card-error" role="alert">{clipboard.error}</p>}
 
           {phase === 'loading' ? (
             <p className="paper-selection-card-status">

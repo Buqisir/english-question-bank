@@ -5,7 +5,7 @@ export function CornerDownRight({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M9.5 17L4.5 12L9.5 7M4.5 12L14.5 12C16.1667 12 19.5 13 19.5 17" /></> : <><path d="M9.5 17L4.5 12L9.5 7M4.5 12L14.5 12C16.1667 12 19.5 13 19.5 17" /></>}
+      {variant === 'fill' ? <><path d="M8.75 16.25L4.5 12L8.75 7.75M4.5 12H12.5C17 12 19.5 13.7 19.5 18.5" /></> : <><path d="M8.75 16.25L4.5 12L8.75 7.75M4.5 12H12.5C17 12 19.5 13.7 19.5 18.5" /></>}
     </EqbIcon>
   )
 }

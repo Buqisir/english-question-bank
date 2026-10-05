@@ -13,7 +13,7 @@
  */
 
 import { type MouseEvent, type ReactNode } from 'react'
-import { BookOpen, Check, Paper, Papers, Plus } from '../icons'
+import { ReadingAnalysis, Check, Paper, Papers, Plus } from '../icons'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { buildTopicText, compactPassageTitle, compactSummary } from './passageText.ts'
 import { ConciergeGroupRowMenu, type ConciergeGroupRowMenuItem } from './ConciergeGroupRowMenu.tsx'
@@ -147,7 +147,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
     menuItems.push({
       key: 'analysis',
       label: group.paperSurfaceLabel || '阅读解析',
-      icon: <BookOpen size={16} aria-hidden="true" />,
+      icon: <ReadingAnalysis size={16} aria-hidden="true" />,
       href: paperSurfaceAnalysisHref,
       dataRaEntry: 'group-card',
       dataRaGroupId: group.id,

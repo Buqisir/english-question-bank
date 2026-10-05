@@ -28,7 +28,8 @@ const groups = {
   'Solar Linear 全部': icons.filter((i) => i.set === 'solar'),
   'Solar 对应站内 62 个': icons.filter((i) => i.set === 'solar' && mapped.has(i.name)),
   'v3 通用层': icons.filter((i) => i.set === 'v3' && i.group === 'generic'),
-  'v3 领域层 + 题型': icons.filter((i) => i.set === 'v3' && i.group !== 'generic'),
+  'v3 领域层 + 题型': icons.filter((i) => i.set === 'v3' && ['domain', 'passage'].includes(i.group)),
+  'v3 扩展层': icons.filter((i) => i.set === 'v3' && i.group === 'extended'),
 }
 
 const lines = []

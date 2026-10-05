@@ -17,14 +17,16 @@ function componentName(key) {
   return Object.hasOwn(passage, key) ? `Type${pascalCase(key)}` : pascalCase(key)
 }
 
-function jsxElements(markup, { omitDots = false } = {}) {
+function jsxElements(markup) {
   return markup.replace(/<(path|circle|rect)([^>]*)\/>/g, (_match, tag, rawAttributes) => {
     const attributes = [...rawAttributes.matchAll(/([\w-]+)="([^"]*)"/g)]
     const className = attributes.find(([_, name]) => name === 'class')?.[2]
-    if (omitDots && className === 'dot') return ''
+    const smallStroke = attributes.find(([_, name]) => name === 'data-stroke-small')?.[2]
     const rendered = attributes
-      .filter(([_, name]) => name !== 'class')
-      .map(([_, name, value]) => `${name === 'fill-opacity' ? 'fillOpacity' : name}="${value}"`)
+      .filter(([_, name]) => name !== 'class' && name !== 'data-stroke-small')
+      .map(([_, name, value]) => name === 'stroke-width' && smallStroke !== undefined
+        ? `strokeWidth={isSmall ? ${Number(smallStroke)} : ${Number(value)}}`
+        : `${name === 'fill-opacity' ? 'fillOpacity' : name === 'stroke-width' ? 'strokeWidth' : name === 'fill-rule' ? 'fillRule' : name}="${value}"`)
     if (className === 'dot' || className === 'joint') rendered.push('fill="currentColor"', 'stroke="none"')
     return `<${tag}${rendered.length ? ` ${rendered.join(' ')}` : ''} />`
   })
@@ -33,9 +35,16 @@ function jsxElements(markup, { omitDots = false } = {}) {
 function componentSource(key, icon) {
   const name = componentName(key)
   const line = jsxElements(icon.line)
-  const fillLine = jsxElements(icon.line, { omitDots: true })
+  // Fill adds a quiet background; it must not remove pupils, punctuation or noteheads.
+  const fillLine = line
   const fillShape = icon.fillShape ? jsxElements(icon.fillShape) : ''
-  return `${header}import { EqbIcon, type EqbIconProps } from '../EqbIcon'\n\nexport function ${name}({ variant = 'line', ...props }: EqbIconProps) {\n  return (\n    <EqbIcon {...props}>\n      {variant === 'fill' && ${fillShape ? `<g fill="currentColor" fillOpacity={0.16} stroke="none">${fillShape}</g>` : 'null'}}\n      {variant === 'fill' ? <>${fillLine}</> : <>${line}</>}\n    </EqbIcon>\n  )\n}\n`
+  const stroke = icon.strokeWidth === undefined ? '' : ` strokeWidth={${icon.strokeWidth}}`
+  // Compound glyphs may need size-specific local strokes without changing the paper/body tier.
+  const localTiers = /data-stroke-small=/.test(icon.line + (icon.fillShape ?? ''))
+  const sizeProp = localTiers ? 'size = 24, ' : ''
+  const sizeAttr = localTiers ? ' size={size}' : ''
+  const sizeSetup = localTiers ? "  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)\n  const isSmall = Number.isFinite(numericSize) && numericSize < 24\n" : ''
+  return `${header}import { EqbIcon, type EqbIconProps } from '../EqbIcon'\n\nexport function ${name}({ ${sizeProp}variant = 'line', ...props }: EqbIconProps) {\n${sizeSetup}  return (\n    <EqbIcon${stroke}${sizeAttr} {...props}>\n      {variant === 'fill' && ${fillShape ? `<g fill="currentColor" fillOpacity={0.16} stroke="none">${fillShape}</g>` : 'null'}}\n      {variant === 'fill' ? <>${fillLine}</> : <>${line}</>}\n    </EqbIcon>\n  )\n}\n`
 }
 
 await mkdir(outputDir, { recursive: true })

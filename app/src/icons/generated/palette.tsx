@@ -5,7 +5,7 @@ export function Palette({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M12 4.2c4.6 0 7.6 2.8 7.6 6.6 0 2.2-1.2 3.6-3.1 3.6h-1.4a1.7 1.7 0 0 0-1.6 2.3c.2.8-.3 1.7-1.1 1.9A6.8 6.8 0 0 1 4.4 12C4.4 7.4 7.6 4.2 12 4.2Z" /></> : <><path d="M12 4.2c4.6 0 7.6 2.8 7.6 6.6 0 2.2-1.2 3.6-3.1 3.6h-1.4a1.7 1.7 0 0 0-1.6 2.3c.2.8-.3 1.7-1.1 1.9A6.8 6.8 0 0 1 4.4 12C4.4 7.4 7.6 4.2 12 4.2Z" /><circle cx="9.2" cy="10.2" r="1" fill="currentColor" stroke="none" /><circle cx="12.4" cy="8.4" r="1" fill="currentColor" stroke="none" /><circle cx="15.2" cy="10.6" r="1" fill="currentColor" stroke="none" /></>}
+      {variant === 'fill' ? <><path d="M10.8 4.9 C15 3.1 20 4.6 21 8 C22 11.2 19.8 14.2 16.5 14.2 C15 14.2 14.45 15.15 14.8 16.4 C15.29 18.15 13.8 20.5 11.7 20.4 C6.6 20.2 2.6 16.8 3 12.3 C3.3 9.2 6.4 6.7 10.8 4.9 Z" /><circle cx="7.3" cy="12.5" r="1" fill="currentColor" stroke="none" /><circle cx="11" cy="9.5" r="1" fill="currentColor" stroke="none" /><circle cx="16" cy="9" r="1" fill="currentColor" stroke="none" /></> : <><path d="M10.8 4.9 C15 3.1 20 4.6 21 8 C22 11.2 19.8 14.2 16.5 14.2 C15 14.2 14.45 15.15 14.8 16.4 C15.29 18.15 13.8 20.5 11.7 20.4 C6.6 20.2 2.6 16.8 3 12.3 C3.3 9.2 6.4 6.7 10.8 4.9 Z" /><circle cx="7.3" cy="12.5" r="1" fill="currentColor" stroke="none" /><circle cx="11" cy="9.5" r="1" fill="currentColor" stroke="none" /><circle cx="16" cy="9" r="1" fill="currentColor" stroke="none" /></>}
     </EqbIcon>
   )
 }

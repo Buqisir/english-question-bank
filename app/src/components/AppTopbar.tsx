@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, BookMarked, BookOpen, LogOut, Pencil, Settings } from '../icons'
+import { Archive, ArrowLeft, BookMarked, VocabularyNotebook, LogOut, Pencil, Settings } from '../icons'
 import { FluidHoverList } from './FluidHoverList.tsx'
 
 function userInitials(username: string): string {
@@ -165,7 +165,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
         )}
         {props.onOpenVocabularyNotebook && (
           <button className="ghost-button" type="button" onClick={props.onOpenVocabularyNotebook}>
-            <BookOpen size={16} />
+            <VocabularyNotebook size={16} />
             生词本
           </button>
         )}

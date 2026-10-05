@@ -1,5 +1,5 @@
 // 量工艺：把 Solar Linear 与 EQB v3 放到同一把尺子上，量出「成熟图标库」的可检验数字。
-//   node design/icon-system-2026-09-15/measure-craft.mjs --solar <@iconify-json/solar icons.json> [--map <solar map.mjs>] [--out craft-measurements.json]
+//   node design/icon-system-2026-09-15/measure-craft.mjs [--stroke 2.25|2.75] [--solar <icons.json>] [--map <solar map.mjs>] [--out craft-measurements.json]
 // 在 Chromium 里用浏览器自己的几何（getBBox / getPointAtLength / Canvas Path2D）量，不自己解析曲线。
 // 量法（24 网格单位，中心线几何 + 描边宽度）：
 //   ink      墨迹外框（描边按半宽外扩）→ 宽、高、离画布边最小距离
@@ -20,32 +20,45 @@ const arg = (name) => {
   return index === -1 ? undefined : process.argv[index + 1]
 }
 const solarPath = arg('--solar')
-if (!solarPath) throw new Error('--solar <icons.json> is required')
 const outPath = arg('--out') ?? join(here, 'craft-measurements.json')
 const mapPath = arg('--map')
 
-const solar = JSON.parse(await readFile(solarPath, 'utf8'))
+const solar = solarPath ? JSON.parse(await readFile(solarPath, 'utf8')) : { icons: {} }
 const v3 = await import(pathToFileURL(join(here, 'icons-v3.mjs')))
+const { extended } = await import(pathToFileURL(join(here, 'extended.mjs')))
 const solarMap = mapPath ? (await import(pathToFileURL(mapPath))).map : {}
 
 const SOLAR_STROKE = 1.5
-const EQB_STROKE = 2.25
+const EQB_STROKE = Number(arg('--stroke') ?? 2.25)
+if (![2.25, 2.75].includes(EQB_STROKE)) throw new Error('--stroke must be 2.25 or 2.75 (EqbIcon size tiers)')
 
 // v3 的 markup 靠根节点给描边；Solar 的 body 自带描边属性，只把 1.5 换成要量的宽度。
-const v3Markup = (markup) =>
-  `<g fill="none" stroke="currentColor" stroke-width="${EQB_STROKE}" stroke-linecap="round" stroke-linejoin="round">${markup.replace(/class="dot"/g, 'fill="currentColor" stroke="none"').replace(/class="joint"/g, 'data-joint="1" fill="currentColor" stroke="none"')}</g>`
+const v3Markup = (markup, stroke) => {
+  const localTiers = markup.replace(/<(path|circle|rect)([^>]*)\/>/g, (element, tag, attrs) => {
+    const small = attrs.match(/data-stroke-small="([^"]+)"/)?.[1]
+    if (small === undefined) return element
+    const resolved = attrs.replace(/\s*data-stroke-small="[^"]+"/, '')
+    return `<${tag}${stroke < 2.75 ? resolved.replace(/stroke-width="[^"]+"/, `stroke-width="${small}"`) : resolved}/>`
+  })
+  return `<g fill="none" stroke="currentColor" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round">${localTiers.replace(/class="dot"/g, 'fill="currentColor" stroke="none"').replace(/class="joint"/g, 'data-joint="1" fill="currentColor" stroke="none"')}</g>`
+}
 
 const jobs = []
 for (const [name, icon] of Object.entries(solar.icons)) {
   if (name.endsWith('-linear')) jobs.push({ set: 'solar', name: name.slice(0, -7), markup: icon.body, stroke: SOLAR_STROKE })
 }
-for (const [group, icons] of [['generic', v3.generic], ['domain', v3.domain], ['passage', v3.passage]]) {
-  for (const [name, icon] of Object.entries(icons)) jobs.push({ set: 'v3', group, name, markup: v3Markup(icon.line), stroke: EQB_STROKE })
+// Same precedence and effective glyphs as the component generator, including extended overrides.
+for (const [name, icon] of Object.entries({ ...v3.all, ...v3.passage })) {
+  const group = Object.hasOwn(v3.passage, name) ? 'passage'
+    : Object.hasOwn(extended, name) ? 'extended'
+      : Object.hasOwn(v3.domain, name) ? 'domain' : 'generic'
+  const stroke = icon.strokeWidth ?? EQB_STROKE
+  jobs.push({ set: 'v3', group, name, markup: v3Markup(icon.line, stroke), stroke })
 }
 
 const require = createRequire(join(root, 'app/package.json'))
 const { chromium } = require('playwright')
-const browser = await chromium.launch()
+const browser = await chromium.launch({ channel: 'chromium', executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH })
 const page = await browser.newPage()
 await page.setContent('<!doctype html><body></body>')
 
@@ -150,7 +163,7 @@ const results = await page.evaluate((jobs) => {
     return { length, pts, bbox: { x: bbox.x, y: bbox.y, w: bbox.width, h: bbox.height } }
   }
 
-  function holes(parts, stroke) {
+  function holes(parts) {
     const scale = 10
     const size = 24 * scale
     const canvas = document.createElement('canvas')
@@ -164,7 +177,7 @@ const results = await page.evaluate((jobs) => {
       const path = new Path2D(part.d)
       if (part.filled) ctx.fill(path, part.evenodd ? 'evenodd' : 'nonzero')
       if (part.stroked) {
-        ctx.lineWidth = stroke
+        ctx.lineWidth = part.stroke
         ctx.stroke(path)
       }
     }
@@ -240,10 +253,13 @@ const results = await page.evaluate((jobs) => {
       }
       const d = shapeToPath(el)
       if (!d) continue
-      const subs = el.tagName === 'path' ? splitSubpaths(d) : [d]
+      // Filled compound contours are one shape: drawing their subpaths separately fills
+      // the counter back in (e.g. Sliders B+'s reverse-winding inner contour).
+      const subs = el.tagName === 'path' && !filled ? splitSubpaths(d) : [d]
       // v3 的 joint 是交接处补的圆角填充，本身就贴着两笔，不参与净空。
       const joint = el.hasAttribute('data-joint')
-      for (const sub of subs) parts.push({ d: sub, stroked, filled, joint, evenodd: style.fillRule === 'evenodd' })
+      const stroke = Number.parseFloat(style.strokeWidth)
+      for (const sub of subs) parts.push({ d: sub, stroked, stroke, filled, joint, evenodd: style.fillRule === 'evenodd' })
     }
     g.remove()
 
@@ -255,7 +271,7 @@ const results = await page.evaluate((jobs) => {
     const corners = []
     for (const [index, part] of parts.entries()) {
       const s = sample(part.d, 0.2)
-      const grow = part.stroked ? stroke / 2 : 0
+      const grow = part.stroked ? part.stroke / 2 : 0
       const box = { x0: s.bbox.x - grow, y0: s.bbox.y - grow, x1: s.bbox.x + s.bbox.w + grow, y1: s.bbox.y + s.bbox.h + grow }
       ink = ink ? { x0: Math.min(ink.x0, box.x0), y0: Math.min(ink.y0, box.y0), x1: Math.max(ink.x1, box.x1), y1: Math.max(ink.y1, box.y1) } : box
       if (part.stroked) length += s.length
@@ -271,7 +287,7 @@ const results = await page.evaluate((jobs) => {
         }
         corners.push({ w: b.w, h: b.h, radii })
       }
-      if (!part.joint) sampled.push({ index, pts: s.pts, half: part.stroked ? stroke / 2 : 0 })
+      if (!part.joint) sampled.push({ index, pts: s.pts, half: part.stroked ? part.stroke / 2 : 0 })
     }
 
     // 互不相连的墨块之间的最小净空（边到边）。墨迹重叠的两笔并成一块；经第三笔连起来的两笔
@@ -295,7 +311,7 @@ const results = await page.evaluate((jobs) => {
     let gap = Infinity, gapAt = null
     for (const { a, b, clear, at } of pairMin) if (findRoot(a) !== findRoot(b) && clear < gap) { gap = clear; gapAt = at }
 
-    const holeList = holes(parts, stroke)
+    const holeList = holes(parts)
     out.push({
       set: job.set,
       group: job.group,
@@ -323,5 +339,5 @@ const results = await page.evaluate((jobs) => {
 }, jobs)
 await browser.close()
 
-await writeFile(outPath, `${JSON.stringify({ solarSource: 'icons.json (@iconify-json/solar)', solarStroke: SOLAR_STROKE, eqbStroke: EQB_STROKE, map: solarMap, icons: results })}\n`)
+await writeFile(outPath, `${JSON.stringify({ solarSource: solarPath ? 'icons.json (@iconify-json/solar)' : null, solarStroke: SOLAR_STROKE, eqbStroke: EQB_STROKE, map: solarMap, icons: results })}\n`)
 console.log(`Measured ${results.length} icons → ${outPath}`)

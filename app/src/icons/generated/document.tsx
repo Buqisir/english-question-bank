@@ -1,11 +1,13 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
 import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 
-export function Document({ variant = 'line', ...props }: EqbIconProps) {
+export function Document({ size = 24, variant = 'line', ...props }: EqbIconProps) {
+  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
+  const isSmall = Number.isFinite(numericSize) && numericSize < 24
   return (
-    <EqbIcon {...props}>
+    <EqbIcon size={size} {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M3.36 10.08 C3.36 6.46 3.36 4.649 4.485 3.525 C5.609 2.4 7.42 2.4 11.04 2.4 H12.96 C16.58 2.4 18.391 2.4 19.515 3.525 C20.64 4.649 20.64 6.46 20.64 10.08 V13.92 C20.64 17.54 20.64 19.351 19.515 20.475 C18.391 21.6 16.58 21.6 12.96 21.6 H11.04 C7.42 21.6 5.609 21.6 4.485 20.475 C3.36 19.351 3.36 17.54 3.36 13.92 V10.08 Z" /><path d="M8.16 10.08 H15.84" /><path d="M8.16 13.92 H12.96" /></> : <><path d="M3.36 10.08 C3.36 6.46 3.36 4.649 4.485 3.525 C5.609 2.4 7.42 2.4 11.04 2.4 H12.96 C16.58 2.4 18.391 2.4 19.515 3.525 C20.64 4.649 20.64 6.46 20.64 10.08 V13.92 C20.64 17.54 20.64 19.351 19.515 20.475 C18.391 21.6 16.58 21.6 12.96 21.6 H11.04 C7.42 21.6 5.609 21.6 4.485 20.475 C3.36 19.351 3.36 17.54 3.36 13.92 V10.08 Z" /><path d="M8.16 10.08 H15.84" /><path d="M8.16 13.92 H12.96" /></>}
+      {variant === 'fill' ? <><path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z" /><path strokeWidth={isSmall ? 2.05 : 2.4} d="M8.16 9.5H15.84 M8.16 14.5H12.16" /></> : <><path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z" /><path strokeWidth={isSmall ? 2.05 : 2.4} d="M8.16 9.5H15.84 M8.16 14.5H12.16" /></>}
     </EqbIcon>
   )
 }

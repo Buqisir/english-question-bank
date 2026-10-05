@@ -1,11 +1,11 @@
+import { PlaybackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import {
   Check,
   ChevronLeft,
   ChevronRight,
   Eye,
   ListMusic,
-  Pause,
-  Play,
   RotateCcw,
   Volume,
 } from '../../icons'
@@ -400,7 +400,7 @@ export function VocabularyDictationPage({
   }
 
   return (
-    <div className="vocabulary-dictation-page">
+    <div className="vocabulary-dictation-page" {...iconMotionInput}>
       {audioElement}
       <header className="vocabulary-dictation-header">
         <a href="/" aria-label="返回英语题库首页">EQBank</a>
@@ -455,11 +455,9 @@ export function VocabularyDictationPage({
                   onClick={status === 'error' ? () => void runFrom(currentIndex, false) : togglePlayback}
                   aria-label={['countdown', 'playing', 'waiting'].includes(status) ? '暂停听写' : status === 'error' ? '重试当前单词音频' : status === 'ended' ? '从头再听一遍' : status === 'paused' ? '继续听写' : '开始听写'}
                 >
-                  {['countdown', 'playing', 'waiting'].includes(status)
-                    ? <Pause size={24} fill="currentColor" />
-                    : status === 'error' || status === 'ended'
-                      ? <RotateCcw size={22} />
-                      : <Play size={24} fill="currentColor" />}
+                  {status === 'error' || status === 'ended'
+                    ? <RotateCcw size={22} />
+                    : <PlaybackIcon size={24} variant="fill" playing={['countdown', 'playing', 'waiting'].includes(status)} />}
                 </button>
                 <button type="button" onClick={() => selectQuestion(Math.min(entries.length - 1, currentIndex + 1))} disabled={currentIndex === entries.length - 1} aria-label="下一题"><ChevronRight size={22} /></button>
               </div>

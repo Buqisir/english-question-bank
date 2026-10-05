@@ -37,12 +37,3 @@ token 的扩展用法。
 - **临时方案**：维持既有 13px 不动（quiet-chrome 刀只摘盒子、不动字号，避免
   全站布局位移）。本刀已顺手把 `.concierge-action` 的 12.5px 收进 12px，
   其余 13px 实例留待本缺口闭环。
-
-## 2026-09-30 纸张视图批注工具浮板缺「选择」「高亮笔」字形
-
-- **位置**：`app/src/features/paper-browse/personal-editing/PaperToolPalette.tsx`
-  的工具图标。
-- **想要的值**：EQB 图标套件里的「选择（指针）」与「高亮笔」字形，按
-  `design/icon-system-2026-09-15/principles.md` 画进 `icons-v3.mjs` 后重生成。
-- **临时方案**：「选择」用 `Target`，「高亮」用 `Palette`；两者旁边都有文字标签，
-  语义靠标签兜住。

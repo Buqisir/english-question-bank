@@ -74,31 +74,6 @@ export function countPdfPages(buffer) {
   return (text.match(/\/Type\s*\/Page\b/g) || []).length
 }
 
-/*
- * The one PDF-download header/stream shape for user files: the My Space
- * artifact route and the personal-export route both go through here, so the
- * download contract cannot drift between them. Disposition is the only knob —
- * my-space serves inline (embeddable), personal exports attach (a download).
- * The attachment path is the stricter one: no cross-origin sharing, no
- * caching of a private annotated edition, no content sniffing; the inline
- * My Space contract stays byte-identical.
- */
-export function sendUserSpacePdf(response, body, fileName, { disposition = 'inline' } = {}) {
-  const headers = {
-    'content-disposition': `${disposition}; filename="${encodeURIComponent(fileName)}"; filename*=UTF-8''${encodeURIComponent(fileName)}`,
-    'content-type': 'application/pdf',
-    'x-file-name': encodeURIComponent(fileName),
-  }
-  if (disposition === 'attachment') {
-    headers['cache-control'] = 'private, no-store'
-    headers['x-content-type-options'] = 'nosniff'
-  } else {
-    headers['access-control-allow-origin'] = '*'
-  }
-  response.writeHead(200, headers)
-  response.end(body)
-}
-
 function rowToFolder(row, artifactCount = 0) {
   return {
     id: row.id,

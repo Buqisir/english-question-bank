@@ -5,7 +5,7 @@ export function Grip({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <></> : <><circle cx="9.25" cy="6" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="6" r="1.6" fill="currentColor" stroke="none" /><circle cx="9.25" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="9.25" cy="18" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="18" r="1.6" fill="currentColor" stroke="none" /></>}
+      {variant === 'fill' ? <><circle cx="9.25" cy="6.5" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="6.5" r="1.6" fill="currentColor" stroke="none" /><circle cx="9.25" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="9.25" cy="17.5" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="17.5" r="1.6" fill="currentColor" stroke="none" /></> : <><circle cx="9.25" cy="6.5" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="6.5" r="1.6" fill="currentColor" stroke="none" /><circle cx="9.25" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="9.25" cy="17.5" r="1.6" fill="currentColor" stroke="none" /><circle cx="14.75" cy="17.5" r="1.6" fill="currentColor" stroke="none" /></>}
     </EqbIcon>
   )
 }

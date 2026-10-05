@@ -171,8 +171,6 @@ const ALLOWED_SAMPLE_ROUTES = [
   { method: 'GET', path: '/api/my-space' },
   { method: 'POST', path: '/api/draft-papers/current/items', body: { groupId: 'verify-nonexistent-group' } },
   { method: 'GET', path: '/api/auth/me' },
-  // Personal annotations (#489) belong to every signed-in member, not only the owner.
-  { method: 'GET', path: '/api/personal-paper-layers/verify-nonexistent-paper' },
 ]
 
 async function seedBootstrapOpenModeFixture() {

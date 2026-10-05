@@ -1,9 +1,11 @@
+import { CopyFeedbackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
+import { useClipboardCopy } from '../../hooks/useClipboardCopy'
 import {
   ArrowLeft,
   BookMarked,
   Check,
   BoardCheck,
-  Copy,
   Download,
   Eye,
   Grid2X2,
@@ -471,8 +473,10 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [vocabularySet, setVocabularySet] = useState<VocabularySetDto | null>(null)
   const [recentSets, setRecentSets] = useState<VocabularySetDto[]>([])
   const [shareId, setShareId] = useState<string | null>(null)
-  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle')
-  const [shareCopyStatus, setShareCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle')
+  const listClipboard = useClipboardCopy()
+  const shareClipboard = useClipboardCopy()
+  const copyStatus = listClipboard.copied ? 'copied' : listClipboard.error ? 'error' : 'idle'
+  const shareCopyStatus = shareClipboard.copied ? 'copied' : shareClipboard.error ? 'error' : 'idle'
   const [printAccent, setPrintAccent] = useState<VocabularyAccent>(printRequest?.accent ?? 'american')
   const [printLoadState, setPrintLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>(printRequest ? 'loading' : 'idle')
   const [printSections, setPrintSections] = useState<Array<{ startIndex: number; title: string }>>([])
@@ -493,8 +497,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [progressUpdateMessage, setProgressUpdateMessage] = useState('')
   const [progressUpdateError, setProgressUpdateError] = useState('')
   const [progressReplaceRequired, setProgressReplaceRequired] = useState(false)
-  const copyTimerRef = useRef<number | null>(null)
-  const shareCopyTimerRef = useRef<number | null>(null)
   const reviewAudioRef = useRef<HTMLAudioElement | null>(null)
   const downloadMenuRef = useRef<HTMLDivElement | null>(null)
   const progressCurrentRef = useRef<HTMLDivElement | null>(null)
@@ -782,8 +784,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   }, [activeProgramId, activeStudentId, applyRun, props.requestedSetId, students])
 
   useEffect(() => () => {
-    if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current)
-    if (shareCopyTimerRef.current !== null) window.clearTimeout(shareCopyTimerRef.current)
     reviewAudioRef.current?.pause()
     reviewAudioRef.current = null
   }, [])
@@ -988,7 +988,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       setShareId(null)
       setReviewState(createVocabularyReviewState(targetInput))
       setRunState('setup')
-      setCopyStatus('idle')
+      listClipboard.reset()
+      shareClipboard.reset()
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : '无法开始下一轮，请重试。')
     } finally {
@@ -1131,26 +1132,12 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
   async function copyVocabularySet() {
     if (!printEntries.length) return
-    try {
-      await navigator.clipboard.writeText(formatVocabularyList(printEntries))
-      setCopyStatus('copied')
-    } catch {
-      setCopyStatus('error')
-    }
-    if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current)
-    copyTimerRef.current = window.setTimeout(() => setCopyStatus('idle'), 1800)
+    await listClipboard.copy(formatVocabularyList(printEntries))
   }
 
   async function copyShareLink() {
     if (!shareId) return
-    try {
-      await navigator.clipboard.writeText(`${PUBLIC_LISTEN_ORIGIN}/vocabulary/listen/${shareId}`)
-      setShareCopyStatus('copied')
-    } catch {
-      setShareCopyStatus('error')
-    }
-    if (shareCopyTimerRef.current !== null) window.clearTimeout(shareCopyTimerRef.current)
-    shareCopyTimerRef.current = window.setTimeout(() => setShareCopyStatus('idle'), 1800)
+    await shareClipboard.copy(`${PUBLIC_LISTEN_ORIGIN}/vocabulary/listen/${shareId}`)
   }
 
   async function downloadVocabularySheet(
@@ -1424,7 +1411,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     : undefined
 
   return (
-    <div className="vocabulary-review-page" data-vocabulary-print-state={embeddedPrintState}>
+    <div className="vocabulary-review-page" data-vocabulary-print-state={embeddedPrintState} {...iconMotionInput}>
       <AppTopbar
         variant="sub"
         pageTitle="过生词"
@@ -1591,13 +1578,13 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <button className="ghost-button" type="button" onClick={() => void revokeShare()} disabled={requestBusy}>撤销公开分享</button>
               )}
               {shareId && (
-                <button className="ghost-button" type="button" onClick={() => void copyShareLink()}>
-                  <Copy size={16} />{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}
+                <button className="ghost-button" type="button" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()}>
+                  <CopyFeedbackIcon size={16} state={shareClipboard.state} />{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}
                 </button>
               )}
-              <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()}>
-                {copyStatus === 'copied' ? <Check size={16} /> : <Copy size={16} />}
-                {copyStatus === 'copied' ? '已复制' : '复制清单'}
+              <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'}>
+                <CopyFeedbackIcon size={16} state={listClipboard.state} />
+                {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
               </button>
               <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
                 <Grid2X2 size={16} />趣味练习
@@ -1869,14 +1856,14 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                     生成固定生词组
                   </button> : downloadControl}
                   {vocabularySet && !shareId && <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</button>}
-                  {shareId && <button className="ghost-button" type="button" onClick={() => void copyShareLink()}><Copy size={16} />{shareCopyStatus === 'copied' ? '链接已复制' : '复制公开链接'}</button>}
+                  {shareId && <button className="ghost-button" type="button" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()}><CopyFeedbackIcon size={16} state={shareClipboard.state} />{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}</button>}
                   {vocabularySet && (
                     <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
                       <Grid2X2 size={16} />趣味练习
                     </button>
                   )}
-                  <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length}>
-                    {copyStatus === 'copied' ? <Check size={16} /> : <Copy size={16} />}
+                  <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'}>
+                    <CopyFeedbackIcon size={16} state={listClipboard.state} />
                     {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
                   </button>
                   <button className="ghost-button" type="button" onClick={() => void startAnotherReview()} disabled={requestBusy}>
@@ -1920,9 +1907,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             )}
 
             <div className="vocabulary-collection-actions">
-              <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length}>
-                {copyStatus === 'copied' ? <Check size={15} /> : <Copy size={15} />}
-                {copyStatus === 'copied' ? '已复制' : '复制'}
+              <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'}>
+                <CopyFeedbackIcon size={15} state={listClipboard.state} />
+                {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
               </button>
               <button className="ghost-button" type="button" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet || pdfDownloadBusy}>
                 <Download size={15} />

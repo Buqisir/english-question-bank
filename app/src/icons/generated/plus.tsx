@@ -5,7 +5,7 @@ export function Plus({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M12 5v14M5 12h14" /></> : <><path d="M12 5v14M5 12h14" /></>}
+      {variant === 'fill' ? <><path d="M12 5.5v13M5.5 12h13" /></> : <><path d="M12 5.5v13M5.5 12h13" /></>}
     </EqbIcon>
   )
 }

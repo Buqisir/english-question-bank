@@ -5,7 +5,7 @@ export function AlignRight({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M4 6h16M10 12h10M7 18h13" /></> : <><path d="M4 6h16M10 12h10M7 18h13" /></>}
+      {variant === 'fill' ? <><path d="M4 6h16M11.2 12h8.8M7 18h13" /></> : <><path d="M4 6h16M11.2 12h8.8M7 18h13" /></>}
     </EqbIcon>
   )
 }

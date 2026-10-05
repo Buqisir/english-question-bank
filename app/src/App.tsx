@@ -1,5 +1,5 @@
 import {
-  BookOpen,
+  QuestionGroup,
   BoardList,
 } from './icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -1059,7 +1059,6 @@ function App() {
     return (
       <PaperBrowsePage
         paperId={paperBrowseRoute.paperId}
-        personalAccountKey={currentUser?.id ?? null}
         reviewRevision={paperBrowseRoute.reviewRevision}
         focusGroupId={paperBrowseRoute.focusGroupId}
         questionId={paperBrowseRoute.questionId}
@@ -1112,7 +1111,7 @@ function App() {
             </div>
             <div className="library-header-actions">
               <div className="filter-bar-summary">
-                <BookOpen size={17} />
+                <QuestionGroup size={17} />
                 <strong>{questionGroups.length}</strong>
                 <span>个题组</span>
               </div>

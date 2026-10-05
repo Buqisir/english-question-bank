@@ -5,7 +5,7 @@ export function PageBreak({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M3.5 12h17" /><path d="m8.5 6.5 3.5-3 3.5 3M8.5 17.5l3.5 3 3.5-3" /></> : <><path d="M3.5 12h17" /><path d="m8.5 6.5 3.5-3 3.5 3M8.5 17.5l3.5 3 3.5-3" /></>}
+      {variant === 'fill' ? <><path d="M4 3.5V5Q4 7.5 6.5 7.5H17.5Q20 7.5 20 5V3.5" /><path d="M4 21V15Q4 12.5 6.5 12.5H17.5Q20 12.5 20 15V21" /></> : <><path d="M4 3.5V5Q4 7.5 6.5 7.5H17.5Q20 7.5 20 5V3.5" /><path d="M4 21V15Q4 12.5 6.5 12.5H17.5Q20 12.5 20 15V21" /></>}
     </EqbIcon>
   )
 }

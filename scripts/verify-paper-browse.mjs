@@ -1443,9 +1443,7 @@ assert(
 )
 assert(
   '.paper-browse-shell carries ref={shellRef} and the 讲评栏 <aside> carries ref={rightPanelRef}',
-  // The shell className template grew a `--paper-view` modifier in #489; the
-  // window only needs to reach the ref on the same element.
-  /className=\{`paper-browse-shell[\s\S]{0,260}`\}\s*\n\s*ref=\{shellRef\}/.test(pageSrc) &&
+  /className=\{`paper-browse-shell[\s\S]{0,120}`\}\s*\n\s*ref=\{shellRef\}/.test(pageSrc) &&
     /<aside className="paper-browse-lecture-panel" aria-label="讲评" ref=\{rightPanelRef\}>/.test(pageSrc),
   'shellRef or rightPanelRef is not attached to the expected DOM node',
 )
@@ -1660,11 +1658,8 @@ assert(
 assert(
   // similar-entrypoints (E3) extends this effect's deps with
   // similarView/similarSeed so it can also sync `similar=1` in/out of the URL.
-  // #489 adds paperViewActive to the same sync (paperView=paper mirrors the
-  // paper view into the URL); trailing deps after the four pinned ones are
-  // intentional extensions, not drift.
   'PaperBrowsePage replaceState-syncs lectureOpen/lectureSelection/similarView/similarSeed into the URL (lecture=1 + focusGroupId/questionId when selected, similar=1 when the CTA result is open; all cleared when 讲评关)',
-  /\}, \[lectureOpen, lectureSelection, similarView, similarSeed(?:, [a-zA-Z]+)*\]\)/.test(pageSrc) &&
+  /\}, \[lectureOpen, lectureSelection, similarView, similarSeed\]\)/.test(pageSrc) &&
     /window\.history\.replaceState\(window\.history\.state,\s*['"]['"],\s*nextUrl\)/.test(pageSrc) &&
     /urlSyncMountedRef/.test(pageSrc),
   'missing the URL-sync effect, or it does not skip the first mount commit',

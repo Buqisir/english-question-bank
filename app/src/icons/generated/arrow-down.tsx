@@ -5,7 +5,7 @@ export function ArrowDown({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M12 4v16" /><path d="m6 14 6 6 6-6" /></> : <><path d="M12 4v16" /><path d="m6 14 6 6 6-6" /></>}
+      {variant === 'fill' ? <><path d="M12 4v16" /><path d="M6.5 14.5 12 20 17.5 14.5" /></> : <><path d="M12 4v16" /><path d="M6.5 14.5 12 20 17.5 14.5" /></>}
     </EqbIcon>
   )
 }
