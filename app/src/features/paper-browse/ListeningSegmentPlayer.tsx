@@ -1,5 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
-import { Headphones, Pause, Play } from '../../icons'
+import { Headphones } from '../../icons'
+import { PlaybackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import { EqbIcon } from '../../icons/EqbIcon'
 import { loadWaveformEnvelope, waveformBars, type WaveformEnvelope } from './listeningWaveform'
 
@@ -237,6 +239,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   }, { items: [], labelEnd: -Infinity }).items
 
   return <span ref={rootRef} className="listening-player" data-size={size}
+    {...iconMotionInput}
     data-playing={playing || undefined} data-open={open || undefined}
     onClick={(event) => event.stopPropagation()}>
     <audio ref={audioRef} src={src} preload="none"
@@ -263,7 +266,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       data-placement={placement} style={{ '--listening-card-shift': `${shift}px` } as CSSProperties}>
       <button type="button" className="listening-player-play" aria-label={playing ? '暂停' : '播放'}
         onClick={togglePlayback}>
-        {playing ? <Pause size={14} variant="fill" aria-hidden="true" /> : <Play size={14} variant="fill" aria-hidden="true" />}
+        <PlaybackIcon playing={playing} size={14} variant="fill" />
       </button>
       <span className="listening-player-track" style={{ width: waveWidth }}>
       {markItems.length > 0 && <span className="listening-player-marks">

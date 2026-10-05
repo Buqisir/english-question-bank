@@ -5,7 +5,7 @@ export function BellOff({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M6.2 15.6V9.2a5.8 5.8 0 0 1 11.6 0v6.4" /><path d="M4.2 15.6h15.6" /><path d="M5.2 5.4 18.8 18.6" /></> : <><path d="M6.2 15.6V9.2a5.8 5.8 0 0 1 11.6 0v6.4" /><path d="M4.2 15.6h15.6" /><circle cx="12" cy="20.4" r="1.1" fill="currentColor" stroke="none" /><path d="M5.2 5.4 18.8 18.6" /></>}
+      {variant === 'fill' ? <><path d="M6.2 15.6V9.2a5.8 5.8 0 0 1 11.6 0v6.4" /><path d="M4.2 15.6h15.6" /><circle cx="12" cy="19.9" r="1.1" fill="currentColor" stroke="none" /><path d="M4.769452 4.982115 19.230548 19.017885" /></> : <><path d="M6.2 15.6V9.2a5.8 5.8 0 0 1 11.6 0v6.4" /><path d="M4.2 15.6h15.6" /><circle cx="12" cy="19.9" r="1.1" fill="currentColor" stroke="none" /><path d="M4.769452 4.982115 19.230548 19.017885" /></>}
     </EqbIcon>
   )
 }

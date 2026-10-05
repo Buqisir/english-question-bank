@@ -1,0 +1,130 @@
+.eqb-motion {
+  display: inline-grid;
+  position: relative;
+  flex: none;
+  vertical-align: middle;
+}
+.eqb-motion > span {
+  grid-area: 1 / 1;
+  display: inline-flex;
+}
+.eqb-motion svg {
+  display: block;
+  overflow: visible;
+}
+
+.eqb-copy-paper {
+  opacity: 1;
+  transition: opacity var(--motion-micro) var(--ease-out);
+}
+.eqb-copy-paper svg > path:first-of-type {
+  transition: opacity var(--motion-fast) var(--ease-out);
+}
+.eqb-copy-paper svg > path:last-of-type {
+  transform: translate(0, 0);
+  transition: transform var(--motion-base) var(--ease-out);
+}
+.eqb-motion-copy[data-state='pending'] .eqb-copy-paper svg > path:first-of-type {
+  opacity: .55;
+}
+.eqb-motion-copy[data-state='pending'] .eqb-copy-paper svg > path:last-of-type {
+  transform: translate(1.2px, 1.2px);
+}
+.eqb-motion-copy[data-state='done'] .eqb-copy-paper {
+  opacity: 0;
+}
+.eqb-motion-copy[data-state='done'] .eqb-copy-paper svg > path:last-of-type {
+  transform: translate(2.1px, 2.1px);
+}
+.eqb-copy-check {
+  opacity: 0;
+  clip-path: inset(-10% 110% -10% -10%);
+  transition: opacity var(--motion-micro) var(--ease-out), clip-path var(--motion-slow) var(--ease-in-out);
+}
+.eqb-motion-copy[data-state='done'] .eqb-copy-check {
+  opacity: 1;
+  clip-path: inset(-10% -10% -10% -10%);
+  transition-delay: var(--motion-micro), 0ms;
+}
+
+.eqb-play-half {
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform var(--motion-base) var(--ease-out), opacity var(--motion-fast) var(--ease-out);
+  transition-delay: 0ms, var(--motion-micro);
+}
+.eqb-play-left {
+  clip-path: inset(-10% 49.8% -10% -10%);
+}
+.eqb-play-right {
+  clip-path: inset(-10% -10% -10% 49.8%);
+}
+.eqb-motion-playback[data-playing='true'] .eqb-play-half {
+  opacity: 0;
+  transition-duration: var(--motion-base), var(--motion-micro);
+  transition-delay: 0ms;
+}
+.eqb-motion-playback[data-playing='true'] .eqb-play-left {
+  transform: translateX(-6%);
+}
+.eqb-motion-playback[data-playing='true'] .eqb-play-right {
+  transform: translateX(6%);
+}
+.eqb-pause-bars path {
+  opacity: 0;
+  transform-box: view-box;
+  transition: transform var(--motion-base) var(--ease-out), opacity var(--motion-micro) var(--ease-out);
+}
+.eqb-pause-bars path:first-of-type {
+  transform: translateX(2.1px);
+}
+.eqb-pause-bars path:last-of-type {
+  transform: translateX(-2.1px);
+}
+.eqb-motion-playback[data-playing='true'] .eqb-pause-bars path {
+  opacity: 1;
+  transform: translateX(0);
+  transition-duration: var(--motion-base), var(--motion-fast);
+  transition-delay: calc(var(--motion-micro) / 2);
+}
+
+.eqb-motion-disclosure {
+  transform: rotateX(0deg);
+  transition: transform var(--motion-base) var(--ease-in-out);
+}
+.eqb-motion-disclosure[data-expanded='true'] {
+  transform: rotateX(180deg);
+}
+.eqb-motion-pin svg {
+  transform-box: view-box;
+  transform-origin: 50% 87.5%;
+  transform: scaleY(1);
+  transition: transform var(--motion-base) var(--ease-out);
+}
+button[data-icon-motion='pointer']:active .eqb-motion-pin svg {
+  transform: scaleY(.955);
+  transition-duration: var(--motion-micro);
+}
+.eqb-motion-pin svg > g {
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--ease-out);
+}
+.eqb-motion-pin[data-pinned='true'] svg > g {
+  opacity: 1;
+  transition-delay: var(--motion-micro);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Accessibility overrides must also beat the more specific active states. */
+  .eqb-motion, .eqb-motion * {
+    transition-property: opacity !important;
+    transition-duration: var(--motion-micro) !important;
+    transition-delay: 0ms !important;
+  }
+  .eqb-copy-paper svg > path, .eqb-motion-playback .eqb-play-half, .eqb-motion-playback .eqb-pause-bars path, .eqb-motion-pin svg {
+    transform: none !important;
+  }
+}
+[data-icon-motion='instant'] .eqb-motion, [data-icon-motion='instant'] .eqb-motion * {
+  transition: none !important;
+}

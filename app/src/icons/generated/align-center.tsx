@@ -5,7 +5,7 @@ export function AlignCenter({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M4 6h16M7 12h10M5.5 18h13" /></> : <><path d="M4 6h16M7 12h10M5.5 18h13" /></>}
+      {variant === 'fill' ? <><path d="M4 6h16M7.6 12h8.8M5.5 18h13" /></> : <><path d="M4 6h16M7.6 12h8.8M5.5 18h13" /></>}
     </EqbIcon>
   )
 }

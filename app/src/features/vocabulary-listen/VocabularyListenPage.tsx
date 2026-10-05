@@ -1,9 +1,9 @@
+import { PlaybackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import {
   ChevronLeft,
   ChevronRight,
   ListMusic,
-  Pause,
-  Play,
   RotateCcw,
   Volume,
 } from '../../icons'
@@ -326,7 +326,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
   }
 
   return (
-    <div className="vocabulary-listen-page">
+    <div className="vocabulary-listen-page" {...iconMotionInput}>
       {audioElement}
       <header className="vocabulary-listen-header">
         <a href="/" aria-label="返回英语题库首页">EQBank</a>
@@ -374,7 +374,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
               <ChevronLeft size={22} />
             </button>
             <button className="vocabulary-listen-primary-control" type="button" onClick={status === 'error' ? retryAudio : togglePlayback} aria-label={status === 'playing' ? '暂停播放' : status === 'ended' ? '从头播放' : status === 'error' ? '重试当前单词音频' : status === 'paused' ? '继续播放' : '开始播放'}>
-              {status === 'playing' ? <Pause size={24} fill="currentColor" /> : status === 'ended' || status === 'error' ? <RotateCcw size={22} /> : <Play size={24} fill="currentColor" />}
+              {status === 'ended' || status === 'error' ? <RotateCcw size={22} /> : <PlaybackIcon size={24} variant="fill" playing={status === 'playing'} />}
             </button>
             <button type="button" onClick={() => selectWord(Math.min(entries.length - 1, currentIndex + 1))} disabled={currentIndex === entries.length - 1} aria-label="下一个单词">
               <ChevronRight size={22} />
@@ -433,11 +433,9 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
           tabIndex={showStickyPlayer ? 0 : -1}
           aria-label={status === 'playing' ? '暂停播放' : status === 'ended' ? '从头播放' : status === 'error' ? '重试当前单词音频' : '继续播放'}
         >
-          {status === 'playing'
-            ? <Pause size={20} fill="currentColor" />
-            : status === 'ended' || status === 'error'
-              ? <RotateCcw size={19} />
-              : <Play size={20} fill="currentColor" />}
+          {status === 'ended' || status === 'error'
+            ? <RotateCcw size={19} />
+            : <PlaybackIcon size={20} variant="fill" playing={status === 'playing'} />}
         </button>
         <button type="button" onClick={() => selectWord(Math.min(entries.length - 1, currentIndex + 1))} disabled={currentIndex === entries.length - 1} tabIndex={showStickyPlayer ? 0 : -1} aria-label="下一个单词"><ChevronRight size={20} /></button>
       </div>

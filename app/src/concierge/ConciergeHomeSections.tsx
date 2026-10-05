@@ -17,39 +17,13 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
 import { groupTypeLabel, type DraftPaperSummary, type QuestionGroupCard } from '../domain/questionBank.ts'
 import { fetchDraftPapers } from '../services/draftPapers.ts'
-import {
-  BoardList,
-  ChevronRight,
-  ListMusic,
-  Paper,
-  TypeApplication,
-  TypeCloze,
-  TypeContinuation,
-  TypeGrammar,
-  TypeReading,
-  TypeSeven,
-} from '../icons'
+import { BoardList, ChevronRight } from '../icons'
 import { pickDailyPassage } from './dailyPassage.ts'
 import { paperHeadline } from './paperHeadline.ts'
 import { buildTopicText, compactPassageTitle, compactSummary } from './passageText.ts'
 import { relativeTimeLabel, type RecentlyOpenedEntry } from './recentlyOpened.ts'
 
 const RECENT_PASSAGE_LIMIT = 3
-
-type PassageIcon = typeof TypeReading
-
-function passageIcon(group: QuestionGroupCard): PassageIcon {
-  switch (group.groupType) {
-    case 'reading': return TypeReading
-    case 'cloze': return TypeCloze
-    case 'seven_choices': return TypeSeven
-    case 'grammar_cloze': return TypeGrammar
-    case 'continuation': return TypeContinuation
-    case 'writing': return /读后续写/.test(group.section) ? TypeContinuation : TypeApplication
-    case 'listening': return ListMusic
-    default: return Paper
-  }
-}
 
 /** "阅读 C" — the same passage label the group index uses, with a space before the letter so it reads as a label. */
 function passageLabel(group: QuestionGroupCard): string {
@@ -75,7 +49,7 @@ function HomeSection({ label, children }: { label: string; children: ReactNode }
 }
 
 type HomeRowProps = {
-  icon: PassageIcon
+  icon?: typeof BoardList
   title: string
   meta?: string
   detail?: string
@@ -89,7 +63,7 @@ function HomeRow({ icon: Icon, title, meta, detail, aside, action, onOpen, ariaL
   return (
     <li>
       <button type="button" className="home-row" onClick={onOpen} aria-label={ariaLabel}>
-        <span className="home-row-icon" aria-hidden="true"><Icon size={16} /></span>
+        {Icon && <span className="home-row-icon" aria-hidden="true"><Icon size={16} /></span>}
         <span className="home-row-text">
           <span className="home-row-title-line">
             <span className="home-row-title">{title}</span>
@@ -172,7 +146,6 @@ export function HomeContinueSection({
         {recentPassages.map(({ entry, group }) => (
           <HomeRow
             key={group.id}
-            icon={passageIcon(group)}
             title={passageLabel(group)}
             meta={paperOrigin(group)}
             detail={buildTopicText(group) ?? undefined}
@@ -198,7 +171,6 @@ export function HomeDailyPassage({ questionGroups, onOpenDetail }: HomeDailyPass
     <HomeSection label="今天翻到">
       <FluidHoverList className="home-row-list" itemSelector=".home-row">
         <HomeRow
-          icon={passageIcon(group)}
           title={passageLabel(group)}
           meta={paperOrigin(group)}
           detail={compactSummary(group)}

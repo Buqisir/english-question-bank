@@ -10,7 +10,6 @@ import {
   Link,
   ListChecks,
   PauseCircle,
-  Pin,
   Printer,
   QrCode,
   Search,
@@ -19,6 +18,8 @@ import {
   Sparkles,
   X,
 } from '../../icons'
+import { PinFeedbackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
@@ -649,6 +650,7 @@ export function VocabularyDictationWorkbench({
 
   async function toggleFlag(state: { id: string; pinned: boolean; paused: boolean }, kind: 'pinned' | 'paused') {
     setBusy(true)
+    setError('')
     try {
       await updateStudentVocabularyWordFlag(activeStudentId, state.id, {
         pinned: kind === 'pinned' ? !state.pinned : state.pinned,
@@ -1261,7 +1263,7 @@ export function VocabularyDictationWorkbench({
                         <small>忘记 {word.totalWrong} 次 · 最近 {displayDate(word.lastForgottenDate)}</small>
                       </div>
                       <div><strong>{word.status === 'repeated' ? '常错' : '待复习'}</strong><small>还需 {Math.max(0, 2 - word.currentCorrectDateCount)} 天认词正确{word.paused ? ' · 已暂停' : ''}</small></div>
-                      <div><button type="button" className={word.pinned ? 'is-active' : ''} aria-pressed={word.pinned} onClick={() => void toggleFlag(word, 'pinned')}><Pin size={14} />重点</button><button type="button" className={word.paused ? 'is-active' : ''} aria-pressed={word.paused} onClick={() => void toggleFlag(word, 'paused')}><PauseCircle size={14} />暂停</button></div>
+                      <div><button type="button" {...iconMotionInput} disabled={busy} className={word.pinned ? 'is-active' : ''} aria-pressed={word.pinned} onClick={() => void toggleFlag(word, 'pinned')}><PinFeedbackIcon size={14} pinned={word.pinned} />重点</button><button type="button" disabled={busy} className={word.paused ? 'is-active' : ''} aria-pressed={word.paused} onClick={() => void toggleFlag(word, 'paused')}><PauseCircle size={14} />暂停</button></div>
                     </div>
                 ))}
               </div>

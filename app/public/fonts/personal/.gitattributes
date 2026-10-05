@@ -1,4 +1,0 @@
-# Preserve upstream legal documents and metadata byte-for-byte.
-xiaolai/License.txt -text -whitespace
-fuzzy-bubbles/OFL.txt -text -whitespace
-fuzzy-bubbles/METADATA.pb -text -whitespace

@@ -5,7 +5,7 @@ export function Move({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M18.72 14.88 L21.6 12 L18.72 9.12 M21.6 12 H14.88 M5.28 9.12 L2.4 12 L5.28 14.88 M2.4 12 H9.12" /><path d="M9.12 5.28 L12 2.4 L14.88 5.28 M12 2.4 V9.12 M14.88 18.72 L12 21.6 L9.12 18.72 M12 21.6 V14.88" /></> : <><path d="M18.72 14.88 L21.6 12 L18.72 9.12 M21.6 12 H14.88 M5.28 9.12 L2.4 12 L5.28 14.88 M2.4 12 H9.12" /><path d="M9.12 5.28 L12 2.4 L14.88 5.28 M12 2.4 V9.12 M14.88 18.72 L12 21.6 L9.12 18.72 M12 21.6 V14.88" /></>}
+      {variant === 'fill' ? <><g transform="translate(-.4 0)"><path d="M19.2 14.4 L21.6 12 L19.2 9.6 M21.6 12 H15.5" /></g><g transform="translate(.4 0)"><path d="M4.8 9.6 L2.4 12 L4.8 14.4 M2.4 12 H8.5" /></g><g transform="translate(0 .4)"><path d="M9.6 4.8 L12 2.4 L14.4 4.8 M12 2.4 V8.5" /></g><g transform="translate(0 -.4)"><path d="M14.4 19.2 L12 21.6 L9.6 19.2 M12 21.6 V15.5" /></g></> : <><g transform="translate(-.4 0)"><path d="M19.2 14.4 L21.6 12 L19.2 9.6 M21.6 12 H15.5" /></g><g transform="translate(.4 0)"><path d="M4.8 9.6 L2.4 12 L4.8 14.4 M2.4 12 H8.5" /></g><g transform="translate(0 .4)"><path d="M9.6 4.8 L12 2.4 L14.4 4.8 M12 2.4 V8.5" /></g><g transform="translate(0 -.4)"><path d="M14.4 19.2 L12 21.6 L9.6 19.2 M12 21.6 V15.5" /></g></>}
     </EqbIcon>
   )
 }

@@ -13,10 +13,6 @@
 // HARD CONTRACT (spike-gate-dp1.md DP-1 evidence, all four acceptance
 // checks passed): pagination and the PDF are produced from ONE Chromium
 // page object, in this exact order:
-//   0. prepare(page) — optional caller hook (options.prepare) run before
-//      step 1's setContent, so request routes (the personal-export font
-//      delivery) exist before the page's first fetch. May only prepare the
-//      page (routes, bindings); it never navigates or changes the document.
 //   1. page.setContent(printHtml) — load the caller's HTML verbatim
 //   2. set window.PagedConfig BEFORE injecting the paged.js polyfill — the
 //      polyfill reads window.PagedConfig SYNCHRONOUSLY at script-eval time
@@ -25,16 +21,6 @@
 //   3. inject the paged.js polyfill (page.addScriptTag) — this starts
 //      pagination automatically once the document is interactive
 //   4. wait for pagination to finish (the PagedConfig.after callback)
-//   5.5 compose(page) — optional caller callback (options.compose): runs
-//      after step 4's pagination and every layout check (and after the
-//      inspect callback), BEFORE the DOM is serialized for step 5 and
-//      printed in step 6. This is the sole entry point for
-//      private-annotation composition (the personal PDF export draws its
-//      marks, note cards and appendix sheet here); a compose callback may
-//      add content to the paginated DOM but must not change the base
-//      pagination of the underlying print HTML. Omitted (default) = the
-//      render is byte-for-byte what this module produced before the
-//      callback existed.
 //   5. serialize the paginated DOM from THIS SAME page (page.content()),
 //      then strip every <script> tag from the returned HTML string —
 //      page.content() re-serializes the injected ~900KB paged.js polyfill
@@ -116,18 +102,13 @@ function stripScriptTags(html) {
 // the paged.js polyfill script stripped) plus a same-source PDF and page
 // count. See module header for the locked render order this function
 // implements.
-export async function renderPaginatedPaper(printHtml, { inspect = null, compose = null, prepare = null } = {}) {
+export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
   if (typeof printHtml !== 'string' || !printHtml.trim()) {
     throw new Error('renderPaginatedPaper: printHtml must be a non-empty string')
   }
   const polyfillPath = resolvePagedjsPolyfillPath()
 
   return withChromiumPage(async (page) => {
-    // Optional caller hook, run before setContent so request routes (e.g. the
-    // personal-export font delivery) exist before the page's first fetch.
-    // Like compose, it may not change the print HTML's pagination; it runs
-    // before the document exists, so it can only prepare the page itself.
-    if (typeof prepare === 'function') await prepare(page)
     await page.setContent(printHtml, { waitUntil: 'load' })
 
     // Planned exports move a group with its immediately preceding chrome.
@@ -255,11 +236,6 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, compose 
     const inspection = typeof inspect === 'function'
       ? await inspect(page)
       : null
-
-    // Step 5.5: the caller's composition hook — see the module header
-    // contract. Runs before serialization so whatever it draws appears in
-    // both the returned paginated HTML and the step-6 PDF.
-    if (typeof compose === 'function') await compose(page)
 
     // Step 5: serialize from THIS SAME page, then strip every <script> tag —
     // see module header for why an un-stripped replay double-paginates.

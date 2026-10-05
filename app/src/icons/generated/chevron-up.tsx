@@ -5,7 +5,7 @@ export function ChevronUp({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="m5.5 15 6.5-6.5L18.5 15" /></> : <><path d="m5.5 15 6.5-6.5L18.5 15" /></>}
+      {variant === 'fill' ? <><path d="M5.5 14.75 12 8.75 18.5 14.75" /></> : <><path d="M5.5 14.75 12 8.75 18.5 14.75" /></>}
     </EqbIcon>
   )
 }

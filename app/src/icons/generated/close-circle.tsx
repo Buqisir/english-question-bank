@@ -5,7 +5,7 @@ export function CloseCircle({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><circle cx="12" cy="12" r="9.6" /><path d="M14.4 9.6 L9.6 14.4 M9.6 9.6 L14.4 14.4" /></> : <><circle cx="12" cy="12" r="9.6" /><path d="M14.4 9.6 L9.6 14.4 M9.6 9.6 L14.4 14.4" /></>}
+      {variant === 'fill' ? <><circle cx="12" cy="12" r="9.25" /><path d="M14.8 9.2 L9.2 14.8 M9.2 9.2 L14.8 14.8" /></> : <><circle cx="12" cy="12" r="9.25" /><path d="M14.8 9.2 L9.2 14.8 M9.2 9.2 L14.8 14.8" /></>}
     </EqbIcon>
   )
 }
