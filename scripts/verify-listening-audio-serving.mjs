@@ -19,6 +19,9 @@ for (const file of ['source/listening-audio.mp3', 'materialization/listening-aud
   mkdirSync(path.dirname(path.join(version, file)), { recursive: true })
   writeFileSync(path.join(version, file), 'private')
 }
+mkdirSync(path.join(version, 'products'), { recursive: true })
+writeFileSync(path.join(version, 'products/answerOnly.pdf'), '%PDF-1.4 private product')
+writeFileSync(path.join(version, 'products/manifest-v1.json'), '{}')
 const server = createServer((request, response) => {
   sendPaperAssetStatic(request, response, request.url, assets)
 })
@@ -58,6 +61,14 @@ try {
   assert.equal((await fetch(`${origin}/paper-assets/%2e%2e%2fprivate.json`)).status, 400)
   assert.equal((await fetch(`${origin}/paper-assets/%ZZ`)).status, 400)
   assert.equal((await fetch(`${origin}/paper-assets/paper-fixture/latest/paper-asset.json`)).status, 200)
+  for (const versionPath of ['latest', 'versions/v1']) {
+    for (const file of ['products/answerOnly.pdf', 'products/manifest-v1.json', '%70roducts/answerOnly.pdf']) {
+      for (const method of ['GET', 'HEAD']) {
+        assert.equal((await fetch(`${origin}/paper-assets/paper-fixture/${versionPath}/${file}`, { method })).status, 404,
+          'products must use exact publication storage, not static files or latest fallback')
+      }
+    }
+  }
   console.log('verify-listening-audio-serving: PASS (200/206/416/HEAD, private artifacts, traversal, symlink, historical JSON)')
 } finally {
   await new Promise((resolve) => server.close(resolve))

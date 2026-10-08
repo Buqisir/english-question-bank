@@ -2843,15 +2843,22 @@ try {
   // A new reviewed source, not a late mutable attachment to legacy v1.
   Object.assign(referenceRollback, makeReviewRoot(path.join(referenceRollback.tempRoot, 'v2'),
     paperId, 'new source for the second reviewed version'))
+  const configPath = path.join(referenceRollback.reviewRoot, 'config.json')
+  const config = JSON.parse(readFileSync(configPath, 'utf8'))
+  writeJson(configPath, { ...config, provenance: { ...config.provenance, year: 2026, month: 11 } })
   const approval = attachSourceReferences(referenceRollback)
   const current = publish(referenceRollback, approval)
   assert.equal(current.publish.assetVersion, 2)
+  const months = () => referenceRollback.db.prepare('SELECT DISTINCT month FROM sources').all().map(row => row.month)
+  assert.deepEqual(months(), [11])
   const exact = readFileSync(path.join(current.publish.versionDir, SOURCE_REFERENCES_FILE))
   rollbackPaperImportPublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir, paperId, versionName: 'v1' })
   const latest = path.join(referenceRollback.paperAssetsDir, paperId, 'latest', SOURCE_REFERENCES_FILE)
   assert(!existsSync(latest), 'rolling back to a legacy version removes the later answer sidecar')
+  assert.deepEqual(months(), [null], 'old unknown month must replace the newer month during rollback')
   rollbackPaperImportPublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir, paperId, versionName: 'v2' })
   assert(readFileSync(latest).equals(exact))
+  assert.deepEqual(months(), [11])
 } finally { close(referenceRollback) }
 
 const postCommit = makeContext('post-commit', { listening: true })

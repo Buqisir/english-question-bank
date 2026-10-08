@@ -1675,6 +1675,9 @@ export function buildNck1ReviewProjection(rootDir, {
     || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))) })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
     ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir)) }) : null
+  if (frozenProducts && !sourceReferences) {
+    fail('四款 PDF 必须保留完整的源参考答案捕获；不能只提交答案 PDF')
+  }
   if (frozenProducts && (frozenProducts.manifest.paperId !== loaded.materialization.paperId
     || frozenProducts.manifest.paperName !== loaded.config.provenance.paperName
     || digestJson(frozenProducts.manifest.examDate) !== digestJson(examDate))) fail('Frozen PDF identity differs from Review')

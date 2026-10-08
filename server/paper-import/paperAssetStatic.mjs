@@ -14,6 +14,9 @@ export function sendPaperAssetStatic(request, response, urlPath, paperAssetsDir)
   if (!relativePath || relativePath.includes('..') || relativePath.includes('\\') || path.isAbsolute(relativePath)) {
     return fail(400, 'Invalid paper asset path')
   }
+  // Frozen products are approval-bound private blobs, never mutable static
+  // files or the highest directory left behind by a failed publication.
+  if (/(?:^|\/)products(?:\/|$)/.test(relativePath)) return fail(404, 'Paper asset file not found')
   const audio = /^[a-z0-9][a-z0-9._-]*\/versions\/v[1-9]\d*\/listening\/playback\.mp3$/.test(relativePath)
   if (!audio && (/\.(?:mp3|wav|m4a)$/i.test(relativePath) || /(?:^|\/)(?:listening-audio|asr-v1|check-v1)/.test(relativePath))) {
     return fail(404, 'Paper asset file not found')

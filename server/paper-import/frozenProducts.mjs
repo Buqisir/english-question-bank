@@ -1,7 +1,9 @@
 import { existsSync, readFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
+import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { configuredBlobStore } from './blobStore.mjs'
 
 export const PRODUCT_MANIFEST = 'products/manifest-v1.json'
@@ -58,6 +60,20 @@ export function readFrozenProducts(rootDir, { inputDigest, required = false, rea
     const buffer = read(expected.path)
     if (!buffer || buffer.length !== file.byteLength || sha256(buffer) !== file.sha256
       || buffer.subarray(0, 5).toString() !== '%PDF-') reject(`文件缺失或已改变：${expected.path}`)
+    let actualPages
+    try {
+      const info = execFileSync('pdfinfo', ['-'], { input: buffer, encoding: 'utf8',
+        timeout: 10_000, maxBuffer: 64 * 1024, stdio: ['pipe', 'pipe', 'pipe'] })
+      actualPages = Number(/^Pages:\s+(\d+)\s*$/m.exec(info)?.[1])
+    } catch { reject(`PDF 无法解析：${expected.path}`) }
+    if (actualPages !== file.pageCount) reject(`PDF 实际页数与清单不同：${expected.path}`)
+    const edition = path.basename(expected.path, '.pdf')
+    if (edition !== 'answerOnly') {
+      const policy = studentProductPolicy(edition, 2)
+      if (policy.atMost ? actualPages > policy.targetPages : actualPages !== policy.targetPages) {
+        reject(`PDF 页数不符合产品规格：${expected.path}`)
+      }
+    }
     bytes[expected.path] = buffer
   }
   return { manifest, bytes, digest: sha256(manifestBytes) }
