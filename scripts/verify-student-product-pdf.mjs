@@ -154,6 +154,31 @@ for (const edition of ['economy8', 'largeNoListening']) {
 // Actual Chromium measurement: inherited body type is insufficient for source
 // captions/table cells, and a too-wide option must change the whole grid.
 try {
+  // Legacy source markers must be measured, never inferred from answer pages
+  // or another writing family's opaque source. A forced split stays rejected.
+  for (const split of [false, true]) {
+    const source = `<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}
+      body{margin:0}.new-page{break-before:page}</style></head><body>
+      <section data-canonical-group-id="application" data-canonical-group-type="writing">
+        <div class="canonical-application-writing" data-canonical-writing-mode="legacy_opaque">
+          <div class="canonical-application-prompt canonical-legacy-opaque-source">Application source is not continuation material.</div>
+          <div class="canonical-application-response">Application answer space</div>
+        </div></section>
+      <section data-canonical-group-id="continuation" data-canonical-group-type="continuation">
+        <div class="canonical-continuation-writing" data-canonical-writing-mode="legacy_opaque">
+          <div class="canonical-legacy-opaque-source">Exact retained continuation material.</div>
+          <div class="canonical-continuation-response${split ? ' new-page' : ''}">Supplied starters</div>
+        </div></section></body></html>`
+    const actual = await renderPaginatedPaper(applyStudentProductLayout(source, layout, 'largeNoListening'), { inspect: inspectGroups })
+    const continuation = actual.inspection.find(group => group.id === 'continuation')
+    assert.deepEqual(continuation.continuationMaterialPages, [1])
+    assert.deepEqual(continuation.continuationAnswerPages, [split ? 2 : 1])
+    assert.equal(actual.inspection.find(group => group.id === 'application').continuationMaterialPages, undefined)
+    const replay = () => renderExplicitStudentProductPdf(source, { edition: 'largeNoListening', layout,
+      plannedBreakGroupIds: [], render: async () => actual })
+    if (split) await assert.rejects(replay, error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+    else assert.equal((await replay()).pageCount, 1)
+  }
   const economyLayout = { ...layout, profile: 'student-friendly-economy-v2', fontSizePt: 10.5 }
   assert.throws(() => applyStudentProductLayout(html, { ...economyLayout, fontSizePt: 12 }, 'largeNoListening'), /Invalid/)
   const balanceHtml = body => `<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}

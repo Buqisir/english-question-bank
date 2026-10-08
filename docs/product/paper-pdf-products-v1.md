@@ -1,9 +1,11 @@
 # 四款 PDF 产品与独立答案版
 
-状态：Owner 2026-10-06 确认产品方向，授权继续本地实现；未 Ship、未部署。
-Owner 同日对 reference-v2 县域样稿回复“OK”，确认本文件的参考格式适配版式与数值；
-不扩成评分细则、源内容忠实或新 Review 的批准，也不授权 Ship／发布。
+状态：Owner 2026-10-06 确认产品方向，2026-10-08 授权 Ship；
+[PR #499](https://github.com/Buqisir/english-question-bank/pull/499) 交付候选，尚未部署或发布试卷。
+Owner 2026-10-06 对 reference-v2 县域样稿回复“OK”，确认本文件的参考格式适配版式与数值；
+该版式确认不扩成评分细则、源内容忠实或新 Review 的批准，也不授权试卷发布。
 本文件承接 [格式总入口](exam-paper-format-standards.md)，不改历史 Canonical authority。
+下方各日期的出样和接线记录保留当时状态，不代替当前 Ship／部署／发布证据。
 
 ## 已确认的产品边界
 
@@ -63,9 +65,10 @@ Owner要求题头保留完整名称，长名通过降低字号避免两行。本
 **当前实现（2026-10-08，本地候选）：** initializer／attach-answers已接入`--year`、
 `--month`，经config、Review封存和import-meta写入Source。`sources.month`为可空整数，
 查询支持year/month，网站按年再按月筛选；旧月份不回填。尚未部署数据库变更或网站，
-也未执行正式发布链验收；B/C候选及原待审身份保持不变。
+真实试卷未发布；隔离可丢弃数据已完成Review→publication→存储→四产品读取验收。
+B/C候选及原待审身份保持不变。
 
-## 正式文件与网站产品访问（2026-10-08，本地未提交候选）
+## 正式文件与网站产品访问（2026-10-08，Ship候选）
 
 Owner要求接通正式文件存储、年月索引和产品访问，不新增管理／检阅台。
 导入和准备产品不会自动发布；网页验样后仍需Owner明确授权单卷上线。
@@ -111,9 +114,10 @@ inline，长度472912／432259／427368／198177；错摘要与异卷HEAD均400�
 已通过的索引／OPS／POST，未检查外部print HEAD，外部未GET PDF，不冒称远端字节验收。
 索引DOM的`time.dateTime`为`2025-12`，可见月份为`12月`，年份在2025分区标题。
 
-`verify-published-products-storage.mjs`已编写并加入Full registry，未运行；Owner未说Ship，
-正式套件／Full／E2E仍为SKIP，不标PASS。首次PR若trusted-base registry尚未收录该脚本，
-Ship需补这一项本地独有验收，不重复已覆盖套件。
+`verify-published-products-storage.mjs`已加入Full registry；Owner授权Ship后，
+本地独有存储／公开读取、源参考答案和v60闭合检查已通过。Full和六个E2E沿用
+当前精确head/base的自然GitHub Actions，保留失败尝试；旧提交结果不授权新提交合并。
+私有R2、真实发布和生产部署仍未执行，不将隔离验收标成生产PASS。
 
 ## 答案内容合同
 

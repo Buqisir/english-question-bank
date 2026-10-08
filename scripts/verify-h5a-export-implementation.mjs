@@ -94,11 +94,11 @@ for (const name of ['sendBinary', 'sendPdf']) {
 }
 
 verifier.assert(
-  routesSource.includes('exportPrintHtml(input)') &&
-    routesSource.includes('exportPrintPdf(input)') &&
+  routesSource.includes('getAssemblyPaperProduct(input)') &&
+    routesSource.includes('sendPdf(response, result.pdfBytes') &&
     !routesSource.includes('exportDocx(input)') &&
     !routesSource.includes('exportPdf(input)'),
-  'export routes expose only supported Print HTML/PDF implementation helpers',
+  'export routes consume one product render for HTML/PDF, not retired DOCX helpers',
 )
 verifier.assert(
   apiSource.includes("from './exports/exportImplementation.mjs'") && apiSource.includes('createExportRoutes(exportImplementation)'),

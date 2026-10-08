@@ -404,7 +404,7 @@ async function runOwnerFlow(browser) {
       const response = await fetch(`/api/draft-papers/${encodeURIComponent(id)}/print-pdf`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ versionType: 'student' }),
+        body: JSON.stringify({ edition: 'largeNoListening' }),
       })
       const buffer = await response.arrayBuffer()
       const head = new TextDecoder('latin1').decode(new Uint8Array(buffer).slice(0, 4))

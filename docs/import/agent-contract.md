@@ -352,7 +352,10 @@ Agent下载或定位源文件，确定绝对路径，按实际内容识别 `ques
 
 考试年月独立于卷名，取Owner输入，供题目沿所属Source按时间索引；不从学年、导入时间、
 paperId或题头猜考试年月，不虚构日。新卷缺年月不能冒称准备完成。本地init和attach-answers
-接受`--year`／`--month`并封存到config与source manifest，Review、publisher和网站查询
+接受`--year`／`--month`并封存到config与source manifest；raw-source intake 的
+`source-intake.mjs init`或首次`continue`也须传这两个参数，续跑不得丢失或推断年月。
+已有初始化的续跑、音频补充和 analyzed-package 沿用各自已封存的身份与日期。
+Review、publisher和网站查询
 已有接线候选；尚未在生产执行。完整规则及当前限制见[产品合同](../product/paper-pdf-products-v1.md)。历史Revision不原地覆盖，
 名称后续校正也按源题头核对并走版本变更，不继续以旧Owner命名替代来源。B/C三卷已有
 本地源卷名候选，未改原Review绑定或发布记录；自动处理不授权自动审核、批准或发布。

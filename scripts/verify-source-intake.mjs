@@ -1220,13 +1220,21 @@ try {
       ], { ampThreadId: 'T-22222222-2222-4222-8222-222222222222' }),
       /another Amp thread/,
     )
+    await assert.rejects(runSourceIntakeCli(origin, [
+      'init', cliSubmissionId, '--paper-id', cliPaperId,
+    ]), /考试年份|考试年份和月份/)
+    assert.equal(existsSync(cliPaperDirectory), false, 'missing exam date cannot initialize a new paper')
     const initOutput = await runSourceIntakeCli(origin, [
       'init',
       cliSubmissionId,
       '--paper-id',
       cliPaperId,
+      '--year', '2025', '--month', '11',
     ])
     assert.match(initOutput, new RegExp(`INITIALIZED ${cliPaperId}`))
+    const initializedConfig = JSON.parse(readFileSync(path.join(cliPaperDirectory, 'config.json'), 'utf8'))
+    assert.equal(initializedConfig.provenance.year, 2025)
+    assert.equal(initializedConfig.provenance.month, 11)
     const initializationReceiptFile = path.join(
       cliPaperDirectory,
       'signals/source-intake-initialization.json',
@@ -1287,14 +1295,17 @@ try {
     assert.equal(existsSync(automaticInbox), false, 'first status creates no claim, journal or directory')
     assert.match(await runSourceIntakeCli(origin, ['status', '--help']), /omit|only submissionId/)
     const completed = JSON.parse(await runSourceIntakeCli(origin, [
-      'continue', automaticSubmissionId,
+      'continue', automaticSubmissionId, '--year', '2025', '--month', '12',
     ]))
     assert.equal(completed.paperId, automaticPaperId)
     assert.equal(completed.blocked.reason, 'needs_agent_review', JSON.stringify(completed))
     assert.equal(completed.steps.at(-1).step, 'materialize')
     assert.equal(completed.nextCommand, `node scripts/import-pipeline/source-intake.mjs handoff ${automaticSubmissionId} --paper-id ${automaticPaperId}`)
     assert.equal(completed.lease.renewalCommand, `node scripts/import-pipeline/source-intake.mjs heartbeat ${automaticSubmissionId}`)
-    assert.equal(JSON.parse(readFileSync(path.join(automaticPaperDirectory, 'config.json'))).importProfile, 'public-paper-v1')
+    const automaticConfig = JSON.parse(readFileSync(path.join(automaticPaperDirectory, 'config.json')))
+    assert.equal(automaticConfig.importProfile, 'public-paper-v1')
+    assert.equal(automaticConfig.provenance.year, 2025)
+    assert.equal(automaticConfig.provenance.month, 12)
     assert.throws(() => execFileSync(process.execPath, [
       path.resolve(import.meta.dirname, 'import-pipeline/review.mjs'),
       'verify-analyses', automaticPaperId,
@@ -1494,6 +1505,7 @@ try {
       audioSubmissionId,
       '--paper-id',
       audioPaperId,
+      '--year', '2026', '--month', '8',
       '--asr-fixture',
       audioAsrFixture,
     ], { ampThreadId: null })

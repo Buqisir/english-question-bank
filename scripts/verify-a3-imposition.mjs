@@ -281,6 +281,10 @@ async function runPhaseB(browser) {
     repositoryRoot: rootDir,
     bankDbPath: dbPath,
     paperAssetsDir,
+    // Four real reading groups still require >=3 actual pages below. Full
+    // writing/product conformance is a separate check, not A3 interaction.
+    groupIds: ['group-2026-i-reading-a', 'group-2026-i-reading-b',
+      'group-2026-i-reading-c', 'group-2026-i-reading-d'],
   })
 
   startProcess('node', ['server/api.mjs'], {
@@ -320,6 +324,11 @@ async function runPhaseB(browser) {
   const pageErrors = []
   const previewRequests = []
   const startedAt = Date.now()
+  // Automatic content-reorder search competes with repagination after every
+  // click. It has its own real E2E; this test keeps manual reordering, actual
+  // pagination and seam suggestions live while isolating that background job.
+  await page.route('**/api/draft-papers/*/reorder-suggestion?*', route =>
+    route.fulfill({ json: { suggestion: null, reused: false } }))
   page.on('pageerror', (error) => pageErrors.push(error.message))
   page.on('request', (request) => {
     if (request.url().includes('/pagination?')) previewRequests.push({ event: 'request', elapsed: Date.now() - startedAt })
@@ -336,7 +345,7 @@ async function runPhaseB(browser) {
   try {
     await page.goto(`http://127.0.0.1:${vitePort}/`, { waitUntil: 'networkidle' })
 
-    // Bulk-add all 10 smoke groups to the current draft directly via the API
+    // Bulk-add the selected confirmed groups directly via the API
     // (mirrors scripts/smoke-c8-draft-paper-composer.mjs's pattern) — the
     // slow search-and-click-add UI flow isn't what this script exists to
     // exercise; the a3 imposition/interaction surface is.
@@ -369,14 +378,16 @@ async function runPhaseB(browser) {
       return data.draftPaper.id
     })
 
-    // React fetches pagination after navigation and a debounce; networkidle
-    // is not pagination readiness. Budget cold server rendering separately
-    // from the unchanged 15s browser visibility/layout checks below.
-    const paginationDeadline = Date.now() + 60_000
+    // React fetches the current product after navigation and a debounce;
+    // networkidle is not pagination readiness. This historical subset has no
+    // saved product plan: the bounded search compares multiple real renders.
+    // Budget that setup separately from
+    // the unchanged 15s browser visibility/layout checks below.
+    const paginationDeadline = Date.now() + 180_000
     const [paginationResponse] = await Promise.all([
       page.waitForResponse((response) =>
         new URL(response.url()).pathname === `/api/draft-papers/${draftId}/pagination`
-        && response.request().method() === 'GET', { timeout: 60_000 }),
+        && response.request().method() === 'GET', { timeout: 180_000 }),
       page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'domcontentloaded' }),
     ])
     if (!paginationResponse.ok()) throw new Error(`Initial pagination failed: HTTP ${paginationResponse.status()}`)
@@ -447,14 +458,32 @@ async function runPhaseB(browser) {
       await page.screenshot({ path: path.join(artifactDir, 'a3-ready.png') })
     }
 
+    // Products hide stale content after a mutation. Scroll/anchor assertions
+    // must target the new rendered document, not its loading placeholder.
+    async function waitForRevisedA3Preview() {
+      const response = await page.waitForResponse((response) =>
+        new URL(response.url()).pathname === `/api/draft-papers/${draftId}/pagination`
+        && response.request().method() === 'GET', { timeout: 180_000 })
+      if (!response.ok()) throw new Error(`Revised pagination failed: HTTP ${response.status()}`)
+      const responseError = await response.finished()
+      if (responseError) throw responseError
+      await page.waitForFunction(() => {
+        const doc = document.querySelector('.draft-a4-sheet iframe')?.contentDocument
+        return doc?.readyState === 'complete' && doc.fonts.status === 'loaded'
+          && doc.querySelector('.a3-imposition-wrap') && doc.querySelectorAll('.preview-page').length >= 3
+      }, undefined, { timeout: 15_000 })
+    }
+
     const reorderMutation = page.waitForResponse(
       (response) => response.url().includes('/api/draft-papers/') && response.request().method() === 'PATCH',
       { timeout: 10_000 },
     )
     await firstGroupActions.getByRole('button', { name: '更多题组操作' }).click()
+    const reorderedPreview = waitForRevisedA3Preview()
     await firstGroupActions.getByRole('button', { name: '下移' }).click()
     const reorderResponse = await reorderMutation
     assert('real click on 下移 menu action in A3 mode triggers a successful PATCH', reorderResponse.ok(), String(reorderResponse.status()))
+    await reorderedPreview
 
     // ── Real click: rail item scrolls the desk to the target group's face ──
     const scrollYBefore = await page.evaluate(() => window.scrollY)
@@ -484,10 +513,12 @@ async function runPhaseB(browser) {
         (response) => response.url().includes('/api/draft-papers/') && response.request().method() === 'PATCH',
         { timeout: 10_000 },
       )
+      const seamPreview = waitForRevisedA3Preview()
       await page.locator('.draft-seam-suggestion').first().click()
       const seamResponse = await seamMutation
       assert('real click on a seam suggestion pill triggers a successful pageBreakBefore PATCH', seamResponse.ok(), String(seamResponse.status()))
       pass('seam suggestion pill is clickable and wired to the same PATCH as manual 前置分页')
+      await seamPreview
     } else {
       console.log('  (no seam suggestion in this fixture — skipping seam-click assertion, not a failure)')
     }
