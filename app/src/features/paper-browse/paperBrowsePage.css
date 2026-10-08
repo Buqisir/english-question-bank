@@ -36,6 +36,10 @@
   max-width: 100%;
 }
 
+.paper-browse-page > .topbar .topbar-brand-title {
+  flex-shrink: 0;
+}
+
 .paper-browse-page > .topbar .topbar-identity,
 .paper-browse-page > .topbar .topbar-actions-page {
   min-width: 0;
