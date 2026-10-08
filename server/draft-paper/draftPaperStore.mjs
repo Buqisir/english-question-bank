@@ -1652,13 +1652,13 @@ export function createDraftPaperStore({
     if (!Number.isSafeInteger(draftPaper.questionNumberStart) || draftPaper.questionNumberStart < 1) throw new Error('起始题号必须是正整数')
     const bankDb = openDatabase({ readOnly: true })
     try {
-      return await renderPaperProduct(draftPaper, bankDb, input.edition, exactConsumption)
+      return await renderPaperProduct(draftPaper, bankDb, input.edition, { exactConsumption })
     } finally {
       bankDb.close()
     }
   }
 
-  async function renderPaperProduct(draftPaper, bankDb, edition, exactConsumption = null) {
+  async function renderPaperProduct(draftPaper, bankDb, edition, { exactConsumption = null, cache = true } = {}) {
       requirePaperPdfEdition(edition)
       if (!draftPaper.items.length) throw new Error('请先添加题组')
       if (draftPaper.items.some(item => item.groupMissing)) throw new Error('选中的题组已缺失，不能生成不完整产品')
@@ -1682,7 +1682,7 @@ export function createDraftPaperStore({
         references: [...sourceByPaper].map(([paperId, source]) => [paperId, source?.commitment]),
       }))
       const cacheKey = draftPaginationCacheKey(draftPaper.id, edition)
-      const cached = draftPaginationCacheGet(cacheKey)
+      const cached = cache ? draftPaginationCacheGet(cacheKey) : null
       const itemsByGroupId = new Map(selected.map(item => [item.groupId, item.id]))
       if (cached?.signature === signature) return { ...cached, draftPaper, reused: true,
         pageBreakSuggestions: edition === 'answerOnly' ? [] : derivePageBreakSuggestions(cached.paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm }) }
@@ -1730,7 +1730,7 @@ export function createDraftPaperStore({
         groupIds: edition === 'answerOnly' ? null : groupIds, pageCount: rendered.pageCount,
       })
       const result = { ...rendered, paginatedHtml, signature, edition }
-      draftPaginationCacheSet(cacheKey, result)
+      if (cache) draftPaginationCacheSet(cacheKey, result)
       return { ...result, draftPaper, reused: false, pageBreakSuggestions: edition === 'answerOnly' ? []
         : derivePageBreakSuggestions(paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm }) }
   }
@@ -1833,7 +1833,7 @@ export function createDraftPaperStore({
       evaluateCandidate: edition ? async candidateDraft => {
         const db = openDatabase({ readOnly: true })
         try {
-          return (await renderPaperProduct(candidateDraft, db, edition)).pageBreakSuggestions
+          return (await renderPaperProduct(candidateDraft, db, edition, { cache: false })).pageBreakSuggestions
         } catch (error) {
           if (['PAPER_FIXED_PAGE_IMPOSSIBLE', 'PAPER_LAYOUT_OVERFLOW'].includes(error.code)) return null
           throw error
