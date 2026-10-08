@@ -21,7 +21,6 @@ export function NotebookAddButton({
     setState('checking')
     setNote('')
     fetchNotebookSelectionState({
-      clientMutationId: `state-${paperId}-${segment.streamId}-${segment.start}`,
       paperId,
       sourceRevision,
       segments: [segment],

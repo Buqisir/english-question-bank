@@ -67,7 +67,6 @@ export function fetchNotebookPaper(paperId: string) {
 }
 
 export function fetchNotebookSelectionState(body: {
-  clientMutationId: string
   paperId: string
   sourceRevision: string
   segments: Array<{ streamId: string; start: number; end: number; selectedText: string }>
@@ -75,7 +74,8 @@ export function fetchNotebookSelectionState(body: {
   return fetch('/api/vocabulary-notebook/selection-state', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ schemaVersion: 'vocabulary-notebook-add-v1', ...body }),
+    // The read-only check never replays, but the shared request shape caps the id at 80 characters.
+    body: JSON.stringify({ schemaVersion: 'vocabulary-notebook-add-v1', clientMutationId: `state-${crypto.randomUUID()}`, ...body }),
   }).then((response) => readJson<{ state: 'not-added' | 'entry-exists' | 'occurrence-exists'; contextId: string | null; entryId: string | null }>(response))
 }
 
