@@ -1,4 +1,5 @@
 import { DatabaseSync } from 'node:sqlite'
+import { randomUUID } from 'node:crypto'
 import { mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -126,6 +127,17 @@ const otherPassage = await runtime.add('local', addBody('reading-b/body', 8, 16,
 check('the same occurrence is saved once', first.created && !again.created && first.contextId === again.contextId)
 check('another occurrence in the same passage is separate', second.created && second.entryId === first.entryId)
 check('the same word in another passage is a separate entry', otherPassage.created && otherPassage.entryId !== first.entryId)
+
+const stateBody = (mutation) => addBody('reading-a/body', firstAt, firstAt + 8, 'approach', mutation)
+check('the read-only check accepts the id the client service generates', runtime.selectionState('local', stateBody(`state-${randomUUID()}`)).state === 'occurrence-exists')
+check('an id built from long paper and stream ids is over the request limit', (() => {
+  try {
+    runtime.selectionState('local', stateBody('state-paper-mock-sz-2026-m1-group-mock-sz-2026-m1-reading-a/passage/body/para-mock-sz-2026-m1-reading-a-1-30'))
+    return false
+  } catch (error) {
+    return error.code === 'NOTEBOOK_REQUEST_INVALID'
+  }
+})())
 
 const before = senseCalls + translateCalls
 runtime.listPapers('local')
