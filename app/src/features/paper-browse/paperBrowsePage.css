@@ -30,6 +30,21 @@
   background: var(--eqb-color-bg, #F3F5F1);
 }
 
+/* Override AppTopbar's intrinsic flex minimums on this page: long source
+   titles can truncate, while all four-product controls stay within the bar. */
+.paper-browse-page > .topbar .topbar-brand {
+  max-width: 100%;
+}
+
+.paper-browse-page > .topbar .topbar-brand-title {
+  flex-shrink: 0;
+}
+
+.paper-browse-page > .topbar .topbar-identity,
+.paper-browse-page > .topbar .topbar-actions-page {
+  min-width: 0;
+}
+
 .paper-browse-export-error {
   margin: 0 24px;
   padding: 8px 12px;

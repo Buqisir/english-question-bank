@@ -10,6 +10,7 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
+import { assertListeningPlaybackUi, PUBLISHED_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
 import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
@@ -1756,9 +1757,31 @@ function validateConsumptionPublication({
       return value
     },
   })
+  let playbackUi = null
+  if (manifest.listeningAudio) {
+    try {
+      const bytes = store.readVersionArtifact(ref, PUBLISHED_LISTENING_WAVEFORM_FILE)
+      if (bytes) {
+        const { digest, ...value } = readJsonBytes(bytes, 'listening playback UI')
+        if (digest !== digestJson(value)) throw new Error('Listening playback UI digest mismatch')
+        playbackUi = assertListeningPlaybackUi(value, manifest.listeningAudio.sha256, manifest.listeningAudio.durationSeconds)
+      }
+    } catch {
+      // A missing/corrupt rebuildable envelope cannot invalidate paper meaning
+      // or supply unchecked timings. Historical browser playback remains available.
+    }
+  }
+  let paperSourceType = null
+  try {
+    const paperAssetBytes = store.readVersionArtifact(ref, 'paper-asset.json')
+    if (paperAssetBytes) paperSourceType = readJsonBytes(paperAssetBytes, 'paper asset').sources?.sourceType
+  } catch {
+    // Canonical-only historical publications need not have a compatibility asset.
+  }
   return {
     manifest,
-    selection: canonicalSelections(validated, contract, sourceAsset),
+    selection: { ...canonicalSelections(validated, contract, sourceAsset), ...(playbackUi ? { playbackUi } : {}),
+      ...(['真题', '模拟题', '校本题', '自编题'].includes(paperSourceType) ? { paperSourceType } : {}) },
     visibleStructure: canonicalVisibleStructure(validated),
     profileRef: structuredClone(validated.plan.profileRef),
     mediaArtifacts: canonicalMediaArtifacts(validated),
@@ -1805,10 +1828,12 @@ function readyConsumption(
         : {}
     ),
     selections: canonical.selections,
+    ...(canonical.paperSourceType ? { paperSourceType: canonical.paperSourceType } : {}),
     ...(manifest.listeningAudio ? {
       listeningAudio: {
         ...manifest.listeningAudio,
         url: `/paper-assets/${encodeURIComponent(request.paperId)}/versions/v${ref.sourceAssetVersion}/${manifest.listeningAudio.relativePath}`,
+        ...(canonical.playbackUi || {}),
       },
     } : {}),
     ...(

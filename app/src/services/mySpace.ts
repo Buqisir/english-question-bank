@@ -1,6 +1,7 @@
 import type { MySpaceArtifact, MySpaceFolder } from '../domain/questionBank'
 import { directDownloadTarget, saveBlobToTarget, type FileSaveTarget } from './fileDownload.ts'
 import { apiPath, errorMessageFromResponse as readError } from './httpClient.ts'
+import type { PaperPdfEdition } from '../../../shared/paperPdfProducts.mjs'
 
 export type MySpaceSnapshot = {
   folders: MySpaceFolder[]
@@ -43,6 +44,7 @@ export async function deleteMySpaceFolder(id: string): Promise<void> {
 
 export async function saveDraftPaperToMySpace(input: {
   draftPaperId: string
+  edition: PaperPdfEdition
   folderId?: string | null
   fileName?: string
 }): Promise<{ artifact: MySpaceArtifact; reusedRecentPdf: boolean }> {
@@ -67,5 +69,5 @@ export async function downloadMySpaceArtifact(
   const response = await fetch(apiPath(artifact.fileUrl))
   if (!response.ok) throw new Error(await readError(response, `Failed to download artifact: ${response.status}`))
   const blob = await response.blob()
-  await saveBlobToTarget(blob, artifact.fileName || '英语草稿卷-学生卷.pdf', target)
+  await saveBlobToTarget(blob, artifact.fileName || '英语草稿卷.pdf', target)
 }

@@ -252,14 +252,14 @@ async function main() {
   const exportsBefore = exportDirectoryEntries()
   const temporaryEntriesBefore = temporaryArtifactEntries()
   const artifactRowsBefore = artifactRows()
-  const printHtmlResponse = await fetch(`${baseUrl}/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-html?versionType=student`)
+  const printHtmlResponse = await fetch(`${baseUrl}/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-html?edition=largeNoListening`)
   const printHtml = await printHtmlResponse.text()
   assert(
     'direct draft Print HTML uses confirmed Canonical content',
     printHtmlResponse.status === 200 && printHtml.includes('data-canonical-group-id'),
     printHtml.slice(0, 500),
   )
-  const printPdfResponse = await post(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`, { versionType: 'student' })
+  const printPdfResponse = await post(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`, { edition: 'largeNoListening' })
   const printPdfBytes = new Uint8Array(await printPdfResponse.arrayBuffer())
   assert(
     'direct draft Print/PDF returns Chromium PDF bytes',

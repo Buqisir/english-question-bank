@@ -1,6 +1,7 @@
 import type { DraftPaper, DraftPaperSummary, DraftPrintForm } from '../domain/questionBank'
 import { directDownloadTarget, saveBlobToTarget, type FileSaveTarget } from './fileDownload.ts'
 import { apiPath, decodeHeaderValue, errorMessageFromResponse as readError } from './httpClient.ts'
+import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../shared/paperPdfProducts.mjs'
 
 // print-form 收口（plan.md Forbidden 追授）：printForm 已并入 domain 的
 // DraftPaperSummary（engine-rewire 合并后并行锁解除），施工期的交叉类型
@@ -105,7 +106,7 @@ export async function migrateAssemblyBasketToDraftPaper(groupIds: string[]): Pro
 // heuristic — see server/draft-paper/draftPaperStore.mjs's derivePageBreakSuggestions.
 export async function fetchDraftPaperPagination(
   id: string,
-  versionType: 'student' | 'teacher' = 'student',
+  edition: PaperPdfEdition = 'largeNoListening',
 ): Promise<{
   paginatedHtml: string
   pageCount: number
@@ -113,7 +114,7 @@ export async function fetchDraftPaperPagination(
   pageBreakSuggestions: Array<{ itemId: string; groupId: string; reason: string }>
 }> {
   const response = await fetch(
-    apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pagination?versionType=${versionType}`),
+    apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pagination?edition=${edition}`),
   )
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to load draft paper pagination: ${response.status}`))
@@ -143,10 +144,10 @@ export type ReorderSuggestion = {
 
 export async function fetchReorderSuggestion(
   id: string,
-  versionType: 'student' | 'teacher' = 'student',
+  edition: PaperPdfEdition = 'largeNoListening',
 ): Promise<ReorderSuggestion> {
   const response = await fetch(
-    apiPath(`/api/draft-papers/${encodeURIComponent(id)}/reorder-suggestion?versionType=${versionType}`),
+    apiPath(`/api/draft-papers/${encodeURIComponent(id)}/reorder-suggestion?edition=${edition}`),
   )
   if (!response.ok) {
     throw new Error(await readError(response, `Failed to load reorder suggestion: ${response.status}`))
@@ -232,12 +233,11 @@ export async function restoreDraftPaperItem(
 
 export async function downloadDraftPaperPdf(
   draftPaperId: string,
-  versionType: 'student' | 'teacher' = 'student',
+  edition: PaperPdfEdition,
   target: FileSaveTarget = directDownloadTarget(),
-  pageLayout: 'natural' | 'friendly8' | 'friendly10' | 'long10' | 'long12' | 'largeComplete' | 'largeNoListening' | 'economy8' = 'natural',
 ): Promise<{ crossingGroupCount: number; splitOptionBankCount: number; fontSizePt: number }> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`), {
-    body: JSON.stringify({ versionType, pageLayout }),
+    body: JSON.stringify({ edition }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
   })
@@ -245,7 +245,7 @@ export async function downloadDraftPaperPdf(
     throw new Error(await readError(response, `Failed to export draft paper PDF: ${response.status}`))
   }
   const blob = await response.blob()
-  const defaultFileName = versionType === 'teacher' ? '英语草稿卷-教师卷.pdf' : '英语草稿卷-学生卷.pdf'
+  const defaultFileName = `英语草稿卷-${PAPER_PDF_PRODUCTS[edition]}.pdf`
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
   await saveBlobToTarget(blob, fileName, target)
   return {

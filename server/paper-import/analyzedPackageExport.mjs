@@ -205,6 +205,7 @@ export function convertRepresentableNck1ReviewSourceToAnalyzedPackageFiles(
     paperName: loaded.config.provenance.paperName,
     metadata: {
       year: Number(loaded.config.provenance.year),
+      ...(loaded.config.provenance.month !== undefined ? { month: loaded.config.provenance.month } : {}),
       region: loaded.config.provenance.region,
       sourceType: loaded.config.provenance.sourceType,
     },

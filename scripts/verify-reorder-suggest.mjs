@@ -272,6 +272,8 @@ async function runPhaseB(browser) {
     repositoryRoot: rootDir,
     bankDbPath: dbPath,
     paperAssetsDir,
+    groupIds: ['group-2026-i-reading-a', 'group-2026-i-reading-b',
+      'group-2026-i-reading-c', 'group-2026-i-reading-d'],
   })
 
   startProcess('node', ['server/api.mjs'], {
@@ -334,13 +336,13 @@ async function runPhaseB(browser) {
 
     // ─── ③④⑤ zero-DB-write + zero-cache-pollution + endpoint shape ───
     const paginationBefore = await page.evaluate(
-      async (id) => (await fetch(`/api/draft-papers/${id}/pagination`)).json(),
+      async (id) => (await fetch(`/api/draft-papers/${id}/pagination?edition=largeNoListening`)).json(),
       draftId,
     )
     const rowsBefore = snapshotRows()
     const reorderResponse = await page.evaluate(
       async (id) => {
-        const response = await fetch(`/api/draft-papers/${id}/reorder-suggestion`)
+        const response = await fetch(`/api/draft-papers/${id}/reorder-suggestion?edition=largeNoListening`)
         return { ok: response.ok, status: response.status, body: await response.json() }
       },
       draftId,
@@ -350,7 +352,7 @@ async function runPhaseB(browser) {
     assert('GET .../reorder-suggestion is zero-write: draft_papers/draft_paper_items rows unchanged', rowsBefore === rowsAfter)
 
     const paginationAfter = await page.evaluate(
-      async (id) => (await fetch(`/api/draft-papers/${id}/pagination`)).json(),
+      async (id) => (await fetch(`/api/draft-papers/${id}/pagination?edition=largeNoListening`)).json(),
       draftId,
     )
     assert('a follow-up pagination GET still reuses the cache (reused: true)', paginationAfter.reused === true, JSON.stringify({ reused: paginationAfter.reused }))
@@ -362,7 +364,7 @@ async function runPhaseB(browser) {
     // CR MF-1 回归钉：第二次调用必须命中缓存（reused: true），null 裁决
     // 也一样——否则 A4 常见路径每次调用都重跑最多 6 次 Chromium dry-run。
     const reorderSecond = await page.evaluate(
-      async (id) => (await fetch(`/api/draft-papers/${id}/reorder-suggestion`)).json(),
+      async (id) => (await fetch(`/api/draft-papers/${id}/reorder-suggestion?edition=largeNoListening`)).json(),
       draftId,
     )
     assert(
@@ -478,7 +480,7 @@ async function runPhaseB(browser) {
       return data.draftPaper.items.filter((item) => !item.groupMissing).map((item) => item.id)
     }, draftId)
     const realSuggestions = await page.evaluate(async (id) => {
-      const response = await fetch(`/api/draft-papers/${id}/pagination`)
+      const response = await fetch(`/api/draft-papers/${id}/pagination?edition=largeNoListening`)
       const data = await response.json()
       return data.pageBreakSuggestions || []
     }, draftId)

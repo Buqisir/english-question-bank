@@ -15,6 +15,9 @@ import { paginationPlanEdition } from '../paper-import/paginationPlan.mjs'
 import { printConsumption } from './revisionProjection.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertCanonicalConsumptionVisibleStructure } from '../../shared/paper-canonical/visibleStructure.mjs'
+import { requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
+import { buildAnswerOnlyHtml } from '../answer-renderer.mjs'
+import { frozenProductResult } from '../paper-import/frozenProducts.mjs'
 
 export function reviewPrintHtml(projection, versionType, buildPrintHtml, { includeListening = true } = {}) {
   if (!['student', 'teacher'].includes(versionType)) {
@@ -76,15 +79,30 @@ export function reviewPaginationMetadata(projection) {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     planDigest: projection.paginationPlanDigest,
-    editions: ['largeNoListening', 'economy8', ...(listeningCount === 2 ? ['largeComplete'] : []),
-      ...Object.keys(projection.paginationPlan?.editions || {}).filter(edition => !STUDENT_PRODUCT_EDITIONS.includes(edition))].map((edition) => ({
+    editions: [...(listeningCount === 2 ? ['largeComplete'] : []), 'largeNoListening', 'economy8'].map((edition) => ({
       edition,
-      ...(STUDENT_PRODUCT_EDITIONS.includes(edition) ? studentProductPolicy : fixedPageLayoutPolicy)(edition, listeningCount),
+      ...studentProductPolicy(edition, listeningCount),
       mode: projection.paginationPlan?.editions?.[edition] ? 'explicit' : 'bounded_auto',
       plan: projection.paginationPlan?.editions?.[edition] || null,
-    })),
+    })).concat([{ edition: 'answerOnly', mode: 'natural', available: Boolean(projection.sourceReferences),
+      sourceReferencesDigest: projection.sourceReferencesDigest,
+      unavailableReason: projection.sourceReferences ? null : '此精确 revision 尚无完整的源参考答案捕获' }]),
     slots: projection.paginationSlotBindings,
+    answerOnly: { edition: 'answerOnly', mode: 'natural', available: Boolean(projection.sourceReferences),
+      sourceReferencesDigest: projection.sourceReferencesDigest,
+      unavailableReason: projection.sourceReferences ? null : '此精确 revision 尚无完整的源参考答案捕获' },
   }
+}
+
+export async function renderReviewPdfProduct(projection, edition, buildPrintHtml, render = renderPaginatedPaper) {
+  requirePaperPdfEdition(edition)
+  if (projection.frozenProducts) return frozenProductResult(projection.frozenProducts, edition)
+  if (edition !== 'answerOnly') return renderReviewFixedEdition(projection, edition, buildPrintHtml, render)
+  if (!projection.sourceReferences) throw new Error('此精确 revision 尚无完整的源参考答案捕获；不能以教师卷替代')
+  const html = buildAnswerOnlyHtml({ paperName: projection.paperName, materialization: projection.materialization,
+    sourceReferences: projection.sourceReferences, sourceDigest: projection.sourceDigest,
+    candidateDigest: projection.candidateDigest, sourceDocuments: projection.sourceInput.documents })
+  return { ...await render(html), edition, mode: 'natural' }
 }
 
 export async function renderReviewFixedEdition(projection, edition, buildPrintHtml, render = renderPaginatedPaper) {

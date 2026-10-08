@@ -137,6 +137,7 @@ try {
     'attach-answers', pdfSourceSetId, pdfPaperId,
     '--question-set-digest', pdfCapture.questionSetDigest,
     '--answer-provenance', 'anonymous synthetic compact key',
+    '--year', '2025', '--month', '11',
     '--source', `official_answers=${fixture.answerPdfPath}`,
   ), /complete_source_set_created/u)
   assert.equal(readFileSync(pdfCapturePath).equals(pdfCaptureBefore), true)
@@ -145,6 +146,8 @@ try {
     path.join(paperDirectory(pdfPaperId), 'universal-source-manifest.json'),
     'utf8',
   ))
+  assert.equal(pdfManifest.provenance.year, 2025)
+  assert.equal(pdfManifest.provenance.month, 11)
   assert.deepEqual(
     pdfManifest.documents.filter((document) => !document.renditionOf)
       .map((document) => document.role),
@@ -182,6 +185,7 @@ try {
     'attach-answers', imageSourceSetId, imagePaperId,
     '--question-set-digest', imageCapture.questionSetDigest,
     '--answer-provenance', 'anonymous synthetic answer image',
+    '--year', '2026', '--month', '1',
     '--source-page', `official_answers:1=${fixture.answerImages[0]}`,
   ), /complete_source_set_created/u)
   assert.equal(readFileSync(imageCapturePath).equals(imageCaptureBefore), true)
@@ -189,6 +193,8 @@ try {
     path.join(paperDirectory(imagePaperId), 'universal-source-manifest.json'),
     'utf8',
   ))
+  assert.equal(imageManifest.provenance.year, 2026)
+  assert.equal(imageManifest.provenance.month, 1)
   assert.deepEqual(
     imageManifest.documents.filter((document) => !document.renditionOf)
       .map((document) => document.role),

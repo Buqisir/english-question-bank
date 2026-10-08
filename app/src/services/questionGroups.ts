@@ -12,6 +12,7 @@ import type {
 } from '../domain/questionBank'
 
 import { apiPath, decodeHeaderValue, errorMessageFromResponse as readErrorMessage } from './httpClient.ts'
+import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../shared/paperPdfProducts.mjs'
 
 type QuestionGroupsResponse = {
   questionGroups: QuestionGroupCard[]
@@ -458,23 +459,23 @@ export async function askQuestionBankSteward(message: string, apiKey: string, th
   return (await response.json()) as QuestionBankStewardResult
 }
 
-export async function exportCompanionAnalysisPdf(paperId: string): Promise<PrintExportResult> {
+export function paperProductPdfUrl(paperId: string, edition: PaperPdfEdition, publicationDigest: string) {
+  return apiPath(`/api/exports/papers/${encodeURIComponent(paperId)}/pdf?edition=${edition}&publicationDigest=${encodeURIComponent(publicationDigest)}`)
+}
+
+export async function exportPaperProductPdf(paperId: string, edition: PaperPdfEdition, publicationDigest: string): Promise<PrintExportResult> {
   let response: Response
   try {
-    response = await fetch(apiPath('/api/exports/companion-analysis-pdf'), {
-      body: JSON.stringify({ paperId }),
-      headers: { 'content-type': 'application/json' },
-      method: 'POST',
-    })
+    response = await fetch(paperProductPdfUrl(paperId, edition, publicationDigest))
   } catch {
     throw new Error('题库 API 服务无法连接：请确认后端进程已启动')
   }
   if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `配套解析 PDF 生成失败：${response.status}`))
+    throw new Error(await readErrorMessage(response, `${PAPER_PDF_PRODUCTS[edition]}生成失败：${response.status}`))
   }
   return {
     blob: await response.blob(),
-    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || '英语试题-配套解析.pdf',
+    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `英语试题-${PAPER_PDF_PRODUCTS[edition]}.pdf`,
   }
 }
 

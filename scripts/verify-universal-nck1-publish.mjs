@@ -39,8 +39,12 @@ import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequ
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import {
   publishUniversalNck1Import,
+  recoverInterruptedPaperImportPublish,
   rollbackPaperImportPublication,
 } from '../server/paper-import/publisher.mjs'
+import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
+import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import { sendPaperAssetStatic } from '../server/paper-import/paperAssetStatic.mjs'
 import { assertListeningAudioManifest, assertListeningAudioSource, LISTENING_AUDIO_PATHS } from '../server/paper-import/listeningAudioEvidence.mjs'
 import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
@@ -72,6 +76,7 @@ import {
   finalizeListeningAudio,
   stageListeningAudio,
 } from './import-pipeline/listening-audio.mjs'
+import { LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_WAVEFORM_FILE } from '../shared/paper-canonical/listeningWaveform.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
@@ -432,7 +437,7 @@ export function makeReviewRoot(
   parentDir,
   fixturePaperId = paperId,
   questionSourceLabel = 'deterministic NCK1 question source',
-  { listening = false } = {},
+  { listening = false, sourceType = '自编题' } = {},
 ) {
   const reviewRoot = path.join(parentDir, 'review')
   const questionBytes = Buffer.from(
@@ -467,7 +472,7 @@ export function makeReviewRoot(
     provenance: {
       paperName: '2026 Contract Mock',
       source: 'Deterministic verifier source',
-      sourceType: '自编题',
+      sourceType,
       region: 'Fixture',
       year: 2026,
     },
@@ -858,9 +863,9 @@ function makeContext(label, options = {}) {
     const current = buildNck1ReviewProjection(reviewRoot)
     assert.equal(replayed.candidateDigest, previous.candidate.candidateDigest)
     assert.equal(replayed.consumption.authorityRef.manifestVersion, '58')
-    assert.equal(replayed.consumption.consumerContractRef.version, '44')
+    assert.equal(replayed.consumption.consumerContractRef.version, '45')
     assert.equal(current.consumption.authorityRef.manifestVersion, '59')
-    assert.equal(current.consumption.consumerContractRef.version, '44')
+    assert.equal(current.consumption.consumerContractRef.version, '45')
     const readingId = replayed.consumption.selections
       .find((selection) => selection.familyContractId === 'reading').groupIds[0]
     for (const [projection, expectedRuleset] of [
@@ -1393,6 +1398,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       await screenBody.evaluate((element) => getComputedStyle(element).textAlign),
       'center',
     )
+    assert.equal(await screenBody.evaluate(element => getComputedStyle(element).fontSize), '14px',
+      'Screen prose retains the five号 10.5pt base independently of paper zoom')
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 0)
     if (process.env.LISTENING_QA_ARTIFACT_DIR) {
       mkdirSync(process.env.LISTENING_QA_ARTIFACT_DIR, { recursive: true })
@@ -1407,6 +1414,11 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await screenPage.locator('.listening-analysis-panel').waitFor()
     await assertPaperFonts(screenPage, '.paper-browse-listening')
     await assertSharedPaperLayout(screenPage, '.paper-browse-listening', ['listening', 'listening-boundaries'], 24)
+    const listeningFontSizes = await screenPage.locator('.paper-browse-listening :is(.ps-question-stem, .ps-option-text, .ps-listening-instruction, .ps-listening-section)')
+      .evaluateAll(elements => elements.map(element => getComputedStyle(element).fontSize))
+    assert.ok(listeningFontSizes.length > 0)
+    assert.ok(listeningFontSizes.every(size => size === '14px'),
+      'Listening stems, options, instructions and section titles retain the five号 base')
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
     assert.equal(await screenPage.locator('.paper-browse-listening .ps-question').count(), 20)
     assert.deepEqual(await screenPage.locator('.paper-browse-listening .ps-question-no')
@@ -1424,22 +1436,79 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       'student exam column stays free of listening transcript and analysis',
     )
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
-    // The sine fixture has no reviewed segmentation. Supply one synthetic cue
-    // only to this browser projection to exercise the optional segment player.
+    // The sine fixture has no reviewed segmentation. Asymmetric synthetic cues
+    // exercise short-question, first-section and dialogue-cue anchors in Screen.
     screenProjection = { ...listeningProjection, consumption: {
       ...listeningPublished.screen,
-      listeningAudio: { ...listeningPublished.screen.listeningAudio, segments: [{
-        segmentId: 'fixture-q1', firstQuestionId: 'question:listening:1', questionNumbers: [1],
-        startSeconds: 0, endSeconds: 6,
-      }] },
+      listeningAudio: { ...listeningPublished.screen.listeningAudio, segments: [
+        ...[[0, 0.7], [1.2, 2], [2.3, 3.3], [3.8, 4.5], [5.1, 6]].map(([startSeconds, endSeconds], index) => ({
+          segmentId: `fixture-q${index + 1}`, firstQuestionId: `question:listening:${index + 1}`,
+          questionNumbers: [index + 1], startSeconds, endSeconds,
+        })),
+        { segmentId: 'fixture-q6-7', firstQuestionId: 'question:listening:6', questionNumbers: [6, 7],
+          startSeconds: 6.5, endSeconds: 8.2 },
+      ] },
     } }
     await screenPage.goto(screenUrl.href)
-    const fullPlayer = screenPage.locator('.listening-player[data-size="full"]')
+    const fullPlayer = screenPage.locator('.ps-listening-part .listening-player[data-size="full"]')
     const trigger = fullPlayer.getByRole('button', { name: '整卷听力录音', exact: true })
     const audio = fullPlayer.locator('audio')
     await trigger.waitFor()
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
     await screenPage.locator('.listening-analysis-panel').waitFor()
+    assert.equal(await screenPage.locator('.ps-listening-player').count(), 0,
+      'Listening controls must not occupy standalone paper rows')
+    assert.equal(await screenPage.locator('.ps-listening-section .ps-text-trail .listening-player').count(), 1)
+    assert.equal(await screenPage.locator('.ps-question > .ps-text-trail .listening-player').count(), 5)
+    assert.equal(await screenPage.locator('.ps-listening-segment-cue .ps-text-trail .listening-player').count(), 1)
+    for (const width of [1280, 390]) {
+      await screenPage.setViewportSize({ width, height: 900 })
+      await screenPage.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+      const anchors = await screenPage.locator('.ps-text-trail').evaluateAll(trails => trails.map(trail => {
+        const host = trail.parentElement
+        const text = host.matches('.ps-question') ? host.querySelector('.ps-question-stem') : host
+        const walker = document.createTreeWalker(text, NodeFilter.SHOW_TEXT)
+        let last = null
+        for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+          if (!node.parentElement.closest('.ps-text-trail') && node.textContent.trim()) last = node
+        }
+        const range = document.createRange()
+        const end = last.textContent.trimEnd().length
+        range.setStart(last, end - 1)
+        range.setEnd(last, end)
+        const glyph = range.getBoundingClientRect()
+        const button = trail.querySelector('.listening-player-trigger').getBoundingClientRect()
+        return {
+          host: host.className,
+          gap: button.left - glyph.right,
+          centerDelta: (button.top + button.bottom - glyph.top - glyph.bottom) / 2,
+          localContext: trail.offsetParent === host,
+          nestedButton: Boolean(trail.closest('button')),
+        }
+      }))
+      assert.equal(anchors.length, 8)
+      for (const anchor of anchors) {
+        assert.equal(anchor.localContext, true, `${width}px ${anchor.host}: anchor belongs to its text host`)
+        assert.equal(anchor.nestedButton, false, 'Audio control must not nest inside the question focus button')
+        assert.ok(anchor.gap >= 0 && anchor.gap < 9 && Math.abs(anchor.centerDelta) < 3,
+          `${width}px headphone follows the last text glyph: ${JSON.stringify(anchor)}`)
+      }
+      assert.equal(await screenPage.evaluate(() => {
+        const nodes = [...document.querySelectorAll('.paper-browse-listening .ps-question, .ps-listening-chrome, .ps-listening-segment-cue')]
+        const geometry = () => nodes.map(node => {
+          const rect = node.getBoundingClientRect()
+          return [rect.x, rect.y, rect.width, rect.height]
+        })
+        const before = JSON.stringify(geometry())
+        const controls = [...document.querySelectorAll('.ps-text-trail, .ps-text-trail-anchor')]
+        const display = controls.map(control => control.style.display)
+        controls.forEach(control => { control.style.display = 'none' })
+        const after = JSON.stringify(geometry())
+        controls.forEach((control, index) => { control.style.display = display[index] })
+        return before === after
+      }), true, `${width}px Screen controls do not change question or heading geometry`)
+    }
+    await screenPage.setViewportSize({ width: 1280, height: 900 })
     assert.equal(await audio.count(), 1)
     assert.equal(await screenPage.locator('.ps-listening-part .ps-text-trail audio').count(), 1,
       'Whole-recording control is a Screen-only overlay after the listening heading')
@@ -1716,7 +1785,7 @@ function runReviewCommand(args, env) {
 }
 
 if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
-const listeningPublication = makeContext('listening-publication', { listening: true })
+const listeningPublication = makeContext('listening-publication', { listening: true, sourceType: '模拟题' })
 try {
   const listeningPackageRoot = path.join(listeningPublication.tempRoot, 'listening-package')
   const listeningPreparedRoot = path.join(listeningPublication.tempRoot, 'listening-package-review')
@@ -1833,6 +1902,46 @@ try {
   assert.equal(result.ok, true, JSON.stringify(result))
   assert.ok(existsSync(path.join(result.publish.versionDir, 'listening/playback.mp3')))
   assert.ok(result.publish.consumers.screen.listeningAudio.url.includes('/versions/v1/'))
+  const preparedWaveform = JSON.parse(readFileSync(path.join(listeningPublication.reviewRoot, LISTENING_WAVEFORM_FILE), 'utf8'))
+  assert(reviewBundleFilePaths(listeningPublication.reviewRoot).some((file) => file.role === 'listening_audio_waveform'))
+  assert.deepEqual(result.publish.consumers.screen.listeningAudio.waveform, preparedWaveform,
+    'publication reuses the exact import waveform instead of decoding in Screen')
+  const playbackUiPath = path.join(result.publish.versionDir, PUBLISHED_LISTENING_WAVEFORM_FILE)
+  const playbackUiBytes = readFileSync(playbackUiPath)
+  const { digest: uiDigest, ...uiValue } = JSON.parse(playbackUiBytes)
+  assert.deepEqual(uiValue.waveform, preparedWaveform)
+  assert.equal(uiDigest, digestJson(uiValue))
+  const manifest = JSON.parse(readFileSync(path.join(result.publish.versionDir, 'canonical',
+    `canonical-paper-publication-v${result.publish.consumers.screen.authorityRef.manifestVersion}.json`), 'utf8'))
+  assert(manifest.sourceEvidence.every(({ relativePath }) => relativePath.startsWith('source-evidence/')),
+    'presentation derivatives must not enter immutable Source Capture')
+  const runtime = createCanonicalConsumerRuntime({ rootDir: listeningPublication.paperAssetsDir, db: listeningPublication.db })
+  const publishedPrint = runtime.load({ paperId, consumerId: 'print_pdf' })
+  assert.equal(runtime.load({ paperId, consumerId: 'screen' }).paperSourceType, '模拟题')
+  assert.equal(publishedPrint.paperSourceType, '模拟题')
+  const publishedPayload = canonicalConsumptionPrintPayload(publishedPrint, listeningProjection.paperName)
+  const publishedHtml = buildPrintHtml({ ...publishedPayload,
+    items: publishedPayload.items.map(({ questionGroupId }) => ({ detail: publishedPayload.details.get(questionGroupId) })),
+    canonicalConsumption: publishedPrint, versionType: 'student' })
+  assert.match(publishedHtml, /data-canonical-mock-name>2026 Contract Mock/,
+    'public print consumes the persisted source classification, not test-injected metadata')
+  for (const derivative of [null, Buffer.from('{bad json'), Buffer.from(JSON.stringify({ ...uiValue,
+    waveform: { ...uiValue.waveform, reference: 999 }, digest: uiDigest }))]) {
+    if (derivative) writeFileSync(playbackUiPath, derivative)
+    else rmSync(playbackUiPath)
+    const historical = runtime.load({ paperId, consumerId: 'screen' })
+    assert.equal(historical.publicationDigest, manifest.publicationDigest)
+    assert.equal(historical.listeningAudio.waveform, undefined, 'discard corrupt geometry; keep validated audio playable')
+    assert.equal(historical.listeningAudio.segments, undefined, 'never consume unchecked timing data')
+    writeFileSync(playbackUiPath, playbackUiBytes)
+  }
+  const mockPrint = await requestReviewPrint(listeningProjection, 'student')
+  assert.equal(mockPrint.status, 200)
+  assert.match(mockPrint.body, /data-canonical-mock-name/)
+  assert.match(mockPrint.body, /data-canonical-cover-title>英 语/)
+  const truePrint = await requestReviewPrint({ ...listeningProjection,
+    consumption: { ...listeningProjection.consumption, paperSourceType: '真题' } }, 'student')
+  assert.doesNotMatch(truePrint.body, /data-canonical-mock-name/)
   const previousAssetRoot = process.env.QUESTION_BANK_PAPER_ASSET_ROOT
   try {
     process.env.QUESTION_BANK_PAPER_ASSET_ROOT = listeningPublication.paperAssetsDir
@@ -2656,6 +2765,101 @@ try {
 } finally {
   close(preCommit)
 }
+
+// The sidecar is optional for legacy versions, but a claimed reviewed sidecar
+// must survive the same atomic receipt, recovery and rollback as Canonical.
+// These cases are authored here for Ship; preview builds do not execute them.
+function attachSourceReferences(context) {
+  const sidecar = prepareSourceReferences(context.projection)
+  const documents = context.projection.materialization.documents.filter(document => document.role === 'official_answers')
+  const evidence = documents.map(document => ({ documentSha256: document.sha256,
+    locator: { kind: 'page_region', documentId: document.documentId, page: 1,
+      region: { x: 0, y: 0, width: 1, height: 1 } } }))
+  for (const group of sidecar.groups) for (const kind of ['essays', 'scoring']) {
+    group[kind] = { state: 'not_supplied', evidence, entries: [] }
+  }
+  writeJson(path.join(context.reviewRoot, SOURCE_REFERENCES_FILE), sidecar)
+  context.projection = buildNck1ReviewProjection(context.reviewRoot, { requireAnalyses: true })
+  const approvedManifest = reviewManifestFor(context.reviewRoot, context.projection)
+  return { approvedManifest, approvedIdentity: { ...approvedIdentity(context.projection),
+    bundleDigest: approvedManifest.bundleDigest, approvalId: 'approval-source-reference-fixture',
+    revisionId: 'revision-source-reference-fixture' } }
+}
+
+const referencePreCommit = makeContext('references-precommit')
+try {
+  const approval = attachSourceReferences(referencePreCommit)
+  const exact = readFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE))
+  assert.throws(() => publish(referencePreCommit), /approved Review|schema/i)
+  assert.throws(() => publish(referencePreCommit, { ...approval, failurePoint: 'db-write' }))
+  assert.equal(publishedVersionCount(referencePreCommit), 0)
+  assert(!existsSync(path.join(referencePreCommit.paperAssetsDir, paperId, 'latest')))
+  rmSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE))
+  assert.throws(() => publish(referencePreCommit, approval), /inventory/i, 'deleted approved sidecar cannot silently become legacy')
+  writeFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), exact)
+  const result = publish(referencePreCommit, approval)
+  const consumption = Object.values(result.publish.consumers)[0]
+  const read = () => readSourceReferencePublication({ db: referencePreCommit.db,
+    paperAssetsDir: referencePreCommit.paperAssetsDir, consumption })
+  assert.equal(read().commitment.bundleDigest, approval.approvedManifest.bundleDigest)
+  assert(read().sourceReferencesBytes.equals(exact))
+  const file = path.join(result.publish.versionDir, SOURCE_REFERENCES_FILE)
+  writeFileSync(file, Buffer.from('{}'))
+  assert.throws(read, /字节/)
+  writeFileSync(file, exact)
+  const swapped = { ...consumption, publicationDigest: `sha256:${'0'.repeat(64)}` }
+  assert.throws(() => readSourceReferencePublication({ db: referencePreCommit.db,
+    paperAssetsDir: referencePreCommit.paperAssetsDir, consumption: swapped }), /不一致/)
+} finally { close(referencePreCommit) }
+
+const referenceRecovery = makeContext('references-recovery')
+try {
+  const approval = attachSourceReferences(referenceRecovery)
+  const exact = readFileSync(path.join(referenceRecovery.reviewRoot, SOURCE_REFERENCES_FILE))
+  assert.throws(() => publish(referenceRecovery, { ...approval, failurePoint: 'committed-reload' }))
+  const paperDir = path.join(referenceRecovery.paperAssetsDir, paperId)
+  const journal = path.join(paperDir, '.latest-swap.json')
+  const latest = path.join(paperDir, 'latest', SOURCE_REFERENCES_FILE)
+  writeFileSync(latest, Buffer.from('{}'))
+  assert.throws(() => recoverInterruptedPaperImportPublish({ db: referenceRecovery.db,
+    paperAssetsDir: referenceRecovery.paperAssetsDir, paperId }), /Review bytes/)
+  assert(existsSync(journal), 'failed recovery retains committed evidence')
+  writeFileSync(latest, exact)
+  const retry = publish(referenceRecovery, approval)
+  assert.equal(retry.status, 'idempotent')
+  assert.equal(publishedVersionCount(referenceRecovery), 1)
+  assert(!existsSync(journal))
+  writeFileSync(latest, Buffer.from('{}'))
+  assert.throws(() => rollbackPaperImportPublication({ db: referenceRecovery.db,
+    paperAssetsDir: referenceRecovery.paperAssetsDir, paperId, versionName: 'v1' }), /Review bytes/)
+  writeFileSync(latest, exact)
+} finally { close(referenceRecovery) }
+
+const referenceRollback = makeContext('references-rollback')
+try {
+  const legacy = publish(referenceRollback)
+  assert.equal(readSourceReferencePublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir,
+    consumption: Object.values(legacy.publish.consumers)[0] }), null)
+  // A new reviewed source, not a late mutable attachment to legacy v1.
+  Object.assign(referenceRollback, makeReviewRoot(path.join(referenceRollback.tempRoot, 'v2'),
+    paperId, 'new source for the second reviewed version'))
+  const configPath = path.join(referenceRollback.reviewRoot, 'config.json')
+  const config = JSON.parse(readFileSync(configPath, 'utf8'))
+  writeJson(configPath, { ...config, provenance: { ...config.provenance, year: 2026, month: 11 } })
+  const approval = attachSourceReferences(referenceRollback)
+  const current = publish(referenceRollback, approval)
+  assert.equal(current.publish.assetVersion, 2)
+  const months = () => referenceRollback.db.prepare('SELECT DISTINCT month FROM sources').all().map(row => row.month)
+  assert.deepEqual(months(), [11])
+  const exact = readFileSync(path.join(current.publish.versionDir, SOURCE_REFERENCES_FILE))
+  rollbackPaperImportPublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir, paperId, versionName: 'v1' })
+  const latest = path.join(referenceRollback.paperAssetsDir, paperId, 'latest', SOURCE_REFERENCES_FILE)
+  assert(!existsSync(latest), 'rolling back to a legacy version removes the later answer sidecar')
+  assert.deepEqual(months(), [null], 'old unknown month must replace the newer month during rollback')
+  rollbackPaperImportPublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir, paperId, versionName: 'v2' })
+  assert(readFileSync(latest).equals(exact))
+  assert.deepEqual(months(), [11])
+} finally { close(referenceRollback) }
 
 const postCommit = makeContext('post-commit', { listening: true })
 try {

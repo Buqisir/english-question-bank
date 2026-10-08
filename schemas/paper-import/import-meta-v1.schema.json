@@ -35,6 +35,7 @@
       "required": ["year", "region", "paperName", "examCode", "subject", "sourceType", "defaultTags"],
       "properties": {
         "year": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
         "region": { "type": "string", "minLength": 1 },
         "paperName": { "type": "string", "minLength": 1 },
         "examCode": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },

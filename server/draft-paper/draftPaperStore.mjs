@@ -8,6 +8,12 @@ import { existsSync, readFileSync } from 'node:fs'
 import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { buildPrintHtml } from '../print-renderer.mjs'
+import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../answer-renderer.mjs'
+import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
+import { canonicalSourceConsumptionForGroup } from '../paper-canonical/consumerRuntime.mjs'
+import { projectCanonicalConsumerGroup, selectedFamilyContractIdForGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
+import { readSourceReferencePublication } from '../paper-import/sourceReferencePublication.mjs'
+import { frozenProductResult, loadStoredProducts } from '../paper-import/frozenProducts.mjs'
 import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
@@ -272,6 +278,7 @@ export function createDraftPaperStore({
   openUserDatabase,
   paperAssetsDir,
   resolveCanonicalConsumption = null,
+  loadCanonicalConsumption = null,
   selectQuestionGroupCards,
 }) {
   // draft-desk-b step4 (SW-5 retirement): `exportDir` and `rootDir` used to be
@@ -808,7 +815,7 @@ export function createDraftPaperStore({
 
   function buildDraftPrintHtml(draftPaper, exportOptions = {}) {
     if (!draftPaper.items.length) return ''
-    const input = buildDraftPaperExportInput(draftPaper, exportOptions)
+    const input = buildDraftPaperExportInput(draftPaper, { questionNumberStart: draftPaper.questionNumberStart ?? 1, ...exportOptions })
     if (!input.items.length) return ''
     const exportItems = resolveDraftExportItems(input).filter((item) =>
       exportOptions.includeListening !== false || item.detail.groupType !== 'listening')
@@ -1504,13 +1511,15 @@ export function createDraftPaperStore({
   // the old Vivliostyle line was synchronous (execFileSync). Both call sites
   // (draftPaperRoutes.mjs's POST .../print-pdf, mySpaceRoutes.mjs's POST
   // /api/my-space/artifacts) are updated in lockstep to await this.
-  async function exportDraftPaperPdf(userId, draftPaperId, { versionType = 'student', pageLayout = 'natural' } = {}) {
+  async function exportDraftPaperPdf(userId, draftPaperId, { edition = null, versionType = 'student', pageLayout = 'natural' } = {}) {
     requireUserId(userId)
     const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
     if (pageLayout !== 'natural' && !FIXED_PAGINATION_EDITIONS.includes(pageLayout)) throw new Error('pageLayout is invalid')
     if (pageLayout !== 'natural' && normalizedVersionType !== 'student') throw new Error('友好定页导出仅支持学生卷')
     let pagination
-    if (pageLayout === 'natural') {
+    if (edition !== null) {
+      pagination = await getDraftPaperProductPagination(userId, draftPaperId, edition)
+    } else if (pageLayout === 'natural') {
       pagination = await getDraftPaperPagination(userId, draftPaperId, { versionType: normalizedVersionType })
     } else {
       const userDb = openUserDatabase({ readOnly: false })
@@ -1568,7 +1577,8 @@ export function createDraftPaperStore({
         : pageLayout === 'friendly10' ? '-10页含听力'
         : pageLayout === 'friendly8' ? '-8页无听力'
           : `-长卷${pageLayout === 'long12' ? '含听力' : '无听力'}-实${pagination.pageCount}页`
-    const fileName = `${safeTitle}-${versionLabel}${layoutLabel}.pdf`
+    const fileName = edition === null ? `${safeTitle}-${versionLabel}${layoutLabel}.pdf`
+      : `${safeTitle}-${PAPER_PDF_PRODUCTS[edition]}.pdf`
     // last_printed_at only ever bumps on an actual export (never on a bare preview
     // fetch) — kept as its own short-lived userDb connection here rather than folded
     // into getDraftPaperPagination, which the preview route also calls and which
@@ -1583,6 +1593,146 @@ export function createDraftPaperStore({
       fontSizePt: pagination.fontSizePt,
       crossingGroupCount: pagination.crossingGroupIds?.length ?? 0,
       splitOptionBankCount: pagination.splitOptionBankCount ?? 0 }
+  }
+
+  // Current product preview, download and My Space reuse the same exact render.
+  // The older pagination API remains an internal composition/historical seam.
+  async function getDraftPaperProductPagination(userId, draftPaperId, edition) {
+    requireUserId(userId)
+    requirePaperPdfEdition(edition)
+    const userDb = openUserDatabase({ readOnly: true })
+    const bankDb = openDatabase({ readOnly: true })
+    try {
+      const draftPaper = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
+      if (!draftPaper) throw new Error('Draft paper not found')
+      return await renderPaperProduct(draftPaper, bankDb, edition)
+    } finally {
+      userDb.close()
+      bankDb.close()
+    }
+  }
+
+  // Published products are immutable reviewed bytes, never a render-on-download.
+  // Assemblies below still render because teachers can change their selection.
+  async function getPublishedPaperProduct(paperId, edition, expectedPublicationDigest) {
+    requirePaperPdfEdition(edition)
+    if (!loadCanonicalConsumption) throw new Error('Canonical paper loader unavailable')
+    if (!/^sha256:[a-f0-9]{64}$/.test(expectedPublicationDigest || '')) throw new Error('缺少精确试卷版本')
+    const db = openDatabase({ readOnly: true })
+    try {
+      const version = db.prepare(`SELECT version_name FROM canonical_paper_publications
+        WHERE paper_id = ? AND publication_digest = ?`).get(paperId, expectedPublicationDigest)
+      if (!version) throw new Error('此试卷版本尚未发布')
+      const consumption = loadCanonicalConsumption({ paperId, consumerId: 'print_pdf', version: version.version_name })
+      if (consumption.publicationDigest !== expectedPublicationDigest) throw new Error('试卷版本身份不一致')
+      return frozenProductResult(await loadStoredProducts({ db, paperAssetsDir, consumption }), edition)
+    } finally {
+      db.close()
+    }
+  }
+
+  async function getAssemblyPaperProduct(input, exactConsumption = null) {
+    requirePaperPdfEdition(input.edition)
+    if (input.versionType !== undefined || input.pageLayout !== undefined) throw new Error('当前产品只使用 edition')
+    if (typeof input.title !== 'string' || !input.title.trim() || !Array.isArray(input.items) || !input.items.length) {
+      throw new Error('卷名与选中的题组不能为空')
+    }
+    const ids = input.items.map(item => item?.questionGroupId)
+    if (ids.some(id => typeof id !== 'string' || !id) || new Set(ids).size !== ids.length) {
+      throw new Error('选中的题组必须有唯一身份')
+    }
+    const draftPaper = { id: `assembly:${createHash('sha256').update(JSON.stringify(input)).digest('hex')}`,
+      title: input.title.trim(), printForm: 'a4', questionNumberStart: input.questionNumberStart ?? 1,
+      items: ids.map((groupId, index) => {
+        const questionGroup = getQuestionGroupDetail(groupId)
+        if (!questionGroup) throw new Error(`questionGroupId not found: ${groupId}`)
+        return { id: `assembly-item:${index}`, groupId, questionGroup, orderIndex: index + 1,
+          pageBreakBefore: false, sourcePaperId: questionGroup.paperId, groupMissing: false }
+      }) }
+    if (!Number.isSafeInteger(draftPaper.questionNumberStart) || draftPaper.questionNumberStart < 1) throw new Error('起始题号必须是正整数')
+    const bankDb = openDatabase({ readOnly: true })
+    try {
+      return await renderPaperProduct(draftPaper, bankDb, input.edition, { exactConsumption })
+    } finally {
+      bankDb.close()
+    }
+  }
+
+  async function renderPaperProduct(draftPaper, bankDb, edition, { exactConsumption = null, cache = true } = {}) {
+      requirePaperPdfEdition(edition)
+      if (!draftPaper.items.length) throw new Error('请先添加题组')
+      if (draftPaper.items.some(item => item.groupMissing)) throw new Error('选中的题组已缺失，不能生成不完整产品')
+      const canonicalConsumption = exactConsumption || resolveDraftCanonicalConsumption(draftPaper)
+      if (!canonicalConsumption) throw new Error('选中的题组没有完整 Canonical 来源')
+      const sourceByPaper = new Map()
+      const selected = draftPaper.items.filter(item => edition === 'answerOnly' || edition === 'largeComplete'
+        || item.questionGroup?.groupType !== 'listening')
+      if (!selected.length) throw new Error('此产品没有可导出的题组')
+      const exportItems = resolveDraftExportItems(buildDraftPaperExportInput(draftPaper))
+        .filter(item => selected.some(selected => selected.groupId === item.detail.id))
+      if (edition === 'answerOnly') {
+        for (const item of exportItems) {
+          const source = canonicalSourceConsumptionForGroup(canonicalConsumption, item.detail.id)
+          if (!sourceByPaper.has(source.paperId)) sourceByPaper.set(source.paperId,
+            readSourceReferencePublication({ db: bankDb, paperAssetsDir, consumption: source }))
+        }
+      }
+      const signature = draftPaperPaginationSignature(draftPaper, edition, JSON.stringify({
+        canonical: consumptionSignature(canonicalConsumption),
+        references: [...sourceByPaper].map(([paperId, source]) => [paperId, source?.commitment]),
+      }))
+      const cacheKey = draftPaginationCacheKey(draftPaper.id, edition)
+      const cached = cache ? draftPaginationCacheGet(cacheKey) : null
+      const itemsByGroupId = new Map(selected.map(item => [item.groupId, item.id]))
+      if (cached?.signature === signature) return { ...cached, draftPaper, reused: true,
+        pageBreakSuggestions: edition === 'answerOnly' ? [] : derivePageBreakSuggestions(cached.paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm }) }
+      let rendered
+      if (edition === 'answerOnly') {
+        const paperName = draftPaper.title || '未命名英语练习卷'
+        const wholePaper = selected.length === 11
+          && (draftPaper.questionNumberStart ?? 1) === 1
+          && ownsCompletePaperOpening(canonicalConsumption, selected.map(item => item.groupId))
+        const html = wholePaper && sourceByPaper.size === 1 && [...sourceByPaper.values()][0]
+          ? buildAnswerOnlyHtml({ ...[...sourceByPaper.values()][0], paperName })
+          : buildAssembledAnswerOnlyHtml({ paperName, questionNumberStart: draftPaper.questionNumberStart ?? 1,
+            items: exportItems.map(item => {
+              const consumption = canonicalSourceConsumptionForGroup(canonicalConsumption, item.detail.id)
+              return { detail: item.detail, source: sourceByPaper.get(item.detail.paperId),
+                canonicalGroup: item.detail.groupType === 'listening' ? projectCanonicalConsumerGroup({ consumption,
+                  groupId: item.detail.id, familyContractId: selectedFamilyContractIdForGroup({ consumption, groupId: item.detail.id }) }) : null }
+            }) })
+        rendered = await renderPaginatedPaper(html)
+      } else {
+        const listening = selected.filter(item => item.questionGroup?.groupType === 'listening')
+        studentProductPolicy(edition, listening.length)
+        if (edition === 'largeComplete' && new Set(listening.map(item =>
+          canonicalSourceConsumptionForGroup(canonicalConsumption, item.groupId).paperId)).size !== 1) {
+          throw new Error('大字完整版需要同一源卷完整的两个听力题组')
+        }
+        const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: 'student',
+          includeListening: edition === 'largeComplete', canonicalConsumption })
+        const groupIds = selected.map(item => item.groupId)
+        let explicit = null
+        if (ownsCompletePaperOpening(canonicalConsumption, groupIds)) {
+          const slotBindings = paginationSlotBindings(canonicalConsumption)
+          const versionDir = path.join(paperAssetsDir, canonicalConsumption.paperId, 'versions', `v${canonicalConsumption.sourceAssetVersion}`)
+          const plan = loadBoundPaperPaginationPlan(versionDir, { paperId: canonicalConsumption.paperId,
+            sourceAssetVersion: canonicalConsumption.sourceAssetVersion, sourceDigest: canonicalConsumption.sourceAssetDigest,
+            slotBindings, sourceHasListening: slotBindings.some(slot => slot.familyContractId === 'listening') })
+          explicit = paginationPlanEdition(plan?.plan, edition, slotBindings)
+        }
+        rendered = explicit
+          ? await renderExplicitStudentProductPdf(html, { ...explicit, render: renderPaginatedPaper })
+          : await planStudentProductPdf(html, { edition, render: renderPaginatedPaper })
+      }
+      const groupIds = selected.map(item => item.groupId)
+      const paginatedHtml = applyPaginationDomContract(rendered.paginatedHtml, {
+        groupIds: edition === 'answerOnly' ? null : groupIds, pageCount: rendered.pageCount,
+      })
+      const result = { ...rendered, paginatedHtml, signature, edition }
+      if (cache) draftPaginationCacheSet(cacheKey, result)
+      return { ...result, draftPaper, reused: false, pageBreakSuggestions: edition === 'answerOnly' ? []
+        : derivePageBreakSuggestions(paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm }) }
   }
 
   // draft-desk-b step2/3 (MF-3/MF-4/MF-3-step3, plan.md "步2 — DOM 契约 + 缓存解耦" /
@@ -1660,18 +1810,19 @@ export function createDraftPaperStore({
   // the CURRENT order, only (on a cache miss) for the bounded candidate set a
   // broken current order produces. Zero-breakage or a cache hit both return
   // fast with no dry-run at all.
-  async function getReorderSuggestion(userId, draftPaperId, { versionType = 'student' } = {}) {
+  async function getReorderSuggestion(userId, draftPaperId, { edition = null, versionType = 'student' } = {}) {
     requireUserId(userId)
     const normalizedVersionType = versionType === 'teacher' ? 'teacher' : 'student'
-    const pagination = await getDraftPaperPagination(userId, draftPaperId, { versionType: normalizedVersionType })
+    const pagination = edition ? await getDraftPaperProductPagination(userId, draftPaperId, edition)
+      : await getDraftPaperPagination(userId, draftPaperId, { versionType: normalizedVersionType })
     if (!pagination.pageBreakSuggestions || pagination.pageBreakSuggestions.length === 0) {
       return { suggestion: null, reused: false }
     }
     const { draftPaper } = pagination
     const signature = draftPaperPaginationSignature(
       draftPaper,
-      normalizedVersionType,
-      pagination.consumptionSignature,
+      edition || normalizedVersionType,
+      pagination.signature || pagination.consumptionSignature,
     )
     const cacheKey = reorderSuggestionCacheKey(draftPaperId, draftPaper.printForm, signature, pagination.pageBreakSuggestions)
     // reused 与分页端点同款语义（CR MF-1 的可断言面）：null 裁决同样必须命中。
@@ -1679,6 +1830,15 @@ export function createDraftPaperStore({
     if (cached !== undefined) return { suggestion: cached, reused: true }
 
     const suggestion = await proposeReorder(draftPaper, pagination.pageBreakSuggestions, draftPaper.printForm, {
+      evaluateCandidate: edition ? async candidateDraft => {
+        const db = openDatabase({ readOnly: true })
+        try {
+          return (await renderPaperProduct(candidateDraft, db, edition, { cache: false })).pageBreakSuggestions
+        } catch (error) {
+          if (['PAPER_FIXED_PAGE_IMPOSSIBLE', 'PAPER_LAYOUT_OVERFLOW'].includes(error.code)) return null
+          throw error
+        } finally { db.close() }
+      } : null,
       buildDraftPaginationPrintHtml,
       renderPaginatedPaper,
       applyPaginationDomContract,
@@ -1698,6 +1858,9 @@ export function createDraftPaperStore({
     getCurrentDraftPaperRow,
     getDraftPaper,
     getDraftPaperPagination,
+    getDraftPaperProductPagination,
+    getAssemblyPaperProduct,
+    getPublishedPaperProduct,
     getOrCreateCurrentDraftPaper,
     getReorderSuggestion,
     listDraftPapers,

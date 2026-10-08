@@ -434,7 +434,7 @@ async function verifyTwoUserIsolation() {
       `status=${aAfterCrossUserMutations.status} body=${JSON.stringify(aAfterCrossUserMutations.json)}`,
     )
 
-    const printHtmlByB = await req(`/api/draft-papers/${draftIdA}/print-html`, { cookie: cookieB })
+    const printHtmlByB = await req(`/api/draft-papers/${draftIdA}/print-html?edition=largeNoListening`, { cookie: cookieB })
     assert('2. B GET A\'s print-html -> 404', printHtmlByB.status === 404, `status=${printHtmlByB.status}`)
 
     // owner has no private-data privilege: A (owner) using B's draftId also 404s.
@@ -494,7 +494,7 @@ async function verifyTwoUserIsolation() {
     // -> getDraftPaper, both gated on (id, user_id) — draft-desk-b step4), BEFORE
     // the paged.js/Chromium pipeline is ever invoked — safe to exercise as a real
     // HTTP call in this hermetic script.
-    const borrowByB = await req('/api/my-space/artifacts', { method: 'POST', body: { draftPaperId: draftIdA }, cookie: cookieB })
+    const borrowByB = await req('/api/my-space/artifacts', { method: 'POST', body: { draftPaperId: draftIdA, edition: 'largeNoListening' }, cookie: cookieB })
     assert('2. B borrows A\'s draftId via POST /api/my-space/artifacts -> 404 (PA MF-3)', borrowByB.status === 404, `status=${borrowByB.status} body=${JSON.stringify(borrowByB.json)}`)
 
     // B tries to file an artifact into A's folder id. Exercised directly against

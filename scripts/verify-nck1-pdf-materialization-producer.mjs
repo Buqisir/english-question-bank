@@ -228,6 +228,7 @@ try {
     cliPaperId,
     '--paper-name', 'Synthetic NCK1 PDF',
     '--provenance', 'anonymous synthetic fixture',
+    '--year', '2025', '--month', '12',
     '--source', `question_source=${questionPath}`,
     '--source', `official_answers=${answerPath}`,
   ), /INITIALIZED/u)

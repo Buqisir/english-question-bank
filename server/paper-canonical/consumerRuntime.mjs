@@ -165,7 +165,7 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
   const store = {
     ...createFileSystemCanonicalPublicationStore({ rootDir, db }),
   }
-  function load({ paperId, consumerId }) {
+  function load({ paperId, consumerId, version = null }) {
     if (
       typeof paperId !== 'string'
       || !SAFE_PAPER_ID.test(paperId)
@@ -183,6 +183,7 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
     const result = loadPaperForConsumptionSync({
       paperId,
       consumerContract,
+      ...(version ? { version } : {}),
     }, store)
     if (result.disposition !== 'ready') throw rejected(result)
     return result

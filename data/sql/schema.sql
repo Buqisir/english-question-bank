@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS sources (
   id TEXT PRIMARY KEY,
   source_type TEXT NOT NULL CHECK (source_type IN ('real_exam', 'mock_exam', 'self_made', 'other')),
   year INTEGER,
+  month INTEGER CHECK (month IS NULL OR (typeof(month) = 'integer' AND month BETWEEN 1 AND 12)),
   region TEXT NOT NULL DEFAULT '',
   paper_name TEXT NOT NULL DEFAULT '',
   section TEXT NOT NULL DEFAULT '',

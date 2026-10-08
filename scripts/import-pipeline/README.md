@@ -8,15 +8,18 @@
 
 任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
 项目级 `importing-nck1-papers` skill 会自动匹配导题、继续某卷、审核返工、状态查询
-和认可后的上线准备。默认 worker 是绑定 submission 的私有 Amp Project Orb。
-已有卷或 source-intake handoff 后运行（新 submission 不需要先找 paperId）：
+和认可后的上线准备。新卷只由 Owner 在 Amp 明确发起，使用专用 Import Project 的
+本地源文件入口；Owner给源材料与考试年月，Agent读取题卷正式题头并处理其余字段。
+专用环境使用 `.agents/import-pre-setup` 选择 `.agents/setup --import`，不初始化开发库、
+CI用户、服务或ASR模型。代码和skill须到达默认分支才作用于后续项目Orb。
+已有卷或历史 source-intake handoff 后运行：
 
 ```bash
 node scripts/import-pipeline/review.mjs preflight <paperId>
 ```
 
-若工作来自 Owner `/ops/` 的“题源台账”，先通过私有队列取得同一份 immutable
-submission；不要从 webhook 文本或网页字段重建文件：
+以下台账命令仅用于 Owner 明确要求继续的历史 submission，不是新卷默认入口。
+通过私有队列取得同一份 immutable submission；不要从 webhook 文本或网页字段重建文件：
 
 ```bash
 QUESTION_BANK_IMPORT_OPS_ORIGIN='<private origin>' \
@@ -28,7 +31,7 @@ node scripts/import-pipeline/source-intake.mjs init <submissionId> --paper-id <p
 node scripts/import-pipeline/source-intake.mjs handoff <submissionId> --paper-id <paperId>
 ```
 
-新接卷/恢复优先使用两个有界入口：
+历史 submission 恢复使用两个有界入口：
 
 ```bash
 node scripts/import-pipeline/source-intake.mjs status <submissionId>
@@ -54,8 +57,9 @@ materialize/preflight，stdout 始终只有一份机器可读 JSON；子进程�
 阻断，不自动重领。听力 init 后尚无 finalized receipt 时返回带命令与路径的 `tasks`，
 不以进度记录代替音频证据；
 协调线程须核对源绑定，按待办运行材料化与内容 review，再显式 finalize。
-OCR web 确认仍有 Owner-only 权限门禁；Agent 不得伪造人工确认。这一限制尚未满足
-所有 OCR 卷只审最终版式的目标，必须准确报告，不得把听力 Agent 检查也归为人工待办。
+当前 public-paper OCR 走真实 Agent `proofread-ocr` 与不可变receipt；不冒充Owner，
+不伪造确认。源文本用Candidate-bound v3记录明确纠错，原始OCR与Source bytes保留。
+Owner在Amp看校正说明与最终Screen／四PDF，不另设OCR清单或报告门户。
 
 新协调与 public-paper-v1 摘要/检索生成统一使用内置 `low` 和 `features: []`，
 模型与推理档位跟随 Amp 的 Low 配置，不在仓库固定。模式不可用则停止，不自动切换模式。
@@ -108,7 +112,8 @@ external analyzed_package 原合同不变，不得为恢复方便改 profile 或
 ```bash
 node scripts/import-pipeline/universal-nck1.mjs preflight
 node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
-  --paper-name '<卷名>' --provenance '<出处>' \
+  --paper-name '<题卷正式题头>' --provenance '<源出处>' \
+  --year <Owner给定年份> --month <Owner给定月份> \
   --source question_source=/abs/questions.pdf \
   --source official_answers=/abs/answers.docx
 node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>
@@ -125,8 +130,30 @@ QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
 `--source question_and_answers=/abs/paper-with-answers.pdf`。只有完整题卷后恰好一个明确
 答案heading才拆分；无/双heading或位置不明返回
 `NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`。纯答案键与带逐题详解/写作范文的答案源都只
-生成同一套完整21–65答案值；源详解和范文不进入Materialization、Candidate或教师版，
+生成同一套完整21–65答案值。写作源范文与评分参考另外捕获到绑定来源的
+`source-references-v1.json`；纯答案版使用源参考，不使用AI范文或逐题详解。
 原source bytes/digest仍保留。只有ABCD而缺56–65答案仍失败关闭。
+
+### 新卷四产品与音频准备
+
+按[四产品合同](../../docs/product/paper-pdf-products-v1.md)准备
+`largeComplete`／`largeNoListening`／`economy8`／`answerOnly`，不再选择学生／教师版。
+源名与Owner年月分别封存；不从学年、导入日期或文件名猜月份，不虚构具体日。
+新音频用 `stage-listening-audio <paperId> --audio <original.mp3> --signal-only`，
+信号分段保留 `contentValidation: not_performed`，不能冒称内容或ASR通过。
+最终normalized playback预计算50ms RMS波形并绑定SHA，Screen复用、PDF不打印；
+已有合法波形不重算，历史缺失仍可播放。规则见导题合同的音频波形预处理节。
+
+源审查、摘要、metadata、源参考、波形与分页稳定后，Review push前运行：
+
+```bash
+node scripts/import-pipeline/freeze-products.mjs --paper-dir <workspace>
+```
+
+四PDF与`products/manifest-v1.json`冻结进精确Review清单，不覆盖已有products目录。
+原卷预览／下载读取已审固定版本，不在下载时重排；返修另建工作副本、新revision和
+授权发布版本，保留旧链接与字节。私有存储配置、生产部署及卷子发布仍需相应授权；
+本地接线不是上线证明。正式验收按AGENTS的Ship节奏执行，不跳过单卷输入门禁。
 
 ### 阅读解析的精确位置准备
 

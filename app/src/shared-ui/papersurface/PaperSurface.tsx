@@ -41,6 +41,7 @@ import {
 } from '../../../../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import {
   clozeRhythm,
+  resolveConsumerClozeGeometry,
 } from '../../../../shared/paper-canonical/clozeRhythm.mjs'
 import {
   grammarFillRhythm,
@@ -139,7 +140,9 @@ type BlankFocusContext = LegacyBlankFocusContext
  * every internal use of the original two values is untouched.
  */
 type PaperSurfaceBlankFocusMode = 'rail' | 'in-passage' | 'paper-blank'
+type ClozeConsumerRef = Parameters<typeof resolveConsumerClozeGeometry>[0]
 type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
+  readonly clozeConsumerRef?: ClozeConsumerRef
   readonly blankFocusMode?: PaperSurfaceBlankFocusMode
   /** Derived from the exact consumer binding, absent on historical surfaces. */
   readonly roleLayout?: 'golden_reference_v1'
@@ -202,6 +205,8 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly listeningPlayers?: Readonly<Record<string, ReactNode>>
   /** Screen-only whole-recording control, placed after the listening part heading. */
   readonly listeningPartPlayer?: ReactNode
+  /** Screen-only first-section control, placed after its heading. */
+  readonly listeningSectionPlayer?: ReactNode
   readonly listeningPresentation?: {
     readonly partHeading: string | null
     readonly transferNotice: string | null
@@ -247,6 +252,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
     sevenChoicesRhythmEnabled = false,
     sevenChoicesFollowingSectionId,
     clozeRhythmEnabled = false,
+    clozeConsumerRef,
     clozeFollowingSectionId,
     optionBankHeading,
     canonicalApplicationPromptBlocks,
@@ -254,6 +260,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
     listeningPresentation,
     listeningPlayers,
     listeningPartPlayer,
+    listeningSectionPlayer,
   } = props
 
   if (semanticParagraphs !== undefined) {
@@ -426,7 +433,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
             blocks={canonicalContinuationMaterialBlocks}
           />
         )}
-        {listeningPresentation && <CanonicalListeningChrome presentation={listeningPresentation} partPlayer={listeningPartPlayer} />}
+        {listeningPresentation && <CanonicalListeningChrome presentation={listeningPresentation} partPlayer={listeningPartPlayer} sectionPlayer={listeningSectionPlayer} />}
         {!canonicalReadingBlocks
           && !canonicalApplicationPromptBlocks
           && !canonicalContinuationMaterialBlocks
@@ -446,6 +453,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
             grammarFillScreenRuling={canonicalGrammarFillScreenRuling}
             sevenChoicesRhythmEnabled={sevenChoicesRhythmEnabled}
             clozeRhythmEnabled={clozeRhythmEnabled}
+            clozeConsumerRef={clozeConsumerRef}
             clozeFollowingSectionId={clozeFollowingSectionId}
           />
         ))}
@@ -524,6 +532,11 @@ function CanonicalListeningPartHeading({ text, player }: { text: string; player?
   return <h2 className="ps-listening-part">{text}{anchor}{trail(player)}</h2>
 }
 
+function CanonicalListeningSectionHeading({ text, player }: { text: string; player?: ReactNode }): ReactNode {
+  const { anchor, trail } = useTextTrail(Boolean(player))
+  return <h3 className="ps-listening-section">{text}{anchor}{trail(player)}</h3>
+}
+
 function CanonicalListeningSegmentCue({ text, player }: { text: string; player?: ReactNode }): ReactNode {
   const { anchor, trail } = useTextTrail(Boolean(player))
   return <li className="ps-listening-segment-cue" data-canonical-listening-segment-cue="">
@@ -531,14 +544,15 @@ function CanonicalListeningSegmentCue({ text, player }: { text: string; player?:
   </li>
 }
 
-function CanonicalListeningChrome({ presentation, partPlayer }: {
+function CanonicalListeningChrome({ presentation, partPlayer, sectionPlayer }: {
   presentation: NonNullable<PaperSurfaceComponentProps['listeningPresentation']>
   partPlayer?: ReactNode
+  sectionPlayer?: ReactNode
 }): ReactNode {
   return <header className="ps-listening-chrome" data-canonical-listening-chrome="">
     {presentation.partHeading && <CanonicalListeningPartHeading text={presentation.partHeading} player={partPlayer} />}
     {presentation.transferNotice && <p className="canonical-listening-transfer-notice">{presentation.transferNotice}</p>}
-    <h3 className="ps-listening-section">{presentation.sectionHeading}</h3>
+    <CanonicalListeningSectionHeading text={presentation.sectionHeading} player={sectionPlayer} />
     <p className="ps-listening-instruction">{presentation.instruction}</p>
     {presentation.example && <div className="ps-listening-example" data-canonical-listening-example="">
       <p>例：{presentation.example.stem}</p>
@@ -1031,6 +1045,7 @@ type PaperSurfaceSectionProps = {
   grammarFillScreenRuling?: GrammarFillScreenRuling
   sevenChoicesRhythmEnabled: boolean
   clozeRhythmEnabled: boolean
+  clozeConsumerRef?: ClozeConsumerRef
   clozeFollowingSectionId?: string
 }
 
@@ -1048,6 +1063,7 @@ function PaperSurfaceSection({
   grammarFillScreenRuling,
   sevenChoicesRhythmEnabled,
   clozeRhythmEnabled,
+  clozeConsumerRef,
   clozeFollowingSectionId,
 }: PaperSurfaceSectionProps): ReactNode {
   const grammarFillRhythmEnabled = semanticParagraphs?.some(
@@ -1111,6 +1127,7 @@ function PaperSurfaceSection({
           lectureFocus={lectureFocus}
           onQuestionClick={onQuestionClick}
           clozeRhythmEnabled={clozeRhythmEnabled}
+          clozeConsumerRef={clozeConsumerRef}
           clozeFollowingSectionId={clozeFollowingSectionId}
         />
       )}
@@ -1348,6 +1365,7 @@ type PaperSurfaceQuestionListProps = {
   readingFollowingSectionId?: string
   readingRhythmEnabled?: boolean
   clozeRhythmEnabled?: boolean
+  clozeConsumerRef?: ClozeConsumerRef
   clozeFollowingSectionId?: string
   listeningSegmentCues?: ReadonlyArray<{ readonly beforeQuestionId: string; readonly text: string }>
   listeningPlayers?: Readonly<Record<string, ReactNode>>
@@ -1361,6 +1379,7 @@ function PaperSurfaceQuestionList({
   readingFollowingSectionId,
   readingRhythmEnabled = false,
   clozeRhythmEnabled = false,
+  clozeConsumerRef,
   clozeFollowingSectionId,
   listeningSegmentCues = [],
   listeningPlayers,
@@ -1399,6 +1418,7 @@ function PaperSurfaceQuestionList({
           }
           readingRhythmEnabled={readingRhythmEnabled}
           clozeRhythmEnabled={clozeRhythmEnabled}
+          clozeConsumerRef={clozeConsumerRef}
           clozeFollowingSectionId={
             index === sorted.length - 1
               ? clozeFollowingSectionId
@@ -1421,6 +1441,7 @@ type PaperSurfaceQuestionItemProps = {
   readingFollowingSectionId?: string
   readingRhythmEnabled: boolean
   clozeRhythmEnabled: boolean
+  clozeConsumerRef?: ClozeConsumerRef
   clozeFollowingSectionId?: string
   /** Screen-only control shown right after the stem text. */
   listeningTrail?: ReactNode
@@ -1435,6 +1456,7 @@ function PaperSurfaceQuestionItem({
   readingFollowingSectionId,
   readingRhythmEnabled,
   clozeRhythmEnabled,
+  clozeConsumerRef,
   clozeFollowingSectionId,
 }: PaperSurfaceQuestionItemProps): ReactNode {
   // QA fix (PR #39): the whole question block is one focus target.
@@ -1472,7 +1494,7 @@ function PaperSurfaceQuestionItem({
   }
   const clozeChoiceMapping =
     clozeRhythmEnabled
-      ? clozeRhythm.horizontalChoiceGeometry.rendererMapping
+      ? resolveConsumerClozeGeometry(clozeConsumerRef)
       : null
 
   return (
@@ -1506,7 +1528,7 @@ function PaperSurfaceQuestionItem({
                 gridTemplateColumns:
                   `${clozeChoiceMapping.questionLabelWidthPt}pt minmax(0, 1fr)`,
                 columnGap: 0,
-                width: `${clozeChoiceMapping.rowWidthPt}pt`,
+                width: clozeChoiceMapping.proportional ? '100%' : `${clozeChoiceMapping.rowWidthPt}pt`,
                 alignItems: 'baseline',
               }
             : undefined}
@@ -1516,15 +1538,16 @@ function PaperSurfaceQuestionItem({
             className={`ps-question-options-inline${question.canonicalPlacement ? ` ps-question-options-inline--${question.canonicalPlacement.mode}` : ''}`}
             data-canonical-placement-signature={question.canonicalPlacement?.signature}
             data-canonical-column-starts-pt={
-              clozeChoiceMapping?.columnStartsPt.join(',')
+              clozeChoiceMapping?.proportional ? undefined : clozeChoiceMapping?.columnStartsPt?.join(',')
               ?? question.canonicalPlacement?.columnStartsPt.join(',')
             }
             style={clozeChoiceMapping
               ? {
-                  width:
-                    `${clozeChoiceMapping.rowWidthPt - clozeChoiceMapping.questionLabelWidthPt}pt`,
-                  gridTemplateColumns: clozeChoiceMapping.columnWidthsPt
-                    .map((width) => `${width}pt`)
+                  width: clozeChoiceMapping.proportional ? '100%' : `${clozeChoiceMapping.rowWidthPt! - clozeChoiceMapping.questionLabelWidthPt}pt`,
+                  // Keep the qnum/A join fixed; distribute the reference
+                  // track proportions across the actual passage width.
+                  gridTemplateColumns: (clozeChoiceMapping.columnWidthSharesPt ?? clozeChoiceMapping.columnWidthsPt ?? [])
+                    .map((width) => clozeChoiceMapping.proportional ? `minmax(0, ${width}fr)` : `${width}pt`)
                     .join(' '),
                   columnGap: 0,
                 }

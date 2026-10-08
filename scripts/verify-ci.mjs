@@ -44,6 +44,7 @@ const registry = {
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-import-pagination-qa.mjs',
   'scripts/verify-student-product-pdf.mjs',
+  'scripts/verify-published-products-storage.mjs',
   'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-scoped-publication.mjs',

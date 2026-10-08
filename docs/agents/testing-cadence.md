@@ -1,21 +1,38 @@
 # Testing cadence
 
 Test weight follows actual blast radius, irreversibility, and automation
-authority. Run affected checks during development; do not use the full suite as
-a ritual. `SKIP` is never `PASS`.
+authority. `SKIP` is never `PASS`.
 
-Use `pnpm -C app verify:changed` for the daily diff-selected pack,
-`pnpm -C app verify:paper` for shared Canonical Paper/Print seams, and
-`pnpm -C app verify:all` only for a final high-risk candidate or conservative
-fallback. Inspect a route without running it with
+## Before Ship
+
+Until the Owner explicitly says Ship, do not run formal local automated
+verify/regression suites by default. Iterate on implementation and review the
+diff. Keep build/render work necessary for a usable preview and checks needed
+for an explicit diagnostic request; neither requires a formal test pack.
+Mark the candidate as awaiting acceptance, not verified. Inspect rendered
+visual changes before claiming UI completion. This cadence does not waive
+authorization or safety checks required for an authorized data/production
+transaction.
+
+Inspect a verification route without running it with
 `node scripts/verify-ci.mjs --plan-json --changed-file <path>`.
+
+## After Ship
+
+Ship starts verification and delivery, not merge-before-test. Synchronize and
+freeze the candidate, then complete missing affected local-only acceptance
+once. Reuse covered checks from that candidate's natural CI, including required
+Full/E2E. Do not stack focused, `verify:changed`, `verify:paper` and
+`verify:all` runs merely to repeat coverage. The pack commands remain available
+for explicit diagnostics or missing coverage, not routine development runs.
 
 ## Local and reversible
 
-Run the affected build/typecheck and focused behavioral check. A UI
-micro-change also gets real-click verification on the exact page and state,
-plus Owner QA when visible. It does not trigger unrelated backend, paper,
-print/PDF, or full-repository suites without a demonstrated dependency.
+At acceptance, run affected build/typecheck or behavioral checks only where
+current CI does not cover them. A UI micro-change also gets real-click
+verification on the exact page and state, plus Owner QA when visible. It does
+not trigger unrelated backend, paper, print/PDF, or full-repository suites
+without a demonstrated dependency.
 
 ## Known-shape paper data addition
 
@@ -33,14 +50,25 @@ lane.
 Changes to shared schema/data contracts, auth/permissions/isolation,
 persistence/migration, atomic publication, shared PaperSurface or
 Screen/Print/PDF behavior, production configuration, or irreversible cross-cut
-architecture require affected public-seam tests, one full suite on the final
-candidate, and one independent Standards/Spec review. Renderer changes use
-real affected Screen/Print/PDF output; static regex or hashes alone are not
-visual proof.
+architecture require affected public-seam tests, Full/E2E on the final
+candidate, and one independent Standards/Spec review at Ship. Reuse the exact
+candidate's natural CI rather than duplicating its suite locally. Renderer
+changes use real affected Screen/Print/PDF output; static regex or hashes alone
+are not visual proof.
 
 ## Release
 
-Run missing release checks once on the final candidate or use current CI
-evidence. Report commands, outcomes, observed wall time, and limitations
-literally. Re-run only checks invalidated by a post-review change, and confirm
-`main` CI after merge.
+Report commands, outcomes, observed wall time, and limitations literally.
+After a fix, rebase or base advance, re-run only local checks invalidated by
+changes to their code, dependencies, fixtures or runtime/environment. Preserve
+unaffected results and failed attempts; an environment fix affecting only a
+few checks does not justify repeating the whole suite. If impact cannot be
+bounded, broaden checks with a reason. Reuse unchanged builds and artifact
+evidence only while their inputs and running implementation remain unchanged;
+keep final outputs bound to the exact revision.
+
+Remote gates are unchanged: each current PR head/base needs its natural
+`verify` and `e2e` results, then the merged main commit needs its own natural
+run. Shared/high/unknown risks require Full and all six E2Es remain fixed.
+Old-head/base CI does not authorize a new candidate; local evidence reuse does
+not waive these gates.

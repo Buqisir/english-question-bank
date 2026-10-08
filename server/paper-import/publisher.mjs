@@ -1,12 +1,16 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import { LISTENING_AUDIO_PATHS } from './listeningAudioEvidence.mjs'
+import { LISTENING_AUDIO_PATHS, listeningPlaybackSegments } from './listeningAudioEvidence.mjs'
+import { buildListeningWaveform, readListeningWaveform } from './listeningWaveform.mjs'
+import { LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   assertPaperImportAnalysisSidecars,
   assertPaperImportParagraphSummaries,
   assertPaperImportPublicSearchMetadata,
   assertPaperImportPaginationPlan,
+  assertPaperImportSourceReferences,
   beginPaperImportPublish,
   computeNextPaperAssetVersion,
   cleanupPaperImportTempArtifacts,
@@ -47,7 +51,13 @@ import {
 import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
+  reviewBundleFilePaths,
+  resolveReviewFile,
 } from '../import-review/revisionProjection.mjs'
+import { validateReviewBundleManifest } from '../import-review/importReviewStore.mjs'
+import { SOURCE_REFERENCES_FILE } from './sourceReferences.mjs'
+import { readSourceReferencePublication } from './sourceReferencePublication.mjs'
+import { PRODUCT_MANIFEST, readPublishedProducts } from './frozenProducts.mjs'
 import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
 import {
   loadBoundPaperPaginationPlan,
@@ -248,13 +258,17 @@ export function recoverInterruptedPaperImportPublish({
       if (!current || current.sourceAssetVersion !== targetVersion) {
         throw new Error(`Committed canonical Publication is missing for ${paperId} v${targetVersion}`)
       }
-      loadCanonicalOnlyConsumers({
+      const consumers = loadCanonicalOnlyConsumers({
         ref: current,
         store: createFileSystemCanonicalPublicationStore({
           rootDir: paperAssetsDir,
           db,
         }),
       })
+      const sourceReferences = readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(consumers)[0] })
+      readPublishedProducts({ db, paperAssetsDir, consumption: Object.values(consumers)[0] })
+      assertPaperImportSourceReferences({ baseDir: path.join(paperAssetsDir, paperId, 'latest'),
+        packageData: sourceReferences || {} })
       if (validateCommittedAssets) validateCommittedAssets(targetVersion)
     },
   })
@@ -267,6 +281,13 @@ function computeNextPublishVersion({ db, paperAssetsDir, paperId }) {
 }
 
 export function ensurePaperImportDatabaseShape(db) {
+  const sourceColumns = db.prepare('PRAGMA table_info(sources)').all()
+  if (sourceColumns.length) {
+    if (!sourceColumns.some(column => column.name === 'month')) {
+      db.exec("ALTER TABLE sources ADD COLUMN month INTEGER CHECK (month IS NULL OR (typeof(month) = 'integer' AND month BETWEEN 1 AND 12))")
+    }
+    db.exec('CREATE INDEX IF NOT EXISTS idx_sources_exam_date ON sources(year DESC, month DESC)')
+  }
   db.exec(`
     CREATE TABLE IF NOT EXISTS paper_asset_versions (
       id TEXT PRIMARY KEY,
@@ -333,11 +354,12 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
 
     db.prepare(
       `
-      INSERT INTO sources (id, source_type, year, region, paper_name, section, file_ref, note, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+      INSERT INTO sources (id, source_type, year, month, region, paper_name, section, file_ref, note, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
       ON CONFLICT(id) DO UPDATE SET
         source_type = excluded.source_type,
         year = excluded.year,
+        month = excluded.month,
         region = excluded.region,
         paper_name = excluded.paper_name,
         section = excluded.section,
@@ -349,6 +371,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
       sourceId,
       sourceType,
       importMeta.paper.year,
+      importMeta.paper.month ?? null,
       importMeta.paper.region,
       importMeta.paper.paperName,
       sectionTitle,
@@ -1129,6 +1152,7 @@ function admitBoundUniversalNck1Package({
   packageData,
   expectedVisibleStructureDigest,
   listeningAudioBytes,
+  playbackUi,
   externalListeningReviewProof,
 }) {
   if (
@@ -1153,6 +1177,13 @@ function admitBoundUniversalNck1Package({
     externalListeningReviewProof,
   })
   if (!admission.ok) return { failure: canonicalAdmissionFailure(admission) }
+  if (playbackUi) {
+    // Optional Screen derivative travels in the same atomic version directory;
+    // it does not alter Source Capture, Candidate or approval identity.
+    admission.sealed.playbackDerivatives = {
+      [PUBLISHED_LISTENING_WAVEFORM_FILE]: Buffer.from(JSON.stringify({ ...playbackUi, digest: digestJson(playbackUi) })),
+    }
+  }
   if (admission.sealed.manifest.paperId !== paperId) {
     return {
       failure: canonicalAdmissionFailure({
@@ -1205,6 +1236,8 @@ function universalValidationReport(projection) {
 export function publishUniversalNck1Import({
   reviewRootDir,
   approvedIdentity,
+  approvedManifest = null,
+  fileStorage = null,
   canonicalRequest,
   db,
   paperAssetsDir,
@@ -1217,6 +1250,55 @@ export function publishUniversalNck1Import({
     reviewRootDir,
     { requireAnalyses: true },
   )
+  let sourceReferenceApproval = null
+  if (projection.config.pdfProductsRequired && !projection.frozenProducts) throw new Error('新卷必须先冻结四款 PDF 并提交 Review')
+  let pdfProductApproval = null
+  if (projection.sourceReferencesBytes || projection.frozenProducts
+    || approvedManifest?.files?.some(file => [SOURCE_REFERENCES_FILE, PRODUCT_MANIFEST].includes(file.path))) {
+    const manifest = validateReviewBundleManifest(approvedManifest)
+    if (manifest.bundleDigest !== approvedIdentity?.bundleDigest || manifest.paperId !== projection.paperId
+      || manifest.paperName !== projection.paperName
+      || manifest.sourceDigest !== projection.sourceDigest || manifest.candidateDigest !== projection.candidateDigest
+      || !approvedIdentity.approvalId || !approvedIdentity.revisionId) {
+      throw new Error('Source references require the exact approved Review bundle')
+    }
+    const inventory = reviewBundleFilePaths(reviewRootDir)
+    if (inventory.length !== manifest.files.length || inventory.some(file => !manifest.files.some(actual =>
+      actual.path === file.path && actual.role === file.role && actual.mediaType === file.mediaType))) {
+      throw new Error('Approved Review inventory does not match the publication workspace')
+    }
+    if (projection.frozenProducts && (fileStorage?.schemaVersion !== 'review-file-storage-v1'
+      || fileStorage.bundleDigest !== manifest.bundleDigest || !fileStorage.store
+      || Object.keys(fileStorage.files || {}).length !== manifest.files.length
+      || manifest.files.some(file => ['sha256', 'byteLength', 'mediaType'].some(key => fileStorage.files[file.path]?.[key] !== file[key])))) {
+      throw new Error('Publication requires all approved files in formal storage before committing')
+    }
+    for (const file of manifest.files) {
+      // Publish the already validated snapshot for this file, not a second read.
+      const bytes = file.path === SOURCE_REFERENCES_FILE ? projection.sourceReferencesBytes
+        : projection.frozenProducts?.bytes[file.path] || readFileSync(resolveReviewFile(reviewRootDir, file.path))
+      if (bytes.byteLength !== file.byteLength || `sha256:${createHash('sha256').update(bytes).digest('hex')}` !== file.sha256) {
+        throw new Error(`Approved Review file bytes changed: ${file.path}`)
+      }
+    }
+    if (projection.frozenProducts) pdfProductApproval = {
+      manifestDigest: projection.frozenProducts.digest,
+      approvalId: approvedIdentity.approvalId,
+      revisionId: approvedIdentity.revisionId,
+      bundleDigest: manifest.bundleDigest,
+    }
+    if (projection.sourceReferencesBytes) sourceReferenceApproval = {
+      schemaVersion: 'source-reference-publication-v1',
+      paperName: projection.paperName,
+      approvalId: approvedIdentity.approvalId,
+      revisionId: approvedIdentity.revisionId,
+      bundleDigest: manifest.bundleDigest,
+      sourceDigest: projection.sourceDigest,
+      candidateDigest: projection.candidateDigest,
+      materializationDigest: digestJson(projection.materialization),
+      sourceReferencesDigest: projection.sourceReferencesDigest,
+    }
+  }
   // The immutable descriptor is part of the Candidate/Owner identity. These
   // exact bytes are sealed before any DB or latest mutation; no ASR replay.
   const listeningAudioBytes = projection.materialization.listening.state === 'captured'
@@ -1271,9 +1353,20 @@ export function publishUniversalNck1Import({
     analysisSidecars: projection.analysisSidecars,
     paragraphSummariesBytes: projection.paragraphSummariesBytes,
     publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
+    sourceReferencesBytes: projection.sourceReferencesBytes,
+    sourceReferenceApproval,
+    frozenProducts: projection.frozenProducts,
+    pdfProductApproval,
     paginationPlan: projection.paginationPlan,
     paginationBindingIdentity: projection,
   })
+  packageData.fileStorage = fileStorage
+  const playback = projection.sourceInput.listeningAudio || projection.analyzedPackage?.listeningAudio
+  const playbackUi = playback ? {
+    waveform: readListeningWaveform(path.join(reviewRootDir, LISTENING_WAVEFORM_FILE), playback.sha256, playback.durationSeconds)
+      || buildListeningWaveform(listeningAudioBytes, playback.durationSeconds),
+    segments: listeningPlaybackSegments(projection.materialization.listening, projection.listeningAudioEvidence?.segments),
+  } : null
   return publishPreparedPaperImport({
     db,
     paperAssetsDir,
@@ -1292,6 +1385,7 @@ export function publishUniversalNck1Import({
         packageData,
         expectedVisibleStructureDigest: projection.visibleStructureDigest,
         listeningAudioBytes,
+        playbackUi,
         externalListeningReviewProof,
       })
     },
@@ -1435,6 +1529,13 @@ function publishPreparedPaperImport({
             baseDir: path.join(paperAssetsDir, paperId, 'latest'),
             packageData,
           })
+          const current = getCurrentCanonicalPublication(db, paperId)
+          const consumers = loadCanonicalOnlyConsumers({ ref: current,
+            store: createFileSystemCanonicalPublicationStore({ rootDir: paperAssetsDir, db }) })
+          readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(consumers)[0],
+            expected: packageData.sourceReferenceApproval })
+          for (const baseDir of [path.join(paperAssetsDir, paperId, 'versions', `v${targetVersion}`),
+            path.join(paperAssetsDir, paperId, 'latest')]) assertPaperImportSourceReferences({ baseDir, packageData })
         }
       : null,
   })
@@ -1505,6 +1606,10 @@ function publishPreparedPaperImport({
     paperId,
     assetVersion: version,
     versionName: `v${version}`,
+    canonicalPublicationDigest: admission.sealed.manifest.publicationDigest,
+    ...(packageData.sourceReferenceApproval ? { sourceReferencePublication: packageData.sourceReferenceApproval } : {}),
+    ...(packageData.pdfProductApproval ? { pdfProducts: packageData.pdfProductApproval } : {}),
+    ...(packageData.fileStorage ? { fileStorage: packageData.fileStorage } : {}),
     searchHref: '/?q=2024%20九省联考',
     generatedAt: new Date().toISOString(),
   }
@@ -1561,7 +1666,7 @@ function publishPreparedPaperImport({
       sourceAssetVersion: version,
       publicationDigest: admission.sealed.manifest.publicationDigest,
     }
-    loadCanonicalOnlyConsumers({
+    const stagedConsumers = loadCanonicalOnlyConsumers({
       ref: canonicalRef,
       store: stagedCanonicalStore({
         versionDir: writtenVersion.versionDir,
@@ -1612,6 +1717,10 @@ function publishPreparedPaperImport({
       assertPaperImportPublicSearchMetadata({ baseDir: latestSwap.latestDir, packageData })
       assertPaperImportPaginationPlan({ baseDir: latestSwap.latestDir, packageData })
     }
+    readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(stagedConsumers)[0],
+      expected: packageData.sourceReferenceApproval })
+    readPublishedProducts({ db, paperAssetsDir, consumption: Object.values(stagedConsumers)[0], required: Boolean(packageData.frozenProducts) })
+    assertPaperImportSourceReferences({ baseDir: latestSwap.latestDir, packageData })
     if (failurePoint === 'process-exit-after-latest-swap') {
       process.exit(86)
     }
@@ -1629,6 +1738,10 @@ function publishPreparedPaperImport({
         db,
       }),
     })
+    readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(consumers)[0],
+      expected: packageData.sourceReferenceApproval })
+    readPublishedProducts({ db, paperAssetsDir, consumption: Object.values(consumers)[0], required: Boolean(packageData.frozenProducts) })
+    assertPaperImportSourceReferences({ baseDir: latestSwap.latestDir, packageData })
     commitPaperImportLatestSwap(latestSwap)
 
     return {
@@ -1728,7 +1841,10 @@ export function rollbackPaperImportPublication({
     db,
   })
   const targetConsumers = loadCanonicalOnlyConsumers({ ref: target, store })
+  const targetReferences = readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(targetConsumers)[0] })
+  readPublishedProducts({ db, paperAssetsDir, consumption: Object.values(targetConsumers)[0] })
   const targetVersionDir = path.join(paperAssetsDir, paperId, 'versions', versionName)
+  assertPaperImportSourceReferences({ baseDir: targetVersionDir, packageData: targetReferences || {} })
   const targetPlanDigest = assertRollbackPaginationVersion({
     target,
     consumers: targetConsumers,
@@ -1788,6 +1904,7 @@ export function rollbackPaperImportPublication({
       error.code = 'PUBLICATION_REF_DISAGREEMENT'
       throw error
     }
+    assertPaperImportSourceReferences({ baseDir: latestDir, packageData: targetReferences || {} })
     return {
       status: 'idempotent',
       paperId,
@@ -1817,6 +1934,7 @@ export function rollbackPaperImportPublication({
       forceFailureAt: failurePoint,
       operation: 'rollback',
     })
+    assertPaperImportSourceReferences({ baseDir: latestSwap.latestDir, packageData: targetReferences || {} })
     const latestPlanDigest = assertRollbackPaginationVersion({
       target,
       consumers: targetConsumers,
@@ -1841,6 +1959,8 @@ export function rollbackPaperImportPublication({
       throw error
     }
     const consumers = loadCanonicalOnlyConsumers({ ref: target, store })
+    readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(consumers)[0] })
+    assertPaperImportSourceReferences({ baseDir: latestSwap.latestDir, packageData: targetReferences || {} })
     commitPaperImportLatestSwap(latestSwap)
     return {
       status: 'rolled_back',

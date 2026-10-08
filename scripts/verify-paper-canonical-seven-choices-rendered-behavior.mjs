@@ -408,11 +408,24 @@ async function assertActualPaperSurface() {
     'utf8',
   ))
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
-  const viteServer = await vite.createServer({
+  // Exercise the shipped CSS cascade, not Vite's development injection order.
+  const screenBuild = path.join(actualArtifactRoot, 'screen-build')
+  await vite.build({
     root: new URL('../app', import.meta.url).pathname,
-    server: { host: '127.0.0.1', port: 0 },
+    logLevel: 'error',
+    build: {
+      outDir: screenBuild,
+      emptyOutDir: true,
+      rollupOptions: {
+        input: new URL('../app/canonical-consumption-qa.html', import.meta.url).pathname,
+      },
+    },
   })
-  await viteServer.listen()
+  const viteServer = await vite.preview({
+    root: new URL('../app', import.meta.url).pathname,
+    build: { outDir: screenBuild },
+    preview: { host: '127.0.0.1', port: 0 },
+  })
   const appUrl = viteServer.resolvedUrls?.local?.[0]
   assert.ok(appUrl)
   const playwright = await import('../app/node_modules/playwright/index.js')
@@ -486,6 +499,18 @@ async function assertActualPaperSurface() {
       assert.deepEqual(await page.locator('.ps-option-bank .ps-option-label').evaluateAll(labels =>
         labels.map(label => getComputedStyle(label).fontWeight)), Array(7).fill('400'),
       'seven-choice bank labels use ordinary body weight')
+      await page.evaluate(() => document.fonts.ready)
+      const bankInsetsEm = await page.locator('.ps-option-bank').evaluate(bank => {
+        const passage = bank.closest('.ps-page').querySelector('.ps-paragraph')
+        const passageRect = passage.getBoundingClientRect()
+        // Screen enlarges the whole paper: normalize geometry to local em.
+        const scale = passageRect.width / parseFloat(getComputedStyle(passage).width)
+        const em = parseFloat(getComputedStyle(bank).fontSize) * scale
+        return [...bank.querySelectorAll('.ps-option-label')].map(label =>
+          (label.getBoundingClientRect().left - passageRect.left) / em)
+      })
+      assert.ok(bankInsetsEm.every(inset => Math.abs(inset - 2) < 0.05),
+        `built Screen A–G retain golden 2em inset: ${JSON.stringify(bankInsetsEm)}`)
       for (const pair of group.questionBlankPairs) {
         assert.equal(
           await page.locator(
@@ -575,7 +600,8 @@ async function assertActualPaperSurface() {
     )
   } finally {
     await browser.close()
-    await viteServer.close()
+    await new Promise((resolve, reject) => viteServer.httpServer.close(error =>
+      error ? reject(error) : resolve()))
   }
 }
 

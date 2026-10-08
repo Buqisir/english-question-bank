@@ -1,76 +1,62 @@
 import { defineRoute } from '../router/index.mjs'
+import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 
 function routeError(error) {
   return error instanceof Error ? error.message : String(error)
 }
 
-function sendHtml(response, { body, fileName }) {
+function sendHtml(response, { body, fileName }, headOnly = false) {
   response.writeHead(200, {
     'access-control-allow-origin': 'http://127.0.0.1:5173',
     'content-type': 'text/html; charset=utf-8',
+    'content-length': Buffer.byteLength(body),
     'x-file-name': encodeURIComponent(fileName),
   })
-  response.end(body)
+  response.end(headOnly ? undefined : body)
 }
 
 export function createExportRoutes(exportImplementation) {
-  const {
-    exportCompanionAnalysisHtml,
-    exportCompanionAnalysisPdf,
-    exportPrintHtml,
-    exportPrintPdf,
-    sendPdf,
-  } = exportImplementation
+  const { sendPdf } = exportImplementation
 
   return [
-    defineRoute('POST', /^\/api\/exports\/companion-analysis-html$/, async ({ request, response, context }) => {
+    // Retain the address with an explicit retirement response, never silently
+    // relabel teacher analyses or modelAnswer as a source-reference booklet.
+    defineRoute('POST', /^\/api\/exports\/companion-analysis-(?:html|pdf)$/, ({ response, context }) => {
+      context.sendJson(response, 410, { error: '配套解析导出已退役，请选择四款 PDF 产品；历史文件保持原样' })
+    }),
+
+    defineRoute('POST', /^\/api\/exports\/print-(html|pdf)$/, async ({ request, response, match, context }) => {
       try {
         const input = await context.readJsonBody(request)
-        const result = exportCompanionAnalysisHtml(input)
-        sendHtml(response, result)
+        const edition = requirePaperPdfEdition(input.edition)
+        const result = await context.draftPaperStore.getAssemblyPaperProduct(input)
+        const name = `${result.draftPaper.title.replace(/[\\/:*?"<>|]/g, '-')}-${PAPER_PDF_PRODUCTS[edition]}`
+        if (match[1] === 'html') sendHtml(response, { body: result.paginatedHtml, fileName: `${name}.html` })
+        else sendPdf(response, result.pdfBytes, `${name}.pdf`, '')
       } catch (error) {
-        const message = routeError(error)
-        const status = error?.code === 'COMPANION_ANALYSIS_NOT_FOUND' ? 404 : 500
-        context.sendJson(response, status, { error: message })
+        context.sendJson(response, error?.code === 'RENDERER_MISSING' ? 503 : 400, { error: routeError(error) })
       }
     }),
 
-    defineRoute('POST', /^\/api\/exports\/companion-analysis-pdf$/, async ({ request, response, context }) => {
+    ...['GET', 'HEAD'].map(method => defineRoute(method, /^\/api\/exports\/papers\/([^/]+)\/(pdf|print)$/, async ({ request, response, url, match, context }) => {
       try {
-        const input = await context.readJsonBody(request)
-        const result = exportCompanionAnalysisPdf(input)
-        sendPdf(response, result.body, result.fileName, result.outputPath)
-      } catch (error) {
-        const message = routeError(error)
-        if (error?.code === 'COMPANION_ANALYSIS_NOT_FOUND') {
-          context.sendJson(response, 404, { error: message })
-        } else if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
-          context.sendJson(response, 503, { error: `配套解析 PDF 不可用: ${message}` })
-        } else {
-          context.sendJson(response, 500, { error: message })
+        if (url.searchParams.has('versionType') || url.searchParams.has('pageLayout')) throw new Error('当前产品只使用 edition')
+        const edition = requirePaperPdfEdition(url.searchParams.get('edition'))
+        const result = await context.draftPaperStore.getPublishedPaperProduct(decodeURIComponent(match[1]), edition,
+          url.searchParams.get('publicationDigest'))
+        const name = `${result.draftPaper.title.replace(/[\\/:*?"<>|]/g, '-')}-${PAPER_PDF_PRODUCTS[edition]}`
+        response.setHeader('cache-control', 'private, no-store')
+        if (match[2] === 'print') sendHtml(response, { body: result.paginatedHtml, fileName: `${name}.html` }, request.method === 'HEAD')
+        else {
+          response.writeHead(200, { 'content-type': 'application/pdf',
+            'content-length': result.pdfBytes.length,
+            'content-disposition': `inline; filename*=UTF-8''${encodeURIComponent(`${name}.pdf`)}`,
+            'x-file-name': encodeURIComponent(`${name}.pdf`) })
+          response.end(request.method === 'HEAD' ? undefined : result.pdfBytes)
         }
-      }
-    }),
-
-    defineRoute('POST', /^\/api\/exports\/print-html$/, async ({ request, response, context }) => {
-      const input = await context.readJsonBody(request)
-      const result = exportPrintHtml(input)
-      sendHtml(response, result)
-    }),
-
-    defineRoute('POST', /^\/api\/exports\/print-pdf$/, async ({ request, response, context }) => {
-      try {
-        const input = await context.readJsonBody(request)
-        const result = exportPrintPdf(input)
-        sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
-        const message = routeError(error)
-        if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
-          context.sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
-        } else {
-          context.sendJson(response, 500, { error: message })
-        }
+        context.sendJson(response, error?.code === 'RENDERER_MISSING' ? 503 : 400, { error: routeError(error) })
       }
-    }),
+    })),
   ]
 }

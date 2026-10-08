@@ -24,6 +24,8 @@ import {
 import { releaseShippingGuard } from './ship-checklist.mjs'
 import { materializeNck1CanonicalRequest } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
+import { createFileSystemCanonicalPublicationStore, loadCanonicalOnlyConsumers } from '../../server/paper-canonical/publication.mjs'
+import { readSourceReferencePublication } from '../../server/paper-import/sourceReferencePublication.mjs'
 import {
   ocrReviewBundleDigest,
   reviewBundleDigest,
@@ -66,6 +68,9 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
+import { prepareListeningWaveform } from '../../server/paper-import/listeningWaveform.mjs'
+import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
+import { LISTENING_AUDIO_PATHS } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import {
   renderReviewDiagnosticEdition,
   renderReviewFixedEdition,
@@ -1140,6 +1145,7 @@ function publicationReceiptMatchesApproval(receipt, approval) {
 async function publish(paperId) {
   const {
     paperDir,
+    status,
     approval,
     projection,
   } = await approvedLocalReview(paperId)
@@ -1168,12 +1174,23 @@ async function publish(paperId) {
           receipt: existingReceipt,
         }).current
       ) fail('Existing local publication receipt does not match approval or committed current state')
+      const consumers = loadCanonicalOnlyConsumers({
+        ref: { paperId, versionName: existingReceipt.versionName, sourceAssetVersion: existingReceipt.assetVersion,
+          publicationDigest: existingReceipt.canonicalPublicationDigest },
+        store: createFileSystemCanonicalPublicationStore({ rootDir: paperAssetsDir, db }),
+      })
+      readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(consumers)[0],
+        expected: projection.sourceReferencesBytes ? {
+          approvalId: approval.approvalId, revisionId: approval.revisionId, bundleDigest: approval.bundleDigest,
+          sourceReferencesDigest: projection.sourceReferencesDigest,
+        } : null })
       console.log(`ALREADY PUBLISHED ${paperId} ${existingReceipt.versionName}: ready_to_ship; no deployment was run`)
       return
     }
     const result = publishUniversalNck1Import({
       reviewRootDir: paperDir,
       approvedIdentity: approval,
+      approvedManifest: status.latest.manifest,
       canonicalRequest,
       db,
       paperAssetsDir,
@@ -1340,6 +1357,19 @@ async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (!['promote', 'request-publication', 'publication-status', 'redeem-publication'].includes(command)) assertNotNck1SourceOnly(paperId, command)
   if (command === 'push') await pushRevision(paperId)
+  else if (command === 'prepare-listening-waveform') {
+    const root = paperDirectory(paperId)
+    const loaded = loadNck1ReviewSource(root)
+    const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
+    if (!playback) fail('Paper has no captured playback audio')
+    const playbackPath = loaded.analyzedPackage
+      ? loaded.sourceProvenance.members.find((member) => member.role === 'audio').path : LISTENING_AUDIO_PATHS.playback
+    const waveform = prepareListeningWaveform(resolveReviewFile(root, LISTENING_WAVEFORM_FILE),
+      readFileSync(resolveReviewFile(root, playbackPath)), playback.durationSeconds)
+    console.log(JSON.stringify({ paperId, playbackAudioSha256: waveform.playbackAudioSha256,
+      waveformSha256: sha256(readFileSync(resolveReviewFile(root, LISTENING_WAVEFORM_FILE))),
+      buckets: waveform.peaks.length, path: LISTENING_WAVEFORM_FILE }, null, 2))
+  }
   else if (command === 'pagination-qa') await paginationQa(paperId)
   else if (command === 'hydrate') await hydrate(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
@@ -1366,6 +1396,7 @@ async function main() {
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
+      + 'prepare-listening-waveform <paperId> (local derivative only; no approval or publication) | '
       + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b (requires saved layout)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> | '
       + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | '
       + 'finalize-ocr-correction-report <paperId> --input <entries.json> | '

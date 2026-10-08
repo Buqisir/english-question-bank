@@ -136,6 +136,19 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
     // New student products change body size, so source column hints must be
     // remeasured with the loaded fonts. Historical rendering stays untouched.
     const studentProduct = printHtml.includes('data-pdf-student-product=')
+    const economyBalance = printHtml.includes('data-pdf-economy-balance="v1"')
+    if (economyBalance) await page.evaluate(() => {
+      // Tag ownership without wrapping nodes or changing any source spacing.
+      for (const group of document.querySelectorAll('section[data-canonical-group-id]')) {
+        const id = group.getAttribute('data-canonical-group-id')
+        group.setAttribute('data-pdf-economy-block', id)
+        let chrome = group.previousElementSibling
+        while (chrome?.matches('.section-header, .reading-meta-instruction, .page-break')) {
+          if (!chrome.matches('.page-break')) chrome.setAttribute('data-pdf-economy-block', id)
+          chrome = chrome.previousElementSibling
+        }
+      }
+    })
     const measureOptions = (prepare) => {
       const root = prepare ? document : document.querySelector('.pagedjs_pages')
       const failures = []
@@ -187,6 +200,65 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
       )
     }
     const pageCount = await page.evaluate(() => window.__pagedPageCount)
+    if (economyBalance) await page.evaluate(() => {
+      const pages = [...document.querySelectorAll('.pagedjs_page')]
+      const blocks = [...document.querySelectorAll('.pagedjs_pages [data-pdf-economy-block]')]
+      const hasOtherContent = (content, members) => {
+        const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT)
+        while (walker.nextNode()) {
+          const node = walker.currentNode
+          if (!node.textContent.trim() || node.parentElement.closest('style,script')) continue
+          if (members.some(member => member.contains(node))) continue
+          const range = document.createRange()
+          range.selectNodeContents(node)
+          if ([...range.getClientRects()].some(rect => rect.width && rect.height)) return true
+        }
+        for (const node of content.querySelectorAll('img,svg,table,.writing-answer-box')) {
+          if (members.some(member => member.contains(node))) continue
+          const rect = node.getBoundingClientRect()
+          if (rect.width && rect.height) return true
+        }
+        return false
+      }
+      for (const group of document.querySelectorAll('.pagedjs_pages section[data-canonical-group-id]')) {
+        const id = group.getAttribute('data-canonical-group-id')
+        const members = blocks.filter(node => node.getAttribute('data-pdf-economy-block') === id)
+        // Never rearrange a split group, a shared page, or the paper opening.
+        if (members.filter(node => node.matches('section[data-canonical-group-id]')).length !== 1) continue
+        const pageElement = group.closest('.pagedjs_page')
+        const content = pageElement.querySelector('.pagedjs_page_content')
+        const area = pageElement.querySelector('.pagedjs_area').getBoundingClientRect()
+        if (hasOtherContent(content, members)) continue
+        const here = members.filter(node => node.closest('.pagedjs_page') === pageElement)
+        const orphaned = members.filter(node => !here.includes(node))
+        const previousPage = pages[pages.indexOf(pageElement) - 1]
+        if (orphaned.some(node => node.closest('.pagedjs_page') !== previousPage
+          || !node.matches('.section-header, .reading-meta-instruction'))) continue
+        if (orphaned.length && !hasOtherContent(previousPage.querySelector('.pagedjs_page_content'), orphaned)) continue
+        // Try bringing only the orphaned chrome into existing spare space.
+        // Roll back if this would make the page dense; it is not a keep rule.
+        const origins = orphaned.map(node => ({ node, parent: node.parentNode, next: node.nextSibling }))
+        for (const node of orphaned) here[0].parentNode.insertBefore(node, here[0])
+        const rects = members.flatMap(node => [node, ...node.querySelectorAll('img,svg,table,.writing-answer-box')])
+          .map(node => node.getBoundingClientRect())
+        const top = Math.min(...rects.map(rect => rect.top))
+        const bottom = Math.max(...rects.map(rect => rect.bottom))
+        const lineHeight = parseFloat(getComputedStyle(group).lineHeight)
+        const topSpace = top - area.top
+        const bottomSpace = area.bottom - bottom
+        // Keep two lines of lower slack. Redistribute only a quarter of the
+        // remaining imbalance, capped at one line: a nudge, not centering.
+        const offset = Math.min(lineHeight, (bottomSpace - topSpace - 2 * lineHeight) / 4)
+        if (!(offset > 0) || topSpace < -1 || bottomSpace < offset) {
+          for (const { node, parent, next } of origins.reverse()) parent.insertBefore(node, next)
+          continue
+        }
+        for (const node of members) {
+          node.style.translate = `0 ${offset}px`
+          node.setAttribute('data-pdf-vertical-offset-pt', String(offset * 0.75))
+        }
+      }
+    })
     // A source-level row count is only a lower bound. Validate the actual
     // paginated boxes before returning either HTML or PDF, including fragments
     // Paged.js created despite break-inside: avoid for oversized content.

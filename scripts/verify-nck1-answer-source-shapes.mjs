@@ -329,6 +329,7 @@ try {
     'init', cliPaperId,
     '--paper-name', 'Synthetic combined question and answers',
     '--provenance', 'anonymous synthetic fixture',
+    '--year', '2025', '--month', '12',
     '--source', `question_and_answers=${combinedPath}`,
   ), /INITIALIZED/u)
   assert.match(run('materialize', cliPaperId), /"disposition": "ready_for_verification"/u)

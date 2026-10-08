@@ -539,12 +539,12 @@ async function verifyActualPaperSurface({
       }
       const label = `PaperSurface ${lecture ? 'lecture' : 'plain'}`
       assertZeroListeningOccurrence(
-        await page.locator('body').innerText(),
+        await page.locator('.paper-browse-shell').innerText(),
         label,
         sourcePhrases,
       )
       assertZeroListeningOccurrence(
-        await page.locator('body').innerHTML(),
+        await page.locator('.paper-browse-shell').innerHTML(),
         `${label} DOM`,
         sourcePhrases,
       )

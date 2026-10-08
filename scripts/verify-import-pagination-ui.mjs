@@ -22,7 +22,6 @@ const detail = {
   ] },
 }
 let hasListening = true
-let hasProducts = false
 let metadataFailure = false
 let capturedIssue
 const send = (response, body, type = 'application/json', status = 200) => {
@@ -42,10 +41,10 @@ const server = createServer(async (request, response) => {
   if (url.pathname.endsWith('/pagination')) {
     if (metadataFailure) return send(response, { error: '测试：版式暂不可用' }, 'application/json', 503)
     return send(response, { editions: [
-      ...(hasProducts ? [{ edition: 'largeNoListening', mode: 'bounded_auto' }, { edition: 'economy8', mode: 'explicit' },
-        ...(hasListening ? [{ edition: 'largeComplete', mode: 'bounded_auto' }] : [])] : []),
-      { edition: 'friendly8', mode: 'explicit' },
-      ...(hasListening ? [{ edition: 'friendly10', mode: 'bounded_auto' }] : []),
+      ...(hasListening ? [{ edition: 'largeComplete', mode: 'bounded_auto' }] : []),
+      { edition: 'largeNoListening', mode: 'bounded_auto' },
+      { edition: 'economy8', mode: 'explicit' },
+      { edition: 'answerOnly', mode: 'source_reference' },
     ] })
   }
   if (url.pathname.endsWith('/issues') && request.method === 'POST') {
@@ -116,21 +115,24 @@ if (process.argv.includes('--serve')) {
     await page.getByRole('button', { name: '退出沉浸 · Esc', exact: true }).click()
     await page.setViewportSize({ width: 1920, height: 1000 })
     await page.getByRole('tab', { name: 'PDF', exact: true }).click()
-    assert.equal(await page.getByLabel('交付版式').inputValue(), 'friendly10')
-    assert.deepEqual(await page.locator('#pdf-edition option').allTextContents(), ['8 页版', '10 页版', '教师 PDF'])
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /version=student&pageLayout=friendly10$/)
-    await page.getByLabel('交付版式').selectOption('friendly8')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /version=student&pageLayout=friendly8$/)
-    assert.match(await page.locator('#issue-form .field-help').textContent(), /R2.*8 页版/)
+    assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeComplete')
+    assert.deepEqual(await page.locator('#pdf-edition option').allTextContents(), [
+      '大字完整版 · 含听力 · 最多 12 页', '大字无听力版 · 最多 10 页',
+      '省纸版 · 无听力 8 页 · 小四优先', '纯答案版 · 自然分页',
+    ])
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=largeComplete$/)
+    await page.getByLabel('交付版式').selectOption('economy8')
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=economy8$/)
+    assert.match(await page.locator('#issue-form .field-help').textContent(), /R2.*省纸版/)
     await page.getByText('精确定位（可选）', { exact: true }).click()
     await page.getByLabel('页码', { exact: true }).fill('2')
     await page.getByLabel('要 Agent 改什么').fill('B 篇请在第 2 页完整呈现，避免跨面。')
     await page.getByRole('button', { name: '记录这个问题', exact: true }).click()
     await page.locator('.issue-message').waitFor()
-    assert.equal(capturedIssue.edition, 'friendly8')
+    assert.equal(capturedIssue.edition, 'economy8')
     assert.equal(capturedIssue.revisionId, revisionId)
     assert.equal(capturedIssue.pageNumber, '2')
-    assert.match(await page.locator('.issue-meta').textContent(), /8 页版/)
+    assert.match(await page.locator('.issue-meta').textContent(), /省纸版/)
     mkdirSync(artifactDir, { recursive: true })
     await page.getByLabel('交付版式').scrollIntoViewIfNeeded()
     await page.screenshot({ path: path.join(artifactDir, 'review-desktop.png') })
@@ -143,31 +145,29 @@ if (process.argv.includes('--serve')) {
     hasListening = false
     await page.reload()
     await page.getByRole('tab', { name: 'PDF', exact: true }).click()
-    assert.equal(await page.getByLabel('交付版式').inputValue(), 'friendly8')
-    assert.equal(await page.locator('#pdf-edition option[value="friendly10"]').count(), 0)
-    hasProducts = true
-    await page.reload()
-    await page.getByRole('tab', { name: 'PDF', exact: true }).click()
     assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeNoListening')
     await page.getByLabel('交付版式').selectOption('economy8')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pageLayout=economy8$/)
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=economy8$/)
     assert.equal(await page.locator('#pdf-edition option[value="largeComplete"]').count(), 0)
     await page.screenshot({ path: path.join(artifactDir, 'review-products-narrow.png') })
     hasListening = true
     await page.reload()
     await page.getByRole('tab', { name: 'PDF', exact: true }).click()
     assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeComplete')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pageLayout=largeComplete$/)
-    await page.getByLabel('交付版式').selectOption('teacher')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?version=teacher&pageLayout=natural$/)
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=largeComplete$/)
+    await page.getByLabel('交付版式').selectOption('answerOnly')
+    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=answerOnly$/)
+    assert.equal(await page.locator('#pdf-edition option[value="teacher"], #pdf-edition option[value="student"]').count(), 0)
     metadataFailure = true
     await page.reload()
     await page.getByRole('tab', { name: 'PDF', exact: true }).click()
-    await page.getByRole('alert').filter({ hasText: '不能代替定页 QA' }).waitFor()
+    await page.getByRole('alert').filter({ hasText: 'PDF 产品未加载：测试：版式暂不可用' }).waitFor()
+    assert.equal(await page.getByLabel('交付版式').isDisabled(), true)
+    assert.equal(await page.locator('#review-frame').count(), 0, 'failed metadata cannot expose a stale product iframe')
     await page.setViewportSize({ width: 1920, height: 1000 })
     await page.screenshot({ path: path.join(artifactDir, 'review-unavailable.png') })
     assert.deepEqual(errors, [])
-    console.log('PASS PDF8/10 exact student URLs, source edition availability, revision+edition+page feedback, natural compatibility, metadata failure and narrow layout')
+    console.log('PASS four exact product URLs, listening availability, revision+edition+page feedback, answerOnly, metadata failure and narrow layout')
   } finally {
     await browser?.close()
     await new Promise((resolve) => server.close(resolve))

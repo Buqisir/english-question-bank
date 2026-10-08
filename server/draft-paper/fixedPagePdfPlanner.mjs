@@ -172,7 +172,7 @@ export function inspectGroups(page) {
         if (!entry.applicationAnswerPages.includes(pageNumber)) entry.applicationAnswerPages.push(pageNumber)
         entry.applicationAnswerPage = pageNumber
       }
-      if (element.querySelector('.canonical-continuation-material')?.textContent.trim()) {
+      if (element.querySelector('.canonical-continuation-material, .canonical-continuation-writing[data-canonical-writing-mode="legacy_opaque"] > .canonical-legacy-opaque-source')?.textContent.trim()) {
         entry.continuationMaterialPages ||= []
         if (!entry.continuationMaterialPages.includes(pageNumber)) entry.continuationMaterialPages.push(pageNumber)
       }

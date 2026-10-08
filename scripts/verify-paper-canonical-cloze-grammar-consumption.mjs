@@ -23,6 +23,7 @@ import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import historicalPrint from '../standards/paper-canonical/consumers/print-pdf-v45.json' with { type: 'json' }
 import {
   digestJson,
   sha256,
@@ -62,6 +63,8 @@ import {
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { applyStudentProductLayout } from '../server/draft-paper/studentProductPdf.mjs'
+import './verify-cloze-proportional-v60.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 import {
   seedConfirmedCanonicalDraftFixture,
@@ -152,12 +155,18 @@ async function readBrowserColumnStarts(page, rowSelector, optionSelector) {
   return page.locator(rowSelector).evaluateAll((rows, childSelector) =>
     rows.map((row) => {
       const root = row.getBoundingClientRect()
-      // Screen reading zoom changes viewport pixels, not paper-space pt anchors.
-      // Print has no zoom host. Keep the independent pt expectations unchanged.
-      const zoomHost = row.closest('.paper-browse-zoom')
-      const zoom = zoomHost ? Number.parseFloat(getComputedStyle(zoomHost).zoom) : 1
+      const question = row.closest('.ps-question, .question').getBoundingClientRect()
+      if (Math.abs(root.right - question.right) > 1) {
+        throw new Error('Cloze option tracks must fill the actual passage width')
+      }
+      const scale = root.width / parseFloat(getComputedStyle(row).width)
+      if (Math.abs((root.left - question.left) / scale * 0.75 - 17.3) > 0.1) {
+        throw new Error('Cloze A must retain the fixed 17.3pt question-label advance')
+      }
+      // Compare reference proportions, not fixed points: the qnum retains
+      // its advance while the remaining 420.9 reference points fill the row.
       return [...row.querySelectorAll(childSelector)].map((option) =>
-        (option.getBoundingClientRect().x - root.x) * 72 / 96 / zoom)
+        (option.getBoundingClientRect().x - root.x) / root.width * 420.9)
     }), optionSelector)
 }
 
@@ -626,6 +635,8 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
   writeFileSync(pdfPath, pdfBytes)
   execFileSync('pdftotext', ['-bbox', pdfPath, bboxPath])
   const source = readFileSync(bboxPath, 'utf8')
+  const pageWidths = [...source.matchAll(/<page width="([^"]+)"/g)]
+    .map((match) => Number(match[1]))
   const words = source.split(/<page\b[^>]*>/).slice(1).flatMap(
     (pageSource, page) => [...pageSource.matchAll(
       /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">([^<]+)<\/word>/g,
@@ -670,7 +681,12 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
       `${label}: qnum box meets the A anchor with no added layout gap (actual ${firstOptionStart - question.x})`,
     )
     questionStarts.push(question.x)
-    rows.push([firstOptionStart, ...candidate.slice(1).map((word) => word.x)])
+    // The current question-paper products have symmetric 20mm side margins.
+    assert.equal(Math.abs(question.x - 20 * 72 / 25.4) <= 0.5, true,
+      `${label}: question labels start at the product's 20mm margin`)
+    const optionWidthPt = pageWidths[question.page] - 40 * 72 / 25.4 - 17.3
+    rows.push([firstOptionStart, ...candidate.slice(1).map((word) => word.x)]
+      .map((x) => (x - firstOptionStart) / optionWidthPt * 420.9))
   }
   assert.equal(
     Math.max(...questionStarts) - Math.min(...questionStarts) <= 0.5,
@@ -684,7 +700,7 @@ async function assertRejectedPhysicalRoutes({ baseUrl, draftPaperId, label }) {
   for (const request of [
     {
       method: 'GET',
-      path: `/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
+      path: `/api/draft-papers/${draftPaperId}/print-html?edition=largeNoListening`,
     },
     {
       method: 'GET',
@@ -693,7 +709,7 @@ async function assertRejectedPhysicalRoutes({ baseUrl, draftPaperId, label }) {
     {
       method: 'POST',
       path: `/api/draft-papers/${draftPaperId}/print-pdf`,
-      body: { versionType: 'student' },
+      body: { edition: 'largeNoListening' },
     },
   ]) {
     const response = await fetchPublic(`${baseUrl}${request.path}`, {
@@ -730,18 +746,13 @@ async function assertActualDraftPrintPdfBoundary({
     canonicalReference,
   }, async ({ baseUrl, bankDbPath, draftPaperId }) => {
     const preview = await fetchPublic(
-      `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
+      `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?edition=largeNoListening`,
     )
     const previewHtml = await preview.text()
     assert.equal(
       preview.status,
       200,
       `real HTTP draft Print preview succeeds: ${previewHtml}`,
-    )
-    assert.equal(
-      (previewHtml.match(/data-canonical-placement-signature=/g) || []).length,
-      15,
-      'real HTTP draft Print preview carries the shared layoutPlan',
     )
 
     const paginationResponse = await fetchPublic(
@@ -753,6 +764,9 @@ async function assertActualDraftPrintPdfBoundary({
     const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
     try {
       const page = await browser.newPage()
+      await page.setContent(previewHtml, { waitUntil: 'load' })
+      assert.equal(await page.locator('.pagedjs_pages [data-canonical-placement-signature]').count(),
+        15, 'real product Print preview carries every placement on rendered pages, not the inert source template')
       await page.setContent(pagination.paginatedHtml, { waitUntil: 'load' })
       assertBrowserColumnGates(
         await readBrowserColumnStarts(
@@ -771,7 +785,7 @@ async function assertActualDraftPrintPdfBoundary({
       {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ versionType: 'student' }),
+        body: JSON.stringify({ edition: 'largeNoListening' }),
       },
     )
     const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
@@ -1153,10 +1167,10 @@ const ticket35GroupIds = [
 const ownerQaOzoneText = 'ground-level ozone (臭氧)—a major factor'
 const ownerQaLegacyOzoneText = 'ground-level ozone (臭氧) 一a major factor'
 const ownerQaApplicationTitle = 'Ranking My College Life Essentials'
-const ownerQaBlankWidthsPx = Object.freeze({
-  q36: 64.390625,
-  q41: 46.1875,
-  q56: 46.1875,
+const ownerQaBlankWidthsEm = Object.freeze({
+  q36: 4.6,
+  q41: 3.3,
+  q56: 3.3,
 })
 
 function ticket35V4Source() {
@@ -1339,7 +1353,7 @@ async function assertTicket35BatchAssetIdentity({
       assert.deepEqual(afterItems, beforeItems, 'identity conflict rejects before the draft write')
 
       const htmlResponse = await fetchPublic(
-        `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=student`,
+        `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?edition=largeNoListening`,
       )
       const html = await htmlResponse.text()
       assert.equal(htmlResponse.ok, false, 'identity conflict leaves no public Print HTML output')
@@ -1349,7 +1363,7 @@ async function assertTicket35BatchAssetIdentity({
         {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ versionType: 'student' }),
+          body: JSON.stringify({ edition: 'largeNoListening' }),
         },
       )
       const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
@@ -1553,6 +1567,24 @@ async function assertTicket35CompletePublication({ rootDir }) {
     path.join(v4Root, fixture.source.paperId),
     { recursive: true },
   )
+  // This test verifies content/geometry, not the separately tested searcher.
+  // Add a bound plan only to its disposable copy; preserve the historical store.
+  const candidate = JSON.parse(readFileSync(
+    'test-fixtures/paper-import/paper-canonical-ticket-35-owner-qa-content-successor/paper-2026-i-v1/import-candidate-v1.json', 'utf8'))
+  const versionDir = path.join(v4Root, canonicalReference.paperId, 'versions', `v${canonicalReference.sourceAssetVersion}`)
+  assert.equal(sha256(readFileSync(path.join(versionDir, 'paper-asset.json'))), candidate.source.sha256)
+  const plan = { schemaVersion: 'paper-pagination-plan-v4', paperId: canonicalReference.paperId,
+    sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest,
+    editions: { largeNoListening: { targetPages: 10, includeListening: false, omitCover: false,
+      coverGapsPt: null, allowSplitOptionBank: false, breakSlotIds: ['writing.application', 'writing.continuation'],
+      layout: { profile: 'student-friendly-v1', fontSizePt: 12, figureLayout: 'natural',
+        answerBoxHeightsMm: { application: 65, continuation: 57 } } } } }
+  writeFileSync(path.join(versionDir, 'pagination-plan.json'), `${stableStringify(plan)}\n`)
+  writeFileSync(path.join(versionDir, 'import-meta.json'), `${stableStringify({ paginationPlanBinding: {
+    schemaVersion: 'paper-pagination-binding-v1', paperId: canonicalReference.paperId,
+    sourceAssetVersion: canonicalReference.sourceAssetVersion, sourceDigest: candidate.source.sha256,
+    canonicalSourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest, planDigest: digestJson(plan),
+  } })}\n`)
   const outputDir = provisionActualArtifacts
     ? path.resolve('.scratch', 'ticket-35-owner-qa', execFileSync(
         'git', ['rev-parse', '--short=12', 'HEAD'], { encoding: 'utf8' },
@@ -1703,12 +1735,12 @@ async function assertTicket35CompletePublication({ rootDir }) {
       const page = await browser.newPage()
       const { notice, starters } = ticket35WritingSourceText(paperAsset)
       const ownerQaPrintObservations = []
-      for (const versionType of ['student', 'teacher']) {
+      for (const edition of ['largeNoListening']) {
         const htmlResponse = await fetchPublic(
-          `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?versionType=${versionType}`,
+          `${baseUrl}/api/draft-papers/${draftPaperId}/print-html?edition=${edition}`,
         )
         const html = await htmlResponse.text()
-        assert.equal(htmlResponse.status, 200, `v3 complete ${versionType} public Print HTML succeeds: ${html}`)
+        assert.equal(htmlResponse.status, 200, `v3 complete ${edition} public Print HTML succeeds: ${html}`)
         await page.setContent(html, { waitUntil: 'load' })
         const observation = await page.evaluate(({
           noticeText,
@@ -1755,7 +1787,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
             const numberRect = number?.getBoundingClientRect()
             const fontSize = Number.parseFloat(numberStyle?.fontSize || '')
             return [key, {
-              blankWidthPx: blankRect?.width ?? Number.NaN,
+              fontSizePx: fontSize,
+              blankWidthEm: (blankRect?.width ?? Number.NaN) / fontSize,
               blankLineHeightRatio: Number.parseFloat(blankStyle?.lineHeight || '') / fontSize,
               numberLineHeightRatio: Number.parseFloat(numberStyle?.lineHeight || '') / fontSize,
               numberBoxBottomGapPx: blankRect && numberRect
@@ -1764,7 +1797,9 @@ async function assertTicket35CompletePublication({ rootDir }) {
             }]
           }))
           return {
-            groupIds: [...document.querySelectorAll('[data-canonical-group-id]')].map((node) => node.getAttribute('data-canonical-group-id')),
+            groupIds: [...document.querySelectorAll('[data-canonical-group-id]')]
+              .map((node) => node.getAttribute('data-canonical-group-id'))
+              .filter((id, index, ids) => index === 0 || id !== ids[index - 1]),
             partHeadings: headingNodes.map((node) => node.textContent?.trim()),
             applicationNoticeBeforeResponse: Boolean(
               application && response
@@ -1813,28 +1848,28 @@ async function assertTicket35CompletePublication({ rootDir }) {
           legacyOzoneText: ownerQaLegacyOzoneText,
           applicationTitle: ownerQaApplicationTitle,
         })
-        assert.deepEqual(observation.groupIds.filter(Boolean), ticket35GroupIds, `v3 complete ${versionType} document retains all canonical groups in source order`)
-        assert.equal(observation.partHeadings.some((text) => text?.includes('第二部分')), true, `v3 complete ${versionType} document retains Reading chrome`)
-        assert.equal(observation.partHeadings.some((text) => text?.includes('第三部分')), true, `v3 complete ${versionType} document retains Language chrome`)
-        assert.equal(observation.partHeadings.some((text) => text?.includes('第四部分')), true, `v3 complete ${versionType} document retains Writing chrome: ${JSON.stringify(observation)}`)
-        assert.equal(observation.applicationNoticeBeforeResponse, true, `v3 complete ${versionType} Print keeps the exact Application notice before its response box`)
-        assert.equal(observation.startersInResponse, true, `v3 complete ${versionType} Print puts both Continuation starters inside the response box`)
+        assert.deepEqual(observation.groupIds.filter(Boolean), ticket35GroupIds, `v3 complete ${edition} document retains all canonical groups in source order`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第二部分')), true, `v3 complete ${edition} document retains Reading chrome`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第三部分')), true, `v3 complete ${edition} document retains Language chrome`)
+        assert.equal(observation.partHeadings.some((text) => text?.includes('第四部分')), true, `v3 complete ${edition} document retains Writing chrome: ${JSON.stringify(observation)}`)
+        assert.equal(observation.applicationNoticeBeforeResponse, true, `v3 complete ${edition} Print keeps the exact Application notice before its response box`)
+        assert.equal(observation.startersInResponse, true, `v3 complete ${edition} Print puts both Continuation starters inside the response box`)
         assert.deepEqual(
           observation.starterOccurrences,
           starters.map(() => ({ total: 1, inside: 1, outside: 0 })),
-          `v3 complete ${versionType} Print renders each Continuation starter exactly once inside its response box: ${JSON.stringify(observation)}`,
+          `v3 complete ${edition} Print renders each Continuation starter exactly once inside its response box: ${JSON.stringify(observation)}`,
         )
-        assert.deepEqual(observation.figureCaptions, [], `v3 complete ${versionType} Print hides internal figure provenance captions`)
-        assert.deepEqual(observation.publicProvenanceAttributes, [], `v3 complete ${versionType} Print emits no public provenance attributes`)
-        assert.equal(observation.grammarRule, 'none', `v3 complete ${versionType} PDF uses a vector rule rather than a background rectangle`)
-        assert.equal(observation.grammarStroke, '1', `v3 complete ${versionType} PDF retains the shared inline blank stroke`)
-        assert.equal(observation.grammarPseudo, 'none', `v3 complete ${versionType} Print has no independent Grammar Fill rule lift`)
-        assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, `v3 complete ${versionType} Print starts Cloze question labels at the passage boundary`)
-        assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, `v3 complete ${versionType} Print aligns the Cloze qnum box with the passage continuation boundary`)
-        assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, `v3 complete ${versionType} Print has no added qnum-box→A layout gap`)
-        assert.deepEqual(observation.writingHeading, observation.peerHeading, `v3 complete ${versionType} Print gives every part score run one typographic treatment`)
+        assert.deepEqual(observation.figureCaptions, [], `v3 complete ${edition} Print hides internal figure provenance captions`)
+        assert.deepEqual(observation.publicProvenanceAttributes, [], `v3 complete ${edition} Print emits no public provenance attributes`)
+        assert.equal(observation.grammarRule, 'none', `v3 complete ${edition} PDF uses a vector rule rather than a background rectangle`)
+        assert.equal(observation.grammarStroke, '1', `v3 complete ${edition} PDF retains the shared inline blank stroke`)
+        assert.equal(observation.grammarPseudo, 'none', `v3 complete ${edition} Print has no independent Grammar Fill rule lift`)
+        assert.equal(Math.abs(observation.clozeNumberOffset) <= 0.5, true, `v3 complete ${edition} Print starts Cloze question labels at the passage boundary`)
+        assert.equal(Math.abs(observation.clozeNumberToPassageContinuationOffset) <= 0.5, true, `v3 complete ${edition} Print aligns the Cloze qnum box with the passage continuation boundary`)
+        assert.equal(Math.abs(observation.clozeNumberToFirstLabelGap) <= 0.5, true, `v3 complete ${edition} Print has no added qnum-box→A layout gap`)
+        assert.deepEqual(observation.writingHeading, observation.peerHeading, `v3 complete ${edition} Print gives every part score run one typographic treatment`)
         ownerQaPrintObservations.push({
-          versionType,
+          edition,
           ...observation.ownerQaContent,
         })
         const pdfResponse = await fetchPublic(
@@ -1842,24 +1877,25 @@ async function assertTicket35CompletePublication({ rootDir }) {
           {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ versionType }),
+            body: JSON.stringify({ edition }),
           },
         )
         const pdfBytes = Buffer.from(await pdfResponse.arrayBuffer())
-        assert.equal(pdfResponse.status, 200, `v3 complete ${versionType} public Print PDF succeeds: ${pdfBytes.toString('utf8')}`)
+        assert.equal(pdfResponse.status, 200, `v3 complete ${edition} public Print PDF succeeds: ${pdfBytes.toString('utf8')}`)
         assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
         readPdfColumnStarts(
           pdfBytes,
           outputDir || rootDir,
-          `v3 complete ${versionType} public Print PDF`,
+          `v3 complete ${edition} public Print PDF`,
         )
         if (outputDir) {
-          writeFileSync(path.join(outputDir, `print-${versionType}.html`), html)
-          writeFileSync(path.join(outputDir, `print-${versionType}.pdf`), pdfBytes)
+          writeFileSync(path.join(outputDir, `print-${edition}.html`), html)
+          writeFileSync(path.join(outputDir, `print-${edition}.pdf`), pdfBytes)
         }
       }
       const compactBlankGeometry = (geometry) => Object.entries(geometry).every(([key, value]) => (
-        Math.abs(value.blankWidthPx - ownerQaBlankWidthsPx[key]) <= 0.02
+        Math.abs(value.fontSizePx - 16) <= 0.02
+        && Math.abs(value.blankWidthEm - ownerQaBlankWidthsEm[key]) <= 0.002
         && Math.abs(value.blankLineHeightRatio - 1.05) <= 0.02
         && Math.abs(value.numberLineHeightRatio - 1.05) <= 0.02
         && Math.abs(value.numberBoxBottomGapPx) <= 0.02
@@ -1878,7 +1914,7 @@ async function assertTicket35CompletePublication({ rootDir }) {
             q36BottomRule: screenObservation.ownerQaContent.screenQ36BlankBottomRelation,
           },
           print: ownerQaPrintObservations.map((entry) => ({
-            versionType: entry.versionType,
+            edition: entry.edition,
             hasOzoneEmDash: entry.hasOzoneEmDash,
             hasLegacyOzoneText: entry.hasLegacyOzoneText,
             applicationTitleOccurrences: entry.applicationTitleOccurrences,
@@ -1895,8 +1931,8 @@ async function assertTicket35CompletePublication({ rootDir }) {
             applicationTitleInsideResponse: 1,
             q36BottomRule: { alignItems: 'flex-end', borderBottomWidth: '1px' },
           },
-          print: ['student', 'teacher'].map((versionType) => ({
-            versionType,
+          print: ['largeNoListening'].map((edition) => ({
+            edition,
             hasOzoneEmDash: true,
             hasLegacyOzoneText: false,
             applicationTitleOccurrences: 1,
@@ -2163,6 +2199,14 @@ try {
         canonicalConsumption: consumption,
         grammarFillChrome: studentGrammarFillChrome,
       })
+      artifactProof.historicalPrint = buildPrintHtml({
+        title: asset.paper.title, versionType: 'student', printStyle: 'exam',
+        items, blocks, questionNumberStart: 41,
+        canonicalConsumption: { ...consumption, consumerContractRef: {
+          id: 'print_pdf', version: historicalPrint.version, digest: historicalPrint.contractDigest,
+        } },
+        grammarFillChrome: studentGrammarFillChrome,
+      })
       const teacher = buildPrintHtml({
         title: asset.paper.title,
         versionType: 'teacher',
@@ -2240,7 +2284,7 @@ try {
       assert.equal(
         (
           student.match(
-            /grid-template-columns:110\.5pt 104\.1pt 104\.65pt 101\.65pt/g,
+            /grid-template-columns:minmax\(0, 110\.5fr\) minmax\(0, 104\.1fr\) minmax\(0, 104\.65fr\) minmax\(0, 101\.65fr\)/g,
           ) || []
         ).length,
         15,
@@ -2251,7 +2295,7 @@ try {
             /data-canonical-column-starts-pt="17\.3,127\.8,231\.9,336\.55"/g,
           ) || []
         ).length,
-        15,
+        0,
       )
       artifactProof.print = { student, teacher }
     }
@@ -2543,6 +2587,16 @@ try {
         ),
         'Print',
       )
+      // Both narrower and wider than the old 438.2pt row: fixed-width or
+      // equal-quarter replacements must fail, even with short option text.
+      for (const widthPt of [360, 482]) {
+        await printPage.evaluate((width) => { document.body.style.width = `${width}pt` }, widthPt)
+        assertBrowserColumnGates(
+          await readBrowserColumnStarts(printPage, '.canonical-options--four_columns', ':scope > span'),
+          `Print at ${widthPt}pt`,
+        )
+      }
+      await printPage.evaluate(() => { document.body.style.width = '' })
       await printPage.screenshot({
         path: path.join(outputDir, 'print-student.png'),
         fullPage: true,
@@ -2552,6 +2606,33 @@ try {
         format: 'A4',
         printBackground: true,
       })
+      for (const fontSizePt of [10.5, 12]) {
+        const productHtml = applyStudentProductLayout(artifactProof.print.student, {
+          profile: 'student-friendly-v1', fontSizePt, figureLayout: 'natural',
+          answerBoxHeightsMm: { application: 65, continuation: 57 },
+        }, fontSizePt === 12 ? 'largeNoListening' : 'economy8')
+        await printPage.setContent(productHtml)
+        await printPage.evaluate(() => document.fonts.ready)
+        assertBrowserColumnGates(await readBrowserColumnStarts(printPage,
+          '.canonical-options--four_columns', ':scope > span'), `Student product ${fontSizePt}pt`)
+        assert.equal(await printPage.locator('.canonical-options--four_columns').evaluateAll(rows =>
+          rows.every(row => row.scrollWidth <= row.clientWidth + 1)), true)
+      }
+      await printPage.setContent(artifactProof.historicalPrint)
+      await printPage.evaluate(() => document.fonts.ready)
+      for (const width of [360, 482]) {
+        await printPage.evaluate(value => { document.body.style.width = `${value}pt` }, width)
+        const historicalRows = await printPage.locator('.options-inline--canonical').evaluateAll(rows => rows.map(row => ({
+          width: row.getBoundingClientRect().width * 0.75,
+          starts: [...row.querySelectorAll('.canonical-options > span')].map(option =>
+            (option.getBoundingClientRect().left - row.getBoundingClientRect().left) * 0.75),
+        })))
+        assert.equal(historicalRows.length, 15)
+        for (const row of historicalRows) {
+          assert(Math.abs(row.width - 438.2) < 0.1, 'historical row stays fixed')
+          row.starts.forEach((start, i) => assert(Math.abs(start - [17.3, 127.8, 231.9, 336.55][i]) < 0.1))
+        }
+      }
     } finally {
       await browser.close()
     }

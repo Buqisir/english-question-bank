@@ -27,6 +27,7 @@
 export async function evaluateCandidateOrder(draftPaper, candidateItems, printForm, deps) {
   const { buildDraftPaginationPrintHtml, renderPaginatedPaper, applyPaginationDomContract, derivePageBreakSuggestions, versionType } = deps
   const candidateDraftPaper = { ...draftPaper, items: candidateItems }
+  if (deps.evaluateCandidate) return deps.evaluateCandidate(candidateDraftPaper)
   const html = buildDraftPaginationPrintHtml(candidateDraftPaper, { versionType })
   if (!html) return []
   const rendered = await renderPaginatedPaper(html)
@@ -124,7 +125,7 @@ export async function proposeReorder(draftPaper, currentSuggestions, printForm, 
   const candidates = buildReorderCandidates(draftPaper.items, brokenGroupIds)
   for (const candidate of candidates) {
     const suggestions = await evaluateCandidateOrder(draftPaper, candidate.items, printForm, deps)
-    if (suggestions.length === 0) {
+    if (suggestions?.length === 0) {
       return {
         order: candidate.items.map((item) => item.id),
         move: candidate.move,

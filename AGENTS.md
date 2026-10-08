@@ -25,8 +25,8 @@ Historical cuts are evidence, not current instructions.
 - The owner defines the outcome and non-goals. The agent inspects the code and
   chooses the lightest safe implementation and verification path; do not ask
   the owner to choose engineering ceremony or classify technical risk.
-- Clear, reversible work stays in the current task: understand, change, run the
-  affected checks, review the diff, and commit when requested.
+- Clear, reversible work stays in the current task: understand, change, review
+  the diff, follow the verification cadence below, and commit when requested.
 - Treat uncertainty as ordinary, reversible work while establishing the blast
   radius. Unfamiliarity, file count, and historical complexity are not high-risk
   triggers; escalate only for a concrete high-risk seam.
@@ -60,24 +60,31 @@ the production traffic/data recovery boundary.
 
 ## Verify the changed risk
 
-Run the narrowest public-seam checks that exercise the changed behavior and its
-direct consumers. Inspect the affected code before choosing the verification
-weight. Uncertainty does not automatically require the full suite: use focused,
-reversible checks while establishing the blast radius. Run the full suite only
-for a final high-risk candidate or when the blast radius genuinely remains
-unknown after inspection, and state the reason.
+Before the Owner explicitly says Ship, do not run formal local automated
+verification/regression suites by default. Iterate on the implementation and
+review the diff; run only build/render work needed for a usable preview or
+checks needed for an explicit diagnostic request. Mark candidates awaiting
+acceptance as unverified; inspect rendered visual changes before claiming UI
+completion. Preview preparation does not require a formal test pack.
 
-| Change | During work | Final gate |
+Ship starts verification and delivery, not merge-before-test. Synchronize and
+freeze the candidate, then complete missing affected local-only acceptance once.
+Reuse its natural Actions results for covered checks, including required Full
+and E2E; do not stack focused, Paper and Full packs merely to repeat coverage.
+Inspect the changed behavior and direct consumers before choosing local checks.
+Expand them only when the impact remains unknown, and state the reason.
+
+| Change | Local-only acceptance after Ship | Final gate (reuse natural CI) |
 | --- | --- | --- |
-| Atomic UI micro-change | `pnpm -C app verify:changed` + exact-page real click | Owner QA when visible; no unrelated backend/Paper suite |
-| Known-shape Canonical Paper data | `pnpm -C app verify:changed` strict input/publication canary | no authority bump, deep per-paper tri-surface proof, full suite, or independent review unless a shared shape changes |
-| Ordinary local feature | `pnpm -C app verify:changed` + its focused behavioral check | affected build/public seam |
-| Shared renderer/Paper contract | `pnpm -C app verify:paper` + affected real Screen/Print/PDF | one final `pnpm -C app verify:all` and one independent Standards/Spec review |
-| Auth, isolation, persistence, migration, production config, or irreversible cross-cut | `pnpm -C app verify:changed` security pack + affected public seam | one final `pnpm -C app verify:all` and one independent Standards/Spec review |
+| Atomic UI micro-change | exact-page real click | Owner QA when visible; no unrelated backend/Paper suite |
+| Known-shape Canonical Paper data | strict input/publication canary not covered by CI | no authority bump, deep per-paper tri-surface proof, full suite, or independent review unless a shared shape changes |
+| Ordinary local feature | affected build/public seam not covered by CI | selected natural CI pack |
+| Shared renderer/Paper contract | affected real Screen/Print/PDF | required Full/E2E and one independent Standards/Spec review |
+| Auth, isolation, persistence, migration, production config, or irreversible cross-cut | affected public seam not covered by CI | required Full/E2E and one independent Standards/Spec review |
 
 `SKIP` is not `PASS`; report its limitation literally. Retain a verifier or
 process rule only when it names the failure or independent detection layer it
-uniquely supplies; otherwise keep it outside daily packs.
+uniquely supplies; otherwise keep it outside acceptance packs.
 
 ## Ship to main
 
@@ -108,14 +115,17 @@ uniquely supplies; otherwise keep it outside daily packs.
   safely reverted as one commit, and any change the agent judges clearly high
   risk. High-risk PRs require the relevant review, `verify:all`, and E2E; never
   push them directly to `main`.
-- Immediately before Ship, run `git fetch origin`, rebase the task branch onto
-  `origin/main`, require `git status --porcelain` to be empty, and verify the
-  affected behavior on that candidate. Its natural Actions Full/E2E run may
-  satisfy the corresponding final checks; do not duplicate that Full locally.
-  Local-only and visual checks still apply. A rebase, conflict resolution, or newly advanced
-  `origin/main` invalidates all earlier results. Resolve conflicts only within
-  the Goal while preserving unrelated behavior; apply the authorization boundary
-  above if a conflict requires broader scope.
+- After the Owner says Ship, run `git fetch origin`, rebase the task branch onto
+  `origin/main`, require `git status --porcelain` to be empty, and complete
+  missing affected local-only and visual checks once on that candidate. Reuse
+  its natural Actions Full/E2E results; do not duplicate covered checks locally.
+  After a fix, rebase or base advance, re-run only local checks whose code,
+  dependencies, fixtures or runtime/environment changed; retain unaffected evidence
+  and failed attempts. If impact cannot be bounded, broaden checks with a reason.
+  A new head/base still requires its own natural CI; old-head/base results cannot
+  authorize merge. Resolve conflicts only within the Goal while preserving
+  unrelated behavior; apply the authorization boundary above if a conflict
+  requires broader scope.
 - Push the task branch and open its PR only when the Goal includes Ship. Merge
   only after the reviewed candidate has successful GitHub Actions `verify` and `e2e`
   checks from `.github/workflows/verify.yml` for its current natural PR run.
@@ -207,11 +217,14 @@ test state.
   Export`.
 - Prefer teacher-operable, passage-first workflows. AI-derived information must
   serve a named teacher task and require human confirmation.
-- Student versions hide answers and explanations; teacher versions include
-  them.
-- Screen, Student/Teacher Print HTML, and PDF consume the same stable Canonical
-  Paper and shared renderer seams; no surface reconstructs paper meaning on its
-  own.
+- Current PDF products are `largeComplete`, `largeNoListening`, `economy8`,
+  and `answerOnly`, per `docs/product/paper-pdf-products-v1.md`. The three question
+  papers hide answers; answerOnly consumes source-backed answers and references,
+  never AI explanations. Student/Teacher remain internal or historical roles,
+  not current product choices.
+- Screen, internal Print HTML, and PDF consume the same stable Canonical Paper
+  and version-bound source references through shared renderer seams; no surface
+  reconstructs paper meaning on its own. Historical bindings stay unchanged.
 - Paper authoring, PaperSurface, print/export, and import display follow
   `docs/product/exam-paper-format-standards.md`.
 - The backend import pipeline produces canonical paper data; the website

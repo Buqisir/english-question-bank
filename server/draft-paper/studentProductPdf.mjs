@@ -3,6 +3,7 @@ import { applyPlannedGroupBreaks, inspectGroups, searchFixedPagePdf } from './fi
 // Separate edition IDs preserve the meaning and digests of saved v1–v3 plans.
 export const STUDENT_PRODUCT_EDITIONS = ['largeComplete', 'largeNoListening', 'economy8']
 export const STUDENT_PRODUCT_PROFILE = 'student-friendly-v1'
+const economyProfile = 'student-friendly-economy-v2'
 const normalHeights = { application: 65, continuation: 57 }
 
 export function studentProductPolicy(edition, listeningCount) {
@@ -18,7 +19,7 @@ export function studentProductPolicy(edition, listeningCount) {
 export function validateStudentProductLayout(layout, edition) {
   const keys = ['profile', 'fontSizePt', 'figureLayout', 'answerBoxHeightsMm']
   if (!layout || Object.keys(layout).sort().join() !== keys.sort().join()
-    || layout.profile !== STUDENT_PRODUCT_PROFILE
+    || !(edition === 'economy8' ? [STUDENT_PRODUCT_PROFILE, economyProfile] : [STUDENT_PRODUCT_PROFILE]).includes(layout.profile)
     || !STUDENT_PRODUCT_EDITIONS.includes(edition)
     || !(edition === 'economy8' ? [12, 10.5] : [12]).includes(layout.fontSizePt)
     || !['natural', 'float80'].includes(layout.figureLayout)
@@ -80,14 +81,15 @@ ${figureLayout === 'float80' ? `
 [data-pdf-single-column]>span{white-space:normal!important}
 `
   return html.replace(margin, 'margin: 21mm 20mm 24mm 20mm;')
-    .replace('</head>', `<style data-pdf-student-product="${STUDENT_PRODUCT_PROFILE}">${css}</style></head>`)
+    .replace('</head>', `<style data-pdf-student-product="${layout.profile}"${layout.profile === economyProfile ? ' data-pdf-economy-balance="v1"' : ''}>${css}</style></head>`)
 }
 
 function acceptableWriting(result, html) {
   const application = result.inspection.filter(group => group.applicationPresent)
   const continuation = result.inspection.filter(group => group.continuationAnswerPages)
-  if (html.includes('canonical-application-response') && application.length !== 1) return false
-  if (html.includes('canonical-continuation-response') && continuation.length !== 1) return false
+  const count = role => [...html.matchAll(new RegExp(`<div\\b[^>]*class="[^"]*\\b${role}\\b[^"]*"`, 'g'))].length
+  if (application.length !== count('canonical-application-response')) return false
+  if (continuation.length !== count('canonical-continuation-response')) return false
   return !result.inspection.some(group => (group.optionBankPages?.length ?? 0) > 1)
     && application.every(group => group.applicationPromptPages?.length === 1
       && group.applicationAnswerPages?.length === 1
@@ -117,7 +119,7 @@ export async function planStudentProductPdf(html, { edition, render }) {
       ['float80', 65, minimumContinuation], ['float80', 24, minimumContinuation],
     ]
     for (const [figureLayout, application, continuation] of profiles) {
-      let layout = { profile: STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
+      let layout = { profile: edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
         answerBoxHeightsMm: { application, continuation } }
       const measure = async (selected, breaks = []) => {
         searchedCandidates += 1

@@ -253,12 +253,13 @@ if (files && Array.isArray(files) && provenance) {
     console.error('\n[import-meta] FATAL: could not parse import-meta buffer:', e.message)
     process.exit(1)
   }
-  const { sourceType, region, paperName, year, defaultTags } = provenance
+  const { sourceType, region, paperName, year, month, defaultTags } = provenance
   meta.paper = meta.paper || {}
   if (sourceType) meta.paper.sourceType = sourceType
   if (region) meta.paper.region = region
   if (paperName) meta.paper.paperName = paperName
   if (year) meta.paper.year = year
+  if (month !== undefined) meta.paper.month = month
   if (defaultTags) meta.paper.defaultTags = defaultTags
   // Write the corrected meta BACK into the package file buffer.
   metaFile.buffer = Buffer.from(`${JSON.stringify(meta, null, 2)}\n`)

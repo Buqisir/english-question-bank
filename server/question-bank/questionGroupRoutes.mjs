@@ -22,9 +22,20 @@ function parseRequestArgs(input) {
 // see DEV completion report).
 export function createQuestionGroupRoutes() {
   return [
-    defineRoute('GET', /^\/api\/question-groups$/, ({ response, context }) => {
+    defineRoute('GET', /^\/api\/question-groups$/, ({ response, context, url }) => {
+      const date = {}
+      for (const [field, minimum, maximum] of [['year', 1900, 2100], ['month', 1, 12]]) {
+        if (!url.searchParams.has(field)) continue
+        const values = url.searchParams.getAll(field)
+        const value = Number(values[0])
+        if (values.length !== 1 || !/^\d+$/.test(values[0]) || !Number.isInteger(value) || value < minimum || value > maximum) {
+          context.sendJson(response, 400, { error: '考试年份或月份无效' })
+          return
+        }
+        date[field] = value
+      }
       const userId = context.resolveDataUserId(context)
-      context.sendJson(response, 200, { questionGroups: context.listQuestionGroups(userId) })
+      context.sendJson(response, 200, { questionGroups: context.listQuestionGroups(userId, date) })
     }),
 
     defineRoute(

@@ -74,7 +74,7 @@ function createContext(storeThrows) {
       return 'user-self'
     },
     async readJsonBody() {
-      return { versionType: 'student' }
+      return { edition: 'largeNoListening' }
     },
     sendJson(response, statusCode, body) {
       response.writeHead(statusCode)

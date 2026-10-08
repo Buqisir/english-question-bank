@@ -219,9 +219,11 @@ These local changes have not been deployed or activated in the live controller.
 任意 Amp Project Orb 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
 Owner 在 Amp 提供题源并明确发起导题；Amp 是唯一沟通与启动入口，不再由网站提交或
 webhook 自动接卷。新卷按下文 off-ledger 本地文件流程初始化，不伪造台账记录。
-预览确认与上线是两步：提供真实 Screen 和 8/10 页 PDF，确认后仍须 Owner 明确要求
+预览确认与上线是两步：提供真实 Screen 和四款 PDF，确认后仍须 Owner 明确要求
 上线才可执行单卷 promotion。改标准/程序走 PR；修订卷子数据不因此要求另提代码 PR。
-现阶段继续使用既有服务器存储，不在本次迁移 COS/R2。
+正式私有文件存储及网站年月／产品访问已有本地候选，尚未部署；私有R2未配置，
+本地源副本仍保留。按[四产品存储合同](../product/paper-pdf-products-v1.md)执行，
+不把普通导题授权当成生产配置、R2写入或上线授权。
 项目级 `importing-nck1-papers` skill 会在导题、继续某卷、审核返工、状态查询和
 认可后上线准备任务中自动触发；Owner 不需要记命令。台账 submission 先运行只读
 `node scripts/import-pipeline/source-intake.mjs status <submissionId>`，无需 paperId。
@@ -335,14 +337,29 @@ small.en ASR 模型。Desktop 可用性不是接卷前置；失败不得阻断�
 导题审核使用独立 Review DB 与文件目录作为 QA 事实源；Candidate 不进入正式题库。
 消费端网站不导题，`/ops/` 只做人工审核与 Agent 反馈，不运行 LLM。
 
-## 开局（owner 只给这三样）
+## 开局（Owner给源材料与考试年月，其余由Agent处理）
 
-1. 完整源文件**绝对路径**，并标明 `question_source`、`official_answers` 或
-   `question_and_answers`。正常导入至少一份完整试题源和一份权威答案源；若暂时只有题卷，
-   走下述source-only暂存，不进入普通导入状态机。
-2. 完整source set才分配`paperId`（真题如 `paper-2026-ii`；模拟卷如
-   `paper-mock-gd-2026-m1`）。只有题卷时先使用通用`sourceSetId`，不为单卷造paperId特例。
-3. 卷名与如实出处。
+Owner 2026-10-07更新输入：只交完整源材料与考试年份、月份，不再逐卷填写其余字段。
+Agent下载或定位源文件，确定绝对路径，按实际内容识别 `question_source`、`official_answers`
+或 `question_and_answers`，不按临时文件名猜角色。正常导入至少一份完整试题源和一份
+权威答案源；若暂时只有题卷，走下述source-only暂存，不进入普通导入状态机。
+
+完整source set才分配`paperId`（真题如 `paper-2026-ii`；模拟卷如 `paper-mock-gd-2026-m1`）。
+只有题卷时先使用通用`sourceSetId`，不为单卷造paperId特例。所有卷一律以扫入题卷的
+正式卷名为准，真题、模拟卷、B/C区及其他卷不设例外；保留原字词与位置，不另起卷名。
+如实出处和其余导题字段由Agent按源及固定NCK1合同生成，不要求Owner
+重新录入，不用文件名或答案册标题代替卷名。实际缺源、题头歧义、明确日期冲突才报具体异常。
+
+考试年月独立于卷名，取Owner输入，供题目沿所属Source按时间索引；不从学年、导入时间、
+paperId或题头猜考试年月，不虚构日。新卷缺年月不能冒称准备完成。本地init和attach-answers
+接受`--year`／`--month`并封存到config与source manifest；raw-source intake 的
+`source-intake.mjs init`或首次`continue`也须传这两个参数，续跑不得丢失或推断年月。
+已有初始化的续跑、音频补充和 analyzed-package 沿用各自已封存的身份与日期。
+Review、publisher和网站查询
+已有接线候选；尚未在生产执行。完整规则及当前限制见[产品合同](../product/paper-pdf-products-v1.md)。历史Revision不原地覆盖，
+名称后续校正也按源题头核对并走版本变更，不继续以旧Owner命名替代来源。B/C三卷已有
+本地源卷名候选，未改原Review绑定或发布记录；自动处理不授权自动审核、批准或发布。
+长名通过PDF题头缩字号适配，不缩写源卷名；候选数值与Screen边界见产品合同。
 
 不匹配 `nck1-paper-standard.md` 固定 NCK1 九题组 → **停**。缺完整权威答案时只允许
 source-only暂存后停；不得Materialize、上传Review、AI解题或发布。源载体和普通版式变化
@@ -352,6 +369,7 @@ source-only暂存后停；不得Materialize、上传Review、AI解题或发布�
 node scripts/import-pipeline/universal-nck1.mjs preflight
 node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   --paper-name '<卷名>' --provenance '<出处>' \
+  --year <Owner给定年份> --month <Owner给定月份> \
   --source question_source=/abs/questions.docx \
   --source official_answers=/abs/answers.pdf
 ```
@@ -362,9 +380,20 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 `NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`并停，禁止按“后半文件大概是答案”猜。
 
 权威答案文件可以是纯答案键，也可以附带逐题详解/写作范文；两者都只生成同一套完整
-21–65答案值。逐题详解和答案文件中的写作范文不进入Materialization、Candidate或教师版，
-原文件bytes/digest仍作为Source Capture证据保留。只有ABCD而缺56–65文本答案仍不完整；
+21–65答案值。Owner 2026-10-06 已确认新增独立纯答案版，目标产品及阶段见
+[四款 PDF 产品合同](../product/paper-pdf-products-v1.md)：写作源范文与评分参考改为
+独立版本化 source-references，不混入客观答案、AI analysis 或旧材料化 schema。
+原文件bytes/digest仍作为Source Capture证据保留。源参考及固定产品已有本地不可变
+Review／发布接线候选，正式验收待Ship；不把 scratch sidecar 当成已审补件，不改历史 Candidate。
+逐题详解不进入纯答案版，Student/Teacher 不再是目标产品选择。
+只有ABCD而缺56–65文本答案仍不完整；
 答案值与解释边界不清时必须停。听力原文继续按独立listening contract处理。
+
+新raw-source工作区在所有非产品输入稳定后运行
+`node scripts/import-pipeline/freeze-products.mjs --paper-dir <workspace>`，生成四个
+`products/<edition>.pdf`及绑定输入字节、卷名、年月的manifest，再正常提交Review。
+产品目录已存在时命令拒绝覆盖；输入或产品返修须用新工作副本、新revision，不回写旧批准。
+原卷的网页PDF预览／下载只读该精确已审版本的固定文件，不点击时重排。
 
 听力 MP3 默认仍做整文件解码与时长检查、保存完整 normalized playback；ASR 仅转写
 开头至多 180 秒。新 v2 证据必须绑定材料化源中 `questionNumbers: [1]` 的正式对话
@@ -376,6 +405,49 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 （`remainder: "unchecked"`），不得声称后半段已核验。没有 question 1 权威原文则停，
 不能拿例题、说明、题目选项或任意 `--reference` 替代。旧 v1 整段证据继续原校验，
 不迁移已有纸卷、lease 或工作区。具体操作见 importing-nck1-papers 的听力检查段落。
+
+新增音频准备会从完整 normalized playback MP3 预计算 `waveform-v1.json`
+（20Hz RMS envelope，绑定播放文件SHA与时长）。它是可重建的Screen播放数据，
+不是ASR、题目映射确认或内容安全证据，不改原音频与Candidate身份。
+Review按独立文件摘要封存并复用；新发布版本在原子版本目录保留同一波形和
+已有候选时间段。Screen不重复解码已预计算音频，播放只更新进度，宽度/范围改变
+才重算显示条柱。历史卷无此文件仍可播放；补充波形用
+`review.mjs prepare-listening-waveform <paperId>`，只新增本地派生文件，不修改已封存
+revision、审核/批准receipt；提交仍需正常profile门禁及fresh Review。
+第一节只有在已有时间段完整覆盖1–5题时显示整体耳机入口，保留题间停顿；
+缺失、不完整或越界时间段不猜。信号分段仍为候选，不声称语义已核验。
+
+### 音频波形预处理规则（Owner 2026-10-05 要求明确规格）
+
+本规则要求后续新导入在音频准备阶段完成波形，进入最终 Screen QA 前核实并复用；
+本地已有预计算与消费代码不等于全入口门禁已实现或生产已部署。旧版无波形仍可播放，
+不因此改写历史 revision、批量重导或触发新批准／发布。本轮 C 区排版不附带重算音频。
+
+- **对象与时机**：规范化播放录音生成后，从最终完整 `playback.mp3` 的实际字节生成一次，
+  不用原始上传录音、分段中间 PCM、ASR 文本或逐题切片代替。保留原音频及播放字节；
+  波形生成不裁剪停顿、不降噪、不再次编码录音，不运行或改变 ASR／信号分段。
+- **统一算法 v1**：仅为计算解码成单声道 4000Hz PCM，连续每 50ms（200 samples）
+  计算 RMS，末桶按实际剩余样本计算，数值保留六位小数。以全录音桶值排序后
+  `floor(N × 0.995)` 位置作为统一显示参照，全部为零时用 1；分段不单独拉伸音量。
+  显示条柱取其时间范围内桶值最大值除以该参照并限幅到 0–1，不捏造装饰波形。
+- **文件与绑定**：使用 `materialization/listening-audio/waveform-v1.json`，记录
+  `schemaVersion: listening-waveform-v1`、`playbackAudioSha256`、`durationSeconds`、
+  `bucketSeconds: 0.05`、`reference` 和 `peaks`。文件有自己的 SHA／byteLength；
+  数据须有限且非负，桶数为 `ceil(durationSeconds / 0.05)`，与播放时长误差最多 0.2 秒。
+  schema 版本绑定上述算法；算法变更须用新版本，不静默替换 v1 的含义。
+- **复用与失效**：完整／第一节／单题／材料播放器都截取同一份全录音波形。
+  播放、拖动、倍速、窗口缩放、改卷名或 PDF 排版不重解码音频；仅范围／宽度变化
+  重聚合显示条柱。播放文件 SHA 或算法版本变化才重生成；缺文件可本地补充，
+  已有文件绑定错误／损坏须保留并报错，不能悄悄覆盖或用旧波形冒认新音频。
+- **证据与门禁**：核实播放 SHA、时长、桶数、数值和独立文件摘要，最终预处理完成表
+  单列波形完成／失败／不适用及所绑定的播放文件。新导入缺失／损坏时不报“预处理完成”；
+  全部静音是合法数据，不伪造柱形，也不能据此报音频内容已核验。无录音记不适用。
+  这些检查证明播放显示数据绑定正确，不证明录音稿、题目对应或内容安全。
+- **交付与兼容**：新 Review 将其作为独立摘要封存的派生文件，与既有时间段分别保存；
+  新发布版本复用同一数据，沿音频的鉴权／版本路径提供最小播放信息，不暴露私有原件
+  或核对记录。Screen 有合法预计算数据就不为绘制波形再下载／解码整段录音；
+  历史缺件可沿原兼容路径懒加载并缓存，绘制失败不阻止正常播放。补件不修改封存
+  revision 或既有批准；需要对外交付新版本时仍走正常提交和授权。Print／PDF不显示波形。
 
 只有题卷时，先安全保留来源；图片页改用重复的
 `--source-page question_source:<页码>=/abs/page.png`：
@@ -727,8 +799,9 @@ Owner 网页会话、Agent token 都不能调用写入口。
 Canonical publication digest 写回 promotion。正式 question-bank rows、Canonical
 current、五份 analysis、`versions/vN`、`latest` 和该卷媒体由既有 publisher 的
 staging/journal/事务/补偿边界提交；不会上传或替换整库。成功后 Review 事务写
-`published` 回执并释放 guard。R2 是下一次定时备份的独立灾备层，本回执不声称 R2
-已经完成。
+`published` 回执并释放 guard。本地新四产品候选在内容事务前归档全部已审文件，
+成功发布记录绑定该清单；R2配置及生产启用尚未执行。现有定时R2灾备仍独立，
+文件归档不表示数据库／整站备份已经完成。
 
 重试：只有同一 exact approval 的状态为 `failed` 或 `publishing`，且 Owner 当前另说
 `重试上线 <paperId>`，才运行：
@@ -768,7 +841,8 @@ QA 之后 Owner 必须另说“上线”（当前口头，不是历史聊天里�
 3. 只改这一卷；不传 SQLite，不同步 broad assets，不包含 Orb 其他本地改动。
 4. publisher 会写目标 vN、正式 rows、Canonical current、当前 profile 的摘要或五份分析 sidecar、latest 与媒体；旧
    immutable version 保留供 rollback。
-5. R2 不同步完成；只会由生产现有定时任务在下一次快照覆盖。
+5. 正式文件存储按部署时的固定配置执行，新产品文件先归档并验证；R2启用需明确环境授权。
+   定时整站灾备仍由独立快照覆盖，本次promotion不声称整站备份完成或本地副本已减容。
 
 ### 收据
 

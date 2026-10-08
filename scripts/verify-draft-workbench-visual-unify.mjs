@@ -202,7 +202,8 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // draft-desk UI-only refresh: menu chrome above the latter two declarations
 // moved their existing white-on-ink foregrounds; no whitelist role changed.
 // Tool-strip collision offset adds one line before the toast foreground.
-const WHITELISTED_LINES = new Set([194, 505, 864])
+// Four-product controls and answer preview shift the same three declarations.
+const WHITELISTED_LINES = new Set([213, 530, 889])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

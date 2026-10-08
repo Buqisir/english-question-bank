@@ -39,3 +39,21 @@ export const clozeRhythm: Readonly<{
     sha256: string
   }>
 }>
+
+export function resolveConsumerClozeGeometry(ref?: {
+  id: string
+  version: string
+  digest: string
+} | null): Readonly<{
+  questionLabelWidthPt: number
+  questionLabelStartPt: number
+  questionToFirstOptionGlyphGapEm: number
+  minimumGutterPt: number
+  labelToTextGapEm: number
+  visibleWeight: number
+  proportional: boolean
+  columnStartsPt?: ReadonlyArray<number>
+  columnWidthsPt?: ReadonlyArray<number>
+  columnWidthSharesPt?: ReadonlyArray<number>
+  rowWidthPt?: number
+}>

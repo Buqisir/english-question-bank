@@ -660,12 +660,17 @@ button.ps-paper-blank.ps-paper-blank--clickable {
    Single-column (unlike the 2-col `.ps-option-list` grid used for short
    4-option MC options) — mirrors print-renderer.mjs's deduped
    single-column `.options-list`
-   fallback for >4-option groups. Indent reuses `.ps-option-list`'s
-   existing 22px left padding — no new spacing/color/size values. */
+   fallback for >4-option groups. Labels share the passage's 2em first-line
+   origin, not the continuation-line left edge. */
 .ps-option-bank {
   margin: 10px 0 0;
-  padding-left: var(--ps-passage-indent);
   gap: 4px;
+}
+
+/* Override paperLayout.css's shared list reset regardless of bundled import
+   order. This calibration belongs to Screen; Print keeps its own bank inset. */
+.ps-surface .ps-option-bank {
+  padding-left: var(--ps-passage-indent);
 }
 
 .ps-option-bank-item {
@@ -772,6 +777,7 @@ button.ps-paper-blank.ps-paper-blank--clickable {
    laid over the page at that spot, so paper lines never reflow. Hosts become
    positioning contexts only; their own geometry is unchanged. */
 .canonical-listening-surface .ps-listening-part,
+.canonical-listening-surface .ps-listening-section,
 .canonical-listening-surface .ps-listening-segment-cue {
   position: relative;
 }

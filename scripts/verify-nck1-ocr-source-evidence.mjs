@@ -331,6 +331,7 @@ try {
     paperId,
     '--paper-name', 'Synthetic NCK1 OCR evidence',
     '--provenance', 'anonymous synthetic fixture',
+    '--year', '2025', '--month', '12',
     '--source', `question_source=${questionPath}`,
     '--source', `official_answers=${answerPath}`,
   ), /INITIALIZED/u)

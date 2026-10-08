@@ -92,10 +92,11 @@ function makeContext(overrides = {}) {
 }
 
 async function dispatch(routes, method, pathname, context, body = {}) {
-  const route = routeBy(routes, method, pathname)
+  const url = new URL(pathname, 'http://localhost')
+  const route = routeBy(routes, method, url.pathname)
   assert(`${method} ${pathname} route exists`, Boolean(route))
   const response = createResponse()
-  await route.handle({ request: { method, body }, response, match: pathname.match(route.pattern), context })
+  await route.handle({ request: { method, body }, response, match: url.pathname.match(route.pattern), url, context })
   return response
 }
 
@@ -178,6 +179,20 @@ assert('createQuestionGroupRoutes returns eighteen routes', routes.length === 18
 
 const listResponse = await dispatch(routes, 'GET', '/api/question-groups', makeContext())
 assert('GET /api/question-groups returns questionGroups array', listResponse.statusCode === 200 && listResponse.body.includes('group-1'))
+
+let dateFilter
+const datedList = await dispatch(routes, 'GET', '/api/question-groups?year=2025&month=11', makeContext({
+  listQuestionGroups(userId, date) { dateFilter = { userId, ...date }; return [] },
+}))
+assert('question index passes the explicit exam year/month and user scope', datedList.statusCode === 200
+  && JSON.stringify(dateFilter) === JSON.stringify({ userId: 'local', year: 2025, month: 11 }))
+for (const query of ['month=0', 'month=13', 'month=11.5', 'year=1899', 'year=2101', 'year=2025&year=2026']) {
+  let listed = false
+  const invalid = await dispatch(routes, 'GET', `/api/question-groups?${query}`, makeContext({
+    listQuestionGroups() { listed = true; return [] },
+  }))
+  assert(`invalid exam date ${query} rejects before querying`, invalid.statusCode === 400 && !listed)
+}
 
 const createResponseResult = await dispatch(routes, 'POST', '/api/question-groups', makeContext(), { title: 'New group' })
 assert('POST /api/question-groups returns 201', createResponseResult.statusCode === 201 && createResponseResult.body.includes('group-created'))

@@ -10,6 +10,11 @@ An Owner saying "Ship" starts this whole sequence. Choose the branch, small PR,
 and verification route automatically; do not ask the Owner to choose a pack or
 re-authorize ordinary protected merge. Direct-main Ship remains disabled.
 
+Before that instruction, do not run formal local automated verify/regression
+suites by default. Keep only necessary preview build/render work and checks
+for explicit diagnostic requests; mark the candidate as awaiting acceptance.
+Ship starts verification and delivery, not merge-before-test.
+
 ## Prepare the exact candidate
 
 1. Preserve unrelated work. Use a task branch, never commit directly on main.
@@ -17,12 +22,23 @@ re-authorize ordinary protected merge. Direct-main Ship remains disabled.
    published branch merely to consolidate commits. Resolve only in-scope conflicts.
 3. Classify all changed paths with `node scripts/verify-ci.mjs --plan-json
    --changed-file <path>` (repeat the flag). Apply high-risk overrides from AGENTS.
-4. Require a clean worktree and record the exact candidate head/base. Rebase,
-   conflict resolution or a new base invalidates prior affected verification.
-5. Run the affected checks and required independent review. Full and six E2E
-   results from this exact candidate's natural Actions run may satisfy the
-   corresponding final gate; do not run another Full just to duplicate it.
-   Keep genuinely local-only or visual verification separate. SKIP is not PASS.
+4. Require a clean worktree and record the exact candidate head/base. A fix,
+   rebase, conflict resolution or new base invalidates only local checks affected
+   through code, dependencies, fixtures or runtime/environment. Retain unaffected
+   evidence; if impact cannot be bounded, broaden checks with a reason. Changed
+   head/base still requires fresh natural CI, never old-head/base success.
+5. Complete missing affected local-only acceptance once and perform the required
+   independent review. Reuse covered checks, including Full and six E2Es, from
+   this exact candidate's natural Actions run. Do not stack focused/Paper/Full
+   packs merely to repeat coverage. Real local-only and visual verification
+   still applies. SKIP is not PASS.
+
+After a fix, check the finding, fix and direct regressions; re-run only actually
+invalidated local checks. Keep failed attempts and unaffected results. A bounded
+environment fix does not require a whole-suite repeat. Reuse unchanged builds
+and artifacts only while their inputs and running implementation stay unchanged,
+and bind final outputs to the exact revision. This local reuse does not change
+the natural PR and post-merge main CI gates below.
 
 ## Push, inspect Actions, merge
 

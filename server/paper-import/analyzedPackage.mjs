@@ -331,6 +331,7 @@ function writeReviewWorkspace(rootDir, loaded) {
       sourceType: loaded.manifest.metadata.sourceType,
       region: loaded.manifest.metadata.region,
       year: loaded.manifest.metadata.year,
+      ...(loaded.manifest.metadata.month !== undefined ? { month: loaded.manifest.metadata.month } : {}),
     },
   }, null, 2)}\n`)
   const sourceManifest = buildNck1AnalyzedPackageReviewSourceManifest({

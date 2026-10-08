@@ -54,10 +54,8 @@ assert('export routes module exports createExportRoutes', /export function creat
 assert('export routes module uses minimal router helper', routeSource.includes("from '../router/index.mjs'"))
 assert('generated DOCX export route is absent', !routeSource.includes('/api\\/exports\\/docx$'))
 assert('obsolete DOCX-converted PDF route is absent', !routeSource.includes('/api\\/exports\\/pdf$'))
-assert('print-html export route registered', routeSource.includes('/api\\/exports\\/print-html$'))
-assert('print-pdf export route registered', routeSource.includes('/api\\/exports\\/print-pdf$'))
-assert('print-pdf preserves vivliostyle unavailable 503 mapping', routeSource.includes('精排 PDF 不可用') && routeSource.includes("message.includes('vivliostyle')"))
-assert('print-pdf preserves generic 500 mapping', routeSource.includes('context.sendJson(response, 500, { error: message })'))
+assert('Print HTML/PDF share the product route', routeSource.includes('/api\\/exports\\/print-(html|pdf)$'))
+assert('product renderer errors use the typed unavailable signal', routeSource.includes("error?.code === 'RENDERER_MISSING' ? 503 : 400"))
 
 assert('api imports export implementation module', api.includes("from './exports/exportImplementation.mjs'"))
 assert('api imports export routes module', api.includes("from './exports/exportRoutes.mjs'"))
@@ -71,14 +69,6 @@ assert('api no longer owns export implementation', !/function exportDocx\(input\
 assert('api no longer owns inline export route branches', !api.includes("url.pathname === '/api/exports/docx'") && !api.includes("url.pathname === '/api/exports/pdf'") && !api.includes("url.pathname === '/api/exports/print-html'") && !api.includes("url.pathname === '/api/exports/print-pdf'"))
 
 const implementation = {
-  exportPrintHtml() {
-    calls.push('exportPrintHtml')
-    return { body: '<html></html>', fileName: 'test.html' }
-  },
-  exportPrintPdf() {
-    calls.push('exportPrintPdf')
-    throw new Error('vivliostyle CLI not found')
-  },
   sendPdf(response, body, fileName, outputPath) {
     calls.push(`sendPdf:${fileName}:${outputPath}:${body.toString()}`)
     response.writeHead(200, { 'content-type': 'pdf' })
@@ -89,7 +79,7 @@ const implementation = {
 const routes = createExportRoutes(implementation)
 assert('createExportRoutes returns the supported Print and companion-analysis routes', routes.length === 4)
 
-const input = { ok: true }
+const input = { title: 'test', edition: 'largeNoListening', items: [{ questionGroupId: 'group-1' }] }
 const request = { method: 'POST' }
 let readCount = 0
 const calls = []
@@ -104,21 +94,35 @@ const context = {
     response.writeHead(statusCode, { 'content-type': 'application/json' })
     response.end(JSON.stringify(body))
   },
+  draftPaperStore: {
+    async getAssemblyPaperProduct(receivedInput) {
+      assert('route delegates the exact assembly input to product rendering', receivedInput === input)
+      return { draftPaper: { title: 'test' }, paginatedHtml: '<html></html>', pdfBytes: Buffer.from('%PDF-fixture') }
+    },
+  },
 }
 
 assert('generated DOCX route cannot be selected', routeByPath(routes, '/api/exports/docx') === undefined)
 assert('obsolete DOCX-converted PDF route cannot be selected', routeByPath(routes, '/api/exports/pdf') === undefined)
 
 const htmlResponse = createResponse()
-await routeByPath(routes, '/api/exports/print-html').handle({ request, response: htmlResponse, context })
+const htmlRoute = routeByPath(routes, '/api/exports/print-html')
+await htmlRoute.handle({ request, response: htmlResponse, context, match: '/api/exports/print-html'.match(htmlRoute.pattern) })
 assert('print-html route sends html response', htmlResponse.statusCode === 200 && htmlResponse.body === '<html></html>')
 assert('print-html route preserves content type', htmlResponse.headers['content-type'] === 'text/html; charset=utf-8')
-assert('print-html route preserves x-file-name header', htmlResponse.headers['x-file-name'] === encodeURIComponent('test.html'))
+assert('print-html route names the selected product', htmlResponse.headers['x-file-name'] === encodeURIComponent('test-大字无听力版.html'))
 
 const printPdfResponse = createResponse()
-await routeByPath(routes, '/api/exports/print-pdf').handle({ request, response: printPdfResponse, context })
-assert('print-pdf route maps missing vivliostyle to 503', printPdfResponse.statusCode === 503 && String(printPdfResponse.body).includes('精排 PDF 不可用'))
-assert('routes parsed JSON once per request', readCount === 2)
+const pdfRoute = routeByPath(routes, '/api/exports/print-pdf')
+const pdfMatch = '/api/exports/print-pdf'.match(pdfRoute.pattern)
+await pdfRoute.handle({ request, response: printPdfResponse, context, match: pdfMatch })
+assert('print-pdf sends the same product renderer bytes', printPdfResponse.statusCode === 200 && printPdfResponse.body.toString() === '%PDF-fixture')
+const unavailableResponse = createResponse()
+await pdfRoute.handle({ request, response: unavailableResponse, context: { ...context,
+  draftPaperStore: { getAssemblyPaperProduct() { throw Object.assign(new Error('Chromium unavailable'), { code: 'RENDERER_MISSING' }) } },
+}, match: pdfMatch })
+assert('print-pdf maps typed renderer unavailability to 503', unavailableResponse.statusCode === 503 && String(unavailableResponse.body).includes('Chromium unavailable'))
+assert('routes parsed JSON once per request', readCount === 3)
 
 assert('verify-ci includes H1-E export routes verify', verifyCi.includes('verify-h1e-export-routes.mjs'))
 assert('scripts README documents H1-E export routes verify', scriptsReadme.includes('verify-h1e-export-routes.mjs'))

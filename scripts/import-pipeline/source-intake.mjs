@@ -23,6 +23,7 @@ import { readAnalyzedPackageArchive } from '../../server/source-intake/analyzedP
 import { parseStrictPackageJson } from '../../server/paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { readExamDate } from '../../shared/examDate.mjs'
 import { inspectNck1Materialization } from './nck1-docx-materialize.mjs'
 import { invalidateParagraphSummariesForListeningSupplement } from './paragraph-summary-rebinding.mjs'
 import { acquireSourceIntakeLock, maintainSourceIntakeLease, runSourceIntakeChild } from './source-intake-lease.mjs'
@@ -593,6 +594,8 @@ async function continueAutomation(submissionId, paperId) {
         return { submissionId, paperId, blocked: { step: 'lease', reason: 'heartbeat_failed', detail: error.message }, next: 'Confirm the lease before any write.' }
       }
       const failure = await runStep('init', ['init', submissionId, '--paper-id', paperId,
+        ...(option('--year') !== null ? ['--year', option('--year')] : []),
+        ...(option('--month') !== null ? ['--month', option('--month')] : []),
         ...(process.argv.includes('--signal-only') ? ['--signal-only'] : [])])
       if (failure) return { submissionId, paperId, ...failure, next: 'Inspect initialization evidence before replaying.' }
       status = await automationStatus(submissionId, paperId)
@@ -901,6 +904,7 @@ async function initialize(submissionId, paperId) {
     )
     invalidateParagraphSummariesForListeningSupplement(path.join(papersRoot, paperId))
   } else {
+    const date = readExamDate({ year: Number(option('--year')), month: Number(option('--month')) }, { required: true })
     const args = [
       universalCli,
       'init',
@@ -909,6 +913,8 @@ async function initialize(submissionId, paperId) {
       manifest.submission.snapshot.paperName,
       '--provenance',
       provenance(manifest.submission.snapshot),
+      '--year', String(date.year),
+      '--month', String(date.month),
     ]
     for (const file of documentFiles) args.push('--source', `${file.role}=${file.localPath}`)
     execFileSync(

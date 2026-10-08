@@ -58,11 +58,13 @@ function escapeAttr(value) {
 // ordered, non-groupMissing group id list (same order as the blocks that
 // produced `paginatedHtml`'s content); `pageCount` must be
 // renderPaginatedPaper's own reported page count for the SAME render.
+// Explicit groupIds:null is page-only wrapping for the independent answer
+// booklet; its source group markers are already bound, not Question Groups.
 export function applyPaginationDomContract(paginatedHtml, { groupIds, pageCount } = {}) {
   if (typeof paginatedHtml !== 'string' || !paginatedHtml) {
     throw new Error('applyPaginationDomContract: paginatedHtml must be a non-empty string')
   }
-  if (!Array.isArray(groupIds) || groupIds.length === 0) {
+  if (groupIds !== null && (!Array.isArray(groupIds) || groupIds.length === 0)) {
     throw new Error('applyPaginationDomContract: groupIds must be a non-empty array')
   }
   if (!Number.isInteger(pageCount) || pageCount < 1) {
@@ -78,7 +80,7 @@ export function applyPaginationDomContract(paginatedHtml, { groupIds, pageCount 
   const refToGroupId = new Map()
   let nextIndex = 0
 
-  const withGroupIds = paginatedHtml.replace(/<section class="question-group"([^>]*)>/g, (fullMatch, attrs) => {
+  const withGroupIds = groupIds === null ? paginatedHtml : paginatedHtml.replace(/<section class="question-group"([^>]*)>/g, (fullMatch, attrs) => {
     const refMatch = /data-ref="([^"]+)"/.exec(attrs)
     if (!refMatch) {
       throw new Error(
@@ -100,7 +102,7 @@ export function applyPaginationDomContract(paginatedHtml, { groupIds, pageCount 
     return `<section class="question-group" data-group-id="${escapeAttr(refToGroupId.get(ref))}"${attrs}>`
   })
 
-  if (nextIndex !== groupIds.length) {
+  if (groupIds !== null && nextIndex !== groupIds.length) {
     throw new Error(
       `applyPaginationDomContract: found ${nextIndex} distinct question-group fragment(s) but expected ` +
         `${groupIds.length} (groupIds.length) — a group may have been dropped or merged unexpectedly`,

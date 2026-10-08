@@ -1,10 +1,12 @@
 import {
   assertCanonicalConsumptionVisibleStructure,
 } from '../../../../shared/paper-canonical/visibleStructure.mjs'
+import type { ListeningWaveform } from '../../../../shared/paper-canonical/listeningWaveform.mjs'
 
 export type WholePaperConsumption = {
   disposition: 'ready'
   paperId: string
+  paperSourceType?: string
   sourceAssetVersion: number | null
   sourceAssetDigest?: string
   publicationDigest?: string
@@ -15,6 +17,7 @@ export type WholePaperConsumption = {
     durationSeconds: number
     mediaType: 'audio/mpeg'
     url: string
+    waveform?: ListeningWaveform
     segments?: ReadonlyArray<{
       segmentId: string
       questionNumbers: ReadonlyArray<number>

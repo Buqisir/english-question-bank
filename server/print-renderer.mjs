@@ -64,7 +64,7 @@ import {
   readingPassageLetterTypography,
 } from '../shared/paper-canonical/readingPassageLetter.mjs'
 import { sevenChoicesRhythm } from '../shared/paper-canonical/sevenChoicesRhythm.mjs'
-import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
+import { clozeRhythm, resolveConsumerClozeGeometry } from '../shared/paper-canonical/clozeRhythm.mjs'
 import {
   grammarFillRhythm,
   grammarFillRhythmForPaperAuthority,
@@ -100,6 +100,7 @@ import { blankPresentationParagraphs } from '../shared/paper-canonical/blankPres
 import { resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import {
   listeningOpening,
+  mockPaperCoverName,
   ownsCompletePaperOpening,
   projectListeningGroupPresentation,
 } from '../shared/paper-canonical/listeningPresentation.mjs'
@@ -2083,10 +2084,16 @@ export function buildPrintHtml({
             const placement = printQuestion.canonicalPlacement
             const clozeChoiceMapping =
               isCanonicalCloze
-                ? clozeRhythm.horizontalChoiceGeometry.rendererMapping
+                ? resolveConsumerClozeGeometry(canonicalSourceConsumptionForGroup(canonicalConsumption, canonicalGroup.groupId).consumerContractRef)
                 : null
+            const optionWidth = clozeChoiceMapping?.proportional
+              ? '100%'
+              : `${clozeChoiceMapping ? clozeChoiceMapping.rowWidthPt - clozeChoiceMapping.questionLabelWidthPt : placement?.rowWidthPt}pt`
+            const columnStartAttrs = clozeChoiceMapping?.proportional || !placement
+              ? ''
+              : ` data-canonical-column-starts-pt="${(clozeChoiceMapping?.columnStartsPt || placement.columnStartsPt).join(',')}"`
             const placementAttrs = placement
-              ? ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${(clozeChoiceMapping?.columnStartsPt || placement.columnStartsPt).join(',')}"${clozeChoiceMapping ? ` data-canonical-cloze-geometry-authority="${digestJson(clozeChoiceMapping)}"` : ''} style="width:${clozeChoiceMapping ? clozeChoiceMapping.rowWidthPt - clozeChoiceMapping.questionLabelWidthPt : placement.rowWidthPt}pt;grid-template-columns:${(clozeChoiceMapping?.columnWidthsPt || placement.columnWidthsPt).map((width) => `${width}pt`).join(' ')}"`
+              ? ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}"${columnStartAttrs}${clozeChoiceMapping ? ` data-canonical-cloze-geometry-authority="${digestJson(clozeChoiceMapping)}"` : ''} style="width:${optionWidth};grid-template-columns:${(clozeChoiceMapping?.columnWidthSharesPt || clozeChoiceMapping?.columnWidthsPt || placement.columnWidthsPt).map((width) => clozeChoiceMapping?.proportional ? `minmax(0, ${width}fr)` : `${width}pt`).join(' ')}"`
               : ''
             const renderedOptions = printQuestion.options.map((o, index) => {
               if (!o.canonicalContent) {
@@ -2094,7 +2101,7 @@ export function buildPrintHtml({
               }
               const physical = placement?.placements[index]
               const canonicalStart =
-                clozeChoiceMapping?.columnStartsPt[index]
+                clozeChoiceMapping?.proportional ? undefined : clozeChoiceMapping?.columnStartsPt?.[index]
                 ?? physical?.startPt
               const continuation = physical?.continuationStartPt
               const style =
@@ -2109,7 +2116,7 @@ export function buildPrintHtml({
               const content = renderCanonicalInlineNodes(o.canonicalContent)
               return `<span${identityAttrs}${style}><span${isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_label"' : ''}>${escapeHtml(o.label)}.</span> <span${isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_text"' : ''}>${content}</span></span>`
             }).join('')
-            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"><span class="qnum">${displayQuestionNo}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
+            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="options-inline options-inline--numbered${placement ? ' options-inline--canonical' : ''}"${clozeChoiceMapping?.proportional ? ' data-cloze-proportional=""' : ''}><span class="qnum">${displayQuestionNo}.</span>${placement ? `<span class="canonical-options canonical-options--${placement.mode}"${placementAttrs}>${renderedOptions}</span>` : renderedOptions}</p>`
           } else {
             const renderedStem = canonicalQuestion
               ? (
@@ -2878,6 +2885,15 @@ ${paperLayoutCss}
   width: ${clozeRhythm.horizontalChoiceGeometry.rendererMapping.rowWidthPt}pt;
 }
 
+.question-group[data-canonical-group-type="cloze"] .options-inline--canonical[data-cloze-proportional] {
+  /* Override the fixed generic option row: preserve the qnum/A join while
+     the four reference track proportions fill this edition's passage width. */
+  grid-template-columns:
+    ${clozeRhythm.horizontalChoiceGeometry.rendererMapping.questionLabelWidthPt}pt
+    minmax(0, 1fr);
+  width: 100%;
+}
+
 .options-inline--canonical > .canonical-options {
   margin-right: 0;
 }
@@ -3165,7 +3181,7 @@ ${isTeacher ? `
 </style>
 </head>
 <body class="${densityClass} paper-print">
-${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening><h1 class="canonical-paper-cover-title" data-canonical-cover-title>${listeningOpening.title}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices><strong>注意事项：</strong><ol>${listeningOpening.notices.map((notice) => `<li>${escapeHtml(notice)}</li>`).join('')}</ol></div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
+${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening>${mockPaperCoverName(canonicalConsumption?.paperSourceType, title) ? `<p class="canonical-paper-mock-name" data-canonical-mock-name>${escapeHtml(mockPaperCoverName(canonicalConsumption.paperSourceType, title))}</p>` : ''}<h1 class="canonical-paper-cover-title" data-canonical-cover-title>${listeningOpening.title}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices><strong>注意事项：</strong><ol>${listeningOpening.notices.map((notice) => `<li>${escapeHtml(notice)}</li>`).join('')}</ol></div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
 <div class="paper-header">
   <h1>${escapeHtml(title || '英语试题')}</h1>
   ${versionLabel ? `<p class="version-label">${escapeHtml(versionLabel)}</p>` : ''}

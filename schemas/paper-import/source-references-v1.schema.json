@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source-references-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paperId", "sourceDigest", "candidateDigest", "materializationDigest", "groups"],
+  "properties": {
+    "schemaVersion": { "const": "source-references-v1" },
+    "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "sourceDigest": { "$ref": "#/$defs/digest" },
+    "candidateDigest": { "$ref": "#/$defs/digest" },
+    "materializationDigest": { "$ref": "#/$defs/digest" },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["groupId", "taskType", "essays", "scoring"],
+        "properties": {
+          "groupId": { "$ref": "#/$defs/id" },
+          "taskType": { "enum": ["application", "continuation"] },
+          "essays": { "$ref": "#/$defs/section" },
+          "scoring": { "$ref": "#/$defs/section" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._:-][a-z0-9]+)*$" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["documentSha256", "locator"],
+      "properties": {
+        "documentSha256": { "$ref": "#/$defs/digest" },
+        "locator": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "documentId", "page", "region"],
+              "properties": {
+                "kind": { "const": "page_region" },
+                "documentId": { "$ref": "#/$defs/id" },
+                "page": { "type": "integer", "minimum": 1 },
+                "region": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["x", "y", "width", "height"],
+                  "properties": {
+                    "x": { "type": "number", "minimum": 0, "maximum": 1 },
+                    "y": { "type": "number", "minimum": 0, "maximum": 1 },
+                    "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+                    "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "documentId", "part", "selector"],
+              "properties": {
+                "kind": { "const": "docx_part" },
+                "documentId": { "$ref": "#/$defs/id" },
+                "part": { "type": "string", "pattern": "\\S" },
+                "selector": { "type": "string", "pattern": "\\S" }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence", "entries"],
+      "properties": {
+        "state": { "enum": ["captured", "not_supplied", "unprocessed"] },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["referenceId", "authority", "sourceLabel", "labelSource", "paragraphs"],
+            "properties": {
+              "referenceId": { "$ref": "#/$defs/id" },
+              "authority": { "const": "source_reference" },
+              "sourceLabel": { "oneOf": [{ "type": "null" }, { "type": "string", "pattern": "\\S" }] },
+              "labelSource": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/source" }] },
+              "paragraphs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["paragraphId", "role", "text", "source"],
+                  "properties": {
+                    "paragraphId": { "$ref": "#/$defs/id" },
+                    "role": { "enum": ["title", "label", "salutation", "body", "closing", "signature"] },
+                    "text": { "type": "string", "pattern": "\\S" },
+                    "source": { "$ref": "#/$defs/source" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

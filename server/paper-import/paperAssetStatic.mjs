@@ -14,6 +14,9 @@ export function sendPaperAssetStatic(request, response, urlPath, paperAssetsDir)
   if (!relativePath || relativePath.includes('..') || relativePath.includes('\\') || path.isAbsolute(relativePath)) {
     return fail(400, 'Invalid paper asset path')
   }
+  // Frozen products are approval-bound private blobs, never mutable static
+  // files or the highest directory left behind by a failed publication.
+  if (/(?:^|\/)products(?:\/|$)/.test(relativePath)) return fail(404, 'Paper asset file not found')
   const audio = /^[a-z0-9][a-z0-9._-]*\/versions\/v[1-9]\d*\/listening\/playback\.mp3$/.test(relativePath)
   if (!audio && (/\.(?:mp3|wav|m4a)$/i.test(relativePath) || /(?:^|\/)(?:listening-audio|asr-v1|check-v1)/.test(relativePath))) {
     return fail(404, 'Paper asset file not found')
@@ -46,8 +49,9 @@ export function sendPaperAssetStatic(request, response, urlPath, paperAssetsDir)
 // Callers establish authorization and resolve the immutable file first.
 export function sendListeningAudioFile(request, response, filePath, {
   cacheControl = 'private, max-age=31536000, immutable',
+  bytes = null,
 } = {}) {
-  const size = statSync(filePath).size
+  const size = bytes ? bytes.length : statSync(filePath).size
   let start = 0
   let end = size - 1
   const range = request.headers.range
@@ -77,6 +81,7 @@ export function sendListeningAudioFile(request, response, filePath, {
     ...(range === undefined ? {} : { 'content-range': `bytes ${start}-${end}/${size}` }),
   })
   if (request.method === 'HEAD') return response.end()
+  if (bytes) return response.end(bytes.subarray(start, end + 1))
   const stream = createReadStream(filePath, { start, end })
   stream.on('error', () => response.destroy())
   response.on('close', () => stream.destroy())

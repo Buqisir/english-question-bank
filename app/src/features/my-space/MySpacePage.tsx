@@ -273,7 +273,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     try {
       const target = await prepareFileSaveTarget({
         mode,
-        suggestedName: artifact.fileName || '英语草稿卷-学生卷.pdf',
+        suggestedName: artifact.fileName || '英语草稿卷.pdf',
         mimeType: 'application/pdf',
       })
       if (!target) return

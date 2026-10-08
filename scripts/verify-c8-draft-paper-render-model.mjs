@@ -224,8 +224,8 @@ assert(
 // a change to what the assertion actually proves (the PDF endpoint still routes
 // through the shared pipeline rather than rendering its own copy).
 assert(
-  'draft PDF endpoint consumes getDraftPaperPagination\'s pdfBytes (paged.js pipeline, Vivliostyle CLI line retired)',
-  /const pagination = await getDraftPaperPagination\(userId, draftPaperId, \{ versionType: normalizedVersionType \}\)/.test(draftStore)
+  'draft PDF endpoint consumes the same product pagination bytes (paged.js pipeline, Vivliostyle CLI line retired)',
+  /pagination = await getDraftPaperProductPagination\(userId, draftPaperId, edition\)/.test(draftStore)
     && /body: pagination\.pdfBytes/.test(draftStore)
     && draftRoutes.includes('exportDraftPaperPdf'),
 )
@@ -323,7 +323,7 @@ assert('the preview iframe HTML itself still carries no suggestion markup (draft
 assert('workbench no longer owns outline rendering details', !workbench.includes('compactSource(item)') && !workbench.includes('draft-outline-panel'))
 assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
 assert('workbench prints through PDF only', !workbench.includes('浏览器打印') && !workbench.includes('browserPrint') && !workbench.includes('printWindow'))
-assert('workbench has no answer export label', !workbench.includes('答案版'))
+assert('workbench selects the four products including source answerOnly', workbench.includes('PAPER_PDF_EDITIONS.map') && workbench.includes("edition === 'answerOnly'") && workbench.includes('纯答案版'))
 assert('workbench has no explanation export label', !workbench.includes('解析版'))
 // C8 (trust-cracks) — undo toast 措辞: "题组已删除" → "题组已移出" (the remove
 // action button is itself called 移除; the group stays in the question bank,

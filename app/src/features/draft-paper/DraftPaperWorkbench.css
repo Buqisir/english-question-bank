@@ -134,6 +134,25 @@
   color: var(--eqb-color-danger);
 }
 
+.draft-product-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.draft-product-control select {
+  background: var(--eqb-color-paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  min-height: 32px;
+  padding: 0 8px;
+  max-width: 100%;
+}
+
 .draft-version-toggle {
   --fh-radius: 8px;
   background: transparent;
@@ -322,6 +341,7 @@
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 10px;
   margin-top: 6px;
   max-width: calc(100vw - 32px);
@@ -342,6 +362,11 @@
   opacity: 1;
   transform: scale(1);
   transition-duration: var(--motion-fast);
+}
+
+.draft-more-menu-panel select {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Locked Decision 5 窄屏退化补充: only shown ≤980px, where the wide-row
@@ -1104,10 +1129,25 @@
     display: none;
   }
 
+  .topbar:has(+ .draft-workbench-shell) .topbar-brand {
+    max-width: 100%;
+  }
+
+  .topbar:has(+ .draft-workbench-shell) .topbar-identity {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .draft-more-menu,
+  .draft-export-menu {
+    position: static;
+  }
+
   .draft-more-menu-panel,
   .draft-export-menu-panel {
     left: 0;
     right: auto;
+    max-width: 100%;
     transform-origin: top left;
   }
 }

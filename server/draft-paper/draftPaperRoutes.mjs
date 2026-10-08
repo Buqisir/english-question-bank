@@ -1,5 +1,5 @@
 import { defineRoute } from '../router/index.mjs'
-import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
+import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 
 function routeError(error) {
   return error instanceof Error ? error.message : String(error)
@@ -67,7 +67,8 @@ function requiredEnum(value, allowed, label) {
 function versionTypeFromQuery(url) {
   const raw = url.searchParams.get('versionType')
   if (raw === null) return 'student'
-  return requiredEnum(raw, ['student', 'teacher'], 'versionType')
+  if (raw === 'teacher') throw new Error('当前教师卷生成入口已退役，请选择四款 PDF 产品')
+  return requiredEnum(raw, ['student'], 'versionType')
 }
 
 export function createDraftPaperRoutes() {
@@ -244,7 +245,11 @@ export function createDraftPaperRoutes() {
         return
       }
       try {
-        const result = await context.draftPaperStore.getDraftPaperPagination(userId, draftPaperId, { versionType })
+        if (url.searchParams.has('edition') && url.searchParams.has('versionType')) throw new Error('edition 不与 versionType 混用')
+        const result = url.searchParams.has('edition')
+          ? await context.draftPaperStore.getDraftPaperProductPagination(userId, draftPaperId,
+            requirePaperPdfEdition(url.searchParams.get('edition')))
+          : await context.draftPaperStore.getDraftPaperPagination(userId, draftPaperId, { versionType })
         context.sendJson(response, 200, {
           paginatedHtml: result.paginatedHtml,
           pageCount: result.pageCount,
@@ -274,50 +279,30 @@ export function createDraftPaperRoutes() {
         return
       }
       try {
-        const result = await context.draftPaperStore.getReorderSuggestion(userId, draftPaperId, { versionType })
+        if (url.searchParams.has('edition') && url.searchParams.has('versionType')) throw new Error('edition 不与 versionType 混用')
+        const options = url.searchParams.has('edition')
+          ? { edition: requirePaperPdfEdition(url.searchParams.get('edition')) } : { versionType }
+        const result = await context.draftPaperStore.getReorderSuggestion(userId, draftPaperId, options)
         context.sendJson(response, 200, { suggestion: result.suggestion, reused: result.reused === true })
       } catch (error) {
         sendDraftMutationError(response, context, error)
       }
     }),
 
-    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, ({ response, url, match, context }) => {
+    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/print-html$/, async ({ response, url, match, context }) => {
       const userId = context.resolveDataUserId(context)
-      const userDb = context.openUserDatabase({ readOnly: true })
-      const bankDb = context.openDatabase({ readOnly: true })
       try {
-        const draftPaperId = decodeURIComponent(match[1])
-        let versionType
-        try {
-          versionType = versionTypeFromQuery(url)
-        } catch (error) {
-          context.sendJson(response, 400, { error: routeError(error) })
-          return
-        }
-        const draftPaper = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
-        if (!draftPaper) {
-          context.sendJson(response, 404, { error: 'Draft paper not found' })
-          return
-        }
-        if (!draftPaper.items.length) {
-          context.sendJson(response, 400, { error: '请先添加题组' })
-          return
-        }
-        const versionLabel = versionType === 'teacher' ? '教师卷' : '学生卷'
-        const html = context.draftPaperStore.buildDraftPrintHtml(draftPaper, { versionType })
-        if (!html) {
-          context.sendJson(response, 400, { error: '请先添加题组' })
-          return
-        }
+        if (url.searchParams.has('versionType') || url.searchParams.has('pageLayout')) throw new Error('当前产品只使用 edition')
+        const edition = requirePaperPdfEdition(url.searchParams.get('edition'))
+        const result = await context.draftPaperStore.getDraftPaperProductPagination(userId, decodeURIComponent(match[1]), edition)
         response.writeHead(200, {
-          'access-control-allow-origin': 'http://127.0.0.1:5173',
           'content-type': 'text/html; charset=utf-8',
-          'x-file-name': encodeURIComponent(`${draftPaper.title}-${versionLabel}.html`),
+          'cache-control': 'private, no-store',
+          'x-file-name': encodeURIComponent(`${result.draftPaper.title}-${PAPER_PDF_PRODUCTS[edition]}.html`),
         })
-        response.end(html)
-      } finally {
-        userDb.close()
-        bankDb.close()
+        response.end(result.paginatedHtml)
+      } catch (error) {
+        sendDraftMutationError(response, context, error)
       }
     }),
 
@@ -325,18 +310,16 @@ export function createDraftPaperRoutes() {
       const userId = context.resolveDataUserId(context)
       try {
         const input = await context.readJsonBody(request)
-        const versionType = input.versionType === undefined
-          ? 'student'
-          : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
-        const pageLayout = input.pageLayout === undefined
-          ? 'natural'
-          : requiredEnum(input.pageLayout, ['natural', ...FIXED_PAGINATION_EDITIONS], 'pageLayout')
+        if (input.versionType !== undefined || input.pageLayout !== undefined) {
+          throw new Error('当前 PDF 使用 edition；旧学生／教师卷生成入口已退役')
+        }
+        const edition = requirePaperPdfEdition(input.edition)
         // draft-desk-b step4 (MF-2/MF-7): exportDraftPaperPdf is now async (it
         // renders through the same Chromium/paged.js pipeline as the pagination
         // route, via getDraftPaperPagination — see draftPaperStore.mjs) where the
         // old Vivliostyle CLI line was synchronous (execFileSync).
-        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType, pageLayout })
-        if (pageLayout !== 'natural') {
+        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { edition })
+        if (edition !== 'answerOnly') {
           response.setHeader('x-paper-crossing-group-count', String(result.crossingGroupCount ?? 0))
           response.setHeader('x-paper-split-option-bank-count', String(result.splitOptionBankCount ?? 0))
           if (result.fontSizePt) response.setHeader('x-paper-font-size-pt', String(result.fontSizePt))
