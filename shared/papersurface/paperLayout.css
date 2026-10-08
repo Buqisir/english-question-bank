@@ -260,6 +260,14 @@
      Fixed-page plans may still explicitly adjust these shared cover gaps. */
   padding-top: var(--canonical-cover-page-top-to-title, 0pt);
 }
+.canonical-paper-mock-name {
+  margin: 0 0 8pt;
+  text-align: center;
+  font-size: 18pt;
+  font-weight: 700;
+  line-height: 27pt;
+  overflow-wrap: anywhere;
+}
 .canonical-paper-cover-title {
   margin: 0 0 var(--canonical-cover-title-to-notices, 72pt);
   text-align: center;

@@ -268,6 +268,7 @@ try {
     'init', paperId,
     '--paper-name', 'Synthetic ordered image bundle',
     '--provenance', 'anonymous synthetic fixture',
+    '--year', '2025', '--month', '12',
     ...pageArguments,
   ), /INITIALIZED/u)
   const manifestPath = path.join(cliPaperDir, 'universal-source-manifest.json')

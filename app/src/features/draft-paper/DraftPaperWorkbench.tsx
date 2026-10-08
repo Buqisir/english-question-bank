@@ -35,9 +35,8 @@ import { useToastPresence, usePresence } from '../shared/useToastPresence.ts'
 import { similarPassagesRecipeSummary, type SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 import { DraftPaperRail } from './DraftPaperRail'
 import { A3_FACE_NATIVE_WIDTH_PX, applyA3Imposition, buildA4PreviewHtml } from './draftPaperPreviewHtml'
+import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import './DraftPaperWorkbench.css'
-
-type DraftVersionType = 'student' | 'teacher'
 
 // similar-workbench-swap (E7, plan.md 施工要点 2 "⇄ 入口 gate"): the four v2
 // engine groupTypes findSimilarPassages actually scores against
@@ -136,7 +135,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [savedToastMessage, setSavedToastMessage] = useState<string | null>(null)
   const savedToastTimerRef = useRef<number | null>(null)
   const [migrationNotice, setMigrationNotice] = useState('')
-  const [versionType, setVersionType] = useState<DraftVersionType>('student')
+  const [edition, setEdition] = useState<PaperPdfEdition>('largeNoListening')
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
   // motion-press-exit #3: toast keyframe→transition — 退出前保持挂载
   // var(--motion-fast)(120ms)播完退出再真卸载。
@@ -177,11 +176,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [activeRailGroupId, setActiveRailGroupId] = useState<string | null>(null)
   // draft-desk-b step3 (MF-3, plan.md "步3"): server-rendered pagination HTML
   // (raw, before buildA4PreviewHtml's thin screen-CSS wrap) + its fetch status.
-  // PO-2 简单版: the previous `paginatedHtml` value is intentionally left in
-  // place while a new fetch is in flight (no local fake repagination) — only
-  // `paginationStatus` flips to 'loading', driving a "重新排版中…" indicator
-  // layered over the still-visible old preview.
+  // Only show the response belonging to the current edition and draft content.
+  // An unavailable answer booklet must never display the previous question PDF.
   const [paginatedHtml, setPaginatedHtml] = useState('')
+  const [renderedPaginationKey, setRenderedPaginationKey] = useState('')
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [paginationError, setPaginationError] = useState('')
   // print-form (plan.md Must Do 5, PO-1 收账): real, pagination-derived
@@ -313,7 +311,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setDraftPaper(next)
       setTitleDraft(next.title)
       setStudentLabelDraft(next.studentLabel || '')
-      setVersionType('student')
+      setEdition('largeNoListening')
       setLoadStatus('loaded')
       loadRecentDrafts()
     } catch (error) {
@@ -335,22 +333,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
     }
   }, [loadDraft])
-
-  useEffect(() => {
-    if (!draftPaper || loadStatus !== 'loaded') return
-    let cancelled = false
-    const generation = draftGenerationRef.current
-    void fetchDraftPaper(draftPaper.id, versionType).then((next) => {
-      if (cancelled || generation !== draftGenerationRef.current) return
-      setDraftPaper((current) => (current && current.id === next.id ? { ...current, printHtml: next.printHtml } : current))
-    })
-    return () => {
-      cancelled = true
-    }
-    // Only re-fetch print HTML when the version toggle changes; item/title edits
-    // already refresh printHtml via their own draftPaper responses (student version).
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [versionType])
 
   useEffect(() => {
     focusedOnceRef.current = false
@@ -472,17 +454,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     () => JSON.stringify((draftPaper?.items ?? []).map((item) => [item.id, item.groupId, item.orderIndex, item.pageBreakBefore])),
     [draftPaper?.items],
   )
+  const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm])
 
-  // draft-desk-b step3 (MF-3, PO-2 简单版, DP-title Option B): fetches the
-  // server-rendered pagination whenever a layout edit, a title edit, or the
-  // student/teacher toggle changes it — debounced so a burst of edits
-  // coalesces into one request, with no local fake repagination shown in
-  // between (the previously fetched `paginatedHtml` just stays on screen,
-  // `paginationStatus` alone flips to 'loading'). `paginationRequestIdRef`
-  // discards a stale response that resolves after a newer request already
-  // started (e.g. two edits in quick succession, both past the debounce).
+  // Debounce layout edits, invalidating in-flight results before the delay.
   useEffect(() => {
     if (paginationDebounceRef.current) window.clearTimeout(paginationDebounceRef.current)
+    const requestId = (paginationRequestIdRef.current += 1)
     const generation = draftGenerationRef.current
     if (draftGeneration !== generation) return
     // Named inner function (not a bare top-level setState call) so this reset
@@ -503,24 +480,29 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     const draftPaperId = draftPaper.id
     paginationDebounceRef.current = window.setTimeout(() => {
       if (generation !== draftGenerationRef.current) return
-      const requestId = (paginationRequestIdRef.current += 1)
       setPaginationStatus('loading')
-      fetchDraftPaperPagination(draftPaperId, versionType)
+      fetchDraftPaperPagination(draftPaperId, edition)
         .then((result) => {
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
           setPaginatedHtml(result.paginatedHtml)
+          setRenderedPaginationKey(paginationKey)
           setPaginationStatus('ready')
           setPaginationError('')
           setPageBreakSuggestions(result.pageBreakSuggestions)
         })
         .catch((error) => {
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
+          setPaginatedHtml('')
+          setRenderedPaginationKey(paginationKey)
           setPaginationStatus('error')
-          setPaginationError(describeError('生成分页预览', error))
+          setPaginationError(edition === 'answerOnly'
+            ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
+            : describeError('生成分页预览', error))
         })
     }, 400)
     return () => {
       if (paginationDebounceRef.current) window.clearTimeout(paginationDebounceRef.current)
+      paginationRequestIdRef.current += 1
     }
     // print-form (plan.md Must Do 3): a print-form toggle alone must still
     // refresh pageBreakSuggestions (the a4/a3 判据 differs) even though it
@@ -528,7 +510,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // is deliberately excluded from the render signature, see
     // draftPaperStore.mjs's getDraftPaperPagination doc comment).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [draftPaper?.id, draftPaper?.title, itemsLayoutKey, versionType, draftPaper?.printForm, draftGeneration])
+  }, [paginationKey])
 
   // reorder-suggest (plan.md 施工契约 3 "拉取策略"): fires only once the
   // pagination fetch above has resolved with real breakage — never on its
@@ -538,12 +520,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // the card immediately with no request — 安静：卡有则现，无则无.
   useEffect(() => {
     const requestId = (reorderRequestIdRef.current += 1)
-    if (!draftPaper || pageBreakSuggestions.length === 0) {
+    if (!draftPaper || renderedPaginationKey !== paginationKey || pageBreakSuggestions.length === 0) {
       setReorderSuggestion(null)
       return
     }
     const draftPaperId = draftPaper.id
-    fetchReorderSuggestion(draftPaperId, versionType)
+    fetchReorderSuggestion(draftPaperId, edition)
       .then((suggestion) => {
         if (reorderRequestIdRef.current !== requestId) return
         setReorderSuggestion(suggestion)
@@ -555,16 +537,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         if (reorderRequestIdRef.current !== requestId) return
         setReorderSuggestion(null)
       })
-  }, [draftPaper?.id, pageBreakSuggestions, versionType])
+  }, [draftPaper?.id, pageBreakSuggestions, edition, renderedPaginationKey, paginationKey])
 
   // a3-imposition (plan.md Must Do 1, 裁点4): the a4 branch is the exact
   // same call this useMemo made before this cut — applyA3Imposition only
   // ever runs when printForm==='a3', so a4 output is byte-identical to
   // pre-cut (zero-diff hard断言, verify-a3-imposition.mjs asserts this).
   const previewHtml = useMemo(() => {
+    if (renderedPaginationKey !== paginationKey || !paginatedHtml) return ''
     const base = buildA4PreviewHtml(paginatedHtml)
     return draftPaper?.printForm === 'a3' ? applyA3Imposition(base) : base
-  }, [paginatedHtml, draftPaper?.printForm])
+  }, [paginatedHtml, draftPaper?.printForm, renderedPaginationKey, paginationKey])
 
   // The iframe re-navigates (srcDoc changes → full document reload) whenever
   // previewHtml changes; scrollspy/persistent-button/page-badge reads must
@@ -1252,7 +1235,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
-  async function exportPdf(mode: FileSaveMode = 'download', pageLayout: 'natural' | 'largeComplete' | 'largeNoListening' | 'economy8' = 'natural') {
+  async function exportPdf(mode: FileSaveMode = 'download') {
     if (!draftPaper || draftPaper.items.length === 0) return
     setExportStatus('idle')
     setExportError('')
@@ -1260,26 +1243,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     try {
       const target = await prepareFileSaveTarget({
         mode,
-        suggestedName: `${draftPaper.title || '英语草稿卷'}-${versionType === 'teacher' ? '教师卷' : '学生卷'}.pdf`,
+        suggestedName: `${draftPaper.title || '英语草稿卷'}-${PAPER_PDF_PRODUCTS[edition]}.pdf`,
         mimeType: 'application/pdf',
       })
       if (!target) return
       setExportStatus('exporting')
-      const { crossingGroupCount, splitOptionBankCount, fontSizePt } = await downloadDraftPaperPdf(draftPaper.id, versionType, target, pageLayout)
+      const { crossingGroupCount, splitOptionBankCount, fontSizePt } = await downloadDraftPaperPdf(draftPaper.id, edition, target)
       setExportStatus('exported')
       const savedMessage = target.kind === 'download'
         ? target.fallbackFromSaveAs ? '当前浏览器不支持系统另存为，已改为普通下载。' : 'PDF 已开始下载。'
         : 'PDF 已保存到所选位置。'
-      const longPaper = pageLayout === 'largeComplete' || pageLayout === 'largeNoListening'
+      const longPaper = edition === 'largeComplete' || edition === 'largeNoListening'
       setExportSuccessMessage(savedMessage + (fontSizePt ? ` 本卷采用${fontSizePt === 12 ? '小四（12pt）' : '五号（10.5pt）'}。` : '') + (crossingGroupCount > 0
         ? ` ${longPaper ? '已满足长卷页数上限' : '已保持指定页数'}和正文版式，仍有 ${crossingGroupCount} 个题组跨 A3 正反面，请检查分页。` : '')
         + (splitOptionBankCount > 0 ? ` ${longPaper ? '' : '为保持指定页数，'}有 ${splitOptionBankCount} 个选项组跨页，单条选项保持完整，请检查。` : ''))
     } catch (error) {
       setExportStatus('error')
-      const fixedLayoutMessage = pageLayout !== 'natural' && error instanceof Error
+      const fixedLayoutMessage = error instanceof Error
         && /^(未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
         ? error.message : null
-      setExportError(fixedLayoutMessage || describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
+      setExportError(edition === 'answerOnly'
+        ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
+        : fixedLayoutMessage || describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
     }
   }
 
@@ -1288,7 +1273,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSpaceDialogOpen(true)
     setSpaceStatus('loading')
     setSpaceMessage('')
-    setSpaceFileName(`${draftPaper.title || '英语草稿卷'}-学生版.pdf`)
+    setSpaceFileName(`${draftPaper.title || '英语草稿卷'}-${PAPER_PDF_PRODUCTS[edition]}.pdf`)
     try {
       const snapshot = await fetchMySpace()
       setSpaceFolders(snapshot.folders)
@@ -1324,6 +1309,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     try {
       await saveDraftPaperToMySpace({
         draftPaperId: draftPaper.id,
+        edition,
         fileName: spaceFileName,
         folderId: spaceFolderId || null,
       })
@@ -1336,7 +1322,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       savedToastTimerRef.current = window.setTimeout(() => setSavedToastMessage(null), 6000)
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(describeError('保存到个人空间', error))
+      setSpaceMessage(edition === 'answerOnly'
+        ? `纯答案版保存失败：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
+        : describeError('保存到个人空间', error))
     }
   }
 
@@ -1360,30 +1348,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     )
   }
 
-  // workbench-header-unify Locked Decision 2/5: 学生版/教师版 and A4/A3 render
-  // twice — once as the wide head-row controls (hidden ≤980px), once inside
-  // the "⋯" panel (shown only ≤980px, plan.md's 窄屏退化补充) — same handlers
-  // both places, just two visibility-toggled mounts of the identical control,
-  // so there is exactly one source of truth for versionType/printForm state.
+  // The same product control appears in the wide header and narrow ⋯ panel.
   const versionToggleControl = (
-    <FluidHoverList as="div" axis="x" className="draft-version-toggle" itemSelector="button" role="group" aria-label="导出版本">
-      <button
-        type="button"
-        className={versionType === 'student' ? 'active' : ''}
-        aria-pressed={versionType === 'student'}
-        onClick={() => setVersionType('student')}
-      >
-        学生版
-      </button>
-      <button
-        type="button"
-        className={versionType === 'teacher' ? 'active' : ''}
-        aria-pressed={versionType === 'teacher'}
-        onClick={() => setVersionType('teacher')}
-      >
-        教师版
-      </button>
-    </FluidHoverList>
+    <label className="draft-product-control">
+      <span>PDF 版本</span>
+      <select aria-label="PDF 版本" value={edition} disabled={exportStatus === 'exporting' || spaceDialogOpen} onChange={(event) => {
+        setEdition(event.target.value as PaperPdfEdition)
+        setExportError('')
+        setExportSuccessMessage('')
+      }}>
+        {PAPER_PDF_EDITIONS.map((value) => <option key={value} value={value}>{PAPER_PDF_PRODUCTS[value]}</option>)}
+      </select>
+    </label>
   )
 
   const formToggleControl = (
@@ -1429,19 +1405,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               void exportPdf()
             }}
           >
-            {versionType === 'teacher' ? <PaperCheck size={16} /> : <PaperStudent size={16} />} 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+            {edition === 'answerOnly' ? <PaperCheck size={16} /> : <PaperStudent size={16} />} 下载 PDF（{PAPER_PDF_PRODUCTS[edition]}）
           </button>
-          {versionType === 'student' && <span className="draft-export-menu-divider" role="separator" />}
-          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'largeComplete') }}>
-            <PaperStudent size={16} /> 大字完整版（含听力，最多 12 页）
-          </button>}
-          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'largeNoListening') }}>
-            <PaperStudent size={16} /> 大字无听力版（最多 10 页）
-          </button>}
-          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'economy8') }}>
-            <PaperStudent size={16} /> 省纸版（无听力 8 页，小四优先）
-          </button>}
-          {versionType === 'student' && <span className="draft-export-menu-divider" role="separator" />}
+          <span className="draft-export-menu-divider" role="separator" />
           <button
             type="button"
             role="menuitem"
@@ -1531,7 +1497,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       const url = new URL(window.location.href)
                       url.searchParams.set('view', 'draft-paper')
                       url.searchParams.set('draftPaperId', id)
-                      setVersionType('student')
+                      setEdition('largeNoListening')
                       void fetchDraftPaper(id).then((next) => {
                         if (generation !== draftGenerationRef.current) return
                         setDraftGeneration(generation)
@@ -1672,7 +1638,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 </>
               ) : (
                 <div className="draft-a4-empty">
-                  {paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览...'}
+                  {renderedPaginationKey === paginationKey && paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览…'}
                 </div>
               )}
             </div>
@@ -1683,7 +1649,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 (computeGroupAnchorTop), same up/down/page-break/delete actions
                 the rail's own buttons call (moveItem/togglePageBreak/deleteItem
                 below — one shared handler set, not a second implementation). */}
-            {nonMissingItems.map((item) => {
+            {edition !== 'answerOnly' && nonMissingItems.map((item) => {
               const anchorTop = groupAnchors[item.groupId]
               if (anchorTop == null) return null
               const fullIndex = draftPaper.items.findIndex((entry) => entry.id === item.id)

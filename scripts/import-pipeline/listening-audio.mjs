@@ -11,6 +11,8 @@ import {
 import { homedir } from 'node:os'
 import path from 'node:path'
 
+import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
+import { prepareListeningWaveform } from '../../server/paper-import/listeningWaveform.mjs'
 import {
   LISTENING_AUDIO_PATHS,
   LISTENING_SIGNAL_ATTACHMENTS,
@@ -239,6 +241,8 @@ export function stageSignalListeningAudio({ paperDir, paperId, sourcePath }) {
     decodeWarnings: result.decodeWarnings,
   }
   atomicJson(artifactPath(paperDir, LISTENING_SIGNAL_ATTACHMENTS[2].path), segments)
+  prepareListeningWaveform(artifactPath(paperDir, LISTENING_WAVEFORM_FILE),
+    readFileSync(playbackPath), segments.durationSeconds)
   const nextManifest = { ...manifest, schemaVersion: 'universal-nck1-source-manifest-v3',
     attachments: LISTENING_SIGNAL_ATTACHMENTS.map((attachment) => {
       const bytes = readFileSync(artifactPath(paperDir, attachment.path))
@@ -273,6 +277,7 @@ export function stageListeningAudio({ paperDir, paperId, sourcePath, asrFixtureP
     normalizePlayback(originalPath, playbackPath)
     const playback = readFileSync(playbackPath)
     const { durationSeconds } = probeAudio(playbackPath)
+    prepareListeningWaveform(artifactPath(paperDir, LISTENING_WAVEFORM_FILE), playback, durationSeconds)
     const raw = transcribe(playbackPath, asrFixturePath)
     atomicJson(artifactPath(paperDir, 'materialization/listening-audio/asr-raw.json'), raw)
     const asr = normalizedAsr(

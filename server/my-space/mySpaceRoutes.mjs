@@ -8,6 +8,7 @@ import {
   saveMySpaceArtifact,
 } from './mySpace.mjs'
 import { defineRoute } from '../router/index.mjs'
+import { requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 
 function routeError(error) {
   return error instanceof Error ? error.message : String(error)
@@ -160,7 +161,11 @@ export function createMySpaceRoutes() {
         // Playwright's page.pdf() as an in-memory Buffer), so there is nothing to
         // clean up. `result` no longer needs to be declared outside this try block
         // either — the old catch block's cleanup call was its only outside-try use.
-        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, draftPaperId)
+        if (input.versionType !== undefined || input.pageLayout !== undefined) {
+          throw new Error('当前 PDF 使用 edition；旧学生／教师卷生成入口已退役')
+        }
+        const edition = requirePaperPdfEdition(input.edition)
+        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, draftPaperId, { edition })
         const db = context.openUserDatabase({ readOnly: false })
         try {
           const artifact = saveMySpaceArtifact(db, userId, {
@@ -169,7 +174,7 @@ export function createMySpaceRoutes() {
             pdfBody: result.body,
             sourcePdfPath: result.outputPath,
             folderId: input.folderId,
-            fileName: input.fileName,
+            fileName: input.fileName || result.fileName,
           })
           context.sendJson(response, 201, { artifact, reusedRecentPdf: result.reusedRecent === true })
         } finally {

@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
+import type { ListeningWaveform } from '../../../../shared/paper-canonical/listeningWaveform.mjs'
 import { Headphones } from '../../icons'
 import { PlaybackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
@@ -11,6 +12,7 @@ type Props = {
   startSeconds: number
   endSeconds: number
   onActivate: (audio: HTMLAudioElement) => void
+  waveform?: ListeningWaveform
   /** Whole-recording player gets a longer waveform. */
   size?: 'segment' | 'full'
   /** Question-segment starts drawn over the whole-recording waveform. */
@@ -34,7 +36,7 @@ function clock(seconds: number): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
 }
 
-export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, size = 'segment', marks }: Props) {
+export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, waveform, size = 'segment', marks }: Props) {
   const rootRef = useRef<HTMLSpanElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -55,7 +57,12 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   const [dragPosition, setDragPosition] = useState<number | null>(null)
   const duration = Math.max(0, endSeconds - startSeconds)
   const barCount = Math.floor(waveWidth / BAR_PITCH)
-  const bars = envelope ? waveformBars(envelope, startSeconds, endSeconds, barCount) : null
+  const preparedEnvelope = useMemo(() => waveform ? {
+    bucketSeconds: waveform.bucketSeconds, peaks: Float32Array.from(waveform.peaks), reference: waveform.reference,
+  } : null, [waveform])
+  const activeEnvelope = preparedEnvelope ?? envelope
+  const bars = useMemo(() => activeEnvelope ? waveformBars(activeEnvelope, startSeconds, endSeconds, barCount) : null,
+    [activeEnvelope, startSeconds, endSeconds, barCount])
   const shownPosition = dragPosition ?? position
   const progress = duration > 0 ? Math.min(1, shownPosition / duration) : 0
 
@@ -65,11 +72,11 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   }, [])
 
   useEffect(() => {
-    if (!open || envelope) return
+    if (!open || preparedEnvelope || envelope) return
     let cancelled = false
     loadWaveformEnvelope(src).then((next) => { if (!cancelled) setEnvelope(next) }, () => {})
     return () => { cancelled = true }
-  }, [open, envelope, src])
+  }, [open, envelope, preparedEnvelope, src])
 
   useEffect(() => {
     if (!playing) return
@@ -211,12 +218,12 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     event.preventDefault()
   }
 
-  const barRects = (bars ?? Array.from({ length: barCount }, () => 0)).map((height, index) => {
+  const barRects = useMemo(() => (bars ?? Array.from({ length: barCount }, () => 0)).map((height, index) => {
     const barHeight = Math.max(BAR_WIDTH, height * WAVE_HEIGHT)
     return <rect key={index} x={index * BAR_PITCH} y={(WAVE_HEIGHT - barHeight) / 2}
       width={BAR_WIDTH} height={barHeight} rx={BAR_WIDTH / 2}
       style={{ '--listening-bar-index': index } as CSSProperties} />
-  })
+  }), [bars, barCount])
   // Each question segment owns its span of the waveform; its label is centred
   // over that span and dropped only if it would touch the previous label.
   const toX = (seconds: number) => duration > 0

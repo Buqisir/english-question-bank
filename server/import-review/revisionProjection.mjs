@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
+import { readExamDate } from '../../shared/examDate.mjs'
 
 import {
   compileNck1MaterializationCandidatePreview,
@@ -11,6 +12,10 @@ import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
+import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
+import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
+import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -528,6 +533,9 @@ function primarySourceType(materialization, analyzedPackage = false) {
 export function reviewBundleFilePaths(rootDir) {
   const loaded = loadNck1ReviewSource(rootDir)
   const { manifest, materialization } = loaded
+  const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
+  const waveform = playback ? readListeningWaveform(resolveReviewFile(rootDir, LISTENING_WAVEFORM_FILE),
+    playback.sha256, playback.durationSeconds) : null
   const importProfile = nck1ImportProfile(loaded.config, {
     externalPackage: Boolean(loaded.analyzedPackage),
   })
@@ -622,6 +630,7 @@ export function reviewBundleFilePaths(rootDir) {
       role: 'spelling_review',
     }] : []),
     ...sourceFiles,
+    ...(waveform ? [{ path: LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
     ...NCK1_STAGED_ANALYSIS_FILES
       .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
       .map(({ path: relativePath, role }) => ({
@@ -650,6 +659,15 @@ export function reviewBundleFilePaths(rootDir) {
       mediaType: 'application/json',
       role: 'pagination_plan',
     }] : []),
+    ...(existsSync(resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE)) ? [{
+      path: SOURCE_REFERENCES_FILE,
+      mediaType: 'application/json',
+      role: 'source_references',
+    }] : []),
+    ...(loaded.config.pdfProductsRequired || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST)) ? [
+      { path: PRODUCT_MANIFEST, mediaType: 'application/json', role: 'pdf_products_manifest' },
+      ...PRODUCT_FILES,
+    ] : []),
   ]
   const byPath = new Map()
   for (const file of files) {
@@ -1319,6 +1337,7 @@ export function buildNck1CompatibilityPaperAsset({
     },
     sources: {
       primarySourceType,
+      sourceType: configuredSourceType(config, materialization.paperId),
       ...(sourceProvenance ? { provenance: structuredClone(sourceProvenance) } : {}),
     },
     layoutTree: { parts: [] },
@@ -1442,6 +1461,10 @@ export function buildNck1CompatibilityPackage({
   analysisSidecars = {},
   paragraphSummariesBytes = null,
   publicSearchMetadataBytes = null,
+  sourceReferencesBytes = null,
+  sourceReferenceApproval = null,
+  frozenProducts = null,
+  pdfProductApproval = null,
   paginationPlan = null,
   paginationBindingIdentity = null,
 }) {
@@ -1462,6 +1485,7 @@ export function buildNck1CompatibilityPackage({
     fail('NCK1 authoritative content source digest is invalid')
   }
   const sourceType = configuredSourceType(config, materialization.paperId)
+  const examDate = readExamDate(config.provenance, { required: Boolean(config.pdfProductsRequired || frozenProducts) })
   const year = configuredYear(config, materialization.paperId)
   const defaultTags = Array.isArray(config.provenance?.defaultTags)
     ? config.provenance.defaultTags
@@ -1514,6 +1538,10 @@ export function buildNck1CompatibilityPackage({
     listeningAnalysis: analysisSidecars['listening-analysis-v1.json'] || null,
     paragraphSummariesBytes,
     publicSearchMetadataBytes,
+    sourceReferencesBytes,
+    sourceReferenceApproval,
+    frozenProducts,
+    pdfProductApproval,
     importMeta: {
       schemaVersion: 'import-meta-v1',
       paperId: materialization.paperId,
@@ -1522,6 +1550,7 @@ export function buildNck1CompatibilityPackage({
       ...(externalPackage ? { sourceProvenance: structuredClone(sourceProvenance) } : {}),
       paper: {
         year,
+        ...(examDate ? { month: examDate.month } : {}),
         region: config.provenance?.region || config.provenance.source,
         paperName: config.provenance.paperName,
         examCode: materialization.paperId.replace(/^paper-/, ''),
@@ -1607,6 +1636,18 @@ export function buildNck1ReviewProjection(rootDir, {
   const publicSearchMetadata = importProfile
     ? loadPublicSearchMetadata(rootDir, loaded, preview.candidate.source.sha256, preview.candidate.candidateDigest)
     : null
+  const referencesPath = resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE)
+  const sourceReferencesBytes = existsSync(referencesPath) ? readFileSync(referencesPath) : null
+  const sourceReferences = sourceReferencesBytes ? JSON.parse(sourceReferencesBytes.toString('utf8')) : null
+  if (sourceReferences) {
+    assertSourceReferences({
+      sidecar: sourceReferences,
+      materialization: loaded.materialization,
+      sourceDigest: preview.candidate.source.sha256,
+      candidateDigest: preview.candidate.candidateDigest,
+      sourceDocuments: loaded.sourceInput.documents,
+    })
+  }
   const slotBindings = paginationSlotBindings(consumption)
   const paginationPlan = loadPaperPaginationPlan(rootDir, {
     paperId: loaded.materialization.paperId,
@@ -1630,16 +1671,25 @@ export function buildNck1ReviewProjection(rootDir, {
         },
       )
     : null
+  const examDate = readExamDate(loaded.config.provenance, { required: Boolean(loaded.config.pdfProductsRequired
+    || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))) })
+  const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
+    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir)) }) : null
+  if (frozenProducts && (frozenProducts.manifest.paperId !== loaded.materialization.paperId
+    || frozenProducts.manifest.paperName !== loaded.config.provenance.paperName
+    || digestJson(frozenProducts.manifest.examDate) !== digestJson(examDate))) fail('Frozen PDF identity differs from Review')
   return {
     ...loaded,
+    frozenProducts,
     paperId: loaded.materialization.paperId,
     paperName: loaded.config.provenance.paperName,
+    examDate,
     sourceDigest: preview.candidate.source.sha256,
     candidateDigest: preview.candidate.candidateDigest,
     visibleStructureDigest: consumption.visibleStructureDigest,
     candidate: preview.candidate,
     compilation: preview.compilation,
-    consumption,
+    consumption: { ...consumption, paperSourceType: configuredSourceType(loaded.config, loaded.materialization.paperId) },
     mediaDerivations,
     paperAsset,
     sourceVisuals,
@@ -1660,6 +1710,9 @@ export function buildNck1ReviewProjection(rootDir, {
     publicSearchMetadata: publicSearchMetadata?.sidecar || null,
     publicSearchMetadataBytes: publicSearchMetadata?.bytes || null,
     publicSearchMetadataDigest: publicSearchMetadata?.digest || null,
+    sourceReferences,
+    sourceReferencesBytes,
+    sourceReferencesDigest: sourceReferencesBytes ? sha256(sourceReferencesBytes) : null,
     ocrCorrectionReport,
     paginationPlan: paginationPlan?.plan || null,
     paginationPlanDigest: paginationPlan?.digest || null,

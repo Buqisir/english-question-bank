@@ -12,6 +12,8 @@ import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { loadBoundPaperPaginationPlan } from './paginationPlan.mjs'
+import { SOURCE_REFERENCES_FILE } from './sourceReferences.mjs'
+import { PRODUCT_MANIFEST, readFrozenProducts } from './frozenProducts.mjs'
 import {
   buildPaperNormalizedGroupsSidecar,
   PAPER_NORMALIZED_GROUPS_FILE_NAME,
@@ -348,6 +350,9 @@ function makeVersionedArtifacts(packageData, version) {
     publicSearchMetadataBytes: packageData.publicSearchMetadataBytes
       ? Buffer.from(packageData.publicSearchMetadataBytes)
       : null,
+    sourceReferencesBytes: packageData.sourceReferencesBytes
+      ? Buffer.from(packageData.sourceReferencesBytes)
+      : null,
     normalizedGroupsSidecar,
     paginationPlan,
   }
@@ -439,6 +444,18 @@ export function assertPaperImportPublicSearchMetadata({ baseDir, packageData }) 
   })
 }
 
+export function assertPaperImportSourceReferences({ baseDir, packageData }) {
+  const filePath = path.join(baseDir, SOURCE_REFERENCES_FILE)
+  if (!packageData.sourceReferencesBytes) {
+    if (existsSync(filePath)) throw new Error('Unreviewed source references appeared in the published version')
+    return null
+  }
+  if (!existsSync(filePath) || !readFileSync(filePath).equals(Buffer.from(packageData.sourceReferencesBytes))) {
+    throw new Error('Published source references differ from the exact Review bytes')
+  }
+  return `sha256:${createHash('sha256').update(packageData.sourceReferencesBytes).digest('hex')}`
+}
+
 export function writePaperImportVersion({
   paperAssetsDir,
   packageData,
@@ -481,6 +498,19 @@ export function writePaperImportVersion({
     }
     if (artifacts.publicSearchMetadataBytes) {
       writeFileSync(path.join(tempDir, publicSearchMetadataFileName), artifacts.publicSearchMetadataBytes)
+    }
+    if (artifacts.sourceReferencesBytes) {
+      writeFileSync(path.join(tempDir, SOURCE_REFERENCES_FILE), artifacts.sourceReferencesBytes)
+    }
+    if (packageData.frozenProducts) {
+      for (const [relativePath, bytes] of Object.entries(packageData.frozenProducts.bytes)) {
+        const target = path.join(tempDir, relativePath)
+        mkdirSync(path.dirname(target), { recursive: true })
+        writeFileSync(target, bytes, { flag: 'wx' })
+      }
+      if (readFrozenProducts(tempDir, { required: true }).digest !== packageData.pdfProductApproval?.manifestDigest) {
+        throw new Error(`${PRODUCT_MANIFEST} differs from the approved product commitment`)
+      }
     }
     writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
     if (artifacts.paginationPlan) {
@@ -530,6 +560,11 @@ export function writePaperImportVersion({
       for (const [relativePath, bytes] of Object.entries(
         canonicalPublication.sourceEvidence,
       )) {
+        const target = path.join(tempDir, relativePath)
+        mkdirSync(path.dirname(target), { recursive: true })
+        writeFileSync(target, bytes)
+      }
+      for (const [relativePath, bytes] of Object.entries(canonicalPublication.playbackDerivatives || {})) {
         const target = path.join(tempDir, relativePath)
         mkdirSync(path.dirname(target), { recursive: true })
         writeFileSync(target, bytes)
@@ -652,6 +687,10 @@ export function swapPaperImportLatest({
       path.join(tempLatest, publicSearchMetadataFileName),
       readFileSync(publicSearchMetadataPath),
     )
+  }
+  const sourceReferencesPath = path.join(versionDir, SOURCE_REFERENCES_FILE)
+  if (existsSync(sourceReferencesPath)) {
+    writeFileSync(path.join(tempLatest, SOURCE_REFERENCES_FILE), readFileSync(sourceReferencesPath))
   }
   const paginationPlanPath = path.join(versionDir, 'pagination-plan.json')
   if (existsSync(paginationPlanPath)) {

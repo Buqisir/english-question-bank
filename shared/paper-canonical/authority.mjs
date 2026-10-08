@@ -57,6 +57,7 @@ import manifestV56 from '../../standards/paper-canonical/manifest-v56.json' with
 import manifestV57 from '../../standards/paper-canonical/manifest-v57.json' with { type: 'json' }
 import manifestV58 from '../../standards/paper-canonical/manifest-v58.json' with { type: 'json' }
 import manifestV59 from '../../standards/paper-canonical/manifest-v59.json' with { type: 'json' }
+import manifestV60 from '../../standards/paper-canonical/manifest-v60.json' with { type: 'json' }
 import reportV58Schema from '../../schemas/paper-canonical/normalization-report-v58.schema.json' with { type: 'json' }
 import publicationV58Schema from '../../schemas/paper-canonical/canonical-paper-publication-v58.schema.json' with { type: 'json' }
 import reportV59Schema from '../../schemas/paper-canonical/normalization-report-v59.schema.json' with { type: 'json' }
@@ -170,6 +171,7 @@ import clozeRhythmV1 from '../../standards/paper-canonical/rendering/cloze-rhyth
 import clozeRhythmV2 from '../../standards/paper-canonical/rendering/cloze-rhythm-v2.json' with { type: 'json' }
 import clozeRhythmV3 from '../../standards/paper-canonical/rendering/cloze-rhythm-v3.json' with { type: 'json' }
 import clozeRhythmV4 from '../../standards/paper-canonical/rendering/cloze-rhythm-v4.json' with { type: 'json' }
+import clozeRhythmV5 from '../../standards/paper-canonical/rendering/cloze-rhythm-v5.json' with { type: 'json' }
 import grammarFillRhythmV1 from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v1.json' with { type: 'json' }
 import grammarFillRhythmV2 from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v2.json' with { type: 'json' }
 import grammarFillRhythmV3 from '../../standards/paper-canonical/rendering/grammar-fill-rhythm-v3.json' with { type: 'json' }
@@ -261,6 +263,7 @@ import clozeRhythmV1Schema from '../../schemas/paper-canonical/cloze-rhythm-v1.s
 import clozeRhythmV2Schema from '../../schemas/paper-canonical/cloze-rhythm-v2.schema.json' with { type: 'json' }
 import clozeRhythmV3Schema from '../../schemas/paper-canonical/cloze-rhythm-v3.schema.json' with { type: 'json' }
 import clozeRhythmV4Schema from '../../schemas/paper-canonical/cloze-rhythm-v4.schema.json' with { type: 'json' }
+import clozeRhythmV5Schema from '../../schemas/paper-canonical/cloze-rhythm-v5.schema.json' with { type: 'json' }
 import grammarFillRhythmV1Schema from '../../schemas/paper-canonical/grammar-fill-rhythm-v1.schema.json' with { type: 'json' }
 import grammarFillRhythmV2Schema from '../../schemas/paper-canonical/grammar-fill-rhythm-v2.schema.json' with { type: 'json' }
 import grammarFillRhythmV3Schema from '../../schemas/paper-canonical/grammar-fill-rhythm-v3.schema.json' with { type: 'json' }
@@ -1288,7 +1291,9 @@ function validateSevenChoicesRhythm(artifact) {
 }
 
 function validateClozeRhythm(artifact, manifestVersion) {
-  const expected = Number(manifestVersion) >= 33
+  const expected = Number(manifestVersion) >= 60
+    ? clozeRhythmV5
+    : Number(manifestVersion) >= 33
     ? clozeRhythmV4
     : Number(manifestVersion) >= 32
     ? clozeRhythmV3
@@ -1424,7 +1429,7 @@ export function validateAuthorityClosure({
   const issues = []
   // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1484,7 +1489,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1554,7 +1559,7 @@ export function validateAuthorityClosure({
     } else {
       issues.push(...validateClozeRhythm(
         clozeRhythmArtifact,
-        semanticManifestVersion,
+        candidateManifest?.version,
       ))
     }
   }
@@ -1679,7 +1684,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -1741,7 +1746,7 @@ export function validateAuthorityClosure({
       ))
     }
   }
-  if (['55', '56'].includes(candidateManifest?.version)) {
+  if (['55', '56', '60'].includes(candidateManifest?.version)) {
     const adapter = Object.values(artifacts || {}).find(
       (artifact) => artifact?.owner === 'source_adapter',
     )
@@ -2079,6 +2084,7 @@ const artifactsV55 = {
   adapter: sourceAdaptersV17,
 }
 const artifactsV56 = { ...artifactsV55, 'renderer-paper-presentation': paperPresentationV3 }
+const artifactsV60 = { ...artifactsV56, 'renderer-cloze-rhythm': clozeRhythmV5 }
 const artifactsV57 = { ...artifactsV54, normalization: normalizationV6 }
 const artifactsV58 = { ...artifactsV57, adapter: sourceAdaptersV18, 'rich-content': richContentV2 }
 const artifactsV59 = { ...artifactsV58, 'renderer-typography': typographyV11 }
@@ -2676,6 +2682,10 @@ const schemasV56 = {
   ...Object.fromEntries(Object.entries(schemasV55).filter(([id]) => id !== 'paper-presentation-v2')),
   'paper-presentation-v3': paperPresentationV3Schema,
 }
+const schemasV60 = {
+  ...Object.fromEntries(Object.entries(schemasV56).filter(([id]) => id !== 'cloze-rhythm-v4')),
+  'cloze-rhythm-v5': clozeRhythmV5Schema,
+}
 const schemasV57 = {
   ...Object.fromEntries(Object.entries(schemasV54).filter(([id]) =>
     !['normalization-rules-v5', 'normalization-report-v54', 'canonical-paper-publication-v54'].includes(id))),
@@ -2813,6 +2823,7 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV57, artifacts: artifactsV57, schemas: schemasV57 }),
   validateAuthorityClosure({ manifest: manifestV58, artifacts: artifactsV58, schemas: schemasV58 }),
   validateAuthorityClosure({ manifest: manifestV59, artifacts: artifactsV59, schemas: schemasV59 }),
+  validateAuthorityClosure({ manifest: manifestV60, artifacts: artifactsV60, schemas: schemasV60 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2887,6 +2898,7 @@ const authorities = [
   { manifest: manifestV57, artifacts: artifactsV57, schemas: schemasV57 },
   { manifest: manifestV58, artifacts: artifactsV58, schemas: schemasV58 },
   { manifest: manifestV59, artifacts: artifactsV59, schemas: schemasV59 },
+  { manifest: manifestV60, artifacts: artifactsV60, schemas: schemasV60 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2906,7 +2918,7 @@ export const nck1MaterializationCandidateAuthorityRef = authorities.find((author
 // Analyzed packages are a distinct captured-source protocol. They may not enter
 // the immutable raw-materialization v54 adapter registry or confirmation lane.
 export const nck1AnalyzedPackageCandidateAuthorityRef55 = authorities.find((authority) => authority.manifest.version === '55').authorityRef
-export const paperPresentationAuthorityRef = authorities.find((authority) => authority.manifest.version === '56').authorityRef
+export const paperPresentationAuthorityRef = authorities.find((authority) => authority.manifest.version === '60').authorityRef
 // Ticket 31a may replay only the exact pre-v42 legacy Candidate authority
 // recorded by the immutable confirmation lanes. It is not a current import
 // authority and cannot be selected by ordinary callers.

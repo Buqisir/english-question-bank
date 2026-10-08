@@ -14,7 +14,7 @@ const state = {
   issueSurface: 'screen',
   pagination: null,
   paginationError: null,
-  pdfEdition: 'natural',
+  pdfEdition: 'largeNoListening',
   target: null,
   pendingScreenTargetId: null,
   ocrDocumentId: null,
@@ -148,13 +148,13 @@ async function loadDetail(paperId, shouldRender = true) {
         try {
           state.pagination = await request(`/api/import-review-preview/revisions/${encodeURIComponent(state.detail.latestRevisionId)}/pagination`)
           if (state.detail.latestRevisionId !== previousRevisionId
-            || (!['natural', 'teacher'].includes(state.pdfEdition) && !state.pagination.editions.some(({ edition }) => edition === state.pdfEdition))) {
-            state.pdfEdition = ['largeComplete', 'largeNoListening', 'economy8', 'friendly10', 'friendly8']
-              .find(value => state.pagination.editions.some(({ edition }) => edition === value)) || 'natural'
+            || !state.pagination.editions.some(({ edition, available }) => edition === state.pdfEdition && available !== false)) {
+            state.pdfEdition = ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']
+              .find(value => state.pagination.editions.some(({ edition, available }) => edition === value && available !== false)) || 'largeNoListening'
           }
         } catch (error) {
           state.paginationError = error.message
-          state.pdfEdition = 'natural'
+          state.pdfEdition = 'largeNoListening'
         }
       }
     }
@@ -473,9 +473,7 @@ function pdfEditionLabel(edition = state.pdfEdition) {
   if (edition === 'largeComplete') return '大字完整版 · 含听力 · 最多 12 页'
   if (edition === 'largeNoListening') return '大字无听力版 · 最多 10 页'
   if (edition === 'economy8') return '省纸版 · 无听力 8 页 · 小四优先'
-  return edition === 'friendly10' ? '10 页版'
-    : edition === 'friendly8' ? '8 页版'
-      : edition === 'teacher' ? '教师 PDF' : '自然分页（参考）'
+  return '纯答案版 · 自然分页'
 }
 
 function surfaceUrl() {
@@ -489,17 +487,10 @@ function surfaceUrl() {
     return `/api/import-reviews/papers/${encodeURIComponent(state.detail.paperId)}`
       + `/revisions/${encodeURIComponent(revisionId)}/teaching`
   }
-  if (state.surface === 'student_print') {
-    return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/print?version=student`
-  }
-  if (state.surface === 'teacher_print') {
-    return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/print?version=teacher`
-  }
   if (state.surface === 'pdf') {
-    const query = ['natural', 'teacher'].includes(state.pdfEdition)
-      ? `version=${state.pdfEdition === 'teacher' ? 'teacher' : 'student'}&pageLayout=natural`
-      : `version=student&pageLayout=${encodeURIComponent(state.pdfEdition)}`
-    return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/pdf?${query}`
+    if (!state.pagination || state.paginationError) return null
+    if (!state.pagination.editions.some(({ edition, available }) => edition === state.pdfEdition && available !== false)) return null
+    return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/pdf?edition=${encodeURIComponent(state.pdfEdition)}`
   }
   return null
 }
@@ -517,18 +508,16 @@ function surfaceStageHtml() {
         ${state.surface === 'pdf' ? `
           <div class="pagination-controls">
             <label for="pdf-edition">交付版式</label>
-            <select id="pdf-edition">
-              ${(state.pagination?.editions || []).map(({ edition }) => `<option value="${escapeHtml(edition)}" ${state.pdfEdition === edition ? 'selected' : ''}>${escapeHtml(pdfEditionLabel(edition))}</option>`).join('')}
-              ${!state.pagination?.editions?.length ? `<option value="natural" ${state.pdfEdition === 'natural' ? 'selected' : ''}>${pdfEditionLabel('natural')}</option>` : ''}
-              <option value="teacher" ${state.pdfEdition === 'teacher' ? 'selected' : ''}>${pdfEditionLabel('teacher')}</option>
+            <select id="pdf-edition" ${state.pagination ? '' : 'disabled'}>
+              ${(state.pagination?.editions || []).map(({ edition, available, unavailableReason }) => `<option value="${escapeHtml(edition)}" ${state.pdfEdition === edition ? 'selected' : ''} ${available === false ? 'disabled' : ''}>${escapeHtml(pdfEditionLabel(edition))}${available === false ? `（${escapeHtml(unavailableReason)}）` : ''}</option>`).join('')}
             </select>
-            <span class="paper-meta">${['natural', 'teacher'].includes(state.pdfEdition) ? '自然分页' : `${['friendly10', 'long12', 'largeComplete'].includes(state.pdfEdition) ? '含听力' : '不含听力'} · ${state.pagination?.editions.find(({ edition }) => edition === state.pdfEdition)?.mode === 'explicit' ? '本卷分页方案' : '自动分页'}`}</span>
+            <span class="paper-meta">${state.pdfEdition === 'answerOnly' ? '独立源参考答案 · 自然分页' : `${state.pdfEdition === 'largeComplete' ? '含听力' : '不含听力'} · ${state.pagination?.editions.find(({ edition }) => edition === state.pdfEdition)?.mode === 'explicit' ? '本卷分页方案' : '自动分页'}`}</span>
           </div>
         ` : `<span class="paper-meta">${state.surface === 'screen' ? '点击卷面内容可带回语义定位' : '由共享 Canonical Print seam 生成'}</span>`}
         <button class="button" id="toggle-immersive" type="button" aria-controls="review-frame" aria-pressed="false">沉浸查看</button>
       </div>
       <div class="frame-shell">
-        ${state.surface === 'pdf' && state.paginationError ? `<p class="pagination-error" role="alert">定页版式未加载：${escapeHtml(state.paginationError)}。请刷新重试，当前教师 PDF 不能代替定页 QA。</p>` : ''}
+        ${state.surface === 'pdf' && state.paginationError ? `<p class="pagination-error" role="alert">PDF 产品未加载：${escapeHtml(state.paginationError)}。请刷新重试。</p>` : ''}
         ${url ? `
           <div class="frame-loading" id="frame-loading">正在打开 ${escapeHtml(surfaceLabels[state.surface])}…</div>
           <iframe

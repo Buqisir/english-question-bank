@@ -3,6 +3,17 @@ import path from 'node:path'
 
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
+export function listeningPlaybackSegments(listening, audio) {
+  const transcript = [...(listening?.transcript || [])]
+    .sort((left, right) => Math.min(...left.questionNumbers) - Math.min(...right.questionNumbers))
+  if (audio?.state !== 'candidate_segments' || transcript.length !== audio.candidates.length) return []
+  return transcript.map((segment, index) => ({
+    segmentId: segment.segmentId, questionNumbers: [...segment.questionNumbers],
+    firstQuestionId: `question:listening:${Math.min(...segment.questionNumbers)}`,
+    startSeconds: audio.candidates[index].startSeconds, endSeconds: audio.candidates[index].endSeconds,
+  }))
+}
+
 export const LISTENING_AUDIO_PATHS = Object.freeze({
   original: 'source/listening-audio.mp3',
   playback: 'materialization/listening-audio/playback.mp3',

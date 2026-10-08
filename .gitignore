@@ -71,6 +71,7 @@ reports/*
 !reports/print-visual-qa-guangdong-2026.md
 !reports/reading-analysis-quote-coverage.md
 output/
+data/published-blobs/
 
 # Local model weights
 models/

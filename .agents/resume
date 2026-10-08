@@ -4,6 +4,11 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+if [[ -f .amp/orb-profile ]] && [[ "$(cat .amp/orb-profile)" == import ]]; then
+  echo "[orb-resume] import ready; paper workspaces and preview services start on demand"
+  exit 0
+fi
+
 if [[ ! -f data/question-bank.sqlite ]]; then
   echo "[orb-resume] restoring the local development database"
   bash scripts/init-db.sh

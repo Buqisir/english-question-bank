@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { applyStudentProductLayout, planStudentProductPdf, renderExplicitStudentProductPdf, studentProductPolicy } from '../server/draft-paper/studentProductPdf.mjs'
 import { validatePaperPaginationPlan, paginationPlanEdition } from '../server/paper-import/paginationPlan.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
@@ -68,6 +69,7 @@ for (const smallOnly of [false, true]) {
   }
   const result = await planStudentProductPdf(html, { edition: 'economy8', render })
   assert.equal(result.fontSizePt, smallOnly ? 10.5 : 12)
+  assert.equal(result.layout.profile, 'student-friendly-economy-v2')
   assert.deepEqual(result.layout.answerBoxHeightsMm, { application: 44, continuation: 57 },
     'last-page space restores continuation independently of application compression')
   assert.ok(seen.some(sizes => sizes.application === 45), 'probe the failing side of the exact height boundary')
@@ -152,17 +154,86 @@ for (const edition of ['economy8', 'largeNoListening']) {
 // Actual Chromium measurement: inherited body type is insufficient for source
 // captions/table cells, and a too-wide option must change the whole grid.
 try {
+  const economyLayout = { ...layout, profile: 'student-friendly-economy-v2', fontSizePt: 10.5 }
+  assert.throws(() => applyStudentProductLayout(html, { ...economyLayout, fontSizePt: 12 }, 'largeNoListening'), /Invalid/)
+  const balanceHtml = body => `<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}
+    body{margin:0}p,.section-header,.question-group{margin:0}
+    .question-group{break-inside:avoid}
+    .forced-start{break-before:page}
+    </style></head><body>${body}</body></html>`
+  const inspectBalance = page => page.evaluate(() => {
+    const pages = [...document.querySelectorAll('.pagedjs_page')]
+    return [...document.querySelectorAll('.pagedjs_pages .section-header,.pagedjs_pages .reading-meta-instruction,.pagedjs_pages section[data-canonical-group-id]')].map(node => {
+      const page = node.closest('.pagedjs_page')
+      const rect = node.getBoundingClientRect()
+      const area = page.querySelector('.pagedjs_area').getBoundingClientRect()
+      return { id: node.getAttribute('data-canonical-group-id') || node.textContent.trim(),
+        page: pages.indexOf(page) + 1, top: rect.top - area.top, bottomSpace: area.bottom - rect.bottom,
+        offsetPt: Number(node.getAttribute('data-pdf-vertical-offset-pt') || 0),
+        height: rect.height, lineHeight: parseFloat(getComputedStyle(node).lineHeight) }
+    })
+  })
+  const orphanFixture = height => balanceHtml(`<section class="question-group" data-canonical-group-id="previous" style="height:240mm">Previous question</section>
+    <h2 class="section-header">Section two</h2><p class="reading-meta-instruction">Instruction</p>
+    <section class="question-group" data-canonical-group-id="target" style="height:${height}mm">Complete question and options</section>`)
+  for (const height of [100, 230]) {
+    const old = await renderPaginatedPaper(applyStudentProductLayout(orphanFixture(height), { ...layout, fontSizePt: 10.5 }, 'economy8'), { inspect: inspectBalance })
+    const actual = await renderPaginatedPaper(applyStudentProductLayout(orphanFixture(height), economyLayout, 'economy8'), { inspect: inspectBalance })
+    const byId = result => Object.fromEntries(result.inspection.map(entry => [entry.id, entry]))
+    const before = byId(old)
+    const after = byId(actual)
+    assert.equal(before['Section two'].page, 1, 'fixture must really orphan the heading')
+    assert.equal(before.target.page, 2)
+    assert.equal(actual.pageCount, old.pageCount, 'never add pages to keep chrome together')
+    assert.equal(after['Section two'].page, height === 100 ? 2 : 1, 'only the loose page takes its heading back')
+    assert.equal(after.target.offsetPt, height === 100 ? 18 : 0)
+    assert.equal(after.target.height, before.target.height, 'no internal stretching or compression')
+    if (height === 100) {
+      assert.equal(after['Section two'].offsetPt, after.target.offsetPt)
+      assert.equal(after.Instruction.offsetPt, after.target.offsetPt)
+      assert.ok(after.target.bottomSpace > 48)
+    } else assert.deepEqual(actual.inspection, old.inspection, 'dense-page trial rolls back exactly')
+  }
+  // Independent A4 calculation, with a non-capped case and both sides of the
+  // two-line threshold. Centering or a constant inset would fail these inputs.
+  for (const height of [226, 239, 240]) {
+    const actual = await renderPaginatedPaper(applyStudentProductLayout(balanceHtml(
+      `<section class="question-group" data-canonical-group-id="target" style="height:${height}mm">Question</section>`,
+    ), economyLayout, 'economy8'), { inspect: inspectBalance })
+    const expectedPt = Math.max(0, Math.min(18, ((252 - height) * 72 / 25.4 - 36) / 4))
+    assert.ok(Math.abs(actual.inspection[0].offsetPt - expectedPt) < 0.05)
+    assert.equal(actual.pageCount, 1)
+    assert.equal(actual.inspection[0].lineHeight, 24)
+  }
+  for (const body of [
+    '<section class="question-group" data-canonical-group-id="a" style="height:100mm">First</section><section class="question-group" data-canonical-group-id="b" style="height:50mm">Second</section>',
+    '<section class="question-group" data-canonical-group-id="a" style="height:100mm">Question</section><div class="writing-answer-box" style="height:100mm"></div>',
+    `<section class="question-group" data-canonical-group-id="a">${'<p>Long question line</p>'.repeat(70)}</section>`,
+    '<header>Paper opening</header><section class="question-group" data-canonical-group-id="a" style="height:100mm">Question</section>',
+  ]) {
+    const actual = await renderPaginatedPaper(applyStudentProductLayout(balanceHtml(body), economyLayout, 'economy8'), { inspect: inspectBalance })
+    assert.ok(actual.inspection.every(entry => entry.offsetPt === 0), 'shared, occupied, split and opening pages stay put')
+  }
+  const blankPageFixture = balanceHtml('<h2 class="section-header">Only content on first page</h2><p class="reading-meta-instruction forced-start">Instruction</p><section class="question-group" data-canonical-group-id="a" style="height:100mm">Question</section>')
+  const blankPage = await renderPaginatedPaper(applyStudentProductLayout(blankPageFixture, economyLayout, 'economy8'), { inspect: inspectBalance })
+  assert.equal(blankPage.pageCount, 2)
+  assert.equal(blankPage.inspection[0].page, 1, 'never leave a blank page by moving its only heading')
+  assert.equal(blankPage.inspection.at(-1).page, 2)
+  assert.ok(blankPage.inspection.every(entry => entry.offsetPt === 0))
   const measured = await renderPaginatedPaper(`<html><head><style>@page{size:A4;margin:20mm}body{margin:0;line-height:20px}</style></head><body>
     <section data-canonical-group-id="box" data-canonical-group-type="writing"><div class="canonical-continuation-response" style="height:180mm;border:1px solid">Starter</div></section></body></html>`, { inspect: inspectGroups })
   // 257mm usable height minus 180mm box and borders, not minus one ink line.
   assert.ok(measured.inspection[0].fragments[0].pageTailLines > 13)
   assert.ok(measured.inspection[0].fragments[0].pageTailLines < 16, 'empty response space must count as occupied')
-  const fixture = `<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}
+  const paperLayoutCss = readFileSync(new URL('../shared/papersurface/paperLayout.css', import.meta.url), 'utf8')
+  const fixture = `<html><head><style>${paperLayoutCss}
+    @page{size:A4;margin: 21mm 24mm 24mm 24mm;}
     body{font-family:serif}.canonical-reading-figure figcaption{font-size:9pt}
     .canonical-reading-table td{line-height:16pt}
     .canonical-options{display:grid;grid-template-columns:80px 180px;width:260px}
     .canonical-options>span{white-space:nowrap}
-    </style></head><body><div class="canonical-paper-cover-title">English</div>
+    </style></head><body><p class="canonical-paper-mock-name">2026 Joint Examination</p>
+    <div class="canonical-paper-cover-title">English</div>
     <div class="canonical-paper-cover-notices">Administrative notices</div>
     <section class="question-group"><figure class="canonical-reading-figure"><figcaption>Source caption</figcaption></figure>
     <table class="canonical-reading-table" style="width:160px"><tr><td>Wrapped source table text for reading.</td></tr></table>
@@ -177,6 +248,7 @@ try {
           return [parseFloat(style.fontSize), parseFloat(style.lineHeight)]
         }
         return { caption: type('figcaption'), table: type('td'),
+          mockName: type('.canonical-paper-mock-name'), subject: type('.canonical-paper-cover-title'),
           single: root.querySelector('.canonical-options').hasAttribute('data-pdf-single-column'),
           notices: getComputedStyle(root.querySelector('.canonical-paper-cover-notices')).display }
       }),
@@ -184,6 +256,8 @@ try {
     const expected = fontSizePt === 12 ? [16, 26] : [14, 24]
     assert.deepEqual(actual.inspection.caption, expected)
     assert.deepEqual(actual.inspection.table, expected)
+    assert.deepEqual(actual.inspection.mockName, [24, 36], '18pt/27pt name stays independent of both body tiers')
+    assert.ok(Math.abs(actual.inspection.subject[0] - 80 / 3) < 0.001, 'subject stays 20pt')
     assert.equal(actual.inspection.single, true)
     assert.equal(actual.inspection.notices, 'none')
     assert.equal(actual.pageCount, 1)
@@ -192,4 +266,4 @@ try {
     fixture.replace('This option does not fit its narrow cell', 'W'.repeat(100)), layout, 'economy8',
   )), error => error.code === 'PAPER_LAYOUT_OVERFLOW', 'unbreakable text must fail, not be arbitrarily split or clipped')
 } finally { await closeChromiumPool() }
-console.log('PASS student products: large-first fallback, 44/45mm boundary, independent 57mm restoration, ceilings, replay and fail-closed content')
+console.log('PASS student products: large-first fallback, height restoration, ceilings, historical replay, loose-page-only balance and fail-closed content')

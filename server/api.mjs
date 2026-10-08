@@ -25,7 +25,8 @@ import { createVocabularyNotebookRoutes } from './vocabulary-notebook/routes.mjs
 import { createVocabularyNotebookRuntime } from './vocabulary-notebook/runtime.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
-import { sendPaperAssetStatic } from './paper-import/paperAssetStatic.mjs'
+import { sendPaperAssetStatic, sendListeningAudioFile } from './paper-import/paperAssetStatic.mjs'
+import { loadStoredPlayback } from './paper-import/blobStore.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
 import { createPaperSetRoutes } from './paper-sets/routes.mjs'
 import { createAiProxyRoutes } from './ai-proxy/routes.mjs'
@@ -480,6 +481,7 @@ const draftPaperStore = createDraftPaperStore({
   openUserDatabase,
   paperAssetsDir,
   resolveCanonicalConsumption,
+  loadCanonicalConsumption,
   rootDir,
   selectQuestionGroupCards,
 })
@@ -1568,35 +1570,43 @@ function attachCanonicalPaperAvailability(db, cards, draftContext = EMPTY_DRAFT_
   })
 }
 
-/**
- * Additive read-only importedAt from sources.created_at.
- * No schema change — a follow-up SELECT keyed by group id.
- */
+// Source is the date authority; legacy missing months stay null. Do not infer
+// an exam month from importedAt, paper names or cohort years.
 function attachImportedAtFromSources(db, cards) {
   const ids = cards.map((card) => card.id).filter(Boolean)
   if (ids.length === 0) return cards
   const placeholders = ids.map(() => '?').join(', ')
   const rows = db.prepare(`
-    SELECT qg.id AS id, s.created_at AS created_at
+    SELECT qg.id AS id, s.created_at AS created_at, s.month AS month
     FROM question_groups qg
     JOIN passages p ON p.id = qg.passage_id
     JOIN sources s ON s.id = p.source_id
     WHERE qg.id IN (${placeholders})
   `).all(...ids)
-  const importedAtById = new Map(rows.map((row) => [row.id, row.created_at]))
+  const sourcesById = new Map(rows.map((row) => [row.id, row]))
   for (const card of cards) {
-    const importedAt = importedAtById.get(card.id)
-    if (importedAt) card.importedAt = importedAt
+    const source = sourcesById.get(card.id)
+    if (source?.created_at) card.importedAt = source.created_at
+    card.month = source?.month ?? null
   }
   return cards
 }
 
-function listQuestionGroups(userId) {
+function listQuestionGroups(userId, { year, month } = {}) {
   const db = openDatabase()
 
   try {
     const draftContext = getDraftSearchContext(userId)
-    return attachCanonicalPaperAvailability(db, selectQuestionGroupCards(db, '', [], draftContext), draftContext, true)
+    const clauses = []
+    const params = []
+    if (year !== undefined) { clauses.push('s.year = ?'); params.push(year) }
+    if (month !== undefined) { clauses.push('s.month = ?'); params.push(month) }
+    const where = clauses.length ? `WHERE id IN (
+      SELECT qg.id FROM question_groups qg
+      JOIN passages p ON p.id = qg.passage_id JOIN sources s ON s.id = p.source_id
+      WHERE ${clauses.join(' AND ')})` : ''
+    return attachCanonicalPaperAvailability(db, selectQuestionGroupCards(db, where, params, draftContext), draftContext, !clauses.length)
+      .sort((a, b) => (b.year - a.year) || ((b.month ?? 0) - (a.month ?? 0)))
   } finally {
     db.close()
   }
@@ -4043,6 +4053,18 @@ const server = createServer(async (request, response) => {
     }
 
     if (['GET', 'HEAD'].includes(request.method) && url.pathname.startsWith('/paper-assets/')) {
+      const audio = /^\/paper-assets\/([a-z0-9][a-z0-9._-]{0,127})\/versions\/(v[1-9]\d*)\/listening\/playback\.mp3$/.exec(url.pathname)
+      if (audio) {
+        const consumption = loadCanonicalConsumption({ paperId: audio[1], version: audio[2], consumerId: 'screen' })
+        const db = openDatabase({ readOnly: true })
+        try {
+          const bytes = await loadStoredPlayback({ db, consumption })
+          if (bytes) {
+            sendListeningAudioFile(request, response, null, { bytes })
+            return
+          }
+        } finally { db.close() }
+      }
       sendPaperAssetStatic(request, response, url.pathname, paperAssetsDir)
       return
     }

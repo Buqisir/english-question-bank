@@ -46,8 +46,9 @@ export function sendPaperAssetStatic(request, response, urlPath, paperAssetsDir)
 // Callers establish authorization and resolve the immutable file first.
 export function sendListeningAudioFile(request, response, filePath, {
   cacheControl = 'private, max-age=31536000, immutable',
+  bytes = null,
 } = {}) {
-  const size = statSync(filePath).size
+  const size = bytes ? bytes.length : statSync(filePath).size
   let start = 0
   let end = size - 1
   const range = request.headers.range
@@ -77,6 +78,7 @@ export function sendListeningAudioFile(request, response, filePath, {
     ...(range === undefined ? {} : { 'content-range': `bytes ${start}-${end}/${size}` }),
   })
   if (request.method === 'HEAD') return response.end()
+  if (bytes) return response.end(bytes.subarray(start, end + 1))
   const stream = createReadStream(filePath, { start, end })
   stream.on('error', () => response.destroy())
   response.on('close', () => stream.destroy())

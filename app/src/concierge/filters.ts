@@ -39,6 +39,7 @@ export type FilterOption<TValue extends string = string> = {
 export type ConciergeFilterOptions = {
   groupType: FilterOption[]
   year: FilterOption[]
+  month: FilterOption[]
   region: FilterOption[]
   sourceType: FilterOption[]
   topicGroup: FilterOption[]
@@ -48,6 +49,7 @@ export type ConciergeFilterOptions = {
 export type ConciergeFilters = {
   groupType?: string
   year?: number
+  month?: number
   /** Browse 「更早」: keep groups whose year is strictly older than this cutoff. */
   yearBefore?: number
   region?: string
@@ -130,6 +132,13 @@ export function buildFilterOptions(groups: QuestionGroupCard[]): ConciergeFilter
     .sort((a, b) => Number(b[0]) - Number(a[0]))
     .map(([value, count]) => ({ value, label: value, count }))
 
+  const monthCounts = countBy(groups, (g) =>
+    Number.isInteger(g.month) && g.month! >= 1 && g.month! <= 12 ? String(g.month) : null,
+  )
+  const month: FilterOption[] = Array.from(monthCounts.entries())
+    .sort((a, b) => Number(a[0]) - Number(b[0]))
+    .map(([value, count]) => ({ value, label: `${value}月`, count }))
+
   const regionCounts = countBy(groups, (g) => {
     const region = String(g.region ?? '').trim()
     return region && region !== '未标地区' && region !== '未标' ? region : null
@@ -164,7 +173,7 @@ export function buildFilterOptions(groups: QuestionGroupCard[]): ConciergeFilter
     .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0], 'zh-Hans-CN'))
     .map(([value, count]) => ({ value, label: value, count }))
 
-  return { groupType, year, region, sourceType, topicGroup }
+  return { groupType, year, month, region, sourceType, topicGroup }
 }
 
 /**
@@ -188,7 +197,7 @@ export function buildFacetedFilterOptions(
   filters: ConciergeFilters,
 ): ConciergeFilterOptions {
   const fullOptions = buildFilterOptions(groups)
-  const dimensions = ['groupType', 'year', 'region', 'sourceType', 'topicGroup'] as const
+  const dimensions = ['groupType', 'year', 'month', 'region', 'sourceType', 'topicGroup'] as const
 
   const result = { ...fullOptions }
   for (const dimension of dimensions) {
@@ -219,10 +228,11 @@ export function applyConciergeFilters(
   groups: QuestionGroupCard[],
   filters: ConciergeFilters,
 ): QuestionGroupCard[] {
-  const { groupType, year, yearBefore, region, sourceType, topicGroup } = filters
+  const { groupType, year, month, yearBefore, region, sourceType, topicGroup } = filters
   if (
     groupType === undefined &&
     year === undefined &&
+    month === undefined &&
     yearBefore === undefined &&
     region === undefined &&
     sourceType === undefined &&
@@ -233,6 +243,7 @@ export function applyConciergeFilters(
   return groups.filter((group) => {
     if (groupType !== undefined && group.groupType !== groupType) return false
     if (year !== undefined && group.year !== year) return false
+    if (month !== undefined && group.month !== month) return false
     if (yearBefore !== undefined && !(typeof group.year === 'number' && group.year < yearBefore)) return false
     if (region !== undefined && String(group.region ?? '').trim() !== region) return false
     if (sourceType !== undefined && group.sourceType !== sourceType) return false

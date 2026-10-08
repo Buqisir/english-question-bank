@@ -13,6 +13,7 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { readExamDate } from '../../shared/examDate.mjs'
 
 import {
   compileNck1MaterializationCandidatePreview,
@@ -403,10 +404,13 @@ function initializeCompleteSourceSet({
   paperId,
   paperName,
   provenance,
+  year,
+  month,
   sources,
   imageSources,
 }) {
   validateSourceInputs({ paperId, paperName, provenance, sources, imageSources })
+  const examDate = readExamDate({ year, month }, { required: true })
   const environment = runImportEnvironmentPreflight()
   const paperDir = path.join(papersRoot, paperId)
   const configPath = path.join(paperDir, 'config.json')
@@ -420,7 +424,7 @@ function initializeCompleteSourceSet({
     schemaVersion: 'universal-nck1-source-manifest-v1',
     paperId,
     profileId: 'nck1',
-    provenance: { paperName, source: provenance },
+    provenance: { paperName, source: provenance, ...examDate },
     documents,
     materializationPath: 'materialization/nck1-source-materialization-v1.json',
     mediaDirectory: 'materialization/media',
@@ -435,8 +439,9 @@ function initializeCompleteSourceSet({
     paperId,
     format: 'universal-nck1',
     importProfile: 'public-paper-v1',
+    pdfProductsRequired: true,
     spellingReview: TEXT_REVIEW_POLICY,
-    provenance: { paperName, source: provenance },
+    provenance: { paperName, source: provenance, ...examDate },
     universalSourceManifestPath: 'universal-source-manifest.json',
     canonicalRequestPath: manifest.canonicalRequestPath,
   }, null, 2)}\n`)
@@ -456,6 +461,8 @@ function initialize() {
     paperId,
     paperName,
     provenance,
+    year: Number(value('--year')),
+    month: Number(value('--month')),
     sources,
     imageSources,
   })
@@ -610,6 +617,8 @@ function attachAnswers() {
       paperId,
       paperName: context.capture.provenance.paperName,
       provenance: completeProvenance,
+      year: Number(value('--year')),
+      month: Number(value('--month')),
       sources,
       imageSources,
     }))

@@ -61,6 +61,7 @@ import { BoardList, PaperDownload, Plus, Presentation, RefreshCw, Scissors } fro
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
+import { firstListeningSectionRange } from '../../../../shared/paper-canonical/listeningWaveform.mjs'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
 // ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**
@@ -179,9 +180,11 @@ import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import {
   listeningOpening,
+  mockPaperCoverName,
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
-import { exportCompanionAnalysisPdf as fetchCompanionAnalysisPdf } from '../../services/questionGroups.ts'
+import { exportPaperProductPdf, paperProductPdfUrl } from '../../services/questionGroups.ts'
+import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { prepareFileSaveTarget, saveBlobToTarget } from '../../services/fileDownload.ts'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
 import {
@@ -746,6 +749,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [error, setError] = useState<string | null>(null)
   const [analysisPdfBusy, setAnalysisPdfBusy] = useState(false)
   const [analysisPdfError, setAnalysisPdfError] = useState('')
+  const [pdfEdition, setPdfEdition] = useState<PaperPdfEdition>('largeNoListening')
   const grammarFillGeometryFixture =
     grammarFillGeometryVariantId == null
       || (loading && canonicalConsumption == null)
@@ -2436,21 +2440,31 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     if (entry.kind === 'listening') {
       const isPanelGroup = lectureOpen && panelGroupId === groupId
       const audio = canonicalConsumption?.listeningAudio
+      const firstSection = firstListeningSectionRange(audio?.segments,
+        entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b))
       const listeningPlayers = audio?.segments ? Object.fromEntries(audio.segments.map((segment) => [
         segment.firstQuestionId,
         <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
             : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
-          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} />,
+          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} waveform={audio.waveform} />,
       ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
           <PaperSurface
             {...entry.model.surfaceData}
             listeningPlayers={listeningPlayers}
+            listeningSectionPlayer={audio && firstSection && (
+              <ListeningSegmentPlayer key={`${audio.sha256}:first-section`} src={audio.url} label="第一节第 1–5 题"
+                startSeconds={firstSection.startSeconds} endSeconds={firstSection.endSeconds}
+                onActivate={activateAudio} size="full" waveform={audio.waveform}
+                marks={firstSection.segments.map((segment) => ({
+                  startSeconds: segment.startSeconds, endSeconds: segment.endSeconds, label: String(segment.questionNumbers[0]),
+                }))} />
+            )}
             listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full"
+                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full" waveform={audio.waveform}
                 marks={audio.segments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,
@@ -2589,6 +2603,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           entry.kind === 'cloze'
           && canonicalClozeGroupIds.includes(groupId)
         }
+        clozeConsumerRef={canonicalConsumption?.consumerContractRef}
         clozeFollowingSectionId={
           entry.kind === 'cloze'
           && groupId
@@ -3964,14 +3979,21 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <Presentation size={14} aria-hidden="true" />
         讲评
       </button>
+      <select className="ghost-button" aria-label="PDF 版本" value={pdfEdition} disabled={analysisPdfBusy} onChange={(event) => {
+        setPdfEdition(event.target.value as PaperPdfEdition)
+        setAnalysisPdfError('')
+      }}>
+        {PAPER_PDF_EDITIONS.map((edition) => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
+      </select>
+      {canonicalConsumption?.publicationDigest && <a className="ghost-button" href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen</a>}
       <button
         className="ghost-button"
         type="button"
         disabled={analysisPdfBusy}
-        onClick={() => void downloadCompanionAnalysis()}
+        onClick={() => void downloadPaperProduct()}
       >
         <PaperDownload size={16} />
-        {analysisPdfBusy ? '生成解析中…' : '下载配套解析'}
+        {analysisPdfBusy ? '生成 PDF 中…' : '下载 PDF'}
       </button>
     </>
   ) : (
@@ -3990,19 +4012,18 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     </button>
   )
 
-  async function downloadCompanionAnalysis(): Promise<void> {
-    if (!asset || reviewRevision || analysisPdfBusy) return
+  async function downloadPaperProduct(): Promise<void> {
+    if (!asset || !canonicalConsumption?.publicationDigest || reviewRevision || analysisPdfBusy) return
     setAnalysisPdfError('')
     try {
-      const cleanTitle = asset.paper.title.replace(/[-—－]\s*答案版\s*$/u, '')
       const target = await prepareFileSaveTarget({
         mode: 'download',
-        suggestedName: `${cleanTitle}-配套解析.pdf`,
+        suggestedName: `${asset.paper.title}-${PAPER_PDF_PRODUCTS[pdfEdition]}.pdf`,
         mimeType: 'application/pdf',
       })
       if (!target) return
       setAnalysisPdfBusy(true)
-      const result = await fetchCompanionAnalysisPdf(paperId)
+      const result = await exportPaperProductPdf(paperId, pdfEdition, canonicalConsumption.publicationDigest)
       await saveBlobToTarget(result.blob, result.fileName, target)
     } catch (downloadError) {
       setAnalysisPdfError(downloadError instanceof Error
@@ -4088,6 +4109,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           <div className="paper-browse-zoom">
             {showListeningOpening && (
               <header className="canonical-paper-opening" data-canonical-paper-opening="">
+                {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title) && (
+                  <p className="canonical-paper-mock-name" data-canonical-mock-name="">
+                    {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title)}
+                  </p>
+                )}
                 <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
                 <div className="canonical-paper-cover-notices" data-canonical-cover-notices="">
                   <strong>注意事项：</strong>

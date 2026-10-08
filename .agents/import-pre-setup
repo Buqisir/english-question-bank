@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Dedicated Import Project selector; the versioned setup owns dependencies.
+mkdir -p .amp
+printf 'import\n' > .amp/orb-profile

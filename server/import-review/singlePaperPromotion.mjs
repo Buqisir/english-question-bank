@@ -17,7 +17,12 @@ import {
   assertPaperImportParagraphSummaries,
   assertPaperImportPublicSearchMetadata,
   assertPaperImportPaginationPlan,
+  assertPaperImportSourceReferences,
 } from '../paper-import/storage.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { readSourceReferencePublication } from '../paper-import/sourceReferencePublication.mjs'
+import { readPublishedProducts } from '../paper-import/frozenProducts.mjs'
+import { archiveReviewFiles, configuredBlobStore } from '../paper-import/blobStore.mjs'
 import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
@@ -152,6 +157,19 @@ function inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData 
     ref: expected,
     store: createFileSystemCanonicalPublicationStore({ rootDir: paperAssetsDir, db }),
   })
+  const products = readPublishedProducts({ db, paperAssetsDir, consumption: Object.values(consumers)[0],
+    required: Boolean(packageData.frozenProducts) })
+  if (products?.digest !== packageData.frozenProducts?.digest) {
+    throw promotionError('IMPORT_REVIEW_PROMOTION_PRODUCT_CONFLICT', 'Published PDFs differ from the approved Review')
+  }
+  readSourceReferencePublication({ db, paperAssetsDir, consumption: Object.values(consumers)[0],
+    expected: packageData.sourceReferencesBytes ? {
+      approvalId: promotion.approvalId, revisionId: promotion.revisionId, bundleDigest: promotion.bundleDigest,
+      sourceDigest: promotion.sourceDigest, candidateDigest: promotion.candidateDigest,
+      sourceReferencesDigest: sha256(packageData.sourceReferencesBytes),
+    } : null })
+  assertPaperImportSourceReferences({ baseDir: versionDir, packageData })
+  assertPaperImportSourceReferences({ baseDir: latestDir, packageData })
   return promotion.importProfile
     ? { paragraphSummariesPublicationDigest: versionPublicationDigest, consumers }
     : { analysisPublicationDigest: versionPublicationDigest, consumers }
@@ -174,8 +192,9 @@ export function createSinglePaperPromotionService({
   paperAssetsDir,
   publish = publishUniversalNck1Import,
   afterPublish = null,
+  blobStore = null,
 }) {
-  function execute(paperId, begun) {
+  function execute(paperId, begun, fileStorage = null) {
       const store = getStore()
       let promotion = begun.promotion
       if (begun.action === 'consumed') {
@@ -194,6 +213,13 @@ export function createSinglePaperPromotionService({
       }
       const reviewRootDir = store.revisionDirectory(revision.id)
       const projection = buildNck1ReviewProjection(reviewRootDir, { requireAnalyses: true })
+      // Upload and verify before opening the publication transaction. Failed
+      // or interrupted publication never deletes these shared content addresses.
+      if (projection.frozenProducts && !fileStorage) {
+        return archiveReviewFiles({ rootDir: reviewRootDir, manifest: revision.manifest,
+          blobStore: blobStore || configuredBlobStore() })
+          .then(storage => execute(paperId, begun, storage))
+      }
       const confirmation = {
         schemaVersion: 'teacher-confirmation-v1',
         candidateDigest: promotion.candidateDigest,
@@ -217,6 +243,8 @@ export function createSinglePaperPromotionService({
         analysisSidecars: projection.analysisSidecars,
         paragraphSummariesBytes: projection.paragraphSummariesBytes,
         publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
+        sourceReferencesBytes: projection.sourceReferencesBytes,
+        frozenProducts: projection.frozenProducts,
         paginationPlan: projection.paginationPlan,
         paginationBindingIdentity: projection,
       })
@@ -249,7 +277,10 @@ export function createSinglePaperPromotionService({
                   })
                 }
                 assertPaperImportPaginationPlan({ baseDir, packageData })
+                assertPaperImportSourceReferences({ baseDir, packageData })
               }
+              // This runs before the publisher clears committed journal evidence.
+              inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData })
             },
           })
           if (
@@ -274,6 +305,8 @@ export function createSinglePaperPromotionService({
         }
         const result = publish({
           reviewRootDir,
+          approvedManifest: revision.manifest,
+          fileStorage,
           approvedIdentity: {
             ...promotion,
             ...(projection.importProfile

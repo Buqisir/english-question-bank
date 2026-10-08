@@ -113,9 +113,10 @@ const ROTATING_PLACEHOLDERS = [
 const DEFAULT_FEED_PAGE_SIZE = 4
 
 /** UI 门面刀 F2 — muted dimension labels in front of each chip row. */
-const FILTER_DIM_LABEL: Record<'groupType' | 'year' | 'region' | 'sourceType' | 'topicGroup', string> = {
+const FILTER_DIM_LABEL: Record<'groupType' | 'year' | 'month' | 'region' | 'sourceType' | 'topicGroup', string> = {
   groupType: '题型',
   year: '年份',
+  month: '月份',
   region: '地区',
   sourceType: '来源',
   topicGroup: '主题',
@@ -128,8 +129,8 @@ const FILTER_DIM_LABEL: Record<'groupType' | 'year' | 'region' | 'sourceType' | 
  * content is the star, don't 堆筛选控件). An active region/source filter pins
  * the full set open so a selection is never hidden.
  */
-const DEFAULT_FILTER_DIMS = ['groupType', 'year', 'topicGroup'] as const
-const ALL_FILTER_DIMS = ['groupType', 'year', 'topicGroup', 'region', 'sourceType'] as const
+const DEFAULT_FILTER_DIMS = ['groupType', 'year', 'month', 'topicGroup'] as const
+const ALL_FILTER_DIMS = ['groupType', 'year', 'month', 'topicGroup', 'region', 'sourceType'] as const
 
 /**
  * Restart cut ⑤ — a non-empty result set is "all weak" when every hit only
@@ -274,6 +275,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       const year = Number(yearRaw)
       if (Number.isFinite(year)) next.year = year
     }
+    const monthRaw = params.get('f.month')
+    if (monthRaw !== null && /^(?:[1-9]|1[0-2])$/.test(monthRaw)) next.month = Number(monthRaw)
     const region = params.get('f.region')
     if (region) next.region = region
     const sourceType = params.get('f.sourceType')
@@ -295,6 +298,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       const FILTER_PARAM_BY_DIM = {
         groupType: 'f.groupType',
         year: 'f.year',
+        month: 'f.month',
         region: 'f.region',
         sourceType: 'f.sourceType',
         topicGroup: 'f.topicGroup',
@@ -321,6 +325,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const hasActiveFilters =
     filters.groupType !== undefined ||
     filters.year !== undefined ||
+    filters.month !== undefined ||
     filters.yearBefore !== undefined ||
     filters.region !== undefined ||
     filters.sourceType !== undefined ||
@@ -375,6 +380,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const activeFilterCount = [
     filters.groupType,
     filters.year,
+    filters.month,
     filters.yearBefore,
     filters.region,
     filters.sourceType,
@@ -384,7 +390,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // labels the open filter panel already computes, just picked out for the
   // currently-active dimensions.
   const activeFilterEntries = useMemo(() => {
-    const dims = ['groupType', 'year', 'region', 'sourceType', 'topicGroup'] as const
+    const dims = ['groupType', 'year', 'month', 'region', 'sourceType', 'topicGroup'] as const
     return dims
       .filter((dim) => filters[dim] !== undefined)
       .map((dim) => {
@@ -422,6 +428,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     setFilters((prev) => {
       const next = { ...prev }
       delete next.yearBefore
+      delete next.month
       if (prev.year === year) delete next.year
       else next.year = year
       return next
@@ -429,10 +436,20 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     if (!browseActive) onEnterBrowse?.()
   }
 
+  function selectBrowseMonth(month: number | undefined) {
+    setFilters((prev) => {
+      const next = { ...prev }
+      if (month === undefined || prev.month === month) delete next.month
+      else next.month = month
+      return next
+    })
+  }
+
   function selectBrowseOlder(cutoff: number) {
     setFilters((prev) => {
       const next = { ...prev }
       delete next.year
+      delete next.month
       if (prev.yearBefore === cutoff) delete next.yearBefore
       else next.yearBefore = cutoff
       return next
@@ -485,6 +502,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   )
   const browseRecentYears = browseYears.slice(0, 4)
   const browseOlderCutoff = browseRecentYears[browseRecentYears.length - 1]
+  const browseMonths = filterOptions.month.filter(option => option.count > 0 || Number(option.value) === filters.month)
 
   // Browse-all and search recovery refer to the full, unfiltered catalog.
   const catalogFeed = useMemo(() => buildDefaultFeed(questionGroups), [questionGroups])
@@ -597,7 +615,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 <button
                   type="button"
                   className="concierge-browse-chip"
-                  aria-pressed={!filters.sourceType && filters.year === undefined && filters.yearBefore === undefined}
+                  aria-pressed={!hasActiveFilters}
                   onClick={() => {
                     clearFilters()
                     if (!browseActive) onEnterBrowse?.()
@@ -642,6 +660,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     更早
                   </button>
                 )}
+              </FluidHoverList>
+            )}
+            {isBrowseScreen && !dataLoading && state.kind === 'empty' && filters.year !== undefined && browseMonths.length > 0 && (
+              <FluidHoverList as="div" axis="xy" className="concierge-browse-chips" itemSelector=".concierge-browse-chip" gapClick={false} role="group" aria-label="月份">
+                <button type="button" className="concierge-browse-chip" aria-pressed={filters.month === undefined} onClick={() => selectBrowseMonth(undefined)}>全部月份</button>
+                {browseMonths.map(option => (
+                  <button key={option.value} type="button" className="concierge-browse-chip" aria-pressed={filters.month === Number(option.value)} onClick={() => selectBrowseMonth(Number(option.value))}>
+                    {option.label}
+                  </button>
+                ))}
               </FluidHoverList>
             )}
           </div>
@@ -754,7 +782,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         onClick={() =>
                           toggleFilter(
                             dimension,
-                            (dimension === 'year' ? Number(option.value) : option.value) as never,
+                            (dimension === 'year' || dimension === 'month' ? Number(option.value) : option.value) as never,
                           )
                         }
                       >

@@ -5230,6 +5230,15 @@ button:disabled {
   min-width: 0;
 }
 
+.concierge-paper-row[data-canonical] .concierge-paper-title-line {
+  flex-wrap: wrap;
+}
+
+.concierge-paper-row[data-canonical] .concierge-paper-headline {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 /* home-editorial — 卷种标注 C·宋体墨字 (owner 2026-07-09 拍板): 真题/模拟
    render in a serif face, ink-muted, wide tracking, no border/fill. */
 .concierge-paper-sourcetype {

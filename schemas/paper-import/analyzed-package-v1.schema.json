@@ -15,6 +15,7 @@
       "required": ["year", "region", "sourceType"],
       "properties": {
         "year": { "type": "integer", "minimum": 2000, "maximum": 2100 },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
         "region": { "type": "string", "minLength": 1, "maxLength": 100 },
         "sourceType": { "type": "string", "minLength": 1, "maxLength": 100 }
       }

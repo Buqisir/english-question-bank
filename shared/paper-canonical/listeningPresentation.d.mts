@@ -27,3 +27,4 @@ export const listeningOpening: {
 export function listeningSegmentCue(segment: ListeningPresentationGroup['segments'][number], ordinal: number, questions: ListeningPresentationGroup['questions']): string
 export function projectListeningGroupPresentation(group: ListeningPresentationGroup): ListeningPresentation
 export function ownsCompletePaperOpening(consumption: unknown, renderedGroupIds: ReadonlyArray<string>): boolean
+export function mockPaperCoverName(sourceType: unknown, paperName: unknown): string | null

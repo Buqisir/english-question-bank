@@ -20,6 +20,7 @@ export type QuestionGroupCard = {
   source: string
   sourceType: SourceType
   year: number
+  month?: number | null
   region: string
   paperName: string
   section: string

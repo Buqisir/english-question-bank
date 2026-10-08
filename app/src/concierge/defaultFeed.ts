@@ -36,6 +36,8 @@ export function buildDefaultFeed(groups: QuestionGroupCard[]): PaperResult[] {
     const aYear = typeof a.year === 'number' ? a.year : -Infinity
     const bYear = typeof b.year === 'number' ? b.year : -Infinity
     if (aYear !== bYear) return bYear - aYear
+    const byMonth = (b.month ?? 0) - (a.month ?? 0)
+    if (byMonth) return byMonth
     return a.paperName.localeCompare(b.paperName, 'zh-Hans-CN')
   })
 }

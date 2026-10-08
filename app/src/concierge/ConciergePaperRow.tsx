@@ -64,6 +64,7 @@ function buildSourceTypeLabel(paper: PaperResult): string {
 /** Year-stripped, region-deduped headline — see paperHeadline.ts. */
 function buildHeadline(paper: PaperResult): string {
   if (paper.isFallback) return '其他来源'
+  if (paper.key.startsWith('canonical:')) return paper.paperName
   return paperHeadline(paper.paperName, paper.region, paper.year)
 }
 
@@ -260,6 +261,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       className={`concierge-paper-row${expanded ? ' is-expanded' : ''}`}
       data-variant={variant}
       data-recent={recentAddition || undefined}
+      data-canonical={paper.key.startsWith('canonical:') || undefined}
       // CR should-watch 收口：年份列 aria-hidden 后，行级 label 补回年份，
       // 屏幕阅读器才能区分同名不同年卷。
       aria-label={paper.year ? `${paper.year} 年 ${headline}` : headline}
@@ -306,6 +308,11 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           ) : (
             <div className="concierge-paper-title-line">
               <strong className="concierge-paper-headline" title={headline}>{headline}</strong>
+              {paper.year && paper.month && (
+                <time className="concierge-paper-sourcetype" dateTime={`${paper.year}-${String(paper.month).padStart(2, '0')}`}>
+                  {paper.month}月
+                </time>
+              )}
               {sourceTypeLabel === '真题' && (
                 <span className="concierge-paper-sourcetype">{sourceTypeLabel}</span>
               )}

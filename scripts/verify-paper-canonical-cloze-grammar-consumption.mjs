@@ -23,6 +23,7 @@ import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import historicalPrint from '../standards/paper-canonical/consumers/print-pdf-v45.json' with { type: 'json' }
 import {
   digestJson,
   sha256,
@@ -62,6 +63,8 @@ import {
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { applyStudentProductLayout } from '../server/draft-paper/studentProductPdf.mjs'
+import './verify-cloze-proportional-v60.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
 import {
   seedConfirmedCanonicalDraftFixture,
@@ -152,12 +155,18 @@ async function readBrowserColumnStarts(page, rowSelector, optionSelector) {
   return page.locator(rowSelector).evaluateAll((rows, childSelector) =>
     rows.map((row) => {
       const root = row.getBoundingClientRect()
-      // Screen reading zoom changes viewport pixels, not paper-space pt anchors.
-      // Print has no zoom host. Keep the independent pt expectations unchanged.
-      const zoomHost = row.closest('.paper-browse-zoom')
-      const zoom = zoomHost ? Number.parseFloat(getComputedStyle(zoomHost).zoom) : 1
+      const question = row.closest('.ps-question, .question').getBoundingClientRect()
+      if (Math.abs(root.right - question.right) > 1) {
+        throw new Error('Cloze option tracks must fill the actual passage width')
+      }
+      const scale = root.width / parseFloat(getComputedStyle(row).width)
+      if (Math.abs((root.left - question.left) / scale * 0.75 - 17.3) > 0.1) {
+        throw new Error('Cloze A must retain the fixed 17.3pt question-label advance')
+      }
+      // Compare reference proportions, not fixed points: the qnum retains
+      // its advance while the remaining 420.9 reference points fill the row.
       return [...row.querySelectorAll(childSelector)].map((option) =>
-        (option.getBoundingClientRect().x - root.x) * 72 / 96 / zoom)
+        (option.getBoundingClientRect().x - root.x) / root.width * 420.9)
     }), optionSelector)
 }
 
@@ -626,6 +635,8 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
   writeFileSync(pdfPath, pdfBytes)
   execFileSync('pdftotext', ['-bbox', pdfPath, bboxPath])
   const source = readFileSync(bboxPath, 'utf8')
+  const pageWidths = [...source.matchAll(/<page width="([^"]+)"/g)]
+    .map((match) => Number(match[1]))
   const words = source.split(/<page\b[^>]*>/).slice(1).flatMap(
     (pageSource, page) => [...pageSource.matchAll(
       /<word xMin="([^"]+)" yMin="([^"]+)" xMax="[^"]+" yMax="[^"]+">([^<]+)<\/word>/g,
@@ -670,7 +681,10 @@ function readPdfColumnStarts(pdfBytes, outputRoot, label) {
       `${label}: qnum box meets the A anchor with no added layout gap (actual ${firstOptionStart - question.x})`,
     )
     questionStarts.push(question.x)
-    rows.push([firstOptionStart, ...candidate.slice(1).map((word) => word.x)])
+    // This public Print/PDF fixture uses the standard symmetric 24mm margins.
+    const optionWidthPt = pageWidths[question.page] - 48 * 72 / 25.4 - 17.3
+    rows.push([firstOptionStart, ...candidate.slice(1).map((word) => word.x)]
+      .map((x) => (x - firstOptionStart) / optionWidthPt * 420.9))
   }
   assert.equal(
     Math.max(...questionStarts) - Math.min(...questionStarts) <= 0.5,
@@ -2163,6 +2177,14 @@ try {
         canonicalConsumption: consumption,
         grammarFillChrome: studentGrammarFillChrome,
       })
+      artifactProof.historicalPrint = buildPrintHtml({
+        title: asset.paper.title, versionType: 'student', printStyle: 'exam',
+        items, blocks, questionNumberStart: 41,
+        canonicalConsumption: { ...consumption, consumerContractRef: {
+          id: 'print_pdf', version: historicalPrint.version, digest: historicalPrint.contractDigest,
+        } },
+        grammarFillChrome: studentGrammarFillChrome,
+      })
       const teacher = buildPrintHtml({
         title: asset.paper.title,
         versionType: 'teacher',
@@ -2240,7 +2262,7 @@ try {
       assert.equal(
         (
           student.match(
-            /grid-template-columns:110\.5pt 104\.1pt 104\.65pt 101\.65pt/g,
+            /grid-template-columns:minmax\(0, 110\.5fr\) minmax\(0, 104\.1fr\) minmax\(0, 104\.65fr\) minmax\(0, 101\.65fr\)/g,
           ) || []
         ).length,
         15,
@@ -2251,7 +2273,7 @@ try {
             /data-canonical-column-starts-pt="17\.3,127\.8,231\.9,336\.55"/g,
           ) || []
         ).length,
-        15,
+        0,
       )
       artifactProof.print = { student, teacher }
     }
@@ -2543,6 +2565,16 @@ try {
         ),
         'Print',
       )
+      // Both narrower and wider than the old 438.2pt row: fixed-width or
+      // equal-quarter replacements must fail, even with short option text.
+      for (const widthPt of [360, 482]) {
+        await printPage.evaluate((width) => { document.body.style.width = `${width}pt` }, widthPt)
+        assertBrowserColumnGates(
+          await readBrowserColumnStarts(printPage, '.canonical-options--four_columns', ':scope > span'),
+          `Print at ${widthPt}pt`,
+        )
+      }
+      await printPage.evaluate(() => { document.body.style.width = '' })
       await printPage.screenshot({
         path: path.join(outputDir, 'print-student.png'),
         fullPage: true,
@@ -2552,6 +2584,33 @@ try {
         format: 'A4',
         printBackground: true,
       })
+      for (const fontSizePt of [10.5, 12]) {
+        const productHtml = applyStudentProductLayout(artifactProof.print.student, {
+          profile: 'student-friendly-v1', fontSizePt, figureLayout: 'natural',
+          answerBoxHeightsMm: { application: 65, continuation: 57 },
+        }, fontSizePt === 12 ? 'largeNoListening' : 'economy8')
+        await printPage.setContent(productHtml)
+        await printPage.evaluate(() => document.fonts.ready)
+        assertBrowserColumnGates(await readBrowserColumnStarts(printPage,
+          '.canonical-options--four_columns', ':scope > span'), `Student product ${fontSizePt}pt`)
+        assert.equal(await printPage.locator('.canonical-options--four_columns').evaluateAll(rows =>
+          rows.every(row => row.scrollWidth <= row.clientWidth + 1)), true)
+      }
+      await printPage.setContent(artifactProof.historicalPrint)
+      await printPage.evaluate(() => document.fonts.ready)
+      for (const width of [360, 482]) {
+        await printPage.evaluate(value => { document.body.style.width = `${value}pt` }, width)
+        const historicalRows = await printPage.locator('.options-inline--canonical').evaluateAll(rows => rows.map(row => ({
+          width: row.getBoundingClientRect().width * 0.75,
+          starts: [...row.querySelectorAll('.canonical-options > span')].map(option =>
+            (option.getBoundingClientRect().left - row.getBoundingClientRect().left) * 0.75),
+        })))
+        assert.equal(historicalRows.length, 15)
+        for (const row of historicalRows) {
+          assert(Math.abs(row.width - 438.2) < 0.1, 'historical row stays fixed')
+          row.starts.forEach((start, i) => assert(Math.abs(start - [17.3, 127.8, 231.9, 336.55][i]) < 0.1))
+        }
+      }
     } finally {
       await browser.close()
     }

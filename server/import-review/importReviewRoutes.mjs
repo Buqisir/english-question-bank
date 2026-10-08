@@ -13,10 +13,15 @@ import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { sendListeningAudioFile } from '../paper-import/paperAssetStatic.mjs'
+import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
+import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
+import { LISTENING_AUDIO_PATHS, listeningPlaybackSegments } from '../paper-import/listeningAudioEvidence.mjs'
 import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
 import { resolveReviewFile } from './revisionProjection.mjs'
+import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 import {
   renderReviewFixedEdition,
+  renderReviewPdfProduct,
   reviewPaginationMetadata,
   reviewPrintHtml,
 } from './reviewPagination.mjs'
@@ -697,27 +702,22 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireReviewer(response, context)) return
     const { projection } = candidateProjectionForRevision(store, match[1])
-    const audio = projection.listeningAudioEvidence?.segments
-    if (!audio) {
+    const playback = projection.sourceInput.listeningAudio || projection.analyzedPackage?.listeningAudio
+    if (!playback) {
       context.sendJson(response, 200, projection.consumption)
       return
     }
-    const transcript = [...projection.materialization.listening.transcript]
-      .sort((left, right) => Math.min(...left.questionNumbers) - Math.min(...right.questionNumbers))
-    const canMap = audio.state === 'candidate_segments' && transcript.length === audio.candidates.length
-    const playback = projection.listeningAudioEvidence.descriptors
-      .find((descriptor) => descriptor.role === 'listening_audio_playback')
+    const playbackPath = projection.analyzedPackage
+      ? projection.sourceProvenance.members.find((member) => member.role === 'audio').path
+      : LISTENING_AUDIO_PATHS.playback
+    const waveform = readListeningWaveform(resolveReviewFile(store.revisionDirectory(match[1]), LISTENING_WAVEFORM_FILE),
+      playback.sha256, playback.durationSeconds)
     context.sendJson(response, 200, { ...projection.consumption, listeningAudio: {
       relativePath: 'listening/playback.mp3', sha256: playback.sha256, byteLength: playback.byteLength,
-      durationSeconds: audio.durationSeconds, mediaType: 'audio/mpeg',
-      url: `/api/import-review-preview/revisions/${encodeURIComponent(match[1])}/files?path=${encodeURIComponent(playback.path)}`,
-      segments: canMap ? transcript.map((segment, index) => ({
-        segmentId: segment.segmentId,
-        questionNumbers: segment.questionNumbers,
-        firstQuestionId: `question:listening:${Math.min(...segment.questionNumbers)}`,
-        startSeconds: audio.candidates[index].startSeconds,
-        endSeconds: audio.candidates[index].endSeconds,
-      })) : [],
+      durationSeconds: playback.durationSeconds, mediaType: 'audio/mpeg',
+      url: `/api/import-review-preview/revisions/${encodeURIComponent(match[1])}/files?path=${encodeURIComponent(playbackPath)}`,
+      ...(waveform ? { waveform } : {}),
+      segments: listeningPlaybackSegments(projection.materialization.listening, projection.listeningAudioEvidence?.segments),
     } })
   })))
 
@@ -978,6 +978,14 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireReviewer(response, context)) return
     const { projection } = candidateProjectionForRevision(store, match[1])
+    if (url.searchParams.has('edition')) {
+      if (url.searchParams.has('version') || url.searchParams.has('pageLayout')) {
+        throw reviewError('IMPORT_REVIEW_EDITION_INVALID', 'edition 不与旧 version/pageLayout 混用', 400)
+      }
+      const rendered = await renderReviewPdfProduct(projection, url.searchParams.get('edition'), buildPrintHtml)
+      sendHtml(response, rendered.paginatedHtml)
+      return
+    }
     const pageLayout = url.searchParams.get('pageLayout') || 'natural'
     if (pageLayout === 'natural') {
       sendHtml(response, reviewPrintHtml(projection, url.searchParams.get('version'), buildPrintHtml))
@@ -998,6 +1006,21 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireReviewer(response, context)) return
     const { projection } = candidateProjectionForRevision(store, match[1])
+    if (url.searchParams.has('edition')) {
+      if (url.searchParams.has('version') || url.searchParams.has('pageLayout')) {
+        throw reviewError('IMPORT_REVIEW_EDITION_INVALID', 'edition 不与旧 version/pageLayout 混用', 400)
+      }
+      const edition = requirePaperPdfEdition(url.searchParams.get('edition'))
+      const rendered = await renderReviewPdfProduct(projection, edition, buildPrintHtml)
+      const title = projection.paperName.replace(/[\\/:*?"<>|]/g, '-')
+      sendBinary(response, rendered.pdfBytes, 'application/pdf', `${title}-${PAPER_PDF_PRODUCTS[edition]}.pdf`, 'inline', {
+        'x-eqb-pagination-edition': edition,
+        'x-eqb-pagination-mode': rendered.mode,
+        'x-eqb-pagination-pages': String(rendered.pageCount),
+        'x-eqb-source-references-digest': edition === 'answerOnly' ? projection.sourceReferencesDigest : '',
+      })
+      return
+    }
     const version = url.searchParams.get('version')
     const pageLayout = url.searchParams.get('pageLayout') || 'natural'
     if (pageLayout !== 'natural') {

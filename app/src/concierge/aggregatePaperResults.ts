@@ -80,6 +80,7 @@ export type PaperResult = {
   /** "2025 浙江一模" / "26.3 广东深圳高三一模英语试卷" — for the row title. */
   paperName: string
   year: number | null
+  month?: number | null
   region: string
   source: string
   sourceType: SourceType | null
@@ -148,7 +149,7 @@ function buildKey(group: QuestionGroupCard): { key: string; isFallback: boolean 
   const sigSource = normalizeSourceSignature(group.source) || '∅'
   const sigType = trim(group.sourceType) || '∅'
   return {
-    key: `paper:${paperName}__${group.year}__${region}__${sigSource}__${sigType}`,
+    key: `paper:${paperName}__${group.year}__${region}__${sigSource}__${sigType}${group.month ? `__month:${group.month}` : ''}`,
     isFallback: false,
   }
 }
@@ -164,6 +165,7 @@ export function aggregatePaperResults(hits: ConciergeSearchHit[]): PaperResult[]
         key,
         paperName: isFallback ? '其他来源' : trim(group.paperName),
         year: isFallback ? null : (Number.isFinite(group.year) ? group.year : null),
+        month: isFallback ? null : (group.month ?? null),
         region: isFallback ? '' : trim(group.region),
         source: isFallback ? '' : trim(group.source),
         sourceType: isFallback ? null : (group.sourceType || null),
