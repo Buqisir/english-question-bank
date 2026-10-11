@@ -247,8 +247,11 @@ try {
   const paperAssetRoot = join(fixtureDir, 'paper-assets')
   const userSpaceRoot = join(fixtureDir, 'user-space')
   const importOpsRoot = join(fixtureDir, 'import-ops-files')
+  const blobRoot = join(fixtureDir, 'private-blobs')
   mkdirSync(importOpsRoot, { recursive: true })
   writeFileSync(join(importOpsRoot, 'revision.bin'), 'review fixture')
+  mkdirSync(blobRoot)
+  writeFileSync(join(blobRoot, 'blob.bin'), 'immutable object fixture')
 
   const seed = spawnSync('sqlite3', [fixtureDb, 'CREATE TABLE t(x); INSERT INTO t VALUES(1);'], { encoding: 'utf8' })
   assert(seed.status === 0, `fixture sqlite db created for VA6 (${seed.stderr ? seed.stderr.trim() : 'ok'})`)
@@ -267,6 +270,8 @@ try {
         QUESTION_BANK_USER_SPACE_ROOT: userSpaceRoot,
         QUESTION_BANK_IMPORT_OPS_DB: fixtureDb,
         QUESTION_BANK_IMPORT_OPS_ROOT: importOpsRoot,
+        QUESTION_BANK_BLOB_ROOT: blobRoot,
+        QUESTION_BANK_FILE_STORE: 'local',
         EQB_SNAPSHOT_DIR: snapshotDir,
       },
     },
@@ -275,6 +280,8 @@ try {
     run.status === 0,
     `backup-to-r2.sh --dry-run exits 0 against temp fixture (no rclone required)${run.status !== 0 ? ' — stderr: ' + (run.stderr || '').trim() : ''}`,
   )
+  assert(run.stdout.includes(`${blobRoot}/ (private immutable blobs)`),
+    'backup inventory includes the immutable files referenced by Review and publication')
 
   const snapPath = join(snapshotDir, 'question-bank.sqlite')
   const importOpsSnapPath = join(snapshotDir, 'import-ops.sqlite')

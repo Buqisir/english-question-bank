@@ -44,7 +44,9 @@ function seed(paperId, suffix, state = 'approved') {
   const db = new DatabaseSync(dbPath)
   const now = new Date().toISOString()
   paperByRevision.set(revisionId, paperId)
-  db.prepare('INSERT INTO import_review_papers VALUES (?, ?, ?, ?, ?)').run(paperId, paperId, revisionId, now, now)
+  db.prepare(`INSERT INTO import_review_papers
+    (paper_id, paper_name, latest_revision_id, created_at, updated_at)
+    VALUES (?, ?, ?, ?, ?)`).run(paperId, paperId, revisionId, now, now)
   db.prepare(`INSERT INTO import_review_revisions
     (id,paper_id,revision_number,state,source_digest,candidate_digest,visible_structure_digest,bundle_digest,producer_build_id,renderer_build_id,manifest_json,approval_receipt_json,created_at,finalized_at,updated_at)
     VALUES (?, ?, 1, ?, ?, ?, ?, ?, 'producer', ?, ?, ?, ?, ?, ?)`)

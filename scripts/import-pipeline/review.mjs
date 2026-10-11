@@ -1,14 +1,17 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process'
-import { randomBytes, randomUUID } from 'node:crypto'
+import { createHash, randomBytes, randomUUID } from 'node:crypto'
 import {
   chmodSync,
+  createReadStream,
   existsSync,
+  lstatSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
   readdirSync,
+  realpathSync,
   renameSync,
   rmSync,
   writeFileSync,
@@ -231,7 +234,7 @@ async function uploadReviewBundle(paperDir, manifest) {
   )
 }
 
-function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId()) {
+function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId(), approvedBaseRevisionId) {
   const initializationPath = path.join(paperDir, 'signals', 'source-intake-initialization.json')
   const initialization = existsSync(initializationPath)
     ? JSON.parse(readFileSync(initializationPath, 'utf8'))
@@ -239,14 +242,26 @@ function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = p
   if (initialization && initialization.paperId !== projection.paperId) {
     fail('Source-intake initialization receipt paperId does not match the Review workspace')
   }
+  const restorePath = path.join(paperDir, 'signals', 'review-restore.json')
+  const restore = existsSync(restorePath) ? requiredJson(restorePath, 'Review restore binding') : null
+  if (restore && (restore.schemaVersion !== 'review-restore-v1'
+    || restore.paperId !== projection.paperId || restore.origin !== origin()
+    || !/^rev-[a-zA-Z0-9-]+$/.test(restore.revisionId || '')
+    || !/^sha256:[a-f0-9]{64}$/.test(restore.bundleDigest || '')
+    || (initialization?.baseRevisionId && initialization.baseRevisionId !== restore.revisionId))) {
+    fail('Review restore origin, paper, or base revision differs; reconcile before submitting a repair')
+  }
+  const expectedBaseRevisionId = approvedBaseRevisionId === undefined
+    ? restore?.revisionId || initialization?.baseRevisionId
+    : approvedBaseRevisionId
   const manifest = {
     schemaVersion: projection.importProfile
       ? (projection.ocrCorrectionReport ? 'web-import-review-bundle-v3' : 'web-import-review-bundle-v2')
       : 'web-import-review-bundle-v1',
     paperId: projection.paperId,
     paperName: projection.paperName,
-    ...(initialization?.baseRevisionId
-      ? { expectedBaseRevisionId: initialization.baseRevisionId }
+    ...(expectedBaseRevisionId
+      ? { expectedBaseRevisionId }
       : {}),
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
@@ -275,6 +290,18 @@ function resolvedIssueIds() {
     .split(',')
     .map((value) => value.trim())
     .filter(Boolean)
+}
+
+async function linkThread(paperId) {
+  const threadId = option('--thread')
+  const expectedThreadId = option('--from') || null
+  const valid = value => /^T-[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(value || '')
+  if (!valid(threadId) || (expectedThreadId !== null && !valid(expectedThreadId))
+    || (process.argv.includes('--from') && !expectedThreadId)) fail('link-thread requires --thread T-id and optional --from T-id')
+  console.log(JSON.stringify(await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/discussion-thread`, {
+    method: 'PUT', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ threadId, expectedThreadId }),
+  }), null, 2))
 }
 
 async function pushRevision(paperId) {
@@ -503,10 +530,17 @@ async function paginationQa(paperId) {
 async function hydrate(paperId) {
   const paperDir = paperDirectory(paperId)
   if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperId}`)
+  const requestedRevisionId = option('--revision')
+  if (process.argv.includes('--revision')
+    && (!requestedRevisionId || requestedRevisionId.startsWith('--'))) {
+    fail('hydrate --revision requires an exact revision id')
+  }
   const status = await api(
     `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
   )
-  const revision = status.latest
+  const revision = requestedRevisionId && requestedRevisionId !== status.latest?.id
+    ? status.revisions?.find((item) => item.id === requestedRevisionId)
+    : status.latest
   if (
     revision?.paperId !== paperId
     || revision.reviewKind !== 'candidate'
@@ -514,12 +548,15 @@ async function hydrate(paperId) {
     || !revision.finalizedAt
     || !revision.manifest
     || revision.manifest.paperId !== paperId
-  ) fail(`${paperId} has no finalized Candidate revision to hydrate`)
+  ) fail(`${paperId} has no finalized Candidate revision to hydrate${requestedRevisionId ? `: ${requestedRevisionId}` : ''}`)
+  // status.files belongs only to latest. Historical files are checked against
+  // their own immutable manifest below, never the current revision's inventory.
   if (
     revision.manifest.bundleDigest !== revision.bundleDigest
     || reviewBundleDigest(revision.manifest) !== revision.bundleDigest
-    || !exactFileDescriptors(revision.manifest.files, status.files || [])
-  ) fail('Latest Review revision manifest, file inventory, or bundleDigest does not close')
+    || (revision.id === status.latest?.id
+      && !exactFileDescriptors(revision.manifest.files, status.files || []))
+  ) fail('Selected Review revision manifest, file inventory, or bundleDigest does not close')
 
   mkdirSync(papersRoot, { recursive: true })
   const temporary = mkdtempSync(path.join(papersRoot, '.hydrate-'))
@@ -558,6 +595,37 @@ async function hydrate(paperId) {
         fail(`Hydrated Review ${key} does not match its finalized manifest`)
       }
     }
+    const report = projection.ocrCorrectionReport
+    if (report) {
+      if (digestJson(report) !== revision.manifest.ocrCorrectionReportDigest) {
+        fail('Hydrated OCR correction report does not match its finalized manifest')
+      }
+      const { receipt } = await api(
+        `/api/import-agent-reviews/revisions/${encodeURIComponent(report.ocrRevisionId)}/ocr-confirmation`,
+      )
+      if (receipt?.schemaVersion !== 'web-import-ocr-review-confirmation-v1'
+        || receipt.paperId !== paperId
+        || receipt.revisionId !== report.ocrRevisionId
+        || receipt.confirmationId !== report.ocrConfirmationId
+        || receipt.reviewerKind !== 'import_agent'
+        || receipt.sourceSetDigest !== report.originalSourceSetDigest
+        || receipt.evidenceDigest !== report.ocrEvidenceDigest
+        || receipt.correctionReport?.sourceSetDigest !== report.originalSourceSetDigest
+        || !receipt.confirmation) {
+        fail('Hydrated OCR receipt does not match the exact historical correction binding')
+      }
+      // Recover server-held evidence, never recreate an approval or transfer
+      // the previous worker's source-intake lease. This is outside the bundle.
+      const receiptPath = path.join(temporary, 'signals', 'agent-proofreading-receipt.json')
+      mkdirSync(path.dirname(receiptPath), { recursive: true })
+      writeFileSync(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx', mode: 0o600 })
+    }
+    const restorePath = path.join(temporary, 'signals', 'review-restore.json')
+    mkdirSync(path.dirname(restorePath), { recursive: true })
+    writeFileSync(restorePath, `${JSON.stringify({
+      schemaVersion: 'review-restore-v1', paperId, origin: origin(),
+      revisionId: revision.id, bundleDigest: revision.bundleDigest,
+    }, null, 2)}\n`, { flag: 'wx', mode: 0o600 })
     renameSync(temporary, paperDir)
   } catch (error) {
     rmSync(temporary, { recursive: true, force: true })
@@ -569,6 +637,59 @@ async function hydrate(paperId) {
     bundleDigest: revision.bundleDigest,
     files: revision.manifest.files.length,
     state: 'hydrated',
+  }, null, 2))
+}
+
+async function cleanupPlan(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const revisionId = option('--revision')
+  if (!/^rev-[a-f0-9-]{36}$/.test(revisionId || '')) fail('cleanup-plan requires --revision with an exact finalized Candidate')
+  if (!existsSync(paperDir) || lstatSync(paperDir).isSymbolicLink()
+    || realpathSync(paperDir) !== path.join(realpathSync(papersRoot), paperId)) {
+    fail('Cleanup inventory requires an existing non-symlink paper workspace')
+  }
+  const status = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`)
+  const revision = status.revisions?.find(item => item.id === revisionId) || (status.latest?.id === revisionId ? status.latest : null)
+  if (!revision || revision.paperId !== paperId || revision.reviewKind !== 'candidate'
+    || revision.state === 'uploading' || !revision.finalizedAt || !revision.manifest
+    || revision.manifest.paperId !== paperId || reviewBundleDigest(revision.manifest) !== revision.bundleDigest) {
+    fail('Cleanup inventory requires an exact finalized Candidate with a closed manifest')
+  }
+  const tracked = new Set(execFileSync('git', ['ls-files', '-z', '--', path.relative(root, paperDir)],
+    { cwd: root, encoding: 'utf8' }).split('\0').filter(Boolean).map(file => path.resolve(root, file)))
+  const manifest = new Map(revision.manifest.files.map(file => [file.path, file]))
+  const files = []
+  async function inspect(directory) {
+    for (const name of readdirSync(directory).sort()) {
+      const filePath = path.join(directory, name)
+      const info = lstatSync(filePath)
+      const relative = path.relative(paperDir, filePath).split(path.sep).join('/')
+      if (info.isDirectory()) { await inspect(filePath); continue }
+      if (!info.isFile()) { files.push({ path: relative, preserve: 'symlink_or_special_file' }); continue }
+      const hash = createHash('sha256')
+      for await (const chunk of createReadStream(filePath)) hash.update(chunk)
+      const digest = `sha256:${hash.digest('hex')}`
+      const expected = manifest.get(relative)
+      const after = lstatSync(filePath)
+      const changed = info.ino !== after.ino || info.size !== after.size || info.mtimeMs !== after.mtimeMs
+      files.push({ path: relative, byteLength: info.size, sha256: digest,
+        allocatedBytes: info.blocks * 512, linkCount: info.nlink,
+        preserve: tracked.has(filePath) ? 'git_tracked' : changed ? 'changed_during_inventory'
+          : !expected ? 'outside_remote_manifest'
+            : expected.sha256 !== digest || expected.byteLength !== info.size ? 'differs_from_remote_manifest' : null })
+    }
+  }
+  await inspect(paperDir)
+  console.log(JSON.stringify({
+    schemaVersion: 'paper-local-cleanup-plan-v1', paperId, revisionId, bundleDigest: revision.bundleDigest,
+    origin: origin(), directory: paperDir, mode: 'inspection_only', eligibleForDeletion: false,
+    blockers: ['remote_bytes_and_product_reads_not_verified', 'independent_backup_and_restore_not_proven',
+      'task_ownership_and_safe_stop_not_confirmed', 'bounded_deletion_not_authorized',
+      ...(files.some(file => file.preserve) ? ['preserved_local_files_require_reconciliation'] : []),
+      ...(status.revisions?.some(item => item.state === 'uploading') ? ['uploading_revision_requires_reconciliation'] : [])],
+    matchingUntrackedBytes: files.filter(file => !file.preserve).reduce((sum, file) => sum + file.byteLength, 0),
+    // Shared inodes and APFS clones mean logical lengths are not reclaimable space.
+    reclaimableBytes: null, files,
   }, null, 2))
 }
 
@@ -990,8 +1111,9 @@ async function approvedLocalReview(paperId) {
   const localManifest = reviewManifest(
     paperDir,
     projection,
-    [],
+    status.latest.manifest.resolvesIssueIds || [],
     approval.producerBuildId,
+    status.latest.manifest.expectedBaseRevisionId || null,
   )
   if (
     !exactFileDescriptors(localManifest.files, status.latest.manifest.files)
@@ -1372,6 +1494,8 @@ async function main() {
   }
   else if (command === 'pagination-qa') await paginationQa(paperId)
   else if (command === 'hydrate') await hydrate(paperId)
+  else if (command === 'link-thread') await linkThread(paperId)
+  else if (command === 'cleanup-plan') await cleanupPlan(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
   else if (command === 'proofread-ocr') await proofreadOcr(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
@@ -1397,7 +1521,9 @@ async function main() {
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
       + 'prepare-listening-waveform <paperId> (local derivative only; no approval or publication) | '
-      + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b (requires saved layout)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> | '
+      + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b (requires saved layout)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
+      + 'cleanup-plan <paperId> --revision rev-id (inspection only; never deletes or certifies eligibility) | '
+      + 'link-thread <paperId> --thread T-id [--from T-id] (explicit discussion handoff only) | '
       + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | '
       + 'finalize-ocr-correction-report <paperId> --input <entries.json> | '
       + 'prepare-spelling <paperId> --output <request.json> | finalize-spelling <paperId> --input <review.json> | verify-spelling <paperId> | '

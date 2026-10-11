@@ -229,6 +229,11 @@ try {
         },
         projection,
       }),
+      verifiedFileForRead: () => ({
+        file: { path: 'questions.pdf', mediaType: 'application/pdf',
+          byteLength: sourceBytes.byteLength, sha256: sourceDigest },
+        filePath: path.join(tempRoot, 'questions.pdf'),
+      }),
       revisionDirectory: () => tempRoot,
     }),
     agentToken,

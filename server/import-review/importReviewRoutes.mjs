@@ -13,15 +13,13 @@ import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { sendListeningAudioFile } from '../paper-import/paperAssetStatic.mjs'
-import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
-import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
-import { LISTENING_AUDIO_PATHS, listeningPlaybackSegments } from '../paper-import/listeningAudioEvidence.mjs'
 import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
+import { frozenProductResult, PRODUCT_MANIFEST } from '../paper-import/frozenProducts.mjs'
+import { SOURCE_REFERENCES_FILE } from '../paper-import/sourceReferences.mjs'
 import { resolveReviewFile } from './revisionProjection.mjs'
 import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 import {
   renderReviewFixedEdition,
-  renderReviewPdfProduct,
   reviewPaginationMetadata,
   reviewPrintHtml,
 } from './reviewPagination.mjs'
@@ -146,6 +144,26 @@ function candidateProjectionForRevision(store, revisionId) {
   return result
 }
 
+function frozenProductForRevision(store, revisionId, edition) {
+  requirePaperPdfEdition(edition)
+  const { revision, filePath: manifestPath } = store.verifiedFileForRead(revisionId, PRODUCT_MANIFEST)
+  if (revision.reviewKind !== 'candidate') {
+    throw reviewError('IMPORT_REVIEW_CANDIDATE_REQUIRED', 'A finalized Candidate is required', 409)
+  }
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
+  const relativePath = `products/${edition}.pdf`
+  const { file, filePath } = store.verifiedFileForRead(revisionId, relativePath)
+  const expected = manifest.files.find(file => file.path === relativePath)
+  if (expected?.sha256 !== file.sha256 || expected?.byteLength !== file.byteLength) {
+    throw reviewError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Frozen product differs from its revision', 409)
+  }
+  return { revision,
+    sourceReferencesDigest: revision.manifest.files.find(file => file.path === SOURCE_REFERENCES_FILE)?.sha256 || '',
+    rendered: frozenProductResult({
+    manifest, bytes: { [relativePath]: readFileSync(filePath) },
+  }, edition) }
+}
+
 function companionAnalyses(sidecars = {}) {
   return {
     reading: sidecars['reading-choice-analysis-v1.json'] || null,
@@ -225,6 +243,7 @@ export function publicPaperReviewDetail(store, paperId) {
 
 export function createImportReviewRoutes({
   getStore,
+  getBlobStore = null,
   agentToken,
   shipToken,
   buildPrintHtml,
@@ -433,6 +452,17 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     ))
   })))
 
+  routes.push(defineRoute('PUT', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/discussion-thread$/, route(async ({
+    request, response, context, match,
+  }) => {
+    if (!agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    const input = await context.readJsonBody(request, { maxBytes: 1000 })
+    context.sendJson(response, 200, store.linkDiscussionThread(decodeURIComponent(match[1]), input))
+  })))
+
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/revisions$/, route(async ({
     request,
     response,
@@ -464,7 +494,13 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       context.sendJson(response, 200, store.uploadStatus(revisionId))
       return
     }
-    const received = await receiveVerifiedUpload(request, upload.destination, upload.file)
+    const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
+    const blobStore = largeAsset ? getBlobStore?.() : null
+    const received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
+      validateTemporaryFile: blobStore?.adoptLocalFile
+        ? (temporary, expected) => blobStore.adoptLocalFile(temporary, expected)
+        : null,
+    })
     context.sendJson(
       response,
       200,
@@ -513,7 +549,8 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     if (
       !revision
       || revision.reviewKind !== 'ocr'
-      || revision.state !== 'approved'
+      || !['approved', 'superseded'].includes(revision.state)
+      || !revision.finalizedAt
       || revision.approval?.schemaVersion !== 'web-import-ocr-review-confirmation-v1'
     ) {
       throw reviewError(
@@ -598,6 +635,20 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       paperAsset: projection.paperAsset,
       analyses: companionAnalyses(projection.analysisSidecars),
     }))
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/product-review$/, route(({
+    response, context, match, url,
+  }) => {
+    if (!requireOwner(response, context)) return
+    const { paperId, latest, discussionThreadId } = store.paperDetail(
+      decodeURIComponent(match[1]), { includeProjection: false },
+    )
+    const published = url.searchParams.has('publicationDigest') ? store.publishedReview(paperId, {
+      publicationDigest: url.searchParams.get('publicationDigest'),
+      sourceAssetVersion: Number(url.searchParams.get('sourceAssetVersion')),
+    }) : null
+    context.sendJson(response, 200, { paperId, latest: latest ? { id: latest.id } : null, discussionThreadId, published })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/issues$/, route(async ({
@@ -701,24 +752,8 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = candidateProjectionForRevision(store, match[1])
-    const playback = projection.sourceInput.listeningAudio || projection.analyzedPackage?.listeningAudio
-    if (!playback) {
-      context.sendJson(response, 200, projection.consumption)
-      return
-    }
-    const playbackPath = projection.analyzedPackage
-      ? projection.sourceProvenance.members.find((member) => member.role === 'audio').path
-      : LISTENING_AUDIO_PATHS.playback
-    const waveform = readListeningWaveform(resolveReviewFile(store.revisionDirectory(match[1]), LISTENING_WAVEFORM_FILE),
-      playback.sha256, playback.durationSeconds)
-    context.sendJson(response, 200, { ...projection.consumption, listeningAudio: {
-      relativePath: 'listening/playback.mp3', sha256: playback.sha256, byteLength: playback.byteLength,
-      durationSeconds: playback.durationSeconds, mediaType: 'audio/mpeg',
-      url: `/api/import-review-preview/revisions/${encodeURIComponent(match[1])}/files?path=${encodeURIComponent(playbackPath)}`,
-      ...(waveform ? { waveform } : {}),
-      segments: listeningPlaybackSegments(projection.materialization.listening, projection.listeningAudioEvidence?.segments),
-    } })
+    const { preview } = store.productPreviewForRevision(match[1])
+    context.sendJson(response, 200, preview.consumption)
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/media\/([^/]+)\/(source|candidate)$/, route(({
@@ -944,14 +979,14 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = candidateProjectionForRevision(store, match[1])
+    const { preview } = store.productPreviewForRevision(match[1])
     if (match[2] === 'paper-asset.json') {
-      context.sendJson(response, 200, projection.paperAsset)
+      context.sendJson(response, 200, preview.paperAsset)
       return
     }
     const sidecarMatch = /^analyses\/([^/]+\.json)$/.exec(match[2])
     const sidecar = sidecarMatch
-      ? projection.analysisSidecars?.[sidecarMatch[1]]
+      ? preview.analysisSidecars?.[sidecarMatch[1]]
       : null
     if (!sidecar) {
       context.sendJson(response, 404, { error: 'Review asset not found' })
@@ -977,15 +1012,15 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = candidateProjectionForRevision(store, match[1])
     if (url.searchParams.has('edition')) {
       if (url.searchParams.has('version') || url.searchParams.has('pageLayout')) {
         throw reviewError('IMPORT_REVIEW_EDITION_INVALID', 'edition 不与旧 version/pageLayout 混用', 400)
       }
-      const rendered = await renderReviewPdfProduct(projection, url.searchParams.get('edition'), buildPrintHtml)
+      const { rendered } = frozenProductForRevision(store, match[1], url.searchParams.get('edition'))
       sendHtml(response, rendered.paginatedHtml)
       return
     }
+    const { projection } = candidateProjectionForRevision(store, match[1])
     const pageLayout = url.searchParams.get('pageLayout') || 'natural'
     if (pageLayout === 'natural') {
       sendHtml(response, reviewPrintHtml(projection, url.searchParams.get('version'), buildPrintHtml))
@@ -1005,22 +1040,22 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = candidateProjectionForRevision(store, match[1])
     if (url.searchParams.has('edition')) {
       if (url.searchParams.has('version') || url.searchParams.has('pageLayout')) {
         throw reviewError('IMPORT_REVIEW_EDITION_INVALID', 'edition 不与旧 version/pageLayout 混用', 400)
       }
       const edition = requirePaperPdfEdition(url.searchParams.get('edition'))
-      const rendered = await renderReviewPdfProduct(projection, edition, buildPrintHtml)
-      const title = projection.paperName.replace(/[\\/:*?"<>|]/g, '-')
+      const { revision, sourceReferencesDigest, rendered } = frozenProductForRevision(store, match[1], edition)
+      const title = revision.manifest.paperName.replace(/[\\/:*?"<>|]/g, '-')
       sendBinary(response, rendered.pdfBytes, 'application/pdf', `${title}-${PAPER_PDF_PRODUCTS[edition]}.pdf`, 'inline', {
         'x-eqb-pagination-edition': edition,
         'x-eqb-pagination-mode': rendered.mode,
         'x-eqb-pagination-pages': String(rendered.pageCount),
-        'x-eqb-source-references-digest': edition === 'answerOnly' ? projection.sourceReferencesDigest : '',
+        'x-eqb-source-references-digest': edition === 'answerOnly' ? sourceReferencesDigest : '',
       })
       return
     }
+    const { projection } = candidateProjectionForRevision(store, match[1])
     const version = url.searchParams.get('version')
     const pageLayout = url.searchParams.get('pageLayout') || 'natural'
     if (pageLayout !== 'natural') {
@@ -1062,17 +1097,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       return
     }
     const relativePath = url.searchParams.get('path') || ''
-    const { revision } = store.projectionForRevision(match[1])
-    const file = revision?.manifest?.files?.find((candidate) => candidate.path === relativePath)
-    if (!revision || !file) {
-      context.sendJson(response, 404, { error: 'Review file not found' })
-      return
-    }
-    const filePath = resolveReviewFile(store.revisionDirectory(match[1]), relativePath)
-    if (!existsSync(filePath)) {
-      context.sendJson(response, 404, { error: 'Review file not found' })
-      return
-    }
+    const { file, filePath } = store.verifiedFileForRead(match[1], relativePath)
     if (file.role === 'listening_audio_playback' && file.mediaType === 'audio/mpeg') {
       sendListeningAudioFile(request, response, filePath, { cacheControl: 'private, no-store' })
       return

@@ -61,6 +61,8 @@ import { BoardList, PaperDownload, Plus, Presentation, RefreshCw, Scissors } fro
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
+import { PaperReviewControls } from './PaperReviewControls'
+import { useIsOwnerView } from '../../auth/AuthGate'
 import { firstListeningSectionRange } from '../../../../shared/paper-canonical/listeningWaveform.mjs'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
@@ -718,6 +720,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 }
 
 function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
+  const isOwnerView = useIsOwnerView()
   const {
     paperId,
     reviewRevision,
@@ -964,11 +967,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
     async function load(): Promise<void> {
       try {
+        const canonicalConsumption = await loadScreenConsumption(paperId, fetch, reviewRevision)
+        const publishedVersion = !reviewRevision && Number.isSafeInteger(canonicalConsumption.sourceAssetVersion)
+          && Number(canonicalConsumption.sourceAssetVersion) > 0 ? canonicalConsumption.sourceAssetVersion : null
         let resolvedBase = reviewRevision
           ? `/api/import-review-preview/revisions/${encodeURIComponent(reviewRevision)}/asset`
-          : `/paper-assets/${paperId}/latest`
+          : publishedVersion ? `/paper-assets/${paperId}/versions/v${publishedVersion}` : `/paper-assets/${paperId}/latest`
         let assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
-        if (!assetRes.ok && !reviewRevision) {
+        if (!assetRes.ok && !reviewRevision && !publishedVersion) {
           resolvedBase = `/paper-assets/${paperId}`
           assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
         }
@@ -976,11 +982,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
         }
         const sourceAsset = (await assetRes.json()) as PaperAssetV1
-        const canonicalConsumption = await loadScreenConsumption(
-          paperId,
-          fetch,
-          reviewRevision,
-        )
         const loadedAsset = projectAssetBlocksToCanonicalConsumption(
           sourceAsset,
           canonicalConsumption,
@@ -4078,13 +4079,22 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       && asset.content.groups[block.groupId]?.groupType === 'listening',
   )
   return (
-    <div className={`paper-browse-page${reviewRevision ? ' paper-browse-page--review' : ''}`}>
+    <div className={`paper-browse-page${reviewRevision || isOwnerView ? ' paper-browse-page--review' : ''}`}>
       <AppTopbar
         {...shellNav}
         pageTitle={displayTitle}
         onBack={onBackToWorkbench}
         actionsSlot={topbarActionsSlot}
       />
+      {(reviewRevision || (isOwnerView && canonicalConsumption?.publicationDigest && canonicalConsumption.sourceAssetVersion)) && <PaperReviewControls
+        key={`${paperId}:${reviewRevision || canonicalConsumption?.publicationDigest}`}
+        paperId={paperId}
+        paperName={displayTitle}
+        revisionId={reviewRevision || undefined}
+        publication={!reviewRevision && canonicalConsumption?.publicationDigest && canonicalConsumption.sourceAssetVersion
+          ? { publicationDigest: canonicalConsumption.publicationDigest, sourceAssetVersion: canonicalConsumption.sourceAssetVersion }
+          : undefined}
+      />}
       {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
       <div
         className={`paper-browse-shell${
@@ -4097,7 +4107,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <h1 id="paper-browse-title" className="visually-hidden">{displayTitle}</h1>
         <nav
           className={`paper-browse-rail${
-            railVerticallyCentered ? ' paper-browse-rail--centered' : ''
+            railVerticallyCentered && !reviewRevision ? ' paper-browse-rail--centered' : ''
           }`}
           ref={railNavRef}
           aria-label="目录"
