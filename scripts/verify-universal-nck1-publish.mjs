@@ -865,7 +865,7 @@ function makeContext(label, options = {}) {
     assert.equal(replayed.candidateDigest, previous.candidate.candidateDigest)
     assert.equal(replayed.consumption.authorityRef.manifestVersion, '58')
     assert.equal(replayed.consumption.consumerContractRef.version, '45')
-    assert.equal(current.consumption.authorityRef.manifestVersion, '59')
+    assert.equal(current.consumption.authorityRef.manifestVersion, '61')
     assert.equal(current.consumption.consumerContractRef.version, '45')
     const readingId = replayed.consumption.selections
       .find((selection) => selection.familyContractId === 'reading').groupIds[0]

@@ -75,7 +75,7 @@ function assertPromptContract() {
   assert('prompt names schemaVersion grammar-fill-analysis-v2', prompt.includes('grammar-fill-analysis-v2'))
   // promptVersion
   assert('prompt names promptVersion grammar-fill-analysis-v2', prompt.includes('promptVersion') || prompt.includes('grammar-fill-analysis-v2'))
-  // All 22 leaf facet keys must be named (D1: 17 v1 leaves -> 22 v2 leaves)
+  // All 23 leaf facet keys must be named, including same-POS adjective negation.
   for (const leaf of [
     'grammar-fill.given.verb.finite',
     'grammar-fill.given.verb.non-finite',
@@ -84,6 +84,7 @@ function assertPromptContract() {
     'grammar-fill.given.conversion.noun-to-verb',
     'grammar-fill.given.conversion.adjective-to-adverb',
     'grammar-fill.given.conversion.adjective-to-noun',
+    'grammar-fill.given.conversion.adjective-to-adjective',
     'grammar-fill.given.conversion.verb-to-adjective',
     'grammar-fill.given.conversion.verb-to-noun',
     'grammar-fill.given.conversion.verb-to-adverb',
@@ -134,7 +135,7 @@ function assertRegistryContract() {
   const raw = readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json')
   const registry = JSON.parse(raw)
   assert('registry is an array', Array.isArray(registry))
-  assert('registry has exactly 22 leaves', registry.length === 22)
+  assert('registry has exactly 23 leaves', registry.length === 23)
 
   const EXPECTED_LEAVES = [
     'grammar-fill.given.verb.finite',
@@ -144,6 +145,7 @@ function assertRegistryContract() {
     'grammar-fill.given.conversion.noun-to-verb',
     'grammar-fill.given.conversion.adjective-to-adverb',
     'grammar-fill.given.conversion.adjective-to-noun',
+    'grammar-fill.given.conversion.adjective-to-adjective',
     'grammar-fill.given.conversion.verb-to-adjective',
     'grammar-fill.given.conversion.verb-to-noun',
     'grammar-fill.given.conversion.verb-to-adverb',
@@ -180,9 +182,9 @@ function assertRegistryContract() {
   }
 
   const similarityRegistry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-similarity-v1.json'))
-  assert('similarity registry has exactly 22 facet entries', similarityRegistry.length === 22)
+  assert('similarity registry has exactly 23 facet entries', similarityRegistry.length === 23)
   assert(
-    'similarity registry covers the same 22 facet keys',
+    'similarity registry covers the same 23 facet keys',
     JSON.stringify(similarityRegistry.map((entry) => entry.facet_key).sort())
       === JSON.stringify(EXPECTED_LEAVES.sort()),
   )

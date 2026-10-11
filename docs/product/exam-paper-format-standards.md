@@ -195,7 +195,7 @@ Print/PDF不继承Screen放大，以A4为页面基准；金样裁切JPEG
 
 ### 规则 → 实现 → 验收
 
-当前 raw-source 新候选使用 v59 / Normalization Rules v6 的
+当前 raw-source 新候选使用 v61 / Normalization Rules v6 的
 `canonical-visible-typography@3`：只在独立英文词后识别中文释义，允许释义含
 省略号及常见中文标点。全角/半角输入统一为半角括号；括号内缘不加空格，
 与前方英文词、后方英文词或数字各隔一个半角空格；后接 `.,;:!?` 不留空格，
@@ -215,6 +215,15 @@ Canonical 文本节点 `marks`，Screen/PDF 共同消费；不按题号或单词
 精确映射；跨不同标记边界的改写、拆分后会改变文本归一化的情况明确阻断，
 不得悄悄丢标记或改题文。此路径不覆盖题干、选项、表格单元、写作或 PDF/OCR
 来源；这些来源的指代标记如无法保真，仍需报告，不从题干反推补线。
+
+v61 / `rich-content-v3` 在此基础上保留 PDF/页图 OCR 阅读正文及题干中的
+源生粗体、下划线。Agent 对照原页确认后，在 OCR confirmation v2 的
+`orderedItems[].sourceEmphasis` 记录原文本 UTF-16 `{start,end,marks}`；
+`marks` 只允许 `bold`、`underline` 或按此顺序的两者。区间非空、顺序不重叠，
+证据及确认字节随 Candidate/Review 保存并绑定摘要；adapter 重验源页与精确
+locator，再按校对编辑映射标记。题号与选项不属于题干标记范围；未匹配或
+不支持的标记明确阻断。Materialization 不接受任意样式，不能按题意猜补。
+Screen 与 PDF 仍消费同一组 Canonical marks；v58/v59 已审卷保留原版本重放。
 
 回归入口为 `verify-paper-canonical-nck1-materialization-candidate.mjs`；
 除规则、幂等性、独立重放与历史对照外，实际产物只验收 Screen 和所需 PDF 版本。

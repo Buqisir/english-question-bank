@@ -1,6 +1,6 @@
 /**
  * Grammar-fill facet labels. Personal teaching frameworks are retired.
- * Keys and labels retain the established 22-facet classification; the registry
+ * Keys and labels retain the 23-facet classification; the registry
  * name remains compatible with existing consumers and drift checks.
  */
 export const FACET_FRAMEWORKS: Record<string, { labelZh: string }> = {
@@ -14,6 +14,7 @@ export const FACET_FRAMEWORKS: Record<string, { labelZh: string }> = {
   'grammar-fill.given.conversion.noun-to-verb': { labelZh: '词形转换（名词→动词）' },
   'grammar-fill.given.conversion.adjective-to-adverb': { labelZh: '词形转换（形容词→副词）' },
   'grammar-fill.given.conversion.adjective-to-noun': { labelZh: '词形转换（形容词→名词）' },
+  'grammar-fill.given.conversion.adjective-to-adjective': { labelZh: '词形转换（形容词→形容词）' },
   'grammar-fill.given.conversion.verb-to-adjective': { labelZh: '词形转换（动词→形容词）' },
   'grammar-fill.given.conversion.verb-to-noun': { labelZh: '词形转换（动词→名词）' },
   'grammar-fill.given.conversion.verb-to-adverb': { labelZh: '词形转换（动词→副词）' },

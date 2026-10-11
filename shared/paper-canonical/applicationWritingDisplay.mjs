@@ -1,4 +1,4 @@
-const NOTICE_PREFIX_PATTERN = /^(注意(?:事项)?[：:])\s*/u
+const NOTICE_PREFIX_PATTERN = /^(注意(?:事项)?\p{Zs}*[：:])\s*/u
 const NUMBERED_INSTRUCTION_PATTERN = /[（(]\d+[)）]|(?<![\d.])\d+[.．、](?!\d)|[一二三四五六七八九十]+[.．、]/gu
 
 function normalizedSplitNoticeInstruction(value) {

@@ -4,6 +4,7 @@ import {
   nck1MaterializationHistoricalAuthorityRef54,
   nck1MaterializationHistoricalAuthorityRef57,
   nck1MaterializationHistoricalAuthorityRef58,
+  nck1MaterializationHistoricalAuthorityRef59,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
@@ -71,7 +72,7 @@ function sameAuthority(left, right) {
 }
 
 export function isNck1MaterializationCanonicalImportRequest(request) {
-  if (![nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58]
+  if (![nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59]
     .some(authority => sameAuthority(request?.authority, authority))) return false
   const documents = request?.evidence?.documents
   if (!Array.isArray(documents)) return false
@@ -234,6 +235,9 @@ export function isLiveConfirmedNck1MaterializationAdmission(admission) {
   ) || isLiveConfirmedNck1Admission(
     admission,
     nck1MaterializationHistoricalAuthorityRef58,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationHistoricalAuthorityRef59,
   )
 }
 
@@ -281,10 +285,10 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
   }
   let imported = importCanonicalCandidate(sourceInput)
   if (!analyzedPackage && confirmation?.candidateDigest !== imported.candidate?.candidateDigest) {
-    const historical = importCanonicalCandidate(sourceInput, undefined, {
-      materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
-    })
-    if (historical.candidate?.candidateDigest === confirmation?.candidateDigest) imported = historical
+    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
+      const historical = importCanonicalCandidate(sourceInput, undefined, { materializationAuthorityRef })
+      if (historical.candidate?.candidateDigest === confirmation?.candidateDigest) { imported = historical; break }
+    }
   }
   if (!imported.candidate || imported.issues.length > 0) {
     const first = imported.issues[0]

@@ -141,6 +141,7 @@ export function preparePublicSearchMetadataRequest({ materialization, sourceDige
         prompt: question.prompt, options: question.options,
         authoritativeAnswer: answers.get(question.questionId),
       })),
+      ...(group.writingTask ? { writingTaskId: `writing-task:${group.groupId}` } : {}),
       writingTask: group.writingTask ? structuredClone(group.writingTask) : null,
     })),
     controlledValues: {

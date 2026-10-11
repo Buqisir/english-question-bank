@@ -25,7 +25,7 @@ assert.equal(v5.horizontalChoiceGeometry.rendererMapping.proportional, true)
 assert.equal(v5.horizontalChoiceGeometry.rendererMapping.columnStartsPt, undefined)
 assert.equal(v5.horizontalChoiceGeometry.rendererMapping.columnWidthsPt, undefined)
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '59')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '61')
 assert.equal(paperPresentationAuthorityRef.manifestVersion, '60')
 const closure = resolveCanonicalAuthority(paperPresentationAuthorityRef).closure
 assert.equal(closure.artifacts['renderer-cloze-rhythm'].version, '5')

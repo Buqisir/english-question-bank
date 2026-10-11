@@ -510,6 +510,7 @@ export type PaperQuestion = {
     readonly kind: 'text'
     readonly nodeId: string
     readonly text: string
+    readonly marks?: ReadonlyArray<'bold' | 'underline'>
   }>
 
   /** Optional Chinese translation of the stem. */

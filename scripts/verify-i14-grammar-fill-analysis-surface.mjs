@@ -90,7 +90,7 @@ const serverFacets = JSON.parse(
 const serverKeys = serverFacets.map((f) => f.facet_key).sort()
 const registryKeys = Object.keys(FACET_FRAMEWORKS).sort()
 
-assert('Step 0: registry has exactly 22 facets', registryKeys.length === 22,
+assert('Step 0: registry has exactly 23 facets', registryKeys.length === 23,
   `found: ${registryKeys.length}`)
 assert('Step 0: drift guard — registry keys EXACTLY equal server JSON keys',
   JSON.stringify(registryKeys) === JSON.stringify(serverKeys),

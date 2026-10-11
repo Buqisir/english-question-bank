@@ -58,16 +58,17 @@ The hint word's POS = entry into which `given` sub-facet:
 | --- | --- | --- |
 | verb (原形) | `given.verb` → 根据句子结构判断谓语/非谓语（分词 `-ed`/`-ing` 作表/定/状/宾补/主补 → `non-finite` + `role`） | blank needs noun → `conversion.verb-to-noun`；blank needs a **non-participle** adjective (`-able`/`-ous`/`-ful`/`-ive`, `a-`) → `conversion.verb-to-adjective`；blank needs an adverb → `conversion.verb-to-adverb` |
 | noun | genitive (`'s`) → `given.noun.genitive`；regular plural of the hint → `given.noun.number` | blank needs a different POS or a same-POS derived word (e.g. occupational `-er`/`-or`) → `given.conversion.noun-to-noun` / `noun-to-adjective` / `noun-to-verb` |
-| adjective | comparative/superlative of the hint → `given.adjective.comparison` | blank needs an adverb (`-ly`) → `given.conversion.adjective-to-adverb`；blank needs a noun → `given.conversion.adjective-to-noun` |
+| adjective | comparative/superlative of the hint → `given.adjective.comparison` | blank needs an adverb (`-ly`) → `given.conversion.adjective-to-adverb`；blank needs a noun → `given.conversion.adjective-to-noun`；negative-prefix adjective derivation → `given.conversion.adjective-to-adjective` |
 | pronoun | `given.pronoun` | — |
 | numeral | `given.numeral` | — |
 
-**词形转换（`given.conversion.<src>-to-<dst>`, 2026-07-15 owner 拍板"词性转换"→"词形转换"重铸，方向矩阵制，8 向）：** use ONLY when the blank's POS genuinely differs from the hint's POS (or, for `noun-to-noun`, is a same-POS derived word) — NOT when it's the hint's own inflection (plural/genitive/comparison/finite-tense/non-finite-role, all of which have their own dedicated facet above):
+**词形转换（`given.conversion.<src>-to-<dst>`, 2026-07-15 owner 拍板"词性转换"→"词形转换"重铸，方向矩阵制，9 向）：** use ONLY when the blank's POS genuinely differs from the hint's POS (or, for `noun-to-noun` / `adjective-to-adjective`, is a same-POS derived word) — NOT when it's the hint's own inflection (plural/genitive/comparison/finite-tense/non-finite-role, all of which have their own dedicated facet above):
 - `noun-to-noun`: hint is noun, blank is a different noun derived from it (e.g. occupational suffix `-er`/`-or`: photograph→photographer)
 - `noun-to-adjective`: hint is noun, blank needs an adjective
 - `noun-to-verb`: hint is noun, blank needs a verb
 - `adjective-to-adverb`: hint is adjective, blank needs an adverb (`-ly`)
 - `adjective-to-noun`: hint is adjective, blank needs a noun (介词后 / 缺主宾 / 限定词后 → 名词；常见后缀 `-ity`/`-ty` curious→curiosity, `-ness` happy→happiness, `-ce`/`-cy` confident→confidence／accurate→accuracy, `-ment`)
+- `adjective-to-adjective`: hint and answer are adjectives; context requires a negative prefix (e.g. complete→incomplete / possible→impossible / happy→unhappy), route `negative-prefix`. This is derivation, not comparison or verb-to-adjective.
 - `verb-to-adjective`: hint is verb, blank needs a **non-participle** adjective derived by a true adjective suffix (`-able`/`-ous`/`-ful`/`-ive`) or the `a-` prefix (remark→remarkable / harm→harmful / sleep→asleep). 分词 `-ed`/`-ing` 不入此叶 — see 判定口令 below.
 - `verb-to-noun`: hint is verb, blank needs a noun
 - `verb-to-adverb`: hint is verb, blank needs an adverb
@@ -200,7 +201,7 @@ Every `blanks[questionId]` MUST include:
 - `blankNo` — integer blank number (56–65)
 - `blankType` — exactly `given` or `no-hint` (from input)
 - `hint` — the given base word (string) for `given` blanks; `null` for `no-hint` blanks (from input)
-- `facetKey` — exactly one of the **22 leaf** keys listed below
+- `facetKey` — exactly one of the **23 leaf** keys listed below
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `similarityProfile` — machine-facing matching support, exactly
@@ -216,7 +217,7 @@ Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb), or `form`/
 deterministically from `answer` after your response. `similarityProfile` is
 different: it records the contextual judgment route and MUST be generated here.
 
-## The 22 Valid `facetKey` Leaves
+## The 23 Valid `facetKey` Leaves
 
 Use ONLY these exact string values. Do NOT use parent nodes (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`) — they are NOT valid facetKeys. (The old `grammar-fill.given.noun` / `grammar-fill.given.adjective` / `grammar-fill.given.derivation.*` leaves from v1 are retired — do NOT use them.)
 
@@ -228,6 +229,7 @@ grammar-fill.given.conversion.noun-to-adjective
 grammar-fill.given.conversion.noun-to-verb
 grammar-fill.given.conversion.adjective-to-adverb
 grammar-fill.given.conversion.adjective-to-noun
+grammar-fill.given.conversion.adjective-to-adjective
 grammar-fill.given.conversion.verb-to-adjective
 grammar-fill.given.conversion.verb-to-noun
 grammar-fill.given.conversion.verb-to-adverb
@@ -260,6 +262,7 @@ For `grammar-fill.given.verb.finite`, use one route:
 
 ```text
 present-stable-description | present-frequency-marker |
+present-progressive-current-action |
 past-explicit-time | past-context-cue | past-narrative-chain |
 present-perfect-explicit-marker | present-perfect-current-effect |
 past-progressive-background | past-perfect-prior-past | modal-passive
@@ -268,6 +271,8 @@ past-progressive-background | past-perfect-prior-past | modal-passive
 Use `features: []`. The route must agree with the tense/voice expressed by the
 authoritative answer. The server, not you, derives the answer's tense, voice,
 and agreement sensitivity.
+Use `present-progressive-current-action` for an action ongoing now or during the
+current period, signalled by context or phrases such as `at present`.
 
 For `grammar-fill.given.verb.non-finite`, the route MUST start with the exact
 `role` value plus `-`:
@@ -324,6 +329,7 @@ allowed features.
 | `conversion.noun-to-verb` | `finite-result` / `non-finite-result` | exactly one inherited finite or non-finite route; see below |
 | `conversion.adjective-to-adverb` | `modify-adjective` / `modify-predicate` / `modify-non-finite` / `modify-sentence` / `modify-adverb-number-quantity` | — |
 | `conversion.adjective-to-noun` | `derived-noun` | — |
+| `conversion.adjective-to-adjective` | `negative-prefix` | — |
 | `conversion.verb-to-adjective` | `true-derived-adjective` | — |
 | `conversion.verb-to-noun` | `derived-noun` | — |
 | `conversion.verb-to-adverb` | `derived-adverb` | — |

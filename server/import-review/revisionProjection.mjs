@@ -7,7 +7,7 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
-import { nck1MaterializationHistoricalAuthorityRef58, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
@@ -34,8 +34,10 @@ import {
   assertNck1ImageBundlePageArtifacts,
 } from '../paper-import/nck1ImageSourceBundle.mjs'
 import {
+  NCK1_OCR_CONFIRMATION_FILE_NAME,
   NCK1_OCR_EVIDENCE_FILE_NAME,
   NCK1_OCR_REVIEW_CODES,
+  loadNck1OcrSourceEmphasis,
   nck1OcrSourceSetDigest,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
@@ -340,6 +342,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false } = {}
     kind: 'nck1-source-materialization',
     materializationBytes,
     ...(spellingReviewBytes ? { spellingReviewBytes } : {}),
+    ...loadNck1OcrSourceEmphasis(rootDir),
     ...(listeningAudio ? { listeningAudio } : {}),
     documents: materialization.documents.map((document) => {
       const sourcePath = documentPathById.get(document.documentId)
@@ -629,6 +632,11 @@ export function reviewBundleFilePaths(rootDir) {
       mediaType: 'application/json',
       role: 'spelling_review',
     }] : []),
+    ...(loaded.sourceInput.ocrSourceBytes
+      ? [NCK1_OCR_EVIDENCE_FILE_NAME, NCK1_OCR_CONFIRMATION_FILE_NAME].map(fileName => ({
+          path: `materialization/${fileName}`, mediaType: 'application/json', role: 'ocr_source_evidence',
+        }))
+      : []),
     ...sourceFiles,
     ...(waveform ? [{ path: LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
     ...NCK1_STAGED_ANALYSIS_FILES
@@ -1115,7 +1123,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(
+        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
@@ -1584,9 +1592,10 @@ export function buildNck1ReviewProjection(rootDir, {
   // default cannot silently change its digest or visual interpretation.
   if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
     && !loaded.analyzedPackage) {
-    imported = importCanonicalCandidate(loaded.sourceInput, undefined, {
-      materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
-    })
+    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
+      const historical = importCanonicalCandidate(loaded.sourceInput, undefined, { materializationAuthorityRef })
+      if (historical.candidate?.candidateDigest === expectedCandidateDigest) { imported = historical; break }
+    }
   }
   if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest) {
     fail('Stored Candidate does not match a retained authority', 'IMPORT_REVIEW_PROJECTION_MISMATCH')

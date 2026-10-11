@@ -5,6 +5,7 @@ import {
   nck1MaterializationHistoricalAuthorityRef54,
   nck1MaterializationHistoricalAuthorityRef57,
   nck1MaterializationHistoricalAuthorityRef58,
+  nck1MaterializationHistoricalAuthorityRef59,
   resolveCanonicalAuthority,
   slotsForProfile,
   trustedDocxCandidateAuthorityRef,
@@ -2407,12 +2408,12 @@ function collectRichTargetIds(content) {
   return collectRichContentTargets(content)
 }
 
-function collectReadingTargetIds(variant) {
+function collectReadingTargetIds(variant, allowStemMarks) {
   if (variant?.family !== 'reading') return []
   return [
-    ...(variant.questions || []).flatMap((question) => [
-      { kind: 'content_node', id: question?.stem?.[0]?.nodeId },
-    ]),
+    ...(variant.questions || []).flatMap((question) =>
+      (allowStemMarks ? question.stem || [] : [question?.stem?.[0]])
+        .map(inline => ({ kind: 'content_node', id: inline?.nodeId }))),
     ...(variant.choiceOwnership?.sets || []).flatMap((set) => (set.options || []).flatMap((option) => [
       { kind: 'option', id: option.optionId },
       ...(option.content || []).map((inline) => ({ kind: 'content_node', id: inline.nodeId })),
@@ -2823,8 +2824,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(closure.authorityRef.manifestVersion),
-    family.familyContractId === 'reading' && closure.artifacts['rich-content']?.version === '2',
+    ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(closure.authorityRef.manifestVersion),
+    family.familyContractId === 'reading' && ['2', '3'].includes(closure.artifacts['rich-content']?.version),
   ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
@@ -2832,7 +2833,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(closure.authorityRef.manifestVersion)
+    ? ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
@@ -2891,7 +2892,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {
@@ -2903,6 +2904,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowFigureOptions: family.optionModes?.includes('figure') === true,
+      allowStemMarks: closure.artifacts['rich-content']?.version === '3',
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'listening') {
@@ -2962,7 +2964,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     ...sourceGroup.blankIds.map((id) => ({ target: { kind: 'blank', id } })),
     ...media.map((item) => ({ target: { kind: 'media', id: item.mediaId } })),
     ...collectRichTargetIds(content).map((entry) => ({ target: entry })),
-    ...collectReadingTargetIds(variant).map((entry) => ({ target: entry })),
+    ...collectReadingTargetIds(variant, closure.artifacts['rich-content']?.version === '3').map((entry) => ({ target: entry })),
     ...collectListeningTargets(variant).map((entry) => ({ target: entry })),
     ...collectGrammarFillTargetIds(variant).map((entry) => ({ target: entry })),
     ...collectApplicationWritingTargetIds(variant).map((entry) => ({ target: entry })),
@@ -3359,13 +3361,13 @@ export function compileCanonicalPaper(
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
   const acceptsNck1MaterializationCandidate = request?.[nck1MaterializationCandidateCompile] === true
-    && [nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58]
+    && [nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59]
       .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
   const acceptsNck1AnalyzedPackageCandidate = request?.[nck1AnalyzedPackageCandidateCompile] === true
     && closure.authorityRef.manifestDigest
       === nck1AnalyzedPackageCandidateAuthorityRef55.manifestDigest
   const acceptsConfirmedNck1MaterializationRequest =
-    [nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58]
+    [nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59]
       .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
     && isConfirmedNck1MaterializationRequest(request)
   const acceptsConfirmedNck1AnalyzedPackageRequest =
@@ -4112,6 +4114,12 @@ function isConfirmedNck1MaterializationRequest(request) {
   }
   const spellingDocument = byInputKey.get('spelling_review')
   if (spellingDocument) sourceInput.spellingReviewBytes = spellingDocument.bytes
+  if (byInputKey.has('ocr_source_evidence') || byInputKey.has('ocr_source_confirmation')) {
+    sourceInput.ocrSourceBytes = {
+      evidenceBytes: byInputKey.get('ocr_source_evidence')?.bytes,
+      confirmationBytes: byInputKey.get('ocr_source_confirmation')?.bytes,
+    }
+  }
   if (!isNck1MaterializationInput(sourceInput)) return false
   const rerun = nck1MaterializationCandidateFromInput(sourceInput, request.authority)
   if (
@@ -4276,6 +4284,7 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices, { materia
     if (materializationAuthorityRef && ![
       nck1MaterializationCandidateAuthorityRef,
       nck1MaterializationHistoricalAuthorityRef58,
+      nck1MaterializationHistoricalAuthorityRef59,
     ].some(ref => ref.manifestDigest === materializationAuthorityRef.manifestDigest)) {
       return { candidate: null, issues: [trustedDocxIssue('AUTHORITY_UNSUPPORTED', 'Materialization replay authority is not retained')] }
     }
