@@ -300,7 +300,9 @@ function verifyCorrectedReviewUploadBaseRevision() {
     const db = new DatabaseSync(reviewDbPath)
     const timestamp = '2026-09-11T00:00:00.000Z'
     db.prepare(`
-      INSERT INTO import_review_papers VALUES (?, ?, ?, ?, ?)
+      INSERT INTO import_review_papers
+        (paper_id, paper_name, latest_revision_id, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?)
     `).run('paper-corrected-upload', 'Corrected upload fixture', 'rev-base', timestamp, timestamp)
     db.prepare(`
       INSERT INTO import_review_revisions (
