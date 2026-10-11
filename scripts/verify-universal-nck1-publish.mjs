@@ -1409,6 +1409,46 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       mkdirSync(process.env.LISTENING_QA_ARTIFACT_DIR, { recursive: true })
       await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'screen-not-supplied.png') })
     }
+
+    // Public discussion must name the viewed publication, not the newer private
+    // Candidate. Exercise the shipped page and clipboard payload without sending
+    // an external message or requiring a real Amp session in CI.
+    const publicationDigest = `sha256:${'a'.repeat(64)}`
+    let mappedPublication = { revisionId: 'rev-published-v7', sourceAssetVersion: 7, publicationDigest }
+    screenProjection = { ...projection, consumption: {
+      ...projection.consumption, sourceAssetVersion: 7, publicationDigest,
+    } }
+    await screenPage.route('**/api/import-reviews/papers/*/product-review?*', route => route.fulfill({
+      status: 200, contentType: 'application/json', body: JSON.stringify({
+        paperId: projection.paperId, latest: { id: 'rev-newer-private' },
+        discussionThreadId: `T-00000000-0000-0000-0000-000000000007`, published: mappedPublication,
+      }),
+    }))
+    for (const mapped of [true, false]) {
+      if (!mapped) mappedPublication = null
+      await screenPage.goto(screenUrl.href)
+      const discuss = screenPage.getByRole('button', { name: '去 Amp 聊这份卷' })
+      await discuss.waitFor()
+      await screenPage.evaluate(() => {
+        window.open = () => null
+        navigator.clipboard.writeText = async text => { window.__copiedPaperContext = text }
+      })
+      await discuss.click()
+      const copied = await screenPage.evaluate(() => window.__copiedPaperContext)
+      assert.match(copied, /发布版本：v7/)
+      assert(copied.includes(publicationDigest))
+      assert(!copied.includes('rev-newer-private'), 'never substitute the latest private Candidate')
+      const publicLine = copied.split('\n').find(line => line.startsWith('公开页面（可能已更新）：'))
+      assert(publicLine && !publicLine.includes('reviewRevision='), 'public URL is not silently relabelled as private')
+      if (mapped) {
+        assert.match(copied, /对应发布版本的私有预览：.*reviewRevision=rev-published-v7/)
+      } else {
+        assert.match(copied, /未取得对应版本的私有预览/)
+        assert(!copied.includes('reviewRevision='), 'missing mapping cannot manufacture a pinned preview')
+      }
+      assert.equal(await screenPage.getByRole('link', { name: '打开对应 Amp 线程' }).getAttribute('href'),
+        'https://ampcode.com/threads/T-00000000-0000-0000-0000-000000000007')
+    }
     screenProjection = listeningProjection
     screenUrl.searchParams.set('focusGroupId', `group:${projection.paperId}:listening.short-dialogue`)
     screenUrl.searchParams.set('lecture', '1')
