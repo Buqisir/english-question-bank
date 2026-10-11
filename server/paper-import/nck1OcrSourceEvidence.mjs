@@ -1,4 +1,7 @@
 import { execFileSync } from 'node:child_process'
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
 
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import {
@@ -14,8 +17,24 @@ import {
 
 export const NCK1_OCR_EVIDENCE_SCHEMA_VERSION = 'nck1-ocr-source-evidence-v1'
 export const NCK1_OCR_CONFIRMATION_SCHEMA_VERSION = 'nck1-ocr-source-confirmation-v1'
+export const NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2 = 'nck1-ocr-source-confirmation-v2'
 export const NCK1_OCR_EVIDENCE_FILE_NAME = 'nck1-ocr-source-evidence-v1.json'
 export const NCK1_OCR_CONFIRMATION_FILE_NAME = 'nck1-ocr-source-confirmation-v1.json'
+
+// Historical v1 stays text-only and keeps its original Candidate identity.
+export function loadNck1OcrSourceEmphasis(paperDir) {
+  const directory = path.join(paperDir, 'materialization')
+  const confirmationPath = path.join(directory, NCK1_OCR_CONFIRMATION_FILE_NAME)
+  if (!existsSync(confirmationPath)) return {}
+  const confirmationBytes = new Uint8Array(readFileSync(confirmationPath))
+  const { schemaVersion } = JSON.parse(new TextDecoder().decode(confirmationBytes))
+  if (schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION) return {}
+  if (schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2) throw new Error('Unsupported OCR source confirmation version')
+  return { ocrSourceBytes: {
+    evidenceBytes: new Uint8Array(readFileSync(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME))),
+    confirmationBytes,
+  } }
+}
 
 export const NCK1_OCR_REVIEW_CODES = Object.freeze([
   'NCK1_OCR_TEXT_LAYER_REQUIRED',
@@ -117,19 +136,26 @@ function rasterPage(document, page) {
     region: FULL_PAGE,
     density: RASTER_DENSITY,
   })
-  const pixels = execFileSync('magick', ['png:-', 'rgba:-'], {
-    input: raster.bytes,
-    maxBuffer: MAX_BUFFER,
-  })
-  return {
-    recipe: {
-      kind: 'pdf_page_region_v1',
-      density: RASTER_DENSITY,
-      region: structuredClone(FULL_PAGE),
-    },
-    sha256: sha256(pixels),
-    pixelWidth: raster.pixelWidth,
-    pixelHeight: raster.pixelHeight,
+  const temp = mkdtempSync(path.join(tmpdir(), 'eqb-ocr-page-pixels-'))
+  try {
+    // Large scanned PNGs can stall ImageMagick's stdin spool on macOS.
+    const imagePath = path.join(temp, 'page.png')
+    writeFileSync(imagePath, raster.bytes)
+    const pixels = execFileSync('magick', [imagePath, 'rgba:-'], {
+      maxBuffer: MAX_BUFFER,
+    })
+    return {
+      recipe: {
+        kind: 'pdf_page_region_v1',
+        density: RASTER_DENSITY,
+        region: structuredClone(FULL_PAGE),
+      },
+      sha256: sha256(pixels),
+      pixelWidth: raster.pixelWidth,
+      pixelHeight: raster.pixelHeight,
+    }
+  } finally {
+    rmSync(temp, { recursive: true, force: true })
   }
 }
 
@@ -530,7 +556,7 @@ export function resolveConfirmedNck1OcrEvidence({
   const fallback = firstSource(documents)
   if (!exactKeys(confirmation, [
     'schemaVersion', 'paperId', 'sourceSetDigest', 'evidenceDigest', 'confirmed', 'documents',
-  ]) || confirmation.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION
+  ]) || ![NCK1_OCR_CONFIRMATION_SCHEMA_VERSION, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2].includes(confirmation.schemaVersion)
     || confirmation.paperId !== paperId
     || confirmation.sourceSetDigest !== evidence.sourceSetDigest
     || confirmation.evidenceDigest !== evidence.evidenceDigest
@@ -604,8 +630,20 @@ export function resolveConfirmedNck1OcrEvidence({
         const itemObservations = Array.isArray(item?.observationIds)
           ? item.observationIds.map((id) => observations.get(id)).filter(Boolean)
           : []
+        const ranges = item?.sourceEmphasis
+        const allowsEmphasis = confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2
+        const validRanges = ranges === undefined || (allowsEmphasis && Array.isArray(ranges)
+          && ranges.length > 0 && ranges.every((range, index) =>
+            exactKeys(range, ['start', 'end', 'marks'])
+            && Number.isInteger(range.start) && Number.isInteger(range.end)
+            && range.start >= (index ? ranges[index - 1].end : 0)
+            && range.end > range.start && range.end <= item.text?.length
+            && ['["bold"]', '["underline"]', '["bold","underline"]'].includes(JSON.stringify(range.marks))))
         if (
-          !exactKeys(item, ['itemId', 'observationIds', 'text'])
+          !exactKeys(item, ['itemId', 'observationIds', 'text',
+            ...(allowsEmphasis && ranges !== undefined ? ['sourceEmphasis'] : []),
+          ])
+          || !validRanges
           || !nonEmpty(item.itemId)
           || seenItemIds.has(item.itemId)
           || !Array.isArray(item.observationIds)
@@ -631,6 +669,7 @@ export function resolveConfirmedNck1OcrEvidence({
           kind: 'paragraph',
           text: item.text,
           containsDrawing: false,
+          ...(ranges ? { sourceEmphasis: structuredClone(ranges) } : {}),
           sourceIndex: {
             kind: 'page_region',
             documentId: document.documentId,

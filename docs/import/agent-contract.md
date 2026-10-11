@@ -35,6 +35,17 @@ and verifies `after` against current Materialization so later layout edits canno
 historical OCR confirmation. Missing means no report exists; an empty `entries` array is a present,
 bound report. Legacy `source_typo` receipts remain historical evidence and are not reclassified.
 
+The CLI finalizer and server use the same historical-item binding check. For
+`ocr_misrecognition`, `before` remains the exact historical OCR text. `after`
+must equal the confirmed text, except for two proved structural projections:
+an exact `<source question number>. ` prefix may move out of a question's
+`stem` into its number field; or one LF may separate two complete, consecutive
+confirmed items represented by adjacent text runs in the same table cell.
+Both projections require the target's source document/page to match the
+historical item, and the table's next run must equal the next confirmed item.
+These are not source errors. No general whitespace trimming, fuzzy text match,
+receipt rewrite, or deletion of correction entries is permitted.
+
 ### Source-text preprocessing, without intermediate Owner approval
 
 New raw-source workspaces carry `config.spellingReview: "source-text-review-v3"`.

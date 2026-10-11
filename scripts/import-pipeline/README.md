@@ -285,6 +285,13 @@ DOCX 优先读原始段落、表格和编号下划线样式；文本 PDF 优先�
 生成 OCR 输出；旧 PDF review/receipt 仍保留。已成功的输出、Agent 改过的输出、来源变化
 或证据不完整一律拒绝替换。听力附件和九份教学解析不属于这次切换的写入范围。
 
+源页阅读正文或题干含局部粗体/下划线时，确认文档使用
+`schemaVersion: "nck1-ocr-source-confirmation-v2"`，在对应 ordered item 加
+`sourceEmphasis: [{start, end, marks: ["bold", "underline"]}]`（按实际可只选一种）。
+坐标是该 item 已核对 `text` 的原始 UTF-16 区间，包含题号前缀；不得标到题号或
+选项，不得按题意猜标记。CLI 自动把两份 OCR 文件绑定并带入 Candidate/Review，
+Materialization 仍只写原文。历史 v1 不增补字段、不迁移。详见试卷格式合同。
+
 暂时只有题卷、没有权威答案时，不运行`init`或分配可发布`paperId`。使用
 source-only状态先保留DOCX/PDF或显式排序图片页：
 

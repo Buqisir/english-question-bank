@@ -202,6 +202,7 @@ export function buildGrammarFillAnalysisMessages({ paper, group }) {
 const FINITE_ROUTE_TENSES = new Map([
   ['present-stable-description', 'present'],
   ['present-frequency-marker', 'present'],
+  ['present-progressive-current-action', 'progressive'],
   ['past-explicit-time', 'past'],
   ['past-context-cue', 'past'],
   ['past-narrative-chain', 'past'],

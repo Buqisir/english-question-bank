@@ -48,6 +48,70 @@ function storeError(code, message, status = 409) {
   return error
 }
 
+function matchesMaterializedOcrText(text, entry, materialization, followingText) {
+  if (text === entry.after) return true
+  const pointer = entry.materializationTarget.jsonPointer
+  const stemTarget = /^\/(?:listening|groups\/(\d+))\/questions\/(\d+)\/stem$/.exec(pointer)
+  if (stemTarget) {
+    const question = stemTarget[1] === undefined
+      ? materialization.listening?.questions?.[stemTarget[2]]
+      : materialization.groups?.[stemTarget[1]]?.questions?.[stemTarget[2]]
+    const number = question?.sourceNumber ?? question?.canonicalNumber
+    // A number moved to its structural field is not an OCR text edit.
+    return Number.isInteger(number) && number > 0
+      && question.stem === entry.after
+      && question.source?.documentId === entry.sourceLocator.documentId
+      && question.source?.page === entry.sourceLocator.page
+      && text === `${number}. ${entry.after}`
+  }
+  const tableTarget = /^\/groups\/(\d+)\/blocks\/(\d+)\/rows\/(\d+)\/cells\/(\d+)\/content\/(\d+)\/text$/.exec(pointer)
+  if (!tableTarget || typeof text !== 'string' || text.endsWith('\n')) return false
+  const [, group, blockIndex, row, cell, run] = tableTarget
+  const block = materialization.groups?.[group]?.blocks?.[blockIndex]
+  const content = block?.rows?.[row]?.cells?.[cell]?.content
+  const current = content?.[run]
+  const following = content?.[Number(run) + 1]
+  // Prove a separator between two complete, consecutive confirmed source
+  // items in the same table cell; never trim arbitrary field whitespace.
+  return block?.kind === 'table'
+    && block.source?.documentId === entry.sourceLocator.documentId
+    && block.source?.page === entry.sourceLocator.page
+    && current?.kind === 'text' && current.text === entry.after
+    && following?.kind === 'text' && typeof followingText === 'string' && followingText.length > 0
+    && following.text === followingText
+    && entry.after === `${text}\n`
+}
+
+export function validateAgentOcrCorrectionReceipt(report, receipt, materialization) {
+  if (receipt?.paperId !== report.paperId
+    || receipt?.revisionId !== report.ocrRevisionId
+    || receipt?.confirmationId !== report.ocrConfirmationId
+    || receipt?.reviewerKind !== 'import_agent'
+    || receipt?.sourceSetDigest !== report.originalSourceSetDigest
+    || receipt?.evidenceDigest !== report.ocrEvidenceDigest
+    || receipt?.correctionReport?.sourceSetDigest !== report.originalSourceSetDigest) {
+    throw storeError('IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID', 'Report does not match the exact server-held OCR receipt and original sources')
+  }
+  const confirmedItems = new Map(receipt.confirmation.documents.flatMap((document) =>
+    document.pages.flatMap((page) => page.orderedItems.map((item, index) =>
+      [item.itemId, { ...item, documentId: document.documentId, page: page.page,
+        followingText: page.orderedItems[index + 1]?.text }]))))
+  const ocrNotes = new Map(receipt.correctionReport.entries.map((entry) => [entry.itemId, entry]))
+  for (const entry of report.entries) {
+    const confirmed = confirmedItems.get(entry.ocrItemId)
+    const note = ocrNotes.get(entry.ocrItemId)
+    if (!confirmed || confirmed.documentId !== entry.sourceLocator.documentId
+      || confirmed.page !== entry.sourceLocator.page
+      || (entry.category === 'ocr_misrecognition'
+        ? (!note || note.ocrText !== entry.before
+          || !matchesMaterializedOcrText(note.correctedText, entry, materialization, confirmed.followingText))
+        : entry.before !== (note?.sourceText || confirmed.text))) {
+      throw storeError('IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID', 'Report entry does not match its exact historical OCR item')
+    }
+  }
+  return report
+}
+
 function requiredString(value, label, maxLength = 500) {
   const text = typeof value === 'string' ? value.trim() : ''
   if (!text || text.length > maxLength) {
@@ -1075,29 +1139,11 @@ export function createImportReviewStore({
         SELECT * FROM import_review_revisions WHERE id = ? AND paper_id = ?
       `).get(report.ocrRevisionId, status.revision.paperId)))
       const receipt = ocrRevision?.approval
-      if (ocrRevision?.reviewKind !== 'ocr' || ocrRevision.state === 'uploading'
-        || receipt?.confirmationId !== report.ocrConfirmationId
-        || receipt?.reviewerKind !== 'import_agent'
-        || receipt?.sourceSetDigest !== report.originalSourceSetDigest
-        || receipt?.evidenceDigest !== report.ocrEvidenceDigest
-        || receipt?.correctionReport?.sourceSetDigest !== report.originalSourceSetDigest) {
+      if (ocrRevision?.reviewKind !== 'ocr' || ocrRevision.state === 'uploading') {
         throw storeError('IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID', 'Report does not match the exact server-held OCR receipt and original sources')
       }
-      const confirmedItems = new Map(receipt.confirmation.documents.flatMap((document) =>
-        document.pages.flatMap((page) => page.orderedItems.map((item) =>
-          [item.itemId, { ...item, documentId: document.documentId, page: page.page }]))))
-      const ocrNotes = new Map(receipt.correctionReport.entries.map((entry) => [entry.itemId, entry]))
-      for (const entry of report.entries) {
-        const confirmed = confirmedItems.get(entry.ocrItemId)
-        const note = ocrNotes.get(entry.ocrItemId)
-        if (!confirmed || confirmed.documentId !== entry.sourceLocator.documentId
-          || confirmed.page !== entry.sourceLocator.page
-          || (entry.category === 'ocr_misrecognition'
-            ? (!note || note.ocrText !== entry.before || note.correctedText !== entry.after)
-            : entry.before !== (note?.sourceText || confirmed.text))) {
-          throw storeError('IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID', 'Report entry does not match its exact historical OCR item')
-        }
-      }
+      validateAgentOcrCorrectionReceipt(report, receipt,
+        JSON.parse(new TextDecoder().decode(projection.sourceInput.materializationBytes)))
     }
     if (projectRevision === buildImportReviewProjection) {
       const expectedFiles = (status.revision.reviewKind === 'ocr'

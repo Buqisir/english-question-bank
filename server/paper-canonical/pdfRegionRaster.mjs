@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process'
 import {
   mkdtempSync,
+  readFileSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -57,15 +58,17 @@ export function rasterPdfRegion({ pdfBytes, page, region, density = 300 }) {
       },
     ).split(',').map(Number)
     const geometry = `${Math.round(region.width * pageWidth)}x${Math.round(region.height * pageHeight)}+${Math.round(region.x * pageWidth)}+${Math.round(region.y * pageHeight)}`
-    const bytes = new Uint8Array(execFileSync('magick', [
+    // File-backed native I/O avoids stdin spool hangs on large scanned pages.
+    const cropPath = path.join(temp, 'crop.png')
+    execFileSync('magick', [
       pagePath, '-crop', geometry, '+repage',
       // Exclude both binary time and date:* text, retaining color and density.
-      '-define', 'png:exclude-chunks=tEXt,zTXt,iTXt,tIME', 'png32:-',
-    ], { maxBuffer }))
+      '-define', 'png:exclude-chunks=tEXt,zTXt,iTXt,tIME', `png32:${cropPath}`,
+    ], { maxBuffer })
+    const bytes = new Uint8Array(readFileSync(cropPath))
     const [pixelWidth, pixelHeight] = execFileSync(
-      'magick', ['identify', '-format', '%w,%h', '-'], {
+      'magick', ['identify', '-format', '%w,%h', cropPath], {
         encoding: 'utf8',
-        input: bytes,
         maxBuffer,
       },
     ).split(',').map(Number)

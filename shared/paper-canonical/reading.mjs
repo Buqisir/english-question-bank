@@ -13,7 +13,7 @@ function issue(code, disposition, path, message) {
   return { code, disposition, path, message }
 }
 
-function literalInlineIssues(inlines, path) {
+function literalInlineIssues(inlines, path, allowSourceMarks = false) {
   if (!Array.isArray(inlines) || inlines.length === 0) {
     return [issue('READING_INLINE_INCOMPLETE', 'incomplete_source', path, 'Reading literal content requires at least one inline')]
   }
@@ -21,7 +21,11 @@ function literalInlineIssues(inlines, path) {
   for (const [index, inline] of inlines.entries()) {
     if (
       !isRecordValue(inline)
-      || !exactKeys(inline, ['kind', 'nodeId', 'text'])
+      || !exactKeys(inline, ['kind', 'nodeId', 'text',
+        ...(allowSourceMarks && Object.hasOwn(inline, 'marks') ? ['marks'] : []),
+      ])
+      || (Object.hasOwn(inline, 'marks')
+        && !['["bold"]', '["underline"]', '["bold","underline"]'].includes(JSON.stringify(inline.marks)))
       || inline.kind !== 'text'
       || typeof inline.nodeId !== 'string'
       || typeof inline.text !== 'string'
@@ -269,6 +273,7 @@ export function validateReadingContract({
   variant,
   assertions,
   allowFigureOptions = false,
+  allowStemMarks = false,
 }) {
   const issues = []
   if (blankIds.length !== 0) {
@@ -350,7 +355,7 @@ export function validateReadingContract({
       issues.push(issue('READING_QUESTION_INVALID', 'needs_review', `$.variant.questions[${index}]`, 'Reading Questions require a closed stem and correct Option join'))
       continue
     }
-    issues.push(...literalInlineIssues(question.stem, `$.variant.questions[${index}].stem`))
+    issues.push(...literalInlineIssues(question.stem, `$.variant.questions[${index}].stem`, allowStemMarks))
     for (const inline of question.stem || []) {
       registerSemanticId(inline.nodeId, `$.variant.questions[${index}].stem`)
     }

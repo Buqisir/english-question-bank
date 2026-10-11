@@ -58,6 +58,12 @@ import manifestV57 from '../../standards/paper-canonical/manifest-v57.json' with
 import manifestV58 from '../../standards/paper-canonical/manifest-v58.json' with { type: 'json' }
 import manifestV59 from '../../standards/paper-canonical/manifest-v59.json' with { type: 'json' }
 import manifestV60 from '../../standards/paper-canonical/manifest-v60.json' with { type: 'json' }
+import manifestV61 from '../../standards/paper-canonical/manifest-v61.json' with { type: 'json' }
+import reportV61Schema from '../../schemas/paper-canonical/normalization-report-v61.schema.json' with { type: 'json' }
+import publicationV61Schema from '../../schemas/paper-canonical/canonical-paper-publication-v61.schema.json' with { type: 'json' }
+import sourceAdaptersV19 from '../../standards/paper-canonical/adapters/source-adapters-v19.json' with { type: 'json' }
+import richContentV3 from '../../standards/paper-canonical/core/rich-content-v3.json' with { type: 'json' }
+import richContentV3Schema from '../../schemas/paper-canonical/rich-content-v3.schema.json' with { type: 'json' }
 import reportV58Schema from '../../schemas/paper-canonical/normalization-report-v58.schema.json' with { type: 'json' }
 import publicationV58Schema from '../../schemas/paper-canonical/canonical-paper-publication-v58.schema.json' with { type: 'json' }
 import reportV59Schema from '../../schemas/paper-canonical/normalization-report-v59.schema.json' with { type: 'json' }
@@ -1291,7 +1297,7 @@ function validateSevenChoicesRhythm(artifact) {
 }
 
 function validateClozeRhythm(artifact, manifestVersion) {
-  const expected = Number(manifestVersion) >= 60
+  const expected = manifestVersion === '60'
     ? clozeRhythmV5
     : Number(manifestVersion) >= 33
     ? clozeRhythmV4
@@ -1429,7 +1435,7 @@ export function validateAuthorityClosure({
   const issues = []
   // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1489,7 +1495,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1684,7 +1690,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -2088,6 +2094,7 @@ const artifactsV60 = { ...artifactsV56, 'renderer-cloze-rhythm': clozeRhythmV5 }
 const artifactsV57 = { ...artifactsV54, normalization: normalizationV6 }
 const artifactsV58 = { ...artifactsV57, adapter: sourceAdaptersV18, 'rich-content': richContentV2 }
 const artifactsV59 = { ...artifactsV58, 'renderer-typography': typographyV11 }
+const artifactsV61 = { ...artifactsV59, adapter: sourceAdaptersV19, 'rich-content': richContentV3 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2707,6 +2714,13 @@ const schemasV59 = {
   'normalization-report-v59': reportV59Schema,
   'canonical-paper-publication-v59': publicationV59Schema,
 }
+const schemasV61 = {
+  ...Object.fromEntries(Object.entries(schemasV59).filter(([id]) =>
+    !['rich-content-v2', 'normalization-report-v59', 'canonical-paper-publication-v59'].includes(id))),
+  'rich-content-v3': richContentV3Schema,
+  'normalization-report-v61': reportV61Schema,
+  'canonical-paper-publication-v61': publicationV61Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2824,6 +2838,7 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV58, artifacts: artifactsV58, schemas: schemasV58 }),
   validateAuthorityClosure({ manifest: manifestV59, artifacts: artifactsV59, schemas: schemasV59 }),
   validateAuthorityClosure({ manifest: manifestV60, artifacts: artifactsV60, schemas: schemasV60 }),
+  validateAuthorityClosure({ manifest: manifestV61, artifacts: artifactsV61, schemas: schemasV61 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2899,6 +2914,7 @@ const authorities = [
   { manifest: manifestV58, artifacts: artifactsV58, schemas: schemasV58 },
   { manifest: manifestV59, artifacts: artifactsV59, schemas: schemasV59 },
   { manifest: manifestV60, artifacts: artifactsV60, schemas: schemasV60 },
+  { manifest: manifestV61, artifacts: artifactsV61, schemas: schemasV61 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2914,7 +2930,8 @@ export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => 
 export const nck1MaterializationHistoricalAuthorityRef54 = authorities.find((authority) => authority.manifest.version === '54').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef57 = authorities.find((authority) => authority.manifest.version === '57').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef58 = authorities.find((authority) => authority.manifest.version === '58').authorityRef
-export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '59').authorityRef
+export const nck1MaterializationHistoricalAuthorityRef59 = authorities.find((authority) => authority.manifest.version === '59').authorityRef
+export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '61').authorityRef
 // Analyzed packages are a distinct captured-source protocol. They may not enter
 // the immutable raw-materialization v54 adapter registry or confirmation lane.
 export const nck1AnalyzedPackageCandidateAuthorityRef55 = authorities.find((authority) => authority.manifest.version === '55').authorityRef

@@ -7,6 +7,7 @@ import {
   resolveCanonicalAuthority,
   nck1MaterializationCandidateAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef58,
+  nck1MaterializationHistoricalAuthorityRef59,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   digestNck1SourceMaterialization,
@@ -21,6 +22,7 @@ import {
 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, extractDocxParagraphEmphasis } from './docxSourceAdapter.mjs'
 import { mapSourceEmphasisEdits, splitSourceEmphasis } from './sourceEmphasis.mjs'
+import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2 } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { rasterPdfRegion } from './pdfRegionRaster.mjs'
 import { applySpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import {
@@ -57,6 +59,13 @@ export function isNck1MaterializationInput(value) {
   if (value && Object.hasOwn(value, 'spellingReviewBytes')) {
     const { spellingReviewBytes, ...original } = value
     return spellingReviewBytes instanceof Uint8Array && isNck1MaterializationInput(original)
+  }
+  if (value && Object.hasOwn(value, 'ocrSourceBytes')) {
+    const { ocrSourceBytes, ...original } = value
+    return exactKeys(ocrSourceBytes, ['evidenceBytes', 'confirmationBytes'])
+      && ocrSourceBytes.evidenceBytes instanceof Uint8Array
+      && ocrSourceBytes.confirmationBytes instanceof Uint8Array
+      && isNck1MaterializationInput(original)
   }
   return Boolean(
     value
@@ -98,6 +107,10 @@ export function cloneNck1MaterializationInput(value) {
     media: cloneByteEntries(value.media, 'mediaId'),
     ...(value.listeningAudio ? { listeningAudio: structuredClone(value.listeningAudio) } : {}),
     ...(value.spellingReviewBytes ? { spellingReviewBytes: new Uint8Array(value.spellingReviewBytes) } : {}),
+    ...(value.ocrSourceBytes ? { ocrSourceBytes: {
+      evidenceBytes: new Uint8Array(value.ocrSourceBytes.evidenceBytes),
+      confirmationBytes: new Uint8Array(value.ocrSourceBytes.confirmationBytes),
+    } } : {}),
   }
 }
 
@@ -148,11 +161,15 @@ function parseMaterialization(bytes) {
   }
 }
 
-function bundleDigest(materializationBytes, documents, media, listeningAudio, spellingReviewBytes) {
+function bundleDigest(materializationBytes, documents, media, listeningAudio, spellingReviewBytes, ocrSourceBytes) {
   return digestJson({
     materialization: sha256(materializationBytes),
     ...(listeningAudio ? { listeningAudio } : {}),
     ...(spellingReviewBytes ? { spellingReview: sha256(spellingReviewBytes) } : {}),
+    ...(ocrSourceBytes ? { ocrSource: {
+      evidence: sha256(ocrSourceBytes.evidenceBytes),
+      confirmation: sha256(ocrSourceBytes.confirmationBytes),
+    } } : {}),
     documents: documents.map((entry) => ({
       documentId: entry.documentId,
       sha256: sha256(entry.bytes),
@@ -1523,6 +1540,12 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
       bytes: new Uint8Array(input.spellingReviewBytes),
       declared: { mediaType: 'application/json', originalName: SPELLING_REVIEW_FILE },
     }] : []),
+    ...(input.ocrSourceBytes ? ['evidence', 'confirmation'].map((kind) => ({
+      inputKey: `ocr_source_${kind}`,
+      roles: ['source_provenance'],
+      bytes: new Uint8Array(input.ocrSourceBytes[`${kind}Bytes`]),
+      declared: { mediaType: 'application/json', originalName: `nck1-ocr-source-${kind}-v1.json` },
+    })) : []),
     ...input.documents.flatMap((entry) => {
       const document = documentsById.get(entry.documentId)
       const sourceDocument = {
@@ -1648,6 +1671,99 @@ function appendReadingSourceEmphasis(source, raw, documentsById, review, issues)
   }
 }
 
+function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues) {
+  try {
+    const evidence = JSON.parse(textDecoder.decode(ocrSourceBytes.evidenceBytes))
+    const confirmation = JSON.parse(textDecoder.decode(ocrSourceBytes.confirmationBytes))
+    if (confirmation.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2) {
+      throw new Error('OCR source emphasis requires version 2 transcription closure')
+    }
+    const resolved = resolveConfirmedNck1OcrEvidence({
+      paperId: raw.paperId,
+      documents: raw.documents.map(document => ({ ...document, bytes: documentsById.get(document.documentId).bytes })),
+      evidence,
+      confirmation,
+    })
+    if (resolved.issues.length) throw new Error(resolved.issues[0].message)
+    const marked = new Map()
+    for (const structure of resolved.structures.values()) {
+      for (const paragraph of structure.paragraphs) {
+        if (!paragraph.sourceEmphasis) continue
+        const key = digestJson(paragraph.sourceIndex)
+        if (marked.has(key)) throw new Error('OCR emphasis locator is ambiguous')
+        marked.set(key, paragraph)
+      }
+    }
+    const consumed = new Set()
+    const corrections = new Map((review?.targets || []).map(target => [target.jsonPointer, target.corrections]))
+    const apply = (locator, parts, derived, targetId, derivedGroup, stem = false) => {
+      const key = digestJson(locator)
+      const paragraph = marked.get(key)
+      if (!paragraph) return null
+      if (consumed.has(key)) throw new Error('OCR emphasis locator is used more than once')
+      const text = parts.map(part => part.text).join('')
+      const prefix = stem ? paragraph.text.match(/^\s*\d+[.．、]\s*/u)?.[0] : ''
+      if (prefix === undefined || paragraph.text.slice(prefix.length, prefix.length + text.length) !== text
+        || (!stem && paragraph.text !== text)
+        || (stem && paragraph.text.slice(prefix.length + text.length).trim()
+          && !/^\s+A[.．、]/u.test(paragraph.text.slice(prefix.length + text.length)))) {
+        throw new Error('OCR emphasis does not match the exact materialized text')
+      }
+      const ranges = paragraph.sourceEmphasis.map(range => ({ ...range,
+        start: range.start - prefix.length, end: range.end - prefix.length }))
+      if (ranges.some(range => range.start < 0 || range.end > text.length)) {
+        throw new Error('OCR emphasis is outside the supported Reading text or stem')
+      }
+      let offset = 0
+      const inlines = parts.flatMap((part, index) => {
+        const localRanges = ranges.flatMap(range => {
+          const start = Math.max(range.start - offset, 0)
+          const end = Math.min(range.end - offset, part.text.length)
+          return end > start ? [{ start, end, marks: range.marks }] : []
+        })
+        const mapped = mapSourceEmphasisEdits(part.text, localRanges, corrections.get(part.pointer) || [])
+        if (mapped.text !== derived[index]?.text) throw new Error('OCR emphasis editorial mapping differs from effective text')
+        offset += part.text.length
+        return localRanges.length ? splitSourceEmphasis(mapped.text, mapped.ranges, derived[index].nodeId) : [derived[index]]
+      })
+      const observation = observationForLocator(`observation:source-emphasis:${targetId}`,
+        'source_reading_emphasis', locator,
+        { targetId, ranges: paragraph.sourceEmphasis, evidenceDigest: evidence.evidenceDigest,
+          confirmationSha256: sha256(ocrSourceBytes.confirmationBytes) }, documentsById)
+      observation.extraction.version = '4'
+      source.observations.push(observation)
+      for (const inline of inlines) derivedGroup.sourceSpanRefsByTarget[`content_node:${inline.nodeId}`] = [`source-span:${observation.observationId}`]
+      consumed.add(key)
+      return inlines
+    }
+    for (const [groupIndex, group] of raw.groups.entries()) {
+      if (group.family !== 'reading') continue
+      const derivedGroup = source.groups.find(item => item.groupId === group.groupId)
+      const derivedBlocks = new Map(sourceOrderedParagraphEntries(derivedGroup.content.blocks, '')
+        .map(({ block }) => [block.nodeId, block]))
+      for (const { block, path: blockPath } of sourceOrderedParagraphEntries(group.blocks, `/groups/${groupIndex}/blocks`)) {
+        if (block.content.some(item => item.kind !== 'text')) continue
+        const pointer = blockPath.replace(/\[(\d+)\]/gu, '/$1').replaceAll('.', '/')
+        const derived = derivedBlocks.get(block.blockId)
+        const inlines = apply(block.source, block.content.map((item, index) => ({
+          text: item.text, pointer: `${pointer}/content/${index}/text`,
+        })), derived.inlines, block.blockId, derivedGroup)
+        if (inlines) derived.inlines = inlines
+      }
+      for (const [index, question] of group.questions.entries()) {
+        const derived = derivedGroup.variant.questions[index]
+        const inlines = apply(question.source, [{ text: question.stem,
+          pointer: `/groups/${groupIndex}/questions/${index}/stem`,
+        }], derived.stem, question.questionId, derivedGroup, true)
+        if (inlines) derived.stem = inlines
+      }
+    }
+    if (consumed.size !== marked.size) throw new Error('OCR source emphasis has an unmatched or unsupported target')
+  } catch (error) {
+    issues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', error.message, '$.ocrSourceBytes'))
+  }
+}
+
 export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1MaterializationCandidateAuthorityRef) {
   const input = cloneNck1MaterializationInput(rawInput)
   const sourceDigest = bundleDigest(
@@ -1656,6 +1772,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     input.media,
     input.listeningAudio,
     input.spellingReviewBytes,
+    input.ocrSourceBytes,
   )
   let materialization = parseMaterialization(input.materializationBytes)
   if (!materialization) {
@@ -1702,11 +1819,20 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     derivationIssues,
     { authorityRef },
   )
-  if ([nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef58]
+  if ([nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
+    nck1MaterializationHistoricalAuthorityRef59]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
       input.spellingReviewBytes ? JSON.parse(new TextDecoder().decode(input.spellingReviewBytes)) : null,
       derivationIssues)
+  }
+  if (input.ocrSourceBytes) {
+    if (authorityRef.manifestDigest !== nck1MaterializationCandidateAuthorityRef.manifestDigest) {
+      derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
+    } else {
+      appendOcrReadingSourceEmphasis(source, rawMaterialization, validation.documentsById, input.ocrSourceBytes,
+        input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues)
+    }
   }
   if (derivationIssues.length > 0) {
     return {
@@ -1747,6 +1873,8 @@ export function nck1MaterializationSourceSummary(derivation) {
     byteLength:
       derivation.input.materializationBytes.byteLength
       + (derivation.input.spellingReviewBytes?.byteLength ?? 0)
+      + (derivation.input.ocrSourceBytes?.evidenceBytes.byteLength ?? 0)
+      + (derivation.input.ocrSourceBytes?.confirmationBytes.byteLength ?? 0)
       + derivation.input.documents.reduce((total, entry) => total + entry.bytes.byteLength, 0)
       + derivation.input.media.reduce((total, entry) => total + entry.bytes.byteLength, 0),
     ...(derivation.input.spellingReviewBytes ? {

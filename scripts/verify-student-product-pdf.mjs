@@ -5,6 +5,7 @@ import { validatePaperPaginationPlan, paginationPlanEdition } from '../server/pa
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import { searchFixedPagePdf, inspectGroups } from '../server/draft-paper/fixedPagePdfPlanner.mjs'
+import { embeddedPaperFontCss } from '../server/paper-fonts.mjs'
 
 const html = '<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}</style></head><body><section data-canonical-group-id="application"><div class="canonical-application-response"></div></section><section data-canonical-group-id="continuation"><div class="canonical-continuation-response">Both supplied starters</div></section></body></html>'
 const inspection = [
@@ -251,18 +252,23 @@ try {
   assert.ok(measured.inspection[0].fragments[0].pageTailLines > 13)
   assert.ok(measured.inspection[0].fragments[0].pageTailLines < 16, 'empty response space must count as occupied')
   const paperLayoutCss = readFileSync(new URL('../shared/papersurface/paperLayout.css', import.meta.url), 'utf8')
-  const fixture = `<html><head><style>${paperLayoutCss}
+  const readingLayoutCss = readFileSync(new URL('../shared/papersurface/readingLayout.css', import.meta.url), 'utf8')
+  const fontRenderingCss = readFileSync(new URL('../shared/papersurface/fontRendering.css', import.meta.url), 'utf8')
+  const fixture = `<html><head><style>${embeddedPaperFontCss()}</style><style>${paperLayoutCss}${readingLayoutCss}${fontRenderingCss}
     @page{size:A4;margin: 21mm 24mm 24mm 24mm;}
-    body{font-family:serif}.canonical-reading-figure figcaption{font-size:9pt}
+    body{font-family:'EQB Termes',serif}.canonical-reading-figure figcaption{font-size:9pt}
     .canonical-reading-table td{line-height:16pt}
     .canonical-options{display:grid;grid-template-columns:80px 180px;width:260px}
     .canonical-options>span{white-space:nowrap}
-    </style></head><body><p class="canonical-paper-mock-name">2026 Joint Examination</p>
+    </style></head><body class="paper-print"><p class="canonical-paper-mock-name">2026 Joint Examination</p>
     <div class="canonical-paper-cover-title">English</div>
     <div class="canonical-paper-cover-notices">Administrative notices</div>
-    <section class="question-group"><figure class="canonical-reading-figure"><figcaption>Source caption</figcaption></figure>
-    <table class="canonical-reading-table" style="width:160px"><tr><td>Wrapped source table text for reading.</td></tr></table>
+    <section class="question-group" data-canonical-group-type="reading"><figure class="canonical-reading-figure"><figcaption>Source caption</figcaption></figure>
+    <table class="canonical-reading-table" style="width:400px"><tr><td><span data-canonical-content-node-id="table-title">Festival title
+</span><span data-canonical-content-node-id="table-body">Separate body paragraph.</span></td></tr></table>
     <div class="canonical-options"><span>A. This option does not fit its narrow cell</span><span>B. Short</span></div>
+    <div class="canonical-options" data-gutter-regression style="width:438.2pt;grid-template-columns:208pt 230.2pt"><span>A. Short</span><span>B. Short</span><span>C. To compare different publishing houses.</span><span>D. Short</span></div>
+    <div class="canonical-options" data-twip-rounding-regression style="width:438.2pt;grid-template-columns:218.55pt 219.65pt"><span><span>A.</span> <span>It mainly helps the tech-skilled.</span></span><span><span>B.</span> <span>Its negatives may outweigh positives.</span></span><span><span>C.</span> <span>It can hurt or improve work and well-being.</span></span><span><span>D.</span> <span>It often lowers productivity and satisfaction.</span></span></div>
     </section></body></html>`
   for (const fontSizePt of [12, 10.5]) {
     const actual = await renderPaginatedPaper(applyStudentProductLayout(fixture, { ...layout, fontSizePt }, 'economy8'), {
@@ -275,6 +281,10 @@ try {
         return { caption: type('figcaption'), table: type('td'),
           mockName: type('.canonical-paper-mock-name'), subject: type('.canonical-paper-cover-title'),
           single: root.querySelector('.canonical-options').hasAttribute('data-pdf-single-column'),
+          gutterSingle: root.querySelector('[data-gutter-regression]').hasAttribute('data-pdf-single-column'),
+          roundingSingle: root.querySelector('[data-twip-rounding-regression]').hasAttribute('data-pdf-single-column'),
+          tableParagraphOffset: root.querySelector('td span:last-child').getBoundingClientRect().top
+            - root.querySelector('td span:first-child').getBoundingClientRect().top,
           notices: getComputedStyle(root.querySelector('.canonical-paper-cover-notices')).display }
       }),
     })
@@ -284,6 +294,12 @@ try {
     assert.deepEqual(actual.inspection.mockName, [24, 36], '18pt/27pt name stays independent of both body tiers')
     assert.ok(Math.abs(actual.inspection.subject[0] - 80 / 3) < 0.001, 'subject stays 20pt')
     assert.equal(actual.inspection.single, true)
+    assert.equal(actual.inspection.gutterSingle, fontSizePt === 12,
+      'a fitting cell still needs the inter-option gutter; the smaller tier retains its valid columns')
+    assert.equal(actual.inspection.roundingSingle, fontSizePt === 12,
+      'sub-twip browser rounding must not reject a safe source-authority column layout')
+    assert.ok(actual.inspection.tableParagraphOffset > 20,
+      'an explicit source table paragraph break must survive rendering, not become titlebody')
     assert.equal(actual.inspection.notices, 'none')
     assert.equal(actual.pageCount, 1)
   }

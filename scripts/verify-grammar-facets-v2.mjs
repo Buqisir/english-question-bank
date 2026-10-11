@@ -74,7 +74,7 @@ const NON_FINITE_KEY = 'grammar-fill.given.verb.non-finite'
 
 const registry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json'))
 const VALID_FACET_KEYS = new Set(registry.map((f) => f.facet_key))
-assert('Req 0: v2 registry has exactly 22 leaves', VALID_FACET_KEYS.size === 22, `found: ${VALID_FACET_KEYS.size}`)
+assert('Req 0: v2 registry has exactly 23 leaves', VALID_FACET_KEYS.size === 23, `found: ${VALID_FACET_KEYS.size}`)
 const frozenPaperIds = JSON.parse(
   readRepoFile('docs/cuts/paper-canonical-unification/migration/manifest-v2.json'),
 ).membership.paperIds
@@ -277,7 +277,7 @@ assert(
   missingFromFrontend.length === 0,
   missingFromFrontend.join(', '),
 )
-assert('Req 5: grammarFillFacetRegistry.ts has exactly 22 entries', registryFrontendKeys.size === 22, `found: ${registryFrontendKeys.size}`)
+assert('Req 5: grammarFillFacetRegistry.ts has exactly 23 entries', registryFrontendKeys.size === 23, `found: ${registryFrontendKeys.size}`)
 
 // The retired v1 registry JSON is kept on disk as a historical record (Req 4
 // allowlist) but must have zero live importers — analyzeGrammarFill.mjs

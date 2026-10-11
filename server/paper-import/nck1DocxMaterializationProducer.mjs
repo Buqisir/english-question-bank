@@ -9,7 +9,7 @@ export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
   'nck1-docx-materialization-producer-v11'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
+const BLANK = /(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
 const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]{0,120}英语试(?:题|卷)(?:参考)?)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?[:：]?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
 const LISTENING_TRANSCRIPT_HEADING = /^(?:附[:：]?\s*)?(?:【)?(?:(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料)(?:[（(]录音稿[）)])?(?:】)?[:：]?$/u

@@ -314,7 +314,7 @@ assert.equal(Boolean(misplacedDirectionConfirmation.compilation), false,
   'a suspected passage instruction blocks confirmed compilation')
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '59')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '61')
 assert.equal(nck1MaterializationHistoricalAuthorityRef58.manifestVersion, '58')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
@@ -706,8 +706,8 @@ const rawAdmission = admitCanonicalPaperImport({
   sourceAssetVersion: 1,
 })
 assert.equal(rawAdmission.ok, true,
-  `raw v59 admission and consumers remain valid: ${JSON.stringify(rawAdmission.diagnostics)}`)
-assert.equal(rawAdmission.sealed.manifest.authority.manifestVersion, '59')
+  `raw v61 admission and consumers remain valid: ${JSON.stringify(rawAdmission.diagnostics)}`)
+assert.equal(rawAdmission.sealed.manifest.authority.manifestVersion, '61')
 for (const side of ['left', 'right']) {
   const missingInput = sourceInput({ listening: false, mixedTable: false })
   const missing = JSON.parse(new TextDecoder().decode(missingInput.materializationBytes))

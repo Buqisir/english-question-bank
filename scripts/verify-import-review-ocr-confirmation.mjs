@@ -17,6 +17,7 @@ import { createImportReviewRoutes } from '../server/import-review/importReviewRo
 import {
   createImportReviewStore,
   ocrReviewBundleDigest,
+  reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
 import {
   buildNck1OcrReviewProjection,
@@ -39,7 +40,7 @@ import {
   readJsonRouteBody,
   runRoutes,
 } from '../server/router/index.mjs'
-import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const paperId = `paper-synthetic-ocr-review-${process.pid}`
@@ -524,8 +525,13 @@ try {
   result = await proofread(publicRevision, { confirmation, correctionNotes: [] })
   assert.equal((await result.json()).code, 'IMPORT_REVIEW_OCR_REPORT_INVALID', 'changed text needs an audit note')
   const editedItem = confirmedPage.orderedItems.find((item) => item.text.endsWith('[owner checked]'))
-  const correctionNotes = [{ itemId: editedItem.itemId, kind: 'ocr_repair',
-    sourceText: editedItem.text, reason: 'Synthetic pixel comparison correction' }]
+  const questionItem = confirmedPage.orderedItems.find((item) => item.text.startsWith('1. '))
+  const correctionNotes = [
+    { itemId: editedItem.itemId, kind: 'ocr_repair',
+      sourceText: editedItem.text, reason: 'Synthetic pixel comparison correction' },
+    { itemId: questionItem.itemId, kind: 'ocr_repair',
+      sourceText: questionItem.text, reason: 'Preserve the numbered source item before stem projection' },
+  ]
   result = await proofread(publicRevision, { confirmation, correctionNotes,
     bundleDigest: `sha256:${'0'.repeat(64)}` })
   assert.equal((await result.json()).code, 'IMPORT_REVIEW_STALE_REVISION')
@@ -536,7 +542,7 @@ try {
   const receipt = (await result.json()).receipt
   assert.equal(receipt.reviewerKind, 'import_agent')
   assert.equal(receipt.confirmedBy, 'synthetic-agent')
-  assert.equal(receipt.correctionReport.entries.length, 1)
+  assert.equal(receipt.correctionReport.entries.length, 2)
   assert.equal(receipt.correctionReport.entries[0].correctedText, editedItem.text)
   assert.equal(receipt.correctionReport.entries[0].page, 1)
   assert.equal(receipt.correctionReport.sourceSetDigest, fixture.evidence.sourceSetDigest)
@@ -579,6 +585,103 @@ try {
   }, reportContext), /incomplete/)
   assert.doesNotThrow(() => validateAgentOcrCorrectionSidecar({ ...candidateReport, entries: [] }, reportContext))
   assert.throws(() => validateAgentOcrCorrectionSidecar(null, reportContext), /identity is incomplete/)
+
+  // Retain real server-held OCR receipts and exercise Candidate finalization.
+  // The synthetic projection isolates the structural field mapping from the
+  // unrelated full-paper compiler, as in the media-receipt verifier.
+  const bindingStore = createImportReviewStore({
+    dbPath: path.join(tempRoot, 'review.sqlite'),
+    filesRoot: path.join(tempRoot, 'candidate-files'),
+    rendererBuildId: 'renderer-ocr-review-verifier',
+    projectRevision(directory) {
+      const marker = JSON.parse(readFileSync(path.join(directory, 'marker.json'), 'utf8'))
+      validateAgentOcrCorrectionSidecar(marker.report, {
+        ...reportContext, materialization: marker.materialization,
+      })
+      return {
+        paperId, importProfile: 'public-paper-v1', manifest: fixture.manifest,
+        sourceDigest: reportContext.sourceDigest, candidateDigest: reportContext.candidateDigest,
+        visibleStructureDigest: sha256(Buffer.from('synthetic-visible-structure')),
+        paragraphSummariesDigest: sha256(Buffer.from('synthetic-summaries')),
+        publicSearchMetadataDigest: sha256(Buffer.from('synthetic-search-metadata')),
+        sourceInput: { materializationBytes: Buffer.from(JSON.stringify(marker.materialization)) },
+        ocrCorrectionReport: marker.report,
+      }
+    },
+  })
+  function finalizeBindingCase(materialization, entry) {
+    const report = { ...candidateReport, entries: [entry] }
+    const bytes = Buffer.from(JSON.stringify({ materialization, report }))
+    const input = {
+      schemaVersion: 'web-import-review-bundle-v3', paperId,
+      paperName: 'Synthetic OCR structural mapping', importProfile: 'public-paper-v1',
+      sourceDigest: reportContext.sourceDigest, candidateDigest: reportContext.candidateDigest,
+      visibleStructureDigest: sha256(Buffer.from('synthetic-visible-structure')),
+      paragraphSummariesDigest: sha256(Buffer.from('synthetic-summaries')),
+      publicSearchMetadataDigest: sha256(Buffer.from('synthetic-search-metadata')),
+      ocrCorrectionReportVersion: report.schemaVersion, ocrCorrectionReportDigest: digestJson(report),
+      producerBuildId: 'synthetic-ocr-structural-mapping',
+      files: [{ path: 'marker.json', mediaType: 'application/json', role: 'synthetic-projection',
+        sha256: sha256(bytes), byteLength: bytes.byteLength }],
+    }
+    const created = bindingStore.createRevision({ ...input, bundleDigest: reviewBundleDigest(input) })
+    const target = bindingStore.fileForUpload(created.revision.id, 'marker.json')
+    writeFileSync(target.destination, bytes)
+    bindingStore.completeFileUpload(created.revision.id, 'marker.json', input.files[0])
+    return bindingStore.finalizeRevision(created.revision.id)
+  }
+  const source = { kind: 'page_region', documentId: 'question-source-1', page: 1 }
+  const stem = questionItem.text.slice('1. '.length)
+  const questionEntry = {
+    ocrItemId: questionItem.itemId, category: 'ocr_misrecognition',
+    before: questionItem.text, after: stem, reason: 'Question number is a structural field',
+    sourceLocator: source, materializationTarget: { jsonPointer: '/listening/questions/0/stem' },
+  }
+  const questionMaterialization = { listening: { questions: [{ canonicalNumber: 1, stem, source }] } }
+  const tablePointer = '/groups/0/blocks/0/rows/0/cells/0/content/0/text'
+  const tableEntry = {
+    ocrItemId: questionItem.itemId, category: 'ocr_misrecognition',
+    before: questionItem.text, after: `${questionItem.text}\n`,
+    reason: 'Separate the source heading from the next table-cell text run',
+    sourceLocator: source, materializationTarget: { jsonPointer: tablePointer },
+  }
+  const tableMaterialization = { groups: [{ blocks: [{ kind: 'table', source, rows: [{ cells: [{
+    content: [{ kind: 'text', text: tableEntry.after }, { kind: 'text', text: editedItem.text }],
+  }] }] }] }] }
+  const readingMaterialization = { groups: [{ questions: [{ sourceNumber: 1, canonicalNumber: 1, stem, source }] }] }
+  for (const [materialization, entry] of [
+    [questionMaterialization, questionEntry],
+    [readingMaterialization, { ...questionEntry, materializationTarget: { jsonPointer: '/groups/0/questions/0/stem' } }],
+    [tableMaterialization, tableEntry],
+  ]) {
+    const finalized = finalizeBindingCase(materialization, entry)
+    assert.equal(finalized.state, 'awaiting_review')
+    assert.equal(finalized.approval, null, 'Structural projection is not final Owner approval')
+  }
+  const wrongNumber = structuredClone(questionMaterialization)
+  wrongNumber.listening.questions[0].canonicalNumber = 2
+  const wrongSource = structuredClone(questionMaterialization)
+  wrongSource.listening.questions[0].source.page = 2
+  const finalRun = structuredClone(tableMaterialization)
+  finalRun.groups[0].blocks[0].rows[0].cells[0].content.pop()
+  const wrongTableSource = structuredClone(tableMaterialization)
+  wrongTableSource.groups[0].blocks[0].source.page = 2
+  const wrongFollowingItem = structuredClone(tableMaterialization)
+  wrongFollowingItem.groups[0].blocks[0].rows[0].cells[0].content[1].text = 'Unrelated source item'
+  for (const [materialization, entry] of [
+    [wrongNumber, questionEntry], [wrongSource, questionEntry],
+    [finalRun, tableEntry], [wrongTableSource, tableEntry], [wrongFollowingItem, tableEntry],
+    [{ text: tableEntry.after }, { ...tableEntry, materializationTarget: { jsonPointer: '/text' } }],
+    [questionMaterialization, { ...questionEntry, before: 'Changed historical OCR' }],
+    [questionMaterialization, { ...questionEntry, sourceLocator: { ...source, page: 2 } }],
+  ]) assert.throws(() => finalizeBindingCase(materialization, entry),
+    (error) => error.code === 'IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID')
+  for (const after of [`${questionItem.text} `, `${questionItem.text}\n\n`, `${questionItem.text} altered\n`]) {
+    const materialization = structuredClone(tableMaterialization)
+    materialization.groups[0].blocks[0].rows[0].cells[0].content[0].text = after
+    assert.throws(() => finalizeBindingCase(materialization, { ...tableEntry, after }),
+      (error) => error.code === 'IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID')
+  }
 
   assert.equal(receipt.candidateReportRequired, true)
   const nextOcrManifest = { ...publicManifest, producerBuildId: 'synthetic-ocr-review-successor' }

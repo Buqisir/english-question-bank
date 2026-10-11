@@ -13,7 +13,10 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
-import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
+import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
+import { nck1MaterializationHistoricalAuthorityRef59 } from '../shared/paper-canonical/authority.mjs'
+import { materializeNck1CanonicalRequest, admitLiveConfirmedNck1MaterializationImport } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
+import { loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
 import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
 import { inspectNck1Materialization } from './import-pipeline/nck1-docx-materialize.mjs'
 import {
@@ -35,6 +38,10 @@ import {
 const root = path.resolve(import.meta.dirname, '..')
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')
 const paperId = `paper-synthetic-ocr-evidence-${process.pid}`
+execFileSync(process.execPath, [path.join(root, 'scripts/generate-paper-ocr-emphasis-authority.mjs'), '--check'], {
+  cwd: root,
+  stdio: 'inherit',
+})
 const fixture = await makeSyntheticNck1OcrFixture({ paperId })
 
 function validRegion(region) {
@@ -54,10 +61,11 @@ function assertLocatedIssue(item) {
   assert(validRegion(item.source?.region))
 }
 
-function imported(produced) {
+function imported(produced, ocrSourceBytes = null) {
   return importCanonicalCandidate({
     kind: 'nck1-source-materialization',
     materializationBytes: new TextEncoder().encode(JSON.stringify(produced.materialization)),
+    ...(ocrSourceBytes ? { ocrSourceBytes } : {}),
     documents: fixture.sourceDocuments.map((document) => ({
       documentId: document.documentId,
       bytes: document.bytes,
@@ -198,6 +206,68 @@ assert.deepEqual(canonical.issues, [])
 assert.equal(canonical.candidate?.interpretation.groups.length, 9)
 assert.equal(canonical.candidate?.interpretation.assertions.length, 45)
 
+// Previously confirmed text-only v59 candidates must not be upgraded on replay.
+const historical = importCanonicalCandidate(canonical.candidate.sourceInput, undefined, {
+  materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef59,
+})
+assert.deepEqual(historical.issues, [])
+assert.notEqual(historical.candidate.candidateDigest, canonical.candidate.candidateDigest)
+const historicalRequest = materializeNck1CanonicalRequest(historical.candidate.sourceInput, {
+  schemaVersion: 'teacher-confirmation-v1', confirmed: true,
+  candidateDigest: historical.candidate.candidateDigest,
+  sourceDigest: historical.candidate.source.sha256,
+})
+assert.equal(historicalRequest.request.authority.manifestVersion, '59')
+assert.equal(admitLiveConfirmedNck1MaterializationImport(historicalRequest.request).compilation.disposition, 'ready')
+
+// Source-checked OCR ranges are original UTF-16 positions, not a word search.
+const markedConfirmation = cloneJson(fixture.confirmation)
+markedConfirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
+const markedItems = markedConfirmation.documents[0].pages.flatMap((page) => page.orderedItems)
+const markedParagraph = markedItems.find((item) => item.text === 'C passage keeps one small promise.')
+const markedStem = markedItems.find((item) => item.text.startsWith('30. Which choice fits item 30?\n'))
+assert(markedParagraph && markedStem)
+markedParagraph.sourceEmphasis = [{ start: 20, end: 25, marks: ['bold', 'underline'] }]
+markedStem.sourceEmphasis = [{ start: 10, end: 16, marks: ['underline'] }]
+const markedProduced = produceNck1OcrMaterialization({
+  paperId, documents: fixture.sourceDocuments, evidence: fixture.evidence, confirmation: markedConfirmation,
+})
+assert.equal(markedProduced.disposition, 'ready_for_verification')
+const ocrSourceBytes = {
+  evidenceBytes: new TextEncoder().encode(JSON.stringify(fixture.evidence)),
+  confirmationBytes: new TextEncoder().encode(JSON.stringify(markedConfirmation)),
+}
+const marked = imported(markedProduced, ocrSourceBytes)
+assert.deepEqual(marked.issues, [])
+const markedReading = marked.candidate.interpretation.groups.find((group) => group.slotId === 'reading.c')
+assert.deepEqual(markedReading.content.blocks[0].inlines.map(({ text, marks }) => ({ text, ...(marks ? { marks } : {}) })), [
+  { text: 'C passage keeps one ' }, { text: 'small', marks: ['bold', 'underline'] }, { text: ' promise.' },
+])
+const question30 = markedReading.variant.questions.find((question) => question.questionId.endsWith(':30'))
+assert.deepEqual(question30.stem.map(({ text, marks }) => ({ text, ...(marks ? { marks } : {}) })), [
+  { text: 'Which ' }, { text: 'choice', marks: ['underline'] }, { text: ' fits item 30?' },
+])
+const markedPreview = compileNck1MaterializationCandidatePreview(marked.candidate)
+assert(markedPreview.compilation, JSON.stringify(markedPreview.unresolvedIssues))
+const markedRequest = materializeNck1CanonicalRequest(marked.candidate.sourceInput, {
+  schemaVersion: 'teacher-confirmation-v1', confirmed: true,
+  candidateDigest: marked.candidate.candidateDigest, sourceDigest: marked.candidate.source.sha256,
+})
+assert.equal(admitLiveConfirmedNck1MaterializationImport(markedRequest.request).compilation.disposition, 'ready')
+for (const change of ['out-of-range', 'option', 'stale-evidence']) {
+  const invalid = cloneJson(markedConfirmation)
+  const paragraph = invalid.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.itemId === markedParagraph.itemId)
+  const stem = invalid.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.itemId === markedStem.itemId)
+  if (change === 'out-of-range') paragraph.sourceEmphasis[0].end = paragraph.text.length + 1
+  if (change === 'option') stem.sourceEmphasis = [{ start: stem.text.indexOf('A.'), end: stem.text.length, marks: ['bold'] }]
+  if (change === 'stale-evidence') invalid.evidenceDigest = `sha256:${'0'.repeat(64)}`
+  const rejected = imported(markedProduced, { ...ocrSourceBytes,
+    confirmationBytes: new TextEncoder().encode(JSON.stringify(invalid)) })
+  assert(rejected.issues.some(issue => issue.code === 'MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED'), change)
+}
+
 const lowConfidence = cloneJson(fixture.evidence)
 const lowObservation = lowConfidence.documents[0].pages
   .flatMap((page) => page.observations)[0]
@@ -320,7 +390,7 @@ try {
   writeFileSync(questionPath, fixture.sourceDocuments[0].bytes)
   writeFileSync(answerPath, fixture.sourceDocuments[1].bytes)
   writeFileSync(evidencePath, `${JSON.stringify(fixture.evidence, null, 2)}\n`)
-  writeFileSync(confirmationPath, `${JSON.stringify(fixture.confirmation, null, 2)}\n`)
+  writeFileSync(confirmationPath, `${JSON.stringify(markedConfirmation, null, 2)}\n`)
   const run = (...args) => execFileSync(process.execPath, [cliPath, ...args], {
     cwd: root,
     encoding: 'utf8',
@@ -375,6 +445,11 @@ try {
   assert.match(run('verify', paperId), /"groups": 9/u)
   assert.match(run('verify', paperId), /"assertions": 45/u)
   assert.match(run('build', paperId), /BUILT CANDIDATE/u)
+  const reloaded = importCanonicalCandidate(loadNck1ReviewSource(cliPaperDir).sourceInput)
+  assert.deepEqual(reloaded.issues, [])
+  const reloadedReading = reloaded.candidate.interpretation.groups.find(group => group.slotId === 'reading.c')
+  assert.deepEqual(reloadedReading.content.blocks[0].inlines, markedReading.content.blocks[0].inlines)
+  assert.deepEqual(reloadedReading.variant.questions.find(question => question.questionId.endsWith(':30')).stem, question30.stem)
   const stagedEvidencePath = path.join(
     cliPaperDir,
     'materialization/nck1-ocr-source-evidence-v1.json',
@@ -394,7 +469,7 @@ try {
   const readyReviewBytes = readFileSync(reviewPath)
   const historicalVersion = 'nck1-ocr-materialization-producer-v6'
   const historicalDigest = nck1OcrProducerSourceDigest(fixture.sourceDocuments, {
-    evidence: fixture.evidence, confirmation: fixture.confirmation, producerVersion: historicalVersion,
+    evidence: fixture.evidence, confirmation: markedConfirmation, producerVersion: historicalVersion,
   })
   writeFileSync(receiptPath, JSON.stringify({ ...readyReceipt, producerVersion: historicalVersion, sourceDigest: historicalDigest }))
   writeFileSync(reviewPath, JSON.stringify({ ...JSON.parse(readyReviewBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }))
@@ -415,7 +490,7 @@ try {
     .find((region) => region.regionId === correctedObservation.regionId)
     .region = cloneJson(correctedObservation.region)
   rebound(correctedEvidence)
-  const correctedConfirmation = cloneJson(fixture.confirmation)
+  const correctedConfirmation = cloneJson(markedConfirmation)
   correctedConfirmation.evidenceDigest = correctedEvidence.evidenceDigest
   writeFileSync(stagedEvidencePath, `${JSON.stringify(correctedEvidence, null, 2)}\n`)
   writeFileSync(stagedConfirmationPath, `${JSON.stringify(correctedConfirmation, null, 2)}\n`)

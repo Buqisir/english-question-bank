@@ -4,6 +4,7 @@
     "routes": [
       "present-stable-description",
       "present-frequency-marker",
+      "present-progressive-current-action",
       "past-explicit-time",
       "past-context-cue",
       "past-narrative-chain",
@@ -81,6 +82,7 @@
     "features": [
       "present-stable-description",
       "present-frequency-marker",
+      "present-progressive-current-action",
       "past-explicit-time",
       "past-context-cue",
       "past-narrative-chain",
@@ -142,6 +144,11 @@
   {
     "facet_key": "grammar-fill.given.conversion.adjective-to-noun",
     "routes": ["derived-noun"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.adjective-to-adjective",
+    "routes": ["negative-prefix"],
     "features": []
   },
   {

@@ -32,6 +32,7 @@ import { readSourceReferencePublication } from '../../server/paper-import/source
 import {
   ocrReviewBundleDigest,
   reviewBundleDigest,
+  validateAgentOcrCorrectionReceipt,
 } from '../../server/import-review/importReviewStore.mjs'
 import {
   buildNck1OcrReviewProjection,
@@ -811,12 +812,14 @@ function finalizeOcrCorrectionReport(paperId) {
     ocrEvidenceDigest: receipt.evidenceDigest,
     entries: authored.entries,
   }
+  const materialization = JSON.parse(new TextDecoder().decode(loaded.sourceInput.materializationBytes))
   validateAgentOcrCorrectionSidecar(report, {
-    materialization: JSON.parse(new TextDecoder().decode(loaded.sourceInput.materializationBytes)),
+    materialization,
     paperId, documents: loaded.manifest.documents,
     sourceDocuments: loaded.sourceInput.documents,
     sourceDigest: report.sourceDigest, candidateDigest: report.candidateDigest,
   })
+  validateAgentOcrCorrectionReceipt(report, receipt, materialization)
   const target = path.join(paperDir, 'agent-ocr-correction-report-v2.json')
   if (existsSync(target)) fail(`OCR correction report already exists: ${target}`)
   writeFileSync(target, `${stableStringify(report)}\n`, { flag: 'wx' })

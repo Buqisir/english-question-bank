@@ -27,6 +27,7 @@ import {
   NCK1_OCR_CONFIRMATION_FILE_NAME,
   NCK1_OCR_EVIDENCE_FILE_NAME,
   NCK1_OCR_REVIEW_CODES,
+  loadNck1OcrSourceEmphasis,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
@@ -821,6 +822,7 @@ function loadInput(paperId) {
     kind: 'nck1-source-materialization',
     materializationBytes,
     ...(spellingReviewBytes ? { spellingReviewBytes } : {}),
+    ...loadNck1OcrSourceEmphasis(paperDir),
     documents: materialization.documents.map((document) => {
       const sourcePath = documentPathById.get(document.documentId)
       if (!sourcePath || !existsSync(sourcePath)) fail(`Materialized document is unavailable: ${document.documentId}`)

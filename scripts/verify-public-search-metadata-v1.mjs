@@ -53,6 +53,10 @@ assert.equal(seven.questions[0].sourceNumber, 36)
 assert.ok(seven.blocks[1].content.some((item) => item.kind === 'blank_ref'), 'inline blank identity is preserved')
 const application = prepared.sourceGroups.find((group) => group.family === 'application-writing')
 assert.deepEqual(application.writingTask.givenSkeleton, [{ text: 'Dear Chris,', role: 'salutation' }])
+for (const group of prepared.sourceGroups.filter((group) => group.writingTask)) {
+  assert.equal(group.writingTaskId, `writing-task:${group.groupId}`,
+    'the request supplies each writing identity required by its output contract')
+}
 assert.equal(prepared.outputContract.properties.groups.items.allOf[1].oneOf.length, 6)
 const authoredContractValidate = new Ajv({ strict: true }).compile(prepared.outputContract)
 assert.equal(Object.hasOwn(prepared.binding, 'paperDigest'), false)
@@ -71,8 +75,8 @@ const authored = { groups: prepared.sourceGroups.map((group) => {
     similarityProfile: { route: prompt ? 'present-stable-description' : 'the-anaphoric', features: [] },
     contextParagraphIds: prepared.deterministic.find((item) => item.groupId === group.groupId).paragraphIds,
   })) }
-  if (group.family === 'application-writing') metadata = { writingTaskId: `writing-task:${group.groupId}`, form: 'thank-you email', function: 'apology and thanks' }
-  if (group.family === 'continuation-writing') metadata = { writingTaskId: `writing-task:${group.groupId}`, situation: 'A situation develops.', conflict: 'A problem must be resolved.', relationships: [] }
+  if (group.family === 'application-writing') metadata = { writingTaskId: group.writingTaskId, form: 'thank-you email', function: 'apology and thanks' }
+  if (group.family === 'continuation-writing') metadata = { writingTaskId: group.writingTaskId, situation: 'A situation develops.', conflict: 'A problem must be resolved.', relationships: [] }
   return { groupId: group.groupId, family: group.family, topicLabels: [labelA, labelB], genre: '记叙', metadata }
 }) }
 assert.equal(authoredContractValidate(authored), true, JSON.stringify(authoredContractValidate.errors))
@@ -100,6 +104,41 @@ assert.deepEqual(validatePublicSearchMetadata({ sidecar: final, ...binding }), [
 const persisted = JSON.parse(stableStringify(final))
 assert.deepEqual(validatePublicSearchMetadata({ sidecar: persisted, ...binding }), [],
   'CLI canonical JSON persistence must not invalidate derived object fields')
+
+const progressiveMaterialization = structuredClone(materialization)
+const progressiveQuestion = progressiveMaterialization.groups.find((group) => group.family === 'grammar-fill').questions[0]
+progressiveQuestion.prompt = 'recover'
+progressiveMaterialization.answers.find((answer) => answer.questionId === progressiveQuestion.questionId).value = 'are recovering'
+const progressiveAuthored = structuredClone(authored)
+progressiveAuthored.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0].similarityProfile.route = 'present-progressive-current-action'
+const progressiveBinding = { ...binding, materialization: progressiveMaterialization }
+const progressiveRequest = preparePublicSearchMetadataRequest(progressiveBinding)
+assert.ok(progressiveRequest.controlledValues.grammarSimilarity.find((facet) => facet.facet_key === 'grammar-fill.given.verb.finite').routes.includes('present-progressive-current-action'))
+const progressive = finalizePublicSearchMetadata({ authored: progressiveAuthored, ...progressiveBinding })
+const progressiveResult = progressive.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0]
+assert.equal(progressiveResult.similarityProfile.route, 'present-progressive-current-action')
+assert.equal(progressiveResult.derived.tense, 'progressive')
+assert.deepEqual(validatePublicSearchMetadata({ sidecar: progressive, ...progressiveBinding }), [])
+
+const negativeMaterialization = structuredClone(materialization)
+const negativeQuestion = negativeMaterialization.groups.find((group) => group.family === 'grammar-fill').questions[0]
+negativeQuestion.prompt = 'complete'
+negativeMaterialization.answers.find((answer) => answer.questionId === negativeQuestion.questionId).value = 'incomplete'
+const negativeAuthored = structuredClone(authored)
+const negativeMetadata = negativeAuthored.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0]
+negativeMetadata.facetKey = 'grammar-fill.given.conversion.adjective-to-adjective'
+negativeMetadata.similarityProfile = { route: 'negative-prefix', features: [] }
+const negativeBinding = { ...binding, materialization: negativeMaterialization }
+const negativeRequest = preparePublicSearchMetadataRequest(negativeBinding)
+assert.deepEqual(negativeRequest.controlledValues.grammarSimilarity.find((facet) => facet.facet_key === negativeMetadata.facetKey)?.routes,
+  ['negative-prefix'], 'same-POS adjective negation must not require a verb-to-adjective classification')
+assert.equal(new Ajv({ strict: true }).compile(negativeRequest.outputContract)(negativeAuthored), true)
+const negative = finalizePublicSearchMetadata({ authored: negativeAuthored, ...negativeBinding })
+const negativeResult = negative.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0]
+assert.equal(negativeResult.facetKey, 'grammar-fill.given.conversion.adjective-to-adjective')
+assert.deepEqual(negativeResult.similarityProfile, { route: 'negative-prefix', features: [] })
+assert.equal(negativeResult.role, null)
+assert.deepEqual(validatePublicSearchMetadata({ sidecar: negative, ...negativeBinding }), [])
 
 const schema = JSON.parse(readFileSync(new URL('../schemas/paper-import/public-search-metadata-v1.schema.json', import.meta.url)))
 const schemaValidate = new Ajv({ strict: true }).compile(schema)

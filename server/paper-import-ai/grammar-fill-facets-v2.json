@@ -6,6 +6,7 @@
   { "facet_key": "grammar-fill.given.conversion.noun-to-verb",           "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.conversion.adjective-to-adverb",    "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.conversion.adjective-to-noun",      "blank_type": "given"   },
+  { "facet_key": "grammar-fill.given.conversion.adjective-to-adjective", "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.conversion.verb-to-adjective",      "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.conversion.verb-to-noun",           "blank_type": "given"   },
   { "facet_key": "grammar-fill.given.conversion.verb-to-adverb",         "blank_type": "given"   },

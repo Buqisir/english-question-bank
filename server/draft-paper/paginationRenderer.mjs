@@ -53,6 +53,7 @@
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { abcdLayoutRules } from '../../shared/paper-canonical/abcdLayout.mjs'
 import { withChromiumPage } from './chromiumPool.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -149,19 +150,28 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
         }
       }
     })
-    const measureOptions = (prepare) => {
+    const measureOptions = ({ prepare, minimumGutterPx, fitSafetyPx, twipPx }) => {
       const root = prepare ? document : document.querySelector('.pagedjs_pages')
       const failures = []
       for (const options of root.querySelectorAll('.canonical-options,.options-grid--listening')) {
         let overflow = options.scrollWidth > options.clientWidth + 1
+        const measuredColumns = getComputedStyle(options).gridTemplateColumns.split(' ').length
+        const preserveGutter = measuredColumns > 1 && (options.matches('.options-grid--listening')
+          || options.closest('[data-canonical-group-type="reading"]'))
         for (const cell of options.children) {
           const box = cell.getBoundingClientRect()
+          const nextBox = cell.nextElementSibling?.getBoundingClientRect()
+          const sharesRow = nextBox && Math.abs(nextBox.top - box.top) < 1 && nextBox.left > box.left
+          const textLimit = sharesRow ? nextBox.left - minimumGutterPx - fitSafetyPx : box.right - fitSafetyPx
           const walker = document.createTreeWalker(cell, NodeFilter.SHOW_TEXT)
           const range = document.createRange()
           while (walker.nextNode()) {
             if (!walker.currentNode.textContent.trim()) continue
             range.selectNodeContents(walker.currentNode)
-            if ([...range.getClientRects()].some(rect => rect.left < box.left - 1 || rect.right > box.right + 1)) overflow = true
+            // Canonical advances round outward to whole twips; Chromium boxes
+            // round to subpixels. Keep the gutter without rejecting sub-twip noise.
+            if ([...range.getClientRects()].some(rect => rect.left < box.left - 1 || rect.right > box.right + 1
+              || (preserveGutter && rect.right > textLimit + twipPx))) overflow = true
           }
         }
         if (!overflow) continue
@@ -170,7 +180,12 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
       }
       return failures
     }
-    if (studentProduct) await page.evaluate(measureOptions, true)
+    const optionSafety = {
+      minimumGutterPx: abcdLayoutRules.minimumGutterTwip / 20 * 96 / 72,
+      fitSafetyPx: abcdLayoutRules.fitSafetyTwip / 20 * 96 / 72,
+      twipPx: 96 / 72 / 20,
+    }
+    if (studentProduct) await page.evaluate(measureOptions, { ...optionSafety, prepare: true })
 
     // Step 2: PagedConfig BEFORE step 3's polyfill injection — order is load-bearing,
     // see module header + spike-gate-dp1.md finding #3.
@@ -300,7 +315,7 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
       })
     }
     if (studentProduct) {
-      const failures = await page.evaluate(measureOptions, false)
+      const failures = await page.evaluate(measureOptions, { ...optionSafety, prepare: false })
       if (failures.length) throw Object.assign(new Error(`选项文字超出列宽：${failures.join(', ')}`), {
         code: 'PAPER_LAYOUT_OVERFLOW',
       })

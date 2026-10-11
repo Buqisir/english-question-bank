@@ -51,6 +51,19 @@ for (const block of produced.materialization.groups.find(group => group.family =
   assert.equal(block.content[0].text, 'A short guide has ', 'trim paragraph exterior, not the space facing the blank')
   assert.equal(block.content.at(-1).text, ' for learners.', 'retain the source separator after the blank')
 }
+const datedFixture = makeSyntheticNck1DocxFixture({
+  transformXml: (xml) => xml
+    .replace('40._____ for learners.', 'arrived in September 2024. ___40___ for learners.')
+    .replaceAll('注意：', '注意 :'),
+})
+const datedProduced = produceNck1DocxMaterialization({
+  paperId: datedFixture.paperId, documents: datedFixture.sourceDocuments,
+})
+assert.equal(datedProduced.disposition, 'ready_for_verification')
+const datedSeven = datedProduced.materialization.groups.find(group => group.family === 'seven-choices')
+assert.equal(datedSeven.questions[4].sourceNumber, 40, 'a preceding year must not become the blank number')
+assert.equal(datedSeven.blocks[4].content[0].text, 'A short guide has arrived in September 2024. ',
+  'blank extraction must preserve all four digits of a preceding year')
 const chineseNoticeFixture = makeSyntheticNck1DocxFixture({ chineseNoticeNumbering: true })
 const chineseNoticeProduced = produceNck1DocxMaterialization({
   paperId: chineseNoticeFixture.paperId, documents: chineseNoticeFixture.sourceDocuments,

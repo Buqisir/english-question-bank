@@ -42,6 +42,11 @@
   vertical-align: top;
 }
 
+:is(.ps-canonical-reading-table, .canonical-reading-table) td [data-canonical-content-node-id] {
+  /* Explicit source breaks belong to text nodes in every table layout. */
+  white-space: pre-line;
+}
+
 /* Current gold-reference tables allocate space to their content rather than
  * forcing equal columns. Keep body type/baselines; compactness comes from fewer
  * unnecessary wraps. Historical bindings retain their fixed-column layout. */

@@ -337,6 +337,10 @@ Watkins predictions 题属于写作手法，不能作为句段作用题的例证
 - **显性频率标志**：`always`、`often`、`every ...` 等直接提示习惯或
   反复发生；即使存量低频也单列，不能误标成“无标志客观描述”。
 
+**现在进行时：**`present-progressive-current-action` 记录由 `at present`、
+`now` 或上下文表明当前时刻／阶段正在进行的动作，不能归成一般现在时的
+稳定描述。程序派生时态沿用 `progressive`，判断路径区分现在与过去进行时。
+
 **一般过去时：**
 
 1. **明确过去时间**：具体年份、`... ago`、`last ...` 等直接锁定过去；
@@ -675,6 +679,13 @@ astonished` 是状态型分词宾补。第一层相似须保留角色区别；�
 一致敏感性和答案形式仍由程序从权威答案派生，不交给 AI 重写。
 
 ### 提示词为形容词（已确认）
+
+#### 形容词否定派生
+
+提示词和答案均为形容词、语境要求否定前缀时，使用
+`grammar-fill.given.conversion.adjective-to-adjective`，路线为 `negative-prefix`，
+`features: []`、`role: null`。如 `complete → incomplete`、`possible → impossible`。
+这不是比较等级，也不能记为动词变形容词；保留权威答案，不由分类规则造词。
 
 #### 形容词变副词（已确认）
 
