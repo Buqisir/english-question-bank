@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { mkdir, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises'
+import { chmod, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { createHash } from 'node:crypto'
@@ -8,12 +8,14 @@ import { DatabaseSync } from 'node:sqlite'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { loadStoredProducts, productInputDigest, readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
 import { readExamDate } from '../shared/examDate.mjs'
+import { PAPER_PDF_PRODUCTS } from '../shared/paperPdfProducts.mjs'
 import { sendListeningAudioFile } from '../server/paper-import/paperAssetStatic.mjs'
 import { createExportRoutes } from '../server/exports/exportRoutes.mjs'
+import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import { runRoutes } from '../server/router/index.mjs'
 import { productPdfBytes as pdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
-import { reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
+import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
@@ -39,6 +41,18 @@ try {
   await assert.rejects(local.put(source), /integrity/)
   assert.deepEqual(await readFile(blobPath), Buffer.alloc(source.length, 0x61), 'must not overwrite existing corrupt content addresses')
 
+  const missingDiskRoot = path.join(directory, 'must-not-fall-back')
+  for (const storageEnv of [
+    { QUESTION_BANK_PAPER_STORAGE_MOUNT: directory },
+    { QUESTION_BANK_PAPER_STORAGE_MOUNT: directory,
+      QUESTION_BANK_PAPER_STORAGE_UUID: '00000000-0000-0000-0000-000000000000' },
+  ]) {
+    const guarded = createBlobStore({ rootDir: missingDiskRoot, storageEnv })
+    await assert.rejects(guarded.put(source), { code: 'PAPER_STORAGE_MOUNT_UNAVAILABLE' })
+    await assert.rejects(stat(missingDiskRoot), { code: 'ENOENT' },
+      'a missing or incomplete disk binding cannot create a fallback object directory')
+  }
+
   let puts = 0
   const remoteBytes = new Map()
   const remote = createBlobStore({ backend: 'r2', bucket: 'test', endpoint: 'https://example.invalid', client: {
@@ -58,6 +72,71 @@ try {
   assert.deepEqual(await remote.get(uploaded), source)
   remoteBytes.set(`eqb-blobs/v1/sha256/${uploaded.sha256.slice(7)}`, Buffer.alloc(source.length))
   await assert.rejects(remote.get(uploaded), /integrity/)
+
+  // Real upload route/store: two private revisions share physical bytes, not
+  // just a matching digest in JSON. No finalization or publication is implied.
+  const custodyRoot = path.join(directory, 'custody')
+  const custody = createBlobStore({ rootDir: custodyRoot })
+  const reviewStore = createImportReviewStore({ dbPath: path.join(custodyRoot, 'review.sqlite'),
+    filesRoot: path.join(custodyRoot, 'revisions'), rendererBuildId: 'storage-fixture' })
+  const uploadRoutes = createImportReviewRoutes({ getStore: () => reviewStore,
+    getBlobStore: () => custody, agentToken: 'storage-upload-fixture' })
+  const audioSource = Buffer.from('original-audio-17: distinct from normalized playback')
+  const createUpload = (label, content = audioSource) => {
+    const file = { path: 'source/audio.mp3', sha256: digest(content), byteLength: content.length,
+      mediaType: 'audio/mpeg', role: 'source' }
+    const manifest = { schemaVersion: 'web-import-review-bundle-v1', paperId: 'paper-storage-upload',
+      paperName: 'Storage fixture', sourceDigest: file.sha256, candidateDigest: digest(Buffer.from(label)),
+      visibleStructureDigest: file.sha256, analysisDigest: file.sha256, producerBuildId: 'storage-fixture',
+      files: [file], resolvesIssueIds: [] }
+    manifest.bundleDigest = reviewBundleDigest(manifest)
+    const { revision } = reviewStore.createRevision(manifest)
+    return { revision, file, destination: path.join(reviewStore.revisionDirectory(revision.id), file.path) }
+  }
+  const uploadFile = async (upload, content = audioSource, authorized = true) => {
+    const request = Readable.from([content.subarray(0, 7), content.subarray(7)])
+    Object.assign(request, { method: 'PUT', headers: { 'content-length': String(content.length),
+      ...(authorized ? { authorization: 'Bearer storage-upload-fixture' } : {}) } })
+    const output = {}
+    const url = new URL(`http://localhost/api/import-agent-reviews/revisions/${upload.revision.id}/files`)
+    url.searchParams.set('path', upload.file.path)
+    assert.equal(await runRoutes(uploadRoutes, { request, response: {}, url,
+      context: { sendJson(_response, status, body) { Object.assign(output, { status, body }) } } }), true)
+    return output
+  }
+  const first = createUpload('first')
+  assert.equal((await uploadFile(first, audioSource, false)).status, 401)
+  assert.deepEqual(await readdir(reviewStore.revisionDirectory(first.revision.id)), [])
+  assert.equal((await uploadFile(first, Buffer.alloc(audioSource.length))).status, 400)
+  assert.equal(reviewStore.uploadStatus(first.revision.id).missingFiles.length, 1)
+  assert.equal((await uploadFile(first)).status, 200)
+  const second = createUpload('second')
+  assert.equal((await uploadFile(second)).status, 200)
+  const objectPath = path.join(custodyRoot, 'eqb-blobs/v1/sha256', first.file.sha256.slice(7))
+  const physical = await Promise.all([first.destination, second.destination, objectPath].map(file => stat(file)))
+  assert.equal(new Set(physical.map(file => `${file.dev}:${file.ino}`)).size, 1,
+    'identical private uploads must occupy one physical file')
+  for (const upload of [first, second]) assert.deepEqual(await readFile(upload.destination), audioSource)
+  assert.equal((await uploadFile(first)).status, 200, 'exact upload retries stay idempotent')
+  assert.deepEqual(await custody.put(audioSource, 'audio/mpeg'), {
+    sha256: first.file.sha256, byteLength: first.file.byteLength, mediaType: 'audio/mpeg',
+  })
+  assert.equal((await stat(objectPath)).ino, physical[0].ino, 'publication reuse must preserve the stored object')
+  const playback = Buffer.from('normalized-playback-31: different bytes must remain separate')
+  const third = createUpload('third', playback)
+  assert.equal((await uploadFile(third, playback)).status, 200)
+  assert.notEqual((await stat(third.destination)).ino, physical[0].ino)
+  await rm(first.destination)
+  assert.deepEqual(await readFile(second.destination), audioSource, 'removing one reference must not remove another')
+  await chmod(objectPath, 0o600)
+  const corrupt = Buffer.alloc(audioSource.length, 0x62)
+  await writeFile(objectPath, corrupt)
+  const fourth = createUpload('fourth')
+  assert.equal((await uploadFile(fourth)).status, 500)
+  assert.equal(reviewStore.uploadStatus(fourth.revision.id).missingFiles.length, 1)
+  assert.deepEqual(await readFile(objectPath), corrupt, 'corrupt addresses cannot be silently repaired by another upload')
+  await assert.rejects(stat(fourth.destination), { code: 'ENOENT' })
+  await assert.rejects(custody.get(first.file), /integrity/)
 
   // Boundary counts, different edition bytes, and a naturally five-page answer.
   const pageCounts = [12, 10, 8, 5]
@@ -152,6 +231,52 @@ try {
     visibleStructureDigest: projection.visibleStructureDigest, analysisDigest: projection.analysisDigest,
     producerBuildId: 'product-storage-verifier', files: reviewFiles, resolvesIssueIds: [] }
   reviewManifest.bundleDigest = reviewBundleDigest(reviewManifest)
+  const previewDb = path.join(directory, 'product-preview.sqlite')
+  const previewFiles = path.join(directory, 'product-preview-files')
+  const previewStore = createImportReviewStore({ dbPath: previewDb, filesRoot: previewFiles,
+    rendererBuildId: 'product-preview-fixture' })
+  const previewRevision = previewStore.createRevision(reviewManifest).revision
+  for (const file of reviewManifest.files) {
+    const upload = previewStore.fileForUpload(previewRevision.id, file.path)
+    await mkdir(path.dirname(upload.destination), { recursive: true })
+    await writeFile(upload.destination, await readFile(path.join(fixture.reviewRoot, file.path)))
+    previewStore.completeFileUpload(previewRevision.id, file.path, file)
+  }
+  previewStore.finalizeRevision(previewRevision.id)
+  const previewReader = createImportReviewStore({ dbPath: previewDb, filesRoot: previewFiles,
+    rendererBuildId: 'product-preview-fixture',
+    projectRevision() { throw new Error('Product reads cannot reprocess source') } })
+  const previewRoutes = createImportReviewRoutes({ getStore: () => previewReader,
+    buildPrintHtml() { throw new Error('Frozen products cannot render on GET') } })
+  const readPreview = async (suffix, role = 'owner') => {
+    const output = { headers: {} }
+    const response = { writeHead(status, headers) { Object.assign(output, { status, headers }) },
+      end(body) { output.body = body } }
+    const url = new URL(`http://fixture/api/import-review-preview/revisions/${previewRevision.id}/${suffix}`)
+    await runRoutes(previewRoutes, { request: { method: 'GET' }, response, url,
+      context: { session: { role }, sendJson(_response, status, body) { Object.assign(output, { status, body }) } } })
+    return output
+  }
+  for (const [index, edition] of Object.keys(PAPER_PDF_PRODUCTS).entries()) {
+    assert.equal((await readPreview(`pdf?edition=${edition}`, 'member')).status, 403)
+    const pdf = await readPreview(`pdf?edition=${edition}`)
+    assert.equal(pdf.status, 200)
+    assert.deepEqual(pdf.body, bytes[`products/${edition}.pdf`])
+    assert.equal(pdf.headers['x-eqb-pagination-pages'], String(pageCounts[index]))
+    assert.equal(pdf.headers['x-eqb-pagination-mode'], 'frozen')
+    const print = await readPreview(`print?edition=${edition}`)
+    assert.equal(print.status, 200)
+    assert.match(print.body, /data:application\/pdf;base64,/)
+  }
+  assert.deepEqual((await readPreview('asset/paper-asset.json')).body,
+    JSON.parse(JSON.stringify(projection.paperAsset)))
+  const previewConsumption = (await readPreview('consumption')).body
+  assert.match(previewConsumption.listeningAudio.url, new RegExp(previewRevision.id))
+  assert.equal(previewConsumption.listeningAudio.sha256, projection.listeningReview.audio.playbackAudioSha256)
+  const changedPdf = path.join(previewFiles, previewRevision.id, 'products/economy8.pdf')
+  await writeFile(changedPdf, bytes['products/largeNoListening.pdf'])
+  assert.equal((await readPreview('pdf?edition=economy8')).status, 409,
+    'changed frozen bytes must fail instead of rendering a replacement')
   const publicationDb = new DatabaseSync(':memory:')
   try {
     publicationDb.exec(await readFile(new URL('../data/sql/schema.sql', import.meta.url), 'utf8'))

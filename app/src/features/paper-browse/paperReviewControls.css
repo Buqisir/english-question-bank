@@ -1,0 +1,46 @@
+.paper-review-controls {
+  padding: var(--eqb-space-2) var(--eqb-space-5);
+  color: var(--eqb-color-text);
+  font-size: var(--eqb-font-size-sm);
+}
+
+.paper-review-controls-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--eqb-space-2);
+}
+
+.paper-review-controls-row > * {
+  min-height: 44px;
+  max-width: 100%;
+}
+
+.paper-review-controls p {
+  max-width: 75ch;
+  margin: var(--eqb-space-2) 0;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.paper-review-controls a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+.paper-review-controls textarea {
+  width: 100%;
+  max-width: 75ch;
+  field-sizing: content;
+  min-height: 7lh;
+  max-height: 50vh;
+  box-sizing: border-box;
+  padding: var(--eqb-space-2) var(--eqb-space-3);
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 8px;
+  background: var(--eqb-color-paper);
+  color: var(--eqb-color-text);
+  font: inherit;
+  line-height: 1.5;
+  resize: vertical;
+}

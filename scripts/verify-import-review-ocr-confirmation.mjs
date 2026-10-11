@@ -587,6 +587,18 @@ try {
   uploadRevision(store, nextOcr, stagingRoot, nextOcrManifest.files)
   assert.equal(store.finalizeRevision(nextOcr.revision.id).state, 'awaiting_review',
     'Candidate report requirement must not block a later OCR-stage revision')
+  const historicalConfirmation = await fetch(
+    `${origin}/api/import-agent-reviews/revisions/${publicRevision.id}/ocr-confirmation`,
+    { headers: { authorization: `Bearer ${agentToken}` } },
+  )
+  assert.equal(historicalConfirmation.status, 200, 'repair can retrieve a superseded OCR receipt')
+  assert.deepEqual((await historicalConfirmation.json()).receipt, receipt,
+    'historical evidence remains unchanged after a newer revision')
+  const pendingConfirmation = await fetch(
+    `${origin}/api/import-agent-reviews/revisions/${nextOcr.revision.id}/ocr-confirmation`,
+    { headers: { authorization: `Bearer ${agentToken}` } },
+  )
+  assert.equal(pendingConfirmation.status, 404, 'finalization without confirmation supplies no receipt')
 
   console.log('verify-import-review-ocr-confirmation: PASS')
 } finally {

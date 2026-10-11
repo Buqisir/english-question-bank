@@ -26,7 +26,7 @@ import { createVocabularyNotebookRuntime } from './vocabulary-notebook/runtime.m
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
 import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
 import { sendPaperAssetStatic, sendListeningAudioFile } from './paper-import/paperAssetStatic.mjs'
-import { loadStoredPlayback } from './paper-import/blobStore.mjs'
+import { configuredBlobStore, loadStoredPlayback } from './paper-import/blobStore.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
 import { createPaperSetRoutes } from './paper-sets/routes.mjs'
 import { createAiProxyRoutes } from './ai-proxy/routes.mjs'
@@ -518,6 +518,7 @@ const serverRoutes = [
   ...createPaperCanonicalConsumerRoutes(),
   ...createImportReviewRoutes({
     getStore: getImportReviewStore,
+    getBlobStore: configuredBlobStore,
     agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',
     shipToken: process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '',
     buildPrintHtml,

@@ -1,8 +1,10 @@
-import { mkdir, readFile, writeFile, link, unlink } from 'node:fs/promises'
+import { createReadStream } from 'node:fs'
+import { chmod, lstat, mkdir, readFile, writeFile, link, unlink, rename } from 'node:fs/promises'
 import path from 'node:path'
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { assertPaperStorageMounted } from './paperStorageMount.mjs'
 
 // Private, content-addressed storage. No bucket administration, deletion,
 // public URL, or fallback from a configured remote store to local files.
@@ -19,7 +21,23 @@ function checked(bytes, file) {
   return bytes
 }
 
-export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, credentials, client } = {}) {
+async function checkFile(filePath, file) {
+  checkDescriptor(file)
+  const stat = await lstat(filePath)
+  if (!stat.isFile() || stat.size !== file.byteLength) throw new Error('Immutable blob byte integrity failure')
+  const hash = createHash('sha256')
+  let size = 0
+  for await (const chunk of createReadStream(filePath)) {
+    size += chunk.length
+    if (size > file.byteLength) throw new Error('Immutable blob byte integrity failure')
+    hash.update(chunk)
+  }
+  if (size !== file.byteLength || `sha256:${hash.digest('hex')}` !== file.sha256) {
+    throw new Error('Immutable blob byte integrity failure')
+  }
+}
+
+export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, credentials, client, storageEnv = process.env } = {}) {
   if (!['local', 'r2'].includes(backend)) throw new Error('Unknown file-storage backend')
   if (backend === 'local' && !rootDir) throw new Error('Private blob directory is required')
   if (backend === 'r2' && (!bucket || !endpoint || (!client && (!credentials?.accessKeyId || !credentials?.secretAccessKey)))) {
@@ -31,7 +49,10 @@ export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, 
   const identity = backend === 'local' ? 'local' : `r2:${new URL(endpoint).host}/${bucket}`
   async function get(file) {
     const name = key(file)
-    if (!s3) return checked(await readFile(path.join(rootDir, name)), file)
+    if (!s3) {
+      assertPaperStorageMounted([rootDir], storageEnv)
+      return checked(await readFile(path.join(rootDir, name)), file)
+    }
     const result = await s3.send(new GetObjectCommand({ Bucket: bucket, Key: name }), { abortSignal: AbortSignal.timeout(120_000) })
     if (result.ContentLength !== file.byteLength) { result.Body?.destroy(); throw new Error('Remote blob length mismatch') }
     const chunks = []
@@ -58,7 +79,14 @@ export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, 
         try { await get(file); return file } catch { throw error }
       }
     } else {
+      assertPaperStorageMounted([rootDir], storageEnv)
       const target = path.join(rootDir, name)
+      try {
+        await checkFile(target, file)
+        return file
+      } catch (error) {
+        if (error.code !== 'ENOENT') throw error
+      }
       await mkdir(path.dirname(target), { recursive: true, mode: 0o700 })
       const temporary = `${target}.${randomUUID()}.tmp`
       await writeFile(temporary, bytes, { flag: 'wx', mode: 0o600 })
@@ -69,12 +97,34 @@ export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, 
     await get(file) // HEAD/ETag is not an actual-byte proof.
     return file
   }
-  return { identity, get, put }
+
+  // Transfers an exclusively owned upload temporary into immutable local
+  // custody. Both paths must be on the same filesystem; EXDEV is a configuration
+  // failure, not permission to silently retain another full copy. Callers must
+  // never edit the adopted file in place, including after its final rename.
+  async function adoptLocalFile(filePath, file) {
+    assertPaperStorageMounted([rootDir, path.dirname(filePath)], storageEnv)
+    const target = path.join(rootDir, key(file))
+    await checkFile(filePath, file)
+    await mkdir(path.dirname(target), { recursive: true, mode: 0o700 })
+    await chmod(filePath, 0o400)
+    try { await link(filePath, target) } catch (error) { if (error.code !== 'EEXIST') throw error }
+    await checkFile(target, file)
+    const temporary = `${filePath}.blob-${randomUUID()}`
+    try {
+      await link(target, temporary)
+      await rename(temporary, filePath)
+    } finally {
+      await unlink(temporary).catch(error => { if (error.code !== 'ENOENT') throw error })
+    }
+  }
+  return { identity, get, put, ...(!s3 ? { adoptLocalFile } : {}) }
 }
 
 export function configuredBlobStore(env = process.env) {
   return createBlobStore({ backend: env.QUESTION_BANK_FILE_STORE || 'local',
     rootDir: env.QUESTION_BANK_BLOB_ROOT || path.resolve(import.meta.dirname, '../../data/published-blobs'),
+    storageEnv: env,
     endpoint: env.QUESTION_BANK_R2_ENDPOINT, bucket: env.QUESTION_BANK_R2_BUCKET,
     credentials: { accessKeyId: env.QUESTION_BANK_R2_ACCESS_KEY_ID, secretAccessKey: env.QUESTION_BANK_R2_SECRET_ACCESS_KEY },
   })

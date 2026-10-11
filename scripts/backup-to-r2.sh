@@ -3,7 +3,8 @@
 #
 # Scope (plan.md PM #6): all three sqlite dbs (question-bank.sqlite +
 # user-data.sqlite + import-ops.sqlite) + app/public/paper-assets/ (incl.
-# versions/) + data/user-space/files/ + data/import-ops/files/. A backup is a
+# versions/) + data/user-space/files/ + data/import-ops/files/ + the local
+# private blob root (immutable objects shared by Review/publication). A backup is a
 # read-only off-site snapshot, so
 # user-data.sqlite IS in scope here — this is the opposite of the
 # pull-run-push (Slice 4) rule that never touches user-data.
@@ -34,6 +35,9 @@
 #   QUESTION_BANK_USER_SPACE_ROOT  default: data/user-space/files
 #   QUESTION_BANK_IMPORT_OPS_DB    default: data/import-ops.sqlite
 #   QUESTION_BANK_IMPORT_OPS_ROOT  default: data/import-ops/files
+#   QUESTION_BANK_BLOB_ROOT        default: data/published-blobs (local store)
+#   QUESTION_BANK_PAPER_STORAGE_UUID / QUESTION_BANK_PAPER_STORAGE_MOUNT
+#                                  optional reviewed data-disk guard; never mounts
 #   EQB_R2_REMOTE                 default: r2:eqb-backup (rclone remote:bucket)
 #   EQB_SNAPSHOT_DIR               if set, snapshots are written there and NOT
 #                                  cleaned up (lets a caller/verifier inspect
@@ -65,8 +69,18 @@ PAPER_ASSET_ROOT="${QUESTION_BANK_PAPER_ASSET_ROOT:-$ROOT_DIR/app/public/paper-a
 USER_SPACE_ROOT="${QUESTION_BANK_USER_SPACE_ROOT:-$ROOT_DIR/data/user-space/files}"
 IMPORT_OPS_DB="${QUESTION_BANK_IMPORT_OPS_DB:-$ROOT_DIR/data/import-ops.sqlite}"
 IMPORT_OPS_ROOT="${QUESTION_BANK_IMPORT_OPS_ROOT:-$ROOT_DIR/data/import-ops/files}"
+BLOB_ROOT="${QUESTION_BANK_BLOB_ROOT:-$ROOT_DIR/data/published-blobs}"
 R2_REMOTE="${EQB_R2_REMOTE:-r2:eqb-backup}"
 RETENTION_COUNT="${EQB_BACKUP_RETENTION_COUNT:-14}"
+
+# Run before creating snapshots or copying anything. An absent configured disk
+# must not yield a superficially successful backup of empty system-disk paths.
+if [[ "${QUESTION_BANK_FILE_STORE:-local}" == "local" ]]; then
+  node "$ROOT_DIR/server/paper-import/paperStorageMount.mjs" "$IMPORT_OPS_ROOT" "$BLOB_ROOT"
+else
+  node "$ROOT_DIR/server/paper-import/paperStorageMount.mjs" "$IMPORT_OPS_ROOT"
+  BLOB_ROOT="" # Remote primary storage needs its own independent backup proof.
+fi
 
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 REMOTE_PREFIX="$R2_REMOTE/$STAMP"
@@ -126,6 +140,7 @@ echo "    $SNAPSHOT_DIR/import-ops.sqlite"
 [[ -d "$PAPER_ASSET_ROOT" ]] && echo "    $PAPER_ASSET_ROOT/ (paper-assets, incl. versions/)"
 [[ -d "$USER_SPACE_ROOT" ]] && echo "    $USER_SPACE_ROOT/ (user-space files)"
 [[ -d "$IMPORT_OPS_ROOT" ]] && echo "    $IMPORT_OPS_ROOT/ (import-review files)"
+[[ -d "$BLOB_ROOT" ]] && echo "    $BLOB_ROOT/ (private immutable blobs)"
 
 HAVE_RCLONE=1
 if ! command -v rclone >/dev/null 2>&1; then
@@ -143,6 +158,7 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
     [[ -d "$PAPER_ASSET_ROOT" ]] && echo "  rclone copy \"$PAPER_ASSET_ROOT\" \"$REMOTE_PREFIX/paper-assets\""
     [[ -d "$USER_SPACE_ROOT" ]] && echo "  rclone copy \"$USER_SPACE_ROOT\" \"$REMOTE_PREFIX/user-space\""
     [[ -d "$IMPORT_OPS_ROOT" ]] && echo "  rclone copy \"$IMPORT_OPS_ROOT\" \"$REMOTE_PREFIX/import-ops-files\""
+    [[ -d "$BLOB_ROOT" ]] && echo "  rclone copy \"$BLOB_ROOT\" \"$REMOTE_PREFIX/private-blobs\""
     echo "==> Dry run complete (no rclone binary present, no push attempted)."
     exit 0
   fi
@@ -154,6 +170,7 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   [[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets" --dry-run
   [[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space" --dry-run
   [[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$REMOTE_PREFIX/import-ops-files" --dry-run
+  [[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$REMOTE_PREFIX/private-blobs" --dry-run
   echo "==> Dry run complete."
   exit 0
 fi
@@ -171,6 +188,7 @@ rclone copy "$SNAPSHOT_DIR/import-ops.sqlite" "$REMOTE_PREFIX/"
 [[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets"
 [[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space"
 [[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$REMOTE_PREFIX/import-ops-files"
+[[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$REMOTE_PREFIX/private-blobs"
 
 echo "==> Push complete. Remote size/manifest:"
 rclone size "$REMOTE_PREFIX" || true

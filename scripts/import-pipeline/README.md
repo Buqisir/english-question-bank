@@ -18,6 +18,49 @@ CI用户、服务或ASR模型。代码和skill须到达默认分支才作用于�
 node scripts/import-pipeline/review.mjs preflight <paperId>
 ```
 
+远端修订恢复复用已完成的 Candidate，不重新 OCR 或重新生成源材料：
+
+```bash
+node scripts/import-pipeline/review.mjs hydrate <paperId>
+node scripts/import-pipeline/review.mjs hydrate <paperId> --revision <exact-revision-id>
+```
+
+不指定 `--revision` 时恢复当前最新 finalized Candidate；显式指定时只恢复该卷的
+那一版，未知、未完成或 OCR-stage revision 都失败，不回退到最新版本。文件逐一核对
+大小和 SHA，并重建 projection 校验身份；已有本地工作目录不会覆盖。
+有 OCR correction report 的 Candidate 同时取回它绑定的历史校对回执（即使该 OCR
+revision 已被后续版本取代），不新造确认、不移交旧 source-intake lease。
+本地 `signals/review-restore.json` 记录来源站点、revision 和 bundle。后续 `push`
+以恢复的 revision 为基线；创建和 finalize 都拒绝过期基线，不自动追认较新的版本。
+恢复旧版不授权覆盖较新的远端修订，也不证明备份完成或允许清理原本地副本。
+
+产品页的 Amp 讨论线程由执行者明确关联，Owner 不需要管理绑定表：
+
+```bash
+node scripts/import-pipeline/review.mjs link-thread <paperId> --thread <T-uuid>
+node scripts/import-pipeline/review.mjs link-thread <paperId> --thread <new-T-uuid> --from <old-T-uuid>
+```
+
+创建后用第一条命令明确关联；`push` 不从 `AMP_THREAD_ID` 或审计头推断绑定。
+换负责人线程时必须传准确旧值，冲突停止；后续上传也不会覆盖它。
+同目标关联可幂等返回；关联不属于内容 bundle，不改变产品或授予审批/发布权限。
+网页只复制卷名、稳定 ID、正在看的版本及链接，再打开对应线程，用户自行粘贴聊天。
+没有绑定则只复制，不猜线程；复制失败显示手动复制文本，弹窗被拦截显示明确链接。
+交付既有批次前须逐卷核实真实关联，不能把临时预览线程或发布审计线程当作负责人。
+
+本地清理盘点（只读，不删除）：
+
+```bash
+node scripts/import-pipeline/review.mjs cleanup-plan <paperId> --revision <exact-revision-id>
+```
+
+仅检查该卷标准工作目录，对照精确 finalized Candidate manifest 逐文件核对。
+Git 跟踪文件、本地改动、manifest 外文件、符号链接和特殊文件均标记保留；不扫描
+Downloads、不跟随目录链接。输出逻辑大小、分配大小和硬链接数，`reclaimableBytes`
+为未知，不能当作释放空间估算。当前始终 `eligibleForDeletion: false`：远端文件与
+产品可读、独立备份恢复、任务归属和停点、限定删除授权仍须另行证明。
+此命令不会为你删除文件，也不会补造备份或审批证据。
+
 以下台账命令仅用于 Owner 明确要求继续的历史 submission，不是新卷默认入口。
 通过私有队列取得同一份 immutable submission；不要从 webhook 文本或网页字段重建文件：
 

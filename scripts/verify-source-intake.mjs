@@ -293,6 +293,9 @@ function verifyCorrectedReviewUploadBaseRevision() {
       dbPath: reviewDbPath,
       filesRoot: path.join(root, 'files'),
       rendererBuildId: 'source-intake-correction-verifier',
+      projectRevision: () => ({ paperId: 'paper-corrected-upload',
+        sourceDigest: digest(Buffer.from('source')), candidateDigest: digest(Buffer.from('candidate')),
+        visibleStructureDigest: digest(Buffer.from('visible')), analysisDigest: digest(Buffer.from('analysis')) }),
     })
     const db = new DatabaseSync(reviewDbPath)
     const timestamp = '2026-09-11T00:00:00.000Z'
@@ -338,13 +341,33 @@ function verifyCorrectedReviewUploadBaseRevision() {
       resolvesIssueIds: [],
     }
     manifest.bundleDigest = reviewBundleDigest(manifest)
-    assert.equal(reviewStore.createRevision(manifest).created, true)
+    const first = reviewStore.createRevision(manifest)
+    assert.equal(first.created, true)
     const stale = { ...manifest, expectedBaseRevisionId: 'rev-older' }
     stale.bundleDigest = reviewBundleDigest(stale)
     assert.throws(
       () => reviewStore.createRevision(stale),
       (error) => error.code === 'IMPORT_REVIEW_BASE_REVISION_STALE',
     )
+    const competing = { ...manifest, producerBuildId: 'competing-correction' }
+    competing.bundleDigest = reviewBundleDigest(competing)
+    const second = reviewStore.createRevision(competing)
+    for (const { revision } of [first, second]) {
+      const upload = reviewStore.fileForUpload(revision.id, 'config.json')
+      writeFileSync(upload.destination, '{}\n')
+      reviewStore.completeFileUpload(revision.id, 'config.json', manifest.files[0])
+    }
+    assert.equal(reviewStore.finalizeRevision(first.revision.id).state, 'awaiting_review')
+    assert.throws(() => reviewStore.finalizeRevision(second.revision.id),
+      (error) => error.code === 'IMPORT_REVIEW_BASE_REVISION_STALE',
+      'a concurrent repair cannot replace a revision finalized during its upload')
+    assert.equal(reviewStore.getRevision(second.revision.id).state, 'uploading', 'failed candidate is retained for reconciliation')
+    assert.equal(reviewStore.agentPaperStatus(manifest.paperId).latestRevisionId, first.revision.id)
+    const replay = reviewStore.createRevision(manifest)
+    assert.equal(replay.created, false, 'an exact successful upload retry must not create another revision')
+    assert.equal(replay.revision.id, first.revision.id)
+    assert.throws(() => reviewStore.createRevision(competing),
+      (error) => error.code === 'IMPORT_REVIEW_BASE_REVISION_STALE')
     console.log('PASS corrected Review upload binds and rechecks its expected base revision')
   } finally {
     rmSync(root, { recursive: true, force: true })

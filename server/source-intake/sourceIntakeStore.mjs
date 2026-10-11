@@ -9,6 +9,7 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 
 const INTAKE_ID = /^intake-[a-f0-9-]{36}$/
 const SUBMISSION_ID = /^submission-[a-f0-9-]{36}$/
@@ -387,6 +388,7 @@ export function sourceIntakeSubmissionDigest(snapshot) {
 }
 
 export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Date() }) {
+  assertPaperStorageMounted([filesRoot])
   mkdirSync(path.dirname(dbPath), { recursive: true })
   mkdirSync(filesRoot, { recursive: true })
   const initialize = new DatabaseSync(dbPath)
@@ -398,6 +400,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
   }
 
   function withDb(write, callback) {
+    if (write) assertPaperStorageMounted([filesRoot])
     const db = new DatabaseSync(dbPath, { readOnly: !write })
     db.exec('PRAGMA foreign_keys = ON')
     try {
@@ -439,6 +442,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     if (!INTAKE_ID.test(intakeId || '')) {
       throw intakeError('SOURCE_INTAKE_ID_INVALID', 'intakeId is invalid', 400)
     }
+    assertPaperStorageMounted([filesRoot])
     return path.join(filesRoot, 'source-intakes', intakeId)
   }
 

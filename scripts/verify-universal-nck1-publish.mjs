@@ -66,6 +66,7 @@ import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consume
 import { consumerContractRefs, resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
   nck1MaterializationCandidateAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef58,
@@ -1226,7 +1227,10 @@ function analysisDigestAt(baseDir) {
 async function requestReviewAsset(projection, relativePath, session) {
   const pathname = `/api/import-review-preview/revisions/rev-fixture/asset/${relativePath}`
   const routes = createImportReviewRoutes({
-    getStore: () => ({ projectionForRevision: () => ({ projection }) }),
+    getStore: () => ({ productPreviewForRevision: () => ({ preview: {
+      paperAsset: projection.paperAsset,
+      analysisSidecars: projection.analysisSidecars,
+    } }) }),
     agentToken: '',
     shipToken: '',
     buildPrintHtml: () => '',
@@ -2260,6 +2264,20 @@ try {
     filesRoot,
     rendererBuildId: 'native-review-replay-verifier',
   })
+  const productReader = createImportReviewStore({
+    dbPath, filesRoot, rendererBuildId: 'native-review-replay-verifier',
+    projectRevision() { throw new Error('Ordinary product reads must not rebuild source projection') },
+  })
+  const preview = productReader.productPreviewForRevision(created.revision.id).preview
+  assert.deepEqual(preview.paperAsset, JSON.parse(JSON.stringify(preparedProjection.paperAsset)),
+    'persisted exact Screen remains available after restart without source processing')
+  assert.deepEqual(preview.consumption, JSON.parse(JSON.stringify(preparedProjection.consumption)),
+    'the stored Screen uses the same canonical consumption data')
+  assert.equal(productReader.paperDetail(paperId, { includeProjection: false }).latest.id, created.revision.id,
+    'product review status does not trigger source processing')
+  const firstFile = manifest.files[0]
+  assert.equal(sha256(readFileSync(productReader.verifiedFileForRead(created.revision.id, firstFile.path).filePath)),
+    firstFile.sha256, 'exact file reads do not rebuild projection')
   const replay = reloadedStore.projectionForRevision(created.revision.id).projection
   assert.deepEqual(replay.sourceInput, preparedProjection.sourceInput,
     'a process-style Review reload reconstructs the identical analyzed-package input')
@@ -2301,6 +2319,9 @@ try {
     replayManifest.members.find(({ role }) => role === 'content').path,
   )
   writeFileSync(contentPath, '{"tampered":true}')
+  assert.throws(() => productReader.productPreviewForRevision(created.revision.id),
+    { code: 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH' },
+  'persisted product data cannot hide tampered revision inputs')
   assert.throws(
     () => reloadedStore.projectionForRevision(created.revision.id),
     (error) => error.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH',
@@ -3145,12 +3166,25 @@ try {
   assert.match(promotedByCli.stdout, /R2 backup remains asynchronous/)
   assert.equal(afterPublishCalls, 1, 'idempotent/failed promotions never re-fire afterPublish')
 
+  const viewedPublication = { sourceAssetVersion: promotedBody.promotion.assetVersion,
+    publicationDigest: promotedBody.promotion.canonicalPublicationDigest }
+  assert.equal(online.reviewStore.publishedReview(paperId, viewedPublication).revisionId, online.revision.id)
+  const repairIssue = online.reviewStore.createIssue(paperId, {
+    revisionId: online.revision.id, surface: 'screen',
+    groupId: Object.keys(online.projection.paperAsset.content.groups)[0],
+    message: 'The first option needs more space.', ...viewedPublication,
+  }, 'synthetic-owner').issues[0]
+  assert.equal(repairIssue.publicationDigest, viewedPublication.publicationDigest)
+  assert.deepEqual(online.reviewStore.getRevision(online.revision.id).approval, online.approval,
+    'feedback never erases the immutable approval of a published version')
   const nextFixture = makeReviewRoot(
     path.join(online.tempRoot, 'next-approved-revision'),
     paperId,
     'newer approved synthetic source that has not been promoted',
   )
   const nextManifest = reviewManifestFor(nextFixture.reviewRoot, nextFixture.projection)
+  nextManifest.resolvesIssueIds = [repairIssue.id]
+  nextManifest.bundleDigest = reviewBundleDigest(nextManifest)
   const nextCreated = online.reviewStore.createRevision(nextManifest)
   for (const file of nextManifest.files) {
     const upload = online.reviewStore.fileForUpload(nextCreated.revision.id, file.path)
@@ -3163,12 +3197,32 @@ try {
     })
   }
   const nextRevision = online.reviewStore.finalizeRevision(nextCreated.revision.id)
+  const approvalInput = { bundleDigest: nextRevision.bundleDigest, approvalScope: 'layout_only' }
+  assert.throws(() => online.reviewStore.approveRevision(paperId, nextRevision.id,
+    approvalInput, 'synthetic-owner'), { code: 'IMPORT_REVIEW_ISSUES_UNRESOLVED' },
+  'unconfirmed repairs still block approval')
+  const concurrentIssue = online.reviewStore.createIssue(paperId, {
+    revisionId: nextRevision.id, surface: 'screen', groupId: repairIssue.groupId,
+    message: 'A second problem was noticed while rechecking the repair.',
+  }, 'synthetic-owner').issues.find(issue => issue.id !== repairIssue.id)
+  assert.throws(() => online.reviewStore.approveRevision(paperId, nextRevision.id,
+    approvalInput, 'synthetic-owner'),
+  { code: 'IMPORT_REVIEW_ISSUES_UNRESOLVED' }, 'another open issue still blocks approval')
+  assert.equal(online.reviewStore.paperDetail(paperId).issues.find(issue =>
+    issue.id === repairIssue.id).state, 'fixed_pending_review',
+  'approval does not silently confirm a repair')
+  assert.throws(() => online.reviewStore.updateIssue(paperId, concurrentIssue.id, { action: 'close' }),
+    { code: 'IMPORT_REVIEW_ISSUE_NOT_FIXED' }, 'an unfixed issue cannot be closed')
+  online.reviewStore.updateIssue(paperId, concurrentIssue.id, { action: 'dismiss', note: 'Synthetic control only' })
+  online.reviewStore.updateIssue(paperId, repairIssue.id, { action: 'close', note: 'Repair rechecked' })
   online.reviewStore.approveRevision(
     paperId,
     nextRevision.id,
-    { bundleDigest: nextRevision.bundleDigest, approvalScope: 'layout_only' },
+    approvalInput,
     'synthetic-owner',
   )
+  assert.equal(online.reviewStore.paperDetail(paperId).issues.find(issue =>
+    issue.id === repairIssue.id).state, 'closed', 'existing issue closure remains separate from approval')
   await reviewPage.reload()
   await reviewPage.locator('summary').filter({ hasText: /^版本记录$/u }).click()
   const nextApprovalRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
@@ -3191,6 +3245,62 @@ try {
   const opsSource = readFileSync(path.join(root, 'import-ops/public/app.js'), 'utf8')
   assert.match(opsSource, /上线审计/)
   assert(!opsSource.includes('/promotions'), 'Review UI has no promotion mutation call')
+
+  const discussionThreadId = `T-${randomUUID()}`
+  const replacementThreadId = `T-${randomUUID()}`
+  const replayWithThreadHeader = () => fetch(`${started.origin}/api/import-agent-reviews/revisions`, {
+    method: 'POST', headers: { 'content-type': 'application/json',
+      authorization: 'Bearer synthetic-agent-token', 'x-amp-thread-id': replacementThreadId },
+    body: JSON.stringify(nextManifest),
+  })
+  assert.equal((await replayWithThreadHeader()).status, 201)
+  assert.equal(online.reviewStore.paperDetail(paperId, { includeProjection: false }).discussionThreadId, null,
+    'ambient upload audit metadata cannot establish the discussion binding')
+  const discussionUrl = `${started.origin}/api/import-agent-reviews/papers/${paperId}/discussion-thread`
+  const linkThread = (threadId, expectedThreadId, authorized = true) => fetch(discussionUrl, {
+    method: 'PUT', headers: { 'content-type': 'application/json',
+      ...(authorized ? { authorization: 'Bearer synthetic-agent-token' } : {}) },
+    body: JSON.stringify({ threadId, expectedThreadId }),
+  })
+  assert.equal((await linkThread(discussionThreadId, null, false)).status, 401)
+  assert.equal((await linkThread('https://example.com/not-an-amp-thread', null)).status, 400)
+  assert.equal((await linkThread(discussionThreadId, null)).status, 200)
+  assert.equal((await linkThread(discussionThreadId, null)).status, 200, 'exact replay remains idempotent')
+  assert.equal((await replayWithThreadHeader()).status, 201)
+  const discussionDetailUrl = `${started.origin}/api/import-reviews/papers/${paperId}/product-review`
+  assert.equal((await fetch(discussionDetailUrl)).status, 403)
+  const discussionDetail = await (await fetch(discussionDetailUrl, { headers: { 'x-synthetic-owner': '1' } })).json()
+  assert.equal(discussionDetail.discussionThreadId, discussionThreadId, 'later upload cannot hijack the existing discussion')
+  assert.equal((await linkThread(replacementThreadId, null)).status, 409, 'unbound-only linking cannot replace an existing discussion')
+  assert.equal((await linkThread(replacementThreadId, discussionThreadId)).status, 200)
+  assert.equal((await linkThread(discussionThreadId, null)).status, 409, 'a stale handoff cannot undo the new binding')
+  assert.equal(online.reviewStore.paperDetail(paperId, { includeProjection: false }).discussionThreadId, replacementThreadId)
+
+  const feedbackUrl = `${started.origin}/api/import-reviews/papers/${paperId}/issues`
+  const historicalFeedback = { revisionId: online.revision.id, ...viewedPublication,
+    surface: 'pdf', edition: 'economy8', pageNumber: 3, message: 'This issue is on the still-public v1, not the private v2.' }
+  const newApprovalBeforeFeedback = online.reviewStore.getRevision(nextRevision.id).approval
+  for (const headers of [{}, { authorization: 'Bearer synthetic-agent-token' }]) {
+    assert.equal((await fetch(feedbackUrl, { method: 'POST',
+      headers: { ...headers, 'content-type': 'application/json' }, body: JSON.stringify(historicalFeedback) })).status, 403)
+  }
+  const wrongVersion = await fetch(feedbackUrl, { method: 'POST',
+    headers: { 'x-synthetic-owner': '1', 'content-type': 'application/json' },
+    body: JSON.stringify({ ...historicalFeedback, sourceAssetVersion: 2 }) })
+  assert.equal(wrongVersion.status, 404, 'a publication digest cannot be paired with a different asset version')
+  const historicalResponse = await fetch(feedbackUrl, { method: 'POST',
+    headers: { 'x-synthetic-owner': '1', 'content-type': 'application/json' }, body: JSON.stringify(historicalFeedback) })
+  assert.equal(historicalResponse.status, 201)
+  const historicalDetail = await historicalResponse.json()
+  assert.equal(historicalDetail.latest.id, nextRevision.id)
+  const recorded = historicalDetail.issues.find(issue => issue.message === historicalFeedback.message)
+  assert.equal(recorded.revisionId, online.revision.id)
+  assert.equal(recorded.publicationDigest, viewedPublication.publicationDigest)
+  assert.equal(recorded.pageNumber, 3)
+  assert.deepEqual(online.reviewStore.getRevision(nextRevision.id).approval, newApprovalBeforeFeedback,
+    'recording historical feedback does not rewrite a newer private approval')
+  assert.equal(online.reviewStore.latestPromotion(paperId).versionName, 'v1',
+    'feedback alone neither publishes a repair nor withdraws the public version')
 } finally {
   if (onlineBrowser) await onlineBrowser.close()
   if (onlineServer) await new Promise((resolve) => onlineServer.close(resolve))
@@ -3766,7 +3876,9 @@ try {
     approval,
   }
   let hydrateFailure = null
-  reviewServer = createServer((request, response) => {
+  let remoteOcrReceipt = null
+  let submittedRepair = null
+  reviewServer = createServer(async (request, response) => {
     const url = new URL(request.url || '/', 'http://127.0.0.1')
     if (request.headers.authorization !== 'Bearer verifier-token') {
       response.writeHead(404, { 'content-type': 'application/json' })
@@ -3779,6 +3891,19 @@ try {
     ) {
       response.writeHead(200, { 'content-type': 'application/json' })
       response.end(JSON.stringify(status))
+      return
+    }
+    if (request.method === 'POST' && url.pathname === '/api/import-agent-reviews/revisions') {
+      submittedRepair = await readJsonRouteBody(request)
+      response.writeHead(409, { 'content-type': 'application/json' })
+      response.end(JSON.stringify({ code: 'IMPORT_REVIEW_BASE_REVISION_STALE', error: 'fixture base advanced' }))
+      return
+    }
+    if (request.method === 'GET'
+      && url.pathname === '/api/import-agent-reviews/revisions/rev-historical-ocr/ocr-confirmation'
+      && remoteOcrReceipt) {
+      response.writeHead(200, { 'content-type': 'application/json' })
+      response.end(JSON.stringify({ receipt: remoteOcrReceipt }))
       return
     }
     if (
@@ -3844,6 +3969,101 @@ try {
   assert(!existsSync(cliPaperDir), 'changed Review bytes do not create a local workspace')
   assert.deepEqual(hydrateTemps(), hydrateTempsBefore, 'drifted hydration cleans its temp workspace')
   hydrateFailure = null
+  await assert.rejects(
+    runReviewCommand(['hydrate', cliPaperId, '--revision'], commandEnv),
+    /requires an exact revision id/,
+  )
+  await assert.rejects(
+    runReviewCommand(['hydrate', cliPaperId, '--revision', 'rev-not-present'], commandEnv),
+    /no finalized Candidate revision to hydrate: rev-not-present/,
+  )
+  assert(!existsSync(cliPaperDir), 'an explicit missing revision never falls back to latest')
+  const latestBeforeHistoricalRestore = status.latest
+  const historicalRevision = { ...status.latest, state: 'superseded' }
+  status.revisions = [historicalRevision]
+  status.latest = {
+    ...status.latest,
+    id: 'rev-newer-uploading',
+    state: 'uploading',
+    finalizedAt: null,
+    manifest: null,
+  }
+  status.latestRevisionId = status.latest.id
+  status.files = []
+  const exactHydrateArgs = ['hydrate', cliPaperId, '--revision', historicalRevision.id]
+  for (const invalid of [
+    { paperId: 'paper-another-source' },
+    { reviewKind: 'ocr' },
+    { state: 'uploading' },
+    { finalizedAt: null },
+  ]) {
+    status.revisions = [{ ...historicalRevision, ...invalid }]
+    await assert.rejects(
+      runReviewCommand(exactHydrateArgs, commandEnv),
+      /no finalized Candidate revision to hydrate/,
+    )
+    assert(!existsSync(cliPaperDir), 'ineligible historical revision creates no workspace')
+  }
+  status.revisions = [historicalRevision]
+  hydrateFailure = 'changed'
+  await assert.rejects(
+    runReviewCommand(exactHydrateArgs, commandEnv),
+    /Hydrated Review file changed in transit/,
+  )
+  assert.deepEqual(hydrateTemps(), hydrateTempsBefore, 'historical integrity failure removes only its temporary workspace')
+  hydrateFailure = null
+  const exactHydrated = JSON.parse((await runReviewCommand(exactHydrateArgs, commandEnv)).stdout)
+  assert.equal(exactHydrated.revisionId, historicalRevision.id)
+  assert.equal(exactHydrated.bundleDigest, bundleDigest)
+  for (const file of files) {
+    assert.deepEqual(
+      readFileSync(resolveReviewFile(cliPaperDir, file.path)),
+      readFileSync(resolveReviewFile(sourceReviewRoot, file.path)),
+      'historical restore uses the selected revision bytes, not the latest inventory',
+    )
+  }
+  await assert.rejects(
+    runReviewCommand(exactHydrateArgs, commandEnv),
+    /Local paper workspace already exists/,
+  )
+  const inventoryRevisionId = `rev-${randomUUID()}`
+  status.revisions = [{ ...historicalRevision, id: inventoryRevisionId }, status.latest]
+  const changedFile = files[0]
+  const changedPath = resolveReviewFile(cliPaperDir, changedFile.path)
+  const originalBytes = readFileSync(changedPath)
+  const modifiedBytes = Buffer.concat([originalBytes, Buffer.from('local unfinished repair')])
+  writeFileSync(changedPath, modifiedBytes)
+  writeFileSync(path.join(cliPaperDir, 'local-only-note.txt'), 'Preserve this unfinished note')
+  symlinkSync(sourceReviewRoot, path.join(cliPaperDir, 'outside-workspace'))
+  const inventory = JSON.parse((await runReviewCommand(
+    ['cleanup-plan', cliPaperId, '--revision', inventoryRevisionId], commandEnv,
+  )).stdout)
+  assert.equal(inventory.revisionId, inventoryRevisionId)
+  assert.equal(inventory.mode, 'inspection_only')
+  assert.equal(inventory.eligibleForDeletion, false, 'remote manifest matching alone never permits deletion')
+  assert.equal(inventory.reclaimableBytes, null, 'logical bytes are not reclaimed disk space')
+  assert(inventory.blockers.includes('uploading_revision_requires_reconciliation'))
+  assert(inventory.blockers.includes('independent_backup_and_restore_not_proven'))
+  assert.equal(inventory.files.find(file => file.path === changedFile.path).preserve, 'differs_from_remote_manifest')
+  assert.equal(inventory.files.find(file => file.path === 'local-only-note.txt').preserve, 'outside_remote_manifest')
+  assert.equal(inventory.files.find(file => file.path === 'outside-workspace').preserve, 'symlink_or_special_file')
+  assert(!inventory.files.some(file => file.path.startsWith('outside-workspace/')), 'inventory never follows directory symlinks')
+  assert(inventory.files.some(file => file.preserve === null), 'unchanged remote-bound files are distinguished from local edits')
+  assert.deepEqual(readFileSync(changedPath), modifiedBytes, 'inspection preserves unfinished edits')
+  assert.equal(readFileSync(path.join(cliPaperDir, 'local-only-note.txt'), 'utf8'), 'Preserve this unfinished note')
+  await assert.rejects(runReviewCommand(['cleanup-plan', cliPaperId], commandEnv), /requires --revision/)
+  writeFileSync(changedPath, originalBytes)
+  rmSync(path.join(cliPaperDir, 'local-only-note.txt'))
+  rmSync(path.join(cliPaperDir, 'outside-workspace'))
+  status.revisions = [historicalRevision]
+  await assert.rejects(runReviewCommand(['push', cliPaperId], commandEnv), /IMPORT_REVIEW_BASE_REVISION_STALE/)
+  assert.equal(submittedRepair.expectedBaseRevisionId, historicalRevision.id,
+    'a repair must name its restored source revision, not silently use the newer latest')
+  rmSync(cliPaperDir, { recursive: true, force: true })
+  status.latest = latestBeforeHistoricalRestore
+  status.latestRevisionId = status.latest.id
+  status.revisions = [status.latest]
+  status.files = files
   const hydrated = await runReviewCommand(['hydrate', cliPaperId], commandEnv)
   assert.equal(JSON.parse(hydrated.stdout).state, 'hydrated')
   assert.equal(buildNck1ReviewProjection(cliPaperDir).candidateDigest, projection.candidateDigest)
@@ -3897,6 +4117,63 @@ try {
     1,
   )
   publishedDb.close()
+
+  // Public-paper recovery needs the exact server-held OCR receipt, not only
+  // the Candidate report. A later OCR revision must not substitute for it.
+  rmSync(cliPaperDir, { recursive: true, force: true })
+  const configPath = path.join(sourceReviewRoot, 'config.json')
+  writeJson(configPath, { ...JSON.parse(readFileSync(configPath, 'utf8')), importProfile: 'public-paper-v1' })
+  writeJson(path.join(sourceReviewRoot, 'paragraph-summaries-v1.json'), {
+    schemaVersion: 'paragraph-summaries-v1', paperId: cliPaperId,
+    sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+    groups: [...Map.groupBy(enumerateParagraphSummaryTargets(projection.materialization), ({ groupId }) => groupId)]
+      .map(([groupId, targets]) => ({ groupId,
+        paragraphs: targets.map(({ paragraphId }) => ({ paragraphId, summary: '恢复校验用段落摘要。' })) })),
+  })
+  writeJson(path.join(sourceReviewRoot, 'public-search-metadata-v1.json'),
+    publicMetadataFixture(projection.materialization, projection.sourceDigest, projection.candidateDigest))
+  const ocrReport = {
+    schemaVersion: 'agent-ocr-correction-report-v2', paperId: cliPaperId,
+    sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+    ocrRevisionId: 'rev-historical-ocr', ocrConfirmationId: 'ocr-confirmation-fixture',
+    originalSourceSetDigest: nck1OcrSourceSetDigest(projection.manifest.documents),
+    ocrEvidenceDigest: sha256(Buffer.from('historical-ocr-fixture')), entries: [],
+  }
+  writeJson(path.join(sourceReviewRoot, 'agent-ocr-correction-report-v2.json'), ocrReport)
+  const restoredProjection = buildNck1ReviewProjection(sourceReviewRoot)
+  files.splice(0, files.length, ...reviewBundleFilePaths(sourceReviewRoot).map(file => {
+    const bytes = readFileSync(resolveReviewFile(sourceReviewRoot, file.path))
+    return { ...file, sha256: sha256(bytes), byteLength: bytes.length }
+  }))
+  const repairManifest = { ...manifestBase, schemaVersion: 'web-import-review-bundle-v3',
+    importProfile: 'public-paper-v1', paragraphSummariesDigest: restoredProjection.paragraphSummariesDigest,
+    publicSearchMetadataDigest: restoredProjection.publicSearchMetadataDigest,
+    ocrCorrectionReportVersion: ocrReport.schemaVersion, ocrCorrectionReportDigest: digestJson(ocrReport), files }
+  repairManifest.bundleDigest = reviewBundleDigest(repairManifest)
+  status.latest = { ...status.latest, manifest: repairManifest, bundleDigest: repairManifest.bundleDigest }
+  remoteOcrReceipt = {
+    schemaVersion: 'web-import-ocr-review-confirmation-v1', paperId: cliPaperId,
+    revisionId: ocrReport.ocrRevisionId, confirmationId: ocrReport.ocrConfirmationId,
+    reviewerKind: 'import_agent', sourceSetDigest: ocrReport.originalSourceSetDigest,
+    evidenceDigest: ocrReport.ocrEvidenceDigest,
+    correctionReport: { sourceSetDigest: ocrReport.originalSourceSetDigest, entries: [] },
+    confirmation: { documents: [] },
+  }
+  const originalOcrReceipt = structuredClone(remoteOcrReceipt)
+  for (const change of [{ paperId: 'paper-other' }, { revisionId: 'rev-newer-ocr' },
+    { confirmationId: 'wrong-confirmation' }, { reviewerKind: 'owner' },
+    { evidenceDigest: sha256(Buffer.from('wrong-evidence')) }]) {
+    remoteOcrReceipt = { ...originalOcrReceipt, ...change }
+    await assert.rejects(runReviewCommand(['hydrate', cliPaperId], commandEnv), /exact historical correction binding/)
+    assert(!existsSync(cliPaperDir))
+    assert.deepEqual(hydrateTemps(), hydrateTempsBefore)
+  }
+  remoteOcrReceipt = originalOcrReceipt
+  await runReviewCommand(['hydrate', cliPaperId], commandEnv)
+  assert.deepEqual(JSON.parse(readFileSync(path.join(cliPaperDir, 'signals/agent-proofreading-receipt.json'), 'utf8')),
+    originalOcrReceipt, 'restore the server receipt unchanged instead of recreating an approval')
+  assert(!existsSync(path.join(cliPaperDir, 'signals/source-intake-initialization.json')),
+    'restoration must not transfer a different worker\'s source claim')
 } finally {
   if (reviewServer) {
     await new Promise((resolve) => reviewServer.close(resolve))
