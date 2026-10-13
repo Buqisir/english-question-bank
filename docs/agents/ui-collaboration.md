@@ -31,3 +31,25 @@ print-preview 影响、响应式影响、或 owner 反馈"怪 / 不舒服 / 不�
 从最新 `main` 开分支，commit 后报告 worktree、branch、HEAD、changed
 files、visual intent、QA status，并返回唯一可复制 `Next`。同一 UI
 worktree 同时只允许一个顶层写任务。
+
+## 写 CSS 与 token 的纪律
+
+2026-10-13 从 `DESIGN.md` §7 移入（design-canon 立项 2026-07-14，出处：
+poolside / StyleX / vibe-designing-playbook 三址调研）。这几条不是视觉规范，
+是 agent 写 CSS 和 token 时的施工纪律，防止「token 覆盖不到就现场编字面量」
+「叠加样式谁赢全靠猜」这类会悄悄侵蚀设计系统的坏习惯。视觉规则见 `DESIGN.md`。
+
+**The No-Literal-Fallback Rule（禁止现场兜底）.** agent 遇到 token 体系覆盖
+不到的取值（既有 token 不合适、又没有对应新 token），**禁止**现场拼一个字面量
+颜色/间距/时长顶上。正确做法：显式记一条缺口到 `docs/design-gaps.md`（格式：
+日期 / 位置 / 想要的值 / 临时方案），攒批等 owner 拍板收编成正式 token 或既有
+token 的扩展用法。临时方案本身仍要写清楚落在哪一行、用了什么权宜值，方便日后
+订正。
+
+**The Explicit-Cascade Rule（覆盖顺序显式化）.** 同一元素上多个 class 叠加、
+容易产生覆盖冲突的组合样式，后写的那条样式规则必须在注释里说明「本条覆盖 X，
+因 Y」，写清楚覆盖了谁、为什么该它赢。这是 agent 写 CSS 的纪律条款，不做
+lint/构建期强制，全靠自觉与 code review 抓。
+
+**同步更新钉色的 CI 断言.** 改颜色 token 时，同步更新钉死该颜色的 CI 断言，
+否则回归护栏会误报（原 `DESIGN.md` §6，2026-07-05）。
