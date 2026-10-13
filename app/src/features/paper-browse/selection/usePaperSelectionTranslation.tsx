@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { classifyCompleteEnglishWord } from '../../../../../shared/paper-dictionary/wordToken.mjs'
 import { SENSE_DEBOUNCE_MS } from '../../../../../shared/paper-dictionary/constants.mjs'
@@ -22,10 +22,20 @@ import { DictionaryCard, dictionaryCopyText, type DictionarySenseState } from '.
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 import { stopDictionaryAudio } from './dictionaryAudio'
 import { createPageTranslationCache } from './pageCache'
-import { mapDomRangeToSegments, selectionRange } from './mapDomSelection'
+import { validateSentenceAnalysis } from '../../../../../shared/sentence-analysis/validate.mjs'
+import type { SentenceAnalysisV1, SentenceTarget } from '../../../../../shared/sentence-analysis/types.d.mts'
+import { mapDomRangeToSegments, selectionRange, streamRangeToDomRange } from './mapDomSelection'
 import { SelectionOverlay, type SelectionOverlayPhase } from './SelectionOverlay'
 import { NotebookAddButton } from '../../vocabulary-notebook/NotebookAddButton.tsx'
+import { SENTENCE_ANALYSIS_ENABLED, SENTENCE_ANALYSIS_MODE } from './sentence-analysis/flag'
+import { paperTextSize } from './sentence-analysis/paperTextSize'
+import { createSentenceAnalysisProvider, SentenceAnalysisRequestError } from './sentence-analysis/provider'
+import { analysisButtonEligible, resolveTarget } from './sentence-analysis/resolveTarget'
+import { SentenceAnalysisCard, type SentenceAnalysisCardStatus } from './sentence-analysis/SentenceAnalysisCard'
 import './selectionOverlay.css'
+import './sentence-analysis/sentenceAnalysis.css'
+
+const sentenceAnalysisProvider = createSentenceAnalysisProvider(SENTENCE_ANALYSIS_MODE)
 
 let translationStatusCache: PaperTranslationStatus | 'unavailable' | null = null
 let translationStatusInflight: Promise<PaperTranslationStatus | 'unavailable'> | null = null
@@ -94,6 +104,9 @@ type Snapshot = {
   promptVersion: string
   segments: Array<{ streamId: string; start: number; end: number; selectedText: string }>
   anchor: { x: number; y: number } | null
+  word: boolean
+  analysisEligible: boolean
+  input: 'pointer' | 'keyboard'
 }
 
 function translationCacheKey(current: Snapshot, segment: Snapshot['segments'][number]) {
@@ -109,13 +122,16 @@ function chooseAction({
   word,
   translationEnabled,
   dictionaryAvailable,
+  analysisEligible,
 }: {
   word: boolean
   translationEnabled: boolean
   dictionaryAvailable: boolean
+  analysisEligible: boolean
 }): SelectionAction | 'none' {
   if (word && dictionaryAvailable) return 'lookup'
   if (translationEnabled) return 'toolbar'
+  if (!word && analysisEligible) return 'toolbar'
   return 'none'
 }
 
@@ -143,11 +159,21 @@ export function usePaperSelectionTranslation({
   const [sense, setSense] = useState<DictionarySenseState>({ status: 'loading' })
   const [playErrorId, setPlayErrorId] = useState('')
   const { state: copyState, copied, error: copyError, copy, reset: resetCopy } = useClipboardCopy()
+  const [analysisState, setAnalysisState] = useState<SentenceAnalysisCardStatus>('loading')
+  const [analysisResult, setAnalysisResult] = useState<SentenceAnalysisV1 | null>(null)
+  const [analysisTarget, setAnalysisTarget] = useState<SentenceTarget | null>(null)
+  const [analysisExpanded, setAnalysisExpanded] = useState(false)
+  const [analysisError, setAnalysisError] = useState('')
+  const [analysisReject, setAnalysisReject] = useState<'cross-sentence' | 'too-long'>('cross-sentence')
   const generationRef = useRef(0)
   const snapshotRef = useRef<Snapshot | null>(null)
   const abortRef = useRef<AbortController | null>(null)
   const lookupAbortRef = useRef<AbortController | null>(null)
   const senseAbortRef = useRef<AbortController | null>(null)
+  const analysisAbortRef = useRef<AbortController | null>(null)
+  const [analysisRange, setAnalysisRange] = useState<Range | null>(null)
+  const analysisEscapeRef = useRef<(() => boolean) | null>(null)
+  const phaseRef = useRef<SelectionOverlayPhase | 'idle'>('idle')
   const senseTimerRef = useRef<number | null>(null)
   const pointerInsideRef = useRef(false)
   const pointerSelectingRef = useRef(false)
@@ -165,7 +191,11 @@ export function usePaperSelectionTranslation({
     }
   }, [consumption])
 
-  const gateRef = useRef(createLectureFocusGate({
+  useEffect(() => {
+    phaseRef.current = phase
+  }, [phase])
+
+  const [gate] = useState(() => createLectureFocusGate({
     isNonCollapsedSelection: () => {
       const selection = window.getSelection()
       return Boolean(selection && !selection.isCollapsed)
@@ -179,7 +209,7 @@ export function usePaperSelectionTranslation({
     }
   }, [])
 
-  const close = useCallback(() => {
+  const cancelPendingWork = useCallback(() => {
     generationRef.current += 1
     abortRef.current?.abort()
     abortRef.current = null
@@ -187,11 +217,19 @@ export function usePaperSelectionTranslation({
     lookupAbortRef.current = null
     senseAbortRef.current?.abort()
     senseAbortRef.current = null
+    analysisAbortRef.current?.abort()
+    analysisAbortRef.current = null
     clearSenseTimer()
     stopDictionaryAudio()
     snapshotRef.current = null
     pointerInsideRef.current = false
-    gateRef.current.cancelPending()
+    gate.cancelPending()
+    resetCopy()
+  }, [clearSenseTimer, gate, resetCopy])
+
+  // Pure state setters only: also runs during render when the reset key changes.
+  const clearOverlayState = useCallback(() => {
+    setAnalysisRange(null)
     setResults([])
     setPhase('idle')
     setSnapshot(null)
@@ -201,8 +239,18 @@ export function usePaperSelectionTranslation({
     setDictionaryResult(null)
     setLookupError('')
     setPlayErrorId('')
-    resetCopy()
-  }, [clearSenseTimer, resetCopy])
+    setAnalysisResult(null)
+    setAnalysisTarget(null)
+    setAnalysisError('')
+    setAnalysisExpanded(false)
+  }, [])
+
+  const lastInputSource = useCallback(() => lastInputRef.current, [])
+
+  const close = useCallback(() => {
+    cancelPendingWork()
+    clearOverlayState()
+  }, [cancelPendingWork, clearOverlayState])
 
   const dismissSelection = useCallback(() => {
     const liveRange = selectionRange()
@@ -210,13 +258,18 @@ export function usePaperSelectionTranslation({
     close()
   }, [close])
 
+  const resetKey = JSON.stringify([paperId, source?.sourceRevision ?? null, status?.enabled ?? null, status?.promptVersion ?? null, status?.contextPolicy ?? null])
+  const [settledResetKey, setSettledResetKey] = useState(resetKey)
+  if (settledResetKey !== resetKey) {
+    setSettledResetKey(resetKey)
+    clearOverlayState()
+  }
   useLayoutEffect(() => {
     pageCacheRef.current.clear()
-    close()
-  }, [close, paperId, source?.sourceRevision, status?.enabled, status?.promptVersion, status?.contextPolicy])
+    cancelPendingWork()
+  }, [cancelPendingWork, resetKey])
 
   useEffect(() => {
-    const gate = gateRef.current
     return () => {
       generationRef.current += 1
       abortRef.current?.abort()
@@ -225,12 +278,14 @@ export function usePaperSelectionTranslation({
       lookupAbortRef.current = null
       senseAbortRef.current?.abort()
       senseAbortRef.current = null
+      analysisAbortRef.current?.abort()
+      analysisAbortRef.current = null
       clearSenseTimer()
       stopDictionaryAudio()
       snapshotRef.current = null
       gate.cancelPending()
     }
-  }, [clearSenseTimer])
+  }, [clearSenseTimer, gate])
 
   const runTranslate = useCallback(async (current: Snapshot) => {
     const generation = current.generation
@@ -433,15 +488,7 @@ export function usePaperSelectionTranslation({
 
   const scheduleSense = useCallback((current: Snapshot) => {
     clearSenseTimer()
-    if (dictionaryStatus === undefined) {
-      setSense({ status: 'loading' })
-      return
-    }
-    if (!dictionaryStatus?.sensePick?.enabled) {
-      setSense({ status: 'unavailable', message: '本文义暂不可用' })
-      return
-    }
-    setSense({ status: 'loading' })
+    if (!dictionaryStatus?.sensePick?.enabled) return
     senseTimerRef.current = window.setTimeout(() => {
       senseTimerRef.current = null
       if (generationRef.current !== current.generation) return
@@ -467,8 +514,8 @@ export function usePaperSelectionTranslation({
     }
     const translationEnabled = Boolean(status && status.enabled)
     const dictionaryAvailable = Boolean(dictionaryStatus?.available)
-    if (status === undefined && dictionaryStatus === undefined) return
-    if (!translationEnabled && !dictionaryAvailable) {
+    if (!SENTENCE_ANALYSIS_ENABLED && status === undefined && dictionaryStatus === undefined) return
+    if (!SENTENCE_ANALYSIS_ENABLED && !translationEnabled && !dictionaryAvailable) {
       if (status === undefined || dictionaryStatus === undefined) return
       if (phase !== 'idle') close()
       return
@@ -511,10 +558,12 @@ export function usePaperSelectionTranslation({
         }]
       }
     }
+    const analysisEligible = SENTENCE_ANALYSIS_ENABLED && analysisButtonEligible(source, consumption, segments)
     const action = chooseAction({
       word,
       translationEnabled,
       dictionaryAvailable,
+      analysisEligible,
     })
     if (action === 'lookup' && status === undefined) return
     if (action === 'none') {
@@ -525,7 +574,7 @@ export function usePaperSelectionTranslation({
     const sameRange = Boolean(previous?.paperId === paperId && previous.sourceRevision === source.sourceRevision
       && previous.range.startContainer === range.startContainer && previous.range.startOffset === range.startOffset
       && previous.range.endContainer === range.endContainer && previous.range.endOffset === range.endOffset)
-    const translationInFlight = phase === 'loading' || phase === 'result' || phase === 'error' || phase === 'dictionary'
+    const translationInFlight = phase === 'loading' || phase === 'result' || phase === 'error' || phase === 'dictionary' || phase === 'sentence-analysis'
     if (sameRange && previous && (previous.action === action || translationInFlight)) {
       pendingAnchorRef.current = null
       return
@@ -537,6 +586,8 @@ export function usePaperSelectionTranslation({
     lookupAbortRef.current = null
     senseAbortRef.current?.abort()
     senseAbortRef.current = null
+    analysisAbortRef.current?.abort()
+    analysisAbortRef.current = null
     clearSenseTimer()
     stopDictionaryAudio()
     const next: Snapshot = {
@@ -551,6 +602,9 @@ export function usePaperSelectionTranslation({
       promptVersion: status?.promptVersion || '',
       segments,
       anchor: pendingAnchorRef.current,
+      word,
+      analysisEligible,
+      input: lastInputRef.current,
     }
     pendingAnchorRef.current = null
     snapshotRef.current = next
@@ -573,13 +627,25 @@ export function usePaperSelectionTranslation({
       void runLookup(next)
       return
     }
-  }, [clearSenseTimer, close, dictionaryStatus, hostRef, paperId, phase, runLookup, source, status, resetCopy])
+  }, [clearSenseTimer, close, consumption, dictionaryStatus, hostRef, paperId, phase, runLookup, source, status, resetCopy])
 
-  const updateFromSelectionRef = useRef(updateFromSelection)
-  updateFromSelectionRef.current = updateFromSelection
+  const shownSense = useMemo<DictionarySenseState>(() => {
+    if (dictionaryStatus === undefined) return { status: 'loading' }
+    if (!dictionaryStatus?.sensePick?.enabled) return { status: 'unavailable', message: '本文义暂不可用' }
+    return sense
+  }, [dictionaryStatus, sense])
+
+  // Re-read the live DOM selection once the policies arrive, as if a selectionchange had fired.
+  const refreshFromSelection = useEffectEvent(() => updateFromSelection())
   useEffect(() => {
-    if (status === undefined && dictionaryStatus === undefined) return
-    updateFromSelectionRef.current()
+    if (!SENTENCE_ANALYSIS_ENABLED && status === undefined && dictionaryStatus === undefined) return undefined
+    let live = true
+    queueMicrotask(() => {
+      if (live) refreshFromSelection()
+    })
+    return () => {
+      live = false
+    }
   }, [dictionaryStatus, status])
 
   useEffect(() => {
@@ -590,18 +656,17 @@ export function usePaperSelectionTranslation({
 
   useEffect(() => {
     function onSelectionChange() {
-      gateRef.current.selectionChanged()
+      gate.selectionChanged()
       if (pointerSelectingRef.current) return
       dismissedRangeRef.current = null
       updateFromSelection()
     }
     document.addEventListener('selectionchange', onSelectionChange)
     return () => document.removeEventListener('selectionchange', onSelectionChange)
-  }, [updateFromSelection])
+  }, [gate, updateFromSelection])
 
   useEffect(() => {
     const host = hostRef.current
-    const gate = gateRef.current
     const onDown = (event: PointerEvent) => {
       lastInputRef.current = 'pointer'
       pointerKindRef.current = event.pointerType || 'mouse'
@@ -617,7 +682,14 @@ export function usePaperSelectionTranslation({
     }
     const onMove = (event: PointerEvent) => gate.pointerMove(event)
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') dismissSelection()
+      if (event.key === 'Escape') {
+        if (phaseRef.current === 'sentence-analysis' && analysisEscapeRef.current?.()) {
+          event.preventDefault()
+          event.stopPropagation()
+          return
+        }
+        dismissSelection()
+      }
       if (
         event.key === 'Enter'
         || event.key === ' '
@@ -641,27 +713,30 @@ export function usePaperSelectionTranslation({
       window.removeEventListener('pointercancel', finishSelecting, true)
       window.removeEventListener('keydown', onKey, true)
     }
-  }, [dismissSelection, hostRef, paperId, source?.sourceRevision, updateFromSelection])
+  }, [dismissSelection, gate, hostRef, paperId, source?.sourceRevision, updateFromSelection])
 
   useEffect(() => {
     const host = hostRef.current
     if (!host || phase === 'idle') return undefined
+    const anchorRange = () => (phase === 'sentence-analysis' && analysisRange) || snapshot?.range || null
     const onScroll = () => {
-      if (!snapshot?.range) return
-      if (!snapshot.range.startContainer.isConnected || !snapshot.range.endContainer.isConnected) {
+      const range = anchorRange()
+      if (!range) return
+      if (!range.startContainer.isConnected || !range.endContainer.isConnected) {
         dismissSelection()
         return
       }
-      const rects = snapshot.range.getClientRects()
+      const rects = range.getClientRects()
       if (rects.length === 0) {
         dismissSelection()
         return
       }
-      const box = snapshot.range.getBoundingClientRect()
+      const box = range.getBoundingClientRect()
       if (box.bottom < -200 || box.top > window.innerHeight + 200) dismissSelection()
     }
     const onResize = () => {
-      if (!snapshot?.range || snapshot.range.getClientRects().length === 0) dismissSelection()
+      const range = anchorRange()
+      if (!range || range.getClientRects().length === 0) dismissSelection()
     }
     const onPointerDown = (event: PointerEvent) => {
       const overlay = document.querySelector('.paper-selection-overlay')
@@ -676,7 +751,7 @@ export function usePaperSelectionTranslation({
       window.removeEventListener('resize', onResize)
       window.removeEventListener('pointerdown', onPointerDown, true)
     }
-  }, [dismissSelection, hostRef, phase, snapshot])
+  }, [analysisRange, dismissSelection, hostRef, phase, snapshot])
 
   const openLookup = useCallback(() => {
     const current = snapshotRef.current
@@ -695,24 +770,114 @@ export function usePaperSelectionTranslation({
     void runLookup(opened)
   }, [dictionaryResult, lookupError, runLookup])
 
+  const openSentenceAnalysis = useCallback(() => {
+    const current = snapshotRef.current
+    if (!current || !source) return
+    const generation = generationRef.current + 1
+    generationRef.current = generation
+    analysisAbortRef.current?.abort()
+    const resolved = resolveTarget(source, consumption, current.segments)
+    setPhase('sentence-analysis')
+    setAnalysisError('')
+    if (!resolved.ok) {
+      setAnalysisRange(null)
+      setAnalysisState('rejected')
+      setAnalysisReject(resolved.reason === 'too-long' ? 'too-long' : 'cross-sentence')
+      setAnalysisResult(null)
+      setAnalysisTarget(null)
+      setAnalysisExpanded(false)
+      setLiveMessage(resolved.reason === 'too-long' ? '句子过长，暂不分析' : '请只选一句')
+      return
+    }
+    const host = hostRef.current
+    setAnalysisRange(host
+      ? streamRangeToDomRange(source, host, resolved.target.streamId, resolved.target.start, resolved.target.end)
+      : null)
+    setAnalysisTarget(resolved.target)
+    setAnalysisExpanded(resolved.expanded)
+    setAnalysisState('loading')
+    setAnalysisResult(null)
+    setLiveMessage('分析中')
+    const controller = new AbortController()
+    analysisAbortRef.current = controller
+    void sentenceAnalysisProvider.analyze(resolved.target, { signal: controller.signal }).then((result) => {
+      if (generationRef.current !== generation || controller.signal.aborted) return
+      const validated = validateSentenceAnalysis(result)
+      if (!validated.ok) {
+        setAnalysisState('invalid')
+        setLiveMessage('分析数据无效')
+        return
+      }
+      const value = validated.value
+      const same = value.source.paperId === resolved.target.paperId
+        && value.source.streamId === resolved.target.streamId
+        && value.source.start === resolved.target.start
+        && value.source.end === resolved.target.end
+        && value.source.sentenceText === resolved.target.sentenceText
+      if (!same) {
+        setAnalysisState('invalid')
+        setLiveMessage('分析数据无效')
+        return
+      }
+      setAnalysisResult(value)
+      if (value.status === 'unavailable') {
+        setAnalysisState('unavailable')
+        setLiveMessage(value.unavailableReason || '该句暂无分析数据')
+      } else if (value.status === 'partial') {
+        setAnalysisState('partial')
+        setLiveMessage('部分结构未能分析')
+      } else {
+        setAnalysisState('ok')
+        setLiveMessage('句子分析已打开')
+      }
+    }).catch((error: unknown) => {
+      if (error instanceof DOMException && error.name === 'AbortError') return
+      if (generationRef.current !== generation) return
+      setAnalysisState('error')
+      setAnalysisError(error instanceof SentenceAnalysisRequestError ? error.message : '分析失败：模拟数据加载出错。点重试再试一次')
+      setLiveMessage('分析失败')
+    })
+  }, [consumption, hostRef, source])
+
   const overlay = snapshot && phase !== 'idle' && (
-    phase === 'dictionary' || phase === 'lookup' || status?.enabled
+    phase === 'dictionary' || phase === 'lookup' || phase === 'sentence-analysis' || status?.enabled
+    || (phase === 'toolbar' && snapshot.analysisEligible)
   )
     ? createPortal(
       <SelectionOverlay
         phase={phase}
-        range={snapshot.range}
+        range={(phase === 'sentence-analysis' && analysisRange) || snapshot.range}
         anchor={snapshot.anchor}
         taskMode={taskMode}
         translation={translation}
         results={results}
         errorMessage={errorMessage}
         liveMessage={liveMessage}
-        focusLookup={lastInputRef.current === 'keyboard'}
+        focusLookup={snapshot.input === 'keyboard'}
         onTranslate={() => {
           void runTranslate(snapshot)
         }}
         onLookup={openLookup}
+        showTranslate={Boolean(status?.enabled)}
+        showAnalyze={SENTENCE_ANALYSIS_ENABLED && snapshot.analysisEligible && (phase === 'toolbar' || phase === 'lookup')}
+        analyzeLabel={snapshot.word ? '分析所在句' : '分析此句'}
+        onAnalyze={openSentenceAnalysis}
+        analysis={phase === 'sentence-analysis' ? (
+          <SentenceAnalysisCard
+            key={`${analysisTarget?.sentenceText || 'selection'}:${analysisState}`}
+            status={analysisState}
+            analysis={analysisResult}
+            sentenceText={analysisTarget?.sentenceText || ''}
+            expanded={analysisExpanded}
+            rejectReason={analysisReject}
+            errorMessage={analysisError}
+            onRetry={openSentenceAnalysis}
+            onClose={dismissSelection}
+            onAnnounce={setLiveMessage}
+            bindEscapeRef={analysisEscapeRef}
+            textSize={paperTextSize(analysisRange || snapshot.range)}
+          />
+        ) : null}
         onRetry={() => {
           void runTranslate(snapshot)
         }}
@@ -727,7 +892,7 @@ export function usePaperSelectionTranslation({
             result={dictionaryResult}
             lookupError={lookupError}
             playErrorId={playErrorId}
-            sense={sense}
+            sense={shownSense}
             onRetrySense={() => {
               void runSense(snapshot)
             }}
@@ -736,10 +901,11 @@ export function usePaperSelectionTranslation({
             copyState={copyState}
             copyError={copyError}
             onCopy={() => {
-              const text = dictionaryCopyText(snapshot.segments[0]?.selectedText || '', dictionaryResult, sense)
+              const text = dictionaryCopyText(snapshot.segments[0]?.selectedText || '', dictionaryResult, shownSense)
               void copy(text)
             }}
             onClose={dismissSelection}
+            onAnalyzeSentence={SENTENCE_ANALYSIS_ENABLED && snapshot.analysisEligible ? openSentenceAnalysis : undefined}
             notebook={snapshot.segments.length === 1 ? (
               <NotebookAddButton
                 paperId={snapshot.paperId}
@@ -756,8 +922,8 @@ export function usePaperSelectionTranslation({
 
   return {
     overlay,
-    lectureFocusGate: gateRef.current,
-    lastInputSource: () => lastInputRef.current,
+    lectureFocusGate: gate,
+    lastInputSource,
     enabled: Boolean(status && status.enabled),
   }
 }

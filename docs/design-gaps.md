@@ -37,3 +37,12 @@ token 的扩展用法。
 - **临时方案**：维持既有 13px 不动（quiet-chrome 刀只摘盒子、不动字号，避免
   全站布局位移）。本刀已顺手把 `.concierge-action` 的 12.5px 收进 12px，
   其余 13px 实例留待本缺口闭环。
+
+## 2026-09-30 句子分析卡片（`.paper-sentence-analysis`）
+
+- **想要的值**：成功绿的深色文字档，和 `--eqb-color-warning-text` 对称。成分标签、引导词和气泡标题都是 11–14px 的绿字，直接用 `--eqb-color-success #1FA062` 过不了 4.5:1。
+- **临时方案**：在 `.paper-sentence-analysis` 里用 `color-mix(in srgb, var(--eqb-color-success) 68%, var(--desk-ink))` 派生出 `--sa-green`，不进全局 token。若日后收编，候选名 `--eqb-color-success-text`。
+- **想要的值**：比 12px Label 再小一级的"行间标注"字号。原句上方的成分标签、下方的难点标签、弱墨小字和气泡按钮要夹在 3.9 倍行距的两行正文之间，12px 会让相邻标签更常互相让位。
+- **临时方案**：这几处用 11px 字面量（`sentenceAnalysis.css` 的 `.sa-label`、`.sa-flag`、`.sa-quiet`、`.sa-bubble-unsure`、`.sa-bubble-action`）。若收编成 Type Ramp 的注释档，候选名 `--eqb-font-size-annotation`。
+- **想要的值**：贴在正文里的轻浮层阴影。`--eqb-shadow-floating`（0 8px 24px 12%）对一行高的气泡太重，会压住下一行字。
+- **临时方案**：`.sa-bubble` 用 `0 2px 8px rgba(25, 29, 24, 0.08)`。候选名 `--eqb-shadow-inline`。

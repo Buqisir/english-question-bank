@@ -1,5 +1,5 @@
 import { useId, useState, type ReactNode } from 'react'
-import { ChevronDown, Volume, X } from '../../../icons'
+import { ChevronDown, SentenceAnalysis, Volume, X } from '../../../icons'
 import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import type {
@@ -326,6 +326,7 @@ export function DictionaryCard({
   copyError,
   onClose,
   notebook,
+  onAnalyzeSentence,
 }: {
   surface: string
   lookup: 'loading' | 'ready'
@@ -341,6 +342,7 @@ export function DictionaryCard({
   copyError?: string
   onClose?: () => void
   notebook?: ReactNode
+  onAnalyzeSentence?: () => void
 }) {
   const [explainAll, setExplainAll] = useState(false)
   const [creditsOpen, setCreditsOpen] = useState(false)
@@ -371,6 +373,17 @@ export function DictionaryCard({
           {single ? <GaokaoBadge entry={single} /> : null}
         </div>
         <div className="paper-selection-card-actions">
+          {onAnalyzeSentence ? (
+            <button
+              type="button"
+              className="paper-dictionary-analyze"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={onAnalyzeSentence}
+            >
+              <SentenceAnalysis size={16} />
+              <span>分析所在句</span>
+            </button>
+          ) : null}
           <button
             type="button"
             className="paper-selection-action-btn"

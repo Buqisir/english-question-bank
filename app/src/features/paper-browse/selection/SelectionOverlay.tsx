@@ -2,12 +2,12 @@ import { useLayoutEffect, useRef } from 'react'
 import type { PaperTranslationResultItem } from '../../../services/paperTranslation'
 import { autoUpdate, computePosition, flip, offset, shift, size, type Placement } from '@floating-ui/react-dom'
 import type { ReactNode } from 'react'
-import { Translate, DictionaryLookup, X, RefreshCw } from '../../../icons'
+import { Translate, DictionaryLookup, X, RefreshCw, SentenceAnalysis } from '../../../icons'
 import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 
-export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary'
+export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary' | 'sentence-analysis'
 
 export type SelectionOverlayProps = {
   phase: SelectionOverlayPhase
@@ -25,6 +25,23 @@ export type SelectionOverlayProps = {
   onPointerInsideChange: (inside: boolean) => void
   dictionary?: ReactNode
   focusLookup?: boolean
+  showTranslate?: boolean
+  showAnalyze?: boolean
+  analyzeLabel?: string
+  onAnalyze?: () => void
+  analysis?: ReactNode
+}
+
+function reserveRoomBelow(range: Range, contextElement: Element | null) {
+  const rect = range.getBoundingClientRect()
+  const targetBottom = Math.max(window.innerHeight * .32, rect.height + 96)
+  const distance = rect.bottom - targetBottom
+  if (distance <= 0) return
+  let scroller = contextElement
+  while (scroller && !(scroller.scrollHeight > scroller.clientHeight
+    && /auto|scroll/.test(getComputedStyle(scroller).overflowY))) scroller = scroller.parentElement
+  const target = scroller || document.scrollingElement
+  if (target) target.scrollTop += distance
 }
 
 export function SelectionOverlay({
@@ -43,6 +60,11 @@ export function SelectionOverlay({
   onPointerInsideChange,
   dictionary,
   focusLookup = false,
+  showTranslate = true,
+  showAnalyze = false,
+  analyzeLabel = '分析此句',
+  onAnalyze,
+  analysis,
 }: SelectionOverlayProps) {
   const floatingRef = useRef<HTMLDivElement | null>(null)
   const clipboard = useClipboardCopy()
@@ -53,10 +75,25 @@ export function SelectionOverlay({
     const floating = floatingRef.current
     if (!floating) return undefined
     lockedPlacementRef.current = null
+    const sentence = phase === 'sentence-analysis'
+    const contextElement = range.startContainer instanceof Element
+      ? range.startContainer : range.startContainer.parentElement
+    const paragraph = contextElement?.closest('[data-paper-paragraph-id], [data-canonical-block-id]')
+    const textColumn = paragraph ?? contextElement?.closest('.ps-page')
+    // Reserve room below the whole sentence on entry. Subsequent scrolling
+    // follows the source; the card never flips over the sentence being read.
+    if (sentence) reserveRoomBelow(range, contextElement)
     const virtual = {
+      contextElement: contextElement || undefined,
       getBoundingClientRect: () => {
         const rects = [...range.getClientRects()]
         if (rects.length === 0) return range.getBoundingClientRect()
+        if (sentence) {
+          const bottom = Math.max(...rects.map(rect => rect.bottom))
+          const column = textColumn?.getBoundingClientRect() ?? range.getBoundingClientRect()
+          // Anchor to the text column, not the selected word or a short last line.
+          return new DOMRect(column.left, bottom, column.width, 0)
+        }
         if (!anchor) return rects.at(-1)!
         const line = rects.find((r) => anchor.y >= r.top && anchor.y <= r.bottom)
           ?? rects.reduce((best, r) => Math.abs((r.top + r.bottom) / 2 - anchor.y) < Math.abs((best.top + best.bottom) / 2 - anchor.y) ? r : best)
@@ -68,14 +105,23 @@ export function SelectionOverlay({
       const locked = lockedPlacementRef.current
       void computePosition(virtual, floating, {
         strategy: 'fixed',
-        placement: locked ?? 'bottom-start',
+        placement: locked ?? (sentence ? 'bottom' : 'bottom-start'),
         middleware: [
-          offset({ mainAxis: 6, crossAxis: 0 }),
-          ...(locked ? [] : [flip({ padding: 12 })]),
+          offset({ mainAxis: sentence ? 12 : 6, crossAxis: 0 }),
+          ...(sentence || locked ? [] : [flip({ padding: 12 })]),
           shift({ padding: 12 }),
           size({
             padding: 12,
             apply({ availableWidth, availableHeight, elements }) {
+              if (phase === 'sentence-analysis') {
+                Object.assign(elements.floating.style, {
+                  width: `${Math.min(760, availableWidth)}px`,
+                  maxWidth: `${Math.min(760, availableWidth)}px`,
+                  maxHeight: '',
+                  '--sa-available-height': `${Math.max(0, Math.min(availableHeight, window.innerHeight * 0.85))}px`,
+                })
+                return
+              }
               Object.assign(elements.floating.style, {
                 maxWidth: `${Math.min(340, availableWidth)}px`,
                 maxHeight: `${Math.min(380, availableHeight, window.innerHeight * 0.55)}px`,
@@ -120,8 +166,11 @@ export function SelectionOverlay({
       className="paper-selection-overlay"
       role={phase === 'dictionary' ? 'dialog' : 'region'}
       aria-modal={phase === 'dictionary' ? false : undefined}
-      aria-label={phase === 'dictionary' || phase === 'lookup' ? '单词查词' : '选区翻译'}
-      onMouseDown={(event) => event.preventDefault()}
+      aria-label={phase === 'sentence-analysis' ? '句子分析' : phase === 'dictionary' || phase === 'lookup' ? '单词查词' : '选区翻译'}
+      onMouseDown={(event) => {
+        if (phase === 'sentence-analysis') return
+        event.preventDefault()
+      }}
       onPointerEnter={() => onPointerInsideChange(true)}
       onPointerLeave={() => onPointerInsideChange(false)}
     >
@@ -138,7 +187,7 @@ export function SelectionOverlay({
               <DictionaryLookup size={16} className="paper-selection-btn-icon" />
               <span>查词</span>
             </button>
-          ) : (
+          ) : showTranslate ? (
             <button
               type="button"
               className="paper-selection-translate"
@@ -147,9 +196,20 @@ export function SelectionOverlay({
               <Translate size={16} className="paper-selection-btn-icon" />
               <span>翻译</span>
             </button>
-          )}
+          ) : null}
+          {showAnalyze ? (
+            <button
+              type="button"
+              className="paper-selection-analyze"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={onAnalyze}
+            >
+              <SentenceAnalysis size={16} className="paper-selection-btn-icon" />
+              <span>{analyzeLabel}</span>
+            </button>
+          ) : null}
         </div>
-      ) : phase === 'dictionary' ? dictionary : (
+      ) : phase === 'sentence-analysis' ? analysis : phase === 'dictionary' ? dictionary : (
         <div className="paper-selection-card">
           <div className="paper-selection-card-header">
             <span className="paper-selection-card-kicker">
