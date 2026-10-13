@@ -204,13 +204,35 @@ try {
   }
   const referencesPath = path.join(fixture.reviewRoot, SOURCE_REFERENCES_FILE)
   await writeFile(referencesPath, JSON.stringify(references))
+  const inputIdentity = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
+  const fixturePageCounts = [12, 10, 9, 5]
+  const fixtureBytes = { ...bytes, 'products/economy8.pdf': pdfBytes(9, 'explicit nine-page product') }
   await mkdir(path.join(fixture.reviewRoot, 'products'))
-  const productManifest = { ...manifest, paperId: fixture.projection.paperId,
+  const productManifest = { ...manifest, schemaVersion: 'paper-pdf-products-v2', economyPageLimit: 9,
+    paperId: fixture.projection.paperId,
     paperName: fixture.projection.paperName, examDate: { year: 2026, month: 4 },
+    files: PRODUCT_FILES.map((file, index) => ({ ...file, pageCount: fixturePageCounts[index],
+      byteLength: fixtureBytes[file.path].length, sha256: digest(fixtureBytes[file.path]) })),
     inputDigest: productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot)) }
-  for (const file of PRODUCT_FILES) await writeFile(path.join(fixture.reviewRoot, file.path), bytes[file.path])
+  for (const file of PRODUCT_FILES) await writeFile(path.join(fixture.reviewRoot, file.path), fixtureBytes[file.path])
+  await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或四款文件清单/,
+    'a nine-page manifest cannot opt in an otherwise eight-page paper')
+  const paginationPlan = { schemaVersion: 'paper-pagination-plan-v5', paperId: inputIdentity.paperId,
+    sourceDigest: inputIdentity.sourceDigest, candidateDigest: inputIdentity.candidateDigest,
+    editions: { economy8: { targetPages: 9, includeListening: false, omitCover: false, coverGapsPt: null,
+      allowSplitOptionBank: false, breakSlotIds: ['writing.continuation'], layout: {
+        profile: 'student-friendly-economy-v2', fontSizePt: 10.5, figureLayout: 'float80',
+        answerBoxHeightsMm: { application: 65, continuation: 57 },
+      } } } }
+  await writeFile(path.join(fixture.reviewRoot, 'pagination-plan.json'), JSON.stringify(paginationPlan))
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或四款文件清单/,
+    'adding the plan invalidates the previous product input digest')
+  productManifest.inputDigest = productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot))
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
   const projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
+  assert.equal(projection.sourceDigest, inputIdentity.sourceDigest)
+  assert.equal(projection.candidateDigest, inputIdentity.candidateDigest)
   await rm(referencesPath)
   const withoutReferences = { ...productManifest,
     inputDigest: productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot)) }
@@ -261,8 +283,8 @@ try {
     assert.equal((await readPreview(`pdf?edition=${edition}`, 'member')).status, 403)
     const pdf = await readPreview(`pdf?edition=${edition}`)
     assert.equal(pdf.status, 200)
-    assert.deepEqual(pdf.body, bytes[`products/${edition}.pdf`])
-    assert.equal(pdf.headers['x-eqb-pagination-pages'], String(pageCounts[index]))
+    assert.deepEqual(pdf.body, fixtureBytes[`products/${edition}.pdf`])
+    assert.equal(pdf.headers['x-eqb-pagination-pages'], String(fixturePageCounts[index]))
     assert.equal(pdf.headers['x-eqb-pagination-mode'], 'frozen')
     const print = await readPreview(`print?edition=${edition}`)
     assert.equal(print.status, 200)
@@ -292,7 +314,7 @@ try {
     const official = await loadStoredProducts({ db: publicationDb, paperAssetsDir: input.paperAssetsDir,
       consumption: Object.values(result.publish.consumers)[0],
       blobStore: createBlobStore({ rootDir: path.join(directory, 'publication-blobs') }) })
-    for (const file of PRODUCT_FILES) assert.deepEqual(official.bytes[file.path], bytes[file.path])
+    for (const file of PRODUCT_FILES) assert.deepEqual(official.bytes[file.path], fixtureBytes[file.path])
   } finally { publicationDb.close() }
 
   // GET success alone cannot catch a missing HEAD registration in this router.

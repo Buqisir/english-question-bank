@@ -45,6 +45,7 @@ import {
 import { assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME,
+  economyPageLimitForPlan,
   loadPaperPaginationPlan,
   paginationSlotBindings,
 } from '../paper-import/paginationPlan.mjs'
@@ -1683,7 +1684,8 @@ export function buildNck1ReviewProjection(rootDir, {
   const examDate = readExamDate(loaded.config.provenance, { required: Boolean(loaded.config.pdfProductsRequired
     || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))) })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir)) }) : null
+    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir)),
+        economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
     fail('四款 PDF 必须保留完整的源参考答案捕获；不能只提交答案 PDF')
   }

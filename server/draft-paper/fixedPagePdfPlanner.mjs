@@ -487,8 +487,10 @@ export async function searchFixedPagePdf(html, {
   targetPages, render, renderLimit, natural, atMost = false, accept = () => true,
   rejectOverflowCandidates = false, balanceWhitespace = false,
 }) {
-  if (![8, 10, 12].includes(targetPages)) throw new Error('targetPages must be 8, 10 or 12')
-  const preferWholeGroups = targetPages === 8 || html.includes('data-pdf-omit-cover')
+  if (![8, 10, 12].includes(targetPages) && !(targetPages === 9 && atMost === true)) {
+    throw new Error('targetPages must be 8, 10 or 12, or an explicit nine-page ceiling')
+  }
+  const preferWholeGroups = targetPages === 8 || targetPages === 9 || html.includes('data-pdf-omit-cover')
   const renderPlan = async (breaks) => {
     try { return await render(applyPlannedGroupBreaks(html, breaks), { inspect: inspectGroups }) } catch (error) {
       if (rejectOverflowCandidates && error.code === 'PAPER_LAYOUT_OVERFLOW') return null

@@ -121,6 +121,47 @@ for (const change of [
 ]) assert.throws(() => validatePaperPaginationPlan({ ...plan, editions: { largeNoListening: { ...plan.editions.largeNoListening, ...change } } }, identity))
 assert.throws(() => validatePaperPaginationPlan({ ...plan, schemaVersion: 'paper-pagination-plan-v2' }, identity), /requires/)
 
+// Nine pages are an explicit new-plan ceiling, never a reinterpretation of v4.
+const nineLayout = { ...layout, profile: 'student-friendly-economy-v2', fontSizePt: 10.5,
+  figureLayout: 'float80', answerBoxHeightsMm: { application: 24, continuation: 24 } }
+const ninePlan = { ...plan, schemaVersion: 'paper-pagination-plan-v5', editions: {
+  ...plan.editions,
+  economy8: { ...plan.editions.largeNoListening, targetPages: 9, layout: nineLayout },
+} }
+assert.deepEqual(validatePaperPaginationPlan(ninePlan, identity), ninePlan)
+assert.throws(() => validatePaperPaginationPlan({ ...ninePlan, schemaVersion: 'paper-pagination-plan-v4' }, identity), /policy/)
+assert.throws(() => validatePaperPaginationPlan({ ...plan, schemaVersion: 'paper-pagination-plan-v5' }, identity), /explicit economy8/)
+for (const change of [{ targetPages: 8 }, { targetPages: 10 },
+  { layout: { ...nineLayout, fontSizePt: 12 } }, { allowSplitOptionBank: true }]) {
+  assert.throws(() => validatePaperPaginationPlan({ ...ninePlan, editions: {
+    ...ninePlan.editions, economy8: { ...ninePlan.editions.economy8, ...change },
+  } }, identity))
+}
+assert.throws(() => validatePaperPaginationPlan(ninePlan, { ...identity, candidateDigest: 'another-candidate' }), /stale/)
+for (const pages of [8, 9, 10]) {
+  const render = async () => ({ pageCount: pages, inspection })
+  const replay = () => renderExplicitStudentProductPdf(html, { edition: 'economy8', economyPageLimit: 9,
+    layout: nineLayout, plannedBreakGroupIds: ['continuation'], render })
+  if (pages <= 9) assert.equal((await replay()).pageCount, pages, 'ceilings never pad short papers')
+  else await assert.rejects(replay, error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+  if (pages === 9) await assert.rejects(() => renderExplicitStudentProductPdf(html, {
+    edition: 'economy8', layout: nineLayout, plannedBreakGroupIds: ['continuation'], render,
+  }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE', 'absent opt-in remains exactly eight pages')
+}
+const initialized = await renderExplicitStudentProductPdf(html, {
+  edition: 'economy8', economyPageLimit: 9, layout: nineLayout, plannedBreakGroupIds: ['continuation'],
+  restoreAnswerBoxes: true, render: async source => {
+    const sizes = geometry(source)
+    assert.equal(sizes.font, 10.5)
+    assert.match(source, /Both supplied starters/)
+    return { pageCount: sizes.application <= 43 ? 9 : 10, inspection }
+  },
+})
+assert.deepEqual(initialized.layout.answerBoxHeightsMm, { application: 43, continuation: 57 },
+  'new explicit initialization restores answer space without changing its font or breaks')
+assert.deepEqual(initialized.plannedBreakGroupIds, ['continuation'])
+assert.ok(initialized.searchedCandidates <= 16)
+
 for (const edition of ['largeComplete', 'largeNoListening']) {
   const friendlier = await planStudentProductPdf(html, { edition, render: async source => {
     const moved = source.includes('data-canonical-group-id="continuation" data-pdf-planned-break')
