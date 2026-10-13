@@ -42,6 +42,7 @@ token 的扩展用法。
 
 - **想要的值**：成功绿的深色文字档，和 `--eqb-color-warning-text` 对称。成分标签、引导词和气泡标题都是 11–14px 的绿字，直接用 `--eqb-color-success #1FA062` 过不了 4.5:1。
 - **临时方案**：在 `.paper-sentence-analysis` 里用 `color-mix(in srgb, var(--eqb-color-success) 68%, var(--desk-ink))` 派生出 `--sa-green`，不进全局 token。若日后收编，候选名 `--eqb-color-success-text`。
+- **2026-10-13 更新**：卡片已改成「奶青 + 奶黄」两色方案，上面的绿字派生不再使用。想要的值：一组可点击成分的浅青底/边/字，一组「正在读」的浅黄底/边。临时方案：`sentenceAnalysis.css` 顶部的 `--sa-label-bg #dcede3`、`--sa-label-rest #e5f1e9`、`--sa-label-edge #bcd6c7`、`--sa-action-hover #cde5d7`、`--sa-action-selected #b4d8c4`、`--sa-label-active #5a8a72`、`--sa-label-ink #2f5a45`、`--sa-green-wash #ffe8ad`、`--sa-related-bg #fff4d7`、`--sa-text-edge #b89c56`，只在卡片作用域内生效。若收编，候选名 `--eqb-color-annotation-*`。
 - **想要的值**：比 12px Label 再小一级的"行间标注"字号。原句上方的成分标签、下方的难点标签、弱墨小字和气泡按钮要夹在 3.9 倍行距的两行正文之间，12px 会让相邻标签更常互相让位。
 - **临时方案**：这几处用 11px 字面量（`sentenceAnalysis.css` 的 `.sa-label`、`.sa-flag`、`.sa-quiet`、`.sa-bubble-unsure`、`.sa-bubble-action`）。若收编成 Type Ramp 的注释档，候选名 `--eqb-font-size-annotation`。
 - **想要的值**：贴在正文里的轻浮层阴影。`--eqb-shadow-floating`（0 8px 24px 12%）对一行高的气泡太重，会压住下一行字。

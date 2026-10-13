@@ -93,7 +93,11 @@ export function createPaperSentenceAnalysisRoutes() {
         }
         if (error?.name === 'AbortError' || error?.code === 'TRANSLATION_CANCELLED') return
         const status = Number.isInteger(error.status) ? error.status : 500
-        if (status >= 500) console.warn(`[paper-sentence-analysis] ${requestId} ${error.code || 'ERROR'}: ${error.message}`)
+        if (status >= 500) {
+          // Converter diagnostics quote the paper sentence; keep them out of long-lived logs.
+          const quotesPaper = error.code === 'SENTENCE_ANALYSIS_INVALID' || error.code === 'FIXTURE_COMPILE'
+          console.warn(`[paper-sentence-analysis] ${requestId} ${error.code || 'ERROR'}${quotesPaper ? '' : `: ${error.message}`}`)
+        }
         sendPrivateJson(response, status, {
           error: userMessage(error.code),
           code: error.code || 'SENTENCE_ANALYSIS_FAILED',

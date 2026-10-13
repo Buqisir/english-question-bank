@@ -58,14 +58,30 @@ export function createSentenceAnalysisStore({
 
   const stamp = () => new Date(now()).toISOString()
 
+  // Eviction runs in its own transaction after the reply is committed: a lock
+  // here must not discard a paid reply, and the next write retries the trim.
   function evictOverflow() {
-    for (;;) {
-      const stats = count.get()
-      const extraEntries = Math.max(0, stats.n - maxEntries)
-      if (extraEntries === 0 && stats.bytes <= maxReplyBytes) return
-      const rows = oldest.all(Math.min(64, Math.max(extraEntries, 1)))
-      if (rows.length === 0) return
-      for (const row of rows) remove.run(row.cache_key)
+    try {
+      db.exec('BEGIN IMMEDIATE')
+    } catch {
+      return
+    }
+    try {
+      for (;;) {
+        const stats = count.get()
+        const extraEntries = Math.max(0, stats.n - maxEntries)
+        if (extraEntries === 0 && stats.bytes <= maxReplyBytes) break
+        const rows = oldest.all(Math.min(64, Math.max(extraEntries, 1)))
+        if (rows.length === 0) break
+        for (const row of rows) remove.run(row.cache_key)
+      }
+      db.exec('COMMIT')
+    } catch {
+      try {
+        db.exec('ROLLBACK')
+      } catch {
+        // The transaction is already closed.
+      }
     }
   }
 
