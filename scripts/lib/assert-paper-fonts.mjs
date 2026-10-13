@@ -24,7 +24,7 @@ export async function assertPaperFonts(page, selector) {
       const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: `[data-font-probe="${index}"]` })
       const { fonts } = await cdp.send('CSS.getPlatformFontsForNode', { nodeId })
       for (const font of fonts) {
-        assert.ok(font.isCustomFont && /^(TeXGyreTermes-|SourceHanSerifCN-)/.test(font.postScriptName),
+        assert.ok(font.isCustomFont && /^(TeXGyreTermes-|SourceHanSerifCN-|EQBWebHanSerif-(?:Regular|Bold)-\d+$)/.test(font.postScriptName),
           `Unexpected paper font: ${JSON.stringify(font)}`)
         used.add(font.postScriptName)
       }

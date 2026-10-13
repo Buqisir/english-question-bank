@@ -865,6 +865,20 @@ try {
   assert.equal(approvedBeforeAccept.state, 'approved')
   assert.equal(approvedBeforeAccept.next.action, 'accept_approval')
 
+  const ocrConfirmed = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: {
+      ...webReviewStatus,
+      latest: { ...webReviewStatus.latest, reviewKind: 'ocr' },
+      approval: null,
+    },
+    reviewChecked: true,
+  })
+  assert.equal(ocrConfirmed.state, 'materializing', 'OCR confirmation is not Candidate approval')
+  assert.equal(ocrConfirmed.next.action, 'push_revision')
+  assert.equal(ocrConfirmed.review.latestReviewKind, 'ocr')
+
   writeFileSync(
     path.join(evidenceDir, 'web-review-approval-v1.json'),
     JSON.stringify(webApproval),

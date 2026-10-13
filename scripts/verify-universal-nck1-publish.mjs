@@ -1611,7 +1611,6 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       }
       await player.locator('.listening-player-trigger').click()
     }
-    await screenPage.close()
 
     const detailPage = await browser.newPage({ viewport: { width: 1280, height: 900 } })
     await detailPage.route('**/api/paper-canonical/consumption?*', (route) => route.fulfill({
@@ -1725,6 +1724,46 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       await companionPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'companion-listening-narrow.png'), fullPage: true })
     }
     await companionPage.close()
+
+    // Late analysis must not publish text before its newly needed font arrives.
+    // Keep the existing paper mounted if that independent download fails.
+    const webFaces = JSON.parse(readFileSync(path.join(root, 'app/src/shared-ui/papersurface/paperWebFonts.json')))
+    const rare = String.fromCodePoint(webFaces[0].shards.at(-1).ranges.at(-1)[1])
+    const rarePaths = new Set(webFaces.map(face => `/fonts/paper/${face.shards.at(-1).path}`))
+    screenProjection = structuredClone(listeningProjection)
+    const lateMaterial = Object.values(screenProjection.analysisSidecars['listening-analysis-v1.json'].materials)[0]
+    lateMaterial.transcript += ` ${rare}`
+    screenUrl.searchParams.set('focusGroupId', `group:${projection.paperId}:listening.short-dialogue`)
+    screenUrl.searchParams.set('questionId', 'question:listening:1')
+    screenUrl.searchParams.set('lecture', '1')
+    let releaseFonts
+    const heldFonts = new Promise(resolve => { releaseFonts = resolve })
+    let requestedFont
+    const fontRequested = new Promise(resolve => { requestedFont = resolve })
+    let corruptLateFont = false
+    await screenPage.route('**/fonts/paper/web/**', async route => {
+      if (!rarePaths.has(new URL(route.request().url()).pathname)) return route.continue()
+      requestedFont()
+      await heldFonts
+      if (corruptLateFont) return route.fulfill({ status: 200, body: 'broken font' })
+      return route.continue()
+    })
+    await screenPage.goto(screenUrl.href)
+    await Promise.race([fontRequested, new Promise((_, reject) => setTimeout(() => reject(new Error('late font not requested')), 15_000))])
+    await screenPage.locator('.paper-browse-listening').first().waitFor()
+    assert(!(await screenPage.locator('body').textContent()).includes(rare), 'late text cannot render before its glyph provider')
+    releaseFonts()
+    await screenPage.locator('[data-paper-question-id="question:listening:1"]').click()
+    await screenPage.waitForFunction(text => document.querySelector('.listening-analysis-panel')?.textContent.includes(text), rare)
+    await assertPaperFonts(screenPage, '.paper-browse-listening')
+    if (process.env.LISTENING_QA_ARTIFACT_DIR) await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'late-analysis-ready.png') })
+    corruptLateFont = true
+    await screenPage.reload()
+    await screenPage.locator('.paper-browse-lecture-panel').getByRole('alert').filter({ hasText: '试卷字体加载失败' }).waitFor()
+    assert(await screenPage.locator('.paper-browse-listening').count() > 0, 'late font failure keeps the admitted paper mounted')
+    assert(!(await screenPage.locator('body').textContent()).includes(rare), 'failed late text cannot fall back to a system font')
+    if (process.env.LISTENING_QA_ARTIFACT_DIR) await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'late-analysis-font-error.png') })
+    await screenPage.close()
 
     const answers = new Map(Object.entries(projection.paperAsset.answerKey.answers)
       .map(([questionId, answer]) => [questionId, answer.answer]))
@@ -1877,6 +1916,31 @@ try {
   assert.equal(listeningExportLoaded.members.filter(({ role }) => role === 'audio').length, 1,
     'native semantic round-trip retains ten listening materials and the exact full MP3 resource')
   const listeningProjection = listeningPublication.projection
+  const listeningCliRoot = path.join(import.meta.dirname, 'import-pipeline/papers', paperId)
+  assert.equal(existsSync(listeningCliRoot), false, 'listening CLI fixture must not collide')
+  symlinkSync(listeningPublication.reviewRoot, listeningCliRoot, 'dir')
+  try {
+    const verified = JSON.parse(execFileSync(process.execPath, [
+      path.join(import.meta.dirname, 'import-pipeline/universal-nck1.mjs'), 'verify', paperId,
+    ], { encoding: 'utf8' }))
+    assert.equal(verified.sourceDigest, listeningProjection.sourceDigest, 'CLI must include exact audio source identity')
+    assert.equal(verified.candidateDigest, listeningProjection.candidateDigest, 'CLI and Review must derive the same Candidate')
+    assert.equal(verified.listening, 'captured')
+    const evidenceDir = path.join(listeningPublication.reviewRoot, 'canonical-evidence')
+    const before = new Map(readdirSync(evidenceDir).map(name => [name, readFileSync(path.join(evidenceDir, name))]))
+    execFileSync(process.execPath, [
+      path.join(import.meta.dirname, 'import-pipeline/universal-nck1.mjs'), 'build', paperId,
+    ])
+    const summary = JSON.parse(readFileSync(path.join(evidenceDir, 'candidate-summary.json')))
+    assert.equal(summary.sourceDigest, verified.sourceDigest)
+    assert.equal(summary.candidateDigest, verified.candidateDigest)
+    for (const [name, bytes] of before) {
+      if (name !== 'candidate-summary.json') assert.deepEqual(readFileSync(path.join(evidenceDir, name)), bytes,
+        'rebuilding a summary must preserve retained confirmation and evidence')
+    }
+  } finally {
+    rmSync(listeningCliRoot)
+  }
   assert.deepEqual(
     listeningProjection.paperAsset.content.blocks.slice(0, 2),
     [
@@ -3949,7 +4013,7 @@ try {
     if (
       request.method === 'GET'
       && url.pathname
-        === `/api/import-review-preview/revisions/${encodeURIComponent(approval.revisionId)}/files`
+        === `/api/import-agent-reviews/revisions/${encodeURIComponent(approval.revisionId)}/files`
     ) {
       const relativePath = url.searchParams.get('path') || ''
       const file = files.find((candidate) => candidate.path === relativePath)

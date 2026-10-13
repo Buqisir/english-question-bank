@@ -60,6 +60,7 @@ import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, use
 import { BoardList, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
+import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
 import { PaperReviewControls } from './PaperReviewControls'
 import { useIsOwnerView } from '../../auth/AuthGate'
@@ -716,7 +717,9 @@ const SIMILAR_RECIPE_SUMMARY: Record<string, string> = {
 const SIMILAR_PASSAGES_MODE_GROUP_TYPES = new Set(['cloze', 'sevenChoices'])
 
 export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
-  return <PaperFontGate><PaperBrowsePageContent {...props} /></PaperFontGate>
+  // Only static chrome and the optional caller-owned heading precede the fetch.
+  // The loaded paper and late analyses prepare their own fonts before setState.
+  return <PaperFontGate content={props.sevenChoicesBankHeading ?? ''}><PaperBrowsePageContent {...props} /></PaperFontGate>
 }
 
 function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
@@ -752,6 +755,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [error, setError] = useState<string | null>(null)
   const [analysisPdfBusy, setAnalysisPdfBusy] = useState(false)
   const [analysisPdfError, setAnalysisPdfError] = useState('')
+  const [analysisFontError, setAnalysisFontError] = useState('')
   const [pdfEdition, setPdfEdition] = useState<PaperPdfEdition>('largeNoListening')
   const grammarFillGeometryFixture =
     grammarFillGeometryVariantId == null
@@ -954,6 +958,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     similarDeepLinkAppliedRef.current = false
     setLoading(true)
     setError(null)
+    setAnalysisFontError('')
     setAsset(null)
     setAssetBase(null)
     setCanonicalConsumption(null)
@@ -1294,6 +1299,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         }
 
         if (cancelled) return
+        await ensurePaperFonts([loadedAsset, canonicalConsumption, models])
+        if (cancelled) return
         setAsset(loadedAsset)
         setAssetBase(resolvedBase)
         setCanonicalConsumption(canonicalConsumption)
@@ -1343,6 +1350,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           ? ((await listeningResponse.json()) as ListeningAnalysisV1)
           : null
         if (cancelled) return
+        await ensurePaperFonts([raw, listening])
+        if (cancelled) return
         setLectureAnalysisByGroupId((previous) => {
           const next = { ...previous }
           for (const groupId of writingGroupIds) {
@@ -1360,8 +1369,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           }
           return next
         })
-      } catch {
+      } catch (error) {
         if (cancelled) return
+        if (error instanceof PaperFontError) {
+          setAnalysisFontError(error.message)
+          return
+        }
         setLectureAnalysisByGroupId((previous) => {
           const next = { ...previous }
           for (const groupId of writingGroupIds) {
@@ -1472,6 +1485,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         }
       }
 
+      if (cancelled) return
+      try {
+        await ensurePaperFonts(entries)
+      } catch (error) {
+        if (cancelled) return
+        setAnalysisFontError(error instanceof Error ? error.message : String(error))
+        setLectureAnalysisLoading(false)
+        return
+      }
       if (cancelled) return
       setLectureAnalysisByGroupId((previous) => ({ ...previous, ...entries }))
       setLectureAnalysisFetched(true)
@@ -3218,6 +3240,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     const entry = groupModels[groupId]
     const lectureEntry = lectureAnalysisByGroupId[groupId]
 
+    if (analysisFontError && !lectureEntry
+      && ['listening', 'writing', 'cloze', 'grammarFill'].includes(group.groupType)) {
+      return <p className="paper-browse-lecture-empty" role="alert">{analysisFontError}</p>
+    }
+
     if (group.groupType === 'listening') {
       if (lectureEntry?.kind === 'listening') {
         return (
@@ -4096,6 +4123,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           : undefined}
       />}
       {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
+      {analysisFontError && !lectureOpen && <p className="paper-browse-export-error" role="alert">{analysisFontError}</p>}
       <div
         className={`paper-browse-shell${
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''

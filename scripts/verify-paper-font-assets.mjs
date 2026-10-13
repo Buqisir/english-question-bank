@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url'
 import { chromium } from '../app/node_modules/playwright/index.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { createServer as createViteServer } from '../app/node_modules/vite/dist/node/index.js'
 
 const root = new URL('../app/public/fonts/paper/', import.meta.url)
 const files = new Map()
@@ -104,4 +105,115 @@ try {
   await browser?.close()
   await closeChromiumPool()
   await new Promise(resolve => server.close(resolve))
+}
+
+const webFaces = JSON.parse(readFileSync(new URL('../app/src/shared-ui/papersurface/paperWebFonts.json', import.meta.url)))
+for (const face of webFaces) {
+  assert.equal(createHash('sha256').update(readFileSync(new URL(face.sourcePath, root))).digest('hex'), face.sourceSha256)
+  const seen = new Set()
+  for (const shard of face.shards) {
+    const bytes = readFileSync(new URL(shard.path, root))
+    assert.equal(bytes.length, shard.byteLength)
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), shard.sha256)
+    for (const [from, to] of shard.ranges) for (let code = from; code <= to; code++) {
+      assert(!seen.has(code), 'shards must not change ownership after late loading')
+      seen.add(code)
+    }
+  }
+  assert.equal(seen.size, 30930, 'complete original Chinese font character coverage')
+}
+
+const vite = await createViteServer({
+  root: fileURLToPath(new URL('../app', import.meta.url)),
+  appType: 'custom',
+  server: { host: '127.0.0.1', port: 0 },
+})
+vite.middlewares.use('/__font-gate', async (_request, response) => {
+  response.setHeader('Content-Type', 'text/html')
+  response.end(await vite.transformIndexHtml('/__font-gate', `<!doctype html><meta charset="utf-8"><style>
+    body{margin:24px;background:white;color:black}
+    #sample{font-family:'EQB Termes','EQB Source Han Serif';font-size:24px;line-height:1.6;
+      font-synthesis:none;font-kerning:none;font-variant-ligatures:none;width:720px}
+    p{margin:0}
+  </style><div id="root"></div><script type="module">
+    import React from '/node_modules/.vite/deps/react.js';
+    import ReactDOM from '/node_modules/.vite/deps/react-dom_client.js';
+    import {PaperFontGate} from '/src/shared-ui/papersurface/PaperFontGate.tsx';
+    const root=ReactDOM.createRoot(document.querySelector('#root'));
+    window.mounts=[];
+    function Sample({text}) {
+      React.useLayoutEffect(()=>{window.mounts.push({text,width:document.querySelector('#sample').getBoundingClientRect().width})},[text]);
+      return React.createElement('div',{id:'sample'}, ...['normal','bold','italic'].map((style,index)=>
+        React.createElement('p',{key:style,style:{fontWeight:index===1?700:400,fontStyle:index===2?'italic':'normal'}},text)));
+    }
+    window.renderText=text=>root.render(React.createElement(PaperFontGate,null,React.createElement(Sample,{text})));
+    window.renderText('阅读下列短文，选出最佳选项。 English Il1 O0 0123456789.');
+  </script>`))
+})
+await vite.listen()
+const gateOrigin = `http://127.0.0.1:${vite.httpServer.address().port}`
+let webBrowser
+try {
+  webBrowser = await chromium.launch({ headless: true, channel: 'chromium' })
+  const page = await webBrowser.newPage({ viewport: { width: 850, height: 400 } })
+  let delay = true
+  let corrupt = false
+  let downloaded = 0
+  await page.route('**/fonts/paper/**', async route => {
+    const url = new URL(route.request().url())
+    const relative = url.pathname.replace('/fonts/paper/', '')
+    const bytes = readFileSync(new URL(relative, root))
+    downloaded += bytes.length
+    if (delay) await new Promise(resolve => setTimeout(resolve, 300))
+    await route.fulfill({ contentType: relative.endsWith('.woff2') ? 'font/woff2' : 'font/otf',
+      body: corrupt && relative.endsWith('.woff2') ? Buffer.from('corrupt') : bytes })
+  })
+  await page.goto(`${gateOrigin}/__font-gate`)
+  await page.getByRole('status').waitFor()
+  assert.equal(await page.locator('#sample').count(), 0, 'no measured content before fonts are verified')
+  await page.locator('#sample').waitFor()
+  assert(downloaded < 2_000_000, `ordinary cold paper must not download full CJK fonts: ${downloaded}`)
+  console.log(`PASS: cold browser mounts after verified shards; ${downloaded} font bytes instead of 24 MB`)
+
+  // A newly introduced supplementary character must not get one fallback-font
+  // render using the previous content's ready state. Supersede it while loading.
+  const rare = String.fromCodePoint(webFaces[0].shards.at(-1).ranges.at(-1)[1])
+  await page.evaluate(text => window.renderText(text), `罕见字 ${rare}`)
+  await page.getByRole('status').waitFor()
+  assert.equal(await page.locator('#sample').count(), 0)
+  await page.evaluate(() => window.renderText('阅读新内容'))
+  await page.locator('#sample').waitFor()
+  await page.waitForTimeout(400)
+  assert.equal(await page.locator('#sample p').first().textContent(), '阅读新内容')
+  assert(!(await page.evaluate(() => window.mounts)).some(mount => mount.text.includes('罕见字')),
+    'cancelled content must never mount after its delayed font request')
+  delay = false
+  const specimen = `阅读下列短文。龘 ${rare} English Il1 O0 0123456789.`
+  await page.evaluate(text => window.renderText(text), specimen)
+  await page.waitForFunction(text => document.querySelector('#sample p')?.textContent === text, specimen)
+  const subsetImage = await page.locator('#sample').screenshot()
+  const subsetRects = await page.locator('#sample p').evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().height))
+  await page.evaluate(async faces => {
+    for (const face of faces) {
+      const response = await fetch(`/fonts/paper/${face.path}`)
+      const family = face.family === 'EQB Termes' ? 'Original Termes' : 'Original Han'
+      document.fonts.add(await new FontFace(family, await response.arrayBuffer(), {style:face.style,weight:face.weight}).load())
+    }
+    document.querySelector('#sample').style.fontFamily = '"Original Termes", "Original Han"'
+  }, (await import('../shared/papersurface/paperFonts.mjs')).paperFontFaces)
+  assert.deepEqual(await page.locator('#sample p').evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().height)), subsetRects)
+  assert.deepEqual(await page.locator('#sample').screenshot(), subsetImage, 'original OTF and sharded WOFF2 must produce identical pixels')
+  if (process.argv.includes('--actual-artifacts')) {
+    writeFileSync(new URL('../.amp/in/artifacts/paper-web-fonts.png', import.meta.url), subsetImage)
+  }
+  console.log('PASS: regular/bold/italic mixed text, rare and supplementary glyph pixels match original OTF')
+
+  corrupt = true
+  await page.reload()
+  await page.getByRole('alert').waitFor()
+  assert.equal(await page.locator('#sample').count(), 0)
+  console.log('PASS: corrupt web shard fails closed without a fallback-font content mount')
+} finally {
+  await webBrowser?.close()
+  await vite.close()
 }

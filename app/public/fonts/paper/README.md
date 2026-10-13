@@ -2,8 +2,9 @@
 
 Owner decision: 2026-09-08. English uses **TeX Gyre Termes**; Chinese uses
 **Source Han Serif CN / 思源宋体（大陆地区子集）**. Screen, Print HTML and
-server PDF must use the same pinned bytes, not locally installed Times New
-Roman, SimSun or Songti. This decision supersedes the earlier font candidates.
+server PDF use these pinned fonts, not locally installed Times New Roman,
+SimSun or Songti. Browser-only derivatives below preserve their glyphs and
+metrics; Print HTML/PDF retain the original OTF bytes.
 
 These are unmodified upstream fonts. The adjacent upstream licenses and
 copyright notices are the redistribution evidence, not a purchased commercial
@@ -58,6 +59,31 @@ before pagination. Tests inspect actual glyph providers, not only CSS names.
 The font-only style block bypasses Paged.js CSS transformation, not browser
 font loading (the full bundle exceeds CSS-tree's 24-bit source-offset limit).
 
-Full original OTFs are retained for this first pinned bundle. Production
-subsetting/WOFF2 conversion, if adopted later, needs its own reproducible build,
-license compliance and glyph-coverage proof. Never hand-edit these binaries.
+## Browser-only WOFF2 shards
+
+`web/` contains EQB derivatives of the two original Chinese faces, under the
+same SIL OFL 1.1 in `source-han-serif/LICENSE.txt`. Their primary font names
+are **EQB Web Han Serif**, not the reserved upstream name. The existing CSS
+alias stays `EQB Source Han Serif`; original OTFs and PDF embedding do not change.
+
+Reproduce from the repository root with Python `fonttools[woff]==4.59.2`,
+`brotli==1.2.0`, installed app dependencies, and Node:
+
+```sh
+python3 scripts/generate-paper-web-fonts.py
+node scripts/verify-paper-font-assets.mjs --actual-artifacts
+```
+
+The generator retains every original Unicode/variation mapping, verifies
+every mapped glyph outline and horizontal metric after WOFF2 compression, and
+writes `app/src/shared-ui/papersurface/paperWebFonts.json` with original-source
+hashes, per-shard hashes, byte lengths and disjoint Unicode ranges. A common
+shard contains static UI literals; other characters are never discarded and
+are selected from source/model text before measured content mounts. Late
+analysis follows the same admission rule. Each download is SHA-256 checked
+before FontFace registration; a failed shard blocks affected content.
+
+The browser canary tests delayed/new characters, cancellation, corrupted bytes,
+cold transfer size, and pixel equality against original OTFs. Do not hand-edit
+the generated manifest or binaries, or replace their integrity checks with
+system-font fallback.

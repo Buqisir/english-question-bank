@@ -1082,13 +1082,20 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     sendBinary(response, pdf, 'application/pdf', `${projection.paperId}-${version}.pdf`)
   })))
 
-  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/files$/, route(({
+  routes.push(defineRoute('GET', /^\/api\/(?:import-agent-reviews|import-review-preview)\/revisions\/([^/]+)\/files$/, route(({
     request,
     response,
     url,
     context,
     match,
   }) => {
+    // The Agent namespace passes the session gate, so authenticate it here.
+    // Owner previews retain their existing cookie gate and reviewer policy.
+    if (url.pathname.startsWith('/api/import-agent-reviews/')
+      && !agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
     const reviewer = context.session?.role === 'owner'
       || context.session?.accountKind === 'import_agent'
       || agentIdentity(request, context, agentToken)

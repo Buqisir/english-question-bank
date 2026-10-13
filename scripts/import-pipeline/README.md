@@ -349,7 +349,9 @@ rendition，再按 `pdf_crop` 路径裁。当前工具只支持确定性媒体�
 低清图的AI辅助候选政策已登记在能力矩阵Ticket 04，但在原图永久保留、source/candidate
 digest绑定、禁止去水印及`/ops/`并排+overlay/闪烁人工确认gate实现前，不得用于导入。
 `verify` 只派生 Candidate，`build` 只生成
-Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。公共卷在 push 前由
+Candidate 摘要，并仅在确认文件不存在时生成 `confirmed: false` 的 Teacher Confirmation
+模板；重建摘要保留已有确认和审计证据，不把旧确认重绑定到新 Candidate。若摘要
+身份变化，旧确认保持 stale，由既有 admission 的精确 digest 比对拒绝。公共卷在 push 前由
 `review.mjs verify-summaries` 校验摘要覆盖与绑定；旧分析合同由 `verify-analyses`
 校验九份输入及其确定性五份 Screen sidecar projection。`push` 把不可变源、Candidate
 与当前 profile 的摘要或原始 analysis bytes 作为新 revision 上传到

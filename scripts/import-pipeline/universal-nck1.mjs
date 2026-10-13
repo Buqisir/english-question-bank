@@ -27,7 +27,6 @@ import {
   NCK1_OCR_CONFIRMATION_FILE_NAME,
   NCK1_OCR_EVIDENCE_FILE_NAME,
   NCK1_OCR_REVIEW_CODES,
-  loadNck1OcrSourceEmphasis,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
@@ -67,8 +66,8 @@ import {
   stageListeningAudio,
   stageSignalListeningAudio,
 } from './listening-audio.mjs'
-import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
-import { loadSpellingReview, TEXT_REVIEW_POLICY } from '../../server/paper-import/spellingReview.mjs'
+import { buildNck1ReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { TEXT_REVIEW_POLICY } from '../../server/paper-import/spellingReview.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -786,73 +785,14 @@ function confirmOcr(paperId) {
   }, null, 2))
 }
 
-function mediaFileName(media) {
-  const extension = ({
-    'image/png': 'png',
-    'image/jpeg': 'jpg',
-    'image/webp': 'webp',
-  })[media.mimeType]
-  if (!extension) fail(`Unsupported Canonical content media type: ${media.mimeType}`)
-  return `${media.mediaId.replaceAll(':', '__')}.${extension}`
-}
-
-function mediaCandidateFileName(media) {
-  const extension = ({
-    'image/png': 'png',
-    'image/jpeg': 'jpg',
-    'image/webp': 'webp',
-  })[media.publication?.candidate?.mimeType]
-  if (!extension) fail(`Unsupported Canonical media Candidate type: ${media.publication?.candidate?.mimeType}`)
-  return `${media.mediaId.replaceAll(':', '__')}--candidate.${extension}`
-}
-
 function loadInput(paperId) {
-  const { paperDir, manifest } = paperContext(paperId)
-  const materializationPath = path.join(paperDir, manifest.materializationPath)
-  if (!existsSync(materializationPath)) fail(`Source Materialization is missing: ${materializationPath}`)
-  const materializationBytes = new Uint8Array(readFileSync(materializationPath))
-  const materialization = JSON.parse(new TextDecoder().decode(materializationBytes))
-  const documentPathById = new Map(manifest.documents.map((document) => [
-    document.documentId,
-    path.join(paperDir, document.path),
-  ]))
-  const config = JSON.parse(readFileSync(path.join(paperDir, 'config.json'), 'utf8'))
-  const spellingReviewBytes = loadSpellingReview(paperDir, config)
-  return {
-    kind: 'nck1-source-materialization',
-    materializationBytes,
-    ...(spellingReviewBytes ? { spellingReviewBytes } : {}),
-    ...loadNck1OcrSourceEmphasis(paperDir),
-    documents: materialization.documents.map((document) => {
-      const sourcePath = documentPathById.get(document.documentId)
-      if (!sourcePath || !existsSync(sourcePath)) fail(`Materialized document is unavailable: ${document.documentId}`)
-      return { documentId: document.documentId, bytes: new Uint8Array(readFileSync(sourcePath)) }
-    }),
-    media: materialization.media.map((media) => {
-      const mediaPath = path.join(paperDir, manifest.mediaDirectory, mediaFileName(media))
-      if (!existsSync(mediaPath)) fail(`Materialized media is unavailable: ${media.mediaId}`)
-      if (!media.publication?.candidate) {
-        return { mediaId: media.mediaId, bytes: new Uint8Array(readFileSync(mediaPath)) }
-      }
-      const renditionPath = path.join(
-        paperDir,
-        manifest.mediaDirectory,
-        mediaCandidateFileName(media),
-      )
-      if (!existsSync(renditionPath)) {
-        fail(`Materialized media Candidate is unavailable: ${media.mediaId}`)
-      }
-      return {
-        mediaId: media.mediaId,
-        bytes: new Uint8Array(readFileSync(mediaPath)),
-        renditionBytes: new Uint8Array(readFileSync(renditionPath)),
-      }
-    }),
-  }
+  const { paperDir } = paperContext(paperId)
+  return loadNck1ReviewSource(paperDir).sourceInput
 }
 
 function verify(paperId) {
-  const imported = importCanonicalCandidate(loadInput(paperId))
+  const input = loadInput(paperId)
+  const imported = importCanonicalCandidate(input)
   if (!imported.candidate || imported.issues.length > 0) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
@@ -872,9 +812,7 @@ function verify(paperId) {
     assertions: imported.candidate.interpretation.assertions.length,
     media: imported.candidate.interpretation.groups.reduce((count, group) =>
       count + group.media.length, 0),
-    listening: imported.candidate.interpretation.inactiveSourceClosures.length === 2
-      ? 'captured'
-      : 'not_supplied',
+    listening: JSON.parse(new TextDecoder().decode(input.materializationBytes)).listening?.state || 'not_supplied',
     ...(config.importProfile ? { importProfile: config.importProfile } : {}),
   }, null, 2))
 }
@@ -954,19 +892,23 @@ function build(paperId) {
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
   }
   const outputDir = path.join(paperDir, 'canonical-evidence')
-  rmSync(outputDir, { recursive: true, force: true })
+  // A summary rebuild is not authority to delete confirmation or audit evidence.
+  // Any retained receipt for an older Candidate remains stale at admission.
   mkdirSync(outputDir, { recursive: true })
   writeFileSync(path.join(outputDir, 'candidate-summary.json'), `${JSON.stringify({
     paperId,
     sourceDigest: imported.candidate.source.sha256,
     candidateDigest: imported.candidate.candidateDigest,
   }, null, 2)}\n`)
-  writeFileSync(path.join(outputDir, 'teacher-confirmation-v1.json'), `${JSON.stringify({
-    schemaVersion: 'teacher-confirmation-v1',
-    candidateDigest: imported.candidate.candidateDigest,
-    sourceDigest: imported.candidate.source.sha256,
-    confirmed: false,
-  }, null, 2)}\n`)
+  const confirmationPath = path.join(outputDir, 'teacher-confirmation-v1.json')
+  if (!existsSync(confirmationPath)) {
+    writeFileSync(confirmationPath, `${JSON.stringify({
+      schemaVersion: 'teacher-confirmation-v1',
+      candidateDigest: imported.candidate.candidateDigest,
+      sourceDigest: imported.candidate.source.sha256,
+      confirmed: false,
+    }, null, 2)}\n`, { flag: 'wx' })
+  }
   console.log(`BUILT CANDIDATE ${paperId}: awaiting external Teacher Confirmation in ${path.relative(root, outputDir)}`)
 }
 
