@@ -34,7 +34,7 @@ export function productInputDigest(rootDir, files) {
 // The manifest is itself an uploaded, approval-bound Review file. The input
 // digest excludes products, avoiding a circular digest and binding config,
 // source documents, answer references, pagination and all other Review inputs.
-export function readFrozenProducts(rootDir, { inputDigest, required = false, readArtifact = null } = {}) {
+export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, required = false, readArtifact = null } = {}) {
   const read = readArtifact || (relative => {
     const file = path.join(rootDir, relative)
     return existsSync(file) ? readFileSync(file) : null
@@ -45,7 +45,10 @@ export function readFrozenProducts(rootDir, { inputDigest, required = false, rea
     return null
   }
   const manifest = JSON.parse(manifestBytes.toString('utf8'))
-  if (manifest.schemaVersion !== 'paper-pdf-products-v1'
+  const manifestPageLimit = manifest.schemaVersion === 'paper-pdf-products-v2' ? manifest.economyPageLimit : 8
+  if (!['paper-pdf-products-v1', 'paper-pdf-products-v2'].includes(manifest.schemaVersion)
+    || (manifest.schemaVersion === 'paper-pdf-products-v2' && manifestPageLimit !== 9)
+    || (economyPageLimit !== undefined && manifestPageLimit !== economyPageLimit)
     || !/^sha256:[a-f0-9]{64}$/.test(manifest.inputDigest || '')
     || (inputDigest && manifest.inputDigest !== inputDigest)
     || typeof manifest.paperName !== 'string' || !manifest.paperName.trim()
@@ -69,7 +72,7 @@ export function readFrozenProducts(rootDir, { inputDigest, required = false, rea
     if (actualPages !== file.pageCount) reject(`PDF 实际页数与清单不同：${expected.path}`)
     const edition = path.basename(expected.path, '.pdf')
     if (edition !== 'answerOnly') {
-      const policy = studentProductPolicy(edition, 2)
+      const policy = studentProductPolicy(edition, 2, { economyPageLimit: manifestPageLimit })
       if (policy.atMost ? actualPages > policy.targetPages : actualPages !== policy.targetPages) {
         reject(`PDF 页数不符合产品规格：${expected.path}`)
       }

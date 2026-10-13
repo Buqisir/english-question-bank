@@ -4,6 +4,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY_V4 } from './spellingReview.mjs'
+import { economyPageLimitForPlan } from './paginationPlan.mjs'
 
 const editions = [
   ['cover8', '保留“英语”及考试说明 · 8 页（不含听力）', 8],
@@ -46,7 +47,9 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
   }
   const longPaper = evidence.schemaVersion === 'preprocessing-handoff-evidence-v2'
   const products = evidence.schemaVersion === 'preprocessing-handoff-evidence-v3'
-  const expectedEditions = products ? productEditions : longPaper ? longEditions : editions
+  const economyPageLimit = economyPageLimitForPlan(projection.paginationPlan)
+  const expectedEditions = products ? productEditions.map(entry => entry[0] === 'economy8' && economyPageLimit === 9
+    ? ['economy8', '省纸版（不含听力，最多9页）', 9] : entry) : longPaper ? longEditions : editions
   const editionLabel = products ? '三版' : '四版'
   const checked = (key) => {
     const check = evidence.checks?.[key]
@@ -81,7 +84,7 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
     const file = verifiedFile(pdf, baseDirectory)
     const info = execFileSync('pdfinfo', [file], { encoding: 'utf8' })
     const actualPages = Number(info.match(/^Pages:\s+(\d+)/m)?.[1])
-    const atMost = longPaper || (products && id !== 'economy8')
+    const atMost = longPaper || (products && (id !== 'economy8' || economyPageLimit === 9))
     if (!Number.isInteger(actualPages) || actualPages < 1 || (atMost ? actualPages > pages : actualPages !== pages)) {
       fail(`${id} page count differs from edition`)
     }

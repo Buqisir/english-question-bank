@@ -26,6 +26,38 @@ Owner 2026-10-06 对 reference-v2 县域样稿回复“OK”，确认本文件�
 不作为当前产品选择，也不把旧 teacher 自动映射成 answerOnly。Teacher Confirmation、
 教师用户及权限角色不改名。个人解析、精选平台参考不混入公共答案版。
 
+## 单卷九页省纸上限（2026-10-13 Owner授权）
+
+M174在默认八页有界搜索失败后，Owner允许本卷超过八页，并授权共享合同支持、
+PR合并、网站代码部署及完成待审版本。默认和历史省纸版仍严格八页；不按paperId
+或题文打补丁，不改Source、Canonical语义、答案或听力，不授权试卷批准、发布或清理。
+本节是新增合同的实施要求，实际Ship／部署／Review状态以相应证据为准。
+
+新`paper-pagination-plan-v5`显式保存`economy8.targetPages:9`，含义是最多九页，
+不是补足九页。此版必须有省纸entry，沿用`student-friendly-economy-v2`及
+10.5pt／18pt正文；其他三产品及Screen不跟随改变。计划仍绑定paperId、Source、
+Candidate和有序slot断点，七选五库不拆、完整应用文题面／框同页等硬约束不放宽。
+v1／v2／v4计划保留原含义与字节，不自动迁移。
+
+正式入口可在新的本地工作副本中初始化已验证几何，无需重新搜索八页候选：
+
+```bash
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition economy8 \
+  --economy-page-limit 9 --product-layout <layout.json> \
+  --break-slots writing.continuation --save-plan --output <new-qa-directory>
+```
+
+`layout.json`只含现有profile、fontSizePt、figureLayout、answerBoxHeightsMm四项，
+先经正式plan validator校验，再实测指定断点。初始24mm框不是最终默认：同一断点／
+字号下先恢复续写、再恢复应用文空间，总计最多16次测量，将实际选中高度保存。
+失败不保存计划；冻结与后续重放仅使用保存的精确布局，不重新猜尺寸。
+
+正式freeze生成`paper-pdf-products-v2`清单，新增`economyPageLimit:9`；稳定路径仍为
+`products/manifest-v1.json`，避免破坏四产品文件访问。清单inputDigest包含完整plan
+及其他非产品输入，Review验证清单页数政策与绑定plan一致，仍核实际PDF页数／SHA。
+已批准版本只读其已承诺的清单与PDF，不能借新合同覆盖旧版本。renderer指纹变化时，
+已有待审卷须同内容提交新revision；产品与输入门禁仍通过才复用字节，不冒称旧审核有效。
+
 ## 所有卷统一取源卷名，Owner只给源材料与考试年月（2026-10-07确认）
 
 Owner提供完整源材料（题卷、权威答案、源有的音频）及考试年份、月份；不再逐项提供
