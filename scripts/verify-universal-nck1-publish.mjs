@@ -3131,9 +3131,16 @@ try {
   )
   const copyCommand = promotionRail.getByRole('button', { name: '复制口令' })
   assert.equal(await copyCommand.count(), 1)
+  await reviewPage.locator('summary').filter({ hasText: /^版本标识$/u }).click()
+  // The manual refresh uses the same reload/render path as the 30-second poll.
+  // It must not fold the audit controls while the Owner is using them.
+  await Promise.all([
+    reviewPage.waitForResponse(response => response.url().endsWith('/pagination') && response.ok()),
+    reviewPage.getByRole('button', { name: '刷新', exact: true }).click(),
+  ])
+  await reviewPage.waitForLoadState('networkidle')
   await copyCommand.click()
   assert.equal(await reviewPage.evaluate(() => window.__copiedReviewText), `上线 ${paperId}`)
-  await reviewPage.locator('summary').filter({ hasText: /^版本标识$/u }).click()
   const copyPaperId = reviewPage.getByRole('button', { name: '复制Paper ID' })
   assert.equal(await copyPaperId.count(), 1)
   await copyPaperId.click()
