@@ -1569,6 +1569,48 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.equal(await audio.evaluate((element) => Math.round(element.currentTime)), 5)
     await fullPlayer.getByRole('button', { name: '播放速度 1 倍，点击切换', exact: true }).click()
     assert.equal(await audio.evaluate((element) => element.playbackRate), 1.25)
+    // Cold-start a nonzero segment, then switch players before its end. A full
+    // recording that merely plays successfully cannot prove these boundaries.
+    const questionPlayers = screenPage.locator('.ps-question > .ps-text-trail .listening-player')
+    const secondPlayer = questionPlayers.nth(1)
+    const thirdPlayer = questionPlayers.nth(2)
+    await questionPlayers.locator('audio').evaluateAll(elements => elements.forEach(element => {
+      element.dataset.playStarts = '[]'
+      element.addEventListener('playing', () => {
+        const starts = JSON.parse(element.dataset.playStarts)
+        element.dataset.playStarts = JSON.stringify([...starts, element.currentTime])
+      })
+    }))
+    await secondPlayer.locator('.listening-player-trigger').click()
+    await screenPage.waitForFunction(() => {
+      const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[1]
+      return audio && !audio.paused && audio.currentTime >= 1.2 && audio.currentTime < 2
+    })
+    assert.equal(await audio.evaluate(element => element.paused), true)
+    await thirdPlayer.locator('.listening-player-trigger').click()
+    await screenPage.waitForFunction(() => {
+      const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[2]
+      return audio && !audio.paused && audio.currentTime >= 2.3 && audio.currentTime < 3.3
+    })
+    assert.equal(await secondPlayer.locator('audio').evaluate(element => element.paused), true,
+      'Switching question segments stops the previous recording')
+    await screenPage.waitForFunction(() => {
+      const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[2]
+      return audio?.paused && Math.abs(audio.currentTime - 3.3) < .01
+    })
+    await thirdPlayer.getByRole('button', { name: '播放', exact: true }).click()
+    await screenPage.waitForFunction(() => {
+      const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[2]
+      return audio && !audio.paused && audio.currentTime >= 2.3 && audio.currentTime < 3.3
+    })
+    await thirdPlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    for (const [player, start, plays] of [[secondPlayer, 1.2, 1], [thirdPlayer, 2.3, 2]]) {
+      const starts = await player.locator('audio').evaluate(element => JSON.parse(element.dataset.playStarts))
+      assert.equal(starts.length, plays)
+      assert(starts.every(value => Math.abs(value - start) < .1),
+        `Cold play and replay start at the selected segment, not earlier audio: ${starts}`)
+    }
+    await trigger.click()
     await screenPage.emulateMedia({ media: 'print' })
     assert.equal(await trigger.isVisible(), false, 'Screen-only listening control is hidden in print')
     await screenPage.emulateMedia({ media: 'screen' })

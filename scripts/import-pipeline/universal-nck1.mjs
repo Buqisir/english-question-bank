@@ -103,14 +103,19 @@ function writeBlockedSignal(paperId, error) {
   }, null, 2)}\n`)
 }
 
-function retireRecoveredSpellingBlock(paperDir) {
+function retireRecoveredSourceBlock(paperDir) {
   const blockedPath = path.join(paperDir, 'signals', 'blocked.json')
   if (!existsSync(blockedPath)) return
   const bytes = readFileSync(blockedPath)
   let blocked
   try { blocked = JSON.parse(bytes.toString('utf8')) } catch { return }
-  if (blocked.code !== 'source_incomplete'
-    || !blocked.note?.startsWith('Spelling review:')) return
+  if (blocked.code !== 'source_incomplete') return
+  // Called only after full source verification, including audio bytes and binding.
+  // A refused restage is recovered by valid signal evidence, not by deleting it.
+  const recoveredSignal = blocked.note === 'Signal audio requires a fresh attachment-free source manifest'
+    && JSON.parse(readFileSync(path.join(paperDir, 'universal-source-manifest.json'), 'utf8'))
+      .schemaVersion === 'universal-nck1-source-manifest-v3'
+  if (!blocked.note?.startsWith('Spelling review:') && !recoveredSignal) return
   const historyDir = path.join(paperDir, 'signals', 'history')
   const historyPath = path.join(historyDir, `blocked-${sha256(bytes)}.json`)
   mkdirSync(historyDir, { recursive: true })
@@ -128,7 +133,7 @@ function runPaperCommand(paperId, operation, { blockOnFailure = false } = {}) {
       if (blockOnFailure) writeBlockedSignal(paperId, error)
       throw error
     }
-    if (process.argv[2] === 'verify') retireRecoveredSpellingBlock(paperDir)
+    if (process.argv[2] === 'verify') retireRecoveredSourceBlock(paperDir)
     return result
   })
 }

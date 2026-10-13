@@ -26,8 +26,9 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 31, 'import pack includes Review target, summary, search metadata and public consumer failure layers')
+assert(materialization.scripts.length <= 32, 'import pack includes signal audio, Review target, summary, search metadata and public consumer failure layers')
 for (const required of [
+  'scripts/verify-listening-signal.mjs',
   'scripts/verify-paragraph-summaries-v1.mjs',
   'scripts/verify-public-search-metadata-v1.mjs',
   'scripts/verify-public-paper-review-consumer.mjs',
@@ -60,6 +61,14 @@ const raster = plan('server/paper-canonical/pdfRegionRaster.mjs')
 assert.equal(raster.pack, 'paper')
 assert(raster.scripts.includes('scripts/verify-nck1-pdf-crop-recipe-replay.mjs'),
   'shared raster changes execute the crop replay regression in the Paper pack')
+
+for (const signalFile of [
+  'scripts/import-pipeline/segment-listening.py',
+  'scripts/import-pipeline/listening-audio.mjs',
+]) {
+  assert(plan(signalFile).scripts.includes('scripts/verify-listening-signal.mjs'),
+    `${signalFile} must exercise real signal staging even when changed alone`)
+}
 
 for (const sharedFile of [
   'scripts/import-pipeline/universal-nck1.mjs',
