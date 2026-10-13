@@ -253,6 +253,13 @@ Source Han Serif CN 2.003；不优先使用用户本机 Times / 宋体 / 黑体 
 运行时字体入口为 `shared/papersurface/paperFonts.mjs`（font policy v1），
 文件 SHA-256、许可证和来源见 `app/public/fonts/paper/`。
 
+浏览器冷启动使用上述两份中文 OTF 的 WOFF2 分片派生物，内部名称依 OFL
+改为 `EQB Web Han Serif`；CSS 字族别名不变。分片保留原字形、水平度量和完整
+Unicode/variation 映射，逐文件校验 SHA-256，正文及后到的解析须在所需字形就绪后
+才进入测量和显示。派生清单为 `app/src/shared-ui/papersurface/paperWebFonts.json`，
+生成及逐字验证入口为 `scripts/generate-paper-web-fonts.py`。Print HTML/PDF 仍使用
+原始 OTF，不重生成或改写历史产品；浏览器与原字体的像素、几何等价必须实测。
+
 这是下文历史字体栈的**显式后继规则**，不是修改既有 Publication：字体选择和
 派生选项宽度属于 renderer，不改变 Source、Teacher Confirmation、Canonical
 语义或已保存 PDF。历史 manifest/typography 文件及其 digest 保持原样；字号、

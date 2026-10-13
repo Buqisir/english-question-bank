@@ -45,6 +45,7 @@ export function statusOf(probes) {
   if (probes.rendererStale) return 'changes_requested'
   if (probes.reviewState === 'changes_requested') return 'changes_requested'
   if (probes.reviewState === 'awaiting_review') return 'awaiting_review'
+  if (probes.reviewKind === 'ocr') return 'materializing'
   if (probes.universal) {
     if (
       probes.locallyPublished
@@ -269,6 +270,7 @@ export function probePaper({
     blocked: blocked && !blocked._invalid ? blocked : null,
     helpNeeded: helpNeeded && !helpNeeded._invalid ? helpNeeded : null,
     reviewState: reviewStatus?.latest?.state || null,
+    reviewKind: reviewStatus?.latest?.reviewKind || null,
     rendererStale: reviewStatus?.rendererStale === true,
     mtimeMs: Math.max(
       mtimeMs(path.join(paperDir, 'config.json')),
@@ -506,7 +508,7 @@ export function preflightPaper({
     'latest',
     'paper-asset.json',
   ))
-  const approval = reviewStatus?.approval || null
+  const approval = paper.reviewKind === 'ocr' ? null : reviewStatus?.approval || null
   const receiptState = {
     candidateCurrent: Boolean(
       candidateSummary
@@ -693,8 +695,8 @@ export function preflightPaper({
     'local_candidate_missing',
     'answer_check_missing',
   ].includes(blocker.code))
-  if (reviewStatus?.latest?.state === 'approved' && !receiptState.qaCurrent) state = 'approved'
-  if (reviewStatus?.latest?.state === 'approved' && receiptState.publicationCurrent) {
+  if (paper.reviewKind !== 'ocr' && reviewStatus?.latest?.state === 'approved' && !receiptState.qaCurrent) state = 'approved'
+  if (paper.reviewKind !== 'ocr' && reviewStatus?.latest?.state === 'approved' && receiptState.publicationCurrent) {
     state = receiptState.acceptanceCurrent
       && receiptState.latestCurrent
       && receiptState.publicationCommitted
@@ -730,6 +732,7 @@ export function preflightPaper({
       exists: Boolean(reviewStatus),
       latestRevisionId: reviewStatus?.latestRevisionId || null,
       latestState: reviewStatus?.latest?.state || null,
+      latestReviewKind: paper.reviewKind,
       rendererStale: reviewStatus?.rendererStale === true,
       unresolvedCount: Number(reviewStatus?.unresolvedCount || 0),
       approvalId: approval?.approvalId || null,

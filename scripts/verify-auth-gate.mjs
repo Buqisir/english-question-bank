@@ -24,7 +24,7 @@
 //   (e) --disable takes effect immediately (a still-valid cookie 401s right
 //       after disabling, without needing to log out first).
 import { spawn } from 'node:child_process'
-import { mkdtempSync, rmSync } from 'node:fs'
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:net'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -37,6 +37,8 @@ import {
   replaceVocabularyProgram,
 } from '../server/vocabulary/vocabularyStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
+import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
+import { sha256 } from '../shared/paper-canonical/stable.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -553,6 +555,48 @@ async function main() {
       bearerInbox.status === 200 && Array.isArray(bearerInbox.json?.papers),
       `got status=${bearerInbox.status} body=${JSON.stringify(bearerInbox.json)}`,
     )
+    const fileContent = { text: 'Exact retained Review file, not a public preview' }
+    const fileBytes = Buffer.from(JSON.stringify(fileContent))
+    const fileIdentity = {
+      paperId: 'paper-auth-readback', paperName: 'Auth readback fixture',
+      sourceDigest: `sha256:${'1'.repeat(64)}`,
+      candidateDigest: `sha256:${'2'.repeat(64)}`,
+      visibleStructureDigest: `sha256:${'3'.repeat(64)}`,
+      analysisDigest: `sha256:${'4'.repeat(64)}`,
+    }
+    const fileStore = createImportReviewStore({
+      dbPath: importOpsDbPath, filesRoot: importOpsFilesRoot,
+      rendererBuildId: 'auth-readback-fixture', projectRevision: () => fileIdentity,
+    })
+    const fileManifest = {
+      schemaVersion: 'web-import-review-bundle-v1', ...fileIdentity,
+      producerBuildId: 'auth-readback-fixture',
+      files: [{ path: 'projection.json', sha256: sha256(fileBytes),
+        byteLength: fileBytes.length, mediaType: 'application/json', role: 'materialization' }],
+    }
+    const fileRevision = fileStore.createRevision({ ...fileManifest, bundleDigest: reviewBundleDigest(fileManifest) }).revision
+    const upload = fileStore.fileForUpload(fileRevision.id, 'projection.json')
+    writeFileSync(upload.destination, fileBytes)
+    fileStore.completeFileUpload(fileRevision.id, 'projection.json', fileManifest.files[0])
+    fileStore.finalizeRevision(fileRevision.id)
+    const agentFilePath = `/api/import-agent-reviews/revisions/${fileRevision.id}/files?path=projection.json`
+    const ownerFilePath = `/api/import-review-preview/revisions/${fileRevision.id}/files?path=projection.json`
+    const readback = await req(agentFilePath, { authorization: `Bearer ${importAgentToken}` })
+    assert('(c) bearer-only file readback passes the enforced global gate with exact content',
+      readback.status === 200 && JSON.stringify(readback.json) === JSON.stringify(fileContent), JSON.stringify(readback))
+    for (const credentials of [{}, { authorization: 'Bearer wrong-token' }, { authorization: `Bearer ${importShipToken}` }, { cookie }]) {
+      const denied = await req(agentFilePath, credentials)
+      assert('(c) Agent file namespace rejects absent, wrong, shipping and Owner-only credentials', denied.status === 401)
+    }
+    const ownerFile = await req(ownerFilePath, { cookie })
+    const bearerPreview = await req(ownerFilePath, { authorization: `Bearer ${importAgentToken}` })
+    assert('(c) Owner preview remains cookie-gated while Agent uses its own file namespace',
+      ownerFile.status === 200 && ownerFile.json?.text === fileContent.text && bearerPreview.status === 401)
+    for (const filename of ['../private.json', 'unlisted.json']) {
+      const denied = await req(`/api/import-agent-reviews/revisions/${fileRevision.id}/files?path=${encodeURIComponent(filename)}`,
+        { authorization: `Bearer ${importAgentToken}` })
+      assert('(c) Agent readback cannot read outside the exact manifest', denied.status === 404)
+    }
     const ownerCannotReadSourceQueue = await req('/api/import-agent-source-intakes', { cookie })
     const bearerSourceQueue = await req('/api/import-agent-source-intakes', {
       authorization: `Bearer ${importAgentToken}`,

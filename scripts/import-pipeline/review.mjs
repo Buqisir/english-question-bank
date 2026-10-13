@@ -564,7 +564,7 @@ async function hydrate(paperId) {
   try {
     for (const file of revision.manifest.files) {
       const downloaded = await api(
-        `/api/import-review-preview/revisions/${encodeURIComponent(revision.id)}`
+        `/api/import-agent-reviews/revisions/${encodeURIComponent(revision.id)}`
           + `/files?path=${encodeURIComponent(file.path)}`,
         {},
         { binary: true },
