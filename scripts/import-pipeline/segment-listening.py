@@ -14,7 +14,56 @@ from pathlib import Path
 import numpy as np
 from scipy.io import wavfile
 from scipy.ndimage import uniform_filter1d
-from scipy.signal import stft
+from scipy.signal import correlate, stft
+
+
+def repeated_waveform_lag(audio, sr, unit, pause, seed_lag):
+    """Corroborate a short spectral match; never certify words or question IDs."""
+    begin, end = round(pause[1]*sr), round(unit[1]*sr)
+    first_begin, first_end = round(unit[0]*sr), round((pause[0]+.02)*sr)
+    lags = []
+    for at in range(begin, end, sr):
+        n = min(sr, end-at)  # Include the fractional tail, not just whole seconds.
+        y = audio[at:at+n]
+        left = max(first_begin, round(at-seed_lag*sr-.2*sr))
+        right = min(first_end, round(at-seed_lag*sr+n+.2*sr))
+        x = audio[left:right]
+        if len(x) < n:
+            return None
+        centered = y-y.mean()
+        sums = np.r_[0., np.cumsum(x)]
+        squares = np.r_[0., np.cumsum(x*x)]
+        variance = squares[n:]-squares[:-n]-(sums[n:]-sums[:-n])**2/n
+        scores = np.abs(correlate(x, centered, mode='valid', method='fft')) / np.sqrt(
+            np.maximum(variance*np.dot(centered, centered), 1e-20))
+        best = int(np.argmax(scores))
+        # Correlation removes DC, so activity must use the same AC signal.
+        # Both sides below one signed-16-bit PCM step are noise, not evidence.
+        if max(np.std(y), np.std(x[best:best+n])) <= 1/32768:
+            continue
+        rivals = scores[np.abs(np.arange(len(scores))-best) >= round(.05*sr)]
+        if scores[best] < .85 or scores[best]-max(rivals, default=0.) < .03:
+            return None
+        lags.append((at-left-best)/sr)
+    if len(lags) < 3:
+        return None
+    lag = float(np.median(lags))
+    if any(abs(value-lag) > .02 for value in lags):
+        return None
+    # A mostly matching second must not hide a short substituted or quiet phrase.
+    delta = round(lag*sr)
+    for at in range(begin, end, round(.2*sr)):
+        n = min(round(.2*sr), end-at)
+        if at-delta < first_begin or at-delta+n > first_end:
+            return None
+        x, y = audio[at-delta:at-delta+n], audio[at:at+n]
+        x, y = x-x.mean(), y-y.mean()
+        if max(np.std(x), np.std(y)) <= 1/32768:
+            continue
+        denominator = float(np.linalg.norm(x)*np.linalg.norm(y))
+        if denominator <= 1e-20 or abs(float(np.dot(x, y)/denominator)) < .85:
+            return None
+    return lag
 
 
 def candidates(audio, sr, gaps):
@@ -31,6 +80,8 @@ def candidates(audio, sr, gaps):
     f = np.log(np.maximum(uniform_filter1d(bands, 3, axis=1), 1e-10)).T
     f -= f.mean(axis=1, keepdims=True)
     f /= np.maximum(np.linalg.norm(f, axis=1, keepdims=True), 1e-8)
+    long = [p for p in gaps if p[1]-p[0] >= 4]
+    short_seeds = {(p[1], q[0]): [] for p, q in zip(long, long[1:])}
     matches = []
     for lag in range(60, min(1501, len(f)-80)):
         both = active[:-lag] & active[lag:]
@@ -38,16 +89,22 @@ def candidates(audio, sr, gaps):
         counts = np.r_[0, np.cumsum(both)]
         count = counts[80:] - counts[:-80]
         score = (sums[80:] - sums[:-80]) / np.maximum(count, 1)
-        changes = np.diff(np.r_[False, (score > .95) & (count >= 48), False].astype(int))
+        supported = (score > .95) & (count >= 48)
+        changes = np.diff(np.r_[False, supported, False].astype(int))
         for x, y in zip(np.where(changes == 1)[0], np.where(changes == -1)[0]):
             if y-x >= 20:
                 matches.append(dict(start=float(times[x]), end=float(times[y+79]), lag=lag*.1))
+        if lag >= 80:  # Two non-overlapping eight-second seed windows.
+            for unit, seeds in short_seeds.items():
+                lo = np.searchsorted(times, unit[0])
+                hi = min(len(supported), np.searchsorted(times, unit[1]-7.9-lag*.1, side='right'))
+                if hi > lo and supported[lo:hi].any():
+                    seeds.append(lag*.1)
     selected = []
     for m in sorted(matches, key=lambda m: -(m['end']-m['start'])):
         if not any(abs(m['lag']-p['lag']) < 1 and m['start'] < p['end'] and m['end'] > p['start'] for p in selected):
             selected.append(m)
     selected.sort(key=lambda m: m['start'])
-    long = [p for p in gaps if p[1]-p[0] >= 4]
     units = []
     for m in selected:
         left = [p for p in long if p[1] <= m['start']+3]
@@ -67,6 +124,20 @@ def candidates(audio, sr, gaps):
     if singles:
         typical = np.median([u['end']-u['body'] for u in singles])
         units.extend(u for u in singles if .5*typical <= u['end']-u['body'] <= 1.8*typical)
+    # Preserve existing units. Only an unoccupied, unambiguous silence-bounded
+    # region can gain a candidate; never select additions to reach a target count.
+    pcm = audio.astype(np.float64)/32768
+    for unit, seeds in short_seeds.items():
+        if not seeds or any(unit[0]-.15 < u['end']+1 and unit[1]+1 > u['start']-.15 for u in units):
+            continue
+        pauses = [p for p in gaps if unit[0]+4.8 <= p[0] and p[1]+4.8 <= unit[1]
+                  and 1.2 <= p[1]-p[0] <= 3.5]
+        if len(pauses) != 1:
+            continue
+        lags = [value for seed in seeds
+                if (value := repeated_waveform_lag(pcm, sr, unit, pauses[0], seed)) is not None]
+        if lags and max(lags)-min(lags) <= .02:
+            units.append(dict(start=unit[0], end=unit[1], kind='repeated'))
     units.sort(key=lambda u: u['start'])
     result = []
     for index, u in enumerate(units):
@@ -109,6 +180,8 @@ def run(source, output):
     sr, audio = wavfile.read(output/'analysis.wav')
     result, repeats = candidates(audio, sr, gaps)
     warnings = (output/'decode.log').read_text().strip()
+    # Keep raw stderr in decode.log, but never bind process addresses into Review.
+    warnings = re.sub(r'(\[[^\]\r\n]+ @ )0x[0-9a-fA-F]+(\])', r'\1<address>\2', warnings)
     report = dict(sourceSha256=hashlib.sha256(source.read_bytes()).hexdigest(),
                   decodedDurationSeconds=len(audio)/sr, elapsedSeconds=round(time.perf_counter()-started, 3),
                   method='recovered spectral similarity plus silence; no ASR',

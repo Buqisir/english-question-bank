@@ -456,9 +456,9 @@ function leftRailHtml() {
           ${structureHtml()}
         </details>`}
         <details class="rail-section review-disclosure"><summary>源文件</summary>${filesHtml()}</details>
-        <details class="rail-section review-disclosure"><summary>版本记录</summary>
+        <details class="rail-section review-disclosure" data-disclosure="revision-history"><summary>版本记录</summary>
           ${revisionsHtml()}
-          <details class="technical-record"><summary>版本标识</summary>
+          <details class="technical-record" data-disclosure="revision-identity"><summary>版本标识</summary>
             <div class="copy-row"><code class="paper-meta">${escapeHtml(state.detail.paperId)}</code>${copyButton(state.detail.paperId, 'Paper ID')}</div>
             ${latest ? `<p class="digest">${escapeHtml(latest.bundleDigest)}</p>` : ''}
           </details>
@@ -1012,6 +1012,10 @@ function accessHtml(title, message, action = '') {
 
 function render() {
   if (!state.user) return
+  const openDisclosures = new Set(Array.from(
+    root.querySelectorAll('details[data-disclosure][open]'),
+    element => element.dataset.disclosure,
+  ))
   root.innerHTML = `<div class="app-shell">
     <div class="sr-only" role="status" aria-live="polite" data-copy-feedback></div>
     <header class="topbar">
@@ -1036,6 +1040,9 @@ function render() {
     </div>
     ${state.error ? `<div class="error-banner" role="alert">${escapeHtml(state.error)}。刷新后重试。</div>` : ''}
   </div>`
+  root.querySelectorAll('details[data-disclosure]').forEach(element => {
+    element.open = openDisclosures.has(element.dataset.disclosure)
+  })
   bind()
   syncImmersiveView()
 }

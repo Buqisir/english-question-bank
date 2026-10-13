@@ -49,6 +49,7 @@ const registry = {
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-scoped-publication.mjs',
   'scripts/verify-listening-audio-intake.mjs',
+  'scripts/verify-listening-signal.mjs',
   'scripts/verify-listening-audio-serving.mjs',
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
@@ -267,6 +268,7 @@ const paperScripts = uniqueRegistered(
     'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
     'scripts/verify-universal-nck1-publish.mjs',
     'scripts/verify-listening-audio-intake.mjs',
+    'scripts/verify-listening-signal.mjs',
     'scripts/verify-listening-audio-serving.mjs',
     'scripts/verify-universal-nck1-image-source-bundle.mjs',
     'scripts/verify-universal-nck1-source-only-intake.mjs',
@@ -279,12 +281,17 @@ const paperScripts = uniqueRegistered(
     'scripts/verify-public-paper-review-consumer.mjs',
   ],
 )
-const featureScripts = uniqueRegistered(registry.scripts.filter(
-  (script) => !paperScripts.includes(script) && !securityScripts.includes(script),
-))
+const featureScripts = uniqueRegistered([
+  ...registry.scripts.filter(
+    (script) => !paperScripts.includes(script) && !securityScripts.includes(script),
+  ),
+  // Signal staging is an import-pipeline feature as well as a Paper input.
+  'scripts/verify-listening-signal.mjs',
+])
 const importPaperScripts = uniqueRegistered([
   'scripts/verify-import-pagination-qa.mjs',
   'scripts/verify-import-pagination-ui.mjs',
+  'scripts/verify-listening-signal.mjs',
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
   'scripts/verify-nck1-answer-source-shapes.mjs',

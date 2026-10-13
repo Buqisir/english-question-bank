@@ -31,6 +31,8 @@ required_packages=(
   imagemagick
   libreoffice-writer
   poppler-utils
+  python3-numpy
+  python3-scipy
   python3-venv
   sqlite3
   tesseract-ocr
@@ -40,9 +42,6 @@ required_packages=(
   util-linux
   zip
 )
-if [[ "$analysis_only" == --import ]]; then
-  required_packages+=(python3-numpy python3-scipy)
-fi
 missing_packages=()
 for package in "${required_packages[@]}"; do
   if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -Fq 'install ok installed'; then
@@ -115,28 +114,29 @@ if [[ "$analysis_only" == --analysis-only ]]; then
   exit 0
 fi
 
-if [[ "$analysis_only" == --import ]]; then
-  import_python="$HOME/.local/share/eqbank-import-python"
-  if [[ ! -x "$import_python/bin/python3" ]]; then
-    step "preparing signal Python with system packages" /usr/bin/python3 -m venv --system-site-packages "$import_python"
-  fi
-  import_profile_marker="# english-question-bank import Python"
-  if ! grep -Fqx "$import_profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
-    cat >> "$HOME/.bash_profile" <<EOF
+import_python="$HOME/.local/share/eqbank-import-python"
+if [[ ! -x "$import_python/bin/python3" ]]; then
+  step "preparing signal Python with system packages" /usr/bin/python3 -m venv --system-site-packages "$import_python"
+fi
+import_profile_marker="# english-question-bank signal Python for import and verification"
+if ! grep -Fqx "$import_profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
+  cat >> "$HOME/.bash_profile" <<EOF
 
 $import_profile_marker
-if [[ -f "$repo_root/.amp/orb-profile" ]] && [[ "\$(cat "$repo_root/.amp/orb-profile")" == import ]]; then
+if [[ "\$PWD" == "$repo_root" || "\$PWD" == "$repo_root/"* ]]; then
   export PATH="\$HOME/.local/share/eqbank-import-python/bin:\$PATH"
 fi
 EOF
-  fi
-  export PATH="$import_python/bin:$PATH"
+fi
+export PATH="$import_python/bin:$PATH"
+step "checking signal audio dependencies" python3 -c 'import numpy, scipy; print("signal audio ready")'
+
+if [[ "$analysis_only" == --import ]]; then
   step "activating pnpm 10.28.1" corepack enable
   step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
   step "installing locked preview dependencies" env CI=true pnpm -C app install --frozen-lockfile
   step "installing locked import dependencies" npm ci --prefix server --no-audit --no-fund
   step "preparing preview Chromium" pnpm -C app exec playwright install --with-deps --no-shell chromium
-  step "checking signal audio dependencies" python3 -c 'import numpy, scipy; print("signal audio ready")'
   step "checking English and Simplified Chinese OCR data" bash -c \
     "tesseract --list-langs 2>/dev/null | grep -Fxq eng && tesseract --list-langs 2>/dev/null | grep -Fxq chi_sim"
   step "checking import environment" node --input-type=module -e \
