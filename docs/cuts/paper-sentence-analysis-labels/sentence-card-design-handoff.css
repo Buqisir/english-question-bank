@@ -1,0 +1,1360 @@
+/*
+ * 长难句「句子分析」卡片 · 设计交接样式表
+ * ------------------------------------------------------------
+ * 用途：交给外部设计系统重新设计。这份文件是只读快照，由下列源文件
+ * 原样拼合，网站不加载它：
+ *   - app/src/features/paper-browse/selection/sentence-analysis/sentenceAnalysis.css（卡片全部样式）
+ *   - app/src/features/paper-browse/selection/selectionOverlay.css（卡片外壳基础样式、入场动画、减少动态效果）
+ *   - 宿主页面的全局 token（App.css / index.css / shared-ui/tokens.css），在第 0 节写成字面值
+ * 设计稿确定后，改动需回写到上面的源文件。
+ *
+ * 一、结构（DOM 层级）
+ *   .paper-selection-card.paper-sentence-analysis   卡片外壳（浮层，宽 ≤760px）
+ *     .sa-head                                      标题行
+ *       .sa-kicker > .sa-heading                    图标 + 「句子分析」
+ *       .sa-reading-nav > .sa-reading-trail         面包屑（进入内部层级后出现）
+ *       .sa-head-actions                            右侧：难点切换 .sa-stepper / .sa-single-difficulty、
+ *                                                   「定位主句」.sa-main-btn、复制/关闭 .sa-icon-btn
+ *     .sa-analysis-scroll                           可滚动的分析区
+ *       .sa-sentence-wrap > .sa-sentence            标注后的英文句子
+ *         .sa-label / .sa-label-group               绿色胶囊（成分名，如「宾语」「非限制性定从」）
+ *         .sa-token                                 单词；.sa-gap 词间空白
+ *         .sa-under / .sa-underline(s)              成分线（主语双线、谓语单线、宾表波浪线、状语虚线、定语点线、补语括线）
+ *         .sa-ink-connector / .sa-ink-triangle-*    连接词下方的三角标记
+ *         .sa-relations / .sa-arrow / .sa-guide      定语箭头（SVG）
+ *         .sa-inserted                              「还原」时插入的省略词
+ *         .sa-local-restore / .sa-local-action      局部还原控件
+ *     .sa-detail-row                                说明行
+ *       .sa-detail-slot > .sa-detail-strip          常驻说明条
+ *         .sa-bubble.sa-bubble-docked               说明内容：.sa-bubble-title（标题）、.sa-bubble-form（形式，加粗）、
+ *                                                   .sa-bubble-body（正文）、.sa-bubble-unsure（不确定）
+ *         .sa-layer-nav > .sa-layer-btn             「看内部 →」/「← 返回」
+ *       .sa-legend > .sa-legend-item                成分线图例（可点击筛选）
+ *     .sa-translation                               参考译文：.sa-translation-label + .sa-translation-body，.sa-zh-hit 为对应高亮
+ *     .sa-status / .sa-skeleton / .sa-loading       状态、骨架屏、加载中
+ *   .paper-selection-analyze                        选词工具条上的「分析」入口（共用卡片的绿色 token）
+ *
+ * 二、状态（data 属性，由脚本切换）
+ *   data-sa-state="focused|related|subject|hover"   单词状态：选中 / 相关（黄色亮框）/ 逻辑主语 / 悬停预览
+ *   data-sa-focus、data-sa-focus-form               当前聚焦的成分及其形式
+ *   data-sa-line、data-sa-line-active、data-sa-line-unit   成分线种类与激活态
+ *   data-sa-label、data-sa-group                    胶囊与胶囊组
+ *   data-sa-connector                               连接词
+ *   data-sa-inserted、data-sa-leaving、data-sa-restored、data-sa-struck   还原插入 / 离场 / 已还原 / 删除线
+ *   data-sa-flag、data-sa-block、data-sa-deeper、data-sa-frame、data-sa-status、data-sa-decoration
+ *
+ * 三、配色原则（Owner 已确认）
+ *   只有两种色相：绿色表示「可以点开」（胶囊、按钮），黄色表示「正在读的答案」（选中与相关）。
+ *   其余全部用桌面中性墨色和线色。一次点击只回答一个问题，黄色只用来回答。
+ *
+ * 四、尺寸与动效
+ *   英文句子走卷面衬线字道（--sa-serif），中文与控件走 UI 无衬线字道（--sa-sans）。
+ *   动效时长走 80 / 120 / 160ms 三档，入场 260ms，定位主句 480ms；系统开启「减少动态效果」时全部关闭（第 3 节）。
+ *
+ * —— Droid 整理（2026-10-07）
+ */
+
+/* ============================================================
+ * 0. 宿主 token（来自页面全局，这里写成字面值，便于独立查看）
+ * ============================================================ */
+:root {
+  --desk-page: #F3F6F0;
+  --desk-surface: #FAFCF8;
+  --desk-raised: #FAFDF7;
+  --desk-hover: #E5EAE1;
+  --desk-border: #D5DACF;
+  --desk-line: #E3E8DF;
+  --desk-ink: #191D18;
+  --desk-muted: #60665C;
+  --eqb-color-paper: #ffffff;
+  --eqb-color-text-strong: #1f1f1d;
+  --eqb-shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --motion-micro: 80ms;
+  --motion-fast: 120ms;
+  --motion-base: 160ms;
+  --ease-hover: ease;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ============================================================
+ * 1. 卡片外壳基础样式（selectionOverlay.css，与词典卡共用）
+ *    第 2 节里 .paper-selection-card.paper-sentence-analysis 会覆盖其中的宽度、内边距、边框和阴影。
+ * ============================================================ */
+.paper-selection-card {
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: min(330px, calc(100vw - 24px));
+  max-height: min(380px, 55vh);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px 10px;
+  background: var(--desk-raised, #FAFDF7);
+  border: 1px solid var(--desk-line, #E3E8DF);
+  border-radius: 12px;
+  box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
+  animation: paper-selection-card-enter var(--motion-base) var(--ease-out);
+  transform-origin: var(--paper-selection-origin, top left);
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* 系统滚动条常驻时会压在圆角卡片右缘；平时隐形，指针进入卡片才浮出细条。 */
+.paper-selection-card:hover {
+  scrollbar-color: color-mix(in srgb, var(--eqb-color-text-strong, #1f1f1d) 18%, transparent) transparent;
+}
+
+.paper-selection-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.paper-selection-card::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+}
+
+.paper-selection-card:hover::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--eqb-color-text-strong, #1f1f1d) 18%, transparent);
+}
+
+@keyframes paper-selection-card-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ============================================================
+ * 2. 句子分析卡片全部样式（sentenceAnalysis.css，原样）
+ * ============================================================ */
+
+/* Tokens are shared with the toolbar entry so it wears the card's green. */
+.paper-selection-card.paper-sentence-analysis,
+.paper-selection-analyze {
+  /* Two hues only: green says "you can open this", yellow says "you are
+     reading this". Everything else uses the desk's neutral inks and lines. */
+  --sa-label-bg: #dcede3;
+  /* Resting capsules sit one step lighter so the selected fill reads clearly. */
+  --sa-label-rest: #e5f1e9;
+  --sa-label-edge: #bcd6c7;
+  --sa-action-hover: #cde5d7;
+  --sa-action-selected: #b4d8c4;
+  --sa-label-active: #5a8a72;
+  --sa-label-ink: #2f5a45;
+  --sa-ink: var(--desk-ink, #191D18);
+  --sa-ink-soft: #3a4037;
+  --sa-muted: var(--desk-muted, #60665C);
+  --sa-faint: #9a9d97;
+  --sa-trunk-line: var(--sa-muted);
+  --sa-chrome-muted: var(--desk-muted, #60665C);
+  --sa-chrome-hover: var(--desk-hover, #E5EAE1);
+  --sa-surface: var(--eqb-color-paper, #ffffff);
+  --sa-line: var(--desk-line, #E3E8DF);
+  --sa-detail-bg: var(--desk-surface, #FAFCF8);
+  --sa-detail-edge: var(--desk-line, #E3E8DF);
+  --sa-green: var(--sa-label-ink);
+  --sa-green-wash: #ffe8ad;
+  --sa-related-bg: #fff4d7;
+  --sa-text-edge: #b89c56;
+  --sa-related-edge: var(--sa-text-edge);
+  --sa-subject-bg: var(--sa-green-wash);
+  --sa-subject-edge: var(--sa-text-edge);
+  --sa-subject-text: var(--sa-label-ink);
+  /* Hover previews a click, so it stays out of the yellow answer family and
+     borrows the Daydream desk colour beside the paper. */
+  /* Same sage as a hovered legend item: one hover colour across the card. */
+  --sa-hover-bg: var(--sa-label-bg);
+  --sa-serif: 'EQB Termes', 'EQB Source Han Serif', serif;
+  --sa-sans: Inter, 'PingFang SC', 'Hiragino Sans GB', ui-sans-serif, system-ui, sans-serif;
+  --sa-stroke: 1.5px;
+  --sa-text-size: 14px;
+  --sa-legend-size: 14px;
+  --sa-ease: var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
+  --sa-ease-hover: var(--ease-hover, ease);
+  --sa-micro: var(--motion-micro, 80ms);
+  --sa-fast: var(--motion-fast, 120ms);
+  --sa-base: var(--motion-base, 160ms);
+  --sa-insert-duration: 260ms;
+  --sa-locate-duration: 480ms;
+}
+
+.paper-selection-card.paper-sentence-analysis {
+  container: sa-card / inline-size;
+  width: min(760px, calc(100vw - 24px));
+  max-width: 100%;
+  max-height: var(--sa-available-height, min(80vh, calc(100vh - 24px)));
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  padding: 12px 20px 14px;
+  border: 1px solid var(--desk-border, #d5dacf);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px #191d1808, 0 12px 28px -12px #191d1829;
+  background: var(--sa-surface);
+  color: var(--sa-ink);
+}
+
+.paper-sentence-analysis > * {
+  flex-shrink: 0;
+}
+
+/* Reserve translation space independently from transient grammar details. */
+.paper-selection-card.paper-sentence-analysis:has(.sa-analysis-scroll) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  scrollbar-gutter: auto;
+}
+
+.paper-sentence-analysis > .sa-analysis-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #b9bfb4 transparent;
+  overscroll-behavior: contain;
+  overflow-anchor: none;
+}
+
+.sa-analysis-scroll:focus-visible {
+  outline: 2px solid var(--sa-green);
+  outline-offset: -2px;
+}
+
+.paper-sentence-analysis:has(.sa-analysis-scroll) > .sa-translation {
+  flex: 0 0 auto;
+  max-height: 35%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--sa-surface);
+}
+
+/* Head */
+
+.sa-head {
+  position: sticky;
+  top: -12px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: -12px -20px 2px;
+  padding: 12px 20px 0;
+  min-height: 42px;
+  background: var(--sa-surface);
+}
+
+.sa-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  color: var(--sa-muted);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.sa-head-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: 0;
+}
+
+.sa-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 6px;
+  color: var(--sa-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sa-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--sa-chrome-muted);
+  cursor: pointer;
+  transition: background var(--sa-micro) var(--sa-ease-hover), color var(--sa-micro) var(--sa-ease-hover);
+}
+
+.sa-icon-btn:hover {
+  background: var(--sa-chrome-hover);
+  color: var(--sa-ink);
+}
+
+.sa-icon-btn:active,
+.sa-main-btn:active {
+  background: var(--sa-chrome-hover);
+}
+
+/* Sentence */
+
+.sa-sentence-wrap {
+  position: relative;
+  margin-top: 0;
+  padding: 8px 0 4px;
+}
+
+.sa-sentence-wrap[data-compact] { padding-top: 8px; }
+.sa-sentence-wrap[data-compact] .sa-sentence { line-height: 2.65; }
+
+.sa-sentence {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  color: var(--sa-ink);
+  font-family: var(--sa-serif);
+  font-size: var(--sa-text-size);
+  font-weight: 400;
+  font-variant-ligatures: common-ligatures;
+  line-height: 3.15;
+  hyphens: none;
+  overflow-wrap: normal;
+  outline: none;
+  cursor: default;
+}
+
+.sa-sentence:focus-visible {
+  outline: 2px solid var(--sa-ink);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.sa-token,
+.sa-gap {
+  --sa-state-bg: transparent;
+  line-height: 1.6;
+  background: var(--sa-state-bg);
+  box-shadow: 0 -3px 0 var(--sa-state-bg), 0 3px 0 var(--sa-state-bg);
+  transition: background var(--sa-micro) var(--sa-ease-hover), box-shadow var(--sa-micro) var(--sa-ease-hover);
+}
+
+.sa-token {
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sa-token[data-sa-connector] {
+  margin: 0;
+  transition: color var(--sa-micro) var(--sa-ease-hover);
+}
+
+.sa-sentence[data-sa-focus-form] .sa-token[data-sa-connector][data-sa-state="focused"] {
+  color: var(--sa-green);
+}
+
+.sa-token[data-sa-state="hover"],
+.sa-gap[data-sa-state="hover"] {
+  --sa-state-bg: var(--sa-hover-bg);
+}
+
+.sa-token[data-edge="start"] {
+  border-radius: 4px 0 0 4px;
+}
+
+.sa-token[data-edge="end"] {
+  border-radius: 0 4px 4px 0;
+}
+
+.sa-token[data-edge="both"] {
+  border-radius: 4px;
+}
+
+.sa-token[data-keyboard="true"] {
+  outline: 1px dashed var(--sa-ink);
+  outline-offset: 2px;
+}
+
+/* The cleft frame (It was … that) can be taken away, so it reads fainter. */
+
+.sa-token[data-sa-frame] {
+  color: color-mix(in srgb, var(--sa-ink) 42%, transparent);
+}
+
+.sa-token[data-sa-struck] {
+  color: color-mix(in srgb, var(--sa-ink) 42%, transparent);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* The wash extends past the words without moving them. */
+
+.sa-inserted {
+  line-height: 1.6;
+  padding: 1px 2px;
+  margin: 0 -2px;
+  border-radius: 4px;
+  background: var(--sa-related-bg);
+  color: var(--sa-ink);
+  text-decoration: none;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  animation: sa-grow var(--sa-insert-duration) var(--sa-ease);
+  box-shadow: inset 0 -1px var(--sa-related-edge);
+}
+
+@keyframes sa-grow {
+from { opacity: 0; }
+}
+
+.sa-token[data-sa-leaving],
+.sa-inserted[data-sa-leaving] {
+  opacity: 0;
+  transition: opacity var(--sa-fast) var(--sa-ease);
+}
+
+.sa-token[data-sa-move] {
+  display: inline-block;
+}
+
+.sa-sentence[data-sa-moving] .sa-relations,
+.sa-sentence[data-sa-moving] .sa-underlay {
+  opacity: 0;
+}
+
+/* Outlined labels above the words say what a unit is. */
+
+.sa-label {
+  position: absolute;
+  z-index: 2;
+  bottom: calc(100% + 5px);
+  left: -1px;
+  margin: 0;
+  padding: 1px 7px;
+  /* Fill alone shapes a capsule; the transparent edge keeps its box size. */
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--sa-label-rest);
+  color: var(--sa-label-ink);
+  font-family: var(--sa-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--sa-micro) var(--sa-ease-hover), color var(--sa-micro) var(--sa-ease-hover), border-color var(--sa-micro) var(--sa-ease-hover), opacity var(--sa-fast) var(--sa-ease);
+  animation: sa-fade var(--sa-base) var(--sa-ease);
+}
+
+.sa-label::after {
+  content: '';
+  position: absolute;
+  inset: -4px -2px;
+}
+
+.sa-label:hover {
+  background: var(--sa-action-hover);
+  color: var(--sa-label-ink);
+}
+
+.sa-label[data-current="true"] {
+  background: var(--sa-action-selected);
+  color: var(--sa-label-ink);
+}
+
+/* Solid labels below the words say why a place is hard; they open the bubble. */
+
+.sa-under {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 6px);
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition: opacity var(--sa-fast) var(--sa-ease);
+}
+
+.sa-flag {
+  position: relative;
+  margin: 0;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--sa-label-bg);
+  color: var(--sa-label-ink);
+  font-family: var(--sa-sans);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  cursor: pointer;
+  /* Placement is measured synchronously. Animating its transform makes the
+     next packing pass read an intermediate position and undo the clearance. */
+  transition: background-color var(--sa-micro) var(--sa-ease-hover), box-shadow var(--sa-micro) var(--sa-ease-hover);
+}
+
+.sa-flag::after {
+  content: '';
+  position: absolute;
+  inset: -4px -2px;
+}
+
+.sa-flag:hover {
+  background: var(--sa-action-hover);
+}
+
+.sa-flag[data-current="true"] {
+  background: var(--sa-action-selected);
+  color: var(--sa-label-ink);
+}
+
+.sa-label:focus-visible,
+.sa-flag:focus-visible,
+.sa-bubble-action:focus-visible {
+  outline: 2px solid var(--sa-ink);
+  outline-offset: 2px;
+}
+
+.sa-quiet {
+  color: var(--sa-muted);
+  font-family: var(--sa-sans);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  user-select: none;
+  animation: sa-fade var(--sa-fast) var(--sa-ease);
+}
+
+/* One-line bubble under (or above) the line it explains. */
+
+.sa-bubble {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  height: auto;
+  width: max-content;
+  padding: 0 9px 0 11px;
+  border: 1px solid var(--sa-detail-edge);
+  border-radius: 8px;
+  background: var(--sa-detail-bg);
+  box-shadow: 0 3px 8px #191d1814;
+  color: var(--sa-ink);
+  font-family: var(--sa-sans);
+  font-size: 13px;
+  line-height: 22px;
+  white-space: normal;
+  opacity: 0;
+  transform: translateY(3px);
+  transform-origin: left center;
+  pointer-events: none;
+  transition: opacity var(--sa-fast) ease-out, transform var(--sa-base) cubic-bezier(.2,.8,.2,1);
+  max-width: 100%;
+  min-height: 32px;
+  flex-wrap: wrap;
+}
+
+.sa-bubble[data-placed] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.sa-bubble:not(:has(.sa-bubble-action)) {
+  padding-right: 8px;
+}
+
+.sa-detail-reserve {
+  display: grid;
+  margin-top: 8px;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sa-single-difficulty {
+  min-height: 30px;
+  border: 1px solid var(--sa-line);
+  border-radius: 8px;
+  padding: 0 8px;
+  background: var(--sa-detail-bg);
+  color: var(--sa-chrome-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.sa-single-difficulty:hover { background: var(--sa-chrome-hover); }
+.sa-single-difficulty[aria-pressed="true"] { background: var(--sa-label-bg); border-color: var(--sa-label-edge); color: var(--sa-label-ink); }
+
+.sa-bubble-title {
+  color: var(--sa-ink);
+  font-weight: 650;
+  font-size: 12px;
+}
+
+/* The form reads first, then the sentence about it: "不定式 · 逻辑主语是 we…". */
+.sa-bubble-form:has(+ .sa-bubble-body)::after {
+  content: '·';
+  margin-left: 8px;
+  font-weight: 400;
+  color: var(--sa-muted);
+}
+
+.sa-bubble-unsure {
+  color: var(--sa-muted);
+  font-size: 11px;
+}
+
+.sa-bubble-action {
+  margin: 0;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--sa-label-bg);
+  color: var(--sa-label-ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 22px;
+  cursor: pointer;
+  transition: background var(--sa-micro) var(--sa-ease-hover), color var(--sa-micro) var(--sa-ease-hover);
+  height: 22px;
+  padding-left: 10px;
+  border-left-color: var(--sa-label-edge);
+  flex-shrink: 0;
+}
+
+.sa-bubble-action[aria-pressed="true"] {
+  background: var(--sa-action-selected);
+  color: var(--sa-label-ink);
+}
+
+/* SVG layer */
+
+.sa-relations,
+.sa-underlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+  animation: sa-fade var(--sa-base) var(--sa-ease);
+}
+
+.sa-underlay {
+  z-index: -1;
+}
+
+.sa-relations path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sa-underline {
+  stroke: var(--sa-muted);
+  stroke-width: 1.5px;
+  opacity: .95;
+}
+
+.sa-underline[data-kind="predicate"] {
+  stroke: var(--sa-ink-soft);
+  stroke-width: 1.75px;
+  opacity: .95;
+}
+
+/* The trunk reads first; other roles stay legible but recede until the
+   reader selects them, picks their legend item, or hovers them. */
+.sa-underline:is([data-kind="object"], [data-kind="adverbial"], [data-kind="attributive"], [data-kind="complement"]):not([data-active]) {
+  opacity: .5;
+  transition: opacity var(--sa-micro) var(--sa-ease-hover);
+}
+
+/* Overrides the receding rule above: a hovered unit previews at full ink. */
+.sa-underline[data-hover]:not([data-active]) {
+  opacity: 1;
+}
+
+.sa-fill[data-state="focused"] {
+  fill: var(--sa-green-wash);
+}
+
+.sa-guides[data-locate] {
+  animation: none;
+}
+
+.sa-guides[data-locate] .sa-fill[data-state="focused"] {
+  animation: sa-locate var(--sa-locate-duration) ease-out;
+}
+
+@keyframes sa-locate {
+0%, 30% { fill: #ffda80; }
+  100% { fill: var(--sa-green-wash); }
+}
+
+/* The arrow's target must hold its own beside the yellow focus wash. */
+.sa-fill[data-state="related"] {
+  fill: var(--sa-related-bg);
+  stroke: var(--sa-related-edge);
+  stroke-width: 1px;
+}
+
+/* A dashed edge distinguishes the logical subject within the yellow text family. */
+.sa-fill[data-state="subject"] {
+  fill: var(--sa-subject-bg);
+  stroke: var(--sa-subject-edge);
+  stroke-width: 1px;
+  stroke-dasharray: 3 2;
+}
+
+.sa-guides {
+  animation: sa-fade var(--sa-fast) var(--sa-ease);
+}
+
+.sa-guide {
+  stroke: currentColor;
+  stroke-width: 1.55px;
+  opacity: 1;
+  color: var(--sa-label-ink);
+}
+
+@keyframes sa-fade {
+from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Head action */
+
+.sa-main-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  margin: 0 4px 0 0;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--sa-chrome-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--sa-micro) var(--sa-ease-hover), color var(--sa-micro) var(--sa-ease-hover);
+}
+
+.sa-main-btn:hover {
+  background: var(--desk-hover, #E5EAE1);
+  color: var(--sa-ink);
+}
+
+.sa-main-btn[aria-pressed="true"] {
+  background: var(--desk-hover, #E5EAE1);
+  color: var(--sa-ink);
+}
+
+/* Translation */
+
+.sa-translation {
+  margin: 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--sa-line);
+  background: transparent;
+}
+
+/* A run-in label, as in the companion analysis print, so the label never
+   costs a line of its own. */
+.sa-translation-label {
+  margin-right: 8px;
+  color: var(--sa-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sa-translation-body {
+  margin: 0;
+  color: var(--sa-ink-soft);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.sa-zh-hit {
+  border-radius: 4px;
+  background: var(--sa-green-wash);
+  color: var(--sa-ink);
+  box-shadow: 0 -2px 0 var(--sa-green-wash), 0 2px 0 var(--sa-green-wash);
+  transition: background var(--sa-micro) var(--sa-ease-hover);
+}
+
+/* Status lines and the difficulty stepper */
+
+.sa-status {
+  margin: 12px 0 0;
+  color: var(--sa-ink);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.sa-status > p {
+  margin: 0;
+}
+
+.sa-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin-right: 4px;
+  border: 1px solid var(--sa-line);
+  border-radius: 8px;
+  background: var(--sa-detail-bg);
+  padding-left: 9px;
+}
+
+.sa-stepper-label {
+  margin-right: 2px;
+  color: var(--sa-chrome-muted);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.sa-stepper-count {
+  min-width: 28px;
+  color: var(--sa-ink);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 650;
+}
+
+/* Loading */
+
+.sa-skeleton {
+  display: block;
+  height: 12px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--sa-ink) 10%, transparent);
+}
+
+.sa-translation:has(.sa-skeleton) {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.paper-dictionary-analyze {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  margin: 0;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--desk-muted, #60665C);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.paper-dictionary-analyze:hover {
+  background: var(--desk-hover, #E5EAE1);
+  color: var(--desk-ink, #191D18);
+}
+
+@media (max-width: 479px) {
+.paper-selection-card.paper-sentence-analysis {
+    width: calc(100vw - 24px);
+    padding: 12px;
+  }
+
+  .paper-sentence-analysis .sa-head {
+    margin: -12px -12px 0;
+    padding: 12px 12px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.paper-sentence-analysis,
+  .paper-sentence-analysis * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.sa-kicker > svg {
+  color: var(--sa-ink);
+}
+
+.sa-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sa-heading strong {
+  color: var(--sa-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.sa-main-btn[aria-pressed=true] {
+  color: var(--sa-label-ink);
+  background: var(--sa-label-bg);
+}
+
+.sa-bubble-action:hover {
+  color: var(--sa-label-ink);
+}
+
+.sa-label-role {
+  font-weight: 600;
+}
+
+.sa-label-form {
+  color: inherit;
+  font-weight: 500;
+}
+
+.sa-label:focus-visible {
+  outline: 2px solid var(--sa-label-active);
+  outline-offset: 3px;
+}
+
+.sa-relation-caption {
+  font-family: var(--sa-sans);
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--sa-label-ink);
+  stroke: white;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+  pointer-events: none;
+}
+
+.sa-label-parts {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.sa-label-separator {
+  color: color-mix(in srgb, var(--sa-label-ink) 55%, transparent);
+}
+
+.sa-legend {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 0 0 10px;
+  min-height: 32px;
+}
+
+.sa-legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+  padding: 3px 8px;
+  min-height: 32px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--sa-ink-soft);
+  background: transparent;
+  /* Smaller reading aid; source-sized English and measured annotation lanes stay unchanged. */
+  font: 400 clamp(12px, calc(var(--sa-legend-size) * .84), 14px)/1.45 var(--sa-serif);
+  cursor: pointer;
+}
+
+.sa-legend-item svg { overflow: visible; }
+.sa-legend-stroke { display: block; }
+.sa-legend-item path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sa-legend-trunk { padding: 3px 8px; min-width: 100px; }
+.sa-legend-pair { display: flex; width: 84px; justify-content: space-between; padding: 0 2px; }
+.sa-legend-pair > span { display: flex; flex-direction: column; align-items: center; }
+
+.sa-legend-item:hover:not(:disabled) {
+  background: var(--sa-label-bg);
+}
+
+.sa-legend-item[aria-pressed=true] {
+  background: var(--sa-label-bg);
+  border-color: var(--sa-label-edge);
+  color: var(--sa-label-ink);
+}
+
+.sa-legend-item:disabled {
+  color: var(--sa-faint);
+  opacity: .7;
+  cursor: default;
+}
+
+.sa-legend-item:focus-visible {
+  outline: 2px solid var(--sa-label-active);
+  outline-offset: 2px;
+}
+
+.sa-bubble-body {
+  overflow-wrap: anywhere;
+}
+
+.sa-under:has(.sa-flag) {
+  z-index: 3;
+}
+
+@media (max-width: 479px) {
+.paper-sentence-analysis .sa-head { top: -12px; flex-wrap: wrap; }
+  .paper-sentence-analysis .sa-translation { margin: 0; padding: 14px 0 0; }
+  .sa-legend { gap: 1px; }
+  .sa-legend-item { padding-left: 6px; padding-right: 6px; }
+  .sa-head-actions { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.paper-sentence-analysis .sa-bubble { transform: none; animation: none; }
+  .paper-sentence-analysis .sa-ink-connector path { transition: none; }
+}
+
+.sa-ink-connector {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 18px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--sa-label-ink);
+  cursor: pointer;
+  z-index: 4;
+  line-height: 1;
+}
+
+.sa-ink-connector svg {
+  overflow: visible;
+  pointer-events: none;
+}
+
+.sa-ink-connector path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill var(--sa-fast) ease-out;
+}
+
+.sa-ink-connector .sa-ink-triangle-fill {
+  fill: transparent;
+  stroke: none;
+}
+
+/* Drawn at 13px from a 16-unit viewBox: 2 units keep the visible line at
+   ~1.6px, the weight it had at full size. */
+.sa-ink-connector .sa-ink-triangle-stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+}
+
+.sa-ink-connector:hover {
+  color: var(--sa-ink);
+}
+
+.sa-ink-connector[aria-pressed=true] {
+  color: var(--sa-label-ink);
+}
+
+.sa-ink-connector[aria-pressed=true] .sa-ink-triangle-fill {
+  fill: currentColor;
+}
+
+.sa-ink-connector:focus-visible {
+  outline: 2px solid var(--sa-label-active);
+  outline-offset: 2px;
+}
+
+.sa-label[hidden], .sa-under[hidden], .sa-label-group[hidden] {
+  display: none;
+}
+
+/* Scope navigation shares the existing header instead of inserting a sentence row. */
+.sa-reading-nav { flex:1; min-width:0; overflow:hidden; display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:28px; padding:2px 0; font-size:12px; color:var(--sa-muted); }
+.sa-reading-trail { display:flex; align-items:center; gap:4px; min-width:0; overflow-x:auto; white-space:nowrap; }
+.sa-reading-trail button { border:0; background:none; color:inherit; padding:4px 2px; cursor:pointer; font:inherit; }
+.sa-reading-trail button[aria-current] { color:var(--sa-label-ink); }
+/* Overrides the plain trail button: entering and returning are named actions,
+   so they read as buttons rather than as path text. */
+.sa-reading-trail .sa-nav-step { flex-shrink:0; border:1px solid var(--sa-label-edge); border-radius:4px; padding:1px 7px; background:var(--sa-label-bg); color:var(--sa-label-ink); font-weight:500; }
+.sa-reading-trail .sa-nav-step:hover { background:var(--sa-action-hover); border-color:var(--sa-label-active); }
+.sa-reading-trail .sa-nav-step:first-child { margin-right:6px; }
+.sa-token[data-sa-deeper] { cursor:zoom-in; }
+.sa-enter { flex-shrink:0; border:1px solid var(--sa-label-edge); border-radius:8px; padding:6px 9px; background:var(--sa-label-bg); color:var(--sa-label-ink); font:inherit; cursor:pointer; }
+.sa-reading-nav button:focus-visible { outline:2px solid var(--sa-label-active); outline-offset:2px; }
+
+.sa-label-group { position:absolute; z-index:3; bottom:calc(100% + 5px); left:-1px; display:inline-flex; align-items:center; gap:5px; white-space:nowrap; }
+.sa-label-entry > .sa-label { position:relative; inset:auto; flex-shrink:0; }
+.sa-label-entry > .sa-label::after { inset:-3px 0; }
+.sa-local-action { position:relative; border:1px solid transparent; border-radius:8px; padding:1px 7px; background:var(--sa-label-bg); color:var(--sa-label-ink); font:500 12px/18px var(--sa-sans); white-space:nowrap; cursor:pointer; }
+.sa-local-action:hover { background:var(--sa-action-hover); }
+.sa-local-action[aria-pressed="true"] { background:var(--sa-action-selected); color:var(--sa-label-ink); }
+.sa-local-action:focus-visible { outline:2px solid var(--sa-label-active); outline-offset:2px; }
+
+/* Co-located structures share one lane while retaining separate click targets. */
+.sa-label-entry { display:inline-flex; align-items:center; gap:5px; }
+/* Set by layout when the actions would overflow the row: capsule stays on its word. */
+.sa-label-group[data-flip] .sa-label-entry { flex-direction:row-reverse; }
+.sa-label-entry + .sa-label-entry { border-left:1px solid var(--sa-label-edge); padding-left:5px; }
+
+/* Joined structures retain independent buttons and share only their surface. */
+.sa-label-group:is([data-sa-group="nested"], [data-sa-group="parallel"]) {
+  gap: 0;
+  width: max-content;
+  max-width: var(--sa-label-max-width);
+  flex-wrap: wrap;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 1px;
+  background: var(--sa-label-rest);
+}
+.sa-label-group:is([data-sa-group="nested"], [data-sa-group="parallel"]) .sa-label-entry {
+  gap: 0;
+  padding: 0;
+  border-left: 0;
+}
+.sa-group-separator {
+  width: 12px;
+  text-align: center;
+  color: var(--sa-label-ink);
+  font: 500 14px/18px var(--sa-sans);
+}
+.sa-label-group:is([data-sa-group="nested"], [data-sa-group="parallel"]) .sa-label {
+  border-color: transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  background: transparent;
+  padding: 0 6px;
+  line-height: 18px;
+  color: var(--sa-label-ink);
+}
+.sa-label-group:is([data-sa-group="nested"], [data-sa-group="parallel"]) .sa-label::after { inset: 0; }
+.sa-label-group:is([data-sa-group="nested"], [data-sa-group="parallel"]) .sa-label:hover { background: var(--sa-action-hover); }
+.sa-label-group:is([data-sa-group="nested"], [data-sa-group="parallel"]) .sa-label[data-current="true"] {
+  background: var(--sa-action-selected);
+  color: var(--sa-label-ink);
+}
+.sa-shared-label {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  border: 0;
+  border-right: 1px solid var(--sa-label-edge);
+  border-radius: 4px 0 0 4px;
+  margin-right: 3px;
+  padding: 0 5px 0 6px;
+  background: transparent;
+  color: var(--sa-label-ink);
+  font: 550 12px/18px var(--sa-sans);
+  cursor: pointer;
+}
+.sa-shared-label:hover { background: var(--sa-action-hover); }
+.sa-shared-label:focus-visible { outline: 2px solid var(--sa-label-active); outline-offset: 2px; }
+.sa-parallel-label { font-size: 10px; font-weight: 500; color: var(--sa-label-ink); }
+.sa-member-number { font: 550 14px/18px var(--sa-sans); }
+.sa-label-group[data-sa-group="member"] .sa-label { padding-inline: 6px; }
+
+.sa-head > .sa-kicker, .sa-head-actions { flex-shrink:0; }
+.sa-reading-trail > span { flex-shrink:0; }
+
+/* Details never scroll the sentence or steal its reading position. The
+   explanation shares one row with the legend; the fixed 300px basis makes the
+   wrap depend on card width only, never on the current explanation. */
+.sa-detail-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin: 0 0 16px;
+}
+.sa-detail-slot {
+  flex: 1 1 300px;
+  min-width: 0;
+  display: flex;
+  /* Fit a short explanation and its action; longer content scrolls from the top.
+     The card sets the height per sentence (detailSpace.ts); 60px is the cap. */
+  align-items: safe center;
+  height: 60px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.sa-detail-row > .sa-legend {
+  flex: 0 0 auto;
+  margin: 0;
+}
+/* The strip keeps one size for the whole sentence. Columns 1fr|auto|1fr centre
+   the text on the strip's own axis whatever sits at the right end; only a text
+   too wide to clear the buttons gives up the centre and stops beside them. */
+.sa-detail-strip {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, auto) minmax(max-content, 1fr);
+  align-items: center;
+  min-height: 100%;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--sa-label-bg) 45%, var(--sa-detail-bg));
+  transition: background-color var(--sa-fast) ease-out;
+}
+/* Overrides the strip fill: with nothing to say it keeps its height, so the
+   layout never jumps, but shows no surface that would draw the eye. */
+.sa-detail-strip:not(:has(.sa-bubble-docked)):not(:has(.sa-layer-nav button)) {
+  background-color: transparent;
+}
+@keyframes sa-text-in { from { opacity: 0; } }
+/* Overrides the floating .sa-bubble: inside the strip it is bare text, and a new
+   selection only fades its words in. */
+.sa-detail-strip .sa-bubble-docked {
+  grid-column: 2;
+  position: relative;
+  inset: auto;
+  min-width: 0;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  transform: none;
+  box-shadow: none;
+  animation: sa-text-in var(--sa-fast) ease-out;
+}
+/* Overrides the bubble's wrapping flex row: in the strip the pieces flow as
+   one run of text, so a long line wraps mid-sentence instead of pushing the
+   form label onto a line of its own (two lines fit the 60px cap, three do not). */
+.sa-detail-strip .sa-bubble-docked { display: block; }
+/* Top-aligned pieces keep every line box at exactly the 22px line height;
+   baseline-aligned mixed font sizes grew it by a font-dependent fraction,
+   so the measured slot and the live strip could disagree. */
+.sa-detail-strip .sa-bubble-docked > * { vertical-align: top; }
+.sa-detail-strip .sa-bubble-docked > * + * { margin-left: 8px; }
+/* 看内部 and 返回 occupy the same spot at the strip's right end, 返回 last. */
+.sa-layer-nav {
+  grid-column: 3;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px 0 8px;
+  white-space: nowrap;
+}
+/* Logical-subject actions remain mint; the target has its own dashed cue. */
+.sa-subject-action {
+  background: var(--sa-label-bg);
+  border: 1px solid var(--sa-label-edge);
+  color: var(--sa-subject-text);
+}
+.sa-subject-action:hover {
+  background: var(--sa-action-hover);
+}
+.sa-subject-action[aria-pressed="true"] {
+  background: var(--sa-action-selected);
+  border: 1px dashed var(--sa-label-active);
+  color: var(--sa-subject-text);
+}
+
+/* Antecedent substitution is a bounded local reading, not a new whole sentence. */
+.sa-local-restore {
+  /* One unbroken reading region: it moves to the next line as a whole.
+     Layout sets data-wrap only when the region is wider than a full line. */
+  white-space: nowrap;
+  position: relative;
+  border: 1px solid var(--sa-related-edge);
+  border-radius: 8px;
+  padding: 5px 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background: var(--sa-related-bg);
+}
+.sa-local-restore[data-wrap] { white-space: normal; }
+.sa-local-restore-label {
+  display: inline-block;
+  margin-right: 7px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--sa-label-ink);
+  background: var(--sa-label-bg);
+  font: 600 12px/1.6 var(--sa-sans);
+  vertical-align: 2px;
+  user-select: none;
+}
+.sa-sentence[data-local-restore] > .sa-token { color: color-mix(in srgb, var(--sa-ink) 48%, transparent); }
+
+.sa-restore-controls {
+  position: absolute;
+  left: 0;
+  top: -32px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+  line-height: 1.6;
+  user-select: none;
+}
+.sa-restore-controls .sa-local-restore-label { margin-right: 0; }
+
+
+/* ============================================================
+ * 3. 减少动态效果（selectionOverlay.css 中与本卡片有关的部分）
+ * ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .paper-selection-card,
+  .paper-sentence-analysis,
+  .paper-sentence-analysis .sa-token,
+  .paper-sentence-analysis .sa-gap,
+  .paper-sentence-analysis .sa-label,
+  .paper-sentence-analysis .sa-under,
+  .paper-sentence-analysis .sa-flag,
+  .paper-sentence-analysis .sa-bubble,
+  .paper-sentence-analysis .sa-inserted,
+  .paper-sentence-analysis .sa-relations,
+  .paper-sentence-analysis .sa-guides,
+  .paper-sentence-analysis .sa-summary-link,
+  .paper-sentence-analysis .sa-main-btn,
+  .paper-sentence-analysis .sa-zh-hit {
+    animation: none !important;
+    transition: none !important;
+  }
+}

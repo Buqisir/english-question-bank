@@ -203,6 +203,10 @@ const registry = {
   'scripts/verify-paper-translation-cache.mjs',
   'scripts/verify-paper-translation-routes.mjs',
   'scripts/verify-paper-selection-browser.mjs',
+  'scripts/verify-sentence-analysis-contract.mjs',
+  'scripts/verify-sentence-analysis-server.mjs',
+  'scripts/verify-sentence-analysis-interaction.mjs',
+  'scripts/verify-sentence-analysis-browser.mjs',
   'scripts/verify-paper-dictionary.mjs',
   'scripts/verify-vocabulary-notebook.mjs',
   'scripts/verify-list-groups-perf.mjs',
@@ -281,9 +285,20 @@ const paperScripts = uniqueRegistered(
     'scripts/verify-public-paper-review-consumer.mjs',
   ],
 )
+// Sentence analysis spans paper-browse/selection (a paper change) and
+// shared/server modules (feature changes); its verifier names match neither
+// rule, so both packs carry them explicitly.
+const sentenceAnalysisScripts = uniqueRegistered([
+  'scripts/verify-sentence-analysis-contract.mjs',
+  'scripts/verify-sentence-analysis-server.mjs',
+  'scripts/verify-sentence-analysis-interaction.mjs',
+  'scripts/verify-sentence-analysis-browser.mjs',
+])
+paperScripts.push(...sentenceAnalysisScripts.filter((script) => !paperScripts.includes(script)))
 const featureScripts = uniqueRegistered([
   ...registry.scripts.filter(
-    (script) => !paperScripts.includes(script) && !securityScripts.includes(script),
+    (script) => sentenceAnalysisScripts.includes(script)
+      || (!paperScripts.includes(script) && !securityScripts.includes(script)),
   ),
   // Signal staging is an import-pipeline feature as well as a Paper input.
   'scripts/verify-listening-signal.mjs',

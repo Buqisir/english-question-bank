@@ -21,6 +21,7 @@ import { loadCanonicalSourceAssetRepresentation } from './paper-canonical/source
 import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
 import { createPaperTranslationRoutes, createPaperTranslationRuntime } from './paper-translation/routes.mjs'
 import { createPaperDictionaryRoutes, createPaperDictionaryRuntime } from './paper-dictionary/routes.mjs'
+import { createPaperSentenceAnalysisRoutes, createPaperSentenceAnalysisRuntime } from './paper-sentence-analysis/routes.mjs'
 import { createVocabularyNotebookRoutes } from './vocabulary-notebook/routes.mjs'
 import { createVocabularyNotebookRuntime } from './vocabulary-notebook/runtime.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
@@ -501,6 +502,14 @@ const paperDictionaryRuntime = createPaperDictionaryRuntime({
   loadCanonicalConsumption,
 })
 serverContext.paperDictionary = paperDictionaryRuntime
+serverContext.paperSentenceAnalysis = createPaperSentenceAnalysisRuntime({
+  rootDir,
+  loadCanonicalConsumption,
+  dailyLimitCounter: {
+    isExceeded: () => aiDailyLimitCounter.isExceeded(),
+    increment: () => aiDailyLimitCounter.increment(),
+  },
+})
 const vocabularyNotebookRuntime = createVocabularyNotebookRuntime({
   rootDir,
   openUserDatabase,
@@ -542,6 +551,7 @@ const serverRoutes = [
   ...createVocabularyRoutes(),
   ...createPaperTranslationRoutes(),
   ...createPaperDictionaryRoutes(),
+  ...createPaperSentenceAnalysisRoutes(),
   ...createVocabularyNotebookRoutes(),
   // D1 (grammar-facets-v2): I16·C verb-profile sidecar + its backfill route
   // retired — tense/voice/agreementSensitive now live on the grammar-fill-

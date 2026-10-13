@@ -242,6 +242,54 @@ export function mapDomRangeToSegments(
   return segments
 }
 
+export function streamRangeToDomRange(
+  source: PaperSelectionSourceView,
+  host: Element,
+  streamId: string,
+  start: number,
+  end: number,
+): Range | null {
+  const stream = source.streams.find((item) => item.streamId === streamId)
+  if (!stream || end <= start) return null
+  const leaf = stream.leaves.find((item) => item.kind === 'paragraph' && item.start <= start && end <= item.end)
+  if (!leaf) return null
+  const candidates = [...host.querySelectorAll<HTMLElement>('[data-paper-paragraph-id], [data-canonical-block-id]')]
+  const root = candidates.find((element) => {
+    if (element.getAttribute('data-canonical-block-kind') === 'table') return false
+    const id = element.getAttribute('data-paper-paragraph-id') || element.getAttribute('data-canonical-block-id')
+    return id === leaf.id
+  })
+  if (!root) return null
+  const localStart = start - leaf.start
+  const localEnd = end - leaf.start
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+  let consumed = 0
+  let startNode: Node | null = null
+  let startOffset = 0
+  let endNode: Node | null = null
+  let endOffset = 0
+  let current = walker.nextNode()
+  while (current) {
+    const length = current.textContent?.length ?? 0
+    if (!startNode && consumed + length >= localStart) {
+      startNode = current
+      startOffset = localStart - consumed
+    }
+    if (consumed + length >= localEnd) {
+      endNode = current
+      endOffset = localEnd - consumed
+      break
+    }
+    consumed += length
+    current = walker.nextNode()
+  }
+  if (!startNode || !endNode) return null
+  const range = document.createRange()
+  range.setStart(startNode, startOffset)
+  range.setEnd(endNode, endOffset)
+  return range
+}
+
 export function selectionRange(): Range | null {
   const selection = window.getSelection()
   if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return null

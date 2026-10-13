@@ -10,6 +10,9 @@
 .paper-selection-toolbar {
   display: inline-flex;
   align-items: center;
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: 4px;
   background: var(--desk-raised, #FAFDF7);
   border: 1px solid var(--desk-line, #E3E8DF);
   border-radius: 8px;
@@ -20,7 +23,8 @@
 }
 
 .paper-selection-translate,
-.paper-selection-lookup {
+.paper-selection-lookup,
+.paper-selection-analyze {
   appearance: none;
   margin: 0;
   border: 0;
@@ -36,8 +40,17 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
   transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-micro) var(--ease-out);
   user-select: none;
+}
+
+/* The entry wears the card's own capsule green (tokens shared from
+   sentenceAnalysis.css), so the toolbar previews what opens. */
+.paper-selection-analyze {
+  background: var(--sa-label-bg);
+  color: var(--sa-label-ink);
+  font-weight: 600;
 }
 
 .paper-selection-btn-icon {
@@ -49,13 +62,23 @@
   background: var(--desk-hover, #E5EAE1);
 }
 
+.paper-selection-analyze:hover {
+  background: var(--sa-action-hover);
+}
+
 .paper-selection-translate:active,
-.paper-selection-lookup:active {
+.paper-selection-lookup:active,
+.paper-selection-analyze:active {
   transform: scale(0.96);
 }
 
+.paper-selection-analyze:active {
+  background: var(--sa-action-selected);
+}
+
 .paper-selection-translate:focus-visible,
-.paper-selection-lookup:focus-visible {
+.paper-selection-lookup:focus-visible,
+.paper-selection-analyze:focus-visible {
   outline: 2px solid var(--eqb-color-text-strong, #1f1f1d);
   outline-offset: 2px;
 }
@@ -765,7 +788,20 @@
   .paper-selection-spinner,
   .paper-selection-kicker-icon circle,
   .paper-dictionary-credits-toggle svg,
-  .paper-dictionary-rare-toggle svg {
+  .paper-dictionary-rare-toggle svg,
+  .paper-sentence-analysis,
+  .paper-sentence-analysis .sa-token,
+  .paper-sentence-analysis .sa-gap,
+  .paper-sentence-analysis .sa-label,
+  .paper-sentence-analysis .sa-under,
+  .paper-sentence-analysis .sa-flag,
+  .paper-sentence-analysis .sa-bubble,
+  .paper-sentence-analysis .sa-inserted,
+  .paper-sentence-analysis .sa-relations,
+  .paper-sentence-analysis .sa-guides,
+  .paper-sentence-analysis .sa-summary-link,
+  .paper-sentence-analysis .sa-main-btn,
+  .paper-sentence-analysis .sa-zh-hit {
     animation: none !important;
     transition: none !important;
   }
