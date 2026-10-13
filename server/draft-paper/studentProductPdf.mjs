@@ -6,14 +6,15 @@ export const STUDENT_PRODUCT_PROFILE = 'student-friendly-v1'
 const economyProfile = 'student-friendly-economy-v2'
 const normalHeights = { application: 65, continuation: 57 }
 
-export function studentProductPolicy(edition, listeningCount) {
+export function studentProductPolicy(edition, listeningCount, { economyPageLimit = 8 } = {}) {
   if (!STUDENT_PRODUCT_EDITIONS.includes(edition)) throw new Error('Unknown student product')
+  if (![8, 9].includes(economyPageLimit)) throw new Error('省纸版只支持默认八页或显式九页上限')
   if (edition === 'largeComplete' && listeningCount !== 2) {
     throw new Error('大字完整版需要完整的两个听力题组')
   }
-  return { targetPages: edition === 'economy8' ? 8 : edition === 'largeComplete' ? 12 : 10,
+  return { targetPages: edition === 'economy8' ? economyPageLimit : edition === 'largeComplete' ? 12 : 10,
     includeListening: edition === 'largeComplete', omitCover: false,
-    atMost: edition !== 'economy8' }
+    atMost: edition !== 'economy8' || economyPageLimit === 9 }
 }
 
 export function validateStudentProductLayout(layout, edition) {
@@ -98,18 +99,44 @@ function acceptableWriting(result, html) {
       && group.continuationMaterialPages?.at(-1) === group.continuationAnswerPages[0])
 }
 
-function impossible(edition, searchedCandidates) {
-  return Object.assign(new Error(`未在有界搜索内找到合格的${edition === 'economy8' ? '八页省纸版（小四及五号）' : '大字版'}；未删改正文或裁切答题框`), {
+function impossible(edition, searchedCandidates, economyPageLimit = 8) {
+  const economy = economyPageLimit === 9 ? '九页上限省纸版（五号）' : '八页省纸版（小四及五号）'
+  return Object.assign(new Error(`未在有界搜索内找到合格的${edition === 'economy8' ? economy : '大字版'}；未删改正文或裁切答题框`), {
     code: 'PAPER_FIXED_PAGE_IMPOSSIBLE', searchedCandidates,
   })
 }
 
-export async function planStudentProductPdf(html, { edition, render }) {
-  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0)
+async function restoreAnswerSpace(fit, layout, { measure, accept, canMeasure }) {
+  // Restore the final box first; earlier compression must not leave a roomy
+  // last page with minimal answer space. Measure every proposed height.
+  for (const family of ['continuation', 'application']) {
+    let low = layout.answerBoxHeightsMm[family] + 1
+    let high = normalHeights[family]
+    let tryNormal = true
+    while (low <= high && canMeasure()) {
+      const height = tryNormal ? high : Math.ceil((low + high) / 2)
+      tryNormal = false
+      const selected = { ...layout, answerBoxHeightsMm: { ...layout.answerBoxHeightsMm, [family]: height } }
+      let measured
+      try { measured = await measure(selected, fit.plannedBreakGroupIds) } catch (error) {
+        if (error.code !== 'PAPER_LAYOUT_OVERFLOW') throw error
+      }
+      if (measured && accept(measured)) {
+        fit = { ...fit, ...measured }
+        layout = selected
+        low = height + 1
+      } else high = height - 1
+    }
+  }
+  return { fit, layout }
+}
+
+export async function planStudentProductPdf(html, { edition, render, economyPageLimit = 8 }) {
+  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit })
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
   let searchedCandidates = 0
-  for (const fontSizePt of edition === 'economy8' ? [12, 10.5] : [12]) {
+  for (const fontSizePt of edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]) {
     const tierStart = searchedCandidates
     const minimumContinuation = fontSizePt === 12 ? 27 : 24
     // Prefer full-size source media and normal answer space. Compact geometry
@@ -144,27 +171,10 @@ export async function planStudentProductPdf(html, { edition, render }) {
         if (error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' || error.code === 'PAPER_LAYOUT_OVERFLOW') continue
         throw error
       }
-      // Restore the final box first: it must not stay tiny just because an
-      // earlier application group needed compression. Every height is rendered.
-      for (const family of ['continuation', 'application']) {
-        let low = layout.answerBoxHeightsMm[family] + 1
-        let high = normalHeights[family]
-        let tryNormal = true
-        while (low <= high && searchedCandidates - tierStart < 48) {
-          const height = tryNormal ? high : Math.ceil((low + high) / 2)
-          tryNormal = false
-          const selected = { ...layout, answerBoxHeightsMm: { ...layout.answerBoxHeightsMm, [family]: height } }
-          let measured
-          try { measured = await measure(selected, fit.plannedBreakGroupIds) } catch (error) {
-            if (error.code !== 'PAPER_LAYOUT_OVERFLOW') throw error
-          }
-          if (measured && withinPages(measured) && accept(measured)) {
-            fit = { ...fit, ...measured }
-            layout = selected
-            low = height + 1
-          } else high = height - 1
-        }
-      }
+      ;({ fit, layout } = await restoreAnswerSpace(fit, layout, {
+        measure, accept: result => withinPages(result) && accept(result),
+        canMeasure: () => searchedCandidates - tierStart < 48,
+      }))
       // Height restoration can change group fragments. Re-score its measured
       // result without another render, retaining the exact chosen breaks.
       const rescored = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
@@ -175,18 +185,36 @@ export async function planStudentProductPdf(html, { edition, render }) {
         searchedCandidates, explicitPlan: false }
     }
   }
-  throw impossible(edition, searchedCandidates)
+  throw impossible(edition, searchedCandidates, economyPageLimit)
 }
 
-export async function renderExplicitStudentProductPdf(html, { edition, layout, plannedBreakGroupIds, render }) {
-  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0)
-  const result = await render(applyPlannedGroupBreaks(applyStudentProductLayout(html, layout, edition), plannedBreakGroupIds), { inspect: inspectGroups })
-  if ((policy.atMost ? result.pageCount > policy.targetPages : result.pageCount !== policy.targetPages)
-    || !acceptableWriting(result, html)) throw impossible(edition, 1)
+export async function renderExplicitStudentProductPdf(html, {
+  edition, layout, plannedBreakGroupIds, render, economyPageLimit = 8, restoreAnswerBoxes = false,
+}) {
+  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit })
+  if (edition === 'economy8' && economyPageLimit === 9 && layout.fontSizePt !== 10.5) {
+    throw new Error('九页上限省纸版须保持10.5pt正文及18pt行距')
+  }
+  let searchedCandidates = 0
+  const measure = (selected, breaks) => {
+    searchedCandidates += 1
+    return render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+  }
+  const accept = result => (policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages)
+    && acceptableWriting(result, html)
+  let result = await measure(layout, plannedBreakGroupIds)
+  if (!accept(result)) throw impossible(edition, searchedCandidates, economyPageLimit)
+  if (restoreAnswerBoxes) {
+    const restored = await restoreAnswerSpace({ ...result, plannedBreakGroupIds }, layout, {
+      measure, accept, canMeasure: () => searchedCandidates < 16,
+    })
+    result = restored.fit
+    layout = restored.layout
+  }
   const summarized = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
     ...policy, natural: result, renderLimit: 1, render, balanceWhitespace: policy.atMost,
   })
   return { ...summarized, edition, layout: structuredClone(layout), plannedBreakGroupIds,
     fontSizePt: layout.fontSizePt, lineHeightPt: layout.fontSizePt === 12 ? 19.5 : 18,
-    searchedCandidates: 1, explicitPlan: true }
+    searchedCandidates, explicitPlan: true }
 }

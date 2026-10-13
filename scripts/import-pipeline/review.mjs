@@ -86,6 +86,7 @@ import { assertApplicationGivenOwnership } from './lib-nck1-new-paper-locks.mjs'
 import {
   FIXED_PAGINATION_EDITIONS,
   PAPER_PAGINATION_PLAN_FILE_NAME,
+  economyPageLimitForPlan,
   validatePaperPaginationPlan,
 } from '../../server/paper-import/paginationPlan.mjs'
 
@@ -330,7 +331,15 @@ async function paginationQa(paperId) {
   }
   const breakOption = option('--break-slots')
   const coverOption = option('--cover-gaps')
+  const pageLimitOption = option('--economy-page-limit')
+  const productLayoutOption = option('--product-layout')
   const product = STUDENT_PRODUCT_EDITIONS.includes(edition)
+  if (pageLimitOption !== null && (edition !== 'economy8' || pageLimitOption !== '9')) {
+    fail('--economy-page-limit supports only the explicitly permitted economy8 nine-page ceiling')
+  }
+  if (productLayoutOption !== null && (pageLimitOption !== '9' || breakOption === null)) {
+    fail('--product-layout requires --edition economy8 --economy-page-limit 9 --break-slots')
+  }
   if (product && coverOption !== null) fail('New student products retain the title and omit administrative notices; --cover-gaps is not supported')
   const explicitEdit = breakOption !== null || coverOption !== null
   if (process.argv.includes('--auto') && explicitEdit) {
@@ -360,12 +369,17 @@ async function paginationQa(paperId) {
       entry.familyContractId === 'listening')
     const listeningCount = projection.paginationSlotBindings.filter((entry) =>
       entry.familyContractId === 'listening').length
-    const selectedPolicy = (product ? studentProductPolicy : fixedPageLayoutPolicy)(edition, listeningCount, sourceHasListening)
+    const economyPageLimit = pageLimitOption === '9' ? 9 : economyPageLimitForPlan(projection.paginationPlan)
+    const productPlanVersion = economyPageLimit === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4'
+    const selectedPolicy = product ? studentProductPolicy(edition, listeningCount, { economyPageLimit })
+      : fixedPageLayoutPolicy(edition, listeningCount, sourceHasListening)
     policy = { targetPages: selectedPolicy.targetPages, includeListening: selectedPolicy.includeListening, omitCover: selectedPolicy.omitCover }
     let candidatePlan = projection.paginationPlan
     if (explicitEdit) {
       const currentEdition = projection.paginationPlan?.editions?.[edition]
-      if (product && !currentEdition?.layout) fail('Run --auto --save-plan before editing product break slots')
+      const productLayout = productLayoutOption === null ? currentEdition?.layout
+        : JSON.parse(readFileSync(path.resolve(productLayoutOption), 'utf8'))
+      if (product && !productLayout) fail('Run --auto --save-plan before editing product break slots, or supply an explicitly permitted nine-page --product-layout')
       const breakSlotIds = breakOption === null
         ? currentEdition?.breakSlotIds || []
         : String(breakOption).split(',').map((value) => value.trim()).filter(Boolean)
@@ -375,7 +389,7 @@ async function paginationQa(paperId) {
           ? null
           : String(coverOption).split(',').map(Number)
       candidatePlan = {
-        schemaVersion: product || projection.paginationPlan?.schemaVersion === 'paper-pagination-plan-v4' ? 'paper-pagination-plan-v4' : edition.startsWith('long') ? 'paper-pagination-plan-v2'
+        schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5'].includes(projection.paginationPlan?.schemaVersion) ? productPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
           : projection.paginationPlan?.schemaVersion || 'paper-pagination-plan-v1',
         paperId: projection.paperId,
         sourceDigest: projection.sourceDigest,
@@ -387,7 +401,7 @@ async function paginationQa(paperId) {
             coverGapsPt,
             breakSlotIds,
             allowSplitOptionBank: currentEdition?.allowSplitOptionBank ?? false,
-            ...(product ? { layout: currentEdition.layout } : {}),
+            ...(product ? { layout: productLayout } : {}),
           },
         },
       }
@@ -406,7 +420,9 @@ async function paginationQa(paperId) {
       ...projection,
       paginationPlan: candidatePlan,
     }
-    const rendered = await renderReviewFixedEdition(renderedProjection, edition, buildPrintHtml)
+    const rendered = await renderReviewFixedEdition(renderedProjection, edition, buildPrintHtml, undefined, {
+      economyPageLimit, restoreAnswerBoxes: productLayoutOption !== null,
+    })
     slotByGroup = new Map(projection.paginationSlotBindings.map(({ groupId, slotId }) => [groupId, slotId]))
     const selectedEdition = useAuto ? {
       ...policy,
@@ -418,9 +434,10 @@ async function paginationQa(paperId) {
     } : {
       ...candidatePlan.editions[edition],
       allowSplitOptionBank: candidatePlan.editions[edition].allowSplitOptionBank ?? false,
+      ...(product ? { layout: rendered.layout } : {}),
     }
     const plan = validatePaperPaginationPlan({
-      schemaVersion: product || candidatePlan?.schemaVersion === 'paper-pagination-plan-v4' ? 'paper-pagination-plan-v4' : edition.startsWith('long') ? 'paper-pagination-plan-v2'
+      schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5'].includes(candidatePlan?.schemaVersion) ? productPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
         : candidatePlan?.schemaVersion || 'paper-pagination-plan-v1',
       paperId: projection.paperId,
       sourceDigest: projection.sourceDigest,
@@ -1524,7 +1541,7 @@ async function main() {
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
       + 'prepare-listening-waveform <paperId> (local derivative only; no approval or publication) | '
-      + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b (requires saved layout)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
+      + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
       + 'cleanup-plan <paperId> --revision rev-id (inspection only; never deletes or certifies eligibility) | '
       + 'link-thread <paperId> --thread T-id [--from T-id] (explicit discussion handoff only) | '
       + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | '

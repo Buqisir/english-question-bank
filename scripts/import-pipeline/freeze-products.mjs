@@ -8,6 +8,7 @@ import { readExamDate } from '../../shared/examDate.mjs'
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
 import { renderReviewPdfProduct } from '../../server/import-review/reviewPagination.mjs'
 import { PRODUCT_FILES, PRODUCT_MANIFEST, productInputDigest, readFrozenProducts } from '../../server/paper-import/frozenProducts.mjs'
+import { economyPageLimitForPlan } from '../../server/paper-import/paginationPlan.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 
@@ -17,6 +18,7 @@ try {
   if (existsSync(path.join(rootDir, 'products'))) throw new Error('产品目录已存在；保留旧字节，请在新 revision 工作副本生成')
   const projection = buildNck1ReviewProjection(rootDir, { requireAnalyses: true })
   const examDate = readExamDate(projection.config.provenance, { required: true })
+  const economyPageLimit = economyPageLimitForPlan(projection.paginationPlan)
   const inputDigest = productInputDigest(rootDir, reviewBundleFilePaths(rootDir))
   const staging = path.join(rootDir, `.products-${randomUUID()}`)
   mkdirSync(path.join(staging, 'products'), { recursive: true })
@@ -28,10 +30,11 @@ try {
     files.push({ ...file, sha256: sha256(result.pdfBytes), byteLength: result.pdfBytes.length, pageCount: result.pageCount })
   }
   if (productInputDigest(rootDir, reviewBundleFilePaths(rootDir)) !== inputDigest) throw new Error(`生成期间输入改变；保留失败产物 ${staging}`)
-  const manifest = { schemaVersion: 'paper-pdf-products-v1', paperId: projection.paperId,
+  const manifest = { schemaVersion: economyPageLimit === 9 ? 'paper-pdf-products-v2' : 'paper-pdf-products-v1',
+    ...(economyPageLimit === 9 ? { economyPageLimit } : {}), paperId: projection.paperId,
     paperName: projection.paperName, examDate, inputDigest, files }
   writeFileSync(path.join(staging, PRODUCT_MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'wx' })
-  readFrozenProducts(staging, { inputDigest, required: true })
+  readFrozenProducts(staging, { inputDigest, economyPageLimit, required: true })
   renameSync(path.join(staging, 'products'), path.join(rootDir, 'products'))
   rmdirSync(staging)
   console.log(JSON.stringify({ status: 'local_products_frozen', paperId: projection.paperId, files,
