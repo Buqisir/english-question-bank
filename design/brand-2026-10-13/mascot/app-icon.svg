@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-<!-- 水獭正面母版 v0（2026-10-13）：v2 形体，竹青 #3D8F70 + 暖米白 #F6EFE0 + 米白 #EEE5D0 + 墨 #191D18。App 图标：暖米白圆角底，头像被底框裁切；16px 需另做简化版。眼睛待调。规范见 BRAND.md。 -->
+<!-- 水獭正面母版 v0（2026-10-13）：v2 形体，竹青 #3D8F70 + 暖米白 #F6EFE0 + 米白 #EEE5D0 + 墨 #191D18。App 图标：暖米白圆角底，头像被底框裁切；16px 需另做简化版。眼睛是墨点眼（M 画板选 e5，2026-10-13 定）。规范见 BRAND.md。 -->
 <title>水獭 · App 图标</title>
 <defs><clipPath id="tile"><rect width="100" height="100" rx="22"/></clipPath></defs>
 <rect width="100" height="100" rx="22" fill="#F6EFE0"/>
