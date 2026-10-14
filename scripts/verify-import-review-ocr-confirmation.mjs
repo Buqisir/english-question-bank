@@ -375,6 +375,10 @@ try {
       send(response, 200, appJs, 'text/javascript; charset=utf-8')
       return
     }
+    if (url.pathname === '/ops/owner-review.js') {
+      send(response, 200, readFileSync(path.join(root, 'import-ops/public/owner-review.js')), 'text/javascript; charset=utf-8')
+      return
+    }
     if (url.pathname === '/ops/clipboard.js') {
       send(response, 200, clipboardJs, 'text/javascript; charset=utf-8')
       return
@@ -449,10 +453,13 @@ try {
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
-  await page.goto(`${origin}/ops/?view=review`)
-  await page.getByRole('heading', { name: 'OCR 校对报告' }).waitFor()
-  assert.equal(await page.locator('[data-ocr-text], #confirm-ocr').count(), 0,
-    'Owner sees a report, not transcription editing or confirmation controls')
+  await page.goto(`${origin}/ops/`)
+  await page.getByRole('heading', { name: '试卷审核' }).waitFor()
+  await page.getByText('还没有送审试卷').waitFor()
+  assert.equal(await page.getByRole('link', { name: 'Anonymous synthetic image-pair review' }).count(), 0,
+    'OCR-only papers are absent from the Owner candidate list')
+  assert.equal(await page.locator('[data-ocr-text], #confirm-ocr, #review-frame').count(), 0,
+    'Owner candidate list has no OCR transcription, confirmation, or report iframe')
   if (process.env.OCR_REVIEW_SCREENSHOT) {
     await page.screenshot({ path: process.env.OCR_REVIEW_SCREENSHOT })
   }

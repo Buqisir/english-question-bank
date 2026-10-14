@@ -109,6 +109,23 @@ function jsonBody(capture) {
   return JSON.parse(capture.body.toString('utf8'))
 }
 
+function candidateListRow(paper) {
+  return {
+    paperId: paper.paperId,
+    paperName: paper.paperName,
+    latestRevisionId: paper.latestRevisionId,
+    revisionNumber: paper.latest.revisionNumber,
+    state: paper.latest.state,
+    reviewKind: 'candidate',
+    bundleDigest: paper.latest.bundleDigest,
+    rendererBuildId: 'source-pairing-renderer',
+    hasMediaCandidates: true,
+    rendererStale: false,
+    promotionState: null,
+    unresolvedCount: paper.unresolvedCount,
+  }
+}
+
 function send(response, status, body, contentType) {
   const bytes = Buffer.isBuffer(body) ? body : Buffer.from(body)
   response.writeHead(status, {
@@ -123,15 +140,6 @@ async function readJson(request) {
   const chunks = []
   for await (const chunk of request) chunks.push(chunk)
   return JSON.parse(Buffer.concat(chunks).toString('utf8'))
-}
-
-async function waitForFocus(locator) {
-  for (let attempt = 0; attempt < 100; attempt += 1) {
-    if (await locator.evaluate((element) =>
-      element.ownerDocument.activeElement === element)) return
-    await new Promise((resolve) => setTimeout(resolve, 25))
-  }
-  assert.fail('Screen target did not receive focus')
 }
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-source-pairing-'))
@@ -410,6 +418,7 @@ try {
   }
   const indexHtml = readFileSync(path.join(root, 'import-ops/public/index.html'))
   const appJs = readFileSync(path.join(root, 'import-ops/public/app.js'))
+  const ownerReviewJs = readFileSync(path.join(root, 'import-ops/public/owner-review.js'))
   const clipboardJs = readFileSync(path.join(root, 'import-ops/public/clipboard.js'))
   const styles = readFileSync(path.join(root, 'import-ops/public/styles.css'))
   let listeningSupplied = true
@@ -421,6 +430,10 @@ try {
     }
     if (url.pathname === '/ops/app.js') {
       send(response, 200, appJs, 'text/javascript; charset=utf-8')
+      return
+    }
+    if (url.pathname === '/ops/owner-review.js') {
+      send(response, 200, ownerReviewJs, 'text/javascript; charset=utf-8')
       return
     }
     if (url.pathname === '/ops/clipboard.js') {
@@ -436,17 +449,29 @@ try {
       return
     }
     if (url.pathname === '/api/import-reviews') {
-      send(response, 200, JSON.stringify({ papers: [{
-        paperId,
-        paperName: detail.paperName,
-        revisionNumber: 1,
-        state: 'awaiting_review',
-        unresolvedCount: 0,
-      }] }), 'application/json')
+      send(response, 200, JSON.stringify({ papers: [
+        candidateListRow(detail),
+        {
+          ...candidateListRow(detail),
+          paperId: 'paper-source-pairing-ocr',
+          paperName: 'OCR-only 不应进入审核列表',
+          reviewKind: 'ocr',
+          latestRevisionId: 'rev-ocr-only',
+        },
+      ] }), 'application/json')
       return
     }
     if (url.pathname === `/api/import-reviews/papers/${paperId}` && request.method === 'GET') {
       send(response, 200, JSON.stringify(detail), 'application/json')
+      return
+    }
+    if (url.pathname === `/api/import-reviews/papers/${paperId}/review-state`) {
+      send(response, 200, JSON.stringify({
+        paperId,
+        latestRevisionId: detail.latestRevisionId,
+        issues: detail.issues,
+        discussionThreadId: null,
+      }), 'application/json')
       return
     }
     if (url.pathname === `/api/import-reviews/papers/${paperId}/issues` && request.method === 'POST') {
@@ -463,20 +488,11 @@ try {
       send(response, 201, JSON.stringify(detail), 'application/json')
       return
     }
-    if (
-      url.pathname === `/api/import-reviews/papers/${paperId}`
-        + `/revisions/${revisionId}/confirm-media`
-      && request.method === 'POST'
-    ) {
+    if (url.pathname === `/api/import-reviews/papers/${paperId}/revisions/${revisionId}/confirm-media`
+      && request.method === 'POST') {
       capturedMediaConfirmation = await readJson(request)
-      const receipt = {
-        confirmationId: 'media-confirmation-source-pairing-fixture',
-        revisionId,
-        mediaId: iconTargetId,
-        sourceSha256: imageSourceDigest,
-        candidateSha256: sha256(mediaCandidateBytes),
-        presentationDigest: mediaPresentationDigest,
-      }
+      const receipt = { ...capturedMediaConfirmation, revisionId,
+        confirmationId: 'media-confirmation-source-pairing-fixture' }
       detail.mediaConfirmations = [receipt]
       send(response, 200, JSON.stringify({ receipt }), 'application/json')
       return
@@ -533,157 +549,121 @@ try {
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
-  const showSourceMaterials = async () => {
-    const summary = page.locator('summary').filter({ hasText: /^对照资料$/u })
-    if (await summary.locator('..').getAttribute('open') === null) await summary.click()
-  }
-  await page.goto(`http://127.0.0.1:${address.port}/ops/?view=review`)
-  const listeningQuestion = page.frameLocator('#review-frame')
-    .locator(`[data-paper-question-id="${listeningQuestionId}"]`)
+  await page.goto(`http://127.0.0.1:${address.port}/ops/`)
+  await page.getByRole('heading', { name: '试卷审核' }).waitFor()
+  assert.equal(await page.locator('#review-frame, [role="tab"], #approval-check').count(), 0,
+    'compact Owner review has no iframe, tabs, or approval checkbox')
+  assert.equal(await page.getByText('OCR-only 不应进入审核列表').count(), 0,
+    'OCR-only papers stay off the candidate list')
+  const paperLink = page.getByRole('link', { name: detail.paperName })
+  const screenHref = new URL(await paperLink.getAttribute('href'), `http://127.0.0.1:${address.port}`)
+  assert.equal(screenHref.searchParams.get('view'), 'paper-browse')
+  assert.equal(screenHref.searchParams.get('paperId'), paperId)
+  assert.equal(screenHref.searchParams.get('reviewRevision'), revisionId)
+  assert.equal(await paperLink.getAttribute('target'), '_blank')
+  const screenPage = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
+  await screenPage.goto(screenHref.toString())
+  const listeningQuestion = screenPage.locator(`[data-paper-question-id="${listeningQuestionId}"]`)
   await listeningQuestion.waitFor()
   assert.equal(await listeningQuestion.count(), 1)
-  await listeningQuestion.click()
-  assert.equal(await page.locator('#listening-review-section').isVisible(), false,
-    'Listening evidence remains secondary until the Owner opens reference materials')
-  await showSourceMaterials()
-  await page.getByText('听力核对 · 第 6 题').waitFor()
-  assert.equal(await page.locator('.listening-review-answer strong').textContent(), 'B')
-  assert.match(
-    await page.locator('.listening-review-transcript').textContent(),
-    /deciding when to meet at the library/u,
-  )
-  assert.match(
-    await page.locator('.listening-audio-evidence').textContent(),
-    /与官方听力原文比对通过/u,
-  )
-  assert.match(
-    await page.locator('.listening-audio-evidence').textContent(),
-    /内容安全检查通过/u,
-  )
-  assert.equal(
-    await page.frameLocator('#review-frame').locator('text=官方答案').count(),
-    0,
-    'official answers stay outside the student Screen frame',
-  )
-  assert.equal(
-    await page.frameLocator('#review-frame').locator('text=deciding when to meet').count(),
-    0,
-    'Listening transcripts stay outside the student Screen frame',
-  )
-  const screenTable = page.frameLocator('#review-frame')
-    .locator(`[data-canonical-block-id="${targetId}"]`)
+  assert.equal(await screenPage.getByText('官方答案').count(), 0,
+    'official answers stay outside the student Screen')
+  assert.equal(await screenPage.getByText('deciding when to meet').count(), 0,
+    'Listening transcripts stay outside the student Screen')
+  const screenTable = screenPage.locator(`[data-canonical-block-id="${targetId}"]`)
+  await screenTable.waitFor()
   if (process.env.LISTENING_QA_ARTIFACT_DIR) {
     mkdirSync(process.env.LISTENING_QA_ARTIFACT_DIR, { recursive: true })
     await page.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'review-captured.png') })
   }
-  await screenTable.click()
-  const sourceImage = page.locator('.source-proof img')
-  await sourceImage.waitFor()
-  await sourceImage.evaluate((image) => image.decode())
-  assert.equal(await sourceImage.evaluate((image) => image.naturalWidth > 0), true)
-  await page.frameLocator('#review-frame')
-    .locator(`[data-canonical-media-id="${iconTargetId}"]`).click()
-  await page.locator('.source-proof figcaption').getByText(iconTargetId).waitFor()
-  assert.equal(
-    await page.locator('#issue-form input[name="blockId"]').inputValue(),
-    targetId,
-    'an inline icon issue retains its semantic table block target',
+  const sourceCrop = await fetch(`http://127.0.0.1:${address.port}${cropPath}`)
+  assert.equal(sourceCrop.status, 200)
+  assert.equal(sourceCrop.headers.get('content-type'), 'image/png')
+  assert.deepEqual(
+    [...new Uint8Array(await sourceCrop.arrayBuffer()).subarray(0, 8)],
+    [137, 80, 78, 71, 13, 10, 26, 10],
+    'paired source crop remains available as exact PNG bytes',
   )
-  assert.equal(
-    await page.locator('#issue-form input[name="mediaId"]').inputValue(),
-    iconTargetId,
+  const iconCrop = await fetch(
+    `http://127.0.0.1:${address.port}/api/import-review-preview/revisions/${revisionId}`
+      + `/source-visuals/${encodeURIComponent(iconVisualId)}`,
   )
-  assert.equal(
-    await page.locator('#issue-form input[name="contentNodeId"]').inputValue(),
-    'media-ref:warning-icon',
+  assert.equal(iconCrop.status, 200, 'inline icon source crop remains a reviewer preview')
+  const sourceFile = await fetch(
+    `http://127.0.0.1:${address.port}/api/import-review-preview/revisions/${revisionId}`
+      + `/files?path=${encodeURIComponent('questions.pdf')}`,
   )
+  assert.equal(sourceFile.status, 200)
+  assert.equal(sourceFile.headers.get('content-type'), 'application/pdf')
+  const sourceRendition = await fetch(
+    `http://127.0.0.1:${address.port}/api/import-review-preview/revisions/${revisionId}`
+      + `/media/${encodeURIComponent(iconTargetId)}/source`,
+  )
+  const candidateRendition = await fetch(
+    `http://127.0.0.1:${address.port}/api/import-review-preview/revisions/${revisionId}`
+      + `/media/${encodeURIComponent(iconTargetId)}/candidate`,
+  )
+  assert.equal(sourceRendition.status, 200)
+  assert.equal(candidateRendition.status, 200)
+  assert.notDeepEqual(
+    new Uint8Array(await sourceRendition.arrayBuffer()),
+    new Uint8Array(await candidateRendition.arrayBuffer()),
+    'source and candidate media renditions stay distinct',
+  )
+
+  await page.getByRole('button', { name: '核对候选图' }).click()
   await page.locator('.media-compare-grid img').first().waitFor()
+  await page.locator('.media-compare-grid img').evaluateAll(images => Promise.all(images.map(image => image.decode())))
   assert.equal(await page.locator('.media-compare-grid img').count(), 2)
-  await page.locator('.media-compare-grid img').evaluateAll((images) =>
-    Promise.all(images.map((image) => image.decode())))
-  assert.equal(
-    await page.locator('.media-compare-grid img').evaluateAll((images) =>
-      images.every((image) => image.naturalWidth > 0)),
-    true,
-  )
-  const overlaySlider = page.locator('[data-media-overlay-opacity]')
-  await overlaySlider.fill('100')
-  assert.equal(
-    await page.locator('[data-media-compare-layer]').evaluate((layer) => layer.style.opacity),
-    '1',
-  )
+  await page.locator('[data-media-opacity]').fill('100')
+  assert.equal(await page.locator('.media-overlay-candidate').evaluate(image => image.style.opacity), '1')
   const mediaConfirm = page.getByRole('button', { name: '确认这张候选图' })
   assert.equal(await mediaConfirm.isDisabled(), true)
-  const mediaChecks = page.locator('#media-confirmation-form input[type="checkbox"]')
+  const mediaChecks = page.locator('[data-confirm-media] input[type="checkbox"]')
   assert.equal(await mediaChecks.count(), 11)
-  for (let index = 0; index < await mediaChecks.count(); index += 1) {
-    await mediaChecks.nth(index).check()
-  }
-  assert.equal(await mediaConfirm.isEnabled(), true)
-  await Promise.all([
-    page.waitForResponse((response) =>
-      response.request().method() === 'GET'
-      && new URL(response.url()).pathname === `/api/import-reviews/papers/${paperId}`),
-    mediaConfirm.click(),
-  ])
-  await page.frameLocator('#review-frame')
-    .locator(`[data-canonical-media-id="${iconTargetId}"]`).click()
-  await page.getByText('这张候选图已确认').waitFor()
-  await showSourceMaterials()
-  assert(capturedMediaConfirmation)
-  assert.equal(capturedMediaConfirmation.mediaId, iconTargetId)
-  assert.equal(
-    Object.values(capturedMediaConfirmation.checklist).every(Boolean),
-    true,
-  )
-  await page.frameLocator('#review-frame')
-    .locator('[data-canonical-block-id="block:unlocated"]').click()
-  await page.getByText('源区域未配对。已知它来自第 1 页').waitFor()
-  await page.getByRole('link', { name: '打开整份源文件' }).waitFor()
-  await screenTable.click()
-  await page.locator('.source-proof img').waitFor()
-  assert.deepEqual(await page.getByRole('tab').allTextContents(), ['Screen', 'PDF'])
-  await page.getByRole('button', { name: '定位 Screen' }).click()
-  await waitForFocus(
-    page.frameLocator('#review-frame').locator(`[data-canonical-block-id="${targetId}"]`),
-  )
-  await page.getByRole('button', { name: '按这个原卷局部记录问题' }).click()
-  await page.locator('#issue-form textarea[name="message"]').fill('原卷表格边框与 Screen 不一致')
-  await page.getByRole('button', { name: '记录这个问题' }).click()
-  await page.waitForFunction(() => document.querySelector('#issue-form textarea[name="message"]')?.value === '')
+  for (let index = 0; index < 10; index += 1) await mediaChecks.nth(index).check()
+  assert.equal(await mediaConfirm.isDisabled(), true, 'all fidelity AND source-authority checks are required')
+  await mediaChecks.nth(10).check()
+  await mediaConfirm.click()
+  await page.getByRole('status').filter({ hasText: '候选图已确认' }).waitFor()
+  assert.deepEqual(capturedMediaConfirmation, {
+    bundleDigest: detail.latest.bundleDigest, mediaId: iconTargetId,
+    sourceSha256: imageSourceDigest, candidateSha256: sha256(mediaCandidateBytes),
+    presentationDigest: mediaPresentationDigest,
+    checklist: { text: true, numbers: true, units: true, arrows: true, legend: true,
+      colorAndLineStyle: true, nodeCountAndOrder: true, curvesIntersectionsAndScale: true,
+      layoutIntent: true, sourceAuthorization: true, watermarkIntegrity: true },
+  })
+  await page.getByRole('button', { name: '核对候选图' }).click()
+  await page.getByText('这张候选图已确认', { exact: true }).waitFor()
+  assert.equal(await mediaConfirm.count(), 0, 'the exact receipt replaces the confirmation form')
+  assert.equal(detail.latest.state, 'awaiting_review', 'image confirmation does not approve the paper')
+
+  await page.getByRole('button', { name: '退回修改' }).click()
+  await page.locator('#return-message').fill('原卷表格边框与 Screen 不一致')
+  await page.getByRole('button', { name: '提交退回' }).click()
+  await page.getByText('已退回修改').waitFor()
   assert(capturedIssue)
-  assert.equal(capturedIssue.surface, 'source')
-  assert.equal(capturedIssue.groupId, 'group:reading-a')
-  assert.equal(capturedIssue.blockId, targetId)
-  assert.equal(capturedIssue.pageNumber, '1')
-  assert.deepEqual(capturedIssue.rect, region)
-  await page.getByRole('button', { name: '查看原卷定位' }).click()
-  await showSourceMaterials()
-  await page.locator('.source-proof img').waitFor()
-  assert.match(
-    await page.locator('#issue-form .field-help').textContent(),
-    /源文件/u,
-  )
+  assert.equal(capturedIssue.surface, 'paper')
+  assert.equal(capturedIssue.revisionId, revisionId)
+  assert.equal(capturedIssue.bundleDigest, detail.latest.bundleDigest)
+  assert.equal(capturedIssue.message, '原卷表格边框与 Screen 不一致')
+  assert.equal(capturedIssue.blockId, undefined,
+    'compact return feedback is paper-level, not a source-rail locator')
 
   listeningSupplied = false
   detail.listeningReview = null
-  await page.reload()
-  await page.frameLocator('#review-frame')
-    .locator(`[data-canonical-block-id="${targetId}"]`).waitFor()
+  await screenPage.reload()
+  await screenPage.locator(`[data-canonical-block-id="${targetId}"]`).waitFor()
   assert.equal(
-    await page.frameLocator('#review-frame')
-      .locator(`[data-paper-question-id="${listeningQuestionId}"]`).count(),
+    await screenPage.locator(`[data-paper-question-id="${listeningQuestionId}"]`).count(),
     0,
     'not_supplied Screen has no Listening Question or phantom slot',
-  )
-  assert.equal(
-    await page.locator('.listening-review-section').count(),
-    0,
-    'not_supplied Review has no Listening rail chrome',
   )
   if (process.env.LISTENING_QA_ARTIFACT_DIR) {
     await page.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'review-not-supplied.png') })
   }
+  await screenPage.close()
 
   console.log('verify-import-review-source-pairing: PASS')
 } finally {

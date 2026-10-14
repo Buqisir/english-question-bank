@@ -129,6 +129,22 @@ assert.match(owner.body, /干扰项辨析/u)
 assert.equal((await invoke(null)).status, 403)
 assert.equal((await invoke({ role: 'owner', accountKind: 'import_agent', username: 'agent' })).status, 403)
 
+function candidateListRow() {
+  return {
+    paperId: detail.paperId,
+    paperName: detail.paperName,
+    latestRevisionId: revisionId,
+    revisionNumber: 1,
+    state: 'awaiting_review',
+    reviewKind: 'candidate',
+    bundleDigest: 'sha256:' + 'a'.repeat(64),
+    rendererBuildId: 'teaching-route-renderer',
+    rendererStale: false,
+    promotionState: null,
+    unresolvedCount: 0,
+  }
+}
+
 const publicDir = new URL('../import-ops/public', import.meta.url).pathname
 const detail = {
   paperId: fixture.paperAsset.paper.paperId,
@@ -144,7 +160,10 @@ const browserServer = createServer((request, response) => {
   const url = new URL(request.url, 'http://test')
   const json = (value) => { response.writeHead(200, { 'content-type': 'application/json' }); response.end(JSON.stringify(value)) }
   if (url.pathname === '/api/auth/me') return json({ authRequired: true, user: { role: 'owner', accountKind: 'human', username: 'owner' } })
-  if (url.pathname === '/api/import-reviews') return json({ papers: [{ paperId: detail.paperId, paperName: detail.paperName, reviewKind: 'candidate', revisionNumber: 1, state: 'awaiting_review', unresolvedCount: 0 }] })
+  if (url.pathname === '/api/import-reviews') return json({ papers: [
+    candidateListRow(),
+    { ...candidateListRow(), paperId: 'paper-teaching-ocr-only', paperName: 'OCR-only 不应进入审核列表', reviewKind: 'ocr' },
+  ] })
   if (url.pathname === `/api/import-reviews/papers/${detail.paperId}`) return json(detail)
   if (url.pathname.endsWith('/pagination')) return json({ editions: [] })
   if (url.pathname.endsWith('/teaching')) { response.writeHead(owner.status, owner.headers); response.end(owner.body); return }
@@ -163,11 +182,24 @@ const playwright = await import('../app/node_modules/playwright/index.js')
 const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 })
-  await page.goto(`http://127.0.0.1:${address.port}/ops/?view=review`)
-  await page.frameLocator('#review-frame').getByText('synthetic review screen').waitFor()
-  assert.deepEqual(await page.getByRole('tab').allTextContents(), ['Screen', 'PDF'])
-  assert.equal(await page.getByRole('tab', { name: '教学解析' }).count(), 0)
-  assert.equal(await page.getByRole('tab', { name: 'Screen', exact: true }).getAttribute('aria-selected'), 'true')
+  await page.goto(`http://127.0.0.1:${address.port}/ops/`)
+  await page.getByRole('heading', { name: '试卷审核' }).waitFor()
+  assert.equal(await page.getByText('OCR-only 不应进入审核列表').count(), 0)
+  assert.equal(await page.locator('#review-frame, [role="tab"]').count(), 0,
+    'Owner review no longer embeds teaching in an iframe or tab')
+  const paperLink = page.getByRole('link', { name: detail.paperName })
+  const screenHref = new URL(await paperLink.getAttribute('href'), `http://127.0.0.1:${address.port}`)
+  assert.equal(screenHref.searchParams.get('view'), 'paper-browse')
+  assert.equal(screenHref.searchParams.get('paperId'), detail.paperId)
+  assert.equal(screenHref.searchParams.get('reviewRevision'), revisionId)
+  assert.equal(await paperLink.getAttribute('target'), '_blank')
+  const teaching = await fetch(
+    `http://127.0.0.1:${address.port}/api/import-reviews/papers/${detail.paperId}/revisions/${revisionId}/teaching`,
+  )
+  assert.equal(teaching.status, 200)
+  assert.match(teaching.headers.get('content-type') || '', /text\/html/u)
+  const teachingHtml = await teaching.text()
+  for (const sentinel of Object.values(sentinels)) assert.match(teachingHtml, new RegExp(sentinel, 'u'))
 } finally {
   await browser.close()
   await new Promise((resolve) => browserServer.close(resolve))

@@ -41,7 +41,7 @@ try {
   const reviewRoot = path.join(temporary, 'external-review')
   await prepareNck1AnalyzedPackageReview({ sourcePath: packageRoot, destinationDir: reviewRoot, expectedPaperId: paperId })
   const projection = buildNck1ReviewProjection(reviewRoot, { requireAnalyses: true })
-  assert.equal(projection.listeningReview.audio.state, 'pending_external_playback_review')
+  assert.equal(projection.listeningReview.audio.state, 'included_in_candidate_review')
   assert.equal(Object.keys(projection.analysisSidecars).length, 6)
   const dbPath = path.join(temporary, 'review.sqlite')
   const filesRoot = path.join(temporary, 'sealed')
@@ -122,7 +122,7 @@ try {
         target.end(JSON.stringify(body))
       }
       if (url.pathname === '/fixture-owner') {
-        response.writeHead(302, { 'set-cookie': 'eqb-fixture-owner=1; HttpOnly; SameSite=Lax; Path=/', location: '/ops/?view=review' })
+        response.writeHead(302, { 'set-cookie': 'eqb-fixture-owner=1; HttpOnly; SameSite=Lax; Path=/', location: '/ops/' })
         return response.end()
       }
       if (url.pathname === '/api/auth/me') return sendJson(response, 200, { authRequired: true, user: session })
@@ -159,32 +159,59 @@ try {
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 2 })
   const page = await context.newPage()
   await page.goto(origin + '/fixture-owner')
-  await page.frameLocator('#review-frame').locator('[data-paper-paragraph-id]').first().waitFor()
-  assert.equal(await page.frameLocator('#review-frame').getByText('没找到这份卷面').count(), 0)
-  await page.locator('[data-external-listening-check]').first().waitFor()
-  assert.equal(await page.locator('[data-external-listening-check]').count(), 3)
-  assert.equal(await page.locator('#approve-revision').isDisabled(), true)
-  const audio = page.locator('.external-listening-approval audio')
-  await audio.evaluate(async (element) => {
-    if (!Number.isFinite(element.duration)) await new Promise((resolve, reject) => {
-      element.addEventListener('loadedmetadata', resolve, { once: true })
-      element.addEventListener('error', reject, { once: true })
+  await page.getByRole('heading', { name: '试卷审核' }).waitFor()
+  assert.equal(await page.locator('#review-frame, [role="tab"], #approve-revision, [data-external-listening-check]').count(), 0,
+    'compact Owner review has no iframe, teaching tab, approval button, or listening checkboxes')
+  const paperLink = page.getByRole('link', { name: '合成验收卷（12 秒测试音，不是真题听力）' })
+  const screenHref = new URL(await paperLink.getAttribute('href'), origin)
+  assert.equal(screenHref.searchParams.get('view'), 'paper-browse')
+  assert.equal(screenHref.searchParams.get('paperId'), paperId)
+  assert.equal(screenHref.searchParams.get('reviewRevision'), revision.id)
+  assert.equal(await paperLink.getAttribute('target'), '_blank')
+  const screenPage = await context.newPage()
+  await screenPage.goto(screenHref.toString())
+  await screenPage.locator('[data-paper-paragraph-id]').first().waitFor()
+  assert.equal(await screenPage.getByText('没找到这份卷面').count(), 0)
+  const listRow = store.listPapers().find((paper) => paper.paperId === paperId)
+  assert.equal(listRow.reviewKind, 'candidate')
+  assert.equal(listRow.latestRevisionId, revision.id)
+  assert.equal(typeof listRow.bundleDigest, 'string')
+  assert.equal(listRow.rendererBuildId, 'external-review-e2e')
+  assert.equal(typeof listRow.unresolvedCount, 'number')
+  const sealed = store.projectionForRevision(revision.id)
+  assert.equal(sealed.projection.listeningReview.audio.state, 'included_in_candidate_review')
+  const audioFile = sealed.revision.manifest.files.find((file) =>
+    file.role === 'analyzed_package_audio' && file.mediaType === 'audio/mpeg')
+  assert(audioFile, 'sealed package keeps the playback MP3 as a revision file')
+  const audioResponse = await page.context().request.get(
+    `${origin}/api/import-review-preview/revisions/${revision.id}/files?path=${encodeURIComponent(audioFile.path)}`,
+  )
+  assert.equal(audioResponse.status(), 200)
+  assert.match(audioResponse.headers()['content-type'] || '', /audio\/mpeg/)
+  const audioPage = await context.newPage()
+  await audioPage.setContent('<audio id="probe" controls></audio>')
+  const playback = await audioPage.evaluate(async (bytes) => {
+    const audio = document.querySelector('#probe')
+    audio.src = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'audio/mpeg' }))
+    if (!Number.isFinite(audio.duration)) await new Promise((resolve, reject) => {
+      audio.addEventListener('loadedmetadata', resolve, { once: true })
+      audio.addEventListener('error', reject, { once: true })
     })
-    await element.play()
-  })
-  await page.waitForFunction(() => document.querySelector('.external-listening-approval audio').currentTime > 0.2)
-  const playback = await audio.evaluate((element) => ({ duration: element.duration, currentTime: element.currentTime, paused: element.paused, error: element.error }))
+    await audio.play()
+    await new Promise((resolve) => setTimeout(resolve, 400))
+    return { duration: audio.duration, currentTime: audio.currentTime, paused: audio.paused, error: audio.error }
+  }, [...new Uint8Array(await audioResponse.body())])
   assert(playback.duration > 11 && playback.duration < 13)
   assert.equal(playback.paused, false)
   assert.equal(playback.error, null)
   if (artifactDir) {
     fs.mkdirSync(artifactDir, { recursive: true })
-    await page.locator('.external-listening-approval').scrollIntoViewIfNeeded()
     await page.screenshot({ path: path.join(artifactDir, 'external-review-audio.png') })
   }
-  await audio.evaluate((element) => element.pause())
-  await page.getByRole('tab', { name: '教学解析' }).click()
-  const frame = page.frameLocator('#review-frame')
+  await audioPage.close()
+  const teachingDocument = await context.newPage()
+  await teachingDocument.goto(origin + teachingPath)
+  const frame = teachingDocument.locator('body')
   await frame.locator('.listening-material').first().waitFor()
   assert.equal(await frame.locator('.listening-material').count(), 10)
   const targets = [
@@ -197,7 +224,7 @@ try {
     const target = frame.locator(selector).first()
     await target.scrollIntoViewIfNeeded()
     assert((await target.innerText()).length > 40, `${name}: actual teaching text, not just a tab or heading`)
-    if (artifactDir) await page.screenshot({ path: path.join(artifactDir, `external-review-${name}.png`) })
+    if (artifactDir) await teachingDocument.screenshot({ path: path.join(artifactDir, `external-review-${name}.png`) })
   }
   assert.equal(await frame.locator('.source-relationships p').first().locator('.translation-marker').count(), 1,
     'overlapping evidence and sentence-structure must not print the same question marker inside a word')
@@ -215,7 +242,7 @@ try {
   assert.match(firstPage, /听力材料/, 'teaching starts on the first sheet, not after an empty cover remainder')
   if (artifactDir) fs.copyFileSync(pdfPath, path.join(artifactDir, 'external-review-companion.pdf'))
   assert.equal(store.projectionForRevision(revision.id).revision.state, 'awaiting_review')
-  console.log('PASS external package real sealed Review: six sidecars, 10 listening materials, 12s MP3 playback, three unchecked Owner confirmations, full teaching iframe, directory/ZIP no-overwrite regressions; no approval/publication')
+  console.log('PASS external package real sealed Review: six sidecars, 10 listening materials, 12s MP3 playback, compact Owner candidate link, teaching route, directory/ZIP no-overwrite regressions; no approval/publication')
 } finally {
   await browser?.close()
   if (server) await new Promise((resolve) => server.close(resolve))
