@@ -366,6 +366,32 @@ export function createSinglePaperPromotionService({
       }
   }
   return {
+    promoteOwner(paperId, revisionId, input, actor) {
+      const store = getStore()
+      const detail = store.paperDetail(paperId, { includeProjection: false })
+      const revision = detail.latest
+      if (input?.intent !== 'publish') {
+        throw promotionError('IMPORT_REVIEW_PROMOTION_INTENT_INVALID', '请明确确认发布这份卷。', 400)
+      }
+      if (!revision || revision.id !== revisionId || revision.reviewKind !== 'candidate'
+        || revision.bundleDigest !== input.bundleDigest
+        || revision.rendererBuildId !== input.rendererBuildId || detail.rendererStale) {
+        throw promotionError('IMPORT_REVIEW_PROMOTION_STALE', '待审版本已变化，请刷新并查看当前版本。')
+      }
+      // A second click is a status read, never a recovery authorization. Keep
+      // interrupted/failed attempts and their guards for explicit reconciliation.
+      if (detail.promotion?.revisionId === revisionId) {
+        return { status: detail.promotion.state, promotion: detail.promotion }
+      }
+      const approval = revision.approval || store.approveRevision(paperId, revisionId, {
+        bundleDigest: input.bundleDigest,
+        ...(revision.manifest.importProfile ? { approvalScope: 'layout_only' } : {}),
+      }, actor)
+      // Both calls are synchronous until the durable guard is acquired. The
+      // store rechecks latest revision, renderer, approval and issues in its
+      // transaction, including races with another process.
+      return execute(paperId, store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor))
+    },
     promote(paperId, input, actor) {
       const store = getStore()
       return execute(paperId, store.beginPromotion(paperId, input, actor))

@@ -4,26 +4,25 @@ import { createServer } from 'node:http'
 import path from 'node:path'
 import { chromium } from '../app/node_modules/playwright/index.mjs'
 
+// Owner no longer embeds pagination UI in OPS. PDF selection lives on the real
+// Screen; this fixture guards the compact list, exact links and action states.
 const root = path.resolve(import.meta.dirname, '..')
-const artifactDir = path.join(root, '.amp/in/artifacts/import-pagination-qa')
-const paperId = 'paper-pagination-ui-fixture'
-const revisionId = 'revision-pagination-ui-fixture'
-const detail = {
-  paperId, paperName: '分页审核交互测试卷', latestRevisionId: revisionId,
-  latest: { id: revisionId, revisionNumber: 2, state: 'awaiting_review', reviewKind: 'candidate', bundleDigest: `sha256:${'a'.repeat(64)}` },
-  revisions: [], issues: [], issueMessages: [], files: [], visibleStructure: [],
-  sourceVisuals: [], mediaDerivations: [], mediaConfirmations: [], unresolvedCount: 0,
-  importProfile: 'public-paper-v1',
-  ocrCorrectionReport: { entries: [
-    { category: 'ocr_misrecognition', sourceLocator: { documentId: '试题原卷', page: 2 },
-      before: 'resrvation', after: 'reservation', reason: '测试示例：识别遗漏字母 e。' },
-    { category: 'source_layout_error', sourceLocator: { documentId: '试题原卷', page: 3 },
-      before: 'Tomorrowmorning.', after: 'Tomorrow morning.', reason: '测试示例：原题两词之间缺少空格。' },
-  ] },
+const artifactDir = path.join(root, '.amp/in/artifacts/owner-review')
+const paperId = 'paper-owner-review-fixture'
+const revisionId = 'revision-owner-review-fixture'
+const initial = {
+  paperId, paperName: '2026 年高三英语模拟卷（交互演示）', latestRevisionId: revisionId,
+  revisionNumber: 2, state: 'awaiting_review', reviewKind: 'candidate',
+  bundleDigest: `sha256:${'a'.repeat(64)}`, rendererBuildId: 'fixture-renderer',
+  rendererStale: false, unresolvedCount: 0, promotionState: null,
 }
-let hasListening = true
-let metadataFailure = false
+let paper = { ...initial }
+let issues = []
+let publishCount = 0
 let capturedIssue
+let failList = false
+let dropPublishResponse = false
+let releasePublish
 const send = (response, body, type = 'application/json', status = 200) => {
   response.writeHead(status, { 'content-type': type })
   response.end(type === 'application/json' ? JSON.stringify(body) : body)
@@ -32,144 +31,169 @@ const server = createServer(async (request, response) => {
   const url = new URL(request.url, 'http://localhost')
   const file = new Map([
     ['/ops/', ['index.html', 'text/html']], ['/ops/app.js', ['app.js', 'text/javascript']],
+    ['/ops/owner-review.js', ['owner-review.js', 'text/javascript']],
     ['/ops/clipboard.js', ['clipboard.js', 'text/javascript']], ['/ops/styles.css', ['styles.css', 'text/css']],
+    ['/ops/source-intakes.css', ['source-intakes.css', 'text/css']],
   ]).get(url.pathname)
   if (file) return send(response, readFileSync(path.join(root, 'import-ops/public', file[0])), file[1])
-  if (url.pathname === '/api/auth/me') return send(response, { authRequired: true, user: { id: 'qa', username: 'QA', role: 'owner' } })
-  if (url.pathname === '/api/import-reviews') return send(response, { papers: [{ ...detail, revisionNumber: 2, state: 'awaiting_review' }] })
-  if (url.pathname === `/api/import-reviews/papers/${paperId}`) return send(response, detail)
-  if (url.pathname.endsWith('/pagination')) {
-    if (metadataFailure) return send(response, { error: '测试：版式暂不可用' }, 'application/json', 503)
-    return send(response, { editions: [
-      ...(hasListening ? [{ edition: 'largeComplete', mode: 'bounded_auto' }] : []),
-      { edition: 'largeNoListening', mode: 'bounded_auto' },
-      { edition: 'economy8', mode: 'explicit' },
-      { edition: 'answerOnly', mode: 'source_reference' },
-    ] })
-  }
-  if (url.pathname.endsWith('/issues') && request.method === 'POST') {
+  if (url.pathname === '/api/auth/me') return send(response, { authRequired: true, user: { username: '演示账号', role: 'owner' } })
+  if (url.pathname === '/api/import-reviews') return failList
+    ? send(response, { error: '演示网络中断' }, 'application/json', 503)
+    : send(response, { papers: [paper] })
+  if (url.pathname.endsWith('/review-state')) return send(response, { paperId, latestRevisionId: paper.latestRevisionId, issues, discussionThreadId: null })
+  if (request.method === 'POST' || request.method === 'PATCH') {
     let body = ''
     for await (const chunk of request) body += chunk
-    capturedIssue = JSON.parse(body)
-    detail.issues = [{ ...capturedIssue, id: 'issue-qa', state: 'open', createdAt: '2026-09-10T00:00:00Z' }]
-    return send(response, detail)
+    const input = JSON.parse(body)
+    assert.equal(request.headers['x-eqb-csrf'], 'owner-review')
+    if (url.pathname.endsWith('/publish')) {
+      assert.equal(input.intent, 'publish')
+      assert.equal(input.bundleDigest, initial.bundleDigest)
+      assert.equal(input.rendererBuildId, initial.rendererBuildId)
+      assert(url.pathname.includes(`/revisions/${revisionId}/`))
+      publishCount += 1
+      paper.promotionState = 'publishing'
+      if (dropPublishResponse) { response.destroy(); return }
+      if (!process.argv.includes('--serve')) await new Promise(resolve => { releasePublish = resolve })
+      paper.promotionState = 'published'
+      return send(response, { status: 'published' })
+    }
+    if (url.pathname.endsWith('/issues')) {
+      capturedIssue = input
+      issues = [{ ...input, id: 'issue-demo', state: 'open' }]
+      paper.state = 'changes_requested'
+      paper.unresolvedCount = 1
+      return send(response, { issues })
+    }
+    if (url.pathname.endsWith('/issues/issue-demo')) {
+      assert.equal(input.revisionId, paper.latestRevisionId)
+      issues[0].state = input.action === 'close' ? 'closed' : 'dismissed'
+      paper.unresolvedCount = 0
+      return send(response, { issues })
+    }
   }
-  if (url.pathname === '/' || url.pathname.endsWith('/pdf')) {
-    return send(response, '<!doctype html><html lang="zh"><body style="font:16px sans-serif;padding:24px">接口夹具：仅验证版式选择和反馈绑定。真实 PDF 由独立渲染测试验证。</body></html>', 'text/html')
-  }
+  if (url.pathname === '/') return send(response,
+    '<!doctype html><meta charset="utf-8"><h1>Screen 链接目标（接口夹具）</h1><p>只验证精确路由，不冒充真实卷面。</p>', 'text/html')
   send(response, { error: 'Fixture route missing' }, 'application/json', 404)
 })
-await new Promise((resolve) => server.listen(process.argv.includes('--serve') ? 5199 : 0, '127.0.0.1', resolve))
+await new Promise(resolve => server.listen(process.argv.includes('--serve') ? 5199 : 0, '127.0.0.1', resolve))
 const origin = `http://127.0.0.1:${server.address().port}`
 if (process.argv.includes('--serve')) {
-  console.log(`Pagination UI fixture ready at ${origin}/ops/?view=review`)
+  console.log(`Owner review UI fixture (no real publication) at ${origin}/ops/`)
 } else {
   let browser
   try {
     browser = await chromium.launch({ headless: true, channel: 'chromium' })
-    const page = await browser.newPage({ viewport: { width: 1920, height: 1000 }, deviceScaleFactor: 2 })
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
     const errors = []
-    page.on('pageerror', (error) => errors.push(error.message))
-    await page.goto(`${origin}/ops/?view=review`)
-    await page.locator('#review-frame:not(.is-loading)').waitFor()
-    assert.deepEqual(await page.locator('[aria-label="审核表面"] [role="tab"]').allTextContents(), ['Screen', 'PDF'])
-    assert.equal(await page.locator('[data-external-listening-check], .paragraph-summaries-section').count(), 0)
-    const report = page.locator('details').filter({ has: page.locator(':scope > summary', { hasText: 'OCR 与原题校对报告' }) }).first()
-    await report.locator('summary').first().click()
-    assert.equal(await report.locator('.correction-list > li').count(), 2)
-    assert.match(await report.textContent(), /resrvation.*reservation/s)
-    mkdirSync(artifactDir, { recursive: true })
-    await report.scrollIntoViewIfNeeded()
-    await page.screenshot({ path: path.join(artifactDir, 'ops-correction-report.png') })
-    await page.evaluate(() => {
-      window.originalReviewFrame = document.querySelector('#review-frame')
-      window.originalReviewDocument = window.originalReviewFrame.contentDocument
+    page.on('pageerror', error => errors.push(error.message))
+    await page.addInitScript(() => {
+      window.ownerPublishFetches = 0
+      const fetch = window.fetch.bind(window)
+      window.fetch = (input, init) => {
+        if (String(input).endsWith('/publish') && init?.method === 'POST') window.ownerPublishFetches += 1
+        return fetch(input, init)
+      }
     })
-    await page.getByRole('button', { name: '沉浸查看', exact: true }).click()
-    assert.deepEqual(await page.locator('.surface-stage').evaluate((stage) => {
-      const rect = stage.getBoundingClientRect()
-      return [rect.x, rect.y, rect.width, rect.height]
-    }), [0, 0, 1920, 1000])
-    assert.equal(await page.locator('.right-rail').evaluate((rail) => rail.inert), true)
-    assert.equal(await page.locator('#toggle-immersive').getAttribute('aria-pressed'), 'true')
-    await page.evaluate(() => {
-      document.querySelector('#review-frame').contentDocument.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
-      )
-    })
-    assert.equal(await page.locator('#toggle-immersive').getAttribute('aria-pressed'), 'false')
-    assert.equal(await page.locator('.right-rail').evaluate((rail) => rail.inert), false)
-    assert.equal(await page.evaluate(() => document.activeElement.id), 'toggle-immersive')
-    assert.equal(await page.evaluate(() =>
-      window.originalReviewFrame === document.querySelector('#review-frame')
-      && window.originalReviewDocument === document.querySelector('#review-frame').contentDocument), true,
-    'enter/escape must preserve the iframe and its loaded document')
-    await page.setViewportSize({ width: 390, height: 844 })
-    await page.getByRole('button', { name: '沉浸查看', exact: true }).click()
-    assert.equal(await page.locator('.surface-stage').evaluate((stage) =>
-      stage.getBoundingClientRect().height), 844, 'mobile minimum stage height must not exceed the immersive viewport')
-    assert.equal(await page.locator('#toggle-immersive').evaluate((button) => {
-      const rect = button.getBoundingClientRect()
-      return rect.left >= 0 && rect.right <= innerWidth && rect.top >= 0 && rect.bottom <= innerHeight
-    }), true, 'immersive exit remains reachable on narrow screens')
-    await page.getByRole('button', { name: '退出沉浸 · Esc', exact: true }).click()
-    await page.setViewportSize({ width: 1920, height: 1000 })
-    await page.getByRole('tab', { name: 'PDF', exact: true }).click()
-    assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeComplete')
-    assert.deepEqual(await page.locator('#pdf-edition option').allTextContents(), [
-      '大字完整版 · 含听力 · 最多 12 页', '大字无听力版 · 最多 10 页',
-      '省纸版 · 无听力 8 页 · 小四优先', '纯答案版 · 自然分页',
+    await page.goto(`${origin}/ops/`)
+    const row = page.locator(`[data-review-paper="${paperId}"]`)
+    const publish = row.getByRole('button', { name: '发布到题库', exact: true })
+    await row.waitFor()
+    assert.equal(await page.locator('iframe, [role="tab"], #approval-check').count(), 0)
+    const [screen] = await Promise.all([
+      page.waitForEvent('popup'), row.getByRole('link', { name: initial.paperName }).click(),
     ])
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=largeComplete$/)
-    await page.getByLabel('交付版式').selectOption('economy8')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=economy8$/)
-    assert.match(await page.locator('#issue-form .field-help').textContent(), /R2.*省纸版/)
-    await page.getByText('精确定位（可选）', { exact: true }).click()
-    await page.getByLabel('页码', { exact: true }).fill('2')
-    await page.getByLabel('要 Agent 改什么').fill('B 篇请在第 2 页完整呈现，避免跨面。')
-    await page.getByRole('button', { name: '记录这个问题', exact: true }).click()
-    await page.locator('.issue-message').waitFor()
-    assert.equal(capturedIssue.edition, 'economy8')
-    assert.equal(capturedIssue.revisionId, revisionId)
-    assert.equal(capturedIssue.pageNumber, '2')
-    assert.match(await page.locator('.issue-meta').textContent(), /省纸版/)
+    await screen.waitForLoadState()
+    const target = new URL(screen.url())
+    assert.equal(target.searchParams.get('paperId'), paperId)
+    assert.equal(target.searchParams.get('reviewRevision'), revisionId)
+    await screen.close()
     mkdirSync(artifactDir, { recursive: true })
-    await page.getByLabel('交付版式').scrollIntoViewIfNeeded()
-    await page.screenshot({ path: path.join(artifactDir, 'review-desktop.png') })
+    await page.screenshot({ path: path.join(artifactDir, 'default.png') })
+    assert.equal(await page.getByRole('button', { name: '核对候选图' }).count(), 0,
+      'ordinary papers keep only publish and return actions')
+    await row.getByRole('button', { name: '退回修改' }).click()
+    await page.getByLabel('需要修改什么？').fill('仅针对旧版的草稿')
+    await page.getByRole('button', { name: '刷新状态' }).click()
+    await row.getByRole('button', { name: '退回修改' }).click()
+    assert.equal(await page.getByLabel('需要修改什么？').inputValue(), '仅针对旧版的草稿')
+    paper = { ...initial, latestRevisionId: 'revision-new', revisionNumber: 3,
+      bundleDigest: `sha256:${'b'.repeat(64)}` }
+    await page.getByRole('button', { name: '刷新状态' }).click()
+    await page.getByRole('status').filter({ hasText: '旧版反馈草稿未带入新版' }).waitFor()
+    await row.getByRole('button', { name: '退回修改' }).click()
+    assert.equal(await page.getByLabel('需要修改什么？').inputValue(), '')
+    await page.getByLabel('需要修改什么？').fill('查看新版后的反馈')
+    await page.getByRole('button', { name: '提交退回' }).click()
+    await row.getByText('待修改', { exact: true }).waitFor()
+    assert.equal(capturedIssue.revisionId, 'revision-new')
+    assert.equal(capturedIssue.bundleDigest, `sha256:${'b'.repeat(64)}`)
+    assert.equal(capturedIssue.message, '查看新版后的反馈')
+    paper = { ...initial }
+    issues = []
+    await page.reload()
+    await row.getByRole('button', { name: '退回修改' }).click()
+    await page.getByLabel('需要修改什么？').fill('第 3 题的选项被遮挡，请调整。')
+    await page.screenshot({ path: path.join(artifactDir, 'return.png') })
+    await page.getByRole('button', { name: '提交退回' }).click()
+    await row.getByText('待修改', { exact: true }).waitFor()
+    assert.equal(capturedIssue.surface, 'paper')
+    assert.equal(capturedIssue.revisionId, revisionId)
+    assert.equal(capturedIssue.bundleDigest, initial.bundleDigest)
+    assert.equal(await publish.isDisabled(), true)
+    issues[0].state = 'fixed_pending_review'
+    await row.getByRole('button', { name: '查看反馈' }).click()
+    await page.getByRole('button', { name: '确认已解决' }).click()
+    await page.getByRole('status').filter({ hasText: '反馈已更新' }).waitFor()
+    assert.equal(await publish.isEnabled(), true)
+    await publish.click()
+    await page.getByText('正在发布，请勿重复提交…', { exact: true }).waitFor()
+    assert.equal(await publish.isDisabled(), true)
+    await page.screenshot({ path: path.join(artifactDir, 'publishing.png') })
+    releasePublish()
+    await row.getByText('已发布', { exact: true }).waitFor()
+    assert.equal(publishCount, 1)
+    assert.equal(await publish.count(), 0)
+    assert.equal(await row.getByRole('link', { name: '查看已发布' }).count(), 1)
+    await page.screenshot({ path: path.join(artifactDir, 'published.png') })
+    paper = { ...initial, rendererStale: true }
+    await page.reload()
+    await row.getByText('预览版本已过期，请在 Amp 重新送审。').waitFor()
+    assert.equal(await publish.isDisabled(), true)
+    paper = { ...initial }
+    dropPublishResponse = true
+    await page.reload()
+    await publish.click()
+    await page.getByRole('alert').waitFor()
+    assert.equal(await publish.isDisabled(), true)
+    await page.getByRole('button', { name: '刷新状态' }).click()
+    await row.getByText('发布中', { exact: true }).waitFor()
+    assert.equal(await publish.isDisabled(), true)
+    // Chromium can retry a closed socket below fetch. Count application calls;
+    // the real publisher's duplicate-request guard is covered by its route tests.
+    assert.equal(await page.evaluate(() => window.ownerPublishFetches), 1,
+      'lost response and status refresh never cause an application-level publish retry')
+    paper.promotionState = 'failed'
+    await page.getByRole('button', { name: '刷新状态' }).click()
+    await row.getByText('发布失败', { exact: true }).waitFor()
+    assert.equal(await publish.isDisabled(), true)
+    await page.screenshot({ path: path.join(artifactDir, 'failed.png') })
+    failList = true
+    await page.getByRole('button', { name: '刷新状态' }).click()
+    await page.getByRole('alert').filter({ hasText: '状态读取失败' }).waitFor()
+    assert.equal(await publish.isDisabled(), true)
+    failList = false
+    paper = { ...initial }
+    await page.reload()
+    await row.waitFor()
     await page.setViewportSize({ width: 390, height: 844 })
-    await page.getByLabel('交付版式').scrollIntoViewIfNeeded()
-    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'narrow layout must not horizontally overflow')
-    assert.equal(await page.getByRole('tab', { name: 'PDF', exact: true }).evaluate((button) =>
-      button.getBoundingClientRect().right <= innerWidth), true, 'PDF tab must not be clipped after rerender')
-    await page.screenshot({ path: path.join(artifactDir, 'review-narrow.png') })
-    hasListening = false
-    await page.reload()
-    await page.getByRole('tab', { name: 'PDF', exact: true }).click()
-    assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeNoListening')
-    await page.getByLabel('交付版式').selectOption('economy8')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=economy8$/)
-    assert.equal(await page.locator('#pdf-edition option[value="largeComplete"]').count(), 0)
-    await page.screenshot({ path: path.join(artifactDir, 'review-products-narrow.png') })
-    hasListening = true
-    await page.reload()
-    await page.getByRole('tab', { name: 'PDF', exact: true }).click()
-    assert.equal(await page.getByLabel('交付版式').inputValue(), 'largeComplete')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=largeComplete$/)
-    await page.getByLabel('交付版式').selectOption('answerOnly')
-    assert.match(await page.locator('#review-frame').getAttribute('src'), /pdf\?edition=answerOnly$/)
-    assert.equal(await page.locator('#pdf-edition option[value="teacher"], #pdf-edition option[value="student"]').count(), 0)
-    metadataFailure = true
-    await page.reload()
-    await page.getByRole('tab', { name: 'PDF', exact: true }).click()
-    await page.getByRole('alert').filter({ hasText: 'PDF 产品未加载：测试：版式暂不可用' }).waitFor()
-    assert.equal(await page.getByLabel('交付版式').isDisabled(), true)
-    assert.equal(await page.locator('#review-frame').count(), 0, 'failed metadata cannot expose a stale product iframe')
-    await page.setViewportSize({ width: 1920, height: 1000 })
-    await page.screenshot({ path: path.join(artifactDir, 'review-unavailable.png') })
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
+    await page.screenshot({ path: path.join(artifactDir, 'mobile.png') })
     assert.deepEqual(errors, [])
-    console.log('PASS four exact product URLs, listening availability, revision+edition+page feedback, answerOnly, metadata failure and narrow layout')
+    console.log('PASS compact Owner list: exact Screen link, return/fix, publish, stale, failed, response-loss and mobile states')
   } finally {
+    releasePublish?.()
     await browser?.close()
-    await new Promise((resolve) => server.close(resolve))
+    await new Promise(resolve => server.close(resolve))
   }
 }

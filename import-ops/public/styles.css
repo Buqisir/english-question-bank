@@ -1568,6 +1568,230 @@ body.review-immersive {
   line-height: 1.65;
 }
 
+.owner-review {
+  font-size: 14px;
+}
+
+.owner-review-header,
+.owner-review main {
+  width: min(100%, 1100px);
+  margin-inline: auto;
+  padding: 24px 32px;
+}
+
+.owner-review-header,
+.owner-review-heading,
+.owner-review-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.owner-review main {
+  padding-top: 32px;
+}
+
+.owner-review h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.owner-review a {
+  color: var(--ink);
+  text-underline-offset: 4px;
+}
+
+.owner-review button {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.owner-review button:hover:not(:disabled),
+.owner-review-item:hover {
+  background: var(--surface-2);
+}
+
+.owner-review button:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* The compact Owner list uses the product's ink focus instead of the legacy
+   workbench's teal halo. Other OPS surfaces retain their existing styles. */
+.owner-review :is(a, button, textarea, input):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.owner-review-intro,
+.owner-review-hint,
+.owner-review-name span,
+.owner-review-header span,
+.owner-review-feedback .owner-review-actions span {
+  color: var(--muted);
+}
+
+.owner-review-intro {
+  margin: 8px 0 32px;
+}
+
+.owner-review-list,
+.owner-review-feedback ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.owner-review-item {
+  padding: 24px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.owner-review-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.owner-review-name {
+  display: grid;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+
+.owner-review-name a {
+  font-weight: 500;
+}
+
+.owner-review-name span,
+.owner-review-hint {
+  font-size: 13px;
+}
+
+.owner-review-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.owner-review-hint {
+  margin: 16px 0 0;
+}
+
+.owner-review-error {
+  color: var(--danger-ink);
+}
+
+.owner-review-empty {
+  padding-block: 48px;
+}
+
+.owner-review-feedback {
+  max-width: 75ch;
+  margin-top: 24px;
+}
+
+.owner-review-feedback li {
+  margin-bottom: 24px;
+}
+
+.owner-review-feedback p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.owner-review-feedback textarea {
+  display: block;
+  width: 100%;
+  margin: 8px 0 16px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  resize: vertical;
+}
+
+.owner-review-feedback textarea::placeholder {
+  color: var(--muted);
+}
+
+.owner-review .owner-review-media-link {
+  justify-self: start;
+  padding-inline: 0;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.owner-review-media {
+  max-width: 720px;
+  margin-top: 24px;
+}
+
+.owner-review-media section {
+  margin-bottom: 24px;
+}
+
+.owner-review-media h2 {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.owner-review-media .media-overlay {
+  margin-top: 16px;
+}
+
+.owner-media-opacity {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  min-height: 44px;
+}
+
+.owner-review-media input {
+  accent-color: var(--ink);
+}
+
+.owner-review-media .media-checklist label {
+  min-height: 44px;
+  align-items: center;
+  font-size: 14px;
+}
+
+.owner-review-media .media-checklist {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 640px) {
+  .owner-review-header,
+  .owner-review main {
+    padding-inline: 16px;
+  }
+
+  .owner-review-item {
+    padding-inline: 0;
+  }
+
+  .owner-review-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+  }
+
+  .owner-review-row > .owner-review-actions {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

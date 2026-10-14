@@ -1151,6 +1151,7 @@ async function startPromotionServer(context, promotionService) {
       '/ops/': ['index.html', 'text/html; charset=utf-8'],
       '/ops/index.html': ['index.html', 'text/html; charset=utf-8'],
       '/ops/app.js': ['app.js', 'text/javascript; charset=utf-8'],
+      '/ops/owner-review.js': ['owner-review.js', 'text/javascript; charset=utf-8'],
       '/ops/clipboard.js': ['clipboard.js', 'text/javascript; charset=utf-8'],
       '/ops/styles.css': ['styles.css', 'text/css; charset=utf-8'],
       '/ops/source-intakes.css': ['source-intakes.css', 'text/css; charset=utf-8'],
@@ -1182,7 +1183,8 @@ async function startPromotionServer(context, promotionService) {
       url,
       context: {
         session: request.headers['x-synthetic-owner']
-          ? { role: 'owner', accountKind: 'human', username: 'synthetic-owner' }
+          ? { role: request.headers['x-synthetic-role'] || 'owner',
+              accountKind: request.headers['x-synthetic-kind'] || 'human', username: 'synthetic-owner' }
           : null,
         readJsonBody: readJsonRouteBody,
         sendJson(target, status, body) {
@@ -3120,33 +3122,13 @@ try {
   const fixedPdfPath = path.join(online.tempRoot, 'review-fixed8.pdf')
   writeFileSync(fixedPdfPath, Buffer.from(await fixedPdfResponse.arrayBuffer()))
   assert.match(execFileSync('pdfinfo', [fixedPdfPath], { encoding: 'utf8' }), /Pages:\s+8\b/)
-  await reviewPage.locator('summary').filter({ hasText: /^版本记录$/u }).click()
-  const promotionRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
-  await promotionRail.getByText('已认可，未上线', { exact: true }).waitFor()
-  await promotionRail.getByText(`上线 ${paperId}`, { exact: true }).waitFor()
-  assert.equal(
-    await promotionRail.getByRole('button', { name: /上线/u }).count(),
-    0,
-    'approved Review audit rail exposes no publish button',
-  )
-  const copyCommand = promotionRail.getByRole('button', { name: '复制口令' })
-  assert.equal(await copyCommand.count(), 1)
-  await reviewPage.locator('summary').filter({ hasText: /^版本标识$/u }).click()
-  // The manual refresh uses the same reload/render path as the 30-second poll.
-  // It must not fold the audit controls while the Owner is using them.
-  await Promise.all([
-    reviewPage.waitForResponse(response => response.url().endsWith('/pagination') && response.ok()),
-    reviewPage.getByRole('button', { name: '刷新', exact: true }).click(),
-  ])
-  await reviewPage.waitForLoadState('networkidle')
-  await copyCommand.click()
-  assert.equal(await reviewPage.evaluate(() => window.__copiedReviewText), `上线 ${paperId}`)
-  const copyPaperId = reviewPage.getByRole('button', { name: '复制Paper ID' })
-  assert.equal(await copyPaperId.count(), 1)
-  await copyPaperId.click()
-  assert.equal(await reviewPage.evaluate(() => window.__copiedReviewText), paperId)
+  const reviewRow = reviewPage.locator(`[data-review-paper="${paperId}"]`)
+  await reviewRow.getByText('待发布', { exact: true }).waitFor()
+  assert.equal(await reviewPage.locator('iframe, #approval-check').count(), 0)
+  assert.match(await reviewRow.locator('.owner-review-name a').getAttribute('href'),
+    new RegExp(`reviewRevision=${online.revision.id}`))
   const pathname = `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/promotions`
-  const body = JSON.stringify(promotionRequest(online.approval))
+  let body = JSON.stringify(promotionRequest(online.approval))
   for (const headers of [
     { authorization: 'Bearer synthetic-agent-token' },
     { 'x-synthetic-owner': '1' },
@@ -3156,7 +3138,7 @@ try {
       headers: { ...headers, 'content-type': 'application/json' },
       body,
     })
-    assert.equal(denied.status, 401, 'Agent and Owner web identities cannot promote')
+    assert.equal(denied.status, 401, 'Agent and Owner cannot use the privileged ship-token route')
     assert.equal((await denied.json()).error, 'shipping_auth_required')
   }
   const stale = await fetch(`${started.origin}${pathname}`, {
@@ -3174,16 +3156,57 @@ try {
   assert.equal((await stale.json()).code, 'IMPORT_REVIEW_PROMOTION_STALE')
   assert.equal(online.reviewStore.latestPromotion(paperId), null)
 
-  const promoted = await fetch(`${started.origin}${pathname}`, {
-    method: 'POST',
-    headers: {
-      authorization: 'Bearer synthetic-ship-token',
-      'content-type': 'application/json',
-    },
-    body,
+  const ownerPath = `/api/import-reviews/papers/${paperId}/revisions/${online.revision.id}/publish`
+  const ownerInput = { intent: 'publish', bundleDigest: online.revision.bundleDigest,
+    rendererBuildId: online.revision.rendererBuildId }
+  const ownerHeaders = { 'x-synthetic-owner': '1', 'content-type': 'application/json',
+    origin: started.origin, 'x-eqb-csrf': 'owner-review' }
+  const ownerPublish = (input = ownerInput, headers = ownerHeaders, url = ownerPath) => fetch(`${started.origin}${url}`, {
+    method: 'POST', headers, body: JSON.stringify(input),
   })
-  assert.equal(promoted.status, 201)
+  for (const headers of [
+    { 'content-type': 'application/json' },
+    { authorization: 'Bearer synthetic-agent-token', 'content-type': 'application/json' },
+    { ...ownerHeaders, 'x-synthetic-role': 'member' },
+    { ...ownerHeaders, 'x-synthetic-kind': 'import_agent' },
+    { ...ownerHeaders, origin: 'https://hostile.test' },
+    { ...ownerHeaders, origin: '' },
+    { ...ownerHeaders, 'x-eqb-csrf': '' },
+  ]) assert.equal((await ownerPublish(ownerInput, headers)).status, 403)
+  for (const input of [
+    { ...ownerInput, bundleDigest: `sha256:${'0'.repeat(64)}` },
+    { ...ownerInput, rendererBuildId: 'old-renderer' },
+  ]) assert.equal((await ownerPublish(input)).status, 409)
+  assert.equal((await ownerPublish({ ...ownerInput, intent: undefined })).status, 400)
+  assert.equal((await ownerPublish(ownerInput, ownerHeaders, ownerPath.replace(online.revision.id, 'old-revision'))).status, 409)
+  assert.equal(afterPublishCalls, 0)
+
+  // Returning a whole paper needs no invented question/page. A browser cannot
+  // return an unseen revision, and unresolved feedback blocks auto-approval.
+  const returnUrl = `${started.origin}/api/import-reviews/papers/${paperId}/issues`
+  const feedback = { revisionId: online.revision.id, bundleDigest: online.revision.bundleDigest,
+    surface: 'paper', message: 'Synthetic whole-paper return for revision review.' }
+  assert.equal((await fetch(returnUrl, { method: 'POST', headers: ownerHeaders,
+    body: JSON.stringify({ ...feedback, bundleDigest: 'stale' }) })).status, 409)
+  const returned = await fetch(returnUrl, { method: 'POST', headers: ownerHeaders, body: JSON.stringify(feedback) })
+  assert.equal(returned.status, 201)
+  const returnedIssue = (await returned.json()).issues[0]
+  assert.equal(online.reviewStore.getRevision(online.revision.id).approval, null)
+  assert.equal((await ownerPublish()).status, 409)
+  online.reviewStore.updateIssue(paperId, returnedIssue.id, { action: 'dismiss' })
+  await reviewPage.reload()
+  const [promoted] = await Promise.all([
+    reviewPage.waitForResponse(response => new URL(response.url()).pathname === ownerPath),
+    reviewRow.getByRole('button', { name: '发布到题库', exact: true }).click(),
+  ])
+  assert.equal(promoted.status(), 200)
   const promotedBody = await promoted.json()
+  online.approval = online.reviewStore.getRevision(online.revision.id).approval
+  body = JSON.stringify(promotionRequest(online.approval))
+  assert.equal(online.approval.approvedBy, 'synthetic-owner')
+  assert.equal(promotedBody.promotion.requestedBy, 'synthetic-owner')
+  const duplicateOwner = await ownerPublish()
+  assert.equal((await duplicateOwner.json()).promotion.promotionId, promotedBody.promotion.promotionId)
   assert.equal(promotedBody.status, 'published')
   assert.equal(promotedBody.promotion.state, 'published')
   assert.equal(promotedBody.promotion.versionName, 'v1')
@@ -3204,15 +3227,9 @@ try {
     assert.match(wiring, /paperSurfaceAnalysisAvailability\.invalidate\(\)/, 'publish clears the analysis-availability cache')
   }
   await reviewPage.reload()
-  await reviewPage.locator('summary').filter({ hasText: /^版本记录$/u }).click()
-  const publishedRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
-  await publishedRail.getByText('已上线', { exact: true }).waitFor()
-  assert.match(await publishedRail.textContent(), /R1 · v1 · 尝试 1/u)
-  assert.equal(
-    await publishedRail.getByRole('button', { name: /上线/u }).count(),
-    0,
-    'published Review audit rail remains read-only',
-  )
+  await reviewRow.getByText('已发布', { exact: true }).waitFor()
+  assert.equal(await reviewRow.getByRole('button', { name: '发布到题库' }).count(), 0)
+  assert.equal(await reviewRow.getByRole('link', { name: '查看已发布' }).count(), 1)
 
   const afterDb = online.openDatabase({ readOnly: true })
   const afterGroupIds = afterDb.prepare('SELECT id FROM question_groups ORDER BY id')
@@ -3357,7 +3374,7 @@ try {
   const concurrentIssue = online.reviewStore.createIssue(paperId, {
     revisionId: nextRevision.id, surface: 'screen', groupId: repairIssue.groupId,
     message: 'A second problem was noticed while rechecking the repair.',
-  }, 'synthetic-owner').issues.find(issue => issue.id !== repairIssue.id)
+  }, 'synthetic-owner').issues.find(issue => issue.id !== repairIssue.id && issue.state === 'open')
   assert.throws(() => online.reviewStore.approveRevision(paperId, nextRevision.id,
     approvalInput, 'synthetic-owner'),
   { code: 'IMPORT_REVIEW_ISSUES_UNRESOLVED' }, 'another open issue still blocks approval')
@@ -3377,27 +3394,11 @@ try {
   assert.equal(online.reviewStore.paperDetail(paperId).issues.find(issue =>
     issue.id === repairIssue.id).state, 'closed', 'existing issue closure remains separate from approval')
   await reviewPage.reload()
-  await reviewPage.locator('summary').filter({ hasText: /^版本记录$/u }).click()
-  const nextApprovalRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
-  await nextApprovalRail.getByText('已认可，未上线', { exact: true }).waitFor()
-  await nextApprovalRail.getByText(`上线 ${paperId}`, { exact: true }).waitFor()
-  assert.match(await nextApprovalRail.textContent(), /上一份上线回执：已上线 · v1/u)
-  const paperListButton = reviewPage.locator(
-    `.paper-list button[data-paper-id="${paperId}"]`,
-  )
-  assert.equal(
-    await paperListButton.locator('.status--published').count(),
-    0,
-    'paper list does not label a newer unshipped approval as published',
-  )
-  assert.equal(
-    await nextApprovalRail.getByRole('button', { name: /上线/u }).count(),
-    0,
-    'a newer approved revision stays visibly unshipped and exposes no publish button',
-  )
-  const opsSource = readFileSync(path.join(root, 'import-ops/public/app.js'), 'utf8')
-  assert.match(opsSource, /上线审计/)
-  assert(!opsSource.includes('/promotions'), 'Review UI has no promotion mutation call')
+  await reviewRow.getByText('待发布', { exact: true }).waitFor()
+  assert.equal(await reviewRow.getByText('已发布', { exact: true }).count(), 0,
+    'a newer unshipped revision is not labelled published by the old receipt')
+  assert.equal(await reviewRow.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
+  assert.equal((await ownerPublish()).status, 409, 'old browser version cannot publish a newer revision')
 
   const discussionThreadId = `T-${randomUUID()}`
   const replacementThreadId = `T-${randomUUID()}`
@@ -3564,6 +3565,12 @@ try {
   const publishing = preCommitPromotion.reviewStore.latestPromotion(paperId)
   assert.equal(publishing.state, 'publishing')
   assert.equal(publishing.versionName, 'v1')
+  const duplicate = service.promoteOwner(paperId, preCommitPromotion.revision.id, {
+    intent: 'publish', bundleDigest: preCommitPromotion.revision.bundleDigest,
+    rendererBuildId: preCommitPromotion.revision.rendererBuildId,
+  }, 'synthetic-owner')
+  assert.equal(duplicate.status, 'publishing', 'Owner click cannot replay an interrupted publisher')
+  assert.deepEqual(duplicate.promotion, publishing, 'interruption evidence and guard remain unchanged')
   assert.throws(
     () => preCommitPromotion.reviewStore.createRevision(
       reviewManifestFor(preCommitPromotion.reviewRoot, preCommitPromotion.projection),
@@ -3871,7 +3878,7 @@ try {
 
 const knownFailure = makeOnlinePromotionContext('known-failure')
 try {
-  const failed = createSinglePaperPromotionService({
+  const failureService = createSinglePaperPromotionService({
     getStore: () => knownFailure.reviewStore,
     openDatabase: knownFailure.openDatabase,
     paperAssetsDir: knownFailure.paperAssetsDir,
@@ -3884,13 +3891,20 @@ try {
         },
       }
     },
-  }).promote(
+  })
+  const failed = failureService.promote(
     paperId,
     promotionRequest(knownFailure.approval),
     'ship-authorizer-token',
   )
   assert.equal(failed.status, 'failed')
   assert.equal(failed.promotion.state, 'failed')
+  const duplicate = failureService.promoteOwner(paperId, knownFailure.revision.id, {
+    intent: 'publish', bundleDigest: knownFailure.revision.bundleDigest,
+    rendererBuildId: knownFailure.revision.rendererBuildId,
+  }, 'synthetic-owner')
+  assert.equal(duplicate.status, 'failed')
+  assert.deepEqual(duplicate.promotion, failed.promotion, 'Owner click retains failure without retrying publication')
   assert.throws(
     () => knownFailure.reviewStore.beginPromotion(
       paperId,

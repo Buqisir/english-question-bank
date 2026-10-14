@@ -98,11 +98,11 @@ function escapeHtml(value) {
   })[character])
 }
 
-function requireSameOrigin(request, response, context, trustedPublicOrigin) {
+function requireSameOrigin(request, response, context, trustedPublicOrigin, csrf = 'scoped-publication') {
   const origin = String(request.headers.origin || '')
   const host = String(request.headers.host || '')
   const trusted = trustedPublicOrigin ? new URL(trustedPublicOrigin).origin : ''
-  if (request.headers['x-eqb-csrf'] === 'scoped-publication'
+  if (request.headers['x-eqb-csrf'] === csrf
     && origin && ((host && [`https://${host}`, `http://${host}`].includes(origin)) || origin === trusted)) return true
   context.sendJson(response, 403, { error: 'same_origin_required' })
   return false
@@ -609,6 +609,35 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     context.sendJson(response, 200, { papers: store.listPapers() })
   })))
 
+  routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/review-state$/, route(({
+    response, context, match,
+  }) => {
+    if (!requireOwner(response, context)) return
+    const detail = store.paperDetail(decodeURIComponent(match[1]), { includeProjection: false })
+    context.sendJson(response, 200, {
+      paperId: detail.paperId, latestRevisionId: detail.latestRevisionId,
+      issues: detail.issues, discussionThreadId: detail.discussionThreadId,
+    })
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/publish$/, route(async ({
+    request, response, context, match,
+  }) => {
+    if (!requireOwner(response, context)
+      || !requireSameOrigin(request, response, context, trustedPublicOrigin, 'owner-review')) return
+    if (!promotionService?.promoteOwner) {
+      throw reviewError('IMPORT_REVIEW_PROMOTION_UNAVAILABLE', '发布服务暂不可用。', 503)
+    }
+    const input = await context.readJsonBody(request, { maxBytes: 2_048 })
+    const result = await promotionService.promoteOwner(
+      decodeURIComponent(match[1]), match[2], input, context.session.username,
+    )
+    context.sendJson(response, result.status === 'publishing' ? 202 : result.status === 'failed' ? 409 : 200, {
+      status: result.status, promotion: result.promotion,
+      ...(result.status === 'failed' ? { error: '发布失败，请在 Amp 核实原因；网页不会自动重试。' } : {}),
+    })
+  })))
+
   routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)$/, route(({
     response,
     context,
@@ -659,6 +688,8 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireOwner(response, context)) return
     const input = await context.readJsonBody(request, { maxBytes: 20_000 })
+    if (input.surface === 'paper'
+      && !requireSameOrigin(request, response, context, trustedPublicOrigin, 'owner-review')) return
     context.sendJson(response, 201, store.createIssue(
       decodeURIComponent(match[1]),
       input,
@@ -691,6 +722,8 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireOwner(response, context)) return
     const input = await context.readJsonBody(request, { maxBytes: 20_000 })
+    if (input.revisionId !== undefined
+      && !requireSameOrigin(request, response, context, trustedPublicOrigin, 'owner-review')) return
     context.sendJson(response, 200, store.updateIssue(
       decodeURIComponent(match[1]),
       match[2],

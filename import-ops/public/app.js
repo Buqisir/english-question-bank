@@ -1555,6 +1555,10 @@ async function boot() {
         mountSourceIntakes({ root, user: state.user, request, accessHtml })
         return
       }
+      state.view = 'owner-review'
+      const { mountOwnerReview } = await import('./owner-review.js')
+      await mountOwnerReview({ root, user: state.user, request, mediaConfirmationChecks })
+      return
     } else if (me.user.accountKind === 'import_agent') {
       state.actor = 'agent'
     } else {

@@ -512,7 +512,6 @@ try {
 }
 
 const html = readFileSync(path.join(repoRoot, 'import-ops/public/index.html'), 'utf8')
-const css = readFileSync(path.join(repoRoot, 'import-ops/public/styles.css'), 'utf8')
 const client = readFileSync(path.join(repoRoot, 'import-ops/public/app.js'), 'utf8')
 const screen = readFileSync(
   path.join(repoRoot, 'app/src/features/paper-browse/PaperBrowsePage.tsx'),
@@ -532,59 +531,12 @@ const reviewRoutes = readFileSync(
 )
 assert.match(html, /<body>\s*<!--[\s\S]*THESIS:/, 'direction contract is the first body child')
 assert.match(client, /accountKind === 'import_agent'/, 'real import_agent account gets its own inbox mode')
-assert.match(client, /reviewRevision=/, 'review Screen URL binds the immutable revision')
-assert.match(client, /认可不是部署授权/, 'approval UI states the deployment boundary')
-assert.doesNotMatch(client, /data-external-listening-check/, 'OPS does not duplicate Screen audio review')
-assert.match(
-  client,
-  /我已检查 Screen 与 PDF，认可当前版本的版式。/,
-  'public-paper approval explicitly limits Owner review to final layout',
-)
-assert.match(client, /approvalScope: 'layout_only'/, 'public-paper approval submits the layout-only receipt scope')
-assert.doesNotMatch(client, /function paragraphSummariesHtml/, 'summaries are absent from Owner review')
-assert.match(client, /OCR 与原题校对报告/, 'correction evidence has a dedicated report')
+// The compact Owner list and its exact links are exercised through the browser
+// in verify-import-pagination-ui; legacy Agent workbench source is not evidence
+// of the Owner's current interface.
 assert.match(reviewRoutes, /\/approve[\s\S]{0,500}requireOwner\(response, context\)/,
   'the approval route rejects import_agent authority before store approval')
-assert.doesNotMatch(client, /pull-run-push|deploy\(/, 'review UI has no deployment action')
 assert.match(screen, /import-review-preview\/revisions/, 'PaperBrowsePage switches only its review data source')
-assert.match(css, /grid-template-columns: 280px minmax\(520px, 1fr\) 360px/, 'wide desktop retains the three-pane workbench')
-assert.match(
-  css,
-  /\.workspace \{\s*display: grid;\s*min-width: 0;/,
-  'mobile workspace can shrink below the tab row intrinsic width',
-)
-assert.match(
-  css,
-  /\.surface-stage \{\s*display: grid;\s*grid-template-columns: minmax\(0, 1fr\);/,
-  'the Screen track cannot expand past a narrow viewport',
-)
-const responsiveWorkspace = css.match(
-  /@media \(max-width: (\d+)px\) \{\s*\.workspace \{\s*grid-template-columns: (\d+)px minmax\(0, 1fr\)/,
-)
-const framePadding = Number(css.match(/\.frame-shell \{[\s\S]*?padding: (\d+)px/)?.[1])
-assert.ok(responsiveWorkspace, 'common desktop has a surface-first two-column layout')
-const commonDesktopScreenWidth = 1440 - Number(responsiveWorkspace[2]) - (2 * framePadding) - 2
-assert.ok(
-  Number(responsiveWorkspace[1]) >= 1880 && commonDesktopScreenWidth >= 1200,
-  `1440px review Screen must keep at least 1200px inner width, got ${commonDesktopScreenWidth}px`,
-)
-assert.match(css, /@media \(max-width: 760px\)/, 'mobile composition collapses structurally')
-const inboxSlot = client.indexOf('${leftRailHtml()}')
-const surfaceSlot = client.indexOf('${state.detail ? (isOcrReview() ? `<main')
-const issuesSlot = client.indexOf('${state.detail && !isOcrReview() ? rightRailHtml()')
-assert.ok(
-  inboxSlot >= 0 && inboxSlot < surfaceSlot && surfaceSlot < issuesSlot,
-  'mobile DOM order remains inbox, surface, issues',
-)
-const screenTargetingHandler = client.match(
-  /frameDocument\.addEventListener\('click', \(event\) => \{([\s\S]*?)\}, true\)/,
-)?.[1] || ''
-assert.match(screenTargetingHandler, /applyScreenTarget\(target\)/, 'Owner click capture still records semantic targets')
-assert.doesNotMatch(
-  screenTargetingHandler,
-  /preventDefault|stopPropagation/,
-  'Owner click capture does not cancel real Screen interactions',
-)
 assert.match(
   importSkill,
   /^name: importing-nck1-papers$/m,

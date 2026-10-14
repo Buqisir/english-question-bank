@@ -2,7 +2,7 @@
 /**
  * Same-origin local shell for the hosted Import Review Workbench.
  * /ops/ serves this package; all app and API requests proxy to EQB_APP_ORIGIN.
- * It does not publish, deploy, or touch production.
+ * Writes reach the upstream API; use a disposable local environment.
  */
 import { createServer, request as httpRequest } from 'node:http'
 import { request as httpsRequest } from 'node:https'
@@ -86,5 +86,6 @@ const server = createServer((request, response) => {
 server.listen(port, host, () => {
   console.log(`导题审核 http://${host}:${port}/ops/`)
   console.log(`same-origin app/API proxy -> ${appOrigin.origin}`)
-  console.log('no publish, no deployment, no production mutation')
+  console.log(`API must set QUESTION_BANK_IMPORT_REVIEW_OWNER_ORIGIN=http://${host}:${port}`)
+  console.log('Writes are forwarded. Use disposable local data, not production.')
 })

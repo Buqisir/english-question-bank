@@ -176,7 +176,33 @@ an Owner spelling-approval step. Historical workspaces without the policy remain
 compatible; adding a report explicitly opts their current Candidate into the
 overlay. Do not rewrite an existing finalized revision or claim it was reviewed.
 
-Owner-facing delivery now uses a direct exact-revision website Screen preview,
+### Amp 送审、网页发布（Owner 2026-10-14 确认）
+
+当前流程为：在 Amp 准备和校对 → Owner 明确「可以送网页审核」→ Agent 提交
+该 Candidate → Owner 在 `/ops/` 点击卷名直接打开精确 revision 的 Screen →
+Owner 点击「发布到题库」。导题授权本身不是 Candidate 送审授权；新版修改后也
+须重新获得送审确认。OCR 准备/校对不等于最终 Candidate 送审。隔离本地预览可以
+用于 Amp 讨论，但不得因此自动上传生产 Candidate。
+
+网页只保留试卷列表、精确 Screen 链接、发布与退回修改；不再用 Owner 三栏
+工作台、独立版式认可或授权兑换页作为日常必经步骤。退回写入绑定当前 revision
+与 bundle 的问题，Agent 在 Amp 处理并在新 revision 中声明解决；Owner 在列表
+确认问题已解决后才能发布。旧版本和证据保留，不删除、不自动认可新版。
+
+「发布到题库」一次点击明确表达认可当前版本和向用户公开两项意图；服务端仍
+分别保存 approval 与 promotion。Owner 会话、同源校验、精确 revision/bundle/
+renderer、未解决问题、真实文件与 Canonical publication 门禁缺一不可；公共卷
+仍记录 `layout_only`，不扩大为答案或音频语义认证。服务器直接执行既有单卷
+publisher，不依赖 Amp 在线，也不向浏览器提供 ship token。重复点击只读回原
+promotion；发布中、失败或 UNKNOWN 不由网页自动恢复/重试。先只读对账，必要的
+恢复另取明确授权。既有 Agent recovery 与默认关闭的 scoped publication 路线仅
+供明确授权的历史/恢复事务，不是网页发布的前置步骤。
+
+本流程不自动发布已在 Review 的任何卷，不修改旧认可记录，不恢复网站导题。
+代码部署仍须单独授权。以下历史「认可后再口头要求上线」描述不再约束上述网页
+直接发布动作；聊天里的「可以送审」始终不是发布授权。
+
+Owner-facing delivery uses a direct exact-revision website Screen preview,
 not the OPS dashboard. Send the OCR report in the Amp conversation: source
 location, original recognition, corrected text and reason; distinguish OCR
 repairs from evidenced source spelling/layout errors. For long reports, give
@@ -188,10 +214,10 @@ changing the preview entrypoint does not approve or publish the paper.
 
 New imports use the dedicated `english-question-bank-import` Amp Project, one
 paper per thread, with `.agents/import-pre-setup` selecting the fast import
-setup profile. Follow `importing-nck1-papers` for attachment intake, exact preview
-handoff and the default-off scoped publication commands. The authenticated Owner
-confirmation page is outside OPS; layout approval and publication delegation are
-separate actions. Plain chat is not server-authenticated authorization. See
+setup profile. Follow `importing-nck1-papers` for attachment intake and exact preview
+handoff after explicit Amp permission to submit for review. Owner publication
+now uses the authenticated list above. Plain chat is not server-authenticated
+publication authorization. For retained legacy scoped publication, see
 `docs/cuts/orb-import-single-paper-promotion/spec.md` for activation and recovery
 boundaries. Normal paper publication is a data operation; code/standard changes
 still require their own reviewed deployment transaction.

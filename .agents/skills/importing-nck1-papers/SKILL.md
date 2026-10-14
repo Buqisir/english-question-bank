@@ -10,8 +10,13 @@ describes the outcome; do not make them remember pipeline commands.
 
 Amp is the sole communication and import-start entry. Webhook automatic intake
 and dispatch are retired. Start new work only from an explicit Owner request,
-using the contract's off-ledger file path. Preview confirmation is not publication:
-publish only after a later explicit Owner instruction for the exact paper/revision.
+using the contract's off-ledger file path. Before submitting a production Candidate,
+wait for the Owner's explicit Amp confirmation that this version may enter web
+review. Preparation/import permission alone does not authorize that submission.
+The Owner then opens the exact Screen from the compact website review list and
+clicks `发布到题库` to approve and publish that version. The server records both
+intents and executes publication; the import Agent stops at `awaiting_review`.
+Amp confirmation to send for review is never publication permission.
 Keep historical ledger records, bindings, leases and UNKNOWN evidence intact;
 never treat an old notification as permission to resume them.
 
@@ -322,23 +327,35 @@ replace page-by-page visual verification.
 
 | State | Agent action |
 | --- | --- |
-| `materializing` | Continue immutable source capture and Source Materialization, run universal `verify` and `build`, and complete AI Answer Transcription Check. For `public-paper-v1`, prepare/finalize/verify per-body-paragraph summaries and compact public search metadata; do not create teaching analyses, highlights, embeddings, or metadata beyond that request. Only legacy absent-profile / external `analyzed_package` workspaces produce and validate all nine staged analyses. Then submit a new review revision. |
+| `materializing` | Continue immutable source capture and Source Materialization, run universal `verify` and `build`, and complete AI Answer Transcription Check. For `public-paper-v1`, prepare/finalize/verify per-body-paragraph summaries and compact public search metadata; do not create teaching analyses, highlights, embeddings, or metadata beyond that request. Only legacy absent-profile / external `analyzed_package` workspaces produce and validate all nine staged analyses. Report readiness in Amp; submit a Candidate only after explicit permission to send this version for web review. |
 | `awaiting_review` | Report the current revision and stop for Owner QA. Do not create another identical revision merely to look busy. |
-| `changes_requested` | Read current issues with `review.mjs status`; reply, correct local Materialization, rerun `verify` / `build`, then `push --resolves <current issue ids>`. Never modify a finalized revision. |
-| `approved` | Stop. Approval is not publication. Ignore compatibility-only local `accept` / `publish` suggestions for Review-backed production papers. Wait for a later, current Owner `上线 <paperId>` command. |
+| `changes_requested` | Read current issues with `review.mjs status`; reply, correct local Materialization, rerun `verify` / `build`, then obtain renewed Amp permission to send for review before `push --resolves <current issue ids>`. Never modify a finalized revision. Owner verifies fixes on the website before publishing. |
+| `approved` | Stop. Approval alone is not publication. Ignore compatibility-only local `accept` / `publish` suggestions for Review-backed production papers. The Owner can publish from the website; do not automatically call promotion. |
 | promotion `publishing` | Report the active guard/receipt and stop. Retry requires a current Owner `重试上线 <paperId>` command. |
 | promotion `failed` | Report the exact failure and stop. Retry requires a current Owner `重试上线 <paperId>` command. |
 | promotion `published` | Report the receipt, vN, and digests. Do not republish or redeploy. |
 | `failed` | Report every blocker. Repair only the named local/review problem; rerun preflight before resuming. |
 
-`rendererStale` is a `changes_requested` resume: submit the same current Candidate
-as a fresh immutable revision under the current renderer. An old local approval
+`rendererStale` is a `changes_requested` resume: after explicit permission to send
+for review, submit the same current Candidate under the current renderer. An old local approval
 or publication receipt never authorizes resubmission or promotion after a newer
 Review revision exists. Use `review.mjs status <paperId>` for the server's exact
 approval and promotion state; old local `locally_published` / `shipped` receipts
 are historical compatibility evidence, not the Review-backed production path.
 
-## Promote only after a new Owner command
+## Website publication and retained legacy recovery
+
+The normal route is the Owner-only `/ops/` list: paper-name links open the exact
+Screen directly, `退回修改` records revision-bound feedback, and `发布到题库`
+expresses final approval plus publication. No three-column Owner workbench,
+separate grant page or Agent redemption is required. Keep immutable evidence and
+history; do not remove underlying safeguards while simplifying the website.
+Do not click the publish button on the Owner's behalf merely because they allowed
+submission. A publishing/failed/UNKNOWN operation still requires read-only
+reconciliation and explicitly authorized recovery, never an automatic retry.
+
+The following capability/ship-token routes are retained only for an explicitly
+authorized legacy or recovery transaction, not as daily steps after web review.
 
 When the server has the separately activated scoped-publication route, after an
 explicit Owner instruction for the previewed paper/revision use:
@@ -422,11 +439,11 @@ the asynchronous R2 backup has completed.
   attestations. Image-candidate confirmation remains required where applicable.
   Source, answer, summary, and metadata correctness
   stay with the automatic gates. Legacy analyzed work retains its prior content
-  review. Approval records `approvalScope: layout_only`; promotion remains a
-  separate explicit Owner command.
+  review. Approval records `approvalScope: layout_only`; the website publish
+  button explicitly authorizes publication and records it separately.
 - Never run Review-backed local `accept` / `publish` as a production step, use
   `pull-run-push.mjs push`, add an Owner assertion flag without the matching
-  current words, or expose a web publish button.
+  current words, or publish with an Agent/import credential alone.
 - Never acquire/release a shipping guard, deploy, or mutate production unless
   the Owner's current message explicitly authorizes that exact action. An old
   message, Review approval, preflight output, or this skill is not authorization.

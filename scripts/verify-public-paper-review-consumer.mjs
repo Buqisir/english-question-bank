@@ -63,10 +63,17 @@ const server = createServer((request, response) => {
   const send = (status, type, body) => { response.writeHead(status, { 'content-type': type }); response.end(body) }
   if (url.pathname === '/ops/' || url.pathname === '/ops/index.html') return send(200, 'text/html', html)
   if (url.pathname === '/ops/app.js') return send(200, 'text/javascript', app)
+  if (url.pathname === '/ops/owner-review.js') return send(200, 'text/javascript', readFileSync(path.join(publicDir, 'owner-review.js')))
   if (url.pathname === '/ops/styles.css') return send(200, 'text/css', css)
   if (url.pathname === '/ops/clipboard.js') return send(200, 'text/javascript', clipboard)
   if (url.pathname === '/api/auth/me') return send(200, 'application/json', JSON.stringify({ authRequired: true, user: { username: 'fixture-owner', role: 'owner', accountKind: 'human' } }))
-  if (url.pathname === '/api/import-reviews') return send(200, 'application/json', JSON.stringify({ papers: [{ paperId: mode === 'public' ? 'public-paper' : 'old-analyzed', paperName: mode === 'public' ? baseDetail.paperName : oldDetail.paperName }] }))
+  if (url.pathname === '/api/import-reviews') return send(200, 'application/json', JSON.stringify({ papers: [{
+    paperId: mode === 'public' ? 'public-paper' : 'old-analyzed',
+    paperName: mode === 'public' ? baseDetail.paperName : oldDetail.paperName,
+    latestRevisionId: 'revision-public', revisionNumber: 1, reviewKind: 'candidate',
+    state: 'awaiting_review', bundleDigest: summaryDigest, rendererBuildId: 'fixture-renderer',
+    rendererStale: false, unresolvedCount: 0, promotionState: null,
+  }] }))
   if (url.pathname.startsWith('/api/import-reviews/papers/')) return send(200, 'application/json', JSON.stringify(mode === 'public' ? projected : oldDetail))
   if (url.pathname.includes('/pagination')) return send(200, 'application/json', JSON.stringify({ editions: [] }))
   if (url.searchParams.get('view') === 'paper-browse') return send(200, 'text/html', '<p tabindex="-1" data-canonical-block-id="paragraph:reading-a:1">A source paragraph visible beside its summary.</p>')
@@ -78,23 +85,23 @@ try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 })
   const origin = `http://127.0.0.1:${server.address().port}`
   await page.goto(`${origin}/ops/?view=review`)
-  await page.getByRole('heading', { name: baseDetail.paperName }).waitFor()
+  await page.getByRole('link', { name: baseDetail.paperName }).waitFor()
   assert.equal(await page.getByRole('heading', { name: '逐段摘要' }).count(), 0)
   assert.equal(await page.locator('.paragraph-summaries-section').count(), 0)
-  assert.equal(await page.getByRole('tab', { name: '教学解析' }).count(), 0)
-  assert.deepEqual(await page.getByRole('tab').allTextContents(), ['Screen', 'PDF'])
-  assert.equal(await page.locator('.approval-check').last().innerText(), '我已检查 Screen 与 PDF，认可当前版本的版式。')
+  assert.equal(await page.locator('iframe, [role="tab"], .approval-check').count(), 0)
+  assert.equal(await page.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
+  assert.match(await page.getByRole('link', { name: baseDetail.paperName }).getAttribute('href'), /reviewRevision=revision-public/)
   if (process.env.EQB_REVIEW_SCREENSHOT) await page.screenshot({ path: process.env.EQB_REVIEW_SCREENSHOT, fullPage: true })
 
   mode = 'old'
   await page.reload()
-  await page.getByRole('heading', { name: '旧解析卷 fixture' }).waitFor()
+  await page.getByRole('link', { name: '旧解析卷 fixture' }).waitFor()
   assert.equal(await page.getByRole('heading', { name: '逐段摘要' }).count(), 0)
-  assert.equal(await page.getByRole('tab', { name: '教学解析' }).count(), 0)
-  assert.equal(await page.locator('.approval-check').last().innerText(), '我已检查 Screen 与 PDF，认可当前版本。')
+  assert.equal(await page.locator('iframe, [role="tab"], .approval-check').count(), 0)
+  assert.equal(await page.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
 } finally {
   await browser.close()
   await new Promise((resolve) => server.close(resolve))
 }
 
-console.log('PASS public-paper summary bindings remain available internally; Owner Review hides summaries/teaching for public and historical papers and uses Screen/PDF approval')
+console.log('PASS public-paper summary bindings remain internal; both profiles use direct Screen links and Owner publication without embedded review panels')

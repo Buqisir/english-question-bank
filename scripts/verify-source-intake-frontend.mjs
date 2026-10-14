@@ -131,6 +131,7 @@ const server = createServer(async (request, response) => {
     '/ops/app.js': ['app.js', 'text/javascript; charset=utf-8'],
     '/ops/clipboard.js': ['clipboard.js', 'text/javascript; charset=utf-8'],
     '/ops/source-intakes.js': ['source-intakes.js', 'text/javascript; charset=utf-8'],
+    '/ops/owner-review.js': ['owner-review.js', 'text/javascript; charset=utf-8'],
     '/ops/styles.css': ['styles.css', 'text/css; charset=utf-8'],
     '/ops/source-intakes.css': ['source-intakes.css', 'text/css; charset=utf-8'],
   }[url.pathname]
@@ -161,7 +162,19 @@ const server = createServer(async (request, response) => {
     return
   }
   if (url.pathname === '/api/import-reviews') {
-    json(response, 200, { papers: [] })
+    json(response, 200, { papers: [{
+      paperId: 'paper-source-intake-ocr-only',
+      paperName: 'OCR-only 不应进入审核列表',
+      latestRevisionId: 'rev-source-intake-ocr',
+      revisionNumber: 1,
+      state: 'awaiting_review',
+      reviewKind: 'ocr',
+      bundleDigest: `sha256:${'b'.repeat(64)}`,
+      rendererBuildId: 'source-intake-renderer',
+      rendererStale: false,
+      promotionState: null,
+      unresolvedCount: 0,
+    }] })
     return
   }
   json(response, 404, { error: 'not found' })
@@ -191,9 +204,12 @@ try {
     })
   })
   await page.goto(`${origin}/ops/`)
-  await page.getByRole('heading', { name: '还没有可审核内容' }).waitFor()
+  await page.getByRole('heading', { name: '试卷审核' }).waitFor()
+  assert.equal(await page.getByText('OCR-only 不应进入审核列表').count(), 0)
+  assert.equal(await page.getByRole('link', { name: '题源记录' }).count(), 0,
+    'compact review navigation does not include the source ledger')
   assert.equal(listRequestCount, 0, 'default OPS route opens Review, not the legacy source ledger')
-  await page.getByRole('link', { name: '题源记录' }).click()
+  await page.goto(`${origin}/ops/?view=sources`)
   await page.getByRole('heading', { name: '题源台账' }).waitFor()
   assert.equal(await page.locator('[data-notify-intake]').count(), 0, 'automatic notification has no UI action')
   assert.equal(await page.getByText('导题由你在 Amp 发起，这里不会自动接卷。', { exact: false }).count(), 1)

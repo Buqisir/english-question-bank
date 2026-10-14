@@ -33,7 +33,7 @@ const SHA256 = /^sha256:[a-f0-9]{64}$/
 const MAX_FILE_BYTES = 64 * 1024 * 1024
 const MAX_BUNDLE_BYTES = 256 * 1024 * 1024
 const MAX_FILES = 200
-const SURFACES = new Set(['screen', 'student_print', 'teacher_print', 'pdf', 'source'])
+const SURFACES = new Set(['paper', 'screen', 'student_print', 'teacher_print', 'pdf', 'source'])
 const UNRESOLVED_ISSUE_STATES = new Set(['open', 'fixed_pending_review'])
 const liveExternalListeningReviewProofs = new WeakMap()
 
@@ -1247,7 +1247,7 @@ export function createImportReviewStore({
     return withDb(false, (db) => db.prepare(`
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
              r.revision_number, r.state, r.bundle_digest, r.manifest_json,
-             r.approval_receipt_json,
+             r.approval_receipt_json, r.renderer_build_id,
              (SELECT pr.state FROM import_review_promotions pr
               WHERE pr.paper_id = p.paper_id
               ORDER BY pr.requested_at DESC, pr.rowid DESC LIMIT 1) AS promotion_state,
@@ -1269,6 +1269,11 @@ export function createImportReviewStore({
       state: row.state || 'uploading',
       reviewKind: reviewKind(parseJson(row.manifest_json, {})),
       bundleDigest: row.bundle_digest,
+      hasMediaCandidates: (parseJson(row.manifest_json, {}).files || [])
+        .some(file => file.role === 'content_media_candidate'),
+      rendererBuildId: row.renderer_build_id,
+      rendererStale: reviewKind(parseJson(row.manifest_json, {})) === 'candidate'
+        && row.renderer_build_id !== currentRendererBuildId(),
       promotionState:
         parseJson(row.approval_receipt_json)?.approvalId === row.promotion_approval_id
           ? row.promotion_state
@@ -1526,7 +1531,8 @@ export function createImportReviewStore({
       throw storeError('IMPORT_REVIEW_PAGE_INVALID', 'Issue page is invalid', 400)
     }
     if (
-      !groupId
+      surface !== 'paper'
+      && !groupId
       && !questionId
       && !blockId
       && !mediaId
@@ -1544,7 +1550,7 @@ export function createImportReviewStore({
       db.exec('BEGIN IMMEDIATE')
       try {
         const current = db.prepare(`
-          SELECT p.latest_revision_id, r.state, r.manifest_json
+          SELECT p.latest_revision_id, r.state, r.manifest_json, r.bundle_digest
           FROM import_review_papers p
           LEFT JOIN import_review_revisions r ON r.id = p.latest_revision_id
           WHERE p.paper_id = ?
@@ -1560,6 +1566,9 @@ export function createImportReviewStore({
             'IMPORT_REVIEW_STALE_REVISION',
             'Issues must target the latest finalized revision',
           )
+        }
+        if (surface === 'paper' && (publication || input.bundleDigest !== current.bundle_digest)) {
+          throw storeError('IMPORT_REVIEW_STALE_REVISION', '退回的试卷版本已变化，请刷新后核对。')
         }
         if (!publication && reviewKind(parseJson(current.manifest_json, {})) !== 'candidate') {
           throw storeError(
@@ -1782,6 +1791,9 @@ export function createImportReviewStore({
           LEFT JOIN import_review_revisions r ON r.id = p.latest_revision_id
           WHERE p.paper_id = ?
         `).get(paperId)
+        if (input.revisionId !== undefined && latest?.latest_revision_id !== input.revisionId) {
+          throw storeError('IMPORT_REVIEW_STALE_REVISION', '反馈对应的待审版本已变化，请刷新后核对。')
+        }
         if (reviewKind(parseJson(latest?.manifest_json, {})) !== 'candidate') {
           throw storeError(
             'IMPORT_REVIEW_CANDIDATE_REQUIRED',
