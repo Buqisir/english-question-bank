@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-<!-- 海獭母版 · App 图标（H1 大鼻子，2026-10-13）：暖米白圆角底（tile，提案，待 Owner 确认；竹青底在头变绿后看不见），头像被底框裁切。16px 需另做简化版（BRAND.md §3.1）。规范见 BRAND.md §4.2。 -->
+<!-- 海獭母版 · App 图标（H1 大鼻子，2026-10-13）：暖米白圆角底（tile，BRAND.md §7 第 34 条；竹青底在头变绿后看不见），头像被底框裁切。16px 需另做简化版（BRAND.md §3.1）。规范见 BRAND.md §4.2。 -->
 <title>海獭 · App 图标</title>
 <defs><clipPath id="app-icon-tile"><rect width="100" height="100" rx="22"/></clipPath><clipPath id="app-icon-muzzle"><path d="M668.4 467.8 C671 237 886 90 1176 90 C1466 90 1684 237 1688 460.6 C1740 645 1690 795 1575 854 C1435 916 959 916 765 854 C664 805 626 644 668.4 467.8Z"/></clipPath></defs>
 <g id="tile"><rect width="100" height="100" rx="22" fill="#F6EFE0"/></g>
