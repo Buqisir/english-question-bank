@@ -59,7 +59,13 @@ export function SentenceAnalysisCard({
     card.style.height = ''
     if (!ready) return
     let width = -1
+    let frame = 0
+    let inner = 0
     const lines = detailCandidates(ready)
+    const relock = () => {
+      card.style.height = ''
+      card.style.height = `${card.offsetHeight}px`
+    }
     const sizeFrame = () => {
       const row = card.querySelector<HTMLElement>('.sa-detail-row')
       const slot = row?.querySelector<HTMLElement>('.sa-detail-slot')
@@ -75,6 +81,10 @@ export function SentenceAnalysisCard({
       // Keep the frame steady during inspection. Only the analysis pane
       // scrolls; the translation keeps its own space below it.
       card.style.height = `${card.offsetHeight}px`
+      // Labels re-place a frame after a width change, so re-lock once they settle.
+      cancelAnimationFrame(frame)
+      cancelAnimationFrame(inner)
+      frame = requestAnimationFrame(() => { inner = requestAnimationFrame(relock) })
     }
     sizeFrame()
     const observer = new ResizeObserver(sizeFrame)
@@ -85,6 +95,8 @@ export function SentenceAnalysisCard({
     document.fonts?.addEventListener('loadingdone', fontsReady)
     return () => {
       observer.disconnect()
+      cancelAnimationFrame(frame)
+      cancelAnimationFrame(inner)
       document.fonts?.removeEventListener('loadingdone', fontsReady)
       card.style.height = ''
     }
