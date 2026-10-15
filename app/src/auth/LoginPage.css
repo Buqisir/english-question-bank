@@ -16,7 +16,84 @@
   background: var(--desk-page);
 }
 
+/* The stage reserves the otter's height above the card so the card and the
+   otter centre together and the otter never runs off the top of a short
+   window. Numbers follow BRAND.md §4.7: the drawing is 166px tall
+   (714.7 x 874.4 viewBox, so 136px wide), the card edge sits at 0.93 of its
+   height (154px), and it leans 6px past the card's right edge. */
+.login-stage {
+  --peek-height: 166px;
+  --peek-width: 136px;
+  --peek-edge: 154px;
+  /* The otter's own easing from BRAND.md §4.6 (slow start, steady stop, no
+     overshoot); --ease-out makes the rise look like a pop. */
+  --ease-otter: cubic-bezier(0.45, 0, 0.55, 1);
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  padding-top: var(--peek-edge);
+}
+
+.login-peek {
+  position: absolute;
+  top: 0;
+  right: -6px;
+  width: var(--peek-width);
+  height: var(--peek-height);
+  pointer-events: none;
+}
+
+.login-peek-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.login-peek-layer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Behind the card: everything above the edge, plus 2px tucked under it. */
+.login-peek-back {
+  z-index: 0;
+  clip-path: inset(0 0 calc(var(--peek-height) - var(--peek-edge) - 2px) 0);
+}
+
+/* In front of the card: only the paws below the edge. Starting 2px above the
+   edge covers the card's hairline border so it does not cut across the paws. */
+.login-peek-front {
+  z-index: 2;
+  clip-path: inset(calc(var(--peek-edge) - 2px) 0 0 0);
+}
+
+.login-peek-back img {
+  animation: login-peek-rise var(--motion-entrance) var(--ease-otter);
+}
+
+/* The paws drop over the edge just before the rise lands (entrance − micro). */
+.login-peek-front img {
+  animation: login-peek-paws var(--motion-fast) var(--ease-out)
+    calc(var(--motion-entrance) - var(--motion-micro)) backwards;
+}
+
+@keyframes login-peek-rise {
+  from {
+    transform: translateY(calc(var(--peek-edge) + 2px));
+  }
+}
+
+@keyframes login-peek-paws {
+  from {
+    /* 2px past the clip line so no anti-aliased sliver of paw shows before
+       the drop starts. */
+    transform: translateY(calc(var(--peek-edge) - var(--peek-height) - 4px));
+  }
+}
+
 .login-card {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 480px;
   padding: 32px 40px;
@@ -153,5 +230,9 @@
   .login-field input,
   .login-submit {
     transition: none;
+  }
+
+  .login-peek-layer img {
+    animation: none;
   }
 }
