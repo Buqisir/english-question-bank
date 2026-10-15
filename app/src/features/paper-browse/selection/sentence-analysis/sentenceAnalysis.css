@@ -890,8 +890,7 @@ from { opacity: 0; }
 .sa-legend-pair { display: flex; width: 84px; justify-content: space-between; padding: 0 2px; }
 .sa-legend-pair > span { display: flex; flex-direction: column; align-items: center; }
 
-/* One outline around the filters reads as a single control; the
-   connector note beside it stays plain text. */
+/* One outline around the filters reads as a single control. */
 .sa-legend-filters {
   display: flex;
   align-items: flex-end;
@@ -900,18 +899,11 @@ from { opacity: 0; }
   border: 1px solid var(--sa-label-edge);
   border-radius: 9px;
 }
-.sa-legend-static { align-self: center; padding-left: 6px; padding-right: 2px; }
 
-.sa-legend-item:hover:not(:disabled):not(.sa-legend-static) {
+.sa-legend-item:hover:not(:disabled) {
   background: var(--sa-label-bg);
 }
 
-.sa-legend-static {
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-  cursor: default;
-}
 
 .sa-legend-item[aria-pressed=true] {
   background: var(--sa-label-bg);
