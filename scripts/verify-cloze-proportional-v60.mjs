@@ -9,7 +9,7 @@ import {
   validateAuthorityClosure,
 } from '../shared/paper-canonical/authority.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
-import { consumerContractRefs, resolveConsumerContract } from '../shared/paper-canonical/consumers.mjs'
+import { consumerContractRefs, resolveConsumerContract, resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import { clozeRhythm, resolveConsumerClozeGeometry } from '../shared/paper-canonical/clozeRhythm.mjs'
 
 const read = path => JSON.parse(readFileSync(path, 'utf8'))
@@ -25,7 +25,7 @@ assert.equal(v5.horizontalChoiceGeometry.rendererMapping.proportional, true)
 assert.equal(v5.horizontalChoiceGeometry.rendererMapping.columnStartsPt, undefined)
 assert.equal(v5.horizontalChoiceGeometry.rendererMapping.columnWidthsPt, undefined)
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '61')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '62')
 assert.equal(paperPresentationAuthorityRef.manifestVersion, '60')
 const closure = resolveCanonicalAuthority(paperPresentationAuthorityRef).closure
 assert.equal(closure.artifacts['renderer-cloze-rhythm'].version, '5')
@@ -43,8 +43,11 @@ for (const attack of read('test-fixtures/paper-canonical/cloze-rhythm-v5-conform
   assert.equal(result.ok, false, attack.caseId)
   assert(result.issues.some(issue => issue.code === 'RENDERER_CLOZE_RHYTHM_INVALID'), attack.caseId)
 }
-assert.equal(consumerContractRefs.screen.version, '45')
-assert.equal(consumerContractRefs.print_pdf.version, '46')
+assert.equal(consumerContractRefs.screen.version, '46')
+assert.equal(consumerContractRefs.print_pdf.version, '47')
+for (const ref of Object.values(consumerContractRefs)) {
+  assert.equal(resolveConsumerPresentation(ref).policy.continuationMaterialAlignment, 'justify_except_last_line')
+}
 const absent = resolveConsumerClozeGeometry()
 assert.equal(absent.proportional, false)
 assert.deepEqual(absent.columnStartsPt, [17.3, 127.8, 231.9, 336.55])
@@ -57,7 +60,7 @@ for (const [id, version] of [['screen', '44'], ['print_pdf', '45']]) {
   assert.equal(geometry.proportional, false)
   assert.deepEqual(geometry.columnWidthsPt, [110.5, 104.1, 104.65, 101.65])
 }
-for (const [id, version] of [['screen', '45'], ['print_pdf', '46']]) {
+for (const [id, version] of [['screen', '45'], ['print_pdf', '46'], ['screen', '46'], ['print_pdf', '47']]) {
   const fileId = id === 'print_pdf' ? 'print-pdf' : id
   const current = resolveConsumerContract({ id, version, digest: read(`standards/paper-canonical/consumers/${fileId}-v${version}.json`).contractDigest })
   assert.equal(current.ok, true)

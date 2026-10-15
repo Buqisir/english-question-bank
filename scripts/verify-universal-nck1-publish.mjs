@@ -864,9 +864,9 @@ function makeContext(label, options = {}) {
     const current = buildNck1ReviewProjection(reviewRoot)
     assert.equal(replayed.candidateDigest, previous.candidate.candidateDigest)
     assert.equal(replayed.consumption.authorityRef.manifestVersion, '58')
-    assert.equal(replayed.consumption.consumerContractRef.version, '45')
-    assert.equal(current.consumption.authorityRef.manifestVersion, '61')
-    assert.equal(current.consumption.consumerContractRef.version, '45')
+    assert.equal(replayed.consumption.consumerContractRef.version, '46')
+    assert.equal(current.consumption.authorityRef.manifestVersion, '62')
+    assert.equal(current.consumption.consumerContractRef.version, '46')
     const readingId = replayed.consumption.selections
       .find((selection) => selection.familyContractId === 'reading').groupIds[0]
     for (const [projection, expectedRuleset] of [

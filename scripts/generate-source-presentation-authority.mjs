@@ -56,10 +56,21 @@ for (const [path, schema] of outputs) {
   manifest.schemas.push({ id: schema.$id, path: `../../${path}`, sha256: digestJson(schema) })
 }
 outputs.set(`${root}manifest-v62.json`, manifest)
+// Consumer authority follows the existing presentation branch, not the raw
+// import branch: v61/v62 deliberately retain older rendering artifacts.
+const presentation = read(`${root}manifest-v60.json`)
+presentation.version = '63'
+presentation.artifacts = presentation.artifacts.map(artifact => artifact.id === 'core'
+  ? { ...artifact, path: 'core/core-invariants-v3.json', schemaId: core.schemaVersion, sha256: digestJson(core) }
+  : artifact)
+for (const schema of [coreSchema, group]) {
+  presentation.schemas.push({ id: schema.$id, path: `../../schemas/paper-canonical/${schema.$id}.schema.json`, sha256: digestJson(schema) })
+}
+outputs.set(`${root}manifest-v63.json`, presentation)
 for (const [name, previousVersion] of [['screen', 45], ['print-pdf', 46]]) {
   const contract = read(`${root}consumers/${name}-v${previousVersion}.json`)
   contract.version = String(previousVersion + 1)
-  contract.authorityManifestDigest = digestJson(manifest)
+  contract.authorityManifestDigest = digestJson(presentation)
   delete contract.contractDigest
   contract.contractDigest = digestJson(contract)
   outputs.set(`${root}consumers/${name}-v${contract.version}.json`, contract)

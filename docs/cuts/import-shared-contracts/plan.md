@@ -78,3 +78,24 @@ completion claim follows from these shared checks alone.
   groups, retaining complete content nodes without a second trim policy. The
   final narrow advisor review found no remaining blocker in that fix; the
   regression explicitly covers leading tab/trailing newline source text.
+
+## Ship CI correction
+
+- The first natural PR 507 run failed: shared fixture assertions still expected
+  Candidate61/Screen45, and the new consumers selected raw-import62's older
+  presentation policy. Keep the failed run as evidence; no checks were waived.
+- Presentation63 extends presentation60 with core/group-v3 support only.
+  Screen46/Print47 now bind it, preserving continuation justification and
+  proportional cloze columns. Candidate62 and all historical authorities remain
+  byte-identical. Regression coverage checks both old and new consumer geometry.
+- The resolver failed before this correction and passed after; fixture-only
+  publication replay and materialization Candidate verification passed. Scoped
+  advisor review found no blocker in the presentation-branch correction.
+- Actual continuation Screen and Print HTML passed the original alignment
+  assertion. The local browser verifier later failed its macOS PDF glyph-ink
+  ratio assertion (1.7809142178648145). A control using the unchanged Print46
+  contract failed at the same assertion with identical measurements. Neither
+  run is a suite PASS; retain this local limitation and require fresh natural
+  CI on the corrected head. The first control also timed out because its old
+  Screen contract did not match the current client; the print-only control
+  kept the current Screen contract and reached the PDF assertion.
