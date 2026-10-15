@@ -1,0 +1,58 @@
+<!doctype html>
+<!--
+  宣传大图的排版（BRAND.md §5.2，2026-10-14 第 63 条，Droid 定）：画是同目录的 promo-*-art.svg，字在这里。
+  用浏览器从仓库里直接打开即可看；PNG 是对 #wide、#tall 两个画框按 1 倍截图得到的。
+  字：思源宋体（SIL OFL，仓库里已有，app/public/fonts/paper），标题 Bold，其余 Regular（§3.3「宣传标题字」）。
+  颜色：天是暖米白 #F6EFE0（§1.5「海、天、光也用这五色画」；和水里的米白光束同一条色阶，光像从天上照下来），
+  不用网站桌面 #F3F6F0：宣传图贴在别人的页面上，要自带一块完整的底。
+  标题和名字墨 #191D18，副句深竹青 #2C6E56（写字的身份色，§1.5）。
+  标志旁的「英语题库工作台」是现在网站的标题，只是占位；名字定了以后换成字标（§2，第 61 条）。
+  一句话和副句是 §1.1 的提案，定名字时一起改。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>宣传大图</title>
+<style>
+  @font-face { font-family: 'Promo Han'; src: url('../../../../app/public/fonts/paper/source-han-serif/SourceHanSerifCN-Bold.otf') format('opentype'); font-weight: 700; }
+  @font-face { font-family: 'Promo Han'; src: url('../../../../app/public/fonts/paper/source-han-serif/SourceHanSerifCN-Regular.otf') format('opentype'); font-weight: 400; }
+  * { box-sizing: border-box; margin: 0; }
+  body { display: flex; flex-direction: column; gap: 48px; padding: 48px; background: #fff; }
+  .frame { position: relative; overflow: hidden; background: #F6EFE0; flex: none; }
+  .frame > .art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .copy { position: absolute; display: flex; flex-direction: column; font-family: 'Promo Han', serif; color: #191D18; }
+  .brand { display: flex; align-items: center; font-weight: 400; letter-spacing: .04em; }
+  .brand img { display: block; }
+  .line { font-weight: 700; letter-spacing: .02em; }
+  .sub { font-weight: 400; color: #2C6E56; letter-spacing: .04em; }
+  #wide { width: 1200px; height: 630px; }
+  #wide .copy { left: 72px; top: 56px; gap: 24px; }
+  #wide .brand { gap: 12px; font-size: 20px; line-height: 1; }
+  #wide .line { font-size: 48px; line-height: 1.38; }
+  #wide .sub { font-size: 22px; line-height: 1.5; }
+  #tall { width: 1080px; height: 1440px; }
+  #tall .copy { left: 96px; top: 120px; gap: 44px; }
+  #tall .brand { gap: 16px; font-size: 26px; line-height: 1; }
+  #tall .line { font-size: 76px; line-height: 1.36; }
+  #tall .sub { font-size: 32px; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="frame" id="wide">
+    <img class="art" src="promo-wide-art.svg" alt="">
+    <div class="copy">
+      <div class="brand"><img src="../../logo/mark.svg" height="30" alt="">英语题库工作台</div>
+      <div class="line">替老师在题海里摸到对的题，<br>再把好题收好。</div>
+      <div class="sub">AI 帮老师找，老师来定。</div>
+    </div>
+  </div>
+  <div class="frame" id="tall">
+    <img class="art" src="promo-tall-art.svg" alt="">
+    <div class="copy">
+      <div class="brand"><img src="../../logo/mark.svg" height="40" alt="">英语题库工作台</div>
+      <div class="line">替老师在题海里<br>摸到对的题，<br>再把好题收好。</div>
+      <div class="sub">AI 帮老师找，老师来定。</div>
+    </div>
+  </div>
+</body>
+</html>
