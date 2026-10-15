@@ -36,8 +36,10 @@ export function validateInlineBlankTextBoundaries(questionGroups) {
           if ((!edge && !adjacentBlank) || (edge && edge !== '\uFEFF' && /\s/u.test(edge))) continue
           // Closing punctuation belongs to the preceding answer; opening
           // brackets belong to the following answer. An em dash separates prose
-          // on either side without requiring spaces. Quotes/hyphens need review.
+          // on either side without requiring spaces. Directional double quotes
+          // delimit answers too; ambiguous quotes/apostrophes/hyphens need review.
           if (edge === '—') continue
+          if (side === 'left' ? edge === '“' : edge === '”') continue
           if (side === 'right' ? /[.,;:!?\)\]\}]/u.test(edge) : /[\(\[\{]/u.test(edge)) continue
           const missing = (!edge && adjacentBlank) || /[\p{L}\p{N}]/u.test(edge)
             || (side === 'left' && /[.,;:!?\)\]\}]/u.test(edge))

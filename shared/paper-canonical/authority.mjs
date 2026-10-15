@@ -59,6 +59,14 @@ import manifestV58 from '../../standards/paper-canonical/manifest-v58.json' with
 import manifestV59 from '../../standards/paper-canonical/manifest-v59.json' with { type: 'json' }
 import manifestV60 from '../../standards/paper-canonical/manifest-v60.json' with { type: 'json' }
 import manifestV61 from '../../standards/paper-canonical/manifest-v61.json' with { type: 'json' }
+import manifestV62 from '../../standards/paper-canonical/manifest-v62.json' with { type: 'json' }
+import reportV62Schema from '../../schemas/paper-canonical/normalization-report-v62.schema.json' with { type: 'json' }
+import publicationV62Schema from '../../schemas/paper-canonical/canonical-paper-publication-v62.schema.json' with { type: 'json' }
+import sourceAdaptersV20 from '../../standards/paper-canonical/adapters/source-adapters-v20.json' with { type: 'json' }
+import coreV3 from '../../standards/paper-canonical/core/core-invariants-v3.json' with { type: 'json' }
+import coreV3Schema from '../../schemas/paper-canonical/core-invariants-v3.schema.json' with { type: 'json' }
+import groupV3Schema from '../../schemas/paper-canonical/canonical-question-group-v3.schema.json' with { type: 'json' }
+import materializationV4Schema from '../../schemas/paper-canonical/nck1-source-materialization-v4.schema.json' with { type: 'json' }
 import reportV61Schema from '../../schemas/paper-canonical/normalization-report-v61.schema.json' with { type: 'json' }
 import publicationV61Schema from '../../schemas/paper-canonical/canonical-paper-publication-v61.schema.json' with { type: 'json' }
 import sourceAdaptersV19 from '../../standards/paper-canonical/adapters/source-adapters-v19.json' with { type: 'json' }
@@ -1435,7 +1443,7 @@ export function validateAuthorityClosure({
   const issues = []
   // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1495,7 +1503,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1671,8 +1679,8 @@ export function validateAuthorityClosure({
       ))
     }
     if (
-      coreArtifact?.groupSchemaId !== 'canonical-question-group-v2'
-      || !schemaById.has('canonical-question-group-v2')
+      coreArtifact?.groupSchemaId !== (candidateManifest.version === '62' ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
+      || !schemaById.has(coreArtifact.groupSchemaId)
     ) {
       issues.push(issue(
         'CORE_GROUP_SCHEMA_INVALID',
@@ -1690,7 +1698,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -2095,6 +2103,7 @@ const artifactsV57 = { ...artifactsV54, normalization: normalizationV6 }
 const artifactsV58 = { ...artifactsV57, adapter: sourceAdaptersV18, 'rich-content': richContentV2 }
 const artifactsV59 = { ...artifactsV58, 'renderer-typography': typographyV11 }
 const artifactsV61 = { ...artifactsV59, adapter: sourceAdaptersV19, 'rich-content': richContentV3 }
+const artifactsV62 = { ...artifactsV61, adapter: sourceAdaptersV20, core: coreV3 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2721,6 +2730,15 @@ const schemasV61 = {
   'normalization-report-v61': reportV61Schema,
   'canonical-paper-publication-v61': publicationV61Schema,
 }
+const schemasV62 = {
+  ...Object.fromEntries(Object.entries(schemasV61).filter(([id]) =>
+    !['normalization-report-v61', 'canonical-paper-publication-v61'].includes(id))),
+  'core-invariants-v3': coreV3Schema,
+  'canonical-question-group-v3': groupV3Schema,
+  'nck1-source-materialization-v4': materializationV4Schema,
+  'normalization-report-v62': reportV62Schema,
+  'canonical-paper-publication-v62': publicationV62Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2839,6 +2857,7 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV59, artifacts: artifactsV59, schemas: schemasV59 }),
   validateAuthorityClosure({ manifest: manifestV60, artifacts: artifactsV60, schemas: schemasV60 }),
   validateAuthorityClosure({ manifest: manifestV61, artifacts: artifactsV61, schemas: schemasV61 }),
+  validateAuthorityClosure({ manifest: manifestV62, artifacts: artifactsV62, schemas: schemasV62 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2915,6 +2934,7 @@ const authorities = [
   { manifest: manifestV59, artifacts: artifactsV59, schemas: schemasV59 },
   { manifest: manifestV60, artifacts: artifactsV60, schemas: schemasV60 },
   { manifest: manifestV61, artifacts: artifactsV61, schemas: schemasV61 },
+  { manifest: manifestV62, artifacts: artifactsV62, schemas: schemasV62 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2931,7 +2951,8 @@ export const nck1MaterializationHistoricalAuthorityRef54 = authorities.find((aut
 export const nck1MaterializationHistoricalAuthorityRef57 = authorities.find((authority) => authority.manifest.version === '57').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef58 = authorities.find((authority) => authority.manifest.version === '58').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef59 = authorities.find((authority) => authority.manifest.version === '59').authorityRef
-export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '61').authorityRef
+export const nck1MaterializationHistoricalAuthorityRef61 = authorities.find((authority) => authority.manifest.version === '61').authorityRef
+export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '62').authorityRef
 // Analyzed packages are a distinct captured-source protocol. They may not enter
 // the immutable raw-materialization v54 adapter registry or confirmation lane.
 export const nck1AnalyzedPackageCandidateAuthorityRef55 = authorities.find((authority) => authority.manifest.version === '55').authorityRef

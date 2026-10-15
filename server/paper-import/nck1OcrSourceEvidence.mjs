@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
+import { resolveOcrContentVisual } from './nck1OcrContentVisuals.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   nck1ImageBundlePage,
@@ -18,6 +19,7 @@ import {
 export const NCK1_OCR_EVIDENCE_SCHEMA_VERSION = 'nck1-ocr-source-evidence-v1'
 export const NCK1_OCR_CONFIRMATION_SCHEMA_VERSION = 'nck1-ocr-source-confirmation-v1'
 export const NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2 = 'nck1-ocr-source-confirmation-v2'
+export const NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3 = 'nck1-ocr-source-confirmation-v3'
 export const NCK1_OCR_EVIDENCE_FILE_NAME = 'nck1-ocr-source-evidence-v1.json'
 export const NCK1_OCR_CONFIRMATION_FILE_NAME = 'nck1-ocr-source-confirmation-v1.json'
 
@@ -29,7 +31,7 @@ export function loadNck1OcrSourceEmphasis(paperDir) {
   const confirmationBytes = new Uint8Array(readFileSync(confirmationPath))
   const { schemaVersion } = JSON.parse(new TextDecoder().decode(confirmationBytes))
   if (schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION) return {}
-  if (schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2) throw new Error('Unsupported OCR source confirmation version')
+  if (![NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3].includes(schemaVersion)) throw new Error('Unsupported OCR source confirmation version')
   return { ocrSourceBytes: {
     evidenceBytes: new Uint8Array(readFileSync(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME))),
     confirmationBytes,
@@ -556,7 +558,7 @@ export function resolveConfirmedNck1OcrEvidence({
   const fallback = firstSource(documents)
   if (!exactKeys(confirmation, [
     'schemaVersion', 'paperId', 'sourceSetDigest', 'evidenceDigest', 'confirmed', 'documents',
-  ]) || ![NCK1_OCR_CONFIRMATION_SCHEMA_VERSION, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2].includes(confirmation.schemaVersion)
+  ]) || ![NCK1_OCR_CONFIRMATION_SCHEMA_VERSION, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3].includes(confirmation.schemaVersion)
     || confirmation.paperId !== paperId
     || confirmation.sourceSetDigest !== evidence.sourceSetDigest
     || confirmation.evidenceDigest !== evidence.evidenceDigest
@@ -586,6 +588,8 @@ export function resolveConfirmedNck1OcrEvidence({
   const issues = []
   const structures = new Map()
   const sourceVisuals = []
+  const contentMedia = []
+  const contentVisuals = confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
   const seenItemIds = new Set()
   const sourceDocuments = nck1OcrSourceDocuments(documents)
   for (const document of sourceDocuments) {
@@ -626,12 +630,13 @@ export function resolveConfirmedNck1OcrEvidence({
       ]))
       const regions = new Map(evidencePage.regions.map((region) => [region.regionId, region]))
       const claimedObservations = new Set()
+      const pageBody = []
       for (const [itemIndex, item] of confirmedPage.orderedItems.entries()) {
         const itemObservations = Array.isArray(item?.observationIds)
           ? item.observationIds.map((id) => observations.get(id)).filter(Boolean)
           : []
         const ranges = item?.sourceEmphasis
-        const allowsEmphasis = confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2
+        const allowsEmphasis = contentVisuals || confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2
         const validRanges = ranges === undefined || (allowsEmphasis && Array.isArray(ranges)
           && ranges.length > 0 && ranges.every((range, index) =>
             exactKeys(range, ['start', 'end', 'marks'])
@@ -665,7 +670,7 @@ export function resolveConfirmedNck1OcrEvidence({
         }
         seenItemIds.add(item.itemId)
         item.observationIds.forEach((id) => claimedObservations.add(id))
-        body.push({
+        pageBody.push({
           kind: 'paragraph',
           text: item.text,
           containsDrawing: false,
@@ -705,8 +710,28 @@ export function resolveConfirmedNck1OcrEvidence({
       }
       const expectedVisuals = evidencePage.regions.filter((region) => region.kind !== 'text')
       const classified = new Set()
+      const claimedItems = new Set()
+      const replacements = []
       for (const [visualIndex, visual] of confirmedPage.visualClassifications.entries()) {
         const region = regions.get(visual?.regionId)
+        if (contentVisuals && visual?.classification !== 'furniture'
+          && region && region.kind !== 'text' && !classified.has(visual.regionId)) {
+          try {
+            if (pageBody.length !== confirmedPage.orderedItems.length) throw new Error('Content layout cannot use invalid confirmed text')
+            const replacement = resolveOcrContentVisual({ paperId, document,
+              page: { ...confirmedPage, observations: evidencePage.observations }, visual, region, claimedItems })
+            replacements.push(replacement)
+            replacement.itemIds.forEach(id => claimedItems.add(id))
+            if (replacement.media) contentMedia.push(replacement.media)
+            if (replacement.visual) sourceVisuals.push(replacement.visual)
+            classified.add(visual.regionId)
+          } catch (error) {
+            issues.push(issue('NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED',
+              `ocrConfirmation.documents.${document.documentId}.pages.${confirmedPage.page}.visualClassifications[${visualIndex}]`,
+              error.message, document.documentId, confirmedPage.page, region.region))
+          }
+          continue
+        }
         if (
           !exactKeys(visual, ['regionId', 'classification'])
           || !region
@@ -747,11 +772,22 @@ export function resolveConfirmedNck1OcrEvidence({
           ))
         }
       }
+      for (const replacement of replacements) {
+        const anchor = confirmedPage.orderedItems[replacement.insertAt - 1]?.itemId
+        if (replacement.media && claimedItems.has(anchor)) {
+          issues.push(issue('NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED', 'ocrConfirmation',
+            'Image placement anchor cannot be consumed by another visual', document.documentId, confirmedPage.page))
+        }
+      }
+      for (let index = 0; index <= pageBody.length; index += 1) {
+        body.push(...replacements.filter(item => item.insertAt === index).map(item => item.item))
+        if (index < pageBody.length && !claimedItems.has(confirmedPage.orderedItems[index]?.itemId)) body.push(pageBody[index])
+      }
     }
     structures.set(document.documentId, {
       body,
-      paragraphs: body,
-      tables: [],
+      paragraphs: body.filter(item => item.kind === 'paragraph'),
+      tables: body.filter(item => item.kind === 'table'),
       unsupportedParagraphCount: 0,
     })
   }
@@ -765,5 +801,5 @@ export function resolveConfirmedNck1OcrEvidence({
       fallback.region,
     ))
   }
-  return { issues, structures, sourceVisuals }
+  return { issues, structures, sourceVisuals, contentMedia }
 }

@@ -1,6 +1,11 @@
 export type ListeningPresentationGroup = {
   readonly groupType: 'listening'
   readonly firstSectionPlayback?: 'once_explicit' | 'twice_default'
+  readonly sourcePresentation?: {
+    readonly instruction: { readonly text: string }
+    readonly example?: { readonly state: 'not_supplied' }
+      | ({ readonly state: 'provided' } & NonNullable<ListeningPresentation['example']>)
+  }
   readonly questions: ReadonlyArray<{ readonly questionId: string; readonly questionNo: number }>
   readonly segments: ReadonlyArray<{
     readonly segmentId: string

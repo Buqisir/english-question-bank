@@ -9,6 +9,7 @@ import {
 } from './mediaPresentation.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
 import { writingNoticeGroups, writingWordCount } from './applicationWritingDisplay.mjs'
+import { SOURCE_INSTRUCTION_SLOTS, validSourceExample } from './sourcePresentation.mjs'
 
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION =
   'nck1-source-materialization-v1'
@@ -16,6 +17,8 @@ export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2 =
   'nck1-source-materialization-v2'
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3 =
   'nck1-source-materialization-v3'
+export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4 =
+  'nck1-source-materialization-v4'
 
 const slots = Object.freeze([
   ['reading.a', 'reading', 21, 23],
@@ -1015,11 +1018,13 @@ export function validateNck1SourceMaterialization(value) {
       'sourceCoverage',
       'listening',
       'issues',
+      ...(value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4 ? ['sourcePresentation'] : []),
     ])
     || ![
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3,
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4,
     ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
     || value.profileId !== 'nck1'
@@ -1058,9 +1063,38 @@ export function validateNck1SourceMaterialization(value) {
       documents.set(document.documentId, document)
     }
   }
+  if (value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4) {
+    const presentation = value.sourcePresentation
+    const required = Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slot =>
+      !slot.startsWith('listening.') || value.listening?.state !== 'not_supplied')
+    const boundToQuestion = (source, path) => {
+      validateLocator(source, path, documents, issues)
+      if (!['question_source', 'question_and_answers'].includes(documents.get(source?.documentId)?.role)) {
+        issues.push(issue('MATERIALIZATION_SOURCE_PRESENTATION_INVALID', path, 'Instruction and example evidence must bind the question-bearing source'))
+      }
+    }
+    if (!isRecordValue(presentation) || !exactKeys(presentation, ['instructions', 'listeningExample'])
+      || !Array.isArray(presentation.instructions) || presentation.instructions.length !== required.length
+      || new Set(presentation.instructions.map(item => item?.slotId)).size !== required.length) {
+      issues.push(issue('MATERIALIZATION_SOURCE_PRESENTATION_INVALID', '$.sourcePresentation', 'All active source instructions require exact, unique slot coverage'))
+    } else {
+      for (const [index, entry] of presentation.instructions.entries()) {
+        const path = `$.sourcePresentation.instructions[${index}]`
+        if (!isRecordValue(entry) || !exactKeys(entry, ['slotId', 'text', 'source'])
+          || !required.includes(entry.slotId) || !nonEmptyString(entry.text)) {
+          issues.push(issue('MATERIALIZATION_SOURCE_PRESENTATION_INVALID', path, 'Source instruction needs an active slot, exact text and locator'))
+        } else boundToQuestion(entry.source, `${path}.source`)
+      }
+      if (value.listening?.state === 'not_supplied') {
+        if (presentation.listeningExample !== null) issues.push(issue('MATERIALIZATION_SOURCE_PRESENTATION_INVALID', '$.sourcePresentation.listeningExample', 'Inactive listening cannot supply an example'))
+      } else if (!validSourceExample(presentation.listeningExample, 'source')) {
+        issues.push(issue('MATERIALIZATION_SOURCE_PRESENTATION_INVALID', '$.sourcePresentation.listeningExample', 'Listening example requires source-backed content or explicit source-backed absence'))
+      } else boundToQuestion(presentation.listeningExample.source, '$.sourcePresentation.listeningExample.source')
+    }
+  }
   const mediaReferences = []
   const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues,
-    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3)
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4].includes(value.schemaVersion))
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {

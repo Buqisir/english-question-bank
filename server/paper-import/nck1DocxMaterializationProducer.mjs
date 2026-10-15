@@ -246,7 +246,7 @@ function contentBlocks(items, context) {
       if (item.materializedMedia && normalized(item.text).length === 0) {
         return [{
           kind: 'figure',
-          blockId: `block:${context.paperId}:${context.slotId.replaceAll('.', '-')}:figure-${item.sourceIndex}`,
+          blockId: `block:${context.paperId}:${context.slotId.replaceAll('.', '-')}:figure-${item.sourceIndex?.kind === 'page_region' ? digestJson(item.sourceIndex).slice(7, 23) : item.sourceIndex}`,
           mediaId: item.materializedMedia.mediaId,
           caption: '',
           source: sourceLocator(context.documentId, item.sourceIndex),
@@ -1200,7 +1200,7 @@ export function produceNck1MaterializationFromStructures({
       }),
       ...sourceVisuals.map((visual) => structuredClone(visual)),
       ...(coverage?.pageCount === 1
-        ? selectedMedia.map((item, index) => ({
+        ? selectedMedia.filter(item => !sourceVisuals.some(visual => visual.targetId === item.mediaId)).map((item, index) => ({
             visualId: `visual:${paperId}:media-${index + 1}`,
             page: 1,
             disposition: 'content_media',

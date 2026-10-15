@@ -8,7 +8,9 @@ import {
   nck1MaterializationCandidateAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef59,
+  nck1MaterializationHistoricalAuthorityRef61,
 } from '../../shared/paper-canonical/authority.mjs'
+import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 import {
   digestNck1SourceMaterialization,
   validateNck1SourceMaterialization,
@@ -22,7 +24,8 @@ import {
 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, extractDocxParagraphEmphasis } from './docxSourceAdapter.mjs'
 import { mapSourceEmphasisEdits, splitSourceEmphasis } from './sourceEmphasis.mjs'
-import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2 } from '../paper-import/nck1OcrSourceEvidence.mjs'
+import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3 } from '../paper-import/nck1OcrSourceEvidence.mjs'
+import { produceNck1MaterializationFromStructures } from '../paper-import/nck1DocxMaterializationProducer.mjs'
 import { rasterPdfRegion } from './pdfRegionRaster.mjs'
 import { applySpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import {
@@ -1430,7 +1433,7 @@ export function deriveNck1SemanticSource(
                 },
               }
             : {}),
-          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),
@@ -1501,6 +1504,27 @@ export function deriveNck1SemanticSource(
     })
   }
   appendListeningGroups(source, materialization, documentsById)
+  for (const entry of materialization.sourcePresentation?.instructions || []) {
+    const group = source.groups.find(group => group.slotId === canonicalSlotId(entry.slotId))
+    const instructionId = SOURCE_INSTRUCTION_SLOTS[entry.slotId]
+    const observation = observationForLocator(`observation:source-instruction:${group.groupId}`,
+      'source_instruction', entry.source, { instructionId, text: entry.text }, documentsById)
+    observation.extraction.version = '5'
+    source.observations.push(observation)
+    group.sourcePresentation = { instruction: { instructionId, text: entry.text,
+      authorityObservationRef: observation.observationId } }
+    const refs = [`source-span:${observation.observationId}`]
+    if (entry.slotId === 'listening.short-dialogue') {
+      const { source: locator, ...example } = materialization.sourcePresentation.listeningExample
+      const exampleObservation = observationForLocator(`observation:source-example:${group.groupId}`,
+        'source_listening_example', locator, example, documentsById)
+      exampleObservation.extraction.version = '5'
+      source.observations.push(exampleObservation)
+      group.sourcePresentation.example = { ...example, authorityObservationRef: exampleObservation.observationId }
+      refs.push(`source-span:${exampleObservation.observationId}`)
+    }
+    group.sourceSpanRefsByTarget[`source_presentation:${group.groupId}`] = refs
+  }
   return source
 }
 
@@ -1675,8 +1699,8 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
   try {
     const evidence = JSON.parse(textDecoder.decode(ocrSourceBytes.evidenceBytes))
     const confirmation = JSON.parse(textDecoder.decode(ocrSourceBytes.confirmationBytes))
-    if (confirmation.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2) {
-      throw new Error('OCR source emphasis requires version 2 transcription closure')
+    if (![NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3].includes(confirmation.schemaVersion)) {
+      throw new Error('OCR source evidence requires version 2 or 3 transcription closure')
     }
     const resolved = resolveConfirmedNck1OcrEvidence({
       paperId: raw.paperId,
@@ -1685,6 +1709,60 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       confirmation,
     })
     if (resolved.issues.length) throw new Error(resolved.issues[0].message)
+    if (confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3) {
+      const flatten = blocks => blocks.flatMap(block => block.kind === 'framed_columns'
+        ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
+      const blocks = raw.groups.flatMap(group => flatten(group.blocks))
+      const question = raw.documents.find(document => !document.renditionOf && document.role === 'question_source')
+      const answer = raw.documents.find(document => !document.renditionOf && document.role === 'official_answers')
+      // Reuse the producer's source-order parser, not the mutable Candidate's
+      // claimed group. This also excludes answer-source tables from student content.
+      const expectedGroups = question && answer ? produceNck1MaterializationFromStructures({
+        paperId: raw.paperId, documents: raw.documents, question, answer, coverage: question,
+        questionStructure: resolved.structures.get(question.documentId),
+        answerStructure: resolved.structures.get(answer.documentId),
+        issues: [], sourceVisuals: resolved.sourceVisuals, mediaInventory: raw.media,
+        codePrefix: 'NCK1_OCR',
+      }).materialization.groups : []
+      const placements = groups => groups.flatMap(group => {
+        const ordered = flatten(group.blocks)
+        return ordered.flatMap((block, index) => ['table', 'figure'].includes(block.kind) ? [{
+          slotId: group.slotId, kind: block.kind, source: block.source,
+          ...(block.kind === 'figure' ? { mediaId: block.mediaId } : {}),
+          before: ordered[index - 1]?.source ?? null,
+          after: ordered[index + 1]?.source ?? null,
+        }] : [])
+      })
+      if (digestJson(placements(raw.groups)) !== digestJson(placements(expectedGroups))) {
+        throw new Error('OCR visuals must retain exactly their confirmed question-source groups and neighboring source anchors')
+      }
+      const expectedTables = expectedGroups.flatMap(group => flatten(group.blocks)).filter(block => block.kind === 'table')
+      const cells = table => table?.rows.map(row => row.cells.map(cell => ({
+        content: cell.content, role: cell.role, columnSpan: cell.columnSpan, rowSpan: cell.rowSpan,
+      })))
+      for (const document of raw.documents.filter(document => document.role === 'question_source')) {
+        for (const table of resolved.structures.get(document.documentId)?.tables || []) {
+          const matches = blocks.filter(block => block.kind === 'table' && digestJson(block.source) === digestJson(table.source))
+          const expected = expectedTables.find(block => digestJson(block.source) === digestJson(table.source))
+          if (matches.length !== 1 || !expected || digestJson(cells(matches[0])) !== digestJson(cells(expected))) {
+            throw new Error('Confirmed OCR table must retain its exact cells and one source-bound content placement')
+          }
+        }
+      }
+      if (raw.media.length !== resolved.contentMedia.length) {
+        throw new Error('OCR media inventory must contain only the confirmed question-source crops')
+      }
+      for (const { mediaId, source: locator } of resolved.contentMedia) {
+        const media = raw.media.find(item => item.mediaId === mediaId)
+        if (!media || media.extraction.kind !== 'pdf_crop'
+          || media.extraction.documentId !== locator.documentId || media.extraction.page !== locator.page
+          || digestJson(media.extraction.region) !== digestJson(locator.region)
+          || blocks.filter(block => block.kind === 'figure' && block.mediaId === mediaId
+            && digestJson(block.source) === digestJson(locator)).length !== 1) {
+          throw new Error('Confirmed OCR image must retain its exact source crop and one content placement')
+        }
+      }
+    }
     const marked = new Map()
     for (const structure of resolved.structures.values()) {
       for (const paragraph of structure.paragraphs) {
@@ -1786,6 +1864,11 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     }
   }
   const validation = validateBundle(materialization, input)
+  if ((materialization.schemaVersion === 'nck1-source-materialization-v4'
+    || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
+    && authorityRef.manifestVersion !== '62') {
+    validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require the v62 closure'))
+  }
   if (validation.issues.length > 0) {
     return {
       input,
@@ -1820,14 +1903,15 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     { authorityRef },
   )
   if ([nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
-    nck1MaterializationHistoricalAuthorityRef59]
+    nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
       input.spellingReviewBytes ? JSON.parse(new TextDecoder().decode(input.spellingReviewBytes)) : null,
       derivationIssues)
   }
   if (input.ocrSourceBytes) {
-    if (authorityRef.manifestDigest !== nck1MaterializationCandidateAuthorityRef.manifestDigest) {
+    if (![nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef61]
+      .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
       derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
     } else {
       appendOcrReadingSourceEmphasis(source, rawMaterialization, validation.documentsById, input.ocrSourceBytes,

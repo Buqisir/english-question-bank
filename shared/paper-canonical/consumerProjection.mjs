@@ -13,6 +13,7 @@ import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
+import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
   'cloze',
@@ -48,7 +49,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61'].includes(input.consumption.authorityRef?.manifestVersion)
+  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -129,6 +130,7 @@ function projectListeningConsumerGroup(input, occurrence) {
     groupId,
     familyContractId: 'listening',
     questions: questions.map(({ layoutPlan: _layoutPlan, ...question }) => question),
+    ...(occurrence.sourcePresentation === undefined ? {} : { sourcePresentation: structuredClone(occurrence.sourcePresentation) }),
   }
   return Object.freeze({
     groupType: 'listening',
@@ -1264,11 +1266,11 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1340,6 +1342,11 @@ export function projectCanonicalConsumerGroup(input) {
   const occurrence = selectOccurrence(input)
   if (occurrence.familyContractId !== familyContractId) {
     throw rejected(`Canonical occurrence ${groupId} belongs to another family`)
+  }
+  if (occurrence.sourcePresentation !== undefined
+    && (input.consumption.authorityRef?.manifestVersion !== '62'
+      || !validCanonicalSourcePresentation(occurrence.sourcePresentation))) {
+    throw rejected(`Canonical occurrence ${groupId} has invalid source presentation`)
   }
   if (familyContractId === 'reading') {
     return projectReadingConsumerGroup(input, occurrence)
@@ -1414,7 +1421,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

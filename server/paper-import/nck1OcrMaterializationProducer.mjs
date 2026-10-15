@@ -5,6 +5,7 @@ import {
 import {
   nck1OcrSourceDocuments,
   nck1OcrSourceSetDigest,
+  NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
 } from './nck1OcrSourceEvidence.mjs'
@@ -12,6 +13,7 @@ import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
 } from './nck1ImageSourceBundle.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 
 export const NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION =
   'nck1-ocr-materialization-producer-v7'
@@ -53,7 +55,12 @@ function closeIssueSource(item, document) {
   }
 }
 
-export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null, producerVersion = NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION } = {}) {
+export function nck1OcrProducerVersion(confirmation) {
+  return confirmation?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
+    ? 'nck1-ocr-materialization-producer-v8' : NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION
+}
+
+export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null, producerVersion = nck1OcrProducerVersion(confirmation) } = {}) {
   return digestJson({
     producerVersion,
     sourceSetDigest: nck1OcrSourceSetDigest(documents),
@@ -123,6 +130,8 @@ export function produceNck1OcrMaterialization({
   let questionStructure = emptyStructure()
   let answerStructure = emptyStructure()
   let sourceVisuals = []
+  const mediaInventory = []
+  const mediaFiles = []
   if (!evidence) {
     const unresolvedDocuments = [...new Map(
       [question, answer].filter(Boolean).map((document) => [document.documentId, document]),
@@ -171,6 +180,25 @@ export function produceNck1OcrMaterialization({
       answerStructure = resolved.structures.get(answer?.documentId) || emptyStructure()
     }
     sourceVisuals = resolved.sourceVisuals
+    if (resolved.issues.length === 0) {
+      for (const { mediaId, source: locator } of resolved.contentMedia || []) {
+        const document = documents.find(item => item.documentId === locator.documentId)
+        try {
+          const crop = rasterPdfRegion({ pdfBytes: document.bytes, page: locator.page,
+            region: locator.region, density: 144 })
+          const digest = sha256(crop.bytes)
+          mediaInventory.push({ mediaId, usage: 'content', kind: 'figure', mimeType: 'image/png',
+            sha256: digest, pixelWidth: crop.pixelWidth, pixelHeight: crop.pixelHeight,
+            extraction: { ...locator, kind: 'pdf_crop', density: 144 },
+            presentation: { alignment: 'center', widthRatio: 1, spacingBefore: 'normal', spacingAfter: 'normal' },
+            publication: { selection: 'source_crop', sourceSha256: digest } })
+          mediaFiles.push({ mediaId, bytes: crop.bytes })
+        } catch (error) {
+          addIssue(issues, 'NCK1_OCR_MEDIA_EXTRACTION_FAILED', `media.${mediaId}`,
+            error.message, document, locator.page, locator.region)
+        }
+      }
+    }
   }
 
   const produced = produceNck1MaterializationFromStructures({
@@ -183,8 +211,10 @@ export function produceNck1OcrMaterialization({
     answerStructure,
     issues,
     sourceVisuals,
+    mediaInventory,
+    mediaFiles,
     codePrefix: 'NCK1_OCR',
-    producerVersion: NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
+    producerVersion: nck1OcrProducerVersion(confirmation),
     reviewSchemaVersion: 'nck1-ocr-materialization-review-v1',
     sourceDigest: nck1OcrProducerSourceDigest(documents, { evidence, confirmation }),
   })
