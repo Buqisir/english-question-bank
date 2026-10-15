@@ -4,7 +4,9 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
+  cpSync,
   existsSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
@@ -18,13 +20,14 @@ import { nck1MaterializationHistoricalAuthorityRef59 } from '../shared/paper-can
 import { materializeNck1CanonicalRequest, admitLiveConfirmedNck1MaterializationImport } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
 import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
-import { inspectNck1Materialization } from './import-pipeline/nck1-docx-materialize.mjs'
+import { inspectNck1Materialization, runNck1MaterializationJob } from './import-pipeline/nck1-docx-materialize.mjs'
 import {
   nck1OcrProducerSourceDigest,
   produceNck1OcrMaterialization,
 } from '../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import {
   nck1OcrEvidenceDigest,
+  resolveConfirmedNck1OcrEvidence,
 } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
   extractNck1PdfTextStructure,
@@ -70,7 +73,7 @@ function imported(produced, ocrSourceBytes = null) {
       documentId: document.documentId,
       bytes: document.bytes,
     })),
-    media: [],
+    media: produced.mediaFiles || [],
   })
 }
 
@@ -205,6 +208,115 @@ const canonical = imported(confirmed)
 assert.deepEqual(canonical.issues, [])
 assert.equal(canonical.candidate?.interpretation.groups.length, 9)
 assert.equal(canonical.candidate?.interpretation.assertions.length, 45)
+
+// v3 content classification preserves confirmed text in cells instead of
+// pretending it is furniture. Exercise the public resolver, including the
+// official-answer carrier, without authoring a second copy of cell text.
+for (const documentIndex of [0, 1]) {
+  const evidence = cloneJson(fixture.evidence)
+  const confirmation = cloneJson(fixture.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
+  const page = confirmation.documents[documentIndex].pages[0]
+  const observed = evidence.documents[documentIndex].pages[0]
+  const ids = page.orderedItems.map(item => item.itemId)
+  assert(ids.length >= 2)
+  observed.regions.push({ regionId: 'table-layout', kind: 'visual',
+    region: { x: 0, y: 0, width: 1, height: 1 } })
+  page.visualClassifications.push({ regionId: 'table-layout', classification: 'semantic_table',
+    rows: [{ header: true, cells: [[ids[0]], ids.slice(1)] }] })
+  rebound(evidence)
+  confirmation.evidenceDigest = evidence.evidenceDigest
+  const resolve = value => resolveConfirmedNck1OcrEvidence({ paperId,
+    documents: fixture.sourceDocuments, evidence, confirmation: value })
+  const result = resolve(confirmation)
+  assert.deepEqual(result.issues, [])
+  const table = result.structures.get(fixture.sourceDocuments[documentIndex].documentId).tables[0]
+  assert.deepEqual(table.rows[0].cells.map(cell => cell.text),
+    [page.orderedItems[0].text, page.orderedItems.slice(1).map(item => item.text).join('\n')])
+  assert.equal(table.columnCount, 2)
+  for (const change of [
+    value => { value.documents[documentIndex].pages[0].visualClassifications.at(-1).rows[0].cells[1].pop() },
+    value => { value.documents[documentIndex].pages[0].visualClassifications.at(-1).rows[0].cells[0][0] = 'foreign-item' },
+    value => { value.documents[documentIndex].pages[0].visualClassifications.at(-1).rows[0].cells[1].push(ids[0]) },
+    value => { value.schemaVersion = 'nck1-ocr-source-confirmation-v2' },
+  ]) {
+    const invalid = cloneJson(confirmation)
+    change(invalid)
+    assert(resolve(invalid).issues.some(issue => issue.code === 'NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED'))
+  }
+}
+
+// Exercise actual producer -> immutable crop/table -> Canonical preview, not
+// only the layout resolver. The source region contains one passage paragraph.
+for (const classification of ['semantic_table', 'content_media']) {
+  const evidence = cloneJson(fixture.evidence)
+  const confirmation = cloneJson(fixture.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
+  const page = confirmation.documents[0].pages.find(page => page.orderedItems.some(item => item.text === 'C passage keeps one small promise.'))
+  const index = page.orderedItems.findIndex(item => item.text === 'C passage keeps one small promise.')
+  assert(index > 0)
+  const item = page.orderedItems[index]
+  const observed = evidence.documents[0].pages.find(value => value.page === page.page)
+  const observation = observed.observations.find(value => item.observationIds.includes(value.observationId))
+  assert.equal(item.observationIds.length, 1)
+  if (classification === 'semantic_table') {
+    item.text = `\t${item.text}\n`
+    observation.text = item.text
+  }
+  observed.regions.push({ regionId: 'content-layout', kind: 'visual', region: cloneJson(observation.region) })
+  page.visualClassifications.push({ regionId: 'content-layout', classification,
+    ...(classification === 'semantic_table'
+      ? { rows: [{ header: false, cells: [[item.itemId]] }] }
+      : { itemIds: [item.itemId], afterItemId: page.orderedItems[index - 1].itemId }) })
+  rebound(evidence)
+  confirmation.evidenceDigest = evidence.evidenceDigest
+  const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
+  assert.deepEqual(produced.review.required, [], JSON.stringify(produced.review.required))
+  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v8')
+  if (classification === 'semantic_table') {
+    assert.equal(produced.materialization.groups.find(group => group.slotId === 'reading.c')
+      .blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text,
+    '\tC passage keeps one small promise.\n', 'cell edge tabs/newlines follow the producer, not a second trim policy')
+  }
+  const sourceBytes = { evidenceBytes: new TextEncoder().encode(JSON.stringify(evidence)),
+    confirmationBytes: new TextEncoder().encode(JSON.stringify(confirmation)) }
+  const candidate = imported(produced, sourceBytes)
+  assert.deepEqual(candidate.issues, [])
+  const preview = compileNck1MaterializationCandidatePreview(candidate.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const content = preview.compilation.artifacts.canonicalPaper.questionGroups.find(group => group.identity.groupId.endsWith('reading-c')).content
+  assert(content.blocks.some(block => block.kind === (classification === 'semantic_table' ? 'table' : 'figure')))
+  const tampered = cloneJson(produced.materialization)
+  const blocks = tampered.groups.find(group => group.slotId === 'reading.c').blocks
+  if (classification === 'semantic_table') blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text = 'Invented cell'
+  else blocks.splice(blocks.findIndex(block => block.kind === 'figure'), 1)
+  const rejected = imported({ ...produced, materialization: tampered }, sourceBytes)
+  assert(rejected.issues.length > 0, 'dropping or rewriting a confirmed source visual must not compile')
+  for (const change of ['wrong-group', 'wrong-anchor', 'answer-table']) {
+    const moved = cloneJson(produced.materialization)
+    const owner = moved.groups.find(group => group.slotId === 'reading.c')
+    const destination = moved.groups.find(group => group.slotId === 'reading.d')
+    if (change === 'wrong-group') {
+      const visualIndex = owner.blocks.findIndex(block => ['table', 'figure'].includes(block.kind))
+      destination.blocks.push(owner.blocks.splice(visualIndex, 1)[0])
+      owner.blocks.push(cloneJson(confirmed.materialization.groups.find(group => group.slotId === 'reading.c').blocks[0]))
+    } else if (change === 'wrong-anchor') {
+      owner.blocks.unshift(cloneJson(confirmed.materialization.groups.find(group => group.slotId === 'reading.c').blocks[0]))
+    } else {
+      if (classification !== 'semantic_table') continue
+      const table = cloneJson(owner.blocks.find(block => block.kind === 'table'))
+      table.blockId += '-answer-leak'
+      table.source = { kind: 'page_region', documentId: fixture.sourceDocuments[1].documentId,
+        page: 1, region: { x: 0, y: 0, width: 1, height: 1 } }
+      destination.blocks.push(table)
+      moved.sourceCoverage.visuals.push({ visualId: 'visual:answer-leak', page: 1,
+        region: table.source.region, disposition: 'semantic_table', targetId: table.blockId })
+    }
+    const invalid = imported({ ...produced, materialization: moved }, sourceBytes)
+    assert(invalid.issues.some(issue => /confirmed question-source groups/.test(issue.message)),
+      `${change}: intact visuals must retain question-source ownership and placement: ${JSON.stringify(invalid.issues)}`)
+  }
+}
 
 // Previously confirmed text-only v59 candidates must not be upgraded on replay.
 const historical = importCanonicalCandidate(canonical.candidate.sourceInput, undefined, {
@@ -405,6 +517,34 @@ try {
     '--source', `question_source=${questionPath}`,
     '--source', `official_answers=${answerPath}`,
   ), /INITIALIZED/u)
+  const v3Dir = path.join(tempRoot, 'confirmation-v3')
+  cpSync(cliPaperDir, v3Dir, { recursive: true })
+  mkdirSync(path.join(v3Dir, 'materialization'), { recursive: true })
+  writeFileSync(path.join(v3Dir, 'materialization/nck1-ocr-source-evidence-v1.json'), JSON.stringify(fixture.evidence))
+  writeFileSync(path.join(v3Dir, 'materialization/nck1-ocr-source-confirmation-v1.json'),
+    JSON.stringify({ ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }))
+  const v3Job = { paperDir: v3Dir, manifest: JSON.parse(readFileSync(path.join(v3Dir, 'universal-source-manifest.json'))) }
+  assert.equal(runNck1MaterializationJob(v3Job).disposition, 'ready_for_verification')
+  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v8')
+  assert.equal(runNck1MaterializationJob(v3Job).cached, true, 'v3 output, review and receipt must agree on the current v8 producer')
+  const v3ReviewFile = path.join(v3Dir, 'materialization/nck1-ocr-materialization-review-v1.json')
+  const v3ReviewBytes = readFileSync(v3ReviewFile)
+  writeFileSync(v3ReviewFile, JSON.stringify({ ...JSON.parse(v3ReviewBytes), producerVersion: 'nck1-ocr-materialization-producer-v6' }))
+  assert.throws(() => inspectNck1Materialization(v3Job), /not bound/u)
+  assert.throws(() => runNck1MaterializationJob(v3Job), /not bound/u,
+    'a current receipt cannot mask a stale producer review on cache hits')
+  writeFileSync(v3ReviewFile, v3ReviewBytes)
+  const oldV3Digest = nck1OcrProducerSourceDigest(fixture.sourceDocuments, {
+    evidence: fixture.evidence, confirmation: { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' },
+    producerVersion: 'nck1-ocr-materialization-producer-v6',
+  })
+  for (const name of ['producer-receipt', 'review']) {
+    const file = path.join(v3Dir, `materialization/nck1-ocr-materialization-${name}-v1.json`)
+    const value = JSON.parse(readFileSync(file, 'utf8'))
+    writeFileSync(file, JSON.stringify({ ...value, producerVersion: 'nck1-ocr-materialization-producer-v6', sourceDigest: oldV3Digest }))
+  }
+  assert.throws(() => inspectNck1Materialization(v3Job), /not bound/u,
+    'historical producers cannot attest confirmation v3 even with matching recomputed digests')
   assert.match(run('materialize', paperId), /"disposition": "needs_agent_review"/u)
   const failedOutputPath = path.join(cliPaperDir, fixture.manifest.materializationPath)
   const pdfReceiptPath = path.join(cliPaperDir, 'materialization/nck1-pdf-materialization-producer-receipt-v1.json')

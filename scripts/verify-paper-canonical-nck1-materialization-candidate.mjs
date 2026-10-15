@@ -9,6 +9,7 @@ import {
   nck1MaterializationCandidateAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef54,
   nck1MaterializationHistoricalAuthorityRef58,
+  nck1MaterializationHistoricalAuthorityRef61,
   resolveCanonicalAuthority,
   trustedDocxCandidateAuthorityRef,
 } from '../shared/paper-canonical/authority.mjs'
@@ -20,11 +21,15 @@ import {
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { validateContinuationWritingContract } from '../shared/paper-canonical/continuationWriting.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
+import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresentation.mjs'
+import { projectListeningGroupPresentation } from '../shared/paper-canonical/listeningPresentation.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { assertCanonicalConsumptionVisibleStructure } from '../shared/paper-canonical/visibleStructure.mjs'
 import manifestV46 from '../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
+import oldScreenContract from '../standards/paper-canonical/consumers/screen-v45.json' with { type: 'json' }
+import oldPrintContract from '../standards/paper-canonical/consumers/print-pdf-v46.json' with { type: 'json' }
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
-import { admitCanonicalPaperImport } from '../server/paper-canonical/publication.mjs'
+import { admitCanonicalPaperImport, loadPaperForConsumptionSync, publicationFileName } from '../server/paper-canonical/publication.mjs'
 import {
   NCK1_MATERIALIZATION_REQUEST_FILE_NAME,
   materializeNck1CanonicalRequest,
@@ -38,7 +43,7 @@ import {
 } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { extractDocxDocumentParagraphs } from '../server/paper-canonical/docxSourceAdapter.mjs'
 import { applySpellingReview, enumerateSpellingTargets, loadSpellingReview, prepareSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY_V4 } from '../server/paper-import/spellingReview.mjs'
-import { loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewConsumption, loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
 import { buildPreprocessingReport } from '../server/paper-import/preprocessingReport.mjs'
 import { canonicalizeVisibleEnglishTypography as typography } from '../shared/paper-canonical/visibleTypography.mjs'
 import { replayCanonicalVisibleTypography as replayTypography } from '../shared/paper-canonical/visibleTypographyReplay.mjs'
@@ -314,7 +319,7 @@ assert.equal(Boolean(misplacedDirectionConfirmation.compilation), false,
   'a suspected passage instruction blocks confirmed compilation')
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '61')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '62')
 assert.equal(nck1MaterializationHistoricalAuthorityRef58.manifestVersion, '58')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
@@ -706,8 +711,100 @@ const rawAdmission = admitCanonicalPaperImport({
   sourceAssetVersion: 1,
 })
 assert.equal(rawAdmission.ok, true,
-  `raw v61 admission and consumers remain valid: ${JSON.stringify(rawAdmission.diagnostics)}`)
-assert.equal(rawAdmission.sealed.manifest.authority.manifestVersion, '61')
+  `raw v62 admission and consumers remain valid: ${JSON.stringify(rawAdmission.diagnostics)}`)
+assert.equal(rawAdmission.sealed.manifest.authority.manifestVersion, '62')
+const replay61 = importCanonicalCandidate(rawNoListeningInput, undefined, {
+  materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef61,
+})
+assert.deepEqual(replay61.issues, [])
+const request61 = materializeNck1CanonicalRequest(rawNoListeningInput, confirmation(replay61.candidate))
+assert.equal(request61.request.authority.manifestVersion, '61')
+assert.equal(compileCanonicalPaper(request61.request).disposition, 'ready')
+
+// A pre-v62 client must not silently discard source-owned directions/examples.
+for (const sourceOwned of [false, true]) {
+  const source = sourceInput({ listening: false, mixedTable: false })
+  const materialization = JSON.parse(new TextDecoder().decode(source.materializationBytes))
+  if (sourceOwned) {
+    materialization.schemaVersion = 'nck1-source-materialization-v4'
+    materialization.sourcePresentation = { listeningExample: null,
+      instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slot => !slot.startsWith('listening.'))
+        .map(slotId => ({ slotId, text: `Source direction for ${slotId}.`, source: materialization.groups[0].blocks[0].source })) }
+    source.materializationBytes = textEncoder.encode(JSON.stringify(materialization))
+  }
+  const candidate = importCanonicalCandidate(source).candidate
+  const request = materializeNck1CanonicalRequest(source, confirmation(candidate)).request
+  const admission = admitCanonicalPaperImport({ request, sourceAssetVersion: 1 })
+  assert.equal(admission.ok, true, JSON.stringify(admission.diagnostics))
+  const { sealed } = admission
+  const ref = { paperId: sealed.manifest.paperId, versionName: 'v1', sourceAssetVersion: 1,
+    publicationDigest: sealed.manifest.publicationDigest }
+  const store = {
+    readPublishedRefs: () => ({ current: ref, latest: ref }),
+    readSourceAsset: () => sealed.sourceAsset,
+    readVersionArtifact: (_ref, relativePath) => relativePath === `canonical/${publicationFileName}`
+      ? textEncoder.encode(JSON.stringify(sealed.manifest))
+      : sealed.artifacts[relativePath] || sealed.sourceEvidence[relativePath] || null,
+  }
+  for (const old of [oldScreenContract, oldPrintContract]) {
+    const result = loadPaperForConsumptionSync({ paperId: ref.paperId, version: ref.versionName,
+      consumerContract: { id: old.consumerId, version: old.version, digest: old.contractDigest } }, store)
+    assert.equal(result.disposition, sourceOwned ? 'incompatible' : 'ready', JSON.stringify(result.diagnostics))
+    if (sourceOwned) assert.equal(result.diagnostics[0].code, 'CANONICAL_CONSUMER_SOURCE_PRESENTATION_UNAVAILABLE')
+  }
+}
+
+// Raw v4 directions/example presence survive the same canonical path as Questions.
+for (const exampleState of ['not_supplied', 'provided']) {
+  const source = sourceInput({ listening: true, mixedTable: false })
+  const materialization = JSON.parse(new TextDecoder().decode(source.materializationBytes))
+  const locator = materialization.groups[0].source ?? materialization.groups[0].blocks[0].source
+  materialization.schemaVersion = 'nck1-source-materialization-v4'
+  materialization.sourcePresentation = {
+    instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).map(slotId => ({ slotId,
+      text: `Source direction for ${slotId}.`, source: structuredClone(locator) })),
+    listeningExample: { state: exampleState, source: structuredClone(locator),
+      ...(exampleState === 'provided' ? { stem: 'When does the bus leave?',
+        options: [{ label: 'A', text: '8:20' }, { label: 'B', text: '9:40' }, { label: 'C', text: '10:15' }], answer: 'B' } : {}) },
+  }
+  source.materializationBytes = textEncoder.encode(JSON.stringify(materialization))
+  const candidate = importCanonicalCandidate(source)
+  assert.deepEqual(candidate.issues, [])
+  const compilation = rederiveConfirmedCanonicalCandidate(candidate.candidate, confirmation(candidate.candidate)).compilation
+  assert(compilation?.artifacts.canonicalPaper, 'source presentation must compile, not disappear silently')
+  assertCanonicalConsumptionVisibleStructure(buildNck1ReviewConsumption(candidate.candidate, compilation))
+  const pack = { plan: compilation.artifacts.canonicalPaper.paperPlan,
+    groups: compilation.artifacts.canonicalPaper.questionGroups,
+    sourceCapture: compilation.artifacts.sourceCapture }
+  const projection = projectCanonicalPaper(pack)
+  for (const entry of materialization.sourcePresentation.instructions) {
+    assert.equal(projection.nodes.find(node => node.kind === 'instruction'
+      && node.instructionId === SOURCE_INSTRUCTION_SLOTS[entry.slotId]).text, entry.text)
+  }
+  const occurrences = projection.nodes.filter(node => node.kind === 'group' && node.familyContractId === 'listening')
+  const consumption = { disposition: 'ready', paperId: materialization.paperId,
+    authorityRef: pack.plan.authorityRef, selections: [{ mode: 'canonical', familyContractId: 'listening',
+      groupIds: occurrences.map(item => item.groupId), projectedOccurrences: occurrences,
+      projectedOccurrenceDigests: occurrences.map(item => ({ groupId: item.groupId, digest: digestJson(item) })) }] }
+  const group = projectCanonicalConsumerGroup({ consumption, groupId: occurrences[0].groupId, familyContractId: 'listening' })
+  const presentation = projectListeningGroupPresentation(group)
+  assert.equal(presentation.instruction, 'Source direction for listening.short-dialogue.')
+  assert.equal(presentation.example?.answer ?? null, exampleState === 'provided' ? 'B' : null)
+  assert.equal(presentation.example?.stem ?? null, exampleState === 'provided' ? 'When does the bus leave?' : null)
+  assert.equal(JSON.stringify(group).includes('correctOptionId'), false, 'example answer does not disclose formal Question answers')
+  const tampered = structuredClone(pack)
+  tampered.groups.find(item => item.sourcePresentation).sourcePresentation.instruction.text = 'Unbound instruction'
+  assert.throws(() => projectCanonicalPaper(tampered), /Source presentation/)
+  const missing = structuredClone(materialization)
+  missing.sourcePresentation.instructions.pop()
+  assert(importCanonicalCandidate({ ...source, materializationBytes: textEncoder.encode(JSON.stringify(missing)) }).issues.length)
+  const wrongSource = structuredClone(materialization)
+  wrongSource.sourcePresentation.listeningExample.source.documentId = 'answers'
+  assert(importCanonicalCandidate({ ...source, materializationBytes: textEncoder.encode(JSON.stringify(wrongSource)) }).issues.length)
+  assert(importCanonicalCandidate(source, undefined, { materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef61 }).issues
+    .some(issue => issue.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'))
+}
+assert.equal(projectListeningGroupPresentation(studentListening).example.answer, 'C', 'legacy input keeps historical opening')
 for (const side of ['left', 'right']) {
   const missingInput = sourceInput({ listening: false, mixedTable: false })
   const missing = JSON.parse(new TextDecoder().decode(missingInput.materializationBytes))
@@ -1128,7 +1225,12 @@ try {
     sourceInput: { spellingReviewBytes: textEncoder.encode(JSON.stringify(report)) } }
   const evidence = { schemaVersion: 'preprocessing-handoff-evidence-v1',
     paperId: projection.paperId, sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest }
-  const render = value => buildPreprocessingReport(projection, value, { baseDirectory: reportDir })
+  const reviewStatus = { paperId: projection.paperId, revisions: [{ id: 'rev-current',
+    paperId: projection.paperId, reviewKind: 'candidate', state: 'awaiting_review',
+    sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest }] }
+  const render = (value, status = reviewStatus) => buildPreprocessingReport(projection, value, {
+    baseDirectory: reportDir, reviewStatus: status,
+  })
   const markdown = render(evidence)
   assert(markdown.includes('fanily') && markdown.includes('family'))
   assert(markdown.includes('保留原文的疑点') && markdown.includes(report.targets.find(t => t.decision === 'uncertain').note))
@@ -1210,6 +1312,42 @@ try {
     ...completeProducts.checks, pdfVisual: { ...productCheck, files: productPdfs.slice(0, 2) },
   } }), /pdfVisual PASS must bind every delivered PDF/)
   assert.throws(() => render({ ...productEvidence, pdfs: [productPdfs[0], productPdfs[0]] }), /invalid or duplicate PDF editions/)
+  const fourEvidence = { ...evidence, schemaVersion: 'preprocessing-handoff-evidence-v4' }
+  const fourPdfs = [...productPdfs, pdfFixture(13, 'answerOnly')]
+  const fourCheck = { ...pdfCheck, files: fourPdfs }
+  const fourComplete = { ...fourEvidence, pdfs: fourPdfs,
+    checks: { pdfContent: fourCheck, pdfVisual: fourCheck } }
+  assert(render(fourComplete).includes('4/4 份'))
+  assert(render(fourComplete).includes('纯答案版'))
+  assert(render({ ...fourEvidence, pdfs: productPdfs }).includes('尚未齐全'))
+  assert.throws(() => render({ ...fourComplete, checks: {
+    ...fourComplete.checks, pdfVisual: productCheck,
+  } }), /pdfVisual PASS must bind every delivered PDF/)
+  assert.throws(() => render({ ...productEvidence, pdfs: [fourPdfs[3]] }), /invalid or duplicate PDF editions/,
+    'historical three-product reports retain their version contract')
+  const staleScreen = { revisionId: 'rev-old', url: screen.url.replace('rev-current', 'rev-old') }
+  assert.throws(() => render({ ...fourEvidence, screen: staleScreen }), /Screen revision/,
+    'matching caller-supplied revision strings do not prove a current Candidate binding')
+  assert.throws(() => render({ ...fourEvidence, screen }, null), /Screen revision/)
+  for (const change of [{ sourceDigest: 'stale-source' }, { candidateDigest: 'stale-candidate' },
+    { paperId: 'paper-other' }, { reviewKind: 'ocr' }, { state: 'uploading' }]) {
+    assert.throws(() => render({ ...fourEvidence, screen }, { ...reviewStatus,
+      revisions: [{ ...reviewStatus.revisions[0], ...change }] }), /Screen revision/)
+  }
+  for (const host of ['127.0.0.1:51778', '[::1]:51778', 'localhost:51778']) {
+    const localScreen = { ...screen, url: screen.url.replace('https://example.onamp.dev', `http://${host}`) }
+    assert(render({ ...fourEvidence, screen: localScreen }).includes('本机 loopback'))
+    assert.throws(() => render({ ...productEvidence, screen: localScreen }), /Screen URL/)
+    for (const url of [localScreen.url + '&token=secret', localScreen.url + '&reviewRevision=rev-current',
+      localScreen.url.replace('rev-current', 'rev-old'), localScreen.url.replace('http://', 'http://user:secret@'),
+      localScreen.url + '#secret']) {
+      assert.throws(() => render({ ...fourEvidence, screen: { ...localScreen, url } }), /Screen URL/)
+    }
+  }
+  for (const host of ['example.com', 'localhost.example.com', '192.168.1.10', '0.0.0.0']) {
+    assert.throws(() => render({ ...fourEvidence, screen: { ...screen,
+      url: screen.url.replace('https://example.onamp.dev', `http://${host}`) } }), /Screen URL/)
+  }
 } finally {
   rmSync(reportDir, { recursive: true, force: true })
 }

@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
 import { TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY_V4 } from './spellingReview.mjs'
 import { economyPageLimitForPlan } from './paginationPlan.mjs'
 
@@ -38,19 +39,22 @@ function verifiedFile(file, baseDirectory) {
 // This is an evidence report, never an approval or a substitute for visual QA.
 // Source/answer/visual assertions are labelled as Agent records and must carry
 // exact-candidate bindings plus retained, hash-checked evidence. Missing != PASS.
-export function buildPreprocessingReport(projection, evidence, { baseDirectory = process.cwd() } = {}) {
+export function buildPreprocessingReport(projection, evidence, { baseDirectory = process.cwd(), reviewStatus = null } = {}) {
   for (const key of ['paperId', 'sourceDigest', 'candidateDigest']) {
     if (!projection[key] || evidence?.[key] !== projection[key]) fail(`stale ${key}`)
   }
-  if (!['preprocessing-handoff-evidence-v1', 'preprocessing-handoff-evidence-v2', 'preprocessing-handoff-evidence-v3'].includes(evidence.schemaVersion)) {
+  if (!['preprocessing-handoff-evidence-v1', 'preprocessing-handoff-evidence-v2', 'preprocessing-handoff-evidence-v3', 'preprocessing-handoff-evidence-v4'].includes(evidence.schemaVersion)) {
     fail('unsupported evidence version')
   }
   const longPaper = evidence.schemaVersion === 'preprocessing-handoff-evidence-v2'
-  const products = evidence.schemaVersion === 'preprocessing-handoff-evidence-v3'
+  const fourProducts = evidence.schemaVersion === 'preprocessing-handoff-evidence-v4'
+  const products = fourProducts || evidence.schemaVersion === 'preprocessing-handoff-evidence-v3'
   const economyPageLimit = economyPageLimitForPlan(projection.paginationPlan)
-  const expectedEditions = products ? productEditions.map(entry => entry[0] === 'economy8' && economyPageLimit === 9
+  const selectedProducts = fourProducts ? Object.entries(PAPER_PDF_PRODUCTS).map(([id, label]) =>
+    [id, label, id === 'answerOnly' ? null : productEditions.find(entry => entry[0] === id)[2]]) : productEditions
+  const expectedEditions = products ? selectedProducts.map(entry => entry[0] === 'economy8' && economyPageLimit === 9
     ? ['economy8', '省纸版（不含听力，最多9页）', 9] : entry) : longPaper ? longEditions : editions
-  const editionLabel = products ? '三版' : '四版'
+  const editionLabel = products && !fourProducts ? '三版' : '四版'
   const checked = (key) => {
     const check = evidence.checks?.[key]
     if (!check) return ['未检查', '没有本次检查记录']
@@ -85,7 +89,7 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
     const info = execFileSync('pdfinfo', [file], { encoding: 'utf8' })
     const actualPages = Number(info.match(/^Pages:\s+(\d+)/m)?.[1])
     const atMost = longPaper || (products && (id !== 'economy8' || economyPageLimit === 9))
-    if (!Number.isInteger(actualPages) || actualPages < 1 || (atMost ? actualPages > pages : actualPages !== pages)) {
+    if (!Number.isInteger(actualPages) || actualPages < 1 || (pages !== null && (atMost ? actualPages > pages : actualPages !== pages))) {
       fail(`${id} page count differs from edition`)
     }
     return `| ${label} | [查看 PDF](${pathToFileURL(file).href}) | ${actualPages} |`
@@ -93,13 +97,27 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
   let screen = 'Screen：尚未提供本次精确 revision 的预览地址。'
   if (evidence.screen) {
     const url = new URL(evidence.screen.url)
-    if (url.protocol !== 'https:' || url.username || url.password || url.hash
+    const local = fourProducts && url.protocol === 'http:'
+      && ['127.0.0.1', '[::1]', 'localhost'].includes(url.hostname)
+    if ((!local && url.protocol !== 'https:') || url.username || url.password || url.hash
       || url.searchParams.get('view') !== 'paper-browse'
       || url.searchParams.get('paperId') !== projection.paperId
       || !evidence.screen.revisionId || url.searchParams.get('reviewRevision') !== evidence.screen.revisionId
       || [...url.searchParams.keys()].some(key => !['view', 'paperId', 'reviewRevision'].includes(key))
       || [...url.searchParams.keys()].length !== 3) fail('Screen URL must identify the exact paper/revision without credentials')
+    if (fourProducts) {
+      // The CLI supplies authenticated Review status, never a record from the evidence file.
+      const revisions = reviewStatus?.revisions?.filter(revision => revision.id === evidence.screen.revisionId) || []
+      const revision = revisions[0]
+      if (reviewStatus?.paperId !== projection.paperId || revisions.length !== 1
+        || revision.reviewKind !== 'candidate'
+        || !['awaiting_review', 'changes_requested', 'approved', 'superseded'].includes(revision.state)
+        || ['paperId', 'sourceDigest', 'candidateDigest'].some(key => revision[key] !== projection[key])) {
+        fail('Screen revision must resolve to the exact current paper/source/Candidate in Review')
+      }
+    }
     screen = `[打开 Screen 预览](${url.href} "amp-portal") · revision：${cell(evidence.screen.revisionId)}。链接不等于已完成可视检查，请看下表。`
+    if (local) screen += ' 本机 loopback 预览，仅运行服务的机器可访问，不是线上审核地址。'
   }
   const spelling = projection.sourceInput.spellingReviewBytes
     ? JSON.parse(new TextDecoder().decode(projection.sourceInput.spellingReviewBytes)) : null

@@ -952,14 +952,17 @@ function spellingReview(paperId, command) {
   }, null, 2))
 }
 
-function preprocessingReport(paperId) {
+async function preprocessingReport(paperId) {
   const evidencePath = option('--evidence')
   const output = option('--output')
   if (!evidencePath || !output) fail('preprocessing-report requires --evidence <evidence.json> --output <report.md>')
   const evidenceFile = path.resolve(evidencePath)
   const projection = buildNck1ReviewProjection(paperDirectory(paperId))
-  const markdown = buildPreprocessingReport(projection, requiredJson(evidenceFile, 'handoff evidence'), {
-    baseDirectory: path.dirname(evidenceFile),
+  const evidence = requiredJson(evidenceFile, 'handoff evidence')
+  const reviewStatus = evidence.schemaVersion === 'preprocessing-handoff-evidence-v4' && evidence.screen
+    ? await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`) : null
+  const markdown = buildPreprocessingReport(projection, evidence, {
+    baseDirectory: path.dirname(evidenceFile), reviewStatus,
   })
   writeFileSync(path.resolve(output), markdown, { flag: 'wx' })
   console.log(JSON.stringify({ paperId, candidateDigest: projection.candidateDigest,
@@ -1521,7 +1524,7 @@ async function main() {
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
   else if (command === 'finalize-ocr-correction-report') finalizeOcrCorrectionReport(paperId)
   else if (['prepare-spelling', 'finalize-spelling', 'verify-spelling'].includes(command)) spellingReview(paperId, command)
-  else if (command === 'preprocessing-report') preprocessingReport(paperId)
+  else if (command === 'preprocessing-report') await preprocessingReport(paperId)
   else if (command === 'preflight') await preflight(paperId)
   else if (command === 'verify-analyses') verifyAnalyses(paperId)
   else if (command === 'prepare-summaries') prepareSummaries(paperId)

@@ -108,6 +108,51 @@ Generate it with `review.mjs preprocessing-report <paperId> --evidence <evidence
 --output <report.md>` after current Candidate/summary/metadata checks and preview QA.
 The output is a local Markdown artifact, not another website or an approval gate.
 
+Current four-product reports use `preprocessing-handoff-evidence-v4` with
+`largeComplete`, `largeNoListening`, `economy8`, and `answerOnly`. The first
+three retain their bound pagination policies; answerOnly has natural positive
+page counts, not a fixed page target. Complete delivery requires content and
+visual evidence for all four exact files. v4 also accepts HTTP Screen links
+only on `127.0.0.1`, `::1`, or `localhost`, visibly labelled local-only; all
+other hosts require HTTPS. Credentials, extra query parameters, fragments and
+paper/revision mismatches remain invalid. A local link does not establish
+remote Owner access or completed Screen QA. Do not relabel historical reports.
+When v4 includes Screen, the report CLI reads authenticated status from the
+configured Review API and resolves that revision's paper/source/Candidate
+binding. Supply the existing Review origin and Agent credential; an unavailable
+or mismatched revision fails closed. Reports without Screen remain offline.
+
+New source-faithful directions and listening examples use Materialization v4
+under the v62 authority. Its `sourcePresentation.instructions` has one
+`{slotId, text, source}` for each of `reading.a`, `seven-choices`, `cloze`,
+`grammar-fill`, and both listening slots when supplied. Preserve the source
+directions, including the stated playback count; do not copy profile defaults.
+`sourcePresentation.listeningExample` is `null` without listening, otherwise
+`{state: "not_supplied", source}` after inspecting the question source, or
+`{state: "provided", source, stem, options: [{label, text}], answer}` with A–C
+options and the actual example answer. This is not a formal Question answer.
+Screen and Print/PDF share this projection. Historical v1–v3 inputs keep their
+old opening; do not silently relabel a stored Candidate or confirmation.
+The default consumers are Screen v46 and Print/PDF v47. Earlier consumers can
+still replay historical input, but cannot consume sourcePresentation-bearing
+publications: they would otherwise discard the source example/directions.
+
+OCR confirmation v3 adds explicit `semantic_table` and `content_media` visual
+classifications. A table supplies rectangular `rows: [{header, cells}]`, each
+cell containing confirmed `itemId`s, not rewritten text. An image supplies
+`itemIds` for all OCR text inside its region and `afterItemId` for a surviving
+preceding item; its immutable PDF region is cropped, never regenerated. Every
+observation inside a visual must be accounted for exactly once. Images and tables
+retain the source-parser's question group and neighboring source anchors;
+moving intact visuals between groups does not preserve their binding.
+Images currently require a separate PDF question source; tables require separate question
+and answer sources. Merged/nested tables and emphasized
+cell text remain blocked rather than flattened silently. Answer-source tables
+stay answer evidence: capture scoring references against those answer locators
+in the existing source-references sidecar; never insert them into student groups.
+The v8 OCR producer receipt binds this new confirmation; preserve older output
+and receipts before starting a new source-input revision, and rebind sidecars.
+
 Evidence uses `schemaVersion: "preprocessing-handoff-evidence-v1"` and exact
 `paperId`, `sourceDigest`, `candidateDigest`. `pdfs` is an array of
 `{edition, path, sha256}` with editions `cover8`, `cover10`, `no-cover8`,

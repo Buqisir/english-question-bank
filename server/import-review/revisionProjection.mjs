@@ -7,7 +7,7 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
-import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
@@ -1124,12 +1124,12 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61'].includes(
+        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
           : []),
-      ].includes(familyContractId)
+      ].includes(familyContractId) || projectedOccurrences.some(occurrence => occurrence.sourcePresentation !== undefined)
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map((occurrence) => ({
               groupId: occurrence.groupId,
@@ -1593,7 +1593,7 @@ export function buildNck1ReviewProjection(rootDir, {
   // default cannot silently change its digest or visual interpretation.
   if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
     && !loaded.analyzedPackage) {
-    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
+    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
       const historical = importCanonicalCandidate(loaded.sourceInput, undefined, { materializationAuthorityRef })
       if (historical.candidate?.candidateDigest === expectedCandidateDigest) { imported = historical; break }
     }

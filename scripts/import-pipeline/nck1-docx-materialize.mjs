@@ -21,6 +21,7 @@ import {
 import {
   NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
   nck1OcrProducerSourceDigest,
+  nck1OcrProducerVersion,
   produceNck1OcrMaterialization,
 } from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import {
@@ -187,6 +188,7 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   const documents = loadDocuments(paperDir, manifest)
   const producer = selectProducer(paperDir, documents)
   const producerInputs = producer.loadInputs?.(paperDir) || {}
+  const producerVersion = producer === OCR_PRODUCER ? nck1OcrProducerVersion(producerInputs.confirmation) : producer.version
   const outputPath = path.join(paperDir, manifest.materializationPath)
   const directory = path.dirname(outputPath)
   const receiptPath = path.join(directory, producer.receiptName)
@@ -200,8 +202,10 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   const review = JSON.parse(readFileSync(reviewPath, 'utf8'))
   // Read retained provenance; this does not authorize old output as a current cache.
   const sourceDigest = producer.sourceDigest(documents, { ...producerInputs, producerVersion: receipt.producerVersion })
+  const acceptedVersions = producerVersion === producer.version
+    ? [producerVersion, producer.historicalVersion] : [producerVersion]
   if (receipt.schemaVersion !== producer.receiptSchemaVersion
-    || ![producer.version, producer.historicalVersion].includes(receipt.producerVersion)
+    || !acceptedVersions.includes(receipt.producerVersion)
     || receipt.paperId !== manifest.paperId
     || receipt.sourceDigest !== sourceDigest
     || review.schemaVersion !== producer.reviewName.replace('.json', '')
@@ -228,7 +232,7 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   return {
     disposition: receipt.disposition,
     producerVersion: receipt.producerVersion,
-    producerState: receipt.producerVersion === producer.version ? 'current' : 'historical',
+    producerState: receipt.producerVersion === producerVersion ? 'current' : 'historical',
     outputDigest: receipt.outputDigest,
     outputState: outputDigest === receipt.outputDigest ? 'producer_output_unchanged' : 'agent_modified',
     sourceDigest,
@@ -285,6 +289,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   const documents = loadDocuments(paperDir, manifest)
   const producer = selectProducer(paperDir, documents)
   const producerInputs = producer.loadInputs?.(paperDir) || {}
+  const producerVersion = producer === OCR_PRODUCER ? nck1OcrProducerVersion(producerInputs.confirmation) : producer.version
   const sourceDigest = producer.sourceDigest(documents, producerInputs)
   const outputPath = path.join(paperDir, manifest.materializationPath)
   const receiptPath = path.join(path.dirname(outputPath), producer.receiptName)
@@ -296,21 +301,18 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
     if (
       receipt.schemaVersion === producer.receiptSchemaVersion
-      && receipt.producerVersion === producer.version
+      && receipt.producerVersion === producerVersion
       && receipt.paperId === manifest.paperId
       && receipt.sourceDigest === sourceDigest
     ) {
       if (!existsSync(reviewPath)) {
         throw new Error('Digest-bound producer review is missing; refusing to overwrite the existing materialization')
       }
-      assertReceiptMediaFiles(paperDir, receipt)
-      const currentDigest = sha256(readFileSync(outputPath))
+      const inspected = inspectNck1Materialization({ paperDir, manifest })
       return {
         cached: true,
-        disposition: receipt.disposition,
-        outputState: currentDigest === receipt.outputDigest
-          ? 'producer_output_unchanged'
-          : 'agent_modified',
+        disposition: inspected.disposition,
+        outputState: inspected.outputState,
         sourceDigest,
         outputPath,
         reviewPath,
@@ -320,7 +322,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     if (
       producer.allowSourceInputRevision
       && receipt.schemaVersion === producer.receiptSchemaVersion
-      && receipt.producerVersion === producer.version
+      && receipt.producerVersion === producerVersion
       && receipt.paperId === manifest.paperId
       && receipt.sourceDigest !== sourceDigest
       && existsSync(reviewPath)
@@ -378,7 +380,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   atomicJson(receiptPath, {
     schemaVersion: producer.receiptSchemaVersion,
     paperId: manifest.paperId,
-    producerVersion: producer.version,
+    producerVersion,
     sourceDigest,
     outputDigest,
     disposition: produced.disposition,

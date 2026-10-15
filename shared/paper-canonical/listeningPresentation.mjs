@@ -44,6 +44,7 @@ export function listeningSegmentCue(segment, ordinal, questions) {
 export function projectListeningGroupPresentation(group) {
   if (group?.groupType !== 'listening') return null
   const short = group.questions[0]?.questionNo <= 5
+  const source = group.sourcePresentation
   return Object.freeze({
     partHeading: short ? instruction('part.listening') : null,
     transferNotice: short ? listeningOpening.transferNotice : null,
@@ -52,10 +53,12 @@ export function projectListeningGroupPresentation(group) {
       : 'section.listening.long-form')
       .replace(/^(第[一二]节)\s*/u, '$1 ')
       .replace(/\s*(\d+(?:\.\d+)?)\s*/gu, ' $1 '),
-    instruction: short
+    instruction: source?.instruction.text ?? (short
       ? section1Instruction(group.firstSectionPlayback ?? 'twice_default')
-      : instruction('listening.long-form.prompt'),
-    example: short ? Object.freeze({
+      : instruction('listening.long-form.prompt')),
+    example: !short ? null : source
+      ? (source.example.state === 'provided' ? source.example : null)
+      : Object.freeze({
       stem: 'How much is the shirt?',
       options: Object.freeze([
         { label: 'A', text: '£19.15' },
@@ -63,7 +66,7 @@ export function projectListeningGroupPresentation(group) {
         { label: 'C', text: '£9.15' },
       ]),
       answer: 'C',
-    }) : null,
+    }),
     segmentCues: short ? [] : group.segments.map((segment, index) => ({
       beforeQuestionId: segment.questionIds[0],
       text: listeningSegmentCue(segment, index + 6, group.questions),

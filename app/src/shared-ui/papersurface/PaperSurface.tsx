@@ -558,7 +558,7 @@ function CanonicalListeningChrome({ presentation, partPlayer, sectionPlayer }: {
       <p>例：{presentation.example.stem}</p>
       <div className="ps-listening-example-options">{presentation.example.options.map((option) =>
         <span key={option.label}>{option.label}. {option.text}</span>)}</div>
-      <p className="ps-listening-example-answer">答案是 C。</p>
+      <p className="ps-listening-example-answer">答案是 {presentation.example.answer}。</p>
     </div>}
   </header>
 }
