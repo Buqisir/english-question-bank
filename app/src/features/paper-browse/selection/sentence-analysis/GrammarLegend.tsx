@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { ROLE_LABELS, legendRolesIn, sentenceLegendRoles, visibleRoleUnits } from './sentencePresentation'
 import { underlinePaths } from './underlines'
 import type { GrammarFilter, LineKind } from './underlines'
+import { CONNECTOR_TRIANGLE } from './ConnectorMarker'
 import type { SentenceAnalysisV1 } from '../../../../../../shared/sentence-analysis/types.d.mts'
 
 function SampleLine({ kind }: { kind: LineKind }) {
@@ -18,8 +19,10 @@ export function GrammarLegend({ analysis, scopeId, selected, onSelect }: {
 }) {
   const inSentence = useMemo(() => sentenceLegendRoles(analysis), [analysis])
   const here = legendRolesIn(visibleRoleUnits(analysis, scopeId))
+  const hasConnector = analysis.units.some(unit => unit.connector)
   if (!inSentence.size) return null
   return <div className="sa-legend" role="group" aria-label="句子成分图例">
+    <span className="sa-legend-filters" title="点一项，只看这类成分">
     {inSentence.has('trunk') && <button className="sa-legend-item sa-legend-trunk" type="button" aria-label="查看主语和谓语"
       title={here.has('trunk') ? '同时查看主语和谓语，再次点击取消' : '这一层未标出主语和谓语'} disabled={!here.has('trunk')}
       aria-pressed={selected === 'trunk'} onClick={() => onSelect('trunk')}>
@@ -37,5 +40,12 @@ export function GrammarLegend({ analysis, scopeId, selected, onSelect }: {
         <span>{label}</span><SampleLine kind={role} />
       </button>
     })}
+    </span>
+    {hasConnector && <span className="sa-legend-item sa-legend-static">
+      <svg width="11" height="10" viewBox="0 0 16 15" aria-hidden="true">
+        <path d={CONNECTOR_TRIANGLE} />
+      </svg>
+      <span>引导词</span>
+    </span>}
   </div>
 }

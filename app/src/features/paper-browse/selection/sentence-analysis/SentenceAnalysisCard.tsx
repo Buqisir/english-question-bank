@@ -60,31 +60,44 @@ export function SentenceAnalysisCard({
     if (!ready) return
     let width = -1
     const lines = detailCandidates(ready)
+    const scroller = card.querySelector<HTMLElement>('.sa-analysis-scroll')
+    // Fade the bottom edge only while content is hidden below it.
+    const markMore = () => {
+      if (!scroller) return
+      if (scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight > 2) scroller.dataset.saMore = ''
+      else delete scroller.dataset.saMore
+    }
     const sizeFrame = () => {
       const row = card.querySelector<HTMLElement>('.sa-detail-row')
       const slot = row?.querySelector<HTMLElement>('.sa-detail-slot')
       // Keyed on the slot, not the card: the legend sharing its row can
       // settle after the first measure and narrow the slot on its own.
       const next = slot?.clientWidth ?? card.offsetWidth
-      if (width === next) return
+      if (width === next) { markMore(); return }
       width = next
       // The explanation slot keeps one height for the whole sentence, so a
       // selection never resizes it; most sentences need a single line.
       if (row && slot) slot.style.height = `${measureDetailHeight(row, slot, lines)}px`
       card.style.height = ''
       // Keep the frame steady during inspection. Only the analysis pane
-      // scrolls; the translation keeps its own space below it.
-      card.style.height = `${card.offsetHeight}px`
+      // scrolls; the translation keeps its own space below it. Narrow cards
+      // wrap the sentence onto more lines, so they grow instead of clipping.
+      if (card.offsetWidth >= 480) card.style.height = `${card.offsetHeight}px`
+      markMore()
     }
     sizeFrame()
     const observer = new ResizeObserver(sizeFrame)
     observer.observe(card)
     const slot = card.querySelector<HTMLElement>('.sa-detail-row .sa-detail-slot')
     if (slot) observer.observe(slot)
+    if (scroller) observer.observe(scroller)
+    if (scroller?.firstElementChild) observer.observe(scroller.firstElementChild)
+    scroller?.addEventListener('scroll', markMore, { passive: true })
     const fontsReady = () => { width = -1; sizeFrame() }
     document.fonts?.addEventListener('loadingdone', fontsReady)
     return () => {
       observer.disconnect()
+      scroller?.removeEventListener('scroll', markMore)
       document.fonts?.removeEventListener('loadingdone', fontsReady)
       card.style.height = ''
     }
