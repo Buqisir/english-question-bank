@@ -1,0 +1,59 @@
+<!doctype html>
+<!--
+  3D 宣传版的排版（BRAND.md §4.8、§5.2，2026-10-15 第 66 条，Droid 定）：画是同目录的 *-art.jpg，字在这里。
+  画：哑光搪胶的 3D 海獭（otter-3d.png 是单只透明底母版），用 GPT Image 编辑按 2D 母版 P 生成，
+  天空是透明的，事后统一铺暖米白 #F6EFE0，水下去掉生成时留下的半透明洞。
+  #splash 是手机开屏（1080×1920），#wide 是链接卡片 / 文章头图（1200×630，和 2D 宣传图同尺寸）。
+  字和 2D 宣传图一样：思源宋体，标题 Bold，其余 Regular；墨 #191D18，副句深竹青 #2C6E56。
+  开屏只放名字和一句副句，不放标题（开屏只停一两秒，读不完长句），也不放平面标志：
+  3D 海獭本身就是标志，再摆一个平面头像会变成上下两只海獭头。
+  「英语题库工作台」只是占位，名字定了以后换成字标（§2，第 61 条）。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>3D 宣传版</title>
+<style>
+  @font-face { font-family: 'Promo Han'; src: url('../../../../app/public/fonts/paper/source-han-serif/SourceHanSerifCN-Bold.otf') format('opentype'); font-weight: 700; }
+  @font-face { font-family: 'Promo Han'; src: url('../../../../app/public/fonts/paper/source-han-serif/SourceHanSerifCN-Regular.otf') format('opentype'); font-weight: 400; }
+  * { box-sizing: border-box; margin: 0; }
+  body { display: flex; flex-direction: column; gap: 48px; padding: 48px; background: #fff; }
+  .frame { position: relative; overflow: hidden; background: #F6EFE0; flex: none; }
+  .frame > .art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
+  .copy { position: absolute; display: flex; flex-direction: column; font-family: 'Promo Han', serif; color: #191D18; }
+  .brand { display: flex; align-items: center; font-weight: 400; letter-spacing: .04em; }
+  .brand img { display: block; }
+  .line { font-weight: 700; letter-spacing: .02em; }
+  .sub { font-weight: 400; color: #2C6E56; letter-spacing: .04em; }
+
+  #wide { width: 1200px; height: 630px; }
+  #wide .art { object-position: center top; }
+  #wide .copy { left: 72px; top: 56px; gap: 24px; }
+  #wide .brand { gap: 12px; font-size: 20px; line-height: 1; }
+  #wide .line { font-size: 48px; line-height: 1.38; }
+  #wide .sub { font-size: 22px; line-height: 1.5; }
+
+  #splash { width: 1080px; height: 1920px; }
+  #splash .copy { left: 0; right: 0; top: 400px; align-items: center; gap: 40px; }
+  #splash .name { font-size: 64px; line-height: 1; font-weight: 700; letter-spacing: .1em; }
+  #splash .sub { font-size: 32px; line-height: 1.5; letter-spacing: .12em; }
+</style>
+</head>
+<body>
+  <div class="frame" id="wide">
+    <img class="art" src="wide-art.jpg" alt="">
+    <div class="copy">
+      <div class="brand"><img src="../../logo/mark.svg" height="30" alt="">英语题库工作台</div>
+      <div class="line">替老师在题海里摸到对的题，<br>再把好题收好。</div>
+      <div class="sub">AI 帮老师找，老师来定。</div>
+    </div>
+  </div>
+  <div class="frame" id="splash">
+    <img class="art" src="splash-art.jpg" alt="">
+    <div class="copy">
+      <div class="name">英语题库工作台</div>
+      <div class="sub">AI 帮老师找，老师来定。</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>獭獭动效 · 「正在想」潜下去、浮上来</title>
+<!--
+  BRAND.md §4.6「正在想」定 (b) 潜下去、浮上来（第 52 条）。状态 02 的路径原样，只给两颊的上点
+  加 class="whisker-top" 和到两个下点中点的位移（--dx / --dy，SVG 用户单位）。
+  - 进入「正在想」：先停 300ms，结果在这之前回来就不动；然后上点沿直线沉到两个下点之间，
+    220ms（DESIGN motion token slow），缓入缓出，不回弹。两颊各成一行三点，合起来是「……」。
+  - 停在省略号上，不循环；进度交给旁边的「正在为…找题…」和骨架屏。
+  - 想完、同一张图还在屏上：160ms（base）浮回 ∴。换成 03/04/05 时由换图承担，不先播浮上来。
+  - 点不放大、不变色、不闪。prefers-reduced-motion 时不移动，直接换。
+-->
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; background: #F3F6F0; color: #191D18; font: 14px/1.5 Inter, "PingFang SC", system-ui, sans-serif; }
+  .otter { width: 215px; height: 150px; display: block; }
+  .stage { width: 360px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .stage p { margin: 0; font-size: 13px; color: #60665C; }
+  button { height: 32px; padding: 0 12px; border: 1px solid #D5DACF; border-radius: 8px; background: #FAFCF8; color: #191D18; font: inherit; font-size: 13px; cursor: pointer; }
+  .controls { display: flex; gap: 8px; }
+
+  .whisker-top {
+    transform-box: view-box;
+    transition: transform 160ms cubic-bezier(0.45, 0, 0.55, 1);
+  }
+  .is-thinking .whisker-top {
+    transform: translate(var(--dx), var(--dy));
+    transition-duration: 220ms;
+    transition-delay: 300ms;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .whisker-top, .is-thinking .whisker-top { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+<svg class="otter" role="img" aria-label="海獭 · 02 找题中" xmlns="http://www.w3.org/2000/svg" viewBox="30.5 25.5 963.5 671">
+<title>海獭 · 02 找题中</title>
+  <g id="_LD8-0__qeeo360">
+    <g id="_LD8-0__qeeo361">
+      <path id="_LD8-0__qeeo362" d="m665 474c42 15 81 38 134 53 58 20 103 26 160 16 14-2 26-6 31 3 8 15-15 34-35 44-48 24-104 32-158 23-45-6-83-17-116-32z" fill="#3D8F70" />
+      <path id="_LD8-0__qeeo363" d="m687 364 45 16c-1-24 7-54 21-59 12-6 20 6 23 20 4-18 12-26 23-20 10 5 12 17 11 29 8-17 19-24 28-15 8 6 7 16 4 26 12-15 25-18 33-6 10 17-3 58-13 85-15 38-37 68-67 89-31 22-62 30-87 23l-15-123z" fill="#3D8F70" />
+    </g>
+    <path d="m117 300c24-22 77-35 145-44 75-10 140-7 189 24 48 10 91 23 139 54l77 29c41 14 73 37 89 75 19 45 9 91-23 123-19 21-45 37-85 48-54 16-109 20-170 13-89-8-165-35-226-84-68-54-113-127-135-218z" fill="#3D8F70" />
+    <path id="_LD8-0__qeeo364" d="m150 304c67-1 184-25 249-44 30 21 70 34 114 53s96 28 148 43c45 13 85 36 99 84 19 57 1 106-48 134 14-26 18-65 13-106-3-32-9-64-26-68-10-4-17 6-19 22-5-15-13-23-22-19-9 3-12 14-11 27-12-17-19-21-27-15-7 4-8 15-6 27-13-15-25-13-31-2-6 13 1 37 10 50-25 3-46 17-62 37-62-18-116-46-160-82 11-23 3-49-15-62-21-16-51-10-73 19-60 1-98-28-124-83z" fill="#EEE5D0" />
+    <g id="_LD8-0__qeeo365">
+      <path id="_LD8-0__qeeo366" d="m267.5 354.5 120.5-80.5 74-1 69 32 50.5 48-117.5 46-13-9-118 43z" fill="#191D18" />
+      <path id="_LD8-0__qeeo367" d="m272 346c34-19 74-34 108-29l76 73c-28-7-56 7-87 16l-61-21z" fill="#F6EFE0" />
+      <path id="_LD8-0__qeeo368" d="m393 314c24-23 55-43 78-54 31 31 59 63 98 91-38 2-75 17-104 38z" fill="#F6EFE0" />
+    </g>
+    <path id="_LD8-0__qeeo369" d="m434 274c8-22 26-39 45-41 25-4 47 11 54 32 4 12 3 24 1 33-9 15-24 23-41 22-16-1-30-8-34-20-5-11-2-23 2-34-10 3-19 9-24 16z" fill="#3D8F70" />
+    <path id="_LD8-0__qeeo3610" d="m254 442c2-19 22-45 41-59 19-13 44-16 60-6 21 12 30 36 22 57-3 9-8 15-13 19 50 37 101 62 168 76l-2 54c-85-8-164-33-218-75-26-22-47-48-58-66z" fill="#3D8F70" />
+    <g>
+      <path id="_LD8-0__qeeo3611" d="m66 191c-3-43 20-84 54-112 37-31 80-49 125-51 37-2 79 6 110 19 39 16 62 44 73 77 14-9 27 2 33 13 8 16 2 35-20 39 5 35 0 61-21 80-31 30-83 42-138 52-61 11-113 16-153 12-33-6-51-35-57-77-12 5-26 1-34-9-7-8-7-19-1-28 5-9 17-16 29-15z" fill="#3D8F70" />
+      <path id="_LD8-0__qeeo3612" d="m102 250c4-24 24-41 52-51 30-10 64-17 100-23 38-6 75-10 105-7 28 2 48 13 54 32 9 23-4 43-24 55-21 12-47 18-71 17s-42-9-56-23c-13 24-38 41-69 48-29 7-58 4-74-5-14-7-20-24-17-43z" fill="#F6EFE0" />
+      <g id="_LD8-0__qeeo3613">
+        <path id="_LD8-0__qeeo3614" d="m202 191c31-8 63-14 95-17 0 20-9 41-24 49-25 16-55-6-71-32z" fill="#191D18" />
+        <circle id="_LD8-0__qeeo3615" cx="171.3" cy="177.1" r="14.3" fill="#191D18" />
+        <circle id="_LD8-0__qeeo3616" cx="330.5" cy="151.5" r="14.3" fill="#191D18" />
+        <circle class="whisker-top" style="--dx:5.45px;--dy:31.7px" id="_LD8-0__qeeo3617" cx="170" cy="222.7" r="8.2" fill="#191D18" />
+        <circle id="_LD8-0__qeeo3618" cx="155.7" cy="257.8" r="8.5" fill="#191D18" />
+        <circle id="_LD8-0__qeeo3619" cx="195.2" cy="251" r="8.3" fill="#191D18" />
+        <circle class="whisker-top" style="--dx:5.8px;--dy:30.75px" id="_LD8-0__qeeo3620" cx="337.8" cy="191.8" r="8.3" fill="#191D18" />
+        <circle id="_LD8-0__qeeo3621" cx="324.3" cy="227.1" r="8.4" fill="#191D18" />
+        <circle id="_LD8-0__qeeo3622" cx="362.9" cy="218" r="8.2" fill="#191D18" />
+      </g>
+    </g>
+    <g id="_LD8-0__qeeo3623">
+      <path id="_LD8-0__qeeo3624" d="m164 493c43 54 105 89 183 125-53-4-98-23-132-53-28-24-48-47-51-72z" fill="#3D8F70" />
+      <path id="_LD8-0__qeeo3625" d="m233 607c73 46 166 70 298 77-48 17-118 12-175-5-54-16-99-42-123-72z" fill="#3D8F70" />
+      <path id="_LD8-0__qeeo3626" d="m503 653c69 3 152-11 215-27-45 40-134 55-215 27z" fill="#3D8F70" />
+      <path id="_LD8-0__qeeo3627" d="m716 626c52 9 109 11 174 1-38 34-109 37-174-1z" fill="#3D8F70" />
+    </g>
+  </g>
+</svg>
+  <p id="status">∴ 静止</p>
+</div>
+<div class="controls">
+  <button type="button" id="think">开始找题</button>
+  <button type="button" id="done">想完（同一张图）</button>
+</div>
+<script>
+  const stage = document.getElementById('stage');
+  const status = document.getElementById('status');
+  document.getElementById('think').onclick = () => { stage.classList.add('is-thinking'); status.textContent = '正在为「失败以后重新振作的文章」找题…'; };
+  document.getElementById('done').onclick = () => { stage.classList.remove('is-thinking'); status.textContent = '∴ 静止'; };
+</script>
+</body>
+</html>

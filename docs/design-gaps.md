@@ -1,7 +1,8 @@
 # Design Gaps Log
 
-来源规则：DESIGN.md §7 The No-Literal-Fallback Rule（design-canon 立项
-2026-07-14）。agent 写 CSS/token 时遇到既有 token 体系覆盖不到的取值
+来源规则：`docs/agents/ui-collaboration.md`「写 CSS 与 token 的纪律」里的
+The No-Literal-Fallback Rule（design-canon 立项 2026-07-14；2026-10-13 以前写在
+DESIGN.md §7）。agent 写 CSS/token 时遇到既有 token 体系覆盖不到的取值
 （颜色/间距/圆角/时长/曲线等），**禁止**现场拼字面量兜底——在这里显式
 记一条缺口，标注临时方案，攒批等 owner 拍板收编成正式 token 或既有
 token 的扩展用法。
@@ -37,6 +38,17 @@ token 的扩展用法。
 - **临时方案**：维持既有 13px 不动（quiet-chrome 刀只摘盒子、不动字号，避免
   全站布局位移）。本刀已顺手把 `.concierge-action` 的 12.5px 收进 12px，
   其余 13px 实例留待本缺口闭环。
+- **2026-10-13 注**：2026-09-04 起工具界面四级字号改为 12 / 13 / 14 / 20
+  （DESIGN.md §3），13px 已在族内。这条缺口等 Owner 确认后删除。
+
+## 2026-09-15 语义色写小号正文（成功 `#1FA062`、提醒 `#E8901A`，跨文件）
+
+- **想要的值**：能写小号正文、对浅底达到 WCAG AA（≥ 4.5:1）的语义色文字档，
+  并在各文件之间统一。实测成功色对白 3.35:1，提醒色对白 2.49:1；提醒色的明度
+  是 Owner 为讲评线色所定，线和图形不改。
+- **临时方案**：语义色只作 chip 底、边、图标和大字。提醒色写小字时用
+  `--eqb-color-warning-text`（`#965a08`，对白 5.58:1）；成功色还没有对应的
+  文字档。2026-10-13 从 DESIGN.md §2 移入，留待独立刀。
 
 ## 2026-09-30 句子分析卡片（`.paper-sentence-analysis`）
 
