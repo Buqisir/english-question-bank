@@ -6,6 +6,24 @@ function userInitials(username: string): string {
   return username.slice(0, 2)
 }
 
+/* BRAND.md §3.1: the logo mark is drawn at 20px tall. On 1x screens the
+   hand-placed 32-grid pixel version is crisper than the scaled-down vector;
+   2x and above get the vector. Decorative: the site name beside it is the
+   accessible label. */
+function BrandMark(): ReactNode {
+  return (
+    <img
+      className="topbar-brand-mark"
+      src="/brand/mark-32.png"
+      srcSet="/brand/mark-32.png 1x, /brand/mark.svg 2x"
+      width={32}
+      height={20}
+      alt=""
+      aria-hidden="true"
+    />
+  )
+}
+
 /* ui-shell-unify CR MF-1 disposition: the topbar deliberately does NOT
    carry page workspace tools. Tool-heavy pages (draft workbench) keep
    their own sticky tool card below the shell bar so tools stay near the
@@ -100,11 +118,13 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
         {variant === 'home' ? (
           !props.hideBrand && (
             <div className="topbar-identity">
+              <BrandMark />
               <span className="topbar-brand-title">英语题库工作台</span>
             </div>
           )
         ) : (
           <div className="topbar-identity">
+            <BrandMark />
             <span className="topbar-brand-title">英语题库工作台</span>
             {props.pageTitleEditable ? (
               editingTitle ? (

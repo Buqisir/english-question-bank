@@ -1124,6 +1124,7 @@
 
 @media (max-width: 560px) {
   /* On a small editing screen, the document title takes precedence over branding. */
+  .topbar:has(+ .draft-workbench-shell) .topbar-brand-mark,
   .topbar:has(+ .draft-workbench-shell) .topbar-brand-title,
   .topbar:has(+ .draft-workbench-shell) .topbar-page-sep {
     display: none;

@@ -118,6 +118,16 @@
   gap: 8px;
 }
 
+.topbar-brand-mark {
+  flex-shrink: 0;
+  display: block;
+  width: 32px;
+  height: 20px;
+  /* The vector is 1.56:1, the pixel version 1.6:1; contain keeps the 2x
+     vector from stretching into the 32px box. */
+  object-fit: contain;
+}
+
 .topbar-brand-title {
   font-size: 14px;
   font-weight: 600;
