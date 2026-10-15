@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>獭獭动效 · 转石头、眨眼、浮上来</title>
+<!--
+  BRAND.md §4.6 第 2 轮（第 65 条）。一次出场只演一个动作，演完就停，不循环；动作在 otter-motion.js。
+  - 01 空闲 · 转石头：出场停一拍（300ms），右爪带着石头绕左爪托住的那一点转 -10°（220ms），
+    停 120ms，转回来（220ms），一次。石头外面包一层用肚皮裁切的组，转的时候不盖到左爪。
+  - 空态 · 眨一次眼：浮姿 P、裹藻仰躺、直立场景这类自己没有动作的图，出场 600ms 后眨一次：
+    合上 80ms、张开 120ms。不定时再眨。
+  - 探头 · 浮上来：03 待确认、05 没找到、登录页 SL。整只从卡片边后面浮上来（260ms，缓入缓出，不回弹），
+    快到位时两只爪和手里的东西从边上搭下来（120ms）。不先停拍，不眨眼。
+  - 02 找题中照「正在想」（thinking-dive.html）；04 完成不动。
+  - 减少动态效果时什么都不演，直接是最后那一帧。
+  这是样例；网站代码没改，上线另开 UI 任务。
+-->
+<style>
+  body { margin: 0; background: #F3F6F0; color: #191D18; font: 14px/1.5 Inter, "PingFang SC", system-ui, sans-serif; }
+  main { max-width: 1120px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 32px; }
+  h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  .lede { margin: 4px 0 0; color: #60665C; font-size: 13px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+  .panel { display: flex; flex-direction: column; gap: 12px; }
+  .panel h2 { margin: 0; font-size: 14px; font-weight: 600; }
+  .panel p.note { margin: 0; font-size: 12px; color: #60665C; max-width: 340px; }
+  .scene { position: relative; }
+  .card { position: relative; z-index: 1; background: #FAFCF8; border-radius: 12px; box-shadow: 0 0 0 1px rgba(30,30,28,0.05), 0 1px 2px rgba(30,30,28,0.06); }
+  .empty { width: 340px; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+  .empty p { margin: 0; font-size: 13px; color: #60665C; }
+  .empty svg { display: block; }
+  .btn { height: 32px; padding: 0 12px; border-radius: 8px; border: 0; background: #191D18; color: #fff; font: inherit; font-size: 13px; }
+  .login { width: 340px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .login b { font-size: 14px; }
+  .field { height: 36px; border-radius: 8px; background: #FAFDF7; box-shadow: inset 0 0 0 1px #D5DACF; }
+  .result { width: 520px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .result b { font-size: 14px; font-weight: 500; }
+  .line { height: 8px; border-radius: 999px; background: #E5EAE1; }
+  .nf { width: 520px; padding: 20px 16px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .nf b { font-size: 14px; font-weight: 500; }
+  .nf span { font-size: 13px; color: #60665C; }
+  .peek { position: absolute; pointer-events: none; }
+  .peek > svg { display: block; width: 100%; height: 100%; }
+  .peek.back { z-index: 0; }
+  .peek.front { z-index: 2; }
+  .replay { align-self: flex-start; height: 28px; padding: 0 12px; border: 1px solid #D5DACF; border-radius: 999px; background: #FAFCF8; color: #191D18; font: inherit; font-size: 13px; cursor: pointer; }
+
+  [data-otter="stone"], [data-otter="stone-paw"] { transform-box: view-box; transform-origin: 340px 352px; }
+  [data-otter="eye"] { transform-box: fill-box; transform-origin: center; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>獭獭动效 · 第 2 轮</h1>
+    <p class="lede">一次出场只演一个动作，演完就停。点「再演一次」重放；系统打开「减少动态效果」时什么都不演。</p>
+  </header>
+
+  <div class="row">
+    <section class="panel" data-demo="stone">
+      <h2>01 空闲 · 转石头</h2>
+      <div class="scene"><div class="card empty" id="empty-01"><p>还没有内容。</p><button class="btn" type="button">去找题</button></div></div>
+      <p class="note">停一拍，右爪带着石头转过去、再转回来，一次。眼睛不跟。</p>
+      <button class="replay" type="button">再演一次</button>
+    </section>
+    <section class="panel" data-demo="blink">
+      <h2>空态 · 眨一次眼</h2>
+      <div class="scene"><div class="card empty" id="empty-kelp"><p>试卷导出为 PDF 后，可以保存在这里。</p><button class="btn" type="button">去找题</button></div></div>
+      <p class="note">自己没有动作的图，出场 600ms 后眨一次。不定时再眨。</p>
+      <button class="replay" type="button">再演一次</button>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="panel" data-demo="login">
+      <h2>登录页 · 浮上来</h2>
+      <div class="scene" style="padding-top:160px"><div class="card login" id="login-card"><b>英语题库工作台</b><div class="field"></div><div class="field"></div><button class="btn" type="button">登录</button></div></div>
+      <p class="note">从卡片边后面浮上来，两只爪最后搭上边。</p>
+      <button class="replay" type="button">再演一次</button>
+    </section>
+    <div class="panel" style="gap:24px">
+      <section class="panel" data-demo="offer">
+        <h2>03 待确认 · 浮上来</h2>
+        <div class="scene" style="padding-top:128px"><div class="card result" id="result-card"><b>A篇 · 失败以后重新振作</b><div class="line" style="width:92%"></div><div class="line" style="width:84%"></div><div class="line" style="width:60%"></div></div></div>
+        <button class="replay" type="button">再演一次</button>
+      </section>
+      <section class="panel" data-demo="nf">
+        <h2>05 没找到 · 浮上来</h2>
+        <div class="scene" style="padding-top:140px"><div class="card nf" id="nf-card"><b>没找到匹配</b><span>换个说法再试，比如写上年级或题型。</span></div></div>
+        <button class="replay" type="button">再演一次</button>
+      </section>
+    </div>
+  </div>
+</main>
+
+<template id="t-01"><svg role="img" aria-label="海獭 · 01 空闲" xmlns="http://www.w3.org/2000/svg" viewBox="31 28 962.5 663">
+  <defs><clipPath id="s01-belly"><use href="#_LAE-0__ogofof3" /></clipPath></defs>
+<g id="_LAE-0__ogofof0">
+    <path id="_LAE-0__ogofof1" d="m675 373c20-3 39-1 55 7 3-25 12-54 26-57 9-3 16 7 19 18 5-12 13-17 20-13s10 13 12 22c8-13 17-17 25-9 6 6 8 14 8 22 11-12 20-14 27-5 13 17 1 56-8 79-15 36-37 65-65 86 50 22 104 24 167 15 15-2 25-4 29 6 12 28-67 62-122 65-55 5-116-7-172-30l-21-206z" fill="#3D8F70" />
+    <path id="_LAE-0__ogofof2" d="m63 197c0-32 10-60 28-83 26-33 67-59 106-73 48-17 97-12 137 0 49 15 85 43 95 90 16-7 31 5 36 20 5 17-8 30-23 33 5 27-5 54-18 73 13 8 24 17 33 26 18 5 36 20 57 30 34 21 74 28 109 37 33 8 65 17 90 36 34 25 53 58 50 96-2 39-27 72-64 97-44 29-98 41-154 42-84 2-171-16-236-48-62-30-110-70-145-120-21-31-38-79-47-128-29-11-42-35-50-76-15 4-30-3-33-19-4-19 11-35 29-33z" fill="#3D8F70" />
+    <path id="_LAE-0__ogofof3" d="m165 322c41-4 78-13 107-30 46 9 99-3 138-25 16 7 31 15 47 28 30 20 64 33 100 40 53 12 114 24 153 47 31 19 49 54 53 87 4 39-16 77-60 106 10-30 15-65 13-95-2-31-6-65-18-78-8-8-18-1-23 11-1-11-13-18-22-12-8 5-13 15-13 23-7-9-14-18-23-12-9 5-11 14-9 25-12-11-22-9-28 1-10 14-1 34 9 50-24 3-47 16-60 33-75-25-139-61-188-107 24-16 36-41 26-63-9-23-32-29-52-19-24 10-44 40-33 66-52-3-92-32-117-76z" fill="#EEE5D0" />
+    <g clip-path="url(#s01-belly)"><path data-otter="stone" id="_LAE-0__ogofof4" d="m322 329c18-24 43-35 72-31 24 1 47 15 56 34 3 17-5 38-21 50-17 13-42 11-63 5 8-16 6-32-4-45s-25-18-40-13z" fill="#191D18" /></g>
+    <path data-otter="stone-paw" id="_LAE-0__ogofof5" d="m456 283c-15-3-34 3-43 13-10 10-11 21-5 34 8 16 27 28 47 32 19 4 39 0 48-11 8-10 8-22 4-31-19-13-34-27-51-37z" fill="#3D8F70" />
+    <path id="_LAE-0__ogofof6" d="m106 246c9-27 38-41 74-51 47-14 103-25 148-24 36-1 62 4 79 23 12 14 14 31 4 45-14 21-48 30-75 31-29 2-54-5-72-21-18 26-47 41-80 47-33 7-62 4-74-12-8-10-8-24-4-38z" fill="#F6EFE0" />
+    <g id="_LAE-0__ogofof7">
+      <path id="_LAE-0__ogofof8" d="m208 190c28-7 63-13 95-15-3 20-11 38-28 47-6 3-14 5-20 3-18-3-36-20-47-35z" fill="#191D18" />
+      <path data-otter="eye" id="_LAE-0__ogofof9" d="m188 178c0 8-6 14-13 14-8 0-14-6-14-14 0-7 6-13 13-13 7-2 14 5 14 13z" fill="#191D18" />
+      <path data-otter="eye" id="_LAE-0__ogofof10" d="m345 153c3 8-3 16-10 17-8 2-15-4-16-11-2-7 3-15 10-16 7-3 14 3 16 10z" fill="#191D18" />
+      <circle id="_LAE-0__ogofof11" cx="172" cy="221" r="8.1" fill="#191D18" />
+      <circle id="_LAE-0__ogofof12" cx="158" cy="255.2" r="8.2" fill="#191D18" />
+      <circle id="_LAE-0__ogofof13" cx="198" cy="248.6" r="8.2" fill="#191D18" />
+      <circle id="_LAE-0__ogofof14" cx="343.5" cy="196.3" r="8.1" fill="#191D18" />
+      <circle id="_LAE-0__ogofof15" cx="329" cy="229.4" r="8.1" fill="#191D18" />
+      <circle id="_LAE-0__ogofof16" cx="367.8" cy="224.4" r="8" fill="#191D18" />
+    </g>
+  </g>
+  <g id="_LAE-0__ogofof17">
+    <path id="_LAE-0__ogofof18" d="m164 488c46 55 112 95 187 125-84-8-156-52-187-125z" fill="#3D8F70" />
+    <path id="_LAE-0__ogofof19" d="m238 606c81 45 176 64 293 72-108 31-223-9-293-72z" fill="#3D8F70" />
+    <path id="_LAE-0__ogofof20" d="m509 650c77-1 141-11 209-29 54 12 111 12 169 3-46 34-111 35-170 2-59 41-131 46-208 24z" fill="#3D8F70" />
+  </g>
+</svg></template>
+<template id="t-kelp"><svg role="img" aria-label="海獭 · 裹藻仰躺" xmlns="http://www.w3.org/2000/svg" viewBox="2.2 8.48 75.68 53.8">
+<path d="m62.62 48.91c4.5-3.22 6.33-10.27 6.07-11.89-0.28-2.04-1.78-1.88-2.67-0.55 0.29-2.17-1.51-2.97-2.44-1.09 0.09-2.23-2-2.62-2.45-0.73-0.22-1.15-0.98-1.71-1.75-1.37-1.26 0.55-1.87 2.98-1.96 4.64-0.77-0.44-1.64-0.75-2.34-0.83l3.3 13.28 3.05 4.28c2.08 0.28 4.52 1.71 8.26 0.51 5.61-0.51 8.12-3.4 7.92-4.29-0.13-0.55-0.95-0.49-1.8-0.41-4.93 0.5-9.62 0.06-13.19-1.55z" fill="#3D8F70" />
+  <path d="m56.35 48.05c1.35 1.39 3.1 3.04 4.54 3.94 0.54 0.33 1.5 0.38 2.35 0.5 2.27 0.34 4.47 1.22 6.28 2.47 2.16 1.51 4.77 3.69 5.03 4.1 0.12 0.19-2.99 0.2-7.16-1.65-2.56-1.14-5.1-2.12-7.37-2.49-2.26-0.37-4.83-1.34-5.56-1.69l0.95-5.07 0.94-0.11z" fill="#2C6E56" />
+  <path d="m55.21 51.49c3.66 2.9 7.04 4.99 7.36 6.9-1.04-0.78-2.48-1.22-3.63-1.64-1.85-0.69-3.44-2.66-4.61-3.38l0.88-1.88z" fill="#2C6E56" />
+  <path d="m56.76 52.02c1.02 1.05 2.48 2.36 3.41 2.92l0.43-0.04c-1.09-0.82-2.23-2-2.96-2.66l-0.88-0.22z" fill="#3D8F70" />
+  <path d="m34.02 27.41c1.42-1.51 1.39-3.9 0.97-6.15 1.19-0.17 1.91-1.16 1.87-2.2-0.05-1.56-1.54-2.47-2.91-1.96-0.7-2.55-1.92-4.98-4.38-6.42-2.28-1.21-6.05-1.96-9.42-1.96-4.84 0-8.77 1.55-11.68 4.57-2.36 2.35-3.43 5.32-3.48 8.48-1.45-0.19-2.55 0.92-2.55 2.17 0 1.48 1.5 2.29 2.85 2 0.28 3.12 1.51 5.62 3.56 6.59 3.37 13.08 15.58 23.39 31 24.02 5.69 0.27 11.26-0.87 15.3-3.4 0.73-1.36 1.13-3.38 1.26-5.03l2.05 2.11c2.85-3.85 1.75-9.73-2.09-12.17-3.67-2.36-9.06-3.61-12.55-5.09l-7.32-2.88-2.48-2.68z" fill="#3D8F70" />
+  <path d="m32.98 28.1c-5.39 2.17-11.14 3.82-15.77 3.91 1.23 0.76 4.89 0.83 8.31 1.11 3.22 0.26 6.97 0.82 9.36 1.55-0.33-1.87 0.32-3.53 1.42-4.33l-3.32-2.24z" fill="#EEE5D0" />
+  <path d="m43.84 32.99c-0.14 1.78-1.64 3.26-3.05 3.75 2.75 1.37 5.6 3.04 7.65 4.45 0.58-0.78 1.65-0.42 2.08 0.41 0.1-2.23 1.97-2.38 2.46-0.55 0.25-1.24 1.14-1.79 1.83-1.23 1.47 1.38 1.7 5.81 1.59 8.29l2.07 2.11c2.78-3.78 1.69-9.75-2.09-12.14-3.54-2.33-8.84-3.73-12.54-5.09z" fill="#EEE5D0" />
+  <path d="m35.35 39.95c-1.03 1.68-2.99 3.06-4.57 3.72 2.97 2.62 7.42 4.64 10.53 5.62 1.11-1.8 3.3-2.77 5.09-2.83l-0.32-1.15c-3.12-2.51-7-4.4-10.73-5.36z" fill="#EEE5D0" />
+  <path d="m12.61 32.01c2.67 6.37 9.08 8.6 14.09 6.98l-0.01-1c-4.23-0.76-8.5-3.22-10.2-5.84-1.38 0.03-2.69-0.03-3.88-0.14z" fill="#EEE5D0" />
+  <path d="m16.31 31.61c1.29 3.33 6.52 5.82 10.45 6.34 0.55-2.43 2.74-4 5.06-4.07-2.84-0.73-5.98-0.92-8.43-1.05-2.59-0.15-5.14-0.58-7.08-1.22z" fill="#2C6E56" />
+  <path d="m35.02 34.69c1.32 1.48 1.21 3.9 0.32 5.25 3.96 1.21 8.06 3.15 10.76 5.4-0.4-1.88 0.5-3.44 1.93-2.48l0.43-1.71c-2.38-1.87-5.21-3.45-7.67-4.41-2 0.37-4.16-0.8-5.77-2.05z" fill="#2C6E56" />
+  <ellipse transform="rotate(-10.78 39.46 32.93)" cx="39.46" cy="32.93" rx="4.806" ry="3.961" fill="#3D8F70" />
+  <path d="m31.68 33.87c-2.99-0.07-5.27 2.45-4.98 5.11-5.22 1.77-11.76-0.73-14.18-6.7l-3.67 0.24c3.26 13.33 15.71 23.19 30.68 24 0.32-1.31 1.3-5.57 1.81-7.23-3.96-1.34-8.14-3.52-10.56-5.62 2.73-1.15 5.17-3.42 5.26-5.83 0.1-2.34-1.89-3.91-4.36-3.97z" fill="#3D8F70" />
+  <path d="m26.18 19.99c-5 0.08-11.25 1.03-14.53 2.32-2.78 1.1-4.16 3.16-4.14 5.08 0.03 2.2 2.16 3.36 4.88 3.36 3.45 0 6.93-1.66 8.26-3.91 1.56 1.04 3.53 1.61 5.44 1.61 3.16 0 7.22-1.83 7.22-4.31 0-2.43-3.34-4.21-7.13-4.15z" fill="#F6EFE0" />
+  <circle data-otter="eye" cx="13.17" cy="20.37" r="1.141" fill="#191D18" />
+  <circle data-otter="eye" cx="25.85" cy="18.43" r="1.141" fill="#191D18" />
+  <path d="m15.87 21.41c1 1.73 2.72 3 4.22 2.99 2.06-0.03 3.48-2.17 3.49-4.22-2.55 0.2-5.39 0.64-7.71 1.23z" fill="#191D18" />
+  <circle cx="13.01" cy="24.1" r=".6368" fill="#191D18" />
+  <circle cx="14.99" cy="26.48" r=".6368" fill="#191D18" />
+  <circle cx="11.83" cy="27.04" r=".6368" fill="#191D18" />
+  <circle cx="25.87" cy="24.88" r=".6368" fill="#191D18" />
+  <circle cx="27" cy="21.96" r=".6505" fill="#191D18" />
+  <circle cx="29.05" cy="24.39" r=".6368" fill="#191D18" />
+  <path d="m13.59 46.94c2.25 4.74 8.48 8.28 13.79 9.25-5.48-2.25-10.44-5.53-13.79-9.25z" fill="#3D8F70" />
+  <path d="m19.59 55.77c5.9 4.92 14.94 7.22 21.89 5.86-8.35-0.3-15.97-2.44-21.89-5.86z" fill="#3D8F70" />
+  <path d="m39.85 59.14c6.39 1.93 13.26 0.81 16.66-2.12-5.49 1.17-11.34 2.42-16.66 2.12z" fill="#3D8F70" />
+  <path d="m56.64 57.05c1.53 2.62 4.23 4.24 7.71 4.58 2.52 0.24 5.13-0.73 5.82-1.8-2.67-0.14-5.46-0.08-7.78-0.45-2.14-0.34-4.17-1.43-5.75-2.33z" fill="#2C6E56" />
+  <path d="m54.2 39.58c-0.64-0.01-1.08 0.67-1.22 1.47-0.29-0.9-0.84-1.4-1.4-1.32-0.68 0.1-1.04 0.96-1.06 1.87-0.44-0.73-1.18-1.01-1.75-0.74-0.61 0.29-0.81 1.23-0.74 2-0.48-0.56-1.24-0.55-1.67 0-0.66 0.9-0.4 2.64 0.04 3.6-2.15 0.12-4.27 1.34-5.15 3.05-0.98 2.4-1.47 5.16-1.7 7.03 5.6 0.31 11.54-0.87 15.6-3.39 0.75-1.54 1.21-3.77 1.26-5.72 0.12-4.05-0.91-7.83-2.21-7.85z" fill="#3D8F70" />
+</svg></template>
+<template id="t-03"><svg role="img" aria-label="海獭 · 03 待确认" xmlns="http://www.w3.org/2000/svg" viewBox="16.9 19.8 810.8 963.8">
+<g id="_LDA-0__6m489x0">
+    <path id="_LDA-0__6m489x1" d="m422.5 21.5c-78.5 0-157.3 21.7-219.4 63.2-57.7 38.5-100.7 96.4-117.1 167.4-11.8-3.9-23.6-4.3-34.5-0.2-21 7.9-32.7 27.9-32.6 49.5 0.2 28.7 20.7 52.4 48.9 50.1 4-0.2 7.6-0.8 11.2-1.5 2.9 64.5 33.7 116.4 89.8 148.8-25.6 66.7-56.3 127.6-88.7 188.8-25.5 48-52 96-52.4 137.9-1 48.4 20.3 88.5 56.8 115.2 39.4 28.8 94.5 40.4 146.1 25.6 19.2 11.5 37.5 16 59.8 15.5 29.1-0.5 51.6-13.5 65.2-36.4 6-10.2 9.5-20.8 10.5-31.7h113.7c1.7 22 12.9 42 30.8 54.7 27.5 19.3 67.3 17.3 104.2-2.1 51.4 14.8 106.5 3.2 145.7-25.6 36.7-26.7 57.8-66.8 57.1-115.2-0.5-41.9-26.8-89.9-52.6-137.9-32.1-61.2-63.2-122.1-88.5-188.8 56-32.4 86.8-84.3 89.7-148.8 3.9 0.8 7.8 1.4 11.9 1.5 27.7 1.5 47.9-21.8 47.9-50.4 0.2-21.7-11.9-41.5-32.4-49.2-11.1-4.2-23.2-3.5-35 0.2-16.3-71-59.3-128.9-116.8-167.4-62.2-41.5-141.1-63.2-219.3-63.2z" fill="#3D8F70" />
+    <path id="_LDA-0__6m489x2" d="m239 511.2c50.7 12.6 118.2 19.4 183.8 19.4s133.3-6.9 184.2-19.4c12.3 40.5 24.4 90.5 24.2 135-0.2 55.9-22.8 111.4-51 156.6-31.9 44.8-90.4 103.7-157.2 113-66.7-9.3-125.7-68.3-157.3-113-28.5-45.2-51.4-100.7-52-156.6-0.4-44.5 12.6-94.5 25.3-135z" fill="#EEE5D0" />
+    <g id="_LDA-0__6m489x3">
+      <g id="_LDA-0__6m489x4">
+        <ellipse data-otter="eye" id="_LDA-0__6m489x5" cx="267.2" cy="236.8" rx="27.8" ry="27.7" fill="#191D18" />
+        <ellipse data-otter="eye" id="_LDA-0__6m489x6" cx="578" cy="236.8" rx="27.8" ry="27.7" fill="#191D18" />
+      </g>
+      <path id="_LDA-0__6m489x7" d="m423 258.1c-75.4-6.7-167.2 13.2-218.4 43.2-47.6 27.9-70.7 59.3-70.7 94.7 0 28.2 13.3 50.6 39.9 65.1 38.9 21.3 94.3 23.3 143.8 12 44.2-10 82-30.1 105.4-54.9 23.3 24.8 61.5 44.9 105.2 54.9 49.7 11.3 104.9 9.3 143.7-12 26.9-14.5 39.3-36.9 39.3-65.1 0-35.4-22.8-66.8-70.5-94.7-51.2-30-142.5-49.9-217.7-43.2z" fill="#F6EFE0" />
+      <path id="_LDA-0__6m489x8" d="m341.2 262.2c23.7-9.5 52.6-15 81.5-15s57.8 5.5 81.3 15c4 1.5 6.3 4.8 5.4 8.9-3.6 18.7-29.1 44.7-53.6 60.2-12.3 7.7-23.3 11.1-33.1 11.1-9.9 0-21-3.4-33.1-11.1-24.6-15.5-50.2-41.5-53.8-60.2-0.9-4.1 1.4-7.4 5.4-8.9z" fill="#191D18" />
+      <g id="_LDA-0__6m489x9">
+        <ellipse cx="258.2" cy="326.6" rx="15.3" ry="15.4" fill="#191D18" />
+        <ellipse cx="222.1" cy="380" rx="15.4" ry="15.3" fill="#191D18" />
+        <ellipse cx="300.3" cy="375.3" rx="15.1" ry="15.2" fill="#191D18" />
+        <ellipse cx="587.7" cy="326.6" rx="15.3" ry="15.4" fill="#191D18" />
+        <ellipse cx="623.8" cy="380" rx="15.4" ry="15.3" fill="#191D18" />
+        <ellipse cx="545.5" cy="375.3" rx="15.1" ry="15.2" fill="#191D18" />
+      </g>
+    </g>
+    <g id="_LDA-0__6m489x10">
+      <path id="_LDA-0__6m489x11" d="m283.8 803.9c-10.8-19.5-6.4-42.2 7.5-57.5 8.1-9 18.5-13.5 29.4-14.1 3-14.9 12-27.5 25.8-34.1 11.9-5.3 25.8-4.3 36.1 1.9 8-16 22.8-26.3 40.5-26.3 17.6 0 32.8 10.3 41.3 26.3 11.3-6.2 23.9-7.2 36.3-1.9 14 6.6 23.1 19.2 26 34.1 13.1 0.6 24.7 7.4 32.7 18.4 11.6 15.9 13.1 36 3.7 53.2-11.4 21.1-37.9 46.9-54.8 72.7-13.9 21.1-28.5 37.7-44.6 55.7-7.9 10.9-19.4 13.8-40.5 13.8-21 0-31.5-2.6-40.9-13.8-15.8-18-30.7-34.6-44.6-55.7-16.6-25.8-42.6-51.6-53.9-72.7z" fill="#F6EFE0" />
+      <g id="_LDA-0__6m489x12">
+        <path id="_LDA-0__6m489x13" d="m304.1 789.7c-4.3-5.8-2.6-13 3-16.4 5.2-3.4 11.3-1.1 14.7 4.5l60.4 95.4c2 3.1 1 5.9-1.5 7.5-2.6 1.6-5.4 0.5-7.2-2z" fill="#191D18" />
+        <path id="_LDA-0__6m489x14" d="m347.9 753.1c-2.6-7.1 1.2-12.7 6.6-14.2 6.3-2 12 1.5 13.8 7.7l36.7 116.2c1.2 3.9-0.3 6.7-3.2 7.6-3.3 1.1-6-0.6-7.4-4z" fill="#191D18" />
+        <path id="_LDA-0__6m489x15" d="m411.7 733.2c-0.3-7.3 4.7-12.7 11.4-12.7 6.9 0 12 5.4 11.9 12.7l-4.8 126.6c-0.1 4.6-2.8 7.7-6.7 7.7-4 0-6.6-3.1-6.7-7.7z" fill="#191D18" />
+        <path id="_LDA-0__6m489x16" d="m477.6 746.6c1.9-6.2 7.6-9.7 13.9-7.7 5.5 1.5 9.3 7.1 6.7 14.2l-46.5 113.3c-1.4 3.4-4.1 5.1-7.3 4-3-0.9-2.9-3.7-1.7-7.6z" fill="#191D18" />
+        <path id="_LDA-0__6m489x17" d="m524.1 777.8c3.4-5.6 9.6-7.9 14.7-4.5 5.7 3.4 7.4 10.6 3 16.4l-69.2 89c-1.9 2.5-4.6 3.6-7.2 2s-2.1-4.4-0.1-7.5z" fill="#191D18" />
+      </g>
+    </g>
+    <g id="_LDA-0__6m489x18">
+      <path id="_LDA-0__6m489x19" d="m231.9 806.2c20.8-6 42.5-4.7 63.9 3.3 28.9 10.9 53.1 35.6 64.3 64.5 13.1 33.8 4.6 65.4-16.9 86.5-17.7 17.4-38.3 22-59.8 21.3-20.4-0.5-38.2-5.9-52.8-15.5-40.5-28.6-44.9-129.5 1.3-160.1z" fill="#3D8F70" />
+      <path id="_LDA-0__6m489x20" d="m613.5 806.2c-21-6-42.4-4.7-63.9 3.3-28.8 10.9-52.7 35.6-63.7 64.5-13.2 33.8-4.8 65.4 16.6 86.5 17.6 17.4 38.6 22 59.7 21.3 20.6-0.5 38-5.9 52.6-15.5 40.6-28.6 44.9-129.5-1.3-160.1z" fill="#3D8F70" />
+    </g>
+  </g>
+</svg></template>
+<template id="t-05"><svg role="img" aria-label="海獭 · 05 没找到" xmlns="http://www.w3.org/2000/svg" viewBox="29.8 123 766.3 768.3">
+  <g id="_KZA-0__mhu05b0">
+    <g id="_KZA-0__mhu05b1">
+      <path id="_KZA-0__mhu05b2" d="m204 502c62-21 354-21 418 0l86 214c22-10 44-11 61-4 20 8 29 22 24 40-5 21-25 37-54 43-2 33-19 66-46 83-22 14-49 15-68 3s-27-34-25-48h-374c0 20-9 41-29 51-22 10-48 6-68-6-26-16-40-48-42-83-29-7-48-22-54-43-5-18 5-33 24-40 18-7 41-5 60 4z" fill="#3D8F70" />
+      <path id="_KZA-0__mhu05b3" d="m251 530c42 11 99 11 162 11s119 0 162-11c9 41 17 85 17 123 0 36-7 63-14 91-5 19-7 35-1 51 4 12 12 21 23 26v12h-374l-1-12c12-7 20-18 24-32 6-17 3-32-2-51-8-28-13-55-13-83-1-38 7-86 17-125z" fill="#EEE5D0" />
+    </g>
+    <g>
+      <path id="_KZA-0__mhu05b4" d="m147 311c12-58 44-101 89-133 48-34 110-53 173-53 71-1 137 19 185 53 47 33 74 78 84 133 15-4 28 0 38 9s15 21 14 32c-1 20-19 36-43 35 2 29-3 56-13 79-11 24-27 43-49 58-42 26-123 33-212 32-87 1-169-6-212-32-24-15-41-35-51-59-10-23-14-50-11-78-24 2-43-15-44-35-1-13 5-25 15-33s23-11 37-8z" fill="#3D8F70" />
+      <path id="_KZA-0__mhu05b5" d="m413 329c-44-1-88 0-126 6s-65 17-83 34c-19 17-28 38-28 61-2 27 7 49 28 64 22 16 49 23 81 23 54 0 97-25 128-61 30 36 74 61 128 61 31 0 60-8 81-24s29-37 28-63c-1-23-10-44-28-60-19-17-46-28-83-35-38-6-81-7-126-6z" fill="#F6EFE0" />
+      <g id="_KZA-0__mhu05b6">
+        <ellipse data-otter="eye" id="_KZA-0__mhu05b7" cx="289.2" cy="310" rx="18.8" ry="18.7" fill="#191D18" />
+        <ellipse data-otter="eye" id="_KZA-0__mhu05b8" cx="536.5" cy="310" rx="18.7" ry="18.8" fill="#191D18" />
+      </g>
+      <path id="_KZA-0__mhu05b9" d="m344 332c17-4 44-5 69-5 26 0 53 1 69 5 7 2 6 8 3 15-8 20-28 38-48 50-9 4-17 6-24 6-8 0-16-2-25-7-20-11-40-29-48-49-3-7-4-13 4-15z" fill="#191D18" />
+      <g id="_KZA-0__mhu05b10">
+        <circle id="_KZA-0__mhu05b11" cx="281.8" cy="374.5" r="11.4" fill="#191D18" />
+        <circle id="_KZA-0__mhu05b12" cx="252.3" cy="425.5" r="11.5" fill="#191D18" />
+        <circle id="_KZA-0__mhu05b13" cx="312.2" cy="425.5" r="11.5" fill="#191D18" />
+        <circle id="_KZA-0__mhu05b14" cx="544" cy="374.5" r="11.4" fill="#191D18" />
+        <circle id="_KZA-0__mhu05b15" cx="513.4" cy="425.5" r="11.5" fill="#191D18" />
+        <circle id="_KZA-0__mhu05b16" cx="573.5" cy="425.5" r="11.5" fill="#191D18" />
+      </g>
+    </g>
+  </g>
+</svg></template>
+<template id="t-sl"><svg role="img" aria-label="海獭 · 登录页探头" xmlns="http://www.w3.org/2000/svg" viewBox="55.7 66.1 714.7 874.4">
+  <g id="_L5H-0__eoyclv0">
+    <path d="m181 464c-19 54-46 130-62 193-17 67-23 157 23 221h542c45-62 40-148 22-222-15-65-40-135-61-192z" fill="#3D8F70" />
+    <path id="_L5H-0__eoyclv1" d="m259 454c-20 39-39 113-36 186 2 50 12 93 32 127l14 63 86 48h116l87-48 13-63c20-39 31-84 32-129 2-68-15-145-37-183-82-36-226-38-307-1z" fill="#EEE5D0" />
+    <path id="_L5H-0__eoyclv2" d="m413 68c-82 0-158 25-214 68-46 36-74 82-84 138-25-8-46 6-54 24-10 25 3 47 24 55 6 3 14 4 21 2-4 38 3 74 21 104 15 25 36 42 61 54 60 29 135 30 225 29 90 1 165 0 225-29 25-12 46-29 61-54 18-30 25-66 21-104 7 2 15 1 21-2 21-8 34-30 24-55-8-18-29-32-54-24-10-56-38-102-84-138-56-43-132-68-214-68z" fill="#3D8F70" />
+    <path id="_L5H-0__eoyclv3" d="m413 295c-51 0-103-1-150 8-45 8-82 26-103 59-16 24-19 50-10 74 8 24 29 42 58 53 32 13 65 16 100 10 43-7 81-32 105-70 24 38 62 63 105 70 35 7 68 3 100-10 29-11 50-29 58-53 9-24 6-50-10-74-21-33-58-51-103-59-47-9-99-8-150-8z" fill="#F6EFE0" />
+    <g id="_L5H-0__eoyclv4">
+      <ellipse data-otter="eye" id="_L5H-0__eoyclv5" cx="280" cy="270.7" rx="21.7" ry="21.8" fill="#191D18" />
+      <ellipse data-otter="eye" id="_L5H-0__eoyclv6" cx="545.8" cy="270.7" rx="21.6" ry="21.8" fill="#191D18" />
+    </g>
+    <path id="_L5H-0__eoyclv7" d="m337 297c12-2 45-2 76-2s64 0 76 2c7 11-6 33-18 44-20 18-41 30-57 31s-38-12-58-30c-13-12-27-34-19-45z" fill="#191D18" />
+    <g id="_L5H-0__eoyclv8">
+      <ellipse id="_L5H-0__eoyclv9" cx="267.7" cy="345.2" rx="11.7" ry="11.9" fill="#191D18" />
+      <ellipse id="_L5H-0__eoyclv10" cx="235.9" cy="400.7" rx="11.8" ry="12" fill="#191D18" />
+      <ellipse id="_L5H-0__eoyclv11" cx="301.5" cy="400.7" rx="11.8" ry="12" fill="#191D18" />
+      <ellipse id="_L5H-0__eoyclv12" cx="559.8" cy="345.2" rx="11.7" ry="11.9" fill="#191D18" />
+      <ellipse id="_L5H-0__eoyclv13" cx="524.8" cy="400.7" rx="11.8" ry="12" fill="#191D18" />
+      <ellipse id="_L5H-0__eoyclv14" cx="591.8" cy="400.7" rx="11.8" ry="12" fill="#191D18" />
+    </g>
+    <g id="_L5H-0__eoyclv15">
+      <path id="_L5H-0__eoyclv16" d="m254 767c24-4 43-10 66-3 34 10 55 35 58 64 5 33-13 65-40 85-25 19-57 28-86 25-38-4-71-26-82-60-12-30-6-60 17-81 18-16 42-24 67-30z" fill="#3D8F70" />
+      <path id="_L5H-0__eoyclv17" d="m572 767c-24-4-43-10-66-3-34 10-55 35-58 64-5 33 13 65 40 85 25 19 57 28 86 25 38-4 71-26 82-60 12-30 6-60-17-81-18-16-42-24-67-30z" fill="#3D8F70" />
+    </g>
+  </g>
+</svg></template>
+
+<script src="otter-motion.js"></script>
+<script>
+  const make = (id) => document.getElementById(id).content.firstElementChild.cloneNode(true);
+  const box = (svg) => svg.getAttribute('viewBox').split(/[ ,]+/).map(Number);
+
+  // 空态：图放在文案上面。01 150px 高；裹藻仰躺按两眼间距和 P@150px 一样大，约 148px 高（§4.7）。
+  function putEmpty(cardId, tplId, height) {
+    const svg = make(tplId);
+    const [, , w, h] = box(svg);
+    Object.assign(svg.style, { height: height + 'px', width: (w / h) * height + 'px' });
+    const card = document.getElementById(cardId);
+    card.insertBefore(svg, card.firstChild);
+    return svg;
+  }
+
+  // 探头：整只画两份，后一份只露卡片边以上，前一份只露卡片边以下；卡片边落在图高的 edge 比例上。
+  function putPeek(cardId, tplId, { height, edge, x }) {
+    const card = document.getElementById(cardId);
+    const scene = card.parentElement;
+    const [, , w, h] = box(make(tplId));
+    const width = (w / h) * height;
+    const edgePx = Math.round(edge * height);
+    const top = card.offsetTop - edgePx;
+    const left = x === 'center' ? card.offsetLeft + (card.offsetWidth - width) / 2 : card.offsetLeft + card.offsetWidth - width - x;
+    const copies = {};
+    for (const side of ['back', 'front']) {
+      const holder = document.createElement('div');
+      holder.className = 'peek ' + side;
+      Object.assign(holder.style, { left: Math.round(left) + 'px', top: top + 'px', width: width + 'px', height: height + 'px' });
+      // 后一份多露 2px 到卡片后面；前一份从卡片边上 2px 开始，盖住卡片外圈那道发丝边，
+      // 不然那道线会横穿搭在边上的爪子和贝壳。
+      holder.style.clipPath = side === 'back' ? 'inset(0 0 ' + (height - edgePx - 2) + 'px 0)' : 'inset(' + (edgePx - 2) + 'px 0 0 0)';
+      holder.appendChild(make(tplId));
+      scene.appendChild(holder);
+      copies[side] = holder;
+    }
+    return { ...copies, edge: edgePx, overhang: height - edgePx + 2 };
+  }
+
+  const s01 = putEmpty('empty-01', 't-01', 150);
+  const kelp = putEmpty('empty-kelp', 't-kelp', 148);
+  // 卡片边的比例照 §4.4：03 约 0.82，05 约 0.92，登录页 0.93。登录页 SL 166px 高，头心离卡片右边 62px。
+  const login = putPeek('login-card', 't-sl', { height: 166, edge: 0.93, x: -6 });
+  const offer = putPeek('result-card', 't-03', { height: 150, edge: 0.82, x: 24 });
+  const nf = putPeek('nf-card', 't-05', { height: 150, edge: 0.92, x: 'center' });
+
+  const play = {
+    stone: () => OtterMotion.turnStone(s01),
+    blink: () => OtterMotion.blink(kelp),
+    login: () => OtterMotion.surface(login),
+    offer: () => OtterMotion.surface(offer),
+    nf: () => OtterMotion.surface(nf),
+  };
+  document.querySelectorAll('[data-demo]').forEach((panel) => {
+    panel.querySelector('.replay').addEventListener('click', () => play[panel.dataset.demo]());
+  });
+  Object.values(play).forEach((f) => f());
+</script>
+</body>
+</html>
