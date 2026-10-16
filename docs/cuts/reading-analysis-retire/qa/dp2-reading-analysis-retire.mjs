@@ -31,6 +31,7 @@ import { spawn, spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { mkdirSync } from 'node:fs'
 import path from 'node:path'
+import { requireLocalQaPassword, LOCAL_QA_OWNER_PASSWORD_ENV } from '../../_shared/local-qa-credentials.mjs'
 
 // 仓根从脚本自身位置推导（docs/cuts/<CUT>/qa → 上四级）——可在主树或任意
 // worktree 重跑，不锚死某次会话的绝对路径。
@@ -45,7 +46,7 @@ const vitePort = 5190
 const children = []
 
 const OWNER_USERNAME = 'qa-reading-analysis-retire-owner'
-const OWNER_PASSWORD = 'qa-reading-analysis-retire-owner-pw-1'
+const OWNER_PASSWORD = requireLocalQaPassword(LOCAL_QA_OWNER_PASSWORD_ENV)
 
 const PAPER_960D0F8D = 'paper-960d0f8d'
 const READING_GROUP = 'group-960d0f8d-reading-a'

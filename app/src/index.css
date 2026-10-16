@@ -6,7 +6,7 @@
   --ink-soft: var(--eqb-color-text-secondary); /* 淡墨：目录未选中项、剪刀 */
   --muted: var(--eqb-color-text-muted);
   --surface: var(--eqb-color-bg);
-  --surface-strong: #e9ece6;
+  --surface-strong: var(--eqb-color-desk);
   --panel: var(--eqb-color-paper);
   --line: var(--eqb-color-border-subtle);
   --line-strong: var(--eqb-color-border-strong);
@@ -25,8 +25,8 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
-  --blue-soft: #e9ece6;
-  --blue-text: #6a6a64;
+  --blue-soft: var(--eqb-color-desk);
+  --blue-text: var(--eqb-color-text-muted);
   --mint-soft: var(--eqb-color-success-soft);
   --mint-text: var(--eqb-color-success);
   --amber-soft: var(--eqb-color-warning-soft);

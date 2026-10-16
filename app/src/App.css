@@ -3136,16 +3136,16 @@ button:disabled {
    Palette: warm white paper, ink, cinnabar accent.
    ======================================================================== */
 
-/* Daydream reference samples for workspace surfaces, not rendered paper. */
-:where(.app-shell:has(.concierge-desk), .concierge-desk, .my-space-page, .draft-workbench-shell, .topbar:has(+ .draft-workbench-shell), .login-page, .auth-gate-loading) {
-  --desk-page: #F3F6F0;
-  --desk-surface: #FAFCF8;
-  --desk-raised: #FAFDF7;
-  --desk-hover: #E5EAE1;
-  --desk-border: #D5DACF;
-  --desk-line: #E3E8DF;
-  --desk-ink: #191D18;
-  --desk-muted: #60665C;
+/* 08 雾海 workspace surfaces (2026-10-15), shared by every tool page; rendered paper keeps --paper-*. */
+:root {
+  --desk-page: #F1F5F7;
+  --desk-surface: #FFFFFF;
+  --desk-raised: #FFFFFF;
+  --desk-hover: #E6EDF0;
+  --desk-border: #DCE6EB;
+  --desk-line: #E6EDF1;
+  --desk-ink: #1B2B33;
+  --desk-muted: #5A6C75;
 }
 
 .concierge-desk {
@@ -3292,9 +3292,9 @@ button:disabled {
   height: 28px;
   padding: 0 12px;
   border-radius: 999px;
-  border: 1px solid #E3E6E0;
+  border: 1px solid var(--eqb-color-border-subtle);
   background: #FFFFFF;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
   font-size: 13px;
   cursor: pointer;
 }
@@ -3308,22 +3308,22 @@ button:disabled {
 }
 
 .concierge-browse-chips.fluid-hover-list::before {
-  background: #E9ECE6;
+  background: var(--eqb-color-desk);
 }
 
 .concierge-browse-chip[data-fluid-hover-active] {
   background: transparent;
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
 }
 
 .concierge-browse-chip[aria-pressed='true'] {
-  background: #1F1F1D;
+  background: var(--action);
   color: #fff;
   border-color: transparent;
 }
 
 .concierge-browse-chip[aria-pressed='true']:hover {
-  background: #3A3A37;
+  background: var(--action-hover);
 }
 
 /* Intent bar */
@@ -3437,7 +3437,7 @@ button:disabled {
   border: none;
   border-radius: 50%;
   padding: 0;
-  background: #1F1F1D;
+  background: var(--action);
   color: #FFFFFF;
   font-size: 13px;
   line-height: 1;
@@ -3459,7 +3459,7 @@ button:disabled {
 }
 
 .concierge-intent-submit:hover:not(:disabled) {
-  background: #3A3A37;
+  background: var(--action-hover);
 }
 
 /* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
@@ -3473,7 +3473,7 @@ button:disabled {
 }
 
 .concierge-intent-submit:disabled {
-  background: #1F1F1D;
+  background: var(--action);
   color: #FFFFFF;
   opacity: 1;
   cursor: not-allowed;
@@ -3527,8 +3527,8 @@ button:disabled {
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked {
-  background: #1F1F1D;
-  border-color: #1F1F1D;
+  background: var(--action);
+  border-color: var(--action);
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked::before {
@@ -3807,7 +3807,7 @@ button:disabled {
 .home-row-chevron {
   display: grid;
   place-items: center;
-  color: #9A9D97;
+  color: var(--eqb-color-text-faint);
   transition: color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
@@ -3836,7 +3836,7 @@ button:disabled {
 .concierge-feed-intro {
   margin: 0;
   font-size: 13px;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
   padding: 0 4px;
 }
 
@@ -3873,14 +3873,14 @@ button:disabled {
   font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
   font-variant-numeric: tabular-nums;
   line-height: 1.5;
 }
 
 .concierge-feed-year-count {
   font-size: 12px;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
 }
 
 .concierge-feed-expand {
@@ -3891,7 +3891,7 @@ button:disabled {
   padding: 0;
   border: none;
   background: none;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
   font-size: 13px;
   font-weight: 400;
   text-decoration: none;
@@ -3899,7 +3899,7 @@ button:disabled {
 }
 
 .concierge-feed-expand:hover {
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
 }
 
 .concierge-result-list {
@@ -4147,7 +4147,7 @@ button:disabled {
    already used, so this override is now redundant but harmless to keep
    explicit for the AI-mode block. */
 .app-shell.home-mode-ai .eyebrow {
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
 }
 
 .app-shell.home-mode-ai .workbench {
@@ -4244,9 +4244,9 @@ button:disabled {
   height: 28px;
   padding: 0 12px;
   background: #FFFFFF;
-  border: 1px solid #D5D9D2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 999px;
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
   font-family: inherit;
   font-size: 13px;
   cursor: pointer;
@@ -4256,8 +4256,8 @@ button:disabled {
 }
 
 .basket-chip:hover {
-  background: #E9ECE6;
-  border-color: #D5D9D2;
+  background: var(--eqb-color-desk);
+  border-color: var(--eqb-color-border);
 }
 
 /* emil-processing: shared pressable convention (scale 0.97 on press). */
@@ -4417,13 +4417,13 @@ button:disabled {
 }
 
 .concierge-starter-chip[data-fluid-hover-active] {
-  border-color: #D5D9D2;
-  color: #1F1F1D;
+  border-color: var(--eqb-color-border);
+  color: var(--eqb-color-text);
 }
 
 .concierge-starter-chip:focus-visible {
-  border-color: #1F1F1D;
-  color: #1F1F1D;
+  border-color: var(--action);
+  color: var(--eqb-color-text);
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
@@ -4499,14 +4499,14 @@ button:disabled {
    the ≤10% accent budget (Green-Pen Rule). teal-800 on teal-50 wash clears
    WCAG AA (9.26:1). */
 .concierge-starter-chip.is-selected {
-  background: #1F1F1D;
+  background: var(--action);
   border-color: transparent;
   color: #FFFFFF;
   font-weight: 500;
 }
 
 .concierge-starter-chip.is-selected:hover {
-  background: #3A3A37;
+  background: var(--action-hover);
   border-color: transparent;
   color: #FFFFFF;
 }
@@ -4603,8 +4603,8 @@ button:disabled {
 }
 
 .concierge-command-filter-toggle:hover {
-  background: #E9ECE6;
-  border-color: #D5D9D2;
+  background: var(--eqb-color-desk);
+  border-color: var(--eqb-color-border);
 }
 
 .concierge-command-filter-toggle:active {
@@ -4612,8 +4612,8 @@ button:disabled {
 }
 
 .concierge-command-filter-toggle[aria-expanded='true'] {
-  border-color: #1F1F1D;
-  color: #1F1F1D;
+  border-color: var(--action);
+  color: var(--eqb-color-text);
 }
 
 .concierge-command-filter-toggle:focus-visible {
@@ -4645,8 +4645,8 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #1F1F1D;
-  border: 1px solid #1F1F1D;
+  background: var(--action);
+  border: 1px solid var(--action);
   color: #FFFFFF;
   font-family: inherit;
   font-size: 12.5px;
@@ -4658,7 +4658,7 @@ button:disabled {
 }
 
 .concierge-active-filter-chip:hover {
-  background: #3A3A37;
+  background: var(--action-hover);
 }
 
 .concierge-active-filter-chip:focus-visible {
@@ -4750,7 +4750,7 @@ button:disabled {
   overflow: hidden;
   height: 12px;
   border-radius: 6px;
-  background: #E9ECE6;
+  background: var(--eqb-color-desk);
 }
 
 .concierge-skeleton-line.short {
@@ -4949,7 +4949,7 @@ button:disabled {
   width: 76px;
   height: 24px;
   border-radius: 999px;
-  background: #E9ECE6;
+  background: var(--eqb-color-desk);
 }
 
 .concierge-skeleton-chip:nth-child(2) { width: 96px; }
@@ -5158,7 +5158,7 @@ button:disabled {
 }
 
 .concierge-row-chevron {
-  color: #9A9D97;
+  color: var(--eqb-color-text-faint);
   display: grid;
   place-items: center;
   transform: rotate(-90deg);
@@ -5168,7 +5168,7 @@ button:disabled {
 .concierge-paper-row-head[data-fluid-hover-active] .concierge-row-chevron,
 .concierge-paper-row:focus-within .concierge-row-chevron,
 .concierge-paper-row.is-expanded .concierge-row-chevron {
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
 }
 
 .concierge-paper-row.is-expanded .concierge-row-chevron {
@@ -5232,7 +5232,7 @@ button:disabled {
 .concierge-paper-headline {
   font-size: 14px;
   font-weight: 500;
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -5255,9 +5255,9 @@ button:disabled {
   flex: 0 0 auto;
   font-family: inherit;
   font-size: 12px;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
   letter-spacing: 0;
-  background: #E9ECE6;
+  background: var(--eqb-color-desk);
   border: 0;
   border-radius: 4px;
   padding: 1px 6px;
@@ -5275,7 +5275,7 @@ button:disabled {
 .concierge-paper-topics-line {
   margin: 0;
   font-size: 13px;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5301,7 +5301,7 @@ button:disabled {
 .concierge-paper-hitcount {
   font-weight: 400;
   font-size: 13px;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
 }
 
 .concierge-paper-row[data-variant='feed'] .concierge-paper-meta {
@@ -5340,7 +5340,7 @@ button:disabled {
    layout shift — emil hover-显形 prescription. */
 .concierge-row-expand-hint {
   font-size: 12px;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--motion-fast) var(--ease-out);
@@ -5388,7 +5388,7 @@ button:disabled {
   padding: 12px 14px 4px 28px;
   font-size: 12px;
   font-weight: 400;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
   letter-spacing: 0.04em;
   background: transparent;
   border: 0;
@@ -5401,7 +5401,7 @@ button:disabled {
 }
 
 .concierge-group-index-rows > li + li {
-  border-top: 1px solid #E3E6E0;
+  border-top: 1px solid var(--eqb-color-border-subtle);
 }
 
 /*
@@ -5488,7 +5488,7 @@ button:disabled {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 13px;
-  color: #6B6E68;
+  color: var(--eqb-color-text-muted);
 }
 
 .concierge-group-row-reason {
@@ -5531,7 +5531,7 @@ button:disabled {
   display: grid;
   place-items: center;
   background: transparent;
-  color: #9A9D97;
+  color: var(--eqb-color-text-faint);
   cursor: pointer;
   flex: 0 0 28px;
   font-family: inherit;
@@ -5539,12 +5539,12 @@ button:disabled {
 
 .concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon:not([aria-pressed='true']),
 .concierge-group-row-icon:focus-visible:not([aria-pressed='true']) {
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
 }
 
 .concierge-group-row-icon:hover:not(:disabled):not([aria-pressed='true']) {
-  background: #E9ECE6;
-  color: #1F1F1D;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .concierge-group-row-icon:focus-visible {
@@ -5557,7 +5557,7 @@ button:disabled {
 .concierge-group-row-icon.concierge-action-add[aria-pressed='true'],
 .concierge-group-row-icon.concierge-action-add[aria-pressed='true']:hover:not(:disabled) {
   background: transparent;
-  color: #9A9D97;
+  color: var(--eqb-color-text-faint);
   font-weight: 400;
 }
 
@@ -5565,11 +5565,11 @@ button:disabled {
 .concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']),
 .concierge-group-row-icon.concierge-action-add:focus-visible:not([aria-pressed='true']) {
   background: transparent;
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
 }
 
 .concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']) {
-  background: #E9ECE6;
+  background: var(--eqb-color-desk);
 }
 
 .concierge-group-row-icon[aria-pressed='true'] {
@@ -5581,14 +5581,14 @@ button:disabled {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #1F1F1D;
+  background: var(--action);
   color: #FFFFFF;
   display: grid;
   place-items: center;
 }
 
 .concierge-group-row-icon[aria-pressed='true']:hover:not(:disabled) .concierge-group-row-icon-mark {
-  background: #3A3A37;
+  background: var(--action-hover);
 }
 
 .concierge-group-row-menu {
@@ -5615,7 +5615,7 @@ button:disabled {
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
   font-size: 13px;
   font-family: inherit;
   font-weight: 400;
@@ -5633,13 +5633,13 @@ button:disabled {
 }
 
 .concierge-group-row-menuitem:focus-visible {
-  background: #E9ECE6;
+  background: var(--eqb-color-desk);
   outline: none;
 }
 
 .concierge-group-row-menuitem svg {
   flex: 0 0 16px;
-  color: #1F1F1D;
+  color: var(--eqb-color-text);
 }
 
 .concierge-group-row-menuitem--danger[data-fluid-hover-active],

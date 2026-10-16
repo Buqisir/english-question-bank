@@ -83,3 +83,34 @@ docs/rendered-*/
 
 # Contract-file hook unlock marker (per-cut, never committed)
 .claude/contract-unlock
+
+# Secret backstop. Keep this block last: the directory re-includes above
+# (for example !data/vocabulary/**) would otherwise un-ignore these files.
+**/.DS_Store
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pem
+**/*.key
+**/*.p8
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+**/id_rsa
+**/id_rsa.*
+**/id_ecdsa
+**/id_ecdsa.*
+**/id_ed25519
+**/id_ed25519.*
+!**/id_*.pub
+**/credentials.json
+**/credentials*.json
+**/service-account*.json
+**/*service-account*.json
+**/client_secret*.json
+**/config.local.json
+**/*.local.json
+**/.netrc
+**/.htpasswd
+**/rclone*.conf

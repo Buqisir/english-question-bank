@@ -14,7 +14,7 @@
   --sa-ink: var(--desk-ink, #191D18);
   --sa-ink-soft: #3a4037;
   --sa-muted: var(--desk-muted, #60665C);
-  --sa-faint: #9a9d97;
+  --sa-faint: var(--eqb-color-text-faint);
   --sa-trunk-line: var(--sa-muted);
   --sa-chrome-muted: var(--desk-muted, #60665C);
   --sa-chrome-hover: var(--desk-hover, #E5EAE1);

@@ -5,17 +5,24 @@
 //   cp docs/cuts/flow-hover/qa/qa-touch.mjs app/qa-touch.mjs
 //   (cd app && node qa-touch.mjs)
 //   rm app/qa-touch.mjs
-// Requires a local user "qa-owner" (see scripts/create-user.mjs). Safe to
-// delete after QA.
+// Requires a local user "qa-owner" (see scripts/create-user.mjs) whose
+// password is in EQB_LOCAL_QA_OWNER_PASSWORD. Safe to delete after QA.
 import { chromium } from 'playwright'
 
+// Copied into app/ to run, so the shared helper in docs/cuts/_shared is not
+// importable here; same rule: no fixed fallback, stop before any login request.
+const OWNER_PASSWORD = process.env.EQB_LOCAL_QA_OWNER_PASSWORD
+if (!OWNER_PASSWORD) {
+  console.error('缺少环境变量 EQB_LOCAL_QA_OWNER_PASSWORD。请先设置本地 QA 账号密码再运行；脚本已停止，没有发出登录请求。')
+  process.exit(2)
+}
 const BASE = 'http://127.0.0.1:5183'
 const URL = `${BASE}/?view=paper-browse&paperId=paper-2026-i`
 const QA_DIR = '../docs/cuts/flow-hover/qa' // relative to app/, where this runs from
 
 async function login(context) {
   const res = await context.request.post(`${BASE}/api/auth/login`, {
-    data: { username: 'qa-owner', password: 'AS-EzGmSRJRx' },
+    data: { username: 'qa-owner', password: OWNER_PASSWORD },
   })
   if (!res.ok()) throw new Error(`login failed: ${res.status()}`)
 }

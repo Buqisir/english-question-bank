@@ -1,19 +1,19 @@
 ---
 name: 英语题库工作台
 description: 一张熟悉而心爱的备课桌
-# 色值是已验收的 Daydream 桌面色阶（§2）。全局 token 文件 app/src/shared-ui/tokens.css 仍是旧值，迁移现状见 §2。
+# 色值是 08 雾海桌面色阶（2026-10-15，§2），App.css 的 --desk-* 与 shared-ui/tokens.css 取同一组值。
 colors:
-  bg: "#F3F6F0"
-  surface: "#FAFCF8"
-  raised: "#FAFDF7"
-  hover: "#E5EAE1"
-  border: "#D5DACF"
-  border-subtle: "#E3E8DF"
-  ink: "#191D18"
-  ink-muted: "#60665C"
-  ink-faint: "#9A9D97"
-  action: "#1F1F1D"
-  action-hover: "#3A3A37"
+  bg: "#F1F5F7"
+  surface: "#FFFFFF"
+  raised: "#FFFFFF"
+  hover: "#E6EDF0"
+  border: "#DCE6EB"
+  border-subtle: "#E6EDF1"
+  ink: "#1B2B33"
+  ink-muted: "#5A6C75"
+  ink-faint: "#94A4AC"
+  action: "#29424D"
+  action-hover: "#3A5561"
   on-action: "#FFFFFF"
   identity: "#2C6E56"
   success: "#1FA062"
@@ -74,9 +74,8 @@ components:
     rounded: "{rounded.card}"
     padding: "16px"
   chip:
-    # 浏览芯片还是旧色值，没有随桌面色阶迁移（§5 Chips）。
-    backgroundColor: "#FFFFFF"
-    textColor: "#6B6E68"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink-muted}"
     rounded: "{rounded.pill}"
     padding: "0 12px"
   input:
@@ -114,14 +113,14 @@ components:
 
 Owner 要求直接采用 Amp **Daydream**（“Faintly green, pleasantly elsewhere”）与 **Deadpan**（“Just greys. No comment”）两套参考，不另起泛化选色。依据最后纠正的 [Daydream 原图](https://ampcode.com/user-content/attachments/51b2d820a7b66d9badf5de059aaf1d803563cb7a50f34bb6a089acc45a902250-image.png) 与 [Deadpan 原图](https://ampcode.com/user-content/attachments/ea2dc3e2ef2cdcd590098e165f149518297e334ef3a5becb453070b014e52c2d-image.png)，不使用此前误发图区分两套配色。
 
-本轮先实现 Daydream 方向。卡片内容面经 Owner 两次微调后确认：只比桌面白一点，不能退回纯白卡片的强对比。色值见 §2；这些是本项目已验收的色值，不冒称 Amp 官方 token。
+Daydream 方向 2026-09 实现过。**2026-10-15 起全站改为 08 雾海**（BRAND.md 第 67 条）：冷雾白底、白卡片、石板墨正文与动作；雾的颜色（晨黄、青、薄荷、长春蓝、薰衣草蓝）只出现在插画里（登录页、空态），界面里不用，紫也只在插画的雾里。色值见 §2。Daydream 时「卡片只比桌面白一点」的约定随之退下：08 的桌面本身偏冷偏暗一档，白卡片对它不刺眼。
 
 - 首页保留搜索与明确的浏览筛选入口；最近上新默认四套已发布且具有完整卷面入口的卷。继续上次组卷由既有草稿卷入口承担，不重复增加「接着准备」。2026-09-15 起首页另有「接着做」和「今天翻到」两段，见 §5 ConciergeDesk。
 - 保留原有部分/节层级、真实简介与主题；阅读目录用 A篇–D篇，删除可预期的题数与重复题型说明。缺少内容时不编造摘要、主题或就绪状态。
 - 顶栏 2026-09-14 先移除绿色品牌标记，只留文字。当时的原话「品牌名未定，先移除绿色品牌标记，不另造 logo」已移到 BRAND.md §3.1 当背景。2026-10-15 起顶栏换上 BRAND.md 的图形标志，放在文字标题前面，规格见 §5 Navigation。
 - 整卷讲评开关前后保持同一纸张尺寸；宽屏收起时居中，打开时左移，让出讲评栏。草稿页让纸张居中，桌面控件沿用相同语言，实际打印纸保持白色。
 - 个人空间当前明确收纳已保存的 PDF；命名、收藏可编辑练习及文件夹管理是后续产品能力，不用假入口冒充已实现。
-- 登录页使用同一桌面/内容面色阶，表单留足输入空间，保留真实账号登录与错误反馈，不改变认证行为。
+- 登录页是 08 雾海（BRAND.md §4.7）：宽屏左边是标志、标语「题海三千，只取一瓢」和表单，右半屏是雾海插画；手机上插画在上半屏、表单在下半屏。标语是品牌时刻，不受工具界面字号上限约束。登录页另有两档族外字号，记在 `docs/design-gaps.md`：品牌名、副题和登录按钮 15px；手机输入框 16px，防 iOS 聚焦时放大页面。底色比桌面亮一档 `#F4F8FA`，和插画画布同色。保留真实账号登录与错误反馈，不改变认证行为。
 
 Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配色的方向不等于主题切换已完成。
 
@@ -131,30 +130,27 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 
 ## 2. Colors
 
-桌面色阶铺底，墨做短动作，墨绿只做身份。语义色与纸页 token 各自独立，不参与「墨 / 身份」预算。「色必须有差事」的总原则见 BRAND.md §1.5。
+雾白桌面铺底，石板墨做短动作，墨绿只做身份。语义色与纸页 token 各自独立，不参与「墨 / 身份」预算。「色必须有差事」的总原则见 BRAND.md §1.5。
 
-### Desk（桌面色阶，已验收）
+### Desk（桌面色阶，08 雾海，2026-10-15）
 
-变量写在 `app/src/App.css` 的 `--desk-*`：
+桌面变量 `--desk-*` 定义在 `app/src/App.css` 的 `:root`，全站共用；基础 token `--eqb-color-*` 在 `app/src/shared-ui/tokens.css`，取同一组值。原来「两套 token 并存」的情况到此结束。Daydream 的旧值（桌面 `#F3F6F0`、内容面 `#FAFCF8`、正文 `#191D18`、旧全局底 `#F3F5F1` 等）在 git 历史里。
 
 | 角色 | 变量 | 值 | 对比度 |
 | --- | --- | --- | --- |
-| 桌面 | `--desk-page` | `#F3F6F0` | |
-| 内容面（卡片、列表） | `--desk-surface` | `#FAFCF8` | |
-| 输入 / 浮层 | `--desk-raised` | `#FAFDF7` | |
-| 悬停 | `--desk-hover` | `#E5EAE1` | |
-| 边框 | `--desk-border` | `#D5DACF` | |
-| 分隔线 | `--desk-line` | `#E3E8DF` | |
-| 正文 | `--desk-ink` | `#191D18` | 对桌面 15.65:1 |
-| 次要文字 | `--desk-muted` | `#60665C` | 对桌面 5.42:1、对内容面 5.73:1、对悬停底 4.84:1，可写正文级次要文字 |
+| 桌面 | `--desk-page` / `--eqb-color-bg` | `#F1F5F7` | |
+| 内容面、输入 / 浮层 | `--desk-surface` / `--desk-raised` | `#FFFFFF` | |
+| 悬停、次层 | `--desk-hover` / `--eqb-color-desk` | `#E6EDF0` | |
+| 边框 | `--desk-border` / `--eqb-color-border` | `#DCE6EB` | |
+| 分隔线 | `--desk-line` / `--eqb-color-border-subtle` | `#E6EDF1` | |
+| 正文 | `--desk-ink` / `--eqb-color-text` | `#1B2B33` | 对桌面 13.29:1 |
+| 次要文字 | `--desk-muted` / `--eqb-color-text-muted` | `#5A6C75` | 对桌面 4.99:1、对白 5.47:1、对悬停底 4.62:1 |
 
-- **Faint Ink 极弱墨** (#9A9D97): 对桌面只有 2.52:1，不能写字，只给极次要的非文字图形。
-
-**现状：两套 token 并存.** 桌面色阶目前作用在首页（含浏览）、个人空间、草稿卷工作台、登录页和登录加载页（见 `App.css` 里定义 `--desk-*` 的选择器）。整卷页、生词本、默写等其他页面仍用 `app/src/shared-ui/tokens.css` 的全局 `--eqb-color-*`，那是旧值：底 `#F3F5F1`、面 `#FFFFFF`、次层 `#E9ECE6`、边 `#E3E6E0` / `#D5D9D2`、正文 `#1F1F1D`、弱墨 `#6B6E68`（对旧底 4.72:1）。新页面用桌面色阶；把旧页面迁过来是单独的界面任务，要在真实页面上给 Owner 看过。
+- **Faint Ink 极弱墨** (#94A4AC): 对桌面 2.34:1，不能写字，只给极次要的非文字图形。
 
 ### Action（墨做动作）
-- **Ink Action 墨动作** (#1F1F1D): 短标签或纯图标的填充：搜索提交圆钮、浏览行悬停「+」、选中筛选芯片。白字对它 16.51:1。
-- **Action Hover** (#3A3A37): 墨填充的悬停态。**填充悬停变浅，不变深。**
+- **Ink Action 石板墨动作** (#29424D，`--action`): 短标签或纯图标的填充：搜索提交圆钮、浏览行悬停「+」、选中筛选芯片、登录按钮。白字对它 10.6:1。原来是近黑 `#1F1F1D`。
+- **Action Hover** (#3A5561，`--action-hover`): 填充的悬停态，白字 7.92:1。**填充悬停变浅，不变深。**
 
 ### Identity（墨绿只做身份）
 - **Identity 墨绿** (#2C6E56): 头像圆，白字对它 6.05:1。原来的「品牌圆点」在 2026-09-14 验收时已从顶栏移除。BRAND.md 提议把它叫作深竹青，和品牌主色竹青 `#3D8F70` 算同一条色阶（提案，BRAND.md §1.5）。不当主按钮、不当选中芯片、不当焦点环、不当链接色。
@@ -220,7 +216,7 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 - **Card 卡片** (`box-shadow: 0 0 0 1px rgba(30,30,28,0.05), 0 1px 2px rgba(30,30,28,0.06)`): 卡片的发丝 + 贴地。
 - **Floating 浮层** (`box-shadow: 0 8px 24px rgba(0,0,0,0.12)`): 草稿丸、弹层、下拉。
 - **Sheet 纸面** (`box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08)`): 整卷页里那张 A4 纸。一条贴地发丝 + 一层远而淡的漫射，让纸"搁在桌面上"而不是"浮在空中"。只给完整卷面用（看整卷、草稿卷预览），卡片和浮层不得借用。Owner 2026-09-15 列为标准。
-- **Focus Ring 焦点环** (`outline: 2px solid #1F1F1D; outline-offset: 2px`): 键盘焦点走墨，不走墨绿，不走蓝辉光。
+- **Focus Ring 焦点环** (`outline: 2px solid var(--eqb-color-action); outline-offset: 2px`): 键盘焦点走石板墨，不走墨绿，不走蓝辉光。
 
 现网另有两处：首页和浏览的卷行列表卡只用 `0 0 0 1px var(--desk-border)` 一圈边，不加落影；首页搜索框用 `0 2px 3px rgba(25,29,24,0.06)` 一层极短的落影。
 
@@ -231,14 +227,14 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 
 ### Buttons
 - **Shape:** 短动作圆钮 50%；次级/导航 8px。
-- **Primary（短动作）:** 墨底（#1F1F1D）+ 白图标，悬停浅一档（#3A3A37）。用于搜索提交与行上「+」。
+- **Primary（短动作）:** 石板墨底（#29424D）+ 白图标，悬停浅一档（#3A5561）。用于搜索提交与行上「+」。
 - **Long-text controls:** 白底或透明，不用墨填。草稿丸白底墨字 + 发丝边 + 浮层阴影。
 - **Secondary / Ghost:** 平时无底无边，hover 才浮出悬停底，focus-visible 走墨焦点环。
 
 ### Chips（浏览筛选）
 - **Size:** 高 28px，字 13px，胶囊 999px。
-- **Unselected:** 白底 #FFFFFF + 边 #E3E6E0，字 #6B6E68；悬停底 #E9ECE6。这几个还是旧色值，没有随桌面色阶迁移。
-- **Selected:** 墨底白字，边透明；悬停 #3A3A37。
+- **Unselected:** 白底 #FFFFFF + 边 `--eqb-color-border-subtle`，字 `--eqb-color-text-muted`；悬停底 `--eqb-color-desk`。
+- **Selected:** 石板墨底白字，边透明；悬停 `--action-hover`。
 - 芯片：全部 · 真题 · 模拟 · 库中实际出现的年份。必须真过滤。
 
 ### Cards / Rows
