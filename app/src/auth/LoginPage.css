@@ -101,7 +101,7 @@
   aspect-ratio: 1024 / 1015;
   transform-origin: 50% 55%;
   /* 签名时刻豁免 300ms 上限：这是常驻的慢呼吸，不是界面反馈。 */
-  animation: login-otter-sway 7s var(--ease-otter) infinite alternate;
+  animation: login-otter-sway 7s var(--ease-otter) infinite alternate; /* signature, token-exempt */
 }
 
 .login-otter,
@@ -123,13 +123,13 @@
 /* 首次出场：描边按笔画画出来，白底与五官随后浮现。签名时刻豁免 300ms 上限。 */
 .login-otter.is-drawing [pathLength] {
   stroke-dasharray: 1;
-  animation:
+  animation: /* signature, token-exempt */
     login-otter-draw 1600ms var(--ease-in-out) both,
     login-otter-fill-in 500ms var(--ease-hover) 1300ms both;
 }
 
 .login-otter.is-drawing svg > g > :not([pathLength]) {
-  animation: login-otter-fade-in 400ms var(--ease-hover) 1500ms both;
+  animation: login-otter-fade-in 400ms var(--ease-hover) 1500ms both; /* signature, token-exempt */
 }
 
 @keyframes login-otter-draw {
