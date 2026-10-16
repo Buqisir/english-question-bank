@@ -2,7 +2,9 @@
 <!--
   3D 宣传版的排版（BRAND.md §4.8、§5.2，2026-10-15 第 66 条，Droid 定）：画是同目录的 *-art.jpg，字在这里。
   画：哑光搪胶的 3D 海獭（otter-3d.png 是单只透明底母版），用 GPT Image 编辑按 2D 母版 P 生成，
-  天空是透明的，事后统一铺暖米白 #F6EFE0，水下去掉生成时留下的半透明洞。
+  天空是透明的，事后统一铺雾白 #F2FAF6（和 2D 宣传图同一块天），水下去掉生成时留下的半透明洞。
+  2026-10-16 第 71 条：海獭、海带和光换成雾薄荷（母版 #72BFA4 / 嘴套 #F2FAF6 / 围兜 #DDF1E8），水仍是深竹青；
+  用 GPT Image 编辑只改颜色，形、脸、∴、搪胶质感不动。竹青旧版留在 zhuqing/。
   #splash 是手机开屏（1080×1920），#wide 是链接卡片 / 文章头图（1200×630，和 2D 宣传图同尺寸）。
   字和 2D 宣传图一样：思源宋体，标题 Bold，其余 Regular；墨 #191D18，副句深竹青 #2C6E56。
   开屏只放名字和一句副句，不放标题（开屏只停一两秒，读不完长句），也不放平面标志：
@@ -18,7 +20,7 @@
   @font-face { font-family: 'Promo Han'; src: url('../../../../app/public/fonts/paper/source-han-serif/SourceHanSerifCN-Regular.otf') format('opentype'); font-weight: 400; }
   * { box-sizing: border-box; margin: 0; }
   body { display: flex; flex-direction: column; gap: 48px; padding: 48px; background: #fff; }
-  .frame { position: relative; overflow: hidden; background: #F6EFE0; flex: none; }
+  .frame { position: relative; overflow: hidden; background: #F2FAF6; flex: none; }
   .frame > .art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; }
   .copy { position: absolute; display: flex; flex-direction: column; font-family: 'Promo Han', serif; color: #191D18; }
   .brand { display: flex; align-items: center; font-weight: 400; letter-spacing: .04em; }
@@ -43,7 +45,7 @@
   <div class="frame" id="wide">
     <img class="art" src="wide-art.jpg" alt="">
     <div class="copy">
-      <div class="brand"><img src="../../logo/mark.svg" height="30" alt="">英语题库工作台</div>
+      <div class="brand"><img src="../../logo/mint/mark.svg" height="30" alt="">英语题库工作台</div>
       <div class="line">替老师在题海里摸到对的题，<br>再把好题收好。</div>
       <div class="sub">AI 帮老师找，老师来定。</div>
     </div>
