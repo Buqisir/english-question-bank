@@ -105,6 +105,40 @@ assertReady(
 assertReady(keyOnlyDocxResult, keyOnlyDocx.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK')
 assert.deepEqual(answerValues(detailedDocxResult), answerValues(keyOnlyDocxResult))
 
+// Multiple alternatives retain their labels and order; a single label is not
+// essay prose. Never silently choose only the first of multiple versions.
+for (const versionLabel of ['Possible Version 1', 'One possible version:', 'A Possible Version:']) {
+  const splitHeadingFixture = makeSyntheticNck1DocxFixture({
+    transformXml: xml => xml
+      .replace('第一节：应用文（满分15分）',
+        `第一节（满分15分）</w:t></w:r></w:p><w:p><w:r><w:t>${versionLabel}`)
+      .replace('第二节：读后续写（满分25分）',
+        '第二节（满分25分）</w:t></w:r></w:p><w:p><w:r><w:t>Possible Version')
+      .replace('Join us on Friday to read and share ideas.',
+        'Join us on Friday to read and share ideas.</w:t></w:r></w:p><w:p><w:r><w:t>Possible Version 2</w:t></w:r></w:p><w:p><w:r><w:t>Meet us on Saturday instead.'),
+  })
+  const result = produceNck1DocxMaterialization({
+    paperId: splitHeadingFixture.paperId, documents: splitHeadingFixture.sourceDocuments,
+  })
+  assertReady(result, splitHeadingFixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', {
+    application: `${versionLabel}\n${expectedWritingSamples.application}\nPossible Version 2\nMeet us on Saturday instead.`,
+    continuation: expectedWritingSamples.continuation,
+  })
+}
+const scoringBeforeSample = makeSyntheticNck1DocxFixture({
+  transformXml: xml => xml.replace('第一节：应用文（满分15分）',
+    '第一节：应用文（满分15分）</w:t></w:r></w:p><w:p><w:r><w:t>评分标准：内容完整。</w:t></w:r></w:p><w:p><w:r><w:t>A Possible Version:'),
+})
+assertReady(produceNck1DocxMaterialization({
+  paperId: scoringBeforeSample.paperId, documents: scoringBeforeSample.sourceDocuments,
+}), scoringBeforeSample.sourceDocuments, '评分标准：内容完整。', expectedWritingSamples)
+const unlabelledWriting = makeSyntheticNck1DocxFixture({
+  transformXml: xml => xml.replace('第一节：应用文（满分15分）', '第一节（满分15分）'),
+})
+assertRejected(produceNck1DocxMaterialization({
+  paperId: unlabelledWriting.paperId, documents: unlabelledWriting.sourceDocuments,
+}), unlabelledWriting.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+
 const multilineDocx = makeSyntheticNck1DocxFixture({ answerShape: 'key_only', multilineAnswers: true })
 const multilineDocxResult = produceNck1DocxMaterialization({
   paperId: multilineDocx.paperId,
@@ -168,12 +202,85 @@ for (const listeningHeading of ['答案及听力材料', '听力原文（录音�
   assert.equal(result.materialization.listening.transcript.length, 10)
 }
 
+for (const wrap of [number => `(Text ${number})`, number => `（Text ${number}）`]) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(/>Text (\d+)</gu, (_, number) => `>${wrap(number)}<`),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.deepEqual(result.materialization.listening.transcript.map(segment => segment.text),
+    Array.from({ length: 10 }, (_, index) => `Synthetic transcript ${index + 1}.`))
+}
+const brokenMarker = makeSyntheticNck1DocxFixture({
+  listening: true, transformXml: xml => xml.replace('>Text 4<', '>(Text 4<'),
+})
+assertRejected(produceNck1DocxMaterialization({
+  paperId: brokenMarker.paperId, documents: brokenMarker.sourceDocuments,
+}), brokenMarker.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+
 const proseListeningHeading = makeSyntheticNck1DocxFixture({
   listening: true, listeningHeading: '下面是听力原文的解释。',
 })
 assertRejected(produceNck1DocxMaterialization({
   paperId: proseListeningHeading.paperId, documents: proseListeningHeading.sourceDocuments,
 }), proseListeningHeading.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+
+const broadcastParagraph = text => `<w:p><w:r><w:t xml:space="preserve">${text}</w:t></w:r></w:p>`
+const headmasterText = 'Hello, everyone. Please listen to the school announcement. Let us take a break, then stay safe.'
+const broadcastFixture = makeSyntheticNck1DocxFixture({
+  listening: true,
+  transformXml: xml => xml.replace('>听力原文<', '>略。<')
+    .replace(broadcastParagraph('Text 1'), `${broadcastParagraph('听下面的录音，回答第1小题。')}${broadcastParagraph('(Text 1)')}`)
+    .replace(broadcastParagraph('Text 2'), `${broadcastParagraph('（停顿2秒）（重复）（停顿10秒）')}${broadcastParagraph('听下面的录音，回答第2小题。')}${broadcastParagraph('Text 2')}`)
+    .replace('Synthetic transcript 9.', 'M: Please listen to my instructions and repeat after me.')
+    .replace('Synthetic transcript 10.', headmasterText),
+})
+const broadcastResult = produceNck1DocxMaterialization({ paperId: broadcastFixture.paperId, documents: broadcastFixture.sourceDocuments })
+assert.equal(broadcastResult.disposition, 'ready_for_verification', JSON.stringify(broadcastResult.review.required))
+assert.deepEqual(broadcastResult.materialization.listening.transcript.map(segment => segment.text), [
+  ...Array.from({ length: 8 }, (_, index) => `Synthetic transcript ${index + 1}.`),
+  'M: Please listen to my instructions and repeat after me.', headmasterText,
+])
+const partition = broadcastResult.review.listeningSourcePartition
+assert.equal(partition.heading, null, 'headingless sources do not get an invented title')
+assert.equal(partition.openingPreamble[0].text, '听下面的录音，回答第1小题。')
+assert.deepEqual(partition.segments[0].bodyItems.filter(item => item.disposition === 'excluded_exam_broadcast').map(item => item.text),
+  ['（停顿2秒）（重复）（停顿10秒）', '听下面的录音，回答第2小题。'])
+assert(partition.segments.flatMap(segment => [segment.textMarker, ...segment.bodyItems]).every(item => item.source))
+for (const [from, to, code] of [
+  ['听下面的录音，回答第2小题。', '听下面的录音，回答第3小题。', 'NCK1_DOCX_LISTENING_ANNOUNCEMENT_RANGE_AMBIGUOUS'],
+  ['听下面的录音，回答第2小题。', 'M: 听下面的录音，回答第2小题。', 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS'],
+]) {
+  const input = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('Text 2'),
+      `${broadcastParagraph(to)}${broadcastParagraph('Text 2')}`),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: input.paperId, documents: input.sourceDocuments })
+  assert(result.review.required.some(issue => issue.code === code), `${from}: ${JSON.stringify(result.review.required)}`)
+  if (to.startsWith('M:')) assert(result.materialization.listening.transcript[0].text.includes(to), 'uncertain mixed speech must be retained, never trimmed')
+}
+
+for (const [nextText, cue, accepted] of [
+  [6, '第一节到此结束。', true],
+  [4, '第一节到此结束。', false],
+  [1, '听力部分到此结束。', false],
+  [3, '这是示例考试听力部分。该部分分为第一、第二两节。', false],
+  [2, '听下面的录音，回答第2小题。现在，你有5秒钟的时间阅读第4小题。', false],
+  [6, '第二节：听下面5段录音。M: Do not lose this speech. 每段录音播放两遍。', false],
+]) {
+  const input = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph(`Text ${nextText}`),
+      `${broadcastParagraph(cue)}${broadcastParagraph(`Text ${nextText}`)}`),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: input.paperId, documents: input.sourceDocuments })
+  assert.equal(result.disposition, accepted ? 'ready_for_verification' : 'needs_agent_review', cue)
+  if (cue.includes('Do not lose')) {
+    assert(result.materialization.listening.transcript[4].text.includes(cue), 'mixed section directions must not erase speech')
+  }
+}
 
 // Different school/year titles must share a parser, not a paper registry.
 for (const title of ['示例市2028年英语试题答案', '某校秋季英语试卷参考答案：']) {

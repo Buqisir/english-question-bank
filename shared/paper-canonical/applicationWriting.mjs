@@ -104,6 +104,37 @@ function validateOpaqueApplicationWritingContract({ content, variant }) {
   return issues
 }
 
+// Registered prompt-figure capability: the complete prompt stream may own
+// source-backed figures; every group media item is placed exactly once and no
+// figure follows fixed text. Textual semantic refs still require paragraphs.
+function promptFigureIssues(content, promptBlockIds, media) {
+  const issues = []
+  const blocks = content?.blocks || []
+  const placed = []
+  let fixedTextSeen = false
+  for (const block of blocks) {
+    if (!promptBlockIds.has(block?.nodeId)) {
+      fixedTextSeen = true
+      continue
+    }
+    if (block?.kind === 'paragraph') continue
+    if (block?.kind !== 'figure' || fixedTextSeen) {
+      issues.push(issue('APPLICATION_PROMPT_BLOCK_UNSUPPORTED', 'unsupported', '$.variant.promptBlockRefs', 'Application prompts own only paragraphs and source figures before fixed text'))
+      continue
+    }
+    placed.push(block.mediaId)
+  }
+  const mediaIds = (media || []).map((item) => item?.mediaId)
+  if (
+    new Set(placed).size !== placed.length
+    || placed.length !== mediaIds.length
+    || placed.some((mediaId) => !mediaIds.includes(mediaId))
+  ) {
+    issues.push(issue('APPLICATION_PROMPT_MEDIA_OWNERSHIP_INVALID', 'incomplete_source', '$.media', 'Every Application Writing media item is placed by exactly one prompt figure'))
+  }
+  return issues
+}
+
 export function validateApplicationWritingContract({
   groupId,
   questionIds,
@@ -111,6 +142,8 @@ export function validateApplicationWritingContract({
   content,
   variant,
   sourceCapture,
+  media = [],
+  allowPromptFigures = false,
 }) {
   const issues = []
   if ((questionIds || []).length > 0 || (blankIds || []).length > 0) {
@@ -151,6 +184,7 @@ export function validateApplicationWritingContract({
     issues.push(issue('APPLICATION_PROMPT_ORDER_AMBIGUOUS', 'needs_review', '$.variant.promptBlockRefs', 'Prompt blocks must occur exactly once in source order'))
   }
   const promptBlockIds = new Set(promptBlockRefs || [])
+  if (allowPromptFigures) issues.push(...promptFigureIssues(content, promptBlockIds, media))
   const sourcePromptOrder = (content?.blocks || []).map((block) => block?.nodeId).filter((blockId) => promptBlockIds.has(blockId))
   if (Array.isArray(promptBlockRefs) && promptBlockRefs.join('\u0000') !== sourcePromptOrder.join('\u0000')) {
     issues.push(issue('APPLICATION_PROMPT_ORDER_AMBIGUOUS', 'needs_review', '$.variant.promptBlockRefs', 'Prompt block refs must retain source order'))

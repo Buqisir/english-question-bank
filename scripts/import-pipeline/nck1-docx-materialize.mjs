@@ -25,6 +25,7 @@ import {
   produceNck1OcrMaterialization,
 } from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import {
+  NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3,
   NCK1_OCR_CONFIRMATION_FILE_NAME,
   NCK1_OCR_EVIDENCE_FILE_NAME,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
@@ -38,7 +39,7 @@ const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
 
 const DOCX_PRODUCER = Object.freeze({
   version: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
-  historicalVersion: 'nck1-docx-materialization-producer-v9',
+  historicalVersions: ['nck1-docx-materialization-producer-v9', 'nck1-docx-materialization-producer-v11', 'nck1-docx-materialization-producer-v12', 'nck1-docx-materialization-producer-v13', 'nck1-docx-materialization-producer-v14'],
   sourceDigest: nck1DocxProducerSourceDigest,
   produce: produceNck1DocxMaterialization,
   reviewName: 'nck1-docx-materialization-review-v1.json',
@@ -48,7 +49,7 @@ const DOCX_PRODUCER = Object.freeze({
 
 const PDF_PRODUCER = Object.freeze({
   version: NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION,
-  historicalVersion: 'nck1-pdf-materialization-producer-v6',
+  historicalVersions: ['nck1-pdf-materialization-producer-v6', 'nck1-pdf-materialization-producer-v8', 'nck1-pdf-materialization-producer-v9', 'nck1-pdf-materialization-producer-v10', 'nck1-pdf-materialization-producer-v11'],
   sourceDigest: nck1PdfProducerSourceDigest,
   produce: produceNck1PdfMaterialization,
   reviewName: 'nck1-pdf-materialization-review-v1.json',
@@ -58,7 +59,7 @@ const PDF_PRODUCER = Object.freeze({
 
 const OCR_PRODUCER = Object.freeze({
   version: NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
-  historicalVersion: 'nck1-ocr-materialization-producer-v6',
+  historicalVersions: ['nck1-ocr-materialization-producer-v6', 'nck1-ocr-materialization-producer-v7', 'nck1-ocr-materialization-producer-v9', 'nck1-ocr-materialization-producer-v11', 'nck1-ocr-materialization-producer-v13'],
   sourceDigest: nck1OcrProducerSourceDigest,
   produce: produceNck1OcrMaterialization,
   reviewName: 'nck1-ocr-materialization-review-v1.json',
@@ -202,8 +203,11 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   const review = JSON.parse(readFileSync(reviewPath, 'utf8'))
   // Read retained provenance; this does not authorize old output as a current cache.
   const sourceDigest = producer.sourceDigest(documents, { ...producerInputs, producerVersion: receipt.producerVersion })
-  const acceptedVersions = producerVersion === producer.version
-    ? [producerVersion, producer.historicalVersion] : [producerVersion]
+  // Confirmation v3 has a separate lineage; v6/v7 never attested its visuals.
+  const historicalVersions = producer === OCR_PRODUCER
+    && producerInputs.confirmation?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
+    ? ['nck1-ocr-materialization-producer-v8', 'nck1-ocr-materialization-producer-v10', 'nck1-ocr-materialization-producer-v12', 'nck1-ocr-materialization-producer-v14'] : producer.historicalVersions
+  const acceptedVersions = [producerVersion, ...historicalVersions]
   if (receipt.schemaVersion !== producer.receiptSchemaVersion
     || !acceptedVersions.includes(receipt.producerVersion)
     || receipt.paperId !== manifest.paperId
@@ -214,6 +218,29 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
     || review.producerVersion !== receipt.producerVersion
     || !Array.isArray(review.required)) {
     throw new Error('Materialization producer evidence is not bound to the current source and producer')
+  }
+  const listeningPartition = review.listeningSourcePartition
+  const partitionDigest = receipt.listeningSourcePartitionDigest
+  // Retained receipts keep the requirements of their own producer version.
+  const requiresPartition = receipt.producerVersion === producerVersion || [
+    'nck1-docx-materialization-producer-v13',
+    'nck1-docx-materialization-producer-v14',
+    'nck1-pdf-materialization-producer-v10',
+    'nck1-pdf-materialization-producer-v11',
+    'nck1-ocr-materialization-producer-v11',
+    'nck1-ocr-materialization-producer-v12',
+    'nck1-ocr-materialization-producer-v13',
+    'nck1-ocr-materialization-producer-v14',
+  ].includes(receipt.producerVersion)
+  if ((requiresPartition && !partitionDigest)
+    || (partitionDigest && (!listeningPartition
+      || digestJson(listeningPartition) !== partitionDigest
+      || listeningPartition.schemaVersion !== 'nck1-listening-source-partition-v1'
+      || listeningPartition.paperId !== manifest.paperId
+      || listeningPartition.producerVersion !== receipt.producerVersion
+      || listeningPartition.producerSourceDigest !== receipt.sourceDigest
+      || listeningPartition.originalMaterializationOutputDigest !== receipt.outputDigest))) {
+    throw new Error('Materialization listening partition does not match its receipt digest and source')
   }
   assertReceiptMediaFiles(paperDir, receipt)
   const outputBytes = readFileSync(outputPath)
@@ -384,6 +411,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     sourceDigest,
     outputDigest,
     disposition: produced.disposition,
+    listeningSourcePartitionDigest: digestJson(produced.review.listeningSourcePartition),
     mediaFiles,
   })
   return {

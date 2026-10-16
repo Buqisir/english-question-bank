@@ -10,7 +10,7 @@ const englishToken = "[A-Za-z]+(?:[’'-][A-Za-z]+)*"
  */
 export function canonicalizeVisibleEnglishTypography(value, ruleVersion = '2') {
   if (typeof value !== 'string') return value
-  if (ruleVersion === '3') {
+  if (ruleVersion === '3' || ruleVersion === '4') {
     return value.replace(
       new RegExp(`(?<![\\p{L}\\p{N}_])(${englishToken})[ \\t]*(?:（([^()（）\\r\\n]*)）|\\(([^()（）\\r\\n]*)\\))[ \\t]*`, 'gu'),
       (match, word, fullWidth, halfWidth, offset, text) => {
@@ -19,8 +19,10 @@ export function canonicalizeVisibleEnglishTypography(value, ruleVersion = '2') {
           || !/^[\p{Script=Han} \t…，、；：。！？—·“”‘’「」《》〈〉.,;:!?-]+$/u.test(inside)) return match
         const gloss = inside.replace(/^[ \t]+|[ \t]+$/g, '')
         const next = text[offset + match.length] ?? ''
+        // A text inline can end immediately before a blank or another inline.
+        // v4 preserves its source separator; v3 replay keeps historical trimming.
         const suffix = /[A-Za-z0-9]/.test(next) ? ' '
-          : next === '' || /[.,;:!?]/.test(next) ? ''
+          : (ruleVersion === '3' && next === '') || /[.,;:!?]/.test(next) ? ''
             : match.match(/[ \t]*$/)[0]
         return `${word} (${gloss})${suffix}`
       },

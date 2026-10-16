@@ -10,14 +10,17 @@ import {
   nck1MaterializationHistoricalAuthorityRef54,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef61,
+  nck1MaterializationHistoricalAuthorityRef64,
   resolveCanonicalAuthority,
   trustedDocxCandidateAuthorityRef,
 } from '../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
+  compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
   rederiveConfirmedCanonicalCandidate,
 } from '../shared/paper-canonical/compiler.mjs'
+import { validateInlineBlankTextBoundaries } from '../shared/paper-canonical/inlineBlankBoundaries.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { validateContinuationWritingContract } from '../shared/paper-canonical/continuationWriting.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
@@ -319,7 +322,7 @@ assert.equal(Boolean(misplacedDirectionConfirmation.compilation), false,
   'a suspected passage instruction blocks confirmed compilation')
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '62')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '67')
 assert.equal(nck1MaterializationHistoricalAuthorityRef58.manifestVersion, '58')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
@@ -711,8 +714,8 @@ const rawAdmission = admitCanonicalPaperImport({
   sourceAssetVersion: 1,
 })
 assert.equal(rawAdmission.ok, true,
-  `raw v62 admission and consumers remain valid: ${JSON.stringify(rawAdmission.diagnostics)}`)
-assert.equal(rawAdmission.sealed.manifest.authority.manifestVersion, '62')
+  `raw v67 admission and consumers remain valid: ${JSON.stringify(rawAdmission.diagnostics)}`)
+assert.equal(rawAdmission.sealed.manifest.authority.manifestVersion, '67')
 const replay61 = importCanonicalCandidate(rawNoListeningInput, undefined, {
   materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef61,
 })
@@ -805,6 +808,72 @@ for (const exampleState of ['not_supplied', 'provided']) {
     .some(issue => issue.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'))
 }
 assert.equal(projectListeningGroupPresentation(studentListening).example.answer, 'C', 'legacy input keeps historical opening')
+// Count correction changes new delivered meaning, never the captured original.
+for (const playCount of [1, 2]) {
+  const source = sourceInput({ listening: true, mixedTable: false })
+  const materialization = JSON.parse(new TextDecoder().decode(source.materializationBytes))
+  const locator = materialization.groups[0].blocks[0].source
+  const before = playCount === 2 ? '每段对话仅读一遍。' : '每段对话读两遍。'
+  const after = playCount === 2 ? '每段对话读两遍。' : '每段对话读一遍。'
+  materialization.schemaVersion = 'nck1-source-materialization-v4'
+  materialization.sourcePresentation = {
+    instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).map(slotId => ({ slotId,
+      text: slotId === 'listening.short-dialogue' ? before : `Source direction for ${slotId}.`, source: locator })),
+    listeningExample: { state: 'not_supplied', source: locator },
+  }
+  materialization.listening.timing = playCount === 2 ? [{ kind: 'section1_playback', passes: 1, source: locator }] : []
+  source.materializationBytes = textEncoder.encode(JSON.stringify(materialization))
+  source.listeningAudio = { relativePath: 'listening/playback.mp3', sha256: sha256(textEncoder.encode('fixture audio')),
+    byteLength: 13, durationSeconds: 300, mediaType: 'audio/mpeg' }
+  const originalDigest = sha256(source.materializationBytes)
+  const oldCandidate = importCanonicalCandidate(source).candidate
+  const content = JSON.stringify({ segments: ['Synthetic repetition evidence'] })
+  const correction = { schemaVersion: 'listening-instruction-correction-v1', policy: 'verified-recording-count-v1',
+    paperId: materialization.paperId, materializationSha256: originalDigest, transcriptDigest: digestJson(materialization.listening.transcript),
+    originalAudioSha256: sha256(textEncoder.encode('fixture original')), playbackAudioSha256: source.listeningAudio.sha256,
+    durationSeconds: 300, reviewedBy: 'import_agent', reviewedAt: '2026-10-16T00:00:00.000Z',
+    method: 'asr_source_comparison', untrustedContentHandledAsData: true,
+    evidence: [{ evidenceId: 'fixture', content, sha256: sha256(textEncoder.encode(content)), byteLength: textEncoder.encode(content).length,
+      window: { startSeconds: 0, endSeconds: 300 }, settings: { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' } }],
+    instructions: [{ slotId: 'listening.short-dialogue', source: locator, before, after, playCount,
+      reason: 'Complete distinct recording occurrences in synthetic fixture', groups: materialization.listening.transcript.slice(0, 5).map((group, index) => ({
+        segmentId: group.segmentId, occurrences: Array.from({ length: playCount }, (_, pass) => ({
+          startSeconds: index * 40 + pass * 15 + 2, endSeconds: index * 40 + pass * 15 + 12, evidenceIds: ['fixture'],
+        })),
+      })) }],
+  }
+  const corrected = { ...source, listeningInstructionCorrectionBytes: textEncoder.encode(JSON.stringify(correction)) }
+  const imported = importCanonicalCandidate(corrected)
+  assert.deepEqual(imported.issues, [])
+  assert.equal(imported.candidate.authority.manifestVersion, '68')
+  assert.notEqual(imported.candidate.source.sha256, oldCandidate.source.sha256)
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
+  const occurrence = consumption.selections.find(item => item.familyContractId === 'listening').projectedOccurrences[0]
+  assert.equal(occurrence.sourcePresentation.instruction.text, after)
+  assert.equal(occurrence.firstSectionPlayback, playCount === 1 ? 'once_explicit' : undefined)
+  assert.equal(JSON.stringify(occurrence).includes('correctOptionId'), false)
+  const capture = preview.compilation.artifacts.sourceCapture
+  const observation = capture.observations.find(item => item.observationId === occurrence.sourcePresentation.instruction.authorityObservationRef)
+  const correctionDocument = capture.documents.find(item => item.documentId === observation.documentId)
+  assert.equal(correctionDocument.inputKey, 'listening_instruction_correction', 'corrected meaning must not claim original PDF bytes as authority')
+  assert.equal(correctionDocument.sha256, sha256(corrected.listeningInstructionCorrectionBytes))
+  const { request } = materializeNck1CanonicalRequest(corrected, confirmation(imported.candidate))
+  assert.equal(compileCanonicalPaper(request).disposition, 'ready', 'captured correction replays without mutable sidecars')
+  const admitted = admitCanonicalPaperImport({ request, sourceAssetVersion: 1, listeningAudioBytes: textEncoder.encode('fixture audio') })
+  assert.equal(admitted.ok, true, JSON.stringify(admitted.diagnostics))
+  assert.equal(sha256(source.materializationBytes), originalDigest)
+  assert.equal(importCanonicalCandidate(source).candidate.candidateDigest, oldCandidate.candidateDigest)
+  assert(importCanonicalCandidate(corrected, undefined, { materializationAuthorityRef: nck1MaterializationCandidateAuthorityRef }).issues.length)
+  for (const mutate of [value => { value.instructions[0].after += '额外改文' },
+    value => { value.instructions[0].groups.pop() }, value => { value.evidence[0].window.endSeconds = 4 },
+    value => { value.instructions[0].groups[1].occurrences[0] = value.instructions[0].groups[0].occurrences[0] },
+    value => { value.playbackAudioSha256 = originalDigest }]) {
+    const invalid = structuredClone(correction); mutate(invalid)
+    assert(importCanonicalCandidate({ ...source, listeningInstructionCorrectionBytes: textEncoder.encode(JSON.stringify(invalid)) }).issues.length)
+  }
+}
 for (const side of ['left', 'right']) {
   const missingInput = sourceInput({ listening: false, mixedTable: false })
   const missing = JSON.parse(new TextDecoder().decode(missingInput.materializationBytes))
@@ -1389,7 +1458,27 @@ const glossCompiled = compileCanonicalPaper(glossRequest.request)
 assert.equal(glossCompiled.disposition, 'ready')
 assert(JSON.stringify(glossCompiled.artifacts.canonicalPaper).includes('Walk amid (在……之中) trees; metaphorical (比喻性的) title.'))
 assert(glossCompiled.artifacts.normalizationReport.transformationRecords.some(record =>
-  record.ruleId === 'canonical-visible-typography' && record.ruleVersion === '3' && record.before === glossBefore))
+  record.ruleId === 'canonical-visible-typography' && record.ruleVersion === '4' && record.before === glossBefore))
+// A registered transformation must preserve source spacing before a blank.
+const glossBlankInput = sourceInput({ listening: false, mixedTable: false })
+const glossBlankMaterialization = JSON.parse(new TextDecoder().decode(glossBlankInput.materializationBytes))
+const glossBlankBlock = glossBlankMaterialization.groups.find(group => group.slotId === 'grammar-fill').blocks[0]
+const firstBlankIndex = glossBlankBlock.content.findIndex(inline => inline.kind === 'blank_ref')
+glossBlankBlock.content[firstBlankIndex - 1].text = 'Take a shuttle(接驳车) '
+glossBlankInput.materializationBytes = textEncoder.encode(JSON.stringify(glossBlankMaterialization))
+for (const [authority, separator] of [[nck1MaterializationCandidateAuthorityRef, ' '], [nck1MaterializationHistoricalAuthorityRef64, '']]) {
+  const imported = importCanonicalCandidate(glossBlankInput, undefined, { materializationAuthorityRef: authority })
+  assert.deepEqual(imported.issues, [])
+  const { compilation: compiled } = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert.equal(compiled.disposition, 'ready')
+  const groups = compiled.artifacts.canonicalPaper.questionGroups
+  const block = groups.find(group => group.variant.family === 'grammar-fill').content.blocks[0]
+  assert.equal(block.inlines[firstBlankIndex - 1].text, `Take a shuttle (接驳车)${separator}`)
+  assert.deepEqual(validateInlineBlankTextBoundaries(groups).map(issue => issue.code),
+    separator ? [] : ['INLINE_BLANK_SEPARATOR_MISSING'])
+  const request = materializeNck1CanonicalRequest(glossBlankInput, confirmation(imported.candidate))
+  assert.equal(request.request.authority.manifestDigest, authority.manifestDigest, 'retained confirmation must replay its own authority')
+}
 // Reconstruct the historical Candidate identity, not a new request relabelled v54.
 const { candidateDigest: _digest, sourceInput: _input, ...historicalBody } = glossCandidate
 historicalBody.authority = nck1MaterializationHistoricalAuthorityRef54

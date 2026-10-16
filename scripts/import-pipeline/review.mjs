@@ -38,6 +38,7 @@ import {
   buildNck1OcrReviewProjection,
   buildNck1ReviewProjection,
   loadNck1ReviewSource,
+  importNck1ReviewCandidate,
   ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
   resolveReviewFile,
@@ -73,6 +74,8 @@ import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { prepareListeningWaveform } from '../../server/paper-import/listeningWaveform.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { applyListeningInstructionCorrection, correctedListeningCount, LISTENING_INSTRUCTION_CORRECTION_FILE, LISTENING_INSTRUCTION_CORRECTION_POLICY } from '../../server/paper-import/listeningInstructionCorrection.mjs'
 import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
 import { LISTENING_AUDIO_PATHS } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import {
@@ -894,6 +897,134 @@ function verifyAnalyses(paperId) {
   }, null, 2))
 }
 
+function listeningInstructionCorrection(paperId, command) {
+  const paperDir = paperDirectory(paperId)
+  const loaded = loadNck1ReviewSource(paperDir, { preparingListeningCorrection: command !== 'verify-listening-instruction-correction' })
+  const raw = JSON.parse(new TextDecoder().decode(loaded.sourceInput.materializationBytes))
+  const playback = loaded.sourceInput.listeningAudio
+  const original = loaded.listeningAudioEvidence?.descriptors.find(file => file.role === 'listening_audio_original')
+  if (!playback || !original || loaded.analyzedPackage) fail('Correction requires captured raw-source audio')
+  if (command === 'prepare-listening-instruction-correction') {
+    const output = option('--output')
+    const slotId = option('--slot')
+    const playCount = Number(option('--count'))
+    const instruction = raw.sourcePresentation?.instructions.find(item => item.slotId === slotId)
+    if (!output || !instruction || !['listening.short-dialogue', 'listening.long-form'].includes(slotId)) {
+      fail('prepare-listening-instruction-correction requires --slot <listening slot> --count 1|2 --output <request.json>')
+    }
+    const groups = raw.listening.transcript.filter(group => group.questionNumbers.every(number => slotId === 'listening.short-dialogue' ? number <= 5 : number >= 6))
+      .sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
+    writeFileSync(path.resolve(output), `${JSON.stringify({
+      instructions: 'Attest each complete nonoverlapping recording occurrence in this section. Embed original evidence JSON verbatim with byte length, SHA, exact windows and actual settings. Repeated ASR output is not recording repetition. This is an instruction-count correction, not OCR or Owner approval. Do not change original documents or audio.',
+      transcript: groups,
+      report: { schemaVersion: 'listening-instruction-correction-v1', policy: LISTENING_INSTRUCTION_CORRECTION_POLICY,
+        paperId, materializationSha256: sha256(loaded.sourceInput.materializationBytes), transcriptDigest: digestJson(raw.listening.transcript),
+        originalAudioSha256: original.sha256, playbackAudioSha256: playback.sha256, durationSeconds: playback.durationSeconds,
+        reviewedBy: 'import_agent', reviewedAt: null, method: 'asr_source_comparison', untrustedContentHandledAsData: true,
+        evidence: [], instructions: [{ slotId, source: instruction.source, before: instruction.text,
+          after: correctedListeningCount(instruction.text, playCount), playCount, reason: '',
+          groups: groups.map(group => ({ segmentId: group.segmentId, occurrences: [] })) }],
+      },
+    }, null, 2)}\n`, { flag: 'wx' })
+    console.log('PREPARED count-only correction; no review attested or source changed')
+    return
+  }
+  if (command === 'finalize-listening-instruction-correction') {
+    const input = option('--input')
+    if (!input) fail('finalize-listening-instruction-correction requires --input <correction.json>')
+    loaded.sourceInput.listeningInstructionCorrectionBytes = new Uint8Array(readFileSync(path.resolve(input)))
+  }
+  const bytes = loaded.sourceInput.listeningInstructionCorrectionBytes
+  if (!bytes) fail('No listening instruction correction exists')
+  const corrected = applyListeningInstructionCorrection(loaded.sourceInput.materializationBytes, bytes, playback)
+  if (corrected.correction.originalAudioSha256 !== original.sha256) fail('Original audio binding differs')
+  const imported = importCanonicalCandidate(loaded.sourceInput)
+  if (!imported.candidate || imported.issues.length) fail(imported.issues[0]?.message || 'Invalid corrected Candidate')
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  if (!preview.compilation) fail(preview.unresolvedIssues?.[0]?.message || 'Corrected Candidate does not compile')
+  if (command === 'finalize-listening-instruction-correction') {
+    const active = path.join(paperDir, LISTENING_INSTRUCTION_CORRECTION_FILE)
+    if (existsSync(active)) {
+      const previous = readFileSync(active)
+      if (sha256(previous) !== sha256(bytes)) {
+        const historyDir = path.join(paperDir, 'listening-instruction-correction-history')
+        mkdirSync(historyDir, { recursive: true })
+        const history = path.join(historyDir, `${sha256(previous).slice(7)}.json`)
+        if (existsSync(history)) {
+          if (sha256(readFileSync(history)) !== sha256(previous)) fail('Retained instruction correction changed')
+        } else writeFileSync(history, previous, { flag: 'wx' })
+      }
+    }
+    writeFileSync(active, bytes)
+  }
+  console.log(JSON.stringify({ paperId, validation: 'PASS', sourceDigest: imported.candidate.source.sha256,
+    candidateDigest: imported.candidate.candidateDigest, correctionDigest: sha256(bytes),
+    corrections: corrected.correction.instructions.map(({ slotId, before, after }) => ({ slotId, before, after })),
+    next: 'New Candidate: rebind answer checks, summaries, metadata and navigation review; regenerate frozen PDFs in a fresh working copy before a new Review.',
+    revision: 'not_submitted', publication: null }, null, 2))
+}
+
+function listeningReview(paperId, command) {
+  const paperDir = paperDirectory(paperId)
+  const loaded = loadNck1ReviewSource(paperDir)
+  const input = command === 'finalize-listening-review' ? option('--input') : null
+  if (command === 'finalize-listening-review' && !input) fail('finalize-listening-review requires --input <review.json>')
+  const authoredBytes = input ? readFileSync(path.resolve(input)) : null
+  const expectedDigest = option('--candidate-digest') || (authoredBytes
+    ? JSON.parse(authoredBytes.toString('utf8'))?.subject?.candidateDigest : null)
+  const imported = importNck1ReviewCandidate(paperDir, loaded, expectedDigest)
+  if (!imported.candidate || imported.issues.length) fail(imported.issues[0]?.message || 'Invalid listening Candidate')
+  const subject = listeningReviewSubject(loaded, imported.candidate)
+  const transcript = loaded.materialization.listening.transcript
+  if (command === 'prepare-listening-review') {
+    const output = option('--output')
+    if (!output) fail('prepare-listening-review requires --output <request.json>')
+    writeFileSync(path.resolve(output), `${JSON.stringify({
+      instructions: 'Review every source group for identity, order, completeness and nontruncating playback. Reuse retained local ASR; do not treat missing markers as mismatch, signal candidates as verified, overlap as repetition, or ASR as direct listening/safety certification. Usable means teacher navigation, not verbatim certification. Keep material uncertainty review_required or blocked; retain nonmaterial doubts in limits. Bind every occurrence to retained evidence. Never invent an attestation.',
+      transcript,
+      sourceInstructions: loaded.materialization.sourcePresentation?.instructions || [],
+      report: {
+        schemaVersion: 'listening-review-v1', subject, reviewedBy: 'import_agent', reviewedAt: null,
+        method: 'asr_source_comparison', untrustedContentHandledAsData: true,
+        scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
+        evidence: [],
+        groups: [...transcript].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
+          .map(group => ({ segmentId: group.segmentId, questionNumbers: group.questionNumbers,
+            decision: 'review_required', reason: '尚未审阅', limits: [], playback: null, occurrences: [] })),
+      },
+      evidenceDescriptor: { path: 'listening-review-evidence/window-000.json', sha256: 'sha256:<actual digest>',
+        byteLength: '<actual bytes>', kind: 'asr_window', window: { startSeconds: 0, endSeconds: '<actual end>' },
+        settings: { engine: '<actual engine/version>', model: '<actual checkpoint>', language: '<actual language>',
+          vad: '<actual boolean>', computeType: '<actual compute type>' } },
+    }, null, 2)}\n`, { flag: 'wx' })
+    console.log(`PREPARED listening review for ${paperId}; no ASR or attestation performed`)
+    return
+  }
+  let validated
+  if (command === 'finalize-listening-review') {
+    const bytes = authoredBytes
+    validated = validateListeningReview(paperDir, JSON.parse(bytes.toString('utf8')), subject, transcript)
+    const active = path.join(paperDir, LISTENING_REVIEW_FILE)
+    if (existsSync(active)) {
+      const previous = readFileSync(active)
+      if (sha256(previous) !== sha256(bytes)) {
+        const historyDir = path.join(paperDir, 'listening-review-history')
+        mkdirSync(historyDir, { recursive: true })
+        const history = path.join(historyDir, `${sha256(previous).slice(7)}.json`)
+        if (existsSync(history)) {
+          if (sha256(readFileSync(history)) !== sha256(previous)) fail('Retained listening history changed')
+        } else writeFileSync(history, previous, { flag: 'wx' })
+      }
+    }
+    writeFileSync(active, bytes)
+  } else validated = readListeningReview(paperDir, subject, transcript)
+  if (!validated) fail('No listening review exists')
+  console.log(JSON.stringify({ paperId, validation: 'PASS', scope: validated.review.scope,
+    usableGroups: validated.review.groups.filter(group => group.decision === 'usable').length,
+    unresolvedGroups: validated.review.groups.filter(group => group.decision !== 'usable').map(group => group.segmentId),
+    semanticJudgment: 'import_agent_attestation', revision: 'not_submitted', publication: null }, null, 2))
+}
+
 function spellingReview(paperId, command) {
   const paperDir = paperDirectory(paperId)
   const loaded = loadNck1ReviewSource(paperDir, { preparingSpelling: command !== 'verify-spelling' })
@@ -976,7 +1107,7 @@ function summaryCandidate(paperDir) {
   if (loaded.config.importProfile !== 'public-paper-v1' || loaded.analyzedPackage) {
     fail('Paragraph summaries are only available for raw-source public-paper-v1 workspaces')
   }
-  const imported = importCanonicalCandidate(loaded.sourceInput)
+  const imported = importNck1ReviewCandidate(paperDir, loaded)
   if (!imported.candidate || imported.issues.length) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
@@ -1502,6 +1633,8 @@ async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (!['promote', 'request-publication', 'publication-status', 'redeem-publication'].includes(command)) assertNotNck1SourceOnly(paperId, command)
   if (command === 'push') await pushRevision(paperId)
+  else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) listeningInstructionCorrection(paperId, command)
+  else if (['prepare-listening-review', 'finalize-listening-review', 'verify-listening-review'].includes(command)) listeningReview(paperId, command)
   else if (command === 'prepare-listening-waveform') {
     const root = paperDirectory(paperId)
     const loaded = loadNck1ReviewSource(root)
@@ -1544,6 +1677,8 @@ async function main() {
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
       + 'prepare-listening-waveform <paperId> (local derivative only; no approval or publication) | '
+      + 'prepare-listening-review <paperId> --output <request.json> | finalize-listening-review <paperId> --input <review.json> | verify-listening-review <paperId> | '
+      + 'prepare-listening-instruction-correction <paperId> --slot <listening slot> --count 1|2 --output <request.json> | finalize-listening-instruction-correction <paperId> --input <correction.json> | verify-listening-instruction-correction <paperId> | '
       + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
       + 'cleanup-plan <paperId> --revision rev-id (inspection only; never deletes or certifies eligibility) | '
       + 'link-thread <paperId> --thread T-id [--from T-id] (explicit discussion handoff only) | '

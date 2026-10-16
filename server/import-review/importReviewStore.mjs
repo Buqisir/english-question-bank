@@ -16,7 +16,8 @@ import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
 import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
 import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
-import { LISTENING_AUDIO_PATHS, listeningPlaybackSegments } from '../paper-import/listeningAudioEvidence.mjs'
+import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mjs'
+import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import {
@@ -1423,7 +1424,7 @@ export function createImportReviewStore({
         durationSeconds: playback.durationSeconds, mediaType: 'audio/mpeg',
         url: `/api/import-review-preview/revisions/${encodeURIComponent(revision.id)}/files?path=${encodeURIComponent(playbackPath)}`,
         ...(waveform ? { waveform } : {}),
-        segments: listeningPlaybackSegments(projection.materialization.listening, projection.listeningAudioEvidence?.segments),
+        segments: reviewedPlaybackSegments(projection.reviewedListening),
       } } : {}) },
     }
     // Small derived Screen data only: no original documents, MP3/PDF bytes,

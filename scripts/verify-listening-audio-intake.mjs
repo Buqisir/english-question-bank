@@ -2,7 +2,7 @@
 
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
@@ -24,6 +24,8 @@ import {
 import { buildListeningWaveform, prepareListeningWaveform, readListeningWaveform } from '../server/paper-import/listeningWaveform.mjs'
 import { assertListeningWaveform, assertListeningPlaybackUi, firstListeningSectionRange } from '../shared/paper-canonical/listeningWaveform.mjs'
 import { mockPaperCoverName } from '../shared/paper-canonical/listeningPresentation.mjs'
+import { validateListeningReview, readListeningReview, reviewedPlaybackSegments } from '../server/paper-import/listeningReview.mjs'
+import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-listening-audio-'))
 const paperId = 'paper-listening-audio-verifier'
@@ -86,6 +88,63 @@ function asr(overrides = {}) {
 }
 
 try {
+  const navigationRoot = path.join(tempRoot, 'navigation')
+  mkdirSync(path.join(navigationRoot, 'listening-review-evidence'), { recursive: true })
+  json(path.join(navigationRoot, 'listening-review-evidence/window.json'), { segments: ['fixture evidence'] })
+  const evidenceBytes = readFileSync(path.join(navigationRoot, 'listening-review-evidence/window.json'))
+  const navigationTranscript = [
+    { segmentId: 'group-1', questionNumbers: [1], text: 'First dialogue', source: { paragraph: 1 } },
+    { segmentId: 'group-2', questionNumbers: [2], text: 'Second dialogue', source: { paragraph: 2 } },
+  ]
+  const subject = { paperId, sourceDigest: `sha256:${'a'.repeat(64)}`, candidateDigest: `sha256:${'b'.repeat(64)}`,
+    originalAudioSha256: `sha256:${'c'.repeat(64)}`, playbackAudioSha256: `sha256:${'d'.repeat(64)}`,
+    durationSeconds: 90, timebase: 'normalized_playback_seconds', transcriptDigest: digestJson(navigationTranscript) }
+  const navigationReview = {
+    schemaVersion: 'listening-review-v1', subject, reviewedBy: 'import_agent', reviewedAt: '2026-10-16T00:00:00.000Z',
+    method: 'asr_source_comparison', untrustedContentHandledAsData: true,
+    scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
+    evidence: [{ path: 'listening-review-evidence/window.json', sha256: sha256(evidenceBytes), byteLength: evidenceBytes.length,
+      kind: 'asr_window', window: { startSeconds: 0, endSeconds: 90 },
+      settings: { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' } }],
+    groups: navigationTranscript.map((group, index) => ({ segmentId: group.segmentId, questionNumbers: group.questionNumbers,
+      decision: 'usable', reason: 'Fixture review', limits: ['Not verbatim certification'],
+      playback: { startSeconds: 3 + index * 40, endSeconds: 31 + index * 40 },
+      occurrences: [{ startSeconds: 7 + index * 40, endSeconds: 28 + index * 40,
+        evidencePaths: ['listening-review-evidence/window.json'] }] })),
+  }
+  assert.equal(readListeningReview(navigationRoot, subject, navigationTranscript), null)
+  assert.deepEqual(reviewedPlaybackSegments(null), [], 'No positional fallback without review')
+  const validateNavigation = review => validateListeningReview(navigationRoot, review, subject, navigationTranscript)
+  const checkedNavigation = validateNavigation(navigationReview)
+  assert.deepEqual(reviewedPlaybackSegments(checkedNavigation).map(group => [group.firstQuestionId, group.startSeconds, group.endSeconds]),
+    [['question:listening:1', 3, 31], ['question:listening:2', 43, 71]])
+  const partial = structuredClone(navigationReview)
+  Object.assign(partial.groups[0], { decision: 'review_required', playback: null, occurrences: [] })
+  assert.deepEqual(reviewedPlaybackSegments(validateNavigation(partial)).map(group => group.segmentId), ['group-2'])
+  for (const mutate of [
+    review => { review.subject.playbackAudioSha256 = `sha256:${'e'.repeat(64)}` },
+    review => { review.groups.reverse() },
+    review => { review.groups.pop() },
+    review => { review.groups[1].playback.startSeconds = 30 },
+    review => { review.groups[0].occurrences.push(structuredClone(review.groups[0].occurrences[0])) },
+    review => { review.groups[0].playback.endSeconds = 27 },
+    review => { review.groups[0].decision = 'review_required' },
+    review => { review.evidence[0].window.endSeconds = 60 },
+    review => { review.evidence[0].path = '../window.json' },
+    review => { review.evidence[0].sha256 = `sha256:${'f'.repeat(64)}` },
+    review => { review.instructionCorrection = { after: '读两遍' } },
+  ]) {
+    const invalid = structuredClone(navigationReview)
+    mutate(invalid)
+    assert.throws(() => validateNavigation(invalid))
+  }
+  json(path.join(navigationRoot, 'config.json'), { paperId })
+  json(path.join(navigationRoot, 'listening-review-v1.json'), navigationReview)
+  const printFiles = [{ path: 'config.json', role: 'config', mediaType: 'application/json' }]
+  const originalPrintDigest = productInputDigest(navigationRoot, printFiles)
+  assert.equal(productInputDigest(navigationRoot, [...printFiles, ...checkedNavigation.files], checkedNavigation), originalPrintDigest)
+  json(path.join(navigationRoot, 'config.json'), { paperId, changed: true })
+  assert.notEqual(productInputDigest(navigationRoot, [...printFiles, ...checkedNavigation.files], checkedNavigation), originalPrintDigest)
   execFileSync('mkdir', ['-p', paperDir])
   json(manifestPath, sourceManifest(paperId))
   execFileSync('ffmpeg', [
@@ -506,6 +565,12 @@ try {
   const misleadingExample = `Listen to this example before the test begins. Question one. ${firstText} Question two. This was only the example. Now the test begins. Text one. An unrelated formal dialogue. Text two.`
   assert.equal(match(quickText).verdict, 'partial_pass', 'different later content must never imply whole-file pass')
   assert.equal(match(quickText).summary, '首段快速匹配、后续内容未核对')
+  const unlocalized = match(`第一题。${firstText} 第二题。`)
+  assert.equal(unlocalized.verdict, 'review_required')
+  assert.deepEqual(unlocalized.flaggedRanges.map(flag => flag.code), ['LISTENING_AUDIO_EXTENDED_CHECK_REQUIRED'],
+    'An unrecognized announcement is a localization failure, not evidence of a different recording')
+  assert.ok(match('Text one. A completely unrelated dialogue about a delayed flight. Text two.')
+    .flaggedRanges.some(flag => flag.code === 'LISTENING_AUDIO_TRANSCRIPT_MISMATCH'))
   for (const text of [
     misleadingExample,
     `Example: ${firstText} Text one. A different topic. Text two.`,

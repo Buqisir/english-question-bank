@@ -16,9 +16,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
-import { nck1MaterializationHistoricalAuthorityRef59 } from '../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef66 } from '../shared/paper-canonical/authority.mjs'
 import { materializeNck1CanonicalRequest, admitLiveConfirmedNck1MaterializationImport } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
-import { loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewConsumption, loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
+import { reviewPrintHtml } from '../server/import-review/reviewPagination.mjs'
+import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
 import { inspectNck1Materialization, runNck1MaterializationJob } from './import-pipeline/nck1-docx-materialize.mjs'
 import {
@@ -224,6 +226,13 @@ for (const documentIndex of [0, 1]) {
     region: { x: 0, y: 0, width: 1, height: 1 } })
   page.visualClassifications.push({ regionId: 'table-layout', classification: 'semantic_table',
     rows: [{ header: true, cells: [[ids[0]], ids.slice(1)] }] })
+  // A watermark inside the table is accounted for as furniture, not a cell.
+  const watermark = { ...cloneJson(observed.observations[0]),
+    observationId: 'table-watermark', regionId: 'table-watermark-text',
+    text: 'SYNTHETIC WATERMARK' }
+  observed.observations.push(watermark)
+  observed.regions.push({ regionId: watermark.regionId, kind: 'text', region: cloneJson(watermark.region) })
+  page.furnitureObservationIds.push(watermark.observationId)
   rebound(evidence)
   confirmation.evidenceDigest = evidence.evidenceDigest
   const resolve = value => resolveConfirmedNck1OcrEvidence({ paperId,
@@ -235,6 +244,7 @@ for (const documentIndex of [0, 1]) {
     [page.orderedItems[0].text, page.orderedItems.slice(1).map(item => item.text).join('\n')])
   assert.equal(table.columnCount, 2)
   for (const change of [
+    value => { value.documents[documentIndex].pages[0].furnitureObservationIds = [] },
     value => { value.documents[documentIndex].pages[0].visualClassifications.at(-1).rows[0].cells[1].pop() },
     value => { value.documents[documentIndex].pages[0].visualClassifications.at(-1).rows[0].cells[0][0] = 'foreign-item' },
     value => { value.documents[documentIndex].pages[0].visualClassifications.at(-1).rows[0].cells[1].push(ids[0]) },
@@ -244,6 +254,9 @@ for (const documentIndex of [0, 1]) {
     change(invalid)
     assert(resolve(invalid).issues.some(issue => issue.code === 'NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED'))
   }
+  const doubleClaimed = cloneJson(confirmation)
+  doubleClaimed.documents[documentIndex].pages[0].furnitureObservationIds.push(page.orderedItems[0].observationIds[0])
+  assert(resolve(doubleClaimed).issues.some(issue => issue.code === 'NCK1_OCR_CONFIRMATION_STALE'))
 }
 
 // Exercise actual producer -> immutable crop/table -> Canonical preview, not
@@ -272,7 +285,7 @@ for (const classification of ['semantic_table', 'content_media']) {
   confirmation.evidenceDigest = evidence.evidenceDigest
   const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
   assert.deepEqual(produced.review.required, [], JSON.stringify(produced.review.required))
-  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v8')
+  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v16')
   if (classification === 'semantic_table') {
     assert.equal(produced.materialization.groups.find(group => group.slotId === 'reading.c')
       .blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text,
@@ -361,6 +374,94 @@ assert.deepEqual(question30.stem.map(({ text, marks }) => ({ text, ...(marks ? {
 ])
 const markedPreview = compileNck1MaterializationCandidatePreview(marked.candidate)
 assert(markedPreview.compilation, JSON.stringify(markedPreview.unresolvedIssues))
+// Writing marks split referenced prompt inlines without invalidating their
+// semantic bindings. Answer-source marks must never decorate question text.
+const writingConfirmation = cloneJson(markedConfirmation)
+const applicationPrompt = markedProduced.materialization.groups
+  .find(group => group.family === 'application-writing').writingTask.prompt
+const writingParagraph = writingConfirmation.documents[0].pages.flatMap(page => page.orderedItems)
+  .find(item => item.text === applicationPrompt)
+assert(writingParagraph)
+writingParagraph.sourceEmphasis = [{ start: 0, end: 3, marks: ['bold'] }]
+const writingMarks = [{ family: 'application', text: applicationPrompt.slice(0, 3), mark: 'bold' }]
+for (const [family, needle, mark] of [
+  ['application', '80', 'underline'],
+  ['continuation', '150', 'bold'],
+  ['continuation', 'lost notebook', 'underline'],
+]) {
+  const item = writingConfirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.text.includes(needle))
+  assert(item, `synthetic writing source must include ${needle}`)
+  const start = item.text.indexOf(needle)
+  item.sourceEmphasis = [{ start, end: start + needle.length, marks: [mark] }]
+  writingMarks.push({ family, text: needle, mark })
+}
+const answerParagraph = writingConfirmation.documents[1].pages.flatMap(page => page.orderedItems)
+  .find(item => item.text.length > 3)
+assert(answerParagraph)
+answerParagraph.sourceEmphasis = [{ start: 0, end: 3, marks: ['underline'] }]
+const writing = imported(markedProduced, { ...ocrSourceBytes,
+  confirmationBytes: new TextEncoder().encode(JSON.stringify(writingConfirmation)) })
+assert.deepEqual(writing.issues, [])
+const writingGroup = writing.candidate.interpretation.groups.find(group => group.family === 'application-writing')
+const writingBlock = writingGroup.content.blocks.find(block => block.inlines?.map(item => item.text).join('') === applicationPrompt)
+assert.deepEqual(writingBlock.inlines.map(({ text, marks }) => ({ text, ...(marks ? { marks } : {}) })), [
+  { text: applicationPrompt.slice(0, 3), marks: ['bold'] }, { text: applicationPrompt.slice(3) },
+])
+const writingPreview = compileNck1MaterializationCandidatePreview(writing.candidate)
+assert(writingPreview.compilation, JSON.stringify(writingPreview.unresolvedIssues))
+// Observe both actual writing surfaces, including normalized split notices.
+// A compilation-only check cannot detect a renderer dropping source marks.
+{
+  const consumption = buildNck1ReviewConsumption(writing.candidate, writingPreview.compilation)
+  const html = reviewPrintHtml({ consumption, paperId, paperName: 'Source emphasis regression', paperAsset: {} }, 'student', buildPrintHtml)
+  const { createServer } = await import('../app/node_modules/vite/dist/node/index.js')
+  const { default: playwright } = await import('../app/node_modules/playwright/index.js')
+  const vite = await createServer({ root: path.join(root, 'app'), server: { host: '127.0.0.1', port: 0 } })
+  await vite.listen()
+  const browser = await playwright.chromium.launch({ channel: 'chromium', headless: true })
+  const artifacts = process.env.EQB_WRITING_MARK_ARTIFACTS
+  if (artifacts) mkdirSync(artifacts, { recursive: true })
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 1000 } })
+    for (const family of ['application', 'continuation']) {
+      await page.route(`**/qa/canonical-${family}-writing-consumption.json`, route => route.fulfill({
+        contentType: 'application/json', body: JSON.stringify(consumption),
+      }))
+      const groupId = consumption.selections.find(selection => selection.familyContractId === `${family}-writing`).groupIds[0]
+      await page.goto(`${vite.resolvedUrls.local[0]}canonical-${family}-writing-qa.html?groupId=${encodeURIComponent(groupId)}`)
+      await page.locator('[data-canonical-response-slot-id]').waitFor()
+      await page.evaluate(() => document.fonts.ready)
+      for (const expected of writingMarks.filter(item => item.family === family)) {
+        const marked = page.locator(`[data-source-marks~="${expected.mark}"]`).filter({ hasText: expected.text })
+        assert.equal(await marked.count(), 1, `${family} Screen retains ${expected.text} emphasis exactly once`)
+        assert.equal(await marked.evaluate((element, mark) => mark === 'bold'
+          ? getComputedStyle(element).fontWeight === '700'
+          : getComputedStyle(element).textDecorationLine.includes('underline'), expected.mark), true)
+      }
+      if (artifacts) await page.screenshot({ path: path.join(artifacts, `${family}-screen.png`), fullPage: true })
+    }
+    await page.setContent(html, { waitUntil: 'load' })
+    await page.evaluate(() => document.fonts.ready)
+    for (const expected of writingMarks) {
+      const marked = page.locator(`[data-source-marks~="${expected.mark}"]`).filter({ hasText: expected.text })
+      assert.equal(await marked.count(), 1, `Print retains ${expected.text} emphasis exactly once`)
+    }
+    if (artifacts) {
+      writeFileSync(path.join(artifacts, 'print.html'), html)
+      await page.pdf({ path: path.join(artifacts, 'writing-emphasis.pdf'), printBackground: true, preferCSSPageSize: true })
+      for (const family of ['application', 'continuation']) {
+        await page.locator(`.canonical-${family}-writing`).first().screenshot({ path: path.join(artifacts, `${family}-print.png`) })
+      }
+    }
+  } finally {
+    await browser.close()
+    await vite.close()
+  }
+}
+assert(importCanonicalCandidate(writing.candidate.sourceInput, undefined, {
+  materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef66,
+}).issues.some(issue => issue.code === 'MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED'))
 const markedRequest = materializeNck1CanonicalRequest(marked.candidate.sourceInput, {
   schemaVersion: 'teacher-confirmation-v1', confirmed: true,
   candidateDigest: marked.candidate.candidateDigest, sourceDigest: marked.candidate.source.sha256,
@@ -525,8 +626,8 @@ try {
     JSON.stringify({ ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }))
   const v3Job = { paperDir: v3Dir, manifest: JSON.parse(readFileSync(path.join(v3Dir, 'universal-source-manifest.json'))) }
   assert.equal(runNck1MaterializationJob(v3Job).disposition, 'ready_for_verification')
-  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v8')
-  assert.equal(runNck1MaterializationJob(v3Job).cached, true, 'v3 output, review and receipt must agree on the current v8 producer')
+  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v16')
+  assert.equal(runNck1MaterializationJob(v3Job).cached, true, 'v3 output, review and receipt must agree on the current producer')
   const v3ReviewFile = path.join(v3Dir, 'materialization/nck1-ocr-materialization-review-v1.json')
   const v3ReviewBytes = readFileSync(v3ReviewFile)
   writeFileSync(v3ReviewFile, JSON.stringify({ ...JSON.parse(v3ReviewBytes), producerVersion: 'nck1-ocr-materialization-producer-v6' }))
@@ -534,17 +635,31 @@ try {
   assert.throws(() => runNck1MaterializationJob(v3Job), /not bound/u,
     'a current receipt cannot mask a stale producer review on cache hits')
   writeFileSync(v3ReviewFile, v3ReviewBytes)
-  const oldV3Digest = nck1OcrProducerSourceDigest(fixture.sourceDocuments, {
-    evidence: fixture.evidence, confirmation: { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' },
-    producerVersion: 'nck1-ocr-materialization-producer-v6',
-  })
-  for (const name of ['producer-receipt', 'review']) {
-    const file = path.join(v3Dir, `materialization/nck1-ocr-materialization-${name}-v1.json`)
-    const value = JSON.parse(readFileSync(file, 'utf8'))
-    writeFileSync(file, JSON.stringify({ ...value, producerVersion: 'nck1-ocr-materialization-producer-v6', sourceDigest: oldV3Digest }))
+  const v3Paths = [path.join(v3Dir, v3Job.manifest.materializationPath),
+    path.join(v3Dir, 'materialization/nck1-ocr-materialization-producer-receipt-v1.json'), v3ReviewFile]
+  for (const version of [8, 10, 6, 7, 9]) {
+    const producerVersion = `nck1-ocr-materialization-producer-v${version}`
+    const sourceDigest = nck1OcrProducerSourceDigest(fixture.sourceDocuments, {
+      evidence: fixture.evidence, confirmation: { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' },
+      producerVersion,
+    })
+    for (const file of v3Paths.slice(1)) {
+      const value = JSON.parse(readFileSync(file, 'utf8'))
+      delete value.listeningSourcePartition
+      delete value.listeningSourcePartitionDigest
+      writeFileSync(file, JSON.stringify({ ...value, producerVersion, sourceDigest }))
+    }
+    const retained = v3Paths.map(file => readFileSync(file))
+    if (version === 8 || version === 10) {
+      assert.equal(inspectNck1Materialization(v3Job).producerState, 'historical')
+    } else {
+      assert.throws(() => inspectNck1Materialization(v3Job), /not bound/u,
+        'pre-v3 producers cannot attest confirmation v3 even with matching recomputed digests')
+    }
+    assert.throws(() => runNck1MaterializationJob(v3Job), /refusing to overwrite/u,
+      'a previous parser must never supply a current cache hit or be overwritten')
+    v3Paths.forEach((file, index) => assert.deepEqual(readFileSync(file), retained[index]))
   }
-  assert.throws(() => inspectNck1Materialization(v3Job), /not bound/u,
-    'historical producers cannot attest confirmation v3 even with matching recomputed digests')
   assert.match(run('materialize', paperId), /"disposition": "needs_agent_review"/u)
   const failedOutputPath = path.join(cliPaperDir, fixture.manifest.materializationPath)
   const pdfReceiptPath = path.join(cliPaperDir, 'materialization/nck1-pdf-materialization-producer-receipt-v1.json')
@@ -611,8 +726,12 @@ try {
   const historicalDigest = nck1OcrProducerSourceDigest(fixture.sourceDocuments, {
     evidence: fixture.evidence, confirmation: markedConfirmation, producerVersion: historicalVersion,
   })
-  writeFileSync(receiptPath, JSON.stringify({ ...readyReceipt, producerVersion: historicalVersion, sourceDigest: historicalDigest }))
-  writeFileSync(reviewPath, JSON.stringify({ ...JSON.parse(readyReviewBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }))
+  const historicalReceipt = { ...readyReceipt, producerVersion: historicalVersion, sourceDigest: historicalDigest }
+  const historicalReview = { ...JSON.parse(readyReviewBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }
+  delete historicalReceipt.listeningSourcePartitionDigest
+  delete historicalReview.listeningSourcePartition
+  writeFileSync(receiptPath, JSON.stringify(historicalReceipt))
+  writeFileSync(reviewPath, JSON.stringify(historicalReview))
   const cliManifest = JSON.parse(readFileSync(path.join(cliPaperDir, 'universal-source-manifest.json')))
   const historical = inspectNck1Materialization({ paperDir: cliPaperDir, manifest: cliManifest })
   assert.equal(historical.producerState, 'historical')

@@ -446,7 +446,9 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
       }],
     })),
   ]
-  const paragraphs = promptBlocks.map((block) => {
+  // Source figures stay in the ordered prompt render stream; only paragraphs
+  // enter the text map used for sentence segmentation and annotations.
+  const paragraphs = promptBlocks.filter((block) => block.kind !== 'figure').map((block) => {
     const segmented = segmentPaperText(block.text, {
       sectionId: block.nodeId,
     }).paragraphs[0]

@@ -2,11 +2,11 @@
 // Offline capture/layout lane only. No Review, DB, promotion or production API.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
-import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
+import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
-  assertSourceReferences, prepareSourceReferences, sourceReferencesSchema,
+  assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
+  sourceReferenceBlocks, structuredSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../../server/draft-paper/paginationRenderer.mjs'
@@ -30,9 +30,13 @@ let activeQaOutput = null
 try {
   const command = process.argv[2]
   if (!['prepare', 'finalize', 'qa'].includes(command)) throw new Error('Use prepare|finalize|qa --paper-dir <workspace> --output <new path>; finalize adds --input, qa adds --references')
-  const loaded = loadNck1ReviewSource(option('--paper-dir'))
+  const paperDir = option('--paper-dir')
+  const loaded = loadNck1ReviewSource(paperDir)
   if (loaded.analyzedPackage) throw new Error('This capture lane requires raw-source materialization')
-  const imported = importCanonicalCandidate(loaded.sourceInput)
+  const referencePath = command === 'prepare' ? path.join(paperDir, SOURCE_REFERENCES_FILE)
+    : option(command === 'finalize' ? '--input' : '--references')
+  const sourceReferences = existsSync(referencePath) ? JSON.parse(readFileSync(referencePath, 'utf8')) : null
+  const imported = importNck1ReviewCandidate(paperDir, loaded, sourceReferences?.candidateDigest)
   if (!imported.candidate || imported.issues.length) throw new Error(`Invalid source candidate: ${imported.issues[0]?.code}`)
   const binding = {
     materialization: loaded.materialization,
@@ -42,18 +46,17 @@ try {
   }
   const output = option('--output')
   if (command === 'prepare') {
+    const structuredScoring = process.argv.includes('--structured-scoring')
     writeNew(output, `${JSON.stringify({
       schemaVersion: 'source-references-request-v1',
-      outputSchema: sourceReferencesSchema,
+      outputSchema: structuredScoring ? structuredSourceReferencesSchema : sourceReferencesSchema,
+      ...(structuredScoring ? { schemaDependencies: [sourceReferencesSchema] } : {}),
       sourceDocuments: loaded.manifest.documents,
-      instructions: 'Capture all source essays/labels/paragraphs and scoring references. Source text only; no AI writing, summaries or legacy modelAnswer conversion. Review every answer-bearing document before declaring not_supplied. Keep unprocessed when incomplete. This is local capture, not Review/publication or source-fidelity approval.',
-      template: prepareSourceReferences(binding),
+      instructions: 'Capture all source essays/labels/paragraphs and scoring references. Keep scoring paragraphs and tables in source order; each table cell needs its exact source locator and text, including empty cells. Do not flatten tables into essays or invent merged-cell structure. Source text only; no AI writing, summaries or legacy modelAnswer conversion. Review every answer-bearing document before declaring not_supplied. Keep unprocessed when incomplete. This is local capture, not Review/publication or source-fidelity approval.',
+      template: prepareSourceReferences({ ...binding, structuredScoring }),
     }, null, 2)}\n`)
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {
-    const input = command === 'finalize' ? option('--input') : option('--references')
-    const referencesBytes = readFileSync(input)
-    const sourceReferences = JSON.parse(referencesBytes.toString('utf8'))
     assertSourceReferences({ ...binding, sidecar: sourceReferences })
     if (command === 'finalize') {
       writeNew(output, `${stableStringify(sourceReferences)}\n`)
@@ -117,6 +120,13 @@ try {
           grammarRows: collect('.answer-keys--5 tr').map(row => [...row.querySelectorAll('[data-answer-number]')]
             .map(answer => Number(answer.dataset.answerNumber))),
           paragraphs: texts('[data-reference-paragraph]', 'data-reference-paragraph'),
+          cells: texts('[data-reference-cell]', 'data-reference-cell'),
+          referenceBlocks: [...new Set(collect('[data-reference-paragraph],[data-reference-table]')
+            .map(node => node.dataset.referenceParagraph ?? node.dataset.referenceTable))],
+          tableRows: collect('[data-reference-table] tr').map(row => ({
+            tableId: row.closest('[data-reference-table]').dataset.referenceTable,
+            cells: [...row.querySelectorAll('[data-reference-cell]')].map(cell => cell.dataset.referenceCell),
+          })),
           labels: texts('[data-reference-label]', 'data-reference-label'),
           transcripts,
           horizontalOverflow: collect('td,p,h1,h2,h3').filter(node => node.scrollWidth > node.clientWidth + 1).length,
@@ -154,20 +164,42 @@ try {
         || JSON.stringify(rendered.inspection.grammarRows) !== JSON.stringify([[56, 57, 58, 59, 60], [61, 62, 63, 64, 65]])) {
         throw new Error('Rendered answer ranges or five-column grammar rows disagree with the reference format')
       }
-      for (const group of sourceReferences.groups) {
-        for (const kind of includeScoring ? ['essays', 'scoring'] : ['essays']) {
+      const referenceBlocks = []
+      const tableRows = []
+      // Match the document's section order: all essays, then optional scoring.
+      for (const kind of includeScoring ? ['essays', 'scoring'] : ['essays']) {
+        for (const writingGroup of binding.materialization.groups.filter(group => group.writingTask)) {
+          const group = sourceReferences.groups.find(group => group.groupId === writingGroup.groupId)
           for (const entry of group[kind].entries) {
             if (entry.sourceLabel !== null
               && normalize(rendered.inspection.labels[entry.referenceId] || '') !== normalize(entry.sourceLabel)) {
               throw new Error(`Rendered source label changed: ${entry.referenceId}`)
             }
-            for (const paragraph of entry.paragraphs) {
-              if (normalize(rendered.inspection.paragraphs[paragraph.paragraphId] || '') !== normalize(paragraph.text)) {
-                throw new Error(`Rendered source paragraph changed: ${paragraph.paragraphId}`)
+            for (const block of sourceReferenceBlocks(entry)) {
+              referenceBlocks.push(block.kind === 'table' ? block.tableId : block.paragraph.paragraphId)
+              if (block.kind === 'table') {
+                for (const row of block.rows) {
+                  tableRows.push({ tableId: block.tableId, cells: row.map(cell => cell.cellId) })
+                  for (const cell of row) {
+                    if (!(cell.cellId in rendered.inspection.cells)
+                      || normalize(rendered.inspection.cells[cell.cellId]) !== normalize(cell.text)) {
+                      throw new Error(`Rendered source cell changed: ${cell.cellId}`)
+                    }
+                  }
+                }
+              } else {
+                const { paragraph } = block
+                if (normalize(rendered.inspection.paragraphs[paragraph.paragraphId] || '') !== normalize(paragraph.text)) {
+                  throw new Error(`Rendered source paragraph changed: ${paragraph.paragraphId}`)
+                }
               }
             }
           }
         }
+      }
+      if (JSON.stringify(rendered.inspection.referenceBlocks) !== JSON.stringify(referenceBlocks)
+        || JSON.stringify(rendered.inspection.tableRows) !== JSON.stringify(tableRows)) {
+        throw new Error('Rendered source block order or scoring table rows changed')
       }
       if (listening.state === 'captured') {
         for (const segment of listening.transcript) {
@@ -188,6 +220,7 @@ try {
         includeScoring, inspectedAnswerNumbers: rendered.inspection.keys.map(key => key.number),
         inspectedAnswerRanges: rendered.inspection.ranges, grammarRows: rendered.inspection.grammarRows,
         inspectedReferenceParagraphs: Object.keys(rendered.inspection.paragraphs).length,
+        inspectedReferenceCells: Object.keys(rendered.inspection.cells).length,
         inspectedTranscriptSegments: listening.state === 'captured' ? listening.transcript.length : 0,
         sourceFidelity: 'native_docx_paragraphs_replayed_pdf_text_requires_source_review',
         reviewRevision: null, publication: null,

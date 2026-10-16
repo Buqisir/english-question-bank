@@ -77,6 +77,47 @@ export function writingNoticeGroup(texts) {
   return writingNoticeGroups(texts)[0] || null
 }
 
+// Slice source nodes rather than flattening a displayed notice. Combined
+// paragraphs keep exact text offsets; split numbered paragraphs retain the
+// existing display-only marker normalization and each source node's marks.
+export function writingNoticeDisplayInlines(nodes, lineIndex = 0) {
+  const text = nodes.map(node => node.text).join('')
+  const start = text.length - text.trimStart().length
+  const end = text.trimEnd().length
+  const slice = (from, to) => {
+    let offset = 0
+    return nodes.flatMap(node => {
+      const nodeStart = offset
+      offset += node.text.length
+      const value = node.text.slice(Math.max(0, from - nodeStart), Math.max(0, Math.min(node.text.length, to - nodeStart)))
+      return value ? [{ ...node, text: value }] : []
+    })
+  }
+  const lines = applicationWritingNoticeLines(text)
+  if (lines) {
+    const from = start + lines.slice(0, lineIndex).reduce((sum, line) => sum + line.text.length, 0)
+    return slice(from, from + lines[lineIndex].text.length)
+  }
+  const value = text.trim()
+  const parenthesized = value.match(/^[（(](\d+)[）)]/u)
+  if (parenthesized) {
+    return [
+      ...slice(start, start + 1).map(node => ({ ...node, text: '（' })),
+      ...slice(start + 1, start + 1 + parenthesized[1].length),
+      ...slice(start + 1 + parenthesized[1].length, start + parenthesized[0].length).map(node => ({ ...node, text: '）' })),
+      ...slice(start + parenthesized[0].length, end),
+    ]
+  }
+  const dotted = value.match(/^(\d+)[.．、](?!\d)\s*/u)
+  if (!dotted) return slice(start, end)
+  return [
+    ...slice(start, start + 1).map(node => ({ ...node, text: '（' })),
+    ...slice(start, start + dotted[1].length),
+    ...slice(start + dotted[1].length, start + dotted[1].length + 1).map(node => ({ ...node, text: '）' })),
+    ...slice(start + dotted[0].length, end),
+  ]
+}
+
 const CONTINUATION_PARAGRAPH_LABELS = [
   '(?:1|one|first)',
   '(?:2|two|second)',
@@ -95,4 +136,16 @@ export function continuationStarterDisplayText(text, starterIndex) {
     new RegExp(`^Paragraph\\s+${label}\\s*[:：]\\s*`, 'iu'),
     '',
   )
+}
+
+// Source emphasis can split the placement label across several text nodes.
+// Trim the same whole-text prefix while retaining every node's identity/marks.
+export function continuationStarterDisplayInlines(nodes, starterIndex) {
+  const text = nodes.map(node => node.text).join('')
+  let remaining = text.length - continuationStarterDisplayText(text, starterIndex).length
+  return nodes.map(node => {
+    const count = Math.min(remaining, node.text.length)
+    remaining -= count
+    return count ? { ...node, text: node.text.slice(count) } : node
+  })
 }

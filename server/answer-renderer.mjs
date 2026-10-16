@@ -1,7 +1,7 @@
 import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
-import { assertSourceReferences } from './paper-import/sourceReferences.mjs'
+import { assertSourceReferences, sourceReferenceBlocks } from './paper-import/sourceReferences.mjs'
 
 function escapeHtml(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;')
@@ -49,7 +49,14 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
         ? `<span class="writing-section-source">${textHtml(prefix[1])}</span><span>${textHtml(prefix[2])}</span>`
         : textHtml(entry.sourceLabel ?? `源参考${section.entries.length > 1 ? ` ${index + 1}` : ''}`)
       const labelHtml = `<h3 class="reference-label" data-reference-label="${escapeHtml(entry.referenceId)}">${sourceLabel}</h3>`
-      const paragraphs = entry.paragraphs.map(paragraph => {
+      const blocks = sourceReferenceBlocks(entry)
+      const paragraphs = blocks.map(block => {
+        if (block.kind === 'table') {
+          return `<table class="reference-table" data-reference-table="${escapeHtml(block.tableId)}"><tbody>${block.rows.map(row =>
+            `<tr>${row.map(cell => `<td data-reference-cell="${escapeHtml(cell.cellId)}">${textHtml(cell.text)}</td>`).join('')}</tr>`,
+          ).join('')}</tbody></table>`
+        }
+        const { paragraph } = block
         // Emphasize only a source-bound starter actually present in the essay;
         // do not prepend paragraph numbers or invent missing starter text.
         const starter = kind === 'essays' && paragraph.role === 'body'
@@ -60,7 +67,7 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
       })
       // Keep a letter's source label with its salutation, without preventing
       // the body of a long source essay from flowing onto subsequent pages.
-      const opening = entry.paragraphs[0]?.role === 'salutation'
+      const opening = blocks[0]?.paragraph?.role === 'salutation'
         ? `<div class="reference-opening">${labelHtml}${paragraphs.shift()}</div>` : labelHtml
       return `<article data-source-reference="${escapeHtml(entry.referenceId)}">
 ${opening}
@@ -210,6 +217,9 @@ p{margin:0;orphans:2;widows:2;overflow-wrap:break-word}
 .reference-paragraph--salutation,.reference-paragraph--closing{break-after:avoid}
 .reference-paragraph--closing,.reference-paragraph--signature{text-align:right}
 .continuation-starter{text-decoration:underline;text-underline-offset:2pt}
+.reference-table{width:100%;border-collapse:collapse;table-layout:auto;margin:6pt 0}
+.reference-table td{border:0.35pt solid currentColor;padding:0 8pt;vertical-align:top;overflow-wrap:anywhere}
+.reference-table tr{break-inside:avoid}
 .source-absent{color:${paperSurfaceTokens.paperMuted}}
 .transcript-label{font-weight:700;margin-top:13pt}
 .transcript{white-space:normal}

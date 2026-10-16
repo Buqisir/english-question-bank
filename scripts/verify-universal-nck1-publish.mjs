@@ -70,6 +70,7 @@ import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvid
 import {
   nck1MaterializationCandidateAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef58,
+  nck1MaterializationHistoricalAuthorityRef66,
   resolveCanonicalAuthority,
 } from '../shared/paper-canonical/authority.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
@@ -449,8 +450,12 @@ export function makeReviewRoot(
   )
   const materialization = makeFixture({ listening })
   materialization.paperId = fixturePaperId
-  if (listening) materialization.listening.transcript[0].text =
-    'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
+  if (listening) {
+    materialization.listening.transcript[0].text =
+      'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
+    materialization.listening.questions[5].options[2].text =
+      'Ask the librarian for information about the new community reading programme.'
+  }
   materialization.groups.find((group) =>
     group.slotId === 'writing.application').writingTask.officialModelAnswer =
       officialApplicationSample
@@ -864,9 +869,9 @@ function makeContext(label, options = {}) {
     const current = buildNck1ReviewProjection(reviewRoot)
     assert.equal(replayed.candidateDigest, previous.candidate.candidateDigest)
     assert.equal(replayed.consumption.authorityRef.manifestVersion, '58')
-    assert.equal(replayed.consumption.consumerContractRef.version, '46')
-    assert.equal(current.consumption.authorityRef.manifestVersion, '62')
-    assert.equal(current.consumption.consumerContractRef.version, '46')
+    assert.equal(replayed.consumption.consumerContractRef.version, '47')
+    assert.equal(current.consumption.authorityRef.manifestVersion, '67')
+    assert.equal(current.consumption.consumerContractRef.version, '47')
     const readingId = replayed.consumption.selections
       .find((selection) => selection.familyContractId === 'reading').groupIds[0]
     for (const [projection, expectedRuleset] of [
@@ -1000,10 +1005,19 @@ function makeOnlinePromotionContext(
     analyzedPackage = false,
     publicPaper = false,
     preservePublicAnalyses = false,
+    retainedAuthorityRef = null,
   } = {},
 ) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), `eqb-single-paper-promotion-${label}-`))
   const fixture = makeReviewRoot(tempRoot, fixturePaperId, undefined, { listening })
+  if (retainedAuthorityRef) {
+    const retained = importCanonicalCandidate(loadNck1ReviewSource(fixture.reviewRoot).sourceInput, undefined,
+      { materializationAuthorityRef: retainedAuthorityRef })
+    assert.deepEqual(retained.issues, [])
+    fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, {
+      requireAnalyses: true, expectedCandidateDigest: retained.candidate.candidateDigest,
+    })
+  }
   if (analyzedPackage) {
     convertToAnalyzedPackageReviewSource(fixture.reviewRoot)
     fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
@@ -1040,7 +1054,9 @@ function makeOnlinePromotionContext(
         fixture.projection.candidateDigest,
       ),
     )
-    fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
+    fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, {
+      requireAnalyses: true, expectedCandidateDigest: fixture.projection.candidateDigest,
+    })
   }
   if (paginationBreaks) {
     writeJson(path.join(fixture.reviewRoot, 'pagination-plan.json'), {
@@ -1620,6 +1636,44 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
     assert.equal(columns.length, 3)
     assert.ok(Math.max(...columns) - Math.min(...columns) < 1)
+    const listeningViewport = screenPage.viewportSize()
+    const listeningContent = screenPage.locator('.paper-browse-content')
+    const listeningZoom = await listeningContent.evaluate(element => element.style.getPropertyValue('--paper-screen-zoom'))
+    for (const width of [390, 1440]) {
+      await screenPage.setViewportSize({ width, height: 1000 })
+      for (const zoom of ['1', '1.35']) {
+        await listeningContent.evaluate((element, value) => element.style.setProperty('--paper-screen-zoom', value), zoom)
+        const layouts = await screenPage.locator('.paper-browse-listening .ps-option-list')
+          .evaluateAll(lists => lists.map(list => {
+            const bounds = list.getBoundingClientRect()
+            return {
+              desktopColumns: list.classList.contains('ps-option-list--three_columns') ? 3 : 1,
+              columns: getComputedStyle(list).gridTemplateColumns.split(' ').length,
+              width: bounds.width,
+              overflow: [...list.children].filter(option => {
+                const optionBounds = option.getBoundingClientRect()
+                const text = document.createRange()
+                text.selectNodeContents(option)
+                return optionBounds.right > bounds.right + 1 || [...text.getClientRects()].some(rect =>
+                  rect.right > optionBounds.right + 1 || rect.left < optionBounds.left - 1)
+              }).map(option => option.textContent),
+            }
+          }))
+        assert.ok(layouts.length > 0, 'Listening layout check requires real options')
+        assert.deepEqual([...new Set(layouts.map(layout => layout.desktopColumns))].sort(), [1, 3],
+          'The listening fixture exercises both single-column and three-column placement')
+        assert.ok(layouts.every(layout => layout.columns === (width <= 700 ? 1 : layout.desktopColumns)),
+          'Screen preserves desktop single-column/thirds and mobile single-column options')
+        if (width <= 700) {
+          assert.ok(layouts.every(layout => layout.width > width * 0.6),
+            'Mobile options retain a readable measure instead of inheriting print-sized side margins')
+        }
+        assert.deepEqual(layouts.flatMap(layout => layout.overflow), [],
+          `Listening option boxes and text fit their Screen columns at ${width}px, zoom ${zoom}`)
+      }
+    }
+    await listeningContent.evaluate((element, value) => element.style.setProperty('--paper-screen-zoom', value), listeningZoom)
+    await screenPage.setViewportSize(listeningViewport)
     await trigger.scrollIntoViewIfNeeded()
     if (process.env.LISTENING_QA_ARTIFACT_DIR) {
       await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'listening-lecture-desktop.png') })
@@ -3074,6 +3128,26 @@ try {
   )
 } finally {
   close(postCommit)
+}
+
+// An approved historical paper without listening/navigation must publish under
+// its retained authority, not today's default; summary bindings make drift fail.
+const retainedOnline = makeOnlinePromotionContext('retained-v66', paperId, null, {
+  publicPaper: true, retainedAuthorityRef: nck1MaterializationHistoricalAuthorityRef66,
+})
+try {
+  assert(!existsSync(path.join(retainedOnline.reviewRoot, 'listening-review-v1.json')))
+  const service = createSinglePaperPromotionService({
+    getStore: () => retainedOnline.reviewStore,
+    openDatabase: retainedOnline.openDatabase,
+    paperAssetsDir: retainedOnline.paperAssetsDir,
+  })
+  const result = await service.promote(paperId, promotionRequest(retainedOnline.approval), 'synthetic-owner')
+  assert.equal(result.status, 'published', JSON.stringify(result))
+  assert.equal(result.consumers.screen.authorityRef.manifestVersion, '66')
+  assert.equal(result.promotion.candidateDigest, retainedOnline.approval.candidateDigest)
+} finally {
+  rmSync(retainedOnline.tempRoot, { recursive: true, force: true })
 }
 
 const online = makeOnlinePromotionContext('online')

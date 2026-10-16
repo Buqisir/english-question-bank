@@ -573,8 +573,13 @@ assert.match(
 )
 assert.match(
   importSkill,
-  /a1\.medium[\s\S]*availableParallelism/,
-  'skill preserves the Owner-selected Medium Orb and verifies actual CPU capacity',
+  /use `executor: runner`[\s\S]*omit `project` and `orb_size`/,
+  'skill routes independent import workers to the local runner without an Import Orb default',
+)
+assert.match(
+  importSkill,
+  /Never fall back to Orb[\s\S]*availableParallelism/,
+  'skill fails closed when local execution is unavailable and verifies actual CPU capacity',
 )
 assert.match(
   importSkill,

@@ -87,6 +87,12 @@ cloze + grammar_cloze + writing×2)。导题源含完整听力且音频证据通
 [规范总入口](exam-paper-format-standards.md)进入。不可用历史步骤覆盖已明确的
 signal-only演练，也不可把本地演练当成已部署能力。
 
+- **播放遍数以录音为准（Owner 已确认）**：确认录音属于该卷、题组对应且实际播放
+  遍数有据后，若题卷说明与录音不同，将新题卷的遍数说明改为录音的实际遍数，
+  不再为这一类差异逐卷询问 Owner。只修正遍数说明，不裁剪、重复或重新编码录音，
+  不改题目、答案及录音稿。保留原始题卷和音频；校正记录写明原说明、新说明与所依据
+  的音频 SHA／非重叠播放区间，不冒称 OCR 错误。ASR 重复输出或重叠窗口不算实际
+  播放次数。Screen、Print、PDF 使用同一修正；已封存版本不回写，按新 revision 交付。
 - 源卷**含**完整听力题、A–C 选项、权威答案和录音稿时,Universal NCK1
   Materialization 将它们绑定成两个 Canonical `listening` 题组:
   `listening.short-dialogue`(1–5)与 `listening.long-form`(6–20)。录音稿按

@@ -851,9 +851,15 @@ function materialize(paperId) {
 
 function stageAudio(paperId) {
   const sourcePath = path.resolve(value('--audio') || '')
-  if (process.argv.includes('--signal-only')) {
+  if (process.argv.includes('--signal-only') && process.argv.includes('--opening-check')) {
+    fail('--signal-only and --opening-check are mutually exclusive')
+  }
+  if (!process.argv.includes('--opening-check')) {
+    if (value('--asr-fixture')) fail('--asr-fixture requires explicit --opening-check')
     const result = stageSignalListeningAudio({ paperDir: paperDirFor(paperId), paperId, sourcePath })
-    console.log(JSON.stringify({ ok: true, ...result }, null, 2))
+    console.log(JSON.stringify({ ok: true, ...result,
+      next: `Materialize the source, then review.mjs prepare-listening-review ${paperId} --output <request.json>; signal candidates are not question mappings`,
+    }, null, 2))
     return
   }
   const result = stageListeningAudio({

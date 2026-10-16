@@ -21,9 +21,19 @@ export function writingNoticeGroups(
   texts: ReadonlyArray<string>,
 ): ReadonlyArray<WritingNoticeGroup>
 
+export function writingNoticeDisplayInlines<T extends { readonly text: string }>(
+  nodes: ReadonlyArray<T>,
+  lineIndex?: number,
+): ReadonlyArray<T>
+
 export function writingWordCount(text: string): number | null
 
 export function continuationStarterDisplayText(
   text: string,
   starterIndex: number,
 ): string
+
+export function continuationStarterDisplayInlines<T extends { readonly text: string }>(
+  nodes: ReadonlyArray<T>,
+  starterIndex: number,
+): ReadonlyArray<T>

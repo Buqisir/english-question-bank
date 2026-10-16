@@ -7,13 +7,14 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
-import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
 import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import {
@@ -29,6 +30,7 @@ import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListenin
 import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummaries.mjs'
 import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
 import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
+import { applyListeningInstructionCorrection, LISTENING_INSTRUCTION_CORRECTION_FILE } from '../paper-import/listeningInstructionCorrection.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
@@ -267,7 +269,7 @@ function loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest) {
   }
 }
 
-export function loadNck1ReviewSource(rootDir, { preparingSpelling = false } = {}) {
+export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, preparingListeningCorrection = false } = {}) {
   const config = readJson(resolveReviewFile(rootDir, 'config.json'), 'config.json')
   const manifest = readJson(
     resolveReviewFile(rootDir, 'universal-source-manifest.json'),
@@ -382,11 +384,22 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false } = {}
       }
     }),
   }
-  const reviewedMaterialization = spellingReviewBytes
+  let reviewedMaterialization = spellingReviewBytes
     ? applySpellingReview(materializationBytes, spellingReviewBytes)
     : materialization
   if (spellingReviewBytes) {
     verifyTerminalWhitespaceSourceEvidence(materializationBytes, spellingReviewBytes, sourceInput.documents)
+  }
+  const correctionPath = resolveReviewFile(rootDir, LISTENING_INSTRUCTION_CORRECTION_FILE)
+  if (!preparingListeningCorrection && existsSync(correctionPath)) {
+    sourceInput.listeningInstructionCorrectionBytes = new Uint8Array(readFileSync(correctionPath))
+    const corrected = applyListeningInstructionCorrection(materializationBytes,
+      sourceInput.listeningInstructionCorrectionBytes, listeningAudio, reviewedMaterialization)
+    const originalAudio = validatedListeningAudioEvidence?.descriptors.get('listening_audio_original')
+    if (corrected.correction.originalAudioSha256 !== originalAudio?.sha256) {
+      fail('Listening instruction correction does not bind the original audio', 'LISTENING_INSTRUCTION_CORRECTION_INVALID')
+    }
+    reviewedMaterialization = corrected.materialization
   }
   return {
     config,
@@ -534,9 +547,43 @@ function primarySourceType(materialization, analyzedPackage = false) {
   return source?.mediaType?.includes('wordprocessingml') ? 'docx' : 'pdf'
 }
 
-export function reviewBundleFilePaths(rootDir) {
+function loadReviewedListening(rootDir, loaded, candidate = null) {
+  if (!existsSync(resolveReviewFile(rootDir, LISTENING_REVIEW_FILE))) return null
+  const subject = listeningReviewSubject(loaded, candidate || importNck1ReviewCandidate(rootDir, loaded).candidate)
+  return readListeningReview(rootDir, subject, loaded.materialization.listening.transcript)
+}
+
+export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest = null) {
+  const reviewPath = resolveReviewFile(rootDir, LISTENING_REVIEW_FILE)
+  if (!expectedCandidateDigest && existsSync(reviewPath)) {
+    expectedCandidateDigest = readJson(reviewPath, LISTENING_REVIEW_FILE)?.subject?.candidateDigest
+    if (!/^sha256:[a-f0-9]{64}$/.test(expectedCandidateDigest || '')) {
+      fail('Listening review has no exact Candidate binding', 'LISTENING_REVIEW_INVALID')
+    }
+  }
+  let imported = importCanonicalCandidate(loaded.sourceInput)
+  // A navigation-only revision must not migrate an existing paper to the new
+  // default authority. Re-derive the requested identity; never trust its label.
+  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
+    && !loaded.analyzedPackage) {
+    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef66, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
+      const historical = importCanonicalCandidate(loaded.sourceInput, undefined, { materializationAuthorityRef })
+      if (historical.candidate?.candidateDigest === expectedCandidateDigest) { imported = historical; break }
+    }
+  }
+  // Keep invalid-source diagnostics distinct from an otherwise valid Candidate
+  // with the wrong approval identity (publication treats those differently).
+  if (!imported.candidate || imported.issues.length) return imported
+  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest) {
+    fail('Stored Candidate does not match a retained authority', 'IMPORT_REVIEW_PROJECTION_MISMATCH')
+  }
+  return imported
+}
+
+export function reviewBundleFilePaths(rootDir, candidate = null) {
   const loaded = loadNck1ReviewSource(rootDir)
   const { manifest, materialization } = loaded
+  const reviewedListening = loadReviewedListening(rootDir, loaded, candidate)
   const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
   const waveform = playback ? readListeningWaveform(resolveReviewFile(rootDir, LISTENING_WAVEFORM_FILE),
     playback.sha256, playback.durationSeconds) : null
@@ -633,6 +680,9 @@ export function reviewBundleFilePaths(rootDir) {
       mediaType: 'application/json',
       role: 'spelling_review',
     }] : []),
+    ...(loaded.sourceInput.listeningInstructionCorrectionBytes ? [{
+      path: LISTENING_INSTRUCTION_CORRECTION_FILE, mediaType: 'application/json', role: 'listening_instruction_correction',
+    }] : []),
     ...(loaded.sourceInput.ocrSourceBytes
       ? [NCK1_OCR_EVIDENCE_FILE_NAME, NCK1_OCR_CONFIRMATION_FILE_NAME].map(fileName => ({
           path: `materialization/${fileName}`, mediaType: 'application/json', role: 'ocr_source_evidence',
@@ -640,6 +690,7 @@ export function reviewBundleFilePaths(rootDir) {
       : []),
     ...sourceFiles,
     ...(waveform ? [{ path: LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
+    ...(reviewedListening?.files || []),
     ...NCK1_STAGED_ANALYSIS_FILES
       .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
       .map(({ path: relativePath, role }) => ({
@@ -1124,7 +1175,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(
+        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
@@ -1588,23 +1639,12 @@ export function buildNck1ReviewProjection(rootDir, {
   expectedCandidateDigest = null,
 } = {}) {
   const loaded = loadNck1ReviewSource(rootDir)
-  let imported = importCanonicalCandidate(loaded.sourceInput)
-  // Reconstruct a stored Review under the exact historical authority. A new
-  // default cannot silently change its digest or visual interpretation.
-  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
-    && !loaded.analyzedPackage) {
-    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
-      const historical = importCanonicalCandidate(loaded.sourceInput, undefined, { materializationAuthorityRef })
-      if (historical.candidate?.candidateDigest === expectedCandidateDigest) { imported = historical; break }
-    }
-  }
-  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest) {
-    fail('Stored Candidate does not match a retained authority', 'IMPORT_REVIEW_PROJECTION_MISMATCH')
-  }
+  const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest)
   if (!imported.candidate || imported.issues.length > 0) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
   }
+  const reviewedListening = loadReviewedListening(rootDir, loaded, imported.candidate)
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   if (!preview.compilation) {
     const issue = preview.unresolvedIssues?.[0]
@@ -1684,7 +1724,7 @@ export function buildNck1ReviewProjection(rootDir, {
   const examDate = readExamDate(loaded.config.provenance, { required: Boolean(loaded.config.pdfProductsRequired
     || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))) })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir)),
+    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir, imported.candidate), reviewedListening),
         economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
     fail('四款 PDF 必须保留完整的源参考答案捕获；不能只提交答案 PDF')
@@ -1695,6 +1735,7 @@ export function buildNck1ReviewProjection(rootDir, {
   return {
     ...loaded,
     frozenProducts,
+    reviewedListening,
     paperId: loaded.materialization.paperId,
     paperName: loaded.config.provenance.paperName,
     examDate,

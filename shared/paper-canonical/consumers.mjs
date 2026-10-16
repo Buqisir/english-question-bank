@@ -14,12 +14,14 @@ import screenV45 from '../../standards/paper-canonical/consumers/screen-v45.json
 import printPdfV46 from '../../standards/paper-canonical/consumers/print-pdf-v46.json' with { type: 'json' }
 import screenV46 from '../../standards/paper-canonical/consumers/screen-v46.json' with { type: 'json' }
 import printPdfV47 from '../../standards/paper-canonical/consumers/print-pdf-v47.json' with { type: 'json' }
+import screenV47 from '../../standards/paper-canonical/consumers/screen-v47.json' with { type: 'json' }
+import printPdfV48 from '../../standards/paper-canonical/consumers/print-pdf-v48.json' with { type: 'json' }
 
-import { authorityRefForManifestDigest, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
+import { authorityRefForManifestDigest, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
 
-const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43, screenV43, printPdfV44, screenV44, printPdfV45, screenV45, printPdfV46]
-const contracts = [screenV46, printPdfV47]
+const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43, screenV43, printPdfV44, screenV44, printPdfV45, screenV45, printPdfV46, screenV46, printPdfV47]
+const contracts = [screenV47, printPdfV48]
 const allContracts = [...historicalContracts, ...contracts]
 
 function validateContract(contract) {
@@ -63,4 +65,14 @@ export function resolveConsumerPresentation(ref) {
   const policy = closure.artifacts['renderer-paper-presentation']
   if (!policy) return null
   return { policy, ref: { id: 'paper-presentation', version: policy.version, digest: digestJson(policy) } }
+}
+
+// A figure-bearing Application Writing prompt is consumable only by a consumer
+// whose own closure registers the renderer-owned prompt-figure capability.
+export function consumerRendersApplicationPromptFigures(ref) {
+  if (!ref) return false
+  const resolved = resolveConsumerContract(ref)
+  if (!resolved.ok) return false
+  const authority = resolveCanonicalAuthority(authorityRefForManifestDigest(resolved.contract.authorityManifestDigest))
+  return authority.ok && closureRendersApplicationPromptFigures(authority.closure)
 }

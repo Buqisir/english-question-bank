@@ -4,7 +4,10 @@
  * Surface-specific typography/physical calibration remains in each consumer;
  * this extraction deliberately preserves the accepted rendering on both sides.
  */
-:is(.ps-canonical-reading, .canonical-reading) {
+/* Prompt figures reuse Reading's cqw sizing, relative to their own content
+ * column, never the viewport. Paragraph-only historical prompts are unchanged. */
+:is(.ps-canonical-reading, .canonical-reading),
+:is(.ps-canonical-application-prompt, .canonical-application-prompt):has(> figure) {
   container-type: inline-size;
 }
 

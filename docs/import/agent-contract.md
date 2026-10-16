@@ -257,10 +257,13 @@ claim a complete or clean report when evidence is missing. Existing login,
 immutable Review records and Owner-only approval/publication gates remain;
 changing the preview entrypoint does not approve or publish the paper.
 
-New imports use the dedicated `english-question-bank-import` Amp Project, one
-paper per thread, with `.agents/import-pre-setup` selecting the fast import
-setup profile. Follow `importing-nck1-papers` for attachment intake and exact preview
-handoff after explicit Amp permission to submit for review. Owner publication
+Imports and their summary/metadata workers run locally, one writer per paper
+worktree. Continue an existing local thread; do not default to the dedicated
+Import Project or start/resume an Orb. A necessary independent worker explicitly
+uses `executor: runner`, a live local `runner_id` and an allowed `working_directory`,
+without `project` or `orb_size`. An unavailable runner blocks dispatch; it does
+not authorize a cloud fallback. Follow `importing-nck1-papers` for local intake
+and exact preview handoff after explicit Amp permission to submit for review. Owner publication
 now uses the authenticated list above. Plain chat is not server-authenticated
 publication authorization. For retained legacy scoped publication, see
 `docs/cuts/orb-import-single-paper-promotion/spec.md` for activation and recovery
@@ -298,7 +301,7 @@ These local changes have not been deployed or activated in the live controller.
 > metadata 的 prepare/finalize/verify，不能用九份教学解析或假空字段代替。无 profile 的历史工作区和
 > external `analyzed_package` 继续原九份分析合同，恢复时不得迁移身份。
 
-任意 Amp Project Orb 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
+本地 Amp 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
 Owner 在 Amp 提供题源并明确发起导题；Amp 是唯一沟通与启动入口，不再由网站提交或
 webhook 自动接卷。新卷按下文 off-ledger 本地文件流程初始化，不伪造台账记录。
 预览确认与上线是两步：提供真实 Screen 和四款 PDF，确认后仍须 Owner 明确要求
@@ -404,17 +407,21 @@ handoff 响应丢失保留 started/unknown 证据，不重放，不通过删除�
 领取期间 `lease` 返回 expiresAt 与 renewalCommand；在源/音频审阅前及每 10 分钟续租，
 暂停或过期后先核对，不自动重新领取。summary/metadata 与 Owner Review 在 handoff 后进行，
 不保持 source-intake 租约。听力尚未形成初始化收据前仍需有限租约；不得为提前 handoff 伪造审查。
-听力内容检查由导题 Agent 审阅绑定的 ASR 与源材料证据，提交真实的
+仅对已显式运行旧 `--opening-check` 的历史 source-intake 接卷，听力内容检查由
+导题 Agent 审阅绑定的首段 ASR 与源材料证据，提交真实的
 `listening-audio-content-review-v1`（`reviewedBy: import_agent`），再显式运行
 `source-intake.mjs finalize-listening <submissionId> --paper-id <paperId> --review <review.json>`。
 `status.tasks` 提供 ASR/源材料路径、真实内容审阅输出路径、finalize 命令和复查命令。
 程序负责比对与门禁；失败不能改写为 pass，也不因 CLI 暂停就把常规听力检查交给 Owner。
+当前默认信号准备与全题组导航复核按[听力准备与导航复核](listening-review.md)执行，
+不调用旧 finalizer、不把首段收据提升为全卷认可。
 以下 Owner OCR 权限限制只描述旧流程；当前隔离演练按本节顶部的 Agent OCR receipt 与
 Candidate-bound v2 correction report 执行。不得冒充 Owner、伪造收据；源缺失或冲突须报告具体缺件。
 
-新 Orb 的完整导题工具可用 `bash .agents/setup --import-tools-only` 安全准备和检查：它不碰
-Desktop 或数据库，安装英/简中 OCR，并缓存 `transcribe-listening.py` 实际默认使用的固定
-small.en ASR 模型。Desktop 可用性不是接卷前置；失败不得阻断上述程序路径。
+本地先检查 Node 24、锁定依赖及当前所需 OCR/音频/渲染工具。不要在 macOS 执行 Linux
+Orb setup，也不要在导题中途安装或升级依赖掩盖失败。`.agents/setup --import-tools-only`
+仅保留为历史 Linux 环境准备入口，不是当前默认启动步骤。隔离 Review 使用新的运行库
+副本、本地凭据和实核 loopback origin；不可原地启动备份或执行旧 Orb launcher/PID。
 
 导题审核使用独立 Review DB 与文件目录作为 QA 事实源；Candidate 不进入正式题库。
 消费端网站不导题，`/ops/` 只做人工审核与 Agent 反馈，不运行 LLM。
@@ -468,6 +475,13 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 原文件bytes/digest仍作为Source Capture证据保留。源参考及固定产品已有本地不可变
 Review／发布接线候选，正式验收待Ship；不把 scratch sidecar 当成已审补件，不改历史 Candidate。
 逐题详解不进入纯答案版，Student/Teacher 不再是目标产品选择。
+评分参考含表格时，`answer-products.mjs prepare --structured-scoring` 输出
+`source-references-v2` 请求；落盘文件名仍为 `source-references-v1.json`。
+essays 沿用 v1 paragraphs，scoring 使用按源顺序排列的 paragraph/table blocks；
+表格逐单元格保存原文、独立 locator 与文档 SHA，保留空格子，不压成范文段落。
+v1 侧件继续读取，不静默迁移。原生 DOCX 须重放完整未合并表格，PDF 须逐格核源；
+只有既有 `includeScoring` 展示才渲染评分表，默认 answerOnly 不增加评分内容。
+细节见[本地版本迁移说明](../cuts/import-format-capabilities/manifest-v64-migration.md)。
 只有ABCD而缺56–65文本答案仍不完整；
 答案值与解释边界不清时必须停。听力原文继续按独立listening contract处理。
 
@@ -477,16 +491,21 @@ Review／发布接线候选，正式验收待Ship；不把 scratch sidecar 当�
 产品目录已存在时命令拒绝覆盖；输入或产品返修须用新工作副本、新revision，不回写旧批准。
 原卷的网页PDF预览／下载只读该精确已审版本的固定文件，不点击时重排。
 
-听力 MP3 默认仍做整文件解码与时长检查、保存完整 normalized playback；ASR 仅转写
-开头至多 180 秒。新 v2 证据必须绑定材料化源中 `questionNumbers: [1]` 的正式对话
-原文、segmentId 与 source locator，排除说明和例题，并识别正式第一、二段标记以确认
-第一段完整。开头提到例题时，例题之后须有明确 “the test begins/starts” 再进入正式
-标记；歧义、采样截断、不匹配或识别不清均保留诊断证据并停，报告需要扩展检查，不
-自动重试全量 ASR 或换模型。仅局部通过记 `partial_pass` 和
-“首段快速匹配、后续内容未核对”；内容安全 review 必须携带 ASR 的精确 `scope`
-（`remainder: "unchecked"`），不得声称后半段已核验。没有 question 1 权威原文则停，
-不能拿例题、说明、题目选项或任意 `--reference` 替代。旧 v1 整段证据继续原校验，
-不迁移已有纸卷、lease 或工作区。具体操作见 importing-nck1-papers 的听力检查段落。
+听力按[听力准备与导航复核](listening-review.md)执行。默认准备整文件解码、完整
+normalized playback、信号候选与波形，不隐式运行旧180秒首题ASR。导题Agent负责
+所有源对话的身份、顺序、完整性、实际遍数及可用播放范围；优先复用同音频的本地
+ASR，只定点处理未决范围，不因漏识别报题就报“录音不符”或重跑全卷。候选段数量
+相等不能证明题组对应。`prepare/finalize/verify-listening-review` 保存源/Candidate/
+音频绑定的导航复核，逐组区分usable、review_required、blocked；非实质疑点保留，
+实质疑点仅阻断受影响用途。不得冒称逐字、直接听审或全录音内容安全认证。
+旧首段检查仅显式`--opening-check`运行，历史v1/v2收据按原范围验证、不回写。
+仅导航复核与其精确证据可复用原冻结PDF；任何题卷说明校正必须使打印输入失效。
+
+题卷与录音的播放遍数冲突按 Owner 已确认的
+[听力遍数规则](../product/nck1-paper-standard.md#4-听力条款)处理：核实实际播放次数后，
+修正新题卷说明以匹配录音，记录原文、修正及音频依据；保留源文件和旧 revision，
+不修改录音，也不将该修正伪装成 OCR 错误。此项不再逐卷请求同样的决定，
+但不授权把识别重复当真实重复、放行其他内容疑点或批准发布。
 
 新增音频准备会从完整 normalized playback MP3 预计算 `waveform-v1.json`
 （20Hz RMS envelope，绑定播放文件SHA与时长）。它是可重建的Screen播放数据，
@@ -581,13 +600,15 @@ revision 纳入 bundle identity，服务端再次以当前 revision 比对，冲
 采用 Owner 选择的 B：每组由新的普通 Low 线程直接生成，启用 fast，不调用 Oracle、
 `nck1_analyze_group`、`amp.ai.generate` 或其他模型。不再使用旧 Grok 解析插件。
 自动 webhook/dispatcher 已退休。Owner 明确发起的新导题若需要独立线程，
-用 `create_thread` 显式指定 Import Project 与内置 Low，不覆盖模型或推理档位，
+用 `create_thread` 显式指定本地 runner 与内置 Low，不覆盖模型或推理档位，
 创建时显式 `features: []`；旧绑定仍保留，不自动创建替代线程。
 新 public-paper-v1 摘要与检索元数据同样使用内置 Low，
-`create_thread` 显式传 `agent_mode: low`、`features: []` 和专用 Import Project。
+优先复用合适的本地 Low 线程；必须新建时显式传 `agent_mode: low`、`features: []`、
+`executor: runner`、当前本机 `runner_id` 及允许的 `working_directory`，不传 Import Project。
+先核对独立工作树、同版合同/校验代码和不重叠写面；不得为了访问当前 checkout 重建线程。
 不再注册自定义 Low 副本；Low 跟随 Amp 的模式配置，不保证固定为 DeepSeek。
 若 Low 不可用则停止，不切换模式或调用 Oracle/Task。实际 provider/model/usage 仍须实测。
-已绑定 coordinator/lease 不迁移，恢复时保持原线程。
+已绑定 coordinator/lease 不擅自迁移。远端历史任务仅保留证据，不因本地改路由恢复远端 writer。
 
 ### 已退休的自动接卷与历史恢复
 
@@ -610,21 +631,20 @@ fast。通过 `create_thread` 派发 Medium 时显式传 `features: []`，避免
 fast；这不是切换默认生成模式、项目路由或迁移既有 coordinator/lease 的授权。
 
 协调者用 `create_thread`，显式设置 `agent_mode: low`、`features: [fast]`、
-`project: user_01M10H0ESEN0415NA8H878PCXJ/english-question-bank-import`。
-使用完整 Project ref，不以仓库名或项目短名替代。禁止使用 `no-project` 空 Orb；不传 `orb_size`，
-继承 Owner 配置的项目规格。Low 是模式与路由选择，不是 Terra 的不可变模型保证；
+`executor: runner`、本机 `runner_id` 及允许的独立 `working_directory`。
+历史解析也遵守本地执行要求，不传 `project` 或 `orb_size`，不创建任何 Orb。
+Low 是模式与路由选择，不是 Terra 的不可变模型保证；
 实际 model/provider/usage 另行核验，不能从线程标题推断。失败不自动升档或换模型。
 
 新线程只接收该组不可变请求（`group`、`sourceGroup`、`authoritativeAnswers`、
 `outputContract`、`teachingDoctrine`），不得接收整卷、submission inbox、claim receipt
-或其他组结果。使用文件传递工具，不假定跨 Orb 共享文件、未提交代码或本地 main。
+或其他组结果。明确本机只读输入与独立输出路径，不假定不同工作树共享未提交代码或本地 main。
 两边必须具有同版合同和校验代码；尚未进入 origin/main 的代码须明确传递，不能仅发送 SHA。
 协调者在文件就绪后才发开始消息，并记录任务起点。
 
-Worker 在接收题组开始生成前，先确认 Node 24 和项目 Ajv 可用。若新 Orb 的完整 setup
-曾失败，由环境准备阶段执行 `bash .agents/setup --analysis-only`；它只准备 Node 24 和
-锁定的 server 依赖，不执行 Desktop/OCR/ASR/数据库步骤，也不宣称完整导题环境已通过。
-准备后重新确认依赖，再接收开始指令。十个单组均使用同一个正式校验入口：
+Worker 在接收题组开始生成前，先确认本机 Node 24 和项目 Ajv 可用。缺依赖时停在环境
+准备阶段，不运行 Linux Orb setup，不写共享 node_modules 或改锁文件。准备后重新确认
+依赖，再接收开始指令。十个单组均使用同一个正式校验入口：
 
 ```bash
 node scripts/import-pipeline/validate-analysis.mjs request.json analysis-reading-b.json
@@ -655,13 +675,12 @@ Worker 完成或失败都主动回报文件路径、字节数、SHA256、正式�
 结果，不能仅凭脚本存在认定成功。不另装 Python jsonschema。缺依赖时报告环境阻断，
 由环境准备阶段修复，不在解析生成中途安装或改 validator。
 
-## Orb 算力边界
+## 本地算力边界
 
-Owner 明确发起的独立导题线程使用私有 Project Orb，并继承专用导题 Amp Project 的默认 Orb
-规格；`create_thread` 显式选择 Import project，省略 `orb_size`。旧自动派单路径不得重新启用。
-专用 `english-question-bank-import` 项目使用 Owner 配置的 `a1.medium` 默认规格；
-Low 模型模式不等于 Small Orb。扫描/OCR、ASR 与渲染前记录实际 CPU、内存和耗时，
-只有实测资源不足才提出调整，不自动升到 xxlarge。不得因此放宽门禁、转移 claim 或重复导入。
+导题、摘要、metadata、OCR、音频处理与渲染均在本机执行；旧 Import Project 不再是
+默认路由，自动派单仍退休。本地 runner 不可用就停止，不回退到 Orb。
+Low 是模型模式，不代表计算资源规格。扫描/OCR、ASR 与渲染前记录实际 CPU、内存、
+可用磁盘和耗时；资源不足先降低并发，不自动转云端、放宽门禁、转移 claim 或重复导入。
 
 可并行的只有互不写同一状态、输出路径唯一的逐页读取/转换/复核工作；并发必须有界并
 给 Agent 与系统工具留余量。Materialization、`verify`、`build`、revision、lease、handoff

@@ -14,7 +14,11 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
-import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
+import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
+import { nck1MaterializationHistoricalAuthorityRef62 } from '../shared/paper-canonical/authority.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import { buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
+import historicalScreen from '../standards/paper-canonical/consumers/screen-v46.json' with { type: 'json' }
 import {
   extractDocxDocumentText,
   extractDocxDocumentParagraphs,
@@ -64,6 +68,20 @@ const datedSeven = datedProduced.materialization.groups.find(group => group.fami
 assert.equal(datedSeven.questions[4].sourceNumber, 40, 'a preceding year must not become the blank number')
 assert.equal(datedSeven.blocks[4].content[0].text, 'A short guide has arrived in September 2024. ',
   'blank extraction must preserve all four digits of a preceding year')
+for (const marker of ['_65__', '_65_', '__65__']) {
+  const numberedFixture = makeSyntheticNck1DocxFixture({
+    transformXml: xml => xml.replace('65._____(word)', `${marker}(word)`),
+  })
+  const numbered = produceNck1DocxMaterialization({
+    paperId: numberedFixture.paperId, documents: numberedFixture.sourceDocuments,
+  })
+  assert.equal(numbered.disposition, 'ready_for_verification')
+  const inlines = numbered.materialization.groups.find(group => group.family === 'grammar-fill')
+    .blocks.flatMap(block => block.content)
+  const index = inlines.findIndex(node => node.blankId?.endsWith(':65'))
+  assert.equal(inlines[index - 1].text, '(learn) and ', 'numbered blank decoration is not prose')
+  assert.equal(inlines[index + 1].text, '(word).', 'the prompt following the blank is preserved')
+}
 const chineseNoticeFixture = makeSyntheticNck1DocxFixture({ chineseNoticeNumbering: true })
 const chineseNoticeProduced = produceNck1DocxMaterialization({
   paperId: chineseNoticeFixture.paperId, documents: chineseNoticeFixture.sourceDocuments,
@@ -187,6 +205,88 @@ const importedMedia = importCanonicalCandidate({
 })
 assert.deepEqual(importedMedia.issues, [])
 assert.equal(importedMedia.candidate?.interpretation.groups[0].media.length, 3)
+
+const writingMediaFixture = makeSyntheticNck1DocxFixture({
+  mediaLayout: true,
+  transformXml: xml => {
+    const drawing = xml.match(/<w:p><w:pPr><w:jc[^]*?<\/w:p>/u)?.[0]
+    return drawing ? xml.replace(drawing, '').replace(
+      '<w:p><w:r><w:t xml:space="preserve">内容包括：',
+      `${drawing}<w:p><w:r><w:t xml:space="preserve">内容包括：`,
+    ) : xml
+  },
+})
+const writingMedia = produceNck1DocxMaterialization({
+  paperId: writingMediaFixture.paperId, documents: writingMediaFixture.sourceDocuments,
+})
+assert.equal(writingMedia.disposition, 'ready_for_verification')
+const writingBlocks = writingMedia.materialization.groups.find(group => group.slotId === 'writing.application').blocks
+assert.equal(writingBlocks[0].content[0].text, 'Write a short notice for the reading club.')
+assert.equal(writingBlocks[1].kind, 'figure', 'A drawing-only writing paragraph retains its source position')
+assert.equal(writingBlocks[2].content[0].text, '内容包括：')
+assert.equal(writingMedia.mediaFiles.length, 3, 'All source media survive writing-group assembly')
+
+const writingMediaInput = {
+  kind: 'nck1-source-materialization',
+  materializationBytes: new TextEncoder().encode(JSON.stringify(writingMedia.materialization)),
+  documents: writingMediaFixture.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })),
+  media: writingMedia.mediaFiles,
+}
+const writingCandidate = importCanonicalCandidate(writingMediaInput)
+assert.deepEqual(writingCandidate.issues, [])
+const writingPreview = compileNck1MaterializationCandidatePreview(writingCandidate.candidate)
+assert(writingPreview.compilation)
+const writingConsumption = buildNck1ReviewConsumption(writingCandidate.candidate, writingPreview.compilation)
+const applicationId = writingMedia.materialization.groups.find(group => group.slotId === 'writing.application').groupId
+const projectApplication = consumption => projectCanonicalConsumerGroup({
+  consumption, familyContractId: 'application-writing', groupId: applicationId,
+})
+const application = projectApplication(writingConsumption)
+assert.equal(application.promptBlocks[1].kind, 'figure')
+assert.equal(application.promptBlocks[1].media.sha256, writingMedia.materialization.media[0].sha256)
+const oldConsumerRef = { id: historicalScreen.consumerId, version: historicalScreen.version, digest: historicalScreen.contractDigest }
+assert.throws(() => projectApplication({ ...writingConsumption, consumerContractRef: oldConsumerRef }),
+  /prompt-figure consumer capability/u)
+assert(importCanonicalCandidate(writingMediaInput, undefined, {
+  materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef62,
+}).issues.some(issue => issue.code === 'MATERIALIZATION_APPLICATION_PROMPT_UNRESOLVED'))
+for (const alter of [
+  consumption => { consumption.mediaArtifacts = [] },
+  consumption => { consumption.mediaArtifacts.find(item => item.mediaId === application.promptBlocks[1].mediaId).encodedBytes = 'AAAA' },
+  consumption => { consumption.mediaArtifacts.push(structuredClone(consumption.mediaArtifacts[0])) },
+  consumption => {
+    const occurrence = consumption.selections.find(item => item.familyContractId === 'application-writing').projectedOccurrences[0]
+    occurrence.prompt.blocks.splice(2, 0, structuredClone(occurrence.prompt.blocks[1]))
+  },
+  consumption => {
+    const occurrence = consumption.selections.find(item => item.familyContractId === 'application-writing').projectedOccurrences[0]
+    occurrence.prompt.blocks.push(...occurrence.prompt.blocks.splice(1, 1))
+  },
+  consumption => {
+    const occurrence = consumption.selections.find(item => item.familyContractId === 'application-writing').projectedOccurrences[0]
+    occurrence.prompt.blocks.splice(0, 1)
+  },
+]) {
+  const invalid = structuredClone(writingConsumption)
+  alter(invalid)
+  assert.throws(() => projectApplication(invalid), /Canonical/u)
+}
+// Moving the raw default must not change the paragraph-only semantic projection
+// or make the previously-current v62 Candidate impossible to reconstruct.
+const currentParagraphCandidate = importCanonicalCandidate(input)
+const oldParagraphCandidate = importCanonicalCandidate(input, undefined, {
+  materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef62,
+})
+assert.deepEqual(oldParagraphCandidate.issues, [])
+const paragraphProjection = candidate => {
+  const preview = compileNck1MaterializationCandidatePreview(candidate)
+  assert(preview.compilation)
+  return buildNck1ReviewConsumption(candidate, preview.compilation)
+}
+const oldParagraphConsumption = paragraphProjection(oldParagraphCandidate.candidate)
+oldParagraphConsumption.consumerContractRef = oldConsumerRef
+assert.deepEqual(projectApplication(paragraphProjection(currentParagraphCandidate.candidate)),
+  projectApplication(oldParagraphConsumption))
 
 // Drawing coordinates and field instructions are not visible Word text.
 // Keep identical numbers in w:t, XML entities, run separators and media intact.
@@ -368,10 +468,35 @@ try {
 
   const receiptBytes = readFileSync(first.receiptPath)
   const reviewBytes = readFileSync(first.reviewPath)
+  for (const remove of [false, true]) {
+    const tampered = JSON.parse(reviewBytes)
+    if (remove) delete tampered.listeningSourcePartition
+    else tampered.listeningSourcePartition.disposition = 'altered'
+    writeFileSync(first.reviewPath, JSON.stringify(tampered))
+    assert.throws(() => runNck1DocxMaterializationJob({ paperDir: tempRoot, manifest: fixture.manifest }), /listening partition/u)
+  }
+  writeFileSync(first.reviewPath, reviewBytes)
+  const historicalBaseReceipt = JSON.parse(receiptBytes)
+  const historicalBaseReview = JSON.parse(reviewBytes)
+  delete historicalBaseReceipt.listeningSourcePartitionDigest
+  delete historicalBaseReview.listeningSourcePartition
+  writeFileSync(first.receiptPath, JSON.stringify(historicalBaseReceipt))
+  assert.throws(() => inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest }), /listening partition/u,
+    'removing the current receipt audit digest must not bypass the partition check')
+  const previousVersion = 'nck1-docx-materialization-producer-v11'
+  const previousDigest = nck1DocxProducerSourceDigest(fixture.sourceDocuments, { producerVersion: previousVersion })
+  writeFileSync(first.receiptPath, JSON.stringify({ ...historicalBaseReceipt, producerVersion: previousVersion, sourceDigest: previousDigest }))
+  writeFileSync(first.reviewPath, JSON.stringify({ ...historicalBaseReview, producerVersion: previousVersion, sourceDigest: previousDigest }))
+  const previousPaths = [outputPath, first.receiptPath, first.reviewPath]
+  const previousBytes = previousPaths.map(file => readFileSync(file))
+  assert.equal(inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest }).producerState,
+    'historical', 'pre-fix output remains inspectable but cannot masquerade as the new parser')
+  assert.throws(() => runNck1DocxMaterializationJob({ paperDir: tempRoot, manifest: fixture.manifest }), /refusing to overwrite/u)
+  previousPaths.forEach((file, index) => assert.deepEqual(readFileSync(file), previousBytes[index]))
   const historicalVersion = 'nck1-docx-materialization-producer-v9'
   const historicalDigest = nck1DocxProducerSourceDigest(fixture.sourceDocuments, { producerVersion: historicalVersion })
-  const historicalReceipt = { ...JSON.parse(receiptBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }
-  const historicalReview = { ...JSON.parse(reviewBytes), producerVersion: historicalVersion, sourceDigest: historicalDigest }
+  const historicalReceipt = { ...historicalBaseReceipt, producerVersion: historicalVersion, sourceDigest: historicalDigest }
+  const historicalReview = { ...historicalBaseReview, producerVersion: historicalVersion, sourceDigest: historicalDigest }
   writeFileSync(first.receiptPath, JSON.stringify(historicalReceipt))
   writeFileSync(first.reviewPath, JSON.stringify(historicalReview))
   const historical = inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest })

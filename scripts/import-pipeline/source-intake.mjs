@@ -596,6 +596,7 @@ async function continueAutomation(submissionId, paperId) {
       const failure = await runStep('init', ['init', submissionId, '--paper-id', paperId,
         ...(option('--year') !== null ? ['--year', option('--year')] : []),
         ...(option('--month') !== null ? ['--month', option('--month')] : []),
+        ...(process.argv.includes('--opening-check') ? ['--opening-check'] : []),
         ...(process.argv.includes('--signal-only') ? ['--signal-only'] : [])])
       if (failure) return { submissionId, paperId, ...failure, next: 'Inspect initialization evidence before replaying.' }
       status = await automationStatus(submissionId, paperId)
@@ -932,16 +933,19 @@ async function initialize(submissionId, paperId) {
       audioFiles[0].localPath,
     ]
     if (process.argv.includes('--signal-only')) args.push('--signal-only')
+    if (process.argv.includes('--opening-check')) args.push('--opening-check')
     if (option('--asr-fixture')) args.push('--asr-fixture', option('--asr-fixture'))
     execFileSync(
       process.execPath,
       args,
       { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
     )
-    if (process.argv.includes('--signal-only')) {
+    if (!process.argv.includes('--opening-check')) {
       recordInitialization(manifest, paperId)
       console.log(JSON.stringify({ submissionId, paperId, state: 'initialized_locally',
-        audioMode: 'signal_only', contentValidation: 'not_performed' }, null, 2))
+        audioMode: 'signal_only', contentValidation: 'not_performed',
+        next: `Materialize source and prepare-listening-review ${paperId}; audio preparation is not semantic review`,
+      }, null, 2))
       return
     }
     recordOperation(submissionId, 'init', 'completed', { paperId })

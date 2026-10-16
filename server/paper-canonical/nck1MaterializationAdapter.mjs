@@ -6,9 +6,15 @@ import path from 'node:path'
 import {
   resolveCanonicalAuthority,
   nck1MaterializationCandidateAuthorityRef,
+  nck1ListeningInstructionAuthorityRef,
+  validateJsonSchema,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef59,
   nck1MaterializationHistoricalAuthorityRef61,
+  nck1MaterializationHistoricalAuthorityRef62,
+  nck1MaterializationHistoricalAuthorityRef64,
+  nck1MaterializationHistoricalAuthorityRef66,
+  closureAdmitsApplicationPromptFigures,
 } from '../../shared/paper-canonical/authority.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 import {
@@ -28,6 +34,7 @@ import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V
 import { produceNck1MaterializationFromStructures } from '../paper-import/nck1DocxMaterializationProducer.mjs'
 import { rasterPdfRegion } from './pdfRegionRaster.mjs'
 import { applySpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
+import { applyListeningInstructionCorrection, LISTENING_INSTRUCTION_CORRECTION_FILE } from '../paper-import/listeningInstructionCorrection.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   nck1ImageExtension,
@@ -59,6 +66,10 @@ function cloneByteEntries(entries, idKey) {
 }
 
 export function isNck1MaterializationInput(value) {
+  if (value && Object.hasOwn(value, 'listeningInstructionCorrectionBytes')) {
+    const { listeningInstructionCorrectionBytes, ...original } = value
+    return listeningInstructionCorrectionBytes instanceof Uint8Array && isNck1MaterializationInput(original)
+  }
   if (value && Object.hasOwn(value, 'spellingReviewBytes')) {
     const { spellingReviewBytes, ...original } = value
     return spellingReviewBytes instanceof Uint8Array && isNck1MaterializationInput(original)
@@ -110,6 +121,7 @@ export function cloneNck1MaterializationInput(value) {
     media: cloneByteEntries(value.media, 'mediaId'),
     ...(value.listeningAudio ? { listeningAudio: structuredClone(value.listeningAudio) } : {}),
     ...(value.spellingReviewBytes ? { spellingReviewBytes: new Uint8Array(value.spellingReviewBytes) } : {}),
+    ...(value.listeningInstructionCorrectionBytes ? { listeningInstructionCorrectionBytes: new Uint8Array(value.listeningInstructionCorrectionBytes) } : {}),
     ...(value.ocrSourceBytes ? { ocrSourceBytes: {
       evidenceBytes: new Uint8Array(value.ocrSourceBytes.evidenceBytes),
       confirmationBytes: new Uint8Array(value.ocrSourceBytes.confirmationBytes),
@@ -164,11 +176,12 @@ function parseMaterialization(bytes) {
   }
 }
 
-function bundleDigest(materializationBytes, documents, media, listeningAudio, spellingReviewBytes, ocrSourceBytes) {
+function bundleDigest(materializationBytes, documents, media, listeningAudio, spellingReviewBytes, ocrSourceBytes, listeningInstructionCorrectionBytes) {
   return digestJson({
     materialization: sha256(materializationBytes),
     ...(listeningAudio ? { listeningAudio } : {}),
     ...(spellingReviewBytes ? { spellingReview: sha256(spellingReviewBytes) } : {}),
+    ...(listeningInstructionCorrectionBytes ? { listeningInstructionCorrection: sha256(listeningInstructionCorrectionBytes) } : {}),
     ...(ocrSourceBytes ? { ocrSource: {
       evidence: sha256(ocrSourceBytes.evidenceBytes),
       confirmation: sha256(ocrSourceBytes.confirmationBytes),
@@ -813,7 +826,7 @@ function writingObservation(source, documentsById, group, observationId, kind, v
   ))
 }
 
-function writingVariant(group, content, issues, source, documentsById) {
+function writingVariant(group, content, issues, source, documentsById, { allowPromptFigures = false } = {}) {
   const task = group.writingTask
   const sourceText = group.blocks.map(paragraphText).join('\n')
   const requiredText = [
@@ -826,7 +839,11 @@ function writingVariant(group, content, issues, source, documentsById) {
     issues.push(adapterIssue('MATERIALIZATION_WRITING_CONTENT_UNRESOLVED', `Writing semantics for ${group.groupId} do not resolve to its source block stream`, '$.groups'))
   }
   const writingTaskId = `writing-task:${group.groupId}`
-  const paragraphs = group.blocks.filter(block => block.kind === 'paragraph')
+  // Under the prompt-figure capability, a figure stays in the source stream and
+  // ends any paragraph run, exactly as Screen and Print group notices.
+  const promptFigures = allowPromptFigures && group.family === 'application-writing'
+    && group.blocks.some(block => block.kind === 'figure')
+  const paragraphs = promptFigures ? group.blocks : group.blocks.filter(block => block.kind === 'paragraph')
   const notice = writingNoticeGroup(paragraphs.map(block => normalizedWritingText(paragraphText(block))))
   const noticeBlocks = notice ? paragraphs.slice(notice.startIndex, notice.startIndex + notice.blockCount) : []
   const wordCountBlock = noticeBlocks.find(block => writingWordCount(paragraphText(block)) === task.wordCountTarget)
@@ -836,6 +853,7 @@ function writingVariant(group, content, issues, source, documentsById) {
   }
   if (group.family === 'application-writing') {
     const givenBlocks = paragraphs.slice(notice.startIndex + notice.blockCount)
+      .filter(block => block.kind === 'paragraph')
     const givenParts = task.givenSkeleton.map((part, index) => {
       const block = givenBlocks[index]
       if (!block || paragraphText(block) !== part.text) {
@@ -871,12 +889,18 @@ function writingVariant(group, content, issues, source, documentsById) {
       }
     }).filter(Boolean)
     const givenBlockIds = new Set(givenParts.map((part) => part.blockRef))
+    // The prompt owns every non-given source block in order; textual semantic
+    // refs come only from its paragraphs. Figures are source-backed media.
     const promptBlocks = group.blocks.filter((block) =>
-      block.kind === 'paragraph' && !givenBlockIds.has(block.blockId))
-    const situationBlock = promptBlocks.find((block) =>
-      paragraphText(block).includes(task.prompt)) || promptBlocks[0]
-    if (!situationBlock || promptBlocks.length + givenParts.length !== group.blocks.length) {
-      issues.push(adapterIssue('MATERIALIZATION_APPLICATION_PROMPT_UNRESOLVED', `Application prompt for ${group.groupId} must resolve to paragraph blocks`, '$.groups'))
+      (block.kind === 'paragraph' || (promptFigures && block.kind === 'figure'))
+      && !givenBlockIds.has(block.blockId))
+    const promptParagraphs = promptBlocks.filter((block) => block.kind === 'paragraph')
+    const situationBlock = promptParagraphs.find((block) =>
+      paragraphText(block).includes(task.prompt)) || promptParagraphs[0]
+    const firstGivenIndex = group.blocks.findIndex((block) => givenBlockIds.has(block.blockId))
+    if (!situationBlock || promptBlocks.length + givenParts.length !== group.blocks.length
+      || (firstGivenIndex >= 0 && group.blocks.slice(firstGivenIndex).some((block) => block.kind === 'figure'))) {
+      issues.push(adapterIssue('MATERIALIZATION_APPLICATION_PROMPT_UNRESOLVED', `Application prompt for ${group.groupId} must resolve to paragraph blocks${promptFigures ? ' and source figures before fixed text' : ''}`, '$.groups'))
       return null
     }
     const wordObservationRef = `observation:application:${group.groupId}:word-count`
@@ -916,7 +940,7 @@ function writingVariant(group, content, issues, source, documentsById) {
         deliverable: situationRef,
         communicativePurpose: situationRef,
       },
-      contentRequirements: promptBlocks
+      contentRequirements: promptParagraphs
         .map((block, index) => ({
           requirementId: `requirement:${group.groupId}:${index + 1}`,
           contentRef: paragraphRef(block),
@@ -1005,7 +1029,7 @@ function writingVariant(group, content, issues, source, documentsById) {
   }
 }
 
-function groupVariant(group, answersByQuestionId, content, issues, source, documentsById) {
+function groupVariant(group, answersByQuestionId, content, issues, source, documentsById, writingOptions) {
   const ownership = choiceOwnership(group)
   const roles = group.blocks
     .filter((block) =>
@@ -1060,7 +1084,7 @@ function groupVariant(group, answersByQuestionId, content, issues, source, docum
     }
   }
   if (['application-writing', 'continuation-writing'].includes(group.family)) {
-    return writingVariant(group, content, issues, source, documentsById)
+    return writingVariant(group, content, issues, source, documentsById, writingOptions)
   }
   return { family: group.family, choiceOwnership: ownership }
 }
@@ -1138,7 +1162,7 @@ function instructionEvidence(materialization, instructionDocument, authorityRef)
   }
 }
 
-function appendListeningGroups(source, materialization, documentsById) {
+function appendListeningGroups(source, materialization, documentsById, listeningInstructionCorrection = null) {
   if (materialization.listening.state === 'not_supplied') {
     source.inactiveSlots['listening.short-dialogue'] = 'not_supplied'
     source.inactiveSlots['listening.long-form'] = 'not_supplied'
@@ -1236,8 +1260,8 @@ function appendListeningGroups(source, materialization, documentsById) {
       variant: {
         family: 'listening',
         ...(spec.slotId === 'listening.short-dialogue'
-          && materialization.listening.timing.some((entry) =>
-            entry?.kind === 'section1_playback' && entry.passes === 1)
+          && (listeningInstructionCorrection?.correction.instructions.find(entry => entry.slotId === spec.slotId)?.playCount
+            ?? (materialization.listening.timing.some(entry => entry?.kind === 'section1_playback' && entry.passes === 1) ? 1 : 2)) === 1
           ? { firstSectionPlayback: 'once_explicit' }
           : {}),
         questions: relevantQuestions.map((question) => {
@@ -1291,7 +1315,7 @@ export function deriveNck1SemanticSource(
   mediaById,
   instructionDocument,
   issues,
-  { analyzedPackage = false, authorityRef = nck1MaterializationCandidateAuthorityRef } = {},
+  { analyzedPackage = false, authorityRef = nck1MaterializationCandidateAuthorityRef, listeningInstructionCorrection = null } = {},
 ) {
   const answersByQuestionId = new Map(materialization.answers.map((answer) => [
     answer.questionId,
@@ -1488,6 +1512,7 @@ export function deriveNck1SemanticSource(
         issues,
         source,
         documentsById,
+        { allowPromptFigures: closureAdmitsApplicationPromptFigures(resolveCanonicalAuthority(authorityRef).closure) },
       ),
       sourceSpanRefsByTarget: Object.fromEntries([
         ...groupMedia.map((media) => [
@@ -1503,13 +1528,20 @@ export function deriveNck1SemanticSource(
       ]),
     })
   }
-  appendListeningGroups(source, materialization, documentsById)
+  appendListeningGroups(source, materialization, documentsById, listeningInstructionCorrection)
   for (const entry of materialization.sourcePresentation?.instructions || []) {
     const group = source.groups.find(group => group.slotId === canonicalSlotId(entry.slotId))
     const instructionId = SOURCE_INSTRUCTION_SLOTS[entry.slotId]
-    const observation = observationForLocator(`observation:source-instruction:${group.groupId}`,
+    const corrected = listeningInstructionCorrection?.correction.instructions.some(item => item.slotId === entry.slotId)
+    const observation = corrected ? {
+      observationId: `observation:corrected-listening-instruction:${group.groupId}`,
+      kind: 'source_instruction', documentInputKey: 'listening_instruction_correction',
+      value: { instructionId, text: entry.text },
+      span: { start: 0, end: listeningInstructionCorrection.byteLength },
+      extraction: { adapterId: 'nck1-source-materialization', version: '8' },
+    } : observationForLocator(`observation:source-instruction:${group.groupId}`,
       'source_instruction', entry.source, { instructionId, text: entry.text }, documentsById)
-    observation.extraction.version = '5'
+    if (!corrected) observation.extraction.version = '5'
     source.observations.push(observation)
     group.sourcePresentation = { instruction: { instructionId, text: entry.text,
       authorityObservationRef: observation.observationId } }
@@ -1563,6 +1595,11 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
       roles: ['source_provenance'],
       bytes: new Uint8Array(input.spellingReviewBytes),
       declared: { mediaType: 'application/json', originalName: SPELLING_REVIEW_FILE },
+    }] : []),
+    ...(input.listeningInstructionCorrectionBytes ? [{
+      inputKey: 'listening_instruction_correction', roles: ['source_provenance'],
+      bytes: new Uint8Array(input.listeningInstructionCorrectionBytes),
+      declared: { mediaType: 'application/json', originalName: LISTENING_INSTRUCTION_CORRECTION_FILE },
     }] : []),
     ...(input.ocrSourceBytes ? ['evidence', 'confirmation'].map((kind) => ({
       inputKey: `ocr_source_${kind}`,
@@ -1695,7 +1732,7 @@ function appendReadingSourceEmphasis(source, raw, documentsById, review, issues)
   }
 }
 
-function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues) {
+function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues, writingEmphasis = false) {
   try {
     const evidence = JSON.parse(textDecoder.decode(ocrSourceBytes.evidenceBytes))
     const confirmation = JSON.parse(textDecoder.decode(ocrSourceBytes.confirmationBytes))
@@ -1774,6 +1811,21 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
     }
     const consumed = new Set()
     const corrections = new Map((review?.targets || []).map(target => [target.jsonPointer, target.corrections]))
+    if (writingEmphasis) {
+      for (const [key, paragraph] of marked) {
+        const locator = paragraph.sourceIndex
+        if (raw.documents.find(document => document.documentId === locator.documentId)?.role !== 'official_answers') continue
+        // Answer headings, scoring and sample starters remain answer-source
+        // evidence. Equal words in a question never inherit their formatting.
+        const observation = observationForLocator(`observation:answer-source-emphasis:${key.slice(7)}`,
+          'source_answer_emphasis', locator,
+          { text: paragraph.text, ranges: paragraph.sourceEmphasis, evidenceDigest: evidence.evidenceDigest,
+            confirmationSha256: sha256(ocrSourceBytes.confirmationBytes) }, documentsById)
+        observation.extraction.version = '5'
+        source.observations.push(observation)
+        consumed.add(key)
+      }
+    }
     const apply = (locator, parts, derived, targetId, derivedGroup, stem = false) => {
       const key = digestJson(locator)
       const paragraph = marked.get(key)
@@ -1793,6 +1845,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         throw new Error('OCR emphasis is outside the supported Reading text or stem')
       }
       let offset = 0
+      const replacements = new Map()
       const inlines = parts.flatMap((part, index) => {
         const localRanges = ranges.flatMap(range => {
           const start = Math.max(range.start - offset, 0)
@@ -1802,10 +1855,20 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         const mapped = mapSourceEmphasisEdits(part.text, localRanges, corrections.get(part.pointer) || [])
         if (mapped.text !== derived[index]?.text) throw new Error('OCR emphasis editorial mapping differs from effective text')
         offset += part.text.length
-        return localRanges.length ? splitSourceEmphasis(mapped.text, mapped.ranges, derived[index].nodeId) : [derived[index]]
+        const nodes = localRanges.length ? splitSourceEmphasis(mapped.text, mapped.ranges, derived[index].nodeId) : [derived[index]]
+        replacements.set(derived[index].nodeId, nodes.map(node => node.nodeId))
+        return nodes
       })
+      if (writingEmphasis && ['application-writing', 'continuation-writing'].includes(derivedGroup.family)) {
+        const remap = value => {
+          if (!value || typeof value !== 'object') return
+          if (Array.isArray(value.inlineNodeIds)) value.inlineNodeIds = value.inlineNodeIds.flatMap(id => replacements.get(id) ?? [id])
+          for (const child of Object.values(value)) if (child && typeof child === 'object') remap(child)
+        }
+        remap(derivedGroup.variant)
+      }
       const observation = observationForLocator(`observation:source-emphasis:${targetId}`,
-        'source_reading_emphasis', locator,
+        derivedGroup.family === 'reading' ? 'source_reading_emphasis' : 'source_writing_emphasis', locator,
         { targetId, ranges: paragraph.sourceEmphasis, evidenceDigest: evidence.evidenceDigest,
           confirmationSha256: sha256(ocrSourceBytes.confirmationBytes) }, documentsById)
       observation.extraction.version = '4'
@@ -1815,14 +1878,17 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       return inlines
     }
     for (const [groupIndex, group] of raw.groups.entries()) {
-      if (group.family !== 'reading') continue
+      if (group.family !== 'reading'
+        && !(writingEmphasis && ['application-writing', 'continuation-writing'].includes(group.family))) continue
       const derivedGroup = source.groups.find(item => item.groupId === group.groupId)
       const derivedBlocks = new Map(sourceOrderedParagraphEntries(derivedGroup.content.blocks, '')
         .map(({ block }) => [block.nodeId, block]))
       for (const { block, path: blockPath } of sourceOrderedParagraphEntries(group.blocks, `/groups/${groupIndex}/blocks`)) {
         if (block.content.some(item => item.kind !== 'text')) continue
+        if (!marked.has(digestJson(block.source))) continue
         const pointer = blockPath.replace(/\[(\d+)\]/gu, '/$1').replaceAll('.', '/')
         const derived = derivedBlocks.get(block.blockId)
+        if (!derived) throw new Error('OCR emphasis targets a source instruction without a rich-text paragraph')
         const inlines = apply(block.source, block.content.map((item, index) => ({
           text: item.text, pointer: `${pointer}/content/${index}/text`,
         })), derived.inlines, block.blockId, derivedGroup)
@@ -1842,7 +1908,8 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
   }
 }
 
-export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1MaterializationCandidateAuthorityRef) {
+export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInput.listeningInstructionCorrectionBytes
+  ? nck1ListeningInstructionAuthorityRef : nck1MaterializationCandidateAuthorityRef) {
   const input = cloneNck1MaterializationInput(rawInput)
   const sourceDigest = bundleDigest(
     input.materializationBytes,
@@ -1851,6 +1918,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     input.listeningAudio,
     input.spellingReviewBytes,
     input.ocrSourceBytes,
+    input.listeningInstructionCorrectionBytes,
   )
   let materialization = parseMaterialization(input.materializationBytes)
   if (!materialization) {
@@ -1866,8 +1934,11 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
   const validation = validateBundle(materialization, input)
   if ((materialization.schemaVersion === 'nck1-source-materialization-v4'
     || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
-    && authorityRef.manifestVersion !== '62') {
-    validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require the v62 closure'))
+    && !['62', '64', '66', '67', '68'].includes(authorityRef.manifestVersion)) {
+    validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require a registered source-presentation closure'))
+  }
+  if (input.listeningInstructionCorrectionBytes && authorityRef.manifestDigest !== nck1ListeningInstructionAuthorityRef.manifestDigest) {
+    validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Listening instruction correction requires its registered successor authority'))
   }
   if (validation.issues.length > 0) {
     return {
@@ -1893,6 +1964,21 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
         issues: [adapterIssue('SPELLING_REVIEW_INVALID', error.message)] }
     }
   }
+  let listeningInstructionCorrection = null
+  if (input.listeningInstructionCorrectionBytes) {
+    try {
+      const corrected = applyListeningInstructionCorrection(input.materializationBytes,
+        input.listeningInstructionCorrectionBytes, input.listeningAudio, materialization)
+      const schema = resolveCanonicalAuthority(authorityRef).closure.schemas['listening-instruction-correction-v1']
+      const issues = validateJsonSchema(corrected.correction, schema, '$.listeningInstructionCorrection')
+      if (issues.length) throw new Error(issues[0].message)
+      materialization = corrected.materialization
+      listeningInstructionCorrection = { correction: corrected.correction, byteLength: input.listeningInstructionCorrectionBytes.byteLength }
+    } catch (error) {
+      return { input, sourceDigest, materialization, source: null, request: null,
+        issues: [adapterIssue('LISTENING_INSTRUCTION_CORRECTION_INVALID', error.message)] }
+    }
+  }
   const derivationIssues = []
   const source = deriveNck1SemanticSource(
     materialization,
@@ -1900,22 +1986,23 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     validation.mediaById,
     validation.instructionDocument,
     derivationIssues,
-    { authorityRef },
+    { authorityRef, listeningInstructionCorrection },
   )
-  if ([nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
-    nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61]
+  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
+    nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
       input.spellingReviewBytes ? JSON.parse(new TextDecoder().decode(input.spellingReviewBytes)) : null,
       derivationIssues)
   }
   if (input.ocrSourceBytes) {
-    if (![nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef61]
+    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
       derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
     } else {
       appendOcrReadingSourceEmphasis(source, rawMaterialization, validation.documentsById, input.ocrSourceBytes,
-        input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues)
+        input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
+        resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version === '4')
     }
   }
   if (derivationIssues.length > 0) {
@@ -1957,12 +2044,17 @@ export function nck1MaterializationSourceSummary(derivation) {
     byteLength:
       derivation.input.materializationBytes.byteLength
       + (derivation.input.spellingReviewBytes?.byteLength ?? 0)
+      + (derivation.input.listeningInstructionCorrectionBytes?.byteLength ?? 0)
       + (derivation.input.ocrSourceBytes?.evidenceBytes.byteLength ?? 0)
       + (derivation.input.ocrSourceBytes?.confirmationBytes.byteLength ?? 0)
       + derivation.input.documents.reduce((total, entry) => total + entry.bytes.byteLength, 0)
       + derivation.input.media.reduce((total, entry) => total + entry.bytes.byteLength, 0),
     ...(derivation.input.spellingReviewBytes ? {
       spellingReview: { sha256: sha256(derivation.input.spellingReviewBytes), byteLength: derivation.input.spellingReviewBytes.byteLength },
+    } : {}),
+    ...(derivation.input.listeningInstructionCorrectionBytes ? {
+      listeningInstructionCorrection: { sha256: sha256(derivation.input.listeningInstructionCorrectionBytes),
+        byteLength: derivation.input.listeningInstructionCorrectionBytes.byteLength },
     } : {}),
     materialization: {
       sha256: sha256(derivation.input.materializationBytes),
