@@ -34,6 +34,7 @@ import { spawn, spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { mkdirSync } from 'node:fs'
 import path from 'node:path'
+import { requireLocalQaPassword, LOCAL_QA_OWNER_PASSWORD_ENV, LOCAL_QA_MEMBER_PASSWORD_ENV } from '../../_shared/local-qa-credentials.mjs'
 
 // 仓根从脚本自身位置推导（docs/cuts/<CUT>/qa → 上四级）——可在主树或任意
 // worktree 重跑，不锚死某次会话的绝对路径（similar-passages-entry DP-3
@@ -49,9 +50,9 @@ const vitePort = 5188
 const children = []
 
 const OWNER_USERNAME = 'qa-local-owner'
-const OWNER_PASSWORD = 'qa-detail-redesign-owner-pw-1'
+const OWNER_PASSWORD = requireLocalQaPassword(LOCAL_QA_OWNER_PASSWORD_ENV)
 const MEMBER_USERNAME = 'qa-detail-redesign-member'
-const MEMBER_PASSWORD = 'qa-detail-redesign-member-pw-1'
+const MEMBER_PASSWORD = requireLocalQaPassword(LOCAL_QA_MEMBER_PASSWORD_ENV)
 
 const READING_GROUP = 'group-960d0f8d-reading-a'
 const CLOZE_GROUP = 'group-960d0f8d-cloze'

@@ -59,6 +59,7 @@ import { spawn, spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { mkdirSync } from 'node:fs'
 import path from 'node:path'
+import { requireLocalQaPassword, LOCAL_QA_OWNER_PASSWORD_ENV } from '../../_shared/local-qa-credentials.mjs'
 
 const rootDir = path.resolve(import.meta.dirname, '..', '..', '..', '..')
 const qaDir = path.join(rootDir, 'docs/cuts/similar-workbench-swap/qa')
@@ -71,7 +72,7 @@ const vitePort = 5189
 const children = []
 
 const OWNER_USERNAME = 'qa-similar-workbench-swap-owner'
-const OWNER_PASSWORD = 'qa-similar-workbench-swap-pw-1'
+const OWNER_PASSWORD = requireLocalQaPassword(LOCAL_QA_OWNER_PASSWORD_ENV)
 
 const READING_GROUP = 'group-960d0f8d-reading-a'
 const CLOZE_GROUP = 'group-960d0f8d-cloze'

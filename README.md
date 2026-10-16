@@ -3,6 +3,21 @@
 面向英语教师的语篇中心题库与组卷工作台，已上线 https://eqbank.cc
 （邀请制登录，owner 策展、member 消费）。
 
+## 版权与使用权限
+
+Copyright (c) 2026 Buqisir. **All rights reserved（保留所有权利）。**
+
+本仓库公开可见，但未授予开源许可。对于 Buqisir 拥有相关权利的内容，
+除适用法律、GitHub 服务条款或另行有效授权允许的情形外，未经 Buqisir
+事先书面许可，不得使用、复制、修改、分发、部署或用于提供服务；
+个人、非商业及商业用途均不另行授权，也不设自动转为开源许可证的日期。
+
+第三方代码、依赖、字体、图片、音频和试题材料等仍适用其各自的权利、
+许可证及声明。完整条款见 [LICENSE](LICENSE)。授权事宜请联系仓库所有者
+[Buqisir](https://github.com/Buqisir)。
+
+## 项目概览
+
 核心模型：`Source -> Passage -> Question Group -> Question -> Paper Set -> Export`。
 
 生产 / 消费分界（ADR-0015 / ADR-0016）：**内容生产在后台 Agent**

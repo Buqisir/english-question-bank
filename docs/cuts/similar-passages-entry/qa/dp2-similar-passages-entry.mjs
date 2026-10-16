@@ -37,6 +37,7 @@ import { spawn, spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
+import { requireLocalQaPassword, LOCAL_QA_OWNER_PASSWORD_ENV } from '../../_shared/local-qa-credentials.mjs'
 
 // 仓根从脚本自身位置推导（docs/cuts/<CUT>/qa → 上四级）——可在主树或任意
 // worktree 重跑，不锚死某次会话的绝对路径（DP-3 收账修正：DEV 原稿硬编码
@@ -52,7 +53,7 @@ const vitePort = 5188
 const children = []
 
 const OWNER_USERNAME = 'qa-local-owner'
-const OWNER_PASSWORD = 'qa-similar-passages-pw-1'
+const OWNER_PASSWORD = requireLocalQaPassword(LOCAL_QA_OWNER_PASSWORD_ENV)
 
 // Real, already-analyzed fixture data (paper-960d0f8d — 2026 巴蜀中学 月考七).
 const READING_PAPER_ID = 'paper-960d0f8d'

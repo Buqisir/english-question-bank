@@ -35,6 +35,7 @@ import { spawn, spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { mkdirSync } from 'node:fs'
 import path from 'node:path'
+import { requireLocalQaPassword, LOCAL_QA_OWNER_PASSWORD_ENV } from '../../_shared/local-qa-credentials.mjs'
 
 // 仓根从脚本自身位置推导（docs/cuts/<CUT>/qa → 上四级）——可在主树或任意
 // worktree 重跑，不锚死某次会话的绝对路径。
@@ -49,7 +50,7 @@ const vitePort = 5191
 const children = []
 
 const OWNER_USERNAME = 'qa-r2-trap-audit-owner'
-const OWNER_PASSWORD = 'qa-r2-trap-audit-owner-pw-1'
+const OWNER_PASSWORD = requireLocalQaPassword(LOCAL_QA_OWNER_PASSWORD_ENV)
 
 const PAPER_ID = 'paper-2023-i'
 const RECAST_GROUP = 'group-2023-i-reading-b'
