@@ -1,11 +1,15 @@
 import {
   nck1AnalyzedPackageCandidateAuthorityRef55,
   nck1MaterializationCandidateAuthorityRef,
+  nck1ListeningInstructionAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef54,
   nck1MaterializationHistoricalAuthorityRef57,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef59,
   nck1MaterializationHistoricalAuthorityRef61,
+  nck1MaterializationHistoricalAuthorityRef62,
+  nck1MaterializationHistoricalAuthorityRef64,
+  nck1MaterializationHistoricalAuthorityRef66,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
@@ -73,7 +77,7 @@ function sameAuthority(left, right) {
 }
 
 export function isNck1MaterializationCanonicalImportRequest(request) {
-  if (![nck1MaterializationCandidateAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61]
+  if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(authority => sameAuthority(request?.authority, authority))) return false
   const documents = request?.evidence?.documents
   if (!Array.isArray(documents)) return false
@@ -242,6 +246,18 @@ export function isLiveConfirmedNck1MaterializationAdmission(admission) {
   ) || isLiveConfirmedNck1Admission(
     admission,
     nck1MaterializationHistoricalAuthorityRef61,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationHistoricalAuthorityRef62,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationHistoricalAuthorityRef64,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationHistoricalAuthorityRef66,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1ListeningInstructionAuthorityRef,
   )
 }
 
@@ -289,7 +305,7 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
   }
   let imported = importCanonicalCandidate(sourceInput)
   if (!analyzedPackage && confirmation?.candidateDigest !== imported.candidate?.candidateDigest) {
-    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
+    for (const materializationAuthorityRef of [nck1MaterializationHistoricalAuthorityRef66, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
       const historical = importCanonicalCandidate(sourceInput, undefined, { materializationAuthorityRef })
       if (historical.candidate?.candidateDigest === confirmation?.candidateDigest) { imported = historical; break }
     }

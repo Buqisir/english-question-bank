@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import { validateInlineBlankTextBoundaries } from '../shared/paper-canonical/inlineBlankBoundaries.mjs'
 import { grammarFillPromptPrefix } from '../shared/paper-canonical/grammarFillPromptContract.mjs'
+import { canonicalizeVisibleEnglishTypography } from '../shared/paper-canonical/visibleTypography.mjs'
+import { replayCanonicalVisibleTypography } from '../shared/paper-canonical/visibleTypographyReplay.mjs'
 
 const text = value => ({ kind: 'text', text: value })
 const blank = { kind: 'blank_ref', blankId: 'b56' }
@@ -66,4 +68,17 @@ for (const punctuation of ['-', '–', '"', '’']) {
 assert.equal(grammarFillPromptPrefix(text('(noun)particularly'), 'noun'), null)
 assert.deepEqual(check([blank, text('(noun)'), text('particularly')], 'grammar-fill', 'noun').map(x => x.code),
   ['INLINE_BLANK_SEPARATOR_MISSING'])
+// A text inline ends before a blank; it is not the end of the paragraph.
+for (const normalize of [canonicalizeVisibleEnglishTypography, replayCanonicalVisibleTypography]) {
+  assert.equal(normalize('shuttle(接驳车) ', '3'), 'shuttle (接驳车)', 'historical v3 remains immutable')
+  for (const separator of [' ', '\t', '  ']) {
+    const normalized = normalize(`shuttle(接驳车)${separator}`, '4')
+    assert.equal(normalized, `shuttle (接驳车)${separator}`)
+    assert.deepEqual(check([text(normalized), blank, text(' after.')]), [])
+    assert.equal(normalize(normalized, '4'), normalized)
+  }
+  assert.deepEqual(check([text(normalize('shuttle(接驳车)', '4')), blank]).map(x => x.code),
+    ['INLINE_BLANK_SEPARATOR_MISSING'], 'normalization must not invent absent source spacing')
+  assert.equal(normalize('word（释义）  , next', '4'), 'word (释义), next')
+}
 console.log('PASS inline blank boundaries: directional punctuation, split text, hints, paragraph edges, identities and immutability')

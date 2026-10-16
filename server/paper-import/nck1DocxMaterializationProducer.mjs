@@ -6,14 +6,18 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v11'
+  'nck1-docx-materialization-producer-v15'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-const BLANK = /(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
+// A number enclosed by underscores is a complete blank, even when OCR kept
+// only one leading stroke. Do not leave that stroke in the surrounding prose.
+const BLANK = /(?<![\p{L}\p{N}_])_+\d{1,3}_+|(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
 const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]{0,120}英语试(?:题|卷)(?:参考)?)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?[:：]?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
 const LISTENING_TRANSCRIPT_HEADING = /^(?:附[:：]?\s*)?(?:【)?(?:(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料)(?:[（(]录音稿[）)])?(?:】)?[:：]?$/u
 const WRITING_SAMPLE_BOUNDARY = /^(?:(?:【)?(?:评分|书面表达评分|答案(?:解析|详解)|解析|详解)|附[:：]?\s*各档次|(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料|AI\s+editions?\b)/iu
+const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))$/iu
+const LISTENING_PAUSE_REPEAT_SEQUENCE = /^(?:(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\)|\(\s*重复\s*\)))+$/u
 const SLOT_SPECS = [
   ['reading.a', 'reading', 21, 23],
   ['reading.b', 'reading', 24, 27],
@@ -54,6 +58,90 @@ function sourceRef(documentId, sourceIndex = null) {
     }
   }
   return sourceIndex === null ? { documentId } : { documentId, sourceIndex }
+}
+
+function hasSourceLocator(documentId, sourceIndex) {
+  if (Number.isInteger(sourceIndex) && sourceIndex > 0) return true
+  return sourceIndex?.kind === 'page_region'
+    && sourceIndex.documentId === documentId
+    && Number.isInteger(sourceIndex.page)
+    && sourceIndex.page > 0
+    && sourceIndex.region
+    && ['x', 'y', 'width', 'height'].every((key) =>
+      Number.isFinite(sourceIndex.region[key]))
+    && sourceIndex.region.width > 0
+    && sourceIndex.region.height > 0
+}
+
+function listeningCue(text) {
+  const value = normalized(text)
+  if (LISTENING_PAUSE_REPEAT_SEQUENCE.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'standalone_pause_or_repeat_cue', kind: 'pause_repeat_cue' }
+  }
+  if (/^第一节到此结束[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_transition', kind: 'section_transition', nextTextNumber: 6 }
+  }
+  if (/^听力部分到此结束[。.!！]?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_end_cue', kind: 'listening_end', nextTextNumber: null }
+  }
+  if (/^第二节到此结束(?:[。.!！,，])?现在[,，]?你有(?:\d+|两|三|四|五|十)分钟(?:的)?时间将试卷上的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_transition_and_answer_transfer', kind: 'answer_transfer', nextTextNumber: null }
+  }
+  const announcement = /^听下面(?:(?:的)?录音|一段(?:对话|独白|对话或独白))[,，]回答第(\d+)(?:(?:至|到|[-–—])第?(\d+)|(?:和|、)第?(\d+))?(?:[一二两三四五六七八九十\d]+个)?(?:小题|题)[。.!！]?(?:现在[,，]?你有\d+秒钟的时间阅读(?:这(?:[一二两三四五六七八九十\d]+个)?小题|第(\d+)小题(?:的有关内容)?)[。.!！]?)?$/u.exec(value)
+  if (announcement) {
+    const from = Number(announcement[1])
+    const to = Number(announcement[2] || announcement[3] || announcement[1])
+    if (from < 1 || to > 20 || to < from) return null
+    if (announcement[4] && (from !== to || Number(announcement[4]) !== from)) return null
+    return {
+      disposition: 'excluded_exam_broadcast',
+      reason: 'anchored_question_range_announcement',
+      kind: 'question_range_announcement',
+      questionNumbers: Array.from({ length: to - from + 1 }, (_, index) => from + index),
+    }
+  }
+  const readingInstruction = /^现在[,，]?你有\d+秒钟的时间阅读第(\d+)小题的有关内容[。.!！](?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.exec(value)
+  if (readingInstruction) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_question_reading_instruction',
+      kind: 'question_reading_instruction', questionNumbers: [Number(readingInstruction[1])] }
+  }
+  if (/^(?:同学们[,，]?你们好[!！])?这是[^。.!！?？\n]{1,100}听力部分[。. ]该部分分为第一[、,]第二两节[。. ]注意[:：,，]回答听力部分时[，,]请先将答案标在试卷上[。. ]听力部分结束前[,，]你将有(?:\d+|两)分钟的时间将你的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！.]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_opening_notice', kind: 'listening_opening_notice', nextTextNumber: 1 }
+  }
+  if (/^这是[^。.!！?？\n]{1,100}听力部分[。. ]该部分分为第一[、,]第二两节[。.!！.]?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_opening_notice', kind: 'listening_opening_notice', nextTextNumber: 1 }
+  }
+  if (/^注意[,，]回答听力部分时[，,]请先将答案标在试卷上[。. ]听力部分结束前[,，]你将有(?:\d+|两)分钟(?:的)?时间将你的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！.]?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_answer_instruction', kind: 'listening_answer_instruction', nextTextNumber: 1 }
+  }
+  if (/^请看听力部分第一节[。.!！]?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_transition', kind: 'section_direction', nextTextNumber: 1 }
+  }
+  if (/^第一节[:：]听下面5段(录音|对话)[。.]每段\1后有一个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听完每段\1后[,，]你都有\d+秒钟的时间来回答有关小题和阅读下一小题[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_direction', kind: 'section_direction', nextTextNumber: 1 }
+  }
+  if (/^第二节[:：]听下面5段(录音|对话或独白)[。.]每段\1后有几个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听每段\1前[,，]你将有时间阅读各个小题[,，]每小题\d+秒钟[;；]听完后[,，](?:每小题都有|各小题将给出)\d+秒钟的作答时间[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_direction', kind: 'section_direction', nextTextNumber: 6 }
+  }
+  return null
+}
+
+function containsEmbeddedListeningCue(text) {
+  const value = normalized(text)
+  return /\(\s*(?:停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)|重复)\s*\)|听下面(?:(?:的)?录音|一段(?:对话|独白|对话或独白))[,，]回答第\d+|(?:第一节|第二节)(?:到此结束|[:：].*听下面5段)|听力部分到此结束|转涂到(?:客观题答题卡|答题纸|答题卡)/u.test(value)
+}
+
+function listeningItemRecord(item, index, documentId, disposition, reason, kind = null) {
+  const located = hasSourceLocator(documentId, item?.sourceIndex)
+  return {
+    sourceOrder: index,
+    itemKind: item?.kind || 'unknown',
+    text: typeof item?.text === 'string' ? item.text : null,
+    source: located ? sourceLocator(documentId, item.sourceIndex) : null,
+    disposition,
+    reason,
+    ...(kind ? { kind } : {}),
+  }
 }
 
 function addIssue(issues, code, path, message, source = null) {
@@ -533,7 +621,7 @@ function skeletonRole(text, index, givens) {
 }
 
 function writingGroup({ paperId, slotId, family, items, documentId, officialModelAnswer, issues }) {
-  let meaningful = items.filter((item) => item.kind !== 'paragraph' || normalized(item.text))
+  let meaningful = items.filter((item) => item.kind !== 'paragraph' || normalized(item.text) || item.containsDrawing)
   const promptItem = meaningful[0]
   const notice = writingNoticeGroup(meaningful.map(item => item.kind === 'paragraph' ? normalized(item.text) : ''))
   const noticeIndex = notice?.startIndex ?? -1
@@ -683,25 +771,41 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
   return answers
 }
 
-function writingSamplePosition(answerBody, pattern, from) {
-  return answerBody.flatMap((item, index) =>
-    index >= from
-      && item.kind === 'paragraph'
-      && pattern.test(normalized(item.text))
-      ? [index]
-      : [])
+function writingSamplePosition(answerBody, pattern, from, splitHeadingPattern = null) {
+  return answerBody.flatMap((item, index) => {
+    if (index < from || item.kind !== 'paragraph') return []
+    const text = normalized(item.text)
+    if (pattern.test(text)) return [index]
+    if (!splitHeadingPattern?.test(text)) return []
+    const next = answerBody.slice(index + 1).find(candidate =>
+      candidate.kind !== 'paragraph' || normalized(candidate.text))
+    return next?.kind === 'paragraph'
+      && /^(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?\s*[:：]?$/iu.test(normalized(next.text))
+      ? [index] : []
+  })
 }
 
 function writingSampleText(answerBody, from, to) {
+  // A source can put scoring prose/tables before the explicit sample label.
+  // Only that exact label establishes the sample start; do not infer it from
+  // English-looking text or discard scoring from the captured source stream.
+  const labels = answerBody.flatMap((item, index) => index >= from && index < to
+    && item.kind === 'paragraph'
+    && /^(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?\s*[:：]?$/iu.test(normalized(item.text)) ? [index] : [])
+  // A single label is not essay prose. Multiple labelled alternatives retain
+  // their labels and order rather than silently selecting one sample.
+  const start = labels.length ? labels[0] + (labels.length === 1 ? 1 : 0) : from
   const boundary = answerBody.findIndex((item, index) =>
-    index >= from
+    index >= start
       && index < to
       && item.kind === 'paragraph'
       && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
-        || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))))
+        || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
+        || LISTENING_TEXT_MARKER.test(normalized(item.text))
+        || listeningCue(item.text)))
   const end = boundary >= 0 ? boundary : to
   return answerBody
-    .slice(from, end)
+    .slice(start, end)
     .filter((item) => item.kind === 'paragraph' && normalized(item.text))
     .map((item) => trimEdgeSpaces(item.text))
     .join('\n')
@@ -739,11 +843,13 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     sampleBody,
     /^第一节(?:\s*[:：])?.*(?:应用文(?:写作)?|参考范文|One possible version)/iu,
     writingStart + 1,
+    /^第一节\s*(?:\(满分\s*15\s*分\))?\s*[:：]?$/u,
   )
   const continuationHeadings = writingSamplePosition(
     sampleBody,
     /^第二节(?:\s*[:：])?.*(?:读后续写|参考范文|One possible version)/iu,
     writingStart + 1,
+    /^第二节\s*(?:\(满分\s*25\s*分\))?\s*[:：]?$/u,
   )
   if (applicationHeadings.length !== 1 || continuationHeadings.length !== 1
     || applicationHeadings[0] >= continuationHeadings[0]) {
@@ -809,10 +915,20 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   )
   if (listeningHeading === null) {
     return {
-      state: 'not_supplied',
-      evidence: {
-        kind: 'question_source_reviewed_no_listening_content',
-        documentId: coverageDocumentId,
+      materialization: {
+        state: 'not_supplied',
+        evidence: {
+          kind: 'question_source_reviewed_no_listening_content',
+          documentId: coverageDocumentId,
+        },
+      },
+      partition: {
+        disposition: 'question_source_has_no_listening_section',
+        heading: null,
+        precedingContentBoundary: null,
+        openingPreamble: [],
+        segments: [],
+        trailingItems: [],
       },
     }
   }
@@ -841,29 +957,73 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   for (const item of questionBody.slice(listeningHeading + 1, readingStart)) {
     if (item.kind !== 'paragraph') continue
     const match = /回答第\s*(\d+)\s*(?:和|、|至|到|[-–—])\s*第?\s*(\d+)/u.exec(normalized(item.text))
-    if (match) ranges.push(Array.from(
-      { length: Number(match[2]) - Number(match[1]) + 1 },
-      (_, index) => Number(match[1]) + index,
-    ))
+    if (match) ranges.push({
+      questionNumbers: Array.from(
+        { length: Number(match[2]) - Number(match[1]) + 1 },
+        (_, index) => Number(match[1]) + index,
+      ),
+      item,
+    })
   }
-  const longRanges = ranges.filter((range) => range[0] >= 6)
-  if (longRanges.length !== 5 || longRanges.flat().join(',') !== Array.from({ length: 15 }, (_, index) => index + 6).join(',')) {
+  const longRanges = ranges.filter((range) => range.questionNumbers[0] >= 6)
+  const longQuestionNumbers = longRanges.flatMap((range) => range.questionNumbers)
+  if (longRanges.length !== 5
+    || longQuestionNumbers.join(',') !== Array.from({ length: 15 }, (_, index) => index + 6).join(',')) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_RANGES_AMBIGUOUS', 'listening.transcript',
       'Listening material ranges do not cover Questions 6-20 exactly once',
       sourceRef(questionDocumentId))
   }
-  const transcriptHeading = answerBody.findIndex((item) =>
-    item.kind === 'paragraph' && LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text)))
-  const analysis = answerBody.findIndex((item, index) =>
-    index > transcriptHeading && isAnswerExplanationHeading(item))
-  if (transcriptHeading < 0) {
+  const firstMarkerIndex = answerBody.findIndex((item) =>
+    item.kind === 'paragraph' && LISTENING_TEXT_MARKER.test(normalized(item.text)))
+  const headingIndexes = answerBody.flatMap((item, index) =>
+    index < firstMarkerIndex
+      && item.kind === 'paragraph' && LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
+      ? [index]
+      : [])
+  const markers = answerBody.flatMap((item, index) => {
+    const match = item.kind === 'paragraph'
+      ? LISTENING_TEXT_MARKER.exec(normalized(item.text))
+      : null
+    return match ? [{ number: Number(match[1] || match[2]), index, item }] : []
+  })
+  const runIsOrdered = markers.length === 10
+    && markers.every((marker, index) => marker.number === index + 1)
+  if (!runIsOrdered) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
-      'Official answer source does not close a Listening transcript section',
-      sourceRef(answerDocumentId))
+      `Expected one unique ordered Text 1-10 run; found ${markers.map((marker) => marker.number).join(',') || 'none'}`,
+      sourceRef(answerDocumentId, markers[0]?.item?.sourceIndex))
   }
-  const transcriptEnd = analysis < 0 ? answerBody.length : analysis
+  if (headingIndexes.length > 1) {
+    addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
+      `Expected zero or one standalone Listening transcript title; found ${headingIndexes.length}`,
+      sourceRef(answerDocumentId, answerBody[headingIndexes[1]]?.sourceIndex))
+  }
+  const headingIndex = headingIndexes.length === 1 ? headingIndexes[0] : -1
+  if (headingIndex >= 0 && markers.some((marker) => marker.index < headingIndex)) {
+    addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
+      'A Text marker precedes the standalone Listening transcript title',
+      sourceRef(answerDocumentId, answerBody[headingIndex]?.sourceIndex))
+  }
+  const lastMarkerIndex = markers.at(-1)?.index ?? -1
+  const analysis = lastMarkerIndex < 0 ? -1 : answerBody.findIndex((item, index) =>
+    index > lastMarkerIndex && isAnswerExplanationHeading(item))
+  const listeningEndIndexes = lastMarkerIndex < 0 ? [] : answerBody.flatMap((item, index) =>
+    index > lastMarkerIndex && item.kind === 'paragraph'
+      && listeningCue(item.text)?.kind === 'listening_end'
+      ? [index]
+      : [])
+  const terminalIndex = listeningEndIndexes.length === 1 ? listeningEndIndexes[0] : -1
+  const analysisBeforeEnd = analysis >= 0 && (terminalIndex < 0 || analysis < terminalIndex)
+  const transcriptEnd = terminalIndex >= 0 && !analysisBeforeEnd
+    ? terminalIndex + 1
+    : analysis >= 0 ? analysis : answerBody.length
+  if (listeningEndIndexes.length > 1) {
+    addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
+      'Listening source contains duplicate end cues',
+      sourceRef(answerDocumentId, answerBody[lastMarkerIndex]?.sourceIndex))
+  }
   const timingSourceIndexes = new Set(answerBody
-    .slice(Math.max(0, transcriptHeading + 1), transcriptEnd)
+    .slice(Math.max(0, markers[0]?.index ?? 0), transcriptEnd)
     .filter((item) => item.kind === 'paragraph'
       && /(?:分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*(?:sec(?:ond)?s?|wpm)\b)/iu
         .test(normalized(item.text)))
@@ -873,36 +1033,264 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       'Source-provided Listening duration or speed data requires exact Agent transcription',
       sourceRef(answerDocumentId, [...timingSourceIndexes][0]))
   }
-  const markers = []
-  for (let index = transcriptHeading + 1; index < transcriptEnd; index += 1) {
-    const match = answerBody[index]?.kind === 'paragraph'
-      ? /^Text\s*(\d{1,2})$/iu.exec(normalized(answerBody[index].text))
-      : null
-    if (match) markers.push({ number: Number(match[1]), index })
-  }
-  if (markers.length !== 10 || markers.some((marker, index) => marker.number !== index + 1)) {
-    addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
-      `Expected Text 1-10 exactly once; found ${markers.length}`, sourceRef(answerDocumentId))
-  }
-  const transcript = markers.map((marker, index) => {
-    const paragraphs = answerBody.slice(marker.index + 1, markers[index + 1]?.index ?? transcriptEnd)
-      .filter((item) => item.kind === 'paragraph'
-        && normalized(item.text)
-        && !timingSourceIndexes.has(item.sourceIndex))
-    return {
-      segmentId: `listening-text-${marker.number}`,
-      text: paragraphs.map((item) => trimEdgeSpaces(item.text)).join('\n'),
-      questionNumbers: marker.number <= 5 ? [marker.number] : longRanges[marker.number - 6] || [],
-      source: sourceLocator(answerDocumentId, paragraphs[0]?.sourceIndex || marker.number),
+
+  let precedingBoundaryIndex = headingIndex >= 0 ? headingIndex : markers[0]?.index - 1
+  const openingPreambleIndexes = []
+  if (markers[0]) {
+    let cursor = markers[0].index - 1
+    if (headingIndex >= 0) {
+      for (let index = headingIndex + 1; index < markers[0].index; index += 1) {
+        openingPreambleIndexes.push(index)
+      }
+    } else {
+      while (cursor >= 0) {
+        const item = answerBody[cursor]
+        const cue = item?.kind === 'paragraph' ? listeningCue(item.text) : null
+        if (!cue && !(item?.kind === 'paragraph' && !normalized(item.text))) break
+        openingPreambleIndexes.unshift(cursor)
+        cursor -= 1
+      }
+      precedingBoundaryIndex = cursor
     }
-  })
+  }
+  if (headingIndex < 0 && precedingBoundaryIndex >= 0
+    && !/^略[。. ]?$/u.test(normalized(answerBody[precedingBoundaryIndex]?.text))) {
+    addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
+      'Headingless Listening needs a closed preceding answer boundary; unknown preamble text cannot be discarded',
+      sourceRef(answerDocumentId, answerBody[precedingBoundaryIndex]?.sourceIndex))
+  }
+  const precedingBoundary = precedingBoundaryIndex >= 0
+    ? listeningItemRecord(answerBody[precedingBoundaryIndex], precedingBoundaryIndex,
+      answerDocumentId, 'preceding_content_boundary',
+      headingIndex >= 0 ? 'explicit_source_transcript_title' : 'last_source_item_before_bounded_marker_preamble')
+    : null
+  const recordPreambleItem = (index) => {
+    const item = answerBody[index]
+    const cue = item?.kind === 'paragraph' ? listeningCue(item.text) : null
+    const empty = item?.kind === 'paragraph' && !normalized(item.text)
+    const supported = Boolean(cue || empty)
+    if (!supported || !hasSourceLocator(answerDocumentId, item?.sourceIndex)) {
+      addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
+        !supported
+          ? 'Unrecognized source content occurs between the transcript boundary and Text 1'
+          : 'A preamble source item has no exact source locator',
+        sourceRef(answerDocumentId, item?.sourceIndex))
+    }
+    const record = listeningItemRecord(item, index, answerDocumentId,
+      cue?.disposition || (empty ? 'empty_separator' : 'unresolved'),
+      cue?.reason || (empty ? 'source_blank_paragraph' : 'unrecognized_preamble_content'), cue?.kind)
+    return record
+  }
+  const openingPreamble = openingPreambleIndexes.map(recordPreambleItem)
+  for (const record of openingPreamble) {
+    const cue = listeningCue(record.text)
+    if (cue && Object.hasOwn(cue, 'nextTextNumber') && cue.nextTextNumber !== markers[0]?.number) {
+      addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
+        'A section or end cue occurs in the opening preamble at the wrong source boundary',
+        record.source ? sourceRef(answerDocumentId, record.source) : sourceRef(answerDocumentId))
+    }
+    if (!cue?.questionNumbers) continue
+    const expectedNumbers = markers[0]
+      ? markers[0].number <= 5
+        ? [markers[0].number]
+        : longRanges[markers[0].number - 6]?.questionNumbers || []
+      : []
+    const actualNumbers = listeningCue(record.text)?.questionNumbers || []
+    if (!markers[0] || digestJson(actualNumbers) !== digestJson(expectedNumbers)
+      || actualNumbers.some((number) => !questions.some((question) => question.canonicalNumber === number))) {
+      addIssue(issues, 'NCK1_DOCX_LISTENING_ANNOUNCEMENT_RANGE_AMBIGUOUS', 'listening.transcript',
+        'An opening question announcement does not match Text 1 and its source question range',
+        record.source ? sourceRef(answerDocumentId, record.source) : sourceRef(answerDocumentId))
+    }
+  }
+  const transcript = []
+  const segmentRecords = []
+  const inspectItem = (item, index, nextMarker) => {
+    if (item?.kind !== 'paragraph') {
+      addIssue(issues, 'NCK1_DOCX_LISTENING_MIXED_CONTENT_AMBIGUOUS', 'listening.transcript',
+        'Listening source contains a table or unsupported mixed content inside the marker-bounded region',
+        sourceRef(answerDocumentId, item?.sourceIndex))
+      const record = listeningItemRecord(item, index, answerDocumentId, 'unresolved',
+        'unsupported_mixed_source_item')
+      return { record, text: null }
+    }
+    const text = typeof item.text === 'string' ? trimEdgeSpaces(item.text) : ''
+    if (timingSourceIndexes.has(item.sourceIndex)) {
+      const record = listeningItemRecord(item, index, answerDocumentId,
+        'unresolved_source_timing', 'timing_requires_exact_agent_transcription')
+      return { record, text: null }
+    }
+    const cue = listeningCue(text)
+    if (cue) {
+      if (Object.hasOwn(cue, 'nextTextNumber') && cue.nextTextNumber !== (nextMarker?.number ?? null)) {
+        addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
+          'A section or end cue does not match its source Text boundary',
+          sourceRef(answerDocumentId, item.sourceIndex))
+      }
+      if (cue.questionNumbers) {
+        const expectedMarker = nextMarker
+        const expectedNumbers = expectedMarker
+          ? expectedMarker.number <= 5
+            ? [expectedMarker.number]
+            : longRanges[expectedMarker.number - 6]?.questionNumbers || []
+          : []
+        const sourceQuestionsExist = cue.questionNumbers.every((number) =>
+          questions.some((question) => question.canonicalNumber === number))
+        if (!expectedMarker || !sourceQuestionsExist
+          || digestJson(cue.questionNumbers) !== digestJson(expectedNumbers)) {
+          addIssue(issues, 'NCK1_DOCX_LISTENING_ANNOUNCEMENT_RANGE_AMBIGUOUS', 'listening.transcript',
+            'A standalone question announcement does not match the next Text segment and source question range',
+            sourceRef(answerDocumentId, item.sourceIndex))
+        }
+      }
+      if (!hasSourceLocator(answerDocumentId, item.sourceIndex)) {
+        addIssue(issues, 'NCK1_DOCX_LISTENING_SOURCE_LOCATOR_MISSING', 'listening.transcript',
+          'A standalone broadcast item has no exact source locator',
+          sourceRef(answerDocumentId, item.sourceIndex))
+      }
+      const record = listeningItemRecord(item, index, answerDocumentId,
+        cue.disposition, cue.reason, cue.kind)
+      return { record, text: null }
+    }
+    if (!normalized(text)) {
+      const record = listeningItemRecord(item, index, answerDocumentId,
+        'empty_separator', 'source_blank_paragraph')
+      return { record, text: null }
+    }
+    if (containsEmbeddedListeningCue(text)) {
+      addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
+        'A possible exam cue is embedded in a source speech item and cannot be safely separated',
+        sourceRef(answerDocumentId, item.sourceIndex))
+    }
+    if (!hasSourceLocator(answerDocumentId, item.sourceIndex)) {
+      addIssue(issues, 'NCK1_DOCX_LISTENING_SOURCE_LOCATOR_MISSING', 'listening.transcript',
+        'A transcript source item has no exact source locator',
+        sourceRef(answerDocumentId, item.sourceIndex))
+    }
+    const record = listeningItemRecord(item, index, answerDocumentId,
+      'retained_question_bearing_speech', 'not_an_anchored_standalone_exam_cue', 'dialogue_or_monologue')
+    return { record, text }
+  }
+  if (runIsOrdered && markers.every((marker) => marker.index < transcriptEnd)
+    && (headingIndex < 0 || headingIndex < markers[0].index)) {
+    for (const [segmentIndex, marker] of markers.entries()) {
+      const nextMarker = markers[segmentIndex + 1] || null
+      const boundary = nextMarker?.index ?? transcriptEnd
+      const bodyTexts = []
+      const bodyRecords = []
+      let broadcastStarted = false
+      for (let index = marker.index + 1; index < boundary; index += 1) {
+        const inspected = inspectItem(answerBody[index], index, nextMarker)
+        bodyRecords.push(inspected.record)
+        if (inspected.record.disposition === 'excluded_exam_broadcast') {
+          if (bodyTexts.length === 0) {
+            addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
+              'A broadcast cannot be excluded before a nonempty question-bearing body',
+              sourceRef(answerDocumentId, answerBody[index].sourceIndex))
+          }
+          broadcastStarted = true
+        } else if (inspected.text !== null && broadcastStarted) {
+          addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
+            'Speech resumes after an apparent broadcast; the boundary is not proven',
+            sourceRef(answerDocumentId, answerBody[index].sourceIndex))
+        }
+        if (inspected.text !== null) bodyTexts.push(inspected.text)
+      }
+      const questionNumbers = marker.number <= 5
+        ? [marker.number]
+        : longRanges[marker.number - 6]?.questionNumbers || []
+      const markerRecord = listeningItemRecord(marker.item, marker.index, answerDocumentId,
+        'segment_boundary', 'exact_ordered_text_marker', 'text_marker')
+      const text = bodyTexts.join('\n')
+      if (!normalized(text)) {
+        addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
+          `Text ${marker.number} has no nonempty retained transcript body`,
+          sourceRef(answerDocumentId, marker.item?.sourceIndex))
+      }
+      if (!hasSourceLocator(answerDocumentId, marker.item?.sourceIndex)) {
+        addIssue(issues, 'NCK1_DOCX_LISTENING_SOURCE_LOCATOR_MISSING', 'listening.transcript',
+          `Text ${marker.number} marker has no exact source locator`,
+          sourceRef(answerDocumentId, marker.item?.sourceIndex))
+      }
+      const firstBodyItem = answerBody.slice(marker.index + 1, boundary).find((item) =>
+        item.kind === 'paragraph' && normalized(item.text)
+          && !listeningCue(item.text) && !timingSourceIndexes.has(item.sourceIndex)
+          && hasSourceLocator(answerDocumentId, item.sourceIndex))
+      transcript.push({
+        segmentId: `listening-text-${marker.number}`,
+        text,
+        questionNumbers,
+        ...(firstBodyItem ? { source: sourceLocator(answerDocumentId, firstBodyItem.sourceIndex) } : {}),
+      })
+      segmentRecords.push({
+        textNumber: marker.number,
+        questionNumbers,
+        previousTextMarker: segmentIndex > 0
+          ? listeningItemRecord(markers[segmentIndex - 1].item, markers[segmentIndex - 1].index,
+              answerDocumentId, 'segment_boundary', 'previous_ordered_text_marker', 'text_marker')
+          : null,
+        textMarker: markerRecord,
+        nextTextMarker: nextMarker
+          ? listeningItemRecord(nextMarker.item, nextMarker.index,
+              answerDocumentId, 'segment_boundary', 'next_ordered_text_marker', 'text_marker')
+          : null,
+        bodyItems: bodyRecords,
+        textDigest: digestJson(text),
+      })
+    }
+  }
+  const trailingItems = []
+  const trailingEnd = analysis >= 0 ? analysis : answerBody.length
+  if (terminalIndex >= 0) {
+    for (let index = terminalIndex + 1; index < trailingEnd; index += 1) {
+      const item = answerBody[index]
+      const isBlank = item?.kind === 'paragraph' && !normalized(item.text)
+      if (!isBlank) {
+        addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
+          'Source content follows the listening end boundary without a proven new section',
+          sourceRef(answerDocumentId, item?.sourceIndex))
+      }
+      trailingItems.push(listeningItemRecord(item, index, answerDocumentId,
+        isBlank ? 'empty_separator' : 'unresolved',
+        isBlank ? 'source_blank_paragraph' : 'unclosed_source_tail'))
+    }
+  }
+  const partition = {
+    disposition: headingIndex >= 0 ? 'explicit_transcript_title' : 'headingless_ordered_text_markers',
+    heading: headingIndex >= 0
+      ? listeningItemRecord(answerBody[headingIndex], headingIndex, answerDocumentId,
+          'transcript_boundary', 'explicit_standalone_source_title', 'transcript_title')
+      : null,
+    precedingContentBoundary: precedingBoundary,
+    openingPreamble,
+    questionSourceRanges: ranges.map(({ questionNumbers, item }) => ({
+      questionNumbers,
+      source: hasSourceLocator(questionDocumentId, item.sourceIndex)
+        ? sourceLocator(questionDocumentId, item.sourceIndex)
+        : null,
+    })),
+    segments: segmentRecords,
+    analysisBoundary: analysis >= 0
+      ? listeningItemRecord(answerBody[analysis], analysis, answerDocumentId,
+          'source_section_boundary', 'answer_analysis_begins_after_transcript')
+      : null,
+    listeningEndBoundary: terminalIndex >= 0
+      ? listeningItemRecord(answerBody[terminalIndex], terminalIndex, answerDocumentId,
+          'source_section_boundary', 'anchored_listening_end_cue', 'listening_end')
+      : null,
+    ...(terminalIndex < 0 && analysis < 0 ? { endBoundary: 'source_document_end' } : {}),
+    trailingItems,
+  }
   return {
-    state: 'captured', questions, answers, transcript,
-    timing: section1Once ? [{
-      kind: 'section1_playback',
-      passes: 1,
-      source: sourceLocator(questionDocumentId, section1Once.sourceIndex),
-    }] : [],
+    materialization: {
+      state: 'captured', questions, answers, transcript,
+      timing: section1Once ? [{
+        kind: 'section1_playback',
+        passes: 1,
+        source: sourceLocator(questionDocumentId, section1Once.sourceIndex),
+      }] : [],
+    },
+    partition,
   }
 }
 
@@ -1209,13 +1597,27 @@ export function produceNck1MaterializationFromStructures({
         : []),
     ],
   }
-  const listening = !question || !answer || readingStart === null
-    ? { state: 'not_supplied', evidence: { kind: 'question_source_reviewed_no_listening_content', documentId: sourceCoverage.documentId } }
+  const listeningResult = !question || !answer || readingStart === null
+    ? {
+        materialization: {
+          state: 'not_supplied',
+          evidence: { kind: 'question_source_reviewed_no_listening_content', documentId: sourceCoverage.documentId },
+        },
+        partition: {
+          disposition: 'listening_source_boundary_not_evaluated',
+          heading: null,
+          precedingContentBoundary: null,
+          openingPreamble: [],
+          segments: [],
+          trailingItems: [],
+        },
+      }
     : listeningMaterialization({
         paperId, questionBody: body, readingStart, answerBody, answerMap,
         questionDocumentId: question.documentId, answerDocumentId: answer.documentId,
         coverageDocumentId: sourceCoverage.documentId, issues,
       })
+  const listening = listeningResult.materialization
   const materialization = {
     schemaVersion: selectedMedia.length > 0
       ? 'nck1-source-materialization-v2'
@@ -1236,6 +1638,22 @@ export function produceNck1MaterializationFromStructures({
     }
     materialization.issues = carrierIssues(issues, codePrefix)
   }
+  const listeningSourcePartition = {
+    schemaVersion: 'nck1-listening-source-partition-v1',
+    paperId,
+    producerVersion,
+    producerSourceDigest: sourceDigest,
+    sourceDocuments: documents.map((document) => ({
+      documentId: document.documentId,
+      role: document.role,
+      sha256: document.sha256,
+      byteLength: document.byteLength,
+    })),
+    ...listeningResult.partition,
+    originalMaterializationOutputDigest: sha256(
+      new TextEncoder().encode(`${JSON.stringify(materialization, null, 2)}\n`),
+    ),
+  }
   const required = carrierIssues(issues, codePrefix)
   return {
     disposition: issues.length === 0 ? 'ready_for_verification' : 'needs_agent_review',
@@ -1247,6 +1665,7 @@ export function produceNck1MaterializationFromStructures({
       producerVersion,
       sourceDigest,
       required,
+      listeningSourcePartition,
       agentTasks: [
         ...SLOT_SPECS.map(([slotId]) => ({
           kind: 'reading_source_roles', slotId, parallelizableRead: true,

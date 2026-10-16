@@ -127,7 +127,7 @@ function replayCanonicalVisibleTypographyV2(value) {
   return output
 }
 
-function replayCanonicalVisibleTypographyV3(value) {
+function replayCanonicalVisibleTypographyV3(value, preserveTerminalSeparator = false) {
   if (typeof value !== 'string') return value
   const horizontalSpace = char => char === ' ' || char === '\t'
   const punctuation = new Set('…，、；：。！？—·“”‘’「」《》〈〉.,;:!?-')
@@ -168,7 +168,7 @@ function replayCanonicalVisibleTypographyV3(value) {
     while (horizontalSpace(value[end])) end++
     const next = value[end] ?? ''
     const suffix = isAsciiLetter(next) || /^[0-9]$/.test(next) ? ' '
-      : next === '' || isAsciiPunctuation(next) ? '' : value.slice(close + 1, end)
+      : (!preserveTerminalSeparator && next === '') || isAsciiPunctuation(next) ? '' : value.slice(close + 1, end)
     output += `${value.slice(start, wordEnd)} (${value.slice(innerStart, innerEnd)})${suffix}`
     start = end - 1
   }
@@ -186,6 +186,9 @@ export function replayCanonicalVisibleTypography(value, ruleVersion = '2') {
   }
   if (ruleVersion === '3') {
     return replayCanonicalVisibleTypographyV3(value)
+  }
+  if (ruleVersion === '4') {
+    return replayCanonicalVisibleTypographyV3(value, true)
   }
   return undefined
 }

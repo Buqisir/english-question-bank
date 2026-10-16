@@ -5,6 +5,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { configuredBlobStore } from './blobStore.mjs'
+import { listeningReviewPrintNeutralPaths } from './listeningReview.mjs'
 
 export const PRODUCT_MANIFEST = 'products/manifest-v1.json'
 export const PRODUCT_FILES = Object.keys(PAPER_PDF_PRODUCTS).map(edition => ({
@@ -24,8 +25,9 @@ function reject(message) {
   throw Object.assign(new Error(`固定 PDF 产品不可用：${message}`), { code: 'FROZEN_PRODUCTS_INVALID', status: 409 })
 }
 
-export function productInputDigest(rootDir, files) {
-  return digestJson(files.filter(file => !file.path.startsWith('products/')).map(file => {
+export function productInputDigest(rootDir, files, reviewedListening = null) {
+  const printNeutral = listeningReviewPrintNeutralPaths(reviewedListening)
+  return digestJson(files.filter(file => !file.path.startsWith('products/') && !printNeutral.has(file.path)).map(file => {
     const bytes = readFileSync(path.join(rootDir, file.path))
     return { ...file, sha256: sha256(bytes), byteLength: bytes.length }
   }).sort((a, b) => a.path.localeCompare(b.path)))
@@ -33,7 +35,8 @@ export function productInputDigest(rootDir, files) {
 
 // The manifest is itself an uploaded, approval-bound Review file. The input
 // digest excludes products, avoiding a circular digest and binding config,
-// source documents, answer references, pagination and all other Review inputs.
+// source documents, answer references, pagination and all other print inputs.
+// Only a validated navigation review may exclude its exact private evidence.
 export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, required = false, readArtifact = null } = {}) {
   const read = readArtifact || (relative => {
     const file = path.join(rootDir, relative)

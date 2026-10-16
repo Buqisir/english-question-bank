@@ -61,6 +61,27 @@ import manifestV60 from '../../standards/paper-canonical/manifest-v60.json' with
 import manifestV61 from '../../standards/paper-canonical/manifest-v61.json' with { type: 'json' }
 import manifestV62 from '../../standards/paper-canonical/manifest-v62.json' with { type: 'json' }
 import manifestV63 from '../../standards/paper-canonical/manifest-v63.json' with { type: 'json' }
+import manifestV64 from '../../standards/paper-canonical/manifest-v64.json' with { type: 'json' }
+import manifestV65 from '../../standards/paper-canonical/manifest-v65.json' with { type: 'json' }
+import manifestV66 from '../../standards/paper-canonical/manifest-v66.json' with { type: 'json' }
+import manifestV67 from '../../standards/paper-canonical/manifest-v67.json' with { type: 'json' }
+import manifestV68 from '../../standards/paper-canonical/manifest-v68.json' with { type: 'json' }
+import reportV68Schema from '../../schemas/paper-canonical/normalization-report-v68.schema.json' with { type: 'json' }
+import publicationV68Schema from '../../schemas/paper-canonical/canonical-paper-publication-v68.schema.json' with { type: 'json' }
+import listeningInstructionCorrectionSchema from '../../schemas/paper-canonical/listening-instruction-correction-v1.schema.json' with { type: 'json' }
+import sourceAdaptersV23 from '../../standards/paper-canonical/adapters/source-adapters-v23.json' with { type: 'json' }
+import reportV67Schema from '../../schemas/paper-canonical/normalization-report-v67.schema.json' with { type: 'json' }
+import publicationV67Schema from '../../schemas/paper-canonical/canonical-paper-publication-v67.schema.json' with { type: 'json' }
+import sourceAdaptersV22 from '../../standards/paper-canonical/adapters/source-adapters-v22.json' with { type: 'json' }
+import richContentV4 from '../../standards/paper-canonical/core/rich-content-v4.json' with { type: 'json' }
+import richContentV4Schema from '../../schemas/paper-canonical/rich-content-v4.schema.json' with { type: 'json' }
+import reportV66Schema from '../../schemas/paper-canonical/normalization-report-v66.schema.json' with { type: 'json' }
+import publicationV66Schema from '../../schemas/paper-canonical/canonical-paper-publication-v66.schema.json' with { type: 'json' }
+import reportV64Schema from '../../schemas/paper-canonical/normalization-report-v64.schema.json' with { type: 'json' }
+import publicationV64Schema from '../../schemas/paper-canonical/canonical-paper-publication-v64.schema.json' with { type: 'json' }
+import sourceAdaptersV21 from '../../standards/paper-canonical/adapters/source-adapters-v21.json' with { type: 'json' }
+import applicationPromptFiguresV1 from '../../standards/paper-canonical/rendering/application-writing-prompt-figures-v1.json' with { type: 'json' }
+import applicationPromptFiguresV1Schema from '../../schemas/paper-canonical/application-writing-prompt-figures-v1.schema.json' with { type: 'json' }
 import reportV62Schema from '../../schemas/paper-canonical/normalization-report-v62.schema.json' with { type: 'json' }
 import publicationV62Schema from '../../schemas/paper-canonical/canonical-paper-publication-v62.schema.json' with { type: 'json' }
 import sourceAdaptersV20 from '../../standards/paper-canonical/adapters/source-adapters-v20.json' with { type: 'json' }
@@ -82,6 +103,8 @@ import richContentV2 from '../../standards/paper-canonical/core/rich-content-v2.
 import richContentV2Schema from '../../schemas/paper-canonical/rich-content-v2.schema.json' with { type: 'json' }
 import normalizationV6 from '../../standards/paper-canonical/normalization/normalization-rules-v6.json' with { type: 'json' }
 import normalizationV6Schema from '../../schemas/paper-canonical/normalization-rules-v6.schema.json' with { type: 'json' }
+import normalizationV7 from '../../standards/paper-canonical/normalization/normalization-rules-v7.json' with { type: 'json' }
+import normalizationV7Schema from '../../schemas/paper-canonical/normalization-rules-v7.schema.json' with { type: 'json' }
 import reportV57Schema from '../../schemas/paper-canonical/normalization-report-v57.schema.json' with { type: 'json' }
 import publicationV57Schema from '../../schemas/paper-canonical/canonical-paper-publication-v57.schema.json' with { type: 'json' }
 import paperPresentationV1 from '../../standards/paper-canonical/rendering/paper-presentation-v1.json' with { type: 'json' }
@@ -1306,7 +1329,7 @@ function validateSevenChoicesRhythm(artifact) {
 }
 
 function validateClozeRhythm(artifact, manifestVersion) {
-  const expected = ['60', '63'].includes(manifestVersion)
+  const expected = ['60', '63', '65'].includes(manifestVersion)
     ? clozeRhythmV5
     : Number(manifestVersion) >= 33
     ? clozeRhythmV4
@@ -1444,7 +1467,7 @@ export function validateAuthorityClosure({
   const issues = []
   // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1504,7 +1527,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1680,7 +1703,7 @@ export function validateAuthorityClosure({
       ))
     }
     if (
-      coreArtifact?.groupSchemaId !== (['62', '63'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
+      coreArtifact?.groupSchemaId !== (['62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
       || !schemaById.has(coreArtifact.groupSchemaId)
     ) {
       issues.push(issue(
@@ -1699,7 +1722,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -1761,7 +1784,7 @@ export function validateAuthorityClosure({
       ))
     }
   }
-  if (['55', '56', '60', '63'].includes(candidateManifest?.version)) {
+  if (['55', '56', '60', '63', '65'].includes(candidateManifest?.version)) {
     const adapter = Object.values(artifacts || {}).find(
       (artifact) => artifact?.owner === 'source_adapter',
     )
@@ -2106,6 +2129,14 @@ const artifactsV59 = { ...artifactsV58, 'renderer-typography': typographyV11 }
 const artifactsV61 = { ...artifactsV59, adapter: sourceAdaptersV19, 'rich-content': richContentV3 }
 const artifactsV62 = { ...artifactsV61, adapter: sourceAdaptersV20, core: coreV3 }
 const artifactsV63 = { ...artifactsV60, core: coreV3 }
+// Raw admission successor: materialization adapter behavior v6 admits
+// source-backed figures in Application Writing prompts.
+const artifactsV64 = { ...artifactsV62, adapter: sourceAdaptersV21 }
+// Presentation successor: renderer-owned prompt-figure capability.
+const artifactsV65 = { ...artifactsV63, 'renderer-application-writing-prompt-figures': applicationPromptFiguresV1 }
+const artifactsV66 = { ...artifactsV64, normalization: normalizationV7 }
+const artifactsV67 = { ...artifactsV66, adapter: sourceAdaptersV22, 'rich-content': richContentV4 }
+const artifactsV68 = { ...artifactsV67, adapter: sourceAdaptersV23 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2746,6 +2777,37 @@ const schemasV63 = {
   'core-invariants-v3': coreV3Schema,
   'canonical-question-group-v3': groupV3Schema,
 }
+const schemasV64 = {
+  ...Object.fromEntries(Object.entries(schemasV62).filter(([id]) =>
+    !['normalization-report-v62', 'canonical-paper-publication-v62'].includes(id))),
+  'normalization-report-v64': reportV64Schema,
+  'canonical-paper-publication-v64': publicationV64Schema,
+}
+const schemasV65 = {
+  ...schemasV63,
+  'application-writing-prompt-figures-v1': applicationPromptFiguresV1Schema,
+}
+const schemasV66 = {
+  ...Object.fromEntries(Object.entries(schemasV64).filter(([id]) =>
+    !['normalization-rules-v6', 'normalization-report-v64', 'canonical-paper-publication-v64'].includes(id))),
+  'normalization-rules-v7': normalizationV7Schema,
+  'normalization-report-v66': reportV66Schema,
+  'canonical-paper-publication-v66': publicationV66Schema,
+}
+const schemasV67 = {
+  ...Object.fromEntries(Object.entries(schemasV66).filter(([id]) =>
+    !['rich-content-v3', 'normalization-report-v66', 'canonical-paper-publication-v66'].includes(id))),
+  'rich-content-v4': richContentV4Schema,
+  'normalization-report-v67': reportV67Schema,
+  'canonical-paper-publication-v67': publicationV67Schema,
+}
+const schemasV68 = {
+  ...Object.fromEntries(Object.entries(schemasV67).filter(([id]) =>
+    !['normalization-report-v67', 'canonical-paper-publication-v67'].includes(id))),
+  'listening-instruction-correction-v1': listeningInstructionCorrectionSchema,
+  'normalization-report-v68': reportV68Schema,
+  'canonical-paper-publication-v68': publicationV68Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2866,6 +2928,11 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV61, artifacts: artifactsV61, schemas: schemasV61 }),
   validateAuthorityClosure({ manifest: manifestV62, artifacts: artifactsV62, schemas: schemasV62 }),
   validateAuthorityClosure({ manifest: manifestV63, artifacts: artifactsV63, schemas: schemasV63 }),
+  validateAuthorityClosure({ manifest: manifestV64, artifacts: artifactsV64, schemas: schemasV64 }),
+  validateAuthorityClosure({ manifest: manifestV65, artifacts: artifactsV65, schemas: schemasV65 }),
+  validateAuthorityClosure({ manifest: manifestV66, artifacts: artifactsV66, schemas: schemasV66 }),
+  validateAuthorityClosure({ manifest: manifestV67, artifacts: artifactsV67, schemas: schemasV67 }),
+  validateAuthorityClosure({ manifest: manifestV68, artifacts: artifactsV68, schemas: schemasV68 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2944,6 +3011,11 @@ const authorities = [
   { manifest: manifestV61, artifacts: artifactsV61, schemas: schemasV61 },
   { manifest: manifestV62, artifacts: artifactsV62, schemas: schemasV62 },
   { manifest: manifestV63, artifacts: artifactsV63, schemas: schemasV63 },
+  { manifest: manifestV64, artifacts: artifactsV64, schemas: schemasV64 },
+  { manifest: manifestV65, artifacts: artifactsV65, schemas: schemasV65 },
+  { manifest: manifestV66, artifacts: artifactsV66, schemas: schemasV66 },
+  { manifest: manifestV67, artifacts: artifactsV67, schemas: schemasV67 },
+  { manifest: manifestV68, artifacts: artifactsV68, schemas: schemasV68 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2955,13 +3027,18 @@ export const canonicalAuthorityRef = authorities.find((authority) => authority.m
 // Ticket 25 can derive and confirm source-bound candidates under v37 without
 // advancing publication/current authority beyond the existing v36 closure.
 export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '37').authorityRef
-// New raw imports use gloss v3; confirmed v54 bytes keep their original replay.
+// New raw imports use gloss v4; retained authorities keep their original replay.
 export const nck1MaterializationHistoricalAuthorityRef54 = authorities.find((authority) => authority.manifest.version === '54').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef57 = authorities.find((authority) => authority.manifest.version === '57').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef58 = authorities.find((authority) => authority.manifest.version === '58').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef59 = authorities.find((authority) => authority.manifest.version === '59').authorityRef
 export const nck1MaterializationHistoricalAuthorityRef61 = authorities.find((authority) => authority.manifest.version === '61').authorityRef
-export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '62').authorityRef
+export const nck1MaterializationHistoricalAuthorityRef62 = authorities.find((authority) => authority.manifest.version === '62').authorityRef
+export const nck1MaterializationHistoricalAuthorityRef64 = authorities.find((authority) => authority.manifest.version === '64').authorityRef
+export const nck1MaterializationHistoricalAuthorityRef66 = authorities.find((authority) => authority.manifest.version === '66').authorityRef
+export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '67').authorityRef
+// Only inputs carrying the audited listening correction select this successor.
+export const nck1ListeningInstructionAuthorityRef = authorities.find((authority) => authority.manifest.version === '68').authorityRef
 // Analyzed packages are a distinct captured-source protocol. They may not enter
 // the immutable raw-materialization v54 adapter registry or confirmation lane.
 export const nck1AnalyzedPackageCandidateAuthorityRef55 = authorities.find((authority) => authority.manifest.version === '55').authorityRef
@@ -2997,6 +3074,25 @@ export function resolveCanonicalAuthority(authorityRef) {
       schemas: authority.schemas,
     }),
   }
+}
+
+// Raw admission capability: only a closure whose Source Adapters bind
+// nck1-source-materialization behavior v6 may admit Application Writing
+// prompt figures. Older raw closures keep paragraph-only admission.
+export function closureAdmitsApplicationPromptFigures(closure) {
+  return closure?.artifacts?.adapter?.adapters?.some((adapter) =>
+    adapter?.adapterId === 'nck1-source-materialization' && adapter.version === '6') === true
+}
+
+export function authorityAdmitsApplicationPromptFigures(authorityRef) {
+  const resolved = resolveCanonicalAuthority(authorityRef)
+  return resolved.ok && closureAdmitsApplicationPromptFigures(resolved.closure)
+}
+
+// Consumer capability: renderer-owned artifact in the consumer's own closure.
+export function closureRendersApplicationPromptFigures(closure) {
+  return digestJson(closure?.artifacts?.['renderer-application-writing-prompt-figures'] ?? null)
+    === digestJson(applicationPromptFiguresV1)
 }
 
 export function authorityRefForManifestDigest(manifestDigest) {

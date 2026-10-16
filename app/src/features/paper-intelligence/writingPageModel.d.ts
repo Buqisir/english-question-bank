@@ -33,6 +33,7 @@ export type WritingGivenPart =
         kind: 'text'
         nodeId: string
         text: string
+        marks?: ReadonlyArray<'bold' | 'underline'>
       }>
     }
   | {
@@ -44,6 +45,7 @@ export type WritingGivenPart =
         kind: 'text'
         nodeId: string
         text: string
+        marks?: ReadonlyArray<'bold' | 'underline'>
       }>
     }
 

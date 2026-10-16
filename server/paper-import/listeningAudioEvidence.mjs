@@ -3,17 +3,6 @@ import path from 'node:path'
 
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
-export function listeningPlaybackSegments(listening, audio) {
-  const transcript = [...(listening?.transcript || [])]
-    .sort((left, right) => Math.min(...left.questionNumbers) - Math.min(...right.questionNumbers))
-  if (audio?.state !== 'candidate_segments' || transcript.length !== audio.candidates.length) return []
-  return transcript.map((segment, index) => ({
-    segmentId: segment.segmentId, questionNumbers: [...segment.questionNumbers],
-    firstQuestionId: `question:listening:${Math.min(...segment.questionNumbers)}`,
-    startSeconds: audio.candidates[index].startSeconds, endSeconds: audio.candidates[index].endSeconds,
-  }))
-}
-
 export const LISTENING_AUDIO_PATHS = Object.freeze({
   original: 'source/listening-audio.mp3',
   playback: 'materialization/listening-audio/playback.mp3',
@@ -97,6 +86,7 @@ export function compareFirstListeningDialogue(asr, dialogue) {
   const flag = (code, message) => flags.push({ code, message, severity: 'review',
     startSeconds: 0, endSeconds: scope.endSeconds })
   let actual = ''
+  let localized = false
   if (!start || !end || !['one', '1'].includes(start[1].toLowerCase())
     || !['two', '2'].includes(end[1].toLowerCase())) {
     flag('LISTENING_AUDIO_EXTENDED_CHECK_REQUIRED', 'Cannot establish complete formal question 1 boundaries; extend the check explicitly')
@@ -110,6 +100,8 @@ export function compareFirstListeningDialogue(asr, dialogue) {
     if (/\b(?:example|sample|practice)\b/i.test(actual)
       || (lastExample && !formalStart.test(opening.slice(lastExample.index)))) {
       flag('LISTENING_AUDIO_EXAMPLE_NOT_DIALOGUE', 'An example cannot stand in for formal question 1')
+    } else {
+      localized = true
     }
   }
   const spoken = (value) => String(value).replace(/(?:^|\n)\s*(?:M|W|Man|Woman)\s*:/gi, ' ')
@@ -119,10 +111,10 @@ export function compareFirstListeningDialogue(asr, dialogue) {
   const words = (value) => value.toLowerCase().match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)?/gu) || []
   const tokens = words(reference)
   const actualWords = words(spoken(actual)).join(' ')
-  if (tokens.length < 8 || recall < 0.9
+  if (localized && (tokens.length < 8 || recall < 0.9
     || !actualWords.startsWith(tokens.slice(0, 4).join(' '))
     || !actualWords.endsWith(tokens.slice(-4).join(' '))
-    || listeningOrderedBigramRecall(spoken(actual), reference) < 0.8) {
+    || listeningOrderedBigramRecall(spoken(actual), reference) < 0.8)) {
     flag('LISTENING_AUDIO_TRANSCRIPT_MISMATCH', 'Formal question 1 does not match its complete authoritative dialogue')
   }
   if (asr.segments.some((segment) => !Number.isFinite(segment.avgLogProbability)

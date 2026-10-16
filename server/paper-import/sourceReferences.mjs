@@ -1,18 +1,29 @@
 import { readFileSync } from 'node:fs'
 import Ajv from 'ajv/dist/2020.js'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { extractDocxDocumentParagraphs } from '../paper-canonical/docxSourceAdapter.mjs'
+import { extractDocxDocumentParagraphs, extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
 
 export const SOURCE_REFERENCES_FILE = 'source-references-v1.json'
 export const sourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-v1.schema.json', import.meta.url), 'utf8',
 ))
-const validateSchema = new Ajv({ allErrors: true, strict: false }).compile(sourceReferencesSchema)
+export const structuredSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-v2.schema.json', import.meta.url), 'utf8',
+))
+const ajv = new Ajv({ allErrors: true, strict: false })
+const validateV1 = ajv.compile(sourceReferencesSchema)
+const validateV2 = ajv.compile(structuredSourceReferencesSchema)
+
+// v1 paragraphs and v2 scoring blocks share one ordered render/QA path.
+// Essays intentionally keep their existing paragraph-only shape in both versions.
+export function sourceReferenceBlocks(entry) {
+  return entry.blocks ?? entry.paragraphs.map(paragraph => ({ kind: 'paragraph', paragraph }))
+}
 
 // Preparing never infers absence or converts legacy/AI modelAnswer into source.
-export function prepareSourceReferences({ materialization, sourceDigest, candidateDigest }) {
+export function prepareSourceReferences({ materialization, sourceDigest, candidateDigest, structuredScoring = false }) {
   return {
-    schemaVersion: 'source-references-v1',
+    schemaVersion: structuredScoring ? 'source-references-v2' : 'source-references-v1',
     paperId: materialization.paperId,
     sourceDigest,
     candidateDigest,
@@ -29,6 +40,7 @@ export function prepareSourceReferences({ materialization, sourceDigest, candida
 export function validateSourceReferences({
   sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null,
 }) {
+  const validateSchema = sidecar?.schemaVersion === 'source-references-v2' ? validateV2 : validateV1
   if (!validateSchema(sidecar)) {
     return validateSchema.errors.map(error => ({
       code: 'SOURCE_REFERENCES_SCHEMA_INVALID', path: error.instancePath, message: error.message,
@@ -47,10 +59,11 @@ export function validateSourceReferences({
   const owners = new Map(writingGroups.map(group => [group.groupId, group]))
   const actualSources = sourceDocuments && new Map(sourceDocuments.map(document => [document.documentId, document.bytes]))
   const sourceParagraphs = new Map()
+  const sourceTables = new Map()
   const seenGroups = new Set()
   const seenIds = new Set()
   function unique(id, path) {
-    if (seenIds.has(id)) issue('SOURCE_REFERENCES_ID_DUPLICATE', path, 'Reference and paragraph IDs must be globally unique')
+    if (seenIds.has(id)) issue('SOURCE_REFERENCES_ID_DUPLICATE', path, 'Reference, paragraph, table and cell IDs must be globally unique')
     seenIds.add(id)
   }
   function sourceBinding(source, path, text = null) {
@@ -123,9 +136,41 @@ export function validateSourceReferences({
           issue('SOURCE_REFERENCES_LABEL_INVALID', entryPath, 'Source labels need their own locator; absent labels stay null')
         }
         if (entry.labelSource) sourceBinding(entry.labelSource, `${entryPath}.labelSource`, entry.sourceLabel)
-        for (const [p, paragraph] of entry.paragraphs.entries()) {
-          unique(paragraph.paragraphId, `${entryPath}.paragraphs[${p}].paragraphId`)
-          sourceBinding(paragraph.source, `${entryPath}.paragraphs[${p}].source`, paragraph.text)
+        for (const [p, block] of sourceReferenceBlocks(entry).entries()) {
+          const blockPath = entry.blocks ? `${entryPath}.blocks[${p}]` : `${entryPath}.paragraphs[${p}]`
+          if (block.kind === 'paragraph') {
+            unique(block.paragraph.paragraphId, `${blockPath}.paragraphId`)
+            sourceBinding(block.paragraph.source, `${blockPath}.source`, block.paragraph.text)
+          } else {
+            unique(block.tableId, `${blockPath}.tableId`)
+            if (block.rows.some(row => row.length !== block.rows[0].length)) {
+              issue('SOURCE_REFERENCES_TABLE_INVALID', blockPath, 'Scoring tables must be rectangular; merged cells require a separate supported representation')
+            }
+            for (const [r, row] of block.rows.entries()) for (const [c, cell] of row.entries()) {
+              const cellPath = `${blockPath}.rows[${r}][${c}]`
+              unique(cell.cellId, `${cellPath}.cellId`)
+              sourceBinding(cell.source, `${cellPath}.source`, cell.text)
+            }
+            const cells = block.rows.flat()
+            const documentId = cells[0].source.locator.documentId
+            if (cells.some(cell => cell.source.locator.documentId !== documentId)
+              || new Set(cells.map(cell => digestJson(cell.source))).size !== cells.length) {
+              issue('SOURCE_REFERENCES_TABLE_INVALID', blockPath, 'Table cells need distinct locations in one answer source')
+            }
+            const document = documents.get(documentId)
+            const bytes = actualSources?.get(documentId)
+            if (document?.mediaType.includes('wordprocessingml') && bytes && sha256(bytes) === document.sha256) {
+              if (!sourceTables.has(documentId)) sourceTables.set(documentId, extractDocxDocumentStructure(bytes).tables)
+              const matches = sourceTables.get(documentId).filter(table => !table.nestedTableCount
+                && table.rows.length === block.rows.length && table.rows.every((row, r) =>
+                  row.cells.length === block.rows[r].length && row.cells.every((cell, c) =>
+                    cell.columnSpan === 1 && !cell.verticalMerge && !cell.containsDrawing
+                    && !cell.containsNestedTable && cell.sourceParagraphIndexes.length === 1
+                    && block.rows[r][c].source.locator.selector === `(/w:document/w:body//w:p)[${cell.sourceParagraphIndexes[0]}]`)))
+              if (matches.length !== 1) issue('SOURCE_REFERENCES_TABLE_INVALID', blockPath,
+                'Native scoring cells must replay one complete unmerged source table in row/column order; multi-paragraph cells are not yet supported')
+            }
+          }
         }
       }
     }

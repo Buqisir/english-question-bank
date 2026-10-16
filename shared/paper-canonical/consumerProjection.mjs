@@ -6,7 +6,8 @@ import {
   layoutFixedFourColumnClozeOptionSet,
   layoutListeningOptionSet,
 } from './abcdLayout.mjs'
-import { resolveCanonicalAuthority } from './authority.mjs'
+import { authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
+import { consumerRendersApplicationPromptFigures } from './consumers.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
 import { validateMediaPresentation } from './mediaPresentation.mjs'
 import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
@@ -49,7 +50,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(input.consumption.authorityRef?.manifestVersion)
+  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -769,6 +770,73 @@ function projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
   })
 }
 
+// Same media closure as Reading figures: exact artifact identity, digest,
+// dimensions, source artifact, optional presentation intent, unique placement.
+function applicationPromptFigureResolver(input, occurrence) {
+  const { groupId } = input
+  if (!Array.isArray(occurrence.media)) {
+    throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid media closure`)
+  }
+  const mediaById = new Map()
+  const presentationRequired = occurrence.media.some((media) => media?.presentation !== undefined)
+  for (const media of occurrence.media) {
+    if (
+      !media
+      || typeof media.mediaId !== 'string'
+      || typeof media.sha256 !== 'string'
+      || typeof media.mimeType !== 'string'
+      || !Number.isInteger(media.pixelWidth)
+      || !Number.isInteger(media.pixelHeight)
+      || typeof media.sourceArtifactRef?.artifactId !== 'string'
+      || (presentationRequired && !validateMediaPresentation(media.presentation))
+      || mediaById.has(media.mediaId)
+    ) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid media closure`)
+    }
+    mediaById.set(media.mediaId, media)
+  }
+  const artifactsById = new Map()
+  for (const artifact of input.consumption.mediaArtifacts || []) {
+    if (artifactsById.has(artifact?.mediaId)) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} has ambiguous prompt figure media`)
+    }
+    artifactsById.set(artifact?.mediaId, artifact)
+  }
+  const seen = new Set()
+  const resolve = (block) => {
+    const media = mediaById.get(block.mediaId)
+    const artifact = artifactsById.get(block.mediaId)
+    const bytes = decodeBase64Bytes(artifact?.encodedBytes)
+    if (
+      !media
+      || seen.has(block.mediaId)
+      || !artifact
+      || artifact.mimeType !== media.mimeType
+      || artifact.sha256 !== media.sha256
+      || artifact.pixelWidth !== media.pixelWidth
+      || artifact.pixelHeight !== media.pixelHeight
+      || artifact.sourceArtifactRef?.artifactId !== media.sourceArtifactRef.artifactId
+      || !bytes
+      || sha256(bytes) !== media.sha256
+    ) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} has unresolved prompt figure media`)
+    }
+    seen.add(block.mediaId)
+    const caption = media.presentation ? block.caption : []
+    return {
+      kind: 'figure',
+      nodeId: block.nodeId,
+      mediaId: block.mediaId,
+      media: structuredClone(media),
+      mediaArtifact: structuredClone(artifact),
+      caption: textContent(caption),
+      captionInlines: structuredClone(caption),
+    }
+  }
+  resolve.complete = () => seen.size === mediaById.size
+  return resolve
+}
+
 function projectApplicationWritingConsumerGroup(input, occurrence) {
   if (occurrence.writingMode === 'legacy_opaque') {
     return projectOpaqueLegacyWritingConsumerGroup(input, occurrence, {
@@ -827,18 +895,30 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     throw rejected(`Canonical Application Writing occurrence ${groupId} is incomplete`)
   }
 
+  // Prompt figures exist only when the raw authority admitted them and this
+  // consumer's own closure registers the renderer-owned capability.
+  const hasPromptFigures = occurrence.content.blocks.some((block) => block?.kind === 'figure')
+  if (hasPromptFigures && (
+    !authorityAdmitsApplicationPromptFigures(input.consumption.authorityRef)
+    || !consumerRendersApplicationPromptFigures(input.consumption.consumerContractRef)
+  )) {
+    throw rejected(`Canonical Application Writing occurrence ${groupId} requires the prompt-figure consumer capability`)
+  }
   const contentById = new Map()
   for (const block of occurrence.content.blocks) {
     if (
-      block?.kind !== 'paragraph'
+      !(block?.kind === 'paragraph' && Array.isArray(block.inlines))
+      && !(hasPromptFigures && block?.kind === 'figure' && typeof block.mediaId === 'string' && Array.isArray(block.caption))
       || typeof block.nodeId !== 'string'
-      || !Array.isArray(block.inlines)
       || contentById.has(block.nodeId)
     ) {
       throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid content`)
     }
     contentById.set(block.nodeId, block)
   }
+  const resolvePromptFigure = hasPromptFigures
+    ? applicationPromptFigureResolver(input, occurrence)
+    : null
 
   const promptBlocks = occurrence.prompt.blocks.map((block) => {
     if (
@@ -848,12 +928,16 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     ) {
       throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid prompt ownership`)
     }
+    if (block.kind === 'figure') return resolvePromptFigure(block)
     return {
       nodeId: block.nodeId,
       text: textContent(block.inlines),
       inlines: structuredClone(block.inlines),
     }
   })
+  if (resolvePromptFigure && !resolvePromptFigure.complete()) {
+    throw rejected(`Canonical Application Writing occurrence ${groupId} does not place every media item exactly once`)
+  }
   if (new Set(promptBlocks.map((block) => block.nodeId)).size !== promptBlocks.length) {
     throw rejected(`Canonical Application Writing occurrence ${groupId} duplicates prompt content`)
   }
@@ -886,6 +970,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
       || seenGivenPartIds.has(part.givenPartId)
       || seenGivenBlockRefs.has(part.blockRef)
       || promptBlockIds.has(part.blockRef)
+      || block.kind !== 'paragraph'
     ) {
       throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid fixed text`)
     }
@@ -910,10 +995,20 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     'answer_region_bottom',
   )
 
+  if (hasPromptFigures) {
+    const expectedPrompt = occurrence.content.blocks.filter(block => !seenGivenBlockRefs.has(block.nodeId))
+    const firstGivenIndex = occurrence.content.blocks.findIndex(block => seenGivenBlockRefs.has(block.nodeId))
+    if (expectedPrompt.length !== promptBlocks.length
+      || expectedPrompt.some((block, index) => block.nodeId !== promptBlocks[index].nodeId)
+      || (firstGivenIndex >= 0 && occurrence.content.blocks.slice(firstGivenIndex).some(block => block.kind === 'figure'))) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} has incomplete or reordered prompt content`)
+    }
+  }
+
   const anchors = occurrence.anchors
   const contentNodeIds = occurrence.content.blocks.flatMap((block) => [
     block.nodeId,
-    ...block.inlines.map((inline) => inline.nodeId),
+    ...(block.kind === 'figure' ? block.caption : block.inlines).map((inline) => inline.nodeId),
   ])
   if (
     !anchors
@@ -1266,11 +1361,11 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1344,7 +1439,7 @@ export function projectCanonicalConsumerGroup(input) {
     throw rejected(`Canonical occurrence ${groupId} belongs to another family`)
   }
   if (occurrence.sourcePresentation !== undefined
-    && (input.consumption.authorityRef?.manifestVersion !== '62'
+    && (!['62', '64', '66', '67', '68'].includes(input.consumption.authorityRef?.manifestVersion)
       || !validCanonicalSourcePresentation(occurrence.sourcePresentation))) {
     throw rejected(`Canonical occurrence ${groupId} has invalid source presentation`)
   }
@@ -1421,7 +1516,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { makeSyntheticNck1DocxFixture } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
-import { prepareSourceReferences, validateSourceReferences } from '../server/paper-import/sourceReferences.mjs'
+import { prepareSourceReferences, validateSourceReferences, sourceReferenceBlocks } from '../server/paper-import/sourceReferences.mjs'
 import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
@@ -15,17 +15,26 @@ const digest = letter => `sha256:${letter.repeat(64)}`
 const normalize = text => text.replace(/\s+/gu, ' ').trim()
 
 // Original synthetic content, not a copied commercial answer booklet.
-export function fixture({ listening = true } = {}) {
+export function fixture({ listening = true, structuredScoring = false } = {}) {
   const prose = 'Our well-rounded group kept the proposal clear, practical and open to different views. '
   const paragraphs = [
     'For the proposal', 'A Useful Proposal', 'Dear Editor,', prose.repeat(45), 'Yours sincerely,', 'Alex',
     'Against the proposal', 'A < B & C is an example, not markup. We prefer the alternative.',
     prose.repeat(20), prose.repeat(28), 'Scoring reference', 'Content: 5 points. Language: 7 points. Structure: 3 points.',
   ]
+  const scoringRows = [
+    ['档次', '要求'], ['第五档', '内容完整，表达准确，衔接自然。'],
+    ['第四档', '基本覆盖内容，个别错误不影响理解。'], ['第三档', '主要内容可辨；A < B & C 保留为原文。'],
+    ['第二档', '内容有缺漏，表达需要读者推测。'], ['第一档', '仅有零散信息。'], ['零分', ''],
+  ]
+  const afterTable = 'Apply the source criteria together, not as an automatic score.'
   const xml = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+  const paragraphXml = text => `<w:p><w:r><w:t xml:space="preserve">${xml(text)}</w:t></w:r></w:p>`
+  const scoringXml = structuredScoring ? `<w:tbl>${scoringRows.map(row =>
+    `<w:tr>${row.map(text => `<w:tc>${paragraphXml(text)}</w:tc>`).join('')}</w:tr>`,
+  ).join('')}</w:tbl>${paragraphXml(afterTable)}` : ''
   const source = makeSyntheticNck1DocxFixture({ transformXml: () =>
-    `<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${paragraphs.map(text =>
-      `<w:p><w:r><w:t xml:space="preserve">${xml(text)}</w:t></w:r></w:p>`).join('')}</w:body></w:document>`,
+    `<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${paragraphs.map(paragraphXml).join('')}${scoringXml}</w:body></w:document>`,
   }).sourceDocuments.find(document => document.role === 'official_answers')
   const materialization = makeFixture({ listening })
   materialization.documents[1] = { ...materialization.documents[1], mediaType: source.mediaType,
@@ -36,7 +45,7 @@ export function fixture({ listening = true } = {}) {
   materialization.answers.reverse()
   const binding = { materialization, sourceDigest: digest('c'), candidateDigest: digest('d'),
     sourceDocuments: [{ documentId: 'answers', bytes: source.bytes }] }
-  const sourceReferences = prepareSourceReferences(binding)
+  const sourceReferences = prepareSourceReferences({ ...binding, structuredScoring })
   const location = index => ({ documentSha256: source.sha256, locator: { kind: 'docx_part',
     documentId: 'answers', part: 'word/document.xml', selector: `(/w:document/w:body//w:p)[${index}]` } })
   const entry = (id, label, indexes, roles) => ({
@@ -55,6 +64,18 @@ export function fixture({ listening = true } = {}) {
   sourceReferences.groups[0].scoring = { state: 'captured', evidence: [], entries: [
     entry('scoring', 11, [12], ['body']),
   ] }
+  if (structuredScoring) {
+    const scoring = sourceReferences.groups[0].scoring.entries[0]
+    scoring.blocks = [
+      { kind: 'paragraph', paragraph: scoring.paragraphs[0] },
+      { kind: 'table', tableId: 'table:scoring', rows: scoringRows.map((row, r) => row.map((text, c) => ({
+        cellId: `cell:scoring:${r + 1}:${c + 1}`, text, source: location(13 + r * 2 + c),
+      }))) },
+      { kind: 'paragraph', paragraph: { paragraphId: 'paragraph:scoring:after', role: 'body',
+        text: afterTable, source: location(27) } },
+    ]
+    delete scoring.paragraphs
+  }
   sourceReferences.groups[1].scoring = { state: 'not_supplied', entries: [], evidence: [location(12)] }
   return { ...binding, sourceReferences, paperName: '合成排版样张：多范文、长答案与源评分参考' }
 }
@@ -173,6 +194,26 @@ function contractChecks() {
   writingQuestion.items[2].detail.questions = [{ id: 'invented-writing-question' }]
   assert.throws(() => buildAssembledAnswerOnlyHtml(writingQuestion), /Writing Task/)
   assert.throws(() => buildAssembledAnswerOnlyHtml({ ...assembly, questionNumberStart: Number.MAX_SAFE_INTEGER }), /安全整数/)
+  const structured = fixture({ structuredScoring: true })
+  assert.deepEqual(validateSourceReferences({ ...structured, sidecar: structured.sourceReferences }), [])
+  const tableHtml = buildAnswerOnlyHtml({ ...structured, includeScoring: true })
+  assert.match(tableHtml, /data-reference-cell="cell:scoring:3:2"/)
+  assert.match(tableHtml, /A &lt; B &amp; C 保留为原文/)
+  assert(!buildAnswerOnlyHtml(structured).includes('data-reference-table='))
+  assert(tableHtml.indexOf('data-reference-paragraph="paragraph:scoring:1"') < tableHtml.indexOf('data-reference-table="table:scoring"'))
+  assert(tableHtml.indexOf('data-reference-table="table:scoring"') < tableHtml.indexOf('data-reference-paragraph="paragraph:scoring:after"'))
+  for (const [change, code] of [
+    [table => table.rows[1].pop(), 'SOURCE_REFERENCES_TABLE_INVALID'],
+    [table => table.rows.reverse(), 'SOURCE_REFERENCES_TABLE_INVALID'],
+    [table => { table.rows[0][0].cellId = table.tableId }, 'SOURCE_REFERENCES_ID_DUPLICATE'],
+    [table => { table.rows[0][0].text = 'Changed score' }, 'SOURCE_REFERENCES_TEXT_DISAGREES'],
+    [table => { table.rows[0][0].source.documentSha256 = digest('e') }, 'SOURCE_REFERENCES_SOURCE_INVALID'],
+    [table => { table.rows[0][0].source = structuredClone(table.rows[0][1].source) }, 'SOURCE_REFERENCES_TABLE_INVALID'],
+  ]) {
+    const sidecar = structuredClone(structured.sourceReferences)
+    change(sidecar.groups[0].scoring.entries[0].blocks[1])
+    assert(validateSourceReferences({ ...structured, sidecar }).some(issue => issue.code === code), code)
+  }
   console.log('PASS source-reference binding, native paragraph replay, absence, variants and independent answer content')
 }
 
@@ -180,7 +221,7 @@ function contractChecks() {
 // not execute the formal mutation/regression pack above.
 async function preview(output) {
   if (existsSync(output)) throw new Error('Use a new preview directory')
-  const input = fixture({ listening: false })
+  const input = fixture({ listening: false, structuredScoring: process.argv.includes('--structured-scoring') })
   const html = buildAnswerOnlyHtml({ ...input, includeScoring: true })
   mkdirSync(output, { recursive: true })
   writeFileSync(path.join(output, 'answerOnly.html'), html, { flag: 'wx' })
@@ -194,7 +235,12 @@ async function preview(output) {
       entries[id] = (entries[id] || '') + text(node)
       return entries
     }, {})
-    return { paragraphs, references: [...new Set(collect('[data-source-reference]').map(node => node.dataset.sourceReference))],
+    const cells = collect('[data-reference-cell]').reduce((entries, node) => {
+      const id = node.dataset.referenceCell
+      entries[id] = (entries[id] || '') + text(node)
+      return entries
+    }, {})
+    return { paragraphs, cells, references: [...new Set(collect('[data-source-reference]').map(node => node.dataset.sourceReference))],
       keys: collect('[data-answer-number]').map(node => ({ number: Number(node.dataset.answerNumber), text: text(node) })),
       roles: collect('[data-reference-paragraph]').map(node => ({ id: node.dataset.referenceParagraph,
         align: getComputedStyle(node).textAlign, indent: getComputedStyle(node).textIndent })),
@@ -204,8 +250,13 @@ async function preview(output) {
   writeFileSync(path.join(output, 'answerOnly-screen.html'), result.paginatedHtml, { flag: 'wx' })
   writeFileSync(path.join(output, 'answerOnly.pdf'), result.pdfBytes, { flag: 'wx' })
   for (const group of input.sourceReferences.groups) for (const kind of ['essays', 'scoring']) {
-    for (const entry of group[kind].entries) for (const paragraph of entry.paragraphs) {
-      assert.equal(normalize(result.inspection.paragraphs[paragraph.paragraphId]), normalize(paragraph.text), paragraph.paragraphId)
+    for (const entry of group[kind].entries) for (const block of sourceReferenceBlocks(entry)) {
+      if (block.kind === 'table') {
+        for (const cell of block.rows.flat()) assert.equal(normalize(result.inspection.cells[cell.cellId]), normalize(cell.text), cell.cellId)
+      } else {
+        const { paragraph } = block
+        assert.equal(normalize(result.inspection.paragraphs[paragraph.paragraphId]), normalize(paragraph.text), paragraph.paragraphId)
+      }
     }
   }
   assert.deepEqual(result.inspection.references, ['reference:positive', 'reference:negative', 'reference:continuation', 'reference:scoring'])
@@ -218,6 +269,7 @@ async function preview(output) {
   assert.equal(result.inspection.horizontalOverflow, 0)
   const report = { status: 'synthetic_local_layout_candidate', pageCount: result.pageCount, pdfSha256: sha256(result.pdfBytes),
     inspectedReferenceParagraphs: Object.keys(result.inspection.paragraphs).length, answerCount: result.inspection.keys.length,
+    inspectedReferenceCells: Object.keys(result.inspection.cells).length,
     includeScoring: true, listening: false, reviewRevision: null, publication: null }
   writeFileSync(path.join(output, 'report.json'), `${JSON.stringify(report, null, 2)}\n`, { flag: 'wx' })
   console.log(JSON.stringify(report))

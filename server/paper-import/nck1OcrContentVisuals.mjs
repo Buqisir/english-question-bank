@@ -54,8 +54,11 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
     || !contains(region.region, observations.get(id).region))) {
     reject('Visual text observations must lie within the classified source region')
   }
+  // The page validator already requires disjoint content/furniture claims.
+  // A confirmed watermark remains in the source, but is not table-cell text.
+  const furniture = new Set(page.furnitureObservationIds)
   if (page.observations.some(observation => contains(region.region, observation.region)
-    && !selected.has(observation.observationId))) {
+    && !selected.has(observation.observationId) && !furniture.has(observation.observationId))) {
     reject('Every text observation inside a content visual must be accounted for')
   }
   if (ids.some(id => items.get(id).item.sourceEmphasis)) {

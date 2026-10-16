@@ -103,6 +103,7 @@ import {
   buildCanonicalApplicationWritingConsumptionSurfaceData,
   buildCanonicalContinuationWritingConsumptionSurfaceData,
   buildCanonicalReadingConsumptionSurfaceData,
+  type CanonicalApplicationWritingPromptBlock,
   type CanonicalReadingSurfaceBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import {
@@ -224,13 +225,7 @@ type GroupModel =
   | {
       kind: 'writing'
       model: Pick<WritingPaperViewModel, 'surfaceData' | 'pageModel'> & {
-        canonicalPromptBlocks?: ReadonlyArray<{
-          readonly nodeId: string
-          readonly inlines: ReadonlyArray<{
-            readonly nodeId: string
-            readonly text: string
-          }>
-        }>
+        canonicalPromptBlocks?: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
         canonicalContinuationMaterialBlocks?: ReadonlyArray<{
           readonly nodeId: string
           readonly inlines: ReadonlyArray<{

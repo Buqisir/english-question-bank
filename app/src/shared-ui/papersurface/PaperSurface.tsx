@@ -29,6 +29,7 @@ import { readingFigureOptionStyles, measuredReadingFigureStyles } from '../../..
 import { hasSourceBulletLines } from '../../../../shared/papersurface/readingParagraphLayout.mjs'
 import {
   applicationWritingNoticeLines,
+  writingNoticeDisplayInlines,
   writingNoticeGroup,
 } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import {
@@ -70,8 +71,10 @@ import type {
 } from '../../../../shared/papersurface/types'
 import type {
   CanonicalSurfaceParagraph,
+  CanonicalApplicationWritingPromptBlock,
   CanonicalReadingSurfaceBlock,
   CanonicalReadingSurfaceColumnChildBlock,
+  CanonicalReadingSurfaceFigureBlock,
   CanonicalReadingSurfaceParagraphBlock,
   CanonicalReadingSurfaceTableBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
@@ -179,26 +182,14 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   /** Optional fixture-backed visible bank heading; production source may omit it. */
   readonly optionBankHeading?: string
   /** Ordered canonical Application Writing prompt rendered without legacy inference. */
-  readonly canonicalApplicationPromptBlocks?: ReadonlyArray<{
-    readonly nodeId: string
-    readonly inlines: ReadonlyArray<{
-      readonly nodeId: string
-      readonly text: string
-    }>
-    readonly figure?: {
-      readonly kind: 'figure'
-      readonly src: string
-      readonly alt: string
-    } | {
-      readonly kind: 'placeholder'
-    }
-  }>
+  readonly canonicalApplicationPromptBlocks?: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
   /** Ordered canonical Continuation Writing material rendered without legacy parsing. */
   readonly canonicalContinuationMaterialBlocks?: ReadonlyArray<{
     readonly nodeId: string
     readonly inlines: ReadonlyArray<{
       readonly nodeId: string
       readonly text: string
+      readonly marks?: ReadonlyArray<'bold' | 'underline'>
     }>
   }>
   /** Screen-only controls; never part of Canonical Paper or print meaning. */
@@ -566,13 +557,7 @@ function CanonicalListeningChrome({ presentation, partPlayer, sectionPlayer }: {
 function CanonicalContinuationWritingMaterial({
   blocks,
 }: {
-  blocks: ReadonlyArray<{
-    readonly nodeId: string
-    readonly inlines: ReadonlyArray<{
-      readonly nodeId: string
-      readonly text: string
-    }>
-  }>
+  blocks: NonNullable<PaperSurfaceComponentProps['canonicalContinuationMaterialBlocks']>
 }) {
   const notice = writingNoticeGroup(blocks.map((block) =>
     block.inlines.map((inline) => inline.text).join('')))
@@ -598,6 +583,7 @@ function CanonicalContinuationWritingMaterial({
                 <span
                   key={inline.nodeId}
                   data-canonical-content-node-id={inline.nodeId}
+                  data-source-marks={inline.marks?.join(' ')}
                 >
                   {inline.text}
                 </span>
@@ -615,7 +601,7 @@ function CanonicalContinuationWritingMaterial({
               : undefined
           }
           data-canonical-content-node-id={
-            notice.blockCount === 1
+            notice.blockCount === 1 && !blocks[notice.startIndex].inlines.some(inline => inline.marks?.length)
               ? blocks[notice.startIndex].inlines[0]?.nodeId
               : undefined
           }
@@ -625,6 +611,7 @@ function CanonicalContinuationWritingMaterial({
             const block = notice.blockCount === 1
               ? blocks[notice.startIndex]
               : blocks[notice.startIndex + index]
+            const marked = block.inlines.some(inline => inline.marks?.length)
             return (
               <span
                 key={`${block.nodeId}:${line.kind}:${index}`}
@@ -633,11 +620,15 @@ function CanonicalContinuationWritingMaterial({
                   notice.blockCount > 1 ? block.nodeId : undefined
                 }
                 data-canonical-content-node-id={
-                  notice.blockCount > 1 ? block.inlines[0]?.nodeId : undefined
+                  notice.blockCount > 1 && !marked ? block.inlines[0]?.nodeId : undefined
                 }
                 data-canonical-continuation-notice-line={line.kind}
               >
-                {line.text}
+                {marked
+                  ? writingNoticeDisplayInlines(block.inlines, notice.blockCount === 1 ? index : 0).map((inline, part) => (
+                      <span key={`${inline.nodeId}:${part}`} data-canonical-content-node-id={inline.nodeId} data-source-marks={inline.marks?.join(' ')}>{inline.text}</span>
+                    ))
+                  : line.text}
               </span>
             )
           })}
@@ -650,22 +641,21 @@ function CanonicalContinuationWritingMaterial({
 function CanonicalApplicationWritingPrompt({
   blocks,
 }: {
-  blocks: ReadonlyArray<{
-    readonly nodeId: string
-    readonly inlines: ReadonlyArray<{
-      readonly nodeId: string
-      readonly text: string
-    }>
-  }>
+  blocks: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
 }): ReactNode {
+  // A source figure contributes no text, so it ends any notice run while
+  // every paragraph keeps its source block index.
   const notice = writingNoticeGroup(blocks.map((block) =>
-    block.inlines.map((inline) => inline.text).join('')))
+    block.kind === 'figure' ? '' : block.inlines.map((inline) => inline.text).join('')))
   return (
     <div
       className="ps-canonical-application-prompt"
       data-canonical-application-prompt=""
     >
       {blocks.map((block, index) => {
+        if (block.kind === 'figure') {
+          return <CanonicalSourceFigure key={block.nodeId} block={block} />
+        }
         if (
           notice
           && index > notice.startIndex
@@ -688,10 +678,13 @@ function CanonicalApplicationWritingPrompt({
           >
             {displayedNoticeLines
               ? displayedNoticeLines.map((line, lineIndex) => {
-                  const sourceBlock = notice?.startIndex === index
+                  const lineBlock = notice?.startIndex === index
                     && notice.blockCount > 1
                     ? blocks[index + lineIndex]
                     : block
+                  // Notice runs never include a figure (it ends the run).
+                  const sourceBlock = lineBlock.kind === 'figure' ? block : lineBlock
+                  const marked = sourceBlock.inlines.some(inline => inline.marks?.length)
                   return (
                       <span
                         key={`${sourceBlock.nodeId}:${line.kind}:${line.text}`}
@@ -702,13 +695,17 @@ function CanonicalApplicationWritingPrompt({
                             : undefined
                         }
                         data-canonical-content-node-id={
-                          (notice && notice.blockCount > 1) || lineIndex === 0
+                          !marked && ((notice && notice.blockCount > 1) || lineIndex === 0)
                             ? sourceBlock.inlines[0]?.nodeId
                             : undefined
                         }
                         data-canonical-application-notice-line={line.kind}
                       >
-                        {line.text}
+                        {marked
+                          ? writingNoticeDisplayInlines(sourceBlock.inlines, notice?.startIndex === index && notice.blockCount > 1 ? 0 : lineIndex).map((inline, part) => (
+                              <span key={`${inline.nodeId}:${part}`} data-canonical-content-node-id={inline.nodeId} data-source-marks={inline.marks?.join(' ')}>{inline.text}</span>
+                            ))
+                          : line.text}
                       </span>
                   )
                 })
@@ -716,6 +713,7 @@ function CanonicalApplicationWritingPrompt({
                   <span
                     key={inline.nodeId}
                     data-canonical-content-node-id={inline.nodeId}
+                    data-source-marks={inline.marks?.join(' ')}
                   >
                     {inline.text}
                   </span>
@@ -888,45 +886,53 @@ function renderCanonicalReadingBlock(block: CanonicalReadingSurfaceBlock): React
     )
   }
   if (block.kind === 'figure') {
-    const src =
-      `data:${block.mediaArtifact.mimeType};base64,`
-      + block.mediaArtifact.encodedBytes
-    const presentation = block.media.presentation
-    return (
-      <figure
-        key={block.nodeId}
-        className="ps-canonical-reading-figure"
-        data-canonical-block-id={block.nodeId}
-        data-canonical-block-kind="figure"
-        data-canonical-media-id={block.mediaId}
-        data-canonical-media-alignment={presentation?.alignment}
-        data-canonical-media-spacing-before={presentation?.spacingBefore}
-        data-canonical-media-spacing-after={presentation?.spacingAfter}
-      >
-        <img
-          src={src}
-          alt=""
-          style={presentation
-            ? ({ '--ps-canonical-media-width-ratio': presentation.widthRatio } as CSSProperties)
-            : undefined}
-        />
-        {block.caption && (
-          <figcaption>
-            {block.captionInlines.map((inline) => (
-              <span
-                key={inline.nodeId}
-                data-canonical-content-node-id={inline.nodeId}
-              >
-                {inline.text}
-              </span>
-            ))}
-          </figcaption>
-        )}
-      </figure>
-    )
+    return <CanonicalSourceFigure key={block.nodeId} block={block} />
   }
   throw new Error(
     `Canonical Reading block ${String((block as { kind?: string }).kind)} is not representable`,
+  )
+}
+
+// Shared source-backed figure presentation for every canonical prompt stream.
+function CanonicalSourceFigure({
+  block,
+}: {
+  block: CanonicalReadingSurfaceFigureBlock
+}): ReactNode {
+  const src =
+    `data:${block.mediaArtifact.mimeType};base64,`
+    + block.mediaArtifact.encodedBytes
+  const presentation = block.media.presentation
+  return (
+    <figure
+      className="ps-canonical-reading-figure"
+      data-canonical-block-id={block.nodeId}
+      data-canonical-block-kind="figure"
+      data-canonical-media-id={block.mediaId}
+      data-canonical-media-alignment={presentation?.alignment}
+      data-canonical-media-spacing-before={presentation?.spacingBefore}
+      data-canonical-media-spacing-after={presentation?.spacingAfter}
+    >
+      <img
+        src={src}
+        alt=""
+        style={presentation
+          ? ({ '--ps-canonical-media-width-ratio': presentation.widthRatio } as CSSProperties)
+          : undefined}
+      />
+      {block.caption && (
+        <figcaption>
+          {block.captionInlines.map((inline) => (
+            <span
+              key={inline.nodeId}
+              data-canonical-content-node-id={inline.nodeId}
+            >
+              {inline.text}
+            </span>
+          ))}
+        </figcaption>
+      )}
+    </figure>
   )
 }
 

@@ -212,7 +212,9 @@ export function createSinglePaperPromotionService({
         )
       }
       const reviewRootDir = store.revisionDirectory(revision.id)
-      const projection = buildNck1ReviewProjection(reviewRootDir, { requireAnalyses: true })
+      const projection = buildNck1ReviewProjection(reviewRootDir, {
+        requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
+      })
       // Upload and verify before opening the publication transaction. Failed
       // or interrupted publication never deletes these shared content addresses.
       if (projection.frozenProducts && !fileStorage) {

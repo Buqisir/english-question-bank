@@ -11,7 +11,9 @@
 import { buildWritingPageModel } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
 import {
   applicationWritingNoticeLines,
+  continuationStarterDisplayInlines,
   continuationStarterDisplayText,
+  writingNoticeDisplayInlines,
   writingNoticeGroup,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 
@@ -38,6 +40,20 @@ assert('continuation display never strips the wrong paragraph label',
   continuationStarterDisplayText('Paragraph 2: Deliberate source text.', 0)
     === 'Paragraph 2: Deliberate source text.')
 
+const markedStarter = [
+  { nodeId: 'label-a', text: 'Paragraph ', marks: ['bold'] },
+  { nodeId: 'label-b', text: '1: ' },
+  { nodeId: 'body', text: 'Starter one.', marks: ['underline'] },
+]
+assert('split source label is hidden without losing starter marks or identities',
+  JSON.stringify(continuationStarterDisplayInlines(markedStarter, 0)) === JSON.stringify([
+    { nodeId: 'label-a', text: '', marks: ['bold'] },
+    { nodeId: 'label-b', text: '' },
+    { nodeId: 'body', text: 'Starter one.', marks: ['underline'] },
+  ]))
+assert('split source nodes stay unchanged for a different paragraph label',
+  JSON.stringify(continuationStarterDisplayInlines(markedStarter, 1)) === JSON.stringify(markedStarter))
+
 const splitNotice = writingNoticeGroup([
   'Writing prompt.',
   '注意：',
@@ -63,6 +79,18 @@ assert('decimal measurements never become numbered notice boundaries',
   decimalNotice?.length === 3 && decimalNotice[1].text.includes('2.5 cm'))
 assert('a decimal-leading paragraph stays outside a split notice',
   writingNoticeGroup(['注意：', '1. Write about 80 words.', '2.5 cm is the title.'])?.blockCount === 2)
+
+const combinedMarkedNotice = [
+  { text: '  注意：\n1. Write ', nodeId: 'before' },
+  { text: '80', nodeId: 'count', marks: ['underline'] },
+  { text: ' words; 2. Write 80 words.  ', nodeId: 'after' },
+]
+const combinedLines = [0, 1, 2].map(index => writingNoticeDisplayInlines(combinedMarkedNotice, index))
+assert('combined notice slicing preserves text and only the source-marked occurrence',
+  JSON.stringify(combinedLines.map(nodes => nodes.map(node => node.text).join('')))
+    === JSON.stringify(['注意：\n', '1. Write 80 words; ', '2. Write 80 words.'])
+  && combinedLines[1].some(node => node.text === '80' && node.marks?.[0] === 'underline')
+  && !combinedLines[2].some(node => node.marks?.length))
 
 const asset = {
   content: {

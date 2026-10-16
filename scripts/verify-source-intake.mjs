@@ -1531,6 +1531,7 @@ try {
       '--paper-id',
       audioPaperId,
       '--year', '2026', '--month', '8',
+      '--opening-check',
       '--asr-fixture',
       audioAsrFixture,
     ], { ampThreadId: null })

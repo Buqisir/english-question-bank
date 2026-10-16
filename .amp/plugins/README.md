@@ -45,8 +45,10 @@ plugin, never reload the CI plugin to enable it. Verify with
 
 ## NCK1 staged-analysis agent
 
-The Owner-selected B flow now uses normal Low + fast threads in
-`english-question-bank-import`, not this experimental Grok tool. Do not invoke
+Import work now runs on the Owner's local runner, not the dedicated Import
+Project Orb. Public-paper summaries/search use built-in Low with `features: []`;
+the retained historical B analysis flow uses Low + fast on that local runner,
+not this experimental Grok tool. Do not invoke
 or reload it for imports. Follow `docs/import/agent-contract.md` for bounded
 file transfer, formal validation and completion. The implementation below is
 retained experimental context, not the active generation instruction.

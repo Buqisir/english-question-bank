@@ -1,7 +1,8 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import { LISTENING_AUDIO_PATHS, listeningPlaybackSegments } from './listeningAudioEvidence.mjs'
+import { LISTENING_AUDIO_PATHS } from './listeningAudioEvidence.mjs'
+import { reviewedPlaybackSegments } from './listeningReview.mjs'
 import { buildListeningWaveform, readListeningWaveform } from './listeningWaveform.mjs'
 import { LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
@@ -1246,10 +1247,19 @@ export function publishUniversalNck1Import({
   onPrepared = null,
   externalListeningReviewProof = null,
 }) {
-  const projection = buildNck1ReviewProjection(
-    reviewRootDir,
-    { requireAnalyses: true },
-  )
+  let projection
+  try {
+    projection = buildNck1ReviewProjection(reviewRootDir, {
+      requireAnalyses: true, expectedCandidateDigest: approvedIdentity?.candidateDigest,
+    })
+  } catch (error) {
+    if (error.code !== 'IMPORT_REVIEW_PROJECTION_MISMATCH') throw error
+    return canonicalAdmissionFailure({
+      disposition: 'unsupported',
+      diagnostics: [{ code: 'IMPORT_REVIEW_APPROVAL_IDENTITY_MISMATCH',
+        message: 'Local universal Candidate does not match the exact Owner-approved identity' }],
+    })
+  }
   let sourceReferenceApproval = null
   if (projection.config.pdfProductsRequired && !projection.frozenProducts) throw new Error('新卷必须先冻结四款 PDF 并提交 Review')
   let pdfProductApproval = null
@@ -1262,7 +1272,7 @@ export function publishUniversalNck1Import({
       || !approvedIdentity.approvalId || !approvedIdentity.revisionId) {
       throw new Error('Source references require the exact approved Review bundle')
     }
-    const inventory = reviewBundleFilePaths(reviewRootDir)
+    const inventory = reviewBundleFilePaths(reviewRootDir, projection.candidate)
     if (inventory.length !== manifest.files.length || inventory.some(file => !manifest.files.some(actual =>
       actual.path === file.path && actual.role === file.role && actual.mediaType === file.mediaType))) {
       throw new Error('Approved Review inventory does not match the publication workspace')
@@ -1365,7 +1375,7 @@ export function publishUniversalNck1Import({
   const playbackUi = playback ? {
     waveform: readListeningWaveform(path.join(reviewRootDir, LISTENING_WAVEFORM_FILE), playback.sha256, playback.durationSeconds)
       || buildListeningWaveform(listeningAudioBytes, playback.durationSeconds),
-    segments: listeningPlaybackSegments(projection.materialization.listening, projection.listeningAudioEvidence?.segments),
+    segments: reviewedPlaybackSegments(projection.reviewedListening),
   } : null
   return publishPreparedPaperImport({
     db,

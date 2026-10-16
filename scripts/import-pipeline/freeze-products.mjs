@@ -19,7 +19,7 @@ try {
   const projection = buildNck1ReviewProjection(rootDir, { requireAnalyses: true })
   const examDate = readExamDate(projection.config.provenance, { required: true })
   const economyPageLimit = economyPageLimitForPlan(projection.paginationPlan)
-  const inputDigest = productInputDigest(rootDir, reviewBundleFilePaths(rootDir))
+  const inputDigest = productInputDigest(rootDir, reviewBundleFilePaths(rootDir), projection.reviewedListening)
   const staging = path.join(rootDir, `.products-${randomUUID()}`)
   mkdirSync(path.join(staging, 'products'), { recursive: true })
   const files = []
@@ -29,7 +29,7 @@ try {
     writeFileSync(path.join(staging, file.path), result.pdfBytes, { flag: 'wx' })
     files.push({ ...file, sha256: sha256(result.pdfBytes), byteLength: result.pdfBytes.length, pageCount: result.pageCount })
   }
-  if (productInputDigest(rootDir, reviewBundleFilePaths(rootDir)) !== inputDigest) throw new Error(`生成期间输入改变；保留失败产物 ${staging}`)
+  if (productInputDigest(rootDir, reviewBundleFilePaths(rootDir), projection.reviewedListening) !== inputDigest) throw new Error(`生成期间输入改变；保留失败产物 ${staging}`)
   const manifest = { schemaVersion: economyPageLimit === 9 ? 'paper-pdf-products-v2' : 'paper-pdf-products-v1',
     ...(economyPageLimit === 9 ? { economyPageLimit } : {}), paperId: projection.paperId,
     paperName: projection.paperName, examDate, inputDigest, files }

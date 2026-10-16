@@ -241,6 +241,7 @@ export type CanonicalApplicationWritingGivenPart = {
     readonly kind: 'text'
     readonly nodeId: string
     readonly text: string
+    readonly marks?: ReadonlyArray<'bold' | 'underline'>
   }>
 }
 
@@ -251,8 +252,14 @@ export type CanonicalWritingSourceBlock = {
     readonly kind: 'text'
     readonly nodeId: string
     readonly text: string
+    readonly marks?: ReadonlyArray<'bold' | 'underline'>
   }>
 }
+
+// Registered prompt-figure consumers keep source figures in prompt order.
+export type CanonicalApplicationWritingPromptBlock =
+  | (CanonicalWritingSourceBlock & { readonly kind?: undefined })
+  | CanonicalReadingSurfaceFigureBlock
 
 export type CanonicalWritingChromePrelude =
   | { readonly kind: 'passage' }
@@ -298,7 +305,7 @@ type CanonicalApplicationWritingSurfaceCommon = {
   readonly semanticDigest: string
   readonly occurrenceSignature: string
   readonly anchors: Record<string, ReadonlyArray<string> | string>
-  readonly promptBlocks: ReadonlyArray<CanonicalWritingSourceBlock>
+  readonly promptBlocks: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
   readonly surfaceData: {
     readonly roleLayout?: 'golden_reference_v1'
     readonly textMap: PaperTextMap
@@ -351,6 +358,7 @@ export type CanonicalContinuationWritingStarter = {
     readonly kind: 'text'
     readonly nodeId: string
     readonly text: string
+    readonly marks?: ReadonlyArray<'bold' | 'underline'>
   }>
 }
 

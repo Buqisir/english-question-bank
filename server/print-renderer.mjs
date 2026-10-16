@@ -56,7 +56,9 @@ import {
 } from '../shared/paper-canonical/abcdLayout.mjs'
 import {
   applicationWritingNoticeLines,
+  continuationStarterDisplayInlines,
   continuationStarterDisplayText,
+  writingNoticeDisplayInlines,
   writingNoticeGroup,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
@@ -589,6 +591,9 @@ function renderCanonicalInlineNodes(nodes) {
 }
 
 function renderContinuationStarterInlineNodes(nodes, starterIndex) {
+  if (nodes.some(node => node.marks?.length)) {
+    return renderCanonicalInlineNodes(continuationStarterDisplayInlines(nodes, starterIndex))
+  }
   let firstText = true
   return nodes.map((node) => {
     if (node.kind === 'media_ref') return renderCanonicalInlineNodes([node])
@@ -665,19 +670,22 @@ function renderCanonicalReadingBlock(block) {
     assertFramedColumnsFitsPrintPage(block)
     return `<div class="canonical-reading-framed-columns" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="framed_columns" data-canonical-column-count="${block.columnCount}">${block.columns.map((column) => `<div class="canonical-reading-framed-column" data-canonical-column-id="${escapeHtml(column.columnId)}">${column.blocks.map((child) => renderCanonicalReadingColumnChild(child, column.columnHeading)).join('')}</div>`).join('')}</div>`
   }
-  if (block.kind === 'figure') {
-    const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
-    const caption = block.caption
-      ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>`
-      : ''
-    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"${canonicalMediaPresentationAttributes(block.media)}><img src="${escapeHtml(src)}" alt=""${canonicalMediaPresentationAttributes(block.media)}>${caption}</figure>`
-  }
+  if (block.kind === 'figure') return renderCanonicalSourceFigure(block)
   rejectCanonicalPrint(
     `Canonical Reading block ${block?.kind || 'unknown'} is not representable`,
   )
 }
 
-function renderCanonicalReadingBlocks(canonicalGroup) {
+// Shared source-backed figure presentation for every canonical prompt stream.
+function renderCanonicalSourceFigure(block) {
+  const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
+  const caption = block.caption
+    ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>`
+    : ''
+  return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"${canonicalMediaPresentationAttributes(block.media)}><img src="${escapeHtml(src)}" alt=""${canonicalMediaPresentationAttributes(block.media)}>${caption}</figure>`
+}
+
+function renderCanonicalReadingBlocks(canonicalGroup, keepFigureHeadings) {
   const precedingGeometry =
     readingPassageLetterGeometryForLetter(
       canonicalGroup.passageLetter,
@@ -695,7 +703,17 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
   const beforeStyle = beforeAdjustment < 0
     ? `margin-top:${beforeAdjustment}pt`
     : `padding-top:${beforeAdjustment}pt`
-  return `<div class="canonical-reading-start"><div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-rhythm-role="passage_letter" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => renderCanonicalReadingBlock(block)).join('')}</div>`
+  const blocks = []
+  for (let index = 0; index < canonicalGroup.blocks.length; index += 1) {
+    const block = canonicalGroup.blocks[index]
+    const next = canonicalGroup.blocks[index + 1]
+    if (keepFigureHeadings && block.kind === 'paragraph'
+      && ['title', 'subtitle'].includes(block.role) && next?.kind === 'figure') {
+      blocks.push(`<div class="canonical-reading-heading-figure">${renderCanonicalReadingBlock(block)}${renderCanonicalReadingBlock(next)}</div>`)
+      index += 1
+    } else blocks.push(renderCanonicalReadingBlock(block))
+  }
+  return `<div class="canonical-reading-start"><div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-rhythm-role="passage_letter" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${blocks.join('')}</div>`
 }
 
 function renderCanonicalWritingChrome(
@@ -800,18 +818,29 @@ function renderCanonicalOpaqueWriting(
 // Both writing families keep source blocks/inline identities while presenting
 // a split or combined notice as the same visual group used by Screen.
 function renderCanonicalWritingBlocks(blocks, family) {
-  const notice = writingNoticeGroup(blocks.map(block => block.inlines.map(inline => inline.text || '').join('')))
+  // A source figure contributes no text, so it ends any notice run while
+  // paragraphs keep their source block indices.
+  const notice = writingNoticeGroup(blocks.map(block => block.kind === 'figure'
+    ? '' : block.inlines.map(inline => inline.text || '').join('')))
   return blocks.map((block, index) => {
+    if (block.kind === 'figure') {
+      if (family !== 'application') rejectCanonicalPrint('Only Application Writing prompts own source figures')
+      return renderCanonicalSourceFigure(block)
+    }
     if (notice && index > notice.startIndex && index < notice.startIndex + notice.blockCount) return ''
     const isNotice = notice?.startIndex === index
     const role = isNotice ? 'notice_line' : family === 'application' ? 'prompt_line' : 'material_paragraph'
     const content = isNotice ? notice.lines.map((line, lineIndex) => {
       const sourceBlock = notice.blockCount > 1 ? blocks[index + lineIndex] : block
+      const marked = sourceBlock.inlines.some(inline => inline.marks?.length)
       const blockAttr = notice.blockCount > 1 && lineIndex > 0
         ? ` data-canonical-block-id="${escapeHtml(sourceBlock.nodeId)}"` : ''
-      const inlineAttr = notice.blockCount > 1 || lineIndex === 0
+      const inlineAttr = !marked && (notice.blockCount > 1 || lineIndex === 0)
         ? ` data-canonical-content-node-id="${escapeHtml(sourceBlock.inlines[0].nodeId)}"` : ''
-      return `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}"${blockAttr}${inlineAttr} data-canonical-${family}-notice-line="${line.kind}">${escapeHtml(line.text)}</span>`
+      const lineContent = marked
+        ? renderCanonicalInlineNodes(writingNoticeDisplayInlines(sourceBlock.inlines, notice.blockCount > 1 ? 0 : lineIndex))
+        : escapeHtml(line.text)
+      return `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}"${blockAttr}${inlineAttr} data-canonical-${family}-notice-line="${line.kind}">${lineContent}</span>`
     }).join('') : renderCanonicalInlineNodes(block.inlines)
     return `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-${family}-writing-rhythm-role="${role}"${isNotice ? ` data-canonical-${family}-notice=""` : ''}>${content}</p>`
   }).join('')
@@ -1877,7 +1906,7 @@ export function buildPrintHtml({
             // passage/transcript block belongs in the student question area.
             groupHtml += `<header class="canonical-listening-chrome" data-canonical-listening-chrome>${listeningPresentation.partHeading ? `<h2 class="canonical-listening-part">${escapeHtml(listeningPresentation.partHeading)}</h2>` : ''}${listeningPresentation.transferNotice ? `<p class="canonical-listening-transfer-notice">${escapeHtml(listeningPresentation.transferNotice)}</p>` : ''}<h3 class="canonical-listening-section">${escapeHtml(listeningPresentation.sectionHeading)}</h3><p class="canonical-listening-instruction">${escapeHtml(listeningPresentation.instruction)}</p>${listeningPresentation.example ? `<div class="canonical-listening-example" data-canonical-listening-example><p>例：${escapeHtml(listeningPresentation.example.stem)}</p><div class="canonical-listening-example-options">${listeningPresentation.example.options.map((option) => `<span>${option.label}. ${escapeHtml(option.text)}</span>`).join('')}</div><p class="canonical-listening-example-answer">答案是 ${escapeHtml(listeningPresentation.example.answer)}。</p></div>` : ''}</header>`
           } else if (canonicalGroup.groupType === 'reading') {
-            groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
+            groupHtml += renderCanonicalReadingBlocks(canonicalGroup, Boolean(roleLayoutAttribute(canonicalGroup.groupId)))
           } else if (canonicalGroup.groupType === 'writing') {
             groupHtml += groupLeadHtml
             groupHtml += renderCanonicalApplicationWriting(
@@ -2676,6 +2705,13 @@ ${paperLayoutCss}
 
 .canonical-reading-figure {
   break-inside: avoid;
+}
+
+/* Paged.js can move a figure with its following table while leaving the source
+ * heading behind. Keep only that heading/figure pair atomic, not the passage. */
+.canonical-reading-heading-figure {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .canonical-reading-figure[data-canonical-media-spacing-before="compact"] {

@@ -323,6 +323,17 @@
     white-space: normal;
   }
 
+  /* Override PaperSurface's inline Print-sized tracks: zoom can shrink the
+   * Screen content box, so listening's equal thirds must fit that box.
+   * Keep specificity low so the mobile single-column rule still wins. */
+  .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--three_columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--one_column {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
   .paper-browse-content :is(.ps-option, .ps-option-text, .ps-question-options-inline-item) {
     min-width: 0;
     white-space: normal;
@@ -1473,7 +1484,8 @@
     padding: 12px 12px 80px;
   }
 
-  .paper-browse-content {
+  /* Override inherited print margins below the content's inline tokens. */
+  .paper-browse-zoom {
     --ps-page-margin-top: 32px;
     --ps-page-margin-x: 24px;
   }

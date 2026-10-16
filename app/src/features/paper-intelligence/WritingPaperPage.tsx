@@ -9,7 +9,7 @@ import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
-import { continuationStarterDisplayText } from '../../../../shared/paper-canonical/applicationWritingDisplay'
+import { continuationStarterDisplayInlines, continuationStarterDisplayText } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import { continuationWritingRhythm } from '../../../../shared/paper-canonical/continuationWritingRhythm.mjs'
 import {
   paperTypographyRuntime,
@@ -138,7 +138,16 @@ const continuationWritingPageStyle: WritingPageStyle = {
 function writingGivenText(
   part: WritingGivenPart,
   continuationStarterIndex: number | null = null,
-): string {
+): ReactNode {
+  if (typeof part !== 'string' && part.inlines.some(node => node.marks?.length)) {
+    const nodes = continuationStarterIndex === null
+      ? part.inlines
+      : continuationStarterDisplayInlines(part.inlines, continuationStarterIndex)
+    return nodes.map(node => (
+      <span key={node.nodeId} data-canonical-content-node-id={node.nodeId}
+        data-source-marks={node.marks?.join(' ')}>{node.text}</span>
+    ))
+  }
   const text = typeof part === 'string' ? part : part.text
   return continuationStarterIndex === null
     ? text
