@@ -294,7 +294,7 @@ console.log('\nTest 12: eyebrow re-scoped off slate inside AI mode only (P3 same
   const css = readSrc('app/src/App.css')
   assert(
     '.app-shell.home-mode-ai .eyebrow rule exists',
-    /\.app-shell\.home-mode-ai \.eyebrow\s*\{[^}]*color:\s*#6B6E68/.test(css),
+    /\.app-shell\.home-mode-ai \.eyebrow\s*\{[^}]*color:\s*var\(--eqb-color-text-muted\)/.test(css),
     '',
   )
   // :root itself must stay untouched — the base .eyebrow rule still reads
@@ -335,7 +335,7 @@ console.log('\nTest 21: home-editorial — row-first year column + retired group
   )
   assert(
     '卷种标注 uses the Songti serif token (owner 2026-07-09 拍板)',
-    /\.concierge-paper-sourcetype[\s\S]{0,200}background:\s*#E9ECE6/.test(readSrc('app/src/App.css')),
+    /\.concierge-paper-sourcetype[\s\S]{0,200}background:\s*var\(--eqb-color-desk\)/.test(readSrc('app/src/App.css')),
     '',
   )
 }
@@ -417,7 +417,7 @@ console.log('\nTest 22: home-editorial — 卷面目录 replaces the 9-card grid
   assert(
     'section labels are eyebrows (12px muted, no bar)',
     /\.concierge-group-section-head\s*\{[^}]*padding:\s*12px 14px 4px 28px/.test(css) &&
-      /\.concierge-group-section-head\s*\{[^}]*color:\s*#6B6E68/.test(css) &&
+      /\.concierge-group-section-head\s*\{[^}]*color:\s*var\(--eqb-color-text-muted\)/.test(css) &&
       !/\.concierge-group-section-head\s*\{[^}]*border-bottom/.test(css),
     '',
   )

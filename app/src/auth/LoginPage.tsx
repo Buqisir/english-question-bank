@@ -1,21 +1,41 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import './LoginPage.css'
 import { login } from './session.ts'
+import otterSvg from './login-otter.svg?raw'
 
-/* BRAND.md §4.7: the otter peeks over the card's top edge, which is the water
-   line. The same drawing is layered twice: the back copy shows only what is
-   above the edge and sits behind the card; the front copy shows only the paws
-   below the edge and sits on top of it. Decorative, so hidden from readers. */
-const OTTER_PEEK_SRC = '/brand/otter-peek-login.svg'
+/* 08 雾海（BRAND.md §4.7）：雾是背景图，海獭内联，好让描边能逐笔画出来。
+   线稿自画只在这台设备第一次打开登录页时出现，之后直接静态出场。 */
+const MIST_SRC = '/brand/login-mist.svg'
+const DRAWN_KEY = 'eqb.login.otterDrawn'
 
-function OtterPeek() {
+function hasDrawnBefore(): boolean {
+  try {
+    return window.localStorage.getItem(DRAWN_KEY) !== null
+  } catch {
+    return true
+  }
+}
+
+function MistScene() {
+  const [drawing] = useState(() => !hasDrawnBefore())
+  // 记号在挂载后再写：StrictMode 会把 useState 初始化跑两遍。
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(DRAWN_KEY, '1')
+    } catch {
+      // 无痕模式写不进去也无妨，最多每次都画一遍。
+    }
+  }, [])
   return (
-    <div className="login-peek" aria-hidden="true">
-      <div className="login-peek-layer login-peek-back">
-        <img src={OTTER_PEEK_SRC} alt="" />
-      </div>
-      <div className="login-peek-layer login-peek-front">
-        <img src={OTTER_PEEK_SRC} alt="" />
+    <div className="login-scene-frame" aria-hidden="true">
+      <div className="login-scene">
+        <img className="login-mist" src={MIST_SRC} alt="" />
+        <div className="login-otter-sway">
+          <div
+            className={drawing ? 'login-otter is-drawing' : 'login-otter'}
+            dangerouslySetInnerHTML={{ __html: otterSvg }}
+          />
+        </div>
       </div>
     </div>
   )
@@ -46,11 +66,15 @@ export function LoginPage() {
 
   return (
     <main className="login-page">
-      <div className="login-stage">
-        <OtterPeek />
+      <MistScene />
+      <div className="login-content">
+        <div className="login-brand">
+          <img src="/brand/mark.svg" alt="" />
+          <span>英语题库工作台</span>
+        </div>
         <section className="login-card" aria-labelledby="login-title">
-          <h1 id="login-title">英语题库工作台</h1>
-          <p className="login-subtitle">输入账号，接着备课。</p>
+          <h1 id="login-title">题海三千，只取一瓢</h1>
+          <p className="login-subtitle">登录后，接着上次的备课。</p>
           {error && <p className="login-error" role="alert">{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="login-field">
@@ -59,6 +83,7 @@ export function LoginPage() {
                 id="login-username"
                 type="text"
                 autoComplete="username"
+                placeholder="用户名"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
                 disabled={submitting}
@@ -71,6 +96,7 @@ export function LoginPage() {
                 id="login-password"
                 type="password"
                 autoComplete="current-password"
+                placeholder="密码"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 disabled={submitting}
@@ -81,8 +107,8 @@ export function LoginPage() {
               {submitting ? '登录中…' : '登录'}
             </button>
           </form>
-          <p className="login-footer-hint">账号需邀请开通。</p>
         </section>
+        <p className="login-footer-hint">账号需邀请开通 · eqbank.cc</p>
       </div>
     </main>
   )

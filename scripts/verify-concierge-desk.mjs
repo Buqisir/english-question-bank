@@ -713,11 +713,11 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   // #6A6A64 neutral palette (was #D3CBBD / #6B645C warm neutrals).
   const chipRule = css.match(/\.concierge-browse-chip\s*\{[^}]*\}/)?.[0] || ''
   assert('browse chip background #FFFFFF', /background:\s*#FFFFFF/.test(chipRule), '')
-  assert('browse chip border #E3E6E0', /border:\s*1px solid #E3E6E0/i.test(chipRule), '')
-  assert('browse chip text uses muted ink #6B6E68', /color:\s*#6B6E68/i.test(chipRule), '')
+  assert('browse chip border uses the subtle border token', /border:\s*1px solid var\(--eqb-color-border-subtle\)/i.test(chipRule), '')
+  assert('browse chip text uses muted ink token', /color:\s*var\(--eqb-color-text-muted\)/i.test(chipRule), '')
 
   const chipSelectedRule = css.match(/\.concierge-browse-chip\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
-  assert('selected chip is ink-filled #1F1F1D (墨做动作)', /background:\s*#1F1F1D/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip is action-filled (墨做动作)', /background:\s*var\(--action\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip text is white', /color:\s*#fff/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip is NOT oxblood #B8323C', !/#B8323C/i.test(chipSelectedRule), chipSelectedRule)
 
