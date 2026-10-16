@@ -419,7 +419,7 @@ assert(writingPreview.compilation, JSON.stringify(writingPreview.unresolvedIssue
   const { default: playwright } = await import('../app/node_modules/playwright/index.js')
   const vite = await createServer({ root: path.join(root, 'app'), server: { host: '127.0.0.1', port: 0 } })
   await vite.listen()
-  const browser = await playwright.chromium.launch({ headless: true })
+  const browser = await playwright.chromium.launch({ channel: 'chromium', headless: true })
   const artifacts = process.env.EQB_WRITING_MARK_ARTIFACTS
   if (artifacts) mkdirSync(artifacts, { recursive: true })
   try {
