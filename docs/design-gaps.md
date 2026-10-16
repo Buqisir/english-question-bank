@@ -59,3 +59,10 @@ token 的扩展用法。
 - **临时方案**：这几处用 11px 字面量（`sentenceAnalysis.css` 的 `.sa-label`、`.sa-flag`、`.sa-quiet`、`.sa-bubble-unsure`、`.sa-bubble-action`）。若收编成 Type Ramp 的注释档，候选名 `--eqb-font-size-annotation`。
 - **想要的值**：贴在正文里的轻浮层阴影。`--eqb-shadow-floating`（0 8px 24px 12%）对一行高的气泡太重，会压住下一行字。
 - **临时方案**：`.sa-bubble` 用 `0 2px 8px rgba(25, 29, 24, 0.08)`。候选名 `--eqb-shadow-inline`。
+
+## 2026-10-15 登录页 08 雾海（`app/src/auth/LoginPage.css`）
+
+- **想要的值**：比 14px 大一档、比 20px 小的品牌页正文字号。登录页是品牌时刻，品牌名、副题和登录按钮在 64px 标语旁边用 14px 显得太弱，用 20px 又和标语抢。
+- **临时方案**：`.login-brand`、`.login-subtitle`、`.login-submit` 用 15px 字面量。若收编，候选名 `--eqb-font-size-brand-body`。
+- **想要的值**：手机输入框的字号下限。iOS Safari 在输入框字号小于 16px 时聚焦会放大页面。
+- **临时方案**：≤760px 时 `.login-field input` 用 16px 字面量。若日后全站表单都需要，候选名 `--eqb-font-size-input-mobile`。

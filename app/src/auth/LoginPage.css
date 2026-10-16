@@ -297,9 +297,10 @@
 }
 
 .login-submit:disabled {
-  background: #C9D5DB;
+  /* 「登录中…」是唯一的进行态，弱墨对桌面色 4.62:1，仍达 AA。 */
+  background: var(--eqb-color-desk);
   box-shadow: none;
-  color: var(--login-surface);
+  color: var(--login-muted);
 }
 
 .login-footer-hint {
