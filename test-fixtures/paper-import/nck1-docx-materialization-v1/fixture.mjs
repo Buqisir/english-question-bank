@@ -302,7 +302,9 @@ function answerBlocks({
           : index === 0 && listeningSeconds === 'instructions'
             ? ['Silence: 5 seconds between conversations', 'Repeat: after 15 seconds', 'Synthetic transcript 1.',
               'Silence: 5 seconds between conversations', 'Repeat: after 15 seconds'].map(paragraph)
-            : [paragraph(`Synthetic transcript ${index + 1}.`)]),
+            : index === 0 && listeningSeconds === 'replay'
+              ? ['Repeat: once', 'Synthetic transcript 1.', 'Repeat: after 15 seconds'].map(paragraph)
+              : [paragraph(`Synthetic transcript ${index + 1}.`)]),
       ]).flat(),
       ...(listeningTiming ? [paragraph('语速：每分钟 120 词')] : []),
     ] : []),

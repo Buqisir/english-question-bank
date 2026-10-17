@@ -133,14 +133,15 @@ function containsEmbeddedListeningCue(text) {
 
 const LISTENING_SECONDS = /\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu
 
+// Only the fixed role labels of exam dialogues can be speakers here. Any word label ("Repeat:",
+// "Silence:", "Tom:") may be a pause or replay instruction, so it never exempts a seconds value.
 function listeningTurn(text) {
-  const turn = /^\s*([A-Z]|[A-Z][a-z]+|(?:Mr|Mrs|Ms|Miss|Dr)\.? [A-Z][a-z]+)\s*[:：]\s*(\S.*)$/u.exec(text)
-  return turn && !LISTENING_METADATA_WORD.test(turn[1]) ? { label: turn[1], speech: turn[2] } : null
+  const turn = /^\s*(M|W|A|B|Man|Woman|Boy|Girl)\s*[:：]\s*(\S.*)$/u.exec(text)
+  return turn ? { label: turn[1], speech: turn[2] } : null
 }
 
-// A label is a confirmed speaker only when it opens at least two transcript lines and at least one
-// of them says no seconds; pause or replay instructions ("Silence: 5 seconds ...") repeat with
-// their durations, so a label shape alone never proves a speaker.
+// A role label is a confirmed speaker only when it opens at least two transcript lines and at
+// least one of them says no seconds.
 function confirmedListeningSpeakers(texts) {
   const lines = new Map()
   for (const text of texts) {
@@ -155,7 +156,7 @@ function confirmedListeningSpeakers(texts) {
 }
 
 // A confirmed speaker's turn can say "14 seconds" as speech; every other seconds value
-// (instructions, durations, metadata labels, bracketed notes) stays a review item.
+// (instructions, durations, named or metadata labels, bracketed notes) stays a review item.
 function listeningTimingMetadata(text, speakers = new Set()) {
   if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
   if (!LISTENING_SECONDS.test(text)) return false
@@ -165,8 +166,6 @@ function listeningTimingMetadata(text, speakers = new Set()) {
   // "Speaker: 2 minutes 25 seconds" with nothing else to say reads as a duration note, not speech.
   return !turn.speech.replace(/\b(?:\d+(?:\.\d+)?|about|around|approximately|and|minutes?|mins?|seconds?|secs?)\b|[^\p{L}]/giu, '')
 }
-
-const LISTENING_METADATA_WORD = /^(?:Note|Notes|Time|Timing|Duration|Length|Pause|Speed|Rate|Recording|Audio|Tape|Text|Part|Section|Question|Questions|Directions?|Instructions?|Tip|Notice|Total|Reading|Answer|Answering|Listening|Interval|Break|Wait|Preparation)$/u
 
 function listeningItemRecord(item, index, documentId, disposition, reason, kind = null) {
   const located = hasSourceLocator(documentId, item?.sourceIndex)

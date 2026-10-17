@@ -454,7 +454,7 @@ assert(unlabelledDuration.review.required.some((item) =>
 
 // Metadata labels and repeated pause/replay instructions look like speaker labels but must not
 // exempt the duration.
-for (const listeningSeconds of ['note', 'compound', 'instructions']) {
+for (const listeningSeconds of ['note', 'compound', 'instructions', 'replay']) {
   const labelledDuration = produceNck1DocxMaterialization({
     paperId: fixture.paperId,
     documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds }).sourceDocuments,
