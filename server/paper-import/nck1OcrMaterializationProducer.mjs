@@ -16,7 +16,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 
 export const NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-ocr-materialization-producer-v17'
+  'nck1-ocr-materialization-producer-v19'
 
 const PDF = 'application/pdf'
 const FULL_PAGE = Object.freeze({ x: 0, y: 0, width: 1, height: 1 })
@@ -57,7 +57,7 @@ function closeIssueSource(item, document) {
 
 export function nck1OcrProducerVersion(confirmation) {
   return confirmation?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
-    ? 'nck1-ocr-materialization-producer-v18' : NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION
+    ? 'nck1-ocr-materialization-producer-v20' : NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION
 }
 
 export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null, producerVersion = nck1OcrProducerVersion(confirmation) } = {}) {

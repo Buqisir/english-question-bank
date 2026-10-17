@@ -132,12 +132,21 @@ const scoringBeforeSample = makeSyntheticNck1DocxFixture({
 assertReady(produceNck1DocxMaterialization({
   paperId: scoringBeforeSample.paperId, documents: scoringBeforeSample.sourceDocuments,
 }), scoringBeforeSample.sourceDocuments, '评分标准：内容完整。', expectedWritingSamples)
+// A bare part heading inside the writing section may lead straight into the
+// English sample; Chinese text first under it is scoring and stays in review.
 const unlabelledWriting = makeSyntheticNck1DocxFixture({
   transformXml: xml => xml.replace('第一节：应用文（满分15分）', '第一节（满分15分）'),
 })
-assertRejected(produceNck1DocxMaterialization({
+assertReady(produceNck1DocxMaterialization({
   paperId: unlabelledWriting.paperId, documents: unlabelledWriting.sourceDocuments,
-}), unlabelledWriting.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+}), unlabelledWriting.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+const unlabelledScoringFirst = makeSyntheticNck1DocxFixture({
+  transformXml: xml => xml.replace('第一节：应用文（满分15分）',
+    '第一节（满分15分）</w:t></w:r></w:p><w:p><w:r><w:t>一、本题总分为15分，按5个档次给分。'),
+})
+assertRejected(produceNck1DocxMaterialization({
+  paperId: unlabelledScoringFirst.paperId, documents: unlabelledScoringFirst.sourceDocuments,
+}), unlabelledScoringFirst.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
 
 const multilineDocx = makeSyntheticNck1DocxFixture({ answerShape: 'key_only', multilineAnswers: true })
 const multilineDocxResult = produceNck1DocxMaterialization({
