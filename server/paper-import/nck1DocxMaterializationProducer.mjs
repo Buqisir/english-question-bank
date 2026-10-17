@@ -137,8 +137,13 @@ function listeningTimingMetadata(text) {
   if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
   if (!/\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu.test(text)) return false
   if (/[(（[【][^)）\]】]*\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[^)）\]】]*[)）\]】]/iu.test(text)) return true
-  return !/^\s*(?:[A-Z]|[A-Z][a-z]+(?: [A-Z][a-z]+)?)\s*[:：]\s*\S/u.test(text)
+  const turn = /^\s*([A-Z]|[A-Z][a-z]+(?: [A-Z][a-z]+)?)\s*[:：]\s*(\S.*)$/u.exec(text)
+  if (!turn || LISTENING_METADATA_LABEL.test(turn[1])) return true
+  // "Speaker: 25 seconds" with nothing else to say reads as a duration note, not speech.
+  return /^[(（[【]?\s*(?:about|around|approximately)?\s*\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[\s.。)）\]】]*$/iu.test(turn[2])
 }
+
+const LISTENING_METADATA_LABEL = /^(?:Note|Notes|Time|Timing|Duration|Length|Pause|Speed|Rate|Recording|Audio|Tape|Text|Part|Section|Question|Questions|Directions?|Instructions?|Tip|Notice|Total)$/u
 
 function listeningItemRecord(item, index, documentId, disposition, reason, kind = null) {
   const located = hasSourceLocator(documentId, item?.sourceIndex)

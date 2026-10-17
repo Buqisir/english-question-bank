@@ -295,6 +295,7 @@ function answerBlocks({
         paragraph(`Text ${index + 1}`),
         ...(index === 0 && listeningSeconds === 'metadata' ? [paragraph('（Text 1：25 seconds）')] : []),
         ...(index === 0 && listeningSeconds === 'duration' ? [paragraph('The duration of this recording is 25 seconds.')] : []),
+        ...(index === 0 && listeningSeconds === 'note' ? [paragraph('Note: 25 seconds')] : []),
         paragraph(index === 0 && listeningSeconds === 'dialogue'
           ? 'W: Wait 14 seconds.'
           : `Synthetic transcript ${index + 1}.`),
