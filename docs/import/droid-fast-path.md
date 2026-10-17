@@ -110,6 +110,7 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 - producer 的范文边界解析不认无标记的裸节标题（目前由主 Agent 处理 issue）。
 - 续写材料的故事标题按正文段渲染；纯答案版听力原文保留原 PDF 行内换行；
   producer 的续写 `officialModelAnswer` 遇到“考场作文”时取错（四款产品读源参考，不受影响）。
-- 题目卷节标题会孤悬页底（`print-renderer.mjs` 的 `.section-header` 没有 `break-after: avoid`）；
-  杭州、温州、湖丽衢、金华都有。属于共享渲染器改动，修后要重排已送审的卷。
+- OCR 听力原文按物理行拼接，句中断行进入 Canonical（违反格式标准“先合并 OCR 物理折行”）；
+  只应在说话人标签前保留换行。修在 OCR 进入 producer 之前，不改 DOCX 路径。
 - 源参考的范文标题按正文段输出，没有标成 `title`。
+- 部/节标题留在页尾是格式标准明确允许的（Owner 2026-09-21），不算缺陷。
