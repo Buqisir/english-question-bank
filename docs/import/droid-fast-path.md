@@ -91,6 +91,18 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
   容易漂移，用 `asr-extra` 错开边界。
 - **OCR 更正报告只收能精确定位的条目**；其余列为 skipped，已体现在确认文本里。
 - **写作源参考**：小写字母开头的行接续上一句，即使上一行提前折行；跨页仍拆成两个带定位的段。
+  “One possible version”“Possible version:”是范文标签；“评分原则：”“【评分说明】”“【各档次的给分…】”
+  单独捕获为评分（不印）；【审题重点】这类讲解和范文后中文起首的行跳过到下一标签或英文行，并写进
+  `review`。finish 末尾的分段总览要看一眼：范文里不该有中文段，评分不该混进范文。
+- **改了 producer 要用 `--redo-from materialize`。** producer 缓存按输入摘要命中、不看代码，
+  redo 会把产物、receipt、review 和媒体挪开；之前手工补过的 Materialization 改动要重新补。
+- **作答框最小高度可能放不下源给的开头。** 五档规划都失败时，规划器按实测最小可渲染高度二分重试
+  （湖丽衢：大字版应用文 40 mm、经济版 35 mm），并在汇报里写明框高。
+- **七选五空可能占小标题位。** worker 会把它记成 `__39__`，小标题匹配按同样写法渲染空。
+- **生产 Screen 字体加载慢。** `submit` 截图等到字体就绪且正文出现后再截；只重拍截图时删掉
+  `state.json` 里的 `screen` 步骤再跑 `submit`，`push` 已完成不会重推。
+- **后台跑 finish/submit 要用真正脱离会话的方式**（Droid 用 fireAndForget）；`nohup … &` 随调用
+  shell 退出会被一起结束，时间线里没有新步骤、日志为空。
 
 ## 已知未修（另立任务）
 
@@ -98,3 +110,6 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 - producer 的范文边界解析不认无标记的裸节标题（目前由主 Agent 处理 issue）。
 - 续写材料的故事标题按正文段渲染；纯答案版听力原文保留原 PDF 行内换行；
   producer 的续写 `officialModelAnswer` 遇到“考场作文”时取错（四款产品读源参考，不受影响）。
+- 题目卷节标题会孤悬页底（`print-renderer.mjs` 的 `.section-header` 没有 `break-after: avoid`）；
+  杭州、温州、湖丽衢、金华都有。属于共享渲染器改动，修后要重排已送审的卷。
+- 源参考的范文标题按正文段输出，没有标成 `title`。
