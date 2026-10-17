@@ -1061,9 +1061,66 @@ async function intake(ctx) {
     }
   }).finally(() => { recordChildren = null })
 }
+// One row per inventory folder, rebuilt from local facts only: the production snapshot and ledger
+// (matched by source bytes or paper name), every batch status file, and the survey probe.
+function progress() {
+  const base = process.env.EQB_BATCH_SOURCE_ROOT || path.join(os.homedir(), '导题2026届模拟题/2026届模拟题')
+  const input = json(process.env.EQB_BATCH_INVENTORY || path.join(os.homedir(), '.cache/eqb-survey/inventory.json'))
+  const entries = Array.isArray(input) ? input : Object.values(input)
+  const { known } = knownPapers(reviewOrigin())
+  const batchPapers = []
+  for (const dirent of readdirSync(batchRoot, { withFileTypes: true })) {
+    const file = path.join(batchRoot, dirent.name, 'status.json')
+    if (!dirent.isDirectory() || !existsSync(file)) continue
+    for (const paper of Object.values(json(file).papers || {})) batchPapers.push({ batch: dirent.name, paper })
+  }
+  const surveyFile = path.join(os.homedir(), '.cache/eqb-survey/parse-results.json')
+  const survey = new Map(existsSync(surveyFile) ? json(surveyFile).map((result) => [`${result.prov}/${result.paper}`, result]) : [])
+  const shortCode = (code) => code.replace(/^NCK1_(?:OCR_|DOCX_)?/u, '')
+  const rows = entries.map((entry) => {
+    const key = `${entry.prov}/${entry.paper}`
+    const directory = path.join(base, entry.prov, entry.paper)
+    const hashes = (entry.pdfs || []).map((name) => path.join(directory, name)).filter(existsSync).map(hashFile)
+    const inBatch = batchPapers.filter(({ paper }) => paper.item?.inventoryKey === key).at(-1)
+    const paperName = inBatch?.paper.paperName || null
+    const production = known.find(([, item]) => item.sha256?.some((hash) => hashes.includes(hash)))
+      || (paperName && known.find(([, item]) => item.paperName && paperNameKey(item.paperName) === paperNameKey(paperName)))
+    const codes = survey.get(key)?.codes?.map((item) => shortCode(item.code)) || []
+    const counts = Object.entries(codes.reduce((all, code) => ({ ...all, [code]: (all[code] || 0) + 1 }), {}))
+      .sort((left, right) => right[1] - left[1])
+    const status = production ? '已在生产' : key.includes('真题') ? '排除：真题' : inBatch ? '批次中' : '未开始'
+    return {
+      province: entry.prov.replace(/模拟题$/u, ''),
+      folder: entry.paper.replace(/^含词汇整理[：:]/u, ''),
+      status,
+      production: production ? `${production[0]}${production[2] === 'ledger' ? '（本地送审记录）' : ''}` : '',
+      productionNote: production?.[1].note || production?.[1].state || '',
+      batch: inBatch?.batch || '',
+      paperId: inBatch?.paper.paperId || '',
+      stage: inBatch ? `${inBatch.paper.stage}/${inBatch.paper.state}` : '',
+      blocked: inBatch?.paper.blocked?.reason?.replace(/\s+/gu, ' ') || '',
+      surveyIssues: survey.has(key) ? codes.length : '',
+      surveyTop: counts.slice(0, 3).map(([code, count]) => `${code}×${count}`).join('；'),
+      audio: (entry.audio || []).length ? '有' : '无',
+    }
+  }).sort((left, right) => left.province.localeCompare(right.province, 'zh') || left.folder.localeCompare(right.folder, 'zh'))
+  const columns = [['province', '省份'], ['folder', '目录'], ['status', '状态'], ['production', '生产 paperId'], ['productionNote', '生产备注'],
+    ['batch', '批次'], ['paperId', '批次 paperId'], ['stage', '阶段/状态'], ['blocked', '阻塞原因'], ['surveyIssues', '体检问题数'],
+    ['surveyTop', '体检主要问题'], ['audio', '听力音频']]
+  const cell = (value) => /[",\n]/u.test(String(value)) ? `"${String(value).replaceAll('"', '""')}"` : String(value)
+  const csv = [columns.map(([, label]) => label), ...rows.map((row) => columns.map(([name]) => row[name]))].map((line) => line.map(cell).join(',')).join('\n')
+  writeFileSync(path.join(batchRoot, 'progress.csv'), `\ufeff${csv}\n`)
+  const tally = (pick) => Object.entries(rows.reduce((all, row) => ({ ...all, [pick(row)]: (all[pick(row)] || 0) + 1 }), {}))
+  const summary = { generatedAt: new Date().toISOString(), total: rows.length, byStatus: Object.fromEntries(tally((row) => row.status)),
+    byProvince: Object.fromEntries(tally((row) => row.province).sort((left, right) => right[1] - left[1])),
+    snapshotPapers: known.length, note: '生产状态只来自手工快照与本地送审记录，未读取生产列表' }
+  writeJson(path.join(batchRoot, 'progress.json'), { ...summary, rows })
+  console.log(JSON.stringify({ ...summary, csv: path.join(batchRoot, 'progress.csv') }, null, 2))
+}
 export async function main(argv = process.argv.slice(2)) {
   const [command, ...args] = argv
-  if (!['intake', 'run', 'status'].includes(command)) fail('用法：batch-run.mjs <intake|run|status> --batch <名>；intake --keys <key列表>；run [--submit] [--parallel 3] [--max-agents 8] [--dry-run] [--retry <paperId,…>] [--clear-pause]')
+  if (command === 'progress') { progress(); return }
+  if (!['intake', 'run', 'status'].includes(command)) fail('用法：batch-run.mjs <intake|run|status> --batch <名>；intake --keys <key列表>；run [--submit] [--parallel 3] [--max-agents 8] [--dry-run] [--retry <paperId,…>] [--clear-pause]；progress')
   const opts = parseOptions(args)
   const ctx = makeContext(opts)
   if (command === 'status') { printStatus(ctx); return }
