@@ -244,22 +244,112 @@ function questionDocument(options = {}) {
   return docx(questionBlocks(options), options)
 }
 
+const OBJECTIVE_KEY = 'ABCDABCBCDACDAB' + 'ABCDE' + 'ABCDABCDABCDABC'
+const TEXT_KEY = ['walked', 'quickly', 'on', 'the', 'path', 'and', 'shared', 'a', 'kind', 'note']
+
+function answerTable(rows) {
+  const cell = (text) => `<w:tc><w:p><w:r><w:t>${escapeXml(text)}</w:t></w:r></w:p></w:tc>`
+  return `<w:tbl><w:tblGrid>${'<w:gridCol/>'.repeat(rows[0].length)}</w:tblGrid>`
+    + rows.map((row) => `<w:tr>${row.map(cell).join('')}</w:tr>`).join('')
+    + '</w:tbl>'
+}
+
+// Real answer-key layouts: unpunctuated pairs, number/answer grids printed as
+// lines or tables, and list separators with an optional in-word letter.
+function formattedKey(answerFormat) {
+  const objective = [...OBJECTIVE_KEY]
+  const numbers = (from, count) => Array.from({ length: count }, (_, index) => String(from + index))
+  if (answerFormat === 'unpunctuated') {
+    return [
+      paragraph(objective.slice(0, 15).map((value, index) => `${21 + index}${value}`).join(' ')),
+      paragraph(objective.slice(15, 20).map((value, index) => `${36 + index} ${value}`).join(' ')),
+      paragraph(objective.slice(20).map((value, index) => `${41 + index}${value}`).join(' ')),
+      paragraph(TEXT_KEY.map((value, index) => `${56 + index} ${value}`).join(' ')),
+    ]
+  }
+  if (answerFormat === 'gridLines') {
+    const rows = []
+    for (let from = 21; from <= 55; from += 10) {
+      const count = Math.min(10, 56 - from)
+      rows.push(paragraph(`序号 ${numbers(from, count).join(' ')}`))
+      rows.push(paragraph(`答案 ${objective.slice(from - 21, from - 21 + count).join(' ')}`))
+    }
+    rows.push(paragraph(`题号| ${numbers(56, 10).join(' ')}`), paragraph(`答案| ${TEXT_KEY.join(' ')}`))
+    return rows
+  }
+  if (answerFormat === 'gridTable') {
+    const rows = []
+    for (let from = 21; from <= 55; from += 10) {
+      const count = Math.min(10, 56 - from)
+      const pad = Array.from({ length: 10 - count }, () => '')
+      rows.push(['序号', ...numbers(from, count), ...pad])
+      rows.push(['答案', ...objective.slice(from - 21, from - 21 + count), ...pad])
+    }
+    return [answerTable(rows), answerTable([
+      ['题号', ...numbers(56, 5)], ['答案', 'walked', 'quickly', 'on', 'the', 'path'],
+      ['题号', ...numbers(61, 5)], ['答案', 'and', 'shared', 'a', 'kind', 'note'],
+    ])]
+  }
+  if (answerFormat === 'separators') {
+    return [
+      paragraph('21~23 ABC 24~27 DABC 28~31 BCDA 32~35 CDAB'),
+      paragraph('36－40 ABCDE'),
+      paragraph('41-45ABCDA46-50BCDAB51-55CDABC'),
+      paragraph('56.walked;\t57.quickly;\t58.on;\t59.the;\t60.path;'),
+      paragraph('61.and;\t62.shared;\t63.a;\t64.kind;\t65.no(t) e;'),
+    ]
+  }
+  return null
+}
+
+function writingSampleBlocks(writingShape) {
+  const application = ['Should We Join the Reading Club?', 'Join us on Friday to read and share ideas.']
+  const continuation = ['Mia carried the notebook to the school office. The teacher found its owner.',
+    'The next morning, a student came to thank her. They became friends.']
+  const shapes = {
+    standard: ['第四部分 写作', '第一节：应用文（满分15分）', ...application, '第二节：读后续写（满分25分）', ...continuation],
+    bare: ['第四部分 写作（共两节，满分40分）', '第一节（满分15分）', ...application, '第二节（满分25分）', ...continuation],
+    bareScoringFirst: ['第四部分 写作', '第一节（满分15分）', '一、本题总分为15分，按5个档次给分。', ...application,
+      '第二节（满分25分）', ...continuation],
+    typed: ['写作', '应用文', ...application, '读后续写', ...continuation],
+    typedNoSection: ['应用文:', '参考范文:', ...application, '读后续写:', '参考范文:', ...continuation],
+    chineseLabel: ['第四部分 写作', '第一节', '评分原则：内容要点完整。', '参考范文：', ...application,
+      '第二节', '写作样例', ...continuation, '一、评分原则', '按档次给分。'],
+    typedWithBareExplanations: ['第四部分 写作', '第一节：应用文写作', ...application, '附应用文评分标准',
+      '第二节：读后续写', ...continuation, '读后续写评分标准', '第一节（满分15分）', '按档次给分。',
+      '第二节（满分25分）', '按档次给分。'],
+    stackedLabels: ['第四部分 写作', '第一节', '(四)参考范文', 'Possible Version 1:', ...application,
+      '第二节', '【作答示例】', 'One possible version:', ...continuation],
+    typedScoringOnly: ['第四部分 写作', '应用文:', '一、本题总分为15分，按5个档次给分。', '按内容要点给分。',
+      '读后续写:', '一、本题总分为25分，按5个档次给分。', '按内容要点给分。'],
+    missingSection: ['One Possible Version:', ...application, ...continuation],
+  }
+  return shapes[writingShape].map(paragraph)
+}
+
 function answerBlocks({
   answerShape = 'detailed',
   answerHeading = true,
   ambiguousTextAnswer = false,
   missingAnswer = false,
   multilineAnswers = false,
+  answerFormat = null,
+  restatedExplanations = false,
+  explanationAfterKey = false,
+  writingShape = 'standard',
   listening = false,
   listeningHeading = '听力原文',
+  listeningMarkerSuffix = '',
   listeningTiming = false,
   listeningSeconds = null,
 } = {}) {
+  const formatted = formattedKey(answerFormat)
   const key = [
     paragraph('Synthetic official answers'),
     ...(listening ? [
       paragraph('1-5ABCAB6-10BCABC11-15ABCAB16-20BCABC'),
     ] : []),
+    ...(formatted || [
     // Deliberately glue adjacent ranges and answers to exercise the real shape.
     multilineAnswers
       ? '<w:p><w:r><w:t>21. A</w:t><w:br/><w:t>22. B</w:t><w:br/><w:t>23. C</w:t><w:br/><w:t>24-27DABC28-31BCDA32-35CDAB</w:t></w:r></w:p>'
@@ -275,24 +365,36 @@ function answerBlocks({
           ? '56.walked\t\t57.quickly58.on\t59.the60.path61.and62.shared63.a64.kind65.note followed by a long explanation sentence whose boundary is not marked clearly enough for an authoritative grammar answer'
           : '56.walked\t\t57.quickly58.on\t59.the60.path61.and62.shared63.a64.kind65.note',
     ),
+    ]),
   ]
   if (answerShape === 'key_only') return key
   return [
     ...(answerHeading ? [paragraph('答案与解析')] : []),
     ...key,
+    ...(explanationAfterKey ? [paragraph('解析'), paragraph('21. D 由原文第二段可知。')] : []),
     paragraph('21. A【解析】DETAIL_TOKEN_MUST_NOT_LEAK into Materialization, Review, Screen, or Print.'),
     paragraph('56. walked【解析】DETAIL_TOKEN_MUST_NOT_LEAK into Materialization, Review, Screen, or Print.'),
-    paragraph('第四部分 写作'),
-    paragraph('第一节：应用文（满分15分）'),
-    paragraph('Should We Join the Reading Club?'),
-    paragraph('Join us on Friday to read and share ideas.'),
-    paragraph('第二节：读后续写（满分25分）'),
-    paragraph('Mia carried the notebook to the school office. The teacher found its owner.'),
-    paragraph('The next morning, a student came to thank her. They became friends.'),
+    ...(restatedExplanations ? [
+      paragraph('56.walked。考查非谓语动词。'),
+      paragraph('65.考查名词的数。句意:同64题解析。'),
+      paragraph('66.应用文参考例文'),
+      ...({
+        conflict: ['56.walking。考查非谓语动词。'],
+        labelledSame: ['56.【答案】walked【解析】考查非谓语动词。', '56.答案：walked。考查非谓语动词。'],
+        repeatedLead: ['56. walked, 考查非谓语动词。', '57. Quickly考查副词。'],
+        extendedLead: ['56. walked Biel walk在这里作谓语。'],
+        labelledExtension: ['56.【答案】walked away【解析】考查短语。'],
+        splitWord: ['56. walk ed考查非谓语动词。'],
+        labelledConflict: ['56.【答案】walking【解析】考查非谓语动词。'],
+        labelledColonConflict: ['56.答案：walking。考查非谓语动词。'],
+        labelledUnseparable: ['56.【答案】考查非谓语动词。'],
+      }[restatedExplanations] || []).map(paragraph),
+    ] : []),
+    ...writingSampleBlocks(writingShape),
     ...(listening ? [
       paragraph(listeningHeading),
       ...Array.from({ length: 10 }, (_, index) => [
-        paragraph(`Text ${index + 1}`),
+        paragraph(`Text ${index + 1}${listeningMarkerSuffix}`),
         ...(index === 0 && listeningSeconds === 'metadata' ? [paragraph('（Text 1：25 seconds）')] : []),
         ...(index === 0 && listeningSeconds === 'duration' ? [paragraph('The duration of this recording is 25 seconds.')] : []),
         ...(index === 0 && listeningSeconds === 'note' ? [paragraph('Note: 25 seconds')] : []),
