@@ -1607,11 +1607,17 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     const cueTimes = [[0, .7], [1.2, 2], [2.3, 3.3], [3.8, 4.5], [5.1, 6], [6.5, 8.2]]
     assert.equal(lineGeometry.length, cueTimes.length)
     const recordingDuration = Number(await fullPlayer.getByRole('slider').getAttribute('aria-valuemax'))
+    // aria-valuemax is whole seconds, while the encoded fixture's published duration carries MP3
+    // frame padding that differs between ffmpeg builds; derive the track scale from the lines instead.
+    const lastLine = lineGeometry.at(-1)
+    const secondsPerTrack = cueTimes.at(-1)[1] / (lastLine.x + lastLine.width)
+    assert.ok(Math.abs(secondsPerTrack - recordingDuration) <= .5,
+      `Line track spans the whole recording: ${JSON.stringify({ secondsPerTrack, recordingDuration })}`)
     lineGeometry.forEach((line, index) => {
       const [start, end] = cueTimes[index]
-      assert.ok(Math.abs(line.x - start / recordingDuration) < .001
-        && Math.abs(line.width - (end - start) / recordingDuration) < .001,
-      'Question lines preserve real timestamps and instruction/silence gaps')
+      assert.ok(Math.abs(line.x * secondsPerTrack - start) < .02
+        && Math.abs(line.width * secondsPerTrack - (end - start)) < .02,
+      `Question lines preserve real timestamps and instruction/silence gaps: ${JSON.stringify({ index, line, secondsPerTrack })}`)
     })
     const slider = fullPlayer.getByRole('slider')
     const beforeDrag = await audio.evaluate(element => element.currentTime)
