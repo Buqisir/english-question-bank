@@ -55,6 +55,7 @@ import { createQuestionBankStewardImplementation } from './search/questionBankSt
 import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, normalizeSynonymCardId, normalizeSynonymConfidence, normalizeSynonymBoolean, uniqueSynonymFlags, formatSynonymDifficultyKnowledgeForReadingPrompt } from './ai-parse/synonymDifficultyService.mjs'
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
 import { createImportReviewStore } from './import-review/importReviewStore.mjs'
+import { rendererBuildIdProvider } from './import-review/rendererBuildIdProvider.mjs'
 import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
 import { createSinglePaperPromotionService } from './import-review/singlePaperPromotion.mjs'
 import { createSourceIntakeNotifier } from './source-intake/sourceIntakeNotifier.mjs'
@@ -115,7 +116,11 @@ function actualRendererBuildId() {
   return `sha256:${hash.digest('hex')}`
 }
 
-const rendererBuildId = process.env.QUESTION_BANK_BUILD_ID || actualRendererBuildId
+const rendererBuildId = rendererBuildIdProvider({
+  explicitBuildId: process.env.QUESTION_BANK_BUILD_ID,
+  production: process.env.NODE_ENV === 'production',
+  compute: actualRendererBuildId,
+})
 let importReviewStore = null
 function getImportReviewStore() {
   if (!importReviewStore) {
