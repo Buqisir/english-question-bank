@@ -783,17 +783,20 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
 // ("56.in;") and an optional letter inside a word ("fuel(l)ed", printed
 // "fuel(l) ed") are answer-key formats; other punctuation, Chinese text, or a
 // long run means explanation prose may be attached, so the value is withheld.
-// An explanation "repeats" a keyed answer when its opening words are the key
-// (English prose may follow) or when it lists the same alternatives in any
-// order; OCR spacing around "/" and inside the value does not matter.
-function restatesAnswer(lead, keyedValue) {
-  const bare = (text) => text.toLowerCase().replace(/[,.;:!?"“”]/gu, ' ')
-  const words = (text) => bare(text).replace(/\s*\/\s*/gu, '/').trim().split(/\s+/u)
-  const alternatives = (text) => bare(text).replace(/\s+/gu, '').split('/').sort().join('/')
+// Two answer values match when they list the same complete alternatives in
+// any order; case, runs of spaces and spacing around "/" do not matter, but
+// word boundaries inside an alternative do ("some time" is not "sometime").
+function alternativeSet(value) {
+  return value.toLowerCase().split('/').map((part) => part.trim().replace(/\s+/gu, ' ')).sort().join('/')
+}
+
+// The key's words opening a longer restatement ("arrived Biel arrive…") give
+// no reliable answer/explanation boundary.
+function extendsAnswer(restated, keyedValue) {
+  const words = (text) => text.toLowerCase().trim().split(/\s+/u)
   const key = words(keyedValue)
-  const restated = words(lead)
-  return key.every((word, index) => restated[index] === word)
-    || alternatives(lead) === alternatives(keyedValue)
+  const longer = words(restated)
+  return longer.length > key.length && key.every((word, index) => longer[index] === word)
 }
 
 function textAnswerValue(rawValue) {
@@ -976,20 +979,21 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       const value = textAnswerValue(detail ? rawValue.slice(0, detail.index) : rawValue)
       if (!value) {
         // An explanation for an already keyed number is not a second
-        // authority when it opens with Chinese prose or repeats the key; an
-        // English lead that differs from the key is a real conflict. An
-        // explicit "【答案】"/"答案：" claim always needs a separable value.
+        // authority when it opens with Chinese prose or repeats the complete
+        // key; a different English value is a real conflict. An explicit
+        // "【答案】"/"答案：" claim always needs a separable value.
         const keyed = answers.get(number)
         if (keyed) {
           const label = /^\s*(?:【\s*答案\s*】|答案\s*[:：])\s*/u.exec(rawValue)
           const lead = rawValue.slice(label ? label[0].length : 0).split(/[\p{Script=Han}。，；：【]/u)[0]
-          if (restatesAnswer(lead, keyed.value)) continue
-          if (textAnswerValue(lead)) {
+          const restated = textAnswerValue(lead)
+          if (restated && alternativeSet(restated) === alternativeSet(keyed.value)) continue
+          if (restated && (label || !extendsAnswer(restated, keyed.value))) {
             addIssue(issues, 'NCK1_DOCX_ANSWER_CONFLICT', `answers.${number}`,
               'An explanation restates a different value than the official answer key', at(item))
             continue
           }
-          if (!label && !/[A-Za-z]/u.test(lead)) continue
+          if (!restated && !label && !/[A-Za-z]/u.test(lead)) continue
         }
         addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
           'A text answer cannot be separated safely from adjacent explanation text', at(item))

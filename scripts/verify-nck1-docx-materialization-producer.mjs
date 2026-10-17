@@ -533,6 +533,9 @@ for (const [restatedExplanations, code] of [
   ['labelledConflict', 'NCK1_DOCX_ANSWER_CONFLICT'],
   ['labelledColonConflict', 'NCK1_DOCX_ANSWER_CONFLICT'],
   ['labelledUnseparable', 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS'],
+  ['extendedLead', 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS'],
+  ['labelledExtension', 'NCK1_DOCX_ANSWER_CONFLICT'],
+  ['splitWord', 'NCK1_DOCX_ANSWER_CONFLICT'],
 ]) {
   const result = produceWith({ restatedExplanations })
   assert.equal(result.disposition, 'needs_agent_review', restatedExplanations)
