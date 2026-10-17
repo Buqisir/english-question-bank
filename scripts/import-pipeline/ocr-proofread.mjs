@@ -32,8 +32,10 @@ import {
   nck1OcrSourceSetDigest,
   resolveConfirmedNck1OcrEvidence,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { planHeadingRepairs } from './ocr-heading-repair.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
+const HEADING_REPAIRS_FILE = 'heading-repairs.json'
 const execFileAsync = promisify(execFile)
 // Must match RASTER_DENSITY in nck1OcrSourceEvidence.mjs so OCR reads the bound raster.
 const EVIDENCE_DENSITY = 144
@@ -210,12 +212,18 @@ async function evidence(paperId) {
     pages: ocrPages.map(({ documentId, page, key, imagePath, words, record }) =>
       ({ documentId, page, key, imagePath, words, record })),
   })
-  for (const page of ocrPages) writeWorksheet(work, page)
+  const questionDocuments = new Set(documents.filter((document) => ['question_source', 'question_and_answers'].includes(document.role))
+    .map((document) => document.documentId))
+  const repairs = await planHeadingRepairs(ocrPages.filter((page) => questionDocuments.has(page.documentId))
+    .map((page) => ({ key: page.key, imagePath: page.imagePath, lines: draftLines(page.words) })))
+  writeJson(path.join(work, HEADING_REPAIRS_FILE), { schemaVersion: 'ocr-heading-repairs-v1', paperId, repairs })
+  for (const page of ocrPages) writeWorksheet(work, page, { repairs: repairs[page.key] })
   console.log(JSON.stringify({
     ok: true,
     paperId,
     stagedEvidence: existsSync(path.join(paperDir, 'materialization', NCK1_OCR_EVIDENCE_FILE_NAME)),
     pages: ocrPages.map((page) => ({ page: page.key, words: page.words.length })),
+    headingRepairs: Object.values(repairs).reduce((sum, byLine) => sum + Object.keys(byLine).length, 0),
     worksheets: path.join(work, 'worksheets'),
     drafts: path.join(work, 'drafts'),
     seconds: Math.round((Date.now() - started) / 1000),
@@ -252,6 +260,25 @@ function watermarkWords(line) {
   return [...found]
 }
 
+// The draft reading of each line (watermark words dropped) with the box of the kept words.
+function draftLines(words) {
+  return pageLines(words).map((line) => {
+    const marks = watermarkWords(line)
+    const kept = line.words.filter((word) => !marks.includes(word.number))
+    const boxes = (kept.length ? kept : line.words).map((word) => word.box)
+    return {
+      id: line.id,
+      text: joinTokens(kept.map((word) => word.text)),
+      box: {
+        left: Math.min(...boxes.map((box) => box.left)),
+        top: Math.min(...boxes.map((box) => box.top)),
+        right: Math.max(...boxes.map((box) => box.left + box.width)),
+        bottom: Math.max(...boxes.map((box) => box.top + box.height)),
+      },
+    }
+  })
+}
+
 function ranges(numbers) {
   const sorted = [...numbers].sort((left, right) => left - right)
   const out = []
@@ -263,7 +290,7 @@ function ranges(numbers) {
   return out.map(([from, to]) => (from === to ? `w${from}` : `w${from}-w${to}`))
 }
 
-function writeWorksheet(work, { documentId, page, key, imagePath, words }, { force = false } = {}) {
+function writeWorksheet(work, { documentId, page, key, imagePath, words }, { force = false, repairs = {} } = {}) {
   const lines = pageLines(words)
   const furniture = []
   const rows = lines.map((line, index) => {
@@ -276,7 +303,12 @@ function writeWorksheet(work, { documentId, page, key, imagePath, words }, { for
     const first = line.words[0].number
     const last = line.words.at(-1).number
     const lowest = Math.min(...line.words.map((word) => word.conf))
-    const hint = isFooter ? '  ⟪页脚候选⟫' : marks.length ? `  ⟪水印候选 ${ranges(marks).join(',')}⟫` : ''
+    const repair = repairs[line.id]
+    const hint = isFooter ? '  ⟪页脚候选⟫' : [
+      ...(marks.length ? [`⟪水印候选 ${ranges(marks).join(',')}⟫`] : []),
+      ...(repair ? [`⟪粗体标题乱码，草稿已按卷面结构重建为「${repair.text}」，请对图核对${
+        [...(repair.notes || []), ...(repair.uncertain ? [`存疑：${repair.uncertain}`] : [])].map((note) => `；${note}`).join('')}⟫`] : []),
+    ].map((text) => `  ${text}`).join('')
     return `${line.id} [w${first}-w${last}] (min conf ${Math.round(lowest)}) ${joinTokens(line.words.map((word) => word.text))}${hint}`
   })
   const tokens = lines.map((line) => `${line.id}: ${line.words.map((word) => `${word.number}:${word.text}`).join(' ')}`)
@@ -305,7 +337,9 @@ function writeWorksheet(work, { documentId, page, key, imagePath, words }, { for
       image: imagePath,
       items: lines.filter((line) => !furniture.includes(line.id)).map((line) => ({
         lines: line.id,
-        text: joinTokens(line.words.filter((word) => !watermarkWords(line).includes(word.number)).map((word) => word.text)),
+        text: repairs[line.id]?.text
+          ?? joinTokens(line.words.filter((word) => !watermarkWords(line).includes(word.number)).map((word) => word.text)),
+        ...(repairs[line.id]?.uncertain ? { uncertain: repairs[line.id].uncertain } : {}),
       })).filter((item) => item.text),
       furniture,
     })
@@ -684,7 +718,9 @@ function worksheets(paperId) {
   const { work } = context(paperId)
   const trace = readJson(path.join(work, 'trace.json'), 'OCR trace')
   const force = process.argv.includes('--reset-drafts')
-  for (const page of trace.pages) writeWorksheet(work, page, { force })
+  const stored = path.join(work, HEADING_REPAIRS_FILE)
+  const repairs = existsSync(stored) ? readJson(stored, 'Heading repairs').repairs : {}
+  for (const page of trace.pages) writeWorksheet(work, page, { force, repairs: repairs[page.key] })
   console.log(JSON.stringify({ ok: true, pages: trace.pages.length, draftsReset: force }))
 }
 
