@@ -21,10 +21,11 @@ import { sha256 } from '../shared/paper-canonical/stable.mjs'
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-scoped-publication-'))
 const dbPath = path.join(root, 'review.sqlite')
 let renderer = 'renderer-a'
+let rendererReads = 0
 const digest = (character) => `sha256:${character.repeat(64)}`
 const paperByRevision = new Map()
 const store = createImportReviewStore({
-  dbPath, filesRoot: path.join(root, 'files'), rendererBuildId: () => renderer,
+  dbPath, filesRoot: path.join(root, 'files'), rendererBuildId: () => { rendererReads += 1; return renderer },
   projectRevision(directory) {
     const revisionId = path.basename(directory)
     return { paperId: paperByRevision.get(revisionId), sourceDigest: digest('1'),
@@ -86,6 +87,11 @@ try {
   const approval = seed('paper-scoped-a', '1')
   const other = seed('paper-scoped-b', '2')
   const awaiting = seed('paper-scoped-awaiting', '3', 'awaiting_review')
+  // Unset QUESTION_BANK_BUILD_ID makes each read hash the renderer tree, so a listing reads it once.
+  const readsBeforeListing = rendererReads
+  const listed = store.listPapers()
+  assert.equal(listed.filter((paper) => paper.reviewKind === 'candidate' && paper.rendererStale === false).length, 3)
+  assert.equal(rendererReads - readsBeforeListing, 1)
   const disabledRoutes = createImportReviewRoutes({ getStore: () => store, agentToken: 'agent-token', shipToken: 'ship-token', buildPrintHtml() {} })
   const disabled = await routeRequest(disabledRoutes, '/api/import-agent-reviews/papers/paper-scoped-a/publication-requests', { body: input(approval, 'route-secret') })
   assert.equal(disabled.status, 404, 'agent token alone must not activate scoped publication')

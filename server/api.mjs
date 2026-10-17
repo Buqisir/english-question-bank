@@ -115,7 +115,14 @@ function actualRendererBuildId() {
   return `sha256:${hash.digest('hex')}`
 }
 
-const rendererBuildId = process.env.QUESTION_BANK_BUILD_ID || actualRendererBuildId
+// Hashing the renderer tree reads the whole built app (~250 MB) synchronously and stalls every
+// request. A production process serves one immutable release directory and restarts on each
+// deploy, so it hashes once; development keeps rehashing so edited sources mark revisions stale.
+let releaseRendererBuildId = null
+const rendererBuildId = process.env.QUESTION_BANK_BUILD_ID
+  || (process.env.NODE_ENV === 'production'
+    ? () => (releaseRendererBuildId ??= actualRendererBuildId())
+    : actualRendererBuildId)
 let importReviewStore = null
 function getImportReviewStore() {
   if (!importReviewStore) {
