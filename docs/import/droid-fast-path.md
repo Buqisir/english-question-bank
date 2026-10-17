@@ -72,6 +72,16 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
   `text-review-parts.mjs auto` 复刻服务端标点规范化后生成审查报告（温州二模 340 条 0 差异）。
 - **ASR 一开始就跑**：绑定不可变的 `source/listening-audio.*`，不等 Materialization。
 
+## PDF 目检口径
+
+格式标准（`docs/product/exam-paper-format-standards.md` §3b 与整卷重排）的精神是规范内的 friendly：
+硬约束很少，其余是可退让的偏好。目检先查硬约束，偏好只在明显难看时提，不当缺陷报。
+
+- **硬约束**：页数（省纸恰好 8、大字不超上限）；不缩字、不删改、不裁图；单道小题、挖空横线、
+  写作作答框不拆；七选五选项库不跨页；无溢出、叠字；OCR 物理折行已合并。
+- **偏好**：题组完整、少翻面、标题随后文（部/节标题留页尾明确允许）、篇章不跨页；作答框优先
+  65/57 mm，压缩后尽量恢复（下限应用文 24 mm、续写 24/27 mm）。
+
 ## 已踩过的坑
 
 - **分页必须在摘要、metadata、听力审查装好之后。** Candidate 要求这些 sidecar；源参考
