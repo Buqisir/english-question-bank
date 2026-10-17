@@ -19,7 +19,9 @@ const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
 // Labels that open an official sample; scoring or prompt text may precede them.
 const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
-const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*[:：]?$/iu
+// Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
+// Match the whole marker, keeping its single Chinese note out of speech.
+const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*(?:\((?=[^()]*\p{Script=Han})[^()]+\)\s*)?[:：]?$/iu
 // English samples never open a paragraph with Chinese; such a paragraph is the key's own
 // commentary (【审题重点】, 主题语境：…). Chinese version labels still separate alternatives.
 const WRITING_SAMPLE_COMMENTARY = /^(?:【|(?!(?:参考)?范文|考场作文)\p{Script=Han})/u
@@ -1083,6 +1085,12 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     item.kind === 'paragraph' && String(item.text).includes('\n')
       ? String(item.text).split('\n').map((text) => ({ ...item, text }))
       : [item])
+  // "第二节 读后续写" followed by "读后续写" names one sample.
+  // Keep the last adjacent heading; any intervening prose keeps the ambiguity.
+  const adjacentContinuationHeadings = (positions) => positions.filter((position, index) =>
+    index === positions.length - 1 || !sampleBody.slice(position + 1, positions[index + 1])
+      .every((item) => item.kind === 'paragraph' && (!normalized(item.text)
+        || CONTINUATION_HEADINGS.some((pattern) => pattern.test(normalized(item.text))))))
   const numberedSections = writingSamplePosition(sampleBody, [NUMBERED_WRITING_ANSWER_SECTION], 0)
   let writingSections = numberedSections.length
     ? numberedSections
@@ -1105,7 +1113,7 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     const typedApplication = APPLICATION_HEADINGS.filter((pattern) => pattern !== BARE_APPLICATION_HEADING)
     const typedContinuation = CONTINUATION_HEADINGS.filter((pattern) => pattern !== BARE_CONTINUATION_HEADING)
     const application = writingSamplePosition(sampleBody, typedApplication, 0)
-    const continuation = writingSamplePosition(sampleBody, typedContinuation, 0)
+    const continuation = adjacentContinuationHeadings(writingSamplePosition(sampleBody, typedContinuation, 0))
     if (application.length === 1 && continuation.length === 1 && application[0] < continuation[0]) {
       writingSections.push(application[0] - 1)
       applicationPatterns = typedApplication
@@ -1141,7 +1149,7 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     return writingSamplePosition(sampleBody, [barePattern], writingStart + 1)
   }
   const applicationHeadings = headings(applicationPatterns, BARE_APPLICATION_HEADING)
-  const continuationHeadings = headings(continuationPatterns, BARE_CONTINUATION_HEADING)
+  const continuationHeadings = adjacentContinuationHeadings(headings(continuationPatterns, BARE_CONTINUATION_HEADING))
   if (applicationHeadings.length !== 1 || continuationHeadings.length !== 1
     || applicationHeadings[0] >= continuationHeadings[0]) {
     addIssue(
@@ -1239,7 +1247,10 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   const ranges = []
   for (const item of questionBody.slice(listeningHeading + 1, readingStart)) {
     if (item.kind !== 'paragraph') continue
+    // "听第6段材料，回答6、7题。" omits 第 only in this complete announcement.
+    // Require both endpoints, a supported separator and the terminal 题.
     const match = /回答第\s*(\d+)\s*(?:和|、|至|到|[-–—])\s*第?\s*(\d+)/u.exec(normalized(item.text))
+      || /^听第\d+段材料[,，]\s*回答\s*(\d+)\s*(?:、|至|-)\s*(\d+)\s*题[。.]?$/u.exec(normalized(item.text))
     if (match) ranges.push({
       questionNumbers: Array.from(
         { length: Number(match[2]) - Number(match[1]) + 1 },

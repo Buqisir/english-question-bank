@@ -581,6 +581,54 @@ for (const [listeningHeading, listeningMarkerSuffix] of [['录音文稿', ''], [
   assert.equal(result.materialization.listening.transcript.length, 10)
 }
 
+// A source may stack a section heading and its short title before one sample.
+for (const between of ['', '<w:p/>']) {
+  const result = produceWith({ transformXml: xml => xml.replace(
+    '第二节：读后续写（满分25分）</w:t></w:r></w:p>',
+    `第二节：读后续写（满分25分）</w:t></w:r></w:p>${between}<w:p><w:r><w:t>读后续写</w:t></w:r></w:p>`,
+  ) })
+  assert.equal(result.disposition, 'ready_for_verification')
+  assert.equal(writingSample(result, 'continuation-writing'), baselineContinuation)
+  assert.equal(writingSample(result, 'application-writing'), baselineApplication)
+}
+const separatedContinuation = produceWith({ transformXml: xml => xml.replace(
+  '第二节：读后续写（满分25分）</w:t></w:r></w:p>',
+  '第二节：读后续写（满分25分）</w:t></w:r></w:p><w:p><w:r><w:t>A separate sample.</w:t></w:r></w:p><w:p><w:r><w:t>读后续写</w:t></w:r></w:p>',
+) })
+assert(separatedContinuation.review.required.some(item =>
+  item.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+const noWritingPartTitle = produceWith({ writingShape: 'typedNoSection', transformXml: xml => xml.replace(
+  '读后续写:</w:t></w:r></w:p>',
+  '第二节 读后续写</w:t></w:r></w:p><w:p><w:r><w:t>读后续写:</w:t></w:r></w:p>',
+) })
+assert.equal(noWritingPartTitle.disposition, 'ready_for_verification')
+assert.equal(writingSample(noWritingPartTitle, 'continuation-writing'), baselineContinuation)
+
+// Only a complete pair/range of question numbers may omit 第 after 回答.
+for (const range of ['6、7', '6至7', '6-7']) {
+  const result = produceWith({ listening: true, transformXml: xml =>
+    xml.replace('回答第6、7题。', `回答${range}题。`) })
+  assert.equal(result.disposition, 'ready_for_verification', range)
+  assert.deepEqual(result.materialization.listening.transcript[5].questionNumbers, [6, 7])
+}
+for (const range of ['6、题', '6、7', '6和7题', '6、7题外文字']) {
+  const result = produceWith({ listening: true, transformXml: xml =>
+    xml.replace('回答第6、7题。', `回答${range}。`) })
+  assert(result.review.required.some(item => item.code === 'NCK1_DOCX_LISTENING_RANGES_AMBIGUOUS'), range)
+}
+
+// Parenthesized Chinese notes belong to marker metadata, never transcript prose.
+for (const listeningMarkerSuffix of ['（第6题为主旨题）', '(第6题为主旨题)', '（比较 Text 3 的主旨）']) {
+  const result = produceWith({ listening: true, listeningMarkerSuffix })
+  assert.equal(result.disposition, 'ready_for_verification', listeningMarkerSuffix)
+  assert.equal(result.materialization.listening.transcript.length, 10)
+  assert.equal(result.materialization.listening.transcript[5].text, 'Synthetic transcript 6.')
+}
+const noteOnlyText = produceWith({ listening: true, transformXml: xml =>
+  xml.replace('Text 6</w:t>', '（第6题说明 Text 6）</w:t>') })
+assert(noteOnlyText.review.required.some(item =>
+  item.code === 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS'))
+
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-docx-producer-'))
 try {
   for (const document of fixture.sourceDocuments) {
