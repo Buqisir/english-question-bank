@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v15'
+  'nck1-docx-materialization-producer-v16'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -131,6 +131,16 @@ function containsEmbeddedListeningCue(text) {
   return /\(\s*(?:停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)|重复)\s*\)|听下面(?:(?:的)?录音|一段(?:对话|独白|对话或独白))[,，]回答第\d+|(?:第一节|第二节)(?:到此结束|[:：].*听下面5段)|听力部分到此结束|转涂到(?:客观题答题卡|答题纸|答题卡)/u.test(value)
 }
 
+// Speech can say "14 seconds"; only a labelled, bracketed or short standalone value is
+// source-provided recording metadata.
+function listeningTimingMetadata(text) {
+  if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
+  const seconds = /\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu
+  if (!seconds.test(text)) return false
+  if (/[(（[【][^)）\]】]*\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[^)）\]】]*[)）\]】]/iu.test(text)) return true
+  return text.split(/\s+/u).filter(Boolean).length <= 5
+}
+
 function listeningItemRecord(item, index, documentId, disposition, reason, kind = null) {
   const located = hasSourceLocator(documentId, item?.sourceIndex)
   return {
@@ -197,6 +207,51 @@ function questionPosition(body, number, from, to) {
   return questionPositions(body, number, from, to)[0] ?? null
 }
 
+function optionsFromMatches(text, matches) {
+  const options = matches.map((match, index) => ({
+    label: match[1] || match[2],
+    text: trimEdgeSpaces(text.slice(
+      match.index + match[0].length,
+      matches[index + 1]?.index ?? text.length,
+    )),
+  }))
+  return options.every((option) => normalized(option.text))
+    ? { leadingText: trimEdgeSpaces(text.slice(0, matches[0].index)), options }
+    : null
+}
+
+// A dotted capital that touches another dotted capital ("Washington D. C.", "U. S.") reads as an
+// abbreviation in the stem or an option, not as an option label.
+function abbreviationLetter(text, match) {
+  const before = text.slice(0, match.index + (match[0].length - match[0].trimStart().length))
+  const after = text.slice(match.index + match[0].length)
+  return /(?:^|[^A-Za-z])[A-Z][.．]\s*$/u.test(before) || /^[A-Z][.．](?![A-Za-z])/u.test(after)
+}
+
+// When the plain label scan fails, accept exactly one label sequence whose skipped candidates
+// are all abbreviation letters; several readings stay ambiguous for review.
+function optionsSkippingAbbreviations(text, matches, labels) {
+  const readings = []
+  const walk = (start, chosen) => {
+    if (readings.length > 1) return
+    if (chosen.length === labels.length) {
+      const skipped = matches.filter((match) => !chosen.includes(match))
+      if (!skipped.every((match) => abbreviationLetter(text, match))) return
+      const parsed = optionsFromMatches(text, chosen)
+      if (parsed) readings.push(parsed)
+      return
+    }
+    for (let index = start; index < matches.length; index += 1) {
+      const match = matches[index]
+      if ((match[1] || match[2]) !== labels[chosen.length]) continue
+      if (chosen.length === 0 && !matches.slice(0, index).every((skipped) => abbreviationLetter(text, skipped))) continue
+      walk(index + 1, [...chosen, match])
+    }
+  }
+  walk(0, [])
+  return readings.length === 1 ? readings[0] : null
+}
+
 function parseOptionsWithLeadingText(items, labels) {
   const paragraphs = items.filter((item) => item.kind === 'paragraph')
   for (let end = 1; end <= paragraphs.length; end += 1) {
@@ -208,21 +263,16 @@ function parseOptionsWithLeadingText(items, labels) {
       /(?:^|\s)([A-G])[.．、]\s*|(?:^|[\t\n]| {2,})([A-G])\s+/gu,
     )]
     if (
-      matches.length !== labels.length
-      || matches.some((match, index) => (match[1] || match[2]) !== labels[index])
-    ) continue
-    const options = matches.map((match, index) => ({
-      label: match[1] || match[2],
-      text: trimEdgeSpaces(text.slice(
-        match.index + match[0].length,
-        matches[index + 1]?.index ?? text.length,
-      )),
-    }))
-    if (options.every((option) => normalized(option.text))) {
-      return {
-        leadingText: trimEdgeSpaces(text.slice(0, matches[0].index)),
-        options,
-      }
+      matches.length === labels.length
+      && matches.every((match, index) => (match[1] || match[2]) === labels[index])
+    ) {
+      const parsed = optionsFromMatches(text, matches)
+      if (parsed) return parsed
+      continue
+    }
+    if (matches.length > labels.length) {
+      const parsed = optionsSkippingAbbreviations(text, matches, labels)
+      if (parsed) return parsed
     }
   }
   return null
@@ -1024,9 +1074,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const timingSourceIndexes = new Set(answerBody
     .slice(Math.max(0, markers[0]?.index ?? 0), transcriptEnd)
-    .filter((item) => item.kind === 'paragraph'
-      && /(?:分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*(?:sec(?:ond)?s?|wpm)\b)/iu
-        .test(normalized(item.text)))
+    .filter((item) => item.kind === 'paragraph' && listeningTimingMetadata(normalized(item.text)))
     .map((item) => item.sourceIndex))
   if (timingSourceIndexes.size > 0) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED', 'listening.timing',
