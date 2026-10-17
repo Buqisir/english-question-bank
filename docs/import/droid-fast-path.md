@@ -141,7 +141,9 @@ Sol 必须看实际 Screen 图，并引用 PDF 检查结果生成如实说明，
 图片与检查 JSON 都在 `logs/`。正常中断重跑同一 run 即续跑，已完成 worker 复用哈希
 收据；blocked 与批次 paused 不自动清除。人工处理后用 `run --retry <paperId,…>` 重排 blocked 卷，
 只读核对生产结果后用 `run --clear-pause` 解除暂停（释放无活进程的生产锁、清 pending 标记，
-原记录留在 history）。不能删除提交 ledger 来“重试”。退出码 0 表示本轮正常结束，2 表示有阻塞卷，3 表示整批暂停。
+原记录留在 history）。不能删除提交 ledger 来“重试”。本地做完、但要换卷号重导的卷，用
+`withdraw --batch <名> --papers <paperId,…> --reason <原因>` 标成 blocked（`withdrawn`），
+保留本地产出、不再送审；已有生产动作的卷拒绝撤回，`run --retry` 可以撤销。退出码 0 表示本轮正常结束，2 表示有阻塞卷，3 表示整批暂停。
 
 ## 为什么更快
 

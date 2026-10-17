@@ -74,7 +74,7 @@ function parseOptions(args) {
   for (let i = 0; i < args.length; i++) {
     const key = args[i]
     if (['--submit', '--dry-run', '--clear-pause', '--local-only'].includes(key)) opts[key.slice(2)] = true
-    else if (['--batch', '--keys', '--parallel', '--max-agents', '--retry'].includes(key)) {
+    else if (['--batch', '--keys', '--parallel', '--max-agents', '--retry', '--papers', '--reason'].includes(key)) {
       if (!args[i + 1] || args[i + 1].startsWith('--')) fail(`${key} 缺少值`)
       opts[key.slice(2)] = args[++i]
     } else fail(`未知参数：${key}`)
@@ -969,6 +969,23 @@ function clearPause(ctx) {
   }
   ctx.save()
 }
+// Keeps a paper's local work but stops later runs from submitting it (for example when it is
+// re-imported under another paperId); --retry undoes it.
+async function withdrawPapers(ctx) {
+  const ids = (ctx.opts.papers || '').split(',').map((value) => value.trim()).filter(Boolean)
+  if (!ids.length || !ctx.opts.reason) fail('withdraw 需要 --papers <paperId,…> 和 --reason <原因>')
+  await lock(path.join(ctx.dir, 'batch.lock'), async () => {
+    for (const id of ids) {
+      const paper = ctx.state.papers[id]
+      if (!paper) fail(`批次里没有这套卷：${id}`)
+      if (paper.pendingProduction || paper.done?.submit || paper.revisionId) fail(`${id} 已有生产动作，不能撤回；先只读核对`)
+      ;(paper.history ||= []).push({ state: paper.state, blocked: paper.blocked, withdrawnAt: now() })
+      Object.assign(paper, { state: 'blocked', blocked: { kind: 'withdrawn', reason: ctx.opts.reason, log: ctx.file } })
+      console.log(`已撤回：${id}`)
+    }
+    ctx.save()
+  })
+}
 function retryPaper(ctx, id) {
   const paper = ctx.state.papers[id]
   if (!paper) fail(`批次里没有这套卷：${id}`)
@@ -1179,10 +1196,11 @@ export async function main(argv = process.argv.slice(2)) {
   const [command, ...args] = argv
   if (command === 'progress') { progress(); return }
   if (command === 'snapshot') { await refreshProductionSnapshot(); return }
-  if (!['intake', 'run', 'status'].includes(command)) fail('用法：batch-run.mjs <intake|run|status> --batch <名>；intake --keys <key列表>；run [--submit] [--parallel 3] [--max-agents 8] [--dry-run] [--retry <paperId,…>] [--clear-pause]；progress；snapshot')
+  if (!['intake', 'run', 'status', 'withdraw'].includes(command)) fail('用法：batch-run.mjs <intake|run|status|withdraw> --batch <名>；withdraw --papers <paperId,…> --reason <原因>；intake --keys <key列表>；run [--submit] [--parallel 3] [--max-agents 8] [--dry-run] [--retry <paperId,…>] [--clear-pause]；progress；snapshot')
   const opts = parseOptions(args)
   const ctx = makeContext(opts)
   if (command === 'status') { printStatus(ctx); return }
+  if (command === 'withdraw') { await withdrawPapers(ctx); return }
   if (command === 'intake') await intake(ctx)
   else await runBatch(ctx)
 }
