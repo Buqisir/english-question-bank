@@ -2055,10 +2055,10 @@
 }
 
 .listening-player-time {
-  min-width: 2.8em;
-  color: var(--paper-ink);
-  font-family: var(--ps-font-stack, "Times New Roman", serif);
-  font-size: 15px;
+  min-width: 42px;
+  color: var(--desk-ink);
+  font-family: inherit;
+  font-size: 12px;
   font-variant-numeric: tabular-nums lining-nums;
   text-align: center;
 }
@@ -2070,8 +2070,7 @@
 }
 
 /* Question segments over the whole recording. Each segment's number sits
-   centred over its own stretch of the waveform, with a small notch where the
-   segment begins; the segment playing now is set in ink. */
+   centred over its own stretch of the track; the segment playing now is set in ink. */
 .listening-player-marks {
   position: relative;
   height: 16px;
@@ -2085,25 +2084,13 @@
   height: 16px;
   padding: 0;
   border-radius: 4px;
-  color: rgba(var(--paper-ink-rgb), 0.55);
-  font-family: var(--ps-font-stack, "Times New Roman", serif);
-  font-size: 10.5px;
-  line-height: 11px;
-  letter-spacing: -0.02em;
+  color: var(--desk-muted);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums lining-nums;
   transition: color var(--motion-fast) var(--ease-hover);
-}
-
-/* The notch: a short hairline standing on the waveform's top edge. */
-.listening-player-mark::before {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 1px;
-  height: 3px;
-  border-radius: 999px;
-  background: rgba(var(--paper-ink-rgb), 0.3);
-  content: "";
 }
 
 .listening-player-mark-label {
@@ -2111,19 +2098,9 @@
   white-space: nowrap;
 }
 
-/* The segment playing now: ink, with a short ink rule under its number. */
-.listening-player .listening-player-mark[data-current] { color: var(--paper-ink-strong); }
-
-.listening-player-mark[data-current] .listening-player-mark-label::after {
-  position: absolute;
-  top: calc(100% + 1px);
-  left: 50%;
-  width: 8px;
-  height: 1.5px;
-  border-radius: 999px;
-  background: var(--paper-ink-strong);
-  content: "";
-  transform: translateX(-50%);
+.listening-player .listening-player-mark[data-current] {
+  color: var(--desk-ink);
+  font-weight: 600;
 }
 
 .listening-player-mark::after {
@@ -2167,58 +2144,47 @@
   border-radius: 4px;
 }
 
-.listening-player-bars {
+.listening-player-line-spans {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  fill: rgba(var(--paper-ink-rgb), 0.3);
-  transition: fill var(--motion-slow) var(--ease-hover);
+  pointer-events: none;
+  color: var(--desk-border);
 }
 
-.listening-player-wave[data-loading] .listening-player-bars { fill: rgba(var(--paper-ink-rgb), 0.2); }
+.listening-player-line-spans--played { color: var(--desk-ink); }
 
-.listening-player-bars--played { fill: var(--paper-ink-strong); }
-
-/* Bars rise from the ruled line once, when the real envelope arrives. */
-.listening-player-wave:not([data-loading]) .listening-player-bars rect {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: listening-bar-rise var(--motion-slow) var(--ease-out) both;
-  animation-delay: min(calc(var(--listening-bar-index) * 1.6ms), 200ms);
-}
-
-@keyframes listening-bar-rise {
-  from { transform: scaleY(0.2); opacity: 0.4; }
-}
-
-/* Playhead: a hairline, and one small down arrow pointing into the bar
-   that is playing now. */
-.listening-player-head {
+.listening-player-line {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -0.75px;
-  width: 1.5px;
+  top: 50%;
+  height: 2.5px;
   border-radius: 999px;
-  background: var(--paper-ink-strong);
+  background: currentColor;
+  transform: translateY(-50%);
+}
+
+.listening-player-line-head {
+  position: absolute;
+  top: 50%;
   pointer-events: none;
 }
 
-.listening-player-wave[data-dragging] .listening-player-head { transition: none; }
-
-.listening-player-caret {
+.listening-player-line-thumb {
   position: absolute;
-  bottom: calc(100% - 1px);
-  left: -3.25px;
   width: 8px;
-  height: 6px;
-  overflow: visible;
-  fill: var(--paper-ink-strong);
-  stroke: var(--paper-ink-strong);
-  stroke-width: 2.25;
-  stroke-linejoin: round;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--desk-ink);
+  transform: translate(-50%, -50%);
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+
+/* Hover/focus/drag enlarges the handle, without moving the line or card. */
+.listening-player-wave:is(:hover, :focus-visible, [data-dragging]) .listening-player-line-thumb {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listening-player-line-thumb { transition: none; }
 }
 
 /* Speed: one small gauge. The needle's angle is the speed (left 0.75,
@@ -2301,8 +2267,6 @@
   @starting-style {
     .listening-player-card { transform: none; }
   }
-
-  .listening-player-wave:not([data-loading]) .listening-player-bars rect { animation: none; }
 }
 
 @media print {
