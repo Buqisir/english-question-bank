@@ -131,14 +131,13 @@ function containsEmbeddedListeningCue(text) {
   return /\(\s*(?:停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)|重复)\s*\)|听下面(?:(?:的)?录音|一段(?:对话|独白|对话或独白))[,，]回答第\d+|(?:第一节|第二节)(?:到此结束|[:：].*听下面5段)|听力部分到此结束|转涂到(?:客观题答题卡|答题纸|答题卡)/u.test(value)
 }
 
-// Speech can say "14 seconds"; only a labelled, bracketed or short standalone value is
-// source-provided recording metadata.
+// A speaker-labelled turn can say "14 seconds" as speech; any other seconds value (instructions,
+// durations, bracketed notes) may be recording metadata and stays a review item.
 function listeningTimingMetadata(text) {
   if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
-  const seconds = /\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu
-  if (!seconds.test(text)) return false
+  if (!/\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu.test(text)) return false
   if (/[(（[【][^)）\]】]*\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[^)）\]】]*[)）\]】]/iu.test(text)) return true
-  return text.split(/\s+/u).filter(Boolean).length <= 5
+  return !/^\s*(?:[A-Z]|[A-Z][a-z]+(?: [A-Z][a-z]+)?)\s*[:：]\s*\S/u.test(text)
 }
 
 function listeningItemRecord(item, index, documentId, disposition, reason, kind = null) {
@@ -225,7 +224,13 @@ function optionsFromMatches(text, matches) {
 function abbreviationLetter(text, match) {
   const before = text.slice(0, match.index + (match[0].length - match[0].trimStart().length))
   const after = text.slice(match.index + match[0].length)
-  return /(?:^|[^A-Za-z])[A-Z][.．]\s*$/u.test(before) || /^[A-Z][.．](?![A-Za-z])/u.test(after)
+  return /(?:^|[^A-Za-z])[A-Z][.．]\s*$/u.test(before) || startsAbbreviation(text, match)
+}
+
+// A label whose text opens with another dotted capital ("D. C.", "A. J. Smith") may be the start of
+// an abbreviation rather than an option, so it is never accepted as a label.
+function startsAbbreviation(text, match) {
+  return /^[A-Z][.．](?![A-Za-z])/u.test(text.slice(match.index + match[0].length))
 }
 
 // When the plain label scan fails, accept exactly one label sequence whose skipped candidates
@@ -243,7 +248,7 @@ function optionsSkippingAbbreviations(text, matches, labels) {
     }
     for (let index = start; index < matches.length; index += 1) {
       const match = matches[index]
-      if ((match[1] || match[2]) !== labels[chosen.length]) continue
+      if ((match[1] || match[2]) !== labels[chosen.length] || startsAbbreviation(text, match)) continue
       if (chosen.length === 0 && !matches.slice(0, index).every((skipped) => abbreviationLetter(text, skipped))) continue
       walk(index + 1, [...chosen, match])
     }
@@ -266,6 +271,8 @@ function parseOptionsWithLeadingText(items, labels) {
       matches.length === labels.length
       && matches.every((match, index) => (match[1] || match[2]) === labels[index])
     ) {
+      // A later paragraph may still hold the real label, so read on instead of accepting it here.
+      if (matches.some((match) => startsAbbreviation(text, match))) continue
       const parsed = optionsFromMatches(text, matches)
       if (parsed) return parsed
       continue

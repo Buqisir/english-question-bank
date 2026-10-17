@@ -99,7 +99,7 @@ function docx(blocks, { mediaLayout = false, transformXml = (xml) => xml } = {})
 function question(no, { stem = `Which choice fits item ${no}?`, options = 'A. Alpha  B. Bravo  C. Charlie  D. Delta' } = {}) {
   return [
     paragraph(`${no}. ${stem}`),
-    paragraph(options),
+    ...[options].flat().map(paragraph),
   ]
 }
 
@@ -157,6 +157,7 @@ function questionBlocks({
   abbreviationStem = false,
   abbreviationOption = false,
   dottedNameStem = false,
+  abbreviationSplitOption = false,
 } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`  A short guide has ${36 + index}._____ for learners.  `))
@@ -200,6 +201,7 @@ function questionBlocks({
     ...reading('B', 24, 27, { questionShapes: {
       ...(abbreviationStem ? { 24: { stem: 'What did the class visit in Washington D. C.?' } } : {}),
       ...(dottedNameStem ? { 26: { stem: 'What does the passage say about D. Smith?' } } : {}),
+      ...(abbreviationSplitOption ? { 27: { options: ['A. Alpha  B. Bravo  C. Washington D. C.', 'D. Delta'] } } : {}),
       ...(abbreviationOption ? { 25: { options: 'A. Alpha  B. A trip to D. C.  C. Charlie  D. Delta' } } : {}),
     } }),
     ...reading('C', 28, 31),
@@ -292,8 +294,9 @@ function answerBlocks({
       ...Array.from({ length: 10 }, (_, index) => [
         paragraph(`Text ${index + 1}`),
         ...(index === 0 && listeningSeconds === 'metadata' ? [paragraph('（Text 1：25 seconds）')] : []),
+        ...(index === 0 && listeningSeconds === 'duration' ? [paragraph('The duration of this recording is 25 seconds.')] : []),
         paragraph(index === 0 && listeningSeconds === 'dialogue'
-          ? 'W: The microwave beeps after 14 seconds, so wait for it before you open the door.'
+          ? 'W: Wait 14 seconds.'
           : `Synthetic transcript ${index + 1}.`),
       ]).flat(),
       ...(listeningTiming ? [paragraph('语速：每分钟 120 词')] : []),
