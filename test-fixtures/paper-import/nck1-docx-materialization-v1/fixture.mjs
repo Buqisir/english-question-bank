@@ -297,9 +297,12 @@ function answerBlocks({
         ...(index === 0 && listeningSeconds === 'duration' ? [paragraph('The duration of this recording is 25 seconds.')] : []),
         ...(index === 0 && listeningSeconds === 'note' ? [paragraph('Note: 25 seconds')] : []),
         ...(index === 0 && listeningSeconds === 'compound' ? [paragraph('Total Time: 2 minutes 25 seconds')] : []),
-        paragraph(index === 0 && listeningSeconds === 'dialogue'
-          ? 'W: Wait 14 seconds.'
-          : `Synthetic transcript ${index + 1}.`),
+        ...(index === 0 && listeningSeconds === 'dialogue'
+          ? ['W: Is the soup ready?', 'M: Not yet.', 'W: Wait 14 seconds.'].map(paragraph)
+          : index === 0 && listeningSeconds === 'instructions'
+            ? ['Silence: 5 seconds between conversations', 'Repeat: after 15 seconds', 'Synthetic transcript 1.',
+              'Silence: 5 seconds between conversations', 'Repeat: after 15 seconds'].map(paragraph)
+            : [paragraph(`Synthetic transcript ${index + 1}.`)]),
       ]).flat(),
       ...(listeningTiming ? [paragraph('语速：每分钟 120 词')] : []),
     ] : []),

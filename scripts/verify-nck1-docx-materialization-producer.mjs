@@ -452,8 +452,9 @@ assert.equal(unlabelledDuration.disposition, 'needs_agent_review')
 assert(unlabelledDuration.review.required.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
-// Metadata labels look like speaker labels but must not exempt the duration.
-for (const listeningSeconds of ['note', 'compound']) {
+// Metadata labels and repeated pause/replay instructions look like speaker labels but must not
+// exempt the duration.
+for (const listeningSeconds of ['note', 'compound', 'instructions']) {
   const labelledDuration = produceNck1DocxMaterialization({
     paperId: fixture.paperId,
     documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds }).sourceDocuments,

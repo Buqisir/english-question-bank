@@ -131,17 +131,39 @@ function containsEmbeddedListeningCue(text) {
   return /\(\s*(?:停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)|重复)\s*\)|听下面(?:(?:的)?录音|一段(?:对话|独白|对话或独白))[,，]回答第\d+|(?:第一节|第二节)(?:到此结束|[:：].*听下面5段)|听力部分到此结束|转涂到(?:客观题答题卡|答题纸|答题卡)/u.test(value)
 }
 
-// A speaker turn can say "14 seconds" as speech. Only an allowlisted speaker label (a single
-// capital, one name, or a title plus surname) exempts the line; every other seconds value
-// (instructions, durations, "Total Time:"-style labels, bracketed notes) stays a review item.
-function listeningTimingMetadata(text) {
-  if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
-  if (!/\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu.test(text)) return false
-  if (/[(（[【][^)）\]】]*\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[^)）\]】]*[)）\]】]/iu.test(text)) return true
+const LISTENING_SECONDS = /\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu
+
+function listeningTurn(text) {
   const turn = /^\s*([A-Z]|[A-Z][a-z]+|(?:Mr|Mrs|Ms|Miss|Dr)\.? [A-Z][a-z]+)\s*[:：]\s*(\S.*)$/u.exec(text)
-  if (!turn || LISTENING_METADATA_WORD.test(turn[1])) return true
+  return turn && !LISTENING_METADATA_WORD.test(turn[1]) ? { label: turn[1], speech: turn[2] } : null
+}
+
+// A label is a confirmed speaker only when it opens at least two transcript lines and at least one
+// of them says no seconds; pause or replay instructions ("Silence: 5 seconds ...") repeat with
+// their durations, so a label shape alone never proves a speaker.
+function confirmedListeningSpeakers(texts) {
+  const lines = new Map()
+  for (const text of texts) {
+    const turn = listeningTurn(text)
+    if (!turn) continue
+    const entry = lines.get(turn.label) || { count: 0, withoutSeconds: 0 }
+    entry.count += 1
+    if (!LISTENING_SECONDS.test(text)) entry.withoutSeconds += 1
+    lines.set(turn.label, entry)
+  }
+  return new Set([...lines].filter(([, entry]) => entry.count >= 2 && entry.withoutSeconds >= 1).map(([label]) => label))
+}
+
+// A confirmed speaker's turn can say "14 seconds" as speech; every other seconds value
+// (instructions, durations, metadata labels, bracketed notes) stays a review item.
+function listeningTimingMetadata(text, speakers = new Set()) {
+  if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
+  if (!LISTENING_SECONDS.test(text)) return false
+  if (/[(（[【][^)）\]】]*\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[^)）\]】]*[)）\]】]/iu.test(text)) return true
+  const turn = listeningTurn(text)
+  if (!turn || !speakers.has(turn.label)) return true
   // "Speaker: 2 minutes 25 seconds" with nothing else to say reads as a duration note, not speech.
-  return !turn[2].replace(/\b(?:\d+(?:\.\d+)?|about|around|approximately|and|minutes?|mins?|seconds?|secs?)\b|[^\p{L}]/giu, '')
+  return !turn.speech.replace(/\b(?:\d+(?:\.\d+)?|about|around|approximately|and|minutes?|mins?|seconds?|secs?)\b|[^\p{L}]/giu, '')
 }
 
 const LISTENING_METADATA_WORD = /^(?:Note|Notes|Time|Timing|Duration|Length|Pause|Speed|Rate|Recording|Audio|Tape|Text|Part|Section|Question|Questions|Directions?|Instructions?|Tip|Notice|Total|Reading|Answer|Answering|Listening|Interval|Break|Wait|Preparation)$/u
@@ -1085,9 +1107,12 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       'Listening source contains duplicate end cues',
       sourceRef(answerDocumentId, answerBody[lastMarkerIndex]?.sourceIndex))
   }
-  const timingSourceIndexes = new Set(answerBody
+  const transcriptParagraphs = answerBody
     .slice(Math.max(0, markers[0]?.index ?? 0), transcriptEnd)
-    .filter((item) => item.kind === 'paragraph' && listeningTimingMetadata(normalized(item.text)))
+    .filter((item) => item.kind === 'paragraph')
+  const speakers = confirmedListeningSpeakers(transcriptParagraphs.map((item) => normalized(item.text)))
+  const timingSourceIndexes = new Set(transcriptParagraphs
+    .filter((item) => listeningTimingMetadata(normalized(item.text), speakers))
     .map((item) => item.sourceIndex))
   if (timingSourceIndexes.size > 0) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED', 'listening.timing',
