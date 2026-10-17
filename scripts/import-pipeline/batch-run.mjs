@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { execFileSync, spawn } from 'node:child_process'
+import { execFileSync, spawn, spawnSync } from 'node:child_process'
 import { createHash, randomUUID } from 'node:crypto'
 import {
   appendFileSync, closeSync, existsSync, lstatSync, mkdirSync, openSync, readFileSync,
@@ -555,10 +555,13 @@ function reviewOrigin() {
 }
 let session = null
 let sessionOrigin = null
-// The Review paper list hashes the renderer tree per candidate paper and stalls production for
-// tens of seconds, so batch runs never call it; only these light reads are allowed.
-async function request(origin, endpoint, { allowMissing = false, ...options } = {}) {
-  if (!['/api/health', '/api/auth/login'].includes(endpoint) && !(allowMissing && /^\/api\/import-agent-reviews\/papers\/[^/]+$/u.test(endpoint))) {
+// Before release e8f4f5e8 the Review paper list hashed the renderer tree per candidate paper and
+// stalled production for tens of seconds, so batch runs never call it; only the snapshot command
+// may read it once, after checking the deployed release contains that fix.
+const LIST_FIX_COMMIT = 'e8f4f5e845c0beb4bb834a36b27f28c18f2cdbeb'
+async function request(origin, endpoint, { allowMissing = false, allowList = false, ...options } = {}) {
+  if (!['/api/health', '/api/auth/login'].includes(endpoint) && !(allowList && endpoint === '/api/import-agent-reviews')
+    && !(allowMissing && /^\/api\/import-agent-reviews\/papers\/[^/]+$/u.test(endpoint))) {
     fail(`批量读取不允许此端点：${endpoint}`)
   }
   if (tls.DEFAULT_ECDH_CURVE === 'auto') tls.DEFAULT_ECDH_CURVE = 'X25519:P-256:P-384'
@@ -656,6 +659,11 @@ async function submissionGuard(ctx, paper, origin, { beforeOcr = false } = {}) {
   const { ledger, known } = knownPapers(origin)
   const own = ledger.papers[paper.paperId]
   const ownOcr = own?.batch === ctx.opts.batch && own.state === 'ocr'
+  const mapped = paper.item?.inventoryKey && inventoryMatch(known, paper.item.inventoryKey)
+  if (mapped && !(ownOcr && mapped.id === paper.paperId)) {
+    throw new Blocked(mapped.confirmed ? 'duplicate_production' : 'needs_owner',
+      `生产快照把目录 ${paper.item.inventoryKey} ${mapped.confirmed ? '映射到' : '疑似映射到'} ${mapped.id}`, productionSnapshot(origin).file)
+  }
   for (const [id, entry, from] of known) {
     // This paper's own OCR upload is recorded in the ledger before it starts (after the paperId probe
     // passed), so a same-id ledger or later snapshot entry is this paper, not a second one.
@@ -679,6 +687,18 @@ async function submissionGuard(ctx, paper, origin, { beforeOcr = false } = {}) {
     writeJson(ledgerFile(), ledger)
   }
   return { ledger, ledgerPath: ledgerFile(), hashes }
+}
+// Folder names such as「26年3月宁波九校」rarely equal the printed paper name, and listed papers carry no
+// source hashes, so snapshot entries name their inventory folders by hand: inventoryKeys are
+// confirmed, possibleInventoryKeys still need the Owner.
+function inventoryMatch(known, inventoryKey) {
+  for (const [id, entry, from] of known) {
+    if (entry.inventoryKeys?.includes(inventoryKey)) return { id, entry: [id, entry, from], confirmed: true }
+  }
+  for (const [id, entry, from] of known) {
+    if (entry.possibleInventoryKeys?.includes(inventoryKey)) return { id, entry: [id, entry, from], confirmed: false }
+  }
+  return null
 }
 function paperNameKey(name) {
   return String(name).normalize('NFKC').replace(/英语|试题|试卷|考试|高三|年级|学年|第[一二]学期/gu, '')
@@ -1016,6 +1036,8 @@ async function intake(ctx) {
       const [inventoryKey, entry] = matches[0]
       // Real exams found in the mock folders belong to a separate real-exam import (Owner 2026-10-17).
       if (inventoryKey.includes('真题')) { console.log(`跳过真题：${inventoryKey}`); continue }
+      const mapped = inventoryMatch(known, inventoryKey)
+      if (mapped) { console.log(`跳过${mapped.confirmed ? '已在生产' : '疑似已在生产（需 Owner 确认）'}：${inventoryKey} → ${mapped.id}`); continue }
       const existing = existsSync(path.join(ctx.dir, 'queue')) ? queue(ctx).find(({ item }) => item.inventoryKey === inventoryKey) : null
       if (existing) { console.log(`已排队：${existing.item.paperId}`); continue }
       const selected = chooseSources(entry, base)
@@ -1083,18 +1105,22 @@ function progress() {
     const hashes = (entry.pdfs || []).map((name) => path.join(directory, name)).filter(existsSync).map(hashFile)
     const inBatch = batchPapers.filter(({ paper }) => paper.item?.inventoryKey === key).at(-1)
     const paperName = inBatch?.paper.paperName || null
-    const production = known.find(([, item]) => item.sha256?.some((hash) => hashes.includes(hash)))
+    let production = known.find(([, item]) => item.sha256?.some((hash) => hashes.includes(hash)))
       || (paperName && known.find(([, item]) => item.paperName && paperNameKey(item.paperName) === paperNameKey(paperName)))
+    const mapped = production ? null : inventoryMatch(known, key)
+    const suspect = mapped && !mapped.confirmed ? mapped.entry : null
+    if (mapped?.confirmed) production = mapped.entry
     const codes = survey.get(key)?.codes?.map((item) => shortCode(item.code)) || []
     const counts = Object.entries(codes.reduce((all, code) => ({ ...all, [code]: (all[code] || 0) + 1 }), {}))
       .sort((left, right) => right[1] - left[1])
-    const status = production ? '已在生产' : key.includes('真题') ? '排除：真题' : inBatch ? '批次中' : '未开始'
+    const status = production ? '已在生产' : key.includes('真题') ? '排除：真题' : suspect ? '疑似已在生产' : inBatch ? '批次中' : '未开始'
+    const match = production || suspect
     return {
       province: entry.prov.replace(/模拟题$/u, ''),
       folder: entry.paper.replace(/^含词汇整理[：:]/u, ''),
       status,
-      production: production ? `${production[0]}${production[2] === 'ledger' ? '（本地送审记录）' : ''}` : '',
-      productionNote: production?.[1].note || production?.[1].state || '',
+      production: match ? `${match[0]}${match[2] === 'ledger' ? '（本地送审记录）' : ''}` : '',
+      productionNote: suspect ? `卷名相近：${suspect[1].paperName}（需人工确认）` : production?.[1].note || production?.[1].state || '',
       batch: inBatch?.batch || '',
       paperId: inBatch?.paper.paperId || '',
       stage: inBatch ? `${inBatch.paper.stage}/${inBatch.paper.state}` : '',
@@ -1113,14 +1139,47 @@ function progress() {
   const tally = (pick) => Object.entries(rows.reduce((all, row) => ({ ...all, [pick(row)]: (all[pick(row)] || 0) + 1 }), {}))
   const summary = { generatedAt: new Date().toISOString(), total: rows.length, byStatus: Object.fromEntries(tally((row) => row.status)),
     byProvince: Object.fromEntries(tally((row) => row.province).sort((left, right) => right[1] - left[1])),
-    snapshotPapers: known.length, note: '生产状态只来自手工快照与本地送审记录，未读取生产列表' }
+    snapshotPapers: known.length, note: '生产状态来自快照（含 snapshot 命令读回的列表与手工 inventoryKeys 映射）与本地送审记录',
+    unmappedProduction: known.filter(([id]) => !rows.some((row) => row.production.startsWith(id))).map(([id, item]) => `${id}（${item.paperName || ''}）`) }
   writeJson(path.join(batchRoot, 'progress.json'), { ...summary, rows })
   console.log(JSON.stringify({ ...summary, csv: path.join(batchRoot, 'progress.csv') }, null, 2))
+}
+// One Review list read merged into the hand snapshot. The list carries no source hashes, so new
+// entries match later papers by paperId and paper name only; existing hashes and notes are kept.
+async function refreshProductionSnapshot() {
+  const origin = reviewOrigin()
+  const healthResponse = await request(origin, '/api/health')
+  const release = /\/releases\/([0-9a-f]{40})\//u.exec((await healthResponse.json()).dbPath || '')?.[1]
+  if (!release) fail('健康响应没有给出生产 release，不能确认卷列表修复已部署')
+  const ancestor = spawnSync('git', ['merge-base', '--is-ancestor', LIST_FIX_COMMIT, release], { cwd: root })
+  if (ancestor.status !== 0) fail(`生产 release ${release} 不包含卷列表修复 ${LIST_FIX_COMMIT}（或本地缺这个提交，先 git fetch origin）`)
+  const started = Date.now()
+  const listResponse = await request(origin, '/api/import-agent-reviews', { headers: await credential(origin), allowList: true })
+  const milliseconds = Date.now() - started
+  const listed = (await listResponse.json()).papers
+  if (!Array.isArray(listed)) fail('卷列表响应缺少 papers 数组')
+  const { file, papers: previous } = productionSnapshot(origin)
+  const capturedAt = now()
+  const papers = { ...previous }
+  for (const item of listed) {
+    const before = previous[item.paperId] || {}
+    papers[item.paperId] = { ...before, paperName: item.paperName || before.paperName, sha256: before.sha256 || [],
+      state: item.state, latestRevisionId: item.latestRevisionId, listedAt: capturedAt,
+      note: before.note || '生产列表读回（无源文件哈希，按卷号与卷名去重）' }
+  }
+  const listedIds = new Set(listed.map((item) => item.paperId))
+  for (const id of Object.keys(previous)) if (!listedIds.has(id)) papers[id] = { ...previous[id], missingFromList: capturedAt }
+  writeJson(file, { schemaVersion: 'production-sources-hand-v1', origin, capturedAt,
+    source: `手工快照 + 生产卷列表读回（release ${release}，${milliseconds}ms）`, papers })
+  const added = listed.filter((item) => !previous[item.paperId]).map((item) => `${item.paperId}（${item.state}）`)
+  console.log(JSON.stringify({ file, release, milliseconds, listed: listed.length, added,
+    missingFromList: Object.keys(previous).filter((id) => !listedIds.has(id)) }, null, 2))
 }
 export async function main(argv = process.argv.slice(2)) {
   const [command, ...args] = argv
   if (command === 'progress') { progress(); return }
-  if (!['intake', 'run', 'status'].includes(command)) fail('用法：batch-run.mjs <intake|run|status> --batch <名>；intake --keys <key列表>；run [--submit] [--parallel 3] [--max-agents 8] [--dry-run] [--retry <paperId,…>] [--clear-pause]；progress')
+  if (command === 'snapshot') { await refreshProductionSnapshot(); return }
+  if (!['intake', 'run', 'status'].includes(command)) fail('用法：batch-run.mjs <intake|run|status> --batch <名>；intake --keys <key列表>；run [--submit] [--parallel 3] [--max-agents 8] [--dry-run] [--retry <paperId,…>] [--clear-pause]；progress；snapshot')
   const opts = parseOptions(args)
   const ctx = makeContext(opts)
   if (command === 'status') { printStatus(ctx); return }

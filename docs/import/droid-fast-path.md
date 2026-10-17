@@ -50,7 +50,9 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
   不批量读别的卷的状态，读慢了不重试。
 - 卷列表 `GET /api/import-agent-reviews`（以及 Owner 的 `/api/import-reviews`）对每套 Candidate 卷
   同步重算一次 renderer 源码树哈希（生产未设 `QUESTION_BANK_BUILD_ID`），2026-10-17 实测超过 15 秒
-  不返回。批量编排不调用它；卷不存在时 `papers/<id>` 只查一张表并返回 404，可以当作轻量的卷号探测。
+  不返回。release e8f4f5e8（#513）起每次列表只算一次，2026-10-17 部署后实测 2.7 秒。批量编排仍不调用它，
+  只有 `batch-run.mjs snapshot` 在确认生产 release 包含该修复后读一次；卷不存在时 `papers/<id>`
+  只查一张表并返回 404，可以当作轻量的卷号探测。
 - Node 24 自带的 OpenSSL 默认发后量子混合密钥交换，本机代理会重置大部分这类握手；`review.mjs`
   已限定经典曲线，截图用的 Chromium 也关掉了同一特性。
 
@@ -111,8 +113,11 @@ Sol 修过的同一停点再次停下时复修一次，每卷至多一次，再�
   活跃阶段与死锁检测，相邻步骤至少隔 30 秒。首次 OCR 上传前也做查重。
 - 查重只对照本地：`imports/batch/submitted.json`（每卷在首次 OCR 上传前记 `ocr`，送审时记
   `submitting`）和手工维护的生产快照 `imports/batch/production-sources.json`（绑定 origin，
-  `papers.<paperId>` 写 `paperName` 与源 `sha256`；编排器只读不刷新）。intake 不联网，按归一化卷名
-  和卷号预先标出待核对项；没有快照时只覆盖本地 ledger，卷单需 Owner 确认后才 `--submit`。
+  `papers.<paperId>` 写 `paperName` 与源 `sha256`；run 只读不刷新）。`batch-run.mjs snapshot` 读一次
+  生产卷列表合并进快照：保留已有哈希与备注，新卷只有卷号、卷名和状态。列表不带源哈希，所以条目可手工写
+  `inventoryKeys`（确认的目录 key）或 `possibleInventoryKeys`（待 Owner 确认）；intake 跳过这些目录，
+  送审守卫分别报 `duplicate_production` / `needs_owner`，`progress` 列出没有对上目录的生产卷。
+  intake 不联网，按归一化卷名和卷号预先标出待核对项；没有快照时只覆盖本地 ledger，卷单需 Owner 确认后才 `--submit`。
 - 首次 OCR 上传前探测一次 `papers/<id>`：只有返回 `IMPORT_REVIEW_NOT_FOUND` 才放行；卷已存在就
   blocked，因为 OCR 上传会给已有卷追加 revision。卷存在时不读响应体。fast-import 既有单卷调用
   仍由生产锁串行包住。
