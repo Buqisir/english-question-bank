@@ -554,9 +554,10 @@ function reviewOrigin() {
 }
 let session = null
 let sessionOrigin = null
-async function request(origin, endpoint, options = {}) {
-  if (!['/api/health', '/api/auth/login', '/api/import-agent-reviews'].includes(endpoint)
-    && !/^\/api\/import-agent-reviews\/revisions\/[^/]+\/files\?path=universal-source-manifest\.json$/u.test(endpoint)) {
+// The Review paper list hashes the renderer tree per candidate paper and stalls production for
+// tens of seconds, so batch runs never call it; only these light reads are allowed.
+async function request(origin, endpoint, { allowMissing = false, ...options } = {}) {
+  if (!['/api/health', '/api/auth/login'].includes(endpoint) && !(allowMissing && /^\/api\/import-agent-reviews\/papers\/[^/]+$/u.test(endpoint))) {
     fail(`批量读取不允许此端点：${endpoint}`)
   }
   if (tls.DEFAULT_ECDH_CURVE === 'auto') tls.DEFAULT_ECDH_CURVE = 'X25519:P-256:P-384'
@@ -565,6 +566,18 @@ async function request(origin, endpoint, options = {}) {
   const started = Date.now()
   try {
     response = await fetch(`${origin}${endpoint}`, { ...options, redirect: 'error', signal: AbortSignal.timeout(15_000) })
+    // Existence probe: the body of an existing paper is a heavy detail payload, so never read it.
+    if (allowMissing && response.ok) {
+      await response.body?.cancel()
+      return { status: response.status, missing: false }
+    }
+    if (allowMissing && response.status === 404) {
+      const missing = await response.json().catch(() => null)
+      if (missing?.code !== 'IMPORT_REVIEW_NOT_FOUND' || missing.error !== 'Paper not found') {
+        throw new Paused('production_unknown', `卷号查询返回无法识别的 404，不能确认生产没有此卷：${endpoint}`)
+      }
+      return { status: 404, missing: true }
+    }
     if (!response.ok) {
       await response.body?.cancel()
       throw new Paused('production_unhealthy', `生产请求失败（HTTP ${response.status}）：${endpoint}`)
@@ -572,7 +585,9 @@ async function request(origin, endpoint, options = {}) {
     body = await response.json()
   } catch (error) {
     if (error instanceof Paused) throw error
-    throw new Paused('production_unhealthy', `生产请求超时、网络失败或响应不是 JSON，不重试：${endpoint}`)
+    const cause = error?.name === 'TimeoutError' ? '超时' : error instanceof SyntaxError
+      ? `响应不是 JSON（content-type ${response?.headers.get('content-type') || '无'}）` : `网络失败（${error?.cause?.code || error?.name || '未知'}）`
+    throw new Paused('production_unhealthy', `生产请求${cause}，${Date.now() - started}ms，不重试：${endpoint}`)
   }
   if (Date.now() - started > HEALTH_LIMIT) throw new Paused('production_unhealthy', `生产读取明显变慢，不重试：${endpoint}`)
   return { headers: response.headers, json: async () => body }
@@ -615,65 +630,54 @@ async function health(ctx, origin, label) {
   ctx.save()
 }
 function sourceHashes(item) { return [item.question, item.answer, item.audio].filter(Boolean).map(hashFile) }
-async function productionSources(origin) {
+// Production papers that predate batch runs, as a hand-maintained snapshot; batch runs never
+// rebuild it from the Review list (see request()).
+function productionSnapshot(origin) {
   const file = path.join(batchRoot, 'production-sources.json')
-  const cache = existsSync(file) ? json(file) : { origin, papers: {} }
-  if (cache.origin !== origin) throw new Paused('origin_changed', '生产源缓存绑定了其他 origin，需人工核对', file)
-  const headers = await credential(origin)
-  const list = await (await request(origin, '/api/import-agent-reviews', { headers })).json()
-  if (!Array.isArray(list?.papers)) throw new Paused('production_unknown', '生产卷列表结构无效')
-  let lastRead = 0
-  for (const paper of list.papers) {
-    const existing = cache.papers[paper.paperId]
-    if (existing) existing.paperName = paper.paperName
-    if (existing?.revisionId === paper.latestRevisionId && existing.sha256?.length) continue
-    if (!paper.latestRevisionId) throw new Paused('production_unknown', `${paper.paperId} 没有可查重的 revision`)
-    await sleep(Math.max(0, 3000 - (Date.now() - lastRead)))
-    const endpoint = `/api/import-agent-reviews/revisions/${encodeURIComponent(paper.latestRevisionId)}/files?path=universal-source-manifest.json`
-    const manifest = await (await request(origin, endpoint, { headers })).json()
-    lastRead = Date.now()
-    if (manifest?.paperId !== paper.paperId || !Array.isArray(manifest.documents)
-      || (manifest.attachments !== undefined && !Array.isArray(manifest.attachments))) {
-      throw new Paused('production_unknown', `${paper.paperId} 的源 manifest 身份或结构无效`, file)
-    }
-    const hashes = [...manifest.documents, ...(manifest.attachments || []).filter((item) => item.role === 'listening_audio_original')]
-      .map((item) => item.sha256)
-    if (!hashes.length || hashes.some((hash) => !/^sha256:[a-f0-9]{64}$/u.test(hash || ''))) {
-      throw new Paused('production_unknown', `${paper.paperId} 源文件摘要缺失，查重不能放行`, file)
-    }
-    cache.papers[paper.paperId] = { revisionId: paper.latestRevisionId, reviewKind: paper.reviewKind, paperName: paper.paperName,
-      sha256: hashes, checkedAt: now() }
-    writeJson(file, cache)
-  }
-  cache.checkedAt = now()
-  writeJson(file, cache)
-  return cache
+  if (!existsSync(file)) return { file, papers: {} }
+  const cache = json(file)
+  if (cache.origin !== origin) throw new Paused('origin_changed', '生产快照绑定了其他 origin，需人工核对', file)
+  return { file, papers: cache.papers || {} }
 }
-async function submissionGuard(ctx, paper, origin) {
-  const ledgerPath = path.join(batchRoot, 'submitted.json')
-  const ledger = existsSync(ledgerPath) ? json(ledgerPath) : { papers: {} }
+function ledgerFile() { return path.join(batchRoot, 'submitted.json') }
+function knownPapers(origin) {
+  const ledger = existsSync(ledgerFile()) ? json(ledgerFile()) : { papers: {} }
+  return { ledger, known: [...Object.entries(productionSnapshot(origin).papers).map(([id, entry]) => [id, entry, 'snapshot']),
+    ...Object.entries(ledger.papers).map(([id, entry]) => [id, entry, 'ledger'])] }
+}
+async function productionPaperMissing(origin, paperId) {
+  const headers = await credential(origin)
+  return (await request(origin, `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`, { headers, allowMissing: true })).missing
+}
+async function submissionGuard(ctx, paper, origin, { beforeOcr = false } = {}) {
   const hashes = sourceHashes(paper.item)
   if (hashes.some((hash, index) => hash !== paper.sourceHashes[index])) throw new Blocked('source_changed', '排队后源文件发生变化')
-  for (const [id, entry] of Object.entries(ledger.papers)) {
+  const { ledger, known } = knownPapers(origin)
+  const own = ledger.papers[paper.paperId]
+  const ownOcr = own?.batch === ctx.opts.batch && own.state === 'ocr'
+  for (const [id, entry, from] of known) {
+    // This paper's own OCR upload is recorded in the ledger before it starts (after the paperId probe
+    // passed), so a same-id ledger or later snapshot entry is this paper, not a second one.
+    if (ownOcr && id === paper.paperId) continue
     if (id === paper.paperId || entry.sha256?.some((hash) => hashes.includes(hash))) {
-      throw new Blocked('duplicate_submission', `本地送审 ledger 已占用同卷或同源：${id}`, ledgerPath)
-    }
-  }
-  const sources = await productionSources(origin)
-  const ownOcr = fastState(paper.paperId).steps['ocr-review']?.result?.revisionId
-  for (const [id, entry] of Object.entries(sources.papers)) {
-    // 本次正常流程已上传的 OCR revision 不是第二次 Candidate 送审。
-    if (id === paper.paperId && entry.reviewKind === 'ocr' && entry.revisionId === ownOcr) continue
-    if (id === paper.paperId || entry.sha256.some((hash) => hashes.includes(hash))) {
-      throw new Blocked('duplicate_production', `生产已有同卷或同源：${id}`, path.join(batchRoot, 'production-sources.json'))
+      throw new Blocked('duplicate_production', `${from === 'ledger' ? '本地送审 ledger' : '生产快照'}已有同卷或同源：${id}`,
+        from === 'ledger' ? ledgerFile() : productionSnapshot(origin).file)
     }
     // Earlier papers may have come from DOCX sources, so equal bytes are not the only duplicate.
-    if (id !== paper.paperId && entry.paperName && paperNameKey(entry.paperName) === paperNameKey(paper.paperName)) {
-      throw new Blocked('needs_owner', `生产已有同名卷 ${id}（${entry.paperName}），需 Owner 确认是否同一场考试`,
-        path.join(batchRoot, 'production-sources.json'))
+    if (entry.paperName && paperNameKey(entry.paperName) === paperNameKey(paper.paperName)) {
+      throw new Blocked('needs_owner', `已有同名卷 ${id}（${entry.paperName}），需 Owner 确认是否同一场考试`,
+        from === 'ledger' ? ledgerFile() : productionSnapshot(origin).file)
     }
   }
-  return { ledger, ledgerPath, hashes }
+  if (beforeOcr) {
+    // The OCR upload creates the Review paper; an existing paperId would silently gain a revision.
+    if (!(await productionPaperMissing(origin, paper.paperId))) {
+      throw new Blocked('duplicate_production', `生产已有卷号 ${paper.paperId}，OCR 上传会给它追加 revision`)
+    }
+    ledger.papers[paper.paperId] = { batch: ctx.opts.batch, origin, paperName: paper.paperName, sha256: hashes, state: 'ocr', at: now() }
+    writeJson(ledgerFile(), ledger)
+  }
+  return { ledger, ledgerPath: ledgerFile(), hashes }
 }
 function paperNameKey(name) {
   return String(name).normalize('NFKC').replace(/英语|试题|试卷|考试|高三|年级|学年|第[一二]学期/gu, '')
@@ -685,7 +689,7 @@ async function submitPaper(ctx, paper) {
     await production(ctx, paper, 'submit', async () => {
       await health(ctx, origin, '送审前')
       const { ledger, ledgerPath, hashes } = await submissionGuard(ctx, paper, origin)
-      ledger.papers[paper.paperId] = { batch: ctx.opts.batch, origin, sha256: hashes, state: 'submitting', at: now() }
+      ledger.papers[paper.paperId] = { batch: ctx.opts.batch, origin, paperName: paper.paperName, sha256: hashes, state: 'submitting', at: now() }
       writeJson(ledgerPath, ledger)
       paper.pendingProduction = 'submit'; ctx.save()
       const result = await fast(ctx, paper, 'submit')
@@ -796,7 +800,7 @@ async function processPaper(ctx, paper) {
         if (!fastState(paper.paperId).steps['ocr-review']?.finishedAt) {
           const origin = reviewOrigin()
           await health(ctx, origin, 'OCR 确认前')
-          await submissionGuard(ctx, paper, origin)
+          await submissionGuard(ctx, paper, origin, { beforeOcr: true })
         }
         paper.pendingProduction = 'after-proofread'; ctx.save()
         const result = await fast(ctx, paper, 'after-proofread', args)
@@ -995,11 +999,10 @@ async function intake(ctx) {
   const base = process.env.EQB_BATCH_SOURCE_ROOT || path.join(os.homedir(), '导题2026届模拟题/2026届模拟题')
   await lock(path.join(ctx.dir, 'batch.lock'), async (updateLock) => {
     recordChildren = () => updateLock({ children: [...children].map((child) => child.pid).filter(Boolean) })
-    // One light list read up front so a same-name production paper is not proofread for nothing;
-    // the source-hash duplicate check still runs before submit.
-    const origin = reviewOrigin()
-    const listed = await (await request(origin, '/api/import-agent-reviews', { headers: await credential(origin) })).json()
-    if (!Array.isArray(listed?.papers)) fail('生产卷列表结构无效，intake 不能查重')
+    // Offline name check so a known paper is not proofread for nothing; the paperId probe and the
+    // source-hash check still run before the OCR upload.
+    const { known } = knownPapers(reviewOrigin())
+    if (!existsSync(productionSnapshot(reviewOrigin()).file)) console.log('提示：没有生产快照，同名查重只覆盖本地 ledger；卷单需 Owner 确认')
     for (const key of keys) {
       const matches = entries.filter(([id, entry]) => id === key || `${entry.prov}/${entry.paper}` === key)
       if (matches.length !== 1) fail(`inventory key 不存在或不唯一：${key}`)
@@ -1031,8 +1034,8 @@ async function intake(ctx) {
         needsReview.push(`卷号与本地现有卷重名：${paperId}`); paperId = `paper-mock-pending-${stamp}`
       }
       const names = [identity.paperName, entry.paper].filter(Boolean).map(paperNameKey)
-      const twin = listed.papers.find((existing) => existing.paperId === paperId || names.includes(paperNameKey(existing.paperName || '')))
-      if (twin) needsReview.push(`生产已有同卷号或同名卷 ${twin.paperId}（${twin.paperName}），需 Owner 确认是否同一场考试`)
+      const twin = known.find(([id, existing]) => id === paperId || names.includes(paperNameKey(existing.paperName || '')))
+      if (twin) needsReview.push(`已有同卷号或同名卷 ${twin[0]}（${twin[1].paperName || '无卷名'}，来自${twin[2] === 'ledger' ? '本地 ledger' : '生产快照'}），需 Owner 确认是否同一场考试`)
       const item = {
         paperId, paperName: identity.paperName || entry.paper,
         provenance: { paperName: identity.paperName || entry.paper, source: `${inventoryKey}；${identity.source || '待核对首页'}`, year: identity.year ?? null, month: identity.month ?? null },

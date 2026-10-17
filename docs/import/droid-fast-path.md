@@ -47,8 +47,10 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 - 生产是 2 GB 内存的单进程服务；`GET /api/import-agent-reviews/papers/<id>` 每次都在请求线程上
   哈希该修订全部文件并做投影。连续请求大卷会把进程挤进 swap，整站 API 卡住几分钟
   （2026-10-17 实测约 30 分钟）。因此：prep 可多卷同时跑；after-proofread、submit、report 一次只跑一卷；
-  不批量读别的卷的状态，读慢了不重试；查重读
-  `GET /api/import-agent-reviews/revisions/<id>/files?path=universal-source-manifest.json`。
+  不批量读别的卷的状态，读慢了不重试。
+- 卷列表 `GET /api/import-agent-reviews`（以及 Owner 的 `/api/import-reviews`）对每套 Candidate 卷
+  同步重算一次 renderer 源码树哈希（生产未设 `QUESTION_BANK_BUILD_ID`），2026-10-17 实测超过 15 秒
+  不返回。批量编排不调用它；卷不存在时 `papers/<id>` 只查一张表并返回 404，可以当作轻量的卷号探测。
 - Node 24 自带的 OpenSSL 默认发后量子混合密钥交换，本机代理会重置大部分这类握手；`review.mjs`
   已限定经典曲线，截图用的 Chromium 也关掉了同一特性。
 
@@ -104,12 +106,15 @@ Sol 修过的同一停点再次停下时复修一次，每卷至多一次，再�
 
 - `after-proofread`、`submit`、`report` 共用 `imports/batch/production.lock`，带 PID、
   活跃阶段与死锁检测，相邻步骤至少隔 30 秒。首次 OCR 上传前也做查重。
-- `production-sources.json` 缓存绑定 origin、paperId、revisionId 和源 sha256；
-  每次护栏只读一次列表，只有缺失/换版 manifest 才逐个补读，间隔至少 3 秒。
-  不直接读取或轮询重型 `papers/<id>` 详情；fast-import 既有单卷调用仍由生产锁串行包住。
-- 同 paperId、任意同源 sha256、`submitted.json` 中已提交或提交中的记录都会拒绝；
-  归一化卷名与生产已有卷相同（可能是早先 DOCX 导入的同场考试）报 `needs_owner`。
-  唯一正常过渡是本次 fast 收据精确绑定的 OCR revision → 首次 Candidate；不允许批量重送。
+- 查重只对照本地：`imports/batch/submitted.json`（每卷在首次 OCR 上传前记 `ocr`，送审时记
+  `submitting`）和手工维护的生产快照 `imports/batch/production-sources.json`（绑定 origin，
+  `papers.<paperId>` 写 `paperName` 与源 `sha256`；编排器只读不刷新）。intake 不联网，按归一化卷名
+  和卷号预先标出待核对项；没有快照时只覆盖本地 ledger，卷单需 Owner 确认后才 `--submit`。
+- 首次 OCR 上传前探测一次 `papers/<id>`：只有返回 `IMPORT_REVIEW_NOT_FOUND` 才放行；卷已存在就
+  blocked，因为 OCR 上传会给已有卷追加 revision。卷存在时不读响应体。fast-import 既有单卷调用
+  仍由生产锁串行包住。
+- 同 paperId、任意同源 sha256 都会拒绝；归一化卷名相同（可能是早先 DOCX 导入的同场考试）报
+  `needs_owner`。唯一正常过渡是本卷自己 ledger 里的 `ocr` 记录 → 首次 Candidate；不允许批量重送。
 - 送审前后检查 `/api/health`。超过 5 秒，或相对本批基线超过 3 倍且超过 2 秒，
   暂停整批且不重试。生产请求超时也暂停；结果未知、死进程活跃锁均保留证据，人工
   只读核对后才能恢复，禁止清掉记录直接重放。
