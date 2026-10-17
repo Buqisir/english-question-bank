@@ -393,6 +393,77 @@ assert.equal(suppliedListeningTiming.materialization.listening.questions.length,
 assert(suppliedListeningTiming.review.required.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
+const questionByNumber = (result, number) =>
+  result.materialization.groups.flatMap((group) => group.questions || [])
+    .find((question) => question.sourceNumber === number)
+const abbreviationStem = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ abbreviationStem: true }).sourceDocuments,
+})
+assert.equal(abbreviationStem.disposition, 'ready_for_verification')
+assert.equal(questionByNumber(abbreviationStem, 24).stem, 'What did the class visit in Washington D. C.?')
+assert.deepEqual(questionByNumber(abbreviationStem, 24).options.map((option) => option.text), ['Alpha', 'Bravo', 'Charlie', 'Delta'])
+
+const abbreviationOption = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ abbreviationOption: true }).sourceDocuments,
+})
+assert.equal(abbreviationOption.disposition, 'ready_for_verification')
+assert.deepEqual(questionByNumber(abbreviationOption, 25).options.map((option) => option.text), ['Alpha', 'A trip to D. C.', 'Charlie', 'Delta'])
+
+// "D. C." must not end the options early when the real D label sits in the next paragraph.
+const abbreviationSplitOption = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ abbreviationSplitOption: true }).sourceDocuments,
+})
+assert.equal(abbreviationSplitOption.disposition, 'ready_for_verification')
+assert.deepEqual(questionByNumber(abbreviationSplitOption, 27).options.map((option) => option.text), ['Alpha', 'Bravo', 'Washington D. C.', 'Delta'])
+
+// A dotted capital that is not part of an abbreviation might be a real label, so it stays a review item.
+const dottedNameStem = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ dottedNameStem: true }).sourceDocuments,
+})
+assert.equal(dottedNameStem.disposition, 'needs_agent_review')
+assert(dottedNameStem.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_OPTIONS_AMBIGUOUS' && item.path === 'questions.26.options'))
+
+const dialogueSeconds = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'dialogue' }).sourceDocuments,
+})
+assert.equal(dialogueSeconds.disposition, 'ready_for_verification')
+assert(!dialogueSeconds.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
+
+const bracketedSeconds = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'metadata' }).sourceDocuments,
+})
+assert.equal(bracketedSeconds.disposition, 'needs_agent_review')
+assert(bracketedSeconds.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
+
+const unlabelledDuration = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'duration' }).sourceDocuments,
+})
+assert.equal(unlabelledDuration.disposition, 'needs_agent_review')
+assert(unlabelledDuration.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
+
+// Metadata labels and repeated pause/replay instructions look like speaker labels but must not
+// exempt the duration.
+for (const listeningSeconds of ['note', 'compound', 'instructions', 'replay']) {
+  const labelledDuration = produceNck1DocxMaterialization({
+    paperId: fixture.paperId,
+    documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds }).sourceDocuments,
+  })
+  assert.equal(labelledDuration.disposition, 'needs_agent_review', listeningSeconds)
+  assert(labelledDuration.review.required.some((item) =>
+    item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'), listeningSeconds)
+}
+
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-docx-producer-'))
 try {
   for (const document of fixture.sourceDocuments) {

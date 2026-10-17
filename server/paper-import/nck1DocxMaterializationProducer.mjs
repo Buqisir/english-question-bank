@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v15'
+  'nck1-docx-materialization-producer-v16'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -131,6 +131,42 @@ function containsEmbeddedListeningCue(text) {
   return /\(\s*(?:停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)|重复)\s*\)|听下面(?:(?:的)?录音|一段(?:对话|独白|对话或独白))[,，]回答第\d+|(?:第一节|第二节)(?:到此结束|[:：].*听下面5段)|听力部分到此结束|转涂到(?:客观题答题卡|答题纸|答题卡)/u.test(value)
 }
 
+const LISTENING_SECONDS = /\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu
+
+// Only the fixed role labels of exam dialogues can be speakers here. Any word label ("Repeat:",
+// "Silence:", "Tom:") may be a pause or replay instruction, so it never exempts a seconds value.
+function listeningTurn(text) {
+  const turn = /^\s*(M|W|A|B|Man|Woman|Boy|Girl)\s*[:：]\s*(\S.*)$/u.exec(text)
+  return turn ? { label: turn[1], speech: turn[2] } : null
+}
+
+// A role label is a confirmed speaker only when it opens at least two transcript lines and at
+// least one of them says no seconds.
+function confirmedListeningSpeakers(texts) {
+  const lines = new Map()
+  for (const text of texts) {
+    const turn = listeningTurn(text)
+    if (!turn) continue
+    const entry = lines.get(turn.label) || { count: 0, withoutSeconds: 0 }
+    entry.count += 1
+    if (!LISTENING_SECONDS.test(text)) entry.withoutSeconds += 1
+    lines.set(turn.label, entry)
+  }
+  return new Set([...lines].filter(([, entry]) => entry.count >= 2 && entry.withoutSeconds >= 1).map(([label]) => label))
+}
+
+// A confirmed speaker's turn can say "14 seconds" as speech; every other seconds value
+// (instructions, durations, named or metadata labels, bracketed notes) stays a review item.
+function listeningTimingMetadata(text, speakers = new Set()) {
+  if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
+  if (!LISTENING_SECONDS.test(text)) return false
+  if (/[(（[【][^)）\]】]*\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[^)）\]】]*[)）\]】]/iu.test(text)) return true
+  const turn = listeningTurn(text)
+  if (!turn || !speakers.has(turn.label)) return true
+  // "Speaker: 2 minutes 25 seconds" with nothing else to say reads as a duration note, not speech.
+  return !turn.speech.replace(/\b(?:\d+(?:\.\d+)?|about|around|approximately|and|minutes?|mins?|seconds?|secs?)\b|[^\p{L}]/giu, '')
+}
+
 function listeningItemRecord(item, index, documentId, disposition, reason, kind = null) {
   const located = hasSourceLocator(documentId, item?.sourceIndex)
   return {
@@ -197,6 +233,57 @@ function questionPosition(body, number, from, to) {
   return questionPositions(body, number, from, to)[0] ?? null
 }
 
+function optionsFromMatches(text, matches) {
+  const options = matches.map((match, index) => ({
+    label: match[1] || match[2],
+    text: trimEdgeSpaces(text.slice(
+      match.index + match[0].length,
+      matches[index + 1]?.index ?? text.length,
+    )),
+  }))
+  return options.every((option) => normalized(option.text))
+    ? { leadingText: trimEdgeSpaces(text.slice(0, matches[0].index)), options }
+    : null
+}
+
+// A dotted capital that touches another dotted capital ("Washington D. C.", "U. S.") reads as an
+// abbreviation in the stem or an option, not as an option label.
+function abbreviationLetter(text, match) {
+  const before = text.slice(0, match.index + (match[0].length - match[0].trimStart().length))
+  const after = text.slice(match.index + match[0].length)
+  return /(?:^|[^A-Za-z])[A-Z][.．]\s*$/u.test(before) || startsAbbreviation(text, match)
+}
+
+// A label whose text opens with another dotted capital ("D. C.", "A. J. Smith") may be the start of
+// an abbreviation rather than an option, so it is never accepted as a label.
+function startsAbbreviation(text, match) {
+  return /^[A-Z][.．](?![A-Za-z])/u.test(text.slice(match.index + match[0].length))
+}
+
+// When the plain label scan fails, accept exactly one label sequence whose skipped candidates
+// are all abbreviation letters; several readings stay ambiguous for review.
+function optionsSkippingAbbreviations(text, matches, labels) {
+  const readings = []
+  const walk = (start, chosen) => {
+    if (readings.length > 1) return
+    if (chosen.length === labels.length) {
+      const skipped = matches.filter((match) => !chosen.includes(match))
+      if (!skipped.every((match) => abbreviationLetter(text, match))) return
+      const parsed = optionsFromMatches(text, chosen)
+      if (parsed) readings.push(parsed)
+      return
+    }
+    for (let index = start; index < matches.length; index += 1) {
+      const match = matches[index]
+      if ((match[1] || match[2]) !== labels[chosen.length] || startsAbbreviation(text, match)) continue
+      if (chosen.length === 0 && !matches.slice(0, index).every((skipped) => abbreviationLetter(text, skipped))) continue
+      walk(index + 1, [...chosen, match])
+    }
+  }
+  walk(0, [])
+  return readings.length === 1 ? readings[0] : null
+}
+
 function parseOptionsWithLeadingText(items, labels) {
   const paragraphs = items.filter((item) => item.kind === 'paragraph')
   for (let end = 1; end <= paragraphs.length; end += 1) {
@@ -208,21 +295,18 @@ function parseOptionsWithLeadingText(items, labels) {
       /(?:^|\s)([A-G])[.．、]\s*|(?:^|[\t\n]| {2,})([A-G])\s+/gu,
     )]
     if (
-      matches.length !== labels.length
-      || matches.some((match, index) => (match[1] || match[2]) !== labels[index])
-    ) continue
-    const options = matches.map((match, index) => ({
-      label: match[1] || match[2],
-      text: trimEdgeSpaces(text.slice(
-        match.index + match[0].length,
-        matches[index + 1]?.index ?? text.length,
-      )),
-    }))
-    if (options.every((option) => normalized(option.text))) {
-      return {
-        leadingText: trimEdgeSpaces(text.slice(0, matches[0].index)),
-        options,
-      }
+      matches.length === labels.length
+      && matches.every((match, index) => (match[1] || match[2]) === labels[index])
+    ) {
+      // A later paragraph may still hold the real label, so read on instead of accepting it here.
+      if (matches.some((match) => startsAbbreviation(text, match))) continue
+      const parsed = optionsFromMatches(text, matches)
+      if (parsed) return parsed
+      continue
+    }
+    if (matches.length > labels.length) {
+      const parsed = optionsSkippingAbbreviations(text, matches, labels)
+      if (parsed) return parsed
     }
   }
   return null
@@ -1022,11 +1106,12 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       'Listening source contains duplicate end cues',
       sourceRef(answerDocumentId, answerBody[lastMarkerIndex]?.sourceIndex))
   }
-  const timingSourceIndexes = new Set(answerBody
+  const transcriptParagraphs = answerBody
     .slice(Math.max(0, markers[0]?.index ?? 0), transcriptEnd)
-    .filter((item) => item.kind === 'paragraph'
-      && /(?:分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*(?:sec(?:ond)?s?|wpm)\b)/iu
-        .test(normalized(item.text)))
+    .filter((item) => item.kind === 'paragraph')
+  const speakers = confirmedListeningSpeakers(transcriptParagraphs.map((item) => normalized(item.text)))
+  const timingSourceIndexes = new Set(transcriptParagraphs
+    .filter((item) => listeningTimingMetadata(normalized(item.text), speakers))
     .map((item) => item.sourceIndex))
   if (timingSourceIndexes.size > 0) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED', 'listening.timing',

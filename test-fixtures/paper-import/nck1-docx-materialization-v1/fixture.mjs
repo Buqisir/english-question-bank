@@ -96,10 +96,10 @@ function docx(blocks, { mediaLayout = false, transformXml = (xml) => xml } = {})
   return zipStore(files)
 }
 
-function question(no) {
+function question(no, { stem = `Which choice fits item ${no}?`, options = 'A. Alpha  B. Bravo  C. Charlie  D. Delta' } = {}) {
   return [
-    paragraph(`${no}. Which choice fits item ${no}?`),
-    paragraph('A. Alpha  B. Bravo  C. Charlie  D. Delta'),
+    paragraph(`${no}. ${stem}`),
+    ...[options].flat().map(paragraph),
   ]
 }
 
@@ -115,6 +115,7 @@ function reading(letter, from, to, {
   duplicateQuestion = null,
   mediaLayout = false,
   anchoredMedia = false,
+  questionShapes = {},
 } = {}) {
   return [
     paragraph(letter),
@@ -138,7 +139,7 @@ function reading(letter, from, to, {
     ] : []),
     ...(table ? [semanticTable({ mediaLayout })] : []),
     ...Array.from({ length: to - from + 1 }, (_, index) =>
-      question(from + index)).flat(),
+      question(from + index, questionShapes[from + index])).flat(),
     ...(duplicateQuestion ? question(duplicateQuestion) : []),
   ]
 }
@@ -153,6 +154,10 @@ function questionBlocks({
   chineseNoticeNumbering = false,
   fullWidthNoticeNumbering = false,
   circledNoticeNumbering = false,
+  abbreviationStem = false,
+  abbreviationOption = false,
+  dottedNameStem = false,
+  abbreviationSplitOption = false,
 } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`  A short guide has ${36 + index}._____ for learners.  `))
@@ -193,7 +198,12 @@ function questionBlocks({
       mediaLayout,
       anchoredMedia,
     }),
-    ...reading('B', 24, 27),
+    ...reading('B', 24, 27, { questionShapes: {
+      ...(abbreviationStem ? { 24: { stem: 'What did the class visit in Washington D. C.?' } } : {}),
+      ...(dottedNameStem ? { 26: { stem: 'What does the passage say about D. Smith?' } } : {}),
+      ...(abbreviationSplitOption ? { 27: { options: ['A. Alpha  B. Bravo  C. Washington D. C.', 'D. Delta'] } } : {}),
+      ...(abbreviationOption ? { 25: { options: 'A. Alpha  B. A trip to D. C.  C. Charlie  D. Delta' } } : {}),
+    } }),
     ...reading('C', 28, 31),
     ...reading('D', 32, 35),
     paragraph('第二节(共5小题；每小题2.5分，满分12.5分)'),
@@ -243,6 +253,7 @@ function answerBlocks({
   listening = false,
   listeningHeading = '听力原文',
   listeningTiming = false,
+  listeningSeconds = null,
 } = {}) {
   const key = [
     paragraph('Synthetic official answers'),
@@ -282,7 +293,18 @@ function answerBlocks({
       paragraph(listeningHeading),
       ...Array.from({ length: 10 }, (_, index) => [
         paragraph(`Text ${index + 1}`),
-        paragraph(`Synthetic transcript ${index + 1}.`),
+        ...(index === 0 && listeningSeconds === 'metadata' ? [paragraph('（Text 1：25 seconds）')] : []),
+        ...(index === 0 && listeningSeconds === 'duration' ? [paragraph('The duration of this recording is 25 seconds.')] : []),
+        ...(index === 0 && listeningSeconds === 'note' ? [paragraph('Note: 25 seconds')] : []),
+        ...(index === 0 && listeningSeconds === 'compound' ? [paragraph('Total Time: 2 minutes 25 seconds')] : []),
+        ...(index === 0 && listeningSeconds === 'dialogue'
+          ? ['W: Is the soup ready?', 'M: Not yet.', 'W: Wait 14 seconds.'].map(paragraph)
+          : index === 0 && listeningSeconds === 'instructions'
+            ? ['Silence: 5 seconds between conversations', 'Repeat: after 15 seconds', 'Synthetic transcript 1.',
+              'Silence: 5 seconds between conversations', 'Repeat: after 15 seconds'].map(paragraph)
+            : index === 0 && listeningSeconds === 'replay'
+              ? ['Repeat: once', 'Synthetic transcript 1.', 'Repeat: after 15 seconds'].map(paragraph)
+              : [paragraph(`Synthetic transcript ${index + 1}.`)]),
       ]).flat(),
       ...(listeningTiming ? [paragraph('语速：每分钟 120 词')] : []),
     ] : []),
