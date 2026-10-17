@@ -318,6 +318,10 @@ function writingSampleBlocks(writingShape) {
     typedWithBareExplanations: ['第四部分 写作', '第一节：应用文写作', ...application, '附应用文评分标准',
       '第二节：读后续写', ...continuation, '读后续写评分标准', '第一节（满分15分）', '按档次给分。',
       '第二节（满分25分）', '按档次给分。'],
+    stackedLabels: ['第四部分 写作', '第一节', '(四)参考范文', 'Possible Version 1:', ...application,
+      '第二节', '【作答示例】', 'One possible version:', ...continuation],
+    typedScoringOnly: ['第四部分 写作', '应用文:', '一、本题总分为15分，按5个档次给分。', '按内容要点给分。',
+      '读后续写:', '一、本题总分为25分，按5个档次给分。', '按内容要点给分。'],
     missingSection: ['One Possible Version:', ...application, ...continuation],
   }
   return shapes[writingShape].map(paragraph)
@@ -331,6 +335,7 @@ function answerBlocks({
   multilineAnswers = false,
   answerFormat = null,
   restatedExplanations = false,
+  explanationAfterKey = false,
   writingShape = 'standard',
   listening = false,
   listeningHeading = '听力原文',
@@ -366,12 +371,14 @@ function answerBlocks({
   return [
     ...(answerHeading ? [paragraph('答案与解析')] : []),
     ...key,
+    ...(explanationAfterKey ? [paragraph('解析'), paragraph('21. D 由原文第二段可知。')] : []),
     paragraph('21. A【解析】DETAIL_TOKEN_MUST_NOT_LEAK into Materialization, Review, Screen, or Print.'),
     paragraph('56. walked【解析】DETAIL_TOKEN_MUST_NOT_LEAK into Materialization, Review, Screen, or Print.'),
     ...(restatedExplanations ? [
       paragraph('56.walked。考查非谓语动词。'),
       paragraph('65.考查名词的数。句意:同64题解析。'),
       paragraph('66.应用文参考例文'),
+      ...(restatedExplanations === 'conflict' ? [paragraph('56.walking。考查非谓语动词。')] : []),
     ] : []),
     ...writingSampleBlocks(writingShape),
     ...(listening ? [

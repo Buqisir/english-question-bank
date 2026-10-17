@@ -18,7 +18,7 @@ const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试�
 const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?${LISTENING_TRANSCRIPT_TITLE}(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
 // Labels that open an official sample; scoring or prompt text may precede them.
-const WRITING_SAMPLE_LABEL = /^(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
+const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*[:：]?$/iu
 const LISTENING_PAUSE_REPEAT_SEQUENCE = /^(?:(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\)|\(\s*重复\s*\)))+$/u
 const SLOT_SPECS = [
@@ -894,11 +894,6 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
     if (item.kind !== 'paragraph') continue
     if (writingAnswerSectionHeading(normalized(item.text))) break
     if (isAnswerExplanationHeading(item)) {
-      const activeAnswersComplete = Array.from(
-        { length: 45 },
-        (_, index) => answers.has(index + 21),
-      ).every(Boolean)
-      if (activeAnswersComplete) break
       lines.push({ item, explanationHeading: true })
       continue
     }
@@ -916,7 +911,14 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       }
       continue
     }
-    if (line.explanationHeading) continue
+    if (line.explanationHeading) {
+      const activeAnswersComplete = Array.from(
+        { length: 45 },
+        (_, offset) => answers.has(offset + 21),
+      ).every(Boolean)
+      if (activeAnswersComplete) break
+      continue
+    }
     const { text } = line
     const previous = lines[index - 1]
     if (previous?.text !== undefined
@@ -960,9 +962,20 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       const detail = INLINE_ANSWER_DETAIL.exec(rawValue)
       const value = textAnswerValue(detail ? rawValue.slice(0, detail.index) : rawValue)
       if (!value) {
-        // An explanation that restates an already keyed answer is not a
-        // second authority; only an unkeyed number needs review.
-        if (answers.has(number)) continue
+        // An explanation for an already keyed number is not a second
+        // authority when it opens with Chinese prose or repeats the key; an
+        // English lead that differs from the key is a real conflict.
+        const keyed = answers.get(number)
+        if (keyed) {
+          const lead = rawValue.split(/[\p{Script=Han}。，；：【]/u)[0]
+          const restated = textAnswerValue(lead)
+          if (restated && restated.toLowerCase() !== keyed.value.toLowerCase()) {
+            addIssue(issues, 'NCK1_DOCX_ANSWER_CONFLICT', `answers.${number}`,
+              'An explanation restates a different value than the official answer key', at(item))
+            continue
+          }
+          if (restated || !/[A-Za-z]/u.test(lead)) continue
+        }
         addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
           'A text answer cannot be separated safely from adjacent explanation text', at(item))
         continue
@@ -995,7 +1008,7 @@ function writingSamplePosition(answerBody, patterns, from) {
   })
 }
 
-function writingSampleText(answerBody, from, to, { bareHeading = false } = {}) {
+function writingSampleText(answerBody, from, to) {
   // A source can put scoring prose/tables before the explicit sample label.
   // Only that exact label establishes the sample start; do not infer it from
   // English-looking text or discard scoring from the captured source stream.
@@ -1004,6 +1017,9 @@ function writingSampleText(answerBody, from, to, { bareHeading = false } = {}) {
     && WRITING_SAMPLE_LABEL.test(normalized(item.text)) ? [index] : [])
   // A single label is not essay prose. Multiple labelled alternatives retain
   // their labels and order rather than silently selecting one sample.
+  // A section label directly followed by another label ("参考范文" then
+  // "Possible Version 1") is a heading for that label, not an alternative.
+  if (labels.length >= 2 && labels[1] === labels[0] + 1) labels.shift()
   const start = labels.length ? labels[0] + (labels.length === 1 ? 1 : 0) : from
   const boundary = answerBody.findIndex((item, index) =>
     index >= start
@@ -1018,9 +1034,9 @@ function writingSampleText(answerBody, from, to, { bareHeading = false } = {}) {
     .slice(start, end)
     .filter((item) => item.kind === 'paragraph' && normalized(item.text))
     .map((item) => trimEdgeSpaces(item.text))
-  // Under a bare heading with no sample label, Chinese text first is scoring
-  // or instructions, not the sample; leave it for review instead of keeping it.
-  if (bareHeading && !labels.length && /\p{Script=Han}/u.test(lines[0] || '')) return ''
+  // With no sample label, Chinese text first is scoring or instructions, not
+  // the sample; leave it for review instead of keeping it.
+  if (!labels.length && /\p{Script=Han}/u.test(lines[0] || '')) return ''
   return lines.join('\n')
 }
 
@@ -1094,19 +1110,8 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     )
     return { application: null, continuation: null }
   }
-  const bare = (index, pattern) => pattern.test(normalized(sampleBody[index].text))
-  const application = writingSampleText(
-    sampleBody,
-    applicationHeadings[0] + 1,
-    continuationHeadings[0],
-    { bareHeading: bare(applicationHeadings[0], BARE_APPLICATION_HEADING) },
-  )
-  const continuation = writingSampleText(
-    sampleBody,
-    continuationHeadings[0] + 1,
-    sampleBody.length,
-    { bareHeading: bare(continuationHeadings[0], BARE_CONTINUATION_HEADING) },
-  )
+  const application = writingSampleText(sampleBody, applicationHeadings[0] + 1, continuationHeadings[0])
+  const continuation = writingSampleText(sampleBody, continuationHeadings[0] + 1, sampleBody.length)
   if (!normalized(application) || !normalized(continuation)) {
     addIssue(
       issues,

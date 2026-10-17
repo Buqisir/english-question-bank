@@ -523,6 +523,15 @@ assert.equal(tableAnswers.materialization.answers.at(-1).authority.selector, '(/
 const restated = produceWith({ restatedExplanations: true })
 assert.equal(restated.disposition, 'ready_for_verification')
 assert.deepEqual(answerValues(restated), baselineAnswers)
+const restatedConflict = produceWith({ restatedExplanations: 'conflict' })
+assert.equal(restatedConflict.disposition, 'needs_agent_review')
+assert(restatedConflict.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_ANSWER_CONFLICT' && item.path === 'answers.56'))
+
+// A complete key ends answer parsing at the explanation heading.
+const explained = produceWith({ explanationAfterKey: true })
+assert.equal(explained.disposition, 'ready_for_verification')
+assert.deepEqual(answerValues(explained), baselineAnswers)
 
 // A one-word grid line cannot hold a multi-word answer; it stays a review item.
 const ambiguousGrid = produceNck1DocxMaterialization({
@@ -536,13 +545,13 @@ assert(ambiguousGrid.review.required.some((item) =>
 
 // Bare part headings, type-only headings and Chinese sample labels all bound
 // the same samples; scoring before or after a label stays out of the sample.
-for (const writingShape of ['bare', 'typed', 'typedNoSection', 'chineseLabel', 'typedWithBareExplanations']) {
+for (const writingShape of ['bare', 'typed', 'typedNoSection', 'chineseLabel', 'typedWithBareExplanations', 'stackedLabels']) {
   const result = produceWith({ writingShape })
   assert.equal(result.disposition, 'ready_for_verification', writingShape)
   assert.equal(writingSample(result, 'application-writing'), baselineApplication, writingShape)
   assert.equal(writingSample(result, 'continuation-writing'), baselineContinuation, writingShape)
 }
-for (const writingShape of ['bareScoringFirst', 'missingSection']) {
+for (const writingShape of ['bareScoringFirst', 'typedScoringOnly', 'missingSection']) {
   const result = produceWith({ writingShape })
   assert.equal(result.disposition, 'needs_agent_review', writingShape)
   assert(result.review.required.some((item) =>
