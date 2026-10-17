@@ -2465,7 +2465,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
             : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
-          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} waveform={audio.waveform} />,
+          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} />,
       ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
@@ -2475,14 +2475,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             listeningSectionPlayer={audio && firstSection && (
               <ListeningSegmentPlayer key={`${audio.sha256}:first-section`} src={audio.url} label="第一节第 1–5 题"
                 startSeconds={firstSection.startSeconds} endSeconds={firstSection.endSeconds}
-                onActivate={activateAudio} size="full" waveform={audio.waveform}
+                onActivate={activateAudio} size="full"
                 marks={firstSection.segments.map((segment) => ({
                   startSeconds: segment.startSeconds, endSeconds: segment.endSeconds, label: String(segment.questionNumbers[0]),
                 }))} />
             )}
             listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full" waveform={audio.waveform}
+                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full"
                 marks={audio.segments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,

@@ -1,10 +1,8 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
-import type { ListeningWaveform } from '../../../../shared/paper-canonical/listeningWaveform.mjs'
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
 import { Headphones } from '../../icons'
 import { PlaybackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import { EqbIcon } from '../../icons/EqbIcon'
-import { loadWaveformEnvelope, waveformBars, type WaveformEnvelope } from './listeningWaveform'
 
 type Props = {
   src: string
@@ -12,10 +10,9 @@ type Props = {
   startSeconds: number
   endSeconds: number
   onActivate: (audio: HTMLAudioElement) => void
-  waveform?: ListeningWaveform
-  /** Whole-recording player gets a longer waveform. */
+  /** Whole-recording player gets a longer track. */
   size?: 'segment' | 'full'
-  /** Question-segment starts drawn over the whole-recording waveform. */
+  /** Question-segment starts drawn over the whole-recording track. */
   marks?: ReadonlyArray<{ label: string; startSeconds: number; endSeconds: number }>
 }
 
@@ -24,11 +21,8 @@ const RATES = [0.75, 1, 1.25] as const
 const NEEDLE_DEGREES = { 0.75: -50, 1: 0, 1.25: 50 } as const
 /** One click steps in this order, so the needle sweeps right, then returns. */
 const CLICK_NEXT = { 1: 1.25, 1.25: 0.75, 0.75: 1 } as const
-const BAR_PITCH = 3
-const BAR_WIDTH = 1.5
 const WAVE_WIDTH = { segment: 216, full: 384 } as const
-const WAVE_HEIGHT = 28
-const MARK_CHAR_PX = 5.5
+const MARK_CHAR_PX = 8
 const HEADER_CLEARANCE = 72
 
 function clock(seconds: number): string {
@@ -36,9 +30,7 @@ function clock(seconds: number): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
 }
 
-export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, waveform, size = 'segment', marks }: Props) {
-  // Local comparison only; the published player stays unchanged until Owner review.
-  const progressLine = import.meta.env.DEV && new URLSearchParams(window.location.search).get('listeningTrack') === 'line'
+export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, size = 'segment', marks }: Props) {
   const rootRef = useRef<HTMLSpanElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
@@ -54,17 +46,9 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   // Before the first play the single clock shows the length; afterwards, elapsed time.
   const [started, setStarted] = useState(false)
   const [error, setError] = useState(false)
-  const [envelope, setEnvelope] = useState<WaveformEnvelope | null>(null)
   // While dragging only the caret moves; the audio seeks once on release.
   const [dragPosition, setDragPosition] = useState<number | null>(null)
   const duration = Math.max(0, endSeconds - startSeconds)
-  const barCount = Math.floor(waveWidth / BAR_PITCH)
-  const preparedEnvelope = useMemo(() => !progressLine && waveform ? {
-    bucketSeconds: waveform.bucketSeconds, peaks: Float32Array.from(waveform.peaks), reference: waveform.reference,
-  } : null, [waveform, progressLine])
-  const activeEnvelope = preparedEnvelope ?? envelope
-  const bars = useMemo(() => !progressLine && activeEnvelope ? waveformBars(activeEnvelope, startSeconds, endSeconds, barCount) : null,
-    [activeEnvelope, startSeconds, endSeconds, barCount, progressLine])
   const shownPosition = dragPosition ?? position
   const progress = duration > 0 ? Math.min(1, shownPosition / duration) : 0
 
@@ -72,13 +56,6 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     const audio = audioRef.current
     return () => { audio?.pause() }
   }, [])
-
-  useEffect(() => {
-    if (progressLine || !open || preparedEnvelope || envelope) return
-    let cancelled = false
-    loadWaveformEnvelope(src).then((next) => { if (!cancelled) setEnvelope(next) }, () => {})
-    return () => { cancelled = true }
-  }, [open, envelope, preparedEnvelope, src, progressLine])
 
   useEffect(() => {
     if (!playing) return
@@ -136,7 +113,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       const right = Math.min(document.documentElement.clientWidth - 8, bounds.right - 8,
         lectureLeft !== undefined && lectureLeft > left ? lectureLeft - 8 : Infinity)
       const chrome = card.offsetWidth - (waveRef.current?.offsetWidth ?? waveWidth)
-      const width = Math.max(BAR_PITCH, Math.min(WAVE_WIDTH[size], Math.floor((right - left) / zoom - chrome)))
+      const width = Math.max(3, Math.min(WAVE_WIDTH[size], Math.floor((right - left) / zoom - chrome)))
       setWaveWidth(width)
       const cardWidth = (chrome + width) * zoom
       const desiredLeft = Math.max(left, Math.min(triggerRect.left - 10 * zoom, right - cardWidth))
@@ -220,13 +197,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     event.preventDefault()
   }
 
-  const barRects = useMemo(() => progressLine ? null : (bars ?? Array.from({ length: barCount }, () => 0)).map((height, index) => {
-    const barHeight = Math.max(BAR_WIDTH, height * WAVE_HEIGHT)
-    return <rect key={index} x={index * BAR_PITCH} y={(WAVE_HEIGHT - barHeight) / 2}
-      width={BAR_WIDTH} height={barHeight} rx={BAR_WIDTH / 2}
-      style={{ '--listening-bar-index': index } as CSSProperties} />
-  }), [bars, barCount, progressLine])
-  // Each question segment owns its span of the waveform; its label is centred
+  // Each question segment owns its span of the track; its label is centred
   // over that span and dropped only if it would touch the previous label.
   const toX = (seconds: number) => duration > 0
     ? Math.min(waveWidth, Math.max(0, ((seconds - startSeconds) / duration) * waveWidth)) : 0
@@ -237,7 +208,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   }>((layout, mark) => {
     const x = toX(mark.startSeconds)
     const width = Math.max(4, toX(mark.endSeconds) - x)
-    const halfLabel = (mark.label.length * (progressLine ? 8 : MARK_CHAR_PX)) / 2
+    const halfLabel = (mark.label.length * MARK_CHAR_PX) / 2
     const showLabel = x + width / 2 - halfLabel >= layout.labelEnd + 2
     const current = (started || dragPosition !== null)
       && nowSeconds >= mark.startSeconds && nowSeconds < mark.endSeconds
@@ -253,7 +224,6 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     .filter((span) => span.width > 0)
 
   return <span ref={rootRef} className="listening-player" data-size={size}
-    data-track={progressLine ? 'line' : undefined}
     {...iconMotionInput}
     data-playing={playing || undefined} data-open={open || undefined}
     onClick={(event) => event.stopPropagation()}>
@@ -296,7 +266,6 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       <div ref={waveRef} className="listening-player-wave" role="slider" tabIndex={0}
         aria-label={`${label}播放进度`} aria-valuemin={0} aria-valuemax={Math.round(duration)}
         aria-valuenow={Math.round(shownPosition)} aria-valuetext={`${clock(shownPosition)} / ${clock(duration)}`}
-        data-loading={progressLine || bars ? undefined : ''}
         data-dragging={dragPosition === null ? undefined : ''}
         onKeyDown={onWaveKey}
         onPointerDown={(event) => {
@@ -312,7 +281,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
           setDragPosition(null)
         }}
         onPointerCancel={() => setDragPosition(null)}>
-        {progressLine ? <>
+        <>
           <span className="listening-player-line-spans" aria-hidden="true">
             {lineSpans.map((span, index) => <span key={index} className="listening-player-line"
               style={{ left: span.x, width: span.width }} />)}
@@ -326,17 +295,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
             style={{ left: progress * waveWidth }}>
             <span className="listening-player-line-thumb" />
           </span>
-        </> : <>
-        <svg className="listening-player-bars" viewBox={`0 0 ${waveWidth} ${WAVE_HEIGHT}`} aria-hidden="true">
-          {barRects}
-        </svg>
-        <svg className="listening-player-bars listening-player-bars--played" viewBox={`0 0 ${waveWidth} ${WAVE_HEIGHT}`}
-          aria-hidden="true" style={{ clipPath: `inset(0 ${(1 - progress) * 100}% 0 0)` }}>{barRects}</svg>
-        <span className="listening-player-head" aria-hidden="true"
-          style={{ transform: `translateX(${progress * waveWidth}px)` }}>
-          <svg className="listening-player-caret" viewBox="0 0 8 6"><path d="M2 1.75h4L4 4.5z" /></svg>
-        </span>
-        </>}
+        </>
       </div>
       </span>
       <span className="listening-player-time" aria-live="off">
