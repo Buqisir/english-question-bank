@@ -523,9 +523,11 @@ assert.equal(tableAnswers.materialization.answers.at(-1).authority.selector, '(/
 const restated = produceWith({ restatedExplanations: true })
 assert.equal(restated.disposition, 'ready_for_verification')
 assert.deepEqual(answerValues(restated), baselineAnswers)
-const labelledSame = produceWith({ restatedExplanations: 'labelledSame' })
-assert.equal(labelledSame.disposition, 'ready_for_verification')
-assert.deepEqual(answerValues(labelledSame), baselineAnswers)
+for (const restatedExplanations of ['labelledSame', 'repeatedLead']) {
+  const result = produceWith({ restatedExplanations })
+  assert.equal(result.disposition, 'ready_for_verification', restatedExplanations)
+  assert.deepEqual(answerValues(result), baselineAnswers, restatedExplanations)
+}
 for (const [restatedExplanations, code] of [
   ['conflict', 'NCK1_DOCX_ANSWER_CONFLICT'],
   ['labelledConflict', 'NCK1_DOCX_ANSWER_CONFLICT'],

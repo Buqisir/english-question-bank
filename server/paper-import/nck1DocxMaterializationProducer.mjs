@@ -783,6 +783,19 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
 // ("56.in;") and an optional letter inside a word ("fuel(l)ed", printed
 // "fuel(l) ed") are answer-key formats; other punctuation, Chinese text, or a
 // long run means explanation prose may be attached, so the value is withheld.
+// An explanation "repeats" a keyed answer when its opening words are the key
+// (English prose may follow) or when it lists the same alternatives in any
+// order; OCR spacing around "/" and inside the value does not matter.
+function restatesAnswer(lead, keyedValue) {
+  const bare = (text) => text.toLowerCase().replace(/[,.;:!?"“”]/gu, ' ')
+  const words = (text) => bare(text).replace(/\s*\/\s*/gu, '/').trim().split(/\s+/u)
+  const alternatives = (text) => bare(text).replace(/\s+/gu, '').split('/').sort().join('/')
+  const key = words(keyedValue)
+  const restated = words(lead)
+  return key.every((word, index) => restated[index] === word)
+    || alternatives(lead) === alternatives(keyedValue)
+}
+
 function textAnswerValue(rawValue) {
   const value = String(rawValue).trim().replace(/\s*[.。;；,，]$/u, '')
   const shape = normalized(value).replace(/(?<=\p{L})\(\p{L}{1,3}\)(?: (?=\p{L}))?/gu, '')
@@ -970,13 +983,13 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
         if (keyed) {
           const label = /^\s*(?:【\s*答案\s*】|答案\s*[:：])\s*/u.exec(rawValue)
           const lead = rawValue.slice(label ? label[0].length : 0).split(/[\p{Script=Han}。，；：【]/u)[0]
-          const restated = textAnswerValue(lead)
-          if (restated && restated.toLowerCase() !== keyed.value.toLowerCase()) {
+          if (restatesAnswer(lead, keyed.value)) continue
+          if (textAnswerValue(lead)) {
             addIssue(issues, 'NCK1_DOCX_ANSWER_CONFLICT', `answers.${number}`,
               'An explanation restates a different value than the official answer key', at(item))
             continue
           }
-          if (restated || (!label && !/[A-Za-z]/u.test(lead))) continue
+          if (!label && !/[A-Za-z]/u.test(lead)) continue
         }
         addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
           'A text answer cannot be separated safely from adjacent explanation text', at(item))

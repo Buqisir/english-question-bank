@@ -381,6 +381,7 @@ function answerBlocks({
       ...({
         conflict: ['56.walking。考查非谓语动词。'],
         labelledSame: ['56.【答案】walked【解析】考查非谓语动词。', '56.答案：walked。考查非谓语动词。'],
+        repeatedLead: ['56. walked, 考查非谓语动词。', '56. walked Biel walk在这里作谓语。', '57. Quickly考查副词。'],
         labelledConflict: ['56.【答案】walking【解析】考查非谓语动词。'],
         labelledColonConflict: ['56.答案：walking。考查非谓语动词。'],
         labelledUnseparable: ['56.【答案】考查非谓语动词。'],
