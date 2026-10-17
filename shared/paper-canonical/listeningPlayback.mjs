@@ -1,25 +1,18 @@
-// Rebuildable playback geometry, not transcription, mapping or paper meaning.
-export const LISTENING_WAVEFORM_FILE = 'materialization/listening-audio/waveform-v1.json'
-export const PUBLISHED_LISTENING_WAVEFORM_FILE = 'listening/playback-ui-v1.json'
-
-export function assertListeningWaveform(value, playbackAudioSha256, durationSeconds) {
-  if (!value || value.schemaVersion !== 'listening-waveform-v1'
-    || value.playbackAudioSha256 !== playbackAudioSha256
-    || !/^sha256:[a-f0-9]{64}$/.test(playbackAudioSha256)
-    || value.bucketSeconds !== 0.05
-    || !Number.isFinite(value.durationSeconds) || value.durationSeconds <= 0
-    || !Number.isFinite(durationSeconds) || Math.abs(value.durationSeconds - durationSeconds) > 0.2
-    || !Number.isFinite(value.reference) || value.reference <= 0
-    || !Array.isArray(value.peaks)
-    || value.peaks.length !== Math.ceil(value.durationSeconds / value.bucketSeconds - 1e-9)
-    || value.peaks.some((peak) => !Number.isFinite(peak) || peak < 0)) {
-    throw new Error('Listening waveform does not match playback bytes/duration or envelope v1')
-  }
-  return value
-}
+// Playback timing is independent of retired waveform geometry.
+export const LEGACY_LISTENING_WAVEFORM_FILE = 'materialization/listening-audio/waveform-v1.json'
+export const PUBLISHED_LISTENING_PLAYBACK_UI_FILE = 'listening/playback-ui-v1.json'
 
 export function assertListeningPlaybackUi(value, playbackAudioSha256, durationSeconds) {
-  const waveform = assertListeningWaveform(value?.waveform, playbackAudioSha256, durationSeconds)
+  // Legacy derivatives bind audio inside waveform. Ignore its retired geometry,
+  // but retain the original audio binding and verify the whole file digest upstream.
+  const binding = value?.playbackAudioSha256 ? value : value?.waveform
+  if (!binding || binding.playbackAudioSha256 !== playbackAudioSha256
+    || !/^sha256:[a-f0-9]{64}$/.test(playbackAudioSha256)
+    || !Number.isFinite(durationSeconds) || durationSeconds <= 0
+    || !Number.isFinite(binding.durationSeconds)
+    || Math.abs(binding.durationSeconds - durationSeconds) > 0.2) {
+    throw new Error('Listening playback timing does not match audio')
+  }
   let end = 0
   const numbers = new Set()
   if (!Array.isArray(value.segments)) throw new Error('Invalid listening playback timing')
@@ -36,7 +29,7 @@ export function assertListeningPlaybackUi(value, playbackAudioSha256, durationSe
     segment.questionNumbers.forEach((number) => numbers.add(number))
   }
   // Do not allow presentation metadata to override the authoritative audio URL/digest.
-  return { waveform, segments: value.segments }
+  return { segments: value.segments }
 }
 
 // Require complete, ordered, single-question timing coverage. Candidate signal

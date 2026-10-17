@@ -78,7 +78,7 @@ import {
   finalizeListeningAudio,
   stageListeningAudio,
 } from './import-pipeline/listening-audio.mjs'
-import { LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_WAVEFORM_FILE } from '../shared/paper-canonical/listeningWaveform.mjs'
+import { LEGACY_LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../shared/paper-canonical/listeningPlayback.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
@@ -2024,6 +2024,59 @@ function runReviewCommand(args, env) {
 }
 
 if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
+for (const legacy of [true, false]) {
+  const context = makeContext(legacy ? 'legacy-waveform' : 'no-waveform', { listening: true })
+  try {
+    const playback = context.projection.sourceInput.listeningAudio
+    const waveform = { schemaVersion: 'listening-waveform-v1',
+      playbackAudioSha256: playback.sha256, durationSeconds: playback.durationSeconds,
+      bucketSeconds: 0.05, reference: 1, peaks: Array(Math.ceil(playback.durationSeconds / 0.05 - 1e-9)).fill(0) }
+    if (legacy) writeJson(path.join(context.reviewRoot, LEGACY_LISTENING_WAVEFORM_FILE), waveform)
+    const reloaded = buildNck1ReviewProjection(context.reviewRoot, {
+      requireAnalyses: true, expectedCandidateDigest: context.projection.candidateDigest,
+    })
+    assert.equal(reloaded.sourceDigest, context.projection.sourceDigest)
+    assert.equal(reloaded.candidateDigest, context.projection.candidateDigest)
+    const manifest = reviewManifestFor(context.reviewRoot, reloaded)
+    assert.equal(manifest.files.some(file => file.role === 'listening_audio_waveform'), legacy)
+    const store = createImportReviewStore({
+      dbPath: path.join(context.tempRoot, 'review.sqlite'),
+      filesRoot: path.join(context.tempRoot, 'review-files'), rendererBuildId: 'waveform-retirement-verifier',
+    })
+    const revision = store.createRevision(manifest).revision
+    for (const file of manifest.files) {
+      const upload = store.fileForUpload(revision.id, file.path)
+      mkdirSync(path.dirname(upload.destination), { recursive: true })
+      writeFileSync(upload.destination, readFileSync(resolveReviewFile(context.reviewRoot, file.path)))
+      store.completeFileUpload(revision.id, file.path, file)
+    }
+    store.finalizeRevision(revision.id)
+    const replay = store.projectionForRevision(revision.id)
+    assert.equal(replay.revision.bundleDigest, manifest.bundleDigest, 'retain the exact sealed inventory identity')
+    assert.equal(replay.projection.candidateDigest, context.projection.candidateDigest)
+    const preview = store.productPreviewForRevision(revision.id).preview
+    assert.equal(preview.consumption.listeningAudio.waveform, undefined)
+    if (legacy) assert.deepEqual(readFileSync(store.verifiedFileForRead(revision.id, LEGACY_LISTENING_WAVEFORM_FILE).filePath),
+      readFileSync(path.join(context.reviewRoot, LEGACY_LISTENING_WAVEFORM_FILE)))
+    const result = publish(context, { reviewRootDir: path.dirname(store.verifiedFileForRead(revision.id, 'config.json').filePath) })
+    assert.equal(result.ok, true, JSON.stringify(result))
+    const runtime = createCanonicalConsumerRuntime({ rootDir: context.paperAssetsDir, db: context.db })
+    const uiPath = path.join(result.publish.versionDir, PUBLISHED_LISTENING_PLAYBACK_UI_FILE)
+    // Historical published format has its own digest over waveform + segments.
+    const segments = [{ segmentId: 'text:1', questionNumbers: [1], firstQuestionId: 'question:listening:1',
+      startSeconds: 0.2, endSeconds: 1.2 }]
+    const value = legacy ? { waveform, segments }
+      : { playbackAudioSha256: playback.sha256, durationSeconds: playback.durationSeconds, segments }
+    writeJson(uiPath, { ...value, digest: digestJson(value) })
+    for (const consumerId of ['screen', 'print_pdf']) {
+      const consumption = runtime.load({ paperId, consumerId })
+      assert.equal(consumption.disposition, 'ready')
+      assert.deepEqual(consumption.listeningAudio.segments, segments)
+      assert.equal(consumption.listeningAudio.waveform, undefined)
+    }
+    console.log(`PASS ${legacy ? 'historical waveform fixture' : 'new candidate without waveform'}: read -> sealed Review reload/preview -> publish -> Screen/Print consumption; exact bundle and Candidate digests retained`)
+  } finally { close(context) }
+}
 const listeningPublication = makeContext('listening-publication', { listening: true, sourceType: '模拟题' })
 try {
   const listeningPackageRoot = path.join(listeningPublication.tempRoot, 'listening-package')
@@ -2166,14 +2219,14 @@ try {
   assert.equal(result.ok, true, JSON.stringify(result))
   assert.ok(existsSync(path.join(result.publish.versionDir, 'listening/playback.mp3')))
   assert.ok(result.publish.consumers.screen.listeningAudio.url.includes('/versions/v1/'))
-  const preparedWaveform = JSON.parse(readFileSync(path.join(listeningPublication.reviewRoot, LISTENING_WAVEFORM_FILE), 'utf8'))
-  assert(reviewBundleFilePaths(listeningPublication.reviewRoot).some((file) => file.role === 'listening_audio_waveform'))
-  assert.deepEqual(result.publish.consumers.screen.listeningAudio.waveform, preparedWaveform,
-    'publication reuses the exact import waveform instead of decoding in Screen')
-  const playbackUiPath = path.join(result.publish.versionDir, PUBLISHED_LISTENING_WAVEFORM_FILE)
+  assert.equal(existsSync(path.join(listeningPublication.reviewRoot, LEGACY_LISTENING_WAVEFORM_FILE)), false)
+  assert.equal(reviewBundleFilePaths(listeningPublication.reviewRoot).some((file) => file.role === 'listening_audio_waveform'), false)
+  assert.equal(result.publish.consumers.screen.listeningAudio.waveform, undefined)
+  const playbackUiPath = path.join(result.publish.versionDir, PUBLISHED_LISTENING_PLAYBACK_UI_FILE)
   const playbackUiBytes = readFileSync(playbackUiPath)
   const { digest: uiDigest, ...uiValue } = JSON.parse(playbackUiBytes)
-  assert.deepEqual(uiValue.waveform, preparedWaveform)
+  assert.equal(Object.hasOwn(uiValue, 'waveform'), false)
+  assert.equal(uiValue.playbackAudioSha256, result.publish.consumers.screen.listeningAudio.sha256)
   assert.equal(uiDigest, digestJson(uiValue))
   const manifest = JSON.parse(readFileSync(path.join(result.publish.versionDir, 'canonical',
     `canonical-paper-publication-v${result.publish.consumers.screen.authorityRef.manifestVersion}.json`), 'utf8'))
@@ -2190,12 +2243,12 @@ try {
   assert.match(publishedHtml, /data-canonical-mock-name>2026 Contract Mock/,
     'public print consumes the persisted source classification, not test-injected metadata')
   for (const derivative of [null, Buffer.from('{bad json'), Buffer.from(JSON.stringify({ ...uiValue,
-    waveform: { ...uiValue.waveform, reference: 999 }, digest: uiDigest }))]) {
+    segments: [{ segmentId: 'tampered' }], digest: uiDigest }))]) {
     if (derivative) writeFileSync(playbackUiPath, derivative)
     else rmSync(playbackUiPath)
     const historical = runtime.load({ paperId, consumerId: 'screen' })
     assert.equal(historical.publicationDigest, manifest.publicationDigest)
-    assert.equal(historical.listeningAudio.waveform, undefined, 'discard corrupt geometry; keep validated audio playable')
+    assert.equal(historical.listeningAudio.waveform, undefined, 'keep validated audio playable without retired waveform geometry')
     assert.equal(historical.listeningAudio.segments, undefined, 'never consume unchecked timing data')
     writeFileSync(playbackUiPath, playbackUiBytes)
   }

@@ -10,7 +10,7 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
-import { assertListeningPlaybackUi, PUBLISHED_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
+import { assertListeningPlaybackUi, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { authorityRefForManifestDigest, canonicalAuthorityRef, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
@@ -1783,14 +1783,14 @@ function validateConsumptionPublication({
   let playbackUi = null
   if (manifest.listeningAudio) {
     try {
-      const bytes = store.readVersionArtifact(ref, PUBLISHED_LISTENING_WAVEFORM_FILE)
+      const bytes = store.readVersionArtifact(ref, PUBLISHED_LISTENING_PLAYBACK_UI_FILE)
       if (bytes) {
         const { digest, ...value } = readJsonBytes(bytes, 'listening playback UI')
         if (digest !== digestJson(value)) throw new Error('Listening playback UI digest mismatch')
         playbackUi = assertListeningPlaybackUi(value, manifest.listeningAudio.sha256, manifest.listeningAudio.durationSeconds)
       }
     } catch {
-      // A missing/corrupt rebuildable envelope cannot invalidate paper meaning
+      // A missing/corrupt playback derivative cannot invalidate paper meaning
       // or supply unchecked timings. Historical browser playback remains available.
     }
   }

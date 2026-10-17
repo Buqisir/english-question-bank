@@ -21,8 +21,7 @@ import {
   finalizeListeningAudio,
   stageListeningAudio,
 } from './import-pipeline/listening-audio.mjs'
-import { buildListeningWaveform, prepareListeningWaveform, readListeningWaveform } from '../server/paper-import/listeningWaveform.mjs'
-import { assertListeningWaveform, assertListeningPlaybackUi, firstListeningSectionRange } from '../shared/paper-canonical/listeningWaveform.mjs'
+import { assertListeningPlaybackUi, firstListeningSectionRange } from '../shared/paper-canonical/listeningPlayback.mjs'
 import { mockPaperCoverName } from '../shared/paper-canonical/listeningPresentation.mjs'
 import { validateListeningReview, readListeningReview, reviewedPlaybackSegments } from '../server/paper-import/listeningReview.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
@@ -711,37 +710,6 @@ assert len(calls) == 1
   assert.throws(() => assertListeningAudioManifest(quickDir, {
     ...quickManifest, attachments: listeningAudioAttachmentDescriptors(quickDir),
   }), /scope/)
-  const shapedAudio = path.join(tempRoot, 'shaped.mp3')
-  execFileSync('ffmpeg', ['-v', 'error', '-f', 'lavfi', '-i',
-    "aevalsrc='if(lt(t,0.6),0,if(lt(t,1.4),0.15*sin(2*PI*431*t),0.6*sin(2*PI*431*t)))':d=2.17", shapedAudio])
-  const shapedBytes = readFileSync(shapedAudio)
-  const shape = buildListeningWaveform(shapedBytes, 2.17)
-  assert.equal(shape.playbackAudioSha256, sha256(shapedBytes))
-  assert.ok(shape.peaks.slice(1, 8).every((peak) => peak < 0.001), 'silence is not a decorative waveform')
-  const low = shape.peaks.slice(16, 24).reduce((sum, peak) => sum + peak) / 8
-  const high = shape.peaks.slice(32, 40).reduce((sum, peak) => sum + peak) / 8
-  assert.ok(high / low > 3.8 && high / low < 4.2, 'RMS envelope retains unequal loudness')
-  for (const mutate of [
-    (value) => { value.playbackAudioSha256 = sha256(Buffer.from('wrong audio')) },
-    (value) => { value.durationSeconds += 1 },
-    (value) => { value.peaks.pop() },
-    (value) => { value.peaks[0] = -1 },
-    (value) => { value.bucketSeconds = 0.1 },
-  ]) {
-    const changed = structuredClone(shape); mutate(changed)
-    assert.throws(() => assertListeningWaveform(changed, sha256(shapedBytes), 2.17))
-  }
-  const savedWaveform = path.join(tempRoot, 'waveform-v1.json')
-  assert.equal(readListeningWaveform(savedWaveform, sha256(shapedBytes), 2.17), null)
-  prepareListeningWaveform(savedWaveform, shapedBytes, 2.17)
-  const savedBytes = readFileSync(savedWaveform)
-  const oldPath = process.env.PATH
-  try {
-    process.env.PATH = '/nonexistent' // A second preparation must not invoke FFmpeg.
-    assert.deepEqual(prepareListeningWaveform(savedWaveform, shapedBytes, 2.17), shape)
-    assert.deepEqual(readFileSync(savedWaveform), savedBytes)
-    assert.throws(() => prepareListeningWaveform(savedWaveform, Buffer.from('different audio'), 2.17), /waveform/)
-  } finally { process.env.PATH = oldPath }
   const segments = [1, 2, 3, 4, 5].map((number, index) => ({
     segmentId: `segment:${number}`, questionNumbers: [number], firstQuestionId: `question:listening:${number}`,
     startSeconds: 0.12 + index * 0.3, endSeconds: 0.29 + index * 0.3,
@@ -754,13 +722,24 @@ assert len(calls) == 1
   assert.equal(firstListeningSectionRange([...segments, segments[0]], [1, 2, 3, 4, 5]), null)
   assert.equal(firstListeningSectionRange(segments, [6, 7, 8, 9, 10]), null)
   assert.equal(firstListeningSectionRange([{ ...segments[0], endSeconds: .5 }, ...segments.slice(1)], [1, 2, 3, 4, 5]), null)
-  const ui = assertListeningPlaybackUi({ waveform: shape, segments, url: '/untrusted', sha256: 'wrong' }, sha256(shapedBytes), 2.17)
-  assert.deepEqual(Object.keys(ui), ['waveform', 'segments'])
-  assert.throws(() => assertListeningPlaybackUi({ waveform: shape, segments: [...segments, segments[0]] }, sha256(shapedBytes), 2.17))
+  const binding = { playbackAudioSha256: sha256(Buffer.from('playback fixture')), durationSeconds: 2.17 }
+  for (const metadata of [binding, { waveform: { ...binding, peaks: [-1], reference: 0 } }]) {
+    const ui = assertListeningPlaybackUi({ ...metadata, segments, url: '/untrusted', sha256: 'wrong' },
+      binding.playbackAudioSha256, binding.durationSeconds)
+    assert.deepEqual(ui, { segments }, 'only timing survives, including historical waveform containers')
+    assert.throws(() => assertListeningPlaybackUi({ ...metadata, segments: [...segments, segments[0]] },
+      binding.playbackAudioSha256, binding.durationSeconds))
+    assert.throws(() => assertListeningPlaybackUi({ ...metadata, segments },
+      sha256(Buffer.from('different playback')), binding.durationSeconds), /does not match audio/)
+    assert.throws(() => assertListeningPlaybackUi({ ...metadata, segments },
+      binding.playbackAudioSha256, 5), /does not match audio/)
+  }
+  assert.equal(existsSync(path.join(paperDir, 'materialization/listening-audio/waveform-v1.json')), false,
+    'new audio preparation does not generate waveform files')
   assert.equal(mockPaperCoverName('模拟题', '不含模拟二字的卷名'), '不含模拟二字的卷名')
   assert.equal(mockPaperCoverName('真题', '名字恰好包含模拟二字'), null)
   assert.equal(mockPaperCoverName(undefined, '未知来源'), null)
-  console.log('PASS audio evidence, genuine precomputed RMS/silence, SHA/duration binding, no repeat decode, first-section coverage/pauses, mock-name source classification')
+  console.log('PASS audio evidence, independent timing with legacy/new audio binding, no waveform generation, first-section coverage/pauses, mock-name source classification')
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })
 }

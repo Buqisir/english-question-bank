@@ -64,7 +64,7 @@ import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/p
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
 import { PaperReviewControls } from './PaperReviewControls'
 import { useIsOwnerView } from '../../auth/AuthGate'
-import { firstListeningSectionRange } from '../../../../shared/paper-canonical/listeningWaveform.mjs'
+import { firstListeningSectionRange } from '../../../../shared/paper-canonical/listeningPlayback.mjs'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
 // ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**

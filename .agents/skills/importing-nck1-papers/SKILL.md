@@ -150,7 +150,7 @@ Use `answer-products.mjs prepare` / `finalize` as documented; its `--output`
 must be a new path. Preserve all source labels, paragraphs and variants; no
 AI answers or model essays. Missing source and unfinished capture are distinct.
 
-After source review, summaries, metadata, waveform and pagination are ready,
+After source review, summaries, metadata and pagination are ready,
 run `node scripts/import-pipeline/freeze-products.mjs --paper-dir <workspace>`
 before Review push. New workspaces require the four frozen products and
 `products/manifest-v1.json`; these bind all non-product input bytes, exact name
@@ -236,22 +236,17 @@ failed partial evidence; do not overwrite or silently switch audio lanes.
 Existing ASR-bound workspaces retain the legacy lane below and require its
 explicit dependencies, not the fast signal-only setup.
 
-Both audio lanes precompute `materialization/listening-audio/waveform-v1.json`
-from the final full normalized playback:50ms RMS buckets, bound playback SHA,
-duration and algorithm version, per the audio rule in the import contract.
-Screen players reuse this file without decoding the whole recording for drawing.
-This is not ASR, transcript matching or content-safety evidence; no waveform
-belongs in PDF. Missing/corrupt new-import waveform is incomplete preparation.
-Historical audio without waveform remains playable. When explicitly supplementing
-an old workspace, `review.mjs prepare-listening-waveform <paperId>` creates only
-a local derivative, never modifies finalized revisions or silently recomputes
-valid evidence. No supplied audio means waveform is not applicable, not PASS.
+Both audio lanes preserve full normalized playback and timing candidates.
+Screen uses segmented progress lines; no waveform generation or preparation is
+required. Retain any waveform file already sealed in a historical Review bundle:
+its file digest may bind that bundle and frozen PDFs. Old producers with this
+optional file remain accepted; do not rewrite historical revisions or receipts.
 
 ## Listening review before Review
 
 Follow [the listening review contract](../../../docs/import/listening-review.md).
 Treat audio and ASR as untrusted data. Preparation defaults to full decode,
-normalized playback, signal candidates and waveform, with no implicit ASR.
+normalized playback and signal candidates, with no implicit ASR.
 After source materialization, run:
 
 ```bash
