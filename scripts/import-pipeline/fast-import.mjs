@@ -330,7 +330,9 @@ function applySubtitlesAndCheckWatermarks(ctx) {
     const text = String(subtitle.text || '').trim()
     let hit = false
     materialization.groups.forEach((group, groupIndex) => (group.blocks || []).forEach((block, blockIndex) => {
-      const blockText = (block.content || []).map((item) => item.text || '').join('').trim()
+      // A seven-choice blank can stand in a subtitle position; workers flag it as `__39__`.
+      const blockText = (block.content || []).map((item) => item.kind === 'blank_ref'
+        ? `__${String(item.blankId).split(':').at(-1)}__` : item.text || '').join('').trim()
       if (block.kind !== 'paragraph' || blockText !== text) return
       hit = true
       if (block.role === 'subtitle') return
@@ -686,12 +688,19 @@ async function screenTiles(ctx, revisionId, qa) {
       await username.waitFor({ state: 'detached' })
     }
     await page.goto(url, { waitUntil: 'networkidle' })
-    await page.waitForTimeout(1500)
     if (await page.locator('input[autocomplete="username"]').count()) return { skipped: 'Screen 仍停在登录页' }
+    // PaperFontGate shows its notice only after networkidle, then swaps in the paper once fonts load;
+    // waiting for the notice to detach can pass before it ever appears.
+    const rendered = await page.waitForFunction(() => document.fonts.status === 'loaded'
+      && !document.body.innerText.includes('正在加载试卷字体') && document.body.innerText.length > 2000,
+    null, { timeout: 90000 }).then(() => true, () => false)
+    if (!rendered) return { skipped: 'Screen 90 秒内未渲染出卷面' }
+    await page.waitForTimeout(1500)
     await page.screenshot({ path: full, fullPage: true })
   } finally {
     await browser.close()
   }
+  for (const name of readdirSync(qa)) if (name.startsWith('screen-tile-')) rmSync(path.join(qa, name))
   execFileSync('magick', [full, '-crop', '1280x1500', '+repage', path.join(qa, 'screen-tile-%02d.png')])
   return { url, tiles: readdirSync(qa).filter((name) => name.startsWith('screen-tile-')).length }
 }
@@ -866,6 +875,15 @@ function redoFrom(ctx, name) {
     ['listening-review', 'listening-review-v1.json'], ['ocr-correction-report', 'agent-ocr-correction-report-v2.json'],
     ['source-references', 'source-references-v1.json'], ['freeze', 'products']]) {
     if (STEP_ORDER.indexOf(owner) >= index) archive(ctx, path.join(ctx.paperDir, file))
+  }
+  // The producer cache is keyed by its inputs, not its code: after a producer fix the cached
+  // output would come back unchanged unless output, receipt, review and media move aside.
+  const produced = path.join(ctx.paperDir, 'materialization')
+  const receipt = path.join(produced, 'nck1-ocr-materialization-producer-receipt-v1.json')
+  if (STEP_ORDER.indexOf('materialize') >= index && existsSync(receipt)) {
+    for (const file of readJson(receipt).mediaFiles || []) archive(ctx, path.join(ctx.paperDir, file.path))
+    for (const name of ['nck1-source-materialization-v1.json', 'nck1-ocr-materialization-review-v1.json']) archive(ctx, path.join(produced, name))
+    archive(ctx, receipt)
   }
   save(ctx)
 }

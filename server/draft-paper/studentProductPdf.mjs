@@ -135,8 +135,50 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit })
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
+  const fontSizes = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
+  const layoutFor = (fontSizePt, figureLayout, application, continuation) => ({
+    profile: edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
+    answerBoxHeightsMm: { application, continuation } })
   let searchedCandidates = 0
-  for (const fontSizePt of edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]) {
+  const measure = async (selected, breaks = []) => {
+    searchedCandidates += 1
+    return render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+  }
+  const fitProfile = async (layout, tierStart) => {
+    let natural
+    try { natural = await measure(layout) } catch (error) {
+      if (error.code === 'PAPER_LAYOUT_OVERFLOW') return null
+      throw error
+    }
+    // Semantic breaks can redistribute an overfull paper, but cannot justify
+    // unbounded trial renders. Reserve room to restore both response boxes.
+    let fit
+    try {
+      fit = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
+        ...policy, natural, accept, renderLimit: withinPages(natural) && accept(natural) ? 13 : 5,
+        balanceWhitespace: policy.atMost,
+        rejectOverflowCandidates: true,
+        render: async (...args) => { searchedCandidates += 1; return render(...args) },
+      })
+    } catch (error) {
+      if (error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' || error.code === 'PAPER_LAYOUT_OVERFLOW') return null
+      throw error
+    }
+    ;({ fit, layout } = await restoreAnswerSpace(fit, layout, {
+      measure, accept: result => withinPages(result) && accept(result),
+      canMeasure: () => searchedCandidates - tierStart < 48,
+    }))
+    // Height restoration can change group fragments. Re-score its measured
+    // result without another render, retaining the exact chosen breaks.
+    const rescored = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
+      ...policy, natural: fit, accept, renderLimit: 1, render, balanceWhitespace: policy.atMost,
+    })
+    return { ...rescored, plannedBreakGroupIds: fit.plannedBreakGroupIds,
+      edition, layout, fontSizePt: layout.fontSizePt, lineHeightPt: layout.fontSizePt === 12 ? 19.5 : 18,
+      searchedCandidates, explicitPlan: false }
+  }
+  const triedHeights = new Map()
+  for (const fontSizePt of fontSizes) {
     const tierStart = searchedCandidates
     const minimumContinuation = fontSizePt === 12 ? 27 : 24
     // Prefer full-size source media and normal answer space. Compact geometry
@@ -145,44 +187,40 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
       ['natural', 65, 57], ['float80', 65, 57], ['natural', 65, minimumContinuation],
       ['float80', 65, minimumContinuation], ['float80', 24, minimumContinuation],
     ]
+    triedHeights.set(fontSizePt, new Set(profiles.map(([, application, continuation]) => `${application}/${continuation}`)))
     for (const [figureLayout, application, continuation] of profiles) {
-      let layout = { profile: edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
-        answerBoxHeightsMm: { application, continuation } }
-      const measure = async (selected, breaks = []) => {
-        searchedCandidates += 1
-        return render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+      const planned = await fitProfile(layoutFor(fontSizePt, figureLayout, application, continuation), tierStart)
+      if (planned) return planned
+    }
+  }
+  // The compact profiles assume each box renders at its contract minimum. A box
+  // whose own content needs more room (e.g. a two-line starter or a printed
+  // salutation) overflows there, so every compact profile was skipped and no
+  // intermediate height was ever measured. Only papers that would otherwise fail
+  // reach this pass; it restarts from the smallest heights that actually render.
+  for (const fontSizePt of fontSizes) {
+    const tierStart = searchedCandidates
+    const heights = {}
+    for (const family of ['application', 'continuation']) {
+      let low = family === 'application' ? 24 : fontSizePt === 12 ? 27 : 24
+      let high = normalHeights[family]
+      while (low < high) {
+        const height = Math.floor((low + high) / 2)
+        try {
+          await measure(layoutFor(fontSizePt, 'natural', ...['application', 'continuation'].map(entry =>
+            entry === family ? height : normalHeights[entry])))
+          high = height
+        } catch (error) {
+          if (error.code !== 'PAPER_LAYOUT_OVERFLOW') throw error
+          low = height + 1
+        }
       }
-      let natural
-      try { natural = await measure(layout) } catch (error) {
-        if (error.code === 'PAPER_LAYOUT_OVERFLOW') continue
-        throw error
-      }
-      // Semantic breaks can redistribute an overfull paper, but cannot justify
-      // unbounded trial renders. Reserve room to restore both response boxes.
-      let fit
-      try {
-        fit = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
-          ...policy, natural, accept, renderLimit: withinPages(natural) && accept(natural) ? 13 : 5,
-          balanceWhitespace: policy.atMost,
-          rejectOverflowCandidates: true,
-          render: async (...args) => { searchedCandidates += 1; return render(...args) },
-        })
-      } catch (error) {
-        if (error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' || error.code === 'PAPER_LAYOUT_OVERFLOW') continue
-        throw error
-      }
-      ;({ fit, layout } = await restoreAnswerSpace(fit, layout, {
-        measure, accept: result => withinPages(result) && accept(result),
-        canMeasure: () => searchedCandidates - tierStart < 48,
-      }))
-      // Height restoration can change group fragments. Re-score its measured
-      // result without another render, retaining the exact chosen breaks.
-      const rescored = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
-        ...policy, natural: fit, accept, renderLimit: 1, render, balanceWhitespace: policy.atMost,
-      })
-      return { ...rescored, plannedBreakGroupIds: fit.plannedBreakGroupIds,
-        edition, layout, fontSizePt, lineHeightPt: fontSizePt === 12 ? 19.5 : 18,
-        searchedCandidates, explicitPlan: false }
+      heights[family] = high
+    }
+    if (triedHeights.get(fontSizePt).has(`${heights.application}/${heights.continuation}`)) continue
+    for (const figureLayout of ['natural', 'float80']) {
+      const planned = await fitProfile(layoutFor(fontSizePt, figureLayout, heights.application, heights.continuation), tierStart)
+      if (planned) return planned
     }
   }
   throw impossible(edition, searchedCandidates, economyPageLimit)

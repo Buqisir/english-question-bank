@@ -106,6 +106,25 @@ const mediaRestored = await planStudentProductPdf(html, { edition: 'economy8', r
 assert.equal(mediaRestored.layout.figureLayout, 'float80')
 assert.deepEqual(mediaRestored.layout.answerBoxHeightsMm, { application: 65, continuation: 57 })
 
+// A box whose own content overflows at its contract minimum must not hide every
+// intermediate height; a paper that is simply too long still fails explicitly.
+{
+  const seen = []
+  const measuredMinimum = await planStudentProductPdf(html, { edition: 'largeComplete', render: async source => {
+    const sizes = geometry(source)
+    seen.push(sizes)
+    if (sizes.application < 38) throw Object.assign(new Error('printed salutation overflows'), { code: 'PAPER_LAYOUT_OVERFLOW' })
+    return { pageCount: sizes.application <= 44 && sizes.continuation <= 40 ? 12 : 13, inspection }
+  } })
+  assert.equal(measuredMinimum.pageCount, 12)
+  assert.deepEqual(measuredMinimum.layout.answerBoxHeightsMm, { application: 44, continuation: 40 },
+    'restart from the smallest rendering boxes, then restore as much answer space as fits')
+  assert.ok(seen.some(sizes => sizes.application === 37), 'probe the overflowing side of the measured minimum')
+  assert.equal(measuredMinimum.searchedCandidates, seen.length)
+}
+await assert.rejects(() => planStudentProductPdf(html, { edition: 'largeComplete', render: async () => ({ pageCount: 13, inspection }) }),
+  error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+
 const layout = { profile: 'student-friendly-v1', fontSizePt: 12, figureLayout: 'natural', answerBoxHeightsMm: { application: 65, continuation: 57 } }
 const identity = { paperId: 'fixture', sourceDigest: 'source', candidateDigest: 'candidate',
   slotBindings: [{ slotId: 'writing.application', groupId: 'application', familyContractId: 'application-writing' },

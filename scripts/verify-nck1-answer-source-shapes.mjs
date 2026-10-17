@@ -202,7 +202,7 @@ for (const listeningHeading of ['答案及听力材料', '听力原文（录音�
   assert.equal(result.materialization.listening.transcript.length, 10)
 }
 
-for (const wrap of [number => `(Text ${number})`, number => `（Text ${number}）`]) {
+for (const wrap of [number => `(Text ${number})`, number => `（Text ${number}）`, number => `Text ${number}:`, number => `Text ${number}：`]) {
   const fixture = makeSyntheticNck1DocxFixture({
     listening: true,
     transformXml: xml => xml.replace(/>Text (\d+)</gu, (_, number) => `>${wrap(number)}<`),
@@ -212,6 +212,57 @@ for (const wrap of [number => `(Text ${number})`, number => `（Text ${number}�
   assert.deepEqual(result.materialization.listening.transcript.map(segment => segment.text),
     Array.from({ length: 10 }, (_, index) => `Synthetic transcript ${index + 1}.`))
 }
+// One long range spaced into groups of five; groups that do not complete it stay ambiguous.
+{
+  const plain = makeSyntheticNck1DocxFixture({ listening: true })
+  const plainResult = produceNck1DocxMaterialization({ paperId: plain.paperId, documents: plain.sourceDocuments })
+  for (const [key, complete] of [['1-20 ABCAB BCABC ABCAB　BCABC', true], ['1-20 ABCAB BCABC ABCAB', false]]) {
+    const fixture = makeSyntheticNck1DocxFixture({
+      listening: true,
+      transformXml: xml => xml.replace('>1-5ABCAB6-10BCABC11-15ABCAB16-20BCABC<', `>${key}<`),
+    })
+    const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+    if (!complete) {
+      assertRejected(result, fixture.sourceDocuments, 'NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS')
+      continue
+    }
+    assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+    assert.deepEqual(result.materialization.listening.answers, plainResult.materialization.listening.answers)
+  }
+}
+
+// A writing heading block printed twice before any sample is one section; prose between copies is not.
+for (const [between, accepted] of [['第一节（满分15分）', true], ['Some unexpected prose.', false]]) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    transformXml: xml => xml.replace('>第四部分 写作<',
+      `>第四部分 写作（共两节，满分40分）</w:t></w:r></w:p><w:p><w:r><w:t>${between}</w:t></w:r></w:p><w:p><w:r><w:t>第四部分 写作<`),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  if (accepted) assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  else assertRejected(result, fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+}
+
+// The key's Chinese commentary after a sample is not sample text; Chinese version labels still are.
+{
+  const paragraphs = (...texts) => texts.map(text => `</w:t></w:r></w:p><w:p><w:r><w:t>${text}`).join('')
+  const commentary = makeSyntheticNck1DocxFixture({
+    transformXml: xml => xml
+      .replace('Join us on Friday to read and share ideas.', `Join us on Friday to read and share ideas.${paragraphs('【审题重点】', '考生应准确理解主题。')}`)
+      .replace('They became friends.', `They became friends.${paragraphs('主题语境：人与自我', '逻辑与伏笔：前后呼应。')}`),
+  })
+  assertReady(produceNck1DocxMaterialization({ paperId: commentary.paperId, documents: commentary.sourceDocuments }),
+    commentary.sourceDocuments, '考生应准确理解主题。', expectedWritingSamples)
+  const chineseLabels = makeSyntheticNck1DocxFixture({
+    transformXml: xml => xml.replace('Join us on Friday to read and share ideas.',
+      `Join us on Friday to read and share ideas.${paragraphs('范文二：', 'Meet us on Saturday instead.')}`),
+  })
+  assertReady(produceNck1DocxMaterialization({ paperId: chineseLabels.paperId, documents: chineseLabels.sourceDocuments }),
+    chineseLabels.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', {
+      application: `${expectedWritingSamples.application}\n范文二：\nMeet us on Saturday instead.`,
+      continuation: expectedWritingSamples.continuation,
+    })
+}
+
 const brokenMarker = makeSyntheticNck1DocxFixture({
   listening: true, transformXml: xml => xml.replace('>Text 4<', '>(Text 4<'),
 })

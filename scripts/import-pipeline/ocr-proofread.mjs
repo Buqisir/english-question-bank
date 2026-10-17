@@ -799,8 +799,11 @@ const WRITING_SECTION = [
 // Some answer keys head the samples only with "第一节（满分15分）" under "第四部分 写作".
 const WRITING_PART = /^第四部分\s*[:：]?\s*写作/u
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
-const ENTRY_LABEL = /^(参考范文|考场作文|参考答案|范文|【[^】]+】)[:：]?$/u
-const SCORING_LABEL = /阅卷|评分|评卷/u
+const ENTRY_LABEL = /^(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】)[:：]?$/iu
+const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
+const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version/iu
+// The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
+const COMMENTARY_LINE = /^\p{Script=Han}/u
 const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
 const SALUTATION = /^Dear\s.+,$/u
 const CLOSING = /^(Yours|Best wishes|Best regards|Sincerely|Yours sincerely|Love)[^.]{0,20},$/iu
@@ -869,11 +872,21 @@ function references(paperId) {
     let entry = null
     let paragraph = null
     let previous = null
+    let skipping = false
     const flush = () => { if (paragraph) { entry.paragraphs.push(paragraph); paragraph = null } }
+    const skip = (line, reason) => {
+      flush()
+      entry = null
+      previous = null
+      skipping = true
+      review.push({ itemId: line.itemId, issue: `${reason}; skipped until the next label or English line` })
+    }
     for (const line of section.lines) {
       if (ENTRY_LABEL.test(line.text)) {
+        skipping = false
+        const kind = SCORING_LABEL.test(line.text) ? 'scoring' : ESSAY_LABEL.test(line.text) ? 'essays' : null
+        if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }
         flush()
-        const kind = SCORING_LABEL.test(line.text) ? 'scoring' : 'essays'
         const index = entries[kind].length + 1
         entry = { kind, referenceId: `source-${kind === 'scoring' ? 'score' : 'ref'}-${short}-${index}`, authority: 'source_reference',
           sourceLabel: line.text, labelSource: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
@@ -882,6 +895,12 @@ function references(paperId) {
         previous = null
         continue
       }
+      if (entry?.kind !== 'scoring' && COMMENTARY_LINE.test(line.text)) {
+        if (!skipping) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
+        continue
+      }
+      if (skipping && !/^[A-Za-z“"‘']/u.test(line.text)) continue
+      skipping = false
       if (!entry) {
         entry = { kind: 'essays', referenceId: `source-ref-${short}-${entries.essays.length + 1}`, authority: 'source_reference',
           sourceLabel: null, labelSource: null, paragraphs: [] }

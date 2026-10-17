@@ -16,7 +16,10 @@ const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
 const LISTENING_TRANSCRIPT_HEADING = /^(?:附[:：]?\s*)?(?:【)?(?:(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料)(?:[（(]录音稿[）)])?(?:】)?[:：]?$/u
 const WRITING_SAMPLE_BOUNDARY = /^(?:(?:【)?(?:评分|书面表达评分|答案(?:解析|详解)|解析|详解)|附[:：]?\s*各档次|(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料|AI\s+editions?\b)/iu
-const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))$/iu
+// English samples never open a paragraph with Chinese; such a paragraph is the key's own
+// commentary (【审题重点】, 主题语境：…). Chinese version labels still separate alternatives.
+const WRITING_SAMPLE_COMMENTARY = /^(?:【|(?!(?:参考)?范文|考场作文)\p{Script=Han})/u
+const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*:?$/iu
 const LISTENING_PAUSE_REPEAT_SEQUENCE = /^(?:(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\)|\(\s*重复\s*\)))+$/u
 const SLOT_SPECS = [
   ['reading.a', 'reading', 21, 23],
@@ -725,16 +728,20 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       if (activeAnswersComplete) break
       continue
     }
-    for (const match of item.text.matchAll(/(\d{1,2})\s*[-–—~至]\s*(\d{1,2})\s*([A-G]+)/gu)) {
+    for (const match of item.text.matchAll(/(\d{1,2})\s*[-–—~至]\s*(\d{1,2})\s*([A-G]+)((?:[ \t\u3000]+[A-G]+)*)/gu)) {
       const from = Number(match[1])
       const to = Number(match[2])
-      if (match[3].length !== to - from + 1) {
+      // Some keys space one long range into groups of five ("1-20 CBAAB CBBCC …").
+      // The groups count only when they complete the range exactly.
+      const grouped = match[3] + match[4].replace(/[ \t\u3000]+/gu, '')
+      const letters = match[3].length !== to - from + 1 && grouped.length === to - from + 1 ? grouped : match[3]
+      if (letters.length !== to - from + 1) {
         addIssue(issues, 'NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS', `answers.${from}-${to}`,
           'Official answer range length does not match its labels',
           sourceRef(answerDocumentId, item.sourceIndex))
         continue
       }
-      ;[...match[3]].forEach((value, index) => add(from + index, value, item))
+      ;[...letters].forEach((value, index) => add(from + index, value, item))
     }
     for (const chunk of item.text.split('\n')) {
       for (const match of chunk.matchAll(
@@ -800,6 +807,7 @@ function writingSampleText(answerBody, from, to) {
       && index < to
       && item.kind === 'paragraph'
       && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
+        || WRITING_SAMPLE_COMMENTARY.test(normalized(item.text))
         || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
         || LISTENING_TEXT_MARKER.test(normalized(item.text))
         || listeningCue(item.text)))
@@ -820,11 +828,18 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     item.kind === 'paragraph' && String(item.text).includes('\n')
       ? String(item.text).split('\n').map((text) => ({ ...item, text }))
       : [item])
-  const writingSections = writingSamplePosition(
+  let writingSections = writingSamplePosition(
     sampleBody,
     /^第四部分\s*[:：]?\s*写作/u,
     0,
   )
+  // A key can print its writing heading block twice before any sample text.
+  // Headings alone between the copies make them one section, starting at the last.
+  if (writingSections.length > 1 && sampleBody.slice(writingSections[0], writingSections.at(-1))
+    .every((item) => item.kind === 'paragraph' && (!normalized(item.text)
+      || /^第四部分\s*[:：]?\s*写作|^第[一二]节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u.test(normalized(item.text))))) {
+    writingSections = [writingSections.at(-1)]
+  }
   if (writingSections.length === 0) {
     return { application: null, continuation: null }
   }
