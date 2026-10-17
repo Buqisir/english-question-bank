@@ -62,6 +62,73 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
   `superseded/`。上游改了 Materialization 后从 `figure-sizes` 或更早重做；第二轮作者稿按 ID
   复用，不需要重派 worker。
 
+## 批量编排（batch-run.mjs）
+
+在已授权的导题 worktree 内使用 Node 24：
+
+```sh
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
+node scripts/import-pipeline/batch-run.mjs intake --batch 浙江十月 --keys '["浙江模拟题/目录名一","浙江模拟题/目录名二"]'
+node scripts/import-pipeline/batch-run.mjs run --batch 浙江十月 --dry-run --submit
+node scripts/import-pipeline/batch-run.mjs run --batch 浙江十月 --parallel 3 --max-agents 8
+node scripts/import-pipeline/batch-run.mjs run --batch 浙江十月 --submit
+node scripts/import-pipeline/batch-run.mjs status --batch 浙江十月
+```
+
+`--keys` 接受 inventory 的显式 key 或 `prov/paper`，支持 JSON 字符串数组、逗号或换行分隔。
+intake 优先选 10 页题卷、原速音频，自己渲染首页；Luna 提取卷名、考试年月、slug。
+不明确项写入 `needsReview`，临时卷号用 `paper-mock-pending-*`，不会进入导入。
+确认后可修改尚未开跑的 queue JSON（改卷号时同时改文件名）；已开跑队列禁止静默改源。
+
+模型分工：Sol / medium 做逐页校对、摘要、听力、PDF 与 Screen 初筛；Luna / medium 做
+intake 和 metadata；Astra / high 只处理 `after-proofread` 的退出码 2：每个停点修一次，
+同一停点再停或累计 3 次即 blocked。
+模型可用 `EQB_BATCH_SOL`、`EQB_BATCH_LUNA`、`EQB_BATCH_ASTRA` 覆盖；
+另有 `EQB_BATCH_DROID`、`EQB_BATCH_INVENTORY`、`EQB_BATCH_SOURCE_ROOT`。
+两轮按 `fast/round1.json`、`fast/round2.json` 的期望产出派发；每个 worker 最长 25 分钟，
+失败重试一次，产出 JSON 与哈希收据齐全才记完成。修复员不重试。
+子 Agent 没有执行工具，校对员交稿后由编排器跑 `ocr-proofread.mjs compile --pages`
+（只检查不写），不通过就带着报错返工一次，仍不通过则该卷 blocked。
+
+`--parallel` 限制同时处理的卷数，`--max-agents` 限制本次运行中所有 Agent 的总并发。
+同 worktree 只允许一个 run；修复期间其他卷照常运行。修复员结束后比较 `git status --porcelain`
+和文件哈希（包含已有脏文件，排除其他卷目录与 `imports/batch/`），越界保留现场并暂停整批，绝不自动回滚。
+`after-proofread` 只有 OCR 上传/确认步骤开始后未完成才算生产结果未知（暂停整批）；
+其前后的本地步骤失败只阻塞本卷。
+修复只能落在本卷 OCR 工作目录和 papers 数据目录，每处写入 `materialization-edits.json`；
+不能改代码、源文件、生产收据或 fast 状态。源卷印刷错报 `needs_owner`，代码缺陷报
+`needs_code_fix`，剩余判断和 PDF/Screen 硬约束问题报 `needs_main_review`。
+
+生产护栏：
+
+- `after-proofread`、`submit`、`report` 共用 `imports/batch/production.lock`，带 PID、
+  活跃阶段与死锁检测，相邻步骤至少隔 30 秒。首次 OCR 上传前也做查重。
+- `production-sources.json` 缓存绑定 origin、paperId、revisionId 和源 sha256；
+  每次护栏只读一次列表，只有缺失/换版 manifest 才逐个补读，间隔至少 3 秒。
+  不直接读取或轮询重型 `papers/<id>` 详情；fast-import 既有单卷调用仍由生产锁串行包住。
+- 同 paperId、任意同源 sha256、`submitted.json` 中已提交或提交中的记录都会拒绝；
+  归一化卷名与生产已有卷相同（可能是早先 DOCX 导入的同场考试）报 `needs_owner`。
+  唯一正常过渡是本次 fast 收据精确绑定的 OCR revision → 首次 Candidate；不允许批量重送。
+- 送审前后检查 `/api/health`。超过 5 秒，或相对本批基线超过 3 倍且超过 2 秒，
+  暂停整批且不重试。生产请求超时也暂停；结果未知、死进程活跃锁均保留证据，人工
+  只读核对后才能恢复，禁止清掉记录直接重放。
+- 脚本只调白名单 fast 阶段。子 Agent 只开放 Read/Grep/Glob/LS/ApplyPatch，
+  禁用执行命令与联网工具；所有提示词禁止联网、发布、Git 提交与越界写入。
+
+finish 后以 `pdfinfo`、`pdftotext`、`pdffonts` 校验页数、空白页、字体嵌入、题号顺序和
+答案号覆盖，再渲染全部页面为 50 dpi 图片交 Sol 初筛。无听力产品按分页计划校验
+21 起的原题号；省纸固定 8 页。听力原文疑似 OCR 折行只记 warning。低分辨率初筛
+不等于逐字或直接听审认证；硬约束拿不准时升级，不把版式偏好当阻塞。
+
+不加 `--submit` 停在 `ready_to_submit`，**但 after-proofread 仍会访问生产 Review**。
+只有 `run --dry-run` 完全不启动 Agent、不访问 Review、不写状态。加 `--submit` 后
+Sol 必须看实际 Screen 图，并引用 PDF 检查结果生成如实说明，才能调用 report。
+主 Agent 读 `imports/batch/<名>/status.json` 和 `escalations.md`；完整日志、提示词、
+图片与检查 JSON 都在 `logs/`。正常中断重跑同一 run 即续跑，已完成 worker 复用哈希
+收据；blocked 与批次 paused 不自动清除。人工处理后用 `run --retry <paperId,…>` 重排 blocked 卷，
+只读核对生产结果后用 `run --clear-pause` 解除暂停（释放无活进程的生产锁、清 pending 标记，
+原记录留在 history）。不能删除提交 ledger 来“重试”。退出码 0 表示本轮正常结束，2 表示有阻塞卷，3 表示整批暂停。
+
 ## 为什么更快
 
 - **Candidate 推导不再重放全卷 OCR 页图**：`nck1OcrSourceEvidence.mjs` 的页面光栅化按内容

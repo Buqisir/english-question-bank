@@ -266,6 +266,10 @@ function proofreadPlan(ctx, workers) {
   }
   return groups.map((keys) => ({
     pages: keys,
+    outputs: [
+      ...keys.map((key) => path.join(ctx.work, 'drafts', `${key}.json`)),
+      path.join(ctx.work, 'source-flags', `${keys[0]}.json`),
+    ],
     prompt: [
       `在 worktree ${root} 校对 OCR。paperId ${ctx.paperId}，只负责页 ${keys.join(', ')}。`,
       `按 scripts/import-pipeline/ocr-proofread-rules.md，对照 imports/ocr-proofread/${ctx.paperId}/pages/<页键>.png 原图，`,
@@ -424,19 +428,19 @@ function round2Prompts(ctx) {
   const relative = (file) => path.relative(root, file)
   for (const part of ctx.state.data.summaryParts) {
     const index = path.basename(part.file).match(/\d+/u)[0]
-    prompts.push({ label: `摘要 ${index}`, prompt: [
+    prompts.push({ label: `摘要 ${index}`, outputs: [path.join(ctx.fast, 'summaries-parts', `part-${index}.json`)], prompt: [
       `在 worktree ${root} 写段落摘要。读 ${relative(part.file)}：其中 prompt 是写作要求，outputSchema 是结构，groups 是本分片的题组（${part.groups} 组 ${part.targets} 段）。`,
       `把结果写到 ${relative(path.join(ctx.fast, 'summaries-parts', `part-${index}.json`))}，格式为 {"groups":[{"groupId":…,"paragraphs":[{"paragraphId":…,"summary":…}]}]}，`,
       '只含本分片的题组，每个 target 一条，paragraphId 原样照抄。只写这个文件，不联网，不运行写命令。完成后回报段数和拿不准之处。',
     ].join('\n') })
   }
-  prompts.push({ label: '检索 metadata', prompt: [
+  prompts.push({ label: '检索 metadata', outputs: [path.join(ctx.fast, 'search-metadata-authored.json')], prompt: [
     `在 worktree ${root} 写公开检索 metadata。读 ${relative(path.join(ctx.fast, 'search-metadata-request.json'))}，按其中说明与结构`,
     `写 ${relative(path.join(ctx.fast, 'search-metadata-authored.json'))}。只写这个文件，不联网，不运行 finalize 或其他写命令。完成后回报题组数。`,
   ].join('\n') })
   if (ctx.state.data.listeningParts) {
     for (const [index, segments] of ctx.state.data.listeningParts.entries()) {
-      prompts.push({ label: `听力 ${index + 1}`, prompt: [
+      prompts.push({ label: `听力 ${index + 1}`, outputs: [path.join(ctx.fast, 'listening-parts', `part-${index + 1}.json`)], prompt: [
         `在 worktree ${root} 做听力导航审查。读 ${relative(path.join(ctx.fast, 'listening-review-request.json'))} 的说明；只负责 ${segments.join(', ')}。`,
         `ASR 证据：${relative(path.join(ctx.fast, 'asr-vad'))}/window-NNN.json（开 VAD）与 ${relative(path.join(ctx.fast, 'asr-novad'))}/window-NNN.json（关 VAD），`,
         '每个窗口 180 秒、步长 175 秒，segments 时间相对该窗口 startSeconds，重叠部分不是额外朗读。VAD 窗口末句时间可能跨静音漂移并伴随幻听，此时以关 VAD 窗口为准。',
@@ -537,6 +541,7 @@ async function afterProofread(ctx, args) {
     })
   }
   const prompts = round2Prompts(ctx)
+  writeJson(path.join(ctx.fast, 'round2.json'), prompts)
   say(`\n第二轮：并行派发 ${prompts.length} 个 worker（complexity medium）。全部完成后运行 finish。`)
   for (const { label, prompt } of prompts) say(`\n--- ${label}\n${prompt}`)
 }
