@@ -80,10 +80,10 @@ intake 优先选 10 页题卷、原速音频，自己渲染首页；Luna 提取�
 不明确项写入 `needsReview`，临时卷号用 `paper-mock-pending-*`，不会进入导入。
 确认后可修改尚未开跑的 queue JSON（改卷号时同时改文件名）；已开跑队列禁止静默改源。
 
-模型分工：Sol / medium 做逐页校对、摘要、听力、PDF 与 Screen 初筛；Luna / medium 做
-intake 和 metadata；Astra / high 只处理 `after-proofread` 的退出码 2：每个停点修一次，
-同一停点再停或累计 3 次即 blocked。
-模型可用 `EQB_BATCH_SOL`、`EQB_BATCH_LUNA`、`EQB_BATCH_ASTRA` 覆盖；
+模型分工：Sol / medium 做逐页校对、摘要、听力、PDF 与 Screen 初筛，以及 `after-proofread`
+退出码 2 的本卷修复（每个停点修一次，同一停点再停或累计 3 次即 blocked；代码缺陷只报
+`needs_code_fix`，不在批次里改共享代码）；Luna / medium 做 intake 和 metadata。
+模型可用 `EQB_BATCH_SOL`、`EQB_BATCH_LUNA` 覆盖；
 另有 `EQB_BATCH_DROID`、`EQB_BATCH_INVENTORY`、`EQB_BATCH_SOURCE_ROOT`。
 两轮按 `fast/round1.json`、`fast/round2.json` 的期望产出派发；每个 worker 最长 25 分钟，
 失败重试一次，产出 JSON 与哈希收据齐全才记完成。修复员不重试。

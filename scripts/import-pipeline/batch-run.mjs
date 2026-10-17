@@ -18,7 +18,6 @@ const proofreadScript = path.join(root, 'scripts/import-pipeline/ocr-proofread.m
 const DROID = process.env.EQB_BATCH_DROID || path.join(os.homedir(), '.local/bin/droid')
 export const MODELS = {
   sol: { model: process.env.EQB_BATCH_SOL || 'custom:magpie/group/auto-gpt-6-1-sol', effort: 'medium' },
-  astra: { model: process.env.EQB_BATCH_ASTRA || 'custom:magpie/group/auto-gpt-6-astra', effort: 'high' },
   luna: { model: process.env.EQB_BATCH_LUNA || 'custom:magpie/group/auto-gpt-6-luna', effort: 'medium' },
 }
 const PRODUCTS = ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']
@@ -357,7 +356,7 @@ async function repair(ctx, paper, result, attempt) {
   const allowed = [relative(work) + '/', relative(path.join(papersRoot, paper.paperId)) + '/']
   let failure
   try {
-    await agent(ctx, paper, `修复员-${attempt}`, 'astra', [
+    await agent(ctx, paper, `修复员-${attempt}`, 'sol', [
       `after-proofread 退出码 2（第 ${attempt} 次停下）。先读日志 ${result.log} 及其指向的 fast/logs，再对照原页修复。`,
       `已追加的 ${path.join(work, 'materialization-edits.json')} 是前几次修复，不要重复或推翻，除非原页证明它错了。`,
       `只允许写 ${allowed.join(' 和 ')} 下的数据。禁止改 server/、shared/、app/、任何 scripts/*.mjs 或其他代码。`,
@@ -867,7 +866,7 @@ function dryRun(ctx) {
     console.log(commandText(process.execPath, [fastScript, ...prepArgs(item)]))
     console.log(`第一轮：${commandText(DROID, ['exec', '-m', MODELS.sol.model, '-r', MODELS.sol.effort, '--auto', 'medium', '--cwd', root, '--only-tools', 'Read,Grep,Glob,LS,ApplyPatch', '-f', '<逐页提示词>'])}`)
     console.log(commandText(process.execPath, [fastScript, 'after-proofread', item.paperId]) + '（生产锁，间隔 ≥30 秒）')
-    console.log(`退出码 2：${MODELS.astra.model} / high 修复（每个停点一次，最多 ${MAX_REPAIRS} 次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
+    console.log(`退出码 2：${MODELS.sol.model} / medium 本卷修复（每个停点一次，最多 ${MAX_REPAIRS} 次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
     console.log(commandText(process.execPath, [fastScript, 'finish', item.paperId]))
     console.log('PDF：pdfinfo / pdftotext / pdffonts 硬约束；pdftoppm -r 50 逐页图 + Sol 视觉初筛')
     if (ctx.opts.submit) {
