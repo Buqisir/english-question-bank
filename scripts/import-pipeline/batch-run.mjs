@@ -73,13 +73,14 @@ function parseOptions(args) {
   const opts = {}
   for (let i = 0; i < args.length; i++) {
     const key = args[i]
-    if (['--submit', '--dry-run', '--clear-pause'].includes(key)) opts[key.slice(2)] = true
+    if (['--submit', '--dry-run', '--clear-pause', '--local-only'].includes(key)) opts[key.slice(2)] = true
     else if (['--batch', '--keys', '--parallel', '--max-agents', '--retry'].includes(key)) {
       if (!args[i + 1] || args[i + 1].startsWith('--')) fail(`${key} 缺少值`)
       opts[key.slice(2)] = args[++i]
     } else fail(`未知参数：${key}`)
   }
   if (!/^[\p{L}\p{N}][\p{L}\p{N}._-]{0,79}$/u.test(opts.batch || '')) fail('--batch 需要安全的批次名')
+  if (opts['local-only'] && opts.submit) fail('--local-only 不能和 --submit 同用')
   for (const [key, fallback] of [['parallel', 3], ['max-agents', 8]]) {
     opts[key] = Number(opts[key] ?? fallback)
     if (!Number.isInteger(opts[key]) || opts[key] < 1 || opts[key] > 32) fail(`--${key} 必须为 1–32`)
@@ -795,6 +796,11 @@ async function processPaper(ctx, paper) {
       paper.done.prep = true; ctx.save()
     }
     if (!paper.done.round1) { await round(ctx, paper, 1); paper.done.round1 = true; ctx.save() }
+    // after-proofread uploads the OCR revision, which creates the Review paper in production.
+    if (ctx.opts['local-only'] && !paper.done['after-proofread']) {
+      paper.state = 'local_ready'; paper.stage = 'proofread'; ctx.save()
+      return
+    }
     if (!paper.done['after-proofread']) {
       const perform = (args = []) => production(ctx, paper, 'after-proofread', async () => {
         if (!fastState(paper.paperId).steps['ocr-review']?.finishedAt) {
@@ -877,12 +883,13 @@ function dryRun(ctx) {
     console.log(`\n${item.paperId} / ${item.paperName}${item.needsReview?.length ? ` [阻塞：${item.needsReview.join('；')}]` : ''}`)
     console.log(commandText(process.execPath, [fastScript, ...prepArgs(item)]))
     console.log(`第一轮：${commandText(DROID, ['exec', '-m', MODELS.sol.model, '-r', MODELS.sol.effort, '--auto', 'medium', '--cwd', root, '--only-tools', 'Read,Grep,Glob,LS,ApplyPatch', '-f', '<逐页提示词>'])}`)
-    console.log(commandText(process.execPath, [fastScript, 'after-proofread', item.paperId]) + '（生产锁，间隔 ≥30 秒）')
+    if (ctx.opts['local-only']) { console.log('--local-only：停在 local_ready，不运行 after-proofread（OCR 上传会在 Review 建卷）'); continue }
+    console.log(commandText(process.execPath, [fastScript, 'after-proofread', item.paperId]) + '（生产锁，间隔 ≥30 秒；首次 OCR 上传前探测卷号）')
     console.log(`退出码 2：${MODELS.sol.model} / medium 本卷修复（每个停点一次，最多 ${MAX_REPAIRS} 个停点；同一停点再停时 ${MODELS.astra.model} / high 复修，每卷至多一次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
     console.log(commandText(process.execPath, [fastScript, 'finish', item.paperId]))
     console.log('PDF：pdfinfo / pdftotext / pdffonts 硬约束；pdftoppm -r 50 逐页图 + Sol 视觉初筛')
     if (ctx.opts.submit) {
-      console.log('送审护栏：健康检查、生产列表与源 manifest 缓存、paperId/sha256 查重、本地提交 ledger')
+      console.log('送审护栏：健康检查、本地 ledger 与生产快照的 paperId/sha256/卷名查重')
       console.log(commandText(process.execPath, [fastScript, 'submit', item.paperId]))
       console.log('健康检查 → Sol 看 Screen 截图并引用 PDF 检查结果')
       console.log(commandText(process.execPath, [fastScript, 'report', item.paperId, '--screen', '<真实检查说明>', '--pdf', '<真实检查说明>']))

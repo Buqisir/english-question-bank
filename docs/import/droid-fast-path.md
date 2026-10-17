@@ -72,6 +72,7 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 node scripts/import-pipeline/batch-run.mjs intake --batch 浙江十月 --keys '["浙江模拟题/目录名一","浙江模拟题/目录名二"]'
 node scripts/import-pipeline/batch-run.mjs run --batch 浙江十月 --dry-run --submit
+node scripts/import-pipeline/batch-run.mjs run --batch 浙江十月 --local-only
 node scripts/import-pipeline/batch-run.mjs run --batch 浙江十月 --parallel 3 --max-agents 8
 node scripts/import-pipeline/batch-run.mjs run --batch 浙江十月 --submit
 node scripts/import-pipeline/batch-run.mjs status --batch 浙江十月
@@ -81,6 +82,8 @@ node scripts/import-pipeline/batch-run.mjs status --batch 浙江十月
 intake 优先选 10 页题卷、原速音频，自己渲染首页；Luna 提取卷名、考试年月、slug。
 不明确项写入 `needsReview`，临时卷号用 `paper-mock-pending-*`，不会进入导入。
 确认后可修改尚未开跑的 queue JSON（改卷号时同时改文件名）；已开跑队列禁止静默改源。
+`--local-only` 只跑 prep 和第一轮逐页校对，停在 `local_ready`：`after-proofread` 的 OCR 上传会在
+Review 建卷，所以卷单未经 Owner 确认时只用这个模式；确认后去掉它再跑即从校对后继续。
 
 模型分工：Sol / medium 做逐页校对、摘要、听力、PDF 与 Screen 初筛，以及 `after-proofread`
 退出码 2 的本卷修复（每个停点修一次，最多 3 个停点；代码缺陷只报 `needs_code_fix`，不在批次里
