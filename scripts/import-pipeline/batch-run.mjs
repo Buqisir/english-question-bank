@@ -18,6 +18,7 @@ const proofreadScript = path.join(root, 'scripts/import-pipeline/ocr-proofread.m
 const DROID = process.env.EQB_BATCH_DROID || path.join(os.homedir(), '.local/bin/droid')
 export const MODELS = {
   sol: { model: process.env.EQB_BATCH_SOL || 'custom:magpie/group/auto-gpt-6-1-sol', effort: 'medium' },
+  astra: { model: process.env.EQB_BATCH_ASTRA || 'custom:magpie/group/auto-gpt-6-astra', effort: 'high' },
   luna: { model: process.env.EQB_BATCH_LUNA || 'custom:magpie/group/auto-gpt-6-luna', effort: 'medium' },
 }
 const PRODUCTS = ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']
@@ -343,7 +344,7 @@ function snapshot(extraDirectories = []) {
   }
   return { porcelain, hashes }
 }
-async function repair(ctx, paper, result, attempt) {
+async function repair(ctx, paper, result, attempt, tier = 'sol', previous = null) {
   paper.stage = 'repair'
   ctx.save()
   const work = workDir(paper.paperId)
@@ -356,8 +357,9 @@ async function repair(ctx, paper, result, attempt) {
   const allowed = [relative(work) + '/', relative(path.join(papersRoot, paper.paperId)) + '/']
   let failure
   try {
-    await agent(ctx, paper, `修复员-${attempt}`, 'sol', [
+    await agent(ctx, paper, `修复员-${attempt}${tier === 'astra' ? '-Astra复修' : ''}`, tier, [
       `after-proofread 退出码 2（第 ${attempt} 次停下）。先读日志 ${result.log} 及其指向的 fast/logs，再对照原页修复。`,
+      ...(previous ? [`上一位修复员已修过同一停点但仍停在这里。先读它的结论 ${previous} 和它追加的 edits，找出它哪里判断错了，再修。`] : []),
       `已追加的 ${path.join(work, 'materialization-edits.json')} 是前几次修复，不要重复或推翻，除非原页证明它错了。`,
       `只允许写 ${allowed.join(' 和 ')} 下的数据。禁止改 server/、shared/、app/、任何 scripts/*.mjs 或其他代码。`,
       '禁止改 fast/state.json 与生产收据；需要重建已完成步骤时在结论 redoFrom 中写出建议，由编排器处理。',
@@ -818,13 +820,19 @@ async function processPaper(ctx, paper) {
         const stops = paper.repairStops ||= []
         let entry = stops.at(-1)
         if (!entry || entry.done || entry.stop !== stop) {
-          if (stops.some((item) => item.stop === stop) || stops.length >= MAX_REPAIRS) {
+          // Sol repairs each distinct stop once; a stop that survives Sol gets one Astra retry,
+          // at most once per paper, before the paper is blocked for main review.
+          const earlier = stops.filter((item) => item.stop === stop)
+          const astraUsed = stops.some((item) => item.tier === 'astra')
+          if (earlier.length >= 2 || (earlier.length === 1 && astraUsed)
+            || (!earlier.length && new Set(stops.map((item) => item.stop)).size >= MAX_REPAIRS)) {
             throw new Blocked('needs_main_review', `修复 ${stops.length} 次后仍停在：${stop.slice(0, 200)}`, result.log)
           }
-          entry = { stop, attempt: stops.length + 1, done: false }
+          entry = { stop, attempt: stops.length + 1, tier: earlier.length ? 'astra' : 'sol', previous: earlier.at(-1)?.attempt ?? null, done: false }
           stops.push(entry); ctx.save()
         }
-        const outcome = await repair(ctx, paper, result, entry.attempt)
+        const previous = entry.previous ? path.join(workDir(paper.paperId), `fast/batch-repair-${entry.previous}.json`) : null
+        const outcome = await repair(ctx, paper, result, entry.attempt, entry.tier || 'sol', previous)
         entry.done = true
         if (outcome.issuesResolved === true) paper.issuesResolved = true
         ctx.save()
@@ -866,7 +874,7 @@ function dryRun(ctx) {
     console.log(commandText(process.execPath, [fastScript, ...prepArgs(item)]))
     console.log(`第一轮：${commandText(DROID, ['exec', '-m', MODELS.sol.model, '-r', MODELS.sol.effort, '--auto', 'medium', '--cwd', root, '--only-tools', 'Read,Grep,Glob,LS,ApplyPatch', '-f', '<逐页提示词>'])}`)
     console.log(commandText(process.execPath, [fastScript, 'after-proofread', item.paperId]) + '（生产锁，间隔 ≥30 秒）')
-    console.log(`退出码 2：${MODELS.sol.model} / medium 本卷修复（每个停点一次，最多 ${MAX_REPAIRS} 次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
+    console.log(`退出码 2：${MODELS.sol.model} / medium 本卷修复（每个停点一次，最多 ${MAX_REPAIRS} 个停点；同一停点再停时 ${MODELS.astra.model} / high 复修，每卷至多一次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
     console.log(commandText(process.execPath, [fastScript, 'finish', item.paperId]))
     console.log('PDF：pdfinfo / pdftotext / pdffonts 硬约束；pdftoppm -r 50 逐页图 + Sol 视觉初筛')
     if (ctx.opts.submit) {
@@ -987,6 +995,11 @@ async function intake(ctx) {
   const base = process.env.EQB_BATCH_SOURCE_ROOT || path.join(os.homedir(), '导题2026届模拟题/2026届模拟题')
   await lock(path.join(ctx.dir, 'batch.lock'), async (updateLock) => {
     recordChildren = () => updateLock({ children: [...children].map((child) => child.pid).filter(Boolean) })
+    // One light list read up front so a same-name production paper is not proofread for nothing;
+    // the source-hash duplicate check still runs before submit.
+    const origin = reviewOrigin()
+    const listed = await (await request(origin, '/api/import-agent-reviews', { headers: await credential(origin) })).json()
+    if (!Array.isArray(listed?.papers)) fail('生产卷列表结构无效，intake 不能查重')
     for (const key of keys) {
       const matches = entries.filter(([id, entry]) => id === key || `${entry.prov}/${entry.paper}` === key)
       if (matches.length !== 1) fail(`inventory key 不存在或不唯一：${key}`)
@@ -1017,6 +1030,9 @@ async function intake(ctx) {
       if (existsSync(path.join(papersRoot, paperId)) || existsSync(path.join(ctx.dir, 'queue', `${paperId}.json`))) {
         needsReview.push(`卷号与本地现有卷重名：${paperId}`); paperId = `paper-mock-pending-${stamp}`
       }
+      const names = [identity.paperName, entry.paper].filter(Boolean).map(paperNameKey)
+      const twin = listed.papers.find((existing) => existing.paperId === paperId || names.includes(paperNameKey(existing.paperName || '')))
+      if (twin) needsReview.push(`生产已有同卷号或同名卷 ${twin.paperId}（${twin.paperName}），需 Owner 确认是否同一场考试`)
       const item = {
         paperId, paperName: identity.paperName || entry.paper,
         provenance: { paperName: identity.paperName || entry.paper, source: `${inventoryKey}；${identity.source || '待核对首页'}`, year: identity.year ?? null, month: identity.month ?? null },
