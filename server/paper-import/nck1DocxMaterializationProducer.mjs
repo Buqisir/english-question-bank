@@ -131,19 +131,20 @@ function containsEmbeddedListeningCue(text) {
   return /\(\s*(?:停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)|重复)\s*\)|听下面(?:(?:的)?录音|一段(?:对话|独白|对话或独白))[,，]回答第\d+|(?:第一节|第二节)(?:到此结束|[:：].*听下面5段)|听力部分到此结束|转涂到(?:客观题答题卡|答题纸|答题卡)/u.test(value)
 }
 
-// A speaker-labelled turn can say "14 seconds" as speech; any other seconds value (instructions,
-// durations, bracketed notes) may be recording metadata and stays a review item.
+// A speaker turn can say "14 seconds" as speech. Only an allowlisted speaker label (a single
+// capital, one name, or a title plus surname) exempts the line; every other seconds value
+// (instructions, durations, "Total Time:"-style labels, bracketed notes) stays a review item.
 function listeningTimingMetadata(text) {
   if (/分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*wpm\b/iu.test(text)) return true
   if (!/\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b/iu.test(text)) return false
   if (/[(（[【][^)）\]】]*\b\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[^)）\]】]*[)）\]】]/iu.test(text)) return true
-  const turn = /^\s*([A-Z]|[A-Z][a-z]+(?: [A-Z][a-z]+)?)\s*[:：]\s*(\S.*)$/u.exec(text)
-  if (!turn || LISTENING_METADATA_LABEL.test(turn[1])) return true
-  // "Speaker: 25 seconds" with nothing else to say reads as a duration note, not speech.
-  return /^[(（[【]?\s*(?:about|around|approximately)?\s*\d+(?:\.\d+)?\s*sec(?:ond)?s?\b[\s.。)）\]】]*$/iu.test(turn[2])
+  const turn = /^\s*([A-Z]|[A-Z][a-z]+|(?:Mr|Mrs|Ms|Miss|Dr)\.? [A-Z][a-z]+)\s*[:：]\s*(\S.*)$/u.exec(text)
+  if (!turn || LISTENING_METADATA_WORD.test(turn[1])) return true
+  // "Speaker: 2 minutes 25 seconds" with nothing else to say reads as a duration note, not speech.
+  return !turn[2].replace(/\b(?:\d+(?:\.\d+)?|about|around|approximately|and|minutes?|mins?|seconds?|secs?)\b|[^\p{L}]/giu, '')
 }
 
-const LISTENING_METADATA_LABEL = /^(?:Note|Notes|Time|Timing|Duration|Length|Pause|Speed|Rate|Recording|Audio|Tape|Text|Part|Section|Question|Questions|Directions?|Instructions?|Tip|Notice|Total)$/u
+const LISTENING_METADATA_WORD = /^(?:Note|Notes|Time|Timing|Duration|Length|Pause|Speed|Rate|Recording|Audio|Tape|Text|Part|Section|Question|Questions|Directions?|Instructions?|Tip|Notice|Total|Reading|Answer|Answering|Listening|Interval|Break|Wait|Preparation)$/u
 
 function listeningItemRecord(item, index, documentId, disposition, reason, kind = null) {
   const located = hasSourceLocator(documentId, item?.sourceIndex)

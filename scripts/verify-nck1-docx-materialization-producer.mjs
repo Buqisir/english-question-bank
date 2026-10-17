@@ -452,14 +452,16 @@ assert.equal(unlabelledDuration.disposition, 'needs_agent_review')
 assert(unlabelledDuration.review.required.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
-// A metadata label looks like a speaker label but must not exempt the duration.
-const labelledDuration = produceNck1DocxMaterialization({
-  paperId: fixture.paperId,
-  documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'note' }).sourceDocuments,
-})
-assert.equal(labelledDuration.disposition, 'needs_agent_review')
-assert(labelledDuration.review.required.some((item) =>
-  item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
+// Metadata labels look like speaker labels but must not exempt the duration.
+for (const listeningSeconds of ['note', 'compound']) {
+  const labelledDuration = produceNck1DocxMaterialization({
+    paperId: fixture.paperId,
+    documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds }).sourceDocuments,
+  })
+  assert.equal(labelledDuration.disposition, 'needs_agent_review', listeningSeconds)
+  assert(labelledDuration.review.required.some((item) =>
+    item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'), listeningSeconds)
+}
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-docx-producer-'))
 try {
