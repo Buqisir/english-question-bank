@@ -39,7 +39,7 @@ const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
 
 const DOCX_PRODUCER = Object.freeze({
   version: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
-  historicalVersions: ['nck1-docx-materialization-producer-v9', 'nck1-docx-materialization-producer-v11', 'nck1-docx-materialization-producer-v12', 'nck1-docx-materialization-producer-v13', 'nck1-docx-materialization-producer-v14'],
+  historicalVersions: ['nck1-docx-materialization-producer-v9', 'nck1-docx-materialization-producer-v11', 'nck1-docx-materialization-producer-v12', 'nck1-docx-materialization-producer-v13', 'nck1-docx-materialization-producer-v14', 'nck1-docx-materialization-producer-v15'],
   sourceDigest: nck1DocxProducerSourceDigest,
   produce: produceNck1DocxMaterialization,
   reviewName: 'nck1-docx-materialization-review-v1.json',
@@ -49,7 +49,7 @@ const DOCX_PRODUCER = Object.freeze({
 
 const PDF_PRODUCER = Object.freeze({
   version: NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION,
-  historicalVersions: ['nck1-pdf-materialization-producer-v6', 'nck1-pdf-materialization-producer-v8', 'nck1-pdf-materialization-producer-v9', 'nck1-pdf-materialization-producer-v10', 'nck1-pdf-materialization-producer-v11'],
+  historicalVersions: ['nck1-pdf-materialization-producer-v6', 'nck1-pdf-materialization-producer-v8', 'nck1-pdf-materialization-producer-v9', 'nck1-pdf-materialization-producer-v10', 'nck1-pdf-materialization-producer-v11', 'nck1-pdf-materialization-producer-v12'],
   sourceDigest: nck1PdfProducerSourceDigest,
   produce: produceNck1PdfMaterialization,
   reviewName: 'nck1-pdf-materialization-review-v1.json',
@@ -59,7 +59,7 @@ const PDF_PRODUCER = Object.freeze({
 
 const OCR_PRODUCER = Object.freeze({
   version: NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
-  historicalVersions: ['nck1-ocr-materialization-producer-v6', 'nck1-ocr-materialization-producer-v7', 'nck1-ocr-materialization-producer-v9', 'nck1-ocr-materialization-producer-v11', 'nck1-ocr-materialization-producer-v13'],
+  historicalVersions: ['nck1-ocr-materialization-producer-v6', 'nck1-ocr-materialization-producer-v7', 'nck1-ocr-materialization-producer-v9', 'nck1-ocr-materialization-producer-v11', 'nck1-ocr-materialization-producer-v13', 'nck1-ocr-materialization-producer-v15'],
   sourceDigest: nck1OcrProducerSourceDigest,
   produce: produceNck1OcrMaterialization,
   reviewName: 'nck1-ocr-materialization-review-v1.json',
@@ -206,7 +206,7 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   // Confirmation v3 has a separate lineage; v6/v7 never attested its visuals.
   const historicalVersions = producer === OCR_PRODUCER
     && producerInputs.confirmation?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
-    ? ['nck1-ocr-materialization-producer-v8', 'nck1-ocr-materialization-producer-v10', 'nck1-ocr-materialization-producer-v12', 'nck1-ocr-materialization-producer-v14'] : producer.historicalVersions
+    ? ['nck1-ocr-materialization-producer-v8', 'nck1-ocr-materialization-producer-v10', 'nck1-ocr-materialization-producer-v12', 'nck1-ocr-materialization-producer-v14', 'nck1-ocr-materialization-producer-v16'] : producer.historicalVersions
   const acceptedVersions = [producerVersion, ...historicalVersions]
   if (receipt.schemaVersion !== producer.receiptSchemaVersion
     || !acceptedVersions.includes(receipt.producerVersion)
@@ -225,12 +225,16 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   const requiresPartition = receipt.producerVersion === producerVersion || [
     'nck1-docx-materialization-producer-v13',
     'nck1-docx-materialization-producer-v14',
+    'nck1-docx-materialization-producer-v15',
     'nck1-pdf-materialization-producer-v10',
     'nck1-pdf-materialization-producer-v11',
+    'nck1-pdf-materialization-producer-v12',
     'nck1-ocr-materialization-producer-v11',
     'nck1-ocr-materialization-producer-v12',
     'nck1-ocr-materialization-producer-v13',
     'nck1-ocr-materialization-producer-v14',
+    'nck1-ocr-materialization-producer-v15',
+    'nck1-ocr-materialization-producer-v16',
   ].includes(receipt.producerVersion)
   if ((requiresPartition && !partitionDigest)
     || (partitionDigest && (!listeningPartition

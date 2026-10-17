@@ -14,6 +14,7 @@ import { Worker } from 'node:worker_threads'
 
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
+import { rendererBuildIdProvider } from '../server/import-review/rendererBuildIdProvider.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -21,10 +22,11 @@ import { sha256 } from '../shared/paper-canonical/stable.mjs'
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-scoped-publication-'))
 const dbPath = path.join(root, 'review.sqlite')
 let renderer = 'renderer-a'
+let rendererReads = 0
 const digest = (character) => `sha256:${character.repeat(64)}`
 const paperByRevision = new Map()
 const store = createImportReviewStore({
-  dbPath, filesRoot: path.join(root, 'files'), rendererBuildId: () => renderer,
+  dbPath, filesRoot: path.join(root, 'files'), rendererBuildId: () => { rendererReads += 1; return renderer },
   projectRevision(directory) {
     const revisionId = path.basename(directory)
     return { paperId: paperByRevision.get(revisionId), sourceDigest: digest('1'),
@@ -83,9 +85,43 @@ async function routeRequest(routes, pathname, { method = 'POST', body = {}, sess
 }
 
 try {
+  {
+    let computed = 0
+    const compute = () => `sha256:release-${++computed}`
+    const production = rendererBuildIdProvider({ production: true, compute })
+    assert.equal(production(), 'sha256:release-1')
+    assert.equal(production(), 'sha256:release-1', 'a production process hashes its release once')
+    assert.equal(rendererBuildIdProvider({ production: true, compute })(), 'sha256:release-2',
+      'a restarted production process hashes the new release')
+    const development = rendererBuildIdProvider({ production: false, compute })
+    assert.equal(development(), 'sha256:release-3')
+    assert.equal(development(), 'sha256:release-4', 'development rehashes so edited renderer sources are seen')
+    assert.equal(rendererBuildIdProvider({ explicitBuildId: 'build-x', production: true, compute }), 'build-x')
+    assert.equal(computed, 4)
+  }
+  const readsBeforeEmptyListing = rendererReads
+  assert.deepEqual(store.listPapers(), [])
+  assert.equal(rendererReads - readsBeforeEmptyListing, 0, 'an empty listing does not hash the renderer')
   const approval = seed('paper-scoped-a', '1')
   const other = seed('paper-scoped-b', '2')
   const awaiting = seed('paper-scoped-awaiting', '3', 'awaiting_review')
+  // Unset QUESTION_BANK_BUILD_ID makes each read hash the renderer tree, so a listing reads it once.
+  const readsBeforeListing = rendererReads
+  const listed = store.listPapers()
+  assert.equal(listed.filter((paper) => paper.reviewKind === 'candidate' && paper.rendererStale === false).length, 3)
+  assert.equal(rendererReads - readsBeforeListing, 1)
+  renderer = 'renderer-changed'
+  const readsBeforeStaleListing = rendererReads
+  const stale = store.listPapers()
+  assert.equal(stale.filter((paper) => paper.reviewKind === 'candidate' && paper.rendererStale === true).length, 3,
+    'a later listing compares Candidates with the renderer read for that listing')
+  assert.equal(rendererReads - readsBeforeStaleListing, 1)
+  for (const paper of stale) {
+    assert.equal(typeof paper.hasMediaCandidates, 'boolean')
+    assert.equal(typeof paper.rendererStale, 'boolean')
+    assert.equal(typeof paper.unresolvedCount, 'number')
+  }
+  renderer = 'renderer-a'
   const disabledRoutes = createImportReviewRoutes({ getStore: () => store, agentToken: 'agent-token', shipToken: 'ship-token', buildPrintHtml() {} })
   const disabled = await routeRequest(disabledRoutes, '/api/import-agent-reviews/papers/paper-scoped-a/publication-requests', { body: input(approval, 'route-secret') })
   assert.equal(disabled.status, 404, 'agent token alone must not activate scoped publication')

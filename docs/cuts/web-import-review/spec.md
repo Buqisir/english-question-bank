@@ -91,7 +91,7 @@ Agent 可在新修订版中声明 `resolvesIssueIds`，问题变为“待 Owner 
   - `QUESTION_BANK_IMPORT_OPS_DB`
   - `QUESTION_BANK_IMPORT_OPS_ROOT`
   - `QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN`
-  - `QUESTION_BANK_BUILD_ID`（可选显式不可变 build id；缺省时对实际 `app/dist`、Screen/Print 源码及共享 renderer 依赖取 SHA-256，并在审核动作时重算）
+  - `QUESTION_BANK_BUILD_ID`（可选显式不可变 build id；缺省时对实际 `app/dist`、Screen/Print 源码及共享 renderer 依赖取 SHA-256。非生产在每次审核动作时重算；`NODE_ENV=production` 每个服务进程只算一次，前提是 controller 部署的 sealed release 不可就地修改、renderer 更新必须产生新 release 并重启服务。不支持就地改动正在运行的 release；同一次列表只读取一次）
 - `pull-run-push` 永不传输 Review DB/文件。
 - R2 日备份独立备份 Review DB 和文件，仍使用 additive `rclone copy`。
 

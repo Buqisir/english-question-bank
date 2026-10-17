@@ -1245,6 +1245,10 @@ export function createImportReviewStore({
   }
 
   function listPapers() {
+    // Without QUESTION_BANK_BUILD_ID the build id hashes the whole renderer tree synchronously;
+    // one listing reads it at most once instead of once per Candidate row.
+    let rendererId
+    const listingRendererBuildId = () => (rendererId ??= currentRendererBuildId())
     return withDb(false, (db) => db.prepare(`
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
              r.revision_number, r.state, r.bundle_digest, r.manifest_json,
@@ -1262,26 +1266,30 @@ export function createImportReviewStore({
       ORDER BY
         CASE r.state WHEN 'changes_requested' THEN 0 WHEN 'awaiting_review' THEN 1 WHEN 'approved' THEN 2 ELSE 3 END,
         p.updated_at DESC
-    `).all().map((row) => ({
-      paperId: row.paper_id,
-      paperName: row.paper_name,
-      latestRevisionId: row.latest_revision_id,
-      revisionNumber: row.revision_number,
-      state: row.state || 'uploading',
-      reviewKind: reviewKind(parseJson(row.manifest_json, {})),
-      bundleDigest: row.bundle_digest,
-      hasMediaCandidates: (parseJson(row.manifest_json, {}).files || [])
-        .some(file => file.role === 'content_media_candidate'),
-      rendererBuildId: row.renderer_build_id,
-      rendererStale: reviewKind(parseJson(row.manifest_json, {})) === 'candidate'
-        && row.renderer_build_id !== currentRendererBuildId(),
-      promotionState:
-        parseJson(row.approval_receipt_json)?.approvalId === row.promotion_approval_id
-          ? row.promotion_state
-          : null,
-      unresolvedCount: Number(row.unresolved_count || 0),
-      updatedAt: row.updated_at,
-    })))
+    `).all().map((row) => {
+      const manifest = parseJson(row.manifest_json, {})
+      const kind = reviewKind(manifest)
+      return {
+        paperId: row.paper_id,
+        paperName: row.paper_name,
+        latestRevisionId: row.latest_revision_id,
+        revisionNumber: row.revision_number,
+        state: row.state || 'uploading',
+        reviewKind: kind,
+        bundleDigest: row.bundle_digest,
+        hasMediaCandidates: (manifest.files || [])
+          .some(file => file.role === 'content_media_candidate'),
+        rendererBuildId: row.renderer_build_id,
+        rendererStale: kind === 'candidate'
+          && row.renderer_build_id !== listingRendererBuildId(),
+        promotionState:
+          parseJson(row.approval_receipt_json)?.approvalId === row.promotion_approval_id
+            ? row.promotion_state
+            : null,
+        unresolvedCount: Number(row.unresolved_count || 0),
+        updatedAt: row.updated_at,
+      }
+    }))
   }
 
   function linkDiscussionThread(paperId, { threadId, expectedThreadId } = {}) {
