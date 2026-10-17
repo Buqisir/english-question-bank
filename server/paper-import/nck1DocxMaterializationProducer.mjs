@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v16'
+  'nck1-docx-materialization-producer-v17'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -14,9 +14,12 @@ const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.doc
 const BLANK = /(?<![\p{L}\p{N}_])_+\d{1,3}_+|(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
 const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]{0,120}英语试(?:题|卷)(?:参考)?)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?[:：]?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
-const LISTENING_TRANSCRIPT_HEADING = /^(?:附[:：]?\s*)?(?:【)?(?:(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料)(?:[（(]录音稿[）)])?(?:】)?[:：]?$/u
-const WRITING_SAMPLE_BOUNDARY = /^(?:(?:【)?(?:评分|书面表达评分|答案(?:解析|详解)|解析|详解)|附[:：]?\s*各档次|(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料|AI\s+editions?\b)/iu
-const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))$/iu
+const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试题|测试)?(?:原文|材料|录音稿|录音原文|录音材料|录音文稿|文稿)|录音(?:原文|文稿|稿)|答案及听力材料)`
+const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?${LISTENING_TRANSCRIPT_TITLE}(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
+const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
+// Labels that open an official sample; scoring or prompt text may precede them.
+const WRITING_SAMPLE_LABEL = /^(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
+const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*[:：]?$/iu
 const LISTENING_PAUSE_REPEAT_SEQUENCE = /^(?:(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\)|\(\s*重复\s*\)))+$/u
 const SLOT_SPECS = [
   ['reading.a', 'reading', 21, 23],
@@ -776,106 +779,229 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
   return group(paperId, slotId, family, blocks, [], [], task)
 }
 
+// A text answer is a short source spelling. One trailing list separator
+// ("56.in;") and an optional letter inside a word ("fuel(l)ed", printed
+// "fuel(l) ed") are answer-key formats; other punctuation, Chinese text, or a
+// long run means explanation prose may be attached, so the value is withheld.
+function textAnswerValue(rawValue) {
+  const value = String(rawValue).trim().replace(/\s*[.。;；,，]$/u, '')
+  const shape = normalized(value).replace(/(?<=\p{L})\(\p{L}{1,3}\)(?: (?=\p{L}))?/gu, '')
+  if (
+    !shape
+    || value.length > 80
+    || shape.split(' ').length > 4
+    || /[.!?。！？,，;；:：（）()“”"\p{Script=Han}\d]/u.test(shape)
+  ) return null
+  return value
+}
+
+function choiceAnswerValue(rawValue) {
+  return /^[A-G]$/u.test(normalized(rawValue)) ? normalized(rawValue) : null
+}
+
+function answerValueFor(number, rawValue) {
+  return number <= 55 ? choiceAnswerValue(rawValue) : textAnswerValue(rawValue)
+}
+
+function consecutive(numbers) {
+  return numbers.every((number, index) => index === 0 || number === numbers[index - 1] + 1)
+}
+
+// "21A 22B 23D" or "56 creator 57 hidden": a key printed without periods. Only
+// a whole line of two or more consecutive pairs counts, so numbers inside
+// prose, scores, or transcripts never become answers.
+function unpunctuatedAnswerPairs(text) {
+  const line = normalized(text)
+  if (/\d\s*[.．、]/u.test(line)) return null
+  const pairs = []
+  const pattern = /(\d{1,2}) ?([A-Za-z][^\d]*?) ?(?=\d|$)/yu
+  let end = 0
+  for (let match = pattern.exec(line); match; match = pattern.exec(line)) {
+    pairs.push([Number(match[1]), match[2]])
+    end = pattern.lastIndex
+  }
+  if (end !== line.length || pairs.length < 2 || !consecutive(pairs.map(([number]) => number))) return null
+  const values = pairs.map(([number, value]) => answerValueFor(number, value))
+  return values.every(Boolean) ? pairs.map(([number], index) => [number, values[index]]) : null
+}
+
+const ANSWER_GRID_NUMBER_LABEL = /^(?:题号|题序|序号|小题)$/u
+const ANSWER_GRID_VALUE_LABEL = /^答案$/u
+
+// One number row and the answer row printed under it, from a table or from
+// two transcribed lines ("序号 1 2 3" / "答案 C C B"). Text lines carry no cell
+// boundaries, so their answers must be one word each; tables keep phrases.
+function answerGridPairs(numberCells, valueCells) {
+  const label = (cells, pattern) => (pattern.test(normalized(cells[0])) ? cells.slice(1) : null)
+  const numbers = label(numberCells, ANSWER_GRID_NUMBER_LABEL)
+  const values = label(valueCells, ANSWER_GRID_VALUE_LABEL)
+  if (!numbers || !values) return null
+  const used = numbers.findLastIndex((cell) => normalized(cell)) + 1
+  const parsedNumbers = numbers.slice(0, used).map((cell) =>
+    (/^\d{1,2}$/u.test(normalized(cell)) ? Number(normalized(cell)) : null))
+  if (used < 2 || parsedNumbers.some((number) => number === null) || !consecutive(parsedNumbers)) return { ambiguous: true }
+  if (values.length < used || values.slice(used).some((cell) => normalized(cell))) return { ambiguous: true, numbers: parsedNumbers }
+  const parsedValues = parsedNumbers.map((number, index) => answerValueFor(number, values[index]))
+  return parsedValues.every(Boolean)
+    ? { pairs: parsedNumbers.map((number, index) => [number, parsedValues[index]]) }
+    : { ambiguous: true, numbers: parsedNumbers }
+}
+
+function answerLineCells(text) {
+  return normalized(text).replace(/^(\S+?) ?[|｜:：] ?/u, '$1 ').split(' ')
+}
+
+const NUMBERED_WRITING_ANSWER_SECTION = /^(?:第四部分|四[、.．])\s*[:：]?\s*(?:写作|书面表达)/u
+// Some answer books print only "写作" above the samples; it counts only when no
+// numbered writing part exists, so a later "写作" explanation title is inert.
+const BARE_WRITING_ANSWER_SECTION = /^写作\s*(?:\([^)]*\))?\s*[:：]?$/u
+
+function writingAnswerSectionHeading(text) {
+  return NUMBERED_WRITING_ANSWER_SECTION.test(text) || BARE_WRITING_ANSWER_SECTION.test(text)
+}
+
 function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
   const answers = new Map()
+  const locate = (item) => sourceLocator(answerDocumentId, item.kind === 'table'
+    ? item.source || { kind: 'docx_part', documentId: answerDocumentId, part: 'word/document.xml', selector: item.selector }
+    : item.sourceIndex)
+  const at = (item) => sourceRef(answerDocumentId, item.kind === 'table' ? item.source || null : item.sourceIndex)
   const add = (number, value, item) => {
+    if (number < 1 || number > 65) return
     const previous = answers.get(number)
     const cleaned = String(value).trim()
     if (!cleaned || INLINE_ANSWER_DETAIL.test(cleaned)) {
       addIssue(issues, 'NCK1_ANSWER_DETAIL_LEAK_DETECTED', `answers.${number}`,
-        'An answer value contains source explanation text',
-        sourceRef(answerDocumentId, item.sourceIndex))
+        'An answer value contains source explanation text', at(item))
       return
     }
     if (previous && previous.value !== cleaned) {
       addIssue(issues, 'NCK1_DOCX_ANSWER_CONFLICT', `answers.${number}`,
-        'Official answer source contains conflicting values',
-        sourceRef(answerDocumentId, item.sourceIndex))
+        'Official answer source contains conflicting values', at(item))
       return
     }
-    answers.set(number, {
-      value: cleaned,
-      authority: sourceLocator(answerDocumentId, item.sourceIndex),
-    })
+    answers.set(number, { value: cleaned, authority: locate(item) })
   }
+  const ambiguousGrid = (numbers, item) => addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS',
+    numbers?.length ? `answers.${numbers[0]}-${numbers.at(-1)}` : 'answers.grid',
+    'An answer grid does not pair each question number with one clear answer', at(item))
+  const lines = []
   for (const item of answerBody) {
+    if (item.kind === 'table') {
+      lines.push({ item, table: true })
+      continue
+    }
     if (item.kind !== 'paragraph') continue
-    if (/^第四部分\s*写作/u.test(normalized(item.text))) break
+    if (writingAnswerSectionHeading(normalized(item.text))) break
     if (isAnswerExplanationHeading(item)) {
       const activeAnswersComplete = Array.from(
         { length: 45 },
         (_, index) => answers.has(index + 21),
       ).every(Boolean)
       if (activeAnswersComplete) break
+      lines.push({ item, explanationHeading: true })
       continue
     }
-    for (const match of item.text.matchAll(/(\d{1,2})\s*[-–—~至]\s*(\d{1,2})\s*([A-G]+)/gu)) {
+    for (const text of item.text.split('\n')) lines.push({ item, text })
+  }
+  for (const [index, line] of lines.entries()) {
+    const { item } = line
+    if (line.table) {
+      for (const [rowIndex, row] of item.rows.entries()) {
+        const next = item.rows[rowIndex + 1]
+        if (!next) continue
+        const grid = answerGridPairs(row.cells.map((cell) => cell.text), next.cells.map((cell) => cell.text))
+        if (grid?.pairs) grid.pairs.forEach(([number, value]) => add(number, value, item))
+        else if (grid?.ambiguous) ambiguousGrid(grid.numbers, item)
+      }
+      continue
+    }
+    if (line.explanationHeading) continue
+    const { text } = line
+    const previous = lines[index - 1]
+    if (previous?.text !== undefined
+      && answerGridPairs(answerLineCells(previous.text), answerLineCells(text))) continue
+    const next = lines[index + 1]
+    const grid = next?.text !== undefined
+      ? answerGridPairs(answerLineCells(text), answerLineCells(next.text))
+      : null
+    if (grid) {
+      if (grid.pairs) grid.pairs.forEach(([number, value]) => add(number, value, next.item))
+      else ambiguousGrid(grid.numbers, item)
+      continue
+    }
+    for (const match of text.matchAll(/(\d{1,2})\s*[-–—~～－至]\s*(\d{1,2})\s*([A-G]+)/gu)) {
       const from = Number(match[1])
       const to = Number(match[2])
       if (match[3].length !== to - from + 1) {
         addIssue(issues, 'NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS', `answers.${from}-${to}`,
-          'Official answer range length does not match its labels',
-          sourceRef(answerDocumentId, item.sourceIndex))
+          'Official answer range length does not match its labels', at(item))
         continue
       }
-      ;[...match[3]].forEach((value, index) => add(from + index, value, item))
+      ;[...match[3]].forEach((value, offset) => add(from + offset, value, item))
     }
-    for (const chunk of item.text.split('\n')) {
-      for (const match of chunk.matchAll(
-        /(\d{1,2})\s*[.．、]\s*(.*?)(?=(?:\d{1,2})\s*[.．、]|$)/gu,
-      )) {
-        const number = Number(match[1])
-        const rawValue = trimEdgeSpaces(match[2])
-        if (!normalized(rawValue)) continue
-        if (number <= 55) {
-          const label = /^([A-G])(?=$|[\s.．、,，;；。:：)）【])/u.exec(normalized(rawValue))?.[1]
-          if (label) add(number, label, item)
-          continue
-        }
-        const detail = INLINE_ANSWER_DETAIL.exec(rawValue)
-        const value = trimEdgeSpaces(detail ? rawValue.slice(0, detail.index) : rawValue)
-        const wordCount = normalized(value).split(' ').filter(Boolean).length
-        if (
-          !normalized(value)
-          || (!detail && (
-            value.length > 80
-            || wordCount > 4
-            || /[.!?。！？,，;；:：（）()]/u.test(value)
-          ))
-        ) {
-          addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
-            'A text answer cannot be separated safely from adjacent explanation text',
-            sourceRef(answerDocumentId, item.sourceIndex))
-          continue
-        }
-        add(number, value, item)
+    const pairs = unpunctuatedAnswerPairs(text)
+    if (pairs) {
+      pairs.forEach(([number, value]) => add(number, value, item))
+      continue
+    }
+    for (const match of text.matchAll(
+      /(\d{1,2})\s*[.．、]\s*(.*?)(?=(?:\d{1,2})\s*[.．、]|$)/gu,
+    )) {
+      const number = Number(match[1])
+      const rawValue = trimEdgeSpaces(match[2])
+      // Numbers past 65 are writing parts or explanation items, never answers.
+      if (!normalized(rawValue) || number < 1 || number > 65) continue
+      if (number <= 55) {
+        const label = /^([A-G])(?=$|[\s.．、,，;；。:：)）【])/u.exec(normalized(rawValue))?.[1]
+        if (label) add(number, label, item)
+        continue
       }
+      const detail = INLINE_ANSWER_DETAIL.exec(rawValue)
+      const value = textAnswerValue(detail ? rawValue.slice(0, detail.index) : rawValue)
+      if (!value) {
+        // An explanation that restates an already keyed answer is not a
+        // second authority; only an unkeyed number needs review.
+        if (answers.has(number)) continue
+        addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
+          'A text answer cannot be separated safely from adjacent explanation text', at(item))
+        continue
+      }
+      add(number, value, item)
     }
   }
   return answers
 }
 
-function writingSamplePosition(answerBody, pattern, from, splitHeadingPattern = null) {
+// Bare part headings carry no sample label of their own: "第一节（满分15分）".
+const BARE_APPLICATION_HEADING = /^第一节\s*(?:\([^)]*\))?\s*[:：]?$/u
+const BARE_CONTINUATION_HEADING = /^第二节\s*(?:\([^)]*\))?\s*[:：]?$/u
+const APPLICATION_HEADINGS = [
+  /^第一节(?:\s*[:：])?.*(?:应用文(?:写作)?|参考范文|One possible version)/iu,
+  /^(?:[一1][、.．]\s*|\(\s*[一1]\s*\)\s*)?(?:应用文(?:写作)?|书面表达)\s*(?:\([^)]*\))?\s*[:：]?$/u,
+  BARE_APPLICATION_HEADING,
+]
+const CONTINUATION_HEADINGS = [
+  /^第二节(?:\s*[:：])?.*(?:读后续写|参考范文|One possible version)/iu,
+  /^(?:[二2][、.．]\s*|\(\s*[二2]\s*\)\s*)?读后续写\s*(?:\([^)]*\))?\s*[:：]?$/u,
+  BARE_CONTINUATION_HEADING,
+]
+
+function writingSamplePosition(answerBody, patterns, from) {
   return answerBody.flatMap((item, index) => {
     if (index < from || item.kind !== 'paragraph') return []
     const text = normalized(item.text)
-    if (pattern.test(text)) return [index]
-    if (!splitHeadingPattern?.test(text)) return []
-    const next = answerBody.slice(index + 1).find(candidate =>
-      candidate.kind !== 'paragraph' || normalized(candidate.text))
-    return next?.kind === 'paragraph'
-      && /^(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?\s*[:：]?$/iu.test(normalized(next.text))
-      ? [index] : []
+    return patterns.some((pattern) => pattern.test(text)) ? [index] : []
   })
 }
 
-function writingSampleText(answerBody, from, to) {
+function writingSampleText(answerBody, from, to, { bareHeading = false } = {}) {
   // A source can put scoring prose/tables before the explicit sample label.
   // Only that exact label establishes the sample start; do not infer it from
   // English-looking text or discard scoring from the captured source stream.
   const labels = answerBody.flatMap((item, index) => index >= from && index < to
     && item.kind === 'paragraph'
-    && /^(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?\s*[:：]?$/iu.test(normalized(item.text)) ? [index] : [])
+    && WRITING_SAMPLE_LABEL.test(normalized(item.text)) ? [index] : [])
   // A single label is not essay prose. Multiple labelled alternatives retain
   // their labels and order rather than silently selecting one sample.
   const start = labels.length ? labels[0] + (labels.length === 1 ? 1 : 0) : from
@@ -888,11 +1014,14 @@ function writingSampleText(answerBody, from, to) {
         || LISTENING_TEXT_MARKER.test(normalized(item.text))
         || listeningCue(item.text)))
   const end = boundary >= 0 ? boundary : to
-  return answerBody
+  const lines = answerBody
     .slice(start, end)
     .filter((item) => item.kind === 'paragraph' && normalized(item.text))
     .map((item) => trimEdgeSpaces(item.text))
-    .join('\n')
+  // Under a bare heading with no sample label, Chinese text first is scoring
+  // or instructions, not the sample; leave it for review instead of keeping it.
+  if (bareHeading && !labels.length && /\p{Script=Han}/u.test(lines[0] || '')) return ''
+  return lines.join('\n')
 }
 
 function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
@@ -904,13 +1033,35 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     item.kind === 'paragraph' && String(item.text).includes('\n')
       ? String(item.text).split('\n').map((text) => ({ ...item, text }))
       : [item])
-  const writingSections = writingSamplePosition(
-    sampleBody,
-    /^第四部分\s*[:：]?\s*写作/u,
-    0,
-  )
+  const numberedSections = writingSamplePosition(sampleBody, [NUMBERED_WRITING_ANSWER_SECTION], 0)
+  const writingSections = numberedSections.length
+    ? numberedSections
+    : writingSamplePosition(sampleBody, [BARE_WRITING_ANSWER_SECTION], 0)
+  let applicationPatterns = APPLICATION_HEADINGS
+  let continuationPatterns = CONTINUATION_HEADINGS
   if (writingSections.length === 0) {
-    return { application: null, continuation: null }
+    // Some answer books print only the two typed part headings ("应用文:" and
+    // "读后续写:"). Without a writing part title a bare "第一节" is not
+    // evidence, so only typed headings, each exactly once and in order, count.
+    const typedApplication = APPLICATION_HEADINGS.filter((pattern) => pattern !== BARE_APPLICATION_HEADING)
+    const typedContinuation = CONTINUATION_HEADINGS.filter((pattern) => pattern !== BARE_CONTINUATION_HEADING)
+    const application = writingSamplePosition(sampleBody, typedApplication, 0)
+    const continuation = writingSamplePosition(sampleBody, typedContinuation, 0)
+    if (application.length === 1 && continuation.length === 1 && application[0] < continuation[0]) {
+      writingSections.push(application[0] - 1)
+      applicationPatterns = typedApplication
+      continuationPatterns = typedContinuation
+    } else {
+      const sampleEvidence = sampleBody.find((item) => item.kind === 'paragraph'
+        && [WRITING_SAMPLE_LABEL, /^Paragraph\s*1\s*[:：]/iu, ...typedApplication, ...typedContinuation]
+          .some((pattern) => pattern.test(normalized(item.text))))
+      if (sampleEvidence) {
+        addIssue(issues, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS', 'answers.writingSamples',
+          'Writing sample text appears without a recognized writing-answer section',
+          sourceRef(answerDocumentId, sampleEvidence.sourceIndex))
+      }
+      return { application: null, continuation: null }
+    }
   }
   if (writingSections.length !== 1) {
     addIssue(
@@ -923,18 +1074,15 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     return { application: null, continuation: null }
   }
   const writingStart = writingSections[0]
-  const applicationHeadings = writingSamplePosition(
-    sampleBody,
-    /^第一节(?:\s*[:：])?.*(?:应用文(?:写作)?|参考范文|One possible version)/iu,
-    writingStart + 1,
-    /^第一节\s*(?:\(满分\s*15\s*分\))?\s*[:：]?$/u,
-  )
-  const continuationHeadings = writingSamplePosition(
-    sampleBody,
-    /^第二节(?:\s*[:：])?.*(?:读后续写|参考范文|One possible version)/iu,
-    writingStart + 1,
-    /^第二节\s*(?:\(满分\s*25\s*分\))?\s*[:：]?$/u,
-  )
+  // Explanation pages after the key often repeat bare "第一节"/"第二节", so a
+  // bare heading counts only when no typed heading names that part.
+  const headings = (patterns, barePattern) => {
+    const typed = writingSamplePosition(sampleBody, patterns.filter((pattern) => pattern !== barePattern), writingStart + 1)
+    if (typed.length || !patterns.includes(barePattern)) return typed
+    return writingSamplePosition(sampleBody, [barePattern], writingStart + 1)
+  }
+  const applicationHeadings = headings(applicationPatterns, BARE_APPLICATION_HEADING)
+  const continuationHeadings = headings(continuationPatterns, BARE_CONTINUATION_HEADING)
   if (applicationHeadings.length !== 1 || continuationHeadings.length !== 1
     || applicationHeadings[0] >= continuationHeadings[0]) {
     addIssue(
@@ -946,15 +1094,18 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     )
     return { application: null, continuation: null }
   }
+  const bare = (index, pattern) => pattern.test(normalized(sampleBody[index].text))
   const application = writingSampleText(
     sampleBody,
     applicationHeadings[0] + 1,
     continuationHeadings[0],
+    { bareHeading: bare(applicationHeadings[0], BARE_APPLICATION_HEADING) },
   )
   const continuation = writingSampleText(
     sampleBody,
     continuationHeadings[0] + 1,
     sampleBody.length,
+    { bareHeading: bare(continuationHeadings[0], BARE_CONTINUATION_HEADING) },
   )
   if (!normalized(application) || !normalized(continuation)) {
     addIssue(

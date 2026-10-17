@@ -26,8 +26,10 @@ import {
   extractDocxParagraphEmphasis,
 } from '../server/paper-canonical/docxSourceAdapter.mjs'
 import {
+  NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
   nck1DocxProducerSourceDigest,
   produceNck1DocxMaterialization,
+  produceNck1MaterializationFromStructures,
 } from '../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import {
   inspectNck1Materialization,
@@ -462,6 +464,97 @@ for (const listeningSeconds of ['note', 'compound', 'instructions', 'replay']) {
   assert.equal(labelledDuration.disposition, 'needs_agent_review', listeningSeconds)
   assert(labelledDuration.review.required.some((item) =>
     item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'), listeningSeconds)
+}
+
+const produceWith = (options) => produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture(options).sourceDocuments,
+})
+const answerValues = (result) => result.materialization.answers.map((answer) => answer.value)
+const writingSample = (result, family) => result.materialization.groups
+  .find((candidate) => candidate.family === family)?.writingTask.officialModelAnswer ?? null
+const baselineAnswers = answerValues(produced)
+const baselineApplication = writingSample(produced, 'application-writing')
+const baselineContinuation = writingSample(produced, 'continuation-writing')
+assert.equal(baselineApplication, 'Should We Join the Reading Club?\nJoin us on Friday to read and share ideas.')
+
+// Answer keys printed without periods, as number/answer grids (lines or
+// tables), or with list separators and an optional in-word letter.
+for (const answerFormat of ['unpunctuated', 'gridLines', 'gridTable', 'separators']) {
+  const result = produceWith({ answerFormat })
+  const expected = answerFormat === 'separators'
+    ? [...baselineAnswers.slice(0, -1), 'no(t) e'] : baselineAnswers
+  assert.deepEqual(answerValues(result), expected, answerFormat)
+  // DOCX answer tables keep their whole-document confirmation gate.
+  assert.deepEqual(result.review.required.map((item) => item.code),
+    answerFormat === 'gridTable' ? ['NCK1_DOCX_ANSWER_TABLE_REVIEW_REQUIRED'] : [], answerFormat)
+}
+const tableAnswers = produceWith({ answerFormat: 'gridTable' })
+assert.equal(tableAnswers.materialization.answers[1].authority.selector, '(/w:document/w:body/w:tbl)[1]',
+  'a table answer keeps its table as the authority')
+assert.equal(tableAnswers.materialization.answers.at(-1).authority.selector, '(/w:document/w:body/w:tbl)[2]')
+
+// OCR answer tables are Agent-confirmed page regions and carry no DOCX table
+// gate: the shared structure parser reads them and cites the table region.
+{
+  const shaped = makeSyntheticNck1DocxFixture({ answerFormat: 'gridTable' })
+  const [questionDocument, rendition, answerDocument] = shaped.sourceDocuments
+  const region = { x: 0.1, y: 0.2, width: 0.8, height: 0.2 }
+  const answerStructure = extractDocxDocumentStructure(answerDocument.bytes)
+  answerStructure.body = answerStructure.body.map((item) => item.kind === 'table'
+    ? { ...item, source: { kind: 'page_region', documentId: answerDocument.documentId, page: 1, region } }
+    : item)
+  const result = produceNck1MaterializationFromStructures({
+    paperId: shaped.paperId, documents: shaped.sourceDocuments,
+    question: questionDocument, answer: answerDocument, coverage: rendition,
+    questionStructure: extractDocxDocumentStructure(questionDocument.bytes), answerStructure,
+    issues: [], codePrefix: 'NCK1_DOCX', producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+    reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
+    sourceDigest: nck1DocxProducerSourceDigest(shaped.sourceDocuments),
+  })
+  assert.deepEqual(result.review.required, [], JSON.stringify(result.review.required))
+  assert.deepEqual(answerValues(result), baselineAnswers)
+  assert.deepEqual(result.materialization.answers.at(-1).authority,
+    { kind: 'page_region', documentId: answerDocument.documentId, page: 1, region })
+}
+
+// Explanations that restate a keyed answer, or say "同64题解析", are not a
+// second answer and must not raise a conflict.
+const restated = produceWith({ restatedExplanations: true })
+assert.equal(restated.disposition, 'ready_for_verification')
+assert.deepEqual(answerValues(restated), baselineAnswers)
+
+// A one-word grid line cannot hold a multi-word answer; it stays a review item.
+const ambiguousGrid = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({ answerFormat: 'gridLines', transformXml: (xml) =>
+    xml.replace('答案| walked quickly', '答案| have walked quickly') }).sourceDocuments,
+})
+assert.equal(ambiguousGrid.disposition, 'needs_agent_review')
+assert(ambiguousGrid.review.required.some((item) =>
+  item.code === 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS' && item.path === 'answers.56-65'))
+
+// Bare part headings, type-only headings and Chinese sample labels all bound
+// the same samples; scoring before or after a label stays out of the sample.
+for (const writingShape of ['bare', 'typed', 'typedNoSection', 'chineseLabel', 'typedWithBareExplanations']) {
+  const result = produceWith({ writingShape })
+  assert.equal(result.disposition, 'ready_for_verification', writingShape)
+  assert.equal(writingSample(result, 'application-writing'), baselineApplication, writingShape)
+  assert.equal(writingSample(result, 'continuation-writing'), baselineContinuation, writingShape)
+}
+for (const writingShape of ['bareScoringFirst', 'missingSection']) {
+  const result = produceWith({ writingShape })
+  assert.equal(result.disposition, 'needs_agent_review', writingShape)
+  assert(result.review.required.some((item) =>
+    item.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'), writingShape)
+  assert.equal(writingSample(result, 'application-writing'), null, writingShape)
+}
+
+// Listening transcript title aliases and "Text 1:" markers.
+for (const [listeningHeading, listeningMarkerSuffix] of [['录音文稿', ''], ['听力试题原文', ''], ['听力原文', '：']]) {
+  const result = produceWith({ listening: true, listeningHeading, listeningMarkerSuffix })
+  assert.equal(result.disposition, 'ready_for_verification', `${listeningHeading}${listeningMarkerSuffix}`)
+  assert.equal(result.materialization.listening.transcript.length, 10)
 }
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-docx-producer-'))
