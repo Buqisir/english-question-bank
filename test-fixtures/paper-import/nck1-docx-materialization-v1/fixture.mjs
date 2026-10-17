@@ -378,7 +378,13 @@ function answerBlocks({
       paragraph('56.walked。考查非谓语动词。'),
       paragraph('65.考查名词的数。句意:同64题解析。'),
       paragraph('66.应用文参考例文'),
-      ...(restatedExplanations === 'conflict' ? [paragraph('56.walking。考查非谓语动词。')] : []),
+      ...({
+        conflict: ['56.walking。考查非谓语动词。'],
+        labelledSame: ['56.【答案】walked【解析】考查非谓语动词。', '56.答案：walked。考查非谓语动词。'],
+        labelledConflict: ['56.【答案】walking【解析】考查非谓语动词。'],
+        labelledColonConflict: ['56.答案：walking。考查非谓语动词。'],
+        labelledUnseparable: ['56.【答案】考查非谓语动词。'],
+      }[restatedExplanations] || []).map(paragraph),
     ] : []),
     ...writingSampleBlocks(writingShape),
     ...(listening ? [

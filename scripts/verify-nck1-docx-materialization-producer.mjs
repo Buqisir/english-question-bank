@@ -523,10 +523,20 @@ assert.equal(tableAnswers.materialization.answers.at(-1).authority.selector, '(/
 const restated = produceWith({ restatedExplanations: true })
 assert.equal(restated.disposition, 'ready_for_verification')
 assert.deepEqual(answerValues(restated), baselineAnswers)
-const restatedConflict = produceWith({ restatedExplanations: 'conflict' })
-assert.equal(restatedConflict.disposition, 'needs_agent_review')
-assert(restatedConflict.review.required.some((item) =>
-  item.code === 'NCK1_DOCX_ANSWER_CONFLICT' && item.path === 'answers.56'))
+const labelledSame = produceWith({ restatedExplanations: 'labelledSame' })
+assert.equal(labelledSame.disposition, 'ready_for_verification')
+assert.deepEqual(answerValues(labelledSame), baselineAnswers)
+for (const [restatedExplanations, code] of [
+  ['conflict', 'NCK1_DOCX_ANSWER_CONFLICT'],
+  ['labelledConflict', 'NCK1_DOCX_ANSWER_CONFLICT'],
+  ['labelledColonConflict', 'NCK1_DOCX_ANSWER_CONFLICT'],
+  ['labelledUnseparable', 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS'],
+]) {
+  const result = produceWith({ restatedExplanations })
+  assert.equal(result.disposition, 'needs_agent_review', restatedExplanations)
+  assert(result.review.required.some((item) => item.code === code && item.path === 'answers.56'),
+    restatedExplanations)
+}
 
 // A complete key ends answer parsing at the explanation heading.
 const explained = produceWith({ explanationAfterKey: true })

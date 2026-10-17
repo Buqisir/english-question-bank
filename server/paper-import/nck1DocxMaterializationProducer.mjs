@@ -964,17 +964,19 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       if (!value) {
         // An explanation for an already keyed number is not a second
         // authority when it opens with Chinese prose or repeats the key; an
-        // English lead that differs from the key is a real conflict.
+        // English lead that differs from the key is a real conflict. An
+        // explicit "【答案】"/"答案：" claim always needs a separable value.
         const keyed = answers.get(number)
         if (keyed) {
-          const lead = rawValue.split(/[\p{Script=Han}。，；：【]/u)[0]
+          const label = /^\s*(?:【\s*答案\s*】|答案\s*[:：])\s*/u.exec(rawValue)
+          const lead = rawValue.slice(label ? label[0].length : 0).split(/[\p{Script=Han}。，；：【]/u)[0]
           const restated = textAnswerValue(lead)
           if (restated && restated.toLowerCase() !== keyed.value.toLowerCase()) {
             addIssue(issues, 'NCK1_DOCX_ANSWER_CONFLICT', `answers.${number}`,
               'An explanation restates a different value than the official answer key', at(item))
             continue
           }
-          if (restated || !/[A-Za-z]/u.test(lead)) continue
+          if (restated || (!label && !/[A-Za-z]/u.test(lead))) continue
         }
         addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
           'A text answer cannot be separated safely from adjacent explanation text', at(item))
