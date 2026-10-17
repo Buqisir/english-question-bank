@@ -489,7 +489,7 @@ export function checkPdfs(paperId) {
         const transcript = text.slice(text.search(/Text\s+1\b/iu))
         const suspicious = transcript.split('\n').filter((line, index, lines) => index > 0
           && /^\s*[a-z]/u.test(line) && /[A-Za-z,;]\s*$/u.test(lines[index - 1]))
-        if (suspicious.length) result.warnings.push(`听力原文疑似 OCR 物理折行 ${suspicious.length} 处；已知缺陷，仅警告，不阻塞`)
+        if (suspicious.length) result.warnings.push(`听力原文疑似物理折行 ${suspicious.length} 处（同页折行已在 compile 合并，剩余多为跨页接续或版面自然换行）；仅警告，不阻塞`)
       }
     } catch (error) {
       errors.push(error.message)
@@ -532,7 +532,7 @@ async function pdfQa(ctx, paper) {
     '读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 50 dpi 页面图，逐页初筛。',
     JSON.stringify(images), `同时读确定性检查 ${output} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
     '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字；看不清的硬约束写 blocking，不能猜通过。',
-    '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文物理折行是已知缺陷只写 notes。',
+    '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
     '50 dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。',
     `只写 ${visual}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
   ].join('\n'), [visual])
@@ -1014,6 +1014,8 @@ async function intake(ctx) {
       const matches = entries.filter(([id, entry]) => id === key || `${entry.prov}/${entry.paper}` === key)
       if (matches.length !== 1) fail(`inventory key 不存在或不唯一：${key}`)
       const [inventoryKey, entry] = matches[0]
+      // Real exams found in the mock folders belong to a separate real-exam import (Owner 2026-10-17).
+      if (inventoryKey.includes('真题')) { console.log(`跳过真题：${inventoryKey}`); continue }
       const existing = existsSync(path.join(ctx.dir, 'queue')) ? queue(ctx).find(({ item }) => item.inventoryKey === inventoryKey) : null
       if (existing) { console.log(`已排队：${existing.item.paperId}`); continue }
       const selected = chooseSources(entry, base)

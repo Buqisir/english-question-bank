@@ -368,6 +368,76 @@ function expand(reference, lines, label) {
   return out
 }
 
+const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?:\s|$)/iu
+const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|语言|[一二三四五六]、)/u
+const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
+
+function lineBox(words) {
+  return {
+    left: Math.min(...words.map((word) => word.box.left)),
+    right: Math.max(...words.map((word) => word.box.left + word.box.width)),
+    height: Math.max(...words.map((word) => word.box.height)),
+  }
+}
+
+// The physical first and last printed lines an item covers, by top-to-bottom word position.
+function itemEdges(item, lines, label) {
+  const numbers = new Set([...(item.lines ? expand(item.lines, lines, label) : []),
+    ...(item.words ? expand(item.words, lines, label) : [])])
+  const covered = lines.map((line) => line.words.filter((word) => numbers.has(word.number)))
+    .filter((words) => words.length)
+    .sort((left, right) => Math.min(...left.map((word) => word.box.top)) - Math.min(...right.map((word) => word.box.top)))
+  return covered.length ? { first: covered[0], last: covered.at(-1) } : null
+}
+
+// Answer documents are proofread one printed line per item, but a speaker turn that wraps
+// onto the next printed line is one paragraph; joining keeps the rendered transcript from
+// breaking where the source page happened to wrap. A join needs typographic proof: the next
+// line's first word would not have fit after the previous line within the same column.
+function joinTranscriptTurns(items, lines, state, label) {
+  const rights = lines.filter((line) => line.words.length >= 4).map((line) => lineBox(line.words))
+  const out = []
+  let joins = 0
+  let previousSpeech = false
+  for (const [index, item] of items.entries()) {
+    const text = typeof item.text === 'string' ? item.text.trim() : ''
+    if (TRANSCRIPT_MARKER.test(text)) state.inTranscript = true
+    else if (TRANSCRIPT_END.test(text)) state.inTranscript = false
+    const speech = state.inTranscript && text && text === item.text && !TRANSCRIPT_MARKER.test(text) && !CJK.test(text)
+      && !item.figure && !item.emphasis
+    const previous = out.at(-1)
+    if (speech && previousSpeech && !SPEAKER_LABEL.test(text)) {
+      const before = itemEdges(previous, lines, `${label} item ${index}`)
+      const after = itemEdges(item, lines, `${label} item ${index + 1}`)
+      if (before && after) {
+        const last = lineBox(before.last)
+        const firstWord = [...after.first].sort((left, right) => left.box.left - right.box.left)[0]
+        const column = rights.filter((box) => box.right > last.left && box.left < last.right
+          && box.left >= last.left - last.height * 3).map((box) => box.right).sort((left, right) => left - right)
+        const columnRight = column.length ? column[Math.floor((column.length - 1) * 0.9)] : last.right
+        if (last.right + last.height * 0.3 + firstWord.box.width > columnRight) {
+          const glue = /[A-Za-z][-‐]$/u.test(previous.text) ? '' : ' '
+          out[out.length - 1] = {
+            ...previous,
+            text: `${previous.text}${glue}${text}`,
+            ...(previous.lines || item.lines ? { lines: [previous.lines, item.lines].filter(Boolean).join(',') } : {}),
+            ...(previous.words || item.words ? { words: [previous.words, item.words].filter(Boolean).join(',') } : {}),
+            ...(previous.uncertain || item.uncertain
+              ? { uncertain: [previous.uncertain, item.uncertain].filter(Boolean).join('；') } : {}),
+            ...(previous.reason || item.reason
+              ? { reason: [previous.reason, item.reason].filter(Boolean).join('；') } : {}),
+          }
+          joins += 1
+          continue
+        }
+      }
+    }
+    out.push(item)
+    previousSpeech = speech
+  }
+  return { items: out, joins }
+}
+
 function emphasisRanges(item, label) {
   if (!item.emphasis) return undefined
   const result = item.emphasis.map((entry) => {
@@ -506,9 +576,12 @@ function compile(paperId) {
   const problems = []
   const only = option('--pages')?.split(',').map((value) => value.trim())
   let corrected = 0
+  let transcriptJoins = 0
   for (const document of documents) {
     const pages = []
     let itemNumber = 0
+    const answerBearing = ['official_answers', 'question_and_answers'].includes(document.role)
+    const transcriptState = { inTranscript: false }
     for (const tracePage of trace.pages.filter((page) => page.documentId === document.documentId)) {
       const label = tracePage.key
       if (only && !only.includes(label)) continue
@@ -526,7 +599,13 @@ function compile(paperId) {
       furniture.forEach((number) => claim(number, 'furniture'))
       const orderedItems = []
       const resolvedItems = []
-      for (const [index, item] of (draft.items || []).entries()) {
+      let draftItems = draft.items || []
+      if (answerBearing) {
+        const joined = joinTranscriptTurns(draftItems, lines, transcriptState, label)
+        draftItems = joined.items
+        transcriptJoins += joined.joins
+      }
+      for (const [index, item] of draftItems.entries()) {
         const itemLabel = `${label} item ${index + 1}`
         if (typeof item.text !== 'string' || !item.text.trim()) fail(`${itemLabel}: text is required`)
         if (item.text !== item.text.trim()) fail(`${itemLabel}: text has leading or trailing whitespace`)
@@ -587,6 +666,7 @@ function compile(paperId) {
       items: confirmation.documents.reduce((count, document) =>
         count + document.pages.reduce((sum, page) => sum + page.orderedItems.length, 0), 0),
       textCorrections: corrected,
+      transcriptJoins,
       uncertain: correctionNotes.filter((note) => note.kind === 'uncertain').map((note) => note.itemId),
       figures: figures.map(({ key, pixels }) => ({ page: key, pixels })),
     }, null, 2))
@@ -625,6 +705,7 @@ function compile(paperId) {
       count + document.pages.reduce((sum, page) => sum + page.orderedItems.length, 0), 0),
     notes: correctionNotes.length,
     textCorrections: corrected,
+    transcriptJoins,
     uncertain: correctionNotes.filter((note) => note.kind === 'uncertain').length,
     next: [
       `node scripts/import-pipeline/review.mjs push-ocr ${paperId}`,
