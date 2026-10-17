@@ -19,6 +19,7 @@ import {
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { tmpdir } from 'node:os'
+import tls from 'node:tls'
 
 import {
   inspectPublicationReceipt,
@@ -96,6 +97,10 @@ import {
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
 
+// OpenSSL 3.5+ adds a post-quantum hybrid key share by default; the larger ClientHello spans
+// several TCP segments and some proxy paths reset most such handshakes to the Review host.
+if (tls.DEFAULT_ECDH_CURVE === 'auto') tls.DEFAULT_ECDH_CURVE = 'X25519:P-256:P-384'
+
 function fail(message) {
   throw new Error(message)
 }
@@ -118,15 +123,60 @@ function origin() {
 
 function token() {
   const value = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '')
-  if (!value) fail('QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN is required')
+  if (!value) fail('QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN or QUESTION_BANK_IMPORT_OPS_AGENT_USERNAME is required')
   return value
 }
 
 function shippingToken() {
   const value = String(process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '')
   if (!value) fail('QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN is required for promotion')
-  if (value === token()) fail('Import Agent and shipping tokens must be different')
+  if (value === String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '')) {
+    fail('Import Agent and shipping tokens must be different')
+  }
   return value
+}
+
+const AGENT_KEYCHAIN_SERVICE = 'eqbank-import-agent'
+let agentSessionCookie = null
+
+function agentUsername() {
+  return String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_USERNAME || '').trim()
+}
+
+function agentPassword(username) {
+  const supplied = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_PASSWORD || '')
+  if (supplied) return supplied
+  try {
+    return execFileSync('security', ['find-generic-password', '-a', username, '-s', AGENT_KEYCHAIN_SERVICE, '-w'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).replace(/\n$/u, '')
+  } catch {
+    return fail(`import_agent ${username} needs QUESTION_BANK_IMPORT_OPS_AGENT_PASSWORD or Keychain item ${AGENT_KEYCHAIN_SERVICE}`)
+  }
+}
+
+// The server accepts the shared Agent bearer token or an import_agent web session for the
+// same Agent routes. A session never carries shipping authority; promotion still needs its token.
+async function agentCredentialHeaders(targetOrigin) {
+  const username = agentUsername()
+  if (process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || !username) return { authorization: `Bearer ${token()}` }
+  if (!agentSessionCookie) {
+    const response = await fetch(`${targetOrigin}/api/auth/login`, {
+      method: 'POST',
+      redirect: 'error',
+      headers: { 'content-type': 'application/json', origin: targetOrigin },
+      body: JSON.stringify({ username, password: agentPassword(username) }),
+    })
+    const body = await response.json().catch(() => null)
+    if (!response.ok) fail(`import_agent login failed: ${response.status} ${body?.error || ''}`.trim())
+    if (body?.user?.accountKind !== 'import_agent') fail(`${username} is not an import_agent account`)
+    const session = response.headers.getSetCookie()
+      .map((cookie) => /^eqb_session=([^;]+)/u.exec(cookie)?.[1]).find(Boolean)
+    if (!session) fail('import_agent login returned no session cookie')
+    agentSessionCookie = `eqb_session=${session}`
+  }
+  return { cookie: agentSessionCookie, origin: targetOrigin }
 }
 
 function publicationCapabilityPath(paperId) {
@@ -158,12 +208,14 @@ async function api(
   { allowNotFound = false, binary = false, credential = 'agent' } = {},
 ) {
   const targetOrigin = origin()
-  const credentialToken = credential === 'shipping' ? shippingToken() : token()
+  const credentialHeaders = credential === 'shipping'
+    ? { authorization: `Bearer ${shippingToken()}` }
+    : await agentCredentialHeaders(targetOrigin)
   const response = await fetch(`${targetOrigin}${pathname}`, {
     ...init,
     redirect: 'error',
     headers: {
-      authorization: `Bearer ${credentialToken}`,
+      ...credentialHeaders,
       ...(init.headers || {}),
     },
   })
@@ -856,11 +908,11 @@ async function status(paperId) {
 async function preflight(paperId) {
   paperDirectory(paperId)
   const configuredOrigin = String(process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || '').trim()
-  const configuredToken = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '').trim()
+  const configuredToken = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '').trim() || agentUsername()
   if (Boolean(configuredOrigin) !== Boolean(configuredToken)) {
     fail(
-      'Preflight requires both QUESTION_BANK_IMPORT_OPS_ORIGIN and '
-        + 'QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN, or neither while materializing locally',
+      'Preflight requires both QUESTION_BANK_IMPORT_OPS_ORIGIN and an Agent credential '
+        + '(QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN or _USERNAME), or neither while materializing locally',
     )
   }
   const reviewChecked = Boolean(configuredOrigin && configuredToken)

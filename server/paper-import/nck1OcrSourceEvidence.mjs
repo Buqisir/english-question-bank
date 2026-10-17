@@ -1,5 +1,13 @@
-import { execFileSync } from 'node:child_process'
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { execFileSync, spawnSync } from 'node:child_process'
+import {
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  renameSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
@@ -121,17 +129,94 @@ export function nck1OcrEvidenceDigest(evidence) {
   return digestJson(evidenceWithoutDigest(evidence))
 }
 
-function rasterPage(document, page) {
-  if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
-    const sourcePage = nck1ImageBundlePage(document, page)
-    return {
-      recipe: {
-        kind: 'image_page_v1',
-        region: structuredClone(FULL_PAGE),
-      },
-      ...nck1ImagePageRgba(sourcePage),
-    }
+// Replaying a PDF page is a pure function of the PDF bytes, page, density and
+// the local pdftoppm/ImageMagick builds, yet every Candidate derivation
+// re-validates every page through five subprocesses plus an RGBA hash. Results
+// are memoized per process, and across processes only when
+// EQB_OCR_RASTER_CACHE_DIR opts in. Tool versions are part of the key so a
+// renderer upgrade replays instead of trusting an older digest.
+const pdfRasterMemo = new Map()
+const pdfBytesDigests = new WeakMap()
+let pdfRasterToolchain = null
+
+function toolVersion(command, args) {
+  const result = spawnSync(command, args, { encoding: 'utf8' })
+  return `${result.stdout || ''}${result.stderr || ''}`.trim()
+}
+
+function pdfRasterKey(bytes, page) {
+  pdfRasterToolchain ??= [toolVersion('pdftoppm', ['-v']), toolVersion('magick', ['-version'])]
+  if (!pdfBytesDigests.has(bytes)) pdfBytesDigests.set(bytes, sha256(bytes))
+  return digestJson({
+    pdf: pdfBytesDigests.get(bytes),
+    page,
+    density: RASTER_DENSITY,
+    toolchain: pdfRasterToolchain,
+  })
+}
+
+function validPdfRaster(raster) {
+  return exactKeys(raster, ['recipe', 'sha256', 'pixelWidth', 'pixelHeight'])
+    && exactKeys(raster.recipe, ['kind', 'density', 'region'])
+    && raster.recipe.kind === 'pdf_page_region_v1'
+    && raster.recipe.density === RASTER_DENSITY
+    && stableStringify(raster.recipe.region) === stableStringify(FULL_PAGE)
+    && /^sha256:[a-f0-9]{64}$/.test(raster.sha256)
+    && Number.isInteger(raster.pixelWidth) && raster.pixelWidth > 0
+    && Number.isInteger(raster.pixelHeight) && raster.pixelHeight > 0
+}
+
+function readPdfRasterCache(key) {
+  const directory = process.env.EQB_OCR_RASTER_CACHE_DIR
+  if (!directory) return null
+  try {
+    const entry = JSON.parse(readFileSync(path.join(directory, `${key.slice(7)}.json`), 'utf8'))
+    return entry?.key === key && validPdfRaster(entry.raster) ? entry.raster : null
+  } catch {
+    return null
   }
+}
+
+function writePdfRasterCache(key, raster) {
+  const directory = process.env.EQB_OCR_RASTER_CACHE_DIR
+  if (!directory) return
+  try {
+    mkdirSync(directory, { recursive: true })
+    const target = path.join(directory, `${key.slice(7)}.json`)
+    const staging = `${target}.${process.pid}.tmp`
+    writeFileSync(staging, `${JSON.stringify({ key, raster })}\n`)
+    renameSync(staging, target)
+  } catch {
+    // The cache is an optimization only; replay already succeeded.
+  }
+}
+
+function rasterPage(document, page) {
+  if (document.mediaType !== NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
+    const key = pdfRasterKey(document.bytes, page)
+    let raster = pdfRasterMemo.get(key) ?? readPdfRasterCache(key)
+    if (!raster) {
+      raster = replayPdfPage(document, page)
+      writePdfRasterCache(key, raster)
+    }
+    pdfRasterMemo.set(key, raster)
+    return structuredClone(raster)
+  }
+  return replayImagePage(document, page)
+}
+
+function replayImagePage(document, page) {
+  const sourcePage = nck1ImageBundlePage(document, page)
+  return {
+    recipe: {
+      kind: 'image_page_v1',
+      region: structuredClone(FULL_PAGE),
+    },
+    ...nck1ImagePageRgba(sourcePage),
+  }
+}
+
+function replayPdfPage(document, page) {
   const raster = rasterPdfRegion({
     pdfBytes: document.bytes,
     page,

@@ -1,0 +1,104 @@
+# OCR 逐页校对规则（public-paper-v1 扫描源）
+
+本规则供 `ocr-proofread.mjs` 生成的逐页草稿使用。每个校对任务只负责分配给它的页：
+打开页面图片逐行对照工作单，只编辑对应的草稿 JSON，不改其他文件，不运行导题命令。
+
+## 草稿格式
+
+```json
+{
+  "documentId": "question-source-1",
+  "page": 4,
+  "image": "/abs/page.png",
+  "items": [
+    { "lines": "L02-L06", "text": "确认后的原文" },
+    { "lines": "L20", "text": "26. What does the underlined phrase “through the roof” in paragraph 4 mean?",
+      "emphasis": [{ "text": "through the roof", "marks": ["bold", "underline"] }] }
+  ],
+  "furniture": ["L41", "w133-w139"]
+}
+```
+
+- `items` 按原页阅读顺序排列，一个 item 就是一个源段落、标题、题干或选项组。
+- `lines` 写一个或多个识别行：`"L03"`、`"L03-L06"`、`"L03,L05"`。一行需要拆给两个 item 时改用
+  `words`（如 `"w120-w135"`，词号见工作单“逐词编号”）。
+- `furniture` 放页脚页码、水印（行内“微信公众号IAI English”、页面大字“IAI English”）和扫描噪点。
+  列入 furniture 的词会自动从 item 的行里剔除；草稿已预填页脚和水印候选，核对后保留或修改。
+- 每个识别词必须且只能归属一次（某个 item 或 furniture）。`compile` 会列出遗漏或重复的词号。
+
+## 文字（`text`）
+
+忠实转写原页。不改源文本身的拼写或语法错误（后续“源文本预处理”阶段统一处理），
+不解题、不补答案、不润色、不按题意猜字。
+
+题卷（`question-source-*`）：
+
+- 正文每个段落一个 item：跨行合并，英文行间一个空格，中文直接相连；行末连字符只有确属换行断词才去掉。
+- 部分标题、节标题、答题说明各一个 item（跨行合并）。篇目标记 `A`、`B`、`C`、`D` 单独成 item；
+  文章标题、小标题单独成 item。
+- 每道题题干一个 item，以 `24. ` 开头（题号、半角句点、一个空格）。
+- 阅读、完形和听力题：同一题的全部选项合成一个 item，写成 `A. … B. … C. … D. …`，选项间一个空格，
+  即使原页分行或分栏。七选五的 A–G 选项每项单独一个 item。
+- 完形、七选五、语法填空的空位写成 `__41__`；语法填空提示词照录，如 `__56__ (list)`。
+- 写作题：任务说明、要点、“注意：”及各条、作文标题、给定开头语（`Paragraph 1: …`）各自成 item，保持原页顺序。
+
+答案（`official-answers-*`）：
+
+- 按印刷行逐行成 item，不合并段落。答案行照录，如 `1-5 ABCBC 6-10 ACCAB 11-15 BAACB 16-20 BACBA`。
+- 听力原文的 `Text 1`、`M: …`、`W: …` 逐行保留；范文、评分说明也逐行保留。
+
+标点与字符：
+
+- 英文内容用半角 `? . , ! : ;`；引号和撇号按原页用弯引号 `’ “ ”`；破折号按原页（`—` 或 `–`）。
+- 中文内容用全角 `，。：；（）、“”`，数字与汉字之间不加空格（`2026年4月`），题头 `绝密★启用前` 照录。
+- 选项字母后是半角句点加一个空格：`A. Neighbors.`。
+
+## 强调
+
+原页正文或题干里真实的局部粗体或下划线，在 item 加
+`"emphasis": [{"text": "through the roof", "marks": ["bold", "underline"]}]`。同一 item 出现多次时加
+`"occurrence": 2`。不标题号、选项字母或整段标题。
+
+## 疑点
+
+看不清或拿不准的字词：保留最可能的源读法，在 item 加 `"uncertain": "简短中文原因"`，继续完成，不要停下来问。
+改动识别文字时可以写 `"reason"`（中文）；不写时工具自动生成“「原识别」改为「校正」”的说明。
+
+## 顺带记录：原文错误、答案、小标题、水印
+
+逐字读原页时，把下面几类信息写进 `imports/ocr-proofread/<paperId>/source-flags/<第一个页键>.json`。
+只写这一个文件；`drafts/` 仍然与原页一致，不在草稿里改印刷原文的错误。
+
+```json
+{
+  "pages": ["question-source-1-p02", "question-source-1-p03"],
+  "flags": [
+    { "page": "question-source-1-p02", "quote": "Back at office", "after": "Back at the office",
+      "category": "grammar", "reason": "office 指具体办公室，at 后应为 the office。" },
+    { "page": "question-source-1-p06", "quote": "on my notebook", "decision": "uncertain",
+      "note": "原页为“on my notebook”，一般用 in，但属搭配选择，保留原文。" }
+  ],
+  "answers": { "1": "A", "56": "to protect" },
+  "subtitles": [{ "page": "question-source-1-p03", "text": "● What should I know?" }],
+  "watermarks": ["IAI English"]
+}
+```
+
+- `flags` 只收印刷原文里明确的错误。`spelling`：`quote` 和 `after` 各是一个完整英文单词。
+  `grammar`：两者只含英文单词和空格，取能改对的最小连续词组；需要插入词时带上相邻单词
+  （`as` → `as the`）。`quote` 要在该页文字里原样出现。`quote` 很短、在同段里不止一处（如人名
+  `Mario` → `and Mario`）时，再加 `"context": "mind, Mario"`：包含 `quote` 的一小段原文，可带标点，
+  只用来定位。同一篇在别处重复出现（如续写材料）时只记一次。
+- 只记文字 item 里的错误；整图保留的图片、流程图里的文字不进入文字审校，不记。
+- 不润色，不改用词习惯、英美拼写、人名术语、大小写、标点或答案。破折号、弯引号空格和词间
+  连续空格由脚本按规则处理，不用记。
+- 拿不准的写 `"decision": "uncertain"` 和中文 `note`，不写 `after`。
+- `reason`、`note` 用中文，保留所讨论的英文原文。
+- `answers`：负责的页里有答案卷答案时，按原页逐题抄录（客观题写字母，填空题照抄单词），不解题。
+- `subtitles`：篇章内独立成行的小标题（如加粗的圆点标题），整行原样抄录；篇章标题和题型说明不算。
+- `watermarks`：在草稿里删掉的水印或机构标识原文；没有就写 `[]`。
+- 没有内容的键写空数组或空对象，文件一定要写。
+
+## 完成后回报
+
+处理了哪些页、各页 item 数、疑点清单，以及图片、表格等无法用文字 item 表达的版式。
