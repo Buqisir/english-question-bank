@@ -73,7 +73,7 @@ import { publishUniversalNck1Import } from '../../server/paper-import/publisher.
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
-import { appendTiming } from './lib-timing.mjs'
+import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { prepareListeningWaveform } from '../../server/paper-import/listeningWaveform.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
@@ -236,7 +236,9 @@ async function api(
     && body?.code === 'IMPORT_REVIEW_NOT_FOUND'
   ) return null
   if (!response.ok) {
-    fail(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
+    const error = new Error(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
+    error.status = response.status
+    throw error
   }
   return body
 }
@@ -265,53 +267,10 @@ function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
 }
 
 async function uploadReviewBundle(paperDir, manifest) {
-  const timing = { paperId: manifest.paperId, startedAt: new Date().toISOString(),
-    manifestFiles: manifest.files.length, uploadedFiles: 0, uploadedBytes: 0,
-    putSeconds: 0, finalizeSeconds: 0, putMode: 'serial', completed: false }
-  try {
-    const created = await api('/api/import-agent-reviews/revisions', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(manifest),
-    })
-    for (const relativePath of created.missingFiles || []) {
-      const file = manifest.files.find((candidate) => candidate.path === relativePath)
-      if (!file) fail(`Server requested an unknown file: ${relativePath}`)
-      const started = performance.now()
-      try {
-        await api(
-          `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}`
-            + `/files?path=${encodeURIComponent(relativePath)}`,
-          {
-            method: 'PUT',
-            headers: {
-              'content-length': String(file.byteLength),
-              'content-type': file.mediaType,
-            },
-            body: readFileSync(resolveReviewFile(paperDir, relativePath)),
-          },
-        )
-        timing.uploadedFiles++
-        timing.uploadedBytes += file.byteLength
-      } finally {
-        timing.putSeconds += (performance.now() - started) / 1000
-      }
-    }
-    const finalizeStarted = performance.now()
-    try {
-      const result = await api(
-        `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}/finalize`,
-        { method: 'POST' },
-      )
-      timing.completed = true
-      return result
-    } finally {
-      timing.finalizeSeconds = (performance.now() - finalizeStarted) / 1000
-    }
-  } finally {
-    appendTiming(path.join(root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl'),
-      { ...timing, finishedAt: new Date().toISOString() })
-  }
+  return uploadBundle({
+    paperDir, manifest, api, resolveReviewFile,
+    timelinePath: path.join(root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl'),
+  })
 }
 
 function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId(), approvedBaseRevisionId) {
