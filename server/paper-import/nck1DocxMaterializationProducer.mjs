@@ -46,6 +46,24 @@ function trimEdgeSpaces(value) {
   return String(value || '').replace(/^\p{Zs}+|\p{Zs}+$/gu, '')
 }
 
+// Only continuous listening speech has this page-boundary rule. DOCX paragraphs,
+// headings, questions and tables keep their existing separators.
+export function joinListeningTranscriptPages(items) {
+  let text = ''
+  let previous = null
+  for (const item of items) {
+    const lastLine = text.trimEnd().split('\n').at(-1) || ''
+    const firstLine = item.text.trimStart().split('\n')[0] || ''
+    const adjacentPages = previous?.page != null && item.page === previous.page + 1
+    const sentenceEnded = /[.!?。？！:：][”’"'）)\]】}」』》〉]*$/u.test(lastLine)
+    const continues = adjacentPages && lastLine && !sentenceEnded && /^[a-z]/u.test(firstLine)
+    text = !text ? item.text : continues
+      ? `${text.trimEnd()} ${item.text.trimStart()}` : `${text}\n${item.text}`
+    previous = item
+  }
+  return text
+}
+
 function sourceLocator(documentId, sourceIndex) {
   if (sourceIndex && typeof sourceIndex === 'object') {
     return structuredClone(sourceIndex)
@@ -1502,14 +1520,17 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
             'Speech resumes after an apparent broadcast; the boundary is not proven',
             sourceRef(answerDocumentId, answerBody[index].sourceIndex))
         }
-        if (inspected.text !== null) bodyTexts.push(inspected.text)
+        if (inspected.text !== null) bodyTexts.push({
+          text: inspected.text,
+          page: sourceLocator(answerDocumentId, answerBody[index].sourceIndex).page ?? null,
+        })
       }
       const questionNumbers = marker.number <= 5
         ? [marker.number]
         : longRanges[marker.number - 6]?.questionNumbers || []
       const markerRecord = listeningItemRecord(marker.item, marker.index, answerDocumentId,
         'segment_boundary', 'exact_ordered_text_marker', 'text_marker')
-      const text = bodyTexts.join('\n')
+      const text = joinListeningTranscriptPages(bodyTexts)
       if (!normalized(text)) {
         addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
           `Text ${marker.number} has no nonempty retained transcript body`,
