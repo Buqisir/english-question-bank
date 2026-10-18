@@ -14,6 +14,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
+import { runFinalizeWorker } from '../server/import-review/runFinalizeWorker.mjs'
 import {
   createImportReviewStore,
   ocrReviewBundleDigest,
@@ -297,7 +298,12 @@ try {
   const created = store.createRevision(manifest)
   assert.equal(created.revision.reviewKind, 'ocr')
   uploadRevision(store, created, stagingRoot, manifest.files)
-  const finalized = store.finalizeRevision(created.revision.id)
+  const workerResult = await runFinalizeWorker(stagingRoot, created.revision)
+  assert.deepEqual(workerResult.projection, buildNck1OcrReviewProjection(stagingRoot),
+    'OCR worker projection preserves all fields and source image bytes')
+  assert.deepEqual(workerResult.expectedFiles, ocrReviewBundleFilePaths(stagingRoot)
+    .map(({ path, mediaType, role }) => `${path}\0${mediaType}\0${role}`).sort())
+  const finalized = await store.finalizeUploadedRevision(created.revision.id)
   assert.equal(finalized.state, 'awaiting_review')
   assert.equal(store.listPapers()[0].reviewKind, 'ocr')
   const detail = store.paperDetail(paperId)

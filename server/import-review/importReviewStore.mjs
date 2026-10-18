@@ -20,11 +20,11 @@ import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mj
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
+import { finalizeInventory } from './finalizeComputation.mjs'
+import { restoreFinalizeError, runFinalizeWorker } from './runFinalizeWorker.mjs'
 import {
   buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
-  ocrReviewBundleFilePaths,
-  reviewBundleFilePaths,
   resolveReviewFile,
   validateNck1OcrReviewConfirmation,
 } from './revisionProjection.mjs'
@@ -1185,7 +1185,25 @@ export function createImportReviewStore({
       timer.finish(error)
       throw error
     }
-    return finalizeRevisionWithLease(revisionId, timer, release)
+    try {
+      const status = uploadStatus(revisionId)
+      let prepared = null
+      if (status.revision.state === 'uploading' && status.missingFiles.length === 0
+        && projectRevision === buildImportReviewProjection) {
+        timer.phase('fileHash')
+        assertStoredRevisionFiles(status.revision)
+        timer.phase('projection')
+        prepared = await runFinalizeWorker(revisionDirectory(revisionId), status.revision, {
+          onPhase: name => timer.phase(name),
+        })
+      }
+      const revision = finalizeRevisionMeasured(revisionId, timer, prepared, status)
+      timer.finish()
+      return revision
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    } finally { release() }
   }
 
   function finalizeRevision(revisionId, { metrics = {} } = {}) {
@@ -1205,8 +1223,7 @@ export function createImportReviewStore({
     } finally { release?.() }
   }
 
-  function finalizeRevisionMeasured(revisionId, timer) {
-    const status = uploadStatus(revisionId)
+  function finalizeRevisionMeasured(revisionId, timer, prepared = null, status = uploadStatus(revisionId)) {
     if (status.revision.state !== 'uploading') {
       // Explicit finalize/replay may prepare a pre-upgrade revision. An ordinary
       // product GET must never cold-run source validation to fill this cache.
@@ -1218,10 +1235,12 @@ export function createImportReviewStore({
       throw storeError('IMPORT_REVIEW_UPLOAD_INCOMPLETE', 'Revision upload is incomplete')
     }
     const directory = revisionDirectory(revisionId)
-    timer.phase('fileHash')
-    assertStoredRevisionFiles(status.revision)
-    timer.phase('projection')
-    const projection = projectRevision(directory, {
+    if (!prepared) {
+      timer.phase('fileHash')
+      assertStoredRevisionFiles(status.revision)
+      timer.phase('projection')
+    }
+    const projection = prepared?.projection || projectRevision(directory, {
       reviewKind: status.revision.reviewKind,
       requireAnalyses: status.revision.reviewKind === 'candidate',
       expectedCandidateDigest: status.revision.candidateDigest,
@@ -1259,11 +1278,8 @@ export function createImportReviewStore({
     }
     timer.phase('inventory')
     if (projectRevision === buildImportReviewProjection) {
-      const expectedFiles = (status.revision.reviewKind === 'ocr'
-        ? ocrReviewBundleFilePaths(directory)
-        : reviewBundleFilePaths(directory))
-        .map(({ path: filePath, mediaType, role }) => `${filePath}\0${mediaType}\0${role}`)
-        .sort()
+      if (prepared?.inventoryError) throw restoreFinalizeError(prepared.inventoryError)
+      const expectedFiles = prepared?.expectedFiles || finalizeInventory(directory, status.revision)
       const actualFiles = status.revision.manifest.files
         .map(({ path: filePath, mediaType, role }) => `${filePath}\0${mediaType}\0${role}`)
         .sort()
