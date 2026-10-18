@@ -8,7 +8,7 @@
 //   compile <paperId>         build and stage the evidence (with any declared figure regions),
 //                             then write the evidence-bound confirmation and correctionNotes
 //                             accepted by `review.mjs proofread-ocr`. `--pages a,b` only checks
-//                             word closure for those pages and writes nothing.
+//                             word closure and missing-figure hints for those pages and writes nothing.
 //   presentation <paperId>    after materialize, upgrade the Materialization to v4 by binding the
 //                             confirmed section-direction items as sourcePresentation.
 //   report-entries <paperId>  after pull-ocr-confirmation + materialize, locate the receipt's
@@ -18,7 +18,7 @@
 // The tool never edits OCR observations or writes Owner receipts. Page drafts are the Agent's
 // page-by-page source reading; every gate stays in the existing CLI and server.
 import { execFile, execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { promisify } from 'node:util'
@@ -33,6 +33,7 @@ import {
   resolveConfirmedNck1OcrEvidence,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { planHeadingRepairs } from './ocr-heading-repair.mjs'
+import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -575,6 +576,20 @@ function compile(paperId) {
   const correctionNotes = []
   const problems = []
   const only = option('--pages')?.split(',').map((value) => value.trim())
+  const flagsDir = path.join(work, 'source-flags')
+  const noFigures = existsSync(flagsDir) ? readdirSync(flagsDir).filter((name) => name.endsWith('.json'))
+    .flatMap((name) => readJson(path.join(flagsDir, name), 'Source flags').noFigures || []) : []
+  const figureHints = missingFigureHints({
+    only,
+    noFigures,
+    pages: trace.pages.map((page) => {
+      const file = path.join(work, 'drafts', `${page.key}.json`)
+      return { ...page, role: documents.find((document) => document.documentId === page.documentId)?.role,
+        draft: existsSync(file) ? readJson(file, `Page draft ${page.key}`) : null }
+    }),
+  })
+  const missingFigures = figureHints.filter((hint) => hint.missing)
+  if (missingFigures.length) fail(missingFigures.map(missingFigureMessage).join('\n'))
   let corrected = 0
   let transcriptJoins = 0
   for (const document of documents) {
