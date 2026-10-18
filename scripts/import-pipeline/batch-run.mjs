@@ -371,7 +371,7 @@ async function repair(ctx, paper, result, attempt, tier = 'sol', previous = null
       `每处改动追加到 ${editsFile}：{"paperId":"${paper.paperId}","edits":[{"target":"文件路径或 JSON Pointer","change":"改动","reason":"原页依据"}]}，保留旧条目。`,
       '不能改答案迎合题意。发现源卷印刷错误（如答案字母印错）返回 needs_owner；代码缺陷返回 needs_code_fix。',
       `最后写 ${decision}：{"decision":"repaired|needs_code_fix|needs_owner","reason":"中文结论","issuesResolved":false,"redoFrom":null}。`,
-      '只有逐条解决 Materialization issues 后才能 issuesResolved:true。无需重建时 redoFrom:null；',
+      '只有逐条解决 Materialization issues 后才能 issuesResolved:true。解决一条就从 Materialization 的 issues 数组删去该条，并在 edits 记一条（target 指向 #/issues，写明删了哪些 code）；后续生成候选要求该数组为空。仍有未解决的条目就保留它并写 issuesResolved:false。无需重建时 redoFrom:null；',
       '允许建议重建的最早阶段为 presentation，不可重放 OCR 上传或 materialize。',
       '最终回复也写 BATCH_REPAIR=repaired / needs_code_fix / needs_owner。',
     ].join('\n'), [decision], { retries: 0 })
@@ -909,7 +909,9 @@ async function processPaper(ctx, paper) {
         const previous = entry.previous ? path.join(workDir(paper.paperId), `fast/batch-repair-${entry.previous}.json`) : null
         const outcome = await repair(ctx, paper, result, entry.attempt, entry.tier || 'sol', previous)
         entry.done = true
-        if (outcome.issuesResolved === true) paper.issuesResolved = true
+        // Candidate derivation rejects any remaining Materialization issue, so a claim alone is not enough.
+        const remaining = json(path.join(papersRoot, paper.paperId, 'materialization/nck1-source-materialization-v1.json')).issues || []
+        if (outcome.issuesResolved === true && !remaining.length) paper.issuesResolved = true
         ctx.save()
         result = await perform([...flags(), ...(outcome.redoFrom ? ['--redo-from', outcome.redoFrom] : [])])
       }
