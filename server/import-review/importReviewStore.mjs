@@ -18,6 +18,8 @@ import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mj
 import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
+import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
+import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
 import {
   buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
@@ -855,7 +857,38 @@ export function createImportReviewStore({
     }
   }
 
-  function createRevision(rawManifest) {
+  function createRevision(rawManifest, { actor = 'internal' } = {}) {
+    const metrics = {}
+    const timer = reviewUploadMetrics('register', { actor }, ['registration', 'reuse'], metrics)
+    try {
+      const result = createRevisionMeasured(rawManifest)
+      timer.finish()
+      return { ...result, metrics }
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
+  }
+
+  async function createRevisionUpload(rawManifest, { blobStore = null, actor = 'internal' } = {}) {
+    const metrics = {}
+    const identity = { actor }
+    const timer = reviewUploadMetrics('register', identity, ['registration', 'reuse'], metrics)
+    try {
+      const result = createRevisionMeasured(rawManifest)
+      identity.revisionId = result.revision.id
+      timer.phase('reuse')
+      await reuseRevisionFiles(result.revision.id, blobStore, actor)
+      const missingFiles = uploadStatus(result.revision.id).missingFiles
+      timer.finish()
+      return { ...result, missingFiles, metrics }
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
+  }
+
+  function createRevisionMeasured(rawManifest) {
     const manifest = validateAnyReviewBundleManifest(rawManifest)
     const kind = reviewKind(manifest)
     const identities = kind === 'ocr'
@@ -964,6 +997,47 @@ export function createImportReviewStore({
       revision,
       files,
       missingFiles: files.filter((file) => !file.uploadedAt).map((file) => file.path),
+    }
+  }
+
+  async function beginFileUpload(revisionId, relativePath) {
+    fileForUpload(revisionId, relativePath)
+    const release = await acquireRevisionUpload(revisionDirectory(revisionId), relativePath)
+    try {
+      return { ...fileForUpload(revisionId, relativePath), release }
+    } catch (error) {
+      release()
+      throw error
+    }
+  }
+
+  async function reuseRevisionFiles(revisionId, blobStore, actor) {
+    if (!blobStore?.reuseLocalFile) return
+    const status = uploadStatus(revisionId)
+    if (status.revision.state !== 'uploading') return
+    for (const file of status.files) {
+      if (file.uploadedAt || !/^(audio\/|image\/|application\/pdf$)/.test(file.mediaType)) continue
+      const source = withDb(false, db => db.prepare(`
+        SELECT f.revision_id, f.path FROM import_review_files f
+        JOIN import_review_revisions r ON r.id = f.revision_id
+        WHERE r.paper_id = ? AND r.revision_number < ? AND f.uploaded_at IS NOT NULL
+          AND f.sha256 = ? AND f.byte_length = ?
+        ORDER BY r.revision_number DESC, f.path LIMIT 1
+      `).get(status.revision.paperId, status.revision.revisionNumber, file.sha256, file.byteLength))
+      if (!source) continue
+      const upload = await beginFileUpload(revisionId, file.path)
+      try {
+        if (upload.file.uploadedAt) continue
+        if (!await blobStore.reuseLocalFile(upload.destination, file)) continue
+        // beginFileUpload's lease prevents finalize while hashing/installing.
+        // Recheck state immediately before marking; bytes prove no approval.
+        completeFileUpload(revisionId, file.path, file)
+        console.info(JSON.stringify({
+          event: 'import-review-blob-reused', revisionId, path: file.path,
+          sourceRevisionId: source.revision_id, sourcePath: source.path,
+          sha256: file.sha256, byteLength: file.byteLength, verifiedAt: nowIso(), actor,
+        }))
+      } finally { upload.release() }
     }
   }
 
@@ -1096,11 +1170,47 @@ export function createImportReviewStore({
     }
   }
 
-  function finalizeRevision(revisionId) {
+  function finalizationTimer(revisionId, metrics) {
+    return reviewUploadMetrics('finalize', { revisionId }, [
+      'status', 'fileHash', 'projection', 'identityAndReport', 'inventory', 'transactionAndPreview',
+    ], metrics)
+  }
+
+  async function finalizeUploadedRevision(revisionId, { metrics = {} } = {}) {
+    const timer = finalizationTimer(revisionId, metrics)
+    let release
+    try {
+      release = await acquireRevisionUpload(revisionDirectory(revisionId))
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
+    return finalizeRevisionWithLease(revisionId, timer, release)
+  }
+
+  function finalizeRevision(revisionId, { metrics = {} } = {}) {
+    return finalizeRevisionWithLease(revisionId, finalizationTimer(revisionId, metrics))
+  }
+
+  function finalizeRevisionWithLease(revisionId, timer, release = null) {
+    try {
+      if (!getRevision(revisionId)) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Revision not found', 404)
+      release ||= tryRevisionFinalization(revisionDirectory(revisionId))
+      const revision = finalizeRevisionMeasured(revisionId, timer)
+      timer.finish()
+      return revision
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    } finally { release?.() }
+  }
+
+  function finalizeRevisionMeasured(revisionId, timer) {
     const status = uploadStatus(revisionId)
     if (status.revision.state !== 'uploading') {
       // Explicit finalize/replay may prepare a pre-upgrade revision. An ordinary
       // product GET must never cold-run source validation to fill this cache.
+      timer.phase('transactionAndPreview')
       if (status.revision.reviewKind === 'candidate') prepareProductPreview(revisionId)
       return status.revision
     }
@@ -1108,12 +1218,15 @@ export function createImportReviewStore({
       throw storeError('IMPORT_REVIEW_UPLOAD_INCOMPLETE', 'Revision upload is incomplete')
     }
     const directory = revisionDirectory(revisionId)
+    timer.phase('fileHash')
     assertStoredRevisionFiles(status.revision)
+    timer.phase('projection')
     const projection = projectRevision(directory, {
       reviewKind: status.revision.reviewKind,
       requireAnalyses: status.revision.reviewKind === 'candidate',
       expectedCandidateDigest: status.revision.candidateDigest,
     })
+    timer.phase('identityAndReport')
     assertProjectionIdentity(projection, status.revision)
     if (status.revision.reviewKind === 'candidate'
       && projection.importProfile === 'public-paper-v1' && projection.manifest?.documents) {
@@ -1144,6 +1257,7 @@ export function createImportReviewStore({
       validateAgentOcrCorrectionReceipt(report, receipt,
         JSON.parse(new TextDecoder().decode(projection.sourceInput.materializationBytes)))
     }
+    timer.phase('inventory')
     if (projectRevision === buildImportReviewProjection) {
       const expectedFiles = (status.revision.reviewKind === 'ocr'
         ? ocrReviewBundleFilePaths(directory)
@@ -1160,6 +1274,7 @@ export function createImportReviewStore({
         )
       }
     }
+    timer.phase('transactionAndPreview')
     const timestamp = nowIso()
     const rendererId = currentRendererBuildId()
     withDb(true, (db) => {
@@ -2941,6 +3056,9 @@ export function createImportReviewStore({
   }
 
   return {
+    createRevisionUpload,
+    finalizeUploadedRevision,
+    beginFileUpload,
     acquireShippingGuard,
     addIssueMessage,
     approveRevision,
