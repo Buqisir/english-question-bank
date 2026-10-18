@@ -10,6 +10,7 @@ import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
 import { buildCompanionAnalysisHtml } from '../exports/companionAnalysisRenderer.mjs'
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
+import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { sendListeningAudioFile } from '../paper-import/paperAssetStatic.mjs'
@@ -39,6 +40,7 @@ function sendError(response, context, error) {
   context.sendJson(response, Number(error?.status || 500), {
     error: error instanceof Error ? error.message : String(error),
     code: error?.code || 'IMPORT_REVIEW_FAILED',
+    ...(error?.metrics ? { metrics: error.metrics } : {}),
   })
 }
 
@@ -496,11 +498,22 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     }
     const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
     const blobStore = largeAsset ? getBlobStore?.() : null
-    const received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
+    const timer = reviewUploadMetrics('put', { revisionId, path: relativePath }, ['receive', 'adoption'])
+    let received
+    try {
+      received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
       validateTemporaryFile: blobStore?.adoptLocalFile
-        ? (temporary, expected) => blobStore.adoptLocalFile(temporary, expected)
+        ? (temporary, expected) => {
+            timer.phase('adoption')
+            return blobStore.adoptLocalFile(temporary, expected)
+          }
         : null,
-    })
+      })
+      timer.finish()
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
     context.sendJson(
       response,
       200,
@@ -518,7 +531,9 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       context.sendJson(response, 401, { error: 'agent_auth_required' })
       return
     }
-    context.sendJson(response, 200, { revision: store.finalizeRevision(match[1]) })
+    const metrics = {}
+    const revision = store.finalizeRevision(match[1], { metrics })
+    context.sendJson(response, 200, { revision, metrics })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/proofread-ocr$/, route(async ({

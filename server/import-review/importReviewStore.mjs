@@ -18,6 +18,7 @@ import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mj
 import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
+import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import {
   buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
@@ -1096,11 +1097,26 @@ export function createImportReviewStore({
     }
   }
 
-  function finalizeRevision(revisionId) {
+  function finalizeRevision(revisionId, { metrics = {} } = {}) {
+    const timer = reviewUploadMetrics('finalize', { revisionId }, [
+      'status', 'fileHash', 'projection', 'identityAndReport', 'inventory', 'transactionAndPreview',
+    ], metrics)
+    try {
+      const revision = finalizeRevisionMeasured(revisionId, timer)
+      timer.finish()
+      return revision
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
+  }
+
+  function finalizeRevisionMeasured(revisionId, timer) {
     const status = uploadStatus(revisionId)
     if (status.revision.state !== 'uploading') {
       // Explicit finalize/replay may prepare a pre-upgrade revision. An ordinary
       // product GET must never cold-run source validation to fill this cache.
+      timer.phase('transactionAndPreview')
       if (status.revision.reviewKind === 'candidate') prepareProductPreview(revisionId)
       return status.revision
     }
@@ -1108,12 +1124,15 @@ export function createImportReviewStore({
       throw storeError('IMPORT_REVIEW_UPLOAD_INCOMPLETE', 'Revision upload is incomplete')
     }
     const directory = revisionDirectory(revisionId)
+    timer.phase('fileHash')
     assertStoredRevisionFiles(status.revision)
+    timer.phase('projection')
     const projection = projectRevision(directory, {
       reviewKind: status.revision.reviewKind,
       requireAnalyses: status.revision.reviewKind === 'candidate',
       expectedCandidateDigest: status.revision.candidateDigest,
     })
+    timer.phase('identityAndReport')
     assertProjectionIdentity(projection, status.revision)
     if (status.revision.reviewKind === 'candidate'
       && projection.importProfile === 'public-paper-v1' && projection.manifest?.documents) {
@@ -1144,6 +1163,7 @@ export function createImportReviewStore({
       validateAgentOcrCorrectionReceipt(report, receipt,
         JSON.parse(new TextDecoder().decode(projection.sourceInput.materializationBytes)))
     }
+    timer.phase('inventory')
     if (projectRevision === buildImportReviewProjection) {
       const expectedFiles = (status.revision.reviewKind === 'ocr'
         ? ocrReviewBundleFilePaths(directory)
@@ -1160,6 +1180,7 @@ export function createImportReviewStore({
         )
       }
     }
+    timer.phase('transactionAndPreview')
     const timestamp = nowIso()
     const rendererId = currentRendererBuildId()
     withDb(true, (db) => {
