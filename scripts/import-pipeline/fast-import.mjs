@@ -27,6 +27,7 @@ import {
 } from '../../server/paper-import/paginationPlan.mjs'
 import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
+import { boundedAsrWindow } from './lib-listening-window.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -718,7 +719,7 @@ async function installListening(ctx) {
     const bytes = readFileSync(target)
     return {
       path: relative, sha256: sha256(bytes), byteLength: bytes.length, kind: 'asr_window',
-      window: { startSeconds: window.startSeconds, endSeconds: window.endSeconds },
+      window: boundedAsrWindow(window, request.report.subject.durationSeconds),
       settings: { engine: `faster-whisper/${input.engine.version}`,
         model: `Systran/faster-whisper-small.en@${path.basename(input.engine.modelSnapshot)}`,
         language: 'en', vad: match[2] === 'vad', computeType: input.engine.computeType },
