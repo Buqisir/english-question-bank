@@ -143,6 +143,8 @@ changed paths, review evidence, checks with PASS/SKIP/FAIL and limitations, and
 protection readback (or its explicit limitation). Do not imply an unmerged PR
 has a main SHA, or that successful CI deployed the website.
 
-The Deployment Orb uses the exact-main GitHub Actions reader and rechecks main
-before dispatch. Never substitute an Amp Check, commit status, human report or
+Website deployment follows [AGENTS.md — Owner Mac deployment](../AGENTS.md#owner-mac-deployment)
+and [ADR-0027](../docs/adr/0027-owner-local-website-deployment.md). The local CLI
+uses the exact-main GitHub Actions reader and rechecks main before dispatch.
+Never substitute an Amp Check, commit status, human report or
 older run for the required native workflow evidence.

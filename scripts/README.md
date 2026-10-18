@@ -140,7 +140,9 @@ Deployment validates the exact-main natural
 workflow and both jobs, failing closed for missing, pending, failed, wrong-SHA,
 wrong-workflow or ambiguous evidence. See ADR-0026 and
 `docs/agents/github-actions-cutover.md`; this README does not claim the live
-branch-protection or Deployment Orb cutover is complete. Retained Amp-specific
+branch-protection cutover is complete. Current deployment follows
+[AGENTS.md — Owner Mac deployment](../AGENTS.md#owner-mac-deployment) and
+[ADR-0027](../docs/adr/0027-owner-local-website-deployment.md). Retained Amp-specific
 verifiers test historical libraries and do not require a live Orb controller.
 
 ## Stable CI entrypoint
@@ -152,7 +154,7 @@ verifiers test historical libraries and do not require a live Orb controller.
 | `verify-ship-check-watcher.mjs` | Rejects duplicate or false-positive registration, stale-head or wrong-target notification, missing failure summaries, duplicate claims, and cancelled-startup overwrites without calling GitHub or messaging a real thread | yes |
 | `verify-amp-orb-ci.mjs` | Rejects non-natural or HMAC-invalid deliveries, delivery/merge drift, candidate-secret exposure, duplicate execution, receipt/Check create-PATCH ambiguity, failed lane aggregation, or diagnostic authority without registering a webhook or calling GitHub | yes |
 | `verify-amp-orb-ci-coordination.mjs` | Proves opt-in serialized PR eligibility, exact Owner-scoped selection, durable selection wake/resume, fail-closed active state, unchanged main processing, writerless forced diagnostics, and backward-compatible installation against fake private state only | yes |
-| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: clean exact-main resolution, pinned App Check selection and fail-closed revalidation, code-only versus reviewed-persistence classification, atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
+| `verify-amp-orb-deploy.mjs` | Proves the deployment CLI/controller contract without production access: clean exact-main resolution, native Actions evidence and fail-closed revalidation, code-only versus reviewed-persistence classification, atomic release switch, shared-data isolation, and healthy rollback; retained App Check/bootstrap cases cover historical contracts | yes |
 | `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
 | `verify-verification-scheduler.mjs` | Proves exact disjoint lane coverage for every pack, invalid-lane rejection, bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | no (manual) |

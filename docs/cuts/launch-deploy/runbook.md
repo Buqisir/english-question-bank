@@ -3,8 +3,9 @@
 > Current deployment control plane: follow
 > [controlled SSH maintenance](../controlled-ssh-maintenance/plan.md).
 > The first-provision/TAT/bootstrap/barrier procedures below are historical,
-> not permission to execute them. Ordinary website deployment uses the dedicated
-> Deployment Orb's `amp-orb-deploy.mjs deploy --owner-said-deploy-latest` command.
+> not permission to execute them. Ordinary website deployment follows
+> [AGENTS.md — Owner Mac deployment](../../../AGENTS.md#owner-mac-deployment)
+> and [ADR-0027](../../adr/0027-owner-local-website-deployment.md).
 > Follow `AGENTS.md`'s Goal authorization: included reviewed maintenance, deploy,
 > reconciliation, health and agreed recovery share one authorization. Historical
 > per-step approvals below are not current rules. A code-only Goal excludes

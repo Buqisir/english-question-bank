@@ -26,11 +26,16 @@ QUESTION_BANK_DEPLOY_SSH_PRIVATE_KEY=$(
 export QUESTION_BANK_DEPLOY_SSH_HOST QUESTION_BANK_DEPLOY_SSH_KNOWN_HOSTS QUESTION_BANK_DEPLOY_SSH_PRIVATE_KEY
 
 umask 077
-shim_dir=$(mktemp -d "${TMPDIR:-/tmp}/eqbank-local-deploy.XXXXXXXX") ||
+invocation_tmp=$(mktemp -d /tmp/eqbank-local-deploy.XXXXXXXX) ||
   fail "无法创建部署临时目录"
-trap 'rm -f "$shim_dir/ssh" "$shim_dir/gh"; rmdir "$shim_dir"' 0
+# Own the whole credential lifetime, even when Node cannot run its finally.
+trap 'rm -rf "$invocation_tmp"' 0
 trap 'exit 130' INT
 trap 'exit 143' TERM
+TMPDIR=$invocation_tmp
+export TMPDIR
+shim_dir=$invocation_tmp/shims
+mkdir "$shim_dir"
 
 interface=${EQB_DEPLOY_DIRECT_INTERFACE:-en0}
 if [ "$interface" != none ]; then
@@ -81,5 +86,5 @@ chmod 700 "$shim_dir/gh"
 PATH="$shim_dir:$PATH"
 export PATH
 
-# Keep this shell alive to clean the shims after Node exits, including failure.
+# Keep this shell alive to clean credentials and shims after Node exits.
 ( exec node scripts/amp-orb-deploy.mjs "$@" )
