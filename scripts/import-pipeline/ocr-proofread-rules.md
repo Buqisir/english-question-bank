@@ -64,6 +64,22 @@
 `"emphasis": [{"text": "through the roof", "marks": ["bold", "underline"]}]`。同一 item 出现多次时加
 `"occurrence": 2`。不标题号、选项字母或整段标题。
 
+## 图片与图表
+
+Tesseract 底稿不带图形标记。校对员必须对照整页图自行补齐 `figure` 和 `figureRegion`
+（页面图片像素坐标 `{ "x": 100, "y": 200, "width": 600, "height": 300 }`），
+包括应用文题的海报、阅读里的流程图和图表。把图内对应的连续 items 标为同一 `figure` 名称，
+在首个图形 item 写 `figureRegion`；图前保留一个文字 item 作为锚点，图中文字仍须归属 OCR 词。
+
+`compile --pages` 和整卷 `compile` 会检查正文指图线索；本页或紧邻下一页都没有
+`figure` / `figureRegion` 时拒绝通过。听力原文不检查。这个文字护栏不能代替看图，
+没有指图用语的图形也必须补齐。
+
+若核对原页确定没有图，在当前分片的 `source-flags/<第一个页键>.json` 增加本地专用声明：
+`"noFigures": [{ "page": "question-source-1-p03", "kind": "no_figure", "reason": "核对原页无图，说明具体原因" }]`。
+必须写对应页键和非空理由；不要放进文字纠错用的 `flags`。该声明只用于本地校对，
+不进入服务端确认输入。
+
 ## 疑点
 
 看不清或拿不准的字词：保留最可能的源读法，在 item 加 `"uncertain": "简短中文原因"`，继续完成，不要停下来问。
