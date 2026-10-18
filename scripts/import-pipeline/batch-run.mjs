@@ -12,6 +12,7 @@ import { pathToFileURL } from 'node:url'
 import { checkSearchMetadataFiles, ensureSearchMetadata } from './search-metadata-check.mjs'
 import { importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 import { answerOnlyCoveredNumbers } from './answer-only-coverage.mjs'
+import { appendTiming } from './lib-timing.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const batchRoot = path.join(root, 'imports/batch')
@@ -250,7 +251,16 @@ async function agent(ctx, paper, label, role, prompt, outputs, { retries = 1, re
       const args = ['exec', '-m', model, '-r', effort, '--auto', 'medium', '--cwd', root,
         '--only-tools', readOnly ? 'Read,Grep,Glob,LS' : 'Read,Grep,Glob,LS,ApplyPatch',
         '-f', promptFile]
-      const result = await execute(DROID, args, log, { timeout: AGENT_TIMEOUT })
+      const timeline = path.join(paperIdValid(paper.paperId) ? fastDir(paper.paperId) : path.join(ctx.dir, 'logs'), 'agent-timeline.jsonl')
+      const timing = { label, model, effort, attempt: attempt + 1, startedAt: now(), finishedAt: null, seconds: null, exit: null, log }
+      appendTiming(timeline, { ...timing, event: 'started' })
+      let result
+      try {
+        result = await execute(DROID, args, log, { timeout: AGENT_TIMEOUT })
+      } finally {
+        appendTiming(timeline, { ...timing, event: 'finished', finishedAt: now(),
+          seconds: (Date.now() - Date.parse(timing.startedAt)) / 1000, exit: result?.exit ?? null })
+      }
       paper.agentRuns.push({ label, model, seconds: result.seconds, exit: result.exit, log, attempt: attempt + 1 })
       paper.lastLog = log
       ctx.save()
@@ -295,35 +305,47 @@ function stopReason(log) {
 }
 
 async function production(ctx, paper, label, fn) {
+  const requested = Date.now()
   return ctx.serialProduction(() => {
     checkPaused(ctx)
     return lock(path.join(batchRoot, 'production.lock'), async (update) => {
-      checkPaused(ctx)
-      if (reviewOrigin() !== ctx.state.reviewOrigin) throw new Paused('origin_changed', 'Review 绑定已改变，停止本批次')
-      const clock = path.join(batchRoot, 'production-clock.json')
-      const previous = existsSync(clock) ? json(clock).finishedAt : 0
-      const delay = Math.max(0, PRODUCTION_GAP - (Date.now() - previous))
-      if (delay) await sleep(delay)
-      checkPaused(ctx)
-      update({ phase: 'active', batch: ctx.opts.batch, paperId: paper.paperId, stage: label })
+      const acquired = Date.now()
+      const timing = { label, paperId: paper.paperId, requestedAt: new Date(requested).toISOString(),
+        acquiredAt: new Date(acquired).toISOString(), lockWaitSeconds: (acquired - requested) / 1000,
+        gapWaitSeconds: 0 }
+      const timeline = path.join(fastDir(paper.paperId), 'production-timeline.jsonl')
       try {
-        const result = await fn()
-        writeJson(clock, { finishedAt: Date.now() })
-        update({ phase: 'complete' })
-        return result
-      } catch (error) {
-        if (paper.pendingProduction) {
-          update({ phase: 'active', error: error.message })
-          error = new Paused('production_unknown', `生产结果未确认，保留锁：${error.message}`, error.log || paper.lastLog)
-        } else {
+        checkPaused(ctx)
+        if (reviewOrigin() !== ctx.state.reviewOrigin) throw new Paused('origin_changed', 'Review 绑定已改变，停止本批次')
+        const clock = path.join(batchRoot, 'production-clock.json')
+        const previous = existsSync(clock) ? json(clock).finishedAt : 0
+        const delay = Math.max(0, PRODUCTION_GAP - (Date.now() - previous))
+        const gapStarted = Date.now()
+        if (delay) await sleep(delay)
+        timing.gapWaitSeconds = (Date.now() - gapStarted) / 1000
+        checkPaused(ctx)
+        update({ phase: 'active', batch: ctx.opts.batch, paperId: paper.paperId, stage: label })
+        try {
+          const result = await fn()
           writeJson(clock, { finishedAt: Date.now() })
-          update({ phase: 'complete', error: error.message })
+          update({ phase: 'complete' })
+          return result
+        } catch (error) {
+          if (paper.pendingProduction) {
+            update({ phase: 'active', error: error.message })
+            error = new Paused('production_unknown', `生产结果未确认，保留锁：${error.message}`, error.log || paper.lastLog)
+          } else {
+            writeJson(clock, { finishedAt: Date.now() })
+            update({ phase: 'complete', error: error.message })
+          }
+          if (error instanceof Paused) {
+            ctx.state.paused = { kind: error.kind, reason: error.message, log: error.log || paper.lastLog, at: now() }
+            ctx.save()
+          }
+          throw error
         }
-        if (error instanceof Paused) {
-          ctx.state.paused = { kind: error.kind, reason: error.message, log: error.log || paper.lastLog, at: now() }
-          ctx.save()
-        }
-        throw error
+      } finally {
+        appendTiming(timeline, { ...timing, finishedAt: now() })
       }
     }, { production: true })
   })
