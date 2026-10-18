@@ -747,13 +747,60 @@ function sealRelease(config, dependencies, release, sha) {
   chmodSync(markerPath, 0o444)
 }
 
+// Called only by deploy after its boundary checks, under the launcher's exclusive
+// deploy.lock. Never infer rollback history from directory names or mtimes.
+function pruneReleases(config, dependencies, currentSha, targetSha) {
+  const result = { pruned: [] }
+  try {
+    const receipts = path.join(config.root, 'deployments', 'receipts')
+    if (!pathEntryExists(receipts)) {
+      result.pruneSkipped = 'PREVIOUS_RELEASE_UNKNOWN'
+      return result
+    }
+    const successful = readdirSync(receipts).filter(name => name.endsWith('.json')).flatMap(name => {
+      const file = path.join(receipts, name)
+      const metadata = lstatSync(file)
+      if (!metadata.isFile() || metadata.uid !== config.controllerUid || (metadata.mode & 0o022)) return []
+      const receipt = JSON.parse(readFileSync(file, 'utf8'))
+      // No-op receipts do not represent an activation and point back to self.
+      if (![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION]
+        .includes(receipt.schemaVersion) || receipt.conclusion !== 'success'
+        || receipt.targetSha !== currentSha || receipt.noOp === true) return []
+      if (!Number.isFinite(Date.parse(receipt.finishedAt))) throw new Error('Invalid release history timestamp')
+      return [receipt]
+    }).sort((a, b) => Date.parse(b.finishedAt) - Date.parse(a.finishedAt))
+    const latest = successful[0]
+    if (!latest || !SHA.test(latest.previousSha || '') || latest.previousSha === currentSha
+      || successful.some(receipt => Date.parse(receipt.finishedAt) === Date.parse(latest.finishedAt)
+        && receipt.previousSha !== latest.previousSha)) {
+      result.pruneSkipped = 'PREVIOUS_RELEASE_UNKNOWN'
+      return result
+    }
+    const keep = new Set([currentSha, latest.previousSha, targetSha])
+    const releases = path.join(config.root, 'releases')
+    const filesystem = dependencies.releaseFilesystem || { lstatSync, rmSync }
+    for (const name of readdirSync(releases).sort()) {
+      if (keep.has(name) || !(SHA.test(name) || name.startsWith('.staging-')
+        || name.startsWith('.candidate-health-'))) continue
+      const directory = path.join(releases, name)
+      const metadata = filesystem.lstatSync(directory)
+      if (!metadata.isDirectory() || metadata.isSymbolicLink() || metadata.uid !== config.controllerUid) continue
+      filesystem.rmSync(directory, { recursive: true, force: false })
+      result.pruned.push(name)
+    }
+  } catch {
+    result.pruneFailed = true
+  }
+  return result
+}
+
 function prepareRelease(config, dependencies, sha) {
   const finalDirectory = releaseDirectory(config, sha)
   if (existsSync(finalDirectory)) {
     readReleaseMarker(config, sha)
     return { release: finalDirectory, staged: false }
   }
-  const filesystem = statfsSync(config.root)
+  const filesystem = (dependencies.releaseFilesystem?.statfsSync || statfsSync)(config.root)
   const availableBytes = filesystem.bavail * filesystem.bsize
   if (availableBytes < config.minimumFreeBytes) {
     throw new Error('Production filesystem has insufficient space to stage a release')
@@ -1181,6 +1228,14 @@ async function deploy(config, dependencies, targetSha, reviewedCodeOnlyDigest = 
     const fetchedSha = fetchMain(config, dependencies)
     if (fetchedSha !== targetSha) throw new Error('Production source main does not match target SHA')
     assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha, reviewedCodeOnlyDigest)
+    const pruning = pruneReleases(config, dependencies, previousSha, targetSha)
+    // Receipt v2 readers reject unknown fields, so retain diagnostics in the
+    // controller journal without changing the wire receipt or rollback path.
+    try {
+      const message = `EQB_RELEASE_PRUNE ${JSON.stringify({ targetSha, ...pruning })}\n`
+      if (dependencies.log) dependencies.log(message)
+      else process.stderr.write(message)
+    } catch { /* Logging failure must not affect activation or rollback. */ }
     staged = prepareRelease(config, dependencies, targetSha).staged
     if (previousSha !== targetSha) checkCandidate(config, dependencies, targetSha)
     const recheckedSha = fetchMain(config, dependencies)

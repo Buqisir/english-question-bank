@@ -101,6 +101,7 @@ import {
 } from './lib/tencentTat.mjs'
 import {
   EQB_DEPLOY_CONTROLLER_VERSION,
+  EQB_DEPLOY_RECEIPT_SCHEMA_VERSION,
   HOST_CONFIGURATION_PATHS,
   PERSISTENCE_AUTHORITY_PATHS,
   STABLE_LAUNCHER_PATHS,
@@ -3351,6 +3352,7 @@ function controllerFixture({
     systemCalls: [],
     restarts: [],
     advanced: false,
+    pruningLogs: [],
     hostConfigurationChange,
     persistenceAuthorityChange,
     stableLauncherChange,
@@ -3385,6 +3387,7 @@ function controllerFixture({
   }
   const currentSha = () => path.basename(readlinkSync(path.join(root, 'current')))
   const dependencies = {
+    log(message) { state.pruningLogs.push(message) },
     runSource(command, args) {
       state.sourceCalls.push([command, ...args])
       const joined = args.join(' ')
@@ -3640,6 +3643,194 @@ for (const command of [
     })(),
     `fixed controller rejects command injection shape ${JSON.stringify(command)}`,
   )
+}
+
+section('Release pruning preserves current, rollback and candidate before staging')
+
+const prunePreviousSha = 'a'.repeat(40)
+const pruneObsoleteSha = 'b'.repeat(40)
+function writePruneHistory(fixture, overrides = {}, name = 'prior-success.json') {
+  const directory = path.join(fixture.root, 'deployments', 'receipts')
+  mkdirSync(directory, { recursive: true })
+  writeFileSync(path.join(directory, name), JSON.stringify({
+    schemaVersion: EQB_DEPLOY_RECEIPT_SCHEMA_VERSION,
+    conclusion: 'success',
+    targetSha: oldSha,
+    previousSha: prunePreviousSha,
+    noOp: false,
+    finishedAt: '2026-10-17T12:00:00.000Z',
+    ...overrides,
+  }), { mode: 0o600 })
+}
+
+async function runPruneFixture(fixture, sha = newSha) {
+  return runController({
+    originalCommand: `deploy ${sha}`,
+    config: fixture.config,
+    dependencies: fixture.dependencies,
+  })
+}
+
+function pruningResult(fixture) {
+  return JSON.parse(fixture.state.pruningLogs.at(-1).slice('EQB_RELEASE_PRUNE '.length))
+}
+
+{
+  const fixture = controllerFixture()
+  try {
+    for (const sha of [newSha, prunePreviousSha, pruneObsoleteSha, 'c'.repeat(40)]) {
+      writeReleaseMarker(fixture.root, sha)
+    }
+    writePruneHistory(fixture)
+    // A newer failure, host-only receipt, or no-op cannot replace activation history.
+    writePruneHistory(fixture, { conclusion: 'failure', previousSha: pruneObsoleteSha,
+      finishedAt: '2026-10-18T12:00:00.000Z' }, 'failed.json')
+    writePruneHistory(fixture, { schemaVersion: 'eqb-host-configuration-receipt-v1',
+      previousSha: pruneObsoleteSha, finishedAt: '2026-10-18T12:01:00.000Z' }, 'host.json')
+    writePruneHistory(fixture, { noOp: true, previousSha: oldSha,
+      finishedAt: '2026-10-18T12:02:00.000Z' }, 'noop.json')
+    writePruneHistory(fixture, { previousSha: pruneObsoleteSha,
+      finishedAt: '2026-10-16T12:00:00.000Z' }, 'older-success.json')
+    const result = await runPruneFixture(fixture)
+    assert(result.exitCode === 0
+      && readdirSync(path.join(fixture.root, 'releases')).sort().join(',')
+        === [oldSha, newSha, prunePreviousSha].sort().join(','),
+    'successful deployment keeps exactly current, latest activated previous, and existing target')
+    assert(pruningResult(fixture).pruned.sort().join(',')
+      === [pruneObsoleteSha, 'c'.repeat(40)].sort().join(','),
+    'pruning logs exactly the deleted releases without extending strict receipt v2')
+    assert(!Object.hasOwn(result.output, 'pruned')
+      && parseDeploymentControllerOutput(formatControllerOutput({
+        ...result.output,
+        receiptPath: `/opt/eqb/deployments/receipts/fixture-${newSha}.json`,
+      }), newSha).conclusion === 'success',
+    'unchanged deployment receipt passes the existing strict CLI parser')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+for (const history of ['missing', 'invalid-previous', 'ambiguous']) {
+  const fixture = controllerFixture()
+  try {
+    writeReleaseMarker(fixture.root, pruneObsoleteSha)
+    mkdirSync(path.join(fixture.root, 'releases', '.staging-stale'))
+    if (history !== 'missing') writePruneHistory(fixture,
+      history === 'invalid-previous' ? { previousSha: null } : {})
+    if (history === 'ambiguous') writePruneHistory(fixture,
+      { previousSha: pruneObsoleteSha }, 'conflicting-success.json')
+    const result = await runPruneFixture(fixture)
+    assert(result.exitCode === 0 && pruningResult(fixture).pruneSkipped === 'PREVIOUS_RELEASE_UNKNOWN'
+      && existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha))
+      && existsSync(path.join(fixture.root, 'releases', '.staging-stale')),
+    `${history} rollback history skips all pruning while allowing deployment`)
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+{
+  const fixture = controllerFixture()
+  try {
+    writePruneHistory(fixture)
+    writeReleaseMarker(fixture.root, prunePreviousSha)
+    const releases = path.join(fixture.root, 'releases')
+    const unowned = 'c'.repeat(40)
+    const linked = 'd'.repeat(40)
+    const file = 'e'.repeat(40)
+    mkdirSync(path.join(releases, unowned))
+    mkdirSync(path.join(releases, 'not-a-release'))
+    symlinkSync(path.join(releases, prunePreviousSha), path.join(releases, linked))
+    symlinkSync(path.join(releases, prunePreviousSha), path.join(releases, '.staging-linked'))
+    writeFileSync(path.join(releases, file), 'not a directory')
+    for (const name of ['.staging-abandoned', '.candidate-health-abandoned']) {
+      mkdirSync(path.join(releases, name))
+      writeFileSync(path.join(releases, name, 'leftover'), 'stale')
+    }
+    fixture.dependencies.releaseFilesystem = {
+      ...fs,
+      lstatSync(directory) {
+        const metadata = fs.lstatSync(directory)
+        return path.basename(directory) === unowned
+          ? { isDirectory: () => true, isSymbolicLink: () => false, uid: metadata.uid + 1 }
+          : metadata
+      },
+    }
+    const result = await runPruneFixture(fixture)
+    assert(result.exitCode === 0
+      && [unowned, linked, file, 'not-a-release', '.staging-linked']
+        .every(name => fs.lstatSync(path.join(releases, name)))
+      && pruningResult(fixture).pruned.join(',') === '.candidate-health-abandoned,.staging-abandoned',
+    'pruning removes stale real staging/health directories and preserves symlinks, files, non-SHAs and other owners')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+for (const failHealth of [false, true]) {
+  const fixture = controllerFixture({ failCandidateHealth: failHealth })
+  try {
+    writePruneHistory(fixture)
+    writeReleaseMarker(fixture.root, prunePreviousSha)
+    writeReleaseMarker(fixture.root, pruneObsoleteSha)
+    fixture.dependencies.releaseFilesystem = {
+      ...fs,
+      rmSync() { throw new Error('fixture prune permission failure') },
+    }
+    const result = await runPruneFixture(fixture)
+    assert(pruningResult(fixture).pruneFailed === true
+      && existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha))
+      && (failHealth
+        ? result.exitCode !== 0 && result.output.rolledBack && result.output.rollbackHealthy
+          && fixture.currentSha() === oldSha
+        : result.exitCode === 0 && fixture.currentSha() === newSha),
+    failHealth ? 'pruning failure preserves ordinary healthy rollback'
+      : 'pruning exception is logged and cannot fail a healthy deployment')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+{
+  const fixture = controllerFixture()
+  try {
+    writePruneHistory(fixture)
+    writeReleaseMarker(fixture.root, prunePreviousSha)
+    writeReleaseMarker(fixture.root, pruneObsoleteSha)
+    fixture.config.minimumFreeBytes = 5 * 1024 ** 3
+    fixture.dependencies.releaseFilesystem = {
+      ...fs,
+      statfsSync() {
+        const obsoleteExists = existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha))
+        return { bavail: (obsoleteExists ? 4 : 6) * 1024 ** 3, bsize: 1 }
+      },
+    }
+    assert(fixture.dependencies.releaseFilesystem.statfsSync().bavail < fixture.config.minimumFreeBytes,
+      'disk fixture initially cannot stage a release')
+    const result = await runPruneFixture(fixture)
+    assert(result.exitCode === 0 && result.output.staged
+      && !existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha)),
+    'pruning frees staging headroom before the original minimum-space check')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+{
+  const fixture = controllerFixture()
+  try {
+    fixture.state.mainSha = oldSha
+    writePruneHistory(fixture)
+    writeReleaseMarker(fixture.root, prunePreviousSha)
+    writeReleaseMarker(fixture.root, pruneObsoleteSha)
+    const result = await runPruneFixture(fixture, oldSha)
+    assert(result.exitCode === 0 && result.output.noOp && fixture.state.restarts.length === 0
+      && !existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha))
+      && existsSync(path.join(fixture.root, 'releases', prunePreviousSha)),
+    'no-op deployment prunes with the same protection and does not restart services')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+{
+  const fixture = controllerFixture({ hostConfigurationChange: true })
+  try {
+    writePruneHistory(fixture)
+    writeReleaseMarker(fixture.root, pruneObsoleteSha)
+    const result = await runPruneFixture(fixture)
+    assert(result.exitCode !== 0 && fixture.state.pruningLogs.length === 0
+      && existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha)),
+    'host boundary rejection occurs before any pruning')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
 }
 
 const fixedSuccess = controllerFixture({ wrongDistModes: true })
