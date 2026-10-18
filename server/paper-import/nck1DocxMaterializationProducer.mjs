@@ -814,7 +814,8 @@ function textAnswerValue(rawValue) {
   if (
     !shape
     || value.length > 80
-    || shape.split(' ').length > 4
+    // Separators are not words; spacing around "/" must not change admission.
+    || shape.replace(/\s*\/\s*/gu, '/').split(' ').length > 4
     || /[.!?。！？,，;；:：（）()“”"\p{Script=Han}\d]/u.test(shape)
   ) return null
   return value
@@ -885,7 +886,7 @@ function writingAnswerSectionHeading(text) {
   return NUMBERED_WRITING_ANSWER_SECTION.test(text) || BARE_WRITING_ANSWER_SECTION.test(text)
 }
 
-function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
+export function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
   const answers = new Map()
   const locate = (item) => sourceLocator(answerDocumentId, item.kind === 'table'
     ? item.source || { kind: 'docx_part', documentId: answerDocumentId, part: 'word/document.xml', selector: item.selector }
@@ -1080,15 +1081,23 @@ function writingSampleText(answerBody, from, to) {
   return lines.join('\n')
 }
 
-function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
+export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
   // OCR engines may return one source region containing several visually
   // distinct paragraphs. Split only for this answer-sample boundary parser;
   // every derived paragraph retains the exact source locator. DOCX/PDF
   // paragraph streams are unchanged by this normalization.
-  const sampleBody = answerBody.flatMap((item) =>
+  let sampleBody = answerBody.flatMap((item) =>
     item.kind === 'paragraph' && String(item.text).includes('\n')
       ? String(item.text).split('\n').map((text) => ({ ...item, text }))
       : [item])
+  // Answer books can repeat the complete writing section in their explanations.
+  // Only an explicit explanation divider after the key's writing heading closes
+  // that key; detailed-only sources with explanations before writing stay intact.
+  const firstWriting = sampleBody.findIndex((item) =>
+    item.kind === 'paragraph' && writingAnswerSectionHeading(normalized(item.text)))
+  const explanation = firstWriting < 0 ? -1 : sampleBody.findIndex((item, index) =>
+    index > firstWriting && isAnswerExplanationHeading(item))
+  if (explanation >= 0) sampleBody = sampleBody.slice(0, explanation)
   // "第二节 读后续写" followed by "读后续写" names one sample.
   // Keep the last adjacent heading; any intervening prose keeps the ambiguity.
   const adjacentContinuationHeadings = (positions) => positions.filter((position, index) =>
