@@ -35,6 +35,7 @@ import {
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { planHeadingRepairs } from './ocr-heading-repair.mjs'
 import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs'
+import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -744,6 +745,7 @@ function compile(paperId) {
     }, null, 2))
     return
   }
+  writeFigureCrosscheck({ work, pages: trace.pages, figures })
   if (figures.length) confirmation.schemaVersion = NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
   const evidence = buildEvidence(paperId, documents, trace, figures)
   confirmation.evidenceDigest = evidence.evidenceDigest

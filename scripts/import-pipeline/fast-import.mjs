@@ -180,6 +180,7 @@ function background(ctx, name, command, args) {
   child.unref()
   ctx.state.background[name] = { pid: child.pid, log, startedAt: new Date().toISOString(), command, args }
   save(ctx)
+  return child
 }
 
 // Three editions paginate concurrently, each loading a ~30 MB print document; under that load
@@ -247,6 +248,20 @@ function startAsr(ctx, { tag = null, extent = ['--whole-file'] } = {}) {
   return names
 }
 
+function startFigureDetection(ctx) {
+  if (env.EQB_OVIS_FIGURE === 'off' || alive(ctx.state.background['ovis-figure']?.pid)) return
+  const python = env.EQB_OVIS_FIGURE_PYTHON || path.join(os.homedir(), '.local/share/eqbank-ocr/bin/python')
+  try {
+    background(ctx, 'ovis-figure', python, [
+      path.join(scripts, 'asr-slot.py'), python, path.join(scripts, 'ocr-figure-detect.py'),
+      '--pages', path.join(ctx.work, 'trace.json'),
+      '--output', path.join(ctx.fast, 'figure-candidates.json'),
+    ]).on('error', (error) => say(`Ovis shadow 后台启动失败：${error.message}`))
+  } catch (error) {
+    say(`Ovis shadow 后台启动失败：${error.message}`)
+  }
+}
+
 // Re-transcribes a sub-range with shifted window boundaries, for groups whose first reading
 // straddles a 5-second window overlap and drifts in both full-file runs.
 async function asrExtra(ctx, args) {
@@ -309,7 +324,8 @@ async function prep(ctx, args) {
     return { initialized: true }
   })
   await step(ctx, 'audio-ocr-review', async () => {
-    const jobs = [run(ctx, 'ocr-evidence', cli('ocr-proofread.mjs', 'evidence', ctx.paperId))]
+    const jobs = [run(ctx, 'ocr-evidence', cli('ocr-proofread.mjs', 'evidence', ctx.paperId))
+      .then(() => startFigureDetection(ctx))]
     if (target.local) jobs.push(restartLocalReview(ctx))
     if (audio) {
       jobs.push(run(ctx, 'stage-audio', cli('universal-nck1.mjs', 'stage-listening-audio', ctx.paperId, '--audio', path.resolve(audio)))
@@ -318,6 +334,8 @@ async function prep(ctx, args) {
     await Promise.all(jobs)
     return { listening: Boolean(audio) }
   })
+  // Also resume detection when prep reuses an already completed evidence step.
+  startFigureDetection(ctx)
   await step(ctx, 'worksheets', () => run(ctx, 'worksheets', cli('ocr-proofread.mjs', 'worksheets', ctx.paperId)))
   const plan = await step(ctx, 'round1-plan', async () => {
     const workersPlan = proofreadPlan(ctx, workers)
