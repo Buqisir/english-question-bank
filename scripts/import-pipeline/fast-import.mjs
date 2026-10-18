@@ -26,6 +26,7 @@ import {
   PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan,
 } from '../../server/paper-import/paginationPlan.mjs'
 import { ECONOMY_NINE_PAGE_OWNER_DATE, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
+import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -481,7 +482,10 @@ async function afterProofread(ctx, args) {
     await run(ctx, 'materialize', cli('universal-nck1.mjs', 'materialize', ctx.paperId))
     return { issues: (readJson(materializationPath(ctx)).issues || []).length }
   })
-  const issues = readJson(materializationPath(ctx)).issues || []
+  const materialization = readJson(materializationPath(ctx))
+  const trailingHeadings = trailingHeadingHints(materialization)
+  if (trailingHeadings.length) throw new Stop(trailingHeadingMessage(trailingHeadings))
+  const issues = materialization.issues || []
   if (issues.length && !args.includes('--issues-resolved')) {
     throw new Stop(`Materialization 有 ${issues.length} 条 issues，需要主 Agent 对照原页处理并记入 materialization-edits.json，然后加 --issues-resolved 重跑：\n${
       issues.map((item) => JSON.stringify(item)).join('\n')}`)

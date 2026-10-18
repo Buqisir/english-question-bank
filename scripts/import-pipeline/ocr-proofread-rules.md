@@ -80,6 +80,7 @@ Tesseract 底稿不带图形标记。校对员必须对照整页图自行补齐 
 `compile --pages` 和整卷 `compile` 会检查正文指图线索；本页或紧邻下一页都没有
 `figure` / `figureRegion` 时拒绝通过。听力原文不检查。这个文字护栏不能代替看图，
 没有指图用语的图形也必须补齐。
+`after-proofread` 在 materialize 后还会拒绝以 subtitle / title / heading 结尾的非写作篇章；遇到此提示须回原页补图或正文，再用 `--redo-from compile` 重跑（应用文与读后续写除外）。
 
 若核对原页确定没有图，在当前分片的 `source-flags/<第一个页键>.json` 增加本地专用声明：
 `"noFigures": [{ "page": "question-source-1-p03", "kind": "no_figure", "reason": "核对原页无图，说明具体原因" }]`。
