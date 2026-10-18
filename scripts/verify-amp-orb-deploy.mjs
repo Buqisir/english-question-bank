@@ -3709,6 +3709,51 @@ function pruningResult(fixture) {
   } finally { rmSync(fixture.root, { recursive: true, force: true }) }
 }
 
+for (const bootstrapMatchesCurrent of [false, true]) {
+  const fixture = controllerFixture()
+  try {
+    // Production SHA prefixes; unknown suffixes are padded for this fixture.
+    const current = 'c0625441'.padEnd(40, '0')
+    const previous = '9759605f'.padEnd(40, '0')
+    const target = 'e7604583'.padEnd(40, '0')
+    const obsolete = 'e8f4f5e8'.padEnd(40, '0')
+    const bootstrapSha = 'cb51230aa5d7f385c140e71805a8e568378d935c'
+    rmSync(path.join(fixture.root, 'current'))
+    rmSync(path.join(fixture.root, 'releases', oldSha), { recursive: true })
+    for (const sha of [current, previous, target, obsolete]) writeReleaseMarker(fixture.root, sha)
+    symlinkSync(path.join('releases', current), path.join(fixture.root, 'current'))
+    fixture.state.mainSha = target
+    writePruneHistory(fixture, {
+      targetSha: current, previousSha: previous, finishedAt: '2026-10-18T12:00:00Z',
+    }, `20261018120000000-${current}.json`)
+    writePruneHistory(fixture, {
+      targetSha: current, previousSha: obsolete, finishedAt: '2026-10-17T12:00:00Z',
+    }, `20261017120000000-${current}.json`)
+    writePruneHistory(fixture, {
+      schemaVersion: 'eqb-deployment-bootstrap-v1',
+      state: 'reported',
+      targetSha: bootstrapMatchesCurrent ? current : bootstrapSha,
+      previousSha: '57c97574f9a6761822245923c6bdc921e15bb86a',
+      controllerVersion: 'eqb-deploy-controller-v1',
+      databaseSnapshots: {
+        'question-bank.sqlite': 'f529…',
+        'user-data.sqlite': 'e200…',
+        'import-ops.sqlite': '41ae…',
+      },
+      finishedAt: bootstrapMatchesCurrent ? '2026-10-19T12:00:00Z' : '2026-09-03T11:36:30Z',
+    }, `20260903T113630Z-bootstrap-${bootstrapSha}.json`)
+    const result = await runPruneFixture(fixture, target)
+    const pruning = pruningResult(fixture)
+    assert(result.exitCode === 0 && !pruning.pruneFailed && !pruning.pruneSkipped
+      && pruning.pruned.join(',') === obsolete
+      && readdirSync(path.join(fixture.root, 'releases')).sort().join(',')
+        === [previous, current, target].sort().join(','),
+    bootstrapMatchesCurrent
+      ? 'newer bootstrap matching current is validated but cannot replace activation history'
+      : 'production bootstrap filename and receipt allow pruning only the obsolete release using finishedAt history')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
 for (const history of ['missing', 'ambiguous']) {
   const fixture = controllerFixture()
   try {
@@ -3744,6 +3789,12 @@ for (const [name, mutate, stage, code] of [
     receipt.schemaVersion = 'unknown-receipt-v1'
     writeFileSync(file, JSON.stringify(receipt))
   }, 'receipt-validation', 'INVALID_RECEIPT'],
+  ['invalid-bootstrap-previous.json', file => {
+    const receipt = JSON.parse(readFileSync(file, 'utf8'))
+    receipt.schemaVersion = 'eqb-deployment-bootstrap-v1'
+    receipt.previousSha = null
+    writeFileSync(file, JSON.stringify(receipt))
+  }, 'receipt-validation', 'INVALID_PREVIOUS_SHA'],
   ['linked.json', (file, fixture) => {
     rmSync(file)
     symlinkSync(path.join(fixture.root, 'deployments', 'receipts', 'prior-success.json'), file)
