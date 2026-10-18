@@ -427,8 +427,10 @@ export function joinTranscriptTurns(items, lines, state, label) {
     if (TRANSCRIPT_MARKER.test(text)) state.inTranscript = true
     else if (TRANSCRIPT_END.test(text)) state.inTranscript = false
     // Chinese glosses/full-width punctuation and source emphasis are part of English speech.
+    const numericContinuation = previousSpeech && /\d,$/u.test(out.at(-1)?.text ?? '')
+      && /^\d{3}(?:\b|[-‐])/u.test(text)
     const speech = state.inTranscript && text && text === item.text && !TRANSCRIPT_MARKER.test(text)
-      && /^(?:[A-Za-z("'“‘]|\(\d+\))/u.test(text) && !item.figure
+      && (/^(?:[A-Za-z("'“‘]|\(\d+\))/u.test(text) || numericContinuation) && !item.figure
     const note = state.inTranscript && !item.figure && (noteStart || (previousNote && /^\p{Script=Han}/u.test(text)))
     const previous = out.at(-1)
     const noteContinuation = note && previousNote && !noteStart && !/[。！？]$/u.test(previous.text)
@@ -449,8 +451,8 @@ export function joinTranscriptTurns(items, lines, state, label) {
         const speechWords = [...before.first].sort((a, b) => a.box.left - b.box.left)
         let labelWords = hanging ? noteBullet ? 1
           : previous.text.match(SPEAKER_LABEL)[0].replace(/[:：]$/u, '').trim().split(/\s+/u).length : 0
-        // A confirmed M: may cover separately recognized label and colon tokens.
-        if (hanging && /^[:：]$/u.test(speechWords[labelWords]?.text ?? '')) labelWords += 1
+        // A confirmed M: may cover a separately recognized colon (also OCR-read as ;).
+        if (hanging && /^[:：;；]$/u.test(speechWords[labelWords]?.text ?? '')) labelWords += 1
         const speechLeft = hanging
           ? speechWords[labelWords]?.box.left ?? last.left
           : last.left

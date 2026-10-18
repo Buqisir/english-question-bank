@@ -84,6 +84,35 @@ test('recognizes page furniture by source geometry, without dropping body text o
   assert.equal(isAnswerFurniture('English Answer Key Page 2 of 5', { y: 0.4, height: 0.02 }), false)
 })
 
+test('joins repaired speaker punctuation and a wrapped thousands group, preserving boundaries', () => {
+  const { items, lines } = fixture(['Text 9', 'M: Learn by connecting',
+    'them with tutors.', 'Text 10', 'W: They move to a 2,',
+    '500-acre reserve and a', 'forest.', '21. A separate question.', 'W: A new turn.'])
+  for (const index of [1, 4]) {
+    const top = index * 30
+    lines[index].words = [
+      { number: index * 100 + 1, text: index === 1 ? 'M' : 'W', box: { left: 111, top, width: 15, height: 20 } },
+      { number: index * 100 + 2, text: ';', box: { left: 140, top: top + 7, width: 3, height: 9 } },
+      { number: index * 100 + 3, text: items[index].text.slice(3), box: { left: 155, top, width: 920, height: 20 } },
+    ]
+  }
+  for (const index of [2, 5, 6]) {
+    lines[index].words.forEach((word, j) => {
+      word.box = { left: 154 + j * 100, top: index * 30, width: j === 0 ? 94 : 100, height: 20 }
+    })
+    lines[index].words.at(-1).box.width = 1075 - lines[index].words.at(-1).box.left
+  }
+  const result = joinTranscriptTurns(items, lines, {}, 'fixture')
+  assert.equal(result.joins, 3)
+  assert.deepEqual(result.items.map(item => item.text), ['Text 9',
+    'M: Learn by connecting them with tutors.', 'Text 10',
+    'W: They move to a 2, 500-acre reserve and a forest.',
+    '21. A separate question.', 'W: A new turn.'])
+  const indented = structuredClone(lines)
+  indented[5].words.forEach(word => { word.box.left += 25 })
+  assert(!joinTranscriptTurns(items, indented, {}, 'fixture').items.some(item => item.text.includes('2, 500')))
+})
+
 test('sample line joins respect real indent and long words wrapping early', () => {
   const previous = { role: 'body', right: 0.81, page: 1 }
   const line = { text: 'Unexpectedly everything changed.', left: 0.1, page: 1,
