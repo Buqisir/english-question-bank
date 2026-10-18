@@ -11,6 +11,7 @@ import tls from 'node:tls'
 import { pathToFileURL } from 'node:url'
 import { checkSearchMetadataFiles, ensureSearchMetadata } from './search-metadata-check.mjs'
 import { importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
+import { answerOnlyCoveredNumbers } from './answer-only-coverage.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const batchRoot = path.join(root, 'imports/batch')
@@ -467,14 +468,7 @@ export function checkPdfs(paperId) {
         : plan.editions?.[product]?.includeListening ? allNumbers : questionNumbers
       const missing = []
       if (product === 'answerOnly') {
-        const covered = new Set()
-        for (const match of text.matchAll(/(?<![\d.])(\d{1,2})\s*[-–—]\s*(\d{1,2})\s+([A-G](?:\s*[A-G])*)/gu)) {
-          const start = Number(match[1]); const end = Number(match[2])
-          if (end >= start && end - start + 1 === match[3].replace(/\s/gu, '').length) {
-            for (let n = start; n <= end; n++) covered.add(n)
-          }
-        }
-        for (const match of text.matchAll(/(?<![\d.])(\d{1,2})[.．、]\s+\S/gu)) covered.add(Number(match[1]))
+        const covered = answerOnlyCoveredNumbers(text)
         missing.push(...expected.filter((n) => !covered.has(n)))
       } else {
         // 完形题号同时出现于正文空位与选项，按顺序找一条完整序列，避免重复号误报。
