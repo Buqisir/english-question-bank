@@ -25,7 +25,7 @@ import { buildNck1ReviewProjection } from '../../server/import-review/revisionPr
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan,
 } from '../../server/paper-import/paginationPlan.mjs'
-import { ECONOMY_NINE_PAGE_OWNER_DATE, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
+import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
@@ -426,19 +426,19 @@ function splitSummaries(ctx, parts) {
   })
 }
 
-function startPagination(ctx, candidateDigest, editions = EDITIONS) {
+function startPagination(ctx, candidateDigest, editions = EDITIONS, economyPageLimit = ctx.state.data.economyPageLimit ?? 8) {
   for (const edition of editions) {
     const out = path.join(ctx.fast, 'pagination', edition)
     const report = path.join(out, 'report.json')
     const previous = existsSync(report) ? readJson(report) : null
     if (previous?.status === 'success' && previous.candidateDigest === candidateDigest
-      && (edition !== 'economy8' || previous.selectedPlan?.targetPages === (ctx.state.data.economyPageLimit ?? 8))) continue
+      && (edition !== 'economy8' || previous.selectedPlan?.targetPages === economyPageLimit)) continue
     archive(ctx, out)
     mkdirSync(out, { recursive: true })
     // One process per edition: the Chromium pool renders serially inside a process.
     background(ctx, `pagination-${edition}`, process.execPath, cli('review.mjs', 'pagination-qa', ctx.paperId,
       '--edition', edition, '--auto', '--output', out,
-      ...(edition === 'economy8' && ctx.state.data.economyPageLimit === 9 ? ['--economy-page-limit', '9'] : [])))
+      ...(edition === 'economy8' && economyPageLimit === 9 ? ['--economy-page-limit', '9'] : [])))
   }
 }
 
@@ -578,20 +578,49 @@ async function afterProofread(ctx, args) {
 
 // ---------- finish ----------
 
+function economyFailure(ctx, edition) {
+  const file = path.join(ctx.fast, 'pagination', edition, 'failure-report.json')
+  return edition === 'economy8' && existsSync(file) && canRetryEconomyNinePages(readJson(file), {
+    paperId: ctx.paperId, candidateDigest: ctx.state.steps['pagination-run']?.result?.candidateDigest,
+    pageLimit: ctx.state.data.economyPageLimit ?? 8,
+  })
+}
+
 async function mergePagination(ctx) {
   const reports = {}
   // pagination-run stays completed after a failed finish, so a resumed finish would only re-read
   // the dead job; an edition whose job exited without a report is started again instead.
   const job = (edition) => ctx.state.background[`pagination-${edition}`]
   const orphaned = EDITIONS.filter((edition) => job(edition) && !alive(job(edition).pid)
-    && !existsSync(path.join(ctx.fast, 'pagination', edition, 'report.json')))
+    && !existsSync(path.join(ctx.fast, 'pagination', edition, 'report.json'))
+    && !economyFailure(ctx, edition))
   if (orphaned.length) {
     say(`↻ 分页 ${orphaned.join(', ')} 的进程已退出且没有报告，重新启动`)
     startPagination(ctx, ctx.state.steps['pagination-run'].result.candidateDigest, orphaned)
   }
   for (const edition of EDITIONS) {
     const file = path.join(ctx.fast, 'pagination', edition, 'report.json')
-    if (ctx.state.background[`pagination-${edition}`]) await waitBackground(ctx, `pagination-${edition}`, () => existsSync(file))
+    try {
+      if (ctx.state.background[`pagination-${edition}`]) await waitBackground(ctx, `pagination-${edition}`, () => existsSync(file))
+    } catch (error) {
+      if (!economyFailure(ctx, edition)) throw error
+    }
+    if (economyFailure(ctx, edition)) {
+      if (ctx.state.steps.push?.startedAt) fail('已开始送审的卷不可原地更改省纸页数')
+      const failure = path.join(ctx.fast, 'pagination/economy8/failure-report.json')
+      const retained = path.join(ctx.fast, 'pagination/economy8-eight-page-failure.json')
+      copyFileSync(failure, retained)
+      say('↻ 省纸 8 页确定无法排入，自动重跑 9 页上限')
+      startPagination(ctx, ctx.state.steps['pagination-run'].result.candidateDigest, ['economy8'], 9)
+      await waitBackground(ctx, 'pagination-economy8', () => existsSync(file))
+      const report = readJson(file)
+      if (report.status !== 'success' || report.selectedPlan?.targetPages !== 9) fail('省纸 9 页分页失败')
+      ctx.state.data.economyPageLimit = 9
+      ctx.state.data.economyPageLimitAuthorization = {
+        rule: ECONOMY_NINE_PAGE_RULE, at: new Date().toISOString(), eightPageFailure: path.relative(root, retained),
+      }
+      save(ctx)
+    }
     if (!existsSync(file)) fail(`${edition} 分页没有产出 report.json`)
     reports[edition] = readJson(file)
     if (reports[edition].status !== 'success') fail(`${edition} 分页失败，见 ${path.relative(root, file)}`)
@@ -600,7 +629,7 @@ async function mergePagination(ctx) {
   const stale = EDITIONS.filter((edition) => reports[edition].candidateDigest !== projection.candidateDigest)
   if (stale.length) fail(`分页报告绑定的 Candidate 已过期：${stale.join(', ')}；删除对应目录后重跑 finish`)
   if (reports.economy8.selectedPlan.targetPages !== (ctx.state.data.economyPageLimit ?? 8)) {
-    fail('省纸分页报告与本卷显式授权页数不一致')
+    fail('省纸分页报告与本卷 fast state 页数不一致')
   }
   const sourceHasListening = projection.paginationSlotBindings.some((entry) => entry.familyContractId === 'listening')
   const binding = { paperId: projection.paperId, sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest }

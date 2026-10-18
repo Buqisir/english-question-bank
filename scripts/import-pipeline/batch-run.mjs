@@ -195,7 +195,7 @@ function makeContext(opts) {
     state: existsSync(file) ? json(file) : { batch: opts.batch, papers: {}, paused: null },
     agents: semaphore(opts['max-agents']), serialProduction: semaphore(1),
     log(label) { return path.join(dir, 'logs', `${Date.now()}-${randomUUID().slice(0, 8)}-${label.replace(/[^\p{L}\p{N}._-]/gu, '-')}.log`) },
-    save() { this.state.updatedAt = now(); writeJson(file, this.state); writeEscalations(this) },
+    save() { this.state.updatedAt = now(); writeJson(file, this.state); writeEscalations(this); writeEconomyReport(this) },
   }
 }
 function writeEscalations(ctx) {
@@ -425,8 +425,8 @@ async function repair(ctx, paper, result, attempt, tier = 'sol', previous = null
   return outcome
 }
 
-export function checkPdfs(paperId, requestedEconomyPageLimit) {
-  const economyPageLimit = importEconomyPageLimit(paperId, requestedEconomyPageLimit)
+export function checkPdfs(paperId) {
+  const economyPageLimit = importEconomyPageLimit(paperId, fastState(paperId).data?.economyPageLimit)
   if (!paperIdValid(paperId)) fail('paperId 格式无效')
   const dir = path.join(papersRoot, paperId)
   const plan = json(path.join(dir, 'pagination-plan.json'))
@@ -459,7 +459,7 @@ export function checkPdfs(paperId, requestedEconomyPageLimit) {
       if (!fonts.length || unembedded.length) errors.push('存在未嵌入字体或无法识别的字体记录')
       const limit = product === 'economy8' ? economyPageLimit : plan.editions?.[product]?.targetPages
       if (product === 'economy8') {
-        if (plan.editions?.economy8?.targetPages !== limit) errors.push('省纸分页计划与显式授权页数不一致')
+        if (plan.editions?.economy8?.targetPages !== limit) errors.push('省纸分页计划与 fast state 页数不一致')
         if (limit === 9 ? pages > 9 : pages !== 8) errors.push(`省纸版${limit === 9 ? '最多 9' : '必须 8'}页，实际 ${pages}`)
       }
       if (product.startsWith('large') && (!Number.isInteger(limit) || pages > limit)) errors.push(`大字版 ${pages} 页，计划上限 ${limit ?? '缺失'}`)
@@ -512,7 +512,7 @@ async function pdfQa(ctx, paper) {
   paper.stage = 'pdf-check'
   ctx.save()
   const output = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-hard-check.json')
-  const checks = checkPdfs(paper.paperId, paper.item.economyPageLimit)
+  const checks = checkPdfs(paper.paperId)
   writeJson(output, checks)
   paper.pdfCheck = output
   if (checks.blocking.length) throw new Blocked('needs_main_review', checks.blocking.join('；'), output)
@@ -1051,12 +1051,17 @@ function retryPaper(ctx, id) {
   Object.assign(paper, { state: 'queued', blocked: null, repairStops: [] })
   ctx.save()
 }
+function writeEconomyReport(ctx) {
+  const papers = Object.values(ctx.state.papers).filter((paper) => fastState(paper.paperId).data?.economyPageLimit === 9)
+    .map((paper) => ({ paperId: paper.paperId, paperName: paper.paperName, label: '省纸 9 页' }))
+  writeJson(path.join(ctx.dir, 'economy-pages-report.json'), { generatedAt: now(), papers })
+}
 function printStatus(ctx) {
-  console.log('卷名\t阶段\t状态\tOCR revision\t送审 revision\t阻塞原因\t用时')
+  console.log('卷名\t省纸版\t阶段\t状态\tOCR revision\t送审 revision\t阻塞原因\t用时')
   for (const paper of Object.values(ctx.state.papers)) {
     const seconds = Math.round(Object.values(paper.timings).reduce((a, b) => a + b, 0)
       + paper.agentRuns.reduce((sum, run) => sum + run.seconds, 0))
-    console.log([paper.paperName, paper.stage, paper.state, paper.ocrRevisionId || '—', paper.revisionId || '—',
+    console.log([paper.paperName, fastState(paper.paperId).data?.economyPageLimit === 9 ? '省纸 9 页' : '—', paper.stage, paper.state, paper.ocrRevisionId || '—', paper.revisionId || '—',
       paper.blocked?.reason.replace(/\s+/gu, ' ') || '—', `${seconds}s（累计任务）`].join('\t'))
   }
   if (ctx.state.paused) console.log(`批次暂停：${ctx.state.paused.reason}`)
