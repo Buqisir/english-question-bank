@@ -914,7 +914,10 @@ async function processPaper(ctx, paper) {
       }
       paper.done['after-proofread'] = true; ctx.save()
     }
-    if (!paper.done.round2) { await round(ctx, paper, 2); paper.done.round2 = true; ctx.save() }
+    // A redo can move a stale round-2 output aside after round 2 finished; rerun only what is missing.
+    const round2Missing = () => json(path.join(fastDir(paper.paperId), 'round2.json'))
+      .some((worker) => (worker.outputs || []).some((output) => !existsSync(output)))
+    if (!paper.done.round2 || round2Missing()) { await round(ctx, paper, 2); paper.done.round2 = true; ctx.save() }
     if (!paper.done.finish) {
       const workers = json(path.join(fastDir(paper.paperId), 'round2.json'))
       const worker = workers.find(worker => /metadata/iu.test(worker.label || ''))

@@ -400,7 +400,16 @@ function splitSummaries(ctx, parts) {
   }
   return buckets.map((bucket, index) => {
     const file = path.join(ctx.fast, 'summaries-parts', `request-${index + 1}.json`)
-    writeJson(file, { ...request, groups: request.groups.filter((group) => bucket.groups.includes(group)) })
+    const groups = request.groups.filter((group) => bucket.groups.includes(group))
+    writeJson(file, { ...request, groups })
+    // Authored parts are reused by ID across redo; a recompile that changed paragraphs (e.g. a
+    // text run restored from a figure) leaves a part citing old IDs, so it moves aside for rewrite.
+    const part = path.join(ctx.fast, 'summaries-parts', `part-${index + 1}.json`)
+    if (existsSync(part)) {
+      const ids = (groupList) => groupList.flatMap((group) => (group.targets || group.paragraphs)
+        .map((item) => `${group.groupId} ${item.paragraphId}`)).sort().join('\n')
+      if (ids(readJson(part).groups || []) !== ids(groups)) archive(ctx, part)
+    }
     return { file, groups: bucket.groups.length, targets: bucket.groups.reduce((sum, group) => sum + group.targets.length, 0) }
   })
 }
