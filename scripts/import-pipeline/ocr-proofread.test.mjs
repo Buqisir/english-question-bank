@@ -198,3 +198,21 @@ test('an omitted section does not become an essay or suppress the other sample',
   assert.deepEqual(result.groups[1].essays.entries.flatMap(e => e.paragraphs.map(p => p.text)),
     ['A source-backed story.'])
 })
+
+test('a bare section merged with a sample label preserves that source label', () => {
+  const result = referencesFixture(['第四部分 写作', '第一节（满分15分）\n参考范文',
+    'A source application.', '第二节（满分25分）', '参考范文', 'A source story.'],
+  ['application', 'continuation'])
+  assert.equal(result.groups[0].essays.entries[0].sourceLabel, '参考范文')
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['A source application.'], ['A source story.']])
+})
+
+test('an adjacent sample label establishes writing context without a part heading', () => {
+  const result = referencesFixture(['第一节', '21—23 ABC', '第二节', '36—40 ABCDE',
+    '第一节', 'One possible version:', 'Dear Daniel,', 'A source application.',
+    '第二节', 'One possible version:', 'A source story.'], ['application', 'continuation'])
+  assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text),
+    ['Dear Daniel,', 'A source application.'])
+  assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), ['A source story.'])
+})

@@ -1103,7 +1103,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
   const sections = new Map()
   let current = null
   let inWriting = false
-  for (const line of lines) {
+  for (const [lineIndex, line] of lines.entries()) {
     if (sections.size && ANSWER_EXPLANATION_START.test(line.text)) {
       review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
       break
@@ -1113,10 +1113,23 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
       continue
     }
-    const bare = inWriting && line.text.normalize('NFKC').match(BARE_WRITING_SECTION)
+    // A heading can share its OCR item with a sample label. Some answer books
+    // omit the writing-part heading entirely; require an adjacent sample label
+    // before treating a bare "第一节" outside writing as a writing section.
+    const [heading, ...rest] = line.text.split('\n')
+    const isSampleLabel = text => ENTRY_LABEL.test(text || '') && ESSAY_LABEL.test(text || '')
+    const mergedLabel = rest.length === 1 && isSampleLabel(rest[0].trim()) ? rest[0].trim() : null
+    const bare = (inWriting || mergedLabel || isSampleLabel(lines[lineIndex + 1]?.text))
+      && (mergedLabel ? heading : line.text).normalize('NFKC').match(BARE_WRITING_SECTION)
     const started = bare ? [bare[1] === '一' ? 'application' : 'continuation']
       : WRITING_SECTION.find(([, pattern]) => pattern.test(line.text))
-    if (started) { current = { taskType: started[0], lines: [] }; sections.set(started[0], current); continue }
+    if (started) {
+      current = { taskType: started[0], lines: [] }
+      sections.set(started[0], current)
+      inWriting = true
+      if (bare && mergedLabel) current.lines.push({ ...line, text: mergedLabel })
+      continue
+    }
     // An explicit omission belongs to the active section, or to both tasks
     // when the key omits the entire writing part. Never invent a model answer.
     if ((inWriting || current) && /^(?:略|[（(]略[）)]|(?:参考)?范文[：:]?\s*略|(?:源)?无范文|未提供范文)[。.]?$/u.test(line.text.trim())) {
