@@ -16,6 +16,7 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 - Node 24：每条命令前缀 `PATH="/opt/homebrew/opt/node@24/bin:$PATH"`。
 - 听力 ASR venv：`~/.local/share/eqbank-listening-asr`（faster-whisper 1.2.1），模型
   `Systran/faster-whisper-small.en@d1d751a5…` 已在 HF 缓存。可用 `EQB_ASR_VENV`、`EQB_ASR_MODEL` 覆盖。
+- ASR（包括 VAD / 非 VAD 和 `asr-extra`）跨卷、跨 worktree 共用 `~/.cache/eqbank/asr-slots` 系统文件锁，整机默认同时只转写 1 个，其余后台排队，进程退出或崩溃自动释放；所有调用统一设置 `EQB_ASR_CONCURRENCY` 可调并发，`EQB_ASR_LOCK_DIR` 可覆盖锁目录（同机调用须保持一致）。
 - `tesseract`（chi_sim+eng）、`magick`、`pdftoppm`、`pdftotext`、`ffmpeg`。
 - 页面重放缓存：`EQB_OCR_RASTER_CACHE_DIR`（编排脚本默认 `~/.cache/eqbank/ocr-raster-v1`），
   键含 PDF sha256、页码、144 DPI 和 pdftoppm/magick 版本，可随时删除。

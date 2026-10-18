@@ -239,6 +239,7 @@ function startAsr(ctx, { tag = null, extent = ['--whole-file'] } = {}) {
     // The original recording is the immutable input binding; Materialization keeps changing
     // during the run and the script refuses inputs that change underneath it.
     background(ctx, name, path.join(ASR_VENV, 'bin/python'), [
+      path.join(scripts, 'asr-slot.py'), path.join(ASR_VENV, 'bin/python'),
       path.join(scripts, 'transcribe-listening-windows.py'), playback, path.join(ctx.paperDir, 'source', original), out,
       '--model-snapshot', ASR_MODEL, '--language', 'en', ...extent, ...(vad ? ['--vad'] : []),
     ])
