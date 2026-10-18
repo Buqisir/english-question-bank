@@ -7,6 +7,21 @@ const defaultRoot = path.resolve(import.meta.dirname, '../..')
 const json = (file) => existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null
 const seconds = (value) => Number.isFinite(value) ? `${value.toFixed(1)}s` : '无记录'
 
+function uploadServerDetail(row) {
+  const details = []
+  if (Number.isFinite(row.reusedFiles) && Number.isFinite(row.reusedBytes)) {
+    details.push(`复用 ${row.reusedFiles} 文件 / ${row.reusedBytes} bytes`)
+  }
+  const phases = Object.entries(row.finalizeMetrics?.durationsMs || {})
+    .filter(([, duration]) => Number.isFinite(duration))
+    .map(([phase, duration]) => `${phase} ${duration.toFixed(1)}ms`)
+  if (phases.length) details.push(`finalize 分段 ${phases.join(' / ')}`)
+  if (row.finalizeMetrics?.outcome === 'failed') {
+    details.push(`finalize failedStage ${row.finalizeMetrics.failedStage || 'unknown'}`)
+  }
+  return details.length ? ` / ${details.join(' / ')}` : ''
+}
+
 export function readTimeline(file) {
   if (!existsSync(file)) return []
   // A running writer can leave a partial last line; keep all complete receipts.
@@ -51,7 +66,7 @@ export function paperReport(root, paperId) {
   add('生产锁', grouped(readTimeline(path.join(fast, 'production-timeline.jsonl')), 'label', ['lockWaitSeconds', 'gapWaitSeconds'])
     .map((row) => [row.label, `${row.count} 次 / 等锁 ${seconds(row.lockWaitSeconds)} / 间隔 ${seconds(row.gapWaitSeconds)}`]))
   add('上传', readTimeline(path.join(fast, 'upload-timeline.jsonl')).map((row) =>
-    [row.startedAt, `manifest ${row.manifestFiles} / 实传 ${row.uploadedFiles} / ${row.uploadedBytes} bytes / PUT ${seconds(row.putSeconds)} (${row.putMode}) / finalize ${seconds(row.finalizeSeconds)}${row.completed ? '' : '（未完成）'}`]))
+    [row.startedAt, `manifest ${row.manifestFiles} / 实传 ${row.uploadedFiles} / ${row.uploadedBytes} bytes / PUT ${seconds(row.putSeconds)} (${row.putMode}) / finalize ${seconds(row.finalizeSeconds)}${row.completed ? '' : '（未完成）'}${uploadServerDetail(row)}`]))
   return [paperId, '类别 | 阶段 | 耗时 / 明细', ...rows.map((row) => row.join(' | '))].join('\n')
 }
 

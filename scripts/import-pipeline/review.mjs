@@ -239,6 +239,7 @@ async function api(
   if (!response.ok) {
     const error = new Error(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
     error.status = response.status
+    if (body?.metrics) error.metrics = body.metrics
     throw error
   }
   return body

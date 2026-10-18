@@ -8,6 +8,23 @@ function retryable(error) {
     || (error instanceof TypeError && !error.status)
 }
 
+function aggregatePutMetrics(timing, metrics) {
+  if (!metrics) return
+  const aggregate = timing.putMetrics ||= {
+    count: 0, totalMs: 0, maxTotalMs: 0, durationsMs: {}, maxDurationsMs: {},
+  }
+  aggregate.count++
+  if (Number.isFinite(metrics.totalMs)) {
+    aggregate.totalMs += metrics.totalMs
+    aggregate.maxTotalMs = Math.max(aggregate.maxTotalMs, metrics.totalMs)
+  }
+  for (const [phase, duration] of Object.entries(metrics.durationsMs || {})) {
+    if (!Number.isFinite(duration)) continue
+    aggregate.durationsMs[phase] = (aggregate.durationsMs[phase] || 0) + duration
+    aggregate.maxDurationsMs[phase] = Math.max(aggregate.maxDurationsMs[phase] || 0, duration)
+  }
+}
+
 export async function uploadReviewBundle({
   paperDir, manifest, api, resolveReviewFile, timelinePath,
   concurrency = Number(process.env.QUESTION_BANK_IMPORT_UPLOAD_CONCURRENCY ?? 4),
@@ -26,12 +43,16 @@ export async function uploadReviewBundle({
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(manifest),
     })
+    if (created.metrics) timing.registerMetrics = created.metrics
     const filesByPath = new Map(manifest.files.map(file => [file.path, file]))
     const missing = [...new Set(created.missingFiles || [])].map(relativePath => {
       const file = filesByPath.get(relativePath)
       if (!file) throw new Error(`Server requested an unknown file: ${relativePath}`)
       return file
     })
+    timing.reusedFiles = manifest.files.length - missing.length
+    timing.reusedBytes = manifest.files.reduce((sum, file) => sum + file.byteLength, 0)
+      - missing.reduce((sum, file) => sum + file.byteLength, 0)
     const revisionPath = `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}`
     let next = 0
     let failure = null
@@ -44,15 +65,17 @@ export async function uploadReviewBundle({
             const started = performance.now()
             timing.putAttempts++
             try {
-              await api(`${revisionPath}/files?path=${encodeURIComponent(file.path)}`, {
+              const result = await api(`${revisionPath}/files?path=${encodeURIComponent(file.path)}`, {
                 method: 'PUT',
                 headers: { 'content-length': String(file.byteLength), 'content-type': file.mediaType },
                 body: bytes,
               })
+              aggregatePutMetrics(timing, result?.metrics)
               timing.uploadedFiles++
               timing.uploadedBytes += file.byteLength
               break
             } catch (error) {
+              aggregatePutMetrics(timing, error.metrics)
               if (attempt >= 2 || !retryable(error)) throw error
               timing.putRetries++
             } finally {
@@ -74,8 +97,12 @@ export async function uploadReviewBundle({
     const finalizeStarted = performance.now()
     try {
       const result = await api(`${revisionPath}/finalize`, { method: 'POST' })
+      if (result.metrics) timing.finalizeMetrics = result.metrics
       timing.completed = true
       return result
+    } catch (error) {
+      if (error.metrics) timing.finalizeMetrics = error.metrics
+      throw error
     } finally {
       timing.finalizeSeconds = (performance.now() - finalizeStarted) / 1000
     }

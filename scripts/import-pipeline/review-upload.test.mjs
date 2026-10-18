@@ -13,7 +13,8 @@ import { uploadReviewBundle } from './lib-review-upload.mjs'
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 
 async function fixture(t, { status = 503, failures = 0, lostResponse = false,
-  missingPaths = null, unknownPath = false, requestDelay = 60, failPhase = null } = {}) {
+  missingPaths = null, unknownPath = false, requestDelay = 60, failPhase = null,
+  metrics = false } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'eqb-upload-'))
   t.after(() => rmSync(dir, { recursive: true, force: true }))
   const files = Array.from({ length: 8 }, (_, i) => {
@@ -27,6 +28,10 @@ async function fixture(t, { status = 503, failures = 0, lostResponse = false,
   const attempts = new Map()
   const state = { active: 0, maximum: 0, finalized: 0, manifestCalls: 0, serverErrors: [] }
   const requested = missingPaths ?? files.map(f => f.path)
+  const telemetry = (operation, durationsMs, failedStage = null) => metrics ? { metrics: {
+    operation, outcome: failedStage ? 'failed' : 'succeeded', failedStage,
+    durationsMs, totalMs: Object.values(durationsMs).reduce((sum, value) => sum + value, 0),
+  } } : {}
   const server = createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost')
     const json = (code, body) => {
@@ -55,7 +60,9 @@ async function fixture(t, { status = 503, failures = 0, lostResponse = false,
             req.socket.destroy()
             return
           }
-          json(200, {})
+          json(200, telemetry('put', {
+            status: attempt, receive: attempt > 1 ? 0 : 2, adoption: 3, installationAndMark: 4,
+          }))
         } finally {
           state.active--
         }
@@ -63,15 +70,19 @@ async function fixture(t, { status = 503, failures = 0, lostResponse = false,
         state.finalized++
         assert.equal(state.active, 0, 'finalize must wait for all active PUTs')
         assert.equal(received.size, requested.length)
-        if (failPhase === 'finalize') return json(503, {})
-        json(200, { revision: { id: 'rev-test', state: 'awaiting_review' } })
+        const timing = telemetry('finalize', {
+          status: 1, fileHash: 2, projection: 3, identityAndReport: 4, inventory: 5, transactionAndPreview: 6,
+        }, failPhase === 'finalize' ? 'projection' : null)
+        if (failPhase === 'finalize') return json(503, timing)
+        json(200, { revision: { id: 'rev-test', state: 'awaiting_review' }, ...timing })
       } else {
         state.manifestCalls++
         let body = ''
         for await (const chunk of req) body += chunk
         assert.deepEqual(JSON.parse(body), manifest)
         if (failPhase === 'manifest') return json(503, {})
-        json(201, { revision: { id: 'rev-test' }, missingFiles: unknownPath ? ['unknown'] : requested })
+        json(201, { revision: { id: 'rev-test' }, missingFiles: unknownPath ? ['unknown'] : requested,
+          ...telemetry('register', { registration: 1, reuse: 2 }) })
       }
     } catch (error) {
       state.serverErrors.push(error)
@@ -84,7 +95,9 @@ async function fixture(t, { status = 503, failures = 0, lostResponse = false,
   const api = async (pathname, init) => {
     const response = await fetch(`http://127.0.0.1:${server.address().port}${pathname}`, init)
     const body = await response.json()
-    if (!response.ok) throw Object.assign(new Error(`HTTP ${response.status}`), { status: response.status })
+    if (!response.ok) throw Object.assign(new Error(`HTTP ${response.status}`), {
+      status: response.status, ...(body.metrics ? { metrics: body.metrics } : {}),
+    })
     return body
   }
   const run = concurrency => uploadReviewBundle({
@@ -119,6 +132,9 @@ test('local HTTP: parallel and serial produce identical verified bytes and final
     assert.ok(f.timing().putWallSeconds > 0)
     assert.ok(f.timing().putSeconds >= f.timing().putWallSeconds * 0.9)
     assert.ok(f.timing().finalizeSeconds > 0)
+    for (const field of ['registerMetrics', 'putMetrics', 'finalizeMetrics']) {
+      assert.equal(Object.hasOwn(f.timing(), field), false, `${field} stays absent on legacy servers`)
+    }
   }
   // Report timings without making correctness depend on scheduler performance.
   t.diagnostic(`serial=${serialMs.toFixed(1)}ms parallel=${parallelMs.toFixed(1)}ms speedup=${(serialMs / parallelMs).toFixed(2)}x`)
@@ -158,14 +174,53 @@ test('local HTTP: resume uploads only missing files; unknown paths fail before a
   assert.equal(resumed.timing().manifestFiles, 8)
   assert.equal(resumed.timing().uploadedFiles, 1)
   assert.equal(resumed.timing().uploadedBytes, 4098)
+  assert.equal(resumed.timing().reusedFiles, 7)
+  assert.equal(resumed.timing().reusedBytes, resumed.manifest.files.reduce((sum, f) => sum + f.byteLength, 0) - 4098)
   const complete = await fixture(t, { missingPaths: [] })
   await complete.run(4)
   assert.equal(complete.timing().uploadedFiles, 0)
+  assert.equal(complete.timing().reusedFiles, 8)
+  assert.equal(complete.timing().reusedBytes, complete.manifest.files.reduce((sum, f) => sum + f.byteLength, 0))
   assert.equal(complete.state.finalized, 1)
   const unknown = await fixture(t, { unknownPath: true })
   await assert.rejects(unknown.run(4), /unknown file/)
   assert.equal(unknown.attempts.size, 0)
   assert.equal(unknown.state.finalized, 0)
+})
+
+test('local HTTP: metrics record registration, aggregate PUT/replay phases and successful finalize', async t => {
+  const f = await fixture(t, { metrics: true, lostResponse: true, requestDelay: 0 })
+  await f.run(4)
+  const timing = f.timing()
+  assert.deepEqual(timing.registerMetrics, {
+    operation: 'register', outcome: 'succeeded', failedStage: null,
+    durationsMs: { registration: 1, reuse: 2 }, totalMs: 3,
+  })
+  assert.deepEqual(timing.putMetrics, {
+    count: 8, totalMs: 79, maxTotalMs: 10,
+    durationsMs: { status: 9, receive: 14, adoption: 24, installationAndMark: 32 },
+    maxDurationsMs: { status: 2, receive: 2, adoption: 3, installationAndMark: 4 },
+  })
+  assert.equal(timing.finalizeMetrics.operation, 'finalize')
+  assert.equal(timing.finalizeMetrics.outcome, 'succeeded')
+  assert.equal(timing.finalizeMetrics.durationsMs.transactionAndPreview, 6)
+  assert.equal(timing.reusedFiles, 0)
+  assert.equal(timing.reusedBytes, 0)
+  assert.deepEqual(f.state.serverErrors, [])
+})
+
+test('local HTTP: reused files need no PUT and failed finalize retains metrics', async t => {
+  const f = await fixture(t, { metrics: true, missingPaths: [], failPhase: 'finalize' })
+  await assert.rejects(f.run(4), /HTTP 503/)
+  const timing = f.timing()
+  assert.equal(timing.reusedFiles, 8)
+  assert.equal(timing.reusedBytes, f.manifest.files.reduce((sum, file) => sum + file.byteLength, 0))
+  assert.equal(timing.finalizeMetrics.outcome, 'failed')
+  assert.equal(timing.finalizeMetrics.failedStage, 'projection')
+  assert.equal(timing.finalizeMetrics.durationsMs.fileHash, 2)
+  assert.equal(Object.hasOwn(timing, 'putMetrics'), false)
+  assert.equal(timing.completed, false)
+  assert.deepEqual(f.state.serverErrors, [])
 })
 
 for (const failPhase of ['manifest', 'finalize']) {
