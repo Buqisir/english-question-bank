@@ -8,7 +8,7 @@
 //
 //   prep <paperId> [--audio <file>] [--proofreaders 7] [-- <universal-nck1 init args>]
 //   after-proofread <paperId> [--issues-resolved]
-//   finish <paperId>                 through frozen PDFs and their contact sheets
+//   finish <paperId> [--economy-page-limit 9] through frozen PDFs and their contact sheets
 //   submit <paperId>                 after PDF QA: push the Candidate, then Screen tiles
 //   report <paperId> --screen "<what was checked>" --pdf "<what was checked>"
 //   status <paperId>
@@ -23,8 +23,9 @@ import path from 'node:path'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import {
-  PAPER_PAGINATION_PLAN_FILE_NAME, economyPageLimitForPlan, validatePaperPaginationPlan,
+  PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan,
 } from '../../server/paper-import/paginationPlan.mjs'
+import { ECONOMY_NINE_PAGE_OWNER_DATE, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -407,12 +408,15 @@ function startPagination(ctx, candidateDigest) {
   for (const edition of EDITIONS) {
     const out = path.join(ctx.fast, 'pagination', edition)
     const report = path.join(out, 'report.json')
-    if (existsSync(report) && readJson(report).candidateDigest === candidateDigest) continue
+    const previous = existsSync(report) ? readJson(report) : null
+    if (previous?.status === 'success' && previous.candidateDigest === candidateDigest
+      && (edition !== 'economy8' || previous.selectedPlan?.targetPages === (ctx.state.data.economyPageLimit ?? 8))) continue
     archive(ctx, out)
     mkdirSync(out, { recursive: true })
     // One process per edition: the Chromium pool renders serially inside a process.
     background(ctx, `pagination-${edition}`, process.execPath, cli('review.mjs', 'pagination-qa', ctx.paperId,
-      '--edition', edition, '--auto', '--output', out))
+      '--edition', edition, '--auto', '--output', out,
+      ...(edition === 'economy8' && ctx.state.data.economyPageLimit === 9 ? ['--economy-page-limit', '9'] : [])))
   }
 }
 
@@ -561,11 +565,14 @@ async function mergePagination(ctx) {
   const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
   const stale = EDITIONS.filter((edition) => reports[edition].candidateDigest !== projection.candidateDigest)
   if (stale.length) fail(`分页报告绑定的 Candidate 已过期：${stale.join(', ')}；删除对应目录后重跑 finish`)
+  if (reports.economy8.selectedPlan.targetPages !== (ctx.state.data.economyPageLimit ?? 8)) {
+    fail('省纸分页报告与本卷显式授权页数不一致')
+  }
   const sourceHasListening = projection.paginationSlotBindings.some((entry) => entry.familyContractId === 'listening')
   const binding = { paperId: projection.paperId, sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest }
   // Same assembly as `review.mjs pagination-qa --auto --save-plan` run once per edition.
   const plan = validatePaperPaginationPlan({
-    schemaVersion: economyPageLimitForPlan(projection.paginationPlan) === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4',
+    schemaVersion: reports.economy8.selectedPlan.targetPages === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4',
     ...binding,
     editions: Object.fromEntries(EDITIONS.map((edition) => [edition, reports[edition].selectedPlan])),
   }, { ...binding, slotBindings: projection.paginationSlotBindings, sourceHasListening })
@@ -736,7 +743,25 @@ function pdfContactSheets(ctx) {
   return { dir: path.relative(root, qa) }
 }
 
-async function finish(ctx) {
+async function finish(ctx, args) {
+  const supplied = args.includes('--economy-page-limit')
+  const requested = option(args, '--economy-page-limit')
+  if (supplied && requested !== '9') fail('--economy-page-limit 只接受显式九页授权值 9')
+  const limit = importEconomyPageLimit(ctx.paperId, supplied ? 9 : ctx.state.data.economyPageLimit)
+  if (limit !== (ctx.state.data.economyPageLimit ?? 8)) {
+    if (ctx.state.steps.push?.startedAt) fail('已开始送审的卷不可原地更改省纸授权')
+    const job = ctx.state.background['pagination-economy8']
+    if (job && alive(job.pid)) fail('省纸分页仍在运行；待其退出后再修改授权')
+    for (const name of ['pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']) delete ctx.state.steps[name]
+    archive(ctx, path.join(ctx.fast, 'pagination/economy8'))
+    archive(ctx, path.join(ctx.paperDir, 'products'))
+    delete ctx.state.background['pagination-economy8']
+    ctx.state.data.economyPageLimit = limit
+    ctx.state.data.economyPageLimitAuthorization = {
+      ownerAuthorizedOn: ECONOMY_NINE_PAGE_OWNER_DATE, recordedAt: new Date().toISOString(), pageLimit: limit,
+    }
+    save(ctx)
+  }
   await step(ctx, 'summaries', () => installSummaries(ctx))
   await step(ctx, 'search-metadata', async () => {
     await run(ctx, 'finalize-search-metadata', cli('review.mjs', 'finalize-search-metadata', ctx.paperId,
@@ -900,7 +925,7 @@ try {
   if (option(args, '--redo-from')) redoFrom(ctx, option(args, '--redo-from'))
   if (command === 'prep') await prep(ctx, args)
   else if (command === 'after-proofread') await afterProofread(ctx, args)
-  else if (command === 'finish') await finish(ctx)
+  else if (command === 'finish') await finish(ctx, args)
   else if (command === 'submit') await submit(ctx, args)
   else if (command === 'report') await report(ctx, args)
   else if (command === 'status') status(ctx)

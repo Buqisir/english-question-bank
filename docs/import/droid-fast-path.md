@@ -131,7 +131,7 @@ Sol 修过的同一停点再次停下时复修一次，每卷至多一次，再�
 
 finish 后以 `pdfinfo`、`pdftotext`、`pdffonts` 校验页数、空白页、字体嵌入、题号顺序和
 答案号覆盖，再渲染全部页面为 100 dpi 图片交 Sol 初筛。无听力产品按分页计划校验
-21 起的原题号；省纸固定 8 页。听力原文疑似 OCR 折行只记 warning。低分辨率初筛
+21 起的原题号；省纸默认固定 8 页，以下明确授权例外最多 9 页。听力原文疑似 OCR 折行只记 warning。低分辨率初筛
 不等于逐字或直接听审认证；硬约束拿不准时升级，不把版式偏好当阻塞。
 
 不加 `--submit` 停在 `ready_to_submit`，**但 after-proofread 仍会访问生产 Review**。
@@ -144,6 +144,28 @@ Sol 必须看实际 Screen 图，并引用 PDF 检查结果生成如实说明，
 原记录留在 history）。不能删除提交 ledger 来“重试”。本地做完、但要换卷号重导的卷，用
 `withdraw --batch <名> --papers <paperId,…> --reason <原因>` 标成 blocked（`withdrawn`），
 保留本地产出、不再送审；已有生产动作的卷拒绝撤回，`run --retry` 可以撤销。退出码 0 表示本轮正常结束，2 表示有阻塞卷，3 表示整批暂停。
+
+### 指定两卷九页授权（Owner 2026-10-18）
+
+仅以下两卷允许 `fast-import.mjs finish <id> --economy-page-limit 9`：
+
+- `paper-mock-zhejiang-hangzhou-2026-05-adaptability-test`
+- `paper-mock-zhejiang-hangzhou-2026-april-three-province-joint-exam`
+
+授权范围集中在 `lib-economy-page-allowance.mjs`；其他卷或其他参数值拒绝。
+CLI 在 `fast/state.json` 的 `data.economyPageLimit: 9` 与
+`data.economyPageLimitAuthorization` 记录 Owner 日期和实际记录时间，续跑复用。
+首次启用会归档旧省纸分页与冻结产品，清除分页启动／合并／冻结／PDF QA 完成标记；
+仍在运行的省纸分页或已开始送审的卷拒绝原地更改。
+随后使用现有 `pagination-qa --auto --economy-page-limit 9`，不需要手工 break slots，
+仍使用 10.5pt／18pt 与原有题目、七选五库、作答框约束；输出 v5 plan 和 v2 manifest。
+
+批次只在 `imports/batch/<批次>/queue/<paperId>.json` 顶层显式有
+`"economyPageLimit": 9` 时传参。已开跑的卷，人工核对后还须在该批次
+`status.json` 的 `papers[paperId].item.economyPageLimit` 写同值，保持队列快照一致；
+再用现有 `run --retry <paperId>` 续跑。不要删除状态、锁或生产 ledger。
+批次 PDF 硬检查同时核对计划页数与此字段：缺字段仍严格 8 页，
+获授权才允许最多 9 页。未授权卷即使误加字段也拒绝。
 
 ## 为什么更快
 
@@ -160,7 +182,7 @@ Sol 必须看实际 Screen 图，并引用 PDF 检查结果生成如实说明，
 格式标准（`docs/product/exam-paper-format-standards.md` §3b 与整卷重排）的精神是规范内的 friendly：
 硬约束很少，其余是可退让的偏好。目检先查硬约束，偏好只在明显难看时提，不当缺陷报。
 
-- **硬约束**：页数（省纸恰好 8、大字不超上限）；不缩字、不删改、不裁图；单道小题、挖空横线、
+- **硬约束**：页数（省纸默认恰好 8，仅明确授权两卷最多 9、大字不超上限）；不缩字、不删改、不裁图；单道小题、挖空横线、
   写作作答框不拆；七选五选项库不跨页；无溢出、叠字；OCR 物理折行已合并。插图只查整体完整、
   不压字、尺寸相称；图内小字清晰度取决于原卷扫描，不算硬约束。
 - **偏好**：题组完整、少翻面、标题随后文（部/节标题留页尾明确允许）、篇章不跨页；作答框优先
