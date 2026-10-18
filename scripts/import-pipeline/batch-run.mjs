@@ -23,6 +23,8 @@ export const MODELS = {
   luna: { model: process.env.EQB_BATCH_LUNA || 'custom:magpie/group/auto-gpt-6-luna', effort: 'medium' },
 }
 const PRODUCTS = ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']
+// 50 dpi left chart labels and font size unverifiable, so every chart page blocked as needs_main_review.
+const PDF_QA_DPI = 100
 const PRODUCTION_GAP = 30_000
 const AGENT_TIMEOUT = 25 * 60_000
 const HEALTH_LIMIT = 5000
@@ -513,11 +515,11 @@ async function pdfQa(ctx, paper) {
   const images = []
   for (const product of PRODUCTS) {
     const pdf = checks.products[product]
-    const imageDir = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-pages', product, pdf.sha256.slice(7, 23))
+    const imageDir = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-pages', product, `${pdf.sha256.slice(7, 23)}-r${PDF_QA_DPI}`)
     mkdirSync(imageDir, { recursive: true })
     const marker = path.join(imageDir, 'source.json')
     if (!existsSync(marker) || json(marker).sha256 !== pdf.sha256) {
-      const render = await execute('pdftoppm', ['-r', '50', '-png', pdf.pdf, path.join(imageDir, 'page')],
+      const render = await execute('pdftoppm', ['-r', String(PDF_QA_DPI), '-png', pdf.pdf, path.join(imageDir, 'page')],
         ctx.log(`${paper.paperId}-render-${product}`))
       if (render.exit) throw new Blocked('needs_main_review', 'PDF 缩略图渲染失败', render.log)
       writeJson(marker, { sha256: pdf.sha256 })
@@ -530,11 +532,11 @@ async function pdfQa(ctx, paper) {
   const binding = digest(JSON.stringify(Object.values(checks.products).map((p) => p.sha256)))
   if (paper.pdfVisualBinding !== binding) delete paper.completed['PDF 视觉初筛']
   await agent(ctx, paper, 'PDF 视觉初筛', 'sol', [
-    '读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 50 dpi 页面图，逐页初筛。',
+    `读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 ${PDF_QA_DPI} dpi 页面图，逐页初筛。`,
     JSON.stringify(images), `同时读确定性检查 ${output} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
     '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字；看不清的硬约束写 blocking，不能猜通过。',
     '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
-    '50 dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。',
+    `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
     `只写 ${visual}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
   ].join('\n'), [visual])
   const review = json(visual)
