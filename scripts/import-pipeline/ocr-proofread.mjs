@@ -1004,6 +1004,16 @@ const WRITING_SECTION = [
 // Some answer keys head the samples only with "第一节（满分15分）" under "第四部分 写作".
 const WRITING_PART = /^第四部分\s*[:：]?\s*写作/u
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
+
+// OCR can keep the first section number on the writing part heading's item
+// ("第四部分 写作（共两节，满分40分）\n第一节"); the sample follows directly.
+export function writingSectionAfterPart(text) {
+  const normalized = String(text).normalize('NFKC')
+  if (!WRITING_PART.test(normalized)) return null
+  const rest = normalized.replace(/^第四部分[^\n)]*\)?/u, '').trim()
+  const bare = rest.match(BARE_WRITING_SECTION)
+  return bare ? (bare[1] === '一' ? 'application' : 'continuation') : null
+}
 const ENTRY_LABEL = /^(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version/iu
@@ -1094,6 +1104,8 @@ function references(paperId) {
     if (/^(第[一二三四五]部分|听力)/u.test(line.text) || TRANSCRIPT_MARKER.test(line.text)) {
       current = null
       inWriting = WRITING_PART.test(line.text)
+      const trailing = writingSectionAfterPart(line.text)
+      if (trailing) { current = { taskType: trailing, lines: [] }; sections.set(trailing, current) }
     } else if (current) current.lines.push(line)
   }
   const role = (text) => VERSION_LABEL.test(text) ? 'label' : SALUTATION.test(text) ? 'salutation'

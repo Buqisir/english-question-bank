@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary } from './ocr-proofread.mjs'
+import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart } from './ocr-proofread.mjs'
 
 function fixture(texts, lefts = []) {
   const items = texts.map((text, i) => ({ lines: `L${i + 1}`, text }))
@@ -94,4 +94,13 @@ test('sample line joins respect real indent and long words wrapping early', () =
   const result = referenceLineBoundary(previous, line, { left: 0.1, right: 0.9 })
   assert.equal(result.indented, true)
   assert.equal(result.continues, false)
+})
+
+test('writing part heading may carry the first section number on the same OCR item', () => {
+  assert.equal(writingSectionAfterPart('第四部分 写作（共两节，满分40分）\n第一节'), 'application')
+  assert.equal(writingSectionAfterPart('第四部分 写作（共两节，满分40分） 第二节'), 'continuation')
+  assert.equal(writingSectionAfterPart('第四部分 写作\n第一节（满分15分）'), 'application')
+  assert.equal(writingSectionAfterPart('第四部分 写作（共两节，满分40分）'), null)
+  assert.equal(writingSectionAfterPart('第四部分 写作（共两节）\n第一节 Dear classmates,'), null)
+  assert.equal(writingSectionAfterPart('第三部分 语言知识运用\n第一节'), null)
 })
