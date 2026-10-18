@@ -563,16 +563,42 @@ async function pdfQa(ctx, paper) {
   const label = (product) => `PDF 视觉初筛 ${product}`
   if (paper.pdfVisualBinding !== binding) for (const product of PRODUCTS) delete paper.completed[label(product)]
   const productVisual = (product) => path.join(ctx.dir, 'logs', paper.paperId, `pdf-visual-${product}.json`)
-  await Promise.all(PRODUCTS.map((product) => agent(ctx, paper, label(product), 'sol', [
-    `读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 ${product} 的 ${PDF_QA_DPI} dpi 页面图，逐页初筛。`,
-    JSON.stringify(imagesByProduct[product]), `同时读确定性检查 ${output} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
-    '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字；看不清的硬约束写 blocking，不能猜通过。',
-    '插图是原卷图片原样嵌入：只查图整体在页内（四边、图注未被裁掉）、不与文字重叠、尺寸与正文相称；图内小字清晰度取决于原卷扫描，看不清写 notes，不算 blocking。',
-    '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
-    '范文一段若在答案册原页跨页处被拆成两段（以写作源参考分段总览里两段的原页码一前一后相邻为准），也是已知遗留，只写 notes；同一原页内的提前折行仍写 blocking。',
-    `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
-    `只写 ${productVisual(product)}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
-  ].join('\n'), [productVisual(product)], { timeout: VISUAL_AGENT_TIMEOUT })))
+  await Promise.all(PRODUCTS.map(async (product) => {
+    const images = imagesByProduct[product]
+    // Twelve page images repeatedly exhausted the visual worker's six-minute budget.
+    // Keep every page and overlap boundaries so split questions remain detectable.
+    const batches = images.length > 10
+      ? Array.from({ length: Math.ceil(images.length / 4) }, (_, index) =>
+        images.slice(Math.max(0, index * 4 - 1), (index + 1) * 4))
+      : [images]
+    const parts = await Promise.all(batches.map(async (batch, index) => {
+      const output = batches.length === 1 ? productVisual(product)
+        : productVisual(product).replace(/\.json$/u, `-${checks.products[product].sha256.slice(7, 23)}-part-${index + 1}.json`)
+      const partLabel = batches.length === 1 ? label(product)
+        : `${label(product)} ${checks.products[product].sha256.slice(7, 23)} 分批 ${index + 1}`
+      await agent(ctx, paper, partLabel, 'sol', [
+        `读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 ${product} 的 ${PDF_QA_DPI} dpi 页面图，逐页初筛。`,
+        JSON.stringify(batch), `同时读确定性检查 ${paper.pdfCheck} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
+        '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字；看不清的硬约束写 blocking，不能猜通过。',
+        '插图是原卷图片原样嵌入：只查图整体在页内（四边、图注未被裁掉）、不与文字重叠、尺寸与正文相称；图内小字清晰度取决于原卷扫描，看不清写 notes，不算 blocking。',
+        '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
+        '范文一段若在答案册原页跨页处被拆成两段（以写作源参考分段总览里两段的原页码一前一后相邻为准），也是已知遗留，只写 notes；同一原页内的提前折行仍写 blocking。',
+        `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
+        `只写 ${output}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
+      ].join('\n'), [output], { timeout: VISUAL_AGENT_TIMEOUT })
+      const part = json(output)
+      if (!Array.isArray(part.blocking) || !Array.isArray(part.notes)
+        || batch.some((image) => !part.checkedImages?.includes(image))) {
+        throw new Blocked('needs_main_review', `${product} 分批 ${index + 1} 未覆盖全部指定页面或格式无效`, output)
+      }
+      return part
+    }))
+    if (batches.length > 1) writeJson(productVisual(product), {
+      blocking: parts.flatMap((part) => part.blocking),
+      notes: parts.flatMap((part) => part.notes),
+      checkedImages: [...new Set(parts.flatMap((part) => part.checkedImages))],
+    })
+  }))
   const review = { blocking: [], notes: [], checkedImages: [] }
   for (const product of PRODUCTS) {
     const part = json(productVisual(product))
