@@ -72,6 +72,18 @@ Deployment Orb 保留旧钥匙作备用，不把本机私钥复制给它。服�
 `eqb-deploy-local-20261018`。只有 Owner 明确说退役时，才核对并删除服务器
 第 1 条旧授权与 Orb 的私钥 secret，保留本机公钥；本 ADR 不授权现在删除。
 
+## 主机 SSH 加固（2026-10-18）
+
+Owner 同日授权关闭密码登录。只读排查确认：自 2026-07-04 起所有成功的 SSH
+登录都是 `ubuntu` 的公钥登录，没有密码或 root 登录；日志中累计约 9600 次
+失败的用户名/密码猜测。新增 `/etc/ssh/sshd_config.d/00-eqb-hardening.conf`
+（`PasswordAuthentication no`、`KbdInteractiveAuthentication no`、
+`PermitRootLogin no`），先于云镜像的 `50-cloud-init.conf` 生效；`sshd -t`
+通过后 reload。之后密码登录对 `ubuntu` 与 `root` 均返回
+`Permission denied (publickey)`，部署钥匙的 `preflight` 照常。腾讯云控制台的
+TAT 免密终端与 VNC 不经过 sshd，作为带外恢复入口；需要回退时在控制台删除该
+文件并 reload。不要为任何流程重新开启密码或 root SSH 登录。
+
 ## 保持不变
 
 - 本地 CLI 要求 exact-main 的 natural GitHub Actions `Verify` 有成功的 `verify`
