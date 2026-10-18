@@ -11,7 +11,9 @@ import {
   finalizePublicSearchMetadata,
   preparePublicSearchMetadataRequest,
   validatePublicSearchMetadata,
+  validateAuthoredPublicSearchMetadata,
 } from '../server/paper-import-ai/publicSearchMetadata.mjs'
+import { ensureSearchMetadata } from './import-pipeline/search-metadata-check.mjs'
 import { buildNck1CompatibilityPackage } from '../server/import-review/revisionProjection.mjs'
 import { stableStringify } from '../shared/paper-canonical/stable.mjs'
 
@@ -80,6 +82,57 @@ const authored = { groups: prepared.sourceGroups.map((group) => {
   return { groupId: group.groupId, family: group.family, topicLabels: [labelA, labelB], genre: '记叙', metadata }
 }) }
 assert.equal(authoredContractValidate(authored), true, JSON.stringify(authoredContractValidate.errors))
+
+assert.deepEqual(validateAuthoredPublicSearchMetadata({ authored, ...binding }), [])
+const badTopic = structuredClone(authored)
+badTopic.groups[0].topicLabels = ['人与自我-生活与学习-积极的人生态度']
+const topicIssues = validateAuthoredPublicSearchMetadata({ authored: badTopic, ...binding })
+assert.equal(topicIssues[0].path, '/groups/0/topicLabels/0')
+assert.equal(topicIssues[0].code, 'PUBLIC_METADATA_AUTHORED_SHAPE_INVALID')
+assert(topicIssues[0].allowedValues.includes(labelA))
+const badTopics = structuredClone(badTopic)
+badTopics.groups[1].topicLabels = ['invented-topic']
+assert.equal(validateAuthoredPublicSearchMetadata({ authored: badTopics, ...binding }).length, 2,
+  'one rewrite receives all schema errors, without irrelevant oneOf family failures')
+const badRoute = structuredClone(authored)
+badRoute.groups.find(group => group.family === 'grammar-fill').metadata.questions[0].similarityProfile.route = 'invented-route'
+const routeIssues = validateAuthoredPublicSearchMetadata({ authored: badRoute, ...binding })
+assert.equal(routeIssues[0].code, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID')
+assert(routeIssues[0].allowedValues.route.includes('present-stable-description'))
+const reorderedRoute = structuredClone(badRoute)
+reorderedRoute.groups.reverse()
+const reorderedIndex = reorderedRoute.groups.findIndex(group => group.family === 'grammar-fill')
+assert.equal(validateAuthoredPublicSearchMetadata({ authored: reorderedRoute, ...binding })[0].path,
+  `$.groups[${reorderedIndex}].metadata.questions[0].similarityProfile`)
+const repairedTopic = structuredClone(badTopic)
+let authoredRewrites = 0
+await ensureSearchMetadata({
+  check: () => validateAuthoredPublicSearchMetadata({ authored: repairedTopic, ...binding }),
+  rewrite: async issues => {
+    assert.deepEqual(issues, topicIssues)
+    repairedTopic.groups[0].topicLabels = [...authored.groups[0].topicLabels]
+    authoredRewrites += 1
+  },
+})
+assert.equal(authoredRewrites, 1, 'a writer stub fixes the reported field and the real validator accepts it')
+for (const successAt of [0, 1, 2]) {
+  let rewrites = 0
+  await ensureSearchMetadata({
+    check: () => rewrites >= successAt ? [] : topicIssues,
+    rewrite: async (issues, attempt) => {
+      assert.deepEqual(issues, topicIssues)
+      assert.equal(attempt, rewrites + 1)
+      rewrites += 1
+    },
+  })
+  assert.equal(rewrites, successAt, 'valid output continues immediately after the successful rewrite')
+}
+let exhausted = 0
+await assert.rejects(ensureSearchMetadata({
+  check: () => routeIssues,
+  rewrite: async () => { exhausted += 1 },
+}), error => error.kind === 'search_metadata_check_failed'
+  && error.message.includes('PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID') && exhausted === 2)
 
 const rejectsAuthored = (mutate, code) => {
   const value = structuredClone(authored)

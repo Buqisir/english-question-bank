@@ -195,8 +195,25 @@ function authoredOutputContract(groups) {
 /** Adds all authority-owned identities and deterministic values after model classification. */
 export function finalizePublicSearchMetadata({ authored, materialization, sourceDigest, candidateDigest }) {
   const prepared = preparePublicSearchMetadataRequest({ materialization, sourceDigest, candidateDigest })
-  const validateAuthored = new Ajv({ strict: true }).compile(prepared.outputContract)
-  if (!validateAuthored(authored)) throw new Error(`PUBLIC_METADATA_AUTHORED_SHAPE_INVALID: ${validateAuthored.errors?.[0]?.instancePath || '$'}`)
+  const validateAuthored = new Ajv({ strict: true, allErrors: true }).compile(prepared.outputContract)
+  if (!validateAuthored(authored)) {
+    const branches = prepared.outputContract.properties.groups.items.allOf[1].oneOf
+    // Report every bad field, but omit failures from other families' oneOf
+    // branches: a grammar writer must not be asked to add reading fields.
+    const errors = validateAuthored.errors.filter(error => {
+      const groupIndex = /^\/groups\/(\d+)/u.exec(error.instancePath)?.[1]
+      const family = authored?.groups?.[groupIndex]?.family
+      const branch = /\/oneOf\/(\d+)\//u.exec(error.schemaPath)?.[1]
+      if (branch !== undefined) return branches[Number(branch)].properties.family.const === family
+      return error.keyword !== 'oneOf' || !branches.some(item => item.properties.family.const === family)
+    })
+    const issues = (errors.length ? errors : validateAuthored.errors).map(error => ({
+      code: 'PUBLIC_METADATA_AUTHORED_SHAPE_INVALID',
+      path: error.instancePath || '$', message: error.message,
+      allowedValues: error.params.allowedValues ?? error.params,
+    }))
+    throw Object.assign(new Error(`PUBLIC_METADATA_AUTHORED_SHAPE_INVALID: ${issues[0].path}`), { issues })
+  }
 
   const sourceById = new Map(prepared.sourceGroups.map((group) => [group.groupId, group]))
   const seen = new Set()
@@ -248,8 +265,38 @@ export function finalizePublicSearchMetadata({ authored, materialization, source
     }),
   }
   const issues = validatePublicSearchMetadata({ sidecar, materialization, sourceDigest, candidateDigest })
-  if (issues.length) throw new Error(`${issues[0].code}: ${issues[0].message}`)
+  if (issues.length) throw Object.assign(new Error(`${issues[0].code}: ${issues[0].message}`), { issues })
   return sidecar
+}
+
+/** Read-only preflight uses finalize itself so authoring and publication cannot drift. */
+export function validateAuthoredPublicSearchMetadata(input) {
+  try {
+    finalizePublicSearchMetadata(input)
+    return []
+  } catch (error) {
+    if (!error.message.startsWith('PUBLIC_METADATA_')) throw error
+    const prepared = preparePublicSearchMetadataRequest(input)
+    return (error.issues || [{ code: error.message.split(':')[0], path: '$', message: error.message }]).map(issue => {
+      // Runtime paths follow deterministic sidecar order, which need not be authored order.
+      const match = /^\$\.groups\[(\d+)\]\.metadata\.questions\[(\d+)\]/u.exec(issue.path)
+      const source = match && prepared.deterministic[Number(match[1])]
+      const group = source && input.authored.groups.find(group => group.groupId === source.groupId)
+      const question = group?.metadata?.questions?.[Number(match?.[2])]
+      const spec = grammarSimilarityByKey.get(question?.facetKey)
+      const authoredIndex = group && input.authored.groups.indexOf(group)
+      const path = group ? issue.path.replace(/^\$\.groups\[\d+\]/u, `$.groups[${authoredIndex}]`) : issue.path
+      let allowedValues = issue.allowedValues
+      if (spec && issue.code === 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID') {
+        allowedValues = { facetKey: spec.facet_key, route: spec.routes, features: spec.features }
+      } else if (issue.code === 'PUBLIC_METADATA_GRAMMAR_ROLE_INVALID') {
+        allowedValues = { role: [null, ...grammarRoles], routesForFacet: spec?.routes || [] }
+      } else if (issue.code === 'PUBLIC_METADATA_GRAMMAR_FACET_INVALID') {
+        allowedValues = prepared.controlledValues.grammarFacets
+      }
+      return { ...issue, path, allowedValues: allowedValues ?? prepared.controlledValues }
+    })
+  }
 }
 
 export function buildPublicSearchMetadataMessages(input) {

@@ -9,6 +9,7 @@ import os from 'node:os'
 import path from 'node:path'
 import tls from 'node:tls'
 import { pathToFileURL } from 'node:url'
+import { checkSearchMetadataFiles, ensureSearchMetadata } from './search-metadata-check.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const batchRoot = path.join(root, 'imports/batch')
@@ -788,11 +789,23 @@ async function round(ctx, paper, number) {
   })
   const jobs = plan.map(({ worker, label, outputs }) => (number === 1
     ? proofreader(ctx, paper, worker, label, outputs)
-    : agent(ctx, paper, label, /metadata/iu.test(worker.label || '') ? 'luna' : 'sol',
-      `${worker.prompt}\n写权限仅限列出的期望产出文件。`, outputs)))
+    : /metadata/iu.test(worker.label || '')
+      ? metadataWorker(ctx, paper, worker, label, outputs)
+      : agent(ctx, paper, label, 'sol', `${worker.prompt}\n写权限仅限列出的期望产出文件。`, outputs)))
   const settled = await Promise.allSettled(jobs)
   const failed = settled.find((result) => result.status === 'rejected')
   if (failed) throw failed.reason
+}
+async function metadataWorker(ctx, paper, worker, label, outputs, { initial = true } = {}) {
+  const base = `${worker.prompt}\n写权限仅限列出的期望产出文件。\ntopicLabels、facetKey、route、features 只能从 request 的 controlledValues 原样复制。`
+  if (initial) await agent(ctx, paper, label, 'luna', base, outputs)
+  await ensureSearchMetadata({
+    check: () => checkSearchMetadataFiles({ fastDirectory: fastDir(paper.paperId),
+      paperDirectory: path.join(papersRoot, paper.paperId) }),
+    rewrite: (issues, attempt) => agent(ctx, paper, `${label}-自检返工-${attempt}`, 'luna',
+      `${base}\n上一轮产出未通过与 finalize 相同的只读校验。只改下列出错字段，其余保持不变：\n${JSON.stringify(issues, null, 2)}`,
+      outputs, { retries: 0 }),
+  })
 }
 async function processPaper(ctx, paper) {
   if (['blocked', 'reported'].includes(paper.state)) return
@@ -872,6 +885,10 @@ async function processPaper(ctx, paper) {
     }
     if (!paper.done.round2) { await round(ctx, paper, 2); paper.done.round2 = true; ctx.save() }
     if (!paper.done.finish) {
+      const workers = json(path.join(fastDir(paper.paperId), 'round2.json'))
+      const worker = workers.find(worker => /metadata/iu.test(worker.label || ''))
+      if (!worker) throw new Blocked('needs_code_fix', '第二轮计划缺少检索 metadata worker')
+      await metadataWorker(ctx, paper, worker, `round2-${worker.label}`, worker.outputs, { initial: false })
       const result = await fast(ctx, paper, 'finish')
       if (result.exit) throw new Blocked('finish_failed', 'finish 失败，需检查本地日志', result.log)
       paper.done.finish = true; ctx.save()
