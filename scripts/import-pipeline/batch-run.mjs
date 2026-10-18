@@ -517,7 +517,7 @@ async function pdfQa(ctx, paper) {
   paper.pdfCheck = output
   if (checks.blocking.length) throw new Blocked('needs_main_review', checks.blocking.join('；'), output)
   const visual = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-visual.json')
-  const images = []
+  const imagesByProduct = {}
   for (const product of PRODUCTS) {
     const pdf = checks.products[product]
     const imageDir = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-pages', product, `${pdf.sha256.slice(7, 23)}-r${PDF_QA_DPI}`)
@@ -532,24 +532,34 @@ async function pdfQa(ctx, paper) {
     const pages = readdirSync(imageDir).filter((name) => /^page-\d+\.png$/u.test(name))
       .sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).slice(0, pdf.pages)
     if (pages.length !== pdf.pages) throw new Blocked('needs_main_review', 'PDF 缩略页数不足', imageDir)
-    images.push(...pages.map((name) => path.join(imageDir, name)))
+    imagesByProduct[product] = pages.map((name) => path.join(imageDir, name))
   }
   const binding = digest(JSON.stringify(Object.values(checks.products).map((p) => p.sha256)))
-  if (paper.pdfVisualBinding !== binding) delete paper.completed['PDF 视觉初筛']
-  await agent(ctx, paper, 'PDF 视觉初筛', 'sol', [
-    `读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 ${PDF_QA_DPI} dpi 页面图，逐页初筛。`,
-    JSON.stringify(images), `同时读确定性检查 ${output} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
+  // One agent per product: all ~34 pages at 100 dpi in one context evicted the earlier images.
+  const label = (product) => `PDF 视觉初筛 ${product}`
+  if (paper.pdfVisualBinding !== binding) for (const product of PRODUCTS) delete paper.completed[label(product)]
+  const productVisual = (product) => path.join(ctx.dir, 'logs', paper.paperId, `pdf-visual-${product}.json`)
+  await Promise.all(PRODUCTS.map((product) => agent(ctx, paper, label(product), 'sol', [
+    `读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 ${product} 的 ${PDF_QA_DPI} dpi 页面图，逐页初筛。`,
+    JSON.stringify(imagesByProduct[product]), `同时读确定性检查 ${output} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
     '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字；看不清的硬约束写 blocking，不能猜通过。',
     '插图是原卷图片原样嵌入：只查图整体在页内（四边、图注未被裁掉）、不与文字重叠、尺寸与正文相称；图内小字清晰度取决于原卷扫描，看不清写 notes，不算 blocking。',
     '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
     `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
-    `只写 ${visual}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
-  ].join('\n'), [visual])
-  const review = json(visual)
-  if (!Array.isArray(review.blocking) || !Array.isArray(review.notes)
-    || images.some((image) => !review.checkedImages?.includes(image))) {
-    throw new Blocked('needs_main_review', '视觉检查没有覆盖全部 PDF 页面或输出格式无效', visual)
+    `只写 ${productVisual(product)}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
+  ].join('\n'), [productVisual(product)])))
+  const review = { blocking: [], notes: [], checkedImages: [] }
+  for (const product of PRODUCTS) {
+    const part = json(productVisual(product))
+    if (!Array.isArray(part.blocking) || !Array.isArray(part.notes)
+      || imagesByProduct[product].some((image) => !part.checkedImages?.includes(image))) {
+      throw new Blocked('needs_main_review', `${product} 视觉检查没有覆盖全部页面或输出格式无效`, productVisual(product))
+    }
+    review.blocking.push(...part.blocking.map((item) => `${product}：${item}`))
+    review.notes.push(...part.notes.map((item) => `${product}：${item}`))
+    review.checkedImages.push(...part.checkedImages)
   }
+  writeJson(visual, review)
   if (review.blocking.length) throw new Blocked('needs_main_review', review.blocking.join('；'), visual)
   paper.pdfVisualBinding = binding
   paper.pdfVisual = visual
@@ -949,7 +959,7 @@ function dryRun(ctx) {
     console.log(commandText(process.execPath, [fastScript, 'after-proofread', item.paperId]) + '（生产锁，间隔 ≥30 秒；首次 OCR 上传前探测卷号）')
     console.log(`退出码 2：${MODELS.sol.model} / medium 本卷修复（每个停点一次，最多 ${MAX_REPAIRS} 个停点；同一停点再停时 ${MODELS.astra.model} / high 复修，每卷至多一次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
     console.log(commandText(process.execPath, [fastScript, 'finish', item.paperId, ...economyFinishArgs(item)]))
-    console.log('PDF：pdfinfo / pdftotext / pdffonts 硬约束；pdftoppm -r 50 逐页图 + Sol 视觉初筛')
+    console.log(`PDF：pdfinfo / pdftotext / pdffonts 硬约束；pdftoppm -r ${PDF_QA_DPI} 逐页图 + 每个产品一个 Sol 视觉初筛`)
     if (ctx.opts.submit) {
       console.log('送审护栏：健康检查、本地 ledger 与生产快照的 paperId/sha256/卷名查重')
       console.log(commandText(process.execPath, [fastScript, 'submit', item.paperId]))
