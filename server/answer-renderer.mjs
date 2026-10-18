@@ -204,7 +204,10 @@ p{margin:0;orphans:2;widows:2;overflow-wrap:break-word}
 .answer-keys{width:100%;border-collapse:collapse;table-layout:fixed;margin:0}
 .answer-keys td{vertical-align:top;padding:0 8pt 0 0;overflow-wrap:anywhere}
 .answer-keys tr{break-inside:avoid}
-.answer-keys--5{table-layout:auto}
+.answer-keys--5{table-layout:auto;--answer-content-width:170mm}
+/* Override --5's auto layout only after measured overflow; 170mm is the A4
+   content width after this booklet's two 20mm margins. */
+.answer-keys--bounded{table-layout:fixed}
 /* Separate the label from wrapping prose; 0.25em preserves the Termes space.
    break-word overrides td's anywhere so table sizing still respects whole words. */
 .answer-key{display:flex;align-items:baseline;column-gap:0.25em}

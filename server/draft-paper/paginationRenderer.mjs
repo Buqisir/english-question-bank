@@ -187,6 +187,23 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
     }
     if (studentProduct) await page.evaluate(measureOptions, { ...optionSafety, prepare: true })
 
+    // Answer booklets retain their automatic column widths unless whole-word
+    // minimums exceed the A4 content width. Measure with loaded print fonts.
+    await page.evaluate(() => {
+      if (document.body.dataset.pdfEdition !== 'answerOnly') return
+      for (const table of document.querySelectorAll('.answer-keys--5')) {
+        const probe = document.createElement('div')
+        probe.style.cssText = `position:absolute;visibility:hidden;width:${getComputedStyle(table).getPropertyValue('--answer-content-width')}`
+        const copy = table.cloneNode(true)
+        probe.append(copy)
+        document.body.append(probe)
+        if (copy.getBoundingClientRect().width > probe.getBoundingClientRect().width + 1) {
+          table.classList.add('answer-keys--bounded')
+        }
+        probe.remove()
+      }
+    })
+
     // Step 2: PagedConfig BEFORE step 3's polyfill injection — order is load-bearing,
     // see module header + spike-gate-dp1.md finding #3.
     await page.evaluate(() => {
