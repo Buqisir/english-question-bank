@@ -171,6 +171,14 @@ function referencesFixture(texts, taskTypes = ['continuation']) {
   }] }] })
 }
 
+test('a repeated writing label merged with its bare section keeps both samples', () => {
+  const result = referencesFixture(['第四部分 写作', '写作\n第一节：',
+    'One possible version:', 'A source application.', '第二节：', 'A source story.'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['A source application.'], ['A source story.']])
+})
+
 test('an inline reading explanation divider closes the writing references', () => {
   const result = referencesFixture(['第二节 读后续写', 'One possible version:',
     'A complete story ends here.', '【解题导语】本文是一篇应用文。',

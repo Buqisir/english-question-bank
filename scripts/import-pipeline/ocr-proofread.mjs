@@ -1117,10 +1117,14 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     // omit the writing-part heading entirely; require an adjacent sample label
     // before treating a bare "第一节" outside writing as a writing section.
     const [heading, ...rest] = line.text.split('\n')
+    // OCR may repeat the writing label above a bare section in the same item.
+    // Only interpret it inside the already established writing part.
+    const sectionText = inWriting && /^写作\s*[:：]?$/u.test(heading) && rest.length === 1
+      ? rest[0].trim() : line.text
     const isSampleLabel = text => ENTRY_LABEL.test(text || '') && ESSAY_LABEL.test(text || '')
     const mergedLabel = rest.length === 1 && isSampleLabel(rest[0].trim()) ? rest[0].trim() : null
     const bare = (inWriting || mergedLabel || isSampleLabel(lines[lineIndex + 1]?.text))
-      && (mergedLabel ? heading : line.text).normalize('NFKC').match(BARE_WRITING_SECTION)
+      && (mergedLabel ? heading : sectionText).normalize('NFKC').match(BARE_WRITING_SECTION)
     const started = bare ? [bare[1] === '一' ? 'application' : 'continuation']
       : WRITING_SECTION.find(([, pattern]) => pattern.test(line.text))
     if (started) {
