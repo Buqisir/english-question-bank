@@ -976,7 +976,7 @@ function redoFrom(ctx, name) {
   // re-derived Candidate, so installed sidecars of forgotten steps move aside up front.
   for (const [owner, file] of [['summaries', 'paragraph-summaries-v1.json'], ['search-metadata', 'public-search-metadata-v1.json'],
     ['listening-review', 'listening-review-v1.json'], ['ocr-correction-report', 'agent-ocr-correction-report-v2.json'],
-    ['source-references', 'source-references-v1.json'], ['freeze', 'products']]) {
+    ['source-references', 'source-references-v1.json'], ['pagination-plan', PAPER_PAGINATION_PLAN_FILE_NAME], ['freeze', 'products']]) {
     if (STEP_ORDER.indexOf(owner) >= index) archive(ctx, path.join(ctx.paperDir, file))
   }
   // The producer cache is keyed by its inputs, not its code: after a producer fix the cached
