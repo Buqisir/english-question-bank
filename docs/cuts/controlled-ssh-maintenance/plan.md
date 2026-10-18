@@ -205,16 +205,30 @@ D=/opt/eqb/deployments/host-configuration-upgrade-v1/$O
 systemctl show "eqb-host-upgrade-$O.service" \
   --property=LoadState,ActiveState,MainPID,ControlPID,ControlGroup || true
 journalctl --no-pager -o cat -u "eqb-host-upgrade-$O"
-cat "$D/operation.json"
-cat /opt/eqb/deployments/controlled-ssh/active.json
+for F in "$D/operation.json" /opt/eqb/deployments/controlled-ssh/active.json \
+  "$D/unit" "$D/caddy" "$D/module" "$D/marker"; do
+  if [[ ! -e "$F" && ! -L "$F" ]]; then
+    printf 'MISSING %s\n' "$F"
+  elif [[ ! -f "$F" || -L "$F" ]]; then
+    printf 'UNSAFE_TYPE %s\n' "$F"
+  else
+    printf 'PRESENT %s\n' "$F"
+    sha256sum "$F" || printf 'HASH_READ_FAILED %s\n' "$F"
+    if [[ "$F" == *.json ]]; then
+      cat "$F" || printf 'RECORD_READ_FAILED %s\n' "$F"
+    fi
+  fi
+done
 ps -eo pid,ppid,stat,lstart,comm
 lslocks --output PID,COMMAND,TYPE,MODE,PATH
-sha256sum "$D/unit" "$D/caddy" "$D/module" "$D/marker"
 readlink /opt/eqb/current /opt/eqb/deployments/host-configuration/current
 ```
 
 Inspect the receiptPath in operation.json, or the unique matching target's
 receipt in deployments/receipts when response loss left engineReceipt null.
+Successful completion with a lost response normally has no active.json.
+Report every missing record/backup and continue the read-only snapshot;
+absence alone never proves success or authorizes replay.
 Do not use a different receipt, restart a unit, restore host bytes, invoke
 implicit engine recovery, or unlink evidence while investigating UNKNOWN.
 
@@ -246,7 +260,12 @@ Three terminal branches share lock/operation/blockade/backup/Git-byte/app-pointe
 unit/Caddy, service and local/public-health verification:
 
 - Healthy rolled-back `failure`: prove the old host identity, complete receipt
-  and backup hashes; record `terminal=rolled-back`.
+  and backup hashes; record `terminal=rolled-back`. The engine may report its
+  own healthy rollback, or a complete failure receipt with `rolledBack=false`
+  after preparation/MAIN_CHANGED. The latter requires the original harness
+  `failure/host-rollback`, `rollbackHealthy=true`, bound receipt and completion
+  timestamp, plus current old-host bytes/app/health and absent engine state.
+  It does not extend the UNKNOWN branch.
 - `success/verified` persisted before blockade unlink: prove the target host,
   successful disk receipt and new-module preflight; record `terminal=installed`.
 - `unknown`: require a complete bound disk receipt (unique if discovered),

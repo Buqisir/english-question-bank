@@ -320,8 +320,20 @@ export async function reconcileHostConfigurationOnce({ targetSha, payloadSha = t
     && !receipt.rolledBack && receipt.failureCode === null
   const healthyRollbackReceipt = receipt.conclusion === 'failure'
     && receipt.rolledBack && receipt.rollbackHealthy === true && typeof receipt.failureCode === 'string'
+  // Preparation/MAIN_CHANGED failures can precede the engine's own rollback
+  // state. The harness still restores and verifies the old host. Accept that
+  // separate durable completion only with its bound full failure receipt;
+  // a general UNKNOWN cannot borrow this branch.
+  const healthyHarnessRollback = receipt.conclusion === 'failure'
+    && typeof receipt.failureCode === 'string' && receipt.failureCode.length > 0
+    && original.engineReceipt?.conclusion === 'failure' && original.state === 'failure'
+    && original.phase === 'host-rollback' && original.rollbackHealthy === true
+    && original.errorCode === 'ENGINE_REPORTED_FAILURE'
+    && Number.isFinite(Date.parse(original.finishedAt))
+    && Date.parse(original.finishedAt) >= Date.parse(receipt.finishedAt)
   const terminal = installed.sha === original.targetSha && successReceipt ? 'installed'
-    : installed.sha === original.previousHostSha && (successReceipt || healthyRollbackReceipt) ? 'rolled-back' : null
+    : installed.sha === original.previousHostSha
+      && (successReceipt || healthyRollbackReceipt || healthyHarnessRollback) ? 'rolled-back' : null
   check(terminal && (original.state !== 'failure' || (terminal === 'rolled-back' && original.rollbackHealthy === true))
     && (original.state !== 'success' || (terminal === 'installed' && original.phase === 'verified')),
   'TERMINAL_STATE_UNPROVEN')

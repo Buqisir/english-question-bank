@@ -109,7 +109,8 @@ function fixture({ engineMode = 'success', preflightFailure = false } = {}) {
     },
     async load(file) {
       state.loads.push(file)
-      if (state.engineMode === 'real-engine') {
+      if (state.engineMode.startsWith('real-engine')) {
+        let engineFetches = 0
         const runtime = {
           uid: () => config.uid,
           seal: directory => fs.chmodSync(directory, 0o755),
@@ -117,7 +118,11 @@ function fixture({ engineMode = 'success', preflightFailure = false } = {}) {
           runSource(command, args) {
             if (args.includes('get-url')) return 'https://github.com/Buqisir/english-question-bank\n'
             if (args.includes('fetch')) return ''
-            if (args.at(-1) === 'FETCH_HEAD') return `${targetSha}\n`
+            if (args.at(-1) === 'FETCH_HEAD') {
+              engineFetches++
+              return `${state.engineMode === 'real-engine-main-changed' && engineFetches === 2
+                ? '5'.repeat(40) : state.main}\n`
+            }
             throw Error('Unexpected real-engine source command')
           },
           runSystem(command, args, options = {}) {
@@ -130,8 +135,11 @@ function fixture({ engineMode = 'success', preflightFailure = false } = {}) {
             }
             if (command === '/usr/bin/tar') {
               const destination = args[args.indexOf('-C') + 1]
-              for (const name of host) write(path.join(destination, name), targetFiles[name])
+              for (const name of host) write(path.join(destination, name), gitFiles[state.main][name])
               return ''
+            }
+            if (command === '/usr/bin/node' && state.engineMode === 'real-engine-prepare-failure') {
+              throw Error('fixture host preparation validation failed')
             }
             if (['/usr/bin/node', '/usr/bin/systemd-analyze'].includes(command)) return ''
             return deps.run(command, args, options).toString()
@@ -212,6 +220,63 @@ function fixture({ engineMode = 'success', preflightFailure = false } = {}) {
 
 export async function verifyHostConfigurationUpgrade() {
   let cases = 0
+  for (const mode of ['real-engine-prepare-failure', 'real-engine-main-changed']) {
+    const f = fixture({ engineMode: mode })
+    try {
+      const result = await f.run()
+      assert.equal(result.state, 'failure', JSON.stringify(result))
+      assert.equal(result.phase, 'host-rollback')
+      assert.equal(result.rollbackHealthy, true)
+      assert.equal(result.engineReceipt.conclusion, 'failure')
+      assert.equal(result.engineReceipt.rolledBack, false, 'engine never reached its rollback phase')
+      assert.equal(result.engineReceipt.rollbackHealthy, null)
+      assert.equal(result.engineReceipt.staged, mode === 'real-engine-main-changed')
+      assert.equal(result.engineReceipt.failureCode,
+        mode === 'real-engine-main-changed' ? 'MAIN_CHANGED' : 'HOST_CONFIGURATION_UPDATE_FAILED')
+      assert.equal(dailyAdmission(f).status, 1)
+      const original = fs.readFileSync(path.join(f.operation, 'operation.json'))
+      for (const [name, mutate] of [
+        ['UNKNOWN', state => { state.state = 'unknown' }],
+        ['unfinished rollback', state => { state.phase = 'postcheck' }],
+        ['unhealthy rollback', state => { state.rollbackHealthy = false }],
+        ['unbound failure', state => { state.errorCode = 'OTHER_ERROR' }],
+        ['missing receipt binding', state => { delete state.engineReceipt }],
+        ['null receipt binding', state => { state.engineReceipt = null }],
+        ['unfinished record', state => { delete state.finishedAt }],
+        ['predated completion', state => { state.finishedAt = new Date(0).toISOString() }],
+      ]) {
+        const unproven = JSON.parse(original)
+        mutate(unproven)
+        fs.writeFileSync(path.join(f.operation, 'operation.json'), JSON.stringify(unproven))
+        await assert.rejects(reconcileHostConfigurationOnce({ targetSha, config: f.config,
+          lockFd: f.lockFd, dependencies: f.deps }), { code: 'TERMINAL_STATE_UNPROVEN' }, name)
+        assert.ok(fs.existsSync(f.active))
+        assert.equal(fs.existsSync(path.join(f.operation, 'reconciliation.json')), false)
+      }
+      fs.writeFileSync(path.join(f.operation, 'operation.json'), original)
+      const proof = await reconcileHostConfigurationOnce({ targetSha, config: f.config,
+        lockFd: f.lockFd, dependencies: f.deps })
+      assert.equal(proof.terminal, 'rolled-back')
+      assert.deepEqual(fs.readFileSync(path.join(f.operation, 'operation.json')), original)
+      assert.equal(dailyAdmission(f).status, 0)
+      await assert.rejects(f.run(), { code: 'OPERATION_CONSUMED' })
+      const nextSha = '4'.repeat(40)
+      f.state.main = nextSha
+      f.state.engineMode = 'real-engine'
+      f.gitFiles[nextSha] = { ...f.gitFiles[targetSha],
+        [host[2]]: Buffer.concat([f.gitFiles[targetSha][host[2]], Buffer.from('\n// future\n')]) }
+      for (const file of payload) {
+        const destination = path.join(f.root, `deployments/host-upgrade-payload-${nextSha}`, file)
+        fs.mkdirSync(path.dirname(destination), { recursive: true, mode: 0o700 })
+        fs.writeFileSync(destination, f.gitFiles[nextSha][file], { mode: 0o600 })
+      }
+      const next = await upgradeHostConfigurationOnce({ targetSha: nextSha, config: f.config,
+        lockFd: f.lockFd, dependencies: f.deps })
+      assert.equal(next.state, 'success', JSON.stringify(next))
+      assert.equal(f.state.calls, 2)
+      cases++
+    } finally { f.close() }
+  }
   const closure = fixture({ preflightFailure: true })
   try {
     await closure.run()
