@@ -14,8 +14,6 @@ import { DatabaseSync } from 'node:sqlite'
 import { MEDIA_AI_CONFIRMATION_CHECKS } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
-import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
-import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
 import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mjs'
 import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
@@ -1420,10 +1418,6 @@ export function createImportReviewStore({
     const playbackPath = projection.analyzedPackage
       ? projection.sourceProvenance?.members.find(member => member.role === 'audio')?.path
       : LISTENING_AUDIO_PATHS.playback
-    const waveform = playback ? readListeningWaveform(
-      resolveReviewFile(revisionDirectory(revision.id), LISTENING_WAVEFORM_FILE),
-      playback.sha256, playback.durationSeconds,
-    ) : null
     const payload = {
       paperAsset: projection.paperAsset,
       analysisSidecars: projection.analysisSidecars || {},
@@ -1431,7 +1425,6 @@ export function createImportReviewStore({
         relativePath: 'listening/playback.mp3', sha256: playback.sha256, byteLength: playback.byteLength,
         durationSeconds: playback.durationSeconds, mediaType: 'audio/mpeg',
         url: `/api/import-review-preview/revisions/${encodeURIComponent(revision.id)}/files?path=${encodeURIComponent(playbackPath)}`,
-        ...(waveform ? { waveform } : {}),
         segments: reviewedPlaybackSegments(projection.reviewedListening),
       } } : {}) },
     }

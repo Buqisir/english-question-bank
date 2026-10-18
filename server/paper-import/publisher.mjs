@@ -3,8 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { LISTENING_AUDIO_PATHS } from './listeningAudioEvidence.mjs'
 import { reviewedPlaybackSegments } from './listeningReview.mjs'
-import { buildListeningWaveform, readListeningWaveform } from './listeningWaveform.mjs'
-import { LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
+import { PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   assertPaperImportAnalysisSidecars,
@@ -1182,7 +1181,7 @@ function admitBoundUniversalNck1Package({
     // Optional Screen derivative travels in the same atomic version directory;
     // it does not alter Source Capture, Candidate or approval identity.
     admission.sealed.playbackDerivatives = {
-      [PUBLISHED_LISTENING_WAVEFORM_FILE]: Buffer.from(JSON.stringify({ ...playbackUi, digest: digestJson(playbackUi) })),
+      [PUBLISHED_LISTENING_PLAYBACK_UI_FILE]: Buffer.from(JSON.stringify({ ...playbackUi, digest: digestJson(playbackUi) })),
     }
   }
   if (admission.sealed.manifest.paperId !== paperId) {
@@ -1373,8 +1372,8 @@ export function publishUniversalNck1Import({
   packageData.fileStorage = fileStorage
   const playback = projection.sourceInput.listeningAudio || projection.analyzedPackage?.listeningAudio
   const playbackUi = playback ? {
-    waveform: readListeningWaveform(path.join(reviewRootDir, LISTENING_WAVEFORM_FILE), playback.sha256, playback.durationSeconds)
-      || buildListeningWaveform(listeningAudioBytes, playback.durationSeconds),
+    playbackAudioSha256: playback.sha256,
+    durationSeconds: playback.durationSeconds,
     segments: reviewedPlaybackSegments(projection.reviewedListening),
   } : null
   return publishPreparedPaperImport({

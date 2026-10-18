@@ -12,8 +12,7 @@ import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
-import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
+import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
@@ -585,8 +584,9 @@ export function reviewBundleFilePaths(rootDir, candidate = null) {
   const { manifest, materialization } = loaded
   const reviewedListening = loadReviewedListening(rootDir, loaded, candidate)
   const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
-  const waveform = playback ? readListeningWaveform(resolveReviewFile(rootDir, LISTENING_WAVEFORM_FILE),
-    playback.sha256, playback.durationSeconds) : null
+  // Retain historical bundle/PDF input identities without interpreting geometry.
+  // Old producers may still upload this optional, independently hashed file.
+  const legacyWaveform = playback && existsSync(resolveReviewFile(rootDir, LEGACY_LISTENING_WAVEFORM_FILE))
   const importProfile = nck1ImportProfile(loaded.config, {
     externalPackage: Boolean(loaded.analyzedPackage),
   })
@@ -689,7 +689,7 @@ export function reviewBundleFilePaths(rootDir, candidate = null) {
         }))
       : []),
     ...sourceFiles,
-    ...(waveform ? [{ path: LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
+    ...(legacyWaveform ? [{ path: LEGACY_LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
     ...(reviewedListening?.files || []),
     ...NCK1_STAGED_ANALYSIS_FILES
       .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
