@@ -470,12 +470,13 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     response,
     context,
   }) => {
-    if (!agentIdentity(request, context, agentToken)) {
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) {
       context.sendJson(response, 401, { error: 'agent_auth_required' })
       return
     }
     const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
-    context.sendJson(response, 201, store.createRevision(input))
+    context.sendJson(response, 201, store.createRevision(input, { blobStore: getBlobStore?.(), actor }))
   })))
 
   routes.push(defineRoute('PUT', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/files$/, route(async ({
@@ -491,34 +492,35 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     }
     const revisionId = match[1]
     const relativePath = url.searchParams.get('path') || ''
-    const upload = store.fileForUpload(revisionId, relativePath)
-    if (upload.file.uploadedAt && existsSync(upload.destination)) {
-      context.sendJson(response, 200, store.uploadStatus(revisionId))
-      return
-    }
-    const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
-    const blobStore = largeAsset ? getBlobStore?.() : null
-    const timer = reviewUploadMetrics('put', { revisionId, path: relativePath }, ['receive', 'adoption'])
-    let received
+    const timer = reviewUploadMetrics('put', { revisionId, path: relativePath },
+      ['status', 'receive', 'adoption', 'installationAndMark'])
+    let upload
     try {
-      received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
-      validateTemporaryFile: blobStore?.adoptLocalFile
-        ? (temporary, expected) => {
+      upload = store.beginFileUpload(revisionId, relativePath)
+      if (upload.file.uploadedAt && existsSync(upload.destination)) {
+        context.sendJson(response, 200, store.uploadStatus(revisionId))
+        timer.finish()
+        return
+      }
+      const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
+      const blobStore = largeAsset ? getBlobStore?.() : null
+      timer.phase('receive')
+      const received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
+        validateTemporaryFile: async (temporary, expected) => {
+          if (blobStore?.adoptLocalFile) {
             timer.phase('adoption')
-            return blobStore.adoptLocalFile(temporary, expected)
+            await blobStore.adoptLocalFile(temporary, expected)
           }
-        : null,
+          timer.phase('installationAndMark')
+        },
       })
+      const status = store.completeFileUpload(revisionId, relativePath, received)
       timer.finish()
+      context.sendJson(response, 200, status)
     } catch (error) {
       timer.finish(error)
       throw error
-    }
-    context.sendJson(
-      response,
-      200,
-      store.completeFileUpload(revisionId, relativePath, received),
-    )
+    } finally { upload?.release() }
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/finalize$/, route(({

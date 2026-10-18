@@ -1,4 +1,7 @@
-import { createReadStream } from 'node:fs'
+import {
+  createReadStream, constants, openSync, closeSync, fstatSync, readSync,
+  mkdirSync, linkSync, unlinkSync,
+} from 'node:fs'
 import { chmod, lstat, mkdir, readFile, writeFile, link, unlink, rename } from 'node:fs/promises'
 import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
@@ -35,6 +38,29 @@ async function checkFile(filePath, file) {
   if (size !== file.byteLength || `sha256:${hash.digest('hex')}` !== file.sha256) {
     throw new Error('Immutable blob byte integrity failure')
   }
+}
+
+function checkLocalFile(filePath, file) {
+  checkDescriptor(file)
+  let fd
+  try {
+    fd = openSync(filePath, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK)
+    const stat = fstatSync(fd)
+    if (!stat.isFile() || stat.size !== file.byteLength) return false
+    const hash = createHash('sha256')
+    const buffer = Buffer.allocUnsafe(64 * 1024)
+    let length
+    let size = 0
+    while ((length = readSync(fd, buffer, 0, buffer.length, null)) > 0) {
+      size += length
+      if (size > file.byteLength) return false
+      hash.update(buffer.subarray(0, length))
+    }
+    return size === file.byteLength && `sha256:${hash.digest('hex')}` === file.sha256
+  } catch (error) {
+    if (['ENOENT', 'ELOOP'].includes(error.code)) return false
+    throw error
+  } finally { if (fd !== undefined) closeSync(fd) }
 }
 
 export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, credentials, client, storageEnv = process.env } = {}) {
@@ -118,7 +144,26 @@ export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, 
       await unlink(temporary).catch(error => { if (error.code !== 'ENOENT') throw error })
     }
   }
-  return { identity, get, put, ...(!s3 ? { adoptLocalFile } : {}) }
+  // Internal local-only reuse. Hash outside SQLite transactions, reject symlinks,
+  // and install without replacing any existing destination. No EXDEV copying.
+  function reuseLocalFile(destination, file) {
+    assertPaperStorageMounted([rootDir, path.dirname(destination)], storageEnv)
+    const source = path.join(rootDir, key(file))
+    if (!checkLocalFile(source, file)) return false
+    mkdirSync(path.dirname(destination), { recursive: true })
+    const temporary = `${destination}.reuse-${randomUUID()}`
+    try {
+      linkSync(source, temporary)
+      if (!checkLocalFile(temporary, file)) return false
+      try { linkSync(temporary, destination) } catch (error) {
+        if (error.code !== 'EEXIST') throw error
+      }
+      return checkLocalFile(destination, file)
+    } finally {
+      try { unlinkSync(temporary) } catch (error) { if (error.code !== 'ENOENT') throw error }
+    }
+  }
+  return { identity, get, put, ...(!s3 ? { adoptLocalFile, reuseLocalFile } : {}) }
 }
 
 export function configuredBlobStore(env = process.env) {

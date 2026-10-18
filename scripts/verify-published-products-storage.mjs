@@ -20,6 +20,9 @@ import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 
+// Keep Review reuse/crash/concurrency coverage in the existing storage CI seam.
+await import('./verify-import-review-upload-reuse.mjs')
+
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 const directory = await mkdtemp(path.join(os.tmpdir(), 'eqb-product-storage-'))
 const db = new DatabaseSync(':memory:')

@@ -19,6 +19,7 @@ import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
+import { revisionUploadGate } from './reviewUploadLocks.mjs'
 import {
   buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
@@ -856,7 +857,24 @@ export function createImportReviewStore({
     }
   }
 
-  function createRevision(rawManifest) {
+  function createRevision(rawManifest, { blobStore = null, actor = 'internal' } = {}) {
+    const identity = { actor }
+    const timer = reviewUploadMetrics('register', identity, ['registration', 'reuse'])
+    try {
+      const result = createRevisionMeasured(rawManifest)
+      identity.revisionId = result.revision.id
+      timer.phase('reuse')
+      reuseRevisionFiles(result.revision.id, blobStore, actor)
+      const missingFiles = uploadStatus(result.revision.id).missingFiles
+      timer.finish()
+      return { ...result, missingFiles }
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
+  }
+
+  function createRevisionMeasured(rawManifest) {
     const manifest = validateAnyReviewBundleManifest(rawManifest)
     const kind = reviewKind(manifest)
     const identities = kind === 'ocr'
@@ -965,6 +983,71 @@ export function createImportReviewStore({
       revision,
       files,
       missingFiles: files.filter((file) => !file.uploadedAt).map((file) => file.path),
+    }
+  }
+
+  function beginFileUpload(revisionId, relativePath) {
+    // Validate the id/path before constructing the lock directory.
+    fileForUpload(revisionId, relativePath)
+    const gate = acquireUploadGate(revisionId)
+    let release
+    try {
+      release = gate.fileLock(relativePath)
+      return { ...fileForUpload(revisionId, relativePath), release }
+    } catch (error) {
+      release?.()
+      throw error
+    } finally { gate.release() }
+  }
+
+  function acquireUploadGate(revisionId, options) {
+    // Serialize stale-owner reclamation as well as gate creation across
+    // processes. This transaction only touches lock metadata, never file hashes.
+    return withDb(true, db => {
+      db.exec('BEGIN IMMEDIATE')
+      let gate
+      try {
+        gate = revisionUploadGate(revisionDirectory(revisionId), options)
+        db.exec('COMMIT')
+        return gate
+      } catch (error) {
+        gate?.release()
+        db.exec('ROLLBACK')
+        throw error
+      }
+    })
+  }
+
+  function reuseRevisionFiles(revisionId, blobStore, actor) {
+    if (!blobStore?.reuseLocalFile) return
+    const status = uploadStatus(revisionId)
+    if (status.revision.state !== 'uploading') return
+    for (const file of status.files) {
+      if (file.uploadedAt || !/^(audio\/|image\/|application\/pdf$)/.test(file.mediaType)) continue
+      const source = withDb(false, db => db.prepare(`
+        SELECT f.revision_id, f.path FROM import_review_files f
+        JOIN import_review_revisions r ON r.id = f.revision_id
+        WHERE r.paper_id = ? AND r.revision_number < ? AND f.uploaded_at IS NOT NULL
+          AND f.sha256 = ? AND f.byte_length = ?
+        ORDER BY r.revision_number DESC, f.path LIMIT 1
+      `).get(status.revision.paperId, status.revision.revisionNumber, file.sha256, file.byteLength))
+      if (!source) continue
+      let upload
+      try { upload = beginFileUpload(revisionId, file.path) } catch (error) {
+        if (error.code === 'IMPORT_REVIEW_UPLOAD_BUSY') continue
+        throw error
+      }
+      try {
+        if (!blobStore.reuseLocalFile(upload.destination, file)) continue
+        // beginFileUpload's lease prevents finalize while hashing/installing.
+        // Recheck state immediately before marking; bytes prove no approval.
+        completeFileUpload(revisionId, file.path, file)
+        console.info(JSON.stringify({
+          event: 'import-review-blob-reused', revisionId, path: file.path,
+          sourceRevisionId: source.revision_id, sourcePath: source.path,
+          sha256: file.sha256, byteLength: file.byteLength, verifiedAt: nowIso(), actor,
+        }))
+      } finally { upload.release() }
     }
   }
 
@@ -1101,14 +1184,17 @@ export function createImportReviewStore({
     const timer = reviewUploadMetrics('finalize', { revisionId }, [
       'status', 'fileHash', 'projection', 'identityAndReport', 'inventory', 'transactionAndPreview',
     ], metrics)
+    let gate
     try {
+      if (!getRevision(revisionId)) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Revision not found', 404)
+      gate = acquireUploadGate(revisionId, { finalizing: true })
       const revision = finalizeRevisionMeasured(revisionId, timer)
       timer.finish()
       return revision
     } catch (error) {
       timer.finish(error)
       throw error
-    }
+    } finally { gate?.release() }
   }
 
   function finalizeRevisionMeasured(revisionId, timer) {
@@ -2962,6 +3048,7 @@ export function createImportReviewStore({
   }
 
   return {
+    beginFileUpload,
     acquireShippingGuard,
     addIssueMessage,
     approveRevision,
