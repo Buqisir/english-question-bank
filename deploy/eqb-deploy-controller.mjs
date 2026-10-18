@@ -32,6 +32,7 @@ import { fileURLToPath } from 'node:url'
 
 export const EQB_DEPLOY_CONTROLLER_VERSION = 'eqb-deploy-controller-v1'
 export const EQB_DEPLOY_RECEIPT_SCHEMA_VERSION = 'eqb-deployment-receipt-v2'
+export const EQB_DEPLOY_BOOTSTRAP_RECEIPT_SCHEMA_VERSION = 'eqb-deployment-bootstrap-v1'
 export const EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION =
   'eqb-reviewed-persistence-receipt-v1'
 export const EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION =
@@ -776,7 +777,8 @@ function pruneReleases(config, dependencies, currentSha, targetSha) {
       stage = 'receipt-validation'
       if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)
         || ![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION,
-          EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION].includes(receipt.schemaVersion)
+          EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION,
+          EQB_DEPLOY_BOOTSTRAP_RECEIPT_SCHEMA_VERSION].includes(receipt.schemaVersion)
         || !['success', 'failure'].includes(receipt.conclusion)
         || !SHA.test(receipt.targetSha || '')
         || typeof receipt.finishedAt !== 'string'
