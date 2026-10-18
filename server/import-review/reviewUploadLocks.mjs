@@ -1,60 +1,50 @@
-import { createHash, randomUUID } from 'node:crypto'
-import { linkSync, mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs'
-import path from 'node:path'
+// 单进程部署假设：多进程部署需要改为持久锁。
+const revisions = new Map()
 
-function busy() {
-  return Object.assign(new Error('Revision upload is busy; retry after the active upload completes'), {
-    code: 'IMPORT_REVIEW_UPLOAD_BUSY', status: 409,
+function stateFor(key) {
+  if (!revisions.has(key)) revisions.set(key, { files: new Set(), finalizing: false, queue: [] })
+  return revisions.get(key)
+}
+
+function drain(key, state) {
+  while (!state.finalizing && state.queue.length) {
+    const next = state.queue[0]
+    if (next.path === null ? state.files.size > 0 : state.files.has(next.path)) break
+    state.queue.shift()
+    next.resolve(grant(key, state, next.path))
+  }
+  if (!state.finalizing && !state.files.size && !state.queue.length) revisions.delete(key)
+}
+
+function grant(key, state, filePath) {
+  if (filePath === null) state.finalizing = true
+  else state.files.add(filePath)
+  let released = false
+  return () => {
+    if (released) return
+    released = true
+    if (filePath === null) state.finalizing = false
+    else state.files.delete(filePath)
+    drain(key, state)
+  }
+}
+
+export function acquireRevisionUpload(key, filePath = null) {
+  const state = stateFor(key)
+  return new Promise(resolve => {
+    state.queue.push({ path: filePath, resolve })
+    drain(key, state)
   })
 }
 
-// These locks coordinate local server processes too. Never reclaim a live or
-// ambiguous owner; a dead process can leave an installed file to reconcile.
-function removeDeadOwner(file) {
-  let pid
-  try { pid = Number(readFileSync(file, 'utf8')) } catch (error) {
-    if (error.code === 'ENOENT') return true
-    throw error
+// Existing synchronous internal callers fail closed while an async writer owns
+// the revision. HTTP finalize uses the queued exclusive lease above.
+export function tryRevisionFinalization(key) {
+  const state = stateFor(key)
+  if (state.finalizing || state.files.size || state.queue.length) {
+    throw Object.assign(new Error('Revision upload is busy; retry after the active upload completes'), {
+      code: 'IMPORT_REVIEW_UPLOAD_BUSY', status: 409,
+    })
   }
-  if (!Number.isSafeInteger(pid) || pid <= 0) return false
-  try { process.kill(pid, 0); return false } catch (error) {
-    if (error.code !== 'ESRCH') return false
-  }
-  try { unlinkSync(file) } catch (error) { if (error.code !== 'ENOENT') throw error }
-  return true
-}
-
-function lock(file) {
-  const temporary = `${file}.owner-${randomUUID()}`
-  writeFileSync(temporary, String(process.pid), { flag: 'wx', mode: 0o600 })
-  try {
-    try { linkSync(temporary, file) } catch (error) {
-      if (error.code !== 'EEXIST') throw error
-      if (!removeDeadOwner(file)) throw busy()
-      // Gate reclamation is serialized by the store's short DB transaction;
-      // path reclamation is serialized by the held revision gate.
-      linkSync(temporary, file)
-    }
-  } finally { unlinkSync(temporary) }
-  return () => unlinkSync(file)
-}
-
-export function revisionUploadGate(directory, { finalizing = false } = {}) {
-  const root = path.join(directory, '.upload-locks')
-  mkdirSync(root, { recursive: true })
-  const release = lock(path.join(root, 'gate'))
-  try {
-    if (finalizing) {
-      for (const name of readdirSync(root)) {
-        if (/^[a-f0-9]{64}$/.test(name) && !removeDeadOwner(path.join(root, name))) throw busy()
-      }
-    }
-    return { release, fileLock(relativePath) {
-      const key = createHash('sha256').update(relativePath).digest('hex')
-      return lock(path.join(root, key))
-    } }
-  } catch (error) {
-    release()
-    throw error
-  }
+  return grant(key, state, null)
 }

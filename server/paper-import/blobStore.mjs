@@ -1,6 +1,6 @@
 import {
   createReadStream, constants, openSync, closeSync, fstatSync, readSync,
-  mkdirSync, linkSync, unlinkSync,
+  mkdirSync, linkSync, unlinkSync, lstatSync,
 } from 'node:fs'
 import { chmod, lstat, mkdir, readFile, writeFile, link, unlink, rename } from 'node:fs/promises'
 import path from 'node:path'
@@ -56,7 +56,7 @@ function checkLocalFile(filePath, file) {
       if (size > file.byteLength) return false
       hash.update(buffer.subarray(0, length))
     }
-    return size === file.byteLength && `sha256:${hash.digest('hex')}` === file.sha256
+    return size === file.byteLength && `sha256:${hash.digest('hex')}` === file.sha256 ? stat : false
   } catch (error) {
     if (['ENOENT', 'ELOOP'].includes(error.code)) return false
     throw error
@@ -149,16 +149,21 @@ export function createBlobStore({ backend = 'local', rootDir, bucket, endpoint, 
   function reuseLocalFile(destination, file) {
     assertPaperStorageMounted([rootDir, path.dirname(destination)], storageEnv)
     const source = path.join(rootDir, key(file))
-    if (!checkLocalFile(source, file)) return false
+    const verified = checkLocalFile(source, file)
+    if (!verified) return false
+    const sameInode = candidate => candidate.isFile() && candidate.dev === verified.dev
+      && candidate.ino === verified.ino && candidate.size === file.byteLength
     mkdirSync(path.dirname(destination), { recursive: true })
     const temporary = `${destination}.reuse-${randomUUID()}`
     try {
       linkSync(source, temporary)
-      if (!checkLocalFile(temporary, file)) return false
+      if (!sameInode(lstatSync(temporary))) return false
       try { linkSync(temporary, destination) } catch (error) {
         if (error.code !== 'EEXIST') throw error
       }
-      return checkLocalFile(destination, file)
+      const installed = lstatSync(destination)
+      if (!installed.isFile()) return false
+      return sameInode(installed) || Boolean(checkLocalFile(destination, file))
     } finally {
       try { unlinkSync(temporary) } catch (error) { if (error.code !== 'ENOENT') throw error }
     }

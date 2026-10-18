@@ -19,7 +19,7 @@ import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
-import { revisionUploadGate } from './reviewUploadLocks.mjs'
+import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
 import {
   buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
@@ -857,17 +857,31 @@ export function createImportReviewStore({
     }
   }
 
-  function createRevision(rawManifest, { blobStore = null, actor = 'internal' } = {}) {
+  function createRevision(rawManifest, { actor = 'internal' } = {}) {
+    const metrics = {}
+    const timer = reviewUploadMetrics('register', { actor }, ['registration', 'reuse'], metrics)
+    try {
+      const result = createRevisionMeasured(rawManifest)
+      timer.finish()
+      return { ...result, metrics }
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
+  }
+
+  async function createRevisionUpload(rawManifest, { blobStore = null, actor = 'internal' } = {}) {
+    const metrics = {}
     const identity = { actor }
-    const timer = reviewUploadMetrics('register', identity, ['registration', 'reuse'])
+    const timer = reviewUploadMetrics('register', identity, ['registration', 'reuse'], metrics)
     try {
       const result = createRevisionMeasured(rawManifest)
       identity.revisionId = result.revision.id
       timer.phase('reuse')
-      reuseRevisionFiles(result.revision.id, blobStore, actor)
+      await reuseRevisionFiles(result.revision.id, blobStore, actor)
       const missingFiles = uploadStatus(result.revision.id).missingFiles
       timer.finish()
-      return { ...result, missingFiles }
+      return { ...result, missingFiles, metrics }
     } catch (error) {
       timer.finish(error)
       throw error
@@ -986,39 +1000,18 @@ export function createImportReviewStore({
     }
   }
 
-  function beginFileUpload(revisionId, relativePath) {
-    // Validate the id/path before constructing the lock directory.
+  async function beginFileUpload(revisionId, relativePath) {
     fileForUpload(revisionId, relativePath)
-    const gate = acquireUploadGate(revisionId)
-    let release
+    const release = await acquireRevisionUpload(revisionDirectory(revisionId), relativePath)
     try {
-      release = gate.fileLock(relativePath)
       return { ...fileForUpload(revisionId, relativePath), release }
     } catch (error) {
-      release?.()
+      release()
       throw error
-    } finally { gate.release() }
+    }
   }
 
-  function acquireUploadGate(revisionId, options) {
-    // Serialize stale-owner reclamation as well as gate creation across
-    // processes. This transaction only touches lock metadata, never file hashes.
-    return withDb(true, db => {
-      db.exec('BEGIN IMMEDIATE')
-      let gate
-      try {
-        gate = revisionUploadGate(revisionDirectory(revisionId), options)
-        db.exec('COMMIT')
-        return gate
-      } catch (error) {
-        gate?.release()
-        db.exec('ROLLBACK')
-        throw error
-      }
-    })
-  }
-
-  function reuseRevisionFiles(revisionId, blobStore, actor) {
+  async function reuseRevisionFiles(revisionId, blobStore, actor) {
     if (!blobStore?.reuseLocalFile) return
     const status = uploadStatus(revisionId)
     if (status.revision.state !== 'uploading') return
@@ -1032,13 +1025,10 @@ export function createImportReviewStore({
         ORDER BY r.revision_number DESC, f.path LIMIT 1
       `).get(status.revision.paperId, status.revision.revisionNumber, file.sha256, file.byteLength))
       if (!source) continue
-      let upload
-      try { upload = beginFileUpload(revisionId, file.path) } catch (error) {
-        if (error.code === 'IMPORT_REVIEW_UPLOAD_BUSY') continue
-        throw error
-      }
+      const upload = await beginFileUpload(revisionId, file.path)
       try {
-        if (!blobStore.reuseLocalFile(upload.destination, file)) continue
+        if (upload.file.uploadedAt) continue
+        if (!await blobStore.reuseLocalFile(upload.destination, file)) continue
         // beginFileUpload's lease prevents finalize while hashing/installing.
         // Recheck state immediately before marking; bytes prove no approval.
         completeFileUpload(revisionId, file.path, file)
@@ -1180,21 +1170,39 @@ export function createImportReviewStore({
     }
   }
 
-  function finalizeRevision(revisionId, { metrics = {} } = {}) {
-    const timer = reviewUploadMetrics('finalize', { revisionId }, [
+  function finalizationTimer(revisionId, metrics) {
+    return reviewUploadMetrics('finalize', { revisionId }, [
       'status', 'fileHash', 'projection', 'identityAndReport', 'inventory', 'transactionAndPreview',
     ], metrics)
-    let gate
+  }
+
+  async function finalizeUploadedRevision(revisionId, { metrics = {} } = {}) {
+    const timer = finalizationTimer(revisionId, metrics)
+    let release
+    try {
+      release = await acquireRevisionUpload(revisionDirectory(revisionId))
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    }
+    return finalizeRevisionWithLease(revisionId, timer, release)
+  }
+
+  function finalizeRevision(revisionId, { metrics = {} } = {}) {
+    return finalizeRevisionWithLease(revisionId, finalizationTimer(revisionId, metrics))
+  }
+
+  function finalizeRevisionWithLease(revisionId, timer, release = null) {
     try {
       if (!getRevision(revisionId)) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Revision not found', 404)
-      gate = acquireUploadGate(revisionId, { finalizing: true })
+      release ||= tryRevisionFinalization(revisionDirectory(revisionId))
       const revision = finalizeRevisionMeasured(revisionId, timer)
       timer.finish()
       return revision
     } catch (error) {
       timer.finish(error)
       throw error
-    } finally { gate?.release() }
+    } finally { release?.() }
   }
 
   function finalizeRevisionMeasured(revisionId, timer) {
@@ -3048,6 +3056,8 @@ export function createImportReviewStore({
   }
 
   return {
+    createRevisionUpload,
+    finalizeUploadedRevision,
     beginFileUpload,
     acquireShippingGuard,
     addIssueMessage,

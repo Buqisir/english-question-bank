@@ -476,7 +476,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       return
     }
     const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
-    context.sendJson(response, 201, store.createRevision(input, { blobStore: getBlobStore?.(), actor }))
+    context.sendJson(response, 201, await store.createRevisionUpload(input, { blobStore: getBlobStore?.(), actor }))
   })))
 
   routes.push(defineRoute('PUT', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/files$/, route(async ({
@@ -496,10 +496,11 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       ['status', 'receive', 'adoption', 'installationAndMark'])
     let upload
     try {
-      upload = store.beginFileUpload(revisionId, relativePath)
+      upload = await store.beginFileUpload(revisionId, relativePath)
       if (upload.file.uploadedAt && existsSync(upload.destination)) {
-        context.sendJson(response, 200, store.uploadStatus(revisionId))
-        timer.finish()
+        const status = store.uploadStatus(revisionId)
+        const metrics = timer.finish()
+        context.sendJson(response, 200, { ...status, metrics })
         return
       }
       const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
@@ -515,15 +516,15 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
         },
       })
       const status = store.completeFileUpload(revisionId, relativePath, received)
-      timer.finish()
-      context.sendJson(response, 200, status)
+      const metrics = timer.finish()
+      context.sendJson(response, 200, { ...status, metrics })
     } catch (error) {
       timer.finish(error)
       throw error
     } finally { upload?.release() }
   })))
 
-  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/finalize$/, route(({
+  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/finalize$/, route(async ({
     request,
     response,
     context,
@@ -534,7 +535,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       return
     }
     const metrics = {}
-    const revision = store.finalizeRevision(match[1], { metrics })
+    const revision = await store.finalizeUploadedRevision(match[1], { metrics })
     context.sendJson(response, 200, { revision, metrics })
   })))
 
