@@ -923,6 +923,13 @@ function redoFrom(ctx, name) {
   // The producer cache is keyed by its inputs, not its code: after a producer fix the cached
   // output would come back unchanged unless output, receipt, review and media move aside.
   const produced = path.join(ctx.paperDir, 'materialization')
+  // Staged OCR evidence is immutable, so a recompile (e.g. a newly marked figure) starts a new OCR
+  // generation: the old evidence, confirmation and receipts move aside and push-ocr creates a new
+  // revision, which supersedes the old one in Review. Source bytes are unchanged and kept.
+  if (STEP_ORDER.indexOf('compile') >= index) {
+    for (const file of [path.join(produced, 'nck1-ocr-source-evidence-v1.json'), path.join(produced, 'nck1-ocr-source-confirmation-v1.json'),
+      path.join(produced, 'agent-proofreading-receipt.json'), path.join(ctx.paperDir, 'signals', 'agent-proofreading-receipt.json')]) archive(ctx, file)
+  }
   const receipt = path.join(produced, 'nck1-ocr-materialization-producer-receipt-v1.json')
   if (STEP_ORDER.indexOf('materialize') >= index && existsSync(receipt)) {
     for (const file of readJson(receipt).mediaFiles || []) archive(ctx, path.join(ctx.paperDir, file.path))

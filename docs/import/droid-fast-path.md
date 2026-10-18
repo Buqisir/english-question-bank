@@ -64,7 +64,8 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
   听力 worker 报 `review_required` 且原因是首遍起点漂移时用它，然后 resume 那个 worker。
 - `--redo-from <步骤>`：忘掉该步骤及之后所有步骤，并把对应已装 sidecar 和 `products/` 挪进
   `superseded/`。上游改了 Materialization 后从 `figure-sizes` 或更早重做；第二轮作者稿按 ID
-  复用，不需要重派 worker。
+  复用，不需要重派 worker。OCR 已确认后又改了校对草稿（例如补漏标的图）用 `--redo-from compile`：
+  旧 OCR 证据、确认和回执一并挪走，重新 push-ocr 建新 OCR revision（Review 里旧的变 superseded）。
 
 ## 批量编排（batch-run.mjs）
 
