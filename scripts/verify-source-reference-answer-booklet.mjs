@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+// Geometry checks run ONLY with --preview, not by the Full CI plan.
+// Use fresh output directories for each invocation:
+// for sample in long multi single short; do
+//   node scripts/verify-source-reference-answer-booklet.mjs --preview "/tmp/answer-grid-$sample" --grammar-grid-case "$sample"
+// done
 import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -222,10 +227,19 @@ function contractChecks() {
 async function preview(output) {
   if (existsSync(output)) throw new Error('Use a new preview directory')
   const input = fixture({ listening: false, structuredScoring: process.argv.includes('--structured-scoring') })
-  if (process.argv.includes('--grammar-grid')) {
+  const caseIndex = process.argv.indexOf('--grammar-grid-case')
+  const grammarCase = caseIndex >= 0 ? process.argv[caseIndex + 1] : process.argv.includes('--grammar-grid') ? 'long' : null
+  if (grammarCase) {
     // Reproduce isolated numbers when short and long answers share five columns.
-    const values = ['are arranged', 'Originating', 'as', 'have gone', 'whose',
-      'repetitive/repeated', 'a', 'studios', 'and', 'while / though / although']
+    const cases = {
+      long: ['are arranged', 'Originating', 'as', 'have gone', 'whose',
+        'repetitive/repeated', 'a', 'studios', 'and', 'while / though / although'],
+      multi: Array(10).fill('pneumonoultramicroscopicsilicovolcanoconiosis'),
+      single: ['w'.repeat(150), 'a', 'as', 'of', 'the', 'a', 'as', 'of', 'the', 'a'],
+      short: ['a', 'of', 'the', 'was', 'whose', 'to', 'an', 'in', 'and', 'as'],
+    }
+    const values = cases[grammarCase]
+    if (!values) throw new Error('Unknown --grammar-grid-case')
     for (const answer of input.materialization.answers) {
       if (answer.canonicalNumber >= 56) answer.value = values[answer.canonicalNumber - 56]
     }
@@ -239,6 +253,10 @@ async function preview(output) {
     const text = node => node.nodeType === Node.TEXT_NODE ? node.textContent
       : node.nodeName === 'BR' ? '\n' : [...node.childNodes].map(text).join('')
     const collect = selector => pages.flatMap(page => [...page.querySelectorAll(selector)])
+    const bounds = node => {
+      const { left, right, top, bottom } = node.getBoundingClientRect()
+      return { left, right, top, bottom }
+    }
     const paragraphs = collect('[data-reference-paragraph]').reduce((entries, node) => {
       const id = node.dataset.referenceParagraph
       entries[id] = (entries[id] || '') + text(node)
@@ -250,6 +268,16 @@ async function preview(output) {
       return entries
     }, {})
     return { paragraphs, cells, references: [...new Set(collect('[data-source-reference]').map(node => node.dataset.sourceReference))],
+      tables: collect('.answer-keys').map(node => ({
+        box: bounds(node), page: bounds(node.closest('.pagedjs_page_content')),
+      })),
+      answerBounds: collect('[data-answer-number]').map(node => {
+        const range = document.createRange()
+        range.selectNodeContents(node)
+        return { number: node.dataset.answerNumber, page: bounds(node.closest('.pagedjs_page_content')),
+          boxes: [...range.getClientRects()].filter(rect => rect.width > 0).map(({ left, right, top, bottom }) =>
+            ({ left, right, top, bottom })) }
+      }),
       keys: collect('[data-answer-number]').map(node => ({ number: Number(node.dataset.answerNumber), text: text(node) })),
       grammar: collect('.answer-keys--5 [data-answer-number]').map(node => {
         const rects = element => {
@@ -260,7 +288,16 @@ async function preview(output) {
         const cell = node.closest('td')
         const label = rects(cell.querySelector('.answer-number'))[0]
         const lines = rects(node)
+        const splitWords = []
+        const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT)
+        while (walker.nextNode()) for (const match of walker.currentNode.textContent.matchAll(/[A-Za-z]+/gu)) {
+          const range = document.createRange()
+          range.setStart(walker.currentNode, match.index)
+          range.setEnd(walker.currentNode, match.index + match[0].length)
+          if (new Set([...range.getClientRects()].map(rect => rect.top)).size > 1) splitWords.push(match[0])
+        }
         return { number: Number(node.dataset.answerNumber), labelTop: label.top,
+          splitWords,
           lines: lines.map(rect => ({ top: rect.top, left: rect.left, right: rect.right })),
           cellRight: cell.getBoundingClientRect().right }
       }),
@@ -290,7 +327,16 @@ async function preview(output) {
   assert.equal(result.inspection.roles.find(role => role.id === 'paragraph:positive:4').align, 'right')
   assert.equal(result.inspection.roles.find(role => role.id === 'paragraph:positive:5').align, 'right')
   assert.equal(result.inspection.grammar.length, 10)
+  const inside = (box, page) => box.left >= page.left - 1 && box.right <= page.right + 1
+    && box.top >= page.top - 1 && box.bottom <= page.bottom + 1
+  for (const table of result.inspection.tables) assert(inside(table.box, table.page), 'answer table exceeds page content')
+  for (const answer of result.inspection.answerBounds) for (const box of answer.boxes) {
+    assert(inside(box, answer.page), `Q${answer.number}: answer text exceeds page content`)
+  }
   for (const answer of result.inspection.grammar) {
+    if (grammarCase === 'long' || grammarCase === 'short') {
+      assert.deepEqual(answer.splitWords, [], `Q${answer.number}: ordinary word split`)
+    }
     assert(Math.abs(answer.labelTop - answer.lines[0].top) < 1, `Q${answer.number}: number separated from answer`)
     for (const line of answer.lines) {
       assert(Math.abs(line.left - answer.lines[0].left) < 1, `Q${answer.number}: missing hanging indent`)
@@ -301,6 +347,8 @@ async function preview(output) {
   const report = { status: 'synthetic_local_layout_candidate', pageCount: result.pageCount, pdfSha256: sha256(result.pdfBytes),
     inspectedReferenceParagraphs: Object.keys(result.inspection.paragraphs).length, answerCount: result.inspection.keys.length,
     inspectedReferenceCells: Object.keys(result.inspection.cells).length,
+    grammarCase, tableBoundsChecked: result.inspection.tables.length,
+    answerBoundsChecked: result.inspection.answerBounds.length,
     includeScoring: true, listening: false, reviewRevision: null, publication: null }
   writeFileSync(path.join(output, 'report.json'), `${JSON.stringify(report, null, 2)}\n`, { flag: 'wx' })
   console.log(JSON.stringify(report))
