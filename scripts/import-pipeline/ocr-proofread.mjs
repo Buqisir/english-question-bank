@@ -481,6 +481,7 @@ function pngSize(file) {
 // A figure is a run of consecutive draft items marked `figure`. Its region defaults to the
 // non-white extent of the band between the neighbouring items; `figureRegion` (page-image
 // pixels) overrides it. The confirmed text stays bound to its words; the crop replaces it.
+// An imageOnly item instead supplies an explicit region without claiming or replacing text.
 function figureRegion(tracePage, items, start, end, label) {
   const { width, height } = pngSize(tracePage.imagePath)
   const explicit = items[start].figureRegion
@@ -622,6 +623,34 @@ function compile(paperId) {
       }
       for (const [index, item] of draftItems.entries()) {
         const itemLabel = `${label} item ${index + 1}`
+        if (item.imageOnly === true) {
+          if (typeof item.figure !== 'string' || !item.figure.trim()
+            || typeof item.reason !== 'string' || !item.reason.trim()
+            || ['lines', 'words', 'text', 'emphasis'].some((key) => key in item)) {
+            fail(`${itemLabel}: imageOnly requires figure and reason, without lines, words, text or emphasis`)
+          }
+          if (!resolvedItems.at(-1)?.itemId || resolvedItems.at(-1).figure) {
+            fail(`${itemLabel}: imageOnly needs a preceding ordinary item to anchor it`)
+          }
+          if (draftItems.filter((entry) => entry.figure === item.figure).length !== 1) {
+            fail(`${itemLabel}: imageOnly figure "${item.figure}" must be the only item with that figure name`)
+          }
+          const region = item.figureRegion
+          const size = pngSize(tracePage.imagePath)
+          if (!region || ![region.x, region.y, region.width, region.height].every(Number.isFinite)
+            || region.x < 0 || region.y < 0 || region.width <= 0 || region.height <= 0
+            || region.x + region.width > size.width || region.y + region.height > size.height) {
+            fail(`${itemLabel}: imageOnly requires a valid figureRegion within the page image`)
+          }
+          const overlapping = tracePage.words.filter(({ box }) =>
+            box.left < region.x + region.width && box.left + box.width > region.x
+            && box.top < region.y + region.height && box.top + box.height > region.y)
+          if (overlapping.length) {
+            fail(`${itemLabel}: imageOnly figureRegion overlaps OCR words ${overlapping.map((word) => `w${word.number}`).join(', ')}; use word-assigned figure items`)
+          }
+          resolvedItems.push({ ...item, numbers: [] })
+          continue
+        }
         if (typeof item.text !== 'string' || !item.text.trim()) fail(`${itemLabel}: text is required`)
         if (item.text !== item.text.trim()) fail(`${itemLabel}: text has leading or trailing whitespace`)
         const fromLines = item.lines ? expand(item.lines, lines, itemLabel).filter((number) => !furniture.has(number)) : []
@@ -652,14 +681,14 @@ function compile(paperId) {
         if (!name || resolvedItems[start - 1]?.figure === name) continue
         let end = start + 1
         while (resolvedItems[end]?.figure === name) end += 1
-        if (start === 0) fail(`${label}: figure "${name}" needs a preceding item to anchor it`)
+        if (start === 0 || !resolvedItems[start - 1].itemId) fail(`${label}: figure "${name}" needs a preceding item to anchor it`)
         const figureLabel = `${label} figure ${name}`
         const regionId = `${document.documentId}:page-${tracePage.page}:figure-${figures.length + 1}`
         figures.push({ key: label, regionId, ...figureRegion(tracePage, resolvedItems, start, end, figureLabel) })
         visualClassifications.push({
           regionId,
           classification: 'content_media',
-          itemIds: resolvedItems.slice(start, end).map((item) => item.itemId),
+          itemIds: resolvedItems.slice(start, end).filter((item) => !item.imageOnly).map((item) => item.itemId),
           afterItemId: resolvedItems[start - 1].itemId,
         })
       }
