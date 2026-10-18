@@ -279,7 +279,7 @@ export function validateAuthoredPublicSearchMetadata(input) {
     const prepared = preparePublicSearchMetadataRequest(input)
     return (error.issues || [{ code: error.message.split(':')[0], path: '$', message: error.message }]).map(issue => {
       // Runtime paths follow deterministic sidecar order, which need not be authored order.
-      const match = /^\$\.groups\[(\d+)\]\.metadata\.questions\[(\d+)\]/u.exec(issue.path)
+      const match = /^\$\.groups\[(\d+)\](?:\.metadata\.questions\[(\d+)\])?/u.exec(issue.path)
       const source = match && prepared.deterministic[Number(match[1])]
       const group = source && input.authored.groups.find(group => group.groupId === source.groupId)
       const question = group?.metadata?.questions?.[Number(match?.[2])]
@@ -293,6 +293,12 @@ export function validateAuthoredPublicSearchMetadata(input) {
         allowedValues = { role: [null, ...grammarRoles], routesForFacet: spec?.routes || [] }
       } else if (issue.code === 'PUBLIC_METADATA_GRAMMAR_FACET_INVALID') {
         allowedValues = prepared.controlledValues.grammarFacets
+      } else if (source && issue.code === 'PUBLIC_METADATA_CONTINUATION_INVALID') {
+        allowedValues = { exactKeys: ['writingTaskId', 'situation', 'conflict', 'relationships'], writingTaskId: `writing-task:${source.groupId}`, situation: 'non-empty string', conflict: 'non-empty string', relationships: 'array of non-empty strings, [] allowed' }
+      } else if (source && issue.code === 'PUBLIC_METADATA_APPLICATION_INVALID') {
+        allowedValues = { exactKeys: ['writingTaskId', 'form', 'function'], writingTaskId: `writing-task:${source.groupId}`, form: 'non-empty string ≤ 80 chars', function: 'non-empty string ≤ 80 chars' }
+      } else if (issue.code === 'PUBLIC_METADATA_READING_PROFILE_INVALID') {
+        allowedValues = { genres: prepared.controlledValues.genres, topics: prepared.controlledValues.topics, reading: prepared.controlledValues.reading }
       }
       return { ...issue, path, allowedValues: allowedValues ?? prepared.controlledValues }
     })
@@ -420,7 +426,7 @@ export function validatePublicSearchMetadata({ sidecar, materialization, sourceD
     } else if (group.family === 'application-writing') {
       if (!exact(metadata, ['writingTaskId', 'form', 'function']) || metadata.writingTaskId !== `writing-task:${group.groupId}` || ![metadata.form, metadata.function].every((value) => typeof value === 'string' && value.trim() && value.length <= 80)) push(issues, 'PUBLIC_METADATA_APPLICATION_INVALID', `${path}.metadata`, 'application form/function must be concise source-grounded strings')
     } else if (group.family === 'continuation-writing') {
-      if (!exact(metadata, ['writingTaskId', 'situation', 'conflict', 'relationships']) || metadata.writingTaskId !== `writing-task:${group.groupId}` || ![metadata.situation, metadata.conflict].every((value) => typeof value === 'string' && value.trim()) || !Array.isArray(metadata.relationships) || metadata.relationships.some((value) => typeof value !== 'string' || !value.trim())) push(issues, 'PUBLIC_METADATA_CONTINUATION_INVALID', `${path}.metadata`, 'continuation metadata is minimal situation/conflict/optional relationships only')
+      if (!exact(metadata, ['writingTaskId', 'situation', 'conflict', 'relationships']) || metadata.writingTaskId !== `writing-task:${group.groupId}` || ![metadata.situation, metadata.conflict].every((value) => typeof value === 'string' && value.trim()) || !Array.isArray(metadata.relationships) || metadata.relationships.some((value) => typeof value !== 'string' || !value.trim())) push(issues, 'PUBLIC_METADATA_CONTINUATION_INVALID', `${path}.metadata`, 'continuation metadata must be exactly writingTaskId/situation/conflict/relationships (relationships may be [])')
     }
   }
   for (const group of sourceGroups) if (!seen.has(group.groupId)) push(issues, 'PUBLIC_METADATA_GROUP_MISSING', '$.groups', `missing ${group.groupId}`)
