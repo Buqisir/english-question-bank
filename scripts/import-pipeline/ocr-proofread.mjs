@@ -925,8 +925,8 @@ function figureSizes(paperId) {
 }
 
 const WRITING_SECTION = [
-  ['application', /^第[一二]节\s*(应用文|书面表达)/u],
-  ['continuation', /^第[一二]节\s*(读后续写|续写)/u],
+  ['application', /^第[一二]节\s*[:：]?\s*(应用文|书面表达)/u],
+  ['continuation', /^第[一二]节\s*[:：]?\s*(读后续写|续写)/u],
 ]
 // Some answer keys head the samples only with "第一节（满分15分）" under "第四部分 写作".
 const WRITING_PART = /^第四部分\s*[:：]?\s*写作/u
