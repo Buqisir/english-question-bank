@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart } from './ocr-proofread.mjs'
+import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart, buildSourceReferences } from './ocr-proofread.mjs'
 
 function fixture(texts, lefts = []) {
   const items = texts.map((text, i) => ({ lines: `L${i + 1}`, text }))
@@ -103,4 +103,57 @@ test('writing part heading may carry the first section number on the same OCR it
   assert.equal(writingSectionAfterPart('第四部分 写作（共两节，满分40分）'), null)
   assert.equal(writingSectionAfterPart('第四部分 写作（共两节）\n第一节 Dear classmates,'), null)
   assert.equal(writingSectionAfterPart('第三部分 语言知识运用\n第一节'), null)
+})
+
+test('joins Chinese transcript footnotes within items and across physical lines', () => {
+  const { items, lines } = fixture(['Text 9', '★ 剑桥大学是顶尖研究\n型大学。',
+    '★ 美索不达米亚是两河之间的土地（两河指幼发', '拉底河与底格里斯河）。', '★ 另一条注释。', 'Text 10'])
+  const result = joinTranscriptTurns(items, lines, {}, 'fixture')
+  assert.equal(result.items[1].text, '★ 剑桥大学是顶尖研究型大学。')
+  assert.equal(result.items[2].text, '★ 美索不达米亚是两河之间的土地（两河指幼发拉底河与底格里斯河）。')
+  assert.equal(result.items[3].text, '★ 另一条注释。')
+  // Actual note marker/body/continuation x coordinates: 141 / 173 / 172.
+  lines[2].words[0].box = { left: 141, top: 1008, width: 18, height: 34 }
+  lines[2].words[1].box = { left: 173, top: 1008, width: 908, height: 34 }
+  lines[3].words[0].box = { left: 172, top: 1045, width: 910, height: 34 }
+  assert.equal(joinTranscriptTurns(items, lines, {}, 'fixture').items[2].text, result.items[2].text)
+  lines[3].words[0].box.left = 200
+  assert.equal(joinTranscriptTurns(items, lines, {}, 'fixture').items[3].text, items[3].text)
+})
+
+test('joins Jiyang Text 7/8 split-label wraps at their source coordinates', () => {
+  for (const [speaker, tail, continuation, top, nextTop, width, colonOffset] of [
+    ['W', 'I’ve downloaded lots', 'of tasty-looking recipes', 1162, 1198, 14, 13],
+    ['M', 'for me to run', 'and it’s all going', 223, 256, 32, 4],
+  ]) {
+    const { items, lines } = fixture(['Text 7', `${speaker}: ${tail}`, continuation])
+    lines[1].words = [
+      { number: 101, text: '=', box: { left: 109, top, width: 18, height: 15 } },
+      { number: 102, text: ':', box: { left: 130, top: top + colonOffset, width: 2, height: 2 } },
+      { number: 103, text: tail, box: { left: 139, top, width: 943, height: 19 } },
+    ]
+    lines.splice(1, 0, { words: [lines[1].words.shift()] })
+    lines[3].words[0].box = { left: 141, top: nextTop, width, height: 27 }
+    lines[3].words.slice(1).forEach((word, i) => {
+      word.box = { left: 181 + i * 200, top: nextTop, width: 150, height: 19 }
+    })
+    items[1].lines = 'L2-L3'
+    items[2].lines = 'L4'
+    assert.equal(joinTranscriptTurns(items, lines, {}, 'fixture').items[1].text,
+      `${speaker}: ${tail} ${continuation}`)
+  }
+})
+
+test('excludes English quote fragments from writing commentary and resumes at a sample label', () => {
+  const texts = ['第二节 读后续写', '参考范文', 'A completed sample.',
+    '首句衔接要点：第一段需与原文', 'leave the next day.',
+    'leave the next day.”自然衔接，体现离别情绪；第二段需与原文',
+    'Arthur arrived.”自然衔接，呼应关键意象。', '范文', 'Another real sample.']
+  const observations = texts.map((text, i) => ({ observationId: `o${i}`, region: { x: .1, y: .15+i*.04, width: .8, height: .02 } }))
+  const result = buildSourceReferences({ documents: [{documentId: 'answers', role: 'official_answers', sha256: 'abc'}],
+    groups: [{groupId: 'cont', writingTask: {taskType: 'continuation'}}] },
+    { documents: [{ documentId: 'answers', pages: [{observations}] }] },
+    { documents: [{ documentId: 'answers', pages: [{page: 1, orderedItems: texts.map((text,i)=>({itemId: `i${i}`, text, observationIds: [`o${i}`]}))}] }] })
+  assert.deepEqual(result.groups[0].essays.entries.map(e=>e.paragraphs.map(p=>p.text)),
+    [['A completed sample.'], ['Another real sample.']])
 })

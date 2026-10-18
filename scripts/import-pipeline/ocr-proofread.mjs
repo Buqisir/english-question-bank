@@ -413,15 +413,26 @@ export function joinTranscriptTurns(items, lines, state, label) {
   const out = []
   let joins = 0
   let previousSpeech = false
-  for (const [index, item] of items.entries()) {
+  let previousNote = false
+  for (const [index, sourceItem] of items.entries()) {
+    // Proofreaders can restore a missing printed gloss line inside one item.
+    const noteStart = state.inTranscript && /^★\s*\p{Script=Han}/u.test(sourceItem.text || '')
+    const item = noteStart && sourceItem.text.includes('\n') ? {
+      ...sourceItem, text: joinLines(sourceItem.text.split(/\n/u).map((line) => line.trim())),
+      ...(sourceItem.emphasis ? { emphasis: sourceItem.emphasis.map((entry) => ({
+        ...entry, text: joinLines(entry.text.split(/\n/u).map((line) => line.trim())),
+      })) } : {}),
+    } : sourceItem
     const text = typeof item.text === 'string' ? item.text.trim() : ''
     if (TRANSCRIPT_MARKER.test(text)) state.inTranscript = true
     else if (TRANSCRIPT_END.test(text)) state.inTranscript = false
     // Chinese glosses/full-width punctuation and source emphasis are part of English speech.
     const speech = state.inTranscript && text && text === item.text && !TRANSCRIPT_MARKER.test(text)
       && /^(?:[A-Za-z("'“‘]|\(\d+\))/u.test(text) && !item.figure
+    const note = state.inTranscript && !item.figure && (noteStart || (previousNote && /^\p{Script=Han}/u.test(text)))
     const previous = out.at(-1)
-    if (speech && previousSpeech && !SPEAKER_LABEL.test(text)) {
+    const noteContinuation = note && previousNote && !noteStart && !/[。！？]$/u.test(previous.text)
+    if ((speech && previousSpeech && !SPEAKER_LABEL.test(text)) || noteContinuation) {
       const before = itemEdges(previous, lines, `${label} item ${index}`)
       const after = itemEdges(item, lines, `${label} item ${index + 1}`)
       if (before && after) {
@@ -431,11 +442,13 @@ export function joinTranscriptTurns(items, lines, state, label) {
         const column = rights.filter((box) => box.right > last.left && box.left < last.right
           && box.left >= last.left - last.height * 3).map((box) => box.right).sort((left, right) => left - right)
         const columnRight = column.length ? column[Math.floor((column.length - 1) * 0.9)] : last.right
-        // Dialogue continuations may have a hanging indent after M:/W:. A monologue's
+        // Dialogue/gloss continuations may hang after M:/W: or a note bullet. A monologue's
         // genuine first-line indent (or an extra indent within a turn) remains a boundary.
-        const hanging = SPEAKER_LABEL.test(previous.text) && before.first === before.last
+        const noteBullet = noteContinuation && /^★\s/u.test(previous.text)
+        const hanging = (SPEAKER_LABEL.test(previous.text) || noteBullet) && before.first === before.last
         const speechWords = [...before.first].sort((a, b) => a.box.left - b.box.left)
-        let labelWords = hanging ? previous.text.match(SPEAKER_LABEL)[0].replace(/[:：]$/u, '').trim().split(/\s+/u).length : 0
+        let labelWords = hanging ? noteBullet ? 1
+          : previous.text.match(SPEAKER_LABEL)[0].replace(/[:：]$/u, '').trim().split(/\s+/u).length : 0
         // A confirmed M: may cover separately recognized label and colon tokens.
         if (hanging && /^[:：]$/u.test(speechWords[labelWords]?.text ?? '')) labelWords += 1
         const speechLeft = hanging
@@ -446,7 +459,9 @@ export function joinTranscriptTurns(items, lines, state, label) {
         const afterTop = Math.min(...after.first.map((word) => word.box.top))
         const adjacent = afterTop >= beforeTop && afterTop - beforeTop <= last.height * 3
         if (!indented && adjacent && last.right + last.height * 0.5 + firstWord.box.width > columnRight) {
-          const glue = /[A-Za-z][-‐]$/u.test(previous.text) ? '' : ' '
+          const glue = noteContinuation
+            ? joinLines([previous.text, text]).slice(previous.text.length, -text.length)
+            : /[A-Za-z][-‐]$/u.test(previous.text) ? '' : ' '
           const joinedText = `${previous.text}${glue}${text}`
           const offset = previous.text.length + glue.length
           const emphasis = [
@@ -478,6 +493,7 @@ export function joinTranscriptTurns(items, lines, state, label) {
     }
     out.push(item)
     previousSpeech = speech
+    previousNote = note
   }
   return { items: out, joins }
 }
@@ -1053,15 +1069,8 @@ export function referenceLineBoundary(previous, line, margin) {
   return { indented, pageTurn, previousShort, continues }
 }
 
-// Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
-// from line geometry (first-line indent or a short previous line), never from the Materialization,
-// so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
-function references(paperId) {
-  const { paperDir, work } = context(paperId)
-  const directory = path.join(paperDir, 'materialization')
-  const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
-  const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
-  const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
+// Pure source interpretation shared by the CLI and offline corpus replay.
+export function buildSourceReferences(materialization, evidence, confirmation) {
   const answerDocuments = materialization.documents.filter((document) =>
     ['official_answers', 'question_and_answers'].includes(document.role))
   if (answerDocuments.length !== 1) fail('Expected exactly one answer-bearing document')
@@ -1152,11 +1161,13 @@ function references(paperId) {
         previous = null
         continue
       }
-      if (entry?.kind !== 'scoring' && COMMENTARY_LINE.test(line.text)) {
+      if (entry?.kind !== 'scoring' && (COMMENTARY_LINE.test(line.text)
+        || (skipping && /\p{Script=Han}/u.test(line.text)))) {
         if (!skipping) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
         continue
       }
-      if (skipping && !/^[A-Za-z“"‘']/u.test(line.text)) continue
+      // English quote fragments in teaching notes cannot restart an unlabeled sample.
+      if (skipping && !/^[A-Z“"‘']/u.test(line.text)) continue
       skipping = false
       if (!entry) {
         entry = { kind: 'essays', referenceId: `source-ref-${short}-${entries.essays.length + 1}`, authority: 'source_reference',
@@ -1203,6 +1214,19 @@ function references(paperId) {
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
+  return { groups, review }
+}
+
+// Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
+// from line geometry (first-line indent or a short previous line), never from the Materialization,
+// so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
+function references(paperId) {
+  const { paperDir, work } = context(paperId)
+  const directory = path.join(paperDir, 'materialization')
+  const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
+  const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
+  const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
+  const { groups, review } = buildSourceReferences(materialization, evidence, confirmation)
   const output = path.join(work, 'source-references-draft.json')
   writeJson(output, { schemaVersion: 'source-references-v1', paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups })
