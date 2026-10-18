@@ -30,6 +30,8 @@ const PRODUCTS = ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']
 const PDF_QA_DPI = 100
 const PRODUCTION_GAP = 30_000
 const AGENT_TIMEOUT = 25 * 60_000
+const VISUAL_AGENT_TIMEOUT = 6 * 60_000
+const METADATA_AGENT_TIMEOUT = 8 * 60_000
 const HEALTH_LIMIT = 5000
 const MAX_REPAIRS = 3
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -185,7 +187,7 @@ async function execute(command, args, log, { timeout = 60 * 60_000, onSpawn } = 
       children.delete(child)
       recordChildren?.()
       closeSync(fd)
-      resolve({ exit: timedOut ? 124 : code ?? 1, signal, seconds: Math.round((Date.now() - started) / 100) / 10, log })
+      resolve({ exit: timedOut ? 124 : code ?? 1, timedOut, signal, seconds: Math.round((Date.now() - started) / 100) / 10, log })
     })
   })
 }
@@ -237,7 +239,8 @@ const AGENT_RULES = [
   '只用读取与文件编辑工具，不运行命令；提示词里的 CLI 自检由编排器接管。',
 ].join('\n')
 
-async function agent(ctx, paper, label, role, prompt, outputs, { retries = 1, readOnly = false } = {}) {
+export async function agent(ctx, paper, label, role, prompt, outputs,
+  { retries = 1, readOnly = false, timeout = AGENT_TIMEOUT } = {}) {
   return ctx.agents(async () => {
     checkPaused(ctx)
     if (receiptValid(paper.completed?.[label])) return
@@ -252,14 +255,16 @@ async function agent(ctx, paper, label, role, prompt, outputs, { retries = 1, re
         '--only-tools', readOnly ? 'Read,Grep,Glob,LS' : 'Read,Grep,Glob,LS,ApplyPatch',
         '-f', promptFile]
       const timeline = path.join(paperIdValid(paper.paperId) ? fastDir(paper.paperId) : path.join(ctx.dir, 'logs'), 'agent-timeline.jsonl')
-      const timing = { label, model, effort, attempt: attempt + 1, startedAt: now(), finishedAt: null, seconds: null, exit: null, log }
+      const timing = { label, model, effort, attempt: attempt + 1, timeoutMs: timeout,
+        startedAt: now(), finishedAt: null, seconds: null, exit: null, log }
       appendTiming(timeline, { ...timing, event: 'started' })
       let result
       try {
-        result = await execute(DROID, args, log, { timeout: AGENT_TIMEOUT })
+        result = await execute(DROID, args, log, { timeout })
       } finally {
         appendTiming(timeline, { ...timing, event: 'finished', finishedAt: now(),
-          seconds: (Date.now() - Date.parse(timing.startedAt)) / 1000, exit: result?.exit ?? null })
+          seconds: (Date.now() - Date.parse(timing.startedAt)) / 1000,
+          exit: result?.timedOut ? 'timeout' : result?.exit ?? null })
       }
       paper.agentRuns.push({ label, model, seconds: result.seconds, exit: result.exit, log, attempt: attempt + 1 })
       paper.lastLog = log
@@ -564,7 +569,7 @@ async function pdfQa(ctx, paper) {
     '范文一段若在答案册原页跨页处被拆成两段（以写作源参考分段总览里两段的原页码一前一后相邻为准），也是已知遗留，只写 notes；同一原页内的提前折行仍写 blocking。',
     `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
     `只写 ${productVisual(product)}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
-  ].join('\n'), [productVisual(product)])))
+  ].join('\n'), [productVisual(product)], { timeout: VISUAL_AGENT_TIMEOUT })))
   const review = { blocking: [], notes: [], checkedImages: [] }
   for (const product of PRODUCTS) {
     const part = json(productVisual(product))
@@ -770,7 +775,7 @@ async function submitPaper(ctx, paper) {
     `读取 ${paper.pdfCheck} 和 ${paper.pdfVisual}；只能依据实际看过的 Screen 与 PDF 检查证据写说明。`,
     '检查是否为真实卷面、有没有登录页/加载态/缺页/叠字/裁切；不认证未看过的细节，不声称人工主 Agent 已目检或直接听审。',
     `只写 ${note}：{"blocking":[],"screen":"实际检查范围、结果和局限","pdf":"引用 PDF 检查范围、结果和局限","checkedImages":[实际打开的截图绝对路径]}。`,
-  ].join('\n'), [note])
+  ].join('\n'), [note], { timeout: VISUAL_AGENT_TIMEOUT })
   const notes = json(note)
   if (!Array.isArray(notes.blocking) || notes.blocking.length || !notes.screen || !notes.pdf
     || images.some((image) => !notes.checkedImages?.includes(image))) throw new Blocked('needs_main_review', 'Screen 需复核或说明未覆盖实际截图', note)
@@ -833,13 +838,13 @@ async function round(ctx, paper, number) {
 }
 async function metadataWorker(ctx, paper, worker, label, outputs, { initial = true } = {}) {
   const base = `${worker.prompt}\n写权限仅限列出的期望产出文件。\ntopicLabels、facetKey、route、features 只能从 request 的 controlledValues 原样复制。`
-  if (initial) await agent(ctx, paper, label, 'luna', base, outputs)
+  if (initial) await agent(ctx, paper, label, 'luna', base, outputs, { timeout: METADATA_AGENT_TIMEOUT })
   await ensureSearchMetadata({
     check: () => checkSearchMetadataFiles({ fastDirectory: fastDir(paper.paperId),
       paperDirectory: path.join(papersRoot, paper.paperId) }),
     rewrite: (issues, attempt) => agent(ctx, paper, `${label}-自检返工-${attempt}`, 'sol',
       `${base}\n上一轮产出未通过与 finalize 相同的只读校验。只改下列出错字段，其余保持不变：\n${compactMetadataIssues(issues)}`,
-      outputs, { retries: 0 }),
+      outputs, { retries: 0, timeout: METADATA_AGENT_TIMEOUT }),
   })
 }
 // Each issue carries its allowed values; repeating a large taxonomy per issue buried the
