@@ -20,8 +20,9 @@ const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六
 // Labels that open an official sample; scoring or prompt text may precede them.
 const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
-// Match the whole marker, keeping its single Chinese note out of speech.
-const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*(?:\((?=[^()]*\p{Script=Han})[^()]+\)\s*)?[:：]?$/iu
+// Zhenhai also prints "Text 8 打听一位画家（第10题为推断题）".
+// Match the whole marker, keeping its Chinese title/note out of speech.
+const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*(?:\((?=[^()]*\p{Script=Han})[^()]+\)\s*|(?=[^()\n]*\p{Script=Han})[\p{Script=Han}A-Za-z0-9\s()、，,]+)?[:：]?$/iu
 // English samples never open a paragraph with Chinese; such a paragraph is the key's own
 // commentary (【审题重点】, 主题语境：…). Chinese version labels still separate alternatives.
 const WRITING_SAMPLE_COMMENTARY = /^(?:【|(?!(?:参考)?范文|考场作文)\p{Script=Han})/u
@@ -263,9 +264,12 @@ function abbreviationLetter(text, match) {
 }
 
 // A label whose text opens with another dotted capital ("D. C.", "A. J. Smith") may be the start of
-// an abbreviation rather than an option, so it is never accepted as a label.
+// an abbreviation rather than an option. Zhenhai's "C. P. E." instead contains
+// the complete subject abbreviation P. E. after its genuine C label.
 function startsAbbreviation(text, match) {
-  return /^[A-Z][.．](?![A-Za-z])/u.test(text.slice(match.index + match[0].length))
+  const after = text.slice(match.index + match[0].length)
+  return /^[A-Z][.．](?![A-Za-z])/u.test(after)
+    && !/^P[.．]\s*E[.．](?![A-Za-z])/u.test(after)
 }
 
 // When the plain label scan fails, accept exactly one label sequence whose skipped candidates

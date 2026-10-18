@@ -48,6 +48,27 @@ const produced = produceNck1DocxMaterialization({
 })
 
 assert.equal(produced.disposition, 'ready_for_verification')
+// Zhenhai's source has a title abbreviation in the stem and a dotted subject name.
+// Neither Mrs. nor P. E. can steal the genuine A./B./C./D. option boundaries.
+for (const options of ['A. Math.  B. Drama.  C. Physics.  D. English.']) {
+  const titledFixture = makeSyntheticNck1DocxFixture({
+    transformXml: xml => xml.replace('21. Which choice fits item 21?', '21. Which subject does Mrs. Green probably teach?')
+      .replace('A. Alpha  B. Bravo  C. Charlie  D. Delta', options),
+  })
+  const titled = produceNck1DocxMaterialization({ paperId: titledFixture.paperId, documents: titledFixture.sourceDocuments })
+  assert.equal(titled.disposition, 'ready_for_verification')
+  const question = titled.materialization.groups.flatMap(group => group.questions).find(q => q.sourceNumber === 21)
+  assert.deepEqual(question.options.map(option => option.label), ['A', 'B', 'C', 'D'])
+  assert.equal(question.options[2].text, 'Physics.')
+  assert.equal(question.stem, 'Which subject does Mrs. Green probably teach?')
+}
+const subjectFixture = makeSyntheticNck1DocxFixture({ listening: true, transformXml: xml => xml
+  .replace('1. Which listening choice fits item 1?', '1. Which subject does Mrs. Green probably teach?')
+  .replace('A. Alpha  B. Bravo  C. Charlie', 'A. Math.  B. Drama.  C. P. E.') })
+const subjectProduced = produceNck1DocxMaterialization({ paperId: subjectFixture.paperId, documents: subjectFixture.sourceDocuments })
+assert.equal(subjectProduced.disposition, 'ready_for_verification')
+assert.equal(subjectProduced.materialization.listening.questions[0].stem, 'Which subject does Mrs. Green probably teach?')
+assert.deepEqual(subjectProduced.materialization.listening.questions[0].options.map(option => option.text), ['Math.', 'Drama.', 'P. E.'])
 assert.deepEqual(produced.review.required, [])
 for (const group of produced.materialization.groups.filter(group => group.family === 'reading')) {
   assert.equal(group.blocks[0].role, 'body', 'a passage slot marker does not make its first prose paragraph a title')
@@ -618,7 +639,8 @@ for (const range of ['6、题', '6、7', '6和7题', '6、7题外文字']) {
 }
 
 // Parenthesized Chinese notes belong to marker metadata, never transcript prose.
-for (const listeningMarkerSuffix of ['（第6题为主旨题）', '(第6题为主旨题)', '（比较 Text 3 的主旨）']) {
+for (const listeningMarkerSuffix of ['（第6题为主旨题）', '(第6题为主旨题)', '（比较 Text 3 的主旨）',
+  ' 打听一位画家（第10题为推断题）', ' AI对艺术家的影响']) {
   const result = produceWith({ listening: true, listeningMarkerSuffix })
   assert.equal(result.disposition, 'ready_for_verification', listeningMarkerSuffix)
   assert.equal(result.materialization.listening.transcript.length, 10)
