@@ -20,6 +20,8 @@ const papersRoot = path.join(root, 'scripts/import-pipeline/papers')
 const fastScript = path.join(root, 'scripts/import-pipeline/fast-import.mjs')
 const proofreadScript = path.join(root, 'scripts/import-pipeline/ocr-proofread.mjs')
 const DROID = process.env.EQB_BATCH_DROID || path.join(os.homedir(), '.local/bin/droid')
+// --only-tools still waits for MCP startup; restrict connections for this process only.
+const AGENT_SETTINGS = path.join(import.meta.dirname, 'batch-agent-settings.json')
 export const MODELS = {
   sol: { model: process.env.EQB_BATCH_SOL || 'custom:magpie/group/auto-gpt-6-1-sol', effort: 'medium' },
   astra: { model: process.env.EQB_BATCH_ASTRA || 'custom:magpie/group/auto-gpt-6-astra', effort: 'high' },
@@ -253,6 +255,7 @@ export async function agent(ctx, paper, label, role, prompt, outputs,
       writeFileSync(promptFile, `${AGENT_RULES}\n${prompt}\n期望产出：${JSON.stringify(outputs)}\n`)
       const args = ['exec', '-m', model, '-r', effort, '--auto', 'medium', '--cwd', root,
         '--only-tools', readOnly ? 'Read,Grep,Glob,LS' : 'Read,Grep,Glob,LS,ApplyPatch',
+        '--settings', AGENT_SETTINGS,
         '-f', promptFile]
       const timeline = path.join(paperIdValid(paper.paperId) ? fastDir(paper.paperId) : path.join(ctx.dir, 'logs'), 'agent-timeline.jsonl')
       const timing = { label, model, effort, attempt: attempt + 1, timeoutMs: timeout,
@@ -983,7 +986,7 @@ function dryRun(ctx) {
   for (const { item } of queue(ctx)) {
     console.log(`\n${item.paperId} / ${item.paperName}${item.needsReview?.length ? ` [阻塞：${item.needsReview.join('；')}]` : ''}`)
     console.log(commandText(process.execPath, [fastScript, ...prepArgs(item)]))
-    console.log(`第一轮：${commandText(DROID, ['exec', '-m', MODELS.sol.model, '-r', MODELS.sol.effort, '--auto', 'medium', '--cwd', root, '--only-tools', 'Read,Grep,Glob,LS,ApplyPatch', '-f', '<逐页提示词>'])}`)
+    console.log(`第一轮：${commandText(DROID, ['exec', '-m', MODELS.sol.model, '-r', MODELS.sol.effort, '--auto', 'medium', '--cwd', root, '--only-tools', 'Read,Grep,Glob,LS,ApplyPatch', '--settings', AGENT_SETTINGS, '-f', '<逐页提示词>'])}`)
     if (ctx.opts['local-only']) { console.log('--local-only：停在 local_ready，不运行 after-proofread（OCR 上传会在 Review 建卷）'); continue }
     console.log(commandText(process.execPath, [fastScript, 'after-proofread', item.paperId]) + '（生产锁，间隔 ≥30 秒；首次 OCR 上传前探测卷号）')
     console.log(`退出码 2：${MODELS.sol.model} / medium 本卷修复（每个停点一次，最多 ${MAX_REPAIRS} 个停点；同一停点再停时 ${MODELS.astra.model} / high 复修，每卷至多一次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
