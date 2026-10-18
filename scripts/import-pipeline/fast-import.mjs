@@ -614,6 +614,15 @@ async function installListening(ctx) {
   }
   const order = listeningGroups(ctx)
   groups.sort((left, right) => order.indexOf(left.segmentId) - order.indexOf(right.segmentId))
+  // Playback is determined by the occurrences; reviewers sometimes bounded only one of the two readings.
+  for (const group of groups) {
+    if (group.decision !== 'usable' || !group.playback || !group.occurrences?.length) continue
+    group.occurrences.sort((left, right) => left.startSeconds - right.startSeconds)
+    group.playback = {
+      startSeconds: Math.min(group.playback.startSeconds, group.occurrences[0].startSeconds),
+      endSeconds: Math.max(group.playback.endSeconds, ...group.occurrences.map((occurrence) => occurrence.endSeconds)),
+    }
+  }
   const cited = [...new Set(groups.flatMap((group) => group.occurrences.flatMap((occurrence) => occurrence.evidencePaths)))].sort()
   const evidence = cited.map((relative) => {
     const match = relative.match(/^listening-review-evidence\/((vad|novad)(?:-[a-z0-9]+)?)-(window-\d{3}\.json)$/u)
