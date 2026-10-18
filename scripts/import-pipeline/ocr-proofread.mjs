@@ -22,6 +22,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import os from 'node:os'
 import path from 'node:path'
 import { promisify } from 'node:util'
+import { fileURLToPath } from 'node:url'
 
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import {
@@ -369,7 +370,7 @@ function expand(reference, lines, label) {
   return out
 }
 
-const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?:\s|$)/iu
+const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
 const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|语言|[一二三四五六]、)/u
 const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
 
@@ -395,7 +396,7 @@ function itemEdges(item, lines, label) {
 // onto the next printed line is one paragraph; joining keeps the rendered transcript from
 // breaking where the source page happened to wrap. A join needs typographic proof: the next
 // line's first word would not have fit after the previous line within the same column.
-function joinTranscriptTurns(items, lines, state, label) {
+export function joinTranscriptTurns(items, lines, state, label) {
   const rights = lines.filter((line) => line.words.length >= 4).map((line) => lineBox(line.words))
   const out = []
   let joins = 0
@@ -404,23 +405,50 @@ function joinTranscriptTurns(items, lines, state, label) {
     const text = typeof item.text === 'string' ? item.text.trim() : ''
     if (TRANSCRIPT_MARKER.test(text)) state.inTranscript = true
     else if (TRANSCRIPT_END.test(text)) state.inTranscript = false
-    const speech = state.inTranscript && text && text === item.text && !TRANSCRIPT_MARKER.test(text) && !CJK.test(text)
-      && !item.figure && !item.emphasis
+    // Chinese glosses/full-width punctuation and source emphasis are part of English speech.
+    const speech = state.inTranscript && text && text === item.text && !TRANSCRIPT_MARKER.test(text)
+      && /^(?:[A-Za-z("'“‘]|\(\d+\))/u.test(text) && !item.figure
     const previous = out.at(-1)
     if (speech && previousSpeech && !SPEAKER_LABEL.test(text)) {
       const before = itemEdges(previous, lines, `${label} item ${index}`)
       const after = itemEdges(item, lines, `${label} item ${index + 1}`)
       if (before && after) {
         const last = lineBox(before.last)
+        const first = lineBox(after.first)
         const firstWord = [...after.first].sort((left, right) => left.box.left - right.box.left)[0]
         const column = rights.filter((box) => box.right > last.left && box.left < last.right
           && box.left >= last.left - last.height * 3).map((box) => box.right).sort((left, right) => left - right)
         const columnRight = column.length ? column[Math.floor((column.length - 1) * 0.9)] : last.right
-        if (last.right + last.height * 0.3 + firstWord.box.width > columnRight) {
+        // Dialogue continuations may have a hanging indent after M:/W:. A monologue's
+        // genuine first-line indent (or an extra indent within a turn) remains a boundary.
+        const hanging = SPEAKER_LABEL.test(previous.text) && before.first === before.last
+        const labelWords = hanging ? previous.text.match(SPEAKER_LABEL)[0].trim().split(/\s+/u).length : 0
+        const speechLeft = hanging
+          ? [...before.first].sort((a, b) => a.box.left - b.box.left)[labelWords]?.box.left ?? last.left
+          : last.left
+        const indented = first.left > speechLeft + last.height * 0.35
+        const beforeTop = Math.min(...before.last.map((word) => word.box.top))
+        const afterTop = Math.min(...after.first.map((word) => word.box.top))
+        const adjacent = afterTop >= beforeTop && afterTop - beforeTop <= last.height * 3
+        if (!indented && adjacent && last.right + last.height * 0.5 + firstWord.box.width > columnRight) {
           const glue = /[A-Za-z][-‐]$/u.test(previous.text) ? '' : ' '
+          const joinedText = `${previous.text}${glue}${text}`
+          const offset = previous.text.length + glue.length
+          const emphasis = [
+            ...(emphasisRanges(previous, label) || []),
+            ...(emphasisRanges(item, label) || []).map((range) =>
+              ({ ...range, start: range.start + offset, end: range.end + offset })),
+          ].map(({ start, end, marks }) => {
+            const text = joinedText.slice(start, end)
+            let occurrence = 0
+            let at = -1
+            do { at = joinedText.indexOf(text, at + 1); occurrence += 1 } while (at < start && at !== -1)
+            return { text, marks, occurrence }
+          })
           out[out.length - 1] = {
             ...previous,
-            text: `${previous.text}${glue}${text}`,
+            text: joinedText,
+            ...(emphasis.length ? { emphasis } : {}),
             ...(previous.lines || item.lines ? { lines: [previous.lines, item.lines].filter(Boolean).join(',') } : {}),
             ...(previous.words || item.words ? { words: [previous.words, item.words].filter(Boolean).join(',') } : {}),
             ...(previous.uncertain || item.uncertain
@@ -977,6 +1005,28 @@ function joinLines(lines) {
   }, '')
 }
 
+// Page furniture can be ordered after a sample by OCR even when physically above it.
+// Require both an edge location and a page-counter/answer-book title (or repeated exam title).
+export function isAnswerFurniture(text, region, repeated = false) {
+  const edge = region.height <= 0.06 && (region.y < 0.12 || region.y + region.height > 0.88)
+  const repeatedTitle = repeated && text.length <= 100 && /考试|高三|模拟|联考|试卷/u.test(text)
+  return edge && (repeatedTitle || FOOTER.test(text)
+    || /\bPage\s+\d+(?:\s+of\s+\d+)?\b/iu.test(text)
+    || /^[\p{Script=Han}\d\s（）()·—\-：:]{0,80}英语\s*(?:试题)?\s*(?:参考)?\s*答案/u.test(text)
+    || /^English\s+(?:Reference\s+)?Answer\s*Key/iu.test(text))
+}
+
+export function referenceLineBoundary(previous, line, margin) {
+  const indented = line.left > margin.left + 0.015
+  const pageTurn = previous && previous.page !== line.page
+  const firstBox = [...line.boxes].sort((a, b) => a.region.y - b.region.y || a.region.x - b.region.x)[0]
+  // A long next word can wrap despite the apparent gap at the right edge.
+  const previousShort = previous && previous.right < margin.right - 0.06
+    && previous.right + (firstBox?.region.width || 0) + 0.003 < margin.right
+  const continues = previous?.role === 'body' && !pageTurn && !indented && /^[a-z]/u.test(line.text)
+  return { indented, pageTurn, previousShort, continues }
+}
+
 // Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
 // from line geometry (first-line indent or a short previous line), never from the Materialization,
 // so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
@@ -994,6 +1044,7 @@ function references(paperId) {
   const evidencePages = evidence.documents.find((document) => document.documentId === answerDocument.documentId).pages
   const pages = confirmation.documents.find((document) => document.documentId === answerDocument.documentId).pages
   const lines = []
+  const review = []
   for (const page of pages) {
     const observations = new Map(evidencePages[page.page - 1].observations.map((item) => [item.observationId, item]))
     for (const item of page.orderedItems) {
@@ -1003,31 +1054,48 @@ function references(paperId) {
         right: Math.max(...boxes.map((box) => box.region.x + box.region.width)) })
     }
   }
+  const edgeTexts = new Map()
+  for (const line of lines) {
+    const region = unionRegion(line.boxes)
+    if (region.y >= 0.12 && region.y + region.height <= 0.88) continue
+    const text = line.text.replace(/\d+/gu, '#').replace(/\s+/gu, '')
+    if (!edgeTexts.has(text)) edgeTexts.set(text, new Set())
+    edgeTexts.get(text).add(line.page)
+  }
   const sections = new Map()
   let current = null
   let inWriting = false
   for (const line of lines) {
+    const normalized = line.text.replace(/\d+/gu, '#').replace(/\s+/gu, '')
+    if (isAnswerFurniture(line.text, unionRegion(line.boxes), edgeTexts.get(normalized)?.size > 1)) {
+      review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
+      continue
+    }
     const bare = inWriting && line.text.normalize('NFKC').match(BARE_WRITING_SECTION)
     const started = bare ? [bare[1] === '一' ? 'application' : 'continuation']
       : WRITING_SECTION.find(([, pattern]) => pattern.test(line.text))
     if (started) { current = { taskType: started[0], lines: [] }; sections.set(started[0], current); continue }
-    if (/^(第[一二三四五]部分|听力)/u.test(line.text) || /^Text\s*\d+$/u.test(line.text)) {
+    if (/^(第[一二三四五]部分|听力)/u.test(line.text) || TRANSCRIPT_MARKER.test(line.text)) {
       current = null
       inWriting = WRITING_PART.test(line.text)
     } else if (current) current.lines.push(line)
   }
-  const margins = new Map()
-  for (const page of new Set(lines.map((line) => line.page))) {
-    const pageLines = lines.filter((line) => line.page === page && line.boxes.length > 3)
-    margins.set(page, { left: Math.min(...pageLines.map((line) => line.left)), right: Math.max(...pageLines.map((line) => line.right)) })
-  }
   const role = (text) => VERSION_LABEL.test(text) ? 'label' : SALUTATION.test(text) ? 'salutation'
     : CLOSING.test(text) ? 'closing' : null
-  const review = []
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
     const taskType = group.writingTask.taskType
     const section = sections.get(taskType)
     if (!section) fail(`No answer-document section found for ${taskType}`)
+    // Derive English sample margins within this writing section, not from unrelated
+    // scoring tables, watermarks or the listening column elsewhere on the same page.
+    const margins = new Map()
+    for (const page of new Set(section.lines.map((line) => line.page))) {
+      const local = section.lines.filter((line) => line.page === page)
+      const english = local.filter((line) => /^[A-Za-z“"‘']/u.test(line.text) && line.boxes.length > 3)
+      const body = english.length ? english : local
+      margins.set(page, { left: Math.min(...body.map((line) => line.left)),
+        right: Math.max(...body.map((line) => line.right)) })
+    }
     const short = taskType === 'application' ? 'app' : 'cont'
     const entries = { essays: [], scoring: [] }
     let entry = null
@@ -1070,11 +1138,7 @@ function references(paperId) {
       const margin = margins.get(line.page)
       const special = role(line.text)
       const afterClosing = previous?.role === 'closing'
-      const indented = line.left > margin.left + 0.015
-      const previousShort = previous && previous.right < margin.right - 0.06
-      const pageTurn = previous && previous.page !== line.page
-      // A lowercase start continues the sentence even when the previous line wrapped early.
-      const continues = previous?.role === 'body' && !pageTurn && /^[a-z]/u.test(line.text)
+      const { indented, previousShort, pageTurn, continues } = referenceLineBoundary(previous, line, margin)
       const starts = !paragraph || special || afterClosing || (!continues && (previous.role !== 'body' || indented
         || previousShort || pageTurn || /^Paragraph\s*\d+[:：]/u.test(line.text)))
       if (pageTurn && !special && !afterClosing && !indented && !previousShort) {
@@ -1126,7 +1190,7 @@ function references(paperId) {
 }
 
 const [command, paperId] = process.argv.slice(2)
-try {
+if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
   if (command === 'evidence') await evidence(paperId)
   else if (command === 'worksheets') worksheets(paperId)
   else if (command === 'compile') compile(paperId)
