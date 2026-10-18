@@ -735,7 +735,7 @@ async function submissionGuard(ctx, paper, origin, { beforeOcr = false } = {}) {
 // Folder names such as「26年3月宁波九校」rarely equal the printed paper name, and listed papers carry no
 // source hashes, so snapshot entries name their inventory folders by hand: inventoryKeys are
 // confirmed, possibleInventoryKeys still need the Owner.
-function inventoryMatch(known, inventoryKey) {
+export function inventoryMatch(known, inventoryKey) {
   for (const [id, entry, from] of known) {
     if (entry.inventoryKeys?.includes(inventoryKey)) return { id, entry: [id, entry, from], confirmed: true }
   }
@@ -744,7 +744,7 @@ function inventoryMatch(known, inventoryKey) {
   }
   return null
 }
-function paperNameKey(name) {
+export function paperNameKey(name) {
   return String(name).normalize('NFKC').replace(/英语|试题|试卷|考试|高三|年级|学年|第[一二]学期/gu, '')
     .replace(/[\s()（）【】[\]「」“”"'·.,，、:：_-]/gu, '').toLowerCase()
 }
@@ -1093,12 +1093,15 @@ function printStatus(ctx) {
   }
   if (ctx.state.paused) console.log(`批次暂停：${ctx.state.paused.reason}`)
 }
+export function questionPdfNames(pdfs) {
+  return pdfs.filter((name) => !/答案|解析|答题卡|词汇/u.test(name) && /试题|试卷|题卷|10页|8页/u.test(name))
+}
 function chooseSources(entry, base) {
   const directory = path.resolve(base, entry.prov, entry.paper)
   if (!directory.startsWith(path.resolve(base) + path.sep)) fail('inventory 路径越界')
   const needsReview = []
   const pdfs = entry.pdfs || []
-  const questions = pdfs.filter((name) => !/答案|解析|答题卡|词汇/u.test(name) && /试题|试卷|题卷|10页|8页/u.test(name))
+  const questions = questionPdfNames(pdfs)
   const ten = questions.filter((name) => /10\s*页/u.test(name))
   const ordinary = questions.filter((name) => !/无听力|不含听力|8\s*页/u.test(name))
   const candidates = ten.length ? ten : ordinary.length ? ordinary : questions
