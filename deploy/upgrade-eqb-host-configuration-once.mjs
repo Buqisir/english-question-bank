@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Version 1: a root-console-only, controller-only host upgrade. No replay or
-// recovery command is exposed. Production paths and privileges are fixed.
+// Version 1: root-console-only controller upgrade and evidence-only closure.
+// Reconciliation never restores configuration or replays an engine operation.
 import fs from 'node:fs'
 import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
@@ -90,10 +90,11 @@ function assertLock(config, fd) {
   const state = fs.lstatSync(file, { bigint: true }), held = fs.fstatSync(fd, { bigint: true })
   check(state.dev === held.dev && state.ino === held.ino && held.isFile(), 'LOCK_IDENTITY_MISMATCH')
 }
-function unresolved(config) {
+function unresolved(config, includeBlockade = true) {
   return ['root-dispatch-barrier.json', 'reviewed-persistence/active.json',
     'host-configuration-update/active.json', 'host-configuration-update/recovery-controller.mjs',
-    'controlled-ssh/active.json'].some(file => exists(path.join(config.root, 'deployments', file)))
+    ...(includeBlockade ? ['controlled-ssh/active.json'] : [])]
+    .some(file => exists(path.join(config.root, 'deployments', file)))
 }
 function productionRun(command, args, options = {}) {
   return execFileSync(command, args, { timeout: 120_000, maxBuffer: 4 * 1024 * 1024,
@@ -165,6 +166,199 @@ function reload(config, dependencies) {
   dependencies.run('/usr/bin/caddy', ['reload', '--config', config.caddy], { timeout: 30_000 })
 }
 
+function blockade(targetSha, record) {
+  return Buffer.from(`${JSON.stringify({ schemaVersion: 'eqb-host-configuration-upgrade-v1',
+    targetSha, recordPath: record, retryAllowed: false })}\n`)
+}
+function sameDigests(left, right) {
+  const names = [...HOST, ...STABLE]
+  return left && right && Object.keys(left).sort().join('\n') === names.sort().join('\n')
+    && names.every(name => /^[a-f0-9]{64}$/u.test(left[name] || '') && left[name] === right[name])
+}
+function reconciliationMatches(proof, original, bytes, blockBytes) {
+  const installed = proof.terminal === 'installed', rolledBack = proof.terminal === 'rolled-back'
+  return proof.schemaVersion === 'eqb-host-configuration-reconciliation-v1'
+    && proof.state === 'verified' && proof.targetSha === original.targetSha
+    && proof.operationSha256 === hash(bytes) && proof.blockadeSha256 === hash(blockBytes)
+    && ['success', 'failure', 'unknown'].includes(original.state)
+    && (installed || rolledBack) && proof.originalState === original.state
+    && (original.state !== 'failure' || (rolledBack && original.rollbackHealthy === true))
+    && (original.state !== 'success' || (installed && original.phase === 'verified'))
+    && proof.hostSha === (installed ? original.targetSha : original.previousHostSha)
+    && proof.appSha === original.previousApp && proof.engineActive === 'absent'
+    && /^[a-f0-9]{64}$/u.test(proof.engineReceiptSha256 || '')
+    && proof.processExited === true && proof.unit?.MainPID === '0' && proof.unit?.ControlPID === '0'
+    && proof.unit.cgroupEmpty === true
+    && ['inactive', 'failed'].includes(proof.unit?.ActiveState)
+    && ['loaded', 'not-found'].includes(proof.unit?.LoadState) && SHA.test(proof.payloadSha || '')
+    && sameDigests(proof.hostDigests, installed ? original.targetDigests : original.previousDigests)
+    && Number.isFinite(Date.parse(proof.finishedAt))
+}
+function processExited(pid) {
+  try { process.kill(pid, 0); return false } catch (error) { return error.code === 'ESRCH' }
+}
+function stopped(targetSha, original, deps) {
+  check(Number.isSafeInteger(original.pid) && original.pid > 1 && deps.processExited(original.pid),
+    'UPGRADE_PROCESS_STILL_PRESENT')
+  let output
+  try {
+    output = deps.run('/usr/bin/systemctl', ['show', `eqb-host-upgrade-${targetSha}.service`,
+      '--property=LoadState,ActiveState,MainPID,ControlPID,ControlGroup'])
+  } catch (error) {
+    // Collected transient units can return nonzero with explicit not-found
+    // properties. Missing/ambiguous output still fails the checks below.
+    output = error.stdout || ''
+  }
+  const fields = Object.fromEntries(String(output).trim().split('\n').map(line => line.split('=')))
+  check(['loaded', 'not-found'].includes(fields.LoadState)
+    && ['inactive', 'failed'].includes(fields.ActiveState)
+    && fields.MainPID === '0' && fields.ControlPID === '0', 'UPGRADE_UNIT_STILL_PRESENT')
+  const group = `/system.slice/eqb-host-upgrade-${targetSha}.service`
+  check(fields.ControlGroup === '' || fields.ControlGroup === group, 'UPGRADE_CGROUP_UNPROVEN')
+  const events = `/sys/fs/cgroup${group}/cgroup.events`
+  if (fields.ControlGroup) check(exists(events), 'UPGRADE_CGROUP_UNPROVEN')
+  if (exists(events)) check(/^populated 0$/um.test(fs.readFileSync(events, 'utf8')), 'UPGRADE_CGROUP_STILL_PRESENT')
+  return { ...fields, cgroupEmpty: true }
+}
+function receiptEvidence(receipt, config, original, exitCode = null) {
+  const keys = ['schemaVersion', 'controllerVersion', 'state', 'conclusion', 'targetSha',
+    'previousHostConfigurationSha', 'changedHostConfigurationPaths', 'changedHostConfigurationPathsDigest',
+    'staged', 'installed', 'noOp', 'rolledBack', 'rollbackHealthy', 'recovered', 'failureCode',
+    'startedAt', 'finishedAt', 'receiptPath']
+  check(receipt?.schemaVersion === 'eqb-host-configuration-receipt-v1'
+    && Object.keys(receipt).sort().join('\n') === keys.sort().join('\n')
+    && receipt.controllerVersion === 'eqb-deploy-controller-v1' && receipt.state === 'reported'
+    && receipt.targetSha === original.targetSha
+    && receipt.previousHostConfigurationSha === original.previousHostSha
+    && receipt.changedHostConfigurationPathsDigest === original.changedPathsDigest
+    && JSON.stringify(receipt.changedHostConfigurationPaths) === JSON.stringify(original.changedPaths)
+    && ['success', 'failure'].includes(receipt.conclusion)
+    && (exitCode === null || exitCode === (receipt.conclusion === 'success' ? 0 : 1))
+    && ['staged', 'installed', 'rolledBack'].every(key => typeof receipt[key] === 'boolean')
+    && [null, true, false].includes(receipt.rollbackHealthy)
+    && (receipt.failureCode === null || typeof receipt.failureCode === 'string')
+    && receipt.recovered === false && receipt.noOp === false
+    && typeof receipt.startedAt === 'string' && Number.isFinite(Date.parse(receipt.startedAt))
+    && typeof receipt.finishedAt === 'string'
+    && Date.parse(receipt.finishedAt) >= Date.parse(receipt.startedAt)
+    && Date.parse(receipt.startedAt) >= Date.parse(original.startedAt), 'ENGINE_RECEIPT_INVALID')
+  check(typeof receipt.receiptPath === 'string'
+    && path.dirname(receipt.receiptPath) === path.join(config.root, 'deployments/receipts'),
+  'ENGINE_RECEIPT_PATH_INVALID')
+  const disk = read(receipt.receiptPath, config, 0o600)
+  const { receiptPath, ...wire } = receipt
+  check(JSON.stringify(JSON.parse(disk)) === JSON.stringify(wire), 'ENGINE_RECEIPT_DISK_MISMATCH')
+  return { receipt, sha256: hash(disk) }
+}
+export async function reconcileHostConfigurationOnce({ targetSha, payloadSha = targetSha,
+  config = HOST_UPGRADE_CONFIG, lockFd = 9, dependencies = {} } = {}) {
+  const deps = { run: productionRun, load: file => import(pathToFileURL(file).href),
+    processExited, ...dependencies }
+  check(SHA.test(targetSha || '') && SHA.test(payloadSha || ''), 'INVALID_TARGET')
+  assertLock(config, lockFd)
+  for (const name of PAYLOAD) check(hash(read(path.join(config.root,
+    `deployments/host-upgrade-payload-${payloadSha}`, name), config))
+    === hash(blob(config, deps, payloadSha, name)), 'PAYLOAD_DIGEST_MISMATCH')
+  const operation = path.join(config.root, 'deployments/host-configuration-upgrade-v1', targetSha)
+  const record = path.join(operation, 'operation.json'), proofPath = path.join(operation, 'reconciliation.json')
+  const bytes = read(record, config, 0o600), original = JSON.parse(bytes)
+  const blockBytes = blockade(targetSha, record)
+  const active = path.join(config.root, 'deployments/controlled-ssh/active.json')
+  check(original.schemaVersion === 'eqb-host-configuration-upgrade-v1' && original.targetSha === targetSha
+    && SHA.test(original.previousHostSha || '') && SHA.test(original.previousApp || '')
+    && original.retryAllowed === false && ['success', 'failure', 'unknown'].includes(original.state)
+    && original.changedPathsDigest === hash('deploy/eqb-deploy-controller.mjs\n')
+    && JSON.stringify(original.changedPaths) === JSON.stringify([HOST[2]])
+    && sameDigests(original.previousDigests, original.previousDigests)
+    && sameDigests(original.targetDigests, original.targetDigests), 'OPERATION_IDENTITY_INVALID')
+  const held = fs.fstatSync(lockFd, { bigint: true })
+  check(original.lockDevice === String(held.dev) && original.lockInode === String(held.ino),
+    'LOCK_IDENTITY_MISMATCH')
+  let proof = null
+  if (exists(proofPath)) {
+    proof = JSON.parse(read(proofPath, config, 0o600))
+    check(reconciliationMatches(proof, original, bytes, blockBytes), 'RECONCILIATION_MISMATCH')
+  }
+  if (!exists(active)) {
+    check(proof !== null, 'BLOCKADE_MISSING')
+    return proof // Already closed; no mutation and no engine replay.
+  }
+  check(read(active, config, 0o600).equals(blockBytes), 'BLOCKADE_CHANGED')
+  stopped(targetSha, original, deps)
+  // Existing engine active/recovery state is unresolved, never implicitly
+  // recovered or deleted by this command. Retain it and refuse closure.
+  check(!unresolved(config, false), 'ENGINE_MAINTENANCE_UNRESOLVED')
+  for (const [name, expected] of [['unit', original.previousDigests[HOST[1]]],
+    ['caddy', original.previousDigests[HOST[0]]], ['module', original.previousDigests[HOST[2]]],
+    ['marker', original.markerBackupSha256]]) {
+    const backup = read(path.join(operation, name), config, 0o600)
+    check(hash(backup) === original[`${name}BackupSha256`] && hash(backup) === expected,
+      'BACKUP_DIGEST_MISMATCH')
+    if (name === 'marker') {
+      const marker = JSON.parse(backup)
+      check(marker.schemaVersion === 'eqb-host-configuration-v1' && marker.sha === original.previousHostSha
+        && sameDigests({ ...marker.files, ...marker.stableLaunchers }, original.previousDigests),
+      'BACKUP_DIGEST_MISMATCH')
+    }
+  }
+  let evidence
+  if (original.engineReceipt) evidence = receiptEvidence(original.engineReceipt, config, original)
+  else {
+    const receipts = path.join(config.root, 'deployments/receipts'), matching = []
+    if (exists(receipts)) for (const name of fs.readdirSync(receipts)) {
+      const receiptPath = path.join(receipts, name)
+      const receipt = JSON.parse(read(receiptPath, config, 0o600))
+      if (receipt.targetSha === targetSha && receipt.schemaVersion === 'eqb-host-configuration-receipt-v1') {
+        matching.push(receiptEvidence({ ...receipt, receiptPath }, config, original))
+      }
+    }
+    check(matching.length === 1, 'TERMINAL_RECEIPT_UNPROVEN')
+    evidence = matching[0]
+  }
+  const installed = hostIdentity(config, deps), receipt = evidence.receipt
+  const successReceipt = receipt.conclusion === 'success' && receipt.installed
+    && !receipt.rolledBack && receipt.failureCode === null
+  const healthyRollbackReceipt = receipt.conclusion === 'failure'
+    && receipt.rolledBack && receipt.rollbackHealthy === true && typeof receipt.failureCode === 'string'
+  const terminal = installed.sha === original.targetSha && successReceipt ? 'installed'
+    : installed.sha === original.previousHostSha && (successReceipt || healthyRollbackReceipt) ? 'rolled-back' : null
+  check(terminal && (original.state !== 'failure' || (terminal === 'rolled-back' && original.rollbackHealthy === true))
+    && (original.state !== 'success' || (terminal === 'installed' && original.phase === 'verified')),
+  'TERMINAL_STATE_UNPROVEN')
+  check(sameDigests(installed.digests, terminal === 'installed' ? original.targetDigests : original.previousDigests)
+    && appSha(config, deps) === original.previousApp, 'TERMINAL_IDENTITY_MISMATCH')
+  // Only installed success needs the new module's preflight. Rolled-back
+  // closure verifies the old module/bytes via Git, without loading its engine.
+  if (terminal === 'installed') {
+    const engine = await deps.load(path.join(installed.version, HOST[2]))
+    const result = await engine.runController({ originalCommand: 'preflight' })
+    check(result.exitCode === 0 && result.output.productionSha === original.previousApp
+      && result.output.layout === 'release' && result.output.eqb === 'active'
+      && result.output.caddy === 'active', 'NEW_MODULE_PREFLIGHT_FAILED')
+  }
+  healthy(config, deps)
+  const unit = stopped(targetSha, original, deps)
+  assertLock(config, lockFd)
+  check(!unresolved(config, false) && read(record, config, 0o600).equals(bytes)
+    && read(active, config, 0o600).equals(blockBytes)
+    && appSha(config, deps) === original.previousApp
+    && hostIdentity(config, deps).sha === installed.sha, 'RECONCILIATION_PRECONDITION_CHANGED')
+  if (!proof) {
+    proof = { schemaVersion: 'eqb-host-configuration-reconciliation-v1', state: 'verified',
+      targetSha, originalState: original.state, operationSha256: hash(bytes), blockadeSha256: hash(blockBytes),
+      terminal, hostSha: installed.sha, hostDigests: installed.digests, appSha: original.previousApp,
+      engineActive: 'absent', engineReceiptSha256: evidence.sha256,
+      processExited: true, unit, payloadSha, finishedAt: new Date().toISOString() }
+    publish(proofPath, `${JSON.stringify(proof, null, 2)}\n`)
+  } else check(proof.terminal === terminal && proof.engineReceiptSha256 === evidence.sha256,
+    'RECONCILIATION_MISMATCH')
+  // Durable proof precedes unlink: interruption is safely finishable by this
+  // same reconciliation command, while operation.json remains byte-identical.
+  fs.unlinkSync(active)
+  sync(path.dirname(active))
+  return proof
+}
+
 export async function upgradeHostConfigurationOnce({ targetSha, config = HOST_UPGRADE_CONFIG,
   lockFd = 9, dependencies = {} } = {}) {
   const deps = { run: productionRun, load: file => import(pathToFileURL(file).href), ...dependencies }
@@ -179,10 +373,14 @@ export async function upgradeHostConfigurationOnce({ targetSha, config = HOST_UP
     directory(operations, config)
     for (const name of fs.readdirSync(operations)) {
       check(SHA.test(name), 'UNRESOLVED_UPGRADE_HISTORY')
-      const prior = JSON.parse(read(path.join(operations, name, 'operation.json'), config, 0o600))
+      const recordPath = path.join(operations, name, 'operation.json')
+      const bytes = read(recordPath, config, 0o600), prior = JSON.parse(bytes)
+      const proofPath = path.join(operations, name, 'reconciliation.json')
+      const reconciled = exists(proofPath) && reconciliationMatches(
+        JSON.parse(read(proofPath, config, 0o600)), prior, bytes, blockade(name, recordPath))
       check(prior.schemaVersion === 'eqb-host-configuration-upgrade-v1' && prior.targetSha === name
-        && prior.state === 'success' && prior.phase === 'verified'
-        && Number.isFinite(Date.parse(prior.finishedAt)), 'UNRESOLVED_UPGRADE_HISTORY')
+        && ((prior.state === 'success' && prior.phase === 'verified'
+          && Number.isFinite(Date.parse(prior.finishedAt))) || reconciled), 'UNRESOLVED_UPGRADE_HISTORY')
     }
   }
   check(fetchMain(config, deps) === targetSha, 'MAIN_MISMATCH')
@@ -237,8 +435,7 @@ export async function upgradeHostConfigurationOnce({ targetSha, config = HOST_UP
     payloadDigests, changedPaths: changed, changedPathsDigest, state: 'unknown', phase: 'admission',
     retryAllowed: false, startedAt: new Date().toISOString(), engineReceipt: null }
   const save = () => publish(record, `${JSON.stringify(state, null, 2)}\n`)
-  const blockBytes = Buffer.from(`${JSON.stringify({ schemaVersion: state.schemaVersion,
-    targetSha, recordPath: record, retryAllowed: false })}\n`)
+  const blockBytes = blockade(targetSha, record)
   // Disk record first, then daily-entry-recognized blockade, before any engine
   // call. Crash here leaves a consumed operation and/or blockade, never a replay.
   save()
@@ -272,29 +469,7 @@ export async function upgradeHostConfigurationOnce({ targetSha, config = HOST_UP
     const result = await engine.runController({ originalCommand: `update-host-config ${targetSha} ${changedPathsDigest}` })
     state.phase = 'engine-receipt'
     const receipt = result?.output
-    const receiptKeys = ['schemaVersion', 'controllerVersion', 'state', 'conclusion', 'targetSha',
-      'previousHostConfigurationSha', 'changedHostConfigurationPaths', 'changedHostConfigurationPathsDigest',
-      'staged', 'installed', 'noOp', 'rolledBack', 'rollbackHealthy', 'recovered', 'failureCode',
-      'startedAt', 'finishedAt', 'receiptPath']
-    check(receipt?.schemaVersion === 'eqb-host-configuration-receipt-v1'
-      && Object.keys(receipt).sort().join('\n') === receiptKeys.sort().join('\n')
-      && receipt.controllerVersion === 'eqb-deploy-controller-v1' && receipt.state === 'reported'
-      && receipt.targetSha === targetSha && receipt.previousHostConfigurationSha === previous.sha
-      && receipt.changedHostConfigurationPathsDigest === changedPathsDigest
-      && JSON.stringify(receipt.changedHostConfigurationPaths) === JSON.stringify(changed)
-      && ['success', 'failure'].includes(receipt.conclusion)
-      && result.exitCode === (receipt.conclusion === 'success' ? 0 : 1)
-      && ['staged', 'installed', 'rolledBack'].every(key => typeof receipt[key] === 'boolean')
-      && [null, true, false].includes(receipt.rollbackHealthy)
-      && (receipt.failureCode === null || typeof receipt.failureCode === 'string')
-      && receipt.recovered === false && receipt.noOp === false
-      && typeof receipt.startedAt === 'string' && Number.isFinite(Date.parse(receipt.startedAt))
-      && typeof receipt.finishedAt === 'string' && Number.isFinite(Date.parse(receipt.finishedAt)), 'ENGINE_RECEIPT_INVALID')
-    check(typeof receipt.receiptPath === 'string'
-      && path.dirname(receipt.receiptPath) === path.join(base, 'receipts'), 'ENGINE_RECEIPT_PATH_INVALID')
-    const diskReceipt = JSON.parse(read(receipt.receiptPath, config, 0o600))
-    const { receiptPath, ...wireReceipt } = receipt
-    check(JSON.stringify(diskReceipt) === JSON.stringify(wireReceipt), 'ENGINE_RECEIPT_DISK_MISMATCH')
+    receiptEvidence(receipt, config, state, result?.exitCode ?? 'missing')
     knownEngineResult = true
     state.engineReceipt = receipt
     state.phase = 'postcheck'
@@ -357,7 +532,8 @@ export async function upgradeHostConfigurationOnce({ targetSha, config = HOST_UP
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    check(process.getuid() === 0 && process.getgid() === 0 && process.argv.length === 3, 'ROOT_ONLY')
+    check(process.getuid() === 0 && process.getgid() === 0
+      && [3, 5].includes(process.argv.length), 'ROOT_ONLY')
     const targetSha = process.argv[2]
     check(SHA.test(targetSha || '') && fileURLToPath(import.meta.url)
       === `/opt/eqb/deployments/host-upgrade-payload-${targetSha}/deploy/upgrade-eqb-host-configuration-once.mjs`, 'PAYLOAD_PATH_INVALID')
@@ -365,11 +541,20 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     // calls that merely open the right inode without acquiring its flock.
     check(/^lock:\s+\d+:\s+FLOCK\s+ADVISORY\s+WRITE\s/um.test(
       fs.readFileSync('/proc/self/fdinfo/9', 'utf8')), 'LOCK_NOT_HELD')
-    const result = await upgradeHostConfigurationOnce({ targetSha })
-    process.stdout.write(`EQB_HOST_UPGRADE ${JSON.stringify(result)}\n`)
-    process.exitCode = result.state === 'success' ? 0 : result.state === 'failure' ? 1 : 70
-  } catch {
-    process.stderr.write('EQB_HOST_UPGRADE_REJECTED_OR_UNKNOWN; inspect retained evidence; do not retry\n')
+    const reconciling = process.argv.length === 5
+    check(!reconciling || (process.argv[3] === 'reconcile' && SHA.test(process.argv[4] || '')),
+      'INVALID_COMMAND')
+    const result = reconciling
+      ? await reconcileHostConfigurationOnce({ targetSha: process.argv[4], payloadSha: targetSha })
+      : await upgradeHostConfigurationOnce({ targetSha })
+    process.stdout.write(`${reconciling ? 'EQB_HOST_RECONCILIATION' : 'EQB_HOST_UPGRADE'} ${JSON.stringify(result)}\n`)
+    process.exitCode = (result.state === 'success' || result.state === 'verified') ? 0
+      : result.state === 'failure' ? 1 : 70
+  } catch (error) {
+    const code = /^[A-Z][A-Z0-9_]{0,63}$/u.test(error.code || '') ? error.code : 'EVIDENCE_UNPROVEN'
+    process.stderr.write(process.argv[3] === 'reconcile'
+      ? `EQB_HOST_RECONCILIATION_REJECTED ${code}; inspect original evidence; never replay upgrade\n`
+      : 'EQB_HOST_UPGRADE_REJECTED_OR_UNKNOWN; inspect retained evidence; do not retry\n')
     process.exitCode = 70
   }
 }
