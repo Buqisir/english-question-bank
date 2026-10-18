@@ -7,13 +7,17 @@
 //   split <request.json> --out <dir> [--parts 5]
 //   merge <request.json> --out <dir> --output <review.json>
 //   merge <request.json> --out <dir> --part N           check one part only; writes nothing
-//   auto <request.json> --flags <dir> --output <review.json>
+//   auto <request.json> --flags <dir> --output <review.json> [--paper-dir <dir>]
 //
 // `auto` builds the complete report from the source flags OCR proofreaders record while
 // reading every page (ocr-proofread-rules.md) plus the policy's mechanical punctuation and
 // whitespace classes. The proofreaders own every spelling/grammar/uncertain judgement.
+// Source emphasis comes from the paper's retained evidence (default: papers/<paperId>).
+// Mechanical edits crossing a mark are skipped; authored edits stay in the report.
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { crossesSourceEmphasis, loadSpellingSourceEmphasis } from './spelling-source-emphasis.mjs'
 
 function fail(message) {
   console.error(message)
@@ -237,6 +241,8 @@ function occurrences(text, flag, wholeWords) {
 
 function auto(requestPath) {
   const request = readJson(requestPath)
+  const paperDir = path.resolve(option('--paper-dir') || fileURLToPath(new URL(`./papers/${request.paperId}/`, import.meta.url)))
+  const emphasis = loadSpellingSourceEmphasis(paperDir, request)
   const flagsDir = path.resolve(option('--flags') || fail('auto requires --flags <dir>'))
   const output = path.resolve(option('--output') || fail('auto requires --output <review.json>'))
   if (existsSync(output)) fail(`Refusing to overwrite: ${output}`)
@@ -284,9 +290,21 @@ function auto(requestPath) {
     }
     mapping.push({ flag: label, decision: uncertain ? 'uncertain' : 'correct', targets: hits.map(({ target }) => target.jsonPointer) })
   }
+  const skippedMechanical = []
+  const crossingAgentCorrections = []
   const targets = request.report.targets.map((target) => {
     const slot = applied.get(target.jsonPointer)
-    const corrections = [...mechanicalCorrections(target.before), ...slot.corrections]
+    const ranges = emphasis.get(target.jsonPointer) || []
+    const mechanicalCorrectionsKept = mechanicalCorrections(target.before).filter(correction => {
+      if (!crossesSourceEmphasis(correction, ranges)) return true
+      skippedMechanical.push({ jsonPointer: target.jsonPointer, correction, ranges })
+      return false
+    })
+    for (const correction of slot.corrections) {
+      if (crossesSourceEmphasis(correction, ranges)) crossingAgentCorrections.push({ jsonPointer: target.jsonPointer, correction, ranges })
+    }
+    const skipped = skippedMechanical.some(item => item.jsonPointer === target.jsonPointer)
+    const corrections = [...mechanicalCorrectionsKept, ...slot.corrections]
       .sort((left, right) => left.start - right.start)
     for (let index = 1; index < corrections.length; index++) {
       const previous = corrections[index - 1]
@@ -296,8 +314,9 @@ function auto(requestPath) {
     }
     const mechanical = corrections.some((correction) => ['punctuation', 'whitespace'].includes(correction.category))
     const decision = slot.notes.length ? 'uncertain' : corrections.length ? 'correct' : 'unchanged'
-    const note = decision === 'unchanged' ? ''
-      : [...new Set([...slot.notes, ...slot.reasons, ...(mechanical ? ['统一英文语境中的破折号、引号空格或词间空格排印。'] : [])])].join('；')
+    const note = [...new Set([...slot.notes, ...slot.reasons,
+      ...(skipped ? ['跨强调边界，保留原排印'] : []),
+      ...(mechanical ? ['统一英文语境中的破折号、引号空格或词间空格排印。'] : [])])].join('；')
     return { ...target, decision, note, corrections }
   })
   if (problems.length) fail(`Source flags need attention before the report can be built:\n${problems.join('\n')}`)
@@ -307,6 +326,7 @@ function auto(requestPath) {
     correct: count('correct'), uncertain: count('uncertain'),
     mechanical: targets.reduce((sum, target) => sum + target.corrections.filter((correction) =>
       ['punctuation', 'whitespace'].includes(correction.category)).length, 0),
+    skippedMechanical, crossingAgentCorrections,
     flags: mapping }, null, 2))
 }
 
@@ -314,4 +334,4 @@ const [command, requestPath] = process.argv.slice(2)
 if (command === 'split' && requestPath) split(path.resolve(requestPath))
 else if (command === 'merge' && requestPath) merge(path.resolve(requestPath))
 else if (command === 'auto' && requestPath) auto(path.resolve(requestPath))
-else fail('Usage: text-review-parts.mjs <split|merge|auto> <request.json> [--out <dir>] [--parts N] [--flags <dir>] [--output <review.json>]')
+else fail('Usage: text-review-parts.mjs <split|merge|auto> <request.json> [--out <dir>] [--parts N] [--flags <dir>] [--output <review.json>] [--paper-dir <dir>]')

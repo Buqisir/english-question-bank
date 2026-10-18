@@ -505,7 +505,7 @@ async function afterProofread(ctx, args) {
     const review = path.join(ctx.fast, 'spelling-review.json')
     archive(ctx, review)
     const built = await run(ctx, 'spelling-auto', cli('text-review-parts.mjs', 'auto', request,
-      '--flags', path.join(ctx.work, 'source-flags'), '--output', review))
+      '--flags', path.join(ctx.work, 'source-flags'), '--output', review, '--paper-dir', ctx.paperDir))
     await run(ctx, 'finalize-spelling', cli('review.mjs', 'finalize-spelling', ctx.paperId, '--input', review))
     await run(ctx, 'verify-spelling', cli('review.mjs', 'verify-spelling', ctx.paperId))
     return { unchanged: built.unchanged, correct: built.correct, uncertain: built.uncertain, mechanical: built.mechanical }

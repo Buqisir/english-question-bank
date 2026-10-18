@@ -9,6 +9,12 @@ import { nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistori
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { admitCanonicalPaperImport } from '../server/paper-canonical/publication.mjs'
 import { buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
+import { execFileSync } from 'node:child_process'
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
+import { prepareSpellingReview, applySpellingReview, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
+import { loadSpellingSourceEmphasis } from './import-pipeline/spelling-source-emphasis.mjs'
 
 const run = (text, properties = '') => `<w:r><w:rPr>${properties}</w:rPr><w:t xml:space="preserve">${text}</w:t></w:r>`
 const paragraphs = [
@@ -52,6 +58,89 @@ assert.throws(() => mapSourceEmphasisEdits('a obstacle', [{ start: 2, end: 10, m
 assert.throws(() => splitSourceEmphasis('word（词） next', [{ start: 0, end: 4, marks: ['bold'] }], 'test'), /normalization/)
 assert.equal(splitSourceEmphasis('plain marked end', [{ start: 6, end: 12, marks: ['bold'] }], 'test').map((n) => n.text).join(''), 'plain marked end')
 console.log('PASS emphasis mapping: length-changing edits before/inside/after, boundary rejection, typography closure')
+
+// Exercise the actual auto CLI, including source-run extraction and unchanged
+// notes, rather than only duplicating the boundary predicate in a unit test.
+const autoFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml
+  .replace('A passage keeps one small promise.',
+    `😀 </w:t></w:r>${run('Bath', '<w:b/>')}<w:r><w:t xml:space="preserve"> — City.`)
+  .replace('B passage keeps one small promise.',
+    `😀 </w:t></w:r>${run('Bath', '<w:b/>')}<w:r><w:t xml:space="preserve"> — City. Plain — Text.`)
+  .replace('C passage keeps one small promise.',
+    `😀 </w:t></w:r>${run('Inside — Mark', '<w:b/>')}<w:r><w:t xml:space="preserve"> Outside — Text.`),
+})
+const autoProduced = produceNck1DocxMaterialization({ paperId: autoFixture.paperId, documents: autoFixture.sourceDocuments })
+assert.equal(autoProduced.disposition, 'ready_for_verification')
+const autoDir = mkdtempSync(path.join(tmpdir(), 'eqb-spelling-emphasis-'))
+try {
+  const materializationBytes = new TextEncoder().encode(JSON.stringify(autoProduced.materialization))
+  writeFileSync(path.join(autoDir, 'materialization.json'), materializationBytes)
+  writeFileSync(path.join(autoDir, 'config.json'), JSON.stringify({ paperId: autoFixture.paperId, spellingReview: TEXT_REVIEW_POLICY }))
+  writeFileSync(path.join(autoDir, 'universal-source-manifest.json'), JSON.stringify({
+    ...autoFixture.manifest, materializationPath: 'materialization.json', mediaDirectory: 'media',
+    documents: autoProduced.materialization.documents.map(document => ({ ...document, path: `${document.documentId}.bin` })),
+  }))
+  for (const document of autoFixture.sourceDocuments) writeFileSync(path.join(autoDir, `${document.documentId}.bin`), document.bytes)
+  mkdirSync(path.join(autoDir, 'flags'))
+  const request = { paperId: autoFixture.paperId, materialization: autoProduced.materialization,
+    report: prepareSpellingReview(materializationBytes, TEXT_REVIEW_POLICY) }
+  writeFileSync(path.join(autoDir, 'request.json'), JSON.stringify(request))
+  const cli = (...args) => JSON.parse(execFileSync(process.execPath,
+    [path.join(import.meta.dirname, 'import-pipeline/text-review-parts.mjs'), 'auto', path.join(autoDir, 'request.json'),
+      '--paper-dir', autoDir, '--flags', path.join(autoDir, 'flags'), ...args], { encoding: 'utf8' }))
+  const summary = cli('--output', path.join(autoDir, 'review.json'))
+  const review = JSON.parse(readFileSync(path.join(autoDir, 'review.json'), 'utf8'))
+  const targetFor = text => review.targets.find(target => target.before === text)
+  const crossing = targetFor('😀 Bath — City.')
+  assert.equal(crossing.decision, 'unchanged')
+  assert.deepEqual(crossing.corrections, [])
+  assert.equal(crossing.note, '跨强调边界，保留原排印')
+  const mixed = targetFor('😀 Bath — City. Plain — Text.')
+  assert.equal(mixed.decision, 'correct')
+  assert.equal(mixed.corrections.length, 1)
+  assert.equal(mixed.corrections[0].before, 'Plain — Text')
+  assert(mixed.note.includes('跨强调边界，保留原排印'))
+  const insideOutside = targetFor('😀 Inside — Mark Outside — Text.')
+  assert.equal(insideOutside.corrections.length, 2)
+  assert.equal(summary.skippedMechanical.length, 2)
+  assert.deepEqual(summary.crossingAgentCorrections, [])
+  const effective = applySpellingReview(materializationBytes, new TextEncoder().encode(JSON.stringify(review)))
+  const ranges = loadSpellingSourceEmphasis(autoDir, request)
+  for (const target of review.targets) {
+    const mapped = mapSourceEmphasisEdits(target.before, ranges.get(target.jsonPointer) || [], target.corrections)
+    const actual = target.jsonPointer.slice(1).split('/').reduce((node, key) => node[key], effective)
+    assert.equal(mapped.text, actual)
+  }
+  // A reviewer-authored correction crossing the same mark stays visible and
+  // is reported, so auto cannot silently discard a semantic correction.
+  writeFileSync(path.join(autoDir, 'flags', 'agent.json'), JSON.stringify({ flags: [
+    { quote: 'Bath', after: 'Bathe', category: 'spelling', reason: '测试明确拼写修正' },
+  ] }))
+  // Place the mark boundary inside the word for this independent source case.
+  const agentFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.replace(
+    'A passage keeps one small promise.',
+    `</w:t></w:r>${run('Ba', '<w:b/>')}<w:r><w:t xml:space="preserve">th word.`,
+  ) })
+  const agentProduced = produceNck1DocxMaterialization({ paperId: agentFixture.paperId, documents: agentFixture.sourceDocuments })
+  const agentBytes = new TextEncoder().encode(JSON.stringify(agentProduced.materialization))
+  writeFileSync(path.join(autoDir, 'materialization.json'), agentBytes)
+  for (const document of agentFixture.sourceDocuments) writeFileSync(path.join(autoDir, `${document.documentId}.bin`), document.bytes)
+  writeFileSync(path.join(autoDir, 'universal-source-manifest.json'), JSON.stringify({
+    ...agentFixture.manifest, materializationPath: 'materialization.json', mediaDirectory: 'media',
+    documents: agentProduced.materialization.documents.map(document => ({ ...document, path: `${document.documentId}.bin` })),
+  }))
+  writeFileSync(path.join(autoDir, 'request.json'), JSON.stringify({
+    paperId: agentFixture.paperId, materialization: agentProduced.materialization,
+    report: prepareSpellingReview(agentBytes, TEXT_REVIEW_POLICY),
+  }))
+  const agentSummary = cli('--output', path.join(autoDir, 'agent-review.json'))
+  assert.equal(agentSummary.crossingAgentCorrections.length, 1)
+  const agentReview = JSON.parse(readFileSync(path.join(autoDir, 'agent-review.json'), 'utf8'))
+  assert.equal(agentReview.targets.find(target => target.before === 'Bath word.').corrections.length, 1)
+} finally {
+  rmSync(autoDir, { recursive: true, force: true })
+}
+console.log('PASS auto spelling: crossing mechanical edits skipped with unchanged note, mixed edits retained, inside/outside unchanged, UTF-16 coordinates, agent corrections retained and reported')
 
 const semanticFixture = makeSyntheticNck1DocxFixture({ transformXml: (xml) => xml.replace(
   'C passage keeps one small promise.',
