@@ -426,8 +426,8 @@ function splitSummaries(ctx, parts) {
   })
 }
 
-function startPagination(ctx, candidateDigest) {
-  for (const edition of EDITIONS) {
+function startPagination(ctx, candidateDigest, editions = EDITIONS) {
+  for (const edition of editions) {
     const out = path.join(ctx.fast, 'pagination', edition)
     const report = path.join(out, 'report.json')
     const previous = existsSync(report) ? readJson(report) : null
@@ -580,6 +580,15 @@ async function afterProofread(ctx, args) {
 
 async function mergePagination(ctx) {
   const reports = {}
+  // pagination-run stays completed after a failed finish, so a resumed finish would only re-read
+  // the dead job; an edition whose job exited without a report is started again instead.
+  const job = (edition) => ctx.state.background[`pagination-${edition}`]
+  const orphaned = EDITIONS.filter((edition) => job(edition) && !alive(job(edition).pid)
+    && !existsSync(path.join(ctx.fast, 'pagination', edition, 'report.json')))
+  if (orphaned.length) {
+    say(`↻ 分页 ${orphaned.join(', ')} 的进程已退出且没有报告，重新启动`)
+    startPagination(ctx, ctx.state.steps['pagination-run'].result.candidateDigest, orphaned)
+  }
   for (const edition of EDITIONS) {
     const file = path.join(ctx.fast, 'pagination', edition, 'report.json')
     if (ctx.state.background[`pagination-${edition}`]) await waitBackground(ctx, `pagination-${edition}`, () => existsSync(file))

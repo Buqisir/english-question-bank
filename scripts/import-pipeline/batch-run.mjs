@@ -918,7 +918,9 @@ async function processPaper(ctx, paper) {
     const round2Missing = () => json(path.join(fastDir(paper.paperId), 'round2.json'))
       .some((worker) => (worker.outputs || []).some((output) => !existsSync(output)))
     if (!paper.done.round2 || round2Missing()) { await round(ctx, paper, 2); paper.done.round2 = true; ctx.save() }
-    if (!paper.done.finish) {
+    // A manual --redo-from clears fast-import's freeze step and moves products aside.
+    const frozen = () => Boolean(json(path.join(fastDir(paper.paperId), 'state.json')).steps?.freeze?.finishedAt)
+    if (!paper.done.finish || !frozen()) {
       const workers = json(path.join(fastDir(paper.paperId), 'round2.json'))
       const worker = workers.find(worker => /metadata/iu.test(worker.label || ''))
       if (!worker) throw new Blocked('needs_code_fix', '第二轮计划缺少检索 metadata worker')
