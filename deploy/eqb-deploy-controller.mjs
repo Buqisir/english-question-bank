@@ -749,24 +749,46 @@ function sealRelease(config, dependencies, release, sha) {
 
 // Called only by deploy after its boundary checks, under the launcher's exclusive
 // deploy.lock. Never infer rollback history from directory names or mtimes.
+// Ordinary activation retains 2–3 releases; noOp retains current + previous.
+// deployReviewedPersistence does not prune. Build/runtime-owned interrupted
+// staging/health directories remain untouched under the same ownership rule.
 function pruneReleases(config, dependencies, currentSha, targetSha) {
   const result = { pruned: [] }
+  let stage = 'history-directory'
+  let filename = 'receipts'
+  const invalidReceipt = code => Object.assign(new Error('Invalid release history'), { code })
   try {
     const receipts = path.join(config.root, 'deployments', 'receipts')
     if (!pathEntryExists(receipts)) {
       result.pruneSkipped = 'PREVIOUS_RELEASE_UNKNOWN'
       return result
     }
-    const successful = readdirSync(receipts).filter(name => name.endsWith('.json')).flatMap(name => {
+    const successful = readdirSync(receipts).filter(name => name.endsWith('.json')).sort().flatMap(name => {
+      filename = name
+      stage = 'receipt-metadata'
       const file = path.join(receipts, name)
       const metadata = lstatSync(file)
-      if (!metadata.isFile() || metadata.uid !== config.controllerUid || (metadata.mode & 0o022)) return []
+      if (!metadata.isFile() || metadata.isSymbolicLink() || metadata.uid !== config.controllerUid
+        || metadata.gid !== config.controllerGid || (metadata.mode & 0o7777) !== 0o600
+        || metadata.nlink !== 1) throw invalidReceipt('UNSAFE_RECEIPT')
+      stage = 'receipt-json'
       const receipt = JSON.parse(readFileSync(file, 'utf8'))
+      stage = 'receipt-validation'
+      if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)
+        || ![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION,
+          EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION].includes(receipt.schemaVersion)
+        || !['success', 'failure'].includes(receipt.conclusion)
+        || !SHA.test(receipt.targetSha || '')
+        || typeof receipt.finishedAt !== 'string'
+        || !Number.isFinite(Date.parse(receipt.finishedAt))) throw invalidReceipt('INVALID_RECEIPT')
+      if (receipt.schemaVersion !== EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION
+        && receipt.conclusion === 'success' && !SHA.test(receipt.previousSha || '')) {
+        throw invalidReceipt('INVALID_PREVIOUS_SHA')
+      }
       // No-op receipts do not represent an activation and point back to self.
       if (![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION]
         .includes(receipt.schemaVersion) || receipt.conclusion !== 'success'
         || receipt.targetSha !== currentSha || receipt.noOp === true) return []
-      if (!Number.isFinite(Date.parse(receipt.finishedAt))) throw new Error('Invalid release history timestamp')
       return [receipt]
     }).sort((a, b) => Date.parse(b.finishedAt) - Date.parse(a.finishedAt))
     const latest = successful[0]
@@ -777,19 +799,29 @@ function pruneReleases(config, dependencies, currentSha, targetSha) {
       return result
     }
     const keep = new Set([currentSha, latest.previousSha, targetSha])
+    stage = 'release-directory'
+    filename = 'releases'
     const releases = path.join(config.root, 'releases')
     const filesystem = dependencies.releaseFilesystem || { lstatSync, rmSync }
     for (const name of readdirSync(releases).sort()) {
       if (keep.has(name) || !(SHA.test(name) || name.startsWith('.staging-')
         || name.startsWith('.candidate-health-'))) continue
+      filename = name
+      stage = 'release-metadata'
       const directory = path.join(releases, name)
       const metadata = filesystem.lstatSync(directory)
       if (!metadata.isDirectory() || metadata.isSymbolicLink() || metadata.uid !== config.controllerUid) continue
+      stage = 'release-remove'
       filesystem.rmSync(directory, { recursive: true, force: false })
       result.pruned.push(name)
     }
-  } catch {
+  } catch (error) {
     result.pruneFailed = true
+    result.pruneSkipped = result.pruned.length === 0 ? 'PRUNING_ABORTED' : undefined
+    result.pruneStage = stage
+    result.pruneFile = filename
+    result.pruneErrorCode = error instanceof SyntaxError ? 'INVALID_JSON'
+      : /^[A-Z][A-Z0-9_]{0,63}$/u.test(error.code || '') ? error.code : 'PRUNE_ERROR'
   }
   return result
 }

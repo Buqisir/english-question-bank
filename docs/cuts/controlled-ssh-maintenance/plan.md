@@ -48,6 +48,75 @@ retired UUID status, TAT or bootstrap commands. New privileges, Secrets, targets
 uncovered destructive data/R2 operations or irreversible risks still require
 Owner authorization. Code-only or merge-only Goals never imply those operations.
 
+### Current: one-time controller-only host upgrade v1
+
+`deploy/upgrade-eqb-host-configuration-once{,.mjs}` is a separately reviewed
+root-console/TAT maintenance entry, never a daily CLI/SSH/sudo command. It accepts
+one full target SHA, only a controller-module host diff, and the repaired daily
+entrypoint. Neither file is in HOST_CONFIGURATION_PATHS/STABLE_LAUNCHER_PATHS:
+stage these two independently verified Git blobs through the existing root
+console, without changing those lists or requiring an application deploy first.
+
+After merge and exact-main natural CI, bind `T`, `H_SH`, `H_JS` to the reviewed
+main SHA and the two Git-blob SHA-256 values computed independently on the Mac.
+First inspect current app/host identities, five installed hashes, root-owned
+path ancestors, the original lock, and absence of unresolved maintenance.
+Run this **once**, in a TAT RunCommand with `Username=root` (all commands below
+write payload/evidence or host configuration; fetch writes only the source clone):
+
+```bash
+set -euo pipefail
+umask 077
+T='<reviewed-40-hex-main-SHA>'
+H_SH='<reviewed-shell-blob-sha256>'
+H_JS='<reviewed-module-blob-sha256>'
+[[ $(id -u):$(id -g) == 0:0 && $T =~ ^[0-9a-f]{40}$ \
+  && $H_SH =~ ^[0-9a-f]{64}$ && $H_JS =~ ^[0-9a-f]{64}$ ]]
+S=/opt/eqb/english-question-bank
+B=/opt/eqb/deployments/host-upgrade-payload-$T
+/usr/sbin/runuser -u eqb -- /usr/bin/env -i HOME=/home/eqb PATH=/usr/local/bin:/usr/bin:/bin \
+  GIT_TERMINAL_PROMPT=0 /usr/bin/git -C "$S" fetch --quiet --no-tags origin main
+[[ $(/usr/bin/git -c safe.directory="$S" -C "$S" rev-parse FETCH_HEAD) == "$T" ]]
+mkdir "$B"
+mkdir "$B/deploy"
+for F in upgrade-eqb-host-configuration-once upgrade-eqb-host-configuration-once.mjs; do
+  /usr/bin/git --no-replace-objects -c safe.directory="$S" -C "$S" show "$T:deploy/$F" > "$B/deploy/$F"
+done
+printf '%s  %s\n' "$H_SH" "$B/deploy/upgrade-eqb-host-configuration-once" \
+  "$H_JS" "$B/deploy/upgrade-eqb-host-configuration-once.mjs" | /usr/bin/sha256sum --check --strict
+/usr/bin/systemd-run --quiet --wait --collect --unit="eqb-host-upgrade-$T" \
+  --property=Type=exec --property=UMask=0077 --property=RuntimeMaxSec=1200s \
+  --property=KillMode=control-group --property=StandardInput=null \
+  --property=StandardOutput=journal --property=StandardError=journal \
+  -- /bin/bash "$B/deploy/upgrade-eqb-host-configuration-once" "$T"
+```
+
+The entry validates the original 0600 root single-link lock and held FD inode;
+after locking it verifies installed host Git bytes/marker/launchers, app SHA,
+payload and target content hashes, and recomputes the path digest from installed
+host SHA → T. It loads only the verified installed module. A durable
+`host-configuration-upgrade-v1/T/operation.json` and
+`controlled-ssh/active.json` blockade precede the engine call. Backups retain the
+old module/marker and unit/Caddy with SHA-256 hashes. The engine rewrites even
+unchanged unit/Caddy and reloads; a complete engine receipt is checked against
+disk, followed by new-module preflight, marker/installed hashes, unchanged app
+pointer and local/public health. Only verified success removes its own blockade.
+
+Read-only verification: `journalctl --no-pager -o cat -u "eqb-host-upgrade-$T"`,
+the operation record/engine receipt/backup hashes, installed pointers/hashes,
+then the normal forced `preflight` after lock release. `admission`/`backup`
+means no engine call yet; `engine-running`/`engine-receipt` requires reconciliation;
+`postcheck`/`host-rollback` includes possible host changes; `verified` with a
+remaining blockade is still not closed. Known postcheck failure restores only
+this operation's unit/Caddy and old host pointer, reloads and proves health;
+it preserves evidence and the blockade. It never changes app/DB/R2/SSH permissions.
+Timeout, disconnect, incomplete receipt or interrupted rollback is **UNKNOWN**:
+inspect processes, manager unit, lock, pointers, files, receipts and backups
+read-only first. Never rerun, invoke implicit engine recovery, or clear evidence.
+Every per-target operation directory is permanently consumed. A failed/UNKNOWN
+blockade requires a separately reviewed reconciliation, not a replay command.
+Daily operation remains the single `deploy` command.
+
 ## Historical entry migration
 
 The remainder records the superseded migration design, not current commands or

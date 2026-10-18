@@ -298,10 +298,19 @@ foreign keys, and records their SHA-256 digests; these are incident evidence and
 are never automatically replayed after traffic may have reopened. Keep the
 legacy `deploy/eqb.service`, `deploy/Caddyfile`, and `scripts/deploy-remote.sh`
 only for pre-cutover operation and rollback evidence; do not use the legacy
-in-place deploy after a successful cutover. Releases are retained for rollback;
-the controller refuses new staging below 5 GiB free instead of deleting them.
-Prune only reviewed, non-current releases as a separate authorized maintenance
-operation.
+in-place deploy after a successful cutover. Once the release-pruning controller
+is installed, ordinary deploy prunes before its unchanged 5 GiB staging-space
+check, retaining current, its most recent successfully activated previous, and
+an existing target: 2–3 releases after activation, current + previous after a
+noOp. No-op receipts do not replace activation history. Missing, malformed,
+unsafe or ambiguous history aborts all pruning; sanitized journal diagnostics
+identify the stage, filename and error code. Deletion errors retain the already
+deleted list and never change deployment/rollback outcomes. Only controller-owned
+real directories are removed, including eligible stale staging/health directories;
+interrupted build/runtime-owned directories remain. Reviewed-persistence deploys
+do not prune. The current one-time controller installation route is documented
+in `../controlled-ssh-maintenance/plan.md`; the historical maintenance CLI below
+must not be revived.
 
 Ordinary deployment also compares the current and target Git trees before
 staging. Any change to the versioned controller/systemd/Caddy files or to the

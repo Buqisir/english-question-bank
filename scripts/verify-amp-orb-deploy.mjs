@@ -120,6 +120,7 @@ import {
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 import { verifyDeployBarrier } from './lib/verifyDeployBarrier.mjs'
 import { verifyBarrierBootstrap } from './lib/verifyBarrierBootstrap.mjs'
+import { verifyHostConfigurationUpgrade } from './verify-host-configuration-upgrade.mjs'
 import { CONTROLLED_ENTRY_FILES, buildControlledEntryTat, executeControlledEntryTat } from './lib/controlledEntryTat.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
@@ -3708,13 +3709,12 @@ function pruningResult(fixture) {
   } finally { rmSync(fixture.root, { recursive: true, force: true }) }
 }
 
-for (const history of ['missing', 'invalid-previous', 'ambiguous']) {
+for (const history of ['missing', 'ambiguous']) {
   const fixture = controllerFixture()
   try {
     writeReleaseMarker(fixture.root, pruneObsoleteSha)
     mkdirSync(path.join(fixture.root, 'releases', '.staging-stale'))
-    if (history !== 'missing') writePruneHistory(fixture,
-      history === 'invalid-previous' ? { previousSha: null } : {})
+    if (history !== 'missing') writePruneHistory(fixture)
     if (history === 'ambiguous') writePruneHistory(fixture,
       { previousSha: pruneObsoleteSha }, 'conflicting-success.json')
     const result = await runPruneFixture(fixture)
@@ -3722,6 +3722,94 @@ for (const history of ['missing', 'invalid-previous', 'ambiguous']) {
       && existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha))
       && existsSync(path.join(fixture.root, 'releases', '.staging-stale')),
     `${history} rollback history skips all pruning while allowing deployment`)
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+for (const [name, mutate, stage, code] of [
+  ['broken.json', file => writeFileSync(file, '{"secret":"must-not-be-logged"'), 'receipt-json', 'INVALID_JSON'],
+  ['invalid-time.json', file => {
+    const receipt = JSON.parse(readFileSync(file, 'utf8'))
+    receipt.finishedAt = 'not-a-date'
+    writeFileSync(file, JSON.stringify(receipt))
+  }, 'receipt-validation', 'INVALID_RECEIPT'],
+  ['invalid-previous.json', file => {
+    const receipt = JSON.parse(readFileSync(file, 'utf8'))
+    receipt.previousSha = null
+    writeFileSync(file, JSON.stringify(receipt))
+  }, 'receipt-validation', 'INVALID_PREVIOUS_SHA'],
+  ['unsafe-mode.json', file => chmodSync(file, 0o666), 'receipt-metadata', 'UNSAFE_RECEIPT'],
+  ['readable-mode.json', file => chmodSync(file, 0o644), 'receipt-metadata', 'UNSAFE_RECEIPT'],
+  ['unknown-schema.json', file => {
+    const receipt = JSON.parse(readFileSync(file, 'utf8'))
+    receipt.schemaVersion = 'unknown-receipt-v1'
+    writeFileSync(file, JSON.stringify(receipt))
+  }, 'receipt-validation', 'INVALID_RECEIPT'],
+  ['linked.json', (file, fixture) => {
+    rmSync(file)
+    symlinkSync(path.join(fixture.root, 'deployments', 'receipts', 'prior-success.json'), file)
+  }, 'receipt-metadata', 'UNSAFE_RECEIPT'],
+]) {
+  const fixture = controllerFixture()
+  try {
+    writePruneHistory(fixture)
+    writePruneHistory(fixture, { finishedAt: '2026-10-18T12:00:00.000Z' }, name)
+    mutate(path.join(fixture.root, 'deployments', 'receipts', name), fixture)
+    writeReleaseMarker(fixture.root, pruneObsoleteSha)
+    const result = await runPruneFixture(fixture)
+    const pruning = pruningResult(fixture)
+    assert(result.exitCode === 0 && pruning.pruneFailed && pruning.pruned.length === 0
+      && pruning.pruneFile === name && pruning.pruneStage === stage && pruning.pruneErrorCode === code
+      && !fixture.state.pruningLogs.join('').includes('must-not-be-logged')
+      && existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha)),
+    `${name} aborts all pruning with filename-only sanitized diagnostics instead of falling back to older history`)
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+{
+  const fixture = controllerFixture({ failCandidateHealth: true })
+  try {
+    writePruneHistory(fixture)
+    for (const sha of [prunePreviousSha, pruneObsoleteSha]) writeReleaseMarker(fixture.root, sha)
+    const obsolete = path.join(fixture.root, 'releases', pruneObsoleteSha)
+    for (const [relative, target] of [
+      ['data', 'data'], ['app/public/paper-assets', 'paper-assets'],
+      ['exports', 'exports'], ['server/logs', 'server-logs'],
+    ]) {
+      const link = path.join(obsolete, relative)
+      mkdirSync(path.dirname(link), { recursive: true })
+      writeFileSync(path.join(fixture.root, 'shared', target, 'prune-sentinel'), target)
+      symlinkSync(path.join(fixture.root, 'shared', target), link)
+    }
+    const result = await runPruneFixture(fixture)
+    assert(result.output.failureCode === 'HEALTH_CHECK_FAILED' && result.output.rolledBack
+      && result.output.rollbackHealthy && fixture.currentSha() === oldSha
+      && pruningResult(fixture).pruned.includes(pruneObsoleteSha)
+      && existsSync(path.join(fixture.root, 'releases', prunePreviousSha)),
+    'successful pruning followed by PUBLIC_HEALTH failure preserves and restores the prior current release')
+    assert(['data', 'paper-assets', 'exports', 'server-logs'].every(target =>
+      readFileSync(path.join(fixture.root, 'shared', target, 'prune-sentinel'), 'utf8') === target),
+    'recursive obsolete release removal does not follow internal shared data/assets/exports/log symlinks')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+{
+  const fixture = controllerFixture()
+  try {
+    writePruneHistory(fixture)
+    for (const sha of [pruneObsoleteSha, 'c'.repeat(40)]) writeReleaseMarker(fixture.root, sha)
+    fixture.dependencies.releaseFilesystem = {
+      ...fs,
+      rmSync(directory, options) {
+        if (path.basename(directory) === 'c'.repeat(40)) throw Object.assign(new Error('private detail'), { code: 'EACCES' })
+        fs.rmSync(directory, options)
+      },
+    }
+    await runPruneFixture(fixture)
+    const pruning = pruningResult(fixture)
+    assert(pruning.pruned.join(',') === pruneObsoleteSha && pruning.pruneFailed
+      && pruning.pruneFile === 'c'.repeat(40) && pruning.pruneStage === 'release-remove'
+      && pruning.pruneErrorCode === 'EACCES' && !fixture.state.pruningLogs.join('').includes('private detail'),
+    'partial cleanup retains the deleted list and sanitizes the failing release diagnostic')
   } finally { rmSync(fixture.root, { recursive: true, force: true }) }
 }
 
@@ -3735,6 +3823,8 @@ for (const history of ['missing', 'invalid-previous', 'ambiguous']) {
     const linked = 'd'.repeat(40)
     const file = 'e'.repeat(40)
     mkdirSync(path.join(releases, unowned))
+    mkdirSync(path.join(releases, '.staging-build-owned'))
+    mkdirSync(path.join(releases, '.candidate-health-runtime-owned'))
     mkdirSync(path.join(releases, 'not-a-release'))
     symlinkSync(path.join(releases, prunePreviousSha), path.join(releases, linked))
     symlinkSync(path.join(releases, prunePreviousSha), path.join(releases, '.staging-linked'))
@@ -3747,14 +3837,14 @@ for (const history of ['missing', 'invalid-previous', 'ambiguous']) {
       ...fs,
       lstatSync(directory) {
         const metadata = fs.lstatSync(directory)
-        return path.basename(directory) === unowned
+        return [unowned, '.staging-build-owned', '.candidate-health-runtime-owned'].includes(path.basename(directory))
           ? { isDirectory: () => true, isSymbolicLink: () => false, uid: metadata.uid + 1 }
           : metadata
       },
     }
     const result = await runPruneFixture(fixture)
     assert(result.exitCode === 0
-      && [unowned, linked, file, 'not-a-release', '.staging-linked']
+      && [unowned, linked, file, 'not-a-release', '.staging-linked', '.staging-build-owned', '.candidate-health-runtime-owned']
         .every(name => fs.lstatSync(path.join(releases, name)))
       && pruningResult(fixture).pruned.join(',') === '.candidate-health-abandoned,.staging-abandoned',
     'pruning removes stale real staging/health directories and preserves symlinks, files, non-SHAs and other owners')
@@ -3816,7 +3906,8 @@ for (const failHealth of [false, true]) {
     const result = await runPruneFixture(fixture, oldSha)
     assert(result.exitCode === 0 && result.output.noOp && fixture.state.restarts.length === 0
       && !existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha))
-      && existsSync(path.join(fixture.root, 'releases', prunePreviousSha)),
+      && existsSync(path.join(fixture.root, 'releases', prunePreviousSha))
+      && readdirSync(path.join(fixture.root, 'releases')).length === 2,
     'no-op deployment prunes with the same protection and does not restart services')
   } finally { rmSync(fixture.root, { recursive: true, force: true }) }
 }
@@ -3830,6 +3921,21 @@ for (const failHealth of [false, true]) {
     assert(result.exitCode !== 0 && fixture.state.pruningLogs.length === 0
       && existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha)),
     'host boundary rejection occurs before any pruning')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
+{
+  const fixture = controllerFixture({ persistenceAuthorityChange: true })
+  try {
+    writePruneHistory(fixture)
+    writeReleaseMarker(fixture.root, pruneObsoleteSha)
+    const result = await runController({
+      originalCommand: `deploy-reviewed-persistence ${newSha} ${deploymentChangedPathDigest(['server/api.mjs'])}`,
+      config: fixture.config, dependencies: fixture.dependencies,
+    })
+    assert(result.exitCode === 0 && fixture.state.pruningLogs.length === 0
+      && existsSync(path.join(fixture.root, 'releases', pruneObsoleteSha)),
+    'reviewed-persistence deployment retains old releases and never runs ordinary pruning')
   } finally { rmSync(fixture.root, { recursive: true, force: true }) }
 }
 
@@ -6270,6 +6376,7 @@ section('One-time TAT delivery uses the reviewed installer without another state
   } finally { rmSync(root, { recursive: true, force: true }) }
 }
 
+await verifyHostConfigurationUpgrade()
 await verifyDeployBarrier(ROOT)
 await verifyBarrierBootstrap(ROOT)
 summary()
