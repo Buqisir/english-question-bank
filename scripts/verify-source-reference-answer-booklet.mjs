@@ -222,6 +222,15 @@ function contractChecks() {
 async function preview(output) {
   if (existsSync(output)) throw new Error('Use a new preview directory')
   const input = fixture({ listening: false, structuredScoring: process.argv.includes('--structured-scoring') })
+  if (process.argv.includes('--grammar-grid')) {
+    // Reproduce isolated numbers when short and long answers share five columns.
+    const values = ['are arranged', 'Originating', 'as', 'have gone', 'whose',
+      'repetitive/repeated', 'a', 'studios', 'and', 'while / though / although']
+    for (const answer of input.materialization.answers) {
+      if (answer.canonicalNumber >= 56) answer.value = values[answer.canonicalNumber - 56]
+    }
+    input.sourceReferences.materializationDigest = prepareSourceReferences(input).materializationDigest
+  }
   const html = buildAnswerOnlyHtml({ ...input, includeScoring: true })
   mkdirSync(output, { recursive: true })
   writeFileSync(path.join(output, 'answerOnly.html'), html, { flag: 'wx' })
@@ -242,6 +251,19 @@ async function preview(output) {
     }, {})
     return { paragraphs, cells, references: [...new Set(collect('[data-source-reference]').map(node => node.dataset.sourceReference))],
       keys: collect('[data-answer-number]').map(node => ({ number: Number(node.dataset.answerNumber), text: text(node) })),
+      grammar: collect('.answer-keys--5 [data-answer-number]').map(node => {
+        const rects = element => {
+          const range = document.createRange()
+          range.selectNodeContents(element)
+          return [...range.getClientRects()].filter(rect => rect.width > 0)
+        }
+        const cell = node.closest('td')
+        const label = rects(cell.querySelector('.answer-number'))[0]
+        const lines = rects(node)
+        return { number: Number(node.dataset.answerNumber), labelTop: label.top,
+          lines: lines.map(rect => ({ top: rect.top, left: rect.left, right: rect.right })),
+          cellRight: cell.getBoundingClientRect().right }
+      }),
       roles: collect('[data-reference-paragraph]').map(node => ({ id: node.dataset.referenceParagraph,
         align: getComputedStyle(node).textAlign, indent: getComputedStyle(node).textIndent })),
       horizontalOverflow: collect('td,p,h1,h2,h3').filter(node => node.scrollWidth > node.clientWidth + 1).length,
@@ -261,11 +283,20 @@ async function preview(output) {
   }
   assert.deepEqual(result.inspection.references, ['reference:positive', 'reference:negative', 'reference:continuation', 'reference:scoring'])
   assert.deepEqual(result.inspection.keys.map(key => key.number), Array.from({ length: 45 }, (_, i) => i + 21))
-  assert.equal(normalize(result.inspection.keys.find(key => key.number === 56).text),
-    'will have been taught / will be taught / pneumonoultramicroscopicsilicovolcanoconiosis')
-  assert.equal(normalize(result.inspection.keys.find(key => key.number === 65).text), 'had written / wrote')
+  for (const answer of input.materialization.answers) {
+    assert.equal(normalize(result.inspection.keys.find(key => key.number === answer.canonicalNumber).text),
+      normalize(answer.value), `Q${answer.canonicalNumber}: answer text changed`)
+  }
   assert.equal(result.inspection.roles.find(role => role.id === 'paragraph:positive:4').align, 'right')
   assert.equal(result.inspection.roles.find(role => role.id === 'paragraph:positive:5').align, 'right')
+  assert.equal(result.inspection.grammar.length, 10)
+  for (const answer of result.inspection.grammar) {
+    assert(Math.abs(answer.labelTop - answer.lines[0].top) < 1, `Q${answer.number}: number separated from answer`)
+    for (const line of answer.lines) {
+      assert(Math.abs(line.left - answer.lines[0].left) < 1, `Q${answer.number}: missing hanging indent`)
+      assert(line.right <= answer.cellRight + 1, `Q${answer.number}: answer overflows its column`)
+    }
+  }
   assert.equal(result.inspection.horizontalOverflow, 0)
   const report = { status: 'synthetic_local_layout_candidate', pageCount: result.pageCount, pdfSha256: sha256(result.pdfBytes),
     inspectedReferenceParagraphs: Object.keys(result.inspection.paragraphs).length, answerCount: result.inspection.keys.length,
