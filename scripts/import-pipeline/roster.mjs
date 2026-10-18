@@ -10,7 +10,10 @@ import { inventoryMatch, paperNameKey, questionPdfNames } from './batch-run.mjs'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const readJson = (file, fallback = {}) => existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : fallback
 const cleanName = (name) => name.replace(/^(?:（修订版）)?含[^：:]+[：:]/u, '')
-const statuses = ['已在生产', '已送审待审', '本地进行中/卡住', '已撤回/重复', '缺材料', '未导入']
+const statuses = ['未导入', '本地进行中/卡住', '待 Owner 审', '生产上传未完成', '已审核通过', '缺材料', '已撤回/重复']
+const passedStates = new Set(['approved', 'published'])
+const pendingStates = new Set(['uploading', 'changes_requested', 'publishing'])
+const knownProductionState = (state) => passedStates.has(state) || pendingStates.has(state) || state === 'awaiting_review'
 
 export function parseExamMonth(name) {
   const text = String(name).normalize('NFKC')
@@ -32,8 +35,12 @@ export function parseExamMonth(name) {
 }
 
 export function classifyStatus({ production, submitted, local, answer, audio }) {
-  if (production) return '已在生产'
-  if (submitted?.state === 'submitted' && submitted.revisionId) return '已送审待审'
+  if (production) {
+    if (passedStates.has(production.state)) return '已审核通过'
+    if (production.state === 'awaiting_review') return '待 Owner 审'
+    return '生产上传未完成'
+  }
+  if (submitted?.state === 'submitted' && submitted.revisionId) return '待 Owner 审'
   if (local && !/withdrawn|duplicate/u.test(`${local.state} ${local.blocked?.kind || ''}`)) return '本地进行中/卡住'
   if (local) return '已撤回/重复'
   if (!answer || !audio) return '缺材料'
@@ -109,10 +116,18 @@ export function buildRoster({ sourceRoot = process.env.EQB_BATCH_SOURCE_ROOT || 
     const exact = mapped?.confirmed ? mapped.entry : eligible.find(([, p]) => p.sha256?.some((h) => hashes.includes(h))) || revisionMatch
     const suspect = exact ? null : (mapped?.entry || eligible.find(([, p]) => p.paperName && names.includes(paperNameKey(p.paperName))))
     const production = exact || suspect
+    const productionEntry = (production || ocrOnly)?.[1]
     const answer = entry.pdfs.some((f) => /答案|解析/u.test(f))
     const audio = entry.audio.length > 0
     const notes = []
     const needsConfirmation = []
+    if (productionEntry && !knownProductionState(productionEntry.state)) {
+      needsConfirmation.push(`未知生产 state：${productionEntry.state ?? '缺失'}，需人工确认`)
+    }
+    if (production && !passedStates.has(productionEntry.state) && productionEntry.state !== 'awaiting_review') {
+      notes.push(`生产尚未完成：state=${productionEntry.state ?? '缺失'}`)
+    }
+    if (submission && !production) notes.push('本地已有送审 revision，生产快照尚未确认')
     if (ocrOnly) notes.push(`生产仅有 OCR revision ${ocrOnly[1].latestRevisionId}，尚未完成送审；保留本地进度`)
     if (suspect) needsConfirmation.push(`疑似生产匹配：${suspect[0]}（仅${mapped ? '可能目录映射' : '规范化卷名'}，需人工确认）`)
     if (!answer) notes.push('缺答案')
@@ -135,10 +150,12 @@ export function buildRoster({ sourceRoot = process.env.EQB_BATCH_SOURCE_ROOT || 
     if (identityMonth && folderMonth && identityMonth !== folderMonth) notes.push(`目录年月 ${folderMonth}；采用批次首页核对年月 ${identityMonth}`)
     if (localMatches.length > 1) notes.push(`合并 ${localMatches.length} 条批次记录，优先保留有效进度`)
     notes.push(...needsConfirmation)
-    const status = classifyStatus({ production, submitted: submission?.[1], local, answer, audio })
+    const status = classifyStatus({ production: production?.[1], submitted: submission?.[1], local, answer, audio })
     return { province: entry.prov.replace(/模拟题$/u, ''), examMonth, examName: cleanName(name),
       sourceDirectory: key, inventoryKey: key, materials: { question: true, answer, audio, questionVersions: questions.length },
-      status, productionPaperId: production?.[0] || ocrOnly?.[0] || '', revisionId: production?.[1].latestRevisionId || submission?.[1].revisionId || local?.revisionId || ocrOnly?.[1].latestRevisionId || '',
+      status, productionPaperId: production?.[0] || ocrOnly?.[0] || '',
+      productionState: productionEntry?.state ?? null, productionRevisionId: productionEntry?.latestRevisionId ?? null,
+      revisionId: productionEntry ? productionEntry.latestRevisionId ?? null : submission?.[1].revisionId || local?.revisionId || '',
       paperId: local?.paperId || submission?.[0] || '', batch: local?.batch || '', match: exact ? (mapped?.confirmed ? 'inventoryKey' : exact === revisionMatch ? 'submittedRevision' : 'sha256') : suspect ? 'suspected' : ocrOnly ? 'ocrOnly' : null,
       notes, needsConfirmation, questionSha256: hashes }
   }).sort(compareRows).map((row, i) => ({ number: i + 1, ...row }))
@@ -161,13 +178,15 @@ export function buildRoster({ sourceRoot = process.env.EQB_BATCH_SOURCE_ROOT || 
   return { generatedAt: new Date().toISOString(), sourceRoot, snapshotCapturedAt: snapshot.capturedAt || null,
     total: rows.length, byStatus, byProvince, hashReads,
     unmappedProduction: known.filter(([id]) => !rows.some((r) => r.productionPaperId === id))
-      .map(([paperId, p]) => ({ paperId, paperName: p.paperName, state: p.state, note: p.note })),
+      .map(([paperId, p]) => ({ paperId, paperName: p.paperName, state: p.state, latestRevisionId: p.latestRevisionId ?? null,
+        status: classifyStatus({ production: p }), needsConfirmation: !knownProductionState(p.state), note: p.note })),
     rows }
 }
 
 const columns = [['number', '序号'], ['province', '省份'], ['examMonth', '考试年月'], ['examName', '考试名'], ['sourceDirectory', '源目录'],
-  ['materialsText', '材料'], ['status', '状态'], ['productionPaperId', '生产卷号'], ['revisionId', 'revision'], ['notesText', '备注']]
+  ['materialsText', '材料'], ['status', '状态'], ['productionStateText', '生产状态'], ['productionPaperId', '生产卷号'], ['revisionId', 'revision'], ['notesText', '备注']]
 const display = (row) => ({ ...row, examMonth: row.examMonth || '未知',
+  productionStateText: row.productionPaperId ? `${row.productionState ?? '未知'} / latestRevisionId=${row.productionRevisionId ?? 'null'}` : '',
   materialsText: `题卷 ${row.materials.questionVersions} 版 / 答案${row.materials.answer ? '有' : '无'} / 音频${row.materials.audio ? '有' : '无'}`,
   notesText: row.notes.join('；') })
 export function writeRoster(result, batchRoot = path.join(root, 'imports/batch')) {
@@ -178,20 +197,23 @@ export function writeRoster(result, batchRoot = path.join(root, 'imports/batch')
   const table = (rows) => [columns.map(([, label]) => label), columns.map(() => '---'),
     ...rows.map((r) => columns.map(([key]) => display(r)[key]))].map((line) => `| ${line.map(escape).join(' | ')} |`).join('\n')
   const md = ['# 模拟题导入名单', '', `生成：${result.generatedAt}；生产快照：${result.snapshotCapturedAt || '无'}。考试年月新→旧，同月按省份；未知日期排最后。`,
-    '', '生产状态表示已进入生产 Review 系统，不等于已发布；仅卷名/可能映射命中会注明“疑似”。仅有 OCR revision 的卷保留本地进度。无音频不阻止导入。', '',
+    '', '生产状态列保留快照原始 state 与 latestRevisionId；approved / published 为已审核通过，awaiting_review 为待 Owner 审，其它状态注明原值，未知值需人工确认。仅有 OCR revision 的卷保留本地进度，不计为整卷审核通过。无音频不阻止导入。', '',
     '| 统计 | 数量 |', '| --- | --- |', `| 总数 | ${result.total} |`, ...Object.entries(result.byStatus).map(([s, n]) => `| ${s} | ${n} |`),
     '', '## 各省未导入数量', '', '| 省份 | 总数 | 未导入 | 缺材料（另计） |', '| --- | --- | --- | --- |',
     ...Object.entries(result.byProvince).map(([p, n]) => `| ${p} | ${n.total} | ${n.unimported} | ${n.missing} |`)]
   for (const [heading, values] of [['未导入', ['未导入']], ['本地卡住 / 进行中', ['本地进行中/卡住']],
-    ['已送审待审', ['已送审待审']], ['已在生产', ['已在生产']], ['缺材料 / 重复', ['缺材料', '已撤回/重复']]]) {
+    ['待 Owner 审', ['待 Owner 审']], ['生产上传未完成', ['生产上传未完成']], ['已审核通过', ['已审核通过']], ['缺材料 / 重复', ['缺材料', '已撤回/重复']]]) {
     const rows = result.rows.filter((r) => values.includes(r.status))
     md.push('', `## ${heading}（${rows.length}）`, '', rows.length ? table(rows) : '无')
   }
   const uncertain = result.rows.filter((r) => r.needsConfirmation.length)
   md.push('', `## 需人工确认（${uncertain.length}）`, '',
     ...uncertain.map((r) => `- #${r.number} ${escape(r.sourceDirectory)}：${escape(r.needsConfirmation.join('；'))}`))
-  if (result.unmappedProduction.length) md.push('', '### 生产卷尚未关联源目录', '',
-    ...result.unmappedProduction.map((p) => `- ${escape(p.paperName)}（${p.paperId}，${p.state}）：${escape(p.note || '缺少源文件或目录映射依据')}`))
+  for (const p of result.unmappedProduction.filter((p) => p.needsConfirmation)) {
+    md.push(`- ${escape(p.paperName)}（${p.paperId}）：未知生产 state=${escape(p.state ?? '缺失')}，需人工确认`)
+  }
+  if (result.unmappedProduction.length) md.push('', '## 这些卷在生产里，但源目录里找不到对应文件夹（可能来自其它来源），不影响未导入清单', '',
+    ...result.unmappedProduction.map((p) => `- ${escape(p.paperName)}（${p.paperId}）：${p.status}；state=${escape(p.state ?? '未知')}；latestRevisionId=${escape(p.latestRevisionId ?? 'null')}；${escape(p.note || '缺少源文件或目录映射依据')}`))
   writeFileSync(path.join(batchRoot, 'roster.md'), `${md.join('\n')}\n`)
 }
 

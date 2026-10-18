@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict'
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
-import { buildRoster, classifyStatus, compareRows, parseExamMonth } from './roster.mjs'
+import { buildRoster, classifyStatus, compareRows, parseExamMonth, writeRoster } from './roster.mjs'
 
 test('考试年月区分明确日期、学年、届别与未知', () => {
   for (const [name, expected] of [
@@ -16,11 +16,11 @@ test('考试年月区分明确日期、学年、届别与未知', () => {
 })
 
 test('状态按生产、送审、进行中、撤回重复、材料、未导入依次判定', () => {
-  const facts = { production: true, submitted: { state: 'submitted', revisionId: 'rev-1' },
+  const facts = { production: { state: 'approved' }, submitted: { state: 'submitted', revisionId: 'rev-1' },
     local: { state: 'blocked', blocked: { kind: 'withdrawn' } }, answer: false, audio: false }
-  assert.equal(classifyStatus(facts), '已在生产')
+  assert.equal(classifyStatus(facts), '已审核通过')
   facts.production = false
-  assert.equal(classifyStatus(facts), '已送审待审')
+  assert.equal(classifyStatus(facts), '待 Owner 审')
   facts.submitted = { state: 'ocr', revisionId: 'ocr-only' }
   assert.equal(classifyStatus(facts), '已撤回/重复')
   facts.local.blocked.kind = 'needs_owner'
@@ -31,6 +31,14 @@ test('状态按生产、送审、进行中、撤回重复、材料、未导入�
   assert.equal(classifyStatus(facts), '缺材料')
   facts.audio = true
   assert.equal(classifyStatus(facts), '未导入')
+})
+
+test('生产状态区分通过、待审、未完成，未知值不冒充审核通过', () => {
+  for (const state of ['approved', 'published']) assert.equal(classifyStatus({ production: { state } }), '已审核通过')
+  assert.equal(classifyStatus({ production: { state: 'awaiting_review' } }), '待 Owner 审')
+  for (const state of ['uploading', 'changes_requested', 'publishing', 'future_state', undefined]) {
+    assert.equal(classifyStatus({ production: { state } }), '生产上传未完成')
+  }
 })
 
 test('先按年月倒序，再按省份，未知最后', () => {
@@ -61,8 +69,9 @@ test('完整名单展开年级目录、合并题卷版本、复用哈希，OCR �
       writeFileSync(path.join(dir, '听力.mp3'), 'audio')
     }
     json(path.join(batchRoot, 'production-sources.json'), { papers: {
-      shengzhou: { paperName: '嵊州', latestRevisionId: 'ocr-1' },
-      joint: { paperName: '另一正式卷名', latestRevisionId: 'rev-2' },
+      shengzhou: { paperName: '嵊州', state: 'approved', latestRevisionId: 'ocr-1' },
+      joint: { paperName: '另一正式卷名', state: 'awaiting_review', latestRevisionId: 'rev-2' },
+      unmatched: { paperName: '其它来源卷', state: 'uploading', latestRevisionId: null },
     } })
     json(path.join(batchRoot, 'submitted.json'), { papers: { joint: { state: 'submitted', revisionId: 'rev-2' } } })
     json(path.join(batchRoot, 'trial/status.json'), { papers: {
@@ -74,7 +83,11 @@ test('完整名单展开年级目录、合并题卷版本、复用哈希，OCR �
     assert.equal(first.total, 2)
     assert.equal(first.hashReads, 4)
     assert.deepEqual(first.rows.map((r) => r.materials.questionVersions), [2, 2])
-    assert.deepEqual(first.rows.map((r) => r.status), ['本地进行中/卡住', '已在生产'])
+    assert.deepEqual(first.rows.map((r) => r.status), ['本地进行中/卡住', '待 Owner 审'])
+    assert.equal(first.rows[0].productionState, 'approved')
+    assert.equal(first.rows[0].productionRevisionId, 'ocr-1')
+    assert.equal(first.rows[1].productionState, 'awaiting_review')
+    assert.equal(first.rows[1].productionRevisionId, 'rev-2')
     assert.equal(first.rows[0].match, 'ocrOnly')
     assert.equal(first.rows[1].match, 'submittedRevision')
     const second = buildRoster({ sourceRoot, batchRoot, cacheFile })
@@ -82,6 +95,27 @@ test('完整名单展开年级目录、合并题卷版本、复用哈希，OCR �
     assert.deepEqual(second.rows, first.rows)
     writeFileSync(path.join(sourceRoot, blockedKey, '试题（10页版）.pdf'), 'changed')
     assert.equal(buildRoster({ sourceRoot, batchRoot, cacheFile }).hashReads, 1)
+    for (const state of ['uploading', 'future_state']) {
+      json(path.join(batchRoot, 'production-sources.json'), { papers: {
+        joint: { paperName: '联考', state, latestRevisionId: null },
+        unmatched: { paperName: '其它来源卷', state: 'uploading', latestRevisionId: null },
+      } })
+      const result = buildRoster({ sourceRoot, batchRoot, cacheFile })
+      const row = result.rows.find((r) => r.paperId === 'joint')
+      assert.equal(row.status, '生产上传未完成')
+      assert.equal(row.productionState, state)
+      assert.equal(row.productionRevisionId, null)
+      assert.equal(row.revisionId, null, '保留快照空 revision，不用本地送审 revision 填充')
+      assert.ok(row.notes.some((n) => n.includes(`state=${state}`)))
+      assert.equal(row.needsConfirmation.some((n) => n.includes('未知生产 state')), state === 'future_state')
+      writeRoster(result, batchRoot)
+      const markdown = readFileSync(path.join(batchRoot, 'roster.md'), 'utf8')
+      assert.ok(markdown.includes('这些卷在生产里，但源目录里找不到对应文件夹（可能来自其它来源），不影响未导入清单'))
+      assert.ok(markdown.includes('state=uploading；latestRevisionId=null'))
+      assert.ok(markdown.includes(`${state} / latestRevisionId=null`))
+      const sections = ['## 未导入', '## 本地卡住', '## 待 Owner 审', '## 生产上传未完成', '## 已审核通过', '## 缺材料']
+      assert.deepEqual(sections.map((section) => markdown.indexOf(section)), sections.map((section) => markdown.indexOf(section)).sort((a, b) => a - b))
+    }
   } finally {
     rmSync(temp, { recursive: true, force: true })
   }
