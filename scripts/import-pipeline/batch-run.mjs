@@ -10,6 +10,7 @@ import path from 'node:path'
 import tls from 'node:tls'
 import { pathToFileURL } from 'node:url'
 import { checkSearchMetadataFiles, ensureSearchMetadata } from './search-metadata-check.mjs'
+import { importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const batchRoot = path.join(root, 'imports/batch')
@@ -424,7 +425,8 @@ async function repair(ctx, paper, result, attempt, tier = 'sol', previous = null
   return outcome
 }
 
-export function checkPdfs(paperId) {
+export function checkPdfs(paperId, requestedEconomyPageLimit) {
+  const economyPageLimit = importEconomyPageLimit(paperId, requestedEconomyPageLimit)
   if (!paperIdValid(paperId)) fail('paperId 格式无效')
   const dir = path.join(papersRoot, paperId)
   const plan = json(path.join(dir, 'pagination-plan.json'))
@@ -455,8 +457,11 @@ export function checkPdfs(paperId) {
       const fonts = textCommand('pdffonts', [pdf]).trim().split('\n').slice(2)
       const unembedded = fonts.filter((line) => !/\s+yes\s+(?:yes|no)\s+(?:yes|no)\s+\d+\s+\d+\s*$/u.test(line))
       if (!fonts.length || unembedded.length) errors.push('存在未嵌入字体或无法识别的字体记录')
-      const limit = product === 'economy8' ? 8 : plan.editions?.[product]?.targetPages
-      if (product === 'economy8' && pages !== 8) errors.push(`省纸版必须 8 页，实际 ${pages}`)
+      const limit = product === 'economy8' ? economyPageLimit : plan.editions?.[product]?.targetPages
+      if (product === 'economy8') {
+        if (plan.editions?.economy8?.targetPages !== limit) errors.push('省纸分页计划与显式授权页数不一致')
+        if (limit === 9 ? pages > 9 : pages !== 8) errors.push(`省纸版${limit === 9 ? '最多 9' : '必须 8'}页，实际 ${pages}`)
+      }
       if (product.startsWith('large') && (!Number.isInteger(limit) || pages > limit)) errors.push(`大字版 ${pages} 页，计划上限 ${limit ?? '缺失'}`)
       const expected = product === 'answerOnly' ? answerNumbers
         : plan.editions?.[product]?.includeListening ? allNumbers : questionNumbers
@@ -507,7 +512,7 @@ async function pdfQa(ctx, paper) {
   paper.stage = 'pdf-check'
   ctx.save()
   const output = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-hard-check.json')
-  const checks = checkPdfs(paper.paperId)
+  const checks = checkPdfs(paper.paperId, paper.item.economyPageLimit)
   writeJson(output, checks)
   paper.pdfCheck = output
   if (checks.blocking.length) throw new Blocked('needs_main_review', checks.blocking.join('；'), output)
@@ -905,7 +910,7 @@ async function processPaper(ctx, paper) {
       const worker = workers.find(worker => /metadata/iu.test(worker.label || ''))
       if (!worker) throw new Blocked('needs_code_fix', '第二轮计划缺少检索 metadata worker')
       await metadataWorker(ctx, paper, worker, `round2-${worker.label}`, worker.outputs, { initial: false })
-      const result = await fast(ctx, paper, 'finish')
+      const result = await fast(ctx, paper, 'finish', economyFinishArgs(paper.item))
       if (result.exit) throw new Blocked('finish_failed', 'finish 失败，需检查本地日志', result.log)
       paper.done.finish = true; ctx.save()
     }
@@ -916,6 +921,7 @@ async function processPaper(ctx, paper) {
 }
 function validateQueue(item) {
   if (!paperIdValid(item.paperId)) fail('队列 paperId 格式无效')
+  importEconomyPageLimit(item.paperId, item.economyPageLimit)
   if (typeof item.paperName !== 'string' || !item.paperName.trim() || item.provenance?.paperName !== item.paperName
     || typeof item.provenance?.source !== 'string' || !item.provenance.source.trim()) fail('队列卷名与 provenance 不完整')
   if (!Number.isInteger(item.provenance.year) || item.provenance.year < 2000 || item.provenance.year > new Date().getFullYear() + 2
@@ -925,6 +931,9 @@ function validateQueue(item) {
   }
   if (!item.question || !item.answer) fail('缺少题卷或答案 PDF')
   if (![item.question, item.answer].every((file) => /\.pdf$/iu.test(file))) fail('题卷和答案源必须是 PDF')
+}
+function economyFinishArgs(item) {
+  return importEconomyPageLimit(item.paperId, item.economyPageLimit) === 9 ? ['--economy-page-limit', '9'] : []
 }
 function queue(ctx) {
   const dir = path.join(ctx.dir, 'queue')
@@ -939,7 +948,7 @@ function dryRun(ctx) {
     if (ctx.opts['local-only']) { console.log('--local-only：停在 local_ready，不运行 after-proofread（OCR 上传会在 Review 建卷）'); continue }
     console.log(commandText(process.execPath, [fastScript, 'after-proofread', item.paperId]) + '（生产锁，间隔 ≥30 秒；首次 OCR 上传前探测卷号）')
     console.log(`退出码 2：${MODELS.sol.model} / medium 本卷修复（每个停点一次，最多 ${MAX_REPAIRS} 个停点；同一停点再停时 ${MODELS.astra.model} / high 复修，每卷至多一次）；第二轮：摘要、听力 ${MODELS.sol.model}，metadata ${MODELS.luna.model}`)
-    console.log(commandText(process.execPath, [fastScript, 'finish', item.paperId]))
+    console.log(commandText(process.execPath, [fastScript, 'finish', item.paperId, ...economyFinishArgs(item)]))
     console.log('PDF：pdfinfo / pdftotext / pdffonts 硬约束；pdftoppm -r 50 逐页图 + Sol 视觉初筛')
     if (ctx.opts.submit) {
       console.log('送审护栏：健康检查、本地 ledger 与生产快照的 paperId/sha256/卷名查重')
