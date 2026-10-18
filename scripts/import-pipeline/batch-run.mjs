@@ -535,6 +535,7 @@ async function pdfQa(ctx, paper) {
     `读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 ${PDF_QA_DPI} dpi 页面图，逐页初筛。`,
     JSON.stringify(images), `同时读确定性检查 ${output} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
     '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字；看不清的硬约束写 blocking，不能猜通过。',
+    '插图是原卷图片原样嵌入：只查图整体在页内（四边、图注未被裁掉）、不与文字重叠、尺寸与正文相称；图内小字清晰度取决于原卷扫描，看不清写 notes，不算 blocking。',
     '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
     `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
     `只写 ${visual}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
@@ -804,10 +805,23 @@ async function metadataWorker(ctx, paper, worker, label, outputs, { initial = tr
   await ensureSearchMetadata({
     check: () => checkSearchMetadataFiles({ fastDirectory: fastDir(paper.paperId),
       paperDirectory: path.join(papersRoot, paper.paperId) }),
-    rewrite: (issues, attempt) => agent(ctx, paper, `${label}-自检返工-${attempt}`, 'luna',
-      `${base}\n上一轮产出未通过与 finalize 相同的只读校验。只改下列出错字段，其余保持不变：\n${JSON.stringify(issues, null, 2)}`,
+    rewrite: (issues, attempt) => agent(ctx, paper, `${label}-自检返工-${attempt}`, 'sol',
+      `${base}\n上一轮产出未通过与 finalize 相同的只读校验。只改下列出错字段，其余保持不变：\n${compactMetadataIssues(issues)}`,
       outputs, { retries: 0 }),
   })
+}
+// Each issue carries its allowed values; repeating a large taxonomy per issue buried the
+// actual errors (a 14k-line prompt), so large value sets are listed once per error code.
+function compactMetadataIssues(issues) {
+  const shared = {}
+  const list = issues.map(({ allowedValues, ...issue }) => {
+    const text = JSON.stringify(allowedValues ?? null)
+    if (text.length <= 400) return { ...issue, allowedValues }
+    const key = `${issue.code}:${digest(text).slice(7, 15)}`
+    shared[key] ??= allowedValues
+    return { ...issue, allowedValues: `见 sharedAllowedValues["${key}"]` }
+  })
+  return JSON.stringify({ issues: list, sharedAllowedValues: shared }, null, 2)
 }
 async function processPaper(ctx, paper) {
   if (['blocked', 'reported'].includes(paper.state)) return

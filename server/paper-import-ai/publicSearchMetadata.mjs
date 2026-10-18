@@ -298,7 +298,7 @@ export function validateAuthoredPublicSearchMetadata(input) {
       } else if (source && issue.code === 'PUBLIC_METADATA_APPLICATION_INVALID') {
         allowedValues = { exactKeys: ['writingTaskId', 'form', 'function'], writingTaskId: `writing-task:${source.groupId}`, form: 'non-empty string ≤ 80 chars', function: 'non-empty string ≤ 80 chars' }
       } else if (issue.code === 'PUBLIC_METADATA_READING_PROFILE_INVALID') {
-        allowedValues = { genres: prepared.controlledValues.genres, topics: prepared.controlledValues.topics, reading: prepared.controlledValues.reading }
+        allowedValues = { subtypeByFamily: prepared.controlledValues.reading, technique: prepared.controlledValues.readingTechniques, rule: 'similarityProfile keys exactly family/subtype/detailScope/technique; subtype copied from subtypeByFamily[family]; detailScope single|multiple only for detail, else null; technique only for writing-method, else null' }
       }
       return { ...issue, path, allowedValues: allowedValues ?? prepared.controlledValues }
     })
