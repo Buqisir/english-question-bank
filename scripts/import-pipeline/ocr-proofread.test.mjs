@@ -179,3 +179,22 @@ test('an inline reading explanation divider closes the writing references', () =
   assert.deepEqual(result.groups[0].essays.entries.flatMap(e => e.paragraphs.map(p => p.text)),
     ['A complete story ends here.'])
 })
+
+test('a writing-part omission supplies explicit absent references for both tasks', () => {
+  const result = referencesFixture(['第四部分 写作（共两节，满分40分）', '略', '听力材料',
+    'Text 1:', 'W: This is not a writing sample.'], ['application', 'continuation'])
+  for (const group of result.groups) {
+    assert.equal(group.essays.state, 'not_supplied')
+    assert.deepEqual(group.essays.entries, [])
+    assert.equal(group.scoring.state, 'not_supplied')
+    assert(group.essays.evidence.length > 0)
+  }
+})
+
+test('an omitted section does not become an essay or suppress the other sample', () => {
+  const result = referencesFixture(['第四部分 写作', '第一节', '无范文', '第二节',
+    'One possible version:', 'A source-backed story.'], ['application', 'continuation'])
+  assert.equal(result.groups[0].essays.state, 'not_supplied')
+  assert.deepEqual(result.groups[1].essays.entries.flatMap(e => e.paragraphs.map(p => p.text)),
+    ['A source-backed story.'])
+})

@@ -1117,6 +1117,15 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     const started = bare ? [bare[1] === '一' ? 'application' : 'continuation']
       : WRITING_SECTION.find(([, pattern]) => pattern.test(line.text))
     if (started) { current = { taskType: started[0], lines: [] }; sections.set(started[0], current); continue }
+    // An explicit omission belongs to the active section, or to both tasks
+    // when the key omits the entire writing part. Never invent a model answer.
+    if ((inWriting || current) && /^(?:略|[（(]略[）)]|(?:参考)?范文[：:]?\s*略|(?:源)?无范文|未提供范文)[。.]?$/u.test(line.text.trim())) {
+      for (const taskType of current ? [current.taskType] : ['application', 'continuation']) {
+        if (!sections.has(taskType)) sections.set(taskType, { taskType, lines: [] })
+      }
+      review.push({ itemId: line.itemId, issue: 'source explicitly supplies no writing sample (not_supplied)' })
+      continue
+    }
     if (/^(第[一二三四五]部分|听力)/u.test(line.text) || TRANSCRIPT_MARKER.test(line.text)) {
       current = null
       inWriting = WRITING_PART.test(line.text)
