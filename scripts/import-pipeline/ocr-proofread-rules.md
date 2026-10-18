@@ -71,6 +71,12 @@ Tesseract 底稿不带图形标记。校对员必须对照整页图自行补齐 
 包括应用文题的海报、阅读里的流程图和图表。把图内对应的连续 items 标为同一 `figure` 名称，
 在首个图形 item 写 `figureRegion`；图前保留一个文字 item 作为锚点，图中文字仍须归属 OCR 词。
 
+若图形区域完全没有 OCR 词，在前一条普通文字 item 后插入纯图条目：
+`{ "figure": "espresso", "figureRegion": { "x": 720, "y": 730, "width": 370, "height": 220 }, "imageOnly": true, "reason": "图形及图注未识别出 OCR 词，按原页保留" }`。
+必须填写 `figureRegion` 和理由，不带 `lines`、`words`、`text`、`emphasis`，同名 figure 只能有这一条。
+区域只框图形及图注，不借用旁边正文的词；编译后图插在前一条普通文字 item 之后，正文与强调仍保留。
+区域内只要有 OCR 词（包括部分重叠）就不能用纯图条目，应改用上面的词归属 figure 写法。
+
 `compile --pages` 和整卷 `compile` 会检查正文指图线索；本页或紧邻下一页都没有
 `figure` / `figureRegion` 时拒绝通过。听力原文不检查。这个文字护栏不能代替看图，
 没有指图用语的图形也必须补齐。

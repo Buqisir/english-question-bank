@@ -15,7 +15,7 @@ export function missingFigureHints({ pages, only, noFigures = [] }) {
   const selected = only && new Set(only)
   const hints = []
   const transcript = new Map()
-  const hasFigure = (page) => page?.draft?.items?.some((item) => item.figure || item.figureRegion)
+  const hasFigure = (page) => page?.draft?.items?.some((item) => item.figure || item.figureRegion || item.imageOnly === true)
   for (const page of [...pages].sort((a, b) =>
     a.documentId.localeCompare(b.documentId) || a.page - b.page)) {
     let inTranscript = transcript.get(page.documentId) || false
