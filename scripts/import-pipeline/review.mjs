@@ -85,6 +85,7 @@ import {
   renderReviewFixedEdition,
 } from '../../server/import-review/reviewPagination.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
+import { finishPaginationTiming } from '../../server/draft-paper/paginationTiming.mjs'
 import { fixedPageLayoutPolicy } from '../../server/draft-paper/fixedPagePdfPlanner.mjs'
 import { STUDENT_PRODUCT_EDITIONS, studentProductPolicy } from '../../server/draft-paper/studentProductPdf.mjs'
 import { assertApplicationGivenOwnership } from './lib-nck1-new-paper-locks.mjs'
@@ -500,6 +501,7 @@ async function paginationQa(paperId) {
       mode: rendered.mode,
       pageCount: rendered.pageCount,
       searchedCandidates: rendered.searchedCandidates,
+      ...(rendered.timing ? { timing: finishPaginationTiming(rendered.timing) } : {}),
       selectedPlan: selectedEdition,
       groups: rendered.inspection.map(({ id, type, pages, optionBankPages }) => ({
         groupId: id,
@@ -560,6 +562,7 @@ async function paginationQa(paperId) {
       targetPages: policy?.targetPages ?? null,
       actualPages: error.actualPages ?? diagnostic?.pageCount ?? null,
       searchedCandidates: error.searchedCandidates ?? null,
+      ...(error.timing ? { timing: finishPaginationTiming(error.timing) } : {}),
       error: { code: error.code || null, message: error.message },
       diagnosticError,
       diagnosticPolicy: policy ? {
@@ -579,6 +582,15 @@ async function paginationQa(paperId) {
     })
   } finally {
     await closeChromiumPool()
+    // Refresh process elapsed time after Chromium teardown, including rasterization.
+    for (const name of ['report.json', 'failure-report.json']) {
+      const file = path.join(outputDir, name)
+      if (!existsSync(file)) continue
+      const report = JSON.parse(readFileSync(file, 'utf8'))
+      if (!report.timing) continue
+      report.timing = finishPaginationTiming(report.timing)
+      writeFileSync(file, `${JSON.stringify(report, null, 2)}\n`)
+    }
   }
 }
 
