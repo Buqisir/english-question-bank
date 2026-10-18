@@ -40,6 +40,7 @@
 // keeping the browser resident.
 
 import { createRequire } from 'node:module'
+import { milliseconds } from './paginationTiming.mjs'
 
 const require = createRequire(import.meta.url)
 
@@ -94,14 +95,19 @@ async function launchBrowser() {
   return launched
 }
 
-async function getContext() {
+async function getContext(timing) {
   if (browser && browser.isConnected() && context) return context
   // Only launch when no live browser is held. Overwriting a still-connected
   // `browser` would drop the module's only reference to a running Chromium
   // process — unreachable by closeChromiumPool(), the exit hook, and the
   // 'disconnected' handler — an orphan that outlives the render that made it.
   if (!browser || !browser.isConnected()) {
-    browser = await launchBrowser()
+    const started = performance.now()
+    try {
+      browser = await launchBrowser()
+    } finally {
+      if (timing) timing.chromiumLaunchMs = milliseconds(performance.now() - started)
+    }
     context = null
   }
   const active = browser
@@ -135,13 +141,21 @@ async function getContext() {
 // serialize, PDF — draft-desk-b's locked single-page-produces-both-
 // artifacts contract lives in paginationRenderer.mjs, not here); this
 // module closes the page afterward regardless of success or failure.
-export function withChromiumPage(task) {
+export function withChromiumPage(task, { timing = null } = {}) {
+  const queuedAt = performance.now()
   const run = async () => {
-    const activeContext = await getContext()
+    if (timing) timing.queueWaitMs = milliseconds(performance.now() - queuedAt)
+    const setupAt = performance.now()
+    const activeContext = await getContext(timing)
     const page = await activeContext.newPage()
+    if (timing) timing.pageSetupMs = milliseconds(performance.now() - setupAt - (timing.chromiumLaunchMs || 0))
+    const renderAt = performance.now()
     try {
       return await task(page)
     } finally {
+      // Task time includes pagination, inspection and serialization; the
+      // renderer records its nested PDF phase separately.
+      if (timing) timing.renderMs = milliseconds(performance.now() - renderAt - (timing.pdfMs || 0))
       await page.close().catch(() => {})
     }
   }

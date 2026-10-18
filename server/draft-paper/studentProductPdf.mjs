@@ -1,4 +1,5 @@
 import { applyPlannedGroupBreaks, inspectGroups, searchFixedPagePdf } from './fixedPagePdfPlanner.mjs'
+import { finishPaginationTiming, timedCandidateRender } from './paginationTiming.mjs'
 
 // Separate edition IDs preserve the meaning and digests of saved v1–v3 plans.
 export const STUDENT_PRODUCT_EDITIONS = ['largeComplete', 'largeNoListening', 'economy8']
@@ -135,6 +136,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit })
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
+  const timed = timedCandidateRender(render, { edition, accepts: result => withinPages(result) && accept(result) })
   const fontSizes = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
   const layoutFor = (fontSizePt, figureLayout, application, continuation) => ({
     profile: edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
@@ -142,7 +144,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   let searchedCandidates = 0
   const measure = async (selected, breaks = []) => {
     searchedCandidates += 1
-    return render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+    return timed.measure(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups }, selected)
   }
   const fitProfile = async (layout, tierStart) => {
     let natural
@@ -158,7 +160,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
         ...policy, natural, accept, renderLimit: withinPages(natural) && accept(natural) ? 13 : 5,
         balanceWhitespace: policy.atMost,
         rejectOverflowCandidates: true,
-        render: async (...args) => { searchedCandidates += 1; return render(...args) },
+        render: async (...args) => { searchedCandidates += 1; return timed.measure(...args, layout) },
       })
     } catch (error) {
       if (error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' || error.code === 'PAPER_LAYOUT_OVERFLOW') return null
@@ -175,7 +177,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     })
     return { ...rescored, plannedBreakGroupIds: fit.plannedBreakGroupIds,
       edition, layout, fontSizePt: layout.fontSizePt, lineHeightPt: layout.fontSizePt === 12 ? 19.5 : 18,
-      searchedCandidates, explicitPlan: false }
+      searchedCandidates, explicitPlan: false, timing: finishPaginationTiming(timed.timing) }
   }
   const triedHeights = new Map()
   for (const fontSizePt of fontSizes) {
@@ -223,7 +225,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
       if (planned) return planned
     }
   }
-  throw impossible(edition, searchedCandidates, economyPageLimit)
+  throw Object.assign(impossible(edition, searchedCandidates, economyPageLimit), { timing: finishPaginationTiming(timed.timing) })
 }
 
 export async function renderExplicitStudentProductPdf(html, {
@@ -234,9 +236,10 @@ export async function renderExplicitStudentProductPdf(html, {
     throw new Error('九页上限省纸版须保持10.5pt正文及18pt行距')
   }
   let searchedCandidates = 0
+  const timed = timedCandidateRender(render, { edition, accepts: result => accept(result) })
   const measure = (selected, breaks) => {
     searchedCandidates += 1
-    return render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+    return timed.measure(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups }, selected)
   }
   const accept = result => (policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages)
     && acceptableWriting(result, html)
@@ -254,5 +257,5 @@ export async function renderExplicitStudentProductPdf(html, {
   })
   return { ...summarized, edition, layout: structuredClone(layout), plannedBreakGroupIds,
     fontSizePt: layout.fontSizePt, lineHeightPt: layout.fontSizePt === 12 ? 19.5 : 18,
-    searchedCandidates, explicitPlan: true }
+    searchedCandidates, explicitPlan: true, timing: finishPaginationTiming(timed.timing) }
 }

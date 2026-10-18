@@ -55,6 +55,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { abcdLayoutRules } from '../../shared/paper-canonical/abcdLayout.mjs'
 import { withChromiumPage } from './chromiumPool.mjs'
+import { milliseconds } from './paginationTiming.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..', '..')
@@ -103,7 +104,7 @@ function stripScriptTags(html) {
 // the paged.js polyfill script stripped) plus a same-source PDF and page
 // count. See module header for the locked render order this function
 // implements.
-export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
+export async function renderPaginatedPaper(printHtml, { inspect = null, timing = null } = {}) {
   if (typeof printHtml !== 'string' || !printHtml.trim()) {
     throw new Error('renderPaginatedPaper: printHtml must be a non-empty string')
   }
@@ -384,11 +385,17 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
     // Step 6: page.pdf() from THIS SAME page — the locked contract this
     // whole module exists to enforce. Do not extract this into a separate
     // function that could be called against an unpaginated page.
-    const pdfBytes = await page.pdf({
-      printBackground: true,
-      preferCSSPageSize: true,
-    })
+    const pdfStarted = performance.now()
+    let pdfBytes
+    try {
+      pdfBytes = await page.pdf({
+        printBackground: true,
+        preferCSSPageSize: true,
+      })
+    } finally {
+      if (timing) timing.pdfMs = milliseconds(performance.now() - pdfStarted)
+    }
 
     return { paginatedHtml, pdfBytes, pageCount, inspection }
-  })
+  }, { timing })
 }
