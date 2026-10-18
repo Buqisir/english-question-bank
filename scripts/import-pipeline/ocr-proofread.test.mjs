@@ -40,6 +40,37 @@ test('keeps speakers, Text headings and genuine paragraph indents separate', () 
   assert.equal(joinTranscriptTurns(hanging.items, hanging.lines, {}, 'fixture').joins, 1)
 })
 
+test('joins a hanging continuation when OCR splits its speaker label from the physical line', () => {
+  const make = () => {
+    const { items, lines } = fixture([
+      'Text 7', 'M: This laptop also has a', 'touchscreen for everyday use', 'W: Thank you.',
+    ], [10, 14, 15, 10])
+    // Source label and colon occupy their own OCR groups, but share the body's
+    // vertical band. The confirmed M: repairs an OCR-misread label.
+    lines[1].words[0].text = ':'
+    lines[1].words[0].box.left = 11
+    lines[1].words[0].box.width = 1
+    const label = { number: 99, text: 'zs', box: { left: 10, top: 15, width: 3, height: 10 } }
+    lines.splice(1, 0, { words: [label] })
+    items[1].lines = 'L2-L3'
+    items[2].lines = 'L4'
+    items[3].lines = 'L5'
+    return { items, lines }
+  }
+  const wrapped = make()
+  const result = joinTranscriptTurns(wrapped.items, wrapped.lines, {}, 'fixture')
+  assert.equal(result.joins, 1)
+  assert.equal(result.items[1].text, 'M: This laptop also has a touchscreen for everyday use')
+  assert.equal(result.items[2].text, 'W: Thank you.')
+
+  const paragraph = make()
+  paragraph.lines[3].words.forEach((word) => { word.box.left += 20 })
+  assert.equal(joinTranscriptTurns(paragraph.items, paragraph.lines, {}, 'fixture').joins, 0)
+  const separateLine = make()
+  separateLine.lines[1].words[0].box.top = 2
+  assert.equal(joinTranscriptTurns(separateLine.items, separateLine.lines, {}, 'fixture').joins, 0)
+})
+
 test('recognizes page furniture by source geometry, without dropping body text or labels', () => {
   const edge = { y: 0.04, height: 0.02 }
   assert.equal(isAnswerFurniture('英语参考答案 第2页（共5页）', edge), true)

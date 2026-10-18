@@ -390,7 +390,18 @@ function itemEdges(item, lines, label) {
   const covered = lines.map((line) => line.words.filter((word) => numbers.has(word.number)))
     .filter((words) => words.length)
     .sort((left, right) => Math.min(...left.map((word) => word.box.top)) - Math.min(...right.map((word) => word.box.top)))
-  return covered.length ? { first: covered[0], last: covered.at(-1) } : null
+  const physical = []
+  for (const words of covered) {
+    const previous = physical.at(-1)
+    const combined = previous ? [...previous, ...words] : words
+    // OCR can put a speaker label in a different line ID from its body.
+    // Coalesce only when every word shares a vertical band on the source page.
+    if (previous && Math.max(...combined.map((word) => word.box.top))
+      < Math.min(...combined.map((word) => word.box.top + word.box.height))) {
+      physical[physical.length - 1] = combined
+    } else physical.push(words)
+  }
+  return physical.length ? { first: physical[0], last: physical.at(-1) } : null
 }
 
 // Answer documents are proofread one printed line per item, but a speaker turn that wraps
@@ -423,9 +434,12 @@ export function joinTranscriptTurns(items, lines, state, label) {
         // Dialogue continuations may have a hanging indent after M:/W:. A monologue's
         // genuine first-line indent (or an extra indent within a turn) remains a boundary.
         const hanging = SPEAKER_LABEL.test(previous.text) && before.first === before.last
-        const labelWords = hanging ? previous.text.match(SPEAKER_LABEL)[0].trim().split(/\s+/u).length : 0
+        const speechWords = [...before.first].sort((a, b) => a.box.left - b.box.left)
+        let labelWords = hanging ? previous.text.match(SPEAKER_LABEL)[0].replace(/[:：]$/u, '').trim().split(/\s+/u).length : 0
+        // A confirmed M: may cover separately recognized label and colon tokens.
+        if (hanging && /^[:：]$/u.test(speechWords[labelWords]?.text ?? '')) labelWords += 1
         const speechLeft = hanging
-          ? [...before.first].sort((a, b) => a.box.left - b.box.left)[labelWords]?.box.left ?? last.left
+          ? speechWords[labelWords]?.box.left ?? last.left
           : last.left
         const indented = first.left > speechLeft + last.height * 0.35
         const beforeTop = Math.min(...before.last.map((word) => word.box.top))
