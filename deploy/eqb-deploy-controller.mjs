@@ -747,13 +747,92 @@ function sealRelease(config, dependencies, release, sha) {
   chmodSync(markerPath, 0o444)
 }
 
+// Called only by deploy after its boundary checks, under the launcher's exclusive
+// deploy.lock. Never infer rollback history from directory names or mtimes.
+// Ordinary activation retains 2–3 releases; noOp retains current + previous.
+// deployReviewedPersistence does not prune. Build/runtime-owned interrupted
+// staging/health directories remain untouched under the same ownership rule.
+function pruneReleases(config, dependencies, currentSha, targetSha) {
+  const result = { pruned: [] }
+  let stage = 'history-directory'
+  let filename = 'receipts'
+  const invalidReceipt = code => Object.assign(new Error('Invalid release history'), { code })
+  try {
+    const receipts = path.join(config.root, 'deployments', 'receipts')
+    if (!pathEntryExists(receipts)) {
+      result.pruneSkipped = 'PREVIOUS_RELEASE_UNKNOWN'
+      return result
+    }
+    const successful = readdirSync(receipts).filter(name => name.endsWith('.json')).sort().flatMap(name => {
+      filename = name
+      stage = 'receipt-metadata'
+      const file = path.join(receipts, name)
+      const metadata = lstatSync(file)
+      if (!metadata.isFile() || metadata.isSymbolicLink() || metadata.uid !== config.controllerUid
+        || metadata.gid !== config.controllerGid || (metadata.mode & 0o7777) !== 0o600
+        || metadata.nlink !== 1) throw invalidReceipt('UNSAFE_RECEIPT')
+      stage = 'receipt-json'
+      const receipt = JSON.parse(readFileSync(file, 'utf8'))
+      stage = 'receipt-validation'
+      if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)
+        || ![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION,
+          EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION].includes(receipt.schemaVersion)
+        || !['success', 'failure'].includes(receipt.conclusion)
+        || !SHA.test(receipt.targetSha || '')
+        || typeof receipt.finishedAt !== 'string'
+        || !Number.isFinite(Date.parse(receipt.finishedAt))) throw invalidReceipt('INVALID_RECEIPT')
+      if (receipt.schemaVersion !== EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION
+        && receipt.conclusion === 'success' && !SHA.test(receipt.previousSha || '')) {
+        throw invalidReceipt('INVALID_PREVIOUS_SHA')
+      }
+      // No-op receipts do not represent an activation and point back to self.
+      if (![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION]
+        .includes(receipt.schemaVersion) || receipt.conclusion !== 'success'
+        || receipt.targetSha !== currentSha || receipt.noOp === true) return []
+      return [receipt]
+    }).sort((a, b) => Date.parse(b.finishedAt) - Date.parse(a.finishedAt))
+    const latest = successful[0]
+    if (!latest || !SHA.test(latest.previousSha || '') || latest.previousSha === currentSha
+      || successful.some(receipt => Date.parse(receipt.finishedAt) === Date.parse(latest.finishedAt)
+        && receipt.previousSha !== latest.previousSha)) {
+      result.pruneSkipped = 'PREVIOUS_RELEASE_UNKNOWN'
+      return result
+    }
+    const keep = new Set([currentSha, latest.previousSha, targetSha])
+    stage = 'release-directory'
+    filename = 'releases'
+    const releases = path.join(config.root, 'releases')
+    const filesystem = dependencies.releaseFilesystem || { lstatSync, rmSync }
+    for (const name of readdirSync(releases).sort()) {
+      if (keep.has(name) || !(SHA.test(name) || name.startsWith('.staging-')
+        || name.startsWith('.candidate-health-'))) continue
+      filename = name
+      stage = 'release-metadata'
+      const directory = path.join(releases, name)
+      const metadata = filesystem.lstatSync(directory)
+      if (!metadata.isDirectory() || metadata.isSymbolicLink() || metadata.uid !== config.controllerUid) continue
+      stage = 'release-remove'
+      filesystem.rmSync(directory, { recursive: true, force: false })
+      result.pruned.push(name)
+    }
+  } catch (error) {
+    result.pruneFailed = true
+    result.pruneSkipped = result.pruned.length === 0 ? 'PRUNING_ABORTED' : undefined
+    result.pruneStage = stage
+    result.pruneFile = filename
+    result.pruneErrorCode = error instanceof SyntaxError ? 'INVALID_JSON'
+      : /^[A-Z][A-Z0-9_]{0,63}$/u.test(error.code || '') ? error.code : 'PRUNE_ERROR'
+  }
+  return result
+}
+
 function prepareRelease(config, dependencies, sha) {
   const finalDirectory = releaseDirectory(config, sha)
   if (existsSync(finalDirectory)) {
     readReleaseMarker(config, sha)
     return { release: finalDirectory, staged: false }
   }
-  const filesystem = statfsSync(config.root)
+  const filesystem = (dependencies.releaseFilesystem?.statfsSync || statfsSync)(config.root)
   const availableBytes = filesystem.bavail * filesystem.bsize
   if (availableBytes < config.minimumFreeBytes) {
     throw new Error('Production filesystem has insufficient space to stage a release')
@@ -1181,6 +1260,14 @@ async function deploy(config, dependencies, targetSha, reviewedCodeOnlyDigest = 
     const fetchedSha = fetchMain(config, dependencies)
     if (fetchedSha !== targetSha) throw new Error('Production source main does not match target SHA')
     assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha, reviewedCodeOnlyDigest)
+    const pruning = pruneReleases(config, dependencies, previousSha, targetSha)
+    // Receipt v2 readers reject unknown fields, so retain diagnostics in the
+    // controller journal without changing the wire receipt or rollback path.
+    try {
+      const message = `EQB_RELEASE_PRUNE ${JSON.stringify({ targetSha, ...pruning })}\n`
+      if (dependencies.log) dependencies.log(message)
+      else process.stderr.write(message)
+    } catch { /* Logging failure must not affect activation or rollback. */ }
     staged = prepareRelease(config, dependencies, targetSha).staged
     if (previousSha !== targetSha) checkCandidate(config, dependencies, targetSha)
     const recheckedSha = fetchMain(config, dependencies)
