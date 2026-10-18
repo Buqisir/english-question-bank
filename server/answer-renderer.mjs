@@ -16,7 +16,7 @@ function keyTable(answers, columns) {
   const rows = []
   for (let start = 0; start < answers.length; start += columns) {
     rows.push(`<tr>${answers.slice(start, start + columns).map(answer =>
-      `<td><span class="answer-number">${answer.canonicalNumber}.</span> <span data-answer-number="${answer.canonicalNumber}">${textHtml(answer.value)}</span></td>`,
+      `<td><span class="answer-key"><span class="answer-number">${answer.canonicalNumber}.</span> <span class="answer-value" data-answer-number="${answer.canonicalNumber}">${textHtml(answer.value)}</span></span></td>`,
     ).join('')}</tr>`)
   }
   return `<table class="answer-keys answer-keys--${columns}"><tbody>${rows.join('')}</tbody></table>`
@@ -204,7 +204,15 @@ p{margin:0;orphans:2;widows:2;overflow-wrap:break-word}
 .answer-keys{width:100%;border-collapse:collapse;table-layout:fixed;margin:0}
 .answer-keys td{vertical-align:top;padding:0 8pt 0 0;overflow-wrap:anywhere}
 .answer-keys tr{break-inside:avoid}
-.answer-keys--5{table-layout:auto}
+.answer-keys--5{table-layout:auto;--answer-content-width:170mm}
+/* Override --5's auto layout only after measured overflow; 170mm is the A4
+   content width after this booklet's two 20mm margins. */
+.answer-keys--bounded{table-layout:fixed}
+/* Separate the label from wrapping prose; 0.25em preserves the Termes space.
+   break-word overrides td's anywhere so table sizing still respects whole words. */
+.answer-key{display:flex;align-items:baseline;column-gap:0.25em}
+.answer-key .answer-number{flex-shrink:0}
+.answer-value{min-width:0;overflow-wrap:break-word}
 .answer-ranges td{white-space:nowrap}
 .answer-number{white-space:nowrap}
 .writing-section,.writing-section-source{font-weight:400;display:block}
