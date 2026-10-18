@@ -931,7 +931,7 @@ const WRITING_SECTION = [
 // Some answer keys head the samples only with "第一节（满分15分）" under "第四部分 写作".
 const WRITING_PART = /^第四部分\s*[:：]?\s*写作/u
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
-const ENTRY_LABEL = /^(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】)[:：]?$/iu
+const ENTRY_LABEL = /^(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
