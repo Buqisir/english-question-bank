@@ -157,3 +157,25 @@ test('excludes English quote fragments from writing commentary and resumes at a 
   assert.deepEqual(result.groups[0].essays.entries.map(e=>e.paragraphs.map(p=>p.text)),
     [['A completed sample.'], ['Another real sample.']])
 })
+
+function referencesFixture(texts, taskTypes = ['continuation']) {
+  const observations = texts.map((text, i) => ({
+    observationId: `o${i}`, region: { x: .1, y: .15 + i * .025, width: .8, height: .02 },
+  }))
+  return buildSourceReferences({
+    documents: [{ documentId: 'answers', role: 'official_answers', sha256: 'abc' }],
+    groups: taskTypes.map(taskType => ({ groupId: taskType, writingTask: { taskType } })),
+  }, { documents: [{ documentId: 'answers', pages: [{ observations }] }] },
+  { documents: [{ documentId: 'answers', pages: [{ page: 1,
+    orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
+  }] }] })
+}
+
+test('an inline reading explanation divider closes the writing references', () => {
+  const result = referencesFixture(['第二节 读后续写', 'One possible version:',
+    'A complete story ends here.', '【解题导语】本文是一篇应用文。',
+    '21.C 推理判断题。根据表格可知……', 'English fragments from the reading explanation.',
+    '参考范文', 'A reading exercise quoted in the explanation.'])
+  assert.deepEqual(result.groups[0].essays.entries.flatMap(e => e.paragraphs.map(p => p.text)),
+    ['A complete story ends here.'])
+})

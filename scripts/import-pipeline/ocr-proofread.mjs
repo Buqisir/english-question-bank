@@ -1020,6 +1020,9 @@ const WRITING_SECTION = [
 // Some answer keys head the samples only with "第一节（满分15分）" under "第四部分 写作".
 const WRITING_PART = /^第四部分\s*[:：]?\s*写作/u
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
+// Some keys start their reading explanations immediately after the samples,
+// without another "第…部分" heading. That divider ends the key's writing scope.
+const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u
 
 // OCR can keep the first section number on the writing part heading's item
 // ("第四部分 写作（共两节，满分40分）\n第一节"); the sample follows directly.
@@ -1101,6 +1104,10 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
   let current = null
   let inWriting = false
   for (const line of lines) {
+    if (sections.size && ANSWER_EXPLANATION_START.test(line.text)) {
+      review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
+      break
+    }
     const normalized = line.text.replace(/\d+/gu, '#').replace(/\s+/gu, '')
     if (isAnswerFurniture(line.text, unionRegion(line.boxes), edgeTexts.get(normalized)?.size > 1)) {
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
