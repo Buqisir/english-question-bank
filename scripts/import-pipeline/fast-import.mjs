@@ -757,9 +757,15 @@ async function screenTiles(ctx, revisionId, qa) {
   // Chromium sends the same post-quantum key share that review.mjs avoids (see its tls note).
   const browser = await chromium.launch({ headless: true, channel: 'chromium', args: ['--disable-features=PostQuantumKyber'] })
   const full = path.join(qa, 'screen-full.png')
+  // A single reset connection (net::ERR_CONNECTION_CLOSED) otherwise blocks a paper already submitted.
+  const visit = (page, target) => page.goto(target, { waitUntil: 'networkidle' }).catch(async (error) => {
+    if (!/net::ERR_/u.test(error.message)) throw error
+    await page.waitForTimeout(3000)
+    return page.goto(target, { waitUntil: 'networkidle' })
+  })
   try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 1000 } })
-    await page.goto(`${account.appOrigin}/`, { waitUntil: 'networkidle' })
+    await visit(page, `${account.appOrigin}/`)
     const username = page.locator('input[autocomplete="username"]')
     // The form renders only after the session probe answers; count() alone races it.
     if (await username.waitFor({ timeout: 5000 }).then(() => true, () => false)) {
@@ -773,7 +779,7 @@ async function screenTiles(ctx, revisionId, qa) {
       if (!login.ok()) return { skipped: `${account.username} 登录失败（HTTP ${login.status()}）` }
       await username.waitFor({ state: 'detached' })
     }
-    await page.goto(url, { waitUntil: 'networkidle' })
+    await visit(page, url)
     if (await page.locator('input[autocomplete="username"]').count()) return { skipped: 'Screen 仍停在登录页' }
     // PaperFontGate shows its notice only after networkidle, then swaps in the paper once fonts load;
     // waiting for the notice to detach can pass before it ever appears.
