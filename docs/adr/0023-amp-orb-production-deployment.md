@@ -3,6 +3,13 @@
 - Status: Accepted; S2 release deployment is active in production
 - Scope: website deployment plus separately authorized persistence and host-configuration maintenance
 
+## Deployment executor supersession (2026-10-18)
+
+[ADR-0027](0027-owner-local-website-deployment.md) replaces only the requirement
+that a separate Orb execute website deployments: the Owner Mac is now primary,
+and the Deployment Orb retains its existing key as a backup. The restricted
+transport, controller, CI evidence gates and reviewed migration digest remain.
+
 ## CI authority supersession (2026-09-06)
 
 ADR-0025 supersedes this ADR's Hosted `verify`/`e2e` deployment-authority
