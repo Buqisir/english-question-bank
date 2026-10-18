@@ -178,15 +178,27 @@ function background(ctx, name, command, args) {
   const fd = openSync(log, 'a')
   const child = spawn(command, args, { cwd: root, env, detached: true, stdio: ['ignore', fd, fd] })
   child.unref()
-  ctx.state.background[name] = { pid: child.pid, log, startedAt: new Date().toISOString() }
+  ctx.state.background[name] = { pid: child.pid, log, startedAt: new Date().toISOString(), command, args }
   save(ctx)
 }
 
+// Three editions paginate concurrently, each loading a ~30 MB print document; under that load
+// Chromium's 30 s setContent "load" wait has timed out while the same edition passes alone.
+const TRANSIENT_RENDER_FAILURE = /page\.setContent: Timeout \d+ms exceeded/u
+
 async function waitBackground(ctx, name, finished) {
-  const job = ctx.state.background[name]
+  let job = ctx.state.background[name]
   if (!job) fail(`后台任务 ${name} 没有启动`)
   while (alive(job.pid) && !finished()) await sleep(2000)
   while (alive(job.pid)) await sleep(500)
+  if (!finished() && !job.retried && job.command && TRANSIENT_RENDER_FAILURE.test(tail(readFileSync(job.log, 'utf8')))) {
+    say(`↻ ${name} 页面加载超时，单独重跑一次`)
+    background(ctx, name, job.command, job.args)
+    job = ctx.state.background[name] = { ...ctx.state.background[name], retried: true }
+    save(ctx)
+    while (alive(job.pid) && !finished()) await sleep(2000)
+    while (alive(job.pid)) await sleep(500)
+  }
   if (!finished()) fail(`后台任务 ${name} 未完成，日志 ${path.relative(root, job.log)}\n${tail(readFileSync(job.log, 'utf8'))}`)
 }
 
