@@ -3216,7 +3216,7 @@ try {
 // The sidecar is optional for legacy versions, but a claimed reviewed sidecar
 // must survive the same atomic receipt, recovery and rollback as Canonical.
 // These cases are authored here for Ship; preview builds do not execute them.
-function attachSourceReferences(context) {
+function attachSourceReferences(context, { continuedParagraph = false } = {}) {
   const sidecar = prepareSourceReferences(context.projection)
   const documents = context.projection.materialization.documents.filter(document => document.role === 'official_answers')
   const evidence = documents.map(document => ({ documentSha256: document.sha256,
@@ -3224,6 +3224,18 @@ function attachSourceReferences(context) {
       region: { x: 0, y: 0, width: 1, height: 1 } } }))
   for (const group of sidecar.groups) for (const kind of ['essays', 'scoring']) {
     group[kind] = { state: 'not_supplied', evidence, entries: [] }
+  }
+  if (continuedParagraph) {
+    const source = structuredClone(evidence[0])
+    const continuation = structuredClone(source)
+    continuation.locator.page = source.locator.page + 1
+    sidecar.groups[0].essays = { state: 'captured', evidence: [], entries: [{
+      referenceId: 'reference:cross-page', authority: 'source_reference',
+      sourceLabel: null, labelSource: null,
+      paragraphs: [{ paragraphId: 'paragraph:cross-page', role: 'body',
+        text: 'This single source paragraph continues onto the next answer page.',
+        source, continuationSources: [continuation] }],
+    }] }
   }
   writeJson(path.join(context.reviewRoot, SOURCE_REFERENCES_FILE), sidecar)
   context.projection = buildNck1ReviewProjection(context.reviewRoot, { requireAnalyses: true })
@@ -3235,8 +3247,16 @@ function attachSourceReferences(context) {
 
 const referencePreCommit = makeContext('references-precommit')
 try {
-  const approval = attachSourceReferences(referencePreCommit)
+  const approval = attachSourceReferences(referencePreCommit, { continuedParagraph: true })
   const exact = readFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE))
+  const tampered = JSON.parse(exact.toString('utf8'))
+  tampered.groups[0].essays.entries[0].paragraphs[0].continuationSources[0].locator.page = 1
+  writeJson(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), tampered)
+  assert.throws(() => buildNck1ReviewProjection(referencePreCommit.reviewRoot, { requireAnalyses: true }),
+    /SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID/, 'invalid continuation cannot enter a sealed Review')
+  assert.throws(() => publish(referencePreCommit, approval), /CONTINUATION_LOCATION_INVALID|inventory/i,
+    'an approved sidecar cannot have its continuation page replaced before publication')
+  writeFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), exact)
   assert.throws(() => publish(referencePreCommit), /approved Review|schema/i)
   assert.throws(() => publish(referencePreCommit, { ...approval, failurePoint: 'db-write' }))
   assert.equal(publishedVersionCount(referencePreCommit), 0)
@@ -3250,13 +3270,17 @@ try {
     paperAssetsDir: referencePreCommit.paperAssetsDir, consumption })
   assert.equal(read().commitment.bundleDigest, approval.approvedManifest.bundleDigest)
   assert(read().sourceReferencesBytes.equals(exact))
+  assert.deepEqual(read().sourceReferences.groups[0].essays.entries[0].paragraphs[0].continuationSources,
+    JSON.parse(exact.toString('utf8')).groups[0].essays.entries[0].paragraphs[0].continuationSources,
+    'continued paragraph provenance survives exact-version publication and reading')
   const file = path.join(result.publish.versionDir, SOURCE_REFERENCES_FILE)
-  writeFileSync(file, Buffer.from('{}'))
+  writeJson(file, tampered)
   assert.throws(read, /字节/)
   writeFileSync(file, exact)
   const swapped = { ...consumption, publicationDigest: `sha256:${'0'.repeat(64)}` }
   assert.throws(() => readSourceReferencePublication({ db: referencePreCommit.db,
     paperAssetsDir: referencePreCommit.paperAssetsDir, consumption: swapped }), /不一致/)
+  console.log('PASS continued paragraph: sealed Review -> exact publication -> read; tampered continuation page rejected')
 } finally { close(referencePreCommit) }
 
 const referenceRecovery = makeContext('references-recovery')

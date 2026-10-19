@@ -109,7 +109,98 @@ export function assemblyFixture() {
     items: [item(second, 'reading.b'), item(first, 'grammar-fill'), item(second, 'writing.application')] }
 }
 
+function continuationContractChecks() {
+  for (const structuredScoring of [false, true]) {
+    const input = fixture({ structuredScoring })
+    const bytes = Buffer.from('Synthetic four-page PDF answer source')
+    const document = { documentId: 'answers', role: 'official_answers', mediaType: 'application/pdf',
+      sha256: sha256(bytes), byteLength: bytes.length, pageCount: 4 }
+    input.materialization.documents[1] = document
+    // An independently valid binding must still be rejected as a continuation
+    // when its document ID differs, even if its exact bytes/SHA are the same.
+    input.materialization.documents.push({ ...document, documentId: 'answers-other' })
+    input.sourceDocuments = ['answers', 'answers-other'].map(documentId => ({ documentId, bytes }))
+    const location = (page, documentId = 'answers') => ({ documentSha256: document.sha256,
+      locator: { kind: 'page_region', documentId, page, region: { x: 0, y: 0, width: 1, height: 1 } } })
+    const groups = input.sourceReferences.groups
+    input.sourceReferences = { ...prepareSourceReferences(input), groups }
+    for (const group of groups) for (const kind of ['essays', 'scoring']) {
+      const section = group[kind]
+      section.evidence = section.evidence.flatMap(() => [location(1), location(1, 'answers-other')])
+      for (const entry of section.entries) {
+        if (entry.labelSource) entry.labelSource = location(1)
+        for (const block of sourceReferenceBlocks(entry)) {
+          if (block.kind === 'paragraph') block.paragraph.source = location(1)
+          else for (const cell of block.rows.flat()) cell.source = location(1)
+        }
+      }
+    }
+    // PDF table cells need distinct locations, just like native DOCX cells.
+    if (structuredScoring) {
+      input.sourceReferences.schemaVersion = 'source-references-v2'
+      const cells = groups[0].scoring.entries[0].blocks[1].rows.flat()
+      cells.forEach((cell, index) => {
+        cell.source.locator.region = { x: 0, y: index / cells.length, width: 1, height: 1 / cells.length }
+      })
+    }
+    const validate = sidecar => validateSourceReferences({ ...input, sidecar })
+    const body = sidecar => sidecar.groups[0].essays.entries[0].paragraphs[2]
+    assert.deepEqual(validate(input.sourceReferences), [], 'legacy shape remains valid')
+    const legacy = structuredClone(input.sourceReferences)
+    const legacyHtml = buildAnswerOnlyHtml(input)
+    assert.deepEqual(input.sourceReferences, legacy, 'legacy reads do not add or rewrite fields')
+    body(input.sourceReferences).continuationSources = [location(2)]
+    assert.deepEqual(validate(input.sourceReferences), [], `${input.sourceReferences.schemaVersion}: two-page body`)
+    const html = buildAnswerOnlyHtml(input)
+    assert.equal(html, legacyHtml, 'provenance does not change rendered output')
+    const paragraph = body(input.sourceReferences)
+    const rendered = [...html.matchAll(/<p\b[^>]*data-reference-paragraph="paragraph:positive:3"[^>]*>([\s\S]*?)<\/p>/gu)]
+    assert.equal(rendered.length, 1, 'a continued paragraph renders as one p')
+    assert.equal(rendered[0][1], paragraph.text)
+    const reject = (label, change, code) => {
+      const sidecar = structuredClone(input.sourceReferences)
+      change(body(sidecar), sidecar)
+      assert(validate(sidecar).some(issue => issue.code === code), `${sidecar.schemaVersion}: ${label}: ${code}`)
+    }
+    const sourceError = 'SOURCE_REFERENCES_CONTINUATION_SOURCE_INVALID'
+    const locationError = 'SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID'
+    const roleError = 'SOURCE_REFERENCES_CONTINUATION_ROLE_INVALID'
+    reject('different document ID', p => { p.continuationSources[0].locator.documentId = 'answers-other' }, sourceError)
+    reject('different SHA', p => { p.continuationSources[0].documentSha256 = digest('e') }, sourceError)
+    reject('DOCX continuation', p => {
+      p.continuationSources[0].locator = { kind: 'docx_part', documentId: 'answers',
+        part: 'word/document.xml', selector: '(/w:document/w:body//w:p)[1]' }
+    }, locationError)
+    reject('DOCX first fragment', p => {
+      p.source.locator = { kind: 'docx_part', documentId: 'answers',
+        part: 'word/document.xml', selector: '(/w:document/w:body//w:p)[1]' }
+    }, locationError)
+    reject('non-adjacent page', p => { p.continuationSources[0].locator.page = 3 }, locationError)
+    reject('descending page', p => { p.source.locator.page = 3 }, locationError)
+    reject('duplicate page', p => { p.continuationSources[0].locator.page = 1 }, locationError)
+    reject('later skipped page', p => { p.continuationSources.push(location(4)) }, locationError)
+    reject('later repeated page', p => { p.continuationSources.push(location(2)) }, locationError)
+    reject('empty array', p => { p.continuationSources = [] }, 'SOURCE_REFERENCES_SCHEMA_INVALID')
+    reject('out-of-bounds region', p => { p.continuationSources[0].locator.region.x = 0.1 }, 'SOURCE_REFERENCES_LOCATION_INVALID')
+    reject('page beyond source', p => {
+      p.source.locator.page = 4
+      p.continuationSources[0].locator.page = 5
+    }, 'SOURCE_REFERENCES_LOCATION_INVALID')
+    reject('scoring paragraph', (p, sidecar) => {
+      const scoring = sourceReferenceBlocks(sidecar.groups[0].scoring.entries[0])[0].paragraph
+      scoring.continuationSources = structuredClone(p.continuationSources)
+    }, roleError)
+    for (const role of ['title', 'label', 'salutation', 'closing', 'signature']) {
+      reject(`non-body ${role}`, p => { p.role = role }, roleError)
+    }
+    body(input.sourceReferences).continuationSources.push(location(3), location(4))
+    assert.deepEqual(validate(input.sourceReferences), [], 'all ordered fragments are validated')
+  }
+  console.log('PASS v1/v2 continued paragraph provenance, legacy output, single-p rendering and fail-closed mutations')
+}
+
 function contractChecks() {
+  continuationContractChecks()
   const input = fixture()
   const validate = sidecar => validateSourceReferences({ ...input, sidecar })
   assert.deepEqual(validate(input.sourceReferences), [])

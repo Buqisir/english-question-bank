@@ -101,7 +101,12 @@
                     "paragraphId": { "$ref": "#/$defs/id" },
                     "role": { "enum": ["title", "label", "salutation", "body", "closing", "signature"] },
                     "text": { "type": "string", "pattern": "\\S" },
-                    "source": { "$ref": "#/$defs/source" }
+                    "source": { "$ref": "#/$defs/source" },
+                    "continuationSources": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": { "$ref": "#/$defs/source" }
+                    }
                   }
                 }
               }
