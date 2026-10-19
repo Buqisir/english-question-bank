@@ -2416,6 +2416,8 @@ body {
   font-size: ${sectionHeadingRuntime.printPdf.fontSizePt}pt;
   margin-block: 1.2em 0.6em;
   margin-right: 0;
+  break-inside: avoid;
+  break-after: avoid;
 }
 
 .section-header--part {

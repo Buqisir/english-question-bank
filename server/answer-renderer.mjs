@@ -41,6 +41,7 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
   const sectionPrefix = value => value?.match(/^(\s*第[一二]节\s*[（(][^）)]*[）)]\s*)([\s\S]+)$/u)
   const heading = kind === 'essays' && sectionPrefix(section.entries[0]?.sourceLabel)
     ? '' : `<h3 class="writing-section">${label}</h3>`
+  let joinedHeading = false
   const content = section.state === 'not_supplied'
     ? '<p class="source-absent">源未提供。</p>'
     : section.entries.map((entry, index) => {
@@ -65,16 +66,20 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
         const prose = starter ? `<em class="continuation-starter">${textHtml(starter)}</em>${textHtml(paragraph.text.slice(starter.length))}` : textHtml(paragraph.text)
         return `<p class="reference-paragraph reference-paragraph--${paragraph.role}" data-reference-paragraph="${escapeHtml(paragraph.paragraphId)}">${prose}</p>`
       })
-      // Keep a letter's source label with its salutation, without preventing
-      // the body of a long source essay from flowing onto subsequent pages.
-      const opening = blocks[0]?.paragraph?.role === 'salutation'
-        ? `<div class="reference-opening">${labelHtml}${paragraphs.shift()}</div>` : labelHtml
+      // Keep the section, source label and first source paragraph together.
+      // The rest of a long essay can still flow onto subsequent pages.
+      const keepOpening = blocks[0]?.paragraph?.role === 'salutation'
+        || (kind === 'essays' && blocks[0]?.kind === 'paragraph')
+      const sectionHeading = keepOpening && index === 0 ? heading : ''
+      if (sectionHeading) joinedHeading = true
+      const opening = keepOpening
+        ? `<div class="reference-opening">${sectionHeading}${labelHtml}${paragraphs.shift()}</div>` : labelHtml
       return `<article data-source-reference="${escapeHtml(entry.referenceId)}">
 ${opening}
 ${paragraphs.join('\n')}
 </article>`
     }).join('\n')
-  return `<section data-answer-section="${kind}" data-group-id="${escapeHtml(group.groupId)}">${heading}${content}</section>`
+  return `<section data-answer-section="${kind}" data-group-id="${escapeHtml(group.groupId)}">${joinedHeading ? '' : heading}${content}</section>`
 }
 
 // Independent source-reference booklet. It never reads teacher HTML or analyses.
