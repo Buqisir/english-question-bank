@@ -2,14 +2,18 @@
 // rendering: historical revisions intentionally have no headerTitle.
 export function subjectFreeHeaderTitle(paperTitle) {
   if (typeof paperTitle !== 'string') throw new TypeError('paperTitle must be a string')
-  const subject = /英\s*语(?:\s*学\s*科\s*试\s*题\s*卷|\s*试\s*题\s*卷|\s*试\s*题|\s*试\s*卷)?(?=(?:\s*[（(][^()（）]*[)）])*\s*[\p{P}\s]*$)/u
+  const subjectWords = String.raw`英\s*语(?:\s*学\s*科)?(?:\s*试\s*题\s*卷|\s*试\s*题|\s*试\s*卷|\s*练\s*习|\s*真\s*题|\s*样\s*题)?`
+  // Match the complete parenthesized subject first, so its empty shell cannot
+  // survive. Genuine edition notes remain in the trailing text.
+  const subject = new RegExp(String.raw`(?:（\s*${subjectWords}\s*）|\(\s*${subjectWords}\s*\)|${subjectWords})(?=(?:\s*[（(][^()（）]*[)）]|[\p{P}\s])*$)`, 'u')
   const match = subject.exec(paperTitle)
   if (!match) return paperTitle
   const prefix = paperTitle.slice(0, match.index)
-  // Every suffix needs the same boundary, including 英语试题. Grade and exam
-  // endings occur in the source roster; compounds such as 商务英语 do not.
-  if (/\p{Script=Han}$/u.test(prefix)
-    && !/(?:考试|检测|测试|测评|联考|统考|模拟|试题|试卷|学年|学年度|高三|高二|高一)$/u.test(prefix)) return paperTitle
+  // For a parenthesized subject, the opening bracket itself precedes 英语.
+  // Otherwise inspect exactly one character, preserving lexical compounds.
+  const beforeSubject = /^[（(]/u.test(match[0]) ? '(' : Array.from(prefix).at(-1)
+  if (beforeSubject && /\p{Script=Han}/u.test(beforeSubject)
+    && !/[考试测检调模练估断评研卷题末中一二三度年级期赛]/u.test(beforeSubject)) return paperTitle
   // A subject at the end, or immediately before trailing edition notes, is
   // removable. A compound such as 英语教学 / 英语学校 is not a subject suffix.
   const result = `${prefix.trimEnd()}${paperTitle.slice(match.index + match[0].length).trimStart()}`.trim()

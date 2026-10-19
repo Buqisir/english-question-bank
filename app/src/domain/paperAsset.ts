@@ -31,8 +31,6 @@ export type PaperAssetV1 = {
 export type PaperAssetPaper = {
   paperId: string
   title: string
-  /** Optional revision-bound first-page title; never a list/search name. */
-  headerTitle?: string
   subject: string
   source: string
   assetVersion: number
