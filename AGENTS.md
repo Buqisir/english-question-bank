@@ -144,8 +144,10 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 
 - `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
   `main`. Stable required checks remain `verify` and `e2e`. Independent workers
-  `verify`, `e2e-seams` and `e2e-render` use isolated runners within trusted-base
-  boundaries; `e2e` aggregates both E2E workers. Full remains
+  `verify-1`, `verify-2`, `e2e-seams` and `e2e-render` use isolated runners
+  within trusted-base boundaries; `verify` and `e2e` each aggregate their two
+  workers. Verify shards use an explicit allocation with a disjoint/full-union
+  assertion; unallocated scripts fail closed. Full remains
   required for paper/security/shared/high/unknown risks, invalid or missing
   exact-head/base advice, and main. `e2e-seams` runs all six browser seams;
   `e2e-render` runs the selected pack's e2e lane. Both required checks and all
@@ -168,9 +170,10 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   after a green notice; diagnose failures before rerunning and retain attempts.
 - Deployment accepts only the exact-main natural Actions run and its two
   successful required checks through the deployment reader, which accepts only
-  the exact v2 `{verify, e2e-seams, e2e-render, e2e}` job set with every job
-  successful. Reader and workflow ship together, so exact-main runs and PR
-  merge refs use v2; v1 acceptance would allow a two-job downgrade.
+  the exact v3 `{verify-1, verify-2, verify, e2e-seams, e2e-render, e2e}` job
+  set with every job successful. Reader and workflow ship together; historical
+  v1/v2 sets are rejected. Deployment resolves latest main, so the new reader
+  does not authorize deployments of historical pre-v3 main runs.
   Pending, failed, missing,
   wrong-SHA, wrong-workflow or ambiguous evidence fails closed.
 - The old Amp CI webhook/controller, serialized eligibility, Amp-only watcher,

@@ -2,7 +2,7 @@ name: Verify
 run-name: >-
   ${{ github.event_name == 'pull_request' && format('Verify PR #{0} head {1}', github.event.pull_request.number, github.event.pull_request.head.sha) || 'Verify' }}
 
-# Stable required checks: verify and e2e; e2e aggregates both isolated workers.
+# Stable required checks: verify and e2e; each aggregates its two isolated workers.
 on:
   pull_request:
   push:
@@ -16,8 +16,8 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  verify:
-    name: verify
+  verify-1:
+    name: verify-1
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -91,9 +91,103 @@ jobs:
       - name: Run selected verification pack
         env:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
-        run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane verify --jobs 2
+        run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane verify --shard 1 --jobs 2
       - name: Require tracked checkout to remain clean
         run: git diff --exit-code && git diff --cached --exit-code
+
+  verify-2:
+    name: verify-2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Select verification from the trusted PR base
+        id: plan
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          plan="$RUNNER_TEMP/eqb-verification-plan.json"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
+            test -z "$(git status --porcelain)"
+            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
+            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
+            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
+          fi
+          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
+            trusted="$RUNNER_TEMP/eqb-ci-policy"
+            git worktree add --detach "$trusted" "$BASE_SHA"
+            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
+            git worktree remove "$trusted"
+          else
+            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
+            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
+          fi
+          pack=$(jq -er '.pack' "$plan")
+          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
+          echo "pack=$pack" >> "$GITHUB_OUTPUT"
+          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            { echo '## Risk Agent selection'; echo '```json';
+              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
+              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+      - name: Install app dependencies
+        run: pnpm -C app install --frozen-lockfile
+      - name: Install server dependencies
+        run: npm --prefix server ci
+      - name: Install verification system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
+          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
+          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
+          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
+          printf '%s\n' \
+            '#!/bin/sh' \
+            'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
+            'exec /usr/bin/convert "$@"' | sudo tee /usr/local/bin/magick >/dev/null
+          sudo chmod 755 /usr/local/bin/magick
+          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
+          if [ -n "$policy" ]; then
+            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
+          fi
+          magick -version
+      - name: Install Chromium
+        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - name: Run selected verification pack
+        env:
+          VERIFY_PACK: ${{ steps.plan.outputs.pack }}
+        run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane verify --shard 2 --jobs 2
+      - name: Require tracked checkout to remain clean
+        run: git diff --exit-code && git diff --cached --exit-code
+
+  verify:
+    name: verify
+    needs: [verify-1, verify-2]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require both verify workers to succeed
+        env:
+          SHARD_1_RESULT: ${{ needs.verify-1.result }}
+          SHARD_2_RESULT: ${{ needs.verify-2.result }}
+        run: |
+          test "$SHARD_1_RESULT" = success
+          test "$SHARD_2_RESULT" = success
 
   e2e-seams:
     name: e2e-seams

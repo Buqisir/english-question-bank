@@ -20,17 +20,24 @@ GitHub hook 672661674 was disabled and read back `active:false` at
 07:36:34Z. Old Orb/platform registration termination and inaccessible private
 queue/receipts remain unverified; do not claim their deletion or replay them.
 
-### E2E worker topology
+### Worker topology
 
-Required checks remain `verify` and `e2e`. The v2 workflow runs independent
+Required checks remain `verify` and `e2e`. The v3 workflow runs independent
+`verify-1` and `verify-2` (explicit disjoint shards of the selected verify lane),
 `e2e-seams` (all six fixed browser seams) and `e2e-render` (selected pack e2e
-lane) workers; `e2e` always runs after both and requires each result to be
-`success`. No protection settings change is needed. Inspect both workers as
-well as the required checks on natural PR and exact-main runs. Deployment and
-watcher readers recognize only the exact v2
-`{verify, e2e-seams, e2e-render, e2e}` job set; every job must succeed for
-authority. Readers ship with the workflow, so exact-main runs and PR merge refs
-use v2; rejecting v1 prevents a downgrade to two successful jobs.
+lane) workers. Each required check always runs after its two workers and requires
+each result to be `success`. The shard allocation is checked against the full
+verify registry before pack selection: new scripts need explicit assignment;
+missing, stale or duplicate allocations fail closed. No protection settings
+change is needed. Inspect all workers and required checks on natural PR and
+exact-main runs. Deployment and watcher readers recognize only the exact v3
+`{verify-1, verify-2, verify, e2e-seams, e2e-render, e2e}` job set; every job must
+succeed for authority. Historical v1/v2 shapes are rejected.
+
+Reader and workflow ship together. Deployment always fetches latest main, so the
+four-job run for `bc9a2d9d2a68ec4a76fd5195caf2f110e9697c15` is used by its
+matching old reader before v3 lands; once v3 lands, latest main has the new
+workflow and reader. Historical-main deployment is not supported or required.
 A source update alone does not prove the installed reader is current.
 
 ### Initial baseline (historical)

@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { classifyActionsChanges, planPullRequest, parseRiskAdvice, applyAgentChoice } from './ci-pr-plan.mjs'
+
+import { assertVerificationShardCoverage, verificationShards } from './lib/verificationShards.mjs'
 
 const identity = { head: 'a'.repeat(40), base: 'b'.repeat(40), pack: 'all' }
 const suggestion = { head: identity.head, base: identity.base, pack: 'ui', reason: 'Only local presentation changed.' }
@@ -104,20 +106,23 @@ const runnerTemp = mkdtempSync(path.join(tmpdir(), 'eqb-ci-bootstrap-'))
 const workflow = readFileSync(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8')
 const selectionShells = [...workflow.matchAll(/        run: \|\n(          plan=[\s\S]*?)\n      - name: Enable pinned pnpm/gu)]
   .map(match => match[1])
-assert.equal(selectionShells.length, 3, 'all isolated workers resolve the trusted natural-event pack')
+assert.equal(selectionShells.length, 4, 'all isolated workers resolve the trusted natural-event pack')
 assert(selectionShells.every(shell => shell === selectionShells[0]),
   'no worker may select a different pack or weaker identity check')
 const selectionShell = selectionShells[0]
 const jobEntries = [...workflow.slice(workflow.indexOf('\njobs:')).matchAll(/^  ([a-z][a-z0-9-]*):\n([\s\S]*?)(?=^  [a-z][a-z0-9-]*:|$(?![\s\S]))/gm)]
 const jobs = Object.fromEntries(jobEntries.map(([, name, body]) => [name, body]))
-assert.deepEqual(Object.keys(jobs), ['verify', 'e2e-seams', 'e2e-render', 'e2e'],
-  'preserve the exact v2 worker and required-check topology')
-const { verify: verifyJob, 'e2e-seams': seamsJob, 'e2e-render': renderJob, e2e: aggregateJob } = jobs
-assert(verifyJob.includes('--pack "$VERIFY_PACK" --lane verify --jobs 2'))
+assert.deepEqual(Object.keys(jobs), ['verify-1', 'verify-2', 'verify', 'e2e-seams', 'e2e-render', 'e2e'],
+  'preserve the exact v3 worker and required-check topology')
+const { 'verify-1': verifyJob, 'verify-2': verifyJob2, verify: verifyAggregateJob,
+  'e2e-seams': seamsJob, 'e2e-render': renderJob, e2e: aggregateJob } = jobs
+for (const [index, worker] of [verifyJob, verifyJob2].entries()) {
+  assert(worker.includes(`--pack "$VERIFY_PACK" --lane verify --shard ${index + 1} --jobs 2`))
+}
 assert(renderJob.includes('--pack "$VERIFY_PACK" --lane e2e --jobs 2'))
 assert(!seamsJob.includes('verify:all'), 'fixed seams do not repeat pack preflight or scripts')
 assert(!/continue-on-error:/.test(workflow), 'failures remain failures')
-for (const worker of [verifyJob, seamsJob, renderJob]) {
+for (const worker of [verifyJob, verifyJob2, seamsJob, renderJob]) {
   assert(!/needs:|^    if:/m.test(worker), 'workers run independently on every natural event')
   for (const setup of ['actions/checkout@v4', 'actions/setup-node@v4', 'fetch-depth: 0',
     'persist-credentials: false', 'pnpm -C app install --frozen-lockfile', 'npm --prefix server ci',
@@ -156,21 +161,60 @@ for (const seams of ['success', 'failure', 'cancelled', 'skipped', '']) {
     else assert.throws(runAggregate, `aggregation rejects ${seams || 'missing'}/${render || 'missing'}`)
   }
 }
+assert(verifyAggregateJob.includes('    name: verify\n'))
+assert(verifyAggregateJob.includes('    needs: [verify-1, verify-2]\n'))
+assert(verifyAggregateJob.includes('    if: ${{ always() }}\n'))
+assert(verifyAggregateJob.includes('SHARD_1_RESULT: ${{ needs.verify-1.result }}'))
+assert(verifyAggregateJob.includes('SHARD_2_RESULT: ${{ needs.verify-2.result }}'))
+const verifyAggregateShell = verifyAggregateJob.match(/        run: \|\n([\s\S]*)/u)?.[1]
+assert(verifyAggregateShell)
+for (const first of ['success', 'failure', 'cancelled', 'skipped', '']) {
+  for (const second of ['success', 'failure', 'cancelled', 'skipped', '']) {
+    const aggregate = () => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', verifyAggregateShell], {
+      env: { ...process.env, SHARD_1_RESULT: first, SHARD_2_RESULT: second }, stdio: 'pipe',
+    })
+    if (first === 'success' && second === 'success') aggregate()
+    else assert.throws(aggregate, `verify aggregate rejects ${first || 'missing'}/${second || 'missing'}`)
+  }
+}
 const systemInstall = job => job.match(/sudo apt-get install --yes [^\n]+/)?.[0]
 assert(systemInstall(verifyJob))
+assert.equal(systemInstall(verifyJob2), systemInstall(verifyJob))
 assert.equal(systemInstall(renderJob), systemInstall(verifyJob), 'render lane retains its system dependencies')
 assert(!systemInstall(seamsJob), 'browser-only seams use Playwright OS dependencies without the render toolchain')
 assert(renderJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
   'empty render partitions do not add system installation')
 const laneShell = renderJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Install verification system dependencies/u)?.[1]
 assert(laneShell, 'exercise the actual render lane planning shell')
-for (const pack of ['all', 'ui', 'feature', 'paper-data', 'import-paper']) {
-  const plan = lane => JSON.parse(execFileSync(process.execPath,
-    ['scripts/verify-ci.mjs', '--plan-json', '--pack', pack, '--lane', lane], { encoding: 'utf8' }))
-  const complete = plan('all').scripts
-  const partition = [...plan('verify').scripts, ...plan('e2e').scripts]
+const registry = JSON.parse(execFileSync(process.execPath, ['scripts/verify-ci.mjs', '--list-json'], { encoding: 'utf8' }))
+for (const pack of Object.keys(registry.packs)) {
+  const plan = (lane, shard = 'all') => JSON.parse(execFileSync(process.execPath,
+    ['scripts/verify-ci.mjs', '--plan-json', '--pack', pack, '--lane', lane, '--shard', shard], { encoding: 'utf8' }))
+  const complete = plan('all')
+  const verify = plan('verify')
+  const shards = ['1', '2'].map(shard => plan('verify', shard))
+  const verifyPartition = shards.flatMap(shard => shard.scripts)
+  assert.equal(new Set(verifyPartition).size, verifyPartition.length, `${pack}: no duplicate shard scripts`)
+  assert.deepEqual([...verifyPartition].sort(), [...verify.scripts].sort(), `${pack}: shards preserve the verify lane`)
+  for (const shard of shards) assert.deepEqual(shard.preflight, complete.preflight, 'each shard retains diff/build preflight')
+  const partition = [...verifyPartition, ...plan('e2e').scripts]
   assert.equal(new Set(partition).size, partition.length, `${pack}: no duplicate pack scripts`)
-  assert.deepEqual([...partition].sort(), [...complete].sort(), `${pack}: workers preserve the complete pack union`)
+  assert.deepEqual([...partition].sort(), [...complete.scripts].sort(), `${pack}: workers preserve the complete pack union`)
+  assert.deepEqual(complete.scripts, registry.packs[pack], 'local Full remains unpartitioned')
+}
+const allocated = Object.values(verificationShards).flat()
+assertVerificationShardCoverage(allocated)
+assert.throws(() => assertVerificationShardCoverage([...allocated, 'scripts/future-check.mjs']), /missing/,
+  'adding an unassigned registry script fails closed before execution')
+assert.throws(() => assertVerificationShardCoverage(allocated.slice(1)), /stale/,
+  'retired or moved scripts require explicit manifest maintenance')
+assert.throws(() => assertVerificationShardCoverage(allocated, { ...verificationShards, extra: [allocated[0]] }), /duplicates/)
+for (const args of [
+  ['--shard'], ['--shard', '3'], ['--shard', '1'], ['--lane', 'e2e', '--shard', '1'],
+  ['--lane', 'verify', '--shard', '1', '--shard', '2'], ['--lane', 'verify', '--shard', '1', '--shard'],
+]) {
+  assert.equal(spawnSync(process.execPath, ['scripts/verify-ci.mjs', '--plan-json', ...args]).status, 1,
+    `invalid shard args cannot silently omit coverage: ${args.join(' ')}`)
 }
 const bootstrap = (base, head, tested) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', selectionShell], {
   cwd: repository, stdio: 'pipe', env: {
