@@ -1016,11 +1016,12 @@ function figureSizes(paperId) {
 }
 
 const WRITING_SECTION = [
-  ['application', /^第[一二]节\s*[:：]?\s*(应用文|书面表达)/u],
-  ['continuation', /^第[一二]节\s*[:：]?\s*(读后续写|续写)/u],
+  ['application', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:应用文|书面表达)\s*[）)]|应用文|书面表达)/u],
+  ['continuation', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:读后续写|续写)\s*[）)]|读后续写|续写)/u],
 ]
-// Some answer keys head the samples only with "第一节（满分15分）" under "第四部分 写作".
-const WRITING_PART = /^第四部分\s*[:：]?\s*写作/u
+// Answer keys may number writing as the third part when listening is absent.
+// Some keys head the samples only with "第一节（满分15分）".
+const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
 // Some keys start their reading explanations immediately after the samples,
 // without another "第…部分" heading. That divider ends the key's writing scope.
@@ -1031,11 +1032,12 @@ const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解�
 export function writingSectionAfterPart(text) {
   const normalized = String(text).normalize('NFKC')
   if (!WRITING_PART.test(normalized)) return null
-  const rest = normalized.replace(/^第四部分[^\n)]*\)?/u, '').trim()
+  const rest = normalized.replace(/^第[三四]部分[^\n)]*\)?/u, '').trim()
   const bare = rest.match(BARE_WRITING_SECTION)
   return bare ? (bare[1] === '一' ? 'application' : 'continuation') : null
 }
 const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
+const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
@@ -1043,6 +1045,10 @@ const COMMENTARY_LINE = /^\p{Script=Han}/u
 const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
 const SALUTATION = /^Dear\s.+,$/u
 const CLOSING = /^(Yours|Best wishes|Best regards|Sincerely|Yours sincerely|Love)[^.]{0,20},$/iu
+
+function isEntryLabel(text) {
+  return ENTRY_LABEL.test(text || '') || WORD_COUNT_SAMPLE_LABEL.test(text || '')
+}
 
 function joinLines(lines) {
   return lines.reduce((text, line) => {
@@ -1123,7 +1129,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     // Only interpret it inside the already established writing part.
     const sectionText = inWriting && /^写作\s*[:：]?$/u.test(heading) && rest.length === 1
       ? rest[0].trim() : line.text
-    const isSampleLabel = text => ENTRY_LABEL.test(text || '') && ESSAY_LABEL.test(text || '')
+    const isSampleLabel = text => isEntryLabel(text) && ESSAY_LABEL.test(text || '')
     const mergedLabel = rest.length === 1 && isSampleLabel(rest[0].trim()) ? rest[0].trim() : null
     const bare = (inWriting || mergedLabel || isSampleLabel(lines[lineIndex + 1]?.text))
       && (mergedLabel ? heading : sectionText).normalize('NFKC').match(BARE_WRITING_SECTION)
@@ -1183,7 +1189,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       review.push({ itemId: line.itemId, issue: `${reason}; skipped until the next label or English line` })
     }
     for (const line of section.lines) {
-      if (ENTRY_LABEL.test(line.text)) {
+      if (isEntryLabel(line.text)) {
         skipping = false
         const kind = SCORING_LABEL.test(line.text) ? 'scoring' : ESSAY_LABEL.test(line.text) ? 'essays' : null
         if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }

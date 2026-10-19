@@ -200,6 +200,94 @@ function referencesFixture(texts, taskTypes = ['continuation']) {
   }] }] })
 }
 
+test('explicit writing sections accept Chinese and ASCII parentheses and retain plain headings', () => {
+  for (const [application, continuation] of [
+    ['第一节（应用文）', '第二节（读后续写）'],
+    ['第一节(应用文)', '第二节(读后续写)'],
+    ['第一节（书面表达）', '第二节（续写）'],
+    ['第一节(书面表达)', '第二节(续写)'],
+    ['第一节 应用文', '第二节 读后续写'],
+    ['第一节：书面表达', '第二节：续写'],
+  ]) {
+    const result = referencesFixture(['第四部分', application, '参考范文',
+      'We planted a small garden.', continuation, 'Possible Version',
+      'Mia returned with a shovel.'], ['application', 'continuation'])
+    assert.deepEqual(result.groups.map(g => g.essays.entries.map(e => e.paragraphs.map(p => p.text))),
+      [[['We planted a small garden.']], [['Mia returned with a shovel.']]], application)
+    assert.deepEqual(result.groups.map(g => g.essays.entries[0].sourceLabel),
+      ['参考范文', 'Possible Version'])
+  }
+})
+
+test('word-count Chinese sample labels preserve separate entries and exact source locators', () => {
+  for (const [first, second, story] of [[92, 91, 162], [105, 109, 224]]) {
+    const labels = [`参考范文一（${first}词）`, `参考范文二（${second}词）`, `参考范文（${story}词）`]
+    const result = referencesFixture(['第四部分', '第一节（应用文）',
+      labels[0], 'Our club meets on Friday.', labels[1], 'Please bring your own seeds.',
+      '第二节（读后续写）', labels[2], 'Leo opened the garden gate.'],
+    ['application', 'continuation'])
+    const entries = result.groups.flatMap(g => g.essays.entries)
+    assert.deepEqual(entries.map(e => e.sourceLabel), labels)
+    assert.deepEqual(entries.map(e => e.referenceId),
+      ['source-ref-app-1', 'source-ref-app-2', 'source-ref-cont-1'])
+    assert.deepEqual(entries.map(e => e.paragraphs.map(p => p.text)),
+      [['Our club meets on Friday.'], ['Please bring your own seeds.'], ['Leo opened the garden gate.']])
+    for (const [index, itemIndex] of [2, 4, 7].entries()) {
+      assert.deepEqual(entries[index].labelSource, {
+        documentSha256: 'abc',
+        locator: { kind: 'page_region', documentId: 'answers', page: 1,
+          region: { x: .1, y: Number((.15 + itemIndex * .025).toFixed(6)), width: .8, height: .02 } },
+      })
+      assert.deepEqual(entries[index].paragraphs[0].source, {
+        documentSha256: 'abc',
+        locator: { kind: 'page_region', documentId: 'answers', page: 1,
+          region: { x: .1, y: Number((.15 + (itemIndex + 1) * .025).toFixed(6)), width: .8, height: .02 } },
+      })
+      assert.equal(entries[index].authority, 'source_reference')
+    }
+  }
+})
+
+test('word-count sample labels establish bare writing sections without widening commentary labels', () => {
+  const result = referencesFixture(['第一节\n参考范文一（92词）', 'Our team made a poster.',
+    '参考范文二(109词)', 'We shared it at school.',
+    '参考范文三（100词）需要结合题意修改', '参考范文四（很多词）', '224',
+    '第二节', '参考范文(224词)', 'Nora carried the poster home.'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.map(e => e.sourceLabel)),
+    [['参考范文一（92词）', '参考范文二(109词)'], ['参考范文(224词)']])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.map(e => e.paragraphs.map(p => p.text))),
+    [[['Our team made a poster.'], ['We shared it at school.']], [['Nora carried the poster home.']]])
+})
+
+test('earlier parenthesized reading and grammar sections cannot establish writing references', () => {
+  const result = referencesFixture(['第二部分', '第一节（阅读理解）', 'Possible Version',
+    'The reading passage describes a garden.', '第三部分', '第二节(语法填空)',
+    '参考范文（224词）', 'The grammar exercise uses a short story.',
+    '第四部分 写作', '略'], ['application', 'continuation'])
+  for (const group of result.groups) {
+    assert.equal(group.essays.state, 'not_supplied')
+    assert.deepEqual(group.essays.entries, [])
+  }
+})
+
+test('third writing part establishes both bare sections without sample labels', () => {
+  const result = referencesFixture(['第二部分 语言运用', '第一节', '56. A',
+    '第三部分 写作（共两节，满分40分）', '第一节', 'Our club planted trees.',
+    '第二节', 'Mia returned to the garden.'], ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Our club planted trees.'], ['Mia returned to the garden.']])
+})
+
+test('third writing part may carry its first bare section in the same OCR item', () => {
+  const heading = '第三部分 写作（共两节，满分40分）\n第一节'
+  assert.equal(writingSectionAfterPart(heading), 'application')
+  const result = referencesFixture([heading, 'Our team brought seeds.',
+    '第二节', 'Leo opened the garden gate.'], ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Our team brought seeds.'], ['Leo opened the garden gate.']])
+})
+
 test('numbered source sample and scoring labels establish and preserve writing boundaries', () => {
   const result = referencesFixture(['第四部分', '第一节（满分15分）',
     '一、参考范文：', 'Dear Alex,', 'A source application.', '二、评分原则',
