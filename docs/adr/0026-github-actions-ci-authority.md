@@ -8,24 +8,34 @@
 
 Use `.github/workflows/verify.yml` on natural PR and main push events. GitHub
 Actions owns execution, logs, attempts and the `verify`/`e2e` checks. Together
-the two jobs run the base-classified pack on PRs and the complete registry on
-main; `e2e` also runs the six existing browser seams. There is no Amp CI webhook,
+the workers run the base-classified pack on PRs and the complete registry on
+main; `e2e` aggregates the two E2E workers, including all six existing browser
+seams. There is no Amp CI webhook,
 queue or serialized selection prerequisite. A read-only watcher can notify the Ship
 thread, but neither a notification nor its absence changes the Checks.
 PRs still need current-main ancestry and strict/up-to-date protection.
 
-The selected pack is partitioned into disjoint `verify` and `e2e` lanes on
-separate runner workspaces. Both resolve the same immutable event through the
-same trusted-base planner; lane selection only assigns work, never changes
-risk or pack selection. Six whole render-heavy scripts run on the previously
-shorter `e2e` runner, retaining their internal stateful order. Local Full remains
-unpartitioned. Both required jobs must succeed, and either lane's test failure
-fails its job. There are no additional job names, matrix skips, shared render
-directories or changes to branch protection/deployment evidence readers.
+The selected pack is partitioned into disjoint `verify` and `e2e` lanes.
+Three independent runner workspaces resolve the same immutable event through
+the same trusted-base planner; lane selection never changes risk or pack selection.
+`verify` retains its lane and `--jobs 2`. `e2e-seams` runs all six fixed browser
+seams in their existing order. `e2e-render` runs the selected pack's e2e lane
+with `--jobs 2`, retaining render resource locks and script order. Browser seams
+install Chromium with its OS dependencies; only a nonempty render lane installs
+the broader render toolchain and runs its existing diff/build preflight. The
+seams worker does not add another pack preflight. Local Full remains unpartitioned.
+The required `e2e` job uses `needs: [e2e-seams, e2e-render]` and `always()`, then
+explicitly requires each worker result to be `success`. Failed, cancelled,
+skipped or missing worker results fail that check. Both required checks remain
+`verify` and `e2e`; no branch-protection change or matrix skip is introduced.
 
 The Deployment reader validates the fixed repository/workflow, native App,
-natural main push, exact current main SHA, latest attempt and both successful
-jobs. It rechecks main before dispatch. A manual diagnostic, same-name foreign
+natural main push, exact current main SHA and latest attempt. It accepts only
+one exact versioned job topology: v1 `{verify, e2e}` for historical runs, or v2
+`{verify, e2e-seams, e2e-render, e2e}`. Every job must complete successfully;
+unknown, missing or duplicate jobs fail closed. The reader rechecks main before
+dispatch. The read-only Ship watcher recognizes the same exact topologies and
+reports unsuccessful workers. A manual diagnostic, same-name foreign
 workflow, old success, skipped job or pending attempt is not authority.
 
 ### Risk routing and notification

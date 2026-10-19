@@ -9,7 +9,10 @@ const REPO = 'Buqisir/english-question-bank'
 const APP = 15368
 const WORKFLOW_PATH = '.github/workflows/verify.yml'
 const WORKFLOW_NAME = 'Verify'
-const REQUIRED_JOBS = ['e2e', 'verify']
+const JOB_TOPOLOGIES = {
+  v1: ['e2e', 'verify'],
+  v2: ['e2e', 'e2e-render', 'e2e-seams', 'verify'],
+}
 const SHA = /^[a-f0-9]{40}$/u
 const TERMINAL = new Set(['success', 'failure', 'cancelled', 'timed_out', 'action_required', 'neutral', 'skipped', 'stale', 'startup_failure'])
 const exec = promisify(execFile)
@@ -135,9 +138,10 @@ async function readLatestWorkflow({ head, event, pullRequest, headRef }, readJso
     if (!positiveInteger(job?.id) || jobIds.has(job.id)) throw new Error('Ambiguous workflow job identity')
     jobIds.add(job.id)
     if (job.run_id !== runId || job.run_attempt !== attempt || job.head_sha !== head
-      || !REQUIRED_JOBS.includes(job.name)) throw new Error('Unknown workflow job identity')
+      || !JOB_TOPOLOGIES.v2.includes(job.name)) throw new Error('Unknown workflow job identity')
   }
-  if (jobs.map(job => job.name).sort().join('\n') !== REQUIRED_JOBS.join('\n')) {
+  if (!Object.values(JOB_TOPOLOGIES).some(names =>
+    jobs.map(job => job.name).sort().join('\n') === names.join('\n'))) {
     throw new Error('Required workflow jobs are missing or ambiguous')
   }
   if (detail.status !== 'completed' || suite.status !== 'completed'

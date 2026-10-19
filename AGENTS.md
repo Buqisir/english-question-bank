@@ -143,11 +143,13 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 ## GitHub Actions CI authority
 
 - `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
-  `main`. Stable jobs `verify` and `e2e` partition the Agent-selected existing
-  pack across isolated runners within trusted-base boundaries; Full remains
+  `main`. Stable required checks remain `verify` and `e2e`. Independent workers
+  `verify`, `e2e-seams` and `e2e-render` use isolated runners within trusted-base
+  boundaries; `e2e` aggregates both E2E workers. Full remains
   required for paper/security/shared/high/unknown risks, invalid or missing
-  exact-head/base advice, and main. `e2e` also runs all six browser seams.
-  Both jobs must succeed; their disjoint lanes must cover the complete selected
+  exact-head/base advice, and main. `e2e-seams` runs all six browser seams;
+  `e2e-render` runs the selected pack's e2e lane. Both required checks and all
+  workers must succeed; their disjoint lanes must cover the complete selected
   pack. Local `verify:all` remains unpartitioned. No path filter, skipped job,
   local report, manual run or Amp Check substitutes for either job.
   See ADR-0026 and the cutover runbook.
@@ -165,7 +167,9 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   An existing Ship Goal covers fresh verification and ordinary protected merge
   after a green notice; diagnose failures before rerunning and retain attempts.
 - Deployment accepts only the exact-main natural Actions run and its two
-  successful jobs through the deployment reader. Pending, failed, missing,
+  successful required checks through the deployment reader, which accepts only
+  exact v1 `{verify, e2e}` or v2 `{verify, e2e-seams, e2e-render, e2e}` job sets
+  with every job successful. Pending, failed, missing,
   wrong-SHA, wrong-workflow or ambiguous evidence fails closed.
 - The old Amp CI webhook/controller, serialized eligibility, Amp-only watcher,
   Sentinel/Discovery and Action-wake are not the new authority. Do not start,

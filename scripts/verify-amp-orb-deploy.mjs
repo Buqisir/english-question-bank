@@ -400,6 +400,27 @@ assert(
   'only the exact natural main workflow and both successful jobs authorize deployment',
 )
 
+const v2Jobs = ['verify', 'e2e-seams', 'e2e-render', 'e2e'].map((name, index) =>
+  actionsJob(newSha, name, { id: 60 + index }))
+const v2Authority = assertGitHubActionsDeploymentRun(
+  actionsEvidence(newSha, { jobs: v2Jobs }), newSha, AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+)
+assert(v2Authority.jobs.length === 4, 'v2 exact sharded topology succeeds; historical v1 remains readable')
+const invalidV2Jobs = [
+  ...['e2e-seams', 'e2e-render', 'e2e'].map(name => [`v2 missing ${name}`, v2Jobs.filter(job => job.name !== name)]),
+  ['v2 unknown job', [...v2Jobs, actionsJob(newSha, 'other', { id: 70 })]],
+  ['v2 duplicate job name', [...v2Jobs, actionsJob(newSha, 'e2e-seams', { id: 70 })]],
+  ...['e2e-seams', 'e2e-render'].flatMap(name => ['failure', 'cancelled', 'skipped'].map(conclusion =>
+    [`v2 ${name} ${conclusion}`, v2Jobs.map(job => job.name === name ? { ...job, conclusion } : job)])),
+]
+for (const [label, jobs] of invalidV2Jobs) {
+  let rejected = false
+  try {
+    assertGitHubActionsDeploymentRun(actionsEvidence(newSha, { jobs }), newSha, AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID)
+  } catch { rejected = true }
+  assert(rejected, `${label} native Actions evidence fails closed`)
+}
+
 const validActionsEvidence = actionsEvidence(newSha)
 for (const [label, evidence] of [
   ['missing run', { workflow_runs: [], run_attempt: null, check_suite: null, jobs: [] }],

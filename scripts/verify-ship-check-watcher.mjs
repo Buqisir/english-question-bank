@@ -121,6 +121,27 @@ assert.equal(success.run.attempt, 1)
 assert.equal(success.run.conclusion, 'success')
 assert.deepEqual(success.run.jobs.map(({ name }) => name).sort(), ['e2e', 'verify'])
 
+const v2Jobs = ['verify', 'e2e-seams', 'e2e-render', 'e2e'].map((name, index) => job(name, { id: 60 + index }))
+assert.equal((await readShipCheck(target, actionsReader({ jobs: v2Jobs }))).run.jobs.length, 4)
+assert.equal((await readShipMain({ head }, mainReader({ jobs: v2Jobs }))).run.jobs.length, 4)
+for (const jobs of [
+  ...['e2e-seams', 'e2e-render', 'e2e'].map(name => v2Jobs.filter(job => job.name !== name)),
+  [...v2Jobs, job('unknown', { id: 70 })],
+  [...v2Jobs, job('e2e-seams', { id: 70 })],
+]) await assert.rejects(readShipCheck(target, actionsReader({ jobs })), undefined, 'reject incomplete or ambiguous v2 topology')
+for (const name of ['e2e-seams', 'e2e-render']) {
+  for (const conclusion of ['failure', 'cancelled', 'skipped']) {
+    const jobs = v2Jobs.map(job => job.name === name ? { ...job, conclusion } : job)
+    await assert.rejects(readShipCheck(target, actionsReader({ jobs })), /terminal result/,
+      'a green aggregate/run cannot conceal an unsuccessful worker')
+    const result = await readShipCheck(target, actionsReader({
+      runs: [run({ conclusion })], jobs,
+    }))
+    assert.equal(result.run.conclusion, conclusion)
+    assert.match(result.run.summary, new RegExp(`${name}: ${conclusion}`))
+  }
+}
+
 const endpoints = []
 await readShipCheck(target, actionsReader({ onRead: endpoint => endpoints.push(endpoint) }))
 assert.equal(endpoints.length, 10, 'terminal evidence uses two PR/run/attempt/suite/jobs snapshots')

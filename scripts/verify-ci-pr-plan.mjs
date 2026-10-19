@@ -104,32 +104,74 @@ const runnerTemp = mkdtempSync(path.join(tmpdir(), 'eqb-ci-bootstrap-'))
 const workflow = readFileSync(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8')
 const selectionShells = [...workflow.matchAll(/        run: \|\n(          plan=[\s\S]*?)\n      - name: Enable pinned pnpm/gu)]
   .map(match => match[1])
-assert.equal(selectionShells.length, 2, 'both isolated runners resolve the trusted natural-event pack')
-assert.equal(selectionShells[0], selectionShells[1], 'neither runner may select a different pack or weaker identity check')
+assert.equal(selectionShells.length, 3, 'all isolated workers resolve the trusted natural-event pack')
+assert(selectionShells.every(shell => shell === selectionShells[0]),
+  'no worker may select a different pack or weaker identity check')
 const selectionShell = selectionShells[0]
-assert.deepEqual([...workflow.slice(workflow.indexOf('\njobs:')).matchAll(/^  ([a-z][a-z0-9-]*):$/gm)].map(match => match[1]),
-  ['verify', 'e2e'], 'preserve the exact two-job Ship/deployment authority topology')
-const [verifyJob, e2eJob] = workflow.slice(workflow.indexOf('\n  verify:')).split('\n  e2e:')
+const jobEntries = [...workflow.slice(workflow.indexOf('\njobs:')).matchAll(/^  ([a-z][a-z0-9-]*):\n([\s\S]*?)(?=^  [a-z][a-z0-9-]*:|$(?![\s\S]))/gm)]
+const jobs = Object.fromEntries(jobEntries.map(([, name, body]) => [name, body]))
+assert.deepEqual(Object.keys(jobs), ['verify', 'e2e-seams', 'e2e-render', 'e2e'],
+  'preserve the exact v2 worker and required-check topology')
+const { verify: verifyJob, 'e2e-seams': seamsJob, 'e2e-render': renderJob, e2e: aggregateJob } = jobs
 assert(verifyJob.includes('--pack "$VERIFY_PACK" --lane verify --jobs 2'))
-assert(e2eJob.includes('--pack "$VERIFY_PACK" --lane e2e --jobs 2'))
-assert(!/continue-on-error:|needs:|^    if:/m.test(workflow), 'both jobs run independently and failures remain failures')
-assert(e2eJob.includes("if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}"),
-  'a failed original E2E must not prevent collecting the transferred lane')
-assert.deepEqual([...e2eJob.matchAll(/run: node scripts\/([^\s]+\.mjs)/g)].map(match => match[1]), [
+assert(renderJob.includes('--pack "$VERIFY_PACK" --lane e2e --jobs 2'))
+assert(!seamsJob.includes('verify:all'), 'fixed seams do not repeat pack preflight or scripts')
+assert(!/continue-on-error:/.test(workflow), 'failures remain failures')
+for (const worker of [verifyJob, seamsJob, renderJob]) {
+  assert(!/needs:|^    if:/m.test(worker), 'workers run independently on every natural event')
+  for (const setup of ['actions/checkout@v4', 'actions/setup-node@v4', 'fetch-depth: 0',
+    'persist-credentials: false', 'pnpm -C app install --frozen-lockfile', 'npm --prefix server ci',
+    'pnpm -C app exec playwright install --with-deps --no-shell chromium']) assert(worker.includes(setup), setup)
+}
+assert(renderJob.includes("if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}"),
+  'render setup and nonempty lane are required for execution')
+const seamScripts = [
   'verify-draft-pagination-renderer.mjs',
   'verify-draft-pagination-dom-contract.mjs',
   'verify-a3-imposition.mjs',
   'verify-reorder-suggest.mjs',
   'verify-paper-normalization-grammar-fill-browser.mjs',
   'smoke-golden-path.mjs',
-], 'all six existing E2E seams remain intact and in order')
+]
+assert.deepEqual([...seamsJob.matchAll(/run: node scripts\/([^\s]+\.mjs)/g)].map(match => match[1]), seamScripts,
+  'all six existing E2E seams remain intact and in order on the seams worker')
+for (const script of seamScripts) {
+  assert.equal(workflow.split(`run: node scripts/${script}`).length - 1, 1, `${script} executes exactly once`)
+  const seamStep = seamsJob.split('      - name:').find(step => step.includes(`run: node scripts/${script}`))
+  assert(seamStep && !/\bif:/.test(seamStep), `${script} is mandatory, never conditionally skipped`)
+}
+assert(aggregateJob.includes('    name: e2e\n'))
+assert(aggregateJob.includes('    needs: [e2e-seams, e2e-render]\n'))
+assert(aggregateJob.includes('    if: ${{ always() }}\n'))
+assert(aggregateJob.includes('SEAMS_RESULT: ${{ needs.e2e-seams.result }}'))
+assert(aggregateJob.includes('RENDER_RESULT: ${{ needs.e2e-render.result }}'))
+const aggregateShell = aggregateJob.match(/        run: \|\n([\s\S]*)/u)?.[1]
+assert(aggregateShell, 'exercise the actual required-check aggregation shell')
+for (const seams of ['success', 'failure', 'cancelled', 'skipped', '']) {
+  for (const render of ['success', 'failure', 'cancelled', 'skipped', '']) {
+    const runAggregate = () => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', aggregateShell], {
+      env: { ...process.env, SEAMS_RESULT: seams, RENDER_RESULT: render }, stdio: 'pipe',
+    })
+    if (seams === 'success' && render === 'success') runAggregate()
+    else assert.throws(runAggregate, `aggregation rejects ${seams || 'missing'}/${render || 'missing'}`)
+  }
+}
 const systemInstall = job => job.match(/sudo apt-get install --yes [^\n]+/)?.[0]
 assert(systemInstall(verifyJob))
-assert.equal(systemInstall(e2eJob), systemInstall(verifyJob), 'both render lanes receive the same system dependencies')
-assert(e2eJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
-  'empty render partitions do not add system installation to reduced-pack E2Es')
-const laneShell = e2eJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Install verification system dependencies/u)?.[1]
+assert.equal(systemInstall(renderJob), systemInstall(verifyJob), 'render lane retains its system dependencies')
+assert(!systemInstall(seamsJob), 'browser-only seams use Playwright OS dependencies without the render toolchain')
+assert(renderJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
+  'empty render partitions do not add system installation')
+const laneShell = renderJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Install verification system dependencies/u)?.[1]
 assert(laneShell, 'exercise the actual render lane planning shell')
+for (const pack of ['all', 'ui', 'feature', 'paper-data', 'import-paper']) {
+  const plan = lane => JSON.parse(execFileSync(process.execPath,
+    ['scripts/verify-ci.mjs', '--plan-json', '--pack', pack, '--lane', lane], { encoding: 'utf8' }))
+  const complete = plan('all').scripts
+  const partition = [...plan('verify').scripts, ...plan('e2e').scripts]
+  assert.equal(new Set(partition).size, partition.length, `${pack}: no duplicate pack scripts`)
+  assert.deepEqual([...partition].sort(), [...complete].sort(), `${pack}: workers preserve the complete pack union`)
+}
 const bootstrap = (base, head, tested) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', selectionShell], {
   cwd: repository, stdio: 'pipe', env: {
     ...process.env, BASE_SHA: base, HEAD_SHA: head, GITHUB_SHA: tested,
