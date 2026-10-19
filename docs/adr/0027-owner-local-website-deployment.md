@@ -19,6 +19,12 @@ Owner 说 `部署最新版` 即授权该次网站代码部署 Goal，包括诊�
 scripts/local-deploy.sh deploy --owner-said-deploy-latest
 ```
 
+包装脚本在读取配置、钥匙串或发起网络请求之前，要求当前分支为 `main`、
+工作区干净（包括未跟踪文件），且 `HEAD = origin/main`。不满足时 fail closed，
+报告实际状态并给出带仓库路径的 `switch main`、`fetch origin`、
+`merge --ff-only origin/main` 或 `status --short` 命令；不自动切分支、
+丢弃改动或修复分叉。原 CLI 随后仍 fetch、fast-forward 并核对 GitHub 当前 main。
+
 非机密配置在 `~/.config/eqbank/deploy/env`（`QUESTION_BANK_DEPLOY_SSH_HOST`）
 和 `known_hosts`（钉住的 ED25519 主机公钥）。可用 `EQB_DEPLOY_CONFIG`
 覆盖配置目录。仓库不记录主机地址。
@@ -58,10 +64,14 @@ FlClash TUN 代理会在到服务器 22 端口的 SSH 握手前断开连接。�
 `EQB_DEPLOY_DIRECT_INTERFACE` 可指定其他网卡；值为 `none` 时不用 SSH shim。
 主机公钥钉住、forced command 与 SSH 其他限制保持不变。
 
-GitHub API 经代理偶发 EOF。包装脚本只对没有写请求参数的 `gh api` 重试，
-最多 4 次，间隔 2 秒；失败尝试的 stdout 不进入成功结果。含
-`-X`、`--method`、`-f`、`-F`、`--field`、`--raw-field` 或 `--input`
-的调用，以及其他 `gh` 命令，直接执行一次。SSH 与部署请求绝不自动重试。
+GitHub API 经代理偶发 EOF。包装脚本只对没有写请求参数的 REST `gh api`
+重试，包括明确指定 `-X GET` / `--method GET` 的请求；最多 4 次，间隔 2 秒。
+失败尝试的 stdout 和 stderr 不进入成功结果；耗尽时只输出最后一次 stderr，
+保留其退出码。含非 GET method、`-f`、`-F`、`--field`、`--raw-field` 或
+`--input` 的调用，以及 GraphQL 与其他 `gh` 命令，直接执行一次；
+不尝试从任意 GraphQL 文本推断其是否只读。现有部署入口的 main ref、workflow
+runs、run attempt、check suite 和 jobs（含分页与重新核验）均使用 REST GET。
+SSH 与部署请求绝不自动重试。
 临时 shim 与 gh 输出文件都位于本次调用的专属临时根目录内并在结束时清理，
 真实 `gh` 路径在生成 shim 前固定。
 
