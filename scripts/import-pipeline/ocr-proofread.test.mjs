@@ -200,6 +200,18 @@ function referencesFixture(texts, taskTypes = ['continuation']) {
   }] }] })
 }
 
+test('Arabic-numbered Chinese story commentary does not become an unlabeled reference', () => {
+  const result = referencesFixture([
+    '第四部分 写作', '第二节', '1. 故事概述', '女孩误会了邻居，随后主动道歉。',
+    '2、续写方向', '续写应呼应门口的花盆。',
+    '参考范文', 'Possible Version 1', 'Mia knocked gently and waited.',
+  ])
+  assert.equal(result.groups[0].essays.entries.length, 1)
+  assert.equal(result.groups[0].essays.entries[0].sourceLabel, '参考范文')
+  assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text),
+    ['Possible Version 1', 'Mia knocked gently and waited.'])
+})
+
 test('captures three official examples per task and stops at each numbered student-script column', () => {
   const applicationLabels = ['【示例一】', '【示例二】建议调整活动安排', '【示例三】说明另一种安排']
   const continuationLabels = ['【示例一】描写共同劳动', '【示例二】描写意外收获', '【示例三】描写再次相遇']
@@ -404,4 +416,64 @@ test('an adjacent sample label establishes writing context without a part headin
   assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text),
     ['Dear Daniel,', 'A source application.'])
   assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), ['A source story.'])
+})
+
+test('task scoring headings capture separately labelled official essays without teaching notes', () => {
+  const labels = ['范文一（83词）：', '范文二(97词)：', '范文1：', '范文2']
+  const texts = ['第四部分 写作（共两节，满分40分）', '应用文评分细则',
+    '写作 第一节（满分15分）', '请介绍校园花园。', '一、参考范文',
+    labels[0], 'Dear Robin,', 'We will open the garden on Monday.', 'Yours,', 'Alex',
+    labels[1], 'Dear Robin,', 'Please bring a notebook on Tuesday.', 'Yours,', 'Alex',
+    '二、内容要点', '1.【语篇解读】介绍活动安排。', '范文分析：注意表达清楚。',
+    '读后续写评分细则：', '一、.参考范文', labels[2], 'Rae found a packet of seeds.',
+    '范文分析', '这是一段中文讲解。', labels[3], 'A new leaf appeared by the window.',
+    '二、评分原则（采取双评）', '1. 本题总分为25分。']
+  const result = referencesFixture(texts, ['application', 'continuation'])
+  const essays = result.groups.flatMap(group => group.essays.entries)
+  assert.deepEqual(essays.map(entry => entry.sourceLabel), labels)
+  assert.deepEqual(essays.map(entry => entry.paragraphs.map(paragraph => paragraph.text)),
+    [['Dear Robin,', 'We will open the garden on Monday.', 'Yours,', 'Alex'],
+      ['Dear Robin,', 'Please bring a notebook on Tuesday.', 'Yours,', 'Alex'],
+      ['Rae found a packet of seeds.'], ['A new leaf appeared by the window.']])
+  for (const [index, label] of labels.entries()) {
+    const labelIndex = texts.indexOf(label)
+    assert.equal(essays[index].authority, 'source_reference')
+    assert.deepEqual(essays[index].labelSource, {
+      documentSha256: 'abc',
+      locator: { kind: 'page_region', documentId: 'answers', page: 1,
+        region: { x: .1, y: Number((.15 + labelIndex * .025).toFixed(6)), width: .8, height: .02 } },
+    })
+    assert.equal(essays[index].paragraphs[0].source.locator.page, 1)
+    assert.equal(essays[index].paragraphs[0].source.documentSha256, 'abc')
+  }
+})
+
+test('writing-prefixed bare sections cannot open writing scope in reading or grammar', () => {
+  const result = referencesFixture(['第二部分 阅读', '写作 第一节（满分15分）',
+    '参考范文', 'A quoted reading example.', '第三部分 语言运用',
+    '写作 第二节（满分25分）', '参考范文', 'A quoted grammar example.',
+    '第四部分 写作', '略'], ['application', 'continuation'])
+  assert(result.groups.every(group => group.essays.state === 'not_supplied'))
+})
+
+test('mentions of writing tasks in commentary cannot establish task scoring scope', () => {
+  const result = referencesFixture(['本篇应用文评分细则需要另行讨论。', '参考范文',
+    'A quoted teaching example.', '读后续写评分细则分析', '范文1',
+    'Another quoted teaching example.', '第四部分 写作', '略'],
+  ['application', 'continuation'])
+  assert(result.groups.every(group => group.essays.state === 'not_supplied'))
+})
+
+test('repeated task scoring headings preserve previously captured source essays', () => {
+  const result = referencesFixture(['应用文评分细则：', '范文一（83词）',
+    'Our garden needs a new sign.', '应用文评分细则', '评分原则', '1. 注意内容完整。',
+    '读后续写评分细则', '范文1', 'Rae painted the sign.',
+    '读后续写评分细则：', '评分细则', '1. 注意情节连贯。'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(group => group.essays.entries.map(entry => entry.sourceLabel)),
+    [['范文一（83词）'], ['范文1']])
+  assert.deepEqual(result.groups.map(group => group.essays.entries.flatMap(entry => entry.paragraphs.map(p => p.text))),
+    [['Our garden needs a new sign.'], ['Rae painted the sign.']])
+  assert.deepEqual(result.groups.map(group => group.scoring.entries.flatMap(entry => entry.paragraphs.map(p => p.text))),
+    [['1. 注意内容完整。'], ['1. 注意情节连贯。']])
 })

@@ -1019,6 +1019,10 @@ const WRITING_SECTION = [
   ['application', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:应用文|书面表达)\s*[）)]|应用文|书面表达)/u],
   ['continuation', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:读后续写|续写)\s*[）)]|读后续写|续写)/u],
 ]
+const WRITING_SCORING_SECTION = [
+  ['application', /^应用文评分细则\s*[:：]?$/u],
+  ['continuation', /^读后续写评分细则\s*[:：]?$/u],
+]
 // Answer keys may number writing as the third part when listening is absent.
 // Some keys head the samples only with "第一节（满分15分）".
 const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
@@ -1038,11 +1042,12 @@ export function writingSectionAfterPart(text) {
 }
 const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
+const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
 const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
-const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han})/u
+const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
 const STUDENT_SCRIPT_BOUNDARY = /^[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*样卷\s*[:：]?$/u
 const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
 const SALUTATION = /^Dear\s.+,$/u
@@ -1050,7 +1055,7 @@ const CLOSING = /^(Yours|Best wishes|Best regards|Sincerely|Yours sincerely|Love
 
 function isEntryLabel(text) {
   return ENTRY_LABEL.test(text || '') || WORD_COUNT_SAMPLE_LABEL.test(text || '')
-    || EXAMPLE_SAMPLE_LABEL.test(text || '')
+    || NUMBERED_SAMPLE_LABEL.test(text || '') || EXAMPLE_SAMPLE_LABEL.test(text || '')
 }
 
 function joinLines(lines) {
@@ -1130,14 +1135,23 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     const [heading, ...rest] = line.text.split('\n')
     // OCR may repeat the writing label above a bare section in the same item.
     // Only interpret it inside the already established writing part.
-    const sectionText = inWriting && /^写作\s*[:：]?$/u.test(heading) && rest.length === 1
-      ? rest[0].trim() : line.text
+    const sectionText = inWriting
+      ? (/^写作\s*[:：]?$/u.test(heading) && rest.length === 1
+        ? rest[0].trim() : line.text.replace(/^写作\s+(?=第[一二]节)/u, ''))
+      : line.text
     const isSampleLabel = text => isEntryLabel(text) && ESSAY_LABEL.test(text || '')
     const mergedLabel = rest.length === 1 && isSampleLabel(rest[0].trim()) ? rest[0].trim() : null
     const bare = (inWriting || mergedLabel || isSampleLabel(lines[lineIndex + 1]?.text))
       && (mergedLabel ? heading : sectionText).normalize('NFKC').match(BARE_WRITING_SECTION)
     const started = bare ? [bare[1] === '一' ? 'application' : 'continuation']
       : WRITING_SECTION.find(([, pattern]) => pattern.test(line.text))
+    const scoringSection = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(line.text))
+    if (scoringSection) {
+      current = sections.get(scoringSection[0]) || { taskType: scoringSection[0], lines: [] }
+      sections.set(scoringSection[0], current)
+      inWriting = true
+      continue
+    }
     if (started) {
       current = { taskType: started[0], lines: [] }
       sections.set(started[0], current)
