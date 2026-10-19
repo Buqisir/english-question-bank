@@ -1035,9 +1035,16 @@ const STEP_ORDER = [
 function redoFrom(ctx, name) {
   const index = STEP_ORDER.indexOf(name)
   if (index === -1) fail(`--redo-from 只接受：${STEP_ORDER.join(', ')}`)
+  const redoPagination = index <= STEP_ORDER.indexOf('pagination-run')
+  const paginationJobs = Object.entries(ctx.state.background).filter(([key]) => key.startsWith('pagination-'))
+  if (redoPagination && paginationJobs.some(([, job]) => alive(job.pid))) fail('分页仍在运行；待其退出后再重做')
   for (const later of STEP_ORDER.slice(index)) delete ctx.state.steps[later]
   delete ctx.state.data.status
   delete ctx.state.data.localReport
+  if (redoPagination) {
+    archive(ctx, path.join(ctx.fast, 'pagination'))
+    for (const [key] of paginationJobs) delete ctx.state.background[key]
+  }
   // A retained listening review pins its Candidate digest and makes the projection refuse the
   // re-derived Candidate, so installed sidecars of forgotten steps move aside up front.
   for (const [owner, file] of [['summaries', 'paragraph-summaries-v1.json'], ['search-metadata', 'public-search-metadata-v1.json'],
