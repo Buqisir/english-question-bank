@@ -1038,16 +1038,19 @@ export function writingSectionAfterPart(text) {
 }
 const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
+const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
-const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version/iu
+const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
-const COMMENTARY_LINE = /^\p{Script=Han}/u
+const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han})/u
+const STUDENT_SCRIPT_BOUNDARY = /^[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*样卷\s*[:：]?$/u
 const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
 const SALUTATION = /^Dear\s.+,$/u
 const CLOSING = /^(Yours|Best wishes|Best regards|Sincerely|Yours sincerely|Love)[^.]{0,20},$/iu
 
 function isEntryLabel(text) {
   return ENTRY_LABEL.test(text || '') || WORD_COUNT_SAMPLE_LABEL.test(text || '')
+    || EXAMPLE_SAMPLE_LABEL.test(text || '')
 }
 
 function joinLines(lines) {
@@ -1189,6 +1192,11 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       review.push({ itemId: line.itemId, issue: `${reason}; skipped until the next label or English line` })
     }
     for (const line of section.lines) {
+      // Student scripts end only this task's official-reference capture.
+      if (STUDENT_SCRIPT_BOUNDARY.test(line.text)) {
+        review.push({ itemId: line.itemId, issue: 'student-script column ends this writing section’s reference capture' })
+        break
+      }
       if (isEntryLabel(line.text)) {
         skipping = false
         const kind = SCORING_LABEL.test(line.text) ? 'scoring' : ESSAY_LABEL.test(line.text) ? 'essays' : null

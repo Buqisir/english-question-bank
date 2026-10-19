@@ -200,6 +200,57 @@ function referencesFixture(texts, taskTypes = ['continuation']) {
   }] }] })
 }
 
+test('captures three official examples per task and stops at each numbered student-script column', () => {
+  const applicationLabels = ['【示例一】', '【示例二】建议调整活动安排', '【示例三】说明另一种安排']
+  const continuationLabels = ['【示例一】描写共同劳动', '【示例二】描写意外收获', '【示例三】描写再次相遇']
+  const result = referencesFixture([
+    '第一节 应用文', '(一)考查目标与写作情境', '本题要求介绍社团活动。',
+    '（二）评分说明', '注意表达清楚。', '(四)作答示例',
+    applicationLabels[0], 'Dear Sam,', 'Our club will plant herbs.',
+    applicationLabels[1], 'Dear Sam,', 'Please join our garden walk.',
+    applicationLabels[2], 'Dear Sam,', 'We could visit the greenhouse.',
+    '(五)样卷', '【示例四】学生作答', 'Dear Sam,', 'This student script must stay outside the references.',
+    '第二节 读后续写', '（一）考查目标与写作情境', '续写需呼应故事。',
+    '（四）作答示例', continuationLabels[0], 'Ada brought a watering can.',
+    continuationLabels[1], 'A tiny green shoot appeared.',
+    continuationLabels[2], 'They met beside the greenhouse.',
+    '（五）样卷', '参考范文', 'This graded student story must also be excluded.', '评语：衔接自然。',
+  ], ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.map(e => e.sourceLabel)),
+    [applicationLabels, continuationLabels])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.map(e => e.paragraphs.map(p => p.text))),
+    [[['Dear Sam,', 'Our club will plant herbs.'], ['Dear Sam,', 'Please join our garden walk.'],
+      ['Dear Sam,', 'We could visit the greenhouse.']],
+    [['Ada brought a watering can.'], ['A tiny green shoot appeared.'], ['They met beside the greenhouse.']]])
+  assert.deepEqual(result.groups.map(g => g.scoring.entries), [[], []])
+  for (const group of result.groups) {
+    assert.equal(group.essays.state, 'captured')
+    assert(group.essays.entries.every(entry => entry.paragraphs.length > 0))
+  }
+})
+
+test('example recognition keeps English numbered text, inline glosses and existing source labels', () => {
+  const result = referencesFixture(['第三部分 写作', '第一节', '参考范文（80词）',
+    'Dear Sam,', '1. Bring seeds（种子） for the garden.', '二、评分原则', '1. 本题总分为15分。',
+    '第二节', 'Possible Version', 'A Day in the Garden', '【示例一】An English sentence follows.',
+    'The children found a seedling（幼苗）.', '(1) They watered it together.',
+    '【示例二】另一种结尾', 'They returned the next morning.'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.map(e => e.sourceLabel)),
+    [['参考范文（80词）'], ['Possible Version', '【示例二】另一种结尾']])
+  assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text),
+    ['Dear Sam,', '1. Bring seeds（种子） for the garden.'])
+  assert.deepEqual(result.groups[0].scoring.entries[0].paragraphs.map(p => p.text),
+    ['1. 本题总分为15分。'])
+  const story = result.groups[1].essays.entries[0].paragraphs.map(p => p.text).join(' ')
+  for (const text of ['A Day in the Garden', '【示例一】An English sentence follows.',
+    'The children found a seedling（幼苗）.', '(1) They watered it together.']) {
+    assert(story.includes(text), text)
+  }
+  assert.deepEqual(result.groups[1].essays.entries[1].paragraphs.map(p => p.text),
+    ['They returned the next morning.'])
+})
+
 test('explicit writing sections accept Chinese and ASCII parentheses and retain plain headings', () => {
   for (const [application, continuation] of [
     ['第一节（应用文）', '第二节（读后续写）'],
