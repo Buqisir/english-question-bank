@@ -6,6 +6,7 @@ import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { configuredBlobStore } from './blobStore.mjs'
 import { listeningReviewPrintNeutralPaths } from './listeningReview.mjs'
+import { manifestProductFiles, NO_LISTENING_PRODUCT_SCHEMA, sourceProductEditions } from './pdfProductSet.mjs'
 
 export const PRODUCT_MANIFEST = 'products/manifest-v1.json'
 export const PRODUCT_FILES = Object.keys(PAPER_PDF_PRODUCTS).map(edition => ({
@@ -37,27 +38,33 @@ export function productInputDigest(rootDir, files, reviewedListening = null) {
 // digest excludes products, avoiding a circular digest and binding config,
 // source documents, answer references, pagination and all other print inputs.
 // Only a validated navigation review may exclude its exact private evidence.
-export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, required = false, readArtifact = null } = {}) {
+export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, config, listeningCount, required = false, readArtifact = null } = {}) {
   const read = readArtifact || (relative => {
     const file = path.join(rootDir, relative)
     return existsSync(file) ? readFileSync(file) : null
   })
   const manifestBytes = read(PRODUCT_MANIFEST)
   if (!manifestBytes) {
-    if (required) reject('请先生成四款产品，再提交新的 Review')
+    if (required) reject('请先生成所需产品，再提交新的 Review')
     return null
   }
   const manifest = JSON.parse(manifestBytes.toString('utf8'))
-  const manifestPageLimit = manifest.schemaVersion === 'paper-pdf-products-v2' ? manifest.economyPageLimit : 8
-  if (!['paper-pdf-products-v1', 'paper-pdf-products-v2'].includes(manifest.schemaVersion)
+  const expectedFiles = manifestProductFiles(manifest)
+  const noListening = manifest.schemaVersion === NO_LISTENING_PRODUCT_SCHEMA
+  if (config !== undefined && (noListening || config.listening !== undefined)) {
+    const editions = sourceProductEditions(config, listeningCount)
+    if (editions.length !== expectedFiles.length) reject('听力声明与产品清单不同')
+  }
+  const manifestPageLimit = manifest.schemaVersion === 'paper-pdf-products-v2' || noListening ? manifest.economyPageLimit : 8
+  if (!['paper-pdf-products-v1', 'paper-pdf-products-v2', NO_LISTENING_PRODUCT_SCHEMA].includes(manifest.schemaVersion)
     || (manifest.schemaVersion === 'paper-pdf-products-v2' && manifestPageLimit !== 9)
     || (economyPageLimit !== undefined && manifestPageLimit !== economyPageLimit)
     || !/^sha256:[a-f0-9]{64}$/.test(manifest.inputDigest || '')
     || (inputDigest && manifest.inputDigest !== inputDigest)
     || typeof manifest.paperName !== 'string' || !manifest.paperName.trim()
-    || !Array.isArray(manifest.files) || manifest.files.length !== PRODUCT_FILES.length) reject('输入或四款文件清单不一致')
+    || !Array.isArray(manifest.files) || manifest.files.length !== expectedFiles.length) reject('输入或产品文件清单不一致')
   const bytes = { [PRODUCT_MANIFEST]: manifestBytes }
-  for (const [index, expected] of PRODUCT_FILES.entries()) {
+  for (const [index, expected] of expectedFiles.entries()) {
     const file = manifest.files[index]
     if (file.path !== expected.path || file.mediaType !== expected.mediaType
       || !Number.isSafeInteger(file.pageCount) || file.pageCount < 1
@@ -125,7 +132,11 @@ export async function loadStoredProducts({ db, paperAssetsDir, consumption, blob
     || storage.bundleDigest !== report.pdfProducts?.bundleDigest
     || report.canonicalPublicationDigest !== consumption.publicationDigest) reject('正式文件存储未接通或版本不一致')
   const snapshot = new Map()
-  for (const relative of [PRODUCT_MANIFEST, ...PRODUCT_FILES.map(file => file.path)]) {
+  const manifestBytes = await blobStore.get(storage.files?.[PRODUCT_MANIFEST])
+  if (sha256(manifestBytes) !== report.pdfProducts?.manifestDigest) reject('已审产品清单字节不同')
+  snapshot.set(PRODUCT_MANIFEST, manifestBytes)
+  const manifest = JSON.parse(manifestBytes.toString('utf8'))
+  for (const relative of manifestProductFiles(manifest).map(file => file.path)) {
     snapshot.set(relative, await blobStore.get(storage.files?.[relative]))
   }
   // No network during validation: read only the hash-verified byte snapshot.

@@ -16,6 +16,7 @@ import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/lis
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
+import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -726,7 +727,8 @@ export function reviewBundleFilePaths(rootDir, candidate = null) {
     }] : []),
     ...(loaded.config.pdfProductsRequired || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST)) ? [
       { path: PRODUCT_MANIFEST, mediaType: 'application/json', role: 'pdf_products_manifest' },
-      ...PRODUCT_FILES,
+      ...(loaded.config.listening === undefined ? PRODUCT_FILES : productFiles(sourceProductEditions(
+        loaded.config, materialization.listening.state === 'captured' ? 2 : 0))),
     ] : []),
   ]
   const byPath = new Map()
@@ -1699,6 +1701,14 @@ export function buildNck1ReviewProjection(rootDir, {
     })
   }
   const slotBindings = paginationSlotBindings(consumption)
+  // Historical analyzed packages without a PDF commitment retain their separate
+  // source contract. Raw-source and product workspaces must declare absence.
+  const existingProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
+    ? readJson(resolveReviewFile(rootDir, PRODUCT_MANIFEST), PRODUCT_MANIFEST) : null
+  if (!loaded.analyzedPackage || loaded.config.pdfProductsRequired || loaded.config.listening !== undefined
+    || existingProducts?.schemaVersion === 'paper-pdf-products-v3') {
+    sourceProductEditions(loaded.config, slotBindings.filter(entry => entry.familyContractId === 'listening').length)
+  }
   const paginationPlan = loadPaperPaginationPlan(rootDir, {
     paperId: loaded.materialization.paperId,
     sourceDigest: preview.candidate.source.sha256,
@@ -1725,6 +1735,7 @@ export function buildNck1ReviewProjection(rootDir, {
     || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))) })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
     ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir, imported.candidate), reviewedListening),
+        config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
     fail('四款 PDF 必须保留完整的源参考答案捕获；不能只提交答案 PDF')

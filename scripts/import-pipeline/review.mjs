@@ -1087,7 +1087,7 @@ async function preprocessingReport(paperId) {
   const evidenceFile = path.resolve(evidencePath)
   const projection = buildNck1ReviewProjection(paperDirectory(paperId))
   const evidence = requiredJson(evidenceFile, 'handoff evidence')
-  const reviewStatus = evidence.schemaVersion === 'preprocessing-handoff-evidence-v4' && evidence.screen
+  const reviewStatus = ['preprocessing-handoff-evidence-v4', 'preprocessing-handoff-evidence-v5'].includes(evidence.schemaVersion) && evidence.screen
     ? await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`) : null
   const markdown = buildPreprocessingReport(projection, evidence, {
     baseDirectory: path.dirname(evidenceFile), reviewStatus,

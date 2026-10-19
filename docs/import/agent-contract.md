@@ -122,6 +122,21 @@ configured Review API and resolves that revision's paper/source/Candidate
 binding. Supply the existing Review origin and Agent credential; an unavailable
 or mismatched revision fails closed. Reports without Screen remain offline.
 
+For a source explicitly lacking listening by exam design, set the sealed
+`config.json` field `listening: "absent-by-exam-design"` before building products.
+Do not infer this declaration from absent audio. New PDF-product workspaces
+require zero Canonical listening groups with this declaration, or exactly two
+without it; disagreement fails closed. Preserve the existing Materialization
+`not_supplied` source evidence. Freeze uses `paper-pdf-products-v3` at the stable
+manifest path and exactly `largeNoListening`, `economy8`, `answerOnly` in that
+order. Its explicit `economyPageLimit` follows the bound plan (8 by default).
+Use `preprocessing-handoff-evidence-v5` for this three-product handoff; all three
+files need the same exact-byte content/visual evidence and Screen revision
+binding as v4. v1/v2 product manifests and v1–v4 reports retain their original
+contracts. Historical analyzed packages without PDF-product commitments retain
+their separate source contract. Raw-source and product workspaces check the
+declaration; freezing new products always checks it.
+
 New source-faithful directions and listening examples use Materialization v4
 under the v62 authority. Its `sourcePresentation.instructions` has one
 `{slotId, text, source}` for each of `reading.a`, `seven-choices`, `cloze`,

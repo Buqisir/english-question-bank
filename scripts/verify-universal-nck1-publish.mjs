@@ -498,6 +498,7 @@ export function makeReviewRoot(
   }
   writeJson(path.join(reviewRoot, 'config.json'), {
     paperId: fixturePaperId,
+    ...(!listening ? { listening: 'absent-by-exam-design' } : {}),
     format: 'universal-nck1',
     provenance: manifest.provenance,
     universalSourceManifestPath: 'universal-source-manifest.json',

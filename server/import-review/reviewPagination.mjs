@@ -18,6 +18,7 @@ import { assertCanonicalConsumptionVisibleStructure } from '../../shared/paper-c
 import { requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 import { buildAnswerOnlyHtml } from '../answer-renderer.mjs'
 import { frozenProductResult } from '../paper-import/frozenProducts.mjs'
+import { sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 
 export function reviewPrintHtml(projection, versionType, buildPrintHtml, { includeListening = true } = {}) {
   if (!['student', 'teacher'].includes(versionType)) {
@@ -73,13 +74,16 @@ export function reviewPrintHtml(projection, versionType, buildPrintHtml, { inclu
 export function reviewPaginationMetadata(projection) {
   const listeningCount = projection.paginationSlotBindings.filter((entry) =>
     entry.familyContractId === 'listening').length
+  const editions = projection.config?.pdfProductsRequired || projection.config?.listening !== undefined
+    ? sourceProductEditions(projection.config, listeningCount)
+    : [...(listeningCount === 2 ? ['largeComplete'] : []), 'largeNoListening', 'economy8', 'answerOnly']
   return {
     schemaVersion: 'import-review-pagination-metadata-v1',
     paperId: projection.paperId,
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     planDigest: projection.paginationPlanDigest,
-    editions: [...(listeningCount === 2 ? ['largeComplete'] : []), 'largeNoListening', 'economy8'].map((edition) => ({
+    editions: editions.filter(edition => edition !== 'answerOnly').map((edition) => ({
       edition,
       ...studentProductPolicy(edition, listeningCount, { economyPageLimit: economyPageLimitForPlan(projection.paginationPlan) }),
       mode: projection.paginationPlan?.editions?.[edition] ? 'explicit' : 'bounded_auto',

@@ -149,6 +149,9 @@ try {
     inputDigest: digest(Buffer.from('inputs')), files: PRODUCT_FILES.map((file, i) => ({ ...file,
       byteLength: bytes[file.path].length, sha256: digest(bytes[file.path]), pageCount: pageCounts[i] })) }
   bytes[PRODUCT_MANIFEST] = Buffer.from(JSON.stringify(manifest))
+  assert.throws(() => readFrozenProducts(directory, { readArtifact: file => file === PRODUCT_MANIFEST
+    ? Buffer.from(JSON.stringify({ ...manifest, files: manifest.files.slice(1) })) : bytes[file] }), /产品文件清单/,
+  'historical four-product manifests still require largeComplete')
   for (const [index, pages, claimed, expected] of [
     [0, 13, 13, /产品规格/], [1, 11, 11, /产品规格/],
     [2, 7, 7, /产品规格/], [2, 9, 9, /产品规格/],
@@ -197,6 +200,9 @@ try {
   const config = JSON.parse(await readFile(configPath, 'utf8'))
   config.pdfProductsRequired = true
   config.provenance = { ...config.provenance, year: 2026, month: 4 }
+  await writeFile(configPath, JSON.stringify({ ...config, listening: 'absent-by-exam-design' }))
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /听力声明/,
+    'a complete listening source cannot declare listening absent')
   await writeFile(configPath, JSON.stringify(config))
   const references = prepareSourceReferences(fixture.projection)
   const evidence = fixture.projection.materialization.documents.filter(file => file.role === 'official_answers').map(file => ({
@@ -220,7 +226,7 @@ try {
     inputDigest: productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot)) }
   for (const file of PRODUCT_FILES) await writeFile(path.join(fixture.reviewRoot, file.path), fixtureBytes[file.path])
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
-  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或四款文件清单/,
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或产品文件清单/,
     'a nine-page manifest cannot opt in an otherwise eight-page paper')
   const paginationPlan = { schemaVersion: 'paper-pagination-plan-v5', paperId: inputIdentity.paperId,
     sourceDigest: inputIdentity.sourceDigest, candidateDigest: inputIdentity.candidateDigest,
@@ -230,7 +236,7 @@ try {
         answerBoxHeightsMm: { application: 65, continuation: 57 },
       } } } }
   await writeFile(path.join(fixture.reviewRoot, 'pagination-plan.json'), JSON.stringify(paginationPlan))
-  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或四款文件清单/,
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或产品文件清单/,
     'adding the plan invalidates the previous product input digest')
   productManifest.inputDigest = productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot))
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
@@ -373,6 +379,7 @@ try {
     if (status === 206) assert.equal(output.headers['content-length'], range === 'bytes=-4' ? 4 : 6)
   }
   console.log('PASS immutable local/remote bytes, UNKNOWN reconciliation, exact publication products, GET/HEAD parity, dates, audio ranges')
+  await import('./verify-no-listening-products.mjs')
 } finally {
   db.close()
   await rm(directory, { recursive: true, force: true })
