@@ -21,13 +21,11 @@ import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mj
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
-import { finalizeInventory } from './finalizeComputation.mjs'
+import { finalizeInventory, ocrConfirmationComputation } from './finalizeComputation.mjs'
 import { restoreFinalizeError, runFinalizeWorker } from './runFinalizeWorker.mjs'
 import {
-  buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
   resolveReviewFile,
-  validateNck1OcrReviewConfirmation,
 } from './revisionProjection.mjs'
 
 const PAPER_ID = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -2191,19 +2189,52 @@ export function createImportReviewStore({
 
   function confirmOcrRevision(paperId, revisionId, input, actor, { reviewerKind = 'owner' } = {}) {
     const { revision, projection } = projectionForRevision(revisionId)
+    return commitOcrConfirmation(paperId, revisionId, input, actor, reviewerKind, revision, projection)
+  }
+
+  async function confirmUploadedOcrRevision(paperId, revisionId, input, actor, { reviewerKind = 'owner' } = {}) {
+    // Retain the injected synchronous seam for internal fixtures only.
+    if (projectRevision !== buildImportReviewProjection) {
+      return confirmOcrRevision(paperId, revisionId, input, actor, { reviewerKind })
+    }
+    const revision = getRevision(revisionId)
+    if (!revision || revision.state === 'uploading') {
+      throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Finalized revision not found', 404)
+    }
+    const release = await acquireRevisionUpload(revisionDirectory(revisionId))
+    try {
+      await assertStoredRevisionFilesAsync(revision)
+      const prepared = await runFinalizeWorker(revisionDirectory(revisionId), revision, {
+        operation: 'ocr-confirmation', input, reviewerKind,
+      })
+      assertProjectionIdentity(prepared.projection, revision)
+      assertOcrConfirmationIdentity(paperId, revision, input)
+      if (prepared.confirmationError) throw restoreFinalizeError(prepared.confirmationError)
+      // Finalized files cannot be uploaded. Keep the revision lease across both
+      // asynchronous integrity passes and the original synchronous transaction.
+      // Defer the second pass's error until after the transaction's state checks,
+      // matching the old idempotent/stale/shipping error precedence.
+      try {
+        prepared.verifiedFiles = await assertStoredRevisionFilesAsync(revision)
+      } catch (error) { prepared.fileError = error }
+      return commitOcrConfirmation(
+        paperId, revisionId, input, actor, reviewerKind, revision, prepared.projection, prepared,
+      )
+    } finally { release() }
+  }
+
+  function assertOcrConfirmationIdentity(paperId, revision, input) {
     if (revision.paperId !== paperId || revision.reviewKind !== 'ocr') {
       throw storeError('IMPORT_REVIEW_OCR_REQUIRED', 'OCR review revision not found', 404)
     }
     if (input?.bundleDigest !== revision.bundleDigest) {
       throw storeError('IMPORT_REVIEW_STALE_REVISION', 'Browser OCR revision digest is stale')
     }
-    const confirmation = validateNck1OcrReviewConfirmation(
-      projection,
-      input?.confirmation,
-    )
-    const correctionReport = reviewerKind === 'import_agent'
-      ? buildAgentOcrCorrectionReport(projection, confirmation, input?.correctionNotes)
-      : null
+  }
+
+  function commitOcrConfirmation(paperId, revisionId, input, actor, reviewerKind, revision, projection, prepared = null) {
+    assertOcrConfirmationIdentity(paperId, revision, input)
+    const { confirmation, correctionReport } = prepared || ocrConfirmationComputation(projection, input, reviewerKind)
     const confirmedAt = nowIso()
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
@@ -2229,7 +2260,18 @@ export function createImportReviewStore({
         if (current.state !== 'awaiting_review') {
           throw storeError('IMPORT_REVIEW_REVISION_NOT_REVIEWABLE', 'OCR revision is not awaiting review')
         }
-        assertStoredRevisionFiles(current, db)
+        if (prepared) {
+          if (prepared.fileError) throw prepared.fileError
+          const files = storedRevisionFiles(current, db)
+          // Recheck the exact DB file records and on-disk presence/size in the
+          // write transaction; expensive byte hashing already ran asynchronously.
+          if (JSON.stringify(files) !== JSON.stringify(prepared.verifiedFiles)) {
+            throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Stored revision file records changed')
+          }
+          for (const file of files) storedRevisionFilePath(current, file)
+        } else {
+          assertStoredRevisionFiles(current, db)
+        }
         const receipt = {
           schemaVersion: 'web-import-ocr-review-confirmation-v1',
           confirmationId: `ocr-confirmation-${randomUUID()}`,
@@ -3106,6 +3148,7 @@ export function createImportReviewStore({
     beginScopedPromotion,
     completeFileUpload,
     confirmOcrRevision,
+    confirmUploadedOcrRevision,
     confirmMediaDerivation,
     createIssue,
     createRevision,

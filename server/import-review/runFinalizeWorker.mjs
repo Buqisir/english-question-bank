@@ -13,6 +13,9 @@ export function restoreFinalizeError(error) {
 export async function runFinalizeWorker(directory, revision, {
   timeoutMs = 10 * 60 * 1000,
   onPhase = () => {},
+  operation = 'finalize',
+  input,
+  reviewerKind,
 } = {}) {
   // Reuse the existing FIFO lease mechanism: at most one finalize worker in
   // this server process, including when different revisions finalize together.
@@ -21,7 +24,7 @@ export async function runFinalizeWorker(directory, revision, {
   let timeout
   try {
     worker = new Worker(new URL('./finalizeWorker.mjs', import.meta.url), {
-      workerData: { directory, revision: {
+      workerData: { directory, operation, input, reviewerKind, revision: {
         reviewKind: revision.reviewKind,
         candidateDigest: revision.candidateDigest,
       } },

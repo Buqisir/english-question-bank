@@ -48,9 +48,9 @@ const paperId = `paper-synthetic-ocr-review-${process.pid}`
 const owner = { role: 'owner', accountKind: 'human', username: 'owner' }
 const agentToken = 'synthetic-import-agent-token'
 
-function syntheticPage(seed) {
+function syntheticPage(seed, size = '400x560') {
   return new Uint8Array(execFileSync('magick', [
-    '-size', '400x560', 'xc:#ffffff',
+    '-size', size, 'xc:#ffffff',
     '-fill', seed % 2 ? '#eaf1ed' : '#ededea',
     '-draw', 'rectangle 32,32 368,112',
     '-fill', '#d8d8d2',
@@ -106,12 +106,12 @@ function bundleDocument(documentId, role, pages) {
   }
 }
 
-function writeSyntheticSource(rootDir) {
+function writeSyntheticSource(rootDir, { imageSize } = {}) {
   const questionPages = [
-    { page: 1, bytes: syntheticPage(1) },
-    { page: 2, bytes: syntheticPage(2) },
+    { page: 1, bytes: syntheticPage(1, imageSize) },
+    { page: 2, bytes: syntheticPage(2, imageSize) },
   ]
-  const answerPages = [{ page: 1, bytes: syntheticPage(3) }]
+  const answerPages = [{ page: 1, bytes: syntheticPage(3, imageSize) }]
   const sourceDocuments = [
     bundleDocument('question-source-1', 'question_source', questionPages),
     bundleDocument('official-answers-1', 'official_answers', answerPages),
@@ -274,6 +274,9 @@ function send(response, status, body, contentType) {
   response.end(bytes)
 }
 
+export { writeSyntheticSource, reviewManifest, uploadRevision }
+
+if (process.env.EQB_OCR_REVIEW_FIXTURE_ONLY !== '1') {
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-import-review-ocr-'))
 const stagingRoot = path.join(tempRoot, 'staging')
 let server = null
@@ -721,6 +724,7 @@ try {
   if (browser) await browser.close()
   if (server) await new Promise((resolve) => server.close(resolve))
   rmSync(tempRoot, { recursive: true, force: true })
+}
 }
 
 function questionOneObservationId(documentId, page, index) {
