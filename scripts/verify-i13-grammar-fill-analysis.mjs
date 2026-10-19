@@ -313,6 +313,89 @@ function stubProvider(payload) {
 async function assertAnalysisValidation() {
   const input = gfFixtureInput()
 
+  // Original synthetic group, independent of the existing source/answer fixture.
+  for (const conversion of [false, true]) {
+    const syntacticInput = {
+      paper: { paperId: `paper-appositive-${conversion}` },
+      group: {
+        groupId: `group-appositive-${conversion}`,
+        paragraphs: [{ id: 'paragraph:principles', text: Array.from({ length: 10 }, (_, index) =>
+          `The club shared one principle — __${56 + index}__ new members settle in.`).join(' ') }],
+        questions: Array.from({ length: 10 }, (_, index) => ({
+          id: `question:principle-${56 + index}`, blankId: `blank:principle-${56 + index}`,
+          stem: String(56 + index), prompt: 'help', answerKey: 'helping',
+        })),
+      },
+    }
+    const synthetic = {
+      schemaVersion: 'grammar-fill-analysis-v2', paperId: syntacticInput.paper.paperId,
+      sourceAssetVersion: 1, targetGroups: [syntacticInput.group.groupId],
+      groups: { [syntacticInput.group.groupId]: { overview: '社团说明帮助新成员适应环境的原则。' } },
+      blanks: Object.fromEntries(syntacticInput.group.questions.map((q) => [q.id, {
+        blankId: q.blankId, blankNo: Number(q.stem), blankType: 'given', hint: q.prompt,
+        facetKey: conversion ? 'grammar-fill.given.conversion.noun-to-verb' : 'grammar-fill.given.verb.non-finite',
+        answer: 'helping', role: conversion ? null : 'appositive',
+        similarityProfile: conversion ? { route: 'non-finite-result', features: ['appositive-gerund'] }
+          : { route: 'appositive-gerund', features: [] },
+        reason: 'helping new members settle in 解释 principle 的内容，作同位语，使用动名词。',
+        evidence: [{ type: 'antecedent', signalText: 'one principle', signalSide: 'passage', relation: '指出所解释的名词内容。' }],
+      }])),
+    }
+    stampGrammarFillDerivedFields(synthetic)
+    validateGrammarFillShape(synthetic, syntacticInput)
+    assert(`appositive ${conversion ? 'conversion' : 'verb'} accepts ordinary doing`,
+      Object.values(synthetic.blanks).every((blank) => blank.form === 'doing' && blank.similarityForm === 'doing'))
+    // The legacy answer-match contract accepts one official alternative;
+    // the public-authority roundtrip separately checks the complete slash key.
+    for (const [answer, sourceAnswer] of [
+      ['not helping', 'not helping'],
+      ['helping', 'helping / assisting'],
+      ['not helping', 'helping/not helping'],
+      ['not   helping', '  HELPING / not   helping  '],
+    ]) {
+      const valid = structuredClone(synthetic)
+      Object.values(valid.blanks)[0].answer = answer
+      const authority = structuredClone(syntacticInput)
+      authority.group.questions[0].answerKey = sourceAnswer
+      stampGrammarFillDerivedFields(valid)
+      validateGrammarFillShape(valid, authority)
+      assert(`appositive accepts ${answer} without rewriting authority (${conversion})`,
+        Object.values(valid.blanks)[0].answer === answer && authority.group.questions[0].answerKey === sourceAnswer)
+    }
+    if (!conversion) {
+      await assertRejects('appositive cannot omit its new similarity profile', () => {
+        const invalid = structuredClone(synthetic)
+        delete Object.values(invalid.blanks)[0].similarityProfile
+        validateGrammarFillShape(invalid, syntacticInput)
+      }, /appositive|profile/i)
+    }
+    for (const patch of [
+      { role: conversion ? 'appositive' : 'adverbial' },
+      { similarityProfile: conversion
+        ? { route: 'non-finite-result', features: ['appositive-gerund', 'adverbial-active'] }
+        : { route: 'appositive-gerund', features: ['preposed'] } },
+      { similarityProfile: conversion
+        ? { route: 'finite-result', features: ['appositive-gerund'] }
+        : { route: 'adverbial-active', features: [] } },
+    ]) {
+      await assertRejects(`appositive rejects mismatched role/route/features (${conversion}, ${JSON.stringify(patch)})`, () => {
+        const invalid = structuredClone(synthetic)
+        Object.assign(Object.values(invalid.blanks)[0], patch)
+        validateGrammarFillShape(invalid, syntacticInput)
+      }, /role|feature/)
+    }
+    for (const answer of ['to help', 'to be helped', 'being helped', 'having helped', 'having been helped', 'to have helped', 'helped', 'not to sing', 'not to be helping', 'not having been helping',
+      'helping / not to sing', 'not to be helping / helping', '/helping', 'helping/', 'helping // assisting']) {
+      await assertRejects(`appositive rejects ${answer} despite fake doing (${conversion})`, () => {
+        const invalid = structuredClone(synthetic)
+        Object.assign(Object.values(invalid.blanks)[0], { answer, form: 'doing', similarityForm: 'doing' })
+        const authority = structuredClone(syntacticInput)
+        authority.group.questions[0].answerKey = answer
+        validateGrammarFillShape(invalid, authority)
+      }, /appositive-gerund.*普通主动 doing/)
+    }
+  }
+
   // --- Happy path ---
   const result = await analyzeGrammarFillImportCandidate(input, {
     providerCallers: { deepseek: stubProvider(validGfAnalysis(input)) },

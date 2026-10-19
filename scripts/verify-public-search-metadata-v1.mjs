@@ -342,6 +342,163 @@ try {
   rmSync(cleftAssetsDir, { recursive: true, force: true })
 }
 
+// Entirely original synthetic sources; no existing fixture answer is rewritten.
+function appositiveCase(id, {
+  conversion = false, answer = conversion ? 'beautifying' : 'helping', role = conversion ? null : 'appositive',
+  route = conversion ? 'non-finite-result' : 'appositive-gerund',
+  features = conversion ? ['appositive-gerund'] : [],
+} = {}) {
+  const questionId = `question:${id}`
+  const groupId = `group:${id}`
+  const blankId = `blank:${id}`
+  const paragraphId = `paragraph:${id}`
+  const source = {
+    paperId: id,
+    groups: [{
+      groupId, family: 'grammar-fill', slotId: 'grammar-fill',
+      blocks: [{ kind: 'paragraph', blockId: paragraphId, role: 'body', content: [
+        { kind: 'text', text: 'The club shared one principle — ' },
+        { kind: 'blank_ref', blankId },
+        { kind: 'text', text: conversion ? ' the shared garden.' : ' new members settle in.' },
+      ] }],
+      questions: [{ questionId, blankId, sourceNumber: 56, canonicalNumber: 56,
+        stem: '56', prompt: conversion ? 'beauty' : 'help' }],
+    }],
+    answers: [{ questionId, value: answer }],
+  }
+  const input = { materialization: source, sourceDigest, candidateDigest }
+  const request = preparePublicSearchMetadataRequest(input)
+  const authored = { groups: [{
+    groupId, family: 'grammar-fill', topicLabels: [labelA], genre: '说明',
+    metadata: { questions: [{ questionId,
+      facetKey: conversion ? 'grammar-fill.given.conversion.noun-to-verb' : 'grammar-fill.given.verb.non-finite',
+      role, similarityProfile: { route, features }, contextParagraphIds: [paragraphId] }] },
+  }] }
+  return { input, request, authored, questionId, groupId }
+}
+
+for (const conversion of [false, true]) {
+  const sample = appositiveCase(`appositive-roundtrip-${conversion}`, { conversion })
+  const before = stableStringify(sample.input.materialization)
+  assert.equal(sample.request.controlledValues.grammarFacets.length, 24)
+  assert.ok(sample.request.controlledValues.grammarSimilarity
+    .find(({ facet_key }) => facet_key === 'grammar-fill.given.verb.non-finite').routes.includes('appositive-gerund'))
+  assert.ok(sample.request.controlledValues.grammarSimilarity
+    .find(({ facet_key }) => facet_key === 'grammar-fill.given.conversion.noun-to-verb').features.includes('appositive-gerund'))
+  assert.equal(new Ajv({ strict: true }).compile(sample.request.outputContract)(sample.authored), true)
+  assert.deepEqual(validateAuthoredPublicSearchMetadata({ ...sample.input, authored: sample.authored }), [])
+  const completed = finalizePublicSearchMetadata({ ...sample.input, authored: sample.authored })
+  const roundtrip = JSON.parse(stableStringify(completed))
+  assert.deepEqual(validatePublicSearchMetadata({ ...sample.input, sidecar: roundtrip }), [])
+  assert.deepEqual(roundtrip, completed)
+  assert.deepEqual(roundtrip.groups[0].metadata.questions[0].derived, { form: 'doing', similarityForm: 'doing' })
+  assert.equal(roundtrip.groups[0].metadata.questions[0].role, conversion ? null : 'appositive')
+  assert.equal(stableStringify(sample.input.materialization), before, 'preparation/finalization preserve synthetic authority')
+
+  for (const answer of ['not helping', 'helping / assisting', 'helping/not helping', '  HELPING / not   helping  ']) {
+    const valid = appositiveCase(`appositive-supported-form-${conversion}`, { conversion, answer })
+    const authorityBefore = stableStringify(valid.input.materialization)
+    assert.deepEqual(validateAuthoredPublicSearchMetadata({ ...valid.input, authored: valid.authored }), [], answer)
+    const finalized = finalizePublicSearchMetadata({ ...valid.input, authored: valid.authored })
+    const persisted = JSON.parse(stableStringify(finalized))
+    assert.deepEqual(validatePublicSearchMetadata({ ...valid.input, sidecar: persisted }), [], answer)
+    assert.deepEqual(persisted.groups[0].metadata.questions[0].derived, { form: 'doing', similarityForm: 'doing' }, answer)
+    assert.equal(stableStringify(valid.input.materialization), authorityBefore, 'supported answer alternatives preserve authority')
+  }
+
+  for (const patch of [
+    { role: conversion ? 'appositive' : 'adverbial' },
+    { similarityProfile: conversion
+      ? { route: 'non-finite-result', features: ['appositive-gerund', 'adverbial-active'] }
+      : { route: 'appositive-gerund', features: ['preposed'] } },
+    { similarityProfile: conversion
+      ? { route: 'finite-result', features: ['appositive-gerund'] }
+      : { route: 'adverbial-active', features: [] } },
+  ]) {
+    const invalid = structuredClone(sample.authored)
+    Object.assign(invalid.groups[0].metadata.questions[0], patch)
+    assert.ok(validateAuthoredPublicSearchMetadata({ ...sample.input, authored: invalid }).length > 0)
+    assert.throws(() => finalizePublicSearchMetadata({ ...sample.input, authored: invalid }), /PUBLIC_METADATA_GRAMMAR_/)
+    const persistedInvalid = structuredClone(roundtrip)
+    Object.assign(persistedInvalid.groups[0].metadata.questions[0], patch)
+    assert.ok(validatePublicSearchMetadata({ ...sample.input, sidecar: persistedInvalid }).length > 0)
+  }
+  for (const answer of ['to help', 'to be helped', 'being helped', 'having helped', 'having been helped', 'to have helped', 'helped', 'not to sing', 'not to be helping', 'not having been helping',
+    'helping / not to sing', 'not to be helping / helping', '/helping', 'helping/', 'helping // assisting']) {
+    const invalid = appositiveCase(`appositive-form-${conversion}`, { conversion, answer })
+    assert.ok(validateAuthoredPublicSearchMetadata({ ...invalid.input, authored: invalid.authored })
+      .some(({ code }) => code === 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'), answer)
+    assert.throws(() => finalizePublicSearchMetadata({ ...invalid.input, authored: invalid.authored }), /PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID/)
+    const forged = structuredClone(roundtrip)
+    // Same identity, changed authoritative answer; caller's fake doing cannot authorize it.
+    const wrongAuthority = structuredClone(sample.input)
+    wrongAuthority.materialization.answers[0].value = answer
+    assert.ok(validatePublicSearchMetadata({ ...wrongAuthority, sidecar: forged })
+      .some(({ code }) => code === 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'), answer)
+  }
+}
+
+const appositiveAssets = mkdtempSync(path.join(tmpdir(), 'public-metadata-appositive-'))
+const appositiveDb = new DatabaseSync(':memory:')
+try {
+  appositiveDb.exec(`
+    CREATE TABLE sources (id TEXT PRIMARY KEY, source_type TEXT, year INTEGER, region TEXT, paper_name TEXT);
+    CREATE TABLE passages (id TEXT PRIMARY KEY, source_id TEXT, discourse_type TEXT, word_count INTEGER);
+    CREATE TABLE question_groups (id TEXT PRIMARY KEY, passage_id TEXT, group_type TEXT, title TEXT);
+    CREATE TABLE questions (id TEXT PRIMARY KEY, group_id TEXT);
+    CREATE TABLE question_group_topic_labels (question_group_id TEXT, label TEXT);
+  `)
+  for (const [id, role] of [
+    ['appositive-seed', 'appositive'], ['appositive-peer', 'appositive'],
+    ['adverbial-seed', 'adverbial'], ['adverbial-peer', 'adverbial'],
+  ]) {
+    const sample = appositiveCase(id, { role, route: role === 'appositive' ? 'appositive-gerund' : 'adverbial-active' })
+    if (role === 'adverbial') sample.input.materialization.groups[0].blocks[0].content = [
+      { kind: 'text', text: 'The guide welcomed the visitors, ' },
+      { kind: 'blank_ref', blankId: `blank:${id}` },
+      { kind: 'text', text: ' them find their seats.' },
+    ]
+    const sidecar = JSON.parse(stableStringify(finalizePublicSearchMetadata({ ...sample.input, authored: sample.authored })))
+    const baseDir = path.join(appositiveAssets, id)
+    mkdirSync(baseDir)
+    for (const [name, value] of [
+      ['paper-asset.json', { paper: { paperId: id, title: id }, content: { groups: {
+        [sample.groupId]: { groupType: 'grammarFill', questionIds: [sample.questionId] },
+      } } }],
+      ['public-search-metadata-v1.json', sidecar],
+      ['import-meta.json', { paginationPlanBinding: { sourceDigest, candidateDigest } }],
+    ]) writeFileSync(path.join(baseDir, name), stableStringify(value))
+    const projected = readPublicFacetEntries({ baseDir, paperId: id,
+      questionToGroup: new Map([[sample.questionId, { groupId: sample.groupId, groupType: 'grammarFill' }]]) })
+    assert.deepEqual(projected.entries.get(sample.questionId), {
+      groupId: sample.groupId, groupType: 'grammarFill', facetKey: 'grammar-fill.given.verb.non-finite',
+      blankType: 'given', role, form: 'doing', similarityForm: 'doing',
+    })
+    assert.equal(Object.hasOwn(projected.entries.get(sample.questionId), 'similarityProfile'), false)
+    appositiveDb.prepare('INSERT INTO sources VALUES (?, ?, ?, ?, ?)').run(id, '模拟题', 2026, '', id)
+    appositiveDb.prepare('INSERT INTO passages VALUES (?, ?, ?, ?)').run(id, id, null, null)
+    appositiveDb.prepare('INSERT INTO question_groups VALUES (?, ?, ?, ?)').run(sample.groupId, id, 'grammar_cloze', id)
+    appositiveDb.prepare('INSERT INTO questions VALUES (?, ?)').run(sample.questionId, sample.groupId)
+  }
+  const warnings = []
+  const index = createTeachingFacetIndex({ paperAssetsDir: appositiveAssets, warn: (...args) => warnings.push(args) }).getIndex()
+  const store = createSimilarQuestionsStore({ getTeachingFacetIndex: () => index, paperAssetsDir: appositiveAssets })
+  for (const [role, label] of [['appositive', '同位语'], ['adverbial', '状语']]) {
+    assert.deepEqual(queryGroupsByTeaching(index, { groupType: 'grammarFill', role }).map(({ groupId }) => groupId).sort(),
+      [`group:${role}-peer`, `group:${role}-seed`])
+    const result = store.findSimilar(appositiveDb, { seeds: [{ questionId: `question:${role}-seed` }] })
+    assert.deepEqual(result.seedProfile.facets, [{ key: 'role', values: [role] }])
+    assert.equal(result.poolStats.totalInPool, 1, 'opposite roles are excluded from the pool in both directions')
+    assert.deepEqual(result.results.map(({ groupId, matchedQuestionIds }) => ({ groupId, matchedQuestionIds })),
+      [{ groupId: `group:${role}-peer`, matchedQuestionIds: [`question:${role}-peer`] }])
+    assert.ok(result.results[0].reasons.some(({ label: text }) => text === `同款：非谓语作${label} · doing`))
+  }
+  assert.deepEqual(warnings, [])
+} finally {
+  appositiveDb.close()
+  rmSync(appositiveAssets, { recursive: true, force: true })
+}
+
 const schema = JSON.parse(readFileSync(new URL('../schemas/paper-import/public-search-metadata-v1.schema.json', import.meta.url)))
 const schemaValidate = new Ajv({ strict: true }).compile(schema)
 assert.equal(schemaValidate(final), true, JSON.stringify(schemaValidate.errors))

@@ -51,6 +51,7 @@ const VALID_ROLE_VALUES = new Set([
   'object',
   'attributive',
   'adverbial',
+  'appositive',
   'object-complement',
   'subject-complement',
 ])
@@ -214,7 +215,12 @@ const FINITE_ROUTE_TENSES = new Map([
 ])
 
 function validateSimilarityProfile(item, questionId) {
-  if (!Object.prototype.hasOwnProperty.call(item, 'similarityProfile')) return
+  if (!Object.prototype.hasOwnProperty.call(item, 'similarityProfile')) {
+    if (item.facetKey === NON_FINITE_FACET && item.role === 'appositive') {
+      throw new Error(`${questionId}: appositive 必须提供 similarityProfile。`)
+    }
+    return
+  }
 
   const profile = item.similarityProfile
   if (!profile || typeof profile !== 'object' || Array.isArray(profile)) {
@@ -309,6 +315,15 @@ function validateSimilarityProfile(item, questionId) {
     && !route.startsWith(`${item.role}-`)
   ) {
     throw new Error(`${questionId}: similarityProfile.route 与非谓语 role ${item.role} 不一致。`)
+  }
+
+  if (
+    (item.facetKey === NON_FINITE_FACET && route === 'appositive-gerund')
+    || (item.facetKey === NOUN_TO_VERB_FACET && route === 'non-finite-result' && seen.has('appositive-gerund'))
+  ) {
+    if (!isSupportedAppositiveGerundAnswer(item.answer)) {
+      throw new Error(`${questionId}: appositive-gerund 必须对应程序派生的普通主动 doing。`)
+    }
   }
 
   if (item.facetKey === 'grammar-fill.given.verb.finite') {
@@ -568,6 +583,16 @@ function deriveNonFiniteSimilarityForm(answer) {
   if (normalized.startsWith('being ')) return 'being-done'
   if (normalized.endsWith('ing')) return 'doing'
   return 'done'
+}
+
+// This route's answer-form boundary does not establish syntactic apposition.
+export function isSupportedAppositiveGerundAnswer(answer) {
+  if (typeof answer !== 'string') return false
+  return answer.split('/').every((alternative) => {
+    const normalized = alternative.trim().toLowerCase().replace(/\s+/g, ' ')
+    return /^(?:not )?[a-z]+ing$/.test(normalized)
+      && deriveNonFiniteSimilarityForm(normalized) === 'doing'
+  })
 }
 
 /** Stamp tense/voice/agreementSensitive (finite) or form (non-finite) onto

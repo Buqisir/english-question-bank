@@ -51,6 +51,7 @@ import { createPaperSurfaceAnalysisAvailability } from '../server/search/paperSu
 import {
   buildGrammarFillAnalysisSurfaceModel,
   findAllTextRangesTolerant,
+  ROLE_LABELS,
 } from '../app/src/features/paper-intelligence/grammarFillAnalysisSurfaceAdapter.ts'
 import { FACET_FRAMEWORKS } from '../app/src/features/paper-intelligence/grammarFillFacetRegistry.ts'
 
@@ -75,6 +76,7 @@ function readSrc(relPath) {
 }
 
 const NON_FINITE = 'grammar-fill.given.verb.non-finite'
+assert('appositive role has the Chinese display label', ROLE_LABELS.appositive === '同位语')
 
 // ============================================================
 // Step 0 — Registry + drift guard (GATE-2)

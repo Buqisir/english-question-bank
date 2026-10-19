@@ -86,6 +86,7 @@ export type GrammarFillRole =
   | 'object'
   | 'attributive'
   | 'adverbial'
+  | 'appositive'
   | 'object-complement'
   | 'subject-complement'
 
@@ -173,6 +174,7 @@ const ROLE_LABELS: Record<GrammarFillRole, string> = {
   'object': '宾语',
   'attributive': '定语',
   'adverbial': '状语',
+  'appositive': '同位语',
   'object-complement': '宾补',
   'subject-complement': '主补',
 }
