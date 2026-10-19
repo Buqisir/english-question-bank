@@ -62,15 +62,22 @@ Owner只需交源材料并提供考试年份、月份；Agent读取正式题头�
 
 **首页显示卷名（Owner 2026-10-19）：** 新导入卷首页第一行为来源卷名去除末尾的
 科目字样（英语学科试题卷／英语试题卷／英语试题／英语试卷／英语，含字间空格），
-第二行保留独立的“英 语”。科目字样后的版次括注保留；非科目词组不猜删，
+第二行保留独立的“英 语”。科目字样后的版次括注保留；“英语”前紧接汉字时，
+只接受考试／检测／测试／测评／联考／统考／模拟／试题／试卷／学年／学年度／高一／高二／高三结尾，
+避免把“商务英语试题”“专业英语试卷”等复合词拆开；非科目词组不猜删，
 去除后为空或只剩标点时保留原名。只改首页第一行，原始题头、元数据卷名、
 列表／搜索及“英语试题第 X 页（共 Y 页）”页脚不变。
 这是新卷的显式展示数据，不是对存量卷的运行时清洗：导入 producer 调用
 `subjectFreeHeaderTitle(config.provenance.paperName)`，将结果写入新卷 `config.headerTitle`，
-并在生成 PDF 前完成；Review 将其封存在 `paper-asset.json` 的可选 `paper.headerTitle`，
-Canonical consumption 传递同版本 `paperHeaderTitle`，Screen、Print/PDF 共同消费。
+并在生成 PDF 前完成；Review 将配置封存在精确批准的 bundle 中，发布时将
+`{sourceTitle, headerTitle}` 写入 Publication 清单的可选 `paperHeader` 扩展，
+由既有 `publicationDigest` 覆盖。消费层验证展示值严格等于同一绑定原题头的
+规则结果，不符即拒绝消费；Canonical consumption 传递同版本 `paperHeaderTitle`，
+Screen、Print/PDF 共同消费。兼容 `paper-asset.json` 的 `paper.headerTitle` 不提供消费权威，
+历史版本即使被注入该字段也不启用新展示。
 已有配置无该字段即沿用历史显示，不回填送审／已发布卷，也不重生成冻结 PDF。
 此展示元数据不新增 Canonical Plan 语义、不改历史 authority/schema/digest；
+可选清单扩展独立严格校验，缺省时清单字节和摘要算法完全不变；
 配置变化仍改变 Review bundle 和冻结产品的输入摘要，必须重新生成产品和审核。
 
 应用文框优先65mm、续写框优先57mm；必要时才压缩，找到合格分页后独立尝试

@@ -10,6 +10,7 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
+import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 import { assertListeningPlaybackUi, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { authorityRefForManifestDigest, canonicalAuthorityRef, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
 import {
@@ -451,6 +452,7 @@ export function sealCanonicalPublication({
   nck1MaterializationConfirmationProof = null,
   nck1AnalyzedPackageConfirmationProof = null,
   externalListeningReviewProof = null,
+  paperHeader,
 }) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
@@ -530,6 +532,8 @@ export function sealCanonicalPublication({
     sourceEvidence: sourceEvidence.map(({ bytes: _bytes, ...descriptor }) => descriptor),
     authority: canonicalPaper.paperPlan.authorityRef,
     ...(listeningAudio ? { listeningAudio } : {}),
+    ...(validatedPaperHeaderTitle(paperHeader) !== undefined
+      ? { paperHeader: structuredClone(paperHeader) } : {}),
     artifacts: descriptors
       .map(({ bytes: _bytes, ...descriptor }) => descriptor)
       .sort((left, right) => left.role.localeCompare(right.role)),
@@ -551,7 +555,10 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Publication authority closure is unknown or stale')
   const closure = authority.closure
   const artifactPaths = artifactPathsFor(closure.authorityRef)
-  const manifestIssues = validateJsonSchema(manifest, closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`], '$.publication')
+  // Strict optional envelope extension: validate it separately without changing
+  // any historical authority schema. The full manifest still enters the digest.
+  validatedPaperHeaderTitle(manifest.paperHeader)
+  const manifestIssues = validateJsonSchema(withoutKey(manifest, 'paperHeader'), closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`], '$.publication')
   if (manifestIssues.length > 0) throw publicationError('CANONICAL_PUBLICATION_SCHEMA_INVALID', JSON.stringify(manifestIssues))
   if (manifest.publicationDigest !== digestJson(withoutKey(manifest, 'publicationDigest'))) throw publicationError('CANONICAL_PUBLICATION_DIGEST_INVALID', 'Publication manifest digest differs')
   assertPaperId(manifest.paperId)
@@ -1173,6 +1180,7 @@ export function admitCanonicalPaperImport({
   listeningAudioBytes = null,
   registeredConfirmation,
   externalListeningReviewProof = null,
+  paperHeader,
 }) {
   let compilation
   let effectiveSourceAsset = sourceAsset
@@ -1269,6 +1277,7 @@ export function admitCanonicalPaperImport({
       nck1MaterializationConfirmationProof,
       nck1AnalyzedPackageConfirmationProof,
       externalListeningReviewProof,
+      paperHeader,
     })
     const ref = {
       paperId: sealed.manifest.paperId,
@@ -1766,6 +1775,9 @@ function validateConsumptionPublication({
   contract,
 }) {
   const manifest = readJsonBytes(manifestBytes, manifestFileName)
+  if (manifest.publicationDigest !== ref.publicationDigest) {
+    throw publicationError('CANONICAL_PUBLICATION_DIGEST_INVALID', 'Publication manifest differs from the exact selected version digest')
+  }
   const validated = validateCanonicalPublicationBundle({
     manifest,
     sourceAsset,
@@ -1795,15 +1807,14 @@ function validateConsumptionPublication({
     }
   }
   let paperSourceType = null
-  let paperHeaderTitle
+  const paperHeaderTitle = validatedPaperHeaderTitle(manifest.paperHeader)
   try {
     const paperAssetBytes = store.readVersionArtifact(ref, 'paper-asset.json')
     if (paperAssetBytes) {
       const asset = readJsonBytes(paperAssetBytes, 'paper asset')
       paperSourceType = asset.sources?.sourceType
-      if (typeof asset.paper?.headerTitle === 'string' && asset.paper.headerTitle.trim()) {
-        paperHeaderTitle = asset.paper.headerTitle
-      }
+      // Compatibility metadata is not bound for Universal NCK1. It cannot
+      // enable or override the approved publication-envelope title.
     }
   } catch {
     // Canonical-only historical publications need not have a compatibility asset.

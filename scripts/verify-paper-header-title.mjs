@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { subjectFreeHeaderTitle, configuredHeaderTitle } from '../shared/paper-canonical/headerTitle.mjs'
+import { subjectFreeHeaderTitle, configuredHeaderTitle, configuredPaperHeader, validatedPaperHeaderTitle } from '../shared/paper-canonical/headerTitle.mjs'
 import { mockPaperCoverName } from '../shared/paper-canonical/listeningPresentation.mjs'
 import { buildNck1CompatibilityPaperAsset } from '../server/import-review/revisionProjection.mjs'
 
@@ -8,6 +8,8 @@ const examples = [
   ['宁波市2025学年第一学期高考模拟考试英语学科试题卷', '宁波市2025学年第一学期高考模拟考试'],
   ['2026年合肥市高三第一次教学质量检测英语', '2026年合肥市高三第一次教学质量检测'],
   ['浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）', '浙江省镇海中学2026年5月高三高考模拟测试（5月卷）'],
+  ['山东省滨州市2025—2026学年度第一学期期末测试高三英语试题', '山东省滨州市2025—2026学年度第一学期期末测试高三'],
+  ['2025-2026学年佛山市普通高中教学质量检测（一）高三英语', '2025-2026学年佛山市普通高中教学质量检测（一）高三'],
 ]
 for (const [source, expected] of examples) assert.equal(subjectFreeHeaderTitle(source), expected)
 for (const suffix of ['英语学科试题卷', '英语试题卷', '英语试题', '英语试卷', '英语']) {
@@ -18,7 +20,9 @@ for (const suffix of ['英语学科试题卷', '英语试题卷', '英语试题'
 }
 for (const title of ['英语', ' 英 语 ', '英语试题', '——英语试卷！', '英语（ ）',
   '英语学校2026年教学质量检测', '英语学科教学质量检测', '英语教学研究', '商务英语', '专业英语',
-  '英语语言学基础', '大学英语教学研究试题', '高三英语能力测试', '高三英语试题分析']) {
+  '英语语言学基础', '大学英语教学研究试题', '高三英语能力测试', '高三英语试题分析',
+  '商务英语试题', '商务英语试卷', '专业英语试卷', '专业英语学科试题卷',
+  '大学英语试题（A卷）', '旅游英语试题卷', '医学英 语试题']) {
   assert.equal(subjectFreeHeaderTitle(title), title, title)
 }
 assert.equal(subjectFreeHeaderTitle('英语学校2026年教学质量检测英语试卷'),
@@ -32,6 +36,12 @@ const headerTitle = subjectFreeHeaderTitle(original)
 const config = { provenance: { paperName: original, source: 'Fixture', sourceType: '模拟题' } }
 assert.equal(configuredHeaderTitle(config), undefined)
 assert.equal(configuredHeaderTitle({ ...config, headerTitle }), headerTitle)
+assert.deepEqual(configuredPaperHeader({ ...config, headerTitle }), { sourceTitle: original, headerTitle })
+assert.equal(validatedPaperHeaderTitle(configuredPaperHeader({ ...config, headerTitle })), headerTitle)
+for (const binding of [null, {}, { sourceTitle: original, headerTitle: '未经审核的替换卷名' },
+  { sourceTitle: original, headerTitle, extra: true }, { sourceTitle: original, headerTitle: undefined }]) {
+  assert.throws(() => validatedPaperHeaderTitle(binding), { code: 'PAPER_HEADER_TITLE_INVALID' })
+}
 assert.throws(() => configuredHeaderTitle({ ...config, headerTitle: 'Arbitrary rename' }), /headerTitle/)
 assert.throws(() => configuredHeaderTitle({ ...config, headerTitle: '' }), /headerTitle/)
 const materialization = { paperId: 'paper-header-title-fixture', listening: { state: 'not_supplied' }, groups: [], answers: [] }

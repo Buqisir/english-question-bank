@@ -4149,9 +4149,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           <div className="paper-browse-zoom">
             {showListeningOpening && (
               <header className="canonical-paper-opening" data-canonical-paper-opening="">
-                {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title, asset.paper.headerTitle) && (
+                {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title, canonicalConsumption?.paperHeaderTitle) && (
                   <p className="canonical-paper-mock-name" data-canonical-mock-name="">
-                    {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title, asset.paper.headerTitle)}
+                    {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title, canonicalConsumption?.paperHeaderTitle)}
                   </p>
                 )}
                 <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
