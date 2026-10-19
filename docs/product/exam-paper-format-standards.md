@@ -90,7 +90,8 @@ Screen、Print/PDF 共同消费。`paper-asset.json` 不写入 `paper.headerTitl
 配置变化仍改变 Review bundle 和冻结产品的输入摘要，必须重新生成产品和审核。
 
 **启用顺序与回滚边界：** ①先部署具备 `paperHeader` 读取及校验能力的 release；
-②之后至少再完成一次普通部署，使可回滚的上一 release 也具备该能力；
+②之后至少再成功部署一次不同 SHA 的 release（重复部署当前 SHA 是 `noOp`，不推进上一 release），
+并核对 current 与 previous release 均具备该能力；
 ③完成前两步后，导卷侧才可写入 `config.headerTitle`，生成产品并送审／发布。
 旧 release `221ac453` 的读取行为如下：
 带 `paperHeader` 的 Publication 会触发 `CANONICAL_PUBLICATION_SCHEMA_INVALID`
