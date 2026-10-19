@@ -41,6 +41,21 @@ test('生产状态区分通过、待审、未完成，未知值不冒充审核�
   }
 })
 
+test('明确无听力不算缺材料，未声明仍缺材料，本批不导独立列出', () => {
+  assert.equal(classifyStatus({ answer: true, audio: false }), '缺材料')
+  assert.equal(classifyStatus({ answer: true, audio: false, listening: 'absent-by-exam-design' }), '未导入')
+  assert.equal(classifyStatus({ answer: false, listening: 'absent-by-exam-design' }), '缺材料')
+  assert.equal(classifyStatus({ excluded: true }), '本批不导：题型待支持')
+  assert.equal(classifyStatus({ local: { state: 'local_ready' }, answer: true }), '本地完成/待送审')
+  const decisions = JSON.parse(readFileSync(new URL('./guangdong-source-decisions-20261019.json', import.meta.url))).sources
+  assert.equal(Object.keys(decisions).length, 20)
+  assert.equal(Object.values(decisions).filter(value => value.listening === 'absent-by-exam-design').length, 18)
+  assert.equal(Object.values(decisions).filter(value => value.excluded).length, 2)
+  const highTwo = Object.entries(decisions).find(([key]) => key.includes('高二'))
+  assert.equal(highTwo[1].examMonth, '2025-06')
+  assert.match(highTwo[1].note, /高二卷/)
+})
+
 test('先按年月倒序，再按省份，未知最后', () => {
   const rows = [
     { examMonth: null, province: '安徽', sourceDirectory: 'a' },
