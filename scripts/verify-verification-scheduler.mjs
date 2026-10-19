@@ -233,6 +233,15 @@ assert.deepEqual(
   { script: imageBundleVerifier, exclusive: false, resourceKeys: ['browser-render'] },
   'transitive image-bundle OCR fixture stays in the browser/render lane',
 )
+const paperBrowseVerifier = 'scripts/verify-paper-browse.mjs'
+assert.deepEqual(
+  verificationSchedulingPolicy(
+    paperBrowseVerifier,
+    readFileSync(new URL('./verify-paper-browse.mjs', import.meta.url), 'utf8'),
+  ),
+  { script: paperBrowseVerifier, exclusive: false, resourceKeys: ['browser-render'] },
+  'paper-browse SSR shares the dependency cache with browser Vite servers',
+)
 assert.deepEqual(
   verificationSchedulingPolicy('server.mjs', 'server.listen(8787, host)'),
   { script: 'server.mjs', exclusive: false, resourceKeys: ['port:8787'] },
