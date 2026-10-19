@@ -14,6 +14,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
+import { capturePageDiagnostics } from './lib/browserPageDiagnostics.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
   canonicalAuthorityRef,
@@ -900,8 +901,9 @@ async function assertActualBrowserArtifacts() {
         }))
       const url = new URL('canonical-reading-qa.html', appUrl)
       url.searchParams.set('groupId', group.groupId)
+      const diagnostics = capturePageDiagnostics(page)
       await page.goto(url.href)
-      await page.locator('[data-canonical-reading-semantic-signature]').waitFor()
+      await diagnostics.waitForMarker('[data-canonical-reading-semantic-signature]')
       assert.equal(
         await page.locator(
           '[data-canonical-reading-semantic-signature]',
