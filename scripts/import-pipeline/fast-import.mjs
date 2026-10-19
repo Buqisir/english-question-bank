@@ -28,11 +28,10 @@ import {
 import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
 import { boundedAsrWindow } from './lib-listening-window.mjs'
+import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
-const EDITIONS = ['largeComplete', 'largeNoListening', 'economy8']
-const PRODUCTS = [...EDITIONS, 'answerOnly']
 const ASR_VENV = process.env.EQB_ASR_VENV || path.join(os.homedir(), '.local/share/eqbank-listening-asr')
 const ASR_MODEL = process.env.EQB_ASR_MODEL || path.join(os.homedir(),
   '.cache/huggingface/hub/models--Systran--faster-whisper-small.en/snapshots/d1d751a5f8271d482d14ca55d9e2deeebbae577f')
@@ -209,7 +208,12 @@ function materializationPath(ctx) {
 }
 
 function hasListening(ctx) {
-  return existsSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3'))
+  return productSet(ctx).hasListening
+}
+
+function productSet(ctx, projection = null) {
+  return fastProductSet(projection?.config || readJson(path.join(ctx.paperDir, 'config.json')),
+    projection ? projection.paginationSlotBindings.filter(entry => entry.familyContractId === 'listening').length : undefined)
 }
 
 function archive(ctx, file) {
@@ -317,6 +321,9 @@ async function prep(ctx, args) {
   const initArgs = separator === -1 ? [] : args.slice(separator + 1)
   const own = separator === -1 ? args : args.slice(0, separator)
   const audio = option(own, '--audio')
+  const declaration = option(own, '--listening')
+  // Validate before init writes anything; absence of audio is never a declaration.
+  declareFastListening({}, declaration, audio)
   const workers = Number(option(own, '--proofreaders') || 7)
   await step(ctx, 'init', async () => {
     if (existsSync(path.join(ctx.paperDir, 'config.json'))) return { existing: true }
@@ -324,6 +331,14 @@ async function prep(ctx, args) {
     await run(ctx, 'init', cli('universal-nck1.mjs', 'init', ctx.paperId, ...initArgs))
     return { initialized: true }
   })
+  await step(ctx, 'source-listening', () => {
+    const file = path.join(ctx.paperDir, 'config.json')
+    const config = readJson(file)
+    const next = declareFastListening(config, declaration, audio)
+    if (next !== config) writeJson(file, next)
+    return { listening: next.listening ?? 'present' }
+  })
+  declareFastListening(readJson(path.join(ctx.paperDir, 'config.json')), declaration, audio)
   await step(ctx, 'audio-ocr-review', async () => {
     const jobs = [run(ctx, 'ocr-evidence', cli('ocr-proofread.mjs', 'evidence', ctx.paperId))
       .then(() => startFigureDetection(ctx))]
@@ -446,7 +461,7 @@ function splitSummaries(ctx, parts) {
   })
 }
 
-function startPagination(ctx, candidateDigest, editions = EDITIONS, economyPageLimit = ctx.state.data.economyPageLimit ?? 8) {
+function startPagination(ctx, candidateDigest, editions = productSet(ctx).editions, economyPageLimit = ctx.state.data.economyPageLimit ?? 8) {
   for (const edition of editions) {
     const out = path.join(ctx.fast, 'pagination', edition)
     const report = path.join(out, 'report.json')
@@ -503,6 +518,9 @@ function round2Prompts(ctx) {
 }
 
 async function afterProofread(ctx, args) {
+  if (hasListening(ctx) && !existsSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3'))) {
+    fail('来源有听力但缺播放音频；请补齐音频。原卷无听力须在 prep 显式声明 --listening absent-by-exam-design')
+  }
   await step(ctx, 'flags-present', () => {
     const covered = new Set(readFlags(ctx).flatMap((flag) => flag.pages || []))
     const missing = readJson(path.join(ctx.work, 'trace.json')).pages.map((page) => page.key).filter((key) => !covered.has(key))
@@ -608,17 +626,18 @@ function economyFailure(ctx, edition) {
 
 async function mergePagination(ctx) {
   const reports = {}
+  const { editions } = productSet(ctx)
   // pagination-run stays completed after a failed finish, so a resumed finish would only re-read
   // the dead job; an edition whose job exited without a report is started again instead.
   const job = (edition) => ctx.state.background[`pagination-${edition}`]
-  const orphaned = EDITIONS.filter((edition) => job(edition) && !alive(job(edition).pid)
+  const orphaned = editions.filter((edition) => job(edition) && !alive(job(edition).pid)
     && !existsSync(path.join(ctx.fast, 'pagination', edition, 'report.json'))
     && !economyFailure(ctx, edition))
   if (orphaned.length) {
     say(`↻ 分页 ${orphaned.join(', ')} 的进程已退出且没有报告，重新启动`)
     startPagination(ctx, ctx.state.steps['pagination-run'].result.candidateDigest, orphaned)
   }
-  for (const edition of EDITIONS) {
+  for (const edition of editions) {
     const file = path.join(ctx.fast, 'pagination', edition, 'report.json')
     try {
       if (ctx.state.background[`pagination-${edition}`]) await waitBackground(ctx, `pagination-${edition}`, () => existsSync(file))
@@ -646,7 +665,8 @@ async function mergePagination(ctx) {
     if (reports[edition].status !== 'success') fail(`${edition} 分页失败，见 ${path.relative(root, file)}`)
   }
   const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
-  const stale = EDITIONS.filter((edition) => reports[edition].candidateDigest !== projection.candidateDigest)
+  productSet(ctx, projection)
+  const stale = editions.filter((edition) => reports[edition].candidateDigest !== projection.candidateDigest)
   if (stale.length) fail(`分页报告绑定的 Candidate 已过期：${stale.join(', ')}；删除对应目录后重跑 finish`)
   if (reports.economy8.selectedPlan.targetPages !== (ctx.state.data.economyPageLimit ?? 8)) {
     fail('省纸分页报告与本卷 fast state 页数不一致')
@@ -657,12 +677,12 @@ async function mergePagination(ctx) {
   const plan = validatePaperPaginationPlan({
     schemaVersion: reports.economy8.selectedPlan.targetPages === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4',
     ...binding,
-    editions: Object.fromEntries(EDITIONS.map((edition) => [edition, reports[edition].selectedPlan])),
+    editions: Object.fromEntries(editions.map((edition) => [edition, reports[edition].selectedPlan])),
   }, { ...binding, slotBindings: projection.paginationSlotBindings, sourceHasListening })
   const target = path.join(ctx.paperDir, PAPER_PAGINATION_PLAN_FILE_NAME)
   writeFileSync(`${target}.tmp`, `${stableStringify(plan)}\n`)
   renameSync(`${target}.tmp`, target)
-  return Object.fromEntries(EDITIONS.map((edition) => [edition, {
+  return Object.fromEntries(editions.map((edition) => [edition, {
     pages: reports[edition].pageCount, searched: reports[edition].searchedCandidates }]))
 }
 
@@ -821,7 +841,7 @@ function pdfContactSheets(ctx) {
   mkdirSync(qa, { recursive: true })
   const temp = mkdtempSync(path.join(os.tmpdir(), 'eqb-fast-qa-'))
   try {
-    for (const product of PRODUCTS) {
+    for (const product of productSet(ctx).products) {
       const pdf = path.join(ctx.paperDir, 'products', `${product}.pdf`)
       execFileSync('pdftoppm', ['-r', '28', '-png', pdf, path.join(temp, product)])
       const pages = readdirSync(temp).filter((name) => name.startsWith(`${product}-`))
@@ -878,7 +898,9 @@ async function finish(ctx, args) {
   // The Candidate requires summaries, metadata and the listening review, so pagination cannot
   // start earlier; source references build meanwhile and the merge rejects a stale digest.
   await step(ctx, 'pagination-run', () => {
-    const { candidateDigest } = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+    const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+    const { candidateDigest } = projection
+    productSet(ctx, projection)
     startPagination(ctx, candidateDigest)
     return { candidateDigest }
   })
@@ -891,7 +913,7 @@ async function finish(ctx, args) {
   const qa = await step(ctx, 'pdf-qa', () => pdfContactSheets(ctx))
   const steps = ctx.state.steps
   say('\n待主 Agent 目检 PDF：')
-  say(`- 四份 PDF 缩略总览：${qa.dir}/contact-{${PRODUCTS.join(',')}}.png；文字版 ${qa.dir}/<产品>.txt`)
+  say(`- ${productSet(ctx).products.length} 份 PDF 缩略总览：${qa.dir}/contact-{${productSet(ctx).products.join(',')}}.png；文字版 ${qa.dir}/<产品>.txt`)
   say(`- 写作源参考分段：${JSON.stringify(steps['source-references'].result.outline)}`)
   say(`- 拼写审查：${JSON.stringify(steps.spelling.result)}；页数：${JSON.stringify(steps.freeze.result)}`)
   say(`没有阻塞问题再送审：fast-import.mjs submit ${ctx.paperId}（目标 ${target.local ? '本地 Review' : target.origin}）`)
@@ -900,23 +922,25 @@ async function finish(ctx, args) {
 // The Candidate upload. Under the batch submission rule it runs only after PDF QA found nothing
 // blocking; `--resolves` carries Owner issues fixed by this revision.
 async function submit(ctx, args) {
+  const localPreview = args.includes('--local-preview')
+  if (localPreview && !target.local) fail('preview-local 只允许已绑定的 loopback Review，禁止访问生产')
   if (!ctx.state.steps['pdf-qa']?.finishedAt) fail('先运行 finish，并在 PDF 目检后再送审')
   const resolves = option(args, '--resolves')
-  const pushed = await step(ctx, 'push', async () => {
+  const pushed = await step(ctx, localPreview ? 'local-preview' : 'push', async () => {
     const result = await run(ctx, 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
     return { revisionId: result.revisionId, state: result.state ?? result.status ?? null, target: target.local ? 'local' : target.origin }
   })
   const qa = path.join(ctx.work, 'handoff/qa')
-  const screen = await step(ctx, 'screen', async () => {
+  const screen = await step(ctx, localPreview ? 'local-screen' : 'screen', async () => {
     try {
       return await screenTiles(ctx, pushed.revisionId, qa)
     } catch (error) {
       return { skipped: tail(error.message, 3) }
     }
   })
-  say(`\n已送审 ${pushed.revisionId}（${pushed.target}）。`)
+  say(`\n${localPreview ? '已建立本机隔离预览' : '已送审'} ${pushed.revisionId}（${pushed.target}）。`)
   say(`- Screen：${screen.tiles ? `${path.relative(root, qa)}/screen-tile-NN.png（共 ${screen.tiles} 张）${screen.url}` : `未自动截图（${screen.skipped}）`}`)
-  say(`抽查 Screen 后运行：fast-import.mjs report ${ctx.paperId} --screen "<抽查了什么>" --pdf "<看了什么>"`)
+  say(`抽查 Screen 后运行：fast-import.mjs report ${ctx.paperId}${localPreview ? ' --local-only' : ''} --screen "<抽查了什么>" --pdf "<看了什么>"`)
 }
 
 // ---------- report ----------
@@ -930,11 +954,18 @@ async function report(ctx, args) {
   const pdfNote = option(args, '--pdf')
   if (!screenNote || !pdfNote) fail('report 需要 --screen 与 --pdf 说明主 Agent 实际看了什么')
   const steps = ctx.state.steps
+  const localOnly = args.includes('--local-only')
+  if (localOnly && !target.local) fail('本地报告只允许 loopback Review')
+  const pushed = steps[localOnly ? 'local-preview' : 'push']?.result
+  const screen = steps[localOnly ? 'local-screen' : 'screen']?.result
+  if (!pushed?.revisionId || !screen?.url || !screen.tiles) fail('缺少本次精确 revision 的实际 Screen 截图')
   const handoff = path.join(ctx.work, 'handoff')
   const evidencePath = path.join(handoff, 'evidence.json')
   const now = new Date().toISOString().replace(/\.\d{3}Z$/u, 'Z')
   const paper = (name) => path.join(ctx.paperDir, name)
-  const products = PRODUCTS.map((product) => paper(`products/${product}.pdf`))
+  const selection = productSet(ctx, buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true }))
+  const selectedProducts = selection.products
+  const products = selectedProducts.map((product) => paper(`products/${product}.pdf`))
   const qa = (name) => path.join(handoff, 'qa', name)
   const edits = existsSync(path.join(ctx.work, 'materialization-edits.json'))
     ? readJson(path.join(ctx.work, 'materialization-edits.json')).edits : []
@@ -943,26 +974,28 @@ async function report(ctx, args) {
   const screenFiles = readdirSync(path.join(handoff, 'qa')).filter((name) => name.startsWith('screen-tile-')).sort().map(qa)
   const check = (detail, files) => ({ status: 'pass', checkedAt: now, detail, files: files.filter(existsSync).map((file) => fileEntry(handoff, file)) })
   const evidence = {
-    schemaVersion: 'preprocessing-handoff-evidence-v4',
+    schemaVersion: selection.hasListening ? 'preprocessing-handoff-evidence-v4' : 'preprocessing-handoff-evidence-v5',
     paperId: ctx.paperId,
     sourceDigest: steps.verify.result.sourceDigest,
     candidateDigest: steps.verify.result.candidateDigest,
-    pdfs: PRODUCTS.map((edition, index) => ({ edition, ...fileEntry(handoff, products[index]) })),
-    screen: { url: steps.screen?.result?.url ?? null, revisionId: steps.push.result.revisionId },
+    pdfs: selectedProducts.map((edition, index) => ({ edition, ...fileEntry(handoff, products[index]) })),
+    screen: { url: screen.url, revisionId: pushed.revisionId },
     checks: {
-      ocr: check(`扫描源共 ${readJson(path.join(ctx.work, 'trace.json')).pages.length} 页，Tesseract OCR 后由 ${readJson(path.join(ctx.fast, 'round1.json')).length} 个子 Agent 对照原图逐行校对（${compile.items} 条，${compile.textCorrections} 处文字修正，${compile.uncertain} 处存疑）；服务器 proofread/pull 收据已绑定（${steps['ocr-review'].result.revisionId}）。可精确定位的识别修正写入更正报告。`,
+      ocr: check(`扫描源共 ${readJson(path.join(ctx.work, 'trace.json')).pages.length} 页，Tesseract OCR 后由导题 Agent 对照原图逐行校对（${compile.items} 条，${compile.textCorrections} 处文字修正，${compile.uncertain} 处存疑）；${localOnly ? '本机隔离' : ''}服务器 proofread/pull 收据已绑定（${steps['ocr-review'].result.revisionId}）。可精确定位的识别修正写入更正报告。`,
         [path.join(ctx.work, 'proofread-input.json'), paper('agent-ocr-correction-report-v2.json')]),
       sourceExtraction: check(`Materialization 由服务器 producer 从确认文本生成；Agent 编辑 ${edits.length} 处，逐条记录在编辑日志。写作源参考按答案卷行几何重建段落。`,
         [path.join(ctx.work, 'materialization-edits.json'), paper('source-references-v1.json')]),
       answerTranscription: check(`校对 worker 对照答案页原图逐题抄录，与答案键比对 ${steps['answer-check'].result.compared}/${steps['answer-check'].result.compared} 一致，无 AI 解题。`,
         [qa('answer-key-comparison.json'), paper('signals/ai-answer-check.json')]),
       ...(listening ? { listeningPlayback: check(`整文件 ASR 开/关 VAD 两遍（small.en，180 秒窗口）；${listening.groups} 组中 ${listening.usable} 组 usable，引用 ${listening.evidence} 个窗口证据。仅为 ASR 与源文比对的教师导航结论，不是直接听审、逐字或全录音认证。`,
-        [paper('listening-review-v1.json')]) } : {}),
+        [paper('listening-review-v1.json')]) } : !selection.hasListening ? {
+        listeningPlayback: { status: 'not_applicable', detail: '来源明确声明原卷设计无听力，Canonical 听力题组为零，不执行音频与 ASR 步骤。' },
+      } : {}),
       screenVisual: check(screenNote, screenFiles),
-      pdfContent: check(`四份冻结 PDF：${PRODUCTS.map((product) => `${product} ${steps.freeze.result[product]} 页`).join('、')}。${pdfNote}`,
+      pdfContent: check(`${selectedProducts.length} 份冻结 PDF：${selectedProducts.map((product) => `${product} ${steps.freeze.result[product]} 页`).join('、')}。${pdfNote}`,
         [...products, qa('contact-answerOnly.png')]),
-      pdfVisual: check(`四份 PDF 全部页面低分辨率缩略总览。${pdfNote}`,
-        [...products, ...PRODUCTS.map((product) => qa(`contact-${product}.png`))]),
+      pdfVisual: check(`${selectedProducts.length} 份 PDF 全部页面低分辨率缩略总览。${pdfNote}`,
+        [...products, ...selectedProducts.map((product) => qa(`contact-${product}.png`))]),
     },
   }
   archive(ctx, evidencePath)
@@ -971,9 +1004,14 @@ async function report(ctx, args) {
   archive(ctx, output)
   await run(ctx, 'preprocessing-report', cli('review.mjs', 'preprocessing-report', ctx.paperId,
     '--evidence', evidencePath, '--output', output), { review: true })
+  if (localOnly) {
+    ctx.state.data.status = 'local_ready'
+    ctx.state.data.localReport = path.relative(root, output)
+    save(ctx)
+  }
   const total = Object.values(steps).reduce((sum, entry) => sum + (entry.seconds || 0), 0)
   say(JSON.stringify({ ok: true, evidence: path.relative(root, evidencePath), report: path.relative(root, output),
-    revisionId: steps.push.result.revisionId, machineSeconds: Math.round(total) }, null, 2))
+    revisionId: pushed.revisionId, status: localOnly ? 'local_ready' : 'reported', machineSeconds: Math.round(total) }, null, 2))
 }
 
 function status(ctx) {
@@ -989,7 +1027,7 @@ const STEP_ORDER = [
   'flags-present', 'compile', 'ocr-review', 'materialize', 'presentation', 'figure-sizes', 'subtitles-watermarks',
   'spelling', 'verify', 'answer-check', 'build', 'round2-requests', 'asr-wait',
   'summaries', 'search-metadata', 'listening-review', 'ocr-correction-report', 'pagination-run', 'source-references',
-  'pagination-plan', 'freeze', 'pdf-qa', 'push', 'screen',
+  'pagination-plan', 'freeze', 'pdf-qa', 'local-preview', 'local-screen', 'push', 'screen',
 ]
 
 // Forgets a step and everything after it, for re-deriving digest-bound outputs after an
@@ -998,6 +1036,8 @@ function redoFrom(ctx, name) {
   const index = STEP_ORDER.indexOf(name)
   if (index === -1) fail(`--redo-from 只接受：${STEP_ORDER.join(', ')}`)
   for (const later of STEP_ORDER.slice(index)) delete ctx.state.steps[later]
+  delete ctx.state.data.status
+  delete ctx.state.data.localReport
   // A retained listening review pins its Candidate digest and makes the projection refuse the
   // re-derived Candidate, so installed sidecars of forgotten steps move aside up front.
   for (const [owner, file] of [['summaries', 'paragraph-summaries-v1.json'], ['search-metadata', 'public-search-metadata-v1.json'],
@@ -1032,6 +1072,7 @@ try {
   else if (command === 'after-proofread') await afterProofread(ctx, args)
   else if (command === 'finish') await finish(ctx, args)
   else if (command === 'submit') await submit(ctx, args)
+  else if (command === 'preview-local') await submit(ctx, [...args, '--local-preview'])
   else if (command === 'report') await report(ctx, args)
   else if (command === 'status') status(ctx)
   else if (command === 'asr-extra') await asrExtra(ctx, args)

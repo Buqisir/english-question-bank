@@ -37,6 +37,22 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 脚本遇到需要判断的情况以退出码 2 停下并说明（Materialization issues、答案不一致等），
 处理后加 `--issues-resolved` 重跑同一命令；已完成步骤自动跳过。
 
+### 原卷设计无听力与本地交付
+
+已经核对原卷设计无听力时，用 `prep <id> --listening absent-by-exam-design -- <init 参数>`，
+不传 `--audio`。这会写入 `config.json` 顶层来源声明；不能用缺音频代替声明。
+后续以 Canonical 听力题组独立核对，只分页 `largeNoListening` / `economy8`，并冻结这两款
+及 `answerOnly`，清单为 `paper-pdf-products-v3`，交接证据为 `preprocessing-handoff-evidence-v5`。
+有听力来源仍走原四产品与 v1/v2 清单、v4 交接证据。
+
+Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离 loopback 服务；
+`after-proofread` 的 OCR 确认也只能发往本机。完成 `finish` 与全部 PDF 页目检后，
+运行 `preview-local <id>` 建立本机 Candidate Screen，抽查实际截图，再运行
+`report <id> --local-only --screen "…" --pdf "…"`，成功记为 `local_ready`。
+这两个命令拒绝生产绑定，预览使用独立的 `local-preview` / `local-screen` 步骤，
+不把生产 `push` 标为完成。此状态不是送审；换到生产须从 OCR 确认重新建立绑定，
+不能沿用本地收据。广东批次明确决定见 `scripts/import-pipeline/guangdong-source-decisions-20261019.json`。
+
 ## 送生产
 
 - 绑定写 `https://eqbank.cc`；账号 `droid-import`（import_agent，member），密码只在钥匙串
