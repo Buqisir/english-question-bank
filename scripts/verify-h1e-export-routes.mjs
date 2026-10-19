@@ -29,9 +29,12 @@ function createResponse() {
     statusCode: 0,
     headers: {},
     body: null,
+    setHeader(name, value) {
+      this.headers[name] = value
+    },
     writeHead(statusCode, headers) {
       this.statusCode = statusCode
-      this.headers = headers
+      Object.assign(this.headers, headers)
     },
     end(body) {
       this.body = body
@@ -39,8 +42,8 @@ function createResponse() {
   }
 }
 
-function routeByPath(routes, pathname) {
-  return routes.find((route) => route.method === 'POST' && pathname.match(route.pattern))
+function routeByPath(routes, pathname, method = 'POST') {
+  return routes.find((route) => route.method === method && pathname.match(route.pattern))
 }
 
 console.log('H1-E verify: export route extraction')
@@ -77,7 +80,57 @@ const implementation = {
 }
 
 const routes = createExportRoutes(implementation)
-assert('createExportRoutes returns the supported Print and companion-analysis routes', routes.length === 4)
+assert('createExportRoutes returns the supported Print, product inventory and companion-analysis routes', routes.length === 5)
+for (const [method, pathname] of [
+  ['POST', '/api/exports/companion-analysis-html'],
+  ['POST', '/api/exports/companion-analysis-pdf'],
+  ['POST', '/api/exports/print-html'],
+  ['POST', '/api/exports/print-pdf'],
+  ['GET', '/api/exports/papers/paper-test/products'],
+  ['GET', '/api/exports/papers/paper-test/pdf'],
+  ['HEAD', '/api/exports/papers/paper-test/pdf'],
+  ['GET', '/api/exports/papers/paper-test/print'],
+  ['HEAD', '/api/exports/papers/paper-test/print'],
+]) {
+  assert(`${method} ${pathname} selects exactly one supported route`,
+    routes.filter(route => route.method === method && route.pattern.test(pathname)).length === 1)
+}
+
+const inventoryPath = '/api/exports/papers/paper%3Atest/products'
+const inventoryRoute = routeByPath(routes, inventoryPath, 'GET')
+assert('product inventory is available to authenticated members', inventoryRoute.ownerOnly === false)
+for (const method of ['HEAD', 'POST', 'PUT', 'PATCH', 'DELETE']) {
+  assert(`product inventory does not accept ${method}`, routeByPath(routes, inventoryPath, method) === undefined)
+}
+const inventory = { editions: ['largeNoListening', 'economy8', 'answerOnly'] }
+const inventoryResponse = createResponse()
+const inventoryUrl = new URL(`http://127.0.0.1${inventoryPath}?publicationDigest=sha256%3Apublication`)
+const inventoryContext = {
+  sendJson(response, statusCode, body) {
+    response.writeHead(statusCode, { 'content-type': 'application/json' })
+    response.end(JSON.stringify(body))
+  },
+  draftPaperStore: {
+    async getPublishedPaperProductInventory(paperId, publicationDigest) {
+      assert('product inventory delegates decoded identity and exact publication digest',
+        paperId === 'paper:test' && publicationDigest === 'sha256:publication')
+      return inventory
+    },
+  },
+}
+await inventoryRoute.handle({ response: inventoryResponse, url: inventoryUrl,
+  match: inventoryPath.match(inventoryRoute.pattern), context: inventoryContext })
+assert('product inventory returns the published inventory', inventoryResponse.statusCode === 200
+  && inventoryResponse.body === JSON.stringify(inventory))
+assert('product inventory response is private and never cached',
+  inventoryResponse.headers['cache-control'] === 'private, no-store')
+const invalidInventoryResponse = createResponse()
+await inventoryRoute.handle({ response: invalidInventoryResponse, url: inventoryUrl,
+  match: inventoryPath.match(inventoryRoute.pattern), context: { ...inventoryContext,
+    draftPaperStore: { getPublishedPaperProductInventory() { throw new Error('Publication changed') } },
+  } })
+assert('product inventory rejects a stale publication with 409', invalidInventoryResponse.statusCode === 409
+  && JSON.parse(invalidInventoryResponse.body).error === 'Publication changed')
 
 const input = { title: 'test', edition: 'largeNoListening', items: [{ questionGroupId: 'group-1' }] }
 const request = { method: 'POST' }

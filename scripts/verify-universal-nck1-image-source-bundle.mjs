@@ -221,6 +221,8 @@ const canonical = imported(confirmed)
 assert.deepEqual(canonical.issues, [])
 const preview = compileNck1MaterializationCandidatePreview(canonical.candidate)
 assert(preview.compilation, JSON.stringify(preview.unresolvedIssues, null, 2))
+assert.equal(preview.compilation.artifacts.canonicalPaper.questionGroups
+  .filter(group => group.contractRef.familyContractId === 'listening').length, 0)
 assert.deepEqual(validateInlineBlankTextBoundaries(preview.compilation.artifacts.canonicalPaper.questionGroups), [], 'OCR source separators survive materialization across all three blank families')
 const captured = preview.compilation.artifacts.sourceCapture.documents
 for (const pages of fixture.pageSets) {
@@ -271,6 +273,13 @@ try {
     '--year', '2025', '--month', '12',
     ...pageArguments,
   ), /INITIALIZED/u)
+  // This synthetic source starts at reading q21 and supplies no listening.
+  // Its product-required Review workspace must declare that source contract.
+  const configPath = path.join(cliPaperDir, 'config.json')
+  const config = JSON.parse(readFileSync(configPath, 'utf8'))
+  assert.equal(config.pdfProductsRequired, true)
+  config.listening = 'absent-by-exam-design'
+  writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`)
   const manifestPath = path.join(cliPaperDir, 'universal-source-manifest.json')
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
   const bundleRecords = manifest.documents.filter((document) =>
