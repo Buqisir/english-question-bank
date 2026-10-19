@@ -278,41 +278,50 @@ function bookmarkName(kind, value) {
     .digest('hex').slice(0, 24)}`
 }
 
-function pdfPageCount(pdfPath) {
+// Cache inspection of immutable bytes, never of a potentially overwritten path.
+// Every assertion still consumes the freshly rendered PDF for its own case.
+const pdfInspections = new Map()
+function inspectPdf(pdfPath) {
+  const digest = createHash('sha256').update(readFileSync(pdfPath)).digest('hex')
+  if (pdfInspections.has(digest)) return pdfInspections.get(digest)
   const info = execFileSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
   const match = info.match(/^Pages:\s+([1-9]\d*)$/m)
   assert.ok(match)
-  return Number(match[1])
+  const text = execFileSync('pdftotext', ['-layout', pdfPath, '-'], { encoding: 'utf8' })
+  const inspection = { pageCount: Number(match[1]), text, pages: text.split('\f') }
+  pdfInspections.set(digest, inspection)
+  return inspection
+}
+
+function pdfPageCount(pdfPath) {
+  return inspectPdf(pdfPath).pageCount
 }
 
 function pdfPageContainingText(pdfPath, text) {
   const expected = text.replaceAll(/\s/g, '')
-  for (let page = 1; page <= pdfPageCount(pdfPath); page += 1) {
-    const pageText = execFileSync(
-      'pdftotext',
-      ['-f', String(page), '-l', String(page), '-layout', pdfPath, '-'],
-      { encoding: 'utf8' },
-    ).replaceAll(/\s/g, '')
-    if (pageText.includes(expected)) return page
+  const { pageCount, pages } = inspectPdf(pdfPath)
+  for (let page = 1; page <= pageCount; page += 1) {
+    if (pages[page - 1].replaceAll(/\s/g, '').includes(expected)) return page
   }
   return null
 }
 
 function pdfWords(pdfPath) {
-  const bbox = execFileSync(
-    'pdftotext',
-    ['-bbox-layout', pdfPath, '-'],
-    { encoding: 'utf8' },
-  )
-  return [...bbox.matchAll(
-    /<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([^<]+)<\/word>/g,
-  )].map((match) => ({
-    xMin: Number(match[1]),
-    yMin: Number(match[2]),
-    xMax: Number(match[3]),
-    yMax: Number(match[4]),
-    text: match[5],
-  }))
+  const inspection = inspectPdf(pdfPath)
+  // Cases without fixed parts do not need word geometry.
+  if (!inspection.words) {
+    const bbox = execFileSync('pdftotext', ['-bbox-layout', pdfPath, '-'], { encoding: 'utf8' })
+    inspection.words = [...bbox.matchAll(
+      /<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([^<]+)<\/word>/g,
+    )].map((match) => ({
+      xMin: Number(match[1]),
+      yMin: Number(match[2]),
+      xMax: Number(match[3]),
+      yMax: Number(match[4]),
+      text: match[5],
+    }))
+  }
+  return inspection.words
 }
 
 function pdfTextBounds(pdfPath, text, label) {
@@ -1526,11 +1535,7 @@ async function assertActualPaperSurfaceArtifacts() {
         const priorPageCount = printGeometry.get(pageCountKey)
         if (priorPageCount) assert.equal(renderedPageCount, priorPageCount)
         else printGeometry.set(pageCountKey, renderedPageCount)
-        const pdfText = execFileSync(
-          'pdftotext',
-          ['-layout', pdfPath, '-'],
-          { encoding: 'utf8' },
-        )
+        const pdfText = inspectPdf(pdfPath).text
         const compactPdfText = pdfText.replaceAll(/\s/g, '')
         assert.equal(compactPdfText.includes('POISONEDLEGACY'), false)
         for (const block of canonical.promptBlocks) {

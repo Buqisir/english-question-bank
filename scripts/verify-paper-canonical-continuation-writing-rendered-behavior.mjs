@@ -1980,7 +1980,13 @@ function assertCanonicalWritingChromeHtmlStructure(html, canonical, label) {
   }
 }
 
+// Cache only inspection, keyed by bytes and exact page scope. Rendering and
+// every role/layout assertion still run independently.
+const pdfLineInspections = new Map()
 function extractPdfLines(pdfPath, pageNumber = null) {
+  const digest = createHash('sha256').update(readFileSync(pdfPath)).digest('hex')
+  const key = JSON.stringify([digest, pageNumber])
+  if (pdfLineInspections.has(key)) return pdfLineInspections.get(key)
   const pageArgs = pageNumber === null
     ? []
     : ['-f', String(pageNumber), '-l', String(pageNumber)]
@@ -1992,7 +1998,7 @@ function extractPdfLines(pdfPath, pageNumber = null) {
   const matches = [...xml.matchAll(
     /<line xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([\s\S]*?)<\/line>/g,
   )]
-  return matches.map((match) => {
+  const lines = matches.map((match) => {
     const words = [...match[5].matchAll(
       /<word xMin="([^"]+)" yMin="([^"]+)" xMax="([^"]+)" yMax="([^"]+)">([\s\S]*?)<\/word>/g,
     )].map((wordMatch) => ({
@@ -2011,6 +2017,8 @@ function extractPdfLines(pdfPath, pageNumber = null) {
       words,
     }
   })
+  pdfLineInspections.set(key, lines)
+  return lines
 }
 
 function extractPdfLineGeometry(pdfPath, text, pageNumber = null) {
