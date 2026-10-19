@@ -549,7 +549,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       return
     }
     const input = await context.readJsonBody(request, { maxBytes: 5_000_000 })
-    context.sendJson(response, 200, { receipt: store.confirmOcrRevision(
+    context.sendJson(response, 200, { receipt: await store.confirmUploadedOcrRevision(
       decodeURIComponent(match[1]), match[2], input, actor, { reviewerKind: 'import_agent' },
     ) })
   })))
@@ -774,7 +774,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireOwner(response, context)) return
     const input = await context.readJsonBody(request, { maxBytes: 5_000_000 })
-    context.sendJson(response, 200, { receipt: store.confirmOcrRevision(
+    context.sendJson(response, 200, { receipt: await store.confirmUploadedOcrRevision(
       decodeURIComponent(match[1]),
       match[2],
       input,
