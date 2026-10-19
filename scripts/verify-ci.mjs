@@ -299,10 +299,19 @@ const sentenceAnalysisScripts = uniqueRegistered([
   'scripts/verify-sentence-analysis-browser.mjs',
 ])
 paperScripts.push(...sentenceAnalysisScripts.filter((script) => !paperScripts.includes(script)))
+// CI implementation changes select all; ordinary feature work does not need
+// process/scheduler/policy metatests. Exclude them from the derived set, rather
+// than only omitting an explicit list entry that the registry would add back.
+const ciMetaScripts = new Set([
+  'scripts/verify-verification-command-runner.mjs',
+  'scripts/verify-verification-scheduler.mjs',
+  'scripts/verify-ci-pr-plan.mjs',
+])
 const featureScripts = uniqueRegistered([
   ...registry.scripts.filter(
-    (script) => sentenceAnalysisScripts.includes(script)
-      || (!paperScripts.includes(script) && !securityScripts.includes(script)),
+    (script) => !ciMetaScripts.has(script)
+      && (sentenceAnalysisScripts.includes(script)
+        || (!paperScripts.includes(script) && !securityScripts.includes(script))),
   ),
   // Signal staging is an import-pipeline feature as well as a Paper input.
   'scripts/verify-listening-signal.mjs',
