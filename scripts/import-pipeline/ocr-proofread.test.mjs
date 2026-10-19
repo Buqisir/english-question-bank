@@ -200,6 +200,19 @@ function referencesFixture(texts, taskTypes = ['continuation']) {
   }] }] })
 }
 
+test('numbered source sample and scoring labels establish and preserve writing boundaries', () => {
+  const result = referencesFixture(['第四部分', '第一节（满分15分）',
+    '一、参考范文：', 'Dear Alex,', 'A source application.', '二、评分原则',
+    '1. 本题总分为15分。', '第二节（满分25分）', '一、参考范文：',
+    'A source story.', '二、评分原则', '1. 本题总分为25分。'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Dear Alex,', 'A source application.'], ['A source story.']])
+  assert.deepEqual(result.groups.map(g => g.scoring.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['1. 本题总分为15分。'], ['1. 本题总分为25分。']])
+  assert.equal(result.groups[0].essays.entries[0].sourceLabel, '一、参考范文：')
+})
+
 test('a repeated writing label merged with its bare section keeps both samples', () => {
   const result = referencesFixture(['第四部分 写作', '写作\n第一节：',
     'One possible version:', 'A source application.', '第二节：', 'A source story.'],

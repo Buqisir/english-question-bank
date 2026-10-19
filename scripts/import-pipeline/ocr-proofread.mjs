@@ -1035,7 +1035,7 @@ export function writingSectionAfterPart(text) {
   const bare = rest.match(BARE_WRITING_SECTION)
   return bare ? (bare[1] === '一' ? 'application' : 'continuation') : null
 }
-const ENTRY_LABEL = /^(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
+const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
