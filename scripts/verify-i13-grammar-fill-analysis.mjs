@@ -75,7 +75,7 @@ function assertPromptContract() {
   assert('prompt names schemaVersion grammar-fill-analysis-v2', prompt.includes('grammar-fill-analysis-v2'))
   // promptVersion
   assert('prompt names promptVersion grammar-fill-analysis-v2', prompt.includes('promptVersion') || prompt.includes('grammar-fill-analysis-v2'))
-  // All 23 leaf facet keys must be named, including same-POS adjective negation.
+  // All 24 leaf facet keys must be named, including the cleft connector.
   for (const leaf of [
     'grammar-fill.given.verb.finite',
     'grammar-fill.given.verb.non-finite',
@@ -100,6 +100,7 @@ function assertPromptContract() {
     'grammar-fill.no-hint.conjunction.relative-clause',
     'grammar-fill.no-hint.conjunction.noun-clause',
     'grammar-fill.no-hint.conjunction.adverbial-clause',
+    'grammar-fill.no-hint.conjunction.cleft',
   ]) {
     assert(`prompt names leaf facet: ${leaf}`, prompt.includes(leaf))
   }
@@ -124,6 +125,18 @@ function assertPromptContract() {
   assert('prompt requires the shortest useful sentence skeleton', prompt.includes('restore the shortest useful skeleton around the gap'))
   assert('prompt explains slot job before answer form', prompt.includes('state what job the gap performs in that skeleton') && prompt.includes('derive the required word or form'))
   assert('prompt requires controlled similarityProfile', prompt.includes('Controlled `similarityProfile`') && prompt.includes('similarityForm'))
+  const roleSection = prompt.split('### `role` (non-finite only)')[1].split('### `no-hint`')[0]
+  assert('prompt role vocabulary includes appositive with its Chinese meaning',
+    roleSection.includes('`appositive`（同位语）'))
+  assert('prompt controlled non-finite routes include appositive-gerund',
+    /attributive-special-limiter \| attributive-participle \|\s*appositive-gerund \|/.test(prompt))
+  assert('prompt binds appositive route to its role and empty features',
+    prompt.includes('`appositive-gerund` uses `role: "appositive"` and `features: []`'))
+  assert('prompt restricts appositive alternatives to ordinary active doing',
+    prompt.includes('only server-derived ordinary active `doing`')
+      && prompt.includes('Every slash-separated\nalternative must qualify; empty alternatives are rejected'))
+  assert('prompt constrains inherited appositive conversion route',
+    prompt.includes('keep `role: null` and use exactly `["appositive-gerund"]` with\n`non-finite-result`'))
 }
 
 // ============================================================
@@ -135,7 +148,7 @@ function assertRegistryContract() {
   const raw = readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json')
   const registry = JSON.parse(raw)
   assert('registry is an array', Array.isArray(registry))
-  assert('registry has exactly 23 leaves', registry.length === 23)
+  assert('registry has exactly 24 leaves', registry.length === 24)
 
   const EXPECTED_LEAVES = [
     'grammar-fill.given.verb.finite',
@@ -161,6 +174,7 @@ function assertRegistryContract() {
     'grammar-fill.no-hint.conjunction.relative-clause',
     'grammar-fill.no-hint.conjunction.noun-clause',
     'grammar-fill.no-hint.conjunction.adverbial-clause',
+    'grammar-fill.no-hint.conjunction.cleft',
   ]
 
   for (const key of EXPECTED_LEAVES) {
@@ -182,9 +196,9 @@ function assertRegistryContract() {
   }
 
   const similarityRegistry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-similarity-v1.json'))
-  assert('similarity registry has exactly 23 facet entries', similarityRegistry.length === 23)
+  assert('similarity registry has exactly 24 facet entries', similarityRegistry.length === 24)
   assert(
-    'similarity registry covers the same 23 facet keys',
+    'similarity registry covers the same 24 facet keys',
     JSON.stringify(similarityRegistry.map((entry) => entry.facet_key).sort())
       === JSON.stringify(EXPECTED_LEAVES.sort()),
   )
@@ -310,6 +324,135 @@ function stubProvider(payload) {
 
 async function assertAnalysisValidation() {
   const input = gfFixtureInput()
+
+  const cleftInput = {
+    paper: { paperId: 'paper-cleft-authority' },
+    group: {
+      groupId: 'group-cleft-authority',
+      paragraphs: [{ id: 'paragraph:cleft', text: Array.from({ length: 10 }, (_, index) =>
+        `It was in the park __${56 + index}__ we met our friends.`).join(' ') }],
+      questions: Array.from({ length: 10 }, (_, index) => ({
+        id: `question:cleft-${56 + index}`, blankId: `blank:cleft-${56 + index}`,
+        stem: String(56 + index), prompt: null, answerKey: 'that',
+      })),
+    },
+  }
+  const cleftAnalysis = {
+    schemaVersion: 'grammar-fill-analysis-v2', paperId: cleftInput.paper.paperId,
+    sourceAssetVersion: 1, targetGroups: [cleftInput.group.groupId],
+    groups: { [cleftInput.group.groupId]: { overview: '强调见面发生的地点。' } },
+    blanks: Object.fromEntries(cleftInput.group.questions.map((q) => [q.id, {
+      blankId: q.blankId, blankNo: Number(q.stem), blankType: 'no-hint', hint: null,
+      facetKey: 'grammar-fill.no-hint.conjunction.cleft', answer: 'that', role: null,
+      similarityProfile: { route: 'cleft-that', features: [] },
+      reason: 'It was ... that ... 强调地点，连接标记填 that。',
+      evidence: [{ type: 'clause-frame', signalText: 'It was in the park',
+        signalSide: 'passage', relation: '强调句的结构。' }],
+    }])),
+  }
+  for (const answer of ['that', '  THAT  ', 'that / THAT']) {
+    const authority = structuredClone(cleftInput)
+    authority.group.questions[0].answerKey = answer
+    validateGrammarFillShape(cleftAnalysis, authority)
+    assert(`cleft accepts normalized authoritative ${answer}`, true)
+  }
+  for (const answer of ['who', 'it', 'because', 'that/who', 'who/that', 'that/', '/that', '']) {
+    await assertRejects(`cleft rejects authoritative ${answer} even with a matching AI answer`, () => {
+      const authority = structuredClone(cleftInput)
+      authority.group.questions[0].answerKey = answer
+      const invalid = structuredClone(cleftAnalysis)
+      Object.values(invalid.blanks)[0].answer = answer.split('/')[0]
+      validateGrammarFillShape(invalid, authority)
+    }, /cleft-that.*权威答案 that/)
+  }
+  await assertRejects('cleft rejects a wrong AI answer against authoritative that', () => {
+    const invalid = structuredClone(cleftAnalysis)
+    Object.values(invalid.blanks)[0].answer = 'who'
+    validateGrammarFillShape(invalid, cleftInput)
+  }, /cleft-that.*权威答案 that/)
+
+  // Original synthetic group, independent of the existing source/answer fixture.
+  for (const conversion of [false, true]) {
+    const syntacticInput = {
+      paper: { paperId: `paper-appositive-${conversion}` },
+      group: {
+        groupId: `group-appositive-${conversion}`,
+        paragraphs: [{ id: 'paragraph:principles', text: Array.from({ length: 10 }, (_, index) =>
+          `The club shared one principle — __${56 + index}__ new members settle in.`).join(' ') }],
+        questions: Array.from({ length: 10 }, (_, index) => ({
+          id: `question:principle-${56 + index}`, blankId: `blank:principle-${56 + index}`,
+          stem: String(56 + index), prompt: 'help', answerKey: 'helping',
+        })),
+      },
+    }
+    const synthetic = {
+      schemaVersion: 'grammar-fill-analysis-v2', paperId: syntacticInput.paper.paperId,
+      sourceAssetVersion: 1, targetGroups: [syntacticInput.group.groupId],
+      groups: { [syntacticInput.group.groupId]: { overview: '社团说明帮助新成员适应环境的原则。' } },
+      blanks: Object.fromEntries(syntacticInput.group.questions.map((q) => [q.id, {
+        blankId: q.blankId, blankNo: Number(q.stem), blankType: 'given', hint: q.prompt,
+        facetKey: conversion ? 'grammar-fill.given.conversion.noun-to-verb' : 'grammar-fill.given.verb.non-finite',
+        answer: 'helping', role: conversion ? null : 'appositive',
+        similarityProfile: conversion ? { route: 'non-finite-result', features: ['appositive-gerund'] }
+          : { route: 'appositive-gerund', features: [] },
+        reason: 'helping new members settle in 解释 principle 的内容，作同位语，使用动名词。',
+        evidence: [{ type: 'antecedent', signalText: 'one principle', signalSide: 'passage', relation: '指出所解释的名词内容。' }],
+      }])),
+    }
+    stampGrammarFillDerivedFields(synthetic)
+    validateGrammarFillShape(synthetic, syntacticInput)
+    assert(`appositive ${conversion ? 'conversion' : 'verb'} accepts ordinary doing`,
+      Object.values(synthetic.blanks).every((blank) => blank.form === 'doing' && blank.similarityForm === 'doing'))
+    // The legacy answer-match contract accepts one official alternative;
+    // the public-authority roundtrip separately checks the complete slash key.
+    for (const [answer, sourceAnswer] of [
+      ['not helping', 'not helping'],
+      ['helping', 'helping / assisting'],
+      ['not helping', 'helping/not helping'],
+      ['not   helping', '  HELPING / not   helping  '],
+    ]) {
+      const valid = structuredClone(synthetic)
+      Object.values(valid.blanks)[0].answer = answer
+      const authority = structuredClone(syntacticInput)
+      authority.group.questions[0].answerKey = sourceAnswer
+      stampGrammarFillDerivedFields(valid)
+      validateGrammarFillShape(valid, authority)
+      assert(`appositive accepts ${answer} without rewriting authority (${conversion})`,
+        Object.values(valid.blanks)[0].answer === answer && authority.group.questions[0].answerKey === sourceAnswer)
+    }
+    if (!conversion) {
+      await assertRejects('appositive cannot omit its new similarity profile', () => {
+        const invalid = structuredClone(synthetic)
+        delete Object.values(invalid.blanks)[0].similarityProfile
+        validateGrammarFillShape(invalid, syntacticInput)
+      }, /appositive|profile/i)
+    }
+    for (const patch of [
+      { role: conversion ? 'appositive' : 'adverbial' },
+      { similarityProfile: conversion
+        ? { route: 'non-finite-result', features: ['appositive-gerund', 'adverbial-active'] }
+        : { route: 'appositive-gerund', features: ['preposed'] } },
+      { similarityProfile: conversion
+        ? { route: 'finite-result', features: ['appositive-gerund'] }
+        : { route: 'adverbial-active', features: [] } },
+    ]) {
+      await assertRejects(`appositive rejects mismatched role/route/features (${conversion}, ${JSON.stringify(patch)})`, () => {
+        const invalid = structuredClone(synthetic)
+        Object.assign(Object.values(invalid.blanks)[0], patch)
+        validateGrammarFillShape(invalid, syntacticInput)
+      }, /role|feature/)
+    }
+    for (const answer of ['to help', 'to be helped', 'being helped', 'having helped', 'having been helped', 'to have helped', 'helped', 'not to sing', 'not to be helping', 'not having been helping',
+      'helping / not to sing', 'not to be helping / helping', '/helping', 'helping/', 'helping // assisting']) {
+      await assertRejects(`appositive rejects ${answer} despite fake doing (${conversion})`, () => {
+        const invalid = structuredClone(synthetic)
+        Object.assign(Object.values(invalid.blanks)[0], { answer, form: 'doing', similarityForm: 'doing' })
+        const authority = structuredClone(syntacticInput)
+        authority.group.questions[0].answerKey = answer
+        validateGrammarFillShape(invalid, authority)
+      }, /appositive-gerund.*普通主动 doing/)
+    }
+  }
 
   // --- Happy path ---
   const result = await analyzeGrammarFillImportCandidate(input, {

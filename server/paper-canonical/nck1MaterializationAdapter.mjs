@@ -1732,6 +1732,303 @@ function appendReadingSourceEmphasis(source, raw, documentsById, review, issues)
   }
 }
 
+// OCR-v3 may confirm an aggregate A-D bank or an ordinary body figure whose
+// top includes preceding text. Materialization v3/v4 proves these separately.
+// This proves provenance and consumption; graphic completeness needs image QA.
+function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks) {
+  const same = (left, right) => digestJson(left) === digestJson(right)
+  const reject = message => { throw new Error(message) }
+  const mediaById = new Map(raw.media.map(media => [media.mediaId, media]))
+  if (mediaById.size !== raw.media.length) reject('OCR media IDs must be globally unique')
+  const references = raw.groups.flatMap(group => [
+    ...referencedMediaIds(group.blocks),
+    ...group.questions.flatMap(question => question.options.filter(option => option.figure)
+      .map(option => option.figure.mediaId)),
+    ...(group.optionBank || []).filter(option => option.figure).map(option => option.figure.mediaId),
+  ])
+  const consumed = new Set()
+  const childParents = new Map()
+  const topTrims = new Map()
+  const questionBanks = raw.groups.flatMap(group => group.questions
+    .filter(question => question.options.some(option => option.figure))
+    .map(question => ({ group, question })))
+  const consumedBanks = new Set()
+  const inside = (outer, inner) => inner.x >= outer.x - 1e-6 && inner.y >= outer.y - 1e-6
+    && inner.x + inner.width <= outer.x + outer.width + 1e-6
+    && inner.y + inner.height <= outer.y + outer.height + 1e-6
+  const matchesCrop = (media, locator) => media?.usage === 'content' && media.kind === 'figure'
+    && media.extraction.kind === 'pdf_crop'
+    && media.extraction.documentId === locator.documentId && media.extraction.page === locator.page
+  const claim = mediaId => {
+    if (consumed.has(mediaId) || references.filter(id => id === mediaId).length !== 1) {
+      reject('OCR media must be consumed exactly once by its confirmed body figure or Reading bank')
+    }
+    consumed.add(mediaId)
+  }
+  for (const parent of resolved.contentMedia) {
+    const { mediaId, source: locator } = parent
+    const original = mediaById.get(mediaId)
+    if (original) {
+      if (!same(original.extraction.region, locator.region)) {
+        // Only an ordinary, source-order body figure may tighten its top.
+        // Keep the immutable parent and the A-D bank path separate.
+        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4'].includes(raw.schemaVersion)
+          || !matchesCrop(original, locator)
+          || resolved.contentMedia.filter(value => value.mediaId === mediaId).length !== 1) {
+          reject('OCR top-trim requires one confirmed PDF content figure with its original media ID')
+        }
+        const child = original.extraction.region
+        const outer = locator.region
+        if (child.x !== outer.x || child.width !== outer.width || child.y <= outer.y
+          || Math.abs(child.y + child.height - outer.y - outer.height) > 1e-9
+          || !inside(outer, child)) {
+          reject('OCR top-trim may only increase the top while preserving left, width and normalized bottom')
+        }
+        const confirmedPages = confirmation.documents.filter(document => document.documentId === locator.documentId)
+          .flatMap(document => document.pages.filter(page => page.page === locator.page))
+        const evidencePages = evidence.documents.filter(document => document.documentId === locator.documentId)
+          .flatMap(document => document.pages.filter(page => page.page === locator.page))
+        if (confirmedPages.length !== 1 || evidencePages.length !== 1) {
+          reject('OCR top-trim requires one verified confirmation and raster page')
+        }
+        const [confirmedPage] = confirmedPages
+        const [evidencePage] = evidencePages
+        const raster = evidencePage.raster
+        if (original.extraction.density !== raster.recipe.density) {
+          reject('OCR top-trim density must equal the verified evidence raster density')
+        }
+        // Match pdfRegionRaster: round origin and size separately, not edges.
+        const window = region => {
+          const left = Math.round(region.x * raster.pixelWidth)
+          const top = Math.round(region.y * raster.pixelHeight)
+          const width = Math.round(region.width * raster.pixelWidth)
+          const height = Math.round(region.height * raster.pixelHeight)
+          return { left, top, right: left + width, bottom: top + height, height }
+        }
+        const parentWindow = window(outer)
+        const childWindow = window(child)
+        if (childWindow.left !== parentWindow.left || childWindow.right !== parentWindow.right
+          || childWindow.bottom !== parentWindow.bottom || childWindow.top <= parentWindow.top
+          || childWindow.height <= 0) {
+          reject('OCR top-trim must preserve the exact raster left, right and bottom and remove positive top pixels')
+        }
+        const visuals = confirmedPage.visualClassifications.filter(visual => visual.classification === 'content_media'
+          && evidencePage.regions.filter(region => region.regionId === visual.regionId
+            && same(region.region, outer)).length === 1)
+        if (visuals.length !== 1) reject('OCR top-trim requires exactly one confirmed parent classification')
+        const [visual] = visuals
+        const nonemptyIds = ids => Array.isArray(ids) && ids.length > 0
+          && ids.every(id => typeof id === 'string' && id.trim().length > 0)
+          && new Set(ids).size === ids.length
+        const itemObservations = id => {
+          const items = confirmedPage.orderedItems.filter(item => item.itemId === id)
+          if (items.length !== 1 || !nonemptyIds(items[0].observationIds)) {
+            reject('OCR top-trim requires unique nonempty confirmed items and observations')
+          }
+          return items[0].observationIds.map(observationId => {
+            const matches = evidencePage.observations.filter(observation => observation.observationId === observationId)
+            if (matches.length !== 1) reject('OCR top-trim observation must exist exactly once')
+            return matches[0]
+          })
+        }
+        if (!nonemptyIds(visual.itemIds)) reject('OCR top-trim requires nonempty unique visual text items')
+        const textObservations = visual.itemIds.flatMap(itemObservations)
+        if (new Set(textObservations.map(observation => observation.observationId)).size !== textObservations.length
+          || textObservations.some(observation => !inside(child, observation.region))) {
+          reject('OCR top-trim must retain every confirmed visual text observation in full')
+        }
+        const anchors = confirmedPage.orderedItems.filter(item => item.itemId === visual.afterItemId)
+        if (anchors.length !== 1 || visual.itemIds.includes(visual.afterItemId)) {
+          reject('OCR top-trim requires one distinct surviving paragraph anchor')
+        }
+        const [anchor] = anchors
+        const observations = itemObservations(visual.afterItemId)
+        const left = Math.min(...observations.map(observation => observation.region.x))
+        const top = Math.min(...observations.map(observation => observation.region.y))
+        const right = Math.max(...observations.map(observation => observation.region.x + observation.region.width))
+        const bottom = Math.max(...observations.map(observation => observation.region.y + observation.region.height))
+        const anchorLocator = { kind: 'page_region', documentId: locator.documentId, page: locator.page,
+          region: { x: left, y: top, width: right - left, height: bottom - top } }
+        const body = resolved.structures.get(locator.documentId)?.body || []
+        const anchorParagraphs = body.filter(item => item.kind === 'paragraph' && !item.materializedMedia
+          && same(item.sourceIndex, anchorLocator))
+        const markers = body.map((item, index) => ({ item, index }))
+          .filter(({ item }) => item.materializedMedia?.mediaId === mediaId)
+        if (anchorParagraphs.length !== 1 || anchorParagraphs[0].text !== anchor.text || markers.length !== 1
+          || !same(markers[0].item.sourceIndex, locator) || body[markers[0].index - 1] !== anchorParagraphs[0]) {
+          reject('OCR top-trim parent must immediately follow its unique surviving source paragraph')
+        }
+        const intrusions = observations.filter(observation => observation.region.y < outer.y
+          && observation.region.y + observation.region.height > outer.y
+          && Math.min(observation.region.x + observation.region.width, outer.x + outer.width)
+            > Math.max(observation.region.x, outer.x))
+        if (!intrusions.length || child.y > Math.max(...intrusions.map(observation =>
+          observation.region.y + observation.region.height)) + 1e-6) {
+          reject('OCR top-trim must remove only the preceding paragraph intrusion at the parent top')
+        }
+        const flatten = values => values.flatMap(block => block.kind === 'framed_columns'
+          ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
+        const owners = expected.groups.flatMap(group => {
+          const ordered = flatten(group.blocks)
+          return ordered.flatMap((block, index) => block.kind === 'figure' && block.mediaId === mediaId
+            ? [{ group, block, before: ordered[index - 1] }] : [])
+        })
+        const rawOwners = raw.groups.flatMap(group => {
+          const ordered = flatten(group.blocks)
+          return ordered.flatMap((block, index) => block.kind === 'figure' && block.mediaId === mediaId
+            ? [{ group, block, before: ordered[index - 1] }] : [])
+        })
+        if (owners.length !== 1 || rawOwners.length !== 1) {
+          reject('OCR top-trim requires exactly one ordinary source-order body figure, never an option bank')
+        }
+        const expectedOwner = owners[0]
+        const owner = rawOwners[0]
+        const childSource = { ...locator, region: child }
+        if (!['slotId', 'groupId', 'family'].every(key => owner.group[key] === expectedOwner.group[key])
+          || owner.block.blockId !== expectedOwner.block.blockId
+          || !same(expectedOwner.block.source, locator) || !same(owner.block.source, childSource)
+          || [owner.before, expectedOwner.before].some(block => block?.kind !== 'paragraph'
+            || !same(block.source, anchorLocator) || paragraphText(block) !== anchor.text)) {
+          reject('OCR top-trim must retain its exact source-order owner, figure identity and preceding paragraph')
+        }
+        const parentVisuals = resolved.sourceVisuals.filter(visual => visual.targetId === mediaId)
+        const coverage = raw.sourceCoverage.visuals.filter(visual => visual.targetId === mediaId)
+        if (parentVisuals.length !== 1 || parentVisuals[0].disposition !== 'content_media'
+          || parentVisuals[0].page !== locator.page || !same(parentVisuals[0].region, outer)
+          || raw.sourceCoverage.documentId !== locator.documentId || coverage.length !== 1
+          || coverage[0].disposition !== 'content_media' || coverage[0].page !== locator.page
+          || !same(coverage[0].region, child)) {
+          reject('OCR top-trim coverage must bind the same content media exactly once at its child region')
+        }
+        claim(mediaId)
+        childParents.set(mediaId, parentVisuals[0])
+        topTrims.set(mediaId, { block: owner.block, childSource, parentSource: locator })
+        continue
+      }
+      if (!matchesCrop(original, locator) || !same(original.extraction.region, locator.region)
+        || blocks.filter(block => block.kind === 'figure' && block.mediaId === mediaId
+          && same(block.source, locator)).length !== 1) {
+        reject('Confirmed OCR image must retain its exact source crop and one content placement')
+      }
+      claim(mediaId)
+      continue
+    }
+    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4'].includes(raw.schemaVersion)) {
+      reject('OCR option banks require the existing figure-option materialization contract')
+    }
+    // Recover afterItemId from the verified immutable closure, never from a
+    // Candidate group, sourceVisual field, or caller-supplied parent property.
+    const confirmedPage = confirmation.documents.find(document => document.documentId === locator.documentId)
+      ?.pages.find(page => page.page === locator.page)
+    const evidencePage = evidence.documents.find(document => document.documentId === locator.documentId)
+      ?.pages.find(page => page.page === locator.page)
+    const visuals = (confirmedPage?.visualClassifications || []).filter(visual =>
+      visual.classification === 'content_media'
+      && evidencePage?.regions.some(region => region.regionId === visual.regionId && same(region.region, locator.region)))
+    if (visuals.length !== 1) reject('OCR option bank requires exactly one confirmed parent')
+    const [visual] = visuals
+    const labels = visual.itemIds.map(id => confirmedPage.orderedItems.find(item => item.itemId === id)?.text).join(' ')
+    if (!/^\s*A[.．、]\s*B[.．、]\s*C[.．、]\s*D[.．、]\s*$/u.test(labels)) {
+      reject('OCR option bank parent must consume only the confirmed ordered A-D labels')
+    }
+    const anchor = confirmedPage.orderedItems.find(item => item.itemId === visual.afterItemId)
+    const observations = anchor?.observationIds.map(id =>
+      evidencePage.observations.find(observation => observation.observationId === id))
+    if (!observations?.length || observations.some(observation => !observation)) {
+      reject('OCR option bank has no confirmed source-order question anchor')
+    }
+    const left = Math.min(...observations.map(observation => observation.region.x))
+    const top = Math.min(...observations.map(observation => observation.region.y))
+    const right = Math.max(...observations.map(observation => observation.region.x + observation.region.width))
+    const bottom = Math.max(...observations.map(observation => observation.region.y + observation.region.height))
+    const anchorLocator = { kind: 'page_region', documentId: locator.documentId, page: locator.page,
+      region: { x: left, y: top, width: right - left, height: bottom - top } }
+    const body = resolved.structures.get(locator.documentId)?.body || []
+    const anchorParagraphs = body.filter(item => item.kind === 'paragraph' && !item.materializedMedia
+      && same(item.sourceIndex, anchorLocator))
+    const markers = body.map((item, index) => ({ item, index }))
+      .filter(({ item }) => item.materializedMedia?.mediaId === mediaId && same(item.sourceIndex, locator))
+    if (anchorParagraphs.length !== 1 || anchorParagraphs[0].text !== anchor.text || markers.length !== 1
+      || body[markers[0].index - 1] !== anchorParagraphs[0]) {
+      reject('OCR option bank must immediately follow its unique surviving source paragraph')
+    }
+    const expectedQuestions = expected.groups.flatMap(group => group.family === 'reading'
+      ? group.questions.filter(question => same(question.source, anchorLocator)).map(question => ({ group, question }))
+      : [])
+    if (expectedQuestions.length !== 1) reject('OCR option bank must bind exactly one source-order Reading question')
+    const owner = questionBanks.filter(({ group, question }) =>
+      group.slotId === expectedQuestions[0].group.slotId && group.groupId === expectedQuestions[0].group.groupId
+      && group.family === expectedQuestions[0].group.family
+      && ['questionId', 'sourceNumber', 'canonicalNumber', 'source'].every(key =>
+        same(question[key], expectedQuestions[0].question[key])))
+    if (owner.length !== 1 || consumedBanks.has(owner[0].question)) {
+      reject('OCR option bank must retain its source-order slot, group, question identity, numbers and locator')
+    }
+    const { question } = owner[0]
+    if (question.options.length !== 4 || question.options.some((option, index) =>
+      option.label !== 'ABCD'[index] || !exactKeys(option, ['label', 'figure'])
+      || !exactKeys(option.figure, ['mediaId']))) {
+      reject('OCR option bank requires four pure figure options ordered A-D')
+    }
+    const children = question.options.map(option => mediaById.get(option.figure.mediaId))
+    if (children.some(media => !matchesCrop(media, locator) || !inside(locator.region, media.extraction.region))) {
+      reject('OCR option crops must lie inside their confirmed parent on the same document and page')
+    }
+    const regions = children.map(media => media.extraction.region)
+    if (Math.max(...regions.map(region => region.y))
+      >= Math.min(...regions.map(region => region.y + region.height))) {
+      reject('OCR option crops must share a positive vertical band in one row')
+    }
+    for (let index = 0; index < regions.length; index += 1) {
+      if (index && regions[index].x <= regions[index - 1].x) reject('OCR A-D crops must follow geometric left-to-right order')
+      for (let previous = 0; previous < index; previous += 1) {
+        if (Math.min(regions[index].x + regions[index].width, regions[previous].x + regions[previous].width)
+          > Math.max(regions[index].x, regions[previous].x)
+          && Math.min(regions[index].y + regions[index].height, regions[previous].y + regions[previous].height)
+          > Math.max(regions[index].y, regions[previous].y)) {
+          reject('OCR option crops must not have positive-area overlap')
+        }
+      }
+    }
+    const parentVisuals = resolved.sourceVisuals.filter(visual => visual.disposition === 'content_media'
+      && visual.targetId === mediaId && visual.page === locator.page && same(visual.region, locator.region))
+    if (parentVisuals.length !== 1) reject('OCR option bank requires one confirmed visual inventory parent')
+    for (const child of children) {
+      const coverage = raw.sourceCoverage.visuals.filter(visual => visual.targetId === child.mediaId)
+      if (raw.sourceCoverage.documentId !== child.extraction.documentId || coverage.length !== 1
+        || coverage[0].disposition !== 'content_media' || coverage[0].page !== child.extraction.page
+        || !same(coverage[0].region, child.extraction.region)) {
+        reject('OCR option coverage must exactly bind each child crop once')
+      }
+      claim(child.mediaId)
+      childParents.set(child.mediaId, parentVisuals[0])
+    }
+    consumedBanks.add(question)
+  }
+  if (consumed.size !== raw.media.length || raw.media.some(media => !consumed.has(media.mediaId))
+    || references.length !== raw.media.length || references.some(mediaId => !consumed.has(mediaId))
+    || consumedBanks.size !== questionBanks.length) {
+    reject('OCR media inventory must exactly equal consumed confirmed figures and their bound option crops')
+  }
+  // Fold only proven child relationships back to the immutable inventory.
+  // Unmatched visuals survive this projection and therefore fail equality.
+  const foldedParents = new Set()
+  const projected = raw.sourceCoverage.visuals.flatMap(visual => {
+    const parent = childParents.get(visual.targetId)
+    if (!parent) return [visual]
+    if (foldedParents.has(parent.targetId)) return []
+    foldedParents.add(parent.targetId)
+    return [parent]
+  })
+  const inventory = visuals => visuals.map(visual => digestJson(visual)).sort()
+  // The source-order producer also projects confirmed semantic tables into
+  // coverage; resolved.sourceVisuals alone contains only images/furniture.
+  if (!same(inventory(projected), inventory(expected.sourceCoverage.visuals))) {
+    reject('OCR visual coverage must project exactly to the confirmed source inventory')
+  }
+  return topTrims
+}
+
 function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues, writingEmphasis = false) {
   try {
     const evidence = JSON.parse(textDecoder.decode(ocrSourceBytes.evidenceBytes))
@@ -1754,23 +2051,37 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       const answer = raw.documents.find(document => !document.renditionOf && document.role === 'official_answers')
       // Reuse the producer's source-order parser, not the mutable Candidate's
       // claimed group. This also excludes answer-source tables from student content.
-      const expectedGroups = question && answer ? produceNck1MaterializationFromStructures({
+      const expected = question && answer ? produceNck1MaterializationFromStructures({
         paperId: raw.paperId, documents: raw.documents, question, answer, coverage: question,
         questionStructure: resolved.structures.get(question.documentId),
         answerStructure: resolved.structures.get(answer.documentId),
         issues: [], sourceVisuals: resolved.sourceVisuals, mediaInventory: raw.media,
         codePrefix: 'NCK1_OCR',
-      }).materialization.groups : []
-      const placements = groups => groups.flatMap(group => {
+      }).materialization : { groups: [], sourceCoverage: { visuals: resolved.sourceVisuals } }
+      const expectedGroups = expected.groups
+      const hasTrimCandidate = resolved.contentMedia.some(parent => raw.media.some(media =>
+        media.mediaId === parent.mediaId && media.extraction?.kind === 'pdf_crop'
+        && digestJson(media.extraction.region) !== digestJson(parent.source.region)))
+      // Only a changed parent crop needs proof before placement projection.
+      // Other inputs retain the existing placement/table diagnostic precedence.
+      const topTrims = hasTrimCandidate
+        ? validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks)
+        : new Map()
+      const placementSource = (block, project) => {
+        const trim = project && block?.kind === 'figure' ? topTrims.get(block.mediaId) : null
+        return trim && trim.block === block && digestJson(block.source) === digestJson(trim.childSource)
+          ? trim.parentSource : block?.source ?? null
+      }
+      const placements = (groups, project = false) => groups.flatMap(group => {
         const ordered = flatten(group.blocks)
         return ordered.flatMap((block, index) => ['table', 'figure'].includes(block.kind) ? [{
-          slotId: group.slotId, kind: block.kind, source: block.source,
+          slotId: group.slotId, kind: block.kind, source: placementSource(block, project),
           ...(block.kind === 'figure' ? { mediaId: block.mediaId } : {}),
-          before: ordered[index - 1]?.source ?? null,
-          after: ordered[index + 1]?.source ?? null,
+          before: placementSource(ordered[index - 1], project),
+          after: placementSource(ordered[index + 1], project),
         }] : [])
       })
-      if (digestJson(placements(raw.groups)) !== digestJson(placements(expectedGroups))) {
+      if (digestJson(placements(raw.groups, true)) !== digestJson(placements(expectedGroups))) {
         throw new Error('OCR visuals must retain exactly their confirmed question-source groups and neighboring source anchors')
       }
       const expectedTables = expectedGroups.flatMap(group => flatten(group.blocks)).filter(block => block.kind === 'table')
@@ -1786,19 +2097,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
           }
         }
       }
-      if (raw.media.length !== resolved.contentMedia.length) {
-        throw new Error('OCR media inventory must contain only the confirmed question-source crops')
-      }
-      for (const { mediaId, source: locator } of resolved.contentMedia) {
-        const media = raw.media.find(item => item.mediaId === mediaId)
-        if (!media || media.extraction.kind !== 'pdf_crop'
-          || media.extraction.documentId !== locator.documentId || media.extraction.page !== locator.page
-          || digestJson(media.extraction.region) !== digestJson(locator.region)
-          || blocks.filter(block => block.kind === 'figure' && block.mediaId === mediaId
-            && digestJson(block.source) === digestJson(locator)).length !== 1) {
-          throw new Error('Confirmed OCR image must retain its exact source crop and one content placement')
-        }
-      }
+      if (!hasTrimCandidate) validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks)
     }
     const marked = new Map()
     for (const structure of resolved.structures.values()) {

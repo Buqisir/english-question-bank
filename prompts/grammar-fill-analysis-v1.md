@@ -73,7 +73,7 @@ The hint word's POS = entry into which `given` sub-facet:
 - `verb-to-noun`: hint is verb, blank needs a noun
 - `verb-to-adverb`: hint is verb, blank needs an adverb
 
-**判定口令（given 动词 + 答案是 `-ed`/`-ing` → 句法功能优先）:** 先判该空的句法 **role**（表语 predicative / 定语 attributive / 状语 adverbial / 宾补 object-complement / 主补 subject-complement，见下"成分七格"）→ 归 `grammar-fill.given.verb.non-finite` + `role`。**只有**答案是非分词形容词后缀（`-able`/`-ous`/`-ful`/`-ive`）或 `a-` 前缀派生时，才用 `grammar-fill.given.conversion.verb-to-adjective`。即情感/状态分词 `excited`（was excited）/ `educated`（become educated）/ `closed`（stays closed）作表语、`aching`/`existing`/`recognized` 作定语、`astonished`（leaving us ~）作宾补，一律是 `non-finite` + `role`，**不是** `verb-to-adjective`。
+**判定口令（given 动词 + 答案是 `-ed`/`-ing` → 句法功能优先）:** 先判该空的句法 **role**（主语 subject / 表语 predicative / 宾语 object / 定语 attributive / 状语 adverbial / 同位语 appositive / 宾补 object-complement / 主补 subject-complement，见下成分清单）→ 归 `grammar-fill.given.verb.non-finite` + `role`。**只有**答案是非分词形容词后缀（`-able`/`-ous`/`-ful`/`-ive`）或 `a-` 前缀派生时，才用 `grammar-fill.given.conversion.verb-to-adjective`。即情感/状态分词 `excited`（was excited）/ `educated`（become educated）/ `closed`（stays closed）作表语、`aching`/`existing`/`recognized` 作定语、`astonished`（leaving us ~）作宾补，一律是 `non-finite` + `role`，**不是** `verb-to-adjective`。
 
 **名词的数 / 名词的格 / 形容词比较等级（三个独立考点，非"词形转换"——词性不变，讲评语言是"考复数/考所有格/考比较级"）：**
 - `given.noun.number`：hint 的规则单复数变化（含 -y→-ies / -f(e)→-ves 等规则变化）
@@ -93,9 +93,13 @@ coordination and subordination rather than relying on a counting shortcut.
 
 For **`grammar-fill.given.verb.non-finite`**, identify the ordinary syntactic role:
 
-- `role` ∈ `subject`（主语）/ `predicative`（表语，系动词后）/ `object`（宾语）/ `attributive`（定语）/ `adverbial`（状语）/ `object-complement`（宾语补足语，如 tell sb to do / wait for sth to do）/ `subject-complement`（**主语补足语 = 宾补的被动**，如 be expected to do、be left doing — NOT a synonym for "表语"; a 系动词 + 表语 blank is `predicative`, never `subject-complement`）
+- `role` ∈ `subject`（主语）/ `predicative`（表语，系动词后）/ `object`（宾语）/ `attributive`（定语）/ `adverbial`（状语）/ `appositive`（同位语）/ `object-complement`（宾语补足语，如 tell sb to do / wait for sth to do）/ `subject-complement`（**主语补足语 = 宾补的被动**，如 be expected to do、be left doing — NOT a synonym for "表语"; a 系动词 + 表语 blank is `predicative`, never `subject-complement`）
 
 For every other facet: `"role": null`.
+
+Use `appositive`（同位语）when a gerund phrase explains a noun's
+content, rather than modifying an action or describing a noun's property.
+This route currently supports only ordinary active `doing`.
 
 ### `no-hint` sub-branch selection rule
 
@@ -107,12 +111,13 @@ For every other facet: `"role": null`.
 | After a verb/adjective or collocates → prepositional phrase (no new predicate) | `no-hint.preposition` |
 | Pronoun position (subject/object), anaphora / formal-subject / it-cleft | `no-hint.pronoun` |
 
-**Conjunction sub-type (4 leaves):**
+**Conjunction sub-type (5 leaves):**
 
 - `coordinating` — connects parallel elements (no subordination)
 - `relative-clause` — preceded by antecedent noun/pronoun; clause modifies it; use `who/whom/which/that/whose/when/where/why`
 - `noun-clause` — clause fills a noun slot (subject/object/predicative); no antecedent; use `what/whether/if/that/how/when/where/why`
 - `adverbial-clause` — both clauses are structurally complete; clause modifies the main clause; use time/reason/condition/concession/result connectors: `when/while/as/because/since/if/unless/although/though/so that/…`
+- `cleft` — 强调句连接标记: only a no-hint blank supplying `that` in `It is/was … that …`; use route `cleft-that`, `features: []`, `role: null`. For example, `It was in the park ___ we met our friends.` takes `that`. The pronoun route `cleft-it` still means supplying `it`, and noun-clause routes require a clause in a noun slot; neither represents this connector. Do not extend this facet to `who` or other routes.
 
 ## Student-Facing Explanation Rule
 
@@ -201,7 +206,7 @@ Every `blanks[questionId]` MUST include:
 - `blankNo` — integer blank number (56–65)
 - `blankType` — exactly `given` or `no-hint` (from input)
 - `hint` — the given base word (string) for `given` blanks; `null` for `no-hint` blanks (from input)
-- `facetKey` — exactly one of the **23 leaf** keys listed below
+- `facetKey` — exactly one of the **24 leaf** keys listed below
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `similarityProfile` — machine-facing matching support, exactly
@@ -217,7 +222,7 @@ Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb), or `form`/
 deterministically from `answer` after your response. `similarityProfile` is
 different: it records the contextual judgment route and MUST be generated here.
 
-## The 23 Valid `facetKey` Leaves
+## The 24 Valid `facetKey` Leaves
 
 Use ONLY these exact string values. Do NOT use parent nodes (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`) — they are NOT valid facetKeys. (The old `grammar-fill.given.noun` / `grammar-fill.given.adjective` / `grammar-fill.given.derivation.*` leaves from v1 are retired — do NOT use them.)
 
@@ -245,6 +250,7 @@ grammar-fill.no-hint.conjunction.coordinating
 grammar-fill.no-hint.conjunction.relative-clause
 grammar-fill.no-hint.conjunction.noun-clause
 grammar-fill.no-hint.conjunction.adverbial-clause
+grammar-fill.no-hint.conjunction.cleft
 ```
 
 `blank_type` match rule: any `grammar-fill.given.*` leaf MUST go with `blankType: "given"`. Any `grammar-fill.no-hint.*` leaf MUST go with `blankType: "no-hint"`.
@@ -283,6 +289,7 @@ adverbial-unexpected-result | adverbial-active | adverbial-passive |
 adverbial-prior-active |
 attributive-future | attributive-abstract-content |
 attributive-special-limiter | attributive-participle |
+appositive-gerund |
 object-verb-to-infinitive | object-verb-gerund |
 object-form-changes-meaning | object-wh-infinitive |
 object-preposition | object-but-structure |
@@ -304,6 +311,20 @@ subject-complement-special-passive
 `subject-complement-linking` covers structures such as `seem to have done`;
 it is not an adverbial. `subject-complement-reporting-passive` covers
 `be said/reported/believed... to do/to have done`.
+
+`appositive-gerund` uses `role: "appositive"` and `features: []`.
+For example, in the original synthetic sentence `The club shared one principle —
+helping new members settle in.`, `helping ...` explains the content of
+`principle`. A dash or an abstract noun alone does not establish apposition.
+Keep `attributive-abstract-content` limited to infinitives after abstract nouns;
+do not use it for this gerund or classify the gerund as a derived noun.
+This new route accepts only server-derived ordinary active `doing`, not
+`to-do`, `being-done`, `having-done`, `having-been-done` or other forms.
+Each answer alternative must be a single `-ing` word, optionally prefixed by
+`not` (e.g. `helping`, `not helping`, `helping / assisting`). Every slash-separated
+alternative must qualify; empty alternatives are rejected. This form check
+does not prove part of speech or syntax; classify by context.
+This limited route does not mean that apposition in general only takes gerunds.
 
 Allowed non-finite features are:
 
@@ -348,6 +369,9 @@ finite judgment routes from the Verb facets section in `features`. If it is
 non-finite, use `non-finite-result` and put exactly one of the non-finite routes
 from that section in `features`. The server then derives tense/voice/agreement
 or the finer answer form from `answer`; do not output those derived fields.
+The inherited `appositive-gerund` feature likewise requires ordinary active
+`doing`; keep `role: null` and use exactly `["appositive-gerund"]` with
+`non-finite-result`.
 
 ### No-hint facets
 
@@ -360,6 +384,7 @@ or the finer answer form from `answer`; do not output those derived fields.
 | `conjunction.relative-clause` | `missing-subject` / `missing-object-predicative` / `missing-possessive` / `missing-adverbial` / `preposition-relative` / `as-special` | `human`, `thing`, `whole-event`, `restrictive`, `non-restrictive` |
 | `conjunction.noun-clause` | `that-clause` / `whether-if` / `what` / `who` / `when-where-why-how` / `wh-infinitive` | `subject-clause`, `object-clause`, `predicative-clause`, `appositive-clause` |
 | `conjunction.adverbial-clause` | `time` / `reason` / `condition` / `concession` / `purpose` / `result` / `manner` / `comparison` / `place` | `simultaneous`, `before-after`, `since-start`, `until-end`, `as-soon-as`, `negative-condition` |
+| `conjunction.cleft` | `cleft-that` | — |
 
 For articles, features record the decisive substructure or `a/an` sound rule;
 use `[]` when the route itself is already complete. For a relative clause,

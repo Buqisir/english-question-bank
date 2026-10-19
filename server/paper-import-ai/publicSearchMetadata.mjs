@@ -5,7 +5,7 @@ import Ajv from 'ajv/dist/2020.js'
 
 import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
 import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { stampGrammarFillDerivedFields } from './analyzeGrammarFill.mjs'
+import { isSupportedAppositiveGerundAnswer, isSupportedCleftThatAnswer, stampGrammarFillDerivedFields } from './analyzeGrammarFill.mjs'
 import { enumerateParagraphSummaryTargets } from './paragraphSummaries.mjs'
 
 export const PUBLIC_SEARCH_METADATA_VERSION = 'public-search-metadata-v1'
@@ -31,7 +31,7 @@ const readingTechniques = new Set(['example', 'comparison', 'quotation', 'statis
 const positions = new Set(['seven-choices.position.paragraph-start', 'seven-choices.position.paragraph-middle', 'seven-choices.position.paragraph-end'])
 const roles = new Set(['seven-choices.role.topic', 'seven-choices.role.summary', 'seven-choices.role.bridge', 'seven-choices.role.cohesion'])
 const mechanisms = new Set(['seven-choices.cohesion.grammatical.referential-cohesion', 'seven-choices.cohesion.grammatical.logical-connector', 'seven-choices.cohesion.lexical.topic-field-alignment'])
-const grammarRoles = new Set(['subject', 'predicative', 'object', 'attributive', 'adverbial', 'object-complement', 'subject-complement'])
+const grammarRoles = new Set(['subject', 'predicative', 'object', 'attributive', 'adverbial', 'appositive', 'object-complement', 'subject-complement'])
 const clozePos = new Set(['verb', 'noun', 'adjective', 'adverb', 'phrase', 'other'])
 const clozeFacetByPos = new Map([
   ['verb', 'cloze.signature.verb.action-sequence'], ['noun', 'cloze.signature.noun.semantic-field'],
@@ -297,6 +297,15 @@ function validateGrammar(item, sourceQuestion, paragraphIds, path, issues) {
   } else if (nonFinite && typeof profile?.route === 'string' && !profile.route.startsWith(`${item.role}-`)) {
     push(issues, 'PUBLIC_METADATA_GRAMMAR_ROLE_INVALID', `${path}.role`, 'role and route conflict')
   }
+  if (nonFinite && profile?.route === 'appositive-gerund'
+    && (!Array.isArray(profile.features) || profile.features.length !== 0)) {
+    push(issues, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID', `${path}.similarityProfile`, 'appositive-gerund requires empty features')
+  }
+  if (item.facetKey === 'grammar-fill.given.conversion.noun-to-verb'
+    && Array.isArray(profile?.features) && profile.features.includes('appositive-gerund')
+    && (profile.route !== 'non-finite-result' || profile.features.length !== 1)) {
+    push(issues, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID', `${path}.similarityProfile`, 'inherited appositive-gerund requires non-finite-result and exactly one feature')
+  }
   if (!Array.isArray(item.contextParagraphIds) || item.contextParagraphIds.length === 0
     || item.contextParagraphIds.some((id, index) => !paragraphIds.includes(id) || (index > 0 && paragraphIds.indexOf(id) <= paragraphIds.indexOf(item.contextParagraphIds[index - 1])))) {
     push(issues, 'PUBLIC_METADATA_GRAMMAR_CONTEXT_INVALID', `${path}.contextParagraphIds`, 'context must be ordered in-group paragraphs')
@@ -364,6 +373,15 @@ export function validatePublicSearchMetadata({ sidecar, materialization, sourceD
           const derivedHolder = { blanks: { [q.questionId]: { facetKey: q.facetKey, hint: q.hint, answer: answers.get(q.questionId), role: q.role, similarityProfile: q.similarityProfile } } }
           stampGrammarFillDerivedFields(derivedHolder)
           const derived = derivedHolder.blanks[q.questionId]
+          if (q.facetKey === 'grammar-fill.no-hint.conjunction.cleft'
+            && !isSupportedCleftThatAnswer(answers.get(q.questionId))) {
+            push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'cleft-that requires every authoritative answer alternative to be that')
+          }
+          if ((q.facetKey === 'grammar-fill.given.verb.non-finite' && q.similarityProfile?.route === 'appositive-gerund')
+            || (q.facetKey === 'grammar-fill.given.conversion.noun-to-verb'
+              && q.similarityProfile?.features?.includes('appositive-gerund'))) {
+            if (!isSupportedAppositiveGerundAnswer(answers.get(q.questionId))) push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'appositive-gerund requires authoritative ordinary active doing')
+          }
           const expected = Object.fromEntries(['tense', 'voice', 'agreementSensitive', 'form', 'similarityForm'].filter((key) => Object.hasOwn(derived, key)).map((key) => [key, derived[key]]))
           if (stableStringify(q.derived) !== stableStringify(expected)) push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'derived answer form/axes must match authoritative answer')
         } catch {
