@@ -378,7 +378,7 @@ function verifyCorrectedReviewUploadBaseRevision() {
 
 verifyCorrectedReviewUploadBaseRevision()
 
-function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId } = {}) {
+function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId, captureResult = false } = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
@@ -394,13 +394,15 @@ function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId } = {}) {
         stdio: ['ignore', 'pipe', 'pipe'],
       },
     )
-    let output = ''
-    child.stdout.on('data', (chunk) => { output += chunk.toString() })
-    child.stderr.on('data', (chunk) => { output += chunk.toString() })
+    let stdout = ''
+    let stderr = ''
+    child.stdout.on('data', (chunk) => { stdout += chunk.toString() })
+    child.stderr.on('data', (chunk) => { stderr = (stderr + chunk.toString()).slice(-4000) })
     child.once('error', reject)
-    child.once('close', (code) => {
-      if (code === 0) resolve(output)
-      else reject(new Error(`source-intake CLI exited ${code}: ${output}`))
+    child.once('close', (code, signal) => {
+      const diagnostics = `source-intake CLI exit code: ${code}; signal: ${signal ?? 'none'}\nstderr tail (max 4000 chars): ${stderr || '(empty)'}`
+      if (code === 0) resolve(captureResult ? { stdout, diagnostics } : stdout)
+      else reject(new Error(`${diagnostics}\nstdout tail: ${stdout.slice(-4000)}`))
     })
   })
 }
@@ -1319,11 +1321,13 @@ try {
     assert.equal(pending.nextCommand, `node scripts/import-pipeline/source-intake.mjs continue ${automaticSubmissionId}`)
     assert.equal(existsSync(automaticInbox), false, 'first status creates no claim, journal or directory')
     assert.match(await runSourceIntakeCli(origin, ['status', '--help']), /omit|only submissionId/)
-    const completed = JSON.parse(await runSourceIntakeCli(origin, [
+    const completedResult = await runSourceIntakeCli(origin, [
       'continue', automaticSubmissionId, '--year', '2025', '--month', '12',
-    ]))
+    ], { captureResult: true })
+    const completed = JSON.parse(completedResult.stdout)
     assert.equal(completed.paperId, automaticPaperId)
-    assert.equal(completed.blocked.reason, 'needs_agent_review', JSON.stringify(completed))
+    assert.equal(completed.blocked.reason, 'needs_agent_review',
+      `${JSON.stringify(completed)}\n${completedResult.diagnostics}`)
     assert.equal(completed.steps.at(-1).step, 'materialize')
     assert.equal(completed.nextCommand, `node scripts/import-pipeline/source-intake.mjs handoff ${automaticSubmissionId} --paper-id ${automaticPaperId}`)
     assert.equal(completed.lease.renewalCommand, `node scripts/import-pipeline/source-intake.mjs heartbeat ${automaticSubmissionId}`)

@@ -16,7 +16,7 @@
  *      multi-dim AND narrows correctly; unanalyzed groups never appear; empty filter returns
  *      all analyzed groups.
  *   6. MF-3: new route is registered and reachable; invalidate() clears cache.
- *   7. verify-ci.mjs and scripts/README.md registration.
+ *   7. scripts/README.md manual audit documentation.
  */
 
 import { readFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, symlinkSync } from 'node:fs'
@@ -528,16 +528,11 @@ assert(
 
 console.log()
 
-// ─── Requirement 7: Registration in CI and README ────────────────────────────
-console.log('=== Req 7: CI + README registration ===')
+// ─── Requirement 7: Manual audit documentation ──────────────────────────────
+console.log('=== Req 7: README documentation ===')
 
-const verifyCi = readFileSync(path.join(rootDir, 'scripts/verify-ci.mjs'), 'utf8')
 const scriptsReadme = readFileSync(path.join(rootDir, 'scripts/README.md'), 'utf8')
 
-assert(
-  'verify-ci.mjs includes i16a verifier',
-  verifyCi.includes('verify-i16a-teaching-dimension-search.mjs'),
-)
 assert(
   'scripts/README.md documents i16a verifier',
   scriptsReadme.includes('verify-i16a-teaching-dimension-search.mjs'),
