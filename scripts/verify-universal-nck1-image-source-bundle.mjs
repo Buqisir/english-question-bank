@@ -43,6 +43,105 @@ const surfaceVerifierPath = path.join(
   root,
   'scripts/verify-universal-nck1-candidate-surfaces.mjs',
 )
+
+function verifyImageProcessTimeouts() {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-image-timeout-'))
+  const pidPath = path.join(tempRoot, 'magick.pid')
+  const modulePath = path.join(root, 'server/paper-import/nck1ImageSourceBundle.mjs')
+  const probe = `
+    import assert from 'node:assert/strict'
+    import childProcess from 'node:child_process'
+    import { syncBuiltinESMExports } from 'node:module'
+    const execFileSync = childProcess.execFileSync
+    // Assert the production deadline before shortening only this isolated probe.
+    childProcess.execFileSync = (file, args, options) => {
+      assert.equal(options.timeout, 30_000)
+      assert.equal(options.killSignal, 'SIGKILL')
+      return execFileSync(file, args, { ...options, timeout: 1_000 })
+    }
+    syncBuiltinESMExports()
+    const {
+      inspectNck1SourceImage, nck1ImagePageRgba, cropNck1SourceImage,
+    } = await import(${JSON.stringify(modulePath)})
+    const bytes = Buffer.alloc(1024 * 1024)
+    Buffer.from('89504e470d0a1a0a', 'hex').copy(bytes)
+    const operations = {
+      identify: () => inspectNck1SourceImage(bytes),
+      rgba: () => nck1ImagePageRgba({ bytes, pixelWidth: 2, pixelHeight: 2 }),
+      crop: () => cropNck1SourceImage(bytes, { x: 0, y: 0, width: 1, height: 1 }),
+    }
+    const start = performance.now()
+    try {
+      operations[process.env.EQB_IMAGE_TEST_OPERATION]()
+      throw new Error('Hung ImageMagick unexpectedly returned output')
+    } catch (error) {
+      console.log(JSON.stringify({
+        name: error.name, code: error.code, elapsedMs: performance.now() - start,
+      }))
+    }
+  `
+  // No shell/sleep descendants: the fake executable itself must be killed.
+  // A full pipe reproduces stdin backpressure; ignoring SIGTERM requires SIGKILL.
+  writeFileSync(path.join(tempRoot, 'magick'), `#!${process.execPath}
+import { writeFileSync } from 'node:fs'
+if (process.argv[2] === 'identify' && process.env.EQB_IMAGE_TEST_OPERATION !== 'identify') {
+  process.stdin.resume()
+  process.stdin.once('end', () => process.stdout.write('2,2'))
+} else {
+  process.on('SIGTERM', () => {})
+  process.stdin.pause()
+  writeFileSync(process.env.EQB_IMAGE_TEST_PID_PATH, String(process.pid))
+  setInterval(() => {}, 1000)
+}
+`, { mode: 0o755 })
+  try {
+    for (const operation of ['identify', 'rgba', 'crop']) {
+      try {
+        // The outer watchdog also bounds this verifier against the unfixed code.
+        const result = JSON.parse(execFileSync(process.execPath, ['--input-type=module', '-e', probe], {
+          cwd: root,
+          encoding: 'utf8',
+          timeout: 5_000,
+          killSignal: 'SIGKILL',
+          env: {
+            ...process.env,
+            PATH: `${tempRoot}${path.delimiter}${process.env.PATH}`,
+            EQB_IMAGE_TEST_OPERATION: operation,
+            EQB_IMAGE_TEST_PID_PATH: pidPath,
+          },
+          stdio: ['ignore', 'pipe', 'pipe'],
+        }))
+        assert.equal(result.name, 'Nck1ImageSourceBundleError', operation)
+        assert.equal(result.code, 'NCK1_IMAGE_PROCESS_TIMEOUT', operation)
+        assert(result.elapsedMs >= 1_000 && result.elapsedMs < 5_000,
+          `${operation} must fail at the shortened 1-second process deadline: ${result.elapsedMs}ms`)
+        const pid = Number(readFileSync(pidPath, 'utf8'))
+        assert.throws(() => process.kill(pid, 0), { code: 'ESRCH' },
+          `${operation} must leave no ImageMagick process behind`)
+        console.log(`ImageMagick ${operation} timeout: PASS (${Math.round(result.elapsedMs)}ms, child ${pid} reaped)`)
+      } finally {
+        if (existsSync(pidPath)) {
+          const pid = Number(readFileSync(pidPath, 'utf8'))
+          try {
+            process.kill(pid, 'SIGKILL')
+          } catch (error) {
+            if (error.code !== 'ESRCH') throw error
+          }
+          rmSync(pidPath)
+        }
+      }
+    }
+  } finally {
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+}
+
+verifyImageProcessTimeouts()
+if (process.argv.includes('--timeout-only')) {
+  console.log('verify-universal-nck1-image-source-bundle: timeout checks PASS')
+  process.exit(0)
+}
+
 const paperId = `paper-synthetic-image-bundle-${process.pid}`
 const cliPaperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
 const fixture = await makeSyntheticNck1ImageBundleFixture({ paperId })
