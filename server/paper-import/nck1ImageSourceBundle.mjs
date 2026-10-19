@@ -17,6 +17,9 @@ const IMAGE_MEDIA_TYPES = Object.freeze({
   'image/webp': 'webp',
 })
 const MAX_IMAGE_BUFFER = 128 * 1024 * 1024
+// 2480×3508 PNG/JPEG/WebP identify/RGBA/crop probes (3 each) took at most
+// 3.30s locally; 30s allows >9× headroom while bounding a stalled stdin pipe.
+const IMAGE_PROCESS_TIMEOUT_MS = 30_000
 
 export class Nck1ImageSourceBundleError extends Error {
   constructor(code, message) {
@@ -65,9 +68,15 @@ export function inspectNck1SourceImage(bytes) {
     dimensions = execFileSync(
       'magick',
       ['identify', '-format', '%w,%h', '-'],
-      { encoding: 'utf8', input: bytes, maxBuffer: MAX_IMAGE_BUFFER },
+      {
+        encoding: 'utf8', input: bytes, maxBuffer: MAX_IMAGE_BUFFER,
+        timeout: IMAGE_PROCESS_TIMEOUT_MS, killSignal: 'SIGKILL',
+      },
     ).split(',').map(Number)
-  } catch {
+  } catch (error) {
+    if (error.code === 'ETIMEDOUT') {
+      fail('NCK1_IMAGE_PROCESS_TIMEOUT', 'Image source page inspection timed out')
+    }
     fail('NCK1_IMAGE_PAGE_COVERAGE_INCOMPLETE', 'Image source page pixels are unreadable')
   }
   const [pixelWidth, pixelHeight] = dimensions
@@ -229,11 +238,22 @@ export function assertNck1ImageBundlePageArtifacts(document, pageArtifacts) {
 }
 
 export function nck1ImagePageRgba(page) {
-  const pixels = execFileSync(
-    'magick',
-    ['-', '-alpha', 'on', 'rgba:-'],
-    { input: page.bytes, maxBuffer: MAX_IMAGE_BUFFER },
-  )
+  let pixels
+  try {
+    pixels = execFileSync(
+      'magick',
+      ['-', '-alpha', 'on', 'rgba:-'],
+      {
+        input: page.bytes, maxBuffer: MAX_IMAGE_BUFFER,
+        timeout: IMAGE_PROCESS_TIMEOUT_MS, killSignal: 'SIGKILL',
+      },
+    )
+  } catch (error) {
+    if (error.code === 'ETIMEDOUT') {
+      fail('NCK1_IMAGE_PROCESS_TIMEOUT', 'Image source page RGBA decoding timed out')
+    }
+    throw error
+  }
   return {
     sha256: sha256(pixels),
     pixelWidth: page.pixelWidth,
@@ -249,11 +269,22 @@ export function cropNck1SourceImage(bytes, region) {
   const bottom = Math.ceil((region.y + region.height) * inspected.pixelHeight)
   const width = Math.max(1, right - x)
   const height = Math.max(1, bottom - y)
-  const output = execFileSync(
-    'magick',
-    ['-', '-crop', `${width}x${height}+${x}+${y}`, '+repage', 'png:-'],
-    { input: bytes, maxBuffer: MAX_IMAGE_BUFFER },
-  )
+  let output
+  try {
+    output = execFileSync(
+      'magick',
+      ['-', '-crop', `${width}x${height}+${x}+${y}`, '+repage', 'png:-'],
+      {
+        input: bytes, maxBuffer: MAX_IMAGE_BUFFER,
+        timeout: IMAGE_PROCESS_TIMEOUT_MS, killSignal: 'SIGKILL',
+      },
+    )
+  } catch (error) {
+    if (error.code === 'ETIMEDOUT') {
+      fail('NCK1_IMAGE_PROCESS_TIMEOUT', 'Image source page cropping timed out')
+    }
+    throw error
+  }
   return { bytes: new Uint8Array(output), pixelWidth: width, pixelHeight: height }
 }
 
