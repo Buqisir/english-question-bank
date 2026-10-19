@@ -2,7 +2,7 @@ name: Verify
 run-name: >-
   ${{ github.event_name == 'pull_request' && format('Verify PR #{0} head {1}', github.event.pull_request.number, github.event.pull_request.head.sha) || 'Verify' }}
 
-# Stable required checks: verify and e2e; each aggregates its two isolated workers.
+# Stable required checks: verify and e2e; verify aggregates two workers; e2e aggregates four.
 on:
   pull_request:
   push:
@@ -189,8 +189,8 @@ jobs:
           test "$SHARD_1_RESULT" = success
           test "$SHARD_2_RESULT" = success
 
-  e2e-seams:
-    name: e2e-seams
+  e2e-seams-1:
+    name: e2e-seams-1
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -248,12 +248,73 @@ jobs:
         run: pnpm -C app exec playwright install --with-deps --no-shell chromium
       - name: Verify draft pagination renderer
         run: node scripts/verify-draft-pagination-renderer.mjs
+      - name: Verify reorder suggestions
+        run: node scripts/verify-reorder-suggest.mjs
+      - name: Require tracked checkout to remain clean
+        if: ${{ !cancelled() }}
+        run: git diff --exit-code && git diff --cached --exit-code
+
+  e2e-seams-2:
+    name: e2e-seams-2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Select verification from the trusted PR base
+        id: plan
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          plan="$RUNNER_TEMP/eqb-verification-plan.json"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
+            test -z "$(git status --porcelain)"
+            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
+            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
+            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
+          fi
+          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
+            trusted="$RUNNER_TEMP/eqb-ci-policy"
+            git worktree add --detach "$trusted" "$BASE_SHA"
+            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
+            git worktree remove "$trusted"
+          else
+            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
+            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
+          fi
+          pack=$(jq -er '.pack' "$plan")
+          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
+          echo "pack=$pack" >> "$GITHUB_OUTPUT"
+          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            { echo '## Risk Agent selection'; echo '```json';
+              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
+              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+      - name: Install app dependencies
+        run: pnpm -C app install --frozen-lockfile
+      - name: Install server dependencies
+        run: npm --prefix server ci
+      # Browser seams need Chromium OS dependencies, not the render-pack toolchain.
+      - name: Install Chromium
+        id: chromium
+        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
       - name: Verify draft pagination DOM contract
         run: node scripts/verify-draft-pagination-dom-contract.mjs
       - name: Verify A3 imposition
         run: node scripts/verify-a3-imposition.mjs
-      - name: Verify reorder suggestions
-        run: node scripts/verify-reorder-suggest.mjs
       - name: Verify grammar-fill browser geometry
         run: node scripts/verify-paper-normalization-grammar-fill-browser.mjs
       - name: Verify golden path
@@ -262,8 +323,8 @@ jobs:
         if: ${{ !cancelled() }}
         run: git diff --exit-code && git diff --cached --exit-code
 
-  e2e-render:
-    name: e2e-render
+  e2e-render-1:
+    name: e2e-render-1
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -321,9 +382,12 @@ jobs:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
         run: |
           lane="$RUNNER_TEMP/eqb-e2e-lane.json"
-          node scripts/verify-ci.mjs --plan-json --pack "$VERIFY_PACK" --lane e2e > "$lane"
+          node scripts/verify-ci.mjs --plan-json --pack "$VERIFY_PACK" --lane e2e --shard 1 > "$lane"
           count=$(jq -er '.scripts | arrays | length' "$lane")
           echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" = 0 ]; then
+            echo '所选 pack 合法空集合 (scripts=0)' | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
           { echo '## Isolated render lane'; echo '```json'; cat "$lane"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Install verification system dependencies
         if: ${{ steps.lane.outputs.count != '0' }}
@@ -351,22 +415,123 @@ jobs:
         if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}
         env:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
-        run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane e2e --jobs 2
+        run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane e2e --shard 1 --jobs 2
+      - name: Require tracked checkout to remain clean
+        if: ${{ !cancelled() }}
+        run: git diff --exit-code && git diff --cached --exit-code
+
+  e2e-render-2:
+    name: e2e-render-2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Select verification from the trusted PR base
+        id: plan
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          plan="$RUNNER_TEMP/eqb-verification-plan.json"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
+            test -z "$(git status --porcelain)"
+            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
+            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
+            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
+          fi
+          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
+            trusted="$RUNNER_TEMP/eqb-ci-policy"
+            git worktree add --detach "$trusted" "$BASE_SHA"
+            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
+            git worktree remove "$trusted"
+          else
+            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
+            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
+          fi
+          pack=$(jq -er '.pack' "$plan")
+          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
+          echo "pack=$pack" >> "$GITHUB_OUTPUT"
+          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            { echo '## Risk Agent selection'; echo '```json';
+              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
+              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+      - name: Install app dependencies
+        run: pnpm -C app install --frozen-lockfile
+      - name: Install server dependencies
+        run: npm --prefix server ci
+      - name: Plan isolated render lane
+        id: lane
+        env:
+          VERIFY_PACK: ${{ steps.plan.outputs.pack }}
+        run: |
+          lane="$RUNNER_TEMP/eqb-e2e-lane.json"
+          node scripts/verify-ci.mjs --plan-json --pack "$VERIFY_PACK" --lane e2e --shard 2 > "$lane"
+          count=$(jq -er '.scripts | arrays | length' "$lane")
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" = 0 ]; then
+            echo '所选 pack 合法空集合 (scripts=0)' | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+          { echo '## Isolated render lane'; echo '```json'; cat "$lane"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Install verification system dependencies
+        if: ${{ steps.lane.outputs.count != '0' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
+          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
+          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
+          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
+          printf '%s\n' \
+            '#!/bin/sh' \
+            'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
+            'exec /usr/bin/convert "$@"' | sudo tee /usr/local/bin/magick >/dev/null
+          sudo chmod 755 /usr/local/bin/magick
+          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
+          if [ -n "$policy" ]; then
+            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
+          fi
+          magick -version
+      - name: Install Chromium
+        id: chromium
+        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - name: Run selected verification pack (isolated render lane)
+        # The selected-pack runner owns its existing diff/build preflight.
+        if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}
+        env:
+          VERIFY_PACK: ${{ steps.plan.outputs.pack }}
+        run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane e2e --shard 2 --jobs 2
       - name: Require tracked checkout to remain clean
         if: ${{ !cancelled() }}
         run: git diff --exit-code && git diff --cached --exit-code
 
   e2e:
     name: e2e
-    needs: [e2e-seams, e2e-render]
+    needs: [e2e-seams-1, e2e-seams-2, e2e-render-1, e2e-render-2]
     if: ${{ always() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - name: Require both E2E workers to succeed
+      - name: Require all four E2E workers to succeed
         env:
-          SEAMS_RESULT: ${{ needs.e2e-seams.result }}
-          RENDER_RESULT: ${{ needs.e2e-render.result }}
+          SEAMS_1_RESULT: ${{ needs.e2e-seams-1.result }}
+          SEAMS_2_RESULT: ${{ needs.e2e-seams-2.result }}
+          RENDER_1_RESULT: ${{ needs.e2e-render-1.result }}
+          RENDER_2_RESULT: ${{ needs.e2e-render-2.result }}
         run: |
-          test "$SEAMS_RESULT" = success
-          test "$RENDER_RESULT" = success
+          test "$SEAMS_1_RESULT" = success
+          test "$SEAMS_2_RESULT" = success
+          test "$RENDER_1_RESULT" = success
+          test "$RENDER_2_RESULT" = success

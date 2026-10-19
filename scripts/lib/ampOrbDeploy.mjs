@@ -28,9 +28,9 @@ export const AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID = 15368
 export const AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES = 8 * 1024 * 1024
 export const AMP_ORB_DEPLOY_WORKFLOW_PATH = '.github/workflows/verify.yml'
 export const AMP_ORB_DEPLOY_WORKFLOW_NAME = 'Verify'
-// v3 ships with this reader; deployment always resolves latest main.
-// Reject historical v1/v2 sets so missing workers cannot downgrade authority.
-export const AMP_ORB_DEPLOY_REQUIRED_JOBS = Object.freeze(['e2e', 'e2e-render', 'e2e-seams', 'verify', 'verify-1', 'verify-2'])
+// v4 ships with this reader; deployment always resolves latest main.
+// Reject historical v1/v2/v3 sets so missing workers cannot downgrade authority.
+export const AMP_ORB_DEPLOY_REQUIRED_JOBS = Object.freeze(['e2e', 'e2e-render-1', 'e2e-render-2', 'e2e-seams-1', 'e2e-seams-2', 'verify', 'verify-1', 'verify-2'])
 // Retained only for backward-compatible verifier coverage. Deployment wiring
 // below uses GitHub Actions workflow evidence, never this legacy Check seam.
 export const AMP_ORB_DEPLOY_AMP_CHECK_NAME = 'Amp Orb Verify'

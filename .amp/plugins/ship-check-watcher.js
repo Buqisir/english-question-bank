@@ -9,8 +9,8 @@ const REPO = 'Buqisir/english-question-bank'
 const APP = 15368
 const WORKFLOW_PATH = '.github/workflows/verify.yml'
 const WORKFLOW_NAME = 'Verify'
-// The watcher and v3 workflow ship together; historical v1/v2 sets are downgrades.
-const REQUIRED_JOBS = ['e2e', 'e2e-render', 'e2e-seams', 'verify', 'verify-1', 'verify-2']
+// The watcher and v4 workflow ship together; historical v1/v2/v3 sets are downgrades.
+const REQUIRED_JOBS = ['e2e', 'e2e-render-1', 'e2e-render-2', 'e2e-seams-1', 'e2e-seams-2', 'verify', 'verify-1', 'verify-2']
 const SHA = /^[a-f0-9]{40}$/u
 const TERMINAL = new Set(['success', 'failure', 'cancelled', 'timed_out', 'action_required', 'neutral', 'skipped', 'stale', 'startup_failure'])
 const exec = promisify(execFile)

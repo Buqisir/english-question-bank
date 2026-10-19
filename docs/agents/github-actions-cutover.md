@@ -22,23 +22,26 @@ queue/receipts remain unverified; do not claim their deletion or replay them.
 
 ### Worker topology
 
-Required checks remain `verify` and `e2e`. The v3 workflow runs independent
+Required checks remain `verify` and `e2e`. The v4 workflow runs independent
 `verify-1` and `verify-2` (disjoint shards of the selected verify lane),
-`e2e-seams` (all six fixed browser seams) and `e2e-render` (selected pack e2e
-lane) workers. Each required check always runs after its two workers and requires
-each result to be `success`. The full shard allocation is generated from the
-verify registry before pack selection: new script paths use SHA-256 modulo 2
-plus 1 without registration; explicit balance overrides can change destinations.
-Missing or duplicate allocations, stale overrides and shard keys other than
-exactly `{1, 2}` fail closed. No protection settings
-change is needed. Inspect all workers and required checks on natural PR and
-exact-main runs. Deployment and watcher readers recognize only the exact v3
-`{verify-1, verify-2, verify, e2e-seams, e2e-render, e2e}` job set; every job must
-succeed for authority. Historical v1/v2 shapes are rejected.
+`e2e-seams-1` (renderer + reorder), `e2e-seams-2` (DOM contract + A3 +
+grammar-fill + golden path), `e2e-render-1` and `e2e-render-2` (disjoint selected-pack render
+shards). All six fixed seams always execute exactly once, independent of pack.
+`verify` always runs after its two workers; `e2e` after its four. Each requires
+all worker results to be `success`. Full verify/render allocations are generated
+before pack selection: new lane paths use SHA-256 modulo 2 plus 1 without shard
+registration; explicit balance overrides can change destinations. Missing or
+duplicate allocations, stale overrides and shard keys other than exactly
+`{1, 2}` fail closed. A legitimate empty render shard succeeds with `scripts=0`;
+it does not skip the job. No protection settings change is needed. Inspect all
+workers and required checks on natural PR and exact-main runs. Deployment and
+watcher readers recognize only the exact v4 `{verify-1, verify-2, verify,
+e2e-seams-1, e2e-seams-2, e2e-render-1, e2e-render-2, e2e}` job set; every job must
+succeed for authority. Historical v1/v2/v3 shapes are rejected.
 
 Reader and workflow ship together. Deployment always fetches latest main, so the
-four-job run for `bc9a2d9d2a68ec4a76fd5195caf2f110e9697c15` is used by its
-matching old reader before v3 lands; once v3 lands, latest main has the new
+six-job run for `9eb492a165dd94c28ce731a5c8061ca5bdaaa9b2` is used by its
+matching old reader before v4 lands; once v4 lands, latest main has the new
 workflow and reader. Historical-main deployment is not supported or required.
 A source update alone does not prove the installed reader is current.
 

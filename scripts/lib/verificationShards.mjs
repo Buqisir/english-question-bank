@@ -1,20 +1,15 @@
 import { createHash } from 'node:crypto'
 
-// Balance overrides measured from PR #525, run 39208479703/job 117916387764.
-// Resource-aware two-bin packing: 538.197s / 538.156s simulated at jobs=2,
-// preserving registry order and existing locks. See ADR-0026 for setup estimates.
-// Unlisted verify-lane paths use SHA-256 modulo 2; retired overrides are errors.
+// Balance overrides measured from main run 39213815569 at 9eb492a1.
+// Registry-order replay at jobs=2 with existing locks: 435.052s / 434.170s.
+// Unlisted lane paths use SHA-256 modulo 2; retired overrides are errors.
 export const verificationShardOverrides = Object.freeze({
   '1': Object.freeze([
-    'scripts/verify-paper-canonical-foundation.mjs',
     'scripts/verify-paper-canonical-import-admission.mjs',
     'scripts/verify-student-product-pdf.mjs',
-    'scripts/verify-published-products-storage.mjs',
     'scripts/verify-scoped-publication.mjs',
     'scripts/verify-listening-signal.mjs',
     'scripts/verify-nck1-docx-materialization-producer.mjs',
-    'scripts/verify-nck1-answer-source-shapes.mjs',
-    'scripts/verify-nck1-reading-figure-options.mjs',
     'scripts/verify-nck1-ocr-source-evidence.mjs',
     'scripts/verify-universal-nck1-source-only-boundaries.mjs',
     'scripts/verify-import-review-ocr-confirmation.mjs',
@@ -24,7 +19,6 @@ export const verificationShardOverrides = Object.freeze({
     'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
     'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
     'scripts/verify-production-canonical-publication-backfill.mjs',
-    'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
     'scripts/verify-paper-canonical-trusted-docx-request.mjs',
     'scripts/verify-paper-canonical-docx-pair-request.mjs',
     'scripts/verify-paper-canonical-legacy-opaque-application.mjs',
@@ -48,7 +42,6 @@ export const verificationShardOverrides = Object.freeze({
     'scripts/verify-docx-source-media-input.mjs',
     'scripts/verify-c7-paper-import-publish.mjs',
     'scripts/verify-c8-draft-paper-render-model.mjs',
-    'scripts/verify-print-renderer.mjs',
     'scripts/verify-verification-scheduler.mjs',
     'scripts/verify-i1-paper-import-analysis.mjs',
     'scripts/verify-i2-seven-choices-ai-import.mjs',
@@ -66,6 +59,12 @@ export const verificationShardOverrides = Object.freeze({
     'scripts/verify-file-save-as.mjs',
   ]),
   '2': Object.freeze([
+    'scripts/verify-nck1-answer-source-shapes.mjs',
+    'scripts/verify-nck1-reading-figure-options.mjs',
+    'scripts/verify-paper-canonical-foundation.mjs',
+    'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
+    'scripts/verify-print-renderer.mjs',
+    'scripts/verify-published-products-storage.mjs',
     'scripts/verify-paper-asset-v1.mjs',
     'scripts/verify-paper-canonical-publication.mjs',
     'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
@@ -189,6 +188,18 @@ export const verificationShardOverrides = Object.freeze({
     'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
     'scripts/verify-reading-analysis-retire.mjs',
     'scripts/verify-r2-trap-audit.mjs',
+  ]),
+})
+
+// Keep the longest render script on its own runner; preserve the lane registry.
+export const e2eRenderShardOverrides = Object.freeze({
+  '1': Object.freeze(['scripts/verify-universal-nck1-publish.mjs']),
+  '2': Object.freeze([
+    'scripts/verify-universal-nck1-image-source-bundle.mjs',
+    'scripts/verify-paper-canonical-legacy-opaque-writing-rendered-behavior.mjs',
+    'scripts/verify-paper-canonical-seven-choices-rendered-behavior.mjs',
+    'scripts/verify-paper-canonical-application-writing-rendered-behavior.mjs',
+    'scripts/verify-figure-render.mjs',
   ]),
 })
 

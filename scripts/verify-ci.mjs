@@ -29,6 +29,7 @@ import {
 
 import {
   createVerificationShards,
+  e2eRenderShardOverrides,
   verificationShardScripts,
 } from './lib/verificationShards.mjs'
 
@@ -577,7 +578,10 @@ function verificationPlan() {
 let plan
 let concurrency
 try {
-  const shardAllocation = createVerificationShards(verificationLaneScripts(registry.scripts, 'verify'))
+  const shardAllocations = {
+    verify: createVerificationShards(verificationLaneScripts(registry.scripts, 'verify')),
+    e2e: createVerificationShards(verificationLaneScripts(registry.scripts, 'e2e'), e2eRenderShardOverrides),
+  }
   plan = verificationPlan()
   const lanes = argumentValues('--lane')
   const laneFlagCount = process.argv.filter((arg) => arg === '--lane').length
@@ -591,9 +595,9 @@ try {
     throw new Error('Expected exactly one --shard value')
   }
   const shard = shards[0] ?? 'all'
-  if (shard !== 'all' && lane !== 'verify') throw new Error('--shard requires --lane verify')
+  if (shard !== 'all' && !['verify', 'e2e'].includes(lane)) throw new Error('--shard requires --lane verify or e2e')
   plan = { ...plan, lane, shard,
-    scripts: verificationShardScripts(verificationLaneScripts(plan.scripts, lane), shard, shardAllocation) }
+    scripts: verificationShardScripts(verificationLaneScripts(plan.scripts, lane), shard, shardAllocations[lane]) }
   concurrency = verificationConcurrency()
 } catch (error) {
   console.error(error.message)
