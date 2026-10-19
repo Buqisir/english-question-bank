@@ -26,6 +26,26 @@ Owner 2026-10-06 对 reference-v2 县域样稿回复“OK”，确认本文件�
 不作为当前产品选择，也不把旧 teacher 自动映射成 answerOnly。Teacher Confirmation、
 教师用户及权限角色不改名。个人解析、精选平台参考不混入公共答案版。
 
+## 考试设计无听力的三产品清单（Owner 2026-10-19）
+
+广东笔试等源卷按考试设计不含听力时，导卷 Agent 在既有 `config.json` 中显式写入
+`listening: "absent-by-exam-design"`，并保留 Materialization 的两个 `not_supplied`
+slot 及来源证据。无音频不等于无听力。新产品工作区的声明必须与 Canonical 听力题组
+一致：声明无听力时只能有零个听力题组；未声明时须有完整两个，任何不一致均阻断。
+
+此类卷冻结为 `paper-pdf-products-v3`，按顺序只含 `largeNoListening`、`economy8`、
+`answerOnly`，仍写到 `products/manifest-v1.json`。清单同时记录上述 `listening` 声明及
+`economyPageLimit: 8`（或既有 v5 分页计划明确授权的 `9`），其余输入、源卷名、
+年月、字节与审批绑定不变。Review 文件枚举、产品选项和发布存储读取使用同一产品集合。
+题卷从第二部分阅读理解开始，客观题仍为 21–65，不造听力标题或 1–20 答案。
+
+`largeComplete` 仍要求完整两个听力题组；有听力卷继续冻结原四产品，v1/v2 清单不迁移、
+不改变旧含义。没有 PDF 产品承诺的历史 analyzed package 继续独立的原回放合同；
+raw-source 和新产品工作区一律核对声明，冻结新产品仍须显式声明。
+无听力三产品交接使用 `preprocessing-handoff-evidence-v5`，保持逐文件内容／视觉证据及
+精确 Screen revision 校验；历史 v1–v4 报告不改义。本地实现和合成样张不代表已部署、
+真实卷源内容已验收或已获送审／发布授权。
+
 ## 单卷九页省纸上限（2026-10-13 Owner授权）
 
 M174在默认八页有界搜索失败后，Owner允许本卷超过八页，并授权共享合同支持、

@@ -345,6 +345,14 @@ async function main() {
       `got status=${forcedHealth.status}`,
     )
 
+    const productInventoryPath = '/api/exports/papers/paper-auth-missing/products'
+    const privateProductInventory = await req(productInventoryPath)
+    assert(
+      '(c) published product inventory requires authentication',
+      privateProductInventory.status === 401 && privateProductInventory.json?.error === 'not_authenticated',
+      `got status=${privateProductInventory.status} body=${JSON.stringify(privateProductInventory.json)}`,
+    )
+
     const publicVocabulary = await req('/api/public/vocabulary/listen/public-fixture-share')
     assert(
       '(c) forced mode: public vocabulary share remains reachable without a cookie',
@@ -729,6 +737,12 @@ async function main() {
       body: { username: 'verify-member', password: 'Verify-Member-123' },
     })
     const memberCookie = cookieHeaderFrom(memberLogin.setCookie)
+    const memberProductInventory = await req(productInventoryPath, { cookie: memberCookie })
+    assert(
+      '(c) human members reach product inventory validation for a missing publication',
+      memberProductInventory.status === 409 && typeof memberProductInventory.json?.error === 'string',
+      `got status=${memberProductInventory.status} body=${JSON.stringify(memberProductInventory.json)}`,
+    )
     const memberReviews = await req('/api/import-reviews', { cookie: memberCookie })
     const memberSourceIntakes = await req('/api/source-intakes', { cookie: memberCookie })
     assert(
