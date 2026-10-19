@@ -334,6 +334,303 @@ for (const classification of ['semantic_table', 'content_media']) {
   }
 }
 
+// Original ordinary body figure with a separately transcribed heading whose
+// last pixel enters the parent crop. All changes below are synthetic/in-memory.
+// Exercise the public import and complete Canonical preview, not a helper.
+{
+  const confirmation = cloneJson(fixture.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
+  const engineDocuments = cloneJson(fixture.evidence.documents)
+  const page = confirmation.documents[0].pages.find(value =>
+    value.orderedItems.some(item => item.text === 'C passage keeps one small promise.'))
+  const index = page.orderedItems.findIndex(item => item.text === 'C passage keeps one small promise.')
+  const item = page.orderedItems[index]
+  const observed = engineDocuments[0].pages.find(value => value.page === page.page)
+  const observation = observed.observations.find(value => value.observationId === item.observationIds[0])
+  const rasterPage = fixture.evidence.documents[0].pages.find(value => value.page === page.page).raster
+  const { pixelWidth, pixelHeight } = rasterPage
+  const headingBottom = Math.floor(observation.region.y * pixelHeight) - 4
+  // A fractional normalized bottom also supplies a regression where equal
+  // normalized bottoms produce different independently rounded raster edges.
+  const figureBottom = (Math.ceil((observation.region.y + observation.region.height) * pixelHeight) + 2.4) / pixelHeight
+  const parentRegion = { x: observation.region.x, y: (headingBottom - 1) / pixelHeight,
+    width: observation.region.width, height: figureBottom - (headingBottom - 1) / pixelHeight }
+  const childRegion = { ...parentRegion, y: headingBottom / pixelHeight,
+    height: figureBottom - headingBottom / pixelHeight }
+  const heading = { ...cloneJson(observation), observationId: 'synthetic-figure-heading-observation',
+    regionId: 'synthetic-figure-heading-text', text: 'Chart summary',
+    region: { x: parentRegion.x, y: (headingBottom - 12) / pixelHeight,
+      width: Math.min(parentRegion.width, 0.15), height: 12 / pixelHeight } }
+  const headingItem = { itemId: 'synthetic-figure-heading-item',
+    observationIds: [heading.observationId], text: heading.text }
+  const tableObservation = { ...cloneJson(observation), observationId: 'synthetic-adjacent-table-observation',
+    regionId: 'synthetic-adjacent-table-text', text: 'Total: 3',
+    region: { x: parentRegion.x, y: figureBottom + 1 / pixelHeight,
+      width: 80 / pixelWidth, height: 8 / pixelHeight } }
+  const tableItem = { itemId: 'synthetic-adjacent-table-item',
+    observationIds: [tableObservation.observationId], text: tableObservation.text }
+  observed.observations.splice(observed.observations.indexOf(observation), 0, heading)
+  observed.observations.splice(observed.observations.indexOf(observation) + 1, 0, tableObservation)
+  observed.regions.push({ regionId: heading.regionId, kind: 'text', region: cloneJson(heading.region) },
+    { regionId: 'synthetic-body-figure', kind: 'visual', region: cloneJson(parentRegion) },
+    { regionId: tableObservation.regionId, kind: 'text', region: cloneJson(tableObservation.region) },
+    { regionId: 'synthetic-adjacent-table', kind: 'visual', region: cloneJson(tableObservation.region) })
+  observed.readingOrderEdges = observed.observations.slice(1).map((value, i) =>
+    ({ before: observed.observations[i].observationId, after: value.observationId }))
+  page.orderedItems.splice(index, 0, headingItem)
+  page.orderedItems.splice(index + 2, 0, tableItem)
+  page.visualClassifications.push({ regionId: 'synthetic-body-figure', classification: 'content_media',
+    afterItemId: headingItem.itemId, itemIds: [item.itemId] },
+    { regionId: 'synthetic-adjacent-table', classification: 'semantic_table',
+      rows: [{ header: false, cells: [[tableItem.itemId]] }] })
+
+  const { default: playwright } = await import('../app/node_modules/playwright/index.js')
+  const browser = await playwright.chromium.launch({ channel: 'chromium', headless: true })
+  const sourceDocuments = fixture.sourceDocuments.map(document => ({ ...document }))
+  try {
+    const view = await browser.newPage()
+    const pages = Array.from({ length: sourceDocuments[0].pageCount }, (_, i) => {
+      const raster = rasterPdfRegion({ pdfBytes: sourceDocuments[0].bytes, page: i + 1,
+        region: { x: 0, y: 0, width: 1, height: 1 }, density: 144 })
+      // Draw the original heading and adjacent native table in blank gaps.
+      // No source pixels are erased or whitened.
+      const overlay = i + 1 === page.page
+        ? `<svg viewBox="0 0 ${pixelWidth} ${pixelHeight}" style="position:absolute;inset:0;width:100%;height:100%">
+          <text x="${heading.region.x * pixelWidth}" y="${headingBottom - 2}" font-family="Arial" font-size="12">${heading.text}</text>
+          <path d="M ${heading.region.x * pixelWidth} ${headingBottom - 0.5} h ${heading.region.width * pixelWidth}" stroke="black" stroke-width="1"/>
+          <rect x="${tableObservation.region.x * pixelWidth}" y="${tableObservation.region.y * pixelHeight}" width="80" height="8" fill="none" stroke="black" stroke-width="0.5"/>
+          <text x="${tableObservation.region.x * pixelWidth + 1}" y="${tableObservation.region.y * pixelHeight + 6}" font-family="Arial" font-size="6">${tableObservation.text}</text></svg>`
+        : ''
+      return `<section><img src="data:image/png;base64,${Buffer.from(raster.bytes).toString('base64')}">${overlay}</section>`
+    })
+    await view.setContent(`<style>@page{size:A4;margin:0}body{margin:0}section{position:relative;width:210mm;height:297mm;break-after:page;overflow:hidden}section:last-child{break-after:auto}img{width:100%;height:100%;display:block}</style>${pages.join('')}`)
+    const bytes = new Uint8Array(await view.pdf({ printBackground: true, preferCSSPageSize: true }))
+    sourceDocuments[0] = { ...sourceDocuments[0], bytes, sha256: sha256(bytes), byteLength: bytes.byteLength }
+  } finally {
+    await browser.close()
+  }
+  const evidence = buildNck1OcrSourceEvidence({ paperId, documents: sourceDocuments,
+    engine: { name: 'synthetic-body-top-trim', version: '1' }, confidenceThreshold: 0.97, engineDocuments })
+  confirmation.sourceSetDigest = evidence.sourceSetDigest
+  confirmation.evidenceDigest = evidence.evidenceDigest
+  const produced = produceNck1OcrMaterialization({ paperId, documents: sourceDocuments, evidence, confirmation })
+  assert.deepEqual(produced.review.required, [])
+  const sourceBytes = { evidenceBytes: new TextEncoder().encode(JSON.stringify(evidence)),
+    confirmationBytes: new TextEncoder().encode(JSON.stringify(confirmation)) }
+  const materialization = cloneJson(produced.materialization)
+  materialization.schemaVersion = 'nck1-source-materialization-v3'
+  delete materialization.sourcePresentation
+  const owner = materialization.groups.find(group => group.slotId === 'reading.c')
+  const figure = owner.blocks.find(block => block.kind === 'figure')
+  assert(figure)
+  assert.equal(owner.blocks[owner.blocks.indexOf(figure) - 1].content.map(part => part.text).join(''), heading.text)
+  const mediaId = figure.mediaId
+  const recrop = (value, region) => {
+    const media = value.materialization.media.find(media => media.mediaId === mediaId)
+    media.extraction.region = cloneJson(region)
+    const raster = rasterPdfRegion({ pdfBytes: sourceDocuments.find(document =>
+      document.documentId === media.extraction.documentId).bytes, ...media.extraction })
+    media.sha256 = sha256(raster.bytes)
+    media.pixelWidth = raster.pixelWidth
+    media.pixelHeight = raster.pixelHeight
+    media.publication = { selection: 'source_crop', sourceSha256: media.sha256 }
+    value.mediaFiles[value.mediaFiles.findIndex(file => file.mediaId === mediaId)] = { mediaId, bytes: raster.bytes }
+    value.materialization.groups.flatMap(group => group.blocks).find(block =>
+      block.kind === 'figure' && block.mediaId === mediaId).source = {
+      kind: 'page_region', documentId: media.extraction.documentId, page: media.extraction.page,
+      region: cloneJson(region),
+    }
+    const coverage = value.materialization.sourceCoverage.visuals.find(visual => visual.targetId === mediaId)
+    coverage.page = media.extraction.page
+    coverage.region = cloneJson(region)
+  }
+  const trimmed = { materialization, mediaFiles: produced.mediaFiles.map(file => ({ ...file })) }
+  recrop(trimmed, childRegion)
+  // The old untrimmed path remains independently usable.
+  const unchanged = imported(produced, sourceBytes, sourceDocuments)
+  assert.deepEqual(unchanged.issues, [])
+  assert(compileNck1MaterializationCandidatePreview(unchanged.candidate).compilation)
+  for (const version of [3, 4]) {
+    const mat = cloneJson(materialization)
+    mat.schemaVersion = `nck1-source-materialization-v${version}`
+    if (version === 4) {
+      const resolved = resolveConfirmedNck1OcrEvidence({ paperId, documents: sourceDocuments, evidence, confirmation })
+      mat.sourcePresentation = { listeningExample: null, instructions: [
+        ['reading.a', '阅读下列短文，从每题所给的四个选项中选出最佳选项。'],
+        ['seven-choices', '阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。'],
+        ['cloze', '阅读下面短文，从每题所给的四个选项中选出最佳选项。'],
+        ['grammar-fill', '阅读下面材料，在空白处填入适当的单词或括号内单词的正确形式。'],
+      ].map(([slotId, text]) => {
+        const paragraphs = resolved.structures.get(sourceDocuments[0].documentId).paragraphs.filter(value => value.text === text)
+        assert.equal(paragraphs.length, 1)
+        return { slotId, text, source: cloneJson(paragraphs[0].sourceIndex) }
+      }) }
+    }
+    const candidate = imported({ ...trimmed, materialization: mat }, sourceBytes, sourceDocuments)
+    assert.deepEqual(candidate.issues, [], JSON.stringify(candidate.issues))
+    const preview = compileNck1MaterializationCandidatePreview(candidate.candidate)
+    assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+    const compiled = preview.compilation.artifacts.canonicalPaper.questionGroups
+      .find(group => group.identity.groupId === owner.groupId)
+    assert.equal(compiled.content.blocks.filter(block => block.kind === 'figure' && block.mediaId === mediaId).length, 1)
+    assert.equal(compiled.content.blocks.find(block => block.kind === 'figure').nodeId, figure.blockId)
+    assert.equal(compiled.content.blocks[compiled.content.blocks.findIndex(block => block.kind === 'figure') + 1].kind, 'table',
+      'an adjacent native table retains the trimmed figure as its projected before anchor')
+    console.log(`PASS OCR ordinary figure top-trim public import+preview: v${version}`)
+  }
+
+  const cases = [
+    'cut-body-observation', 'missing-items', 'empty-items', 'duplicate-items', 'missing-item',
+    'empty-observations', 'missing-observation', 'duplicate-observations',
+    'empty-anchor-observations', 'missing-anchor-observation', 'multiple-parent-candidates',
+    'no-heading-intrusion', 'no-horizontal-intrusion', 'past-heading-bottom', 'wrong-anchor',
+    'changed-anchor-text', 'paragraph-source-alias', 'changed-group-slot', 'changed-group-id',
+    'changed-family', 'changed-block-id', 'move-before-anchor', 'changed-after',
+    'changed-left', 'changed-width', 'changed-bottom', 'same-normalized-different-raster-bottom',
+    'same-raster-top', 'changed-density', 'outside-parent', 'cross-page', 'cross-document',
+    'changed-media-id', 'duplicate-media-id', 'extra-child', 'parent-plus-trimmed-child', 'duplicate-reference',
+    'coverage-duplicate', 'coverage-extra', 'coverage-page', 'coverage-region', 'visual-proof',
+    'wrong-bytes', 'wrong-hash', 'wrong-dimensions', 'wrong-recipe',
+  ]
+  for (const name of cases) {
+    const invalid = { materialization: cloneJson(materialization),
+      mediaFiles: trimmed.mediaFiles.map(file => ({ ...file, bytes: new Uint8Array(file.bytes) })) }
+    const mat = invalid.materialization
+    const group = mat.groups.find(group => group.groupId === owner.groupId)
+    const block = group.blocks.find(block => block.mediaId === mediaId)
+    const blockIndex = group.blocks.indexOf(block)
+    const media = mat.media.find(media => media.mediaId === mediaId)
+    const coverage = mat.sourceCoverage.visuals.find(visual => visual.targetId === mediaId)
+    const changedEvidence = cloneJson(evidence)
+    const changedConfirmation = cloneJson(confirmation)
+    const cp = changedConfirmation.documents[0].pages.find(value => value.page === page.page)
+    const ep = changedEvidence.documents[0].pages.find(value => value.page === page.page)
+    const visual = cp.visualClassifications.find(value => value.regionId === 'synthetic-body-figure')
+    const contentItem = cp.orderedItems.find(value => value.itemId === item.itemId)
+    const anchorItem = cp.orderedItems.find(value => value.itemId === headingItem.itemId)
+    const region = cloneJson(childRegion)
+    let cropChanged = false
+    if (name === 'cut-body-observation') {
+      region.y = observation.region.y + observation.region.height / 2
+      region.height = figureBottom - region.y
+      cropChanged = true
+    } else if (name === 'missing-items') delete visual.itemIds
+    else if (name === 'empty-items') visual.itemIds = []
+    else if (name === 'duplicate-items') visual.itemIds.push(item.itemId)
+    else if (name === 'missing-item') visual.itemIds = ['synthetic-missing-item']
+    else if (name === 'empty-observations') contentItem.observationIds = []
+    else if (name === 'missing-observation') contentItem.observationIds = ['synthetic-missing-observation']
+    else if (name === 'duplicate-observations') contentItem.observationIds.push(contentItem.observationIds[0])
+    else if (name === 'empty-anchor-observations') anchorItem.observationIds = []
+    else if (name === 'missing-anchor-observation') anchorItem.observationIds = ['synthetic-missing-anchor-observation']
+    else if (name === 'multiple-parent-candidates') {
+      ep.regions.push({ regionId: 'synthetic-second-parent', kind: 'visual', region: cloneJson(parentRegion) })
+      cp.visualClassifications.push({ regionId: 'synthetic-second-parent', classification: 'content_media',
+        afterItemId: headingItem.itemId, itemIds: [] })
+    } else if (['no-heading-intrusion', 'no-horizontal-intrusion'].includes(name)) {
+      const anchorObservation = ep.observations.find(value => value.observationId === heading.observationId)
+      if (name === 'no-heading-intrusion') anchorObservation.region.y -= 20 / pixelHeight
+      else anchorObservation.region.x = parentRegion.x + parentRegion.width + 0.01
+      ep.regions.find(value => value.regionId === heading.regionId).region = cloneJson(anchorObservation.region)
+    } else if (name === 'past-heading-bottom') {
+      region.y += 1 / pixelHeight
+      region.height = figureBottom - region.y
+      cropChanged = true
+    } else if (name === 'wrong-anchor') visual.afterItemId = page.orderedItems[index - 1].itemId
+    else if (name === 'changed-anchor-text') anchorItem.text += ' changed'
+    else if (name === 'paragraph-source-alias') group.blocks[blockIndex - 1].source = cloneJson(block.source)
+    else if (name === 'changed-group-slot') group.slotId = 'reading.d'
+    else if (name === 'changed-group-id') group.groupId += '-forged'
+    else if (name === 'changed-family') group.family = 'cloze'
+    else if (name === 'changed-block-id') block.blockId += '-forged'
+    else if (name === 'move-before-anchor') {
+      group.blocks.splice(blockIndex, 1)
+      group.blocks.splice(blockIndex - 1, 0, block)
+    } else if (name === 'changed-after') {
+      group.blocks.splice(blockIndex + 1, 0, { ...cloneJson(group.blocks[blockIndex - 1]),
+        blockId: 'synthetic-extra-after-anchor' })
+    } else if (name === 'changed-left') {
+      region.x += 1 / pixelWidth
+      region.width -= 1 / pixelWidth
+      cropChanged = true
+    } else if (name === 'changed-width') {
+      region.width -= 1 / pixelWidth
+      cropChanged = true
+    } else if (name === 'changed-bottom') {
+      region.height -= 1 / pixelHeight
+      cropChanged = true
+    } else if (name === 'same-normalized-different-raster-bottom') {
+      region.y = (headingBottom - 0.4) / pixelHeight
+      region.height = figureBottom - region.y
+      assert(Math.abs(region.y + region.height - parentRegion.y - parentRegion.height) <= 1e-9)
+      const rasterBottom = value => Math.round(value.y * pixelHeight) + Math.round(value.height * pixelHeight)
+      assert.notEqual(rasterBottom(region), rasterBottom(parentRegion))
+      cropChanged = true
+    } else if (name === 'same-raster-top') {
+      region.y = parentRegion.y + 0.1 / pixelHeight
+      region.height = figureBottom - region.y
+      cropChanged = true
+    } else if (name === 'changed-density') {
+      media.extraction.density = 145
+      cropChanged = true
+    } else if (name === 'outside-parent') {
+      region.y = parentRegion.y - 1 / pixelHeight
+      region.height = figureBottom - region.y
+      cropChanged = true
+    } else if (name === 'cross-page') {
+      media.extraction.page = page.page === 1 ? 2 : 1
+      cropChanged = true
+    } else if (name === 'cross-document') {
+      media.extraction.documentId = sourceDocuments[1].documentId
+      media.extraction.page = 1
+      cropChanged = true
+    } else if (name === 'changed-media-id') {
+      media.mediaId = block.mediaId = coverage.targetId = 'synthetic-renamed-figure'
+      invalid.mediaFiles.find(file => file.mediaId === mediaId).mediaId = media.mediaId
+    } else if (name === 'duplicate-media-id') {
+      mat.media.push(cloneJson(media))
+      invalid.mediaFiles.push({ ...invalid.mediaFiles.find(file => file.mediaId === mediaId) })
+    } else if (name === 'extra-child' || name === 'parent-plus-trimmed-child') {
+      const extra = cloneJson(media)
+      extra.mediaId = 'synthetic-extra-child'
+      mat.media.push(extra)
+      invalid.mediaFiles.push({ ...invalid.mediaFiles.find(file => file.mediaId === mediaId), mediaId: extra.mediaId })
+      group.blocks.push({ ...cloneJson(block), blockId: 'synthetic-extra-child-block', mediaId: extra.mediaId })
+      mat.sourceCoverage.visuals.push({ ...cloneJson(coverage), visualId: 'visual:extra-child', targetId: extra.mediaId })
+      if (name === 'parent-plus-trimmed-child') recrop(invalid, parentRegion)
+    } else if (name === 'duplicate-reference') group.blocks.push({ ...cloneJson(block), blockId: 'synthetic-duplicate-reference' })
+    else if (name === 'coverage-duplicate') mat.sourceCoverage.visuals.push({ ...cloneJson(coverage), visualId: 'visual:duplicate-trim' })
+    else if (name === 'coverage-extra') mat.sourceCoverage.visuals.push({ ...cloneJson(coverage),
+      visualId: 'visual:unconsumed-trim', targetId: 'synthetic-unconsumed-media' })
+    else if (name === 'coverage-page') coverage.page = page.page === 1 ? 2 : 1
+    else if (name === 'coverage-region') coverage.region.y += 0.0001
+    else if (name === 'visual-proof') media.usage = 'visual_proof'
+    else if (name === 'wrong-bytes') {
+      const fullPage = rasterPdfRegion({ pdfBytes: sourceDocuments[0].bytes, page: page.page,
+        region: { x: 0, y: 0, width: 1, height: 1 }, density: 144 })
+      invalid.mediaFiles.find(file => file.mediaId === mediaId).bytes = fullPage.bytes
+      media.sha256 = media.publication.sourceSha256 = sha256(fullPage.bytes)
+      media.pixelWidth = fullPage.pixelWidth
+      media.pixelHeight = fullPage.pixelHeight
+    } else if (name === 'wrong-hash') media.sha256 = media.publication.sourceSha256 = `sha256:${'0'.repeat(64)}`
+    else if (name === 'wrong-dimensions') media.pixelHeight += 1
+    else if (name === 'wrong-recipe') media.extraction.region.y += 1 / pixelHeight
+    if (cropChanged) recrop(invalid, region)
+    rebound(changedEvidence)
+    changedConfirmation.evidenceDigest = changedEvidence.evidenceDigest
+    const rejected = imported(invalid, {
+      evidenceBytes: new TextEncoder().encode(JSON.stringify(changedEvidence)),
+      confirmationBytes: new TextEncoder().encode(JSON.stringify(changedConfirmation)),
+    }, sourceDocuments)
+    assert(rejected.issues.length > 0, `${name} top-trim must fail the public import`)
+    const preview = compileNck1MaterializationCandidatePreview(rejected.candidate)
+    assert(!preview.compilation, `${name} top-trim cannot compile a usable preview`)
+    assert(preview.unresolvedIssues?.length > 0, `${name} top-trim preview must retain blocking issues`)
+    if (name === 'wrong-bytes') assert(rejected.issues.some(issue => issue.code === 'MATERIALIZATION_MEDIA_RECIPE_MISMATCH'))
+    console.log(`PASS OCR ordinary figure top-trim rejection: ${name}`)
+  }
+}
+
 // Original synthetic scanned source: replace one MCQ row with a stem and four
 // distinct drawings. No commercial paper, source text, hash or crop is embedded.
 {
@@ -483,6 +780,35 @@ for (const classification of ['semantic_table', 'content_media']) {
   assert.deepEqual(v4Candidate.issues, [])
   const v4Preview = compileNck1MaterializationCandidatePreview(v4Candidate.candidate)
   assert(v4Preview.compilation, JSON.stringify(v4Preview.unresolvedIssues))
+
+  // Retaining the bank's original ID must not turn it into an ordinary body
+  // image or provide a shortcut around the four-option consumption proof.
+  {
+    const mat = cloneJson(materialization)
+    const childIds = new Set(children.map(child => child.mediaId))
+    mat.media = mat.media.filter(media => !childIds.has(media.mediaId))
+    mat.sourceCoverage.visuals = mat.sourceCoverage.visuals.filter(visual => !childIds.has(visual.targetId))
+    const media = cloneJson(parentMedia)
+    const pageRaster = evidence.documents[0].pages.find(value => value.page === page.page).raster
+    const region = { ...cloneJson(parentRegion), y: parentRegion.y + 1 / pageRaster.pixelHeight,
+      height: parentRegion.height - 1 / pageRaster.pixelHeight }
+    const file = crop(media, region)
+    mat.media.push(media)
+    const owner = mat.groups.find(value => value.groupId === group.groupId)
+    owner.questions.find(value => value.questionId === question.questionId).options =
+      'ABCD'.split('').map(label => ({ label, text: `${label} synthetic replacement` }))
+    owner.blocks.push({ kind: 'figure', blockId: 'synthetic-bank-disguised-as-body',
+      mediaId: parent.mediaId, caption: '', source: { ...cloneJson(parent.source), region } })
+    mat.sourceCoverage.visuals.push({ ...cloneJson(resolved.sourceVisuals.find(value => value.targetId === parent.mediaId)),
+      region: cloneJson(region) })
+    const rejected = imported({ materialization: mat,
+      mediaFiles: [...mediaFiles.filter(value => !childIds.has(value.mediaId)), file] }, sourceBytes, sourceDocuments)
+    assert(rejected.issues.length > 0, 'ordinary top-trim cannot consume an A-D bank')
+    const preview = compileNck1MaterializationCandidatePreview(rejected.candidate)
+    assert(!preview.compilation)
+    assert(preview.unresolvedIssues?.length > 0)
+    console.log('PASS OCR figure-option rejection: bank-disguised-as-ordinary-top-trim')
+  }
 
   const cases = [
     'unconfirmed-parent', 'outside-parent', 'old-D-two-pixels-outside', 'cross-parent', 'cross-page', 'cross-document',
