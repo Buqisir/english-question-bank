@@ -17,8 +17,9 @@ const IMAGE_MEDIA_TYPES = Object.freeze({
   'image/webp': 'webp',
 })
 const MAX_IMAGE_BUFFER = 128 * 1024 * 1024
-// 2480×3508 PNG/JPEG/WebP identify/RGBA/crop probes (3 each) took at most
-// 3.30s locally; 30s allows >9× headroom while bounding a stalled stdin pipe.
+// Each external call gets 30s: crop first identifies, then crops, so the whole
+// operation can approach 60s. Local 2480×3508 PNG/JPEG/WebP identify/RGBA/crop
+// probes (3 each) took at most 3.30s; 30s leaves >9× headroom per call.
 const IMAGE_PROCESS_TIMEOUT_MS = 30_000
 
 export class Nck1ImageSourceBundleError extends Error {

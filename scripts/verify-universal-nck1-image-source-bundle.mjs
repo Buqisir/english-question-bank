@@ -49,9 +49,20 @@ function verifyImageProcessTimeouts() {
   const pidPath = path.join(tempRoot, 'magick.pid')
   const modulePath = path.join(root, 'server/paper-import/nck1ImageSourceBundle.mjs')
   const probe = `
-    import {
+    import assert from 'node:assert/strict'
+    import childProcess from 'node:child_process'
+    import { syncBuiltinESMExports } from 'node:module'
+    const execFileSync = childProcess.execFileSync
+    // Assert the production deadline before shortening only this isolated probe.
+    childProcess.execFileSync = (file, args, options) => {
+      assert.equal(options.timeout, 30_000)
+      assert.equal(options.killSignal, 'SIGKILL')
+      return execFileSync(file, args, { ...options, timeout: 1_000 })
+    }
+    syncBuiltinESMExports()
+    const {
       inspectNck1SourceImage, nck1ImagePageRgba, cropNck1SourceImage,
-    } from ${JSON.stringify(modulePath)}
+    } = await import(${JSON.stringify(modulePath)})
     const bytes = Buffer.alloc(1024 * 1024)
     Buffer.from('89504e470d0a1a0a', 'hex').copy(bytes)
     const operations = {
@@ -90,7 +101,7 @@ if (process.argv[2] === 'identify' && process.env.EQB_IMAGE_TEST_OPERATION !== '
         const result = JSON.parse(execFileSync(process.execPath, ['--input-type=module', '-e', probe], {
           cwd: root,
           encoding: 'utf8',
-          timeout: 40_000,
+          timeout: 5_000,
           killSignal: 'SIGKILL',
           env: {
             ...process.env,
@@ -102,8 +113,8 @@ if (process.argv[2] === 'identify' && process.env.EQB_IMAGE_TEST_OPERATION !== '
         }))
         assert.equal(result.name, 'Nck1ImageSourceBundleError', operation)
         assert.equal(result.code, 'NCK1_IMAGE_PROCESS_TIMEOUT', operation)
-        assert(result.elapsedMs >= 29_000 && result.elapsedMs < 40_000,
-          `${operation} must fail at the 30-second process deadline: ${result.elapsedMs}ms`)
+        assert(result.elapsedMs >= 1_000 && result.elapsedMs < 5_000,
+          `${operation} must fail at the shortened 1-second process deadline: ${result.elapsedMs}ms`)
         const pid = Number(readFileSync(pidPath, 'utf8'))
         assert.throws(() => process.kill(pid, 0), { code: 'ESRCH' },
           `${operation} must leave no ImageMagick process behind`)
