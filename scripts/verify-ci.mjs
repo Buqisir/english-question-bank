@@ -266,6 +266,7 @@ const securityScripts = [
   'scripts/verify-user-scope.mjs',
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-launch-deploy.mjs',
+  'scripts/verify-h11a-http-client.mjs',
   'scripts/verify-paper-translation-cache.mjs',
   'scripts/verify-paper-translation-routes.mjs',
 ]
@@ -309,6 +310,8 @@ const featureScripts = uniqueRegistered([
   ),
   // Signal staging is an import-pipeline feature as well as a Paper input.
   'scripts/verify-listening-signal.mjs',
+  // The shared HTTP client also remains covered for ordinary feature changes.
+  'scripts/verify-h11a-http-client.mjs',
 ])
 const importPaperScripts = uniqueRegistered([
   'scripts/verify-import-pagination-qa.mjs',

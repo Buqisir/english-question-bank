@@ -47,8 +47,8 @@ function escapeRegExp(value) {
 // ── Slice 1: production same-origin addressing ──────────────────────────────
 section('Slice 1 — httpClient same-origin relative addressing')
 
-// H11 exercises the real helper, including browser and SSR addressing.
-execFileSync(process.execPath, [resolve(ROOT, 'scripts/verify-h11a-http-client.mjs')], { stdio: 'inherit' })
+// The independent H11 verifier covers the real browser/SSR helper in both
+// security and feature packs; do not execute that entire verifier twice in all.
 
 // No service file may reintroduce the absolute origin in code.
 const servicesDir = resolve(ROOT, 'app/src/services')
