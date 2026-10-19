@@ -301,5 +301,10 @@
       "as-soon-as",
       "negative-condition"
     ]
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.conjunction.cleft",
+    "routes": ["cleft-that"],
+    "features": []
   }
 ]

@@ -75,7 +75,7 @@ function assertPromptContract() {
   assert('prompt names schemaVersion grammar-fill-analysis-v2', prompt.includes('grammar-fill-analysis-v2'))
   // promptVersion
   assert('prompt names promptVersion grammar-fill-analysis-v2', prompt.includes('promptVersion') || prompt.includes('grammar-fill-analysis-v2'))
-  // All 23 leaf facet keys must be named, including same-POS adjective negation.
+  // All 24 leaf facet keys must be named, including the cleft connector.
   for (const leaf of [
     'grammar-fill.given.verb.finite',
     'grammar-fill.given.verb.non-finite',
@@ -100,6 +100,7 @@ function assertPromptContract() {
     'grammar-fill.no-hint.conjunction.relative-clause',
     'grammar-fill.no-hint.conjunction.noun-clause',
     'grammar-fill.no-hint.conjunction.adverbial-clause',
+    'grammar-fill.no-hint.conjunction.cleft',
   ]) {
     assert(`prompt names leaf facet: ${leaf}`, prompt.includes(leaf))
   }
@@ -135,7 +136,7 @@ function assertRegistryContract() {
   const raw = readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json')
   const registry = JSON.parse(raw)
   assert('registry is an array', Array.isArray(registry))
-  assert('registry has exactly 23 leaves', registry.length === 23)
+  assert('registry has exactly 24 leaves', registry.length === 24)
 
   const EXPECTED_LEAVES = [
     'grammar-fill.given.verb.finite',
@@ -161,6 +162,7 @@ function assertRegistryContract() {
     'grammar-fill.no-hint.conjunction.relative-clause',
     'grammar-fill.no-hint.conjunction.noun-clause',
     'grammar-fill.no-hint.conjunction.adverbial-clause',
+    'grammar-fill.no-hint.conjunction.cleft',
   ]
 
   for (const key of EXPECTED_LEAVES) {
@@ -182,9 +184,9 @@ function assertRegistryContract() {
   }
 
   const similarityRegistry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-similarity-v1.json'))
-  assert('similarity registry has exactly 23 facet entries', similarityRegistry.length === 23)
+  assert('similarity registry has exactly 24 facet entries', similarityRegistry.length === 24)
   assert(
-    'similarity registry covers the same 23 facet keys',
+    'similarity registry covers the same 24 facet keys',
     JSON.stringify(similarityRegistry.map((entry) => entry.facet_key).sort())
       === JSON.stringify(EXPECTED_LEAVES.sort()),
   )

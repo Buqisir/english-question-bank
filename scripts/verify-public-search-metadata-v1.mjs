@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
+import { DatabaseSync } from 'node:sqlite'
 import Ajv from '../server/node_modules/ajv/dist/2020.js'
 
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
@@ -16,6 +20,8 @@ import {
 import { ensureSearchMetadata } from './import-pipeline/search-metadata-check.mjs'
 import { buildNck1CompatibilityPackage } from '../server/import-review/revisionProjection.mjs'
 import { stableStringify } from '../shared/paper-canonical/stable.mjs'
+import { createTeachingFacetIndex, queryGroupsByTeaching, readPublicFacetEntries } from '../server/search/teachingFacets.mjs'
+import { createSimilarQuestionsStore } from '../server/search/similarQuestions.mjs'
 
 const materialization = makeFixture()
 const reading = materialization.groups.find((group) => group.slotId === 'reading.a')
@@ -192,6 +198,149 @@ assert.equal(negativeResult.facetKey, 'grammar-fill.given.conversion.adjective-t
 assert.deepEqual(negativeResult.similarityProfile, { route: 'negative-prefix', features: [] })
 assert.equal(negativeResult.role, null)
 assert.deepEqual(validatePublicSearchMetadata({ sidecar: negative, ...negativeBinding }), [])
+
+// Original synthetic source: the gap supplies the cleft connector, not the pronoun.
+const cleftFacet = 'grammar-fill.no-hint.conjunction.cleft'
+const cleftMaterialization = structuredClone(materialization)
+const cleftGroup = cleftMaterialization.groups.find((group) => group.family === 'grammar-fill')
+const cleftQuestion = cleftGroup.questions.find((question) => question.prompt === null)
+cleftGroup.blocks.push({
+  kind: 'paragraph', blockId: 'block:cleft-that', role: 'body', source: cleftGroup.blocks[0].source,
+  content: [
+    { kind: 'text', text: 'It was in the park ' },
+    { kind: 'blank_ref', blankId: cleftQuestion.blankId },
+    { kind: 'text', text: ' we met our friends.' },
+  ],
+})
+// Move the existing blank ref into its complete sentence; do not duplicate its identity.
+for (const block of cleftGroup.blocks.slice(0, -1)) {
+  block.content = block.content.filter((item) => item.kind !== 'blank_ref' || item.blankId !== cleftQuestion.blankId)
+}
+cleftMaterialization.answers.find((answer) => answer.questionId === cleftQuestion.questionId).value = 'that'
+const cleftBinding = { ...binding, materialization: cleftMaterialization }
+const cleftAuthorityBefore = stableStringify(cleftMaterialization)
+const cleftRequest = preparePublicSearchMetadataRequest(cleftBinding)
+assert.deepEqual(cleftRequest.binding, prepared.binding, 'preparation preserves paper identity and digest bindings')
+assert.deepEqual(cleftRequest.controlledValues.grammarFacets.find((facet) => facet.facet_key === cleftFacet),
+  { facet_key: cleftFacet, blank_type: 'no-hint' })
+assert.deepEqual(cleftRequest.controlledValues.grammarSimilarity.find((facet) => facet.facet_key === cleftFacet),
+  { facet_key: cleftFacet, routes: ['cleft-that'], features: [] })
+const cleftSource = cleftRequest.sourceGroups.find((group) => group.groupId === cleftGroup.groupId)
+assert.equal(cleftSource.questions.find((question) => question.questionId === cleftQuestion.questionId).authoritativeAnswer, 'that')
+assert.deepEqual(cleftSource.blocks.at(-1).content, cleftGroup.blocks.at(-1).content)
+const cleftAuthored = structuredClone(authored)
+const cleftItem = cleftAuthored.groups.find((group) => group.family === 'grammar-fill').metadata.questions
+  .find((question) => question.questionId === cleftQuestion.questionId)
+Object.assign(cleftItem, {
+  facetKey: cleftFacet, role: null,
+  similarityProfile: { route: 'cleft-that', features: [] },
+  contextParagraphIds: cleftRequest.deterministic.find((group) => group.groupId === cleftGroup.groupId).paragraphIds,
+})
+assert.equal(new Ajv({ strict: true }).compile(cleftRequest.outputContract)(cleftAuthored), true)
+assert.deepEqual(validateAuthoredPublicSearchMetadata({ authored: cleftAuthored, ...cleftBinding }), [])
+const cleftFinal = finalizePublicSearchMetadata({ authored: cleftAuthored, ...cleftBinding })
+const cleftResultGroup = cleftFinal.groups.find((group) => group.groupId === cleftGroup.groupId)
+const cleftResult = cleftResultGroup.metadata.questions.find((question) => question.questionId === cleftQuestion.questionId)
+assert.deepEqual(cleftResult, {
+  questionId: cleftQuestion.questionId, blankId: cleftQuestion.blankId, blankType: 'no-hint', hint: null,
+  facetKey: cleftFacet, role: null, similarityProfile: { route: 'cleft-that', features: [] },
+  contextParagraphIds: cleftItem.contextParagraphIds, derived: {},
+})
+assert.deepEqual(validatePublicSearchMetadata({ sidecar: cleftFinal, ...cleftBinding }), [])
+const cleftPersisted = JSON.parse(stableStringify(cleftFinal))
+assert.deepEqual(validatePublicSearchMetadata({ sidecar: cleftPersisted, ...cleftBinding }), [])
+assert.deepEqual(cleftPersisted, cleftFinal)
+for (const key of ['paperId', 'sourceDigest', 'candidateDigest']) {
+  assert.equal(cleftPersisted[key], cleftRequest.binding[key], `${key} survives finalization and persistence`)
+}
+const metadataDigest = (value) => createHash('sha256').update(stableStringify(value)).digest('hex')
+assert.equal(metadataDigest(cleftPersisted), metadataDigest(cleftFinal), 'canonical metadata digest survives JSON roundtrip')
+assert.equal(stableStringify(cleftMaterialization), cleftAuthorityBefore, 'source identities and authoritative answers are never mutated')
+assert.equal(preparePublicSearchMetadataRequest(cleftBinding).sourceGroups
+  .find((group) => group.groupId === cleftGroup.groupId).questions
+  .find((question) => question.questionId === cleftQuestion.questionId).authoritativeAnswer, 'that')
+
+for (const [patch, code] of [
+  [{ similarityProfile: { route: 'cleft-it', features: [] } }, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID'],
+  [{ similarityProfile: { route: 'that-clause', features: [] } }, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID'],
+  [{ similarityProfile: { route: 'cleft-that', features: ['object-clause'] } }, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID'],
+  [{ role: 'subject' }, 'PUBLIC_METADATA_GRAMMAR_ROLE_INVALID'],
+]) {
+  const invalidAuthored = structuredClone(cleftAuthored)
+  Object.assign(invalidAuthored.groups.find((group) => group.family === 'grammar-fill').metadata.questions
+    .find((question) => question.questionId === cleftQuestion.questionId), patch)
+  assert.ok(validateAuthoredPublicSearchMetadata({ authored: invalidAuthored, ...cleftBinding }).some((issue) => issue.code === code))
+  assert.throws(() => finalizePublicSearchMetadata({ authored: invalidAuthored, ...cleftBinding }), new RegExp(code))
+  const invalidFinal = structuredClone(cleftPersisted)
+  Object.assign(invalidFinal.groups.find((group) => group.family === 'grammar-fill').metadata.questions
+    .find((question) => question.questionId === cleftQuestion.questionId), patch)
+  assert.ok(validatePublicSearchMetadata({ sidecar: invalidFinal, ...cleftBinding }).some((issue) => issue.code === code))
+}
+
+// Exercise real public-sidecar readers, filtering and similarity selection on isolated fixtures.
+const cleftAssetsDir = mkdtempSync(path.join(tmpdir(), 'public-metadata-cleft-'))
+const cleftDb = new DatabaseSync(':memory:')
+try {
+  cleftDb.exec(`
+    CREATE TABLE sources (id TEXT PRIMARY KEY, source_type TEXT, year INTEGER, region TEXT, paper_name TEXT);
+    CREATE TABLE passages (id TEXT PRIMARY KEY, source_id TEXT, discourse_type TEXT, word_count INTEGER);
+    CREATE TABLE question_groups (id TEXT PRIMARY KEY, passage_id TEXT, group_type TEXT, title TEXT);
+    CREATE TABLE questions (id TEXT PRIMARY KEY, group_id TEXT);
+    CREATE TABLE question_group_topic_labels (question_group_id TEXT, label TEXT);
+  `)
+  const cases = [
+    ['cleft-seed', cleftFacet, 'cleft-that', []],
+    ['cleft-peer', cleftFacet, 'cleft-that', []],
+    ['pronoun-peer', 'grammar-fill.no-hint.pronoun', 'cleft-it', []],
+    ['noun-peer', 'grammar-fill.no-hint.conjunction.noun-clause', 'that-clause', ['object-clause']],
+  ]
+  const warnings = []
+  for (const [id, facetKey, route, features] of cases) {
+    const groupId = `group:${id}`
+    const questionId = `question:${id}`
+    const baseDir = path.join(cleftAssetsDir, id)
+    mkdirSync(baseDir)
+    const item = { ...cleftResult, questionId, facetKey, similarityProfile: { route, features } }
+    const group = { ...cleftResultGroup, groupId, questionIds: [questionId], metadata: { questions: [item] } }
+    const sidecar = { ...cleftPersisted, paperId: id, groups: [group] }
+    const writeJson = (name, value) => writeFileSync(path.join(baseDir, name), stableStringify(value))
+    writeJson('paper-asset.json', {
+      paper: { paperId: id, title: id },
+      content: { groups: { [groupId]: { groupType: 'grammarFill', questionIds: [questionId] } } },
+    })
+    writeJson('public-search-metadata-v1.json', sidecar)
+    writeJson('import-meta.json', { paginationPlanBinding: { sourceDigest, candidateDigest } })
+    const projected = readPublicFacetEntries({
+      baseDir, paperId: id,
+      questionToGroup: new Map([[questionId, { groupId, groupType: 'grammarFill' }]]),
+    })
+    assert.deepEqual(projected.entries.get(questionId), { groupId, groupType: 'grammarFill', facetKey, blankType: 'no-hint', role: null })
+    cleftDb.prepare('INSERT INTO sources VALUES (?, ?, ?, ?, ?)').run(id, '模拟题', 2026, '', id)
+    cleftDb.prepare('INSERT INTO passages VALUES (?, ?, ?, ?)').run(id, id, null, null)
+    cleftDb.prepare('INSERT INTO question_groups VALUES (?, ?, ?, ?)').run(groupId, id, 'grammar_cloze', id)
+    cleftDb.prepare('INSERT INTO questions VALUES (?, ?)').run(questionId, groupId)
+  }
+  const facetIndex = createTeachingFacetIndex({ paperAssetsDir: cleftAssetsDir, warn: (...args) => warnings.push(args) }).getIndex()
+  assert.deepEqual(queryGroupsByTeaching(facetIndex, { groupType: 'grammarFill', blankType: 'no-hint', facetKey: cleftFacet })
+    .map(({ groupId }) => groupId).sort(), ['group:cleft-peer', 'group:cleft-seed'])
+  for (const [id, facetKey] of cases.slice(2)) {
+    assert.deepEqual(queryGroupsByTeaching(facetIndex, { facetKey }).map(({ groupId }) => groupId), [`group:${id}`])
+  }
+  const store = createSimilarQuestionsStore({ getTeachingFacetIndex: () => facetIndex, paperAssetsDir: cleftAssetsDir })
+  const similar = store.findSimilar(cleftDb, { seeds: [{ questionId: 'question:cleft-seed' }] })
+  assert.deepEqual(similar.seedProfile.facets, [{ key: 'facetKey', values: [cleftFacet] }])
+  assert.deepEqual(similar.results.map(({ groupId, matchedQuestionIds }) => ({ groupId, matchedQuestionIds })),
+    [{ groupId: 'group:cleft-peer', matchedQuestionIds: ['question:cleft-peer'] }])
+  assert.equal(similar.poolStats.totalInPool, 1, 'pronoun and noun-clause candidates are excluded, not merely ranked lower')
+  for (const [id] of cases.slice(2)) {
+    assert.equal(store.findSimilar(cleftDb, { seeds: [{ questionId: `question:${id}` }] }).poolStats.totalInPool, 0,
+      'the separate pronoun/noun-clause pools cannot select cleft connectors')
+  }
+  assert.deepEqual(warnings, [], 'public facet indexing must not silently skip a synthetic paper')
+} finally {
+  cleftDb.close()
+  rmSync(cleftAssetsDir, { recursive: true, force: true })
+}
 
 const schema = JSON.parse(readFileSync(new URL('../schemas/paper-import/public-search-metadata-v1.schema.json', import.meta.url)))
 const schemaValidate = new Ajv({ strict: true }).compile(schema)

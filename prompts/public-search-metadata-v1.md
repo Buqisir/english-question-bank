@@ -16,6 +16,14 @@ from authority. For grammar author only `questionId`, `facetKey`, `role`, `simil
 certain; any explicit IDs stay in source order, belong to that group, and include the target blank's
 paragraph.
 
+For a no-hint blank supplying `that` in `It is/was … that …`, use
+`grammar-fill.no-hint.conjunction.cleft` (强调句连接标记), route `cleft-that`,
+`features: []`, and `role: null`. For example, `It was in the park ___ we met
+our friends.` takes `that`. The existing pronoun route `cleft-it` only applies
+when the blank supplies `it`; noun-clause routes require the clause to occupy
+a noun slot. Do not use either for this emphatic connector. This cleft facet
+does not cover `who` or other routes.
+
 Family metadata shapes are closed:
 - reading: `{slot, questions:[{questionId, similarityProfile:{family,subtype,detailScope,technique}}]}`
 - seven-choices: `{questions:[{questionId,positionFacet,roleFacet,primaryMechanismFacet}]}`

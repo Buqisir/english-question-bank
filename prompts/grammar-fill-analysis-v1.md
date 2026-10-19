@@ -107,12 +107,13 @@ For every other facet: `"role": null`.
 | After a verb/adjective or collocates → prepositional phrase (no new predicate) | `no-hint.preposition` |
 | Pronoun position (subject/object), anaphora / formal-subject / it-cleft | `no-hint.pronoun` |
 
-**Conjunction sub-type (4 leaves):**
+**Conjunction sub-type (5 leaves):**
 
 - `coordinating` — connects parallel elements (no subordination)
 - `relative-clause` — preceded by antecedent noun/pronoun; clause modifies it; use `who/whom/which/that/whose/when/where/why`
 - `noun-clause` — clause fills a noun slot (subject/object/predicative); no antecedent; use `what/whether/if/that/how/when/where/why`
 - `adverbial-clause` — both clauses are structurally complete; clause modifies the main clause; use time/reason/condition/concession/result connectors: `when/while/as/because/since/if/unless/although/though/so that/…`
+- `cleft` — 强调句连接标记: only a no-hint blank supplying `that` in `It is/was … that …`; use route `cleft-that`, `features: []`, `role: null`. For example, `It was in the park ___ we met our friends.` takes `that`. The pronoun route `cleft-it` still means supplying `it`, and noun-clause routes require a clause in a noun slot; neither represents this connector. Do not extend this facet to `who` or other routes.
 
 ## Student-Facing Explanation Rule
 
@@ -201,7 +202,7 @@ Every `blanks[questionId]` MUST include:
 - `blankNo` — integer blank number (56–65)
 - `blankType` — exactly `given` or `no-hint` (from input)
 - `hint` — the given base word (string) for `given` blanks; `null` for `no-hint` blanks (from input)
-- `facetKey` — exactly one of the **23 leaf** keys listed below
+- `facetKey` — exactly one of the **24 leaf** keys listed below
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `similarityProfile` — machine-facing matching support, exactly
@@ -217,7 +218,7 @@ Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb), or `form`/
 deterministically from `answer` after your response. `similarityProfile` is
 different: it records the contextual judgment route and MUST be generated here.
 
-## The 23 Valid `facetKey` Leaves
+## The 24 Valid `facetKey` Leaves
 
 Use ONLY these exact string values. Do NOT use parent nodes (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`) — they are NOT valid facetKeys. (The old `grammar-fill.given.noun` / `grammar-fill.given.adjective` / `grammar-fill.given.derivation.*` leaves from v1 are retired — do NOT use them.)
 
@@ -245,6 +246,7 @@ grammar-fill.no-hint.conjunction.coordinating
 grammar-fill.no-hint.conjunction.relative-clause
 grammar-fill.no-hint.conjunction.noun-clause
 grammar-fill.no-hint.conjunction.adverbial-clause
+grammar-fill.no-hint.conjunction.cleft
 ```
 
 `blank_type` match rule: any `grammar-fill.given.*` leaf MUST go with `blankType: "given"`. Any `grammar-fill.no-hint.*` leaf MUST go with `blankType: "no-hint"`.
@@ -360,6 +362,7 @@ or the finer answer form from `answer`; do not output those derived fields.
 | `conjunction.relative-clause` | `missing-subject` / `missing-object-predicative` / `missing-possessive` / `missing-adverbial` / `preposition-relative` / `as-special` | `human`, `thing`, `whole-event`, `restrictive`, `non-restrictive` |
 | `conjunction.noun-clause` | `that-clause` / `whether-if` / `what` / `who` / `when-where-why-how` / `wh-infinitive` | `subject-clause`, `object-clause`, `predicative-clause`, `appositive-clause` |
 | `conjunction.adverbial-clause` | `time` / `reason` / `condition` / `concession` / `purpose` / `result` / `manner` / `comparison` / `place` | `simultaneous`, `before-after`, `since-start`, `until-end`, `as-soon-as`, `negative-condition` |
+| `conjunction.cleft` | `cleft-that` | — |
 
 For articles, features record the decisive substructure or `a/an` sound rule;
 use `[]` when the route itself is already complete. For a relative clause,

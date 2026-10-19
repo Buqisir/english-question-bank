@@ -838,6 +838,15 @@ one-of-a-kind` 与 `an hour / an 81-year-old` 等拼写和读音不一致的特�
 确认保留。暂不把 `one/ones`、`another` 及所有不定代词预先展开为“代词
 大全”，以后有真实设空再增加。
 
+### 无提示词强调句连接标记（2026-10-19 导入缺项补齐）
+
+`grammar-fill.no-hint.conjunction.cleft`（强调句连接标记）仅表示空格补
+`It is/was … that …` 中的强调连接标记 `that`，路线只允许 `cleft-that`，
+`blankType` 为 `no-hint`、`features` 为 `[]`、`role` 为 `null`。
+例如原创合成句 `It was in the park ___ we met our friends.` 填 `that`。
+原有代词路线 `cleft-it` 仍只表示补 `it`；名词性从句路线要求从句占名词
+位置，不能用来容纳此强调连接标记。本项不扩展到 `who` 或其他路线。
+
 ### 无提示词并列连词（已确认）
 
 并列连词先按主要逻辑关系分五条普通路线：
