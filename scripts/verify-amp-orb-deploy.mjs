@@ -238,6 +238,14 @@ const actionsVerification = (
 
 section('Owner command and exact authoritative candidate')
 
+const localWrapperChecks = spawnSync(process.execPath, [
+  path.join(ROOT, 'scripts/verify-local-deploy.mjs'),
+], { encoding: 'utf8', timeout: 60_000 })
+assert(
+  localWrapperChecks.status === 0,
+  `Owner Mac wrapper retries only read requests and rejects unsafe checkouts before Keychain: ${localWrapperChecks.stderr || localWrapperChecks.stdout}`,
+)
+
 const mainEndpoint = 'repos/Buqisir/english-question-bank/git/ref/heads/main'
 assert(
   JSON.stringify(deploymentGitHubApiArgs(mainEndpoint))
