@@ -3,20 +3,27 @@
 export function subjectFreeHeaderTitle(paperTitle) {
   if (typeof paperTitle !== 'string') throw new TypeError('paperTitle must be a string')
   const subjectWords = String.raw`英\s*语(?:\s*学\s*科)?(?:\s*试\s*题\s*卷|\s*试\s*题|\s*试\s*卷|\s*练\s*习|\s*真\s*题|\s*样\s*题)?`
+  const adjacentGrade = String.raw`高[一二三](?:年级)?\s*`
   // Match the complete parenthesized subject first, so its empty shell cannot
   // survive. Genuine edition notes remain in the trailing text.
-  const subject = new RegExp(String.raw`(?:（\s*${subjectWords}\s*）|\(\s*${subjectWords}\s*\)|${subjectWords})(?=(?:\s*[（(][^()（）]*[)）]|[\p{P}\s])*$)`, 'u')
+  const subject = new RegExp(String.raw`(?:（\s*(${adjacentGrade})?${subjectWords}\s*）|\(\s*(${adjacentGrade})?${subjectWords}\s*\)|${subjectWords})(?=(?:\s*[（(][^()（）]*[)）]|[\p{P}\s])*$)`, 'u')
   const match = subject.exec(paperTitle)
   if (!match) return paperTitle
   const prefix = paperTitle.slice(0, match.index)
-  // For a parenthesized subject, the opening bracket itself precedes 英语.
+  // Parenthesized subject segments have a non-Han opening boundary.
   // Otherwise inspect exactly one character, preserving lexical compounds.
   const beforeSubject = /^[（(]/u.test(match[0]) ? '(' : Array.from(prefix).at(-1)
   if (beforeSubject && /\p{Script=Han}/u.test(beforeSubject)
     && !/[考试测检调模练估断评研卷题末中一二三度年级期赛]/u.test(beforeSubject)) return paperTitle
   // A subject at the end, or immediately before trailing edition notes, is
   // removable. A compound such as 英语教学 / 英语学校 is not a subject suffix.
-  const result = `${prefix.trimEnd()}${paperTitle.slice(match.index + match[0].length).trimStart()}`.trim()
+  // Remove just the adjacent grade after accepting the subject boundary.
+  // Do not recheck the shortened prefix: valid names may now end in 协作体 or
+  // even an earlier lexical 英语. Other grades elsewhere in the title survive.
+  // Captures 1/2 mean the one grade was already consumed inside parentheses.
+  const headerPrefix = match[1] || match[2] ? prefix
+    : prefix.replace(new RegExp(String.raw`\s*${adjacentGrade}$`, 'u'), '')
+  const result = `${headerPrefix.trimEnd()}${paperTitle.slice(match.index + match[0].length).trimStart()}`.trim()
   return /[\p{L}\p{N}]/u.test(result) ? result : paperTitle
 }
 
