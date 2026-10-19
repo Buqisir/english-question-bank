@@ -30,9 +30,16 @@ const materialization = {
     group('grammar', 'grammar-fill', [paragraph('grammar-body', 'body', 'Grammar prose')]),
     group('continuation', 'continuation-writing', [
       paragraph('continuation-instruction', 'body', 'Continue the story.'),
+      paragraph('continuation-title', 'title', 'An unexpected journey'),
+      paragraph('continuation-subtitle', 'subtitle', 'The way home'),
       paragraph('continuation-body', 'body', 'The source story.'),
+      paragraph('continuation-body-2', 'body', 'The journey continued.'),
+      paragraph('continuation-notice', 'body', 'Write two paragraphs.'),
       paragraph('continuation-starter', 'body', 'The source story.'),
-    ], { material: ['The source story.'], starters: ['The source story.'] }),
+    ], {
+      material: ['An unexpected journey', 'The way home', 'The source story.', 'The journey continued.'],
+      starters: ['The source story.'],
+    }),
     group('application', 'application-writing', [paragraph('application-prompt', 'body', 'Write a letter.')]),
   ],
 }
@@ -41,7 +48,7 @@ const targets = enumerateParagraphSummaryTargets(materialization)
 assert.deepEqual(targets.map(({ groupId, paragraphId }) => [groupId, paragraphId]), [
   ['reading-a', 'read-body'], ['seven', 'seven-body'], ['framed', 'left-body'],
   ['framed', 'right-body'], ['cloze', 'cloze-body'], ['grammar', 'grammar-body'],
-  ['continuation', 'continuation-body'],
+  ['continuation', 'continuation-body'], ['continuation', 'continuation-body-2'],
 ])
 assert.throws(
   () => enumerateParagraphSummaryTargets({ groups: [group(
@@ -51,6 +58,31 @@ assert.throws(
     { material: ['Missing material'], starters: ['Starter'] },
   )] }),
   /SUMMARY_CONTINUATION_STRUCTURE_AMBIGUOUS/,
+)
+
+const continuation = materialization.groups.find(({ groupId }) => groupId === 'continuation')
+for (const headingIndex of [1, 2]) {
+  const mismatchedHeading = structuredClone(continuation)
+  mismatchedHeading.blocks[headingIndex].content[0].text = 'A different heading'
+  assert.throws(
+    () => enumerateParagraphSummaryTargets({ groups: [mismatchedHeading] }),
+    /SUMMARY_CONTINUATION_STRUCTURE_AMBIGUOUS/,
+    'heading text must match its exact material position',
+  )
+}
+const shiftedMaterial = structuredClone(continuation)
+shiftedMaterial.blocks.splice(1, 0, paragraph('extra-prompt', 'body', 'Another instruction.'))
+assert.throws(
+  () => enumerateParagraphSummaryTargets({ groups: [shiftedMaterial] }),
+  /SUMMARY_CONTINUATION_STRUCTURE_AMBIGUOUS/,
+  'material shifted by an extra prompt must remain blocked',
+)
+const reorderedMaterial = structuredClone(continuation)
+;[reorderedMaterial.blocks[3], reorderedMaterial.blocks[4]] = [reorderedMaterial.blocks[4], reorderedMaterial.blocks[3]]
+assert.throws(
+  () => enumerateParagraphSummaryTargets({ groups: [reorderedMaterial] }),
+  /SUMMARY_CONTINUATION_STRUCTURE_AMBIGUOUS/,
+  'reordered material must remain blocked',
 )
 
 const valid = {
