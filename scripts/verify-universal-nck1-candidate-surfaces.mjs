@@ -9,6 +9,7 @@ import {
   readFileSync,
   writeFileSync,
 } from 'node:fs'
+import { createServer } from 'node:net'
 import path from 'node:path'
 
 import { buildPrintHtml } from '../server/print-renderer.mjs'
@@ -36,8 +37,21 @@ function slug(paperId) {
   return paperId.replace(/^paper-mock-/, '').replace(/-2026(?:-m\d+|-final)?$/, '')
 }
 
-async function candidateConsumption(paperId, index) {
-  const port = 45100 + index
+// A fixed port collided with a lingering listener on shared CI runners
+// (EADDRINUSE 127.0.0.1:45100); ask the OS for a free one per preview.
+function freePort() {
+  return new Promise((resolve, reject) => {
+    const server = createServer()
+    server.once('error', reject)
+    server.listen(0, '127.0.0.1', () => {
+      const { port } = server.address()
+      server.close(() => resolve(port))
+    })
+  })
+}
+
+async function candidateConsumption(paperId) {
+  const port = await freePort()
   const child = spawn(
     process.execPath,
     ['scripts/import-pipeline/nck1-candidate-preview-server.mjs', paperId],
@@ -202,7 +216,7 @@ const browser = await playwright.default.chromium.launch({ headless: true, chann
 const screenServer = await startScreenServer()
 try {
   for (const [index, paperId] of paperIds.entries()) {
-    const preview = await candidateConsumption(paperId, index)
+    const preview = await candidateConsumption(paperId)
     const consumption = printConsumption(preview.consumption)
     const title = config(paperId).provenance.paperName
     const answers = new Map(Object.entries(preview.paperAsset.answerKey.answers)
