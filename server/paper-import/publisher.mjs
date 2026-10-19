@@ -51,7 +51,7 @@ import {
 import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
-  reviewBundleFilePaths,
+  reviewBundleFilePathsForProjection,
   resolveReviewFile,
 } from '../import-review/revisionProjection.mjs'
 import { validateReviewBundleManifest } from '../import-review/importReviewStore.mjs'
@@ -1272,7 +1272,7 @@ export function publishUniversalNck1Import({
       || !approvedIdentity.approvalId || !approvedIdentity.revisionId) {
       throw new Error('Source references require the exact approved Review bundle')
     }
-    const inventory = reviewBundleFilePaths(reviewRootDir, projection.candidate)
+    const inventory = reviewBundleFilePathsForProjection(reviewRootDir, projection)
     if (inventory.length !== manifest.files.length || inventory.some(file => !manifest.files.some(actual =>
       actual.path === file.path && actual.role === file.role && actual.mediaType === file.mediaType))) {
       throw new Error('Approved Review inventory does not match the publication workspace')

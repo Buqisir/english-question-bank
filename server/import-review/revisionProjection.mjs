@@ -64,6 +64,10 @@ export const PUBLIC_PAPER_IMPORT_PROFILE = 'public-paper-v1'
 export const PARAGRAPH_SUMMARIES_FILE_NAME = 'paragraph-summaries-v1.json'
 export const PUBLIC_SEARCH_METADATA_FILE_NAME = 'public-search-metadata-v1.json'
 
+// Bound to one server-derived projection, never looked up by path across requests.
+// Keep this request-local inventory out of the serialized projection contract.
+const reviewBundleInventories = new WeakMap()
+
 const paragraphSummariesSchema = JSON.parse(readFileSync(path.join(
   import.meta.dirname,
   '../../schemas/paper-import/paragraph-summaries-v1.schema.json',
@@ -583,8 +587,22 @@ export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDige
 
 export function reviewBundleFilePaths(rootDir, candidate = null) {
   const loaded = loadNck1ReviewSource(rootDir)
+  return reviewBundleFilePathsFromSource(rootDir, loaded, candidate)
+}
+
+export function reviewBundleFilePathsForProjection(rootDir, projection) {
+  const context = reviewBundleInventories.get(projection)
+  if (!context || context.rootDir !== path.resolve(rootDir)) {
+    return reviewBundleFilePaths(rootDir, projection?.candidate)
+  }
+  return context.inventory().map(file => ({ ...file }))
+}
+
+function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
+  reviewedListening = loadReviewedListening(rootDir, loaded, candidate),
+  analysisValidated = false,
+} = {}) {
   const { manifest, materialization } = loaded
-  const reviewedListening = loadReviewedListening(rootDir, loaded, candidate)
   const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
   // Retain historical bundle/PDF input identities without interpreting geometry.
   // Old producers may still upload this optional, independently hashed file.
@@ -592,20 +610,22 @@ export function reviewBundleFilePaths(rootDir, candidate = null) {
   const importProfile = nck1ImportProfile(loaded.config, {
     externalPackage: Boolean(loaded.analyzedPackage),
   })
-  const paperAsset = buildNck1CompatibilityPaperAsset({
-    config: loaded.config,
-    materialization,
-    sourceAssetVersion: 1,
-    primarySourceType: primarySourceType(materialization, Boolean(loaded.analyzedPackage)),
-    sourceProvenance: loaded.analyzedPackage ? loaded.sourceProvenance : null,
-  })
-  buildNck1AnalysisProjection({
-    rootDir,
-    materialization,
-    paperAsset,
-    required: !importProfile,
-    requireTeachingContent: Boolean(loaded.analyzedPackage),
-  })
+  if (!analysisValidated) {
+    const paperAsset = buildNck1CompatibilityPaperAsset({
+      config: loaded.config,
+      materialization,
+      sourceAssetVersion: 1,
+      primarySourceType: primarySourceType(materialization, Boolean(loaded.analyzedPackage)),
+      sourceProvenance: loaded.analyzedPackage ? loaded.sourceProvenance : null,
+    })
+    buildNck1AnalysisProjection({
+      rootDir,
+      materialization,
+      paperAsset,
+      required: !importProfile,
+      requireTeachingContent: Boolean(loaded.analyzedPackage),
+    })
+  }
   const sourceFiles = loaded.analyzedPackage
     ? [
         {
@@ -1734,8 +1754,17 @@ export function buildNck1ReviewProjection(rootDir, {
     : null
   const examDate = readExamDate(loaded.config.provenance, { required: Boolean(loaded.config.pdfProductsRequired
     || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))) })
+  let bundleFiles
+  const inventory = () => bundleFiles ||= reviewBundleFilePathsFromSource(rootDir, loaded, imported.candidate, {
+    reviewedListening,
+    // Inventory historically requires analyses for legacy bundles even when
+    // a Screen projection did not, and checks sourceAssetVersion 1. Reuse only
+    // an equivalent (or stricter) analysis validation.
+    analysisValidated: (requireAnalyses || Boolean(importProfile))
+      && preview.candidate.interpretation.sourceAssetVersion === 1,
+  })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir, imported.candidate), reviewedListening),
+    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
         config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
@@ -1744,7 +1773,7 @@ export function buildNck1ReviewProjection(rootDir, {
   if (frozenProducts && (frozenProducts.manifest.paperId !== loaded.materialization.paperId
     || frozenProducts.manifest.paperName !== loaded.config.provenance.paperName
     || digestJson(frozenProducts.manifest.examDate) !== digestJson(examDate))) fail('Frozen PDF identity differs from Review')
-  return {
+  const projection = {
     ...loaded,
     frozenProducts,
     reviewedListening,
@@ -1787,6 +1816,8 @@ export function buildNck1ReviewProjection(rootDir, {
     paginationPlanDigest: paginationPlan?.digest || null,
     paginationSlotBindings: slotBindings,
   }
+  reviewBundleInventories.set(projection, { rootDir: path.resolve(rootDir), inventory })
+  return projection
 }
 
 export function printConsumption(screenConsumption) {
