@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
 import { readExamDate } from '../../shared/examDate.mjs'
+import { configuredPaperHeader, validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 
 import {
   compileNck1MaterializationCandidatePreview,
@@ -1591,6 +1592,7 @@ export function buildNck1CompatibilityPackage({
     }]))
   return {
     paperAsset,
+    ...(config.headerTitle !== undefined ? { paperHeader: configuredPaperHeader(config) } : {}),
     answerKey,
     readingAnalysis: analysisSidecars['reading-choice-analysis-v1.json'] || null,
     scAnalysis: analysisSidecars['seven-choices-analysis-v1.json'] || null,
@@ -1754,7 +1756,9 @@ export function buildNck1ReviewProjection(rootDir, {
     visibleStructureDigest: consumption.visibleStructureDigest,
     candidate: preview.candidate,
     compilation: preview.compilation,
-    consumption: { ...consumption, paperSourceType: configuredSourceType(loaded.config, loaded.materialization.paperId) },
+    consumption: { ...consumption, paperSourceType: configuredSourceType(loaded.config, loaded.materialization.paperId),
+      ...(loaded.config.headerTitle !== undefined
+        ? { paperHeaderTitle: validatedPaperHeaderTitle(configuredPaperHeader(loaded.config)) } : {}) },
     mediaDerivations,
     paperAsset,
     sourceVisuals,

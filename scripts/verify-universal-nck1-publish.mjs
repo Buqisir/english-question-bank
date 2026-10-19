@@ -66,6 +66,7 @@ import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consume
 import { consumerContractRefs, resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { subjectFreeHeaderTitle } from '../shared/paper-canonical/headerTitle.mjs'
 import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
   nck1MaterializationCandidateAuthorityRef,
@@ -2024,7 +2025,114 @@ function runReviewCommand(args, env) {
   })
 }
 
+// The first-page title belongs to the exact approved revision and publication,
+// never to the mutable compatibility asset.
+export function verifyPaperHeaderTitlePublication() {
+for (const enabled of [false, true]) {
+  const context = makeContext(`header-title-${enabled}`, { listening: true, sourceType: '模拟题' })
+  try {
+    const configPath = path.join(context.reviewRoot, 'config.json')
+    const config = JSON.parse(readFileSync(configPath, 'utf8'))
+    config.provenance.paperName = '浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）'
+    if (enabled) config.headerTitle = subjectFreeHeaderTitle(config.provenance.paperName)
+    writeJson(configPath, config)
+    context.projection = buildNck1ReviewProjection(context.reviewRoot, { requireAnalyses: true })
+    const manifest = reviewManifestFor(context.reviewRoot, context.projection)
+    const reviewStore = createImportReviewStore({
+      dbPath: path.join(context.tempRoot, 'review.sqlite'),
+      filesRoot: path.join(context.tempRoot, 'review-files'), rendererBuildId: 'header-title-verifier',
+    })
+    const revision = reviewStore.createRevision(manifest).revision
+    for (const file of manifest.files) {
+      const upload = reviewStore.fileForUpload(revision.id, file.path)
+      mkdirSync(path.dirname(upload.destination), { recursive: true })
+      writeFileSync(upload.destination, readFileSync(resolveReviewFile(context.reviewRoot, file.path)))
+      reviewStore.completeFileUpload(revision.id, file.path, file)
+    }
+    reviewStore.finalizeRevision(revision.id)
+    const replay = reviewStore.projectionForRevision(revision.id)
+    assert.equal(replay.projection.consumption.paperHeaderTitle, config.headerTitle)
+    const approval = reviewStore.approveRevision(paperId, revision.id,
+      { bundleDigest: revision.bundleDigest }, 'synthetic-owner')
+    const options = {
+      reviewRootDir: path.dirname(reviewStore.verifiedFileForRead(revision.id, 'config.json').filePath),
+      approvedManifest: manifest,
+      approvedIdentity: { ...approvedIdentity(context.projection), approvalId: approval.approvalId,
+        revisionId: revision.id, bundleDigest: manifest.bundleDigest },
+    }
+    if (enabled) {
+      assert.throws(() => publish(context), /Review|manifest|bundle/i,
+        'new presentation metadata requires an exact approved bundle')
+      const changedConfig = structuredClone(config)
+      changedConfig.provenance.paperName = '其他考试英语试题'
+      changedConfig.headerTitle = '其他考试'
+      writeJson(configPath, changedConfig)
+      assert.throws(() => publish(context, { ...options, reviewRootDir: context.reviewRoot }),
+        /exact approved Review bundle|bytes changed/,
+        'a rule-valid replacement still requires approval of its exact config')
+      writeJson(configPath, config)
+    }
+    const result = publish(context, options)
+    assert.equal(result.ok, true, JSON.stringify(result))
+    const versionDir = result.publish.versionDir
+    const publicationPath = path.join(versionDir, 'canonical',
+      `canonical-paper-publication-v${context.projection.consumption.authorityRef.manifestVersion}.json`)
+    const originalPublication = readFileSync(publicationPath)
+    const publication = JSON.parse(originalPublication)
+    assert.equal(Object.hasOwn(publication, 'paperHeader'), enabled)
+    if (enabled) assert.deepEqual(publication.paperHeader, {
+      sourceTitle: config.provenance.paperName, headerTitle: config.headerTitle,
+    })
+    const runtime = createCanonicalConsumerRuntime({ rootDir: context.paperAssetsDir, db: context.db })
+    const load = (consumerId) => runtime.load({ paperId, consumerId, version: 'v1' })
+    const before = Object.fromEntries(['screen', 'print_pdf'].map(id => [id, load(id)]))
+    for (const consumption of Object.values(before)) {
+      assert.equal(consumption.disposition, 'ready')
+      assert.equal(consumption.paperHeaderTitle, config.headerTitle)
+    }
+    const assetPath = path.join(versionDir, 'paper-asset.json')
+    const asset = JSON.parse(readFileSync(assetPath))
+    asset.paper.headerTitle = '未经审核的替换卷名'
+    writeJson(assetPath, asset)
+    for (const id of ['screen', 'print_pdf']) {
+      assert.deepEqual(load(id), before[id], 'compatibility-only injection cannot change any consumer')
+    }
+    if (enabled) {
+      const altered = structuredClone(publication)
+      altered.paperHeader.headerTitle = '未经审核的替换卷名'
+      writeJson(publicationPath, altered)
+      for (const id of ['screen', 'print_pdf']) {
+        assert.throws(() => load(id), error =>
+          error.code === 'CANONICAL_CONSUMPTION_REJECTED'
+          && error.diagnostics[0].code === 'PAPER_HEADER_TITLE_INVALID')
+      }
+      // A rule-valid replacement with a recomputed digest is still a different
+      // publication, and cannot masquerade as the selected approved version.
+      altered.paperHeader = { sourceTitle: '其他考试英语试题', headerTitle: '其他考试' }
+      const { publicationDigest: _oldDigest, ...body } = altered
+      altered.publicationDigest = digestJson(body)
+      assert.notEqual(altered.publicationDigest, publication.publicationDigest)
+      writeJson(publicationPath, altered)
+      for (const id of ['screen', 'print_pdf']) {
+        assert.throws(() => load(id), error =>
+          error.diagnostics[0].code === 'CANONICAL_PUBLICATION_DIGEST_INVALID')
+      }
+      // Removing the opt-in and resealing must also fail against the exact ref.
+      delete altered.paperHeader
+      const { publicationDigest: _changedDigest, ...withoutHeader } = altered
+      altered.publicationDigest = digestJson(withoutHeader)
+      writeJson(publicationPath, altered)
+      assert.throws(() => load('screen'), error =>
+        error.diagnostics[0].code === 'CANONICAL_PUBLICATION_DIGEST_INVALID')
+      writeFileSync(publicationPath, originalPublication)
+    }
+    console.log(`PASS ${enabled ? 'new' : 'historical'} header title: sealed Review -> approval -> exact-version Screen/Print-PDF; compatibility injection ignored; bound tampering rejected`)
+  } finally { close(context) }
+}
+}
+
 if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
+verifyPaperHeaderTitlePublication()
 for (const legacy of [true, false]) {
   const context = makeContext(legacy ? 'legacy-waveform' : 'no-waveform', { listening: true })
   try {

@@ -52,6 +52,7 @@ const registry = {
   'scripts/verify-published-products-storage.mjs',
   'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-paper-header-title.mjs',
   'scripts/verify-scoped-publication.mjs',
   'scripts/verify-listening-audio-intake.mjs',
   'scripts/verify-listening-signal.mjs',
