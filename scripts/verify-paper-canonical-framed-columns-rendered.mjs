@@ -12,6 +12,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
+import { capturePageDiagnostics } from './lib/browserPageDiagnostics.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
@@ -308,8 +309,9 @@ async function assertActualBrowserArtifacts() {
       }))
     const url = new URL('canonical-reading-qa.html', appUrl)
     url.searchParams.set('groupId', FRAMED_GROUP_ID)
+    const diagnostics = capturePageDiagnostics(page)
     await page.goto(url.href)
-    await page.locator('[data-canonical-reading-semantic-signature]').waitFor()
+    await diagnostics.waitForMarker('[data-canonical-reading-semantic-signature]')
     assert.equal(
       await page.locator(`[data-canonical-block-id="${FRAMED_BLOCK_ID}"]`).count(),
       1,
@@ -393,8 +395,9 @@ async function assertActualBrowserArtifacts() {
       }))
     const noHeadingUrl = new URL('canonical-reading-qa.html', appUrl)
     noHeadingUrl.searchParams.set('groupId', FRAMED_GROUP_ID)
+    const noHeadingDiagnostics = capturePageDiagnostics(noHeadingPage)
     await noHeadingPage.goto(noHeadingUrl.href)
-    await noHeadingPage.locator('[data-canonical-reading-semantic-signature]').waitFor()
+    await noHeadingDiagnostics.waitForMarker('[data-canonical-reading-semantic-signature]')
     assert.equal(
       await noHeadingPage.locator(
         '[data-canonical-block-id="paragraph:puzzle-heading"][data-canonical-column-heading]',

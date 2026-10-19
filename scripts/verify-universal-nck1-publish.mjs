@@ -856,7 +856,9 @@ function makeContext(label, options = {}) {
 
 // A stored v58 Review must be rederived under its original Candidate authority,
 // while the existing consumer presentation stays unchanged for both versions.
-{
+// Fixture-only consumers must not replay this independent historical contract.
+function verifyHistoricalAuthorityReplay() {
+  const startedAt = performance.now()
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-review-v58-replay-'))
   try {
     const { reviewRoot } = makeReviewRoot(root)
@@ -924,6 +926,7 @@ function makeContext(label, options = {}) {
     }), /Stored Candidate does not match a retained authority/)
   } finally {
     rmSync(root, { recursive: true, force: true })
+    console.log(`historical-authority-replay: ${(performance.now() - startedAt).toFixed(2)}ms`)
   }
 }
 
@@ -2132,6 +2135,7 @@ for (const enabled of [false, true]) {
 }
 
 if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
+verifyHistoricalAuthorityReplay()
 verifyPaperHeaderTitlePublication()
 for (const legacy of [true, false]) {
   const context = makeContext(legacy ? 'legacy-waveform' : 'no-waveform', { listening: true })

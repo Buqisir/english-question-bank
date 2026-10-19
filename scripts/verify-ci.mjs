@@ -114,7 +114,6 @@ const registry = {
   'scripts/verify-ship-check-watcher.mjs',
   'scripts/verify-ci-pr-plan.mjs',
   'scripts/verify-amp-orb-ci.mjs',
-  'scripts/verify-amp-orb-ci-coordination.mjs',
   'scripts/verify-amp-orb-deploy.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
@@ -202,7 +201,6 @@ const registry = {
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-classic-retire-2.mjs',
   'scripts/verify-classic-retire-3.mjs',
-  'scripts/verify-analysis-layering.mjs',
   'scripts/verify-launch-deploy.mjs',
   'scripts/verify-paper-assets-consistency.mjs',
   'scripts/verify-paper-browse.mjs',
@@ -218,7 +216,6 @@ const registry = {
   'scripts/verify-vocabulary-notebook.mjs',
   'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
-  'scripts/verify-section-chrome-on-solo-surface.mjs',
   'scripts/verify-draft-workbench-visual-unify.mjs',
   'scripts/verify-my-space-shelf.mjs',
   'scripts/verify-draft-student-field.mjs',
@@ -260,12 +257,12 @@ const securityScripts = [
   'scripts/verify-source-intake.mjs',
   'scripts/verify-source-intake-webhook.mjs',
   'scripts/verify-amp-orb-ci.mjs',
-  'scripts/verify-amp-orb-ci-coordination.mjs',
   'scripts/verify-amp-orb-deploy.mjs',
   'scripts/verify-owner-gate.mjs',
   'scripts/verify-user-scope.mjs',
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-launch-deploy.mjs',
+  'scripts/verify-h11a-http-client.mjs',
   'scripts/verify-paper-translation-cache.mjs',
   'scripts/verify-paper-translation-routes.mjs',
 ]
@@ -302,13 +299,24 @@ const sentenceAnalysisScripts = uniqueRegistered([
   'scripts/verify-sentence-analysis-browser.mjs',
 ])
 paperScripts.push(...sentenceAnalysisScripts.filter((script) => !paperScripts.includes(script)))
+// CI implementation changes select all; ordinary feature work does not need
+// process/scheduler/policy metatests. Exclude them from the derived set, rather
+// than only omitting an explicit list entry that the registry would add back.
+const ciMetaScripts = new Set([
+  'scripts/verify-verification-command-runner.mjs',
+  'scripts/verify-verification-scheduler.mjs',
+  'scripts/verify-ci-pr-plan.mjs',
+])
 const featureScripts = uniqueRegistered([
   ...registry.scripts.filter(
-    (script) => sentenceAnalysisScripts.includes(script)
-      || (!paperScripts.includes(script) && !securityScripts.includes(script)),
+    (script) => !ciMetaScripts.has(script)
+      && (sentenceAnalysisScripts.includes(script)
+        || (!paperScripts.includes(script) && !securityScripts.includes(script))),
   ),
   // Signal staging is an import-pipeline feature as well as a Paper input.
   'scripts/verify-listening-signal.mjs',
+  // The shared HTTP client also remains covered for ordinary feature changes.
+  'scripts/verify-h11a-http-client.mjs',
 ])
 const importPaperScripts = uniqueRegistered([
   'scripts/verify-import-pagination-qa.mjs',
