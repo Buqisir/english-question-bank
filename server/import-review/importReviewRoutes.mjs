@@ -10,11 +10,13 @@ import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
 import { buildCompanionAnalysisHtml } from '../exports/companionAnalysisRenderer.mjs'
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
+import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { sendListeningAudioFile } from '../paper-import/paperAssetStatic.mjs'
 import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
 import { frozenProductResult, PRODUCT_MANIFEST } from '../paper-import/frozenProducts.mjs'
+import { manifestProductFiles } from '../paper-import/pdfProductSet.mjs'
 import { SOURCE_REFERENCES_FILE } from '../paper-import/sourceReferences.mjs'
 import { resolveReviewFile } from './revisionProjection.mjs'
 import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
@@ -39,6 +41,7 @@ function sendError(response, context, error) {
   context.sendJson(response, Number(error?.status || 500), {
     error: error instanceof Error ? error.message : String(error),
     code: error?.code || 'IMPORT_REVIEW_FAILED',
+    ...(error?.metrics ? { metrics: error.metrics } : {}),
   })
 }
 
@@ -468,12 +471,13 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     response,
     context,
   }) => {
-    if (!agentIdentity(request, context, agentToken)) {
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) {
       context.sendJson(response, 401, { error: 'agent_auth_required' })
       return
     }
     const input = await context.readJsonBody(request, { maxBytes: 2_000_000 })
-    context.sendJson(response, 201, store.createRevision(input))
+    context.sendJson(response, 201, await store.createRevisionUpload(input, { blobStore: getBlobStore?.(), actor }))
   })))
 
   routes.push(defineRoute('PUT', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/files$/, route(async ({
@@ -489,26 +493,39 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     }
     const revisionId = match[1]
     const relativePath = url.searchParams.get('path') || ''
-    const upload = store.fileForUpload(revisionId, relativePath)
-    if (upload.file.uploadedAt && existsSync(upload.destination)) {
-      context.sendJson(response, 200, store.uploadStatus(revisionId))
-      return
-    }
-    const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
-    const blobStore = largeAsset ? getBlobStore?.() : null
-    const received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
-      validateTemporaryFile: blobStore?.adoptLocalFile
-        ? (temporary, expected) => blobStore.adoptLocalFile(temporary, expected)
-        : null,
-    })
-    context.sendJson(
-      response,
-      200,
-      store.completeFileUpload(revisionId, relativePath, received),
-    )
+    const timer = reviewUploadMetrics('put', { revisionId, path: relativePath },
+      ['status', 'receive', 'adoption', 'installationAndMark'])
+    let upload
+    try {
+      upload = await store.beginFileUpload(revisionId, relativePath)
+      if (upload.file.uploadedAt && existsSync(upload.destination)) {
+        const status = store.uploadStatus(revisionId)
+        const metrics = timer.finish()
+        context.sendJson(response, 200, { ...status, metrics })
+        return
+      }
+      const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
+      const blobStore = largeAsset ? getBlobStore?.() : null
+      timer.phase('receive')
+      const received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
+        validateTemporaryFile: async (temporary, expected) => {
+          if (blobStore?.adoptLocalFile) {
+            timer.phase('adoption')
+            await blobStore.adoptLocalFile(temporary, expected)
+          }
+          timer.phase('installationAndMark')
+        },
+      })
+      const status = store.completeFileUpload(revisionId, relativePath, received)
+      const metrics = timer.finish()
+      context.sendJson(response, 200, { ...status, metrics })
+    } catch (error) {
+      timer.finish(error)
+      throw error
+    } finally { upload?.release() }
   })))
 
-  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/finalize$/, route(({
+  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/finalize$/, route(async ({
     request,
     response,
     context,
@@ -518,7 +535,9 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       context.sendJson(response, 401, { error: 'agent_auth_required' })
       return
     }
-    context.sendJson(response, 200, { revision: store.finalizeRevision(match[1]) })
+    const metrics = {}
+    const revision = await store.finalizeUploadedRevision(match[1], { metrics })
+    context.sendJson(response, 200, { revision, metrics })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/proofread-ocr$/, route(async ({
@@ -1026,6 +1045,31 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       return
     }
     context.sendJson(response, 200, sidecar)
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/products$/, route(({
+    response, context, match,
+  }) => {
+    if (!requireReviewer(response, context)) return
+    const revisionId = decodeURIComponent(match[1])
+    const { revision, filePath } = store.verifiedFileForRead(revisionId, PRODUCT_MANIFEST)
+    if (revision.reviewKind !== 'candidate') {
+      throw reviewError('IMPORT_REVIEW_CANDIDATE_REQUIRED', 'A finalized Candidate is required', 409)
+    }
+    const manifest = JSON.parse(readFileSync(filePath, 'utf8'))
+    const expectedFiles = manifestProductFiles(manifest)
+    if (manifest.paperId !== revision.manifest.paperId || manifest.files?.length !== expectedFiles.length) {
+      throw reviewError('FROZEN_PRODUCTS_INVALID', 'Frozen product inventory differs from its revision', 409)
+    }
+    for (const [index, expected] of expectedFiles.entries()) {
+      const { file } = store.verifiedFileForRead(revisionId, expected.path)
+      const product = manifest.files[index]
+      if (product.path !== expected.path || product.sha256 !== file.sha256 || product.byteLength !== file.byteLength) {
+        throw reviewError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Frozen product differs from its revision', 409)
+      }
+    }
+    context.sendJson(response, 200, { paperId: manifest.paperId, revisionId,
+      editions: expectedFiles.map(file => path.basename(file.path, '.pdf')) })
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/pagination$/, route(({

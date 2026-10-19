@@ -64,7 +64,7 @@ import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/p
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
 import { PaperReviewControls } from './PaperReviewControls'
 import { useIsOwnerView } from '../../auth/AuthGate'
-import { firstListeningSectionRange } from '../../../../shared/paper-canonical/listeningWaveform.mjs'
+import { firstListeningSectionRange } from '../../../../shared/paper-canonical/listeningPlayback.mjs'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
 // ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**
@@ -188,7 +188,8 @@ import {
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
 import { exportPaperProductPdf, paperProductPdfUrl } from '../../services/questionGroups.ts'
-import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { usePaperPdfProducts } from './usePaperPdfProducts'
 import { prepareFileSaveTarget, saveBlobToTarget } from '../../services/fileDownload.ts'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
 import {
@@ -751,7 +752,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [analysisPdfBusy, setAnalysisPdfBusy] = useState(false)
   const [analysisPdfError, setAnalysisPdfError] = useState('')
   const [analysisFontError, setAnalysisFontError] = useState('')
-  const [pdfEdition, setPdfEdition] = useState<PaperPdfEdition>('largeNoListening')
+  const { editions: pdfEditions, edition: pdfEdition, setEdition: setPdfEdition,
+    error: pdfProductsError, retry: retryPdfProducts } = usePaperPdfProducts({
+    paperId, publicationDigest: reviewRevision ? undefined : canonicalConsumption?.publicationDigest,
+  })
   const grammarFillGeometryFixture =
     grammarFillGeometryVariantId == null
       || (loading && canonicalConsumption == null)
@@ -2465,7 +2469,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
             : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
-          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} waveform={audio.waveform} />,
+          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} />,
       ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
@@ -2475,14 +2479,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             listeningSectionPlayer={audio && firstSection && (
               <ListeningSegmentPlayer key={`${audio.sha256}:first-section`} src={audio.url} label="第一节第 1–5 题"
                 startSeconds={firstSection.startSeconds} endSeconds={firstSection.endSeconds}
-                onActivate={activateAudio} size="full" waveform={audio.waveform}
+                onActivate={activateAudio} size="full"
                 marks={firstSection.segments.map((segment) => ({
                   startSeconds: segment.startSeconds, endSeconds: segment.endSeconds, label: String(segment.questionNumbers[0]),
                 }))} />
             )}
             listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full" waveform={audio.waveform}
+                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full"
                 marks={audio.segments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,
@@ -4002,22 +4006,25 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <Presentation size={14} aria-hidden="true" />
         讲评
       </button>
-      <select className="ghost-button" aria-label="PDF 版本" value={pdfEdition} disabled={analysisPdfBusy} onChange={(event) => {
+      <select className="ghost-button" aria-label="PDF 版本" value={pdfEdition ?? ''} disabled={analysisPdfBusy || !pdfEdition} onChange={(event) => {
         setPdfEdition(event.target.value as PaperPdfEdition)
         setAnalysisPdfError('')
       }}>
-        {PAPER_PDF_EDITIONS.map((edition) => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
+        {pdfEditions.map((edition) => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
       </select>
-      {canonicalConsumption?.publicationDigest && <a className="ghost-button" href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen</a>}
+      {pdfEdition && canonicalConsumption?.publicationDigest && <a className="ghost-button" href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen</a>}
       <button
         className="ghost-button"
         type="button"
-        disabled={analysisPdfBusy}
+        disabled={analysisPdfBusy || !pdfEdition}
         onClick={() => void downloadPaperProduct()}
       >
         <PaperDownload size={16} />
         {analysisPdfBusy ? '生成 PDF 中…' : '下载 PDF'}
       </button>
+      {pdfProductsError && <span role="alert">{pdfProductsError}{' '}
+        <button className="ghost-button" type="button" onClick={retryPdfProducts}>刷新 PDF 版本</button>
+      </span>}
     </>
   ) : (
     <button
@@ -4036,7 +4043,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   )
 
   async function downloadPaperProduct(): Promise<void> {
-    if (!asset || !canonicalConsumption?.publicationDigest || reviewRevision || analysisPdfBusy) return
+    if (!asset || !canonicalConsumption?.publicationDigest || !pdfEdition || reviewRevision || analysisPdfBusy) return
     setAnalysisPdfError('')
     try {
       const target = await prepareFileSaveTarget({

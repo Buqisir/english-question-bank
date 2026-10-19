@@ -97,6 +97,10 @@ paused until that exact-main run succeeds. A successful PR tree does not replace
 the new main run. On failure retain checks/logs and diagnose before a rerun;
 do not advance the batch or retire old infrastructure to hide the failure.
 
+The following Orb installation steps apply to the 2026-09 CI cutover period;
+current deployment follows [AGENTS.md — Owner Mac deployment](../../AGENTS.md#owner-mac-deployment)
+and [ADR-0027](../adr/0027-owner-local-website-deployment.md).
+
 In the private Deployment Orb, install only the reviewed reader closure from the
 merged commit, preserving existing SSH/controller configuration. Follow the
 reader's configuration contract; never copy its SSH key to this development Orb.

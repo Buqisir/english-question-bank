@@ -6,6 +6,7 @@ import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
 import { TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY_V4 } from './spellingReview.mjs'
 import { economyPageLimitForPlan } from './paginationPlan.mjs'
+import { ABSENT_BY_EXAM_DESIGN, sourceProductEditions } from './pdfProductSet.mjs'
 
 const editions = [
   ['cover8', '保留“英语”及考试说明 · 8 页（不含听力）', 8],
@@ -43,18 +44,23 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
   for (const key of ['paperId', 'sourceDigest', 'candidateDigest']) {
     if (!projection[key] || evidence?.[key] !== projection[key]) fail(`stale ${key}`)
   }
-  if (!['preprocessing-handoff-evidence-v1', 'preprocessing-handoff-evidence-v2', 'preprocessing-handoff-evidence-v3', 'preprocessing-handoff-evidence-v4'].includes(evidence.schemaVersion)) {
+  if (!['preprocessing-handoff-evidence-v1', 'preprocessing-handoff-evidence-v2', 'preprocessing-handoff-evidence-v3', 'preprocessing-handoff-evidence-v4', 'preprocessing-handoff-evidence-v5'].includes(evidence.schemaVersion)) {
     fail('unsupported evidence version')
   }
   const longPaper = evidence.schemaVersion === 'preprocessing-handoff-evidence-v2'
-  const fourProducts = evidence.schemaVersion === 'preprocessing-handoff-evidence-v4'
+  const noListeningProducts = evidence.schemaVersion === 'preprocessing-handoff-evidence-v5'
+  if (noListeningProducts && projection.config?.listening !== ABSENT_BY_EXAM_DESIGN) fail('v5 requires an explicit absent-by-exam-design source declaration')
+  const fourProducts = ['preprocessing-handoff-evidence-v4', 'preprocessing-handoff-evidence-v5'].includes(evidence.schemaVersion)
   const products = fourProducts || evidence.schemaVersion === 'preprocessing-handoff-evidence-v3'
   const economyPageLimit = economyPageLimitForPlan(projection.paginationPlan)
-  const selectedProducts = fourProducts ? Object.entries(PAPER_PDF_PRODUCTS).map(([id, label]) =>
+  const selectedEditions = noListeningProducts
+    ? sourceProductEditions(projection.config, projection.paginationSlotBindings?.filter(entry => entry.familyContractId === 'listening').length)
+    : Object.keys(PAPER_PDF_PRODUCTS)
+  const selectedProducts = fourProducts ? selectedEditions.map(id => [id, PAPER_PDF_PRODUCTS[id]]).map(([id, label]) =>
     [id, label, id === 'answerOnly' ? null : productEditions.find(entry => entry[0] === id)[2]]) : productEditions
   const expectedEditions = products ? selectedProducts.map(entry => entry[0] === 'economy8' && economyPageLimit === 9
     ? ['economy8', '省纸版（不含听力，最多9页）', 9] : entry) : longPaper ? longEditions : editions
-  const editionLabel = products && !fourProducts ? '三版' : '四版'
+  const editionLabel = noListeningProducts || (products && !fourProducts) ? '三版' : '四版'
   const checked = (key) => {
     const check = evidence.checks?.[key]
     if (!check) return ['未检查', '没有本次检查记录']

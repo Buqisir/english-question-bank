@@ -174,22 +174,31 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   preserve old receipts and queue evidence. Source removal is not proof that a
   remote webhook or lost Orb has stopped.
 
-## Dedicated Deployment Orb
+## Owner Mac deployment
 
-- Website deployment belongs only to the separate private Deployment Orb
-  project. Development and CI Orbs must not receive its SSH key.
+- Website deployment runs on the Owner Mac through `scripts/local-deploy.sh`.
+  The private key lives only in the Owner Mac Keychain; never copy it into a
+  repository, worktree, log, Agent prompt, CI, or development Orb.
 - A current Owner instruction `部署最新版` authorizes that one website-code
-  deployment Goal, including diagnosis, health and agreed recovery; resolve
-  current `main` and run
-  `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
-  the Owner to copy a SHA.
+  deployment Goal, including diagnosis, health and agreed recovery. Use the
+  dedicated clean `main` clone at `~/Projects/eqb-deploy`, fetch `origin` and
+  fast-forward to `origin/main`, then run
+  `scripts/local-deploy.sh deploy --owner-said-deploy-latest`.
+  Never ask the Owner to copy a SHA.
 - The deploy command requires the exact-main successful natural GitHub Actions
   `Verify` workflow with both `verify` and `e2e` jobs, then sends that SHA
   through pinned restricted SSH to the root-owned fixed host controller.
   Missing, pending, malformed, wrong-SHA or ambiguous evidence fails closed.
-  Installing the new reader is a separate controlled cutover step; merging its
-  source does not prove the Deployment Orb is updated. Never stream candidate
-  deployment code, bypass the forced command, or use legacy in-place deploy.
+  Never stream candidate deployment code, bypass the forced command, or use
+  legacy in-place deploy.
+- Non-secret configuration lives in `~/.config/eqbank/deploy/env` and
+  `known_hosts`; the wrapper reads the private key from Keychain and supplies
+  it only through the child-process environment. See ADR-0027 for the accepted
+  local-user trust boundary and network handling.
+- The Deployment Orb retains its old key as a backup. Only when the Owner
+  explicitly requests retirement, remove the server's first `authorized_keys`
+  entry (`eqb-amp-deployment-v1`) and the Orb's private-key secret; preserve
+  the local key entry. Do not retire it as part of an ordinary deployment.
 - A code-only Goal excludes migration, Review/paper promotion, DB/R2 mutation
   and controller/host changes. A Goal that explicitly includes reviewed entry
   maintenance and deployment covers both, without an extra activation approval.

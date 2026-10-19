@@ -63,6 +63,8 @@ try {
   assert.equal(result.candidateCount, 0)
   assert.ok(Math.abs(result.durationSeconds - 12.3) < .1)
   assert.ok(!existsSync(path.join(root, 'materialization/listening-audio/asr-v1.json')))
+  assert.ok(!existsSync(path.join(root, 'materialization/listening-audio/waveform-v1.json')),
+    'signal-only preparation retains timing candidates without generating a waveform')
   const manifestPath = path.join(root, 'universal-source-manifest.json')
   const manifest = json(manifestPath)
   assert.equal(manifest.schemaVersion, 'universal-nck1-source-manifest-v3')

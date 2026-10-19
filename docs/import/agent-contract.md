@@ -122,6 +122,21 @@ configured Review API and resolves that revision's paper/source/Candidate
 binding. Supply the existing Review origin and Agent credential; an unavailable
 or mismatched revision fails closed. Reports without Screen remain offline.
 
+For a source explicitly lacking listening by exam design, set the sealed
+`config.json` field `listening: "absent-by-exam-design"` before building products.
+Do not infer this declaration from absent audio. New PDF-product workspaces
+require zero Canonical listening groups with this declaration, or exactly two
+without it; disagreement fails closed. Preserve the existing Materialization
+`not_supplied` source evidence. Freeze uses `paper-pdf-products-v3` at the stable
+manifest path and exactly `largeNoListening`, `economy8`, `answerOnly` in that
+order. Its explicit `economyPageLimit` follows the bound plan (8 by default).
+Use `preprocessing-handoff-evidence-v5` for this three-product handoff; all three
+files need the same exact-byte content/visual evidence and Screen revision
+binding as v4. v1/v2 product manifests and v1–v4 reports retain their original
+contracts. Historical analyzed packages without PDF-product commitments retain
+their separate source contract. Raw-source and product workspaces check the
+declaration; freezing new products always checks it.
+
 New source-faithful directions and listening examples use Materialization v4
 under the v62 authority. Its `sourcePresentation.instructions` has one
 `{slotId, text, source}` for each of `reading.a`, `seven-choices`, `cloze`,
@@ -492,7 +507,7 @@ v1 侧件继续读取，不静默迁移。原生 DOCX 须重放完整未合并�
 原卷的网页PDF预览／下载只读该精确已审版本的固定文件，不点击时重排。
 
 听力按[听力准备与导航复核](listening-review.md)执行。默认准备整文件解码、完整
-normalized playback、信号候选与波形，不隐式运行旧180秒首题ASR。导题Agent负责
+normalized playback 与信号候选，不隐式运行旧180秒首题ASR。导题Agent负责
 所有源对话的身份、顺序、完整性、实际遍数及可用播放范围；优先复用同音频的本地
 ASR，只定点处理未决范围，不因漏识别报题就报“录音不符”或重跑全卷。候选段数量
 相等不能证明题组对应。`prepare/finalize/verify-listening-review` 保存源/Candidate/
@@ -507,48 +522,21 @@ ASR，只定点处理未决范围，不因漏识别报题就报“录音不符�
 不修改录音，也不将该修正伪装成 OCR 错误。此项不再逐卷请求同样的决定，
 但不授权把识别重复当真实重复、放行其他内容疑点或批准发布。
 
-新增音频准备会从完整 normalized playback MP3 预计算 `waveform-v1.json`
-（20Hz RMS envelope，绑定播放文件SHA与时长）。它是可重建的Screen播放数据，
-不是ASR、题目映射确认或内容安全证据，不改原音频与Candidate身份。
-Review按独立文件摘要封存并复用；新发布版本在原子版本目录保留同一波形和
-已有候选时间段。Screen不重复解码已预计算音频，播放只更新进度，宽度/范围改变
-才重算显示条柱。历史卷无此文件仍可播放；补充波形用
-`review.mjs prepare-listening-waveform <paperId>`，只新增本地派生文件，不修改已封存
-revision、审核/批准receipt；提交仍需正常profile门禁及fresh Review。
+Screen 听力播放器使用分段进度线；音频准备和发布不再生成波形、采样峰值或
+波形图像，也不再提供 `prepare-listening-waveform` 命令。题段起止时间、实际遍数、
+题号映射和导航复核保持原合同，独立于波形数据。信号分段中的 PCM 重复检测用于
+定位候选与实际遍数，不是播放器波形绘制，不因此删除。
 第一节只有在已有时间段完整覆盖1–5题时显示整体耳机入口，保留题间停顿；
 缺失、不完整或越界时间段不猜。信号分段仍为候选，不声称语义已核验。
 
-### 音频波形预处理规则（Owner 2026-10-05 要求明确规格）
-
-本规则要求后续新导入在音频准备阶段完成波形，进入最终 Screen QA 前核实并复用；
-本地已有预计算与消费代码不等于全入口门禁已实现或生产已部署。旧版无波形仍可播放，
-不因此改写历史 revision、批量重导或触发新批准／发布。本轮 C 区排版不附带重算音频。
-
-- **对象与时机**：规范化播放录音生成后，从最终完整 `playback.mp3` 的实际字节生成一次，
-  不用原始上传录音、分段中间 PCM、ASR 文本或逐题切片代替。保留原音频及播放字节；
-  波形生成不裁剪停顿、不降噪、不再次编码录音，不运行或改变 ASR／信号分段。
-- **统一算法 v1**：仅为计算解码成单声道 4000Hz PCM，连续每 50ms（200 samples）
-  计算 RMS，末桶按实际剩余样本计算，数值保留六位小数。以全录音桶值排序后
-  `floor(N × 0.995)` 位置作为统一显示参照，全部为零时用 1；分段不单独拉伸音量。
-  显示条柱取其时间范围内桶值最大值除以该参照并限幅到 0–1，不捏造装饰波形。
-- **文件与绑定**：使用 `materialization/listening-audio/waveform-v1.json`，记录
-  `schemaVersion: listening-waveform-v1`、`playbackAudioSha256`、`durationSeconds`、
-  `bucketSeconds: 0.05`、`reference` 和 `peaks`。文件有自己的 SHA／byteLength；
-  数据须有限且非负，桶数为 `ceil(durationSeconds / 0.05)`，与播放时长误差最多 0.2 秒。
-  schema 版本绑定上述算法；算法变更须用新版本，不静默替换 v1 的含义。
-- **复用与失效**：完整／第一节／单题／材料播放器都截取同一份全录音波形。
-  播放、拖动、倍速、窗口缩放、改卷名或 PDF 排版不重解码音频；仅范围／宽度变化
-  重聚合显示条柱。播放文件 SHA 或算法版本变化才重生成；缺文件可本地补充，
-  已有文件绑定错误／损坏须保留并报错，不能悄悄覆盖或用旧波形冒认新音频。
-- **证据与门禁**：核实播放 SHA、时长、桶数、数值和独立文件摘要，最终预处理完成表
-  单列波形完成／失败／不适用及所绑定的播放文件。新导入缺失／损坏时不报“预处理完成”；
-  全部静音是合法数据，不伪造柱形，也不能据此报音频内容已核验。无录音记不适用。
-  这些检查证明播放显示数据绑定正确，不证明录音稿、题目对应或内容安全。
-- **交付与兼容**：新 Review 将其作为独立摘要封存的派生文件，与既有时间段分别保存；
-  新发布版本复用同一数据，沿音频的鉴权／版本路径提供最小播放信息，不暴露私有原件
-  或核对记录。Screen 有合法预计算数据就不为绘制波形再下载／解码整段录音；
-  历史缺件可沿原兼容路径懒加载并缓存，绘制失败不阻止正常播放。补件不修改封存
-  revision 或既有批准；需要对外交付新版本时仍走正常提交和授权。Print／PDF不显示波形。
+历史兼容：旧工作副本可继续携带 `materialization/listening-audio/waveform-v1.json`；
+有音频且文件存在时仍按原路径、角色及独立文件摘要封存，保持历史 Review bundle
+和固定 PDF 输入摘要，不再解释或校验其中峰值。服务端同时接受带此文件和不带此文件
+的新 Candidate，不修改已封存 revision、批准 receipt、schema 或 Canonical 身份。
+新发布的 `listening/playback-ui-v1.json` 只含播放 SHA、时长、题段和自身摘要。
+旧发布文件仍按包含波形字段的完整原始对象验证摘要，并保留原音频 SHA／时长绑定；
+通过后只消费题段，忽略波形。缺失或损坏的派生文件不阻止已验证音频和卷面读取，
+也不提供未校验的时间段。Print／PDF不显示波形，旧固定 PDF 不重新生成。
 
 只有题卷时，先安全保留来源；图片页改用重复的
 `--source-page question_source:<页码>=/abs/page.png`：

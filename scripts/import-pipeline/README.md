@@ -182,16 +182,16 @@ QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
 按[四产品合同](../../docs/product/paper-pdf-products-v1.md)准备
 `largeComplete`／`largeNoListening`／`economy8`／`answerOnly`，不再选择学生／教师版。
 源名与Owner年月分别封存；不从学年、导入日期或文件名猜月份，不虚构具体日。
-新音频用 `stage-listening-audio <paperId> --audio <original.mp3>`，默认只准备信号与波形；
+新音频用 `stage-listening-audio <paperId> --audio <original.mp3>`，默认只准备完整播放音频与信号候选；
 `--signal-only`仍兼容，旧180秒检查须显式`--opening-check`。信号分段保留
 `contentValidation: not_performed`，不能按候选数量猜题组映射或冒称内容通过。
 材料化后运行`review.mjs prepare-listening-review <paperId> --output <request.json>`，
 复用本地ASR逐组审阅，再`finalize-listening-review --input`及`verify-listening-review`。
 完整命令、证据和限制见[听力复核](../../docs/import/listening-review.md)。
-最终normalized playback预计算50ms RMS波形并绑定SHA，Screen复用、PDF不打印；
-已有合法波形不重算，历史缺失仍可播放。规则见导题合同的音频波形预处理节。
+Screen用分段进度线，不再预计算波形；旧工作副本里已有的`waveform-v1.json`原样保留，
+不删除、不改写。
 
-源审查、摘要、metadata、源参考、波形与分页稳定后，Review push前运行：
+源审查、摘要、metadata、源参考与分页稳定后，Review push前运行：
 
 ```bash
 node scripts/import-pipeline/freeze-products.mjs --paper-dir <workspace>

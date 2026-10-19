@@ -75,11 +75,8 @@ import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
-import { prepareListeningWaveform } from '../../server/paper-import/listeningWaveform.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { applyListeningInstructionCorrection, correctedListeningCount, LISTENING_INSTRUCTION_CORRECTION_FILE, LISTENING_INSTRUCTION_CORRECTION_POLICY } from '../../server/paper-import/listeningInstructionCorrection.mjs'
-import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
-import { LISTENING_AUDIO_PATHS } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import {
   renderReviewDiagnosticEdition,
   renderReviewFixedEdition,
@@ -1137,7 +1134,7 @@ async function preprocessingReport(paperId) {
   const evidenceFile = path.resolve(evidencePath)
   const projection = buildNck1ReviewProjection(paperDirectory(paperId))
   const evidence = requiredJson(evidenceFile, 'handoff evidence')
-  const reviewStatus = evidence.schemaVersion === 'preprocessing-handoff-evidence-v4' && evidence.screen
+  const reviewStatus = ['preprocessing-handoff-evidence-v4', 'preprocessing-handoff-evidence-v5'].includes(evidence.schemaVersion) && evidence.screen
     ? await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`) : null
   const markdown = buildPreprocessingReport(projection, evidence, {
     baseDirectory: path.dirname(evidenceFile), reviewStatus,
@@ -1682,19 +1679,6 @@ async function main() {
   if (command === 'push') await pushRevision(paperId)
   else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) listeningInstructionCorrection(paperId, command)
   else if (['prepare-listening-review', 'finalize-listening-review', 'verify-listening-review'].includes(command)) listeningReview(paperId, command)
-  else if (command === 'prepare-listening-waveform') {
-    const root = paperDirectory(paperId)
-    const loaded = loadNck1ReviewSource(root)
-    const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
-    if (!playback) fail('Paper has no captured playback audio')
-    const playbackPath = loaded.analyzedPackage
-      ? loaded.sourceProvenance.members.find((member) => member.role === 'audio').path : LISTENING_AUDIO_PATHS.playback
-    const waveform = prepareListeningWaveform(resolveReviewFile(root, LISTENING_WAVEFORM_FILE),
-      readFileSync(resolveReviewFile(root, playbackPath)), playback.durationSeconds)
-    console.log(JSON.stringify({ paperId, playbackAudioSha256: waveform.playbackAudioSha256,
-      waveformSha256: sha256(readFileSync(resolveReviewFile(root, LISTENING_WAVEFORM_FILE))),
-      buckets: waveform.peaks.length, path: LISTENING_WAVEFORM_FILE }, null, 2))
-  }
   else if (command === 'pagination-qa') await paginationQa(paperId)
   else if (command === 'hydrate') await hydrate(paperId)
   else if (command === 'link-thread') await linkThread(paperId)
@@ -1723,7 +1707,6 @@ async function main() {
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
-      + 'prepare-listening-waveform <paperId> (local derivative only; no approval or publication) | '
       + 'prepare-listening-review <paperId> --output <request.json> | finalize-listening-review <paperId> --input <review.json> | verify-listening-review <paperId> | '
       + 'prepare-listening-instruction-correction <paperId> --slot <listening slot> --count 1|2 --output <request.json> | finalize-listening-instruction-correction <paperId> --input <correction.json> | verify-listening-instruction-correction <paperId> | '
       + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '

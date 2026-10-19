@@ -12,11 +12,11 @@ import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningWaveform.mjs'
-import { readListeningWaveform } from '../paper-import/listeningWaveform.mjs'
+import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
+import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -585,8 +585,9 @@ export function reviewBundleFilePaths(rootDir, candidate = null) {
   const { manifest, materialization } = loaded
   const reviewedListening = loadReviewedListening(rootDir, loaded, candidate)
   const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
-  const waveform = playback ? readListeningWaveform(resolveReviewFile(rootDir, LISTENING_WAVEFORM_FILE),
-    playback.sha256, playback.durationSeconds) : null
+  // Retain historical bundle/PDF input identities without interpreting geometry.
+  // Old producers may still upload this optional, independently hashed file.
+  const legacyWaveform = playback && existsSync(resolveReviewFile(rootDir, LEGACY_LISTENING_WAVEFORM_FILE))
   const importProfile = nck1ImportProfile(loaded.config, {
     externalPackage: Boolean(loaded.analyzedPackage),
   })
@@ -689,7 +690,7 @@ export function reviewBundleFilePaths(rootDir, candidate = null) {
         }))
       : []),
     ...sourceFiles,
-    ...(waveform ? [{ path: LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
+    ...(legacyWaveform ? [{ path: LEGACY_LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
     ...(reviewedListening?.files || []),
     ...NCK1_STAGED_ANALYSIS_FILES
       .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
@@ -726,7 +727,8 @@ export function reviewBundleFilePaths(rootDir, candidate = null) {
     }] : []),
     ...(loaded.config.pdfProductsRequired || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST)) ? [
       { path: PRODUCT_MANIFEST, mediaType: 'application/json', role: 'pdf_products_manifest' },
-      ...PRODUCT_FILES,
+      ...(loaded.config.listening === undefined ? PRODUCT_FILES : productFiles(sourceProductEditions(
+        loaded.config, materialization.listening.state === 'captured' ? 2 : 0))),
     ] : []),
   ]
   const byPath = new Map()
@@ -1699,6 +1701,13 @@ export function buildNck1ReviewProjection(rootDir, {
     })
   }
   const slotBindings = paginationSlotBindings(consumption)
+  // Historical analyzed packages without a PDF commitment retain their separate
+  // source contract. Raw-source and product workspaces must declare absence.
+  const hasProductManifest = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
+  if (!loaded.analyzedPackage || loaded.config.pdfProductsRequired || loaded.config.listening !== undefined
+    || hasProductManifest) {
+    sourceProductEditions(loaded.config, slotBindings.filter(entry => entry.familyContractId === 'listening').length)
+  }
   const paginationPlan = loadPaperPaginationPlan(rootDir, {
     paperId: loaded.materialization.paperId,
     sourceDigest: preview.candidate.source.sha256,
@@ -1725,6 +1734,7 @@ export function buildNck1ReviewProjection(rootDir, {
     || existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))) })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
     ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, reviewBundleFilePaths(rootDir, imported.candidate), reviewedListening),
+        config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
     fail('四款 PDF 必须保留完整的源参考答案捕获；不能只提交答案 PDF')

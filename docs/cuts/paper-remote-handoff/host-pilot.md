@@ -12,7 +12,9 @@ Owner 提供的到期日为 2026-11-11；确认续费安排，不能把单块盘
 
 本计划不授权任何挂载、格式化、生产迁移、R2 写入/清理、Mac 删除或发布。
 先完成代码 Ship 所需验收，再批准下面具名目标和路径；代码部署与主机存储切换
-是不同动作。网站代码仍只走 Dedicated Deployment Orb，不能借存储维护绕过它。
+是不同动作。网站代码部署遵循
+[AGENTS.md「Owner Mac deployment」](../../../AGENTS.md#owner-mac-deployment)
+与 [ADR-0027](../../adr/0027-owner-local-website-deployment.md)，不能借存储维护绕过该入口。
 
 ## 执行前冻结一份路径清单
 
