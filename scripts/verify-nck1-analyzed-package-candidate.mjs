@@ -111,7 +111,8 @@ assert.deepEqual(imported.issues, [])
 assert.equal(imported.candidate.schemaVersion, 'trusted-nck1-analyzed-package-import-candidate-v1')
 assert.deepEqual(imported.candidate.authority, nck1AnalyzedPackageCandidateAuthorityRef55)
 assert.equal(imported.candidate.authority.manifestVersion, '55')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '57')
+assert.notDeepEqual(imported.candidate.authority, nck1MaterializationCandidateAuthorityRef,
+  'analyzed packages retain a distinct authority from the current raw materialization lane')
 const derivedContent = deriveNck1AnalyzedPackageBundle(input).materialization
 assert.equal(derivedContent.schemaVersion, 'nck1-analyzed-package-content-v1')
 assert.equal(Object.hasOwn(derivedContent, 'documents'), false)
@@ -121,7 +122,7 @@ const rawAdapters = resolveCanonicalAuthority(
 ).closure.artifacts.adapter.adapters
 assert.equal(rawAdapters.some((adapter) =>
   adapter.adapterId === 'nck1-analyzed-package'), false,
-'raw successor retains the immutable v54 adapter registry and rejects analyzed-package extraction')
+'current raw materialization authority rejects analyzed-package extraction')
 assert(imported.candidate.source.members.some((member) => member.role === 'analysis'))
 
 const reviewRoot = mkdtempSync(path.join(tmpdir(), 'eqb-analyzed-review-'))
