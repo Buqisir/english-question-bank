@@ -141,6 +141,30 @@ export function validateSourceReferences({
           if (block.kind === 'paragraph') {
             unique(block.paragraph.paragraphId, `${blockPath}.paragraphId`)
             sourceBinding(block.paragraph.source, `${blockPath}.source`, block.paragraph.text)
+            if (block.paragraph.continuationSources) {
+              const { source, continuationSources, role, text } = block.paragraph
+              if (kind !== 'essays' || role !== 'body') {
+                issue('SOURCE_REFERENCES_CONTINUATION_ROLE_INVALID', blockPath, 'Only essay body paragraphs may span source pages')
+              }
+              if (source.locator.kind !== 'page_region') {
+                issue('SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID', `${blockPath}.source`, 'Continued paragraphs must start with a page region')
+              }
+              let previous = source
+              for (const [c, continuation] of continuationSources.entries()) {
+                const continuationPath = `${blockPath}.continuationSources[${c}]`
+                sourceBinding(continuation, continuationPath, text)
+                if (continuation.locator.documentId !== source.locator.documentId
+                  || continuation.documentSha256 !== source.documentSha256) {
+                  issue('SOURCE_REFERENCES_CONTINUATION_SOURCE_INVALID', continuationPath, 'All paragraph fragments must bind the same source document and SHA')
+                }
+                if (continuation.locator.kind !== 'page_region'
+                  || previous.locator.kind !== 'page_region'
+                  || continuation.locator.page !== previous.locator.page + 1) {
+                  issue('SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID', continuationPath, 'Paragraph fragments must use consecutive, strictly increasing page regions')
+                }
+                previous = continuation
+              }
+            }
           } else {
             unique(block.tableId, `${blockPath}.tableId`)
             if (block.rows.some(row => row.length !== block.rows[0].length)) {
