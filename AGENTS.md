@@ -168,8 +168,10 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   after a green notice; diagnose failures before rerunning and retain attempts.
 - Deployment accepts only the exact-main natural Actions run and its two
   successful required checks through the deployment reader, which accepts only
-  exact v1 `{verify, e2e}` or v2 `{verify, e2e-seams, e2e-render, e2e}` job sets
-  with every job successful. Pending, failed, missing,
+  the exact v2 `{verify, e2e-seams, e2e-render, e2e}` job set with every job
+  successful. Reader and workflow ship together, so exact-main runs and PR
+  merge refs use v2; v1 acceptance would allow a two-job downgrade.
+  Pending, failed, missing,
   wrong-SHA, wrong-workflow or ambiguous evidence fails closed.
 - The old Amp CI webhook/controller, serialized eligibility, Amp-only watcher,
   Sentinel/Discovery and Action-wake are not the new authority. Do not start,

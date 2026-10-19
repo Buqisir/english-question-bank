@@ -31,10 +31,12 @@ skipped or missing worker results fail that check. Both required checks remain
 
 The Deployment reader validates the fixed repository/workflow, native App,
 natural main push, exact current main SHA and latest attempt. It accepts only
-one exact versioned job topology: v1 `{verify, e2e}` for historical runs, or v2
-`{verify, e2e-seams, e2e-render, e2e}`. Every job must complete successfully;
+the exact v2 job topology `{verify, e2e-seams, e2e-render, e2e}`. The reader
+and workflow ship together: exact-main runs and PR merge refs use v2, and a
+whole-change revert restores the old reader, so v1 compatibility is unnecessary
+and would permit a downgrade. Every job must complete successfully;
 unknown, missing or duplicate jobs fail closed. The reader rechecks main before
-dispatch. The read-only Ship watcher recognizes the same exact topologies and
+dispatch. The read-only Ship watcher requires the same exact v2 topology and
 reports unsuccessful workers. A manual diagnostic, same-name foreign
 workflow, old success, skipped job or pending attempt is not authority.
 

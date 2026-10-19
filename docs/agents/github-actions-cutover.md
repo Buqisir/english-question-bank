@@ -27,9 +27,11 @@ Required checks remain `verify` and `e2e`. The v2 workflow runs independent
 lane) workers; `e2e` always runs after both and requires each result to be
 `success`. No protection settings change is needed. Inspect both workers as
 well as the required checks on natural PR and exact-main runs. Deployment and
-watcher readers recognize only exact v1 `{verify, e2e}` or v2
-`{verify, e2e-seams, e2e-render, e2e}` job sets; every job must succeed for
-authority. A source update alone does not prove the installed reader is current.
+watcher readers recognize only the exact v2
+`{verify, e2e-seams, e2e-render, e2e}` job set; every job must succeed for
+authority. Readers ship with the workflow, so exact-main runs and PR merge refs
+use v2; rejecting v1 prevents a downgrade to two successful jobs.
+A source update alone does not prove the installed reader is current.
 
 ### Initial baseline (historical)
 

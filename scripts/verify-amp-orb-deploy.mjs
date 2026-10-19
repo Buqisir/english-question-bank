@@ -190,7 +190,7 @@ function actionsRun(sha, {
 }
 
 function actionsJob(sha, name, {
-  id = name === 'verify' ? 60 : 61,
+  id = ({ verify: 60, e2e: 61, 'e2e-render': 62, 'e2e-seams': 63 })[name] ?? 64,
   runId = 40,
   runAttempt = 1,
   status = 'completed',
@@ -334,6 +334,8 @@ else if (endpoint.endsWith('/check-suites/50')) {
   payload = { jobs: [
     { id: 60, run_id: 40, run_attempt: 1, head_sha: sha, name: 'verify', status: 'completed', conclusion: 'success' },
     { id: 61, run_id: 40, run_attempt: 1, head_sha: sha, name: 'e2e', status: 'completed', conclusion: 'success' },
+    { id: 62, run_id: 40, run_attempt: 1, head_sha: sha, name: 'e2e-render', status: 'completed', conclusion: 'success' },
+    { id: 63, run_id: 40, run_attempt: 1, head_sha: sha, name: 'e2e-seams', status: 'completed', conclusion: 'success' },
   ] }
 } else process.exit(64)
 process.stdout.write(JSON.stringify(payload))
@@ -382,7 +384,7 @@ const readActionsEvidence = await readDeploymentWorkflowEvidence({
 })
 assert(
   actionsEndpoints.length === 8
-    && readActionsEvidence.jobs.length === 2
+    && readActionsEvidence.jobs.length === 4
     && readActionsEvidence.run_attempt.run_attempt === 1,
   'native Actions reader requires two stable snapshots of run, attempt, suite, and jobs',
 )
@@ -396,8 +398,8 @@ assert(
     && actionsAuthority.workflowPath === AMP_ORB_DEPLOY_WORKFLOW_PATH
     && actionsAuthority.runId === 40
     && actionsAuthority.attempt === 1
-    && actionsAuthority.jobs.map(({ name }) => name).join(',') === 'e2e,verify',
-  'only the exact natural main workflow and both successful jobs authorize deployment',
+    && actionsAuthority.jobs.map(({ name }) => name).join(',') === 'e2e,e2e-render,e2e-seams,verify',
+  'only the exact natural main workflow and all four successful v2 jobs authorize deployment',
 )
 
 const v2Jobs = ['verify', 'e2e-seams', 'e2e-render', 'e2e'].map((name, index) =>
@@ -405,8 +407,10 @@ const v2Jobs = ['verify', 'e2e-seams', 'e2e-render', 'e2e'].map((name, index) =>
 const v2Authority = assertGitHubActionsDeploymentRun(
   actionsEvidence(newSha, { jobs: v2Jobs }), newSha, AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
 )
-assert(v2Authority.jobs.length === 4, 'v2 exact sharded topology succeeds; historical v1 remains readable')
+assert(v2Authority.jobs.length === 4, 'v2 exact sharded topology succeeds')
 const invalidV2Jobs = [
+  ['historical v1 successful pair', ['e2e', 'verify'].map(name => actionsJob(newSha, name))],
+  ['v2 both workers missing', v2Jobs.filter(job => !['e2e-seams', 'e2e-render'].includes(job.name))],
   ...['e2e-seams', 'e2e-render', 'e2e'].map(name => [`v2 missing ${name}`, v2Jobs.filter(job => job.name !== name)]),
   ['v2 unknown job', [...v2Jobs, actionsJob(newSha, 'other', { id: 70 })]],
   ['v2 duplicate job name', [...v2Jobs, actionsJob(newSha, 'e2e-seams', { id: 70 })]],
@@ -464,32 +468,21 @@ for (const [label, evidence] of [
     status: 'in_progress',
     conclusion: null,
   } })],
-  ['missing e2e', actionsEvidence(newSha, { jobs: [actionsJob(newSha, 'verify')] })],
-  ['failed e2e', actionsEvidence(newSha, { jobs: [
-    actionsJob(newSha, 'verify'),
-    actionsJob(newSha, 'e2e', { conclusion: 'failure' }),
-  ] })],
-  ['cancelled e2e', actionsEvidence(newSha, { jobs: [
-    actionsJob(newSha, 'verify'),
-    actionsJob(newSha, 'e2e', { conclusion: 'cancelled' }),
-  ] })],
-  ['skipped verify', actionsEvidence(newSha, { jobs: [
-    actionsJob(newSha, 'verify', { conclusion: 'skipped' }),
-    actionsJob(newSha, 'e2e'),
-  ] })],
+  ['missing e2e', actionsEvidence(newSha, { jobs: v2Jobs.filter(job => job.name !== 'e2e') })],
+  ['failed e2e', actionsEvidence(newSha, { jobs: v2Jobs.map(job =>
+    job.name === 'e2e' ? { ...job, conclusion: 'failure' } : job) })],
+  ['cancelled e2e', actionsEvidence(newSha, { jobs: v2Jobs.map(job =>
+    job.name === 'e2e' ? { ...job, conclusion: 'cancelled' } : job) })],
+  ['skipped verify', actionsEvidence(newSha, { jobs: v2Jobs.map(job =>
+    job.name === 'verify' ? { ...job, conclusion: 'skipped' } : job) })],
   ['duplicate verify', actionsEvidence(newSha, { jobs: [
-    actionsJob(newSha, 'verify'),
-    actionsJob(newSha, 'verify', { id: 62 }),
+    ...v2Jobs, actionsJob(newSha, 'verify', { id: 70 }),
   ] })],
   ['unexpected job', actionsEvidence(newSha, { jobs: [
-    actionsJob(newSha, 'verify'),
-    actionsJob(newSha, 'e2e'),
-    actionsJob(newSha, 'other', { id: 62 }),
+    ...v2Jobs, actionsJob(newSha, 'other', { id: 70 }),
   ] })],
-  ['job from old attempt', actionsEvidence(newSha, { jobs: [
-    actionsJob(newSha, 'verify'),
-    actionsJob(newSha, 'e2e', { runAttempt: 2 }),
-  ] })],
+  ['job from old attempt', actionsEvidence(newSha, { jobs: v2Jobs.map(job =>
+    job.name === 'e2e' ? { ...job, run_attempt: 2 } : job) })],
 ]) {
   assert((() => {
     try {
