@@ -13,7 +13,7 @@ try {
   let expectedFiles
   let inventoryError
   try {
-    expectedFiles = finalizeInventory(directory, revision)
+    expectedFiles = finalizeInventory(directory, revision, projection)
   } catch (error) {
     // Preserve the existing identity/report-before-inventory error precedence.
     inventoryError = failure(error)
