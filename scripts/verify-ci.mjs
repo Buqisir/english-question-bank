@@ -218,7 +218,6 @@ const registry = {
   'scripts/verify-vocabulary-notebook.mjs',
   'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
-  'scripts/verify-section-chrome-on-solo-surface.mjs',
   'scripts/verify-draft-workbench-visual-unify.mjs',
   'scripts/verify-my-space-shelf.mjs',
   'scripts/verify-draft-student-field.mjs',
