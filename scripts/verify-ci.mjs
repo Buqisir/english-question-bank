@@ -301,17 +301,18 @@ const sentenceAnalysisScripts = uniqueRegistered([
   'scripts/verify-sentence-analysis-browser.mjs',
 ])
 paperScripts.push(...sentenceAnalysisScripts.filter((script) => !paperScripts.includes(script)))
-// CI implementation changes select all; ordinary feature work does not need
-// process/scheduler/policy metatests. Exclude them from the derived set, rather
+// Full retains process/scheduler/policy metatests and the OCR responsiveness
+// diagnostic; ordinary feature work excludes them from the derived set, rather
 // than only omitting an explicit list entry that the registry would add back.
-const ciMetaScripts = new Set([
+const fullOnlyScripts = new Set([
   'scripts/verify-verification-command-runner.mjs',
   'scripts/verify-verification-scheduler.mjs',
   'scripts/verify-ci-pr-plan.mjs',
+  'scripts/verify-import-review-ocr-worker.mjs',
 ])
 const featureScripts = uniqueRegistered([
   ...registry.scripts.filter(
-    (script) => !ciMetaScripts.has(script)
+    (script) => !fullOnlyScripts.has(script)
       && (sentenceAnalysisScripts.includes(script)
         || (!paperScripts.includes(script) && !securityScripts.includes(script))),
   ),

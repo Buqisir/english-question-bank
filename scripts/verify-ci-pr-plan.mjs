@@ -194,6 +194,17 @@ const laneShells = renderJobs.map(renderJob => {
   return shell
 })
 const registry = JSON.parse(execFileSync(process.execPath, ['scripts/verify-ci.mjs', '--list-json'], { encoding: 'utf8' }))
+for (const script of [
+  'scripts/verify-verification-command-runner.mjs',
+  'scripts/verify-verification-scheduler.mjs',
+  'scripts/verify-ci-pr-plan.mjs',
+  'scripts/verify-import-review-ocr-worker.mjs',
+]) {
+  assert(registry.packs.all.includes(script), `${script}: retain Full coverage`)
+  for (const [pack, scripts] of Object.entries(registry.packs)) {
+    if (pack !== 'all') assert(!scripts.includes(script), `${script}: exclude from ${pack}`)
+  }
+}
 for (const pack of Object.keys(registry.packs)) {
   const plan = (lane, shard = 'all') => JSON.parse(execFileSync(process.execPath,
     ['scripts/verify-ci.mjs', '--plan-json', '--pack', pack, '--lane', lane, '--shard', shard], { encoding: 'utf8' }))
