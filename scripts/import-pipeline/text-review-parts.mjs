@@ -226,7 +226,7 @@ function mechanicalCorrections(text) {
 
 // `context` is an optional longer verbatim snippet that pins a short quote (a name, a
 // one-word insertion point) to one place; the correction itself stays the minimal quote.
-function occurrences(text, flag, wholeWords) {
+function occurrences(text, flag, wholeWords, allowWrapped = false) {
   const needle = flag.context ?? flag.quote
   const offset = flag.context === undefined ? 0 : flag.context.indexOf(flag.quote)
   const found = []
@@ -236,7 +236,26 @@ function occurrences(text, flag, wholeWords) {
       found.push(start)
     }
   }
+  // Uncertain notes preserve source text and need no correction offsets. OCR
+  // line wrapping may split their verbatim phrase across whitespace. Actual
+  // spelling/grammar corrections retain the literal matching requirement.
+  if (allowWrapped && !wholeWords && !found.length && /\s/u.test(needle)) {
+    const pattern = needle.split(/\s+/u)
+      .map((part) => part.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')).join('\\s+')
+    for (const match of text.matchAll(new RegExp(pattern, 'gu'))) found.push(match.index + offset)
+  }
   return found
+}
+
+export function findSourceFlagTargets(targets, flag) {
+  const uncertain = flag.decision === 'uncertain'
+  const locate = (allowWrapped) => targets
+    .map((target) => ({ target, at: occurrences(target.before, flag, !uncertain, allowWrapped) }))
+    .filter(({ at }) => at.length)
+  const exact = locate(false)
+  // Preserve every existing literal binding. Only rescue an otherwise missing
+  // uncertain note; never broaden a successful historical mapping.
+  return exact.length || !uncertain ? exact : locate(true)
 }
 
 function auto(requestPath) {
@@ -273,9 +292,7 @@ function auto(requestPath) {
         continue
       }
     }
-    const hits = request.report.targets
-      .map((target) => ({ target, at: occurrences(target.before, flag, !uncertain) }))
-      .filter(({ at }) => at.length)
+    const hits = findSourceFlagTargets(request.report.targets, flag)
     if (!hits.length) { problems.push(`${label}: not found in any target`); continue }
     for (const { target, at } of hits) {
       const index = at.length === 1 ? at[0] : at[(flag.occurrence ?? 0) - 1]
@@ -330,8 +347,10 @@ function auto(requestPath) {
     flags: mapping }, null, 2))
 }
 
-const [command, requestPath] = process.argv.slice(2)
-if (command === 'split' && requestPath) split(path.resolve(requestPath))
-else if (command === 'merge' && requestPath) merge(path.resolve(requestPath))
-else if (command === 'auto' && requestPath) auto(path.resolve(requestPath))
-else fail('Usage: text-review-parts.mjs <split|merge|auto> <request.json> [--out <dir>] [--parts N] [--flags <dir>] [--output <review.json>] [--paper-dir <dir>]')
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const [command, requestPath] = process.argv.slice(2)
+  if (command === 'split' && requestPath) split(path.resolve(requestPath))
+  else if (command === 'merge' && requestPath) merge(path.resolve(requestPath))
+  else if (command === 'auto' && requestPath) auto(path.resolve(requestPath))
+  else fail('Usage: text-review-parts.mjs <split|merge|auto> <request.json> [--out <dir>] [--parts N] [--flags <dir>] [--output <review.json>] [--paper-dir <dir>]')
+}
