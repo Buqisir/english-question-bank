@@ -181,7 +181,8 @@ const registry = {
   'scripts/verify-i13-grammar-fill-analysis.mjs',
   'scripts/verify-i14-grammar-fill-analysis-surface.mjs',
   'scripts/verify-i15-grammar-fill-blank-focus.mjs',
-  'scripts/verify-i16a-teaching-dimension-search.mjs',
+  // I16-A's gitignored corpus and list-groups-perf's real local DB are manual
+  // audits, not reproducible daily checks. Prerequisites: scripts/README.md.
   'scripts/verify-i16b-theme-labels-backfill.mjs',
   'scripts/verify-grammar-facets-v2.mjs',
   'scripts/verify-similar-v2.mjs',
@@ -215,7 +216,6 @@ const registry = {
   'scripts/verify-sentence-analysis-browser.mjs',
   'scripts/verify-paper-dictionary.mjs',
   'scripts/verify-vocabulary-notebook.mjs',
-  'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
   'scripts/verify-draft-workbench-visual-unify.mjs',
   'scripts/verify-my-space-shelf.mjs',
