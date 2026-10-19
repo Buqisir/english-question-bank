@@ -1795,15 +1795,23 @@ function validateConsumptionPublication({
     }
   }
   let paperSourceType = null
+  let paperHeaderTitle
   try {
     const paperAssetBytes = store.readVersionArtifact(ref, 'paper-asset.json')
-    if (paperAssetBytes) paperSourceType = readJsonBytes(paperAssetBytes, 'paper asset').sources?.sourceType
+    if (paperAssetBytes) {
+      const asset = readJsonBytes(paperAssetBytes, 'paper asset')
+      paperSourceType = asset.sources?.sourceType
+      if (typeof asset.paper?.headerTitle === 'string' && asset.paper.headerTitle.trim()) {
+        paperHeaderTitle = asset.paper.headerTitle
+      }
+    }
   } catch {
     // Canonical-only historical publications need not have a compatibility asset.
   }
   return {
     manifest,
     selection: { ...canonicalSelections(validated, contract, sourceAsset), ...(playbackUi ? { playbackUi } : {}),
+      ...(paperHeaderTitle !== undefined ? { paperHeaderTitle } : {}),
       ...(['真题', '模拟题', '校本题', '自编题'].includes(paperSourceType) ? { paperSourceType } : {}) },
     visibleStructure: canonicalVisibleStructure(validated),
     profileRef: structuredClone(validated.plan.profileRef),
@@ -1852,6 +1860,7 @@ function readyConsumption(
     ),
     selections: canonical.selections,
     ...(canonical.paperSourceType ? { paperSourceType: canonical.paperSourceType } : {}),
+    ...(canonical.paperHeaderTitle !== undefined ? { paperHeaderTitle: canonical.paperHeaderTitle } : {}),
     ...(manifest.listeningAudio ? {
       listeningAudio: {
         ...manifest.listeningAudio,

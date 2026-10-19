@@ -3217,7 +3217,7 @@ ${isTeacher ? `
 </style>
 </head>
 <body class="${densityClass} paper-print">
-${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening>${mockPaperCoverName(canonicalConsumption?.paperSourceType, title) ? `<p class="canonical-paper-mock-name" data-canonical-mock-name>${escapeHtml(mockPaperCoverName(canonicalConsumption.paperSourceType, title))}</p>` : ''}<h1 class="canonical-paper-cover-title" data-canonical-cover-title>${listeningOpening.title}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices><strong>注意事项：</strong><ol>${listeningOpening.notices.map((notice) => `<li>${escapeHtml(notice)}</li>`).join('')}</ol></div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
+${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening>${mockPaperCoverName(canonicalConsumption?.paperSourceType, title, canonicalConsumption?.paperHeaderTitle) ? `<p class="canonical-paper-mock-name" data-canonical-mock-name>${escapeHtml(mockPaperCoverName(canonicalConsumption.paperSourceType, title, canonicalConsumption.paperHeaderTitle))}</p>` : ''}<h1 class="canonical-paper-cover-title" data-canonical-cover-title>${listeningOpening.title}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices><strong>注意事项：</strong><ol>${listeningOpening.notices.map((notice) => `<li>${escapeHtml(notice)}</li>`).join('')}</ol></div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
 <div class="paper-header">
   <h1>${escapeHtml(title || '英语试题')}</h1>
   ${versionLabel ? `<p class="version-label">${escapeHtml(versionLabel)}</p>` : ''}

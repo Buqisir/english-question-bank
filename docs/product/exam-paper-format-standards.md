@@ -60,6 +60,19 @@ Owner只需交源材料并提供考试年份、月份；Agent读取正式题头�
 月份摄入、Review封存、Source持久化与网站查询已有本地接线候选，未部署生产；
 正式验收及存储限制见[产品合同](paper-pdf-products-v1.md)。
 
+**首页显示卷名（Owner 2026-10-19）：** 新导入卷首页第一行为来源卷名去除末尾的
+科目字样（英语学科试题卷／英语试题卷／英语试题／英语试卷／英语，含字间空格），
+第二行保留独立的“英 语”。科目字样后的版次括注保留；非科目词组不猜删，
+去除后为空或只剩标点时保留原名。只改首页第一行，原始题头、元数据卷名、
+列表／搜索及“英语试题第 X 页（共 Y 页）”页脚不变。
+这是新卷的显式展示数据，不是对存量卷的运行时清洗：导入 producer 调用
+`subjectFreeHeaderTitle(config.provenance.paperName)`，将结果写入新卷 `config.headerTitle`，
+并在生成 PDF 前完成；Review 将其封存在 `paper-asset.json` 的可选 `paper.headerTitle`，
+Canonical consumption 传递同版本 `paperHeaderTitle`，Screen、Print/PDF 共同消费。
+已有配置无该字段即沿用历史显示，不回填送审／已发布卷，也不重生成冻结 PDF。
+此展示元数据不新增 Canonical Plan 语义、不改历史 authority/schema/digest；
+配置变化仍改变 Review bundle 和冻结产品的输入摘要，必须重新生成产品和审核。
+
 应用文框优先65mm、续写框优先57mm；必要时才压缩，找到合格分页后独立尝试
 恢复两个框，先恢复续写框，不能因前面拥挤而让宽松的末页仍保留最短框。
 漫画可等比缩小绕排；不得删文字、混用字号档、裁切图片/框或让选项叠字。

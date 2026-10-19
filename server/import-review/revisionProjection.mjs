@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
 import { readExamDate } from '../../shared/examDate.mjs'
+import { configuredHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 
 import {
   compileNck1MaterializationCandidatePreview,
@@ -1251,6 +1252,7 @@ export function buildNck1CompatibilityPaperAsset({
   primarySourceType = 'pdf',
   sourceProvenance = null,
 }) {
+  const headerTitle = configuredHeaderTitle(config)
   const groupTypes = {
     reading: 'reading',
     'seven-choices': 'sevenChoices',
@@ -1392,6 +1394,7 @@ export function buildNck1CompatibilityPaperAsset({
     paper: {
       paperId: materialization.paperId,
       title: config.provenance.paperName,
+      ...(headerTitle !== undefined ? { headerTitle } : {}),
       subject: 'English',
       source: config.provenance.source,
       assetVersion: sourceAssetVersion,
@@ -1754,7 +1757,8 @@ export function buildNck1ReviewProjection(rootDir, {
     visibleStructureDigest: consumption.visibleStructureDigest,
     candidate: preview.candidate,
     compilation: preview.compilation,
-    consumption: { ...consumption, paperSourceType: configuredSourceType(loaded.config, loaded.materialization.paperId) },
+    consumption: { ...consumption, paperSourceType: configuredSourceType(loaded.config, loaded.materialization.paperId),
+      ...(paperAsset.paper.headerTitle !== undefined ? { paperHeaderTitle: paperAsset.paper.headerTitle } : {}) },
     mediaDerivations,
     paperAsset,
     sourceVisuals,

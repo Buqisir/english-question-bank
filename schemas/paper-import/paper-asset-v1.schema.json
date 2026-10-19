@@ -14,6 +14,7 @@
       "properties": {
         "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
         "title": { "type": "string", "minLength": 1 },
+        "headerTitle": { "type": "string", "minLength": 1 },
         "subject": { "type": "string", "minLength": 1 },
         "source": { "type": "string", "minLength": 1 },
         "assetVersion": { "type": "integer", "minimum": 1 },
