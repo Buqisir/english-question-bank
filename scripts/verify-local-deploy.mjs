@@ -165,6 +165,17 @@ process.exit(result.status ?? 1)
       }
     })
   }
+  check('untracked files fail even when Git config hides them from status', () => {
+    git('config', 'status.showUntrackedFiles', 'no')
+    try {
+      const result = run({ dirty: true })
+      assert.equal(result.status, 1)
+      assert.match(result.stderr, /工作区必须干净/u)
+      assert.equal(result.calls.length, 0)
+    } finally {
+      git('config', '--unset', 'status.showUntrackedFiles')
+    }
+  })
   check('behind origin/main gives fetch and fast-forward instructions without moving HEAD', () => {
     git('checkout', '--quiet', 'main')
     git('update-ref', 'refs/heads/main', previousSha)

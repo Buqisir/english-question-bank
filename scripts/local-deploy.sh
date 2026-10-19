@@ -18,7 +18,7 @@ branch=$(git branch --show-current)
 $git_here switch main
 $git_here fetch origin
 $git_here merge --ff-only origin/main"
-[ -z "$(git status --porcelain)" ] || fail "部署仓库工作区必须干净（包括未跟踪文件）。
+[ -z "$(git status --porcelain --untracked-files=all)" ] || fail "部署仓库工作区必须干净（包括未跟踪文件）。
 先查看并保留这些改动，再重新运行：
 $git_here status --short"
 local_sha=$(git rev-parse HEAD)
