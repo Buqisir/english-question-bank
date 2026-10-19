@@ -2,7 +2,7 @@ name: Verify
 run-name: >-
   ${{ github.event_name == 'pull_request' && format('Verify PR #{0} head {1}', github.event.pull_request.number, github.event.pull_request.head.sha) || 'Verify' }}
 
-# Stable required jobs: both run; their disjoint lanes cover the selected pack.
+# Stable required checks: verify and e2e; e2e aggregates both isolated workers.
 on:
   pull_request:
   push:
@@ -95,8 +95,81 @@ jobs:
       - name: Require tracked checkout to remain clean
         run: git diff --exit-code && git diff --cached --exit-code
 
-  e2e:
-    name: e2e
+  e2e-seams:
+    name: e2e-seams
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Select verification from the trusted PR base
+        id: plan
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          plan="$RUNNER_TEMP/eqb-verification-plan.json"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
+            test -z "$(git status --porcelain)"
+            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
+            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
+            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
+          fi
+          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
+            trusted="$RUNNER_TEMP/eqb-ci-policy"
+            git worktree add --detach "$trusted" "$BASE_SHA"
+            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
+            git worktree remove "$trusted"
+          else
+            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
+            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
+          fi
+          pack=$(jq -er '.pack' "$plan")
+          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
+          echo "pack=$pack" >> "$GITHUB_OUTPUT"
+          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            { echo '## Risk Agent selection'; echo '```json';
+              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
+              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+      - name: Install app dependencies
+        run: pnpm -C app install --frozen-lockfile
+      - name: Install server dependencies
+        run: npm --prefix server ci
+      # Browser seams need Chromium OS dependencies, not the render-pack toolchain.
+      - name: Install Chromium
+        id: chromium
+        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - name: Verify draft pagination renderer
+        run: node scripts/verify-draft-pagination-renderer.mjs
+      - name: Verify draft pagination DOM contract
+        run: node scripts/verify-draft-pagination-dom-contract.mjs
+      - name: Verify A3 imposition
+        run: node scripts/verify-a3-imposition.mjs
+      - name: Verify reorder suggestions
+        run: node scripts/verify-reorder-suggest.mjs
+      - name: Verify grammar-fill browser geometry
+        run: node scripts/verify-paper-normalization-grammar-fill-browser.mjs
+      - name: Verify golden path
+        run: node scripts/smoke-golden-path.mjs
+      - name: Require tracked checkout to remain clean
+        if: ${{ !cancelled() }}
+        run: git diff --exit-code && git diff --cached --exit-code
+
+  e2e-render:
+    name: e2e-render
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -179,20 +252,8 @@ jobs:
       - name: Install Chromium
         id: chromium
         run: pnpm -C app exec playwright install --with-deps --no-shell chromium
-      - name: Verify draft pagination renderer
-        run: node scripts/verify-draft-pagination-renderer.mjs
-      - name: Verify draft pagination DOM contract
-        run: node scripts/verify-draft-pagination-dom-contract.mjs
-      - name: Verify A3 imposition
-        run: node scripts/verify-a3-imposition.mjs
-      - name: Verify reorder suggestions
-        run: node scripts/verify-reorder-suggest.mjs
-      - name: Verify grammar-fill browser geometry
-        run: node scripts/verify-paper-normalization-grammar-fill-browser.mjs
-      - name: Verify golden path
-        run: node scripts/smoke-golden-path.mjs
       - name: Run selected verification pack (isolated render lane)
-        # Still collect this lane if a preceding E2E fails; no continue-on-error.
+        # The selected-pack runner owns its existing diff/build preflight.
         if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}
         env:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
@@ -200,3 +261,18 @@ jobs:
       - name: Require tracked checkout to remain clean
         if: ${{ !cancelled() }}
         run: git diff --exit-code && git diff --cached --exit-code
+
+  e2e:
+    name: e2e
+    needs: [e2e-seams, e2e-render]
+    if: ${{ always() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require both E2E workers to succeed
+        env:
+          SEAMS_RESULT: ${{ needs.e2e-seams.result }}
+          RENDER_RESULT: ${{ needs.e2e-render.result }}
+        run: |
+          test "$SEAMS_RESULT" = success
+          test "$RENDER_RESULT" = success

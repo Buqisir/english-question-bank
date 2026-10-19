@@ -28,7 +28,9 @@ export const AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID = 15368
 export const AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES = 8 * 1024 * 1024
 export const AMP_ORB_DEPLOY_WORKFLOW_PATH = '.github/workflows/verify.yml'
 export const AMP_ORB_DEPLOY_WORKFLOW_NAME = 'Verify'
-export const AMP_ORB_DEPLOY_REQUIRED_JOBS = Object.freeze(['e2e', 'verify'])
+// v2 ships with this reader; exact-main runs and PR merge refs use its workflow.
+// Reject the historical two-job set so missing workers cannot downgrade authority.
+export const AMP_ORB_DEPLOY_REQUIRED_JOBS = Object.freeze(['e2e', 'e2e-render', 'e2e-seams', 'verify'])
 // Retained only for backward-compatible verifier coverage. Deployment wiring
 // below uses GitHub Actions workflow evidence, never this legacy Check seam.
 export const AMP_ORB_DEPLOY_AMP_CHECK_NAME = 'Amp Orb Verify'
@@ -968,7 +970,8 @@ export function assertGitHubActionsDeploymentRun(evidence, expectedSha, trustedA
   const jobNames = evidence.jobs.map((job) => job?.name).sort()
   if (
     new Set(jobIds).size !== jobIds.length
-    || jobNames.join('\n') !== AMP_ORB_DEPLOY_REQUIRED_JOBS.join('\n')
+    || jobNames.length !== AMP_ORB_DEPLOY_REQUIRED_JOBS.length
+    || jobNames.some((name, index) => name !== AMP_ORB_DEPLOY_REQUIRED_JOBS[index])
     || evidence.jobs.some((job) => (
       job?.run_id !== runId
       || job?.run_attempt !== attempt

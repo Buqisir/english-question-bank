@@ -20,6 +20,19 @@ GitHub hook 672661674 was disabled and read back `active:false` at
 07:36:34Z. Old Orb/platform registration termination and inaccessible private
 queue/receipts remain unverified; do not claim their deletion or replay them.
 
+### E2E worker topology
+
+Required checks remain `verify` and `e2e`. The v2 workflow runs independent
+`e2e-seams` (all six fixed browser seams) and `e2e-render` (selected pack e2e
+lane) workers; `e2e` always runs after both and requires each result to be
+`success`. No protection settings change is needed. Inspect both workers as
+well as the required checks on natural PR and exact-main runs. Deployment and
+watcher readers recognize only the exact v2
+`{verify, e2e-seams, e2e-render, e2e}` job set; every job must succeed for
+authority. Readers ship with the workflow, so exact-main runs and PR merge refs
+use v2; rejecting v1 prevents a downgrade to two successful jobs.
+A source update alone does not prove the installed reader is current.
+
 ### Initial baseline (historical)
 
 Initial read-only baseline on 2026-09-14:

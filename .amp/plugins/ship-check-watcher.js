@@ -9,7 +9,8 @@ const REPO = 'Buqisir/english-question-bank'
 const APP = 15368
 const WORKFLOW_PATH = '.github/workflows/verify.yml'
 const WORKFLOW_NAME = 'Verify'
-const REQUIRED_JOBS = ['e2e', 'verify']
+// The watcher and v2 workflow ship together; the historical pair is a downgrade.
+const REQUIRED_JOBS = ['e2e', 'e2e-render', 'e2e-seams', 'verify']
 const SHA = /^[a-f0-9]{40}$/u
 const TERMINAL = new Set(['success', 'failure', 'cancelled', 'timed_out', 'action_required', 'neutral', 'skipped', 'stale', 'startup_failure'])
 const exec = promisify(execFile)
@@ -137,7 +138,9 @@ async function readLatestWorkflow({ head, event, pullRequest, headRef }, readJso
     if (job.run_id !== runId || job.run_attempt !== attempt || job.head_sha !== head
       || !REQUIRED_JOBS.includes(job.name)) throw new Error('Unknown workflow job identity')
   }
-  if (jobs.map(job => job.name).sort().join('\n') !== REQUIRED_JOBS.join('\n')) {
+  const jobNames = jobs.map(job => job.name).sort()
+  if (jobNames.length !== REQUIRED_JOBS.length
+    || jobNames.some((name, index) => name !== REQUIRED_JOBS[index])) {
     throw new Error('Required workflow jobs are missing or ambiguous')
   }
   if (detail.status !== 'completed' || suite.status !== 'completed'
