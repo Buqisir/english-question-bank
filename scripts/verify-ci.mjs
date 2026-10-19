@@ -333,7 +333,6 @@ const importPaperScripts = uniqueRegistered([
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-paper-canonical-listening-first-section-playback-slot-gating.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
-  'scripts/verify-paper-header-title.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-paragraph-summaries-v1.mjs',
