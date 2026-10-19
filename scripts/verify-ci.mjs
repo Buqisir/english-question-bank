@@ -27,6 +27,11 @@ import {
   verificationSchedulingPolicy,
 } from './lib/verificationScheduler.mjs'
 
+import {
+  createVerificationShards,
+  verificationShardScripts,
+} from './lib/verificationShards.mjs'
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 
@@ -571,6 +576,7 @@ function verificationPlan() {
 let plan
 let concurrency
 try {
+  const shardAllocation = createVerificationShards(verificationLaneScripts(registry.scripts, 'verify'))
   plan = verificationPlan()
   const lanes = argumentValues('--lane')
   const laneFlagCount = process.argv.filter((arg) => arg === '--lane').length
@@ -578,7 +584,15 @@ try {
     throw new Error('Expected exactly one --lane value')
   }
   const lane = lanes[0] ?? 'all'
-  plan = { ...plan, lane, scripts: verificationLaneScripts(plan.scripts, lane) }
+  const shards = argumentValues('--shard')
+  const shardFlagCount = process.argv.filter((arg) => arg === '--shard').length
+  if (shardFlagCount > 1 || shardFlagCount !== shards.length) {
+    throw new Error('Expected exactly one --shard value')
+  }
+  const shard = shards[0] ?? 'all'
+  if (shard !== 'all' && lane !== 'verify') throw new Error('--shard requires --lane verify')
+  plan = { ...plan, lane, shard,
+    scripts: verificationShardScripts(verificationLaneScripts(plan.scripts, lane), shard, shardAllocation) }
   concurrency = verificationConcurrency()
 } catch (error) {
   console.error(error.message)
@@ -725,7 +739,7 @@ const skipped = results.filter((r) => r.status === SKIP_EXIT_CODE)
 const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CODE)
 
 console.log('\n===== verify summary =====')
-console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack} / LANE ${plan.lane}`)
+console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack} / LANE ${plan.lane} / SHARD ${plan.shard}`)
 console.log(
   `JOBS ${concurrency} / CORES ${availableParallelism()}`
     + ` / WALL ${((performance.now() - suiteStartedAt) / 1_000).toFixed(1)}s`,

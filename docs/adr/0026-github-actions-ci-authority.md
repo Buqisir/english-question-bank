@@ -9,36 +9,76 @@
 Use `.github/workflows/verify.yml` on natural PR and main push events. GitHub
 Actions owns execution, logs, attempts and the `verify`/`e2e` checks. Together
 the workers run the base-classified pack on PRs and the complete registry on
-main; `e2e` aggregates the two E2E workers, including all six existing browser
-seams. There is no Amp CI webhook,
+main; `verify` and `e2e` each aggregate two workers, including all six
+existing browser seams in `e2e-seams`. There is no Amp CI webhook,
 queue or serialized selection prerequisite. A read-only watcher can notify the Ship
 thread, but neither a notification nor its absence changes the Checks.
 PRs still need current-main ancestry and strict/up-to-date protection.
 
 The selected pack is partitioned into disjoint `verify` and `e2e` lanes.
-Three independent runner workspaces resolve the same immutable event through
-the same trusted-base planner; lane selection never changes risk or pack selection.
-`verify` retains its lane and `--jobs 2`. `e2e-seams` runs all six fixed browser
-seams in their existing order. `e2e-render` runs the selected pack's e2e lane
-with `--jobs 2`, retaining render resource locks and script order. Browser seams
-install Chromium with its OS dependencies; only a nonempty render lane installs
-the broader render toolchain and runs its existing diff/build preflight. The
-seams worker does not add another pack preflight. Local Full remains unpartitioned.
-The required `e2e` job uses `needs: [e2e-seams, e2e-render]` and `always()`, then
-explicitly requires each worker result to be `success`. Failed, cancelled,
-skipped or missing worker results fail that check. Both required checks remain
-`verify` and `e2e`; no branch-protection change or matrix skip is introduced.
+Four independent runner workspaces resolve the same immutable event through
+the same trusted-base planner; lane/shard selection never changes risk or pack
+selection. `verify-1` and `verify-2` partition the verify lane using the balance
+overrides in `scripts/lib/verificationShards.mjs`; unlisted registry paths use
+their SHA-256 integer modulo 2 plus 1. New scripts need no shard registration;
+add an explicit override only to rebalance. Before selecting a pack, the runner
+generates the full allocation and asserts no duplicates or omissions against the
+entire verify registry. Stale overrides and shard keys other than exactly
+`{1, 2}` fail closed. Filtering preserves registry order within each shard.
+Both shards retain `--jobs 2`, existing resource locks, setup and diff/build
+preflight. Local Full remains unpartitioned.
+
+`e2e-seams` runs all six fixed browser seams in their existing order.
+`e2e-render` runs the selected pack's e2e lane with `--jobs 2`, retaining render
+resource locks and script order. Browser seams install Chromium with its OS
+dependencies; only a nonempty render lane installs the broader render toolchain
+and runs its existing diff/build preflight. The seams worker does not add
+another pack preflight.
+
+The required `verify` job uses `needs: [verify-1, verify-2]`; `e2e` uses
+`needs: [e2e-seams, e2e-render]`. Both use `always()` and explicitly require each
+worker result to be `success`. Failed, cancelled, skipped or missing worker
+results fail that check. Required names remain `verify` and `e2e`; no
+branch-protection change or matrix skip is introduced.
+
+#### Verify shard timing basis
+
+PR #525 [run 39208479703](https://github.com/Buqisir/english-question-bank/actions/runs/39208479703),
+verify job 117916387764, used 19.6 minutes total. Its 181 script progress events
+sum to 1731.368 seconds; `jobs=2` and resource locks yield 1060.568 seconds of
+script wall time. The build preflight adds 12.1 seconds. Step metadata records
+checkout 11s, Node setup <1s, trusted selection 4s, pnpm 2s, app install 2s,
+server install 9s, system dependencies 55s and Chromium 14s. Installation and
+runner setup remain duplicated deliberately; two shards already fit below E2E.
+
+The balance overrides use descending measured durations and choose the bin
+with the smaller simulated completion time, using registry order, two slots and
+the existing resource keys. Durations are a planning sample, not runtime policy.
+
+| Worker | Scripts | Sum of script seconds | Browser-render lock seconds | Simulated script wall | Estimated full job |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| verify-1 | 58 | 921.083 | 493.753 | 538.197s | about 11m |
+| verify-2 | 123 | 810.285 | 496.442 | 538.156s | about 11m |
+
+The original scheduler replay matches the observed script wall time. Estimates
+include approximately 12s build and 103s other job overhead. Hosted runner
+variance and duplicated installations require confirmation on the natural PR
+run. Existing `e2e-seams`/`e2e-render` observations are 12.6m/13.2m, so the
+expected overall wall time is about 13–14m with two verify shards.
 
 The Deployment reader validates the fixed repository/workflow, native App,
 natural main push, exact current main SHA and latest attempt. It accepts only
-the exact v2 job topology `{verify, e2e-seams, e2e-render, e2e}`. The reader
-and workflow ship together: exact-main runs and PR merge refs use v2, and a
-whole-change revert restores the old reader, so v1 compatibility is unnecessary
-and would permit a downgrade. Every job must complete successfully;
-unknown, missing or duplicate jobs fail closed. The reader rechecks main before
-dispatch. The read-only Ship watcher requires the same exact v2 topology and
-reports unsuccessful workers. A manual diagnostic, same-name foreign
-workflow, old success, skipped job or pending attempt is not authority.
+the exact v3 topology `{verify-1, verify-2, verify, e2e-seams, e2e-render, e2e}`.
+Every job must complete successfully; unknown, missing or duplicate jobs fail
+closed. The reader and workflow ship together; historical v1/v2 compatibility
+would permit missing workers. Deployment always resolves latest main, so the
+four-job main `bc9a2d9d2a68ec4a76fd5195caf2f110e9697c15` uses its old reader
+before v3 lands, and latest main uses the new reader/workflow after merge.
+Historical-main deployment is not required. A whole-change revert restores the
+matching old reader. The reader rechecks main before dispatch. The read-only
+Ship watcher requires the same exact v3 topology and reports unsuccessful
+workers. A manual diagnostic, same-name foreign workflow, old success, skipped
+job or pending attempt is not authority.
 
 ### Risk routing and notification
 
