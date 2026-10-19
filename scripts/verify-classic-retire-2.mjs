@@ -58,6 +58,21 @@ function read(relPath) {
 
 const detailView = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 
+// Merged from analysis-layering: retired analysis must stay absent even if
+// reintroduced without its old disclosure component. The disclosure itself
+// remains forbidden by verify-detail-redesign in the same feature/all packs.
+const retiredAnalysisMarkers = [
+  ['question-ai-block (per-question AI analysis wrapper)', /question-ai-block/],
+  ['question-ai-parse (per-question AI analysis body)', /question-ai-parse/],
+  ['脉络与重要词块 (reading group-level block)', /脉络与重要词块/],
+  ['故事大意与串词成篇 (cloze group-level block)', /故事大意与串词成篇/],
+  ['文章主旨 (seven_choices group-level block, as an AnalysisDisclosure label)', /<AnalysisDisclosure label="文章主旨"/],
+  ['全文翻译 (grammar group-level block, as an AnalysisDisclosure label)', /<AnalysisDisclosure label="全文翻译"/],
+]
+for (const [label, pattern] of retiredAnalysisMarkers) {
+  assert(`retired analysis surface absent: ${label}`, !pattern.test(detailView))
+}
+
 // figure-render cut (fig-token P0) opened this component's "props-driven,
 // zero internal useState" invariant with ONE deliberate exception (the old
 // figure-manifest fetch); similar-passages-entry (E6) added a second pair

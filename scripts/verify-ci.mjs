@@ -202,7 +202,6 @@ const registry = {
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-classic-retire-2.mjs',
   'scripts/verify-classic-retire-3.mjs',
-  'scripts/verify-analysis-layering.mjs',
   'scripts/verify-launch-deploy.mjs',
   'scripts/verify-paper-assets-consistency.mjs',
   'scripts/verify-paper-browse.mjs',
