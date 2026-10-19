@@ -18,11 +18,13 @@ PRs still need current-main ancestry and strict/up-to-date protection.
 The selected pack is partitioned into disjoint `verify` and `e2e` lanes.
 Four independent runner workspaces resolve the same immutable event through
 the same trusted-base planner; lane/shard selection never changes risk or pack
-selection. `verify-1` and `verify-2` partition the verify lane using the explicit
-allocation in `scripts/lib/verificationShards.mjs`. The runner asserts that the
-allocation has no duplicates, omissions or stale entries against the entire
-verify registry before selecting a pack. Adding a verifier without deliberately
-assigning it fails closed. Filtering preserves registry order within each shard.
+selection. `verify-1` and `verify-2` partition the verify lane using the balance
+overrides in `scripts/lib/verificationShards.mjs`; unlisted registry paths use
+their SHA-256 integer modulo 2 plus 1. New scripts need no shard registration;
+add an explicit override only to rebalance. Before selecting a pack, the runner
+generates the full allocation and asserts no duplicates or omissions against the
+entire verify registry. Stale overrides and shard keys other than exactly
+`{1, 2}` fail closed. Filtering preserves registry order within each shard.
 Both shards retain `--jobs 2`, existing resource locks, setup and diff/build
 preflight. Local Full remains unpartitioned.
 
@@ -49,7 +51,7 @@ checkout 11s, Node setup <1s, trusted selection 4s, pnpm 2s, app install 2s,
 server install 9s, system dependencies 55s and Chromium 14s. Installation and
 runner setup remain duplicated deliberately; two shards already fit below E2E.
 
-The explicit allocation uses descending measured durations and chooses the bin
+The balance overrides use descending measured durations and choose the bin
 with the smaller simulated completion time, using registry order, two slots and
 the existing resource keys. Durations are a planning sample, not runtime policy.
 

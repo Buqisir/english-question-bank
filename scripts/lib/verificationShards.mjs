@@ -1,8 +1,10 @@
-// Explicit allocation measured from PR #525, run 39208479703/job 117916387764.
+import { createHash } from 'node:crypto'
+
+// Balance overrides measured from PR #525, run 39208479703/job 117916387764.
 // Resource-aware two-bin packing: 538.197s / 538.156s simulated at jobs=2,
 // preserving registry order and existing locks. See ADR-0026 for setup estimates.
-// New/retired verify-lane scripts require a deliberate allocation update.
-export const verificationShards = Object.freeze({
+// Unlisted verify-lane paths use SHA-256 modulo 2; retired overrides are errors.
+export const verificationShardOverrides = Object.freeze({
   '1': Object.freeze([
     'scripts/verify-paper-canonical-foundation.mjs',
     'scripts/verify-paper-canonical-import-admission.mjs',
@@ -190,7 +192,40 @@ export const verificationShards = Object.freeze({
   ]),
 })
 
-export function assertVerificationShardCoverage(scripts, shards = verificationShards) {
+function assertShardKeys(shards) {
+  const keys = Reflect.ownKeys(shards)
+  if (keys.length !== 2 || !keys.includes('1') || !keys.includes('2')) {
+    throw new Error('Invalid verify shard keys: expected exactly 1 and 2')
+  }
+  if (!Array.isArray(shards['1']) || !Array.isArray(shards['2'])) {
+    throw new Error('Invalid verify shard allocation: expected script arrays')
+  }
+}
+
+export function createVerificationShards(scripts, overrides = verificationShardOverrides) {
+  assertShardKeys(overrides)
+  const registered = new Set(scripts)
+  const destinations = new Map()
+  for (const [shard, entries] of Object.entries(overrides)) {
+    for (const script of entries) {
+      if (!registered.has(script)) throw new Error(`Invalid verify shard allocation: stale override ${script}`)
+      if (destinations.has(script)) throw new Error(`Invalid verify shard allocation: duplicate override ${script}`)
+      destinations.set(script, shard)
+    }
+  }
+  const shards = { '1': [], '2': [] }
+  for (const script of scripts) {
+    // Registry paths are stable identities; use the entire SHA-256 integer.
+    const shard = destinations.get(script)
+      ?? String(Number(BigInt(`0x${createHash('sha256').update(script).digest('hex')}`) % 2n) + 1)
+    shards[shard].push(script)
+  }
+  assertVerificationShardCoverage(scripts, shards)
+  return Object.freeze({ '1': Object.freeze(shards['1']), '2': Object.freeze(shards['2']) })
+}
+
+export function assertVerificationShardCoverage(scripts, shards) {
+  assertShardKeys(shards)
   const assigned = Object.values(shards).flat()
   const registered = new Set(scripts)
   const duplicates = assigned.filter((script, index) => assigned.indexOf(script) !== index)
@@ -201,9 +236,9 @@ export function assertVerificationShardCoverage(scripts, shards = verificationSh
   }
 }
 
-export function verificationShardScripts(scripts, shard = 'all') {
+export function verificationShardScripts(scripts, shard = 'all', shards) {
   if (shard === 'all') return scripts
-  if (!Object.hasOwn(verificationShards, shard)) throw new Error(`Unknown verification shard: ${shard}`)
-  const assigned = new Set(verificationShards[shard])
+  if (!Object.hasOwn(shards, shard)) throw new Error(`Unknown verification shard: ${shard}`)
+  const assigned = new Set(shards[shard])
   return scripts.filter(script => assigned.has(script))
 }

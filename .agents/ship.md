@@ -70,6 +70,12 @@ cannot lower these boundaries. Main always runs Full; all six E2Es remain fixed.
 Outside these boundaries, the Agent chooses the existing pack; this is not
 shadow mode. Assess consumers rather than selecting the cheapest label.
 
+Verify shards derive from registry paths: new scripts use SHA-256 modulo 2
+plus 1 without shard registration. Set an explicit balance override in
+`scripts/lib/verificationShards.mjs` only when needed; remove stale overrides.
+Only shard keys `{1, 2}` are valid, and the complete allocation must have no
+duplicates or omissions.
+
 Read **Risk Agent selection** in either `verify-1` or `verify-2` job summary for `actualPack`,
 `classifierPack`, `decision` and `advice`. The first rollout can report
 `unavailable-on-base`; the new policy takes effect only after it reaches main.

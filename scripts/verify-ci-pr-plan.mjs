@@ -6,7 +6,12 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { classifyActionsChanges, planPullRequest, parseRiskAdvice, applyAgentChoice } from './ci-pr-plan.mjs'
 
-import { assertVerificationShardCoverage, verificationShards } from './lib/verificationShards.mjs'
+import {
+  assertVerificationShardCoverage,
+  createVerificationShards,
+  verificationShardOverrides,
+  verificationShardScripts,
+} from './lib/verificationShards.mjs'
 
 const identity = { head: 'a'.repeat(40), base: 'b'.repeat(40), pack: 'all' }
 const suggestion = { head: identity.head, base: identity.base, pack: 'ui', reason: 'Only local presentation changed.' }
@@ -202,13 +207,43 @@ for (const pack of Object.keys(registry.packs)) {
   assert.deepEqual([...partition].sort(), [...complete.scripts].sort(), `${pack}: workers preserve the complete pack union`)
   assert.deepEqual(complete.scripts, registry.packs[pack], 'local Full remains unpartitioned')
 }
-const allocated = Object.values(verificationShards).flat()
-assertVerificationShardCoverage(allocated)
-assert.throws(() => assertVerificationShardCoverage([...allocated, 'scripts/future-check.mjs']), /missing/,
-  'adding an unassigned registry script fails closed before execution')
-assert.throws(() => assertVerificationShardCoverage(allocated.slice(1)), /stale/,
-  'retired or moved scripts require explicit manifest maintenance')
-assert.throws(() => assertVerificationShardCoverage(allocated, { ...verificationShards, extra: [allocated[0]] }), /duplicates/)
+const allocated = Object.values(verificationShardOverrides).flat()
+const allocation = createVerificationShards(allocated)
+assert.deepEqual(allocation, verificationShardOverrides, 'balance overrides retain every current destination')
+assertVerificationShardCoverage(allocated, allocation)
+const futureScript = 'scripts/future-check.mjs'
+const futureRegistry = [...allocated, futureScript]
+const futureAllocation = createVerificationShards(futureRegistry)
+assert(!futureAllocation['1'].includes(futureScript))
+assert(futureAllocation['2'].includes(futureScript), 'fixture SHA-256 ends in 2b: modulo 2 plus 1 is shard 2')
+assertVerificationShardCoverage(futureRegistry, futureAllocation)
+for (const pack of Object.values(registry.packs)) {
+  const selected = [...pack.filter(script => allocated.includes(script)), futureScript]
+  const shards = ['1', '2'].map(shard => verificationShardScripts(selected, shard, futureAllocation))
+  assert.equal(new Set(shards.flat()).size, selected.length, 'new script has exactly one destination in each pack')
+  assert.deepEqual(shards.flat().sort(), [...selected].sort(), 'new script preserves each pack union')
+}
+const reordered = createVerificationShards([...futureRegistry].reverse(), {
+  '2': verificationShardOverrides['2'], '1': verificationShardOverrides['1'],
+})
+for (const shard of ['1', '2']) assert.deepEqual([...reordered[shard]].sort(), [...futureAllocation[shard]].sort(),
+  'hash assignment is independent of registry and override key order')
+assert.throws(() => assertVerificationShardCoverage(futureRegistry, allocation), /missing/)
+assert.throws(() => createVerificationShards(allocated.slice(1)), /stale/,
+  'retired or moved scripts require removing their balance override')
+assert.throws(() => createVerificationShards(allocated, {
+  ...verificationShardOverrides, '2': [...verificationShardOverrides['2'], allocated[0]],
+}), /duplicate/)
+assert.throws(() => createVerificationShards([...allocated, allocated[0]]), /Invalid verify shard allocation/)
+for (const invalid of [
+  { ...verificationShardOverrides, '3': [] },
+  { '1': verificationShardOverrides['1'], '3': verificationShardOverrides['2'] },
+  { ...verificationShardOverrides, extra: [] },
+  { '1': allocated },
+]) {
+  assert.throws(() => createVerificationShards(allocated, invalid), /expected exactly 1 and 2/)
+  assert.throws(() => assertVerificationShardCoverage(allocated, invalid), /expected exactly 1 and 2/)
+}
 for (const args of [
   ['--shard'], ['--shard', '3'], ['--shard', '1'], ['--lane', 'e2e', '--shard', '1'],
   ['--lane', 'verify', '--shard', '1', '--shard', '2'], ['--lane', 'verify', '--shard', '1', '--shard'],

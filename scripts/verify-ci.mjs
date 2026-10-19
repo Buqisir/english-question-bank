@@ -28,7 +28,7 @@ import {
 } from './lib/verificationScheduler.mjs'
 
 import {
-  assertVerificationShardCoverage,
+  createVerificationShards,
   verificationShardScripts,
 } from './lib/verificationShards.mjs'
 
@@ -576,7 +576,7 @@ function verificationPlan() {
 let plan
 let concurrency
 try {
-  assertVerificationShardCoverage(verificationLaneScripts(registry.scripts, 'verify'))
+  const shardAllocation = createVerificationShards(verificationLaneScripts(registry.scripts, 'verify'))
   plan = verificationPlan()
   const lanes = argumentValues('--lane')
   const laneFlagCount = process.argv.filter((arg) => arg === '--lane').length
@@ -592,7 +592,7 @@ try {
   const shard = shards[0] ?? 'all'
   if (shard !== 'all' && lane !== 'verify') throw new Error('--shard requires --lane verify')
   plan = { ...plan, lane, shard,
-    scripts: verificationShardScripts(verificationLaneScripts(plan.scripts, lane), shard) }
+    scripts: verificationShardScripts(verificationLaneScripts(plan.scripts, lane), shard, shardAllocation) }
   concurrency = verificationConcurrency()
 } catch (error) {
   console.error(error.message)

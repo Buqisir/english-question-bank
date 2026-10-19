@@ -146,8 +146,9 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   `main`. Stable required checks remain `verify` and `e2e`. Independent workers
   `verify-1`, `verify-2`, `e2e-seams` and `e2e-render` use isolated runners
   within trusted-base boundaries; `verify` and `e2e` each aggregate their two
-  workers. Verify shards use an explicit allocation with a disjoint/full-union
-  assertion; unallocated scripts fail closed. Full remains
+  workers. Verify shards use registry-path SHA-256 modulo 2 plus 1 with explicit
+  balance overrides and a disjoint/full-union assertion; stale overrides and
+  shard keys other than exactly `{1, 2}` fail closed. Full remains
   required for paper/security/shared/high/unknown risks, invalid or missing
   exact-head/base advice, and main. `e2e-seams` runs all six browser seams;
   `e2e-render` runs the selected pack's e2e lane. Both required checks and all

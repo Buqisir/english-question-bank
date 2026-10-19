@@ -23,12 +23,14 @@ queue/receipts remain unverified; do not claim their deletion or replay them.
 ### Worker topology
 
 Required checks remain `verify` and `e2e`. The v3 workflow runs independent
-`verify-1` and `verify-2` (explicit disjoint shards of the selected verify lane),
+`verify-1` and `verify-2` (disjoint shards of the selected verify lane),
 `e2e-seams` (all six fixed browser seams) and `e2e-render` (selected pack e2e
 lane) workers. Each required check always runs after its two workers and requires
-each result to be `success`. The shard allocation is checked against the full
-verify registry before pack selection: new scripts need explicit assignment;
-missing, stale or duplicate allocations fail closed. No protection settings
+each result to be `success`. The full shard allocation is generated from the
+verify registry before pack selection: new script paths use SHA-256 modulo 2
+plus 1 without registration; explicit balance overrides can change destinations.
+Missing or duplicate allocations, stale overrides and shard keys other than
+exactly `{1, 2}` fail closed. No protection settings
 change is needed. Inspect all workers and required checks on natural PR and
 exact-main runs. Deployment and watcher readers recognize only the exact v3
 `{verify-1, verify-2, verify, e2e-seams, e2e-render, e2e}` job set; every job must
