@@ -12,12 +12,20 @@ export const resolveRef = (repo, ref) => git(repo, ['rev-parse', '--verify', `${
 export function snapshot(repo, sha, directory, worktree = null) {
   if (worktree && resolveRef(worktree, 'HEAD') !== sha) throw new Error('Candidate worktree HEAD does not match candidate ref')
   const files = new Map()
+  let supportedChannels = []
   const visit = (relative) => {
     if (files.has(relative)) return
     if (relative.startsWith('../') || path.isAbsolute(relative) || !relative.endsWith('.mjs')) {
       throw new Error(`Unsupported replay module: ${relative}`)
     }
     const source = worktree ? readFileSync(path.join(worktree, relative), 'utf8') : git(repo, ['show', `${sha}:${relative}`])
+    if (/\bimport\s*\(/u.test(source)) throw new Error(`Unsupported dynamic import in replay module: ${relative}`)
+    if (relative === entryPath) {
+      supportedChannels = [
+        ['R', 'buildSourceReferences'],
+        ['T', 'buildTranscriptJoinDocuments'],
+      ].filter(([, name]) => new RegExp(`export\\s+function\\s*\\*?\\s+${name}\\b`, 'u').test(source)).map(([channel]) => channel)
+    }
     files.set(relative, sha256(source))
     const imports = /(?:^|\n)(?:import|export)\s+(?:[^;]*?\s+from\s*)?['"]([^'"]+)['"]/gu
     for (const match of source.matchAll(imports)) {
@@ -32,5 +40,5 @@ export function snapshot(repo, sha, directory, worktree = null) {
   }
   visit(entryPath)
   const modules = Object.fromEntries([...files.entries()].sort(([a], [b]) => a.localeCompare(b)))
-  return { sha, moduleDigest: digest(modules), modules, workingTree: worktree ? path.resolve(worktree) : null }
+  return { sha, moduleDigest: digest(modules), modules, supportedChannels, workingTree: worktree ? path.resolve(worktree) : null }
 }

@@ -622,6 +622,62 @@ function buildEvidence(paperId, documents, trace, figures) {
   })
 }
 
+// JSON-only production orchestration, shared by compile and corpus replay.
+// Generators retain page-at-a-time processing and document-local transcript state.
+export function* buildTranscriptJoinDocuments({ documents, trace, drafts, only = null }) {
+  if (trace.schemaVersion !== 'ocr-proofread-trace-v2') fail('OCR trace predates staged-at-compile evidence; rerun `evidence`')
+  for (const document of documents.filter((entry) => !entry.renditionOf)) {
+    const answerBearing = ['official_answers', 'question_and_answers'].includes(document.role)
+    function* pages() {
+      const transitions = []
+      let currentPage = null
+      let sourceItemIndex = null
+      const transcriptState = new Proxy({ inTranscript: false }, {
+        set(target, key, value) {
+          transitions.push({ page: currentPage, sourceItemIndex, key, assignment: transitions.length, value })
+          target[key] = value
+          return true
+        },
+      })
+      for (const tracePage of trace.pages.filter((page) => page.documentId === document.documentId)) {
+        const label = tracePage.key
+        if (only && !only.includes(label)) continue
+        currentPage = tracePage.page
+        const draft = drafts[label]
+        if (!draft) fail(`Page draft ${label} is missing`)
+        if (draft.documentId !== document.documentId || draft.page !== tracePage.page) fail(`${label}: draft identity mismatch`)
+        const lines = pageLines(tracePage.words)
+        const stateBefore = transcriptState.inTranscript
+        const transitionStart = transitions.length
+        sourceItemIndex = null
+        const sourceItems = draft.items || []
+        // Observation only: iterator values and source items remain unchanged.
+        const observedItems = new Proxy(sourceItems, {
+          get(target, key, receiver) {
+            if (key === 'entries' || key === Symbol.iterator) return function* () {
+              for (let index = 0; index < target.length; index += 1) {
+                sourceItemIndex = index
+                yield key === 'entries' ? [index, target[index]] : target[index]
+              }
+            }
+            return Reflect.get(target, key, receiver)
+          },
+        })
+        let draftItems = sourceItems
+        let joins = 0
+        if (answerBearing) {
+          const joined = joinTranscriptTurns(observedItems, lines, transcriptState, label)
+          draftItems = joined.items
+          joins = joined.joins
+        }
+        yield { tracePage, draft, lines, items: draftItems, joins, stateBefore,
+          stateAfter: transcriptState.inTranscript, transitions: transitions.slice(transitionStart) }
+      }
+    }
+    yield { document, pages: pages() }
+  }
+}
+
 function compile(paperId) {
   const { paperDir, documents, work } = context(paperId)
   const trace = readJson(path.join(work, 'trace.json'), 'OCR trace')
@@ -641,30 +697,26 @@ function compile(paperId) {
   const flagsDir = path.join(work, 'source-flags')
   const noFigures = existsSync(flagsDir) ? readdirSync(flagsDir).filter((name) => name.endsWith('.json'))
     .flatMap((name) => readJson(path.join(flagsDir, name), 'Source flags').noFigures || []) : []
+  const drafts = {}
   const figureHints = missingFigureHints({
     only,
     noFigures,
     pages: trace.pages.map((page) => {
       const file = path.join(work, 'drafts', `${page.key}.json`)
+      drafts[page.key] = existsSync(file) ? readJson(file, `Page draft ${page.key}`) : null
       return { ...page, role: documents.find((document) => document.documentId === page.documentId)?.role,
-        draft: existsSync(file) ? readJson(file, `Page draft ${page.key}`) : null }
+        draft: drafts[page.key] }
     }),
   })
   const missingFigures = figureHints.filter((hint) => hint.missing)
   if (missingFigures.length) fail(missingFigures.map(missingFigureMessage).join('\n'))
   let corrected = 0
   let transcriptJoins = 0
-  for (const document of documents) {
+  for (const { document, pages: transcriptPages } of buildTranscriptJoinDocuments({ documents, trace, drafts, only })) {
     const pages = []
     let itemNumber = 0
-    const answerBearing = ['official_answers', 'question_and_answers'].includes(document.role)
-    const transcriptState = { inTranscript: false }
-    for (const tracePage of trace.pages.filter((page) => page.documentId === document.documentId)) {
+    for (const { tracePage, draft, lines, items: draftItems, joins } of transcriptPages) {
       const label = tracePage.key
-      if (only && !only.includes(label)) continue
-      const draft = readJson(path.join(work, 'drafts', `${label}.json`), `Page draft ${label}`)
-      if (draft.documentId !== document.documentId || draft.page !== tracePage.page) fail(`${label}: draft identity mismatch`)
-      const lines = pageLines(tracePage.words)
       const byNumber = new Map(tracePage.words.map((word) => [word.number, word]))
       const claimed = new Map()
       const claim = (number, owner) => {
@@ -676,12 +728,7 @@ function compile(paperId) {
       furniture.forEach((number) => claim(number, 'furniture'))
       const orderedItems = []
       const resolvedItems = []
-      let draftItems = draft.items || []
-      if (answerBearing) {
-        const joined = joinTranscriptTurns(draftItems, lines, transcriptState, label)
-        draftItems = joined.items
-        transcriptJoins += joined.joins
-      }
+      transcriptJoins += joins
       for (const [index, item] of draftItems.entries()) {
         const itemLabel = `${label} item ${index + 1}`
         if (item.imageOnly === true) {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process'
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { applyDeclarations, compare, validateDeclarations } from './compare.mjs'
@@ -35,7 +35,8 @@ function locateReferenceDiffs(differences, directory, paper) {
 export function run(options) {
   const started = performance.now()
   const report = { schemaVersion: 'eqb-replay-report-v1', ok: false, jobs: 1, records: [], errors: [] }
-  const temp = mkdtempSync('/tmp/eqb-replay-')
+  mkdirSync(path.join(root, '.scratch'), { recursive: true })
+  const temp = mkdtempSync(path.join(root, '.scratch/replay-'))
   let peakWorkerRssBytes = 0
   try {
     if (Number(options.jobs || 1) !== 1) throw new Error('Replay only supports --jobs 1')
@@ -47,6 +48,9 @@ export function run(options) {
     const directory = path.resolve(options.corpus)
     const manifest = verifyCorpus(directory)
     report.corpusDigest = manifest.corpusDigest
+    if (options['expect-corpus-digest'] && options['expect-corpus-digest'] !== manifest.corpusDigest) {
+      throw new Error(`Expected corpus digest mismatch: expected ${options['expect-corpus-digest']}, got ${manifest.corpusDigest}`)
+    }
     report.coverage = coverage(manifest)
     report.channels = channels
     const declarations = options.expected ? validateDeclarations(readJson(options.expected)) : []
@@ -56,6 +60,14 @@ export function run(options) {
     const candidateSha = resolveRef(repo, options.candidate)
     report.baseline = snapshot(repo, baselineSha, path.join(temp, 'baseline'))
     report.candidate = snapshot(repo, candidateSha, path.join(temp, 'candidate'), options['candidate-worktree'])
+    for (const version of ['baseline', 'candidate']) {
+      for (const channel of channels) {
+        if (!report[version].supportedChannels.includes(channel)) {
+          throw new Error(`${version} 不支持该通道 ${channel}：缺少生产入口；T 需要 buildTranscriptJoinDocuments，请采用本次纯抽取提交作为新 baseline`)
+        }
+      }
+    }
+    let invocation = 0
     for (const paper of manifest.papers) {
       for (const channel of channels) {
         const record = { paperId: paper.paperId, channel }
@@ -67,10 +79,12 @@ export function run(options) {
         const results = []
         const metrics = {}
         for (const version of ['baseline', 'candidate']) {
-          const output = path.join(temp, `${version}-output.json`)
+          const callId = `call-${String(++invocation).padStart(6, '0')}`
+          const output = path.join(temp, `${callId}-${version}-output.json`)
+          const identity = { paperId: paper.paperId, channel, ref: report[version].sha, version, callId }
           const child = spawnSync(process.execPath, [
             path.join(import.meta.dirname, 'worker.mjs'), path.join(temp, version, entryPath),
-            directory, paper.paperId, channel, output,
+            directory, paper.paperId, channel, output, identity.ref, version, callId,
           ], { encoding: 'utf8', maxBuffer: 1024 * 1024, timeout: 120_000,
             env: { ...process.env, OMP_THREAD_LIMIT: '1' } })
           if (child.status !== 0 || child.error) {
@@ -79,7 +93,11 @@ export function run(options) {
             continue
           }
           try {
+            if (!existsSync(output)) throw new Error(`${callId}: worker exited zero but did not produce its output`)
             const result = readJson(output)
+            for (const [key, value] of Object.entries(identity)) {
+              if (result[key] !== value) throw new Error(`${callId}: worker output identity mismatch: ${key}`)
+            }
             if (!Object.hasOwn(result, 'value') || result.value === null
               || !Number.isFinite(result.peakRssBytes) || !Number.isFinite(result.elapsedMs)) {
               throw new Error('Invalid replay worker output')
@@ -90,6 +108,8 @@ export function run(options) {
           } catch (error) {
             results.push(null)
             metrics[version] = { error: error.message }
+          } finally {
+            rmSync(output, { force: true })
           }
         }
         record.metrics = metrics
@@ -145,7 +165,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const options = {}
   for (let index = 2; index < process.argv.length; index += 2) {
     const key = process.argv[index]
-    const allowed = ['corpus', 'baseline', 'candidate', 'expected', 'report', 'channels', 'jobs', 'repo', 'candidate-worktree']
+    const allowed = ['corpus', 'expect-corpus-digest', 'baseline', 'candidate', 'expected', 'report', 'channels', 'jobs', 'repo', 'candidate-worktree']
     if (!key.startsWith('--') || !allowed.includes(key.slice(2)) || !process.argv[index + 1]) {
       console.error(`Unknown/missing option: ${key}`)
       process.exit(1)

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart, buildSourceReferences } from './ocr-proofread.mjs'
+import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart, buildSourceReferences,
+  buildTranscriptJoinDocuments } from './ocr-proofread.mjs'
 
 function fixture(texts, lefts = []) {
   const items = texts.map((text, i) => ({ lines: `L${i + 1}`, text }))
@@ -13,6 +14,46 @@ function fixture(texts, lefts = []) {
   }))
   return { items, lines }
 }
+
+test('production transcript orchestration owns roles, rendition filtering, trace order and document/page state', () => {
+  const documents = [
+    { documentId: 'question', role: 'question_source' },
+    { documentId: 'copy', role: 'official_answers', renditionOf: 'answers' },
+    { documentId: 'answers', role: 'official_answers' },
+    { documentId: 'other', role: 'question_and_answers' },
+  ]
+  const drafts = {}
+  const makePage = (documentId, page, texts) => {
+    const { items, lines } = fixture(texts)
+    const key = `${documentId}-p${page}`
+    drafts[key] = { documentId, page, items }
+    return { documentId, page, key, words: lines.flatMap((line, index) =>
+      line.words.map((word) => ({ ...word, line: index }))) }
+  }
+  const trace = { schemaVersion: 'ocr-proofread-trace-v2', pages: [
+    makePage('answers', 2, ['Text 1']),
+    makePage('question', 1, ['Text 1', 'M: These are some words', 'and these continue that turn']),
+    makePage('answers', 1, ['M: These are some words', 'and these continue that turn']),
+    makePage('other', 1, ['M: These are some words', 'and these continue that turn']),
+    makePage('copy', 1, ['Text 1']),
+  ] }
+  const input = { documents, trace, drafts }
+  const original = structuredClone(input)
+  const result = [...buildTranscriptJoinDocuments(input)].map(({ document, pages }) => ({ document, pages: [...pages] }))
+  assert.deepEqual(result.map(({ document }) => document.documentId), ['question', 'answers', 'other'])
+  assert.equal(result[0].pages[0].joins, 0)
+  assert.deepEqual(result[1].pages.map(({ tracePage }) => tracePage.page), [2, 1])
+  assert.deepEqual(result[1].pages.map(({ stateBefore }) => stateBefore), [false, true])
+  assert.deepEqual(result[1].pages.map(({ joins }) => joins), [0, 1])
+  assert.equal(result[2].pages[0].stateBefore, false)
+  assert.equal(result[2].pages[0].joins, 0)
+  const selected = [...buildTranscriptJoinDocuments({ ...input, only: ['answers-p1'] })]
+    .flatMap(({ pages }) => [...pages])
+  assert.equal(selected.length, 1)
+  assert.equal(selected[0].stateBefore, false)
+  assert.equal(selected[0].joins, 0)
+  assert.deepEqual(input, original)
+})
 
 test('joins source bold spans and Chinese glosses without losing their occurrences', () => {
   const { items, lines } = fixture(['Text 1', 'M: Hello hello（注）', 'hello again.', 'W: Hello.'])
