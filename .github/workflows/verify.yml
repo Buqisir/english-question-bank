@@ -392,11 +392,10 @@ jobs:
       - name: Install verification system dependencies
         if: ${{ steps.lane.outputs.count != '0' }}
         run: |
+          # These six render scripts consume PDF/image sources, Chromium and
+          # prebuilt audio; DOCX conversion and signal segmentation run in verify.
           sudo apt-get update
-          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
-          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
-          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
-          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
+          sudo apt-get install --yes ffmpeg poppler-utils imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip
           printf '%s\n' \
             '#!/bin/sh' \
             'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
@@ -489,11 +488,10 @@ jobs:
       - name: Install verification system dependencies
         if: ${{ steps.lane.outputs.count != '0' }}
         run: |
+          # These six render scripts consume PDF/image sources, Chromium and
+          # prebuilt audio; DOCX conversion and signal segmentation run in verify.
           sudo apt-get update
-          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
-          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
-          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
-          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
+          sudo apt-get install --yes ffmpeg poppler-utils imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip
           printf '%s\n' \
             '#!/bin/sh' \
             'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
