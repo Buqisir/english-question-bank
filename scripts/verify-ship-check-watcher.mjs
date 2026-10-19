@@ -57,7 +57,7 @@ function run({
 }
 
 function job(name, {
-  id = ({ verify: 60, e2e: 61, 'e2e-render': 62, 'e2e-seams': 63, 'verify-1': 64, 'verify-2': 65 })[name] ?? 66,
+  id = ({ verify: 60, e2e: 61, 'e2e-render-1': 62, 'e2e-seams-1': 63, 'verify-1': 64, 'verify-2': 65, 'e2e-render-2': 66, 'e2e-seams-2': 67 })[name] ?? 68,
   runId = 40,
   attempt = 1,
   status = 'completed',
@@ -69,7 +69,7 @@ function job(name, {
 }
 
 function workflowJobs(options = {}, overrides = {}) {
-  return ['verify', 'e2e', 'e2e-render', 'e2e-seams', 'verify-1', 'verify-2'].map(name =>
+  return ['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e'].map(name =>
     job(name, { ...options, ...overrides[name] }))
 }
 
@@ -122,34 +122,40 @@ assert.deepEqual(run().pull_requests, [], 'an exact run-name routes the real emp
 assert.equal(success.run.runId, 40)
 assert.equal(success.run.attempt, 1)
 assert.equal(success.run.conclusion, 'success')
-assert.deepEqual(success.run.jobs.map(({ name }) => name).sort(), ['e2e', 'e2e-render', 'e2e-seams', 'verify', 'verify-1', 'verify-2'])
+assert.deepEqual(success.run.jobs.map(({ name }) => name).sort(), ['e2e', 'e2e-render-1', 'e2e-render-2', 'e2e-seams-1', 'e2e-seams-2', 'verify', 'verify-1', 'verify-2'])
 
-const v3Jobs = ['verify-1', 'verify-2', 'verify', 'e2e-seams', 'e2e-render', 'e2e'].map((name, index) => job(name, { id: 60 + index }))
-assert.equal((await readShipCheck(target, actionsReader({ jobs: v3Jobs }))).run.jobs.length, 6)
-assert.equal((await readShipMain({ head }, mainReader({ jobs: v3Jobs }))).run.jobs.length, 6)
+const v4Jobs = ['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e'].map((name, index) => job(name, { id: 60 + index }))
+assert.equal((await readShipCheck(target, actionsReader({ jobs: v4Jobs }))).run.jobs.length, 8)
+assert.equal((await readShipMain({ head }, mainReader({ jobs: v4Jobs }))).run.jobs.length, 8)
 const historicalJobs = [job('e2e'), job('verify')]
 await assert.rejects(readShipCheck(target, actionsReader({ jobs: historicalJobs })), /missing or ambiguous/,
   'reject the historical successful v1 pair')
 await assert.rejects(readShipMain({ head }, mainReader({ jobs: historicalJobs })), /missing or ambiguous/,
   'exact-main also rejects the historical successful v1 pair')
 for (const jobs of [
-  v3Jobs.filter(job => !['verify-1', 'verify-2'].includes(job.name)),
-  v3Jobs.filter(job => !['e2e-seams', 'e2e-render'].includes(job.name)),
-  ...['verify-1', 'verify-2', 'verify', 'e2e-seams', 'e2e-render', 'e2e'].map(name => v3Jobs.filter(job => job.name !== name)),
-  [...v3Jobs, job('unknown', { id: 70 })],
-  [...v3Jobs, job('e2e-seams', { id: 70 })],
+  ['verify-1', 'verify-2', 'verify', 'e2e-seams', 'e2e-render', 'e2e'].map((name, index) => job(name, { id: 60 + index })),
+  ['verify', 'e2e', 'e2e-seams', 'e2e-render'].map((name, index) => job(name, { id: 60 + index })),
+  v4Jobs.filter(job => !['verify-1', 'verify-2'].includes(job.name)),
+  v4Jobs.filter(job => !['e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2'].includes(job.name)),
+  ...['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e'].map(name => v4Jobs.filter(job => job.name !== name)),
+  [...v4Jobs, job('unknown', { id: 70 })],
+  [...v4Jobs, job('e2e-seams-1', { id: 70 })],
 ]) {
-  await assert.rejects(readShipCheck(target, actionsReader({ jobs })), undefined, 'reject incomplete or ambiguous v3 topology')
+  await assert.rejects(readShipCheck(target, actionsReader({ jobs })), undefined, 'reject incomplete or ambiguous v4 topology')
   await assert.rejects(readShipMain({ head }, mainReader({ jobs })), undefined, 'exact-main rejects historical or ambiguous topology')
 }
-for (const name of ['verify-1', 'verify-2', 'e2e-seams', 'e2e-render']) {
-  assert.deepEqual(await readShipCheck(target, actionsReader({ jobs: v3Jobs.map(job =>
-    job.name === name ? { ...job, status: 'in_progress', conclusion: null } : job) })), { pending: true },
+for (const name of ['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e']) {
+  const pendingJobs = v4Jobs.map(job => job.name === name ? { ...job, status: 'in_progress', conclusion: null } : job)
+  assert.deepEqual(await readShipCheck(target, actionsReader({ jobs: pendingJobs })), { pending: true },
     'pending worker cannot produce a terminal success hint')
+  assert.deepEqual(await readShipMain({ head }, mainReader({ jobs: pendingJobs })), { pending: true },
+    'pending worker cannot authorize exact-main success')
   for (const conclusion of ['failure', 'cancelled', 'skipped']) {
-    const jobs = v3Jobs.map(job => job.name === name ? { ...job, conclusion } : job)
+    const jobs = v4Jobs.map(job => job.name === name ? { ...job, conclusion } : job)
     await assert.rejects(readShipCheck(target, actionsReader({ jobs })), /terminal result/,
       'a green aggregate/run cannot conceal an unsuccessful worker')
+    await assert.rejects(readShipMain({ head }, mainReader({ jobs })), /terminal result/,
+      'exact-main also rejects an unsuccessful worker behind a green run')
     const result = await readShipCheck(target, actionsReader({
       runs: [run({ conclusion })], jobs,
     }))
@@ -257,7 +263,7 @@ assert.deepEqual(await readShipCheck(target, async endpoint => {
   if (endpoint.includes('/check-suites/51')) return suite({ id: 51 })
   if (endpoint.includes('/jobs?')) {
     const attempt = endpoint.includes('/attempts/2/') ? 2 : 1
-    return { jobs: workflowJobs({ attempt }), total_count: 6 }
+    return { jobs: workflowJobs({ attempt }), total_count: 8 }
   }
   return endpoint.endsWith('/attempts/2') ? run({ attempt: 2, suiteId: 51 }) : run()
 }), { pending: true }, 'a changed terminal snapshot is not accepted')
@@ -300,7 +306,7 @@ assert.equal((await readShipCheck(target, async endpoint => {
     ? { workflow_runs: hundredRuns, total_count: 101 }
     : { workflow_runs: [run({ id: 101 })], total_count: 101 }
   if (endpoint.includes('/check-suites/')) return suite()
-  if (endpoint.includes('/jobs?')) return { jobs: workflowJobs({ runId: 101 }), total_count: 6 }
+  if (endpoint.includes('/jobs?')) return { jobs: workflowJobs({ runId: 101 }), total_count: 8 }
   return run({ id: 101 })
 })).run.runId, 101)
 
