@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { classifyActionsChanges, planPullRequest, parseRiskAdvice, applyAgentChoice } from './ci-pr-plan.mjs'
+
+import {
+  assertVerificationShardCoverage,
+  createVerificationShards,
+  e2eRenderShardOverrides,
+  verificationShardOverrides,
+  verificationShardScripts,
+} from './lib/verificationShards.mjs'
 
 const identity = { head: 'a'.repeat(40), base: 'b'.repeat(40), pack: 'all' }
 const suggestion = { head: identity.head, base: identity.base, pack: 'ui', reason: 'Only local presentation changed.' }
@@ -104,32 +112,151 @@ const runnerTemp = mkdtempSync(path.join(tmpdir(), 'eqb-ci-bootstrap-'))
 const workflow = readFileSync(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8')
 const selectionShells = [...workflow.matchAll(/        run: \|\n(          plan=[\s\S]*?)\n      - name: Enable pinned pnpm/gu)]
   .map(match => match[1])
-assert.equal(selectionShells.length, 2, 'both isolated runners resolve the trusted natural-event pack')
-assert.equal(selectionShells[0], selectionShells[1], 'neither runner may select a different pack or weaker identity check')
+assert.equal(selectionShells.length, 6, 'all isolated workers resolve the trusted natural-event pack')
+assert(selectionShells.every(shell => shell === selectionShells[0]),
+  'no worker may select a different pack or weaker identity check')
 const selectionShell = selectionShells[0]
-assert.deepEqual([...workflow.slice(workflow.indexOf('\njobs:')).matchAll(/^  ([a-z][a-z0-9-]*):$/gm)].map(match => match[1]),
-  ['verify', 'e2e'], 'preserve the exact two-job Ship/deployment authority topology')
-const [verifyJob, e2eJob] = workflow.slice(workflow.indexOf('\n  verify:')).split('\n  e2e:')
-assert(verifyJob.includes('--pack "$VERIFY_PACK" --lane verify --jobs 2'))
-assert(e2eJob.includes('--pack "$VERIFY_PACK" --lane e2e --jobs 2'))
-assert(!/continue-on-error:|needs:|^    if:/m.test(workflow), 'both jobs run independently and failures remain failures')
-assert(e2eJob.includes("if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}"),
-  'a failed original E2E must not prevent collecting the transferred lane')
-assert.deepEqual([...e2eJob.matchAll(/run: node scripts\/([^\s]+\.mjs)/g)].map(match => match[1]), [
+const jobEntries = [...workflow.slice(workflow.indexOf('\njobs:')).matchAll(/^  ([a-z][a-z0-9-]*):\n([\s\S]*?)(?=^  [a-z][a-z0-9-]*:|$(?![\s\S]))/gm)]
+const jobs = Object.fromEntries(jobEntries.map(([, name, body]) => [name, body]))
+const workerNames = ['verify-1', 'verify-2', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2']
+assert.deepEqual(Object.keys(jobs), ['verify-1', 'verify-2', 'verify', ...workerNames.slice(2), 'e2e'],
+  'preserve the exact v4 worker and required-check topology')
+const verifyJobs = ['verify-1', 'verify-2'].map(name => jobs[name])
+const seamsJobs = ['e2e-seams-1', 'e2e-seams-2'].map(name => jobs[name])
+const renderJobs = ['e2e-render-1', 'e2e-render-2'].map(name => jobs[name])
+const verifyJob = verifyJobs[0]
+for (const [lane, workers] of [['verify', verifyJobs], ['e2e', renderJobs]]) {
+  for (const [index, worker] of workers.entries()) {
+    assert(worker.includes(`--pack "$VERIFY_PACK" --lane ${lane} --shard ${index + 1} --jobs 2`))
+  }
+}
+for (const worker of seamsJobs) assert(!worker.includes('verify:all'), 'fixed seams do not repeat pack preflight or scripts')
+assert(!/continue-on-error:/.test(workflow), 'failures remain failures')
+for (const name of workerNames) {
+  const worker = jobs[name]
+  assert(!/needs:|^    if:/m.test(worker), 'workers run independently on every natural event')
+  for (const setup of ['actions/checkout@v4', 'actions/setup-node@v4', 'fetch-depth: 0',
+    'persist-credentials: false', 'pnpm -C app install --frozen-lockfile', 'npm --prefix server ci',
+    'pnpm -C app exec playwright install --with-deps --no-shell chromium']) assert(worker.includes(setup), setup)
+}
+for (const renderJob of renderJobs) assert(renderJob.includes("if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}"),
+  'render setup and nonempty lane are required for execution')
+const seamScripts = [
   'verify-draft-pagination-renderer.mjs',
   'verify-draft-pagination-dom-contract.mjs',
   'verify-a3-imposition.mjs',
   'verify-reorder-suggest.mjs',
   'verify-paper-normalization-grammar-fill-browser.mjs',
   'smoke-golden-path.mjs',
-], 'all six existing E2E seams remain intact and in order')
+]
+const assignedSeams = seamsJobs.map(worker => [...worker.matchAll(/run: node scripts\/([^\s]+\.mjs)/g)].map(match => match[1]))
+assert.deepEqual(assignedSeams, [
+  [seamScripts[0], seamScripts[3]],
+  [seamScripts[1], seamScripts[2], seamScripts[4], seamScripts[5]],
+], 'balance fixed seams without changing their internal behavior')
+assert.deepEqual(assignedSeams.flat().sort(), [...seamScripts].sort(), 'fixed seams form a disjoint full union')
+for (const script of seamScripts) {
+  assert.equal(workflow.split(`run: node scripts/${script}`).length - 1, 1, `${script} executes exactly once in every pack`)
+  const seamStep = seamsJobs.flatMap(worker => worker.split('      - name:')).find(step => step.includes(`run: node scripts/${script}`))
+  assert(seamStep && !/\bif:/.test(seamStep), `${script} is mandatory, never conditionally skipped`)
+}
+for (const [name, needs, variables] of [
+  ['verify', ['verify-1', 'verify-2'], ['SHARD_1_RESULT', 'SHARD_2_RESULT']],
+  ['e2e', workerNames.slice(2), ['SEAMS_1_RESULT', 'SEAMS_2_RESULT', 'RENDER_1_RESULT', 'RENDER_2_RESULT']],
+]) {
+  const aggregate = jobs[name]
+  assert(aggregate.includes(`    name: ${name}\n`))
+  assert(aggregate.includes(`    needs: [${needs.join(', ')}]\n`))
+  assert(aggregate.includes('    if: ${{ always() }}\n'))
+  for (const [index, worker] of needs.entries()) assert(aggregate.includes(`${variables[index]}: \${{ needs.${worker}.result }}`))
+  const shell = aggregate.match(/        run: \|\n([\s\S]*)/u)?.[1]
+  assert(shell, 'exercise the actual aggregation shell')
+  const results = ['success', 'failure', 'cancelled', 'skipped', '']
+  const combinations = variables.reduce(states => states.flatMap(state => results.map(result => [...state, result])), [[]])
+  // Batch the process launches through one shell; keep the complete result matrix.
+  const assertions = combinations.map(combination => {
+    const environment = variables.map((variable, index) => `${variable}='${combination[index]}'`).join(' ')
+    const success = combination.every(result => result === 'success')
+    return `if ${environment} bash -e -o pipefail -c "$1"; then ${success ? 'true' : 'exit 1'}; else ${success ? 'exit 1' : 'true'}; fi`
+  }).join('\n')
+  execFileSync('bash', ['-e', '-o', 'pipefail', '-c', assertions, 'aggregate-fixture', shell], { stdio: 'pipe' })
+
+}
 const systemInstall = job => job.match(/sudo apt-get install --yes [^\n]+/)?.[0]
 assert(systemInstall(verifyJob))
-assert.equal(systemInstall(e2eJob), systemInstall(verifyJob), 'both render lanes receive the same system dependencies')
-assert(e2eJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
-  'empty render partitions do not add system installation to reduced-pack E2Es')
-const laneShell = e2eJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Install verification system dependencies/u)?.[1]
-assert(laneShell, 'exercise the actual render lane planning shell')
+for (const worker of [...verifyJobs, ...renderJobs]) assert.equal(systemInstall(worker), systemInstall(verifyJob), 'retain system dependencies')
+for (const worker of seamsJobs) assert(!systemInstall(worker), 'browser seams retain Playwright OS dependencies only')
+const laneShells = renderJobs.map(renderJob => {
+  assert(renderJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
+    'empty render partitions do not add system installation')
+  const shell = renderJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Install verification system dependencies/u)?.[1]
+  assert(shell, 'exercise the actual render shard planning shell')
+  return shell
+})
+const registry = JSON.parse(execFileSync(process.execPath, ['scripts/verify-ci.mjs', '--list-json'], { encoding: 'utf8' }))
+for (const pack of Object.keys(registry.packs)) {
+  const plan = (lane, shard = 'all') => JSON.parse(execFileSync(process.execPath,
+    ['scripts/verify-ci.mjs', '--plan-json', '--pack', pack, '--lane', lane, '--shard', shard], { encoding: 'utf8' }))
+  const complete = plan('all')
+  const partition = []
+  for (const lane of ['verify', 'e2e']) {
+    const shards = ['1', '2'].map(shard => plan(lane, shard))
+    const scripts = shards.flatMap(shard => shard.scripts)
+    assert.equal(new Set(scripts).size, scripts.length, `${pack}/${lane}: no duplicate shard scripts`)
+    assert.deepEqual([...scripts].sort(), [...plan(lane).scripts].sort(), `${pack}/${lane}: preserve full lane union`)
+    for (const shard of shards) assert.deepEqual(shard.preflight, complete.preflight, 'each shard retains diff/build preflight')
+    partition.push(...scripts)
+  }
+  assert.equal(new Set(partition).size, partition.length, `${pack}: no duplicate pack scripts`)
+  assert.deepEqual([...partition].sort(), [...complete.scripts].sort(), `${pack}: workers preserve the complete pack union`)
+  assert.deepEqual(complete.scripts, registry.packs[pack], 'local Full remains unpartitioned')
+}
+for (const overrides of [verificationShardOverrides, e2eRenderShardOverrides]) {
+  const allocated = Object.values(overrides).flat()
+  const allocation = createVerificationShards(allocated, overrides)
+  assert.deepEqual(allocation, overrides, 'balance overrides retain every current destination')
+  assertVerificationShardCoverage(allocated, allocation)
+  const futureScript = 'scripts/future-check.mjs'
+  const futureRegistry = [...allocated, futureScript]
+  const futureAllocation = createVerificationShards(futureRegistry, overrides)
+  assert(!futureAllocation['1'].includes(futureScript))
+  assert(futureAllocation['2'].includes(futureScript), 'fixture SHA-256 ends in 2b: modulo 2 plus 1 is shard 2')
+  assertVerificationShardCoverage(futureRegistry, futureAllocation)
+  for (const pack of Object.values(registry.packs)) {
+    const selected = [...pack.filter(script => allocated.includes(script)), futureScript]
+    const shards = ['1', '2'].map(shard => verificationShardScripts(selected, shard, futureAllocation))
+    assert.equal(new Set(shards.flat()).size, selected.length, 'new script has exactly one destination in each pack')
+    assert.deepEqual(shards.flat().sort(), [...selected].sort(), 'new script preserves each pack union')
+  }
+  const reordered = createVerificationShards([...futureRegistry].reverse(), {
+    '2': overrides['2'], '1': overrides['1'],
+  })
+  for (const shard of ['1', '2']) assert.deepEqual([...reordered[shard]].sort(), [...futureAllocation[shard]].sort(),
+    'hash assignment is independent of registry and override key order')
+  assert.throws(() => assertVerificationShardCoverage(futureRegistry, allocation), /missing/)
+  assert.throws(() => createVerificationShards(allocated.slice(1), overrides), /stale/,
+    'retired or moved scripts require removing their balance override')
+  assert.throws(() => createVerificationShards(allocated, {
+    ...overrides, '2': [...overrides['2'], allocated[0]],
+  }), /duplicate/)
+  assert.throws(() => createVerificationShards([...allocated, allocated[0]], overrides), /Invalid verify shard allocation/)
+  for (const invalid of [
+    { ...overrides, '3': [] },
+    { '1': overrides['1'], '3': overrides['2'] },
+    { ...overrides, extra: [] },
+    { '1': allocated },
+  ]) {
+    assert.throws(() => createVerificationShards(allocated, invalid), /expected exactly 1 and 2/)
+    assert.throws(() => assertVerificationShardCoverage(allocated, invalid), /expected exactly 1 and 2/)
+  }
+}
+for (const args of [
+  ['--shard'], ['--shard', '3'], ['--shard', '1'], ['--lane', 'e2e', '--shard', '3'],
+  ['--lane', 'verify', '--shard', '1', '--shard', '2'], ['--lane', 'verify', '--shard', '1', '--shard'],
+]) {
+  assert.equal(spawnSync(process.execPath, ['scripts/verify-ci.mjs', '--plan-json', ...args]).status, 1,
+    `invalid shard args cannot silently omit coverage: ${args.join(' ')}`)
+}
 const bootstrap = (base, head, tested) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', selectionShell], {
   cwd: repository, stdio: 'pipe', env: {
     ...process.env, BASE_SHA: base, HEAD_SHA: head, GITHUB_SHA: tested,
@@ -145,18 +272,22 @@ const write = (file, contents) => {
 }
 const commit = label => { git('add', '.'); git('commit', '-qm', label); return git('rev-parse', 'HEAD') }
 try {
-  const runLanePlan = pack => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', laneShell], {
+  const runLanePlan = (pack, laneShell) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', laneShell], {
     cwd: new URL('..', import.meta.url), stdio: 'pipe', env: {
       ...process.env, VERIFY_PACK: pack, RUNNER_TEMP: runnerTemp,
       GITHUB_OUTPUT: path.join(runnerTemp, 'lane-output'), GITHUB_STEP_SUMMARY: path.join(runnerTemp, 'lane-summary'),
     },
   })
-  for (const [pack, count] of [['all', 6], ['ui', 0], ['feature', 0], ['paper-data', 0], ['import-paper', 3]]) {
-    runLanePlan(pack)
-    assert(readFileSync(path.join(runnerTemp, 'lane-output'), 'utf8').endsWith(`count=${count}\n`),
-      `${pack}: extra setup/execution follows actual selected scripts, not a second routing map`)
+  for (const [index, laneShell] of laneShells.entries()) {
+    for (const [pack, counts] of [['all', [1, 5]], ['ui', [0, 0]], ['feature', [0, 0]], ['paper-data', [0, 0]], ['import-paper', [1, 2]]]) {
+      const count = counts[index]
+      const output = runLanePlan(pack, laneShell).toString()
+      assert(readFileSync(path.join(runnerTemp, 'lane-output'), 'utf8').endsWith(`count=${count}\n`),
+        `${pack}/${index + 1}: extra setup/execution follows actual selected scripts`)
+      assert.equal(output.includes('所选 pack 合法空集合 (scripts=0)'), count === 0, 'successful empty shard records its legitimate selected-pack empty set')
+    }
+    assert.throws(() => runLanePlan('invalid-pack', laneShell), 'lane planning errors fail the job instead of skipping coverage')
   }
-  assert.throws(() => runLanePlan('invalid-pack'), 'lane planning errors fail the job instead of skipping coverage')
   git('init', '-q', '-b', 'main')
   git('config', 'user.name', 'CI fixture')
   git('config', 'user.email', 'ci-fixture@example.invalid')

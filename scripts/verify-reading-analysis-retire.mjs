@@ -76,6 +76,13 @@ for (const relPath of orphanFiles) {
   assert(`orphan file gone: ${relPath}`, gone(relPath))
 }
 
+// Former solo-surface verifier's independent boundary: the retired harness
+// helper must not return through the shared, live PaperSurface.
+assert(
+  'PaperSurface.tsx does not reference groupChrome / groupChromeBlocks',
+  !/groupChrome/i.test(read('app/src/shared-ui/papersurface/PaperSurface.tsx')),
+)
+
 assert('adapter/ directory does not exist', gone('app/src/features/paper-intelligence/adapter'))
 assert('evidence/ directory does not exist', gone('app/src/features/paper-intelligence/evidence'))
 assert('readingAnalysisRoute.ts does not exist', gone('app/src/features/paper-intelligence/paperIntelligenceRoute.ts'))

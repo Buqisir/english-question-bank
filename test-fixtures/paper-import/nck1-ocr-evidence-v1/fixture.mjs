@@ -163,7 +163,10 @@ export function cloneJson(value) {
 export async function makeSyntheticNck1OcrFixture({
   paperId = 'paper-synthetic-ocr-evidence',
 } = {}) {
-  const textFixture = await makeSyntheticNck1PdfFixture({ includeTable: false })
+  const textFixture = await makeSyntheticNck1PdfFixture({
+    includeTable: false,
+    includeExtractionCases: false,
+  })
   const structures = textFixture.sourceDocuments.map((document) => ({
     documentId: document.documentId,
     structure: extractNck1PdfTextStructure(document.bytes, {

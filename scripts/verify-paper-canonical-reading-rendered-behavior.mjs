@@ -14,6 +14,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
+import { capturePageDiagnostics } from './lib/browserPageDiagnostics.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import {
   canonicalAuthorityRef,
@@ -248,6 +249,19 @@ function assertPdfStemOptionAlignment(pdfPath, group, label) {
   }
 }
 
+// The same rendered bytes feed several independent rhythm assertions.
+// Hash the file each time so reusing an output path never reuses stale geometry.
+const pdfBboxes = new Map()
+function pdfBbox(pdfPath) {
+  const digest = createHash('sha256').update(readFileSync(pdfPath)).digest('hex')
+  if (!pdfBboxes.has(digest)) {
+    pdfBboxes.set(digest, execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
+      encoding: 'utf8',
+    }))
+  }
+  return pdfBboxes.get(digest)
+}
+
 function assertPdfInstructionRhythm(pdfPath, group, label) {
   const rhythm = readingPassageLetterTypography.verticalRhythm.targets.printPdf
   const info = execFileSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
@@ -258,9 +272,7 @@ function assertPdfInstructionRhythm(pdfPath, group, label) {
     && Math.abs(Number(pageSize[2]) - 841.89) <= 0.5,
     `${label} is exact CSS A4`,
   )
-  const bbox = execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
-    encoding: 'utf8',
-  })
+  const bbox = pdfBbox(pdfPath)
   const words = [...bbox.matchAll(
     /<word xMin="[^"]+" yMin="([^"]+)" xMax="[^"]+" yMax="([^"]+)">([^<]+)<\/word>/g,
   )].map((match) => ({
@@ -329,9 +341,7 @@ function assertPdfInstructionRhythm(pdfPath, group, label) {
 
 function assertPdfWrappedOptionRhythm(pdfPath, question, label) {
   const rhythm = readingPassageLetterTypography.verticalRhythm.targets.printPdf
-  const bbox = execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
-    encoding: 'utf8',
-  })
+  const bbox = pdfBbox(pdfPath)
   const words = [...bbox.matchAll(
     /<word xMin="[^"]+" yMin="([^"]+)" xMax="[^"]+" yMax="([^"]+)">([^<]+)<\/word>/g,
   )].map((match) => ({
@@ -392,9 +402,7 @@ function assertPdfWrappedOptionRhythm(pdfPath, question, label) {
 
 function assertPdfTwoLineStemRhythm(pdfPath, question, label) {
   const rhythm = readingPassageLetterTypography.verticalRhythm.targets.printPdf
-  const bbox = execFileSync('pdftotext', ['-bbox', pdfPath, '-'], {
-    encoding: 'utf8',
-  })
+  const bbox = pdfBbox(pdfPath)
   const words = [...bbox.matchAll(
     /<word xMin="[^"]+" yMin="([^"]+)" xMax="[^"]+" yMax="([^"]+)">([^<]+)<\/word>/g,
   )].map((match) => ({
@@ -893,8 +901,9 @@ async function assertActualBrowserArtifacts() {
         }))
       const url = new URL('canonical-reading-qa.html', appUrl)
       url.searchParams.set('groupId', group.groupId)
+      const diagnostics = capturePageDiagnostics(page)
       await page.goto(url.href)
-      await page.locator('[data-canonical-reading-semantic-signature]').waitFor()
+      await diagnostics.waitForMarker('[data-canonical-reading-semantic-signature]')
       assert.equal(
         await page.locator(
           '[data-canonical-reading-semantic-signature]',

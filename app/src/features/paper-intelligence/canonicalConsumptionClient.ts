@@ -6,6 +6,7 @@ export type WholePaperConsumption = {
   disposition: 'ready'
   paperId: string
   paperSourceType?: string
+  paperHeaderTitle?: string
   sourceAssetVersion: number | null
   sourceAssetDigest?: string
   publicationDigest?: string

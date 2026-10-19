@@ -8,25 +8,83 @@
 
 Use `.github/workflows/verify.yml` on natural PR and main push events. GitHub
 Actions owns execution, logs, attempts and the `verify`/`e2e` checks. Together
-the two jobs run the base-classified pack on PRs and the complete registry on
-main; `e2e` also runs the six existing browser seams. There is no Amp CI webhook,
+the workers run the base-classified pack on PRs and the complete registry on
+main; `verify` aggregates two workers and `e2e` four, including all six
+existing browser seams across `e2e-seams-1` and `e2e-seams-2`. There is no Amp CI webhook,
 queue or serialized selection prerequisite. A read-only watcher can notify the Ship
 thread, but neither a notification nor its absence changes the Checks.
 PRs still need current-main ancestry and strict/up-to-date protection.
 
-The selected pack is partitioned into disjoint `verify` and `e2e` lanes on
-separate runner workspaces. Both resolve the same immutable event through the
-same trusted-base planner; lane selection only assigns work, never changes
-risk or pack selection. Six whole render-heavy scripts run on the previously
-shorter `e2e` runner, retaining their internal stateful order. Local Full remains
-unpartitioned. Both required jobs must succeed, and either lane's test failure
-fails its job. There are no additional job names, matrix skips, shared render
-directories or changes to branch protection/deployment evidence readers.
+The selected pack is partitioned into disjoint `verify` and `e2e` lanes.
+Six independent runner workspaces resolve the same immutable event through
+the same trusted-base planner; lane/shard selection never changes risk or pack
+selection. `verify-1`/`verify-2` and `e2e-render-1`/`e2e-render-2` partition their lanes using the balance
+overrides in `scripts/lib/verificationShards.mjs`; unlisted registry paths use
+their SHA-256 integer modulo 2 plus 1. New scripts need no shard registration;
+add an explicit override only to rebalance. Before selecting a pack, the runner
+generates the full allocation and asserts no duplicates or omissions against the
+entire registry for each lane. Stale overrides and shard keys other than exactly
+`{1, 2}` fail closed. Filtering preserves registry order within each shard.
+All verify/render shards retain `--jobs 2`, existing resource locks, setup and diff/build
+preflight. Local Full remains unpartitioned.
+
+`e2e-seams-1` runs renderer + reorder; `e2e-seams-2` runs DOM contract + A3 +
+grammar-fill + golden path. All six fixed seams execute exactly once for every
+pack. `e2e-render-1` runs universal-nck1-publish; `e2e-render-2` runs the other
+five registered render scripts, with stable hashing for future unlisted lane
+scripts. Render workers retain `--jobs 2`, resource locks and registry order.
+Browser seams install Chromium with its OS dependencies; only a nonempty render
+shard installs the broader render toolchain and runs its existing diff/build
+preflight. A legitimate empty render shard succeeds with an explicit selected-pack
+empty-set message (`scripts=0`), never a skipped job. Seams workers do not add
+another pack preflight.
+
+The required `verify` job uses `needs: [verify-1, verify-2]`; `e2e` uses
+`needs: [e2e-seams-1, e2e-seams-2, e2e-render-1, e2e-render-2]`. Both use `always()` and explicitly require each
+worker result to be `success`. Failed, cancelled, skipped or missing worker
+results fail that check. Required names remain `verify` and `e2e`; no
+branch-protection change or matrix skip is introduced.
+
+#### Shard timing basis
+
+Main [run 39213815569](https://github.com/Buqisir/english-question-bank/actions/runs/39213815569)
+at `9eb492a165dd94c28ce731a5c8061ca5bdaaa9b2` took 817s overall. The original
+verify scripts took 543.464s / 349.451s; render scripts took 705.309s and the six
+fixed seams 714s. Replay uses actual per-script durations, registry order, two
+slots and existing resource locks; durations are planning data, not runtime policy.
+
+Move foundation, published-products-storage, nck1-answer-source-shapes,
+nck1-reading-figure-options, paper-canonical-import-pilot-fixes and print-renderer
+from verify shard 1 to 2. Each move retains the entire script and all checks.
+
+| Worker | Scripts | Simulated script wall |
+| --- | ---: | ---: |
+| verify-1 | 52 | 435.052s |
+| verify-2 | 129 | 434.170s |
+| e2e-seams-1 | 2 | 357.000s |
+| e2e-seams-2 | 4 | 357.000s |
+| e2e-render-1 | 1 | 354.440s |
+| e2e-render-2 | 5 | 350.869s |
+
+Setup remains unchanged and duplicated on isolated runners. With approximately
+12s build and 76–103s other verify overhead, the estimated critical worker is
+about 9–10 minutes. Hosted runner variance and changed CPU contention require
+confirmation on the natural PR run; replay does not establish actual savings.
 
 The Deployment reader validates the fixed repository/workflow, native App,
-natural main push, exact current main SHA, latest attempt and both successful
-jobs. It rechecks main before dispatch. A manual diagnostic, same-name foreign
-workflow, old success, skipped job or pending attempt is not authority.
+natural main push, exact current main SHA and latest attempt. It accepts only
+the exact v4 topology `{verify-1, verify-2, verify, e2e-seams-1, e2e-seams-2,
+e2e-render-1, e2e-render-2, e2e}`.
+Every job must complete successfully; unknown, missing or duplicate jobs fail
+closed. The reader and workflow ship together; historical v1/v2/v3 compatibility
+would permit missing workers. Deployment always resolves latest main, so the
+six-job main `9eb492a165dd94c28ce731a5c8061ca5bdaaa9b2` uses its old reader
+before v4 lands, and latest main uses the new reader/workflow after merge.
+Historical-main deployment is not required. A whole-change revert restores the
+matching old reader. The reader rechecks main before dispatch. The read-only
+Ship watcher requires the same exact v4 topology and reports unsuccessful
+workers. A manual diagnostic, same-name foreign workflow, old success, skipped
+job or pending attempt is not authority.
 
 ### Risk routing and notification
 

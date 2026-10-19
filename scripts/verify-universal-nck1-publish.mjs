@@ -66,6 +66,7 @@ import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consume
 import { consumerContractRefs, resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { subjectFreeHeaderTitle } from '../shared/paper-canonical/headerTitle.mjs'
 import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
   nck1MaterializationCandidateAuthorityRef,
@@ -855,7 +856,9 @@ function makeContext(label, options = {}) {
 
 // A stored v58 Review must be rederived under its original Candidate authority,
 // while the existing consumer presentation stays unchanged for both versions.
-{
+// Fixture-only consumers must not replay this independent historical contract.
+function verifyHistoricalAuthorityReplay() {
+  const startedAt = performance.now()
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-review-v58-replay-'))
   try {
     const { reviewRoot } = makeReviewRoot(root)
@@ -923,6 +926,7 @@ function makeContext(label, options = {}) {
     }), /Stored Candidate does not match a retained authority/)
   } finally {
     rmSync(root, { recursive: true, force: true })
+    console.log(`historical-authority-replay: ${(performance.now() - startedAt).toFixed(2)}ms`)
   }
 }
 
@@ -2024,7 +2028,115 @@ function runReviewCommand(args, env) {
   })
 }
 
+// The first-page title belongs to the exact approved revision and publication,
+// never to the mutable compatibility asset.
+export function verifyPaperHeaderTitlePublication() {
+for (const enabled of [false, true]) {
+  const context = makeContext(`header-title-${enabled}`, { listening: true, sourceType: '模拟题' })
+  try {
+    const configPath = path.join(context.reviewRoot, 'config.json')
+    const config = JSON.parse(readFileSync(configPath, 'utf8'))
+    config.provenance.paperName = '浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）'
+    if (enabled) config.headerTitle = subjectFreeHeaderTitle(config.provenance.paperName)
+    writeJson(configPath, config)
+    context.projection = buildNck1ReviewProjection(context.reviewRoot, { requireAnalyses: true })
+    const manifest = reviewManifestFor(context.reviewRoot, context.projection)
+    const reviewStore = createImportReviewStore({
+      dbPath: path.join(context.tempRoot, 'review.sqlite'),
+      filesRoot: path.join(context.tempRoot, 'review-files'), rendererBuildId: 'header-title-verifier',
+    })
+    const revision = reviewStore.createRevision(manifest).revision
+    for (const file of manifest.files) {
+      const upload = reviewStore.fileForUpload(revision.id, file.path)
+      mkdirSync(path.dirname(upload.destination), { recursive: true })
+      writeFileSync(upload.destination, readFileSync(resolveReviewFile(context.reviewRoot, file.path)))
+      reviewStore.completeFileUpload(revision.id, file.path, file)
+    }
+    reviewStore.finalizeRevision(revision.id)
+    const replay = reviewStore.projectionForRevision(revision.id)
+    assert.equal(replay.projection.consumption.paperHeaderTitle, config.headerTitle)
+    const approval = reviewStore.approveRevision(paperId, revision.id,
+      { bundleDigest: revision.bundleDigest }, 'synthetic-owner')
+    const options = {
+      reviewRootDir: path.dirname(reviewStore.verifiedFileForRead(revision.id, 'config.json').filePath),
+      approvedManifest: manifest,
+      approvedIdentity: { ...approvedIdentity(context.projection), approvalId: approval.approvalId,
+        revisionId: revision.id, bundleDigest: manifest.bundleDigest },
+    }
+    if (enabled) {
+      assert.throws(() => publish(context), /Review|manifest|bundle/i,
+        'new presentation metadata requires an exact approved bundle')
+      const changedConfig = structuredClone(config)
+      changedConfig.provenance.paperName = '其他考试英语试题'
+      changedConfig.headerTitle = '其他考试'
+      writeJson(configPath, changedConfig)
+      assert.throws(() => publish(context, { ...options, reviewRootDir: context.reviewRoot }),
+        /exact approved Review bundle|bytes changed/,
+        'a rule-valid replacement still requires approval of its exact config')
+      writeJson(configPath, config)
+    }
+    const result = publish(context, options)
+    assert.equal(result.ok, true, JSON.stringify(result))
+    const versionDir = result.publish.versionDir
+    const publicationPath = path.join(versionDir, 'canonical',
+      `canonical-paper-publication-v${context.projection.consumption.authorityRef.manifestVersion}.json`)
+    const originalPublication = readFileSync(publicationPath)
+    const publication = JSON.parse(originalPublication)
+    assert.equal(Object.hasOwn(publication, 'paperHeader'), enabled)
+    if (enabled) assert.deepEqual(publication.paperHeader, {
+      sourceTitle: config.provenance.paperName, headerTitle: config.headerTitle,
+    })
+    const runtime = createCanonicalConsumerRuntime({ rootDir: context.paperAssetsDir, db: context.db })
+    const load = (consumerId) => runtime.load({ paperId, consumerId, version: 'v1' })
+    const before = Object.fromEntries(['screen', 'print_pdf'].map(id => [id, load(id)]))
+    for (const consumption of Object.values(before)) {
+      assert.equal(consumption.disposition, 'ready')
+      assert.equal(consumption.paperHeaderTitle, config.headerTitle)
+    }
+    const assetPath = path.join(versionDir, 'paper-asset.json')
+    const asset = JSON.parse(readFileSync(assetPath))
+    asset.paper.headerTitle = '未经审核的替换卷名'
+    writeJson(assetPath, asset)
+    for (const id of ['screen', 'print_pdf']) {
+      assert.deepEqual(load(id), before[id], 'compatibility-only injection cannot change any consumer')
+    }
+    if (enabled) {
+      const altered = structuredClone(publication)
+      altered.paperHeader.headerTitle = '未经审核的替换卷名'
+      writeJson(publicationPath, altered)
+      for (const id of ['screen', 'print_pdf']) {
+        assert.throws(() => load(id), error =>
+          error.code === 'CANONICAL_CONSUMPTION_REJECTED'
+          && error.diagnostics[0].code === 'PAPER_HEADER_TITLE_INVALID')
+      }
+      // A rule-valid replacement with a recomputed digest is still a different
+      // publication, and cannot masquerade as the selected approved version.
+      altered.paperHeader = { sourceTitle: '其他考试英语试题', headerTitle: '其他考试' }
+      const { publicationDigest: _oldDigest, ...body } = altered
+      altered.publicationDigest = digestJson(body)
+      assert.notEqual(altered.publicationDigest, publication.publicationDigest)
+      writeJson(publicationPath, altered)
+      for (const id of ['screen', 'print_pdf']) {
+        assert.throws(() => load(id), error =>
+          error.diagnostics[0].code === 'CANONICAL_PUBLICATION_DIGEST_INVALID')
+      }
+      // Removing the opt-in and resealing must also fail against the exact ref.
+      delete altered.paperHeader
+      const { publicationDigest: _changedDigest, ...withoutHeader } = altered
+      altered.publicationDigest = digestJson(withoutHeader)
+      writeJson(publicationPath, altered)
+      assert.throws(() => load('screen'), error =>
+        error.diagnostics[0].code === 'CANONICAL_PUBLICATION_DIGEST_INVALID')
+      writeFileSync(publicationPath, originalPublication)
+    }
+    console.log(`PASS ${enabled ? 'new' : 'historical'} header title: sealed Review -> approval -> exact-version Screen/Print-PDF; compatibility injection ignored; bound tampering rejected`)
+  } finally { close(context) }
+}
+}
+
 if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
+verifyHistoricalAuthorityReplay()
+verifyPaperHeaderTitlePublication()
 for (const legacy of [true, false]) {
   const context = makeContext(legacy ? 'legacy-waveform' : 'no-waveform', { listening: true })
   try {
@@ -3104,7 +3216,7 @@ try {
 // The sidecar is optional for legacy versions, but a claimed reviewed sidecar
 // must survive the same atomic receipt, recovery and rollback as Canonical.
 // These cases are authored here for Ship; preview builds do not execute them.
-function attachSourceReferences(context) {
+function attachSourceReferences(context, { continuedParagraph = false } = {}) {
   const sidecar = prepareSourceReferences(context.projection)
   const documents = context.projection.materialization.documents.filter(document => document.role === 'official_answers')
   const evidence = documents.map(document => ({ documentSha256: document.sha256,
@@ -3112,6 +3224,18 @@ function attachSourceReferences(context) {
       region: { x: 0, y: 0, width: 1, height: 1 } } }))
   for (const group of sidecar.groups) for (const kind of ['essays', 'scoring']) {
     group[kind] = { state: 'not_supplied', evidence, entries: [] }
+  }
+  if (continuedParagraph) {
+    const source = structuredClone(evidence[0])
+    const continuation = structuredClone(source)
+    continuation.locator.page = source.locator.page + 1
+    sidecar.groups[0].essays = { state: 'captured', evidence: [], entries: [{
+      referenceId: 'reference:cross-page', authority: 'source_reference',
+      sourceLabel: null, labelSource: null,
+      paragraphs: [{ paragraphId: 'paragraph:cross-page', role: 'body',
+        text: 'This single source paragraph continues onto the next answer page.',
+        source, continuationSources: [continuation] }],
+    }] }
   }
   writeJson(path.join(context.reviewRoot, SOURCE_REFERENCES_FILE), sidecar)
   context.projection = buildNck1ReviewProjection(context.reviewRoot, { requireAnalyses: true })
@@ -3123,8 +3247,16 @@ function attachSourceReferences(context) {
 
 const referencePreCommit = makeContext('references-precommit')
 try {
-  const approval = attachSourceReferences(referencePreCommit)
+  const approval = attachSourceReferences(referencePreCommit, { continuedParagraph: true })
   const exact = readFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE))
+  const tampered = JSON.parse(exact.toString('utf8'))
+  tampered.groups[0].essays.entries[0].paragraphs[0].continuationSources[0].locator.page = 1
+  writeJson(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), tampered)
+  assert.throws(() => buildNck1ReviewProjection(referencePreCommit.reviewRoot, { requireAnalyses: true }),
+    /SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID/, 'invalid continuation cannot enter a sealed Review')
+  assert.throws(() => publish(referencePreCommit, approval), /CONTINUATION_LOCATION_INVALID|inventory/i,
+    'an approved sidecar cannot have its continuation page replaced before publication')
+  writeFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), exact)
   assert.throws(() => publish(referencePreCommit), /approved Review|schema/i)
   assert.throws(() => publish(referencePreCommit, { ...approval, failurePoint: 'db-write' }))
   assert.equal(publishedVersionCount(referencePreCommit), 0)
@@ -3138,13 +3270,17 @@ try {
     paperAssetsDir: referencePreCommit.paperAssetsDir, consumption })
   assert.equal(read().commitment.bundleDigest, approval.approvedManifest.bundleDigest)
   assert(read().sourceReferencesBytes.equals(exact))
+  assert.deepEqual(read().sourceReferences.groups[0].essays.entries[0].paragraphs[0].continuationSources,
+    JSON.parse(exact.toString('utf8')).groups[0].essays.entries[0].paragraphs[0].continuationSources,
+    'continued paragraph provenance survives exact-version publication and reading')
   const file = path.join(result.publish.versionDir, SOURCE_REFERENCES_FILE)
-  writeFileSync(file, Buffer.from('{}'))
+  writeJson(file, tampered)
   assert.throws(read, /字节/)
   writeFileSync(file, exact)
   const swapped = { ...consumption, publicationDigest: `sha256:${'0'.repeat(64)}` }
   assert.throws(() => readSourceReferencePublication({ db: referencePreCommit.db,
     paperAssetsDir: referencePreCommit.paperAssetsDir, consumption: swapped }), /不一致/)
+  console.log('PASS continued paragraph: sealed Review -> exact publication -> read; tampered continuation page rejected')
 } finally { close(referencePreCommit) }
 
 const referenceRecovery = makeContext('references-recovery')

@@ -143,11 +143,19 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 ## GitHub Actions CI authority
 
 - `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
-  `main`. Stable jobs `verify` and `e2e` partition the Agent-selected existing
-  pack across isolated runners within trusted-base boundaries; Full remains
-  required for paper/security/shared/high/unknown risks, invalid or missing
-  exact-head/base advice, and main. `e2e` also runs all six browser seams.
-  Both jobs must succeed; their disjoint lanes must cover the complete selected
+  `main`. Stable required checks remain `verify` and `e2e`. Independent workers
+  `verify-1`, `verify-2`, `e2e-seams-1`, `e2e-seams-2`, `e2e-render-1` and
+  `e2e-render-2` use isolated runners within trusted-base boundaries; `verify`
+  aggregates its two workers and `e2e` its four. Verify and render shards use
+  registry-path SHA-256 modulo 2 plus 1 with explicit balance overrides and a
+  disjoint/full-union assertion; stale overrides and shard keys other than
+  exactly `{1, 2}` fail closed. Full remains required for paper/security/shared/high/unknown
+  risks, invalid or missing exact-head/base advice, and main. The seams workers
+  always run all six fixed browser seams exactly once (renderer + reorder;
+  DOM contract + A3 + grammar-fill + golden path). Render workers partition the
+  selected pack's e2e lane; a legitimate empty shard succeeds and records
+  `scripts=0`, never a skipped job. Both required checks and all
+  workers must succeed; their disjoint lanes must cover the complete selected
   pack. Local `verify:all` remains unpartitioned. No path filter, skipped job,
   local report, manual run or Amp Check substitutes for either job.
   See ADR-0026 and the cutover runbook.
@@ -165,7 +173,13 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   An existing Ship Goal covers fresh verification and ordinary protected merge
   after a green notice; diagnose failures before rerunning and retain attempts.
 - Deployment accepts only the exact-main natural Actions run and its two
-  successful jobs through the deployment reader. Pending, failed, missing,
+  successful required checks through the deployment reader, which accepts only
+  the exact v4 `{verify-1, verify-2, verify, e2e-seams-1, e2e-seams-2,
+  e2e-render-1, e2e-render-2, e2e}` job
+  set with every job successful. Reader and workflow ship together; historical
+  v1/v2/v3 sets are rejected. Deployment resolves latest main, so the new reader
+  does not authorize deployments of historical pre-v4 main runs.
+  Pending, failed, missing,
   wrong-SHA, wrong-workflow or ambiguous evidence fails closed.
 - The old Amp CI webhook/controller, serialized eligibility, Amp-only watcher,
   Sentinel/Discovery and Action-wake are not the new authority. Do not start,

@@ -20,7 +20,7 @@ import {
 import {
   buildNck1AnalyzedPackageReviewSourceManifest,
   buildNck1ReviewProjection,
-  reviewBundleFilePaths,
+  reviewBundleFilePathsForProjection,
 } from '../import-review/revisionProjection.mjs'
 import {
   NCK1_ANALYZED_PACKAGE_INPUT_KIND,
@@ -348,8 +348,8 @@ function writeReviewWorkspace(rootDir, loaded) {
     requireAnalyses: true,
     ...(analysisProfile ? { analysisProfile } : {}),
   })
-  reviewBundleFilePaths(rootDir)
-  return projection
+  const files = reviewBundleFilePathsForProjection(rootDir, projection)
+  return { projection, files }
 }
 
 export async function prepareNck1AnalyzedPackageReview({
@@ -372,7 +372,7 @@ export async function prepareNck1AnalyzedPackageReview({
     const loaded = loadAnalyzedPackageFiles(packageRoot, { expectedPaperId })
     const workspace = path.join(temporary, 'review')
     mkdirSync(workspace)
-    const projection = writeReviewWorkspace(workspace, loaded)
+    const { projection, files } = writeReviewWorkspace(workspace, loaded)
     renameSync(workspace, destinationDir)
     installed = true
     return {
@@ -381,7 +381,7 @@ export async function prepareNck1AnalyzedPackageReview({
       candidateDigest: projection.candidateDigest,
       visibleStructureDigest: projection.visibleStructureDigest,
       analysisDigest: projection.analysisDigest,
-      files: reviewBundleFilePaths(destinationDir),
+      files,
     }
   } catch (error) {
     if (installed && existsSync(destinationDir)) rmSync(destinationDir, { recursive: true, force: true })

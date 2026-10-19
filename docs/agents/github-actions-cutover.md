@@ -20,6 +20,31 @@ GitHub hook 672661674 was disabled and read back `active:false` at
 07:36:34Z. Old Orb/platform registration termination and inaccessible private
 queue/receipts remain unverified; do not claim their deletion or replay them.
 
+### Worker topology
+
+Required checks remain `verify` and `e2e`. The v4 workflow runs independent
+`verify-1` and `verify-2` (disjoint shards of the selected verify lane),
+`e2e-seams-1` (renderer + reorder), `e2e-seams-2` (DOM contract + A3 +
+grammar-fill + golden path), `e2e-render-1` and `e2e-render-2` (disjoint selected-pack render
+shards). All six fixed seams always execute exactly once, independent of pack.
+`verify` always runs after its two workers; `e2e` after its four. Each requires
+all worker results to be `success`. Full verify/render allocations are generated
+before pack selection: new lane paths use SHA-256 modulo 2 plus 1 without shard
+registration; explicit balance overrides can change destinations. Missing or
+duplicate allocations, stale overrides and shard keys other than exactly
+`{1, 2}` fail closed. A legitimate empty render shard succeeds with `scripts=0`;
+it does not skip the job. No protection settings change is needed. Inspect all
+workers and required checks on natural PR and exact-main runs. Deployment and
+watcher readers recognize only the exact v4 `{verify-1, verify-2, verify,
+e2e-seams-1, e2e-seams-2, e2e-render-1, e2e-render-2, e2e}` job set; every job must
+succeed for authority. Historical v1/v2/v3 shapes are rejected.
+
+Reader and workflow ship together. Deployment always fetches latest main, so the
+six-job run for `9eb492a165dd94c28ce731a5c8061ca5bdaaa9b2` is used by its
+matching old reader before v4 lands; once v4 lands, latest main has the new
+workflow and reader. Historical-main deployment is not supported or required.
+A source update alone does not prove the installed reader is current.
+
 ### Initial baseline (historical)
 
 Initial read-only baseline on 2026-09-14:

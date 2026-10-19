@@ -2,7 +2,8 @@ import profile from '../../standards/paper-canonical/profiles/nck1-v16.json' wit
 
 const instructions = profile.instructions
 
-export function mockPaperCoverName(sourceType, paperName) {
+export function mockPaperCoverName(sourceType, paperName, headerTitle) {
+  if (typeof headerTitle === 'string' && headerTitle.trim()) return headerTitle
   return sourceType === '模拟题' && typeof paperName === 'string' && paperName.trim()
     ? paperName.trim() : null
 }

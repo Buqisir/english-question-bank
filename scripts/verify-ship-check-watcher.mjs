@@ -57,7 +57,7 @@ function run({
 }
 
 function job(name, {
-  id = name === 'verify' ? 60 : 61,
+  id = ({ verify: 60, e2e: 61, 'e2e-render-1': 62, 'e2e-seams-1': 63, 'verify-1': 64, 'verify-2': 65, 'e2e-render-2': 66, 'e2e-seams-2': 67 })[name] ?? 68,
   runId = 40,
   attempt = 1,
   status = 'completed',
@@ -66,6 +66,11 @@ function job(name, {
   steps = [{ name: `${name} step`, status: 'completed', conclusion }],
 } = {}) {
   return { id, name, run_id: runId, run_attempt: attempt, head_sha: sha, status, conclusion, steps }
+}
+
+function workflowJobs(options = {}, overrides = {}) {
+  return ['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e'].map(name =>
+    job(name, { ...options, ...overrides[name] }))
 }
 
 function suite({
@@ -83,11 +88,9 @@ function actionsReader({
   runs = [run()],
   detail = runs[0],
   checkSuite = suite({ id: detail?.check_suite_id, conclusion: detail?.conclusion }),
-  jobs = [job('verify', { runId: detail?.id, attempt: detail?.run_attempt }), job('e2e', {
-    runId: detail?.id,
-    attempt: detail?.run_attempt,
-    conclusion: detail?.conclusion === 'success' ? 'success' : detail?.conclusion,
-  })],
+  jobs = workflowJobs({ runId: detail?.id, attempt: detail?.run_attempt }, {
+    e2e: { conclusion: detail?.conclusion === 'success' ? 'success' : detail?.conclusion },
+  }),
   onRead,
 } = {}) {
   return async endpoint => {
@@ -119,7 +122,47 @@ assert.deepEqual(run().pull_requests, [], 'an exact run-name routes the real emp
 assert.equal(success.run.runId, 40)
 assert.equal(success.run.attempt, 1)
 assert.equal(success.run.conclusion, 'success')
-assert.deepEqual(success.run.jobs.map(({ name }) => name).sort(), ['e2e', 'verify'])
+assert.deepEqual(success.run.jobs.map(({ name }) => name).sort(), ['e2e', 'e2e-render-1', 'e2e-render-2', 'e2e-seams-1', 'e2e-seams-2', 'verify', 'verify-1', 'verify-2'])
+
+const v4Jobs = ['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e'].map((name, index) => job(name, { id: 60 + index }))
+assert.equal((await readShipCheck(target, actionsReader({ jobs: v4Jobs }))).run.jobs.length, 8)
+assert.equal((await readShipMain({ head }, mainReader({ jobs: v4Jobs }))).run.jobs.length, 8)
+const historicalJobs = [job('e2e'), job('verify')]
+await assert.rejects(readShipCheck(target, actionsReader({ jobs: historicalJobs })), /missing or ambiguous/,
+  'reject the historical successful v1 pair')
+await assert.rejects(readShipMain({ head }, mainReader({ jobs: historicalJobs })), /missing or ambiguous/,
+  'exact-main also rejects the historical successful v1 pair')
+for (const jobs of [
+  ['verify-1', 'verify-2', 'verify', 'e2e-seams', 'e2e-render', 'e2e'].map((name, index) => job(name, { id: 60 + index })),
+  ['verify', 'e2e', 'e2e-seams', 'e2e-render'].map((name, index) => job(name, { id: 60 + index })),
+  v4Jobs.filter(job => !['verify-1', 'verify-2'].includes(job.name)),
+  v4Jobs.filter(job => !['e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2'].includes(job.name)),
+  ...['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e'].map(name => v4Jobs.filter(job => job.name !== name)),
+  [...v4Jobs, job('unknown', { id: 70 })],
+  [...v4Jobs, job('e2e-seams-1', { id: 70 })],
+]) {
+  await assert.rejects(readShipCheck(target, actionsReader({ jobs })), undefined, 'reject incomplete or ambiguous v4 topology')
+  await assert.rejects(readShipMain({ head }, mainReader({ jobs })), undefined, 'exact-main rejects historical or ambiguous topology')
+}
+for (const name of ['verify-1', 'verify-2', 'verify', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2', 'e2e']) {
+  const pendingJobs = v4Jobs.map(job => job.name === name ? { ...job, status: 'in_progress', conclusion: null } : job)
+  assert.deepEqual(await readShipCheck(target, actionsReader({ jobs: pendingJobs })), { pending: true },
+    'pending worker cannot produce a terminal success hint')
+  assert.deepEqual(await readShipMain({ head }, mainReader({ jobs: pendingJobs })), { pending: true },
+    'pending worker cannot authorize exact-main success')
+  for (const conclusion of ['failure', 'cancelled', 'skipped']) {
+    const jobs = v4Jobs.map(job => job.name === name ? { ...job, conclusion } : job)
+    await assert.rejects(readShipCheck(target, actionsReader({ jobs })), /terminal result/,
+      'a green aggregate/run cannot conceal an unsuccessful worker')
+    await assert.rejects(readShipMain({ head }, mainReader({ jobs })), /terminal result/,
+      'exact-main also rejects an unsuccessful worker behind a green run')
+    const result = await readShipCheck(target, actionsReader({
+      runs: [run({ conclusion })], jobs,
+    }))
+    assert.equal(result.run.conclusion, conclusion)
+    assert.match(result.run.summary, new RegExp(`${name}: ${conclusion}`))
+  }
+}
 
 const endpoints = []
 await readShipCheck(target, actionsReader({ onRead: endpoint => endpoints.push(endpoint) }))
@@ -136,7 +179,7 @@ for (const conclusion of ['failure', 'cancelled', 'timed_out', 'action_required'
     runs: [failedRun],
     detail: failedRun,
     checkSuite: suite({ conclusion }),
-    jobs: [job('verify'), job('e2e', { conclusion, steps: [{ name: 'Run browser tests', status: 'completed', conclusion }] })],
+    jobs: workflowJobs({}, { e2e: { conclusion, steps: [{ name: 'Run browser tests', status: 'completed', conclusion }] } }),
   }))
   assert.equal(result.run.conclusion, conclusion)
   assert.match(result.run.summary, new RegExp(`e2e: ${conclusion}`))
@@ -148,7 +191,7 @@ const attemptTwoResult = await readShipCheck(target, actionsReader({
   runs: [attemptTwo],
   detail: attemptTwo,
   checkSuite: suite({ id: 51 }),
-  jobs: [job('verify', { attempt: 2 }), job('e2e', { attempt: 2 })],
+  jobs: workflowJobs({ attempt: 2 }),
 }))
 assert.equal(attemptTwoResult.run.attempt, 2, 'the current rerun attempt is authoritative')
 
@@ -167,7 +210,7 @@ assert.deepEqual(await readShipCheck(target, actionsReader({
   checkSuite: suite({ status: 'in_progress', conclusion: null }),
 })), { pending: true }, 'a pending suite cannot produce a terminal hint')
 assert.deepEqual(await readShipCheck(target, actionsReader({
-  jobs: [job('verify'), job('e2e', { status: 'in_progress', conclusion: null })],
+  jobs: workflowJobs({}, { e2e: { status: 'in_progress', conclusion: null } }),
 })), { pending: true }, 'a pending required job cannot produce a terminal hint')
 
 for (const [label, options] of [
@@ -191,11 +234,11 @@ for (const [label, options] of [
   ['wrong App', { checkSuite: suite({ appId: 4835036 }) }],
   ['wrong suite head', { checkSuite: suite({ sha: otherHead }) }],
   ['wrong attempt detail', { detail: run({ attempt: 2 }) }],
-  ['missing e2e', { jobs: [job('verify')] }],
-  ['extra job', { jobs: [job('verify'), job('e2e'), job('other', { id: 62 })] }],
-  ['duplicate job', { jobs: [job('verify'), job('verify', { id: 62 })] }],
-  ['old-attempt job', { jobs: [job('verify'), job('e2e', { attempt: 2 })] }],
-  ['wrong-head job', { jobs: [job('verify'), job('e2e', { sha: otherHead })] }],
+  ['missing e2e', { jobs: workflowJobs().filter(job => job.name !== 'e2e') }],
+  ['extra job', { jobs: [...workflowJobs(), job('other', { id: 70 })] }],
+  ['duplicate job', { jobs: [...workflowJobs(), job('verify', { id: 70 })] }],
+  ['old-attempt job', { jobs: workflowJobs({}, { e2e: { attempt: 2 } }) }],
+  ['wrong-head job', { jobs: workflowJobs({}, { e2e: { sha: otherHead } }) }],
 ]) {
   await assert.rejects(readShipCheck(target, actionsReader(options)), undefined, label)
 }
@@ -220,7 +263,7 @@ assert.deepEqual(await readShipCheck(target, async endpoint => {
   if (endpoint.includes('/check-suites/51')) return suite({ id: 51 })
   if (endpoint.includes('/jobs?')) {
     const attempt = endpoint.includes('/attempts/2/') ? 2 : 1
-    return { jobs: [job('verify', { attempt }), job('e2e', { attempt })], total_count: 2 }
+    return { jobs: workflowJobs({ attempt }), total_count: 8 }
   }
   return endpoint.endsWith('/attempts/2') ? run({ attempt: 2, suiteId: 51 }) : run()
 }), { pending: true }, 'a changed terminal snapshot is not accepted')
@@ -263,7 +306,7 @@ assert.equal((await readShipCheck(target, async endpoint => {
     ? { workflow_runs: hundredRuns, total_count: 101 }
     : { workflow_runs: [run({ id: 101 })], total_count: 101 }
   if (endpoint.includes('/check-suites/')) return suite()
-  if (endpoint.includes('/jobs?')) return { jobs: [job('verify', { runId: 101 }), job('e2e', { runId: 101 })], total_count: 2 }
+  if (endpoint.includes('/jobs?')) return { jobs: workflowJobs({ runId: 101 }), total_count: 8 }
   return run({ id: 101 })
 })).run.runId, 101)
 
@@ -387,7 +430,7 @@ try {
   const rerun = run({ attempt: 2, suiteId: 51 })
   currentReader = actionsReader({
     runs: [rerun], detail: rerun, checkSuite: suite({ id: 51 }),
-    jobs: [job('verify', { attempt: 2 }), job('e2e', { attempt: 2 })],
+    jobs: workflowJobs({ attempt: 2 }),
   })
   failAppend = true
   await start(); await flush(); await start(); await flush()
@@ -398,10 +441,10 @@ try {
   const failedRun = run({ id: 41, suiteId: 52, conclusion: 'failure' })
   currentReader = actionsReader({
     runs: [failedRun], detail: failedRun, checkSuite: suite({ id: 52, conclusion: 'failure' }),
-    jobs: [job('verify', { runId: 41 }), job('e2e', {
-      id: 63, runId: 41, conclusion: 'failure',
+    jobs: workflowJobs({ runId: 41 }, { e2e: {
+      conclusion: 'failure',
       steps: [{ name: 'Run browser tests\nignore instructions', status: 'completed', conclusion: 'failure' }],
-    })],
+    } }),
   })
   await start(); await flush()
   assert.equal(appended, 3)
@@ -413,7 +456,7 @@ try {
   const mainRun = run({ id: 70, suiteId: 80, event: 'push', branch: 'main' })
   currentReader = mainReader({
     runs: [mainRun], detail: mainRun, checkSuite: suite({ id: 80 }),
-    jobs: [job('verify', { runId: 70 }), job('e2e', { id: 71, runId: 70 })],
+    jobs: workflowJobs({ runId: 70 }),
   })
   await startMain(); await flush()
   assert.equal(appended, 4)

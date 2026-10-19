@@ -60,6 +60,51 @@ Owner只需交源材料并提供考试年份、月份；Agent读取正式题头�
 月份摄入、Review封存、Source持久化与网站查询已有本地接线候选，未部署生产；
 正式验收及存储限制见[产品合同](paper-pdf-products-v1.md)。
 
+**首页显示卷名（Owner 2026-10-19）：** 新导入卷首页第一行为来源卷名去除末尾的
+科目字样（英语，可接“学科”及试题卷／试题／试卷／练习／真题／样题，含字间空格），
+第二行保留独立的“英 语”。科目段必须位于末尾，或之后只有括注、标点及空白；
+完整的“（英语）”／“(英语)”科目括注一并移除，真正的“（5月卷）”“（一）”“(二)”版次括注保留。
+“英语”前一字为非汉字或位于标题开头时可剥离；紧接汉字时，
+只接受单字集合“考试测检调模练估断评研卷题末中一二三度年级期赛”，
+避免把“商务英语试题”“专业英语试卷”等复合词拆开；非科目词组不猜删，
+科目段通过此边界判定后，将其前紧邻的一个“高一／高二／高三”（可带“年级”，可隔空白）
+一起去掉；题头其他位置的年级保留。完整科目括注里的紧邻年级也一并去掉。
+没有科目段时，不单独删末尾年级。
+这是一次移除，不递归删年级，也不对缩短后的题头再次套用科目边界：
+“浙江名校协作体高二英语试题”保留“浙江名校协作体”，
+“七彩阳光英语高三英语试题”保留“七彩阳光英语”；
+“2026届高三年级五月适应性检测高三英语试题”保留“2026届高三年级五月适应性检测”。
+去除后为空或只剩标点时保留原名。只改首页第一行，原始题头、元数据卷名、
+列表／搜索及“英语试题第 X 页（共 Y 页）”页脚不变。
+这是新卷的显式展示数据，不是对存量卷的运行时清洗：导入 producer 调用
+`subjectFreeHeaderTitle(config.provenance.paperName)`，将结果写入新卷 `config.headerTitle`，
+并在生成 PDF 前完成；Review 将配置封存在精确批准的 bundle 中，发布时将
+`{sourceTitle, headerTitle}` 写入 Publication 清单的可选 `paperHeader` 扩展，
+由既有 `publicationDigest` 覆盖。消费层验证展示值严格等于同一绑定原题头的
+规则结果，不符即拒绝消费；Canonical consumption 传递同版本 `paperHeaderTitle`，
+Screen、Print/PDF 共同消费。`paper-asset.json` 不写入 `paper.headerTitle`；
+兼容资产即使被注入该字段也不启用新展示。
+已有配置无该字段即沿用历史显示，不回填送审／已发布卷，也不重生成冻结 PDF。
+此展示元数据不新增 Canonical Plan 语义、不改历史 authority/schema/digest；
+可选清单扩展独立严格校验，缺省时清单字节和摘要算法完全不变；
+配置变化仍改变 Review bundle 和冻结产品的输入摘要，必须重新生成产品和审核。
+
+**启用顺序与回滚边界：** ①先部署具备 `paperHeader` 读取及校验能力的 release；
+②之后至少再成功部署一次不同 SHA 的 release（重复部署当前 SHA 是 `noOp`，不推进上一 release），
+并核对 current 与 previous release 均具备该能力；
+③完成前两步后，导卷侧才可写入 `config.headerTitle`，生成产品并送审／发布。
+旧 release `221ac453` 的读取行为如下：
+带 `paperHeader` 的 Publication 会触发 `CANONICAL_PUBLICATION_SCHEMA_INVALID`
+（底层 `SCHEMA_UNKNOWN_FIELD`），Screen／Print／PDF 的 Canonical 消费均不可用；
+未带该字段的历史 Publication 不受此字段影响。
+仅封存配置含 `headerTitle` 的待审 Revision 不会因未知配置字段被旧 Review 拒绝：
+列表只读清单／状态，投影读取配置但忽略该字段，旧版预览及重新生成的首页仍用原卷名；
+封存 PDF 保持已有字节，不因回滚自动重生成。审批仍校验精确文件、bundle 和 renderer build，
+新 release 封存的 Revision 通常会被旧 release 以 `IMPORT_REVIEW_RENDERER_STALE` 阻止审批，
+须按正常流程重新送审；即使 renderer build 匹配，旧审批也不会验证或应用该展示字段。
+若在完成启用顺序前回滚，上述字段相关影响只落在携带字段的 Publication／Revision；
+不得据此放宽旧 schema、原地改历史清单或在旧 release 上继续批准／发布这些新记录。
+
 应用文框优先65mm、续写框优先57mm；必要时才压缩，找到合格分页后独立尝试
 恢复两个框，先恢复续写框，不能因前面拥挤而让宽松的末页仍保留最短框。
 漫画可等比缩小绕排；不得删文字、混用字号档、裁切图片/框或让选项叠字。

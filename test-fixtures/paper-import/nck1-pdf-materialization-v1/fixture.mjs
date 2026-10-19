@@ -230,6 +230,7 @@ function record(documentId, role, bytes, fileName) {
 export async function makeSyntheticNck1PdfFixture({
   includeAnswerShapes = false,
   includeTable = true,
+  includeExtractionCases = true,
 } = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'chromium' })
   try {
@@ -251,16 +252,19 @@ export async function makeSyntheticNck1PdfFixture({
         includeTable,
       }))),
     } : null
-    const imageOnlyBytes = await renderPdf(browser, documentHtml(
+    // OCR/image consumers need only sourceDocuments. Keep all extraction
+    // cases for their dedicated verifier, but never render unused inputs.
+    const extractionPdf = (html) => includeExtractionCases ? renderPdf(browser, html) : null
+    const imageOnlyBytes = await extractionPdf(documentHtml(
       '<div class="image-only" aria-label="synthetic raster page"></div>',
       '.image-only { width: 100%; height: 250mm; background: linear-gradient(135deg, #ddd, #aaa); }',
     ))
-    const incompleteBytes = await renderPdf(browser, documentHtml(
+    const incompleteBytes = await extractionPdf(documentHtml(
       paragraph('First page has a text layer.')
         + '<div class="empty-page"></div>',
       '.empty-page { break-before: page; width: 100%; height: 250mm; background: #eee; }',
     ))
-    const multiColumnBytes = await renderPdf(browser, documentHtml(
+    const multiColumnBytes = await extractionPdf(documentHtml(
       '<div class="columns"><div>'
         + Array.from({ length: 4 }, (_, index) => paragraph(`Left column ${index + 1}.`)).join('')
         + '</div><div>'
@@ -268,27 +272,27 @@ export async function makeSyntheticNck1PdfFixture({
         + '</div></div>',
       '.columns { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; }',
     ))
-    const overlapBytes = await renderPdf(browser, documentHtml(
+    const overlapBytes = await extractionPdf(documentHtml(
       '<div class="overlap">'
         + paragraph('First overlapping text block.', 'first')
         + paragraph('Second overlapping text block.', 'second')
         + '</div>',
       '.overlap { position: relative; height: 100px; } .overlap p { position: absolute; left: 0; top: 0; }',
     ))
-    const alignedNonTableBytes = await renderPdf(browser, documentHtml(
+    const alignedNonTableBytes = await extractionPdf(documentHtml(
       '<table class="unbordered"><tbody>'
         + '<tr><td>Left one</td><td>Right one</td></tr>'
         + '<tr><td>Left two</td><td>Right two</td></tr>'
         + '</tbody></table>',
       '.unbordered td { border: 0; }',
     ))
-    const embeddedImageBytes = await renderPdf(browser, documentHtml(
+    const embeddedImageBytes = await extractionPdf(documentHtml(
       paragraph('This text page also contains one synthetic raster image.')
         + `<img src="${tinyPngDataUrl}" alt="" width="32" height="24">`,
     ))
     const examRow = (texts) => `<div class="exam-row">${texts.map((text) => `<span>${escaped(text)}</span>`).join('')}</div>`
     const rowStyle = '.exam-row { display: flex; justify-content: space-between; margin-bottom: 20px; }'
-    const labelledRowsBytes = await renderPdf(browser, documentHtml([
+    const labelledRowsBytes = await extractionPdf(documentHtml([
       examRow(['A. Alpha', 'B. Bravo', 'C. Charlie']),
       examRow(['A. One', 'B. Two', 'C. Three', 'D. Four']),
       examRow(['41.', 'A. Red', 'B. Blue', 'C. Green', 'D. Yellow']),
@@ -297,7 +301,7 @@ export async function makeSyntheticNck1PdfFixture({
       paragraph('第 1 页 共 1 页'),
       paragraph('第 1 页 共 1 页', 'page-number'),
     ].join(''), rowStyle + '@page { margin: 0; } body { margin: 12px; } .page-number { position: absolute; top: 288mm; margin: 0; line-height: 1; }'))
-    const misorderedOptionsBytes = await renderPdf(browser, documentHtml(
+    const misorderedOptionsBytes = await extractionPdf(documentHtml(
       examRow(['A. Alpha', 'C. Charlie', 'B. Bravo']), rowStyle,
     ))
     const documents = [
@@ -308,7 +312,9 @@ export async function makeSyntheticNck1PdfFixture({
       paperId: 'paper-synthetic-pdf-text',
       questionBytes,
       answerBytes,
-      labelledRows: { bytes: labelledRowsBytes, pageCount: pdfPageCount(labelledRowsBytes) },
+      labelledRows: includeExtractionCases
+        ? { bytes: labelledRowsBytes, pageCount: pdfPageCount(labelledRowsBytes) }
+        : null,
       sourceDocuments: [
         { ...documents[0], bytes: questionBytes },
         { ...documents[1], bytes: answerBytes },
@@ -351,7 +357,7 @@ export async function makeSyntheticNck1PdfFixture({
         mediaDirectory: 'materialization/media',
         canonicalRequestPath: 'canonical-evidence/canonical-import-request.json',
       },
-      negative: {
+      negative: includeExtractionCases ? {
         misorderedOptions: { bytes: misorderedOptionsBytes, pageCount: pdfPageCount(misorderedOptionsBytes) },
         imageOnly: {
           bytes: imageOnlyBytes,
@@ -381,7 +387,7 @@ export async function makeSyntheticNck1PdfFixture({
           bytes: stencilImagePdfBytes(),
           pageCount: 1,
         },
-      },
+      } : null,
     }
   } finally {
     await browser.close()

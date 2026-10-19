@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto'
 import {
   closeSync,
+  createReadStream,
   existsSync,
   mkdirSync,
   openSync,
@@ -797,6 +798,13 @@ function sha256File(filePath) {
     return `sha256:${hash.digest('hex')}`
   } finally { closeSync(descriptor) }
 }
+async function sha256FileAsync(filePath) {
+  const hash = createHash('sha256')
+  for await (const chunk of createReadStream(filePath, { highWaterMark: 64 * 1024 })) {
+    hash.update(chunk)
+  }
+  return `sha256:${hash.digest('hex')}`
+}
 
 export function createImportReviewStore({
   dbPath,
@@ -1074,20 +1082,35 @@ export function createImportReviewStore({
     return uploadStatus(revisionId)
   }
 
-  function assertStoredRevisionFiles(revision, currentDb = null) {
+  function storedRevisionFiles(revision, currentDb = null) {
     const readFiles = (db) => db.prepare(`
       SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path
     `).all(revision.id).map(fileRow)
-    const files = currentDb ? readFiles(currentDb) : withDb(false, readFiles)
+    return currentDb ? readFiles(currentDb) : withDb(false, readFiles)
+  }
+  function storedRevisionFilePath(revision, file) {
+    const filePath = resolveReviewFile(revisionDirectory(revision.id), file.path)
+    if (!file.uploadedAt || !existsSync(filePath) || statSync(filePath).isDirectory()
+      || statSync(filePath).size !== file.byteLength) {
+      throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', `Stored file changed: ${file.path}`)
+    }
+    return filePath
+  }
+  function assertStoredRevisionFiles(revision, currentDb = null) {
+    const files = storedRevisionFiles(revision, currentDb)
     for (const file of files) {
-      const filePath = resolveReviewFile(revisionDirectory(revision.id), file.path)
-      if (
-        !file.uploadedAt
-        || !existsSync(filePath)
-        || statSync(filePath).isDirectory()
-        || statSync(filePath).size !== file.byteLength
-        || sha256File(filePath) !== file.sha256
-      ) throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', `Stored file changed: ${file.path}`)
+      if (sha256File(storedRevisionFilePath(revision, file)) !== file.sha256) {
+        throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', `Stored file changed: ${file.path}`)
+      }
+    }
+    return files
+  }
+  async function assertStoredRevisionFilesAsync(revision) {
+    const files = storedRevisionFiles(revision)
+    for (const file of files) {
+      if (await sha256FileAsync(storedRevisionFilePath(revision, file)) !== file.sha256) {
+        throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', `Stored file changed: ${file.path}`)
+      }
     }
     return files
   }
@@ -1191,7 +1214,7 @@ export function createImportReviewStore({
       if (status.revision.state === 'uploading' && status.missingFiles.length === 0
         && projectRevision === buildImportReviewProjection) {
         timer.phase('fileHash')
-        assertStoredRevisionFiles(status.revision)
+        await assertStoredRevisionFilesAsync(status.revision)
         timer.phase('projection')
         prepared = await runFinalizeWorker(revisionDirectory(revisionId), status.revision, {
           onPhase: name => timer.phase(name),
@@ -1279,7 +1302,7 @@ export function createImportReviewStore({
     timer.phase('inventory')
     if (projectRevision === buildImportReviewProjection) {
       if (prepared?.inventoryError) throw restoreFinalizeError(prepared.inventoryError)
-      const expectedFiles = prepared?.expectedFiles || finalizeInventory(directory, status.revision)
+      const expectedFiles = prepared?.expectedFiles || finalizeInventory(directory, status.revision, projection)
       const actualFiles = status.revision.manifest.files
         .map(({ path: filePath, mediaType, role }) => `${filePath}\0${mediaType}\0${role}`)
         .sort()

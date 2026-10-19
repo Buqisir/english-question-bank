@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// verify-resource: browser-render
 /**
  * Verification: paper-browse (刀B 整卷预览页 v1).
  *

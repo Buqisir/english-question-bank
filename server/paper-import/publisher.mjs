@@ -51,7 +51,7 @@ import {
 import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
-  reviewBundleFilePaths,
+  reviewBundleFilePathsForProjection,
   resolveReviewFile,
 } from '../import-review/revisionProjection.mjs'
 import { validateReviewBundleManifest } from '../import-review/importReviewStore.mjs'
@@ -1173,6 +1173,7 @@ function admitBoundUniversalNck1Package({
     request: canonicalRequest,
     sourceAssetVersion: version,
     sourceAsset: nck1MaterializationPublicationSourceAsset(canonicalRequest),
+    paperHeader: packageData.paperHeader,
     listeningAudioBytes,
     externalListeningReviewProof,
   })
@@ -1262,7 +1263,7 @@ export function publishUniversalNck1Import({
   let sourceReferenceApproval = null
   if (projection.config.pdfProductsRequired && !projection.frozenProducts) throw new Error('新卷必须先冻结四款 PDF 并提交 Review')
   let pdfProductApproval = null
-  if (projection.sourceReferencesBytes || projection.frozenProducts
+  if (projection.config.headerTitle !== undefined || projection.sourceReferencesBytes || projection.frozenProducts
     || approvedManifest?.files?.some(file => [SOURCE_REFERENCES_FILE, PRODUCT_MANIFEST].includes(file.path))) {
     const manifest = validateReviewBundleManifest(approvedManifest)
     if (manifest.bundleDigest !== approvedIdentity?.bundleDigest || manifest.paperId !== projection.paperId
@@ -1271,7 +1272,7 @@ export function publishUniversalNck1Import({
       || !approvedIdentity.approvalId || !approvedIdentity.revisionId) {
       throw new Error('Source references require the exact approved Review bundle')
     }
-    const inventory = reviewBundleFilePaths(reviewRootDir, projection.candidate)
+    const inventory = reviewBundleFilePathsForProjection(reviewRootDir, projection)
     if (inventory.length !== manifest.files.length || inventory.some(file => !manifest.files.some(actual =>
       actual.path === file.path && actual.role === file.role && actual.mediaType === file.mediaType))) {
       throw new Error('Approved Review inventory does not match the publication workspace')
@@ -1288,6 +1289,10 @@ export function publishUniversalNck1Import({
         : projection.frozenProducts?.bytes[file.path] || readFileSync(resolveReviewFile(reviewRootDir, file.path))
       if (bytes.byteLength !== file.byteLength || `sha256:${createHash('sha256').update(bytes).digest('hex')}` !== file.sha256) {
         throw new Error(`Approved Review file bytes changed: ${file.path}`)
+      }
+      if (projection.config.headerTitle !== undefined && file.path === 'config.json'
+        && digestJson(JSON.parse(Buffer.from(bytes).toString('utf8'))) !== digestJson(projection.config)) {
+        throw new Error('Approved header title configuration differs from the projected snapshot')
       }
     }
     if (projection.frozenProducts) pdfProductApproval = {

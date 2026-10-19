@@ -27,6 +27,12 @@ import {
   verificationSchedulingPolicy,
 } from './lib/verificationScheduler.mjs'
 
+import {
+  createVerificationShards,
+  e2eRenderShardOverrides,
+  verificationShardScripts,
+} from './lib/verificationShards.mjs'
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 
@@ -47,6 +53,8 @@ const registry = {
   'scripts/verify-published-products-storage.mjs',
   'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-paper-header-title.mjs',
+  'scripts/verify-nck1-analyzed-package-candidate.mjs',
   'scripts/verify-scoped-publication.mjs',
   'scripts/verify-listening-audio-intake.mjs',
   'scripts/verify-listening-signal.mjs',
@@ -107,7 +115,6 @@ const registry = {
   'scripts/verify-ship-check-watcher.mjs',
   'scripts/verify-ci-pr-plan.mjs',
   'scripts/verify-amp-orb-ci.mjs',
-  'scripts/verify-amp-orb-ci-coordination.mjs',
   'scripts/verify-amp-orb-deploy.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
@@ -195,7 +202,6 @@ const registry = {
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-classic-retire-2.mjs',
   'scripts/verify-classic-retire-3.mjs',
-  'scripts/verify-analysis-layering.mjs',
   'scripts/verify-launch-deploy.mjs',
   'scripts/verify-paper-assets-consistency.mjs',
   'scripts/verify-paper-browse.mjs',
@@ -211,7 +217,6 @@ const registry = {
   'scripts/verify-vocabulary-notebook.mjs',
   'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
-  'scripts/verify-section-chrome-on-solo-surface.mjs',
   'scripts/verify-draft-workbench-visual-unify.mjs',
   'scripts/verify-my-space-shelf.mjs',
   'scripts/verify-draft-student-field.mjs',
@@ -253,12 +258,12 @@ const securityScripts = [
   'scripts/verify-source-intake.mjs',
   'scripts/verify-source-intake-webhook.mjs',
   'scripts/verify-amp-orb-ci.mjs',
-  'scripts/verify-amp-orb-ci-coordination.mjs',
   'scripts/verify-amp-orb-deploy.mjs',
   'scripts/verify-owner-gate.mjs',
   'scripts/verify-user-scope.mjs',
   'scripts/verify-ai-daily-limit.mjs',
   'scripts/verify-launch-deploy.mjs',
+  'scripts/verify-h11a-http-client.mjs',
   'scripts/verify-paper-translation-cache.mjs',
   'scripts/verify-paper-translation-routes.mjs',
 ]
@@ -295,13 +300,24 @@ const sentenceAnalysisScripts = uniqueRegistered([
   'scripts/verify-sentence-analysis-browser.mjs',
 ])
 paperScripts.push(...sentenceAnalysisScripts.filter((script) => !paperScripts.includes(script)))
+// CI implementation changes select all; ordinary feature work does not need
+// process/scheduler/policy metatests. Exclude them from the derived set, rather
+// than only omitting an explicit list entry that the registry would add back.
+const ciMetaScripts = new Set([
+  'scripts/verify-verification-command-runner.mjs',
+  'scripts/verify-verification-scheduler.mjs',
+  'scripts/verify-ci-pr-plan.mjs',
+])
 const featureScripts = uniqueRegistered([
   ...registry.scripts.filter(
-    (script) => sentenceAnalysisScripts.includes(script)
-      || (!paperScripts.includes(script) && !securityScripts.includes(script)),
+    (script) => !ciMetaScripts.has(script)
+      && (sentenceAnalysisScripts.includes(script)
+        || (!paperScripts.includes(script) && !securityScripts.includes(script))),
   ),
   // Signal staging is an import-pipeline feature as well as a Paper input.
   'scripts/verify-listening-signal.mjs',
+  // The shared HTTP client also remains covered for ordinary feature changes.
+  'scripts/verify-h11a-http-client.mjs',
 ])
 const importPaperScripts = uniqueRegistered([
   'scripts/verify-import-pagination-qa.mjs',
@@ -571,6 +587,10 @@ function verificationPlan() {
 let plan
 let concurrency
 try {
+  const shardAllocations = {
+    verify: createVerificationShards(verificationLaneScripts(registry.scripts, 'verify')),
+    e2e: createVerificationShards(verificationLaneScripts(registry.scripts, 'e2e'), e2eRenderShardOverrides),
+  }
   plan = verificationPlan()
   const lanes = argumentValues('--lane')
   const laneFlagCount = process.argv.filter((arg) => arg === '--lane').length
@@ -578,7 +598,15 @@ try {
     throw new Error('Expected exactly one --lane value')
   }
   const lane = lanes[0] ?? 'all'
-  plan = { ...plan, lane, scripts: verificationLaneScripts(plan.scripts, lane) }
+  const shards = argumentValues('--shard')
+  const shardFlagCount = process.argv.filter((arg) => arg === '--shard').length
+  if (shardFlagCount > 1 || shardFlagCount !== shards.length) {
+    throw new Error('Expected exactly one --shard value')
+  }
+  const shard = shards[0] ?? 'all'
+  if (shard !== 'all' && !['verify', 'e2e'].includes(lane)) throw new Error('--shard requires --lane verify or e2e')
+  plan = { ...plan, lane, shard,
+    scripts: verificationShardScripts(verificationLaneScripts(plan.scripts, lane), shard, shardAllocations[lane]) }
   concurrency = verificationConcurrency()
 } catch (error) {
   console.error(error.message)
@@ -725,7 +753,7 @@ const skipped = results.filter((r) => r.status === SKIP_EXIT_CODE)
 const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CODE)
 
 console.log('\n===== verify summary =====')
-console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack} / LANE ${plan.lane}`)
+console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack} / LANE ${plan.lane} / SHARD ${plan.shard}`)
 console.log(
   `JOBS ${concurrency} / CORES ${availableParallelism()}`
     + ` / WALL ${((performance.now() - suiteStartedAt) / 1_000).toFixed(1)}s`,
