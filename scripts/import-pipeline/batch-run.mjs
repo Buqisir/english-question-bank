@@ -13,6 +13,7 @@ import { checkSearchMetadataFiles, ensureSearchMetadata } from './search-metadat
 import { importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 import { answerOnlyCoveredNumbers } from './answer-only-coverage.mjs'
 import { appendTiming } from './lib-timing.mjs'
+import { fastProductSet, declareFastListening } from './lib-fast-products.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const batchRoot = path.join(root, 'imports/batch')
@@ -27,7 +28,6 @@ export const MODELS = {
   astra: { model: process.env.EQB_BATCH_ASTRA || 'custom:magpie/group/auto-gpt-6-astra', effort: 'high' },
   luna: { model: process.env.EQB_BATCH_LUNA || 'custom:magpie/group/auto-gpt-6-luna', effort: 'medium' },
 }
-const PRODUCTS = ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']
 // 50 dpi left chart labels and font size unverifiable, so every chart page blocked as needs_main_review.
 const PDF_QA_DPI = 100
 const PRODUCTION_GAP = 30_000
@@ -281,8 +281,10 @@ export async function agent(ctx, paper, label, role, prompt, outputs,
     }
   })
 }
-function prepArgs(item) {
-  return ['prep', item.paperId, ...(item.audio ? ['--audio', item.audio] : []), '--',
+export function prepArgs(item) {
+  declareFastListening({}, item.listening ?? null, item.audio)
+  return ['prep', item.paperId, ...(item.audio ? ['--audio', item.audio] : []),
+    ...(item.listening ? ['--listening', item.listening] : []), '--',
     '--paper-name', item.paperName, '--provenance', item.provenance.source,
     '--year', String(item.provenance.year), '--month', String(item.provenance.month),
     '--source', `question_source=${item.question}`, '--source', `official_answers=${item.answer}`]
@@ -460,6 +462,8 @@ export function checkPdfs(paperId) {
   const economyPageLimit = importEconomyPageLimit(paperId, fastState(paperId).data?.economyPageLimit)
   if (!paperIdValid(paperId)) fail('paperId 格式无效')
   const dir = path.join(papersRoot, paperId)
+  const config = json(path.join(dir, 'config.json'))
+  const { products, hasListening } = fastProductSet(config)
   const plan = json(path.join(dir, 'pagination-plan.json'))
   const materialization = json(path.join(dir, 'materialization/nck1-source-materialization-v1.json'))
   const questionNumbers = (materialization.groups || []).flatMap((group) => (group.questions || []).map((q) => q.canonicalNumber))
@@ -469,10 +473,11 @@ export function checkPdfs(paperId) {
   const answerNumbers = [...(materialization.listening?.answers || []), ...(materialization.answers || [])].map((a) => a.canonicalNumber)
   const result = { paperId, checkedAt: now(), products: {}, blocking: [], warnings: [] }
   const allNumbers = [...listeningNumbers, ...questionNumbers]
-  if (!allNumbers.length || allNumbers.some((n, index) => n !== index + 1)) {
-    result.blocking.push('Materialization 题号不是连续的 1..N，不能确认 PDF 完整性')
+  const firstNumber = hasListening ? 1 : 21
+  if (!allNumbers.length || allNumbers.some((n, index) => n !== index + firstNumber)) {
+    result.blocking.push(`Materialization 题号不是连续的 ${firstNumber}..N，不能确认 PDF 完整性`)
   }
-  for (const product of PRODUCTS) {
+  for (const product of products) {
     const pdf = path.join(dir, 'products', `${product}.pdf`)
     const errors = []
     try {
@@ -537,12 +542,13 @@ async function pdfQa(ctx, paper) {
   ctx.save()
   const output = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-hard-check.json')
   const checks = checkPdfs(paper.paperId)
+  const products = Object.keys(checks.products)
   writeJson(output, checks)
   paper.pdfCheck = output
   if (checks.blocking.length) throw new Blocked('needs_main_review', checks.blocking.join('；'), output)
   const visual = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-visual.json')
   const imagesByProduct = {}
-  for (const product of PRODUCTS) {
+  for (const product of products) {
     const pdf = checks.products[product]
     const imageDir = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-pages', product, `${pdf.sha256.slice(7, 23)}-r${PDF_QA_DPI}`)
     mkdirSync(imageDir, { recursive: true })
@@ -561,9 +567,9 @@ async function pdfQa(ctx, paper) {
   const binding = digest(JSON.stringify(Object.values(checks.products).map((p) => p.sha256)))
   // One agent per product: all ~34 pages at 100 dpi in one context evicted the earlier images.
   const label = (product) => `PDF 视觉初筛 ${product}`
-  if (paper.pdfVisualBinding !== binding) for (const product of PRODUCTS) delete paper.completed[label(product)]
+  if (paper.pdfVisualBinding !== binding) for (const product of products) delete paper.completed[label(product)]
   const productVisual = (product) => path.join(ctx.dir, 'logs', paper.paperId, `pdf-visual-${product}.json`)
-  await Promise.all(PRODUCTS.map(async (product) => {
+  await Promise.all(products.map(async (product) => {
     const images = imagesByProduct[product]
     // Twelve page images repeatedly exhausted the visual worker's six-minute budget.
     // Keep every page and overlap boundaries so split questions remain detectable.
@@ -600,7 +606,7 @@ async function pdfQa(ctx, paper) {
     })
   }))
   const review = { blocking: [], notes: [], checkedImages: [] }
-  for (const product of PRODUCTS) {
+  for (const product of products) {
     const part = json(productVisual(product))
     if (!Array.isArray(part.blocking) || !Array.isArray(part.notes)
       || imagesByProduct[product].some((image) => !part.checkedImages?.includes(image))) {
@@ -617,10 +623,12 @@ async function pdfQa(ctx, paper) {
   ctx.save()
 }
 
-function reviewOrigin() {
+export function reviewOrigin({ allowLocal = false } = {}) {
   const value = readFileSync(path.join(root, '.amp/import-review-origin'), 'utf8').trim()
   const url = new URL(value)
-  if (url.protocol !== 'https:' || url.username || url.password || url.pathname !== '/') fail('批量生产读取需要显式 HTTPS Review origin 绑定')
+  const local = url.protocol === 'http:' && ['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname)
+  if (!(url.protocol === 'https:' || (allowLocal && local)) || url.username || url.password
+    || url.pathname !== '/' || url.search || url.hash) fail('批量生产读取需要显式 HTTPS Review origin 绑定；--local-only 可绑定隔离 loopback')
   return url.origin
 }
 let session = null
@@ -1034,7 +1042,7 @@ async function runBatch(ctx) {
     if (ctx.opts['clear-pause']) clearPause(ctx)
     for (const id of (ctx.opts.retry || '').split(',').map((value) => value.trim()).filter(Boolean)) retryPaper(ctx, id)
     checkPaused(ctx)
-    const origin = reviewOrigin()
+    const origin = reviewOrigin({ allowLocal: ctx.opts['local-only'] })
     if (ctx.state.reviewOrigin && ctx.state.reviewOrigin !== origin) throw new Paused('origin_changed', '不能更换已开始批次的 Review 目标')
     ctx.state.reviewOrigin = origin
     const entries = queue(ctx)
