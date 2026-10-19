@@ -206,6 +206,34 @@ assert.equal(preparePublicSearchMetadataRequest(cleftBinding).sourceGroups
   .find((group) => group.groupId === cleftGroup.groupId).questions
   .find((question) => question.questionId === cleftQuestion.questionId).authoritativeAnswer, 'that')
 
+for (const answer of ['that', '  THAT  ', 'that / THAT']) {
+  const normalizedBinding = structuredClone(cleftBinding)
+  normalizedBinding.materialization.answers.find((item) => item.questionId === cleftQuestion.questionId).value = answer
+  const completed = finalizePublicSearchMetadata({ authored: cleftAuthored, ...normalizedBinding })
+  assert.deepEqual(validatePublicSearchMetadata({
+    sidecar: JSON.parse(stableStringify(completed)), ...normalizedBinding,
+  }), [], `cleft accepts normalized authoritative ${answer}`)
+}
+const cleftAuthorityDir = mkdtempSync(path.join(tmpdir(), 'public-metadata-cleft-authority-'))
+try {
+  const sidecarPath = path.join(cleftAuthorityDir, 'public-search-metadata-v1.json')
+  writeFileSync(sidecarPath, stableStringify(cleftFinal))
+  for (const answer of ['who', 'it', 'because', 'that/who', 'who/that', 'that/', '/that', '']) {
+    const invalidBinding = structuredClone(cleftBinding)
+    invalidBinding.materialization.answers.find((item) => item.questionId === cleftQuestion.questionId).value = answer
+    assert.throws(() => finalizePublicSearchMetadata({ authored: cleftAuthored, ...invalidBinding }),
+      /PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID/, `cleft finalization rejects authoritative ${answer}`)
+    assert.ok(validatePublicSearchMetadata({ sidecar: cleftFinal, ...invalidBinding })
+      .some(({ code }) => code === 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'), answer)
+    const reread = JSON.parse(readFileSync(sidecarPath, 'utf8'))
+    assert.ok(validatePublicSearchMetadata({ sidecar: reread, ...invalidBinding })
+      .some(({ code }) => code === 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'),
+    `persisted cleft sidecar cannot authorize ${answer}`)
+  }
+} finally {
+  rmSync(cleftAuthorityDir, { recursive: true, force: true })
+}
+
 for (const [patch, code] of [
   [{ similarityProfile: { route: 'cleft-it', features: [] } }, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID'],
   [{ similarityProfile: { route: 'that-clause', features: [] } }, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID'],
@@ -428,7 +456,7 @@ try {
   const warnings = []
   const index = createTeachingFacetIndex({ paperAssetsDir: appositiveAssets, warn: (...args) => warnings.push(args) }).getIndex()
   const store = createSimilarQuestionsStore({ getTeachingFacetIndex: () => index, paperAssetsDir: appositiveAssets })
-  for (const [role, label] of [['appositive', 'appositive'], ['adverbial', '状语']]) {
+  for (const [role, label] of [['appositive', '同位语'], ['adverbial', '状语']]) {
     assert.deepEqual(queryGroupsByTeaching(index, { groupType: 'grammarFill', role }).map(({ groupId }) => groupId).sort(),
       [`group:${role}-peer`, `group:${role}-seed`])
     const result = store.findSimilar(appositiveDb, { seeds: [{ questionId: `question:${role}-seed` }] })

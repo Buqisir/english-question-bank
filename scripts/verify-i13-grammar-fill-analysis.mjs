@@ -125,6 +125,18 @@ function assertPromptContract() {
   assert('prompt requires the shortest useful sentence skeleton', prompt.includes('restore the shortest useful skeleton around the gap'))
   assert('prompt explains slot job before answer form', prompt.includes('state what job the gap performs in that skeleton') && prompt.includes('derive the required word or form'))
   assert('prompt requires controlled similarityProfile', prompt.includes('Controlled `similarityProfile`') && prompt.includes('similarityForm'))
+  const roleSection = prompt.split('### `role` (non-finite only)')[1].split('### `no-hint`')[0]
+  assert('prompt role vocabulary includes appositive with its Chinese meaning',
+    roleSection.includes('`appositive`（同位语）'))
+  assert('prompt controlled non-finite routes include appositive-gerund',
+    /attributive-special-limiter \| attributive-participle \|\s*appositive-gerund \|/.test(prompt))
+  assert('prompt binds appositive route to its role and empty features',
+    prompt.includes('`appositive-gerund` uses `role: "appositive"` and `features: []`'))
+  assert('prompt restricts appositive alternatives to ordinary active doing',
+    prompt.includes('only server-derived ordinary active `doing`')
+      && prompt.includes('Every slash-separated\nalternative must qualify; empty alternatives are rejected'))
+  assert('prompt constrains inherited appositive conversion route',
+    prompt.includes('keep `role: null` and use exactly `["appositive-gerund"]` with\n`non-finite-result`'))
 }
 
 // ============================================================
@@ -312,6 +324,52 @@ function stubProvider(payload) {
 
 async function assertAnalysisValidation() {
   const input = gfFixtureInput()
+
+  const cleftInput = {
+    paper: { paperId: 'paper-cleft-authority' },
+    group: {
+      groupId: 'group-cleft-authority',
+      paragraphs: [{ id: 'paragraph:cleft', text: Array.from({ length: 10 }, (_, index) =>
+        `It was in the park __${56 + index}__ we met our friends.`).join(' ') }],
+      questions: Array.from({ length: 10 }, (_, index) => ({
+        id: `question:cleft-${56 + index}`, blankId: `blank:cleft-${56 + index}`,
+        stem: String(56 + index), prompt: null, answerKey: 'that',
+      })),
+    },
+  }
+  const cleftAnalysis = {
+    schemaVersion: 'grammar-fill-analysis-v2', paperId: cleftInput.paper.paperId,
+    sourceAssetVersion: 1, targetGroups: [cleftInput.group.groupId],
+    groups: { [cleftInput.group.groupId]: { overview: '强调见面发生的地点。' } },
+    blanks: Object.fromEntries(cleftInput.group.questions.map((q) => [q.id, {
+      blankId: q.blankId, blankNo: Number(q.stem), blankType: 'no-hint', hint: null,
+      facetKey: 'grammar-fill.no-hint.conjunction.cleft', answer: 'that', role: null,
+      similarityProfile: { route: 'cleft-that', features: [] },
+      reason: 'It was ... that ... 强调地点，连接标记填 that。',
+      evidence: [{ type: 'clause-frame', signalText: 'It was in the park',
+        signalSide: 'passage', relation: '强调句的结构。' }],
+    }])),
+  }
+  for (const answer of ['that', '  THAT  ', 'that / THAT']) {
+    const authority = structuredClone(cleftInput)
+    authority.group.questions[0].answerKey = answer
+    validateGrammarFillShape(cleftAnalysis, authority)
+    assert(`cleft accepts normalized authoritative ${answer}`, true)
+  }
+  for (const answer of ['who', 'it', 'because', 'that/who', 'who/that', 'that/', '/that', '']) {
+    await assertRejects(`cleft rejects authoritative ${answer} even with a matching AI answer`, () => {
+      const authority = structuredClone(cleftInput)
+      authority.group.questions[0].answerKey = answer
+      const invalid = structuredClone(cleftAnalysis)
+      Object.values(invalid.blanks)[0].answer = answer.split('/')[0]
+      validateGrammarFillShape(invalid, authority)
+    }, /cleft-that.*权威答案 that/)
+  }
+  await assertRejects('cleft rejects a wrong AI answer against authoritative that', () => {
+    const invalid = structuredClone(cleftAnalysis)
+    Object.values(invalid.blanks)[0].answer = 'who'
+    validateGrammarFillShape(invalid, cleftInput)
+  }, /cleft-that.*权威答案 that/)
 
   // Original synthetic group, independent of the existing source/answer fixture.
   for (const conversion of [false, true]) {

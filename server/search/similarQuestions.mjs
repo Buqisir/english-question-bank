@@ -66,13 +66,10 @@ const GROUP_TYPE_LABELS = {
 const FINITE_VERB_FACET_KEY = 'grammar-fill.given.verb.finite'
 const NON_FINITE_VERB_FACET_KEY = 'grammar-fill.given.verb.non-finite'
 
-// Non-finite role 七格终稿 (program.md §语法填空考点粒度终稿, 2026-07-15
-// owner 补主补拍板). `predicative` and `subject-complement` do not exist in
-// the current real DB yet (D1's role-correction step introduces them) —
-// they are listed here regardless so the engine never silently drops a
-// legitimate role once D1 lands (PA C-2 "防漏格假绿").
+// Non-finite syntactic role labels, including gerund apposition.
 const NON_FINITE_ROLE_LABELS = {
   adverbial: '状语',
+  appositive: '同位语',
   attributive: '定语',
   subject: '主语',
   object: '宾语',
