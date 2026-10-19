@@ -43,14 +43,14 @@ function continuationMaterialParagraphs(group) {
     selected.length !== material.length
     || selected.some((block, index) =>
       block.kind !== 'paragraph'
-      || block.role !== 'body'
+      || !['body', 'title', 'subtitle'].includes(block.role)
       || paragraphText(block) !== material[index])
   ) {
     throw new Error(
       `SUMMARY_CONTINUATION_STRUCTURE_AMBIGUOUS: ${group.groupId} material blocks do not match adapter positions`,
     )
   }
-  return selected
+  return selected.filter((block) => block.role === 'body')
 }
 
 /**

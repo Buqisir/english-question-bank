@@ -1,6 +1,6 @@
 /**
  * Grammar-fill facet labels. Personal teaching frameworks are retired.
- * Keys and labels retain the 23-facet classification; the registry
+ * Keys and labels retain the 24-facet classification; the registry
  * name remains compatible with existing consumers and drift checks.
  */
 export const FACET_FRAMEWORKS: Record<string, { labelZh: string }> = {
@@ -27,4 +27,5 @@ export const FACET_FRAMEWORKS: Record<string, { labelZh: string }> = {
   'grammar-fill.no-hint.conjunction.relative-clause': { labelZh: '定语从句' },
   'grammar-fill.no-hint.conjunction.noun-clause': { labelZh: '名词性从句' },
   'grammar-fill.no-hint.conjunction.adverbial-clause': { labelZh: '状语从句' },
+  'grammar-fill.no-hint.conjunction.cleft': { labelZh: '强调句连接标记' },
 }

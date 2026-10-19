@@ -29,6 +29,7 @@
       "attributive-abstract-content",
       "attributive-special-limiter",
       "attributive-participle",
+      "appositive-gerund",
       "object-verb-to-infinitive",
       "object-verb-gerund",
       "object-form-changes-meaning",
@@ -101,6 +102,7 @@
       "attributive-abstract-content",
       "attributive-special-limiter",
       "attributive-participle",
+      "appositive-gerund",
       "object-verb-to-infinitive",
       "object-verb-gerund",
       "object-form-changes-meaning",
@@ -301,5 +303,10 @@
       "as-soon-as",
       "negative-condition"
     ]
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.conjunction.cleft",
+    "routes": ["cleft-that"],
+    "features": []
   }
 ]

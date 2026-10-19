@@ -51,6 +51,7 @@ import { createPaperSurfaceAnalysisAvailability } from '../server/search/paperSu
 import {
   buildGrammarFillAnalysisSurfaceModel,
   findAllTextRangesTolerant,
+  ROLE_LABELS,
 } from '../app/src/features/paper-intelligence/grammarFillAnalysisSurfaceAdapter.ts'
 import { FACET_FRAMEWORKS } from '../app/src/features/paper-intelligence/grammarFillFacetRegistry.ts'
 
@@ -75,6 +76,7 @@ function readSrc(relPath) {
 }
 
 const NON_FINITE = 'grammar-fill.given.verb.non-finite'
+assert('appositive role has the Chinese display label', ROLE_LABELS.appositive === '同位语')
 
 // ============================================================
 // Step 0 — Registry + drift guard (GATE-2)
@@ -90,8 +92,10 @@ const serverFacets = JSON.parse(
 const serverKeys = serverFacets.map((f) => f.facet_key).sort()
 const registryKeys = Object.keys(FACET_FRAMEWORKS).sort()
 
-assert('Step 0: registry has exactly 23 facets', registryKeys.length === 23,
+assert('Step 0: registry has exactly 24 facets', registryKeys.length === 24,
   `found: ${registryKeys.length}`)
+assert('Step 0: cleft connector has its Chinese display label',
+  FACET_FRAMEWORKS['grammar-fill.no-hint.conjunction.cleft']?.labelZh === '强调句连接标记')
 assert('Step 0: drift guard — registry keys EXACTLY equal server JSON keys',
   JSON.stringify(registryKeys) === JSON.stringify(serverKeys),
   `registry: ${registryKeys.join(',')}\n      server:   ${serverKeys.join(',')}`)

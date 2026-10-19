@@ -59,6 +59,7 @@ console.log()
 
 const VALID_ROLE = new Set([
   'adverbial',
+  'appositive',
   'attributive',
   'subject',
   'object',
@@ -74,7 +75,15 @@ const NON_FINITE_KEY = 'grammar-fill.given.verb.non-finite'
 
 const registry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json'))
 const VALID_FACET_KEYS = new Set(registry.map((f) => f.facet_key))
-assert('Req 0: v2 registry has exactly 23 leaves', VALID_FACET_KEYS.size === 23, `found: ${VALID_FACET_KEYS.size}`)
+assert('Req 0: v2 registry has exactly 24 leaves', VALID_FACET_KEYS.size === 24, `found: ${VALID_FACET_KEYS.size}`)
+const similarityRegistry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-similarity-v1.json'))
+const nonFiniteRoutes = similarityRegistry.find((entry) => entry.facet_key === NON_FINITE_KEY).routes
+const conversionFeatures = similarityRegistry.find((entry) => entry.facet_key === 'grammar-fill.given.conversion.noun-to-verb').features
+assert('Req 0: appositive-gerund extends the existing non-finite facet', nonFiniteRoutes.includes('appositive-gerund'))
+assert('Req 0: noun-to-verb mirrors every non-finite route, including appositive-gerund',
+  nonFiniteRoutes.every((route) => conversionFeatures.includes(route)))
+assert('Req 0: similarity registry retains the same 24 facet keys',
+  similarityRegistry.length === 24 && similarityRegistry.every((entry) => VALID_FACET_KEYS.has(entry.facet_key)))
 const frozenPaperIds = JSON.parse(
   readRepoFile('docs/cuts/paper-canonical-unification/migration/manifest-v2.json'),
 ).membership.paperIds
@@ -277,7 +286,7 @@ assert(
   missingFromFrontend.length === 0,
   missingFromFrontend.join(', '),
 )
-assert('Req 5: grammarFillFacetRegistry.ts has exactly 23 entries', registryFrontendKeys.size === 23, `found: ${registryFrontendKeys.size}`)
+assert('Req 5: grammarFillFacetRegistry.ts has exactly 24 entries', registryFrontendKeys.size === 24, `found: ${registryFrontendKeys.size}`)
 
 // The retired v1 registry JSON is kept on disk as a historical record (Req 4
 // allowlist) but must have zero live importers — analyzeGrammarFill.mjs
@@ -398,7 +407,7 @@ function buildTeachingFacetsFixture() {
       'Req 7: agreementSensitive exposed on the agreement axis as string "true" (new value domain, same param name)',
       bucket?.agreements?.has('true'),
     )
-    assert('Req 7: role (7-way, incl. subject-complement) picked up unchanged', bucket?.roles?.has('subject-complement'))
+    assert('Req 7: role (incl. subject-complement) picked up unchanged', bucket?.roles?.has('subject-complement'))
     assert('Req 7: existing facetKeys/blankTypes preserved (MF-2 regression)', bucket?.facetKeys?.has('grammar-fill.no-hint.preposition'))
 
     // Filter contract: external param names tense/voice/agreement unchanged (i16a compat)
