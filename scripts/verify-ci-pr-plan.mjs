@@ -184,13 +184,7 @@ for (const [name, needs, variables] of [
 }
 const systemInstall = job => job.match(/sudo apt-get install --yes [^\n]+/)?.[0]
 assert(systemInstall(verifyJob))
-for (const worker of verifyJobs) assert.equal(systemInstall(worker), systemInstall(verifyJob), 'retain full verify system dependencies')
-const renderSystemInstall = 'sudo apt-get install --yes ffmpeg poppler-utils imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip'
-for (const worker of renderJobs) {
-  assert.equal(systemInstall(worker), renderSystemInstall, 'render retains fonts, PDF, image and audio tools')
-  assert(!/libreoffice|python3-(?:venv|numpy|scipy)|eqb-signal-python/.test(worker),
-    'render does not install the unused DOCX conversion or signal segmentation toolchain')
-}
+for (const worker of [...verifyJobs, ...renderJobs]) assert.equal(systemInstall(worker), systemInstall(verifyJob), 'retain system dependencies')
 for (const worker of seamsJobs) assert(!systemInstall(worker), 'browser seams retain Playwright OS dependencies only')
 const laneShells = renderJobs.map(renderJob => {
   assert(renderJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
