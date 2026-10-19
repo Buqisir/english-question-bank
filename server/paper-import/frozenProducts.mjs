@@ -51,7 +51,7 @@ export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, con
   const manifest = JSON.parse(manifestBytes.toString('utf8'))
   const expectedFiles = manifestProductFiles(manifest)
   const noListening = manifest.schemaVersion === NO_LISTENING_PRODUCT_SCHEMA
-  if (config !== undefined && (noListening || config.listening !== undefined)) {
+  if (config !== undefined || listeningCount !== undefined) {
     const editions = sourceProductEditions(config, listeningCount)
     if (editions.length !== expectedFiles.length) reject('听力声明与产品清单不同')
   }

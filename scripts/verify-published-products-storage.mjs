@@ -152,6 +152,26 @@ try {
   assert.throws(() => readFrozenProducts(directory, { readArtifact: file => file === PRODUCT_MANIFEST
     ? Buffer.from(JSON.stringify({ ...manifest, files: manifest.files.slice(1) })) : bytes[file] }), /产品文件清单/,
   'historical four-product manifests still require largeComplete')
+  for (const schemaVersion of ['paper-pdf-products-v1', 'paper-pdf-products-v2']) {
+    const historical = { ...structuredClone(manifest), schemaVersion,
+      ...(schemaVersion.endsWith('v2') ? { economyPageLimit: 9 } : {}) }
+    const snapshot = { ...bytes }
+    if (historical.economyPageLimit === 9) {
+      const pdf = pdfBytes(9, 'historical explicit nine-page economy')
+      snapshot['products/economy8.pdf'] = pdf
+      Object.assign(historical.files[2], { pageCount: 9, byteLength: pdf.length, sha256: digest(pdf) })
+    }
+    snapshot[PRODUCT_MANIFEST] = Buffer.from(JSON.stringify(historical))
+    const context = { readArtifact: file => snapshot[file], config: {} }
+    for (const listeningCount of [0, 1]) {
+      assert.throws(() => readFrozenProducts(directory, { ...context, listeningCount }), /听力声明/,
+        `${schemaVersion} with supplied source context requires two Canonical listening groups`)
+    }
+    assert.equal(readFrozenProducts(directory, { ...context, listeningCount: 2 }).manifest.schemaVersion, schemaVersion)
+    assert.equal(readFrozenProducts(directory, { readArtifact: context.readArtifact, listeningCount: 2 }).manifest.schemaVersion, schemaVersion)
+    assert.throws(() => readFrozenProducts(directory, { ...context, listeningCount: 2,
+      config: { listening: 'absent-by-exam-design' } }), /听力声明/)
+  }
   for (const [index, pages, claimed, expected] of [
     [0, 13, 13, /产品规格/], [1, 11, 11, /产品规格/],
     [2, 7, 7, /产品规格/], [2, 9, 9, /产品规格/],
@@ -289,6 +309,10 @@ try {
       context: { session: { role }, sendJson(_response, status, body) { Object.assign(output, { status, body }) } } })
     return output
   }
+  assert.equal((await readPreview('products', 'member')).status, 403)
+  assert.deepEqual((await readPreview('products')).body, {
+    paperId: projection.paperId, revisionId: previewRevision.id, editions: Object.keys(PAPER_PDF_PRODUCTS),
+  }, 'private inventory must use the requested sealed revision without source reprocessing')
   for (const [index, edition] of Object.keys(PAPER_PDF_PRODUCTS).entries()) {
     assert.equal((await readPreview(`pdf?edition=${edition}`, 'member')).status, 403)
     const pdf = await readPreview(`pdf?edition=${edition}`)
@@ -307,6 +331,8 @@ try {
   assert.equal(previewConsumption.listeningAudio.sha256, projection.listeningReview.audio.playbackAudioSha256)
   const changedPdf = path.join(previewFiles, previewRevision.id, 'products/economy8.pdf')
   await writeFile(changedPdf, bytes['products/largeNoListening.pdf'])
+  assert.equal((await readPreview('products')).status, 409,
+    'inventory cannot offer a product whose sealed bytes changed')
   assert.equal((await readPreview('pdf?edition=economy8')).status, 409,
     'changed frozen bytes must fail instead of rendering a replacement')
   const publicationDb = new DatabaseSync(':memory:')
@@ -330,6 +356,11 @@ try {
   // GET success alone cannot catch a missing HEAD registration in this router.
   const routes = createExportRoutes({})
   const routeContext = { draftPaperStore: {
+    async getPublishedPaperProductInventory(paperId, publicationDigest) {
+      assert.equal(paperId, manifest.paperId)
+      if (publicationDigest !== consumption.publicationDigest) throw new Error('publication mismatch')
+      return { paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS) }
+    },
     async getPublishedPaperProduct(paperId, edition, publicationDigest) {
       assert.equal(paperId, manifest.paperId)
       assert.equal(publicationDigest, consumption.publicationDigest)
@@ -337,6 +368,19 @@ try {
         paginatedHtml: '<!doctype html><title>源卷名</title>' }
     },
   } }
+  for (const publicationDigest of [consumption.publicationDigest, digest(Buffer.from('wrong publication'))]) {
+    const output = {}
+    const url = new URL(`http://localhost/api/exports/papers/${manifest.paperId}/products`)
+    url.searchParams.set('publicationDigest', publicationDigest)
+    await runRoutes(routes, { request: { method: 'GET' },
+      response: { setHeader(name, value) { output[name] = value } }, url,
+      context: { ...routeContext, sendJson(_response, status, body) { Object.assign(output, { status, body }) } } })
+    assert.equal(output['cache-control'], 'private, no-store')
+    assert.equal(output.status, publicationDigest === consumption.publicationDigest ? 200 : 409)
+    if (output.status === 200) assert.deepEqual(output.body, {
+      paperId: manifest.paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS),
+    })
+  }
   for (const edition of ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']) {
     for (const product of ['pdf', 'print']) {
       const url = new URL(`http://localhost/api/exports/papers/${manifest.paperId}/${product}`)

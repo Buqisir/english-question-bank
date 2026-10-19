@@ -38,6 +38,17 @@ export function createExportRoutes(exportImplementation) {
       }
     }),
 
+    defineRoute('GET', /^\/api\/exports\/papers\/([^/]+)\/products$/, async ({ response, url, match, context }) => {
+      response.setHeader('cache-control', 'private, no-store')
+      try {
+        const inventory = await context.draftPaperStore.getPublishedPaperProductInventory(
+          decodeURIComponent(match[1]), url.searchParams.get('publicationDigest'))
+        context.sendJson(response, 200, inventory)
+      } catch (error) {
+        context.sendJson(response, 409, { error: routeError(error) })
+      }
+    }),
+
     ...['GET', 'HEAD'].map(method => defineRoute(method, /^\/api\/exports\/papers\/([^/]+)\/(pdf|print)$/, async ({ request, response, url, match, context }) => {
       try {
         if (url.searchParams.has('versionType') || url.searchParams.has('pageLayout')) throw new Error('当前产品只使用 edition')

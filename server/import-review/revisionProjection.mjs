@@ -1703,10 +1703,9 @@ export function buildNck1ReviewProjection(rootDir, {
   const slotBindings = paginationSlotBindings(consumption)
   // Historical analyzed packages without a PDF commitment retain their separate
   // source contract. Raw-source and product workspaces must declare absence.
-  const existingProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readJson(resolveReviewFile(rootDir, PRODUCT_MANIFEST), PRODUCT_MANIFEST) : null
+  const hasProductManifest = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
   if (!loaded.analyzedPackage || loaded.config.pdfProductsRequired || loaded.config.listening !== undefined
-    || existingProducts?.schemaVersion === 'paper-pdf-products-v3') {
+    || hasProductManifest) {
     sourceProductEditions(loaded.config, slotBindings.filter(entry => entry.familyContractId === 'listening').length)
   }
   const paginationPlan = loadPaperPaginationPlan(rootDir, {

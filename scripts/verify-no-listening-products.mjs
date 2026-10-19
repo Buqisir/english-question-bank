@@ -15,11 +15,12 @@ import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
+import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
-const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
+const { makeReviewRoot, makeExternalAnalyzedPackage } = await import('./verify-universal-nck1-publish.mjs')
 if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
 
@@ -34,6 +35,35 @@ try {
   assert.throws(() => sourceProductEditions({ listening: 'missing-audio' }, 0), /听力声明/)
   const fixture = makeReviewRoot(directory, 'paper-no-listening-contract')
   const root = fixture.reviewRoot
+  const packageRoot = path.join(directory, 'historical-package')
+  const historicalRoot = path.join(directory, 'historical-review')
+  makeExternalAnalyzedPackage(root, packageRoot)
+  await prepareNck1AnalyzedPackageReview({
+    sourcePath: packageRoot, destinationDir: historicalRoot, expectedPaperId: fixture.projection.paperId,
+  })
+  const historicalConfig = JSON.parse(readFileSync(path.join(historicalRoot, 'config.json')))
+  delete historicalConfig.listening
+  delete historicalConfig.pdfProductsRequired
+  json(path.join(historicalRoot, 'config.json'), historicalConfig)
+  assert.doesNotThrow(() => buildNck1ReviewProjection(historicalRoot),
+    'historical analyzed packages without any PDF commitment retain their source-only contract')
+  mkdirSync(path.join(historicalRoot, 'products'))
+  for (const schemaVersion of ['paper-pdf-products-v1', 'paper-pdf-products-v2']) {
+    const historicalManifest = { schemaVersion, paperId: fixture.projection.paperId,
+      paperName: historicalConfig.provenance.paperName, inputDigest: sha256(Buffer.from('historical fixture')),
+      ...(schemaVersion.endsWith('v2') ? { economyPageLimit: 9 } : {}), files: [] }
+    for (const [index, edition] of ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly'].entries()) {
+      const pageCount = [12, 10, schemaVersion.endsWith('v2') ? 9 : 8, 2][index]
+      const bytes = productPdfBytes(pageCount, edition)
+      const file = { path: `products/${edition}.pdf`, mediaType: 'application/pdf', role: 'pdf_product',
+        pageCount, byteLength: bytes.length, sha256: sha256(bytes) }
+      writeFileSync(path.join(historicalRoot, file.path), bytes)
+      historicalManifest.files.push(file)
+    }
+    json(path.join(historicalRoot, PRODUCT_MANIFEST), historicalManifest)
+    assert.throws(() => buildNck1ReviewProjection(historicalRoot), /听力声明/,
+      `${schemaVersion} removes the historical package exemption even when pdfProductsRequired is absent`)
+  }
   const configPath = path.join(root, 'config.json')
   const config = JSON.parse(readFileSync(configPath))
   delete config.listening

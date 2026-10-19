@@ -1614,8 +1614,7 @@ export function createDraftPaperStore({
 
   // Published products are immutable reviewed bytes, never a render-on-download.
   // Assemblies below still render because teachers can change their selection.
-  async function getPublishedPaperProduct(paperId, edition, expectedPublicationDigest) {
-    requirePaperPdfEdition(edition)
+  async function getPublishedPaperProducts(paperId, expectedPublicationDigest) {
     if (!loadCanonicalConsumption) throw new Error('Canonical paper loader unavailable')
     if (!/^sha256:[a-f0-9]{64}$/.test(expectedPublicationDigest || '')) throw new Error('缺少精确试卷版本')
     const db = openDatabase({ readOnly: true })
@@ -1625,10 +1624,19 @@ export function createDraftPaperStore({
       if (!version) throw new Error('此试卷版本尚未发布')
       const consumption = loadCanonicalConsumption({ paperId, consumerId: 'print_pdf', version: version.version_name })
       if (consumption.publicationDigest !== expectedPublicationDigest) throw new Error('试卷版本身份不一致')
-      return frozenProductResult(await loadStoredProducts({ db, paperAssetsDir, consumption }), edition)
+      return await loadStoredProducts({ db, paperAssetsDir, consumption })
     } finally {
       db.close()
     }
+  }
+  async function getPublishedPaperProduct(paperId, edition, expectedPublicationDigest) {
+    requirePaperPdfEdition(edition)
+    return frozenProductResult(await getPublishedPaperProducts(paperId, expectedPublicationDigest), edition)
+  }
+  async function getPublishedPaperProductInventory(paperId, expectedPublicationDigest) {
+    const { manifest } = await getPublishedPaperProducts(paperId, expectedPublicationDigest)
+    return { paperId, publicationDigest: expectedPublicationDigest,
+      editions: manifest.files.map(file => path.basename(file.path, '.pdf')) }
   }
 
   async function getAssemblyPaperProduct(input, exactConsumption = null) {
@@ -1861,6 +1869,7 @@ export function createDraftPaperStore({
     getDraftPaperProductPagination,
     getAssemblyPaperProduct,
     getPublishedPaperProduct,
+    getPublishedPaperProductInventory,
     getOrCreateCurrentDraftPaper,
     getReorderSuggestion,
     listDraftPapers,

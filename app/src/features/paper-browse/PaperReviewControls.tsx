@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { usePaperPdfProducts } from './usePaperPdfProducts'
 import './paperReviewControls.css'
 
 type ReviewDetail = {
@@ -16,7 +17,8 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
   publication?: { publicationDigest: string; sourceAssetVersion: number }
 }) {
   const [detail, setDetail] = useState<ReviewDetail | null>(null)
-  const [edition, setEdition] = useState<PaperPdfEdition>('largeComplete')
+  const { editions, edition, setEdition, error: productError, retry: retryProducts } =
+    usePaperPdfProducts({ paperId, revisionId, defaultEdition: 'largeComplete' })
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
@@ -46,7 +48,8 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
   const threadUrl = /^T-[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(detail?.discussionThreadId || '')
     ? `https://ampcode.com/threads/${detail!.discussionThreadId}` : ''
   const current = revisionId && detail?.latest?.id === revisionId
-  const pdfUrl = `/api/import-review-preview/revisions/${encodeURIComponent(revisionId || '')}/pdf?edition=${edition}`
+  const pdfUrl = revisionId && edition
+    ? `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/pdf?edition=${edition}` : ''
 
   async function discuss() {
     if (busy) return
@@ -108,17 +111,20 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
 
   return <section className="paper-review-controls" aria-label="检查这份卷">
     <div className="paper-review-controls-row">
-      {revisionId && <><select className="ghost-button" aria-label="查看哪款 PDF" value={edition}
-        onChange={event => setEdition(event.target.value as PaperPdfEdition)}>
-        {PAPER_PDF_EDITIONS.map(edition => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
+      {revisionId && <><select className="ghost-button" aria-label="查看哪款 PDF" value={edition ?? ''}
+        disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}>
+        {editions.map(edition => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
       </select>
-      <a className="ghost-button" href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF</a></>}
+      {pdfUrl && <a className="ghost-button" href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF</a>}</>}
       <button className="ghost-button" type="button" disabled={busy || (!detail && !error)} onClick={() => void discuss()}>
         {busy ? '复制中…' : threadUrl ? '去 Amp 聊这份卷' : '复制试卷信息'}
       </button>
     </div>
     {revisionId && detail && !current && <p>你正在看旧版，复制的信息会保留这一版。</p>}
     {notice && <p role="status">{notice}</p>}
+    {revisionId && productError && <p role="alert">{productError}{' '}
+      <button className="ghost-button" type="button" onClick={retryProducts}>刷新 PDF 版本</button>
+    </p>}
     {error && <p role="alert">{error}{' '}
       <button className="ghost-button" type="button" onClick={() => setRefresh(value => value + 1)}>刷新</button>
     </p>}
