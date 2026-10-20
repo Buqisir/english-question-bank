@@ -30,6 +30,8 @@ await import('./verify-import-review-file-hash.mjs')
 await import('./verify-review-compatibility.mjs')
 await import('./verify-review-build-identity.mjs')
 await import('./verify-review-compatibility-store.mjs')
+await import('./verify-review-eligibility.mjs')
+await import('./verify-review-publication-content.mjs')
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 const directory = await mkdtemp(path.join(os.tmpdir(), 'eqb-product-storage-'))
