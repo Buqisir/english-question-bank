@@ -15,13 +15,17 @@ import { DatabaseSync } from 'node:sqlite'
 import { MEDIA_AI_CONFIRMATION_CHECKS } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
-import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mjs'
-import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
-import { finalizeInventory, ocrConfirmationComputation } from './finalizeComputation.mjs'
+import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation } from './finalizeComputation.mjs'
+import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
+import { appendReviewCompatibility } from './reviewCompatibilityStore.mjs'
+import { buildProductPreviewPayload } from './reviewSubject.mjs'
+import { compareReviewSubjects } from './reviewCompatibility.mjs'
+import { reviewBuildIdentityProvider } from './reviewBuildIdentity.mjs'
+import { beginReviewActivity } from './reviewCompatibilityScheduling.mjs'
 import { restoreFinalizeError, runFinalizeWorker } from './runFinalizeWorker.mjs'
 import {
   buildImportReviewProjection,
@@ -609,6 +613,7 @@ function ensureShape(db) {
   if (!paperColumns.has('discussion_thread_id')) {
     db.exec('ALTER TABLE import_review_papers ADD COLUMN discussion_thread_id TEXT')
   }
+  ensureReviewCompatibilityShape(db)
 }
 
 function revisionRow(row) {
@@ -817,6 +822,7 @@ export function createImportReviewStore({
   ensureShape(initialize)
   initialize.close()
   const projectionCache = new Map()
+  const targetBuild = reviewBuildIdentityProvider()
 
   function currentRendererBuildId() {
     return requiredString(
@@ -1199,11 +1205,13 @@ export function createImportReviewStore({
 
   async function finalizeUploadedRevision(revisionId, { metrics = {} } = {}) {
     const timer = finalizationTimer(revisionId, metrics)
+    const finishActivity = beginReviewActivity('finalize')
     let release
     try {
       release = await acquireRevisionUpload(revisionDirectory(revisionId))
     } catch (error) {
       timer.finish(error)
+      finishActivity()
       throw error
     }
     try {
@@ -1214,7 +1222,9 @@ export function createImportReviewStore({
         timer.phase('fileHash')
         await assertStoredRevisionFilesAsync(status.revision)
         timer.phase('projection')
-        prepared = await runFinalizeWorker(revisionDirectory(revisionId), status.revision, {
+        prepared = await runFinalizeWorker(revisionDirectory(revisionId), {
+          ...status.revision, rendererBuildId: currentRendererBuildId(),
+        }, {
           onPhase: name => timer.phase(name),
         })
       }
@@ -1224,7 +1234,7 @@ export function createImportReviewStore({
     } catch (error) {
       timer.finish(error)
       throw error
-    } finally { release() }
+    } finally { release(); finishActivity() }
   }
 
   function finalizeRevision(revisionId, { metrics = {} } = {}) {
@@ -1232,6 +1242,7 @@ export function createImportReviewStore({
   }
 
   function finalizeRevisionWithLease(revisionId, timer, release = null) {
+    const finishActivity = beginReviewActivity('finalize')
     try {
       if (!getRevision(revisionId)) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Revision not found', 404)
       release ||= tryRevisionFinalization(revisionDirectory(revisionId))
@@ -1241,7 +1252,7 @@ export function createImportReviewStore({
     } catch (error) {
       timer.finish(error)
       throw error
-    } finally { release?.() }
+    } finally { release?.(); finishActivity() }
   }
 
   function finalizeRevisionMeasured(revisionId, timer, prepared = null, status = uploadStatus(revisionId)) {
@@ -1314,6 +1325,12 @@ export function createImportReviewStore({
     timer.phase('transactionAndPreview')
     const timestamp = nowIso()
     const rendererId = currentRendererBuildId()
+    const finalizedIdentity = { ...status.revision, rendererBuildId: rendererId, state: 'awaiting_review' }
+    const baseline = status.revision.reviewKind === 'candidate'
+      ? prepared?.contentSubject || finalizeContentSubject(directory, finalizedIdentity, projection) : null
+    const comparison = baseline ? compareReviewSubjects({
+      baseline, target: baseline, targetBuildId: targetBuild().targetBuildId,
+    }) : null
     withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
@@ -1383,6 +1400,7 @@ export function createImportReviewStore({
         }
         if (current.reviewKind === 'candidate') {
           saveProductPreview(db, current, rendererId, projection)
+          appendReviewCompatibility(db, finalizedIdentity, baseline, comparison)
         }
         db.exec('COMMIT')
       } catch (error) {
@@ -1566,20 +1584,7 @@ export function createImportReviewStore({
   }
 
   function saveProductPreview(db, revision, rendererId, projection) {
-    const playback = projection.sourceInput?.listeningAudio || projection.analyzedPackage?.listeningAudio
-    const playbackPath = projection.analyzedPackage
-      ? projection.sourceProvenance?.members.find(member => member.role === 'audio')?.path
-      : LISTENING_AUDIO_PATHS.playback
-    const payload = {
-      paperAsset: projection.paperAsset,
-      analysisSidecars: projection.analysisSidecars || {},
-      consumption: { ...projection.consumption, ...(playback ? { listeningAudio: {
-        relativePath: 'listening/playback.mp3', sha256: playback.sha256, byteLength: playback.byteLength,
-        durationSeconds: playback.durationSeconds, mediaType: 'audio/mpeg',
-        url: `/api/import-review-preview/revisions/${encodeURIComponent(revision.id)}/files?path=${encodeURIComponent(playbackPath)}`,
-        segments: reviewedPlaybackSegments(projection.reviewedListening),
-      } } : {}) },
-    }
+    const payload = buildProductPreviewPayload(revision, projection)
     // Small derived Screen data only: no original documents, MP3/PDF bytes,
     // source rasters or new approval authority. Keep it in the same DB snapshot.
     const json = JSON.stringify(payload)

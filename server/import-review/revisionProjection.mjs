@@ -18,6 +18,9 @@ import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } fr
 import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
+import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
+import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
+import { buildStoredReviewSubject, buildTargetReviewSubject } from './reviewSubject.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -1657,11 +1660,65 @@ export function buildNck1CompatibilityPackage({
   }
 }
 
-export function buildNck1ReviewProjection(rootDir, {
+export function buildNck1ReviewProjection(rootDir, options = {}) {
+  return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts)
+}
+
+// Only this entry constructs the private product reader. There is no public
+// skip-pdfinfo option and callers cannot supply projection/listening objects.
+export function computeSealedReviewSubjects({ directory, revision, preview, storedFiles }) {
+  return withSealedReviewSnapshot(directory, revision.manifest.files, snapshot => {
+    const { fileEvidence } = snapshot
+    let baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence })
+    const changed = fileEvidence.find(file => {
+      const expected = revision.manifest.files.find(item => item.path === file.path)
+      return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
+    })
+    if (changed) return { baseline: { ok: false, reasonCode: 'SEALED_FILE_CHANGED', differences: [changed.path] }, target: null }
+    try {
+      const products = fileEvidence.find(file => file.path === PRODUCT_MANIFEST)
+      const readSealedProducts = (_root, options) => {
+        const manifest = products?.json
+        if (!manifest || manifest.inputDigest !== options.inputDigest
+          || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
+          fail('Sealed product input identity differs')
+        }
+        const pageLimit = ['paper-pdf-products-v2', 'paper-pdf-products-v3'].includes(manifest.schemaVersion)
+          ? manifest.economyPageLimit : 8
+        if (options.economyPageLimit !== undefined && options.economyPageLimit !== pageLimit) fail('Sealed product page limit differs')
+        for (const file of manifest.files) {
+          const edition = path.basename(file.path, '.pdf')
+          if (edition === 'answerOnly') continue
+          const policy = studentProductPolicy(edition, 2, { economyPageLimit: pageLimit })
+          if (policy.atMost ? file.pageCount > policy.targetPages : file.pageCount !== policy.targetPages) {
+            fail('Sealed product page count differs')
+          }
+        }
+        // Byte hashes and all product descriptors are checked by subject
+        // extraction. No PDF bytes are materialized or returned to the API.
+        return { manifest, digest: products.sha256, bytes: {} }
+      }
+      const projection = buildNck1ReviewProjectionInternal(snapshot.directory,
+        { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts)
+      baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence,
+        validatedListeningReview: projection.reviewedListening })
+      const expected = reviewBundleFilePathsForProjection(snapshot.directory, projection)
+      const inventory = expected.map(file => ({
+        ...file, sha256: fileEvidence.find(item => item.path === file.path)?.sha256,
+        byteLength: fileEvidence.find(item => item.path === file.path)?.byteLength,
+      }))
+      return { baseline, target: buildTargetReviewSubject({ revision, projection, inventory, fileEvidence }) }
+    } catch {
+      return { baseline, target: { ok: false, reasonCode: 'TARGET_COMPUTATION_FAILED' } }
+    }
+  })
+}
+
+function buildNck1ReviewProjectionInternal(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
-} = {}) {
+} = {}, readProducts) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest)
   if (!imported.candidate || imported.issues.length > 0) {
@@ -1764,7 +1821,7 @@ export function buildNck1ReviewProjection(rootDir, {
       && preview.candidate.interpretation.sourceAssetVersion === 1,
   })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
+    ? readProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
         config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {

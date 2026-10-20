@@ -43,14 +43,14 @@ function inventory(files) {
 // Streaming, no filesystem access and no PDF parser. The I/O boundary must
 // securely open regular files (including every parent) and reject symlinks.
 // Only bounded JSON bytes are retained; PDFs/audio are hashed and discarded.
-export async function inspectReviewFile(file, chunks) {
+function reviewFileInspector(file) {
   descriptor(file)
   const hash = createHash('sha256')
   const jsonChunks = []
   const json = file.mediaType === 'application/json' || file.path.endsWith('.json')
   let byteLength = 0
   let prefix = Buffer.alloc(0)
-  for await (const chunk of chunks) {
+  function push(chunk) {
     if (!(chunk instanceof Uint8Array)) fail('MISSING_EVIDENCE', file.path)
     hash.update(chunk)
     byteLength += chunk.byteLength
@@ -60,14 +60,29 @@ export async function inspectReviewFile(file, chunks) {
       jsonChunks.push(Buffer.from(chunk))
     }
   }
-  const evidence = { path: file.path, sha256: `sha256:${hash.digest('hex')}`, byteLength, prefix: prefix.toString('ascii') }
-  if (json) {
-    try { evidence.json = JSON.parse(Buffer.concat(jsonChunks).toString('utf8')) }
-    // Preserve successful byte evidence even when tampering broke JSON syntax.
-    // verifiedFiles classifies a changed hash before interpreting this flag.
-    catch { evidence.jsonError = true }
+  function finish() {
+    const evidence = { path: file.path, sha256: `sha256:${hash.digest('hex')}`, byteLength, prefix: prefix.toString('ascii') }
+    if (json) {
+      try { evidence.json = JSON.parse(Buffer.concat(jsonChunks).toString('utf8')) }
+      // Preserve successful byte evidence even when tampering broke JSON syntax.
+      // verifiedFiles classifies a changed hash before interpreting this flag.
+      catch { evidence.jsonError = true }
+    }
+    return evidence
   }
-  return evidence
+  return { push, finish }
+}
+
+export async function inspectReviewFile(file, chunks) {
+  const inspector = reviewFileInspector(file)
+  for await (const chunk of chunks) inspector.push(chunk)
+  return inspector.finish()
+}
+
+export function inspectReviewFileSync(file, chunks) {
+  const inspector = reviewFileInspector(file)
+  for (const chunk of chunks) inspector.push(chunk)
+  return inspector.finish()
 }
 
 // Same historical bundle identity as importReviewStore.reviewBundleDigest.
