@@ -1898,7 +1898,7 @@ export function replaceOcrStructuredAnswerRegions(raw, expected, resolved, confi
 // producer is deliberately unchanged: it supplies question identity/locator and
 // options, while these contiguous media markers were previously unassociated.
 // A subsequent authority must admit the complete v5 reader before publication.
-function confirmedStemFigures(raw, resolved, expected, confirmation, evidence) {
+function confirmedStemFigures(raw, resolved, expected) {
   const same = (left, right) => digestJson(left) === digestJson(right)
   const reject = message => { throw new Error(message) }
   const owners = new Map()
@@ -1953,19 +1953,6 @@ function confirmedStemFigures(raw, resolved, expected, confirmation, evidence) {
           || owners.has(figure.mediaId)) {
           reject('Stem figure must consume its exact confirmed region once in source order; crop revisions are unsupported')
         }
-        if (figure.caption) {
-          const page = confirmation.documents.find(value => value.documentId === document.documentId)
-            ?.pages.find(value => value.page === figure.source.page)
-          const sourcePage = evidence.documents.find(value => value.documentId === document.documentId)
-            ?.pages.find(value => value.page === figure.source.page)
-          const visuals = (page?.visualClassifications || []).filter(value => value.classification === 'content_media'
-            && sourcePage?.regions.some(region => region.regionId === value.regionId && same(region.region, figure.source.region)))
-          const captions = visuals.length === 1 ? visuals[0].itemIds.map(id =>
-            page.orderedItems.find(item => item.itemId === id)?.text) : []
-          if (captions.filter(text => text === figure.caption).length !== 1) {
-            reject('Stem figure caption must be exact confirmed text inside its source image, or empty')
-          }
-        }
         owners.set(figure.mediaId, figure)
       }
     }
@@ -1988,7 +1975,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       .map(option => option.figure.mediaId)),
     ...(group.optionBank || []).filter(option => option.figure).map(option => option.figure.mediaId),
   ])
-  const stemFigures = confirmedStemFigures(raw, resolved, expected, confirmation, evidence)
+  const stemFigures = confirmedStemFigures(raw, resolved, expected)
   if (stemFigures.size) {
     const regions = new Set()
     for (const media of raw.media) {

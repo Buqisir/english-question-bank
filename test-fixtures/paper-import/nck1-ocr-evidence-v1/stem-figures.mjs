@@ -58,7 +58,7 @@ export async function verifyReadingStemFigures(fixture) {
         region: { x: 0, y: 0, width: 1, height: 1 }, density: 144 })
       const overlay = i + 1 === page.page
         ? observed.regions.filter(region => region.regionId.startsWith('stem-map-')).map(({ region }) =>
-          `<svg viewBox="0 0 100 30" preserveAspectRatio="none" style="position:absolute;left:${region.x * 100}%;top:${region.y * 100}%;width:${region.width * 100}%;height:${region.height * 100}%"><rect width="100" height="30" fill="white"/><path d="M5 15H95M30 3V27M70 3V27" stroke="black"/><circle cx="30" cy="15" r="4"/><circle cx="70" cy="15" r="4"/></svg>`).join('')
+          `<svg viewBox="0 0 100 30" preserveAspectRatio="none" style="position:absolute;left:${region.x * 100}%;top:${region.y * 100}%;width:${region.width * 100}%;height:${region.height * 100}%"><rect width="100" height="30" fill="white"/><path d="M5 15H95M30 3V27M70 3V27" stroke="black"/><circle cx="30" cy="15" r="4"/><circle cx="70" cy="15" r="4"/><text x="5" y="8" font-size="7">Library</text></svg>`).join('')
         : ''
       return `<section><img src="data:image/png;base64,${Buffer.from(raster.bytes).toString('base64')}">${overlay}</section>`
     })
@@ -225,7 +225,7 @@ export async function verifyReadingStemFigures(fixture) {
     'crop-replay-mismatch', 'top-trim', 'wrong-question-source', 'combined-question-answers-source',
     'figure-inside-options', 'figure-after-next-question', 'cross-unconsumed-text',
     'reversed-figures', 'missing-confirmation', 'legacy-v4-field', 'non-reading-field',
-    'empty-stem-figures', 'null-stem-figure', 'non-figure-stem-block', 'invented-caption',
+    'empty-stem-figures', 'null-stem-figure', 'non-figure-stem-block', 'invented-caption', 'confirmed-label-caption',
   ]
   for (const name of cases) {
     const invalid = clone(mat)
@@ -308,6 +308,29 @@ export async function verifyReadingStemFigures(fixture) {
     else if (name === 'null-stem-figure') q.stemFigures = [null]
     else if (name === 'non-figure-stem-block') figure.kind = 'paragraph'
     else if (name === 'invented-caption') figure.caption = 'Unconfirmed caption'
+    else if (name === 'confirmed-label-caption') {
+      const ep = ev.documents[0].pages.find(value => value.page === page.page)
+      const region = figure.source.region
+      const label = { ...clone(observation), observationId: 'map-label-observation',
+        regionId: 'map-label-region', text: 'Library',
+        region: { x: region.x + region.width * 0.05, y: region.y + region.height * 0.05,
+          width: region.width * 0.5, height: region.height * 0.25 } }
+      ep.observations.splice(ep.observations.findIndex(value => value.observationId === observation.observationId) + 1, 0, label)
+      ep.regions.push({ regionId: label.regionId, kind: 'text', region: clone(label.region) })
+      ep.readingOrderEdges = ep.observations.slice(1).map((value, index) =>
+        ({ before: ep.observations[index].observationId, after: value.observationId }))
+      confirmedPage.orderedItems.splice(confirmedPage.orderedItems.findIndex(value => value.itemId === item.itemId) + 1, 0,
+        { itemId: 'map-label-item', observationIds: [label.observationId], text: label.text })
+      visual.itemIds = ['map-label-item']
+      ev.evidenceDigest = nck1OcrEvidenceDigest(ev)
+      cf.evidenceDigest = ev.evidenceDigest
+      assert.deepEqual(resolveConfirmedNck1OcrEvidence({ paperId, documents, evidence: ev, confirmation: cf }).issues, [])
+      assert.deepEqual(imported(invalid, files, sourceBytes(ev, cf)).issues, [],
+        'confirmed map labels remain valid inside the crop with an empty caption')
+      figure.caption = label.text
+      assert(validateJsonSchema(figure, materializationV5Schema.$defs.stemFigure).length > 0)
+      assert(validateNck1SourceMaterialization(invalid).some(issue => issue.code === 'MATERIALIZATION_STEM_FIGURE_CAPTION_INVALID'))
+    }
     ev.evidenceDigest = nck1OcrEvidenceDigest(ev)
     cf.evidenceDigest = ev.evidenceDigest
     const result = name === 'missing-confirmation' ? importCanonicalCandidate({

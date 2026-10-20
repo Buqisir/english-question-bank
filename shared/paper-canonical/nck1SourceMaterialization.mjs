@@ -385,6 +385,9 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
       } else {
         validateBlocks(figures, `${path}.stemFigures`, documents, figureReferences, [], ids, issues)
         for (const figure of figures) {
+          if (figure.caption !== '') {
+            issues.push(issue('MATERIALIZATION_STEM_FIGURE_CAPTION_INVALID', `${path}.stemFigures`, 'Source-cropped stem figures must have an empty caption; image labels must not be transcribed again'))
+          }
           const document = documents.get(figure.source?.documentId)
           if (figure.source?.kind !== 'page_region' || document?.role !== 'question_source'
             || document?.mediaType !== 'application/pdf'
