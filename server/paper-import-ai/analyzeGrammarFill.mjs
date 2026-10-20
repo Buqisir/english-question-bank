@@ -108,6 +108,11 @@ function normalizeAnswerBranch(raw) {
     .toLowerCase()
 }
 
+export function isSupportedCleftThatAnswer(answer) {
+  return typeof answer === 'string'
+    && answer.split('/').every((alternative) => normalizeAnswerBranch(alternative) === 'that')
+}
+
 function answerMatchesKey(aiAnswer, answerKey) {
   const normalizedAi = normalizeAnswerBranch(aiAnswer)
   const branches = String(answerKey).split('/').map(normalizeAnswerBranch)
@@ -443,6 +448,10 @@ export function validateGrammarFillShape(analysis, {
     // C1: answer-match against answer key — FROZEN 4-op normalization
     const aiAnswer = optionalString(item.answer)
     const answerKey = sourceQuestion?.answerKey || ''
+    if (facetKey === 'grammar-fill.no-hint.conjunction.cleft'
+      && (!isSupportedCleftThatAnswer(answerKey) || !isSupportedCleftThatAnswer(item.answer))) {
+      throw new Error(`${questionId}: cleft-that 必须对应权威答案 that，且每个斜杠分隔答案都必须是 that。`)
+    }
     if (aiAnswer && answerKey) {
       if (!answerMatchesKey(aiAnswer, answerKey)) {
         const conflictError = new Error(

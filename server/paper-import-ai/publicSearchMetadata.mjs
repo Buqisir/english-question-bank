@@ -5,7 +5,7 @@ import Ajv from 'ajv/dist/2020.js'
 
 import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
 import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { isSupportedAppositiveGerundAnswer, stampGrammarFillDerivedFields } from './analyzeGrammarFill.mjs'
+import { isSupportedAppositiveGerundAnswer, isSupportedCleftThatAnswer, stampGrammarFillDerivedFields } from './analyzeGrammarFill.mjs'
 import { enumerateParagraphSummaryTargets } from './paragraphSummaries.mjs'
 
 export const PUBLIC_SEARCH_METADATA_VERSION = 'public-search-metadata-v1'
@@ -426,6 +426,10 @@ export function validatePublicSearchMetadata({ sidecar, materialization, sourceD
           const derivedHolder = { blanks: { [q.questionId]: { facetKey: q.facetKey, hint: q.hint, answer: answers.get(q.questionId), role: q.role, similarityProfile: q.similarityProfile } } }
           stampGrammarFillDerivedFields(derivedHolder)
           const derived = derivedHolder.blanks[q.questionId]
+          if (q.facetKey === 'grammar-fill.no-hint.conjunction.cleft'
+            && !isSupportedCleftThatAnswer(answers.get(q.questionId))) {
+            push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'cleft-that requires every authoritative answer alternative to be that')
+          }
           if ((q.facetKey === 'grammar-fill.given.verb.non-finite' && q.similarityProfile?.route === 'appositive-gerund')
             || (q.facetKey === 'grammar-fill.given.conversion.noun-to-verb'
               && q.similarityProfile?.features?.includes('appositive-gerund'))) {
