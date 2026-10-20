@@ -74,7 +74,7 @@ try {
   let legitimateApproval
   for (const [result, reasonCode] of [
     ['equal', 'CONTENT_EQUAL'], ['different', 'CONTENT_DIFFERENT'],
-    ...['MISSING_BASELINE', 'BACKFILL_PENDING', 'WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT',
+    ...['MISSING_BASELINE', 'BACKFILL_PENDING', 'WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_RSS_LIMIT', 'WORKER_EXIT',
       'IO_ERROR', 'EXHAUSTED', 'TARGET_IDENTITY_UNAVAILABLE', 'TARGET_IDENTITY_PENDING',
       'LEGACY_REVIEW_SUBJECTS_PRESENT', 'NOT_CHECKED'].map(reason => ['unknown', reason]),
   ]) {
@@ -137,6 +137,22 @@ try {
   assert.throws(() => conflictStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner'),
     { code: 'IMPORT_REVIEW_RENDERER_STALE' })
   pass('a retained definitive different cannot fall back even after a later unknown integrity-conflict attempt')
+  const recoveredPath = path.join(root, 'different-recovered.sqlite')
+  copyFileSync(fixture.dbPath, recoveredPath)
+  dbRun(recoveredPath, db => {
+    db.exec('DELETE FROM review_compatibility; BEGIN IMMEDIATE')
+    const subjectDigest = db.prepare('SELECT subject_digest FROM review_subject').get().subject_digest
+    appendReviewCompatibility(db, revision, null, { result: 'different', reasonCode: 'CONTENT_DIFFERENT',
+      subjectDigest, targetBuildId: 'sha256:' + 'e'.repeat(64) })
+    appendReviewCompatibility(db, revision, null, { result: 'equal', reasonCode: 'CONTENT_EQUAL',
+      subjectDigest, targetBuildId: target.targetBuildId })
+    db.exec('COMMIT')
+  })
+  const recoveredStore = createImportReviewStore({ dbPath: recoveredPath, filesRoot, rendererBuildId: revision.rendererBuildId })
+  assert.equal(recoveredStore.compatibilityForRevision(revision.id).eligible, true)
+  assert.equal(recoveredStore.listPapers()[0].compatibility.eligible, true)
+  assert.equal(recoveredStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner').revisionId, revision.id)
+  pass('only a later validated equal for the current trusted target supersedes another target difference')
   // Actual empty subject/missing attempt and cold identity states.
   const emptyPath = path.join(root, 'missing.sqlite')
   copyFileSync(fixture.dbPath, emptyPath)

@@ -1,10 +1,11 @@
+export const reviewCompatibilityAutorunEnabled = () => process.env.EQB_REVIEW_COMPATIBILITY_AUTORUN !== '0'
 // Host budgets are centralized; callers may lower, never raise, these limits.
-export const REVIEW_WORKER_BUDGET = Object.freeze({ heapMb: 384, deadlineMs: 300_000, batchSize: 1, yieldMs: 5000 })
+export const REVIEW_WORKER_BUDGET = Object.freeze({ heapMb: 384, rssMb: 640, deadlineMs: 300_000, batchSize: 1, yieldMs: 5000 })
 export const REVIEW_IDENTITY_BUDGET = Object.freeze({ heapMb: 384, deadlineMs: 30_000, retryMs: 60_000 })
-export const REVIEW_BACKFILL_WORKER_BUDGET = Object.freeze({ heapMb: 128, deadlineMs: 30_000 })
+export const REVIEW_BACKFILL_WORKER_BUDGET = Object.freeze({ heapMb: 128, rssMb: 256, deadlineMs: 30_000 })
 export const REVIEW_BACKFILL_RETRY_DELAYS_MS = Object.freeze([60_000, 300_000, 900_000, 3_600_000, 14_400_000])
 export const isTransientReviewFailure = reason => [
-  'WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT', 'IO_ERROR',
+  'WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_RSS_LIMIT', 'WORKER_EXIT', 'IO_ERROR',
   'LEADER_BUSY', 'ACTIVITY_PENDING', 'TARGET_CHANGED', 'TARGET_IDENTITY_PENDING',
   'TARGET_IDENTITY_UNAVAILABLE', 'TARGET_IDENTITY_INVALID', 'TARGET_IDENTITY_MISMATCH',
 ].includes(reason)

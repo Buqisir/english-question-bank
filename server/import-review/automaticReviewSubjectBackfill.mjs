@@ -1,6 +1,7 @@
 import { reviewCompatibilityShapeAvailable } from './reviewCompatibilitySchema.mjs'
 import { REVIEW_BACKFILL_WORKER_BUDGET, isTransientReviewFailure, reviewBackfillRetryState } from './reviewRecoveryPolicy.mjs'
 import { createHash } from 'node:crypto'
+import { tmpdir } from 'node:os'
 import { lstatSync, statfsSync } from 'node:fs'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
@@ -194,7 +195,7 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
     try {
       if (reviewCompatibilityBusy()) return { paused: 'ACTIVITY_PENDING', results: [] }
       await target.ready({ signal })
-      const disk = statfsSync('/tmp')
+      const disk = statfsSync(tmpdir())
       const free = disk.bavail * disk.bsize
       if (free < 10 * 1024 ** 3) return {
         paused: free < 7 * 1024 ** 3 ? 'DISK_STOP_BELOW_7_GIB' : 'DISK_WAIT_BELOW_10_GIB', results: [],

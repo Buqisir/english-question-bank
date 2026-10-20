@@ -1,6 +1,6 @@
 import { reviewCompatibilityShapeAvailable } from './reviewCompatibilitySchema.mjs'
-import { isTransientReviewFailure, reviewBackfillRetryState } from './reviewRecoveryPolicy.mjs'
-export const reviewSubjectBackfillEnabled = () => process.env.EQB_REVIEW_SUBJECT_BACKFILL !== '0'
+import { isTransientReviewFailure, reviewBackfillRetryState, reviewCompatibilityAutorunEnabled } from './reviewRecoveryPolicy.mjs'
+export const reviewSubjectBackfillEnabled = () => reviewCompatibilityAutorunEnabled() && process.env.EQB_REVIEW_SUBJECT_BACKFILL !== '0'
 export const backfillScopeSql = `FROM import_review_revisions r
   JOIN import_review_papers p ON p.latest_revision_id=r.id
   WHERE r.state IN ('awaiting_review','approved')

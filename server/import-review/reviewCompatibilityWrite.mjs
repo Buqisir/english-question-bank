@@ -73,7 +73,7 @@ export function prepareReviewCompatibilityWrite(revision, subjectRow, previous, 
     throw error('BASELINE_UNTRUSTED')
   }
   if (terminal) {
-    if (comparison.result === 'unknown' && ['WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT',
+    if (comparison.result === 'unknown' && ['WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_RSS_LIMIT', 'WORKER_EXIT',
       'IO_ERROR', 'COMPUTATION_FAILED', 'TARGET_COMPUTATION_FAILED'].includes(comparison.reasonCode)) {
       plan.outcome = { appended: false, attemptNo: previous[0].attempt_no }
       return plan

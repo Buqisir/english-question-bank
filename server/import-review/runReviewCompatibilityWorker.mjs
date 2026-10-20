@@ -1,4 +1,5 @@
-import { Worker } from 'node:worker_threads'
+import { fork } from 'node:child_process'
+import { readReviewProcessTree, killReviewProcessTree } from './reviewProcessTree.mjs'
 import { mkdtempSync, realpathSync, rmSync, statfsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -9,13 +10,14 @@ import {
   validReviewCompatibilityLease,
 } from './reviewCompatibilityScheduling.mjs'
 
-import { REVIEW_WORKER_BUDGET, REVIEW_BACKFILL_WORKER_BUDGET } from './reviewRecoveryPolicy.mjs'
+import { REVIEW_WORKER_BUDGET, REVIEW_BACKFILL_WORKER_BUDGET, reviewCompatibilityAutorunEnabled } from './reviewRecoveryPolicy.mjs'
 export { REVIEW_WORKER_BUDGET } from './reviewRecoveryPolicy.mjs'
 const running = new WeakSet()
 
 export async function runReviewCompatibilityWorker(input, {
   timeoutMs = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).deadlineMs,
   heapMb = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).heapMb,
+  rssMb = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).rssMb,
   signal, leaderLease,
 } = {}) {
   const budget = input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET
@@ -24,10 +26,16 @@ export async function runReviewCompatibilityWorker(input, {
   const unknown = reasonCode => ({ baseline: null, comparison: {
     result: 'unknown', reasonCode, targetBuildId: input.targetBuildId, subjectDigest: null,
     comparatorVersion: REVIEW_COMPARATOR_VERSION,
-    componentDigests: {}, differences: [], metrics: { heapLimitMb: heapMb, deadlineMs: timeoutMs,
+    componentDigests: {}, differences: [], metrics: { heapLimitMb: heapMb, rssLimitMb: rssMb, peakTreeRssBytes: peakRssBytes, deadlineMs: timeoutMs,
       ...(['LEADER_BUSY', 'ACTIVITY_PENDING'].includes(reasonCode) ? { locks: reviewCompatibilityLockDiagnostics() } : {}) },
   } })
   let worker
+  let exited
+  let rssTimer
+  let sampling
+  let pids = []
+  let peakRssBytes = 0
+  let stderr = ''
   let timer
   let onAbort
   let ownsRunning = false
@@ -39,32 +47,69 @@ export async function runReviewCompatibilityWorker(input, {
     running.add(lease)
     ownsRunning = true
     if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || timeoutMs > budget.deadlineMs
-      || !Number.isInteger(heapMb) || heapMb < 16 || heapMb > budget.heapMb) throw new Error('Invalid worker budget')
+      || !Number.isInteger(heapMb) || heapMb < 16 || heapMb > budget.heapMb
+      || !Number.isFinite(rssMb) || rssMb <= 0 || rssMb > budget.rssMb) throw new Error('Invalid worker budget')
     if (signal?.aborted) return unknown('WORKER_EXIT')
-    // The supervisor owns temporary custody. Terminating an OOM/timed-out
-    // thread does not run its finally blocks, so cleanup must happen here.
+    // A killed child cannot clean its own temporary files. Custody stays here.
     workspace = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-job-'))
-    worker = new Worker(new URL('./reviewCompatibilityWorker.mjs', import.meta.url), {
-      workerData: input, resourceLimits: { maxOldGenerationSizeMb: heapMb },
+    worker = fork(new URL('./reviewCompatibilityWorker.mjs', import.meta.url), [], {
+      execArgv: [`--max-old-space-size=${heapMb}`], serialization: 'advanced', detached: true,
+      stdio: ['ignore', 'ignore', 'pipe', 'ipc'],
       env: { ...process.env, TMPDIR: workspace, TMP: workspace, TEMP: workspace },
     })
+    exited = new Promise(resolve => worker.once('exit', resolve))
+    worker.stderr.on('data', bytes => { stderr = (stderr + bytes.toString()).slice(-8192) })
     return await new Promise(resolve => {
-      timer = setTimeout(() => resolve(unknown('WORKER_TIMEOUT')), timeoutMs)
-      onAbort = () => resolve(unknown('WORKER_EXIT'))
-      signal?.addEventListener('abort', onAbort, { once: true })
-      worker.once('message', output => {
-        output.comparison.metrics = { ...output.comparison.metrics, heapLimitMb: heapMb, deadlineMs: timeoutMs }
+      let settled = false
+      const finish = output => {
+        if (settled) return
+        settled = true
+        output.comparison.metrics = { ...output.comparison.metrics,
+          heapLimitMb: heapMb, rssLimitMb: rssMb, peakTreeRssBytes: peakRssBytes, deadlineMs: timeoutMs }
         resolve(output)
-      })
-      worker.once('error', error => resolve(unknown(error.code === 'ERR_WORKER_OUT_OF_MEMORY' ? 'WORKER_OOM' : 'WORKER_EXIT')))
-      worker.once('exit', () => resolve(unknown('WORKER_EXIT')))
+      }
+      const fail = reason => {
+        if (settled) return
+        killReviewProcessTree(worker, pids)
+        finish(unknown(reason))
+      }
+      const sample = async () => {
+        if (settled || sampling) return
+        sampling = (async () => {
+          try {
+            const tree = await readReviewProcessTree(worker.pid)
+            pids = tree.pids
+            peakRssBytes = Math.max(peakRssBytes, tree.rssBytes)
+            if (tree.rssBytes > rssMb * 1024 ** 2) fail('WORKER_RSS_LIMIT')
+          } catch { fail('WORKER_EXIT') }
+        })()
+        await sampling
+        sampling = null
+      }
+      timer = setTimeout(() => fail('WORKER_TIMEOUT'), timeoutMs)
+      onAbort = () => fail('WORKER_EXIT')
+      signal?.addEventListener('abort', onAbort, { once: true })
+      rssTimer = setInterval(() => { void sample() }, 250)
+      void sample()
+      worker.once('message', finish)
+      worker.once('error', () => fail('WORKER_EXIT'))
+      worker.once('exit', () => finish(unknown(/heap out of memory|Allocation failed/i.test(stderr)
+        ? 'WORKER_OOM' : 'WORKER_EXIT')))
+      worker.send(input, error => { if (error) fail('WORKER_EXIT') })
     })
   } catch (error) {
     return unknown(error.code === 'ERR_WORKER_OUT_OF_MEMORY' ? 'WORKER_OOM' : 'WORKER_EXIT')
   } finally {
     clearTimeout(timer)
+    clearInterval(rssTimer)
     signal?.removeEventListener('abort', onAbort)
-    try { await worker?.terminate() } finally {
+    try {
+      await sampling
+      if (worker?.pid) {
+        killReviewProcessTree(worker, pids)
+        await exited
+      }
+    } finally {
       try { if (workspace) rmSync(workspace, { recursive: true, force: true }) }
       finally { if (ownsRunning) running.delete(lease); owned?.release() }
     }
@@ -85,7 +130,7 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
       if (signal?.aborted) break
       if (reviewCompatibilityBusy()) return { paused: 'ACTIVITY_PENDING', results, locks: reviewCompatibilityLockDiagnostics() }
       if (store.isBusy()) break
-      const disk = statfsSync('/tmp')
+      const disk = statfsSync(tmpdir())
       const free = disk.bavail * disk.bsize
       if (free < 10 * 1024 ** 3) return { paused: free < 7 * 1024 ** 3 ? 'DISK_STOP_BELOW_7_GIB' : 'DISK_WAIT_BELOW_10_GIB', results }
       const job = store.prepare(revisionId)
@@ -108,12 +153,14 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
 // asynchronous; requests never wait for compilation. Each process may own a
 // timer, but only the host leader is allowed to scan/compute a batch.
 export function startReviewCompatibilityWorker(store, { onError = () => {}, backfillStore = null } = {}) {
+  if (!reviewCompatibilityAutorunEnabled()) return { async stop() {} }
   const controller = new AbortController()
   let timer
   let active
   async function tick() {
     let delay = 30_000
     try {
+      if (!reviewCompatibilityAutorunEnabled()) return
       active = (async () => {
         // Normal comparison always gets the first slot. Only then spend one
         // bounded idle slot recovering original evidence in a separate thread.
