@@ -497,6 +497,7 @@ function round2Prompts(ctx) {
   }
   prompts.push({ label: '检索 metadata', outputs: [path.join(ctx.fast, 'search-metadata-authored.json')], prompt: [
     'topicLabels、facetKey、route、features 只能从 request 的 controlledValues 原样复制。',
+    '语法分类返工以整道题为单位，允许依据答案和原句重新判断 facetKey、role、route、features；错误路径只定位问题，不锁定已有 facet。不得把未知 route 自动映射到近义 route，不得新增词表值。',
     `在 worktree ${root} 写公开检索 metadata。读 ${relative(path.join(ctx.fast, 'search-metadata-request.json'))}，按其中说明与结构`,
     `写 ${relative(path.join(ctx.fast, 'search-metadata-authored.json'))}。只写这个文件，不联网，不运行 finalize 或其他写命令。完成后回报题组数。`,
   ].join('\n') })

@@ -14,6 +14,8 @@ import { importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 import { answerOnlyCoveredNumbers } from './answer-only-coverage.mjs'
 import { appendTiming } from './lib-timing.mjs'
 import { fastProductSet, declareFastListening } from './lib-fast-products.mjs'
+import { GRAMMAR_REWORK_RULE, metadataReworkFeedback } from './metadata-rework.mjs'
+import { visualBatches, validateVisualPart, resolveVisualParts } from './pdf-visual-shards.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const batchRoot = path.join(root, 'imports/batch')
@@ -537,7 +539,7 @@ export function checkPdfs(paperId) {
   return result
 }
 
-async function pdfQa(ctx, paper) {
+export async function pdfQa(ctx, paper) {
   paper.stage = 'pdf-check'
   ctx.save()
   const output = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-hard-check.json')
@@ -566,17 +568,16 @@ async function pdfQa(ctx, paper) {
   }
   const binding = digest(JSON.stringify(Object.values(checks.products).map((p) => p.sha256)))
   // One agent per product: all ~34 pages at 100 dpi in one context evicted the earlier images.
-  const label = (product) => `PDF 视觉初筛 ${product}`
+  const label = (product) => `PDF 视觉初筛 v2 ${product}`
   if (paper.pdfVisualBinding !== binding) for (const product of products) delete paper.completed[label(product)]
   const productVisual = (product) => path.join(ctx.dir, 'logs', paper.paperId, `pdf-visual-${product}.json`)
   await Promise.all(products.map(async (product) => {
     const images = imagesByProduct[product]
     // Twelve page images repeatedly exhausted the visual worker's six-minute budget.
     // Keep every page and overlap boundaries so split questions remain detectable.
-    const batches = images.length > 10
-      ? Array.from({ length: Math.ceil(images.length / 4) }, (_, index) =>
-        images.slice(Math.max(0, index * 4 - 1), (index + 1) * 4))
-      : [images]
+    const batches = visualBatches(images)
+    const sha256 = checks.products[product].sha256
+    const outputContract = `格式 {"sha256":"${sha256}","blocking":[],"needsContext":[{"reason":"缺少的上下文与待核事项","pages":[相关PDF页码]}],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。blocking 只写图上确证的缺陷或图像本身无法辨认的硬约束；本分片未见后续选项库等上下文不足必须写 needsContext，不能写 blocking，也不能猜通过。无疑点时 needsContext 为 []。`
     const parts = await Promise.all(batches.map(async (batch, index) => {
       const output = batches.length === 1 ? productVisual(product)
         : productVisual(product).replace(/\.json$/u, `-${checks.products[product].sha256.slice(7, 23)}-part-${index + 1}.json`)
@@ -585,25 +586,30 @@ async function pdfQa(ctx, paper) {
       await agent(ctx, paper, partLabel, 'sol', [
         `读 docs/import/droid-fast-path.md 的「PDF 目检口径」。打开下列每一张 ${product} 的 ${PDF_QA_DPI} dpi 页面图，逐页初筛。`,
         JSON.stringify(batch), `同时读确定性检查 ${paper.pdfCheck} 和 ${path.join(fastDir(paper.paperId), 'state.json')} 中写作源参考分段总览。`,
-        '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字；看不清的硬约束写 blocking，不能猜通过。',
+        '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字。七选五正文跨页后选项库完整排在下一页是允许的；选项库本身拆页才是缺陷。',
+        `PDF 总页数 ${images.length}；本批页码 ${JSON.stringify(batch.map(image => images.indexOf(image) + 1))}。`,
         '插图是原卷图片原样嵌入：只查图整体在页内（四边、图注未被裁掉）、不与文字重叠、尺寸与正文相称；图内小字清晰度取决于原卷扫描，看不清写 notes，不算 blocking。',
         '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
         '范文一段若在答案册原页跨页处被拆成两段（以写作源参考分段总览里两段的原页码一前一后相邻为准），也是已知遗留，只写 notes；同一原页内的提前折行仍写 blocking。',
         `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
-        `只写 ${output}，格式 {"blocking":[],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。`,
+        `只写 ${output}，${outputContract}`,
       ].join('\n'), [output], { timeout: VISUAL_AGENT_TIMEOUT })
       const part = json(output)
-      if (!Array.isArray(part.blocking) || !Array.isArray(part.notes)
-        || batch.some((image) => !part.checkedImages?.includes(image))) {
-        throw new Blocked('needs_main_review', `${product} 分批 ${index + 1} 未覆盖全部指定页面或格式无效`, output)
-      }
+      validateVisualPart(part, batch, sha256)
       return part
     }))
-    if (batches.length > 1) writeJson(productVisual(product), {
-      blocking: parts.flatMap((part) => part.blocking),
-      notes: parts.flatMap((part) => part.notes),
-      checkedImages: [...new Set(parts.flatMap((part) => part.checkedImages))],
-    })
+    const resolved = await resolveVisualParts({ parts, images, sha256, recheck: async ({ index, issues, pages, images: adjacent }) => {
+      const output = productVisual(product).replace(/\.json$/u, `-${sha256.slice(7, 23)}-context-${index + 1}.json`)
+      await agent(ctx, paper, `${label(product)} ${sha256.slice(7, 23)} 上下文 ${index + 1}`, 'sol', [
+        `复核同一 PDF ${sha256} 的上下文疑点 ${JSON.stringify(issues)}。`,
+        `必须打开全部相邻页图 ${JSON.stringify(adjacent)}，对应 PDF 页码 ${JSON.stringify(pages)}。`,
+        '逐项裁决原疑点：完整七选五选项库在正文后一页允许；选项库本身拆页、实际缺项仍 blocking。仍无法确认写 needsContext；已消除写 notes 并引用具体页码与证据。',
+        `只写 ${output}，${outputContract}`,
+      ].join('\n'), [output], { timeout: VISUAL_AGENT_TIMEOUT })
+      return json(output)
+    } })
+    writeJson(productVisual(product), resolved)
+    if (hashFile(checks.products[product].pdf) !== sha256) throw new Blocked('needs_main_review', '视觉检查期间 PDF 改变，检查证据失效', productVisual(product))
   }))
   const review = { blocking: [], notes: [], checkedImages: [] }
   for (const product of products) {
@@ -873,29 +879,33 @@ async function round(ctx, paper, number) {
   const failed = settled.find((result) => result.status === 'rejected')
   if (failed) throw failed.reason
 }
-async function metadataWorker(ctx, paper, worker, label, outputs, { initial = true } = {}) {
-  const base = `${worker.prompt}\n写权限仅限列出的期望产出文件。\ntopicLabels、facetKey、route、features 只能从 request 的 controlledValues 原样复制。`
+export async function metadataWorker(ctx, paper, worker, label, outputs, { initial = true } = {}) {
+  const base = `${worker.prompt}\n写权限仅限列出的期望产出文件。\ntopicLabels、facetKey、route、features 只能从 request 的 controlledValues 原样复制。\n${GRAMMAR_REWORK_RULE}`
   if (initial) await agent(ctx, paper, label, 'luna', base, outputs, { timeout: METADATA_AGENT_TIMEOUT })
   await ensureSearchMetadata({
     check: () => checkSearchMetadataFiles({ fastDirectory: fastDir(paper.paperId),
       paperDirectory: path.join(papersRoot, paper.paperId) }),
-    rewrite: (issues, attempt) => agent(ctx, paper, `${label}-自检返工-${attempt}`, 'sol',
-      `${base}\n上一轮产出未通过与 finalize 相同的只读校验。只改下列出错字段，其余保持不变：\n${compactMetadataIssues(issues)}`,
+    rewrite: (issues, attempt) => agent(ctx, paper, `${label}-整题返工-v2-${attempt}`, 'sol',
+      `${base}\n上一轮产出未通过与 finalize 相同的只读校验。语法题按整题重新判断，其他错误修对应字段：\n${compactMetadataIssues(metadataReworkFeedback({
+        request: json(path.join(fastDir(paper.paperId), 'search-metadata-request.json')),
+        authored: issues.some(issue => issue.code === 'PUBLIC_METADATA_AUTHORED_JSON_INVALID') ? {}
+          : json(path.join(fastDir(paper.paperId), 'search-metadata-authored.json')), issues,
+      }))}`,
       outputs, { retries: 0, timeout: METADATA_AGENT_TIMEOUT }),
   })
 }
 // Each issue carries its allowed values; repeating a large taxonomy per issue buried the
 // actual errors (a 14k-line prompt), so large value sets are listed once per error code.
-function compactMetadataIssues(issues) {
+function compactMetadataIssues(feedback) {
   const shared = {}
-  const list = issues.map(({ allowedValues, ...issue }) => {
+  const list = feedback.issues.map(({ allowedValues, ...issue }) => {
     const text = JSON.stringify(allowedValues ?? null)
     if (text.length <= 400) return { ...issue, allowedValues }
     const key = `${issue.code}:${digest(text).slice(7, 15)}`
     shared[key] ??= allowedValues
     return { ...issue, allowedValues: `见 sharedAllowedValues["${key}"]` }
   })
-  return JSON.stringify({ issues: list, sharedAllowedValues: shared }, null, 2)
+  return JSON.stringify({ ...feedback, issues: list, sharedAllowedValues: shared }, null, 2)
 }
 async function processPaper(ctx, paper) {
   if (['blocked', 'reported'].includes(paper.state)) return
