@@ -1045,6 +1045,15 @@ for (const policy of ['spelling-only-v1', TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POL
     [compoundText, 'lemon-favoured', 'lemon-flavoured'],
     [ageText, '7-year-year-old', '7-year-old'],
     ['😀 Their fanily.', 'fanily', 'family'],
+    ['We dont know.', 'dont', "don't"],
+    ['We dont know.', 'dont', 'don’t'],
+    ['That is its purpose.', 'its', "it's"],
+    ['That is its purpose.', 'its', 'it’s'],
+    ["Their fanily's home.", "fanily's", "family's"],
+    ['Their fanily’s home.', 'fanily’s', 'family’s'],
+    ['fanily', 'fanily', 'family’s'],
+    ["Don't worry.", "Don't", 'Dont'],
+    ['Don’t worry.', 'Don’t', 'Dont'],
   ]) {
     const fixture = compoundReview(text, before, after, policy)
     const result = fixture.apply()
@@ -1062,8 +1071,6 @@ for (const [text, before, after] of [
   ['year-old', 'year-old', '7-year-old'],
   ['7-year-old', '7-year-old', '7-year-8-old'],
   ['07-year-old', '07-year-old', '7-year-old'],
-  ["fanily's", "fanily's", "family's"],
-  ['fanily', 'fanily', 'family’s'],
   ['fanily', 'fanily', 'family!'],
   ['7', '7', '8'],
 ]) {

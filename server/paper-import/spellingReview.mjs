@@ -11,12 +11,13 @@ export const TEXT_REVIEW_POLICY_V4 = 'source-text-review-v4'
 const reviewPolicies = [SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4]
 
 // Shared by source-flag authoring and final admission. Policies keep their
-// existing envelopes; compound tokens still carry one exact spelling edit.
-const SPELLING_TOKEN = /^(?:[A-Za-z]+(?:-[A-Za-z]+)*|\d+(?:-[A-Za-z]+)+)$/u
+// existing envelopes and every legacy apostrophe form; compounds are additive.
+const SPELLING_TOKEN = /^(?:[A-Za-z]+(?:['’][A-Za-z]+)*|[A-Za-z]+(?:-[A-Za-z]+)+|\d+(?:-[A-Za-z]+)+)$/u
 export function isSpellingTokenCorrection(before, after) {
   return typeof before === 'string' && typeof after === 'string'
     && SPELLING_TOKEN.test(before) && SPELLING_TOKEN.test(after)
-    && JSON.stringify(before.match(/\d+/gu) ?? []) === JSON.stringify(after.match(/\d+/gu) ?? [])
+    && (!/^\d/u.test(before) && !/^\d/u.test(after)
+      || JSON.stringify(before.match(/\d+/gu) ?? []) === JSON.stringify(after.match(/\d+/gu) ?? []))
 }
 
 export const SPELLING_REVIEW_INSTRUCTIONS = `Review every supplied text target in its full group context against the immutable source.
@@ -31,8 +32,8 @@ An uncertain target may still contain independently clear spelling corrections; 
 Write human-facing notes and correction reasons in Chinese, retaining the exact English source wording being discussed.
 For each target set decision to unchanged, correct, or uncertain. For corrections provide zero-based UTF-16 start,
 exact before/after whole spelling tokens, category spelling, certainty unambiguous, and a contextual reason.
-Spelling tokens contain letters or hyphenated letter segments, optionally led by digits (7-year-old).
-Preserve every digit string exactly; apostrophes and other characters are not spelling tokens.
+Spelling tokens retain words with straight or curly apostrophes and also permit hyphenated letter compounds.
+Digit-led compounds (7-year-old) are permitted only when every digit string stays exactly unchanged.
 Review duplicate representations separately and keep them consistent. Never manufacture a completed review.
 This is an agent attestation, not an authenticated Owner approval or an automated semantic proof.`
 
@@ -45,8 +46,8 @@ Do not polish awkward English, substitute uncertain word choices, solve question
 or normalize names, technical terms, spelling variants, punctuation or capitalization preferences.
 Use the smallest exact word or phrase replacement for grammar, one whole token for spelling, and only replace
 an internal run of two or more ASCII spaces with one ASCII space for whitespace.
-Spelling tokens contain letters or hyphenated letter segments, optionally led by digits (7-year-old).
-Preserve every digit string exactly; apostrophes and other characters are not spelling tokens.
+Spelling tokens retain words with straight or curly apostrophes and also permit hyphenated letter compounds.
+Digit-led compounds (7-year-old) are permitted only when every digit string stays exactly unchanged.
 Offsets are zero-based UTF-16 positions in the original target, never in partially corrected text.
 Categories are spelling, grammar, whitespace;
 certainty must be unambiguous. Code verifies exact edits and evidence, not the semantic judgment.
