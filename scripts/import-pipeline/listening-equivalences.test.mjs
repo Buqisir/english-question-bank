@@ -254,3 +254,22 @@ test('context-bound contractions never cross invalid timestamps, long pauses or 
     assert.ok(evaluate(source, target).occurrences[0].alignment.differences.length)
   }
 })
+test('all nine modal auxiliaries are critical for deletion, insertion and substitution', () => {
+  for (const word of ['will', 'would', 'shall', 'should', 'can', 'could', 'may', 'might', 'must']) {
+    for (const [source, actual] of [[`we ${word} go`, 'we go'], ['we go', `we ${word} go`],
+      [`we ${word} go`, 'we often go'], ['we often go', `we ${word} go`]]) {
+      const result = evaluate(source, actual)
+      assert.equal(result.decision, 'review_required', `${source} / ${actual}`)
+      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+    }
+  }
+  for (const [a, b] of [["we'll go", 'we go'], ["we'd be glad", 'we are glad']]) {
+    for (const [source, actual] of [[a, b], [b, a]]) {
+      assert.ok(evaluate(source, actual).issues.includes('CRITICAL_WORD_DIFFERENCE'))
+    }
+  }
+  for (const [a, b] of [["we'll go", 'we will go'], ["we'd go", 'we would go'],
+    ["we'd been waiting", 'we had been waiting']]) {
+    for (const [source, actual] of [[a, b], [b, a]]) assert.equal(evaluate(source, actual).decision, 'usable')
+  }
+})

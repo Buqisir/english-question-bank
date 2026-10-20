@@ -36,8 +36,11 @@ once/twice。明确的 Text N、「第 N 段」「第 a 至 b 题」播报都须
 Apple 和 Whisper 合并后再次校验同一骨架规则；局部 Whisper 结果不能自行代表整卷通过。
 
 每遍独立连续对齐，禁止拼接两遍的首尾。尾锚包含真实末话轮的结尾；短末话轮连同前文
-构造。漏整话轮，以及对齐任一侧的数字、货币、否定词或时间差异均要求复核；
+构造。漏整话轮，以及对齐任一侧的数字、货币、否定词、时间或情态词差异均要求复核；
 删除、插入和替换均记录在 `alignment.differences`，新增 `not` 不能因源词全匹配而放行。
+Owner 明确指定 `will would shall should can could may might must` 全部为关键字；
+插入、删除、替换均拦截。只沿用 v3 已能确定的 `'ll` / will、`'d` / would 展开，
+不把情态词省略或相互替换视为等价；`we'll go` → `we go` 必须复核。
 正文内部观察到超过 2 秒的静音也保守
 要求复核，避免拼接分离片段。重复和重叠窗口先按绝对时间选择一致窗口区间，再计遍数。
 
@@ -426,6 +429,7 @@ text-1 在 OFF 为次数不匹配，在 ON 为正文匹配率低，text-6 为边
 
 边界修复：先过滤不能容纳完整原 run 与既有 0.02 秒余量的静音候选，再按既有先后
 规则选取相邻静音。候选仍必须是实际测得的静音且距 run ≤2 秒；没有合格静音仍复核。
+跳过不合格候选时还须执行下节 Astra P1 的双侧语音间隙保护，不能仅凭余量选择更远静音。
 没有更改 silence 参数、2 秒窗口、0.02 秒余量、时长比、双引擎冲突或骨架策略。
 
 ### 六组诊断
@@ -492,4 +496,77 @@ TMPDIR="$PWD/.scratch/listening-v3-test-tmp" node --test --test-concurrency=1 \
 node scripts/import-pipeline/replay-listening-rule.mjs .scratch/asr-eval-20261020 \
   .scratch/listening-v3-replay-final --no-fuzzy-anchors
 node .scratch/listening-v3-cached-e2e.mjs
+```
+
+## 2026-10-21 Astra P1 跟进：跳过静音的语音保护与情态词
+
+修复原反例：正文末 run 结束于 4.200，静音 4.120–4.203 无法保留 0.02 秒余量；
+4.250–4.550 是 timed `Text Two`，后续静音为 4.620–7.200，下一组正文从 8.200 开始。
+原路径会批准前组到 5.910，包含下一组播报。现前组为 `review_required`，
+每遍和组均记录 `BOUNDARY_EVIDENCE_INSUFFICIENT`，组的批准 playback 清空，
+下一组仍独立可用。
+
+跳过候选改选更远静音时，末 run 结束至所选静音起点之间不得有任何已观测 timed ASR
+语音；起点侧对称检查所选更早静音终点至首 run 开始之间的间隙。
+正文、播报、普通提示、中文提示均计入；检查原始 run/word 时间区间，不依赖英文规范化、
+播报分类或正文选窗。仅有 segment 文字及时间时也保守保留该区间。
+重复/重叠窗口中没有参与正文对齐的语音同样保留。
+`boundarySpeech` 存紧凑的绝对时间区间并集；每遍 `boundaryEvidence`
+记录选中/跳过的静音、阻挡语音与终点限制。按组携带证据，保证适配器和回放提取组后仍可使用；
+合并时汇总所有已观测引擎和组的时间区间，复查先前通过的主引擎边界，包括别组回退窗口中的语音。
+合并不修改原引擎 attempt 的 occurrence。
+
+终点仍须在真实静音内包住完整末 run，并保留 0.02 秒余量；静音中点若越过下一遍正文开头
+或成功骨架邻组的 playback 起点，只允许在同一已观测静音内收紧。
+限制落在静音之外或不能保留余量时复核；保留原有共享静音的安全分界。
+双引擎合并后再检查下一遍/冻结骨架的限制。普通相邻静音不额外套用“跳过候选”的间隙条件。
+
+情态词按上文 Owner 策略全部加入关键字门禁，等价表版本仍为 v3，数值阈值未变。
+新增覆盖九词逐一插入/删除/替换、确定缩写等价和缩写丢词；
+边界回归覆盖原 Astra 秒数、起点侧、中文/非播报提示、被舍弃窗口、其他引擎/其他组窗口、
+下一遍和骨架限制、静音外的非法收紧。原反例先失败，再通过修复后的公共入口。
+
+| 最终验证（与 f5e048e2 相同缓存） | 上一提交 | 本次 |
+| --- | --- | --- |
+| 完整 import-pipeline/replay 测试 | 431 PASS | 439 PASS / 0 FAIL / 0 SKIP |
+| 45 组 / 22 卷局部 usable / review_required | 28 / 17 | 27 / 18 |
+| Apple、Whisper 各自 usable / review_required | 25 / 20、21 / 24 | 24 / 21、20 / 25 |
+| 含顺序 usable / review / ORDER_NOT_EVALUABLE_IN_REPLAY | 0 / 17 / 28 | 0 / 18 / 27 |
+| 潍坊整卷 usable / review_required；缓存回退组数 | 10 / 0；0 | 10 / 0；0 |
+| 山东核心素养整卷 usable / review_required；缓存回退组数 | 9 / 1；1 | 9 / 1；1 |
+| 两卷未改动的 validateListeningReview | PASS | PASS |
+
+唯一新增复核为样本 11、`paper-mock-nb-2026-m2` / `listening-text-10`：
+源 `I can see`，Apple 和 Whisper 各两遍均为 `I could see`。
+两引擎每遍仍有 179/180 = 0.994444 的匹配率及编辑相似度；
+现在触发 `CRITICAL_WORD_MISSING` / `CRITICAL_WORD_DIFFERENCE`，属于已有缓存中的实际词义差异，
+没有将 can/could 加为等价。45 组没有因跳过静音保护而新增复核；
+全部 45 组仍缺整卷顺序证据，局部 27 组可用不能当作整卷批准。
+其他 44 组最终决策和原因不变。
+
+两卷无新增拦截：潍坊仍全部 Apple 独立通过；山东只读取 Text 1 的旧 Whisper 缓存，
+仍因 Cris/Chris 首锚缺失而报次数不足。山东 Text 6 的 tiny pause 后没有额外 timed 语音，
+可继续使用合格静音。未调用回退不代表已消除了旧缓存中的跨引擎差异。
+新 ASR 调用为 0；原物化、活动 sidecar、分页文件哈希前后相同。
+所有新结果仅写入独立 scratch attempt，没有装入纸卷、送审、push 或生产动作。
+
+最终证据（均在当前工作树）：
+
+- `.scratch/listening-p1-final-suite.log`
+- `.scratch/listening-p1-final-replay/replay-2026-10-20T21-03-47-919Z.json`
+- `.scratch/listening-p1-final-comparison.json`
+- `.scratch/listening-p1-final-cached-e2e.mjs`
+- `.scratch/listening-p1-final-cached-e2e-summary.json`
+- `.scratch/listening-p1-final-cached-e2e/paper-mock-shandong-weifang-2026-04-second-mock/attempt-2026-10-20T21-03-24-615Z-687a8c03/`
+- `.scratch/listening-p1-final-cached-e2e/paper-mock-shandong-2026-04-core-literacy-assessment/attempt-2026-10-20T21-03-24-889Z-bcaa0104/`
+
+最终执行命令：
+
+```sh
+export PATH=/opt/homebrew/opt/node@24/bin:$PATH
+TMPDIR="$PWD/.scratch/listening-v3-test-tmp" node --test --test-concurrency=1 \
+  scripts/import-pipeline/*.test.mjs scripts/import-pipeline/replay/*.test.mjs
+node scripts/import-pipeline/replay-listening-rule.mjs .scratch/asr-eval-20261020 \
+  .scratch/listening-p1-final-replay --no-fuzzy-anchors
+node .scratch/listening-p1-final-cached-e2e.mjs
 ```
