@@ -42,7 +42,6 @@ export function statusOf(probes) {
   if (probes.shipped) return 'shipped'
   if (probes.shippedReceiptInvalid) return 'failed'
   if (probes.blocked) return 'failed'
-  if (probes.rendererStale) return 'changes_requested'
   if (probes.reviewState === 'changes_requested') return 'changes_requested'
   if (probes.reviewState === 'awaiting_review') return 'awaiting_review'
   if (probes.reviewKind === 'ocr') return 'materializing'
@@ -272,6 +271,7 @@ export function probePaper({
     reviewState: reviewStatus?.latest?.state || null,
     reviewKind: reviewStatus?.latest?.reviewKind || null,
     rendererStale: reviewStatus?.rendererStale === true,
+    compatibility: reviewStatus?.compatibility || null,
     mtimeMs: Math.max(
       mtimeMs(path.join(paperDir, 'config.json')),
       mtimeMs(path.join(paperDir, 'universal-source-manifest.json')),
@@ -445,6 +445,14 @@ function nextStep(state, paper, reviewStatus, receiptState) {
   if (state === 'shipped') {
     return { action: 'done', command: null, mutatesProduction: false }
   }
+  const finalizedCandidate = reviewStatus?.latest && reviewStatus.latest.reviewKind !== 'ocr'
+    && reviewStatus.latest.state !== 'uploading'
+  if (finalizedCandidate && reviewStatus.compatibility && reviewStatus.compatibility.result !== 'equal') {
+    const result = reviewStatus.compatibility.result
+    return { action: result === 'pending' ? 'wait_for_content_check'
+      : result === 'different' ? 'inspect_content_difference' : 'inspect_content_compatibility',
+    command: command('status'), mutatesProduction: false }
+  }
   if (state === 'ready_to_ship') {
     return { action: 'stop_ready_to_ship', command: null, mutatesProduction: false }
   }
@@ -458,9 +466,7 @@ function nextStep(state, paper, reviewStatus, receiptState) {
   }
   if (state === 'changes_requested') {
     return {
-      action: reviewStatus?.rendererStale
-        ? 'resubmit_for_current_renderer'
-        : 'revise_and_resubmit',
+      action: 'revise_and_resubmit',
       command: command('status'),
       mutatesProduction: false,
     }
@@ -706,7 +712,6 @@ export function preflightPaper({
   }
   if (reviewStatus?.latest?.state === 'awaiting_review') state = 'awaiting_review'
   if (reviewStatus?.latest?.state === 'changes_requested') state = 'changes_requested'
-  if (reviewStatus?.rendererStale) state = 'changes_requested'
   if (hardFailure) state = 'failed'
   if (!hardFailure && !paper.blocked && receiptState.shippedCurrent) state = 'shipped'
   if (paper.blocked) state = 'failed'
@@ -734,6 +739,8 @@ export function preflightPaper({
       latestState: reviewStatus?.latest?.state || null,
       latestReviewKind: paper.reviewKind,
       rendererStale: reviewStatus?.rendererStale === true,
+      compatibility: reviewStatus?.compatibility || null,
+      subjectBackfill: reviewStatus?.subjectBackfill || null,
       unresolvedCount: Number(reviewStatus?.unresolvedCount || 0),
       approvalId: approval?.approvalId || null,
     },

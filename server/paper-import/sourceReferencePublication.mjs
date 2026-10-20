@@ -4,6 +4,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { validateCanonicalPublicationBundle } from '../paper-canonical/publication.mjs'
 import { applySpellingReview } from './spellingReview.mjs'
 import { SOURCE_REFERENCES_FILE, assertSourceReferences } from './sourceReferences.mjs'
+import { deriveNck1AnalyzedPackageBundle, NCK1_ANALYZED_PACKAGE_INPUT_KIND, parseStrictPackageJson } from '../paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(`纯答案版不可用：${message}`), { code: 'SOURCE_REFERENCE_PUBLICATION_INVALID' })
@@ -58,22 +59,40 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
   const documents = validated.sourceCapture.documents
   const decoded = document => Buffer.from(document.encodedBytes, 'base64')
   const materializations = documents.filter(document => document.inputKey === 'nck1_source_materialization')
-  if (materializations.length !== 1) reject('此版本没有可回放的源材料化')
-  const materializationBytes = decoded(materializations[0])
   const overlays = documents.filter(document => document.inputKey === 'spelling_review')
   if (overlays.length > 1) reject('源校订身份不唯一')
-  const materialization = overlays.length
-    ? applySpellingReview(materializationBytes, decoded(overlays[0]))
-    : JSON.parse(materializationBytes.toString('utf8'))
+  let materialization
+  let sourceInput = null
+  if (materializations.length === 1) {
+    const materializationBytes = decoded(materializations[0])
+    materialization = overlays.length
+      ? applySpellingReview(materializationBytes, decoded(overlays[0]))
+      : JSON.parse(materializationBytes.toString('utf8'))
+  } else {
+    const packages = documents.filter(document => document.inputKey === 'nck1_analyzed_package_manifest')
+    if (materializations.length || packages.length !== 1 || overlays.length) reject('此版本没有唯一可回放的源材料化或分析包')
+    const manifestBytes = decoded(packages[0])
+    const packageManifest = parseStrictPackageJson(manifestBytes)
+    sourceInput = { kind: NCK1_ANALYZED_PACKAGE_INPUT_KIND, manifestBytes,
+      members: packageManifest.members.map(member => {
+        const matches = documents.filter(document => document.inputKey === `source_document_${member.memberId.replace(/[^a-z0-9]+/gi, '_')}`)
+        if (matches.length !== 1) reject('分析包源成员缺失或不唯一')
+        return { memberId: member.memberId, role: member.role, mediaType: member.mediaType, bytes: decoded(matches[0]) }
+      }) }
+    const derived = deriveNck1AnalyzedPackageBundle(sourceInput)
+    if (derived.issues.length || !derived.materialization) reject('封存分析包无法回放')
+    materialization = derived.materialization
+  }
   if (digestJson(materialization) !== commitment.materializationDigest) reject('源材料化与答案承诺不同')
-  const sourceDocuments = materialization.documents.map(document => {
+  const sourceDocuments = sourceInput ? sourceInput.members.map(member => ({ documentId: member.memberId, bytes: member.bytes }))
+    : materialization.documents.map(document => {
     const matches = documents.filter(captured => captured.sha256 === document.sha256)
     if (matches.length !== 1) reject('原文档身份不唯一或缺失')
     return { documentId: document.documentId, bytes: decoded(matches[0]) }
   })
   const sourceReferences = JSON.parse(referenceBytes.toString('utf8'))
   assertSourceReferences({ sidecar: sourceReferences, materialization,
-    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, sourceDocuments })
+    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, sourceDocuments, sourceInput })
   return { paperName: commitment.paperName, materialization, sourceReferences, sourceReferencesBytes: referenceBytes, sourceDocuments,
-    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, commitment }
+    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, commitment, ...(sourceInput ? { sourceInput } : {}) }
 }

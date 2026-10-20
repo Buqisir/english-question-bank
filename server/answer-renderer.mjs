@@ -2,6 +2,20 @@ import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { assertSourceReferences, sourceReferenceBlocks } from './paper-import/sourceReferences.mjs'
+import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedPackageAdapter.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
+
+function assertAnswerSource(materialization, sourceInput) {
+  if (materialization.documents) {
+    const issues = validateNck1SourceMaterialization(materialization)
+    if (issues.length) throw new Error(`Answer source is invalid: ${issues[0].code}`)
+  } else {
+    const derived = deriveNck1AnalyzedPackageBundle(sourceInput)
+    if (derived.issues.length || digestJson(derived.materialization) !== digestJson(materialization)) {
+      throw new Error('Answer source differs from the exact sealed analyzed package')
+    }
+  }
+}
 
 function escapeHtml(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;')
@@ -87,12 +101,11 @@ ${paragraphs.join('\n')}
 // Owner accepted reference-v2; source approval is a separate boundary.
 export function buildAnswerOnlyHtml({
   paperName, materialization, sourceReferences, sourceDigest, candidateDigest,
-  includeScoring = false, sourceDocuments = null,
+  includeScoring = false, sourceDocuments = null, sourceInput = null,
 }) {
   if (typeof paperName !== 'string' || !paperName.trim()) throw new Error('Owner-provided paper name is required')
-  const materializationIssues = validateNck1SourceMaterialization(materialization)
-  if (materializationIssues.length) throw new Error(`Answer source is invalid: ${materializationIssues[0].code}`)
-  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments })
+  assertAnswerSource(materialization, sourceInput)
+  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments, sourceInput })
   const answers = [...materialization.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber)
   const listening = materialization.listening
   const slice = (first, last) => answers.filter(answer => answer.canonicalNumber >= first && answer.canonicalNumber <= last)
@@ -141,8 +154,7 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
     const { materialization, sourceReferences } = source
     if (detail.paperId !== materialization.paperId) throw new Error('选中的题组与答案源不属于同一卷')
     if (!validated.has(source)) {
-      const issues = validateNck1SourceMaterialization(materialization)
-      if (issues.length) throw new Error(`Answer source is invalid: ${issues[0].code}`)
+      assertAnswerSource(materialization, source.sourceInput)
       assertSourceReferences({ ...source, sidecar: sourceReferences })
       validated.add(source)
     }

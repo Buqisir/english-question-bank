@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import '../scripts/lib/reviewTestLockRoot.mjs'
 import {
   mkdirSync,
   mkdtempSync,
@@ -17,6 +18,8 @@ import {
   reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
 import { preflightPaper } from './lib/probe.mjs'
+import { freezeReviewFixture, reviewFixtureManifest } from '../scripts/lib/reviewPublicationFixture.mjs'
+import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
 import {
   evaluateShip,
   writeShippedReceipt,
@@ -25,136 +28,58 @@ import { sha256 } from '../shared/paper-canonical/stable.mjs'
 
 const repoRoot = path.resolve(import.meta.dirname, '..')
 
-function fixtureProjection(rootDir) {
-  const identity = JSON.parse(readFileSync(path.join(rootDir, 'projection.json'), 'utf8'))
-  if (identity.externalListening) {
-    const audioBytes = new Uint8Array(Buffer.from(identity.externalListening.audioBase64, 'base64'))
-    return {
-      ...identity,
-      sourceProvenance: { kind: 'external_analyzed_package' },
-      materialization: {
-        listening: {
-          state: 'captured',
-          transcript: Array.from({ length: 10 }, (_, index) => ({ segmentId: `segment:${index + 1}` })),
-          questions: Array.from({ length: 20 }, (_, index) => ({ canonicalNumber: index + 1 })),
-          answers: Array.from({ length: 20 }, (_, index) => ({ canonicalNumber: index + 1, value: 'A' })),
-        },
-      },
-      listeningAudioBytes: audioBytes,
-      listeningReview: { audio: {
-        state: 'included_in_candidate_review',
-        playbackAudioSha256: sha256(audioBytes),
-        mediaType: 'audio/mpeg',
-        durationSeconds: 42.5,
-      } },
-    }
+const previousFixtureMode = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+const { makeReviewRoot, makeExternalAnalyzedPackage } = await import('../scripts/verify-universal-nck1-publish.mjs')
+if (previousFixtureMode === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previousFixtureMode
+const fixtureDirectories = new Map()
+
+function bundle(directory, candidate, resolvesIssueIds = []) {
+  const projection = freezeReviewFixture(directory)
+  const input = {
+    ...reviewFixtureManifest(directory, projection),
+    producerBuildId: `producer-${candidate}`, resolvesIssueIds,
   }
-  return {
-    ...identity,
-    consumption: {
-      visibleStructure: [{
-        kind: 'group',
-        slotId: 'reading.a',
-        groupId: identity.groupId,
-        familyContractId: 'reading',
-      }],
-    },
-    sourceVisuals: [{
-      visualId: 'visual:reading-a',
-      documentId: 'paper',
-      path: 'source/questions.pdf',
-      sourceDigest: identity.sourceDigest,
-      mediaType: 'application/pdf',
-      page: 1,
-      region: { x: 0.1, y: 0.2, width: 0.3, height: 0.4 },
-      disposition: 'semantic_table',
-      targetId: identity.groupId,
-      state: 'paired',
-    }],
-  }
+  input.bundleDigest = reviewBundleDigest(input)
+  fixtureDirectories.set(input.bundleDigest, directory)
+  return { bytes: readFileSync(path.join(directory, 'config.json')), input, projection }
 }
 
 function manifest({
-  paperId = 'paper-mock-review-2026-m1',
-  candidate = 'a',
-  groupId = 'group:reading-a',
-  resolvesIssueIds = [],
+  paperId = 'paper-mock-review-2026-m1', candidate = 'a',
+  groupId = 'group:reading-a', resolvesIssueIds = [],
 } = {}) {
-  const identity = {
-    paperId,
-    paperName: '网页审核测试卷',
-    sourceDigest: `sha256:${'1'.repeat(64)}`,
-    candidateDigest: `sha256:${candidate.repeat(64)}`,
-    visibleStructureDigest: `sha256:${(
-      candidate === 'a' ? '2' : candidate === 'b' ? '3' : candidate === 'c' ? '4' : '5'
-    ).repeat(64)}`,
-    analysisDigest: `sha256:${(
-      candidate === 'a' ? '6' : candidate === 'b' ? '7' : candidate === 'c' ? '8' : '9'
-    ).repeat(64)}`,
-    groupId,
-  }
-  const bytes = Buffer.from(`${JSON.stringify(identity)}\n`)
-  const input = {
-    schemaVersion: 'web-import-review-bundle-v1',
-    paperId,
-    paperName: identity.paperName,
-    sourceDigest: identity.sourceDigest,
-    candidateDigest: identity.candidateDigest,
-    visibleStructureDigest: identity.visibleStructureDigest,
-    analysisDigest: identity.analysisDigest,
-    producerBuildId: `producer-${candidate}`,
-    files: [{
-      path: 'projection.json',
-      sha256: sha256(bytes),
-      byteLength: bytes.byteLength,
-      mediaType: 'application/json',
-      role: 'materialization',
-    }],
-    resolvesIssueIds,
-  }
-  return { bytes, input: { ...input, bundleDigest: reviewBundleDigest(input) } }
+  const fixture = makeReviewRoot(mkdtempSync(path.join(tempRoot, 'candidate-')),
+    paperId, `OPS source ${candidate} ${groupId}`)
+  return bundle(fixture.reviewRoot, candidate, resolvesIssueIds)
 }
 
-function externalListeningManifest() {
+async function externalListeningManifest() {
   const paperId = 'paper-mock-external-listening'
-  const audioBytes = Buffer.from('measured external mp3 fixture bytes')
-  const identity = {
-    paperId,
-    paperName: '外部听力审核测试卷',
-    sourceDigest: `sha256:${'a'.repeat(64)}`,
-    candidateDigest: `sha256:${'b'.repeat(64)}`,
-    visibleStructureDigest: `sha256:${'c'.repeat(64)}`,
-    analysisDigest: `sha256:${'d'.repeat(64)}`,
-    externalListening: { audioBase64: audioBytes.toString('base64') },
-  }
-  const bytes = Buffer.from(`${JSON.stringify(identity)}\n`)
-  const input = {
-    schemaVersion: 'web-import-review-bundle-v1',
-    paperId,
-    paperName: identity.paperName,
-    sourceDigest: identity.sourceDigest,
-    candidateDigest: identity.candidateDigest,
-    visibleStructureDigest: identity.visibleStructureDigest,
-    analysisDigest: identity.analysisDigest,
-    producerBuildId: 'producer-external-listening',
-    files: [{
-      path: 'projection.json',
-      sha256: sha256(bytes),
-      byteLength: bytes.byteLength,
-      mediaType: 'application/json',
-      role: 'materialization',
-    }],
-  }
-  return { bytes, audioDigest: sha256(audioBytes), input: { ...input, bundleDigest: reviewBundleDigest(input) } }
+  const parent = mkdtempSync(path.join(tempRoot, 'external-'))
+  const native = makeReviewRoot(parent, paperId, undefined, { listening: true })
+  const packageRoot = path.join(parent, 'package')
+  makeExternalAnalyzedPackage(native.reviewRoot, packageRoot)
+  const directory = path.join(parent, 'external-review')
+  await prepareNck1AnalyzedPackageReview({
+    sourcePath: packageRoot, destinationDir: directory, expectedPaperId: paperId,
+  })
+  const fixture = bundle(directory, 'external-listening')
+  return { ...fixture, audioDigest: fixture.projection.listeningReview.audio.playbackAudioSha256 }
 }
 
-function upload(store, created, bytes) {
-  const target = store.fileForUpload(created.revision.id, 'projection.json')
-  writeFileSync(target.destination, bytes)
-  store.completeFileUpload(created.revision.id, 'projection.json', {
-    sha256: sha256(bytes),
-    byteLength: bytes.byteLength,
-  })
+function upload(store, created, primaryBytes) {
+  const directory = fixtureDirectories.get(created.revision.bundleDigest)
+  for (const file of created.revision.manifest.files) {
+    const bytes = file.path === 'config.json' ? primaryBytes : readFileSync(path.join(directory, file.path))
+    const target = store.fileForUpload(created.revision.id, file.path)
+    mkdirSync(path.dirname(target.destination), { recursive: true })
+    writeFileSync(target.destination, bytes)
+    store.completeFileUpload(created.revision.id, file.path, {
+      sha256: sha256(bytes), byteLength: bytes.length,
+    })
+  }
 }
 
 function makeStore(root) {
@@ -162,16 +87,16 @@ function makeStore(root) {
     dbPath: path.join(root, 'review.sqlite'),
     filesRoot: path.join(root, 'files'),
     rendererBuildId: 'renderer-test',
-    projectRevision: fixtureProjection,
   })
 }
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-import-review-'))
 try {
   const store = makeStore(tempRoot)
+  await store.ready()
   const first = manifest()
   const traversal = structuredClone(first.input)
-  traversal.files[0].path = '../projection.json'
+  traversal.files[0].path = '../config.json'
   assert.throws(
     () => store.createRevision(traversal),
     (error) => error.code === 'IMPORT_REVIEW_PATH_INVALID',
@@ -180,7 +105,7 @@ try {
 
   const createdFirst = store.createRevision(first.input)
   assert.equal(createdFirst.created, true)
-  assert.deepEqual(createdFirst.missingFiles, ['projection.json'])
+  assert.deepEqual(createdFirst.missingFiles, first.input.files.map(file => file.path).sort())
   assert.throws(
     () => store.finalizeRevision(createdFirst.revision.id),
     (error) => error.code === 'IMPORT_REVIEW_UPLOAD_INCOMPLETE',
@@ -190,35 +115,34 @@ try {
   assert.equal(idempotent.created, false)
   assert.equal(idempotent.revision.id, createdFirst.revision.id)
 
-  const firstTarget = store.fileForUpload(createdFirst.revision.id, 'projection.json')
+  const firstTarget = store.fileForUpload(createdFirst.revision.id, 'config.json')
   writeFileSync(firstTarget.destination, first.bytes)
   assert.throws(
-    () => store.completeFileUpload(createdFirst.revision.id, 'projection.json', {
+    () => store.completeFileUpload(createdFirst.revision.id, 'config.json', {
       sha256: `sha256:${'f'.repeat(64)}`,
       byteLength: first.bytes.byteLength,
     }),
     (error) => error.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH',
     'wrong upload digest is rejected',
   )
-  store.completeFileUpload(createdFirst.revision.id, 'projection.json', {
+  store.completeFileUpload(createdFirst.revision.id, 'config.json', {
     sha256: sha256(first.bytes),
     byteLength: first.bytes.byteLength,
   })
+  upload(store, createdFirst, first.bytes)
   const finalizedFirst = store.finalizeRevision(createdFirst.revision.id)
   assert.equal(finalizedFirst.state, 'awaiting_review')
   assert.equal(finalizedFirst.rendererBuildId, 'renderer-test')
   assert.throws(
-    () => store.fileForUpload(createdFirst.revision.id, 'projection.json'),
+    () => store.fileForUpload(createdFirst.revision.id, 'config.json'),
     (error) => error.code === 'IMPORT_REVIEW_REVISION_IMMUTABLE',
     'finalized revision is immutable',
   )
   const firstDetail = store.paperDetail(first.input.paperId)
-  assert.equal(firstDetail.visibleStructure[0].groupId, 'group:reading-a')
-  assert.equal(firstDetail.sourceVisuals[0].targetId, 'group:reading-a')
-  assert.equal(
-    store.agentPaperStatus(first.input.paperId).sourceVisuals[0].visualId,
-    'visual:reading-a',
-  )
+  assert.deepEqual(firstDetail.visibleStructure, first.projection.consumption.visibleStructure)
+  assert(firstDetail.sourceVisuals.length > 0, 'the real source fixture contains linked visuals')
+  assert.deepEqual(firstDetail.sourceVisuals, first.projection.sourceVisuals)
+  assert.deepEqual(store.agentPaperStatus(first.input.paperId).sourceVisuals, first.projection.sourceVisuals)
 
   assert.throws(
     () => store.createIssue(first.input.paperId, {
@@ -398,7 +322,7 @@ try {
   const createdTampered = store.createRevision(tampered.input)
   upload(store, createdTampered, tampered.bytes)
   writeFileSync(
-    path.join(store.revisionDirectory(createdTampered.revision.id), 'projection.json'),
+    path.join(store.revisionDirectory(createdTampered.revision.id), 'config.json'),
     Buffer.from('tampered'),
   )
   assert.throws(
@@ -408,7 +332,7 @@ try {
   )
 
   writeFileSync(
-    path.join(store.revisionDirectory(finalizedFirst.id), 'projection.json'),
+    path.join(store.revisionDirectory(finalizedFirst.id), 'config.json'),
     Buffer.from('tampered after finalize'),
   )
   assert.throws(
@@ -422,18 +346,22 @@ try {
     dbPath: path.join(tempRoot, 'review.sqlite'),
     filesRoot: path.join(tempRoot, 'files'),
     rendererBuildId: () => activeRendererBuildId,
-    projectRevision: fixtureProjection,
   })
-  dynamicRendererStore.approveRevision(
+  const frontendApproval = dynamicRendererStore.approveRevision(
     first.input.paperId,
     createdThird.revision.id,
     { bundleDigest: third.input.bundleDigest },
     'owner',
   )
+  const awaitingFrontend = manifest({ paperId: 'paper-frontend-awaiting' })
+  const createdAwaitingFrontend = dynamicRendererStore.createRevision(awaitingFrontend.input)
+  upload(dynamicRendererStore, createdAwaitingFrontend, awaitingFrontend.bytes)
+  const finalizedAwaitingFrontend = dynamicRendererStore.finalizeRevision(createdAwaitingFrontend.revision.id)
   activeRendererBuildId = 'renderer-test-2'
   const rendererStaleStatus = dynamicRendererStore.agentPaperStatus(first.input.paperId)
-  assert.equal(rendererStaleStatus.rendererStale, true)
-  assert.equal(rendererStaleStatus.approval, null, 'renderer changes invalidate current Agent acceptance')
+  assert.equal(rendererStaleStatus.rendererStale, false)
+  assert.equal(rendererStaleStatus.compatibility.result, 'equal')
+  assert.equal(rendererStaleStatus.approval.revisionId, createdThird.revision.id)
   assert.throws(
     () => dynamicRendererStore.approveRevision(
       first.input.paperId,
@@ -441,17 +369,23 @@ try {
       { bundleDigest: third.input.bundleDigest },
       'owner',
     ),
-    (error) => error.code === 'IMPORT_REVIEW_RENDERER_STALE',
-    'a renderer deployment invalidates approval of an older review revision',
+    { code: 'IMPORT_REVIEW_REVISION_NOT_REVIEWABLE' },
+    'an already approved revision retains the original business-state rule',
   )
+  assert.deepEqual(dynamicRendererStore.getRevision(createdThird.revision.id).approval, frontendApproval)
+  const awaitingFrontendApproval = dynamicRendererStore.approveRevision(
+    awaitingFrontend.input.paperId, finalizedAwaitingFrontend.id,
+    { bundleDigest: finalizedAwaitingFrontend.bundleDigest }, 'owner')
+  assert.equal(awaitingFrontendApproval.rendererBuildId, 'renderer-test',
+    'an awaiting equal revision can be approved after a frontend deployment with its historical identity')
   const refreshedForRenderer = dynamicRendererStore.createRevision(third.input)
   assert.equal(
     refreshedForRenderer.created,
-    true,
-    'the same content bundle can become a fresh revision after the renderer changes',
+    false,
+    'the same equal content bundle retains its original revision after a frontend deployment',
   )
 
-  const external = externalListeningManifest()
+  const external = await externalListeningManifest()
   const externalStore = makeStore(tempRoot)
   const createdExternal = externalStore.createRevision(external.input)
   upload(externalStore, createdExternal, external.bytes)
@@ -494,9 +428,9 @@ try {
     'owner',
   )
   assert.deepEqual(externalApproval.externalListeningReview.scope, {
-    transcriptSegmentCount: 10,
-    questionCount: 20,
-    answerCount: 20,
+    transcriptSegmentCount: external.projection.materialization.listening.transcript.length,
+    questionCount: external.projection.materialization.listening.questions.length,
+    answerCount: external.projection.materialization.listening.answers.length,
   })
   assert.equal(Object.hasOwn(externalApproval.externalListeningReview, 'engine'), false)
   assert.equal(externalApproval.externalListeningReview.schemaVersion, 'external-listening-owner-review-v2')
@@ -781,6 +715,8 @@ try {
     ...webReviewStatus,
     latest: { ...webReviewStatus.latest, state: 'awaiting_review' },
     approval: null,
+    subjectBackfill: { enabled: true, inserted: 2, skipped: 1, pending: 0, completed: true,
+      skippedByReason: { SEALED_FILE_CHANGED: 1 }, revision: { outcome: 'skipped', reasonCode: 'SEALED_FILE_CHANGED' } },
   }
   const awaitingReview = preflightPaper({
     repoRoot: shipRoot,
@@ -790,6 +726,7 @@ try {
   })
   assert.equal(awaitingReview.state, 'awaiting_review')
   assert.equal(awaitingReview.next.action, 'wait_for_owner_review')
+  assert.deepEqual(awaitingReview.review.subjectBackfill, awaitingReviewStatus.subjectBackfill)
 
   const changesRequested = preflightPaper({
     repoRoot: shipRoot,
@@ -807,11 +744,12 @@ try {
   const rendererStale = preflightPaper({
     repoRoot: shipRoot,
     paperId,
-    reviewStatus: { ...webReviewStatus, approval: null, rendererStale: true },
+    reviewStatus: { ...webReviewStatus, approval: null, rendererStale: true,
+      compatibility: { result: 'pending', reasonCode: 'NOT_CHECKED', pending: true } },
     reviewChecked: true,
   })
-  assert.equal(rendererStale.state, 'changes_requested')
-  assert.equal(rendererStale.next.action, 'resubmit_for_current_renderer')
+  assert.equal(rendererStale.state, 'approved')
+  assert.equal(rendererStale.next.action, 'wait_for_content_check')
 
   const approvedBeforeAccept = preflightPaper({
     repoRoot: shipRoot,
@@ -822,6 +760,15 @@ try {
   assert.equal(approvedBeforeAccept.state, 'approved')
   assert.equal(approvedBeforeAccept.next.action, 'accept_approval')
 
+  const uploadingCandidate = preflightPaper({
+    repoRoot: shipRoot, paperId, reviewChecked: true,
+    reviewStatus: { ...webReviewStatus, approval: null,
+      latest: { ...webReviewStatus.latest, state: 'uploading', reviewKind: 'candidate' },
+      compatibility: { result: 'pending', reasonCode: 'NOT_CHECKED', pending: true } },
+  })
+  assert.equal(uploadingCandidate.state, 'materializing')
+  assert.equal(uploadingCandidate.next.action, 'push_revision', 'resume upload before content qualification')
+
   const ocrConfirmed = preflightPaper({
     repoRoot: shipRoot,
     paperId,
@@ -829,6 +776,7 @@ try {
       ...webReviewStatus,
       latest: { ...webReviewStatus.latest, reviewKind: 'ocr' },
       approval: null,
+      compatibility: { result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false },
     },
     reviewChecked: true,
   })

@@ -24,10 +24,7 @@ export async function runFinalizeWorker(directory, revision, {
   let timeout
   try {
     worker = new Worker(new URL('./finalizeWorker.mjs', import.meta.url), {
-      workerData: { directory, operation, input, reviewerKind, revision: {
-        reviewKind: revision.reviewKind,
-        candidateDigest: revision.candidateDigest,
-      } },
+      workerData: { directory, operation, input, reviewerKind, revision },
     })
     return await new Promise((resolve, reject) => {
       timeout = setTimeout(() => reject(workerError(

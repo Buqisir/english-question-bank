@@ -41,6 +41,8 @@ function sendError(response, context, error) {
   context.sendJson(response, Number(error?.status || 500), {
     error: error instanceof Error ? error.message : String(error),
     code: error?.code || 'IMPORT_REVIEW_FAILED',
+    ...(error?.reasonCode ? { reasonCode: error.reasonCode } : {}),
+    ...(error?.compatibility ? { compatibility: error.compatibility } : {}),
     ...(error?.metrics ? { metrics: error.metrics } : {}),
   })
 }
@@ -202,6 +204,7 @@ export function publicPaperReviewDetail(store, paperId) {
     !detail.latestRevisionId
     || detail.latest?.state === 'uploading'
     || detail.latest?.reviewKind === 'ocr'
+    || detail.compatibility?.result !== 'equal'
   ) return detail
   const { projection } = candidateProjectionForRevision(store, detail.latestRevisionId)
   if (projection.importProfile !== 'public-paper-v1') return detail
@@ -804,7 +807,9 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { preview } = store.productPreviewForRevision(match[1])
+    const { preview, compatibility } = store.productPreviewForRevision(match[1])
+    response.setHeader?.('x-eqb-review-compatibility', compatibility.result)
+    response.setHeader?.('x-eqb-review-reason', compatibility.reasonCode)
     context.sendJson(response, 200, preview.consumption)
   })))
 
@@ -1031,7 +1036,9 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { preview } = store.productPreviewForRevision(match[1])
+    const { preview, compatibility } = store.productPreviewForRevision(match[1])
+    response.setHeader?.('x-eqb-review-compatibility', compatibility.result)
+    response.setHeader?.('x-eqb-review-reason', compatibility.reasonCode)
     if (match[2] === 'paper-asset.json') {
       context.sendJson(response, 200, preview.paperAsset)
       return
