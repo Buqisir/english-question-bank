@@ -14,7 +14,10 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 ## 前置
 
 - Node 24：每条命令前缀 `PATH="/opt/homebrew/opt/node@24/bin:$PATH"`。
-- 听力 ASR venv：`~/.local/share/eqbank-listening-asr`（faster-whisper 1.2.1），模型
+- 听力主引擎：macOS 26 的 Apple SpeechAnalyzer，需已安装 `en_US` 资源和 Swift 编译器；
+  不弹授权、不自动下载资源。失败组用 Whisper 单次复核，严格规则和本地产物见
+  [listening-segment-rule-v2.md](listening-segment-rule-v2.md)。
+- Whisper 复核 venv：`~/.local/share/eqbank-listening-asr`（faster-whisper 1.2.1），模型
   `Systran/faster-whisper-small.en@d1d751a5…` 已在 HF 缓存。可用 `EQB_ASR_VENV`、`EQB_ASR_MODEL` 覆盖。
 - ASR（包括 VAD / 非 VAD 和 `asr-extra`）跨卷、跨 worktree 共用 `~/.cache/eqbank/asr-slots` 系统文件锁，整机默认同时只转写 1 个，其余后台排队，进程退出或崩溃自动释放；所有调用统一设置 `EQB_ASR_CONCURRENCY` 可调并发，`EQB_ASR_LOCK_DIR` 可覆盖锁目录（同机调用须保持一致）。
 - `tesseract`（chi_sim+eng）、`magick`、`pdftoppm`、`pdftotext`、`ffmpeg`。
@@ -25,13 +28,13 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 
 | # | 命令 / 动作 | 内容 | 杭州二模实测 |
 | --- | --- | --- | --- |
-| 1 | `fast-import.mjs prep <id> --audio <mp3> --proofreaders N -- <init 参数>` | init；并行 OCR evidence、（本地目标时）重启本地 Review、stage 音频；后台开/关 VAD 两遍整文件 ASR；生成 worksheets；按字数分页并打印第一轮提示词 | 34 s |
+| 1 | `fast-import.mjs prep <id> --audio <mp3> --proofreaders N -- <init 参数>` | init；并行 OCR evidence、（本地目标时）重启本地 Review、stage 音频；后台 Apple 整文件 ASR；生成 worksheets；按字数分页并打印第一轮提示词 | 旧流程历史实测 34 s |
 | 2 | 第一轮：N 个校对 worker 并行 | 每人 1–3 页 `drafts/`，规则 `ocr-proofread-rules.md`；同时顺带记录 `source-flags/<首页>.json`（原卷语法错、答案、小标题、水印） | 约 3 分 |
-| 3 | `fast-import.mjs after-proofread <id>` | compile → push/proofread/pull OCR → materialize →（issues 停下）→ presentation → 图宽还原 → 小标题与水印 → 拼写审查自动生成并 finalize → verify → 答案核对 → build → 摘要/metadata/听力审查请求 → 等 ASR；打印第二轮提示词 | 约 1.5 分 |
-| 4 | 第二轮：6 个 worker 并行 | 摘要 3 片、metadata 1 份、听力 2 半 | 约 4 分 |
+| 3 | `fast-import.mjs after-proofread <id>` | compile → push/proofread/pull OCR → materialize →（issues 停下）→ presentation → 图宽还原 → 小标题与水印 → 拼写审查自动生成并 finalize → verify → 答案核对 → build → 请求 → Apple 规则判定、失败组 Whisper 单次复核；打印第二轮提示词 | 新引擎待批量实测 |
+| 4 | 第二轮：4 个 worker 并行 | 摘要 3 片、metadata 1 份；听力由版本化机器规则判定 | 新流程待批量实测 |
 | 5 | `fast-import.mjs finish <id>` | 装摘要/metadata/听力审查 → OCR 更正报告 → 后台三版分页（三个进程）同时建写作源参考 → 合并分页计划 → 四款并行冻结 → 缩略总览与 pdftotext | 约 4 分（分页 168 s） |
 | 6 | 主 Agent 目检 PDF | 四款缩略总览逐页、写作源参考分段 | 约 2 分 |
-| 7 | `fast-import.mjs submit <id> [--resolves <ids>]` | push Candidate → 登录 Review 截 Screen | 约 1 分 |
+| 7 | `fast-import.mjs submit <id> [--resolves <ids>]` | 强制全部听力组 usable、中文语境无半角编号 → push Candidate → 登录 Review 截 Screen | 约 1 分 |
 | 8 | 主 Agent 抽查 Screen 截图后 `fast-import.mjs report <id> --screen "…" --pdf "…"` | 写 evidence v4 与 `校正报告与预处理完成表.md` | 数秒 |
 
 脚本遇到需要判断的情况以退出码 2 停下并说明（Materialization issues、答案不一致等），
@@ -78,7 +81,8 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
 - `fast-import.mjs status <id>`：各步骤耗时与后台任务。
 - `fast-import.mjs asr-extra <id> --start <s> --end <s> --tag <名>`：错开窗口边界重转一段
   （开/关 VAD 各一遍），证据写成 `listening-review-evidence/{vad,novad}-<名>-window-NNN.json`。
-  听力 worker 报 `review_required` 且原因是首遍起点漂移时用它，然后 resume 那个 worker。
+  仅保留作人工诊断，不替代 v2 判定，也不绕过送审门禁。重做规则用
+  `after-proofread <id> --redo-from asr-apple-rule-v2`；旧 attempt 保留。
 - `--redo-from <步骤>`：忘掉该步骤及之后所有步骤，并把对应已装 sidecar 和 `products/` 挪进
   `superseded/`。上游改了 Materialization 后从 `figure-sizes` 或更早重做；第二轮作者稿按 ID
   复用，不需要重派 worker。OCR 已确认后又改了校对草稿（例如补漏标的图）用 `--redo-from compile`：

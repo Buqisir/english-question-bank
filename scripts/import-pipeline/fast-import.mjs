@@ -27,8 +27,8 @@ import {
 } from '../../server/paper-import/paginationPlan.mjs'
 import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
-import { boundedAsrWindow } from './lib-listening-window.mjs'
 import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
+import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -233,6 +233,16 @@ async function restartLocalReview(ctx) {
 
 function startAsr(ctx, { tag = null, extent = ['--whole-file'] } = {}) {
   const playback = path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')
+  if (!tag) {
+    const name = 'asr-apple-v2'
+    const out = path.join(ctx.fast, name)
+    const completed = path.join(out, 'completed.json')
+    if (existsSync(completed) && readJson(completed).audioSha256 === sha256(readFileSync(playback))) return [name]
+    if (!alive(ctx.state.background[name]?.pid)) background(ctx, name, 'python3', [
+      path.join(scripts, 'asr-slot.py'), 'python3', path.join(scripts, 'transcribe-listening-apple.py'), playback, out,
+    ])
+    return [name]
+  }
   const original = readdirSync(path.join(ctx.paperDir, 'source')).find((name) => name.startsWith('listening-audio'))
   if (!original) fail('找不到 source/listening-audio.*')
   const names = []
@@ -501,20 +511,6 @@ function round2Prompts(ctx) {
     `在 worktree ${root} 写公开检索 metadata。读 ${relative(path.join(ctx.fast, 'search-metadata-request.json'))}，按其中说明与结构`,
     `写 ${relative(path.join(ctx.fast, 'search-metadata-authored.json'))}。只写这个文件，不联网，不运行 finalize 或其他写命令。完成后回报题组数。`,
   ].join('\n') })
-  if (ctx.state.data.listeningParts) {
-    for (const [index, segments] of ctx.state.data.listeningParts.entries()) {
-      prompts.push({ label: `听力 ${index + 1}`, outputs: [path.join(ctx.fast, 'listening-parts', `part-${index + 1}.json`)], prompt: [
-        `在 worktree ${root} 做听力导航审查。读 ${relative(path.join(ctx.fast, 'listening-review-request.json'))} 的说明；只负责 ${segments.join(', ')}。`,
-        `ASR 证据：${relative(path.join(ctx.fast, 'asr-vad'))}/window-NNN.json（开 VAD）与 ${relative(path.join(ctx.fast, 'asr-novad'))}/window-NNN.json（关 VAD），`,
-        '每个窗口 180 秒、步长 175 秒，segments 时间相对该窗口 startSeconds，重叠部分不是额外朗读。VAD 窗口末句时间可能跨静音漂移并伴随幻听，此时以关 VAD 窗口为准。',
-        `把结果写到 ${relative(path.join(ctx.fast, 'listening-parts', `part-${index + 1}.json`))}：组对象数组，字段严格为`,
-        'segmentId, questionNumbers, decision, reason, limits, playback, occurrences（与 listening-review-v1 的 groups 条目相同）。',
-        'evidencePaths 写成 listening-review-evidence/vad-window-NNN.json 或 listening-review-evidence/novad-window-NNN.json，且所列窗口要覆盖整个 occurrence。',
-        '拿不准的组写 review_required、playback null、occurrences []。reason 与 limits 用中文，说明依据和局限（仅 ASR 比对、非直接听审、非逐字认证）。',
-        '只写这个文件，不联网，不运行写命令。完成后回报每组结论。',
-      ].join('\n') })
-    }
-  }
   return prompts
 }
 
@@ -602,11 +598,24 @@ async function afterProofread(ctx, args) {
     return { summaryParts: ctx.state.data.summaryParts.length, listeningParts: ctx.state.data.listeningParts?.length ?? 0 }
   })
   if (hasListening(ctx)) {
-    await step(ctx, 'asr-wait', async () => {
-      for (const name of ['asr-vad', 'asr-novad']) {
-        await waitBackground(ctx, name, () => existsSync(path.join(ctx.fast, name, 'completed.json')))
+    await step(ctx, 'asr-apple-rule-v2', async () => {
+      for (const name of startAsr(ctx)) {
+        const ready = () => existsSync(path.join(ctx.fast, name, 'completed.json'))
+          && readJson(path.join(ctx.fast, name, 'completed.json')).audioSha256
+            === sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))
+        if (!ready()) await waitBackground(ctx, name, ready)
       }
-      return { windows: readJson(path.join(ctx.fast, 'asr-vad/completed.json')).windows.length }
+      const primary = readJson(path.join(ctx.fast, 'asr-apple-v2/completed.json'))
+      const result = await run(ctx, 'listening-segment-v2', cli('listening-segment.mjs',
+        '--paper-dir', ctx.paperDir, '--request', path.join(ctx.fast, 'listening-review-request.json'),
+        '--apple-evidence', primary.evidence, '--output', path.join(ctx.fast, 'listening-segment-attempts')))
+      ctx.state.data.listeningSegmentAttempt = result
+      // An old cached installation must not survive a fresh stricter rule run.
+      // Preserve the old sidecar and require finish to install this attempt.
+      delete ctx.state.steps['listening-review']
+      archive(ctx, path.join(ctx.paperDir, 'listening-review-v1.json'))
+      save(ctx)
+      return result
     })
   }
   const prompts = round2Prompts(ctx)
@@ -709,54 +718,23 @@ async function installSummaries(ctx) {
 }
 
 async function installListening(ctx) {
-  const request = readJson(path.join(ctx.fast, 'listening-review-request.json'))
-  const groups = []
-  for (let index = 1; index <= ctx.state.data.listeningParts.length; index++) {
-    const file = path.join(ctx.fast, 'listening-parts', `part-${index}.json`)
-    if (!existsSync(file)) fail(`缺少听力分片 ${path.relative(root, file)}`)
-    groups.push(...readJson(file))
-  }
-  const order = listeningGroups(ctx)
-  groups.sort((left, right) => order.indexOf(left.segmentId) - order.indexOf(right.segmentId))
-  // Playback is determined by the occurrences; reviewers sometimes bounded only one of the two readings.
-  for (const group of groups) {
-    if (group.decision !== 'usable' || !group.playback || !group.occurrences?.length) continue
-    group.occurrences.sort((left, right) => left.startSeconds - right.startSeconds)
-    group.playback = {
-      startSeconds: Math.min(group.playback.startSeconds, group.occurrences[0].startSeconds),
-      endSeconds: Math.max(group.playback.endSeconds, ...group.occurrences.map((occurrence) => occurrence.endSeconds)),
-    }
-  }
-  const cited = [...new Set(groups.flatMap((group) => group.occurrences.flatMap((occurrence) => occurrence.evidencePaths)))].sort()
-  const evidence = cited.map((relative) => {
-    const match = relative.match(/^listening-review-evidence\/((vad|novad)(?:-[a-z0-9]+)?)-(window-\d{3}\.json)$/u)
-    if (!match) fail(`无法识别的听力证据路径：${relative}`)
-    const runDir = path.join(ctx.fast, `asr-${match[1]}`)
-    const input = readJson(path.join(runDir, 'input.json'))
-    const window = readJson(path.join(runDir, match[3]))
-    const target = path.join(ctx.paperDir, relative)
+  const result = ctx.state.data.listeningSegmentAttempt
+  if (!result?.review || !existsSync(result.review)) fail('缺少 listening-segment-rule-v2 结果；先运行 after-proofread')
+  const report = readJson(result.review)
+  for (const file of report.evidence) {
+    const source = path.join(result.attempt, file.path)
+    const target = path.join(ctx.paperDir, file.path)
+    const bytes = readFileSync(source)
+    if (sha256(bytes) !== file.sha256 || bytes.length !== file.byteLength) fail(`听力证据已变化：${file.path}`)
     mkdirSync(path.dirname(target), { recursive: true })
-    if (!existsSync(target)) copyFileSync(path.join(runDir, match[3]), target)
-    const bytes = readFileSync(target)
-    return {
-      path: relative, sha256: sha256(bytes), byteLength: bytes.length, kind: 'asr_window',
-      window: boundedAsrWindow(window, request.report.subject.durationSeconds),
-      settings: { engine: `faster-whisper/${input.engine.version}`,
-        model: `Systran/faster-whisper-small.en@${path.basename(input.engine.modelSnapshot)}`,
-        language: 'en', vad: match[2] === 'vad', computeType: input.engine.computeType },
-    }
-  })
-  const review = path.join(ctx.fast, 'listening-review.json')
-  archive(ctx, review)
-  writeJson(review, {
-    schemaVersion: 'listening-review-v1', subject: request.report.subject, reviewedBy: 'import_agent',
-    reviewedAt: new Date().toISOString(), method: 'asr_source_comparison', untrustedContentHandledAsData: true,
-    scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
-    evidence, groups,
-  })
-  await run(ctx, 'finalize-listening', cli('review.mjs', 'finalize-listening-review', ctx.paperId, '--input', review))
+    if (existsSync(target)) {
+      if (sha256(readFileSync(target)) !== file.sha256) fail(`不可覆盖旧听力证据：${file.path}`)
+    } else writeFileSync(target, bytes, { flag: 'wx' })
+  }
+  await run(ctx, 'finalize-listening', cli('review.mjs', 'finalize-listening-review', ctx.paperId, '--input', result.review))
   await run(ctx, 'verify-listening', cli('review.mjs', 'verify-listening-review', ctx.paperId))
-  return { groups: groups.length, usable: groups.filter((group) => group.decision === 'usable').length, evidence: evidence.length }
+  return { groups: report.groups.length, usable: report.groups.filter(g => g.decision === 'usable').length,
+    evidence: report.evidence.length, ruleVersion: 'listening-segment-rule-v2' }
 }
 
 async function sourceReferences(ctx) {
@@ -924,6 +902,8 @@ async function finish(ctx, args) {
 // The Candidate upload. Under the batch submission rule it runs only after PDF QA found nothing
 // blocking; `--resolves` carries Owner issues fixed by this revision.
 async function submit(ctx, args) {
+  // Always re-read before a possibly cached push step; no preview/submit bypass.
+  assertImportSubmissionReady(ctx.paperDir)
   const localPreview = args.includes('--local-preview')
   if (localPreview && !target.local) fail('preview-local 只允许已绑定的 loopback Review，禁止访问生产')
   if (!ctx.state.steps['pdf-qa']?.finishedAt) fail('先运行 finish，并在 PDF 目检后再送审')
@@ -989,7 +969,7 @@ async function report(ctx, args) {
         [path.join(ctx.work, 'materialization-edits.json'), paper('source-references-v1.json')]),
       answerTranscription: check(`校对 worker 对照答案页原图逐题抄录，与答案键比对 ${steps['answer-check'].result.compared}/${steps['answer-check'].result.compared} 一致，无 AI 解题。`,
         [qa('answer-key-comparison.json'), paper('signals/ai-answer-check.json')]),
-      ...(listening ? { listeningPlayback: check(`整文件 ASR 开/关 VAD 两遍（small.en，180 秒窗口）；${listening.groups} 组中 ${listening.usable} 组 usable，引用 ${listening.evidence} 个窗口证据。仅为 ASR 与源文比对的教师导航结论，不是直接听审、逐字或全录音认证。`,
+      ...(listening ? { listeningPlayback: check(`Apple SpeechAnalyzer 主转写，失败组 Whisper 单次复核；按 listening-segment-rule-v2 判定，${listening.groups} 组中 ${listening.usable} 组 usable，保留 ${listening.evidence} 份证据。仅为 ASR 与源文比对的教师导航结论，不是直接听审、逐字或全录音认证。`,
         [paper('listening-review-v1.json')]) } : !selection.hasListening ? {
         listeningPlayback: { status: 'not_applicable', detail: '来源明确声明原卷设计无听力，Canonical 听力题组为零，不执行音频与 ASR 步骤。' },
       } : {}),
@@ -1027,7 +1007,7 @@ function status(ctx) {
 
 const STEP_ORDER = [
   'flags-present', 'compile', 'ocr-review', 'materialize', 'presentation', 'figure-sizes', 'subtitles-watermarks',
-  'spelling', 'verify', 'answer-check', 'build', 'round2-requests', 'asr-wait',
+  'spelling', 'verify', 'answer-check', 'build', 'round2-requests', 'asr-wait', 'asr-apple-rule-v2',
   'summaries', 'search-metadata', 'listening-review', 'ocr-correction-report', 'pagination-run', 'source-references',
   'pagination-plan', 'freeze', 'pdf-qa', 'local-preview', 'local-screen', 'push', 'screen',
 ]
@@ -1041,6 +1021,7 @@ function redoFrom(ctx, name) {
   const paginationJobs = Object.entries(ctx.state.background).filter(([key]) => key.startsWith('pagination-'))
   if (redoPagination && paginationJobs.some(([, job]) => alive(job.pid))) fail('分页仍在运行；待其退出后再重做')
   for (const later of STEP_ORDER.slice(index)) delete ctx.state.steps[later]
+  if (index <= STEP_ORDER.indexOf('asr-apple-rule-v2')) delete ctx.state.data.listeningSegmentAttempt
   delete ctx.state.data.status
   delete ctx.state.data.localReport
   if (redoPagination) {

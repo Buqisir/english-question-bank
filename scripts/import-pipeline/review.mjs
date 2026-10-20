@@ -74,6 +74,7 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
+import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { applyListeningInstructionCorrection, correctedListeningCount, LISTENING_INSTRUCTION_CORRECTION_FILE, LISTENING_INSTRUCTION_CORRECTION_POLICY } from '../../server/paper-import/listeningInstructionCorrection.mjs'
@@ -344,6 +345,7 @@ async function linkThread(paperId) {
 
 async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
+  assertImportSubmissionReady(paperDir, loadNck1ReviewSource(paperDir).materialization)
   const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
   const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
   if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
