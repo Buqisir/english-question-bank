@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'
 import { createServer } from 'node:http'
 import { setTimeout as yieldFor } from 'node:timers/promises'
-import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -14,7 +14,7 @@ import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuild
 import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCompatibilitySchema.mjs'
 import { appendReviewCompatibility, createReviewCompatibilityStore, captureReviewCompatibilitySnapshot } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { createAutomaticReviewSubjectBackfillStore, reviewBackfillInputToken, readBackfillRetryState } from '../server/import-review/automaticReviewSubjectBackfill.mjs'
-import { REVIEW_BACKFILL_RETRY_DELAYS_MS, reviewCompatibilityEligibility } from '../server/import-review/reviewRecoveryPolicy.mjs'
+import { REVIEW_WORKER_BUDGET, REVIEW_BACKFILL_RETRY_DELAYS_MS, reviewCompatibilityEligibility } from '../server/import-review/reviewRecoveryPolicy.mjs'
 import { finalizeReviewFixture, freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { isReviewCompatible } from '../import-ops/public/owner-review.js'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
@@ -71,6 +71,32 @@ try {
   const filesRoot = path.join(output, 'files')
   const target = reviewBuildIdentityProvider()()
   const revision = fixture.revision
+  const canaryPath = path.join(root, 'canary.sqlite')
+  copyFileSync(fixture.dbPath, canaryPath)
+  dbRun(canaryPath, db => db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject'))
+  const canaryBytes = readFileSync(canaryPath)
+  const canaryArgs = ['scripts/review-compatibility-canary.mjs', '--db', canaryPath, '--files-root', filesRoot,
+    '--revision', revision.id, '--operator', 'recovery-fixture', '--reason', 'verify one-revision canary']
+  const canaryEnv = { ...process.env, EQB_REVIEW_COMPATIBILITY_AUTORUN: '0' }
+  const dryCanary = JSON.parse(execFileSync(process.execPath, canaryArgs, { encoding: 'utf8', env: canaryEnv, timeout: 120000 }))
+  assert.equal(dryCanary.apply, false)
+  assert.equal(dryCanary.comparison.result, 'equal')
+  assert.deepEqual(readFileSync(canaryPath), canaryBytes, 'default canary leaves exact DB bytes unchanged')
+  const historicalCanaryRows = () => dbRun(canaryPath, db => db.prepare(
+    "SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'import_review_%' ORDER BY name"
+  ).all().map(({ name }) => [name, db.prepare(`SELECT * FROM ${name} ORDER BY rowid`).all()]))
+  const historicalBefore = historicalCanaryRows()
+  const appliedCanary = JSON.parse(execFileSync(process.execPath, [...canaryArgs, '--apply'],
+    { encoding: 'utf8', env: canaryEnv, timeout: 120000 }))
+  assert.equal(appliedCanary.comparison.result, 'equal')
+  assert.equal(appliedCanary.backfillCommit.committed, true)
+  assert.equal(appliedCanary.comparisonCommit.committed, true)
+  assert.deepEqual(historicalCanaryRows(), historicalBefore, 'apply appends credentials without approving or publishing')
+  assert.equal(dbRun(canaryPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject').get().n), 1)
+  assert.deepEqual(dbRun(canaryPath, db => db.prepare(
+    'SELECT result,reason_code FROM review_compatibility ORDER BY rowid'
+  ).all().map(row => [row.result, row.reason_code])), [['unknown', 'BACKFILL_PENDING'], ['equal', 'CONTENT_EQUAL']])
+  pass('explicit one-revision canary overrides autorun off; dry-run preserves DB bytes; apply only appends credentials')
   let legitimateApproval
   for (const [result, reasonCode] of [
     ['equal', 'CONTENT_EQUAL'], ['different', 'CONTENT_DIFFERENT'],
@@ -377,6 +403,76 @@ try {
   pass('real HTTP API starts with nonempty v1, returns authenticated status, warns, shuts down cleanly and preserves legacy bytes')
 
   const release = makeReviewRelease(path.join(root, 'identity-release'))
+  symlinkSync(path.resolve(import.meta.dirname, '../data'), path.join(release, 'data'), 'dir')
+  const comparisonFile = path.join(release, 'server/import-review/reviewCompatibilityWorker.mjs')
+  const originalWorker = readFileSync(comparisonFile)
+  // Exercise the actual HTTP API while a disposable comparison child exceeds
+  // native RSS. No production runtime injection hook is introduced.
+  writeFileSync(comparisonFile, `
+    import {writeFileSync} from 'node:fs';
+    process.once('message',()=> {
+      writeFileSync(process.env.REVIEW_TEST_STARTED,'started');
+      const bytes=Buffer.alloc(${REVIEW_WORKER_BUDGET.rssMb + 128}*1024**2,1);
+      setInterval(()=>bytes[0],1000);
+    });
+  `)
+  try {
+    for (const enabled of [false, true]) {
+      const isolatedPath = path.join(root, `api-rss-${enabled}.sqlite`)
+      copyFileSync(fixture.dbPath, isolatedPath)
+      dbRun(isolatedPath, db => db.exec('DELETE FROM review_compatibility'))
+      const startedFile = path.join(root, `api-rss-${enabled}.started`)
+      const api = spawn(process.execPath, ['server/api.mjs'], { cwd: release,
+        env: { ...process.env, NODE_ENV: 'production', QUESTION_BANK_API_PORT: String(port),
+          QUESTION_BANK_BUILD_ID: revision.rendererBuildId, QUESTION_BANK_DB: bankPath,
+          USER_DATA_DB: path.join(root, `api-rss-${enabled}-users.sqlite`),
+          QUESTION_BANK_IMPORT_OPS_DB: isolatedPath, QUESTION_BANK_IMPORT_OPS_ROOT: filesRoot,
+          QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: agentToken,
+          QUESTION_BANK_PAPER_ASSET_ROOT: path.join(root, `api-rss-${enabled}-assets`),
+          QUESTION_BANK_USER_SPACE_ROOT: path.join(root, `api-rss-${enabled}-space`),
+          EQB_REVIEW_COMPATIBILITY_AUTORUN: enabled ? '1' : '0', REVIEW_TEST_STARTED: startedFile,
+          EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT: path.join(root, `api-rss-${enabled}-locks`) },
+        stdio: ['ignore', 'pipe', 'pipe'] })
+      let log = ''
+      api.stdout.on('data', bytes => { log += bytes })
+      api.stderr.on('data', bytes => { log += bytes })
+      const exited = new Promise(resolve => api.once('exit', (code, signal) => resolve({ code, signal })))
+      try {
+        let status
+        for (let attempt = 0; attempt < 200; attempt++) {
+          assert.equal(api.exitCode, null, log)
+          if (log.includes('API listening')) {
+            const response = await fetch(`http://127.0.0.1:${port}/api/import-agent-reviews/papers/${revision.paperId}`, {
+              headers: { authorization: `Bearer ${agentToken}` }, signal: AbortSignal.timeout(3000),
+            })
+            assert.equal(response.status, 200, log)
+            status = await response.json()
+            if (!enabled || status.compatibility.reasonCode === 'WORKER_RSS_LIMIT') break
+          }
+          await yieldFor(100)
+        }
+        if (enabled) {
+          assert.equal(status?.compatibility.reasonCode, 'WORKER_RSS_LIMIT', log)
+          assert.equal(status.compatibility.eligible, true)
+          assert.equal(status.compatibility.fallback, true)
+          assert.equal(existsSync(startedFile), true)
+        } else {
+          await yieldFor(1000)
+          assert.equal(existsSync(startedFile), false)
+          assert.equal(status.subjectBackfill.enabled, false)
+        }
+      } finally {
+        api.kill('SIGTERM')
+        let deadline
+        try {
+          assert.deepEqual(await Promise.race([exited, new Promise((_, reject) => {
+            deadline = setTimeout(() => { api.kill('SIGKILL'); reject(new Error('RSS API shutdown timeout')) }, 10000)
+          })]), { code: 0, signal: null }, log)
+        } finally { clearTimeout(deadline) }
+      }
+      pass(`real HTTP API autorun=${enabled}: ${enabled ? 'RSS child killed, API survives and legacy fallback applies' : 'comparison and backfill do not start'}`)
+    }
+  } finally { writeFileSync(comparisonFile, originalWorker) }
   const workerFile = path.join(release, 'server/import-review/reviewBuildIdentityWorker.mjs')
   writeFileSync(workerFile, "import { appendFileSync } from 'node:fs'\n" + readFileSync(workerFile, 'utf8').replace('try {', `try {
     appendFileSync(process.env.BUB90_COUNTER, 'attempt\\n')

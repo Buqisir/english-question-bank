@@ -2225,6 +2225,11 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInpu
     rawInput.listeningInstructionCorrectionBytes,
   )
   let prepared = sourceCache?.get(sourceDigest)
+  if (prepared && bundleDigest(
+    prepared.input.materializationBytes, prepared.input.documents, prepared.input.media,
+    prepared.input.listeningAudio, prepared.input.spellingReviewBytes, prepared.input.ocrSourceBytes,
+    prepared.input.listeningInstructionCorrectionBytes,
+  ) !== sourceDigest) prepared = null
   if (!prepared) {
     const input = cloneNck1MaterializationInput(rawInput)
     const materialization = parseMaterialization(input.materializationBytes)
@@ -2234,7 +2239,9 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInpu
     if (prepared.validation && !prepared.validation.issues.length) sourceCache?.set(sourceDigest, prepared)
   }
   const { input } = prepared
-  let { materialization } = prepared
+  // Derivations expose materialization to their caller. Keep that mutable result
+  // separate from the verified parse retained for another authority attempt.
+  let materialization = structuredClone(prepared.materialization)
   if (!materialization) {
     return { input, sourceDigest, materialization: null, source: null, request: null,
       issues: [adapterIssue('MATERIALIZATION_JSON_INVALID', 'NCK1 Source Materialization bytes are not readable JSON')] }

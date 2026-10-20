@@ -36,6 +36,7 @@ export async function runReviewCompatibilityWorker(input, {
   let pids = []
   let peakRssBytes = 0
   let stderr = ''
+  let sawOom = false
   let timer
   let onAbort
   let ownsRunning = false
@@ -58,7 +59,10 @@ export async function runReviewCompatibilityWorker(input, {
       env: { ...process.env, TMPDIR: workspace, TMP: workspace, TEMP: workspace },
     })
     exited = new Promise(resolve => worker.once('exit', resolve))
-    worker.stderr.on('data', bytes => { stderr = (stderr + bytes.toString()).slice(-8192) })
+    worker.stderr.on('data', bytes => {
+      stderr = (stderr + bytes.toString()).slice(-8192)
+      sawOom ||= /heap out of memory|Allocation failed/i.test(stderr)
+    })
     return await new Promise(resolve => {
       let settled = false
       const finish = output => {
@@ -92,10 +96,11 @@ export async function runReviewCompatibilityWorker(input, {
       rssTimer = setInterval(() => { void sample() }, 250)
       void sample()
       worker.once('message', finish)
-      worker.once('error', () => fail('WORKER_EXIT'))
-      worker.once('exit', () => finish(unknown(/heap out of memory|Allocation failed/i.test(stderr)
-        ? 'WORKER_OOM' : 'WORKER_EXIT')))
-      worker.send(input, error => { if (error) fail('WORKER_EXIT') })
+      // An OOM during module startup can close IPC before its fatal diagnostic
+      // is drained. Classify after close; an EPIPE must not mask WORKER_OOM.
+      worker.once('error', () => { if (!worker.pid) finish(unknown('WORKER_EXIT')) })
+      worker.once('close', () => finish(unknown(sawOom ? 'WORKER_OOM' : 'WORKER_EXIT')))
+      worker.send(input, error => { if (error && !worker.pid) finish(unknown('WORKER_EXIT')) })
     })
   } catch (error) {
     return unknown(error.code === 'ERR_WORKER_OUT_OF_MEMORY' ? 'WORKER_OOM' : 'WORKER_EXIT')

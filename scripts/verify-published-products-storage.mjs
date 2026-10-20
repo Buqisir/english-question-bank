@@ -34,6 +34,8 @@ await import('./verify-review-subject-backfill.mjs')
 await import('./verify-review-subject-backfill-automatic.mjs')
 await import('./verify-review-eligibility.mjs')
 await import('./verify-review-recovery.mjs')
+await import('./verify-review-process-isolation.mjs')
+await import('./verify-review-memory.mjs')
 await import('./verify-review-publication-content.mjs')
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`

@@ -227,6 +227,10 @@ try {
   let resultA
   try {
     process.env.PATH = path.join(root, 'no-executables')
+    mkdirSync(process.env.PATH)
+    // RSS supervision needs only the OS process inventory. Content comparison
+    // must still succeed without pdfinfo, rendering or conversion executables.
+    symlinkSync('/bin/ps', path.join(process.env.PATH, 'ps'))
     resultA = await compatibility.compute(a)
   } finally { process.env.PATH = oldPath }
   assert.equal(resultA.comparison.result, 'equal', JSON.stringify(resultA.comparison))
@@ -252,7 +256,7 @@ try {
   assert.equal(newRows()[1][0].origin, 'finalize')
   assert.equal(newRows()[2].length, 1)
   assert.equal(JSON.stringify(historical()), oldRows)
-  pass('two overlapping worker snapshots preserve the original baseline and produce one terminal; no pdfinfo/executable required')
+  pass('two overlapping worker snapshots preserve the original baseline and produce one terminal; only OS RSS telemetry is required')
 
   const terminalRows = JSON.stringify(newRows().slice(1))
   const terminalReplay = await compatibility.checkRevision(revision.id)
@@ -422,7 +426,7 @@ try {
   const finish = beginReviewActivity('finalize-fixture')
   try { assert.equal((await runReviewCompatibilityBatch(compatibility)).paused, 'ACTIVITY_PENDING') }
   finally { finish() }
-  assert.deepEqual(REVIEW_WORKER_BUDGET, { heapMb: 384, deadlineMs: 300_000, batchSize: 1, yieldMs: 5000 })
+  assert.deepEqual(REVIEW_WORKER_BUDGET, { heapMb: 384, rssMb: 896, deadlineMs: 300_000, batchSize: 1, yieldMs: 5000 })
   pass('host-wide leader excludes another process and finalize pauses new work; resource defaults exact')
 
   await bump()

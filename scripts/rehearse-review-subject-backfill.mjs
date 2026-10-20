@@ -7,8 +7,6 @@ import { pathToFileURL } from 'node:url'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { runReviewCompatibilityWorker } from '../server/import-review/runReviewCompatibilityWorker.mjs'
 import { REVIEW_BACKFILL_BUDGET } from '../server/import-review/automaticReviewSubjectBackfill.mjs'
-import { computeSealedReviewSubjects } from '../server/import-review/revisionProjection.mjs'
-import { compareReviewSubjects } from '../server/import-review/reviewCompatibility.mjs'
 import { computeReviewBuildIdentity } from '../server/import-review/reviewBuildIdentity.mjs'
 import { reviewBackfillDiagnostic } from '../server/import-review/reviewBackfillDiagnostic.mjs'
 
@@ -96,12 +94,13 @@ export async function rehearseReviewSubjectBackfill(evidenceRoot, { papersRoot, 
         const revision = status.body.latest
         onProgress({ paperId: paper.paperId, stage: 'comparison-start' })
         const input = { directory, revision, preview: value.preview, storedFiles: revision.manifest.files }
-        const compared = computeSealedReviewSubjects(input)
-        const comparison = compareReviewSubjects({ ...compared, storedSubject: baseline.subject, targetBuildId })
+        const compared = await runReviewCompatibilityWorker({ ...input,
+          storedSubjectJson: JSON.stringify(baseline.subject), targetBuildId })
+        const comparison = compared.comparison
         onProgress({ paperId: paper.paperId, stage: 'comparison-end', reasonCode: comparison.reasonCode })
         result = { ...result, result: comparison.result, reasonCode: comparison.reasonCode,
           subjectBytes: baseline.metrics.subjectBytes, differences: comparison.differences,
-          subjectDigest: baseline.subjectDigest, backfillBudget: backfill.comparison.metrics,
+          subjectDigest: baseline.subjectDigest, componentDigests: baseline.componentDigests, backfillBudget: backfill.comparison.metrics,
           comparisonBudget: comparison.metrics }
       } catch (error) {
         result = { ...result, result: 'unknown', reasonCode: error.reasonCode || error.code || 'REHEARSAL_FAILED',
@@ -117,8 +116,8 @@ export async function rehearseReviewSubjectBackfill(evidenceRoot, { papersRoot, 
       [key, results.filter(result => result.result === key).length]))
     return {
       capturedAt: new Date().toISOString(), targetBuildId, evidenceRoot, papersRoot,
-      comparisonMode: 'inline',
-      limitation: 'Preview envelope and payload_digest reconstructed from authenticated GET payloads; raw historical SQLite preview row/digest and hidden guard/confirmation rows are not exposed. Missing preview is never rebuilt from current projection. Backfill uses the production worker budget; inline target comparison does not prove the production comparison worker heap/deadline. This is offline content rehearsal, not a production CAS or approval test.',
+      comparisonMode: 'child-process',
+      limitation: 'Preview envelope and payload_digest reconstructed from authenticated GET payloads; raw historical SQLite preview row/digest and hidden guard/confirmation rows are not exposed. Missing preview is never rebuilt from current projection. Both backfill and target comparison use the production child-process RSS/heap/deadline budgets. This is offline content rehearsal, not a production CAS or approval test.',
       counts, results,
     }
   } finally {

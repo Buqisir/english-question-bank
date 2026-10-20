@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
 import vm from 'node:vm'
 import { stableStringify, sha256, digestJson } from '../shared/paper-canonical/stable.mjs'
 import * as legacy from '../test-fixtures/review-compatibility/legacyStable.mjs'
+import { deriveNck1MaterializationBundle, withNck1MaterializationSourceCache } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
+import { loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
 
 const source = readFileSync(new URL('../shared/paper-canonical/stable.mjs', import.meta.url), 'utf8')
 const browser = vm.runInNewContext(`(() => {
@@ -35,4 +39,29 @@ for (const value of [undefined, NaN, Infinity, { a: NaN }, [undefined], BigInt(1
   assert.throws(() => legacy.digestJson(value), TypeError)
   checks++
 }
-console.log(`PASS ${checks} native streaming/browser/legacy canonical byte and digest checks`)
+const previousFixtureMode = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
+if (previousFixtureMode === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previousFixtureMode
+const root = mkdtempSync(path.join(tmpdir(), 'eqb-review-memory-'))
+try {
+  const { reviewRoot } = makeReviewRoot(root, 'paper-memory-source')
+  const raw = loadNck1ReviewSource(reviewRoot).sourceInput
+  const before = sha256(raw.materializationBytes)
+  withNck1MaterializationSourceCache(() => {
+    const first = deriveNck1MaterializationBundle(raw)
+    assert.deepEqual(first.issues, [])
+    const sourceDigest = digestJson(first.source)
+    first.materialization.paperId = 'paper-tampered-result'
+    assert.equal(digestJson(deriveNck1MaterializationBundle(raw).source), sourceDigest)
+    checks++
+    first.input.materializationBytes[0] ^= 1
+    const second = deriveNck1MaterializationBundle(raw)
+    assert.equal(digestJson(second.source), sourceDigest)
+    assert.equal(sha256(second.input.materializationBytes), before)
+    assert.equal(sha256(raw.materializationBytes), before)
+    checks++
+  })
+} finally { rmSync(root, { recursive: true, force: true }) }
+console.log(`PASS ${checks} native streaming/browser/legacy bytes, digests and source-cache mutation checks`)
