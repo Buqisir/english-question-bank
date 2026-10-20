@@ -18,6 +18,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { crossesSourceEmphasis, loadSpellingSourceEmphasis } from './spelling-source-emphasis.mjs'
+import { isSpellingTokenCorrection } from '../../server/paper-import/spellingReview.mjs'
 
 function fail(message) {
   console.error(message)
@@ -190,7 +191,6 @@ const PUNCTUATION_SPANS = [
   /“ +/gu,
   / +”/gu,
 ]
-const SPELLING_WORD = /^[A-Za-z]+(?:['’][A-Za-z]+)*$/u
 const GRAMMAR_WORDS = /^[A-Za-z]+(?:['’][A-Za-z]+)*(?: [A-Za-z]+(?:['’][A-Za-z]+)*)*$/u
 const WORD_CHAR = /[\p{L}\p{N}'’_-]/u
 
@@ -281,10 +281,11 @@ function auto(requestPath) {
     if (uncertain) {
       if (!String(flag.note || '').trim()) { problems.push(`${label}: uncertain flag needs a Chinese note`); continue }
     } else {
-      const words = flag.category === 'spelling' ? SPELLING_WORD : flag.category === 'grammar' ? GRAMMAR_WORDS : null
-      if (!words) { problems.push(`${label}: category must be spelling or grammar`); continue }
-      if (!words.test(flag.quote) || !words.test(String(flag.after))) {
-        problems.push(`${label}: ${flag.category} quote/after must be ${flag.category === 'spelling' ? 'one English word' : 'English words and spaces only'}`)
+      const spelling = flag.category === 'spelling'
+      if (!spelling && flag.category !== 'grammar') { problems.push(`${label}: category must be spelling or grammar`); continue }
+      if (spelling ? !isSpellingTokenCorrection(flag.quote, flag.after)
+        : !GRAMMAR_WORDS.test(flag.quote) || !GRAMMAR_WORDS.test(String(flag.after))) {
+        problems.push(`${label}: ${flag.category} quote/after must be ${spelling ? 'one whole spelling token with unchanged digit strings' : 'English words and spaces only'}`)
         continue
       }
       if (flag.quote.toLowerCase() === String(flag.after).toLowerCase() || !String(flag.reason || '').trim()) {
