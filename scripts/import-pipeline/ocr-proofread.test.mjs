@@ -536,3 +536,105 @@ test('repeated task scoring headings preserve previously captured source essays'
   assert.deepEqual(result.groups.map(group => group.scoring.entries.flatMap(entry => entry.paragraphs.map(p => p.text))),
     [['1. 注意内容完整。'], ['1. 注意情节连贯。']])
 })
+
+test('writing scope ends once and cannot be reopened by later task or sample headings', () => {
+  const result = referencesFixture(['答案详解', '第一节 应用文', '参考范文',
+    'Our club will plant herbs.', '第二节 读后续写', '参考范文',
+    'Ada brought a watering can.', '答案详解', '第四部分 写作',
+    '第一节 应用文', '参考范文', 'Please join our garden walk.',
+    '第二节 读后续写', '参考范文', 'They met beside the greenhouse.'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Our club will plant herbs.'], ['Ada brought a watering can.']])
+  // The same divider before any section is a counterexample to whole-scope termination.
+  assert.deepEqual(result.review, [
+    { itemId: 'i7', issue: 'answer explanations end the writing-reference scope' },
+  ])
+})
+
+test('student-script termination is task-local and cannot resume at a sample or scoring label', () => {
+  const result = referencesFixture(['第一节 应用文', '参考范文', 'Our club will plant herbs.',
+    '（五）样卷', '参考范文', 'Please join our garden walk.', '评分原则', '1. 注意内容完整。',
+    '第二节 读后续写', '（四）作答示例', '参考范文', 'Ada brought a watering can.'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Our club will plant herbs.'], ['Ada brought a watering can.']])
+  assert(result.groups.every(g => g.scoring.state === 'not_supplied'))
+  assert.equal(result.review.filter(r => r.issue.includes('student-script')).length, 1)
+})
+
+test('part boundaries leave writing scope and bare sections cannot reopen it without a sample label', () => {
+  const result = referencesFixture(['第四部分 写作', '第一节', 'Our club will plant herbs.',
+    '听力材料', '第一节', '无范文', 'M: Learn by connecting',
+    '第二节 读后续写', 'Ada brought a watering can.'], ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Our club will plant herbs.'], ['Ada brought a watering can.']])
+  assert.deepEqual(result.review, [])
+})
+
+test('commentary pause skips fragments and mixed teaching text but resumes at an uppercase English line', () => {
+  const result = referencesFixture(['第二节 读后续写', '参考范文', 'A completed sample.',
+    '首句衔接要点：第一段需与原文', 'leave the next day.',
+    'Arthur arrived.”自然衔接，呼应关键意象。', 'Another real sample.'])
+  assert.deepEqual(result.groups[0].essays.entries.map(e => ({
+    label: e.sourceLabel, id: e.referenceId, text: e.paragraphs.map(p => p.text),
+  })), [
+    { label: '参考范文', id: 'source-ref-cont-1', text: ['A completed sample.'] },
+    { label: null, id: 'source-ref-cont-2', text: ['Another real sample.'] },
+  ])
+  assert.equal(result.review.length, 1)
+  assert.equal(result.review[0].itemId, 'i3')
+})
+
+test('commentary labels pause before any sample and repeated commentary does not duplicate review', () => {
+  const result = referencesFixture(['第二节 读后续写', '【审题重点】', '1. 故事概述',
+    'leave the next day.', '【谋篇布局】', '续写需呼应故事。',
+    '参考范文', 'Mia knocked gently and waited.'])
+  assert.deepEqual(result.groups[0].essays.entries.map(e => [e.sourceLabel, e.referenceId]),
+    [['参考范文', 'source-ref-cont-1']])
+  assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text),
+    ['Mia knocked gently and waited.'])
+  assert.deepEqual(result.review.map(r => r.itemId), ['i1', 'i4'])
+})
+
+test('scoring labels resume paused capture and Chinese scoring lines do not pause it', () => {
+  const result = referencesFixture(['第二节 读后续写', '参考范文', 'A completed sample.',
+    '范文分析', '评分原则', '1. 本题总分为25分。', '注意情节连贯。',
+    '参考范文', 'Another real sample.', '范文分析', 'leave the next day.',
+    '范文2', 'They returned the next morning.'])
+  assert.deepEqual(result.groups[0].scoring.entries[0].paragraphs.map(p => p.text),
+    ['1. 本题总分为25分。注意情节连贯。'])
+  assert.deepEqual(result.groups[0].essays.entries.map(e => e.paragraphs.map(p => p.text)),
+    [['A completed sample.'], ['Another real sample.'], ['They returned the next morning.']])
+  assert.deepEqual(result.review.map(r => r.itemId), ['i3', 'i9'])
+})
+
+test('whole-part omission stays unselected and can later enter either bare task', () => {
+  const result = referencesFixture(['第四部分 写作', '略', '未提供范文',
+    '参考范文', 'Our club will plant herbs.', '第二节', '参考范文',
+    'Ada brought a watering can.'], ['application', 'continuation'])
+  assert.equal(result.groups[0].essays.state, 'not_supplied')
+  assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text),
+    ['Ada brought a watering can.'])
+  assert.deepEqual(result.review.map(r => r.itemId), ['i1', 'i2'])
+})
+
+test('task omission preserves prior samples and permits later source lines and a second task', () => {
+  const result = referencesFixture(['第四部分 写作', '第一节', '参考范文',
+    'Our club will plant herbs.', '无范文', '参考范文', 'Please join our garden walk.',
+    '第二节', '（略）'], ['application', 'continuation'])
+  assert.deepEqual(result.groups[0].essays.entries.map(e => e.paragraphs.map(p => p.text)),
+    [['Our club will plant herbs.'], ['Please join our garden walk.']])
+  assert.equal(result.groups[1].essays.state, 'not_supplied')
+  assert.deepEqual(result.review.map(r => r.itemId), ['i4', 'i8'])
+})
+
+test('ordinary task restarts replace prior sections while scoring headings reuse them', () => {
+  const result = referencesFixture(['第一节 应用文', '参考范文', 'Our club will plant herbs.',
+    '第一节 应用文', '参考范文', 'Please join our garden walk.',
+    '应用文评分细则', '评分原则', '1. 注意内容完整。'], ['application'])
+  assert.deepEqual(result.groups[0].essays.entries.map(e => [e.referenceId, e.paragraphs[0].text]),
+    [['source-ref-app-1', 'Please join our garden walk.']])
+  assert.equal(result.groups[0].scoring.entries[0].sourceLabel, '评分原则')
+  assert.deepEqual(result.review, [])
+})

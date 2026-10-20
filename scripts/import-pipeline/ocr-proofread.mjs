@@ -39,6 +39,7 @@ import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import { LINE_ROLE_RULES, matchesLineRole, firstLineRole, speakerLabel,
   inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches } from './ocr-line-roles.mjs'
+import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -1136,13 +1137,14 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     edgeTexts.get(text).add(line.page)
   }
   const sections = new Map()
-  let current = null
-  let inWriting = false
+  const scope = createWritingScope(sections)
   for (const [lineIndex, line] of lines.entries()) {
+    if (scope.ended) break
     const facts = factsFor(line)
     if (matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
+      scope.end()
       review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
-      break
+      continue
     }
     if (firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
@@ -1153,43 +1155,34 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     // before treating a bare "第一节" outside writing as a writing section.
     const inlineSample = inlineSampleParts(facts.text)
     const [heading, ...rest] = inlineSample || facts.text.split('\n')
-    const sectionText = writingSectionText(facts, heading, rest, inWriting)
+    const sectionText = writingSectionText(facts, heading, rest, scope.inWriting)
     const mergedText = rest.length === 1 ? rest[0].trim() : null
     const mergedLabel = mergedText && matchesLineRole('entry.sample-label', computeLineFacts({ text: mergedText })) ? mergedText : null
-    const bare = (inWriting || mergedLabel || (lines[lineIndex + 1]
+    const bare = (scope.inWriting || mergedLabel || (lines[lineIndex + 1]
       && matchesLineRole('entry.sample-label', factsFor(lines[lineIndex + 1]))))
       && bareSectionNumber((mergedLabel ? heading : sectionText).normalize('NFKC'))
     const started = bare ? (bare === '一' ? 'application' : 'continuation')
       : firstLineRole('writing-section', facts)?.value
     const scoringSection = firstLineRole('scoring-section', facts)?.value
     if (scoringSection) {
-      current = sections.get(scoringSection) || { taskType: scoringSection, lines: [] }
-      sections.set(scoringSection, current)
-      inWriting = true
+      scope.startTask(scoringSection, { reuse: true })
       continue
     }
     if (started) {
-      current = { taskType: started, lines: [] }
-      sections.set(started, current)
-      inWriting = true
-      if (bare && mergedLabel) current.lines.push({ ...line, text: mergedLabel })
+      scope.startTask(started)
+      if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
       continue
     }
     // An explicit omission belongs to the active section, or to both tasks
     // when the key omits the entire writing part. Never invent a model answer.
-    if (matchesLineRole('writing.omission', facts, { inWriting, current })) {
-      for (const taskType of current ? [current.taskType] : ['application', 'continuation']) {
-        if (!sections.has(taskType)) sections.set(taskType, { taskType, lines: [] })
-      }
+    if (matchesLineRole('writing.omission', facts, { inWriting: scope.inWriting, current: scope.current })) {
+      scope.omit()
       review.push({ itemId: line.itemId, issue: 'source explicitly supplies no writing sample (not_supplied)' })
       continue
     }
     if (matchesLineRole('writing.part-boundary', facts)) {
-      current = null
-      inWriting = matchesLineRole('writing.part', facts)
-      const trailing = writingSectionAfterPart(line.text)
-      if (trailing) { current = { taskType: trailing, lines: [] }; sections.set(trailing, current) }
-    } else if (current) current.lines.push(line)
+      scope.enterPart(matchesLineRole('writing.part', facts), writingSectionAfterPart(line.text))
+    } else if (scope.current) scope.current.lines.push(line)
   }
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
     const taskType = group.writingTask.taskType
@@ -1210,27 +1203,29 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     let entry = null
     let paragraph = null
     let previous = null
-    let skipping = false
+    const capture = createReferenceCapture()
     const flush = () => { if (paragraph) { entry.paragraphs.push(paragraph); paragraph = null } }
     const skip = (line, reason) => {
       flush()
       entry = null
       previous = null
-      skipping = true
+      capture.pause()
       review.push({ itemId: line.itemId, issue: `${reason}; skipped until the next label or English line` })
     }
     for (const line of section.lines) {
+      if (capture.ended) break
       const facts = factsFor(line)
       // Student scripts end only this task's official-reference capture.
       if (matchesLineRole('writing.student-script', facts)) {
+        capture.end()
         review.push({ itemId: line.itemId, issue: 'student-script column ends this writing section’s reference capture' })
-        break
+        continue
       }
       if (firstLineRole('entry-label', facts)) {
-        skipping = false
         const kind = firstLineRole('entry-kind', facts)?.value || null
         if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }
         flush()
+        capture.start(kind)
         const index = entries[kind].length + 1
         entry = { kind, referenceId: `source-${kind === 'scoring' ? 'score' : 'ref'}-${short}-${index}`, authority: 'source_reference',
           sourceLabel: line.text, labelSource: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
@@ -1239,13 +1234,13 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
         previous = null
         continue
       }
-      if (matchesLineRole('writing.commentary', facts, { entryKind: entry?.kind, skipping })) {
-        if (!skipping) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
+      if (matchesLineRole('writing.commentary', facts, { entryKind: capture.kind, skipping: capture.paused })) {
+        if (!capture.paused) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
         continue
       }
       // English quote fragments in teaching notes cannot restart an unlabeled sample.
-      if (matchesLineRole('writing.skipped-fragment', facts, { skipping })) continue
-      skipping = false
+      if (matchesLineRole('writing.skipped-fragment', facts, { skipping: capture.paused })) continue
+      capture.resume()
       if (!entry) {
         entry = { kind: 'essays', referenceId: `source-ref-${short}-${entries.essays.length + 1}`, authority: 'source_reference',
           sourceLabel: null, labelSource: null, paragraphs: [] }
