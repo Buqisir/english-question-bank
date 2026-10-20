@@ -170,8 +170,8 @@ export const LINE_ROLE_RULES = Object.freeze([
     && /^(?:略|[（(]略[）)]|(?:参考)?范文[：:]?\s*略|(?:源)?无范文|未提供范文)[。.]?$/u.test(f.trimmed),
   { text: '略', context: { inWriting: true } }, { text: '参考范文', context: { inWriting: true } }),
   rule('writing.part-boundary', 'part-boundary', 10, f =>
-    /^(第[一二三四五]部分|听力)/u.test(f.text) || TRANSCRIPT_MARKER.test(f.text),
-    '听力材料', '第二节 读后续写'),
+    /^(第[一二三四五]部分|(?:附\s*[:：]\s*)?听力)/u.test(f.text) || TRANSCRIPT_MARKER.test(f.text),
+    '附：听力录音稿', '第二节 读后续写'),
   pattern('writing.student-script', 'capture-stop', 10, STUDENT_SCRIPT_BOUNDARY, '（五）样卷', '（四）作答示例'),
   rule('writing.commentary', 'commentary', 10, (f, c) => c.entryKind !== 'scoring'
     && (COMMENTARY_LINE.test(f.text) || (c.skipping && f.hasHan)),
