@@ -21,7 +21,8 @@ import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
 import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation } from './finalizeComputation.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
-import { appendReviewCompatibility } from './reviewCompatibilityStore.mjs'
+import { checkedStoredReviewSubject } from './reviewCompatibilityWrite.mjs'
+import { appendReviewCompatibility, getReviewCompatibility } from './reviewCompatibilityStore.mjs'
 import { buildProductPreviewPayload } from './reviewSubject.mjs'
 import { compareReviewSubjects } from './reviewCompatibility.mjs'
 import { reviewBuildIdentityProvider } from './reviewBuildIdentity.mjs'
@@ -2771,6 +2772,82 @@ export function createImportReviewStore({
     })
   }
 
+  // Internal publication capability: the durable shipping guard freezes Review
+  // mutations; the final synchronous writer runs inside this write transaction.
+  // Never hold SQLite across the asynchronous blob archive.
+  function withPromotionContentGuard(paperId, promotionId, expected, callback) {
+    return withDb(true, db => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const promotion = promotionRow(db, db.prepare(
+          'SELECT * FROM import_review_promotions WHERE id = ? AND paper_id = ?',
+        ).get(promotionId, paperId))
+        const guard = shippingGuardRow(db.prepare(
+          'SELECT * FROM import_review_shipping_guards WHERE paper_id = ?',
+        ).get(paperId))
+        if (!promotion || promotion.state !== 'publishing' || !guard
+          || guard.id !== promotion.guardId || guard.revisionId !== promotion.revisionId
+          || guard.approvalId !== promotion.approvalId) {
+          throw storeError('IMPORT_REVIEW_PROMOTION_GUARD_MISSING', 'Promotion guard changed')
+        }
+        const { revision } = assertCurrentApprovedRevision(db, paperId, promotion)
+        const target = targetBuild()
+        if (expected && target.targetBuildId !== expected.targetBuildId) {
+          const error = storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication target changed during preparation')
+          error.reasonCode = 'TARGET_CHANGED'
+          throw error
+        }
+        const compatibility = getReviewCompatibility(db, revision, target)
+        if (compatibility.result !== 'equal') {
+          const error = storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication content compatibility is not equal')
+          error.reasonCode = compatibility.reasonCode
+          throw error
+        }
+        const baseline = checkedStoredReviewSubject(db.prepare(
+          'SELECT * FROM review_subject WHERE revision_id = ?',
+        ).get(revision.id))
+        if (!baseline || baseline.row.subject_digest !== compatibility.subjectDigest) {
+          throw storeError('BASELINE_UNTRUSTED', 'Publication subject is missing or untrusted')
+        }
+        const preview = db.prepare('SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(revision.id)
+        let trustedPreview = false
+        try {
+          trustedPreview = preview?.bundle_digest === revision.bundleDigest
+            && preview.renderer_build_id === revision.rendererBuildId
+            && preview.payload_digest === baseline.row.consumer_digest
+            && digestJson(JSON.parse(preview.payload_json)) === baseline.row.consumer_digest
+        } catch { /* Malformed persisted evidence is never replaced with a fresh preview. */ }
+        if (!trustedPreview) {
+          const error = storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Stored preview no longer matches the original Review subject')
+          error.reasonCode = 'BASELINE_UNTRUSTED'
+          throw error
+        }
+        const binding = {
+          subjectDigest: baseline.row.subject_digest, targetBuildId: target.targetBuildId,
+          comparatorVersion: compatibility.comparatorVersion,
+          tokenDigest: digestJson({
+            paper: db.prepare('SELECT * FROM import_review_papers WHERE paper_id = ?').get(paperId),
+            revision: db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(revision.id),
+            preview,
+            files: db.prepare('SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path').all(revision.id),
+            confirmations: db.prepare('SELECT * FROM import_review_media_confirmations WHERE paper_id = ? ORDER BY rowid').all(paperId),
+            issues: db.prepare('SELECT * FROM import_review_issues WHERE paper_id = ? ORDER BY rowid').all(paperId),
+            guard,
+          }),
+        }
+        if (expected && digestJson(binding) !== digestJson(expected)) {
+          const error = storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication Review or target changed')
+          error.reasonCode = binding.targetBuildId !== expected.targetBuildId ? 'TARGET_CHANGED' : 'CAS_CHANGED'
+          throw error
+        }
+        const value = callback({ subject: baseline.subject, binding, revision, promotion })
+        if (value instanceof Promise) throw storeError('REVIEW_TRANSACTION_ASYNC', 'Publication guard must remain synchronous')
+        db.exec('COMMIT')
+        return value
+      } catch (error) { if (db.isTransaction) db.exec('ROLLBACK'); throw error }
+    })
+  }
+
   function recordPromotionTarget(paperId, promotionId, input) {
     const assetVersion = Number(input?.assetVersion)
     const versionName = requiredString(input?.versionName, 'versionName', 30)
@@ -3177,6 +3254,7 @@ export function createImportReviewStore({
     registerPublicationRequest,
     revokePublicationRequest,
     recordPromotionTarget,
+    withPromotionContentGuard,
     releaseShippingGuard,
     verifiedFileForRead,
     revisionDirectory,

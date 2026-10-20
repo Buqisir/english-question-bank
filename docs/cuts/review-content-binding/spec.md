@@ -194,6 +194,44 @@ CAS：
 
 实际写出的冻结 PDF 必须与原 subject 字节相同。不能比较过一个对象后再读取另一份未验证文件；经检查的 snapshot/字节直接交给 writer。代码变了而内容完全相同可以发布，代码没变但内容不同也必须拒绝。
 
+### C 实施的实际发布字段覆盖
+
+下表为 `review-publication-content-v1` 的穷举规则。A = 内容相等；B = 明确的运行 envelope/技术派生；C = 无法证明映射，返回 `unknown/UNSUPPORTED_PUBLICATION_MAPPING`。B 不是按字段名全局删除：只在具名位置执行转换，剩余完整对象仍比较。`preparedReviewContent.mjs` 同时核验实际 compilation 的消费投影、`admission.consumers` 和从实际 writer 的 `sealed` 字节重新加载的 consumers；三者任一不等都拒绝。
+
+| 实际字段/写出物 | 类别 | 原基准与精确规则 |
+|---|---|---|
+| `paperAsset` 全部字段（paper、sources、layoutTree、content、answerKey、analysis） | A；两项 B | 完整比较原 preview；仅 `paper.assetVersion` 可为实际目标版本、`paper.status` 可为 `published`，映回原值。标题、sourceType、题文/选项/顺序/答案不改写 |
+| 独立 `answerKey` | A + B | schema/paperId、完整 answers 等于原 asset；`sourceAssetVersion` 仅原版本或实际目标版本 |
+| 六个 `readingAnalysis/scAnalysis/clozeAnalysis/grammarFillAnalysis/writingAnalysis/listeningAnalysis` | A + B | 对应原 preview 的六个具名 analysisSidecars；非 writing 的顶层版本、四类客观题 teachingContent 版本只按 writer 的规则转换；其余全量相等。合法缺项必须两侧均缺 |
+| `paragraphSummariesBytes/publicSearchMetadataBytes/sourceReferencesBytes` | A | 对应三个具名封存 sidecar 的原字节 SHA；不适用时两侧均缺 |
+| `paginationPlan` | A | 等于封存 `pagination-plan.json` 的完整 JSON，缺失对应 null |
+| `frozenProducts.manifest/digest/bytes` | A | 顶层仅这三键；完整原 manifest、manifest 原 SHA；bytes 路径集合完全相同，清单和所有 PDF SHA/长度逐项相等；writer 直接使用已核验的这些 bytes |
+| `importMeta.schemaVersion/paperId` | B | 固定 `import-meta-v1`，paperId 等于 subject |
+| `importMeta.sourceFileName/sourceFileSha256`、package `sourceAssetDigest` | A + B | 封存 universal source manifest 中选中的首个 `question_source/question_and_answers` 文档，或 analyzed package 的 `content` member；文件名仅 POSIX basename，后两项仅移除 SHA 的 `sha256:` 前缀；必须绑定 inventory 的实际 SHA/长度 |
+| `importMeta.sourceProvenance` | A | 仅 external analyzed package 存在，完整等于原 preview `paperAsset.sources.provenance` |
+| `importMeta.paper` | A + B | year、region/source、paperName、sourceType、defaultTags 直接取封存 config；month 取已封存产品 examDate；examCode 仅移除 `paper-`，subject 固定 English，默认 tags 为 `[sourceType,String(year)]`。缺少可证明的年份等源事实则 C，不用当前推断补旧事实 |
+| `importMeta.groups` | A + B | 只生成原 asset 中已有且有对应原 analysis 的四类客观题组；summary 为原 analysis overview → 原 group.title → 固定题型名，displayTitle 为原 title → 题型名，difficulty 固定中、tags 固定对应题型名；完整比较结果 |
+| `paperHeader` / `sealed.manifest.paperHeader` | A + B | 完整等于封存 config 的明确 `headerTitle` 与 provenance.paperName；沿既有 subject-free title 验证；同时对应原消费载荷 header，不允许现场重新命名 |
+| `sourceReferenceApproval` | B | schema、paperName、approvalId/revisionId/bundleDigest/sourceDigest/candidateDigest、sourceReferencesDigest 全部 exact；materializationDigest 绑定本次已严格验证的实际 materialization，是运行身份而非新的历史内容基准；源答案内容另由原 bytes 比较 |
+| `pdfProductApproval` | B | exact 原 approval/revision/bundle，manifestDigest exact 原产品清单 SHA |
+| `paginationPlanBinding` | B | schema/paper/source/candidate/planDigest exact；canonicalSourceDigest 绑定本次实际 admission 的 source；writer 只增加实际 sourceAssetVersion |
+| `fileStorage.schemaVersion/bundleDigest/files/reviewManifest` | B | 固定 schema、exact bundle；文件路径集合、每项 sha256/byteLength/mediaType 全部等于原 inventory；reviewManifest descriptor 绑定真实 approved manifest 的 `JSON.stringify(manifest)+"\n"` 字节 |
+| `fileStorage.store` | B | 允许本次归档返回的 `local` 或 `r2:host/bucket` 存储位置；不是内容，不要求与历史存储位置相同；存储上传/读回与完整 descriptors 的原守卫保留 |
+| 实际 `consumption` 中题文、selections、visibleStructure、mediaArtifacts、authority/profile、diagnostics 等其余全部内容 | A | 完整等于原 consumption；完整 compilation 不是旧基准，但由实际 compilation 重投影出的内容也必须相等 |
+| consumption `sourceAssetVersion/publicationDigest/sourceAssetDigest` | B | 版本和 publicationDigest exact 实际 sealed manifest；真实 `sealed.sourceAsset` 字节必须等于封存 manifest 明确指定的 materializationPath 或 external content 文件，再映回原 Review source digest；不接受任意 caller digest |
+| consumption `consumerContractRef` | B | 每个实际 consumer 必须先匹配已注册的该 consumer contract，随后只把 Print/Screen 的执行身份映到原 Screen ref 以比较同一内容；不忽略 selections 差异 |
+| `paperSourceType/paperHeaderTitle` decorator | A + B | admission 的内存 candidate store 没有 compatibility asset 时，从实际 package 的已比较 sourceType、sealed header 补入；已存在的值不覆盖，必须原值相等 |
+| `listeningAudio`、`sealed.playbackDerivatives` | A + B | 原音频 SHA/长度/mediaType/duration/relativePath/segments 全部相等；URL 仅允许 exact `/paper-assets/{paperId}/versions/v{version}/{relativePath}` → 原 revision URL；唯一 UI derivative 的完整 `{playbackAudioSha256,durationSeconds,segments,digest}` 必须绑定原 preview；不接受新增 derivative 文件 |
+| 听力 occurrence `firstSectionPlayback` 及对应 digest | B | 仅原 preview 省略、正式 occurrence 明确 `twice_default` 的 short-dialogue 默认值可消去；先验证实际 occurrence digest，再仅重算该项映射后的 digest。`once_explicit`、其他题组或其他内容改变不归入 envelope |
+| writer `import-meta.paginationPlanBinding`、normalized-groups、DB 检索/关联索引 | B | 仅从以上已比较 package/实际版本按现有 writer/DB 函数派生，并保留当前 normalization/DB/admission 验证；索引、分配 ID 不作为旧内容基准，题文/标题/答案/解析仍由上列字段覆盖 |
+| 实际 `publishReport` | A + B | exact paper/version/publicationDigest 与前三个批准/存储对象；仅 `generatedAt`、旧 `searchHref` 为具名非内容诊断，要求字符串而不比较历史值；新增 report 字段 C |
+| validation/publish diagnostics、生成时间、journal 临时路径、数据库分配 ID、Canonical/Source Capture 内部表示和 normalizationReport | B | 不是原内容 component，不要求旧字节相同；已有当前严格验证与 journal 恢复仍执行。`publicValidation.readingGroups` 是已比较 asset 的组号/题号/标题索引，不能携带另一份题文 |
+| 新 package 字段、未知身份回执键、无法从原 preview/封存源事实证明的实际内容 | C | 立即 unknown 并拒绝；不通过递归删除 digest/version/url、整对象忽略或两次当前重算放行 |
+
+C 的内部锁入口为 `store.withPromotionContentGuard`：持有既有 shipping guard，在 `BEGIN IMMEDIATE` 内复核当前 approved/latest、旧 renderer 守卫、issues、文件、subject 和目标 equal。第一次捕获 subjectDigest/targetBuildId/comparatorVersion 及 revision/paper/preview/files/confirmations/issues/guard token，异步归档期间不持 SQLite 事务；归档后必须匹配该 token。最终 `onPrepared` 先保存不可变目标，随后再次在该 Review 事务内检查实际目标，并包住同步现场比较、writer/journal 与 bank DB 提交；不引入跨 SQLite 的伪原子承诺。比较器明确证明尚未执行 writer 的拒绝沿原 `markPromotionFailed` 记录失败并释放该 guard；竞态、I/O 或响应丢失等未知异常不带这个证明，保留 publishing/guard/evidence。提交后 Review 回执丢失沿原 target/journal reconciliation 补录，不创建第二个版本。
+
+本步保留全部旧 renderer 判断。`beginPromotion`/scoped begin 的资格入口由 D 再统一切换；C 在 guard 已取得之后额外要求 equal，不能单独宣称跨构建发布已恢复。新增 `scripts/verify-review-publication-content.mjs` 使用真实 native NCK1 听力 profile 的自编 fixture，完整六类 analysis、源参考答案、四份冻结 PDF 和 header；不使用生产数据、浏览器或远端服务。
+
 ## 6. 历史 revision 回填与无需重送恢复
 
 ### 6.1 可信性结论

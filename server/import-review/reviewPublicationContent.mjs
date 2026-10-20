@@ -1,5 +1,7 @@
 import { createHash } from 'node:crypto'
-import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import path from 'node:path'
+import { configuredPaperHeader } from '../../shared/paper-canonical/headerTitle.mjs'
+import { digestJson, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { reviewContentDifferences } from './reviewCompatibility.mjs'
 import { assertReviewPreviewPayload, validateReviewSubject } from './reviewSubject.mjs'
 
@@ -13,6 +15,10 @@ export const REVIEW_PUBLICATION_ENVELOPES = Object.freeze([
   '/answerKey/sourceAssetVersion', '/analysisSidecars/*/sourceAssetVersion',
   '/analysisSidecars/*/groups/*/teachingContent/sourceAssetVersion',
   '/consumption/sourceAssetVersion', '/consumption/publicationDigest',
+  '/consumption/sourceAssetDigest', '/consumption/consumerContractRef',
+  '/consumption/listeningAudio/url',
+  '/consumption/selections/*/projectedOccurrences/*/firstSectionPlayback',
+  '/consumption/selections/*/projectedOccurrenceDigests/*/digest',
 ])
 const ANALYSES = Object.freeze({
   readingAnalysis: 'reading-choice-analysis-v1.json',
@@ -38,23 +44,71 @@ function versionField(object, key, from, to, pointer) {
   object[key] = from
 }
 
-// No URL/digest/version wildcard stripping. The sealed source digest must
-// already equal the review source digest; until C supplies a proven source
-// mapping, a different publication source representation fails closed.
-export function mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version }) {
+// Source Capture may use a package-level digest in Review and exact content
+// member bytes in Publication. Only the explicitly selected sealed source file
+// can bridge those representations; a caller-supplied digest is insufficient.
+function sourceFacts(subject) {
+  const sidecar = subject.components.sidecar
+  const manifest = sidecar.find(file => file.path === 'universal-source-manifest.json')?.json
+  if (!manifest) unknown('/source/manifest')
+  const external = Boolean(manifest.packageManifest)
+  const document = external ? manifest.members?.find(file => file.role === 'content')
+    : manifest.documents?.find(file => ['question_source', 'question_and_answers'].includes(file.role))
+  const publicationPath = external ? document?.path : manifest.materializationPath
+  const publicationFile = subject.components.inventory.find(file => file.path === publicationPath)
+  const sourceFile = subject.components.inventory.find(file => file.path === document?.path)
+  if (!document || !publicationFile || !sourceFile || document.sha256 !== sourceFile.sha256
+    || document.byteLength !== sourceFile.byteLength) unknown('/source/content')
+  return { document, publicationFile, external }
+}
+
+export function mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version, sourceAsset = null }) {
   const baseline = subject.components.consumer.consumption
+  let sourceDigest = baseline.sourceAssetDigest
+  if (sourceAsset !== null) {
+    const file = sourceFacts(subject).publicationFile
+    if (!(sourceAsset instanceof Uint8Array) || sourceAsset.byteLength !== file.byteLength
+      || byteDigest(sourceAsset) !== file.sha256) unknown('/source/bytes')
+    sourceDigest = file.sha256
+  }
   if (!Number.isSafeInteger(version) || version < 1 || !record(consumption)
     || sealedManifest?.paperId !== subject.components.identity.paperId
     || sealedManifest.sourceAssetVersion !== version
     || !/^sha256:[a-f0-9]{64}$/.test(sealedManifest.publicationDigest || '')
-    || sealedManifest.sourceAssetDigest !== baseline.sourceAssetDigest
+    || sealedManifest.sourceAssetDigest !== sourceDigest
     || consumption.sourceAssetDigest !== sealedManifest.sourceAssetDigest
     || consumption.publicationDigest !== sealedManifest.publicationDigest) unknown('/consumption/publicationDigest')
   const mapped = clone(consumption)
   versionField(mapped, 'sourceAssetVersion', baseline.sourceAssetVersion, version, '/consumption/sourceAssetVersion')
+  mapped.sourceAssetDigest = baseline.sourceAssetDigest
   delete mapped.publicationDigest
-  // Published listening URLs require a SHA/length/segment-bound mapping in C.
-  // Comparing the original review URL exactly is intentionally conservative.
+  if (mapped.listeningAudio && mapped.listeningAudio.url !== baseline.listeningAudio?.url) {
+    const audio = mapped.listeningAudio
+    const before = baseline.listeningAudio
+    const expectedUrl = `/paper-assets/${encodeURIComponent(sealedManifest.paperId)}/versions/v${version}/${audio.relativePath}`
+    // Only location changes. Every descriptor, duration and reviewed segment
+    // remains in the full comparison below.
+    if (!before || audio.url !== expectedUrl
+      || !subject.components.media.files.some(file => file.sha256 === audio.sha256
+        && file.byteLength === audio.byteLength && file.mediaType === audio.mediaType)) unknown('/consumption/listeningAudio')
+    audio.url = before.url
+  }
+  // The historical preview omits the two-play default, while Publication
+  // explicitly decorates it. Only this one default is representational.
+  for (const [index, selection] of (mapped.selections || []).entries()) {
+    for (const [offset, occurrence] of (selection.projectedOccurrences || []).entries()) {
+      const before = baseline.selections[index]?.projectedOccurrences?.[offset]
+      if (occurrence.familyContractId === 'listening' && occurrence.slotId === 'listening.short-dialogue'
+        && occurrence.firstSectionPlayback === 'twice_default' && before
+        && !Object.hasOwn(before, 'firstSectionPlayback')) {
+        const descriptor = selection.projectedOccurrenceDigests?.[offset]
+        if (!descriptor || descriptor.groupId !== occurrence.groupId
+          || descriptor.digest !== digestJson(occurrence)) unknown('/consumption/projectedOccurrenceDigests')
+        delete occurrence.firstSectionPlayback
+        descriptor.digest = digestJson(occurrence)
+      }
+    }
+  }
   return mapped
 }
 
@@ -97,27 +151,30 @@ function expectedImportMeta(subject) {
   return { paper, groups }
 }
 
-// Package fields supported here are exhaustive. A future package field cannot
-// disappear into a normalize/omit list. Identity receipts, fileStorage, raw
-// sources and pagination binding need C's runtime guard and are unknown here.
+// Exhaustive package coverage. Unknown fields never disappear in normalization.
 export const REVIEW_PUBLICATION_PACKAGE_FIELDS = Object.freeze([
   'paperAsset', 'answerKey', ...Object.keys(ANALYSES),
   'paragraphSummariesBytes', 'publicSearchMetadataBytes', 'sourceReferencesBytes',
   'paginationPlan', 'frozenProducts', 'importMeta', 'sourceAssetDigest', 'paperHeader',
+  'sourceReferenceApproval', 'pdfProductApproval', 'fileStorage', 'paginationPlanBinding',
 ])
 
-export function compareReviewPublicationContent({ subject, packageData, consumption, sealedManifest, version }) {
+export function compareReviewPublicationContent({ subject, packageData, consumption, sealedManifest, version,
+  sourceAsset = null, approvedIdentity = null, approvedManifest = null, materializationDigest = null,
+}) {
   const result = { mappingVersion: REVIEW_PUBLICATION_CONTENT_VERSION, result: 'unknown',
     reasonCode: 'UNSUPPORTED_PUBLICATION_MAPPING', differences: [], coverage: [] }
   try {
     if (!validateReviewSubject(subject).ok || !record(packageData)) unknown('/')
     const unmapped = Object.keys(packageData).filter(key => !REVIEW_PUBLICATION_PACKAGE_FIELDS.includes(key))
     if (unmapped.length) unknown(`/packageData/${unmapped[0]}`)
+    if (!(sourceAsset instanceof Uint8Array)) unknown('/source/bytes')
     const original = subject.components.consumer
     const actualAsset = clone(packageData.paperAsset)
     // Accept either the pre-writer exact preview identity or the final version
     // identity, but never an arbitrary third version/status.
-    if (!same(actualAsset.paper, original.paperAsset.paper)) {
+    if (actualAsset.paper.assetVersion !== original.paperAsset.paper.assetVersion
+      || actualAsset.paper.status !== original.paperAsset.paper.status) {
       versionField(actualAsset.paper, 'assetVersion', original.paperAsset.paper.assetVersion, version, '/paperAsset/paper/assetVersion')
       if (actualAsset.paper.status !== 'published') unknown('/paperAsset/paper/status')
       actualAsset.paper.status = original.paperAsset.paper.status
@@ -147,7 +204,7 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
       actualAnalyses[file] = mapped
     }
     const actualPayload = { paperAsset: actualAsset, analysisSidecars: actualAnalyses,
-      consumption: mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version }) }
+      consumption: mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version, sourceAsset }) }
     assertReviewPreviewPayload(actualPayload)
     const diff = reviewContentDifferences(original, actualPayload)
     result.differences.push(...diff.differences)
@@ -173,6 +230,7 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
     const pagination = subject.components.sidecar.find(file => file.path === 'pagination-plan.json')?.json ?? null
     if (!same(packageData.paginationPlan ?? null, pagination)) result.differences.push('/packageData/paginationPlan')
     const frozen = packageData.frozenProducts
+    exactKeys(frozen, ['manifest', 'bytes', 'digest'], '/packageData/frozenProducts')
     if (!frozen || !same(frozen.manifest, subject.components.products.manifest)
       || frozen.digest !== subject.components.products.manifestFile.sha256) result.differences.push('/packageData/frozenProducts')
     else {
@@ -187,18 +245,61 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
     }
     result.coverage.push('paginationPlan', 'frozenProducts')
     const meta = packageData.importMeta
-    // File name/source provenance cannot be established merely by recomputing
-    // a package. Until their explicit sealed-source mapping is supplied, fail
-    // closed on the real package's additional fields.
-    exactKeys(meta, ['schemaVersion', 'paperId', 'paper', 'groups'], '/packageData/importMeta')
+    const facts = sourceFacts(subject)
+    const provenance = original.paperAsset.sources.provenance
+    exactKeys(meta, ['schemaVersion', 'paperId', 'sourceFileName', 'sourceFileSha256',
+      ...(facts.external ? ['sourceProvenance'] : []), 'paper', 'groups'], '/packageData/importMeta')
     if (meta.schemaVersion !== 'import-meta-v1' || meta.paperId !== subject.components.identity.paperId) unknown('/importMeta')
     const expectedMeta = expectedImportMeta(subject)
     if (!same(meta.paper, expectedMeta.paper)) result.differences.push('/packageData/importMeta/paper')
     if (!same(meta.groups, expectedMeta.groups)) result.differences.push('/packageData/importMeta/groups')
-    const expectedSource = original.paperAsset.sources.provenance?.members?.find(file => file.role === 'content')?.sha256
-    if (!expectedSource || packageData.sourceAssetDigest !== expectedSource.replace(/^sha256:/, '')) unknown('/packageData/sourceAssetDigest')
-    if (packageData.paperHeader !== undefined) unknown('/packageData/paperHeader')
-    result.coverage.push('importMeta.paper', 'importMeta.groups', 'sourceAssetDigest')
+    if (meta.sourceFileName !== path.posix.basename(facts.document.path)
+      || meta.sourceFileSha256 !== facts.document.sha256.replace(/^sha256:/, '')
+      || (facts.external && !same(meta.sourceProvenance, provenance))
+      || packageData.sourceAssetDigest !== facts.document.sha256.replace(/^sha256:/, '')) {
+      result.differences.push('/packageData/importMeta/source')
+    }
+    const config = subject.components.sidecar.find(file => file.path === 'config.json')?.json
+    if (!same(packageData.paperHeader ?? null, configuredPaperHeader(config) ?? null)
+      || !same(sealedManifest.paperHeader ?? null, packageData.paperHeader ?? null)) result.differences.push('/paperHeader')
+    result.coverage.push('importMeta', 'sourceAssetDigest', 'paperHeader')
+    if (!approvedIdentity || !approvedManifest || approvedIdentity.revisionId !== subject.revisionId
+      || approvedIdentity.bundleDigest !== subject.bundleDigest
+      || approvedManifest.bundleDigest !== subject.bundleDigest
+      || !same([...approvedManifest.files].sort((a,b) => a.path < b.path ? -1 : 1), subject.components.inventory)
+      || !approvedIdentity.approvalId) unknown('/approval')
+    const id = subject.components.identity
+    const references = subject.components.sidecar.find(file => file.path === 'source-references-v1.json')
+    const expectedReferenceApproval = references ? {
+      schemaVersion: 'source-reference-publication-v1', paperName: approvedManifest.paperName,
+      approvalId: approvedIdentity.approvalId, revisionId: subject.revisionId, bundleDigest: subject.bundleDigest,
+      sourceDigest: id.sourceDigest, candidateDigest: id.candidateDigest,
+      materializationDigest, sourceReferencesDigest: references.sha256,
+    } : null
+    if (references && !/^sha256:[a-f0-9]{64}$/.test(materializationDigest || '')) unknown('/sourceReferenceApproval/materializationDigest')
+    if (!same(packageData.sourceReferenceApproval, expectedReferenceApproval)) unknown('/sourceReferenceApproval')
+    if (!same(packageData.pdfProductApproval, {
+      manifestDigest: subject.components.products.manifestFile.sha256,
+      approvalId: approvedIdentity.approvalId, revisionId: subject.revisionId, bundleDigest: subject.bundleDigest,
+    })) unknown('/pdfProductApproval')
+    if (!same(packageData.paginationPlanBinding, {
+      schemaVersion: 'paper-pagination-binding-v1', paperId: id.paperId,
+      sourceDigest: id.sourceDigest, candidateDigest: id.candidateDigest,
+      canonicalSourceDigest: sealedManifest.sourceAssetDigest,
+      planDigest: pagination ? digestJson(pagination) : null,
+    })) unknown('/paginationPlanBinding')
+    const storage = packageData.fileStorage
+    exactKeys(storage, ['schemaVersion', 'store', 'bundleDigest', 'reviewManifest', 'files'], '/fileStorage')
+    if (storage.schemaVersion !== 'review-file-storage-v1' || storage.bundleDigest !== subject.bundleDigest
+      || typeof storage.store !== 'string' || !/^(local|r2:[^\s]+)$/.test(storage.store)) unknown('/fileStorage/store')
+    exactKeys(storage.files, subject.components.inventory.map(file => file.path), '/fileStorage/files')
+    for (const file of subject.components.inventory) {
+      if (!same(storage.files[file.path], { sha256: file.sha256, byteLength: file.byteLength, mediaType: file.mediaType })) unknown(`/fileStorage/files/${file.path}`)
+    }
+    const manifestBytes = Buffer.from(`${JSON.stringify(approvedManifest)}\n`)
+    if (!same(storage.reviewManifest, { sha256: byteDigest(manifestBytes),
+      byteLength: manifestBytes.byteLength, mediaType: 'application/json' })) unknown('/fileStorage/reviewManifest')
+    result.coverage.push('sourceReferenceApproval', 'pdfProductApproval', 'paginationPlanBinding', 'fileStorage')
     return { ...result, result: result.differences.length ? 'different' : 'equal',
       reasonCode: result.differences.length ? 'SUBJECT_CHANGED' : 'CONTENT_EQUAL' }
   } catch (error) {

@@ -19,6 +19,9 @@ import {
   assertPaperImportPaginationPlan,
   assertPaperImportSourceReferences,
 } from '../paper-import/storage.mjs'
+import { buildProductPreviewPayload } from './reviewSubject.mjs'
+import { reviewContentDifferences } from './reviewCompatibility.mjs'
+import { inspectSealedReviewFiles } from './sealedReviewFiles.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { readSourceReferencePublication } from '../paper-import/sourceReferencePublication.mjs'
 import { readPublishedProducts } from '../paper-import/frozenProducts.mjs'
@@ -194,7 +197,7 @@ export function createSinglePaperPromotionService({
   afterPublish = null,
   blobStore = null,
 }) {
-  function execute(paperId, begun, fileStorage = null) {
+  function execute(paperId, begun, fileStorage = null, contentBinding = null) {
       const store = getStore()
       let promotion = begun.promotion
       if (begun.action === 'consumed') {
@@ -215,13 +218,6 @@ export function createSinglePaperPromotionService({
       const projection = buildNck1ReviewProjection(reviewRootDir, {
         requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
       })
-      // Upload and verify before opening the publication transaction. Failed
-      // or interrupted publication never deletes these shared content addresses.
-      if (projection.frozenProducts && !fileStorage) {
-        return archiveReviewFiles({ rootDir: reviewRootDir, manifest: revision.manifest,
-          blobStore: blobStore || configuredBlobStore() })
-          .then(storage => execute(paperId, begun, storage))
-      }
       const confirmation = {
         schemaVersion: 'teacher-confirmation-v1',
         candidateDigest: promotion.candidateDigest,
@@ -305,7 +301,42 @@ export function createSinglePaperPromotionService({
           const receipt = store.markPromotionPublished(paperId, promotion.promotionId, committed)
           return { status: 'idempotent', promotion: receipt, consumers: committed.consumers }
         }
+        const context = store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, value => {
+          const differences = reviewContentDifferences(value.subject.components.consumer,
+            buildProductPreviewPayload(revision, projection)).differences
+          const evidence = inspectSealedReviewFiles(reviewRootDir, revision.manifest.files)
+          const changed = evidence.find(file => {
+            const expected = revision.manifest.files.find(item => item.path === file.path)
+            return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
+          })
+          if (changed || differences.length) {
+            const error = promotionError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Projected content differs from the approved Review')
+            error.reasonCode = changed ? 'SEALED_FILE_CHANGED' : 'SUBJECT_CHANGED'
+            error.publicationNotWritten = true
+            throw error
+          }
+          return value
+        })
+        // The first context is captured before the asynchronous archive. A
+        // second pass must match it exactly, including target and confirmations.
+        if (projection.frozenProducts && !fileStorage) {
+          return archiveReviewFiles({ rootDir: reviewRootDir, manifest: revision.manifest,
+            blobStore: blobStore || configuredBlobStore() })
+            .then(storage => execute(paperId, begun, storage, context.binding))
+        }
         const result = publish({
+          approvedReviewSubject: context.subject,
+          withPreparedReviewSubject(snapshot, write) {
+            return store.withPromotionContentGuard(paperId, promotion.promotionId, context.binding, current => {
+              if (current.promotion.assetVersion !== snapshot.version
+                || current.promotion.canonicalPublicationDigest !== snapshot.admission.sealed.manifest.publicationDigest) {
+                const error = promotionError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Prepared publication target changed')
+                error.reasonCode = 'CAS_CHANGED'
+                throw error
+              }
+              return write()
+            })
+          },
           reviewRootDir,
           approvedManifest: revision.manifest,
           fileStorage,
@@ -363,6 +394,20 @@ export function createSinglePaperPromotionService({
           promotion: receipt,
           consumers: committedAfterPublish.consumers,
         }
+      } catch (error) {
+        // Only a comparator's explicit pre-write rejection proves this attempt
+        // wrote no assets. Races, I/O failures and lost responses retain the
+        // publishing state/guard for reconciliation.
+        if (error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED' && error.publicationNotWritten === true) {
+          try {
+            store.markPromotionFailed(paperId, promotion.promotionId, {
+              failureCode: error.reasonCode, failureMessage: error.message,
+            })
+          } catch {
+            // Preserve both the original rejection and any still-held guard.
+          }
+        }
+        throw error
       } finally {
         db.close()
       }
