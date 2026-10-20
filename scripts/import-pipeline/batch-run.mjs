@@ -539,7 +539,7 @@ export function checkPdfs(paperId) {
   return result
 }
 
-export async function pdfQa(ctx, paper) {
+async function pdfQa(ctx, paper) {
   paper.stage = 'pdf-check'
   ctx.save()
   const output = path.join(ctx.dir, 'logs', paper.paperId, 'pdf-hard-check.json')
@@ -579,8 +579,8 @@ export async function pdfQa(ctx, paper) {
     const sha256 = checks.products[product].sha256
     const outputContract = `格式 {"sha256":"${sha256}","blocking":[],"needsContext":[{"reason":"缺少的上下文与待核事项","pages":[相关PDF页码]}],"notes":[],"checkedImages":[全部实际打开的图片绝对路径]}。blocking 只写图上确证的缺陷或图像本身无法辨认的硬约束；本分片未见后续选项库等上下文不足必须写 needsContext，不能写 blocking，也不能猜通过。无疑点时 needsContext 为 []。`
     const parts = await Promise.all(batches.map(async (batch, index) => {
-      const output = batches.length === 1 ? productVisual(product)
-        : productVisual(product).replace(/\.json$/u, `-${checks.products[product].sha256.slice(7, 23)}-part-${index + 1}.json`)
+      // Keep worker evidence separate from the resolved aggregate so its receipt remains valid.
+      const output = productVisual(product).replace(/\.json$/u, `-${sha256.slice(7, 23)}-part-${index + 1}.json`)
       const partLabel = batches.length === 1 ? label(product)
         : `${label(product)} ${checks.products[product].sha256.slice(7, 23)} 分批 ${index + 1}`
       await agent(ctx, paper, partLabel, 'sol', [
@@ -589,7 +589,7 @@ export async function pdfQa(ctx, paper) {
         '硬约束：题目/作答框/七选五选项库不可拆，不能溢出叠字、裁图、漏内容或缩字。七选五正文跨页后选项库完整排在下一页是允许的；选项库本身拆页才是缺陷。',
         `PDF 总页数 ${images.length}；本批页码 ${JSON.stringify(batch.map(image => images.indexOf(image) + 1))}。`,
         '插图是原卷图片原样嵌入：只查图整体在页内（四边、图注未被裁掉）、不与文字重叠、尺寸与正文相称；图内小字清晰度取决于原卷扫描，看不清写 notes，不算 blocking。',
-        '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 problems。',
+        '题组跨页、篇章跨页、部/节标题留页尾是偏好，不自动阻塞。听力原文一轮话在跨页处断成两行是已知遗留，只写 notes；同页内一轮话被拆成多行则写进 blocking。',
         '范文一段若在答案册原页跨页处被拆成两段（以写作源参考分段总览里两段的原页码一前一后相邻为准），也是已知遗留，只写 notes；同一原页内的提前折行仍写 blocking。',
         `${PDF_QA_DPI} dpi 初筛不能认证逐字正确；如实说明局限。不要声称已听音频。`,
         `只写 ${output}，${outputContract}`,
