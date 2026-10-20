@@ -2,7 +2,96 @@
 
 基线：`c42f8b649b8956dcd2383a9540f0dca0156fd808`。文件行号沿用该基线的只读核对结果；实施时重新定位。本文定义实施，不授权生产迁移、部署或发布试卷。
 
-## 2026-10-21 审查后恢复规则（本节覆盖下文冲突的历史规则）
+## 2026-10-21 第三轮修订（本节覆盖后文冲突规则）
+
+- **已知 different 优先于身份可用性。** 所有资格读取先查 revision 在任何 target 下最后追加的 `different`。身份冷启动、超时或不可用均不能绕过它；旧 equal 也不能兜底。只有当前可信 target 下经过完整绑定校验、且全局追加顺序晚于所有 different 的 equal 才能恢复资格。详情、列表、批准、promotion 与最终 writer 共用此规则；同 target 内的终态冲突仍拒绝。
+- **自动运行默认开启。** `EQB_REVIEW_COMPATIBILITY_AUTORUN=0` 应急停用自动比较及 backfill；既有 `EQB_REVIEW_SUBJECT_BACKFILL=0` 仅关闭 backfill。停止计算不删除证据、不关闭 different 拒绝检查，也不借旧 equal 放行。本次分支已修改 renderer 指纹覆盖路径，部署本身必然改变指纹：尚未取得当前 target equal 的待审卷在计算完成前不可批准；此时关闭自动运行会延长不可批准状态，需重新开启后完成比较。已验证的当前 equal 仍按原内容与业务守卫读取。
+- **独立子进程与 RSS 软隔离。** 比较和 backfill 使用 `child_process.fork`，单任务串行、批量 1 卷、任务间让出 5 秒。父进程每 250 ms 通过 `ps` 汇总整个子进程树 RSS，超限立即向专用进程组和已观察到的后代发送 SIGKILL，等待退出后清理父进程保管的临时目录。超限记为 `unknown/WORKER_RSS_LIMIT`，按原瞬态退避重试；资格继续遵守前两条，不把失败标成 equal。V8 heap 和 deadline 仍独立限制，调用方只能降低预算。
+- **退出清理竞态。** macOS 在子进程已是 zombie、Node 尚未投递 exit 时，对该进程组的 SIGKILL 返回 EPERM。清理遇此错误时异步重查整个进程组；只有目标已不存在或全部为 Z 状态才视为已退出，任何存活成员的 EPERM 仍报错。竞争调用共享同一个清理 Promise，父进程等待其完成再释放资源；RSS/timeout 触发后，迟到的成功 IPC 不能覆盖失败。
+- **隔离边界。** 250 ms 轮询可能漏过瞬时峰值；进程级隔离与 V8 heap 均不是主机 RSS 硬额度。生产建议另行评审 systemd/cgroup 的独立 worker scope、`MemoryHigh/MemoryMax` 与 API 保留内存，并以目标主机实际负载决定额度。本轮不修改 deploy、controller、systemd 或 cgroup，也不声称已经在 2 CPU/2 GiB 限制中证明。
+- **单卷 canary。** `node scripts/review-compatibility-canary.mjs --db <本地 Review DB> --files-root <封存根目录> --revision <精确 revision ID> --operator <操作员> --reason <原因>` 默认只计算并输出诊断，显式 `--apply` 才追加 subject/比较凭证。只处理指定 revision，不扫描其他卷、不批准、不发布；继续持有原 leader、检查 activity、完整证据与 CAS。它独立于 API 的自动开关，backfill 的单独应急开关仍有效。
+- **内容与指纹。** Owner 已授权本轮内存优化改变 renderer 指纹；不得调整指纹覆盖范围来掩盖变化。Node 使用原生 SHA-256 和分块 canonical JSON 哈希，浏览器保留原同步算法；长字符串保持 JSON 转义及代理对的精确字节。投影去除重复 Buffer 复制，私有编译证据共享防御性快照，同次同步投影内复用逐字节哈希绑定的已验证源解析，JSON 核验后只保留 digest/必要字段。公共 clone 仍保留防御复制。canonical、subject/component、payload 与冻结 PDF 绑定必须与优化前实现相同。
+
+### 第三轮资源验收（macOS arm64 / Node 24.15.0）
+
+最终比较额度为 **384 MiB heap / 896 MiB RSS / 300 秒**，回填为
+**128 MiB heap / 384 MiB RSS / 30 秒**；批量 1，自动任务之间让出 5 秒。
+最重比较子进程原生 high-water 为 650.33 MiB，距 RSS 额度留 27.4%；
+最重回填为 284.34 MiB，留 26.0%。原 640/256 MiB 试用额度没有所需
+20% 余量，故按实测上调；轮询仍可能漏过短峰，额度是软保护。
+修复后 59 套重跑中，子进程原生 high-water 与子树采样 RSS 取较大值，
+比较/回填最高分别为 646.56/279.44 MiB；全体任务均保留至少 20% 额度余量。
+
+下表 RSS 是 supervisor 与所有后代的**整棵进程树**每 50 ms 采样峰值，
+时间是独立子进程的整个任务耗时。优化前也采用独立进程、相同 heap/deadline，
+仅在离线测量副本中放宽 RSS 以观察完整峰值；不是把线程版与进程版混作内存收益。
+
+| 样本 | 比较 RSS MiB 前→后 | 比较秒 前→后 | 回填 RSS MiB 前→后 | 回填秒 前→后 |
+| --- | --- | --- | --- | --- |
+| 大湾区 2025-10 | 1332.42→833.66 | 80.74→43.13 | 548.55→405.91 | 1.79→1.18 |
+| 烟台 2026-05 | 1094.44→725.59 | 35.47→23.09 | 537.92→404.31 | 1.86→1.15 |
+| 宁波 2026-03 | 1043.48→587.06 | 33.92→24.20 | 359.27→311.38 | 1.49→1.31 |
+| 天域 2026-04 | 1266.80→766.73 | 68.09→37.84 | 508.67→360.48 | 1.79→1.15 |
+
+四卷每次回填后均间隔 5 秒再比较；比较均 equal，回填均只建立基准并返回
+BACKFILL_PENDING。比较期间最小 HTTP 探针全部成功，最高 p95 2.13 ms。
+它仅证明 supervisor 主线程可响应；完整 HTTP API 的 RSS 杀停与应急关闭另由
+`verify-review-recovery.mjs` 真实启动 API 验证。
+
+若 59 卷均需回填及比较，按四样本平均任务时间再加 117 个 5 秒间隔，
+本机粗估约 42.5 分钟；用样本最快/最慢时间估约 34–54 分钟。样本并不覆盖全部卷
+或生产负载，2 核主机时间可能更长；建议夜间部署并留至少 1–2 小时观察窗口，
+以实际进度决定，不把本机时间当生产承诺。部署改变 renderer 指纹后，
+未完成当前 target equal 的卷仍会暂时不可批准。
+
+外部证据根目录为 `/Users/huangxuewei/Projects/eqb-scratch-archive/bub90-repro`。
+`round3-before-*.json` 与 `round3-final-*.json` 保留原始测量；其中 environment
+沿用了旧模板中的 taskpolicy/nice 说明，该字段不准确：本轮实际直接启动 Node，
+没有使用 taskpolicy/nice，也没有 CPU/总内存的 2 核/2 GiB 硬限制。
+资源副本 `round3-final-release` 在后续修正启动 OOM 分类和 zombie 清理之前冻结；
+6 个内容/内存核心模块已与当前候选逐字核对一致，新增变化为启动分类、
+异步清理及 ps 的进程组/状态字段，不把历史资源测量冒充新测量。
+59 套修复后演练使用另行冻结的 `round3-zombie-fixed-release`，
+不改写旧副本或失败日志。59 套离线内容覆盖由 4 个独立 supervisor 并行执行；
+四卷资源测量及生产调度仍为串行、间隔 5 秒，离线批次不作为生产吞吐证明。
+
+### 第三轮已完成的内容与行为核验
+
+- 修复后的完整 59 套为 **58 equal / 0 different / 1 unknown**，唯一 unknown 为
+  重庆八中 `paper-mock-cq8-2026-m5` 的 `MISSING_BASELINE`。全部使用同一目标
+  `sha256:aca927a02538b058c8f81e3cb29ba1c01684a5f152d9b418b378c9b6159b61f6`；
+  逐卷 JSON/TSV 为 `round3-zombie-fixed-rehearsal-results.*`。58 个 subjectDigest
+  与优化前历史演练逐项相同，证明记录为 `round3-zombie-fixed-subject-digest-equivalence.json`。
+  `round3-delivery-evidence.json` 汇总当前 target、提交、23 项源码改动的绝对路径、
+  资源与验证索引，并自动断言目标一致、内容等价和 RSS 余量。
+- `round3-canonical-byte-equivalence.json`：四卷各比较原始 JSON 与 stable JSON，
+  **8/8 逐字节相同**，同时覆盖 Canonical Paper、preview payload、源/候选/显示/
+  解析/段落/搜索/来源引用/分页 digest 与冻结产品 manifest/digest。
+- `legacyStable.mjs` 与优化前副本的旧实现文件逐字节相同；Node 原生、浏览器旧算法
+  与该参考实现的 **27 项**哈希/编码/拒绝输入/源缓存变异检查通过。缓存命中会重新
+  哈希已保存的快照，调用者修改 materialization 或字节不能污染后续派生。
+- 首轮 59 套为 **56 equal / 0 different / 3 unknown**，其中两套为清理 EPERM；
+  加诊断后的另一轮为 **57 / 0 / 2**，捕获进程组清理错误。最小复现 50/50 命中
+  zombie，修复后同样 50 次全部通过，新增回归先红后绿；
+  原始批次与诊断日志全部保留。修复只接纳已经退出的 zombie，
+  不将存活进程权限错误或真正内容差异转成 equal。
+- **14 个专项脚本通过**，索引 `round3-zombie-fixed-tests-results.json`；异步清理修复后
+  重跑 12 个直接消费者，两个未变化的共享 Canonical 契约脚本保留原通过证据。
+  其中兼容比较 43 项、存储/worker 36 项、恢复 50 项、进程隔离 5 项、
+  资格 14 项、实际发布内容 24 项，
+  另有 5 个回填场景及启动、构建身份、自动回填、真实封存 Review E2E 和共享
+  Canonical/源材料 Candidate 契约验证；浏览器构建 `pnpm -C app build` 通过。
+  恢复检查包含真实 API 在 RSS 超限后存活、默认开启/应急关闭，以及单卷 canary
+  默认逐字节保留 DB、apply 只追加 BACKFILL_PENDING/equal 凭证而不批准/发布。
+- 完整分支 80 个变化路径的 machine plan 为 `unknown-fallback / all`；
+  `round3-ci-plan.json` 仅为路线分类。本轮没有 Ship，正式 natural Actions
+  Full/E2E 和新候选独立 Astra 审查仍未完成，专项检查不能替代这些门禁。
+- 上线前还需 BUB-104 所列 2 核/2 GiB Linux 限制实测、受支持的生产有界只读
+  schema/精确 revision 核对，以及随后单独授权的实际迁移。BUB-104 的旧“默认关闭”
+  说明已被 Owner 本轮“默认开启、保留应急关闭”的明确决定覆盖；不得据旧文字
+  把默认行为改回关闭。本轮没有安装主机软件、连接生产或修改 controller/host。
+
+## 2026-10-21 审查后恢复规则（除上节修订外覆盖下文历史规则）
 
 - 批准资格：确定 `equal` 允许，确定 `different` 拒绝且不能被后续 unknown 覆盖。无确定结果时回退到修复前的 renderer 指纹守卫，只有历史 renderer 等于当前 renderer 才允许批准；继续执行旧版封存文件、投影身份、听力、issue、权限与业务状态检查，不制造历史 subject。响应提供 `eligible/guard/fallback/fallbackReason/legacyRendererStale`，日志事件 `review-compatibility-fallback` 记录原因及是否放行。
 - 相同资格覆盖独立批准、Owner“批准并发布”、scoped promotion 和实际 writer。确定 equal 保留原 subject/实际 writer 映射；不可用时走修复前的 renderer/file/投影身份/Canonical admission 守卫，不制造历史 subject。归档前后以 Review 原始行 token 和 renderer 做 CAS，最终 writer 在同一 Review 写事务里重新核验；已准备的内容绑定不能中途降级为旧模式，guard 模式变化拒绝并保留证据。缺 subject/preview 或非空 v1 时，幂等对账使用旧版封存投影路径，仍验证已提交目标和冻结字节。
@@ -43,8 +132,8 @@ API，验证鉴权状态返回、停用告警、正常关闭及旧 subject 字�
 
 59 套离线演练的 preview envelope/digest 来自已捕获鉴权 GET 的重建，不能冒充生产
 SQLite 原始 preview 字符串、隐藏 guard 或生产 CAS/批准证据。四卷资源样本另跑真实
-backfill/比较 worker；本机没有容器运行时，使用 macOS `taskpolicy -b`/`nice -n 10`
-串行近似，只有 V8 heap 上限，**没有 2 CPU/总 RSS 2 GiB 的硬限制**。健康探针是同一
+backfill/比较 worker；第三轮直接使用 macOS Node，逐任务串行并间隔 5 秒，
+有 V8 heap 与轮询 RSS 软保护，**没有 2 CPU/总 RSS 2 GiB 的硬限制**。健康探针是同一
 supervisor 主线程的最小 HTTP 服务，不是完整 API；RSS 每 50 ms 采样，原生 high-water
 累计值不能误标成某阶段独立峰值。
 
