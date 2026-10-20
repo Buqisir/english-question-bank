@@ -328,6 +328,7 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 - 两表/索引为 additive，不改旧表和 PDF。迁移前备份 Review DB 并记录原行摘要，后查 schema、foreign_key_check、原行未变及服务健康。
 - 默认不做 down migration；删新表会丢证据。代码回滚保留表，旧代码不查询它们，结构上无害。
 - 回滚到 c42f8b64 会恢复旧 renderer guard，跨构建已兼容卷可能再次 stale；这是旧代码的可用性限制，不应通过修改历史 renderer/approval 规避。必要时优先回滚到已支持内容比较的修复版本。
+- c42f8b64 的 `sourceReferencePublication.mjs` 也不支持新的 external analyzed-package 源参考答案回放（`package_json_pointer` 与已验证 Source Capture member）。因此新增此类正式资产后，直接回滚到该基线可能使已发布卷的源参考答案读取/导出或 promotion reconciliation 失败，不能把保留 DB/资产等同于旧代码可读。推荐回滚到保留该兼容读取修复的版本；若需撤回其他功能，应制作保留 source-reference 兼容 reader 的修复 release，并验证已发布 external 资产的读取及恢复链。不得删资产、改历史 locator/approval 或回放部署前 DB 来适配旧 reader。
 - 已发布资产/版本不删，不能用部署前 DB 快照覆盖上线后业务写入。未决 promotion 保留 guard/journal/target，先只读 reconciliation，禁止盲目重试。
 - 本次仅修订规格，没有执行生产盘点、迁移、测试或部署。
 
