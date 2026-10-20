@@ -75,6 +75,7 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
   if (!leader) return { paused: 'LEADER_BUSY', results: [], locks: reviewCompatibilityLockDiagnostics() }
   try {
     if (reviewCompatibilityBusy()) return { paused: 'ACTIVITY_PENDING', results: [], locks: reviewCompatibilityLockDiagnostics() }
+    await store.ready({ signal })
     const ids = store.scan({ limit: REVIEW_WORKER_BUDGET.batchSize })
     const results = []
     for (const revisionId of ids) {
@@ -87,6 +88,7 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
       const job = store.prepare(revisionId)
       if (!job) continue
       const output = await store.compute(job, { signal, leaderLease: leader.lease })
+      if (signal?.aborted) { store.discard(job); break }
       const committed = dryRun ? { committed: false, reasonCode: 'DRY_RUN' } : await store.commit(job, output)
       if (dryRun) store.discard(job)
       results.push({ revisionId, ...committed, comparison: output.comparison })

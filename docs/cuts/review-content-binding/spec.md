@@ -244,6 +244,7 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 - OCR bundle 重放保留原 renderer 身份规则，Candidate 的 equal 条件不侵入 OCR；probe 的 wait/inspect 仅针对已 finalize Candidate，OCR 和 uploading 保留原继续构造/恢复上传动作。异步 finalize 通过同一可信 provider 的 worker 计算 server fingerprint，避免提交前在主线程解析执行图；仍在原事务中原子保存 preview/subject/self comparison。缺产品的旧性能 fixture 明确为 unknown，仅验证原缓存与 worker 计算一致。
 - 完整 external analyzed-package 发布需要源参考答案可回放：source references 增加 `package_json_pointer`，要求 exact package 重新派生 materialization、官方答案 member role/SHA、严格 own-property pointer 和存在文本的逐字一致。发布后从已验证 Source Capture 还原相同 member；原 PDF/DOCX 校验保留。
 - D 当前指令优先于下节早期自动回填设想：自动 worker 遇到缺失持久 subject 的旧 revision，追加 `unknown/MISSING_BASELINE`，不创建 subject、不借 renderer 相同放行。当前 backfill CLI 的 dry-run 同样报告缺基准、保持 DB 字节不变；下节显式维护回填仅保留为后续单独授权的方案。
+- D P2 修正：列表与自动调度共享 executing release 的异步 identity worker/cache；冷启动未就绪返回 `pending/TARGET_IDENTITY_PENDING`，同步事务只消费已准备的 target。开发模式按内容文件变更失效并异步刷新，前端文件不失效；提交前仍在 worker 中 fresh 核对。SIGTERM 在活动批次中中断计算、等待退出并释放 leader。
 
 ## 6. 历史 revision 回填与无需重送恢复
 

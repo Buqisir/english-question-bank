@@ -93,6 +93,7 @@ function makeStore(root) {
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-import-review-'))
 try {
   const store = makeStore(tempRoot)
+  await store.ready()
   const first = manifest()
   const traversal = structuredClone(first.input)
   traversal.files[0].path = '../config.json'

@@ -24,6 +24,7 @@ import { runRoutes } from '../server/router/index.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 import { finalizeReviewFixture, freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { preflightPaper } from '../import-ops/lib/probe.mjs'
+import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -41,6 +42,7 @@ const dbRun = (file, callback) => {
 }
 let api
 try {
+  await reviewBuildIdentityProvider().ready()
   const release = makeReviewRelease(path.join(root, 'release'))
   const module = async name => import(pathToFileURL(path.join(release, `server/import-review/${name}.mjs`)).href)
   const { createImportReviewStore: createReleaseStore } = await module('importReviewStore')
@@ -50,6 +52,7 @@ try {
   const dbPath = path.join(output, 'review.sqlite')
   const filesRoot = path.join(output, 'files')
   const store = createReleaseStore({ dbPath, filesRoot, rendererBuildId: () => renderer })
+  await store.ready()
   const native = makeReviewRoot(path.join(root, 'native'), 'paper-eligibility-native', undefined, { listening: true })
   const projection = freezeReviewFixture(native.reviewRoot)
   const fixture = finalizeReviewFixture({ directory: native.reviewRoot, output, projection, store })
@@ -96,6 +99,7 @@ try {
   pass('frontend-only deployment retains current content eligibility')
   const parser = path.join(release, 'scripts/import-pipeline/lib.mjs')
   writeFileSync(parser, `${readFileSync(parser)}\n// Same output, new server target.\n`)
+  await yieldFor(30)
   const compatibility = createReviewCompatibilityStore({ dbPath, filesRoot })
   const blockedEntrances = () => {
     for (const operation of [
@@ -172,6 +176,7 @@ try {
   const projectionSource = readFileSync(projectionFile, 'utf8')
   writeFileSync(projectionFile, projectionSource.replace('  reviewBundleInventories.set(projection,',
     '  projection.consumption.fixtureAdditionalContent = true;\n  reviewBundleInventories.set(projection,'))
+  await yieldFor(30)
   assert.equal(store.compatibilityForRevision(revision.id).result, 'pending')
   const different = await compatibility.checkRevision(revision.id)
   assert.equal(different.comparison.result, 'different', JSON.stringify(different.comparison))
@@ -179,6 +184,7 @@ try {
   pass('a new target cannot reuse old equal; actual complete-payload difference blocks every entrance')
   assertOpsNext('inspect_content_difference')
   writeFileSync(projectionFile, projectionSource)
+  await yieldFor(30)
   dbRun(dbPath, db => db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject'))
   const missing = await compatibility.checkRevision(revision.id)
   assert.equal(missing.comparison.result, 'unknown')

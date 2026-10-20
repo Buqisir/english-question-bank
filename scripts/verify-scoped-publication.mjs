@@ -84,6 +84,7 @@ async function routeRequest(routes, pathname, { method = 'POST', body = {}, sess
 }
 
 try {
+  await store.ready()
   {
     let computed = 0
     const compute = () => `sha256:release-${++computed}`

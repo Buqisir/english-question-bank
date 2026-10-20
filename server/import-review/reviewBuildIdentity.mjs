@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto'
 import { isBuiltin } from 'node:module'
-import { lstatSync, readdirSync, readFileSync, realpathSync, existsSync } from 'node:fs'
+import { lstatSync, readdirSync, readFileSync, realpathSync, existsSync, watch } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { parse } from 'acorn'
@@ -211,8 +211,12 @@ export async function computeReviewBuildIdentityAsync(options = {}) {
     workerData: { prepareWrite: options.prepareWrite },
   })
   let timer
+  let onAbort
   try {
     const result = await new Promise((resolve, reject) => {
+      onAbort = () => reject(Object.assign(new Error('Identity check aborted'), { name: 'AbortError' }))
+      if (options.signal?.aborted) return onAbort()
+      options.signal?.addEventListener('abort', onAbort, { once: true })
       timer = setTimeout(() => reject(invalid('Build identity worker deadline exceeded')), 10_000)
       worker.once('message', message => message.error
         ? reject(invalid(message.error)) : resolve(message))
@@ -223,15 +227,110 @@ export async function computeReviewBuildIdentityAsync(options = {}) {
       throw invalid('Build identity worker returned a different executing release')
     }
     return result
-  } finally { clearTimeout(timer); await worker.terminate() }
+  } finally {
+    clearTimeout(timer)
+    options.signal?.removeEventListener('abort', onAbort)
+    await worker.terminate()
+  }
 }
 
+// One trusted target per executing release/runtime, shared by reads and scans.
+// Synchronous transactions only consume a completed worker result.
+const providers = new Map()
 export function reviewBuildIdentityProvider(options = {}) {
   assertExecutionRoot(options)
   const production = options.production ?? process.env.NODE_ENV === 'production'
+  if (providers.has(production)) return providers.get(production)
   let cached
-  const fresh = () => computeReviewBuildIdentity()
-  const provider = () => production ? (cached ??= fresh()) : fresh()
-  provider.fresh = prepareWrite => computeReviewBuildIdentityAsync({ ...options, prepareWrite })
+  let active
+  let failure
+  let watchFailure
+  let generation = 0
+  let runtime = runtimeSignature()
+  let paths = new Set()
+  function runtimeSignature() { return JSON.stringify(runtimeKeys.map(key => process.env[key] ?? null)) }
+  function invalidate() { generation++; cached = undefined; failure = undefined }
+  function currentRuntime() {
+    const next = runtimeSignature()
+    if (next !== runtime) { runtime = next; invalidate() }
+  }
+  const pending = () => Object.assign(new Error('Executing target identity is being checked'), {
+    code: 'REVIEW_TARGET_IDENTITY_PENDING', reasonCode: 'TARGET_IDENTITY_PENDING',
+  })
+  function publish(result, epoch) {
+    currentRuntime()
+    if (watchFailure) throw watchFailure
+    if (epoch !== generation) throw pending()
+    paths = new Set(result.paths)
+    cached = Object.freeze({ targetBuildId: result.targetBuildId, releaseRoot: result.releaseRoot, metrics: result.metrics })
+    failure = undefined
+  }
+  function initialize() {
+    currentRuntime()
+    if (!active) {
+      const epoch = generation
+      active = computeReviewBuildIdentityAsync(options).then(result => publish(result, epoch))
+        .catch(error => { if (epoch === generation) failure = error })
+        .finally(() => { active = undefined })
+    }
+    return active
+  }
+  if (!production) {
+    // Watching metadata is cheap; traversal, parsing and hashing stay off-thread.
+    // Include the conservative union and actual graph edges outside that union.
+    const watcher = watch(releaseRoot, { recursive: true, persistent: false }, (_event, filename) => {
+      const name = String(filename || '').split(path.sep).join('/')
+      if (!name || (!excluded(name) && (paths.has(name) || [...paths].some(file => file.startsWith(`${name}/`))
+        || coveredDirectories.some(directory => name === directory || name.startsWith(`${directory}/`))))) {
+        invalidate()
+        void initialize()
+      }
+    })
+    watcher.on('error', () => {
+      invalidate()
+      watchFailure = failure = invalid('Target file watcher failed')
+    })
+  }
+  const provider = () => {
+    currentRuntime()
+    if (watchFailure) throw watchFailure
+    if (cached) return cached
+    if (failure) throw failure
+    void initialize()
+    throw pending()
+  }
+  provider.ready = async ({ signal } = {}) => {
+    while (true) {
+      signal?.throwIfAborted()
+      currentRuntime()
+      if (watchFailure) throw watchFailure
+      if (cached) return cached
+      if (failure) throw failure
+      // A shared initialization is never cancelled by one consumer.
+      // Its bounded worker still owns termination; callers can stop waiting.
+      const work = initialize()
+      if (!signal) await work
+      else await new Promise((resolve, reject) => {
+        const aborted = () => reject(signal.reason)
+        signal.addEventListener('abort', aborted, { once: true })
+        work.then(resolve, reject).finally(() => signal.removeEventListener('abort', aborted))
+      })
+    }
+  }
+  provider.fresh = async prepareWrite => {
+    currentRuntime()
+    const epoch = generation
+    let result
+    try { result = await computeReviewBuildIdentityAsync({ ...options, prepareWrite }) }
+    catch (error) { invalidate(); failure = error; throw error }
+    if (watchFailure) throw watchFailure
+    currentRuntime()
+    // The worker result still revalidates its actual target for the caller's
+    // CAS. A delayed file event must not let it replace an invalidated cache.
+    if (epoch === generation) publish(result, epoch)
+    return result
+  }
+  providers.set(production, provider)
+  void initialize()
   return provider
 }

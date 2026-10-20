@@ -4,8 +4,8 @@ import { computeReviewBuildIdentity } from './reviewBuildIdentity.mjs'
 import { reviewCompatibilityAttempts, prepareReviewCompatibilityWrite } from './reviewCompatibilityWrite.mjs'
 
 try {
-  const { targetBuildId, releaseRoot, metrics } = computeReviewBuildIdentity()
-  const output = { targetBuildId, releaseRoot, metrics }
+  const { targetBuildId, releaseRoot, metrics, files } = computeReviewBuildIdentity()
+  const output = { targetBuildId, releaseRoot, metrics, paths: files.map(file => file.repoRelativePosixPath) }
   const request = workerData?.prepareWrite
   if (request?.expectedTargetBuildId === targetBuildId) {
     const db = new DatabaseSync(request.dbPath, { readOnly: true })

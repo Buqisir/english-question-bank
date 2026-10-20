@@ -19,6 +19,7 @@ import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blob
 import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
+import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -31,6 +32,7 @@ const directory = previewRoot ? path.resolve(previewRoot) : mkdtempSync(path.joi
 const json = (file, value) => writeFileSync(file, JSON.stringify(value, null, 2))
 const db = new DatabaseSync(':memory:')
 try {
+  await reviewBuildIdentityProvider().ready()
   assert.throws(() => sourceProductEditions({}, 0), /听力声明/)
   assert.throws(() => sourceProductEditions({ listening: ABSENT_BY_EXAM_DESIGN }, 2), /听力声明/)
   assert.throws(() => sourceProductEditions({}, 1), /听力声明/)

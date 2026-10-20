@@ -4141,6 +4141,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   cleanupPaperImportTempArtifacts(paperAssetsDir)
   ensureMySpaceFilesRoot(userSpaceFilesDir)
   getImportReviewStore()
+  // Both stores share the executing identity worker/cache. The scheduler awaits
+  // initialization; requests remain available and report pending meanwhile.
   const compatibilityStore = createReviewCompatibilityStore({
     dbPath: importReviewDbPath, filesRoot: importReviewFilesRoot,
   })

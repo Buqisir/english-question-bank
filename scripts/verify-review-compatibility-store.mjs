@@ -31,6 +31,7 @@ process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
 const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
 if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
+await import('./verify-review-identity-startup.mjs')
 const root = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-compatibility-store-'))
 let server
 let checks = 0
@@ -108,6 +109,7 @@ try {
   const dbPath = path.join(root, 'review.sqlite')
   const filesRoot = path.join(root, 'revisions')
   const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-renderer' })
+  await store.ready()
   const revision = store.createRevision(manifest).revision
   for (const file of files) {
     const { destination } = store.fileForUpload(revision.id, file.path)
@@ -204,6 +206,7 @@ try {
   writeFileSync(path.join(targetRoot, 'app/src/main.css'), 'body{color:red}')
   assert.equal(computeReviewBuildIdentity({ repoRoot: targetRoot }).targetBuildId, firstBuild.targetBuildId)
   const cached = reviewBuildIdentityProvider({ repoRoot: targetRoot, production: true })
+  await cached.ready()
   const cachedBuild = cached()
   writeFileSync(parser, `${parserSource}\n// target build 2\n`)
   assert.notEqual(computeReviewBuildIdentity({ repoRoot: targetRoot }).targetBuildId, firstBuild.targetBuildId)
@@ -212,6 +215,7 @@ try {
 
   const compatibility = createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot: targetRoot })
   const second = createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot: targetRoot })
+  await compatibility.ready()
   assert.deepEqual(compatibility.get(revision.id), { result: 'unknown', reasonCode: 'NOT_CHECKED', pending: true })
   const a = compatibility.prepare(revision.id)
   const b = second.prepare(revision.id)
@@ -270,14 +274,20 @@ try {
   // Use a fresh build namespace for each race so earlier terminal evidence
   // cannot mask a failed CAS or supply another revision's result.
   let build = 3
-  const bump = () => writeFileSync(parser, `${parserSource}\n// target build ${build++}\n`)
+  const bump = async () => {
+    writeFileSync(parser, `${parserSource}\n// target build ${build++}\n`)
+    await reviewBuildIdentityProvider({ repoRoot: targetRoot }).fresh()
+    await compatibility.ready()
+  }
   const beforeWorkerMismatch = readFileSync(parser, 'utf8')
   const mismatchJob = compatibility.prepare(revision.id)
-  bump()
+  await bump()
   const mismatchOutput = await compatibility.compute(mismatchJob)
   assert.equal(mismatchOutput.comparison.result, 'unknown')
   assert.equal(mismatchOutput.comparison.reasonCode, 'TARGET_IDENTITY_MISMATCH')
   writeFileSync(parser, beforeWorkerMismatch)
+  await reviewBuildIdentityProvider({ repoRoot: targetRoot }).fresh()
+  await compatibility.ready()
   assert.equal((await compatibility.commit(mismatchJob, mismatchOutput)).reasonCode, 'TARGET_IDENTITY_MISMATCH')
   assert.equal(JSON.stringify(newRows().slice(1)), terminalRows)
   pass('worker verifies its executing release; restoring supervisor identity cannot admit a mismatched worker')
@@ -285,13 +295,13 @@ try {
   const productionStore = createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot: targetRoot, production: true })
   const cachedJob = productionStore.prepare(revision.id)
   const cachedOutput = await productionStore.compute(cachedJob)
-  bump()
+  await bump()
   assert.equal((await productionStore.commit(cachedJob, cachedOutput)).reasonCode, 'TARGET_CHANGED')
   pass('commit bypasses production descriptor cache and rechecks executing files')
-  bump()
+  await bump()
   const changedBuildJob = compatibility.prepare(revision.id)
   const changedBuildResult = await compatibility.compute(changedBuildJob)
-  bump()
+  await bump()
   assert.equal((await compatibility.commit(changedBuildJob, changedBuildResult)).reasonCode, 'TARGET_CHANGED')
   assert.equal(compatibility.get(revision.id).reasonCode, 'NOT_CHECKED')
   pass('old target worker cannot write credentials for a new target')
@@ -359,7 +369,7 @@ try {
   renameSync(path.join(nextDir, 'source-real'), path.join(nextDir, 'source'))
   pass('symlink leaf and every symlink parent rejected using actual filesystem counterexamples')
 
-  bump()
+  await bump()
   server = createServer((_request, response) => {
     // This long-running fixture measures health, not pooled socket expiry.
     response.setHeader('Connection', 'close')
@@ -370,6 +380,7 @@ try {
   const workspaces = () => readdirSync(realpathSync(tmpdir())).filter(name => name.startsWith('eqb-review-job-')).sort()
   const beforeFaultWorkspaces = workspaces()
   const timeout = await compatibility.checkRevision(next.id, { timeoutMs: 1 })
+  assert.equal(timeout.committed, true, JSON.stringify(timeout))
   assert.equal(timeout.comparison.reasonCode, 'WORKER_TIMEOUT')
   assert.equal(await (await fetch(healthUrl)).text(), 'ok')
   const aborted = new AbortController()
@@ -377,19 +388,22 @@ try {
   const exitPending = compatibility.compute(exitJob, { signal: aborted.signal })
   aborted.abort()
   const exitResult = await exitPending
-  await compatibility.commit(exitJob, exitResult)
+  const exitCommit = await compatibility.commit(exitJob, exitResult)
+  assert.equal(exitCommit.committed, true, JSON.stringify(exitCommit))
   assert.equal(exitResult.comparison.reasonCode, 'WORKER_EXIT')
   const oom = await compatibility.checkRevision(next.id, { heapMb: 16 })
+  assert.equal(oom.committed, true, JSON.stringify(oom))
   assert.equal(oom.comparison.reasonCode, 'WORKER_OOM', JSON.stringify(oom.comparison))
   assert.deepEqual(workspaces(), beforeFaultWorkspaces, 'supervisor cleans custody after timeout, exit and OOM')
   assert.equal(await (await fetch(healthUrl)).text(), 'ok')
   assert.equal(store.getRevision(next.id).state, 'awaiting_review')
+  await compatibility.ready()
   assert.equal(compatibility.get(next.id).result, 'unknown')
   assert.equal(compatibility.scan({ nowMs: Date.now() + 600_000 }).includes(next.id), false,
     'at most two automatic retries, three attempts total')
   pass('timeout, worker exit and real bounded-heap OOM append unknown; API stays responsive; retry cap holds')
 
-  bump()
+  await bump()
   assert.equal((await compatibility.checkRevision(next.id, { timeoutMs: 1 })).comparison.reasonCode, 'WORKER_TIMEOUT')
   assert.equal(compatibility.scan().includes(next.id), false)
   assert.equal(compatibility.scan({ nowMs: Date.now() + 31_000 }).includes(next.id), true)
@@ -414,7 +428,7 @@ try {
   assert.deepEqual(REVIEW_WORKER_BUDGET, { heapMb: 384, deadlineMs: 120_000, batchSize: 5, yieldMs: 1000 })
   pass('host-wide leader excludes another process and finalize pauses new work; resource defaults exact')
 
-  bump()
+  await bump()
   const beforeDryRun = JSON.stringify(newRows())
   let completed = false
   const dryRunPending = runReviewCompatibilityBatch(compatibility, { dryRun: true }).finally(() => { completed = true })
@@ -467,6 +481,8 @@ try {
   const invalidGraphOutput = await compatibility.compute(invalidGraphJob)
   try {
     writeFileSync(parser, `${parserSource}\nexport const invalidDynamicImport = value => import(value)\n`)
+    await reviewBuildIdentityProvider({ repoRoot: targetRoot }).fresh().catch(() => {})
+    await compatibility.ready().catch(() => {})
     assert.equal((await compatibility.commit(invalidGraphJob, invalidGraphOutput)).reasonCode, 'TARGET_IDENTITY_INVALID')
     assert.equal(compatibility.get(next.id).reasonCode, 'TARGET_IDENTITY_INVALID')
     const invalidResult = await compatibility.checkRevision(next.id)

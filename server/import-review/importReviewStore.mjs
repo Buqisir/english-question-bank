@@ -845,7 +845,10 @@ export function createImportReviewStore({
       const value = getReviewCompatibility(db, revision, target)
       return { ...value, result: value.pending ? 'pending' : value.result,
         targetBuildId: target.targetBuildId, comparatorVersion: value.comparatorVersion || REVIEW_COMPARATOR_VERSION }
-    } catch {
+    } catch (error) {
+      if (error.code === 'REVIEW_TARGET_IDENTITY_PENDING') {
+        return { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true }
+      }
       return { result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false }
     }
   }
@@ -1455,7 +1458,12 @@ export function createImportReviewStore({
 
   function listPapers() {
     let target
-    try { target = targetBuild() } catch { /* Each row reports identity unknown. */ }
+    let unavailable
+    try { target = targetBuild() } catch (error) {
+      unavailable = error.code === 'REVIEW_TARGET_IDENTITY_PENDING'
+        ? { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true }
+        : { result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false }
+    }
     return withDb(false, (db) => {
       const rows = db.prepare(`
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
@@ -1485,7 +1493,7 @@ export function createImportReviewStore({
         : target ? { ...compatibilities.get(row.latest_revision_id),
           result: compatibilities.get(row.latest_revision_id).pending ? 'pending' : compatibilities.get(row.latest_revision_id).result,
           targetBuildId: target.targetBuildId, comparatorVersion: REVIEW_COMPARATOR_VERSION }
-          : { result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false }
+          : unavailable
       return {
         paperId: row.paper_id,
         paperName: row.paper_name,
@@ -2893,6 +2901,11 @@ export function createImportReviewStore({
         return value
       } catch (error) {
         if (db.isTransaction) db.exec('ROLLBACK')
+        if (error.code === 'REVIEW_TARGET_IDENTITY_PENDING') {
+          Object.assign(error, { code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED',
+            reasonCode: 'TARGET_IDENTITY_PENDING',
+            compatibility: { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true } })
+        }
         if (error.code === 'IMPORT_REVIEW_RENDERER_STALE' && error.compatibility) {
           error.code = 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
         }
@@ -3280,6 +3293,7 @@ export function createImportReviewStore({
     acquireShippingGuard,
     addIssueMessage,
     approveRevision,
+    ready: targetBuild.ready,
     compatibilityForRevision,
     agentPaperStatus,
     beginPromotion,

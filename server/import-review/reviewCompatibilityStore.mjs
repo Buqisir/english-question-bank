@@ -200,6 +200,7 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
   }
   async function checkRevision(revisionId, options = {}) {
     try {
+      await descriptor.ready(options)
       const job = prepare(revisionId)
       if (!job) return { committed: false, reasonCode: 'NOT_ELIGIBLE' }
       const output = await compute(job, options)
@@ -215,7 +216,10 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
   }
   function get(revisionId) {
     let target
-    try { target = descriptor() } catch { return identityUnknown() }
+    try { target = descriptor() } catch (error) {
+      return error.code === 'REVIEW_TARGET_IDENTITY_PENDING'
+        ? { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true } : identityUnknown()
+    }
     return withDb(false, db => {
       const row = db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(revisionId)
       if (!row) return { result: 'unknown', reasonCode: 'NOT_FOUND', pending: false }
@@ -224,7 +228,11 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
     })
   }
   function scan({ nowMs = Date.now(), limit = 5 } = {}) {
-    const target = descriptor()
+    let target
+    try { target = descriptor() } catch (failure) {
+      if (failure.code === 'REVIEW_TARGET_IDENTITY_PENDING') return []
+      throw failure
+    }
     return withDb(false, db => {
       if (db.prepare('SELECT 1 FROM import_review_shipping_guards LIMIT 1').get()
         || db.prepare("SELECT 1 FROM import_review_promotions WHERE state = 'publishing' LIMIT 1").get()) return []
@@ -247,5 +255,5 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
     return withDb(false, db => Boolean(db.prepare('SELECT 1 FROM import_review_shipping_guards LIMIT 1').get()
       || db.prepare("SELECT 1 FROM import_review_promotions WHERE state='publishing' LIMIT 1").get()))
   }
-  return { prepare, compute, commit, discard, checkRevision, get, scan, isBusy }
+  return { prepare, compute, commit, discard, checkRevision, get, scan, isBusy, ready: descriptor.ready }
 }
