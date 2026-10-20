@@ -8,7 +8,15 @@ import { reviewBackfillDiagnostic } from './reviewBackfillDiagnostic.mjs'
 
 const workerData = await new Promise(resolve => process.once('message', resolve))
 const samples = []
-const sampleMemory = stage => samples.push({ stage, ...process.memoryUsage() })
+const sampleMemory = stage => {
+  samples.push({ stage, ...process.memoryUsage() })
+  // Bulk AST/JSON and byte snapshots are dead at these handoffs. Collect only
+  // inside this disposable child, never on the API's request event loop.
+  if (['identity', 'compacted-evidence', 'projection', 'subjects', 'backfill'].includes(stage)) {
+    global.gc?.()
+    samples.push({ stage: `${stage}-collected`, ...process.memoryUsage() })
+  }
+}
 const send = output => {
   sampleMemory('complete')
   output.comparison.metrics = { ...output.comparison.metrics, memoryStages: samples,
@@ -28,6 +36,7 @@ try {
   }
   if (workerData.mode === 'backfill') {
     const baseline = extractStoredReviewBaseline(workerData.value, workerData.directory)
+    sampleMemory('backfill')
     const comparison = { result: 'unknown', reasonCode: 'BACKFILL_PENDING', targetBuildId,
       subjectDigest: baseline.subjectDigest }
     const writePlan = prepareReviewCompatibilityWrite(storedReviewRevision(workerData.value.revision),

@@ -1,3 +1,8 @@
+// Node 24 supplies a synchronous native hash without importing a Node module
+// into browser bundles. The browser retains its existing synchronous fallback.
+const nativeCreateHash = typeof process !== 'undefined' && typeof process.getBuiltinModule === 'function'
+  ? process.getBuiltinModule('node:crypto').createHash : null
+
 function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
@@ -90,12 +95,54 @@ function sha256Hex(bytes) {
 }
 
 export function sha256(value) {
+  if (nativeCreateHash) return `sha256:${nativeCreateHash('sha256').update(value instanceof Uint8Array ? value : String(value)).digest('hex')}`
   const bytes = value instanceof Uint8Array ? value : new TextEncoder().encode(String(value))
   return `sha256:${sha256Hex(bytes)}`
 }
 
 export function digestJson(value) {
-  return sha256(stableStringify(value))
+  if (!nativeCreateHash) return sha256(stableStringify(value))
+  const hash = nativeCreateHash('sha256')
+  let pending = ''
+  const write = token => {
+    pending += token
+    if (pending.length >= 65536) { hash.update(pending); pending = '' }
+  }
+  function visit(item) {
+    if (Array.isArray(item)) {
+      write('[')
+      for (let index = 0; index < item.length; index++) {
+        if (index) write(',')
+        // Match Array.map/join's existing sparse-array byte representation.
+        if (index in item) visit(item[index])
+      }
+      write(']')
+    } else if (isRecord(item)) {
+      write('{')
+      let first = true
+      for (const key of Object.keys(item).sort().filter(key => item[key] !== undefined)) {
+        if (!first) write(',')
+        first = false
+        write(JSON.stringify(key)); write(':'); visit(item[key])
+      }
+      write('}')
+    } else if (typeof item === 'string' && item.length > 16384) {
+      // Image bundles contain large base64 strings. Escape bounded pieces,
+      // preserving surrogate pairs so the canonical UTF-8 bytes stay exact.
+      write('"')
+      for (let start = 0; start < item.length;) {
+        let end = Math.min(start + 16384, item.length)
+        if (end < item.length && item.charCodeAt(end - 1) >= 0xd800 && item.charCodeAt(end - 1) <= 0xdbff
+          && item.charCodeAt(end) >= 0xdc00 && item.charCodeAt(end) <= 0xdfff) end--
+        write(JSON.stringify(item.slice(start, end)).slice(1, -1))
+        start = end
+      }
+      write('"')
+    } else write(stableStringify(item))
+  }
+  visit(value)
+  hash.update(pending)
+  return `sha256:${hash.digest('hex')}`
 }
 
 export function withoutKey(value, key) {

@@ -53,7 +53,7 @@ export async function runReviewCompatibilityWorker(input, {
     // A killed child cannot clean its own temporary files. Custody stays here.
     workspace = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-job-'))
     worker = fork(new URL('./reviewCompatibilityWorker.mjs', import.meta.url), [], {
-      execArgv: [`--max-old-space-size=${heapMb}`], serialization: 'advanced', detached: true,
+      execArgv: [`--max-old-space-size=${heapMb}`, '--expose-gc'], serialization: 'advanced', detached: true,
       stdio: ['ignore', 'ignore', 'pipe', 'ipc'],
       env: { ...process.env, TMPDIR: workspace, TMP: workspace, TEMP: workspace },
     })

@@ -64,7 +64,13 @@ function reviewFileInspector(file) {
   function finish() {
     const evidence = { path: file.path, sha256: `sha256:${hash.digest('hex')}`, byteLength, prefix: prefix.toString('ascii') }
     if (json) {
-      try { evidence.json = JSON.parse(Buffer.concat(jsonChunks).toString('utf8')) }
+      try {
+        let bytes = Buffer.concat(jsonChunks)
+        jsonChunks.length = 0
+        const text = bytes.toString('utf8')
+        bytes = null
+        evidence.json = JSON.parse(text)
+      }
       // Preserve successful byte evidence even when tampering broke JSON syntax.
       // verifiedFiles classifies a changed hash before interpreting this flag.
       catch { evidence.jsonError = true }
@@ -208,15 +214,17 @@ function verifiedFiles(expected, fileEvidence) {
     if (!evidence) fail('MISSING_EVIDENCE', file.path)
     if (file.sha256 !== evidence.sha256 || file.byteLength !== evidence.byteLength) fail('SEALED_FILE_CHANGED', file.path)
     if (evidence.jsonError) fail('BASELINE_UNTRUSTED', file.path)
-    if ((file.mediaType === 'application/json' || file.path.endsWith('.json')) && !own(evidence, 'json')) {
+    if ((file.mediaType === 'application/json' || file.path.endsWith('.json')) && !own(evidence, 'json') && !SHA.test(evidence.jsonDigest || '')) {
       fail('MISSING_EVIDENCE', file.path)
     }
-    return { ...file, ...(own(evidence, 'json') ? { json: evidence.json } : {}), prefix: evidence.prefix }
+    return { ...file, ...(own(evidence, 'json') ? { json: evidence.json } : {}),
+      ...(evidence.jsonDigest ? { jsonDigest: evidence.jsonDigest } : {}), prefix: evidence.prefix }
   })
 }
 
 const isMedia = file => /^(image|audio|video)\//.test(file.mediaType)
-const contentFile = file => ({ ...descriptor(file), ...(own(file, 'json') ? { jsonDigest: digestJson(file.json) } : {}) })
+const contentFile = file => ({ ...descriptor(file), ...(own(file, 'json')
+  ? { jsonDigest: digestJson(file.json) } : file.jsonDigest ? { jsonDigest: file.jsonDigest } : {}) })
 
 function productsFromFiles(files, revision, validatedListeningReview) {
   const entry = files.find(file => file.path === PRODUCT_MANIFEST)
@@ -344,7 +352,7 @@ export function buildStoredReviewSubject({ revision, preview, storedFiles, fileE
       if (!expected) continue
       const entry = verified.find(file => file.path === path)
       if (!entry) fail('MISSING_EVIDENCE', path)
-      const actual = key === 'ocrCorrectionReportDigest' ? digestJson(entry.json) : entry.sha256
+      const actual = key === 'ocrCorrectionReportDigest' ? (entry.jsonDigest || digestJson(entry.json)) : entry.sha256
       if (actual !== expected) fail('BASELINE_UNTRUSTED', `/identity/${key}`)
     }
     return makeSubject(revision, componentsFor(revision, baselineIdentity, payload,
