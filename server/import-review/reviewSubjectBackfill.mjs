@@ -16,6 +16,7 @@ import { acquireReviewCompatibilityLeader, reviewCompatibilityBusy,
   reviewCompatibilityLockDiagnostics } from './reviewCompatibilityScheduling.mjs'
 
 const fail = reasonCode => { throw Object.assign(new Error(reasonCode), { reasonCode }) }
+export const REVIEW_BACKFILL_FILE_BUDGET = Object.freeze({ maxFileBytes: 64 * 1024 ** 2, maxTotalBytes: 256 * 1024 ** 2 })
 const eligible = value => value?.paper.latest_revision_id === value?.revision.id
   && ['awaiting_review', 'approved'].includes(value?.revision.state)
   && !value.shipping_guards.length && !value.promotions.some(row => row.state === 'publishing')
@@ -64,7 +65,33 @@ function originalConfirmations(value, revision, evidence) {
   for (const file of evidence) if (file.json) visit(file.json)
 }
 
-// Explicit local maintenance only. The shared leader excludes API background
+// Shared historical extractor: CLI and the bounded API thread use the same
+// original records/bytes. It never invokes the current compiler or renderer.
+export function extractStoredReviewBaseline(value, directory) {
+  if (!eligible(value)) fail('NOT_ELIGIBLE')
+  const revision = storedReviewRevision(value.revision)
+  if (revision.reviewKind !== 'candidate') fail('OCR_NOT_APPLICABLE')
+  if (!/^rev-[a-f0-9-]{36}$/.test(revision.id)) fail('REVIEW_REVISION_INVALID')
+  if (!value.preview?.payload_json) fail('MISSING_BASELINE')
+  const storedFiles = value.files.map(row => ({ path: row.path, role: row.role,
+    mediaType: row.media_type, sha256: row.sha256, byteLength: row.byte_length }))
+  const baseline = withSealedReviewSnapshot(directory, revision.manifest.files, sealed => {
+    const changed = sealed.fileEvidence.some(file => {
+      const original = revision.manifest.files.find(item => item.path === file.path)
+      return original.sha256 !== file.sha256 || original.byteLength !== file.byteLength
+    })
+    if (changed) fail('SEALED_FILE_CHANGED')
+    originalConfirmations(value, revision, sealed.fileEvidence)
+    return buildStoredReviewSubject({ revision, preview: value.preview, storedFiles,
+      fileEvidence: sealed.fileEvidence,
+      validatedListeningReview: originalListeningReview(sealed.directory, revision, value.preview, sealed.fileEvidence) })
+  }, REVIEW_BACKFILL_FILE_BUDGET)
+  if (!baseline.ok) fail(baseline.reasonCode)
+  baseline.provenance.confirmationsDigest = digestJson(value.media_confirmations)
+  return baseline
+}
+
+// Explicit local maintenance. The shared leader excludes API background
 // workers; activity checks and the same raw-row CAS handle concurrent API
 // finalization/approval. No transaction spans filesystem reads or identity work.
 export async function backfillReviewSubjects({ dbPath, filesRoot, apply = false }) {
@@ -97,26 +124,8 @@ export async function backfillReviewSubjects({ dbPath, filesRoot, apply = false 
           report.results.push({ ...result, action: 'already_present', reasonCode: 'SUBJECT_EXISTS' })
           continue
         }
-        if (!eligible(value)) fail('NOT_ELIGIBLE')
+        const baseline = extractStoredReviewBaseline(value, path.join(filesRoot, revisionId))
         const revision = storedReviewRevision(value.revision)
-        if (revision.reviewKind !== 'candidate') fail('OCR_NOT_APPLICABLE')
-        if (!/^rev-[a-f0-9-]{36}$/.test(revisionId)) fail('REVIEW_REVISION_INVALID')
-        if (!value.preview?.payload_json) fail('MISSING_BASELINE')
-        const storedFiles = value.files.map(row => ({ path: row.path, role: row.role,
-          mediaType: row.media_type, sha256: row.sha256, byteLength: row.byte_length }))
-        const baseline = withSealedReviewSnapshot(path.join(filesRoot, revisionId), revision.manifest.files, sealed => {
-          const changed = sealed.fileEvidence.some(file => {
-            const original = revision.manifest.files.find(item => item.path === file.path)
-            return original.sha256 !== file.sha256 || original.byteLength !== file.byteLength
-          })
-          if (changed) fail('SEALED_FILE_CHANGED')
-          originalConfirmations(value, revision, sealed.fileEvidence)
-          return buildStoredReviewSubject({ revision, preview: value.preview, storedFiles,
-            fileEvidence: sealed.fileEvidence,
-            validatedListeningReview: originalListeningReview(sealed.directory, revision, value.preview, sealed.fileEvidence) })
-        })
-        if (!baseline.ok) fail(baseline.reasonCode)
-        baseline.provenance.confirmationsDigest = digestJson(value.media_confirmations)
         if (apply) withDb(true, db => {
           db.exec('BEGIN IMMEDIATE')
           try {

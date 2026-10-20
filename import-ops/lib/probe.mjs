@@ -740,6 +740,7 @@ export function preflightPaper({
       latestReviewKind: paper.reviewKind,
       rendererStale: reviewStatus?.rendererStale === true,
       compatibility: reviewStatus?.compatibility || null,
+      subjectBackfill: reviewStatus?.subjectBackfill || null,
       unresolvedCount: Number(reviewStatus?.unresolvedCount || 0),
       approvalId: approval?.approvalId || null,
     },

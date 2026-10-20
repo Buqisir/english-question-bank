@@ -31,6 +31,7 @@ await import('./verify-review-compatibility.mjs')
 await import('./verify-review-build-identity.mjs')
 await import('./verify-review-compatibility-store.mjs')
 await import('./verify-review-subject-backfill.mjs')
+await import('./verify-review-subject-backfill-automatic.mjs')
 await import('./verify-review-eligibility.mjs')
 await import('./verify-review-publication-content.mjs')
 

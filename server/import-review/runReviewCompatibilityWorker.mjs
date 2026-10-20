@@ -104,17 +104,31 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
 // D calls this once from the API's lifecycle. Startup and periodic scans are
 // asynchronous; requests never wait for compilation. Each process may own a
 // timer, but only the host leader is allowed to scan/compute a batch.
-export function startReviewCompatibilityWorker(store, { onError = () => {} } = {}) {
+export function startReviewCompatibilityWorker(store, { onError = () => {}, backfillStore = null } = {}) {
   const controller = new AbortController()
   let timer
   let active
   async function tick() {
-    try { active = runReviewCompatibilityBatch(store, { signal: controller.signal }); await active }
+    let delay = 30_000
+    try {
+      active = (async () => {
+        // Normal comparison always gets the first slot. Only then spend one
+        // bounded idle slot recovering original evidence in a separate thread.
+        const normal = await runReviewCompatibilityBatch(store, { signal: controller.signal })
+        if (normal.paused || controller.signal.aborted || !backfillStore) return
+        const backfill = await backfillStore.runBatch({ signal: controller.signal })
+        if (backfill.more || backfill.results?.some(row => row.outcome === 'inserted'
+          || row.reasonCode === 'CAS_CHANGED')) delay = REVIEW_WORKER_BUDGET.yieldMs
+        if (backfill.results?.length) console.info(JSON.stringify({ event: 'review-subject-backfill',
+          results: backfill.results, summary: backfillStore.status() }))
+      })()
+      await active
+    }
     catch (error) { if (!controller.signal.aborted) onError(error) }
     finally {
       active = null
       if (!controller.signal.aborted) {
-        timer = setTimeout(tick, 30_000)
+        timer = setTimeout(tick, delay)
         timer.unref()
       }
     }

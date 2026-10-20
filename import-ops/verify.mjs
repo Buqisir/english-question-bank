@@ -715,6 +715,8 @@ try {
     ...webReviewStatus,
     latest: { ...webReviewStatus.latest, state: 'awaiting_review' },
     approval: null,
+    subjectBackfill: { enabled: true, inserted: 2, skipped: 1, pending: 0, completed: true,
+      skippedByReason: { SEALED_FILE_CHANGED: 1 }, revision: { outcome: 'skipped', reasonCode: 'SEALED_FILE_CHANGED' } },
   }
   const awaitingReview = preflightPaper({
     repoRoot: shipRoot,
@@ -724,6 +726,7 @@ try {
   })
   assert.equal(awaitingReview.state, 'awaiting_review')
   assert.equal(awaitingReview.next.action, 'wait_for_owner_review')
+  assert.deepEqual(awaitingReview.review.subjectBackfill, awaitingReviewStatus.subjectBackfill)
 
   const changesRequested = preflightPaper({
     repoRoot: shipRoot,

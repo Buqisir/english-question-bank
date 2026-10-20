@@ -243,7 +243,7 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 - CLI 正向发布使用真实 Review API 的 `promote`（scoped 路径另有端到端覆盖）；旧离线 `publish` 缺少原 subject/live guard 时继续拒绝，验证不再通过离线批准文件模拟新发布成功。
 - OCR bundle 重放保留原 renderer 身份规则，Candidate 的 equal 条件不侵入 OCR；probe 的 wait/inspect 仅针对已 finalize Candidate，OCR 和 uploading 保留原继续构造/恢复上传动作。异步 finalize 通过同一可信 provider 的 worker 计算 server fingerprint，避免提交前在主线程解析执行图；仍在原事务中原子保存 preview/subject/self comparison。缺产品的旧性能 fixture 明确为 unknown，仅验证原缓存与 worker 计算一致。
 - 完整 external analyzed-package 发布需要源参考答案可回放：source references 增加 `package_json_pointer`，要求 exact package 重新派生 materialization、官方答案 member role/SHA、严格 own-property pointer 和存在文本的逐字一致。发布后从已验证 Source Capture 还原相同 member；原 PDF/DOCX 校验保留。
-- 自动 worker 遇到缺失持久 subject 的旧 revision，追加 `unknown/MISSING_BASELINE`，不创建 subject、不借 renderer 相同放行。§6 的显式维护 CLI 负责从旧证据回填；默认 dry-run，只有 `--apply` 写入并入队。
+- 自动 worker 遇到缺失持久 subject 的旧 revision，普通比较保持 `unknown/MISSING_BASELINE`。§6 的低优先级自动回填阶段从原证据创建基准，随后仍由普通比较判定；不借 renderer 相同放行。CLI 保留为本地 dry-run/测试工具。
 - D P2 修正：列表与自动调度共享 executing release 的异步 identity worker/cache；冷启动未就绪返回 `pending/TARGET_IDENTITY_PENDING`，同步事务只消费已准备的 target。开发模式按内容文件变更失效并异步刷新，前端文件不失效；提交前仍在 worker 中 fresh 核对。SIGTERM 在活动批次中中断计算、等待退出并释放 leader。
 
 ## 6. 历史 revision 回填与无需重送恢复
@@ -252,7 +252,7 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 
 **Owner 新规则下，原服务端 preview 载荷、既存身份摘要、完整 bundle/文件 SHA、产品清单与冻结 PDF 字节，是充分且可执行的内容审查基准。** 它们证明当时提供给 Owner 的内容，不证明 Owner 实际看过每一页；是否已批准仍由原状态/回执决定。无需恢复旧代码或证明旧前端显示像素一致。
 
-显式维护回填步骤（D 自动 worker 不执行缺失 subject 的创建）：
+API compatibility worker 的自动回填步骤：
 
 1. 读取 finalized revision 及原 `import_review_product_previews`。验证 payload_digest 自洽、revision/bundle/历史 renderer 绑定正确，profile 所需字段齐全。
 2. 验证 manifest/bundleDigest、DB inventory 一致，逐文件对 SHA/长度；解析原产品清单、sidecar 和媒体确认，检查 frozen PDF 字节及产品 inputDigest。
@@ -275,15 +275,27 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 
 ### 6.3 能否让旧卷恢复
 
-**可以。** 已有可信持久 subject、历史记录完整且目标重算内容相同的 revision，可无需重送恢复可用；代码、CSS、字体改变不再阻断。缺 subject 的旧记录按 D 当前规则保持 unknown，不能宣称自动恢复。保留原 awaiting_review/approved 状态；changes_requested、有 unresolved issue、过期 request 不因 equal 获得发布资格。
+**可以。** 历史记录完整且目标重算内容相同的 revision，可在自动回填后无需重送恢复可用；代码、CSS、字体改变不再阻断。证据不完整或不自洽的旧记录继续 unknown，并记录跳过原因。保留原 awaiting_review/approved 状态；changes_requested、有 unresolved issue、过期 request 不因 equal 获得发布资格。
 
 不承诺约 29 套都 equal：本任务未读取生产 DB，而且它们正在重送；worker 只处理 latest，不能恢复 superseded。以后具备同样证据的旧卷可走这条自动恢复路径。上线盘点应统计 preview/必要摘要/封存文件完整性及 equal/different/unknown，不再盘点旧 release 是否保留。
 
-维护入口为 `node scripts/backfill-review-subjects.mjs --db <本地 Review DB> --files-root <封存 revision 根目录>`；必须显式指定路径，默认 dry-run，增加 `--apply` 才写入。仅处理 latest 且 awaiting_review/approved 的缺 subject Candidate；已有 subject 不覆盖，证据不足逐卷跳过并报告原因。stdout 输出逐卷 JSON，stderr 输出中文计数和逐卷结果，不包含题文或账号数据。
+生产入口为现有 API compatibility worker，target ready 后默认开启。仅处理 latest 且 awaiting_review/approved 的缺 subject Candidate；已有 subject 不覆盖，OCR、uploading、changes_requested、superseded 不进入回填范围。缺证据不会触发重新送审或自动批准。
+
+本地诊断入口为 `node scripts/backfill-review-subjects.mjs --db <本地 Review DB> --files-root <封存 revision 根目录>`；必须显式指定路径，默认 dry-run，增加 `--apply` 才写入。stdout 输出逐卷 JSON，stderr 输出中文计数和逐卷结果，不包含题文或账号数据。生产正常运行无需手工执行该 CLI。
 
 CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐文件 SHA/长度，校验冻结 PDF 与产品 inputDigest；不运行 compiler、projection、renderer、pdfinfo 或浏览器。成功插入 `origin=stored_evidence` 后追加 `unknown/BACKFILL_PENDING`，由正常 worker 下次扫描在目标命名空间计算；CLI 不直接判 equal。默认预检不建表、不写 DB。apply 仅幂等创建 additive 表/索引、CAS INSERT subject 和追加排队 attempt，不更改旧表/旧行。
 
-与在线 API 共存：持有同一 host leader，遇活动 finalize 或不明 leader/activity 则暂停/跳过，保留锁证据；文件读取在 SQLite 事务外，短 `BEGIN IMMEDIATE` 重读与 worker 相同的 revision/paper/preview/subject/files/issues/confirmations/guard/promotions/request 原始单元快照，变化即拒绝。在线后台 worker 取得 leader 后才比较，因此不会在回填中途派生；批准、发布现场仍执行完整守卫。重复运行仅报告已有基准，不追加 attempt。生产执行仍属于单独授权的维护 Goal，本任务未执行。
+与在线 API 共存：持有同一 host leader，遇活动 finalize 或不明 leader/activity 则暂停，保留锁证据；临时暂停不持久化为已处理/跳过。文件读取在 SQLite 事务外，短 `BEGIN IMMEDIATE` 重读与 worker 相同的 revision/paper/preview/subject/files/issues/confirmations/guard/promotions/request 原始单元快照及文件 metadata token，变化即拒绝。普通扫描优先，每批回填最多 1 卷、检查最多 5 个输入，独立线程上限 128 MiB/10 秒，临时快照单文件 64 MiB、总计 256 MiB，并在复制超出原声明长度的字节前拒绝。有待处理卷时批间至少让出 1 秒，完成后随 30 秒普通周期轮询；低磁盘按已有 10/7 GiB 门槛暂停。正常 API 请求无需等待文件 SHA 或 subject 构造；SIGTERM 中断线程、清理临时目录并释放 leader。
+
+`review_subject_backfill` 按 revision/input_token 追加 `inserted`/`skipped`、reasonCode、checkedAt；原业务表不改写。input_token 是调度指纹：原始 SQLite cells 的 native SHA 与封存文件/目录的 lstat 身份、文件长度/mtime/ctime，不能代替 worker 的真实文件 SHA。缺证据、被篡改、不可用的输入处理一次后跨重启保留；原数据或原文件修复会改变 token，允许新一轮处理。每次最多检查 5 个 token，故外部输入变化与观测摘要是轮询收敛，不能把 completed 当作发布许可。CAS 失败仅记录旧输入，不能用旧结果覆盖并发批准、退回、finalize 或 issue。
+
+成功只插入 `origin=stored_evidence` 与 `unknown/BACKFILL_PENDING`。每个 target 的普通扫描器看到新 subject 后，都会重新处理自己先前的 `MISSING_BASELINE`/缺证据结果；不会把本地 CLI 环境的 target 当成在线目标。不同/未知结果仍保守阻止批准和发布，现有内容 guard 不变。
+
+### 6.4 观测与停用
+
+`agentPaperStatus().subjectBackfill` 和 import-ops probe 的 `review.subjectBackfill` 提供 enabled、inserted、skipped、skippedByReason、pending、completed、lastCheckedAt 及当前 revision 的 outcome/reasonCode/checkedAt。摘要只查小表/计数，不读取大 subject；API 日志事件 `review-subject-backfill` 记录每批结果和摘要。completed 表示已观测范围都有持久结果，不表示所有卷 equal；跳过的卷仍可保持原业务状态并被内容 gate 阻止。
+
+应急通过既有 API 进程环境配置设置 `EQB_REVIEW_SUBJECT_BACKFILL=0` 并正常重启停用自动回填；普通兼容扫描、原证据读取和全部批准/发布 guard 继续工作。移除变量或设为非 `0` 后恢复。停用不删除历史回填结果、subject 或 attempt，不清除锁和未决 promotion。
 
 ## 7. 分步实施、验收和部署顺序
 
@@ -323,14 +335,16 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 
 上线后无需“一次性部署”约束：前端变化不改变服务端目标 fingerprint 时直接复用凭证；服务端 fingerprint 改变后重新比较，暂时 pending，不使卷永久作废。不得先放宽 approve 再补 publisher 实际对象检查。若不需要 shadow，上线完整功能一次切换仍是更简单的默认方案。
 
+本轮生产恢复选择正常部署后由 API 进程默认执行 §6 的有界阶段。回填只需要应用自身已有的 Review DB/封存文件权限，不增加 controlled SSH/controller 维护命令，也不修改 root-owned host；扩权既无必要，也会制造独立维护入口。部署批准应明确包括这个默认开启的 additive 行为；本轮仅完成本地实现与相关验证，没有连接生产或部署。
+
 ## 8. 迁移、回滚与证据
 
-- 两表/索引为 additive，不改旧表和 PDF。迁移前备份 Review DB 并记录原行摘要，后查 schema、foreign_key_check、原行未变及服务健康。
+- `review_subject`、`review_compatibility`、`review_subject_backfill` 及索引为 additive，不改旧表和 PDF。迁移前备份 Review DB 并记录原行摘要，后查 schema、foreign_key_check、原行未变及服务健康。
 - 默认不做 down migration；删新表会丢证据。代码回滚保留表，旧代码不查询它们，结构上无害。
 - 回滚到 c42f8b64 会恢复旧 renderer guard，跨构建已兼容卷可能再次 stale；这是旧代码的可用性限制，不应通过修改历史 renderer/approval 规避。必要时优先回滚到已支持内容比较的修复版本。
 - c42f8b64 的 `sourceReferencePublication.mjs` 也不支持新的 external analyzed-package 源参考答案回放（`package_json_pointer` 与已验证 Source Capture member）。因此新增此类正式资产后，直接回滚到该基线可能使已发布卷的源参考答案读取/导出或 promotion reconciliation 失败，不能把保留 DB/资产等同于旧代码可读。推荐回滚到保留该兼容读取修复的版本；若需撤回其他功能，应制作保留 source-reference 兼容 reader 的修复 release，并验证已发布 external 资产的读取及恢复链。不得删资产、改历史 locator/approval 或回放部署前 DB 来适配旧 reader。
 - 已发布资产/版本不删，不能用部署前 DB 快照覆盖上线后业务写入。未决 promotion 保留 guard/journal/target，先只读 reconciliation，禁止盲目重试。
-- 本次仅修订规格，没有执行生产盘点、迁移、测试或部署。
+- 自动回填停用或代码回滚均保留新增结果表；不要用删除 skip 记录制造热重试。证据确需修复时保留原记录，由输入变化触发新 token。本轮没有执行生产盘点、迁移或部署。
 
 ## 9. UI 文案
 

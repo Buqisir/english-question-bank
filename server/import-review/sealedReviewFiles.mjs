@@ -53,9 +53,12 @@ function openRegular(filePath) {
   }
 }
 
-export function inspectSealedReviewFiles(directory, files, { snapshot = null } = {}) {
+export function inspectSealedReviewFiles(directory, files, {
+  snapshot = null, maxFileBytes = Infinity, maxTotalBytes = Infinity,
+} = {}) {
   const evidence = []
   const seen = new Set()
+  let totalBytes = 0
   for (const file of files) {
     if (!validReviewRelativePath(file.path) || seen.has(file.path)) reject()
     seen.add(file.path)
@@ -70,7 +73,14 @@ export function inspectSealedReviewFiles(directory, files, { snapshot = null } =
       function* chunks() {
         const buffer = Buffer.allocUnsafe(64 * 1024)
         let size
+        let fileBytes = 0
         while ((size = readSync(source.fd, buffer, 0, buffer.length, null)) > 0) {
+          fileBytes += size
+          totalBytes += size
+          if ((Number.isFinite(maxFileBytes) && fileBytes > Math.min(file.byteLength, maxFileBytes))
+            || totalBytes > maxTotalBytes) {
+            throw Object.assign(new Error('Historical file exceeds backfill budget'), { reasonCode: 'SEALED_FILE_CHANGED' })
+          }
           const chunk = buffer.subarray(0, size)
           if (output !== undefined) {
             let written = 0
@@ -89,10 +99,10 @@ export function inspectSealedReviewFiles(directory, files, { snapshot = null } =
   return evidence
 }
 
-export function withSealedReviewSnapshot(directory, files, callback) {
+export function withSealedReviewSnapshot(directory, files, callback, limits = {}) {
   const snapshot = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-content-'))
   try {
-    const fileEvidence = inspectSealedReviewFiles(directory, files, { snapshot })
+    const fileEvidence = inspectSealedReviewFiles(directory, files, { ...limits, snapshot })
     return callback({ directory: snapshot, fileEvidence })
   } finally { rmSync(snapshot, { recursive: true, force: true }) }
 }

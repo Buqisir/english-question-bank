@@ -21,6 +21,7 @@ import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
 import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation } from './finalizeComputation.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
+import { readReviewSubjectBackfillStatus } from './reviewSubjectBackfillStatus.mjs'
 import { checkedStoredReviewSubject } from './reviewCompatibilityWrite.mjs'
 import { appendReviewCompatibility, getReviewCompatibility, getReviewCompatibilitySummary, getLatestReviewCompatibilities } from './reviewCompatibilityStore.mjs'
 import { buildProductPreviewPayload } from './reviewSubject.mjs'
@@ -3117,6 +3118,7 @@ export function createImportReviewStore({
       promotion: detail.promotion,
       rendererStale: detail.rendererStale,
       compatibility: detail.compatibility,
+      subjectBackfill: withDb(false, db => readReviewSubjectBackfillStatus(db, detail.latestRevisionId)),
       unresolvedCount: detail.unresolvedCount,
       approval: detail.latest?.reviewKind === 'candidate'
         && detail.latest.state === 'approved'

@@ -58,6 +58,7 @@ import { createImportReviewStore } from './import-review/importReviewStore.mjs'
 import { rendererBuildIdProvider } from './import-review/rendererBuildIdProvider.mjs'
 import { createReviewCompatibilityStore } from './import-review/reviewCompatibilityStore.mjs'
 import { startReviewCompatibilityWorker } from './import-review/runReviewCompatibilityWorker.mjs'
+import { createAutomaticReviewSubjectBackfillStore } from './import-review/automaticReviewSubjectBackfill.mjs'
 import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
 import { createSinglePaperPromotionService } from './import-review/singlePaperPromotion.mjs'
 import { createSourceIntakeNotifier } from './source-intake/sourceIntakeNotifier.mjs'
@@ -4147,6 +4148,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     dbPath: importReviewDbPath, filesRoot: importReviewFilesRoot,
   })
   const compatibilityWorker = startReviewCompatibilityWorker(compatibilityStore, {
+    backfillStore: createAutomaticReviewSubjectBackfillStore({ dbPath: importReviewDbPath, filesRoot: importReviewFilesRoot }),
     onError(error) { console.error('[review-compatibility]', error.code || 'WORKER_FAILED') },
   })
   server.once('close', () => { void compatibilityWorker.stop() })

@@ -40,6 +40,15 @@ export function ensureReviewCompatibilityShape(db) {
       );
       CREATE INDEX IF NOT EXISTS idx_review_compatibility_lookup
         ON review_compatibility(revision_id, target_build_id, comparator_version, attempt_no DESC);
+      CREATE TABLE IF NOT EXISTS review_subject_backfill (
+        id INTEGER PRIMARY KEY,
+        revision_id TEXT NOT NULL REFERENCES import_review_revisions(id),
+        input_token TEXT NOT NULL,
+        outcome TEXT NOT NULL CHECK(outcome IN ('inserted','skipped')),
+        reason_code TEXT NOT NULL,
+        checked_at TEXT NOT NULL,
+        UNIQUE(revision_id, input_token)
+      );
     `)
     if (ownTransaction) db.exec('COMMIT')
   } catch (error) {
