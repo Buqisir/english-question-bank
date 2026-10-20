@@ -1,6 +1,6 @@
 import { parentPort, workerData } from 'node:worker_threads'
 import { serialize } from 'node:v8'
-import { finalizeContentSubject, finalizeInventory, finalizeProjection, ocrConfirmationComputation } from './finalizeComputation.mjs'
+import { finalizeInventory, finalizeProjection, ocrConfirmationComputation } from './finalizeComputation.mjs'
 
 function failure(error) {
   return { message: error.message, code: error.code, status: error.status, stack: error.stack }
@@ -42,9 +42,7 @@ try {
       inventoryError = failure(error)
     }
     // v8 serialization preserves Buffer fields, unlike structured clone.
-    const contentSubject = revision.id && revision.reviewKind === 'candidate' && !inventoryError
-      ? finalizeContentSubject(directory, revision, projection) : null
-    const bytes = serialize({ projection, expectedFiles, inventoryError, contentSubject })
+    const bytes = serialize({ projection, expectedFiles, inventoryError })
     parentPort.postMessage({ bytes }, [bytes.buffer])
   }
 } catch (error) {

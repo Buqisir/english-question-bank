@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict'
-import './lib/reviewTestLockRoot.mjs'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'

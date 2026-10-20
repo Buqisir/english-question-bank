@@ -1,5 +1,4 @@
 import { bindClipboardButtons } from './clipboard.js'
-import { isReviewCompatible, reviewCompatibilityMessage as compatibilityMessage } from './owner-review.js'
 
 const root = document.querySelector('#app')
 
@@ -34,7 +33,7 @@ const stateLabels = {
   uploading: '上传中',
   awaiting_review: '待审核',
   changes_requested: '待修改',
-  approved: '已批准',
+  approved: '已认可',
   publishing: '上线中',
   published: '已上线',
   failed: '上线失败',
@@ -75,10 +74,6 @@ function status(value, label = null) {
 function shortDigest(value) {
   const text = String(value || '')
   return text.length > 24 ? `${text.slice(0, 16)}…${text.slice(-8)}` : text
-}
-
-function reviewCompatibilityMessage() {
-  return compatibilityMessage(state.detail?.compatibility)
 }
 
 function copyButton(value, name, label = '复制') {
@@ -454,7 +449,7 @@ function leftRailHtml() {
           <h3>${escapeHtml(state.detail.paperName)}</h3>
           <p class="paper-meta">${latest ? `R${escapeHtml(latest.revisionNumber)} · ${escapeHtml(stateLabels[latest.state] || latest.state)}` : '等待提交'}</p>
           ${isOcrReview() ? '<p class="muted">Agent 正在校对原文，无需逐项确认。</p>' : ''}
-          ${!isOcrReview() && !isReviewCompatible(state.detail.compatibility) ? `<p class="boundary-note">${reviewCompatibilityMessage()}</p>` : ''}
+          ${state.detail.rendererStale ? '<p class="boundary-note">版式已更新，等待 Agent 提交新版本。</p>' : ''}
         </section>
         ${isOcrReview() ? '' : `<details class="rail-section structure-section">
           <summary><h3>卷面结构</h3><span class="paper-meta">${escapeHtml((state.detail.visibleStructure || []).length)} 项</span></summary>
@@ -885,13 +880,12 @@ function approvalHtml() {
       <p class="boundary-note">这个账号可以读 QA、回复并提交新 revision；不能关闭问题、认可或部署。</p>
     </section>`
   const latest = state.detail.latest
-  if (latest.approval && latest.state === 'approved') {
+  if (latest.approval && latest.state === 'approved' && !state.detail.rendererStale) {
     const externalListeningReview = latest.approval.externalListeningReview
     return `<section class="rail-section">
-      <h2>已批准当前 revision</h2>
+      <h2>已认可当前 revision</h2>
       <div class="approval-box">
         ${status('approved')}
-        ${!isReviewCompatible(state.detail.compatibility) ? `<p class="boundary-note">${reviewCompatibilityMessage()}</p>` : ''}
         <p class="digest">${escapeHtml(latest.approval.approvalId)}</p>
         ${externalListeningReview?.schemaVersion === 'external-listening-owner-review-v1' ? `
           <p class="muted">外部听力真人播放核验已绑定：原文一致、全部段落/题目/答案对应、实际内容适合且安全。</p>
@@ -903,7 +897,7 @@ function approvalHtml() {
     </section>`
   }
   const blocked = state.detail.unresolvedCount > 0
-    || !isReviewCompatible(state.detail.compatibility)
+    || state.detail.rendererStale
     || !['awaiting_review', 'changes_requested'].includes(latest.state)
   const publicPaper = state.detail.importProfile === 'public-paper-v1'
   return `<section class="rail-section">
@@ -917,7 +911,7 @@ function approvalHtml() {
           : '我已检查 Screen 与 PDF，认可当前版本。'}</span>
       </label>
       <button class="button button--primary" id="approve-revision" type="button" disabled>认可这个 revision</button>
-      ${blocked ? `<p class="field-help">${!isReviewCompatible(state.detail.compatibility) ? reviewCompatibilityMessage() : '先处理所有待处理和待验证问题。'}</p>` : ''}
+      ${blocked ? `<p class="field-help">${state.detail.rendererStale ? '渲染器已更新，请 Agent 先重新提交 Candidate。' : '先处理所有待处理和待验证问题。'}</p>` : ''}
       <p class="boundary-note">认可不是部署授权；后台永远不提供上线按钮。</p>
     </div>
   </section>`
@@ -1508,12 +1502,10 @@ function bind() {
   const approvalCheck = document.querySelector('#approval-check')
   const approvalButton = document.querySelector('#approve-revision')
   const updateApprovalButton = () => {
-    approvalButton.disabled = !approvalCheck.checked || approvalCheck.disabled
-      || !isReviewCompatible(state.detail?.compatibility)
+    approvalButton.disabled = !approvalCheck.checked
   }
   approvalCheck?.addEventListener('change', updateApprovalButton)
   approvalButton?.addEventListener('click', async () => {
-    if (!approvalCheck?.checked || approvalCheck.disabled || !isReviewCompatible(state.detail?.compatibility)) return
     approvalButton.disabled = true
     try {
       await request(

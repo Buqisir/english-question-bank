@@ -35,7 +35,6 @@ const baseDetail = {
   latest: { id: 'revision-public', revisionNumber: 1, state: 'awaiting_review', bundleDigest: summaryDigest },
   revisions: [], issues: [], issueMessages: [], files: [], visibleStructure: [], sourceVisuals: [],
   mediaDerivations: [], mediaConfirmations: [], promotion: null, rendererStale: false, unresolvedCount: 0,
-  compatibility: { result: 'equal', pending: false, reasonCode: 'CONTENT_EQUAL' },
 }
 const projected = publicPaperReviewDetail({
   paperDetail: () => structuredClone(baseDetail),
@@ -74,7 +73,6 @@ const server = createServer((request, response) => {
     latestRevisionId: 'revision-public', revisionNumber: 1, reviewKind: 'candidate',
     state: 'awaiting_review', bundleDigest: summaryDigest, rendererBuildId: 'fixture-renderer',
     rendererStale: false, unresolvedCount: 0, promotionState: null,
-    compatibility: { result: 'equal', pending: false, reasonCode: 'CONTENT_EQUAL' },
   }] }))
   if (url.pathname.startsWith('/api/import-reviews/papers/')) return send(200, 'application/json', JSON.stringify(mode === 'public' ? projected : oldDetail))
   if (url.pathname.includes('/pagination')) return send(200, 'application/json', JSON.stringify({ editions: [] }))

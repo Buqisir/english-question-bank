@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict'
-import './lib/reviewTestLockRoot.mjs'
 import { chmod, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
@@ -20,20 +19,12 @@ import { createImportReviewStore, reviewBundleDigest } from '../server/import-re
 import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
-import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
 
 // Keep Review reuse/crash/concurrency coverage in the existing storage CI seam.
 await import('./verify-import-review-upload-reuse.mjs')
 await import('./verify-import-review-finalize-worker.mjs')
 await import('./verify-import-review-bundle-reuse.mjs')
 await import('./verify-import-review-file-hash.mjs')
-await import('./verify-review-compatibility.mjs')
-await import('./verify-review-build-identity.mjs')
-await import('./verify-review-compatibility-store.mjs')
-await import('./verify-review-subject-backfill.mjs')
-await import('./verify-review-subject-backfill-automatic.mjs')
-await import('./verify-review-eligibility.mjs')
-await import('./verify-review-publication-content.mjs')
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 const directory = await mkdtemp(path.join(os.tmpdir(), 'eqb-product-storage-'))
@@ -349,10 +340,8 @@ try {
   const publicationDb = new DatabaseSync(':memory:')
   try {
     publicationDb.exec(await readFile(new URL('../data/sql/schema.sql', import.meta.url), 'utf8'))
-    const reviewed = finalizeReviewFixture({ directory: fixture.reviewRoot,
-      output: path.join(directory, 'publication-review'), manifest: reviewManifest, projection })
     const input = { reviewRootDir: fixture.reviewRoot, approvedManifest: reviewManifest,
-      ...publicationFixtureInput(reviewed), fileStorage: null,
+      approvedIdentity: { ...reviewManifest, approvalId: 'product-approval', revisionId: 'product-revision' },
       canonicalRequest: loadCanonicalImportRequest(fixture.requestPath), db: publicationDb,
       paperAssetsDir: path.join(directory, 'published-fixture') }
     assert.throws(() => publishUniversalNck1Import(input), /formal storage/)
