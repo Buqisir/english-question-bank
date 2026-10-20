@@ -39,16 +39,6 @@
             {
               "type": "object",
               "additionalProperties": false,
-              "required": ["kind", "documentId", "pointer"],
-              "properties": {
-                "kind": { "const": "package_json_pointer" },
-                "documentId": { "$ref": "#/$defs/id" },
-                "pointer": { "type": "string", "pattern": "^(/|$)" }
-              }
-            },
-            {
-              "type": "object",
-              "additionalProperties": false,
               "required": ["kind", "documentId", "page", "region"],
               "properties": {
                 "kind": { "const": "page_region" },

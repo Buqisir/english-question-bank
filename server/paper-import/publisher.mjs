@@ -1,7 +1,3 @@
-import { withSealedReviewSnapshot } from '../import-review/sealedReviewFiles.mjs'
-import { assertPreparedReviewContent } from '../import-review/preparedReviewContent.mjs'
-import { buildProductPreviewPayload } from '../import-review/reviewSubject.mjs'
-import { reviewContentDifferences } from '../import-review/reviewCompatibility.mjs'
 import { createHash, randomUUID } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -1238,28 +1234,8 @@ function universalValidationReport(projection) {
   }
 }
 
-export function publishUniversalNck1Import(options) {
-  if (!options.approvedReviewSubject || typeof options.withPreparedReviewSubject !== 'function') {
-    throw Object.assign(new Error('Publication requires the original Review subject and live shipping guard'), {
-      code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'MISSING_BASELINE', status: 409,
-    })
-  }
-  return withSealedReviewSnapshot(options.reviewRootDir, options.approvedManifest.files, snapshot => {
-    const changed = snapshot.fileEvidence.find(file => {
-      const expected = options.approvedManifest.files.find(item => item.path === file.path)
-      return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
-    })
-    if (changed) throw Object.assign(new Error(`Approved Review file bytes changed: ${changed.path}`), {
-      code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'SEALED_FILE_CHANGED', status: 409,
-    })
-    return publishUniversalNck1ImportSnapshot({ ...options, reviewRootDir: snapshot.directory })
-  })
-}
-
-function publishUniversalNck1ImportSnapshot({
+export function publishUniversalNck1Import({
   reviewRootDir,
-  approvedReviewSubject,
-  withPreparedReviewSubject,
   approvedIdentity,
   approvedManifest = null,
   fileStorage = null,
@@ -1282,14 +1258,6 @@ function publishUniversalNck1ImportSnapshot({
       disposition: 'unsupported',
       diagnostics: [{ code: 'IMPORT_REVIEW_APPROVAL_IDENTITY_MISMATCH',
         message: 'Local universal Candidate does not match the exact Owner-approved identity' }],
-    })
-  }
-  const projectedDifferences = reviewContentDifferences(approvedReviewSubject.components.consumer,
-    buildProductPreviewPayload({ id: approvedReviewSubject.revisionId }, projection)).differences
-  if (projectedDifferences.length) {
-    throw Object.assign(new Error('Publisher projection differs from the original Review subject'), {
-      code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'SUBJECT_CHANGED',
-      differences: projectedDifferences, status: 409, publicationNotWritten: true,
     })
   }
   let sourceReferenceApproval = null
@@ -1421,17 +1389,6 @@ function publishUniversalNck1ImportSnapshot({
     forceDbFailure,
     failurePoint,
     onPrepared,
-    validatePrepared(snapshot) {
-      assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
-        projection, approvedIdentity, approvedManifest })
-    },
-    withPreparedWrite(snapshot, write) {
-      return withPreparedReviewSubject(snapshot, () => {
-        const outputInventory = assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
-          projection, approvedIdentity, approvedManifest })
-        return write(outputInventory)
-      })
-    },
     requireCompleteAnalyses: !projection.importProfile,
     requireParagraphSummaries: Boolean(projection.importProfile),
     admitPackage(version) {
@@ -1526,8 +1483,6 @@ function publishPreparedPaperImport({
   forceDbFailure = false,
   failurePoint = null,
   onPrepared = null,
-  withPreparedWrite = null,
-  validatePrepared = null,
   requireCompleteAnalyses = false,
   requireParagraphSummaries = false,
 }) {
@@ -1660,10 +1615,6 @@ function publishPreparedPaperImport({
     : admitPackage(version)
   if (admissionResult.failure) return admissionResult.failure
   const admission = admissionResult.admission
-  // Recovery can advance the version; bind the actual admitted source again.
-  if (packageData.paginationPlanBinding) {
-    packageData.paginationPlanBinding.canonicalSourceDigest = admission.sealed.manifest.sourceAssetDigest
-  }
   const publishReport = {
     ok: true,
     paperId,
@@ -1677,7 +1628,6 @@ function publishPreparedPaperImport({
     generatedAt: new Date().toISOString(),
   }
 
-  if (validatePrepared) validatePrepared({ packageData, admission, version, publishReport, validationReport: publicValidation })
   if (onPrepared) {
     onPrepared({
       assetVersion: version,
@@ -1686,7 +1636,6 @@ function publishPreparedPaperImport({
     })
   }
 
-  const write = (outputInventory = null) => {
   let writtenVersion = null
   let latestSwap = null
   let dbCommitted = false
@@ -1698,7 +1647,6 @@ function publishPreparedPaperImport({
       publishReport,
       version,
       canonicalPublication: admission.sealed,
-      outputInventory,
       forceFailureAt: failurePoint,
       beforeVersionCommit({ tempDir, versionName }) {
         beginPaperImportPublish({
@@ -1871,8 +1819,6 @@ function publishPreparedPaperImport({
     }
     throw error
   }
-  }
-  return withPreparedWrite ? withPreparedWrite({ packageData, admission, version, publishReport, validationReport: publicValidation }, write) : write()
 }
 
 export function rollbackPaperImportPublication({

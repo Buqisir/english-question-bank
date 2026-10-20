@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict'
-import './lib/reviewTestLockRoot.mjs'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
@@ -11,8 +10,6 @@ import { buildImportReviewProjection, reviewBundleFilePaths } from '../server/im
 import { finalizeInventory } from '../server/import-review/finalizeComputation.mjs'
 import { runFinalizeWorker } from '../server/import-review/runFinalizeWorker.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
-import { buildProductPreviewPayload } from '../server/import-review/reviewSubject.mjs'
-import { saveProductPreview as legacySaveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 let makeReviewRoot
@@ -31,16 +28,6 @@ try {
   const directory = fixture.reviewRoot
   const options = { reviewKind: 'candidate', requireAnalyses: true }
   const synchronous = buildImportReviewProjection(directory, options)
-  assert.equal(sha256(Buffer.from(legacySaveProductPreview.toString())),
-    'sha256:95f750c91a3d18504a1f7eb41746fc5cc8f3af1415803d425b96059f19f97660')
-  let legacyJson
-  const previewRevision = { id: 'rev-preview-byte-parity', bundleDigest: synchronous.candidateDigest }
-  legacySaveProductPreview({ prepare: () => ({ run: (...values) => { legacyJson = values[4] } }) },
-    previewRevision, 'legacy-renderer', synchronous)
-  const currentJson = JSON.stringify(buildProductPreviewPayload(previewRevision, synchronous))
-  assert.deepEqual(Buffer.from(currentJson), Buffer.from(legacyJson),
-    'preview JSON bytes must match the actual 6dc7530b constructor on the same listening fixture')
-  console.log('PASS preview payload JSON bytes match original 6dc7530b constructor')
   const revision = { reviewKind: 'candidate', candidateDigest: synchronous.candidateDigest }
   const worker = await runFinalizeWorker(directory, revision)
   assert.deepEqual(worker.projection, synchronous, 'every field and binary byte must match the synchronous projection')
@@ -87,7 +74,6 @@ try {
   }
 
   const sync = upload('sync')
-  await sync.store.ready()
   const startedSync = performance.now()
   const syncResult = sync.store.finalizeRevision(sync.revision.id)
   const synchronousMs = performance.now() - startedSync
@@ -132,24 +118,7 @@ try {
   for (const field of ['state', 'sourceDigest', 'candidateDigest', 'visibleStructureDigest', 'analysisDigest', 'rendererBuildId']) {
     assert.deepEqual(asyncResult[field], syncResult[field], field)
   }
-  assert.deepEqual(asyncCase.store.productPreviewForRevision(asyncResult.id).preview,
-    buildProductPreviewPayload(asyncResult, synchronous))
-  assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'MISSING_FROZEN_PRODUCTS')
-  assert.equal(asyncCase.store.listPapers()[0].compatibility.reasonCode, 'MISSING_FROZEN_PRODUCTS')
-  assert.throws(() => asyncCase.store.projectionForRevision(asyncResult.id),
-    { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' },
-    'a legacy fixture without frozen products retains its original preview but cannot derive live content')
-  const evidenceDb = new DatabaseSync(asyncCase.dbPath)
-  try {
-    const evidence = evidenceDb.prepare('SELECT evidence_json FROM review_compatibility WHERE revision_id=?')
-      .get(asyncResult.id).evidence_json
-    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
-      .run('{}', asyncResult.id)
-    assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'BASELINE_UNTRUSTED',
-      'unknown diagnostics without a subject still require intact evidence')
-    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
-      .run(evidence, asyncResult.id)
-  } finally { evidenceDb.close() }
+  assert.deepEqual(asyncCase.store.projectionForRevision(asyncResult.id).projection, synchronous)
   function preview(dbPath) {
     const db = new DatabaseSync(dbPath, { readOnly: true })
     try {

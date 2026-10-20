@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict'
-import './lib/reviewTestLockRoot.mjs'
 import { createHash } from 'node:crypto'
 import { mkdirSync, mkdtempSync, openSync, closeSync, rmSync, writeFileSync, writeSync } from 'node:fs'
 import { tmpdir } from 'node:os'
