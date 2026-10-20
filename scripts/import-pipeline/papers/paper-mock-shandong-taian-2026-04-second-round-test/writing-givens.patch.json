@@ -1,0 +1,22 @@
+[
+  {
+    "op": "test",
+    "path": "/paperId",
+    "value": "paper-mock-shandong-taian-2026-04-second-round-test"
+  },
+  {
+    "op": "test",
+    "path": "/groups/7/writingTask/givenSkeleton",
+    "value": [
+      {
+        "text": "",
+        "role": "title"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/groups/7/writingTask/givenSkeleton",
+    "value": []
+  }
+]
