@@ -44,6 +44,8 @@ import {
 } from './nck1MaterializationCanonicalRequest.mjs'
 import {
   consumerContractRefs,
+  consumerContractRefsForAuthority,
+  consumerRendersReadingStemFigures,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
@@ -1119,13 +1121,13 @@ function candidateStore(sealed, ref) {
 
 export function loadCanonicalOnlyConsumers({ ref, store }) {
   const consumers = {}
-  for (const [consumerId, consumerContract] of Object.entries(
+  for (const consumerId of Object.keys(
     consumerContractRefs,
   )) {
     const consumption = loadPaperForConsumptionSync({
       paperId: ref.paperId,
       version: ref.versionName,
-      consumerContract,
+      consumerId,
     }, store)
     if (
       consumption.disposition !== 'ready'
@@ -1583,6 +1585,17 @@ function canonicalSelections(validated, contract, sourceAsset) {
       'This paper requires a consumer that preserves the source-backed Application Writing drawing area',
     )
   }
+  const stemFigureGroups = validated.groups.filter(group =>
+    group.variant.family === 'reading' && group.variant.questions.some(question => question.stemFigures !== undefined))
+  if (stemFigureGroups.length && (!consumerRendersReadingStemFigures({
+    id: contract.consumerId, version: contract.version, digest: contract.contractDigest,
+  }) || stemFigureGroups.some(group => !contract.families.some(entry =>
+    entry.familyContractId === 'reading'
+      && entry.version === group.contractRef.familyContractVersion
+      && entry.digest === group.contractRef.familyContractDigest)))) {
+    throw publicationError('CANONICAL_CONSUMER_STEM_FIGURE_UNAVAILABLE',
+      'Reading stem figures require the exact successor family and renderer capability')
+  }
   if (validated.groups.some(group => group.sourcePresentation !== undefined)
     && Number(authorityRefForManifestDigest(contract.authorityManifestDigest)?.manifestVersion) < 62) {
     throw publicationError(
@@ -1931,13 +1944,21 @@ function publicationDiagnostic(error) {
   }
 }
 
+function consumptionRequestForPublication(request, manifestBytes) {
+  if (request.consumerContract) return request
+  const manifest = readJsonBytes(manifestBytes, 'consumer authority selection')
+  return { ...request,
+    consumerContract: consumerContractRefsForAuthority(manifest.authority)[request.consumerId],
+  }
+}
+
 /**
  * Shared Screen/Print-PDF loader. It resolves one immutable publication
  * and one exact checked-in Consumer Contract before exposing a whole-family
  * consumption plan; existing consumers are intentionally not rewired here.
  */
 export async function loadPaperForConsumption(request, store) {
-  const consumer = resolveConsumerContract(request.consumerContract)
+  const consumer = resolveConsumerContract(request.consumerContract || consumerContractRefs[request.consumerId])
   if (!consumer.ok) return { disposition: 'incompatible', diagnostics: consumer.issues }
   for (let attempt = 0; attempt < 2; attempt++) {
     const refs = await store.readPublishedRefs(request.paperId, request.version)
@@ -1957,6 +1978,8 @@ export async function loadPaperForConsumption(request, store) {
     const sourceAsset = await store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
+      const selectedRequest = consumptionRequestForPublication(request, manifestBytes)
+      const selectedConsumer = resolveConsumerContract(selectedRequest.consumerContract)
       const {
         manifest,
         selection,
@@ -1970,10 +1993,10 @@ export async function loadPaperForConsumption(request, store) {
         manifestFileName,
         sourceAsset,
         store,
-        contract: consumer.contract,
+        contract: selectedConsumer.contract,
       })
       return readyConsumption(
-        request,
+        selectedRequest,
         ref,
         manifest,
         selection,
@@ -1997,7 +2020,7 @@ export async function loadPaperForConsumption(request, store) {
  * async loader above. Async legacy projectors are intentionally rejected.
  */
 export function loadPaperForConsumptionSync(request, store) {
-  const consumer = resolveConsumerContract(request.consumerContract)
+  const consumer = resolveConsumerContract(request.consumerContract || consumerContractRefs[request.consumerId])
   if (!consumer.ok) return { disposition: 'incompatible', diagnostics: consumer.issues }
   for (let attempt = 0; attempt < 2; attempt++) {
     const refs = store.readPublishedRefs(request.paperId, request.version)
@@ -2017,6 +2040,8 @@ export function loadPaperForConsumptionSync(request, store) {
     const sourceAsset = store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
+      const selectedRequest = consumptionRequestForPublication(request, manifestBytes)
+      const selectedConsumer = resolveConsumerContract(selectedRequest.consumerContract)
       const {
         manifest,
         selection,
@@ -2030,10 +2055,10 @@ export function loadPaperForConsumptionSync(request, store) {
         manifestFileName,
         sourceAsset,
         store,
-        contract: consumer.contract,
+        contract: selectedConsumer.contract,
       })
       return readyConsumption(
-        request,
+        selectedRequest,
         ref,
         manifest,
         selection,

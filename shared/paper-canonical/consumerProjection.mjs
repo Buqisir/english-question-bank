@@ -6,9 +6,9 @@ import {
   layoutFixedFourColumnClozeOptionSet,
   layoutListeningOptionSet,
 } from './abcdLayout.mjs'
-import { authorityAdmitsApplicationDrawingArea, authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
+import { authorityAdmitsApplicationDrawingArea, closureAdmitsReadingStemFigures, authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
 import { isBase64String } from './base64.mjs'
-import { consumerRendersApplicationDrawingArea, consumerRendersApplicationPromptFigures } from './consumers.mjs'
+import { consumerRendersApplicationDrawingArea, consumerRendersReadingStemFigures, consumerRendersApplicationPromptFigures } from './consumers.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
 import { validateMediaPresentation } from './mediaPresentation.mjs'
 import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
@@ -463,13 +463,19 @@ function projectReadingConsumerGroup(input, occurrence) {
   const layoutByQuestionId = new Map(textOptionSets.map((set, index) =>
     [set.questionId, layoutPlans[index]]))
   const questions = occurrence.questions.map((question) => {
+    if (question.stemFigures !== undefined && (!closureAdmitsReadingStemFigures(authority?.closure)
+      || !consumerRendersReadingStemFigures(input.consumption.consumerContractRef))) {
+      throw rejected(`Canonical Reading occurrence ${groupId} has no stem figure consumer capability`)
+    }
     if (question.stemFigures !== undefined
       && (!Array.isArray(question.stemFigures) || question.stemFigures.length === 0)) {
       throw rejected(`Canonical Reading occurrence ${groupId} has an invalid stem figure sequence`)
     }
     const stemFigures = question.stemFigures === undefined ? {} : {
       stemFigures: question.stemFigures.map(figure => {
-        if (figure?.kind !== 'figure') throw rejected(`Canonical Reading occurrence ${groupId} has a non-figure stem block`)
+        if (figure?.kind !== 'figure' || !Array.isArray(figure.caption) || figure.caption.length !== 0) {
+          throw rejected(`Canonical Reading occurrence ${groupId} requires a stem figure with an empty caption`)
+        }
         return projectReadingChildBlock(figure, { allowFigure: true, allowFramedColumns: false })
       }),
     }
@@ -568,7 +574,11 @@ function projectReadingConsumerGroup(input, occurrence) {
     ).map((inline) => inline.nodeId))
     return identities
   }
-  const contentNodeIds = occurrence.blocks.flatMap((block) => collectOccurrenceContentNodeIds(block))
+  const contentNodeIds = [
+    ...occurrence.blocks.flatMap((block) => collectOccurrenceContentNodeIds(block)),
+    ...occurrence.questions.flatMap(question =>
+      (question.stemFigures || []).flatMap(collectOccurrenceContentNodeIds)),
+  ]
   const anchors = occurrence.anchors
   if (
     !anchors

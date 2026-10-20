@@ -3,7 +3,8 @@ import playwright from '../../../app/node_modules/playwright/index.js'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../../shared/paper-canonical/compiler.mjs'
 import { validateNck1SourceMaterialization } from '../../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { projectCanonicalConsumerGroup } from '../../../shared/paper-canonical/consumerProjection.mjs'
-import { validateJsonSchema } from '../../../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationCandidateAuthorityRef, validateJsonSchema } from '../../../shared/paper-canonical/authority.mjs'
+import { buildNck1ReviewConsumption } from '../../../server/import-review/revisionProjection.mjs'
 import materializationV5Schema from '../../../schemas/paper-canonical/nck1-source-materialization-v5.schema.json' with { type: 'json' }
 import { sha256 } from '../../../shared/paper-canonical/stable.mjs'
 import { rasterPdfRegion } from '../../../server/paper-canonical/pdfRegionRaster.mjs'
@@ -16,7 +17,7 @@ const bytes = value => new TextEncoder().encode(JSON.stringify(value))
 // Exercise the public import seam using original synthetic map drawings. The
 // producer remains unchanged: B1 supplies only the new, independently proven
 // ownership and v5 envelope, as the future producer will.
-export async function verifyReadingStemFigures(fixture) {
+export async function verifyReadingStemFigures(fixture, { onlyPositive = false } = {}) {
   const { paperId } = fixture
   const confirmation = clone(fixture.confirmation)
   confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
@@ -58,7 +59,7 @@ export async function verifyReadingStemFigures(fixture) {
         region: { x: 0, y: 0, width: 1, height: 1 }, density: 144 })
       const overlay = i + 1 === page.page
         ? observed.regions.filter(region => region.regionId.startsWith('stem-map-')).map(({ region }) =>
-          `<svg viewBox="0 0 100 30" preserveAspectRatio="none" style="position:absolute;left:${region.x * 100}%;top:${region.y * 100}%;width:${region.width * 100}%;height:${region.height * 100}%"><rect width="100" height="30" fill="white"/><path d="M5 15H95M30 3V27M70 3V27" stroke="black"/><circle cx="30" cy="15" r="4"/><circle cx="70" cy="15" r="4"/><text x="5" y="8" font-size="7">Library</text></svg>`).join('')
+          `<svg viewBox="0 0 100 30" preserveAspectRatio="none" style="position:absolute;left:${region.x * 100}%;top:${region.y * 100}%;width:${region.width * 100}%;height:${region.height * 100}%"><rect width="100" height="30" fill="white"/><path d="M5 22H95M30 16V29M70 16V29" stroke="black"/><circle cx="30" cy="22" r="4"/><circle cx="70" cy="22" r="4"/><text x="5" y="13" font-size="16">Library</text></svg>`).join('')
         : ''
       return `<section><img src="data:image/png;base64,${Buffer.from(raster.bytes).toString('base64')}">${overlay}</section>`
     })
@@ -136,10 +137,15 @@ export async function verifyReadingStemFigures(fixture) {
     assert.deepEqual(derived.sourceSpanRefsByTarget[`content_node:${figure.blockId}`],
       [`source-span:observation:stem-figure:${figure.blockId}`])
   }
-  // B1 is intentionally not publishable through an old Canonical authority.
   const preview = compileNck1MaterializationCandidatePreview(accepted.candidate)
-  assert(!preview.compilation, 'B2 must register the complete reader before compilation')
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  assert.equal(preview.compilation.artifacts.canonicalPaper.paperPlan.authorityRef.manifestVersion, '69')
+  const oldAuthority = importCanonicalCandidate(accepted.candidate.sourceInput, undefined,
+    { materializationAuthorityRef: nck1MaterializationCandidateAuthorityRef })
+  assert(oldAuthority.issues.some(issue => issue.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'))
   console.log('PASS OCR stem figures: q21 synthetic maps, ordered Canonical figures, media count and source spans')
+  if (onlyPositive) return { candidate: accepted.candidate, compilation: preview.compilation,
+    materialization: mat, documents, mediaFiles }
 
   {
     const ev = clone(evidence)
@@ -196,22 +202,8 @@ export async function verifyReadingStemFigures(fixture) {
 
   // Public consumer independently resolves the same figure artifacts, preserving
   // the question-owned field and enforcing exactly-once media placement.
-  const occurrence = { occurrenceId: 'stem-map-occurrence', kind: 'group', groupId: group.groupId,
-    familyContractId: 'reading', familyContractVersion: '1', slotId: 'reading.a', blanks: [], content: derived.content,
-    blocks: derived.content.blocks, passageBlockRoles: [], media: derived.media.map(media => ({
-      ...media, presentation: mat.media.find(value => value.mediaId === media.mediaId).presentation,
-    })),
-    questions: derived.variant.questions.map((value, i) => ({ ...value, number: 21 + i,
-      options: derived.variant.choiceOwnership.sets[i].options })),
-    numbering: derived.variant.questions.map((value, i) => ({ questionId: value.questionId, number: 21 + i })),
-    anchors: { contentNodeIds: derived.content.blocks.flatMap(block =>
-      [block.nodeId, ...(block.inlines || []).map(inline => inline.nodeId)]),
-    questionIds: derived.questionIds, optionIds: derived.variant.choiceOwnership.sets.flatMap(set => set.options.map(option => option.optionId)) } }
-  const artifacts = occurrence.media.map(media => ({ ...media,
-    encodedBytes: Buffer.from(mediaFiles.find(file => file.mediaId === media.mediaId).bytes).toString('base64') }))
-  const consumer = projectCanonicalConsumerGroup({ consumption: { paperId, disposition: 'ready',
-    selections: [{ familyContractId: 'reading', mode: 'canonical', groupIds: [group.groupId], projectedOccurrences: [occurrence] }],
-    mediaArtifacts: artifacts },
+  const consumption = buildNck1ReviewConsumption(accepted.candidate, preview.compilation)
+  const consumer = projectCanonicalConsumerGroup({ consumption,
     groupId: group.groupId, familyContractId: 'reading' })
   assert.equal(consumer.questions[0].stemFigures.length, 2)
   assert.equal(consumer.questions[0].stemFigures[0].mediaId, question.stemFigures[0].mediaId)

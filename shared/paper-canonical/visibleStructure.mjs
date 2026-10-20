@@ -30,6 +30,7 @@ import manifestV67 from '../../standards/paper-canonical/manifest-v67.json' with
 import manifestV68 from '../../standards/paper-canonical/manifest-v68.json' with { type: 'json' }
 import manifestV69 from '../../standards/paper-canonical/manifest-v69.json' with { type: 'json' }
 import nck1V17 from '../../standards/paper-canonical/profiles/nck1-v17.json' with { type: 'json' }
+import nationalLegacyV5 from '../../standards/paper-canonical/profiles/national-legacy-v5.json' with { type: 'json' }
 import zhejiangLegacyV14 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v14.json' with { type: 'json' }
 import nck1V16 from '../../standards/paper-canonical/profiles/nck1-v16.json' with { type: 'json' }
 import nationalLegacyV4 from '../../standards/paper-canonical/profiles/national-legacy-v4.json' with { type: 'json' }

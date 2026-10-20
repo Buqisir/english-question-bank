@@ -207,7 +207,7 @@ function readingContentBlockIssues(blocks, pathPrefix, mediaById, mediaOccurrenc
   return issues
 }
 
-function readingContentIssues(content, media, optionSets = []) {
+function readingContentIssues(content, media, optionSets = [], questions = []) {
   const issues = []
   const mediaItems = Array.isArray(media) ? media : []
   const mediaById = new Map(mediaItems.map((item) => [item.mediaId, item]))
@@ -229,8 +229,25 @@ function readingContentIssues(content, media, optionSets = []) {
       }
     }
   }
+  for (const [questionIndex, question] of (Array.isArray(questions) ? questions : []).entries()) {
+    if (question?.stemFigures === undefined) continue
+    const path = `$.variant.questions[${questionIndex}].stemFigures`
+    if (!Array.isArray(question.stemFigures) || question.stemFigures.length === 0) {
+      issues.push(issue('READING_STEM_FIGURES_INVALID', 'needs_review', path, 'Stem figures must be a nonempty ordered figure sequence'))
+      continue
+    }
+    for (const [index, figure] of question.stemFigures.entries()) {
+      if (!isRecordValue(figure) || !exactKeys(figure, ['kind', 'nodeId', 'mediaId', 'caption'])
+        || figure.kind !== 'figure' || typeof figure.nodeId !== 'string' || !figure.nodeId
+        || !Array.isArray(figure.caption) || figure.caption.length !== 0) {
+        issues.push(issue('READING_STEM_FIGURE_INVALID', 'needs_review', `${path}[${index}]`, 'Stem figures require a closed source figure and empty caption'))
+        continue
+      }
+      issues.push(...readingLeafBlockIssues(figure, `${path}[${index}]`, mediaById, mediaOccurrences, { allowFigure: true }))
+    }
+  }
   if ([...mediaOccurrences.values()].some((count) => count !== 1)) {
-    issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed exactly once by a Figure, table media ref, or option'))
+    issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed exactly once by a passage Figure, table media ref, Question stem Figure, or option'))
   }
   return issues
 }
@@ -274,6 +291,7 @@ export function validateReadingContract({
   assertions,
   allowFigureOptions = false,
   allowStemMarks = false,
+  allowStemFigures = false,
 }) {
   const issues = []
   if (blankIds.length !== 0) {
@@ -287,7 +305,7 @@ export function validateReadingContract({
     return [issue('READING_VARIANT_INVALID', 'needs_review', '$.variant', 'Reading variant fields are closed')]
   }
   const blocks = Array.isArray(content?.blocks) ? content.blocks : []
-  issues.push(...readingContentIssues(content, media, variant.choiceOwnership?.sets))
+  issues.push(...readingContentIssues(content, media, variant.choiceOwnership?.sets, variant.questions))
   const semanticIds = new Set()
   function registerSemanticId(id, path) {
     if (typeof id !== 'string' || semanticIds.has(id)) {
@@ -349,6 +367,7 @@ export function validateReadingContract({
       !isRecordValue(question)
       || !exactKeys(question, ['questionId', 'stem', 'correctOptionId',
         ...(allowFigureOptions && Object.hasOwn(question, 'figureLayout') ? ['figureLayout'] : []),
+        ...(allowStemFigures && Object.hasOwn(question, 'stemFigures') ? ['stemFigures'] : []),
       ])
       || typeof question.correctOptionId !== 'string'
     ) {
@@ -358,6 +377,11 @@ export function validateReadingContract({
     issues.push(...literalInlineIssues(question.stem, `$.variant.questions[${index}].stem`, allowStemMarks))
     for (const inline of question.stem || []) {
       registerSemanticId(inline.nodeId, `$.variant.questions[${index}].stem`)
+    }
+    for (const figure of Array.isArray(question.stemFigures) ? question.stemFigures : []) {
+      if (isRecordValue(figure) && figure.kind === 'figure' && Array.isArray(figure.caption)) {
+        registerBlockSemanticIds(figure, `$.variant.questions[${index}].stemFigures`, registerSemanticId)
+      }
     }
     const options = set?.options
     if (

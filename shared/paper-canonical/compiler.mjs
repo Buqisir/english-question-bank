@@ -4,6 +4,8 @@ import {
   nck1MaterializationCandidateAuthorityRef,
   nck1ListeningInstructionAuthorityRef,
   nck1DrawingAreaAuthorityRef,
+  nck1ReadingStemFiguresAuthorityRef,
+  closureAdmitsReadingStemFigures,
   nck1MaterializationHistoricalAuthorityRef54,
   nck1MaterializationHistoricalAuthorityRef57,
   nck1MaterializationHistoricalAuthorityRef58,
@@ -2934,6 +2936,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       assertions: capture.assertions,
       allowFigureOptions: family.optionModes?.includes('figure') === true,
       allowStemMarks: ['3', '4'].includes(closure.artifacts['rich-content']?.version),
+      allowStemFigures: closureAdmitsReadingStemFigures(closure),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'listening') {
@@ -3402,13 +3405,13 @@ export function compileCanonicalPaper(
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
   const acceptsNck1MaterializationCandidate = request?.[nck1MaterializationCandidateCompile] === true
-    && [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    && [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
   const acceptsNck1AnalyzedPackageCandidate = request?.[nck1AnalyzedPackageCandidateCompile] === true
     && closure.authorityRef.manifestDigest
       === nck1AnalyzedPackageCandidateAuthorityRef55.manifestDigest
   const acceptsConfirmedNck1MaterializationRequest =
-    [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
     && isConfirmedNck1MaterializationRequest(request)
   const acceptsConfirmedNck1AnalyzedPackageRequest =
@@ -4335,6 +4338,7 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices, { materia
       nck1MaterializationCandidateAuthorityRef,
       nck1ListeningInstructionAuthorityRef,
       nck1DrawingAreaAuthorityRef,
+      nck1ReadingStemFiguresAuthorityRef,
       nck1MaterializationHistoricalAuthorityRef58,
       nck1MaterializationHistoricalAuthorityRef59,
       nck1MaterializationHistoricalAuthorityRef61,

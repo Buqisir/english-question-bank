@@ -8,6 +8,8 @@ import {
   nck1MaterializationCandidateAuthorityRef,
   nck1ListeningInstructionAuthorityRef,
   nck1DrawingAreaAuthorityRef,
+  nck1ReadingStemFiguresAuthorityRef,
+  closureAdmitsReadingStemFigures,
   validateJsonSchema,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef59,
@@ -1449,10 +1451,12 @@ export function deriveNck1SemanticSource(
     }
     for (const question of group.questions) {
       for (const figure of question.stemFigures || []) {
-        source.observations.push(observationForLocator(
+        const observation = observationForLocator(
           `observation:stem-figure:${figure.blockId}`, 'source_question_figure',
           figure.source, { blockId: figure.blockId, mediaId: figure.mediaId }, documentsById,
-        ))
+        )
+        observation.extraction.version = '9'
+        source.observations.push(observation)
       }
     }
     const canonicalBlocks = group.family === 'continuation-writing'
@@ -2475,6 +2479,7 @@ export function withNck1MaterializationSourceCache(callback) {
 }
 
 export function nck1MaterializationAuthorityForInput(input) {
+  if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v6') return nck1ReadingStemFiguresAuthorityRef
   if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v5') return nck1DrawingAreaAuthorityRef
   return input.listeningInstructionCorrectionBytes ? nck1ListeningInstructionAuthorityRef : nck1MaterializationCandidateAuthorityRef
 }
@@ -2509,6 +2514,10 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
   }
   // Authority checks append issues; keep that list private to this derivation.
   const validation = { ...prepared.validation, issues: [...prepared.validation.issues] }
+  if (materialization.schemaVersion === 'nck1-source-materialization-v6'
+    && !closureAdmitsReadingStemFigures(resolveCanonicalAuthority(authorityRef).closure)) {
+    validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v6 requires the complete Reading stem figure reader authority'))
+  }
   if (materialization.groups?.some(group => group.questions?.some(question => question.stemFigures))
     && parseMaterialization(input.ocrSourceBytes?.confirmationBytes)?.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3) {
     validation.issues.push(adapterIssue('MATERIALIZATION_STEM_FIGURE_CONFIRMATION_REQUIRED',
@@ -2575,7 +2584,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     derivationIssues,
     { authorityRef, listeningInstructionCorrection },
   )
-  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
+  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
     nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
@@ -2583,7 +2592,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
       derivationIssues)
   }
   if (input.ocrSourceBytes) {
-    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
       derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
     } else {

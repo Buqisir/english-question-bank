@@ -18,13 +18,16 @@ import screenV46 from '../../standards/paper-canonical/consumers/screen-v46.json
 import printPdfV47 from '../../standards/paper-canonical/consumers/print-pdf-v47.json' with { type: 'json' }
 import screenV47 from '../../standards/paper-canonical/consumers/screen-v47.json' with { type: 'json' }
 import printPdfV48 from '../../standards/paper-canonical/consumers/print-pdf-v48.json' with { type: 'json' }
+import screenV48 from '../../standards/paper-canonical/consumers/screen-v48.json' with { type: 'json' }
+import printPdfV49 from '../../standards/paper-canonical/consumers/print-pdf-v49.json' with { type: 'json' }
 
-import { authorityRefForManifestDigest, closureAdmitsApplicationDrawingArea, closureRendersApplicationDrawingArea, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
+import { authorityRefForManifestDigest, closureAdmitsApplicationDrawingArea, closureRendersApplicationDrawingArea, closureAdmitsReadingStemFigures, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
 
 const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43, screenV43, printPdfV44, screenV44, printPdfV45, screenV45, printPdfV46, screenV46, printPdfV47, screenV47, printPdfV48]
 const contracts = [screenV48, printPdfV49]
-const allContracts = [...historicalContracts, ...contracts]
+const stemFigureContracts = [screenV49, printPdfV50]
+const allContracts = [...historicalContracts, ...contracts, ...stemFigureContracts]
 
 function validateContract(contract) {
   const authorityRef = authorityRefForManifestDigest(contract.authorityManifestDigest)
@@ -51,6 +54,23 @@ for (const contract of allContracts) {
 }
 
 export const consumerContractRefs = Object.freeze(Object.fromEntries(contracts.map((contract) => [contract.consumerId, Object.freeze({ id: contract.consumerId, version: contract.version, digest: contract.contractDigest })])))
+
+// Select by immutable paper authority; no-figure publications retain their
+// existing consumer identities and historical byte output.
+export function consumerContractRefsForAuthority(authorityRef) {
+  const authority = resolveCanonicalAuthority(authorityRef)
+  return authority.ok && closureAdmitsReadingStemFigures(authority.closure)
+    ? Object.fromEntries(stemFigureContracts.map(contract => [contract.consumerId,
+      { id: contract.consumerId, version: contract.version, digest: contract.contractDigest }]))
+    : consumerContractRefs
+}
+
+export function consumerRendersReadingStemFigures(ref) {
+  const resolved = resolveConsumerContract(ref)
+  if (!resolved.ok) return false
+  const authority = resolveCanonicalAuthority(authorityRefForManifestDigest(resolved.contract.authorityManifestDigest))
+  return authority.ok && closureAdmitsReadingStemFigures(authority.closure)
+}
 
 export function resolveConsumerContract(ref) {
   const contract = allContracts.find((candidate) => candidate.consumerId === ref?.id && candidate.version === ref?.version)

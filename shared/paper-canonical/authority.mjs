@@ -79,6 +79,7 @@ import manifestV65 from '../../standards/paper-canonical/manifest-v65.json' with
 import manifestV66 from '../../standards/paper-canonical/manifest-v66.json' with { type: 'json' }
 import manifestV67 from '../../standards/paper-canonical/manifest-v67.json' with { type: 'json' }
 import manifestV68 from '../../standards/paper-canonical/manifest-v68.json' with { type: 'json' }
+import readingV3 from '../../standards/paper-canonical/families/reading-v3.json' with { type: 'json' }
 import reportV68Schema from '../../schemas/paper-canonical/normalization-report-v68.schema.json' with { type: 'json' }
 import publicationV68Schema from '../../schemas/paper-canonical/canonical-paper-publication-v68.schema.json' with { type: 'json' }
 import listeningInstructionCorrectionSchema from '../../schemas/paper-canonical/listening-instruction-correction-v1.schema.json' with { type: 'json' }
@@ -3080,6 +3081,7 @@ export const nck1MaterializationHistoricalAuthorityRef66 = authorities.find((aut
 export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '67').authorityRef
 // Only inputs carrying the audited listening correction select this successor.
 export const nck1ListeningInstructionAuthorityRef = authorities.find((authority) => authority.manifest.version === '68').authorityRef
+export const nck1ReadingStemFiguresAuthorityRef = authorities.find((authority) => authority.manifest.version === '69').authorityRef
 // Analyzed packages are a distinct captured-source protocol. They may not enter
 // the immutable raw-materialization v54 adapter registry or confirmation lane.
 export const nck1AnalyzedPackageCandidateAuthorityRef55 = authorities.find((authority) => authority.manifest.version === '55').authorityRef
@@ -3098,6 +3100,12 @@ export const trustedLegacyCaptureCandidateAuthorityRef = authorities.find((autho
 export const paper2026IPrintSuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '43').authorityRef
 export const paper2026ISuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '44').authorityRef
 export const paper2026IOwnerQaContentSuccessorCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '45').authorityRef
+
+export function closureAdmitsReadingStemFigures(closure) {
+  return closure?.families?.get('reading')?.stemFigures === 'ordered_question_owned_source_figures'
+    && closure.artifacts.adapter?.adapters?.some(adapter =>
+      adapter.adapterId === 'nck1-source-materialization' && adapter.version === '9') === true
+}
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

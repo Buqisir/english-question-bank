@@ -1,4 +1,4 @@
-import { closureAdmitsApplicationDrawingArea, closureAdmitsApplicationPromptFigures, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { closureAdmitsApplicationDrawingArea, closureAdmitsReadingStemFigures, closureAdmitsApplicationPromptFigures, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
 import { validateGrammarFillPromptContract } from './grammarFillPromptContract.mjs'
@@ -244,6 +244,7 @@ function assertCanonicalPackage(canonicalPackage) {
         assertions: sourceCapture.assertions,
         allowFigureOptions: family.optionModes?.includes('figure') === true,
         allowStemMarks: ['3', '4'].includes(closure.artifacts['rich-content']?.version),
+        allowStemFigures: closureAdmitsReadingStemFigures(closure),
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
     }
@@ -459,7 +460,11 @@ export function projectCanonicalPaper(canonicalPackage) {
                 ...(question.stemFigures ? { stemFigures: cloneJson(question.stemFigures) } : {}),
               })),
               anchors: {
-                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                contentNodeIds: [
+                  ...contentIdentityLists(group.content).contentNodeIds,
+                  ...group.variant.questions.flatMap(question =>
+                    contentIdentityLists({ blocks: question.stemFigures || [] }).contentNodeIds),
+                ],
                 questionIds: group.questionRefs.map(({ questionId }) => questionId),
                 optionIds: group.variant.choiceOwnership.sets.flatMap((set) => set.options.map(({ optionId }) => optionId)),
               },
