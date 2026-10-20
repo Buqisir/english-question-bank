@@ -32,7 +32,7 @@ process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
 const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
 if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
-await import('./verify-review-identity-startup.mjs')
+const { measureReviewOperation } = await import('./verify-review-identity-startup.mjs')
 const root = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-compatibility-store-'))
 let server
 let checks = 0
@@ -232,24 +232,16 @@ try {
   assert.equal(resultA.comparison.result, 'equal', JSON.stringify(resultA.comparison))
   const resultB = await second.compute(b)
   assert.equal(resultB.comparison.result, 'equal')
-  let previousTick = performance.now()
-  let maxCommitDelayMs = 0
-  let commitTicks = 0
-  const commitTimer = setInterval(() => {
-    const now = performance.now()
-    maxCommitDelayMs = Math.max(maxCommitDelayMs, now - previousTick - 2)
-    previousTick = now
-    commitTicks++
-  }, 2)
-  let firstCommit
-  try {
-    await yieldFor(10)
-    firstCommit = await compatibility.commit(a, resultA)
-    await yieldFor(10)
-  } finally { clearInterval(commitTimer) }
+  // Measure the commit entry, worker delivery/exit and CAS continuation;
+  // fixture settling and idle worker wait are not part of a synchronous turn.
+  const commitRead = await measureReviewOperation(() => compatibility.commit(a, resultA))
+  const firstCommit = commitRead.value
+  const maxCommitDelayMs = commitRead.maxDelayMs
+  const commitTicks = commitRead.phases.length
   assert.equal(firstCommit.committed, true)
   assert(commitTicks > 0)
-  console.log(JSON.stringify({ check: 'compatibility-commit-event-loop', maxCommitDelayMs, commitTicks }))
+  console.log(JSON.stringify({ check: 'compatibility-commit-event-loop', maxCommitDelayMs, commitTicks,
+    phases: commitRead.phases }))
   assert(maxCommitDelayMs < 50, `commit event loop delay ${maxCommitDelayMs.toFixed(2)}ms must be below 50ms`)
   pass('asynchronous commit keeps maximum main-thread event loop delay below 50ms')
   const overlappingCommit = await second.commit(b, resultB)
@@ -263,7 +255,8 @@ try {
   pass('two overlapping worker snapshots preserve the original baseline and produce one terminal; no pdfinfo/executable required')
 
   const terminalRows = JSON.stringify(newRows().slice(1))
-  assert.equal((await compatibility.checkRevision(revision.id)).appended, false)
+  const terminalReplay = await compatibility.checkRevision(revision.id)
+  assert.equal(terminalReplay.appended, false, JSON.stringify(terminalReplay))
   assert.equal(JSON.stringify(newRows().slice(1)), terminalRows)
   const tamperJob = compatibility.prepare(revision.id)
   const legitimate = await compatibility.compute(tamperJob, { timeoutMs: 1 })

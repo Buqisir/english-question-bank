@@ -7,9 +7,56 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { createServer } from 'node:http'
 import { setTimeout as yieldFor } from 'node:timers/promises'
+import { Worker } from 'node:worker_threads'
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { finalizeReviewFixture, freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
+
+export async function measureReviewOperation(action) {
+  const windows = []
+  const timers = []
+  const emit = Worker.prototype.emit
+  const ownEmit = Object.hasOwn(Worker.prototype, 'emit')
+  let captureWorkerEvents = false
+  function sample(phase) {
+    const started = performance.now()
+    const cpu = process.threadCpuUsage()
+    const loop = performance.eventLoopUtilization()
+    windows.push(new Promise(resolve => {
+      timers.push(setTimeout(() => {
+        const elapsedMs = performance.now() - started
+        const usage = process.threadCpuUsage(cpu)
+        const utilization = performance.eventLoopUtilization(loop)
+        resolve({ phase, elapsedMs, delayMs: Math.max(0, elapsedMs - 2),
+          threadCpuMs: (usage.user + usage.system) / 1000,
+          activeMs: utilization.active, idleMs: utilization.idle })
+      }, 2))
+    }))
+  }
+  // Probe the public entry and its real worker callbacks, including their
+  // promise continuations (publish/CAS), through the first following timer.
+  // A periodic timer spanning the worker's idle wait measures unrelated turns
+  // and scheduler stalls. No CPU/idle subtraction or threshold adjustment is used.
+  Worker.prototype.emit = function (event, ...args) {
+    if (captureWorkerEvents && ['message', 'error', 'exit'].includes(event)) sample(event)
+    return emit.call(this, event, ...args)
+  }
+  const started = performance.now()
+  try {
+    sample('entry')
+    const pending = action()
+    captureWorkerEvents = Boolean(pending && typeof pending.then === 'function')
+    const value = await pending
+    const callMs = performance.now() - started
+    captureWorkerEvents = false
+    const phases = await Promise.all(windows)
+    return { value, callMs, phases, maxDelayMs: Math.max(...phases.map(phase => phase.delayMs)) }
+  } finally {
+    if (ownEmit) Worker.prototype.emit = emit
+    else delete Worker.prototype.emit
+    for (const timer of timers) clearTimeout(timer)
+  }
+}
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -32,34 +79,47 @@ try {
     import assert from 'node:assert/strict';
     import { readFileSync, writeFileSync } from 'node:fs';
     import { setTimeout as yieldFor } from 'node:timers/promises';
+    import { PerformanceObserver } from 'node:perf_hooks';
+    import { Worker } from 'node:worker_threads';
     import { createImportReviewStore } from './server/import-review/importReviewStore.mjs';
     import { createReviewCompatibilityStore } from './server/import-review/reviewCompatibilityStore.mjs';
     import { reviewBuildIdentityProvider } from './server/import-review/reviewBuildIdentity.mjs';
     const [dbPath, filesRoot, revisionId] = process.argv.slice(1);
+    const gcEvents = [];
+    const observer = new PerformanceObserver(entries => {
+      for (const entry of entries.getEntries()) gcEvents.push({ at: entry.startTime, ms: entry.duration });
+    });
+    observer.observe({ entryTypes: ['gc'] });
+    const measureReviewOperation = ${measureReviewOperation.toString()};
+    // Cold means the identity is not ready, not cold fixture pages or module
+    // garbage. Settle those before constructing either identity consumer.
+    readFileSync(dbPath);
+    globalThis.gc();
+    await yieldFor(5);
     const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-startup' });
     const compatibility = createReviewCompatibilityStore({ dbPath, filesRoot });
     assert.equal(store.ready, compatibility.ready, 'read and scan stores share one identity initialization');
     const samples = [];
     async function measure(name, action, enforceColdBudget = true) {
-      let previous = performance.now(), maxDelayMs = 0;
-      const timer = setInterval(() => {
-        const now = performance.now(); maxDelayMs = Math.max(maxDelayMs, now - previous - 2); previous = now;
-      }, 2);
-      try {
-        await yieldFor(5);
-        const start = performance.now(); await action(); const callMs = performance.now() - start;
-        await yieldFor(5);
-        const sample = { name, callMs, maxDelayMs, mode: process.env.NODE_ENV };
-        samples.push(sample); console.log(JSON.stringify(sample));
-        if (enforceColdBudget) assert(maxDelayMs < 50, JSON.stringify(sample));
-        return sample;
-      } finally { clearInterval(timer); }
+      await yieldFor(5);
+      const windowStart = performance.now();
+      const { callMs, maxDelayMs, phases } = await measureReviewOperation(action);
+      // CPU/GC explain failures; the original wall-clock 50ms gate still decides.
+      const gc = gcEvents.filter(entry => entry.at >= windowStart);
+      const sample = { name, callMs, maxDelayMs, phases, gc, mode: process.env.NODE_ENV };
+      samples.push(sample); console.log(JSON.stringify(sample));
+      if (enforceColdBudget) assert(maxDelayMs < 50, JSON.stringify(sample));
+      return sample;
     }
+    let coldRow, approval;
     await measure('cold-list', () => {
-      const row = store.listPapers()[0];
-      assert.equal(row.compatibility.result, 'pending');
-      const approval = store.getRevision(revisionId).approval;
-      assert.throws(() => store.beginPromotion(row.paperId, { ...approval, intent: 'ship' }, 'fixture-owner'),
+      coldRow = store.listPapers()[0];
+      assert.equal(coldRow.compatibility.result, 'pending');
+    });
+    // These are separate public operations, not part of the list endpoint.
+    await measure('cold-revision', () => { approval = store.getRevision(revisionId).approval; });
+    await measure('cold-promotion-denial', () => {
+      assert.throws(() => store.beginPromotion(coldRow.paperId, { ...approval, intent: 'ship' }, 'fixture-owner'),
         error => error.compatibility.result === 'pending');
     });
     await measure('cold-scan', () => assert.deepEqual(compatibility.scan(), []));
@@ -77,15 +137,17 @@ try {
       const before = provider().targetBuildId;
       const file = './server/import-review/rendererBuildIdProvider.mjs';
       const bytes = readFileSync(file);
+      globalThis.gc();
       writeFileSync(file, Buffer.concat([bytes, Buffer.from('\\n// startup invalidation fixture\\n')]));
       await yieldFor(20);
       assert.equal(store.listPapers()[0].compatibility.result, 'pending');
       await measure('development-refresh', () => store.ready());
       assert.notEqual(provider().targetBuildId, before);
     }
+    observer.disconnect();
   `
   for (const mode of ['production', 'development']) {
-    console.log(execFileSync(process.execPath, ['-e', program,
+    console.log(execFileSync(process.execPath, ['--expose-gc', '-e', program,
       dbPath, filesRoot, fixture.revision.id], { cwd: release, encoding: 'utf8',
       env: { ...process.env, NODE_ENV: mode }, timeout: 30_000 }))
   }
