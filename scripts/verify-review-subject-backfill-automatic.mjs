@@ -2,7 +2,8 @@
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, truncateSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, truncateSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { createServer } from 'node:http'
 import path from 'node:path'
 import { setTimeout as yieldFor } from 'node:timers/promises'
@@ -18,7 +19,8 @@ process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
 const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
 if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
-const root = mkdtempSync('/private/tmp/eqb-review-auto-backfill-')
+const temporaryRoot = realpathSync(tmpdir())
+const root = mkdtempSync(path.join(temporaryRoot, 'eqb-review-auto-backfill-'))
 const repository = path.resolve(import.meta.dirname, '..')
 const dbPath = path.join(root, 'review.sqlite'), filesRoot = path.join(root, 'files')
 const dbRun = (file, fn) => {
@@ -195,17 +197,17 @@ try {
 
   // All normal MISSING_BASELINE attempts already exist for this exact target,
   // so the next observed worker belongs to automatic backfill.
-  const beforeWorkspaces = new Set(readdirSync('/private/tmp').filter(name => name.startsWith('eqb-review-job-')))
+  const beforeWorkspaces = new Set(readdirSync(temporaryRoot).filter(name => name.startsWith('eqb-review-job-')))
   await startApi(true)
   let workspace
   const leader = path.join(process.env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT, 'leader')
   await until(() => {
-    workspace = readdirSync('/private/tmp').find(name => name.startsWith('eqb-review-job-') && !beforeWorkspaces.has(name))
+    workspace = readdirSync(temporaryRoot).find(name => name.startsWith('eqb-review-job-') && !beforeWorkspaces.has(name))
     return workspace && existsSync(leader) && JSON.parse(readFileSync(leader)).pid === api.pid
   }, 'active automatic backfill thread')
   const shutdownMs = await stopApi()
   assert.equal(existsSync(leader), false)
-  assert.equal(existsSync(path.join('/private/tmp', workspace)), false)
+  assert.equal(existsSync(path.join(temporaryRoot, workspace)), false)
   assert.equal(query(db => db.prepare('SELECT COUNT(*) n FROM review_subject_backfill').get().n), 0)
   console.log(JSON.stringify({ check: 'automatic-backfill-SIGTERM', shutdownMs, leaderReleased: true, workspaceRemoved: true }))
 

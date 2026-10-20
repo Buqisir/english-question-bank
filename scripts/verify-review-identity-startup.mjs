@@ -2,7 +2,8 @@
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { createServer } from 'node:http'
@@ -63,7 +64,8 @@ process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
 const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
 if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
-const root = mkdtempSync('/private/tmp/eqb-review-startup-')
+const temporaryRoot = realpathSync(tmpdir())
+const root = mkdtempSync(path.join(temporaryRoot, 'eqb-review-startup-'))
 const repository = path.resolve(import.meta.dirname, '..')
 let api
 try {
@@ -162,7 +164,7 @@ try {
   await new Promise(resolve => reservation.listen(0, '127.0.0.1', resolve))
   const port = reservation.address().port
   await new Promise(resolve => reservation.close(resolve))
-  const workspaces = new Set(readdirSync('/private/tmp').filter(name => name.startsWith('eqb-review-job-')))
+  const workspaces = new Set(readdirSync(temporaryRoot).filter(name => name.startsWith('eqb-review-job-')))
   let log = ''
   api = spawn(process.execPath, ['server/api.mjs'], { cwd: repository, env: {
     ...process.env, NODE_ENV: 'production', QUESTION_BANK_API_PORT: String(port),
@@ -178,7 +180,7 @@ try {
   let activeWorkspace
   for (let attempt = 0; attempt < 1500; attempt++) {
     assert.equal(api.exitCode, null, log)
-    activeWorkspace = readdirSync('/private/tmp').find(name => name.startsWith('eqb-review-job-') && !workspaces.has(name))
+    activeWorkspace = readdirSync(temporaryRoot).find(name => name.startsWith('eqb-review-job-') && !workspaces.has(name))
     if (activeWorkspace && existsSync(leader) && JSON.parse(readFileSync(leader)).pid === api.pid) break
     activeWorkspace = null
     await yieldFor(10)
@@ -193,7 +195,7 @@ try {
     })])
     assert.deepEqual(result, { code: 0, signal: null }, log)
     assert.equal(existsSync(leader), false)
-    assert.equal(existsSync(path.join('/private/tmp', activeWorkspace)), false)
+    assert.equal(existsSync(path.join(temporaryRoot, activeWorkspace)), false)
     console.log(JSON.stringify({ check: 'api-active-batch-SIGTERM', shutdownMs: performance.now() - started,
       leaderReleased: true, workspaceRemoved: true, ...result }))
   } finally { clearTimeout(deadline) }
