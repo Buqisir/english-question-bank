@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
@@ -17,6 +18,7 @@ import { createImportReviewStore, reviewBundleDigest } from '../server/import-re
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCompatibilitySchema.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
+import { verifyReviewCompatibilityScheduling } from '../test-fixtures/review-compatibility/scheduling.mjs'
 import { inspectSealedReviewFiles } from '../server/import-review/sealedReviewFiles.mjs'
 import { acquireReviewCompatibilityLeader, beginReviewActivity } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
@@ -37,6 +39,19 @@ const json = (file, value) => writeFileSync(file, JSON.stringify(value))
 const readJson = file => JSON.parse(readFileSync(file))
 
 try {
+  const isolatedRoot = process.env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT
+  const isolatedLeader = acquireReviewCompatibilityLeader()
+  assert.ok(isolatedLeader)
+  try {
+    const record = readJson(path.join(isolatedRoot, 'leader'))
+    assert.equal(record.pid, process.pid)
+    assert.equal(record.uid, process.getuid())
+    assert.equal(typeof record.processToken, 'string')
+    assert.equal(typeof record.token, 'string')
+  } finally { isolatedLeader.release() }
+  pass('verifier lock root is isolated and leader records identify the owning process')
+  await verifyReviewCompatibilityScheduling(pass)
+
   const empty = new DatabaseSync(':memory:')
   empty.exec('PRAGMA foreign_keys=ON; CREATE TABLE import_review_revisions(id TEXT PRIMARY KEY)')
   ensureReviewCompatibilityShape(empty)
@@ -129,8 +144,35 @@ try {
   const oldRows = JSON.stringify(historical())
   dbRun(db => db.exec('DROP TABLE review_compatibility; DROP TABLE review_subject'))
   const oldDbBytes = readFileSync(dbPath)
-  const oldDryRun = JSON.parse(execFileSync(process.execPath, [path.resolve('scripts/backfill-review-subjects.mjs'),
-    '--db', dbPath, '--files-root', filesRoot], { encoding: 'utf8' }))
+  const runDryRunCli = () => JSON.parse(execFileSync(process.execPath, [path.resolve('scripts/backfill-review-subjects.mjs'),
+    '--db', dbPath, '--files-root', filesRoot], { encoding: 'utf8', timeout: 120_000 }))
+  const cliLeader = acquireReviewCompatibilityLeader()
+  assert.ok(cliLeader)
+  try {
+    const paused = runDryRunCli()
+    assert.equal(paused.paused, 'LEADER_BUSY')
+    assert.equal(paused.locks.root, isolatedRoot)
+    assert.equal(paused.locks.leader.pid, process.pid)
+    assert.equal(paused.locks.leader.alive, true)
+  } finally { cliLeader.release() }
+  writeFileSync(path.join(isolatedRoot, 'leader'), '', { flag: 'wx', mode: 0o600 })
+  try {
+    const paused = runDryRunCli()
+    assert.equal(paused.paused, 'LEADER_BUSY')
+    assert.equal(paused.locks.leader.state, 'malformed')
+    assert.equal(paused.locks.leader.pid, null)
+    assert.equal(paused.locks.leader.alive, null)
+    assert.equal(readFileSync(path.join(isolatedRoot, 'leader'), 'utf8'), '')
+  } finally { unlinkSync(path.join(isolatedRoot, 'leader')) }
+  const cliActivity = beginReviewActivity('finalize-cli-fixture')
+  try {
+    const paused = runDryRunCli()
+    assert.equal(paused.paused, 'ACTIVITY_PENDING')
+    assert.equal(paused.locks.activities[0].pid, process.pid)
+    assert.equal(paused.locks.activities[0].alive, true)
+  } finally { cliActivity() }
+  pass('CLI dry-run identifies live leader/activity owners and diagnoses empty records without stealing them')
+  const oldDryRun = runDryRunCli()
   assert.equal(oldDryRun.dryRun, true)
   assert.equal(oldDryRun.results[0].comparison.result, 'equal')
   assert.deepEqual(readFileSync(dbPath), oldDbBytes)

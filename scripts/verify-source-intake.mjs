@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 
 import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'

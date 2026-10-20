@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 // M0-2 verify: invite-login auth gate contract (docs/cuts/m0-2-invite-login/plan.md
 // verification 1). Spawns the real server (server/api.mjs) against a temp,
 // throwaway question-bank + user-data pair so it exercises the actual HTTP gate,

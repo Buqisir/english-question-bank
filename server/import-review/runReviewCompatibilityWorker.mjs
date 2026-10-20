@@ -5,7 +5,8 @@ import path from 'node:path'
 import { setTimeout as yieldFor } from 'node:timers/promises'
 import { REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
 import {
-  acquireReviewCompatibilityLeader, reviewCompatibilityBusy, validReviewCompatibilityLease,
+  acquireReviewCompatibilityLeader, reviewCompatibilityBusy, reviewCompatibilityLockDiagnostics,
+  validReviewCompatibilityLease,
 } from './reviewCompatibilityScheduling.mjs'
 
 export const REVIEW_WORKER_BUDGET = Object.freeze({ heapMb: 384, deadlineMs: 120_000, batchSize: 5, yieldMs: 1000 })
@@ -20,7 +21,8 @@ export async function runReviewCompatibilityWorker(input, {
   const unknown = reasonCode => ({ baseline: null, comparison: {
     result: 'unknown', reasonCode, targetBuildId: input.targetBuildId, subjectDigest: null,
     comparatorVersion: REVIEW_COMPARATOR_VERSION,
-    componentDigests: {}, differences: [], metrics: { heapLimitMb: heapMb, deadlineMs: timeoutMs },
+    componentDigests: {}, differences: [], metrics: { heapLimitMb: heapMb, deadlineMs: timeoutMs,
+      ...(['LEADER_BUSY', 'ACTIVITY_PENDING'].includes(reasonCode) ? { locks: reviewCompatibilityLockDiagnostics() } : {}) },
   } })
   let worker
   let timer
@@ -70,13 +72,15 @@ export async function runReviewCompatibilityWorker(input, {
 // checked by scan; finalize marks host-wide activity before starting its work.
 export async function runReviewCompatibilityBatch(store, { dryRun = false, signal } = {}) {
   const leader = acquireReviewCompatibilityLeader()
-  if (!leader) return { paused: 'LEADER_BUSY', results: [] }
+  if (!leader) return { paused: 'LEADER_BUSY', results: [], locks: reviewCompatibilityLockDiagnostics() }
   try {
-    if (reviewCompatibilityBusy()) return { paused: 'ACTIVITY_PENDING', results: [] }
+    if (reviewCompatibilityBusy()) return { paused: 'ACTIVITY_PENDING', results: [], locks: reviewCompatibilityLockDiagnostics() }
     const ids = store.scan({ limit: REVIEW_WORKER_BUDGET.batchSize })
     const results = []
     for (const revisionId of ids) {
-      if (signal?.aborted || reviewCompatibilityBusy() || store.isBusy()) break
+      if (signal?.aborted) break
+      if (reviewCompatibilityBusy()) return { paused: 'ACTIVITY_PENDING', results, locks: reviewCompatibilityLockDiagnostics() }
+      if (store.isBusy()) break
       const disk = statfsSync('/tmp')
       const free = disk.bavail * disk.bsize
       if (free < 10 * 1024 ** 3) return { paused: free < 7 * 1024 ** 3 ? 'DISK_STOP_BELOW_7_GIB' : 'DISK_WAIT_BELOW_10_GIB', results }
