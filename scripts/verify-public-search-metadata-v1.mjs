@@ -190,7 +190,7 @@ negativeMetadata.similarityProfile = { route: 'negative-prefix', features: [] }
 const negativeBinding = { ...binding, materialization: negativeMaterialization }
 const negativeRequest = preparePublicSearchMetadataRequest(negativeBinding)
 assert.deepEqual(negativeRequest.controlledValues.grammarSimilarity.find((facet) => facet.facet_key === negativeMetadata.facetKey)?.routes,
-  ['negative-prefix'], 'same-POS adjective negation must not require a verb-to-adjective classification')
+  ['negative-prefix', 'suffix-derivation'], 'same-POS adjective derivation supports distinct prefix and suffix routes')
 assert.equal(new Ajv({ strict: true }).compile(negativeRequest.outputContract)(negativeAuthored), true)
 const negative = finalizePublicSearchMetadata({ authored: negativeAuthored, ...negativeBinding })
 const negativeResult = negative.groups.find((group) => group.family === 'grammar-fill').metadata.questions[0]
@@ -198,6 +198,64 @@ assert.equal(negativeResult.facetKey, 'grammar-fill.given.conversion.adjective-t
 assert.deepEqual(negativeResult.similarityProfile, { route: 'negative-prefix', features: [] })
 assert.equal(negativeResult.role, null)
 assert.deepEqual(validatePublicSearchMetadata({ sidecar: negative, ...negativeBinding }), [])
+
+// Original synthetic contexts exercise same-POS suffix derivation without
+// classifying the supplied adjective as a verb or rewriting its answer.
+for (const [hint, answer, before, after] of [
+  ['distinct', 'distinctive', 'The exhibit features ', ' treasures.'],
+  ['economic', 'economical', 'This is an ', ' way to heat the room.'],
+  ['historic', 'historical', 'The archive holds ', ' records.'],
+]) {
+  const groupId = `group:suffix-${hint}`
+  const questionId = `question:suffix-${hint}`
+  const blankId = `blank:suffix-${hint}`
+  const paragraphId = `paragraph:suffix-${hint}`
+  const suffixBinding = { sourceDigest, candidateDigest, materialization: {
+    paperId: `paper:suffix-${hint}`,
+    groups: [{ groupId, family: 'grammar-fill', slotId: 'grammar-fill',
+      blocks: [{ kind: 'paragraph', blockId: paragraphId, role: 'body', content: [
+        { kind: 'text', text: before }, { kind: 'blank_ref', blankId }, { kind: 'text', text: after },
+      ] }],
+      questions: [{ questionId, blankId, sourceNumber: 59, canonicalNumber: 59, stem: '59', prompt: hint }],
+    }],
+    answers: [{ questionId, value: answer }],
+  } }
+  const suffixAuthored = { groups: [{ groupId, family: 'grammar-fill', topicLabels: [labelA], genre: '说明',
+    metadata: { questions: [{ questionId, facetKey: negativeMetadata.facetKey, role: null,
+      similarityProfile: { route: 'suffix-derivation', features: [] }, contextParagraphIds: [paragraphId] }] },
+  }] }
+  const authorityBefore = stableStringify(suffixBinding.materialization)
+  const request = preparePublicSearchMetadataRequest(suffixBinding)
+  assert.equal(new Ajv({ strict: true }).compile(request.outputContract)(suffixAuthored), true)
+  const suffixFinal = finalizePublicSearchMetadata({ authored: suffixAuthored, ...suffixBinding })
+  const roundtrip = JSON.parse(stableStringify(suffixFinal))
+  const result = roundtrip.groups[0].metadata.questions[0]
+  assert.equal(result.facetKey, negativeResult.facetKey)
+  assert.deepEqual(result.similarityProfile, { route: 'suffix-derivation', features: [] })
+  assert.notEqual(result.similarityProfile.route, negativeResult.similarityProfile.route,
+    'suffix derivation must remain distinct from negative-prefix derivation')
+  assert.equal(result.hint, hint)
+  assert.equal(result.role, null)
+  assert.deepEqual(result.derived, {})
+  assert.deepEqual(validatePublicSearchMetadata({ sidecar: roundtrip, ...suffixBinding }), [])
+  assert.equal(stableStringify(suffixBinding.materialization), authorityBefore)
+
+  for (const patch of [
+    { facetKey: 'grammar-fill.given.conversion.verb-to-adjective' },
+    { facetKey: 'grammar-fill.given.adjective.comparison' },
+    { similarityProfile: { route: 'suffix-derivation', features: ['negative-prefix'] } },
+    { similarityProfile: { route: 'derived-adjective', features: [] } },
+  ]) {
+    const invalid = structuredClone(suffixAuthored)
+    Object.assign(invalid.groups[0].metadata.questions[0], patch)
+    assert.throws(() => finalizePublicSearchMetadata({ authored: invalid, ...suffixBinding }),
+      /PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID/)
+    const invalidSidecar = structuredClone(roundtrip)
+    Object.assign(invalidSidecar.groups[0].metadata.questions[0], patch)
+    assert.ok(validatePublicSearchMetadata({ sidecar: invalidSidecar, ...suffixBinding })
+      .some(({ code }) => code === 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID'))
+  }
+}
 
 // Original synthetic source: the gap supplies the cleft connector, not the pronoun.
 const cleftFacet = 'grammar-fill.no-hint.conjunction.cleft'
