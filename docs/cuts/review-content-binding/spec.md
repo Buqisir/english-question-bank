@@ -329,12 +329,14 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 
 ## 9. UI 文案
 
-`import-ops/public/owner-review.js:102`：
-- 原：`预览版本已过期，请在 Amp 重新送审。`
-- 改：`预览版本需要更新，请在 Droid 中核验后重新送审`
-- 同步 `scripts/verify-import-pagination-ui.mjs:161`。
+E 使用 `compatibility` 决定批准/发布可用性，仅 equal 开放；缺字段按 unknown 保守阻止，不以 rendererStale 回退。业务状态保持原值，approved 在 pending 时仍显示 `已批准`，只暂时禁用发布。
 
-该文案仅用于确定内容不同，或已查明证据缺失、需要人工核验的结果，不因部署/代码变化直接显示。NOT_CHECKED/处理中显示 `正在核验预览内容…`；暂时故障显示可重试的核验失败，不诱导重新送审。未知时仍可查看校验通过的原 preview 和冻结 PDF，但批准/发布不可用。旧 rendererStale boolean 保留为兼容字段，新 UI 优先读取内容 compatibility/reason。
+- pending：`正在核验预览版本…`
+- equal：保留正常操作。
+- different：`预览内容有变化，请在 Droid 中核验后重新送审`
+- unknown：`无法核验原预览版本，请在 Droid 中核验后重新送审`；有可解释原因时补简短中文，例如 `（缺少原预览记录）`。
+
+所有兼容状态保留原 Screen 与冻结 PDF 的查看、下载入口，继续由原身份、SHA 和鉴权保护。移除按旧构建直接判定过期的提示，不修改样式体系。`verify-import-pagination-ui.mjs` 覆盖四态、旧 boolean 冲突、approved 保持和冻结 PDF 原字节下载；`--serve` 仅提供本地接口夹具供真实浏览器点击，不冒充真实卷面或正式发布。
 
 ## 10. 工作量与最大风险
 

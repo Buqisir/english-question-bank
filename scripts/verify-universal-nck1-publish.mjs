@@ -3519,7 +3519,7 @@ try {
   writeFileSync(fixedPdfPath, Buffer.from(await fixedPdfResponse.arrayBuffer()))
   assert.match(execFileSync('pdfinfo', [fixedPdfPath], { encoding: 'utf8' }), /Pages:\s+8\b/)
   const reviewRow = reviewPage.locator(`[data-review-paper="${paperId}"]`)
-  await reviewRow.getByText('待发布', { exact: true }).waitFor()
+  await reviewRow.getByText('已批准', { exact: true }).waitFor()
   assert.equal(await reviewPage.locator('iframe, #approval-check').count(), 0)
   assert.match(await reviewRow.locator('.owner-review-name a').getAttribute('href'),
     new RegExp(`reviewRevision=${online.revision.id}`))
@@ -3790,7 +3790,7 @@ try {
   assert.equal(online.reviewStore.paperDetail(paperId).issues.find(issue =>
     issue.id === repairIssue.id).state, 'closed', 'existing issue closure remains separate from approval')
   await reviewPage.reload()
-  await reviewRow.getByText('待发布', { exact: true }).waitFor()
+  await reviewRow.getByText('已批准', { exact: true }).waitFor()
   assert.equal(await reviewRow.getByText('已发布', { exact: true }).count(), 0,
     'a newer unshipped revision is not labelled published by the old receipt')
   assert.equal(await reviewRow.getByRole('button', { name: '发布到题库' }).isEnabled(), true)

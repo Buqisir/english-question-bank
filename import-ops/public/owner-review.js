@@ -3,8 +3,26 @@ const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character =>
 })[character])
 
 const labels = {
-  awaiting_review: '待审核', changes_requested: '待修改', approved: '待发布',
+  awaiting_review: '待审核', changes_requested: '待修改', approved: '已批准',
   publishing: '发布中', published: '已发布', failed: '发布失败',
+}
+
+export const isReviewCompatible = compatibility => compatibility?.result === 'equal' && !compatibility.pending
+
+export function reviewCompatibilityMessage(compatibility) {
+  if (compatibility?.pending || compatibility?.result === 'pending') return '正在核验预览版本…'
+  if (isReviewCompatible(compatibility)) return ''
+  if (compatibility?.result === 'different') return '预览内容有变化，请在 Droid 中核验后重新送审'
+  const reason = {
+    MISSING_BASELINE: '缺少原预览记录',
+    BASELINE_UNTRUSTED: '原预览记录未通过校验',
+    TARGET_IDENTITY_INVALID: '当前版本无法核验',
+    WORKER_TIMEOUT: '核验超时',
+    WORKER_OOM: '核验资源不足',
+    WORKER_EXIT: '核验进程已中断',
+    WORKER_ABORTED: '核验已中断',
+  }[compatibility?.reasonCode]
+  return `无法核验原预览版本，请在 Droid 中核验后重新送审${reason ? `（${reason}）` : ''}`
 }
 
 export async function mountOwnerReview({ root, user, request, mediaConfirmationChecks }) {
@@ -92,14 +110,14 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
   function rowHtml(paper) {
     const state = paper.promotionState || paper.state
     const pending = uncertain.has(paper.paperId)
-    const canPublish = !busy && fresh && !pending && !paper.rendererStale
+    const canPublish = !busy && fresh && !pending && isReviewCompatible(paper.compatibility)
       && !paper.promotionState && paper.unresolvedCount === 0
       && ['awaiting_review', 'changes_requested', 'approved'].includes(paper.state)
     const frozen = Boolean(paper.promotionState)
     const hint = pending ? '请求结果待核实，请刷新状态；不要重复提交。'
       : state === 'publishing' ? '服务器正在处理。如长时间未完成，请在 Amp 核实，不要重试。'
       : state === 'failed' ? '请在 Amp 核实失败原因，保留原发布记录。'
-      : paper.rendererStale ? '预览版本已过期，请在 Amp 重新送审。'
+      : !isReviewCompatible(paper.compatibility) ? reviewCompatibilityMessage(paper.compatibility)
       : paper.unresolvedCount ? `${paper.unresolvedCount} 条反馈尚未确认解决。` : ''
     return `<li class="owner-review-item" data-review-paper="${escapeHtml(paper.paperId)}">
       <div class="owner-review-row">
@@ -237,6 +255,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
 
   async function mutate(paper, url, body, successMessage, method = 'POST') {
     if (busy || !fresh || uncertain.has(paper.paperId)) return
+    if (body.intent === 'publish' && !isReviewCompatible(paper.compatibility)) return
     busy = true
     error = ''
     notice = method === 'POST' && body.intent === 'publish' ? '正在发布，请勿重复提交…' : '正在保存…'
