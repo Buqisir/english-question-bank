@@ -1,7 +1,7 @@
 # 听力导航切段：listening-segment-rule-v2
 
 实现仅位于 `scripts/import-pipeline/`，沿用服务端 `listening-review-v1` 契约。
-Apple SpeechAnalyzer 为主引擎；失败组按相邻候选收窄裁窗，由已安装的 Whisper
+Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻骨架组收窄裁窗，由已安装的 Whisper
 `small.en` 单次复核。两份原始结果、失败信息和规则判定均保留。无播报不直接判错；
 正文唯一性、全卷单调顺序和相邻组边界仍须有证据。缺少相邻组的离线裁窗不能替代全卷证明。
 
@@ -13,6 +13,7 @@ Apple SpeechAnalyzer 为主引擎；失败组按相邻候选收窄裁窗，由�
 | --- | --- |
 | 规则 / 等价表版本 | `listening-segment-rule-v2` / `listening-equivalences-v1` |
 | 首尾连续锚 | 6 词；歧义扩为 12 词，仍歧义则复核 |
+| 可选模糊锚 | 默认关闭；至少 20 词，12 词连续锚中恰好 1 处替换，每遍另一端须精确 |
 | 短材料 / 其他材料 | 少于 40 词：源词匹配率和含插入惩罚的编辑相似度均 ≥0.95；其他均 ≥0.90 |
 | 边词时间跨度 / 开头词间空档异常 | >2 秒即复核，不据此截断 |
 | 两遍时长比 | 第一遍 / 第二遍须在 0.85–1.15 |
@@ -35,7 +36,9 @@ once/twice。明确的 Text N、「第 N 段」「第 a 至 b 题」播报都须
 Apple 和 Whisper 合并后再次校验同一骨架规则；局部 Whisper 结果不能自行代表整卷通过。
 
 每遍独立连续对齐，禁止拼接两遍的首尾。尾锚包含真实末话轮的结尾；短末话轮连同前文
-构造。漏整话轮、数字/货币/否定词均要求复核。正文内部观察到超过 2 秒的静音也保守
+构造。漏整话轮，以及对齐任一侧的数字、货币、否定词或时间差异均要求复核；
+删除、插入和替换均记录在 `alignment.differences`，新增 `not` 不能因源词全匹配而放行。
+正文内部观察到超过 2 秒的静音也保守
 要求复核，避免拼接分离片段。重复和重叠窗口先按绝对时间选择一致窗口区间，再计遍数。
 
 相邻两遍若分别选择同一静音内的边界而发生播放重叠，只能在该已观测静音内选择共同分界点，
@@ -102,7 +105,9 @@ node --test scripts/import-pipeline/*.test.mjs scripts/import-pipeline/replay/*.
 - `IMPORT_SUBMIT_LISTENING_NOT_USABLE`：任一听力组缺失或不是 `usable`，列出 segmentId。
 - `IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING`：中文文本或中文 inline runs 中出现
   `(1)`、`(2)` 等半角数字编号，列出字段路径；改为 `（1）`、`（2）`。纯英文内容中的
-  括号数字不据此拦截。规则不自动改写原卷内容。
+  括号数字不据此拦截。按编号的局部语言和引号判断，不因整串或兄弟 inline 项含中文
+  就拦截英文引文；纯编号 run 和跨 run 的括号仍从相邻文本获取语境。
+  规则不自动改写原卷内容。
 
 没有 Owner 覆盖开关。门禁不取代现有服务端的 subject、哈希、证据覆盖和顺序校验。
 
@@ -199,3 +204,78 @@ Whisper 回退。旧差异仍保留在诊断中，不将“未调用回退”解
 完整复跑通过，没有改动超时实现或测试阈值。新增覆盖含缺组不级联、倒序双方失败、无播报组越界、
 unknown 不误报、同一静音分界及服务端真实 sidecar 校验、回放不可评估状态，以及骨架组在静音
 空档内的播放区间重叠同时阻止双方。阈值与等价表逐项和父 commit 比较一致。
+
+## 2026-10-21 审查修复及可选模糊锚评测
+
+当前候选修复三项审查问题：失败/歧义组的部分首锚不再截断正常组的候选配对；
+Whisper 裁窗忽略失败邻组的 occurrence；关键差异检查覆盖对齐两侧；中文编号门禁
+允许英文引文及英文 inline 子项。先无邻组约束独立判定，再冻结成功骨架用于候选配对。
+已观测精确尾词沿用原有的播报分段用途，不能据此充当成功骨架或收窄裁窗。
+
+模糊锚由 `LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled=false` 控制，尚未启用默认。
+适配器及回放 CLI 都接受 `--fuzzy-anchors` / `--no-fuzzy-anchors`，实际配置写入 attempt。
+精确 6 词锚缺失时才尝试 12 词锚，只有同长度窗口中最多 1 处替换，绝不以插入/删除匹配。
+每遍首尾合计最多 1 处替换，另一端 12 词须精确。替换两侧均不得为数字、否定、
+货币、时间或该组题干/选项的实词。题目按 `canonicalNumber` / `sourceNumber` 绑定，
+所有相关题干和选项缺一则不能批准模糊候选；实词采用保守的非功能词集合。
+
+同源自身、其他源文组、当前录音和全录音均用相同的“最多 1 处替换”规则枚举候选，
+被保护词替换的候选仍参与歧义计数。全录音 ASR 窗口必须连续覆盖录音，且首尾候选数
+与来源次数一致；回退裁窗还须与全录音候选在 0.5 秒内对应。仅 Whisper 裁窗不能证明
+全卷唯一。适配器保留 Apple 全录音作为全局证据；45 组裁窗回放不混入补充全录音。
+不足 20 词不能模糊匹配；20–23 词因两锚重叠仍需复核，只有另一引擎给出完整精确且
+通过其余门禁的证据，合并时才能选择该精确结论。次数、顺序、末话轮、物理边界、
+双引擎冲突与 0.95/0.90 阈值均未放宽，等价表与规范化算法未扩充。
+
+`anchors.fuzzy` 保留候选位置及全局唯一性证据；每遍 `anchorSubstitutions` 保留端点、
+源词/ASR 词、源词下标/ASR 下标、原始源词和 ASR run 文本。源文不改写。
+
+最终完整 import-pipeline 测试：`389 passed / 0 failed / 0 skipped`（新增 16 项）。
+测试覆盖 Astra 反例、成功骨架裁窗、双侧关键字差异、英文引文、模糊锚禁区和全局唯一性。
+命令：
+
+```sh
+TMPDIR=<worktree>/.scratch/listening-v2-fix-tests node --test --test-concurrency=1 \
+  scripts/import-pipeline/*.test.mjs scripts/import-pipeline/replay/*.test.mjs
+```
+
+最终缓存评测结果如下；45 组来自 22 卷，复用原 ASR，不重跑识别。
+
+| 范围 | 模糊锚关 | 模糊锚开 |
+| --- | --- | --- |
+| 45 组局部规则，排除不可评估的整卷顺序 | usable 23 / review_required 22 | usable 23 / review_required 22 |
+| 45 组含顺序状态 | usable 0 / review_required 22 / ORDER_NOT_EVALUABLE_IN_REPLAY 23 | 相同 |
+| Apple 原规则判定 | usable 18 / review_required 27 | 相同 |
+| Whisper 原规则判定 | usable 17 / review_required 28 | 相同 |
+| 山东完整流程，含全卷顺序及原服务端 sidecar 校验 | usable 8 / review_required 2 / 校验 PASS | 相同 |
+
+开关导致最终 `usable/review_required` 改变的组为 **0**，没有新增或可疑放行。
+以下列出全部新增模糊候选，包括最终结果不变的组；样本号沿用 manifest 的零起始 index。
+
+| 样本 / 卷 / 组 | 替换词对 | 开启后的处置 |
+| --- | --- | --- |
+| 0 / 杭州 / text-4 | service → surface（Apple） | 属于题干/选项保护词，且缺全录音唯一证据；继续选择原先精确通过的 Whisper |
+| 2 / 杭州 / text-9 | helpline → heartline（Whisper） | 保护词、缺全录音证据且次数不足；原 Apple 精确结论不变 |
+| 12 / 山东核心素养 / text-1 | Cris → Chris（两引擎） | 裁窗缺全录音唯一证据且正文低于 0.95；维持复核 |
+| 37 / 浙江强基 / text-8 | erhu → aahu（Apple）；erhu → arhu（Whisper） | Apple 未形成唯一完整首尾配对；Whisper 命中保护词；两者次数来源未知，维持复核 |
+| 42 / 台州 / text-2 | here → hear（Apple） | 缺全录音唯一证据；继续选择原先精确通过的 Whisper |
+| 43 / 台州 / text-8 | Chen → Jen（Apple） | 缺全录音唯一证据；Whisper 原有首遍边界不足，维持复核 |
+
+山东完整流程中，text-1 的 Apple 全录音可以证明候选唯一，但正文两遍的匹配率/编辑
+相似度均为 0.903226，仍不满足短材料 0.95；故复核原因从次数不足变为正文低匹配。
+text-6 仍为边界不足和引擎冲突；text-2–5、text-7–10 仍可用。两种配置各调用 4 个
+失败组的既有 Whisper 输出，未启动 ASR。两次完整结果均通过未改动的
+`validateListeningReview`。
+
+相较此前历史回放的 29/16，本轮 23/22 的差异来自更完整的关键字门禁，
+与模糊锚开关无关。新增复核样本为 4、5、11、27、28、44，涉及 AM/PM/整点表示、
+`first/1st`、`second/2nd` 和插入 `hundred` 等差异；其中含规范化范围尚未覆盖的
+表示差异，不能把这些保守复核一律解释为真实录音内容错误。本轮没有自动扩充等价规则。
+
+本工作树的最终证据：
+
+- `.scratch/listening-v2-fix-suite-final.log`
+- `.scratch/listening-v2-fix-replay-final-off/replay-2026-10-20T19-29-02-871Z.json`
+- `.scratch/listening-v2-fix-replay-final-on/replay-2026-10-20T19-29-02-876Z.json`
+- `.scratch/listening-v2-fix-e2e-off/attempt-2026-10-20T19-29-18-867Z-76934f40/`
+- `.scratch/listening-v2-fix-e2e-on/attempt-2026-10-20T19-29-19-339Z-7ecf379f/`

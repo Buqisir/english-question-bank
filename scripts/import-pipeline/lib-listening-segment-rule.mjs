@@ -4,6 +4,8 @@ export const LISTENING_SEGMENT_RULE = Object.freeze({
   normalizationVersion: 'listening-equivalences-v1',
   anchorWords: 6,
   expandedAnchorWords: 12,
+  fuzzyAnchorsEnabled: false,
+  fuzzyMinimumWords: 20,
   shortMaterialWords: 40,
   shortMatchMinimum: 0.95,
   matchMinimum: 0.90,
@@ -30,6 +32,29 @@ const smallNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'sev
   'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
   'sixteen', 'seventeen', 'eighteen', 'nineteen']
 const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
+const criticalWords = new Set(['not', 'no', 'never', 'none', 'neither', 'nothing', 'nobody', 'nowhere', 'nor', 'without', 'cannot',
+  ...smallNumbers, ...tens.filter(Boolean), 'hundred', 'thousand', 'million', 'billion',
+  'dollar', 'dollars', 'pound', 'pounds', 'cent', 'cents', 'euro', 'euros', 'yuan', 'yen',
+  "o'clock", 'am', 'pm', 'a.m', 'p.m', 'hour', 'hours', 'minute', 'minutes', 'second', 'seconds',
+  'noon', 'midnight', 'morning', 'afternoon', 'evening', 'tonight', 'today', 'tomorrow', 'yesterday',
+  'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',
+  'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september',
+  'october', 'november', 'december'])
+const isCritical = word => criticalWords.has(word) || /n't$|\d/u.test(word || '')
+// Conservatively protect every non-function word in the group's questions/options.
+const functionWords = new Set(('a an the i you he she it we they me him her us them my your his its our their '
+  + 'this that these those what which who whom whose when where why how is are was were be been being '
+  + 'do does did have has had will would shall should can could may might must to of in on at by for from '
+  + 'with about as and or but if than then so there here some any all each every').split(' '))
+function questionWords(group, questions) {
+  const selected = group.questions || questions?.filter(q => group.questionNumbers.includes(q.canonicalNumber ?? q.sourceNumber))
+  const text = node => typeof node === 'string' ? node : Array.isArray(node) ? node.map(text).join(' ')
+    : node && typeof node === 'object' ? text(node.text ?? node.content ?? node.runs ?? '') : ''
+  return { available: group.questionNumbers.every(number => selected?.some(q =>
+    (q.canonicalNumber ?? q.sourceNumber) === number && text(q.stem) && text(q.options))),
+    words: new Set((selected || []).flatMap(q => normalizeListeningText(
+      `${text(q.stem)} ${text(q.options)}`)).filter(w => !functionWords.has(w))) }
+}
 function numberWords(value) {
   const n = Number(value)
   if (!Number.isSafeInteger(n) || n < 0 || n >= 1_000_000) return value
@@ -49,13 +74,21 @@ export function normalizeListeningText(value) {
     .match(/[a-z]+(?:'[a-z]+)?|\d+/gu)?.map(word => LISTENING_EQUIVALENCES[word] || word) || []
 }
 
-export function listeningSourceTurns(text) {
+function listeningSourceTurnText(text) {
   return String(text ?? '').split('参考答案')[0]
     .replace(/^\s*text\s+\d+[^\n]*(?:\n|$)/gimu, '')
     .replace(/^\s*\d+\.\s*/u, '')
     .split(/(?:^|\n)\s*(?:\d+\.\s*)?(?:M|W|Speaker \d+):\s*/u)
     .map(turn => turn.replace(/\(\d+\)|[①-⑳]/gu, '').trim())
-    .filter(Boolean).map(normalizeListeningText).filter(turn => turn.length)
+    .filter(Boolean)
+}
+export function listeningSourceTurns(text) {
+  return listeningSourceTurnText(text).map(normalizeListeningText).filter(turn => turn.length)
+}
+function listeningSourceRawWords(text) {
+  return listeningSourceTurnText(text).flatMap(turn =>
+    (turn.match(/[$£]?\d[\d,]*(?::\d+|\.\d+)?|[a-z]+(?:['’][a-z]+)?/giu) || [])
+      .flatMap(raw => normalizeListeningText(raw).map(() => raw)))
 }
 
 function countReadings(text) {
@@ -138,6 +171,7 @@ export function listeningAsrTokens(windows) {
             runStartSeconds: start, runEndSeconds: end,
             startBoundary: i === 0, endBoundary: i === tokens.length - 1,
             timing: tokens.length === 1 ? 'run' : 'interpolated_within_run',
+            rawRunText: String(run.word ?? run.text),
             runId: `${windowIndex}:${segmentIndex}:${runIndex}`,
             evidencePaths: window.evidencePaths || [],
           })
@@ -219,17 +253,29 @@ export function alignListeningOccurrence(source, target) {
   let i = source.length, j = target.length
   const matched = []
   const missing = []
+  const differences = []
   while (i || j) {
     const move = !i ? 2 : !j ? 1 : trace[i][j]
     if (move === 0) {
       if (source[i - 1] === target[j - 1].token) matched.push(i - 1)
-      else missing.push(i - 1)
+      else {
+        missing.push(i - 1)
+        differences.push({ kind: 'substitution', sourceIndex: i - 1, targetIndex: j - 1,
+          sourceWord: source[i - 1], targetWord: target[j - 1].token })
+      }
       i--; j--
-    } else if (move === 1) { missing.push(--i) } else j--
+    } else if (move === 1) {
+      missing.push(--i)
+      differences.push({ kind: 'deletion', sourceIndex: i, targetIndex: null, sourceWord: source[i], targetWord: null })
+    } else {
+      j--
+      differences.push({ kind: 'insertion', sourceIndex: null, targetIndex: j, sourceWord: null, targetWord: target[j].token })
+    }
   }
   return { sourceMatchRate: matched.length / Math.max(1, source.length),
     editSimilarity: 1 - previous[target.length] / Math.max(1, source.length, target.length),
     matchedSourceIndices: matched.reverse(), missingSourceIndices: missing.reverse(),
+    differences: differences.reverse(),
     editDistance: previous[target.length], sourceWordCount: source.length, asrWordCount: target.length }
 }
 
@@ -243,8 +289,31 @@ function problem(result, code) {
   result.decision = 'review_required'
   return result
 }
-function anchorsFor(group, corpus, words, expected) {
+function substitutionMatches(haystack, needle) {
+  const matches = []
+  for (let i = 0; i <= haystack.length - needle.length; i++) {
+    const differences = []
+    for (let j = 0; j < needle.length && differences.length <= 1; j++) {
+      const actual = haystack[i + j].token ?? haystack[i + j]
+      if (needle[j] !== actual) differences.push({ offset: j, sourceWord: needle[j], targetWord: actual })
+    }
+    if (differences.length <= 1) matches.push({ index: i, differences })
+  }
+  return matches
+}
+function coversRecording(windows, durationSeconds) {
+  let end = 0
+  for (const w of [...windows].filter(w => !w.error && (w.result?.segments || w.segments)?.length)
+    .sort((a, b) => (a.startSeconds ?? 0) - (b.startSeconds ?? 0))) {
+    if ((w.startSeconds ?? 0) > end) return false
+    end = Math.max(end, w.endSeconds)
+  }
+  // MP3 format duration can be a fraction of a millisecond below PCM duration.
+  return end >= durationSeconds - 0.001
+}
+function anchorsFor(group, corpus, words, expected, fuzzy = null) {
   const source = listeningSourceTurns(group.text).flat()
+  let exact
   for (const length of [LISTENING_SEGMENT_RULE.anchorWords, LISTENING_SEGMENT_RULE.expandedAnchorWords]) {
     const width = Math.min(length, source.length)
     const head = source.slice(0, width), tail = source.slice(-width)
@@ -254,9 +323,35 @@ function anchorsFor(group, corpus, words, expected) {
         .every(other => positions(listeningSourceTurns(other.text).flat(), anchor).length === 0))
     const heads = positions(words, head), tails = positions(words, tail)
     const uniqueAudio = expected === 'unknown' || (heads.length <= expected && tails.length <= expected)
-    if (uniqueSource && uniqueAudio) return { width, head, tail, heads, tails, ambiguous: false }
-    if (length === LISTENING_SEGMENT_RULE.expandedAnchorWords) return { width, head, tail, heads, tails, ambiguous: true }
+    exact = { width, head, tail, heads, tails, ambiguous: !uniqueSource || !uniqueAudio }
+    if (!exact.ambiguous) break
   }
+  const incomplete = expected === 'unknown' ? !exact.heads.length || !exact.tails.length
+    : exact.heads.length < expected || exact.tails.length < expected
+  if (!fuzzy || !incomplete || exact.ambiguous || source.length < LISTENING_SEGMENT_RULE.fuzzyMinimumWords) return exact
+  const width = LISTENING_SEGMENT_RULE.expandedAnchorWords
+  const head = source.slice(0, width), tail = source.slice(-width)
+  const heads = substitutionMatches(words, head), tails = substitutionMatches(words, tail)
+  if (![...heads, ...tails].some(m => m.differences.length)) return exact
+  const sourceUnique = [head, tail].every((a, i) => {
+    const self = substitutionMatches(source, a)
+    return self.length === 1 && self[0].index === (i ? source.length - width : 0)
+      && corpus.filter(other => other.segmentId !== group.segmentId)
+        .every(other => !substitutionMatches(listeningSourceTurns(other.text).flat(), a).length)
+  })
+  const globalHeads = substitutionMatches(fuzzy.globalWords, head)
+  const globalTails = substitutionMatches(fuzzy.globalWords, tail)
+  const ambiguous = !sourceUnique || (expected !== 'unknown'
+    && [heads, tails, globalHeads, globalTails].some(m => m.length > expected))
+  const sameTimes = (local, global) => local.every(candidate => global.some(other =>
+    Math.abs(words[candidate.index].startSeconds - fuzzy.globalWords[other.index].startSeconds)
+      <= LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds))
+  return { width, head, tail, heads: heads.map(m => m.index), tails: tails.map(m => m.index),
+    ambiguous, fuzzy: { heads, tails, globalHeadPositions: globalHeads.map(m => m.index),
+      globalTailPositions: globalTails.map(m => m.index), globalCoverage: fuzzy.globalCoverage,
+      globalProven: fuzzy.globalCoverage && expected !== 'unknown'
+        && globalHeads.length === expected && globalTails.length === expected
+        && sameTimes(heads, globalHeads) && sameTimes(tails, globalTails) } }
 }
 
 function boundsFor(first, last, pauses, duration) {
@@ -323,16 +418,22 @@ export function validateListeningOrder(results) {
 }
 
 export function evaluateListeningEngine({ groups, instructions = [], windows = [], pauses = [], durationSeconds,
-  engine = 'Apple SpeechAnalyzer', corpus = groups, requireWholePaper = true }) {
+  engine = 'Apple SpeechAnalyzer', corpus = groups, requireWholePaper = true, questions,
+  fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled, globalAnchorWindows = windows }) {
   const { words, markers } = listeningAsrTokens(windows)
+  const fuzzy = fuzzyAnchors ? {
+    globalWords: globalAnchorWindows === windows ? words : listeningAsrTokens(globalAnchorWindows).words,
+    globalCoverage: coversRecording(globalAnchorWindows, durationSeconds),
+  } : null
   const orderedGroups = [...groups].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
-  const allTails = []
-  const allHeads = corpus.flatMap(group => {
+  // Preserve cue scoping to an observed exact lexical tail. This is only an
+  // announcement delimiter, never a candidate-pairing/crop/playback constraint.
+  const announcementTails = corpus.flatMap(group => {
     const a = anchorsFor(group, corpus, words, expectedListeningReadings(group, instructions).expectedReadings)
-    allTails.push(...a.tails.map(index => index + a.width - 1))
-    return a.heads.map(index => ({ segmentId: group.segmentId, index }))
+    return a.tails.map(index => index + a.width - 1)
   })
-  const results = orderedGroups.map(group => {
+  const run = (skeleton = []) => orderedGroups.map(group => {
+    const allHeads = skeleton.flatMap(g => g.occurrences.map(o => ({ segmentId: g.segmentId, index: o.startWordIndex })))
     const expected = expectedListeningReadings(group, instructions)
     const result = { segmentId: group.segmentId, questionNumbers: group.questionNumbers, engine,
       ...expected, decision: 'usable', issues: [], occurrences: [], playback: null,
@@ -341,9 +442,12 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
     const turns = listeningSourceTurns(group.text)
     const source = turns.flat()
+    const sourceRawWords = listeningSourceRawWords(group.text)
     if (!source.length) return problem(result, 'SOURCE_EMPTY')
-    const anchor = anchorsFor(group, corpus, words, expected.expectedReadings)
-    result.anchors = { width: anchor.width, headPositions: anchor.heads, tailPositions: anchor.tails }
+    const anchor = anchorsFor(group, corpus, words, expected.expectedReadings, fuzzy)
+    const protectedQuestion = questionWords(group, questions)
+    result.anchors = { width: anchor.width, headPositions: anchor.heads, tailPositions: anchor.tails,
+      mode: anchor.fuzzy ? 'one_substitution_12' : 'exact', fuzzy: anchor.fuzzy ?? null }
     if (anchor.ambiguous) problem(result, 'ANCHOR_AMBIGUOUS')
     const groupNumber = Number(group.segmentId.match(/(\d+)$/u)?.[1])
     for (const [headNumber, startIndex] of anchor.heads.entries()) {
@@ -358,6 +462,23 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       const first = actual[0], last = actual.at(-1)
       const alignment = alignListeningOccurrence(source, actual)
       const issues = []
+      const anchorSubstitutions = []
+      if (anchor.fuzzy) {
+        for (const [side, index, sourceOffset] of [['head', startIndex, 0], ['tail', tails[0], source.length - anchor.width]]) {
+          const match = anchor.fuzzy[side === 'head' ? 'heads' : 'tails'].find(m => m.index === index)
+          for (const difference of match.differences) anchorSubstitutions.push({ ...difference, side,
+            sourceWordIndex: sourceOffset + difference.offset, asrWordIndex: index + difference.offset,
+            rawSourceWord: sourceRawWords[sourceOffset + difference.offset],
+            rawAsrRun: words[index + difference.offset].rawRunText })
+        }
+        if (anchorSubstitutions.length > 1) issues.push('FUZZY_ANCHOR_BOTH_ENDS_CHANGED')
+        if (anchorSubstitutions.some(d => isCritical(d.sourceWord) || isCritical(d.targetWord)
+          || protectedQuestion.words.has(d.sourceWord) || protectedQuestion.words.has(d.targetWord))) {
+          issues.push('FUZZY_ANCHOR_PROTECTED_WORD')
+        }
+        if (anchorSubstitutions.length && !protectedQuestion.available) issues.push('FUZZY_ANCHOR_QUESTION_CONTEXT_MISSING')
+        if (anchorSubstitutions.length && !anchor.fuzzy.globalProven) issues.push('FUZZY_ANCHOR_GLOBAL_UNPROVEN')
+      }
       const threshold = source.length < LISTENING_SEGMENT_RULE.shortMaterialWords
         ? LISTENING_SEGMENT_RULE.shortMatchMinimum : LISTENING_SEGMENT_RULE.matchMinimum
       if (alignment.sourceMatchRate < threshold || alignment.editSimilarity < threshold) issues.push('BODY_ALIGNMENT_LOW')
@@ -368,10 +489,11 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
         }
         turnStart += turn.length
       }
-      const critical = new Set(['not', 'no', 'never', 'none', 'neither', 'nothing', 'without',
-        ...smallNumbers, ...tens.filter(Boolean), 'hundred', 'thousand', 'dollars', 'pounds', 'cents'])
-      if (alignment.missingSourceIndices.some(index => critical.has(source[index]) || /n't$/u.test(source[index]))) {
+      if (alignment.missingSourceIndices.some(index => isCritical(source[index]))) {
         issues.push('CRITICAL_WORD_MISSING')
+      }
+      if (alignment.differences.some(d => isCritical(d.sourceWord) || isCritical(d.targetWord))) {
+        issues.push('CRITICAL_WORD_DIFFERENCE')
       }
       const edges = [...actual.slice(0, anchor.width), ...actual.slice(-anchor.width)]
       if (edges.some(w => w.runEndSeconds - w.runStartSeconds > LISTENING_SEGMENT_RULE.edgeWordMaxSeconds)) {
@@ -383,7 +505,7 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       // A long in-body pause is uncertainty, not permission to join two fragments.
       if (pauses.some(p => p.startSeconds > first.runEndSeconds && p.endSeconds < last.runStartSeconds
         && p.endSeconds - p.startSeconds > LISTENING_SEGMENT_RULE.openingGapMaxSeconds)) issues.push('OCCURRENCE_DISCONTINUOUS')
-      const previousBodyEnd = words[allTails.filter(index => index < startIndex)
+      const previousBodyEnd = words[announcementTails.filter(index => index < startIndex)
         .reduce((maximum, index) => Math.max(maximum, index), -1)]?.endSeconds ?? 0
       const preceding = markers.filter(m => m.startSeconds >= previousBodyEnd && m.endSeconds <= first.runStartSeconds)
       const relevant = [...preceding,
@@ -402,8 +524,11 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
         if (!coverage.length && coveredEnd < boundary.endSeconds) boundary = null
       }
       if (!boundary) issues.push('BOUNDARY_EVIDENCE_INSUFFICIENT')
-      const occurrence = { startSeconds: first.runStartSeconds, endSeconds: last.runEndSeconds,
-        playback: boundary, alignment, issues: [...new Set(issues)], announcements: relevant,
+      const occurrence = { startWordIndex: startIndex, endWordIndex: endIndex,
+        startSeconds: first.runStartSeconds, endSeconds: last.runEndSeconds,
+        playback: boundary, alignment, anchorSubstitutions,
+        requiresExactCorroboration: anchorSubstitutions.length > 0 && source.length < 24,
+        issues: [...new Set(issues)], announcements: relevant,
         evidencePaths: [...new Set(actual.flatMap(w => w.evidencePaths))] }
       result.occurrences.push(occurrence)
       for (const code of issues) problem(result, code)
@@ -436,6 +561,9 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       if (result.durationRatio < LISTENING_SEGMENT_RULE.durationRatioMinimum
         || result.durationRatio > LISTENING_SEGMENT_RULE.durationRatioMaximum) problem(result, 'READING_DURATION_CONFLICT')
     }
+    if (result.occurrences.some(o => o.requiresExactCorroboration)) {
+      problem(result, 'FUZZY_ANCHOR_OVERLAP_NEEDS_EXACT_ENGINE')
+    }
     if (result.decision === 'usable' && result.occurrences.length) result.playback = {
       startSeconds: result.occurrences[0].playback.startSeconds,
       endSeconds: result.occurrences.at(-1).playback.endSeconds,
@@ -443,8 +571,12 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     result.independentlyAnchored = result.decision === 'usable'
     return result
   })
+  // Candidate pairing cannot depend on a partial/ambiguous foreign head.
+  // Freeze independently successful groups before applying any neighbor limits.
+  const independent = run()
+  const results = run(independent.filter(g => g.independentlyAnchored))
   if (requireWholePaper) validateListeningOrder(results)
-  return { ruleVersion: LISTENING_SEGMENT_RULE.version, engine, groups: results }
+  return { ruleVersion: LISTENING_SEGMENT_RULE.version, fuzzyAnchors, engine, groups: results }
 }
 
 export function reconcileListeningEngines(apple, whisper) {

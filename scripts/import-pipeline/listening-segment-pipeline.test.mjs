@@ -124,3 +124,26 @@ test('two readings sharing one silence produce nonoverlapping occurrences accept
   assert.ok(review.groups[0].occurrences[0].endSeconds <= review.groups[0].occurrences[1].startSeconds)
   assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
 })
+test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
+  const { options, dir, subject } = workspace(t, fixture)
+  const other = { segmentId: 'listening-text-2', questionNumbers: [2], instruction: '本段读两遍',
+    text: 'Fresh apples grow around this quiet village and our neighbors deliver baskets every summer.' }
+  const groups = [{ ...group, instruction: '本段读两遍' }, other]
+  options.request.transcript = groups
+  subject.transcriptDigest = digestJson(groups)
+  const tokens = other.text.toLowerCase().replace('.', '').split(' ')
+  const primary = JSON.parse(readFileSync(options.appleEvidence, 'utf8'))
+  primary.result.segments.push({ text: other.text, start: 15, end: 18,
+    words: tokens.map((word, i) => ({ word, start: 15 + i * 0.2, end: 15 + (i + 1) * 0.2 })) })
+  writeFileSync(options.appleEvidence, JSON.stringify(primary))
+  const source = JSON.parse(readFileSync(path.join(dir, 'source.json'), 'utf8'))
+  source.listening.transcript = groups
+  writeFileSync(path.join(dir, 'source.json'), JSON.stringify(source))
+  const calls = []
+  segmentListening({ ...options, pauses: [...pauses, { startSeconds: 14, endSeconds: 14.9 },
+    { startSeconds: 18.1, endSeconds: 19 }], runWhisper: args => {
+    calls.push([args.group.segmentId, args.startSeconds, args.endSeconds])
+    throw new Error('frozen fallback intentionally unavailable')
+  } })
+  assert.deepEqual(calls, [['listening-text-1', 0, 30], ['listening-text-2', 0, 30]])
+})

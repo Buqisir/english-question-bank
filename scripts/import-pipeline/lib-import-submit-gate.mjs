@@ -19,35 +19,62 @@ export function importSubmissionIssues({ materialization, listeningReview }) {
   const skip = new Set(['source', 'sources', 'documents', 'media', 'sourceCoverage', 'issues',
     'answers', 'sourceDigest', 'candidateDigest', 'provenance', 'timing'])
   const hasChinese = text => /[\p{Script=Han}]/u.test(text)
-  function visit(node, field = '$', chineseContext = false) {
+  function numbering(text, chunks = null) {
+    return [...text.matchAll(/\(\s*\d{1,3}\s*\)/gu)].filter(match => {
+      // Inspect the neighboring lexical fragment, not all Han characters in a
+      // mixed-language instruction. English quotes remain English fragments.
+      const quote = [...text.matchAll(/“[^”]*”|"[^"]*"|‘[^’]*’|「[^」]*」|『[^』]*』/gu)]
+        .find(q => q.index < match.index && q.index + q[0].length > match.index + match[0].length)
+      if (quote && /[a-z]/iu.test(quote[0]) && !hasChinese(quote[0])) return false
+      let local = text, index = match.index
+      // A lexical inline item owns its language. Number-only runs still obtain
+      // context from the combined stream, including split parentheses.
+      let offset = 0
+      for (const chunk of chunks || []) {
+        if (offset <= match.index && offset + chunk.length >= match.index + match[0].length
+          && /\p{L}/u.test(chunk)) { local = chunk; index -= offset; break }
+        offset += chunk.length
+      }
+      const before = local.slice(0, index).split(/[。！？.!?;；\n]/u).at(-1)
+        .match(/([\p{L}]+)[^\p{L}]*$/u)?.[1] || ''
+      const after = local.slice(index + match[0].length).split(/[。！？.!?;；\n]/u)[0]
+        .match(/^[^\p{L}]*([\p{L}]+)/u)?.[1] || ''
+      const prior = local.slice(0, index).match(/([\p{L}]+)[^\p{L}]*$/u)?.[1] || ''
+      return hasChinese(after || before || prior)
+    })
+  }
+  function visit(node, field = '$') {
     if (typeof node === 'string') {
       // A Chinese instruction may continue on a new line with numbered points.
       // Do not flag a wholly English passage's ordinary parenthesized numbers.
-      if (chineseContext || hasChinese(node)) {
-        const matches = [...node.matchAll(/\(\s*\d{1,3}\s*\)/gu)].map(match => match[0])
-        if (matches.length) issues.push({ code: 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING', field, matches })
-      }
+      const matches = numbering(node).map(match => match[0])
+      if (matches.length) issues.push({ code: 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING', field, matches })
     } else if (Array.isArray(node)) {
       const inline = /\.(?:runs|children|content|points|requirements)$/u.test(field)
       const chunks = inline ? node.map(value => typeof value === 'string' ? value : value?.text || '') : []
       const combined = chunks.join('')
-      if (inline && (chineseContext || hasChinese(combined))) {
-        for (const match of combined.matchAll(/\(\s*\d{1,3}\s*\)/gu)) {
+      if (inline) {
+        for (const match of numbering(combined, chunks)) {
           let offset = 0
           const touched = []
           chunks.forEach((chunk, index) => {
             if (offset < match.index + match[0].length && offset + chunk.length > match.index) touched.push(index)
             offset += chunk.length
           })
-          if (touched.length > 1) issues.push({ code: 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING',
+          if (touched.length) issues.push({ code: 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING',
             field: `${field}[${touched[0]}]${typeof node[touched[0]] === 'string' ? '' : '.text'}`,
             matches: [match[0]] })
         }
       }
-      node.forEach((value, index) => visit(value, `${field}[${index}]`, chineseContext || hasChinese(combined)))
+      node.forEach((value, index) => {
+        if (!inline) visit(value, `${field}[${index}]`)
+        else if (value && typeof value === 'object') {
+          for (const [key, child] of Object.entries(value)) if (key !== 'text' && !skip.has(key)) visit(child, `${field}[${index}].${key}`)
+        }
+      })
     }
     else if (node && typeof node === 'object') {
-      for (const [key, value] of Object.entries(node)) if (!skip.has(key)) visit(value, `${field}.${key}`, chineseContext)
+      for (const [key, value] of Object.entries(node)) if (!skip.has(key)) visit(value, `${field}.${key}`)
     }
   }
   visit(materialization)

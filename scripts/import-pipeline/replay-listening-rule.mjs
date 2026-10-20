@@ -10,6 +10,8 @@ import { listeningReplayDistributions, replayOrderProjection } from './lib-liste
 const read = file => JSON.parse(readFileSync(file, 'utf8'))
 const evaluation = path.resolve(process.argv[2] || '.scratch/asr-eval-20261020')
 const output = path.resolve(process.argv[3] || '.scratch/listening-rule-v2-replay')
+const fuzzyAnchors = process.argv.includes('--no-fuzzy-anchors') ? false
+  : process.argv.includes('--fuzzy-anchors') ? true : LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled
 mkdirSync(output, { recursive: true })
 assertListeningDiskSpace(output)
 const rows = read(path.join(evaluation, 'manifest.json'))
@@ -34,6 +36,7 @@ for (const row of rows) {
     '-f', 'null', '-'], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
   const pauses = silence.status === 0 ? parseListeningPauses(silence.stderr, row.durationSeconds) : []
   const input = { groups: materialization.listening.transcript,
+    questions: materialization.listening.questions, fuzzyAnchors,
     instructions: materialization.sourcePresentation?.instructions || [],
     durationSeconds: row.durationSeconds, pauses }
   const apple = evaluateListeningEngine({ ...input, windows: appleWindows })
@@ -57,7 +60,7 @@ const distribution = values => Object.fromEntries(['usable', 'review_required'].
   values.filter(g => g.decision === decision).length]))
 const reasonCounts = {}
 for (const group of details) for (const issue of group.issues) reasonCounts[issue] = (reasonCounts[issue] || 0) + 1
-const report = { rule: LISTENING_SEGMENT_RULE, groups: details.length, papers: papers.size,
+const report = { rule: { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }, groups: details.length, papers: papers.size,
   scope: '45 cached group crops only; order unavailable is a non-failure statistical status; no import sidecar or playback approval is emitted',
   previousAppleEvaluation: { usable: 44, partial: 1, unusable: 0 },
   distributions: listeningReplayDistributions(details),
