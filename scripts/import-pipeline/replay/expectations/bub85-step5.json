@@ -1,0 +1,965 @@
+{
+  "schemaVersion": "eqb-replay-expectations-v1",
+  "changes": [
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/11/continuationSources",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "after": {
+        "sha256": "03e1bb169c376502f8932324bc449fa104d8dbf96d7aecc78b6306cdfa4d0c30"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/11/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "5de53c0153c93b6a457d747b3cbec68654fecb5e657ee6b65892c34d3b7c675b"
+      },
+      "after": {
+        "sha256": "d59f0c5c7366505a3abb27e35062f0bcce250731c5e771fd4e05068906d85f89"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/12/role",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "53b935f650ece562c12c2c1a5b7485996b098390650fb54b91df5dac87db474a"
+      },
+      "after": {
+        "sha256": "8c65e215f4c741abf66e1f5b3c71602d9498fb179e5cc8d1c65c2cc508edff71"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/12/source/locator/region/height",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "689433ac8efd0c299d6e2a1b85b82e6909b69cbebe5565398cbf8a152959ecc9"
+      },
+      "after": {
+        "sha256": "1ff0c2d4576d1d7a4da2288910f0a43e9a0977422d5ccc137b40e5f7450aa4ae"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/12/source/locator/region/width",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "f584202eb33c285788cb05c31dedb9ef15ff6d6d5b3ca9390178f2e84e043408"
+      },
+      "after": {
+        "sha256": "808f7f51d56139743fc6240576c7f519281fc62f04e3ca52ec6a8ffa532897b0"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/12/source/locator/region/x",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "9c3e86f6ffd31a57ca9248848ba77b09dd6d9c947edfb13491d27672d384ab22"
+      },
+      "after": {
+        "sha256": "b8b510f188d402c33e8987686da7575ec3910ceeacc4851915bb6e93af3a5d1d"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/12/source/locator/region/y",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "d2050b67a4ef844111f93ee335f50c60220c5c519e6cb413d566bb6f9b26a6df"
+      },
+      "after": {
+        "sha256": "97fc224d5d51b7675d5a25df91be8034abb4c01b9db0e24dae7eda624c034159"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/12/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "b400346ad3615778958fbf0b570a67313366ad2956bdce8bc604e54afa713618"
+      },
+      "after": {
+        "sha256": "c2e5fedbb2bd6de12717702c40cf7a971a96041dda1a0c9fd50f8d57aeb44512"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/13/source/locator/region/height",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "1ff0c2d4576d1d7a4da2288910f0a43e9a0977422d5ccc137b40e5f7450aa4ae"
+      },
+      "after": {
+        "sha256": "689433ac8efd0c299d6e2a1b85b82e6909b69cbebe5565398cbf8a152959ecc9"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/13/source/locator/region/width",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "808f7f51d56139743fc6240576c7f519281fc62f04e3ca52ec6a8ffa532897b0"
+      },
+      "after": {
+        "sha256": "2af4dc298a6cabdf6c3c7e7b128f13036595e7c5e1bee229842e8b05c0b775df"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/13/source/locator/region/x",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "b8b510f188d402c33e8987686da7575ec3910ceeacc4851915bb6e93af3a5d1d"
+      },
+      "after": {
+        "sha256": "bb9d5d42125bce1453f34c8d27c460df2576046994fa937aa9d5647d6a220ed8"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/13/source/locator/region/y",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "97fc224d5d51b7675d5a25df91be8034abb4c01b9db0e24dae7eda624c034159"
+      },
+      "after": {
+        "sha256": "78bc970048f3f6e2f4e38fb41564d462a5adac7a69022ef54982c98dbc371dad"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/13/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "c2e5fedbb2bd6de12717702c40cf7a971a96041dda1a0c9fd50f8d57aeb44512"
+      },
+      "after": {
+        "sha256": "b1ab4fc5ac83cdef8300b2d7e6c0df0e2bbcc1c2237851fc051f2569338f9a99"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/14/role",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "8c65e215f4c741abf66e1f5b3c71602d9498fb179e5cc8d1c65c2cc508edff71"
+      },
+      "after": {
+        "sha256": "883c7c27064772c2f6696f48bd2557ccdfec42c9e73170da1c73d5e6038b5e05"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/14/source/locator/region/height",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "689433ac8efd0c299d6e2a1b85b82e6909b69cbebe5565398cbf8a152959ecc9"
+      },
+      "after": {
+        "sha256": "a5875c95e919bd9c27f00f0ac635579441715a72a3d5bf2adc154b0e46f4ba70"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/14/source/locator/region/width",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "2af4dc298a6cabdf6c3c7e7b128f13036595e7c5e1bee229842e8b05c0b775df"
+      },
+      "after": {
+        "sha256": "10e4af61f81667b53498d989fbd693ed41bbf0f8848547c944b4653a6d554d10"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/14/source/locator/region/x",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "bb9d5d42125bce1453f34c8d27c460df2576046994fa937aa9d5647d6a220ed8"
+      },
+      "after": {
+        "sha256": "b5b7de12425e0f822efeff45457d16cd27b27cd851f28a9b7fd972b77c6a918d"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/14/source/locator/region/y",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "78bc970048f3f6e2f4e38fb41564d462a5adac7a69022ef54982c98dbc371dad"
+      },
+      "after": {
+        "sha256": "e596ed4c7418b93113020ae68f1917c358143a1e44c3f9e43d95628eeca22105"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/14/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "b1ab4fc5ac83cdef8300b2d7e6c0df0e2bbcc1c2237851fc051f2569338f9a99"
+      },
+      "after": {
+        "sha256": "8219e0dfa6f90b9734601cfcec05d2fc2dbde06ddf324a1b9672be056840e1fc"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/0/paragraphs/15",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-2025-12-second-joint-survey:writing-application"
+      },
+      "before": {
+        "sha256": "c3e228d9e5ad7712ecb86f4842f835085ba5dc5179acac4956dcfd2b0d374d0a"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/review/1/issue",
+      "target": {
+        "itemId": "official-answers-2:item-39"
+      },
+      "before": {
+        "sha256": "81594aaa7badc3d147ee34f165be69ce6f600eea3007ecee21580e806a45ced4"
+      },
+      "after": {
+        "sha256": "3fcff3ca45e354da7f29620019c424da15f06ef5f277da0fab933b151bbc445c"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/review/1/itemId",
+      "target": {
+        "itemId": "official-answers-2:item-39"
+      },
+      "before": {
+        "sha256": "a152f544e2a3c93e77e6d3d76757345f5bddd02de369d62f603cdd24cccb008a"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/review/1/referenceId",
+      "target": {
+        "itemId": "official-answers-2:item-39"
+      },
+      "before": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "after": {
+        "sha256": "3b21bcb748ba796ff501cb1aa94d095b1fbaefee884b1d012b170d13fd3e5eea"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-2025-12-second-joint-survey",
+      "channel": "R",
+      "path": "/review/2",
+      "target": {
+        "scope": "channel"
+      },
+      "before": {
+        "sha256": "815a9f0a4dc6739f70b1cb09ec19832694ec15bb629f49ac6c8bb900249e71cb"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/continuationSources",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation"
+      },
+      "before": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "after": {
+        "sha256": "624f2b7004c86d883020f528c61fc7f7e74aaff52b45ff59290ee16c88178b28"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 3→4; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/text",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation"
+      },
+      "before": {
+        "sha256": "ab7e666258ec65b982b05669de3d23c9f8ad7fef1f772c9f2b44c9f09d422267"
+      },
+      "after": {
+        "sha256": "3af4027755e64cf4140c3e0b98aa3c75df1fd91cd35ad3001c260851d5b941d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 3→4; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/2",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam:writing-continuation"
+      },
+      "before": {
+        "sha256": "1ac4672dfd3ecabe1e9f53cfd86581137e3a2a614914bc2a5841fcec1b3d405b"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 3→4; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+      "channel": "R",
+      "path": "/review/1/issue",
+      "target": {
+        "itemId": "official-answers-2:item-154"
+      },
+      "before": {
+        "sha256": "81594aaa7badc3d147ee34f165be69ce6f600eea3007ecee21580e806a45ced4"
+      },
+      "after": {
+        "sha256": "dff538159537221382ff1eab86319d51430fe4c0c70a8990c264803411dbfd56"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 3→4; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+      "channel": "R",
+      "path": "/review/1/itemId",
+      "target": {
+        "itemId": "official-answers-2:item-154"
+      },
+      "before": {
+        "sha256": "c1e587a0df6e407a94d254995ff66d6c01ef270094d1ebdcca96b0e5d8173670"
+      },
+      "after": {
+        "sha256": "f187f48329ec1347adb2549cb05b5286f89a5dcc2f8d818e442c63660aaebd56"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 3→4; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-six-school-alliance-2026-05-may-joint-exam",
+      "channel": "R",
+      "path": "/review/2",
+      "target": {
+        "itemId": "official-answers-2:item-156"
+      },
+      "before": {
+        "sha256": "dad18a3393f1f083af02ac4716fcb931a7e4912762b6c05d0c254e859ab5f9da"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 3→4; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/0/continuationSources",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "after": {
+        "sha256": "6609a35de5196d975e7e18597d8e96f5c34bba0544a58d30f42aa6055df7cfb7"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/0/text",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "09811cc314385294f0e99488e6af8e8d8cdf7e286cc9b1de15f3157cccf1ed20"
+      },
+      "after": {
+        "sha256": "ad53de78c5f9367119bf02987f054aec8be01079578843f9a9d1c229d9465b05"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/source/locator/region/height",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "976dcf0bdff787bdf547d710f5ec33cf4414c77f45ab4774949fca12ae7a2c3a"
+      },
+      "after": {
+        "sha256": "2c399637f03ab260667acfadde68f1452f408f4b5f40843da569fd099edbe5c1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/source/locator/region/width",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "15d599cfb04cb4b2af74e97265432d076627ec617fde9bf70ab29a3836e924a3"
+      },
+      "after": {
+        "sha256": "2cd9a3dfaf46da41b449595a7dcb649b20b8c90a7fcbca8ffd2968e1370bf50b"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/source/locator/region/x",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "a8f8e652e8f4728a0cf622a151e53b1e9603f74172c0d9caa286021cfae25b34"
+      },
+      "after": {
+        "sha256": "b9c33966b850a4202d958697b5fe9c12d8d0646d4fae6ab17ee5ac4fb5afb826"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/source/locator/region/y",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "ffd537e4a9b3b1940942841353419f2b9ae6608f66f8aa28b0f17562e8b1547c"
+      },
+      "after": {
+        "sha256": "2f270d602def13dee2ad2875048b9d2fd16c294b7a1ae185bc8c5554d39272f4"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/text",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "f3532d50c4986207598c4f7b1c7f5f7c7751ef4c70ec046107834adc96a6e934"
+      },
+      "after": {
+        "sha256": "ac904859dde9a5b0826cd4eeecb5b9e59b3fa0bd3d579ce1d3d10d8fa0c3e9bb"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/2",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-ningbo-2025-11-first-mock:writing-continuation"
+      },
+      "before": {
+        "sha256": "ba47d6dc63ce02ddfdc90714a7a9ab2a19deeedf02d39ca2b71a41fdb47700a4"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-ningbo-2025-11-first-mock",
+      "channel": "R",
+      "path": "/review/0",
+      "target": {
+        "itemId": "official-answers-2:item-37"
+      },
+      "before": {
+        "sha256": "54c1f6caf3abe1b5231daaa1a3fbad94e1a491af4122bb3669947494c019525b"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84: join the essay sentence across answer-book pages 1→2; retain both page regions, renumber subsequent paragraphs and remove the resolved page-turn review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/1/paragraphs/0/continuationSources",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation"
+      },
+      "before": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "after": {
+        "sha256": "ecbb619ec4c21e2c543570138fb56fb15f067f1a9f8c5955e20e9d548a8c0be2"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/1/paragraphs/0/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation"
+      },
+      "before": {
+        "sha256": "2d7b2c0b81d60e69404664f42c75c178d472625a1c2498ef7269ecb5227e70a0"
+      },
+      "after": {
+        "sha256": "1e5ae6f942dbc2c9692c97f7e1670b4b4a19f1e836c23a2fe79cc4f0507be49f"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/1/paragraphs/1/source/locator/region/height",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation"
+      },
+      "before": {
+        "sha256": "30ffd3aa3cc03d7e54142a02a314f161773a202c911e074f14d861efb055ef41"
+      },
+      "after": {
+        "sha256": "da6896c49e838ea603433e239f6976eaa02229709c7131ee53897873cdd6cdb4"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/1/paragraphs/1/source/locator/region/y",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation"
+      },
+      "before": {
+        "sha256": "0a0e43cba86e46516a74bd58d0e24febcd8e00b29e873470a4230dd549840349"
+      },
+      "after": {
+        "sha256": "0ac9958d478c8ae51cb5b235bb5287c979e61e25a7cb6eb0660900c7103fb4a8"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/1/paragraphs/1/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation"
+      },
+      "before": {
+        "sha256": "9d6cb5216d0f58345949f2e506fbd5ec0496fa1f180355d6e857524b56f85934"
+      },
+      "after": {
+        "sha256": "80278155e5cf6464434e980490bb321267e7e98b3cf829c0b350a63a56c2afe5"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/1/paragraphs/2",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shantou-2026-01-final:writing-continuation"
+      },
+      "before": {
+        "sha256": "dc604142a920e8f88cc7db9b8cbdebb937e2e27ddc8386b00f91f8534dd240a0"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/review/4/issue",
+      "target": {
+        "itemId": "official-answers-2:item-152"
+      },
+      "before": {
+        "sha256": "81594aaa7badc3d147ee34f165be69ce6f600eea3007ecee21580e806a45ced4"
+      },
+      "after": {
+        "sha256": "009c290899e62379acd31367bf2b7d987b12716656475debe4460112c445d385"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/review/4/itemId",
+      "target": {
+        "itemId": "official-answers-2:item-152"
+      },
+      "before": {
+        "sha256": "a53d888b92c937c7aa90d7d4a144b1925b047af879d96e9e494c9df0d4224823"
+      },
+      "after": {
+        "sha256": "971d15c98eece1a5a040428d8ad5113749079053392474c08294b7d41feecd6e"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shantou-2026-01-final",
+      "channel": "R",
+      "path": "/review/5",
+      "target": {
+        "itemId": "official-answers-2:item-161"
+      },
+      "before": {
+        "sha256": "6902e8b922ddb2c1a70c5742fae200d7e2e435b088e651e9f7b389fcda5a6075"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 4→5: \"!” Jack caught up immediately, eyes fixed on the\" / \"watch’s real-time data. But he soon grew exhaust\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/2/continuationSources",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "after": {
+        "sha256": "04667049d4eb0b4a961754db34c7b35f4bf2980d54cc3711a0c67fd5fa66ba43"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/2/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "89cb8bb8e049b24d0f2d9c8f3f37e3c0b16ea6e022c2dfb8c4f457be1cf3ca6d"
+      },
+      "after": {
+        "sha256": "7844276f7e92f952db6755ef80713f52334f80ec46dbf10f955d8af55230db09"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/3/source/locator/region/height",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "edc15e967368738f572cc9922c0c270bcc8a01cf942a52bce521455abf3dc9bd"
+      },
+      "after": {
+        "sha256": "88998da9c17dcc70da278a3966ca25151ffe163d637cb9a91b4dd4e846bec707"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/3/source/locator/region/width",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "16d7a8f34d2fd3afeb3b37ced307d791d77610e9f7ba42b80e04f3776e9b4129"
+      },
+      "after": {
+        "sha256": "2c0168628811d9010d6c78e17118bc21f1ca904446fcffb98470e6c9a0c2fbfc"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/3/source/locator/region/x",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "9c3e86f6ffd31a57ca9248848ba77b09dd6d9c947edfb13491d27672d384ab22"
+      },
+      "after": {
+        "sha256": "22329670ac2a34ca48edaa69138c36cabd625a6ae57ee498578083d8e9f78e4a"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/3/source/locator/region/y",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "affb84520c768482e9dbe34a48bc26f2a640df57141d45f37ac28320349550da"
+      },
+      "after": {
+        "sha256": "3067f5a6963e3fc696eb8429c43d990477ec2f99db9aedc7a9d028f7e45595bd"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/3/text",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "cefd2e2584fbb03756a34531155b17134a77a5e7516fee4c2550f11032abb251"
+      },
+      "after": {
+        "sha256": "b0cbf7f88f4d6fcaa20a0db222bce93d3c0d08600be1d046c65a17688683b6e1"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/groups/0/essays/entries/2/paragraphs/4",
+      "target": {
+        "groupId": "group:paper-mock-guangdong-shenzhen-2026-04-second:writing-application"
+      },
+      "before": {
+        "sha256": "5371642ec57c14ed8e421dc678aebe7965a3ddedab9496d59c326dc0943844d6"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-guangdong-shenzhen-2026-04-second",
+      "channel": "R",
+      "path": "/review/2",
+      "target": {
+        "itemId": "official-answers-2:item-38"
+      },
+      "before": {
+        "sha256": "db614d3c28f18034d17877f7616a7e607ff65f000906e4dfe0fc0d5d17803052"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"love for these feathered friends and deepen your\" / \"appreciation for campus biodiversity.\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/0/continuationSources",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation"
+      },
+      "before": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "after": {
+        "sha256": "3f888e0837e1d997dadc46c0981e4d40368d3aa958769733a93c61f6c9064c34"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"his chest and pushed hard, just like the teacher\" / \"showed us. “One, two, three, four…” I counted in\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/0/text",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation"
+      },
+      "before": {
+        "sha256": "9fd6e7947b6d37e7c795b4f45b172eba5a8a74fea9d6d68ea836854a45494eab"
+      },
+      "after": {
+        "sha256": "990769fd63faed4c322a0b0f38407cfd88d9bb842afe81a1dd5fef5a63c5e202"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"his chest and pushed hard, just like the teacher\" / \"showed us. “One, two, three, four…” I counted in\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/source/locator/region/height",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation"
+      },
+      "before": {
+        "sha256": "00332d4b18ca96648d2f88df72170ccaf8c5874ba9ea8287d8409fd9489ef7c1"
+      },
+      "after": {
+        "sha256": "19ddf4669b689ab26ec77f4d77d610069fed785d7a841e7f58a7c963f80d442b"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"his chest and pushed hard, just like the teacher\" / \"showed us. “One, two, three, four…” I counted in\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/source/locator/region/y",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation"
+      },
+      "before": {
+        "sha256": "ded1586239d4d3a51469084a7fc7cd604c60ac5e314169d0b4673ac0a777bc3a"
+      },
+      "after": {
+        "sha256": "44ee1ef0d55b0d58764c0edbc489c9a5922cfa08a6953ec07cde27d1620caa89"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"his chest and pushed hard, just like the teacher\" / \"showed us. “One, two, three, four…” I counted in\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/1/text",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation"
+      },
+      "before": {
+        "sha256": "4512bde012d6eb9e2771c6ab0efc0e5a08e08de5c427b852320075bb36b56369"
+      },
+      "after": {
+        "sha256": "4e0c0ad04c1d5d2c8f556c840c9bace777e8217d68ec81a6538146fad3b32f74"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"his chest and pushed hard, just like the teacher\" / \"showed us. “One, two, three, four…” I counted in\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+      "channel": "R",
+      "path": "/groups/1/essays/entries/0/paragraphs/2",
+      "target": {
+        "groupId": "group:paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test:writing-continuation"
+      },
+      "before": {
+        "sha256": "2d4c43052f955494be7e04270d7735e2bd2baef875f713344ea74e8609205ecf"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"his chest and pushed hard, just like the teacher\" / \"showed us. “One, two, three, four…” I counted in\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    },
+    {
+      "paperId": "paper-mock-zhejiang-zhenhai-2026-05-31-gaokao-mock-test",
+      "channel": "R",
+      "path": "/review/0",
+      "target": {
+        "itemId": "official-answers-2:item-37"
+      },
+      "before": {
+        "sha256": "54c1f6caf3abe1b5231daaa1a3fbad94e1a491af4122bb3669947494c019525b"
+      },
+      "after": {
+        "sha256": "398b676e47d03a29016ee92fe378b8b4f1b3e965390c4c64ce78d27f79df74d1"
+      },
+      "reason": "BUB-84 additional corpus hit, visually verified on original answer-book pages 1→2: \"his chest and pushed hard, just like the teacher\" / \"showed us. “One, two, three, four…” I counted in\". Exact same-document/SHA essay-body merge; preserve both page regions and remove only the resolved review."
+    }
+  ]
+}

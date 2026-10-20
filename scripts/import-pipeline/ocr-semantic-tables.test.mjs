@@ -64,11 +64,12 @@ test('table cell identities survive active transcript joining unchanged', () => 
   assert.deepEqual(result.items, items)
 })
 
-test('captures a scoring table in v2 with 14 distinct PDF locators, keeping essays separate', () => {
+for (const crossPage of [false, true]) test(
+  `captures a scoring table in v2 with 14 distinct PDF locators and ${crossPage ? 'a cross-page' : 'a single-page'} essay`, () => {
   const { items, draft, context } = fixture()
   const [table] = compileSemanticTables(draft, items, context)
   const texts = ['第二节 读后续写', '一、评分原则', '按档次评分。',
-    ...items.map(item => item.text), 'One possible version:', 'A source sample.']
+    ...items.map(item => item.text), 'One possible version:', crossPage ? 'A source sample that' : 'A source sample.']
   const orderedItems = texts.map((text, index) => index >= 3 && index < 17
     ? items[index - 3] : { itemId: `outside-${index}`, observationIds: [`outside-word-${index}`], text })
   const observations = orderedItems.map((item, index) => ({
@@ -79,20 +80,35 @@ test('captures a scoring table in v2 with 14 distinct PDF locators, keeping essa
   const materialization = {
     paperId: 'paper-table-test',
     documents: [{ documentId: 'answers', role: 'official_answers',
-      sha256: `sha256:${'a'.repeat(64)}`, mediaType: 'application/pdf', pageCount: 1 }],
+      sha256: `sha256:${'a'.repeat(64)}`, mediaType: 'application/pdf', pageCount: crossPage ? 2 : 1 }],
     groups: [{ groupId: 'continuation', writingTask: { taskType: 'continuation' } }],
   }
+  const continuationRegion = { x: .1, y: .1, width: .15, height: .02 }
   const { groups, structuredScoring } = buildSourceReferences(materialization,
-    { documents: [{ documentId: 'answers', pages: [{ observations }] }] },
+    { documents: [{ documentId: 'answers', pages: [{ observations }, ...(crossPage ? [{
+      observations: [{ observationId: 'continued-word', region: continuationRegion }],
+    }] : [])] }] },
     { documents: [{ documentId: 'answers', pages: [{ page: 1, orderedItems,
-      visualClassifications: [table.visual] }] }] })
+      visualClassifications: [table.visual] }, ...(crossPage ? [{
+      page: 2, orderedItems: [{ itemId: 'continued-item', observationIds: ['continued-word'], text: 'continues on another page.' }],
+    }] : [])] }] })
   assert.equal(structuredScoring, true)
   const blocks = groups[0].scoring.entries[0].blocks
   assert.deepEqual(blocks.map(block => block.kind), ['paragraph', 'table'])
   assert.equal(blocks[1].rows.length, 7)
   assert.equal(new Set(blocks[1].rows.flat().map(cell => JSON.stringify(cell.source.locator))).size, 14)
   assert.deepEqual(blocks[1].rows[6].map(cell => cell.text), ['零分', '抄原文，未作答，跑题。'])
-  assert.deepEqual(groups[0].essays.entries[0].paragraphs.map(p => p.text), ['A source sample.'])
+  const essayParagraphs = groups[0].essays.entries[0].paragraphs
+  assert.deepEqual(essayParagraphs.map(p => p.text), [
+    crossPage ? 'A source sample that continues on another page.' : 'A source sample.',
+  ])
+  assert.deepEqual(essayParagraphs[0].source.locator, {
+    kind: 'page_region', documentId: 'answers', page: 1, region: observations.at(-1).region,
+  })
+  assert.deepEqual(essayParagraphs[0].continuationSources, crossPage ? [{
+    documentSha256: materialization.documents[0].sha256,
+    locator: { kind: 'page_region', documentId: 'answers', page: 2, region: continuationRegion },
+  }] : undefined)
   const sourceDigest = `sha256:${'b'.repeat(64)}`, candidateDigest = `sha256:${'c'.repeat(64)}`
   assert.deepEqual(validateSourceReferences({ materialization, sourceDigest, candidateDigest, sidecar: {
     schemaVersion: 'source-references-v2', paperId: materialization.paperId,

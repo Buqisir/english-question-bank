@@ -115,7 +115,8 @@ function runnerFixture(fault = '') {
 import { writeFileSync } from 'node:fs'
 export function buildSourceReferences(materialization) {
   if (materialization.paperId === 'paper-b') { ${fault} }
-  return { groups: [], review: [] }
+  // Match the production format flag so paper-a isolates the paper-b protocol fault.
+  return { groups: [], review: [], structuredScoring: false }
 }
 export function* buildTranscriptJoinDocuments() {}
 function pageLines() {}

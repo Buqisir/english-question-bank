@@ -1110,6 +1110,8 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
   const pages = confirmation.documents.find((document) => document.documentId === answerDocument.documentId).pages
   const lines = []
   const review = []
+  const sourceOrder = new WeakMap()
+  const furniture = new WeakSet()
   const lineFacts = new WeakMap()
   const factsFor = line => {
     if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
@@ -1146,6 +1148,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       const facts = factsFor(line)
       line.left = facts.left
       line.right = facts.right
+      sourceOrder.set(line, lines.length)
       lines.push(line)
     }
   }
@@ -1175,6 +1178,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       continue
     }
     if (firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
+      furniture.add(line)
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
       continue
     }
@@ -1233,6 +1237,10 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     let previous = null
     let previousLocation = null
     const capture = createReferenceCapture()
+    const pageSource = pageLines => ({ documentSha256, locator: {
+      kind: 'page_region', documentId: answerDocument.documentId, page: pageLines[0].page,
+      region: unionRegion(pageLines.flatMap(line => line.boxes)),
+    } })
     const flush = () => { if (paragraph) { entry.paragraphs.push(paragraph); paragraph = null } }
     const skip = (line, reason) => {
       flush()
@@ -1293,6 +1301,11 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
         geometry: { unit: 'normalized', margin, previousMargin: previous ? margins.get(previous.page) : margin },
         roles: { hasParagraph: Boolean(paragraph), special, afterClosing,
           numbered: matchesLineRole('paragraph.numbered', facts) },
+        referenceContext: { entryKind: entry.kind,
+          before: previous ? pageSource([lines[previous.sourceIndex]]) : null,
+          after: pageSource([line]),
+          furnitureOnly: Boolean(previous && sourceOrder.get(line) > previous.sourceIndex
+            && lines.slice(previous.sourceIndex + 1, sourceOrder.get(line)).every(item => furniture.has(item))) },
         location: { before: previousLocation,
           after: { documentId: answerDocument.documentId, page: line.page, itemId: line.itemId } },
       })
@@ -1302,7 +1315,8 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
         paragraph = { role: special || (afterClosing ? 'signature' : 'body'), lines: [] }
       }
       paragraph.lines.push(line)
-      previous = { role: paragraph.role, right: line.right, page: line.page }
+      previous = { role: paragraph.role, right: line.right, page: line.page,
+        text: line.text, sourceIndex: sourceOrder.get(line) }
       previousLocation = decision.location.after
     }
     flush()
@@ -1316,13 +1330,22 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
           locator: { kind: 'page_region', documentId: answerDocument.documentId, page: page.page, region: { ...FULL_PAGE } } })) }
       }
       return { state: 'captured', evidence: [], entries: list.map(({ kind: _kind, paragraphs, ...rest }) => {
-        const blocks = paragraphs.map((item, index) => item.table || ({ kind: 'paragraph', paragraph: {
-          paragraphId: `${rest.referenceId}-p${index + 1}`,
-          role: item.role,
-          text: joinLines(item.lines.map((line) => line.text)),
-          source: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
-            page: item.lines[0].page, region: unionRegion(item.lines.flatMap((line) => line.boxes)) } },
-        } }))
+        const blocks = paragraphs.map((item, index) => {
+          if (item.table) return item.table
+          const byPage = new Map()
+          for (const line of item.lines) {
+            if (!byPage.has(line.page)) byPage.set(line.page, [])
+            byPage.get(line.page).push(line)
+          }
+          const sources = [...byPage.values()].map(pageSource)
+          return { kind: 'paragraph', paragraph: {
+            paragraphId: `${rest.referenceId}-p${index + 1}`,
+            role: item.role,
+            text: joinLines(item.lines.map((line) => line.text)),
+            source: sources[0],
+            ...(sources.length > 1 ? { continuationSources: sources.slice(1) } : {}),
+          } }
+        })
         return { ...rest, ...(kind === 'scoring' && structuredScoring
           ? { blocks } : { paragraphs: blocks.map(block => block.paragraph) }) }
       }) }

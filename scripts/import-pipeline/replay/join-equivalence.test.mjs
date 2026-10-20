@@ -181,7 +181,9 @@ for (const { name, channel, input, check } of cases) {
   test(`join cross-commit equivalence: ${name}`, () => {
     const expected = capture(baseline, channel, input)
     check(expected) // Guard against a vacuous comparison of two equally wrong/unused fixtures.
-    assert.deepEqual(capture(candidate, channel, input), expected)
+    // The historical R entry predates the scoring-format flag; these fixtures have no tables.
+    assert.deepEqual(capture(candidate, channel, input),
+      channel === 'R' ? { ...expected, structuredScoring: false } : expected)
   })
 }
 
@@ -191,6 +193,7 @@ test('4b behavior fix: a short line followed by lowercase text splits into two l
   assert.equal(paragraphs(before).length, 1)
   assert.equal(paragraphs(before)[0].text, 'They left early and returned the next morning.')
   const expected = structuredClone(before)
+  expected.structuredScoring = false
   const original = paragraphs(before)[0]
   const entry = expected.groups[0].essays.entries[0]
   entry.paragraphs = ['They left early', 'and returned the next morning.'].map((text, index) => ({
@@ -207,6 +210,7 @@ test('4b behavior fix: previous-page margin restores cross-page review without c
   assert.deepEqual(paragraphs(before).map(p => p.source.locator.page), [1, 2])
   assert.deepEqual(before.review, [])
   const expected = structuredClone(before)
+  expected.structuredScoring = false
   expected.review = [{ itemId: 'p2-i0',
     issue: 'paragraph continues across a page turn; split into two located paragraphs' }]
   assert.deepEqual(capture(candidate, 'R', input), expected)

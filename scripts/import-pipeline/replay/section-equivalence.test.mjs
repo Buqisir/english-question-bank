@@ -58,6 +58,8 @@ for (const { name, taskType, texts, reviews } of boundaries) {
     assert.equal(expected.status, 0)
     assert.equal(expected.output.groups[0].essays.entries.length, 2)
     assert.equal(expected.output.review.length, reviews)
+    // The historical entry predates this flag; successful fixtures contain no scoring tables.
+    expected.output.structuredScoring = false
     // Compare every field, including review, IDs, text and source locators.
     assert.deepEqual(capture(candidate, input), expected)
   })
@@ -77,5 +79,6 @@ test('cross-commit equivalence: full-width colon enters writing before trailing-
   const expected = capture(baseline, input)
   assert.equal(expected.status, 0)
   assert.deepEqual(expected.output.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
+  expected.output.structuredScoring = false
   assert.deepEqual(capture(candidate, input), expected)
 })

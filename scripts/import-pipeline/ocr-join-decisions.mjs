@@ -18,6 +18,8 @@ import { matchesLineRole, speakerLabel } from './ocr-line-roles.mjs'
  * @property {{hasParagraph?: boolean, special?: string|null, afterClosing?: boolean, numbered?: boolean,
  *   turnContinuation?: boolean, noteContinuation?: boolean, noteStart?: boolean, multiline?: boolean}} roles
  * @property {{before: object|null, after: object}} location Source item/page or draft line/word references.
+ * @property {{entryKind: string, before: object|null, after: object, furnitureOnly: boolean}} [referenceContext]
+ *   Exact source identities and the unfiltered source-order gap, supplied by reference capture.
  */
 /**
  * @typedef {object} JoinDecision
@@ -40,13 +42,47 @@ export function referenceBoundaryFromFacts(previous, facts, margin, previousMarg
   return { indented, pageTurn, previousShort, continues }
 }
 
-function referencePolicy({ previous, current, geometry, roles, location }) {
+// A separate cross-page rule: ordinary same-page wrapping never grants this
+// authority. Missing facts are uncertainty, not evidence for a continuation.
+function referenceCrossPageRule({ previous, current, geometry, roles, referenceContext }, boundary) {
+  if (!referenceContext || referenceContext.entryKind !== 'essays' || !roles.hasParagraph
+    || previous?.role !== 'body' || roles.special || roles.afterClosing || roles.numbered
+    || !current.startsLower) return null
+  const { before, after, furnitureOnly } = referenceContext
+  const sameSource = before?.locator && after?.locator && before.documentSha256 === after.documentSha256
+    && before.locator.documentId === after.locator.documentId
+  if (!boundary.pageTurn && sameSource) return null
+  const pageRegion = source => source?.locator?.kind === 'page_region'
+    && /^sha256:[a-f0-9]{64}$/u.test(source.documentSha256)
+    && Number.isInteger(source.locator.page) && source.locator.page > 0
+  const previousMargin = geometry.previousMargin
+  const fullLine = Number.isFinite(previous.right) && Number.isFinite(previousMargin?.right)
+    && previous.right >= previousMargin.right - .06
+  const currentMarginKnown = Number.isFinite(geometry.margin?.left) && Number.isFinite(current.left)
+  // Inspect a copy: OCR may space out punctuation and nested closing marks.
+  // Only a word ending proves an unfinished tail; sentence stops, deferred
+  // punctuation (commas/hyphens etc.) and unknown suffixes all stay split.
+  const previousTail = typeof previous.text === 'string'
+    ? previous.text.replace(/[\s"'”’»)\]）】」』]+$/u, '') : ''
+  const unfinished = /[\p{L}\p{N}]$/u.test(previousTail)
+  const proven = sameSource && pageRegion(before) && pageRegion(after)
+    && before.locator.page === previous.page && after.locator.page === current.page
+    && after.locator.page === before.locator.page + 1
+    && fullLine && currentMarginKnown && !boundary.indented && unfinished && furnitureOnly === true
+  return { resolution: proven ? 'join' : 'separate',
+    reason: proven ? 'reference.cross-page-continuation' : 'reference.cross-page-uncertain' }
+}
+
+function referencePolicy(input) {
+  const { previous, current, geometry, roles, location } = input
   const boundary = referenceBoundaryFromFacts(previous, current, geometry.margin, geometry.previousMargin)
+  const crossPage = referenceCrossPageRule(input, boundary)
   const { indented, previousShort, pageTurn, continues } = boundary
   const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues
     && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered))
   const reviews = []
-  if (pageTurn && !roles.special && !roles.afterClosing && !indented && !previousShort) {
+  if (crossPage?.resolution === 'separate'
+    || (!crossPage && pageTurn && !roles.special && !roles.afterClosing && !indented && !previousShort)) {
     reviews.push({ itemId: location.after.itemId,
       issue: 'paragraph continues across a page turn; split into two located paragraphs' })
   }
@@ -57,7 +93,8 @@ function referencePolicy({ previous, current, geometry, roles, location }) {
       : previous.role !== 'body' ? 'reference.role-boundary' : indented ? 'reference.indented'
         : previousShort ? 'reference.previous-short' : pageTurn ? 'reference.page-turn'
           : roles.numbered ? 'reference.numbered' : 'reference.body-wrap'
-  return { resolution: starts ? 'separate' : 'join', reason, reviews, boundary }
+  return { resolution: crossPage?.resolution || (starts ? 'separate' : 'join'),
+    reason: crossPage?.reason || reason, reviews, boundary }
 }
 
 // Speech and glosses share the pixel wrap proof, but their text glue and
