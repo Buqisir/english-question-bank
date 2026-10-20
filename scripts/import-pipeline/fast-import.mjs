@@ -763,9 +763,10 @@ async function sourceReferences(ctx) {
   const outline = await run(ctx, 'references', cli('ocr-proofread.mjs', 'references', ctx.paperId))
   const request = path.join(ctx.fast, 'source-references-request.json')
   archive(ctx, request)
-  await run(ctx, 'answer-products-prepare', cli('answer-products.mjs', 'prepare', '--paper-dir', ctx.paperDir, '--output', request))
-  const template = readJson(request).template
   const draft = readJson(path.join(ctx.work, 'source-references-draft.json'))
+  await run(ctx, 'answer-products-prepare', cli('answer-products.mjs', 'prepare', '--paper-dir', ctx.paperDir,
+    '--output', request, ...(draft.schemaVersion === 'source-references-v2' ? ['--structured-scoring'] : [])))
+  const template = readJson(request).template
   const input = path.join(ctx.fast, 'source-references-input.json')
   archive(ctx, input)
   writeJson(input, { ...draft, sourceDigest: template.sourceDigest, candidateDigest: template.candidateDigest,

@@ -41,6 +41,7 @@ import { LINE_ROLE_RULES, matchesLineRole, firstLineRole,
   inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches } from './ocr-line-roles.mjs'
 import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
+import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -425,6 +426,13 @@ export function joinTranscriptTurns(items, lines, state, label, sourceLocation =
   let previousSpeech = false
   let previousNote = false
   for (const [index, sourceItem] of items.entries()) {
+    // Cell identities must survive transcript processing unchanged.
+    if (sourceItem.cell) {
+      out.push(sourceItem)
+      previousSpeech = false
+      previousNote = false
+      continue
+    }
     // Proofreaders can restore a missing printed gloss line inside one item.
     const noteStart = matchesLineRole('transcript.note-start', factsForItem(sourceItem), state)
     const inlineDecision = decideLineJoin({
@@ -785,7 +793,11 @@ function compile(paperId) {
       for (const word of tracePage.words) {
         if (!claimed.has(word.number)) problems.push(`${label}: w${word.number} "${word.text}" is unclaimed`)
       }
-      const visualClassifications = []
+      const tables = compileSemanticTables(draft, resolvedItems, {
+        documentId: document.documentId, page: tracePage.page, ...pngSize(tracePage.imagePath),
+      })
+      figures.push(...tables.map(({ visual: _visual, ...table }) => ({ key: label, ...table })))
+      const visualClassifications = tables.map(table => table.visual)
       for (let start = 0; start < resolvedItems.length; start += 1) {
         const name = resolvedItems[start].figure
         if (!name || resolvedItems[start - 1]?.figure === name) continue
@@ -1105,9 +1117,32 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
   }
   for (const page of pages) {
     const observations = new Map(evidencePages[page.page - 1].observations.map((item) => [item.observationId, item]))
+    const tableStarts = new Map()
+    const tableItems = new Set()
+    const items = new Map(page.orderedItems.map(item => [item.itemId, item]))
+    for (const visual of page.visualClassifications || []) {
+      if (visual.classification !== 'semantic_table') continue
+      const ids = visual.rows.flatMap(row => row.cells.flat())
+      ids.forEach(id => tableItems.add(id))
+      tableStarts.set(ids[0], {
+        kind: 'table', tableId: `source-${visual.regionId.replace(/:/gu, '-')}`,
+        rows: visual.rows.map((row, r) => row.cells.map((cell, c) => {
+          const selected = cell.map(id => items.get(id))
+          return {
+            cellId: `source-${visual.regionId.replace(/:/gu, '-')}-r${r}-c${c}`,
+            text: selected.map(item => item.text).join('\n'),
+            source: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
+              page: page.page, region: unionRegion(selected.flatMap(item =>
+                item.observationIds.map(id => observations.get(id)))) } },
+          }
+        })),
+      })
+    }
     for (const item of page.orderedItems) {
+      if (tableItems.has(item.itemId) && !tableStarts.has(item.itemId)) continue
       const boxes = item.observationIds.map((id) => observations.get(id))
-      const line = { itemId: item.itemId, page: page.page, text: item.text, boxes }
+      const line = { itemId: item.itemId, page: page.page, text: item.text, boxes,
+        ...(tableStarts.has(item.itemId) ? { table: tableStarts.get(item.itemId) } : {}) }
       const facts = factsFor(line)
       line.left = facts.left
       line.right = facts.right
@@ -1123,9 +1158,16 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     edgeTexts.get(text).add(line.page)
   }
   const sections = new Map()
+  const structuredScoring = pages.some(page =>
+    page.visualClassifications?.some(visual => visual.classification === 'semantic_table'))
   const scope = createWritingScope(sections)
   for (const [lineIndex, line] of lines.entries()) {
     if (scope.ended) break
+    if (line.table) {
+      if (!scope.current) fail(`Source table ${line.table.tableId} has no writing-task scope`)
+      scope.current.lines.push(line)
+      continue
+    }
     const facts = factsFor(line)
     if (matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
       scope.end()
@@ -1202,6 +1244,14 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     }
     for (const line of section.lines) {
       if (capture.ended) break
+      if (line.table) {
+        if (entry?.kind !== 'scoring') fail(`Source table ${line.table.tableId} is outside a scoring entry`)
+        flush()
+        entry.paragraphs.push({ table: line.table })
+        previous = null
+        previousLocation = null
+        continue
+      }
       const facts = factsFor(line)
       // Student scripts end only this task's official-reference capture.
       if (matchesLineRole('writing.student-script', facts)) {
@@ -1265,20 +1315,21 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
         return { state: 'not_supplied', entries: [], evidence: pages.map((page) => ({ documentSha256,
           locator: { kind: 'page_region', documentId: answerDocument.documentId, page: page.page, region: { ...FULL_PAGE } } })) }
       }
-      return { state: 'captured', evidence: [], entries: list.map(({ kind: _kind, paragraphs, ...rest }) => ({
-        ...rest,
-        paragraphs: paragraphs.map((item, index) => ({
+      return { state: 'captured', evidence: [], entries: list.map(({ kind: _kind, paragraphs, ...rest }) => {
+        const blocks = paragraphs.map((item, index) => item.table || ({ kind: 'paragraph', paragraph: {
           paragraphId: `${rest.referenceId}-p${index + 1}`,
           role: item.role,
           text: joinLines(item.lines.map((line) => line.text)),
           source: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
             page: item.lines[0].page, region: unionRegion(item.lines.flatMap((line) => line.boxes)) } },
-        })),
-      })) }
+        } }))
+        return { ...rest, ...(kind === 'scoring' && structuredScoring
+          ? { blocks } : { paragraphs: blocks.map(block => block.paragraph) }) }
+      }) }
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  return { groups, review }
+  return { groups, review, structuredScoring }
 }
 
 // Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
@@ -1290,9 +1341,9 @@ function references(paperId) {
   const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
   const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
   const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
-  const { groups, review } = buildSourceReferences(materialization, evidence, confirmation)
+  const { groups, review, structuredScoring } = buildSourceReferences(materialization, evidence, confirmation)
   const output = path.join(work, 'source-references-draft.json')
-  writeJson(output, { schemaVersion: 'source-references-v1', paperId, sourceDigest: null, candidateDigest: null,
+  writeJson(output, { schemaVersion: structuredScoring ? 'source-references-v2' : 'source-references-v1', paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups })
   console.log(JSON.stringify({
     ok: true,

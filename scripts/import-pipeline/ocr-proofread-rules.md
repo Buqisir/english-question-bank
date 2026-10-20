@@ -66,6 +66,15 @@
 
 ## 图片与图表
 
+未合并、未嵌套、无单元格强调的语义表格用独立文字 item 逐格转写，给每个 item 唯一的
+`cell` 名称；不要标 `figure`。页面顶层 `semanticTables` 显式声明像素区域、行列和表头：
+`[{"name":"scoring","region":{"x":100,"y":200,"width":600,"height":300},"rows":[{"header":true,"cells":[["r0c0"],["r0c1"]]},{"header":false,"cells":[["r1c0"],["r1c1"]]}]}]`。
+`cells` 中是该格 item 的 `cell` 名称数组，按行再按列排列；所有表格 item 必须连续，
+每个名称只出现一次。每个 item 仍须绑定本格真实 OCR 词号，不借用相邻格的词。
+漏识别整格时先补真实 OCR 证据，不能凭空造词坐标。
+答案表格仅作为答案证据，由 `references` 生成 `source-references-v2` 逐格定位；
+不进入学生题组，默认 `answerOnly` 不显示评分。
+
 Tesseract 底稿不带图形标记。校对员必须对照整页图自行补齐 `figure` 和 `figureRegion`
 （页面图片像素坐标 `{ "x": 100, "y": 200, "width": 600, "height": 300 }`），
 包括应用文题的海报、阅读里的流程图和图表。把图内对应的连续 items 标为同一 `figure` 名称，
