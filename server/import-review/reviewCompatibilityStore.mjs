@@ -156,6 +156,10 @@ const eligible = value => value && value.paper.latest_revision_id === value.revi
   && !value.shipping_guards.length && !value.promotions.some(row => row.state === 'publishing')
   && revisionValue(value.revision).reviewKind === 'candidate'
 
+// Internal maintenance reuses exactly the worker's raw-cell CAS snapshot.
+export { snapshot as captureReviewCompatibilitySnapshot, sameSnapshot as sameReviewCompatibilitySnapshot,
+  revisionValue as storedReviewRevision }
+
 export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, production } = {}) {
   const descriptor = reviewBuildIdentityProvider({ repoRoot, production })
   const jobs = new WeakMap()
@@ -286,6 +290,7 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
           AND target_build_id = ? AND comparator_version = ? ORDER BY attempt_no DESC LIMIT 1`)
           .get(row.id, target.targetBuildId, REVIEW_COMPARATOR_VERSION) : null
         if (!latest) return true
+        if (latest.result === 'unknown' && latest.reason_code === 'BACKFILL_PENDING') return true
         const transient = ['WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT', 'IO_ERROR', 'COMPUTATION_FAILED']
         return latest.result === 'unknown' && transient.includes(latest.reason_code) && latest.attempt_no <= 2
           && nowMs >= Date.parse(latest.checked_at) + (latest.attempt_no === 1 ? 30_000 : 300_000)

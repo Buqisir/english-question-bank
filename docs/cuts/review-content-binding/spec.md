@@ -243,7 +243,7 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 - CLI 正向发布使用真实 Review API 的 `promote`（scoped 路径另有端到端覆盖）；旧离线 `publish` 缺少原 subject/live guard 时继续拒绝，验证不再通过离线批准文件模拟新发布成功。
 - OCR bundle 重放保留原 renderer 身份规则，Candidate 的 equal 条件不侵入 OCR；probe 的 wait/inspect 仅针对已 finalize Candidate，OCR 和 uploading 保留原继续构造/恢复上传动作。异步 finalize 通过同一可信 provider 的 worker 计算 server fingerprint，避免提交前在主线程解析执行图；仍在原事务中原子保存 preview/subject/self comparison。缺产品的旧性能 fixture 明确为 unknown，仅验证原缓存与 worker 计算一致。
 - 完整 external analyzed-package 发布需要源参考答案可回放：source references 增加 `package_json_pointer`，要求 exact package 重新派生 materialization、官方答案 member role/SHA、严格 own-property pointer 和存在文本的逐字一致。发布后从已验证 Source Capture 还原相同 member；原 PDF/DOCX 校验保留。
-- D 当前指令优先于下节早期自动回填设想：自动 worker 遇到缺失持久 subject 的旧 revision，追加 `unknown/MISSING_BASELINE`，不创建 subject、不借 renderer 相同放行。当前 backfill CLI 的 dry-run 同样报告缺基准、保持 DB 字节不变；下节显式维护回填仅保留为后续单独授权的方案。
+- 自动 worker 遇到缺失持久 subject 的旧 revision，追加 `unknown/MISSING_BASELINE`，不创建 subject、不借 renderer 相同放行。§6 的显式维护 CLI 负责从旧证据回填；默认 dry-run，只有 `--apply` 写入并入队。
 - D P2 修正：列表与自动调度共享 executing release 的异步 identity worker/cache；冷启动未就绪返回 `pending/TARGET_IDENTITY_PENDING`，同步事务只消费已准备的 target。开发模式按内容文件变更失效并异步刷新，前端文件不失效；提交前仍在 worker 中 fresh 核对。SIGTERM 在活动批次中中断计算、等待退出并释放 leader。
 
 ## 6. 历史 revision 回填与无需重送恢复
@@ -279,7 +279,11 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 
 不承诺约 29 套都 equal：本任务未读取生产 DB，而且它们正在重送；worker 只处理 latest，不能恢复 superseded。以后具备同样证据的旧卷可走这条自动恢复路径。上线盘点应统计 preview/必要摘要/封存文件完整性及 equal/different/unknown，不再盘点旧 release 是否保留。
 
-可提供 `scripts/backfill-review-subjects.mjs` dry-run 诊断入口，默认只读本地指定 DB/封存目录，复用 worker 比较器；写入走授权维护入口和 CAS。不需要导出旧运行环境，不将试卷原件或题文写入仓库/日志。
+维护入口为 `node scripts/backfill-review-subjects.mjs --db <本地 Review DB> --files-root <封存 revision 根目录>`；必须显式指定路径，默认 dry-run，增加 `--apply` 才写入。仅处理 latest 且 awaiting_review/approved 的缺 subject Candidate；已有 subject 不覆盖，证据不足逐卷跳过并报告原因。stdout 输出逐卷 JSON，stderr 输出中文计数和逐卷结果，不包含题文或账号数据。
+
+CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐文件 SHA/长度，校验冻结 PDF 与产品 inputDigest；不运行 compiler、projection、renderer、pdfinfo 或浏览器。成功插入 `origin=stored_evidence` 后追加 `unknown/BACKFILL_PENDING`，由正常 worker 下次扫描在目标命名空间计算；CLI 不直接判 equal。默认预检不建表、不写 DB。apply 仅幂等创建 additive 表/索引、CAS INSERT subject 和追加排队 attempt，不更改旧表/旧行。
+
+与在线 API 共存：持有同一 host leader，遇活动 finalize 或不明 leader/activity 则暂停/跳过，保留锁证据；文件读取在 SQLite 事务外，短 `BEGIN IMMEDIATE` 重读与 worker 相同的 revision/paper/preview/subject/files/issues/confirmations/guard/promotions/request 原始单元快照，变化即拒绝。在线后台 worker 取得 leader 后才比较，因此不会在回填中途派生；批准、发布现场仍执行完整守卫。重复运行仅报告已有基准，不追加 attempt。生产执行仍属于单独授权的维护 Goal，本任务未执行。
 
 ## 7. 分步实施、验收和部署顺序
 
