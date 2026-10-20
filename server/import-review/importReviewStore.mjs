@@ -2477,10 +2477,6 @@ export function createImportReviewStore({
       )
     }
     const compatibility = reconciliation ? null : assertReviewCompatible(db, revision, target)
-    if (compatibility?.fallback) {
-      throw Object.assign(storeError('IMPORT_REVIEW_RENDERER_STALE', 'Publication still requires a definitive content result'),
-        { reasonCode: compatibility.reasonCode, compatibility })
-    }
     for (const key of [
       'approvalId',
       'revisionId',
@@ -2890,13 +2886,51 @@ export function createImportReviewStore({
           || guard.approvalId !== promotion.approvalId) {
           throw storeError('IMPORT_REVIEW_PROMOTION_GUARD_MISSING', 'Promotion guard changed')
         }
+        const { revision, compatibility } = assertCurrentApprovedRevision(db, paperId, promotion)
+        // An unavailable content check uses precisely the old renderer guard.
+        // Freeze the same Review rows across the asynchronous archive; never
+        // manufacture or persist a subject from the current projection.
+        if (compatibility.fallback) {
+          const binding = {
+            guard: 'legacy_renderer', rendererBuildId: currentRendererBuildId(),
+            tokenDigest: digestJson({
+              paper: db.prepare('SELECT * FROM import_review_papers WHERE paper_id = ?').get(paperId),
+              revision: db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(revision.id),
+              preview: db.prepare('SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(revision.id) || null,
+              files: db.prepare('SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path').all(revision.id),
+              confirmations: db.prepare('SELECT * FROM import_review_media_confirmations WHERE paper_id = ? ORDER BY rowid').all(paperId),
+              issues: db.prepare('SELECT * FROM import_review_issues WHERE paper_id = ? ORDER BY rowid').all(paperId),
+              guard,
+            }),
+          }
+          if (expected?.tokenDigest && (expected.guard !== binding.guard
+            || expected.rendererBuildId !== binding.rendererBuildId || expected.tokenDigest !== binding.tokenDigest)) {
+            throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Legacy Review guard changed'),
+              { reasonCode: 'CAS_CHANGED' })
+          }
+          // A context prepared under a definitive subject cannot silently
+          // downgrade after archive or during the final writer callback.
+          if (expected?.subjectDigest && expected.guard !== 'legacy_renderer') {
+            throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication guard mode changed'),
+              { reasonCode: expected.targetBuildId && compatibility.targetBuildId
+                && expected.targetBuildId !== compatibility.targetBuildId ? 'TARGET_CHANGED'
+                : compatibility.reasonCode === 'TARGET_IDENTITY_PENDING' ? 'TARGET_IDENTITY_PENDING' : 'CAS_CHANGED' })
+          }
+          const value = callback({ subject: null, binding, revision, promotion, compatibility })
+          if (value instanceof Promise) throw storeError('REVIEW_TRANSACTION_ASYNC', 'Publication guard must remain synchronous')
+          db.exec('COMMIT')
+          return value
+        }
+        if (expected?.guard === 'legacy_renderer' && expected.tokenDigest) {
+          throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication guard mode changed'),
+            { reasonCode: 'CAS_CHANGED' })
+        }
         const target = targetBuild()
         if (expected && target.targetBuildId !== expected.targetBuildId) {
           const error = storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication target changed during preparation')
           error.reasonCode = 'TARGET_CHANGED'
           throw error
         }
-        const { revision, compatibility } = assertCurrentApprovedRevision(db, paperId, promotion, { target })
         const baseline = checkedStoredReviewSubject(db.prepare(
           'SELECT * FROM review_subject WHERE revision_id = ?',
         ).get(revision.id))

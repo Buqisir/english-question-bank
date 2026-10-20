@@ -207,6 +207,11 @@ if (process.argv.includes('--serve')) {
       await page.screenshot({ path: path.join(artifactDir, `${result}.png`) })
     }
     assert.equal(publishCount, 1, 'blocked compatibility states never issue a publication')
+    paper = { ...initial, compatibility: { result: 'unknown', reasonCode: 'MISSING_BASELINE',
+      fallback: true, guard: 'legacy_renderer', eligible: true, legacyRendererStale: false } }
+    await page.reload()
+    assert.equal(await publish.isEnabled(), true, 'explicit matching-renderer fallback enables Owner publish')
+    assert.equal(await row.locator('.owner-review-hint').count(), 0)
     paper = { ...initial, compatibility: undefined }
     await page.reload()
     await row.waitFor()

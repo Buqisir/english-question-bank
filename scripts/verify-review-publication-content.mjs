@@ -10,6 +10,7 @@ import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
+import { createReviewCompatibilityStore } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { buildPaperImportOutputInventory, writePaperImportVersion } from '../server/paper-import/storage.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
@@ -292,7 +293,8 @@ try {
     await assert.rejects(Promise.resolve().then(() => service({ blobStore: targetRace })
       .promote(projection.paperId, { ...intent, intent: 'retry_ship' }, 'fixture')),
     error => error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
-      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING'].includes(error.reasonCode))
+      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING', 'CAS_CHANGED'].includes(error.reasonCode))
+    assert.equal(changedTarget, true)
     assert.equal(store.latestPromotion(projection.paperId).assetVersion, null)
     assert.equal(store.latestPromotion(projection.paperId).state, 'publishing')
     assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM import_review_shipping_guards').get().n), 1)
@@ -309,13 +311,34 @@ try {
     const changedDigest = sha256('corrupted original preview record')
     assert.notEqual(changedDigest, originalPreviewDigest)
     dbRun(db => db.prepare('UPDATE import_review_product_previews SET payload_digest=? WHERE revision_id=?').run(changedDigest, revision.id))
-    await assert.rejects(Promise.resolve().then(() => service().promote(
-      projection.paperId, { ...intent, intent: 'retry_ship' }, 'fixture',
-    )), { code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'BASELINE_UNTRUSTED' })
+    const unavailable = store.compatibilityForRevision(revision.id)
+    assert.equal(unavailable.fallback, true)
+    assert.notEqual(unavailable.result, 'equal')
+    assert.equal(unavailable.guard, 'legacy_renderer')
+    const current = store.latestPromotion(projection.paperId)
+    const context = store.withPromotionContentGuard(projection.paperId, current.promotionId, null, value => value)
+    assert.equal(context.subject, null)
+    assert.equal(context.binding.guard, 'legacy_renderer')
+    assert.equal(current.assetVersion, null)
   } finally {
     dbRun(db => db.prepare('UPDATE import_review_product_previews SET payload_digest=? WHERE revision_id=?').run(originalPreviewDigest, revision.id))
   }
-  pass('cached equal cannot hide a damaged original preview record')
+  pass('damaged preview invalidates cached equal and selects explicit legacy guard without manufacturing evidence')
+  async function refreshEqualAfterRejectedFixture() {
+    // Each preceding injected guard failure happened before any target write.
+    // Finish that fixture operation through the store, then let a real worker
+    // establish current equal before testing the content-binding writer again.
+    assert.equal(existsSync(path.join(root, 'promoted', projection.paperId, 'versions')), false)
+    store.markPromotionFailed(projection.paperId, store.latestPromotion(projection.paperId).promotionId, {
+      failureCode: 'FIXTURE_PRE_WRITE_REJECTION', failureMessage: 'Injected fixture rejected before publisher write',
+    })
+    const compatibility = await createReviewCompatibilityStore({
+      dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
+    }).checkRevision(revision.id)
+    assert.equal(compatibility.comparison.result, 'equal', JSON.stringify(compatibility))
+    assert.equal(store.compatibilityForRevision(revision.id).result, 'equal')
+  }
+  await refreshEqualAfterRejectedFixture()
   try {
     await assert.rejects(Promise.resolve().then(() => service({
       publish(options) {
@@ -326,7 +349,7 @@ try {
       },
     }).promote(projection.paperId, { ...intent, intent: 'retry_ship' }, 'fixture')),
     error => error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
-      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING'].includes(error.reasonCode))
+      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING', 'CAS_CHANGED'].includes(error.reasonCode))
     assert.equal(store.latestPromotion(projection.paperId).state, 'publishing')
     assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM import_review_shipping_guards').get().n), 1)
   } finally {
@@ -335,6 +358,7 @@ try {
     await store.ready()
   }
   pass('target change after prepared callback is rejected by the final transaction before writing')
+  await refreshEqualAfterRejectedFixture()
   await assert.rejects(Promise.resolve().then(() => service({
     publish(options) {
       return publishUniversalNck1Import({ ...options, withPreparedReviewSubject(snapshot, write) {

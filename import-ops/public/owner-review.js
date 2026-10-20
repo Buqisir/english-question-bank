@@ -14,8 +14,6 @@ export const isReviewCompatible = compatibility => {
     && compatibility.eligible === true && compatibility.legacyRendererStale === false
 }
 
-const isPublicationCompatible = compatibility => compatibility?.result === 'equal' && !compatibility.pending
-
 export function reviewCompatibilityMessage(compatibility) {
   if (isReviewCompatible(compatibility)) return ''
   if (compatibility?.pending || compatibility?.result === 'pending'
@@ -118,15 +116,14 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
   function rowHtml(paper) {
     const state = paper.promotionState || paper.state
     const pending = uncertain.has(paper.paperId)
-    const canPublish = !busy && fresh && !pending && isPublicationCompatible(paper.compatibility)
+    const canPublish = !busy && fresh && !pending && isReviewCompatible(paper.compatibility)
       && !paper.promotionState && paper.unresolvedCount === 0
       && ['awaiting_review', 'changes_requested', 'approved'].includes(paper.state)
     const frozen = Boolean(paper.promotionState)
     const hint = pending ? '请求结果待核实，请刷新状态；不要重复提交。'
       : state === 'publishing' ? '服务器正在处理。如长时间未完成，请在 Amp 核实，不要重试。'
       : state === 'failed' ? '请在 Amp 核实失败原因，保留原发布记录。'
-      : !isPublicationCompatible(paper.compatibility) ? (isReviewCompatible(paper.compatibility)
-        ? '正在核验发布内容…' : reviewCompatibilityMessage(paper.compatibility))
+      : !isReviewCompatible(paper.compatibility) ? reviewCompatibilityMessage(paper.compatibility)
       : paper.unresolvedCount ? `${paper.unresolvedCount} 条反馈尚未确认解决。` : ''
     return `<li class="owner-review-item" data-review-paper="${escapeHtml(paper.paperId)}">
       <div class="owner-review-row">
@@ -264,7 +261,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
 
   async function mutate(paper, url, body, successMessage, method = 'POST') {
     if (busy || !fresh || uncertain.has(paper.paperId)) return
-    if (body.intent === 'publish' && !isPublicationCompatible(paper.compatibility)) return
+    if (body.intent === 'publish' && !isReviewCompatible(paper.compatibility)) return
     busy = true
     error = ''
     notice = method === 'POST' && body.intent === 'publish' ? '正在发布，请勿重复提交…' : '正在保存…'

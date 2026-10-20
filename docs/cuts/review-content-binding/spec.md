@@ -5,7 +5,7 @@
 ## 2026-10-21 审查后恢复规则（本节覆盖下文冲突的历史规则）
 
 - 批准资格：确定 `equal` 允许，确定 `different` 拒绝且不能被后续 unknown 覆盖。无确定结果时回退到修复前的 renderer 指纹守卫，只有历史 renderer 等于当前 renderer 才允许批准；继续执行旧版封存文件、投影身份、听力、issue、权限与业务状态检查，不制造历史 subject。响应提供 `eligible/guard/fallback/fallbackReason/legacyRendererStale`，日志事件 `review-compatibility-fallback` 记录原因及是否放行。
-- 发布器的原 subject/实际 writer 映射仍是独立强制契约。此次批准回退不绕过它；Owner 紧凑列表的“批准并发布”仍只对 equal 启用，卷面独立批准按钮消费回退资格。若要求缺 subject 时整条发布链也退回旧模式，需主会话先收敛发布契约，不能以当前投影冒充历史 subject。
+- 相同资格覆盖独立批准、Owner“批准并发布”、scoped promotion 和实际 writer。确定 equal 保留原 subject/实际 writer 映射；不可用时走修复前的 renderer/file/投影身份/Canonical admission 守卫，不制造历史 subject。归档前后以 Review 原始行 token 和 renderer 做 CAS，最终 writer 在同一 Review 写事务里重新核验；已准备的内容绑定不能中途降级为旧模式，guard 模式变化拒绝并保留证据。缺 subject/preview 或非空 v1 时，幂等对账使用旧版封存投影路径，仍验证已提交目标和冻结字节。
 - `reviewRecoveryPolicy.mjs` 集中预算：比较 384 MiB/300 秒、每批 1 卷、任务间让出 5 秒；backfill 128 MiB/30 秒；身份 384 MiB/30 秒。调用方只能降低 worker 上限。普通比较最多重试 2 次，30 秒/5 分钟退避，只统计瞬态失败，不计 MISSING_BASELINE/BACKFILL_PENDING。
 - backfill 瞬态失败追加到 `review_subject_backfill_attempt`，初次失败后最多 5 次重试，依次间隔 1/5/15/60/240 分钟。耗尽显示 exhausted，保留诊断；确定性内容缺失或不合法仍按 input token 封存。原 skip/attempt 行不删改。受控恢复函数 `createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot }).resetTransientBudget(revisionId, { actor, reason })` 要求具名操作员和原因，追加 `TRANSIENT_BUDGET_RESET` 记录，仅重置该 revision 当前 token 的瞬态额度，不清除锁、不重置业务状态、不改变确定性失败。
 - 身份 timeout/OOM/exit/临时 I/O 与确定性身份错误分开。初始化与 fresh 共用 single-flight，瞬态失败最少 60 秒后重试，`ready()` 不永久缓存为失败。fresh 的瞬态失败保留上一份有效描述符，但在成功刷新之前不对外提供它，防止旧 equal 授权；文件或 runtime 变化照常清空缓存。
@@ -36,7 +36,10 @@ COUNT 随表规模增长；精确 ID 查询应走索引，一次一卷。不要�
 恢复验证覆盖 equal/different 与各不可用状态在 renderer 相同/不同时的真实批准，
 瞬态额度耗尽及具名恢复、身份 single-flight/60 秒退避与确定性错误隔离；空 v1
 离线迁移同时核对原始行、外键及精确 `97c63a3b` store 的 revision/list/preview 读回。
-非空 v1 验证 store 正常构造、列表、批准回退和两个 worker 禁用。
+非空 v1 验证 store 正常构造、列表、批准回退和两个 worker 禁用；另启动真实 HTTP
+API，验证鉴权状态返回、停用告警、正常关闭及旧 subject 字节保留。缺 subject、
+缺 preview 和非空 v1 均验证实际发布和幂等对账；归档期间 revision/renderer/
+确定 different 的变化均在写入前拒绝，保留 shipping guard。
 
 59 套离线演练的 preview envelope/digest 来自已捕获鉴权 GET 的重建，不能冒充生产
 SQLite 原始 preview 字符串、隐藏 guard 或生产 CAS/批准证据。四卷资源样本另跑真实

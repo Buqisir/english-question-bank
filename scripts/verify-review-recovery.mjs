@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
-import { copyFileSync, mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs'
+import { execFileSync, spawn } from 'node:child_process'
+import { createServer } from 'node:http'
+import { setTimeout as yieldFor } from 'node:timers/promises'
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -15,6 +17,8 @@ import { createAutomaticReviewSubjectBackfillStore, reviewBackfillInputToken, re
 import { REVIEW_BACKFILL_RETRY_DELAYS_MS, reviewCompatibilityEligibility } from '../server/import-review/reviewRecoveryPolicy.mjs'
 import { finalizeReviewFixture, freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { isReviewCompatible } from '../import-ops/public/owner-review.js'
+import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
+import { createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -39,6 +43,7 @@ try {
   const filesRoot = path.join(output, 'files')
   const target = reviewBuildIdentityProvider()()
   const revision = fixture.revision
+  let legitimateApproval
   for (const [result, reasonCode] of [
     ['equal', 'CONTENT_EQUAL'], ['different', 'CONTENT_DIFFERENT'],
     ...['MISSING_BASELINE', 'BACKFILL_PENDING', 'WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT',
@@ -70,8 +75,21 @@ try {
       assert.equal(store.listPapers()[0].rendererStale, !allowed)
       const approve = () => store.approveRevision(revision.paperId, revision.id,
         { bundleDigest: revision.bundleDigest }, 'recovery-owner')
-      if (allowed) assert.equal(approve().revisionId, revision.id)
-      else assert.throws(approve, { code: 'IMPORT_REVIEW_RENDERER_STALE' })
+      if (allowed) {
+        legitimateApproval = approve()
+        assert.equal(legitimateApproval.revisionId, revision.id)
+      } else {
+        assert.throws(approve, { code: 'IMPORT_REVIEW_RENDERER_STALE' })
+        dbRun(dbPath, db => db.prepare("UPDATE import_review_revisions SET state='approved',approval_receipt_json=? WHERE id=?")
+          .run(JSON.stringify(legitimateApproval), revision.id))
+        assert.throws(() => store.beginPromotion(revision.paperId, { ...legitimateApproval, intent: 'ship' }, 'owner'),
+          { code: 'IMPORT_REVIEW_RENDERER_STALE' })
+      }
+      if (allowed) {
+        const begun = store.beginPromotion(revision.paperId, { ...store.getRevision(revision.id).approval, intent: 'ship' }, 'owner')
+        const context = store.withPromotionContentGuard(revision.paperId, begun.promotion.promotionId, begun.contentBinding, value => value)
+        assert.equal(context.subject === null, result === 'unknown')
+      }
       if (result === 'unknown') assert.equal(dbRun(dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject').get().n), 0)
       pass(`${result}/${reasonCode}, rendererStale=${stale}: approval=${allowed}, no manufactured baseline`)
     }
@@ -99,6 +117,76 @@ try {
   assert.equal(emptyStore.compatibilityForRevision(revision.id).result, 'pending')
   assert.equal(emptyStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner').revisionId, revision.id)
   pass('real missing subject and unchecked pending permit the exact legacy approval path')
+
+  const serviceFor = (store, directory, options = {}) => {
+    const openDatabase = () => new DatabaseSync(path.join(directory, 'bank.sqlite'))
+    const db = openDatabase()
+    db.exec(readFileSync(new URL('../data/sql/schema.sql', import.meta.url), 'utf8')); db.close()
+    return createSinglePaperPromotionService({
+      getStore: () => store, openDatabase,
+      paperAssetsDir: path.join(directory, 'assets'), blobStore: createBlobStore({ rootDir: path.join(directory, 'blobs') }),
+      ...options,
+    })
+  }
+  for (const state of ['missing_subject', 'missing_preview', 'nonempty_v1']) {
+    const directory = path.join(root, `publish-${state}`)
+    mkdirSync(directory, { recursive: true })
+    const dbPath = `${directory}.sqlite`
+    copyFileSync(fixture.dbPath, dbPath)
+    dbRun(dbPath, db => {
+      db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject')
+      if (state === 'missing_preview') db.exec('DELETE FROM import_review_product_previews')
+      if (state === 'nonempty_v1') db.exec(`DROP TABLE review_subject;
+        CREATE TABLE review_subject(revision_id TEXT, subject_version TEXT CHECK(subject_version='review-content-subject-v1'), subject_json TEXT);
+        INSERT INTO review_subject VALUES('legacy','review-content-subject-v1','{"preserved":true}')`)
+    })
+    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: revision.rendererBuildId })
+    const service = serviceFor(store, directory)
+    const result = await service.promoteOwner(revision.paperId, revision.id, {
+      intent: 'publish', bundleDigest: revision.bundleDigest, rendererBuildId: revision.rendererBuildId,
+    }, 'owner')
+    assert.equal(result.status, 'published')
+    assert.equal((await service.promote(revision.paperId, { ...store.getRevision(revision.id).approval, intent: 'retry_ship' }, 'owner')).status, 'idempotent')
+    assert.equal(dbRun(dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject').get().n), state === 'nonempty_v1' ? 1 : 0)
+    pass(`${state}: real approve/publish/reconciliation succeeds under legacy renderer without a manufactured subject`)
+  }
+  for (const race of ['revision', 'renderer', 'different']) {
+    const directory = path.join(root, `race-${race}`)
+    mkdirSync(directory)
+    const dbPath = `${directory}.sqlite`
+    copyFileSync(fixture.dbPath, dbPath)
+    dbRun(dbPath, db => db.exec('DELETE FROM review_compatibility'))
+    if (race !== 'different') dbRun(dbPath, db => db.exec('DELETE FROM review_subject'))
+    let rendererBuildId = revision.rendererBuildId
+    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: () => rendererBuildId })
+    const blobs = createBlobStore({ rootDir: path.join(directory, 'blobs') })
+    let changed = false
+    const service = serviceFor(store, directory, { blobStore: { identity: blobs.identity, async put(bytes, mediaType) {
+      const result = await blobs.put(bytes, mediaType)
+      if (!changed) {
+        changed = true
+        if (race === 'renderer') rendererBuildId = 'changed-renderer'
+        else dbRun(dbPath, db => {
+          if (race === 'revision') db.prepare('UPDATE import_review_revisions SET updated_at=? WHERE id=?').run('archive-race', revision.id)
+          else {
+            const subjectDigest = db.prepare('SELECT subject_digest FROM review_subject').get().subject_digest
+            db.exec('BEGIN IMMEDIATE')
+            appendReviewCompatibility(db, revision, null, { result: 'different', reasonCode: 'CONTENT_DIFFERENT',
+              subjectDigest, targetBuildId: target.targetBuildId })
+            db.exec('COMMIT')
+          }
+        })
+      }
+      return result
+    } } })
+    await assert.rejects(service.promoteOwner(revision.paperId, revision.id, {
+      intent: 'publish', bundleDigest: revision.bundleDigest, rendererBuildId: revision.rendererBuildId,
+    }, 'owner'), error => error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED')
+    assert.equal(store.latestPromotion(revision.paperId).assetVersion, null)
+    assert.equal(store.latestPromotion(revision.paperId).state, 'publishing')
+    assert.equal(dbRun(dbPath, db => db.prepare('SELECT COUNT(*) n FROM import_review_shipping_guards').get().n), 1)
+    pass(`legacy archive ${race} race rejects before publication and retains its guard`)
+  }
 
   const retryPath = path.join(root, 'retry.sqlite')
   copyFileSync(fixture.dbPath, retryPath)
@@ -195,6 +283,55 @@ try {
   assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject').get().subject_json), '{"preserve":true}')
   pass('nonempty v1 starts, lists, falls back for approval, disables both workers and preserves legacy bytes')
 
+  const bankPath = path.join(root, 'legacy-api-bank.sqlite')
+  dbRun(bankPath, db => db.exec(readFileSync(new URL('../data/sql/schema.sql', import.meta.url), 'utf8')))
+  const reservation = createServer()
+  await new Promise(resolve => reservation.listen(0, '127.0.0.1', resolve))
+  const port = reservation.address().port
+  await new Promise(resolve => reservation.close(resolve))
+  const agentToken = 'synthetic-legacy-api-token'
+  const api = spawn(process.execPath, ['server/api.mjs'], { cwd: path.resolve(import.meta.dirname, '..'),
+    env: { ...process.env, NODE_ENV: 'production', QUESTION_BANK_API_PORT: String(port),
+      QUESTION_BANK_DB: bankPath, USER_DATA_DB: path.join(root, 'legacy-api-users.sqlite'),
+      QUESTION_BANK_IMPORT_OPS_DB: migration, QUESTION_BANK_IMPORT_OPS_ROOT: filesRoot,
+      QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: agentToken,
+      QUESTION_BANK_PAPER_ASSET_ROOT: path.join(root, 'legacy-api-assets'),
+      QUESTION_BANK_USER_SPACE_ROOT: path.join(root, 'legacy-api-user-space'),
+      EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT: path.join(root, 'legacy-api-locks') },
+    stdio: ['ignore', 'pipe', 'pipe'] })
+  let apiLog = ''
+  api.stdout.on('data', bytes => { apiLog += bytes })
+  api.stderr.on('data', bytes => { apiLog += bytes })
+  const exited = new Promise(resolve => api.once('exit', (code, signal) => resolve({ code, signal })))
+  try {
+    let status
+    for (let attempt = 0; attempt < 150; attempt++) {
+      assert.equal(api.exitCode, null, apiLog)
+      if (apiLog.includes('API listening')) {
+        const response = await fetch(`http://127.0.0.1:${port}/api/import-agent-reviews/papers/${revision.paperId}`, {
+          headers: { authorization: `Bearer ${agentToken}` }, signal: AbortSignal.timeout(3000),
+        })
+        assert.equal(response.status, 200, apiLog)
+        status = await response.json()
+        if (status.compatibility.reasonCode === 'LEGACY_REVIEW_SUBJECTS_PRESENT') break
+      }
+      await yieldFor(100)
+    }
+    assert.equal(status?.compatibility.reasonCode, 'LEGACY_REVIEW_SUBJECTS_PRESENT', apiLog)
+    assert.match(apiLog, /review-compatibility-disabled/)
+  } finally {
+    api.kill('SIGTERM')
+    let deadline
+    try {
+      const result = await Promise.race([exited, new Promise((_, reject) => {
+        deadline = setTimeout(() => { api.kill('SIGKILL'); reject(new Error('Legacy API shutdown exceeded 10s')) }, 10000)
+      })])
+      assert.deepEqual(result, { code: 0, signal: null }, apiLog)
+    } finally { clearTimeout(deadline) }
+  }
+  assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject').get().subject_json), '{"preserve":true}')
+  pass('real HTTP API starts with nonempty v1, returns authenticated status, warns, shuts down cleanly and preserves legacy bytes')
+
   const release = makeReviewRelease(path.join(root, 'identity-release'))
   const workerFile = path.join(release, 'server/import-review/reviewBuildIdentityWorker.mjs')
   writeFileSync(workerFile, "import { appendFileSync } from 'node:fs'\n" + readFileSync(workerFile, 'utf8').replace('try {', `try {
@@ -229,6 +366,8 @@ try {
     const status=store.compatibilityForRevision(revisionId);
     assert.equal(status.fallback,true); assert.equal(status.eligible,true);
     assert.equal(store.approveRevision(revision.paperId,revisionId,{bundleDigest:revision.bundleDigest},'owner').revisionId,revisionId);
+    const begun=store.beginPromotion(revision.paperId,{...store.getRevision(revisionId).approval,intent:'ship'},'owner');
+    assert.equal(store.withPromotionContentGuard(revision.paperId,begun.promotion.promotionId,begun.contentBinding,value=>value).subject,null);
     delete process.env.BUB90_FAILURE;
     now+=60001;
     assert.equal((await provider.ready()).targetBuildId,first.targetBuildId);

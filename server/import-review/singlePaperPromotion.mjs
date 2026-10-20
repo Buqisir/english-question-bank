@@ -59,7 +59,24 @@ function readJson(filePath, label) {
 // This is evidence for reconciling an existing target, never a new publish
 // package. It uses the original preview/subject and exact sealed bytes only.
 function originalPromotionEvidence(store, revision) {
-  const { preview, subject } = store.originalReviewEvidenceForRevision(revision.id)
+  let original
+  try { original = store.originalReviewEvidenceForRevision(revision.id) } catch (error) {
+    const compatibility = store.compatibilityForRevision(revision.id)
+    if (!compatibility.fallback || !compatibility.eligible) throw error
+    // The pre-fix reconciliation path derives the package from the sealed
+    // revision only after the old renderer/file/projection guards pass.
+    const { projection } = store.projectionForRevision(revision.id)
+    return buildNck1CompatibilityPackage({
+      config: projection.config, manifest: projection.manifest,
+      materialization: projection.materialization, sourceProvenance: projection.sourceProvenance,
+      sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
+      analysisSidecars: projection.analysisSidecars, paragraphSummariesBytes: projection.paragraphSummariesBytes,
+      publicSearchMetadataBytes: projection.publicSearchMetadataBytes, sourceReferencesBytes: projection.sourceReferencesBytes,
+      frozenProducts: projection.frozenProducts, paginationPlan: projection.paginationPlan,
+      paginationBindingIdentity: projection,
+    })
+  }
+  const { preview, subject } = original
   const bytes = relativePath => {
     const file = revision.manifest.files.find(file => file.path === relativePath)
     if (!file) return null
@@ -339,8 +356,8 @@ export function createSinglePaperPromotionService({
           paginationBindingIdentity: projection,
         })
         const context = store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, value => {
-          const differences = reviewContentDifferences(value.subject.components.consumer,
-            buildProductPreviewPayload(revision, projection)).differences
+          const differences = value.subject ? reviewContentDifferences(value.subject.components.consumer,
+            buildProductPreviewPayload(revision, projection)).differences : []
           const evidence = inspectSealedReviewFiles(reviewRootDir, revision.manifest.files)
           const changed = evidence.find(file => {
             const expected = revision.manifest.files.find(item => item.path === file.path)
@@ -364,10 +381,12 @@ export function createSinglePaperPromotionService({
         }
         const result = publish({
           approvedReviewSubject: context.subject,
+          legacyRendererBuildId: context.binding.guard === 'legacy_renderer' ? context.binding.rendererBuildId : null,
           withPreparedReviewSubject(snapshot, write) {
             return store.withPromotionContentGuard(paperId, promotion.promotionId, context.binding, current => {
               if (current.promotion.assetVersion !== snapshot.version
-                || current.promotion.canonicalPublicationDigest !== snapshot.admission.sealed.manifest.publicationDigest) {
+                || current.promotion.canonicalPublicationDigest !== snapshot.admission.sealed.manifest.publicationDigest
+                || snapshot.reviewGuard !== (current.subject ? 'content_binding' : 'legacy_renderer')) {
                 const error = promotionError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Prepared publication target changed')
                 error.reasonCode = 'CAS_CHANGED'
                 throw error
@@ -380,6 +399,7 @@ export function createSinglePaperPromotionService({
           fileStorage,
           approvedIdentity: {
             ...promotion,
+            rendererBuildId: revision.rendererBuildId,
             ...(projection.importProfile
               ? {
                   importProfile: projection.importProfile,

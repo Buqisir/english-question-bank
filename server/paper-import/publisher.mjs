@@ -1239,7 +1239,9 @@ function universalValidationReport(projection) {
 }
 
 export function publishUniversalNck1Import(options) {
-  if (!options.approvedReviewSubject || typeof options.withPreparedReviewSubject !== 'function') {
+  const legacyRenderer = typeof options.legacyRendererBuildId === 'string'
+    && options.legacyRendererBuildId === options.approvedIdentity?.rendererBuildId
+  if ((!options.approvedReviewSubject && !legacyRenderer) || typeof options.withPreparedReviewSubject !== 'function') {
     throw Object.assign(new Error('Publication requires the original Review subject and live shipping guard'), {
       code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'MISSING_BASELINE', status: 409,
     })
@@ -1284,8 +1286,8 @@ function publishUniversalNck1ImportSnapshot({
         message: 'Local universal Candidate does not match the exact Owner-approved identity' }],
     })
   }
-  const projectedDifferences = reviewContentDifferences(approvedReviewSubject.components.consumer,
-    buildProductPreviewPayload({ id: approvedReviewSubject.revisionId }, projection)).differences
+  const projectedDifferences = approvedReviewSubject ? reviewContentDifferences(approvedReviewSubject.components.consumer,
+    buildProductPreviewPayload({ id: approvedReviewSubject.revisionId }, projection)).differences : []
   if (projectedDifferences.length) {
     throw Object.assign(new Error('Publisher projection differs from the original Review subject'), {
       code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'SUBJECT_CHANGED',
@@ -1422,13 +1424,14 @@ function publishUniversalNck1ImportSnapshot({
     failurePoint,
     onPrepared,
     validatePrepared(snapshot) {
-      assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
+      if (approvedReviewSubject) assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
         projection, approvedIdentity, approvedManifest })
     },
     withPreparedWrite(snapshot, write) {
-      return withPreparedReviewSubject(snapshot, () => {
-        const outputInventory = assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
-          projection, approvedIdentity, approvedManifest })
+      return withPreparedReviewSubject({ ...snapshot,
+        reviewGuard: approvedReviewSubject ? 'content_binding' : 'legacy_renderer' }, () => {
+        const outputInventory = approvedReviewSubject ? assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
+          projection, approvedIdentity, approvedManifest }) : null
         return write(outputInventory)
       })
     },
