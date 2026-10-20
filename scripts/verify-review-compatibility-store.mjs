@@ -10,6 +10,8 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { pathToFileURL } from 'node:url'
 import { createServer } from 'node:http'
+import { performance } from 'node:perf_hooks'
+import { setTimeout as yieldFor } from 'node:timers/promises'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
@@ -174,8 +176,27 @@ try {
   assert.equal(resultA.comparison.result, 'equal', JSON.stringify(resultA.comparison))
   const resultB = await second.compute(b)
   assert.equal(resultB.comparison.result, 'equal')
-  assert.equal(compatibility.commit(a, resultA).committed, true)
-  assert.equal(second.commit(b, resultB).reasonCode, 'CAS_CHANGED')
+  let previousTick = performance.now()
+  let maxCommitDelayMs = 0
+  let commitTicks = 0
+  const commitTimer = setInterval(() => {
+    const now = performance.now()
+    maxCommitDelayMs = Math.max(maxCommitDelayMs, now - previousTick - 2)
+    previousTick = now
+    commitTicks++
+  }, 2)
+  let firstCommit
+  try {
+    await yieldFor(10)
+    firstCommit = await compatibility.commit(a, resultA)
+    await yieldFor(10)
+  } finally { clearInterval(commitTimer) }
+  assert.equal(firstCommit.committed, true)
+  assert(commitTicks > 0)
+  console.log(JSON.stringify({ check: 'compatibility-commit-event-loop', maxCommitDelayMs, commitTicks }))
+  assert(maxCommitDelayMs < 50, `commit event loop delay ${maxCommitDelayMs.toFixed(2)}ms must be below 50ms`)
+  pass('asynchronous commit keeps maximum main-thread event loop delay below 50ms')
+  assert.equal((await second.commit(b, resultB)).reasonCode, 'CAS_CHANGED')
   assert.equal(newRows()[1].length, 1)
   assert.equal(newRows()[1][0].origin, 'stored_evidence')
   assert.equal(newRows()[2].length, 1)
@@ -190,7 +211,7 @@ try {
   legitimate.comparison.result = 'equal'
   legitimate.comparison.reasonCode = 'FORGED'
   legitimate.baseline = {}
-  compatibility.commit(tamperJob, legitimate)
+  await compatibility.commit(tamperJob, legitimate)
   assert.notEqual(compatibility.get(revision.id).reasonCode, 'FORGED')
   assert.equal(compatibility.get(revision.id).result, 'equal', 'transient diagnostic failure cannot overwrite a terminal result')
   pass('terminal rows cannot be overwritten and external diagnostic objects cannot forge results')
@@ -206,7 +227,7 @@ try {
   assert.equal(mismatchOutput.comparison.result, 'unknown')
   assert.equal(mismatchOutput.comparison.reasonCode, 'TARGET_IDENTITY_MISMATCH')
   writeFileSync(parser, beforeWorkerMismatch)
-  assert.equal(compatibility.commit(mismatchJob, mismatchOutput).reasonCode, 'TARGET_IDENTITY_MISMATCH')
+  assert.equal((await compatibility.commit(mismatchJob, mismatchOutput)).reasonCode, 'TARGET_IDENTITY_MISMATCH')
   assert.equal(JSON.stringify(newRows().slice(1)), terminalRows)
   pass('worker verifies its executing release; restoring supervisor identity cannot admit a mismatched worker')
 
@@ -214,26 +235,27 @@ try {
   const cachedJob = productionStore.prepare(revision.id)
   const cachedOutput = await productionStore.compute(cachedJob)
   bump()
-  assert.equal(productionStore.commit(cachedJob, cachedOutput).reasonCode, 'TARGET_CHANGED')
+  assert.equal((await productionStore.commit(cachedJob, cachedOutput)).reasonCode, 'TARGET_CHANGED')
   pass('commit bypasses production descriptor cache and rechecks executing files')
   bump()
   const changedBuildJob = compatibility.prepare(revision.id)
   const changedBuildResult = await compatibility.compute(changedBuildJob)
   bump()
-  assert.equal(compatibility.commit(changedBuildJob, changedBuildResult).reasonCode, 'TARGET_CHANGED')
+  assert.equal((await compatibility.commit(changedBuildJob, changedBuildResult)).reasonCode, 'TARGET_CHANGED')
   assert.equal(compatibility.get(revision.id).reasonCode, 'NOT_CHECKED')
   pass('old target worker cannot write credentials for a new target')
 
   const issueJob = compatibility.prepare(revision.id)
   const issueResult = await compatibility.compute(issueJob)
+  const issueCommit = compatibility.commit(issueJob, issueResult)
   const issue = store.createIssue(revision.paperId, { revisionId: revision.id, surface: 'paper',
     bundleDigest: revision.bundleDigest, message: 'Fixture Owner feedback' }, 'owner-fixture')
   const afterIssue = JSON.stringify(historical())
-  assert.equal(compatibility.commit(issueJob, issueResult).reasonCode, 'CAS_CHANGED')
+  assert.equal((await issueCommit).reasonCode, 'CAS_CHANGED')
   assert.equal(store.getRevision(revision.id).state, 'changes_requested')
   assert.equal(JSON.stringify(historical()), afterIssue)
   assert.ok(issue)
-  pass('new issue during computation preserves Owner state and rejects stale CAS')
+  pass('new issue while asynchronous commit identity is running preserves Owner state and rejects stale CAS')
 
   // The media receipt digest is independently part of CAS, without touching
   // revision.updated_at. A synthetic receipt row is sufficient to test that seam.
@@ -243,7 +265,7 @@ try {
     (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run('fixture-media', revision.paperId, revision.id,
     'media-fixture', sha256(Buffer.from('source')), sha256(Buffer.from('candidate')),
     sha256(Buffer.from('presentation')), '{}', 'fixture', new Date().toISOString()))
-  assert.equal(compatibility.commit(mediaJob, mediaResult).reasonCode, 'CAS_CHANGED')
+  assert.equal((await compatibility.commit(mediaJob, mediaResult)).reasonCode, 'CAS_CHANGED')
   pass('media confirmation changes invalidate CAS independently of revision.updated_at')
 
   const revisionJob = compatibility.prepare(revision.id)
@@ -259,7 +281,7 @@ try {
   }
   await store.finalizeUploadedRevision(next.id)
   const afterNext = JSON.stringify(historical())
-  assert.equal(compatibility.commit(revisionJob, revisionResult).reasonCode, 'CAS_CHANGED')
+  assert.equal((await compatibility.commit(revisionJob, revisionResult)).reasonCode, 'CAS_CHANGED')
   assert.equal(store.getRevision(revision.id).state, 'superseded')
   assert.equal(compatibility.get(next.id).reasonCode, 'NOT_CHECKED')
   assert.equal(JSON.stringify(historical()), afterNext)
@@ -287,7 +309,11 @@ try {
   pass('symlink leaf and every symlink parent rejected using actual filesystem counterexamples')
 
   bump()
-  server = createServer((_request, response) => response.end('ok'))
+  server = createServer((_request, response) => {
+    // This long-running fixture measures health, not pooled socket expiry.
+    response.setHeader('Connection', 'close')
+    response.end('ok')
+  })
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
   const healthUrl = `http://127.0.0.1:${server.address().port}/api/health`
   const workspaces = () => readdirSync(realpathSync(tmpdir())).filter(name => name.startsWith('eqb-review-job-')).sort()
@@ -300,7 +326,7 @@ try {
   const exitPending = compatibility.compute(exitJob, { signal: aborted.signal })
   aborted.abort()
   const exitResult = await exitPending
-  compatibility.commit(exitJob, exitResult)
+  await compatibility.commit(exitJob, exitResult)
   assert.equal(exitResult.comparison.reasonCode, 'WORKER_EXIT')
   const oom = await compatibility.checkRevision(next.id, { heapMb: 16 })
   assert.equal(oom.comparison.reasonCode, 'WORKER_OOM', JSON.stringify(oom.comparison))
@@ -356,7 +382,7 @@ try {
   const approvalResult = await compatibility.compute(approvalJob)
   const approval = store.approveRevision(next.paperId, next.id, { bundleDigest: next.bundleDigest }, 'owner-fixture')
   const afterApproval = JSON.stringify(historical())
-  assert.equal(compatibility.commit(approvalJob, approvalResult).reasonCode, 'CAS_CHANGED')
+  assert.equal((await compatibility.commit(approvalJob, approvalResult)).reasonCode, 'CAS_CHANGED')
   assert.deepEqual(store.getRevision(next.id).approval, approval)
   assert.equal(store.getRevision(next.id).state, 'approved')
   assert.equal(JSON.stringify(historical()), afterApproval)
@@ -386,8 +412,11 @@ try {
   assert.equal(dbRun(db => db.prepare('SELECT subject_json FROM review_subject WHERE revision_id=?').get(next.id).subject_json), '{broken')
   pass('corrupt original subject appends unknown without crashing or repairing historical evidence')
   const beforeInvalidGraph = readFileSync(parser, 'utf8')
+  const invalidGraphJob = compatibility.prepare(next.id)
+  const invalidGraphOutput = await compatibility.compute(invalidGraphJob)
   try {
     writeFileSync(parser, `${parserSource}\nexport const invalidDynamicImport = value => import(value)\n`)
+    assert.equal((await compatibility.commit(invalidGraphJob, invalidGraphOutput)).reasonCode, 'TARGET_IDENTITY_INVALID')
     assert.equal(compatibility.get(next.id).reasonCode, 'TARGET_IDENTITY_INVALID')
     const invalidResult = await compatibility.checkRevision(next.id)
     assert.equal(invalidResult.comparison.result, 'unknown')

@@ -1,14 +1,14 @@
 import { DatabaseSync } from 'node:sqlite'
 import path from 'node:path'
-import { digestJson, stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { REVIEW_COMPONENTS, REVIEW_SUBJECT_VERSION, validateReviewSubject } from './reviewSubject.mjs'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
 import { reviewBuildIdentityProvider } from './reviewBuildIdentity.mjs'
 import { runReviewCompatibilityWorker } from './runReviewCompatibilityWorker.mjs'
+import {
+  checkedStoredReviewSubject, reviewCompatibilityAttempts, prepareReviewCompatibilityWrite, applyReviewCompatibilityWrite,
+} from './reviewCompatibilityWrite.mjs'
 
-const now = () => new Date().toISOString()
 const error = code => Object.assign(new Error(code), { code })
-const json = value => stableStringify(value)
 const hasTable = (db, table) => Boolean(db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?").get(table))
 const identityUnknown = () => ({ result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false,
   targetBuildId: null, comparatorVersion: REVIEW_COMPARATOR_VERSION })
@@ -16,16 +16,7 @@ const identityUnknown = () => ({ result: 'unknown', reasonCode: 'TARGET_IDENTITY
 function storedSubject(db, revisionId) {
   if (!hasTable(db, 'review_subject')) return null
   const row = db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revisionId)
-  if (!row) return null
-  const subject = JSON.parse(row.subject_json)
-  const checked = validateReviewSubject(subject)
-  if (!checked.ok || checked.subjectDigest !== row.subject_digest
-    || subject.revisionId !== row.revision_id || subject.bundleDigest !== row.bundle_digest
-    || subject.sourceRendererBuildId !== row.source_renderer_build_id
-    || REVIEW_COMPONENTS.some(key => digestJson(subject.components[key]) !== row[`${key}_digest`])) {
-    throw error('BASELINE_UNTRUSTED')
-  }
-  return { row, subject }
+  return checkedStoredReviewSubject(row)
 }
 
 export function getReviewCompatibility(db, revision, targetDescriptor) {
@@ -56,73 +47,24 @@ export function getReviewCompatibility(db, revision, targetDescriptor) {
 // Used by finalize in its existing preview/state transaction and by CAS below.
 export function appendReviewCompatibility(db, revision, baseline, comparison) {
   if (!db.isTransaction) throw error('REVIEW_TRANSACTION_REQUIRED')
-  if (!/^sha256:[a-f0-9]{64}$/.test(comparison.targetBuildId || '')
-    || !['equal', 'different', 'unknown'].includes(comparison.result)) throw error('REVIEW_RESULT_INVALID')
-  let existing
-  try { existing = storedSubject(db, revision.id) }
-  catch {
-    const row = db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id)
-    existing = row ? { row, subject: null } : null
-    baseline = null
-    comparison = { ...comparison, result: 'unknown', reasonCode: 'BASELINE_UNTRUSTED' }
-  }
-  if (baseline?.ok) {
-    const checked = validateReviewSubject(baseline.subject)
-    if (!checked.ok || checked.subjectDigest !== baseline.subjectDigest
-      || baseline.subject.revisionId !== revision.id || baseline.subject.bundleDigest !== revision.bundleDigest
-      || baseline.subject.sourceRendererBuildId !== revision.rendererBuildId) throw error('BASELINE_UNTRUSTED')
-    if (existing && json(existing.subject) !== json(baseline.subject)) {
-      comparison = { ...comparison, result: 'unknown', reasonCode: 'BASELINE_UNTRUSTED' }
-    } else if (!existing) {
-      db.prepare(`INSERT INTO review_subject
-        (revision_id, subject_version, origin, source_renderer_build_id, bundle_digest,
-         identity_digest, consumer_digest, sidecar_digest, media_digest, products_digest, inventory_digest,
-         subject_digest, subject_json, provenance_json, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).run(
-        revision.id, REVIEW_SUBJECT_VERSION, baseline.origin, revision.rendererBuildId, revision.bundleDigest,
-        ...REVIEW_COMPONENTS.map(key => digestJson(baseline.subject.components[key])),
-        checked.subjectDigest, json(baseline.subject), json(baseline.provenance), now())
-      existing = storedSubject(db, revision.id)
-    }
-  }
-  const previous = db.prepare(`SELECT * FROM review_compatibility
-    WHERE revision_id = ? AND target_build_id = ? AND comparator_version = ? ORDER BY attempt_no DESC`)
-    .all(revision.id, comparison.targetBuildId, REVIEW_COMPARATOR_VERSION)
-  const terminal = previous.find(row => row.result !== 'unknown')
-  const subjectDigest = existing?.row.subject_digest ?? null
-  if (comparison.result === 'equal' && (!subjectDigest || comparison.subjectDigest !== subjectDigest)) {
-    throw error('BASELINE_UNTRUSTED')
-  }
-  if (terminal) {
-    // A transient inability to recompute is not a contradictory content result.
-    // Automatic scheduling never reruns terminal keys; manual diagnostics may
-    // return unknown, but cannot replace an already complete terminal record.
-    if (comparison.result === 'unknown' && ['WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT',
-      'IO_ERROR', 'COMPUTATION_FAILED', 'TARGET_COMPUTATION_FAILED'].includes(comparison.reasonCode)) {
-      return { appended: false, attemptNo: previous[0].attempt_no }
-    }
-    if (comparison.result === terminal.result && subjectDigest === terminal.subject_digest
-      && !previous.some(row => ['TERMINAL_INTEGRITY_CONFLICT', 'BASELINE_UNTRUSTED'].includes(row.reason_code))) {
-      return { appended: false, attemptNo: terminal.attempt_no }
-    }
-    // Keep the original terminal row byte-for-byte; a new fault makes reads
-    // fail closed, including when a former equal's sealed bytes changed.
-    comparison = { ...comparison, result: 'unknown', reasonCode: 'TERMINAL_INTEGRITY_CONFLICT' }
-  }
-  const attemptNo = (previous[0]?.attempt_no ?? 0) + 1
-  const evidence = {
-    result: comparison.result, reasonCode: comparison.reasonCode,
-    componentDigests: comparison.componentDigests || {}, differences: comparison.differences || [],
-    metrics: comparison.metrics || {}, publicationMappingVersion: 'review-publication-content-v1',
-  }
-  db.prepare(`INSERT INTO review_compatibility
-    (revision_id, target_build_id, comparator_version, attempt_no, subject_digest, bundle_digest,
-     result, reason_code, evidence_digest, evidence_json, checked_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-    .run(revision.id, comparison.targetBuildId, REVIEW_COMPARATOR_VERSION, attemptNo, subjectDigest,
-      revision.bundleDigest, comparison.result, comparison.reasonCode, digestJson(evidence), json(evidence), now())
-  return { appended: true, attemptNo }
+  const subject = db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id)
+  const previous = reviewCompatibilityAttempts(db, revision.id, comparison.targetBuildId)
+  return applyReviewCompatibilityWrite(db, prepareReviewCompatibilityWrite(revision, subject, previous, baseline, comparison))
 }
 
+// Snapshot values are raw SQLite cells (including exact JSON strings), not
+// decoded JSON. Compare every cell directly instead of serializing/hashing a
+// potentially large preview again while holding the write transaction.
+function sameSnapshot(left, right) {
+  if (left === right) return true
+  if (!left || !right || typeof left !== 'object' || typeof right !== 'object') return false
+  if (left instanceof Uint8Array || right instanceof Uint8Array) {
+    return left instanceof Uint8Array && right instanceof Uint8Array && Buffer.compare(left, right) === 0
+  }
+  const keys = Object.keys(left)
+  return keys.length === Object.keys(right).length
+    && keys.every(key => Object.hasOwn(right, key) && sameSnapshot(left[key], right[key]))
+}
 function snapshot(db, revisionId) {
   const revision = db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(revisionId)
   if (!revision) return null
@@ -167,7 +109,7 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
     if (!eligible(value)) return null
     const target = descriptor()
     const job = Object.freeze({ revisionId, targetBuildId: target.targetBuildId })
-    jobs.set(job, { value, target, token: digestJson(value) })
+    jobs.set(job, { value, target })
     pending.add(revisionId)
     return job
   }
@@ -188,15 +130,22 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
     results.set(output, { job, output: structuredClone(output) })
     return output
   }
-  function commit(job, output) {
+  async function commit(job, output) {
     const captured = jobs.get(job)
     const computed = results.get(output)
     if (!captured || computed?.job !== job) throw error('REVIEW_RESULT_INVALID')
     try {
       let currentTarget
-      try { currentTarget = descriptor.fresh() }
+      try {
+        currentTarget = await descriptor.fresh({
+          dbPath, revision: revisionValue(captured.value.revision), subject: captured.value.subject,
+          baseline: computed.output.baseline, comparison: computed.output.comparison,
+          expectedTargetBuildId: captured.target.targetBuildId,
+        })
+      }
       catch { return { committed: false, reasonCode: 'TARGET_IDENTITY_INVALID' } }
       if (currentTarget.targetBuildId !== captured.target.targetBuildId) return { committed: false, reasonCode: 'TARGET_CHANGED' }
+      if (jobs.get(job) !== captured || results.get(output) !== computed) return { committed: false, reasonCode: 'REVIEW_JOB_INVALID' }
       const { comparison, executionIdentity } = computed.output
       if (comparison.targetBuildId !== captured.target.targetBuildId
         || ['TARGET_CHANGED', 'TARGET_IDENTITY_MISMATCH', 'TARGET_IDENTITY_INVALID'].includes(comparison.reasonCode)
@@ -209,17 +158,17 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
         db.exec('BEGIN IMMEDIATE')
         try {
           const current = snapshot(db, job.revisionId)
-          if (!eligible(current) || digestJson(current) !== captured.token) {
+          if (!eligible(current) || !sameSnapshot(current, captured.value)
+            || !sameSnapshot(reviewCompatibilityAttempts(db, job.revisionId, captured.target.targetBuildId), currentTarget.previous)) {
             db.exec('ROLLBACK')
             return { committed: false, reasonCode: 'CAS_CHANGED' }
           }
-          const revision = revisionValue(current.revision)
-          const { baseline, comparison } = computed.output
+          const { comparison } = computed.output
           if (['LEADER_BUSY', 'ACTIVITY_PENDING'].includes(comparison.reasonCode)) {
             db.exec('ROLLBACK')
             return { committed: false, reasonCode: comparison.reasonCode }
           }
-          const outcome = appendReviewCompatibility(db, revision, baseline, comparison)
+          const outcome = applyReviewCompatibilityWrite(db, currentTarget.writePlan)
           db.exec('COMMIT')
           return { committed: true, ...outcome }
         } catch (failure) { if (db.isTransaction) db.exec('ROLLBACK'); throw failure }
@@ -231,7 +180,7 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
       const job = prepare(revisionId)
       if (!job) return { committed: false, reasonCode: 'NOT_ELIGIBLE' }
       const output = await compute(job, options)
-      return { ...commit(job, output), comparison: output.comparison }
+      return { ...await commit(job, output), comparison: output.comparison }
     } catch (error) {
       if (error.code !== 'REVIEW_TARGET_IDENTITY_INVALID') throw error
       return { committed: false, reasonCode: 'TARGET_IDENTITY_INVALID', comparison: identityUnknown() }

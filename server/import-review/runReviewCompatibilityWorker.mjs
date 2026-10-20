@@ -83,7 +83,7 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
       const job = store.prepare(revisionId)
       if (!job) continue
       const output = await store.compute(job, { signal, leaderLease: leader.lease })
-      const committed = dryRun ? { committed: false, reasonCode: 'DRY_RUN' } : store.commit(job, output)
+      const committed = dryRun ? { committed: false, reasonCode: 'DRY_RUN' } : await store.commit(job, output)
       if (dryRun) store.discard(job)
       results.push({ revisionId, ...committed, comparison: output.comparison })
       if (results.length < ids.length) await yieldFor(REVIEW_WORKER_BUDGET.yieldMs, undefined, { signal })
