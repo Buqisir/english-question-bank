@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 
 // Isolated synthetic package; never connects to a production database or approves audio.
 import assert from 'node:assert/strict'

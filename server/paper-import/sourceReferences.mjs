@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import Ajv from 'ajv/dist/2020.js'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
+import { deriveNck1AnalyzedPackageBundle, parseStrictPackageJson } from '../paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 
 export const SOURCE_REFERENCES_FILE = 'source-references-v1.json'
 export const sourceReferencesSchema = JSON.parse(readFileSync(
@@ -38,7 +39,7 @@ export function prepareSourceReferences({ materialization, sourceDigest, candida
 }
 
 export function validateSourceReferences({
-  sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null,
+  sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null, sourceInput = null,
 }) {
   const validateSchema = sidecar?.schemaVersion === 'source-references-v2' ? validateV2 : validateV1
   if (!validateSchema(sidecar)) {
@@ -54,7 +55,20 @@ export function validateSourceReferences({
   })) {
     if (sidecar[key] !== expected) issue('SOURCE_REFERENCES_BINDING_STALE', `$.${key}`, `${key} disagrees with the exact source candidate`)
   }
-  const documents = new Map(materialization.documents.map(document => [document.documentId, document]))
+  let documentInventory = materialization.documents
+  if (!documentInventory) {
+    try {
+      const derived = deriveNck1AnalyzedPackageBundle(sourceInput)
+      if (derived.issues.length || digestJson(derived.materialization) !== digestJson(materialization)) throw new Error('Package differs')
+      documentInventory = sourceInput.members.map(member => ({ ...member,
+        documentId: member.memberId, sha256: sha256(member.bytes) }))
+      sourceDocuments = documentInventory
+    } catch {
+      issue('SOURCE_REFERENCES_SOURCE_INVALID', '$', 'Exact analyzed-package source evidence is required')
+      return issues
+    }
+  }
+  const documents = new Map(documentInventory.map(document => [document.documentId, document]))
   const writingGroups = materialization.groups.filter(group => group.writingTask)
   const owners = new Map(writingGroups.map(group => [group.groupId, group]))
   const actualSources = sourceDocuments && new Map(sourceDocuments.map(document => [document.documentId, document.bytes]))
@@ -79,7 +93,27 @@ export function validateSourceReferences({
       issue('SOURCE_REFERENCES_SOURCE_BYTES_CHANGED', path, 'Reference source bytes changed or are unavailable')
       return
     }
-    if (document.mediaType.includes('wordprocessingml') && locator.kind !== 'docx_part') {
+    if (locator.kind === 'package_json_pointer') {
+      try {
+        if (!sourceInput || document.mediaType !== 'application/json') throw new Error('Not a package JSON member')
+        const bytes = actualSources?.get(document.documentId)
+        if (!bytes || sha256(bytes) !== document.sha256) throw new Error('Missing member bytes')
+        let value = parseStrictPackageJson(bytes)
+        if (locator.pointer !== '') {
+          if (!locator.pointer.startsWith('/') || /~(?![01])/u.test(locator.pointer)) throw new Error('Invalid pointer')
+          for (const encoded of locator.pointer.slice(1).split('/')) {
+            const key = encoded.replace(/~1/g, '/').replace(/~0/g, '~')
+            if (!value || typeof value !== 'object' || !Object.hasOwn(value, key)) throw new Error('Missing pointer')
+            value = value[key]
+          }
+        }
+        if (text !== null && value !== text) throw new Error('Text differs')
+      } catch {
+        issue('SOURCE_REFERENCES_TEXT_DISAGREES', path, 'Package references must replay the exact sealed official-answer member and pointer')
+      }
+    } else if (sourceInput && !materialization.documents) {
+      issue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'Analyzed-package references require JSON pointers')
+    } else if (document.mediaType.includes('wordprocessingml') && locator.kind !== 'docx_part') {
       issue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'Native DOCX references use replayable paragraph selectors, not unverifiable page regions')
     } else if (locator.kind === 'page_region') {
       const { x, y, width, height } = locator.region
