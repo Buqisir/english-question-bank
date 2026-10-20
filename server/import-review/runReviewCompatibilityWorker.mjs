@@ -9,13 +9,16 @@ import {
   validReviewCompatibilityLease,
 } from './reviewCompatibilityScheduling.mjs'
 
-export const REVIEW_WORKER_BUDGET = Object.freeze({ heapMb: 384, deadlineMs: 120_000, batchSize: 5, yieldMs: 1000 })
+import { REVIEW_WORKER_BUDGET, REVIEW_BACKFILL_WORKER_BUDGET } from './reviewRecoveryPolicy.mjs'
+export { REVIEW_WORKER_BUDGET } from './reviewRecoveryPolicy.mjs'
 const running = new WeakSet()
 
 export async function runReviewCompatibilityWorker(input, {
-  timeoutMs = REVIEW_WORKER_BUDGET.deadlineMs, heapMb = REVIEW_WORKER_BUDGET.heapMb,
+  timeoutMs = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).deadlineMs,
+  heapMb = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).heapMb,
   signal, leaderLease,
 } = {}) {
+  const budget = input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET
   const owned = leaderLease ? null : acquireReviewCompatibilityLeader()
   const lease = leaderLease || owned?.lease
   const unknown = reasonCode => ({ baseline: null, comparison: {
@@ -35,8 +38,8 @@ export async function runReviewCompatibilityWorker(input, {
     if (reviewCompatibilityBusy()) return unknown('ACTIVITY_PENDING')
     running.add(lease)
     ownsRunning = true
-    if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || timeoutMs > REVIEW_WORKER_BUDGET.deadlineMs
-      || !Number.isInteger(heapMb) || heapMb < 16 || heapMb > REVIEW_WORKER_BUDGET.heapMb) throw new Error('Invalid worker budget')
+    if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || timeoutMs > budget.deadlineMs
+      || !Number.isInteger(heapMb) || heapMb < 16 || heapMb > budget.heapMb) throw new Error('Invalid worker budget')
     if (signal?.aborted) return unknown('WORKER_EXIT')
     // The supervisor owns temporary custody. Terminating an OOM/timed-out
     // thread does not run its finally blocks, so cleanup must happen here.
@@ -96,7 +99,7 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
     }
     return { results }
   } catch (error) {
-    if (error.code !== 'REVIEW_TARGET_IDENTITY_INVALID') throw error
+    if (!['REVIEW_TARGET_IDENTITY_INVALID', 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'].includes(error.code)) throw error
     return { paused: 'TARGET_IDENTITY_INVALID', results: [], compatibility: { result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID' } }
   } finally { leader.release() }
 }
@@ -116,6 +119,7 @@ export function startReviewCompatibilityWorker(store, { onError = () => {}, back
         // bounded idle slot recovering original evidence in a separate thread.
         const normal = await runReviewCompatibilityBatch(store, { signal: controller.signal })
         if (normal.paused || controller.signal.aborted || !backfillStore) return
+        if (normal.results.length) await yieldFor(REVIEW_WORKER_BUDGET.yieldMs, undefined, { signal: controller.signal })
         const backfill = await backfillStore.runBatch({ signal: controller.signal })
         if (backfill.more || backfill.results?.some(row => row.outcome === 'inserted'
           || row.reasonCode === 'CAS_CHANGED')) delay = REVIEW_WORKER_BUDGET.yieldMs

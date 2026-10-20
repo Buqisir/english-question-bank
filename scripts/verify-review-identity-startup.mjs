@@ -29,9 +29,9 @@ import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCo
     db.exec(`DROP TABLE review_subject;
       CREATE TABLE review_subject (revision_id TEXT, subject_version TEXT CHECK(subject_version='review-content-subject-v1'), subject_json TEXT);
       INSERT INTO review_subject VALUES('retained','review-content-subject-v1','{"retained":true}');`)
-    assert.throws(() => ensureReviewCompatibilityShape(db), { code: 'LEGACY_REVIEW_SUBJECTS_PRESENT' })
+    assert.deepEqual(ensureReviewCompatibilityShape(db), { enabled: false, reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT' })
     assert.equal(db.prepare('SELECT subject_json FROM review_subject').get().subject_json, '{"retained":true}')
-    console.log('PASS empty v1 schema upgrades idempotently; skip history survives; unexpected v1 subjects remain intact and fail closed')
+    console.log('PASS empty v1 schema upgrades idempotently; skip history survives; unexpected v1 subjects remain intact with the feature disabled')
   } finally { db.close() }
 }
 
@@ -120,7 +120,7 @@ try {
     readFileSync(dbPath);
     globalThis.gc();
     await yieldFor(5);
-    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-startup' });
+    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'new-startup-renderer' });
     const compatibility = createReviewCompatibilityStore({ dbPath, filesRoot });
     assert.equal(store.ready, compatibility.ready, 'read and scan stores share one identity initialization');
     const samples = [];

@@ -1,3 +1,5 @@
+import { reviewCompatibilityShapeAvailable } from './reviewCompatibilitySchema.mjs'
+import { isTransientReviewFailure } from './reviewRecoveryPolicy.mjs'
 import { DatabaseSync } from 'node:sqlite'
 import { createHash } from 'node:crypto'
 import path from 'node:path'
@@ -37,7 +39,7 @@ function compatibilityFromRows(revision, subject, rows) {
         || row.bundle_digest !== revision.bundleDigest
         || (row.subject_digest && row.subject_digest !== baseline?.row.subject_digest)) throw error('BASELINE_UNTRUSTED')
     }
-    const row = rows[0]
+    const row = rows.find(row => row.result === 'different') || rows[0]
     if (row.result === 'equal' && !baseline) throw error('BASELINE_UNTRUSTED')
     return { result: row.result, reasonCode: row.reason_code, pending: false, attemptNo: row.attempt_no,
       subjectDigest: row.subject_digest, targetBuildId: row.target_build_id,
@@ -46,6 +48,7 @@ function compatibilityFromRows(revision, subject, rows) {
 }
 
 export function getReviewCompatibility(db, revision, targetDescriptor) {
+  if (!reviewCompatibilityShapeAvailable(db)) return { result: 'unknown', reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', pending: false }
   const subject = hasTable(db, 'review_subject')
     ? db.prepare(`${subjectWithPreview} WHERE s.revision_id = ?`).get(revision.id) : null
   const rows = hasTable(db, 'review_compatibility') ? db.prepare(`SELECT * FROM review_compatibility
@@ -104,22 +107,26 @@ function compatibilitySummary(revision, subject, row, target) {
   } catch { return pending }
 }
 export function getReviewCompatibilitySummary(db, revision, target) {
+  if (!reviewCompatibilityShapeAvailable(db)) return { result: 'unknown', reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', pending: false }
   const subject = db.prepare(`${summarySubject} WHERE s.revision_id=?`).get(revision.id)
   const row = db.prepare(`SELECT * FROM review_compatibility WHERE revision_id=?
-    AND target_build_id=? AND comparator_version=? ORDER BY attempt_no DESC LIMIT 1`)
+    AND target_build_id=? AND comparator_version=? ORDER BY (result='different') DESC, attempt_no DESC LIMIT 1`)
     .get(revision.id, target.targetBuildId, REVIEW_COMPARATOR_VERSION)
   return compatibilitySummary(revision, subject, row, target)
 }
 
 export function getLatestReviewCompatibilities(db, revisions, targetDescriptor) {
+  if (!reviewCompatibilityShapeAvailable(db)) return new Map(revisions.map(revision =>
+    [revision.id, { result: 'unknown', reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', pending: false }]))
   const subjects = new Map(db.prepare(`${summarySubject}
     JOIN import_review_papers p ON p.latest_revision_id = s.revision_id`).all().map(row => [row.revision_id, row]))
   const attempts = new Map(db.prepare(`SELECT c.* FROM review_compatibility c
     JOIN import_review_papers p ON p.latest_revision_id = c.revision_id
     WHERE c.target_build_id = ? AND c.comparator_version = ?
-      AND c.attempt_no = (SELECT MAX(a.attempt_no) FROM review_compatibility a
+      AND c.attempt_no = (SELECT a.attempt_no FROM review_compatibility a
         WHERE a.revision_id=c.revision_id AND a.target_build_id=c.target_build_id
-          AND a.comparator_version=c.comparator_version)`)
+          AND a.comparator_version=c.comparator_version
+        ORDER BY (a.result='different') DESC, a.attempt_no DESC LIMIT 1)`)
     .all(targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION).map(row => [row.revision_id, row]))
   return new Map(revisions.map(revision => [revision.id,
     compatibilitySummary(revision, subjects.get(revision.id), attempts.get(revision.id), targetDescriptor)]))
@@ -128,6 +135,7 @@ export function getLatestReviewCompatibilities(db, revisions, targetDescriptor) 
 // Caller owns BEGIN IMMEDIATE. These are INSERT-only; no UPDATE/REPLACE/DELETE.
 // Used by finalize in its existing preview/state transaction and by CAS below.
 export function appendReviewCompatibility(db, revision, baseline, comparison) {
+  if (!reviewCompatibilityShapeAvailable(db)) return { appended: false, reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT' }
   if (!db.isTransaction) throw error('REVIEW_TRANSACTION_REQUIRED')
   const subject = db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id)
   const previous = reviewCompatibilityAttempts(db, revision.id, comparison.targetBuildId)
@@ -192,7 +200,7 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
     if (!/^rev-[a-f0-9-]{36}$/.test(revisionId || '')) throw error('REVIEW_REVISION_INVALID')
     if (isBusy()) return null
     const value = withDb(false, db => snapshot(db, revisionId))
-    if (!eligible(value)) return null
+    if (!eligible(value) || !withDb(false, reviewCompatibilityShapeAvailable)) return null
     const target = descriptor()
     const job = Object.freeze({ revisionId, targetBuildId: target.targetBuildId })
     jobs.set(job, { value, target })
@@ -269,7 +277,7 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
       const output = await compute(job, options)
       return { ...await commit(job, output), comparison: output.comparison }
     } catch (error) {
-      if (error.code !== 'REVIEW_TARGET_IDENTITY_INVALID') throw error
+      if (!['REVIEW_TARGET_IDENTITY_INVALID', 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'].includes(error.code)) throw error
       return { committed: false, reasonCode: 'TARGET_IDENTITY_INVALID', comparison: identityUnknown() }
     }
   }
@@ -297,6 +305,7 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
       throw failure
     }
     return withDb(false, db => {
+      if (!reviewCompatibilityShapeAvailable(db)) return []
       if (db.prepare('SELECT 1 FROM import_review_shipping_guards LIMIT 1').get()
         || db.prepare("SELECT 1 FROM import_review_promotions WHERE state = 'publishing' LIMIT 1").get()) return []
       const rows = db.prepare(`SELECT r.* FROM import_review_revisions r JOIN import_review_papers p
@@ -316,9 +325,10 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
           const subject = db.prepare('SELECT subject_digest FROM review_subject WHERE revision_id=?').get(row.id)
           if (subject && subject.subject_digest !== latest.subject_digest) return true
         }
-        const transient = ['WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT', 'IO_ERROR', 'COMPUTATION_FAILED']
-        return latest.result === 'unknown' && transient.includes(latest.reason_code) && latest.attempt_no <= 2
-          && nowMs >= Date.parse(latest.checked_at) + (latest.attempt_no === 1 ? 30_000 : 300_000)
+        const failures = reviewCompatibilityAttempts(db, row.id, target.targetBuildId)
+          .filter(attempt => attempt.result === 'unknown' && isTransientReviewFailure(attempt.reason_code))
+        return latest.result === 'unknown' && isTransientReviewFailure(latest.reason_code) && failures.length <= 2
+          && nowMs >= Date.parse(latest.checked_at) + (failures.length === 1 ? 30_000 : 300_000)
       }).slice(0, Math.min(limit, 5)).map(row => row.id)
     })
   }

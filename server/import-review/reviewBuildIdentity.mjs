@@ -1,3 +1,4 @@
+import { REVIEW_IDENTITY_BUDGET } from './reviewRecoveryPolicy.mjs'
 import { createHash } from 'node:crypto'
 import { isBuiltin } from 'node:module'
 import { lstatSync, readdirSync, readFileSync, realpathSync, existsSync, watch } from 'node:fs'
@@ -49,6 +50,9 @@ const relative = absolute => path.relative(releaseRoot, absolute).split(path.sep
 const inside = absolute => {
   const value = relative(absolute)
   return value !== '..' && !value.startsWith('../') && !path.isAbsolute(value)
+}
+function unavailable(reasonCode, message) {
+  return Object.assign(new Error(message), { code: 'REVIEW_TARGET_IDENTITY_UNAVAILABLE', reasonCode })
 }
 function invalid(message) {
   return Object.assign(new Error(message), { code: 'REVIEW_TARGET_IDENTITY_INVALID' })
@@ -201,6 +205,9 @@ export function computeReviewBuildIdentity(options = {}) {
         descriptorBytes: Buffer.byteLength(serialized), computeMs: performance.now() - started } })
   } catch (error) {
     if (error.code === 'REVIEW_TARGET_IDENTITY_INVALID') throw error
+    if (['EIO', 'EBUSY', 'EAGAIN', 'EMFILE', 'ENFILE', 'ETIMEDOUT'].includes(error.code)) {
+      throw unavailable('IO_ERROR', 'Unable to read executing release')
+    }
     throw invalid(`Unable to fingerprint executing release: ${error.message}`)
   }
 }
@@ -210,7 +217,7 @@ export function computeReviewBuildIdentity(options = {}) {
 export async function computeReviewBuildIdentityAsync(options = {}) {
   assertExecutionRoot(options)
   const worker = new Worker(new URL('./reviewBuildIdentityWorker.mjs', import.meta.url), {
-    resourceLimits: { maxOldGenerationSizeMb: 384 },
+    resourceLimits: { maxOldGenerationSizeMb: REVIEW_IDENTITY_BUDGET.heapMb },
     workerData: { prepareWrite: options.prepareWrite },
   })
   let timer
@@ -220,11 +227,12 @@ export async function computeReviewBuildIdentityAsync(options = {}) {
       onAbort = () => reject(Object.assign(new Error('Identity check aborted'), { name: 'AbortError' }))
       if (options.signal?.aborted) return onAbort()
       options.signal?.addEventListener('abort', onAbort, { once: true })
-      timer = setTimeout(() => reject(invalid('Build identity worker deadline exceeded')), 10_000)
+      timer = setTimeout(() => reject(unavailable('WORKER_TIMEOUT', 'Build identity worker deadline exceeded')), REVIEW_IDENTITY_BUDGET.deadlineMs)
       worker.once('message', message => message.error
-        ? reject(invalid(message.error)) : resolve(message))
-      worker.once('error', failure => reject(invalid(`Build identity worker failed: ${failure.code || 'WORKER_EXIT'}`)))
-      worker.once('exit', () => reject(invalid('Build identity worker exited without a result')))
+        ? reject(message.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
+          ? unavailable(message.reasonCode, message.error) : invalid(message.error)) : resolve(message))
+      worker.once('error', failure => reject(unavailable(failure.code === 'ERR_WORKER_OUT_OF_MEMORY' ? 'WORKER_OOM' : 'WORKER_EXIT', 'Build identity worker failed')))
+      worker.once('exit', () => reject(unavailable('WORKER_EXIT', 'Build identity worker exited without a result')))
     })
     if (result.releaseRoot !== releaseRoot || !/^sha256:[a-f0-9]{64}$/.test(result.targetBuildId)) {
       throw invalid('Build identity worker returned a different executing release')
@@ -247,6 +255,7 @@ export function reviewBuildIdentityProvider(options = {}) {
   let cached
   let active
   let failure
+  let failureAt = 0
   let watchFailure
   let generation = 0
   let runtime = runtimeSignature()
@@ -268,14 +277,27 @@ export function reviewBuildIdentityProvider(options = {}) {
     cached = Object.freeze({ targetBuildId: result.targetBuildId, releaseRoot: result.releaseRoot, metrics: result.metrics })
     failure = undefined
   }
+  function retryAllowed() {
+    return !failure || (failure.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
+      && Date.now() >= failureAt + REVIEW_IDENTITY_BUDGET.retryMs)
+  }
+  function run(prepareWrite) {
+    const epoch = generation
+    active = computeReviewBuildIdentityAsync({ ...options, prepareWrite }).then(result => {
+      currentRuntime()
+      // A delayed watcher notification invalidates the shared cache, not the
+      // independently computed fresh result used by the caller's exact CAS.
+      if (epoch === generation) publish(result, epoch)
+      return result
+    }).catch(error => {
+      if (epoch === generation) { failure = error; failureAt = Date.now() }
+      throw error
+    }).finally(() => { active = undefined })
+    return active
+  }
   function initialize() {
     currentRuntime()
-    if (!active) {
-      const epoch = generation
-      active = computeReviewBuildIdentityAsync(options).then(result => publish(result, epoch))
-        .catch(error => { if (epoch === generation) failure = error })
-        .finally(() => { active = undefined })
-    }
+    if (!active && retryAllowed()) void run().catch(() => {})
     return active
   }
   if (!production) {
@@ -297,8 +319,11 @@ export function reviewBuildIdentityProvider(options = {}) {
   const provider = () => {
     currentRuntime()
     if (watchFailure) throw watchFailure
+    if (failure) {
+      if (retryAllowed()) void initialize()
+      throw failure
+    }
     if (cached) return cached
-    if (failure) throw failure
     void initialize()
     throw pending()
   }
@@ -307,31 +332,32 @@ export function reviewBuildIdentityProvider(options = {}) {
       signal?.throwIfAborted()
       currentRuntime()
       if (watchFailure) throw watchFailure
-      if (cached) return cached
-      if (failure) throw failure
+      if (failure && !retryAllowed()) throw failure
+      if (cached && !failure) return cached
       // A shared initialization is never cancelled by one consumer.
       // Its bounded worker still owns termination; callers can stop waiting.
       const work = initialize()
-      if (!signal) await work
-      else await new Promise((resolve, reject) => {
+      if (!signal) {
+        try { await work } catch (error) { if (error.code !== 'REVIEW_TARGET_IDENTITY_PENDING') throw error }
+      } else await new Promise((resolve, reject) => {
         const aborted = () => reject(signal.reason)
         signal.addEventListener('abort', aborted, { once: true })
-        work.then(resolve, reject).finally(() => signal.removeEventListener('abort', aborted))
+        work.then(value => { signal.removeEventListener('abort', aborted); resolve(value) },
+          error => { signal.removeEventListener('abort', aborted); reject(error) })
       })
     }
   }
   provider.fresh = async prepareWrite => {
     currentRuntime()
-    const epoch = generation
-    let result
-    try { result = await computeReviewBuildIdentityAsync({ ...options, prepareWrite }) }
-    catch (error) { invalidate(); failure = error; throw error }
+    // Fresh writes carry different SQL inputs, so serialize rather than share
+    // their results. Initialization and fresh checks use the same single flight.
+    while (active) await active.catch(() => {})
     if (watchFailure) throw watchFailure
-    currentRuntime()
-    // The worker result still revalidates its actual target for the caller's
-    // CAS. A delayed file event must not let it replace an invalidated cache.
-    if (epoch === generation) publish(result, epoch)
-    return result
+    if (!retryAllowed()) throw failure
+    // A transient failure retains the last valid descriptor internally, but
+    // provider()/ready() cannot serve it until a successful refresh. Runtime
+    // or file invalidation still clears it; stale equal can never be authorized.
+    return run(prepareWrite)
   }
   providers.set(production, provider)
   void initialize()

@@ -1,3 +1,5 @@
+import { reviewCompatibilityShapeAvailable } from './reviewCompatibilitySchema.mjs'
+import { REVIEW_BACKFILL_WORKER_BUDGET, isTransientReviewFailure, reviewBackfillRetryState } from './reviewRecoveryPolicy.mjs'
 import { createHash } from 'node:crypto'
 import { lstatSync, statfsSync } from 'node:fs'
 import path from 'node:path'
@@ -11,7 +13,7 @@ import { backfillScopeSql, readReviewSubjectBackfillStatus, reviewSubjectBackfil
 import { REVIEW_BACKFILL_FILE_BUDGET } from './reviewSubjectBackfill.mjs'
 
 export const REVIEW_BACKFILL_BUDGET = Object.freeze({
-  heapMb: 128, deadlineMs: 10_000, batchSize: 1, scanLimit: 5, ...REVIEW_BACKFILL_FILE_BUDGET,
+  ...REVIEW_BACKFILL_WORKER_BUDGET, batchSize: 1, scanLimit: 5, ...REVIEW_BACKFILL_FILE_BUDGET,
 })
 export const REVIEW_BACKFILL_EXTRACTOR_VERSION = 'review-backfill-extractor-v2'
 
@@ -41,6 +43,15 @@ export function reviewBackfillInputToken(value, filesRoot, extractorVersion = RE
   return hash.digest('hex')
 }
 
+export function readBackfillRetryState(db, revisionId, token, nowMs = Date.now()) {
+  const old = db.prepare('SELECT * FROM review_subject_backfill WHERE revision_id=? AND input_token=?')
+    .get(revisionId, token)
+  if (old && !isTransientReviewFailure(old.reason_code)) return { eligible: false, terminal: true, exhausted: false }
+  const attempts = db.prepare(`SELECT * FROM review_subject_backfill_attempt
+    WHERE revision_id=? AND input_token=? ORDER BY id`).all(revisionId, token)
+  return reviewBackfillRetryState([...(old ? [old] : []), ...attempts], nowMs)
+}
+
 export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot }) {
   const target = reviewBuildIdentityProvider()
   const jobs = new WeakMap()
@@ -51,15 +62,16 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
     db.exec('PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000')
     try { return fn(db) } finally { db.close() }
   }
-  function prepare(revisionId) {
+  function prepare(revisionId, { nowMs = Date.now() } = {}) {
     if (!reviewSubjectBackfillEnabled()) return null
     const descriptor = target()
     return withDb(false, db => {
+      if (!reviewCompatibilityShapeAvailable(db)) return null
       const value = capture(db, revisionId)
       if (!value?.revision || value.subject || value.paper?.latest_revision_id !== revisionId
         || !['awaiting_review', 'approved'].includes(value.revision.state)) return null
       const token = reviewBackfillInputToken(value, filesRoot)
-      if (db.prepare('SELECT 1 FROM review_subject_backfill WHERE revision_id=? AND input_token=?').get(revisionId, token)) return null
+      if (!readBackfillRetryState(db, revisionId, token, nowMs).eligible) return null
       const job = Object.freeze({ revisionId })
       jobs.set(job, { value, token, descriptor,
         previous: reviewCompatibilityAttempts(db, revisionId, descriptor.targetBuildId) })
@@ -67,7 +79,7 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
     })
   }
   function scan() {
-    const ids = withDb(false, db => db.prepare(`SELECT r.id ${backfillScopeSql}
+    const ids = withDb(false, db => !reviewCompatibilityShapeAvailable(db) ? [] : db.prepare(`SELECT r.id ${backfillScopeSql}
       AND NOT EXISTS (SELECT 1 FROM review_subject s WHERE s.revision_id=r.id) ORDER BY r.id`).all().map(row => row.id))
     const next = ids.findIndex(id => id > cursor)
     for (let i = 0; i < Math.min(ids.length, REVIEW_BACKFILL_BUDGET.scanLimit); i++) {
@@ -77,13 +89,13 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
     }
     return null
   }
-  async function compute(job, { signal, leaderLease } = {}) {
+  async function compute(job, { signal, leaderLease, timeoutMs = REVIEW_BACKFILL_BUDGET.deadlineMs } = {}) {
     const data = jobs.get(job)
     if (!data) throw new Error('Unknown backfill job')
     const output = await runReviewCompatibilityWorker({
       mode: 'backfill', value: data.value, previous: data.previous,
       directory: path.join(filesRoot, job.revisionId), targetBuildId: data.descriptor.targetBuildId,
-    }, { signal, leaderLease, heapMb: REVIEW_BACKFILL_BUDGET.heapMb, timeoutMs: REVIEW_BACKFILL_BUDGET.deadlineMs })
+    }, { signal, leaderLease, heapMb: REVIEW_BACKFILL_BUDGET.heapMb, timeoutMs })
     outputs.set(output, { job, output: structuredClone(output) })
     return output
   }
@@ -94,13 +106,22 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
     jobs.delete(job)
     outputs.delete(diagnostic)
     const output = computed.output
-    if (['LEADER_BUSY', 'ACTIVITY_PENDING', 'TARGET_CHANGED', 'TARGET_IDENTITY_INVALID',
-      'TARGET_IDENTITY_MISMATCH'].includes(output.comparison.reasonCode)) {
-      return { committed: false, reasonCode: output.comparison.reasonCode }
+    let fresh
+    if (!isTransientReviewFailure(output.comparison.reasonCode)) {
+      try { fresh = await target.fresh() }
+      catch (error) {
+        output.comparison = { result: 'unknown',
+          reasonCode: error.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
+            ? 'TARGET_IDENTITY_UNAVAILABLE' : 'TARGET_IDENTITY_INVALID',
+          diagnostic: { message: error.message, reasonCode: error.reasonCode || error.code } }
+        output.writePlan = null
+      }
     }
-    const fresh = await target.fresh()
     if (signal?.aborted) return { committed: false, reasonCode: 'WORKER_EXIT' }
-    if (fresh.targetBuildId !== data.descriptor.targetBuildId) return { committed: false, reasonCode: 'TARGET_CHANGED' }
+    if (fresh && fresh.targetBuildId !== data.descriptor.targetBuildId) {
+      output.comparison = { result: 'unknown', reasonCode: 'TARGET_CHANGED' }
+      output.writePlan = null
+    }
     if (reviewCompatibilityBusy() || !reviewSubjectBackfillEnabled()) return { committed: false, reasonCode: 'ACTIVITY_PENDING' }
     return withDb(true, db => {
       db.exec('BEGIN IMMEDIATE')
@@ -118,18 +139,27 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
           db.exec('COMMIT')
           return { committed: false, reasonCode: 'CAS_CHANGED' }
         }
-        if (JSON.stringify(reviewCompatibilityAttempts(db, job.revisionId, fresh.targetBuildId)) !== JSON.stringify(data.previous)) {
+        if (JSON.stringify(reviewCompatibilityAttempts(db, job.revisionId, data.descriptor.targetBuildId)) !== JSON.stringify(data.previous)) {
           db.exec('ROLLBACK')
           return { committed: false, reasonCode: 'CAS_CHANGED' }
         }
-        if (db.prepare('SELECT 1 FROM review_subject_backfill WHERE revision_id=? AND input_token=?')
-          .get(job.revisionId, data.token)) {
+        if (!readBackfillRetryState(db, job.revisionId, data.token).eligible) {
           db.exec('ROLLBACK')
           return { committed: false, reasonCode: 'ALREADY_PROCESSED' }
         }
+        if (isTransientReviewFailure(output.comparison.reasonCode)) {
+          db.prepare(`INSERT INTO review_subject_backfill_attempt
+            (revision_id,input_token,reason_code,checked_at,diagnostic_json) VALUES (?,?,?,?,?)`)
+            .run(job.revisionId, data.token, output.comparison.reasonCode, new Date().toISOString(),
+              JSON.stringify(output.comparison.diagnostic || output.comparison.metrics || null))
+          const retry = readBackfillRetryState(db, job.revisionId, data.token)
+          db.exec('COMMIT')
+          return { committed: true, outcome: retry.exhausted ? 'exhausted' : 'retry_pending',
+            reasonCode: output.comparison.reasonCode, ...retry }
+        }
         const inserted = Boolean(output.writePlan?.subjectValues && output.baseline?.origin === 'stored_evidence'
           && output.comparison.result === 'unknown' && output.comparison.reasonCode === 'BACKFILL_PENDING'
-          && output.executionIdentity?.targetBuildId === fresh.targetBuildId
+          && fresh && output.executionIdentity?.targetBuildId === fresh.targetBuildId
           && output.executionIdentity?.releaseRoot === fresh.releaseRoot)
         if (inserted) applyReviewCompatibilityWrite(db, output.writePlan)
         const reasonCode = inserted ? 'BACKFILL_PENDING' : output.comparison.reasonCode
@@ -140,6 +170,23 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
     })
   }
   function status() { return withDb(false, db => readReviewSubjectBackfillStatus(db)) }
+  function resetTransientBudget(revisionId, { actor, reason } = {}) {
+    if (!actor?.trim() || !reason?.trim()) throw new Error('Reset requires an operator and reason')
+    return withDb(true, db => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        if (!reviewCompatibilityShapeAvailable(db)) throw new Error('Legacy subject shape is disabled')
+        const value = capture(db, revisionId)
+        if (!value?.revision || value.subject) throw new Error('Revision is missing or already has a subject')
+        const token = reviewBackfillInputToken(value, filesRoot)
+        db.prepare(`INSERT INTO review_subject_backfill_attempt
+          (revision_id,input_token,reason_code,checked_at,diagnostic_json) VALUES (?,?,'TRANSIENT_BUDGET_RESET',?,?)`)
+          .run(revisionId, token, new Date().toISOString(), JSON.stringify({ actor, reason }))
+        db.exec('COMMIT')
+        return { revisionId, ...readBackfillRetryState(db, revisionId, token) }
+      } catch (error) { if (db.isTransaction) db.exec('ROLLBACK'); throw error }
+    })
+  }
   async function runBatch({ signal } = {}) {
     if (!reviewSubjectBackfillEnabled() || signal?.aborted) return { paused: 'DISABLED', results: [] }
     const leader = acquireReviewCompatibilityLeader()
@@ -160,5 +207,5 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
       return { results: [{ revisionId: job.revisionId, ...result }], more: status().pending > 0 }
     } finally { leader.release() }
   }
-  return { ready: target.ready, prepare, compute, commit, runBatch, status }
+  return { ready: target.ready, prepare, compute, commit, runBatch, status, resetTransientBudget }
 }

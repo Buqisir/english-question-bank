@@ -18,5 +18,5 @@ try {
   }
   parentPort.postMessage(output)
 } catch (error) {
-  parentPort.postMessage({ error: error.code || 'REVIEW_TARGET_IDENTITY_INVALID' })
+  parentPort.postMessage({ error: error.message, code: error.code || 'REVIEW_TARGET_IDENTITY_INVALID', reasonCode: error.reasonCode })
 }

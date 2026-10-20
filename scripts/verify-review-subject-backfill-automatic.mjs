@@ -122,7 +122,7 @@ try {
   }
 
   // Exercise the same async compute -> short CAS boundary as the API worker.
-  // Approval is correctly denied by the current API without equal. A direct
+  // Matching-renderer approval uses the legacy guard without equal. A direct
   // old-writer receipt change also must not be overwritten by an in-flight job.
   const casPath = path.join(root, 'cas.sqlite')
   copyFileSync(dbPath, casPath)
@@ -135,15 +135,20 @@ try {
     revision: db.prepare('SELECT * FROM import_review_revisions WHERE id=?').get(id),
     paper: db.prepare('SELECT * FROM import_review_papers WHERE paper_id=?').get(paperId),
   }))
-  assert.throws(() => casStore.approveRevision(paperId, id, { bundleDigest: fixture.revision.bundleDigest }, 'racing-owner'),
-    error => Boolean(error.compatibility))
+  const fallbackApproval = casStore.approveRevision(paperId, id, { bundleDigest: fixture.revision.bundleDigest }, 'racing-owner')
+  assert.equal(fallbackApproval.revisionId, id)
+  dbRun(casPath, db => db.prepare(`UPDATE import_review_revisions SET state=?,approval_receipt_json=? WHERE id=?`)
+    .run(saved.revision.state, saved.revision.approval_receipt_json, id))
   const pausedJob = backfill.prepare(id)
   const finishActivity = beginReviewActivity('backfill-pause-fixture')
   let pausedOutput
   try { pausedOutput = await backfill.compute(pausedJob) } finally { finishActivity() }
   assert.equal((await backfill.commit(pausedJob, pausedOutput)).reasonCode, 'ACTIVITY_PENDING')
   assert.equal(dbRun(casPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject_backfill').get().n), 0)
-  console.log('PASS a transient activity pause never becomes a permanent skipped input')
+  assert.equal(dbRun(casPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject_backfill_attempt').get().n), 1)
+  assert.equal(backfill.prepare(id), null, 'activity deferral respects bounded backoff')
+  backfill.resetTransientBudget(id, { actor: 'fixture-owner', reason: 'Test activity is released' })
+  console.log('PASS a transient activity pause is retained, backs off and can be explicitly resumed without a permanent skip')
   for (const kind of ['approval', 'return', 'issue', 'finalize']) {
     const job = backfill.prepare(id)
     assert(job)
@@ -186,7 +191,7 @@ try {
       }
     })
   }
-  console.log('PASS automatic backfill refuses stale approval/return/issue/finalize snapshots; current approval still requires equal')
+  console.log('PASS automatic backfill refuses stale approval/return/issue/finalize snapshots; matching-renderer approval retains the legacy guard')
   const diagnosticJob = backfill.prepare(fixtures[1].revision.id)
   const diagnostic = await backfill.compute(diagnosticJob)
   assert(diagnostic.writePlan?.subjectValues, JSON.stringify(diagnostic.comparison))
