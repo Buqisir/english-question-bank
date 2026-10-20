@@ -150,7 +150,7 @@
   },
   {
     "facet_key": "grammar-fill.given.conversion.adjective-to-adjective",
-    "routes": ["negative-prefix"],
+    "routes": ["negative-prefix", "suffix-derivation"],
     "features": []
   },
   {

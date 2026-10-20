@@ -125,6 +125,12 @@ function assertPromptContract() {
   assert('prompt requires the shortest useful sentence skeleton', prompt.includes('restore the shortest useful skeleton around the gap'))
   assert('prompt explains slot job before answer form', prompt.includes('state what job the gap performs in that skeleton') && prompt.includes('derive the required word or form'))
   assert('prompt requires controlled similarityProfile', prompt.includes('Controlled `similarityProfile`') && prompt.includes('similarityForm'))
+  assert('prompt gives same-POS adjective suffix examples and distinguishes negation',
+    prompt.includes('distinct→distinctive / economic→economical / historic→historical')
+      && prompt.includes('use `suffix-derivation` for a same-POS derivational suffix')
+      && prompt.includes('Use `negative-prefix` when context requires a negative prefix'))
+  assert('prompt excludes inflection and POS changes from suffix derivation',
+    prompt.includes('`suffix-derivation` excludes negative prefixes, comparative/superlative inflections, and POS changes'))
   const roleSection = prompt.split('### `role` (non-finite only)')[1].split('### `no-hint`')[0]
   assert('prompt role vocabulary includes appositive with its Chinese meaning',
     roleSection.includes('`appositive`（同位语）'))
@@ -196,6 +202,11 @@ function assertRegistryContract() {
   }
 
   const similarityRegistry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-similarity-v1.json'))
+  const adjectiveDerivation = similarityRegistry.find((entry) =>
+    entry.facet_key === 'grammar-fill.given.conversion.adjective-to-adjective')
+  assert('adjective derivation has separate negative-prefix and suffix-derivation routes',
+    JSON.stringify(adjectiveDerivation.routes) === JSON.stringify(['negative-prefix', 'suffix-derivation'])
+      && adjectiveDerivation.features.length === 0)
   assert('similarity registry has exactly 24 facet entries', similarityRegistry.length === 24)
   assert(
     'similarity registry covers the same 24 facet keys',
@@ -324,6 +335,54 @@ function stubProvider(payload) {
 
 async function assertAnalysisValidation() {
   const input = gfFixtureInput()
+
+  // Independent synthetic sources: the hint/answer remain adjective pairs.
+  for (const [hint, answer, route, before, after, signal] of [
+    ['distinct', 'distinctive', 'suffix-derivation', 'The exhibit features ', ' treasures.', 'treasures'],
+    ['economic', 'economical', 'suffix-derivation', 'This is an ', ' way to heat the room.', 'way'],
+    ['historic', 'historical', 'suffix-derivation', 'The archive holds ', ' records.', 'records'],
+    ['complete', 'incomplete', 'negative-prefix', 'The report is ', '.', 'report'],
+  ]) {
+    const adjectiveInput = {
+      paper: { paperId: `paper:adjective-${hint}` },
+      group: {
+        groupId: `group:adjective-${hint}`,
+        paragraphs: [{ id: 'paragraph:adjectives', text: Array.from({ length: 10 }, (_, index) =>
+          `${before}__${56 + index}__${after}`).join(' ') }],
+        questions: Array.from({ length: 10 }, (_, index) => ({
+          id: `question:adjective-${56 + index}`, blankId: `blank:adjective-${56 + index}`,
+          stem: String(56 + index), prompt: hint, answerKey: answer,
+        })),
+      },
+    }
+    const adjectiveAnalysis = validGfAnalysis(adjectiveInput)
+    for (const blank of Object.values(adjectiveAnalysis.blanks)) {
+      Object.assign(blank, {
+        facetKey: 'grammar-fill.given.conversion.adjective-to-adjective',
+        similarityProfile: { route, features: [] },
+        reason: `原句需要形容词，${hint} 派生为 ${answer}。`,
+        evidence: [{ type: 'modified-word', signalText: signal, signalSide: 'passage', relation: '句法位置要求形容词。' }],
+      })
+    }
+    const beforeValidation = JSON.stringify(adjectiveAnalysis)
+    validateGrammarFillShape(adjectiveAnalysis, adjectiveInput)
+    assert(`same-POS adjective ${hint}→${answer} accepts and preserves ${route}`,
+      JSON.stringify(adjectiveAnalysis) === beforeValidation)
+    for (const facetKey of ['grammar-fill.given.conversion.verb-to-adjective', 'grammar-fill.given.adjective.comparison']) {
+      await assertRejects(`${route} cannot be used under ${facetKey}`, () => {
+        const invalid = structuredClone(adjectiveAnalysis)
+        Object.values(invalid.blanks)[0].facetKey = facetKey
+        validateGrammarFillShape(invalid, adjectiveInput)
+      }, /similarityProfile.route.*不匹配/)
+    }
+    await assertRejects(`${route} cannot put the other derivation route in features`, () => {
+      const invalid = structuredClone(adjectiveAnalysis)
+      Object.values(invalid.blanks)[0].similarityProfile.features = [
+        route === 'suffix-derivation' ? 'negative-prefix' : 'suffix-derivation',
+      ]
+      validateGrammarFillShape(invalid, adjectiveInput)
+    }, /similarityProfile.features.*不支持/)
+  }
 
   const cleftInput = {
     paper: { paperId: 'paper-cleft-authority' },
