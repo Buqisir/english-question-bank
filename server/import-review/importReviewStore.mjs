@@ -24,7 +24,7 @@ import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation }
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
 import { readReviewSubjectBackfillStatus } from './reviewSubjectBackfillStatus.mjs'
 import { checkedStoredReviewSubject } from './reviewCompatibilityWrite.mjs'
-import { appendReviewCompatibility, getReviewCompatibility, getReviewCompatibilitySummary, getLatestReviewCompatibilities } from './reviewCompatibilityStore.mjs'
+import { appendReviewCompatibility, retainedReviewDifference, enforceRetainedReviewDifference, getReviewCompatibility, getReviewCompatibilitySummary, getLatestReviewCompatibilities } from './reviewCompatibilityStore.mjs'
 import { buildProductPreviewPayload } from './reviewSubject.mjs'
 import { compareReviewSubjects, REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
 import { reviewBuildIdentityProvider } from './reviewBuildIdentity.mjs'
@@ -848,17 +848,19 @@ export function createImportReviewStore({
     if (revision.reviewKind === 'ocr') return {
       result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false,
     }
+    const difference = retainedReviewDifference(db, revision.id)
+    const finish = value => enforceRetainedReviewDifference(db, revision.id, difference, value, target)
     try {
       target ||= targetBuild()
       const value = (summary ? getReviewCompatibilitySummary : getReviewCompatibility)(db, revision, target)
-      return { ...value, result: value.pending ? 'pending' : value.result,
-        targetBuildId: target.targetBuildId, comparatorVersion: value.comparatorVersion || REVIEW_COMPARATOR_VERSION }
+      return finish({ ...value, result: value.pending ? 'pending' : value.result,
+        targetBuildId: target.targetBuildId, comparatorVersion: value.comparatorVersion || REVIEW_COMPARATOR_VERSION })
     } catch (error) {
       if (error.code === 'REVIEW_TARGET_IDENTITY_PENDING') {
-        return { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true }
+        return finish({ result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true })
       }
-      return { result: 'unknown', reasonCode: error.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
-        ? 'TARGET_IDENTITY_UNAVAILABLE' : 'TARGET_IDENTITY_INVALID', pending: false }
+      return finish({ result: 'unknown', reasonCode: error.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
+        ? 'TARGET_IDENTITY_UNAVAILABLE' : 'TARGET_IDENTITY_INVALID', pending: false })
     }
   }
 
@@ -1506,7 +1508,9 @@ export function createImportReviewStore({
           result: compatibilities.get(row.latest_revision_id).pending ? 'pending' : compatibilities.get(row.latest_revision_id).result,
           targetBuildId: target.targetBuildId, comparatorVersion: REVIEW_COMPARATOR_VERSION }
           : unavailable
-      const compatibility = eligibility({ rendererBuildId: row.renderer_build_id }, rawCompatibility)
+      const compatibility = eligibility({ rendererBuildId: row.renderer_build_id },
+        kind === 'ocr' ? rawCompatibility : enforceRetainedReviewDifference(db, row.latest_revision_id,
+          retainedReviewDifference(db, row.latest_revision_id), rawCompatibility, target))
       return {
         paperId: row.paper_id,
         paperName: row.paper_name,

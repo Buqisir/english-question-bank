@@ -369,6 +369,60 @@ try {
       { code: process.env.BUB90_FAILURE === 'deterministic' ? 'REVIEW_TARGET_IDENTITY_INVALID'
         : 'REVIEW_TARGET_IDENTITY_UNAVAILABLE', reasonCode: 'WORKER_EXIT' })
   `))
+  // Preserve a valid promotion, then inject a difference in another target.
+  // Both identity-unavailable modes must reject all three public mutation seams.
+  const differenceCases = []
+  for (const mode of ['cold', 'timeout']) {
+    const dbPath = path.join(root, `retained-${mode}.sqlite`)
+    copyFileSync(fixture.dbPath, dbPath)
+    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: revision.rendererBuildId })
+    const approval = store.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner')
+    const begun = store.beginPromotion(revision.paperId, { ...approval, intent: 'ship' }, 'owner')
+    dbRun(dbPath, db => {
+      const subjectDigest = db.prepare('SELECT subject_digest FROM review_subject').get().subject_digest
+      db.exec('BEGIN IMMEDIATE')
+      appendReviewCompatibility(db, revision, null, { result: 'different', reasonCode: 'CONTENT_DIFFERENT',
+        subjectDigest, targetBuildId: 'sha256:' + 'd'.repeat(64) })
+      db.exec('COMMIT')
+    })
+    const approvalPath = path.join(root, `retained-${mode}-approval.sqlite`)
+    copyFileSync(dbPath, approvalPath)
+    dbRun(approvalPath, db => db.exec('DELETE FROM import_review_promotions; DELETE FROM import_review_shipping_guards'))
+    differenceCases.push({ dbPath, approvalPath, mode, approval, begun })
+  }
+  const differentProgram = `
+    import assert from 'node:assert/strict';
+    import { reviewBuildIdentityProvider } from './server/import-review/reviewBuildIdentity.mjs';
+    import { createImportReviewStore } from './server/import-review/importReviewStore.mjs';
+    const [casesJson,filesRoot,rendererBuildId]=process.argv.slice(1);
+    const c=JSON.parse(casesJson);
+    const provider=reviewBuildIdentityProvider({production:true});
+    if(c.mode==='timeout') await assert.rejects(provider.ready(),{code:'REVIEW_TARGET_IDENTITY_UNAVAILABLE'});
+    const store=createImportReviewStore({dbPath:c.approvalPath,filesRoot,rendererBuildId});
+    const writerStore=createImportReviewStore({dbPath:c.dbPath,filesRoot,rendererBuildId});
+    const revision=store.getRevision(c.approval.revisionId);
+    for(const value of [store.compatibilityForRevision(revision.id),store.listPapers()[0].compatibility]) {
+      assert.equal(value.result,'different'); assert.equal(value.eligible,false); assert.equal(value.fallback,false);
+    }
+    assert.throws(()=>store.approveRevision(revision.paperId,revision.id,{bundleDigest:revision.bundleDigest},'owner'),
+      {code:'IMPORT_REVIEW_RENDERER_STALE'});
+    assert.throws(()=>store.beginPromotion(revision.paperId,{...c.approval,intent:'ship'},'owner'),
+      {code:'IMPORT_REVIEW_RENDERER_STALE'});
+    let wrote=false;
+    assert.throws(()=>writerStore.withPromotionContentGuard(revision.paperId,c.begun.promotion.promotionId,
+      c.begun.contentBinding,()=>{wrote=true}),{code:'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'});
+    assert.equal(wrote,false);
+    console.log('PASS retained different + '+c.mode+': approve, promotion and final writer denied despite old equal');
+  `
+  // The injected identity failure uses the same unavailable code/reason as a deadline.
+  writeFileSync(workerFile, readFileSync(workerFile, 'utf8').replace("reasonCode: 'WORKER_EXIT'", "reasonCode: 'WORKER_TIMEOUT'"))
+  for (const c of differenceCases) {
+    console.log(execFileSync(process.execPath, ['-e', differentProgram, JSON.stringify(c), filesRoot,
+      revision.rendererBuildId], { cwd: release, encoding: 'utf8', timeout: 120_000,
+      env: { ...process.env, NODE_ENV: 'production', BUB90_FAILURE: '1',
+        BUB90_COUNTER: path.join(root, `different-${c.mode}-attempts`) } }))
+    checks++
+  }
   const program = `
     import assert from 'node:assert/strict';
     import { readFileSync } from 'node:fs';

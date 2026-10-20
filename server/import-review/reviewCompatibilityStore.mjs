@@ -47,6 +47,27 @@ function compatibilityFromRows(revision, subject, rows) {
   } catch { return { result: 'unknown', reasonCode: 'BASELINE_UNTRUSTED', pending: false } }
 }
 
+// Consult all target namespaces before attempting to resolve the current identity.
+// A validated equal may supersede old differences only when it was appended later
+// for this exact, currently trusted target. Never borrow another target's equal.
+export function retainedReviewDifference(db, revisionId) {
+  if (!hasTable(db, 'review_compatibility')) return null
+  return db.prepare(`SELECT rowid AS sequence, * FROM review_compatibility
+    WHERE revision_id=? AND result='different' ORDER BY rowid DESC LIMIT 1`).get(revisionId) || null
+}
+export function enforceRetainedReviewDifference(db, revisionId, difference, value, target) {
+  if (!difference) return value
+  if (target && value.result === 'equal' && value.targetBuildId === target.targetBuildId) {
+    const equal = db.prepare(`SELECT rowid AS sequence FROM review_compatibility
+      WHERE revision_id=? AND target_build_id=? AND comparator_version=? AND attempt_no=? AND result='equal'`)
+      .get(revisionId, target.targetBuildId, value.comparatorVersion, value.attemptNo)
+    if (equal?.sequence > difference.sequence) return value
+  }
+  return { result: 'different', reasonCode: 'RETAINED_CONTENT_DIFFERENT', pending: false,
+    targetBuildId: difference.target_build_id, comparatorVersion: difference.comparator_version,
+    checkedAt: difference.checked_at }
+}
+
 export function getReviewCompatibility(db, revision, targetDescriptor) {
   if (!reviewCompatibilityShapeAvailable(db)) return { result: 'unknown', reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', pending: false }
   const subject = hasTable(db, 'review_subject')
