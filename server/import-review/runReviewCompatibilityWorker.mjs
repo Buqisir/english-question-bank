@@ -63,19 +63,21 @@ export async function runReviewCompatibilityWorker(input, {
       stderr = (stderr + bytes.toString()).slice(-8192)
       sawOom ||= /heap out of memory|Allocation failed/i.test(stderr)
     })
-    return await new Promise(resolve => {
+    return await new Promise((resolve, reject) => {
       let settled = false
-      const finish = output => {
-        if (settled) return
+      let failureReason = null
+      const finish = (output, failed = false) => {
+        if (settled || (failureReason && !failed)) return
         settled = true
         output.comparison.metrics = { ...output.comparison.metrics,
           heapLimitMb: heapMb, rssLimitMb: rssMb, peakTreeRssBytes: peakRssBytes, deadlineMs: timeoutMs }
         resolve(output)
       }
       const fail = reason => {
-        if (settled) return
-        killReviewProcessTree(worker, pids)
-        finish(unknown(reason))
+        if (settled || failureReason) return
+        failureReason = reason
+        // A late successful IPC message cannot overtake an RSS/timeout kill.
+        killReviewProcessTree(worker, pids).then(() => finish(unknown(reason), true), reject)
       }
       const sample = async () => {
         if (settled || sampling) return
@@ -111,7 +113,7 @@ export async function runReviewCompatibilityWorker(input, {
     try {
       await sampling
       if (worker?.pid) {
-        killReviewProcessTree(worker, pids)
+        await killReviewProcessTree(worker, pids)
         await exited
       }
     } finally {
