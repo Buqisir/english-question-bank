@@ -111,6 +111,7 @@ try {
   const reviewDb = path.join(root, 'review.sqlite')
   const store = createImportReviewStore({ dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
     rendererBuildId: 'publication-fixture-renderer' })
+  await store.ready()
   const revision = store.createRevision(manifest).revision
   for (const file of files) {
     const { destination } = store.fileForUpload(revision.id, file.path)
@@ -290,11 +291,15 @@ try {
   try {
     await assert.rejects(Promise.resolve().then(() => service({ blobStore: targetRace })
       .promote(projection.paperId, { ...intent, intent: 'retry_ship' }, 'fixture')),
-    { code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'TARGET_CHANGED' })
+    error => error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
+      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING'].includes(error.reasonCode))
     assert.equal(store.latestPromotion(projection.paperId).assetVersion, null)
+    assert.equal(store.latestPromotion(projection.paperId).state, 'publishing')
+    assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM import_review_shipping_guards').get().n), 1)
   } finally {
     if (beforeOrigin === undefined) delete process.env.QUESTION_BANK_PUBLIC_ORIGIN
     else process.env.QUESTION_BANK_PUBLIC_ORIGIN = beforeOrigin
+    await store.ready()
   }
   pass('asynchronous archive target identity race rejects')
   const originalPreviewDigest = dbRun(db => db.prepare(
@@ -320,10 +325,14 @@ try {
         } })
       },
     }).promote(projection.paperId, { ...intent, intent: 'retry_ship' }, 'fixture')),
-    { code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'TARGET_CHANGED' })
+    error => error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
+      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING'].includes(error.reasonCode))
+    assert.equal(store.latestPromotion(projection.paperId).state, 'publishing')
+    assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM import_review_shipping_guards').get().n), 1)
   } finally {
     if (beforeOrigin === undefined) delete process.env.QUESTION_BANK_PUBLIC_ORIGIN
     else process.env.QUESTION_BANK_PUBLIC_ORIGIN = beforeOrigin
+    await store.ready()
   }
   pass('target change after prepared callback is rejected by the final transaction before writing')
   await assert.rejects(Promise.resolve().then(() => service({
