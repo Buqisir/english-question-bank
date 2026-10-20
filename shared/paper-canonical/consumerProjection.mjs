@@ -463,6 +463,16 @@ function projectReadingConsumerGroup(input, occurrence) {
   const layoutByQuestionId = new Map(textOptionSets.map((set, index) =>
     [set.questionId, layoutPlans[index]]))
   const questions = occurrence.questions.map((question) => {
+    if (question.stemFigures !== undefined
+      && (!Array.isArray(question.stemFigures) || question.stemFigures.length === 0)) {
+      throw rejected(`Canonical Reading occurrence ${groupId} has an invalid stem figure sequence`)
+    }
+    const stemFigures = question.stemFigures === undefined ? {} : {
+      stemFigures: question.stemFigures.map(figure => {
+        if (figure?.kind !== 'figure') throw rejected(`Canonical Reading occurrence ${groupId} has a non-figure stem block`)
+        return projectReadingChildBlock(figure, { allowFigure: true, allowFramedColumns: false })
+      }),
+    }
     if (
       !Array.isArray(question.stem)
       || !Array.isArray(question.options)
@@ -496,6 +506,7 @@ function projectReadingConsumerGroup(input, occurrence) {
         questionNo: numberByQuestionId.get(question.questionId),
         stem: textContent(question.stem),
         stemContent: structuredClone(question.stem),
+        ...stemFigures,
         options,
         correctOptionId: question.correctOptionId,
         layoutPlan: null,
@@ -520,6 +531,7 @@ function projectReadingConsumerGroup(input, occurrence) {
       questionNo: numberByQuestionId.get(question.questionId),
       stem: textContent(question.stem),
       stemContent: structuredClone(question.stem),
+      ...stemFigures,
       options,
       correctOptionId: question.correctOptionId,
       layoutPlan,

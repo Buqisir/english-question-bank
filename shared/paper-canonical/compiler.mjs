@@ -2429,6 +2429,7 @@ function collectReadingTargetIds(variant, allowStemMarks) {
     ...(variant.questions || []).flatMap((question) =>
       (allowStemMarks ? question.stem || [] : [question?.stem?.[0]])
         .map(inline => ({ kind: 'content_node', id: inline?.nodeId }))),
+    ...(variant.questions || []).flatMap(question => collectRichTargetIds({ blocks: question.stemFigures || [] })),
     ...(variant.choiceOwnership?.sets || []).flatMap((set) => (set.options || []).flatMap((option) => [
       { kind: 'option', id: option.optionId },
       ...(option.content || []).map((inline) => ({ kind: 'content_node', id: inline.nodeId })),

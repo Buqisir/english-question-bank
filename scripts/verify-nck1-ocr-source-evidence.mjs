@@ -41,6 +41,7 @@ import {
   cloneJson,
   makeSyntheticNck1OcrFixture,
 } from '../test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs'
+import { verifyReadingStemFigures } from '../test-fixtures/paper-import/nck1-ocr-evidence-v1/stem-figures.mjs'
 import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { replaceOcrStructuredAnswerRegions } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
@@ -55,6 +56,7 @@ execFileSync(process.execPath, [path.join(root, 'scripts/generate-paper-ocr-emph
   stdio: 'inherit',
 })
 const fixture = await makeSyntheticNck1OcrFixture({ paperId })
+await verifyReadingStemFigures(fixture)
 
 function validRegion(region) {
   return region

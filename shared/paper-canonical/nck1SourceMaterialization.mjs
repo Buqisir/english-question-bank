@@ -22,6 +22,11 @@ export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4 =
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5 =
   'nck1-source-materialization-v5'
 
+// v6 extends v5 with Reading Question-owned stemFigures. Older envelopes
+// remain closed. Canonical authority registration waits for the complete reader.
+export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6 =
+  'nck1-source-materialization-v6'
+
 const slots = Object.freeze([
   ['reading.a', 'reading', 21, 23],
   ['reading.b', 'reading', 24, 27],
@@ -339,7 +344,7 @@ function validateBlocks(blocks, path, documents, mediaReferences, blankReference
   }
 }
 
-function validateQuestion(question, expectedNumber, family, path, documents, ids, issues, figureReferences = null) {
+function validateQuestion(question, expectedNumber, family, path, documents, ids, issues, figureReferences = null, allowStemFigures = false) {
   if (
     !isRecordValue(question)
     || !exactKeys(question, [
@@ -352,6 +357,7 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
       'prompt',
       'source',
       ...(figureReferences && family === 'reading' && Object.hasOwn(question, 'figureLayout') ? ['figureLayout'] : []),
+      ...(allowStemFigures && family === 'reading' && Object.hasOwn(question, 'stemFigures') ? ['stemFigures'] : []),
     ])
     || !nonEmptyString(question.questionId)
     || ids.has(question.questionId)
@@ -372,6 +378,22 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
     issues.push(issue('MATERIALIZATION_FIGURE_LAYOUT_INVALID', `${path}.figureLayout`, 'Source-measured Reading layout must bind its exact question, options, source document and measurement'))
   }
   if (family === 'reading') {
+    if (Object.hasOwn(question, 'stemFigures')) {
+      const figures = question.stemFigures
+      if (!Array.isArray(figures) || figures.length === 0 || figures.some(figure => figure?.kind !== 'figure')) {
+        issues.push(issue('MATERIALIZATION_STEM_FIGURES_INVALID', `${path}.stemFigures`, 'Stem figures must be a nonempty ordered figure-only sequence'))
+      } else {
+        validateBlocks(figures, `${path}.stemFigures`, documents, figureReferences, [], ids, issues)
+        for (const figure of figures) {
+          const document = documents.get(figure.source?.documentId)
+          if (figure.source?.kind !== 'page_region' || document?.role !== 'question_source'
+            || document?.mediaType !== 'application/pdf'
+            || figure.source.documentId !== question.source.documentId) {
+            issues.push(issue('MATERIALIZATION_STEM_FIGURE_SOURCE_INVALID', `${path}.stemFigures`, 'Stem figures require the same question_source PDF as their owning Question'))
+          }
+        }
+      }
+    }
     if (figureReferences && Array.isArray(question.options) && question.options.some((option) => option?.figure)) {
       if (question.options.length !== 4 || question.options.some((option, index) =>
         !isRecordValue(option) || !exactKeys(option, ['label', 'figure'])
@@ -579,7 +601,7 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
   }
 }
 
-function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false) {
+function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false) {
   if (!Array.isArray(groups) || groups.length !== slots.length) {
     issues.push(issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'NCK1 requires exactly nine active groups'))
     return { questionIds: new Map(), ids: new Set() }
@@ -636,7 +658,7 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
     for (let number = from; number <= to; number += 1) {
       const questionIndex = number - from
       const question = group.questions[questionIndex]
-      validateQuestion(question, number, expectedFamily, `${path}.questions[${questionIndex}]`, documents, ids, issues, allowFigureOptions ? mediaReferences : null)
+      validateQuestion(question, number, expectedFamily, `${path}.questions[${questionIndex}]`, documents, ids, issues, allowFigureOptions ? mediaReferences : null, allowStemFigures)
       if (nonEmptyString(question?.questionId)) {
         questionIds.set(question.questionId, { number, family: expectedFamily })
       }
@@ -1097,7 +1119,7 @@ export function validateNck1SourceMaterialization(value) {
       'sourceCoverage',
       'listening',
       'issues',
-      ...([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5].includes(value.schemaVersion) ? ['sourcePresentation'] : []),
+      ...([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion) ? ['sourcePresentation'] : []),
     ])
     || ![
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION,
@@ -1105,6 +1127,7 @@ export function validateNck1SourceMaterialization(value) {
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5,
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6,
     ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
     || value.profileId !== 'nck1'
@@ -1143,7 +1166,7 @@ export function validateNck1SourceMaterialization(value) {
       documents.set(document.documentId, document)
     }
   }
-  if ([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5].includes(value.schemaVersion)) {
+  if ([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion)) {
     const presentation = value.sourcePresentation
     const required = Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slot =>
       !slot.startsWith('listening.') || value.listening?.state !== 'not_supplied')
@@ -1174,12 +1197,23 @@ export function validateNck1SourceMaterialization(value) {
   }
   const mediaReferences = []
   const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues,
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5].includes(value.schemaVersion),
-    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5)
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion),
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion),
+    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6)
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {
     for (const question of Array.isArray(group?.questions) ? group.questions : []) {
+      for (const figure of Array.isArray(question?.stemFigures) ? question.stemFigures : []) {
+        const media = (Array.isArray(value.media) ? value.media : []).find(item => item?.mediaId === figure?.mediaId)
+        const crop = media?.extraction
+        if (media?.kind !== 'figure' || crop?.kind !== 'pdf_crop'
+          || !isRecordValue(figure.source?.region) || !isRecordValue(crop.region)
+          || crop.documentId !== figure.source?.documentId || crop.page !== figure.source?.page
+          || digestJson(crop.region) !== digestJson(figure.source?.region)) {
+          issues.push(issue('MATERIALIZATION_STEM_FIGURE_CROP_INVALID', '$.groups', 'Stem figure locator must equal its exact PDF crop'))
+        }
+      }
       if (question?.figureLayout && !validateReadingFigureLayout(
         question.figureLayout, question.questionId, question.options,
         documents.get(question.source?.documentId)?.sha256,

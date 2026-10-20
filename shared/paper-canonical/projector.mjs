@@ -55,6 +55,7 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
     ...(group.variant.family === 'reading'
       ? [
           ...group.variant.questions.flatMap((question) => question.stem.map((inline) => `content_node:${inline.nodeId}`)),
+          ...group.variant.questions.flatMap(question => contentIdentityLists({ blocks: question.stemFigures || [] }).sourceMappedIds.map(id => `content_node:${id}`)),
           ...group.variant.choiceOwnership.sets.flatMap((set) => set.options.flatMap((option) => [
             `option:${option.optionId}`,
             ...(option.content || []).map((inline) => `content_node:${inline.nodeId}`),
@@ -455,6 +456,7 @@ export function projectCanonicalPaper(canonicalPackage) {
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
                 correctOptionId: question.correctOptionId,
                 ...(question.figureLayout ? { figureLayout: cloneJson(question.figureLayout) } : {}),
+                ...(question.stemFigures ? { stemFigures: cloneJson(question.stemFigures) } : {}),
               })),
               anchors: {
                 contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
