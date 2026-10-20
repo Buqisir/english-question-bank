@@ -603,8 +603,13 @@ async function pdfQa(ctx, paper) {
       await agent(ctx, paper, `${label(product)} ${sha256.slice(7, 23)} 上下文 ${index + 1}`, 'sol', [
         `复核同一 PDF ${sha256} 的上下文疑点 ${JSON.stringify(issues)}。`,
         `必须打开全部相邻页图 ${JSON.stringify(adjacent)}，对应 PDF 页码 ${JSON.stringify(pages)}。`,
-        '逐项裁决原疑点：完整七选五选项库在正文后一页允许；选项库本身拆页、实际缺项仍 blocking。仍无法确认写 needsContext；已消除写 notes 并引用具体页码与证据。',
+        '逐项裁决原疑点：完整七选五选项库在正文后一页允许；选项库本身拆页、实际缺项仍 blocking。不能只返回空数组或 notes 来消除原疑点。',
         `只写 ${output}，${outputContract}`,
+        '另加 decisions 数组，每个原疑点 ID 恰好返回一次：'
+          + '{"id":"原疑点完整ID","status":"resolved","pages":[实际证据所在PDF页码],"evidence":"图中可见的具体证据"}，'
+          + '或 {"id":"原疑点完整ID","status":"blocking","reason":"确证缺陷"}，'
+          + '或 {"id":"原疑点完整ID","status":"needsContext","reason":"仍不能判断的原因"}。'
+          + 'resolved 必须有本次实际打开的页码与非空证据。保留 ID 原值；漏答、重复、无效裁决均继续阻塞。',
       ].join('\n'), [output], { timeout: VISUAL_AGENT_TIMEOUT })
       return json(output)
     } })
