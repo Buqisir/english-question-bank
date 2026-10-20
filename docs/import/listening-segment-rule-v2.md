@@ -11,7 +11,7 @@ Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻�
 
 | 参数 | 值 |
 | --- | --- |
-| 规则 / 等价表版本 | `listening-segment-rule-v2` / `listening-equivalences-v2` |
+| 规则 / 等价表版本 | `listening-segment-rule-v2` / `listening-equivalences-v3` |
 | 首尾连续锚 | 6 词；歧义扩为 12 词，仍歧义则复核 |
 | 可选模糊锚 | 默认关闭；至少 20 词，12 词连续锚中恰好 1 处替换，每遍另一端须精确 |
 | 短材料 / 其他材料 | 少于 40 词：源词匹配率和含插入惩罚的编辑相似度均 ≥0.95；其他均 ≥0.90 |
@@ -46,7 +46,8 @@ Apple 和 Whisper 合并后再次校验同一骨架规则；局部 Whisper 结�
 `READINGS_OVERLAP`。`boundaryAdjustments` 保留原边界、静音区间及共同分界点。
 
 等价规则先于关键字门禁执行，源文与 ASR 使用同一规范化路径；全部插入、删除、替换仍检查
-规范化后的两侧数值、序数、货币、否定和时间。当前版本 `listening-equivalences-v2`：
+规范化后的两侧数值、序数、货币、否定和时间。当前版本 `listening-equivalences-v3`
+保留下列 v2 规则，并追加文末列出的有限缩写规则：
 
 | 类别 | 确定等价范围 | 保守边界 |
 | --- | --- | --- |
@@ -403,3 +404,92 @@ text-1 在 OFF 为次数不匹配，在 ON 为正文匹配率低，text-6 为边
 - `.scratch/listening-astra-type-fix-e2e-comparison-final.json`
 - `.scratch/listening-astra-type-fix-e2e-off/attempt-2026-10-20T19-56-35-280Z-f151ec8c/`
 - `.scratch/listening-astra-type-fix-e2e-on/attempt-2026-10-20T19-56-36-396Z-32085c2f/`
+
+## 2026-10-21 normalization v3：真实整卷误拦修复
+
+规则版本保持 v2；等价版本升为 `listening-equivalences-v3`。阈值仍为短材料
+0.95、其他 0.90，精确首尾锚仍为 6 词，模糊锚默认关闭。没有新增专名、同音词、
+动词屈折或任意所有格等价。
+
+新增的确定缩写规则在源文和 timed ASR 的同一路径中执行，先展开再对齐及检查关键字：
+
+| 类别 | 有限范围 | 保守边界 |
+| --- | --- | --- |
+| 否定助动词 | do/does/did/is/are/was/were/has/have/had/could/would/should/must/might/need/ought/dare + n't；can't/cannot → can not；won't → will not；shan't → shall not | not 必须保留；doesn't ↔ does、can't ↔ can、won't ↔ will 双向都拦截；未列形式不猜测 |
+| 确定的肯定缩写 | I'm；you/we/they + 're；i/you/we/they/could/would/should/might/must + 've；i/you/he/she/it/we/they/there/that/who/what + 'll | 展开为 am/are/have/will，不移除主语或助动词 |
+| 's | 紧邻 been → has；代词主语紧邻 being → is；he/she/it/there/that/who/what 紧邻有限表语 wrong/ready/afraid/happy/sorry/here/there 或物主限定词 my/your/his/her/its/our/their → is | 只接受这些标准英语谓语语境；John's running、city's park、it's gone、he's finished、it's not 等歧义保留；不将 's 本身作为关键字 |
+| 'd | 代词主语紧邻 been/better → had；紧邻 be/have/like/love/prefer/rather/go/work/join/say/take/give/need/want → would | read 等有 had/would 歧义的形式保留，不统一改为 would |
+
+上下文缩写保留完整表达式的原始字符范围和原 run 边界；不能跨句点、segment、
+失败/倒序时间戳或超过 2 秒的空档展开。多 token 展开不能为内部 token 创造物理播放边界。
+即使规范化后的纯文本相等，既有 year/time/cardinal/ordinal 类型门禁仍执行。
+
+边界修复：先过滤不能容纳完整原 run 与既有 0.02 秒余量的静音候选，再按既有先后
+规则选取相邻静音。候选仍必须是实际测得的静音且距 run ≤2 秒；没有合格静音仍复核。
+没有更改 silence 参数、2 秒窗口、0.02 秒余量、时长比、双引擎冲突或骨架策略。
+
+### 六组诊断
+
+下表首尾为修复前规范化的连续 6 词（已去说话人标签；Hey 已按既有规则变为 hi）。
+时间为录音绝对秒，第一/第二遍以分号分隔；“首/尾”各列给出相应六词时间范围。
+所有尾词与源一致，山东 Text 6 展开后的尾六词为 `right now we will talk later`。
+
+| 组 | 源首六词 / 源尾六词 | 根因与修复后的结论 |
+| --- | --- | --- |
+| 潍坊 Text 3 | `mr white i'm afraid i have` / `a guide for the returning graduates` | 两引擎读作 `mr white i am afraid i`，缺缩写展开导致首锚为零。恢复后还发现 what's wrong / what is wrong、it's our… / it is our…；有限谓语语境展开后 Apple 两遍匹配率/编辑相似度均 1，可用。Whisper 首遍 Mr. 提前到 184.70、White 188.84，缺 anniversary，仍有开头空档及两遍时长比异常；原始证据保留，本轮 Apple 独立成功不调用该缓存。 |
+| 潍坊 Text 5 | `this subway transfer hall is huge` / `a lot on improving public spaces` | city’s been / city has been 是漏归一化；makes / make 是两引擎一致的真实转写差异，未消除。前者修复后仍为短材料（39 词），两遍两项分数均 38/39 = 0.974359，原阈值内可用；不是单纯把 0.947 放行。 |
+| 潍坊 Text 7 | `hi leo you've improved a lot` / `be there this week thanks leo` | 两引擎首部均为 `hi leo you have improved a`；非标签、中文播报或窗口问题。展开后 Apple 两遍匹配率均 0.992537，编辑相似度 0.985185/0.977941，可用。it's way / it is way 仍保留差异，不为提高分数扩展歧义形式。 |
+| 潍坊 Text 10 | `last month a group of university` / `hearts it becomes alive and meaningful` | 源 doesn’t，两个引擎均 does not；旧关键字检查看到未匹配的 doesn't 和插入 not，形成伪否定冲突。展开后否定一致，Apple 两遍匹配率 0.988636/0.982955，编辑相似度 0.977528/0.966480，可用；learned/learn、Wuqinxi/wu ching shi、textbooks/text books 仍计差异。没有剥除源 TCM 括号说明。 |
+| 山东核心素养 Text 1 | `hi cris i love your suit` / `bought me this for my birthday` | 两引擎均 Chris，专名差异没有等价授权；Apple 两遍首锚为零，Whisper 还缺首遍。继续 READING_COUNT_MISMATCH，playback 为 null，不用模糊锚绕过。ASR 本身不能证明源文拼写错误。 |
+| 山东核心素养 Text 6 | `hi george congratulations on your promotion` / `office right now we'll talk later` | Apple 两遍正文均完整；第二遍末 run 到 412.500，旧 find 选 412.419167–412.503333 的微小静音，无法留足 0.02 秒；随后 412.922–422.580792 的合格静音被忽略。修复后第二遍终点 417.751396，Apple 独立两遍通过。Whisper 首遍整个开头缺失，首个后续 token 为 I@365.84，第二遍完整；不把 2/1 改成虚假一致，本轮不再触发回退。 |
+
+| 组 | Apple 首 / 尾 | Whisper 首 / 尾 |
+| --- | --- | --- |
+| 潍坊 Text 3 | 187.20–190.26 / 202.56–204.42；206.22–209.16 / 221.40–223.32 | 184.70–190.26 / 202.64–204.64；206.78–209.10 / 221.48–223.48 |
+| 潍坊 Text 5 | 303.36–306.36 / 317.22–319.56；321.36–324.18 / 335.10–337.98 | 303.00–306.34 / 317.20–319.82；321.66–324.18 / 335.06–337.80 |
+| 潍坊 Text 7 | 529.80–533.88 / 584.34–586.92；588.54–592.32 / 642.72–645.36 | 530.58–533.82 / 584.02–586.72；589.30–592.40 / 642.60–645.34 |
+| 潍坊 Text 10 | 1051.32–1054.38 / 1129.20–1132.86；1135.92–1137.90 / 1212.66–1215.78 | 1051.58–1054.62 / 1129.26–1132.40；1135.48–1138.06 / 1212.68–1215.80 |
+| 山东 Text 1（首为 `hi chris i love your suit`） | 78.30–81.36 / 88.68–90.00；91.44–94.56 / 101.76–103.56 | 首遍缺失；92.20–94.56 / 101.84–103.44 |
+| 山东 Text 6 | 357.00–361.14 / 382.20–384.18；385.50–389.40 / 410.94–412.50 | 首遍首锚缺失，尾 382.50–384.38；386.10–389.70 / 411.00–412.82 |
+
+Text 5 的 city/has/been：Apple 首遍 316.14–316.68、第二遍 333.90–334.62；
+Whisper 首遍 316.06–316.74、第二遍 333.86–334.58。
+Text 10 的 does/not：Apple 1123.20–1123.74、1206.54–1207.02；
+Whisper 1123.08–1123.62、1206.50–1207.04。
+以上均复用 2026-10-20 整卷重跑的原始 evidence，没有再次识别。
+
+### 验证
+
+- 完整 import-pipeline/replay 测试 **431 PASS / 0 FAIL / 0 SKIP**，新增 7 项。
+  两条既有断言改为检查展开后的 not，以及插入+替换不能生成模糊锚候选，未减弱否定保护。
+- 45 组、22 卷局部回放仍为 **28 usable / 17 review_required**；含顺序状态为
+  **0 usable / 17 review_required / 28 ORDER_NOT_EVALUABLE_IN_REPLAY**，
+  45 组整卷顺序均不可评估。Apple 25/20；Whisper 21/24（此前 20/25）。
+  同一缓存与 HEAD 原规则逐组比对，最终决策变化为 0；除 normalizationVersion 外，
+  `LISTENING_SEGMENT_RULE` 所有参数逐项相等。
+- 潍坊整卷 **6/4 → 10/0**，全部由 Apple 独立通过，本轮 0 次 Whisper 回退。
+- 山东核心素养整卷 **8/2 → 9/1**，只有 Text 1 回退到原 Whisper 缓存，仍需复核。
+  两卷均通过未改动的 `validateListeningReview`；原物化、活动 sidecar 和分页文件哈希未变。
+- 新 ASR 调用为 0。新 attempt 保留本次算法/代码哈希、原缓存窗口范围、判定和未批准组；
+  不安装到纸卷、不送审、不发布。
+
+证据在当前工作树下：
+
+- `.scratch/listening-v3-group-diagnostics.json`：六组原首尾锚、逐 token/raw run/时间及缓存文件绝对路径。
+- `.scratch/listening-v3-cached-e2e.mjs`、`.scratch/listening-v3-cached-e2e-summary.json`：缓存整卷入口与汇总。
+- `.scratch/listening-v3-cached-e2e/paper-mock-shandong-weifang-2026-04-second-mock/attempt-2026-10-20T20-48-13-040Z-52dbd99d/`
+- `.scratch/listening-v3-cached-e2e/paper-mock-shandong-2026-04-core-literacy-assessment/attempt-2026-10-20T20-48-13-176Z-0c876835/`
+- `.scratch/listening-v3-replay-final/replay-2026-10-20T20-48-28-107Z.json`
+- `.scratch/listening-v3-replay-baseline-comparison.json`：45 组逐项基线对照与参数不变断言。
+- `.scratch/listening-v3-suite-final-2.log`
+
+命令：
+
+```sh
+export PATH=/opt/homebrew/opt/node@24/bin:$PATH
+TMPDIR="$PWD/.scratch/listening-v3-test-tmp" node --test --test-concurrency=1 \
+  scripts/import-pipeline/*.test.mjs scripts/import-pipeline/replay/*.test.mjs
+node scripts/import-pipeline/replay-listening-rule.mjs .scratch/asr-eval-20261020 \
+  .scratch/listening-v3-replay-final --no-fuzzy-anchors
+node .scratch/listening-v3-cached-e2e.mjs
+```

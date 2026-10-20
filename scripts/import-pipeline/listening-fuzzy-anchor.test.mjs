@@ -55,7 +55,13 @@ test('critical words and question or option content words are protected on both 
     const src = change(1, sourceWord)
     const result = evaluate({ text: src.join(' '), actual: change(1, actualWord, src) })
     assert.equal(result.decision, 'review_required', `${sourceWord} -> ${actualWord}`)
-    assert.ok(result.issues.includes('FUZZY_ANCHOR_PROTECTED_WORD'))
+    if (actualWord === "don't") {
+      // v3 expands do not: this is now an insertion plus substitution, so
+      // it cannot even form a one-substitution fuzzy candidate.
+      assert.equal(result.anchors.mode, 'exact')
+      assert.equal(result.occurrences.length, 0)
+      assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
+    } else assert.ok(result.issues.includes('FUZZY_ANCHOR_PROTECTED_WORD'))
   }
   for (const word of ['dolphins', 'porpoises']) {
     const result = evaluate({ actual: change(1, 'porpoises'), questions: [

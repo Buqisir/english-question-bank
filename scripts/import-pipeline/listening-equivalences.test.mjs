@@ -10,7 +10,7 @@ const ordinal = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'sevent
   'twenty seventh', 'twenty eighth', 'twenty ninth', 'thirtieth', 'thirty first']
 const suffix = n => n >= 11 && n <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th')
 test('v2 equates exactly the first thirty-one ordinal spellings, preserving their value', () => {
-  assert.equal(LISTENING_SEGMENT_RULE.normalizationVersion, 'listening-equivalences-v2')
+  assert.equal(LISTENING_SEGMENT_RULE.normalizationVersion, 'listening-equivalences-v3')
   ordinal.forEach((word, i) => {
     assert.deepEqual(normal(`${i + 1}${suffix(i + 1)}`), normal(word))
     assert.deepEqual(normal(word.replaceAll(' ', '-')), normal(word))
@@ -165,4 +165,92 @@ test('a four-digit literal licenses year rewriting; identical expressions remain
   assert.equal(result.decision, 'review_required')
   assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
   assert.deepEqual(normal('2026.'), normal('twenty twenty-six.'))
+})
+
+test('v3 expands finite negative auxiliaries and preserves not', () => {
+  for (const [a, b] of [["doesn't", 'does not'], ["don't", 'do not'], ["isn't", 'is not'],
+    ["aren't", 'are not'], ["wasn't", 'was not'], ["weren't", 'were not'],
+    ["didn't", 'did not'], ["hasn't", 'has not'], ["haven't", 'have not'],
+    ["hadn't", 'had not'], ["can't", 'can not'], ['cannot', 'can not'],
+    ["won't", 'will not'], ["shan't", 'shall not'], ["wouldn't", 'would not'],
+    ["shouldn't", 'should not'], ["couldn't", 'could not'], ["mustn't", 'must not'],
+    ["mightn't", 'might not'], ["needn't", 'need not'], ["oughtn't", 'ought not']]) {
+    assert.deepEqual(normal(a), normal(b), `${a} / ${b}`)
+    for (const [source, actual] of [[a, b], [b, a]]) assert.equal(evaluate(source, actual).decision, 'usable')
+    for (const [source, actual] of [[a, b.replace(' not', '')], [b.replace(' not', ''), a]]) {
+      const result = evaluate(source, actual)
+      assert.equal(result.decision, 'review_required')
+      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'), `${source} / ${actual}`)
+    }
+  }
+})
+test('unambiguous positive contractions expand before exact anchors and body alignment', () => {
+  for (const [a, b] of [["I'm afraid", 'I am afraid'], ["you’re welcome", 'you are welcome'],
+    ["we're ready", 'we are ready'], ["they're waiting", 'they are waiting'],
+    ["you've improved", 'you have improved'], ["I'll attend", 'I will attend'],
+    ["we’ve finished", 'we have finished'], ["I'd be glad", 'I would be glad'],
+    ["she'd been waiting", 'she had been waiting'], ["I'd better leave", 'I had better leave']]) {
+    assert.deepEqual(normal(a), normal(b), `${a} / ${b}`)
+    assert.equal(evaluate(a, b).decision, 'usable')
+  }
+})
+test('s contractions expand only in determinate local contexts; possessives and ambiguous predicates remain differences', () => {
+  for (const [a, b] of [["the city's been focusing", 'the city has been focusing'],
+    ["he's been working", 'he has been working'], ["she's being careful", 'she is being careful'],
+    ["what's wrong", 'what is wrong'], ["it's our anniversary", 'it is our anniversary']]) {
+    assert.deepEqual(normal(a), normal(b))
+    assert.equal(evaluate(a, b).decision, 'usable')
+  }
+  for (const [a, b] of [["John's running", 'John is running'], ["it's gone", 'it has gone'],
+    ["he's finished", 'he is finished'], ["the city's park", 'the city is park'],
+    ["she'd read", 'she had read'], ["she'd read", 'she would read'],
+    ["he's. Been waiting", 'he has been waiting']]) assert.notDeepEqual(normal(a), normal(b), `${a} / ${b}`)
+  const ambiguous = evaluate("it's finished", 'it has finished')
+  assert.ok(ambiguous.occurrences[0].alignment.differences.length)
+  assert.ok(!ambiguous.issues.some(code => code.startsWith('CRITICAL_WORD')))
+})
+test('expanded contractions retain the whole acoustic run and cannot create internal playback boundaries', () => {
+  const words = listeningAsrTokens([windowFor(["I'm", 'afraid', "doesn't", "we'll"])]).words
+  assert.deepEqual(words.map(w => w.token), normal('I am afraid does not we will'))
+  for (const token of ["I'm", "doesn't", "we'll"]) {
+    const expanded = words.filter(w => w.rawRunText === token)
+    assert.equal(expanded.length, 2)
+    assert.equal(expanded[0].startBoundary, true)
+    assert.equal(expanded[0].endBoundary, false)
+    assert.equal(expanded[1].startBoundary, false)
+    assert.equal(expanded[1].endBoundary, true)
+    assert.equal(expanded[0].runStartSeconds, expanded[1].runStartSeconds)
+    assert.equal(expanded[0].runEndSeconds, expanded[1].runEndSeconds)
+  }
+})
+test('exact heads accept contracted source and expanded ASR without fuzzy matching', () => {
+  for (const [source, actual] of [["I'm afraid I have to bring the blue folder home today", 'I am afraid I have to bring the blue folder home today'],
+    ["Hey Leo you've improved a lot in physics this year", 'Hey Leo you have improved a lot in physics this year']]) {
+    const raw = windowFor(actual.split(' ')), end = raw.result.segments[0].end
+    const result = evaluateListeningEngine({groups: [{segmentId: 'listening-text-1', questionNumbers: [1], text: source}],
+      instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}], windows: [raw],
+      durationSeconds: 100, pauses: [{startSeconds: 1, endSeconds: 1.95}, {startSeconds: end + 0.05, endSeconds: end + 1}]}).groups[0]
+    assert.equal(result.decision, 'usable', result.issues.join(','))
+    assert.equal(result.anchors.mode, 'exact')
+  }
+})
+test('context-bound contractions never cross invalid timestamps, long pauses or segment boundaries', () => {
+  for (const edit of [
+    words => { words[1].start += 3; words[1].end += 3 },
+    words => { words[1].end = NaN },
+    words => { words[1].start = 1; words[1].end = 1.5 },
+  ]) {
+    const raw = windowFor(["city's", 'been', 'focusing'])
+    edit(raw.result.segments[0].words)
+    assert.ok(!listeningAsrTokens([raw]).words.some(w => w.token === 'has'))
+  }
+  const raw = windowFor(["he's", 'been'])
+  raw.result.segments = raw.result.segments[0].words.map(word => ({text: word.word, words: [word]}))
+  assert.ok(!listeningAsrTokens([raw]).words.some(w => w.token === 'has'))
+  for (const [source, target] of [["he's being", 'he has being'], ["city's been", 'city is been'],
+    ["he'd been", 'he would been'], ["he'd be", 'he had be'],
+    ["what's wrong", 'what has wrong'], ["it's our anniversary", 'it has our anniversary']]) {
+    assert.notDeepEqual(normal(source), normal(target))
+    assert.ok(evaluate(source, target).occurrences[0].alignment.differences.length)
+  }
 })

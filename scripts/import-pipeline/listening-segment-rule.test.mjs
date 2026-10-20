@@ -38,6 +38,20 @@ test('frozen Apple run fixture: one reading is usable from original instructions
   assert.ok(result.playback.startSeconds < 2)
   assert.ok(result.playback.endSeconds > 6.8)
 })
+test('boundary search skips an overlapping silence that cannot retain padding and uses the next observed pause', () => {
+  const raw = windowFor('Bright birds gather along the quiet river near our peaceful village')
+  const end = raw.result.segments[0].end
+  const result = evaluate({groups: [{...group, text: raw.result.segments[0].text}], windows: [raw],
+    pauses: [{startSeconds: 1, endSeconds: 1.9},
+      {startSeconds: end - 0.08, endSeconds: end + 0.003},
+      {startSeconds: end + 0.42, endSeconds: end + 3}]})
+  assert.equal(result.decision, 'usable', result.issues.join(','))
+  assert.ok(result.playback.endSeconds >= end + 0.42)
+  assert.ok(result.playback.endSeconds > end + 0.02)
+  const noLaterPause = evaluate({groups: [{...group, text: raw.result.segments[0].text}], windows: [raw],
+    pauses: [{startSeconds: 1, endSeconds: 1.9}, {startSeconds: end - 0.08, endSeconds: end + 0.003}]})
+  assert.ok(noLaterPause.issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
+})
 test('reading count is never inferred from one occurrence', () => {
   assert.equal(evaluate({ instructions: two }).decision, 'review_required')
   assert.equal(evaluate({ instructions: [] }).expectedReadings, 'unknown')
@@ -119,7 +133,8 @@ test('alignment checks critical insertions, deletions and replacements on both s
       const result = evaluate({ groups: [{ ...group, text }], windows: [raw], pauses: surrounding([raw]) })
       assert.equal(result.decision, 'review_required', `${text} / ${actual}`)
       assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
-      assert.ok(result.occurrences[0].alignment.differences.some(d => d.sourceWord === word || d.targetWord === word))
+      const critical = word === "don't" ? 'not' : word
+      assert.ok(result.occurrences[0].alignment.differences.some(d => d.sourceWord === critical || d.targetWord === critical))
     }
   }
 })

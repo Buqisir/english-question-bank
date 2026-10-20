@@ -1,7 +1,7 @@
 // Pure, platform-independent navigation rule. ASR is evidence, never a source-text editor.
 export const LISTENING_SEGMENT_RULE = Object.freeze({
   version: 'listening-segment-rule-v2',
-  normalizationVersion: 'listening-equivalences-v2',
+  normalizationVersion: 'listening-equivalences-v3',
   anchorWords: 6,
   expandedAnchorWords: 12,
   fuzzyAnchorsEnabled: false,
@@ -39,6 +39,16 @@ export const LISTENING_EQUIVALENCES = Object.freeze({
   organise: 'organize', organised: 'organized', realise: 'realize',
   ...Object.fromEntries(ordinalEntries),
   'a.m.': 'am', 'a.m': 'am', 'p.m.': 'pm', 'p.m': 'pm',
+  ...Object.fromEntries(['do', 'does', 'did', 'is', 'are', 'was', 'were', 'has', 'have', 'had',
+    'could', 'would', 'should', 'must', 'might', 'need', 'ought', 'dare']
+    .map(auxiliary => [`${auxiliary}n't`, `${auxiliary} not`])),
+  "can't": 'can not', cannot: 'can not', "won't": 'will not', "shan't": 'shall not',
+  "i'm": 'i am',
+  ...Object.fromEntries(['you', 'we', 'they'].map(subject => [`${subject}'re`, `${subject} are`])),
+  ...Object.fromEntries(['i', 'you', 'we', 'they', 'could', 'would', 'should', 'might', 'must']
+    .map(subject => [`${subject}'ve`, `${subject} have`])),
+  ...Object.fromEntries(['i', 'you', 'he', 'she', 'it', 'we', 'they', 'there', 'that', 'who', 'what']
+    .map(subject => [`${subject}'ll`, `${subject} will`])),
 })
 const smallNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
   'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
@@ -152,6 +162,32 @@ function normalizeListeningUnits(value) {
   const result = []
   for (let i = 0; i < units.length; i++) {
     const a = units[i], b = units[i + 1], c = units[i + 2]
+    // Do not guess is/has/possessive or had/would from a suffix alone.
+    // These finite contexts license the expansion on either input side.
+    // Keep the full context's raw span, so timed ASR cannot license it across
+    // an invalid run, segment boundary or preparation pause.
+    const contracted = a.token.match(/^([a-z]+)'([sd])$/u)
+    const subject = contracted?.[1], suffix = contracted?.[2]
+    const pronoun = ['i', 'you', 'he', 'she', 'it', 'we', 'they', 'there', 'that', 'who', 'what'].includes(subject)
+    let auxiliary
+    if (b && adjacent(a, b)) {
+      if (suffix === 's' && b.token === 'been') auxiliary = 'has'
+      if (suffix === 's' && pronoun && b.token === 'being') auxiliary = 'is'
+      // Pronoun subjects cannot be possessors here. Only these published
+      // predicative complements license is; gone/finished/not stay ambiguous.
+      if (suffix === 's' && ['he', 'she', 'it', 'there', 'that', 'who', 'what'].includes(subject)
+        && ['wrong', 'ready', 'afraid', 'happy', 'sorry', 'here', 'there',
+          'my', 'your', 'his', 'her', 'its', 'our', 'their'].includes(b?.token)
+        && adjacent(a, b)) auxiliary = 'is'
+      if (suffix === 'd' && pronoun) {
+        if (['been', 'better'].includes(b.token)) auxiliary = 'had'
+        else if (['be', 'have', 'like', 'love', 'prefer', 'rather', 'go', 'work', 'join',
+          'say', 'take', 'give', 'need', 'want'].includes(b.token)) auxiliary = 'would'
+      }
+    }
+    if (auxiliary) {
+      result.push(...span([subject, auxiliary, b.token], a, b, 'text')); i++; continue
+    }
     if (a.token === 'half' && b?.token === 'past' && c
       && smallNumbers.indexOf(c.token) >= 1 && smallNumbers.indexOf(c.token) <= 12
       && adjacent(a, b) && adjacent(b, c)) {
@@ -522,8 +558,10 @@ function anchorsFor(group, corpus, words, expected, fuzzy = null) {
 function boundsFor(first, last, pauses, duration) {
   const before = pauses.filter(p => p.startSeconds < first.runStartSeconds
     && p.endSeconds <= first.runEndSeconds
+    && p.startSeconds <= Math.max(0, first.runStartSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
     && first.runStartSeconds - p.endSeconds <= LISTENING_SEGMENT_RULE.boundarySearchSeconds).at(-1)
   const after = pauses.find(p => p.endSeconds > last.runEndSeconds
+    && p.endSeconds >= Math.min(duration, last.runEndSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
     && p.startSeconds >= last.runStartSeconds
     && p.startSeconds - last.runEndSeconds <= LISTENING_SEGMENT_RULE.boundarySearchSeconds)
   if (!before || !after || !first.startBoundary || !last.endBoundary) return null
