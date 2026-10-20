@@ -1091,6 +1091,7 @@ const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
 const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
+const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[）)]$/iu
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
@@ -1103,6 +1104,7 @@ const CLOSING = /^(Yours|Best wishes|Best regards|Sincerely|Yours sincerely|Love
 function isEntryLabel(text) {
   return ENTRY_LABEL.test(text || '') || WORD_COUNT_SAMPLE_LABEL.test(text || '')
     || NUMBERED_SAMPLE_LABEL.test(text || '') || EXAMPLE_SAMPLE_LABEL.test(text || '')
+    || PARENTHESIZED_SAMPLE_LABEL.test(text || '')
 }
 
 function joinLines(lines) {
@@ -1179,7 +1181,8 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     // A heading can share its OCR item with a sample label. Some answer books
     // omit the writing-part heading entirely; require an adjacent sample label
     // before treating a bare "第一节" outside writing as a writing section.
-    const [heading, ...rest] = line.text.split('\n')
+    const inlineSample = line.text.match(/^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)\s+([（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu)
+    const [heading, ...rest] = inlineSample ? inlineSample.slice(1) : line.text.split('\n')
     // OCR may repeat the writing label above a bare section in the same item.
     // Only interpret it inside the already established writing part.
     const sectionText = inWriting

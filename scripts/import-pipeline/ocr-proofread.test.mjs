@@ -450,6 +450,24 @@ test('a bare section merged with a sample label preserves that source label', ()
     [['A source application.'], ['A source story.']])
 })
 
+test('Yantai section and parenthesized sample label on one line preserve both official essays', () => {
+  const label = '(One possible version)'
+  const result = referencesFixture(['第四部分 写作（共两节，满分40分）',
+    `第一节（满分15分） ${label}`, 'Dear Tom,',
+    'I can’t wait to share with you the event I participated in during the school fun sports meet',
+    `第二节（满分25分） ${label}`,
+    '“That sounds a good idea!” Drolma and Tashi responded.'], ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries[0].sourceLabel), [label, label])
+  assert.deepEqual(result.groups.map(g => g.essays.entries[0].paragraphs.map(p => p.text)),
+    [['Dear Tom,', 'I can’t wait to share with you the event I participated in during the school fun sports meet'],
+      ['“That sounds a good idea!” Drolma and Tashi responded.']])
+  assert.equal(result.groups[0].essays.entries[0].labelSource.locator.page, 1)
+  const outsideWriting = referencesFixture(['第二部分 阅读',
+    `第一节（阅读理解） ${label}`, 'A quoted reading example.',
+    '第四部分 写作', '略'], ['application', 'continuation'])
+  assert(outsideWriting.groups.every(g => g.essays.state === 'not_supplied'))
+})
+
 test('an adjacent sample label establishes writing context without a part heading', () => {
   const result = referencesFixture(['第一节', '21—23 ABC', '第二节', '36—40 ABCDE',
     '第一节', 'One possible version:', 'Dear Daniel,', 'A source application.',
