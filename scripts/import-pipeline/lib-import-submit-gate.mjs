@@ -19,28 +19,34 @@ export function importSubmissionIssues({ materialization, listeningReview }) {
   const skip = new Set(['source', 'sources', 'documents', 'media', 'sourceCoverage', 'issues',
     'answers', 'sourceDigest', 'candidateDigest', 'provenance', 'timing'])
   const hasChinese = text => /[\p{Script=Han}]/u.test(text)
+  const quotes = /“[^”]*”|"[^"]*"|‘[^’]*’|「[^」]*」|『[^』]*』/gu
+  const englishQuote = text => /[a-z]/iu.test(text) && !hasChinese(text)
+  const maskEnglishQuotes = text => text.replace(quotes, quote => englishQuote(quote) ? ' '.repeat(quote.length) : quote)
   function numbering(text, chunks = null) {
     return [...text.matchAll(/\(\s*\d{1,3}\s*\)/gu)].filter(match => {
-      // Inspect the neighboring lexical fragment, not all Han characters in a
-      // mixed-language instruction. English quotes remain English fragments.
-      const quote = [...text.matchAll(/“[^”]*”|"[^"]*"|‘[^’]*’|「[^」]*」|『[^』]*』/gu)]
+      const quote = [...text.matchAll(quotes)]
         .find(q => q.index < match.index && q.index + q[0].length > match.index + match[0].length)
-      if (quote && /[a-z]/iu.test(quote[0]) && !hasChinese(quote[0])) return false
+      if (quote && englishQuote(quote[0])) return false
       let local = text, index = match.index
-      // A lexical inline item owns its language. Number-only runs still obtain
-      // context from the combined stream, including split parentheses.
+      // Preserve explicitly separate English clauses such as "Include (1)".
+      // A run starting with "(1) DIY" does not own the entry: Han may follow
+      // in another run, and split parentheses also need the combined stream.
       let offset = 0
       for (const chunk of chunks || []) {
         if (offset <= match.index && offset + chunk.length >= match.index + match[0].length
-          && /\p{L}/u.test(chunk)) { local = chunk; index -= offset; break }
+          && !hasChinese(chunk) && /[a-z]/iu.test(chunk.slice(0, match.index - offset))) {
+          local = chunk; index -= offset; break
+        }
         offset += chunk.length
       }
-      const before = local.slice(0, index).split(/[。！？.!?;；\n]/u).at(-1)
-        .match(/([\p{L}]+)[^\p{L}]*$/u)?.[1] || ''
-      const after = local.slice(index + match[0].length).split(/[。！？.!?;；\n]/u)[0]
-        .match(/^[^\p{L}]*([\p{L}]+)/u)?.[1] || ''
+      local = maskEnglishQuotes(local)
+      const boundary = /\(\s*\d{1,3}\s*\)|[。！？.!?;；\n]/u
+      const after = local.slice(index + match[0].length).split(boundary)[0]
+      // Classify the whole entry, not just its first word (DIY / BBQ).
+      if (/\p{L}/u.test(after)) return hasChinese(after)
+      const before = local.slice(0, index).split(boundary).at(-1)
       const prior = local.slice(0, index).match(/([\p{L}]+)[^\p{L}]*$/u)?.[1] || ''
-      return hasChinese(after || before || prior)
+      return hasChinese(/\p{L}/u.test(before) ? before : prior)
     })
   }
   function visit(node, field = '$') {

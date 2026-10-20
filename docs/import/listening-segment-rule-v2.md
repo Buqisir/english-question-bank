@@ -56,10 +56,14 @@ Apple 和 Whisper 合并后再次校验同一骨架规则；局部 Whisper 结�
 | 时刻 | `HH:MM`（小时 0–23、分钟 00–59），如 `7:30` / seven thirty；整点仍对应 o'clock；个位分钟保留 oh | 不猜测 12/24 小时换算；裸 `930` 仍为 nine hundred thirty |
 | 明确 meridiem 的数字时刻 | `1.15pm` / `1:15 pm` / `115 p.m.`，附 AM/PM 且小时 1–12、分钟合法；跨 run 的 `1` + `.15pm` 同样支持 | 没有 AM/PM 的 `7.30` 保留数值小数，不自动当 `7:30`；无后缀裸整数不补冒号 |
 | 明确 half past | half past one–twelve（或 1–12）对应该小时 thirty | 不加入 half seven、quarter to 等额外读法，也不推断上午/下午 |
-| 年份分组读法 | 2001–2099；2026 / twenty twenty-six、2006 / twenty oh six；复用基数展开 | 仅整段为年份表达式，或紧接 in/since/during/until/by/before/after/from/year；不跨句点/逗号，货币或时长单位后缀不按年份改写；twenty six 不猜成 2006 |
+| 年份分组读法 | 2001–2099；2026 / twenty twenty-six / two thousand and twenty-six、2006 / twenty oh six；复用基数展开 | 仅整段为年份表达式，或紧接 in/since/during/until/by/before/after/from/year；等价须一侧为四位年份字面量、另一侧为明确单词读法；不将时刻展开结果或分离数字改成年份，不跨句点/逗号，货币或时长单位后缀不按年份改写 |
 
 `first` ≠ `second`、`7:30` ≠ `7:13`、`2026` ≠ `2027`，相同数值的表示转换不改变
 这些保护。专名和其他正文差异仍进入原编辑距离及话轮检查，不因等价表更新而被消除。
+规范化 token 保留 `expressionType`（year/time/cardinal/ordinal，普通正文为 text）、
+原字面量/单词形式、原表达式文本及年份值。年份读取器只消费原始单词，
+对齐同时检查年份类型和形式；展开文字相同也不能消除 year/time 或 year/cardinal 差异，
+这些替换进入 `CRITICAL_WORD_DIFFERENCE` 并记录两侧表达式类型。相同原表达式照常匹配。
 
 Apple attributed run 可包含多个词。新路径先保留字符范围，再将同一 segment 内跨 run
 的确定表达式一起规范化，保留原 run 文本、起止时间与编号范围。插值显式标记为
@@ -123,8 +127,10 @@ node --test scripts/import-pipeline/*.test.mjs scripts/import-pipeline/replay/*.
 - `IMPORT_SUBMIT_LISTENING_NOT_USABLE`：任一听力组缺失或不是 `usable`，列出 segmentId。
 - `IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING`：中文文本或中文 inline runs 中出现
   `(1)`、`(2)` 等半角数字编号，列出字段路径；改为 `（1）`、`（2）`。纯英文内容中的
-  括号数字不据此拦截。按编号的局部语言和引号判断，不因整串或兄弟 inline 项含中文
-  就拦截英文引文；纯编号 run 和跨 run 的括号仍从相邻文本获取语境。
+  括号数字不据此拦截。按编号到下一个编号/分隔符之间的完整局部条目判断语言，
+  DIY/BBQ 等英文缩写不能掩盖后面的汉字；英文引文先屏蔽，再判条目中的中文。
+  不因整串或兄弟 inline 项含中文就拦截英文引文；既有独立英文 inline 从句保留，
+  编号起首的 run、纯编号 run 和跨 run 的括号仍从合并条目获取语境。
   规则不自动改写原卷内容。
 
 没有 Owner 覆盖开关。门禁不取代现有服务端的 subject、哈希、证据覆盖和顺序校验。
@@ -352,3 +358,48 @@ node --test --test-concurrency=1 scripts/import-pipeline/*.test.mjs scripts/impo
 - `.scratch/listening-equivalences-v2-e2e-comparison-final.json`
 - `.scratch/listening-equivalences-v2-e2e-off/attempt-2026-10-20T19-43-57-881Z-710455f0/`
 - `.scratch/listening-equivalences-v2-e2e-on/attempt-2026-10-20T19-43-59-011Z-4c547e75/`
+
+## 2026-10-21 Astra 复审修正：表达式类型与编号条目
+
+修复两个可复现漏拦，未改阈值，模糊锚仍默认关闭：
+
+- P1：原路径先展开时刻/数字，再把 `twenty ...` 当成年份，丢失原始表达式类型。
+  现在年份读取器只接受原始单词；token 带原始类型、形式、文本及年份值，
+  源文/ASR 对齐检查年份类型兼容性。`by 2026` / `by 20:26`、
+  `before 2013` / `before 20:13`、`in 2026` / ASR 分离 run 的 `in 20 26`
+  全部为 `review_required`，含 `CRITICAL_WORD_DIFFERENCE`。
+  混合数字读法如 `in 2 thousand 26` 即使展开文字一致也不能绕过门禁。
+  四位年份与 twenty twenty-six / two thousand and twenty-six 等明确单词读法
+  仍双向等价；两个不同的纯单词年份表达式不新增互换许可，相同表达式照常匹配。
+- P2：原路径只选 `after || before || prior` 的首个相邻词，DIY/BBQ 会掩盖条目中文。
+  现在检查直到下一个编号/分隔符的整项，包括跨 inline run 的内容，
+  英文引文先屏蔽；`要点：(1) DIY 活动；(2) BBQ 晚会` 报出两个编号。
+  保留英文引文、独立英文 inline 从句、跨 run 括号和省略号条目的既有行为，
+  不把下一编号条目的中文传给当前英文条目，不改写物化内容。
+
+Node 24.15.0 完整 import-pipeline/replay 测试 **409 PASS / 0 FAIL / 0 SKIP**，
+较上一提交新增 11 项（年份/类型 7 项、编号条目 4 项）。
+
+| 最终验证 | 修正前 | 修正后 |
+| --- | --- | --- |
+| 45 组 / 22 卷局部 usable / review_required | 28 / 17 | 28 / 17 |
+| Apple、Whisper 各自 usable / review_required | 25 / 20、20 / 25 | 25 / 20、20 / 25 |
+| 含顺序状态 usable / review / ORDER_NOT_EVALUABLE_IN_REPLAY | 0 / 17 / 28 | 0 / 17 / 28 |
+| 山东完整流程 usable / review_required | 8 / 2 | 8 / 2 |
+| 山东缓存 Whisper 回退组数；原服务端 sidecar 校验 | 2；PASS | 2；PASS |
+
+模糊锚 OFF / ON 都是上述分布，最终决策差异为 0；与上一提交逐组比较，
+45 组和山东的决策、原因均无变化。45 组仍全部缺少可证明整卷顺序的覆盖，
+局部 28 组可用不等于整卷批准。山东 text-1、text-6 仍复核；
+text-1 在 OFF 为次数不匹配，在 ON 为正文匹配率低，text-6 为边界不足/引擎冲突。
+仅复用原缓存 ASR，没有新识别；新 `input.json` 中 rule/adapter 哈希已核对当前实现。
+
+本轮新增证据（当前工作树内独立目录，保留原证据）：
+
+- `.scratch/listening-astra-type-fix-suite-final.log`
+- `.scratch/listening-astra-type-fix-replay-off/replay-2026-10-20T19-56-40-504Z.json`
+- `.scratch/listening-astra-type-fix-replay-on/replay-2026-10-20T19-56-40-518Z.json`
+- `.scratch/evaluate-listening-astra-type-fix.mjs`
+- `.scratch/listening-astra-type-fix-e2e-comparison-final.json`
+- `.scratch/listening-astra-type-fix-e2e-off/attempt-2026-10-20T19-56-35-280Z-f151ec8c/`
+- `.scratch/listening-astra-type-fix-e2e-on/attempt-2026-10-20T19-56-36-396Z-32085c2f/`
