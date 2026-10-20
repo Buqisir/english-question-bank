@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "paragraph-summaries-v1",
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "sourceDigest": "sha256:f06d284eb9a94ac24bd88e935c9d372571c2f02483e333c22c21e69564a61fc4",
+  "candidateDigest": "sha256:68b71a9ab28100eb3e477271a113dfb685ef60fb4a655d13e833a877316cb7f6",
+  "groups": [
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:1",
+          "summary": "介绍 2026 年优质线上暑期项目。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:2",
+          "summary": "精心设计的线上暑期项目可帮助高中生提升学业能力、探索大学课程，并积累申请经验。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:4",
+          "summary": "斯坦福项目面向八至十一年级学生，提供为期两周的单科深入学习、每日直播课和国际同伴合作，不授学分。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:5",
+          "summary": "申请者年龄须为 13 至 18 岁，并全程开启摄像头和麦克风参与。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:6",
+          "summary": "斯坦福项目申请截止日期为 2026 年 3 月 13 日。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:8",
+          "summary": "康奈尔项目允许高中生远程修读本科课程，获得学分和正式成绩单，课程涵盖建筑、商业及医学等领域。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:9",
+          "summary": "申请者须为 15 至 19 岁，至少完成十年级，并满足具体课程的先修要求。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:10",
+          "summary": "康奈尔项目的申请截止时间因期次而异，最早为 2026 年 4 月 28 日。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:12",
+          "summary": "宾夕法尼亚大学项目提供由本校教师授课的学分课程，按大学要求安排作业与考试，完成后可获正式成绩单。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:13",
+          "summary": "项目要求至少 3.5 的绩点、较强写作能力和推荐信，国际申请者还须具备英语能力。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:14",
+          "summary": "宾夕法尼亚大学项目申请截止日期为 2026 年 4 月 15 日。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:16",
+          "summary": "加州大学伯克利分校项目提供多领域的本科低年级线上学分课程，参与者可加入包括本校及访问本科生在内的学习社区。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:17",
+          "summary": "申请者须在 2026 年夏季前完成十或十一年级、在 6 月 21 日前满 16 岁，且绩点不低于 3.0。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-a:18",
+          "summary": "伯克利项目申请截止日期为 2026 年 5 月 10 日。"
+        }
+      ]
+    },
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:1",
+          "summary": "作者是一名害怕公开讲话的教师，每学年面对新学生时都会感到紧张。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:2",
+          "summary": "同事建议作者先假装自信，但多年教学和伪装并未消除恐惧，作者逐渐找到了另一种应对方式。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:3",
+          "summary": "了解到许多学生同样害羞，作者在作业回复中坦诚分享自己的紧张，以此表达理解。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:4",
+          "summary": "学生看到经验丰富的教师也会发抖和结巴，逐渐敢于谈论恐惧，也更能接纳自己的不完美。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-b:5",
+          "summary": "公开讲话的恐惧未必彻底消失；教师可从诚实面对自身不足开始，以同理心帮助学生将弱点转化为力量。"
+        }
+      ]
+    },
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:1",
+          "summary": "一位盲人女性自发用圆内曲线表示旋转，使作者意识到盲人也能使用超越字面再现的视觉符号。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:3",
+          "summary": "其他盲人也用弯曲轮辐暗示运动，促使作者设计实验比较不同线条的表达效果。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:4",
+          "summary": "作者制作五种凸线轮形图，让十八名盲人志愿者凭触觉匹配运动状态，并以十八名视力正常的大学生作对照。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:5",
+          "summary": "参与者将不同轮辐线条分别理解为匀速旋转、摇摆、晃动、制动和快速旋转。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-c:7",
+          "summary": "盲人与视力正常者对运动线条的理解高度一致，说明盲人也能理解视觉隐喻。"
+        }
+      ]
+    },
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:1",
+          "summary": "研究者尝试以结构方法探索主观感受与脑信号之间的意识难题，并比较不同人的感官体验。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:2",
+          "summary": "结构方法把意识视为关系网络，通过感受相似度评分建立几何体验图；跨年龄和文化的图形一致性暗示共同感知结构。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:3",
+          "summary": "颜色研究显示感知维度可能超过传统三维，颜色的意义取决于关系网络中的位置，不同色觉者的网络可能不同。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:4",
+          "summary": "短暂色圈虽未进入意识却影响后续反应，说明大脑也会进行无意识比较，但其结构比有意识体验更无序。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:reading-d:5",
+          "summary": "结构研究为意识难题提供了更精确的研究路径，有望改变人们对感知、情绪和人的体验的理解。"
+        }
+      ]
+    },
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:1",
+          "summary": "大学以蓝光紧急电话、安保巡逻和实时提醒等措施，为师生提供安全保障。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:2",
+          "summary": "及时求助渠道、合理校园布局和配套设施让低年级学生普遍感到安全。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:3",
+          "summary": "学校设施无法独自实现全天保护，学生相互提醒、夜间结伴和彼此照应也是重要保障。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:4",
+          "summary": "较低的校园事故和财物损失率说明学校管理与学生防范相结合取得了成效。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:seven-choices:5",
+          "summary": "校园长期安全依赖学校与个人的共同参与和密切合作。"
+        }
+      ]
+    },
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:1",
+          "summary": "布达佩斯的老人 Kis 前往图书馆参加由青少年教授数字技能的月度课程。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:2",
+          "summary": "经历长期昏迷的 Kis 需要精神刺激，却因语言和信心不足害怕上网；项目帮助她使用翻译工具，减少隔离感。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:3",
+          "summary": "项目缓解了老年人的数字鸿沟，也让青少年培养耐心、了解数字时代以前的生活，并思考更易用的技术。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:cloze:4",
+          "summary": "课程既传授技能，也建立代际联系，展现耐心、理解与相互学习意愿的重要性。"
+        }
+      ]
+    },
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:1",
+          "summary": "良渚古城出土的玉雕可能帮助人们重新认识比既有认知更早的中华文明。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:2",
+          "summary": "精美玉器显示良渚具备成熟工艺和艺术传统，促使学者重新审视中国历史的基本认识。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:3",
+          "summary": "良渚的城市设施及其早于商代的年代，改变了人们对中华文明起源时间和地域的理解。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:grammar-fill:4",
+          "summary": "良渚遗址于 2019 年列入世界遗产名录，如今吸引各地研究者和游客，玉器见证其文明成就。"
+        }
+      ]
+    },
+    {
+      "groupId": "group:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation",
+      "paragraphs": [
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:2",
+          "summary": "为申请艺术院校而准备代表作的叙述者陷入创作瓶颈，面对空白画布感到沮丧。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:3",
+          "summary": "叙述者连续数周参观博物馆、翻阅艺术书并漫步公园，却始终找不到新鲜灵感。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:4",
+          "summary": "为暂时逃离失败感，叙述者带着速写本漫无目的地走上城市街头。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:5",
+          "summary": "匆忙的人群与高耸而冷漠的建筑没有触动叙述者的内心。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:6",
+          "summary": "广场上一位编织的老妇人看着分享冰激凌的孩子露出微笑，其中的回忆、怀念与爱深深吸引了叙述者。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:7",
+          "summary": "周围喧闹渐渐淡去，叙述者立即用速写记录这份温暖，老妇人则毫不知情地离开。"
+        },
+        {
+          "paragraphId": "block:paper-mock-shandong-zibo-2026-05-stage-quality-test:writing-continuation:8",
+          "summary": "这个平凡温柔的片刻带来了灵感，叙述者兴奋地跑回画室，准备开始作画。"
+        }
+      ]
+    }
+  ]
+}

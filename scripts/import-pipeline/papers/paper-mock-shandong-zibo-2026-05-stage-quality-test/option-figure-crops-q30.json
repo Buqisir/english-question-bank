@@ -1,0 +1,14 @@
+{
+  "documentId": "question-source-1",
+  "sourceSha256": "sha256:dbc396ea864da1f8f47fa47b91447bf640b3dc6bffb8f2c5e8b1ee4341da5f9c",
+  "page": 5,
+  "questionNumber": 30,
+  "visualId": "visual:paper-mock-shandong-zibo-2026-05-stage-quality-test:ocr-7ac9d381e4f1f267",
+  "pagePixels": [1191, 1684],
+  "crops": [
+    {"label": "A", "pixels": [115, 1181, 150, 180]},
+    {"label": "B", "pixels": [325, 1181, 150, 180]},
+    {"label": "C", "pixels": [555, 1181, 150, 180]},
+    {"label": "D", "pixels": [745, 1181, 149, 180]}
+  ]
+}
