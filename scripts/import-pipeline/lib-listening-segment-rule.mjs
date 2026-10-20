@@ -1,7 +1,7 @@
 // Pure, platform-independent navigation rule. ASR is evidence, never a source-text editor.
 export const LISTENING_SEGMENT_RULE = Object.freeze({
   version: 'listening-segment-rule-v2',
-  normalizationVersion: 'listening-equivalences-v1',
+  normalizationVersion: 'listening-equivalences-v2',
   anchorWords: 6,
   expandedAnchorWords: 12,
   fuzzyAnchorsEnabled: false,
@@ -20,6 +20,16 @@ export const LISTENING_SEGMENT_RULE = Object.freeze({
   engineBoundaryToleranceSeconds: 0.5,
 })
 
+const ordinalSmall = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth',
+  'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth',
+  'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth']
+const ordinalEntries = Array.from({ length: 31 }, (_, i) => {
+  const n = i + 1
+  const suffix = n >= 11 && n <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th')
+  const word = n < 20 ? ordinalSmall[n - 1] : n === 20 ? 'twentieth' : n === 30 ? 'thirtieth'
+    : `${n < 30 ? 'twenty' : 'thirty'} ${ordinalSmall[n % 10 - 1]}`
+  return [`${n}${suffix}`, word]
+})
 // Finite, published equivalences only. Personal names are intentionally absent.
 export const LISTENING_EQUIVALENCES = Object.freeze({
   ok: 'okay', hey: 'hi', hm: 'hmm', hmmm: 'hmm',
@@ -27,6 +37,8 @@ export const LISTENING_EQUIVALENCES = Object.freeze({
   travelling: 'traveling', colour: 'color', colours: 'colors',
   centre: 'center', centres: 'centers', favourite: 'favorite',
   organise: 'organize', organised: 'organized', realise: 'realize',
+  ...Object.fromEntries(ordinalEntries),
+  'a.m.': 'am', 'a.m': 'am', 'p.m.': 'pm', 'p.m': 'pm',
 })
 const smallNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
   'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
@@ -34,6 +46,7 @@ const smallNumbers = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'sev
 const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 const criticalWords = new Set(['not', 'no', 'never', 'none', 'neither', 'nothing', 'nobody', 'nowhere', 'nor', 'without', 'cannot',
   ...smallNumbers, ...tens.filter(Boolean), 'hundred', 'thousand', 'million', 'billion',
+  ...ordinalEntries.flatMap(([, value]) => value.split(' ')), 'half',
   'dollar', 'dollars', 'pound', 'pounds', 'cent', 'cents', 'euro', 'euros', 'yuan', 'yen',
   "o'clock", 'am', 'pm', 'a.m', 'p.m', 'hour', 'hours', 'minute', 'minutes', 'second', 'seconds',
   'noon', 'midnight', 'morning', 'afternoon', 'evening', 'tonight', 'today', 'tomorrow', 'yesterday',
@@ -64,14 +77,101 @@ function numberWords(value) {
   return `${numberWords(Math.floor(n / 1000))} thousand${n % 1000 ? ` ${numberWords(n % 1000)}` : ''}`
 }
 
+const meridiemPattern = '[ap]\\s*\\.?\\s*m\\.?'
+const listeningLexemes = new RegExp([
+  '[$£]\\d+(?:,\\d{3})*(?:\\.\\d{2})?',
+  `\\b\\d{1,2}\\s*:\\s*\\d{2}(?:\\s*${meridiemPattern}(?![a-z]))?`,
+  `\\b\\d{1,2}\\s*\\.\\s*\\d{2}\\s*${meridiemPattern}(?![a-z])`,
+  `\\b\\d{1,4}\\s*${meridiemPattern}(?![a-z])`,
+  '\\b[ap]\\s*\\.\\s*m\\.?(?![a-z])',
+  "\\bo\\s*['’]\\s*clock\\b",
+  '\\b\\d+(?:st|nd|rd|th)\\b',
+  '\\d+(?:,\\d{3})+(?:\\s*\\.\\s*\\d+)?', '\\d+\\s*\\.\\s*\\d+',
+  '\\d+', "[a-z]+(?:['’][a-z]+)?",
+].join('|'), 'giu')
+function lexemeWords(raw) {
+  const text = raw.toLowerCase().replaceAll('’', "'").replace(/(?<=\d),(?=\d{3}\b)/gu, '')
+  if (LISTENING_EQUIVALENCES[text]) return LISTENING_EQUIVALENCES[text].split(' ')
+  if (/^o\s*'\s*clock$/u.test(text)) return ["o'clock"]
+  if (/^[ap]\s*\.\s*m\.?$/u.test(text)) return [text[0] + 'm']
+  const money = text.match(/^([$£])(\d+)(?:\.(\d{2}))?$/u)
+  if (money) return `${numberWords(money[2])} ${money[1] === '$' ? 'dollars' : 'pounds'}${money[3] ? ` ${numberWords(money[3])} cents` : ''}`.split(' ')
+  const clock = text.match(/^(\d{1,2})\s*([:.])\s*(\d{2})(?:\s*([ap])\s*\.?\s*m\.?)?$/u)
+  const compact = text.match(/^(\d{1,4})\s*([ap])\s*\.?\s*m\.?$/u)
+  let hour, minute, meridiem
+  if (clock && (clock[2] === ':' || clock[4])) {
+    hour = Number(clock[1]); minute = Number(clock[3]); meridiem = clock[4]
+  }
+  else if (compact) {
+    const digits = compact[1]
+    hour = Number(digits.length > 2 ? digits.slice(0, -2) : digits)
+    minute = digits.length > 2 ? Number(digits.slice(-2)) : 0
+    meridiem = compact[2]
+  }
+  if (hour !== undefined && hour >= (meridiem ? 1 : 0) && hour <= (meridiem ? 12 : 23)
+    && minute >= 0 && minute <= 59) {
+    return `${numberWords(hour)}${minute ? ` ${minute < 10 ? 'oh ' : ''}${numberWords(minute)}` : meridiem ? '' : " o'clock"}${meridiem ? ` ${meridiem}m` : ''}`.split(' ')
+  }
+  // Without an explicit meridiem a decimal may be a quantity; preserve its
+  // numeric literal for the critical gate instead of silently reading a clock.
+  if (/^\d+\s*\.\s*\d+$/u.test(text)) return [text.replace(/\s+/gu, '')]
+  return (text.match(/[a-z]+(?:'[a-z]+)?|\d+/gu) || [])
+    .flatMap(word => /^\d+$/u.test(word) ? numberWords(word).split(' ') : [LISTENING_EQUIVALENCES[word] || word])
+}
+// One normalization path for source text and timed ASR, retaining raw character
+// ranges. A run boundary cannot split "1" + ".15pm" or "o" + "'clock".
+function normalizeListeningUnits(value) {
+  const text = String(value ?? '')
+  let units = [...text.matchAll(listeningLexemes)].flatMap(match =>
+    lexemeWords(match[0]).map(token => ({ token, start: match.index, end: match.index + match[0].length })))
+  const adjacent = (a, b) => a.end >= b.start || /^[\s-]*$/u.test(text.slice(a.end, b.start))
+  const span = (tokens, first, last) => tokens.map(token => ({ token, start: first.start, end: last.end }))
+  const result = []
+  const yearContext = new Set(['in', 'since', 'during', 'until', 'by', 'before', 'after', 'from', 'year'])
+  const quantityUnits = new Set(['dollar', 'dollars', 'pound', 'pounds', 'cent', 'cents', 'euro', 'euros',
+    'yuan', 'yen', 'hundred', 'thousand', 'million', 'hours', 'minutes', 'seconds'])
+  for (let i = 0; i < units.length; i++) {
+    const a = units[i], b = units[i + 1], c = units[i + 2]
+    if (a.token === 'half' && b?.token === 'past' && c
+      && smallNumbers.indexOf(c.token) >= 1 && smallNumbers.indexOf(c.token) <= 12
+      && adjacent(a, b) && adjacent(b, c)) {
+      result.push(...span([c.token, 'thirty'], a, c)); i += 2; continue
+    }
+    if (a.token === 'twenty' && b && adjacent(a, b)) {
+      let remainder = smallNumbers.indexOf(b.token), last = i + 1
+      if (tens.includes(b.token)) {
+        remainder = tens.indexOf(b.token) * 10
+        if (c && smallNumbers.indexOf(c.token) >= 1 && smallNumbers.indexOf(c.token) <= 9 && adjacent(b, c)) {
+          remainder += smallNumbers.indexOf(c.token); last++
+        }
+      } else if (['oh', 'o', 'zero'].includes(b.token) && c && adjacent(b, c)
+        && smallNumbers.indexOf(c.token) >= 1 && smallNumbers.indexOf(c.token) <= 9) {
+        remainder = smallNumbers.indexOf(c.token); last++
+      }
+      const standalone = i === 0 && last === units.length - 1
+      const context = i > 0 && yearContext.has(units[i - 1].token) && adjacent(units[i - 1], a)
+      if (remainder >= 1 && remainder <= 99 && (remainder >= 10 || last > i + 1)
+        && (standalone || context) && !quantityUnits.has(units[last + 1]?.token)
+        && !ordinalSmall.includes(units[last + 1]?.token)) {
+        result.push(...span(numberWords(2000 + remainder).split(' '), a, units[last])); i = last; continue
+      }
+    }
+    result.push(a)
+  }
+  units = result
+  const withoutOptionalClock = []
+  for (let i = 0; i < units.length; i++) {
+    const a = units[i], b = units[i + 1], c = units[i + 2]
+    if (smallNumbers.indexOf(a.token) >= 1 && smallNumbers.indexOf(a.token) <= 12
+      && b?.token === "o'clock" && ['am', 'pm'].includes(c?.token) && adjacent(a, b) && adjacent(b, c)) {
+      withoutOptionalClock.push({ ...a, end: b.end }); i++; continue
+    }
+    withoutOptionalClock.push(a)
+  }
+  return withoutOptionalClock
+}
 export function normalizeListeningText(value) {
-  return String(value ?? '').toLowerCase().replaceAll('’', "'")
-    .replace(/(?<=\d),(?=\d{3}\b)/gu, '')
-    .replace(/([$£])(\d+)(?:\.(\d{2}))?/gu, (_, currency, amount, cents) =>
-      `${numberWords(amount)} ${currency === '$' ? 'dollars' : 'pounds'}${cents ? ` ${numberWords(cents)} cents` : ''}`)
-    .replace(/\b(\d+):00\b/gu, "$1 o'clock")
-    .replace(/\b\d+\b/gu, numberWords)
-    .match(/[a-z]+(?:'[a-z]+)?|\d+/gu)?.map(word => LISTENING_EQUIVALENCES[word] || word) || []
+  return normalizeListeningUnits(value).map(unit => unit.token)
 }
 
 function listeningSourceTurnText(text) {
@@ -87,8 +187,7 @@ export function listeningSourceTurns(text) {
 }
 function listeningSourceRawWords(text) {
   return listeningSourceTurnText(text).flatMap(turn =>
-    (turn.match(/[$£]?\d[\d,]*(?::\d+|\.\d+)?|[a-z]+(?:['’][a-z]+)?/giu) || [])
-      .flatMap(raw => normalizeListeningText(raw).map(() => raw)))
+    normalizeListeningUnits(turn).map(unit => turn.slice(unit.start, unit.end)))
 }
 
 function countReadings(text) {
@@ -126,6 +225,47 @@ export function expectedListeningReadings(group, instructions = []) {
 
 // Apple attributed runs may contain several lexical words. Interpolation is explicitly
 // labelled; only the first/last token of a run may assert its acoustic outer boundary.
+function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths) {
+  let cursor = 0
+  const spans = runs.map((run, index) => {
+    const text = String(run.word ?? run.text)
+    const start = offset + Number(run.start ?? run.startSeconds)
+    const end = offset + Number(run.end ?? run.endSeconds)
+    const span = { text, index, low: cursor, high: cursor + text.length, start, end,
+      valid: Number.isFinite(start) && Number.isFinite(end) && start >= offset && end > start && end <= windowEnd + 0.5 }
+    cursor = span.high + 1
+    return span
+  })
+  const joined = spans.map(s => s.text).join(' ')
+  const units = []
+  let first = 0
+  for (const unit of normalizeListeningUnits(joined)) {
+    while (first < spans.length && spans[first].high <= unit.start) first++
+    const touched = []
+    for (let i = first; i < spans.length && spans[i].low < unit.end; i++) touched.push(spans[i])
+    // Never normalize across a failed timestamp or a preparation/reading pause.
+    if (!touched.length || touched.at(-1).end <= touched[0].start
+      || touched.some((s, i) => !s.valid || (i && (s.start < touched[i - 1].start
+        || s.start - touched[i - 1].end > LISTENING_SEGMENT_RULE.openingGapMaxSeconds)))) continue
+    units.push({ ...unit, touched })
+  }
+  const runUnits = spans.map(() => [])
+  units.forEach((unit, i) => unit.touched.forEach(s => runUnits[s.index].push(i)))
+  return units.map((unit, i) => {
+    const a = unit.touched[0], b = unit.touched.at(-1)
+    const left = runUnits[a.index], right = runUnits[b.index]
+    return { token: unit.token,
+      startSeconds: a.start + (a.end - a.start) * left.indexOf(i) / left.length,
+      endSeconds: b.start + (b.end - b.start) * (right.indexOf(i) + 1) / right.length,
+      runStartSeconds: a.start, runEndSeconds: b.end,
+      startBoundary: left[0] === i, endBoundary: right.at(-1) === i,
+      timing: unit.touched.length > 1 ? 'interpolated_within_normalized_span'
+        : left.length === 1 ? 'run' : 'interpolated_within_run',
+      rawRunText: unit.touched.map(s => s.text).join(' '),
+      runId: `${idPrefix}:${a.index}${a === b ? '' : `-${b.index}`}`,
+      evidencePaths }
+  })
+}
 export function listeningAsrTokens(windows) {
   const words = []
   const markers = []
@@ -159,24 +299,8 @@ export function listeningAsrTokens(windows) {
         markers.push({ ...cue, startSeconds: timed.length ? offset + timed[0].run.start : segmentStart,
           endSeconds: timed.length ? offset + timed.at(-1).run.end : segmentEnd })
       }
-      for (const [runIndex, run] of runs.entries()) {
-        const tokens = normalizeListeningText(run.word ?? run.text)
-        const start = offset + Number(run.start ?? run.startSeconds)
-        const end = offset + Number(run.end ?? run.endSeconds)
-        if (!Number.isFinite(start) || !Number.isFinite(end) || start < offset || end <= start
-          || end > window.endSeconds + 0.5) continue
-        for (const [i, token] of tokens.entries()) {
-          inWindow.push({ token, startSeconds: start + (end - start) * i / tokens.length,
-            endSeconds: start + (end - start) * (i + 1) / tokens.length,
-            runStartSeconds: start, runEndSeconds: end,
-            startBoundary: i === 0, endBoundary: i === tokens.length - 1,
-            timing: tokens.length === 1 ? 'run' : 'interpolated_within_run',
-            rawRunText: String(run.word ?? run.text),
-            runId: `${windowIndex}:${segmentIndex}:${runIndex}`,
-            evidencePaths: window.evidencePaths || [],
-          })
-        }
-      }
+      inWindow.push(...timedListeningUnits(runs, offset, window.endSeconds,
+        `${windowIndex}:${segmentIndex}`, window.evidencePaths || []))
     }
     inWindow.sort((a, b) => a.startSeconds - b.startSeconds || a.endSeconds - b.endSeconds)
     windowsWithWords.push({ window, words: inWindow })

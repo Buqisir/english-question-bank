@@ -90,7 +90,7 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   const playbackEndSeconds = Math.min(durationSeconds, primaryWindow.endSeconds ?? durationSeconds)
   write(path.join(attempt, 'input.json'), {
     rule: { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }, normalization: LISTENING_EQUIVALENCES,
-    normalizationAlgorithm: 'finite equivalences; decimal integers 0..999999; $/£ and .xx cents; HH:00',
+    normalizationAlgorithm: 'listening-equivalences-v2; finite spelling aliases; integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; year readings 2001..2099 only standalone or in year context; shared source/ASR character spans, original acoustic run boundaries',
     sourceTextSha256: digest(Buffer.from(JSON.stringify(groups))),
     materializationSha256: digest(materializationBytes), audioSha256: audioHash,
     ruleCodeSha256: digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs'))),

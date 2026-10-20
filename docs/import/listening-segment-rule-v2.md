@@ -11,7 +11,7 @@ Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻�
 
 | 参数 | 值 |
 | --- | --- |
-| 规则 / 等价表版本 | `listening-segment-rule-v2` / `listening-equivalences-v1` |
+| 规则 / 等价表版本 | `listening-segment-rule-v2` / `listening-equivalences-v2` |
 | 首尾连续锚 | 6 词；歧义扩为 12 词，仍歧义则复核 |
 | 可选模糊锚 | 默认关闭；至少 20 词，12 词连续锚中恰好 1 处替换，每遍另一端须精确 |
 | 短材料 / 其他材料 | 少于 40 词：源词匹配率和含插入惩罚的编辑相似度均 ≥0.95；其他均 ≥0.90 |
@@ -45,9 +45,27 @@ Apple 和 Whisper 合并后再次校验同一骨架规则；局部 Whisper 结�
 并同时保留前遍末 run 与后遍首 run 的完整发音及原有 0.02 秒余量；否则仍报
 `READINGS_OVERLAP`。`boundaryAdjustments` 保留原边界、静音区间及共同分界点。
 
-等价表仅包含明列的 OK/okay、Hi/Hey、hm/hmm、部分英美拼写，以及代码中确定的数字、
-整点时间和货币读法；不添加专名。Apple attributed run 可包含多个词，词时按 run
-内插值并显式标记；只有 run 的外边界能证明发音边界，不能把整段时间冒充每个词的时间。
+等价规则先于关键字门禁执行，源文与 ASR 使用同一规范化路径；全部插入、删除、替换仍检查
+规范化后的两侧数值、序数、货币、否定和时间。当前版本 `listening-equivalences-v2`：
+
+| 类别 | 确定等价范围 | 保守边界 |
+| --- | --- | --- |
+| 固定拼写 / 基数 / 货币 | 既有 OK/okay、Hi/Hey、hm/hmm、英美拼写；0–999999 整数（含千分位）；`$`/`£` 与两位分值 | 不增加人名或同音词；`too` ≠ `two` |
+| 序数 | `1st`–`31st` 与 first–thirty-first；连字符或空格均可 | 保留 first / second / third 等不同值，以及序数与基数的区别；错误后缀不修正 |
+| AM / PM | `a.m.` / `AM` / `am` 与 `p.m.` / `PM` / `pm`；附在数字后亦支持 | AM 与 PM 不互换；只在明确 AM/PM 前省略整点 `o'clock` |
+| 时刻 | `HH:MM`（小时 0–23、分钟 00–59），如 `7:30` / seven thirty；整点仍对应 o'clock；个位分钟保留 oh | 不猜测 12/24 小时换算；裸 `930` 仍为 nine hundred thirty |
+| 明确 meridiem 的数字时刻 | `1.15pm` / `1:15 pm` / `115 p.m.`，附 AM/PM 且小时 1–12、分钟合法；跨 run 的 `1` + `.15pm` 同样支持 | 没有 AM/PM 的 `7.30` 保留数值小数，不自动当 `7:30`；无后缀裸整数不补冒号 |
+| 明确 half past | half past one–twelve（或 1–12）对应该小时 thirty | 不加入 half seven、quarter to 等额外读法，也不推断上午/下午 |
+| 年份分组读法 | 2001–2099；2026 / twenty twenty-six、2006 / twenty oh six；复用基数展开 | 仅整段为年份表达式，或紧接 in/since/during/until/by/before/after/from/year；不跨句点/逗号，货币或时长单位后缀不按年份改写；twenty six 不猜成 2006 |
+
+`first` ≠ `second`、`7:30` ≠ `7:13`、`2026` ≠ `2027`，相同数值的表示转换不改变
+这些保护。专名和其他正文差异仍进入原编辑距离及话轮检查，不因等价表更新而被消除。
+
+Apple attributed run 可包含多个词。新路径先保留字符范围，再将同一 segment 内跨 run
+的确定表达式一起规范化，保留原 run 文本、起止时间与编号范围。插值显式标记为
+`interpolated_within_run` 或 `interpolated_within_normalized_span`；只有原 run 的最外
+规范化 token 可证明发音边界，内部 token 不会获得新的物理边界。表达式不能跨越失败、
+倒序时间戳、超过 2 秒的空档或 segment 边界。源词原文同样按字符范围映射，不覆盖源文。
 
 Apple 缺词而 Whisper 提供完整唯一证据时允许通过；身份、次数、顺序或物理边界出现
 可证实冲突时保留 `review_required`。所有 unresolved 组都不输出已批准 playback。
@@ -205,7 +223,7 @@ Whisper 回退。旧差异仍保留在诊断中，不将“未调用回退”解
 unknown 不误报、同一静音分界及服务端真实 sidecar 校验、回放不可评估状态，以及骨架组在静音
 空档内的播放区间重叠同时阻止双方。阈值与等价表逐项和父 commit 比较一致。
 
-## 2026-10-21 审查修复及可选模糊锚评测
+## 2026-10-21 审查修复及可选模糊锚评测（normalization v1 历史基线）
 
 当前候选修复三项审查问题：失败/歧义组的部分首锚不再截断正常组的候选配对；
 Whisper 裁窗忽略失败邻组的 occurrence；关键差异检查覆盖对齐两侧；中文编号门禁
@@ -279,3 +297,58 @@ text-6 仍为边界不足和引擎冲突；text-2–5、text-7–10 仍可用。
 - `.scratch/listening-v2-fix-replay-final-on/replay-2026-10-20T19-29-02-876Z.json`
 - `.scratch/listening-v2-fix-e2e-off/attempt-2026-10-20T19-29-18-867Z-76934f40/`
 - `.scratch/listening-v2-fix-e2e-on/attempt-2026-10-20T19-29-19-339Z-7ecf379f/`
+
+## 2026-10-21 normalization v2 追加验证
+
+模糊锚继续默认关闭。此次只扩展前述确定等价表达式及其原始字符/时间映射，
+关键字检查仍位于规范化之后，0.95/0.90、次数、顺序、边界、冲突和送审策略不变。
+下表 index 均为 manifest 零起始编号；“通过”仅指本次裁窗局部规则，整卷顺序仍不可评估。
+
+| 样本 / 组 | v1 的具体表示差异 | v2 最终结果及保留的疑点 |
+| --- | --- | --- |
+| 4 / 江南十校 / text-9 | 源 `9:00 am` 展开为 nine o'clock am；Apple `9` + `a.m.` 变 nine a m；Whisper `9am` 的 9 未展开，形成伪数字/整点差异 | Apple 两遍通过，选择 Apple。Whisper 时间表示修复后仍只有一遍完整首尾锚，保留 `READING_COUNT_MISMATCH`。ha-ha 缺词及第二遍 read/ready 差异仍计分，Apple 匹配率 0.989071 / 0.983607。 |
+| 5 / 江南十校 / text-10 | 源 `1:00 pm` 与 one p.m. 的 o'clock/meridiem 差异；first 与 `1st`（旧为 one st）；`1:15 pm` 与 Apple `115 p.m.`（旧多 hundred）；Whisper `1pm`、跨 run `1` + `.15pm`、`2` + `.45pm` 的附字母数字未展开 | 两引擎两遍均通过，选择 Apple。明确 PM 与合法 HMM/H.MM 保证小时/分钟值确定，不对裸整数套此规则；to gather/together 差异未加入等价表，仍计分。两引擎每遍匹配率均 0.989848。 |
+| 11 / 宁波 m2 / text-10 | 源 first 与 Apple `1st`；源 `9:00` / o'clock 与 Whisper 跨 run `o` + `'clock`，旧拆为 o / clock | 两引擎两遍通过，选择 Apple；can/could 仍作为替换计分，每遍匹配率 0.994382。 |
+| 27 / 天域 m4 / text-9 | 源 second 与 Apple `2nd`（旧为 two nd）；Whisper 首遍另有 too → two | Apple 两遍通过（各 0.984925）；Whisper 的 too/two 不是等价表示，仍报 `CRITICAL_WORD_DIFFERENCE`。kingdoms/kingdom、seminar's/seminar、was/with、gotta/got to 仍按原阈值计分，没有改写源文或新增同音类。 |
+| 28 / 天域 m4 / text-10 | 源 `09:30`；Apple 首遍 `9.30`、第二遍 `930`（旧多 hundred）；Whisper 两遍 `9.30`；另有源 `12:00` 与 Whisper 跨 run `o` + `'clock` 的伪差异 | **仍复核**。12:00 的分词差异已修，但无 AM/PM 的 `9.30` 可能是小数，裸 930 可能是整数，不自行补冒号；两引擎都保留 `CRITICAL_WORD_MISSING` / `CRITICAL_WORD_DIFFERENCE`。Whisper 两遍匹配率 0.968254 / 0.973545 仍被关键字门禁挡住。专名等替换继续计分；这属于表示尚不确定，不能仅凭 ASR 断言录音内容错误。 |
+| 44 / 台州 m2 / text-9 | 源 `3:00 p.m.` 旧为 three o'clock p m；Apple `3 pm` / Whisper meridiem 表示缺少或拆开 o'clock/p/m | 两引擎两遍通过，选择 Apple；Apple 1 / 0.989899，Whisper 1 / 1。Apple 第二遍 we'll/will 仍计分。 |
+
+由 v1 的 23/22 变为 **28/17**，仅 4、5、11、27、44 五组从复核变为局部可用；
+原有可用组没有新增失败。开发阶段一次 29/16 的试跑把裸 `9.30` 当数字片段后与
+9:30 重合；数值反例揭示此歧义后，最终明确保留未标注小数，28 号恢复保守复核。
+没有为达到更高通过率而推断时间意义。
+
+| 最终范围 | 模糊锚关 | 模糊锚开 |
+| --- | --- | --- |
+| 45 组 / 22 卷，排除整卷顺序的局部分布 | usable 28 / review_required 17 | 相同 |
+| 包含顺序状态 | usable 0 / review_required 17 / ORDER_NOT_EVALUABLE_IN_REPLAY 28 | 相同 |
+| orderStatusCounts | 全部 45 组 ORDER_NOT_EVALUABLE_IN_REPLAY | 相同 |
+| Apple | usable 25 / review_required 20 | 相同 |
+| Whisper | usable 20 / review_required 25 | 相同 |
+| 山东完整流程，含全卷顺序及未改动服务端 sidecar 校验 | usable 8 / review_required 2 / 校验 PASS | 相同 |
+
+模糊锚开关对最终决策影响仍为 0。山东 text-1 仍为 Cris/Chris 首锚问题：
+默认关闭报次数不足；开启后 Apple 两遍匹配率均 0.903226，低于短材料 0.95，继续复核。
+text-6 仍为物理边界证据不足及引擎冲突，其余 8 组可用。两种配置各只调用 text-1、
+text-6 的缓存 Whisper 输出，共 2 组；text-7、text-10 由此前 Whisper 回退通过变为
+Apple 独立通过。没有启动新 ASR，也未将缓存裁窗冒充本次重新识别结果。
+
+完整 import-pipeline/replay 测试 **398 passed / 0 failed / 0 skipped**（新增 9 项）：
+31 个序数、meridiem/时刻/half past/年份等价，千分位与货币兼容，小数歧义，
+跨 run 原始文本与边界，失败/倒序时间戳及空档，不等序数/分钟/AM-PM/年份/金额、
+否定和 too/two 的公共规则入口硬阻断。Node 24.15.0：
+
+```sh
+TMPDIR=<worktree>/.scratch/listening-equivalences-v2-test-tmp \
+node --test --test-concurrency=1 scripts/import-pipeline/*.test.mjs scripts/import-pipeline/replay/*.test.mjs
+```
+
+最终证据均位于当前工作树；早期 v1 / 试跑证据保留，未覆盖：
+
+- `.scratch/listening-equivalences-v2-suite-final.log`
+- `.scratch/listening-equivalences-v2-replay-final-off/replay-2026-10-20T19-44-01-824Z.json`
+- `.scratch/listening-equivalences-v2-replay-final-on/replay-2026-10-20T19-44-01-834Z.json`
+- `.scratch/evaluate-listening-equivalences-v2.mjs`（仅复用缓存的本地完整流程入口）
+- `.scratch/listening-equivalences-v2-e2e-comparison-final.json`
+- `.scratch/listening-equivalences-v2-e2e-off/attempt-2026-10-20T19-43-57-881Z-710455f0/`
+- `.scratch/listening-equivalences-v2-e2e-on/attempt-2026-10-20T19-43-59-011Z-4c547e75/`
