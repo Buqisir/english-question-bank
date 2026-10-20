@@ -36,6 +36,9 @@ import {
 import { planHeadingRepairs } from './ocr-heading-repair.mjs'
 import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs'
 import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
+import { computeLineFacts } from './ocr-line-facts.mjs'
+import { LINE_ROLE_RULES, matchesLineRole, firstLineRole, speakerLabel,
+  inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches } from './ocr-line-roles.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -44,8 +47,6 @@ const execFileAsync = promisify(execFile)
 const EVIDENCE_DENSITY = 144
 const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
-const WATERMARK = /微\s*信\s*公\s*众\s*号\s*(?:I\s*A\s*[Il1|]\s*)?(?:English)?/gu
-const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
 
 function fail(message) {
   console.error(message)
@@ -255,7 +256,7 @@ function watermarkWords(line) {
     text += word.text
   }
   const found = new Set()
-  for (const match of text.matchAll(WATERMARK)) {
+  for (const match of watermarkMatches(text)) {
     for (let index = match.index; index < match.index + match[0].length; index += 1) {
       if (owner[index]) found.add(owner[index])
     }
@@ -299,8 +300,8 @@ function writeWorksheet(work, { documentId, page, key, imagePath, words }, { for
   const rows = lines.map((line, index) => {
     const marks = watermarkWords(line)
     const lineText = joinTokens(line.words.map((word) => word.text))
-    const isFooter = (index >= lines.length - 2 && FOOTER.test(lineText))
-      || (index === lines.length - 1 && /页/u.test(lineText) && line.words.length <= 12)
+    const facts = computeLineFacts({ text: lineText, words: line.words })
+    const isFooter = matchesLineRole('worksheet.footer', facts, { index, lineCount: lines.length })
     if (isFooter) furniture.push(line.id)
     else furniture.push(...ranges(marks))
     const first = line.words[0].number
@@ -371,18 +372,6 @@ function expand(reference, lines, label) {
   return out
 }
 
-const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
-const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|语言|[一二三四五六]、)/u
-const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
-
-function lineBox(words) {
-  return {
-    left: Math.min(...words.map((word) => word.box.left)),
-    right: Math.max(...words.map((word) => word.box.left + word.box.width)),
-    height: Math.max(...words.map((word) => word.box.height)),
-  }
-}
-
 // The physical first and last printed lines an item covers, by top-to-bottom word position.
 function itemEdges(item, lines, label) {
   const numbers = new Set([...(item.lines ? expand(item.lines, lines, label) : []),
@@ -409,61 +398,80 @@ function itemEdges(item, lines, label) {
 // breaking where the source page happened to wrap. A join needs typographic proof: the next
 // line's first word would not have fit after the previous line within the same column.
 export function joinTranscriptTurns(items, lines, state, label) {
-  const rights = lines.filter((line) => line.words.length >= 4).map((line) => lineBox(line.words))
+  const physicalFacts = new Map()
+  const factsForWords = words => {
+    const key = words.map(word => word.number).join(',')
+    if (!physicalFacts.has(key)) physicalFacts.set(key, computeLineFacts({ words }))
+    return physicalFacts.get(key)
+  }
+  const rights = lines.filter((line) => line.words.length >= 4).map((line) => factsForWords(line.words).box)
+  const itemGeometry = new WeakMap()
+  const geometryFor = (item, label) => {
+    if (!itemGeometry.has(item)) {
+      const edges = itemEdges(item, lines, label)
+      itemGeometry.set(item, edges && { ...edges, firstFacts: factsForWords(edges.first), lastFacts: factsForWords(edges.last) })
+    }
+    return itemGeometry.get(item)
+  }
+  const itemFacts = new WeakMap()
+  const factsForItem = item => {
+    if (!itemFacts.has(item)) itemFacts.set(item, computeLineFacts(item))
+    return itemFacts.get(item)
+  }
   const out = []
   let joins = 0
   let previousSpeech = false
   let previousNote = false
   for (const [index, sourceItem] of items.entries()) {
     // Proofreaders can restore a missing printed gloss line inside one item.
-    const noteStart = state.inTranscript && /^★\s*\p{Script=Han}/u.test(sourceItem.text || '')
+    const noteStart = matchesLineRole('transcript.note-start', factsForItem(sourceItem), state)
     const item = noteStart && sourceItem.text.includes('\n') ? {
       ...sourceItem, text: joinLines(sourceItem.text.split(/\n/u).map((line) => line.trim())),
       ...(sourceItem.emphasis ? { emphasis: sourceItem.emphasis.map((entry) => ({
         ...entry, text: joinLines(entry.text.split(/\n/u).map((line) => line.trim())),
       })) } : {}),
     } : sourceItem
-    const text = typeof item.text === 'string' ? item.text.trim() : ''
-    if (TRANSCRIPT_MARKER.test(text)) state.inTranscript = true
-    else if (TRANSCRIPT_END.test(text)) state.inTranscript = false
+    const facts = factsForItem(item)
+    const text = facts.trimmed
+    const trimmedFacts = text === facts.text ? facts : computeLineFacts({ ...item, text })
+    const transition = firstLineRole('transcript-state', trimmedFacts)
+    if (transition?.id === 'transcript.marker') state.inTranscript = true
+    else if (transition?.id === 'transcript.end') state.inTranscript = false
     // Chinese glosses/full-width punctuation and source emphasis are part of English speech.
-    const numericContinuation = previousSpeech && /\d,$/u.test(out.at(-1)?.text ?? '')
-      && /^\d{3}(?:\b|[-‐])/u.test(text)
-    const speech = state.inTranscript && text && text === item.text && !TRANSCRIPT_MARKER.test(text)
-      && (/^(?:[A-Za-z("'“‘]|\(\d+\))/u.test(text) || numericContinuation) && !item.figure
-    const note = state.inTranscript && !item.figure && (noteStart || (previousNote && /^\p{Script=Han}/u.test(text)))
     const previous = out.at(-1)
-    const noteContinuation = note && previousNote && !noteStart && !/[。！？]$/u.test(previous.text)
-    if ((speech && previousSpeech && !SPEAKER_LABEL.test(text)) || noteContinuation) {
-      const before = itemEdges(previous, lines, `${label} item ${index}`)
-      const after = itemEdges(item, lines, `${label} item ${index + 1}`)
+    const previousFacts = previous ? factsForItem(previous) : null
+    const numericContinuation = matchesLineRole('transcript.numeric-continuation', facts,
+      { previousSpeech, previousFacts })
+    const speech = matchesLineRole('transcript.speech', facts, { inTranscript: state.inTranscript, numericContinuation })
+    const note = matchesLineRole('transcript.note', facts, { inTranscript: state.inTranscript, noteStart, previousNote })
+    const noteContinuation = matchesLineRole('transcript.note-continuation', facts,
+      { note, previousNote, noteStart, previousFacts })
+    if (matchesLineRole('transcript.turn-continuation', facts, { speech, previousSpeech, noteContinuation })) {
+      const before = geometryFor(previous, `${label} item ${index}`)
+      const after = geometryFor(item, `${label} item ${index + 1}`)
       if (before && after) {
-        const last = lineBox(before.last)
-        const first = lineBox(after.first)
-        const firstWord = [...after.first].sort((left, right) => left.box.left - right.box.left)[0]
+        const last = before.lastFacts.box
+        const firstFacts = after.firstFacts
         const column = rights.filter((box) => box.right > last.left && box.left < last.right
           && box.left >= last.left - last.height * 3).map((box) => box.right).sort((left, right) => left - right)
         const columnRight = column.length ? column[Math.floor((column.length - 1) * 0.9)] : last.right
         // Dialogue/gloss continuations may hang after M:/W: or a note bullet. A monologue's
         // genuine first-line indent (or an extra indent within a turn) remains a boundary.
-        const noteBullet = noteContinuation && /^★\s/u.test(previous.text)
-        const hanging = (SPEAKER_LABEL.test(previous.text) || noteBullet) && before.first === before.last
-        const speechWords = [...before.first].sort((a, b) => a.box.left - b.box.left)
+        const noteBullet = matchesLineRole('transcript.note-bullet', previousFacts, { noteContinuation })
+        const hanging = matchesLineRole('transcript.hanging', previousFacts,
+          { noteBullet, singlePhysicalLine: before.first === before.last })
+        const speechWords = before.firstFacts.sortedWords
         let labelWords = hanging ? noteBullet ? 1
-          : previous.text.match(SPEAKER_LABEL)[0].replace(/[:：]$/u, '').trim().split(/\s+/u).length : 0
+          : speakerLabel(previous.text).replace(/[:：]$/u, '').trim().split(/\s+/u).length : 0
         // A confirmed M: may cover a separately recognized colon (also OCR-read as ;).
-        if (hanging && /^[:：;；]$/u.test(speechWords[labelWords]?.text ?? '')) labelWords += 1
+        if (matchesLineRole('transcript.split-colon', computeLineFacts({ text: speechWords[labelWords]?.text ?? '' }), { hanging })) labelWords += 1
         const speechLeft = hanging
           ? speechWords[labelWords]?.box.left ?? last.left
           : last.left
-        const indented = first.left > speechLeft + last.height * 0.35
-        const beforeTop = Math.min(...before.last.map((word) => word.box.top))
-        const afterTop = Math.min(...after.first.map((word) => word.box.top))
-        const adjacent = afterTop >= beforeTop && afterTop - beforeTop <= last.height * 3
-        if (!indented && adjacent && last.right + last.height * 0.5 + firstWord.box.width > columnRight) {
+        if (matchesLineRole('transcript.wrap', firstFacts, { speechLeft, last, columnRight })) {
           const glue = noteContinuation
             ? joinLines([previous.text, text]).slice(previous.text.length, -text.length)
-            : /[A-Za-z][-‐]$/u.test(previous.text) ? '' : ' '
+            : previousFacts.endsEnglishHyphen ? '' : ' '
           const joinedText = `${previous.text}${glue}${text}`
           const offset = previous.text.length + glue.length
           const emphasis = [
@@ -961,14 +969,7 @@ function worksheets(paperId) {
 // Zhejiang NCK1 section directions have stable wording; each slot binds exactly one confirmed
 // question-source item. The first matching item wins, so the more specific pattern is listed
 // first where two directions share a prefix.
-const DIRECTION_PATTERNS = [
-  ['listening.long-form', /^听下面\d+段对话或独白/u],
-  ['listening.short-dialogue', /^听下面\d+段对话。/u],
-  ['seven-choices', /多余选项/u],
-  ['cloze', /选出可以填入空白处/u],
-  ['grammar-fill', /括号内单词的正确形式/u],
-  ['reading.a', /^阅读下列短文，从每题所给的/u],
-]
+const DIRECTION_SLOTS = LINE_ROLE_RULES.filter(rule => rule.phase === 'direction').map(rule => rule.value)
 
 function unionRegion(observations) {
   const left = Math.min(...observations.map((item) => item.region.x))
@@ -993,8 +994,9 @@ function presentation(paperId) {
   for (const page of question.pages) {
     const observations = new Map(evidencePages[page.page - 1].observations.map((item) => [item.observationId, item]))
     for (const item of page.orderedItems) {
-      if (/^例[：:]/u.test(item.text)) fail(`Listening example found on page ${page.page}; author sourcePresentation.listeningExample by hand`)
-      const slot = DIRECTION_PATTERNS.find(([, pattern]) => pattern.test(item.text))?.[0]
+      const facts = computeLineFacts(item)
+      if (matchesLineRole('presentation.example', facts)) fail(`Listening example found on page ${page.page}; author sourcePresentation.listeningExample by hand`)
+      const slot = firstLineRole('direction', facts)?.value
       if (!slot || found.has(slot)) continue
       found.set(slot, {
         slotId: slot,
@@ -1008,7 +1010,7 @@ function presentation(paperId) {
       })
     }
   }
-  const required = DIRECTION_PATTERNS.map(([slot]) => slot).filter((slot) => listening || !slot.startsWith('listening.'))
+  const required = DIRECTION_SLOTS.filter((slot) => listening || !slot.startsWith('listening.'))
   const missing = required.filter((slot) => !found.has(slot))
   if (missing.length) fail(`No confirmed direction item matched: ${missing.join(', ')}`)
   const order = ['listening.short-dialogue', 'listening.long-form', 'reading.a', 'seven-choices', 'cloze', 'grammar-fill']
@@ -1062,49 +1064,13 @@ function figureSizes(paperId) {
   console.log(JSON.stringify({ ok: true, paperId, changes }, null, 2))
 }
 
-const WRITING_SECTION = [
-  ['application', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:应用文|书面表达)\s*[）)]|应用文|书面表达)/u],
-  ['continuation', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:读后续写|续写)\s*[）)]|读后续写|续写)/u],
-]
-const WRITING_SCORING_SECTION = [
-  ['application', /^应用文评分细则\s*[:：]?$/u],
-  ['continuation', /^读后续写评分细则\s*[:：]?$/u],
-]
-// Answer keys may number writing as the third part when listening is absent.
-// Some keys head the samples only with "第一节（满分15分）".
-const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
-const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
-// Some keys start their reading explanations immediately after the samples,
-// without another "第…部分" heading. That divider ends the key's writing scope.
-const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u
-
-// OCR can keep the first section number on the writing part heading's item
-// ("第四部分 写作（共两节，满分40分）\n第一节"); the sample follows directly.
+// OCR can keep a bare section on the writing-part heading's item.
 export function writingSectionAfterPart(text) {
   const normalized = String(text).normalize('NFKC')
-  if (!WRITING_PART.test(normalized)) return null
+  if (!matchesLineRole('writing.part', computeLineFacts({ text: normalized }))) return null
   const rest = normalized.replace(/^第[三四]部分[^\n)]*\)?/u, '').trim()
-  const bare = rest.match(BARE_WRITING_SECTION)
-  return bare ? (bare[1] === '一' ? 'application' : 'continuation') : null
-}
-const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
-const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
-const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
-const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
-const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[）)]$/iu
-const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
-const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
-// The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
-const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
-const STUDENT_SCRIPT_BOUNDARY = /^[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*样卷\s*[:：]?$/u
-const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
-const SALUTATION = /^Dear\s.+,$/u
-const CLOSING = /^(Yours|Best wishes|Best regards|Sincerely|Yours sincerely|Love)[^.]{0,20},$/iu
-
-function isEntryLabel(text) {
-  return ENTRY_LABEL.test(text || '') || WORD_COUNT_SAMPLE_LABEL.test(text || '')
-    || NUMBERED_SAMPLE_LABEL.test(text || '') || EXAMPLE_SAMPLE_LABEL.test(text || '')
-    || PARENTHESIZED_SAMPLE_LABEL.test(text || '')
+  const number = bareSectionNumber(rest)
+  return number ? (number === '一' ? 'application' : 'continuation') : null
 }
 
 function joinLines(lines) {
@@ -1118,23 +1084,20 @@ function joinLines(lines) {
 // Page furniture can be ordered after a sample by OCR even when physically above it.
 // Require both an edge location and a page-counter/answer-book title (or repeated exam title).
 export function isAnswerFurniture(text, region, repeated = false) {
-  const edge = region.height <= 0.06 && (region.y < 0.12 || region.y + region.height > 0.88)
-  const repeatedTitle = repeated && text.length <= 100 && /考试|高三|模拟|联考|试卷/u.test(text)
-  return edge && (repeatedTitle || FOOTER.test(text)
-    || /\bPage\s+\d+(?:\s+of\s+\d+)?\b/iu.test(text)
-    || /^[\p{Script=Han}\d\s（）()·—\-：:]{0,80}英语\s*(?:试题)?\s*(?:参考)?\s*答案/u.test(text)
-    || /^English\s+(?:Reference\s+)?Answer\s*Key/iu.test(text))
+  return Boolean(firstLineRole('furniture', computeLineFacts({ text, region }), { repeated }))
+}
+
+function referenceBoundaryFromFacts(previous, facts, margin) {
+  const context = { previous, margin }
+  const indented = matchesLineRole('reference.indented', facts, context)
+  const pageTurn = matchesLineRole('reference.page-turn', facts, context)
+  const previousShort = matchesLineRole('reference.previous-short', facts, context)
+  const continues = matchesLineRole('reference.lowercase-continuation', facts, { ...context, pageTurn, indented })
+  return { indented, pageTurn, previousShort, continues }
 }
 
 export function referenceLineBoundary(previous, line, margin) {
-  const indented = line.left > margin.left + 0.015
-  const pageTurn = previous && previous.page !== line.page
-  const firstBox = [...line.boxes].sort((a, b) => a.region.y - b.region.y || a.region.x - b.region.x)[0]
-  // A long next word can wrap despite the apparent gap at the right edge.
-  const previousShort = previous && previous.right < margin.right - 0.06
-    && previous.right + (firstBox?.region.width || 0) + 0.003 < margin.right
-  const continues = previous?.role === 'body' && !pageTurn && !indented && /^[a-z]/u.test(line.text)
-  return { indented, pageTurn, previousShort, continues }
+  return referenceBoundaryFromFacts(previous, computeLineFacts(line), margin)
 }
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
@@ -1148,20 +1111,27 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
   const pages = confirmation.documents.find((document) => document.documentId === answerDocument.documentId).pages
   const lines = []
   const review = []
+  const lineFacts = new WeakMap()
+  const factsFor = line => {
+    if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
+    return lineFacts.get(line)
+  }
   for (const page of pages) {
     const observations = new Map(evidencePages[page.page - 1].observations.map((item) => [item.observationId, item]))
     for (const item of page.orderedItems) {
       const boxes = item.observationIds.map((id) => observations.get(id))
-      lines.push({ itemId: item.itemId, page: page.page, text: item.text, boxes,
-        left: Math.min(...boxes.map((box) => box.region.x)),
-        right: Math.max(...boxes.map((box) => box.region.x + box.region.width)) })
+      const line = { itemId: item.itemId, page: page.page, text: item.text, boxes }
+      const facts = factsFor(line)
+      line.left = facts.left
+      line.right = facts.right
+      lines.push(line)
     }
   }
   const edgeTexts = new Map()
   for (const line of lines) {
-    const region = unionRegion(line.boxes)
-    if (region.y >= 0.12 && region.y + region.height <= 0.88) continue
-    const text = line.text.replace(/\d+/gu, '#').replace(/\s+/gu, '')
+    const facts = factsFor(line)
+    if (!facts.atEdge) continue
+    const text = facts.edgeText
     if (!edgeTexts.has(text)) edgeTexts.set(text, new Set())
     edgeTexts.get(text).add(line.page)
   }
@@ -1169,64 +1139,58 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
   let current = null
   let inWriting = false
   for (const [lineIndex, line] of lines.entries()) {
-    if (sections.size && ANSWER_EXPLANATION_START.test(line.text)) {
+    const facts = factsFor(line)
+    if (matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
       review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
       break
     }
-    const normalized = line.text.replace(/\d+/gu, '#').replace(/\s+/gu, '')
-    if (isAnswerFurniture(line.text, unionRegion(line.boxes), edgeTexts.get(normalized)?.size > 1)) {
+    if (firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
       continue
     }
     // A heading can share its OCR item with a sample label. Some answer books
     // omit the writing-part heading entirely; require an adjacent sample label
     // before treating a bare "第一节" outside writing as a writing section.
-    const inlineSample = line.text.match(/^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)\s+([（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu)
-    const [heading, ...rest] = inlineSample ? inlineSample.slice(1) : line.text.split('\n')
-    // OCR may repeat the writing label above a bare section in the same item.
-    // Only interpret it inside the already established writing part.
-    const sectionText = inWriting
-      ? (/^写作\s*[:：]?$/u.test(heading) && rest.length === 1
-        ? rest[0].trim() : line.text.replace(/^写作\s+(?=第[一二]节)/u, ''))
-      : line.text
-    const isSampleLabel = text => isEntryLabel(text) && ESSAY_LABEL.test(text || '')
-    const mergedLabel = rest.length === 1 && isSampleLabel(rest[0].trim()) ? rest[0].trim() : null
-    const bare = (inWriting || mergedLabel || isSampleLabel(lines[lineIndex + 1]?.text))
-      && (mergedLabel ? heading : sectionText).normalize('NFKC').match(BARE_WRITING_SECTION)
-    const started = bare ? [bare[1] === '一' ? 'application' : 'continuation']
-      : WRITING_SECTION.find(([, pattern]) => pattern.test(line.text))
-    const scoringSection = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(line.text))
+    const inlineSample = inlineSampleParts(facts.text)
+    const [heading, ...rest] = inlineSample || facts.text.split('\n')
+    const sectionText = writingSectionText(facts, heading, rest, inWriting)
+    const mergedText = rest.length === 1 ? rest[0].trim() : null
+    const mergedLabel = mergedText && matchesLineRole('entry.sample-label', computeLineFacts({ text: mergedText })) ? mergedText : null
+    const bare = (inWriting || mergedLabel || (lines[lineIndex + 1]
+      && matchesLineRole('entry.sample-label', factsFor(lines[lineIndex + 1]))))
+      && bareSectionNumber((mergedLabel ? heading : sectionText).normalize('NFKC'))
+    const started = bare ? (bare === '一' ? 'application' : 'continuation')
+      : firstLineRole('writing-section', facts)?.value
+    const scoringSection = firstLineRole('scoring-section', facts)?.value
     if (scoringSection) {
-      current = sections.get(scoringSection[0]) || { taskType: scoringSection[0], lines: [] }
-      sections.set(scoringSection[0], current)
+      current = sections.get(scoringSection) || { taskType: scoringSection, lines: [] }
+      sections.set(scoringSection, current)
       inWriting = true
       continue
     }
     if (started) {
-      current = { taskType: started[0], lines: [] }
-      sections.set(started[0], current)
+      current = { taskType: started, lines: [] }
+      sections.set(started, current)
       inWriting = true
       if (bare && mergedLabel) current.lines.push({ ...line, text: mergedLabel })
       continue
     }
     // An explicit omission belongs to the active section, or to both tasks
     // when the key omits the entire writing part. Never invent a model answer.
-    if ((inWriting || current) && /^(?:略|[（(]略[）)]|(?:参考)?范文[：:]?\s*略|(?:源)?无范文|未提供范文)[。.]?$/u.test(line.text.trim())) {
+    if (matchesLineRole('writing.omission', facts, { inWriting, current })) {
       for (const taskType of current ? [current.taskType] : ['application', 'continuation']) {
         if (!sections.has(taskType)) sections.set(taskType, { taskType, lines: [] })
       }
       review.push({ itemId: line.itemId, issue: 'source explicitly supplies no writing sample (not_supplied)' })
       continue
     }
-    if (/^(第[一二三四五]部分|听力)/u.test(line.text) || TRANSCRIPT_MARKER.test(line.text)) {
+    if (matchesLineRole('writing.part-boundary', facts)) {
       current = null
-      inWriting = WRITING_PART.test(line.text)
+      inWriting = matchesLineRole('writing.part', facts)
       const trailing = writingSectionAfterPart(line.text)
       if (trailing) { current = { taskType: trailing, lines: [] }; sections.set(trailing, current) }
     } else if (current) current.lines.push(line)
   }
-  const role = (text) => VERSION_LABEL.test(text) ? 'label' : SALUTATION.test(text) ? 'salutation'
-    : CLOSING.test(text) ? 'closing' : null
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
     const taskType = group.writingTask.taskType
     const section = sections.get(taskType)
@@ -1236,7 +1200,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     const margins = new Map()
     for (const page of new Set(section.lines.map((line) => line.page))) {
       const local = section.lines.filter((line) => line.page === page)
-      const english = local.filter((line) => /^[A-Za-z“"‘']/u.test(line.text) && line.boxes.length > 3)
+      const english = local.filter((line) => matchesLineRole('writing.margin-body', factsFor(line)))
       const body = english.length ? english : local
       margins.set(page, { left: Math.min(...body.map((line) => line.left)),
         right: Math.max(...body.map((line) => line.right)) })
@@ -1256,14 +1220,15 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       review.push({ itemId: line.itemId, issue: `${reason}; skipped until the next label or English line` })
     }
     for (const line of section.lines) {
+      const facts = factsFor(line)
       // Student scripts end only this task's official-reference capture.
-      if (STUDENT_SCRIPT_BOUNDARY.test(line.text)) {
+      if (matchesLineRole('writing.student-script', facts)) {
         review.push({ itemId: line.itemId, issue: 'student-script column ends this writing section’s reference capture' })
         break
       }
-      if (isEntryLabel(line.text)) {
+      if (firstLineRole('entry-label', facts)) {
         skipping = false
-        const kind = SCORING_LABEL.test(line.text) ? 'scoring' : ESSAY_LABEL.test(line.text) ? 'essays' : null
+        const kind = firstLineRole('entry-kind', facts)?.value || null
         if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }
         flush()
         const index = entries[kind].length + 1
@@ -1274,13 +1239,12 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
         previous = null
         continue
       }
-      if (entry?.kind !== 'scoring' && (COMMENTARY_LINE.test(line.text)
-        || (skipping && /\p{Script=Han}/u.test(line.text)))) {
+      if (matchesLineRole('writing.commentary', facts, { entryKind: entry?.kind, skipping })) {
         if (!skipping) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
         continue
       }
       // English quote fragments in teaching notes cannot restart an unlabeled sample.
-      if (skipping && !/^[A-Z“"‘']/u.test(line.text)) continue
+      if (matchesLineRole('writing.skipped-fragment', facts, { skipping })) continue
       skipping = false
       if (!entry) {
         entry = { kind: 'essays', referenceId: `source-ref-${short}-${entries.essays.length + 1}`, authority: 'source_reference',
@@ -1288,11 +1252,11 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
         entries.essays.push(entry)
       }
       const margin = margins.get(line.page)
-      const special = role(line.text)
+      const special = firstLineRole('paragraph-role', facts)?.value || null
       const afterClosing = previous?.role === 'closing'
-      const { indented, previousShort, pageTurn, continues } = referenceLineBoundary(previous, line, margin)
+      const { indented, previousShort, pageTurn, continues } = referenceBoundaryFromFacts(previous, facts, margin)
       const starts = !paragraph || special || afterClosing || (!continues && (previous.role !== 'body' || indented
-        || previousShort || pageTurn || /^Paragraph\s*\d+[:：]/u.test(line.text)))
+        || previousShort || pageTurn || matchesLineRole('paragraph.numbered', facts)))
       if (pageTurn && !special && !afterClosing && !indented && !previousShort) {
         review.push({ itemId: line.itemId, issue: 'paragraph continues across a page turn; split into two located paragraphs' })
       }
@@ -1301,7 +1265,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
         paragraph = { role: special || (afterClosing ? 'signature' : 'body'), lines: [] }
       }
       paragraph.lines.push(line)
-      if (/[-‐]$/u.test(line.text)) review.push({ itemId: line.itemId, issue: 'line ends with a hyphen; joined with a space' })
+      if (facts.endsHyphen) review.push({ itemId: line.itemId, issue: 'line ends with a hyphen; joined with a space' })
       previous = { role: paragraph.role, right: line.right, page: line.page }
     }
     flush()
