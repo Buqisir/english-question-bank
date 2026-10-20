@@ -127,3 +127,42 @@ test('unequal ordinals, clocks, years, amounts and negation remain critical diff
     assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'), `${a} / ${b}: ${result.issues}`)
   }
 })
+for (const [source, actual] of [['by 2026', 'by 20:26'], ['before 2013', 'before 20:13'],
+  ['in 2026', 'in 20 26']]) {
+  test(`a year cannot equal a time or separate numeric runs: ${source} / ${actual}`, () => {
+    const result = evaluate(source, actual)
+    assert.equal(result.decision, 'review_required')
+    assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+  })
+}
+test('year literals accept explicit word readings in either direction, including and', () => {
+  for (const [a, b] of [['by 2026', 'by twenty twenty-six'],
+    ['before 2013', 'before two thousand and thirteen'], ['in 2026', 'in two thousand and twenty-six']]) {
+    for (const [source, actual] of [[a, b], [b, a]]) assert.equal(evaluate(source, actual).decision, 'usable')
+  }
+})
+test('mixed digits and words cannot masquerade as a year even when their expanded tokens coincide', () => {
+  for (const actual of ['in 2 thousand 26', 'in two thousand 26', 'in twenty 26', 'in 20 twenty-six']) {
+    for (const [source, target] of [['in 2026', actual], [actual, 'in 2026']]) {
+      const result = evaluate(source, target)
+      assert.equal(result.decision, 'review_required', `${source} / ${target}`)
+      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+    }
+  }
+})
+test('timed tokens retain original year, time, cardinal and ordinal expression types', () => {
+  for (const [text, type] of [['in 2026', 'year'], ['at 20:26', 'time'], ['in 20 26', 'cardinal'],
+    ['the 21st', 'ordinal'], ['in twenty twenty-six', 'year']]) {
+    const words = listeningAsrTokens([windowFor(text.split(' '))]).words.slice(1)
+    assert.ok(words.length && words.every(w => w.expressionType === type), text)
+  }
+})
+test('a four-digit literal licenses year rewriting; identical expressions remain unchanged', () => {
+  for (const text of ['in 2026', 'in twenty twenty-six', 'in two thousand and twenty-six']) {
+    assert.equal(evaluate(text, text).decision, 'usable')
+  }
+  const result = evaluate('in twenty twenty-six', 'in two thousand and twenty-six')
+  assert.equal(result.decision, 'review_required')
+  assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+  assert.deepEqual(normal('2026.'), normal('twenty twenty-six.'))
+})

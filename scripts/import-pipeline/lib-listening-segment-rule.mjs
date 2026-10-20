@@ -122,38 +122,64 @@ function lexemeWords(raw) {
 // ranges. A run boundary cannot split "1" + ".15pm" or "o" + "'clock".
 function normalizeListeningUnits(value) {
   const text = String(value ?? '')
-  let units = [...text.matchAll(listeningLexemes)].flatMap(match =>
-    lexemeWords(match[0]).map(token => ({ token, start: match.index, end: match.index + match[0].length })))
-  const adjacent = (a, b) => a.end >= b.start || /^[\s-]*$/u.test(text.slice(a.end, b.start))
-  const span = (tokens, first, last) => tokens.map(token => ({ token, start: first.start, end: last.end }))
-  const result = []
   const yearContext = new Set(['in', 'since', 'during', 'until', 'by', 'before', 'after', 'from', 'year'])
   const quantityUnits = new Set(['dollar', 'dollars', 'pound', 'pounds', 'cent', 'cents', 'euro', 'euros',
     'yuan', 'yen', 'hundred', 'thousand', 'million', 'hours', 'minutes', 'seconds'])
+  const yearPosition = (start, end) => {
+    const prefix = text.slice(0, start).trim()
+    const context = prefix.match(/([a-z]+)\s*$/iu)?.[1]?.toLowerCase()
+    return ((!prefix && /^[\s.!?。！？]*$/u.test(text.slice(end))) || yearContext.has(context))
+      && !quantityUnits.has(text.slice(end).match(/^\s*([a-z]+)/iu)?.[1]?.toLowerCase())
+  }
+  let units = [...text.matchAll(listeningLexemes)].flatMap(match => {
+    const raw = match[0], start = match.index, end = start + raw.length
+    const words = lexemeWords(raw)
+    const expressionForm = /\d/u.test(raw) ? 'literal' : 'words'
+    let expressionType = /\d/u.test(raw) ? 'cardinal'
+      : words.some(w => ordinalSmall.includes(w) || ['twentieth', 'thirtieth'].includes(w)) ? 'ordinal'
+        : words.some(w => smallNumbers.includes(w) || tens.includes(w) || ['hundred', 'thousand'].includes(w)) ? 'cardinal' : 'text'
+    if (/^\d+(?:st|nd|rd|th)$/iu.test(raw)) expressionType = 'ordinal'
+    else if (raw.includes(':') || /\d[\s\S]*[ap]\s*\.?\s*m\.?$/iu.test(raw)
+      || words.some(w => ["o'clock", 'am', 'pm'].includes(w))) expressionType = 'time'
+    else if (/^\d{4}$/u.test(raw) && yearPosition(start, end)) expressionType = 'year'
+    return words.map(token => ({ token, start, end, expressionType, expressionForm, expressionText: raw,
+      ...(expressionType === 'year' ? { expressionValue: Number(raw) } : {}) }))
+  })
+  const adjacent = (a, b) => a.end >= b.start || /^[\s-]*$/u.test(text.slice(a.end, b.start))
+  const span = (tokens, first, last, expressionType, expressionValue) => tokens.map(token =>
+    ({ token, start: first.start, end: last.end, expressionType, expressionValue,
+      expressionForm: 'words', expressionText: text.slice(first.start, last.end) }))
+  const result = []
   for (let i = 0; i < units.length; i++) {
     const a = units[i], b = units[i + 1], c = units[i + 2]
     if (a.token === 'half' && b?.token === 'past' && c
       && smallNumbers.indexOf(c.token) >= 1 && smallNumbers.indexOf(c.token) <= 12
       && adjacent(a, b) && adjacent(b, c)) {
-      result.push(...span([c.token, 'thirty'], a, c)); i += 2; continue
+      result.push(...span([c.token, 'thirty'], a, c, 'time')); i += 2; continue
     }
-    if (a.token === 'twenty' && b && adjacent(a, b)) {
-      let remainder = smallNumbers.indexOf(b.token), last = i + 1
-      if (tens.includes(b.token)) {
-        remainder = tens.indexOf(b.token) * 10
-        if (c && smallNumbers.indexOf(c.token) >= 1 && smallNumbers.indexOf(c.token) <= 9 && adjacent(b, c)) {
-          remainder += smallNumbers.indexOf(c.token); last++
+    if ((a.token === 'twenty' || (a.token === 'two' && b?.token === 'thousand')) && b && adjacent(a, b)) {
+      let numberIndex = i + 1
+      if (a.token === 'two') numberIndex += units[numberIndex + 1]?.token === 'and' ? 2 : 1
+      const number = units[numberIndex], next = units[numberIndex + 1]
+      let remainder = smallNumbers.indexOf(number?.token), last = numberIndex
+      if (tens.includes(number?.token)) {
+        remainder = tens.indexOf(number.token) * 10
+        if (next && smallNumbers.indexOf(next.token) >= 1 && smallNumbers.indexOf(next.token) <= 9 && adjacent(number, next)) {
+          remainder += smallNumbers.indexOf(next.token); last++
         }
-      } else if (['oh', 'o', 'zero'].includes(b.token) && c && adjacent(b, c)
-        && smallNumbers.indexOf(c.token) >= 1 && smallNumbers.indexOf(c.token) <= 9) {
-        remainder = smallNumbers.indexOf(c.token); last++
+      } else if (a.token === 'twenty' && ['oh', 'o', 'zero'].includes(number?.token) && next && adjacent(number, next)
+        && smallNumbers.indexOf(next.token) >= 1 && smallNumbers.indexOf(next.token) <= 9) {
+        remainder = smallNumbers.indexOf(next.token); last++
       }
-      const standalone = i === 0 && last === units.length - 1
-      const context = i > 0 && yearContext.has(units[i - 1].token) && adjacent(units[i - 1], a)
-      if (remainder >= 1 && remainder <= 99 && (remainder >= 10 || last > i + 1)
-        && (standalone || context) && !quantityUnits.has(units[last + 1]?.token)
+      // Expanded time/cardinal tokens are never evidence of a word-form year.
+      const originalWords = units.slice(i, last + 1).every((unit, j, list) =>
+        unit.expressionForm === 'words' && ['text', 'cardinal'].includes(unit.expressionType)
+        && (!j || adjacent(list[j - 1], unit)))
+      if (remainder >= 1 && remainder <= 99 && (a.token === 'two' || remainder >= 10 || last > i + 1)
+        && originalWords && yearPosition(a.start, units[last].end)
         && !ordinalSmall.includes(units[last + 1]?.token)) {
-        result.push(...span(numberWords(2000 + remainder).split(' '), a, units[last])); i = last; continue
+        result.push(...span(numberWords(2000 + remainder).split(' '), a, units[last], 'year', 2000 + remainder))
+        i = last; continue
       }
     }
     result.push(a)
@@ -255,6 +281,8 @@ function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths) {
     const a = unit.touched[0], b = unit.touched.at(-1)
     const left = runUnits[a.index], right = runUnits[b.index]
     return { token: unit.token,
+      expressionType: unit.expressionType, expressionForm: unit.expressionForm,
+      expressionText: unit.expressionText, expressionValue: unit.expressionValue,
       startSeconds: a.start + (a.end - a.start) * left.indexOf(i) / left.length,
       endSeconds: b.start + (b.end - b.start) * (right.indexOf(i) + 1) / right.length,
       runStartSeconds: a.start, runEndSeconds: b.end,
@@ -357,7 +385,18 @@ function positions(haystack, needle) {
 
 // Global edit distance for ONE bounded occurrence. Insertions count in the
 // score; a free prefix/suffix or src*2 alignment would hide narration/splicing.
-export function alignListeningOccurrence(source, target) {
+function compatibleYearExpressions(source, target) {
+  if (!source || (source.expressionType !== 'year' && target.expressionType !== 'year')) return true
+  if (source.expressionType !== 'year' || target.expressionType !== 'year'
+    || source.expressionValue !== target.expressionValue) return false
+  if (source.expressionForm !== target.expressionForm || source.expressionForm === 'literal') return true
+  // Identical spoken words need no equivalence. Rewriting between different
+  // word readings is only licensed by a four-digit literal on the other side.
+  const words = text => text.toLowerCase().replace(/[-\s]+/gu, ' ')
+  return words(source.expressionText) === words(target.expressionText)
+}
+export function alignListeningOccurrence(source, target, sourceUnits = []) {
+  const equal = (i, j) => source[i] === target[j].token && compatibleYearExpressions(sourceUnits[i], target[j])
   const trace = [new Uint8Array(target.length + 1).fill(2)]
   let previous = Array.from({ length: target.length + 1 }, (_, i) => i)
   for (let i = 1; i <= source.length; i++) {
@@ -365,7 +404,7 @@ export function alignListeningOccurrence(source, target) {
     const moves = new Uint8Array(target.length + 1)
     moves[0] = 1
     for (let j = 1; j <= target.length; j++) {
-      const costs = [previous[j - 1] + Number(source[i - 1] !== target[j - 1].token),
+      const costs = [previous[j - 1] + Number(!equal(i - 1, j - 1)),
         previous[j] + 1, row[j - 1] + 1]
       const move = costs.indexOf(Math.min(...costs))
       row[j] = costs[move]
@@ -381,11 +420,13 @@ export function alignListeningOccurrence(source, target) {
   while (i || j) {
     const move = !i ? 2 : !j ? 1 : trace[i][j]
     if (move === 0) {
-      if (source[i - 1] === target[j - 1].token) matched.push(i - 1)
+      if (equal(i - 1, j - 1)) matched.push(i - 1)
       else {
         missing.push(i - 1)
         differences.push({ kind: 'substitution', sourceIndex: i - 1, targetIndex: j - 1,
-          sourceWord: source[i - 1], targetWord: target[j - 1].token })
+          sourceWord: source[i - 1], targetWord: target[j - 1].token,
+          ...(sourceUnits[i - 1] ? { sourceExpressionType: sourceUnits[i - 1].expressionType,
+            targetExpressionType: target[j - 1].expressionType } : {}) })
       }
       i--; j--
     } else if (move === 1) {
@@ -566,6 +607,7 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
     const turns = listeningSourceTurns(group.text)
     const source = turns.flat()
+    const sourceUnits = listeningSourceTurnText(group.text).flatMap(normalizeListeningUnits)
     const sourceRawWords = listeningSourceRawWords(group.text)
     if (!source.length) return problem(result, 'SOURCE_EMPTY')
     const anchor = anchorsFor(group, corpus, words, expected.expectedReadings, fuzzy)
@@ -584,7 +626,7 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       const endIndex = tails[0] + anchor.width
       const actual = words.slice(startIndex, endIndex)
       const first = actual[0], last = actual.at(-1)
-      const alignment = alignListeningOccurrence(source, actual)
+      const alignment = alignListeningOccurrence(source, actual, sourceUnits)
       const issues = []
       const anchorSubstitutions = []
       if (anchor.fuzzy) {
