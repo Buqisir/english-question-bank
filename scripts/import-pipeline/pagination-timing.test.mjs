@@ -32,6 +32,27 @@ test('candidate diagnostics preserve render order, options, result identity and 
   assert.ok(finishPaginationTiming(timed.timing).totalSeconds >= 0)
 })
 
+test('stored break group ids do not retain the candidate HTML', async () => {
+  const { spawnSync } = await import('node:child_process')
+  const moduleUrl = new URL('../../server/draft-paper/paginationTiming.mjs', import.meta.url).href
+  const script = `
+    const { timedCandidateRender } = await import(${JSON.stringify(moduleUrl)})
+    const timed = timedCandidateRender(async () => ({ pageCount: 1 }), { edition: 'economy8', accepts: () => true })
+    globalThis.gc(); const before = process.memoryUsage().heapUsed
+    for (let i = 0; i < 8; i += 1) {
+      const padding = String.fromCharCode(0x4e00 + i).repeat(4 * 1024 * 1024)
+      await timed.measure('<section data-canonical-group-id="reading-comprehension-group-' + i + '" data-pdf-planned-break>' + padding, {}, {})
+    }
+    globalThis.gc(); process.stdout.write(String(process.memoryUsage().heapUsed - before))
+  `
+  const run = spawnSync(process.execPath, ['--expose-gc', '--input-type=module', '-e', script], { encoding: 'utf8' })
+  assert.equal(run.status, 0, run.stderr)
+  // Ids must exceed V8's 13-char sliced-string minimum to reproduce the leak.
+  // Eight retained 8MB strings add ~64MB; the fix leaves only RegExp's
+  // last-input cache (one 8MB copy).
+  assert.ok(Number(run.stdout) < 24 * 1024 * 1024, `heap grew by ${run.stdout} bytes`)
+})
+
 test('summary reports candidate totals and tolerates historical reports', () => {
   assert.equal(summarizePaginationTiming({ edition: 'economy8' }), 'economy8 | 无 timing 记录')
   assert.equal(summarizePaginationTiming({ edition: 'economy8', timing: {

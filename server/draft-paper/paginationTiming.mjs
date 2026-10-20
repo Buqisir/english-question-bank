@@ -17,7 +17,11 @@ export function timedCandidateRender(render, { edition, accepts }) {
     const row = {
       index: timing.candidates.length + 1, edition,
       layout: structuredClone(layout),
-      breakGroupIds: [...html.matchAll(/<section\b[^>]*data-canonical-group-id="([^"]*)"[^>]*data-pdf-planned-break/g)].map(match => match[1]),
+      // V8 keeps regex captures as slices of the source string, so storing them
+      // directly retains every ~60MB candidate HTML (inline fonts) for the
+      // whole search. The Buffer round trip forces an independent copy.
+      breakGroupIds: [...html.matchAll(/<section\b[^>]*data-canonical-group-id="([^"]*)"[^>]*data-pdf-planned-break/g)]
+        .map(match => Buffer.from(match[1], 'utf8').toString('utf8')),
       queueWaitMs: 0, chromiumLaunchMs: 0, renderMs: 0, pdfMs: 0, hit: false,
     }
     timing.candidates.push(row)
