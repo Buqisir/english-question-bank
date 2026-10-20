@@ -4,7 +4,7 @@ import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { execFile } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -279,6 +279,8 @@ try {
   const cliApproval = seed(cliPaperId, '6')
   const capabilityDir = path.resolve(import.meta.dirname, '../data/import-publication-requests')
   const capabilityPath = path.join(capabilityDir, `${cliPaperId}.json`)
+  const workspace = path.join(import.meta.dirname, 'import-pipeline/papers', `paper-scoped-workspace-${process.pid}`)
+  let linked = false
   let dropRegistrationResponse = true
   const httpServer = createServer(async (request, response) => {
     const url = new URL(request.url, 'http://localhost')
@@ -315,6 +317,11 @@ try {
     expiryDb.prepare('UPDATE import_review_publication_requests SET expires_at = ? WHERE id = ?')
       .run('2000-01-01T00:00:00.000Z', retained.requestId)
     expiryDb.close()
+    // Other CI verifiers stage CLI papers this way. Mutable authoring inputs
+    // must not invalidate this unrelated, already sealed publication request.
+    symlinkSync(root, workspace)
+    linked = true
+    await new Promise(resolve => setTimeout(resolve, 30))
     const renewed = JSON.parse((await runCli('--new-request')).stdout)
     assert.notEqual(renewed.request.requestId, retained.requestId)
     assert.deepEqual(JSON.parse(readFileSync(`${capabilityPath}.${retained.requestId}`, 'utf8')), retained)
@@ -335,6 +342,7 @@ try {
     assert.equal(replay.promotion.attemptCount, 1)
   } finally {
     await new Promise((resolve) => httpServer.close(resolve))
+    if (linked) rmSync(workspace)
     for (const name of readdirSync(capabilityDir).filter((name) => name.startsWith(`${cliPaperId}.json`))) {
       rmSync(path.join(capabilityDir, name), { recursive: true, force: true })
     }

@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
-import { mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { performance } from 'node:perf_hooks'
+import { setTimeout as yieldFor } from 'node:timers/promises'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 
 const directory = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-build-'))
@@ -128,6 +129,32 @@ try {
       writeFileSync(absolute, 'synthetic excluded fixture')
     }
     assert.equal(computeReviewBuildIdentity().targetBuildId, before)
+  })
+  await check('an executable import cannot hide inside an excluded paper workspace', () => {
+    const entry = path.join(release, 'scripts/import-pipeline/papers/paper-code-probe/entry.mjs')
+    mkdirSync(path.dirname(entry), { recursive: true })
+    writeFileSync(entry, 'export const runtime = true')
+    try {
+      writeFileSync(parser, `${original}\nimport './papers/paper-code-probe/entry.mjs'\n`)
+      assert.throws(() => computeReviewBuildIdentity(),
+        { code: 'REVIEW_TARGET_IDENTITY_INVALID', message: /Excluded runtime dependency/ })
+    } finally { writeFileSync(parser, original) }
+  })
+  await check('mutable paper workspaces and CLI symlinks leave cached and fresh target identities unchanged', async () => {
+    const provider = reviewBuildIdentityProvider({ production: false })
+    await provider.ready()
+    const before = provider()
+    const live = path.join(directory, 'live-paper')
+    mkdirSync(live)
+    const linked = path.join(release, 'scripts/import-pipeline/papers/paper-signal-verification-probe')
+    symlinkSync(live, linked)
+    try {
+      writeFileSync(path.join(live, 'config.json'), '{"mutable":true}')
+      await yieldFor(30)
+      assert.equal(provider(), before, 'workspace events must not put a ready identity into pending')
+      assert.equal(computeReviewBuildIdentity().targetBuildId, before.targetBuildId)
+      assert.equal((await provider.fresh()).targetBuildId, before.targetBuildId)
+    } finally { rmSync(linked) }
   })
   assert.equal(failures, 0, `${failures} identity regression(s)`)
 } finally { rmSync(directory, { recursive: true, force: true }) }

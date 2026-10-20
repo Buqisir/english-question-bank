@@ -24,12 +24,14 @@ const graphEntries = [
   'server/import-review/reviewBuildIdentityWorker.mjs',
 ]
 // Deliberately narrow exclusions. server/exports is executable code, so it is
-// included. Pipeline papers and all registry JSON stay in the conservative union.
+// included. Pipeline code and registry JSON stay in the conservative union;
+// mutable per-paper workspaces are content inputs, bound by sealed subjects.
 export const REVIEW_BUILD_EXCLUSIONS = Object.freeze([
   { rule: 'any node_modules directory', reason: 'Dependency sources use lockfiles and installed package versions instead' },
   { rule: 'any .git, __pycache__ directory or .DS_Store file', reason: 'VCS, interpreter cache and OS metadata are not runtime inputs' },
   { rule: 'server/**/{fixtures,test-fixtures,__fixtures__,testdata}/**', reason: 'Synthetic test data is not deployed content authority' },
   { rule: 'server/**/{data,db,uploads,logs,tmp,.cache,coverage}/**', reason: 'Mutable databases, uploads, logs and generated runtime/test artifacts are bound separately' },
+  { rule: 'scripts/import-pipeline/papers/**', reason: 'Mutable import workspaces are bound by revision subjects and sealed-file checks, not release identity' },
   { rule: 'any secrets directory, .env* or *.pem / *.key file', reason: 'Secrets are never fingerprint inputs' },
   { rule: 'server/**/*.sqlite{,-wal,-shm,-journal} and server/**/*.db{,-wal,-shm,-journal}', reason: 'Database bytes are mutable evidence, not a release identity' },
 ])
@@ -38,6 +40,7 @@ function excluded(name) {
   const leaf = parts.at(-1)
   return parts.some(part => ['node_modules', '.git', '__pycache__', 'secrets'].includes(part))
     || leaf === '.DS_Store' || leaf.startsWith('.env') || /\.(?:pem|key)$/.test(leaf)
+    || name === 'scripts/import-pipeline/papers' || name.startsWith('scripts/import-pipeline/papers/')
     || (parts[0] === 'server' && (parts.some(part => [
       'fixtures', 'test-fixtures', '__fixtures__', 'testdata', 'data', 'db', 'uploads', 'logs', 'tmp', '.cache', 'coverage',
     ].includes(part)) || /\.(?:sqlite|db)(?:-wal|-shm|-journal)?$/.test(leaf)))
@@ -187,7 +190,7 @@ export function computeReviewBuildIdentity(options = {}) {
     for (const [name, version] of importedPackages) {
       if (!installedPackages.has(`${name}@${version}`)) throw invalid(`Imported package is not locked: ${name}`)
     }
-    const descriptor = { schemaVersion: REVIEW_TARGET_BUILD_VERSION, moduleGraphVersion: 'review-target-union-import-graph-v2',
+    const descriptor = { schemaVersion: REVIEW_TARGET_BUILD_VERSION, moduleGraphVersion: 'review-target-union-import-graph-v3',
       coveredDirectories, graphEntries, exclusions: REVIEW_BUILD_EXCLUSIONS,
       files: [...files.values()].sort((a, b) => a.repoRelativePosixPath < b.repoRelativePosixPath ? -1 : a.repoRelativePosixPath > b.repoRelativePosixPath ? 1 : 0),
       installedPackages: [...installedPackages.values()].sort((a, b) => a.packagePath < b.packagePath ? -1 : a.packagePath > b.packagePath ? 1 : 0),
