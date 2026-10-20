@@ -2,7 +2,8 @@
 // verify-resource: browser-render
 
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
+import childProcess, { execFileSync } from 'node:child_process'
+import { syncBuiltinESMExports } from 'node:module'
 import {
   cpSync,
   existsSync,
@@ -333,6 +334,59 @@ for (const classification of ['semantic_table', 'content_media']) {
       `${change}: intact visuals must retain question-source ownership and placement: ${JSON.stringify(invalid.issues)}`)
   }
 }
+
+// Prepare immutable native page fixtures once for the media-negative matrix.
+// Only exact PDF page renders and exact PNG -> RGBA decodes are reused; each
+// crop, hash/dimension check, import and preview still runs through production.
+// Keys include actual input bytes and command/options, never caller digests.
+// The original A4 carriers and every negative assertion remain unchanged.
+function prepareNativePageFixtures() {
+  const nativeExecFileSync = childProcess.execFileSync
+  const cache = new Map()
+  const maxBytes = 64 * 1024 * 1024
+  let retainedBytes = 0
+  const counts = { renders: 0, renderHits: 0, decodes: 0, decodeHits: 0 }
+  childProcess.execFileSync = (command, args, options) => {
+    const pdf = command === 'pdftoppm' && args?.length === 10
+      && args.slice(0, 8).filter((_, index) => [0, 2, 4, 5, 7].includes(index)).join(' ')
+        === '-f -l -singlefile -r -png'
+    const rgba = command === 'magick' && args?.length === 2 && args[1] === 'rgba:-'
+    if ((!pdf && !rgba) || Object.keys(options || {}).some(key => key !== 'maxBuffer')) {
+      return nativeExecFileSync(command, args, options)
+    }
+    const input = readFileSync(pdf ? args.at(-2) : args[0])
+    const parameters = pdf ? args.slice(0, -2) : args.slice(1)
+    const key = JSON.stringify([command, sha256(input), parameters, options])
+    const cached = cache.get(key)
+    if (cached) {
+      if (pdf) {
+        writeFileSync(`${args.at(-1)}.png`, cached.image)
+        counts.renderHits += 1
+      } else counts.decodeHits += 1
+      return Buffer.from(cached.stdout)
+    }
+    const stdout = nativeExecFileSync(command, args, options)
+    const image = pdf ? readFileSync(`${args.at(-1)}.png`) : null
+    const size = stdout.byteLength + (image?.byteLength || 0)
+    if (retainedBytes + size <= maxBytes) {
+      cache.set(key, { stdout: Buffer.from(stdout), image })
+      retainedBytes += size
+    }
+    counts[pdf ? 'renders' : 'decodes'] += 1
+    return stdout
+  }
+  // Production modules hold live ESM imports of this builtin. Scope the native
+  // preparation cache to this matrix and restore it before DOCX/CLI checks.
+  syncBuiltinESMExports()
+  return () => {
+    childProcess.execFileSync = nativeExecFileSync
+    syncBuiltinESMExports()
+    cache.clear()
+    console.log(`OCR NATIVE FIXTURES ${JSON.stringify({ ...counts, retainedBytes })}`)
+  }
+}
+const restoreNativePageFixtures = prepareNativePageFixtures()
+try {
 
 // Original ordinary body figure with a separately transcribed heading whose
 // last pixel enters the parent crop. All changes below are synthetic/in-memory.
@@ -944,6 +998,10 @@ for (const classification of ['semantic_table', 'content_media']) {
     console.log(`PASS OCR figure-option rejection: ${name}`)
   }
   console.log(`PASS OCR figure-option public import+preview: v3/v4, ${cases.length} rejections`)
+}
+
+} finally {
+  restoreNativePageFixtures()
 }
 
 // The OCR-only closure must not impose confirmed-PDF-parent requirements on
