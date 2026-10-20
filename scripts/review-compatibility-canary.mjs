@@ -57,5 +57,10 @@ try {
     }, { leaderLease: leader.lease })).comparison
   }
   console.log(JSON.stringify(report, null, 2))
+  if (report.apply && report.comparisonCommit?.committed !== true) {
+    console.error(`兼容凭证提交失败：${report.comparisonCommit?.reasonCode
+      || report.backfillCommit?.reasonCode || report.comparison.reasonCode || 'COMPARISON_NOT_COMMITTED'}`)
+    process.exitCode = 1
+  }
   if (report.comparison.result !== 'equal') process.exitCode = 1
 } finally { leader.release() }

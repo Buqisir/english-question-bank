@@ -97,6 +97,63 @@ try {
     'SELECT result,reason_code FROM review_compatibility ORDER BY rowid'
   ).all().map(row => [row.result, row.reason_code])), [['unknown', 'BACKFILL_PENDING'], ['equal', 'CONTENT_EQUAL']])
   pass('explicit one-revision canary overrides autorun off; dry-run preserves DB bytes; apply only appends credentials')
+  const canaryRelease = makeReviewRelease(path.join(root, 'canary-race-release'))
+  const canaryStoreFile = path.join(canaryRelease, 'server/import-review/reviewCompatibilityStore.mjs')
+  const canaryStoreSource = readFileSync(canaryStoreFile, 'utf8')
+  // Mutate only this copied release: compute is real, then SQLite changes
+  // before the real commit. No race-injection hook enters production code.
+  writeFileSync(canaryStoreFile, canaryStoreSource.replace(
+    'export function createReviewCompatibilityStore(', 'function createCanaryRaceStore(',
+  ) + `
+    export function createReviewCompatibilityStore(options) {
+      const store = createCanaryRaceStore(options);
+      return { ...store, async compute(job, settings) {
+        const output = await store.compute(job, settings);
+        const db = new DatabaseSync(options.dbPath);
+        try {
+          if (process.env.REVIEW_CANARY_RACE === 'cas') {
+            db.prepare('UPDATE import_review_revisions SET updated_at=? WHERE id=?').run('canary-cas-race',job.revisionId);
+          } else {
+            db.exec('BEGIN IMMEDIATE');
+            const old = db.prepare('SELECT * FROM import_review_revisions WHERE id=?').get(job.revisionId);
+            const next = { ...old, id:'rev-00000000-0000-4000-8000-000000000001',
+              revision_number:old.revision_number+1,state:'uploading',approval_receipt_json:null,finalized_at:null };
+            const keys = Object.keys(next);
+            db.prepare('INSERT INTO import_review_revisions ('+keys.join(',')+') VALUES ('+keys.map(()=>'?').join(',')+')')
+              .run(...Object.values(next));
+            db.prepare("UPDATE import_review_revisions SET state='superseded' WHERE id=?").run(old.id);
+            db.prepare('UPDATE import_review_papers SET latest_revision_id=? WHERE paper_id=?').run(next.id,old.paper_id);
+            db.exec('COMMIT');
+          }
+        } finally { db.close(); }
+        return output;
+      } };
+    }
+  `)
+  for (const race of ['cas', 'revision']) {
+    const racePath = path.join(root, `canary-${race}.sqlite`)
+    copyFileSync(fixture.dbPath, racePath)
+    dbRun(racePath, db => db.exec('DELETE FROM review_compatibility'))
+    let failure
+    try {
+      execFileSync(process.execPath, ['scripts/review-compatibility-canary.mjs',
+        '--db', racePath, '--files-root', filesRoot, '--revision', revision.id,
+        '--operator', 'recovery-fixture', '--reason', `verify ${race} refusal`, '--apply'],
+      { cwd: canaryRelease, encoding: 'utf8', env: { ...canaryEnv, REVIEW_CANARY_RACE: race },
+        timeout: 120000, stdio: ['ignore', 'pipe', 'pipe'] })
+    } catch (error) { failure = error }
+    assert(failure, `canary --apply must fail when ${race} rejects an equal comparison commit`)
+    assert.equal(failure.status, 1)
+    const report = JSON.parse(failure.stdout)
+    assert.equal(report.comparison.result, 'equal')
+    assert.equal(report.comparisonCommit.committed, false)
+    assert.equal(report.comparisonCommit.reasonCode, 'CAS_CHANGED')
+    assert.match(failure.stderr, /CAS_CHANGED/)
+    assert.equal(dbRun(racePath, db => db.prepare('SELECT COUNT(*) n FROM review_compatibility').get().n), 0)
+    if (race === 'revision') assert.notEqual(dbRun(racePath, db => db.prepare(
+      'SELECT latest_revision_id FROM import_review_papers WHERE paper_id=?').get(revision.paperId).latest_revision_id), revision.id)
+    pass(`canary --apply rejects ${race} after equal computation, prints CAS_CHANGED and writes no credential`)
+  }
   let legitimateApproval
   for (const [result, reasonCode] of [
     ['equal', 'CONTENT_EQUAL'], ['different', 'CONTENT_DIFFERENT'],
