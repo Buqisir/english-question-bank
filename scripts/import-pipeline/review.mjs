@@ -641,7 +641,7 @@ async function hydrate(paperId) {
       mkdirSync(path.dirname(filePath), { recursive: true })
       writeFileSync(filePath, downloaded.bytes)
     }
-    const projection = buildNck1ReviewProjection(temporary, { requireAnalyses: false })
+    const projection = buildNck1ReviewProjection(temporary, { requireAnalyses: false, expectedCandidateDigest: revision.candidateDigest })
     const identity = {
       sourceDigest: projection.sourceDigest,
       candidateDigest: projection.candidateDigest,
