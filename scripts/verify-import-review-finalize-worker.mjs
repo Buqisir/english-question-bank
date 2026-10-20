@@ -31,6 +31,12 @@ try {
   const directory = fixture.reviewRoot
   const options = { reviewKind: 'candidate', requireAnalyses: true }
   const synchronous = buildImportReviewProjection(directory, options)
+  function assertByteTypes(value) {
+    if (value instanceof Uint8Array) assert.equal(value.constructor, Uint8Array,
+      'native Review source bytes retain their public Uint8Array type')
+    else if (value && typeof value === 'object') Object.values(value).forEach(assertByteTypes)
+  }
+  assertByteTypes(synchronous.sourceInput)
   assert.equal(sha256(Buffer.from(legacySaveProductPreview.toString())),
     'sha256:95f750c91a3d18504a1f7eb41746fc5cc8f3af1415803d425b96059f19f97660')
   let legacyJson
@@ -139,6 +145,17 @@ try {
   assert.throws(() => asyncCase.store.projectionForRevision(asyncResult.id),
     { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' },
     'a legacy fixture without frozen products retains its original preview but cannot derive live content')
+  assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).eligible, false)
+  assert.equal(asyncCase.store.listPapers()[0].compatibility.eligible, false)
+  assert.throws(() => asyncCase.store.approveRevision(asyncResult.paperId, asyncResult.id,
+    { bundleDigest: asyncResult.bundleDigest }, 'owner'),
+  { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' })
+  assert.throws(() => asyncCase.store.registerPublicationRequest(asyncResult.paperId, {
+    revisionId: asyncResult.id, requestId: 'publication-request-00000000-0000-4000-8000-000000000001',
+    secretHash: sha256('missing-products'),
+  }, 'agent'), { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' })
+  assert.equal(asyncCase.store.getRevision(asyncResult.id).approval, null,
+    'missing frozen products cannot acquire approval through renderer fallback')
   const evidenceDb = new DatabaseSync(asyncCase.dbPath)
   try {
     const evidence = evidenceDb.prepare('SELECT evidence_json FROM review_compatibility WHERE revision_id=?')

@@ -838,7 +838,14 @@ export function createImportReviewStore({
   // Historical renderer identities are immutable receipt data. Definitive content
   // results take precedence; unavailable checks retain the accepted legacy guard.
   function eligibility(revision, compatibility) {
-    return reviewCompatibilityEligibility(compatibility, revision?.rendererBuildId !== currentRendererBuildId())
+    const value = reviewCompatibilityEligibility(compatibility, revision?.rendererBuildId !== currentRendererBuildId())
+    // Renderer fallback cannot supply missing frozen products. Check the sealed
+    // inventory even when target identity is unavailable and masks that reason.
+    if (value.fallback && revision?.reviewKind === 'candidate'
+      && !revision.manifest?.files.some(file => file.path === 'products/manifest-v1.json')) {
+      return { ...value, eligible: false }
+    }
+    return value
   }
   function compatibilityFor(db, revision, target = null, summary = false) {
     return eligibility(revision, rawCompatibilityFor(db, revision, target, summary))
@@ -1508,7 +1515,7 @@ export function createImportReviewStore({
           result: compatibilities.get(row.latest_revision_id).pending ? 'pending' : compatibilities.get(row.latest_revision_id).result,
           targetBuildId: target.targetBuildId, comparatorVersion: REVIEW_COMPARATOR_VERSION }
           : unavailable
-      const compatibility = eligibility({ rendererBuildId: row.renderer_build_id },
+      const compatibility = eligibility({ rendererBuildId: row.renderer_build_id, reviewKind: kind, manifest },
         kind === 'ocr' ? rawCompatibility : enforceRetainedReviewDifference(db, row.latest_revision_id,
           retainedReviewDifference(db, row.latest_revision_id), rawCompatibility, target))
       return {

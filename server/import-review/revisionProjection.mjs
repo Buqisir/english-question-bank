@@ -101,7 +101,7 @@ function loadParagraphSummaries(rootDir, loaded, sourceDigest, candidateDigest) 
     candidateDigest,
   })
   if (issues.length > 0) fail(`${issues[0].code}: ${issues[0].message}`, issues[0].code)
-  const bytes = readFileSync(filePath)
+  const bytes = readReviewBytes(filePath)
   return { sidecar, bytes, digest: sha256(bytes) }
 }
 
@@ -172,13 +172,20 @@ function readJson(filePath, label) {
   }
 }
 
+// Each read owns fresh bytes. Preserve the public Uint8Array contract without
+// copying the Buffer; no retained Buffer alias can mutate the returned view.
+function readReviewBytes(filePath) {
+  const bytes = readFileSync(filePath)
+  return new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+}
+
 function readSealedBytes(rootDir, descriptor, label) {
   const filePath = resolveReviewFile(
     rootDir,
     normalizedRelativePath(descriptor.path, `${label} path`),
   )
   if (!existsSync(filePath)) fail(`${label} is missing`)
-  const bytes = readFileSync(filePath)
+  const bytes = readReviewBytes(filePath)
   if (
     descriptor.sha256 !== sha256(bytes)
     || descriptor.byteLength !== bytes.byteLength
@@ -311,7 +318,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
     normalizedRelativePath(manifest.materializationPath, 'materializationPath'),
   )
   if (!existsSync(materializationPath)) fail('Source Materialization is missing')
-  const materializationBytes = readFileSync(materializationPath)
+  const materializationBytes = readReviewBytes(materializationPath)
   let materialization
   try {
     materialization = JSON.parse(new TextDecoder().decode(materializationBytes))
@@ -336,7 +343,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       fail(`Image source bundle is unavailable: ${document.documentId}`)
     }
     assertNck1ImageBundlePageArtifacts(
-      { ...document, bytes: readFileSync(documentPath) },
+      { ...document, bytes: readReviewBytes(documentPath) },
       (document.pages || []).map((page) => {
         const pagePath = resolveReviewFile(
           rootDir,
@@ -345,7 +352,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
         if (!existsSync(pagePath)) {
           fail(`Image source page is unavailable: ${document.documentId}:${page.page}`)
         }
-        return { ...page, bytes: readFileSync(pagePath) }
+        return { ...page, bytes: readReviewBytes(pagePath) }
       }),
     )
   }
@@ -363,7 +370,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       }
       return {
         documentId: document.documentId,
-        bytes: readFileSync(sourcePath),
+        bytes: readReviewBytes(sourcePath),
       }
     }),
     media: materialization.media.map((media) => {
@@ -374,7 +381,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       const mediaPath = resolveReviewFile(rootDir, relativePath)
       if (!existsSync(mediaPath)) fail(`Materialized media is unavailable: ${media.mediaId}`)
       if (!media.publication?.candidate) {
-        return { mediaId: media.mediaId, bytes: readFileSync(mediaPath) }
+        return { mediaId: media.mediaId, bytes: readReviewBytes(mediaPath) }
       }
       const renditionPath = resolveReviewFile(
         rootDir,
@@ -388,8 +395,8 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       }
       return {
         mediaId: media.mediaId,
-        bytes: readFileSync(mediaPath),
-        renditionBytes: readFileSync(renditionPath),
+        bytes: readReviewBytes(mediaPath),
+        renditionBytes: readReviewBytes(renditionPath),
       }
     }),
   }
@@ -401,7 +408,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
   }
   const correctionPath = resolveReviewFile(rootDir, LISTENING_INSTRUCTION_CORRECTION_FILE)
   if (!preparingListeningCorrection && existsSync(correctionPath)) {
-    sourceInput.listeningInstructionCorrectionBytes = readFileSync(correctionPath)
+    sourceInput.listeningInstructionCorrectionBytes = readReviewBytes(correctionPath)
     const corrected = applyListeningInstructionCorrection(materializationBytes,
       sourceInput.listeningInstructionCorrectionBytes, listeningAudio, reviewedMaterialization)
     const originalAudio = validatedListeningAudioEvidence?.descriptors.get('listening_audio_original')
@@ -787,7 +794,7 @@ export function loadNck1OcrReviewSource(rootDir) {
       normalizedRelativePath(document.path, `document ${document.documentId}`),
     )
     if (!existsSync(filePath)) fail(`OCR source document is unavailable: ${document.documentId}`)
-    const captured = { ...document, bytes: readFileSync(filePath) }
+    const captured = { ...document, bytes: readReviewBytes(filePath) }
     if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
       assertNck1ImageBundlePageArtifacts(captured, (document.pages || []).map((page) => {
         const pagePath = resolveReviewFile(
@@ -797,7 +804,7 @@ export function loadNck1OcrReviewSource(rootDir) {
         if (!existsSync(pagePath)) {
           fail(`OCR source page is unavailable: ${document.documentId}:${page.page}`)
         }
-        return { ...page, bytes: readFileSync(pagePath) }
+        return { ...page, bytes: readReviewBytes(pagePath) }
       }))
     }
     return captured
