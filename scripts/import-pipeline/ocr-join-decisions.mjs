@@ -4,7 +4,8 @@ import { matchesLineRole, speakerLabel } from './ocr-line-roles.mjs'
 /** @typedef {ReturnType<typeof computeLineFacts>} LineFacts */
 /** @typedef {{first: object, last: object, firstFacts: LineFacts, lastFacts: LineFacts}} PhysicalEdges */
 /**
- * @typedef {{unit: 'normalized', margin: {left: number, right: number}} |
+ * @typedef {{unit: 'normalized', margin: {left: number, right: number},
+ *   previousMargin?: {left: number, right: number}} |
  *   {unit: 'pixels', before: PhysicalEdges|null, after: PhysicalEdges|null, rights: Array<LineFacts['box']>} |
  *   {unit: 'text'}} JoinGeometry
  */
@@ -28,19 +29,19 @@ import { matchesLineRole, speakerLabel } from './ocr-line-roles.mjs'
  * @property {object} [boundary] Reference geometry candidates, retained for diagnostics and the public helper.
  */
 
-// Keep the two known BUB-85 4b issues here unchanged: lowercase continuation
-// does not consult previousShort, and previous.right uses the current margin.
-export function referenceBoundaryFromFacts(previous, facts, margin) {
+// Indentation belongs to the current page; the previous line's fullness belongs
+// to its own page. Same-page/public helper callers can reuse a single margin.
+export function referenceBoundaryFromFacts(previous, facts, margin, previousMargin = margin) {
   const context = { previous, margin }
   const indented = matchesLineRole('reference.indented', facts, context)
   const pageTurn = matchesLineRole('reference.page-turn', facts, context)
-  const previousShort = matchesLineRole('reference.previous-short', facts, context)
-  const continues = matchesLineRole('reference.lowercase-continuation', facts, { ...context, pageTurn, indented })
+  const previousShort = matchesLineRole('reference.previous-short', facts, { previous, margin: previousMargin })
+  const continues = matchesLineRole('reference.lowercase-continuation', facts, { ...context, pageTurn, indented, previousShort })
   return { indented, pageTurn, previousShort, continues }
 }
 
 function referencePolicy({ previous, current, geometry, roles, location }) {
-  const boundary = referenceBoundaryFromFacts(previous, current, geometry.margin)
+  const boundary = referenceBoundaryFromFacts(previous, current, geometry.margin, geometry.previousMargin)
   const { indented, previousShort, pageTurn, continues } = boundary
   const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues
     && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered))

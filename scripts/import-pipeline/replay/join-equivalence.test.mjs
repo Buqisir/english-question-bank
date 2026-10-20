@@ -100,18 +100,9 @@ const cases = [
         [['A tiny green shoot grew in the gar-', 1], ['den beside the gate.', 2]])
       assert.deepEqual(output.review.map(r => r.itemId), ['p1-i2', 'p2-i0'])
     } },
-  { name: 'reference short-line lowercase continuation stays unchanged until 4b', channel: 'R',
-    input: references([[...heading, { text: 'They left early', width: .4 }, 'and returned the next morning.']]),
-    check: output => assert.equal(paragraphs(output).length, 1) },
   { name: 'reference first-line indent remains a normalized-coordinate boundary', channel: 'R',
     input: references([[...heading, 'They left early.', { text: 'A new paragraph starts here.', left: .14, width: .76 }]]),
     check: output => assert.equal(paragraphs(output).length, 2) },
-  { name: 'reference cross-page current-margin comparison stays unchanged until 4b', channel: 'R',
-    input: references([[...heading, { text: 'They left early.', width: .55 }], ['Another day began.']]),
-    check: output => {
-      assert.equal(paragraphs(output).length, 2)
-      assert.deepEqual(output.review, [])
-    } },
   { name: 'speech hyphen wraps omit the space and remap emphasis', channel: 'T',
     input: transcript([['Text 1', { text: 'M: The source spans a well-', emphasis: [{ text: 'well-', marks: ['bold'] }] },
       { text: 'known garden path.', emphasis: [{ text: 'known', marks: ['underline'] }] }]]),
@@ -193,3 +184,30 @@ for (const { name, channel, input, check } of cases) {
     assert.deepEqual(capture(candidate, channel, input), expected)
   })
 }
+
+test('4b behavior fix: a short line followed by lowercase text splits into two located paragraphs', () => {
+  const input = references([[...heading, { text: 'They left early', width: .4 }, 'and returned the next morning.']])
+  const before = capture(baseline, 'R', input)
+  assert.equal(paragraphs(before).length, 1)
+  assert.equal(paragraphs(before)[0].text, 'They left early and returned the next morning.')
+  const expected = structuredClone(before)
+  const original = paragraphs(before)[0]
+  const entry = expected.groups[0].essays.entries[0]
+  entry.paragraphs = ['They left early', 'and returned the next morning.'].map((text, index) => ({
+    ...original, paragraphId: `${entry.referenceId}-p${index + 1}`, text,
+    source: { ...original.source, locator: { ...original.source.locator,
+      region: { x: .1, y: index ? .32 : .28, width: index ? .8 : .4, height: .02 } } },
+  }))
+  assert.deepEqual(capture(candidate, 'R', input), expected)
+})
+
+test('4b behavior fix: previous-page margin restores cross-page review without changing page locators', () => {
+  const input = references([[...heading, { text: 'They left early.', width: .55 }], ['Another day began.']])
+  const before = capture(baseline, 'R', input)
+  assert.deepEqual(paragraphs(before).map(p => p.source.locator.page), [1, 2])
+  assert.deepEqual(before.review, [])
+  const expected = structuredClone(before)
+  expected.review = [{ itemId: 'p2-i0',
+    issue: 'paragraph continues across a page turn; split into two located paragraphs' }]
+  assert.deepEqual(capture(candidate, 'R', input), expected)
+})

@@ -1083,8 +1083,8 @@ export function isAnswerFurniture(text, region, repeated = false) {
   return Boolean(firstLineRole('furniture', computeLineFacts({ text, region }), { repeated }))
 }
 
-export function referenceLineBoundary(previous, line, margin) {
-  return referenceBoundaryFromFacts(previous, computeLineFacts(line), margin)
+export function referenceLineBoundary(previous, line, margin, previousMargin = margin) {
+  return referenceBoundaryFromFacts(previous, computeLineFacts(line), margin, previousMargin)
 }
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
@@ -1239,7 +1239,8 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       const special = firstLineRole('paragraph-role', facts)?.value || null
       const afterClosing = previous?.role === 'closing'
       const decision = decideLineJoin({
-        content: 'reference', previous, current: facts, geometry: { unit: 'normalized', margin },
+        content: 'reference', previous, current: facts,
+        geometry: { unit: 'normalized', margin, previousMargin: previous ? margins.get(previous.page) : margin },
         roles: { hasParagraph: Boolean(paragraph), special, afterClosing,
           numbered: matchesLineRole('paragraph.numbered', facts) },
         location: { before: previousLocation,

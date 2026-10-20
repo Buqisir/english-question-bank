@@ -196,13 +196,11 @@ export const LINE_ROLE_RULES = Object.freeze([
     c.previous && c.previous.right < c.margin.right - 0.06
       && c.previous.right + f.firstObservationWidth + 0.003 < c.margin.right,
   { text: 'Unexpectedly everything changed.', context: boundary },
-  { text: 'Unexpectedly everything changed.', boxes: [{ region: { x: .1, y: .3, width: .1, height: .02 } }], context: boundary },
-  { knownIssue: 'BUB-85 第 4b 步修：跨页仍把 previous.right 与当前页 margin.right 比较，原样保留。' }),
+  { text: 'Unexpectedly everything changed.', boxes: [{ region: { x: .1, y: .3, width: .1, height: .02 } }], context: boundary }),
   rule('reference.lowercase-continuation', 'lowercase-continuation', 10, (f, c) =>
-    c.previous?.role === 'body' && !c.pageTurn && !c.indented && f.startsLower,
-  { text: 'and these continue that turn', context: { ...boundary, previousShort: true } },
-  { text: 'Unexpectedly everything changed.', context: boundary },
-  { knownIssue: 'BUB-85 第 4b 步修：continues 缺少 !previousShort，原样保留。' }),
+    c.previous?.role === 'body' && !c.pageTurn && !c.indented && !c.previousShort && f.startsLower,
+  { text: 'and these continue that turn', context: { ...boundary, previousShort: false } },
+  { text: 'and these continue that turn', context: { ...boundary, previousShort: true } }),
 ])
 
 const byId = new Map(LINE_ROLE_RULES.map(rule => [rule.id, rule]))

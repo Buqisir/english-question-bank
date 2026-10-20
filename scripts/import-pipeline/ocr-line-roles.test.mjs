@@ -48,19 +48,21 @@ test('line facts preserve source text/order and distinguish normalized regions f
   assert.doesNotThrow(() => computeLineFacts({ text: 'Dear Sam,', words: 'w1-w3' }))
 })
 
-test('known lowercase-after-short-line behavior is retained until BUB-85 step 4b', () => {
+test('a lowercase line cannot continue a short previous line', () => {
   const result = referenceLineBoundary({ role: 'body', right: .5, page: 1 },
     { text: 'and these continue that turn', left: .1, page: 1,
       boxes: [{ region: { x: .1, y: .3, width: .1, height: .02 } }] },
     { left: .1, right: .9 })
   assert.equal(result.previousShort, true)
-  assert.equal(result.continues, true)
+  assert.equal(result.continues, false)
 })
 
-test('cross-page short-line comparison retains the current-page margin until step 4b', () => {
+test('cross-page short-line comparison uses the previous margin independently of the current margin', () => {
   const previous = { role: 'body', right: .8, page: 1 }
   const line = { text: 'Unexpectedly everything changed.', left: .1, page: 2,
     boxes: [{ region: { x: .1, y: .3, width: .01, height: .02 } }] }
-  assert.equal(referenceLineBoundary(previous, line, { left: .1, right: .9 }).previousShort, true)
-  assert.equal(referenceLineBoundary(previous, line, { left: .1, right: .82 }).previousShort, false)
+  const previousMargin = { left: .1, right: .82 }
+  assert.equal(referenceLineBoundary(previous, line, { left: .1, right: .9 }, previousMargin).previousShort, false)
+  assert.equal(referenceLineBoundary(previous, line, { left: .1, right: .82 }, previousMargin).previousShort, false)
+  assert.equal(referenceLineBoundary(previous, line, { left: .1, right: .82 }, { left: .1, right: .9 }).previousShort, true)
 })

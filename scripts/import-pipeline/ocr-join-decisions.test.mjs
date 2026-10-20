@@ -25,16 +25,29 @@ test('review decisions carry the old deterministic resolution, exact reviews and
   assert.deepEqual(input, before)
 })
 
-test('hyphen review keeps a join and preserves the known lowercase-after-short-line behavior', () => {
+test('hyphen review remains present when a short previous line now forces separation', () => {
   const input = reference()
   input.previous.right = .5
   input.current = computeLineFacts({ text: 'and a well-', page: 1, left: .1 })
   const result = decideLineJoin(input)
   assert.equal(result.action, 'review')
-  assert.equal(result.resolution, 'join')
+  assert.equal(result.resolution, 'separate')
   assert.equal(result.boundary.previousShort, true)
-  assert.equal(result.boundary.continues, true)
+  assert.equal(result.boundary.continues, false)
   assert.equal(result.reviews[0].issue, 'line ends with a hyphen; joined with a space')
+})
+
+test('previous-page short-line geometry never replaces the current-page indentation margin', () => {
+  const input = reference()
+  input.previous.right = .65
+  input.current = computeLineFacts({ text: 'Another day began.', page: 2, left: .14 })
+  input.geometry.previousMargin = { left: .3, right: .65 }
+  const result = decideLineJoin(input)
+  assert.equal(result.boundary.previousShort, false)
+  assert.equal(result.boundary.indented, true)
+  assert.equal(result.reason, 'reference.indented')
+  assert.equal(result.resolution, 'separate')
+  assert.deepEqual(result.reviews, [])
 })
 
 test('coordinate units cannot accidentally route normalized reference facts through pixel speech policy', () => {
