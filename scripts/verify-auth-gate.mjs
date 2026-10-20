@@ -587,6 +587,7 @@ async function main() {
     const upload = fileStore.fileForUpload(fileRevision.id, 'projection.json')
     writeFileSync(upload.destination, fileBytes)
     fileStore.completeFileUpload(fileRevision.id, 'projection.json', fileManifest.files[0])
+    await fileStore.ready()
     fileStore.finalizeRevision(fileRevision.id)
     const agentFilePath = `/api/import-agent-reviews/revisions/${fileRevision.id}/files?path=projection.json`
     const ownerFilePath = `/api/import-review-preview/revisions/${fileRevision.id}/files?path=projection.json`

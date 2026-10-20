@@ -254,14 +254,18 @@ try {
       } catch(error) { parentPort.postMessage({ok:false, code:error.code, message:error.message}); }
       parentPort.close();
     });
+    await store.ready();
     parentPort.postMessage('ready');`
-  const workers = await Promise.all(['revoke', 'redeem'].map(operation => new Promise((resolve, reject) => {
+  // Initialize each connection before racing the two publication operations.
+  // Schema setup is not the revoke/redeem concurrency seam under test.
+  const workers = []
+  for (const operation of ['revoke', 'redeem']) workers.push(await new Promise((resolve, reject) => {
     const worker = new Worker(new URL(`data:text/javascript,${encodeURIComponent(workerSource)}`), { workerData: {
       operation, dbPath, filesRoot:path.join(root, 'files'), requestId:raceRequest.requestId, secretHash:sha256('race-secret'),
     } })
     worker.once('error', reject)
     worker.once('message', () => resolve(worker))
-  })))
+  }))
   try {
     const outcomes = workers.map(worker => new Promise((resolve, reject) => { worker.once('message', resolve); worker.once('error', reject) }))
     workers.forEach(worker => worker.postMessage('start'))

@@ -4,6 +4,7 @@ import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
@@ -16,10 +17,10 @@ import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import {
   createImportReviewStore,
-  reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
 import {
   buildNck1ReviewConsumption,
+  buildNck1ReviewProjection,
   printConsumption,
 } from '../server/import-review/revisionProjection.mjs'
 import {
@@ -39,6 +40,7 @@ import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-co
 import {
   makeSyntheticNck1DocxFixture,
 } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
+import { freezeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
 
 const encoder = new TextEncoder()
 const checklist = Object.fromEntries(MEDIA_AI_CONFIRMATION_CHECKS.map((key) => [key, true]))
@@ -443,25 +445,24 @@ await verifyActualScreenAndPdf()
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-media-review-store-'))
 try {
   const paperId = 'paper-media-receipt-fixture'
-  const identities = {
-    sourceDigest: sha256(encoder.encode('source')),
-    visibleStructureDigest: sha256(encoder.encode('visible')),
-    analysisDigest: sha256(encoder.encode('analysis')),
+  const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+  let makeReviewRoot
+  try {
+    process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+    ;({ makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs'))
+  } finally {
+    if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+    else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
   }
   const sourceSha256 = firstInventory.sha256
   const candidateSha256 = aiCandidate.sha256
   const presentationDigest = mediaPresentationDigest(firstInventory.presentation)
   const projectionForMarker = (directory) => {
-    const marker = JSON.parse(readFileSync(path.join(directory, 'marker.json'), 'utf8'))
+    const projection = buildNck1ReviewProjection(directory, { requireAnalyses: true })
+    const marker = JSON.parse(readFileSync(path.join(directory, 'config.json'), 'utf8')).mediaReceiptFixture
     const confirmation = marker.confirmation || null
     return {
-      paperId,
-      sourceDigest: identities.sourceDigest,
-      candidateDigest: marker.candidateDigest,
-      visibleStructureDigest: identities.visibleStructureDigest,
-      analysisDigest: identities.analysisDigest,
-      consumption: { visibleStructure: [] },
-      sourceVisuals: [],
+      ...projection,
       mediaDerivations: [{
         mediaId: firstInventory.mediaId,
         presentationDigest,
@@ -480,34 +481,25 @@ try {
     projectRevision: projectionForMarker,
   })
   function createAndFinalize(marker) {
-    const bytes = encoder.encode(JSON.stringify(marker))
-    const manifestBase = {
-      schemaVersion: 'web-import-review-bundle-v1',
-      paperId,
-      paperName: 'Synthetic media receipt fixture',
-      ...identities,
-      candidateDigest: marker.candidateDigest,
-      producerBuildId: 'producer-media-v1',
-      files: [{
-        path: 'marker.json',
-        sha256: sha256(bytes),
-        byteLength: bytes.byteLength,
-        mediaType: 'application/json',
-        role: 'fixture_marker',
-      }],
-      resolvesIssueIds: [],
-    }
-    const manifest = { ...manifestBase, bundleDigest: reviewBundleDigest(manifestBase) }
+    // Keep the synthetic receipt decisions, but bind them to a complete
+    // frozen Review so the real content-eligibility gate remains exercised.
+    const { reviewRoot } = makeReviewRoot(path.join(temp, marker.candidateDigest.slice(7)), paperId)
+    const configPath = path.join(reviewRoot, 'config.json')
+    const config = JSON.parse(readFileSync(configPath))
+    writeFileSync(configPath, JSON.stringify({ ...config, mediaReceiptFixture: marker }))
+    freezeReviewFixture(reviewRoot)
+    const manifest = reviewFixtureManifest(reviewRoot, projectionForMarker(reviewRoot))
     const created = store.createRevision(manifest)
-    const upload = store.fileForUpload(created.revision.id, 'marker.json')
-    writeFileSync(upload.destination, bytes)
-    store.completeFileUpload(created.revision.id, 'marker.json', {
-      sha256: sha256(bytes),
-      byteLength: bytes.byteLength,
-    })
+    for (const file of manifest.files) {
+      const upload = store.fileForUpload(created.revision.id, file.path)
+      mkdirSync(path.dirname(upload.destination), { recursive: true })
+      writeFileSync(upload.destination, readFileSync(path.join(reviewRoot, file.path)))
+      store.completeFileUpload(created.revision.id, file.path, file)
+    }
     return { revision: created.revision, manifest, finalize: () => store.finalizeRevision(created.revision.id) }
   }
 
+  await store.ready()
   const firstDigest = sha256(encoder.encode('candidate-1'))
   const first = createAndFinalize({ candidateDigest: firstDigest, candidateSha256 })
   assert.equal(first.finalize().state, 'awaiting_review')

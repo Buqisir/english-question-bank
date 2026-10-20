@@ -2795,6 +2795,7 @@ try {
     reloadedStore.revisionDirectory(created.revision.id),
     replayManifest.members.find(({ role }) => role === 'content').path,
   )
+  await reloadedStore.ready()
   writeFileSync(contentPath, '{"tampered":true}')
   assert.throws(() => productReader.productPreviewForRevision(created.revision.id),
     { code: 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH' },
@@ -3175,6 +3176,7 @@ try {
     publishedScreen: result.publish.consumers.screen,
     publishedPrint: result.publish.consumers.print_pdf,
   })
+  await reviewBuildIdentityProvider().ready()
 } finally {
   close(happy)
 }
