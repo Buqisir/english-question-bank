@@ -9,7 +9,8 @@ import path from 'node:path'
 import { setTimeout as yieldFor } from 'node:timers/promises'
 import { DatabaseSync } from 'node:sqlite'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
-import { createAutomaticReviewSubjectBackfillStore, REVIEW_BACKFILL_BUDGET } from '../server/import-review/automaticReviewSubjectBackfill.mjs'
+import { createAutomaticReviewSubjectBackfillStore, REVIEW_BACKFILL_BUDGET, reviewBackfillInputToken } from '../server/import-review/automaticReviewSubjectBackfill.mjs'
+import { captureReviewCompatibilitySnapshot } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { finalizeReviewFixture, freezeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
 import { saveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 import { beginReviewActivity, reviewCompatibilityLockDiagnostics } from '../server/import-review/reviewCompatibilityScheduling.mjs'
@@ -95,6 +96,30 @@ try {
   }
   query(db => db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject'))
   const oldRows = originalRows()
+  {
+    const versionDb = path.join(root, 'extractor-version.sqlite')
+    copyFileSync(dbPath, versionDb)
+    const id = fixtures[0].revision.id
+    const value = dbRun(versionDb, db => captureReviewCompatibilitySnapshot(db, id))
+    const oldToken = reviewBackfillInputToken(value, filesRoot, 'review-backfill-extractor-v1')
+    const newToken = reviewBackfillInputToken(value, filesRoot)
+    assert.notEqual(oldToken, newToken)
+    dbRun(versionDb, db => db.prepare(`INSERT INTO review_subject_backfill
+      (revision_id,input_token,outcome,reason_code,checked_at,diagnostic_json) VALUES (?,?,'skipped','COMPUTATION_FAILED',?,?)`)
+      .run(id, oldToken, new Date().toISOString(), '{"reasonCode":"LISTENING_REVIEW_INVALID","pointer":"listening-review-v1.json#/subject/transcriptDigest"}'))
+    const upgraded = createAutomaticReviewSubjectBackfillStore({ dbPath: versionDb, filesRoot })
+    await upgraded.ready()
+    assert(upgraded.prepare(id), 'new extractor must retry unchanged legacy input once')
+    dbRun(versionDb, db => db.prepare(`INSERT INTO review_subject_backfill
+      (revision_id,input_token,outcome,reason_code,checked_at) VALUES (?,?,'skipped','MISSING_BASELINE',?)`)
+      .run(id, newToken, new Date().toISOString()))
+    assert.equal(upgraded.prepare(id), null)
+    assert.equal(createAutomaticReviewSubjectBackfillStore({ dbPath: versionDb, filesRoot }).prepare(id), null)
+    assert.equal(dbRun(versionDb, db => db.prepare('SELECT COUNT(*) n FROM review_subject_backfill').get().n), 2)
+    assert.equal(dbRun(versionDb, db => JSON.parse(db.prepare('SELECT diagnostic_json FROM review_subject_backfill WHERE input_token=?')
+      .get(oldToken).diagnostic_json).reasonCode), 'LISTENING_REVIEW_INVALID')
+    console.log('PASS extractor version retries unchanged old skips once, retains history/diagnostics and suppresses same-version restart retries')
+  }
 
   // Exercise the same async compute -> short CAS boundary as the API worker.
   // Approval is correctly denied by the current API without equal. A direct
@@ -222,6 +247,9 @@ try {
     completed: status.completed, reason: status.revision.reasonCode },
   { inserted: 1, skipped: 1, pending: 0, completed: true, reason: 'SEALED_FILE_CHANGED' })
   assert.equal(status.skippedByReason.SEALED_FILE_CHANGED, 1)
+  assert.equal(status.revision.diagnostic.reasonCode, 'SEALED_FILE_CHANGED')
+  assert.equal(typeof status.revision.diagnostic.message, 'string')
+  assert(status.revision.diagnostic.message.length <= 256)
   assert.deepEqual(query(db => db.prepare('SELECT origin FROM review_subject').all().map(row => row.origin)), ['stored_evidence'])
   const count = () => query(db => db.prepare('SELECT COUNT(*) n FROM review_subject_backfill').get().n)
   await startApi(true)

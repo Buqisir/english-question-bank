@@ -11,6 +11,10 @@ import { createReviewCompatibilityStore } from '../server/import-review/reviewCo
 import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 import { saveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 import { freezeReviewFixture, finalizeReviewFixture } from './lib/reviewPublicationFixture.mjs'
+import { extractStoredListeningReview } from '../server/import-review/reviewSubjectBackfill.mjs'
+import { prepareSpellingReview } from '../server/paper-import/spellingReview.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { mkdirSync } from 'node:fs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -58,6 +62,53 @@ function productionProcess(revisions, compare) {
   }))
 }
 try {
+  {
+    const directory = path.join(root, 'spelling-replay')
+    mkdirSync(directory)
+    mkdirSync(path.join(directory, 'listening-review-evidence'))
+    const raw = { listening: { transcript: [{ segmentId: 's1', questionNumbers: [1], text: 'Visit the libary.' }] } }
+    const bytes = Buffer.from(JSON.stringify(raw))
+    writeFileSync(path.join(directory, 'materialization.json'), bytes)
+    const spelling = prepareSpellingReview(bytes)
+    spelling.reviewedBy = 'import_agent'; spelling.reviewedAt = '2026-10-20T00:00:00Z'
+    for (const target of spelling.targets) {
+      target.decision = 'correct'
+      target.corrections = [{ start: 10, before: 'libary', after: 'library',
+        category: 'spelling', certainty: 'unambiguous', reason: 'Exact spelling correction' }]
+    }
+    writeFileSync(path.join(directory, 'spelling-review-v1.json'), JSON.stringify(spelling))
+    const revision = { paperId: 'paper-spelling-replay', sourceDigest: sha256('source'), candidateDigest: sha256('candidate') }
+    const corrected = [{ ...raw.listening.transcript[0], text: 'Visit the library.' }]
+    const notes = Buffer.from('{"checked":true}')
+    writeFileSync(path.join(directory, 'listening-review-evidence/notes.json'), notes)
+    const review = { schemaVersion: 'listening-review-v1', subject: { ...revision,
+      originalAudioSha256: sha256('original'), playbackAudioSha256: sha256('playback'), durationSeconds: 30,
+      timebase: 'normalized_playback_seconds', transcriptDigest: digestJson(corrected) },
+    reviewedBy: 'import_agent', reviewedAt: spelling.reviewedAt, method: 'audio_source_comparison',
+    untrustedContentHandledAsData: true,
+    scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
+    evidence: [{ path: 'listening-review-evidence/notes.json', sha256: sha256(notes), byteLength: notes.length,
+      kind: 'review_notes', window: null, settings: null }],
+    groups: [{ segmentId: 's1', questionNumbers: [1], decision: 'review_required', reason: 'Navigation unresolved',
+      limits: [], playback: null, occurrences: [] }] }
+    writeFileSync(path.join(directory, 'listening-review-v1.json'), JSON.stringify(review))
+    const evidence = [
+      { path: 'universal-source-manifest.json', json: { materializationPath: 'materialization.json' } },
+      { path: 'materialization.json', json: raw }, { path: 'listening-review-v1.json', json: review },
+      { path: 'source/listening-audio.mp3', sha256: sha256('original') },
+      { path: 'materialization/listening-audio/playback.mp3', sha256: sha256('playback'), byteLength: 8 },
+    ]
+    const preview = { payload_json: JSON.stringify({ consumption: { listeningAudio: {
+      sha256: sha256('playback'), byteLength: 8, durationSeconds: 30 } } }) }
+    assert.throws(() => extractStoredListeningReview(directory, revision, preview, evidence), error =>
+      error.code === 'LISTENING_REVIEW_INVALID'
+      && error.pointer === 'listening-review-v1.json#/subject/transcriptDigest'
+      && /invalid subject, attestation or scope/.test(error.message))
+    evidence.push({ path: 'spelling-review-v1.json', json: spelling })
+    assert.equal(extractStoredListeningReview(directory, revision, preview, evidence).review.subject.transcriptDigest,
+      digestJson(corrected))
+    console.log('PASS real sealed spelling replay restores transcript digest before the original listening validator; mismatch keeps type/location/message')
+  }
   const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-preview-renderer' })
   await store.ready()
   const revisions = []

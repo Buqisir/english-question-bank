@@ -117,6 +117,13 @@ function assertPreparedReviewContentInternal({
         subject, packageData, consumption: decorate(consumption, consumerId),
         sealedManifest: manifest, sourceAsset: sealed.sourceAsset, version, approvedIdentity, approvedManifest,
         materializationDigest: digestJson(projection.materialization),
+        // The subject stores commitments, not duplicate JSON. These current
+        // source facts are usable only after the mapper matches each digest.
+        sidecarContents: {
+          'universal-source-manifest.json': projection.manifest,
+          'config.json': projection.config,
+          'pagination-plan.json': projection.paginationPlan,
+        },
       })
       if (comparison.result !== 'equal') reject(comparison.reasonCode,
         comparison.differences.map(pointer => `/${label}/${consumerId}${pointer}`))

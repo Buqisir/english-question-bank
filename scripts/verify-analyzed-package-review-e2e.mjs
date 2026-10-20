@@ -47,6 +47,7 @@ try {
   const dbPath = path.join(temporary, 'review.sqlite')
   const filesRoot = path.join(temporary, 'sealed')
   const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'external-review-e2e' })
+  await store.ready()
   const files = reviewBundleFilePaths(reviewRoot).map((file) => {
     const bytes = fs.readFileSync(resolveReviewFile(reviewRoot, file.path))
     return { ...file, sha256: sha256(bytes), byteLength: bytes.byteLength }

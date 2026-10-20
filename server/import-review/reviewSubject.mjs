@@ -4,8 +4,9 @@ import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mj
 import { listeningReviewPrintNeutralPaths, reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { manifestProductFiles } from '../paper-import/pdfProductSet.mjs'
 
-export const REVIEW_SUBJECT_VERSION = 'review-content-subject-v1'
+export const REVIEW_SUBJECT_VERSION = 'review-content-subject-v2'
 export const REVIEW_SUBJECT_MAX_BYTES = 8 * 1024 * 1024
+export const REVIEW_JSON_FILE_MAX_BYTES = 64 * 1024 * 1024
 export const REVIEW_COMPONENTS = Object.freeze(['identity', 'consumer', 'sidecar', 'media', 'products', 'inventory'])
 const PRODUCT_MANIFEST = 'products/manifest-v1.json'
 const SHA = /^sha256:[a-f0-9]{64}$/
@@ -56,7 +57,7 @@ function reviewFileInspector(file) {
     byteLength += chunk.byteLength
     if (prefix.length < 5) prefix = Buffer.concat([prefix, Buffer.from(chunk.subarray(0, 5 - prefix.length))])
     if (json) {
-      if (byteLength > REVIEW_SUBJECT_MAX_BYTES) fail('SUBJECT_TOO_LARGE', file.path)
+      if (byteLength > REVIEW_JSON_FILE_MAX_BYTES) fail('JSON_FILE_TOO_LARGE', file.path)
       jsonChunks.push(Buffer.from(chunk))
     }
   }
@@ -215,7 +216,7 @@ function verifiedFiles(expected, fileEvidence) {
 }
 
 const isMedia = file => /^(image|audio|video)\//.test(file.mediaType)
-const contentFile = file => ({ ...descriptor(file), ...(own(file, 'json') ? { json: file.json } : {}) })
+const contentFile = file => ({ ...descriptor(file), ...(own(file, 'json') ? { jsonDigest: digestJson(file.json) } : {}) })
 
 function productsFromFiles(files, revision, validatedListeningReview) {
   const entry = files.find(file => file.path === PRODUCT_MANIFEST)
@@ -343,7 +344,8 @@ export function buildStoredReviewSubject({ revision, preview, storedFiles, fileE
       if (!expected) continue
       const entry = verified.find(file => file.path === path)
       if (!entry) fail('MISSING_EVIDENCE', path)
-      if (entry.sha256 !== expected) fail('BASELINE_UNTRUSTED', `/identity/${key}`)
+      const actual = key === 'ocrCorrectionReportDigest' ? digestJson(entry.json) : entry.sha256
+      if (actual !== expected) fail('BASELINE_UNTRUSTED', `/identity/${key}`)
     }
     return makeSubject(revision, componentsFor(revision, baselineIdentity, payload,
       verified, validatedListeningReview), 'stored_evidence', {

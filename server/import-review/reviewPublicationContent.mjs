@@ -47,9 +47,16 @@ function versionField(object, key, from, to, pointer) {
 // Source Capture may use a package-level digest in Review and exact content
 // member bytes in Publication. Only the explicitly selected sealed source file
 // can bridge those representations; a caller-supplied digest is insufficient.
-function sourceFacts(subject) {
-  const sidecar = subject.components.sidecar
-  const manifest = sidecar.find(file => file.path === 'universal-source-manifest.json')?.json
+function sidecarJson(subject, contents, filePath) {
+  const file = subject.components.sidecar.find(file => file.path === filePath)
+  if (!file) return null
+  const value = contents?.[filePath]
+  if (value === undefined || digestJson(value) !== file.jsonDigest) unknown(`/sidecar/${filePath}`)
+  return value
+}
+
+function sourceFacts(subject, sidecarContents) {
+  const manifest = sidecarJson(subject, sidecarContents, 'universal-source-manifest.json')
   if (!manifest) unknown('/source/manifest')
   const external = Boolean(manifest.packageManifest)
   const document = external ? manifest.members?.find(file => file.role === 'content')
@@ -62,11 +69,11 @@ function sourceFacts(subject) {
   return { document, publicationFile, external }
 }
 
-export function mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version, sourceAsset = null }) {
+export function mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version, sourceAsset = null, sidecarContents }) {
   const baseline = subject.components.consumer.consumption
   let sourceDigest = baseline.sourceAssetDigest
   if (sourceAsset !== null) {
-    const file = sourceFacts(subject).publicationFile
+    const file = sourceFacts(subject, sidecarContents).publicationFile
     if (!(sourceAsset instanceof Uint8Array) || sourceAsset.byteLength !== file.byteLength
       || byteDigest(sourceAsset) !== file.sha256) unknown('/source/bytes')
     sourceDigest = file.sha256
@@ -112,9 +119,9 @@ export function mapReviewPublicationConsumer({ subject, consumption, sealedManif
   return mapped
 }
 
-function expectedImportMeta(subject) {
-  const { consumer, sidecar } = subject.components
-  const config = sidecar.find(file => file.path === 'config.json')?.json
+function expectedImportMeta(subject, sidecarContents) {
+  const { consumer } = subject.components
+  const config = sidecarJson(subject, sidecarContents, 'config.json')
   const provenance = config?.provenance
   const asset = consumer.paperAsset
   if (!provenance || !Number.isInteger(Number(provenance.year))
@@ -160,7 +167,7 @@ export const REVIEW_PUBLICATION_PACKAGE_FIELDS = Object.freeze([
 ])
 
 export function compareReviewPublicationContent({ subject, packageData, consumption, sealedManifest, version,
-  sourceAsset = null, approvedIdentity = null, approvedManifest = null, materializationDigest = null,
+  sourceAsset = null, approvedIdentity = null, approvedManifest = null, materializationDigest = null, sidecarContents,
 }) {
   const result = { mappingVersion: REVIEW_PUBLICATION_CONTENT_VERSION, result: 'unknown',
     reasonCode: 'UNSUPPORTED_PUBLICATION_MAPPING', differences: [], coverage: [] }
@@ -204,7 +211,7 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
       actualAnalyses[file] = mapped
     }
     const actualPayload = { paperAsset: actualAsset, analysisSidecars: actualAnalyses,
-      consumption: mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version, sourceAsset }) }
+      consumption: mapReviewPublicationConsumer({ subject, consumption, sealedManifest, version, sourceAsset, sidecarContents }) }
     assertReviewPreviewPayload(actualPayload)
     const diff = reviewContentDifferences(original, actualPayload)
     result.differences.push(...diff.differences)
@@ -227,7 +234,7 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
       }
       result.coverage.push(field)
     }
-    const pagination = subject.components.sidecar.find(file => file.path === 'pagination-plan.json')?.json ?? null
+    const pagination = sidecarJson(subject, sidecarContents, 'pagination-plan.json')
     if (!same(packageData.paginationPlan ?? null, pagination)) result.differences.push('/packageData/paginationPlan')
     const frozen = packageData.frozenProducts
     exactKeys(frozen, ['manifest', 'bytes', 'digest'], '/packageData/frozenProducts')
@@ -245,12 +252,12 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
     }
     result.coverage.push('paginationPlan', 'frozenProducts')
     const meta = packageData.importMeta
-    const facts = sourceFacts(subject)
+    const facts = sourceFacts(subject, sidecarContents)
     const provenance = original.paperAsset.sources.provenance
     exactKeys(meta, ['schemaVersion', 'paperId', 'sourceFileName', 'sourceFileSha256',
       ...(facts.external ? ['sourceProvenance'] : []), 'paper', 'groups'], '/packageData/importMeta')
     if (meta.schemaVersion !== 'import-meta-v1' || meta.paperId !== subject.components.identity.paperId) unknown('/importMeta')
-    const expectedMeta = expectedImportMeta(subject)
+    const expectedMeta = expectedImportMeta(subject, sidecarContents)
     if (!same(meta.paper, expectedMeta.paper)) result.differences.push('/packageData/importMeta/paper')
     if (!same(meta.groups, expectedMeta.groups)) result.differences.push('/packageData/importMeta/groups')
     if (meta.sourceFileName !== path.posix.basename(facts.document.path)
@@ -259,7 +266,7 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
       || packageData.sourceAssetDigest !== facts.document.sha256.replace(/^sha256:/, '')) {
       result.differences.push('/packageData/importMeta/source')
     }
-    const config = subject.components.sidecar.find(file => file.path === 'config.json')?.json
+    const config = sidecarJson(subject, sidecarContents, 'config.json')
     if (!same(packageData.paperHeader ?? null, configuredPaperHeader(config) ?? null)
       || !same(sealedManifest.paperHeader ?? null, packageData.paperHeader ?? null)) result.differences.push('/paperHeader')
     result.coverage.push('importMeta', 'sourceAssetDigest', 'paperHeader')

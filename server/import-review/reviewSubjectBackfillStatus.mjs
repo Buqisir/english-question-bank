@@ -23,8 +23,12 @@ export function readReviewSubjectBackfillStatus(db, revisionId = null) {
       AND b.id=(SELECT MAX(b2.id) FROM review_subject_backfill b2 WHERE b2.revision_id=b.revision_id)
     GROUP BY b.reason_code`).all()
   const skipped = skippedRows.reduce((sum, row) => sum + row.n, 0)
-  const revision = revisionId ? db.prepare(`SELECT outcome, reason_code AS reasonCode, checked_at AS checkedAt
+  const revision = revisionId ? db.prepare(`SELECT outcome, reason_code AS reasonCode, checked_at AS checkedAt, diagnostic_json
     FROM review_subject_backfill WHERE revision_id=? ORDER BY id DESC LIMIT 1`).get(revisionId) ?? null : null
+  if (revision) {
+    revision.diagnostic = JSON.parse(revision.diagnostic_json || 'null')
+    delete revision.diagnostic_json
+  }
   return { enabled, completed: missing === skipped, inserted, skipped,
     skippedByReason: Object.fromEntries(skippedRows.map(row => [row.reason_code, row.n])),
     pending: missing - skipped, revision,

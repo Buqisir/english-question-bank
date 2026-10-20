@@ -5,6 +5,7 @@ import { computeReviewBuildIdentity } from './reviewBuildIdentity.mjs'
 import { extractStoredReviewBaseline } from './reviewSubjectBackfill.mjs'
 import { storedReviewRevision } from './reviewCompatibilityStore.mjs'
 import { prepareReviewCompatibilityWrite } from './reviewCompatibilityWrite.mjs'
+import { reviewBackfillDiagnostic } from './reviewBackfillDiagnostic.mjs'
 
 const started = performance.now()
 let executionIdentity = null
@@ -46,10 +47,12 @@ try {
   }
 } catch (error) {
   parentPort.postMessage({ baseline: null, executionIdentity, comparison: {
-    result: 'unknown', reasonCode: error.reasonCode || (error.code === 'REVIEW_TARGET_IDENTITY_INVALID'
+    result: 'unknown', reasonCode: error.reasonCode || (error.code === 'LISTENING_REVIEW_INVALID'
+      ? error.code : error.code === 'REVIEW_TARGET_IDENTITY_INVALID'
       ? 'TARGET_IDENTITY_INVALID' : error.code?.startsWith('E') ? 'IO_ERROR' : 'COMPUTATION_FAILED'),
     subjectDigest: null, targetBuildId: executionIdentity?.targetBuildId ?? null,
     comparatorVersion: REVIEW_COMPARATOR_VERSION,
-    componentDigests: {}, differences: [], metrics: { elapsedMs: performance.now() - started },
+    componentDigests: {}, differences: error.pointer ? [error.pointer] : [],
+    diagnostic: reviewBackfillDiagnostic(error), metrics: { elapsedMs: performance.now() - started },
   } })
 }

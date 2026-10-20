@@ -13,12 +13,13 @@ import { REVIEW_BACKFILL_FILE_BUDGET } from './reviewSubjectBackfill.mjs'
 export const REVIEW_BACKFILL_BUDGET = Object.freeze({
   heapMb: 128, deadlineMs: 10_000, batchSize: 1, scanLimit: 5, ...REVIEW_BACKFILL_FILE_BUDGET,
 })
+export const REVIEW_BACKFILL_EXTRACTOR_VERSION = 'review-backfill-extractor-v2'
 
 // A scheduling token, not content evidence. Native hashing covers the original
 // SQLite cells; lstat detects repaired/replaced files without reading their
 // bytes on the API thread. The worker still verifies every SHA and sealed path.
-function inputToken(value, filesRoot) {
-  const hash = createHash('sha256').update(JSON.stringify(value))
+export function reviewBackfillInputToken(value, filesRoot, extractorVersion = REVIEW_BACKFILL_EXTRACTOR_VERSION) {
+  const hash = createHash('sha256').update(JSON.stringify([extractorVersion, value]))
   if (!/^rev-[a-f0-9-]{36}$/.test(value.revision.id)) return hash.digest('hex')
   const root = path.resolve(filesRoot, value.revision.id)
   const paths = new Set([root])
@@ -57,7 +58,7 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
       const value = capture(db, revisionId)
       if (!value?.revision || value.subject || value.paper?.latest_revision_id !== revisionId
         || !['awaiting_review', 'approved'].includes(value.revision.state)) return null
-      const token = inputToken(value, filesRoot)
+      const token = reviewBackfillInputToken(value, filesRoot)
       if (db.prepare('SELECT 1 FROM review_subject_backfill WHERE revision_id=? AND input_token=?').get(revisionId, token)) return null
       const job = Object.freeze({ revisionId })
       jobs.set(job, { value, token, descriptor,
@@ -105,11 +106,12 @@ export function createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot })
       db.exec('BEGIN IMMEDIATE')
       try {
         const record = (outcome, reason) => db.prepare(`INSERT OR IGNORE INTO review_subject_backfill
-          (revision_id,input_token,outcome,reason_code,checked_at) VALUES (?,?,?,?,?)`)
-          .run(job.revisionId, data.token, outcome, reason, new Date().toISOString())
+          (revision_id,input_token,outcome,reason_code,checked_at,diagnostic_json) VALUES (?,?,?,?,?,?)`)
+          .run(job.revisionId, data.token, outcome, reason, new Date().toISOString(),
+            JSON.stringify(output.comparison.diagnostic ?? null))
         const current = capture(db, job.revisionId)
         if (reviewCompatibilityBusy()) { db.exec('ROLLBACK'); return { committed: false, reasonCode: 'ACTIVITY_PENDING' } }
-        if (!same(current, data.value) || inputToken(current, filesRoot) !== data.token) {
+        if (!same(current, data.value) || reviewBackfillInputToken(current, filesRoot) !== data.token) {
           // Record only the stale input. A current input remains independently
           // eligible; compatibility-attempt churn alone must not suppress it.
           record('skipped', 'CAS_CHANGED')

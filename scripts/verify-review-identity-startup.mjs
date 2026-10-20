@@ -12,6 +12,28 @@ import { Worker } from 'node:worker_threads'
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { finalizeReviewFixture, freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
+import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCompatibilitySchema.mjs'
+
+{
+  const db = new DatabaseSync(':memory:')
+  try {
+    db.exec(`CREATE TABLE review_subject (revision_id TEXT, subject_version TEXT CHECK(subject_version='review-content-subject-v1'), subject_json TEXT);
+      CREATE TABLE review_subject_backfill (id INTEGER PRIMARY KEY, revision_id TEXT, input_token TEXT,
+        outcome TEXT, reason_code TEXT, checked_at TEXT, UNIQUE(revision_id,input_token));
+      INSERT INTO review_subject_backfill VALUES(1,'old-revision','old-token','skipped','COMPUTATION_FAILED','2026-10-20');`)
+    ensureReviewCompatibilityShape(db)
+    ensureReviewCompatibilityShape(db)
+    assert.match(db.prepare("SELECT sql FROM sqlite_master WHERE name='review_subject'").get().sql, /review-content-subject-v2/)
+    assert.equal(db.prepare('SELECT input_token FROM review_subject_backfill').get().input_token, 'old-token')
+    assert(db.prepare('PRAGMA table_info(review_subject_backfill)').all().some(row => row.name === 'diagnostic_json'))
+    db.exec(`DROP TABLE review_subject;
+      CREATE TABLE review_subject (revision_id TEXT, subject_version TEXT CHECK(subject_version='review-content-subject-v1'), subject_json TEXT);
+      INSERT INTO review_subject VALUES('retained','review-content-subject-v1','{"retained":true}');`)
+    assert.throws(() => ensureReviewCompatibilityShape(db), { code: 'LEGACY_REVIEW_SUBJECTS_PRESENT' })
+    assert.equal(db.prepare('SELECT subject_json FROM review_subject').get().subject_json, '{"retained":true}')
+    console.log('PASS empty v1 schema upgrades idempotently; skip history survives; unexpected v1 subjects remain intact and fail closed')
+  } finally { db.close() }
+}
 
 export async function measureReviewOperation(action) {
   const windows = []

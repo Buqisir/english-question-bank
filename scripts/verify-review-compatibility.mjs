@@ -25,7 +25,7 @@ function check(label, fn) {
 // Small, invented source facts. No compilation, rendering, pdfinfo or original
 // copyrighted passage. PDF bytes stand for a previously finalized commitment:
 // this suite tests hash preservation, not first-finalize PDF validation.
-async function fixture({ publicProfile = false, noListening = false } = {}) {
+async function fixture({ publicProfile = false, noListening = false, ocrReport = false, sidecarPadding = 0, payloadPadding = 0 } = {}) {
   const paperId = 'paper-mock-review-2026'
   const projection = {
     paperId, sourceDigest: hash('source'), candidateDigest: hash('candidate'),
@@ -82,6 +82,10 @@ async function fixture({ publicProfile = false, noListening = false } = {}) {
     raw.set(path, buffer)
   }
   add('config.json', 'config', 'application/json', { provenance: { year: 2026, paperName: '内容审查 fixture', source: 'fixture' } })
+  if (ocrReport) add('agent-ocr-correction-report-v2.json', 'agent_ocr_correction_report', 'application/json',
+    { schemaVersion: 'agent-ocr-correction-report-v2', paperId, corrections: [] })
+  if (sidecarPadding) add('materialization/nck1-ocr-source-evidence-v1.json', 'ocr_source_evidence', 'application/json',
+    { schemaVersion: 'nck1-ocr-source-evidence-v1', documents: [{ pages: [{ text: 'a'.repeat(sidecarPadding) }] }] })
   if (publicProfile) {
     add('paragraph-summaries-v1.json', 'paragraph_summaries', 'application/json', { groups: [] })
     projection.paragraphSummariesDigest = files.at(-1).sha256
@@ -105,7 +109,7 @@ async function fixture({ publicProfile = false, noListening = false } = {}) {
   }
   add('products/manifest-v1.json', 'pdf_product_manifest', 'application/json', manifest)
   const bundle = {
-    schemaVersion: publicProfile ? 'web-import-review-bundle-v2' : 'web-import-review-bundle-v1',
+    schemaVersion: ocrReport ? 'web-import-review-bundle-v3' : publicProfile ? 'web-import-review-bundle-v2' : 'web-import-review-bundle-v1',
     paperId, paperName: '内容审查 fixture', sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest, visibleStructureDigest: projection.visibleStructureDigest,
     ...(publicProfile ? { importProfile: projection.importProfile,
@@ -113,11 +117,16 @@ async function fixture({ publicProfile = false, noListening = false } = {}) {
       publicSearchMetadataDigest: projection.publicSearchMetadataDigest } : { analysisDigest: projection.analysisDigest }),
     producerBuildId: 'original-producer', files,
   }
+  if (ocrReport) {
+    bundle.ocrCorrectionReportVersion = 'agent-ocr-correction-report-v2'
+    bundle.ocrCorrectionReportDigest = digestJson(JSON.parse(raw.get('agent-ocr-correction-report-v2.json')))
+  }
   bundle.bundleDigest = reviewSubjectBundleDigest(bundle)
   const revision = { id: 'revision-original', paperId, reviewKind: 'candidate', state: 'approved',
     rendererBuildId: 'historical-renderer', bundleDigest: bundle.bundleDigest,
     sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest, manifest: bundle }
+  if (payloadPadding) projection.paperAsset.content.groups.g1.passage.text = 'b'.repeat(payloadPadding)
   const payload = buildProductPreviewPayload(revision, projection)
   const preview = { revision_id: revision.id, bundle_digest: revision.bundleDigest,
     renderer_build_id: revision.rendererBuildId, payload_digest: digestJson(payload), payload_json: JSON.stringify(payload) }
@@ -130,6 +139,33 @@ async function fixture({ publicProfile = false, noListening = false } = {}) {
 }
 const f = await fixture()
 const baseline = buildStoredReviewSubject(f)
+{
+  const actual = await fixture({ publicProfile: true, ocrReport: true })
+  const report = actual.storedFiles.find(file => file.path === 'agent-ocr-correction-report-v2.json')
+  assert.notEqual(report.sha256, actual.revision.manifest.ocrCorrectionReportDigest)
+  assert.equal(buildStoredReviewSubject(actual).ok, true)
+  for (const key of ['paragraphSummariesDigest', 'publicSearchMetadataDigest', 'ocrCorrectionReportDigest']) {
+    const changed = clone(actual)
+    changed.revision.manifest[key] = hash('wrong')
+    changed.revision.manifest.bundleDigest = reviewSubjectBundleDigest(changed.revision.manifest)
+    changed.revision.bundleDigest = changed.revision.manifest.bundleDigest
+    changed.preview.bundle_digest = changed.revision.bundleDigest
+    assert.equal(buildStoredReviewSubject(changed).reasonCode, 'BASELINE_UNTRUSTED', key)
+  }
+  console.log('PASS v3 OCR canonical JSON digest differs from byte SHA; all three sidecar digest guards still reject wrong values')
+}
+{
+  const large = await fixture({ sidecarPadding: 9 * 1024 ** 2 })
+  const built = buildStoredReviewSubject(large)
+  assert.equal(built.ok, true, JSON.stringify(built))
+  assert(built.metrics.subjectBytes < 100_000)
+  const entry = built.subject.components.sidecar.find(file => file.role === 'ocr_source_evidence')
+  assert.equal(Object.hasOwn(entry, 'json'), false)
+  assert.equal(entry.jsonDigest, digestJson(large.fileEvidence.find(file => file.path === entry.path).json))
+  const tooLarge = await fixture({ payloadPadding: 8 * 1024 ** 2 })
+  assert.equal(buildStoredReviewSubject(tooLarge).reasonCode, 'SUBJECT_TOO_LARGE')
+  console.log('PASS 9 MiB OCR evidence is read separately and committed by digest; actual subject retains its 8 MiB cap')
+}
 function compare(projection = f.projection, extra = {}) {
   const target = buildTargetReviewSubject({ ...f, projection, inventory: f.storedFiles, ...extra })
   return compareReviewSubjects({ baseline, target, targetBuildId })

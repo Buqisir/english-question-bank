@@ -1,9 +1,12 @@
 import path from 'node:path'
+import { readFileSync } from 'node:fs'
 import { DatabaseSync } from 'node:sqlite'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { validateMediaPublication } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mjs'
 import { readListeningReview } from '../paper-import/listeningReview.mjs'
+import { applySpellingReview, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
+import { reviewBackfillDiagnostic } from './reviewBackfillDiagnostic.mjs'
 import { buildStoredReviewSubject } from './reviewSubject.mjs'
 import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
@@ -21,22 +24,36 @@ const eligible = value => value?.paper.latest_revision_id === value?.revision.id
   && ['awaiting_review', 'approved'].includes(value?.revision.state)
   && !value.shipping_guards.length && !value.promotions.some(row => row.state === 'publishing')
 
-function originalListeningReview(directory, revision, preview, evidence) {
+export function extractStoredListeningReview(directory, revision, preview, evidence) {
   if (!evidence.some(file => file.path === 'listening-review-v1.json')) return null
   const source = evidence.find(file => file.path === 'universal-source-manifest.json')?.json
-  const materialization = evidence.find(file => file.path === source?.materializationPath)?.json
+  let materialization = evidence.find(file => file.path === source?.materializationPath)?.json
+  // Use the same sealed-byte spelling replay as loadNck1ReviewSource/finalize;
+  // do not compile a new Candidate to manufacture historical evidence.
+  if (materialization && evidence.some(file => file.path === SPELLING_REVIEW_FILE)) {
+    materialization = applySpellingReview(
+      readFileSync(path.join(directory, source.materializationPath)),
+      readFileSync(path.join(directory, SPELLING_REVIEW_FILE)))
+  }
   const transcript = materialization?.listening?.transcript
   const audio = JSON.parse(preview.payload_json).consumption?.listeningAudio
   const original = evidence.find(file => file.path === LISTENING_AUDIO_PATHS.original)
   const playback = evidence.find(file => file.path === LISTENING_AUDIO_PATHS.playback)
   if (!transcript || !audio || !original || !playback
     || audio.sha256 !== playback.sha256 || audio.byteLength !== playback.byteLength) fail('MISSING_VALIDATED_LISTENING_REVIEW')
-  return readListeningReview(directory, {
+  const subject = {
     paperId: revision.paperId, sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
     originalAudioSha256: original.sha256, playbackAudioSha256: playback.sha256,
     durationSeconds: audio.durationSeconds, timebase: 'normalized_playback_seconds',
     transcriptDigest: digestJson(transcript),
-  }, transcript)
+  }
+  try { return readListeningReview(directory, subject, transcript) }
+  catch (error) {
+    const review = evidence.find(file => file.path === 'listening-review-v1.json')?.json
+    error.pointer ||= review?.subject?.transcriptDigest !== subject.transcriptDigest
+      ? 'listening-review-v1.json#/subject/transcriptDigest' : 'listening-review-v1.json'
+    throw error
+  }
 }
 
 function originalConfirmations(value, revision, evidence) {
@@ -84,9 +101,11 @@ export function extractStoredReviewBaseline(value, directory) {
     originalConfirmations(value, revision, sealed.fileEvidence)
     return buildStoredReviewSubject({ revision, preview: value.preview, storedFiles,
       fileEvidence: sealed.fileEvidence,
-      validatedListeningReview: originalListeningReview(sealed.directory, revision, value.preview, sealed.fileEvidence) })
+      validatedListeningReview: extractStoredListeningReview(sealed.directory, revision, value.preview, sealed.fileEvidence) })
   }, REVIEW_BACKFILL_FILE_BUDGET)
-  if (!baseline.ok) fail(baseline.reasonCode)
+  if (!baseline.ok) throw Object.assign(new Error(baseline.reasonCode), {
+    reasonCode: baseline.reasonCode, pointer: baseline.differences?.[0] || '',
+  })
   baseline.provenance.confirmationsDigest = digestJson(value.media_confirmations)
   return baseline
 }
@@ -148,7 +167,9 @@ export async function backfillReviewSubjects({ dbPath, filesRoot, apply = false 
           reasonCode: apply ? 'BACKFILL_PENDING' : 'EVIDENCE_VERIFIED', subjectDigest: baseline.subjectDigest }
       } catch (error) {
         report.skipped++
-        result.reasonCode = error.reasonCode || (error.code === 'ENOENT' ? 'MISSING_EVIDENCE' : 'BASELINE_UNTRUSTED')
+        result.reasonCode = error.reasonCode || (error.code === 'ENOENT' ? 'MISSING_EVIDENCE'
+          : error.code === 'LISTENING_REVIEW_INVALID' ? error.code : 'BASELINE_UNTRUSTED')
+        result.diagnostic = reviewBackfillDiagnostic(error)
       }
       report.results.push(result)
     }

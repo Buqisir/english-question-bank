@@ -1,14 +1,23 @@
-export const REVIEW_COMPATIBILITY_SCHEMA_VERSION = 'review-compatibility-schema-v1'
+export const REVIEW_COMPATIBILITY_SCHEMA_VERSION = 'review-compatibility-schema-v2'
 
 // Additive only. Never rewrite old review rows or the bank's user_version.
 export function ensureReviewCompatibilityShape(db) {
   const ownTransaction = !db.isTransaction
   if (ownTransaction) db.exec('BEGIN IMMEDIATE')
   try {
+    const legacy = db.prepare("SELECT sql FROM sqlite_master WHERE type='table' AND name='review_subject'").get()
+    if (legacy && !legacy.sql.includes('review-content-subject-v2')) {
+      // The reverted rollout inserted zero subjects. Upgrade only that proven
+      // empty shape; unexpected legacy content stays intact and fails closed.
+      if (db.prepare('SELECT 1 FROM review_subject LIMIT 1').get()) {
+        throw Object.assign(new Error('Legacy review subjects require explicit migration'), { code: 'LEGACY_REVIEW_SUBJECTS_PRESENT' })
+      }
+      db.exec('DROP TABLE review_subject')
+    }
     db.exec(`
       CREATE TABLE IF NOT EXISTS review_subject (
         revision_id TEXT PRIMARY KEY REFERENCES import_review_revisions(id),
-        subject_version TEXT NOT NULL CHECK(subject_version = 'review-content-subject-v1'),
+        subject_version TEXT NOT NULL CHECK(subject_version = 'review-content-subject-v2'),
         origin TEXT NOT NULL CHECK(origin IN ('finalize','stored_evidence')),
         source_renderer_build_id TEXT NOT NULL,
         bundle_digest TEXT NOT NULL,
@@ -47,9 +56,13 @@ export function ensureReviewCompatibilityShape(db) {
         outcome TEXT NOT NULL CHECK(outcome IN ('inserted','skipped')),
         reason_code TEXT NOT NULL,
         checked_at TEXT NOT NULL,
+        diagnostic_json TEXT,
         UNIQUE(revision_id, input_token)
       );
     `)
+    if (!db.prepare('PRAGMA table_info(review_subject_backfill)').all().some(row => row.name === 'diagnostic_json')) {
+      db.exec('ALTER TABLE review_subject_backfill ADD COLUMN diagnostic_json TEXT')
+    }
     if (ownTransaction) db.exec('COMMIT')
   } catch (error) {
     if (ownTransaction) db.exec('ROLLBACK')

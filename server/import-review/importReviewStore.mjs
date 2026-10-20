@@ -2156,10 +2156,20 @@ export function createImportReviewStore({
               400,
             )
           }
-          const listening = baseline.subject.components.sidecar.find(file =>
-            Array.isArray(file.json?.listening?.transcript)
-            && Array.isArray(file.json?.listening?.questions)
-            && Array.isArray(file.json?.listening?.answers))?.json.listening
+          let listening
+          for (const file of baseline.subject.components.sidecar) {
+            if (!file.jsonDigest) continue
+            const bytes = readFileSync(resolveReviewFile(revisionDirectory(revision.id), file.path))
+            if (sha256(bytes) !== file.sha256 || bytes.byteLength !== file.byteLength) {
+              throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Original listening evidence changed')
+            }
+            const json = JSON.parse(bytes)
+            if (digestJson(json) !== file.jsonDigest) {
+              throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Original listening JSON changed')
+            }
+            if (Array.isArray(json?.listening?.transcript) && Array.isArray(json?.listening?.questions)
+              && Array.isArray(json?.listening?.answers)) { listening = json.listening; break }
+          }
           if (!listening) throw Object.assign(storeError('IMPORT_REVIEW_RENDERER_STALE', 'Original listening evidence is missing'),
             { reasonCode: 'MISSING_BASELINE' })
           externalListeningReview = {

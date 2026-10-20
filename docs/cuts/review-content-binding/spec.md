@@ -26,7 +26,7 @@
 ```sql
 CREATE TABLE IF NOT EXISTS review_subject (
   revision_id TEXT PRIMARY KEY REFERENCES import_review_revisions(id),
-  subject_version TEXT NOT NULL CHECK(subject_version = 'review-content-subject-v1'),
+  subject_version TEXT NOT NULL CHECK(subject_version = 'review-content-subject-v2'),
   origin TEXT NOT NULL CHECK(origin IN ('finalize','stored_evidence')),
   source_renderer_build_id TEXT NOT NULL,
   bundle_digest TEXT NOT NULL,
@@ -76,7 +76,8 @@ CREATE TABLE IF NOT EXISTS review_subject_backfill (
 
 字段及约束：
 
-- `subject_version='review-content-subject-v1'`；`comparator_version='review-content-equivalence-v1'`。此前规格未实施，旧设计不是线上 schema，不需要为草稿设计编写迁移。内容范围、映射、允许差异或比较算法改变时升级 comparator；subject 形状变更另升级 subject/schema，不改历史 JSON。
+- `subject_version='review-content-subject-v2'`、`review-compatibility-schema-v2`；`comparator_version='review-content-equivalence-v1'`。v2 将 sidecar/media JSON 改存 descriptor + `jsonDigest=digestJson(json)`，不重复保存完整 JSON；完整消费载荷和产品清单仍保留。内容范围、允许差异和比较算法不变。发布现场需要的 config/source manifest/pagination JSON 来自实际严格投影，使用前逐项匹配 subject 的 jsonDigest，不能仅相信新投影。
+- #542 已部署后由 #544 回滚；原回填 inserted=0。OCR revision 不进入 Candidate subject/finalize 分支。升级仅自动替换**空** v1 subject 表的 CHECK；若发现任何 v1 subject，保留原数据并以 `LEGACY_REVIEW_SUBJECTS_PRESENT` 拒绝启动，交由明确迁移决定，不覆盖历史 subject。原 skip/attempt 全部保留；backfill 表仅增 nullable `diagnostic_json`。
 - `source_renderer_build_id` 仅记录原 revision 身份，不参加与当前网站代码的比较。
 - `origin=stored_evidence` 表示从原服务端记录及封存文件提取，不表示用当前代码补造旧结果。两种 origin 使用完全相同的内容契约。
 - 各 digest 用 `sha256:<64 lowercase hex>`。JSON 用 `digestJson`；文件用流式 Node crypto SHA-256。subject_json 保存具名内容对象/摘要和文件描述，不重复保存 PDF、音频、源文档二进制；上限 8 MiB，超限 unknown，不截断。
@@ -94,7 +95,7 @@ CREATE TABLE IF NOT EXISTS review_subject_backfill (
 
 1. **identity**：原 revision/manifest 的 paperId、reviewKind、importProfile、sourceDigest、candidateDigest、visibleStructureDigest，以及该 profile 要求的 analysisDigest 或 paragraphSummariesDigest/publicSearchMetadataDigest。必要字段缺失即 unknown；profile 合法的“不适用”明确为 null，不能把缺字段当 null 放行。保留原 bundle/manifest 摘要。
 2. **consumer**：完整旧 `import_review_product_previews.payload_json`，精确包括 paperAsset、analysisSidecars、consumption；校验 payload_digest、revision_id、bundle_digest、renderer_build_id 与原 revision 的绑定。抽出 store `saveProductPreview:1568–1582` 为纯 `buildProductPreviewPayload(revision,projection)`，目标代码生成同形 payload 后完整比较。题目/答案/解析、header/sourceType、选项与顺序、projectedOccurrence、媒体描述、听力 duration/segments/url 全部参与。同 revision URL 应完全相等，不泛化删除。原 payload 某必要嵌套字段缺失/形状不受支持，unknown。
-3. **sidecar**：原 manifest 中所有非产品/非媒体输入的有序 `{path,role,mediaType,byteLength,sha256}`，以及经 hash 校验的配置、analysis、段落摘要、检索 metadata、sourceReferences、OCR correction、listening review、paginationPlan 等 JSON 内容。完整文件 inventory 兜住新增角色，不依赖有限文件名白名单。目标仍执行当前验证器及已持久化的派生摘要校验；不得仅看文件名相同。原始文件内容相等不意味着所有目标派生物自动相等，派生的展示内容必须同时落入 consumer 比较或第 5 节的发布内容映射。
+3. **sidecar**：原 manifest 中所有非产品/非媒体输入的有序 `{path,role,mediaType,byteLength,sha256}`；JSON 在逐字节验证和解析后另存 `jsonDigest`，绑定配置、analysis、段落摘要、检索 metadata、sourceReferences、OCR correction、listening review、paginationPlan 等完整 JSON 内容，不重复内嵌 JSON。完整文件 inventory 兜住新增角色，不依赖有限文件名白名单。目标仍执行当前验证器及已持久化的派生摘要校验；不得仅看文件名相同。原始文件内容相等不意味着所有目标派生物自动相等，派生的展示内容必须同时落入 consumer 比较或第 5 节的发布内容映射。
 4. **media**：原 manifest 的媒体/原图/candidate 图/源图页/音频及分段文件描述和已核验字节，以及原 preview 中的媒体描述、presentation/选择结果、听力数据。媒体确认回执沿用原身份 guard（store:1156），不得仅比较 mediaId。原 preview 未保存的纯诊断 mediaDerivations 不冒充历史展示基准；若发布必须使用未被原 payload、封存 sidecar 或媒体确认绑定的新选择，unknown。
 5. **products**：原 `products/manifest-v1.json` 的原始 hash、完整解析内容、inputDigest，以及每个产品 edition/path/mediaType/pageCount/sha256/byteLength 与 PDF 实际字节。集合通过 `manifestProductFiles` 解析，不假定总有四款；无听力产品有独立 schema。复用 `frozenProducts.mjs:29,41` 的输入/清单规则。增删产品、PDF 任意字节变化均 different。
 6. **inventory**：完整原 manifest.files 与 import_review_files 记录逐项一致，按 POSIX path 码点序排序并核验所有文件字节。目标 inventory 用 `reviewBundleFilePathsForProjection:593` / `finalizeInventory`，新增/删除/角色变化均不得略过。禁止重复路径、symlink 逃逸、非标准相对路径。
@@ -265,7 +266,8 @@ C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建�
 API compatibility worker 的自动回填步骤：
 
 1. 读取 finalized revision 及原 `import_review_product_previews`。验证 payload_digest 自洽、revision/bundle/历史 renderer 绑定正确，profile 所需字段齐全。
-2. 验证 manifest/bundleDigest、DB inventory 一致，逐文件对 SHA/长度；解析原产品清单、sidecar 和媒体确认，检查 frozen PDF 字节及产品 inputDigest。
+2. 验证 manifest/bundleDigest、DB inventory 一致，逐文件对 SHA/长度；解析原产品清单、sidecar 和媒体确认，检查 frozen PDF 字节及产品 inputDigest。`ocrCorrectionReportDigest` 是 `digestJson(report)`，不能与文件字节 SHA 混比；paragraphSummariesDigest/publicSearchMetadataDigest 仍是原字节 SHA。
+   听力先用 finalize 同一个 `applySpellingReview` 对封存 materialization/spelling-review 原字节重放，再计算 transcriptDigest 并调用原 `readListeningReview`；不运行当前 compiler 补造历史转录。摘要不符保留 `LISTENING_REVIEW_INVALID`、`listening-review-v1.json#/subject/transcriptDigest` 与有界 message。
 3. **只用上述已存证据**构造原 subject（origin=stored_evidence）；缺必需证据不写一个“完整 subject”。已有可信完整基准可以保存，即便随后目标比较 different。
 4. 用当前目标服务端从封存输入重算 identity、同形 preview payload、inventory 和内容分量，逐项比较；全部相等 equal，明确不同 different，任一必要项缺失/不可计算 unknown。
 5. CAS 追加 subject/compatibility，不改原 revision、旧 preview 或 approval。不得“先补 preview 再比较自己”，不得把新增当前派生字段当成历史已存字段。
@@ -297,13 +299,17 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 
 与在线 API 共存：持有同一 host leader，遇活动 finalize 或不明 leader/activity 则暂停，保留锁证据；临时暂停不持久化为已处理/跳过。文件读取在 SQLite 事务外，短 `BEGIN IMMEDIATE` 重读与 worker 相同的 revision/paper/preview/subject/files/issues/confirmations/guard/promotions/request 原始单元快照及文件 metadata token，变化即拒绝。普通扫描优先，每批回填最多 1 卷、检查最多 5 个输入，独立线程上限 128 MiB/10 秒，临时快照单文件 64 MiB、总计 256 MiB，并在复制超出原声明长度的字节前拒绝。有待处理卷时批间至少让出 1 秒，完成后随 30 秒普通周期轮询；低磁盘按已有 10/7 GiB 门槛暂停。正常 API 请求无需等待文件 SHA 或 subject 构造；SIGTERM 中断线程、清理临时目录并释放 leader。
 
-`review_subject_backfill` 按 revision/input_token 追加 `inserted`/`skipped`、reasonCode、checkedAt；原业务表不改写。input_token 是调度指纹：原始 SQLite cells 的 native SHA 与封存文件/目录的 lstat 身份、文件长度/mtime/ctime，不能代替 worker 的真实文件 SHA。缺证据、被篡改、不可用的输入处理一次后跨重启保留；原数据或原文件修复会改变 token，允许新一轮处理。每次最多检查 5 个 token，故外部输入变化与观测摘要是轮询收敛，不能把 completed 当作发布许可。CAS 失败仅记录旧输入，不能用旧结果覆盖并发批准、退回、finalize 或 issue。
+`review_subject_backfill` 按 revision/input_token 追加 `inserted`/`skipped`、reasonCode、checkedAt 和 nullable diagnostic_json（reasonCode/pointer/message，后两项各至多 256 字符）；原业务表不改写。input_token 是调度指纹：明确的 `review-backfill-extractor-v2`、原始 SQLite cells 的 native SHA 与封存文件/目录的 lstat 身份、文件长度/mtime/ctime，不能代替 worker 的真实文件 SHA。缺证据、被篡改、不可用的输入处理一次后跨重启保留；原数据、原文件修复或 extractor 版本升级会改变 token，每个新版本的每份输入最多再处理一次。网站 targetBuildId 和每次部署本身不进入 token，不按部署热重试。历史 skip 不删除。每次最多检查 5 个 token，故外部输入变化与观测摘要是轮询收敛，不能把 completed 当作发布许可。CAS 失败仅记录旧输入，不能用旧结果覆盖并发批准、退回、finalize 或 issue。
+
+单个 JSON 文件读取限额独立为 64 MiB（超限 `JSON_FILE_TOO_LARGE`）；subject 序列化总限仍为 8 MiB（`SUBJECT_TOO_LARGE`），不截断消费内容。sidecar JSON 的 descriptor 同时保留原字节 SHA/长度与规范化 jsonDigest，读取所有原字节验证后才摘要化；该变化不是忽略未知 sidecar 或降低内容完整性检查。临时 snapshot 的单文件/总计 64/256 MiB 预算继续保留。
+
+真实卷上线前演练使用 `node scripts/rehearse-review-subject-backfill.mjs <外部证据目录> --papers-root <只读封存 papers 目录>`。证据目录含认证只读 GET 抓取的 list.json、papers/<paperId>/status.json、preview-api.json（consumption、asset/paper-asset.json）及 analysis-api.json（六个 analysis asset）。脚本重建外层 preview envelope 后运行真实历史 extractor、当前 sealed subject 构建和比较，输出逐卷结果及计数；只读 HTTP 不暴露原 SQLite preview digest/隐藏 CAS 行，因此演练声明这一限制，不冒充生产事务核验。缺 preview 不用本地新投影补造，重庆八中继续 MISSING_BASELINE。真实卷数据与输出只放外部证据目录，不提交仓库。
 
 成功只插入 `origin=stored_evidence` 与 `unknown/BACKFILL_PENDING`。每个 target 的普通扫描器看到新 subject 后，都会重新处理自己先前的 `MISSING_BASELINE`/缺证据结果；不会把本地 CLI 环境的 target 当成在线目标。不同/未知结果仍保守阻止批准和发布，现有内容 guard 不变。
 
 ### 6.4 观测与停用
 
-`agentPaperStatus().subjectBackfill` 和 import-ops probe 的 `review.subjectBackfill` 提供 enabled、inserted、skipped、skippedByReason、pending、completed、lastCheckedAt 及当前 revision 的 outcome/reasonCode/checkedAt。摘要只查小表/计数，不读取大 subject；API 日志事件 `review-subject-backfill` 记录每批结果和摘要。completed 表示已观测范围都有持久结果，不表示所有卷 equal；跳过的卷仍可保持原业务状态并被内容 gate 阻止。
+`agentPaperStatus().subjectBackfill` 和 import-ops probe 的 `review.subjectBackfill` 提供 enabled、inserted、skipped、skippedByReason、pending、completed、lastCheckedAt 及当前 revision 的 outcome/reasonCode/checkedAt/diagnostic。摘要只查小表/计数，不读取大 subject；API 日志事件 `review-subject-backfill` 记录每批结果和摘要。completed 表示已观测范围都有持久结果，不表示所有卷 equal；跳过的卷仍可保持原业务状态并被内容 gate 阻止。
 
 应急通过既有 API 进程环境配置设置 `EQB_REVIEW_SUBJECT_BACKFILL=0` 并正常重启停用自动回填；普通兼容扫描、原证据读取和全部批准/发布 guard 继续工作。移除变量或设为非 `0` 后恢复。停用不删除历史回填结果、subject 或 attempt，不清除锁和未决 promotion。
 
