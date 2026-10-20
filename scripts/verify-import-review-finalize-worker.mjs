@@ -10,6 +10,8 @@ import { buildImportReviewProjection, reviewBundleFilePaths } from '../server/im
 import { finalizeInventory } from '../server/import-review/finalizeComputation.mjs'
 import { runFinalizeWorker } from '../server/import-review/runFinalizeWorker.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { buildProductPreviewPayload } from '../server/import-review/reviewSubject.mjs'
+import { saveProductPreview as legacySaveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 let makeReviewRoot
@@ -28,6 +30,16 @@ try {
   const directory = fixture.reviewRoot
   const options = { reviewKind: 'candidate', requireAnalyses: true }
   const synchronous = buildImportReviewProjection(directory, options)
+  assert.equal(sha256(Buffer.from(legacySaveProductPreview.toString())),
+    'sha256:95f750c91a3d18504a1f7eb41746fc5cc8f3af1415803d425b96059f19f97660')
+  let legacyJson
+  const previewRevision = { id: 'rev-preview-byte-parity', bundleDigest: synchronous.candidateDigest }
+  legacySaveProductPreview({ prepare: () => ({ run: (...values) => { legacyJson = values[4] } }) },
+    previewRevision, 'legacy-renderer', synchronous)
+  const currentJson = JSON.stringify(buildProductPreviewPayload(previewRevision, synchronous))
+  assert.deepEqual(Buffer.from(currentJson), Buffer.from(legacyJson),
+    'preview JSON bytes must match the actual 6dc7530b constructor on the same listening fixture')
+  console.log('PASS preview payload JSON bytes match original 6dc7530b constructor')
   const revision = { reviewKind: 'candidate', candidateDigest: synchronous.candidateDigest }
   const worker = await runFinalizeWorker(directory, revision)
   assert.deepEqual(worker.projection, synchronous, 'every field and binary byte must match the synchronous projection')

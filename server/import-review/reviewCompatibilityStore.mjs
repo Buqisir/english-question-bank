@@ -9,8 +9,12 @@ import { runReviewCompatibilityWorker } from './runReviewCompatibilityWorker.mjs
 const now = () => new Date().toISOString()
 const error = code => Object.assign(new Error(code), { code })
 const json = value => stableStringify(value)
+const hasTable = (db, table) => Boolean(db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?").get(table))
+const identityUnknown = () => ({ result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false,
+  targetBuildId: null, comparatorVersion: REVIEW_COMPARATOR_VERSION })
 
 function storedSubject(db, revisionId) {
+  if (!hasTable(db, 'review_subject')) return null
   const row = db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revisionId)
   if (!row) return null
   const subject = JSON.parse(row.subject_json)
@@ -29,9 +33,9 @@ export function getReviewCompatibility(db, revision, targetDescriptor) {
     const baseline = storedSubject(db, revision.id)
     if (baseline && (baseline.row.bundle_digest !== revision.bundleDigest
       || baseline.row.source_renderer_build_id !== revision.rendererBuildId)) throw error('BASELINE_UNTRUSTED')
-    const rows = db.prepare(`SELECT * FROM review_compatibility
+    const rows = hasTable(db, 'review_compatibility') ? db.prepare(`SELECT * FROM review_compatibility
       WHERE revision_id = ? AND target_build_id = ? AND comparator_version = ? ORDER BY attempt_no DESC`)
-      .all(revision.id, targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION)
+      .all(revision.id, targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION) : []
     if (!rows.length) return { result: 'unknown', reasonCode: 'NOT_CHECKED', pending: true }
     for (const row of rows) {
       const evidence = JSON.parse(row.evidence_json)
@@ -130,7 +134,8 @@ function snapshot(db, revisionId) {
   return { revision, paper, ...related,
     files: db.prepare('SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path').all(revisionId),
     preview: db.prepare('SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(revisionId) ?? null,
-    subject: db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revisionId) ?? null }
+    subject: hasTable(db, 'review_subject')
+      ? db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revisionId) ?? null : null }
 }
 
 function revisionValue(row) {
@@ -188,7 +193,18 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
     const computed = results.get(output)
     if (!captured || computed?.job !== job) throw error('REVIEW_RESULT_INVALID')
     try {
-      if (descriptor().targetBuildId !== captured.target.targetBuildId) return { committed: false, reasonCode: 'TARGET_CHANGED' }
+      let currentTarget
+      try { currentTarget = descriptor.fresh() }
+      catch { return { committed: false, reasonCode: 'TARGET_IDENTITY_INVALID' } }
+      if (currentTarget.targetBuildId !== captured.target.targetBuildId) return { committed: false, reasonCode: 'TARGET_CHANGED' }
+      const { comparison, executionIdentity } = computed.output
+      if (comparison.targetBuildId !== captured.target.targetBuildId
+        || ['TARGET_CHANGED', 'TARGET_IDENTITY_MISMATCH', 'TARGET_IDENTITY_INVALID'].includes(comparison.reasonCode)
+        || (comparison.result !== 'unknown' && !executionIdentity)
+        || (executionIdentity && (executionIdentity.targetBuildId !== captured.target.targetBuildId
+          || executionIdentity.releaseRoot !== captured.target.releaseRoot))) {
+        return { committed: false, reasonCode: 'TARGET_IDENTITY_MISMATCH' }
+      }
       return withDb(true, db => {
         db.exec('BEGIN IMMEDIATE')
         try {
@@ -211,17 +227,23 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
     } finally { pending.delete(job.revisionId); jobs.delete(job); results.delete(output) }
   }
   async function checkRevision(revisionId, options = {}) {
-    const job = prepare(revisionId)
-    if (!job) return { committed: false, reasonCode: 'NOT_ELIGIBLE' }
-    const output = await compute(job, options)
-    return { ...commit(job, output), comparison: output.comparison }
+    try {
+      const job = prepare(revisionId)
+      if (!job) return { committed: false, reasonCode: 'NOT_ELIGIBLE' }
+      const output = await compute(job, options)
+      return { ...commit(job, output), comparison: output.comparison }
+    } catch (error) {
+      if (error.code !== 'REVIEW_TARGET_IDENTITY_INVALID') throw error
+      return { committed: false, reasonCode: 'TARGET_IDENTITY_INVALID', comparison: identityUnknown() }
+    }
   }
   function discard(job) {
     pending.delete(job.revisionId)
     jobs.delete(job)
   }
   function get(revisionId) {
-    const target = descriptor()
+    let target
+    try { target = descriptor() } catch { return identityUnknown() }
     return withDb(false, db => {
       const row = db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(revisionId)
       if (!row) return { result: 'unknown', reasonCode: 'NOT_FOUND', pending: false }
@@ -239,9 +261,9 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
         ORDER BY r.finalized_at, r.id`).all()
       return rows.filter(row => {
         if (revisionValue(row).reviewKind !== 'candidate') return false
-        const latest = db.prepare(`SELECT * FROM review_compatibility WHERE revision_id = ?
+        const latest = hasTable(db, 'review_compatibility') ? db.prepare(`SELECT * FROM review_compatibility WHERE revision_id = ?
           AND target_build_id = ? AND comparator_version = ? ORDER BY attempt_no DESC LIMIT 1`)
-          .get(row.id, target.targetBuildId, REVIEW_COMPARATOR_VERSION)
+          .get(row.id, target.targetBuildId, REVIEW_COMPARATOR_VERSION) : null
         if (!latest) return true
         const transient = ['WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT', 'IO_ERROR', 'COMPUTATION_FAILED']
         return latest.result === 'unknown' && transient.includes(latest.reason_code) && latest.attempt_no <= 2

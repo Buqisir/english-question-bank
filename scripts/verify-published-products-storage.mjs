@@ -26,6 +26,7 @@ await import('./verify-import-review-finalize-worker.mjs')
 await import('./verify-import-review-bundle-reuse.mjs')
 await import('./verify-import-review-file-hash.mjs')
 await import('./verify-review-compatibility.mjs')
+await import('./verify-review-build-identity.mjs')
 await import('./verify-review-compatibility-store.mjs')
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`

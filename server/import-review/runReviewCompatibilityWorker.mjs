@@ -89,6 +89,9 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
       if (results.length < ids.length) await yieldFor(REVIEW_WORKER_BUDGET.yieldMs, undefined, { signal })
     }
     return { results }
+  } catch (error) {
+    if (error.code !== 'REVIEW_TARGET_IDENTITY_INVALID') throw error
+    return { paused: 'TARGET_IDENTITY_INVALID', results: [], compatibility: { result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID' } }
   } finally { leader.release() }
 }
 

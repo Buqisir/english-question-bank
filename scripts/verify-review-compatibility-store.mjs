@@ -8,16 +8,15 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
+import { pathToFileURL } from 'node:url'
 import { createServer } from 'node:http'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCompatibilitySchema.mjs'
-import { createReviewCompatibilityStore } from '../server/import-review/reviewCompatibilityStore.mjs'
-import { computeReviewBuildIdentity, reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
+import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 import { inspectSealedReviewFiles } from '../server/import-review/sealedReviewFiles.mjs'
 import { acquireReviewCompatibilityLeader, beginReviewActivity } from '../server/import-review/reviewCompatibilityScheduling.mjs'
-import { runReviewCompatibilityBatch, REVIEW_WORKER_BUDGET } from '../server/import-review/runReviewCompatibilityWorker.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
 import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
@@ -127,23 +126,36 @@ try {
   // synthetic fixture, leaving every original table and row untouched.
   const oldRows = JSON.stringify(historical())
   dbRun(db => db.exec('DROP TABLE review_compatibility; DROP TABLE review_subject'))
+  const oldDbBytes = readFileSync(dbPath)
+  const oldDryRun = JSON.parse(execFileSync(process.execPath, [path.resolve('scripts/backfill-review-subjects.mjs'),
+    '--db', dbPath, '--files-root', filesRoot], { encoding: 'utf8' }))
+  assert.equal(oldDryRun.dryRun, true)
+  assert.equal(oldDryRun.results[0].comparison.result, 'equal')
+  assert.deepEqual(readFileSync(dbPath), oldDbBytes)
+  assert.equal(dbRun(db => db.prepare("SELECT count(*) AS n FROM sqlite_master WHERE name IN ('review_subject','review_compatibility')").get()).n, 0)
+  pass('pre-migration CLI dry-run works without additive tables and preserves every DB byte')
   createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-renderer' })
   createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-renderer' })
   assert.equal(JSON.stringify(historical()), oldRows)
   assert.deepEqual(dbRun(db => db.prepare('PRAGMA foreign_key_check').all()), [])
   pass('old DB migration is idempotent and original rows stay byte-for-byte')
 
-  const targetRoot = path.join(root, 'target')
-  mkdirSync(path.join(targetRoot, 'server'), { recursive: true })
-  mkdirSync(path.join(targetRoot, 'app/src'), { recursive: true })
-  writeFileSync(path.join(targetRoot, 'server/entry.mjs'), 'export const build = 1')
+  const targetRoot = makeReviewRelease(path.join(root, 'target'))
+  const { computeReviewBuildIdentity, reviewBuildIdentityProvider } = await import(
+    pathToFileURL(path.join(targetRoot, 'server/import-review/reviewBuildIdentity.mjs')).href)
+  const { createReviewCompatibilityStore } = await import(
+    pathToFileURL(path.join(targetRoot, 'server/import-review/reviewCompatibilityStore.mjs')).href)
+  const { runReviewCompatibilityBatch, REVIEW_WORKER_BUDGET } = await import(
+    pathToFileURL(path.join(targetRoot, 'server/import-review/runReviewCompatibilityWorker.mjs')).href)
+  const parser = path.join(targetRoot, 'scripts/import-pipeline/lib.mjs')
+  const parserSource = readFileSync(parser, 'utf8')
   writeFileSync(path.join(targetRoot, 'app/src/main.css'), 'body{}')
   const firstBuild = computeReviewBuildIdentity({ repoRoot: targetRoot })
   writeFileSync(path.join(targetRoot, 'app/src/main.css'), 'body{color:red}')
   assert.equal(computeReviewBuildIdentity({ repoRoot: targetRoot }).targetBuildId, firstBuild.targetBuildId)
   const cached = reviewBuildIdentityProvider({ repoRoot: targetRoot, production: true })
   const cachedBuild = cached()
-  writeFileSync(path.join(targetRoot, 'server/entry.mjs'), 'export const build = 2')
+  writeFileSync(parser, `${parserSource}\n// target build 2\n`)
   assert.notEqual(computeReviewBuildIdentity({ repoRoot: targetRoot }).targetBuildId, firstBuild.targetBuildId)
   assert.equal(cached(), cachedBuild)
   pass('target identity ignores frontend, detects server edits and caches immutable releases')
@@ -186,7 +198,24 @@ try {
   // Use a fresh build namespace for each race so earlier terminal evidence
   // cannot mask a failed CAS or supply another revision's result.
   let build = 3
-  const bump = () => writeFileSync(path.join(targetRoot, 'server/entry.mjs'), `export const build = ${build++}`)
+  const bump = () => writeFileSync(parser, `${parserSource}\n// target build ${build++}\n`)
+  const beforeWorkerMismatch = readFileSync(parser, 'utf8')
+  const mismatchJob = compatibility.prepare(revision.id)
+  bump()
+  const mismatchOutput = await compatibility.compute(mismatchJob)
+  assert.equal(mismatchOutput.comparison.result, 'unknown')
+  assert.equal(mismatchOutput.comparison.reasonCode, 'TARGET_IDENTITY_MISMATCH')
+  writeFileSync(parser, beforeWorkerMismatch)
+  assert.equal(compatibility.commit(mismatchJob, mismatchOutput).reasonCode, 'TARGET_IDENTITY_MISMATCH')
+  assert.equal(JSON.stringify(newRows().slice(1)), terminalRows)
+  pass('worker verifies its executing release; restoring supervisor identity cannot admit a mismatched worker')
+
+  const productionStore = createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot: targetRoot, production: true })
+  const cachedJob = productionStore.prepare(revision.id)
+  const cachedOutput = await productionStore.compute(cachedJob)
+  bump()
+  assert.equal(productionStore.commit(cachedJob, cachedOutput).reasonCode, 'TARGET_CHANGED')
+  pass('commit bypasses production descriptor cache and rechecks executing files')
   bump()
   const changedBuildJob = compatibility.prepare(revision.id)
   const changedBuildResult = await compatibility.compute(changedBuildJob)
@@ -356,6 +385,18 @@ try {
   assert.equal(compatibility.get(next.id).reasonCode, 'BASELINE_UNTRUSTED')
   assert.equal(dbRun(db => db.prepare('SELECT subject_json FROM review_subject WHERE revision_id=?').get(next.id).subject_json), '{broken')
   pass('corrupt original subject appends unknown without crashing or repairing historical evidence')
+  const beforeInvalidGraph = readFileSync(parser, 'utf8')
+  try {
+    writeFileSync(parser, `${parserSource}\nexport const invalidDynamicImport = value => import(value)\n`)
+    assert.equal(compatibility.get(next.id).reasonCode, 'TARGET_IDENTITY_INVALID')
+    const invalidResult = await compatibility.checkRevision(next.id)
+    assert.equal(invalidResult.comparison.result, 'unknown')
+    assert.equal(invalidResult.comparison.reasonCode, 'TARGET_IDENTITY_INVALID')
+    const invalidBatch = await runReviewCompatibilityBatch(compatibility)
+    assert.equal(invalidBatch.compatibility.result, 'unknown')
+    assert.equal(invalidBatch.paused, 'TARGET_IDENTITY_INVALID')
+  } finally { writeFileSync(parser, beforeInvalidGraph) }
+  pass('an unresolved import graph produces unknown through store and batch public seams')
   console.log(`PASS review compatibility store/worker: ${checks} checks`)
 } finally {
   if (server) await new Promise(resolve => server.close(resolve))
