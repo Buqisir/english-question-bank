@@ -22,7 +22,7 @@ import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLo
 import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation } from './finalizeComputation.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
 import { checkedStoredReviewSubject } from './reviewCompatibilityWrite.mjs'
-import { appendReviewCompatibility, getReviewCompatibility, getLatestReviewCompatibilities } from './reviewCompatibilityStore.mjs'
+import { appendReviewCompatibility, getReviewCompatibility, getReviewCompatibilitySummary, getLatestReviewCompatibilities } from './reviewCompatibilityStore.mjs'
 import { buildProductPreviewPayload } from './reviewSubject.mjs'
 import { compareReviewSubjects, REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
 import { reviewBuildIdentityProvider } from './reviewBuildIdentity.mjs'
@@ -835,14 +835,14 @@ export function createImportReviewStore({
 
   // Historical renderer identities are immutable receipt data. Only content
   // compatibility under the executing server target grants current eligibility.
-  function compatibilityFor(db, revision, target = null) {
+  function compatibilityFor(db, revision, target = null, summary = false) {
     if (!revision) return { result: 'unknown', reasonCode: 'NOT_FOUND', pending: false }
     if (revision.reviewKind === 'ocr') return {
       result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false,
     }
     try {
       target ||= targetBuild()
-      const value = getReviewCompatibility(db, revision, target)
+      const value = (summary ? getReviewCompatibilitySummary : getReviewCompatibility)(db, revision, target)
       return { ...value, result: value.pending ? 'pending' : value.result,
         targetBuildId: target.targetBuildId, comparatorVersion: value.comparatorVersion || REVIEW_COMPARATOR_VERSION }
     } catch (error) {
@@ -866,7 +866,7 @@ export function createImportReviewStore({
   function compatibilityForRevision(revisionId) {
     const revision = getRevision(revisionId)
     if (!revision) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Revision not found', 404)
-    return withDb(false, db => compatibilityFor(db, revision))
+    return withDb(false, db => compatibilityFor(db, revision, null, true))
   }
 
   function withDb(write, callback) {
@@ -1534,7 +1534,7 @@ export function createImportReviewStore({
     })
   }
 
-  function paperDetail(paperId, { includeProjection = true } = {}) {
+  function paperDetail(paperId, { includeProjection = true, cachedProjectionOnly = false } = {}) {
     const paper = withDb(false, (db) => db.prepare(`
       SELECT * FROM import_review_papers WHERE paper_id = ?
     `).get(paperId))
@@ -1564,10 +1564,10 @@ export function createImportReviewStore({
           SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path
         `).all(latest.id).map(fileRow))
       : []
-    const compatibility = latest ? withDb(false, db => compatibilityFor(db, latest)) : null
+    const compatibility = latest ? withDb(false, db => compatibilityFor(db, latest, null, true)) : null
     const latestProjection = includeProjection && latest && latest.state !== 'uploading'
       && (latest.reviewKind === 'ocr' || compatibility.result === 'equal')
-      ? projectionForRevision(latest.id).projection
+      ? (cachedProjectionOnly ? projectionCache.get(latest.id) || null : projectionForRevision(latest.id).projection)
       : null
     const visibleStructure = latestProjection?.consumption?.visibleStructure || []
     const sourceVisuals = latestProjection?.sourceVisuals || []
@@ -2639,7 +2639,7 @@ export function createImportReviewStore({
       paperName: paper?.paper_name || row.paper_id,
       revisionId: row.revision_id,
       revisionNumber: revision?.revisionNumber || null,
-      compatibility: compatibilityFor(db, revision),
+      compatibility: compatibilityFor(db, revision, null, true),
       approvalId: row.approval_id,
       sourceDigest: row.source_digest,
       candidateDigest: row.candidate_digest,
@@ -3094,7 +3094,9 @@ export function createImportReviewStore({
   }
 
   function agentPaperStatus(paperId) {
-    const detail = paperDetail(paperId)
+    // Probe consumes status credentials only. Retain already cached diagnostics,
+    // but never enter projection/file/subject validation from a status request.
+    const detail = paperDetail(paperId, { cachedProjectionOnly: true })
     return {
       paperId: detail.paperId,
       paperName: detail.paperName,

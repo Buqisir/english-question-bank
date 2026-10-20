@@ -18,6 +18,7 @@ import { createImportReviewStore, reviewBundleDigest } from '../server/import-re
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCompatibilitySchema.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
+import { verifyReviewListScale } from '../test-fixtures/review-compatibility/list-scale.mjs'
 import { verifyReviewCompatibilityScheduling } from '../test-fixtures/review-compatibility/scheduling.mjs'
 import { inspectSealedReviewFiles } from '../server/import-review/sealedReviewFiles.mjs'
 import { acquireReviewCompatibilityLeader, beginReviewActivity } from '../server/import-review/reviewCompatibilityScheduling.mjs'
@@ -141,6 +142,8 @@ try {
   store.finalizeRevision(revision.id)
   assert.equal(JSON.stringify(newRows()), atomicRows)
   pass('finalize preview/subject/self equal rollback together; replay is byte-stable')
+  await verifyReviewListScale({ dbPath, destination: path.join(root, 'scale.sqlite'), filesRoot })
+  pass('100 papers with 365 KiB subjects list below 100ms without delaying timers; mismatched bindings fail closed')
 
   // Model an old DB: drop only the additive empty-authority tables in this
   // synthetic fixture, leaving every original table and row untouched.

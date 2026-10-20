@@ -63,6 +63,12 @@ export function prepareReviewCompatibilityWrite(revision, subjectRow, previous, 
   }
   const terminal = previous.find(row => row.result !== 'unknown')
   const subjectDigest = existing?.row.subject_digest ?? null
+  const binding = {
+    revisionId: revision.id, subjectDigest,
+    previewDigest: existing?.row.consumer_digest ?? baseline?.componentDigests?.consumer ?? null,
+    bundleDigest: revision.bundleDigest, rendererBuildId: revision.rendererBuildId,
+    targetBuildId: comparison.targetBuildId,
+  }
   if (comparison.result === 'equal' && (!subjectDigest || comparison.subjectDigest !== subjectDigest)) {
     throw error('BASELINE_UNTRUSTED')
   }
@@ -74,13 +80,17 @@ export function prepareReviewCompatibilityWrite(revision, subjectRow, previous, 
     }
     if (comparison.result === terminal.result && subjectDigest === terminal.subject_digest
       && !previous.some(row => ['TERMINAL_INTEGRITY_CONFLICT', 'BASELINE_UNTRUSTED'].includes(row.reason_code))) {
-      plan.outcome = { appended: false, attemptNo: terminal.attempt_no }
-      return plan
+      if (json(JSON.parse(previous[0].evidence_json).binding ?? null) === json(binding)) {
+        plan.outcome = { appended: false, attemptNo: terminal.attempt_no }
+        return plan
+      }
+    } else {
+      comparison = { ...comparison, result: 'unknown', reasonCode: 'TERMINAL_INTEGRITY_CONFLICT' }
     }
-    comparison = { ...comparison, result: 'unknown', reasonCode: 'TERMINAL_INTEGRITY_CONFLICT' }
   }
   const attemptNo = (previous[0]?.attempt_no ?? 0) + 1
   const evidence = {
+    binding,
     result: comparison.result, reasonCode: comparison.reasonCode,
     componentDigests: comparison.componentDigests || {}, differences: comparison.differences || [],
     metrics: comparison.metrics || {}, publicationMappingVersion: 'review-publication-content-v1',

@@ -53,17 +53,58 @@ export function getReviewCompatibility(db, revision, targetDescriptor) {
   return compatibilityFromRows(revision, subject, rows)
 }
 
-// List reads the latest-revision namespace in two queries, without deriving
-// content or issuing a subject/attempt query for each paper.
+// Immutable subject rows are validated when written and at mutation gates.
+// Read-only status consumes only the worker's latest verdict and small binding
+// cells; never load subject_json or rehash content on the API thread.
+const summarySubject = `SELECT s.revision_id, s.subject_digest, s.bundle_digest,
+  s.source_renderer_build_id, s.consumer_digest, v.revision_id AS preview_revision_id,
+  v.bundle_digest AS preview_bundle_digest, v.renderer_build_id AS preview_renderer_build_id,
+  v.payload_digest AS preview_payload_digest FROM review_subject s
+  LEFT JOIN import_review_product_previews v ON v.revision_id = s.revision_id`
+function compatibilitySummary(revision, subject, row, target) {
+  const pending = { result: 'unknown', reasonCode: 'NOT_CHECKED', pending: true }
+  if (!row) return pending
+  if (!subject || !subject.preview_revision_id) {
+    return { result: 'unknown', reasonCode: 'MISSING_BASELINE', pending: false }
+  }
+  try {
+    const binding = JSON.parse(row.evidence_json).binding
+    if (!binding || binding.revisionId !== subject.revision_id || subject.revision_id !== revision.id
+      || binding.subjectDigest !== subject.subject_digest || row.subject_digest !== subject.subject_digest
+      || binding.previewDigest !== subject.preview_payload_digest || binding.previewDigest !== subject.consumer_digest
+      || subject.preview_revision_id !== revision.id
+      || binding.bundleDigest !== revision.bundleDigest || subject.bundle_digest !== revision.bundleDigest
+      || subject.preview_bundle_digest !== revision.bundleDigest || row.bundle_digest !== revision.bundleDigest
+      || binding.rendererBuildId !== revision.rendererBuildId
+      || subject.source_renderer_build_id !== revision.rendererBuildId
+      || subject.preview_renderer_build_id !== revision.rendererBuildId
+      || binding.targetBuildId !== target.targetBuildId || row.target_build_id !== target.targetBuildId
+      || row.comparator_version !== REVIEW_COMPARATOR_VERSION) return pending
+    return { result: row.result, reasonCode: row.reason_code, pending: false, attemptNo: row.attempt_no,
+      subjectDigest: row.subject_digest, targetBuildId: row.target_build_id,
+      comparatorVersion: row.comparator_version, checkedAt: row.checked_at }
+  } catch { return pending }
+}
+export function getReviewCompatibilitySummary(db, revision, target) {
+  const subject = db.prepare(`${summarySubject} WHERE s.revision_id=?`).get(revision.id)
+  const row = db.prepare(`SELECT * FROM review_compatibility WHERE revision_id=?
+    AND target_build_id=? AND comparator_version=? ORDER BY attempt_no DESC LIMIT 1`)
+    .get(revision.id, target.targetBuildId, REVIEW_COMPARATOR_VERSION)
+  return compatibilitySummary(revision, subject, row, target)
+}
+
 export function getLatestReviewCompatibilities(db, revisions, targetDescriptor) {
-  const subjects = new Map(db.prepare(`${subjectWithPreview}
+  const subjects = new Map(db.prepare(`${summarySubject}
     JOIN import_review_papers p ON p.latest_revision_id = s.revision_id`).all().map(row => [row.revision_id, row]))
-  const attempts = Map.groupBy(db.prepare(`SELECT c.* FROM review_compatibility c
+  const attempts = new Map(db.prepare(`SELECT c.* FROM review_compatibility c
     JOIN import_review_papers p ON p.latest_revision_id = c.revision_id
-    WHERE c.target_build_id = ? AND c.comparator_version = ? ORDER BY c.attempt_no DESC`)
-    .all(targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION), row => row.revision_id)
+    WHERE c.target_build_id = ? AND c.comparator_version = ?
+      AND c.attempt_no = (SELECT MAX(a.attempt_no) FROM review_compatibility a
+        WHERE a.revision_id=c.revision_id AND a.target_build_id=c.target_build_id
+          AND a.comparator_version=c.comparator_version)`)
+    .all(targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION).map(row => [row.revision_id, row]))
   return new Map(revisions.map(revision => [revision.id,
-    compatibilityFromRows(revision, subjects.get(revision.id), attempts.get(revision.id) || [])]))
+    compatibilitySummary(revision, subjects.get(revision.id), attempts.get(revision.id), targetDescriptor)]))
 }
 
 // Caller owns BEGIN IMMEDIATE. These are INSERT-only; no UPDATE/REPLACE/DELETE.
