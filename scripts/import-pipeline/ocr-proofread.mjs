@@ -9,8 +9,8 @@
 //                             then write the evidence-bound confirmation and correctionNotes
 //                             accepted by `review.mjs proofread-ocr`. `--pages a,b` only checks
 //                             word closure and missing-figure hints for those pages and writes nothing.
-//   presentation <paperId>    after materialize, upgrade the Materialization to v4 by binding the
-//                             confirmed section-direction items as sourcePresentation.
+//   presentation <paperId>    after materialize, fill missing v4 sourcePresentation directions
+//                             from confirmed items; --output <path> previews without overwriting.
 //   report-entries <paperId>  after pull-ocr-confirmation + materialize, locate the receipt's
 //                             real OCR repairs in the current Materialization for
 //                             `review.mjs finalize-ocr-correction-report`.
@@ -37,11 +37,12 @@ import { planHeadingRepairs } from './ocr-heading-repair.mjs'
 import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs'
 import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { LINE_ROLE_RULES, matchesLineRole, firstLineRole,
+import { matchesLineRole, firstLineRole,
   inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches } from './ocr-line-roles.mjs'
 import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
+import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -972,11 +973,6 @@ function worksheets(paperId) {
   console.log(JSON.stringify({ ok: true, pages: trace.pages.length, draftsReset: force }))
 }
 
-// Zhejiang NCK1 section directions have stable wording; each slot binds exactly one confirmed
-// question-source item. The first matching item wins, so the more specific pattern is listed
-// first where two directions share a prefix.
-const DIRECTION_SLOTS = LINE_ROLE_RULES.filter(rule => rule.phase === 'direction').map(rule => rule.value)
-
 function unionRegion(observations) {
   const left = Math.min(...observations.map((item) => item.region.x))
   const top = Math.min(...observations.map((item) => item.region.y))
@@ -990,52 +986,16 @@ function presentation(paperId) {
   const directory = path.join(paperDir, 'materialization')
   const materializationPath = path.join(directory, 'nck1-source-materialization-v1.json')
   const materialization = readJson(materializationPath, 'Materialization')
-  if (materialization.sourcePresentation) fail('Materialization already has sourcePresentation')
   const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
   const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
-  const question = confirmation.documents.find((document) => document.documentId.startsWith('question-source'))
-  const evidencePages = evidence.documents.find((document) => document.documentId === question.documentId).pages
-  const listening = materialization.listening?.state !== 'not_supplied'
-  const found = new Map()
-  for (const page of question.pages) {
-    const observations = new Map(evidencePages[page.page - 1].observations.map((item) => [item.observationId, item]))
-    for (const item of page.orderedItems) {
-      const facts = computeLineFacts(item)
-      if (matchesLineRole('presentation.example', facts)) fail(`Listening example found on page ${page.page}; author sourcePresentation.listeningExample by hand`)
-      const slot = firstLineRole('direction', facts)?.value
-      if (!slot || found.has(slot)) continue
-      found.set(slot, {
-        slotId: slot,
-        text: item.text,
-        source: {
-          kind: 'page_region',
-          documentId: question.documentId,
-          page: page.page,
-          region: unionRegion(item.observationIds.map((id) => observations.get(id))),
-        },
-      })
-    }
-  }
-  const required = DIRECTION_SLOTS.filter((slot) => listening || !slot.startsWith('listening.'))
-  const missing = required.filter((slot) => !found.has(slot))
-  if (missing.length) fail(`No confirmed direction item matched: ${missing.join(', ')}`)
-  const order = ['listening.short-dialogue', 'listening.long-form', 'reading.a', 'seven-choices', 'cloze', 'grammar-fill']
-  const { issues, ...rest } = materialization
-  const upgraded = {
-    ...rest,
-    schemaVersion: 'nck1-source-materialization-v4',
-    sourcePresentation: {
-      instructions: order.filter((slot) => required.includes(slot)).map((slot) => found.get(slot)),
-      listeningExample: listening
-        ? { state: 'not_supplied', source: { kind: 'page_region', documentId: question.documentId, page: 1, region: { ...FULL_PAGE } } }
-        : null,
-    },
-    issues,
-  }
-  writeJson(materializationPath, upgraded)
+  const upgraded = restoreOcrSourcePresentation({ materialization, evidence, confirmation })
+  // Preview/recovery can write elsewhere without touching retained paper artifacts or sidecars.
+  const output = path.resolve(option('--output') || materializationPath)
+  if (output !== materializationPath || JSON.stringify(upgraded) !== JSON.stringify(materialization)) writeJson(output, upgraded)
   console.log(JSON.stringify({
     ok: true,
     paperId,
+    output,
     schemaVersion: upgraded.schemaVersion,
     instructions: upgraded.sourcePresentation.instructions.map(({ slotId, text, source }) => ({ slotId, page: source.page, text })),
     listeningExample: upgraded.sourcePresentation.listeningExample?.state ?? null,
