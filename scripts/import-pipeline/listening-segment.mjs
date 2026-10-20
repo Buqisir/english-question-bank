@@ -52,7 +52,7 @@ function engineDescriptor(file, bytes, record, durationSeconds) {
 // One attempt, one retained raw primary, at most one Whisper invocation per
 // failed group. Both engine results and failures survive every rerun.
 export function segmentListening({ paperDir, request, appleEvidence, output, whisperPython, whisperModel, pauses = null,
-  runWhisper = null }) {
+  runWhisper = null, fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled }) {
   mkdirSync(output, { recursive: true })
   assertListeningDiskSpace(output)
   const attemptId = `${new Date().toISOString().replace(/[:.]/gu, '-')}-${randomUUID().slice(0, 8)}`
@@ -89,8 +89,8 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   if (primaryWindow.audioSha256 !== audioHash) throw new Error('LISTENING_APPLE_INPUT_BINDING_MISMATCH')
   const playbackEndSeconds = Math.min(durationSeconds, primaryWindow.endSeconds ?? durationSeconds)
   write(path.join(attempt, 'input.json'), {
-    rule: LISTENING_SEGMENT_RULE, normalization: LISTENING_EQUIVALENCES,
-    normalizationAlgorithm: 'finite equivalences; decimal integers 0..999999; $/£ and .xx cents; HH:00',
+    rule: { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }, normalization: LISTENING_EQUIVALENCES,
+    normalizationAlgorithm: 'listening-equivalences-v2; finite spelling aliases; integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; year readings 2001..2099 only standalone or in year context; shared source/ASR character spans, original acoustic run boundaries',
     sourceTextSha256: digest(Buffer.from(JSON.stringify(groups))),
     materializationSha256: digest(materializationBytes), audioSha256: audioHash,
     ruleCodeSha256: digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs'))),
@@ -106,15 +106,16 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
         minimumSilenceSeconds: LISTENING_SEGMENT_RULE.minimumSilenceSeconds } })
     pauses = detected.status === 0 ? parseListeningPauses(detected.stderr, durationSeconds) : []
   }
-  const base = { groups, instructions, pauses, durationSeconds }
+  const base = { groups, instructions, pauses, durationSeconds, fuzzyAnchors,
+    questions: materialization.listening.questions, globalAnchorWindows: [primaryWindow] }
   const apple = evaluateListeningEngine({ ...base, windows: [primaryWindow] })
   write(path.join(attempt, 'apple-rule.json'), apple)
   const fallback = []
   for (const [index, failed] of apple.groups.entries()) {
     if (failed.decision === 'usable') continue
     assertListeningDiskSpace(attempt)
-    const previous = apple.groups.slice(0, index).flatMap(g => g.occurrences)
-    const next = apple.groups.slice(index + 1).flatMap(g => g.occurrences)
+    const previous = apple.groups.slice(0, index).filter(g => g.independentlyAnchored && g.decision === 'usable').flatMap(g => g.occurrences)
+    const next = apple.groups.slice(index + 1).filter(g => g.independentlyAnchored && g.decision === 'usable').flatMap(g => g.occurrences)
     const startSeconds = Math.max(0, ...previous.map(o => o.endSeconds))
     // The canonical PCM duration can exceed ffprobe's MP3 format duration by a
     // fraction of a millisecond. Never pass the rounded-up value to a crop CLI.
@@ -174,10 +175,11 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     fallback.push(...result.groups)
   }
   const resolved = reconcileListeningEngines(apple, { groups: fallback })
-  write(path.join(attempt, 'rule-result.json'), { rule: LISTENING_SEGMENT_RULE, groups: resolved })
+  const effectiveRule = { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }
+  write(path.join(attempt, 'rule-result.json'), { rule: effectiveRule, groups: resolved })
   const notes = `listening-review-evidence/${attemptId}-rule.json`
   const notesFile = path.join(attempt, notes)
-  write(notesFile, { rule: LISTENING_SEGMENT_RULE, normalization: LISTENING_EQUIVALENCES,
+  write(notesFile, { rule: effectiveRule, normalization: LISTENING_EQUIVALENCES,
     input: json(path.join(attempt, 'input.json')), groups: resolved })
   const bytes = readFileSync(notesFile)
   evidence.push({ path: notes, sha256: digest(bytes), byteLength: bytes.length, kind: 'review_notes', window: null, settings: null })
@@ -213,5 +215,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     '.cache/huggingface/hub/models--Systran--faster-whisper-small.en/snapshots/d1d751a5f8271d482d14ca55d9e2deeebbae577f')
   console.log(JSON.stringify(segmentListening({ paperDir: path.resolve(option('--paper-dir')),
     request: json(option('--request')), appleEvidence: path.resolve(option('--apple-evidence')),
-    output: path.resolve(option('--output')), whisperPython: path.join(venv, 'bin/python'), whisperModel: model }), null, 2))
+    output: path.resolve(option('--output')), whisperPython: path.join(venv, 'bin/python'), whisperModel: model,
+    fuzzyAnchors: process.argv.includes('--no-fuzzy-anchors') ? false
+      : process.argv.includes('--fuzzy-anchors') ? true : LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled }), null, 2))
 }

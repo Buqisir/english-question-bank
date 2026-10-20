@@ -103,6 +103,46 @@ test('missing a critical number or negation blocks regardless of score', () => {
   const text = source.replace('to the station', 'not to the station')
   assert.ok(evaluate({ groups: [{ ...group, text }] }).issues.includes('CRITICAL_WORD_MISSING'))
 })
+test('inserted critical words cannot pass merely because every source word matched', () => {
+  const raw = windowFor(source.replace(/(?:M|W):/gu, '').replace('folder to', 'folder not to'))
+  const result = evaluate({ windows: [raw], pauses: surrounding([raw]) })
+  assert.equal(result.decision, 'review_required')
+  assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+})
+test('alignment checks critical insertions, deletions and replacements on both sides', () => {
+  const plain = source.replace(/(?:M|W):/gu, '')
+  for (const word of ['not', 'no', 'never', "don't", 'twenty', 'dollars', 'pounds', 'am', 'pm', 'midnight']) {
+    const added = plain.replace('folder to', `folder ${word} to`)
+    for (const [text, actual] of [[plain, added], [added, plain],
+      [plain.replace('station', word), plain], [plain, plain.replace('station', word)]]) {
+      const raw = windowFor(actual)
+      const result = evaluate({ groups: [{ ...group, text }], windows: [raw], pauses: surrounding([raw]) })
+      assert.equal(result.decision, 'review_required', `${text} / ${actual}`)
+      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+      assert.ok(result.occurrences[0].alignment.differences.some(d => d.sourceWord === word || d.targetWord === word))
+    }
+  }
+})
+test('a failed group whose first twelve words occur in another body never constrains that body', () => {
+  const prefix = 'curious children quietly gather orange leaves beside their school every autumn morning'
+  const a = { ...group, text: `Blue dolphins travel beyond distant islands while ${prefix} and young sailors carefully study maps beside the harbor.` }
+  const b = { segmentId: 'listening-text-2', questionNumbers: [2],
+    text: `${prefix} but silver rockets carry instruments above frozen mountains tonight.` }
+  const raw = windowFor(a.text)
+  const result = evaluateListeningEngine({ groups: [a, b], instructions: one, windows: [raw],
+    pauses: surrounding([raw]), durationSeconds: 100 })
+  assert.deepEqual(result.groups.map(g => g.decision), ['usable', 'review_required'])
+  assert.ok(result.groups[1].issues.includes('ANCHOR_AMBIGUOUS'))
+})
+test('Chinese instructions permit numbering inside an English quote or English inline fragment', () => {
+  for (const stem of ['请阅读句子 “Include (1) a title.” 并翻译。',
+    '请翻译 “Include (1)” 并回答。', '请翻译 "Include (1)" 并回答。',
+    { runs: [{ text: '请阅读句子 ' }, { text: 'Include (1) a title.' }, { text: ' 并翻译。' }] },
+    { content: ['请阅读句子 ', 'Include (1)', ' 并翻译。'] }]) {
+    assert.deepEqual(importSubmissionIssues({ materialization: { groups: [{ stem }] } }), [])
+  }
+  assert.equal(importSubmissionIssues({ materialization: { stem: '要点：(1) 介绍活动；(2) …' } })[0].matches.length, 2)
+})
 test('cross-reading head/tail splicing across a pause cannot pass', () => {
   const raw = structuredClone(fixture)
   for (const word of raw.result.segments[0].runs.slice(10)) { word.start += 10; word.end += 10 }
@@ -119,6 +159,19 @@ test('Chinese announcements must agree with group number and question range', ()
 })
 test('missing announcements alone does not fail unique complete evidence', () => {
   assert.equal(evaluate().decision, 'usable')
+})
+test('a failed previous reading count does not reassign its old announcement to the next body', () => {
+  const other = { segmentId: 'listening-text-2', questionNumbers: [2],
+    text: 'Fresh apples grow around this quiet village and our neighbors deliver baskets every summer.' }
+  const a = windowFor(source.replace(/(?:M|W):/gu, ''), 2), b = windowFor(other.text, 15)
+  const windows = [{ startSeconds: 0, endSeconds: 100, result: { segments: [
+    { text: 'Text One', start: 0, end: 1, runs: [] }, ...a.result.segments,
+    { text: 'Text Two', start: 12, end: 13, runs: [] }, ...b.result.segments,
+  ] } }]
+  const result = evaluateListeningEngine({ groups: [{ ...group, instruction: '本段读两遍' }, other],
+    instructions: one, windows, pauses: surrounding([a, b]), durationSeconds: 100 })
+  assert.deepEqual(result.groups.map(g => g.decision), ['review_required', 'usable'])
+  assert.deepEqual(result.groups[1].occurrences[0].announcements.map(m => m.groupNumber), [2])
 })
 test('no local silence evidence means no approved playback', () => {
   assert.ok(evaluate({ pauses: [] }).issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
