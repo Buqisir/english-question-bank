@@ -687,6 +687,19 @@ astonished` 是状态型分词宾补。第一层相似须保留角色区别；�
 `features: []`、`role: null`。如 `complete → incomplete`、`possible → impossible`。
 这不是比较等级，也不能记为动词变形容词；保留权威答案，不由分类规则造词。
 
+#### 形容词同词性后缀派生
+
+提示词和答案均为形容词、语境要求通过派生后缀形成另一形容词时，同样使用
+`grammar-fill.given.conversion.adjective-to-adjective`，路线为 `suffix-derivation`，
+`features: []`、`role: null`。如 `distinct → distinctive`、
+`economic → economical`、`historic → historical`；淄博卷 Q59 的
+`distinct → distinctive` 属于此类。
+
+此路线不含比较级或最高级屈折变化、否定前缀及词性转换：比较等级仍用
+`grammar-fill.given.adjective.comparison`，否定前缀仍用 `negative-prefix`，
+词性改变则按真实派生方向使用对应 conversion facet。路线区分由提示词、
+权威答案和原文语境共同支持，不因答案含某个后缀就推断词性或改写答案。
+
 #### 形容词变副词（已确认）
 
 派生方向只有“形容词 → 副词”一个，但按副词实际修饰范围分五类相似题：

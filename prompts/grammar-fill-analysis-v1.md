@@ -58,7 +58,7 @@ The hint word's POS = entry into which `given` sub-facet:
 | --- | --- | --- |
 | verb (原形) | `given.verb` → 根据句子结构判断谓语/非谓语（分词 `-ed`/`-ing` 作表/定/状/宾补/主补 → `non-finite` + `role`） | blank needs noun → `conversion.verb-to-noun`；blank needs a **non-participle** adjective (`-able`/`-ous`/`-ful`/`-ive`, `a-`) → `conversion.verb-to-adjective`；blank needs an adverb → `conversion.verb-to-adverb` |
 | noun | genitive (`'s`) → `given.noun.genitive`；regular plural of the hint → `given.noun.number` | blank needs a different POS or a same-POS derived word (e.g. occupational `-er`/`-or`) → `given.conversion.noun-to-noun` / `noun-to-adjective` / `noun-to-verb` |
-| adjective | comparative/superlative of the hint → `given.adjective.comparison` | blank needs an adverb (`-ly`) → `given.conversion.adjective-to-adverb`；blank needs a noun → `given.conversion.adjective-to-noun`；negative-prefix adjective derivation → `given.conversion.adjective-to-adjective` |
+| adjective | comparative/superlative of the hint → `given.adjective.comparison` | blank needs an adverb (`-ly`) → `given.conversion.adjective-to-adverb`；blank needs a noun → `given.conversion.adjective-to-noun`；same-POS adjective derivation (negative prefix or derivational suffix) → `given.conversion.adjective-to-adjective` |
 | pronoun | `given.pronoun` | — |
 | numeral | `given.numeral` | — |
 
@@ -68,7 +68,7 @@ The hint word's POS = entry into which `given` sub-facet:
 - `noun-to-verb`: hint is noun, blank needs a verb
 - `adjective-to-adverb`: hint is adjective, blank needs an adverb (`-ly`)
 - `adjective-to-noun`: hint is adjective, blank needs a noun (介词后 / 缺主宾 / 限定词后 → 名词；常见后缀 `-ity`/`-ty` curious→curiosity, `-ness` happy→happiness, `-ce`/`-cy` confident→confidence／accurate→accuracy, `-ment`)
-- `adjective-to-adjective`: hint and answer are adjectives; context requires a negative prefix (e.g. complete→incomplete / possible→impossible / happy→unhappy), route `negative-prefix`. This is derivation, not comparison or verb-to-adjective.
+- `adjective-to-adjective`: hint and answer are adjectives. Use `negative-prefix` when context requires a negative prefix (e.g. complete→incomplete / possible→impossible / happy→unhappy); use `suffix-derivation` for a same-POS derivational suffix (e.g. distinct→distinctive / economic→economical / historic→historical). Both use `features: []` and `role: null`. `suffix-derivation` excludes negative prefixes, comparative/superlative inflections, and POS changes; classify those under their own route or facet. Preserve the authoritative answer; never invent a derived word.
 - `verb-to-adjective`: hint is verb, blank needs a **non-participle** adjective derived by a true adjective suffix (`-able`/`-ous`/`-ful`/`-ive`) or the `a-` prefix (remark→remarkable / harm→harmful / sleep→asleep). 分词 `-ed`/`-ing` 不入此叶 — see 判定口令 below.
 - `verb-to-noun`: hint is verb, blank needs a noun
 - `verb-to-adverb`: hint is verb, blank needs an adverb
@@ -350,7 +350,7 @@ allowed features.
 | `conversion.noun-to-verb` | `finite-result` / `non-finite-result` | exactly one inherited finite or non-finite route; see below |
 | `conversion.adjective-to-adverb` | `modify-adjective` / `modify-predicate` / `modify-non-finite` / `modify-sentence` / `modify-adverb-number-quantity` | — |
 | `conversion.adjective-to-noun` | `derived-noun` | — |
-| `conversion.adjective-to-adjective` | `negative-prefix` | — |
+| `conversion.adjective-to-adjective` | `negative-prefix` / `suffix-derivation` | — |
 | `conversion.verb-to-adjective` | `true-derived-adjective` | — |
 | `conversion.verb-to-noun` | `derived-noun` | — |
 | `conversion.verb-to-adverb` | `derived-adverb` | — |
