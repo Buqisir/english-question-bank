@@ -13,6 +13,9 @@ try {
     throw Object.assign(new Error('Worker identity differs from requested target'), { reasonCode: 'TARGET_IDENTITY_MISMATCH' })
   }
   let storedSubject = null
+  if (!storedSubjectJson) {
+    throw Object.assign(new Error('Original content subject is missing'), { reasonCode: 'MISSING_BASELINE' })
+  }
   if (storedSubjectJson) {
     try { storedSubject = JSON.parse(storedSubjectJson) }
     catch { throw Object.assign(new Error('Invalid stored subject JSON'), { reasonCode: 'BASELINE_UNTRUSTED' }) }

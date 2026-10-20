@@ -134,6 +134,7 @@ try {
   assert.deepEqual(newRows().map(rows => rows.length), [1, 1, 1])
   assert.equal(newRows()[2][0].result, 'equal')
   assert.equal(newRows()[1][0].origin, 'finalize')
+  const finalizedSubjectRow = newRows()[1][0]
   const atomicRows = JSON.stringify(newRows())
   store.finalizeRevision(revision.id)
   assert.equal(JSON.stringify(newRows()), atomicRows)
@@ -174,15 +175,20 @@ try {
   pass('CLI dry-run identifies live leader/activity owners and diagnoses empty records without stealing them')
   const oldDryRun = runDryRunCli()
   assert.equal(oldDryRun.dryRun, true)
-  assert.equal(oldDryRun.results[0].comparison.result, 'equal')
+  assert.equal(oldDryRun.results[0].comparison.result, 'unknown')
+  assert.equal(oldDryRun.results[0].comparison.reasonCode, 'MISSING_BASELINE')
   assert.deepEqual(readFileSync(dbPath), oldDbBytes)
   assert.equal(dbRun(db => db.prepare("SELECT count(*) AS n FROM sqlite_master WHERE name IN ('review_subject','review_compatibility')").get()).n, 0)
-  pass('pre-migration CLI dry-run works without additive tables and preserves every DB byte')
+  pass('pre-migration CLI dry-run reports missing baseline without additive tables and preserves every DB byte')
   createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-renderer' })
   createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-renderer' })
   assert.equal(JSON.stringify(historical()), oldRows)
   assert.deepEqual(dbRun(db => db.prepare('PRAGMA foreign_key_check').all()), [])
   pass('old DB migration is idempotent and original rows stay byte-for-byte')
+  // Restore the exact subject originally produced by real finalize. D's
+  // automatic worker deliberately does not manufacture a missing old subject.
+  dbRun(db => db.prepare(`INSERT INTO review_subject (${Object.keys(finalizedSubjectRow).join(',')})
+    VALUES (${Object.keys(finalizedSubjectRow).map(() => '?').join(',')})`).run(...Object.values(finalizedSubjectRow)))
 
   const targetRoot = makeReviewRelease(path.join(root, 'target'))
   const { computeReviewBuildIdentity, reviewBuildIdentityProvider } = await import(
@@ -238,12 +244,15 @@ try {
   console.log(JSON.stringify({ check: 'compatibility-commit-event-loop', maxCommitDelayMs, commitTicks }))
   assert(maxCommitDelayMs < 50, `commit event loop delay ${maxCommitDelayMs.toFixed(2)}ms must be below 50ms`)
   pass('asynchronous commit keeps maximum main-thread event loop delay below 50ms')
-  assert.equal((await second.commit(b, resultB)).reasonCode, 'CAS_CHANGED')
+  const overlappingCommit = await second.commit(b, resultB)
+  assert.equal(overlappingCommit.committed, true)
+  assert.equal(overlappingCommit.appended, false,
+    'both jobs retain the existing original subject; the second terminal result is deduplicated')
   assert.equal(newRows()[1].length, 1)
-  assert.equal(newRows()[1][0].origin, 'stored_evidence')
+  assert.equal(newRows()[1][0].origin, 'finalize')
   assert.equal(newRows()[2].length, 1)
   assert.equal(JSON.stringify(historical()), oldRows)
-  pass('two overlapping worker snapshots produce one baseline and one terminal; no pdfinfo/executable required')
+  pass('two overlapping worker snapshots preserve the original baseline and produce one terminal; no pdfinfo/executable required')
 
   const terminalRows = JSON.stringify(newRows().slice(1))
   assert.equal((await compatibility.checkRevision(revision.id)).appended, false)

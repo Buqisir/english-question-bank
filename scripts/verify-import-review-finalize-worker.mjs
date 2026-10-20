@@ -131,7 +131,12 @@ try {
   for (const field of ['state', 'sourceDigest', 'candidateDigest', 'visibleStructureDigest', 'analysisDigest', 'rendererBuildId']) {
     assert.deepEqual(asyncResult[field], syncResult[field], field)
   }
-  assert.deepEqual(asyncCase.store.projectionForRevision(asyncResult.id).projection, synchronous)
+  assert.deepEqual(asyncCase.store.productPreviewForRevision(asyncResult.id).preview,
+    buildProductPreviewPayload(asyncResult, synchronous))
+  assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'MISSING_FROZEN_PRODUCTS')
+  assert.throws(() => asyncCase.store.projectionForRevision(asyncResult.id),
+    { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' },
+    'a legacy fixture without frozen products retains its original preview but cannot derive live content')
   function preview(dbPath) {
     const db = new DatabaseSync(dbPath, { readOnly: true })
     try {

@@ -22,7 +22,8 @@ import {
 import { buildProductPreviewPayload } from './reviewSubject.mjs'
 import { reviewContentDifferences } from './reviewCompatibility.mjs'
 import { inspectSealedReviewFiles } from './sealedReviewFiles.mjs'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../paper-import/paginationPlan.mjs'
 import { readSourceReferencePublication } from '../paper-import/sourceReferencePublication.mjs'
 import { readPublishedProducts } from '../paper-import/frozenProducts.mjs'
 import { archiveReviewFiles, configuredBlobStore } from '../paper-import/blobStore.mjs'
@@ -52,6 +53,45 @@ function readJson(filePath, label) {
     return JSON.parse(readFileSync(filePath, 'utf8'))
   } catch {
     throw promotionError('IMPORT_REVIEW_PROMOTION_ARTIFACT_INVALID', `${label} is invalid`)
+  }
+}
+
+// This is evidence for reconciling an existing target, never a new publish
+// package. It uses the original preview/subject and exact sealed bytes only.
+function originalPromotionEvidence(store, revision) {
+  const { preview, subject } = store.originalReviewEvidenceForRevision(revision.id)
+  const bytes = relativePath => {
+    const file = revision.manifest.files.find(file => file.path === relativePath)
+    if (!file) return null
+    const value = readFileSync(store.verifiedFileForRead(revision.id, relativePath).filePath)
+    if (value.length !== file.byteLength || sha256(value) !== file.sha256) {
+      throw promotionError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Original promotion evidence changed')
+    }
+    return value
+  }
+  const planBytes = bytes(PAPER_PAGINATION_PLAN_FILE_NAME)
+  const paginationPlan = planBytes ? JSON.parse(planBytes) : null
+  return {
+    paperAsset: preview.paperAsset,
+    ...Object.fromEntries([
+      ['readingAnalysis', 'reading-choice-analysis-v1.json'],
+      ['scAnalysis', 'seven-choices-analysis-v1.json'],
+      ['clozeAnalysis', 'cloze-analysis-v1.json'],
+      ['grammarFillAnalysis', 'grammar-fill-analysis-v1.json'],
+      ['writingAnalysis', 'writing-analysis-v1.json'],
+      ['listeningAnalysis', 'listening-analysis-v1.json'],
+    ].map(([key, file]) => [key, preview.analysisSidecars[file] || null])),
+    paragraphSummariesBytes: bytes('paragraph-summaries-v1.json'),
+    publicSearchMetadataBytes: bytes('public-search-metadata-v1.json'),
+    sourceReferencesBytes: bytes('source-references-v1.json'),
+    frozenProducts: subject.components.products?.manifestFile
+      ? { digest: subject.components.products.manifestFile.sha256 } : null,
+    paginationPlan,
+    paginationPlanBinding: {
+      schemaVersion: 'paper-pagination-binding-v1', paperId: revision.paperId,
+      sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
+      canonicalSourceDigest: null, planDigest: paginationPlan ? digestJson(paginationPlan) : null,
+    },
   }
 }
 
@@ -198,12 +238,13 @@ export function createSinglePaperPromotionService({
   blobStore = null,
 }) {
   function execute(paperId, begun, fileStorage = null, contentBinding = null) {
+      contentBinding ||= begun.contentBinding
       const store = getStore()
       let promotion = begun.promotion
       if (begun.action === 'consumed') {
         return { status: promotion?.state || 'consumed', promotion }
       }
-      const { revision } = store.projectionForRevision(promotion.revisionId)
+      const revision = store.getRevision(promotion.revisionId)
       if (
         revision.paperId !== paperId
         || revision.reviewKind !== 'candidate'
@@ -215,39 +256,9 @@ export function createSinglePaperPromotionService({
         )
       }
       const reviewRootDir = store.revisionDirectory(revision.id)
-      const projection = buildNck1ReviewProjection(reviewRootDir, {
-        requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
-      })
-      const confirmation = {
-        schemaVersion: 'teacher-confirmation-v1',
-        candidateDigest: promotion.candidateDigest,
-        sourceDigest: promotion.sourceDigest,
-        confirmed: true,
-      }
-      const materialized = materializeNck1CanonicalRequest(
-        projection.sourceInput,
-        confirmation,
-      )
-      const externalListeningReviewProof = store.mintExternalListeningPublicationProof(
-        paperId,
-        promotion,
-      )
-      const packageData = buildNck1CompatibilityPackage({
-        config: projection.config,
-        manifest: projection.manifest,
-        materialization: projection.materialization,
-        sourceProvenance: projection.sourceProvenance,
-        sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
-        analysisSidecars: projection.analysisSidecars,
-        paragraphSummariesBytes: projection.paragraphSummariesBytes,
-        publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
-        sourceReferencesBytes: projection.sourceReferencesBytes,
-        frozenProducts: projection.frozenProducts,
-        paginationPlan: projection.paginationPlan,
-        paginationBindingIdentity: projection,
-      })
       const db = openDatabase({ readOnly: false })
       try {
+        const evidence = promotion.assetVersion !== null ? originalPromotionEvidence(store, revision) : null
         if (promotion.assetVersion !== null) {
           const recovery = recoverInterruptedPaperImportPublish({
             db,
@@ -264,21 +275,21 @@ export function createSinglePaperPromotionService({
                 path.join(paperAssetsDir, paperId, 'versions', promotion.versionName),
                 path.join(paperAssetsDir, paperId, 'latest'),
               ]) {
-                if (projection.importProfile) {
-                  assertPaperImportParagraphSummaries({ baseDir, packageData })
-                  assertPaperImportPublicSearchMetadata({ baseDir, packageData })
+                if (promotion.importProfile) {
+                  assertPaperImportParagraphSummaries({ baseDir, packageData: evidence })
+                  assertPaperImportPublicSearchMetadata({ baseDir, packageData: evidence })
                 } else {
                   assertPaperImportAnalysisSidecars({
                     baseDir,
-                    packageData,
+                    packageData: evidence,
                     version: promotion.assetVersion,
                   })
                 }
-                assertPaperImportPaginationPlan({ baseDir, packageData })
-                assertPaperImportSourceReferences({ baseDir, packageData })
+                assertPaperImportPaginationPlan({ baseDir, packageData: evidence })
+                assertPaperImportSourceReferences({ baseDir, packageData: evidence })
               }
               // This runs before the publisher clears committed journal evidence.
-              inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData })
+              inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData: evidence })
             },
           })
           if (
@@ -295,12 +306,38 @@ export function createSinglePaperPromotionService({
           db,
           paperAssetsDir,
           promotion,
-          packageData,
+          packageData: evidence,
         })
         if (committed) {
           const receipt = store.markPromotionPublished(paperId, promotion.promotionId, committed)
           return { status: 'idempotent', promotion: receipt, consumers: committed.consumers }
         }
+        // Reconciliation cannot authorize a new write. Require current content
+        // eligibility before running any current projection or compiler.
+        store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, () => {})
+        const projection = buildNck1ReviewProjection(reviewRootDir, {
+          requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
+        })
+        const materialized = materializeNck1CanonicalRequest(projection.sourceInput, {
+          schemaVersion: 'teacher-confirmation-v1',
+          candidateDigest: promotion.candidateDigest,
+          sourceDigest: promotion.sourceDigest,
+          confirmed: true,
+        })
+        const packageData = buildNck1CompatibilityPackage({
+          config: projection.config,
+          manifest: projection.manifest,
+          materialization: projection.materialization,
+          sourceProvenance: projection.sourceProvenance,
+          sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
+          analysisSidecars: projection.analysisSidecars,
+          paragraphSummariesBytes: projection.paragraphSummariesBytes,
+          publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
+          sourceReferencesBytes: projection.sourceReferencesBytes,
+          frozenProducts: projection.frozenProducts,
+          paginationPlan: projection.paginationPlan,
+          paginationBindingIdentity: projection,
+        })
         const context = store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, value => {
           const differences = reviewContentDifferences(value.subject.components.consumer,
             buildProductPreviewPayload(revision, projection)).differences
@@ -317,6 +354,7 @@ export function createSinglePaperPromotionService({
           }
           return value
         })
+        const externalListeningReviewProof = store.mintExternalListeningPublicationProof(paperId, promotion)
         // The first context is captured before the asynchronous archive. A
         // second pass must match it exactly, including target and confirmations.
         if (projection.frozenProducts && !fileStorage) {
@@ -422,7 +460,7 @@ export function createSinglePaperPromotionService({
       }
       if (!revision || revision.id !== revisionId || revision.reviewKind !== 'candidate'
         || revision.bundleDigest !== input.bundleDigest
-        || revision.rendererBuildId !== input.rendererBuildId || detail.rendererStale) {
+        || revision.rendererBuildId !== input.rendererBuildId) {
         throw promotionError('IMPORT_REVIEW_PROMOTION_STALE', '待审版本已变化，请刷新并查看当前版本。')
       }
       // A second click is a status read, never a recovery authorization. Keep
@@ -435,7 +473,7 @@ export function createSinglePaperPromotionService({
         ...(revision.manifest.importProfile ? { approvalScope: 'layout_only' } : {}),
       }, actor)
       // Both calls are synchronous until the durable guard is acquired. The
-      // store rechecks latest revision, renderer, approval and issues in its
+      // store rechecks latest revision, content compatibility, approval and issues in its
       // transaction, including races with another process.
       return execute(paperId, store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor))
     },

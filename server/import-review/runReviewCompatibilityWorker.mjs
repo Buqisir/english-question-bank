@@ -119,5 +119,11 @@ export function startReviewCompatibilityWorker(store, { onError = () => {} } = {
   }
   timer = setTimeout(tick, 0)
   timer.unref()
-  return { async stop() { clearTimeout(timer); controller.abort(); await active } }
+  return { async stop() {
+    clearTimeout(timer)
+    controller.abort()
+    // tick already reports failures. Shutdown still awaits disposal, without
+    // rethrowing the same batch error from an EventEmitter close listener.
+    await active?.catch(() => {})
+  } }
 }

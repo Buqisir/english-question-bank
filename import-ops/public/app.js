@@ -76,6 +76,14 @@ function shortDigest(value) {
   return text.length > 24 ? `${text.slice(0, 16)}…${text.slice(-8)}` : text
 }
 
+function reviewCompatibilityMessage() {
+  return {
+    pending: '正在核验内容，完成后可继续审阅。',
+    different: '内容核验发现差异，需检查当前版本。',
+    unknown: '尚未完成内容核验，当前不能认可或发布。',
+  }[state.detail?.compatibility?.result] || '尚未完成内容核验，当前不能认可或发布。'
+}
+
 function copyButton(value, name, label = '复制') {
   return `<button class="copy-button" type="button" data-copy-text="${escapeHtml(value)}" data-copy-name="${escapeHtml(name)}" aria-label="复制${escapeHtml(name)}">${escapeHtml(label)}</button>`
 }
@@ -449,7 +457,7 @@ function leftRailHtml() {
           <h3>${escapeHtml(state.detail.paperName)}</h3>
           <p class="paper-meta">${latest ? `R${escapeHtml(latest.revisionNumber)} · ${escapeHtml(stateLabels[latest.state] || latest.state)}` : '等待提交'}</p>
           ${isOcrReview() ? '<p class="muted">Agent 正在校对原文，无需逐项确认。</p>' : ''}
-          ${state.detail.rendererStale ? '<p class="boundary-note">版式已更新，等待 Agent 提交新版本。</p>' : ''}
+          ${state.detail.rendererStale ? `<p class="boundary-note">${reviewCompatibilityMessage()}</p>` : ''}
         </section>
         ${isOcrReview() ? '' : `<details class="rail-section structure-section">
           <summary><h3>卷面结构</h3><span class="paper-meta">${escapeHtml((state.detail.visibleStructure || []).length)} 项</span></summary>
@@ -911,7 +919,7 @@ function approvalHtml() {
           : '我已检查 Screen 与 PDF，认可当前版本。'}</span>
       </label>
       <button class="button button--primary" id="approve-revision" type="button" disabled>认可这个 revision</button>
-      ${blocked ? `<p class="field-help">${state.detail.rendererStale ? '渲染器已更新，请 Agent 先重新提交 Candidate。' : '先处理所有待处理和待验证问题。'}</p>` : ''}
+      ${blocked ? `<p class="field-help">${state.detail.rendererStale ? reviewCompatibilityMessage() : '先处理所有待处理和待验证问题。'}</p>` : ''}
       <p class="boundary-note">认可不是部署授权；后台永远不提供上线按钮。</p>
     </div>
   </section>`

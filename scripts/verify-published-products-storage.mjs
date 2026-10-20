@@ -20,6 +20,7 @@ import { createImportReviewStore, reviewBundleDigest } from '../server/import-re
 import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
+import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
 
 // Keep Review reuse/crash/concurrency coverage in the existing storage CI seam.
 await import('./verify-import-review-upload-reuse.mjs')
@@ -344,8 +345,10 @@ try {
   const publicationDb = new DatabaseSync(':memory:')
   try {
     publicationDb.exec(await readFile(new URL('../data/sql/schema.sql', import.meta.url), 'utf8'))
+    const reviewed = finalizeReviewFixture({ directory: fixture.reviewRoot,
+      output: path.join(directory, 'publication-review'), manifest: reviewManifest, projection })
     const input = { reviewRootDir: fixture.reviewRoot, approvedManifest: reviewManifest,
-      approvedIdentity: { ...reviewManifest, approvalId: 'product-approval', revisionId: 'product-revision' },
+      ...publicationFixtureInput(reviewed), fileStorage: null,
       canonicalRequest: loadCanonicalImportRequest(fixture.requestPath), db: publicationDb,
       paperAssetsDir: path.join(directory, 'published-fixture') }
     assert.throws(() => publishUniversalNck1Import(input), /formal storage/)

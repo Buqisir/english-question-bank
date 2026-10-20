@@ -1777,6 +1777,7 @@ function buildNck1ReviewProjectionInternal(rootDir, {
       sourceDigest: preview.candidate.source.sha256,
       candidateDigest: preview.candidate.candidateDigest,
       sourceDocuments: loaded.sourceInput.documents,
+      sourceInput: loaded.analyzedPackage ? loaded.sourceInput : null,
     })
   }
   const slotBindings = paginationSlotBindings(consumption)

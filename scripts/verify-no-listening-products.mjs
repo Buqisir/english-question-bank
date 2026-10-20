@@ -18,6 +18,7 @@ import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequ
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
+import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -148,8 +149,10 @@ try {
   const fileStorage = await archiveReviewFiles({ rootDir: root, manifest: approvedManifest, blobStore })
   db.exec(readFileSync(new URL('../data/sql/schema.sql', import.meta.url), 'utf8'))
   const paperAssetsDir = path.join(directory, 'published')
+  const reviewed = finalizeReviewFixture({ directory: root, output: path.join(directory, 'reviewed'),
+    manifest: approvedManifest, projection: frozen })
   const result = publishUniversalNck1Import({ reviewRootDir: root, approvedManifest, fileStorage,
-    approvedIdentity: { ...approvedManifest, approvalId: 'approval-no-listening', revisionId: 'rev-no-listening' },
+    ...publicationFixtureInput(reviewed), fileStorage,
     canonicalRequest: loadCanonicalImportRequest(fixture.requestPath), db, paperAssetsDir })
   assert.equal(result.ok, true)
   const stored = await loadStoredProducts({ db, paperAssetsDir, blobStore,

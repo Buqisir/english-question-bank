@@ -56,6 +56,8 @@ import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, 
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
 import { createImportReviewStore } from './import-review/importReviewStore.mjs'
 import { rendererBuildIdProvider } from './import-review/rendererBuildIdProvider.mjs'
+import { createReviewCompatibilityStore } from './import-review/reviewCompatibilityStore.mjs'
+import { startReviewCompatibilityWorker } from './import-review/runReviewCompatibilityWorker.mjs'
 import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
 import { createSinglePaperPromotionService } from './import-review/singlePaperPromotion.mjs'
 import { createSourceIntakeNotifier } from './source-intake/sourceIntakeNotifier.mjs'
@@ -4138,6 +4140,21 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   openUserDatabase({ readOnly: false }).close()
   cleanupPaperImportTempArtifacts(paperAssetsDir)
   ensureMySpaceFilesRoot(userSpaceFilesDir)
+  getImportReviewStore()
+  const compatibilityStore = createReviewCompatibilityStore({
+    dbPath: importReviewDbPath, filesRoot: importReviewFilesRoot,
+  })
+  const compatibilityWorker = startReviewCompatibilityWorker(compatibilityStore, {
+    onError(error) { console.error('[review-compatibility]', error.code || 'WORKER_FAILED') },
+  })
+  server.once('close', () => { void compatibilityWorker.stop() })
+  const shutdown = async () => {
+    const closed = new Promise(resolve => server.close(resolve))
+    server.closeIdleConnections()
+    await Promise.all([closed, compatibilityWorker.stop()])
+  }
+  process.once('SIGTERM', shutdown)
+  process.once('SIGINT', shutdown)
 
   {
     const db = openUserDatabase({ readOnly: true })

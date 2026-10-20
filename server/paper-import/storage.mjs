@@ -260,33 +260,15 @@ function collectDocxSourceCapture(sourceDocx, paperId, add, addJson) {
   }, 'sourceDocx.mediaCapture.manifest')
 }
 
-function makeVersionedArtifacts(packageData, version) {
-  const paperAsset = JSON.parse(JSON.stringify(packageData.paperAsset))
-  const answerKey = JSON.parse(JSON.stringify(packageData.answerKey))
-  const importMeta = JSON.parse(JSON.stringify(packageData.importMeta))
-  const readingAnalysis = packageData.readingAnalysis
-    ? JSON.parse(JSON.stringify(packageData.readingAnalysis))
-    : null
-
-  paperAsset.paper.assetVersion = version
-  paperAsset.paper.status = 'published'
-  answerKey.sourceAssetVersion = version
-  if (readingAnalysis) readingAnalysis.sourceAssetVersion = version
-
-  const scAnalysis = packageData.scAnalysis
-    ? JSON.parse(JSON.stringify(packageData.scAnalysis))
-    : null
-  if (scAnalysis) scAnalysis.sourceAssetVersion = version
-
-  const clozeAnalysis = packageData.clozeAnalysis
-    ? JSON.parse(JSON.stringify(packageData.clozeAnalysis))
-    : null
-  if (clozeAnalysis) clozeAnalysis.sourceAssetVersion = version
-
-  const grammarFillAnalysis = packageData.grammarFillAnalysis
-    ? JSON.parse(JSON.stringify(packageData.grammarFillAnalysis))
-    : null
-  if (grammarFillAnalysis) grammarFillAnalysis.sourceAssetVersion = version
+// Also used by committed reconciliation: only the historical version envelope
+// changes, without invoking the current paper compiler or normalization.
+function makeVersionedAnalysisSidecars(packageData, version) {
+  const result = Object.fromEntries(analysisArtifacts.map(([key]) => {
+    const analysis = packageData[key] ? JSON.parse(JSON.stringify(packageData[key])) : null
+    if (analysis && key !== 'writingAnalysis') analysis.sourceAssetVersion = version
+    return [key, analysis]
+  }))
+  const { readingAnalysis, scAnalysis, clozeAnalysis, grammarFillAnalysis } = result
   for (const analysis of [readingAnalysis, scAnalysis, clozeAnalysis, grammarFillAnalysis]) {
     for (const group of Object.values(analysis?.groups || {})) {
       if (group.teachingContent?.schemaVersion === 'objective-teaching-content-v1') {
@@ -295,13 +277,18 @@ function makeVersionedArtifacts(packageData, version) {
     }
   }
 
-  const writingAnalysis = packageData.writingAnalysis
-    ? JSON.parse(JSON.stringify(packageData.writingAnalysis))
-    : null
-  const listeningAnalysis = packageData.listeningAnalysis
-    ? JSON.parse(JSON.stringify(packageData.listeningAnalysis))
-    : null
-  if (listeningAnalysis) listeningAnalysis.sourceAssetVersion = version
+  return result
+}
+
+function makeVersionedArtifacts(packageData, version) {
+  const paperAsset = JSON.parse(JSON.stringify(packageData.paperAsset))
+  const answerKey = JSON.parse(JSON.stringify(packageData.answerKey))
+  const importMeta = JSON.parse(JSON.stringify(packageData.importMeta))
+  paperAsset.paper.assetVersion = version
+  paperAsset.paper.status = 'published'
+  answerKey.sourceAssetVersion = version
+  const { readingAnalysis, scAnalysis, clozeAnalysis, grammarFillAnalysis,
+    writingAnalysis, listeningAnalysis } = makeVersionedAnalysisSidecars(packageData, version)
   const paginationPlan = packageData.paginationPlan
     ? JSON.parse(JSON.stringify(packageData.paginationPlan))
     : null
@@ -495,7 +482,7 @@ export function assertPaperImportPaginationPlan({ baseDir, packageData, version 
 }
 
 export function assertPaperImportAnalysisSidecars({ baseDir, packageData, version }) {
-  const expected = makeVersionedArtifacts(packageData, version)
+  const expected = makeVersionedAnalysisSidecars(packageData, version)
   const expectedFiles = analysisArtifacts.filter(([key]) => expected[key])
   if (expectedFiles.filter(([key]) => key !== 'listeningAnalysis').length !== requiredAnalysisArtifactCount) {
     throw new Error('Complete NCK1 analysis publication requires all five sidecars')

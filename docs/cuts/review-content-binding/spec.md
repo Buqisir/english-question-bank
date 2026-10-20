@@ -229,9 +229,21 @@ CAS：
 | validation/publish diagnostics、生成时间、journal 临时路径、数据库分配 ID、Canonical/Source Capture 内部表示和 normalizationReport | B | 不是原内容 component，不要求旧字节相同；已有当前严格验证与 journal 恢复仍执行。`publicValidation.readingGroups` 是已比较 asset 的组号/题号/标题索引，不能携带另一份题文 |
 | 新 package 字段、未知身份回执键、无法从原 preview/封存源事实证明的实际内容 | C | 立即 unknown 并拒绝；不通过递归删除 digest/version/url、整对象忽略或两次当前重算放行 |
 
-C 的内部锁入口为 `store.withPromotionContentGuard`：持有既有 shipping guard，在 `BEGIN IMMEDIATE` 内复核当前 approved/latest、旧 renderer 守卫、issues、文件、subject 和目标 equal。第一次捕获 subjectDigest/targetBuildId/comparatorVersion 及 revision/paper/preview/files/confirmations/issues/guard token，异步归档期间不持 SQLite 事务；归档后必须匹配该 token。最终 `onPrepared` 先保存不可变目标，随后再次在该 Review 事务内检查实际目标，并包住同步现场比较、writer/journal 与 bank DB 提交；不引入跨 SQLite 的伪原子承诺。比较器明确证明尚未执行 writer 的拒绝沿原 `markPromotionFailed` 记录失败并释放该 guard；竞态、I/O 或响应丢失等未知异常不带这个证明，保留 publishing/guard/evidence。提交后 Review 回执丢失沿原 target/journal reconciliation 补录，不创建第二个版本。
+C 的内部锁入口为 `store.withPromotionContentGuard`：持有既有 shipping guard，在 `BEGIN IMMEDIATE` 内复核当前 approved/latest、历史 renderer 相互绑定、issues、文件、subject 和目标 equal。第一次捕获 subjectDigest/targetBuildId/comparatorVersion 及 revision/paper/preview/files/confirmations/issues/guard token，异步归档期间不持 SQLite 事务；归档后必须匹配该 token。最终 `onPrepared` 先保存不可变目标，随后再次在该 Review 事务内检查实际目标，并包住同步现场比较、writer/journal 与 bank DB 提交；不引入跨 SQLite 的伪原子承诺。比较器明确证明尚未执行 writer 的拒绝沿原 `markPromotionFailed` 记录失败并释放该 guard；竞态、I/O 或响应丢失等未知异常不带这个证明，保留 publishing/guard/evidence。提交后 Review 回执丢失沿原 target/journal reconciliation 补录，不创建第二个版本。
 
-本步保留全部旧 renderer 判断。`beginPromotion`/scoped begin 的资格入口由 D 再统一切换；C 在 guard 已取得之后额外要求 equal，不能单独宣称跨构建发布已恢复。新增 `scripts/verify-review-publication-content.mjs` 使用真实 native NCK1 听力 profile 的自编 fixture，完整六类 analysis、源参考答案、四份冻结 PDF 和 header；不使用生产数据、浏览器或远端服务。
+C 的独立提交保留全部旧 renderer 判断，不能单独宣称跨构建发布已恢复；后续 D 统一切换这些入口。`scripts/verify-review-publication-content.mjs` 使用真实 native NCK1 听力 profile 的自编 fixture，完整六类 analysis、源参考答案、四份冻结 PDF 和 header；不使用生产数据、浏览器或远端服务。
+
+### D 实施边界
+
+- `assertReviewCompatible` 统一使用 executing server 的可信 target provider；approve、request、grant、scoped begin、promotion begin 和 shipping guard 都在原写事务内检查 equal，随后保留最新 revision、原批准、expiry、issues、文件及原条件写入检查。subjectDigest/targetBuildId/comparatorVersion 传入 C 最终 guard；归档前后和 writer 前继续复核。
+- revision、approval、request、preview 的历史 renderer 相互绑定不变；当前 renderer 不再决定资格。list/detail/agent status 返回 `compatibility`，list 批量读取凭证，动态 projection 受 gate；已有缓存与冻结文件仍按原身份、SHA、鉴权读取，缺 preview 不由 GET 补造。
+- `server/api.mjs` executable 启动初始化 Review store 并启动自动 worker；server close、SIGTERM/SIGINT 停止调度并等待活动批次。routes 返回结构化 `reasonCode/compatibility`，缓存响应附兼容状态 header；probe 保留原审查业务状态，提供等待核验或检查差异动作。Owner Review 完整 UI 禁用与交互验收属于 E。
+- 已 committed 的补录先用 `originalReviewEvidenceForRevision` 验证原 subject/preview 与封存文件，再核对 target/journal、版本和 latest 的 sidecar/分页/产品/源引用及 Canonical consumers。仅应用已有 analysis 版本 envelope，不运行当前 projection/compiler；任何新写入仍先查当前 equal。
+- universal/no-listening/storage/scoped/OPS fixture 改为真实冻结产品、上传、finalize/self equal、批准、归档及最终事务 guard。合成 PDF 仅用于契约验证，不作为真实卷面视觉验收。没有直接插入 equal 或关闭内容检查。
+- CLI 正向发布使用真实 Review API 的 `promote`（scoped 路径另有端到端覆盖）；旧离线 `publish` 缺少原 subject/live guard 时继续拒绝，验证不再通过离线批准文件模拟新发布成功。
+- OCR bundle 重放保留原 renderer 身份规则，Candidate 的 equal 条件不侵入 OCR；probe 的 wait/inspect 仅针对已 finalize Candidate，OCR 和 uploading 保留原继续构造/恢复上传动作。异步 finalize 通过同一可信 provider 的 worker 计算 server fingerprint，避免提交前在主线程解析执行图；仍在原事务中原子保存 preview/subject/self comparison。缺产品的旧性能 fixture 明确为 unknown，仅验证原缓存与 worker 计算一致。
+- 完整 external analyzed-package 发布需要源参考答案可回放：source references 增加 `package_json_pointer`，要求 exact package 重新派生 materialization、官方答案 member role/SHA、严格 own-property pointer 和存在文本的逐字一致。发布后从已验证 Source Capture 还原相同 member；原 PDF/DOCX 校验保留。
+- D 当前指令优先于下节早期自动回填设想：自动 worker 遇到缺失持久 subject 的旧 revision，追加 `unknown/MISSING_BASELINE`，不创建 subject、不借 renderer 相同放行。当前 backfill CLI 的 dry-run 同样报告缺基准、保持 DB 字节不变；下节显式维护回填仅保留为后续单独授权的方案。
 
 ## 6. 历史 revision 回填与无需重送恢复
 
@@ -239,7 +251,7 @@ C 的内部锁入口为 `store.withPromotionContentGuard`：持有既有 shippin
 
 **Owner 新规则下，原服务端 preview 载荷、既存身份摘要、完整 bundle/文件 SHA、产品清单与冻结 PDF 字节，是充分且可执行的内容审查基准。** 它们证明当时提供给 Owner 的内容，不证明 Owner 实际看过每一页；是否已批准仍由原状态/回执决定。无需恢复旧代码或证明旧前端显示像素一致。
 
-回填步骤：
+显式维护回填步骤（D 自动 worker 不执行缺失 subject 的创建）：
 
 1. 读取 finalized revision 及原 `import_review_product_previews`。验证 payload_digest 自洽、revision/bundle/历史 renderer 绑定正确，profile 所需字段齐全。
 2. 验证 manifest/bundleDigest、DB inventory 一致，逐文件对 SHA/长度；解析原产品清单、sidecar 和媒体确认，检查 frozen PDF 字节及产品 inputDigest。
@@ -262,7 +274,7 @@ C 的内部锁入口为 `store.withPromotionContentGuard`：持有既有 shippin
 
 ### 6.3 能否让旧卷恢复
 
-**可以。** 历史记录完整且目标重算内容相同的 revision，在第一阶段上线后可无需重送恢复可用；代码、CSS、字体改变不再阻断。保留原 awaiting_review/approved 状态；changes_requested、有 unresolved issue、过期 request 不因 equal 获得发布资格。
+**可以。** 已有可信持久 subject、历史记录完整且目标重算内容相同的 revision，可无需重送恢复可用；代码、CSS、字体改变不再阻断。缺 subject 的旧记录按 D 当前规则保持 unknown，不能宣称自动恢复。保留原 awaiting_review/approved 状态；changes_requested、有 unresolved issue、过期 request 不因 equal 获得发布资格。
 
 不承诺约 29 套都 equal：本任务未读取生产 DB，而且它们正在重送；worker 只处理 latest，不能恢复 superseded。以后具备同样证据的旧卷可走这条自动恢复路径。上线盘点应统计 preview/必要摘要/封存文件完整性及 equal/different/unknown，不再盘点旧 release 是否保留。
 

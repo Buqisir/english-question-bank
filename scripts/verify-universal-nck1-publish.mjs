@@ -83,6 +83,7 @@ import {
 import { LEGACY_LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../shared/paper-canonical/listeningPlayback.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
+import { freezeReviewFixture, finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
 import {
   finalizePublicSearchMetadata,
@@ -99,7 +100,7 @@ function writeJson(filePath, value) {
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`)
 }
 
-function publicMetadataFixture(materialization, sourceDigest, candidateDigest) {
+export function publicMetadataFixture(materialization, sourceDigest, candidateDigest) {
   const binding = { materialization, sourceDigest, candidateDigest }
   const prepared = preparePublicSearchMetadataRequest(binding)
   const groups = prepared.sourceGroups.map((group) => {
@@ -673,10 +674,27 @@ function convertToAnalyzedPackageReviewSource(reviewRoot) {
     }
   }
   replaceLocators(content)
+  const officialAnswersBytes = Buffer.from(JSON.stringify({
+    answers: content.answers.map(({ questionId, canonicalNumber, value }) => ({
+      questionId, canonicalNumber, value,
+    })),
+    listeningAnswers: (content.listening.answers || []).map(({ canonicalNumber, value }) => ({
+      canonicalNumber, value,
+    })),
+  }))
+  content.answers.forEach((answer, index) => {
+    answer.authority = { kind: 'package_json_pointer', documentId: 'official-answers', pointer: `/answers/${index}` }
+  })
+  ;(content.listening.answers || []).forEach((answer, index) => {
+    answer.authority = { kind: 'package_json_pointer', documentId: 'official-answers', pointer: `/listeningAnswers/${index}` }
+  })
   const contentBytes = new TextEncoder().encode(JSON.stringify(content))
   const members = [{
     memberId: 'content', role: 'content', mediaType: 'application/json',
     path: 'analyzed-package/content.json', bytes: contentBytes,
+  }, {
+    memberId: 'official-answers', role: 'official_answers', mediaType: 'application/json',
+    path: 'analyzed-package/official-answers.json', bytes: officialAnswersBytes,
   }, ...NCK1_STAGED_ANALYSIS_FILES.map((descriptor) => ({
     memberId: descriptor.key,
     role: 'analysis',
@@ -711,6 +729,7 @@ function convertToAnalyzedPackageReviewSource(reviewRoot) {
   mkdirSync(path.join(reviewRoot, 'analyzed-package'), { recursive: true })
   writeFileSync(path.join(reviewRoot, packageManifestPath), packageManifestBytes)
   writeFileSync(path.join(reviewRoot, members[0].path), contentBytes)
+  writeFileSync(path.join(reviewRoot, 'analyzed-package/official-answers.json'), officialAnswersBytes)
   const audioMember = members.find(({ role }) => role === 'audio')
   if (audioMember) writeFileSync(path.join(reviewRoot, audioMember.path), audioMember.bytes)
   writeJson(
@@ -948,13 +967,37 @@ function approvedIdentity(projection) {
 }
 
 function publish(context, options = {}) {
-  return publishUniversalNck1Import({
+  return publishReviewedFixture({
     reviewRootDir: context.reviewRoot,
     approvedIdentity: approvedIdentity(context.projection),
     canonicalRequest: loadCanonicalImportRequest(context.requestPath),
     db: context.db,
     paperAssetsDir: context.paperAssetsDir,
     ...options,
+  })
+}
+
+const publicationFixtures = new Map()
+function publishReviewedFixture(input) {
+  if (input.approvedReviewSubject) return publishUniversalNck1Import(input)
+  const key = `${input.reviewRootDir}:${input.approvedManifest?.bundleDigest || JSON.stringify(input.approvedIdentity)}`
+  let fixture = publicationFixtures.get(key)
+  if (!fixture) {
+    if (!existsSync(path.join(input.reviewRootDir, 'products/manifest-v1.json'))) {
+      freezeReviewFixture(input.reviewRootDir, { expectedCandidateDigest: input.approvedIdentity?.candidateDigest })
+    }
+    fixture = finalizeReviewFixture({ directory: input.reviewRootDir,
+      manifest: input.approvedManifest,
+      output: path.join(path.dirname(input.reviewRootDir), `publication-review-${randomUUID()}`) })
+    publicationFixtures.set(key, fixture)
+  }
+  const reviewed = publicationFixtureInput(fixture)
+  return publishUniversalNck1Import({ ...reviewed, ...input,
+    approvedManifest: input.approvedManifest || fixture.manifest,
+    approvedIdentity: { ...fixture.approval, ...input.approvedIdentity,
+      revisionId: fixture.revision.id, approvalId: fixture.approval.approvalId },
+    withPreparedReviewSubject: reviewed.withPreparedReviewSubject,
+    onPrepared(target) { reviewed.onPrepared(target); input.onPrepared?.(target) },
   })
 }
 
@@ -970,6 +1013,9 @@ function close(context) {
 }
 
 function reviewManifestFor(reviewRoot, projection) {
+  if (!existsSync(path.join(reviewRoot, 'products/manifest-v1.json'))) {
+    projection = freezeReviewFixture(reviewRoot, { expectedCandidateDigest: projection.candidateDigest })
+  }
   const files = reviewBundleFilePaths(reviewRoot).map((file) => {
     const bytes = readFileSync(resolveReviewFile(reviewRoot, file.path))
     return {
@@ -1073,6 +1119,9 @@ function makeOnlinePromotionContext(
     })
     fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot)
   }
+  fixture.projection = freezeReviewFixture(fixture.reviewRoot, {
+    expectedCandidateDigest: fixture.projection.candidateDigest,
+  })
   const reviewStore = createImportReviewStore({
     dbPath: path.join(tempRoot, 'import-review.sqlite'),
     filesRoot: path.join(tempRoot, 'review-files'),
@@ -2037,6 +2086,7 @@ for (const enabled of [false, true]) {
   try {
     const configPath = path.join(context.reviewRoot, 'config.json')
     const config = JSON.parse(readFileSync(configPath, 'utf8'))
+    config.provenance.month = 5
     config.provenance.paperName = '浙江省镇海中学2026年5月高三高考模拟测试英语试题（5月卷）'
     if (enabled) config.headerTitle = subjectFreeHeaderTitle(config.provenance.paperName)
     writeJson(configPath, config)
@@ -2065,14 +2115,14 @@ for (const enabled of [false, true]) {
         revisionId: revision.id, bundleDigest: manifest.bundleDigest },
     }
     if (enabled) {
-      assert.throws(() => publish(context), /Review|manifest|bundle/i,
+      assert.throws(() => publishUniversalNck1Import({ reviewRootDir: context.reviewRoot }), /Review|manifest|bundle/i,
         'new presentation metadata requires an exact approved bundle')
       const changedConfig = structuredClone(config)
       changedConfig.provenance.paperName = '其他考试英语试题'
       changedConfig.headerTitle = '其他考试'
       writeJson(configPath, changedConfig)
       assert.throws(() => publish(context, { ...options, reviewRootDir: context.reviewRoot }),
-        /exact approved Review bundle|bytes changed/,
+        error => error.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH' && /config\.json/.test(error.message),
         'a rule-valid replacement still requires approval of its exact config')
       writeJson(configPath, config)
     }
@@ -2468,7 +2518,7 @@ assert.throws(() => buildNck1ReviewProjection(publicOnly.reviewRoot), /SUMMARY_B
 writeJson(summariesPath, { ...publicSummary, candidateDigest: `sha256:${'1'.repeat(64)}` })
 assert.throws(() => buildNck1ReviewProjection(publicOnly.reviewRoot), /SUMMARY_BINDING_STALE/)
 writeJson(summariesPath, publicSummary)
-const publicPublication = publishUniversalNck1Import({
+const publicPublication = publishReviewedFixture({
   reviewRootDir: publicOnly.reviewRoot,
   approvedIdentity: approvedPublicIdentity,
   canonicalRequest: loadCanonicalImportRequest(publicOnly.requestPath),
@@ -2483,15 +2533,13 @@ assert.deepEqual(
 )
 const changedPublicSummary = `${readFileSync(summariesPath, 'utf8')} `
 writeFileSync(summariesPath, changedPublicSummary)
-const changedAfterApproval = publishUniversalNck1Import({
+assert.throws(() => publishReviewedFixture({
   reviewRootDir: publicOnly.reviewRoot,
   approvedIdentity: approvedPublicIdentity,
   canonicalRequest: loadCanonicalImportRequest(publicOnly.requestPath),
   db: publicOnly.db,
   paperAssetsDir: publicOnly.paperAssetsDir,
-})
-assert.equal(changedAfterApproval.ok, false)
-assert.equal(changedAfterApproval.canonicalAdmission.diagnostics[0].code, 'IMPORT_REVIEW_APPROVAL_IDENTITY_MISMATCH')
+}), { code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'SEALED_FILE_CHANGED' })
 close(publicOnly)
 
 const publicRollback = makeContext('public-rollback')
@@ -2656,7 +2704,7 @@ try {
       projection.sourceInput,
       confirmation,
     ).request
-    const publication = publishUniversalNck1Import({
+    const publication = publishReviewedFixture({
       reviewRootDir: fixture.reviewRoot,
       approvedIdentity: approvedIdentity(projection),
       canonicalRequest,
@@ -2847,7 +2895,7 @@ try {
     openDatabase: externalListeningPromotion.openDatabase,
     paperAssetsDir: externalListeningPromotion.paperAssetsDir,
   })
-  const promoted = service.promote(
+  const promoted = await service.promote(
     paperId,
     promotionRequest(externalListeningPromotion.approval),
     'synthetic-agent',
@@ -3139,10 +3187,11 @@ for (const [label, mutate] of [
 ]) {
   const context = makeContext(label)
   try {
+    freezeReviewFixture(context.reviewRoot)
     const identity = approvedIdentity(context.projection)
     const request = loadCanonicalImportRequest(context.requestPath)
     mutate({ identity, request })
-    const result = publishUniversalNck1Import({
+    const result = publishReviewedFixture({
       reviewRootDir: context.reviewRoot,
       approvedIdentity: identity,
       canonicalRequest: request,
@@ -3176,7 +3225,7 @@ try {
     paperId,
     'older but internally valid NCK1 question source',
   )
-  const result = publishUniversalNck1Import({
+  const result = publishReviewedFixture({
     reviewRootDir: staleRequest.reviewRoot,
     approvedIdentity: approvedIdentity(staleRequest.projection),
     canonicalRequest: loadCanonicalImportRequest(staleFixture.requestPath),
@@ -3214,6 +3263,14 @@ try {
   close(preCommit)
 }
 
+await verifyUniversalSourceReferencePublication()
+await verifyUniversalOwnerPromotion()
+await verifyUniversalCliPromotion()
+await verifyUniversalCliHydration()
+console.log('verify-universal-nck1-publish: PASS')
+}
+
+export async function verifyUniversalSourceReferencePublication() {
 // The sidecar is optional for legacy versions, but a claimed reviewed sidecar
 // must survive the same atomic receipt, recovery and rollback as Canonical.
 // These cases are authored here for Ship; preview builds do not execute them.
@@ -3255,15 +3312,22 @@ try {
   writeJson(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), tampered)
   assert.throws(() => buildNck1ReviewProjection(referencePreCommit.reviewRoot, { requireAnalyses: true }),
     /SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID/, 'invalid continuation cannot enter a sealed Review')
-  assert.throws(() => publish(referencePreCommit, approval), /CONTINUATION_LOCATION_INVALID|inventory/i,
+  assert.throws(() => publish(referencePreCommit, approval), { code: 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH' },
     'an approved sidecar cannot have its continuation page replaced before publication')
   writeFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), exact)
-  assert.throws(() => publish(referencePreCommit), /approved Review|schema/i)
+  assert.throws(() => publishUniversalNck1Import({
+    reviewRootDir: referencePreCommit.reviewRoot,
+    approvedIdentity: approvedIdentity(referencePreCommit.projection),
+    canonicalRequest: loadCanonicalImportRequest(referencePreCommit.requestPath),
+    db: referencePreCommit.db,
+    paperAssetsDir: referencePreCommit.paperAssetsDir,
+  }), { code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'MISSING_BASELINE' })
   assert.throws(() => publish(referencePreCommit, { ...approval, failurePoint: 'db-write' }))
   assert.equal(publishedVersionCount(referencePreCommit), 0)
   assert(!existsSync(path.join(referencePreCommit.paperAssetsDir, paperId, 'latest')))
   rmSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE))
-  assert.throws(() => publish(referencePreCommit, approval), /inventory/i, 'deleted approved sidecar cannot silently become legacy')
+  assert.throws(() => publish(referencePreCommit, approval),
+    { code: 'ENOENT', reasonCode: 'MISSING_EVIDENCE' }, 'deleted approved sidecar cannot silently become legacy')
   writeFileSync(path.join(referencePreCommit.reviewRoot, SOURCE_REFERENCES_FILE), exact)
   const result = publish(referencePreCommit, approval)
   const consumption = Object.values(result.publish.consumers)[0]
@@ -3309,10 +3373,11 @@ try {
 
 const referenceRollback = makeContext('references-rollback')
 try {
-  const legacy = publish(referenceRollback)
-  assert.equal(readSourceReferencePublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir,
-    consumption: Object.values(legacy.publish.consumers)[0] }), null)
-  // A new reviewed source, not a late mutable attachment to legacy v1.
+  const original = publish(referenceRollback)
+  assert(readSourceReferencePublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir,
+    consumption: Object.values(original.publish.consumers)[0] }))
+  const originalReferences = readFileSync(path.join(original.publish.versionDir, SOURCE_REFERENCES_FILE))
+  // A second genuinely reviewed source, never a mutable attachment to v1.
   Object.assign(referenceRollback, makeReviewRoot(path.join(referenceRollback.tempRoot, 'v2'),
     paperId, 'new source for the second reviewed version'))
   const configPath = path.join(referenceRollback.reviewRoot, 'config.json')
@@ -3326,8 +3391,8 @@ try {
   const exact = readFileSync(path.join(current.publish.versionDir, SOURCE_REFERENCES_FILE))
   rollbackPaperImportPublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir, paperId, versionName: 'v1' })
   const latest = path.join(referenceRollback.paperAssetsDir, paperId, 'latest', SOURCE_REFERENCES_FILE)
-  assert(!existsSync(latest), 'rolling back to a legacy version removes the later answer sidecar')
-  assert.deepEqual(months(), [null], 'old unknown month must replace the newer month during rollback')
+  assert(readFileSync(latest).equals(originalReferences), 'rollback restores the exact first approved answer sidecar')
+  assert.deepEqual(months(), [10], 'the first approved month replaces the newer month during rollback')
   rollbackPaperImportPublication({ db: referenceRollback.db, paperAssetsDir: referenceRollback.paperAssetsDir, paperId, versionName: 'v2' })
   assert(readFileSync(latest).equals(exact))
   assert.deepEqual(months(), [11])
@@ -3353,7 +3418,7 @@ try {
   const invalidRequest = loadCanonicalImportRequest(postCommit.requestPath)
   invalidRequest.nck1MaterializationConfirmation.candidateDigest =
     `sha256:${'0'.repeat(64)}`
-  const rejected = publishUniversalNck1Import({
+  const rejected = publishReviewedFixture({
     reviewRootDir: postCommit.reviewRoot,
     approvedIdentity: approvedIdentity(postCommit.projection),
     canonicalRequest: invalidRequest,
@@ -3379,6 +3444,10 @@ try {
   close(postCommit)
 }
 
+console.log('PASS universal source-reference publication, frozen bytes, rollback and recovery')
+}
+
+export async function verifyUniversalOwnerPromotion() {
 // An approved historical paper without listening/navigation must publish under
 // its retained authority, not today's default; summary bindings make drift fail.
 const retainedOnline = makeOnlinePromotionContext('retained-v66', paperId, null, {
@@ -3600,7 +3669,7 @@ try {
     1,
   )
   duplicateDb.close()
-  const inspected = promotionService.promote(
+  const inspected = await promotionService.promote(
     paperId,
     promotionRequest(online.approval),
     'ship-authorizer-token',
@@ -3789,7 +3858,7 @@ const plannedPromotion = makeOnlinePromotionContext('planned', paperId, ['readin
 try {
   const service = createSinglePaperPromotionService({ getStore: () => plannedPromotion.reviewStore,
     openDatabase: plannedPromotion.openDatabase, paperAssetsDir: plannedPromotion.paperAssetsDir })
-  const first = service.promote(paperId, promotionRequest(plannedPromotion.approval), 'synthetic-ship')
+  const first = await service.promote(paperId, promotionRequest(plannedPromotion.approval), 'synthetic-ship')
   assert.equal(first.status, 'published')
   const clozeV1 = JSON.parse(readFileSync(path.join(plannedPromotion.reviewRoot, 'analysis-cloze.json')))
   const clozeGroupId = Object.keys(clozeV1.groups)[0]
@@ -3821,7 +3890,7 @@ try {
   const summaryV2 = '第二版完形简介：人物先遭遇困难，随后采取行动并在关键事件中迎来明确转折。'
   clozeV1.groups[clozeGroupId].overview = summaryV2
   writeJson(path.join(plannedPromotion.reviewRoot, 'analysis-cloze.json'), clozeV1)
-  const nextProjection = buildNck1ReviewProjection(plannedPromotion.reviewRoot)
+  const nextProjection = freezeReviewFixture(plannedPromotion.reviewRoot)
   assert.equal(nextProjection.candidateDigest, plannedPromotion.projection.candidateDigest)
   const manifest = reviewManifestFor(plannedPromotion.reviewRoot, nextProjection)
   assert.notEqual(manifest.bundleDigest, plannedPromotion.approval.bundleDigest)
@@ -3834,7 +3903,7 @@ try {
   }
   const revision = plannedPromotion.reviewStore.finalizeRevision(created.revision.id)
   const approval = plannedPromotion.reviewStore.approveRevision(paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'synthetic-owner')
-  const second = service.promote(paperId, promotionRequest(approval), 'synthetic-ship')
+  const second = await service.promote(paperId, promotionRequest(approval), 'synthetic-ship')
   assert.equal(second.promotion.assetVersion, 2, 'same Candidate with a newly approved plan must not reuse v1')
   assert.deepEqual(JSON.parse(readFileSync(path.join(paperDir, 'latest/pagination-plan.json'))), changedPlan)
   for (const file of ['reading-choice-analysis-v1.json', 'seven-choices-analysis-v1.json', 'cloze-analysis-v1.json', 'grammar-fill-analysis-v1.json']) {
@@ -3874,11 +3943,11 @@ try {
     openDatabase: preCommitPromotion.openDatabase,
     paperAssetsDir: preCommitPromotion.paperAssetsDir,
     publish(input) {
-      return publishUniversalNck1Import({ ...input, failurePoint: 'db-write' })
+      return publishReviewedFixture({ ...input, failurePoint: 'db-write' })
     },
   })
-  assert.throws(
-    () => service.promote(
+  await assert.rejects(
+    async () => service.promote(
       paperId,
       promotionRequest(preCommitPromotion.approval),
       'ship-authorizer-token',
@@ -3888,7 +3957,7 @@ try {
   const publishing = preCommitPromotion.reviewStore.latestPromotion(paperId)
   assert.equal(publishing.state, 'publishing')
   assert.equal(publishing.versionName, 'v1')
-  const duplicate = service.promoteOwner(paperId, preCommitPromotion.revision.id, {
+  const duplicate = await service.promoteOwner(paperId, preCommitPromotion.revision.id, {
     intent: 'publish', bundleDigest: preCommitPromotion.revision.bundleDigest,
     rendererBuildId: preCommitPromotion.revision.rendererBuildId,
   }, 'synthetic-owner')
@@ -3922,7 +3991,7 @@ try {
   assert.equal(aborted.released, true)
   assert.equal(aborted.promotion.state, 'failed')
   assert.equal(aborted.promotion.failureCode, 'IMPORT_REVIEW_PROMOTION_ABORTED')
-  const recovered = createSinglePaperPromotionService({
+  const recovered = await createSinglePaperPromotionService({
     getStore: () => preCommitPromotion.reviewStore,
     openDatabase: preCommitPromotion.openDatabase,
     paperAssetsDir: preCommitPromotion.paperAssetsDir,
@@ -3947,8 +4016,8 @@ try {
       throw new Error('forced receipt crash')
     },
   })
-  assert.throws(
-    () => interrupted.promote(
+  await assert.rejects(
+    async () => interrupted.promote(
       paperId,
       promotionRequest(committedWithoutReceipt.approval),
       'ship-authorizer-token',
@@ -3965,7 +4034,7 @@ try {
     }, 'synthetic-owner'),
     (error) => error.code === 'IMPORT_REVIEW_SHIPPING_IN_PROGRESS',
   )
-  const resumed = createSinglePaperPromotionService({
+  const resumed = await createSinglePaperPromotionService({
     getStore: () => committedWithoutReceipt.reviewStore,
     openDatabase: committedWithoutReceipt.openDatabase,
     paperAssetsDir: committedWithoutReceipt.paperAssetsDir,
@@ -4011,8 +4080,8 @@ try {
     secretHash: sha256('synthetic-scoped-capability'),
   }, 'synthetic-import-agent')
   publicCommittedWithoutReceipt.reviewStore.grantPublicationRequest(scopedRequest.requestId, 'synthetic-owner')
-  assert.throws(
-    () => interrupted.promoteScoped(
+  await assert.rejects(
+    async () => interrupted.promoteScoped(
       paperId,
       scopedRequest.requestId,
       sha256('synthetic-scoped-capability'),
@@ -4020,7 +4089,7 @@ try {
     ),
     /forced public receipt crash/,
   )
-  const replay = interrupted.promoteScoped(paperId, scopedRequest.requestId,
+  const replay = await interrupted.promoteScoped(paperId, scopedRequest.requestId,
     sha256('synthetic-scoped-capability'), 'synthetic-import-agent')
   assert.equal(replay.status, 'publishing', 'consumed replay reports retained UNKNOWN without invoking publisher again')
   const durable = publicCommittedWithoutReceipt.reviewStore.latestPromotion(paperId)
@@ -4046,9 +4115,9 @@ try {
     promotionRequest(publicCommittedWithoutReceipt.approval, 'retry_ship'),
     'ship-authorizer-token',
   )
-  assert.throws(resume, /paragraph summar|digest|byte/i, 'committed public recovery rejects byte drift')
+  await assert.rejects(async () => resume(), /paragraph summar|digest|byte/i, 'committed public recovery rejects byte drift')
   writeFileSync(latestSummaryPath, exactSummaryBytes)
-  const resumed = resume()
+  const resumed = await resume()
   assert.equal(resumed.status, 'idempotent')
   assert.equal(resumed.promotion.state, 'published')
   assert.equal(
@@ -4155,11 +4224,11 @@ try {
     openDatabase: committedJournal.openDatabase,
     paperAssetsDir: committedJournal.paperAssetsDir,
     publish(input) {
-      return publishUniversalNck1Import({ ...input, failurePoint: 'committed-reload' })
+      return publishReviewedFixture({ ...input, failurePoint: 'committed-reload' })
     },
   })
-  assert.throws(
-    () => interrupted.promote(
+  await assert.rejects(
+    async () => interrupted.promote(
       paperId,
       promotionRequest(committedJournal.approval),
       'ship-authorizer-token',
@@ -4173,7 +4242,7 @@ try {
   )
   assert(existsSync(journalPath), 'committed publisher crash leaves its recovery journal')
   assert.equal(committedJournal.reviewStore.latestPromotion(paperId).state, 'publishing')
-  const resumed = createSinglePaperPromotionService({
+  const resumed = await createSinglePaperPromotionService({
     getStore: () => committedJournal.reviewStore,
     openDatabase: committedJournal.openDatabase,
     paperAssetsDir: committedJournal.paperAssetsDir,
@@ -4215,14 +4284,14 @@ try {
       }
     },
   })
-  const failed = failureService.promote(
+  const failed = await failureService.promote(
     paperId,
     promotionRequest(knownFailure.approval),
     'ship-authorizer-token',
   )
   assert.equal(failed.status, 'failed')
   assert.equal(failed.promotion.state, 'failed')
-  const duplicate = failureService.promoteOwner(paperId, knownFailure.revision.id, {
+  const duplicate = await failureService.promoteOwner(paperId, knownFailure.revision.id, {
     intent: 'publish', bundleDigest: knownFailure.revision.bundleDigest,
     rendererBuildId: knownFailure.revision.rendererBuildId,
   }, 'synthetic-owner')
@@ -4236,7 +4305,7 @@ try {
     ),
     (error) => error.code === 'IMPORT_REVIEW_PROMOTION_RETRY_REQUIRED',
   )
-  const retried = createSinglePaperPromotionService({
+  const retried = await createSinglePaperPromotionService({
     getStore: () => knownFailure.reviewStore,
     openDatabase: knownFailure.openDatabase,
     paperAssetsDir: knownFailure.paperAssetsDir,
@@ -4251,6 +4320,46 @@ try {
   rmSync(knownFailure.tempRoot, { recursive: true, force: true })
 }
 
+console.log('PASS universal Owner HTTP/browser publication and recovery')
+}
+
+export async function verifyUniversalCliPromotion() {
+  const context = makeOnlinePromotionContext('cli-guarded')
+  let started = null
+  try {
+    const promotionService = createSinglePaperPromotionService({
+      getStore: () => context.reviewStore,
+      openDatabase: context.openDatabase,
+      paperAssetsDir: context.paperAssetsDir,
+    })
+    started = await startPromotionServer(context, promotionService)
+    const env = {
+      QUESTION_BANK_IMPORT_OPS_ORIGIN: started.origin,
+      QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'synthetic-agent-token',
+      QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN: 'synthetic-ship-token',
+    }
+    const args = ['promote', paperId, '--owner-said-ship']
+    const published = await runReviewCommand(args, env)
+    assert.match(published.stdout, /"status": "published"/)
+    const receipt = context.reviewStore.latestPromotion(paperId)
+    assert.equal(receipt.approvalId, context.approval.approvalId)
+    assert.equal(receipt.assetVersion, 1)
+    assert.equal(receipt.state, 'published')
+    const repeated = await runReviewCommand(args, env)
+    assert.match(repeated.stdout, /"status": "idempotent"/)
+    const db = context.openDatabase({ readOnly: true })
+    try {
+      assert.equal(db.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?')
+        .get(paperId).count, 1)
+    } finally { db.close() }
+  } finally {
+    if (started) await new Promise(resolve => started.server.close(resolve))
+    rmSync(context.tempRoot, { recursive: true, force: true })
+  }
+  console.log('PASS universal CLI promotion through genuine Review API and live transaction guard')
+}
+
+export async function verifyUniversalCliHydration() {
 const cliTempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-universal-publish-cli-'))
 const cliPaperId = `paper-mock-contract-2026-cli-${process.pid}`
 const cliPaperDir = path.join(
@@ -4589,22 +4698,17 @@ try {
     checkedAt: '2026-08-28T00:00:00.000Z',
     method: 'source-markings-vs-answerKey',
   })
-  const published = await runReviewCommand(['publish', cliPaperId], commandEnv)
-  assert.match(published.stdout, /^PUBLISHED .* v1: ready_to_ship;/)
-  const receipt = JSON.parse(readFileSync(
-    path.join(cliPaperDir, 'signals/locally-published.json'),
-    'utf8',
-  ))
-  assert.equal(receipt.approvalId, approval.approvalId)
-  assert.equal(receipt.assetVersion, 1)
-  const repeated = await runReviewCommand(['publish', cliPaperId], commandEnv)
-  assert.match(repeated.stdout, /^ALREADY PUBLISHED .* v1: ready_to_ship;/)
+  await assert.rejects(runReviewCommand(['publish', cliPaperId], commandEnv),
+    /IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED.*original Review subject and live shipping guard/)
+  assert(!existsSync(path.join(cliPaperDir, 'signals/locally-published.json')),
+    'a cached approval cannot create a local publication receipt without the live guard')
+  assert(!existsSync(assetsDir))
   const publishedDb = new DatabaseSync(dbPath, { readOnly: true })
   assert.equal(
     publishedDb.prepare(
       'SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?',
     ).get(cliPaperId).count,
-    1,
+    0,
   )
   publishedDb.close()
 
@@ -4672,5 +4776,5 @@ try {
   rmSync(cliTempRoot, { recursive: true, force: true })
 }
 
-console.log('verify-universal-nck1-publish: PASS')
+console.log('PASS universal CLI hydration, exact revisions, digests and OCR binding')
 }

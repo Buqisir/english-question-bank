@@ -12,21 +12,22 @@ const error = code => Object.assign(new Error(code), { code })
 const hasTable = (db, table) => Boolean(db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?").get(table))
 const identityUnknown = () => ({ result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false,
   targetBuildId: null, comparatorVersion: REVIEW_COMPARATOR_VERSION })
+const subjectWithPreview = `SELECT s.*, v.revision_id AS preview_revision_id,
+  v.bundle_digest AS preview_bundle_digest, v.renderer_build_id AS preview_renderer_build_id,
+  v.payload_digest AS preview_payload_digest
+  FROM review_subject s LEFT JOIN import_review_product_previews v ON v.revision_id = s.revision_id`
 
-function storedSubject(db, revisionId) {
-  if (!hasTable(db, 'review_subject')) return null
-  const row = db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revisionId)
-  return checkedStoredReviewSubject(row)
-}
-
-export function getReviewCompatibility(db, revision, targetDescriptor) {
+function compatibilityFromRows(revision, subject, rows) {
   try {
-    const baseline = storedSubject(db, revision.id)
+    const baseline = checkedStoredReviewSubject(subject)
     if (baseline && (baseline.row.bundle_digest !== revision.bundleDigest
       || baseline.row.source_renderer_build_id !== revision.rendererBuildId)) throw error('BASELINE_UNTRUSTED')
-    const rows = hasTable(db, 'review_compatibility') ? db.prepare(`SELECT * FROM review_compatibility
-      WHERE revision_id = ? AND target_build_id = ? AND comparator_version = ? ORDER BY attempt_no DESC`)
-      .all(revision.id, targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION) : []
+    if (baseline && !subject.preview_revision_id) {
+      return { result: 'unknown', reasonCode: 'MISSING_BASELINE', pending: false }
+    }
+    if (baseline && (subject.preview_bundle_digest !== revision.bundleDigest
+      || subject.preview_renderer_build_id !== revision.rendererBuildId
+      || subject.preview_payload_digest !== baseline.row.consumer_digest)) throw error('BASELINE_UNTRUSTED')
     if (!rows.length) return { result: 'unknown', reasonCode: 'NOT_CHECKED', pending: true }
     for (const row of rows) {
       const evidence = JSON.parse(row.evidence_json)
@@ -41,6 +42,28 @@ export function getReviewCompatibility(db, revision, targetDescriptor) {
       subjectDigest: row.subject_digest, targetBuildId: row.target_build_id,
       comparatorVersion: row.comparator_version, checkedAt: row.checked_at }
   } catch { return { result: 'unknown', reasonCode: 'BASELINE_UNTRUSTED', pending: false } }
+}
+
+export function getReviewCompatibility(db, revision, targetDescriptor) {
+  const subject = hasTable(db, 'review_subject')
+    ? db.prepare(`${subjectWithPreview} WHERE s.revision_id = ?`).get(revision.id) : null
+  const rows = hasTable(db, 'review_compatibility') ? db.prepare(`SELECT * FROM review_compatibility
+    WHERE revision_id = ? AND target_build_id = ? AND comparator_version = ? ORDER BY attempt_no DESC`)
+    .all(revision.id, targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION) : []
+  return compatibilityFromRows(revision, subject, rows)
+}
+
+// List reads the latest-revision namespace in two queries, without deriving
+// content or issuing a subject/attempt query for each paper.
+export function getLatestReviewCompatibilities(db, revisions, targetDescriptor) {
+  const subjects = new Map(db.prepare(`${subjectWithPreview}
+    JOIN import_review_papers p ON p.latest_revision_id = s.revision_id`).all().map(row => [row.revision_id, row]))
+  const attempts = Map.groupBy(db.prepare(`SELECT c.* FROM review_compatibility c
+    JOIN import_review_papers p ON p.latest_revision_id = c.revision_id
+    WHERE c.target_build_id = ? AND c.comparator_version = ? ORDER BY c.attempt_no DESC`)
+    .all(targetDescriptor.targetBuildId, REVIEW_COMPARATOR_VERSION), row => row.revision_id)
+  return new Map(revisions.map(revision => [revision.id,
+    compatibilityFromRows(revision, subjects.get(revision.id), attempts.get(revision.id) || [])]))
 }
 
 // Caller owns BEGIN IMMEDIATE. These are INSERT-only; no UPDATE/REPLACE/DELETE.
