@@ -10,7 +10,8 @@ const labels = {
 export const isReviewCompatible = compatibility => compatibility?.result === 'equal' && !compatibility.pending
 
 export function reviewCompatibilityMessage(compatibility) {
-  if (compatibility?.pending || compatibility?.result === 'pending') return '正在核验预览版本…'
+  if (compatibility?.pending || compatibility?.result === 'pending'
+    || (compatibility?.result === 'unknown' && compatibility.reasonCode === 'BACKFILL_PENDING')) return '正在核验预览版本…'
   if (isReviewCompatible(compatibility)) return ''
   if (compatibility?.result === 'different') return '预览内容有变化，请在 Droid 中核验后重新送审'
   const reason = {

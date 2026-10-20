@@ -21,7 +21,7 @@
 
 基线没有编号式 migration runner。`server/import-review/importReviewStore.mjs:442` 的 `ensureShape()` 使用幂等建表和 `PRAGMA table_info`，初始化在 816–818。新增 `server/import-review/reviewCompatibilitySchema.mjs`，导出 `ensureReviewCompatibilityShape(db)`，由旧表就绪后的 `ensureShape()` 调用；标识 `review-compatibility-schema-v1`，不编造全库编号或修改 bank DB 的 user_version。
 
-两表/索引在短 `BEGIN IMMEDIATE` 中一起创建，不做文件 I/O、历史扫描或回填；已有外层事务时不得嵌套 BEGIN。首次生产执行属于明确授权的 schema 扩展 Goal。
+三表及索引在短 `BEGIN IMMEDIATE` 中一起创建，不做文件 I/O、历史扫描或回填；已有外层事务时不得嵌套 BEGIN。首次生产执行属于明确授权的 schema 扩展 Goal。
 
 ```sql
 CREATE TABLE IF NOT EXISTS review_subject (
@@ -60,6 +60,16 @@ CREATE TABLE IF NOT EXISTS review_compatibility (
 
 CREATE INDEX IF NOT EXISTS idx_review_compatibility_lookup
   ON review_compatibility(revision_id, target_build_id, comparator_version, attempt_no DESC);
+
+CREATE TABLE IF NOT EXISTS review_subject_backfill (
+  id INTEGER PRIMARY KEY,
+  revision_id TEXT NOT NULL REFERENCES import_review_revisions(id),
+  input_token TEXT NOT NULL,
+  outcome TEXT NOT NULL CHECK(outcome IN ('inserted','skipped')),
+  reason_code TEXT NOT NULL,
+  checked_at TEXT NOT NULL,
+  UNIQUE(revision_id, input_token)
+);
 ```
 
 外键默认 NO ACTION，保留证据；不用 `INSERT OR REPLACE`。迁移验证 foreign_key_check。

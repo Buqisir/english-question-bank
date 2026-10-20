@@ -177,17 +177,22 @@ if (process.argv.includes('--serve')) {
     await page.screenshot({ path: path.join(artifactDir, 'published.png') })
     const messages = {
       pending: '正在核验预览版本…', equal: '',
+      backfill_pending: '正在核验预览版本…',
       different: '预览内容有变化，请在 Droid 中核验后重新送审',
       unknown: '无法核验原预览版本，请在 Droid 中核验后重新送审（缺少原预览记录）',
     }
-    for (const result of ['pending', 'equal', 'different', 'unknown']) {
+    for (const result of ['pending', 'equal', 'different', 'unknown', 'backfill_pending']) {
+      const backfillPending = result === 'backfill_pending'
       paper = { ...initial, state: 'approved', rendererStale: result === 'equal',
-        compatibility: { result, pending: result === 'pending', reasonCode: 'MISSING_BASELINE' } }
+        compatibility: { result: backfillPending ? 'unknown' : result, pending: result === 'pending',
+          reasonCode: backfillPending ? 'BACKFILL_PENDING' : 'MISSING_BASELINE' } }
       await page.reload()
       await row.getByText('已批准', { exact: true }).waitFor()
       assert.equal(await publish.isEnabled(), result === 'equal')
       if (messages[result]) await row.getByText(messages[result], { exact: true }).waitFor()
       else assert.equal(await row.locator('.owner-review-hint').count(), 0)
+      if (backfillPending) assert.equal(await row.getByText(/重新送审/).count(), 0,
+        'backfill pending shows verification in progress without asking for resubmission')
       const [frozenScreen] = await Promise.all([
         page.waitForEvent('popup'), row.getByRole('link', { name: initial.paperName }).click(),
       ])
@@ -236,7 +241,7 @@ if (process.argv.includes('--serve')) {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
     await page.screenshot({ path: path.join(artifactDir, 'mobile.png') })
     assert.deepEqual(errors, [])
-    console.log('PASS compact Owner list: four compatibility states preserve approval and frozen PDF downloads; exact Screen link, return/fix, publish, failed, response-loss and mobile states')
+    console.log('PASS compact Owner list: four compatibility states and unknown/BACKFILL_PENDING preserve approval and frozen PDF downloads; backfill waits without resubmission or publication; exact Screen link, return/fix, publish, failed, response-loss and mobile states')
   } finally {
     releasePublish?.()
     await browser?.close()
