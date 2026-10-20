@@ -20,6 +20,7 @@ import { isReviewCompatible } from '../import-ops/public/owner-review.js'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
+import { startReviewCompatibilityWorker } from '../server/import-review/runReviewCompatibilityWorker.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -35,6 +36,33 @@ const dbRun = (file, fn) => {
   try { return fn(db) } finally { db.close() }
 }
 try {
+  for (const idleBackfill of [false, true]) {
+    const started = []
+    let completed, failed
+    const second = new Promise((resolve, reject) => { completed = resolve; failed = reject })
+    const schedulingStore = {
+      ready: async () => {}, isBusy: () => false,
+      scan({ limit }) { assert.equal(limit, 1); return ['scheduled-revision'] },
+      prepare: () => ({}), discard() {},
+      async compute() {
+        started.push(performance.now())
+        if (started.length === 2) completed()
+        return { comparison: { result: 'unknown', reasonCode: 'MISSING_BASELINE' } }
+      },
+      commit: async () => ({ committed: false }),
+    }
+    const worker = startReviewCompatibilityWorker(schedulingStore, { onError: failed,
+      backfillStore: idleBackfill ? { runBatch: async () => ({ results: [] }) } : null })
+    let deadline
+    try {
+      await Promise.race([second, new Promise((_, reject) => {
+        deadline = setTimeout(() => reject(new Error('Busy comparison scheduler retained its old 30s idle interval')), 20000)
+      })])
+      const interval = started[1] - started[0]
+      assert.ok(interval >= 4900 && interval <= 11500, `Unexpected task interval: ${interval}ms`)
+    } finally { clearTimeout(deadline); await worker.stop() }
+    pass(`comparison-only scheduling with idleBackfill=${idleBackfill} advances one-paper batches within 5–10s`)
+  }
   await reviewBuildIdentityProvider().ready()
   const { reviewRoot } = makeReviewRoot(path.join(root, 'source'), 'paper-recovery-policy')
   const projection = freezeReviewFixture(reviewRoot)

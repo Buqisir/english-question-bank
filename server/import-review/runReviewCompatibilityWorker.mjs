@@ -118,6 +118,7 @@ export function startReviewCompatibilityWorker(store, { onError = () => {}, back
         // Normal comparison always gets the first slot. Only then spend one
         // bounded idle slot recovering original evidence in a separate thread.
         const normal = await runReviewCompatibilityBatch(store, { signal: controller.signal })
+        if (normal.results.length) delay = REVIEW_WORKER_BUDGET.yieldMs
         if (normal.paused || controller.signal.aborted || !backfillStore) return
         if (normal.results.length) await yieldFor(REVIEW_WORKER_BUDGET.yieldMs, undefined, { signal: controller.signal })
         const backfill = await backfillStore.runBatch({ signal: controller.signal })
