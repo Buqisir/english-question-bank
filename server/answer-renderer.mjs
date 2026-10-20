@@ -31,14 +31,8 @@ function rangeTable(groups) {
   }).join('')}</tr></tbody></table>`
 }
 
-function referenceNumber(number, omitLeadingOne = true) {
-  if (number < 10) return '零一二三四五六七八九'[number]
-  const [unit, suffix] = [[100000000, '亿'], [10000, '万'], [1000, '千'], [100, '百'], [10, '十']]
-    .find(([unit]) => number >= unit)
-  const remainder = number % unit
-  const leading = unit === 10 && number < 20 && omitLeadingOne ? '' : referenceNumber(Math.floor(number / unit))
-  return leading + suffix + (remainder
-    ? `${remainder < unit / 10 ? '零' : ''}${referenceNumber(remainder, false)}` : '')
+function referenceNumber(number) {
+  return ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'][number - 1] ?? ` ${number}`
 }
 
 function referenceSection(group, kind, starters = [], labelOverride = null) {

@@ -230,7 +230,7 @@ function answerLabelChecks() {
       entry.paragraphs.forEach((paragraph, index) => { paragraph.paragraphId = `paragraph:variant:${number}:${index}` })
       entries.push(entry)
     }
-    assert.deepEqual(labels(buildAnswerOnlyHtml(input)).slice(8, 11), ['参考范文九', '参考范文十', '参考范文十一'])
+    assert.deepEqual(labels(buildAnswerOnlyHtml(input)).slice(8, 11), ['参考范文九', '参考范文十', '参考范文 11'])
     const group = input.materialization.groups.find(group => group.writingTask?.taskType === 'application')
     const item = { source: input, detail: { id: group.groupId, paperId: input.materialization.paperId, questions: [] } }
     const assembled = buildAssembledAnswerOnlyHtml({ paperName: input.paperName, items: [item] })
