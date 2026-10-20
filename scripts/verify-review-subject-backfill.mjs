@@ -30,7 +30,33 @@ function rows() {
 }
 const cli = (...args) => JSON.parse(execFileSync(process.execPath, [
   path.resolve('scripts/backfill-review-subjects.mjs'), '--db', dbPath, '--files-root', filesRoot, ...args,
-], { encoding: 'utf8', timeout: 120_000, stdio: ['ignore', 'pipe', 'pipe'] }))
+], { encoding: 'utf8', env: { ...process.env, NODE_ENV: '' }, timeout: 120_000, stdio: ['ignore', 'pipe', 'pipe'] }))
+function productionProcess(revisions, compare) {
+  const program = `
+    import assert from 'node:assert/strict';
+    import { createImportReviewStore } from './server/import-review/importReviewStore.mjs';
+    import { createReviewCompatibilityStore } from './server/import-review/reviewCompatibilityStore.mjs';
+    import { reviewBuildIdentityProvider } from './server/import-review/reviewBuildIdentity.mjs';
+    const [dbPath, filesRoot, idsJson, compare] = process.argv.slice(1);
+    const ids = JSON.parse(idsJson);
+    createImportReviewStore({dbPath, filesRoot});
+    const compatibility = createReviewCompatibilityStore({dbPath, filesRoot});
+    await compatibility.ready();
+    if (compare === 'yes') assert.deepEqual(new Set(compatibility.scan()), new Set(ids));
+    for (const id of ids) {
+      const result = await compatibility.checkRevision(id);
+      assert.equal(result.committed, true);
+      assert.equal(result.comparison.result, compare === 'yes' ? 'equal' : 'unknown');
+      if (compare !== 'yes') assert.equal(result.comparison.reasonCode, 'MISSING_BASELINE');
+    }
+    console.log(JSON.stringify({targetBuildId: reviewBuildIdentityProvider()().targetBuildId}));
+  `
+  return JSON.parse(execFileSync(process.execPath, ['-e', program,
+    dbPath, filesRoot, JSON.stringify(revisions.map(row => row.id)), compare ? 'yes' : 'no'], {
+    cwd: path.resolve(import.meta.dirname, '..'), env: { ...process.env, NODE_ENV: 'production' },
+    encoding: 'utf8', timeout: 120_000,
+  }))
+}
 try {
   const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'historical-preview-renderer' })
   await store.ready()
@@ -60,6 +86,7 @@ try {
   assert.deepEqual(readFileSync(dbPath), originalBytes)
   assert.equal(rows(), originalRows)
   console.log('PASS old DB with original preview writer: dry-run verifies both review states without any DB byte change')
+  const productionTarget = productionProcess(revisions, false).targetBuildId
 
   const file = path.join(filesRoot, revisions[0].id, 'products/answerOnly.pdf')
   const originalPdf = readFileSync(file)
@@ -73,7 +100,7 @@ try {
   assert.equal(rows(), originalRows)
   assert.deepEqual(withDb(db => db.prepare('SELECT origin FROM review_subject').all().map(row => row.origin)), ['stored_evidence'])
   assert.equal(withDb(db => db.prepare('SELECT result FROM review_compatibility').get().result), 'unknown')
-  assert.equal(withDb(db => db.prepare('SELECT reason_code FROM review_compatibility').get().reason_code), 'BACKFILL_PENDING')
+  assert.equal(withDb(db => db.prepare('SELECT reason_code FROM review_compatibility ORDER BY rowid DESC LIMIT 1').get().reason_code), 'BACKFILL_PENDING')
   console.log('PASS tampered sealed PDF is skipped; intact original evidence is CAS inserted and queued, never marked equal by CLI')
 
   writeFileSync(file, originalPdf)
@@ -87,6 +114,10 @@ try {
   assert.deepEqual(readFileSync(dbPath), beforeRepeat)
   assert.equal(rows(), originalRows)
   console.log('PASS repeated apply preserves subjects, attempts and every original row; repaired evidence can be backfilled once')
+  assert.notEqual(withDb(db => db.prepare(`SELECT target_build_id FROM review_compatibility
+    WHERE reason_code='BACKFILL_PENDING' LIMIT 1`).get().target_build_id), productionTarget)
+  productionProcess(revisions, true)
+  console.log('PASS separate production API scanner recovers its MISSING_BASELINE after CLI backfill under another environment/target')
 
   await reviewBuildIdentityProvider().ready()
   const compatibility = createReviewCompatibilityStore({ dbPath, filesRoot })
@@ -102,5 +133,5 @@ try {
   assert.equal(rows(), originalRows)
   assert.deepEqual(withDb(db => db.prepare('PRAGMA foreign_key_check').all()), [])
   console.log('PASS real worker compares backfilled listening/no-listening fixtures to equal without changing approval or review state')
-  console.log('PASS review subject backfill: 4 scenarios')
+  console.log('PASS review subject backfill: 5 scenarios')
 } finally { rmSync(root, { recursive: true, force: true }) }

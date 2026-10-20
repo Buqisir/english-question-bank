@@ -291,6 +291,13 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
           .get(row.id, target.targetBuildId, REVIEW_COMPARATOR_VERSION) : null
         if (!latest) return true
         if (latest.result === 'unknown' && latest.reason_code === 'BACKFILL_PENDING') return true
+        // A baseline may be inserted by another release/environment. Recovery
+        // belongs to this scanner's target, never the maintenance target label.
+        if (latest.result === 'unknown' && ['MISSING_BASELINE', 'MISSING_EVIDENCE',
+          'MISSING_FROZEN_PRODUCTS', 'MISSING_VALIDATED_LISTENING_REVIEW'].includes(latest.reason_code)) {
+          const subject = db.prepare('SELECT subject_digest FROM review_subject WHERE revision_id=?').get(row.id)
+          if (subject && subject.subject_digest !== latest.subject_digest) return true
+        }
         const transient = ['WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_EXIT', 'IO_ERROR', 'COMPUTATION_FAILED']
         return latest.result === 'unknown' && transient.includes(latest.reason_code) && latest.attempt_no <= 2
           && nowMs >= Date.parse(latest.checked_at) + (latest.attempt_no === 1 ? 30_000 : 300_000)
