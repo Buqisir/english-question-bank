@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import {
   LISTENING_SEGMENT_RULE, alignListeningOccurrence, evaluateListeningEngine, expectedListeningReadings,
-  listeningAsrTokens, normalizeListeningText, parseListeningAnnouncements, reconcileListeningEngines,
+  listeningAsrTokens, normalizeListeningText, parseListeningAnnouncements, reconcileListeningEngines, validateListeningOrder,
 } from './lib-listening-segment-rule.mjs'
 import { importSubmissionIssues } from './lib-import-submit-gate.mjs'
 
@@ -218,4 +218,62 @@ test('a cue spanning multiple runs remains visible before the body in a long ASR
   raw.result.segments[0].start = 0
   raw.result.segments[0].runs.unshift({ text: 'Text', start: 0, end: 0.4 }, { text: ' Two.', start: 0.4, end: 1 })
   assert.ok(evaluate({ windows: [raw] }).issues.includes('ANNOUNCEMENT_CONFLICT'))
+})
+
+function orderScenario(times, missing = [], middleInstruction = null) {
+  const texts = [
+    'Blue dolphins travel beyond distant islands while young sailors carefully study maps beside the harbor.',
+    'Orange butterflies settle upon purple flowers as curious children quietly gather leaves near their school.',
+    'Silver rockets carry important instruments above frozen mountains where scientists patiently observe stars every evening.',
+  ]
+  const groups = texts.map((text, i) => ({ segmentId: `listening-text-${i + 1}`, questionNumbers: [i + 1],
+    text, ...(i === 1 && middleInstruction ? { instruction: middleInstruction } : {}) }))
+  const parts = groups.filter((_, i) => !missing.includes(i)).map(g => windowFor(g.text, times[groups.indexOf(g)]))
+  const windows = [{ startSeconds: 0, endSeconds: 100,
+    result: { segments: parts.flatMap(w => w.result.segments) } }]
+  return evaluateListeningEngine({ groups, windows, instructions: one, durationSeconds: 100, pauses: surrounding(parts) })
+}
+test('one missing group widens the skeleton interval without failing usable neighbors', () => {
+  const result = orderScenario([2, 20, 40], [1])
+  assert.deepEqual(result.groups.map(g => g.decision), ['usable', 'review_required', 'usable'])
+  assert.deepEqual(reconcileListeningEngines(result).map(g => g.decision), ['usable', 'review_required', 'usable'])
+})
+test('inverted independently anchored skeleton fails both involved groups', () => {
+  const result = orderScenario([20, 2, 40])
+  for (const group of result.groups.slice(0, 2)) {
+    assert.ok(group.issues.includes('WHOLE_PAPER_ORDER_CONFLICT'))
+    assert.equal(group.playback, null)
+  }
+  assert.equal(result.groups[2].decision, 'usable')
+})
+test('overlapping playback in the skeleton gap fails both groups before sidecar emission', () => {
+  const result = orderScenario([2, 40, 80])
+  result.groups[0].playback.endSeconds = 30
+  result.groups[1].playback.startSeconds = 29
+  validateListeningOrder(result.groups)
+  assert.deepEqual(result.groups.map(g => g.decision), ['review_required', 'review_required', 'usable'])
+})
+test('all occurrences of an unannounced failed group must remain in its skeleton interval', () => {
+  const result = orderScenario([2, 60, 40], [], '本段读两遍')
+  assert.ok(result.groups[1].issues.includes('WHOLE_PAPER_ORDER_CONFLICT'))
+  assert.ok(result.groups[1].issues.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.groups[2].decision, 'usable')
+})
+test('unknown expected reading count is not a numeric count mismatch', () => {
+  const result = evaluate({ instructions: [] })
+  assert.ok(result.issues.includes('READING_COUNT_UNKNOWN'))
+  assert.ok(!result.issues.includes('READING_COUNT_MISMATCH'))
+})
+test('adjacent readings share a silence boundary without clipping complete acoustic runs', () => {
+  const body = source.replace(/(?:M|W):/gu, '')
+  const a = windowFor(body, 2), b = windowFor(body, 6.6)
+  const result = evaluate({ instructions: two,
+    windows: [{ startSeconds: 0, endSeconds: 100, result: { segments: [a.result.segments[0], b.result.segments[0]] } }],
+    pauses: [{ startSeconds: 0, endSeconds: 1.9 }, { startSeconds: 6.45, endSeconds: 6.79 },
+      { startSeconds: 11.1, endSeconds: 13 }] })
+  assert.equal(result.decision, 'usable', result.issues.join(', '))
+  const [first, second] = result.occurrences
+  assert.ok(first.playback.endSeconds <= second.playback.startSeconds)
+  assert.ok(first.playback.endSeconds >= first.endSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
+  assert.ok(second.playback.startSeconds <= second.startSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
 })

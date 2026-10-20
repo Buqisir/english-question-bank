@@ -278,6 +278,50 @@ function boundsFor(first, last, pauses, duration) {
     ? { startSeconds, endSeconds } : null
 }
 
+// Freeze the independently successful anchors before adding order issues.
+// Failed/missing groups never become constraints merely because they have a
+// partial occurrence. Removing one only widens the neighboring interval.
+export function validateListeningOrder(results) {
+  const ordered = [...results].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
+  const orderCodes = new Set(['WHOLE_PAPER_ORDER_CONFLICT', 'NEIGHBOR_BOUNDARY_CROSSED'])
+  const skeleton = ordered.filter(g => g.independentlyAnchored && g.occurrences.length
+    && g.issues.every(code => orderCodes.has(code)))
+  const first = g => Math.min(...g.occurrences.map(o => o.startSeconds))
+  const last = g => Math.max(...g.occurrences.map(o => o.endSeconds))
+  // Compare every pair against the frozen skeleton. A conflict marks both
+  // participants, even when the first mark changes a participant's decision.
+  for (let i = 0; i < skeleton.length; i++) {
+    for (const next of skeleton.slice(i + 1)) {
+      const previous = skeleton[i]
+      if (last(previous) >= first(next)) {
+        problem(previous, 'WHOLE_PAPER_ORDER_CONFLICT')
+        problem(next, 'WHOLE_PAPER_ORDER_CONFLICT')
+      }
+      if ((previous.playback && previous.playback.endSeconds >= first(next))
+        || (next.playback && next.playback.startSeconds <= last(previous))
+        || (previous.playback && next.playback
+          && previous.playback.endSeconds > next.playback.startSeconds)) {
+        problem(previous, 'NEIGHBOR_BOUNDARY_CROSSED')
+        problem(next, 'NEIGHBOR_BOUNDARY_CROSSED')
+      }
+    }
+  }
+  for (const [i, result] of ordered.entries()) {
+    const previous = ordered.slice(0, i).filter(g => skeleton.includes(g)).at(-1)
+    const next = ordered.slice(i + 1).find(g => skeleton.includes(g))
+    result.orderEvidence = { previousSegmentId: previous?.segmentId ?? null,
+      nextSegmentId: next?.segmentId ?? null, afterSeconds: previous ? last(previous) : null,
+      beforeSeconds: next ? first(next) : null, independentlyAnchored: result.independentlyAnchored }
+    if (!result.occurrences.some(o => o.announcements.length)
+      && result.occurrences.some(o => (previous && o.startSeconds <= last(previous))
+        || (next && o.endSeconds >= first(next)))) problem(result, 'WHOLE_PAPER_ORDER_CONFLICT')
+    if (result.playback && ((previous && result.playback.startSeconds <= last(previous))
+      || (next && result.playback.endSeconds >= first(next)))) problem(result, 'NEIGHBOR_BOUNDARY_CROSSED')
+  }
+  for (const result of results) if (result.decision !== 'usable') result.playback = null
+  return results
+}
+
 export function evaluateListeningEngine({ groups, instructions = [], windows = [], pauses = [], durationSeconds,
   engine = 'Apple SpeechAnalyzer', corpus = groups, requireWholePaper = true }) {
   const { words, markers } = listeningAsrTokens(windows)
@@ -364,7 +408,27 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       result.occurrences.push(occurrence)
       for (const code of issues) problem(result, code)
     }
-    if (result.occurrences.length !== expected.expectedReadings) problem(result, 'READING_COUNT_MISMATCH')
+    if (expected.expectedReadings !== 'unknown'
+      && result.occurrences.length !== expected.expectedReadings) problem(result, 'READING_COUNT_MISMATCH')
+    for (const [i, current] of result.occurrences.entries()) {
+      const previous = result.occurrences[i - 1]
+      if (!previous?.playback || !current.playback
+        || previous.playback.endSeconds <= current.playback.startSeconds) continue
+      const pause = pauses.find(p => p.startSeconds <= current.playback.startSeconds
+        && p.endSeconds >= previous.playback.endSeconds)
+      const low = Math.max(pause?.startSeconds ?? Infinity,
+        previous.endSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
+      const high = Math.min(pause?.endSeconds ?? -Infinity,
+        current.startSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
+      if (low > high) { problem(result, 'READINGS_OVERLAP'); continue }
+      const seam = Math.max(low, Math.min(high, (pause.startSeconds + pause.endSeconds) / 2))
+      result.boundaryAdjustments ??= []
+      result.boundaryAdjustments.push({ betweenReadings: [i, i + 1], pause,
+        previousEndSeconds: previous.playback.endSeconds, nextStartSeconds: current.playback.startSeconds,
+        sharedBoundarySeconds: seam })
+      previous.playback.endSeconds = seam
+      current.playback.startSeconds = seam
+    }
     if (result.occurrences.some((o, i, list) => i && o.startSeconds < list[i - 1].endSeconds)) problem(result, 'READINGS_OVERLAP')
     if (result.occurrences.length === 2) {
       const [a, b] = result.occurrences.map(o => o.endSeconds - o.startSeconds)
@@ -376,39 +440,26 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       startSeconds: result.occurrences[0].playback.startSeconds,
       endSeconds: result.occurrences.at(-1).playback.endSeconds,
     }
+    result.independentlyAnchored = result.decision === 'usable'
     return result
   })
-  // Even unresolved neighboring candidates constrain boundaries and order.
-  for (const [i, result] of results.entries()) {
-    const current = result.occurrences
-    if (!current.length) continue
-    const previous = results.slice(0, i).flatMap(g => g.occurrences)
-    const next = results.slice(i + 1).flatMap(g => g.occurrences)
-    if (previous.some(o => o.endSeconds > current[0].startSeconds)
-      || next.some(o => o.startSeconds < current.at(-1).endSeconds)) problem(result, 'WHOLE_PAPER_ORDER_CONFLICT')
-    if (result.playback && (previous.some(o => o.endSeconds > result.playback.startSeconds)
-      || next.some(o => o.startSeconds < result.playback.endSeconds))) problem(result, 'NEIGHBOR_BOUNDARY_CROSSED')
-    if (requireWholePaper && !current.some(o => o.announcements.length)
-      && corpus.some(g => !results.find(r => r.segmentId === g.segmentId)?.occurrences.length)) {
-      problem(result, 'WHOLE_PAPER_ORDER_UNPROVEN')
-    }
-  }
-  if (requireWholePaper && corpus.some(g => !results.some(r => r.segmentId === g.segmentId))) {
-    for (const result of results) problem(result, 'WHOLE_PAPER_ORDER_UNPROVEN')
-  }
-  for (const result of results) if (result.decision !== 'usable') result.playback = null
+  if (requireWholePaper) validateListeningOrder(results)
   return { ruleVersion: LISTENING_SEGMENT_RULE.version, engine, groups: results }
 }
 
 export function reconcileListeningEngines(apple, whisper) {
   const hardConflict = new Set(['ANNOUNCEMENT_CONFLICT', 'READINGS_OVERLAP', 'READING_DURATION_CONFLICT',
-    'WHOLE_PAPER_ORDER_CONFLICT', 'NEIGHBOR_BOUNDARY_CROSSED', 'ANCHOR_AMBIGUOUS'])
+    'ANCHOR_AMBIGUOUS'])
   const results = apple.groups.map(primary => {
     const secondary = whisper?.groups.find(g => g.segmentId === primary.segmentId)
     const attempts = [primary, ...(secondary ? [secondary] : [])]
     let chosen = primary, conflict = false
+    const engineConflicts = []
     if (secondary) {
       conflict = attempts.some(a => a.issues.some(code => hardConflict.has(code)))
+      for (const attempt of attempts) for (const code of attempt.issues.filter(code => hardConflict.has(code))) {
+        engineConflicts.push({ kind: 'attempt_hard_conflict', engine: attempt.engine, code })
+      }
       const complete = a => a.occurrences.filter(o => o.alignment.sourceMatchRate >=
         (o.alignment.sourceWordCount < LISTENING_SEGMENT_RULE.shortMaterialWords
           ? LISTENING_SEGMENT_RULE.shortMatchMinimum : LISTENING_SEGMENT_RULE.matchMinimum)
@@ -416,32 +467,26 @@ export function reconcileListeningEngines(apple, whisper) {
           ? LISTENING_SEGMENT_RULE.shortMatchMinimum : LISTENING_SEGMENT_RULE.matchMinimum))
       const a = complete(primary), b = complete(secondary)
       if (a.length && b.length) {
-        if (a.length !== b.length) conflict = true
-        else if (a.some((o, i) => o.playback && b[i].playback
-          && (Math.abs(o.playback.startSeconds - b[i].playback.startSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds
-          || Math.abs(o.playback.endSeconds - b[i].playback.endSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds))) conflict = true
+        if (a.length !== b.length) {
+          conflict = true
+          engineConflicts.push({ kind: 'complete_occurrence_count', primary: a.length, secondary: b.length })
+        } else for (const [i, occurrence] of a.entries()) {
+          if (!occurrence.playback || !b[i].playback) continue
+          const startDeltaSeconds = b[i].playback.startSeconds - occurrence.playback.startSeconds
+          const endDeltaSeconds = b[i].playback.endSeconds - occurrence.playback.endSeconds
+          if (Math.abs(startDeltaSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds
+            || Math.abs(endDeltaSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds) {
+            conflict = true
+            engineConflicts.push({ kind: 'playback_boundary', occurrence: i + 1, startDeltaSeconds, endDeltaSeconds })
+          }
+        }
       }
       if (!conflict && primary.decision !== 'usable' && secondary.decision === 'usable') chosen = secondary
     }
     return { ...chosen, decision: conflict ? 'review_required' : chosen.decision,
       playback: conflict ? null : chosen.playback,
-      issues: conflict ? [...new Set([...chosen.issues, 'ENGINE_CONFLICT'])] : chosen.issues,
-      selectedEngine: chosen.engine, engineAttempts: attempts }
+      issues: conflict ? [...new Set([...chosen.issues, 'ENGINE_CONFLICT'])] : [...chosen.issues],
+      selectedEngine: chosen.engine, engineAttempts: attempts, engineConflicts }
   })
-  for (const [i, result] of results.entries()) {
-    if (!result.playback) continue
-    const previous = results.slice(0, i).flatMap(group => group.occurrences)
-    const next = results.slice(i + 1).flatMap(group => group.occurrences)
-    if (previous.some(o => o.endSeconds > result.playback.startSeconds)
-      || next.some(o => o.startSeconds < result.playback.endSeconds)) {
-      problem(result, 'WHOLE_PAPER_ORDER_CONFLICT')
-      result.playback = null
-    }
-    if (!result.occurrences.some(o => o.announcements.length)
-      && results.some(g => !g.occurrences.length)) {
-      problem(result, 'WHOLE_PAPER_ORDER_UNPROVEN')
-      result.playback = null
-    }
-  }
-  return results
+  return validateListeningOrder(results)
 }

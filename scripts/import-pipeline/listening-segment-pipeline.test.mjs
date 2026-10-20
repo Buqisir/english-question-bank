@@ -107,3 +107,20 @@ test('request text is bound to its reviewed transcript digest, including reviewe
   changed.transcript[0].text += ' altered'
   assert.throws(() => segmentListening({ ...options, request: changed }), /LISTENING_REQUEST_TRANSCRIPT_STALE/u)
 })
+test('two readings sharing one silence produce nonoverlapping occurrences accepted by the server', t => {
+  const primary = structuredClone(fixture)
+  const second = structuredClone(primary.result.segments[0])
+  second.start += 5.2
+  second.end += 5.2
+  for (const run of second.runs) { run.start += 5.2; run.end += 5.2 }
+  primary.result.segments.push(second)
+  const { subject, options } = workspace(t, primary)
+  options.request.sourceInstructions[0].text = '每段录音读两遍。'
+  const result = segmentListening({ ...options,
+    pauses: [{ startSeconds: 0, endSeconds: 1.9 }, { startSeconds: 7.11, endSeconds: 7.39 },
+      { startSeconds: 12.1, endSeconds: 14 }] })
+  assert.equal(result.usable, 1)
+  const review = JSON.parse(readFileSync(result.review, 'utf8'))
+  assert.ok(review.groups[0].occurrences[0].endSeconds <= review.groups[0].occurrences[1].startSeconds)
+  assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
+})
