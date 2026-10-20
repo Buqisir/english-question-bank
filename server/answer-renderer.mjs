@@ -31,6 +31,10 @@ function rangeTable(groups) {
   }).join('')}</tr></tbody></table>`
 }
 
+function referenceNumber(number) {
+  return ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'][number - 1] ?? ` ${number}`
+}
+
 function referenceSection(group, kind, starters = [], labelOverride = null) {
   const section = group[kind]
   const label = labelOverride ?? (kind === 'essays'
@@ -47,7 +51,9 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
       const prefix = sectionPrefix(entry.sourceLabel)
       const sourceLabel = prefix
         ? `<span class="writing-section-source">${textHtml(prefix[1])}</span><span>${textHtml(prefix[2])}</span>`
-        : textHtml(entry.sourceLabel ?? `源参考${section.entries.length > 1 ? ` ${index + 1}` : ''}`)
+        : textHtml(entry.sourceLabel ?? (kind === 'essays'
+          ? `参考范文${section.entries.length > 1 ? referenceNumber(index + 1) : ''}`
+          : `源参考${section.entries.length > 1 ? ` ${index + 1}` : ''}`))
       const labelHtml = `<h3 class="reference-label" data-reference-label="${escapeHtml(entry.referenceId)}">${sourceLabel}</h3>`
       const blocks = sourceReferenceBlocks(entry)
       const paragraphs = blocks.map(block => {
@@ -111,7 +117,7 @@ ${keyTable(slice(56, 65), 5)}</section>`
     + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters)).join('\n')
     + (includeScoring ? groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'scoring')).join('\n') : '')
   const transcripts = listening.state === 'captured'
-    ? `<section data-answer-section="transcripts" aria-label="听力原文">${listening.transcript.map((segment, index) =>
+    ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${listening.transcript.map((segment, index) =>
       `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
     ).join('\n')}</section>`
     : ''
@@ -147,7 +153,7 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
       if (!Array.isArray(detail.questions) || detail.questions.length) throw new Error('Writing Task 不能产生 Questions')
       const reference = sourceReferences.groups.find(reference => reference.groupId === group.groupId)
       return `<h2>第${index + 1}题组　${labels[group.writingTask.taskType]}</h2>`
-        + referenceSection(reference, 'essays', group.writingTask.starters, '源参考范文')
+        + referenceSection(reference, 'essays', group.writingTask.starters, '参考范文')
     }
     if (listening && (materialization.listening.state !== 'captured' || canonicalGroup?.groupId !== detail.id
       || canonicalGroup.paperId !== materialization.paperId || canonicalGroup.groupType !== 'listening')) {
@@ -179,7 +185,8 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
   const transcriptHtml = [...transcripts.values()].map((segment, index) =>
     `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
   ).join('\n')
-  return answerDocument(paperName, content + transcriptHtml)
+  return answerDocument(paperName, content + (transcriptHtml
+    ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${transcriptHtml}</section>` : ''))
 }
 
 function answerDocument(paperName, content) {
