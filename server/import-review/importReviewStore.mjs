@@ -13,7 +13,7 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
 import { MEDIA_AI_CONFIRMATION_CHECKS } from '../../shared/paper-canonical/mediaPresentation.mjs'
-import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'

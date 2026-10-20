@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Offline rehearsal. Capture authenticated GET responses separately; this
 // command has no network, DB-write, approval or publication capability.
-import { existsSync, mkdirSync, readFileSync, realpathSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
@@ -17,6 +17,10 @@ const read = file => JSON.parse(readFileSync(file, 'utf8'))
 export function rehearsalSnapshot(status, previewApi, analysisApi) {
   const revision = status.latest
   const manifest = revision.manifest
+  if ([previewApi?.consumption, previewApi?.['asset/paper-asset.json']]
+    .some(value => ![200, 404].includes(value?.status))) {
+    throw Object.assign(new Error('Captured preview endpoints are unavailable'), { reasonCode: 'EVIDENCE_UNAVAILABLE' })
+  }
   const ready = previewApi?.consumption?.status === 200 && previewApi?.['asset/paper-asset.json']?.status === 200
   if (ready && (!analysisApi || Object.keys(analysisApi).length !== 6
     || Object.values(analysisApi).some(value => ![200, 404].includes(value.status)))) {
@@ -48,7 +52,9 @@ export async function rehearseReviewSubjectBackfill(evidenceRoot, { papersRoot, 
   papersRoot ||= read(path.join(evidenceRoot, 'rehearsal-input.json')).papersRoot
   papersRoot = realpathSync(papersRoot)
   const workspaceRoot = path.join(evidenceRoot, 'workspaces')
+  const resultsRoot = path.join(evidenceRoot, 'rehearsal-results')
   mkdirSync(workspaceRoot, { recursive: true })
+  mkdirSync(resultsRoot, { recursive: true })
   const previousTmpdir = process.env.TMPDIR
   const previousLockRoot = process.env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT
   process.env.TMPDIR = workspaceRoot
@@ -61,7 +67,7 @@ export async function rehearseReviewSubjectBackfill(evidenceRoot, { papersRoot, 
     const results = []
     for (const paper of papers) {
       const captured = path.join(evidenceRoot, 'papers', paper.paperId)
-      let result = { paperId: paper.paperId, paperName: paper.paperName, revisionId: paper.latestRevisionId }
+      let result = { paperId: paper.paperId, paperName: paper.paperName, revisionId: paper.latestRevisionId, targetBuildId }
       try {
         const status = read(path.join(captured, 'status.json'))
         if (status.status !== 200 || status.body.latest.id !== paper.latestRevisionId) throw new Error('Captured status identity mismatch')
@@ -91,6 +97,7 @@ export async function rehearseReviewSubjectBackfill(evidenceRoot, { papersRoot, 
           diagnostic: reviewBackfillDiagnostic(error) }
       }
       results.push(result)
+      writeFileSync(path.join(resultsRoot, `${paper.paperId}.json`), JSON.stringify(result, null, 2))
       console.error(`${result.paperId}\t${result.result}\t${result.reasonCode}\t${result.subjectBytes ?? ''}`)
       // Let previous large parsed evidence be reclaimed between papers.
       await new Promise(resolve => setImmediate(resolve))
@@ -100,7 +107,7 @@ export async function rehearseReviewSubjectBackfill(evidenceRoot, { papersRoot, 
     return {
       capturedAt: new Date().toISOString(), targetBuildId, evidenceRoot, papersRoot,
       comparisonMode: 'inline',
-      limitation: 'Preview envelope and payload_digest reconstructed from authenticated GET payloads; raw historical SQLite preview row/digest and hidden guard/confirmation rows are not exposed. Missing preview is never rebuilt from current projection. This is offline content rehearsal, not a production CAS or approval test.',
+      limitation: 'Preview envelope and payload_digest reconstructed from authenticated GET payloads; raw historical SQLite preview row/digest and hidden guard/confirmation rows are not exposed. Missing preview is never rebuilt from current projection. Backfill uses the production worker budget; inline target comparison does not prove the production comparison worker heap/deadline. This is offline content rehearsal, not a production CAS or approval test.',
       counts, results,
     }
   } finally {

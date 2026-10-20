@@ -83,9 +83,24 @@ async function fixture({ publicProfile = false, noListening = false, ocrReport =
   }
   add('config.json', 'config', 'application/json', { provenance: { year: 2026, paperName: '内容审查 fixture', source: 'fixture' } })
   if (ocrReport) add('agent-ocr-correction-report-v2.json', 'agent_ocr_correction_report', 'application/json',
-    { schemaVersion: 'agent-ocr-correction-report-v2', paperId, corrections: [] })
+    { schemaVersion: 'agent-ocr-correction-report-v2', paperId,
+      ocrRevisionId: 'rev-ocr-fixture', ocrConfirmationId: 'ocr-confirmation-fixture',
+      originalSourceSetDigest: hash('source-set'), ocrEvidenceDigest: hash('ocr-evidence'),
+      sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+      entries: [{ ocrItemId: 'ocr-item-fixture', category: 'source_spelling_error',
+        before: 'Teh', after: 'The', reason: 'Synthetic source spelling error',
+        sourceLocator: { documentId: 'question-source-1', page: 1 },
+        materializationTarget: { jsonPointer: '/listening/transcript/0/text' } }] })
   if (sidecarPadding) add('materialization/nck1-ocr-source-evidence-v1.json', 'ocr_source_evidence', 'application/json',
-    { schemaVersion: 'nck1-ocr-source-evidence-v1', documents: [{ pages: [{ text: 'a'.repeat(sidecarPadding) }] }] })
+    { schemaVersion: 'nck1-ocr-source-evidence-v1', paperId, sourceSetDigest: hash('source-set'),
+      engine: { name: 'tesseract', version: 'synthetic-fixture' }, confidenceThreshold: 0.85,
+      documents: [{ documentId: 'question-source-1', pages: [{ page: 1,
+        raster: { recipe: { kind: 'pdf_page_region_v1', density: 150,
+          region: { x: 0, y: 0, width: 1, height: 1 } }, sha256: hash('raster'), pixelWidth: 100, pixelHeight: 100 },
+        regions: [{ regionId: 'r1', kind: 'text', region: { x: 0, y: 0, width: 1, height: 1 } }],
+        observations: [{ observationId: 'o1', regionId: 'r1', region: { x: 0, y: 0, width: 1, height: 1 },
+          text: 'a'.repeat(sidecarPadding), confidence: 0.99, alternatives: [] }], readingOrderEdges: [] }] }],
+      evidenceDigest: hash('evidence') })
   if (publicProfile) {
     add('paragraph-summaries-v1.json', 'paragraph_summaries', 'application/json', { groups: [] })
     projection.paragraphSummariesDigest = files.at(-1).sha256

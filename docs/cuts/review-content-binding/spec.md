@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS review_subject_backfill (
   outcome TEXT NOT NULL CHECK(outcome IN ('inserted','skipped')),
   reason_code TEXT NOT NULL,
   checked_at TEXT NOT NULL,
+  diagnostic_json TEXT,
   UNIQUE(revision_id, input_token)
 );
 ```
@@ -289,7 +290,7 @@ API compatibility worker 的自动回填步骤：
 
 **可以。** 历史记录完整且目标重算内容相同的 revision，可在自动回填后无需重送恢复可用；代码、CSS、字体改变不再阻断。证据不完整或不自洽的旧记录继续 unknown，并记录跳过原因。保留原 awaiting_review/approved 状态；changes_requested、有 unresolved issue、过期 request 不因 equal 获得发布资格。
 
-不承诺约 29 套都 equal：本任务未读取生产 DB，而且它们正在重送；worker 只处理 latest，不能恢复 superseded。以后具备同样证据的旧卷可走这条自动恢复路径。上线盘点应统计 preview/必要摘要/封存文件完整性及 equal/different/unknown，不再盘点旧 release 是否保留。
+原 rollout 的约 29 套恢复范围不代替本轮验收。本轮目标为 59 套 awaiting_review Candidate 中 58 套 equal，重庆八中因历史 preview 缺失维持 MISSING_BASELINE；必须以逐卷实演记录为准，不能把预期计数写成通过。生产只读 API 不提供原 SQLite 行，抓取不完整时明确报告缺口。worker 只处理 latest，不能恢复 superseded。
 
 生产入口为现有 API compatibility worker，target ready 后默认开启。仅处理 latest 且 awaiting_review/approved 的缺 subject Candidate；已有 subject 不覆盖，OCR、uploading、changes_requested、superseded 不进入回填范围。缺证据不会触发重新送审或自动批准。
 
@@ -303,7 +304,7 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 
 单个 JSON 文件读取限额独立为 64 MiB（超限 `JSON_FILE_TOO_LARGE`）；subject 序列化总限仍为 8 MiB（`SUBJECT_TOO_LARGE`），不截断消费内容。sidecar JSON 的 descriptor 同时保留原字节 SHA/长度与规范化 jsonDigest，读取所有原字节验证后才摘要化；该变化不是忽略未知 sidecar 或降低内容完整性检查。临时 snapshot 的单文件/总计 64/256 MiB 预算继续保留。
 
-真实卷上线前演练使用 `node scripts/rehearse-review-subject-backfill.mjs <外部证据目录> --papers-root <只读封存 papers 目录>`。证据目录含认证只读 GET 抓取的 list.json、papers/<paperId>/status.json、preview-api.json（consumption、asset/paper-asset.json）及 analysis-api.json（六个 analysis asset）。脚本重建外层 preview envelope 后运行真实历史 extractor、当前 sealed subject 构建和比较，输出逐卷结果及计数；只读 HTTP 不暴露原 SQLite preview digest/隐藏 CAS 行，因此演练声明这一限制，不冒充生产事务核验。缺 preview 不用本地新投影补造，重庆八中继续 MISSING_BASELINE。真实卷数据与输出只放外部证据目录，不提交仓库。
+真实卷上线前演练使用 `node scripts/rehearse-review-subject-backfill.mjs <外部证据目录> --papers-root <只读封存 papers 目录>`。证据目录含认证只读 GET 抓取的 list.json、papers/<paperId>/status.json、preview-api.json（consumption、asset/paper-asset.json）及 analysis-api.json（六个 analysis asset）。脚本重建外层 preview envelope 后，以真实 128 MiB/10 秒线程运行历史 extractor，当前 sealed subject 构建和比较在同进程执行；该演练不证明生产目标比较线程的 384 MiB/120 秒预算。逐卷 JSON 随执行写入外部 rehearsal-results/，并输出整表及计数；只读 HTTP 不暴露原 SQLite preview digest/隐藏 CAS 行，因此演练声明这一限制，不冒充生产事务核验。只有真实 404 可表示缺 preview，其他 HTTP 故障或缺抓取数据均是证据不可用；不以本地新投影补造重庆八中历史基线。真实卷数据与输出只放外部证据目录，不提交仓库。
 
 成功只插入 `origin=stored_evidence` 与 `unknown/BACKFILL_PENDING`。每个 target 的普通扫描器看到新 subject 后，都会重新处理自己先前的 `MISSING_BASELINE`/缺证据结果；不会把本地 CLI 环境的 target 当成在线目标。不同/未知结果仍保守阻止批准和发布，现有内容 guard 不变。
 
@@ -351,7 +352,7 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 
 上线后无需“一次性部署”约束：前端变化不改变服务端目标 fingerprint 时直接复用凭证；服务端 fingerprint 改变后重新比较，暂时 pending，不使卷永久作废。不得先放宽 approve 再补 publisher 实际对象检查。若不需要 shadow，上线完整功能一次切换仍是更简单的默认方案。
 
-本轮生产恢复选择正常部署后由 API 进程默认执行 §6 的有界阶段。回填只需要应用自身已有的 Review DB/封存文件权限，不增加 controlled SSH/controller 维护命令，也不修改 root-owned host；扩权既无必要，也会制造独立维护入口。部署批准应明确包括这个默认开启的 additive 行为；本轮仅完成本地实现与相关验证，没有连接生产或部署。
+本轮生产恢复选择正常部署后由 API 进程默认执行 §6 的有界阶段。回填只需要应用自身已有的 Review DB/封存文件权限，不增加 controlled SSH/controller 维护命令，也不修改 root-owned host；扩权既无必要，也会制造独立维护入口。部署批准应明确包括这个默认开启的 additive 行为；本轮仅进行本地实现、相关验证和生产只读 GET 证据采集，未修改生产 DB/R2 或部署。
 
 ## 8. 迁移、回滚与证据
 
@@ -360,7 +361,7 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 - 回滚到 c42f8b64 会恢复旧 renderer guard，跨构建已兼容卷可能再次 stale；这是旧代码的可用性限制，不应通过修改历史 renderer/approval 规避。必要时优先回滚到已支持内容比较的修复版本。
 - c42f8b64 的 `sourceReferencePublication.mjs` 也不支持新的 external analyzed-package 源参考答案回放（`package_json_pointer` 与已验证 Source Capture member）。因此新增此类正式资产后，直接回滚到该基线可能使已发布卷的源参考答案读取/导出或 promotion reconciliation 失败，不能把保留 DB/资产等同于旧代码可读。推荐回滚到保留该兼容读取修复的版本；若需撤回其他功能，应制作保留 source-reference 兼容 reader 的修复 release，并验证已发布 external 资产的读取及恢复链。不得删资产、改历史 locator/approval 或回放部署前 DB 来适配旧 reader。
 - 已发布资产/版本不删，不能用部署前 DB 快照覆盖上线后业务写入。未决 promotion 保留 guard/journal/target，先只读 reconciliation，禁止盲目重试。
-- 自动回填停用或代码回滚均保留新增结果表；不要用删除 skip 记录制造热重试。证据确需修复时保留原记录，由输入变化触发新 token。本轮没有执行生产盘点、迁移或部署。
+- 自动回填停用或代码回滚均保留新增结果表；不要用删除 skip 记录制造热重试。证据确需修复时保留原记录，由输入变化触发新 token。本轮未执行生产迁移或部署；只读盘点以外部逐卷证据记录为准。
 
 ## 9. UI 文案
 
