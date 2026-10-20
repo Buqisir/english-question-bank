@@ -1,6 +1,7 @@
 import { DatabaseSync } from 'node:sqlite'
+import { createHash } from 'node:crypto'
 import path from 'node:path'
-import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
 import { reviewBuildIdentityProvider } from './reviewBuildIdentity.mjs'
 import { runReviewCompatibilityWorker } from './runReviewCompatibilityWorker.mjs'
@@ -68,7 +69,13 @@ function compatibilitySummary(revision, subject, row, target) {
     return { result: 'unknown', reasonCode: 'MISSING_BASELINE', pending: false }
   }
   try {
-    const binding = JSON.parse(row.evidence_json).binding
+    const evidence = JSON.parse(row.evidence_json)
+    const evidenceDigest = `sha256:${createHash('sha256').update(stableStringify(evidence)).digest('hex')}`
+    if (evidenceDigest !== row.evidence_digest || evidence.result !== row.result
+      || evidence.reasonCode !== row.reason_code) {
+      return { result: 'unknown', reasonCode: 'BASELINE_UNTRUSTED', pending: false }
+    }
+    const binding = evidence.binding
     if (!binding || binding.revisionId !== subject.revision_id || subject.revision_id !== revision.id
       || binding.subjectDigest !== subject.subject_digest || row.subject_digest !== subject.subject_digest
       || binding.previewDigest !== subject.preview_payload_digest || binding.previewDigest !== subject.consumer_digest

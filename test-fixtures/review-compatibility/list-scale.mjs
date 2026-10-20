@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
 import { copyFileSync } from 'node:fs'
 import { DatabaseSync } from 'node:sqlite'
 import { performance } from 'node:perf_hooks'
@@ -41,7 +42,20 @@ export async function verifyReviewListScale({ dbPath, destination, filesRoot }) 
       for (const table of tables) insert(table, rows[table])
     }
     db.exec('COMMIT')
-    const store = createImportReviewStore({ dbPath: destination, filesRoot, rendererBuildId: 'scale-fixture' })
+    // Construction allocates and hashes 37 MiB of synthetic subjects. Exercise
+    // the real reads in a clean process, as an API process opening this DB would,
+    // so fixture garbage collection is not charged to the read-only seam.
+    const program = `import { verifyReviewListScaleReads } from ${JSON.stringify(import.meta.url)};
+      await verifyReviewListScaleReads({ dbPath: process.argv[1], filesRoot: process.argv[2] });`
+    console.log(execFileSync(process.execPath, ['-e', program, destination, filesRoot],
+      { encoding: 'utf8', timeout: 30_000 }).trim())
+  } finally { db.close() }
+}
+
+export async function verifyReviewListScaleReads({ dbPath, filesRoot }) {
+  const db = new DatabaseSync(dbPath)
+  try {
+    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'scale-fixture' })
     await store.ready()
     let tick = performance.now()
     let delay = 0
@@ -91,6 +105,27 @@ export async function verifyReviewListScale({ dbPath, destination, filesRoot }) 
       }
       assert(store.listPapers().every(row => row.compatibility.result === 'equal'))
     }
+    const attempts = db.prepare('SELECT rowid, evidence_json, evidence_digest FROM review_compatibility').all()
+    for (const mode of ['bad_digest', 'changed_json', 'mismatched_result', 'mismatched_reason']) {
+      try {
+        const update = db.prepare('UPDATE review_compatibility SET evidence_json=?, evidence_digest=? WHERE rowid=?')
+        for (const row of attempts) {
+          const evidence = JSON.parse(row.evidence_json)
+          if (mode === 'changed_json') evidence.metrics = { corrupted: true }
+          if (mode === 'mismatched_result') evidence.result = 'unknown'
+          if (mode === 'mismatched_reason') evidence.reasonCode = 'FORGED'
+          const digest = mode === 'bad_digest' ? 'corrupted'
+            : mode === 'changed_json' ? row.evidence_digest : digestJson(evidence)
+          update.run(JSON.stringify(evidence), digest, row.rowid)
+        }
+        assert(store.listPapers().every(row => row.compatibility.result !== 'equal'), mode)
+        assert.notEqual(store.agentPaperStatus('paper-scale-0').compatibility.result, 'equal', mode)
+      } finally {
+        const restore = db.prepare('UPDATE review_compatibility SET evidence_json=?, evidence_digest=? WHERE rowid=?')
+        for (const row of attempts) restore.run(row.evidence_json, row.evidence_digest, row.rowid)
+      }
+    }
+    console.log('PASS lightweight list/probe reject corrupt evidence digest, changed JSON and recomputed but inconsistent result/reason')
     console.log(JSON.stringify({ check: 'review-list-scale', papers: 100, subjectBytesAtLeast: 365 * 1024,
       elapsedMs, probeMs, maxTimerDelayMs: delay, ticks }))
   } finally { db.close() }
