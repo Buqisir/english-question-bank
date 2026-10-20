@@ -304,7 +304,7 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 
 单个 JSON 文件读取限额独立为 64 MiB（超限 `JSON_FILE_TOO_LARGE`）；subject 序列化总限仍为 8 MiB（`SUBJECT_TOO_LARGE`），不截断消费内容。sidecar JSON 的 descriptor 同时保留原字节 SHA/长度与规范化 jsonDigest，读取所有原字节验证后才摘要化；该变化不是忽略未知 sidecar 或降低内容完整性检查。临时 snapshot 的单文件/总计 64/256 MiB 预算继续保留。
 
-真实卷上线前演练使用 `node scripts/rehearse-review-subject-backfill.mjs <外部证据目录> --papers-root <只读封存 papers 目录>`。证据目录含认证只读 GET 抓取的 list.json、papers/<paperId>/status.json、preview-api.json（consumption、asset/paper-asset.json）及 analysis-api.json（六个 analysis asset）。脚本重建外层 preview envelope 后，以真实 128 MiB/10 秒线程运行历史 extractor，当前 sealed subject 构建和比较在同进程执行；该演练不证明生产目标比较线程的 384 MiB/120 秒预算。逐卷 JSON 随执行写入外部 rehearsal-results/，并输出整表及计数；只读 HTTP 不暴露原 SQLite preview digest/隐藏 CAS 行，因此演练声明这一限制，不冒充生产事务核验。只有真实 404 可表示缺 preview，其他 HTTP 故障或缺抓取数据均是证据不可用；不以本地新投影补造重庆八中历史基线。真实卷数据与输出只放外部证据目录，不提交仓库。
+真实卷上线前演练使用 `node scripts/rehearse-review-subject-backfill.mjs <外部证据目录> --papers-root <只读封存 papers 目录>`。证据目录含认证只读 GET 抓取的 list.json、papers/<paperId>/status.json、preview-api.json（consumption、asset/paper-asset.json）及 analysis-api.json（六个 analysis asset）。脚本重建外层 preview envelope 后，以真实 128 MiB/10 秒线程运行历史 extractor，当前 sealed subject 构建和比较在同进程执行；该演练不证明生产目标比较线程的 384 MiB/120 秒预算。逐卷 JSON 随执行写入外部 rehearsal-results/，并输出整表及计数；只读 HTTP 不暴露原 SQLite preview digest/隐藏 CAS 行，因此演练声明这一限制，不冒充生产事务核验。真实 404 或 `409/IMPORT_REVIEW_PREVIEW_NOT_PREPARED` 表示缺 preview，其他 HTTP 故障或缺抓取数据均是证据不可用；不以本地新投影补造重庆八中历史基线。真实卷数据与输出只放外部证据目录，不提交仓库。
 
 成功只插入 `origin=stored_evidence` 与 `unknown/BACKFILL_PENDING`。每个 target 的普通扫描器看到新 subject 后，都会重新处理自己先前的 `MISSING_BASELINE`/缺证据结果；不会把本地 CLI 环境的 target 当成在线目标。不同/未知结果仍保守阻止批准和发布，现有内容 guard 不变。
 

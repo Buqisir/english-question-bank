@@ -13,12 +13,14 @@ import { computeReviewBuildIdentity } from '../server/import-review/reviewBuildI
 import { reviewBackfillDiagnostic } from '../server/import-review/reviewBackfillDiagnostic.mjs'
 
 const read = file => JSON.parse(readFileSync(file, 'utf8'))
+const missingPreview = response => response?.status === 404
+  || (response?.status === 409 && response.body?.code === 'IMPORT_REVIEW_PREVIEW_NOT_PREPARED')
 
 export function rehearsalSnapshot(status, previewApi, analysisApi) {
   const revision = status.latest
   const manifest = revision.manifest
   if ([previewApi?.consumption, previewApi?.['asset/paper-asset.json']]
-    .some(value => ![200, 404].includes(value?.status))) {
+    .some(value => value?.status !== 200 && !missingPreview(value))) {
     throw Object.assign(new Error('Captured preview endpoints are unavailable'), { reasonCode: 'EVIDENCE_UNAVAILABLE' })
   }
   const ready = previewApi?.consumption?.status === 200 && previewApi?.['asset/paper-asset.json']?.status === 200
@@ -63,15 +65,24 @@ export async function rehearseReviewSubjectBackfill(evidenceRoot, { papersRoot, 
     const papers = read(path.join(evidenceRoot, 'list.json')).body.papers
       .filter(paper => paper.state === 'awaiting_review' && paper.reviewKind === 'candidate'
         && (!paperId || paper.paperId === paperId))
+    if (!papers.length) throw new Error('No matching awaiting Candidate in the captured list')
     const targetBuildId = computeReviewBuildIdentity({ repoRoot: path.resolve(import.meta.dirname, '..') }).targetBuildId
     const results = []
     for (const paper of papers) {
       const captured = path.join(evidenceRoot, 'papers', paper.paperId)
       let result = { paperId: paper.paperId, paperName: paper.paperName, revisionId: paper.latestRevisionId, targetBuildId }
       try {
+        const previewApi = read(path.join(captured, 'preview-api.json'))
+        const core = [previewApi?.consumption, previewApi?.['asset/paper-asset.json']]
+        if (core.some(value => value?.status !== 200 && !missingPreview(value))) throw Object.assign(
+          new Error('Captured preview endpoints are unavailable'), { reasonCode: 'EVIDENCE_UNAVAILABLE' })
+        if (core.some(missingPreview)) throw Object.assign(new Error('Original preview is missing'),
+          { reasonCode: 'MISSING_BASELINE', pointer: '/consumer' })
+        if (!existsSync(path.join(captured, 'status.json'))) throw Object.assign(
+          new Error('Original revision/manifest status was not captured'),
+          { reasonCode: 'EVIDENCE_UNAVAILABLE', pointer: 'capture/status.json' })
         const status = read(path.join(captured, 'status.json'))
         if (status.status !== 200 || status.body.latest.id !== paper.latestRevisionId) throw new Error('Captured status identity mismatch')
-        const previewApi = read(path.join(captured, 'preview-api.json'))
         const analysisApi = existsSync(path.join(captured, 'analysis-api.json')) ? read(path.join(captured, 'analysis-api.json')) : null
         const value = rehearsalSnapshot(status.body, previewApi, analysisApi)
         const directory = path.join(papersRoot, paper.paperId)
