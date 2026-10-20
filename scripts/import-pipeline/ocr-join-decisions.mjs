@@ -59,9 +59,12 @@ function referenceCrossPageRule({ previous, current, geometry, roles, referenceC
   const fullLine = Number.isFinite(previous.right) && Number.isFinite(previousMargin?.right)
     && previous.right >= previousMargin.right - .06
   const currentMarginKnown = Number.isFinite(geometry.margin?.left) && Number.isFinite(current.left)
-  const unfinished = typeof previous.text === 'string' && previous.text.trim()
-    && !/[.!?。！？…]["'”’)\]）】]*\s*$/u.test(previous.text)
-    && !/[-‐—,:;，：；]["'”’)\]）】]*\s*$/u.test(previous.text)
+  // Inspect a copy: OCR may space out punctuation and nested closing marks.
+  // Only a word ending proves an unfinished tail; sentence stops, deferred
+  // punctuation (commas/hyphens etc.) and unknown suffixes all stay split.
+  const previousTail = typeof previous.text === 'string'
+    ? previous.text.replace(/[\s"'”’»)\]）】」』]+$/u, '') : ''
+  const unfinished = /[\p{L}\p{N}]$/u.test(previousTail)
   const proven = sameSource && pageRegion(before) && pageRegion(after)
     && before.locator.page === previous.page && after.locator.page === current.page
     && after.locator.page === before.locator.page + 1

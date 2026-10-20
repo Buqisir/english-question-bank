@@ -99,6 +99,45 @@ function fixture(pageLines) {
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
 const paragraphs = output => output.groups[0].essays.entries.flatMap(e => e.paragraphs)
 
+for (const [name, previousText] of [
+  ['space before closing quote', 'He said, “The project is finished. ”'],
+  ['closing guillemet', 'He said, «The project is finished.»'],
+  ['adjacent closing quote', 'He said, “The project is finished.”'],
+  ['spaces between nested closers', 'He said, “The project is finished! ” ）'],
+  ...['”', '’', '"', "'", '»', ')', ']', '）', '】', '」', '』'].map(closer =>
+    [`question mark before spaced ${closer}`, `The project is finished? ${closer}`]),
+  ...['-', '‐', '—', ',', ':', ';', '，', '：', '；'].map(mark =>
+    [`deferred punctuation ${mark} before spaced closers`, `We considered another method${mark} ” 】`]),
+  ['unknown trailing punctuation', 'The project is finished ※'],
+  ['unsupported closer', 'The project is finished. 〉'],
+  ['closers without a preceding word', '” 】'],
+]) test(`producer preserves split paragraphs and review for ${name}`, () => {
+  const nextText = 'iPhone users can try another method.'
+  const result = buildSourceReferences(...fixture([
+    [...heading, line(previousText, .7)],
+    [line(nextText, .2)],
+  ]))
+  const captured = paragraphs(result)
+  assert.deepEqual(captured.map(p => p.text), [previousText, nextText])
+  assert(captured.every(p => !p.continuationSources))
+  assert.deepEqual(captured.map(p => p.source.locator.page), [1, 2])
+  assert.deepEqual(result.review, [{ itemId: 'p2-i0',
+    issue: 'paragraph continues across a page turn; split into two located paragraphs' }])
+})
+
+test('producer inspects spaced closing suffixes without rewriting unfinished text', () => {
+  const previousText = 'He said, “We could learn ” ）'
+  const nextText = 'together and share our ideas.'
+  const result = buildSourceReferences(...fixture([
+    [...heading, line(previousText, .7)],
+    [line(nextText, .2)],
+  ]))
+  assert.equal(paragraphs(result).length, 1)
+  assert.equal(paragraphs(result)[0].text, `${previousText} ${nextText}`)
+  assert.deepEqual(paragraphs(result)[0].continuationSources.map(s => s.locator.page), [2])
+  assert.deepEqual(result.review, [])
+})
+
 test('producer groups regions by page and validates through the deployed reader schema and semantics', () => {
   const input = fixture([
     [...heading, line('We found a place where we could', .7), line('英语参考答案 第1页', .94)],
