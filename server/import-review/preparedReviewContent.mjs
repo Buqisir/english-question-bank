@@ -3,6 +3,7 @@ import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs
 import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 import { PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { loadCanonicalOnlyConsumers } from '../paper-canonical/publication.mjs'
+import { buildPaperImportOutputInventory } from '../paper-import/storage.mjs'
 import { buildNck1ReviewConsumption } from './revisionProjection.mjs'
 import { compareReviewPublicationContent } from './reviewPublicationContent.mjs'
 
@@ -19,13 +20,14 @@ function reject(reasonCode, differences = []) {
 export function assertPreparedReviewContent(snapshot) {
   try { return assertPreparedReviewContentInternal(snapshot) }
   catch (error) {
+    if (error.code === 'PAPER_IMPORT_OUTPUT_REJECTED') reject(error.reasonCode, error.differences)
     if (error.reasonCode) throw error
     reject('UNSUPPORTED_PUBLICATION_MAPPING', ['/prepared'])
   }
 }
 
 function assertPreparedReviewContentInternal({
-  subject, packageData, admission, projection, version, approvedIdentity, approvedManifest, publishReport,
+  subject, packageData, admission, projection, version, approvedIdentity, approvedManifest, publishReport, validationReport,
 }) {
   if (!subject) reject('MISSING_BASELINE')
   const { sealed } = admission
@@ -42,6 +44,10 @@ function assertPreparedReviewContentInternal({
     || typeof report.searchHref !== 'string' || typeof report.generatedAt !== 'string') {
     reject('UNSUPPORTED_PUBLICATION_MAPPING', ['/publishReport'])
   }
+  const outputInventory = buildPaperImportOutputInventory({
+    packageData, version, canonicalPublication: sealed, publishReport, validationReport,
+  })
+  const outputFiles = new Map(outputInventory.files.map(file => [file.path, file.bytes]))
   const baseline = subject.components.consumer.consumption
   let playback = null
   const derivativeFiles = Object.keys(sealed.playbackDerivatives || {})
@@ -98,12 +104,8 @@ function assertPreparedReviewContentInternal({
   // writer, so stale admission.consumers cannot conceal changed sealed bytes.
   const writtenConsumers = loadCanonicalOnlyConsumers({ ref, store: {
     readPublishedRefs: () => ({ current: ref, latest: ref }),
-    readSourceAsset: () => sealed.sourceAsset,
-    readVersionArtifact(_ref, file) {
-      if (file === 'paper-asset.json') return Buffer.from(JSON.stringify(packageData.paperAsset))
-      if (file === `canonical/canonical-paper-publication-v${manifest.authority.manifestVersion}.json`) return Buffer.from(JSON.stringify(manifest))
-      return sealed.artifacts[file] || sealed.sourceEvidence[file] || sealed.playbackDerivatives?.[file] || null
-    },
+    readSourceAsset: () => outputFiles.get('canonical/source-asset.bin'),
+    readVersionArtifact: (_ref, file) => outputFiles.get(file) ?? null,
   } })
   const expectedConsumers = Object.keys(consumerContractRefs).sort()
   if (!same(Object.keys(admission.consumers).sort(), expectedConsumers)) reject('UNSUPPORTED_PUBLICATION_MAPPING')
@@ -120,4 +122,5 @@ function assertPreparedReviewContentInternal({
         comparison.differences.map(pointer => `/${label}/${consumerId}${pointer}`))
     }
   }
+  return outputInventory
 }

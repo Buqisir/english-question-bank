@@ -1427,9 +1427,9 @@ function publishUniversalNck1ImportSnapshot({
     },
     withPreparedWrite(snapshot, write) {
       return withPreparedReviewSubject(snapshot, () => {
-        assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
+        const outputInventory = assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
           projection, approvedIdentity, approvedManifest })
-        return write()
+        return write(outputInventory)
       })
     },
     requireCompleteAnalyses: !projection.importProfile,
@@ -1677,7 +1677,7 @@ function publishPreparedPaperImport({
     generatedAt: new Date().toISOString(),
   }
 
-  if (validatePrepared) validatePrepared({ packageData, admission, version, publishReport })
+  if (validatePrepared) validatePrepared({ packageData, admission, version, publishReport, validationReport: publicValidation })
   if (onPrepared) {
     onPrepared({
       assetVersion: version,
@@ -1686,7 +1686,7 @@ function publishPreparedPaperImport({
     })
   }
 
-  const write = () => {
+  const write = (outputInventory = null) => {
   let writtenVersion = null
   let latestSwap = null
   let dbCommitted = false
@@ -1698,6 +1698,7 @@ function publishPreparedPaperImport({
       publishReport,
       version,
       canonicalPublication: admission.sealed,
+      outputInventory,
       forceFailureAt: failurePoint,
       beforeVersionCommit({ tempDir, versionName }) {
         beginPaperImportPublish({
@@ -1871,7 +1872,7 @@ function publishPreparedPaperImport({
     throw error
   }
   }
-  return withPreparedWrite ? withPreparedWrite({ packageData, admission, version, publishReport }, write) : write()
+  return withPreparedWrite ? withPreparedWrite({ packageData, admission, version, publishReport, validationReport: publicValidation }, write) : write()
 }
 
 export function rollbackPaperImportPublication({

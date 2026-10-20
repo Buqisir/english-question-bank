@@ -11,6 +11,7 @@ import {
 import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { assertListeningPlaybackUi, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { loadBoundPaperPaginationPlan } from './paginationPlan.mjs'
 import { SOURCE_REFERENCES_FILE } from './sourceReferences.mjs'
 import { PRODUCT_MANIFEST, readFrozenProducts } from './frozenProducts.mjs'
@@ -153,7 +154,7 @@ function sha256(buffer) {
   return createHash('sha256').update(buffer).digest('hex')
 }
 
-function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
+function collectDocxSourceCapture(sourceDocx, paperId, add, addJson) {
   const capture = sourceDocx.mediaCapture
   if (!capture) return
   if (capture.sourceSha256 !== sourceDocx.sha256) {
@@ -170,8 +171,7 @@ function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
       throw new Error(`DOCX source image digest mismatch: ${fileName}`)
     }
     const relativePath = path.join('docx-media', fileName)
-    mkdirSync(path.dirname(path.join(rawDir, relativePath)), { recursive: true })
-    writeFileSync(path.join(rawDir, relativePath), image.buffer)
+    add(`raw/${relativePath}`, image.buffer, 'sourceDocx.mediaCapture.embeddedImages')
     embeddedImages.push({
       fileName,
       mediaType: image.mediaType,
@@ -188,10 +188,7 @@ function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
     ) {
       throw new Error('DOCX source shape capture digest mismatch')
     }
-    writeFileSync(
-      path.join(rawDir, 'docx-shapes.pdf'),
-      capture.shapeCapture.buffer,
-    )
+    add('raw/docx-shapes.pdf', capture.shapeCapture.buffer, 'sourceDocx.mediaCapture.shapeCapture')
     shapeCapture = {
       fileName: 'docx-shapes.pdf',
       mediaType: 'application/pdf',
@@ -201,7 +198,6 @@ function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
       figures: [],
     }
 
-    const figuresDir = path.join(versionDir, 'figures')
     const manifestFigures = []
     const usedFigureIds = new Set()
     const usedFileNames = new Set()
@@ -220,8 +216,7 @@ function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
       }
       usedFileNames.add(fileName)
       usedFigureIds.add(figure.figureId)
-      mkdirSync(figuresDir, { recursive: true })
-      writeFileSync(path.join(figuresDir, fileName), figure.buffer)
+      add(`figures/${fileName}`, figure.buffer, 'sourceDocx.mediaCapture.figures')
       const manifestFigure = {
         figureId: figure.figureId,
         groupId: figure.groupId,
@@ -248,21 +243,21 @@ function writeDocxSourceCapture(versionDir, rawDir, sourceDocx, paperId) {
     if (manifestFigures.length === 0) {
       throw new Error('DOCX source shape capture has no cropped figures')
     }
-    writeJson(path.join(figuresDir, 'manifest.json'), {
+    addJson('figures/manifest.json', {
       schemaVersion: 'paper-figures-manifest-v1',
       paperId,
       sourceSha256: sourceDocx.sha256,
       figures: manifestFigures,
-    })
+    }, 'sourceDocx.mediaCapture.figuresManifest')
   }
 
-  writeJson(path.join(rawDir, 'docx-source-capture.json'), {
+  addJson('raw/docx-source-capture.json', {
     schemaVersion: 'docx-source-media-capture-v1',
     sourceFileName: sourceDocx.fileName,
     sourceSha256: sourceDocx.sha256,
     embeddedImages,
     shapeCapture,
-  })
+  }, 'sourceDocx.mediaCapture.manifest')
 }
 
 function makeVersionedArtifacts(packageData, version) {
@@ -356,6 +351,113 @@ function makeVersionedArtifacts(packageData, version) {
     normalizedGroupsSidecar,
     paginationPlan,
   }
+}
+
+function outputRejected(reasonCode, relativePath) {
+  throw Object.assign(new Error(`Publication output rejected: ${reasonCode}: ${relativePath}`), {
+    code: 'PAPER_IMPORT_OUTPUT_REJECTED', reasonCode, differences: [relativePath],
+  })
+}
+
+// Pure, complete write plan. Both Review comparison and the writer use these
+// exact paths, origins and copied bytes, including generated compatibility files.
+export function buildPaperImportOutputInventory({
+  packageData, version, validationReport, publishReport, canonicalPublication = null,
+}) {
+  const artifacts = makeVersionedArtifacts(packageData, version)
+  const files = []
+  const paths = new Map()
+  function add(relativePath, bytes, source) {
+    if (typeof relativePath !== 'string' || relativePath.includes('\\') || relativePath.includes('\0')
+      || relativePath.split('/').some(part => !part || part === '.' || part === '..')) {
+      outputRejected('INVALID_PUBLICATION_OUTPUT_PATH', String(relativePath))
+    }
+    // Also reject aliases on case-insensitive, Unicode-normalizing filesystems.
+    const key = relativePath.normalize('NFC').toLowerCase()
+    if ([...paths.keys()].some(existing => existing === key
+      || existing.startsWith(`${key}/`) || key.startsWith(`${existing}/`))) {
+      outputRejected('PUBLICATION_OUTPUT_PATH_CONFLICT', relativePath)
+    }
+    if (!(bytes instanceof Uint8Array)) outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', relativePath)
+    const copy = Buffer.from(bytes)
+    paths.set(key, source)
+    files.push({ path: relativePath, source, bytes: copy, byteLength: copy.length, sha256: `sha256:${sha256(copy)}` })
+  }
+  const addJson = (file, value, source) => add(file, Buffer.from(`${JSON.stringify(value, null, 2)}\n`), source)
+  if (packageData.sourceDocx) {
+    add(`raw/${packageData.sourceDocx.fileName}`, packageData.sourceDocx.buffer, 'sourceDocx')
+    collectDocxSourceCapture(packageData.sourceDocx, packageData.paperAsset.paper.paperId, add, addJson)
+  }
+  addJson('paper-asset.json', artifacts.paperAsset, 'package.paperAsset')
+  addJson('answer-key.json', artifacts.answerKey, 'package.answerKey')
+  for (const [key, file] of [
+    ['paragraphSummariesBytes', paragraphSummariesFileName],
+    ['publicSearchMetadataBytes', publicSearchMetadataFileName],
+    ['sourceReferencesBytes', SOURCE_REFERENCES_FILE],
+  ]) if (artifacts[key]) add(file, artifacts[key], `package.${key}`)
+  if (packageData.frozenProducts) {
+    for (const [file, bytes] of Object.entries(packageData.frozenProducts.bytes)) add(file, bytes, 'package.frozenProducts')
+  }
+  addJson('import-meta.json', artifacts.importMeta, 'package.importMeta')
+  if (artifacts.paginationPlan) addJson('pagination-plan.json', artifacts.paginationPlan, 'package.paginationPlan')
+  for (const [key, file] of analysisArtifacts) {
+    if (artifacts[key]) addJson(`analyses/${file}`, artifacts[key], `package.${key}`)
+  }
+  addJson(PAPER_NORMALIZED_GROUPS_FILE_NAME, artifacts.normalizedGroupsSidecar, 'generated.normalizedGroups')
+  addJson('validation-report.json', validationReport, 'generated.validationReport')
+  addJson('publish-report.json', publishReport, 'generated.publishReport')
+  if (canonicalPublication) {
+    const sealed = canonicalPublication
+    const { manifest } = sealed
+    add('canonical/source-asset.bin', sealed.sourceAsset, 'sealed.sourceAsset')
+    for (const collection of ['artifacts', 'sourceEvidence', 'playbackDerivatives']) {
+      const values = sealed[collection] ?? (collection === 'playbackDerivatives' ? {} : null)
+      if (!values || typeof values !== 'object' || Array.isArray(values)) {
+        outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', collection)
+      }
+      for (const [file, bytes] of Object.entries(values)) add(file, bytes, `sealed.${collection}`)
+    }
+    addJson(`canonical/canonical-paper-publication-v${manifest.authority.manifestVersion}.json`,
+      manifest, 'sealed.manifest')
+    const bound = (file, descriptor) => {
+      if (!descriptor || file.sha256 !== descriptor.sha256 || file.byteLength !== descriptor.byteLength) {
+        outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', file.path)
+      }
+    }
+    const checkCollection = (collection, descriptors) => {
+      if (!Array.isArray(descriptors)) outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', collection)
+      const declared = new Map()
+      for (const descriptor of descriptors) {
+        if (typeof descriptor?.relativePath !== 'string' || declared.has(descriptor.relativePath)) {
+          outputRejected('PUBLICATION_OUTPUT_PATH_CONFLICT', descriptor?.relativePath || collection)
+        }
+        declared.set(descriptor.relativePath, descriptor)
+      }
+      const actual = files.filter(file => file.source === `sealed.${collection}`)
+      for (const file of actual) {
+        if (!declared.has(file.path)) outputRejected('UNDECLARED_PUBLICATION_OUTPUT', file.path)
+        bound(file, declared.get(file.path))
+        declared.delete(file.path)
+      }
+      if (declared.size) outputRejected('MISSING_PUBLICATION_OUTPUT', declared.keys().next().value)
+    }
+    checkCollection('artifacts', manifest.artifacts)
+    checkCollection('sourceEvidence', [
+      ...manifest.sourceEvidence,
+      ...(manifest.listeningAudio ? [manifest.listeningAudio] : []),
+    ])
+    const source = files.find(file => file.source === 'sealed.sourceAsset')
+    if (source.sha256 !== manifest.sourceAssetDigest) outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', source.path)
+    for (const file of files.filter(file => file.source === 'sealed.playbackDerivatives')) {
+      if (file.path !== PUBLISHED_LISTENING_PLAYBACK_UI_FILE) outputRejected('UNDECLARED_PUBLICATION_OUTPUT', file.path)
+      try {
+        const { digest, ...value } = JSON.parse(file.bytes)
+        if (!manifest.listeningAudio || digest !== digestJson(value)) throw new Error('Invalid playback commitment')
+        assertListeningPlaybackUi(value, manifest.listeningAudio.sha256, manifest.listeningAudio.durationSeconds)
+      } catch { outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', file.path) }
+    }
+  }
+  return { artifacts, files }
 }
 
 export function assertPaperImportPaginationPlan({ baseDir, packageData, version = null }) {
@@ -463,128 +565,59 @@ export function writePaperImportVersion({
   publishReport,
   version,
   canonicalPublication = null,
+  outputInventory = null,
   forceFailureAt = null,
   beforeVersionCommit = null,
 }) {
+  // Validate the complete namespace before creating even a staging directory.
+  const derived = buildPaperImportOutputInventory({
+    packageData, validationReport, publishReport, version, canonicalPublication,
+  })
+  if (outputInventory) {
+    const expected = derived.files
+    const actual = outputInventory.files
+    if (!Array.isArray(actual) || actual.length !== expected.length
+      || expected.some((file, index) => {
+        const checked = actual[index]
+        return !checked || checked.path !== file.path || checked.source !== file.source
+          || checked.sha256 !== file.sha256 || checked.byteLength !== file.byteLength
+          || !(checked.bytes instanceof Uint8Array) || !file.bytes.equals(checked.bytes)
+      })) outputRejected('PUBLICATION_OUTPUT_INVENTORY_CHANGED', '/outputInventory')
+  }
+  const { artifacts } = derived
+  const files = (outputInventory || derived).files
   const paperId = packageData.paperAsset.paper.paperId
   const paperDir = path.join(paperAssetsDir, paperId)
   const versionsDir = path.join(paperDir, 'versions')
   mkdirSync(versionsDir, { recursive: true })
-
   const versionName = `v${version}`
   const versionDir = path.join(versionsDir, versionName)
-  if (existsSync(versionDir)) {
-    throw new Error(`${paperId} ${versionName} already exists`)
-  }
-
+  if (existsSync(versionDir)) throw new Error(`${paperId} ${versionName} already exists`)
   const tempDir = path.join(versionsDir, `.tmp-${versionName}-${randomUUID()}`)
   mkdirSync(tempDir, { recursive: true })
 
-  const artifacts = makeVersionedArtifacts(packageData, version)
   try {
-    if (packageData.sourceDocx) {
-      const rawDir = path.join(tempDir, 'raw')
-      mkdirSync(rawDir, { recursive: true })
-      writeFileSync(path.join(rawDir, packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
-      writeDocxSourceCapture(tempDir, rawDir, packageData.sourceDocx, paperId)
-    }
-    writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
-    if (forceFailureAt === 'version-write') {
-      throw new Error('Forced version-write failure')
-    }
-    writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
-    if (artifacts.paragraphSummariesBytes) {
-      writeFileSync(path.join(tempDir, paragraphSummariesFileName), artifacts.paragraphSummariesBytes)
-    }
-    if (artifacts.publicSearchMetadataBytes) {
-      writeFileSync(path.join(tempDir, publicSearchMetadataFileName), artifacts.publicSearchMetadataBytes)
-    }
-    if (artifacts.sourceReferencesBytes) {
-      writeFileSync(path.join(tempDir, SOURCE_REFERENCES_FILE), artifacts.sourceReferencesBytes)
-    }
-    if (packageData.frozenProducts) {
-      for (const [relativePath, bytes] of Object.entries(packageData.frozenProducts.bytes)) {
-        const target = path.join(tempDir, relativePath)
-        mkdirSync(path.dirname(target), { recursive: true })
-        writeFileSync(target, bytes, { flag: 'wx' })
+    let corrupted = false
+    for (const file of files) {
+      if (file.source === 'generated.normalizedGroups' && forceFailureAt === 'sidecar-write') {
+        throw new Error('Forced sidecar-write failure')
       }
-      if (readFrozenProducts(tempDir, { required: true }).digest !== packageData.pdfProductApproval?.manifestDigest) {
-        throw new Error(`${PRODUCT_MANIFEST} differs from the approved product commitment`)
+      const target = path.join(tempDir, file.path)
+      mkdirSync(path.dirname(target), { recursive: true })
+      // The explicit failure hook corrupts only an already inventoried artifact.
+      const corrupt = forceFailureAt === 'canonical-stage-corrupt'
+        && file.source === 'sealed.artifacts' && !corrupted
+      writeFileSync(target, corrupt ? '{"corrupt":true}\n' : file.bytes, { flag: 'wx' })
+      if (corrupt) corrupted = true
+      if (file.path === 'paper-asset.json' && forceFailureAt === 'version-write') {
+        throw new Error('Forced version-write failure')
       }
     }
-    writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
-    if (artifacts.paginationPlan) {
-      writeJson(path.join(tempDir, 'pagination-plan.json'), artifacts.paginationPlan)
+    if (packageData.frozenProducts
+      && readFrozenProducts(tempDir, { required: true }).digest !== packageData.pdfProductApproval?.manifestDigest) {
+      throw new Error(`${PRODUCT_MANIFEST} differs from the approved product commitment`)
     }
-    if (artifacts.readingAnalysis) {
-      writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
-    }
-    if (artifacts.scAnalysis) {
-      writeJson(path.join(tempDir, 'analyses', sevenChoicesAnalysisFileName), artifacts.scAnalysis)
-    }
-    if (artifacts.clozeAnalysis) {
-      writeJson(path.join(tempDir, 'analyses', clozeAnalysisFileName), artifacts.clozeAnalysis)
-    }
-    if (artifacts.grammarFillAnalysis) {
-      writeJson(path.join(tempDir, 'analyses', grammarFillAnalysisFileName), artifacts.grammarFillAnalysis)
-    }
-    if (artifacts.writingAnalysis) {
-      writeJson(path.join(tempDir, 'analyses', writingAnalysisFileName), artifacts.writingAnalysis)
-    }
-    if (artifacts.listeningAnalysis) {
-      writeJson(path.join(tempDir, 'analyses', listeningAnalysisFileName), artifacts.listeningAnalysis)
-    }
-    if (forceFailureAt === 'sidecar-write') {
-      throw new Error('Forced sidecar-write failure')
-    }
-    writeJson(
-      path.join(tempDir, PAPER_NORMALIZED_GROUPS_FILE_NAME),
-      artifacts.normalizedGroupsSidecar,
-    )
-    writeJson(path.join(tempDir, 'validation-report.json'), validationReport)
-    writeJson(path.join(tempDir, 'publish-report.json'), publishReport)
-    if (canonicalPublication) {
-      const canonicalDir = path.join(tempDir, 'canonical')
-      mkdirSync(canonicalDir, { recursive: true })
-      writeFileSync(
-        path.join(canonicalDir, 'source-asset.bin'),
-        canonicalPublication.sourceAsset,
-      )
-      for (const [relativePath, bytes] of Object.entries(
-        canonicalPublication.artifacts,
-      )) {
-        const target = path.join(tempDir, relativePath)
-        mkdirSync(path.dirname(target), { recursive: true })
-        writeFileSync(target, bytes)
-      }
-      for (const [relativePath, bytes] of Object.entries(
-        canonicalPublication.sourceEvidence,
-      )) {
-        const target = path.join(tempDir, relativePath)
-        mkdirSync(path.dirname(target), { recursive: true })
-        writeFileSync(target, bytes)
-      }
-      for (const [relativePath, bytes] of Object.entries(canonicalPublication.playbackDerivatives || {})) {
-        const target = path.join(tempDir, relativePath)
-        mkdirSync(path.dirname(target), { recursive: true })
-        writeFileSync(target, bytes)
-      }
-      writeJson(
-        path.join(
-          canonicalDir,
-          `canonical-paper-publication-v${canonicalPublication.manifest.authority.manifestVersion}.json`,
-        ),
-        canonicalPublication.manifest,
-      )
-      if (forceFailureAt === 'canonical-stage-corrupt') {
-        const corruptPath = Object.keys(canonicalPublication.artifacts)[0]
-        writeFileSync(path.join(tempDir, corruptPath), '{"corrupt":true}\n')
-      }
-    }
-
-    if (beforeVersionCommit) {
-      beforeVersionCommit({ tempDir, versionDir, versionName })
-    }
+    if (beforeVersionCommit) beforeVersionCommit({ tempDir, versionDir, versionName })
     renameSync(tempDir, versionDir)
   } catch (error) {
     if (existsSync(tempDir)) rmSync(tempDir, { recursive: true, force: true })

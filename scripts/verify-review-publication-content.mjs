@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
+import { deserialize } from 'node:v8'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
@@ -10,6 +11,7 @@ import { createImportReviewStore, reviewBundleDigest } from '../server/import-re
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
+import { buildPaperImportOutputInventory, writePaperImportVersion } from '../server/paper-import/storage.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
@@ -25,6 +27,19 @@ else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
 const root = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-publication-'))
 const json = (file, value) => writeFileSync(file, JSON.stringify(value))
 const readJson = file => JSON.parse(readFileSync(file))
+function outputFiles(directory, prefix = '') {
+  return readdirSync(path.join(directory, prefix), { withFileTypes: true }).flatMap(entry => {
+    const file = `${prefix}${entry.name}`
+    return entry.isDirectory() ? outputFiles(directory, `${file}/`) : [file]
+  }).sort()
+}
+function assertSameOutput(expectedDir, actualDir) {
+  const files = outputFiles(expectedDir)
+  assert.deepEqual(outputFiles(actualDir), files)
+  for (const file of files) assert.ok(readFileSync(path.join(expectedDir, file))
+    .equals(readFileSync(path.join(actualDir, file))), `output bytes differ: ${file}`)
+  return files.length
+}
 function changeText(value) {
   if (value?.kind === 'text' && typeof value.text === 'string') { value.text += ' Changed question.'; return true }
   return value && typeof value === 'object' && Object.values(value).some(changeText)
@@ -33,6 +48,21 @@ let checks = 0
 const pass = label => { checks++; console.log(`PASS ${label}`) }
 
 try {
+  // Optional differential acceptance against exact inputs and files captured
+  // from the pre-fix writer, including its original report timestamps/receipts.
+  const oldOutput = process.env.EQB_REVIEW_PUBLICATION_OUTPUT_BASELINE
+  if (oldOutput) {
+    const input = deserialize(readFileSync(path.join(oldOutput, 'input.bin')))
+    const inventory = buildPaperImportOutputInventory(input)
+    const oldFiles = outputFiles(path.join(oldOutput, 'files'))
+    assert.deepEqual(inventory.files.map(file => file.path).sort(), oldFiles)
+    for (const file of inventory.files) assert.ok(file.bytes.equals(
+      readFileSync(path.join(oldOutput, 'files', file.path))), `inventory differs from old writer: ${file.path}`)
+    const written = writePaperImportVersion({ ...input, outputInventory: inventory,
+      paperAssetsDir: path.join(root, 'baseline-replay') })
+    const count = assertSameOutput(path.join(oldOutput, 'files'), written.versionDir)
+    pass(`pre-fix writer and shared inventory have identical ${count} paths and bytes`)
+  }
   // Real native NCK1 profile, all six analysis families, listening audio,
   // authoritative source references, explicit header and four frozen products.
   // Only invented source text is used; no browser, OCR, ASR or AI service.
@@ -128,12 +158,23 @@ try {
     } finally { db.close() }
   }
   const rejected = (label, mutate, reason = 'SUBJECT_CHANGED') => {
+    const bankRows = () => {
+      const db = openDatabase()
+      try {
+        return Object.fromEntries(db.prepare("SELECT name FROM sqlite_schema WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name")
+          .all().map(({ name }) => [name, db.prepare(`SELECT COUNT(*) AS n FROM "${name.replaceAll('"', '""')}"`).get().n])
+          .filter(([, count]) => count > 0))
+      } finally { db.close() }
+    }
+    const beforeBank = bankRows()
     let mutated = false
     assert.throws(() => publish(label, snapshot => { mutate(snapshot); mutated = true }), error => {
       assert.equal(error.reasonCode, reason, JSON.stringify({ code: error.code, reason: error.reasonCode, differences: error.differences }))
       return true
     })
     assert.equal(mutated, true, 'the rejection must follow the deliberate mutation, not a failing normal preflight')
+    assert.deepEqual(bankRows(), beforeBank, 'rejection must not insert any formal bank rows')
+    assert.equal(existsSync(path.join(root, label)), false, 'rejection must precede staging, journal and version writes')
     assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM review_subject').get().n), 1)
     pass(label)
   }
@@ -171,6 +212,30 @@ try {
     packageData.fileStorage = structuredClone(packageData.fileStorage)
     delete packageData.fileStorage.files['products/economy8.pdf']
   }, 'UNSUPPORTED_PUBLICATION_MAPPING')
+  rejected('Astra sourceEvidence cannot overwrite the reviewed answer key', ({ admission, packageData }) => {
+    admission.sealed.sourceEvidence['answer-key.json'] = Buffer.from(JSON.stringify({
+      ...packageData.answerKey, answers: { unreviewed: 'B' },
+    }))
+  }, 'PUBLICATION_OUTPUT_PATH_CONFLICT')
+  rejected('sealed collections cannot share a path', ({ admission }) => {
+    const [file, bytes] = Object.entries(admission.sealed.artifacts)[0]
+    admission.sealed.sourceEvidence[file] = Buffer.from(bytes)
+  }, 'PUBLICATION_OUTPUT_PATH_CONFLICT')
+  rejected('sealed artifacts cannot add an undeclared output', ({ admission }) => {
+    admission.sealed.artifacts['canonical/unreviewed.json'] = Buffer.from('{}')
+  }, 'UNDECLARED_PUBLICATION_OUTPUT')
+  rejected('source evidence cannot add an undeclared output', ({ admission }) => {
+    admission.sealed.sourceEvidence['source-evidence/unreviewed.bin'] = Buffer.from('unreviewed')
+  }, 'UNDECLARED_PUBLICATION_OUTPUT')
+  rejected('playback derivatives cannot add an undeclared output', ({ admission }) => {
+    admission.sealed.playbackDerivatives['listening/unreviewed.json'] = Buffer.from('{}')
+  }, 'UNDECLARED_PUBLICATION_OUTPUT')
+  rejected('sealed artifact bytes must match their descriptor', ({ admission }) => {
+    admission.sealed.artifacts[Object.keys(admission.sealed.artifacts)[0]] = Buffer.from('{}')
+  }, 'PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH')
+  rejected('declared source evidence cannot be omitted', ({ admission }) => {
+    delete admission.sealed.sourceEvidence[Object.keys(admission.sealed.sourceEvidence)[0]]
+  }, 'MISSING_PUBLICATION_OUTPUT')
   const published = publish('normal-envelope')
   assert.equal(published.ok, true)
   assert.equal(published.publish.assetVersion, 1)
