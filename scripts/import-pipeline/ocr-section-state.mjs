@@ -9,21 +9,30 @@ const WRITING_SCOPE = Object.freeze({
   ENDED: 'writing-ended',
 })
 
+function selectTask(scope, sections, taskType, reuse = false) {
+  scope.current = (reuse && sections.get(taskType)) || { taskType, lines: [] }
+  sections.set(taskType, scope.current)
+  scope.phase = WRITING_SCOPE.TASK
+}
+
 export function createWritingScope(sections) {
   return {
     phase: WRITING_SCOPE.OUTSIDE,
+    partPhase: WRITING_SCOPE.OUTSIDE,
     current: null,
-    get inWriting() { return this.phase !== WRITING_SCOPE.OUTSIDE && !this.ended },
+    get inWriting() { return this.partPhase === WRITING_SCOPE.PART },
     get ended() { return this.phase === WRITING_SCOPE.ENDED },
     startTask(taskType, { reuse = false } = {}) {
-      this.current = (reuse && sections.get(taskType)) || { taskType, lines: [] }
-      sections.set(taskType, this.current)
-      this.phase = WRITING_SCOPE.TASK
+      selectTask(this, sections, taskType, reuse)
+      this.partPhase = WRITING_SCOPE.PART
     },
     enterPart(writing, trailingTask) {
       this.current = null
       this.phase = writing ? WRITING_SCOPE.PART : WRITING_SCOPE.OUTSIDE
-      if (trailingTask) this.startTask(trailingTask)
+      this.partPhase = this.phase
+      // Raw part recognition and the NFKC trailing-section helper can disagree.
+      // Selecting that task must preserve the raw heading's writing-part state.
+      if (trailingTask) selectTask(this, sections, trailingTask)
     },
     omit() {
       // Omission is an observation, not a terminal veto on later source text.
@@ -33,7 +42,7 @@ export function createWritingScope(sections) {
       }
       this.phase = this.current ? WRITING_SCOPE.OMITTED_TASK : WRITING_SCOPE.OMITTED_PART
     },
-    end() { this.phase = WRITING_SCOPE.ENDED },
+    end() { this.phase = this.partPhase = WRITING_SCOPE.ENDED },
   }
 }
 
