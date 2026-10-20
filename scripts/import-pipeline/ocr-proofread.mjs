@@ -37,9 +37,10 @@ import { planHeadingRepairs } from './ocr-heading-repair.mjs'
 import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs'
 import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { LINE_ROLE_RULES, matchesLineRole, firstLineRole, speakerLabel,
+import { LINE_ROLE_RULES, matchesLineRole, firstLineRole,
   inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches } from './ocr-line-roles.mjs'
 import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
+import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -398,7 +399,7 @@ function itemEdges(item, lines, label) {
 // onto the next printed line is one paragraph; joining keeps the rendered transcript from
 // breaking where the source page happened to wrap. A join needs typographic proof: the next
 // line's first word would not have fit after the previous line within the same column.
-export function joinTranscriptTurns(items, lines, state, label) {
+export function joinTranscriptTurns(items, lines, state, label, sourceLocation = { label }) {
   const physicalFacts = new Map()
   const factsForWords = words => {
     const key = words.map(word => word.number).join(',')
@@ -426,7 +427,12 @@ export function joinTranscriptTurns(items, lines, state, label) {
   for (const [index, sourceItem] of items.entries()) {
     // Proofreaders can restore a missing printed gloss line inside one item.
     const noteStart = matchesLineRole('transcript.note-start', factsForItem(sourceItem), state)
-    const item = noteStart && sourceItem.text.includes('\n') ? {
+    const inlineDecision = decideLineJoin({
+      content: 'inline-annotation', previous: null, current: factsForItem(sourceItem),
+      geometry: { unit: 'text' }, roles: { noteStart, multiline: noteStart && sourceItem.text.includes('\n') },
+      location: { before: null, after: { ...sourceLocation, itemIndex: index, lines: sourceItem.lines, words: sourceItem.words } },
+    })
+    const item = inlineDecision.resolution === 'join' ? {
       ...sourceItem, text: joinLines(sourceItem.text.split(/\n/u).map((line) => line.trim())),
       ...(sourceItem.emphasis ? { emphasis: sourceItem.emphasis.map((entry) => ({
         ...entry, text: joinLines(entry.text.split(/\n/u).map((line) => line.trim())),
@@ -447,60 +453,46 @@ export function joinTranscriptTurns(items, lines, state, label) {
     const note = matchesLineRole('transcript.note', facts, { inTranscript: state.inTranscript, noteStart, previousNote })
     const noteContinuation = matchesLineRole('transcript.note-continuation', facts,
       { note, previousNote, noteStart, previousFacts })
-    if (matchesLineRole('transcript.turn-continuation', facts, { speech, previousSpeech, noteContinuation })) {
-      const before = geometryFor(previous, `${label} item ${index}`)
-      const after = geometryFor(item, `${label} item ${index + 1}`)
-      if (before && after) {
-        const last = before.lastFacts.box
-        const firstFacts = after.firstFacts
-        const column = rights.filter((box) => box.right > last.left && box.left < last.right
-          && box.left >= last.left - last.height * 3).map((box) => box.right).sort((left, right) => left - right)
-        const columnRight = column.length ? column[Math.floor((column.length - 1) * 0.9)] : last.right
-        // Dialogue/gloss continuations may hang after M:/W: or a note bullet. A monologue's
-        // genuine first-line indent (or an extra indent within a turn) remains a boundary.
-        const noteBullet = matchesLineRole('transcript.note-bullet', previousFacts, { noteContinuation })
-        const hanging = matchesLineRole('transcript.hanging', previousFacts,
-          { noteBullet, singlePhysicalLine: before.first === before.last })
-        const speechWords = before.firstFacts.sortedWords
-        let labelWords = hanging ? noteBullet ? 1
-          : speakerLabel(previous.text).replace(/[:：]$/u, '').trim().split(/\s+/u).length : 0
-        // A confirmed M: may cover a separately recognized colon (also OCR-read as ;).
-        if (matchesLineRole('transcript.split-colon', computeLineFacts({ text: speechWords[labelWords]?.text ?? '' }), { hanging })) labelWords += 1
-        const speechLeft = hanging
-          ? speechWords[labelWords]?.box.left ?? last.left
-          : last.left
-        if (matchesLineRole('transcript.wrap', firstFacts, { speechLeft, last, columnRight })) {
-          const glue = noteContinuation
-            ? joinLines([previous.text, text]).slice(previous.text.length, -text.length)
-            : previousFacts.endsEnglishHyphen ? '' : ' '
-          const joinedText = `${previous.text}${glue}${text}`
-          const offset = previous.text.length + glue.length
-          const emphasis = [
-            ...(emphasisRanges(previous, label) || []),
-            ...(emphasisRanges(item, label) || []).map((range) =>
-              ({ ...range, start: range.start + offset, end: range.end + offset })),
-          ].map(({ start, end, marks }) => {
-            const text = joinedText.slice(start, end)
-            let occurrence = 0
-            let at = -1
-            do { at = joinedText.indexOf(text, at + 1); occurrence += 1 } while (at < start && at !== -1)
-            return { text, marks, occurrence }
-          })
-          out[out.length - 1] = {
-            ...previous,
-            text: joinedText,
-            ...(emphasis.length ? { emphasis } : {}),
-            ...(previous.lines || item.lines ? { lines: [previous.lines, item.lines].filter(Boolean).join(',') } : {}),
-            ...(previous.words || item.words ? { words: [previous.words, item.words].filter(Boolean).join(',') } : {}),
-            ...(previous.uncertain || item.uncertain
-              ? { uncertain: [previous.uncertain, item.uncertain].filter(Boolean).join('；') } : {}),
-            ...(previous.reason || item.reason
-              ? { reason: [previous.reason, item.reason].filter(Boolean).join('；') } : {}),
-          }
-          joins += 1
-          continue
-        }
+    const turnContinuation = matchesLineRole('transcript.turn-continuation', facts, { speech, previousSpeech, noteContinuation })
+    const decision = decideLineJoin({
+      content: noteContinuation ? 'annotation' : 'transcript', previous: previousFacts, current: facts,
+      geometry: { unit: 'pixels', rights,
+        before: turnContinuation ? geometryFor(previous, `${label} item ${index}`) : null,
+        after: turnContinuation ? geometryFor(item, `${label} item ${index + 1}`) : null },
+      roles: { turnContinuation, noteContinuation },
+      location: { before: previous ? { ...sourceLocation, lines: previous.lines, words: previous.words } : null,
+        after: { ...sourceLocation, itemIndex: index, lines: item.lines, words: item.words } },
+    })
+    if (decision.resolution === 'join') {
+      const glue = noteContinuation
+        ? joinLines([previous.text, text]).slice(previous.text.length, -text.length)
+        : previousFacts.endsEnglishHyphen ? '' : ' '
+      const joinedText = `${previous.text}${glue}${text}`
+      const offset = previous.text.length + glue.length
+      const emphasis = [
+        ...(emphasisRanges(previous, label) || []),
+        ...(emphasisRanges(item, label) || []).map((range) =>
+          ({ ...range, start: range.start + offset, end: range.end + offset })),
+      ].map(({ start, end, marks }) => {
+        const text = joinedText.slice(start, end)
+        let occurrence = 0
+        let at = -1
+        do { at = joinedText.indexOf(text, at + 1); occurrence += 1 } while (at < start && at !== -1)
+        return { text, marks, occurrence }
+      })
+      out[out.length - 1] = {
+        ...previous,
+        text: joinedText,
+        ...(emphasis.length ? { emphasis } : {}),
+        ...(previous.lines || item.lines ? { lines: [previous.lines, item.lines].filter(Boolean).join(',') } : {}),
+        ...(previous.words || item.words ? { words: [previous.words, item.words].filter(Boolean).join(',') } : {}),
+        ...(previous.uncertain || item.uncertain
+          ? { uncertain: [previous.uncertain, item.uncertain].filter(Boolean).join('；') } : {}),
+        ...(previous.reason || item.reason
+          ? { reason: [previous.reason, item.reason].filter(Boolean).join('；') } : {}),
       }
+      joins += 1
+      continue
     }
     out.push(item)
     previousSpeech = speech
@@ -675,7 +667,8 @@ export function* buildTranscriptJoinDocuments({ documents, trace, drafts, only =
         let draftItems = sourceItems
         let joins = 0
         if (answerBearing) {
-          const joined = joinTranscriptTurns(observedItems, lines, transcriptState, label)
+          const joined = joinTranscriptTurns(observedItems, lines, transcriptState, label,
+            { label, documentId: document.documentId, page: tracePage.page })
           draftItems = joined.items
           joins = joined.joins
         }
@@ -1075,6 +1068,8 @@ export function writingSectionAfterPart(text) {
 }
 
 function joinLines(lines) {
+  // Text glue only. Semantic boundaries have already passed decideLineJoin;
+  // reference/annotation CJK spacing intentionally differs from speech hyphens.
   return lines.reduce((text, line) => {
     if (!text) return line
     const cjk = /[\u3000-\u9fff\uff00-\uffef]$/u.test(text) && /^[\u3000-\u9fff\uff00-\uffef]/u.test(line)
@@ -1086,15 +1081,6 @@ function joinLines(lines) {
 // Require both an edge location and a page-counter/answer-book title (or repeated exam title).
 export function isAnswerFurniture(text, region, repeated = false) {
   return Boolean(firstLineRole('furniture', computeLineFacts({ text, region }), { repeated }))
-}
-
-function referenceBoundaryFromFacts(previous, facts, margin) {
-  const context = { previous, margin }
-  const indented = matchesLineRole('reference.indented', facts, context)
-  const pageTurn = matchesLineRole('reference.page-turn', facts, context)
-  const previousShort = matchesLineRole('reference.previous-short', facts, context)
-  const continues = matchesLineRole('reference.lowercase-continuation', facts, { ...context, pageTurn, indented })
-  return { indented, pageTurn, previousShort, continues }
 }
 
 export function referenceLineBoundary(previous, line, margin) {
@@ -1203,12 +1189,14 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
     let entry = null
     let paragraph = null
     let previous = null
+    let previousLocation = null
     const capture = createReferenceCapture()
     const flush = () => { if (paragraph) { entry.paragraphs.push(paragraph); paragraph = null } }
     const skip = (line, reason) => {
       flush()
       entry = null
       previous = null
+      previousLocation = null
       capture.pause()
       review.push({ itemId: line.itemId, issue: `${reason}; skipped until the next label or English line` })
     }
@@ -1232,6 +1220,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
             page: line.page, region: unionRegion(line.boxes) } }, paragraphs: [] }
         entries[kind].push(entry)
         previous = null
+        previousLocation = null
         continue
       }
       if (matchesLineRole('writing.commentary', facts, { entryKind: capture.kind, skipping: capture.paused })) {
@@ -1249,19 +1238,21 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       const margin = margins.get(line.page)
       const special = firstLineRole('paragraph-role', facts)?.value || null
       const afterClosing = previous?.role === 'closing'
-      const { indented, previousShort, pageTurn, continues } = referenceBoundaryFromFacts(previous, facts, margin)
-      const starts = !paragraph || special || afterClosing || (!continues && (previous.role !== 'body' || indented
-        || previousShort || pageTurn || matchesLineRole('paragraph.numbered', facts)))
-      if (pageTurn && !special && !afterClosing && !indented && !previousShort) {
-        review.push({ itemId: line.itemId, issue: 'paragraph continues across a page turn; split into two located paragraphs' })
-      }
-      if (starts) {
+      const decision = decideLineJoin({
+        content: 'reference', previous, current: facts, geometry: { unit: 'normalized', margin },
+        roles: { hasParagraph: Boolean(paragraph), special, afterClosing,
+          numbered: matchesLineRole('paragraph.numbered', facts) },
+        location: { before: previousLocation,
+          after: { documentId: answerDocument.documentId, page: line.page, itemId: line.itemId } },
+      })
+      review.push(...decision.reviews)
+      if (decision.resolution === 'separate') {
         flush()
         paragraph = { role: special || (afterClosing ? 'signature' : 'body'), lines: [] }
       }
       paragraph.lines.push(line)
-      if (facts.endsHyphen) review.push({ itemId: line.itemId, issue: 'line ends with a hyphen; joined with a space' })
       previous = { role: paragraph.role, right: line.right, page: line.page }
+      previousLocation = decision.location.after
     }
     flush()
     const section_ = (kind) => {
