@@ -204,7 +204,7 @@ export function publicPaperReviewDetail(store, paperId) {
     !detail.latestRevisionId
     || detail.latest?.state === 'uploading'
     || detail.latest?.reviewKind === 'ocr'
-    || detail.compatibility?.result !== 'equal'
+    || detail.rendererStale
   ) return detail
   const { projection } = candidateProjectionForRevision(store, detail.latestRevisionId)
   if (projection.importProfile !== 'public-paper-v1') return detail
@@ -342,7 +342,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     const pending = store.publicationRequest(match[1])
     const approval = store.approveRevision(pending.paperId, pending.revisionId,
       { bundleDigest: pending.bundleDigest, approvalScope: 'layout_only' }, context.session.username, pending.requestId)
-    context.sendJson(response, 200, { approval })
+    context.sendJson(response, 200, { approval, compatibility: store.compatibilityForRevision(pending.revisionId) })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-reviews\/publication-requests\/([^/]+)\/grant$/, route(({ request, response, context, match }) => {
@@ -761,12 +761,13 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireOwner(response, context)) return
     const input = await context.readJsonBody(request, { maxBytes: 20_000 })
-    context.sendJson(response, 200, { approval: store.approveRevision(
+    const approval = store.approveRevision(
       decodeURIComponent(match[1]),
       match[2],
       input,
       context.session.username,
-    ) })
+    )
+    context.sendJson(response, 200, { approval, compatibility: store.compatibilityForRevision(match[2]) })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/confirm-ocr$/, route(async ({

@@ -2,6 +2,49 @@
 
 基线：`c42f8b649b8956dcd2383a9540f0dca0156fd808`。文件行号沿用该基线的只读核对结果；实施时重新定位。本文定义实施，不授权生产迁移、部署或发布试卷。
 
+## 2026-10-21 审查后恢复规则（本节覆盖下文冲突的历史规则）
+
+- 批准资格：确定 `equal` 允许，确定 `different` 拒绝且不能被后续 unknown 覆盖。无确定结果时回退到修复前的 renderer 指纹守卫，只有历史 renderer 等于当前 renderer 才允许批准；继续执行旧版封存文件、投影身份、听力、issue、权限与业务状态检查，不制造历史 subject。响应提供 `eligible/guard/fallback/fallbackReason/legacyRendererStale`，日志事件 `review-compatibility-fallback` 记录原因及是否放行。
+- 发布器的原 subject/实际 writer 映射仍是独立强制契约。此次批准回退不绕过它；Owner 紧凑列表的“批准并发布”仍只对 equal 启用，卷面独立批准按钮消费回退资格。若要求缺 subject 时整条发布链也退回旧模式，需主会话先收敛发布契约，不能以当前投影冒充历史 subject。
+- `reviewRecoveryPolicy.mjs` 集中预算：比较 384 MiB/300 秒、每批 1 卷、任务间让出 5 秒；backfill 128 MiB/30 秒；身份 384 MiB/30 秒。调用方只能降低 worker 上限。普通比较最多重试 2 次，30 秒/5 分钟退避，只统计瞬态失败，不计 MISSING_BASELINE/BACKFILL_PENDING。
+- backfill 瞬态失败追加到 `review_subject_backfill_attempt`，初次失败后最多 5 次重试，依次间隔 1/5/15/60/240 分钟。耗尽显示 exhausted，保留诊断；确定性内容缺失或不合法仍按 input token 封存。原 skip/attempt 行不删改。受控恢复函数 `createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot }).resetTransientBudget(revisionId, { actor, reason })` 要求具名操作员和原因，追加 `TRANSIENT_BUDGET_RESET` 记录，仅重置该 revision 当前 token 的瞬态额度，不清除锁、不重置业务状态、不改变确定性失败。
+- 身份 timeout/OOM/exit/临时 I/O 与确定性身份错误分开。初始化与 fresh 共用 single-flight，瞬态失败最少 60 秒后重试，`ready()` 不永久缓存为失败。fresh 的瞬态失败保留上一份有效描述符，但在成功刷新之前不对外提供它，防止旧 equal 授权；文件或 runtime 变化照常清空缓存。
+- 空 v1 subject 表升级为 v2，保留已有 skip/compatibility/业务行。非空 v1 表原样保留、告警 `LEGACY_REVIEW_SUBJECTS_PRESENT`，不建新表且禁用比较/backfill；API 正常启动，批准按上述旧守卫回退。所有生产 schema/数据核对及迁移仍需要授权。
+
+### 生产只读核对路径调查（仅查本地实现，未连接生产）
+
+| 现有路径 | 能读取什么 | 授权及负载 |
+| --- | --- | --- |
+| `scripts/local-deploy.sh preflight --owner-said-preflight` | production SHA、服务状态、布局、controller/协议/host configuration 身份；不查询 SQLite schema、subject 数量或 revision 原始行 | 需要 Owner 当前只读预检授权及现有 Keychain/受限 SSH；文件、git、systemctl 查询负载低 |
+| controller 内部 controlled status | 维护事务状态和 receipt；不是数据库查询接口 | 日常 CLI 已退役 status，当前 `deploy/eqb-deploy-transport` 只接受 preflight/deploy；不绕过 forced command 或使用旧 root 路径 |
+| 鉴权 GET `/api/import-agent-reviews`、`/papers/<paperId>` | 最新 revision、历史 revision、解码后的 manifest、业务状态/批准、文件描述、兼容性与 backfill 摘要 | 需要相应 agent/Owner 凭据及本次未包含的生产读取授权；小 JSON 查询负载低，但不是 SQLite 原始字符串导出 |
+| 鉴权 GET `/api/import-agent-reviews/revisions/<revisionId>/files?path=...` 与 `/api/import-review-preview/revisions/<revisionId>/...` | 精确封存文件字节、consumption/asset/products/PDF 投影；不能获取原始 `payload_digest` 或隐藏 guard 行 | 按精确 revision 串行读取；文件核验和 PDF 传输产生随字节量增长的哈希/I/O，不宜在 2 核主机并发拉取 |
+| `ops-mcp` 固定只读工具 | 服务/健康/磁盘/版本与有界日志摘要；没有 SQL/schema/raw-row 工具 | 现有受限运维身份及独立读取授权；摘要负载低，日志按窗口限量 |
+| `import-ops/lib/probe.mjs`、`scripts/pull-run-push.mjs pull`、controller 内部 `snapshotDatabases` | probe 只读本地 question-bank；pull 不导出 Review DB；snapshot 是部署持久化事务的内部备份步骤 | pull/backup 会写远端临时快照，完整备份/完整性扫描的 I/O 更大，不能作为“生产零写入”的 schema 核对路径 |
+
+现有受支持入口不能交付迁移决策所需的 SQLite `sqlite_master`、
+`PRAGMA table_info(review_subject)`、subject 数量和指定 revision 原始单元格。
+生产核对仍是未满足的上线前条件。后续应单独授权有界只读主机操作，或评审固定
+controller 查询扩展：以 `readOnly: true`、`PRAGMA query_only=ON`、短 busy timeout
+打开 `import-ops.sqlite`，先查 schema/数量，再用参数化精确 revision 查询
+revision/preview/subject/backfill/compatibility/guard 原始行。schema 查询很轻；
+COUNT 随表规模增长；精确 ID 查询应走索引，一次一卷。不要为检查 schema 启动部署、
+全库备份或 integrity 扫描，不接受通用任意 SQL 接口。
+
+### 本地证据与证明边界
+
+恢复验证覆盖 equal/different 与各不可用状态在 renderer 相同/不同时的真实批准，
+瞬态额度耗尽及具名恢复、身份 single-flight/60 秒退避与确定性错误隔离；空 v1
+离线迁移同时核对原始行、外键及精确 `97c63a3b` store 的 revision/list/preview 读回。
+非空 v1 验证 store 正常构造、列表、批准回退和两个 worker 禁用。
+
+59 套离线演练的 preview envelope/digest 来自已捕获鉴权 GET 的重建，不能冒充生产
+SQLite 原始 preview 字符串、隐藏 guard 或生产 CAS/批准证据。四卷资源样本另跑真实
+backfill/比较 worker；本机没有容器运行时，使用 macOS `taskpolicy -b`/`nice -n 10`
+串行近似，只有 V8 heap 上限，**没有 2 CPU/总 RSS 2 GiB 的硬限制**。健康探针是同一
+supervisor 主线程的最小 HTTP 服务，不是完整 API；RSS 每 50 ms 采样，原生 high-water
+累计值不能误标成某阶段独立峰值。
+
 ## 1. 目标与非目标
 
 **Owner 批准的是卷的内容，不是网站代码。** 内容包括题目、答案、解析、图片与媒体、版面产品清单、冻结 PDF 字节，以及 Screen 实际消费的数据载荷（paperAsset、analysisSidecars、consumption）。前端题面组件、CSS、字体与已发布卷一样，由代码审查和 CI 把关；它们的变化不使待审卷作废。

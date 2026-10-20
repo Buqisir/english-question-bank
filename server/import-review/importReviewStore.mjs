@@ -1,3 +1,4 @@
+import { reviewCompatibilityEligibility } from './reviewRecoveryPolicy.mjs'
 import { createHash, randomUUID } from 'node:crypto'
 import {
   closeSync,
@@ -834,9 +835,15 @@ export function createImportReviewStore({
     )
   }
 
-  // Historical renderer identities are immutable receipt data. Only content
-  // compatibility under the executing server target grants current eligibility.
+  // Historical renderer identities are immutable receipt data. Definitive content
+  // results take precedence; unavailable checks retain the accepted legacy guard.
+  function eligibility(revision, compatibility) {
+    return reviewCompatibilityEligibility(compatibility, revision?.rendererBuildId !== currentRendererBuildId())
+  }
   function compatibilityFor(db, revision, target = null, summary = false) {
+    return eligibility(revision, rawCompatibilityFor(db, revision, target, summary))
+  }
+  function rawCompatibilityFor(db, revision, target = null, summary = false) {
     if (!revision) return { result: 'unknown', reasonCode: 'NOT_FOUND', pending: false }
     if (revision.reviewKind === 'ocr') return {
       result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false,
@@ -850,13 +857,16 @@ export function createImportReviewStore({
       if (error.code === 'REVIEW_TARGET_IDENTITY_PENDING') {
         return { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true }
       }
-      return { result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false }
+      return { result: 'unknown', reasonCode: error.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
+        ? 'TARGET_IDENTITY_UNAVAILABLE' : 'TARGET_IDENTITY_INVALID', pending: false }
     }
   }
 
   function assertReviewCompatible(db, revision, target = null) {
     const compatibility = compatibilityFor(db, revision, target)
-    if (compatibility.result !== 'equal') {
+    if (compatibility.fallback) console.info(JSON.stringify({ event: 'review-compatibility-fallback',
+      revisionId: revision.id, reasonCode: compatibility.fallbackReason, allowed: compatibility.eligible }))
+    if (!compatibility.eligible) {
       const error = storeError('IMPORT_REVIEW_RENDERER_STALE', 'Review content compatibility is not equal')
       Object.assign(error, { reasonCode: compatibility.reasonCode, compatibility })
       throw error
@@ -1463,7 +1473,8 @@ export function createImportReviewStore({
     try { target = targetBuild() } catch (error) {
       unavailable = error.code === 'REVIEW_TARGET_IDENTITY_PENDING'
         ? { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true }
-        : { result: 'unknown', reasonCode: 'TARGET_IDENTITY_INVALID', pending: false }
+        : { result: 'unknown', reasonCode: error.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
+          ? 'TARGET_IDENTITY_UNAVAILABLE' : 'TARGET_IDENTITY_INVALID', pending: false }
     }
     return withDb(false, (db) => {
       const rows = db.prepare(`
@@ -1490,11 +1501,12 @@ export function createImportReviewStore({
       return rows.map((row) => {
       const manifest = parseJson(row.manifest_json, {})
       const kind = reviewKind(manifest)
-      const compatibility = kind === 'ocr' ? { result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false }
+      const rawCompatibility = kind === 'ocr' ? { result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false }
         : target ? { ...compatibilities.get(row.latest_revision_id),
           result: compatibilities.get(row.latest_revision_id).pending ? 'pending' : compatibilities.get(row.latest_revision_id).result,
           targetBuildId: target.targetBuildId, comparatorVersion: REVIEW_COMPARATOR_VERSION }
           : unavailable
+      const compatibility = eligibility({ rendererBuildId: row.renderer_build_id }, rawCompatibility)
       return {
         paperId: row.paper_id,
         paperName: row.paper_name,
@@ -1507,7 +1519,7 @@ export function createImportReviewStore({
           .some(file => file.role === 'content_media_candidate'),
         rendererBuildId: row.renderer_build_id,
         compatibility,
-        rendererStale: kind === 'candidate' && compatibility.result !== 'equal',
+        rendererStale: kind === 'candidate' && !compatibility.eligible,
         promotionState:
           parseJson(row.approval_receipt_json)?.approvalId === row.promotion_approval_id
             ? row.promotion_state
@@ -1583,7 +1595,7 @@ export function createImportReviewStore({
     )
     const rendererStale = Boolean(
       latest?.reviewKind === 'candidate'
-      && compatibility?.result !== 'equal',
+      && !compatibility?.eligible,
     )
     return {
       paperId: paper.paper_id,
@@ -2110,7 +2122,7 @@ export function createImportReviewStore({
             'OCR review must be confirmed before a Candidate revision can be approved',
           )
         }
-        assertReviewCompatible(db, revision)
+        const approvalCompatibility = assertReviewCompatible(db, revision)
         if (request && (request.renderer_build_id !== revision.rendererBuildId || request.bundle_digest !== revision.bundleDigest)) {
           throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request identity changed')
         }
@@ -2143,10 +2155,23 @@ export function createImportReviewStore({
           throw storeError('IMPORT_REVIEW_ISSUES_UNRESOLVED', 'Unresolved issues block approval')
         }
         assertStoredRevisionFiles(revision, db)
-        const baseline = checkedStoredReviewSubject(db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
-        const consumer = baseline.subject.components.consumer
-        const audio = consumer.consumption.listeningAudio
-        const externalAudio = consumer.paperAsset.sources.provenance?.kind === 'external_analyzed_package' && Boolean(audio)
+        let baseline, consumer, legacyProjection
+        if (approvalCompatibility.fallback) {
+          // Exact pre-BUB-90 approval validation: renderer match plus the sealed
+          // projection identity and listening rules. Do not manufacture a subject.
+          legacyProjection = projectRevision(revisionDirectory(revision.id), {
+            reviewKind: revision.reviewKind, requireAnalyses: !revision.manifest.importProfile,
+            expectedCandidateDigest: revision.candidateDigest,
+          })
+          assertProjectionIdentity(legacyProjection, revision)
+        } else {
+          baseline = checkedStoredReviewSubject(db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
+          consumer = baseline.subject.components.consumer
+        }
+        const audio = consumer?.consumption.listeningAudio
+        const externalAudio = legacyProjection
+          ? legacyProjection.listeningReview?.audio?.state === 'included_in_candidate_review'
+          : consumer.paperAsset.sources.provenance?.kind === 'external_analyzed_package' && Boolean(audio)
         let externalListeningReview = null
         if (externalAudio) {
           if (input?.externalListeningReview !== undefined) {
@@ -2156,8 +2181,8 @@ export function createImportReviewStore({
               400,
             )
           }
-          let listening
-          for (const file of baseline.subject.components.sidecar) {
+          let listening = legacyProjection?.materialization.listening
+          for (const file of baseline?.subject.components.sidecar || []) {
             if (!file.jsonDigest) continue
             const bytes = readFileSync(resolveReviewFile(revisionDirectory(revision.id), file.path))
             if (sha256(bytes) !== file.sha256 || bytes.byteLength !== file.byteLength) {
@@ -2181,10 +2206,10 @@ export function createImportReviewStore({
               answerCount: listening.answers.length,
             },
             audio: {
-              sha256: audio.sha256,
-              byteLength: audio.byteLength,
-              mediaType: audio.mediaType,
-              durationSeconds: audio.durationSeconds,
+              sha256: legacyProjection ? legacyProjection.listeningReview.audio.playbackAudioSha256 : audio.sha256,
+              byteLength: legacyProjection ? legacyProjection.listeningAudioBytes.byteLength : audio.byteLength,
+              mediaType: legacyProjection ? legacyProjection.listeningReview.audio.mediaType : audio.mediaType,
+              durationSeconds: legacyProjection ? legacyProjection.listeningReview.audio.durationSeconds : audio.durationSeconds,
             },
             reviewedAt: approvedAt,
             reviewedBy: actor,
@@ -2452,6 +2477,10 @@ export function createImportReviewStore({
       )
     }
     const compatibility = reconciliation ? null : assertReviewCompatible(db, revision, target)
+    if (compatibility?.fallback) {
+      throw Object.assign(storeError('IMPORT_REVIEW_RENDERER_STALE', 'Publication still requires a definitive content result'),
+        { reasonCode: compatibility.reasonCode, compatibility })
+    }
     for (const key of [
       'approvalId',
       'revisionId',
@@ -2872,7 +2901,8 @@ export function createImportReviewStore({
           'SELECT * FROM review_subject WHERE revision_id = ?',
         ).get(revision.id))
         if (!baseline || baseline.row.subject_digest !== compatibility.subjectDigest) {
-          throw storeError('BASELINE_UNTRUSTED', 'Publication subject is missing or untrusted')
+          throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication subject is missing or untrusted'),
+            { reasonCode: 'BASELINE_UNTRUSTED' })
         }
         const preview = db.prepare('SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(revision.id)
         let trustedPreview = false

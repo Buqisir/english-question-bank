@@ -422,7 +422,7 @@ try {
   const finish = beginReviewActivity('finalize-fixture')
   try { assert.equal((await runReviewCompatibilityBatch(compatibility)).paused, 'ACTIVITY_PENDING') }
   finally { finish() }
-  assert.deepEqual(REVIEW_WORKER_BUDGET, { heapMb: 384, deadlineMs: 120_000, batchSize: 5, yieldMs: 1000 })
+  assert.deepEqual(REVIEW_WORKER_BUDGET, { heapMb: 384, deadlineMs: 300_000, batchSize: 1, yieldMs: 5000 })
   pass('host-wide leader excludes another process and finalize pauses new work; resource defaults exact')
 
   await bump()
