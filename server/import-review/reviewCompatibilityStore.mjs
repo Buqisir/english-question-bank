@@ -65,7 +65,7 @@ const summarySubject = `SELECT s.revision_id, s.subject_digest, s.bundle_digest,
 function compatibilitySummary(revision, subject, row, target) {
   const pending = { result: 'unknown', reasonCode: 'NOT_CHECKED', pending: true }
   if (!row) return pending
-  if (!subject || !subject.preview_revision_id) {
+  if (subject && !subject.preview_revision_id) {
     return { result: 'unknown', reasonCode: 'MISSING_BASELINE', pending: false }
   }
   try {
@@ -76,7 +76,20 @@ function compatibilitySummary(revision, subject, row, target) {
       return { result: 'unknown', reasonCode: 'BASELINE_UNTRUSTED', pending: false }
     }
     const binding = evidence.binding
-    if (!binding || binding.revisionId !== subject.revision_id || subject.revision_id !== revision.id
+    if (!binding || binding.revisionId !== revision.id
+      || binding.bundleDigest !== revision.bundleDigest || row.bundle_digest !== revision.bundleDigest
+      || binding.rendererBuildId !== revision.rendererBuildId
+      || binding.targetBuildId !== target.targetBuildId || row.target_build_id !== target.targetBuildId
+      || row.comparator_version !== REVIEW_COMPARATOR_VERSION) return pending
+    // Finalize can durably record an unknown reason before a subject exists
+    // (for example missing frozen PDFs). Preserve that checked evidence;
+    // it supplies diagnostics only and can never grant equal eligibility.
+    if (!subject) {
+      if (row.result !== 'unknown' || row.subject_digest !== null
+        || binding.subjectDigest !== null || binding.previewDigest !== null) {
+        return { result: 'unknown', reasonCode: 'MISSING_BASELINE', pending: false }
+      }
+    } else if (binding.revisionId !== subject.revision_id || subject.revision_id !== revision.id
       || binding.subjectDigest !== subject.subject_digest || row.subject_digest !== subject.subject_digest
       || binding.previewDigest !== subject.preview_payload_digest || binding.previewDigest !== subject.consumer_digest
       || subject.preview_revision_id !== revision.id
@@ -84,9 +97,7 @@ function compatibilitySummary(revision, subject, row, target) {
       || subject.preview_bundle_digest !== revision.bundleDigest || row.bundle_digest !== revision.bundleDigest
       || binding.rendererBuildId !== revision.rendererBuildId
       || subject.source_renderer_build_id !== revision.rendererBuildId
-      || subject.preview_renderer_build_id !== revision.rendererBuildId
-      || binding.targetBuildId !== target.targetBuildId || row.target_build_id !== target.targetBuildId
-      || row.comparator_version !== REVIEW_COMPARATOR_VERSION) return pending
+      || subject.preview_renderer_build_id !== revision.rendererBuildId) return pending
     return { result: row.result, reasonCode: row.reason_code, pending: false, attemptNo: row.attempt_no,
       subjectDigest: row.subject_digest, targetBuildId: row.target_build_id,
       comparatorVersion: row.comparator_version, checkedAt: row.checked_at }

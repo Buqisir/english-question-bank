@@ -87,6 +87,7 @@ try {
   }
 
   const sync = upload('sync')
+  await sync.store.ready()
   const startedSync = performance.now()
   const syncResult = sync.store.finalizeRevision(sync.revision.id)
   const synchronousMs = performance.now() - startedSync
@@ -134,9 +135,21 @@ try {
   assert.deepEqual(asyncCase.store.productPreviewForRevision(asyncResult.id).preview,
     buildProductPreviewPayload(asyncResult, synchronous))
   assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'MISSING_FROZEN_PRODUCTS')
+  assert.equal(asyncCase.store.listPapers()[0].compatibility.reasonCode, 'MISSING_FROZEN_PRODUCTS')
   assert.throws(() => asyncCase.store.projectionForRevision(asyncResult.id),
     { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' },
     'a legacy fixture without frozen products retains its original preview but cannot derive live content')
+  const evidenceDb = new DatabaseSync(asyncCase.dbPath)
+  try {
+    const evidence = evidenceDb.prepare('SELECT evidence_json FROM review_compatibility WHERE revision_id=?')
+      .get(asyncResult.id).evidence_json
+    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
+      .run('{}', asyncResult.id)
+    assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'BASELINE_UNTRUSTED',
+      'unknown diagnostics without a subject still require intact evidence')
+    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
+      .run(evidence, asyncResult.id)
+  } finally { evidenceDb.close() }
   function preview(dbPath) {
     const db = new DatabaseSync(dbPath, { readOnly: true })
     try {
