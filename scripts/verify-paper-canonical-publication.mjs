@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+// Runs through this existing CI registry entry in every publication pack.
+import './verify-paper-canonical-base64.mjs'
 import {
   cpSync,
   existsSync,
@@ -388,6 +390,12 @@ assert.throws(
 await assertExactOldV13FilesystemReload()
 await assertExactOldV14FilesystemReload()
 const sealed = sealCanonicalPublication({ compilation, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset })
+// Exercise the actual publication seam, not just the standalone encoder.
+// Every emitted artifact and the sealed manifest retain the old JSON+LF bytes.
+for (const bytes of Object.values(sealed.artifacts)) {
+  assert.ok(Buffer.from(bytes).equals(Buffer.from(stableBytes(JSON.parse(Buffer.from(bytes))))))
+}
+assert.ok(Buffer.from(stableBytes(sealed.manifest)).at(-1) === 10)
 const reorderedCompilation = structuredClone(compilation)
 const reorderedPublicationGrammarFill =
   reorderedCompilation.artifacts.canonicalPaper.questionGroups.find(

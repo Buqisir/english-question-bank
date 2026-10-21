@@ -310,12 +310,13 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, timing =
       const pagesByBlock = new Map()
       const fixedPageAtoms = fixedPage
         ? ', .pagedjs_pages .question, .pagedjs_pages .canonical-option-bank-item' : ''
-      for (const element of document.querySelectorAll('.pagedjs_pages .canonical-reading-framed-columns, .pagedjs_pages .canonical-reading-figure, .pagedjs_pages .writing-answer-box, .pagedjs_pages [data-canonical-group-type="listening"] .question' + fixedPageAtoms)) {
+      for (const element of document.querySelectorAll('.pagedjs_pages .canonical-reading-framed-columns, .pagedjs_pages .canonical-reading-figure, .pagedjs_pages .question[data-canonical-stem-figures], .pagedjs_pages .writing-answer-box, .pagedjs_pages [data-canonical-group-type="listening"] .question' + fixedPageAtoms)) {
         const page = element.closest('.pagedjs_page')
         const area = page.querySelector('.pagedjs_area').getBoundingClientRect()
         const box = element.getBoundingClientRect()
         const id = element.getAttribute('data-canonical-block-id')
           || element.getAttribute('data-ref')
+          || element.getAttribute('data-canonical-question-id')
         if (id) {
           const previous = pagesByBlock.get(id)
           if (previous && previous !== page) return { id, reason: 'atomic block split across pages' }
@@ -324,6 +325,16 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, timing =
         if (box.top < area.top - 1 || box.bottom > area.bottom + 1
           || box.left < area.left - 1 || box.right > area.right + 1) {
           return { id, reason: 'block exceeds printable page area' }
+        }
+        if (element.matches('.question[data-canonical-stem-figures]')) {
+          for (const img of element.querySelectorAll('figure img')) {
+            const rect = img.getBoundingClientRect()
+            if (!img.naturalWidth || !img.naturalHeight || rect.height <= 0
+              || Math.abs(rect.width / rect.height / (img.naturalWidth / img.naturalHeight) - 1) > 0.01
+              || rect.top < box.top - 1 || rect.bottom > box.bottom + 1) {
+              return { id, reason: 'stem figure is clipped, distorted or unavailable' }
+            }
+          }
         }
         for (const child of [element, ...element.querySelectorAll('td, figcaption, .writing-continuation-row, .writing-starter-line, .canonical-application-given, .canonical-application-drawing-area')]) {
           const rect = child.getBoundingClientRect()

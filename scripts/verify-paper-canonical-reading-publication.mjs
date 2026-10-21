@@ -9,6 +9,7 @@ import { DatabaseSync } from 'node:sqlite'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
@@ -82,6 +83,11 @@ async function exercisePublicSeams(fixture) {
       assert.equal(selection.mode, 'canonical')
       assert.equal(selection.groupIds.length, 4)
       assert.equal(selection.projectedOccurrences.length, 4)
+      for (const groupId of selection.groupIds) {
+        assert.equal(projectCanonicalConsumerGroup({
+          consumption: loaded, familyContractId: 'reading', groupId,
+        }).groupId, groupId)
+      }
     }
   } finally {
     db.close()
@@ -128,9 +134,11 @@ function sourceDocumentArtifactId(bytes) {
   }
 }
 
-function makeCanonicalFigureFixture() {
+function makeCanonicalFigureFixture(byteLength) {
   const fixture = makeReadyCanonicalFixture()
-  const mediaBytes = new Uint8Array(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAFgwJ/lY6O3wAAAABJRU5ErkJggg==', 'base64'))
+  const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAFgwJ/lY6O3wAAAABJRU5ErkJggg==', 'base64')
+  const mediaBytes = new Uint8Array(byteLength || png.length)
+  mediaBytes.set(png)
   const { mediaDigest, artifactId } = sourceDocumentArtifactId(mediaBytes)
   const group = fixture.source.groups.find((candidate) => candidate.slotId === 'reading.d')
   const mediaId = 'media:reading:figure-proof'
@@ -186,6 +194,10 @@ const figureGroup = readingGroups(figureProof.compilation).find((group) => group
 assert.equal(figureGroup.content.blocks.filter((block) => block.kind === 'figure').length, 1)
 assert.equal(figureGroup.media.length, 1)
 assert.equal(figureGroup.sourceMap.entries.some((entry) => entry.target.kind === 'media' && entry.target.id === figureGroup.media[0].mediaId), true)
+
+// The consumer must decode and verify a large embedded image, not only its
+// Base64 grammar. PNG readers allow trailing bytes after IEND.
+await exercisePublicSeams(makeCanonicalFigureFixture(4 * 1024 * 1024))
 
 const realFixture = makeReadingCanonicalReferenceFixture()
 const real = await exercisePublicSeams(realFixture)

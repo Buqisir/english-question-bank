@@ -374,6 +374,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
           questionNo: String(question.questionNo),
           stem: question.stem,
           canonicalStemContent: question.stemContent,
+          ...(question.stemFigures ? { stemFigures: question.stemFigures } : {}),
           ...(question.figureLayout ? { figureLayout: question.figureLayout } : {}),
           options: question.options.map((option) => ({
             label: option.label,

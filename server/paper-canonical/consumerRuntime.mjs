@@ -182,7 +182,7 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
     })
     const result = loadPaperForConsumptionSync({
       paperId,
-      consumerContract,
+      consumerId,
       ...(version ? { version } : {}),
     }, store)
     if (result.disposition !== 'ready') throw rejected(result)

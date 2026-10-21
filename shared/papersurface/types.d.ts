@@ -505,6 +505,9 @@ export type PaperQuestion = {
   /** Question stem text. */
   readonly stem: string
 
+  /** Ordered Question-owned source crops, between the stem and A-D options. */
+  readonly stemFigures?: ReadonlyArray<import('../paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs').CanonicalReadingSurfaceFigureBlock>
+
   /** Canonical Reading literal stem nodes, preserved for anchor parity. */
   readonly canonicalStemContent?: ReadonlyArray<{
     readonly kind: 'text'

@@ -216,7 +216,141 @@ for (const edition of ['economy8', 'largeNoListening']) {
 
 // Actual Chromium measurement: inherited body type is insufficient for source
 // captions/table cells, and a too-wide option must change the whole grid.
+const coverLiftProfile = 'student-friendly-cover-lift-v2'
+const drawingHtml = html.replace('class="canonical-application-response"',
+  'class="canonical-application-response" data-canonical-drawing-area-id="fixture-drawing"')
+for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
+  const limit = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0).targetPages
+  for (const regularFits of [false, true]) {
+    const seen = []
+    const result = await planStudentProductPdf(html, { edition, render: async source => {
+      const lifted = source.includes(`data-pdf-student-product="${coverLiftProfile}"`)
+      const sizes = geometry(source)
+      seen.push({ lifted, ...sizes })
+      return { pageCount: regularFits || (lifted && sizes.application <= 42) ? limit : limit + 1,
+        inspection, pdfBytes: Buffer.from(source) }
+    } })
+    assert.equal(result.layout.profile, regularFits ? edition === 'economy8'
+      ? 'student-friendly-economy-v2' : 'student-friendly-v1' : coverLiftProfile)
+    assert.equal(seen.some(entry => entry.lifted), !regularFits)
+    if (!regularFits) {
+      const firstLift = seen.findIndex(entry => entry.lifted)
+      const regular = seen.slice(0, firstLift)
+      assert.ok(regular.length >= (edition === 'economy8' ? 10 : 5))
+      assert.ok(regular.some(entry => entry.application === 24 && entry.continuation === 27))
+      if (edition === 'economy8') assert.ok(regular.some(entry => entry.font === 10.5),
+        'all ordinary font tiers precede even the large-font cover lift')
+      assert.ok(seen.slice(firstLift).every(entry => entry.lifted))
+      assert.deepEqual(result.layout.answerBoxHeightsMm, { application: 42, continuation: 57 })
+      assert.equal(result.fontSizePt, 12)
+      assert.equal(result.lineHeightPt, 19.5)
+      assert.ok(seen.length - firstLift <= 27, 'fallback has its own bounded render reserve')
+      const replay = await renderExplicitStudentProductPdf(html, { edition, layout: result.layout,
+        plannedBreakGroupIds: result.plannedBreakGroupIds,
+        render: async source => ({ pageCount: limit, inspection, pdfBytes: Buffer.from(source) }) })
+      assert.deepEqual(replay.pdfBytes, result.pdfBytes, 'new saved profile replays exact HTML')
+    }
+    assert.equal(result.searchedCandidates, seen.length)
+  }
+  const failed = []
+  await assert.rejects(() => planStudentProductPdf(html, { edition, render: async source => {
+    failed.push(source)
+    return { pageCount: limit + 1, inspection }
+  } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+  assert.ok(failed.some(source => source.includes(coverLiftProfile)), 'try fallback before failing closed')
+  assert.ok(failed.length <= (edition === 'economy8' ? 60 : 30))
+  for (const drawing of [false, true]) for (const failureMode of ['all-overflow', 'natural-overflow', 'break-overflow']) {
+    let overflowCount = 0
+    let measuredCount = 0
+    let liftedCount = 0
+    await assert.rejects(() => planStudentProductPdf(drawing ? drawingHtml : html, { edition, render: async source => {
+      if (source.includes(coverLiftProfile)) {
+        liftedCount += 1
+        return { pageCount: limit, inspection }
+      }
+      const broken = /data-canonical-group-id="[^"]+" data-pdf-planned-break/.test(source)
+      const overflow = failureMode === 'all-overflow'
+        || (failureMode === 'natural-overflow' && !broken
+          && geometry(source).application === (drawing ? 65 : 24)
+          && (!drawing || source.includes('float:right!important')))
+        || (failureMode === 'break-overflow' && broken)
+      if (overflow) {
+        overflowCount += 1
+        throw Object.assign(new Error('atomic block or content overflows'), { code: 'PAPER_LAYOUT_OVERFLOW' })
+      }
+      measuredCount += 1
+      // A shared starting page makes a semantic break a real search trial.
+      return { pageCount: limit + 1, inspection: [inspection[0], {
+        ...inspection[1], pages: [7, 8], continuationMaterialPages: [7, 8],
+      }] }
+    } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE', `${edition}: drawing=${drawing}, ${failureMode}`)
+    assert.ok(overflowCount > 0, `${failureMode} really exercises an unknown page count`)
+    assert.equal(measuredCount > 0, failureMode !== 'all-overflow')
+    assert.equal(liftedCount, 0, 'unknown ordinary results never authorize the cover lift')
+  }
+  for (const coverFits of [true, false]) {
+    let lifted = 0
+    const attempt = () => planStudentProductPdf(drawingHtml, { edition, render: async source => {
+      assert.equal(geometry(source).application, 65, 'drawing-area boxes never enter a compressed trial')
+      const cover = source.includes(coverLiftProfile)
+      if (cover) lifted += 1
+      return { pageCount: cover && coverFits ? limit : limit + 1, inspection }
+    } })
+    if (coverFits) {
+      const selected = await attempt()
+      assert.equal(selected.layout.profile, coverLiftProfile)
+      assert.deepEqual(selected.layout.answerBoxHeightsMm, { application: 65, continuation: 57 })
+    } else await assert.rejects(attempt, error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+    assert.ok(lifted > 0, 'a 65mm cover-lift seed remains reachable after all ordinary trials exceed the limit')
+  }
+  let invalidReplayRenders = 0
+  await assert.rejects(() => renderExplicitStudentProductPdf(drawingHtml, {
+    edition, layout: { ...layout, profile: coverLiftProfile, answerBoxHeightsMm: { application: 24, continuation: 27 } },
+    plannedBreakGroupIds: [], render: async () => {
+      invalidReplayRenders += 1
+      return { pageCount: limit, inspection }
+    },
+  }), error => error.code === 'PAPER_LAYOUT_OVERFLOW')
+  assert.equal(invalidReplayRenders, 0, 'undersized drawing-area replay fails before rendering')
+}
+// A content-integrity failure within the ceiling does not authorize moving the cover.
+await assert.rejects(() => planStudentProductPdf(html, { edition: 'largeNoListening',
+  render: async source => {
+    assert.ok(!source.includes(coverLiftProfile))
+    return { pageCount: 10, inspection: [inspection[0]] }
+  },
+}), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+assert.deepEqual(validatePaperPaginationPlan({ ...plan, editions: { largeNoListening: {
+  ...plan.editions.largeNoListening, layout: { ...layout, profile: coverLiftProfile },
+} } }, identity).editions.largeNoListening.layout.profile, coverLiftProfile)
+assert.throws(() => applyStudentProductLayout(html, {
+  ...layout, profile: coverLiftProfile, figureLayout: 'float80',
+}, 'largeNoListening'), /Invalid/)
 try {
+  const coverFixture = `<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}
+    body,p{margin:0}.canonical-paper-opening{margin-top:0}</style></head><body>
+    <header class="canonical-paper-opening"><p>Source paper title</p><p>English</p></header>
+    <section data-canonical-group-id="reading"><p class="canonical-reading-body">Unchanged body text.</p>
+    <img alt="Source illustration" style="width:120px;height:60px" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Crect width='120' height='60' fill='black'/%3E%3C/svg%3E"></section></body></html>`
+  const coverGeometry = async profile => (await renderPaginatedPaper(
+    applyStudentProductLayout(coverFixture, { ...layout, profile }, 'largeNoListening'), {
+      inspect: page => page.evaluate(() => {
+        const root = document.querySelector('.pagedjs_page_content')
+        const opening = root.querySelector('.canonical-paper-opening')
+        const text = root.querySelector('.canonical-reading-body')
+        const image = root.querySelector('img').getBoundingClientRect()
+        const type = getComputedStyle(text)
+        return { openingTop: opening.getBoundingClientRect().top - root.getBoundingClientRect().top,
+          openingHeight: opening.getBoundingClientRect().height,
+          font: type.fontSize, lineHeight: type.lineHeight, image: [image.width, image.height] }
+      }),
+    })).inspection
+  const ordinaryGeometry = await coverGeometry(layout.profile)
+  const liftedGeometry = await coverGeometry(coverLiftProfile)
+  assert.ok(Math.abs(ordinaryGeometry.openingTop - liftedGeometry.openingTop - 34) < 0.05,
+    '25.5pt moves only the opening into the first-page margin')
+  assert.deepEqual({ ...liftedGeometry, openingTop: ordinaryGeometry.openingTop }, ordinaryGeometry,
+    'body typography, source image and cover height stay unchanged')
   // Legacy source markers must be measured, never inferred from answer pages
   // or another writing family's opaque source. A forced split stays rejected.
   for (const split of [false, true]) {

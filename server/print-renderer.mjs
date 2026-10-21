@@ -574,10 +574,10 @@ function renderCanonicalSharedBank(canonicalGroup, {
   return `<div class="canonical-option-bank-region" data-canonical-bank-heading-state="${headingHtml ? 'present' : 'absent'}">${headingHtml}<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${optionHtml}</ol></div>`
 }
 
-function canonicalMediaPresentationAttributes(media) {
+function canonicalMediaPresentationAttributes(media, extraStyle = '') {
   const presentation = media?.presentation
-  if (!presentation) return ''
-  return ` data-canonical-media-alignment="${presentation.alignment}" data-canonical-media-spacing-before="${presentation.spacingBefore}" data-canonical-media-spacing-after="${presentation.spacingAfter}" style="--canonical-media-width-ratio:${presentation.widthRatio}"`
+  if (!presentation) return extraStyle ? ` style="${extraStyle}"` : ''
+  return ` data-canonical-media-alignment="${presentation.alignment}" data-canonical-media-spacing-before="${presentation.spacingBefore}" data-canonical-media-spacing-after="${presentation.spacingAfter}" style="--canonical-media-width-ratio:${presentation.widthRatio}${extraStyle ? `;${extraStyle}` : ''}"`
 }
 
 function renderCanonicalInlineNodes(nodes) {
@@ -678,12 +678,12 @@ function renderCanonicalReadingBlock(block) {
 }
 
 // Shared source-backed figure presentation for every canonical prompt stream.
-function renderCanonicalSourceFigure(block) {
+function renderCanonicalSourceFigure(block, stemFigure = false) {
   const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
   const caption = block.caption
     ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>`
     : ''
-  return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"${canonicalMediaPresentationAttributes(block.media)}><img src="${escapeHtml(src)}" alt=""${canonicalMediaPresentationAttributes(block.media)}>${caption}</figure>`
+  return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"${stemFigure ? ` data-canonical-content-node-id="${escapeHtml(block.nodeId)}"` : ''}${canonicalMediaPresentationAttributes(block.media, stemFigure ? 'max-height:none' : '')}><img src="${escapeHtml(src)}" alt=""${canonicalMediaPresentationAttributes(block.media, stemFigure ? 'flex-shrink:0' : '')}>${caption}</figure>`
 }
 
 function renderCanonicalReadingBlocks(canonicalGroup, keepFigureHeadings) {
@@ -2064,7 +2064,8 @@ export function buildPrintHtml({
                 ...question,
                 stem: canonicalQuestion.stem ?? '',
                 ...(canonicalGroup.groupType === 'reading'
-                  ? { stemContent: canonicalQuestion.stemContent }
+                  ? { stemContent: canonicalQuestion.stemContent,
+                    ...(canonicalQuestion.stemFigures ? { stemFigures: canonicalQuestion.stemFigures } : {}) }
                   : {}),
                 options: canonicalQuestion.options.map((option) => ({
                   optionId: option.optionId,
@@ -2093,7 +2094,7 @@ export function buildPrintHtml({
             ? canonicalQuestion.questionNo
             : questionNum
           const canonicalQuestionAttrs = canonicalQuestion
-            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isCanonicalGrammarFill && canonicalQuestion.questionId === lastGrammarFillQuestionId && followingGrammarFillSectionId ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
+            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalQuestion.stemFigures?.length ? ' data-canonical-stem-figures="" style="container-type:inline-size"' : ''}${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isCanonicalGrammarFill && canonicalQuestion.questionId === lastGrammarFillQuestionId && followingGrammarFillSectionId ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
             : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
@@ -2119,7 +2120,7 @@ export function buildPrintHtml({
               ? 'question--canonical-seven-choices-tail'
               : 'question--canonical-grammar-fill-tail'
             groupHtml += `<div class="question ${tailClass}"${canonicalQuestionAttrs}>`
-          } else if (!stemText && hasOptions) {
+          } else if (!stemText && hasOptions && !printQuestion.stemFigures?.length) {
             // 真卷完形形态:题号与选项同一行「41. A. xxx B. xxx C. xxx D. xxx」
             const placement = printQuestion.canonicalPlacement
             const clozeChoiceMapping =
@@ -2174,6 +2175,7 @@ export function buildPrintHtml({
               ? ` data-canonical-question-stem-start-pt="${stemPlacement.questionStemStartPt}" style="grid-template-columns:${stemPlacement.questionStemStartPt}pt minmax(0,1fr)"`
               : ''
             groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem${stemPlacement ? ' stem--canonical' : ''}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_stem_line"' : ''}${stemAttrs}><span class="qnum">${displayQuestionNo}.</span>${stemPlacement ? `<span class="canonical-stem-text">${renderedStem}</span>` : ` ${renderedStem}`}</p>`
+            groupHtml += (printQuestion.stemFigures || []).map(block => renderCanonicalSourceFigure(block, true)).join('')
             groupHtml += canonicalQuestion && (canonicalQuestion.layoutPlan || canonicalQuestion.options.some((option) => option.figure))
               ? renderCanonicalQuestionOptions(
                   canonicalQuestion,

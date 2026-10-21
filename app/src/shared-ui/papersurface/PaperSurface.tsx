@@ -896,8 +896,10 @@ function renderCanonicalReadingBlock(block: CanonicalReadingSurfaceBlock): React
 // Shared source-backed figure presentation for every canonical prompt stream.
 function CanonicalSourceFigure({
   block,
+  stemFigure = false,
 }: {
   block: CanonicalReadingSurfaceFigureBlock
+  stemFigure?: boolean
 }): ReactNode {
   const src =
     `data:${block.mediaArtifact.mimeType};base64,`
@@ -909,6 +911,8 @@ function CanonicalSourceFigure({
       data-canonical-block-id={block.nodeId}
       data-canonical-block-kind="figure"
       data-canonical-media-id={block.mediaId}
+      data-canonical-content-node-id={stemFigure ? block.nodeId : undefined}
+      style={stemFigure ? { maxHeight: 'none' } : undefined}
       data-canonical-media-alignment={presentation?.alignment}
       data-canonical-media-spacing-before={presentation?.spacingBefore}
       data-canonical-media-spacing-after={presentation?.spacingAfter}
@@ -916,8 +920,9 @@ function CanonicalSourceFigure({
       <img
         src={src}
         alt=""
-        style={presentation
-          ? ({ '--ps-canonical-media-width-ratio': presentation.widthRatio } as CSSProperties)
+        style={presentation || stemFigure
+          ? ({ ...(presentation ? { '--ps-canonical-media-width-ratio': presentation.widthRatio } : {}),
+            ...(stemFigure ? { flexShrink: 0 } : {}) } as CSSProperties)
           : undefined}
       />
       {block.caption && (
@@ -1519,10 +1524,10 @@ function PaperSurfaceQuestionItem({
         clozeRhythmEnabled ? 'choice_row' : undefined
       }
       data-canonical-cloze-before-section={clozeFollowingSectionId}
-      style={question.options.some((option) => option.figure) ? { breakInside: 'avoid' } : undefined}
+      style={question.stemFigures?.length || question.options.some((option) => option.figure) ? { breakInside: 'avoid', ...(question.stemFigures?.length ? { containerType: 'inline-size' } : {}) } : undefined}
       onClick={() => onQuestionClick(question.id)}
     >
-      {!trimmedStem && hasOptions ? (
+      {!trimmedStem && hasOptions && !question.stemFigures?.length ? (
         <button
           type="button"
           className="ps-question-stem-button"
@@ -1639,6 +1644,9 @@ function PaperSurfaceQuestionItem({
               {stemTrail.anchor}
             </span>
           </button>
+          {question.stemFigures?.map(block => (
+            <CanonicalSourceFigure key={block.nodeId} block={block} stemFigure />
+          ))}
           {stemTrail.trail(listeningTrail)}
           {hasOptions && (
             <PaperSurfaceOptionList

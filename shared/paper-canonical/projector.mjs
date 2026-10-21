@@ -1,4 +1,4 @@
-import { closureAdmitsApplicationDrawingArea, closureAdmitsApplicationPromptFigures, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { closureAdmitsApplicationDrawingArea, closureAdmitsReadingStemFigures, closureAdmitsApplicationPromptFigures, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
 import { validateGrammarFillPromptContract } from './grammarFillPromptContract.mjs'
@@ -55,6 +55,7 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
     ...(group.variant.family === 'reading'
       ? [
           ...group.variant.questions.flatMap((question) => question.stem.map((inline) => `content_node:${inline.nodeId}`)),
+          ...group.variant.questions.flatMap(question => contentIdentityLists({ blocks: question.stemFigures || [] }).sourceMappedIds.map(id => `content_node:${id}`)),
           ...group.variant.choiceOwnership.sets.flatMap((set) => set.options.flatMap((option) => [
             `option:${option.optionId}`,
             ...(option.content || []).map((inline) => `content_node:${inline.nodeId}`),
@@ -202,7 +203,7 @@ function assertCanonicalPackage(canonicalPackage) {
     )
     if (groupIssues.length > 0) throw projectionError('Canonical Group is schema-invalid', groupIssues)
     if (group.sourcePresentation !== undefined
-      && (!['62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion)
+      && (!['62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion)
         || !sourcePresentationMatchesCapture(group.sourcePresentation, sourceCapture))) {
       throw projectionError('Source presentation does not match captured source observations', [])
     }
@@ -229,7 +230,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion),
+          ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -243,6 +244,7 @@ function assertCanonicalPackage(canonicalPackage) {
         assertions: sourceCapture.assertions,
         allowFigureOptions: family.optionModes?.includes('figure') === true,
         allowStemMarks: ['3', '4'].includes(closure.artifacts['rich-content']?.version),
+        allowStemFigures: closureAdmitsReadingStemFigures(closure),
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
     }
@@ -428,7 +430,7 @@ export function projectCanonicalPaper(canonicalPackage) {
         }
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion)
+              ...(['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,
@@ -455,9 +457,14 @@ export function projectCanonicalPaper(canonicalPackage) {
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
                 correctOptionId: question.correctOptionId,
                 ...(question.figureLayout ? { figureLayout: cloneJson(question.figureLayout) } : {}),
+                ...(question.stemFigures ? { stemFigures: cloneJson(question.stemFigures) } : {}),
               })),
               anchors: {
-                contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
+                contentNodeIds: [
+                  ...contentIdentityLists(group.content).contentNodeIds,
+                  ...group.variant.questions.flatMap(question =>
+                    contentIdentityLists({ blocks: question.stemFigures || [] }).contentNodeIds),
+                ],
                 questionIds: group.questionRefs.map(({ questionId }) => questionId),
                 optionIds: group.variant.choiceOwnership.sets.flatMap((set) => set.options.map(({ optionId }) => optionId)),
               },
@@ -473,14 +480,14 @@ export function projectCanonicalPaper(canonicalPackage) {
                 number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,
                 stem: cloneJson(question.stem),
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
-                ...(['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(plan.authorityRef.manifestVersion)
+                ...(['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(plan.authorityRef.manifestVersion)
                   ? {}
                   : { correctOptionId: question.correctOptionId }),
               })),
               // v51 public consumption needs only coverage identities. Full
               // transcript/answers stay in source authority and Owner Review.
               transcriptSegments: group.variant.transcriptSegments.map((segment) =>
-                ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(plan.authorityRef.manifestVersion)
+                ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(plan.authorityRef.manifestVersion)
                   ? { segmentId: segment.segmentId, questionIds: cloneJson(segment.questionIds) }
                   : cloneJson(segment)),
               anchors: {

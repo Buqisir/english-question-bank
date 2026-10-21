@@ -41,6 +41,7 @@ import {
   makeSyntheticNck1DocxFixture,
 } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
 import { freezeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
+import { verifyConfirmedNck1Renditions } from './lib/verifyConfirmedNck1Renditions.mjs'
 
 const encoder = new TextEncoder()
 const checklist = Object.fromEntries(MEDIA_AI_CONFIRMATION_CHECKS.map((key) => [key, true]))
@@ -257,6 +258,24 @@ const aiInput = makeInput(
 )
 const latentAi = compile(aiInput)
 assert.equal(latentAi.consumption.mediaArtifacts[0].sha256, firstInventory.sha256)
+
+// This verifier is registered in both the Full and import-paper CI packs.
+// Keep source_crop selected: even an unselected candidate is bound evidence.
+const dualMaterialization = clone(aiMaterialization)
+const secondInventory = dualMaterialization.media[1]
+const secondRendition = new Uint8Array(execFileSync('magick', [
+  '-size', '32x48', 'xc:white', '-fill', 'black', '-draw', 'line 1,1 30,46', 'png:-',
+]))
+secondInventory.publication = {
+  selection: 'source_crop', sourceSha256: secondInventory.sha256,
+  candidate: imageDescription(secondRendition, 'ai_assisted_redraw', {
+    tool: 'synthetic-test-only', toolVersion: '1',
+    promptSummarySha256: sha256(encoder.encode('preserve every source fact')),
+  }),
+}
+verifyConfirmedNck1Renditions(makeInput(dualMaterialization, produced, fixture, new Map([
+  [firstInventory.mediaId, alteredBytes], [secondInventory.mediaId, secondRendition],
+])))
 
 // Review media routes return the exact immutable bytes and digest headers.
 const mediaDerivation = {

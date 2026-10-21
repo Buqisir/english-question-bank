@@ -106,14 +106,7 @@ export function sha256(value) {
   return `sha256:${sha256Hex(bytes)}`
 }
 
-export function digestJson(value) {
-  if (!nativeCreateHash) return sha256(stableStringify(value))
-  const hash = nativeCreateHash('sha256')
-  let pending = ''
-  const write = token => {
-    pending += token
-    if (pending.length >= 65536) { hash.update(pending); pending = '' }
-  }
+function visitCanonicalTokens(value, write) {
   function visit(item) {
     if (Array.isArray(item)) {
       write('[')
@@ -129,15 +122,15 @@ export function digestJson(value) {
       for (const key of Object.keys(item).sort().filter(key => item[key] !== undefined)) {
         if (!first) write(',')
         first = false
-        write(JSON.stringify(key)); write(':'); visit(item[key])
+        visit(key); write(':'); visit(item[key])
       }
       write('}')
-    } else if (typeof item === 'string' && item.length > 16384) {
+    } else if (typeof item === 'string' && item.length > 8192) {
       // Image bundles contain large base64 strings. Escape bounded pieces,
       // preserving surrogate pairs so the canonical UTF-8 bytes stay exact.
       write('"')
       for (let start = 0; start < item.length;) {
-        let end = Math.min(start + 16384, item.length)
+        let end = Math.min(start + 8192, item.length)
         if (end < item.length && item.charCodeAt(end - 1) >= 0xd800 && item.charCodeAt(end - 1) <= 0xdbff
           && item.charCodeAt(end) >= 0xdc00 && item.charCodeAt(end) <= 0xdfff) end--
         write(JSON.stringify(item.slice(start, end)).slice(1, -1))
@@ -147,6 +140,35 @@ export function digestJson(value) {
     } else write(stableStringify(item))
   }
   visit(value)
+}
+
+// Canonical ordinary data only, like stableStringify; no getter/Proxy or
+// mutation protocol. Two synchronous traversals retain only one owned result
+// and bounded UTF-8 tokens, including for very long object keys and strings.
+export function stableUtf8Bytes(value) {
+  const encoder = new TextEncoder()
+  let byteLength = 1
+  visitCanonicalTokens(value, token => { byteLength += encoder.encode(token).length })
+  const bytes = new Uint8Array(byteLength)
+  let offset = 0
+  visitCanonicalTokens(value, token => {
+    const { read, written } = encoder.encodeInto(token, bytes.subarray(offset, byteLength - 1))
+    if (read !== token.length) throw new TypeError('Canonical value changed while encoding')
+    offset += written
+  })
+  if (offset !== byteLength - 1) throw new TypeError('Canonical value changed while encoding')
+  bytes[offset] = 10
+  return bytes
+}
+
+export function digestJson(value) {
+  if (!nativeCreateHash) return sha256(stableStringify(value))
+  const hash = nativeCreateHash('sha256')
+  let pending = ''
+  visitCanonicalTokens(value, token => {
+    pending += token
+    if (pending.length >= 65536) { hash.update(pending); pending = '' }
+  })
   hash.update(pending)
   return `sha256:${hash.digest('hex')}`
 }

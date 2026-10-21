@@ -1,6 +1,7 @@
 import { withSealedReviewSnapshot } from '../import-review/sealedReviewFiles.mjs'
 import { assertPreparedReviewContent } from '../import-review/preparedReviewContent.mjs'
 import { buildProductPreviewPayload } from '../import-review/reviewSubject.mjs'
+import { reviewProjectionForTrustedBaseline } from '../import-review/reviewComparisonProjection.mjs'
 import { reviewContentDifferences } from '../import-review/reviewCompatibility.mjs'
 import { createHash, randomUUID } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
@@ -1258,20 +1259,9 @@ export function publishUniversalNck1Import(options) {
   })
 }
 
-function publishUniversalNck1ImportSnapshot({
-  reviewRootDir,
-  approvedReviewSubject,
-  withPreparedReviewSubject,
-  approvedIdentity,
-  approvedManifest = null,
-  fileStorage = null,
-  canonicalRequest,
-  db,
-  paperAssetsDir,
-  forceDbFailure = false,
-  failurePoint = null,
-  onPrepared = null,
-  externalListeningReviewProof = null,
+function prepareUniversalNck1ImportSnapshot({
+  reviewRootDir, approvedReviewSubject, approvedIdentity, approvedManifest = null,
+  fileStorage = null, canonicalRequest,
 }) {
   let projection
   try {
@@ -1287,7 +1277,8 @@ function publishUniversalNck1ImportSnapshot({
     })
   }
   const projectedDifferences = approvedReviewSubject ? reviewContentDifferences(approvedReviewSubject.components.consumer,
-    buildProductPreviewPayload({ id: approvedReviewSubject.revisionId }, projection)).differences : []
+    buildProductPreviewPayload({ id: approvedReviewSubject.revisionId },
+      reviewProjectionForTrustedBaseline(approvedReviewSubject, projection))).differences : []
   if (projectedDifferences.length) {
     throw Object.assign(new Error('Publisher projection differs from the original Review subject'), {
       code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'SUBJECT_CHANGED',
@@ -1415,35 +1406,70 @@ function publishUniversalNck1ImportSnapshot({
     durationSeconds: playback.durationSeconds,
     segments: reviewedPlaybackSegments(projection.reviewedListening),
   } : null
+  return {
+    packageData,
+    publicValidation: universalValidationReport(projection),
+    preparedFacts: {
+      candidate: {
+        interpretation: { sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion },
+        source: { sha256: projection.candidate.source.sha256 },
+      },
+      materializationDigest: digestJson(projection.materialization),
+      manifest: projection.manifest,
+      config: projection.config,
+      paginationPlan: projection.paginationPlan,
+    },
+    importProfile: projection.importProfile,
+    paperId: projection.paperId,
+    visibleStructureDigest: projection.visibleStructureDigest,
+    listeningAudioBytes,
+    playbackUi,
+  }
+}
+
+function publishUniversalNck1ImportSnapshot(options) {
+  const facts = prepareUniversalNck1ImportSnapshot(options)
+  // Preserve the existing unsupported-admission result without entering writer.
+  if (!facts.packageData) return facts
+  return publishUniversalNck1ImportFacts(options, facts)
+}
+
+// No projection/raw Candidate can enter these writer callback closures.
+function publishUniversalNck1ImportFacts({
+  approvedReviewSubject, withPreparedReviewSubject, approvedIdentity, approvedManifest = null,
+  canonicalRequest, db, paperAssetsDir, forceDbFailure = false, failurePoint = null,
+  onPrepared = null, externalListeningReviewProof = null,
+}, { packageData, publicValidation, preparedFacts, importProfile, paperId,
+  visibleStructureDigest, listeningAudioBytes, playbackUi }) {
   return publishPreparedPaperImport({
     db,
     paperAssetsDir,
     packageData,
-    publicValidation: universalValidationReport(projection),
+    publicValidation,
     forceDbFailure,
     failurePoint,
     onPrepared,
     validatePrepared(snapshot) {
       if (approvedReviewSubject) assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
-        projection, approvedIdentity, approvedManifest })
+        preparedFacts, approvedIdentity, approvedManifest })
     },
     withPreparedWrite(snapshot, write) {
       return withPreparedReviewSubject({ ...snapshot,
         reviewGuard: approvedReviewSubject ? 'content_binding' : 'legacy_renderer' }, () => {
         const outputInventory = approvedReviewSubject ? assertPreparedReviewContent({ ...snapshot, subject: approvedReviewSubject,
-          projection, approvedIdentity, approvedManifest }) : null
+          preparedFacts, approvedIdentity, approvedManifest }) : null
         return write(outputInventory)
       })
     },
-    requireCompleteAnalyses: !projection.importProfile,
-    requireParagraphSummaries: Boolean(projection.importProfile),
+    requireCompleteAnalyses: !importProfile,
+    requireParagraphSummaries: Boolean(importProfile),
     admitPackage(version) {
       return admitBoundUniversalNck1Package({
         canonicalRequest,
         version,
-        paperId: projection.paperId,
+        paperId,
         packageData,
-        expectedVisibleStructureDigest: projection.visibleStructureDigest,
+        expectedVisibleStructureDigest: visibleStructureDigest,
         listeningAudioBytes,
         playbackUi,
         externalListeningReviewProof,
