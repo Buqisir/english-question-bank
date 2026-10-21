@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { verifyDrawingAreaPrint } from './preview-application-drawing-area.mjs'
+import { drawingAreaPrintFixture, verifyDrawingAreaPrint } from './preview-application-drawing-area.mjs'
 import { makeDrawingAreaCompilation, drawingAreaConsumption } from '../test-fixtures/paper-canonical/applicationDrawingAreaFixture.mjs'
 verifyDrawingAreaPrint()
 import { execFileSync } from 'node:child_process'
@@ -954,9 +954,32 @@ async function assertActualPaperSurfaceArtifacts() {
         label: longOpening ? 'drawing-long-opening' : 'drawing',
         consumption: drawingAreaConsumption(makeDrawingAreaCompilation({ longOpening }).compilation, consumerContractRefs.screen),
       })),
+      { label: 'drawing-marked', consumption: drawingAreaConsumption(
+        makeDrawingAreaCompilation({ labelMarks: ['underline'] }).compilation, consumerContractRefs.screen,
+      ) },
     ]) {
       const canonical = applicationGroup(consumption)
       const signatures = []
+      let printDrawingInlines
+      if (canonical.answerRegion.drawingArea) {
+        const printPage = await browser.newPage()
+        try {
+          await printPage.setContent(drawingAreaPrintFixture({
+            longOpening: label === 'drawing-long-opening',
+            labelMarks: label === 'drawing-marked' ? ['underline'] : [],
+          }).html)
+          const area = printPage.locator('[data-canonical-drawing-area-id]')
+          printDrawingInlines = await area.locator('[data-canonical-content-node-id]').evaluateAll(nodes => nodes.map(node => ({
+            nodeId: node.dataset.canonicalContentNodeId, text: node.textContent,
+            marks: node.dataset.sourceMarks || '', decoration: getComputedStyle(node).textDecorationLine,
+          })))
+          assert.deepEqual(await area.evaluate(node => {
+            const style = getComputedStyle(node)
+            return [style.paddingTop, style.paddingRight, style.paddingBottom, style.paddingLeft, style.boxSizing]
+          }), ['4px', '4px', '4px', '4px', 'border-box'])
+          if (label === 'drawing-marked') assert.match(printDrawingInlines[0].decoration, /underline/)
+        } finally { await printPage.close() }
+      }
       for (const teacher of [false, true]) {
         const page = await browser.newPage({
           viewport: { width: 1280, height: 900 },
@@ -1011,6 +1034,8 @@ async function assertActualPaperSurfaceArtifacts() {
               right: rect.right, boxRight: element.getBoundingClientRect().right,
               bottom: rect.bottom, signatureTop: signature.top, givenRight: given.right, x: rect.x,
               label: area.textContent, labelCount: element.textContent.split('作图处').length - 1,
+              padding: ['Top', 'Right', 'Bottom', 'Left'].map(side => getComputedStyle(area)[`padding${side}`]),
+              boxSizing: getComputedStyle(area).boxSizing,
               border: getComputedStyle(area).borderWidth, outerBorder: getComputedStyle(element).borderWidth }
           })
           assert.equal(geometry.label, '作图处')
@@ -1021,6 +1046,17 @@ async function assertActualPaperSurfaceArtifacts() {
           assert.ok(geometry.bottom < geometry.signatureTop)
           assert.ok(geometry.right < geometry.boxRight)
           assert.equal(geometry.border, geometry.outerBorder)
+          assert.deepEqual(geometry.padding, ['4px', '4px', '4px', '4px'])
+          assert.equal(geometry.boxSizing, 'border-box')
+          const screenInlines = await response.locator('[data-canonical-drawing-area-id] [data-canonical-content-node-id]').evaluateAll(nodes => nodes.map(node => ({
+            nodeId: node.dataset.canonicalContentNodeId, text: node.textContent,
+            marks: node.dataset.sourceMarks || '', decoration: getComputedStyle(node).textDecorationLine,
+          })))
+          assert.deepEqual(screenInlines, printDrawingInlines, 'Screen/Print preserve label inline identity, source marks and decoration')
+          assert.deepEqual(screenInlines.map(({ nodeId, text, marks }) => ({ nodeId, text, marks })),
+            canonical.answerRegion.drawingArea.inlines.map(node => ({
+              nodeId: node.nodeId, text: node.text, marks: node.marks?.join(' ') || '',
+            })))
         }
         assert.deepEqual(
           await page.locator(

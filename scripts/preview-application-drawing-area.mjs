@@ -13,8 +13,8 @@ import { prepareSourceReferences } from '../server/paper-import/sourceReferences
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import oldConsumer from '../standards/paper-canonical/consumers/print-pdf-v48.json' with { type: 'json' }
 
-export function drawingAreaPrintFixture({ drawing = true, longOpening = false, listening = true, consumerContractRef } = {}) {
-  const ready = makeDrawingAreaCompilation({ drawing, longOpening, listening })
+export function drawingAreaPrintFixture({ drawing = true, longOpening = false, listening = true, labelMarks = [], consumerContractRef } = {}) {
+  const ready = makeDrawingAreaCompilation({ drawing, longOpening, listening, labelMarks })
   const consumption = drawingAreaConsumption(ready.compilation, consumerContractRef)
   const groups = ready.compilation.artifacts.canonicalPaper.questionGroups
   const items = groups.map(group => ({

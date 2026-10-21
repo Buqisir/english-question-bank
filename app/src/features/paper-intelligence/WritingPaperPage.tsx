@@ -424,7 +424,12 @@ function WritingPaperPageContent({
                           style={applicationDrawingAreaStyles.area}
                           data-canonical-drawing-area-id={block.drawingArea.drawingAreaId}
                           data-canonical-drawing-label-block-ref={block.drawingArea.labelBlockRef}
-                        >{block.drawingArea.text}</div>
+                        >
+                          {block.drawingArea.inlines.map(node => (
+                            <span key={node.nodeId} data-canonical-content-node-id={node.nodeId}
+                              data-source-marks={node.marks?.join(' ')}>{node.text}</span>
+                          ))}
+                        </div>
                       </>
                     ) : givenTop}
                   </div>

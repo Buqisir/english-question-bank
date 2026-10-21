@@ -5,5 +5,5 @@ export const applicationDrawingAreaPolicy = Object.freeze(policy)
 export const applicationDrawingAreaStyles = Object.freeze({
   top: Object.freeze({ display: 'grid', gridTemplateColumns: `minmax(0, ${1 - policy.widthRatio}fr) minmax(0, ${policy.widthRatio}fr)`, alignItems: 'start', flexShrink: 0 }),
   given: Object.freeze({ minWidth: 0, paddingRight: '1em', overflowWrap: 'anywhere' }),
-  area: Object.freeze({ width: '100%', aspectRatio: String(policy.aspectRatio), boxSizing: 'border-box', border: 'var(--drawing-area-border, 1px) solid currentColor', textAlign: 'left', textIndent: 0, overflowWrap: 'anywhere' }),
+  area: Object.freeze({ width: '100%', aspectRatio: String(policy.aspectRatio), boxSizing: 'border-box', padding: `${policy.labelPaddingPx}px`, border: 'var(--drawing-area-border, 1px) solid currentColor', textAlign: 'left', textIndent: 0, overflowWrap: 'anywhere' }),
 })

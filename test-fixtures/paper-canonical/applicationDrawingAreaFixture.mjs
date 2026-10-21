@@ -71,6 +71,17 @@ export function makeDrawingAreaCompilation(options) {
     candidateDigest: imported.candidate.candidateDigest, sourceDigest: imported.candidate.source.sha256, confirmed: true }
   const confirmed = rederiveConfirmedCanonicalCandidate(imported.candidate, confirmation)
   assert(confirmed.compilation?.artifacts.canonicalPaper, JSON.stringify(confirmed.unresolvedIssues))
+  // Exercise Canonical inline rendering directly; materialization text tokens
+  // remain unchanged and do not acquire a new marks input capability.
+  if (options?.labelMarks?.length) {
+    const group = confirmed.compilation.artifacts.canonicalPaper.questionGroups.find(
+      group => group.contractRef.familyContractId === 'application-writing',
+    )
+    const label = group.content.blocks.find(block => block.nodeId === group.variant.response.drawingArea.labelBlockRef)
+    label.inlines[0].marks = [...options.labelMarks]
+    const { sourceMap, sourceFingerprint, semanticDigest, ...semantic } = group
+    group.semanticDigest = digestJson(semantic)
+  }
   return { ...confirmed, sourceInput, imported, confirmation }
 }
 

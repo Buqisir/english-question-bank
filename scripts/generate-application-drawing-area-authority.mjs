@@ -85,7 +85,7 @@ const policy = {
   schemaVersion: 'application-writing-drawing-area-v1',
   id: 'application-writing-drawing-area', version: '1', owner: 'renderer_typography',
   placement: 'top_right', widthRatio: 0.25, aspectRatio: 1,
-  labelPlacement: 'inside_top_left', border: 'same_as_response_box',
+  labelPlacement: 'inside_top_left', labelPaddingPx: 4, border: 'same_as_response_box',
   topLayout: 'given_left_drawing_right', bottomLayout: 'full_width_writing_then_signature',
   answerOnly: 'omit', minimumApplicationHeightMm: 65,
 }
@@ -110,7 +110,9 @@ for (const [name, previousVersion] of [['screen', 47], ['print-pdf', 48]]) {
 }
 for (const [path, value] of outputs) {
   const bytes = `${stableStringify(value)}\n`
-  if (process.argv.includes('--check') || existsSync(path)) assert.equal(readFileSync(path, 'utf8'), bytes, path)
+  // Explicit refresh applies only to this branch's unpublished successor outputs.
+  if (process.argv.includes('--write-candidate') && !process.argv.includes('--check')) writeFileSync(path, bytes)
+  else if (process.argv.includes('--check') || existsSync(path)) assert.equal(readFileSync(path, 'utf8'), bytes, path)
   else writeFileSync(path, bytes, { flag: 'wx' })
 }
 console.log('PASS drawing-area v69/v70 successors preserve historical authority members')
