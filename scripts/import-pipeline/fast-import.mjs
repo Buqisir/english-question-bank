@@ -876,8 +876,9 @@ async function finish(ctx, args) {
       '--input', path.join(ctx.work, 'ocr-correction-entries.json')))
     return { entries: entries.entries ?? null, skipped: entries.skipped?.length ?? null }
   })
-  // The Candidate requires summaries, metadata and the listening review, so pagination cannot
-  // start earlier; source references build meanwhile and the merge rejects a stale digest.
+  // Confirmed answer figures require their admitted v3 sidecar before the
+  // pagination projection can load the Candidate.
+  await step(ctx, 'source-references', () => sourceReferences(ctx))
   await step(ctx, 'pagination-run', () => {
     const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
     const { candidateDigest } = projection
@@ -885,7 +886,6 @@ async function finish(ctx, args) {
     startPagination(ctx, candidateDigest)
     return { candidateDigest }
   })
-  await step(ctx, 'source-references', () => sourceReferences(ctx))
   await step(ctx, 'pagination-plan', () => mergePagination(ctx))
   await step(ctx, 'freeze', async () => {
     const frozen = await run(ctx, 'freeze', cli('freeze-products.mjs', '--paper-dir', ctx.paperDir, '--parallel'))
@@ -1009,7 +1009,7 @@ function status(ctx) {
 const STEP_ORDER = [
   'flags-present', 'compile', 'ocr-review', 'materialize', 'presentation', 'figure-sizes', 'subtitles-watermarks',
   'spelling', 'verify', 'answer-check', 'build', 'round2-requests', 'asr-wait', 'asr-apple-rule-v2',
-  'summaries', 'search-metadata', 'listening-review', 'ocr-correction-report', 'pagination-run', 'source-references',
+  'summaries', 'search-metadata', 'listening-review', 'ocr-correction-report', 'source-references', 'pagination-run',
   'pagination-plan', 'freeze', 'pdf-qa', 'local-preview', 'local-screen', 'push', 'screen',
 ]
 
