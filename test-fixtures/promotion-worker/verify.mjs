@@ -8,6 +8,7 @@ import { DatabaseSync } from 'node:sqlite'
 import { setTimeout as yieldFor } from 'node:timers/promises'
 import { matchingReviewProcess, reviewProcessIdentity, reviewProcessGroupMembers, killReviewProcessTree } from '../../server/import-review/reviewProcessTree.mjs'
 import { createPromotionOperationStore } from '../../server/import-review/promotionOperationStore.mjs'
+import { writeFixtureJson } from './faults.mjs'
 
 const hook = new URL('./hook.mjs', import.meta.url).pathname
 const driver = new URL('./api.mjs', import.meta.url)
@@ -141,7 +142,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       },
       plan(value) {
         const control = path.join(directory, 'fault-plan.json')
-        writeFileSync(control, JSON.stringify(value))
+        writeFixtureJson(control, value)
         env.NODE_OPTIONS = `--import=${hook}`
         env.EQB_PROMOTION_FAULT_STAGE = 'plan'
         env.EQB_PROMOTION_FAULT_CONTROL = control

@@ -1,7 +1,17 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
-import { createHash } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
+import path from 'node:path'
 import { setTimeout as yieldFor } from 'node:timers/promises'
+
+export function writeFixtureJson(file, value) {
+  // Plans and checkpoints have concurrent readers/writers. Publish complete
+  // JSON with a sibling rename; interrupted temporary files stay out of the
+  // checkpoint evidence collector's filename prefix.
+  const temporary = path.join(path.dirname(file), `.${path.basename(file)}.${randomUUID()}.tmp`)
+  writeFileSync(temporary, JSON.stringify(value), { flag: 'wx' })
+  renameSync(temporary, file)
+}
 
 function selected(stage) {
   if (process.env.EQB_PROMOTION_FAULT_CONTROL) {
@@ -12,13 +22,13 @@ function selected(stage) {
     ? process.env.EQB_PROMOTION_FAULT_ACTION || 'block' : null
 }
 function checkpoint(stage, detail = {}) {
-  const record = JSON.stringify({
+  const record = {
     stage, pid: process.pid, at: Date.now(), rssBytes: process.memoryUsage().rss, ...detail,
     ...(stage === 'compatibility-input' ? { workspace: process.env.TMPDIR } : {}),
-  })
-  writeFileSync(process.env.EQB_PROMOTION_FAULT_MARKER, record)
-  writeFileSync(`${process.env.EQB_PROMOTION_FAULT_MARKER}.${stage}`, record)
-  writeFileSync(`${process.env.EQB_PROMOTION_FAULT_MARKER}.${process.pid}.${stage}`, record)
+  }
+  writeFixtureJson(process.env.EQB_PROMOTION_FAULT_MARKER, record)
+  writeFixtureJson(`${process.env.EQB_PROMOTION_FAULT_MARKER}.${stage}`, record)
+  writeFixtureJson(`${process.env.EQB_PROMOTION_FAULT_MARKER}.${process.pid}.${stage}`, record)
 }
 export async function promotionAsyncFault(stage) {
   if (selected(stage) !== 'gate') return
