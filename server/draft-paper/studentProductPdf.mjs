@@ -5,6 +5,7 @@ import { applyPlannedGroupBreaks, inspectGroups, searchFixedPagePdf } from './fi
 export const STUDENT_PRODUCT_EDITIONS = ['largeComplete', 'largeNoListening', 'economy8']
 export const STUDENT_PRODUCT_PROFILE = 'student-friendly-v1'
 const economyProfile = 'student-friendly-economy-v2'
+const coverLiftProfile = 'student-friendly-cover-lift-v2'
 const normalHeights = { application: 65, continuation: 57 }
 
 export function studentProductPolicy(edition, listeningCount, { economyPageLimit = 8 } = {}) {
@@ -21,10 +22,11 @@ export function studentProductPolicy(edition, listeningCount, { economyPageLimit
 export function validateStudentProductLayout(layout, edition) {
   const keys = ['profile', 'fontSizePt', 'figureLayout', 'answerBoxHeightsMm']
   if (!layout || Object.keys(layout).sort().join() !== keys.sort().join()
-    || !(edition === 'economy8' ? [STUDENT_PRODUCT_PROFILE, economyProfile] : [STUDENT_PRODUCT_PROFILE]).includes(layout.profile)
+    || !(edition === 'economy8' ? [STUDENT_PRODUCT_PROFILE, economyProfile, coverLiftProfile] : [STUDENT_PRODUCT_PROFILE, coverLiftProfile]).includes(layout.profile)
     || !STUDENT_PRODUCT_EDITIONS.includes(edition)
     || !(edition === 'economy8' ? [12, 10.5] : [12]).includes(layout.fontSizePt)
     || !['natural', 'float80'].includes(layout.figureLayout)
+    || (layout.profile === coverLiftProfile && layout.figureLayout !== 'natural')
     || !layout.answerBoxHeightsMm
     || Object.keys(layout.answerBoxHeightsMm).sort().join() !== 'application,continuation') {
     throw new Error('Invalid student product layout')
@@ -49,7 +51,7 @@ export function applyStudentProductLayout(html, layout, edition) {
   if (html.split(margin).length !== 2 || html.split('</head>').length !== 2) {
     throw new Error('Student product requires the canonical A4 print geometry')
   }
-  const css = `
+  let css = `
 .canonical-paper-cover-notices{display:none!important}
 .canonical-paper-cover-title{margin-bottom:0!important}
 body{--paper-seven-baseline:${lineHeightPt}pt;--paper-cloze-baseline:${lineHeightPt}pt;
@@ -86,8 +88,11 @@ ${figureLayout === 'float80' ? `
 {display:grid!important;grid-template-columns:minmax(0,1fr)!important;white-space:normal!important}
 [data-pdf-single-column]>span{white-space:normal!important}
 `
+  // This profile overrides the opening margin only after ordinary searches fail;
+  // keep historical CSS byte-for-byte unchanged for saved layout replay.
+  if (layout.profile === coverLiftProfile) css += '.canonical-paper-opening{margin-top:-25.5pt!important}'
   return html.replace(margin, 'margin: 21mm 20mm 24mm 20mm;')
-    .replace('</head>', `<style data-pdf-student-product="${layout.profile}"${layout.profile === economyProfile ? ' data-pdf-economy-balance="v1"' : ''}>${css}</style></head>`)
+    .replace('</head>', `<style data-pdf-student-product="${layout.profile}"${layout.profile === economyProfile || (layout.profile === coverLiftProfile && edition === 'economy8') ? ' data-pdf-economy-balance="v1"' : ''}>${css}</style></head>`)
 }
 
 function acceptableWriting(result, html) {
@@ -141,22 +146,30 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
   let searchedCandidates = 0
-  for (const fontSizePt of edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]) {
+  let regularWithinLimit = false
+  const fonts = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
+  // Finish every ordinary font tier before lifting the opening. One extra
+  // profile per tier gets at most 13 break trials + 14 box-restoration renders.
+  const tiers = [false, true].flatMap(coverLift => fonts.map(fontSizePt => ({ fontSizePt, coverLift })))
+  for (const { fontSizePt, coverLift } of tiers) {
+    if (coverLift && regularWithinLimit) break
     const tierStart = searchedCandidates
     const minimumContinuation = fontSizePt === 12 ? 27 : 24
     // Prefer full-size source media and normal answer space. Compact geometry
     // is a measured fallback, never the default carried over from a sample.
-    const profiles = [
+    const profiles = coverLift ? [['natural', 24, minimumContinuation]] : [
       ['natural', 65, 57], ['float80', 65, 57], ['natural', 65, minimumContinuation],
       ['float80', 65, minimumContinuation], ['float80', 24, minimumContinuation],
     ]
     for (const [figureLayout, application, continuation] of profiles) {
       if (html.includes('data-canonical-drawing-area-id=') && application < applicationDrawingAreaPolicy.minimumApplicationHeightMm) continue
-      let layout = { profile: edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
+      let layout = { profile: coverLift ? coverLiftProfile : edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
         answerBoxHeightsMm: { application, continuation } }
       const measure = async (selected, breaks = []) => {
         searchedCandidates += 1
-        return render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+        const result = await render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+        if (!coverLift && result.pageCount <= policy.targetPages) regularWithinLimit = true
+        return result
       }
       let natural
       try { natural = await measure(layout) } catch (error) {
@@ -171,7 +184,12 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
           ...policy, natural, accept, renderLimit: withinPages(natural) && accept(natural) ? 13 : 5,
           balanceWhitespace: policy.atMost,
           rejectOverflowCandidates: true,
-          render: async (...args) => { searchedCandidates += 1; return render(...args) },
+          render: async (...args) => {
+            searchedCandidates += 1
+            const result = await render(...args)
+            if (!coverLift && result.pageCount <= policy.targetPages) regularWithinLimit = true
+            return result
+          },
         })
       } catch (error) {
         if (error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' || error.code === 'PAPER_LAYOUT_OVERFLOW') continue
@@ -179,7 +197,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
       }
       ;({ fit, layout } = await restoreAnswerSpace(fit, layout, {
         measure, accept: result => withinPages(result) && accept(result),
-        canMeasure: () => searchedCandidates - tierStart < 48,
+        canMeasure: () => searchedCandidates - tierStart < (coverLift ? 27 : 48),
       }))
       // Height restoration can change group fragments. Re-score its measured
       // result without another render, retaining the exact chosen breaks.
