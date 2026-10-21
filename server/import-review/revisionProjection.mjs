@@ -10,7 +10,7 @@ import {
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
 import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
-import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
+import { consumerContractRefsForAuthority } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
@@ -1211,7 +1211,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(
+        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
@@ -1234,7 +1234,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
     sourceAssetDigest: candidate.source.sha256,
     authorityRef: structuredClone(canonicalPaper.paperPlan.authorityRef),
     profileRef: structuredClone(canonicalPaper.paperPlan.profileRef),
-    consumerContractRef: structuredClone(consumerContractRefs.screen),
+    consumerContractRef: structuredClone(consumerContractRefsForAuthority(canonicalPaper.paperPlan.authorityRef).screen),
     visibleStructure: structure,
     visibleStructureDigest: digestJson(structure),
     selections,
@@ -1906,6 +1906,6 @@ function buildNck1ReviewProjectionUncached(rootDir, {
 export function printConsumption(screenConsumption) {
   return {
     ...structuredClone(screenConsumption),
-    consumerContractRef: structuredClone(consumerContractRefs.print_pdf),
+    consumerContractRef: structuredClone(consumerContractRefsForAuthority(screenConsumption.authorityRef).print_pdf),
   }
 }

@@ -8,6 +8,8 @@ import {
   nck1MaterializationCandidateAuthorityRef,
   nck1ListeningInstructionAuthorityRef,
   nck1DrawingAreaAuthorityRef,
+  nck1ReadingStemFiguresAuthorityRef,
+  closureAdmitsReadingStemFigures,
   validateJsonSchema,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef59,
@@ -1071,6 +1073,7 @@ function groupVariant(group, answersByQuestionId, content, issues, source, docum
         correctOptionId:
           `option:${question.questionId}:${answersByQuestionId.get(question.questionId)}`,
         ...(question.figureLayout ? { figureLayout: structuredClone(question.figureLayout) } : {}),
+        ...(question.stemFigures ? { stemFigures: question.stemFigures.map(canonicalBlock) } : {}),
       })),
       choiceOwnership: ownership,
     }
@@ -1446,6 +1449,16 @@ export function deriveNck1SemanticSource(
         ))
       }
     }
+    for (const question of group.questions) {
+      for (const figure of question.stemFigures || []) {
+        const observation = observationForLocator(
+          `observation:stem-figure:${figure.blockId}`, 'source_question_figure',
+          figure.source, { blockId: figure.blockId, mediaId: figure.mediaId }, documentsById,
+        )
+        observation.extraction.version = '10'
+        source.observations.push(observation)
+      }
+    }
     const canonicalBlocks = group.family === 'continuation-writing'
       ? group.blocks.filter((block) =>
           block.kind !== 'paragraph'
@@ -1454,6 +1467,7 @@ export function deriveNck1SemanticSource(
     const content = { blocks: canonicalBlocks.map(canonicalBlock) }
     const groupMedia = [
       ...referencedMediaIds(group.blocks),
+      ...group.questions.flatMap(question => referencedMediaIds(question.stemFigures || [])),
       ...group.questions.flatMap((question) => question.options
         .filter((value) => value.figure).map((value) => value.figure.mediaId)),
     ].map((mediaId) => {
@@ -1494,7 +1508,7 @@ export function deriveNck1SemanticSource(
                 },
               }
             : {}),
-          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),
@@ -1555,6 +1569,11 @@ export function deriveNck1SemanticSource(
         },
       ),
       sourceSpanRefsByTarget: Object.fromEntries([
+        ...group.questions.flatMap(question => (question.stemFigures || []).flatMap(figure =>
+          [figure.blockId, ...(figure.caption ? [`caption:${figure.blockId}`] : [])].map(nodeId => [
+            `content_node:${nodeId}`,
+            [`source-span:observation:stem-figure:${figure.blockId}`],
+          ]))),
         ...groupMedia.map((media) => [
           `media:${media.mediaId}`,
           [`source-span:observation:source-media:${media.mediaId}`],
@@ -1790,14 +1809,15 @@ export function replaceOcrStructuredAnswerRegions(raw, expected, resolved, confi
   }
   const references = raw.groups.flatMap(group => [
     ...referencedMediaIds(group.blocks),
+    ...group.questions.flatMap(question => referencedMediaIds(question.stemFigures || [])),
     ...group.questions.flatMap(question => question.options.filter(option => option.figure).map(option => option.figure.mediaId)),
     ...(group.optionBank || []).filter(option => option.figure).map(option => option.figure.mediaId),
   ])
   for (const visual of visuals) {
     const group = raw.groups.find(group => group.groupId === visual.targetId)
-    if (raw.schemaVersion !== 'nck1-source-materialization-v5' || group?.family !== 'application-writing'
+    if (!['nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(raw.schemaVersion) || group?.family !== 'application-writing'
       || group.writingTask?.taskType !== 'application' || !group.writingTask.drawingArea) {
-      reject('UNMATCHED', 'Structured OCR replacement requires a v5 application group with drawingArea')
+      reject('UNMATCHED', 'Structured OCR replacement requires a v5/v6 application group with drawingArea')
     }
     const owners = expected.groups.flatMap(owner => flatten(owner.blocks).flatMap(block => {
       if (owner.groupId !== group.groupId || owner.slotId !== group.slotId || owner.family !== group.family
@@ -1879,6 +1899,72 @@ export function replaceOcrStructuredAnswerRegions(raw, expected, resolved, confi
   return { expected, replacements, paragraphs }
 }
 
+// B1 derives ownership from the immutable confirmed source stream. The old
+// producer is deliberately unchanged: it supplies question identity/locator and
+// options, while these contiguous media markers were previously unassociated.
+// A subsequent authority must admit the complete v6 reader before publication.
+function confirmedStemFigures(raw, resolved, expected) {
+  const same = (left, right) => digestJson(left) === digestJson(right)
+  const reject = message => { throw new Error(message) }
+  const owners = new Map()
+  for (const group of raw.groups) {
+    for (const question of group.questions) {
+      if (!question.stemFigures) continue
+      const document = raw.documents.find(document => document.documentId === question.source.documentId)
+      if (document?.role !== 'question_source' || document.mediaType !== 'application/pdf') {
+        reject('Stem figures require a separate question_source PDF')
+      }
+      const matches = expected.groups.flatMap(candidate => candidate.family === 'reading'
+        ? candidate.questions.filter(value => same(value.source, question.source))
+          .map(value => ({ group: candidate, question: value })) : [])
+      if (matches.length !== 1) reject('Stem figures require one source-derived Reading question')
+      const derived = matches[0]
+      if (!['slotId', 'groupId', 'family'].every(key => group[key] === derived.group[key])
+        || !['questionId', 'sourceNumber', 'canonicalNumber', 'source', 'stem', 'options']
+          .every(key => same(question[key], derived.question[key]))) {
+        reject('Stem figures must retain their source-derived group, question identity, stem and options')
+      }
+      const body = resolved.structures.get(document.documentId)?.body || []
+      const anchors = body.flatMap((item, index) => item.kind === 'paragraph' && !item.materializedMedia
+        && same(item.sourceIndex, question.source) ? [index] : [])
+      if (anchors.length !== 1) reject('Stem figure question anchor must be unique')
+      let cursor = anchors[0]
+      const text = []
+      while (body[cursor]?.kind === 'paragraph' && !body[cursor].materializedMedia) {
+        const item = body[cursor]
+        // Never pass an option row or a later question looking for a figure.
+        if ((cursor !== anchors[0] && /^\s*\d+[.．、]/u.test(item.text))
+          || /(?:^|\s)A[.．、]\s*/u.test(item.text)) break
+        text.push(item.text)
+        cursor += 1
+      }
+      const stem = text.join('\n').replace(/^\s*\d+[.．、]\s*/u, '').trim()
+      if (stem !== derived.question.stem.trim()) reject('Stem figure must follow the complete source stem without crossing unconsumed text')
+      const markers = []
+      while (body[cursor]?.materializedMedia) {
+        markers.push(body[cursor])
+        cursor += 1
+      }
+      if (!markers.length || markers.length !== question.stemFigures.length
+        || !/^\s*A[.．、]\s*/u.test(body[cursor]?.text || '')) {
+        reject('Stem figures must form one contiguous sequence between stem and first option')
+      }
+      for (const [index, figure] of question.stemFigures.entries()) {
+        const marker = markers[index]
+        const parents = resolved.contentMedia.filter(parent => parent.mediaId === figure.mediaId
+          && same(parent.source, figure.source))
+        if (figure.kind !== 'figure' || parents.length !== 1
+          || marker.materializedMedia.mediaId !== figure.mediaId || !same(marker.sourceIndex, figure.source)
+          || owners.has(figure.mediaId)) {
+          reject('Stem figure must consume its exact confirmed region once in source order; crop revisions are unsupported')
+        }
+        owners.set(figure.mediaId, figure)
+      }
+    }
+  }
+  return owners
+}
+
 // OCR-v3 may confirm an aggregate A-D bank or an ordinary body figure whose
 // top includes preceding text. Materialization v3/v4 proves these separately.
 // This proves provenance and consumption; graphic completeness needs image QA.
@@ -1889,10 +1975,22 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
   if (mediaById.size !== raw.media.length) reject('OCR media IDs must be globally unique')
   const references = raw.groups.flatMap(group => [
     ...referencedMediaIds(group.blocks),
+    ...group.questions.flatMap(question => referencedMediaIds(question.stemFigures || [])),
     ...group.questions.flatMap(question => question.options.filter(option => option.figure)
       .map(option => option.figure.mediaId)),
     ...(group.optionBank || []).filter(option => option.figure).map(option => option.figure.mediaId),
   ])
+  const stemFigures = confirmedStemFigures(raw, resolved, expected)
+  if (stemFigures.size) {
+    const regions = new Set()
+    for (const media of raw.media) {
+      const crop = media.extraction
+      if (crop.kind !== 'pdf_crop') continue
+      const key = digestJson([crop.documentId, crop.page, crop.region])
+      if (regions.has(key)) reject('One confirmed source region cannot be consumed under multiple media identities')
+      regions.add(key)
+    }
+  }
   const consumed = new Set()
   const childParents = new Map()
   const topTrims = new Map()
@@ -1921,10 +2019,13 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       continue
     }
     if (original) {
+      if (stemFigures.has(mediaId) && !same(original.extraction.region, locator.region)) {
+        reject('Stem figures do not admit crop revisions or ordinary body top-trim proof')
+      }
       if (!same(original.extraction.region, locator.region)) {
         // Only an ordinary, source-order body figure may tighten its top.
         // Keep the immutable parent and the A-D bank path separate.
-        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(raw.schemaVersion)
+        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(raw.schemaVersion)
           || !matchesCrop(original, locator)
           || resolved.contentMedia.filter(value => value.mediaId === mediaId).length !== 1) {
           reject('OCR top-trim requires one confirmed PDF content figure with its original media ID')
@@ -2058,14 +2159,14 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
         continue
       }
       if (!matchesCrop(original, locator) || !same(original.extraction.region, locator.region)
-        || blocks.filter(block => block.kind === 'figure' && block.mediaId === mediaId
+        || [...blocks, ...stemFigures.values()].filter(block => block.kind === 'figure' && block.mediaId === mediaId
           && same(block.source, locator)).length !== 1) {
         reject('Confirmed OCR image must retain its exact source crop and one content placement')
       }
       claim(mediaId)
       continue
     }
-    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(raw.schemaVersion)) {
+    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(raw.schemaVersion)) {
       reject('OCR option banks require the existing figure-option materialization contract')
     }
     // Recover afterItemId from the verified immutable closure, never from a
@@ -2379,6 +2480,7 @@ export function withNck1MaterializationSourceCache(callback) {
 }
 
 export function nck1MaterializationAuthorityForInput(input) {
+  if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v6') return nck1ReadingStemFiguresAuthorityRef
   if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v5') return nck1DrawingAreaAuthorityRef
   return input.listeningInstructionCorrectionBytes ? nck1ListeningInstructionAuthorityRef : nck1MaterializationCandidateAuthorityRef
 }
@@ -2413,9 +2515,18 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
   }
   // Authority checks append issues; keep that list private to this derivation.
   const validation = { ...prepared.validation, issues: [...prepared.validation.issues] }
-  if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(materialization.schemaVersion)
+  if (materialization.schemaVersion === 'nck1-source-materialization-v6'
+    && !closureAdmitsReadingStemFigures(resolveCanonicalAuthority(authorityRef).closure)) {
+    validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v6 requires the complete Reading stem figure reader authority'))
+  }
+  if (materialization.groups?.some(group => group.questions?.some(question => question.stemFigures))
+    && parseMaterialization(input.ocrSourceBytes?.confirmationBytes)?.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3) {
+    validation.issues.push(adapterIssue('MATERIALIZATION_STEM_FIGURE_CONFIRMATION_REQUIRED',
+      'Stem figures require a verified v3 OCR question-source stream'))
+  }
+  if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(materialization.schemaVersion)
     || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
-    && !['62', '64', '66', '67', '68', '69'].includes(authorityRef.manifestVersion)) {
+    && !['62', '64', '66', '67', '68', '69', '71'].includes(authorityRef.manifestVersion)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require a registered source-presentation closure'))
   }
   if ((materialization.schemaVersion === 'nck1-source-materialization-v5'
@@ -2423,7 +2534,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     && !closureAdmitsApplicationDrawingArea(resolveCanonicalAuthority(authorityRef).closure)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_DRAWING_AREA_UNSUPPORTED', 'Application drawing areas require their registered successor authority'))
   }
-  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
+  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Listening instruction correction requires its registered successor authority'))
   }
   if (validation.issues.length > 0) {
@@ -2474,7 +2585,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     derivationIssues,
     { authorityRef, listeningInstructionCorrection },
   )
-  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
+  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
     nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
@@ -2482,7 +2593,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
       derivationIssues)
   }
   if (input.ocrSourceBytes) {
-    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
       derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
     } else {

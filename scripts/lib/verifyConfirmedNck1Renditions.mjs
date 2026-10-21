@@ -20,7 +20,7 @@ export function verifyConfirmedNck1Renditions(input) {
       document.inputKey.startsWith('candidate_media_') ? [index] : [])
     assert.equal(indexes.length, 2, 'two distinct renditions exercise swaps')
     assert.notDeepEqual(request.evidence.documents[indexes[0]].bytes, request.evidence.documents[indexes[1]].bytes)
-    const versions = ['54', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69']
+    const versions = ['54', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71']
     for (const version of versions) {
       const authority = Object.values(authorities).find(value =>
         value?.manifestId === 'paper-canonical' && value.manifestVersion === version)

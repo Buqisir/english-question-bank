@@ -3,7 +3,7 @@ import {
   consumerContractRefs, proveReviewConsumerComparison, reviewConsumerPairs,
   reviewConsumerSuccessions, validateReviewConsumerRelations,
 } from '../shared/paper-canonical/consumers.mjs'
-import { nck1MaterializationHistoricalAuthorityRef66, nck1DrawingAreaAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef66, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 
 const old = reviewConsumerPairs[0]
 const current = consumerContractRefs
@@ -38,3 +38,30 @@ assert.throws(() => validateReviewConsumerRelations(reviewConsumerSuccessions, [
   { screen: old.screen, print_pdf: current.print_pdf },
 ]), /Invalid Review consumer pair/)
 console.log('PASS exact consumer succession, identity, pair, unknown, missing, reverse, cycle and capability cases')
+
+const stem = reviewConsumerPairs[2]
+for (const id of ['screen', 'print_pdf']) {
+  const twoHop = prove(old[id], stem[id])
+  assert.equal(twoHop.ok, true, 'known old closure crosses two exact edges')
+  assert.deepEqual(twoHop.edges.map(edge => edge.addedCapabilities), [
+    ['application-drawing-area'], ['reading-stem-figures'],
+  ])
+  const stemOnly = prove(current[id], stem[id], nck1DrawingAreaAuthorityRef)
+  assert.equal(stemOnly.ok, true, 'drawing-capable closure may cross only the stem delta')
+  assert.deepEqual(stemOnly.edges.map(edge => edge.addedCapabilities), [['reading-stem-figures']])
+  assert.equal(prove(old[id], stem[id], nck1DrawingAreaAuthorityRef).ok, false,
+    'two-hop proof still rejects a closure admitting the first delta')
+  assert.equal(prove(current[id], stem[id], nck1ReadingStemFiguresAuthorityRef).ok, false,
+    'stem-admitting closure cannot cross the stem edge, even if unused')
+  assert.equal(prove(stem[id], stem[id], nck1ReadingStemFiguresAuthorityRef).ok, true)
+  assert.equal(prove(stem[id], current[id]).ok, false, 'no stem reverse edge')
+  assert.equal(prove(current[id], stem[id], {}).ok, false)
+}
+assert.equal(prove(old.screen, stem.print_pdf).ok, true, 'paired two-hop Print')
+assert.equal(prove(current.screen, stem.print_pdf, nck1DrawingAreaAuthorityRef).ok, true)
+assert.equal(prove(stem.screen, stem.print_pdf, nck1ReadingStemFiguresAuthorityRef).ok, true)
+assert.equal(prove({ ...stem.screen, version: '50' }, stem.screen).ok, false)
+assert.throws(() => validateReviewConsumerRelations([
+  { ...reviewConsumerSuccessions[2], addedCapabilities: ['unknown-capability'] },
+], reviewConsumerPairs), /Invalid Review consumer succession/)
+console.log('PASS screen47->49, drawing screen48->49, screen49 identity, stem closure rejection, paired Print and per-edge capability deltas')

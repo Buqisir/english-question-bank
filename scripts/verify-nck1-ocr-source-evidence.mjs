@@ -41,6 +41,7 @@ import {
   cloneJson,
   makeSyntheticNck1OcrFixture,
 } from '../test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs'
+import { verifyReadingStemFigures } from '../test-fixtures/paper-import/nck1-ocr-evidence-v1/stem-figures.mjs'
 import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { replaceOcrStructuredAnswerRegions } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
@@ -55,6 +56,7 @@ execFileSync(process.execPath, [path.join(root, 'scripts/generate-paper-ocr-emph
   stdio: 'inherit',
 })
 const fixture = await makeSyntheticNck1OcrFixture({ paperId })
+await verifyReadingStemFigures(fixture)
 
 function validRegion(region) {
   return region
@@ -425,6 +427,12 @@ for (const classification of ['semantic_table', 'content_media']) {
   const withoutProof = cloneJson(changed)
   withoutProof.media = withoutProof.media.filter(media => media.mediaId !== mediaId)
   assert.deepEqual(importChanged(withoutProof).issues, [], 'confirmed template media may also be omitted')
+  for (const materialization of [changed, withoutProof]) {
+    const successor = cloneJson(materialization)
+    successor.schemaVersion = 'nck1-source-materialization-v6'
+    assert.deepEqual(validateNck1SourceMaterialization(successor), [])
+    assert.deepEqual(importChanged(successor).issues, [], 'v6 inherits the controlled OCR structured answer replacement')
+  }
   const immutableRaw = cloneJson(changed)
   const transformed = replaceOcrStructuredAnswerRegions(changed, cloneJson(produced.materialization), resolved, confirmation, evidence)
   assert.deepEqual(changed, immutableRaw, 'only the expected side is rewritten')
@@ -442,10 +450,13 @@ for (const classification of ['semantic_table', 'content_media']) {
     if (name === 'text') owner.blocks.find(value => value.blockId === paragraphs[0].blockId).content[0].text = 'Invented label'
     if (name === 'source') owner.blocks.find(value => value.blockId === paragraphs[0].blockId).source.region.x += .001
     const suffix = { content: 'CONTENT_CONFLICT', text: 'TEXT_UNCONFIRMED', source: 'TEXT_SOURCE_INVALID' }[name] || 'UNMATCHED'
-    assert.throws(() => replaceOcrStructuredAnswerRegions(raw, exp, resolved, confirmation, evidence),
-      error => error.code === `OCR_STRUCTURED_ANSWER_REGION_${suffix}`, name)
+    for (const version of [5, 6]) {
+      raw.schemaVersion = `nck1-source-materialization-v${version}`
+      assert.throws(() => replaceOcrStructuredAnswerRegions(raw, cloneJson(exp), resolved, confirmation, evidence),
+        error => error.code === `OCR_STRUCTURED_ANSWER_REGION_${suffix}`, `v${version} ${name}`)
+    }
   }
-  console.log('PASS OCR-v3 controlled structured answer replacement: exact owner/region/text/source, proof/absence, closed media and unchanged legacy path')
+  console.log('PASS OCR-v3 controlled structured answer replacement for v5/v6: exact owner/region/text/source, proof/absence, closed media and unchanged legacy path')
 }
 
 // Prepare immutable native page fixtures once for the media-negative matrix.

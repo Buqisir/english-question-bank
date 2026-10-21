@@ -44,6 +44,8 @@ import {
 } from './nck1MaterializationCanonicalRequest.mjs'
 import {
   consumerContractRefs,
+  consumerContractRefsForAuthority,
+  consumerRendersReadingStemFigures,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
@@ -62,6 +64,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v71.json',
   'canonical-paper-publication-v69.json',
   'canonical-paper-publication-v68.json',
   'canonical-paper-publication-v67.json',
@@ -149,6 +152,15 @@ function publicationError(code, message) {
   const error = new Error(message)
   error.code = code
   return error
+}
+
+// Publication schemas have independent successor numbers from authority manifests.
+function publicationSchemaVersion(closure) {
+  return closure.authorityRef.manifestVersion === '71' ? '70' : closure.authorityRef.manifestVersion
+}
+
+function publicationSchema(closure) {
+  return closure.schemas[`canonical-paper-publication-v${publicationSchemaVersion(closure)}`]
 }
 
 function artifactPathsFor(authorityRef) {
@@ -426,13 +438,13 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
 }
 
 function capturedListeningAudio(sourceCapture, groups, closure) {
-  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion)) return null
+  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion)) return null
   const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
   const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
   if (!active && documents.length === 0) return null
   if (!active || documents.length !== 1) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Listening requires one confirmed playback descriptor')
   const descriptor = readJsonBytes(decodeBase64(documents[0].encodedBytes, 'listening audio'), 'listening audio')
-  const schema = closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`].properties.listeningAudio
+  const schema = publicationSchema(closure).properties.listeningAudio
   if (validateJsonSchema(descriptor, schema).length) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Invalid playback descriptor')
   return descriptor
 }
@@ -526,7 +538,7 @@ export function sealCanonicalPublication({
     artifactDescriptor('normalization_report', normalizationReport, artifactPaths),
   ]
   const manifestBase = {
-    schemaVersion: `canonical-paper-publication-v${closure.authorityRef.manifestVersion}`,
+    schemaVersion: `canonical-paper-publication-v${publicationSchemaVersion(closure)}`,
     paperId: canonicalPaper.paperPlan.paperId,
     sourceAssetVersion,
     sourceAssetDigest,
@@ -560,7 +572,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   // Strict optional envelope extension: validate it separately without changing
   // any historical authority schema. The full manifest still enters the digest.
   validatedPaperHeaderTitle(manifest.paperHeader)
-  const manifestIssues = validateJsonSchema(withoutKey(manifest, 'paperHeader'), closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`], '$.publication')
+  const manifestIssues = validateJsonSchema(withoutKey(manifest, 'paperHeader'), publicationSchema(closure), '$.publication')
   if (manifestIssues.length > 0) throw publicationError('CANONICAL_PUBLICATION_SCHEMA_INVALID', JSON.stringify(manifestIssues))
   if (manifest.publicationDigest !== digestJson(withoutKey(manifest, 'publicationDigest'))) throw publicationError('CANONICAL_PUBLICATION_DIGEST_INVALID', 'Publication manifest digest differs')
   assertPaperId(manifest.paperId)
@@ -576,7 +588,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   }
   const sourceCaptureIssues = validateJsonSchema(artifacts.source_capture, closure.schemas['source-capture-v1'], '$.sourceCapture')
   const planIssues = validateJsonSchema(artifacts.paper_plan, closure.schemas['canonical-paper-plan-v1'], '$.plan')
-  const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.report')
+  const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${publicationSchemaVersion(closure)}`], '$.report')
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
   const listeningAudio = capturedListeningAudio(artifacts.source_capture, artifacts.question_groups.groups, closure)
   if (digestJson(listeningAudio) !== digestJson(manifest.listeningAudio || null)) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Publication audio differs from the confirmed source')
@@ -1119,13 +1131,13 @@ function candidateStore(sealed, ref) {
 
 export function loadCanonicalOnlyConsumers({ ref, store }) {
   const consumers = {}
-  for (const [consumerId, consumerContract] of Object.entries(
+  for (const consumerId of Object.keys(
     consumerContractRefs,
   )) {
     const consumption = loadPaperForConsumptionSync({
       paperId: ref.paperId,
       version: ref.versionName,
-      consumerContract,
+      consumerId,
     }, store)
     if (
       consumption.disposition !== 'ready'
@@ -1583,6 +1595,17 @@ function canonicalSelections(validated, contract, sourceAsset) {
       'This paper requires a consumer that preserves the source-backed Application Writing drawing area',
     )
   }
+  const stemFigureGroups = validated.groups.filter(group =>
+    group.variant.family === 'reading' && group.variant.questions.some(question => question.stemFigures !== undefined))
+  if (stemFigureGroups.length && (!consumerRendersReadingStemFigures({
+    id: contract.consumerId, version: contract.version, digest: contract.contractDigest,
+  }) || stemFigureGroups.some(group => !contract.families.some(entry =>
+    entry.familyContractId === 'reading'
+      && entry.version === group.contractRef.familyContractVersion
+      && entry.digest === group.contractRef.familyContractDigest)))) {
+    throw publicationError('CANONICAL_CONSUMER_STEM_FIGURE_UNAVAILABLE',
+      'Reading stem figures require the exact successor family and renderer capability')
+  }
   if (validated.groups.some(group => group.sourcePresentation !== undefined)
     && Number(authorityRefForManifestDigest(contract.authorityManifestDigest)?.manifestVersion) < 62) {
     throw publicationError(
@@ -1649,7 +1672,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         || projectedOccurrences.some(occurrence => occurrence.sourcePresentation !== undefined)
         || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1661,7 +1684,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(
@@ -1931,13 +1954,21 @@ function publicationDiagnostic(error) {
   }
 }
 
+function consumptionRequestForPublication(request, manifestBytes) {
+  if (request.consumerContract) return request
+  const manifest = readJsonBytes(manifestBytes, 'consumer authority selection')
+  return { ...request,
+    consumerContract: consumerContractRefsForAuthority(manifest.authority)[request.consumerId],
+  }
+}
+
 /**
  * Shared Screen/Print-PDF loader. It resolves one immutable publication
  * and one exact checked-in Consumer Contract before exposing a whole-family
  * consumption plan; existing consumers are intentionally not rewired here.
  */
 export async function loadPaperForConsumption(request, store) {
-  const consumer = resolveConsumerContract(request.consumerContract)
+  const consumer = resolveConsumerContract(request.consumerContract || consumerContractRefs[request.consumerId])
   if (!consumer.ok) return { disposition: 'incompatible', diagnostics: consumer.issues }
   for (let attempt = 0; attempt < 2; attempt++) {
     const refs = await store.readPublishedRefs(request.paperId, request.version)
@@ -1957,6 +1988,8 @@ export async function loadPaperForConsumption(request, store) {
     const sourceAsset = await store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
+      const selectedRequest = consumptionRequestForPublication(request, manifestBytes)
+      const selectedConsumer = resolveConsumerContract(selectedRequest.consumerContract)
       const {
         manifest,
         selection,
@@ -1970,10 +2003,10 @@ export async function loadPaperForConsumption(request, store) {
         manifestFileName,
         sourceAsset,
         store,
-        contract: consumer.contract,
+        contract: selectedConsumer.contract,
       })
       return readyConsumption(
-        request,
+        selectedRequest,
         ref,
         manifest,
         selection,
@@ -1997,7 +2030,7 @@ export async function loadPaperForConsumption(request, store) {
  * async loader above. Async legacy projectors are intentionally rejected.
  */
 export function loadPaperForConsumptionSync(request, store) {
-  const consumer = resolveConsumerContract(request.consumerContract)
+  const consumer = resolveConsumerContract(request.consumerContract || consumerContractRefs[request.consumerId])
   if (!consumer.ok) return { disposition: 'incompatible', diagnostics: consumer.issues }
   for (let attempt = 0; attempt < 2; attempt++) {
     const refs = store.readPublishedRefs(request.paperId, request.version)
@@ -2017,6 +2050,8 @@ export function loadPaperForConsumptionSync(request, store) {
     const sourceAsset = store.readSourceAsset(ref)
     if (!manifestBytes || !sourceAsset) continue
     try {
+      const selectedRequest = consumptionRequestForPublication(request, manifestBytes)
+      const selectedConsumer = resolveConsumerContract(selectedRequest.consumerContract)
       const {
         manifest,
         selection,
@@ -2030,10 +2065,10 @@ export function loadPaperForConsumptionSync(request, store) {
         manifestFileName,
         sourceAsset,
         store,
-        contract: consumer.contract,
+        contract: selectedConsumer.contract,
       })
       return readyConsumption(
-        request,
+        selectedRequest,
         ref,
         manifest,
         selection,
