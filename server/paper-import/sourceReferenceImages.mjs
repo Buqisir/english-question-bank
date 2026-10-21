@@ -12,6 +12,9 @@ export const SOURCE_REFERENCE_IMAGE_LIMITS = Object.freeze({
 })
 export const SOURCE_REFERENCE_IMAGE_PROFILE = 'source-reference-pdf-crop-v1'
 export const SOURCE_REFERENCE_IMAGE_DPI = 288
+export const SOURCE_REFERENCE_RASTER_LIMITS = Object.freeze({
+  maxPagePixels: 16_000_000, maxPageDimension: 8192, timeoutMs: 15_000,
+})
 const signature = Buffer.from('89504e470d0a1a0a', 'hex')
 
 function invalid(message) {
@@ -93,7 +96,7 @@ export function decodeSourceReferencePng(raster) {
       '-limit', 'memory', '128MiB', '-limit', 'map', '128MiB', '-limit', 'disk', '0',
       '-limit', 'thread', '1', '-limit', 'time', '10', '-regard-warnings',
       `png:${file}`, '-colorspace', 'sRGB', '-alpha', 'on', '-depth', '8', 'rgba:-',
-    ], { maxBuffer: limits.pixels * 4 + 1024, timeout: 15_000, stdio: ['ignore', 'pipe', 'pipe'] })
+    ], { maxBuffer: limits.pixels * 4 + 1024, timeout: 15_000, killSignal: 'SIGKILL', stdio: ['ignore', 'pipe', 'pipe'] })
     if (pixels.length !== width * height * 4) invalid('PNG must fully decode as one RGBA frame')
     return { bytes, pixels, pixelWidth: width, pixelHeight: height }
   } catch (error) {
@@ -108,8 +111,20 @@ export function decodeSourceReferencePng(raster) {
 // helper rounds x/y/width/height to nearest pixel, +repage, PNG32. Compare sRGB
 // 8-bit RGBA pixels, so compression/metadata differences cannot change meaning.
 // The exact admitted PNG byte SHA remains the publication commitment.
-export function captureSourceReferenceFigure({ pdfBytes, page, region }) {
-  const crop = rasterPdfRegion({ pdfBytes, page, region, density: SOURCE_REFERENCE_IMAGE_DPI })
+export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceLimits }) {
+  // Diagnostic overrides can only tighten the consumer's fixed ceilings.
+  const budgets = Object.fromEntries(Object.entries(SOURCE_REFERENCE_RASTER_LIMITS)
+    .map(([key, ceiling]) => [key, Math.min(resourceLimits?.[key] ?? ceiling, ceiling)]))
+  let crop
+  try {
+    crop = rasterPdfRegion({ pdfBytes, page, region, density: SOURCE_REFERENCE_IMAGE_DPI, resourceLimits: budgets })
+  } catch (error) {
+    if (error.code?.startsWith('PDF_REGION_RASTER_')) {
+      throw Object.assign(new Error(error.message, { cause: error }),
+        { code: error.code.replace('PDF_REGION_', 'SOURCE_REFERENCES_FIGURE_') })
+    }
+    throw error
+  }
   const bytes = Buffer.from(crop.bytes)
   const raster = { profile: SOURCE_REFERENCE_IMAGE_PROFILE, mediaType: 'image/png',
     sha256: sha256(bytes), byteLength: bytes.length, pixelWidth: crop.pixelWidth,

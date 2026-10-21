@@ -1,0 +1,116 @@
+#!/usr/bin/env node
+import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
+import { mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
+import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
+import { captureSourceReferenceFigure, decodeSourceReferencePng } from '../server/paper-import/sourceReferenceImages.mjs'
+
+function pagePdf(width, height, rotation = 0) {
+  const drawing = '0.12 0.53 0.91 rg 8.125 8.75 35.5 24.25 re f\n'
+  const objects = ['<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Count 1 /Kids [3 0 R] >>',
+    `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${width} ${height}] /Rotate ${rotation} /Resources << >> /Contents 4 0 R >>`,
+    `<< /Length ${drawing.length} >>\nstream\n${drawing}endstream`]
+  let pdf = '%PDF-1.4\n'
+  const offsets = objects.map((object, index) => {
+    const offset = pdf.length
+    pdf += `${index + 1} 0 obj\n${object}\nendobj\n`
+    return offset
+  })
+  const xref = pdf.length
+  pdf += `xref\n0 5\n0000000000 65535 f \n${offsets.map(offset => `${String(offset).padStart(10, '0')} 00000 n \n`).join('')}`
+  return Buffer.from(`${pdf}trailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`)
+}
+
+const region = { x: 0.137, y: 0.114, width: 0.431, height: 0.377 }
+const quote = value => `'${value.replaceAll("'", "'\\''")}'`
+const directory = mkdtempSync(path.join(tmpdir(), 'eqb-reference-raster-limits-'))
+const previous = { PATH: process.env.PATH, TMPDIR: process.env.TMPDIR }
+const trace = path.join(directory, 'calls.log')
+try {
+  const localTmp = path.join(directory, 'tmp')
+  mkdirSync(localTmp)
+  const stall = path.join(directory, 'stall.mjs')
+  // Finite, idle delay: even a broken timeout cannot hang or exhaust resources.
+  writeFileSync(stall, 'setTimeout(() => process.exit(86), 1000)\n')
+  for (const tool of ['pdfinfo', 'pdftoppm', 'magick']) {
+    const native = execFileSync('which', [tool], { encoding: 'utf8' }).trim()
+    writeFileSync(path.join(directory, tool), `#!/bin/sh
+stage=${quote(tool)}
+if [ "$stage" = magick ]; then
+  stage=magick-crop
+  if [ "$1" = identify ]; then
+    case "$*" in
+      */page.png) stage=magick-identify-page ;;
+      */crop.png) stage=magick-identify-crop ;;
+    esac
+  fi
+fi
+printf '%s|%s\\n' "$stage" "$*" >> ${quote(trace)}
+if [ "$stage" = pdftoppm ] && [ "$EQB_RASTER_TEST_FORBID_RENDER" = 1 ]; then exit 85; fi
+if [ "$stage" = "$EQB_RASTER_TEST_STALL" ]; then exec ${quote(process.execPath)} ${quote(stall)}; fi
+exec ${quote(native)} "$@"
+`, { mode: 0o755 })
+  }
+  process.env.PATH = `${directory}${path.delimiter}${previous.PATH}`
+  process.env.TMPDIR = localTmp
+  if (!process.argv.includes('--timeouts-only')) {
+    process.env.EQB_RASTER_TEST_FORBID_RENDER = '1'
+    for (const [name, pdfBytes, resourceLimits] of [
+      ['tiny pixel budget', pagePdf(72, 96), { maxPagePixels: 1 }],
+      ['tiny dimension budget', pagePdf(72, 96), { maxPageDimension: 1 }],
+      ['oversized pixel area', pagePdf(1500, 1500), undefined],
+      ['oversized page dimension', pagePdf(2100, 1), undefined],
+      ['consumer limits cannot be raised', pagePdf(1500, 1500), { maxPagePixels: 1e12, maxPageDimension: 1e6 }],
+    ]) {
+      writeFileSync(trace, '')
+      assert.throws(() => captureSourceReferenceFigure({ pdfBytes, page: 1, region, resourceLimits }),
+        { code: 'SOURCE_REFERENCES_FIGURE_RASTER_LIMIT' }, name)
+      assert(readFileSync(trace, 'utf8').startsWith('pdfinfo|'), 'check exact PDF page geometry first')
+      assert(!readFileSync(trace, 'utf8').includes('pdftoppm|'), 'reject before any page raster allocation')
+      assert.deepEqual(readdirSync(localTmp), [], 'failure cleans its temporary files')
+    }
+    delete process.env.EQB_RASTER_TEST_FORBID_RENDER
+    console.log('PASS reference recrop page dimensions/pixels bounded before rendering; caller may only lower budgets')
+  }
+  for (const stage of ['pdfinfo', 'pdftoppm', 'magick-identify-page', 'magick-crop', 'magick-identify-crop']) {
+    writeFileSync(trace, '')
+    process.env.EQB_RASTER_TEST_STALL = stage
+    assert.throws(() => captureSourceReferenceFigure({
+      pdfBytes: pagePdf(72, 96), page: 1, region, resourceLimits: { timeoutMs: 500 },
+    }), { code: 'SOURCE_REFERENCES_FIGURE_RASTER_TIMEOUT' }, `hard timeout at ${stage}`)
+    const calls = readFileSync(trace, 'utf8').trim().split('\n')
+    assert(calls.at(-1).startsWith(`${stage}|`), `timeout really reached ${stage}`)
+    for (const call of calls.filter(call => call.startsWith('magick'))) {
+      for (const limit of ['memory 128MiB', 'map 128MiB', 'disk 0', 'thread 1', 'time 10']) {
+        assert(call.includes(`-limit ${limit}`), `${stage}: ImageMagick resource ${limit}`)
+      }
+    }
+    assert.deepEqual(readdirSync(localTmp), [], 'timeout kills the subprocess and cleans its files')
+  }
+  delete process.env.EQB_RASTER_TEST_STALL
+  console.log('PASS hard timeout at all five native recrop stages; ImageMagick memory/map/disk/thread/time limits')
+  for (const rotation of [0, 90, 180, 270]) {
+    const pdfBytes = pagePdf(72, 96, rotation)
+    const legacy = rasterPdfRegion({ pdfBytes, page: 1, region, density: 288 })
+    const bounded = captureSourceReferenceFigure({ pdfBytes, page: 1, region })
+    const oldRaster = { ...bounded, pixelWidth: legacy.pixelWidth, pixelHeight: legacy.pixelHeight,
+      byteLength: legacy.bytes.length, sha256: sha256(legacy.bytes), base64: Buffer.from(legacy.bytes).toString('base64') }
+    assert.deepEqual(decodeSourceReferencePng(bounded).pixels, decodeSourceReferencePng(oldRaster).pixels,
+      `fractional crop pixels stay identical at page rotation ${rotation}`)
+    assert.equal(bounded.pixelWidth, legacy.pixelWidth)
+    assert.equal(bounded.pixelHeight, legacy.pixelHeight)
+  }
+  console.log('PASS bounded reference recrop retains v1 pixels at all rotations; question crop defaults preserved')
+} finally {
+  for (const [key, value] of Object.entries(previous)) {
+    if (value === undefined) delete process.env[key]
+    else process.env[key] = value
+  }
+  delete process.env.EQB_RASTER_TEST_FORBID_RENDER
+  delete process.env.EQB_RASTER_TEST_STALL
+  rmSync(directory, { recursive: true, force: true })
+}

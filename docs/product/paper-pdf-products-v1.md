@@ -208,6 +208,8 @@ sourceRegionId 和冻结 PNG。只支持存活段落后的图，锚点顺序不�
 任务归属从确认文本中的写作部标题及第一／二节，或显式应用文写作／读后续写
 标题建立；目前不猜测其他标题格式。带图文档的参考正文、源标签和表格单元格
 必须重放排除图片 items 后的存活 OCR 文本，允许正常换行与断词合并。
+文本索引取自已验证 confirmation 的 item 及 observation 定位，仅排除图片消费项；
+布局解析转入 semantic_table 的评分单元格仍保留来源并参与重放。
 图内文字按确认的 itemIds/observationIds 从 OCR 正文结构排除，证据仍保留，
 不按文字替换。参考图不进入材料化 media、Canonical sourceCoverage 或题卷
 image registry；三款题卷及组卷题卷不消费源参考图。
@@ -222,6 +224,15 @@ PNG32 输出；接收端完整解码为 sRGB 8-bit RGBA，按像素重放比对�
 400 万像素；每 entry 4 图、每 sidecar 16 图、base64 解码后 PNG 总字节
 8 MiB、v3 原始 JSON 16 MiB。服务器既有普通文件上传及 64 MiB JSON 读取
 限额继续适用，部署环境的反代上限需在消费者上线验收时核对。
+
+参考图接收重裁额外限制整页栅格：单边 8192 px、总计 1600 万像素；
+渲染前按精确源 PDF 的 MediaBox 换算检查，保守增加 1 px 覆盖尺寸舍入。
+pdfinfo、pdftoppm、两次 identify 和 crop 共用 15 秒截止时间，超时 SIGKILL；
+ImageMagick 另限制 memory/map 各 128 MiB、disk 0、thread 1、time 10 秒。
+超过预算返回 `SOURCE_REFERENCES_FIGURE_RASTER_LIMIT`，超时返回
+`SOURCE_REFERENCES_FIGURE_RASTER_TIMEOUT`，原生进程失败返回
+`SOURCE_REFERENCES_FIGURE_RASTER_FAILED`。诊断参数只能收紧预算。
+此有界选项仅由参考图消费端启用，题卷裁图默认行为及 v1 裁图像素算法保持原义。
 
 单卷和组卷 answerOnly 在指定段落后独立等比排图，按 288 dpi 推导源物理
 尺寸（济南图约 26 mm），限制最大宽高且图片整体不跨页；不阻止长范文自然
