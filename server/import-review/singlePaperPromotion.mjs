@@ -247,6 +247,60 @@ function failureFromResult(result) {
   }
 }
 
+// End the complete projection/materialization activation before archiving or
+// entering publisher. Only the second (or non-archiving) pass owns write inputs.
+function preparePromotionContent({ store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage }) {
+  const projection = buildNck1ReviewProjection(reviewRootDir, {
+    requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
+  })
+  const materialized = materializeNck1CanonicalRequest(projection.sourceInput, {
+    schemaVersion: 'teacher-confirmation-v1',
+    candidateDigest: promotion.candidateDigest,
+    sourceDigest: promotion.sourceDigest,
+    confirmed: true,
+  })
+  const packageData = buildNck1CompatibilityPackage({
+    config: projection.config,
+    manifest: projection.manifest,
+    materialization: projection.materialization,
+    sourceProvenance: projection.sourceProvenance,
+    sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
+    analysisSidecars: projection.analysisSidecars,
+    paragraphSummariesBytes: projection.paragraphSummariesBytes,
+    publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
+    sourceReferencesBytes: projection.sourceReferencesBytes,
+    frozenProducts: projection.frozenProducts,
+    paginationPlan: projection.paginationPlan,
+    paginationBindingIdentity: projection,
+  })
+  const context = store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, value => {
+    const differences = value.subject ? reviewContentDifferences(value.subject.components.consumer,
+      buildProductPreviewPayload(revision, reviewProjectionForTrustedBaseline(value.subject, projection))).differences : []
+    const evidence = inspectSealedReviewFiles(reviewRootDir, revision.manifest.files)
+    const changed = evidence.find(file => {
+      const expected = revision.manifest.files.find(item => item.path === file.path)
+      return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
+    })
+    if (changed || differences.length) {
+      const error = promotionError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Projected content differs from the approved Review')
+      error.reasonCode = changed ? 'SEALED_FILE_CHANGED' : 'SUBJECT_CHANGED'
+      error.publicationNotWritten = true
+      throw error
+    }
+    return value
+  })
+  const archiveRequired = Boolean(projection.frozenProducts && !fileStorage)
+  if (archiveRequired) return { binding: context.binding, archiveRequired }
+  return {
+    context, archiveRequired, packageData, canonicalRequest: materialized.request,
+    profileIdentity: projection.importProfile ? {
+      importProfile: projection.importProfile,
+      paragraphSummariesDigest: projection.paragraphSummariesDigest,
+      publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+    } : {},
+  }
+}
+
 export function createSinglePaperPromotionService({
   getStore,
   openDatabase,
@@ -333,52 +387,16 @@ export function createSinglePaperPromotionService({
         // Reconciliation cannot authorize a new write. Require current content
         // eligibility before running any current projection or compiler.
         store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, () => {})
-        const projection = buildNck1ReviewProjection(reviewRootDir, {
-          requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
-        })
-        const materialized = materializeNck1CanonicalRequest(projection.sourceInput, {
-          schemaVersion: 'teacher-confirmation-v1',
-          candidateDigest: promotion.candidateDigest,
-          sourceDigest: promotion.sourceDigest,
-          confirmed: true,
-        })
-        const packageData = buildNck1CompatibilityPackage({
-          config: projection.config,
-          manifest: projection.manifest,
-          materialization: projection.materialization,
-          sourceProvenance: projection.sourceProvenance,
-          sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
-          analysisSidecars: projection.analysisSidecars,
-          paragraphSummariesBytes: projection.paragraphSummariesBytes,
-          publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
-          sourceReferencesBytes: projection.sourceReferencesBytes,
-          frozenProducts: projection.frozenProducts,
-          paginationPlan: projection.paginationPlan,
-          paginationBindingIdentity: projection,
-        })
-        const context = store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, value => {
-          const differences = value.subject ? reviewContentDifferences(value.subject.components.consumer,
-            buildProductPreviewPayload(revision, reviewProjectionForTrustedBaseline(value.subject, projection))).differences : []
-          const evidence = inspectSealedReviewFiles(reviewRootDir, revision.manifest.files)
-          const changed = evidence.find(file => {
-            const expected = revision.manifest.files.find(item => item.path === file.path)
-            return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
-          })
-          if (changed || differences.length) {
-            const error = promotionError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Projected content differs from the approved Review')
-            error.reasonCode = changed ? 'SEALED_FILE_CHANGED' : 'SUBJECT_CHANGED'
-            error.publicationNotWritten = true
-            throw error
-          }
-          return value
+        const { context, binding, archiveRequired, packageData, canonicalRequest, profileIdentity } = preparePromotionContent({
+          store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage,
         })
         const externalListeningReviewProof = store.mintExternalListeningPublicationProof(paperId, promotion)
         // The first context is captured before the asynchronous archive. A
         // second pass must match it exactly, including target and confirmations.
-        if (projection.frozenProducts && !fileStorage) {
+        if (archiveRequired) {
           return archiveReviewFiles({ rootDir: reviewRootDir, manifest: revision.manifest,
             blobStore: blobStore || configuredBlobStore() })
-            .then(storage => execute(paperId, begun, storage, context.binding))
+            .then(storage => execute(paperId, begun, storage, binding))
         }
         const result = publish({
           approvedReviewSubject: context.subject,
@@ -401,15 +419,9 @@ export function createSinglePaperPromotionService({
           approvedIdentity: {
             ...promotion,
             rendererBuildId: revision.rendererBuildId,
-            ...(projection.importProfile
-              ? {
-                  importProfile: projection.importProfile,
-                  paragraphSummariesDigest: projection.paragraphSummariesDigest,
-                  publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
-                }
-              : {}),
+            ...profileIdentity,
           },
-          canonicalRequest: materialized.request,
+          canonicalRequest,
           externalListeningReviewProof,
           db,
           paperAssetsDir,

@@ -50,7 +50,7 @@ import {
 } from '../../shared/paper-canonical/consumers.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
-import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableStringify, stableUtf8Bytes, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 import {
   enrichSourceBoundListeningPlayback,
   sourceBoundFirstSectionPlayback,
@@ -137,7 +137,7 @@ const artifactPathBase = {
 const safePaperId = /^[a-z0-9][a-z0-9._-]{0,127}$/
 
 function stableBytes(value) {
-  return new TextEncoder().encode(`${stableStringify(value)}\n`)
+  return stableUtf8Bytes(value)
 }
 
 function readJsonBytes(bytes, label) {

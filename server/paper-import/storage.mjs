@@ -346,11 +346,11 @@ function outputRejected(reasonCode, relativePath) {
   })
 }
 
-// Pure, complete write plan. Both Review comparison and the writer use these
-// exact paths, origins and copied bytes, including generated compatibility files.
-export function buildPaperImportOutputInventory({
+// One namespace/descriptor validator for snapshots and writer revalidation.
+// The visitor sees current bytes one at a time; only small metadata is retained.
+function enumeratePaperImportOutputs({
   packageData, version, validationReport, publishReport, canonicalPublication = null,
-}) {
+}, visit, ownBytes = false) {
   const artifacts = makeVersionedArtifacts(packageData, version)
   const files = []
   const paths = new Map()
@@ -366,9 +366,22 @@ export function buildPaperImportOutputInventory({
       outputRejected('PUBLICATION_OUTPUT_PATH_CONFLICT', relativePath)
     }
     if (!(bytes instanceof Uint8Array)) outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', relativePath)
-    const copy = Buffer.from(bytes)
+    // Inventory descriptors commit to their owned snapshot, as before. Writer
+    // revalidation instead hashes the current source view without copying it.
+    if (ownBytes) bytes = Buffer.from(bytes)
+    const file = { path: relativePath, source, byteLength: bytes.length, sha256: `sha256:${sha256(bytes)}` }
     paths.set(key, source)
-    files.push({ path: relativePath, source, bytes: copy, byteLength: copy.length, sha256: `sha256:${sha256(copy)}` })
+    files.push(file)
+    if (source === 'sealed.playbackDerivatives') {
+      if (relativePath !== PUBLISHED_LISTENING_PLAYBACK_UI_FILE) outputRejected('UNDECLARED_PUBLICATION_OUTPUT', relativePath)
+      try {
+        const { digest, ...value } = JSON.parse(Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength))
+        const manifest = canonicalPublication.manifest
+        if (!manifest.listeningAudio || digest !== digestJson(value)) throw new Error('Invalid playback commitment')
+        assertListeningPlaybackUi(value, manifest.listeningAudio.sha256, manifest.listeningAudio.durationSeconds)
+      } catch { outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', relativePath) }
+    }
+    visit(file, bytes)
   }
   const addJson = (file, value, source) => add(file, Buffer.from(`${JSON.stringify(value, null, 2)}\n`), source)
   if (packageData.sourceDocx) {
@@ -435,15 +448,17 @@ export function buildPaperImportOutputInventory({
     ])
     const source = files.find(file => file.source === 'sealed.sourceAsset')
     if (source.sha256 !== manifest.sourceAssetDigest) outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', source.path)
-    for (const file of files.filter(file => file.source === 'sealed.playbackDerivatives')) {
-      if (file.path !== PUBLISHED_LISTENING_PLAYBACK_UI_FILE) outputRejected('UNDECLARED_PUBLICATION_OUTPUT', file.path)
-      try {
-        const { digest, ...value } = JSON.parse(file.bytes)
-        if (!manifest.listeningAudio || digest !== digestJson(value)) throw new Error('Invalid playback commitment')
-        assertListeningPlaybackUi(value, manifest.listeningAudio.sha256, manifest.listeningAudio.durationSeconds)
-      } catch { outputRejected('PUBLICATION_OUTPUT_DESCRIPTOR_MISMATCH', file.path) }
-    }
+
   }
+  return { artifacts, files }
+}
+
+// Every caller receives owned bytes; freezing a wrapper cannot freeze backing.
+export function buildPaperImportOutputInventory(input) {
+  const files = []
+  const { artifacts } = enumeratePaperImportOutputs(input, (file, bytes) => {
+    files.push({ ...file, bytes })
+  }, true)
   return { artifacts, files }
 }
 
@@ -557,22 +572,27 @@ export function writePaperImportVersion({
   beforeVersionCommit = null,
 }) {
   // Validate the complete namespace before creating even a staging directory.
-  const derived = buildPaperImportOutputInventory({
-    packageData, validationReport, publishReport, version, canonicalPublication,
-  })
+  const input = { packageData, validationReport, publishReport, version, canonicalPublication }
+  let artifacts
+  let files
   if (outputInventory) {
-    const expected = derived.files
     const actual = outputInventory.files
-    if (!Array.isArray(actual) || actual.length !== expected.length
-      || expected.some((file, index) => {
-        const checked = actual[index]
-        return !checked || checked.path !== file.path || checked.source !== file.source
-          || checked.sha256 !== file.sha256 || checked.byteLength !== file.byteLength
-          || !(checked.bytes instanceof Uint8Array) || !file.bytes.equals(checked.bytes)
-      })) outputRejected('PUBLICATION_OUTPUT_INVENTORY_CHANGED', '/outputInventory')
+    if (!Array.isArray(actual)) outputRejected('PUBLICATION_OUTPUT_INVENTORY_CHANGED', '/outputInventory')
+    let index = 0
+    ;({ artifacts } = enumeratePaperImportOutputs(input, (file, bytes) => {
+      const checked = actual[index++]
+      if (!checked || checked.path !== file.path || checked.source !== file.source
+        || checked.sha256 !== file.sha256 || checked.byteLength !== file.byteLength
+        || !(checked.bytes instanceof Uint8Array)
+        || !Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength).equals(checked.bytes)) {
+        outputRejected('PUBLICATION_OUTPUT_INVENTORY_CHANGED', '/outputInventory')
+      }
+    }))
+    if (index !== actual.length) outputRejected('PUBLICATION_OUTPUT_INVENTORY_CHANGED', '/outputInventory')
+    files = actual
+  } else {
+    ;({ artifacts, files } = buildPaperImportOutputInventory(input))
   }
-  const { artifacts } = derived
-  const files = (outputInventory || derived).files
   const paperId = packageData.paperAsset.paper.paperId
   const paperDir = path.join(paperAssetsDir, paperId)
   const versionsDir = path.join(paperDir, 'versions')
