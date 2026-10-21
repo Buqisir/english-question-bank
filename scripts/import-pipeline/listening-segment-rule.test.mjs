@@ -30,6 +30,62 @@ function surrounding(windows) {
   ])).flat().sort((a, b) => a.startSeconds - b.startSeconds)
 }
 
+function repeatedEngine({first = null, third = false, engine = 'Apple SpeechAnalyzer'} = {}) {
+  const text = 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over there'
+  const parts = [windowFor(first ?? text, 2), windowFor(text, 12), ...(third ? [windowFor(text, 22)] : [])]
+  return evaluateListeningEngine({groups: [{...group, text}], instructions: two, engine,
+    windows: [{startSeconds: 0, endSeconds: 100, result: {segments: parts.flatMap(w => w.result.segments)}}],
+    pauses: surrounding(parts), durationSeconds: 100})
+}
+test('a missing first tail is absence of evidence, paired by time with the complete second reading', () => {
+  const missing = repeatedEngine({first: 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over here'})
+  const full = repeatedEngine({engine: 'faster-whisper'})
+  assert.equal(missing.groups[0].occurrences.length, 1)
+  const result = reconcileListeningEngines(missing, full)[0]
+  assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
+  assert.equal(result.selectedEngine, 'faster-whisper')
+  assert.equal(reconcileListeningEngines(full, missing)[0].decision, 'usable')
+})
+test('extra readings remain blocked with a distinct observed-count reason', () => {
+  const result = reconcileListeningEngines(repeatedEngine({third: true}), repeatedEngine({engine: 'faster-whisper'}))[0]
+  assert.equal(result.decision, 'review_required')
+  assert.ok(result.issues.includes('OBSERVED_READING_COUNT_EXCEEDED'))
+  assert.ok(!result.engineAttempts[0].issues.includes('ANCHOR_AMBIGUOUS'))
+})
+test('critical counterevidence in a missing-tail candidate blocks either direction', () => {
+  const text = 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over here'
+  for (const first of [text.replace('can buy', 'can not buy'), text.replace('can buy', 'could buy'),
+    text.replace('twenty dollars', 'thirty dollars'), text.replace('before seven', 'before eight')]) {
+    const partial = repeatedEngine({first}), full = repeatedEngine({engine: 'faster-whisper'})
+    for (const pair of [[partial, full], [full, partial]]) {
+      const result = reconcileListeningEngines(...pair)[0]
+      assert.equal(result.decision, 'review_required', first)
+      assert.ok(result.issues.includes('ENGINE_CONFLICT'), first)
+    }
+  }
+})
+test('missing-head tail candidates also retain critical counterevidence in either engine', () => {
+  const text = 'Blazing birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over there'
+  const full = repeatedEngine({engine: 'faster-whisper'})
+  assert.equal(reconcileListeningEngines(repeatedEngine({first: text}), full)[0].decision, 'usable')
+  for (const first of [text.replace('can buy', 'can not buy'), text.replace('can buy', 'could buy'),
+    text.replace('twenty dollars', 'thirty dollars'), text.replace('before seven', 'before eight')]) {
+    const partial = repeatedEngine({first})
+    for (const pair of [[partial, full], [full, partial]]) {
+      assert.equal(reconcileListeningEngines(...pair)[0].decision, 'review_required', first)
+    }
+  }
+})
+test('common occurrences at incompatible times or in reversed order still conflict', () => {
+  const full = repeatedEngine(), other = repeatedEngine({engine: 'faster-whisper'})
+  other.groups[0].occurrences.reverse()
+  assert.equal(reconcileListeningEngines(full, other)[0].decision, 'review_required')
+  const shifted = repeatedEngine({engine: 'faster-whisper'})
+  shifted.groups[0].occurrences[0].startSeconds += 30
+  shifted.groups[0].occurrences[0].endSeconds += 30
+  assert.equal(reconcileListeningEngines(full, shifted)[0].decision, 'review_required')
+})
+
 test('frozen Apple run fixture: one reading is usable from original instructions', () => {
   const result = evaluate()
   assert.equal(result.decision, 'usable', JSON.stringify(result.issues))
@@ -83,7 +139,7 @@ test('duplicate and overlapping windows do not count as extra readings', () => {
 test('common head/tail in wrong groups expand to 12; exact ambiguous materials cannot pass', () => {
   const ambiguous = { ...group, segmentId: 'listening-text-2', questionNumbers: [2] }
   const result = evaluate({ groups: [group, ambiguous] })
-  assert.ok(result.issues.includes('ANCHOR_AMBIGUOUS'))
+  assert.ok(result.issues.includes('ANCHOR_IDENTITY_AMBIGUOUS'))
   const changed = { ...ambiguous, text: source.replace('to the station before the morning', 'over the bridge after the evening') }
   const expanded = evaluate({ groups: [group, changed] })
   assert.equal(expanded.anchors.width, 12)
@@ -147,7 +203,7 @@ test('a failed group whose first twelve words occur in another body never constr
   const result = evaluateListeningEngine({ groups: [a, b], instructions: one, windows: [raw],
     pauses: surrounding([raw]), durationSeconds: 100 })
   assert.deepEqual(result.groups.map(g => g.decision), ['usable', 'review_required'])
-  assert.ok(result.groups[1].issues.includes('ANCHOR_AMBIGUOUS'))
+  assert.ok(result.groups[1].issues.includes('ANCHOR_IDENTITY_AMBIGUOUS'))
 })
 test('Chinese instructions permit numbering inside an English quote or English inline fragment', () => {
   for (const stem of ['请阅读句子 “Include (1) a title.” 并翻译。',
@@ -225,7 +281,9 @@ test('two-engine identity or boundary conflict blocks', () => {
   const apple = evaluate()
   const whisper = evaluate({ engine: 'faster-whisper' })
   whisper.occurrences[0].playback.startSeconds += 1
-  assert.ok(reconcileListeningEngines({ groups: [apple] }, { groups: [whisper] })[0].issues.includes('ENGINE_CONFLICT'))
+  const conflict = reconcileListeningEngines({ groups: [apple] }, { groups: [whisper] })[0]
+  assert.ok(conflict.issues.includes('ENGINE_CONFLICT'))
+  assert.equal(conflict.engineConflicts.find(c => c.kind === 'playback_boundary').startDeltaSeconds, 1)
   whisper.occurrences[0].playback.startSeconds -= 1
   whisper.issues.push('ANNOUNCEMENT_CONFLICT')
   assert.equal(reconcileListeningEngines({ groups: [apple] }, { groups: [whisper] })[0].decision, 'review_required')

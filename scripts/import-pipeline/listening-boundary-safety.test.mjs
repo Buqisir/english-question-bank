@@ -20,6 +20,36 @@ function run(segments, pauses, options = {}) {
 }
 const endPauses = [pause(1, 1.9), pause(4.12, 4.203), pause(4.62, 7.2),
   pause(7.4, 8), pause(10.5, 12)]
+test('same final there with overlapping timestamps and a shared later pause is one pronunciation', () => {
+  const text = firstText.replace('village', 'there')
+  const clean = [segment(text, 2), segment(nextText, 8.2)]
+  const primary = run(clean, endPauses, {groups: [group(1, text), group(2, nextText)]})
+  const shifted = structuredClone(clean)
+  shifted[0].words.at(-1).start = 4.1
+  shifted[0].words.at(-1).end = 4.48
+  shifted[0].end = 4.48
+  const secondary = run(shifted, endPauses, {groups: [group(1, text), group(2, nextText)], engine: 'faster-whisper'})
+  const result = reconcileListeningEngines(primary, secondary)
+  assert.equal(result[0].decision, 'usable', JSON.stringify(result[0].issues))
+  const sharedWindows = run(clean, endPauses, {groups: [group(1, text), group(2, nextText)],
+    globalAnchorWindows: [window(shifted)]})
+  assert.equal(sharedWindows.groups[0].decision, 'usable', sharedWindows.groups[0].issues.join(','))
+  assert.ok(primary.groups[0].occurrences[0].playback)
+  const mergedPrompt = structuredClone(shifted)
+  mergedPrompt[0].words.at(-1).word = 'there 请准备'
+  assert.equal(reconcileListeningEngines(primary, run(mergedPrompt, endPauses,
+    {groups: [group(1, text), group(2, nextText)], engine: 'faster-whisper'}))[0].decision, 'review_required')
+  const crossesPause = structuredClone(shifted)
+  crossesPause[0].words.at(-1).end = 4.7
+  crossesPause[0].end = 4.7
+  assert.equal(reconcileListeningEngines(primary, run(crossesPause, endPauses,
+    {groups: [group(1, text), group(2, nextText)], engine: 'faster-whisper'}))[0].decision, 'review_required')
+  for (const prompt of ['Text Two', '请准备', 'note', 'there']) {
+    const extra = run([...shifted, segment(prompt, 4.5, 0.1)], endPauses,
+      {groups: [group(1, text), group(2, nextText)], engine: 'faster-whisper'})
+    assert.equal(reconcileListeningEngines(primary, extra)[0].decision, 'review_required', prompt)
+  }
+})
 test('Astra: a farther ending pause cannot include Text Two between 4.200 and 4.620', () => {
   const result = run([segment(firstText, 2), segment('Text Two', 4.25, 0.3), segment(nextText, 8.2)], endPauses)
   assert.equal(result.groups[0].decision, 'review_required')

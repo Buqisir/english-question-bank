@@ -525,7 +525,8 @@ function anchorsFor(group, corpus, words, expected, fuzzy = null) {
         .every(other => positions(listeningSourceTurns(other.text).flat(), anchor).length === 0))
     const heads = positions(words, head), tails = positions(words, tail)
     const uniqueAudio = expected === 'unknown' || (heads.length <= expected && tails.length <= expected)
-    exact = { width, head, tail, heads, tails, ambiguous: !uniqueSource || !uniqueAudio }
+    exact = { width, head, tail, heads, tails, identityAmbiguous: !uniqueSource,
+      countExceeded: !uniqueAudio, ambiguous: !uniqueSource || !uniqueAudio }
     if (!exact.ambiguous) break
   }
   const incomplete = expected === 'unknown' ? !exact.heads.length || !exact.tails.length
@@ -549,7 +550,9 @@ function anchorsFor(group, corpus, words, expected, fuzzy = null) {
     Math.abs(words[candidate.index].startSeconds - fuzzy.globalWords[other.index].startSeconds)
       <= LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds))
   return { width, head, tail, heads: heads.map(m => m.index), tails: tails.map(m => m.index),
-    ambiguous, fuzzy: { heads, tails, globalHeadPositions: globalHeads.map(m => m.index),
+    ambiguous, identityAmbiguous: !sourceUnique,
+    countExceeded: expected !== 'unknown' && [heads, tails, globalHeads, globalTails].some(m => m.length > expected),
+    fuzzy: { heads, tails, globalHeadPositions: globalHeads.map(m => m.index),
       globalTailPositions: globalTails.map(m => m.index), globalCoverage: fuzzy.globalCoverage,
       globalProven: fuzzy.globalCoverage && expected !== 'unknown'
         && globalHeads.length === expected && globalTails.length === expected
@@ -557,8 +560,9 @@ function anchorsFor(group, corpus, words, expected, fuzzy = null) {
 }
 
 // Boundary safety consumes every raw timed run, including Chinese prompts and
-// windows discarded by lexical overlap selection. Compact unions retain speech
-// presence without duplicating transcript text in each group's rule evidence.
+// windows discarded by lexical overlap selection. Keep run identity until the
+// cross-engine check; an interval union alone cannot distinguish a second
+// timestamp for the terminal word from a new prompt.
 function mergeSpeechIntervals(intervals) {
   const merged = []
   for (const [start, end] of [...intervals].sort((a, b) => a[0] - b[0] || a[1] - b[1])) {
@@ -567,17 +571,47 @@ function mergeSpeechIntervals(intervals) {
   }
   return merged
 }
-function boundarySpeechIntervals(windows) {
-  return mergeSpeechIntervals(windows.filter(w => !w.error).flatMap(w =>
-    (w.result?.segments || w.segments || []).flatMap(segment => {
+function boundarySpeechRuns(windows, pauses, engine) {
+  return windows.flatMap((w, windowIndex) => w.error ? [] :
+    (w.result?.segments || w.segments || []).flatMap((segment, segmentIndex) => {
       const runs = segment.runs || segment.words || []
-      return (runs.length ? runs : [segment]).flatMap(run => {
+      const tokens = timedListeningUnits(runs, w.startSeconds ?? 0, w.endSeconds,
+        `${windowIndex}:${segmentIndex}`, w.evidencePaths || [])
+      const terminalIndices = new Map(tokens.flatMap((t, i) => t.endBoundary ? [[t.runId, i]] : []))
+      return (runs.length ? runs : [segment]).flatMap((run, runIndex) => {
         const start = (w.startSeconds ?? 0) + Number(run.start ?? run.startSeconds)
         const end = (w.startSeconds ?? 0) + Number(run.end ?? run.endSeconds)
-        return String(run.word ?? run.text ?? '').trim() && Number.isFinite(start) && Number.isFinite(end)
-          && end >= start && start >= (w.startSeconds ?? 0) && end <= w.endSeconds + 0.5 ? [[start, end]] : []
+        const text = String(run.word ?? run.text ?? '').trim()
+        if (!text || !Number.isFinite(start) || !Number.isFinite(end) || end < start
+          || start < (w.startSeconds ?? 0) || end > w.endSeconds + 0.5) return []
+        const runId = `${windowIndex}:${segmentIndex}:${runIndex}`
+        const last = terminalIndices.get(runId)
+        const afterPause = pauses.find(p => p.endSeconds > end && p.startSeconds >= start
+          && p.startSeconds - end <= LISTENING_SEGMENT_RULE.boundarySearchSeconds
+          && p.endSeconds >= end + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
+        return [{engine: w.engine?.name || engine, runId, evidencePaths: w.evidencePaths || [],
+          startSeconds: start, endSeconds: end, text,
+          tail: last === undefined ? [] : tokens.slice(Math.max(0, last + 1 - LISTENING_SEGMENT_RULE.anchorWords), last + 1)
+            .map(t => t.token), afterPause: afterPause ?? null}]
       })
-    })))
+    }))
+}
+function sameTerminalPronunciation(run, occurrence) {
+  const edge = occurrence.terminalRun, pause = occurrence.boundaryEvidence?.afterPause
+  if (!edge || !pause || !run.afterPause
+    || run.startSeconds >= edge.endSeconds || run.endSeconds <= edge.startSeconds) return false
+  const tokens = normalizeListeningText(run.text)
+  return Boolean(
+    // Lexical normalization must not hide a Chinese/other-language prompt
+    // appended to an otherwise matching English terminal run.
+    !/[\p{L}\p{N}]/u.test(run.text.replace(/[a-z0-9]/giu, ''))
+    && run.startSeconds >= occurrence.startSeconds
+    && run.endSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds <= pause.startSeconds
+    && occurrence.endSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds <= pause.startSeconds
+    && run.afterPause.startSeconds === pause.startSeconds && run.afterPause.endSeconds === pause.endSeconds
+    && tokens.length && tokens.length <= edge.tail.length
+    && tokens.every((t, i) => t === edge.tail[edge.tail.length - tokens.length + i])
+    && run.tail.length === edge.tail.length && run.tail.every((t, i) => t === edge.tail[i]))
 }
 function boundaryObstructions(first, last, evidence, speech) {
   const gaps = [[evidence.beforePause?.endSeconds, first, evidence.skippedBefore?.length],
@@ -585,7 +619,7 @@ function boundaryObstructions(first, last, evidence, speech) {
   return gaps.flatMap(([start, end, skipped], side) => skipped && end > start
     ? speech.filter(([a, b]) => a < end && b > start).map(interval => ({side: side ? 'end' : 'start', interval})) : [])
 }
-function boundsFor(first, last, pauses, duration, speech, endLimitSeconds = Infinity) {
+function boundsFor(first, last, pauses, duration, speechRuns, terminalRun, endLimitSeconds = Infinity) {
   const beforeCandidates = pauses.filter(p => p.startSeconds < first.runStartSeconds
     && p.endSeconds <= first.runEndSeconds
     && first.runStartSeconds - p.endSeconds <= LISTENING_SEGMENT_RULE.boundarySearchSeconds)
@@ -607,6 +641,10 @@ function boundsFor(first, last, pauses, duration, speech, endLimitSeconds = Infi
     (before.startSeconds + before.endSeconds) / 2))
   const endSeconds = Math.min(duration, endLimitSeconds, Math.max(last.runEndSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds,
     (after.startSeconds + after.endSeconds) / 2))
+  const occurrence = {startSeconds: first.runStartSeconds, endSeconds: last.runEndSeconds,
+    terminalRun, boundaryEvidence: evidence}
+  const speech = mergeSpeechIntervals(speechRuns.filter(run => !sameTerminalPronunciation(run, occurrence))
+    .map(run => [run.startSeconds, run.endSeconds]))
   evidence.obstructions = boundaryObstructions(first.runStartSeconds, last.runEndSeconds, evidence, speech)
   const valid = startSeconds >= before.startSeconds && startSeconds <= before.endSeconds
     && endSeconds >= after.startSeconds && endSeconds <= after.endSeconds
@@ -664,7 +702,8 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
   engine = 'Apple SpeechAnalyzer', corpus = groups, requireWholePaper = true, questions,
   fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled, globalAnchorWindows = windows }) {
   const { words, markers } = listeningAsrTokens(windows)
-  const boundarySpeech = boundarySpeechIntervals([...windows, ...globalAnchorWindows])
+  const speechRuns = boundarySpeechRuns([...new Set([...windows, ...globalAnchorWindows])], pauses, engine)
+  const boundarySpeech = mergeSpeechIntervals(speechRuns.map(r => [r.startSeconds, r.endSeconds]))
   const fuzzy = fuzzyAnchors ? {
     globalWords: globalAnchorWindows === windows ? words : listeningAsrTokens(globalAnchorWindows).words,
     globalCoverage: coversRecording(globalAnchorWindows, durationSeconds),
@@ -681,7 +720,7 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     const expected = expectedListeningReadings(group, instructions)
     const result = { segmentId: group.segmentId, questionNumbers: group.questionNumbers, engine,
       ...expected, decision: 'usable', issues: [], occurrences: [], playback: null,
-      sourceText: group.text, boundarySpeech }
+      sourceText: group.text, boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [] }
     if (expected.issue) problem(result, expected.issue)
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
     const turns = listeningSourceTurns(group.text)
@@ -693,7 +732,14 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     const protectedQuestion = questionWords(group, questions)
     result.anchors = { width: anchor.width, headPositions: anchor.heads, tailPositions: anchor.tails,
       mode: anchor.fuzzy ? 'one_substitution_12' : 'exact', fuzzy: anchor.fuzzy ?? null }
-    if (anchor.ambiguous) problem(result, 'ANCHOR_AMBIGUOUS')
+    result.anchorEvidence = {
+      heads: anchor.heads.map(i => ({startSeconds: words[i].runStartSeconds,
+        endSeconds: words[i + anchor.width - 1].runEndSeconds})),
+      tails: anchor.tails.map(i => ({startSeconds: words[i].runStartSeconds,
+        endSeconds: words[i + anchor.width - 1].runEndSeconds})),
+    }
+    if (anchor.identityAmbiguous) problem(result, 'ANCHOR_IDENTITY_AMBIGUOUS')
+    if (anchor.countExceeded) problem(result, 'OBSERVED_READING_COUNT_EXCEEDED')
     const groupNumber = Number(group.segmentId.match(/(\d+)$/u)?.[1])
     for (const [headNumber, startIndex] of anchor.heads.entries()) {
       const nextHead = anchor.heads[headNumber + 1] ?? words.length
@@ -701,7 +747,18 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
         .reduce((end, h) => Math.min(end, h.index), nextHead)
       const tails = anchor.tails.filter(index => index + anchor.width > startIndex
         && index + anchor.width <= foreignHead)
-      if (tails.length !== 1) { problem(result, 'OCCURRENCE_TAIL_MISSING_OR_AMBIGUOUS'); continue }
+      if (tails.length !== 1) {
+        problem(result, 'OCCURRENCE_TAIL_MISSING_OR_AMBIGUOUS')
+        if (tails.length > 1) problem(result, 'ANCHOR_IDENTITY_AMBIGUOUS')
+        // Preserve the observed partial reading, including critical words.
+        // It is counterevidence only, never an approved occurrence.
+        result.partialOccurrences.push({startSeconds: words[startIndex].runStartSeconds,
+          anchorEndSeconds: words[startIndex + anchor.width - 1].runEndSeconds,
+          words: words.slice(startIndex, foreignHead).map(({token, startSeconds, endSeconds,
+            expressionType, expressionForm, expressionText, expressionValue}) => ({
+            token, startSeconds, endSeconds, expressionType, expressionForm, expressionText, expressionValue}))})
+        continue
+      }
       const endIndex = tails[0] + anchor.width
       const actual = words.slice(startIndex, endIndex)
       const first = actual[0], last = actual.at(-1)
@@ -760,7 +817,9 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
         ? words[nextHead].runStartSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds : Infinity,
         ...skeleton.filter(g => g.segmentId !== group.segmentId && g.playback?.startSeconds > last.runEndSeconds)
           .map(g => g.playback.startSeconds))
-      const bounds = boundsFor(first, last, pauses, durationSeconds, boundarySpeech, endLimitSeconds)
+      const terminalRun = {runId: last.runId, startSeconds: last.runStartSeconds, endSeconds: last.runEndSeconds,
+        tail: actual.slice(-LISTENING_SEGMENT_RULE.anchorWords).map(w => w.token)}
+      const bounds = boundsFor(first, last, pauses, durationSeconds, speechRuns, terminalRun, endLimitSeconds)
       let boundary = bounds.playback
       if (boundary) {
         const coverage = windows.filter(w => (w.startSeconds ?? 0) <= boundary.startSeconds
@@ -778,11 +837,24 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
         startSeconds: first.runStartSeconds, endSeconds: last.runEndSeconds,
         playback: boundary, alignment, anchorSubstitutions,
         boundaryEvidence: bounds.evidence,
+        terminalRun,
         requiresExactCorroboration: anchorSubstitutions.length > 0 && source.length < 24,
         issues: [...new Set(issues)], announcements: relevant,
         evidencePaths: [...new Set(actual.flatMap(w => w.evidencePaths))] }
       result.occurrences.push(occurrence)
       for (const code of issues) problem(result, code)
+    }
+    // A missing head leaves a tail candidate too. Preserve its observed words
+    // so a critical contradiction cannot disappear merely by losing the head.
+    for (const [i, tailIndex] of anchor.tails.entries()) {
+      const endIndex = tailIndex + anchor.width
+      if (result.occurrences.some(o => o.endWordIndex === endIndex)) continue
+      const startIndex = i ? anchor.tails[i - 1] + anchor.width : 0
+      result.partialOccurrences.push({startSeconds: words[tailIndex].runStartSeconds,
+        anchorEndSeconds: words[endIndex - 1].runEndSeconds,
+        words: words.slice(startIndex, endIndex).map(({token, startSeconds, endSeconds,
+          expressionType, expressionForm, expressionText, expressionValue}) => ({
+          token, startSeconds, endSeconds, expressionType, expressionForm, expressionText, expressionValue}))})
     }
     if (expected.expectedReadings !== 'unknown'
       && result.occurrences.length !== expected.expectedReadings) problem(result, 'READING_COUNT_MISMATCH')
@@ -830,49 +902,112 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
   return { ruleVersion: LISTENING_SEGMENT_RULE.version, fuzzyAnchors, engine, groups: results }
 }
 
+// Match physical readings, never array indices: a lone complete occurrence may
+// be the second reading. Every observed head/tail must be an ordered subset.
+function compareObservedReadings(observed, reference, referenceIsSecondary = true) {
+  const conflicts = []
+  const overlaps = (a, b) => a.startSeconds < b.endSeconds && a.endSeconds > b.startSeconds
+  const match = span => reference.occurrences.flatMap((o, i) => overlaps(span, o) ? [i] : [])
+  const orderedMatches = spans => {
+    let previous = -1
+    return spans.map(span => {
+      const candidates = match(span)
+      const index = candidates.length === 1 ? candidates[0] : -1
+      if (index <= previous) conflicts.push({kind: 'occurrence_identity_or_order', engine: observed.engine, span})
+      previous = index
+      return index
+    })
+  }
+  if (observed.sourceText !== reference.sourceText
+    || observed.questionNumbers.join(',') !== reference.questionNumbers.join(',')) {
+    conflicts.push({kind: 'group_identity', engine: observed.engine})
+  }
+  for (const side of ['heads', 'tails']) orderedMatches(observed.anchorEvidence?.[side] || [])
+  const matches = orderedMatches(observed.occurrences)
+  for (const [i, occurrence] of observed.occurrences.entries()) {
+    const other = reference.occurrences[matches[i]]
+    if (!other || !occurrence.playback || !other.playback) continue
+    // Keep the published diagnostic sign: secondary minus primary, whichever
+    // engine supplied the complete reference readings.
+    const direction = referenceIsSecondary ? 1 : -1
+    const startDeltaSeconds = direction * (other.playback.startSeconds - occurrence.playback.startSeconds)
+    const endDeltaSeconds = direction * (other.playback.endSeconds - occurrence.playback.endSeconds)
+    if (Math.abs(startDeltaSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds
+      || Math.abs(endDeltaSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds) {
+      conflicts.push({kind: 'playback_boundary', engine: observed.engine,
+        occurrence: referenceIsSecondary ? i + 1 : matches[i] + 1,
+        observedOccurrence: i + 1, referenceOccurrence: matches[i] + 1, startDeltaSeconds, endDeltaSeconds})
+    }
+  }
+  const sourceUnits = listeningSourceTurnText(reference.sourceText).flatMap(normalizeListeningUnits)
+  const source = sourceUnits.map(u => u.token)
+  for (const partial of observed.partialOccurrences || []) {
+    const candidates = match({startSeconds: partial.startSeconds,
+      endSeconds: partial.anchorEndSeconds})
+    if (candidates.length !== 1) {
+      conflicts.push({kind: 'partial_occurrence_identity', engine: observed.engine, startSeconds: partial.startSeconds})
+      continue
+    }
+    const other = reference.occurrences[candidates[0]]
+    const words = partial.words.filter(w =>
+      w.startSeconds < other.endSeconds + LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds
+      && w.endSeconds > other.startSeconds - LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds)
+    const alignment = alignListeningOccurrence(source, words, sourceUnits)
+    const first = alignment.matchedSourceIndices[0], last = alignment.matchedSourceIndices.at(-1)
+    // Unobserved leading/trailing words do not assert a deletion. An inserted
+    // or substituted critical word, or an internal deletion, is counterevidence.
+    const differences = alignment.differences.filter(d =>
+      (d.kind !== 'deletion' || (d.sourceIndex > first && d.sourceIndex < last))
+      && (isCritical(d.sourceWord) || isCritical(d.targetWord)))
+    if (differences.length) conflicts.push({kind: 'partial_critical_word_difference', engine: observed.engine,
+      referenceOccurrence: candidates[0] + 1, differences})
+  }
+  return conflicts
+}
+
 export function reconcileListeningEngines(apple, whisper) {
-  const allObservedSpeech = mergeSpeechIntervals([...apple.groups, ...(whisper?.groups || [])]
-    .flatMap(group => group.boundarySpeech || []))
+  const allAttempts = [...apple.groups, ...(whisper?.groups || [])]
+  const allObservedRuns = [...new Set(allAttempts.flatMap(group => group.boundarySpeechRuns || []))]
+  // Legacy/incomplete evidence with no run identity remains an obstruction.
+  const unknownSpeech = allAttempts.filter(g => !g.boundarySpeechRuns).flatMap(g => g.boundarySpeech || [])
   const hardConflict = new Set(['ANNOUNCEMENT_CONFLICT', 'READINGS_OVERLAP', 'READING_DURATION_CONFLICT',
-    'ANCHOR_AMBIGUOUS'])
+    'ANCHOR_AMBIGUOUS', 'CRITICAL_WORD_MISSING', 'CRITICAL_WORD_DIFFERENCE'])
+  const blockingEvidence = new Set(['OBSERVED_READING_COUNT_EXCEEDED', 'ANCHOR_IDENTITY_AMBIGUOUS'])
   const results = apple.groups.map(primary => {
     const secondary = whisper?.groups.find(g => g.segmentId === primary.segmentId)
     const attempts = [primary, ...(secondary ? [secondary] : [])]
     let chosen = primary, conflict = false
     const engineConflicts = []
+    const evidenceIssues = attempts.flatMap(a => a.issues.filter(code => blockingEvidence.has(code)))
     if (secondary) {
       conflict = attempts.some(a => a.issues.some(code => hardConflict.has(code)))
       for (const attempt of attempts) for (const code of attempt.issues.filter(code => hardConflict.has(code))) {
         engineConflicts.push({ kind: 'attempt_hard_conflict', engine: attempt.engine, code })
       }
-      const complete = a => a.occurrences.filter(o => o.alignment.sourceMatchRate >=
-        (o.alignment.sourceWordCount < LISTENING_SEGMENT_RULE.shortMaterialWords
-          ? LISTENING_SEGMENT_RULE.shortMatchMinimum : LISTENING_SEGMENT_RULE.matchMinimum)
-        && o.alignment.editSimilarity >= (o.alignment.sourceWordCount < LISTENING_SEGMENT_RULE.shortMaterialWords
-          ? LISTENING_SEGMENT_RULE.shortMatchMinimum : LISTENING_SEGMENT_RULE.matchMinimum))
-      const a = complete(primary), b = complete(secondary)
-      if (a.length && b.length) {
-        if (a.length !== b.length) {
-          conflict = true
-          engineConflicts.push({ kind: 'complete_occurrence_count', primary: a.length, secondary: b.length })
-        } else for (const [i, occurrence] of a.entries()) {
-          if (!occurrence.playback || !b[i].playback) continue
-          const startDeltaSeconds = b[i].playback.startSeconds - occurrence.playback.startSeconds
-          const endDeltaSeconds = b[i].playback.endSeconds - occurrence.playback.endSeconds
-          if (Math.abs(startDeltaSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds
-            || Math.abs(endDeltaSeconds) > LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds) {
-            conflict = true
-            engineConflicts.push({ kind: 'playback_boundary', occurrence: i + 1, startDeltaSeconds, endDeltaSeconds })
-          }
+      const complete = a => a.decision === 'usable' && a.independentlyAnchored
+        && a.expectedReadings !== 'unknown' && a.occurrences.length === a.expectedReadings
+        && a.occurrences.every(o => o.playback && !o.issues.length)
+      const reference = complete(primary) ? primary : complete(secondary) ? secondary : null
+      if (reference) {
+        engineConflicts.push(...compareObservedReadings(reference === primary ? secondary : primary,
+          reference, reference === secondary))
+      } else if (primary.occurrences.length && secondary.occurrences.length) {
+        // No independently complete engine exists to establish a safe subset.
+        engineConflicts.push(...compareObservedReadings(primary, secondary))
+        if (primary.occurrences.length !== secondary.occurrences.length) {
+          engineConflicts.push({kind: 'complete_occurrence_count',
+            primary: primary.occurrences.length, secondary: secondary.occurrences.length})
         }
       }
-      if (!conflict && primary.decision !== 'usable' && secondary.decision === 'usable') chosen = secondary
+      conflict ||= engineConflicts.length > 0
+      if (!conflict && !evidenceIssues.length && primary.decision !== 'usable' && complete(secondary)) chosen = secondary
     }
-    return { ...chosen, decision: conflict ? 'review_required' : chosen.decision,
-      playback: conflict ? null : chosen.playback,
+    const blocked = conflict || evidenceIssues.length > 0
+    return { ...chosen, decision: blocked ? 'review_required' : chosen.decision,
+      playback: blocked ? null : chosen.playback,
       occurrences: chosen.occurrences.map(o => ({...o, playback: o.playback ? {...o.playback} : null,
         issues: [...o.issues], boundaryEvidence: o.boundaryEvidence ? {...o.boundaryEvidence} : undefined})),
-      issues: conflict ? [...new Set([...chosen.issues, 'ENGINE_CONFLICT'])] : [...chosen.issues],
+      issues: [...new Set([...chosen.issues, ...evidenceIssues, ...(conflict ? ['ENGINE_CONFLICT'] : [])])],
       selectedEngine: chosen.engine, engineAttempts: attempts, engineConflicts }
   })
   // A successful primary may have been evaluated before another group's
@@ -881,9 +1016,12 @@ export function reconcileListeningEngines(apple, whisper) {
     .map(g => ({segmentId: g.segmentId, startSeconds: g.playback.startSeconds}))
   for (const result of results) for (const [index, occurrence] of result.occurrences.entries()) {
     if (!occurrence.playback) continue
+    const speech = mergeSpeechIntervals([...unknownSpeech, ...allObservedRuns
+      .filter(run => !sameTerminalPronunciation(run, occurrence))
+      .map(run => [run.startSeconds, run.endSeconds])])
     const obstructions = occurrence.boundaryEvidence
       ? boundaryObstructions(occurrence.startSeconds, occurrence.endSeconds,
-        occurrence.boundaryEvidence, allObservedSpeech) : []
+        occurrence.boundaryEvidence, speech) : []
     const endLimit = Math.min(result.occurrences[index + 1]?.startSeconds ?? Infinity,
       ...skeleton.filter(g => g.segmentId !== result.segmentId && g.startSeconds > occurrence.endSeconds)
         .map(g => g.startSeconds))

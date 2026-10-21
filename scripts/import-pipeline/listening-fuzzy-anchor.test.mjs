@@ -75,10 +75,10 @@ test('source and audio uniqueness count every one-substitution candidate, even p
   const actual = change(1, 'porpoises')
   const other = { segmentId: 'listening-text-2', questionNumbers: [2], text: change(1, 'not').join(' ') }
   const sourceConflict = evaluate({ actual, corpus: [group, other] })
-  assert.ok(sourceConflict.issues.includes('ANCHOR_AMBIGUOUS'))
+  assert.ok(sourceConflict.issues.includes('ANCHOR_IDENTITY_AMBIGUOUS'))
   const a = windowFor(actual), b = windowFor(change(1, 'not'), 20)
   const raw = { ...a, result: { segments: [...a.result.segments, ...b.result.segments] } }
-  assert.ok(evaluate({ actual, windows: [raw] }).issues.includes('ANCHOR_AMBIGUOUS'))
+  assert.ok(evaluate({ actual, windows: [raw] }).issues.includes('OBSERVED_READING_COUNT_EXCEEDED'))
 })
 test('a Whisper crop cannot prove whole-recording uniqueness; failed coverage never counts', () => {
   const actual = change(1, 'porpoises')

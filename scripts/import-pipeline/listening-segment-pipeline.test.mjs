@@ -124,6 +124,42 @@ test('two readings sharing one silence produce nonoverlapping occurrences accept
   assert.ok(review.groups[0].occurrences[0].endSeconds <= review.groups[0].occurrences[1].startSeconds)
   assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
 })
+test('missing first tail falls back once to two complete readings; critical partial evidence still blocks submit', t => {
+  for (const critical of [false, true]) {
+    const full = structuredClone(fixture)
+    const second = structuredClone(full.result.segments[0])
+    second.start += 10
+    second.end += 10
+    for (const run of second.runs) { run.start += 10; run.end += 10 }
+    full.result.segments.push(second)
+    const primary = structuredClone(full)
+    primary.result.segments[0].runs.at(-2).text = 'beside'
+    if (critical) primary.result.segments[0].runs[8].text = 'station not'
+    const {dir, subject, options} = workspace(t, primary)
+    options.request.sourceInstructions[0].text = '每段录音读两遍。'
+    let calls = 0
+    const result = segmentListening({...options,
+      pauses: [{startSeconds: 0, endSeconds: 1.9}, {startSeconds: 6.9, endSeconds: 10},
+        {startSeconds: 11, endSeconds: 11.9}, {startSeconds: 16.9, endSeconds: 19}],
+      runWhisper: () => { calls++; return {...full, engine: {name: 'faster-whisper'}} }})
+    assert.equal(calls, 1)
+    const review = JSON.parse(readFileSync(result.review, 'utf8'))
+    validateListeningReview(result.attempt, review, subject, [group])
+    writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
+    if (critical) {
+      assert.equal(result.usable, 0)
+      assert.equal(review.groups[0].playback, null)
+      assert.throws(() => assertImportSubmissionReady(dir), {code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE'})
+    } else {
+      assert.equal(result.usable, 1)
+      assert.equal(review.groups[0].occurrences.length, 2)
+      const rules = JSON.parse(readFileSync(path.join(result.attempt, 'rule-result.json'), 'utf8'))
+      assert.equal(rules.groups[0].selectedEngine, 'faster-whisper')
+      assert.equal(rules.groups[0].engineAttempts[0].occurrences.length, 1)
+      assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
+    }
+  }
+})
 test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
   const { options, dir, subject } = workspace(t, fixture)
   const other = { segmentId: 'listening-text-2', questionNumbers: [2], instruction: '本段读两遍',
