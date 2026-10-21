@@ -1809,14 +1809,15 @@ export function replaceOcrStructuredAnswerRegions(raw, expected, resolved, confi
   }
   const references = raw.groups.flatMap(group => [
     ...referencedMediaIds(group.blocks),
+    ...group.questions.flatMap(question => referencedMediaIds(question.stemFigures || [])),
     ...group.questions.flatMap(question => question.options.filter(option => option.figure).map(option => option.figure.mediaId)),
     ...(group.optionBank || []).filter(option => option.figure).map(option => option.figure.mediaId),
   ])
   for (const visual of visuals) {
     const group = raw.groups.find(group => group.groupId === visual.targetId)
-    if (raw.schemaVersion !== 'nck1-source-materialization-v5' || group?.family !== 'application-writing'
+    if (!['nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(raw.schemaVersion) || group?.family !== 'application-writing'
       || group.writingTask?.taskType !== 'application' || !group.writingTask.drawingArea) {
-      reject('UNMATCHED', 'Structured OCR replacement requires a v5 application group with drawingArea')
+      reject('UNMATCHED', 'Structured OCR replacement requires a v5/v6 application group with drawingArea')
     }
     const owners = expected.groups.flatMap(owner => flatten(owner.blocks).flatMap(block => {
       if (owner.groupId !== group.groupId || owner.slotId !== group.slotId || owner.family !== group.family

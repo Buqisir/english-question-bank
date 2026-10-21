@@ -1227,7 +1227,7 @@ export function validateNck1SourceMaterialization(value) {
     }
   }
   const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues,
-    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5)
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion))
   validateListening(value.listening, documents, sourceCoverage, issues)
   return issues
 }

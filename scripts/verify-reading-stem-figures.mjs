@@ -29,8 +29,8 @@ import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
 const bytes = value => new TextEncoder().encode(JSON.stringify(value))
 // v6 inherits Drawing Area admission and its presentation policy; v5 keeps its
 // exact historical authority, publication schema and default consumers.
-for (const version of [5, 6]) {
-  const input = makeDrawingAreaSourceInput({ listening: false })
+for (const version of [5, 6]) for (const structuredAnswerRegion of [false, true]) {
+  const input = makeDrawingAreaSourceInput({ listening: false, structuredAnswerRegion })
   const materialization = JSON.parse(new TextDecoder().decode(input.materializationBytes))
   materialization.schemaVersion = `nck1-source-materialization-v${version}`
   input.materializationBytes = bytes(materialization)
@@ -46,10 +46,10 @@ for (const version of [5, 6]) {
     assert.equal(consumption.authorityRef.manifestVersion, version === 5 ? '69' : '71')
     const groupId = materialization.groups.find(group => group.family === 'application-writing').groupId
     assert.equal(projectCanonicalConsumerGroup({ consumption, groupId,
-      familyContractId: 'application-writing' }).answerRegion.drawingArea.text, '作图处')
+      familyContractId: 'application-writing' }).answerRegion.drawingArea.text, structuredAnswerRegion ? '（做图处）' : '作图处')
   }
 }
-console.log('PASS v5 historical Drawing Area and v6 inherited Drawing Area admission and both consumers')
+console.log('PASS v5 historical and v6 inherited Drawing Area, including structured_answer_region, admission and both consumers')
 const paperId = 'paper-synthetic-jinan-stem-map'
 const fixture = await verifyReadingStemFigures(await makeSyntheticNck1OcrFixture({ paperId }), { onlyPositive: true })
 const sourceInput = structuredClone(fixture.candidate.sourceInput)

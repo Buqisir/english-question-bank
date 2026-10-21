@@ -90,7 +90,7 @@ for (const [name, previous, next] of [['screen', 48, 49], ['print-pdf', 49, 50]]
 }
 for (const [file, value] of outputs) {
   const bytes = `${stableStringify(value)}\n`
-  if (process.argv.includes('--refresh')) writeFileSync(file, bytes)
+  if (process.argv.includes('--write-candidate') || process.argv.includes('--refresh')) writeFileSync(file, bytes)
   else if (process.argv.includes('--check') || existsSync(file)) assert.equal(readFileSync(file, 'utf8'), bytes, file)
   else writeFileSync(file, bytes, { flag: 'wx' })
 }
