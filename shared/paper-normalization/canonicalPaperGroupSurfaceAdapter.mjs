@@ -475,6 +475,7 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     occurrenceSignature: canonicalGroup.occurrenceSignature,
     givenTop: canonicalGroup.answerRegion.givenTop || [],
     givenBottom: canonicalGroup.answerRegion.givenBottom || [],
+    ...(canonicalGroup.answerRegion.drawingArea ? { drawingArea: canonicalGroup.answerRegion.drawingArea } : {}),
   }
   const writingChrome = projectCanonicalWritingChrome({
     consumption,

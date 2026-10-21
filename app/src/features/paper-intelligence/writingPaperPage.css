@@ -214,3 +214,14 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+
+
+/* Overrides the fixed application height only for source drawing areas:
+   natural content (including an open lecture) must never overlap the signature. */
+.pi-writing-answer-box--application.pi-writing-answer-box--drawing {
+  --drawing-area-border: var(--application-writing-response-border, 1px);
+  height: auto;
+}
+.pi-writing-answer-box--drawing .pi-writing-answer-bottom {
+  flex-shrink: 0;
+}

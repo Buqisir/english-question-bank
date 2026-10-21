@@ -245,6 +245,14 @@ export type CanonicalApplicationWritingGivenPart = {
   }>
 }
 
+export type CanonicalApplicationDrawingArea = {
+  readonly drawingAreaId: string
+  readonly placement: 'top_right'
+  readonly labelBlockRef: string
+  readonly text: string
+  readonly inlines: CanonicalApplicationWritingGivenPart['inlines']
+}
+
 export type CanonicalWritingSourceBlock = {
   readonly nodeId: string
   readonly text: string
@@ -279,6 +287,7 @@ export type CanonicalRichWritingPageModel<TGivenPart> = {
         readonly occurrenceSignature: string
         readonly givenTop: ReadonlyArray<TGivenPart>
         readonly givenBottom: ReadonlyArray<TGivenPart>
+        readonly drawingArea?: CanonicalApplicationDrawingArea
       }
   >
 }
@@ -323,6 +332,7 @@ export type CanonicalRichApplicationWritingConsumptionSurfaceData =
       readonly responseSlotId: string
       readonly givenTop: ReadonlyArray<CanonicalApplicationWritingGivenPart>
       readonly givenBottom: ReadonlyArray<CanonicalApplicationWritingGivenPart>
+      readonly drawingArea?: CanonicalApplicationDrawingArea
     }
     readonly pageModel: CanonicalRichWritingPageModel<CanonicalApplicationWritingGivenPart>
   }

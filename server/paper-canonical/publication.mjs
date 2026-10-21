@@ -12,7 +12,7 @@ import path from 'node:path'
 
 import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 import { assertListeningPlaybackUi, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
-import { authorityRefForManifestDigest, canonicalAuthorityRef, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
+import { authorityRefForManifestDigest, canonicalAuthorityRef, closureRendersApplicationPromptFigures, closureRendersApplicationDrawingArea, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
   validateExactTransformationRecords,
@@ -61,6 +61,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v69.json',
   'canonical-paper-publication-v68.json',
   'canonical-paper-publication-v67.json',
   'canonical-paper-publication-v66.json',
@@ -424,7 +425,7 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
 }
 
 function capturedListeningAudio(sourceCapture, groups, closure) {
-  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(closure.authorityRef.manifestVersion)) return null
+  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion)) return null
   const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
   const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
   if (!active && documents.length === 0) return null
@@ -1573,6 +1574,14 @@ function sourceOwnedApplicationInstructions(validated, sourceAsset) {
 }
 
 function canonicalSelections(validated, contract, sourceAsset) {
+  if (validated.groups.some(group => group.variant?.response?.drawingArea)
+    && !closureRendersApplicationDrawingArea(resolveCanonicalAuthority(
+      authorityRefForManifestDigest(contract.authorityManifestDigest)).closure)) {
+    throw publicationError(
+      'CANONICAL_CONSUMER_APPLICATION_DRAWING_AREA_UNAVAILABLE',
+      'This paper requires a consumer that preserves the source-backed Application Writing drawing area',
+    )
+  }
   if (validated.groups.some(group => group.sourcePresentation !== undefined)
     && Number(authorityRefForManifestDigest(contract.authorityManifestDigest)?.manifestVersion) < 62) {
     throw publicationError(
@@ -1639,7 +1648,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         || projectedOccurrences.some(occurrence => occurrence.sourcePresentation !== undefined)
         || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1651,7 +1660,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

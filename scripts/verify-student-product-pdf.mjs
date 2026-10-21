@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict'
+import { verifyDrawingAreaProductPolicy } from './verify-application-drawing-area.mjs'
+await verifyDrawingAreaProductPolicy()
 import { readFileSync } from 'node:fs'
 import { applyStudentProductLayout, planStudentProductPdf, renderExplicitStudentProductPdf, studentProductPolicy } from '../server/draft-paper/studentProductPdf.mjs'
 import { validatePaperPaginationPlan, paginationPlanEdition } from '../server/paper-import/paginationPlan.mjs'

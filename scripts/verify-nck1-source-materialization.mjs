@@ -342,7 +342,7 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
   }
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 await import('./verify-inline-blank-boundaries.mjs')
 const plain = makeFixture()
 assert.deepEqual(validateNck1SourceMaterialization(plain), [])
@@ -543,5 +543,20 @@ continuationBlocks.splice(2, 0, starter)
 assert(validateNck1SourceMaterialization(misplacedContinuationStarters).some((item) =>
   item.code === 'MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID'))
 
+const drawing = structuredClone(plain)
+drawing.schemaVersion = 'nck1-source-materialization-v5'
+drawing.sourcePresentation = {
+  instructions: ['reading.a', 'seven-choices', 'cloze', 'grammar-fill'].map(slotId => ({
+    slotId, text: `Source direction for ${slotId}.`, source: locator(),
+  })),
+  listeningExample: null,
+}
+const drawingGroup = drawing.groups.find(group => group.family === 'application-writing')
+drawingGroup.blocks.push({ kind: 'paragraph', blockId: 'drawing-label', role: 'body',
+  content: [{ kind: 'text', text: '作图处' }], source: locator() })
+drawingGroup.writingTask.drawingArea = { placement: 'top_right', labelBlockRef: 'drawing-label', source: locator() }
+assert.deepEqual(validateNck1SourceMaterialization(drawing), [])
+drawing.schemaVersion = 'nck1-source-materialization-v4'
+assert(validateNck1SourceMaterialization(drawing).length, 'v4 must reject the drawing extension')
 console.log('verify-nck1-source-materialization: PASS')
 }

@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { verifyDrawingAreaPublication } from './verify-application-drawing-area.mjs'
+verifyDrawingAreaPublication()
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'

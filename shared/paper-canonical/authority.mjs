@@ -1,3 +1,16 @@
+import manifestV69 from '../../standards/paper-canonical/manifest-v69.json' with { type: 'json' }
+import manifestV70 from '../../standards/paper-canonical/manifest-v70.json' with { type: 'json' }
+import sourceAdaptersV24 from '../../standards/paper-canonical/adapters/source-adapters-v24.json' with { type: 'json' }
+import applicationWritingV5 from '../../standards/paper-canonical/families/application-writing-v5.json' with { type: 'json' }
+import nck1V17Drawing from '../../standards/paper-canonical/profiles/nck1-v17.json' with { type: 'json' }
+import zhejiangV14Drawing from '../../standards/paper-canonical/profiles/zhejiang-legacy-v14.json' with { type: 'json' }
+import applicationDrawingAreaV1 from '../../standards/paper-canonical/rendering/application-writing-drawing-area-v1.json' with { type: 'json' }
+import materializationV5Schema from '../../schemas/paper-canonical/nck1-source-materialization-v5.schema.json' with { type: 'json' }
+import applicationVariantV3Schema from '../../schemas/paper-canonical/canonical-application-writing-variant-v3.schema.json' with { type: 'json' }
+import familyV12Schema from '../../schemas/paper-canonical/canonical-family-contract-v12.schema.json' with { type: 'json' }
+import reportV69Schema from '../../schemas/paper-canonical/normalization-report-v69.schema.json' with { type: 'json' }
+import publicationV69Schema from '../../schemas/paper-canonical/canonical-paper-publication-v69.schema.json' with { type: 'json' }
+import applicationDrawingAreaV1Schema from '../../schemas/paper-canonical/application-writing-drawing-area-v1.schema.json' with { type: 'json' }
 import manifestV1 from '../../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV2 from '../../standards/paper-canonical/manifest-v2.json' with { type: 'json' }
 import manifestV3 from '../../standards/paper-canonical/manifest-v3.json' with { type: 'json' }
@@ -709,7 +722,7 @@ function validateNck1WritingChrome(profile) {
     ? '第二节 （满分 25 分）'
     : '第二节（满分25分）'
   const valid = (
-    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'].includes(profile.version)
+    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -764,7 +777,7 @@ function validateZhejiangWritingChrome(profile) {
   const application = sections[0]
   const continuation = sections[1]
   const valid = (
-    ['4', '5', '6', '7', '8', '9', '10', '11', '12', '13'].includes(profile?.version)
+    ['4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'].includes(profile?.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -1329,7 +1342,7 @@ function validateSevenChoicesRhythm(artifact) {
 }
 
 function validateClozeRhythm(artifact, manifestVersion) {
-  const expected = ['60', '63', '65'].includes(manifestVersion)
+  const expected = ['60', '63', '65', '70'].includes(manifestVersion)
     ? clozeRhythmV5
     : Number(manifestVersion) >= 33
     ? clozeRhythmV4
@@ -1467,7 +1480,7 @@ export function validateAuthorityClosure({
   const issues = []
   // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1527,7 +1540,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1703,7 +1716,7 @@ export function validateAuthorityClosure({
       ))
     }
     if (
-      coreArtifact?.groupSchemaId !== (['62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
+      coreArtifact?.groupSchemaId !== (['62', '63', '64', '65', '66', '67', '68', '69', '70'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
       || !schemaById.has(coreArtifact.groupSchemaId)
     ) {
       issues.push(issue(
@@ -1722,7 +1735,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -2808,6 +2821,30 @@ const schemasV68 = {
   'normalization-report-v68': reportV68Schema,
   'canonical-paper-publication-v68': publicationV68Schema,
 }
+const artifactsV69 = {
+  ...artifactsV68, adapter: sourceAdaptersV24,
+  'family-application-writing': applicationWritingV5,
+  'profile-nck1': nck1V17Drawing, 'profile-zhejiang-legacy': zhejiangV14Drawing,
+}
+const artifactsV70 = {
+  ...artifactsV65, 'family-application-writing': applicationWritingV5,
+  'profile-nck1': nck1V17Drawing, 'profile-zhejiang-legacy': zhejiangV14Drawing,
+  'renderer-application-writing-drawing-area': applicationDrawingAreaV1,
+}
+const schemasV69 = {
+  ...Object.fromEntries(Object.entries(schemasV68).filter(([id]) =>
+    !['normalization-report-v68', 'canonical-paper-publication-v68'].includes(id))),
+  'nck1-source-materialization-v5': materializationV5Schema,
+  'canonical-application-writing-variant-v3': applicationVariantV3Schema,
+  'canonical-family-contract-v12': familyV12Schema,
+  'normalization-report-v69': reportV69Schema, 'canonical-paper-publication-v69': publicationV69Schema,
+}
+const schemasV70 = {
+  ...schemasV65,
+  'canonical-application-writing-variant-v3': applicationVariantV3Schema,
+  'canonical-family-contract-v12': familyV12Schema,
+  'application-writing-drawing-area-v1': applicationDrawingAreaV1Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2933,6 +2970,8 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV66, artifacts: artifactsV66, schemas: schemasV66 }),
   validateAuthorityClosure({ manifest: manifestV67, artifacts: artifactsV67, schemas: schemasV67 }),
   validateAuthorityClosure({ manifest: manifestV68, artifacts: artifactsV68, schemas: schemasV68 }),
+  validateAuthorityClosure({ manifest: manifestV69, artifacts: artifactsV69, schemas: schemasV69 }),
+  validateAuthorityClosure({ manifest: manifestV70, artifacts: artifactsV70, schemas: schemasV70 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -3016,6 +3055,8 @@ const authorities = [
   { manifest: manifestV66, artifacts: artifactsV66, schemas: schemasV66 },
   { manifest: manifestV67, artifacts: artifactsV67, schemas: schemasV67 },
   { manifest: manifestV68, artifacts: artifactsV68, schemas: schemasV68 },
+  { manifest: manifestV69, artifacts: artifactsV69, schemas: schemasV69 },
+  { manifest: manifestV70, artifacts: artifactsV70, schemas: schemasV70 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -3102,4 +3143,18 @@ export function authorityRefForManifestDigest(manifestDigest) {
 
 export function slotsForProfile(profile) {
   return flattenSlots(profile)
+}
+
+// Drawing-area capability is bound separately to raw admission and rendering.
+export const nck1DrawingAreaAuthorityRef = authorities.find(authority => authority.manifest.version === '69').authorityRef
+export function closureAdmitsApplicationDrawingArea(closure) {
+  return closure?.artifacts?.adapter?.adapters?.some(adapter =>
+    adapter.adapterId === 'nck1-source-materialization' && adapter.version === '9') === true
+}
+export function authorityAdmitsApplicationDrawingArea(ref) {
+  const result = resolveCanonicalAuthority(ref)
+  return result.ok && closureAdmitsApplicationDrawingArea(result.closure)
+}
+export function closureRendersApplicationDrawingArea(closure) {
+  return digestJson(closure?.artifacts?.['renderer-application-writing-drawing-area'] ?? null) === digestJson(applicationDrawingAreaV1)
 }

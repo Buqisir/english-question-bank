@@ -78,6 +78,16 @@ export function assertApplicationGivenOwnership(group) {
   const text = id => (blocks.get(id)?.inlines || []).map(inline => inline.text || '').join('')
   const promptIds = variant.promptBlockRefs || []
   const skeleton = variant.givenSkeleton
+  if (Object.hasOwn(variant.response || {}, 'drawingArea')) {
+    const area = variant.response.drawingArea
+    const label = blocks.get(area?.labelBlockRef)
+    if (area?.placement !== 'top_right' || !area.drawingAreaId || !area.authorityObservationRef
+      || label?.kind !== 'paragraph' || !text(area.labelBlockRef).trim()
+      || promptIds.includes(area.labelBlockRef)
+      || skeleton?.parts?.some(part => part.blockRef === area.labelBlockRef)) {
+      throw new Error('application drawing label needs exclusive source paragraph ownership inside the response box')
+    }
+  }
   if (skeleton?.presence === 'none' && skeleton.answerRegionAbsenceAssertionRef) return
   if (skeleton?.presence !== 'provided' || !skeleton.parts?.length) {
     throw new Error('application givenSkeleton needs source-provided parts or evidenced absence')

@@ -1,3 +1,4 @@
+import { applicationDrawingAreaStyles } from '../../../../shared/paper-canonical/applicationDrawingArea.mjs'
 import {
   Fragment,
   type CSSProperties,
@@ -315,47 +316,7 @@ function WritingPaperPageContent({
             return <div key={index} className="pi-writing-passage">{children}</div>
           case 'answerBox': {
             const lectureOpenInBox = retainedModelAnswer !== undefined
-            return (
-                <div
-                  key={index}
-                  className={[
-                    'pi-writing-answer-box',
-                    block.answerRegionRef === 'writing.application-box'
-                      ? 'pi-writing-answer-box--application'
-                      : '',
-                    block.answerRegionRef === 'writing.continuation-box'
-                      ? 'pi-writing-answer-box--continuation'
-                      : '',
-                    block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
-                    onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
-                    lectureOpenInBox ? 'pi-writing-answer-box--lecture-open' : '',
-                  ].filter(Boolean).join(' ')}
-                  aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
-                  data-canonical-application-semantic-signature={block.semanticSignature}
-                  data-canonical-application-occurrence-signature={block.occurrenceSignature}
-                  data-canonical-writing-semantic-signature={block.semanticSignature}
-                  data-canonical-writing-occurrence-signature={block.occurrenceSignature}
-                  data-canonical-answer-region-ref={block.answerRegionRef}
-                  data-canonical-response-slot-id={block.responseSlotId}
-                  data-canonical-response-ownership={block.ownership}
-                  data-canonical-application-writing-rhythm-role={
-                    block.answerRegionRef === 'writing.application-box'
-                      ? 'response_box'
-                      : undefined
-                  }
-                  data-canonical-continuation-writing-rhythm-role={
-                    block.answerRegionRef === 'writing.continuation-box'
-                      ? 'response_box'
-                      : undefined
-                  }
-                  data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
-                  role={onAnswerBoxActivate ? 'button' : undefined}
-                  tabIndex={onAnswerBoxActivate ? 0 : undefined}
-                  onClick={onAnswerBoxActivate}
-                  onKeyDown={handleAnswerBoxKeyDown}
-                >
-                  <div className="pi-writing-answer-top">
-                    {block.givenTop.map((part, lineIndex) => {
+            const givenTop = block.givenTop.map((part, lineIndex) => {
                       const partKey = typeof part === 'string'
                         ? `t${lineIndex}`
                         : 'starterId' in part
@@ -413,7 +374,64 @@ function WritingPaperPageContent({
                           />
                         </div>
                       )
-                    })}
+                    })
+            return (
+                <div
+                  key={index}
+                  className={[
+                    'pi-writing-answer-box',
+                    block.drawingArea ? 'pi-writing-answer-box--drawing' : '',
+                    block.answerRegionRef === 'writing.application-box'
+                      ? 'pi-writing-answer-box--application'
+                      : '',
+                    block.answerRegionRef === 'writing.continuation-box'
+                      ? 'pi-writing-answer-box--continuation'
+                      : '',
+                    block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
+                    onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
+                    lectureOpenInBox ? 'pi-writing-answer-box--lecture-open' : '',
+                  ].filter(Boolean).join(' ')}
+                  aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
+                  data-canonical-application-semantic-signature={block.semanticSignature}
+                  data-canonical-application-occurrence-signature={block.occurrenceSignature}
+                  data-canonical-writing-semantic-signature={block.semanticSignature}
+                  data-canonical-writing-occurrence-signature={block.occurrenceSignature}
+                  data-canonical-answer-region-ref={block.answerRegionRef}
+                  data-canonical-response-slot-id={block.responseSlotId}
+                  data-canonical-response-ownership={block.ownership}
+                  data-canonical-application-writing-rhythm-role={
+                    block.answerRegionRef === 'writing.application-box'
+                      ? 'response_box'
+                      : undefined
+                  }
+                  data-canonical-continuation-writing-rhythm-role={
+                    block.answerRegionRef === 'writing.continuation-box'
+                      ? 'response_box'
+                      : undefined
+                  }
+                  data-writing-lecture-trigger={onAnswerBoxActivate ? '' : undefined}
+                  role={onAnswerBoxActivate ? 'button' : undefined}
+                  tabIndex={onAnswerBoxActivate ? 0 : undefined}
+                  onClick={onAnswerBoxActivate}
+                  onKeyDown={handleAnswerBoxKeyDown}
+                >
+                  <div className="pi-writing-answer-top" style={block.drawingArea ? applicationDrawingAreaStyles.top : undefined}>
+                    {block.drawingArea ? (
+                      <>
+                        <div style={applicationDrawingAreaStyles.given}>{givenTop}</div>
+                        <div
+                          className="pi-writing-drawing-area"
+                          style={applicationDrawingAreaStyles.area}
+                          data-canonical-drawing-area-id={block.drawingArea.drawingAreaId}
+                          data-canonical-drawing-label-block-ref={block.drawingArea.labelBlockRef}
+                        >
+                          {block.drawingArea.inlines.map(node => (
+                            <span key={node.nodeId} data-canonical-content-node-id={node.nodeId}
+                              data-source-marks={node.marks?.join(' ')}>{node.text}</span>
+                          ))}
+                        </div>
+                      </>
+                    ) : givenTop}
                   </div>
                   {lectureOpenInBox && (
                     <div
