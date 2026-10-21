@@ -314,6 +314,48 @@ try {
     delete admission.sealed.sourceEvidence[Object.keys(admission.sealed.sourceEvidence)[0]]
   }, 'MISSING_PUBLICATION_OUTPUT')
   }
+  if (!process.argv.includes('--references-only')) {
+    // Revalidate real writer inputs against an owned prepared snapshot, after
+    // the first prepared check has already completed. No replacement "SHA" is
+    // trusted; frozen wrappers still have mutable TypedArray backing.
+    const mutations = [
+      ['source backing under frozen shell', (input, inventory) => {
+        Object.freeze(input.canonicalPublication)
+        input.canonicalPublication.sourceAsset[0] ^= 1
+      }],
+      ['inventory backing under frozen shell', (_input, inventory) => {
+        Object.freeze(inventory); Object.freeze(inventory.files[0])
+        inventory.files[0].bytes[0] ^= 1
+      }],
+      ['path', (_input, inventory) => { inventory.files[0].path += '.changed' }],
+      ['source', (_input, inventory) => { inventory.files[0].source = 'changed' }],
+      ['SHA', (_input, inventory) => { inventory.files[0].sha256 = sha256('changed') }],
+      ['length', (_input, inventory) => { inventory.files[0].byteLength++ }],
+      ['missing snapshot item', (_input, inventory) => { inventory.files.pop() }],
+      ['extra snapshot item', (_input, inventory) => { inventory.files.push(inventory.files[0]) }],
+      ['source descriptor', input => { input.canonicalPublication.manifest.artifacts[0].byteLength++ }],
+      ['missing source item', input => { delete input.canonicalPublication.artifacts[Object.keys(input.canonicalPublication.artifacts)[0]] }],
+      ['extra source item', input => { input.canonicalPublication.artifacts['canonical/extra.json'] = Buffer.from('{}') }],
+    ]
+    for (const [label, mutate] of mutations) {
+      const sentinel = new Error('writer-only rejection verified')
+      assert.throws(() => publish(`writer-recheck-${label}`, snapshot => {
+        const input = {
+          packageData: snapshot.packageData, version: snapshot.version,
+          canonicalPublication: snapshot.admission.sealed,
+          publishReport: snapshot.publishReport, validationReport: snapshot.validationReport,
+        }
+        const inventory = buildPaperImportOutputInventory(input)
+        mutate(input, inventory)
+        const paperAssetsDir = path.join(root, `writer-direct-${label}`)
+        assert.throws(() => writePaperImportVersion({ ...input, outputInventory: inventory, paperAssetsDir }),
+          error => error.code === 'PAPER_IMPORT_OUTPUT_REJECTED')
+        assert.equal(existsSync(paperAssetsDir), false)
+        throw sentinel
+      }), error => error === sentinel)
+      pass(`writer rechecks ${label} before staging`)
+    }
+  }
   const published = publish('normal-envelope')
   assert.equal(published.ok, true)
   assert.equal(published.publish.assetVersion, 1)

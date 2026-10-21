@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
+import { runInNewContext } from 'node:vm'
 import manifestV1 from '../standards/paper-canonical/manifest-v1.json' with { type: 'json' }
 import manifestV13 from '../standards/paper-canonical/manifest-v13.json' with { type: 'json' }
 import manifestV30 from '../standards/paper-canonical/manifest-v30.json' with { type: 'json' }
@@ -29,9 +30,55 @@ import {
   sectionHeadingRuntime,
   sectionHeadingRuntimeFromContract,
 } from '../shared/paper-canonical/sectionHeadingContract.mjs'
-import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableUtf8Bytes } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 import { paperFontStack } from '../shared/papersurface/paperFonts.mjs'
+
+// Native and browser paths must preserve every old canonical byte, including
+// sparse-array gaps (not JSON nulls), escaped surrogates and long object keys.
+const stableSource = readFileSync(new URL('../shared/paper-canonical/stable.mjs', import.meta.url), 'utf8')
+let maxTokenBytes = 0
+let checkingBoundedEncoding = false
+class BoundedTextEncoder extends TextEncoder {
+  encode(value) {
+    const bytes = super.encode(value)
+    if (checkingBoundedEncoding) {
+      maxTokenBytes = Math.max(maxTokenBytes, bytes.length)
+      assert.ok(bytes.length <= 65536, `unbounded canonical token: ${bytes.length}`)
+    }
+    return bytes
+  }
+}
+const browserStable = runInNewContext(`${stableSource.replaceAll('export function ', 'function ')}
+  ;({ stableUtf8Bytes, digestJson, sha256 })`, { TextEncoder: BoundedTextEncoder, Uint8Array, DataView })
+const sparse = new Array(5); sparse[2] = '中'
+const boundaries = [
+  null, true, false, 0, -0, 1.25, { z: 2, a: 1, omitted: undefined },
+  [], sparse, '\0\b\t\n\r"\\\u001f', '中文', '\ud800', '\udfff', 'a\ud800b\udfffc',
+  'x'.repeat(8191) + '😀中' + 'y'.repeat(8192),
+  { ['中😀\\'.repeat(20000)]: 'key' },
+  { base64: Buffer.alloc(12 * 1024 * 1024, 173).toString('base64'), title: '大卷' },
+  new Uint8Array([255, 1, 2, 254]).subarray(1, 3),
+]
+for (const value of boundaries) {
+  const expected = new TextEncoder().encode(stableStringify(value) + '\n')
+  for (const implementation of [{ stableUtf8Bytes, digestJson, sha256 }, browserStable]) {
+    checkingBoundedEncoding = true
+    const actual = implementation.stableUtf8Bytes(value)
+    checkingBoundedEncoding = false
+    assert.ok(Buffer.from(actual).equals(Buffer.from(expected)))
+    assert.equal(actual.at(-1), 10)
+    assert.equal(implementation.sha256(actual), sha256(expected))
+    assert.equal(implementation.digestJson(value), sha256(stableStringify(value)))
+  }
+}
+for (const value of [undefined, [undefined], NaN, Infinity, -Infinity, { n: NaN }, 1n]) {
+  assert.throws(() => stableStringify(value))
+  assert.throws(() => stableUtf8Bytes(value))
+  assert.throws(() => browserStable.stableUtf8Bytes(value))
+}
+assert.ok(maxTokenBytes > 0 && maxTokenBytes <= 65536)
+console.log(`PASS bounded canonical UTF-8 Node/browser differential: ${boundaries.length} values, 7 rejections, token max ${maxTokenBytes}`)
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..')
 const readyFixture = makeReadyCanonicalFixture()

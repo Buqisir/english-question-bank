@@ -66,7 +66,7 @@ import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { consumerContractRefs, resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
-import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
 import { subjectFreeHeaderTitle } from '../shared/paper-canonical/headerTitle.mjs'
 import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
@@ -2396,6 +2396,12 @@ try {
   assert.equal(uiDigest, digestJson(uiValue))
   const manifest = JSON.parse(readFileSync(path.join(result.publish.versionDir, 'canonical',
     `canonical-paper-publication-v${result.publish.consumers.screen.authorityRef.manifestVersion}.json`), 'utf8'))
+  for (const descriptor of manifest.artifacts) {
+    const bytes = readFileSync(path.join(result.publish.versionDir, descriptor.relativePath))
+    const oldBytes = Buffer.from(stableStringify(JSON.parse(bytes)) + '\n')
+    assert.ok(bytes.equals(oldBytes), `listening publication keeps canonical bytes: ${descriptor.relativePath}`)
+    assert.equal(sha256(bytes), descriptor.sha256)
+  }
   assert(manifest.sourceEvidence.every(({ relativePath }) => relativePath.startsWith('source-evidence/')),
     'presentation derivatives must not enter immutable Source Capture')
   const runtime = createCanonicalConsumerRuntime({ rootDir: listeningPublication.paperAssetsDir, db: listeningPublication.db })

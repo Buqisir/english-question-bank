@@ -28,7 +28,7 @@ export function assertPreparedReviewContent(snapshot) {
 }
 
 function assertPreparedReviewContentInternal({
-  subject, packageData, admission, projection, version, approvedIdentity, approvedManifest, publishReport, validationReport,
+  subject, packageData, admission, preparedFacts, version, approvedIdentity, approvedManifest, publishReport, validationReport,
 }) {
   if (!subject) reject('MISSING_BASELINE')
   const { sealed } = admission
@@ -109,20 +109,20 @@ function assertPreparedReviewContentInternal({
   } })
   const expectedConsumers = Object.keys(consumerContractRefs).sort()
   if (!same(Object.keys(admission.consumers).sort(), expectedConsumers)) reject('UNSUPPORTED_PUBLICATION_MAPPING')
-  const compiled = buildNck1ReviewConsumption(projection.candidate, admission.compilation)
+  const compiled = buildNck1ReviewConsumption(preparedFacts.candidate, admission.compilation)
   for (const [label, consumers] of [['admission', admission.consumers], ['writer', writtenConsumers],
     ['compilation', { compilation: compiled }]]) {
     for (const [consumerId, consumption] of Object.entries(consumers)) {
       const comparison = compareReviewPublicationContent({
         subject, packageData, consumption: decorate(consumption, consumerId),
         sealedManifest: manifest, sourceAsset: sealed.sourceAsset, version, approvedIdentity, approvedManifest,
-        materializationDigest: digestJson(projection.materialization),
+        materializationDigest: preparedFacts.materializationDigest,
         // The subject stores commitments, not duplicate JSON. These current
         // source facts are usable only after the mapper matches each digest.
         sidecarContents: {
-          'universal-source-manifest.json': projection.manifest,
-          'config.json': projection.config,
-          'pagination-plan.json': projection.paginationPlan,
+          'universal-source-manifest.json': preparedFacts.manifest,
+          'config.json': preparedFacts.config,
+          'pagination-plan.json': preparedFacts.paginationPlan,
         },
       })
       if (comparison.result !== 'equal') reject(comparison.reasonCode,
