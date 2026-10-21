@@ -17,7 +17,7 @@ const bytes = value => new TextEncoder().encode(JSON.stringify(value))
 // Exercise the public import seam using original synthetic map drawings. The
 // producer remains unchanged: B1 supplies only the new, independently proven
 // ownership and v6 envelope, as the future producer will.
-export async function verifyReadingStemFigures(fixture, { onlyPositive = false } = {}) {
+export async function verifyReadingStemFigures(fixture, { onlyPositive = false, drawingArea = false } = {}) {
   const { paperId } = fixture
   const confirmation = clone(fixture.confirmation)
   confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
@@ -50,6 +50,30 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
     page.visualClassifications.push({ regionId: `stem-map-${i}`, classification: 'content_media',
       itemIds: [], afterItemId: item.itemId })
   }
+  let template
+  if (drawingArea) {
+    const page = confirmation.documents[0].pages.find(page =>
+      page.orderedItems.some(item => item.text === 'Should We Join the Reading Club?'))
+    const index = page.orderedItems.findIndex(item => item.text === 'Should We Join the Reading Club?')
+    const label = page.orderedItems[index]
+    const observed = engineDocuments[0].pages.find(value => value.page === page.page)
+    const observation = observed.observations.find(value => label.observationIds.includes(value.observationId))
+    label.text = observation.text = '（做图处）'
+    const region = clone(observation.region)
+    const extras = ['This is my logo.', 'Li Hua'].map((text, i) => {
+      const id = `stem-drawing-template-${i}`
+      const box = { x: region.x + region.width * .05, y: region.y + region.height * (.1 + i * .3),
+        width: region.width * .4, height: region.height * .2 }
+      observed.regions.push({ regionId: id, kind: 'text', region: box })
+      observed.observations.push({ ...clone(observation), observationId: id, regionId: id, text, region: box })
+      return { itemId: id, observationIds: [id], text }
+    })
+    page.orderedItems.splice(index + 1, 0, ...extras)
+    observed.regions.push({ regionId: 'stem-drawing-template', kind: 'visual', region })
+    page.visualClassifications.push({ regionId: 'stem-drawing-template', classification: 'content_media',
+      itemIds: [label.itemId, ...extras.map(item => item.itemId)], afterItemId: page.orderedItems[index - 1].itemId })
+    template = { page, observed, region, items: [label, ...extras] }
+  }
   const browser = await playwright.chromium.launch({ channel: 'chromium', headless: true })
   const documents = fixture.sourceDocuments.map(document => ({ ...document }))
   try {
@@ -59,9 +83,11 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
         region: { x: 0, y: 0, width: 1, height: 1 }, density: 144 })
       const overlay = i + 1 === page.page
         ? observed.regions.filter(region => region.regionId.startsWith('stem-map-')).map(({ region }) =>
-          `<svg viewBox="0 0 100 30" preserveAspectRatio="none" style="position:absolute;left:${region.x * 100}%;top:${region.y * 100}%;width:${region.width * 100}%;height:${region.height * 100}%"><rect width="100" height="30" fill="white"/><path d="M5 22H95M30 16V29M70 16V29" stroke="black"/><circle cx="30" cy="22" r="4"/><circle cx="70" cy="22" r="4"/><text x="5" y="13" font-size="16">Library</text></svg>`).join('')
+          `<svg viewBox="0 0 100 30" preserveAspectRatio="none" style="position:absolute;left:${region.x * 100}%;top:${region.y * 100}%;width:${region.width * 100}%;height:${region.height * 100}%;box-shadow:0 0 0 1mm white"><rect width="100" height="30" fill="white"/><path d="M5 22H95M30 16V29M70 16V29" stroke="black"/><circle cx="30" cy="22" r="4"/><circle cx="70" cy="22" r="4"/><text x="5" y="13" font-size="16">Library</text></svg>`).join('')
         : ''
-      return `<section><img src="data:image/png;base64,${Buffer.from(raster.bytes).toString('base64')}">${overlay}</section>`
+      const drawing = template && i + 1 === template.page.page
+        ? `<div style="position:absolute;left:${template.region.x * 100}%;top:${template.region.y * 100}%;width:${template.region.width * 100}%;height:${template.region.height * 100}%;background:white;font-size:3px">（做图处） This is my logo. Li Hua</div>` : ''
+      return `<section><img src="data:image/png;base64,${Buffer.from(raster.bytes).toString('base64')}">${overlay}${drawing}</section>`
     })
     await view.setContent(`<style>@page{size:A4;margin:0}body{margin:0}section{position:relative;width:210mm;height:297mm;break-after:page;overflow:hidden}section:last-child{break-after:auto}img{display:block;width:100%;height:100%}</style>${pages.join('')}`)
     const data = new Uint8Array(await view.pdf({ printBackground: true, preferCSSPageSize: true }))
@@ -76,7 +102,11 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
   const sourceBytes = (ev = evidence, cf = confirmation) =>
     ({ evidenceBytes: bytes(ev), confirmationBytes: bytes(cf) })
   const produced = produceNck1OcrMaterialization({ paperId, documents, evidence, confirmation })
-  assert(produced.review.required.every(issue => issue.code === 'NCK1_OCR_MEDIA_ASSOCIATION_AMBIGUOUS'),
+  const expectedIssues = ['NCK1_OCR_MEDIA_ASSOCIATION_AMBIGUOUS', ...(drawingArea ? [
+    'NCK1_OCR_MATERIALIZATION_FIGURE_INVALID', 'NCK1_OCR_MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID',
+    'NCK1_OCR_MATERIALIZATION_WRITING_TASK_INVALID',
+  ] : [])]
+  assert(produced.review.required.every(issue => expectedIssues.includes(issue.code)),
     JSON.stringify(produced.review.required))
   assert(!produced.materialization.groups.some(group => group.questions.some(question => question.stemFigures)),
     'B1 must not enable the producer')
@@ -98,7 +128,7 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
   const group = mat.groups.find(group => group.slotId === 'reading.a')
   const question = group.questions[0]
   const body = resolved.structures.get(documents[0].documentId).body
-  const markers = body.filter(item => item.materializedMedia)
+  const markers = body.filter(item => item.materializedMedia && item.sourceIndex.page === page.page)
   assert.equal(markers.length, 2)
   question.stemFigures = markers.map((marker, i) => ({ kind: 'figure', blockId: `stem-map-block-${i}`,
     mediaId: marker.materializedMedia.mediaId, caption: '', source: clone(marker.sourceIndex) }))
@@ -114,12 +144,36 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
   }
   mat.media = question.stemFigures.map(figure => {
     const media = { mediaId: figure.mediaId, usage: 'content', kind: 'figure', mimeType: 'image/png',
-      extraction: { ...clone(figure.source), kind: 'pdf_crop', density: 144 },
+      // These maps occupy a small source region; retain enough source pixels
+      // for the enlarged question view instead of testing a blurry thumbnail.
+      extraction: { ...clone(figure.source), kind: 'pdf_crop', density: 576 },
       presentation: { alignment: 'center', widthRatio: 0.5, spacingBefore: 'compact', spacingAfter: 'compact' } }
     mediaFiles.push(recrop(media))
     return media
   })
   mat.sourceCoverage.visuals = clone(resolved.sourceVisuals)
+  if (template) {
+    const application = mat.groups.find(group => group.family === 'application-writing')
+    const index = application.blocks.findIndex(block => block.kind === 'figure')
+    assert(index >= 0)
+    const figure = application.blocks[index]
+    const paragraphs = template.items.map((item, i) => {
+      const observation = template.observed.observations.find(value => item.observationIds.includes(value.observationId))
+      const { x, y, width, height } = observation.region
+      return { kind: 'paragraph', blockId: `block:stem-drawing-template-${i}`, role: 'body',
+        content: [{ kind: 'text', text: item.text }],
+        source: { kind: 'page_region', documentId: documents[0].documentId, page: template.page.page,
+          region: { x, y, width: x + width - x, height: y + height - y } } }
+    })
+    application.blocks.splice(index, 1, ...paragraphs)
+    application.writingTask.drawingArea = { placement: 'top_right',
+      labelBlockRef: paragraphs[0].blockId, source: clone(figure.source) }
+    application.writingTask.givenSkeleton = template.items.slice(1).map((item, i) =>
+      ({ role: i ? 'signature' : 'opening', text: item.text }))
+    const visual = mat.sourceCoverage.visuals.find(value => value.targetId === figure.mediaId)
+    visual.disposition = 'structured_answer_region'
+    visual.targetId = application.groupId
+  }
   function imported(materialization = mat, files = mediaFiles, closure = sourceBytes(), docs = documents) {
     return importCanonicalCandidate({ kind: 'nck1-source-materialization', materializationBytes: bytes(materialization),
       documents: docs.map(({ documentId, bytes }) => ({ documentId, bytes })), media: files, ocrSourceBytes: closure })

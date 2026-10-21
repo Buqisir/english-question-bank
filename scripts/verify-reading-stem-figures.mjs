@@ -11,7 +11,7 @@ import { makeDrawingAreaSourceInput } from '../test-fixtures/paper-canonical/app
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { consumerContractRefs, consumerContractRefsForAuthority } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
-import { buildCanonicalReadingConsumptionSurfaceData } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { buildCanonicalReadingConsumptionSurfaceData, buildCanonicalApplicationWritingConsumptionSurfaceData } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { digestJson, sha256, withoutKey } from '../shared/paper-canonical/stable.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { admitCanonicalPaperImport, loadPaperForConsumption, loadPaperForConsumptionSync, validateCanonicalPublicationBundle } from '../server/paper-canonical/publication.mjs'
@@ -27,6 +27,7 @@ import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
 
 const bytes = value => new TextEncoder().encode(JSON.stringify(value))
+const historicalOutputs = new Map()
 // v6 inherits Drawing Area admission and its presentation policy; v5 keeps its
 // exact historical authority, publication schema and default consumers.
 for (const version of [5, 6]) for (const structuredAnswerRegion of [false, true]) {
@@ -42,16 +43,32 @@ for (const version of [5, 6]) for (const structuredAnswerRegion of [false, true]
   const admitted = admitCanonicalPaperImport({ request, sourceAssetVersion: 1 })
   assert.equal(admitted.ok, true, JSON.stringify(admitted.diagnostics))
   assert.equal(admitted.sealed.manifest.schemaVersion, `canonical-paper-publication-v${version === 5 ? 69 : 70}`)
-  for (const consumption of Object.values(admitted.consumers)) {
+  const screenModels = []
+  for (const [consumerId, consumption] of Object.entries(admitted.consumers)) {
     assert.equal(consumption.authorityRef.manifestVersion, version === 5 ? '69' : '71')
+    assert.equal(consumption.consumerContractRef.version,
+      consumerId === 'screen' ? (version === 5 ? '48' : '49') : (version === 5 ? '49' : '50'))
     const groupId = materialization.groups.find(group => group.family === 'application-writing').groupId
     assert.equal(projectCanonicalConsumerGroup({ consumption, groupId,
       familyContractId: 'application-writing' }).answerRegion.drawingArea.text, structuredAnswerRegion ? '（做图处）' : '作图处')
+    if (consumerId === 'screen') {
+      for (const group of materialization.groups.filter(group => group.family === 'reading')) {
+        const model = buildCanonicalReadingConsumptionSurfaceData({ consumption, groupId: group.groupId })
+        screenModels.push({ surfaceData: model.surfaceData, richBlocks: model.richBlocks, passageLetter: model.passageLetter })
+      }
+      const model = buildCanonicalApplicationWritingConsumptionSurfaceData({ consumption, groupId })
+      screenModels.push({ surfaceData: model.surfaceData, promptBlocks: model.promptBlocks, answerRegion: model.answerRegion })
+    }
   }
+  const output = { screen: screenModels, print: printHtml(admitted.consumers.print_pdf) }
+  if (version === 5) historicalOutputs.set(structuredAnswerRegion, output)
+  else assert.deepEqual(output, historicalOutputs.get(structuredAnswerRegion),
+    'v6 without stemFigures preserves v5 Screen content/layout and Print HTML bytes')
 }
-console.log('PASS v5 historical and v6 inherited Drawing Area, including structured_answer_region, admission and both consumers')
+console.log('PASS v5 fixed Screen48/Print49, v6 Screen49/Print50, identical no-stem Screen/Print output and inherited Drawing Area')
 const paperId = 'paper-synthetic-jinan-stem-map'
-const fixture = await verifyReadingStemFigures(await makeSyntheticNck1OcrFixture({ paperId }), { onlyPositive: true })
+const fixture = await verifyReadingStemFigures(await makeSyntheticNck1OcrFixture({ paperId }),
+  { onlyPositive: true, drawingArea: process.argv.includes('--with-drawing-area') })
 const sourceInput = structuredClone(fixture.candidate.sourceInput)
 const mat = JSON.parse(new TextDecoder().decode(sourceInput.materializationBytes))
 // One selected deterministic rendition and one original crop must both survive
@@ -284,13 +301,29 @@ try {
             })
             const option = question.querySelector('[data-canonical-option-id]').getBoundingClientRect()
             return { page: Number(page.dataset.pageNumber), stemBottom: stem.bottom, figures,
-              firstOptionTop: option.top, areaTop: area.top, areaBottom: area.bottom }
+              firstOptionTop: option.top, questionBottom: question.getBoundingClientRect().bottom,
+              areaTop: area.top, areaBottom: area.bottom,
+              drawing: [...document.querySelectorAll('.pagedjs_pages [data-canonical-drawing-area-id]')].map(node => {
+                const response = node.closest('.canonical-application-response')
+                return { page: Number(node.closest('.pagedjs_page').dataset.pageNumber),
+                  heightMm: response.getBoundingClientRect().height / 96 * 25.4,
+                  label: node.textContent,
+                  imageCount: node.closest('[data-canonical-group-id]').querySelectorAll('img').length }
+              }) }
           }),
         })
         const box = inspected.inspection
         assert(box.stemBottom <= box.figures[0].top && box.figures[0].bottom <= box.figures[1].top
           && box.figures[1].bottom <= box.firstOptionTop)
         for (const figure of box.figures) assert(Math.abs(figure.width / figure.height / figure.aspect - 1) < 0.01)
+        assert(box.questionBottom <= box.areaBottom + 1, 'stem, both maps and every option fit within the page')
+        if (process.argv.includes('--with-drawing-area')) {
+          assert.equal(box.drawing.length, 1)
+          assert(Math.abs(box.drawing[0].heightMm - 65) < .3, 'drawing answer box stays 65mm')
+          assert.equal(box.drawing[0].imageCount, 0, 'structured drawing area is not duplicated as an image')
+          save(outputDir, `${edition}-drawing.png`, rasterPdfRegion({ pdfBytes: result.pdfBytes,
+            page: box.drawing[0].page, region: { x: 0, y: 0, width: 1, height: 1 }, density: 120 }).bytes)
+        }
         save(outputDir, `${edition}-q21.png`, rasterPdfRegion({ pdfBytes: result.pdfBytes,
           page: box.page, region: { x: 0, y: 0, width: 1, height: 1 }, density: 120 }).bytes)
         geometry.push({ edition, pageCount: result.pageCount, ...box })
@@ -299,6 +332,8 @@ try {
       save(outputDir, 'geometry.json', bytes(geometry))
       const answerPdf = await renderPaginatedPaper(answerHtml)
       save(outputDir, 'answerOnly.pdf', answerPdf.pdfBytes)
+      save(outputDir, 'answerOnly.png', rasterPdfRegion({ pdfBytes: answerPdf.pdfBytes,
+        page: 1, region: { x: 0, y: 0, width: 1, height: 1 }, density: 120 }).bytes)
       // Force a figure past the page's physical height. The reader must block
       // this case rather than flex-shrink an unreadable image or clip it.
       const oversized = html.replace('flex-shrink:0', 'flex-shrink:0;height:1400px')
