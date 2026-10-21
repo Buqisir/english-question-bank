@@ -7,6 +7,7 @@ import {
   layoutListeningOptionSet,
 } from './abcdLayout.mjs'
 import { authorityAdmitsApplicationDrawingArea, authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
+import { isBase64String } from './base64.mjs'
 import { consumerRendersApplicationDrawingArea, consumerRendersApplicationPromptFigures } from './consumers.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
 import { validateMediaPresentation } from './mediaPresentation.mjs'
@@ -149,10 +150,7 @@ function projectListeningConsumerGroup(input, occurrence) {
 }
 
 function decodeBase64Bytes(value) {
-  if (
-    typeof value !== 'string'
-    || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(value)
-  ) return null
+  if (!isBase64String(value)) return null
   try {
     const decoded = atob(value)
     return Uint8Array.from(decoded, (character) => character.charCodeAt(0))

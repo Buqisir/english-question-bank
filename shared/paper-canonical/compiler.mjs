@@ -4143,6 +4143,12 @@ function isConfirmedNck1MaterializationRequest(request) {
     media: (materialization.media || []).map((media) => ({
       mediaId: media.mediaId,
       bytes: byInputKey.get(nck1InputKey('source_media', media.mediaId))?.bytes,
+      // Rebuild the same immutable input for every allowed raw authority.
+      // The adapter validates these bytes; confirmation and evidence fingerprints
+      // below still bind the complete candidate, source, and document order.
+      ...(media.publication?.candidate ? {
+        renditionBytes: byInputKey.get(nck1InputKey('candidate_media', media.mediaId))?.bytes,
+      } : {}),
     })),
   }
   const audioDocument = byInputKey.get('listening_audio_descriptor')
