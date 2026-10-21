@@ -194,7 +194,8 @@ function preflight(db) {
       fail('REVIEW_COMPATIBILITY_MIGRATION_RECORD_MISSING', legacyName)
     }
   }
-  return { subject, upgradeBackfill }
+  return { subject, upgradeBackfill,
+    complete: subject === 'v2' && !upgradeBackfill && tables.every(name => object(db, name)) }
 }
 
 // Function-level atomicity even when an outer caller catches the error and
@@ -202,9 +203,22 @@ function preflight(db) {
 // legacy business/compatibility rows. IMMEDIATE serializes independent starts.
 export function ensureReviewCompatibilityShape(db) {
   const ownTransaction = !db.isTransaction
-  if (ownTransaction) db.exec('BEGIN IMMEDIATE')
   let savepoint = false
   try {
+    db.exec('PRAGMA busy_timeout=5000')
+    // A read-only snapshot keeps all strict checks coherent without reserving
+    // the writer. In rollback journal mode even an empty IMMEDIATE transaction
+    // needs an exclusive lock at COMMIT and can race the API's polling readers.
+    db.exec('SAVEPOINT review_compatibility_shape')
+    savepoint = true
+    const initial = preflight(db)
+    db.exec('RELEASE SAVEPOINT review_compatibility_shape')
+    savepoint = false
+    if (initial.complete) return { enabled: true }
+
+    // Release our read snapshot before waiting for the writer. Revalidate after
+    // acquiring it: another startup may have completed the migration meanwhile.
+    if (ownTransaction) db.exec('BEGIN IMMEDIATE')
     db.exec('SAVEPOINT review_compatibility_shape')
     savepoint = true
     const { subject, upgradeBackfill } = preflight(db)
@@ -227,6 +241,12 @@ export function ensureReviewCompatibilityShape(db) {
   } catch (error) {
     if (savepoint) db.exec('ROLLBACK TO SAVEPOINT review_compatibility_shape; RELEASE SAVEPOINT review_compatibility_shape')
     if (ownTransaction && db.isTransaction) db.exec('ROLLBACK')
+    if ((error.errcode & 0xff) === 5 || (error.errcode & 0xff) === 6) {
+      throw Object.assign(new Error(
+        'REVIEW_COMPATIBILITY_SCHEMA_BUSY: review schema startup could not acquire or commit its lock within 5000ms',
+        { cause: error },
+      ), { code: 'REVIEW_COMPATIBILITY_SCHEMA_BUSY' })
+    }
     throw error
   }
 }

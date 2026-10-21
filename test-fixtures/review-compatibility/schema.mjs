@@ -1,9 +1,12 @@
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
+import { readFileSync } from 'node:fs'
 import { DatabaseSync } from 'node:sqlite'
 import path from 'node:path'
+import { setTimeout as yieldFor } from 'node:timers/promises'
 import { reviewCompatibilityV1Sql, installV1Subject } from './schema-v1.mjs'
 import { ensureReviewCompatibilityShape, readReviewCompatibilitySchemaStatus } from '../../server/import-review/reviewCompatibilitySchema.mjs'
+import { createImportReviewStore } from '../../server/import-review/importReviewStore.mjs'
 
 const schema = db => db.prepare('SELECT * FROM sqlite_master ORDER BY name').all()
 const integrity = db => {
@@ -21,6 +24,7 @@ function database(file = ':memory:') {
 }
 
 export async function verifyReviewCompatibilitySchema(root, pass) {
+  await verifyReviewCompatibilityStartupLocks(root, pass)
   for (const version of ['v1', 'v2']) {
     const reference = database()
     if (version === 'v1') reference.exec(reviewCompatibilityV1Sql)
@@ -212,4 +216,114 @@ export async function verifyReviewCompatibilitySchema(root, pass) {
     integrity(final)
     pass('two concurrent process starts serialize to one archive and one migration record')
   } finally { final.close() }
+}
+
+export async function verifyReviewCompatibilityStartupLocks(root, pass) {
+  const file = path.join(root, 'startup-locks.sqlite')
+  const options = { dbPath: file, filesRoot: path.join(root, 'startup-files'), rendererBuildId: 'startup-lock-fixture' }
+  createImportReviewStore(options)
+  const holder = new DatabaseSync(file)
+  try {
+    assert.equal(holder.prepare('PRAGMA journal_mode').get().journal_mode, 'delete')
+    const before = readFileSync(file)
+    for (const lock of ['BEGIN; SELECT * FROM review_subject', 'BEGIN IMMEDIATE']) {
+      holder.exec(lock)
+      try {
+        const db = new DatabaseSync(file)
+        try {
+          const calls = []
+          const wrapped = {
+            get isTransaction() { return db.isTransaction },
+            prepare: db.prepare.bind(db),
+            exec(sql) { calls.push(sql); return db.exec(sql) },
+          }
+          ensureReviewCompatibilityShape(wrapped)
+          ensureReviewCompatibilityShape(wrapped)
+          assert.equal(calls.some(sql => /\b(IMMEDIATE|CREATE|ALTER|INSERT|UPDATE|DELETE)\b/.test(sql)), false)
+          assert.equal(db.isTransaction, false)
+          assert.equal(db.prepare('SELECT total_changes() n').get().n, 0)
+        } finally { db.close() }
+        // Same synchronous constructor used before API listen, twice for deploy/restart.
+        createImportReviewStore(options)
+        createImportReviewStore(options)
+      } finally { holder.exec('ROLLBACK') }
+      assert.deepEqual(readFileSync(file), before)
+      pass(`verified v2 startup under ${lock}: ensure and API store stay read-only and byte-stable`)
+    }
+  } finally { holder.close() }
+
+  const moduleUrl = new URL('../../server/import-review/reviewCompatibilitySchema.mjs', import.meta.url).href
+  for (const [label, lock, release] of [
+    ['writer-release', 'BEGIN IMMEDIATE', true],
+    ['writer-timeout', 'BEGIN IMMEDIATE', false],
+    ['reader-release', 'BEGIN; SELECT * FROM review_subject', true],
+    ['reader-timeout', 'BEGIN; SELECT * FROM review_subject', false],
+  ]) {
+    const file = path.join(root, `migration-lock-${label}.sqlite`)
+    const holder = database(file)
+    holder.exec(reviewCompatibilityV1Sql)
+    installV1Subject(holder, 'old-revision')
+    const before = schema(holder)
+    holder.exec(lock)
+    let released = false
+    try {
+      const child = spawn(process.execPath, ['--input-type=module', '-e', `
+        import {DatabaseSync} from 'node:sqlite';
+        import {ensureReviewCompatibilityShape} from ${JSON.stringify(moduleUrl)};
+        const db = new DatabaseSync(${JSON.stringify(file)});
+        process.send('starting');
+        const start = performance.now();
+        try {
+          ensureReviewCompatibilityShape(db);
+          console.log(JSON.stringify({enabled:true,elapsed:performance.now()-start,transaction:db.isTransaction}));
+        } catch(error) {
+          console.log(JSON.stringify({code:error.code,cause:error.cause?.errcode,
+            elapsed:performance.now()-start,transaction:db.isTransaction}));
+        } finally { db.close(); process.disconnect(); }
+      `], { stdio: ['ignore', 'pipe', 'pipe', 'ipc'] })
+      let output = '', errors = ''
+      child.stdout.on('data', value => { output += value })
+      child.stderr.on('data', value => { errors += value })
+      const started = new Promise((resolve, reject) => {
+        child.once('message', resolve)
+        child.once('error', reject)
+        child.once('exit', () => reject(new Error(`Child exited before lock probe: ${errors}`)))
+      })
+      const exited = new Promise((resolve, reject) => {
+        child.once('error', reject)
+        child.once('exit', code => code === 0 ? resolve() : reject(new Error(errors)))
+      })
+      await started
+      if (release) {
+        await yieldFor(150)
+        holder.exec('ROLLBACK')
+        released = true
+      }
+      await exited
+      const result = JSON.parse(output)
+      assert.equal(result.transaction, false)
+      assert(result.elapsed >= (release ? 100 : 4500), output)
+      assert(result.elapsed < 15_000, output)
+      if (release) {
+        assert.equal(result.enabled, true, output)
+        const status = readReviewCompatibilitySchemaStatus(holder)
+        assert.equal(status.migration.legacyRowCount, 1)
+        ensureReviewCompatibilityShape(holder)
+        ensureReviewCompatibilityShape(holder)
+        assert.deepEqual(readReviewCompatibilitySchemaStatus(holder), status)
+      } else {
+        assert.equal(result.code, 'REVIEW_COMPATIBILITY_SCHEMA_BUSY', output)
+        assert.equal(result.cause, 5)
+        assert.deepEqual(schema(holder), before)
+        holder.exec('ROLLBACK')
+        released = true
+        ensureReviewCompatibilityShape(holder)
+        assert.equal(readReviewCompatibilitySchemaStatus(holder).migration.legacyRowCount, 1)
+      }
+      pass(`v1 migration ${label}: bounded wait, named timeout rollback, lossless retry and repeat ensure`)
+    } finally {
+      if (!released) holder.exec('ROLLBACK')
+      holder.close()
+    }
+  }
 }

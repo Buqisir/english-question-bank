@@ -822,8 +822,10 @@ export function createImportReviewStore({
   mkdirSync(path.dirname(dbPath), { recursive: true })
   mkdirSync(filesRoot, { recursive: true })
   const initialize = new DatabaseSync(dbPath)
-  ensureShape(initialize)
-  initialize.close()
+  try {
+    initialize.exec('PRAGMA busy_timeout=5000')
+    ensureShape(initialize)
+  } finally { initialize.close() }
   const projectionCache = new Map()
   const targetBuild = reviewBuildIdentityProvider()
 
