@@ -43,6 +43,9 @@ import {
 } from '../test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs'
 import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { replaceOcrStructuredAnswerRegions } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
+import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresentation.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')
@@ -333,6 +336,116 @@ for (const classification of ['semantic_table', 'content_media']) {
     assert(invalid.issues.some(issue => /confirmed question-source groups/.test(issue.message)),
       `${change}: intact visuals must retain question-source ownership and placement: ${JSON.stringify(invalid.issues)}`)
   }
+}
+
+// A confirmed template can change representation, but cannot invent its text,
+// provenance, owner or content inventory.
+{
+  const evidence = cloneJson(fixture.evidence)
+  const confirmation = cloneJson(fixture.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
+  const page = confirmation.documents[0].pages.find(page =>
+    page.orderedItems.some(item => item.text === 'Should We Join the Reading Club?'))
+  const index = page.orderedItems.findIndex(item => item.text === 'Should We Join the Reading Club?')
+  const label = page.orderedItems[index]
+  label.text = '（做图处）'
+  const observed = evidence.documents[0].pages.find(value => value.page === page.page)
+  const labelObservation = observed.observations.find(value => label.observationIds.includes(value.observationId))
+  const extras = ['This is my logo.', 'Li Hua'].map((text, i) => {
+    const id = `structured-template-${i}`
+    const { x, y, width, height } = labelObservation.region
+    const region = { x: x + width * .05, y: y + height * (.1 + i * .3),
+      width: width * .4, height: height * .2 }
+    observed.regions.push({ regionId: id, kind: 'text', region })
+    observed.observations.push({ ...cloneJson(labelObservation), observationId: id, regionId: id, text, region })
+    return { itemId: id, observationIds: [id], text }
+  })
+  page.orderedItems.splice(index + 1, 0, ...extras)
+  const region = cloneJson(labelObservation.region)
+  observed.regions.push({ regionId: 'structured-template', kind: 'visual', region })
+  page.visualClassifications.push({ regionId: 'structured-template', classification: 'content_media',
+    itemIds: [label.itemId, ...extras.map(item => item.itemId)], afterItemId: page.orderedItems[index - 1].itemId })
+  rebound(evidence)
+  confirmation.evidenceDigest = evidence.evidenceDigest
+  const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
+  const expected = cloneJson(produced.materialization)
+  // The producer's historical draft cannot admit an application figure;
+  // the v5 replacement below resolves precisely these representation issues.
+  assert.deepEqual(produced.review.required.map(issue => issue.code).sort(), [
+    'NCK1_OCR_MATERIALIZATION_FIGURE_INVALID',
+    'NCK1_OCR_MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID',
+    'NCK1_OCR_MATERIALIZATION_WRITING_TASK_INVALID',
+  ])
+  const original = cloneJson(expected)
+  const unchanged = replaceOcrStructuredAnswerRegions(produced.materialization, expected)
+  assert.strictEqual(unchanged.expected, expected)
+  assert.deepEqual(expected, original, 'no structured visuals leaves the old comparison input byte-for-byte unchanged')
+  assert.equal(unchanged.replacements.size, 0)
+  const resolved = resolveConfirmedNck1OcrEvidence({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
+  assert.deepEqual(resolved.issues, [])
+  const changed = cloneJson(produced.materialization)
+  changed.schemaVersion = 'nck1-source-materialization-v5'
+  changed.issues = []
+  const group = changed.groups.find(group => group.family === 'application-writing')
+  const figureIndex = group.blocks.findIndex(block => block.kind === 'figure')
+  const figure = group.blocks[figureIndex]
+  assert(figure)
+  const mediaId = figure.mediaId
+  const paragraphs = [label, ...extras].map((item, i) => {
+    const observation = observed.observations.find(value => value.observationId === item.observationIds[0])
+    const { x, y, width, height } = observation.region
+    return { kind: 'paragraph', blockId: `block:structured-template-${i}`, role: 'body',
+      content: [{ kind: 'text', text: item.text }],
+      source: { kind: 'page_region', documentId: fixture.sourceDocuments[0].documentId, page: page.page,
+        region: { x, y, width: x + width - x, height: y + height - y } } }
+  })
+  group.blocks.splice(figureIndex, 1, ...paragraphs)
+  group.writingTask.drawingArea = { placement: 'top_right', labelBlockRef: paragraphs[0].blockId,
+    source: cloneJson(figure.source) }
+  group.writingTask.givenSkeleton = extras.map((item, i) => ({ role: i ? 'signature' : 'opening', text: item.text }))
+  const instructionBlock = changed.groups.find(value => value.slotId === 'reading.a').blocks.find(value => value.kind === 'paragraph')
+  changed.sourcePresentation = {
+    instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS)
+      .filter(slot => !slot.startsWith('listening.') || changed.listening.state !== 'not_supplied')
+      .map(slotId => ({ slotId, text: instructionBlock.content.map(value => value.text).join(''),
+        source: cloneJson(instructionBlock.source) })),
+    listeningExample: changed.listening.state === 'not_supplied' ? null
+      : { state: 'not_supplied', source: cloneJson(instructionBlock.source) },
+  }
+  const visual = changed.sourceCoverage.visuals.find(value => value.targetId === mediaId)
+  visual.disposition = 'structured_answer_region'
+  visual.targetId = group.groupId
+  changed.media.find(media => media.mediaId === mediaId).usage = 'visual_proof'
+  assert.deepEqual(validateNck1SourceMaterialization(changed), [])
+  const sourceBytes = { evidenceBytes: new TextEncoder().encode(JSON.stringify(evidence)),
+    confirmationBytes: new TextEncoder().encode(JSON.stringify(confirmation)) }
+  const importChanged = materialization => imported({ ...produced, materialization,
+    mediaFiles: produced.mediaFiles.filter(file => materialization.media.some(media => media.mediaId === file.mediaId)) }, sourceBytes)
+  assert.deepEqual(importChanged(changed).issues, [], 'confirmed figure -> structured region with retained proof')
+  const withoutProof = cloneJson(changed)
+  withoutProof.media = withoutProof.media.filter(media => media.mediaId !== mediaId)
+  assert.deepEqual(importChanged(withoutProof).issues, [], 'confirmed template media may also be omitted')
+  const immutableRaw = cloneJson(changed)
+  const transformed = replaceOcrStructuredAnswerRegions(changed, cloneJson(produced.materialization), resolved, confirmation, evidence)
+  assert.deepEqual(changed, immutableRaw, 'only the expected side is rewritten')
+  assert.equal(transformed.replacements.size, 1)
+  assert(!transformed.expected.groups.find(value => value.groupId === group.groupId).blocks.some(value => value.kind === 'figure'))
+  for (const name of ['region', 'group', 'multiple', 'content', 'drawing', 'text', 'source']) {
+    const raw = cloneJson(changed)
+    const exp = cloneJson(produced.materialization)
+    const owner = raw.groups.find(value => value.groupId === group.groupId)
+    if (name === 'region') raw.sourceCoverage.visuals.find(value => value.disposition === 'structured_answer_region').region.width -= .000001
+    if (name === 'group') owner.slotId = 'wrong-slot'
+    if (name === 'multiple') exp.groups.find(value => value.groupId === group.groupId).blocks.push(cloneJson(figure))
+    if (name === 'content') owner.blocks.push(cloneJson(figure))
+    if (name === 'drawing') delete owner.writingTask.drawingArea
+    if (name === 'text') owner.blocks.find(value => value.blockId === paragraphs[0].blockId).content[0].text = 'Invented label'
+    if (name === 'source') owner.blocks.find(value => value.blockId === paragraphs[0].blockId).source.region.x += .001
+    const suffix = { content: 'CONTENT_CONFLICT', text: 'TEXT_UNCONFIRMED', source: 'TEXT_SOURCE_INVALID' }[name] || 'UNMATCHED'
+    assert.throws(() => replaceOcrStructuredAnswerRegions(raw, exp, resolved, confirmation, evidence),
+      error => error.code === `OCR_STRUCTURED_ANSWER_REGION_${suffix}`, name)
+  }
+  console.log('PASS OCR-v3 controlled structured answer replacement: exact owner/region/text/source, proof/absence, closed media and unchanged legacy path')
 }
 
 // Prepare immutable native page fixtures once for the media-negative matrix.
