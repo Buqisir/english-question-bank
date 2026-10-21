@@ -17,7 +17,9 @@ const bytes = value => new TextEncoder().encode(JSON.stringify(value))
 // Exercise the public import seam using original synthetic map drawings. The
 // producer remains unchanged: B1 supplies only the new, independently proven
 // ownership and v6 envelope, as the future producer will.
-export async function verifyReadingStemFigures(fixture, { onlyPositive = false, drawingArea = false } = {}) {
+export async function verifyReadingStemFigures(fixture, {
+  onlyPositive = false, drawingArea = false, cropDensity = 144,
+} = {}) {
   const { paperId } = fixture
   const confirmation = clone(fixture.confirmation)
   confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
@@ -144,9 +146,9 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false, 
   }
   mat.media = question.stemFigures.map(figure => {
     const media = { mediaId: figure.mediaId, usage: 'content', kind: 'figure', mimeType: 'image/png',
-      // These maps occupy a small source region; retain enough source pixels
-      // for the enlarged question view instead of testing a blurry thumbnail.
-      extraction: { ...clone(figure.source), kind: 'pdf_crop', density: 576 },
+      // Render acceptance opts into more source pixels for enlarged maps;
+      // ordinary import regressions retain the historical low-cost density.
+      extraction: { ...clone(figure.source), kind: 'pdf_crop', density: cropDensity },
       presentation: { alignment: 'center', widthRatio: 0.5, spacingBefore: 'compact', spacingAfter: 'compact' } }
     mediaFiles.push(recrop(media))
     return media

@@ -68,7 +68,8 @@ for (const version of [5, 6]) for (const structuredAnswerRegion of [false, true]
 console.log('PASS v5 fixed Screen48/Print49, v6 Screen49/Print50, identical no-stem Screen/Print output and inherited Drawing Area')
 const paperId = 'paper-synthetic-jinan-stem-map'
 const fixture = await verifyReadingStemFigures(await makeSyntheticNck1OcrFixture({ paperId }),
-  { onlyPositive: true, drawingArea: process.argv.includes('--with-drawing-area') })
+  { onlyPositive: true, drawingArea: process.argv.includes('--with-drawing-area'),
+    cropDensity: process.argv.includes('--render') ? 576 : 144 })
 const sourceInput = structuredClone(fixture.candidate.sourceInput)
 const mat = JSON.parse(new TextDecoder().decode(sourceInput.materializationBytes))
 // One selected deterministic rendition and one original crop must both survive
