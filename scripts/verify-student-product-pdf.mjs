@@ -238,6 +238,33 @@ for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
   } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
   assert.ok(failed.some(source => source.includes(coverLiftProfile)), 'try fallback before failing closed')
   assert.ok(failed.length <= (edition === 'economy8' ? 60 : 30))
+  for (const failureMode of ['all-overflow', 'natural-overflow', 'break-overflow']) {
+    let overflowCount = 0
+    let measuredCount = 0
+    let liftedCount = 0
+    await assert.rejects(() => planStudentProductPdf(html, { edition, render: async source => {
+      if (source.includes(coverLiftProfile)) {
+        liftedCount += 1
+        return { pageCount: limit, inspection }
+      }
+      const broken = /data-canonical-group-id="[^"]+" data-pdf-planned-break/.test(source)
+      const overflow = failureMode === 'all-overflow'
+        || (failureMode === 'natural-overflow' && !broken && geometry(source).application === 24)
+        || (failureMode === 'break-overflow' && broken)
+      if (overflow) {
+        overflowCount += 1
+        throw Object.assign(new Error('atomic block or content overflows'), { code: 'PAPER_LAYOUT_OVERFLOW' })
+      }
+      measuredCount += 1
+      // A shared starting page makes a semantic break a real search trial.
+      return { pageCount: limit + 1, inspection: [inspection[0], {
+        ...inspection[1], pages: [7, 8], continuationMaterialPages: [7, 8],
+      }] }
+    } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE', `${edition}: ${failureMode}`)
+    assert.ok(overflowCount > 0, `${failureMode} really exercises an unknown page count`)
+    assert.equal(measuredCount > 0, failureMode !== 'all-overflow')
+    assert.equal(liftedCount, 0, 'unknown ordinary results never authorize the cover lift')
+  }
 }
 // A content-integrity failure within the ceiling does not authorize moving the cover.
 await assert.rejects(() => planStudentProductPdf(html, { edition: 'largeNoListening',

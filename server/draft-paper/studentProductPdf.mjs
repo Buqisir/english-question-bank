@@ -146,13 +146,13 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
   let searchedCandidates = 0
-  let regularWithinLimit = false
+  let regularAllOverLimit = true
   const fonts = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
   // Finish every ordinary font tier before lifting the opening. One extra
   // profile per tier gets at most 13 break trials + 14 box-restoration renders.
   const tiers = [false, true].flatMap(coverLift => fonts.map(fontSizePt => ({ fontSizePt, coverLift })))
   for (const { fontSizePt, coverLift } of tiers) {
-    if (coverLift && regularWithinLimit) break
+    if (coverLift && (!regularAllOverLimit || searchedCandidates === 0)) break
     const tierStart = searchedCandidates
     const minimumContinuation = fontSizePt === 12 ? 27 : 24
     // Prefer full-size source media and normal answer space. Compact geometry
@@ -167,9 +167,15 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
         answerBoxHeightsMm: { application, continuation } }
       const measure = async (selected, breaks = []) => {
         searchedCandidates += 1
-        const result = await render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
-        if (!coverLift && result.pageCount <= policy.targetPages) regularWithinLimit = true
-        return result
+        try {
+          const result = await render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+          if (!coverLift && !(Number.isInteger(result.pageCount) && result.pageCount > policy.targetPages)) regularAllOverLimit = false
+          return result
+        } catch (error) {
+          // Overflow can mean broken content, not a measured excess page count.
+          if (!coverLift) regularAllOverLimit = false
+          throw error
+        }
       }
       let natural
       try { natural = await measure(layout) } catch (error) {
@@ -186,9 +192,15 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
           rejectOverflowCandidates: true,
           render: async (...args) => {
             searchedCandidates += 1
-            const result = await render(...args)
-            if (!coverLift && result.pageCount <= policy.targetPages) regularWithinLimit = true
-            return result
+            try {
+              const result = await render(...args)
+              if (!coverLift && !(Number.isInteger(result.pageCount) && result.pageCount > policy.targetPages)) regularAllOverLimit = false
+              return result
+            } catch (error) {
+              // Record unknowns before searchFixedPagePdf rejects the trial.
+              if (!coverLift) regularAllOverLimit = false
+              throw error
+            }
           },
         })
       } catch (error) {
