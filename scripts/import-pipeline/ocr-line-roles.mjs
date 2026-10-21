@@ -148,6 +148,8 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('entry.numbered', 'entry-label', 30, NUMBERED_SAMPLE_LABEL, '范文一（83词）：', '范文分析'),
   pattern('entry.example', 'entry-label', 40, EXAMPLE_SAMPLE_LABEL, '【示例二】建议调整活动安排', '【示例一】An English sentence follows.'),
   pattern('entry.parenthesized', 'entry-label', 50, PARENTHESIZED_SAMPLE_LABEL, '(One possible version)', 'One possible version:'),
+  pattern('entry.version', 'entry-label', 60, /^(?:(?:A|One)\s+)?Possible\s+Version\s*\d+[:：]?$/iu,
+    'Possible Version 2', 'Possible Version 2 describes a design.'),
   pattern('entry.scoring-kind', 'entry-kind', 10, SCORING_LABEL, '二、评分原则', '参考范文', { value: 'scoring' }),
   pattern('entry.essay-kind', 'entry-kind', 20, ESSAY_LABEL, '参考范文', '二、评分原则', { value: 'essays' }),
   rule('entry.sample-label', 'sample-label', 10, f =>

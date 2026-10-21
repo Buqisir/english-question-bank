@@ -25,6 +25,9 @@ import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
+import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
+import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2,
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3,
@@ -1060,7 +1063,7 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
 }
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
-export function buildSourceReferences(materialization, evidence, confirmation) {
+export function buildSourceReferences(materialization, evidence, confirmation, { sourceDocuments = [] } = {}) {
   const answerDocuments = materialization.documents.filter((document) =>
     ['official_answers', 'question_and_answers'].includes(document.role))
   if (answerDocuments.length !== 1) fail('Expected exactly one answer-bearing document')
@@ -1073,12 +1076,25 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
   const sourceOrder = new WeakMap()
   const furniture = new WeakSet()
   const lineFacts = new WeakMap()
+  const referenceFigures = []
+  const assignedFigures = new Set()
   const factsFor = line => {
     if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
     return lineFacts.get(line)
   }
   for (const page of pages) {
-    const observations = new Map(evidencePages[page.page - 1].observations.map((item) => [item.observationId, item]))
+    const evidencePage = evidencePages[page.page - 1]
+    const observations = new Map(evidencePage.observations.map((item) => [item.observationId, item]))
+    const pictureItems = new Set()
+    for (const visual of page.visualClassifications || []) {
+      if (visual.classification !== 'content_media') continue
+      const resolved = resolveOcrContentVisual({ paperId: materialization.paperId, document: answerDocument,
+        page: { ...page, observations: evidencePage.observations }, visual,
+        region: evidencePage.regions.find(region => region.regionId === visual.regionId), claimedItems: pictureItems })
+      if (!resolved.referenceFigure) throw new Error('Reference figures require a separate official_answers PDF')
+      referenceFigures.push(resolved.referenceFigure)
+      resolved.itemIds.forEach(id => pictureItems.add(id))
+    }
     const tableStarts = new Map()
     const tableItems = new Set()
     const items = new Map(page.orderedItems.map(item => [item.itemId, item]))
@@ -1101,6 +1117,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       })
     }
     for (const item of page.orderedItems) {
+      if (pictureItems.has(item.itemId)) continue
       if (tableItems.has(item.itemId) && !tableStarts.has(item.itemId)) continue
       const boxes = item.observationIds.map((id) => observations.get(id))
       const line = { itemId: item.itemId, page: page.page, text: item.text, boxes,
@@ -1253,12 +1270,20 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
           sourceLabel: null, labelSource: null, paragraphs: [] }
         entries.essays.push(entry)
       }
-      const margin = margins.get(line.page)
+      const margin = { ...margins.get(line.page) }
+      // A confirmed illustration narrows the available text line. A line
+      // wrapping beside it is not a short final line of a natural paragraph.
+      const lineRegion = facts.region
+      for (const figure of referenceFigures.filter(figure => figure.source.page === line.page)) {
+        const box = figure.source.region
+        if (lineRegion && box.y < lineRegion.y + lineRegion.height && box.y + box.height > lineRegion.y
+          && box.x >= line.right && box.x < margin.right) margin.right = box.x
+      }
       const special = firstLineRole('paragraph-role', facts)?.value || null
       const afterClosing = previous?.role === 'closing'
       const decision = decideLineJoin({
         content: 'reference', previous, current: facts,
-        geometry: { unit: 'normalized', margin, previousMargin: previous ? margins.get(previous.page) : margin },
+        geometry: { unit: 'normalized', margin, previousMargin: previous?.margin || margin },
         roles: { hasParagraph: Boolean(paragraph), special, afterClosing,
           numbered: matchesLineRole('paragraph.numbered', facts) },
         referenceContext: { entryKind: entry.kind,
@@ -1276,7 +1301,7 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
       }
       paragraph.lines.push(line)
       previous = { role: paragraph.role, right: line.right, page: line.page,
-        text: line.text, sourceIndex: sourceOrder.get(line) }
+        text: line.text, sourceIndex: sourceOrder.get(line), margin }
       previousLocation = decision.location.after
     }
     flush()
@@ -1306,27 +1331,48 @@ export function buildSourceReferences(materialization, evidence, confirmation) {
             ...(sources.length > 1 ? { continuationSources: sources.slice(1) } : {}),
           } }
         })
-        return { ...rest, ...(kind === 'scoring' && structuredScoring
-          ? { blocks } : { paragraphs: blocks.map(block => block.paragraph) }) }
+        const figures = kind === 'essays' ? referenceFigures.flatMap(figure => {
+          const index = paragraphs.findIndex(item => item.lines?.some(line => line.itemId === figure.afterItem.itemId))
+          if (index < 0) return []
+          if (paragraphs[index].lines.at(-1).itemId !== figure.afterItem.itemId || assignedFigures.has(figure)) {
+            throw new Error('Reference figure anchor must end one surviving essay paragraph')
+          }
+          const document = sourceDocuments.find(document => document.documentId === answerDocument.documentId)
+          if (!document?.bytes || sha256(document.bytes) !== documentSha256) {
+            throw new Error('Reference figure capture requires exact source PDF bytes')
+          }
+          assignedFigures.add(figure)
+          return [{ figureId: `source-figure-${referenceFigures.indexOf(figure) + 1}`,
+            afterParagraphId: blocks[index].paragraph.paragraphId,
+            sourceRegionId: figure.sourceRegionId,
+            source: { documentSha256, locator: figure.source },
+            raster: captureSourceReferenceFigure({ pdfBytes: document.bytes,
+              page: figure.source.page, region: figure.source.region }) }]
+        }) : []
+        return { ...rest, ...(kind === 'scoring' && (structuredScoring || referenceFigures.length)
+          ? { blocks } : { paragraphs: blocks.map(block => block.paragraph) }),
+          ...(figures.length ? { figures } : {}) }
       }) }
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  return { groups, review, structuredScoring }
+  if (assignedFigures.size !== referenceFigures.length) throw new Error('Reference figure has no surviving essay anchor')
+  return { groups, review, structuredScoring, ...(referenceFigures.length ? { schemaVersion: 'source-references-v3' } : {}) }
 }
 
 // Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
 // from line geometry (first-line indent or a short previous line), never from the Materialization,
 // so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
 function references(paperId) {
-  const { paperDir, work } = context(paperId)
+  const { paperDir, work, documents } = context(paperId)
   const directory = path.join(paperDir, 'materialization')
   const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
   const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
   const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
-  const { groups, review, structuredScoring } = buildSourceReferences(materialization, evidence, confirmation)
+  const { groups, review, structuredScoring, schemaVersion } = buildSourceReferences(materialization, evidence, confirmation,
+    { sourceDocuments: documents })
   const output = path.join(work, 'source-references-draft.json')
-  writeJson(output, { schemaVersion: structuredScoring ? 'source-references-v2' : 'source-references-v1', paperId, sourceDigest: null, candidateDigest: null,
+  writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups })
   console.log(JSON.stringify({
     ok: true,

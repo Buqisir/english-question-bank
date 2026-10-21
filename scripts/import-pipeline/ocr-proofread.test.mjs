@@ -248,9 +248,9 @@ test('Arabic-numbered Chinese story commentary does not become an unlabeled refe
     '参考范文', 'Possible Version 1', 'Mia knocked gently and waited.',
   ])
   assert.equal(result.groups[0].essays.entries.length, 1)
-  assert.equal(result.groups[0].essays.entries[0].sourceLabel, '参考范文')
+  assert.equal(result.groups[0].essays.entries[0].sourceLabel, 'Possible Version 1')
   assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text),
-    ['Possible Version 1', 'Mia knocked gently and waited.'])
+    ['Mia knocked gently and waited.'])
 })
 
 test('captures three official examples per task and stops at each numbered student-script column', () => {

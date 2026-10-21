@@ -743,7 +743,8 @@ async function sourceReferences(ctx) {
   archive(ctx, request)
   const draft = readJson(path.join(ctx.work, 'source-references-draft.json'))
   await run(ctx, 'answer-products-prepare', cli('answer-products.mjs', 'prepare', '--paper-dir', ctx.paperDir,
-    '--output', request, ...(draft.schemaVersion === 'source-references-v2' ? ['--structured-scoring'] : [])))
+    '--output', request, ...(draft.schemaVersion === 'source-references-v3' ? ['--figures']
+      : draft.schemaVersion === 'source-references-v2' ? ['--structured-scoring'] : [])))
   const template = readJson(request).template
   const input = path.join(ctx.fast, 'source-references-input.json')
   archive(ctx, input)

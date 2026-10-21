@@ -6,8 +6,9 @@ import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/im
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
   assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
-  sourceReferenceBlocks, structuredSourceReferencesSchema,
+  sourceReferenceBlocks, structuredSourceReferencesSchema, figureSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
+import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
@@ -47,17 +48,21 @@ try {
   const output = option('--output')
   if (command === 'prepare') {
     const structuredScoring = process.argv.includes('--structured-scoring')
+    const figures = process.argv.includes('--figures')
+    const template = prepareSourceReferences({ ...binding, structuredScoring })
+    if (figures) template.schemaVersion = 'source-references-v3'
     writeNew(output, `${JSON.stringify({
       schemaVersion: 'source-references-request-v1',
-      outputSchema: structuredScoring ? structuredSourceReferencesSchema : sourceReferencesSchema,
+      outputSchema: figures ? figureSourceReferencesSchema : structuredScoring ? structuredSourceReferencesSchema : sourceReferencesSchema,
       ...(structuredScoring ? { schemaDependencies: [sourceReferencesSchema] } : {}),
       sourceDocuments: loaded.manifest.documents,
       instructions: 'Capture all source essays/labels/paragraphs and scoring references. Keep scoring paragraphs and tables in source order; each table cell needs its exact source locator and text, including empty cells. Do not flatten tables into essays or invent merged-cell structure. Source text only; no AI writing, summaries or legacy modelAnswer conversion. Review every answer-bearing document before declaring not_supplied. Keep unprocessed when incomplete. This is local capture, not Review/publication or source-fidelity approval.',
-      template: prepareSourceReferences({ ...binding, structuredScoring }),
+      template,
     }, null, 2)}\n`)
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {
     assertSourceReferences({ ...binding, sidecar: sourceReferences })
+    assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput })
     if (command === 'finalize') {
       writeNew(output, `${stableStringify(sourceReferences)}\n`)
       console.log(JSON.stringify({ status: 'local_capture_finalized', output, sourceReferencesDigest: sha256(readFileSync(output)), sourceFidelity: 'native_docx_paragraphs_replayed_pdf_text_requires_source_review' }))
@@ -214,7 +219,7 @@ try {
         status: 'local_layout_candidate', edition: 'answerOnly', layout: 'reference-v2',
         paperId: binding.materialization.paperId,
         sourceDigest: binding.sourceDigest, candidateDigest: binding.candidateDigest,
-        sourceReferencesDigest: sha256(referencesBytes), materializationDigest: sourceReferences.materializationDigest,
+        sourceReferencesDigest: sha256(readFileSync(referencePath)), materializationDigest: sourceReferences.materializationDigest,
         pdfSha256: sha256(rendered.pdfBytes), pageCount: rendered.pageCount,
         geometryPx: geometry, typographyPx: rendered.inspection.typography,
         includeScoring, inspectedAnswerNumbers: rendered.inspection.keys.map(key => key.number),
