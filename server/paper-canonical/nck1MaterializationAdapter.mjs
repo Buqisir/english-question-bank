@@ -1773,10 +1773,116 @@ function appendReadingSourceEmphasis(source, raw, documentsById, review, issues)
   }
 }
 
+// Called only after the immutable OCR-v3 evidence/confirmation has resolved.
+// Rewrite the producer side, never the Candidate or the confirmed inventory.
+export function replaceOcrStructuredAnswerRegions(raw, expected, resolved, confirmation, evidence) {
+  const replacements = new Map()
+  const paragraphs = []
+  const visuals = raw.sourceCoverage.visuals.filter(visual => visual.disposition === 'structured_answer_region')
+  if (!visuals.length) return { expected, replacements, paragraphs }
+  const same = (left, right) => digestJson(left) === digestJson(right)
+  const flatten = blocks => blocks.flatMap(block => block.kind === 'framed_columns'
+    ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
+  const reject = (suffix, message) => {
+    const error = new Error(message)
+    error.code = `OCR_STRUCTURED_ANSWER_REGION_${suffix}`
+    throw error
+  }
+  const references = raw.groups.flatMap(group => [
+    ...referencedMediaIds(group.blocks),
+    ...group.questions.flatMap(question => question.options.filter(option => option.figure).map(option => option.figure.mediaId)),
+    ...(group.optionBank || []).filter(option => option.figure).map(option => option.figure.mediaId),
+  ])
+  for (const visual of visuals) {
+    const group = raw.groups.find(group => group.groupId === visual.targetId)
+    if (raw.schemaVersion !== 'nck1-source-materialization-v5' || group?.family !== 'application-writing'
+      || group.writingTask?.taskType !== 'application' || !group.writingTask.drawingArea) {
+      reject('UNMATCHED', 'Structured OCR replacement requires a v5 application group with drawingArea')
+    }
+    const owners = expected.groups.flatMap(owner => flatten(owner.blocks).flatMap(block => {
+      if (owner.groupId !== group.groupId || owner.slotId !== group.slotId || owner.family !== group.family
+        || block.kind !== 'figure') return []
+      const coverage = expected.sourceCoverage.visuals.filter(value =>
+        value.disposition === 'content_media' && value.targetId === block.mediaId)
+      const parents = resolved.contentMedia.filter(parent => parent.mediaId === block.mediaId)
+      if (coverage.length !== 1 || parents.length !== 1
+        || raw.sourceCoverage.documentId !== expected.sourceCoverage.documentId
+        || parents[0].source.documentId !== raw.sourceCoverage.documentId
+        || coverage[0].page !== visual.page || parents[0].source.page !== visual.page
+        || (!same(coverage[0].region, visual.region) && !same(parents[0].source.region, visual.region))) return []
+      return [{ owner, block, coverage: coverage[0], parent: parents[0] }]
+    }))
+    if (owners.length !== 1 || replacements.has(owners[0].block.mediaId)) {
+      reject('UNMATCHED', 'Structured OCR replacement must match exactly one confirmed source figure in the same application slot/group/page/region')
+    }
+    const { owner, block, coverage, parent } = owners[0]
+    const media = raw.media.find(media => media.mediaId === block.mediaId)
+    if (references.includes(block.mediaId) || (media && (media.usage !== 'visual_proof'
+      || media.extraction?.kind !== 'pdf_crop'
+      || !same({ kind: 'page_region', documentId: media.extraction.documentId,
+        page: media.extraction.page, region: media.extraction.region }, parent.source)))) {
+      reject('CONTENT_CONFLICT', 'Replaced OCR template media must be absent or an unconsumed visual_proof of its exact confirmed crop')
+    }
+    const confirmedPage = confirmation.documents.find(document => document.documentId === raw.sourceCoverage.documentId)
+      ?.pages.find(page => page.page === visual.page)
+    const evidencePage = evidence.documents.find(document => document.documentId === raw.sourceCoverage.documentId)
+      ?.pages.find(page => page.page === visual.page)
+    const candidates = (confirmedPage?.orderedItems || []).flatMap((item, index) => {
+      const observations = item.observationIds.map(id => evidencePage?.observations.find(value => value.observationId === id))
+      if (!observations.length || observations.some(value => !value
+        || value.region.x < visual.region.x || value.region.y < visual.region.y
+        || value.region.x + value.region.width > visual.region.x + visual.region.width
+        || value.region.y + value.region.height > visual.region.y + visual.region.height)) return []
+      const left = Math.min(...observations.map(value => value.region.x))
+      const top = Math.min(...observations.map(value => value.region.y))
+      const right = Math.max(...observations.map(value => value.region.x + value.region.width))
+      const bottom = Math.max(...observations.map(value => value.region.y + value.region.height))
+      return [{ item, index, source: { kind: 'page_region', documentId: raw.sourceCoverage.documentId,
+        page: visual.page, region: { x: left, y: top, width: right - left, height: bottom - top } } }]
+    })
+    const rawBlocks = flatten(group.blocks)
+    const label = rawBlocks.find(value => value.blockId === group.writingTask.drawingArea.labelBlockRef)
+    const selected = [label, ...(group.writingTask.givenSkeleton || []).map(given => {
+      const matches = rawBlocks.filter(value => value.kind === 'paragraph' && paragraphText(value) === given.text)
+      return matches.length === 1 ? matches[0] : null
+    })]
+    if (selected.some(value => value?.kind !== 'paragraph') || new Set(selected).size !== selected.length) {
+      reject('TEXT_UNCONFIRMED', 'Structured OCR label and givens require distinct, unambiguous source paragraphs')
+    }
+    // Existing source paragraphs keep their old comparison path. Only text
+    // restored from the removed visual needs this new transcription proof.
+    const introduced = selected.filter(value => !flatten(owner.blocks).some(existing =>
+      existing.kind === 'paragraph' && same(existing.source, value.source) && paragraphText(existing) === paragraphText(value)))
+    const restored = introduced.map(value => {
+      const matches = candidates.filter(candidate => candidate.item.text === paragraphText(value))
+      if (matches.length !== 1) {
+        reject('TEXT_UNCONFIRMED', `No unique confirmed OCR text inside the template for ${value.blockId}: ${paragraphText(value)}`)
+      }
+      const [match] = matches
+      if (!same(value.source, match.source)) {
+        reject('TEXT_SOURCE_INVALID', `Structured OCR paragraph ${value.blockId} must reuse the confirmed source of ${match.item.itemId}: ${JSON.stringify(match.source)}`)
+      }
+      paragraphs.push({ text: match.item.text, sourceIndex: match.source,
+        ...(match.item.sourceEmphasis ? { sourceEmphasis: match.item.sourceEmphasis } : {}) })
+      return { ...match, block: structuredClone(value) }
+    }).sort((left, right) => left.index - right.index)
+    const rewrite = blocks => blocks.flatMap(value => value === block ? restored.map(value => value.block)
+      : value.kind === 'framed_columns'
+        ? [{ ...value, columns: value.columns.map(column => ({ ...column, blocks: rewrite(column.blocks) })) }]
+        : [value])
+    owner.blocks = rewrite(owner.blocks)
+    coverage.disposition = visual.disposition
+    coverage.targetId = visual.targetId
+    coverage.region = structuredClone(visual.region)
+    replacements.set(block.mediaId, parent)
+  }
+  return { expected, replacements, paragraphs }
+}
+
 // OCR-v3 may confirm an aggregate A-D bank or an ordinary body figure whose
 // top includes preceding text. Materialization v3/v4 proves these separately.
 // This proves provenance and consumption; graphic completeness needs image QA.
-function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks) {
+function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks, replacements = new Map()) {
   const same = (left, right) => digestJson(left) === digestJson(right)
   const reject = message => { throw new Error(message) }
   const mediaById = new Map(raw.media.map(media => [media.mediaId, media]))
@@ -1809,6 +1915,11 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
   for (const parent of resolved.contentMedia) {
     const { mediaId, source: locator } = parent
     const original = mediaById.get(mediaId)
+    if (replacements.has(mediaId)) {
+      // The replacement proof already checked exact provenance and zero uses.
+      if (original) consumed.add(mediaId)
+      continue
+    }
     if (original) {
       if (!same(original.extraction.region, locator.region)) {
         // Only an ordinary, source-order body figure may tighten its top.
@@ -2047,7 +2158,8 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
     consumedBanks.add(question)
   }
   if (consumed.size !== raw.media.length || raw.media.some(media => !consumed.has(media.mediaId))
-    || references.length !== raw.media.length || references.some(mediaId => !consumed.has(mediaId))
+    || references.length !== raw.media.length - [...replacements.keys()].filter(id => mediaById.has(id)).length
+    || references.some(mediaId => !consumed.has(mediaId))
     || consumedBanks.size !== questionBanks.length) {
     reject('OCR media inventory must exactly equal consumed confirmed figures and their bound option crops')
   }
@@ -2072,6 +2184,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
 
 function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues, writingEmphasis = false) {
   try {
+    let restoredParagraphs = []
     const evidence = JSON.parse(textDecoder.decode(ocrSourceBytes.evidenceBytes))
     const confirmation = JSON.parse(textDecoder.decode(ocrSourceBytes.confirmationBytes))
     if (![NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3].includes(confirmation.schemaVersion)) {
@@ -2099,6 +2212,8 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         issues: [], sourceVisuals: resolved.sourceVisuals, mediaInventory: raw.media,
         codePrefix: 'NCK1_OCR',
       }).materialization : { groups: [], sourceCoverage: { visuals: resolved.sourceVisuals } }
+      const replacement = replaceOcrStructuredAnswerRegions(raw, expected, resolved, confirmation, evidence)
+      restoredParagraphs = replacement.paragraphs
       const expectedGroups = expected.groups
       const hasTrimCandidate = resolved.contentMedia.some(parent => raw.media.some(media =>
         media.mediaId === parent.mediaId && media.extraction?.kind === 'pdf_crop'
@@ -2106,7 +2221,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       // Only a changed parent crop needs proof before placement projection.
       // Other inputs retain the existing placement/table diagnostic precedence.
       const topTrims = hasTrimCandidate
-        ? validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks)
+        ? validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks, replacement.replacements)
         : new Map()
       const placementSource = (block, project) => {
         const trim = project && block?.kind === 'figure' ? topTrims.get(block.mediaId) : null
@@ -2138,7 +2253,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
           }
         }
       }
-      if (!hasTrimCandidate) validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks)
+      if (!hasTrimCandidate) validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expected, blocks, replacement.replacements)
     }
     const marked = new Map()
     for (const structure of resolved.structures.values()) {
@@ -2148,6 +2263,11 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         if (marked.has(key)) throw new Error('OCR emphasis locator is ambiguous')
         marked.set(key, paragraph)
       }
+    }
+    for (const paragraph of restoredParagraphs) {
+      if (!paragraph.sourceEmphasis) continue
+      const key = digestJson(paragraph.sourceIndex)
+      if (!marked.has(key)) marked.set(key, paragraph)
     }
     const consumed = new Set()
     const corrections = new Map((review?.targets || []).map(target => [target.jsonPointer, target.corrections]))
@@ -2244,7 +2364,8 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
     }
     if (consumed.size !== marked.size) throw new Error('OCR source emphasis has an unmatched or unsupported target')
   } catch (error) {
-    issues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', error.message, '$.ocrSourceBytes'))
+    issues.push(adapterIssue(error.code?.startsWith('OCR_STRUCTURED_ANSWER_REGION_')
+      ? error.code : 'MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', error.message, '$.ocrSourceBytes'))
   }
 }
 
