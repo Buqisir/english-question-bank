@@ -13,7 +13,9 @@ import { reviewProcessIdentity, matchingReviewProcess, reviewProcessGroupMembers
 import { freezeReviewFixture, finalizeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { verifyPromotionWorkerMatrix } from '../test-fixtures/promotion-worker/verify.mjs'
+import { verifyProcessExitSampling } from '../test-fixtures/promotion-worker/process-exit-sampling.mjs'
 
+await verifyProcessExitSampling()
 const disk = statfsSync(tmpdir())
 assert.ok(disk.bavail * disk.bsize >= 10_000_000_000, 'DISK_STOP_BELOW_10_GB')
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-promotion-worker-'))

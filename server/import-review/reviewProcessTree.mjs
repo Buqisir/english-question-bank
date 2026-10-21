@@ -71,7 +71,10 @@ export async function reviewProcessIdentity(pid = process.pid) {
     if (!startId) return null
     return { bootId: bootIdentity, pid, startId }
   } catch (error) {
-    if (error.code === 'ENOENT' || error.code === 1) return null
+    // Linux /proc can open successfully, then report ESRCH on read if the
+    // process exits between those operations. Other I/O failures stay fatal.
+    if (error.code === 'ENOENT' || error.code === 1
+      || (process.platform === 'linux' && error.code === 'ESRCH')) return null
     throw error
   }
 }
