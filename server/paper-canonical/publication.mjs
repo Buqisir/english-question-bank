@@ -10,6 +10,7 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
+import { isBase64String } from '../../shared/paper-canonical/base64.mjs'
 import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 import { assertListeningPlaybackUi, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { authorityRefForManifestDigest, canonicalAuthorityRef, closureRendersApplicationPromptFigures, closureRendersApplicationDrawingArea, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
@@ -180,7 +181,7 @@ function assertPaperId(paperId) {
 }
 
 function decodeBase64(encodedBytes, label) {
-  if (typeof encodedBytes !== 'string' || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(encodedBytes)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', `${label} has invalid base64 evidence`)
+  if (!isBase64String(encodedBytes)) throw publicationError('CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID', `${label} has invalid base64 evidence`)
   return new Uint8Array(Buffer.from(encodedBytes, 'base64'))
 }
 

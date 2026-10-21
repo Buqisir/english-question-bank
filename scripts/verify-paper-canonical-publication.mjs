@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+// Runs through this existing CI registry entry in every publication pack.
+import './verify-paper-canonical-base64.mjs'
 import {
   cpSync,
   existsSync,
