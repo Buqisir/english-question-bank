@@ -3,6 +3,7 @@ import Ajv from 'ajv/dist/2020.js'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
 import { deriveNck1AnalyzedPackageBundle, parseStrictPackageJson } from '../paper-canonical/nck1AnalyzedPackageAdapter.mjs'
+import { decodeSourceReferencePng, SOURCE_REFERENCE_IMAGE_LIMITS } from './sourceReferenceImages.mjs'
 
 export const SOURCE_REFERENCES_FILE = 'source-references-v1.json'
 export const sourceReferencesSchema = JSON.parse(readFileSync(
@@ -11,12 +12,25 @@ export const sourceReferencesSchema = JSON.parse(readFileSync(
 export const structuredSourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-v2.schema.json', import.meta.url), 'utf8',
 ))
+export const figureSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-v3.schema.json', import.meta.url), 'utf8',
+))
 const ajv = new Ajv({ allErrors: true, strict: false })
 const validateV1 = ajv.compile(sourceReferencesSchema)
 const validateV2 = ajv.compile(structuredSourceReferencesSchema)
+const validateV3 = ajv.compile(figureSourceReferencesSchema)
+
+export function parseSourceReferencesBytes(bytes) {
+  const buffer = Buffer.from(bytes)
+  const sidecar = JSON.parse(buffer.toString('utf8'))
+  if (sidecar?.schemaVersion === 'source-references-v3' && buffer.byteLength > SOURCE_REFERENCE_IMAGE_LIMITS.jsonBytes) {
+    throw Object.assign(new Error('v3 source-reference JSON exceeds 16 MiB'), { code: 'SOURCE_REFERENCES_FIGURE_LIMIT' })
+  }
+  return sidecar
+}
 
 // v1 paragraphs and v2 scoring blocks share one ordered render/QA path.
-// Essays intentionally keep their existing paragraph-only shape in both versions.
+// v3 essay figures stay outside this paragraph/table contract.
 export function sourceReferenceBlocks(entry) {
   return entry.blocks ?? entry.paragraphs.map(paragraph => ({ kind: 'paragraph', paragraph }))
 }
@@ -41,14 +55,27 @@ export function prepareSourceReferences({ materialization, sourceDigest, candida
 export function validateSourceReferences({
   sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null, sourceInput = null,
 }) {
-  const validateSchema = sidecar?.schemaVersion === 'source-references-v2' ? validateV2 : validateV1
+  const validateSchema = sidecar?.schemaVersion === 'source-references-v3' ? validateV3
+    : sidecar?.schemaVersion === 'source-references-v2' ? validateV2 : validateV1
   if (!validateSchema(sidecar)) {
+    if (sidecar?.schemaVersion === 'source-references-v3' && validateSchema.errors.some(error =>
+      error.keyword === 'minItems' && error.instancePath.endsWith('/paragraphs'))) {
+      return [{ code: 'SOURCE_REFERENCES_FIGURE_UNSUPPORTED', path: '$',
+        message: 'Pure-image essay entries are unsupported; keep real text paragraphs and a same-entry afterParagraphId' }]
+    }
     return validateSchema.errors.map(error => ({
       code: 'SOURCE_REFERENCES_SCHEMA_INVALID', path: error.instancePath, message: error.message,
     }))
   }
   const issues = []
   const issue = (code, path, message) => issues.push({ code, path, message })
+  const figures = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry => entry.figures ?? []))
+  if (sidecar.schemaVersion === 'source-references-v3'
+    && (figures.length > SOURCE_REFERENCE_IMAGE_LIMITS.sidecarFigures
+      || figures.reduce((total, figure) => total + figure.raster.byteLength, 0) > SOURCE_REFERENCE_IMAGE_LIMITS.totalPngBytes
+      || Buffer.byteLength(JSON.stringify(sidecar)) > SOURCE_REFERENCE_IMAGE_LIMITS.jsonBytes)) {
+    return [{ code: 'SOURCE_REFERENCES_FIGURE_LIMIT', path: '$', message: 'Reference figures or sidecar exceed the admission limits' }]
+  }
   for (const [key, expected] of Object.entries({
     paperId: materialization.paperId, sourceDigest, candidateDigest,
     materializationDigest: digestJson(materialization),
@@ -76,8 +103,9 @@ export function validateSourceReferences({
   const sourceTables = new Map()
   const seenGroups = new Set()
   const seenIds = new Set()
+  const seenFigureRegions = new Set()
   function unique(id, path) {
-    if (seenIds.has(id)) issue('SOURCE_REFERENCES_ID_DUPLICATE', path, 'Reference, paragraph, table and cell IDs must be globally unique')
+    if (seenIds.has(id)) issue('SOURCE_REFERENCES_ID_DUPLICATE', path, 'Reference, paragraph, figure, table and cell IDs must be globally unique')
     seenIds.add(id)
   }
   function sourceBinding(source, path, text = null) {
@@ -170,6 +198,34 @@ export function validateSourceReferences({
           issue('SOURCE_REFERENCES_LABEL_INVALID', entryPath, 'Source labels need their own locator; absent labels stay null')
         }
         if (entry.labelSource) sourceBinding(entry.labelSource, `${entryPath}.labelSource`, entry.sourceLabel)
+        let previousAnchor = -1
+        for (const [f, figure] of (entry.figures ?? []).entries()) {
+          const figurePath = `${entryPath}.figures[${f}]`
+          unique(figure.figureId, `${figurePath}.figureId`)
+          const anchor = entry.paragraphs.findIndex(paragraph => paragraph.paragraphId === figure.afterParagraphId)
+          if (kind !== 'essays' || section.state !== 'captured' || anchor < 0 || anchor < previousAnchor) {
+            issue('SOURCE_REFERENCES_FIGURE_ANCHOR_INVALID', figurePath,
+              'Only captured essays support figures after surviving paragraphs in the same entry and nondecreasing order; before-first, image-only and cross-entry figures are unsupported')
+          }
+          previousAnchor = anchor
+          const { locator } = figure.source
+          const document = documents.get(locator.documentId)
+          sourceBinding(figure.source, `${figurePath}.source`)
+          if (document?.role !== 'official_answers' || document?.mediaType !== 'application/pdf') {
+            issue('SOURCE_REFERENCES_FIGURE_SOURCE_INVALID', figurePath, 'Reference figures require a separate official_answers PDF')
+          }
+          // Neither changing regionId nor assigning another figureId permits
+          // the same source crop to be printed twice.
+          const regionKeys = [digestJson([locator.documentId, locator.page, locator.region]),
+            digestJson([locator.documentId, locator.page, figure.sourceRegionId])]
+          if (regionKeys.some(key => seenFigureRegions.has(key))) {
+            issue('SOURCE_REFERENCES_FIGURE_DUPLICATE', figurePath, 'A source figure region may occur only once')
+          }
+          regionKeys.forEach(key => seenFigureRegions.add(key))
+          try { decodeSourceReferencePng(figure.raster) } catch (error) {
+            issue(error.code, `${figurePath}.raster`, error.message)
+          }
+        }
         for (const [p, block] of sourceReferenceBlocks(entry).entries()) {
           const blockPath = entry.blocks ? `${entryPath}.blocks[${p}]` : `${entryPath}.paragraphs[${p}]`
           if (block.kind === 'paragraph') {

@@ -16,7 +16,8 @@ import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } from '../paper-import/listeningReview.mjs'
-import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
+import { assertSourceReferenceAdmission } from '../paper-import/sourceReferenceAdmission.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
@@ -1791,17 +1792,14 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     : null
   const referencesPath = resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE)
   const sourceReferencesBytes = existsSync(referencesPath) ? readFileSync(referencesPath) : null
-  const sourceReferences = sourceReferencesBytes ? JSON.parse(sourceReferencesBytes.toString('utf8')) : null
-  if (sourceReferences) {
-    assertSourceReferences({
-      sidecar: sourceReferences,
-      materialization: loaded.materialization,
-      sourceDigest: preview.candidate.source.sha256,
-      candidateDigest: preview.candidate.candidateDigest,
-      sourceDocuments: loaded.sourceInput.documents,
-      sourceInput: loaded.analyzedPackage ? loaded.sourceInput : null,
-    })
-  }
+  const sourceReferences = sourceReferencesBytes ? parseSourceReferencesBytes(sourceReferencesBytes) : null
+  assertSourceReferenceAdmission({
+    sidecar: sourceReferences,
+    materialization: loaded.materialization,
+    sourceDigest: preview.candidate.source.sha256,
+    candidateDigest: preview.candidate.candidateDigest,
+    sourceInput: loaded.sourceInput,
+  })
   const slotBindings = paginationSlotBindings(consumption)
   // Historical analyzed packages without a PDF commitment retain their separate
   // source contract. Raw-source and product workspaces must declare absence.

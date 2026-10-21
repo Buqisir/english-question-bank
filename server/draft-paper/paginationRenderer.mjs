@@ -111,6 +111,17 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
 
   return withChromiumPage(async (page) => {
     await page.setContent(printHtml, { waitUntil: 'load' })
+    // Source-reference PNGs are answer-only frozen content. A load event alone
+    // also fires for failed images: require decode and natural dimensions before
+    // pagination/PDF, without changing the student renderer's image registry.
+    await page.evaluate(async () => {
+      for (const image of document.querySelectorAll('[data-reference-figure] img')) {
+        await image.decode()
+        if (!image.complete || !image.naturalWidth || !image.naturalHeight) {
+          throw new Error('Frozen source-reference image failed browser decoding')
+        }
+      }
+    })
 
     // Planned exports move a group with its immediately preceding chrome.
     // Natural preview/Print HTML never contains these markers and is untouched.

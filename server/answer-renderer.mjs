@@ -4,6 +4,7 @@ import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck
 import { assertSourceReferences, sourceReferenceBlocks } from './paper-import/sourceReferences.mjs'
 import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
+import { sourceReferenceFigurePresentation } from './paper-import/sourceReferencePresentation.mjs'
 
 function assertAnswerSource(materialization, sourceInput) {
   if (materialization.documents) {
@@ -49,7 +50,7 @@ function referenceNumber(number) {
   return ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'][number - 1] ?? ` ${number}`
 }
 
-function referenceSection(group, kind, starters = [], labelOverride = null) {
+function referenceSection(group, kind, starters = [], labelOverride = null, namespace = null) {
   const section = group[kind]
   const label = labelOverride ?? (kind === 'essays'
     ? group.taskType === 'application' ? '第一节（满分15分）' : '第二节（满分25分）'
@@ -83,7 +84,9 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
           ? starters.map(value => value.replace(/^Paragraph\s+\d+\s*:\s*/iu, ''))
             .find(value => value && paragraph.text.startsWith(value)) : null
         const prose = starter ? `<em class="continuation-starter">${textHtml(starter)}</em>${textHtml(paragraph.text.slice(starter.length))}` : textHtml(paragraph.text)
-        return `<p class="reference-paragraph reference-paragraph--${paragraph.role}" data-reference-paragraph="${escapeHtml(paragraph.paragraphId)}">${prose}</p>`
+        const figures = kind === 'essays' ? sourceReferenceFigurePresentation(entry, paragraph.paragraphId, namespace)
+          .map(figure => `<figure class="reference-figure" id="${figure.domId}" data-reference-figure="${escapeHtml(figure.figureId)}"><img alt="" src="${figure.dataUrl}" style="width:${figure.widthMm}mm;height:${figure.heightMm}mm"></figure>`).join('') : ''
+        return `<p class="reference-paragraph reference-paragraph--${paragraph.role}" data-reference-paragraph="${escapeHtml(paragraph.paragraphId)}">${prose}</p>${figures}`
       })
       // Keep a letter's source label with its salutation, without preventing
       // the body of a long source essay from flowing onto subsequent pages.
@@ -127,7 +130,8 @@ ${keyTable(slice(56, 65), 5)}</section>`
   const referencesByGroup = new Map(sourceReferences.groups.map(group => [group.groupId, group]))
   const groups = materialization.groups.filter(group => group.writingTask)
   const references = `<h2>第四部分　写作（共两节，满分40分）</h2>`
-    + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters)).join('\n')
+    + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters,
+      null, [materialization.paperId, sourceDigest, candidateDigest])).join('\n')
     + (includeScoring ? groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'scoring')).join('\n') : '')
   const transcripts = listening.state === 'captured'
     ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${listening.transcript.map((segment, index) =>
@@ -165,7 +169,8 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
       if (!Array.isArray(detail.questions) || detail.questions.length) throw new Error('Writing Task 不能产生 Questions')
       const reference = sourceReferences.groups.find(reference => reference.groupId === group.groupId)
       return `<h2>第${index + 1}题组　${labels[group.writingTask.taskType]}</h2>`
-        + referenceSection(reference, 'essays', group.writingTask.starters, '参考范文')
+        + referenceSection(reference, 'essays', group.writingTask.starters, '参考范文',
+          [materialization.paperId, source.sourceDigest, source.candidateDigest])
     }
     if (listening && (materialization.listening.state !== 'captured' || canonicalGroup?.groupId !== detail.id
       || canonicalGroup.paperId !== materialization.paperId || canonicalGroup.groupType !== 'listening')) {
@@ -247,6 +252,8 @@ p{margin:0;orphans:2;widows:2;overflow-wrap:break-word}
 .reference-table{width:100%;border-collapse:collapse;table-layout:auto;margin:6pt 0}
 .reference-table td{border:0.35pt solid currentColor;padding:0 8pt;vertical-align:top;overflow-wrap:anywhere}
 .reference-table tr{break-inside:avoid}
+.reference-figure{margin:6pt 0;break-inside:avoid;page-break-inside:avoid}
+.reference-figure img{display:block;max-width:100%;max-height:60mm;object-fit:contain;object-position:left center}
 .source-absent{color:${paperSurfaceTokens.paperMuted}}
 .transcript-label{font-weight:700;margin-top:13pt}
 .transcript{white-space:normal}

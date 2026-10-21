@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
 import { deserialize } from 'node:v8'
 import { tmpdir } from 'node:os'
@@ -8,7 +9,8 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
-import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewProjection, loadNck1ReviewSource, printConsumption, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
+import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { createReviewCompatibilityStore } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
@@ -19,6 +21,12 @@ import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
 import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
+import { sourceReferenceFiguresFixture } from '../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
+import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
+import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { applyStudentProductLayout } from '../server/draft-paper/studentProductPdf.mjs'
+import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
+import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -72,6 +80,25 @@ try {
   Object.assign(config, { pdfProductsRequired: true, headerTitle: config.provenance.paperName })
   config.provenance.month = 10
   json(path.join(source, 'config.json'), config)
+  let figureReferences = null
+  if (process.argv.includes('--v3-figures')) {
+    const sourceManifest = readJson(path.join(source, 'universal-source-manifest.json'))
+    const fixture = sourceReferenceFiguresFixture(readJson(path.join(source, sourceManifest.materializationPath)))
+    sourceManifest.documents = sourceManifest.documents.map(document => ({
+      ...document, ...fixture.materialization.documents.find(item => item.documentId === document.documentId),
+    }))
+    json(path.join(source, 'universal-source-manifest.json'), sourceManifest)
+    json(path.join(source, sourceManifest.materializationPath), fixture.materialization)
+    for (const document of sourceManifest.documents) writeFileSync(path.join(source, document.path),
+      fixture.sourceDocuments.find(item => item.documentId === document.documentId).bytes)
+    json(path.join(source, 'materialization/nck1-ocr-source-evidence-v1.json'), fixture.evidence)
+    json(path.join(source, 'materialization/nck1-ocr-source-confirmation-v1.json'), fixture.confirmation)
+    const imported = importCanonicalCandidate(loadNck1ReviewSource(source).sourceInput)
+    assert.deepEqual(imported.issues, [], 'v3 fixture must use the real source admission')
+    figureReferences = { ...fixture.sourceReferences, sourceDigest: imported.candidate.source.sha256,
+      candidateDigest: imported.candidate.candidateDigest }
+    json(path.join(source, SOURCE_REFERENCES_FILE), figureReferences)
+  }
   let projection = buildNck1ReviewProjection(source)
   json(path.join(source, 'pagination-plan.json'), {
     schemaVersion: 'paper-pagination-plan-v1', paperId: projection.paperId,
@@ -79,12 +106,13 @@ try {
     editions: { friendly8: { targetPages: 8, includeListening: false, omitCover: true,
       coverGapsPt: null, breakSlotIds: [], allowSplitOptionBank: false } },
   })
-  const references = prepareSourceReferences(projection)
+  const references = figureReferences ?? prepareSourceReferences({ ...projection,
+    structuredScoring: process.argv.includes('--v2-references') })
   const evidence = projection.materialization.documents.filter(file => file.role === 'official_answers').map(file => ({
     documentSha256: file.sha256, locator: { kind: 'page_region', documentId: file.documentId,
       page: 1, region: { x: 0, y: 0, width: 1, height: 1 } },
   }))
-  for (const group of references.groups) for (const kind of ['essays', 'scoring']) {
+  for (const group of figureReferences ? [] : references.groups) for (const kind of ['essays', 'scoring']) {
     group[kind] = { state: 'not_supplied', evidence, entries: [] }
   }
   json(path.join(source, SOURCE_REFERENCES_FILE), references)
@@ -100,6 +128,30 @@ try {
   }
   json(path.join(source, 'products/manifest-v1.json'), products)
   projection = buildNck1ReviewProjection(source)
+  if (figureReferences) {
+    const consumption = printConsumption(projection.consumption)
+    const payload = canonicalConsumptionPrintPayload(consumption, projection.paperName)
+    const items = payload.items.map(({ questionGroupId }) => ({ detail: payload.details.get(questionGroupId) }))
+    const html = buildPrintHtml({ ...payload, items, canonicalConsumption: consumption, versionType: 'student' })
+    const raster = figureReferences.groups[0].essays.entries[0].figures[0].raster
+    const hidden = html => {
+      assert(!html.includes(raster.base64), 'answer PNG must not reach the student image registry')
+      assert.doesNotMatch(html, /data-reference-figure=|World Smile Day/u)
+    }
+    const layout = { profile: 'student-friendly-v1', fontSizePt: 12, figureLayout: 'natural',
+      answerBoxHeightsMm: { application: 65, continuation: 57 } }
+    for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
+      hidden(applyStudentProductLayout(html, layout, edition))
+    }
+    const writing = items.filter(item => item.detail.questions.length === 0)
+    hidden(buildPrintHtml({ ...payload, items: writing, blocks: [], canonicalConsumption: consumption, versionType: 'student' }))
+    assert.match(buildAnswerOnlyHtml({ ...projection, sourceDocuments: projection.sourceInput.documents }),
+      /data-reference-figure=/u)
+    assert.equal(projection.materialization.media.length, 0)
+    assert(!JSON.stringify(projection.materialization.sourceCoverage).includes('answers:figure'))
+    assert(!JSON.stringify(projection.compilation.artifacts.canonicalPaper).includes('figure:smile'))
+    pass('v3 PNG stays outside materialization/Canonical media and all three student products/assembly, and appears in answerOnly')
+  }
   const files = reviewBundleFilePaths(source).map(file => {
     const bytes = readFileSync(path.join(source, file.path))
     return { ...file, sha256: sha256(bytes), byteLength: bytes.length }
@@ -178,8 +230,31 @@ try {
     assert.deepEqual(bankRows(), beforeBank, 'rejection must not insert any formal bank rows')
     assert.equal(existsSync(path.join(root, label)), false, 'rejection must precede staging, journal and version writes')
     assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM review_subject').get().n), 1)
+    assert.deepEqual(store.getRevision(revision.id).approval, approval, 'rejected writes retain the original approval')
     pass(label)
   }
+  if (figureReferences) {
+    const mutateReferences = change => ({ packageData }) => {
+      const references = JSON.parse(Buffer.from(packageData.sourceReferencesBytes).toString('utf8'))
+      change(references.groups[0].essays.entries[0])
+      packageData.sourceReferencesBytes = Buffer.from(JSON.stringify(references))
+    }
+    rejected('v3 approved PNG bytes cannot change', mutateReferences(entry => {
+      const raster = entry.figures[0].raster
+      const bytes = Buffer.from(raster.base64, 'base64')
+      bytes[bytes.length - 1] ^= 1
+      raster.base64 = bytes.toString('base64')
+      raster.sha256 = sha256(bytes)
+    }))
+    rejected('v3 approved crop cannot change', mutateReferences(entry => {
+      entry.figures[0].source.locator.region.x -= 0.01
+    }))
+    rejected('v3 approved anchor cannot change', mutateReferences(entry => {
+      entry.figures[0].afterParagraphId = entry.paragraphs[1].paragraphId
+    }))
+    rejected('v3 approved figure cannot be deleted', mutateReferences(entry => { delete entry.figures }))
+  }
+  if (!process.argv.includes('--references-only')) {
   rejected('preview unchanged but actual admission consumer changes a question', ({ admission }) => {
     const selection = admission.consumers.screen.selections.find(item => item.familyContractId === 'reading')
     assert.equal(changeText(selection.projectedOccurrences[0].questions[0].stem), true)
@@ -238,6 +313,7 @@ try {
   rejected('declared source evidence cannot be omitted', ({ admission }) => {
     delete admission.sealed.sourceEvidence[Object.keys(admission.sealed.sourceEvidence)[0]]
   }, 'MISSING_PUBLICATION_OUTPUT')
+  }
   const published = publish('normal-envelope')
   assert.equal(published.ok, true)
   assert.equal(published.publish.assetVersion, 1)
@@ -245,6 +321,22 @@ try {
   assert.equal(second.ok, true)
   assert.equal(second.publish.assetVersion, 2)
   pass('real listening profile covers all fields and ordinary version/status/source/audio envelopes')
+  const retained = readFileSync(path.join(root, 'normal-envelope', projection.paperId, 'versions/v1', SOURCE_REFERENCES_FILE))
+  assert.ok(retained.equals(readFileSync(path.join(source, SOURCE_REFERENCES_FILE))))
+  assert.equal(JSON.parse(retained).schemaVersion, references.schemaVersion)
+  assert.deepEqual(dbRun(db => JSON.parse(db.prepare('SELECT subject_json FROM review_subject WHERE revision_id=?')
+    .get(revision.id).subject_json)), subject, 'published references do not migrate the approved subject')
+  pass(`${references.schemaVersion} publishes exact bytes and retains its original approved subject`)
+  const publishedDb = openDatabase()
+  try {
+    const frozen = readSourceReferencePublication({ db: publishedDb,
+      paperAssetsDir: path.join(root, 'normal-envelope'), consumption: Object.values(published.publish.consumers)[0] })
+    assert(frozen.sourceReferencesBytes.equals(retained))
+    const html = buildAnswerOnlyHtml(frozen)
+    assert.equal(html.includes('data-reference-figure='), Boolean(figureReferences))
+    pass(`${references.schemaVersion} exact published consumer replays SQLite commitment and frozen answer rendering`)
+  } finally { publishedDb.close() }
+  if (!process.argv.includes('--references-only')) {
   const frozenPath = path.join(source, 'products/economy8.pdf')
   const frozenBytes = readFileSync(frozenPath)
   try {
@@ -386,5 +478,15 @@ try {
   assert.deepEqual(versions(), beforeVersions)
   assert.equal(store.latestPromotion(projection.paperId).state, 'published')
   pass('committed crash reconciliation records the existing target without another publication')
+  }
   console.log(`PASS review publication content: ${checks} checks`)
 } finally { rmSync(root, { recursive: true, force: true }) }
+
+// Existing publication CI seam owns these new independent rejection layers;
+// no change to the CI planner or publication mapping is required.
+if (!process.argv.includes('--v3-figures') && !process.argv.includes('--v2-references')) {
+  await import('./verify-source-reference-figures.mjs')
+  for (const version of ['--v2-references', '--v3-figures']) {
+    execFileSync(process.execPath, [import.meta.filename, version, '--references-only'], { stdio: 'inherit' })
+  }
+}
