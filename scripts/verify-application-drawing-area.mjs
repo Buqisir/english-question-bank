@@ -59,6 +59,30 @@ function verifyStructuredAnswerRegion() {
     disposition: 'content_media', targetId: 'media:template' })
   assert.deepEqual(validateNck1SourceMaterialization(conflict).map(issue => issue.code),
     ['MATERIALIZATION_SOURCE_VISUAL_CONTENT_CONFLICT'], 'otherwise valid content media must conflict')
+  for (const kind of ['docx_media', 'docx_svg_raster']) {
+    const docxConflict = structuredClone(conflict)
+    docxConflict.documents.push({ documentId: 'template-docx', role: 'question_source',
+      mediaType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      sha256: `sha256:${'d'.repeat(64)}`, byteLength: 100, pageCount: 1 })
+    docxConflict.media[0].extraction = { kind, documentId: 'template-docx',
+      entryName: `word/media/template.${kind === 'docx_media' ? 'png' : 'svg'}`,
+      ...(kind === 'docx_svg_raster' ? { density: 300 } : {}) }
+    for (const evidence of ['both', 'block', 'visual']) {
+      const changed = structuredClone(docxConflict)
+      if (evidence === 'block') delete changed.sourceCoverage.visuals.at(-1).region
+      if (evidence === 'visual') application(changed).blocks.at(-1).source.page = 8
+      assert.deepEqual(validateNck1SourceMaterialization(changed).map(issue => issue.code),
+        ['MATERIALIZATION_SOURCE_VISUAL_CONTENT_CONFLICT'], `${kind} ${evidence} source overlap`)
+    }
+    const elsewhere = structuredClone(docxConflict)
+    application(elsewhere).blocks.at(-1).source.page = 8
+    elsewhere.sourceCoverage.visuals.at(-1).page = 8
+    assert.deepEqual(validateNck1SourceMaterialization(elsewhere), [], `${kind} non-overlapping content stays valid`)
+    docxConflict.media[0].usage = 'visual_proof'
+    application(docxConflict).blocks.pop()
+    docxConflict.sourceCoverage.visuals.pop()
+    assert.deepEqual(validateNck1SourceMaterialization(docxConflict), [], `${kind} unconsumed visual proof stays valid`)
+  }
   const proofOnly = structuredClone(conflict)
   proofOnly.media[0].usage = 'visual_proof'
   application(proofOnly).blocks.pop()

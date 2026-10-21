@@ -839,6 +839,22 @@ function regionContains(outer, inner) {
     && inner.y + inner.height <= outer.y + outer.height + structuredAnswerRegionTolerance
 }
 
+function regionsOverlap(left, right) {
+  return left && right
+    && Math.min(left.x + left.width, right.x + right.width)
+      - Math.max(left.x, right.x) > structuredAnswerRegionTolerance
+    && Math.min(left.y + left.height, right.y + right.height)
+      - Math.max(left.y, right.y) > structuredAnswerRegionTolerance
+}
+
+function blockReferencesMedia(block, mediaId) {
+  if (block.kind === 'figure') return block.mediaId === mediaId
+  return block.kind === 'table' && Array.isArray(block.rows) && block.rows.some(row =>
+    Array.isArray(row?.cells) && row.cells.some(cell =>
+      Array.isArray(cell?.content) && cell.content.some(node =>
+        node?.kind === 'media_ref' && node.mediaId === mediaId)))
+}
+
 function validateSourceCoverage(sourceCoverage, groups, media, documents, issues, allowStructuredAnswerRegion = false) {
   if (!isRecordValue(sourceCoverage) || !exactKeys(sourceCoverage, [
     'documentId', 'reviewedPages', 'visuals',
@@ -862,8 +878,8 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
   ) {
     issues.push(issue('MATERIALIZATION_SOURCE_PAGE_COVERAGE_INCOMPLETE', '$.sourceCoverage.reviewedPages', 'Every page of one immutable question-bearing paged source must be reviewed exactly once in order'))
   }
-  const tableIds = new Set(groups.flatMap((group) =>
-    nestedBlocks(group.blocks).filter((block) => block.kind === 'table').map((block) => block.blockId)))
+  const blocks = groups.flatMap(group => nestedBlocks(group.blocks))
+  const tableIds = new Set(blocks.filter(block => block.kind === 'table').map(block => block.blockId))
   const mediaIds = new Set(media.filter((item) => item?.usage === 'content').map((item) => item.mediaId))
   const groupsById = new Map(groups.map(group => [group.groupId, group]))
   const expectedTargets = new Set([...tableIds, ...mediaIds])
@@ -915,15 +931,17 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
         issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID', `${path}.targetId`,
           'Structured answer visual must bind an application group with a drawing area inside the same source document/page/region'))
       }
+      const sourceOverlaps = source => source?.kind === 'page_region'
+        && source.documentId === sourceCoverage.documentId && source.page === visual.page
+        && regionsOverlap(visual.region, source.region)
       const conflictingMedia = media.some(item => {
+        if (item?.usage !== 'content') return false
         const crop = item?.extraction
-        if (item?.usage !== 'content' || crop?.kind !== 'pdf_crop'
-          || crop.documentId !== sourceCoverage.documentId || crop.page !== visual.page
-          || !visual.region || !crop.region) return false
-        return Math.min(visual.region.x + visual.region.width, crop.region.x + crop.region.width)
-            - Math.max(visual.region.x, crop.region.x) > structuredAnswerRegionTolerance
-          && Math.min(visual.region.y + visual.region.height, crop.region.y + crop.region.height)
-            - Math.max(visual.region.y, crop.region.y) > structuredAnswerRegionTolerance
+        return (crop?.kind === 'pdf_crop' && sourceOverlaps({ ...crop, kind: 'page_region' }))
+          || sourceCoverage.visuals.some(candidate =>
+            candidate?.disposition === 'content_media' && candidate.targetId === item.mediaId
+            && candidate.page === visual.page && regionsOverlap(visual.region, candidate.region))
+          || blocks.some(block => blockReferencesMedia(block, item.mediaId) && sourceOverlaps(block.source))
       })
       if (conflictingMedia) issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_CONTENT_CONFLICT', path,
         'A structured answer visual cannot also be consumed by overlapping content media'))
