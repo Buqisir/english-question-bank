@@ -14,6 +14,36 @@ import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { validateApplicationWritingContract } from '../shared/paper-canonical/applicationWriting.mjs'
 import oldConsumer from '../standards/paper-canonical/consumers/print-pdf-v48.json' with { type: 'json' }
 import { drawingAreaPrintFixture } from './preview-application-drawing-area.mjs'
+import { buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
+import { assertCanonicalConsumptionVisibleStructure } from '../shared/paper-canonical/visibleStructure.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
+
+export function verifyDrawingAreaReviewProjection() {
+  const { imported, compilation } = makeDrawingAreaCompilation({ structuredAnswerRegion: true })
+  const { canonicalPaper } = compilation.artifacts
+  assert.equal(canonicalPaper.paperPlan.authorityRef.manifestVersion, '69')
+  assert(canonicalPaper.questionGroups.find(group => group.contractRef.familyContractId === 'application-writing')
+    .variant.response.drawingArea)
+  const consumption = buildNck1ReviewConsumption(imported.candidate, compilation)
+  const continuation = consumption.selections.find(selection => selection.familyContractId === 'continuation-writing')
+  assert(continuation?.projectedOccurrences.length, 'the whole-paper fixture must exercise continuation')
+  for (const occurrence of continuation.projectedOccurrences) {
+    assert(occurrence.sourceInstruction?.authorityObservationRef)
+    assert.equal(occurrence.sourcePresentation, undefined,
+      'exercise the continuation version gate rather than the sourcePresentation fallback')
+  }
+  assert.deepEqual(continuation.projectedOccurrenceDigests, continuation.projectedOccurrences.map(occurrence => ({
+    groupId: occurrence.groupId, digest: digestJson(occurrence),
+  })), 'Review must attest every manifest-69 continuation occurrence')
+  assert.doesNotThrow(() => assertCanonicalConsumptionVisibleStructure(consumption))
+  const missingProof = structuredClone(consumption)
+  delete missingProof.selections.find(selection => selection.familyContractId === 'continuation-writing').projectedOccurrenceDigests
+  assert.throws(() => assertCanonicalConsumptionVisibleStructure(missingProof),
+    error => error.code === 'CANONICAL_CONSUMPTION_REJECTED'
+      && error.message.includes('source-backed Profile instruction proof is invalid'),
+    'omitting the continuation proof reproduces the original Review rejection')
+  console.log('PASS drawing-area manifest-69 Review projection: continuation occurrence digests, visible structure and missing-proof rejection')
+}
 
 function verifyStructuredAnswerRegion() {
   const make = () => makeDrawingAreaMaterialization({ structuredAnswerRegion: true })
@@ -116,6 +146,7 @@ function verifyStructuredAnswerRegion() {
 
 export function verifyDrawingAreaContract() {
 verifyStructuredAnswerRegion()
+verifyDrawingAreaReviewProjection()
 const source = makeDrawingAreaMaterialization()
 assert.deepEqual(validateNck1SourceMaterialization(source), [])
 makeDrawingAreaCompilation({ labelFirst: true })
