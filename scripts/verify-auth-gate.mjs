@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 // M0-2 verify: invite-login auth gate contract (docs/cuts/m0-2-invite-login/plan.md
 // verification 1). Spawns the real server (server/api.mjs) against a temp,
 // throwaway question-bank + user-data pair so it exercises the actual HTTP gate,
@@ -586,6 +587,7 @@ async function main() {
     const upload = fileStore.fileForUpload(fileRevision.id, 'projection.json')
     writeFileSync(upload.destination, fileBytes)
     fileStore.completeFileUpload(fileRevision.id, 'projection.json', fileManifest.files[0])
+    await fileStore.ready()
     fileStore.finalizeRevision(fileRevision.id)
     const agentFilePath = `/api/import-agent-reviews/revisions/${fileRevision.id}/files?path=projection.json`
     const ownerFilePath = `/api/import-review-preview/revisions/${fileRevision.id}/files?path=projection.json`

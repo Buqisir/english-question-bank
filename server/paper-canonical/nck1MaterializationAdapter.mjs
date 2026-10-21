@@ -1560,6 +1560,7 @@ export function deriveNck1SemanticSource(
   return source
 }
 
+// Read-only compiler evidence shares the derivation's defensive byte snapshot.
 function compilerDocuments(input, materialization, source, instructionDocument, authorityRef) {
   const sourceBytes = textEncoder.encode(JSON.stringify(source))
   const profileEvidence = instructionEvidence(materialization, instructionDocument, authorityRef)
@@ -1584,7 +1585,7 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
     {
       inputKey: 'nck1_source_materialization',
       roles: ['structured_source', 'source_provenance'],
-      bytes: new Uint8Array(input.materializationBytes),
+      bytes: input.materializationBytes,
       declared: {
         mediaType: NCK1_MATERIALIZATION_MEDIA_TYPE,
         originalName: `${materialization.schemaVersion}.json`,
@@ -1593,18 +1594,18 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
     ...(input.spellingReviewBytes ? [{
       inputKey: 'spelling_review',
       roles: ['source_provenance'],
-      bytes: new Uint8Array(input.spellingReviewBytes),
+      bytes: input.spellingReviewBytes,
       declared: { mediaType: 'application/json', originalName: SPELLING_REVIEW_FILE },
     }] : []),
     ...(input.listeningInstructionCorrectionBytes ? [{
       inputKey: 'listening_instruction_correction', roles: ['source_provenance'],
-      bytes: new Uint8Array(input.listeningInstructionCorrectionBytes),
+      bytes: input.listeningInstructionCorrectionBytes,
       declared: { mediaType: 'application/json', originalName: LISTENING_INSTRUCTION_CORRECTION_FILE },
     }] : []),
     ...(input.ocrSourceBytes ? ['evidence', 'confirmation'].map((kind) => ({
       inputKey: `ocr_source_${kind}`,
       roles: ['source_provenance'],
-      bytes: new Uint8Array(input.ocrSourceBytes[`${kind}Bytes`]),
+      bytes: input.ocrSourceBytes[`${kind}Bytes`],
       declared: { mediaType: 'application/json', originalName: `nck1-ocr-source-${kind}-v1.json` },
     })) : []),
     ...input.documents.flatMap((entry) => {
@@ -1612,7 +1613,7 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
       const sourceDocument = {
         inputKey: inputKeyForDocument(entry.documentId),
         roles: sourceRoles(document.role),
-        bytes: new Uint8Array(entry.bytes),
+        bytes: entry.bytes,
         declared: {
           mediaType: document.mediaType,
           originalName: originalName(document),
@@ -1624,7 +1625,7 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
       const pages = parseNck1ImageSourceBundle(entry.bytes).pages.map((page) => ({
         inputKey: `${inputKeyForDocument(entry.documentId)}_page_${page.page}`,
         roles: sourceRoles(document.role),
-        bytes: new Uint8Array(page.bytes),
+        bytes: page.bytes,
         declared: {
           mediaType: page.mediaType,
           originalName: `${entry.documentId}-page-${page.page}.${nck1ImageExtension(page.mediaType)}`,
@@ -1645,7 +1646,7 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
         roles: media.usage === 'content'
           ? ['source_media']
           : ['source_provenance'],
-        bytes: new Uint8Array(entry.bytes),
+        bytes: entry.bytes,
         declared: {
           mediaType: media.mimeType,
           originalName: `${media.mediaId.replace(/[^a-z0-9]+/gi, '-')}.${media.mimeType.split('/')[1].replace('jpeg', 'jpg')}`,
@@ -1659,7 +1660,7 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
           && media.publication.selection !== 'source_crop'
           ? ['source_media', 'source_provenance']
           : ['source_provenance'],
-        bytes: new Uint8Array(entry.renditionBytes),
+        bytes: entry.renditionBytes,
         declared: {
           mediaType: candidate.mimeType,
           originalName: `${media.mediaId.replace(/[^a-z0-9]+/gi, '-')}-candidate.${candidate.mimeType.split('/')[1].replace('jpeg', 'jpg')}`,
@@ -2207,30 +2208,46 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
   }
 }
 
+// Scoped to one synchronous projection. Never persist parsed sources across
+// requests or trust object identity: every lookup rehashes the exact input bytes.
+let sourceCache = null
+export function withNck1MaterializationSourceCache(callback) {
+  const previous = sourceCache
+  sourceCache = new Map()
+  try { return callback() } finally { sourceCache = previous }
+}
+
 export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInput.listeningInstructionCorrectionBytes
   ? nck1ListeningInstructionAuthorityRef : nck1MaterializationCandidateAuthorityRef) {
-  const input = cloneNck1MaterializationInput(rawInput)
   const sourceDigest = bundleDigest(
-    input.materializationBytes,
-    input.documents,
-    input.media,
-    input.listeningAudio,
-    input.spellingReviewBytes,
-    input.ocrSourceBytes,
-    input.listeningInstructionCorrectionBytes,
+    rawInput.materializationBytes, rawInput.documents, rawInput.media,
+    rawInput.listeningAudio, rawInput.spellingReviewBytes, rawInput.ocrSourceBytes,
+    rawInput.listeningInstructionCorrectionBytes,
   )
-  let materialization = parseMaterialization(input.materializationBytes)
-  if (!materialization) {
-    return {
-      input,
-      sourceDigest,
-      materialization: null,
-      source: null,
-      request: null,
-      issues: [adapterIssue('MATERIALIZATION_JSON_INVALID', 'NCK1 Source Materialization bytes are not readable JSON')],
-    }
+  let prepared = sourceCache?.get(sourceDigest)
+  if (prepared && bundleDigest(
+    prepared.input.materializationBytes, prepared.input.documents, prepared.input.media,
+    prepared.input.listeningAudio, prepared.input.spellingReviewBytes, prepared.input.ocrSourceBytes,
+    prepared.input.listeningInstructionCorrectionBytes,
+  ) !== sourceDigest) prepared = null
+  if (!prepared) {
+    const input = cloneNck1MaterializationInput(rawInput)
+    const materialization = parseMaterialization(input.materializationBytes)
+    prepared = { input, materialization,
+      validation: materialization ? validateBundle(materialization, input) : null }
+    // Only successful, fully verified sources can be reused across authorities.
+    if (prepared.validation && !prepared.validation.issues.length) sourceCache?.set(sourceDigest, prepared)
   }
-  const validation = validateBundle(materialization, input)
+  const { input } = prepared
+  // Derivations expose materialization to their caller. Keep that mutable result
+  // separate from the verified parse retained for another authority attempt.
+  let materialization = structuredClone(prepared.materialization)
+  if (!materialization) {
+    return { input, sourceDigest, materialization: null, source: null, request: null,
+      issues: [adapterIssue('MATERIALIZATION_JSON_INVALID', 'NCK1 Source Materialization bytes are not readable JSON')] }
+  }
+  // Authority checks append issues; keep that list private to this derivation.
+  const validation = { ...prepared.validation, issues: [...prepared.validation.issues] }
   if ((materialization.schemaVersion === 'nck1-source-materialization-v4'
     || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
     && !['62', '64', '66', '67', '68'].includes(authorityRef.manifestVersion)) {

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 
 import assert from 'node:assert/strict'
 import { execFile } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -18,46 +19,44 @@ import { rendererBuildIdProvider } from '../server/import-review/rendererBuildId
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
+import { finalizeReviewFixture, freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
+
+const previousFixtureOnly = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+const { makeReviewRoot, publicMetadataFixture } = await import('./verify-universal-nck1-publish.mjs')
+if (previousFixtureOnly === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previousFixtureOnly
 
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-scoped-publication-'))
 const dbPath = path.join(root, 'review.sqlite')
 let renderer = 'renderer-a'
 let rendererReads = 0
-const digest = (character) => `sha256:${character.repeat(64)}`
-const paperByRevision = new Map()
 const store = createImportReviewStore({
   dbPath, filesRoot: path.join(root, 'files'), rendererBuildId: () => { rendererReads += 1; return renderer },
-  projectRevision(directory) {
-    const revisionId = path.basename(directory)
-    return { paperId: paperByRevision.get(revisionId), sourceDigest: digest('1'),
-      candidateDigest: digest('2'), visibleStructureDigest: digest('3'), analysisDigest: digest('4'),
-      mediaDerivations: [] }
-  },
 })
 
-function seed(paperId, suffix, state = 'approved') {
-  const revisionId = `rev-00000000-0000-4000-8000-00000000000${suffix}`
-  const approval = {
-    schemaVersion: 'web-import-review-approval-v1', approvalId: `approval-${suffix}`,
-    paperId, revisionId, sourceDigest: digest('1'), candidateDigest: digest('2'),
-    visibleStructureDigest: digest('3'), analysisDigest: digest('4'), bundleDigest: digest('5'),
-    rendererBuildId: renderer, approvedAt: new Date().toISOString(), approvedBy: 'owner',
+function seed(paperId, suffix, state = 'approved', { publicPaper = false, analyses = false } = {}) {
+  const fixture = makeReviewRoot(path.join(root, `source-${suffix}`), paperId)
+  if (publicPaper) {
+    const json = (file, value) => writeFileSync(path.join(fixture.reviewRoot, file), JSON.stringify(value))
+    const projection = fixture.projection
+    json('config.json', { ...JSON.parse(readFileSync(path.join(fixture.reviewRoot, 'config.json'))), importProfile: 'public-paper-v1' })
+    json('paragraph-summaries-v1.json', { schemaVersion: 'paragraph-summaries-v1', paperId,
+      sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+      groups: [...Map.groupBy(enumerateParagraphSummaryTargets(projection.materialization), value => value.groupId)]
+        .map(([groupId, values]) => ({ groupId, paragraphs: values.map(({ paragraphId }) => ({ paragraphId, summary: `摘要 ${paragraphId}` })) })),
+    })
+    json('public-search-metadata-v1.json', publicMetadataFixture(projection.materialization,
+      projection.sourceDigest, projection.candidateDigest))
+    if (!analyses) for (const file of readdirSync(fixture.reviewRoot)) {
+      if (file.startsWith('analysis-') && file.endsWith('.json')) rmSync(path.join(fixture.reviewRoot, file))
+    }
   }
-  const db = new DatabaseSync(dbPath)
-  const now = new Date().toISOString()
-  paperByRevision.set(revisionId, paperId)
-  db.prepare(`INSERT INTO import_review_papers
-    (paper_id, paper_name, latest_revision_id, created_at, updated_at)
-    VALUES (?, ?, ?, ?, ?)`).run(paperId, paperId, revisionId, now, now)
-  db.prepare(`INSERT INTO import_review_revisions
-    (id,paper_id,revision_number,state,source_digest,candidate_digest,visible_structure_digest,bundle_digest,producer_build_id,renderer_build_id,manifest_json,approval_receipt_json,created_at,finalized_at,updated_at)
-    VALUES (?, ?, 1, ?, ?, ?, ?, ?, 'producer', ?, ?, ?, ?, ?, ?)`)
-    .run(revisionId, paperId, state, approval.sourceDigest, approval.candidateDigest,
-      approval.visibleStructureDigest, approval.bundleDigest, renderer,
-      JSON.stringify({ schemaVersion: 'web-import-review-bundle-v1', analysisDigest: approval.analysisDigest }),
-      state === 'approved' ? JSON.stringify(approval) : null, now, now, now)
-  db.close()
-  return approval
+  const projection = freezeReviewFixture(fixture.reviewRoot)
+  const reviewed = finalizeReviewFixture({ directory: fixture.reviewRoot, output: root, projection, store,
+    approve: state === 'approved' })
+  return reviewed.approval || { ...reviewed.manifest, revisionId: reviewed.revision.id, approvalId: null }
 }
 
 function input(approval, secret) {
@@ -85,6 +84,7 @@ async function routeRequest(routes, pathname, { method = 'POST', body = {}, sess
 }
 
 try {
+  await store.ready()
   {
     let computed = 0
     const compute = () => `sha256:release-${++computed}`
@@ -105,17 +105,19 @@ try {
   const approval = seed('paper-scoped-a', '1')
   const other = seed('paper-scoped-b', '2')
   const awaiting = seed('paper-scoped-awaiting', '3', 'awaiting_review')
-  // Unset QUESTION_BANK_BUILD_ID makes each read hash the renderer tree, so a listing reads it once.
+  // Equal qualifies through content; the renderer is also read for fallback diagnostics.
   const readsBeforeListing = rendererReads
   const listed = store.listPapers()
   assert.equal(listed.filter((paper) => paper.reviewKind === 'candidate' && paper.rendererStale === false).length, 3)
-  assert.equal(rendererReads - readsBeforeListing, 1)
+  assert.ok(rendererReads - readsBeforeListing <= listed.length)
+  assert.ok(listed.every(paper => paper.compatibility.guard === 'content_binding'))
   renderer = 'renderer-changed'
   const readsBeforeStaleListing = rendererReads
   const stale = store.listPapers()
-  assert.equal(stale.filter((paper) => paper.reviewKind === 'candidate' && paper.rendererStale === true).length, 3,
-    'a later listing compares Candidates with the renderer read for that listing')
-  assert.equal(rendererReads - readsBeforeStaleListing, 1)
+  assert.equal(stale.filter((paper) => paper.reviewKind === 'candidate' && paper.rendererStale === false).length, 3,
+    'historical renderer changes retain exact equal eligibility')
+  assert.ok(rendererReads - readsBeforeStaleListing <= stale.length)
+  assert.ok(stale.every(paper => paper.compatibility.guard === 'content_binding'))
   for (const paper of stale) {
     assert.equal(typeof paper.hasMediaCandidates, 'boolean')
     assert.equal(typeof paper.rendererStale, 'boolean')
@@ -215,10 +217,9 @@ try {
     .run(JSON.stringify(approval), approval.revisionId)
   restoreDb.close()
   renderer = 'renderer-b'
-  assert.throws(() => store.beginScopedPromotion('paper-scoped-a', pending.requestId, sha256('secret-a'), 'agent-a'),
-    (error) => error.code === 'IMPORT_REVIEW_PUBLICATION_REQUEST_STALE' || error.code === 'IMPORT_REVIEW_PROMOTION_STALE')
-  renderer = 'renderer-a'
+  assert.equal(store.publicationRequest(pending.requestId).rendererBuildId, approval.rendererBuildId)
   const first = store.beginScopedPromotion('paper-scoped-a', pending.requestId, sha256('secret-a'), 'agent-a')
+  renderer = 'renderer-a'
   const concurrent = store.beginScopedPromotion('paper-scoped-a', pending.requestId, sha256('secret-a'), 'agent-a')
   assert.equal(first.action, 'publish')
   assert.equal(concurrent.action, 'consumed')
@@ -230,20 +231,15 @@ try {
   assert.equal(responseLoss.action, 'consumed')
   assert.equal(responseLoss.promotion.state, 'publishing')
   assert.equal(store.latestPromotion('paper-scoped-a').attemptCount, 1)
-  for (const [suffix, version] of [['4', 'v2'], ['5', 'v3']]) {
-    const publicApproval = seed(`paper-public-${version}`, suffix)
-    delete publicApproval.analysisDigest
-    Object.assign(publicApproval, { importProfile: 'public-paper-v1', paragraphSummariesDigest: digest('6'), publicSearchMetadataDigest: digest('7') })
-    const publicDb = new DatabaseSync(dbPath)
-    publicDb.prepare('UPDATE import_review_revisions SET manifest_json = ?, approval_receipt_json = ? WHERE id = ?')
-      .run(JSON.stringify({ ...publicApproval, schemaVersion: `web-import-review-bundle-${version}` }), JSON.stringify(publicApproval), publicApproval.revisionId)
-    publicDb.close()
+  for (const [suffix, analyses] of [['4', false], ['5', true]]) {
+    const publicApproval = seed(`paper-public-${analyses ? 'with' : 'without'}-analysis`, suffix, 'approved',
+      { publicPaper: true, analyses })
     const publicRequest = store.registerPublicationRequest(publicApproval.paperId, input(publicApproval, 'public-secret'), 'agent-a')
     store.grantPublicationRequest(publicRequest.requestId, 'owner')
     const publicPromotion = store.beginScopedPromotion(publicApproval.paperId, publicRequest.requestId, sha256('public-secret'), 'agent-a')
-    assert.equal(publicPromotion.promotion.importProfile, 'public-paper-v1', `${version} must not turn into a legacy promotion`)
-    assert.equal(publicPromotion.promotion.analysisDigest, undefined)
-    assert.equal(publicPromotion.promotion.paragraphSummariesDigest, digest('6'))
+    assert.equal(publicPromotion.promotion.importProfile, 'public-paper-v1')
+    assert.equal(publicPromotion.promotion.analysisDigest, publicApproval.analysisDigest)
+    assert.equal(publicPromotion.promotion.paragraphSummariesDigest, publicApproval.paragraphSummariesDigest)
   }
   const raceApproval = seed('paper-scoped-race', '7')
   const raceRequest = store.registerPublicationRequest(raceApproval.paperId, input(raceApproval, 'race-secret'), 'agent-a')
@@ -260,14 +256,18 @@ try {
       } catch(error) { parentPort.postMessage({ok:false, code:error.code, message:error.message}); }
       parentPort.close();
     });
+    await store.ready();
     parentPort.postMessage('ready');`
-  const workers = await Promise.all(['revoke', 'redeem'].map(operation => new Promise((resolve, reject) => {
+  // Initialize each connection before racing the two publication operations.
+  // Schema setup is not the revoke/redeem concurrency seam under test.
+  const workers = []
+  for (const operation of ['revoke', 'redeem']) workers.push(await new Promise((resolve, reject) => {
     const worker = new Worker(new URL(`data:text/javascript,${encodeURIComponent(workerSource)}`), { workerData: {
       operation, dbPath, filesRoot:path.join(root, 'files'), requestId:raceRequest.requestId, secretHash:sha256('race-secret'),
     } })
     worker.once('error', reject)
     worker.once('message', () => resolve(worker))
-  })))
+  }))
   try {
     const outcomes = workers.map(worker => new Promise((resolve, reject) => { worker.once('message', resolve); worker.once('error', reject) }))
     workers.forEach(worker => worker.postMessage('start'))
@@ -285,6 +285,8 @@ try {
   const cliApproval = seed(cliPaperId, '6')
   const capabilityDir = path.resolve(import.meta.dirname, '../data/import-publication-requests')
   const capabilityPath = path.join(capabilityDir, `${cliPaperId}.json`)
+  const workspace = path.join(import.meta.dirname, 'import-pipeline/papers', `paper-scoped-workspace-${process.pid}`)
+  let linked = false
   let dropRegistrationResponse = true
   const httpServer = createServer(async (request, response) => {
     const url = new URL(request.url, 'http://localhost')
@@ -321,6 +323,11 @@ try {
     expiryDb.prepare('UPDATE import_review_publication_requests SET expires_at = ? WHERE id = ?')
       .run('2000-01-01T00:00:00.000Z', retained.requestId)
     expiryDb.close()
+    // Other CI verifiers stage CLI papers this way. Mutable authoring inputs
+    // must not invalidate this unrelated, already sealed publication request.
+    symlinkSync(root, workspace)
+    linked = true
+    await new Promise(resolve => setTimeout(resolve, 30))
     const renewed = JSON.parse((await runCli('--new-request')).stdout)
     assert.notEqual(renewed.request.requestId, retained.requestId)
     assert.deepEqual(JSON.parse(readFileSync(`${capabilityPath}.${retained.requestId}`, 'utf8')), retained)
@@ -341,6 +348,7 @@ try {
     assert.equal(replay.promotion.attemptCount, 1)
   } finally {
     await new Promise((resolve) => httpServer.close(resolve))
+    if (linked) rmSync(workspace)
     for (const name of readdirSync(capabilityDir).filter((name) => name.startsWith(`${cliPaperId}.json`))) {
       rmSync(path.join(capabilityDir, name), { recursive: true, force: true })
     }

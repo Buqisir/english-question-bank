@@ -60,7 +60,6 @@ import {
 import {
   NCK1_MATERIALIZATION_INPUT_KIND,
   NCK1_MATERIALIZATION_CANDIDATE_SCHEMA_VERSION,
-  cloneNck1MaterializationInput,
   deriveNck1MaterializationBundle,
   isNck1MaterializationInput,
   nck1MaterializationSourceSummary,
@@ -4050,7 +4049,8 @@ function nck1MaterializationCandidateFromInput(sourceInput, authority = nck1Mate
     candidate: {
       ...body,
       candidateDigest: digestJson(body),
-      sourceInput: cloneNck1MaterializationInput(sourceInput),
+      // The adapter already owns a defensive snapshot; evidence consumers only read it.
+      sourceInput: derivation.input,
     },
     derivation,
   }

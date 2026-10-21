@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 
 import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'
@@ -18,6 +19,7 @@ import { createSourceIntakeNotifier } from '../server/source-intake/sourceIntake
 import { createSourceIntakeRoutes } from '../server/source-intake/sourceIntakeRoutes.mjs'
 import { createSourceIntakeStore } from '../server/source-intake/sourceIntakeStore.mjs'
 import { acquireSourceIntakeLock, maintainSourceIntakeLease, runSourceIntakeChild } from './import-pipeline/source-intake-lease.mjs'
+import { freezeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
 
 // Drive the renewal boundary without a wall-clock sleep or production test flag.
 for (const failRenewal of [false, true]) {
@@ -285,7 +287,16 @@ function verifyLegacyDatabaseMigration() {
 
 verifyLegacyDatabaseMigration()
 
-function verifyCorrectedReviewUploadBaseRevision() {
+async function verifyCorrectedReviewUploadBaseRevision() {
+  const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+  let makeReviewRoot
+  try {
+    process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+    ;({ makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs'))
+  } finally {
+    if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+    else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
+  }
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-corrected-review-base-'))
   const reviewDbPath = path.join(root, 'review.sqlite')
   try {
@@ -293,9 +304,6 @@ function verifyCorrectedReviewUploadBaseRevision() {
       dbPath: reviewDbPath,
       filesRoot: path.join(root, 'files'),
       rendererBuildId: 'source-intake-correction-verifier',
-      projectRevision: () => ({ paperId: 'paper-corrected-upload',
-        sourceDigest: digest(Buffer.from('source')), candidateDigest: digest(Buffer.from('candidate')),
-        visibleStructureDigest: digest(Buffer.from('visible')), analysisDigest: digest(Buffer.from('analysis')) }),
     })
     const db = new DatabaseSync(reviewDbPath)
     const timestamp = '2026-09-11T00:00:00.000Z'
@@ -323,24 +331,14 @@ function verifyCorrectedReviewUploadBaseRevision() {
       timestamp,
     )
     db.close()
+    // Reuse requires real equal content now; retain the base-revision race
+    // assertions using a complete frozen bundle rather than a legacy stub.
+    const source = makeReviewRoot(path.join(root, 'source'), 'paper-corrected-upload')
+    const projection = freezeReviewFixture(source.reviewRoot)
     const manifest = {
-      schemaVersion: 'web-import-review-bundle-v1',
-      paperId: 'paper-corrected-upload',
-      paperName: 'Corrected upload fixture',
+      ...reviewFixtureManifest(source.reviewRoot, projection),
       expectedBaseRevisionId: 'rev-base',
-      sourceDigest: digest(Buffer.from('source')),
-      candidateDigest: digest(Buffer.from('candidate')),
-      visibleStructureDigest: digest(Buffer.from('visible')),
-      analysisDigest: digest(Buffer.from('analysis')),
       producerBuildId: 'correction-build',
-      files: [{
-        path: 'config.json',
-        sha256: digest(Buffer.from('{}\n')),
-        byteLength: 3,
-        mediaType: 'application/json',
-        role: 'config',
-      }],
-      resolvesIssueIds: [],
     }
     manifest.bundleDigest = reviewBundleDigest(manifest)
     const first = reviewStore.createRevision(manifest)
@@ -354,11 +352,13 @@ function verifyCorrectedReviewUploadBaseRevision() {
     const competing = { ...manifest, producerBuildId: 'competing-correction' }
     competing.bundleDigest = reviewBundleDigest(competing)
     const second = reviewStore.createRevision(competing)
-    for (const { revision } of [first, second]) {
-      const upload = reviewStore.fileForUpload(revision.id, 'config.json')
-      writeFileSync(upload.destination, '{}\n')
-      reviewStore.completeFileUpload(revision.id, 'config.json', manifest.files[0])
+    for (const { revision } of [first, second]) for (const file of manifest.files) {
+      const upload = reviewStore.fileForUpload(revision.id, file.path)
+      mkdirSync(path.dirname(upload.destination), { recursive: true })
+      writeFileSync(upload.destination, readFileSync(path.join(source.reviewRoot, file.path)))
+      reviewStore.completeFileUpload(revision.id, file.path, file)
     }
+    await reviewStore.ready()
     assert.equal(reviewStore.finalizeRevision(first.revision.id).state, 'awaiting_review')
     assert.throws(() => reviewStore.finalizeRevision(second.revision.id),
       (error) => error.code === 'IMPORT_REVIEW_BASE_REVISION_STALE',
@@ -376,7 +376,7 @@ function verifyCorrectedReviewUploadBaseRevision() {
   }
 }
 
-verifyCorrectedReviewUploadBaseRevision()
+await verifyCorrectedReviewUploadBaseRevision()
 
 function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId, captureResult = false } = {}) {
   return new Promise((resolve, reject) => {

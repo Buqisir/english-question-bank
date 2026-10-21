@@ -1,3 +1,4 @@
+import { withNck1MaterializationSourceCache } from '../paper-canonical/nck1MaterializationAdapter.mjs'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
@@ -18,6 +19,9 @@ import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } fr
 import { SOURCE_REFERENCES_FILE, assertSourceReferences } from '../paper-import/sourceReferences.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
+import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
+import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
+import { buildStoredReviewSubject, buildTargetReviewSubject } from './reviewSubject.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -97,7 +101,7 @@ function loadParagraphSummaries(rootDir, loaded, sourceDigest, candidateDigest) 
     candidateDigest,
   })
   if (issues.length > 0) fail(`${issues[0].code}: ${issues[0].message}`, issues[0].code)
-  const bytes = new Uint8Array(readFileSync(filePath))
+  const bytes = readReviewBytes(filePath)
   return { sidecar, bytes, digest: sha256(bytes) }
 }
 
@@ -168,13 +172,20 @@ function readJson(filePath, label) {
   }
 }
 
+// Each read owns fresh bytes. Preserve the public Uint8Array contract without
+// copying the Buffer; no retained Buffer alias can mutate the returned view.
+function readReviewBytes(filePath) {
+  const bytes = readFileSync(filePath)
+  return new Uint8Array(bytes.buffer, bytes.byteOffset, bytes.byteLength)
+}
+
 function readSealedBytes(rootDir, descriptor, label) {
   const filePath = resolveReviewFile(
     rootDir,
     normalizedRelativePath(descriptor.path, `${label} path`),
   )
   if (!existsSync(filePath)) fail(`${label} is missing`)
-  const bytes = new Uint8Array(readFileSync(filePath))
+  const bytes = readReviewBytes(filePath)
   if (
     descriptor.sha256 !== sha256(bytes)
     || descriptor.byteLength !== bytes.byteLength
@@ -307,7 +318,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
     normalizedRelativePath(manifest.materializationPath, 'materializationPath'),
   )
   if (!existsSync(materializationPath)) fail('Source Materialization is missing')
-  const materializationBytes = new Uint8Array(readFileSync(materializationPath))
+  const materializationBytes = readReviewBytes(materializationPath)
   let materialization
   try {
     materialization = JSON.parse(new TextDecoder().decode(materializationBytes))
@@ -332,7 +343,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       fail(`Image source bundle is unavailable: ${document.documentId}`)
     }
     assertNck1ImageBundlePageArtifacts(
-      { ...document, bytes: new Uint8Array(readFileSync(documentPath)) },
+      { ...document, bytes: readReviewBytes(documentPath) },
       (document.pages || []).map((page) => {
         const pagePath = resolveReviewFile(
           rootDir,
@@ -341,7 +352,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
         if (!existsSync(pagePath)) {
           fail(`Image source page is unavailable: ${document.documentId}:${page.page}`)
         }
-        return { ...page, bytes: new Uint8Array(readFileSync(pagePath)) }
+        return { ...page, bytes: readReviewBytes(pagePath) }
       }),
     )
   }
@@ -359,7 +370,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       }
       return {
         documentId: document.documentId,
-        bytes: new Uint8Array(readFileSync(sourcePath)),
+        bytes: readReviewBytes(sourcePath),
       }
     }),
     media: materialization.media.map((media) => {
@@ -370,7 +381,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       const mediaPath = resolveReviewFile(rootDir, relativePath)
       if (!existsSync(mediaPath)) fail(`Materialized media is unavailable: ${media.mediaId}`)
       if (!media.publication?.candidate) {
-        return { mediaId: media.mediaId, bytes: new Uint8Array(readFileSync(mediaPath)) }
+        return { mediaId: media.mediaId, bytes: readReviewBytes(mediaPath) }
       }
       const renditionPath = resolveReviewFile(
         rootDir,
@@ -384,8 +395,8 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       }
       return {
         mediaId: media.mediaId,
-        bytes: new Uint8Array(readFileSync(mediaPath)),
-        renditionBytes: new Uint8Array(readFileSync(renditionPath)),
+        bytes: readReviewBytes(mediaPath),
+        renditionBytes: readReviewBytes(renditionPath),
       }
     }),
   }
@@ -397,7 +408,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
   }
   const correctionPath = resolveReviewFile(rootDir, LISTENING_INSTRUCTION_CORRECTION_FILE)
   if (!preparingListeningCorrection && existsSync(correctionPath)) {
-    sourceInput.listeningInstructionCorrectionBytes = new Uint8Array(readFileSync(correctionPath))
+    sourceInput.listeningInstructionCorrectionBytes = readReviewBytes(correctionPath)
     const corrected = applyListeningInstructionCorrection(materializationBytes,
       sourceInput.listeningInstructionCorrectionBytes, listeningAudio, reviewedMaterialization)
     const originalAudio = validatedListeningAudioEvidence?.descriptors.get('listening_audio_original')
@@ -783,7 +794,7 @@ export function loadNck1OcrReviewSource(rootDir) {
       normalizedRelativePath(document.path, `document ${document.documentId}`),
     )
     if (!existsSync(filePath)) fail(`OCR source document is unavailable: ${document.documentId}`)
-    const captured = { ...document, bytes: new Uint8Array(readFileSync(filePath)) }
+    const captured = { ...document, bytes: readReviewBytes(filePath) }
     if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
       assertNck1ImageBundlePageArtifacts(captured, (document.pages || []).map((page) => {
         const pagePath = resolveReviewFile(
@@ -793,7 +804,7 @@ export function loadNck1OcrReviewSource(rootDir) {
         if (!existsSync(pagePath)) {
           fail(`OCR source page is unavailable: ${document.documentId}:${page.page}`)
         }
-        return { ...page, bytes: new Uint8Array(readFileSync(pagePath)) }
+        return { ...page, bytes: readReviewBytes(pagePath) }
       }))
     }
     return captured
@@ -1657,11 +1668,79 @@ export function buildNck1CompatibilityPackage({
   }
 }
 
-export function buildNck1ReviewProjection(rootDir, {
+export function buildNck1ReviewProjection(rootDir, options = {}) {
+  return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts)
+}
+
+// Only this entry constructs the private product reader. There is no public
+// skip-pdfinfo option and callers cannot supply projection/listening objects.
+export function computeSealedReviewSubjects({ directory, revision, preview, storedFiles, onMemory = () => {} }) {
+  return withSealedReviewSnapshot(directory, revision.manifest.files, snapshot => {
+    const { fileEvidence } = snapshot
+    onMemory('sealed-snapshot')
+    let baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence })
+    const changed = fileEvidence.find(file => {
+      const expected = revision.manifest.files.find(item => item.path === file.path)
+      return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
+    })
+    if (changed) return { baseline: { ok: false, reasonCode: 'SEALED_FILE_CHANGED', differences: [changed.path] }, target: null }
+    // Sealed hashes and JSON syntax are already checked. The target reopens its
+    // own snapshot; retain canonical JSON digests instead of a second full parse
+    // of every image bundle/materialization throughout compilation.
+    for (const file of fileEvidence) if (Object.hasOwn(file, 'json') && file.path !== PRODUCT_MANIFEST) {
+      file.jsonDigest = digestJson(file.json)
+      delete file.json
+    }
+    onMemory('compacted-evidence')
+    try {
+      const products = fileEvidence.find(file => file.path === PRODUCT_MANIFEST)
+      const readSealedProducts = (_root, options) => {
+        const manifest = products?.json
+        if (!manifest || manifest.inputDigest !== options.inputDigest
+          || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
+          fail('Sealed product input identity differs')
+        }
+        const pageLimit = ['paper-pdf-products-v2', 'paper-pdf-products-v3'].includes(manifest.schemaVersion)
+          ? manifest.economyPageLimit : 8
+        if (options.economyPageLimit !== undefined && options.economyPageLimit !== pageLimit) fail('Sealed product page limit differs')
+        for (const file of manifest.files) {
+          const edition = path.basename(file.path, '.pdf')
+          if (edition === 'answerOnly') continue
+          const policy = studentProductPolicy(edition, 2, { economyPageLimit: pageLimit })
+          if (policy.atMost ? file.pageCount > policy.targetPages : file.pageCount !== policy.targetPages) {
+            fail('Sealed product page count differs')
+          }
+        }
+        // Byte hashes and all product descriptors are checked by subject
+        // extraction. No PDF bytes are materialized or returned to the API.
+        return { manifest, digest: products.sha256, bytes: {} }
+      }
+      const projection = buildNck1ReviewProjectionInternal(snapshot.directory,
+        { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts)
+      onMemory('projection')
+      baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence,
+        validatedListeningReview: projection.reviewedListening })
+      const expected = reviewBundleFilePathsForProjection(snapshot.directory, projection)
+      const inventory = expected.map(file => ({
+        ...file, sha256: fileEvidence.find(item => item.path === file.path)?.sha256,
+        byteLength: fileEvidence.find(item => item.path === file.path)?.byteLength,
+      }))
+      return { baseline, target: buildTargetReviewSubject({ revision, projection, inventory, fileEvidence }) }
+    } catch {
+      return { baseline, target: { ok: false, reasonCode: 'TARGET_COMPUTATION_FAILED' } }
+    }
+  })
+}
+
+function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts) {
+  return withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir, options, readProducts))
+}
+
+function buildNck1ReviewProjectionUncached(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
-} = {}) {
+} = {}, readProducts) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest)
   if (!imported.candidate || imported.issues.length > 0) {
@@ -1720,6 +1799,7 @@ export function buildNck1ReviewProjection(rootDir, {
       sourceDigest: preview.candidate.source.sha256,
       candidateDigest: preview.candidate.candidateDigest,
       sourceDocuments: loaded.sourceInput.documents,
+      sourceInput: loaded.analyzedPackage ? loaded.sourceInput : null,
     })
   }
   const slotBindings = paginationSlotBindings(consumption)
@@ -1764,7 +1844,7 @@ export function buildNck1ReviewProjection(rootDir, {
       && preview.candidate.interpretation.sourceAssetVersion === 1,
   })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readFrozenProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
+    ? readProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
         config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {

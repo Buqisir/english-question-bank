@@ -41,6 +41,8 @@ function sendError(response, context, error) {
   context.sendJson(response, Number(error?.status || 500), {
     error: error instanceof Error ? error.message : String(error),
     code: error?.code || 'IMPORT_REVIEW_FAILED',
+    ...(error?.reasonCode ? { reasonCode: error.reasonCode } : {}),
+    ...(error?.compatibility ? { compatibility: error.compatibility } : {}),
     ...(error?.metrics ? { metrics: error.metrics } : {}),
   })
 }
@@ -202,6 +204,7 @@ export function publicPaperReviewDetail(store, paperId) {
     !detail.latestRevisionId
     || detail.latest?.state === 'uploading'
     || detail.latest?.reviewKind === 'ocr'
+    || detail.rendererStale
   ) return detail
   const { projection } = candidateProjectionForRevision(store, detail.latestRevisionId)
   if (projection.importProfile !== 'public-paper-v1') return detail
@@ -339,7 +342,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     const pending = store.publicationRequest(match[1])
     const approval = store.approveRevision(pending.paperId, pending.revisionId,
       { bundleDigest: pending.bundleDigest, approvalScope: 'layout_only' }, context.session.username, pending.requestId)
-    context.sendJson(response, 200, { approval })
+    context.sendJson(response, 200, { approval, compatibility: store.compatibilityForRevision(pending.revisionId) })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-reviews\/publication-requests\/([^/]+)\/grant$/, route(({ request, response, context, match }) => {
@@ -758,12 +761,13 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   }) => {
     if (!requireOwner(response, context)) return
     const input = await context.readJsonBody(request, { maxBytes: 20_000 })
-    context.sendJson(response, 200, { approval: store.approveRevision(
+    const approval = store.approveRevision(
       decodeURIComponent(match[1]),
       match[2],
       input,
       context.session.username,
-    ) })
+    )
+    context.sendJson(response, 200, { approval, compatibility: store.compatibilityForRevision(match[2]) })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/confirm-ocr$/, route(async ({
@@ -804,7 +808,9 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { preview } = store.productPreviewForRevision(match[1])
+    const { preview, compatibility } = store.productPreviewForRevision(match[1])
+    response.setHeader?.('x-eqb-review-compatibility', compatibility.result)
+    response.setHeader?.('x-eqb-review-reason', compatibility.reasonCode)
     context.sendJson(response, 200, preview.consumption)
   })))
 
@@ -1031,7 +1037,9 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { preview } = store.productPreviewForRevision(match[1])
+    const { preview, compatibility } = store.productPreviewForRevision(match[1])
+    response.setHeader?.('x-eqb-review-compatibility', compatibility.result)
+    response.setHeader?.('x-eqb-review-reason', compatibility.reasonCode)
     if (match[2] === 'paper-asset.json') {
       context.sendJson(response, 200, preview.paperAsset)
       return

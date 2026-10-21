@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import './lib/reviewTestLockRoot.mjs'
 
 // Isolated synthetic package; never connects to a production database or approves audio.
 import assert from 'node:assert/strict'
@@ -10,7 +11,8 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
-import { buildNck1ReviewProjection, reviewBundleFilePaths, resolveReviewFile } from '../server/import-review/revisionProjection.mjs'
+import { reviewBundleFilePaths, resolveReviewFile } from '../server/import-review/revisionProjection.mjs'
+import { freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
 import { exportAnalyzedPackageRevision } from '../server/paper-import/analyzedPackageExport.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
@@ -18,6 +20,8 @@ import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+// Vite sets NODE_ENV during startup; bind the fixture to the same runtime from the outset.
+process.env.NODE_ENV ||= 'development'
 const { makeReviewRoot, makeExternalAnalyzedPackage } = await import('./verify-universal-nck1-publish.mjs')
 const root = path.resolve(import.meta.dirname, '..')
 const temporary = fs.mkdtempSync(path.join(tmpdir(), 'eqb-external-review-e2e-'))
@@ -40,19 +44,20 @@ try {
   makeExternalAnalyzedPackage(raw.reviewRoot, packageRoot)
   const reviewRoot = path.join(temporary, 'external-review')
   await prepareNck1AnalyzedPackageReview({ sourcePath: packageRoot, destinationDir: reviewRoot, expectedPaperId: paperId })
-  const projection = buildNck1ReviewProjection(reviewRoot, { requireAnalyses: true })
+  const projection = freezeReviewFixture(reviewRoot)
   assert.equal(projection.listeningReview.audio.state, 'included_in_candidate_review')
   assert.equal(Object.keys(projection.analysisSidecars).length, 6)
   const dbPath = path.join(temporary, 'review.sqlite')
   const filesRoot = path.join(temporary, 'sealed')
   const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'external-review-e2e' })
+  await store.ready()
   const files = reviewBundleFilePaths(reviewRoot).map((file) => {
     const bytes = fs.readFileSync(resolveReviewFile(reviewRoot, file.path))
     return { ...file, sha256: sha256(bytes), byteLength: bytes.byteLength }
   })
   const manifest = {
     schemaVersion: 'web-import-review-bundle-v1', paperId,
-    paperName: '合成验收卷（12 秒测试音，不是真题听力）',
+    paperName: projection.paperName,
     sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest, analysisDigest: projection.analysisDigest,
     producerBuildId: 'external-review-e2e', files, resolvesIssueIds: [],
@@ -162,7 +167,7 @@ try {
   await page.getByRole('heading', { name: '试卷审核' }).waitFor()
   assert.equal(await page.locator('#review-frame, [role="tab"], #approve-revision, [data-external-listening-check]').count(), 0,
     'compact Owner review has no iframe, teaching tab, approval button, or listening checkboxes')
-  const paperLink = page.getByRole('link', { name: '合成验收卷（12 秒测试音，不是真题听力）' })
+  const paperLink = page.getByRole('link', { name: projection.paperName })
   const screenHref = new URL(await paperLink.getAttribute('href'), origin)
   assert.equal(screenHref.searchParams.get('view'), 'paper-browse')
   assert.equal(screenHref.searchParams.get('paperId'), paperId)
