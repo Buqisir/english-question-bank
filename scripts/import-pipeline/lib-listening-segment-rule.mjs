@@ -388,7 +388,17 @@ export function listeningAsrTokens(windows) {
       && (word.startSeconds + word.endSeconds) / 2 < high))
   }
   words.sort((a, b) => a.startSeconds - b.startSeconds || a.endSeconds - b.endSeconds)
-  return { words, markers }
+  // Window selection above chooses a clock for anchors/counts. Losing windows
+  // and text without anchors still carry counterevidence, including crop edges.
+  const observedWindows = windowsWithWords.map(({window, words}) => ({
+    startSeconds: window.startSeconds, endSeconds: window.endSeconds,
+    evidencePaths: window.evidencePaths || [],
+    words: words.map(({token, startSeconds, endSeconds, runStartSeconds, runEndSeconds,
+      expressionType, expressionForm, expressionText, expressionValue}) => ({
+      token, startSeconds, endSeconds, runStartSeconds, runEndSeconds,
+      expressionType, expressionForm, expressionText, expressionValue})),
+  }))
+  return { words, markers, observedWindows }
 }
 
 function chineseNumber(text) {
@@ -701,7 +711,7 @@ export function validateListeningOrder(results) {
 export function evaluateListeningEngine({ groups, instructions = [], windows = [], pauses = [], durationSeconds,
   engine = 'Apple SpeechAnalyzer', corpus = groups, requireWholePaper = true, questions,
   fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled, globalAnchorWindows = windows }) {
-  const { words, markers } = listeningAsrTokens(windows)
+  const { words, markers, observedWindows } = listeningAsrTokens(windows)
   const speechRuns = boundarySpeechRuns([...new Set([...windows, ...globalAnchorWindows])], pauses, engine)
   const boundarySpeech = mergeSpeechIntervals(speechRuns.map(r => [r.startSeconds, r.endSeconds]))
   const fuzzy = fuzzyAnchors ? {
@@ -720,7 +730,8 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     const expected = expectedListeningReadings(group, instructions)
     const result = { segmentId: group.segmentId, questionNumbers: group.questionNumbers, engine,
       ...expected, decision: 'usable', issues: [], occurrences: [], playback: null,
-      sourceText: group.text, boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [] }
+      sourceText: group.text, boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [],
+      observedWindows }
     if (expected.issue) problem(result, expected.issue)
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
     const turns = listeningSourceTurns(group.text)
@@ -734,9 +745,11 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       mode: anchor.fuzzy ? 'one_substitution_12' : 'exact', fuzzy: anchor.fuzzy ?? null }
     result.anchorEvidence = {
       heads: anchor.heads.map(i => ({startSeconds: words[i].runStartSeconds,
-        endSeconds: words[i + anchor.width - 1].runEndSeconds})),
+        endSeconds: words[i + anchor.width - 1].runEndSeconds,
+        wordStartSeconds: words[i].startSeconds, wordEndSeconds: words[i + anchor.width - 1].endSeconds})),
       tails: anchor.tails.map(i => ({startSeconds: words[i].runStartSeconds,
-        endSeconds: words[i + anchor.width - 1].runEndSeconds})),
+        endSeconds: words[i + anchor.width - 1].runEndSeconds,
+        wordStartSeconds: words[i].startSeconds, wordEndSeconds: words[i + anchor.width - 1].endSeconds})),
     }
     if (anchor.identityAmbiguous) problem(result, 'ANCHOR_IDENTITY_AMBIGUOUS')
     if (anchor.countExceeded) problem(result, 'OBSERVED_READING_COUNT_EXCEEDED')
@@ -939,8 +952,6 @@ function compareObservedReadings(observed, reference, referenceIsSecondary = tru
         observedOccurrence: i + 1, referenceOccurrence: matches[i] + 1, startDeltaSeconds, endDeltaSeconds})
     }
   }
-  const sourceUnits = listeningSourceTurnText(reference.sourceText).flatMap(normalizeListeningUnits)
-  const source = sourceUnits.map(u => u.token)
   for (const partial of observed.partialOccurrences || []) {
     const candidates = match({startSeconds: partial.startSeconds,
       endSeconds: partial.anchorEndSeconds})
@@ -948,19 +959,76 @@ function compareObservedReadings(observed, reference, referenceIsSecondary = tru
       conflicts.push({kind: 'partial_occurrence_identity', engine: observed.engine, startSeconds: partial.startSeconds})
       continue
     }
-    const other = reference.occurrences[candidates[0]]
-    const words = partial.words.filter(w =>
-      w.startSeconds < other.endSeconds + LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds
-      && w.endSeconds > other.startSeconds - LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds)
-    const alignment = alignListeningOccurrence(source, words, sourceUnits)
-    const first = alignment.matchedSourceIndices[0], last = alignment.matchedSourceIndices.at(-1)
-    // Unobserved leading/trailing words do not assert a deletion. An inserted
-    // or substituted critical word, or an internal deletion, is counterevidence.
-    const differences = alignment.differences.filter(d =>
-      (d.kind !== 'deletion' || (d.sourceIndex > first && d.sourceIndex < last))
-      && (isCritical(d.sourceWord) || isCritical(d.targetWord)))
-    if (differences.length) conflicts.push({kind: 'partial_critical_word_difference', engine: observed.engine,
-      referenceOccurrence: candidates[0] + 1, differences})
+  }
+  return [...conflicts, ...compareObservedWords(observed, reference), ...compareObservedWords(reference, reference)]
+}
+
+function compareObservedWords(observed, reference) {
+  const conflicts = []
+  const overlaps = (a, b) => a.startSeconds < b.endSeconds && a.endSeconds > b.startSeconds
+  const match = span => reference.occurrences.flatMap((o, i) => overlaps(span, o) ? [i] : [])
+  const sourceUnits = listeningSourceTurnText(reference.sourceText).flatMap(normalizeListeningUnits)
+  const source = sourceUnits.map(u => u.token)
+  // Anchors are unnecessary for counterevidence. Inspect every original window,
+  // rather than cropping an anchored candidate to the other ASR's body ±0.5s.
+  // Only measured outer pauses establish physical limits; keep speech in those
+  // pauses too, since a disputed edge cannot license fallback. A uniquely
+  // matched adjacent head/tail can establish ownership of a neighboring reading.
+  const windows = observed.observedWindows
+    ?? (observed.partialOccurrences || []).map(p => ({words: p.words}))
+  for (const [index, other] of reference.occurrences.entries()) {
+    let low = other.boundaryEvidence?.beforePause?.startSeconds
+    let high = other.boundaryEvidence?.afterPause?.endSeconds
+    if (!Number.isFinite(low) || !Number.isFinite(high)) {
+      if (windows.some(w => w.words.some(word => overlaps(word, other)))) {
+        conflicts.push({kind: 'observed_speech_identity', engine: observed.engine, referenceOccurrence: index + 1})
+      }
+      continue
+    }
+    for (const tail of observed.anchorEvidence?.tails || []) {
+      const owners = match(tail)
+      if (owners.length === 1 && owners[0] < index) low = Math.max(low, tail.endSeconds)
+    }
+    for (const head of observed.anchorEvidence?.heads || []) {
+      const owners = match(head)
+      if (owners.length === 1 && owners[0] > index) high = Math.min(high, head.startSeconds)
+    }
+    const ownAnchors = [...(observed.anchorEvidence?.heads || []), ...(observed.anchorEvidence?.tails || [])]
+      .filter(anchor => {
+        const owners = match(anchor)
+        return owners.length === 1 && owners[0] === index
+      })
+    for (const window of windows) {
+      // Retain entire acoustic runs: normalization may split a number or a
+      // contraction across several units whose interpolated times cross a cut.
+      const span = word => ({startSeconds: word.runStartSeconds ?? word.startSeconds,
+        endSeconds: word.runEndSeconds ?? word.endSeconds})
+      const words = window.words.filter(word => overlaps(span(word), {startSeconds: low, endSeconds: high}))
+      if (!words.length) continue
+      const alignment = alignListeningOccurrence(source, words, sourceUnits)
+      const first = alignment.matchedSourceIndices[0], last = alignment.matchedSourceIndices.at(-1)
+      if (first === undefined || words.some(word => match(span(word)).length > 1)) {
+        conflicts.push({kind: 'observed_speech_identity', engine: observed.engine,
+          referenceOccurrence: index + 1, evidencePaths: window.evidencePaths || []})
+      }
+      // Use the existing tolerance to reject unexplained edge speech, never to
+      // discard it. A matched anchor proves ownership despite timestamp drift;
+      // an independent late "there" or prompt has no such proof.
+      const tolerance = LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds
+      const edgeWords = words.filter(word =>
+        (word.endSeconds < other.startSeconds - tolerance || word.startSeconds > other.endSeconds + tolerance)
+        && !ownAnchors.some(anchor => overlaps(word,
+          {startSeconds: anchor.wordStartSeconds, endSeconds: anchor.wordEndSeconds})))
+      if (edgeWords.length) conflicts.push({kind: 'unassigned_edge_speech', engine: observed.engine,
+        referenceOccurrence: index + 1, evidencePaths: window.evidencePaths || [], words: edgeWords})
+      // Truly unobserved prefixes/suffixes assert no deletion. Every observed
+      // critical insertion/substitution and internal deletion remains blocking.
+      const differences = alignment.differences.filter(d =>
+        (d.kind !== 'deletion' || (d.sourceIndex > first && d.sourceIndex < last))
+        && (isCritical(d.sourceWord) || isCritical(d.targetWord)))
+      if (differences.length) conflicts.push({kind: 'observed_critical_word_difference', engine: observed.engine,
+        referenceOccurrence: index + 1, evidencePaths: window.evidencePaths || [], differences})
+    }
   }
   return conflicts
 }

@@ -76,6 +76,127 @@ test('missing-head tail candidates also retain critical counterevidence in eithe
     }
   }
 })
+const astraText = 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over there'
+function astraEngine(first = astraText, mutate = null, overrides = {}) {
+  const segments = [windowFor(first, 2), windowFor(astraText, 12)].flatMap(w => w.result.segments)
+  mutate?.(segments)
+  return evaluateListeningEngine({groups: [{...group, text: astraText}], instructions: two,
+    windows: [{startSeconds: 0, endSeconds: 30, result: {segments}}],
+    pauses: [{startSeconds: 1, endSeconds: 1.95}, {startSeconds: 8.5, endSeconds: 9.5},
+      {startSeconds: 11, endSeconds: 11.95}, {startSeconds: 16.85, endSeconds: 18}],
+    durationSeconds: 30, ...overrides})
+}
+function assertCounterevidenceBlocks(partial, full, label) {
+  for (const pair of [[partial, full], [full, partial]]) {
+    const result = reconcileListeningEngines(...pair)[0]
+    assert.equal(result.decision, 'review_required', label)
+    assert.equal(result.playback, null, label)
+    assert.ok(result.issues.includes('ENGINE_CONFLICT'), label)
+  }
+}
+test('Astra P1: a late not in a missing-tail candidate cannot be clipped by reference body times', () => {
+  const first = astraText.replace('over there', 'over here')
+  const full = astraEngine(astraText, null, {engine: 'faster-whisper'})
+  assert.equal(reconcileListeningEngines(astraEngine(first), full)[0].decision, 'usable')
+  const partial = astraEngine(`${first} not`, segments => {
+    segments[0].words.at(-1).start = 8
+    segments[0].words.at(-1).end = 8.2
+    segments[0].end = 8.2
+  })
+  assertCounterevidenceBlocks(partial, full, 'not at 8.0–8.2 after reference body end 6.8')
+})
+test('Astra P1: both anchors may be missing while observed can/could still blocks fallback', () => {
+  const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
+  const full = astraEngine(astraText, null, {engine: 'faster-whisper'})
+  const clean = astraEngine(first)
+  assert.equal(clean.groups[0].occurrences.length, 1)
+  assert.equal(clean.groups[0].partialOccurrences.length, 0)
+  for (const pair of [[clean, full], [full, clean]]) assert.equal(reconcileListeningEngines(...pair)[0].decision, 'usable')
+  for (const changed of [first.replace('can buy', 'could buy'), first.replace('can buy', 'can not buy'),
+    first.replace('twenty dollars', 'thirty dollars'), first.replace('before seven', 'before eight')]) {
+    assertCounterevidenceBlocks(astraEngine(changed), full, changed)
+  }
+})
+test('reference envelope edges retain negative, modal and numeric observations in both directions', () => {
+  const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
+  const full = astraEngine(astraText, null, {engine: 'faster-whisper',
+    pauses: [{startSeconds: 0.1, endSeconds: 0.4}, {startSeconds: 8.5, endSeconds: 9.5},
+      {startSeconds: 11, endSeconds: 11.95}, {startSeconds: 16.85, endSeconds: 18}]})
+  for (const anchored of [first, first.replace('Blazing', 'Bright'), first.replace('over here', 'over there')]) {
+    for (const word of ['not', 'could', 'thirty']) for (const side of ['start', 'end']) {
+      const partial = astraEngine(side === 'start' ? `${word} ${anchored}` : `${anchored} ${word}`, segments => {
+        if (side === 'start') {
+          segments[0].words.forEach((w, i) => {
+            w.start = i ? 2 + (i - 1) * 0.2 : 1
+            w.end = i ? 2 + i * 0.2 : 1.2
+          })
+          segments[0].start = 1
+        } else {
+          segments[0].words.at(-1).start = 8
+          segments[0].words.at(-1).end = 8.2
+          segments[0].end = 8.2
+        }
+      })
+      assertCounterevidenceBlocks(partial, full, `${side} ${word} in ${anchored}`)
+    }
+  }
+})
+test('counterevidence in a discarded overlapping window also blocks a complete reference engine', () => {
+  const segments = [windowFor(astraText, 2), windowFor(astraText, 12)].flatMap(w => w.result.segments)
+  const changed = astraText.replace('Bright', 'Blazing').replace('over there', 'over here').replace('can buy', 'could buy')
+  const bad = astraEngine(astraText, null, {windows: [
+    {startSeconds: 0, endSeconds: 30, result: {segments}},
+    {...windowFor(changed, 2), endSeconds: 9},
+  ]})
+  assert.equal(bad.groups[0].decision, 'usable', 'the chosen anchor clock remains complete')
+  assertCounterevidenceBlocks(bad, astraEngine(astraText, null, {engine: 'faster-whisper'}), 'discarded window could')
+})
+test('unanchored raw speech spanning two physical readings has no safe subset assignment', () => {
+  const text = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
+  const partial = astraEngine(text, null, {windows: [{startSeconds: 0, endSeconds: 30,
+    result: {segments: [{start: 2, end: 16.8, text, words: [{word: text, start: 2, end: 16.8}]}]}}]})
+  assert.equal(partial.groups[0].occurrences.length, 0)
+  assert.equal(partial.groups[0].partialOccurrences.length, 0)
+  assertCounterevidenceBlocks(partial, astraEngine(astraText, null, {engine: 'faster-whisper'}), 'ambiguous raw run')
+})
+test('unexplained ordinary edge speech cannot be treated as an unobserved prefix or suffix', () => {
+  const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
+  const full = astraEngine(astraText, null, {engine: 'faster-whisper',
+    pauses: [{startSeconds: 0.1, endSeconds: 0.4}, {startSeconds: 8.5, endSeconds: 9.5},
+      {startSeconds: 11, endSeconds: 11.95}, {startSeconds: 16.85, endSeconds: 18}]})
+  for (const word of ['prepare', 'there']) for (const side of ['start', 'end']) {
+    const partial = astraEngine(first, segments => {
+      const extra = {word, start: side === 'start' ? 1 : 8, end: side === 'start' ? 1.2 : 8.2}
+      segments[0].words[side === 'start' ? 'unshift' : 'push'](extra)
+      segments[0][side] = side === 'start' ? 1 : 8.2
+    })
+    assertCounterevidenceBlocks(partial, full, `${side} ordinary ${word}`)
+  }
+})
+test('an anchor inside a long acoustic run cannot explain extra edge words in that run', () => {
+  const text = `${astraText} there`
+  const partial = astraEngine(text, null, {instructions: one, windows: [{startSeconds: 0, endSeconds: 30,
+    result: {segments: [{start: 2, end: 8.2, text, words: [{word: text, start: 2, end: 8.2}]}]}}]})
+  const full = astraEngine(astraText, null, {instructions: one, engine: 'faster-whisper',
+    windows: [{...windowFor(astraText, 2), endSeconds: 30}]})
+  assert.ok(partial.groups[0].issues.includes('EDGE_WORD_SPAN_LONG'))
+  assert.equal(full.groups[0].decision, 'usable')
+  assertCounterevidenceBlocks(partial, full, 'extra there shares a coarse run with exact anchors')
+})
+test('genuinely unobserved prefixes and suffixes do not assert critical deletions', () => {
+  const full = astraEngine(astraText, null, {engine: 'faster-whisper'})
+  for (const side of ['prefix', 'suffix', 'both']) {
+    const partial = astraEngine(astraText, segments => {
+      segments[0].words = segments[0].words.filter((_, i, list) =>
+        (side === 'suffix' || i >= 10) && (side === 'prefix' || i < list.length - 9))
+      segments[0].start = segments[0].words[0].start
+      segments[0].end = segments[0].words.at(-1).end
+    })
+    for (const pair of [[partial, full], [full, partial]]) {
+      assert.equal(reconcileListeningEngines(...pair)[0].decision, 'usable', side)
+    }
+  }
+})
 test('common occurrences at incompatible times or in reversed order still conflict', () => {
   const full = repeatedEngine(), other = repeatedEngine({engine: 'faster-whisper'})
   other.groups[0].occurrences.reverse()
