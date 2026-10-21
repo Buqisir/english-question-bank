@@ -7,7 +7,7 @@ import { prepareSourceReferences } from '../../../server/paper-import/sourceRefe
 
 // Invented OCR text on deterministic blank PDFs: tests evidence plumbing and
 // exact crop replay, not OCR accuracy. Real page/figure quality is separate QA.
-export function sourceReferenceFiguresFixture(materialization = makeFixture({ listening: false })) {
+export function sourceReferenceFiguresFixture(materialization = makeFixture({ listening: false }), { scoringTable = false } = {}) {
   const documents = materialization.documents.map(document => {
     const bytes = productPdfBytes(1, `Synthetic ${document.documentId}`)
     Object.assign(document, { sha256: sha256(bytes), byteLength: bytes.length, pageCount: 1 })
@@ -24,6 +24,12 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     { x: 0.1, y: 0.3, width: 0.5, height: 0.02 },
     { x: 0.1, y: 0.4, width: 0.5, height: 0.02 },
   ]
+  const tableRegion = { x: 0.08, y: 0.54, width: 0.6, height: 0.05 }
+  if (scoringTable) {
+    texts.push('Content and coherence', '13–15')
+    regions.push({ x: 0.1, y: 0.55, width: 0.35, height: 0.02 },
+      { x: 0.55, y: 0.55, width: 0.1, height: 0.02 })
+  }
   const engineDocuments = documents.map(document => {
     const isAnswer = document === answer
     const observations = (isAnswer ? texts : ['Synthetic question evidence.']).map((text, index) => ({
@@ -35,7 +41,8 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
       region: { x: 0.1, y: 0.1, width: 0.5, height: 0.02 }, confidence: 1, alternatives: [] })
     return { documentId: document.documentId, pages: [{ page: 1,
       regions: [...observations.map(item => ({ regionId: item.regionId, kind: 'text', region: item.region })),
-        ...(isAnswer ? [{ regionId: 'answers:figure:smile', kind: 'visual', region: figureRegion }] : [])],
+        ...(isAnswer ? [{ regionId: 'answers:figure:smile', kind: 'visual', region: figureRegion },
+          ...(scoringTable ? [{ regionId: 'answers:table:score', kind: 'visual', region: tableRegion }] : [])] : [])],
       observations, readingOrderEdges: observations.slice(1).map((item, index) => ({
         before: observations[index].observationId, after: item.observationId,
       })),
@@ -53,7 +60,8 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
       visualClassifications: document.documentId === answer.documentId ? [{
         regionId: 'answers:figure:smile', classification: 'content_media',
         itemIds: [`${answer.documentId}:item:1`], afterItemId: `${answer.documentId}:item:0`,
-      }] : [],
+      }, ...(scoringTable ? [{ regionId: 'answers:table:score', classification: 'semantic_table',
+        rows: [{ header: false, cells: [[`${answer.documentId}:item:4`], [`${answer.documentId}:item:5`]] }] }] : [])] : [],
     })) })),
   }
   const sourceInput = { kind: 'nck1-source-materialization',
@@ -82,6 +90,12 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     source: source(figureRegion), sourceRegionId: 'answers:figure:smile',
     raster: captureSourceReferenceFigure({ pdfBytes: answer.bytes, page: 1, region: figureRegion }) }]
   sourceReferences.groups[0].essays = { state: 'captured', evidence: [], entries }
+  if (scoringTable) sourceReferences.groups[0].scoring = { state: 'captured', evidence: [], entries: [{
+    referenceId: 'reference:score:0', authority: 'source_reference', sourceLabel: null, labelSource: null,
+    blocks: [{ kind: 'table', tableId: 'table:score', rows: [[4, 5].map(index => ({
+      cellId: `cell:score:${index}`, text: texts[index], source: source(regions[index]),
+    }))] }],
+  }] }
   return { ...binding, paperName: '合成源范文配图样张', sourceReferences, evidence, confirmation,
     materializationDigest: digestJson(materialization) }
 }

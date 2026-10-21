@@ -45,6 +45,25 @@ function containsSource(source, inner) {
     && b.y + b.height <= a.y + a.height + 0.000001
 }
 
+function survivingConfirmedText(confirmation, evidence, referenceFigures) {
+  const pictureItems = new Set(referenceFigures.flatMap(reference => reference.itemIds))
+  const evidenceDocuments = new Map(evidence.documents.map(document => [document.documentId, document]))
+  return new Map(confirmation.documents.map(document => {
+    const pages = new Map(evidenceDocuments.get(document.documentId).pages.map(page => [page.page, page]))
+    return [document.documentId, document.pages.flatMap(page => {
+      const observations = new Map(pages.get(page.page).observations.map(item => [item.observationId, item]))
+      return page.orderedItems.filter(item => !pictureItems.has(item.itemId)).map(item => {
+        const boxes = item.observationIds.map(id => observations.get(id).region)
+        const x = Math.min(...boxes.map(box => box.x)), y = Math.min(...boxes.map(box => box.y))
+        return { text: item.text, sourceIndex: { kind: 'page_region', documentId: document.documentId,
+          page: page.page, region: { x, y,
+            width: Math.max(...boxes.map(box => box.x + box.width)) - x,
+            height: Math.max(...boxes.map(box => box.y + box.height)) - y } } }
+      })
+    })]
+  }))
+}
+
 // Acceptance/finalize boundary. This always uses exact input bytes, and has no
 // bypass flag. Published consumers use the separate integrity validator and
 // SQLite's approved sidecar-byte commitment; they never recrop during export.
@@ -71,11 +90,15 @@ export function assertSourceReferenceAdmission({
   }
   const documents = materialization.documents.map(document => ({ ...document,
     bytes: sourceInput.documents.find(source => source.documentId === document.documentId)?.bytes }))
+  const evidence = JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8'))
   const resolved = resolveConfirmedNck1OcrEvidence({ paperId: materialization.paperId, documents,
-    evidence: JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')), confirmation })
+    evidence, confirmation })
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
   const expected = resolved.referenceFigures ?? []
   if (expected.length !== figures.length) reject('All confirmed official-answer content figures must match sidecar figures one-to-one')
+  // Layout resolution moves table items out of paragraphs. Index validated
+  // confirmation text before layout, excluding only picture-consumed identities.
+  const confirmedTexts = survivingConfirmedText(confirmation, evidence, expected)
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
   const illustratedDocuments = new Set(expected.map(reference => reference.source.documentId))
@@ -91,7 +114,7 @@ export function assertSourceReferenceAdmission({
     // The resolver has already consumed exactly the selected image itemIds and
     // observationIds. Replay the surviving items, never remove words by value.
     const surviving = [...new Set(sources.flatMap(source =>
-      (resolved.structures.get(source.locator.documentId)?.paragraphs ?? [])
+      (confirmedTexts.get(source.locator.documentId) ?? [])
         .filter(item => containsSource(source, item.sourceIndex))))]
     if (!surviving.length || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
       reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')

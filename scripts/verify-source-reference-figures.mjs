@@ -39,6 +39,22 @@ entry(imageProse).paragraphs.push({ ...entry(imageProse).paragraphs[0],
   } } })
 assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: imageProse }),
   { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' }, 'selected image observations must never reappear as prose')
+const withTable = sourceReferenceFiguresFixture(undefined, { scoringTable: true })
+assert.deepEqual(validateSourceReferences({ ...withTable, sidecar: withTable.sourceReferences }), [])
+const tableResolved = resolveConfirmedNck1OcrEvidence({ paperId: withTable.materialization.paperId,
+  documents: withTable.sourceDocuments, evidence: withTable.evidence, confirmation: withTable.confirmation })
+assert.deepEqual(tableResolved.issues, [])
+assert.equal(tableResolved.structures.get('answers').tables.length, 1)
+assert.doesNotThrow(() => assertSourceReferenceAdmission({ ...withTable, sidecar: withTable.sourceReferences }),
+  'one official_answers PDF may contain both a reference figure and a semantic scoring table')
+const imageCell = structuredClone(withTable.sourceReferences)
+imageCell.groups[0].scoring.entries[0].blocks[0].rows[0][0] = {
+  cellId: 'cell:forbidden-image-text', text: imageProse.groups[0].essays.entries[0].paragraphs.at(-1).text,
+  source: imageProse.groups[0].essays.entries[0].paragraphs.at(-1).source,
+}
+assert.throws(() => assertSourceReferenceAdmission({ ...withTable, sidecar: imageCell }),
+  { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
+console.log('PASS reference figure plus semantic scoring table; image text stays excluded from prose and cells')
 const unchanged = JSON.stringify(input.sourceReferences)
 for (const [name, mutate, code] of [
   ['cross-entry anchor', value => { figure(value).afterParagraphId = value.groups[0].essays.entries[1].paragraphs[0].paragraphId }, 'SOURCE_REFERENCES_FIGURE_ANCHOR_INVALID'],
