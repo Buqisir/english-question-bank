@@ -192,6 +192,42 @@ materializationDigest；每段有稳定ID和角色，每篇有 source-reference 
 该文件不代替 OCR/源忠实核对：schema、位置、SHA 只能证明结构与来源绑定，不能证明
 作者转录正确，也不能把 layout-only Owner Review 扩成语义审核。
 
+### 源范文配图（source-references-v3）
+
+固定文件名仍为 `source-references-v1.json`；v1/v2 按原合同读取，历史
+Revision、subject 和已发布字节不迁移。v3 保持 essay `paragraphs`，scoring 沿用 v2 `blocks`，
+仅为 captured essay entry 增加可选、非空 `figures`。每图绑定全局唯一
+figureId、同 entry 的 afterParagraphId、源 PDF SHA/页/归一化框、
+sourceRegionId 和冻结 PNG。只支持存活段落后的图，锚点顺序不得倒退；
+首段前图、纯图条目、跨范文和重复使用源区域明确拒绝。
+
+首版仅接受独立 `official_answers`、`application/pdf` 源；混合源不放宽。
+接收/finalize 读取封存 OCR confirmation，按 sourceRegionId 和精确框
+逐图核对全部答案 content_media，验证唯一的存活段落/entry/Writing Task
+锚点；少图、多图或缺 writing scope 阻断，有图时 v1/v2 不能省略它。
+任务归属从确认文本中的写作部标题及第一／二节，或显式应用文写作／读后续写
+标题建立；目前不猜测其他标题格式。带图文档的参考正文、源标签和表格单元格
+必须重放排除图片 items 后的存活 OCR 文本，允许正常换行与断词合并。
+图内文字按确认的 itemIds/observationIds 从 OCR 正文结构排除，证据仍保留，
+不按文字替换。参考图不进入材料化 media、Canonical sourceCoverage 或题卷
+image registry；三款题卷及组卷题卷不消费源参考图。
+
+`source-reference-pdf-crop-v1` 固定 288 dpi，复用 Poppler 显示页（含页面旋转）
+与共享 PDF 裁图 helper：归一化坐标乘栅格宽高后各自四舍五入，裁剪后 +repage、
+PNG32 输出；接收端完整解码为 sRGB 8-bit RGBA，按像素重放比对来源。
+冻结 PNG 的精确字节 SHA 继续绑定审批与发布；导出只读批准版本，不临时重裁。
+仅接受 canonical base64 的单帧 PNG，完整解码并拒绝动画、截断、尾随数据及
+不属于裁图 profile 的压缩元数据（zTXt/iTXt/iCCP），避免旁路解压预算。
+限额集中在 `SOURCE_REFERENCE_IMAGE_LIMITS`：每图 2 MiB、单边 4096 px、
+400 万像素；每 entry 4 图、每 sidecar 16 图、base64 解码后 PNG 总字节
+8 MiB、v3 原始 JSON 16 MiB。服务器既有普通文件上传及 64 MiB JSON 读取
+限额继续适用，部署环境的反代上限需在消费者上线验收时核对。
+
+单卷和组卷 answerOnly 在指定段落后独立等比排图，按 288 dpi 推导源物理
+尺寸（济南图约 26 mm），限制最大宽高且图片整体不跨页；不阻止长范文自然
+跨页。组卷 DOM 标识绑定来源命名空间，跨卷同名 figureId 不冲突。源标签、
+范文顺序、标题和两篇正文保持完整；不复制机构水印。
+
 ## 按 Owner 参考格式适配（reference-v2，Owner 已确认）
 
 Owner 2026-10-06 明确否定先前五项逐题号／两列语法的自拟版式，要求针对

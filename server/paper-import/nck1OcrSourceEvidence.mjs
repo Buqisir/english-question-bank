@@ -589,6 +589,7 @@ export function resolveConfirmedNck1OcrEvidence({
   const structures = new Map()
   const sourceVisuals = []
   const contentMedia = []
+  const referenceFigures = []
   const contentVisuals = confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
   const seenItemIds = new Set()
   const sourceDocuments = nck1OcrSourceDocuments(documents)
@@ -724,6 +725,7 @@ export function resolveConfirmedNck1OcrEvidence({
             replacement.itemIds.forEach(id => claimedItems.add(id))
             if (replacement.media) contentMedia.push(replacement.media)
             if (replacement.visual) sourceVisuals.push(replacement.visual)
+            if (replacement.referenceFigure) referenceFigures.push(replacement.referenceFigure)
             classified.add(visual.regionId)
           } catch (error) {
             issues.push(issue('NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED',
@@ -774,13 +776,13 @@ export function resolveConfirmedNck1OcrEvidence({
       }
       for (const replacement of replacements) {
         const anchor = confirmedPage.orderedItems[replacement.insertAt - 1]?.itemId
-        if (replacement.media && claimedItems.has(anchor)) {
+        if ((replacement.media || replacement.referenceFigure) && claimedItems.has(anchor)) {
           issues.push(issue('NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED', 'ocrConfirmation',
             'Image placement anchor cannot be consumed by another visual', document.documentId, confirmedPage.page))
         }
       }
       for (let index = 0; index <= pageBody.length; index += 1) {
-        body.push(...replacements.filter(item => item.insertAt === index).map(item => item.item))
+        body.push(...replacements.filter(item => item.insertAt === index && item.item).map(item => item.item))
         if (index < pageBody.length && !claimedItems.has(confirmedPage.orderedItems[index]?.itemId)) body.push(pageBody[index])
       }
     }
@@ -801,5 +803,5 @@ export function resolveConfirmedNck1OcrEvidence({
       fallback.region,
     ))
   }
-  return { issues, structures, sourceVisuals, contentMedia }
+  return { issues, structures, sourceVisuals, contentMedia, referenceFigures }
 }

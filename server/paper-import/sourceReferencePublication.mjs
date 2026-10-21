@@ -3,7 +3,7 @@ import path from 'node:path'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { validateCanonicalPublicationBundle } from '../paper-canonical/publication.mjs'
 import { applySpellingReview } from './spellingReview.mjs'
-import { SOURCE_REFERENCES_FILE, assertSourceReferences } from './sourceReferences.mjs'
+import { SOURCE_REFERENCES_FILE, assertSourceReferences, parseSourceReferencesBytes } from './sourceReferences.mjs'
 import { deriveNck1AnalyzedPackageBundle, NCK1_ANALYZED_PACKAGE_INPUT_KIND, parseStrictPackageJson } from '../paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 
 function reject(message) {
@@ -90,7 +90,7 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
     if (matches.length !== 1) reject('原文档身份不唯一或缺失')
     return { documentId: document.documentId, bytes: decoded(matches[0]) }
   })
-  const sourceReferences = JSON.parse(referenceBytes.toString('utf8'))
+  const sourceReferences = parseSourceReferencesBytes(referenceBytes)
   assertSourceReferences({ sidecar: sourceReferences, materialization,
     sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, sourceDocuments, sourceInput })
   return { paperName: commitment.paperName, materialization, sourceReferences, sourceReferencesBytes: referenceBytes, sourceDocuments,

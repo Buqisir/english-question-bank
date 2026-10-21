@@ -20,8 +20,8 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
       : ['regionId', 'classification', 'itemIds', 'afterItemId'])) {
     reject('Content visual requires a closed table or source-image placement')
   }
-  if (image && (document.role !== 'question_source' || document.mediaType !== 'application/pdf')) {
-    reject('Content images currently require a separate PDF question source with a replayable crop')
+  if (image && (!['question_source', 'official_answers'].includes(document.role) || document.mediaType !== 'application/pdf')) {
+    reject('Content images require a separate PDF question source or official_answers reference source with a replayable crop')
   }
   if (table && document.role === 'question_and_answers') {
     reject('Content tables currently require separate question/answer sources to keep scoring out of student content')
@@ -76,6 +76,20 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
         verticalMerge: null, containsDrawing: false, containsNestedTable: false,
       })) })),
     } }
+  }
+  if (document.role === 'official_answers') {
+    const anchor = items.get(visual.afterItemId).item
+    const boxes = anchor.observationIds.map(id => observations.get(id).region)
+    const x = Math.min(...boxes.map(box => box.x))
+    const y = Math.min(...boxes.map(box => box.y))
+    const anchorRegion = { x, y,
+      width: Math.max(...boxes.map(box => box.x + box.width)) - x,
+      height: Math.max(...boxes.map(box => box.y + box.height)) - y }
+    return { itemIds: ids, insertAt: items.get(visual.afterItemId).index + 1,
+      referenceFigure: { sourceRegionId: region.regionId, source,
+        itemIds: [...ids], observationIds: [...selected],
+        afterItem: { itemId: anchor.itemId, text: anchor.text,
+          source: { ...source, region: anchorRegion } } } }
   }
   const mediaId = `media:${paperId}:${suffix}`
   return { itemIds: ids, insertAt: items.get(visual.afterItemId).index + 1, item: {

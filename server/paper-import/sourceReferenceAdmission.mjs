@@ -1,0 +1,124 @@
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { assertSourceReferences, sourceReferenceBlocks } from './sourceReferences.mjs'
+import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
+import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
+
+function reject(message) {
+  throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
+}
+
+const normalize = text => text.replace(/\s+/gu, ' ').trim()
+const joinedText = text => text.normalize('NFKC').replace(/(\p{L})-\s+(?=\p{L})/gu, '$1').replace(/\s+/gu, '')
+
+// Only explicit confirmed NCK1 writing headings establish task ownership.
+// Missing/ambiguous scopes fail closed rather than borrowing the nearest task.
+function writingScopes(confirmation, answerIds) {
+  const scopes = new Map()
+  for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
+    let writing = false, task = null
+    for (const page of document.pages) for (const item of page.orderedItems) {
+      const text = item.text.normalize('NFKC').replace(/\s+/gu, '')
+      if (/^第[一二三四五六]部分/u.test(text)) {
+        writing = /^第[三四]部分(?:写作|书面表达)/u.test(text)
+        task = null
+      }
+      const heading = text.replace(/^第[三四]部分(?:写作|书面表达)(?:\([^)]*\))?/u, '')
+      if (/^(?:听力(?:原文|录音|材料)|录音原文|试题解析|参考答案解析)/u.test(heading)) {
+        writing = false
+        task = null
+      }
+      if ((writing && /^第一节(?:\(|$)/u.test(heading))
+        || /^(?:第一节(?:\([^)]*\))?)?(?:应用文写作|书面表达)$/u.test(heading)) task = 'application'
+      if ((writing && /^第二节(?:\(|$)/u.test(heading))
+        || /^(?:第二节(?:\([^)]*\))?)?读后续写$/u.test(heading)) task = 'continuation'
+      scopes.set(item.itemId, task)
+    }
+  }
+  return scopes
+}
+function containsSource(source, inner) {
+  const outer = source?.locator
+  if (outer?.kind !== 'page_region' || outer.documentId !== inner.documentId || outer.page !== inner.page) return false
+  const a = outer.region, b = inner.region
+  return b.x >= a.x - 0.000001 && b.y >= a.y - 0.000001
+    && b.x + b.width <= a.x + a.width + 0.000001
+    && b.y + b.height <= a.y + a.height + 0.000001
+}
+
+// Acceptance/finalize boundary. This always uses exact input bytes, and has no
+// bypass flag. Published consumers use the separate integrity validator and
+// SQLite's approved sidecar-byte commitment; they never recrop during export.
+export function assertSourceReferenceAdmission({
+  sidecar, materialization, sourceDigest, candidateDigest, sourceInput,
+}) {
+  if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
+    sourceDocuments: sourceInput.documents, sourceInput })
+  const figures = sidecar?.groups.flatMap(group => group.essays.entries.flatMap(entry =>
+    (entry.figures ?? []).map(figure => ({ figure, entry, group })))) ?? []
+  const ocr = sourceInput.ocrSourceBytes
+  if (!ocr) {
+    if (figures.length) reject('Reference figures require sealed OCR confirmation and writing-scope anchors')
+    return
+  }
+  const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
+  const answerIds = new Set(materialization.documents.filter(document => document.role === 'official_answers')
+    .map(document => document.documentId))
+  const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
+    && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
+  if (!hasReferenceVisual && !figures.length) return
+  if (!sidecar || sidecar.schemaVersion !== 'source-references-v3') {
+    reject('Confirmed official-answer content figures require a complete source-references-v3 sidecar; v1/v2 cannot omit them')
+  }
+  const documents = materialization.documents.map(document => ({ ...document,
+    bytes: sourceInput.documents.find(source => source.documentId === document.documentId)?.bytes }))
+  const resolved = resolveConfirmedNck1OcrEvidence({ paperId: materialization.paperId, documents,
+    evidence: JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')), confirmation })
+  if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
+  const expected = resolved.referenceFigures ?? []
+  if (expected.length !== figures.length) reject('All confirmed official-answer content figures must match sidecar figures one-to-one')
+  const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
+    entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
+  const illustratedDocuments = new Set(expected.map(reference => reference.source.documentId))
+  const texts = sidecar.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
+    group[kind].entries.flatMap(entry => [
+      ...(entry.sourceLabel === null ? [] : [{ text: entry.sourceLabel, source: entry.labelSource }]),
+      ...sourceReferenceBlocks(entry).flatMap(block => block.kind === 'paragraph'
+        ? [block.paragraph] : block.rows.flat()),
+    ])))
+  for (const text of texts) {
+    const sources = [text.source, ...(text.continuationSources ?? [])]
+    if (!sources.some(source => illustratedDocuments.has(source.locator.documentId))) continue
+    // The resolver has already consumed exactly the selected image itemIds and
+    // observationIds. Replay the surviving items, never remove words by value.
+    const surviving = [...new Set(sources.flatMap(source =>
+      (resolved.structures.get(source.locator.documentId)?.paragraphs ?? [])
+        .filter(item => containsSource(source, item.sourceIndex))))]
+    if (!surviving.length || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
+      reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')
+    }
+  }
+  const scopes = writingScopes(confirmation, answerIds)
+  const seen = new Set()
+  for (const { figure, entry, group } of figures) {
+    const matches = expected.filter(reference => reference.sourceRegionId === figure.sourceRegionId
+      && digestJson(reference.source) === digestJson(figure.source.locator))
+    if (matches.length !== 1 || seen.has(matches[0])) reject('Missing, extra, duplicated or substituted source figure region')
+    const reference = matches[0]
+    seen.add(reference)
+    if (scopes.get(reference.afterItem.itemId) !== group.taskType) {
+      reject('Figure anchor requires an explicit confirmed source writing scope matching its Writing Task')
+    }
+    // An exact surviving item proves the paragraph and entry. Task ownership
+    // comes from the confirmed headings, not the sidecar's declared grouping.
+    const anchors = paragraphs.filter(item =>
+      [item.paragraph.source, ...(item.paragraph.continuationSources ?? [])]
+        .some(source => containsSource(source, reference.afterItem.source))
+      && normalize(item.paragraph.text).endsWith(normalize(reference.afterItem.text)))
+    if (anchors.length !== 1 || anchors[0].entry !== entry || anchors[0].group !== group
+      || anchors[0].paragraph.paragraphId !== figure.afterParagraphId) {
+      reject('Figure has no exact unique surviving paragraph in its Writing Task and essay; cross-entry and before-first placement are unsupported')
+    }
+    assertSourceReferenceFigureReplay({ figure,
+      document: documents.find(document => document.documentId === figure.source.locator.documentId) })
+  }
+}
