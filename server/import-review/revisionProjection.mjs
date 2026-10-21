@@ -23,6 +23,7 @@ import { productFiles, sourceProductEditions } from '../paper-import/pdfProductS
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
 import { buildStoredReviewSubject, buildTargetReviewSubject } from './reviewSubject.mjs'
+import { reviewProjectionForTrustedBaseline } from './reviewComparisonProjection.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -1726,7 +1727,11 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
         ...file, sha256: fileEvidence.find(item => item.path === file.path)?.sha256,
         byteLength: fileEvidence.find(item => item.path === file.path)?.byteLength,
       }))
-      return { baseline, target: buildTargetReviewSubject({ revision, projection, inventory, fileEvidence }) }
+      if (!baseline.ok) return { baseline, target: { ok: false, reasonCode: 'BASELINE_UNTRUSTED' } }
+      const comparisonProjection = reviewProjectionForTrustedBaseline(baseline.subject, projection)
+      const target = buildTargetReviewSubject({ revision, projection: comparisonProjection, inventory, fileEvidence })
+      if (target.ok) target.provenance.source = 'current-validated-projection-with-declared-consumer-comparison'
+      return { baseline, target }
     } catch {
       return { baseline, target: { ok: false, reasonCode: 'TARGET_COMPUTATION_FAILED' } }
     }

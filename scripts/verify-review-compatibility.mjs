@@ -8,6 +8,10 @@ import {
   inspectReviewFile, reviewSubjectBundleDigest, validReviewRelativePath,
 } from '../server/import-review/reviewSubject.mjs'
 import { compareReviewSubjects } from '../server/import-review/reviewCompatibility.mjs'
+import './verify-review-consumer-succession.mjs'
+import { consumerContractRefs, reviewConsumerPairs } from '../shared/paper-canonical/consumers.mjs'
+import { nck1MaterializationHistoricalAuthorityRef66 } from '../shared/paper-canonical/authority.mjs'
+import { reviewProjectionForTrustedBaseline } from '../server/import-review/reviewComparisonProjection.mjs'
 import {
   compareReviewPublicationContent, mapReviewPublicationConsumer,
 } from '../server/import-review/reviewPublicationContent.mjs'
@@ -154,6 +158,39 @@ async function fixture({ publicProfile = false, noListening = false, ocrReport =
 }
 const f = await fixture()
 const baseline = buildStoredReviewSubject(f)
+{
+  const historical = clone(f)
+  historical.projection.consumption.authorityRef = nck1MaterializationHistoricalAuthorityRef66
+  historical.projection.consumption.consumerContractRef = reviewConsumerPairs[0].screen
+  const payload = buildProductPreviewPayload(historical.revision, historical.projection)
+  historical.preview.payload_json = JSON.stringify(payload)
+  historical.preview.payload_digest = digestJson(payload)
+  const stored = buildStoredReviewSubject(historical)
+  assert.equal(stored.ok, true)
+  const actual = clone(historical.projection)
+  actual.consumption.consumerContractRef = consumerContractRefs.screen
+  const before = stableStringify(actual)
+  const mapped = reviewProjectionForTrustedBaseline(stored.subject, actual)
+  const targetFor = projection => buildTargetReviewSubject({ ...historical,
+    projection, inventory: historical.storedFiles })
+  assert.equal(compareReviewSubjects({ baseline: stored, target: targetFor(mapped), targetBuildId }).result, 'equal')
+  assert.equal(stableStringify(actual), before, 'actual projection must retain current contract')
+  for (const mutate of [
+    p => { p.paperAsset.content.groups.g1.passage.text += ' changed' },
+    p => { p.paperAsset.content.questions.q1.options[0].text += ' changed' },
+    p => { p.paperAsset.answerKey.answers.q1.value = 'B' },
+    p => { p.analysisSidecars['reading-choice-analysis-v1.json'].groups.g1.overview += ' changed' },
+    p => { p.consumption.mediaArtifacts[0].sha256 = hash('changed') },
+    p => { p.consumption.selections[0].projectedOccurrences[0].sourceMap = { changed: true } },
+    p => { p.consumption.selections[0].projectedOccurrences[0].drawingArea = { changed: true } },
+  ]) {
+    const changed = clone(actual)
+    mutate(changed)
+    const target = targetFor(reviewProjectionForTrustedBaseline(stored.subject, changed))
+    assert.equal(compareReviewSubjects({ baseline: stored, target, targetBuildId }).result, 'different')
+  }
+  console.log('PASS succession is applied before subject hashing; simultaneous contract/content mutations remain different')
+}
 {
   const actual = await fixture({ publicProfile: true, ocrReport: true })
   const report = actual.storedFiles.find(file => file.path === 'agent-ocr-correction-report-v2.json')
