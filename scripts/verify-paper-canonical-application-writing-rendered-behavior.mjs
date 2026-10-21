@@ -957,6 +957,9 @@ async function assertActualPaperSurfaceArtifacts() {
       { label: 'drawing-marked', consumption: drawingAreaConsumption(
         makeDrawingAreaCompilation({ labelMarks: ['underline'] }).compilation, consumerContractRefs.screen,
       ) },
+      { label: 'drawing-template', consumption: drawingAreaConsumption(
+        makeDrawingAreaCompilation({ structuredAnswerRegion: true }).compilation, consumerContractRefs.screen,
+      ) },
     ]) {
       const canonical = applicationGroup(consumption)
       const signatures = []
@@ -967,6 +970,7 @@ async function assertActualPaperSurfaceArtifacts() {
           await printPage.setContent(drawingAreaPrintFixture({
             longOpening: label === 'drawing-long-opening',
             labelMarks: label === 'drawing-marked' ? ['underline'] : [],
+            structuredAnswerRegion: label === 'drawing-template',
           }).html)
           const area = printPage.locator('[data-canonical-drawing-area-id]')
           printDrawingInlines = await area.locator('[data-canonical-content-node-id]').evaluateAll(nodes => nodes.map(node => ({
@@ -1033,12 +1037,12 @@ async function assertActualPaperSurfaceArtifacts() {
             return { width: rect.width, height: rect.height, ratio: rect.width / top.width,
               right: rect.right, boxRight: element.getBoundingClientRect().right,
               bottom: rect.bottom, signatureTop: signature.top, givenRight: given.right, x: rect.x,
-              label: area.textContent, labelCount: element.textContent.split('作图处').length - 1,
+              label: area.textContent, labelCount: element.textContent.split(area.textContent).length - 1,
               padding: ['Top', 'Right', 'Bottom', 'Left'].map(side => getComputedStyle(area)[`padding${side}`]),
               boxSizing: getComputedStyle(area).boxSizing,
               border: getComputedStyle(area).borderWidth, outerBorder: getComputedStyle(element).borderWidth }
           })
-          assert.equal(geometry.label, '作图处')
+          assert.equal(geometry.label, canonical.answerRegion.drawingArea.text)
           assert.equal(geometry.labelCount, 1)
           assert.ok(Math.abs(geometry.width - geometry.height) <= 1)
           assert.ok(Math.abs(geometry.ratio - .25) <= .003)

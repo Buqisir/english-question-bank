@@ -1132,7 +1132,7 @@ function observationForLocator(observationId, kind, locator, value, documentsByI
       && typeof value === 'object'
       ? { ...structuredClone(value), packageEvidence }
       : value,
-    span: kind === 'application_drawing_area'
+    span: ['application_drawing_area', 'application_structured_answer_region'].includes(kind)
       ? Object.fromEntries(Object.entries(locator).filter(([key]) => key !== 'documentId'))
       : { start: 0, end: document.bytes.byteLength },
     extraction: packageEvidence
@@ -1359,6 +1359,20 @@ export function deriveNck1SemanticSource(
     transformations: [],
     inactiveSlots: {},
     inactiveSourceClosures: [],
+  }
+  for (const visual of materialization.sourceCoverage?.visuals || []) {
+    if (visual.disposition !== 'structured_answer_region') continue
+    const observation = observationForLocator(
+      `observation:application:${visual.targetId}:structured-answer-region`,
+      'application_structured_answer_region',
+      { kind: 'page_region', documentId: materialization.sourceCoverage.documentId,
+        page: visual.page, region: structuredClone(visual.region) },
+      { groupId: visual.targetId, drawingAreaId: `drawing-area:${visual.targetId}:1`,
+        visualId: visual.visualId, disposition: visual.disposition },
+      documentsById,
+    )
+    observation.extraction = { adapterId: 'nck1-source-materialization', version: '9' }
+    source.observations.push(observation)
   }
   if (analyzedPackage) {
     const continuation = materialization.groups.find((group) =>

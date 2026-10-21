@@ -885,6 +885,11 @@ Word 左右细线框、框里只有能打的字和矩形对照时,三面由共�
   书写空间，署名仍在框内右下。尺寸由渲染策略管理，导卷不填写坐标或尺寸。
   `largeComplete`、`largeNoListening`、`economy8` 显示此区域并保留标准约 65mm
   框高，不接受 24mm 压缩；放不下即报告版面不适配。`answerOnly` 不显示作图区。
+- v5 源卷作答模板图由结构化作答区替代时，`sourceCoverage.visuals` 使用
+  `structured_answer_region`，`targetId` 引用带 `drawingArea` 的 application
+  `groupId`；必须给出 visual region，作图区来源须在同文档同页的该区域内
+  （归一化坐标容差 `1e-6`），每组最多一个，不得与 content media 重叠消费；
+  整张模板保留独立 Source Span 并映射到作图区，不作为 prompt 图片渲染。
 
 ## 9. 分页保护
 

@@ -13,8 +13,85 @@ import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consume
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { validateApplicationWritingContract } from '../shared/paper-canonical/applicationWriting.mjs'
 import oldConsumer from '../standards/paper-canonical/consumers/print-pdf-v48.json' with { type: 'json' }
+import { drawingAreaPrintFixture } from './preview-application-drawing-area.mjs'
+
+function verifyStructuredAnswerRegion() {
+  const make = () => makeDrawingAreaMaterialization({ structuredAnswerRegion: true })
+  const application = value => value.groups.find(group => group.family === 'application-writing')
+  const template = value => value.sourceCoverage.visuals.find(visual => visual.disposition === 'structured_answer_region')
+  const source = make()
+  assert.deepEqual(validateNck1SourceMaterialization(source), [])
+  const close = make()
+  application(close).writingTask.drawingArea.source.region = {
+    ...template(close).region, x: template(close).region.x - 0.5e-6,
+  }
+  assert.deepEqual(validateNck1SourceMaterialization(close), [], 'sub-micro rounding tolerance')
+  for (const [label, mutate, code] of [
+    ['missing group', value => { template(value).targetId = 'missing' }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['not application', value => { template(value).targetId = value.groups[0].groupId }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['no drawing area', value => { delete application(value).writingTask.drawingArea }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['wrong task type', value => { application(value).writingTask.taskType = 'continuation' }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['cross page', value => { application(value).writingTask.drawingArea.source.page = 8 }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['cross document', value => { application(value).writingTask.drawingArea.source.documentId = 'answers' }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['missing visual region', value => { delete template(value).region }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['outside region', value => { application(value).writingTask.drawingArea.source.region.x = .95 }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['outside tolerance', value => { application(value).writingTask.drawingArea.source.region = {
+      ...template(value).region, x: template(value).region.x - 2e-6,
+    } }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID'],
+    ['duplicate group', value => { value.sourceCoverage.visuals.push({
+      ...structuredClone(template(value)), visualId: 'visual:second-template',
+    }) }, 'MATERIALIZATION_SOURCE_VISUAL_TARGET_DUPLICATE'],
+  ]) {
+    const changed = make()
+    mutate(changed)
+    assert(validateNck1SourceMaterialization(changed).some(issue => issue.code === code), label)
+  }
+  const conflict = make()
+  const visual = template(conflict)
+  const crop = { kind: 'pdf_crop', documentId: 'paper', page: visual.page, region: structuredClone(visual.region), density: 300 }
+  conflict.media.push({ mediaId: 'media:template', usage: 'content', kind: 'figure', mimeType: 'image/png',
+    sha256: `sha256:${'c'.repeat(64)}`, pixelWidth: 400, pixelHeight: 100, extraction: crop,
+    presentation: { alignment: 'center', widthRatio: 1, spacingBefore: 'normal', spacingAfter: 'normal' },
+    publication: { selection: 'source_crop', sourceSha256: `sha256:${'c'.repeat(64)}` } })
+  application(conflict).blocks.push({ kind: 'figure', blockId: 'block:template', mediaId: 'media:template',
+    caption: '', source: { kind: 'page_region', documentId: 'paper', page: visual.page, region: structuredClone(visual.region) } })
+  conflict.sourceCoverage.visuals.push({ ...structuredClone(visual), visualId: 'visual:content-template',
+    disposition: 'content_media', targetId: 'media:template' })
+  assert.deepEqual(validateNck1SourceMaterialization(conflict).map(issue => issue.code),
+    ['MATERIALIZATION_SOURCE_VISUAL_CONTENT_CONFLICT'], 'otherwise valid content media must conflict')
+  const proofOnly = structuredClone(conflict)
+  proofOnly.media[0].usage = 'visual_proof'
+  application(proofOnly).blocks.pop()
+  proofOnly.sourceCoverage.visuals.pop()
+  assert.deepEqual(validateNck1SourceMaterialization(proofOnly), [], 'a retained visual proof is allowed without prompt consumption')
+  for (const version of [1, 2, 3, 4]) {
+    const old = make()
+    old.schemaVersion = `nck1-source-materialization-v${version}`
+    delete application(old).writingTask.drawingArea
+    if (version < 4) delete old.sourcePresentation
+    const issues = validateNck1SourceMaterialization(old)
+    assert(issues.length, `v${version} rejects structured answer visuals`)
+    if (version === 4) assert(issues.some(issue => issue.code === 'MATERIALIZATION_SOURCE_VISUAL_INVALID'))
+  }
+  const fixture = drawingAreaPrintFixture({ structuredAnswerRegion: true })
+  const { sourceCapture, canonicalPaper } = fixture.compilation.artifacts
+  const group = canonicalPaper.questionGroups.find(group => group.contractRef.familyContractId === 'application-writing')
+  const observation = sourceCapture.observations.find(item => item.kind === 'application_structured_answer_region')
+  assert.equal(observation.value.visualId, template(source).visualId)
+  assert.equal(observation.value.groupId, application(source).groupId)
+  const span = sourceCapture.sourceSpans.find(span => span.sourceSpanId === observation.sourceSpanId)
+  assert.deepEqual(span.coordinate, { kind: 'page_region', page: visual.page, region: visual.region })
+  assert(group.sourceMap.entries.find(entry => entry.target.kind === 'drawing_area').sourceSpanRefs.includes(span.sourceSpanId))
+  assert.equal(group.content.blocks.filter(block => block.kind === 'figure').length, 0)
+  assert.equal(group.media.length, 0)
+  assert.equal((fixture.html.match(/（做图处）/g) || []).length, 1)
+  assert(fixture.html.includes('data-canonical-drawing-area-id='))
+  assert(!fixture.html.includes('data-canonical-media-id='))
+  console.log('PASS structured answer visual: Jinan-style coverage, precise source mapping, no prompt image, v1-v4 rejection and invalid targets/geometry/duplicates/content conflicts')
+}
 
 export function verifyDrawingAreaContract() {
+verifyStructuredAnswerRegion()
 const source = makeDrawingAreaMaterialization()
 assert.deepEqual(validateNck1SourceMaterialization(source), [])
 makeDrawingAreaCompilation({ labelFirst: true })
@@ -102,7 +179,7 @@ console.log('PASS drawing-area materialization, source authority, compiler, excl
 }
 
 export function verifyDrawingAreaPublication() {
-  const { sourceInput, confirmation } = makeDrawingAreaCompilation({ listening: false })
+  const { sourceInput, confirmation } = makeDrawingAreaCompilation({ listening: false, structuredAnswerRegion: true })
   const materialized = materializeNck1CanonicalRequest(sourceInput, confirmation)
   const admission = admitCanonicalPaperImport({ request: materialized.request, sourceAssetVersion: 1 })
   assert.equal(admission.ok, true, JSON.stringify(admission.diagnostics))
@@ -121,7 +198,7 @@ export function verifyDrawingAreaPublication() {
     assert.equal(loaded.disposition, 'ready', JSON.stringify(loaded.diagnostics))
     const selection = loaded.selections.find(item => item.familyContractId === 'application-writing')
     assert.equal(projectCanonicalConsumerGroup({ consumption: loaded, groupId: selection.groupIds[0],
-      familyContractId: 'application-writing' }).answerRegion.drawingArea.text, '作图处')
+      familyContractId: 'application-writing' }).answerRegion.drawingArea.text, '（做图处）')
   }
   const old = loadPaperForConsumptionSync({ paperId: ref.paperId, version: 'v1',
     consumerContract: { id: oldConsumer.consumerId, version: oldConsumer.version, digest: oldConsumer.contractDigest } }, store)

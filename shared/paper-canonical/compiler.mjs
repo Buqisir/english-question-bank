@@ -2500,7 +2500,10 @@ function applicationWritingSourceSpanRefs(variant, content, capture, target) {
   if (drawing) {
     const observation = capture.observations.find(item => item.observationId === drawing.authorityObservationRef)
     if (observation && target.kind === 'drawing_area' && target.id === drawing.drawingAreaId) {
-      return [observation.sourceSpanId]
+      return [observation.sourceSpanId, ...capture.observations.filter(item =>
+        item.kind === 'application_structured_answer_region'
+        && item.value?.groupId === observation.value.groupId
+        && item.value?.drawingAreaId === drawing.drawingAreaId).map(item => item.sourceSpanId)]
     }
   }
   if (target.kind === 'content_node') {
