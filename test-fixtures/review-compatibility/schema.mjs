@@ -21,6 +21,40 @@ function database(file = ':memory:') {
 }
 
 export async function verifyReviewCompatibilitySchema(root, pass) {
+  for (const version of ['v1', 'v2']) {
+    const reference = database()
+    if (version === 'v1') reference.exec(reviewCompatibilityV1Sql)
+    else ensureReviewCompatibilityShape(reference)
+    const objects = reference.prepare("SELECT type,name,sql FROM sqlite_master WHERE tbl_name LIKE 'review_%' AND sql IS NOT NULL").all()
+    const names = {
+      tables: new Set(objects.filter(row => row.type === 'table').map(row => row.name).concat('import_review_revisions')),
+      indexes: new Set(objects.filter(row => row.type === 'index').map(row => row.name)),
+      columns: new Set(['id', ...objects.filter(row => row.type === 'table')
+        .flatMap(row => reference.prepare(`PRAGMA table_xinfo("${row.name}")`).all().map(column => column.name))]),
+    }
+    reference.close()
+    for (const surface of ['tables', 'indexes', 'columns', 'all']) {
+      for (const style of ['upper', 'mixed']) {
+        const identifiers = surface === 'all' ? new Set(Object.values(names).flatMap(set => [...set])) : names[surface]
+        const changeCase = token => style === 'upper' ? token.toUpperCase()
+          : [...token].map((letter, i) => i % 2 ? letter.toLowerCase() : letter.toUpperCase()).join('')
+        const ddl = objects.map(row => row.sql).join(';\n').replace(
+          /'(?:''|[^'])*'|[A-Za-z_][A-Za-z_0-9]*/g,
+          token => identifiers.has(token) ? changeCase(token) : token)
+        const db = database()
+        try {
+          db.exec(ddl)
+          ensureReviewCompatibilityShape(db)
+          const once = schema(db)
+          ensureReviewCompatibilityShape(db)
+          assert.deepEqual(schema(db), once)
+          assert.equal(readReviewCompatibilitySchemaStatus(db).legacyPresent, version === 'v1')
+          integrity(db)
+          pass(`${version} ${surface} ${style}: SQLite-equivalent identifier casing migrates and restarts`)
+        } finally { db.close() }
+      }
+    }
+  }
   for (const state of ['missing', 'empty-v1', 'nonempty-v1']) {
     const db = database()
     try {
@@ -69,6 +103,13 @@ export async function verifyReviewCompatibilitySchema(root, pass) {
     ['missing-check', null, 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
     ['wrong-fk', null, 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
     ['wrong-primary-key', null, 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
+    ['wrong-column-name', 'ALTER TABLE review_subject RENAME COLUMN subject_digest TO subject_fingerprint', 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
+    ['wrong-type', null, 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
+    ['missing-not-null', null, 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
+    ['extra-default', null, 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
+    ['changed-literal-case', null, 'REVIEW_COMPATIBILITY_SCHEMA_UNKNOWN'],
+    ['wrong-index-order', 'DROP INDEX idx_review_compatibility_lookup; CREATE INDEX idx_review_compatibility_lookup ON review_compatibility(revision_id,target_build_id,comparator_version,attempt_no ASC)', 'REVIEW_COMPATIBILITY_SCHEMA_INDEX_CONFLICT'],
+    ['wrong-collation', 'DROP INDEX idx_review_compatibility_lookup; CREATE INDEX idx_review_compatibility_lookup ON review_compatibility(revision_id COLLATE NOCASE,target_build_id,comparator_version,attempt_no DESC)', 'REVIEW_COMPATIBILITY_SCHEMA_INDEX_CONFLICT'],
   ]
   for (const [label, sql, code] of cases) {
     const db = database()
@@ -77,6 +118,10 @@ export async function verifyReviewCompatibilitySchema(root, pass) {
       if (label === 'missing-check') ddl = ddl.replace("CHECK(subject_version = 'review-content-subject-v1')", '')
       if (label === 'wrong-fk') ddl = ddl.replace('REFERENCES import_review_revisions(id)', 'REFERENCES import_review_revisions(id) ON DELETE CASCADE')
       if (label === 'wrong-primary-key') ddl = ddl.replace('revision_id TEXT PRIMARY KEY', 'revision_id TEXT UNIQUE')
+      if (label === 'wrong-type') ddl = ddl.replace('subject_digest TEXT NOT NULL', 'subject_digest BLOB NOT NULL')
+      if (label === 'missing-not-null') ddl = ddl.replace('subject_digest TEXT NOT NULL', 'subject_digest TEXT')
+      if (label === 'extra-default') ddl = ddl.replace('subject_digest TEXT NOT NULL', "subject_digest TEXT NOT NULL DEFAULT 'unexpected'")
+      if (label === 'changed-literal-case') ddl = ddl.replaceAll('review-content-subject-v1', 'REVIEW-CONTENT-SUBJECT-V1')
       db.exec(ddl)
       if (sql) db.exec(sql)
       integrity(db)

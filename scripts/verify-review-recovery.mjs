@@ -13,6 +13,7 @@ import { createImportReviewStore } from '../server/import-review/importReviewSto
 import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 import { installV1Subject } from '../test-fixtures/review-compatibility/schema-v1.mjs'
 import { verifyHistoricalReviewTargets } from '../test-fixtures/review-compatibility/historical-targets.mjs'
+import { verifyReviewRolloutObservation } from '../test-fixtures/review-compatibility/rollout.mjs'
 import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCompatibilitySchema.mjs'
 import { appendReviewCompatibility, createReviewCompatibilityStore, captureReviewCompatibilitySnapshot } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { createAutomaticReviewSubjectBackfillStore, reviewBackfillInputToken, readBackfillRetryState } from '../server/import-review/automaticReviewSubjectBackfill.mjs'
@@ -38,6 +39,7 @@ const dbRun = (file, fn) => {
   try { return fn(db) } finally { db.close() }
 }
 try {
+  await verifyReviewRolloutObservation(pass)
   for (const idleBackfill of [false, true]) {
     const started = []
     let completed, failed

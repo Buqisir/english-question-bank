@@ -53,6 +53,8 @@ base 变化后重新计算，不能照抄旧候选的 digest。
 下列命令只发 **一次 GET**，通过既有 Agent token 环境注入鉴权，不打印 token。
 在有当前读取授权的操作上下文中执行；`EQB_OBSERVE=list` 或 `canary`，两次调用间
 至少隔 30 秒；不加自动重试。输出仅身份/小状态，不输出题文。
+canary 读取前将本次 exact release 部署 receipt 的 `startedAt` 原值放入
+`EQB_DEPLOY_STARTED_AT`。该维护窗口起点只区分新凭据与复用凭据，不决定 equal 是否有效。
 
 ```bash
 EQB_OBSERVE=canary node --input-type=module <<'JS'
@@ -63,6 +65,10 @@ if (!token) throw new Error('Use the existing authorized Agent credential route'
 const base = 'https://eqbank.cc/api/import-agent-reviews'
 const paperId = 'paper-mock-zj-ningbo-2026-mar'
 const revisionId = 'rev-72139a1b-56e4-4e70-a97d-df595300c217'
+const deploymentStartedAt = process.env.EQB_DEPLOY_STARTED_AT
+if (kind === 'canary' && !Number.isFinite(Date.parse(deploymentStartedAt))) {
+  throw new Error('EQB_DEPLOY_STARTED_AT must be the exact deployment receipt startedAt')
+}
 const started = Date.now()
 const response = await fetch(kind === 'list' ? base : `${base}/papers/${paperId}`, {
   headers: { authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(10000),
@@ -71,8 +77,20 @@ if (!response.ok) throw new Error(`Observation HTTP ${response.status}; stop, do
 const value = await response.json()
 if (kind === 'canary') {
   if (value.latestRevisionId !== revisionId) throw new Error('Canary superseded: choose and locally rehearse a new exact revision')
+  const c = value.compatibility || {}
+  // The authenticated API validates the persisted attempt against its current
+  // trusted target and subject; an old target equal cannot grant these flags.
+  const validEqual = c.result === 'equal' && c.reasonCode === 'CONTENT_EQUAL' && c.pending === false
+    && c.eligible === true && c.guard === 'content_binding' && c.fallback === false
+    && /^sha256:[a-f0-9]{64}$/.test(c.targetBuildId || '')
+    && c.subjectDigest === 'sha256:24d9c91ce48eaf7664ac90721dbe281cf6ce0c88d4b55c7b43a3e004c85bc595'
+    && Number.isInteger(c.attemptNo) && c.attemptNo >= 1 && Number.isFinite(Date.parse(c.checkedAt))
+  const comparisonEvidence = !validEqual ? 'NOT_VERIFIED_EQUAL'
+    : Date.parse(c.checkedAt) >= Date.parse(deploymentStartedAt)
+      ? 'DEPLOYMENT_WINDOW_EQUAL' : 'REUSED_VERIFIED_EQUAL'
   console.log(JSON.stringify({ observedAt: new Date().toISOString(), elapsedMs: Date.now() - started,
-    paperId, revisionId, compatibility: value.compatibility, subjectBackfill: value.subjectBackfill }))
+    paperId, revisionId, deploymentStartedAt, comparisonEvidence,
+    compatibility: value.compatibility, subjectBackfill: value.subjectBackfill }))
 } else {
   const papers = value.papers.filter(p => p.reviewKind === 'candidate'
     && ['awaiting_review', 'approved'].includes(p.state))
@@ -96,7 +114,8 @@ JS
 
 ## 3. 频率、证据与失败期限
 
-流量重开时刻为 T0。先记 exact release SHA/部署 receipt/T0，再串行取一次列表和
+流量重开时刻为 T0，**仅作为上线后观察期限起点，不是 checkedAt 的验收下界**。
+先记 exact release SHA/部署 receipt 的 startedAt/T0，再串行取一次列表和
 一次 canary。canary 在队列原位等待，不通过写操作插队，不批准或发布。若已 supersede，
 停止使用该 canary；选一个实际最新 revision 并先完成本地演练，不能默默更换 ID。
 
@@ -111,11 +130,17 @@ JS
 1. `subjectBackfill.enabled=true`，`schema.schemaVersion` 为 v2；若原为 v1，
    `legacyPresent=true`、来源 v1、有效迁移时间及 legacyRowCount 可见。
 2. 当前 target 不再 pending，记录实际 targetBuildId；旧 different 的返回身份可能
-   是旧 target，不能把它认作当前 target。新 canary equal 提供此次可信 target。
+   是旧 target，不能把它认作当前 target。经 API 完整绑定校验的 canary equal 提供此次可信 target。
 3. 基准已建立：该卷 backfill outcome=inserted（或已有 subjectDigest），比较
    subjectDigest 等于上述原基准。`BACKFILL_PENDING` 仅表示基准已提交，尚未 equal。
-4. 新 comparison 已提交：canary 为当前 target 的 `equal/CONTENT_EQUAL`，
-   checkedAt 不早于 T0、attemptNo>=1；仅旧 equal 或进程计算 stdout 均不算。
+4. 有效 comparison 已持久提交：精确 revision、当前可信 target、原 subjectDigest 的
+   `equal/CONTENT_EQUAL`，有效 checkedAt、attemptNo>=1，且满足第 5 条资格标记。
+   checkedAt 在部署 receipt startedAt 之后记为 `DEPLOYMENT_WINDOW_EQUAL`，包括
+   停流量期间候选 API 已启动、worker 已提交而尚未到 T0 的情况；这里只证明维护
+   窗口内产生，release 身份仍由 receipt 与当前 target 绑定，不靠时间推断。
+   若 target 完全相同且 checkedAt 更早，记为 `REUSED_VERIFIED_EQUAL`（复用已验证凭据），
+   同样允许验收。终态 equal 不会被扫描器重算，不要求只读观察制造新时间戳。
+   别的 target 的旧 equal、无效绑定或进程计算 stdout 均不算。
 5. 资格恢复：eligible=true、guard=content_binding、fallback=false。业务 state/
    revision/原批准保持原业务事实；equal 不证明 issues 已解决或已发布。
 6. 全列表 reasonCode/result 分布、NOT_CHECKED/BACKFILL_PENDING/pending 总量逐次
@@ -139,13 +164,20 @@ JS
 确定性缺证据、comparison 与基准/当前 target 不符、fallback 冒充资格恢复、健康失败。
 canary 尚未轮到不等于失败；它轮到后出现终态 unknown 则失败。
 `TARGET_IDENTITY_PENDING/UNAVAILABLE/INVALID` 连续 5 分钟未恢复，或首 15 分钟没有
-任何 checkedAt/inserted/equal 变化，判“未开始处理”失败；其后任意 15 分钟完全
-无进展也失败，先检查 leader/activity/低磁盘等既有暂停原因，不清锁、不热重试。
+任何 checkedAt/inserted/equal 变化且仍有待处理对象，判“未开始处理”失败；其后仍有
+待处理对象且任意 15 分钟完全无进展也失败，先检查 leader/activity/低磁盘等既有
+暂停原因，不清锁、不热重试。已全部达到可解释终态的队列不要求额外重算来制造进展。
 新增 exhausted 或三次资源比较重试耗尽，立即记录失败，不等 48 小时。
 12 小时仍有从未检查的 pending、或 48 小时仍有瞬态 pending，执行代码回退决策。
 
 单卷 equal 仅证明该卷；要交付恢复结果，还需列表所有计划对象都有可解释的最终
 状态。证据完整性不能由 schema 安全替代，这是取消上线前生产抽样的剩余可用性风险。
+
+离线验收示例：receipt startedAt=`2026-10-21T01:00:00Z`，候选 worker 于
+`01:04:00Z` 提交当前 target equal，T0=`01:05:00Z`；`01:06:00Z` 的只读观察
+返回 `DEPLOYMENT_WINDOW_EQUAL`，无需重算。若同一可信 target 的有效 equal 为前一日，
+返回 `REUSED_VERIFIED_EQUAL`，不冒称由新 release 产生。对应离线 smoke 直接执行
+本节原命令，覆盖这两类凭据及无效/旧身份资格拒绝，不发送网络请求。
 
 ## 4. 失败后的受支持操作
 

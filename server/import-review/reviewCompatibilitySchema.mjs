@@ -90,18 +90,27 @@ function normalizedSql(sql, name) {
   const value = tokens(sql).join(' ').replace(' if not exists ', ' ')
   return name === legacyName ? value.replace(legacyName, 'review_subject') : value
 }
+// SQLite folds ASCII identifiers only. Do not normalize literals, defaults,
+// types, collations or any other structural/constraint values from PRAGMAs.
+const identifier = value => typeof value === 'string'
+  ? value.replace(/[A-Z]/g, letter => letter.toLowerCase()) : value
+const identifiers = (row, keys) => Object.fromEntries(Object.entries(row)
+  .map(([key, value]) => [key, keys.includes(key) ? identifier(value) : value]))
 function signature(db, name) {
   const row = object(db, name)
   if (!row || row.type !== 'table') return null
   return {
     sql: normalizedSql(row.sql, name),
-    columns: db.prepare(`PRAGMA table_xinfo(${quoted(name)})`).all(),
-    foreignKeys: db.prepare(`PRAGMA foreign_key_list(${quoted(name)})`).all(),
+    columns: db.prepare(`PRAGMA table_xinfo(${quoted(name)})`).all()
+      .map(row => identifiers(row, ['name'])),
+    foreignKeys: db.prepare(`PRAGMA foreign_key_list(${quoted(name)})`).all()
+      .map(row => identifiers(row, ['table', 'from', 'to'])),
     indexes: db.prepare(`PRAGMA index_list(${quoted(name)})`).all().map(index => ({
       // Autoindex names change when renaming, their actual columns must not.
-      name: index.origin === 'c' ? index.name : index.origin,
+      name: index.origin === 'c' ? identifier(index.name) : index.origin,
       unique: index.unique, origin: index.origin, partial: index.partial,
-      columns: db.prepare(`PRAGMA index_xinfo(${quoted(index.name)})`).all(),
+      columns: db.prepare(`PRAGMA index_xinfo(${quoted(index.name)})`).all()
+        .map(row => identifiers(row, ['name'])),
     })).sort((a, b) => a.name.localeCompare(b.name)),
   }
 }
