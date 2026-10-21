@@ -14,7 +14,8 @@ import { inspectSealedReviewFiles } from './sealedReviewFiles.mjs'
 // constructor above, never a request body. Missing old frozen products remain
 // unknown rather than creating a substitute historical baseline.
 export function finalizeContentSubject(directory, revision, projection) {
-  if (!revision.manifest?.files?.some(file => file.path === 'products/manifest-v1.json')) {
+  if (!Array.isArray(revision.manifest?.files)
+    || !revision.manifest.files.some(file => file?.path === 'products/manifest-v1.json')) {
     return { ok: false, reasonCode: 'MISSING_FROZEN_PRODUCTS' }
   }
   const payload = buildProductPreviewPayload(revision, projection)
