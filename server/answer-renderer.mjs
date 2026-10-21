@@ -2,6 +2,21 @@ import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { assertSourceReferences, sourceReferenceBlocks } from './paper-import/sourceReferences.mjs'
+import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedPackageAdapter.mjs'
+import { digestJson } from '../shared/paper-canonical/stable.mjs'
+import { sourceReferenceFigurePresentation } from './paper-import/sourceReferencePresentation.mjs'
+
+function assertAnswerSource(materialization, sourceInput) {
+  if (materialization.documents) {
+    const issues = validateNck1SourceMaterialization(materialization)
+    if (issues.length) throw new Error(`Answer source is invalid: ${issues[0].code}`)
+  } else {
+    const derived = deriveNck1AnalyzedPackageBundle(sourceInput)
+    if (derived.issues.length || digestJson(derived.materialization) !== digestJson(materialization)) {
+      throw new Error('Answer source differs from the exact sealed analyzed package')
+    }
+  }
+}
 
 function escapeHtml(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;')
@@ -31,7 +46,11 @@ function rangeTable(groups) {
   }).join('')}</tr></tbody></table>`
 }
 
-function referenceSection(group, kind, starters = [], labelOverride = null) {
+function referenceNumber(number) {
+  return ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'][number - 1] ?? ` ${number}`
+}
+
+function referenceSection(group, kind, starters = [], labelOverride = null, namespace = null) {
   const section = group[kind]
   const label = labelOverride ?? (kind === 'essays'
     ? group.taskType === 'application' ? '第一节（满分15分）' : '第二节（满分25分）'
@@ -48,7 +67,9 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
       const prefix = sectionPrefix(entry.sourceLabel)
       const sourceLabel = prefix
         ? `<span class="writing-section-source">${textHtml(prefix[1])}</span><span>${textHtml(prefix[2])}</span>`
-        : textHtml(entry.sourceLabel ?? `源参考${section.entries.length > 1 ? ` ${index + 1}` : ''}`)
+        : textHtml(entry.sourceLabel ?? (kind === 'essays'
+          ? `参考范文${section.entries.length > 1 ? referenceNumber(index + 1) : ''}`
+          : `源参考${section.entries.length > 1 ? ` ${index + 1}` : ''}`))
       const labelHtml = `<h3 class="reference-label" data-reference-label="${escapeHtml(entry.referenceId)}">${sourceLabel}</h3>`
       const blocks = sourceReferenceBlocks(entry)
       const paragraphs = blocks.map(block => {
@@ -64,7 +85,9 @@ function referenceSection(group, kind, starters = [], labelOverride = null) {
           ? starters.map(value => value.replace(/^Paragraph\s+\d+\s*:\s*/iu, ''))
             .find(value => value && paragraph.text.startsWith(value)) : null
         const prose = starter ? `<em class="continuation-starter">${textHtml(starter)}</em>${textHtml(paragraph.text.slice(starter.length))}` : textHtml(paragraph.text)
-        return `<p class="reference-paragraph reference-paragraph--${paragraph.role}" data-reference-paragraph="${escapeHtml(paragraph.paragraphId)}">${prose}</p>`
+        const figures = kind === 'essays' ? sourceReferenceFigurePresentation(entry, paragraph.paragraphId, namespace)
+          .map(figure => `<figure class="reference-figure" id="${figure.domId}" data-reference-figure="${escapeHtml(figure.figureId)}"><img alt="" src="${figure.dataUrl}" style="width:${figure.widthMm}mm;height:${figure.heightMm}mm"></figure>`).join('') : ''
+        return `<p class="reference-paragraph reference-paragraph--${paragraph.role}" data-reference-paragraph="${escapeHtml(paragraph.paragraphId)}">${prose}</p>${figures}`
       })
       // Keep the section, source label and first source paragraph together.
       // The rest of a long essay can still flow onto subsequent pages.
@@ -86,12 +109,11 @@ ${paragraphs.join('\n')}
 // Owner accepted reference-v2; source approval is a separate boundary.
 export function buildAnswerOnlyHtml({
   paperName, materialization, sourceReferences, sourceDigest, candidateDigest,
-  includeScoring = false, sourceDocuments = null,
+  includeScoring = false, sourceDocuments = null, sourceInput = null,
 }) {
   if (typeof paperName !== 'string' || !paperName.trim()) throw new Error('Owner-provided paper name is required')
-  const materializationIssues = validateNck1SourceMaterialization(materialization)
-  if (materializationIssues.length) throw new Error(`Answer source is invalid: ${materializationIssues[0].code}`)
-  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments })
+  assertAnswerSource(materialization, sourceInput)
+  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments, sourceInput })
   const answers = [...materialization.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber)
   const listening = materialization.listening
   const slice = (first, last) => answers.filter(answer => answer.canonicalNumber >= first && answer.canonicalNumber <= last)
@@ -113,10 +135,11 @@ ${keyTable(slice(56, 65), 5)}</section>`
   const referencesByGroup = new Map(sourceReferences.groups.map(group => [group.groupId, group]))
   const groups = materialization.groups.filter(group => group.writingTask)
   const references = `<h2>第四部分　写作（共两节，满分40分）</h2>`
-    + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters)).join('\n')
+    + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters,
+      null, [materialization.paperId, sourceDigest, candidateDigest])).join('\n')
     + (includeScoring ? groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'scoring')).join('\n') : '')
   const transcripts = listening.state === 'captured'
-    ? `<section data-answer-section="transcripts" aria-label="听力原文">${listening.transcript.map((segment, index) =>
+    ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${listening.transcript.map((segment, index) =>
       `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
     ).join('\n')}</section>`
     : ''
@@ -140,8 +163,7 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
     const { materialization, sourceReferences } = source
     if (detail.paperId !== materialization.paperId) throw new Error('选中的题组与答案源不属于同一卷')
     if (!validated.has(source)) {
-      const issues = validateNck1SourceMaterialization(materialization)
-      if (issues.length) throw new Error(`Answer source is invalid: ${issues[0].code}`)
+      assertAnswerSource(materialization, source.sourceInput)
       assertSourceReferences({ ...source, sidecar: sourceReferences })
       validated.add(source)
     }
@@ -152,7 +174,8 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
       if (!Array.isArray(detail.questions) || detail.questions.length) throw new Error('Writing Task 不能产生 Questions')
       const reference = sourceReferences.groups.find(reference => reference.groupId === group.groupId)
       return `<h2>第${index + 1}题组　${labels[group.writingTask.taskType]}</h2>`
-        + referenceSection(reference, 'essays', group.writingTask.starters, '源参考范文')
+        + referenceSection(reference, 'essays', group.writingTask.starters, '参考范文',
+          [materialization.paperId, source.sourceDigest, source.candidateDigest])
     }
     if (listening && (materialization.listening.state !== 'captured' || canonicalGroup?.groupId !== detail.id
       || canonicalGroup.paperId !== materialization.paperId || canonicalGroup.groupType !== 'listening')) {
@@ -184,7 +207,8 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
   const transcriptHtml = [...transcripts.values()].map((segment, index) =>
     `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
   ).join('\n')
-  return answerDocument(paperName, content + transcriptHtml)
+  return answerDocument(paperName, content + (transcriptHtml
+    ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${transcriptHtml}</section>` : ''))
 }
 
 function answerDocument(paperName, content) {
@@ -233,6 +257,8 @@ p{margin:0;orphans:2;widows:2;overflow-wrap:break-word}
 .reference-table{width:100%;border-collapse:collapse;table-layout:auto;margin:6pt 0}
 .reference-table td{border:0.35pt solid currentColor;padding:0 8pt;vertical-align:top;overflow-wrap:anywhere}
 .reference-table tr{break-inside:avoid}
+.reference-figure{margin:6pt 0;break-inside:avoid;page-break-inside:avoid}
+.reference-figure img{display:block;max-width:100%;max-height:60mm;object-fit:contain;object-position:left center}
 .source-absent{color:${paperSurfaceTokens.paperMuted}}
 .transcript-label{font-weight:700;margin-top:13pt}
 .transcript{white-space:normal}

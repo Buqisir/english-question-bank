@@ -324,6 +324,75 @@ async function runPhaseB(browser) {
   const pageErrors = []
   const previewRequests = []
   const startedAt = Date.now()
+  // Observe the browser's own fetch/JSON boundary, including requests that
+  // React later discards. A head-only marker lets us identify the response
+  // actually adopted by srcDoc without changing page content or layout.
+  await page.addInitScript(() => {
+    if (window !== window.top) return
+    const state = window.__a3Pagination = { requests: [], successfulPatches: 0, loads: [] }
+    const log = (event) => console.log(`[A3 pagination] ${JSON.stringify(event)}`)
+    const nativeFetch = window.fetch.bind(window)
+    window.fetch = async (input, options) => {
+      const url = new URL(input instanceof Request ? input.url : input, location.href)
+      const method = (options?.method ?? (input instanceof Request ? input.method : 'GET')).toUpperCase()
+      const pagination = /^\/api\/draft-papers\/[^/]+\/pagination$/.test(url.pathname) && method === 'GET'
+      const request = pagination ? {
+        id: state.requests.length + 1, path: url.pathname,
+        patch: state.successfulPatches, issuedAt: Date.now(),
+      } : null
+      if (request) {
+        state.requests.push(request)
+        log({ event: 'issued', ...request })
+      }
+      try {
+        const response = await nativeFetch(input, options)
+        if (method === 'PATCH' && /^\/api\/draft-papers\/[^/]+(?:\/items\/[^/]+)?$/.test(url.pathname) && response.ok) {
+          state.successfulPatches += 1
+          log({ event: 'patch succeeded', patch: state.successfulPatches, at: Date.now() })
+        }
+        if (request) {
+          request.status = response.status
+          const nativeJson = response.json.bind(response)
+          response.json = async () => {
+            try {
+              const data = await nativeJson()
+              if (typeof data.paginatedHtml === 'string') {
+                data.paginatedHtml = data.paginatedHtml.replace('</head>',
+                  `<meta name="a3-qa-pagination-request" content="${request.id}"></head>`)
+              }
+              return data
+            } finally {
+              request.finishedAt = Date.now()
+              log({ event: 'completed', ...request, duration: request.finishedAt - request.issuedAt })
+            }
+          }
+        }
+        return response
+      } catch (error) {
+        if (request) {
+          request.finishedAt = Date.now()
+          request.failure = String(error)
+          log({ event: 'failed', ...request })
+        }
+        throw error
+      }
+    }
+    document.addEventListener('load', (event) => {
+      if (!(event.target instanceof HTMLIFrameElement)) return
+      const doc = event.target.contentDocument
+      const requestId = Number(doc?.querySelector('meta[name="a3-qa-pagination-request"]')?.content)
+      const load = {
+        requestId, at: Date.now(), readyState: doc?.readyState,
+        fonts: doc?.fonts.status, pages: doc?.querySelectorAll('.preview-page').length,
+        a3: Boolean(doc?.querySelector('.a3-imposition-wrap')),
+      }
+      state.loads.push(load)
+      log({ event: 'iframe loaded', ...load })
+    }, true)
+  })
+  page.on('console', (message) => {
+    if (message.text().startsWith('[A3 pagination]')) console.log(message.text())
+  })
   // Automatic content-reorder search competes with repagination after every
   // click. It has its own real E2E; this test keeps manual reordering, actual
   // pagination and seam suggestions live while isolating that background job.
@@ -460,30 +529,50 @@ async function runPhaseB(browser) {
 
     // Products hide stale content after a mutation. Scroll/anchor assertions
     // must target the new rendered document, not its loading placeholder.
-    async function waitForRevisedA3Preview() {
-      const response = await page.waitForResponse((response) =>
-        new URL(response.url()).pathname === `/api/draft-papers/${draftId}/pagination`
-        && response.request().method() === 'GET', { timeout: 180_000 })
-      if (!response.ok()) throw new Error(`Revised pagination failed: HTTP ${response.status()}`)
-      const responseError = await response.finished()
-      if (responseError) throw responseError
-      await page.waitForFunction(() => {
+    async function waitForRevisedA3Preview(patch, deadline) {
+      // An optimistic GET (or the A3-toggle GET) can finish after PATCH while
+      // belonging to an obsolete render. Require issuance AFTER PATCH success,
+      // and the newest such response to be adopted by the real frontend.
+      // Body delivery + React adoption share the original pagination budget;
+      // only then does the unchanged iframe load/layout budget begin.
+      const adopted = await page.waitForFunction(({ patch, pathname }) => {
+        const latest = window.__a3Pagination.requests
+          .filter((request) => request.path === pathname && request.patch >= patch).at(-1)
+        const frame = document.querySelector('.draft-a4-sheet iframe')
+        return latest?.finishedAt && latest.status === 200
+          && frame?.srcdoc.includes(`name="a3-qa-pagination-request" content="${latest.id}"`)
+          && latest.id
+      }, { patch, pathname: `/api/draft-papers/${draftId}/pagination` },
+      { timeout: Math.max(1, deadline - Date.now()) })
+      const requestId = await adopted.jsonValue()
+      await adopted.dispose()
+      const ready = await page.waitForFunction((requestId) => {
+        const state = window.__a3Pagination
         const doc = document.querySelector('.draft-a4-sheet iframe')?.contentDocument
-        return doc?.readyState === 'complete' && doc.fonts.status === 'loaded'
+        return state.requests.at(-1)?.id === requestId
+          && state.loads.some((load) => load.requestId === requestId)
+          && doc?.querySelector('meta[name="a3-qa-pagination-request"]')?.content === String(requestId)
+          && doc.readyState === 'complete' && doc.fonts.status === 'loaded'
           && doc.querySelector('.a3-imposition-wrap') && doc.querySelectorAll('.preview-page').length >= 3
-      }, undefined, { timeout: 15_000 })
+          && { event: 'iframe ready', requestId, at: Date.now(), readyState: doc.readyState,
+            fonts: doc.fonts.status, pages: doc.querySelectorAll('.preview-page').length, a3: true }
+      }, requestId, { timeout: 15_000 })
+      console.log(`[A3 pagination] ${JSON.stringify(await ready.jsonValue())}`)
+      await ready.dispose()
     }
 
+    const reorderPatch = await page.evaluate(() => window.__a3Pagination.successfulPatches + 1)
+    const reorderDeadline = Date.now() + 180_000
     const reorderMutation = page.waitForResponse(
-      (response) => response.url().includes('/api/draft-papers/') && response.request().method() === 'PATCH',
+      (response) => new URL(response.url()).pathname === `/api/draft-papers/${draftId}`
+        && response.request().method() === 'PATCH',
       { timeout: 10_000 },
     )
     await firstGroupActions.getByRole('button', { name: '更多题组操作' }).click()
-    const reorderedPreview = waitForRevisedA3Preview()
     await firstGroupActions.getByRole('button', { name: '下移' }).click()
     const reorderResponse = await reorderMutation
     assert('real click on 下移 menu action in A3 mode triggers a successful PATCH', reorderResponse.ok(), String(reorderResponse.status()))
-    await reorderedPreview
+    await waitForRevisedA3Preview(reorderPatch, reorderDeadline)
 
     // ── Real click: rail item scrolls the desk to the target group's face ──
     const scrollYBefore = await page.evaluate(() => window.scrollY)
@@ -509,16 +598,18 @@ async function runPhaseB(browser) {
     // ── Seam suggestion badge (if the fixture produced one): real click ──
     const seamBadgeCount = await page.locator('.draft-seam-suggestion').count()
     if (seamBadgeCount > 0) {
+      const seamPatch = await page.evaluate(() => window.__a3Pagination.successfulPatches + 1)
+      const seamDeadline = Date.now() + 180_000
       const seamMutation = page.waitForResponse(
-        (response) => response.url().includes('/api/draft-papers/') && response.request().method() === 'PATCH',
+        (response) => new URL(response.url()).pathname.startsWith(`/api/draft-papers/${draftId}/items/`)
+          && response.request().method() === 'PATCH',
         { timeout: 10_000 },
       )
-      const seamPreview = waitForRevisedA3Preview()
       await page.locator('.draft-seam-suggestion').first().click()
       const seamResponse = await seamMutation
       assert('real click on a seam suggestion pill triggers a successful pageBreakBefore PATCH', seamResponse.ok(), String(seamResponse.status()))
       pass('seam suggestion pill is clickable and wired to the same PATCH as manual 前置分页')
-      await seamPreview
+      await waitForRevisedA3Preview(seamPatch, seamDeadline)
     } else {
       console.log('  (no seam suggestion in this fixture — skipping seam-click assertion, not a failure)')
     }
@@ -595,6 +686,7 @@ async function runPhaseB(browser) {
   } catch (error) {
     const state = await page.evaluate(() => ({
       readyState: document.readyState,
+      pagination: window.__a3Pagination,
       text: document.body.innerText,
       iframeCount: document.querySelectorAll('.draft-a4-sheet iframe').length,
       frames: [...document.querySelectorAll('.draft-a4-sheet iframe')].map((frame) => ({

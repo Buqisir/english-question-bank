@@ -68,6 +68,7 @@ const registry = {
   'scripts/verify-universal-nck1-source-only-intake.mjs',
   'scripts/verify-universal-nck1-source-only-boundaries.mjs',
   'scripts/verify-import-review-ocr-confirmation.mjs',
+  'scripts/verify-import-review-ocr-worker.mjs',
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-import-review-target.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
@@ -181,7 +182,8 @@ const registry = {
   'scripts/verify-i13-grammar-fill-analysis.mjs',
   'scripts/verify-i14-grammar-fill-analysis-surface.mjs',
   'scripts/verify-i15-grammar-fill-blank-focus.mjs',
-  'scripts/verify-i16a-teaching-dimension-search.mjs',
+  // I16-A's gitignored corpus and list-groups-perf's real local DB are manual
+  // audits, not reproducible daily checks. Prerequisites: scripts/README.md.
   'scripts/verify-i16b-theme-labels-backfill.mjs',
   'scripts/verify-grammar-facets-v2.mjs',
   'scripts/verify-similar-v2.mjs',
@@ -215,7 +217,6 @@ const registry = {
   'scripts/verify-sentence-analysis-browser.mjs',
   'scripts/verify-paper-dictionary.mjs',
   'scripts/verify-vocabulary-notebook.mjs',
-  'scripts/verify-list-groups-perf.mjs',
   'scripts/verify-add-to-draft-feel.mjs',
   'scripts/verify-draft-workbench-visual-unify.mjs',
   'scripts/verify-my-space-shelf.mjs',
@@ -300,17 +301,18 @@ const sentenceAnalysisScripts = uniqueRegistered([
   'scripts/verify-sentence-analysis-browser.mjs',
 ])
 paperScripts.push(...sentenceAnalysisScripts.filter((script) => !paperScripts.includes(script)))
-// CI implementation changes select all; ordinary feature work does not need
-// process/scheduler/policy metatests. Exclude them from the derived set, rather
+// Full retains process/scheduler/policy metatests and the OCR responsiveness
+// diagnostic; ordinary feature work excludes them from the derived set, rather
 // than only omitting an explicit list entry that the registry would add back.
-const ciMetaScripts = new Set([
+const fullOnlyScripts = new Set([
   'scripts/verify-verification-command-runner.mjs',
   'scripts/verify-verification-scheduler.mjs',
   'scripts/verify-ci-pr-plan.mjs',
+  'scripts/verify-import-review-ocr-worker.mjs',
 ])
 const featureScripts = uniqueRegistered([
   ...registry.scripts.filter(
-    (script) => !ciMetaScripts.has(script)
+    (script) => !fullOnlyScripts.has(script)
       && (sentenceAnalysisScripts.includes(script)
         || (!paperScripts.includes(script) && !securityScripts.includes(script))),
   ),

@@ -199,7 +199,61 @@ function continuationContractChecks() {
   console.log('PASS v1/v2 continued paragraph provenance, legacy output, single-p rendering and fail-closed mutations')
 }
 
+function answerLabelChecks() {
+  const labels = html => [...html.matchAll(/<h3 class="reference-label"[^>]*>([\s\S]*?)<\/h3>/gu)]
+    .map(match => match[1])
+  for (const structuredScoring of [false, true]) {
+    const input = fixture({ structuredScoring })
+    const original = structuredClone(input.sourceReferences)
+    const html = buildAnswerOnlyHtml(input)
+    assert.deepEqual(labels(html), ['For the proposal', 'Against the proposal', '参考范文'],
+      'source-printed labels stay exact; a single unlabeled essay gets no number')
+    assert.deepEqual(input.sourceReferences, original, 'display labels do not rewrite source fields')
+    assert.match(html, /aria-label="听力原文"><h2>听力原文<\/h2><article[^>]+><h3 class="transcript-label">Text 1<\/h3>/u)
+    assert.equal((html.match(/<h2>听力原文<\/h2>/gu) || []).length, 1)
+
+    const entries = input.sourceReferences.groups[0].essays.entries
+    for (const entry of entries) {
+      entry.sourceLabel = null
+      entry.labelSource = null
+    }
+    assert.deepEqual(labels(buildAnswerOnlyHtml(input)), ['参考范文一', '参考范文二', '参考范文'])
+    // Number by source order even when some entries carry their own label.
+    entries[0].sourceLabel = original.groups[0].essays.entries[0].sourceLabel
+    entries[0].labelSource = original.groups[0].essays.entries[0].labelSource
+    assert.deepEqual(labels(buildAnswerOnlyHtml(input)), ['For the proposal', '参考范文二', '参考范文'])
+    entries[0].sourceLabel = null
+    entries[0].labelSource = null
+    for (let number = 3; number <= 11; number++) {
+      const entry = structuredClone(entries[1])
+      entry.referenceId = `reference:variant:${number}`
+      entry.paragraphs.forEach((paragraph, index) => { paragraph.paragraphId = `paragraph:variant:${number}:${index}` })
+      entries.push(entry)
+    }
+    assert.deepEqual(labels(buildAnswerOnlyHtml(input)).slice(8, 11), ['参考范文九', '参考范文十', '参考范文 11'])
+    const group = input.materialization.groups.find(group => group.writingTask?.taskType === 'application')
+    const item = { source: input, detail: { id: group.groupId, paperId: input.materialization.paperId, questions: [] } }
+    const assembled = buildAssembledAnswerOnlyHtml({ paperName: input.paperName, items: [item] })
+    assert.deepEqual(labels(assembled), labels(buildAnswerOnlyHtml(input)).slice(0, 11))
+    assert(!assembled.includes('源参考'))
+    assert(!assembled.includes('<h2>听力原文</h2>'), 'writing-only selections do not invent listening')
+
+    const questions = [1, 2, 3, 4, 5].map(number => ({ questionId: `question:listening:${number}` }))
+    const listeningItem = { source: input,
+      detail: { id: 'group:listening:first', paperId: input.materialization.paperId, groupType: 'listening',
+        questions: questions.map(question => ({ id: question.questionId })) },
+      canonicalGroup: { groupId: 'group:listening:first', paperId: input.materialization.paperId,
+        groupType: 'listening', questions } }
+    const listeningHtml = buildAssembledAnswerOnlyHtml({ paperName: input.paperName, items: [listeningItem] })
+    assert.match(listeningHtml, /aria-label="听力原文"><h2>听力原文<\/h2><article[^>]+><h3 class="transcript-label">Text 1<\/h3>/u)
+    assert.equal((listeningHtml.match(/<h2>听力原文<\/h2>/gu) || []).length, 1)
+  }
+  assert(!buildAnswerOnlyHtml(fixture({ listening: false })).includes('<h2>听力原文</h2>'))
+  console.log('PASS v1/v2 source labels, single/multiple essay numbering and whole/assembled transcript headings')
+}
+
 function contractChecks() {
+  answerLabelChecks()
   continuationContractChecks()
   const input = fixture()
   const validate = sidecar => validateSourceReferences({ ...input, sidecar })

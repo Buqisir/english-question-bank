@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import './lib/reviewTestLockRoot.mjs'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
@@ -7,9 +8,11 @@ import { performance } from 'node:perf_hooks'
 import { DatabaseSync } from 'node:sqlite'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { buildImportReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
-import { finalizeInventory } from '../server/import-review/finalizeComputation.mjs'
+import { finalizeContentSubject, finalizeInventory } from '../server/import-review/finalizeComputation.mjs'
 import { runFinalizeWorker } from '../server/import-review/runFinalizeWorker.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { buildProductPreviewPayload } from '../server/import-review/reviewSubject.mjs'
+import { saveProductPreview as legacySaveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 let makeReviewRoot
@@ -28,6 +31,22 @@ try {
   const directory = fixture.reviewRoot
   const options = { reviewKind: 'candidate', requireAnalyses: true }
   const synchronous = buildImportReviewProjection(directory, options)
+  function assertByteTypes(value) {
+    if (value instanceof Uint8Array) assert.equal(value.constructor, Uint8Array,
+      'native Review source bytes retain their public Uint8Array type')
+    else if (value && typeof value === 'object') Object.values(value).forEach(assertByteTypes)
+  }
+  assertByteTypes(synchronous.sourceInput)
+  assert.equal(sha256(Buffer.from(legacySaveProductPreview.toString())),
+    'sha256:95f750c91a3d18504a1f7eb41746fc5cc8f3af1415803d425b96059f19f97660')
+  let legacyJson
+  const previewRevision = { id: 'rev-preview-byte-parity', bundleDigest: synchronous.candidateDigest }
+  legacySaveProductPreview({ prepare: () => ({ run: (...values) => { legacyJson = values[4] } }) },
+    previewRevision, 'legacy-renderer', synchronous)
+  const currentJson = JSON.stringify(buildProductPreviewPayload(previewRevision, synchronous))
+  assert.deepEqual(Buffer.from(currentJson), Buffer.from(legacyJson),
+    'preview JSON bytes must match the actual 6dc7530b constructor on the same listening fixture')
+  console.log('PASS preview payload JSON bytes match original 6dc7530b constructor')
   const revision = { reviewKind: 'candidate', candidateDigest: synchronous.candidateDigest }
   const worker = await runFinalizeWorker(directory, revision)
   assert.deepEqual(worker.projection, synchronous, 'every field and binary byte must match the synchronous projection')
@@ -74,6 +93,7 @@ try {
   }
 
   const sync = upload('sync')
+  await sync.store.ready()
   const startedSync = performance.now()
   const syncResult = sync.store.finalizeRevision(sync.revision.id)
   const synchronousMs = performance.now() - startedSync
@@ -118,7 +138,57 @@ try {
   for (const field of ['state', 'sourceDigest', 'candidateDigest', 'visibleStructureDigest', 'analysisDigest', 'rendererBuildId']) {
     assert.deepEqual(asyncResult[field], syncResult[field], field)
   }
-  assert.deepEqual(asyncCase.store.projectionForRevision(asyncResult.id).projection, synchronous)
+  assert.deepEqual(asyncCase.store.productPreviewForRevision(asyncResult.id).preview,
+    buildProductPreviewPayload(asyncResult, synchronous))
+  assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'MISSING_FROZEN_PRODUCTS')
+  assert.equal(asyncCase.store.listPapers()[0].compatibility.reasonCode, 'MISSING_FROZEN_PRODUCTS')
+  assert.throws(() => asyncCase.store.projectionForRevision(asyncResult.id),
+    { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' },
+    'a legacy fixture without frozen products retains its original preview but cannot derive live content')
+  assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).eligible, false)
+  assert.equal(asyncCase.store.listPapers()[0].compatibility.eligible, false)
+  assert.throws(() => asyncCase.store.approveRevision(asyncResult.paperId, asyncResult.id,
+    { bundleDigest: asyncResult.bundleDigest }, 'owner'),
+  { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' })
+  assert.throws(() => asyncCase.store.registerPublicationRequest(asyncResult.paperId, {
+    revisionId: asyncResult.id, requestId: 'publication-request-00000000-0000-4000-8000-000000000001',
+    secretHash: sha256('missing-products'),
+  }, 'agent'), { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' })
+  assert.equal(asyncCase.store.getRevision(asyncResult.id).approval, null,
+    'missing frozen products cannot acquire approval through renderer fallback')
+  const evidenceDb = new DatabaseSync(asyncCase.dbPath)
+  try {
+    const evidence = evidenceDb.prepare('SELECT evidence_json FROM review_compatibility WHERE revision_id=?')
+      .get(asyncResult.id).evidence_json
+    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
+      .run('{}', asyncResult.id)
+    assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'BASELINE_UNTRUSTED',
+      'unknown diagnostics without a subject still require intact evidence')
+    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
+      .run(evidence, asyncResult.id)
+    // Historical production manifests may omit `files`; the fallback guard must
+    // treat that as missing frozen products instead of failing the whole list.
+    const manifestJson = evidenceDb.prepare('SELECT manifest_json FROM import_review_revisions WHERE id=?')
+      .get(asyncResult.id).manifest_json
+    const { files: _files, ...withoutFiles } = JSON.parse(manifestJson)
+    for (const [label, files] of [['missing'], ['null', null], ['object', {}], ['string', 'files'], ['number', 1]]) {
+      const malformed = label === 'missing' ? withoutFiles : { ...withoutFiles, files }
+      evidenceDb.prepare('UPDATE import_review_revisions SET manifest_json=? WHERE id=?')
+        .run(JSON.stringify(malformed), asyncResult.id)
+      const listed = asyncCase.store.listPapers()[0]
+      assert.equal(listed.compatibility.eligible, false,
+        `a candidate manifest with ${label} files lists as ineligible instead of throwing`)
+      assert.equal(listed.hasMediaCandidates, false, label)
+      assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).eligible, false, label)
+      assert.equal(asyncCase.store.agentPaperStatus(asyncResult.paperId).compatibility.eligible, false, label)
+      assert.deepEqual(finalizeContentSubject(root, asyncCase.store.getRevision(asyncResult.id), synchronous),
+        { ok: false, reasonCode: 'MISSING_FROZEN_PRODUCTS' }, label)
+      assert.throws(() => asyncCase.store.verifiedFileForRead(asyncResult.id, 'products/manifest-v1.json'),
+        { code: 'IMPORT_REVIEW_NOT_FOUND', status: 404 }, label)
+    }
+    evidenceDb.prepare('UPDATE import_review_revisions SET manifest_json=? WHERE id=?')
+      .run(manifestJson, asyncResult.id)
+  } finally { evidenceDb.close() }
   function preview(dbPath) {
     const db = new DatabaseSync(dbPath, { readOnly: true })
     try {

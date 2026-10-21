@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source-references-v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "sourceDigest",
+    "candidateDigest",
+    "materializationDigest",
+    "groups"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "source-references-v3"
+    },
+    "paperId": {
+      "$ref": "source-references-v1#/properties/paperId"
+    },
+    "sourceDigest": {
+      "$ref": "source-references-v1#/$defs/digest"
+    },
+    "candidateDigest": {
+      "$ref": "source-references-v1#/$defs/digest"
+    },
+    "materializationDigest": {
+      "$ref": "source-references-v1#/$defs/digest"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "groupId",
+          "taskType",
+          "essays",
+          "scoring"
+        ],
+        "properties": {
+          "groupId": {
+            "$ref": "source-references-v1#/$defs/id"
+          },
+          "taskType": {
+            "enum": [
+              "application",
+              "continuation"
+            ]
+          },
+          "essays": {
+            "$ref": "#/$defs/essays"
+          },
+          "scoring": {
+            "$ref": "source-references-v2#/$defs/scoring"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "essays": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "evidence",
+        "entries"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "captured",
+            "not_supplied",
+            "unprocessed"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "source-references-v1#/$defs/source"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "referenceId",
+              "authority",
+              "sourceLabel",
+              "labelSource",
+              "paragraphs"
+            ],
+            "properties": {
+              "referenceId": {
+                "$ref": "source-references-v1#/$defs/id"
+              },
+              "authority": {
+                "const": "source_reference"
+              },
+              "sourceLabel": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                ]
+              },
+              "labelSource": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "source-references-v1#/$defs/source"
+                  }
+                ]
+              },
+              "paragraphs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "paragraphId",
+                    "role",
+                    "text",
+                    "source"
+                  ],
+                  "properties": {
+                    "paragraphId": {
+                      "$ref": "source-references-v1#/$defs/id"
+                    },
+                    "role": {
+                      "enum": [
+                        "title",
+                        "label",
+                        "salutation",
+                        "body",
+                        "closing",
+                        "signature"
+                      ]
+                    },
+                    "text": {
+                      "type": "string",
+                      "pattern": "\\S"
+                    },
+                    "source": {
+                      "$ref": "source-references-v1#/$defs/source"
+                    },
+                    "continuationSources": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "source-references-v1#/$defs/source"
+                      }
+                    }
+                  }
+                }
+              },
+              "figures": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 4,
+                "items": {
+                  "$ref": "#/$defs/figure"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "figure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "figureId",
+        "afterParagraphId",
+        "source",
+        "sourceRegionId",
+        "raster"
+      ],
+      "properties": {
+        "figureId": {
+          "$ref": "source-references-v1#/$defs/id"
+        },
+        "afterParagraphId": {
+          "$ref": "source-references-v1#/$defs/id"
+        },
+        "source": {
+          "allOf": [
+            {
+              "$ref": "source-references-v1#/$defs/source"
+            },
+            {
+              "properties": {
+                "locator": {
+                  "properties": {
+                    "kind": {
+                      "const": "page_region"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "sourceRegionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "raster": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "mediaType",
+            "sha256",
+            "byteLength",
+            "pixelWidth",
+            "pixelHeight",
+            "base64"
+          ],
+          "properties": {
+            "profile": {
+              "const": "source-reference-pdf-crop-v1"
+            },
+            "mediaType": {
+              "const": "image/png"
+            },
+            "sha256": {
+              "$ref": "source-references-v1#/$defs/digest"
+            },
+            "byteLength": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2097152
+            },
+            "pixelWidth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4096
+            },
+            "pixelHeight": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4096
+            },
+            "base64": {
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 2796204
+            }
+          }
+        }
+      }
+    }
+  }
+}

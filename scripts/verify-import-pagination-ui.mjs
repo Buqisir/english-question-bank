@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict'
+import './lib/reviewTestLockRoot.mjs'
 import { readFileSync, mkdirSync } from 'node:fs'
 import { createServer } from 'node:http'
 import path from 'node:path'
 import { chromium } from '../app/node_modules/playwright/index.mjs'
+import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 
 // Owner no longer embeds pagination UI in OPS. PDF selection lives on the real
 // Screen; this fixture guards the compact list, exact links and action states.
 const root = path.resolve(import.meta.dirname, '..')
-const artifactDir = path.join(root, '.amp/in/artifacts/owner-review')
+const artifactDir = process.env.EQB_OWNER_REVIEW_ARTIFACT_DIR || path.join(root, '.amp/in/artifacts/owner-review')
 const paperId = 'paper-owner-review-fixture'
 const revisionId = 'revision-owner-review-fixture'
 const initial = {
@@ -15,6 +17,7 @@ const initial = {
   revisionNumber: 2, state: 'awaiting_review', reviewKind: 'candidate',
   bundleDigest: `sha256:${'a'.repeat(64)}`, rendererBuildId: 'fixture-renderer',
   rendererStale: false, unresolvedCount: 0, promotionState: null,
+  compatibility: { result: 'equal', pending: false, reasonCode: 'CONTENT_EQUAL' },
 }
 let paper = { ...initial }
 let issues = []
@@ -29,6 +32,12 @@ const send = (response, body, type = 'application/json', status = 200) => {
 }
 const server = createServer(async (request, response) => {
   const url = new URL(request.url, 'http://localhost')
+  if (process.argv.includes('--serve') && url.pathname === '/ops/' && url.searchParams.has('compatibility')) {
+    const result = url.searchParams.get('compatibility')
+    assert(['pending', 'equal', 'different', 'unknown'].includes(result))
+    paper = { ...initial, state: 'approved', rendererStale: result === 'equal',
+      compatibility: { result, pending: result === 'pending', reasonCode: result === 'unknown' ? 'MISSING_BASELINE' : undefined } }
+  }
   const file = new Map([
     ['/ops/', ['index.html', 'text/html']], ['/ops/app.js', ['app.js', 'text/javascript']],
     ['/ops/owner-review.js', ['owner-review.js', 'text/javascript']],
@@ -47,6 +56,7 @@ const server = createServer(async (request, response) => {
     const input = JSON.parse(body)
     assert.equal(request.headers['x-eqb-csrf'], 'owner-review')
     if (url.pathname.endsWith('/publish')) {
+      assert.equal(paper.compatibility.result, 'equal')
       assert.equal(input.intent, 'publish')
       assert.equal(input.bundleDigest, initial.bundleDigest)
       assert.equal(input.rendererBuildId, initial.rendererBuildId)
@@ -72,14 +82,23 @@ const server = createServer(async (request, response) => {
       return send(response, { issues })
     }
   }
+  const pdfUrl = `/api/import-review-preview/revisions/${revisionId}/pdf`
+  if (url.pathname === pdfUrl) {
+    if (url.searchParams.has('download')) response.setHeader('content-disposition', 'attachment; filename="frozen-review.pdf"')
+    return send(response, productPdfBytes(1, 'economy8'), 'application/pdf')
+  }
   if (url.pathname === '/') return send(response,
-    '<!doctype html><meta charset="utf-8"><h1>Screen 链接目标（接口夹具）</h1><p>只验证精确路由，不冒充真实卷面。</p>', 'text/html')
+    `<!doctype html><meta charset="utf-8"><h1>Screen 链接目标（接口夹具）</h1>
+    <p>只验证精确路由，不冒充真实卷面。</p>
+    <a href="${pdfUrl}?edition=economy8" target="_blank">查看冻结 PDF</a>
+    <a href="${pdfUrl}?edition=economy8&download=1" download>下载冻结 PDF</a>`, 'text/html')
   send(response, { error: 'Fixture route missing' }, 'application/json', 404)
 })
 await new Promise(resolve => server.listen(process.argv.includes('--serve') ? 5199 : 0, '127.0.0.1', resolve))
 const origin = `http://127.0.0.1:${server.address().port}`
 if (process.argv.includes('--serve')) {
   console.log(`Owner review UI fixture (no real publication) at ${origin}/ops/`)
+  process.once('SIGTERM', () => server.close(() => process.exit(0)))
 } else {
   let browser
   try {
@@ -156,10 +175,47 @@ if (process.argv.includes('--serve')) {
     assert.equal(await publish.count(), 0)
     assert.equal(await row.getByRole('link', { name: '查看已发布' }).count(), 1)
     await page.screenshot({ path: path.join(artifactDir, 'published.png') })
-    paper = { ...initial, rendererStale: true }
+    const messages = {
+      pending: '正在核验预览版本…', equal: '',
+      backfill_pending: '正在核验预览版本…',
+      different: '预览内容有变化，请在 Droid 中核验后重新送审',
+      unknown: '无法核验原预览版本，请在 Droid 中核验后重新送审（缺少原预览记录）',
+    }
+    for (const result of ['pending', 'equal', 'different', 'unknown', 'backfill_pending']) {
+      const backfillPending = result === 'backfill_pending'
+      paper = { ...initial, state: 'approved', rendererStale: result === 'equal',
+        compatibility: { result: backfillPending ? 'unknown' : result, pending: result === 'pending',
+          reasonCode: backfillPending ? 'BACKFILL_PENDING' : 'MISSING_BASELINE' } }
+      await page.reload()
+      await row.getByText('已批准', { exact: true }).waitFor()
+      assert.equal(await publish.isEnabled(), result === 'equal')
+      if (messages[result]) await row.getByText(messages[result], { exact: true }).waitFor()
+      else assert.equal(await row.locator('.owner-review-hint').count(), 0)
+      if (backfillPending) assert.equal(await row.getByText(/重新送审/).count(), 0,
+        'backfill pending shows verification in progress without asking for resubmission')
+      const [frozenScreen] = await Promise.all([
+        page.waitForEvent('popup'), row.getByRole('link', { name: initial.paperName }).click(),
+      ])
+      await frozenScreen.waitForLoadState()
+      const [download] = await Promise.all([
+        frozenScreen.waitForEvent('download'), frozenScreen.getByRole('link', { name: '下载冻结 PDF' }).click(),
+      ])
+      const downloadPath = path.join(artifactDir, `${result}-frozen.pdf`)
+      await download.saveAs(downloadPath)
+      assert.deepEqual(readFileSync(downloadPath), productPdfBytes(1, 'economy8'))
+      await frozenScreen.close()
+      await page.screenshot({ path: path.join(artifactDir, `${result}.png`) })
+    }
+    assert.equal(publishCount, 1, 'blocked compatibility states never issue a publication')
+    paper = { ...initial, compatibility: { result: 'unknown', reasonCode: 'MISSING_BASELINE',
+      fallback: true, guard: 'legacy_renderer', eligible: true, legacyRendererStale: false } }
     await page.reload()
-    await row.getByText('预览版本已过期，请在 Amp 重新送审。').waitFor()
-    assert.equal(await publish.isDisabled(), true)
+    assert.equal(await publish.isEnabled(), true, 'explicit matching-renderer fallback enables Owner publish')
+    assert.equal(await row.locator('.owner-review-hint').count(), 0)
+    paper = { ...initial, compatibility: undefined }
+    await page.reload()
+    await row.waitFor()
+    assert.equal(await publish.isDisabled(), true, 'missing compatibility never falls back to rendererStale')
     paper = { ...initial }
     dropPublishResponse = true
     await page.reload()
@@ -190,7 +246,7 @@ if (process.argv.includes('--serve')) {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
     await page.screenshot({ path: path.join(artifactDir, 'mobile.png') })
     assert.deepEqual(errors, [])
-    console.log('PASS compact Owner list: exact Screen link, return/fix, publish, stale, failed, response-loss and mobile states')
+    console.log('PASS compact Owner list: four compatibility states and unknown/BACKFILL_PENDING preserve approval and frozen PDF downloads; backfill waits without resubmission or publication; exact Screen link, return/fix, publish, failed, response-loss and mobile states')
   } finally {
     releasePublish?.()
     await browser?.close()

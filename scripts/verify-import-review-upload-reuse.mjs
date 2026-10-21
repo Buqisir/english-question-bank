@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import './lib/reviewTestLockRoot.mjs'
 import {
   chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync,
   symlinkSync, unlinkSync, writeFileSync,

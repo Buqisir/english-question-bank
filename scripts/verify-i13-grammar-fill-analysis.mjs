@@ -131,6 +131,18 @@ function assertPromptContract() {
       && prompt.includes('Use `negative-prefix` when context requires a negative prefix'))
   assert('prompt excludes inflection and POS changes from suffix derivation',
     prompt.includes('`suffix-derivation` excludes negative prefixes, comparative/superlative inflections, and POS changes'))
+  const roleSection = prompt.split('### `role` (non-finite only)')[1].split('### `no-hint`')[0]
+  assert('prompt role vocabulary includes appositive with its Chinese meaning',
+    roleSection.includes('`appositive`（同位语）'))
+  assert('prompt controlled non-finite routes include appositive-gerund',
+    /attributive-special-limiter \| attributive-participle \|\s*appositive-gerund \|/.test(prompt))
+  assert('prompt binds appositive route to its role and empty features',
+    prompt.includes('`appositive-gerund` uses `role: "appositive"` and `features: []`'))
+  assert('prompt restricts appositive alternatives to ordinary active doing',
+    prompt.includes('only server-derived ordinary active `doing`')
+      && prompt.includes('Every slash-separated\nalternative must qualify; empty alternatives are rejected'))
+  assert('prompt constrains inherited appositive conversion route',
+    prompt.includes('keep `role: null` and use exactly `["appositive-gerund"]` with\n`non-finite-result`'))
 }
 
 // ============================================================

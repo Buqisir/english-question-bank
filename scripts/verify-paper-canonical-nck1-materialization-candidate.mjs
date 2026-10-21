@@ -45,6 +45,7 @@ import {
   validateDocxParagraphBindings,
 } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { extractDocxDocumentParagraphs } from '../server/paper-canonical/docxSourceAdapter.mjs'
+import { mapSourceEmphasisEdits } from '../server/paper-canonical/sourceEmphasis.mjs'
 import { applySpellingReview, enumerateSpellingTargets, loadSpellingReview, prepareSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY_V4 } from '../server/paper-import/spellingReview.mjs'
 import { buildNck1ReviewConsumption, loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
 import { buildPreprocessingReport } from '../server/paper-import/preprocessingReport.mjs'
@@ -1022,6 +1023,80 @@ const variableResult = applySpellingReview(variableBytes, textEncoder.encode(JSO
 assert.equal(variableResult.groups[0].questions[0].options[0].text, 'We accommodate family.',
   'later offsets refer to original text, even after a length-changing correction; options are not exempt')
 assert.equal(variableResult.answers[0].value, 'has  made', 'untouched answer spacing stays exact')
+
+// Short source excerpts from Heze second mock and Zaozhuang third mock.
+const compoundText = 'eatables like lemon-favoured chocolates'
+const ageText = 'near Moscow, 7-year-year-old Filonenko Rodion'
+function compoundReview(text, before, after, policy = TEXT_REVIEW_POLICY) {
+  const source = { groups: [{ blocks: [{ content: [{ text }] }], writingTask: { material: [text] } }] }
+  const bytes = textEncoder.encode(JSON.stringify(source))
+  const reviewed = prepareSpellingReview(bytes, policy)
+  reviewed.reviewedBy = 'import_agent'
+  reviewed.reviewedAt = report.reviewedAt
+  for (const target of reviewed.targets) {
+    target.decision = 'correct'
+    target.corrections = [{ start: text.indexOf(before), before, after, category: 'spelling',
+      certainty: 'unambiguous', reason: '原印拼写有误，按上下文更正完整词形并保留数字。' }]
+  }
+  return { bytes, reviewed, apply: () => applySpellingReview(bytes, textEncoder.encode(JSON.stringify(reviewed))) }
+}
+for (const policy of ['spelling-only-v1', TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4]) {
+  for (const [text, before, after] of [
+    [compoundText, 'lemon-favoured', 'lemon-flavoured'],
+    [ageText, '7-year-year-old', '7-year-old'],
+    ['😀 Their fanily.', 'fanily', 'family'],
+    ['We dont know.', 'dont', "don't"],
+    ['We dont know.', 'dont', 'don’t'],
+    ['That is its purpose.', 'its', "it's"],
+    ['That is its purpose.', 'its', 'it’s'],
+    ["Their fanily's home.", "fanily's", "family's"],
+    ['Their fanily’s home.', 'fanily’s', 'family’s'],
+    ['fanily', 'fanily', 'family’s'],
+    ["Don't worry.", "Don't", 'Dont'],
+    ['Don’t worry.', 'Don’t', 'Dont'],
+  ]) {
+    const fixture = compoundReview(text, before, after, policy)
+    const result = fixture.apply()
+    const expected = text.replace(before, after)
+    assert.equal(result.groups[0].blocks[0].content[0].text, expected)
+    assert.equal(result.groups[0].writingTask.material[0], expected, 'duplicate representations stay in sync')
+    assert.equal(JSON.parse(new TextDecoder().decode(fixture.bytes)).groups[0].writingTask.material[0], text)
+  }
+}
+for (const [text, before, after] of [
+  [compoundText, 'favoured', 'flavoured'],
+  ['mindless', 'mind', 'mend'],
+  ['7-year-old', '7-year-old', '8-year-old'],
+  ['7-year-old', '7-year-old', 'year-old'],
+  ['year-old', 'year-old', '7-year-old'],
+  ['7-year-old', '7-year-old', '7-year-8-old'],
+  ['07-year-old', '07-year-old', '7-year-old'],
+  ['fanily', 'fanily', 'family!'],
+  ['7', '7', '8'],
+]) {
+  assert.throws(compoundReview(text, before, after).apply, /Spelling review:/)
+}
+for (const mutate of [
+  fixture => { fixture.reviewed.targets[0].corrections[0].start++ },
+  fixture => { fixture.reviewed.targets[0].corrections[0].before = 'lemon-flavoured' },
+  fixture => { fixture.reviewed.targets[0].corrections.push({ ...fixture.reviewed.targets[0].corrections[0] }) },
+]) {
+  const fixture = compoundReview(compoundText, 'lemon-favoured', 'lemon-flavoured')
+  mutate(fixture)
+  assert.throws(fixture.apply, /Spelling review:/)
+}
+const compoundCorrection = compoundReview(compoundText, 'lemon-favoured', 'lemon-flavoured').reviewed.targets[0].corrections[0]
+assert.throws(() => mapSourceEmphasisEdits(compoundText, [{
+  start: compoundCorrection.start + 6,
+  end: compoundCorrection.start + compoundCorrection.before.length,
+  marks: ['underline'],
+}], [compoundCorrection]), /crosses a mark boundary/)
+assert.equal(mapSourceEmphasisEdits(compoundText, [{
+  start: compoundCorrection.start,
+  end: compoundCorrection.start + compoundCorrection.before.length,
+  marks: ['underline'],
+}], [compoundCorrection]).text, compoundText.replace('lemon-favoured', 'lemon-flavoured'))
+
 const textReviewSource = { groups: [{ blocks: [{ content: [{ text: '😀 He braved trails and hardships.' }] }] }],
   answers: [{ value: 'has  made' }], listening: { questions: [{ stem: 'What problem does children have?' }] } }
 const textReviewBytes = textEncoder.encode(JSON.stringify(textReviewSource))
