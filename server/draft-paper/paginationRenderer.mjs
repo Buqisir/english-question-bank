@@ -324,7 +324,7 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
           || box.left < area.left - 1 || box.right > area.right + 1) {
           return { id, reason: 'block exceeds printable page area' }
         }
-        for (const child of [element, ...element.querySelectorAll('td, figcaption, .writing-continuation-row, .writing-starter-line, .canonical-application-given')]) {
+        for (const child of [element, ...element.querySelectorAll('td, figcaption, .writing-continuation-row, .writing-starter-line, .canonical-application-given, .canonical-application-drawing-area')]) {
           const rect = child.getBoundingClientRect()
           if (child.scrollWidth > child.clientWidth + 1
             || child.scrollHeight > child.clientHeight + 1

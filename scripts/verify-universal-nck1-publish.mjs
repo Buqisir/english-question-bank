@@ -894,9 +894,9 @@ function verifyHistoricalAuthorityReplay() {
     const current = buildNck1ReviewProjection(reviewRoot)
     assert.equal(replayed.candidateDigest, previous.candidate.candidateDigest)
     assert.equal(replayed.consumption.authorityRef.manifestVersion, '58')
-    assert.equal(replayed.consumption.consumerContractRef.version, '47')
+    assert.equal(replayed.consumption.consumerContractRef.version, '48')
     assert.equal(current.consumption.authorityRef.manifestVersion, '67')
-    assert.equal(current.consumption.consumerContractRef.version, '47')
+    assert.equal(current.consumption.consumerContractRef.version, '48')
     const readingId = replayed.consumption.selections
       .find((selection) => selection.familyContractId === 'reading').groupIds[0]
     for (const [projection, expectedRuleset] of [

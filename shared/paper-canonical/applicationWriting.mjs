@@ -144,6 +144,7 @@ export function validateApplicationWritingContract({
   sourceCapture,
   media = [],
   allowPromptFigures = false,
+  allowDrawingArea = false,
 }) {
   const issues = []
   if ((questionIds || []).length > 0 || (blankIds || []).length > 0) {
@@ -307,11 +308,39 @@ export function validateApplicationWritingContract({
     if (new Set(givenBlockIds).size !== givenBlockIds.length) issues.push(issue('APPLICATION_GIVEN_TEXT_DUPLICATE', 'needs_review', '$.variant.givenSkeleton.parts', 'Fixed-text blocks must be owned exactly once'))
   }
 
-  const ownedBlocks = [...promptBlockIds, ...givenBlockIds]
+  const drawing = variant.response?.drawingArea
+  const drawingLabelIds = []
+  if (Object.hasOwn(variant.response || {}, 'drawingArea')) {
+    const block = index.blocks.get(drawing?.labelBlockRef)
+    const observation = observationById(sourceCapture, drawing?.authorityObservationRef)
+    if (!allowDrawingArea) {
+      issues.push(issue('APPLICATION_DRAWING_AREA_UNSUPPORTED', 'unsupported', '$.variant.response.drawingArea', 'This authority does not admit drawing areas'))
+    }
+    if (!isRecordValue(drawing)
+      || !exactKeys(drawing, ['drawingAreaId', 'placement', 'labelBlockRef', 'authorityObservationRef'])
+      || drawing.drawingAreaId !== `drawing-area:${groupId}:1`
+      || drawing.placement !== 'top_right'
+      || drawing.authorityObservationRef !== `observation:application:${groupId}:drawing-area`
+      || block?.kind !== 'paragraph'
+      || !(block.inlines || []).map(inline => inline.text || '').join('').trim()
+      || promptBlockIds.has(drawing.labelBlockRef) || givenBlockIds.includes(drawing.labelBlockRef)) {
+      issues.push(issue('APPLICATION_DRAWING_AREA_INVALID', 'needs_review', '$.variant.response.drawingArea', 'One nonempty source label must belong exclusively to the top-right drawing area'))
+    } else drawingLabelIds.push(drawing.labelBlockRef)
+    if (observation?.kind !== 'application_drawing_area'
+      || observation.value?.groupId !== groupId
+      || observation.value?.drawingAreaId !== drawing?.drawingAreaId
+      || observation.value?.placement !== drawing?.placement
+      || observation.value?.labelBlockRef !== drawing?.labelBlockRef
+      || typeof observation.sourceSpanId !== 'string'
+      || !sourceCapture?.sourceSpans?.some(span => span.sourceSpanId === observation.sourceSpanId)) {
+      issues.push(issue('APPLICATION_DRAWING_AREA_UNPROVEN', 'incomplete_source', '$.variant.response.drawingArea', 'Drawing area requires its own source observation and resolved source span'))
+    }
+  }
+  const ownedBlocks = [...promptBlockIds, ...givenBlockIds, ...drawingLabelIds]
   if (ownedBlocks.length !== index.blocks.size || new Set(ownedBlocks).size !== index.blocks.size) {
     issues.push(issue('APPLICATION_CONTENT_OWNERSHIP_INCOMPLETE', 'needs_review', '$.content.blocks', 'Prompt and fixed-text blocks must each be owned exactly once'))
   }
-  const sourceGivenOrder = (content?.blocks || []).map((block) => block?.nodeId).filter((blockId) => !promptBlockIds.has(blockId))
+  const sourceGivenOrder = (content?.blocks || []).map((block) => block?.nodeId).filter((blockId) => !promptBlockIds.has(blockId) && !drawingLabelIds.includes(blockId))
   if (givenBlockIds.join('\u0000') !== sourceGivenOrder.join('\u0000')) {
     issues.push(issue('APPLICATION_GIVEN_PART_ORDER_AMBIGUOUS', 'needs_review', '$.variant.givenSkeleton.parts', 'Given parts must retain their fixed-text source order'))
   }
@@ -320,7 +349,8 @@ export function validateApplicationWritingContract({
   }
   if (
     !isRecordValue(variant.response)
-    || !exactKeys(variant.response, ['kind', 'answerRegionRef', 'authorityObservationRef'])
+    || !exactKeys(variant.response, ['kind', 'answerRegionRef', 'authorityObservationRef',
+      ...(allowDrawingArea && Object.hasOwn(variant.response, 'drawingArea') ? ['drawingArea'] : [])])
     || variant.response.kind !== 'group_level_written_response'
     || variant.response.answerRegionRef !== 'writing.application-box'
   ) {

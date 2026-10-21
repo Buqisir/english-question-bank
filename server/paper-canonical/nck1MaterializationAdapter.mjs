@@ -7,6 +7,7 @@ import {
   resolveCanonicalAuthority,
   nck1MaterializationCandidateAuthorityRef,
   nck1ListeningInstructionAuthorityRef,
+  nck1DrawingAreaAuthorityRef,
   validateJsonSchema,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef59,
@@ -15,6 +16,7 @@ import {
   nck1MaterializationHistoricalAuthorityRef64,
   nck1MaterializationHistoricalAuthorityRef66,
   closureAdmitsApplicationPromptFigures,
+  closureAdmitsApplicationDrawingArea,
 } from '../../shared/paper-canonical/authority.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 import {
@@ -826,7 +828,7 @@ function writingObservation(source, documentsById, group, observationId, kind, v
   ))
 }
 
-function writingVariant(group, content, issues, source, documentsById, { allowPromptFigures = false } = {}) {
+function writingVariant(group, content, issues, source, documentsById, { allowPromptFigures = false, allowDrawingArea = false } = {}) {
   const task = group.writingTask
   const sourceText = group.blocks.map(paragraphText).join('\n')
   const requiredText = [
@@ -843,7 +845,8 @@ function writingVariant(group, content, issues, source, documentsById, { allowPr
   // ends any paragraph run, exactly as Screen and Print group notices.
   const promptFigures = allowPromptFigures && group.family === 'application-writing'
     && group.blocks.some(block => block.kind === 'figure')
-  const paragraphs = promptFigures ? group.blocks : group.blocks.filter(block => block.kind === 'paragraph')
+  const paragraphs = (promptFigures ? group.blocks : group.blocks.filter(block => block.kind === 'paragraph'))
+    .filter(block => block.blockId !== task.drawingArea?.labelBlockRef)
   const notice = writingNoticeGroup(paragraphs.map(block => normalizedWritingText(paragraphText(block))))
   const noticeBlocks = notice ? paragraphs.slice(notice.startIndex, notice.startIndex + notice.blockCount) : []
   const wordCountBlock = noticeBlocks.find(block => writingWordCount(paragraphText(block)) === task.wordCountTarget)
@@ -852,8 +855,13 @@ function writingVariant(group, content, issues, source, documentsById, { allowPr
     return null
   }
   if (group.family === 'application-writing') {
+    const drawing = task.drawingArea
+    if (drawing && !allowDrawingArea) {
+      issues.push(adapterIssue('MATERIALIZATION_DRAWING_AREA_UNSUPPORTED', 'This authority does not admit application drawing areas'))
+      return null
+    }
     const givenBlocks = paragraphs.slice(notice.startIndex + notice.blockCount)
-      .filter(block => block.kind === 'paragraph')
+      .filter(block => block.kind === 'paragraph' && block.blockId !== drawing?.labelBlockRef)
     const givenParts = task.givenSkeleton.map((part, index) => {
       const block = givenBlocks[index]
       if (!block || paragraphText(block) !== part.text) {
@@ -893,12 +901,12 @@ function writingVariant(group, content, issues, source, documentsById, { allowPr
     // refs come only from its paragraphs. Figures are source-backed media.
     const promptBlocks = group.blocks.filter((block) =>
       (block.kind === 'paragraph' || (promptFigures && block.kind === 'figure'))
-      && !givenBlockIds.has(block.blockId))
+      && !givenBlockIds.has(block.blockId) && block.blockId !== drawing?.labelBlockRef)
     const promptParagraphs = promptBlocks.filter((block) => block.kind === 'paragraph')
     const situationBlock = promptParagraphs.find((block) =>
       paragraphText(block).includes(task.prompt)) || promptParagraphs[0]
     const firstGivenIndex = group.blocks.findIndex((block) => givenBlockIds.has(block.blockId))
-    if (!situationBlock || promptBlocks.length + givenParts.length !== group.blocks.length
+    if (!situationBlock || promptBlocks.length + givenParts.length + (drawing ? 1 : 0) !== group.blocks.length
       || (firstGivenIndex >= 0 && group.blocks.slice(firstGivenIndex).some((block) => block.kind === 'figure'))) {
       issues.push(adapterIssue('MATERIALIZATION_APPLICATION_PROMPT_UNRESOLVED', `Application prompt for ${group.groupId} must resolve to paragraph blocks${promptFigures ? ' and source figures before fixed text' : ''}`, '$.groups'))
       return null
@@ -929,6 +937,18 @@ function writingVariant(group, content, issues, source, documentsById, { allowPr
         answerRegionAbsenceAssertionRef: absenceRef,
       }
     }
+    let drawingArea
+    if (drawing) {
+      const drawingAreaId = `drawing-area:${group.groupId}:1`
+      const authorityObservationRef = `observation:application:${group.groupId}:drawing-area`
+      writingObservation(source, documentsById, group, authorityObservationRef, 'application_drawing_area', {
+        groupId: group.groupId, drawingAreaId, placement: drawing.placement, labelBlockRef: drawing.labelBlockRef,
+      }, drawing.source)
+      source.observations.find(item => item.observationId === authorityObservationRef).extraction = {
+        adapterId: 'nck1-source-materialization', version: '9',
+      }
+      drawingArea = { drawingAreaId, placement: drawing.placement, labelBlockRef: drawing.labelBlockRef, authorityObservationRef }
+    }
     const situationRef = paragraphRef(situationBlock)
     return {
       family: 'application-writing',
@@ -958,6 +978,7 @@ function writingVariant(group, content, issues, source, documentsById, { allowPr
         kind: 'group_level_written_response',
         answerRegionRef: 'writing.application-box',
         authorityObservationRef: responseObservationRef,
+        ...(drawingArea ? { drawingArea } : {}),
       },
     }
   }
@@ -1111,7 +1132,9 @@ function observationForLocator(observationId, kind, locator, value, documentsByI
       && typeof value === 'object'
       ? { ...structuredClone(value), packageEvidence }
       : value,
-    span: { start: 0, end: document.bytes.byteLength },
+    span: kind === 'application_drawing_area'
+      ? Object.fromEntries(Object.entries(locator).filter(([key]) => key !== 'documentId'))
+      : { start: 0, end: document.bytes.byteLength },
     extraction: packageEvidence
       ? { adapterId: 'nck1-analyzed-package', version: '1' }
       : {
@@ -1457,7 +1480,7 @@ export function deriveNck1SemanticSource(
                 },
               }
             : {}),
-          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),
@@ -1512,7 +1535,10 @@ export function deriveNck1SemanticSource(
         issues,
         source,
         documentsById,
-        { allowPromptFigures: closureAdmitsApplicationPromptFigures(resolveCanonicalAuthority(authorityRef).closure) },
+        {
+          allowPromptFigures: closureAdmitsApplicationPromptFigures(resolveCanonicalAuthority(authorityRef).closure),
+          allowDrawingArea: closureAdmitsApplicationDrawingArea(resolveCanonicalAuthority(authorityRef).closure),
+        },
       ),
       sourceSpanRefsByTarget: Object.fromEntries([
         ...groupMedia.map((media) => [
@@ -1773,7 +1799,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       if (!same(original.extraction.region, locator.region)) {
         // Only an ordinary, source-order body figure may tighten its top.
         // Keep the immutable parent and the A-D bank path separate.
-        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4'].includes(raw.schemaVersion)
+        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(raw.schemaVersion)
           || !matchesCrop(original, locator)
           || resolved.contentMedia.filter(value => value.mediaId === mediaId).length !== 1) {
           reject('OCR top-trim requires one confirmed PDF content figure with its original media ID')
@@ -1914,7 +1940,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       claim(mediaId)
       continue
     }
-    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4'].includes(raw.schemaVersion)) {
+    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(raw.schemaVersion)) {
       reject('OCR option banks require the existing figure-option materialization contract')
     }
     // Recover afterItemId from the verified immutable closure, never from a
@@ -2217,8 +2243,12 @@ export function withNck1MaterializationSourceCache(callback) {
   try { return callback() } finally { sourceCache = previous }
 }
 
-export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInput.listeningInstructionCorrectionBytes
-  ? nck1ListeningInstructionAuthorityRef : nck1MaterializationCandidateAuthorityRef) {
+export function nck1MaterializationAuthorityForInput(input) {
+  if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v5') return nck1DrawingAreaAuthorityRef
+  return input.listeningInstructionCorrectionBytes ? nck1ListeningInstructionAuthorityRef : nck1MaterializationCandidateAuthorityRef
+}
+
+export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1MaterializationAuthorityForInput(rawInput)) {
   const sourceDigest = bundleDigest(
     rawInput.materializationBytes, rawInput.documents, rawInput.media,
     rawInput.listeningAudio, rawInput.spellingReviewBytes, rawInput.ocrSourceBytes,
@@ -2248,12 +2278,17 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInpu
   }
   // Authority checks append issues; keep that list private to this derivation.
   const validation = { ...prepared.validation, issues: [...prepared.validation.issues] }
-  if ((materialization.schemaVersion === 'nck1-source-materialization-v4'
+  if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(materialization.schemaVersion)
     || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
-    && !['62', '64', '66', '67', '68'].includes(authorityRef.manifestVersion)) {
+    && !['62', '64', '66', '67', '68', '69'].includes(authorityRef.manifestVersion)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require a registered source-presentation closure'))
   }
-  if (input.listeningInstructionCorrectionBytes && authorityRef.manifestDigest !== nck1ListeningInstructionAuthorityRef.manifestDigest) {
+  if ((materialization.schemaVersion === 'nck1-source-materialization-v5'
+    || materialization.groups?.some(group => Object.hasOwn(group.writingTask || {}, 'drawingArea')))
+    && !closureAdmitsApplicationDrawingArea(resolveCanonicalAuthority(authorityRef).closure)) {
+    validation.issues.push(adapterIssue('MATERIALIZATION_DRAWING_AREA_UNSUPPORTED', 'Application drawing areas require their registered successor authority'))
+  }
+  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Listening instruction correction requires its registered successor authority'))
   }
   if (validation.issues.length > 0) {
@@ -2304,7 +2339,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInpu
     derivationIssues,
     { authorityRef, listeningInstructionCorrection },
   )
-  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
+  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
     nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
@@ -2312,7 +2347,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = rawInpu
       derivationIssues)
   }
   if (input.ocrSourceBytes) {
-    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
       derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
     } else {

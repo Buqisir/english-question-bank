@@ -1,3 +1,4 @@
+import { applicationDrawingAreaPolicy } from '../../shared/paper-canonical/applicationDrawingArea.mjs'
 import { applyPlannedGroupBreaks, inspectGroups, searchFixedPagePdf } from './fixedPagePdfPlanner.mjs'
 
 // Separate edition IDs preserve the meaning and digests of saved v1–v3 plans.
@@ -38,6 +39,10 @@ export function validateStudentProductLayout(layout, edition) {
 
 export function applyStudentProductLayout(html, layout, edition) {
   validateStudentProductLayout(layout, edition)
+  if (html.includes('data-canonical-drawing-area-id=')
+    && layout.answerBoxHeightsMm.application < applicationDrawingAreaPolicy.minimumApplicationHeightMm) {
+    throw Object.assign(new Error('带作图区的应用文必须保留标准答题框高度'), { code: 'PAPER_LAYOUT_OVERFLOW' })
+  }
   const { fontSizePt, figureLayout, answerBoxHeightsMm } = layout
   const lineHeightPt = fontSizePt === 12 ? 19.5 : 18
   const margin = 'margin: 21mm 24mm 24mm 24mm;'
@@ -146,6 +151,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
       ['float80', 65, minimumContinuation], ['float80', 24, minimumContinuation],
     ]
     for (const [figureLayout, application, continuation] of profiles) {
+      if (html.includes('data-canonical-drawing-area-id=') && application < applicationDrawingAreaPolicy.minimumApplicationHeightMm) continue
       let layout = { profile: edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
         answerBoxHeightsMm: { application, continuation } }
       const measure = async (selected, breaks = []) => {

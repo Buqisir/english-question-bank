@@ -1,3 +1,4 @@
+import type { CanonicalApplicationDrawingArea } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 // Keep this file in sync with writingPageModel.d.ts and writingPageModel.d.mts.
 import type { PaperAssetV1, PaperParagraph, PaperWritingTask } from '../../domain/paperAsset.ts'
 
@@ -19,6 +20,7 @@ export type WritingChromeBlock =
       occurrenceSignature?: string
       givenTop: ReadonlyArray<WritingGivenPart>
       givenBottom: ReadonlyArray<WritingGivenPart>
+      drawingArea?: CanonicalApplicationDrawingArea
     }
 
 export type WritingGivenPart =

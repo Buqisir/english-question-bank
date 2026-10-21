@@ -19,6 +19,8 @@ export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3 =
   'nck1-source-materialization-v3'
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4 =
   'nck1-source-materialization-v4'
+export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5 =
+  'nck1-source-materialization-v5'
 
 const slots = Object.freeze([
   ['reading.a', 'reading', 21, 23],
@@ -409,7 +411,7 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
   }
 }
 
-function validateWritingTask(task, family, path, documents, issues) {
+function validateWritingTask(task, family, path, documents, issues, allowDrawingArea = false) {
   if (
     !isRecordValue(task)
     || !exactKeys(task, [
@@ -421,6 +423,7 @@ function validateWritingTask(task, family, path, documents, issues) {
       'wordCountTarget',
       'officialModelAnswer',
       'source',
+      ...(allowDrawingArea && Object.hasOwn(task, 'drawingArea') ? ['drawingArea'] : []),
     ])
     || task.taskType !== (family === 'application-writing' ? 'application' : 'continuation')
     || !nonEmptyString(task.prompt)
@@ -448,6 +451,19 @@ function validateWritingTask(task, family, path, documents, issues) {
     issues.push(issue('MATERIALIZATION_CONTINUATION_SHAPE_INVALID', path, 'Continuation needs source material and exactly two starters'))
   }
   validateLocator(task.source, `${path}.source`, documents, issues)
+  if (Object.hasOwn(task, 'drawingArea')) {
+    const area = task.drawingArea
+    if (family !== 'application-writing' || !isRecordValue(area)
+      || !exactKeys(area, ['placement', 'labelBlockRef', 'source'])
+      || area.placement !== 'top_right' || !nonEmptyString(area.labelBlockRef)) {
+      issues.push(issue('MATERIALIZATION_DRAWING_AREA_INVALID', `${path}.drawingArea`, 'One application-only top-right drawing area requires a label block and source locator'))
+    } else {
+      validateLocator(area.source, `${path}.drawingArea.source`, documents, issues)
+      if (!['question_source', 'question_and_answers'].includes(documents.get(area.source?.documentId)?.role)) {
+        issues.push(issue('MATERIALIZATION_DRAWING_AREA_SOURCE_INVALID', `${path}.drawingArea.source`, 'Drawing area must bind the question-bearing source'))
+      }
+    }
+  }
 }
 
 export function normalizedWritingText(value) {
@@ -486,7 +502,13 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
     || !Number.isInteger(task.wordCountTarget)
   ) return
 
-  const paragraphs = writingParagraphs(blocks)
+  const paragraphs = writingParagraphs(blocks).filter(block => block.blockId !== task.drawingArea?.labelBlockRef)
+  if (task.drawingArea) {
+    const labels = writingParagraphs(blocks).filter(block => block.blockId === task.drawingArea.labelBlockRef)
+    if (labels.length !== 1 || !labels[0].text) {
+      issues.push(issue('MATERIALIZATION_DRAWING_LABEL_INVALID', `${path}.writingTask.drawingArea.labelBlockRef`, 'Drawing label must resolve to one nonempty paragraph in its own group'))
+    }
+  }
   const notices = writingNoticeGroups(paragraphs.map(paragraph => paragraph.text))
     .map(notice => ({
       start: notice.startIndex,
@@ -557,7 +579,7 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
   }
 }
 
-function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false) {
+function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false) {
   if (!Array.isArray(groups) || groups.length !== slots.length) {
     issues.push(issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'NCK1 requires exactly nine active groups'))
     return { questionIds: new Map(), ids: new Set() }
@@ -590,7 +612,7 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
       if (!Array.isArray(group.questions) || group.questions.length !== 0 || !Array.isArray(group.optionBank) || group.optionBank.length !== 0) {
         issues.push(issue('MATERIALIZATION_WRITING_QUESTIONS_FORBIDDEN', path, 'Writing groups have no Questions or option bank'))
       }
-      validateWritingTask(group.writingTask, expectedFamily, `${path}.writingTask`, documents, issues)
+      validateWritingTask(group.writingTask, expectedFamily, `${path}.writingTask`, documents, issues, allowDrawingArea)
       validateWritingBlocks(group.blocks, group.writingTask, expectedFamily, path, issues)
       continue
     }
@@ -1018,13 +1040,14 @@ export function validateNck1SourceMaterialization(value) {
       'sourceCoverage',
       'listening',
       'issues',
-      ...(value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4 ? ['sourcePresentation'] : []),
+      ...([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5].includes(value.schemaVersion) ? ['sourcePresentation'] : []),
     ])
     || ![
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4,
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5,
     ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
     || value.profileId !== 'nck1'
@@ -1063,7 +1086,7 @@ export function validateNck1SourceMaterialization(value) {
       documents.set(document.documentId, document)
     }
   }
-  if (value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4) {
+  if ([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5].includes(value.schemaVersion)) {
     const presentation = value.sourcePresentation
     const required = Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slot =>
       !slot.startsWith('listening.') || value.listening?.state !== 'not_supplied')
@@ -1094,7 +1117,8 @@ export function validateNck1SourceMaterialization(value) {
   }
   const mediaReferences = []
   const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues,
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4].includes(value.schemaVersion))
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5].includes(value.schemaVersion),
+    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5)
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {

@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { verifyDrawingAreaPrint } from './preview-application-drawing-area.mjs'
+import { makeDrawingAreaCompilation, drawingAreaConsumption } from '../test-fixtures/paper-canonical/applicationDrawingAreaFixture.mjs'
+verifyDrawingAreaPrint()
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
@@ -947,6 +950,10 @@ async function assertActualPaperSurfaceArtifacts() {
       { label: 'absent', consumption: absentScreenConsumption },
       { label: 'provided', consumption: providedScreenConsumption },
       { label: 'all-fixed', consumption: allFixedScreenConsumption },
+      ...[false, true].map(longOpening => ({
+        label: longOpening ? 'drawing-long-opening' : 'drawing',
+        consumption: drawingAreaConsumption(makeDrawingAreaCompilation({ longOpening }).compilation, consumerContractRefs.screen),
+      })),
     ]) {
       const canonical = applicationGroup(consumption)
       const signatures = []
@@ -993,6 +1000,28 @@ async function assertActualPaperSurfaceArtifacts() {
         assert.ok(responseBox)
         assert.ok(Math.abs(responseBox.width - (144 / 25.4 * 96)) <= 1)
         assert.ok(responseBox.height >= 245)
+        if (canonical.answerRegion.drawingArea) {
+          const geometry = await response.evaluate(element => {
+            const area = element.querySelector('[data-canonical-drawing-area-id]')
+            const rect = area.getBoundingClientRect()
+            const top = area.parentElement.getBoundingClientRect()
+            const signature = element.querySelector('.pi-writing-answer-bottom').getBoundingClientRect()
+            const given = area.previousElementSibling.getBoundingClientRect()
+            return { width: rect.width, height: rect.height, ratio: rect.width / top.width,
+              right: rect.right, boxRight: element.getBoundingClientRect().right,
+              bottom: rect.bottom, signatureTop: signature.top, givenRight: given.right, x: rect.x,
+              label: area.textContent, labelCount: element.textContent.split('作图处').length - 1,
+              border: getComputedStyle(area).borderWidth, outerBorder: getComputedStyle(element).borderWidth }
+          })
+          assert.equal(geometry.label, '作图处')
+          assert.equal(geometry.labelCount, 1)
+          assert.ok(Math.abs(geometry.width - geometry.height) <= 1)
+          assert.ok(Math.abs(geometry.ratio - .25) <= .003)
+          assert.ok(geometry.givenRight <= geometry.x + 1)
+          assert.ok(geometry.bottom < geometry.signatureTop)
+          assert.ok(geometry.right < geometry.boxRight)
+          assert.equal(geometry.border, geometry.outerBorder)
+        }
         assert.deepEqual(
           await page.locator(
             '[data-canonical-application-prompt] [data-canonical-block-id]',
@@ -1049,6 +1078,9 @@ async function assertActualPaperSurfaceArtifacts() {
               })),
             )
           }
+        } else if (canonical.answerRegion.drawingArea) {
+          assert.deepEqual(await noticeLines.allTextContents(),
+            canonical.promptBlocks.slice(1).map(block => block.text.replace(/^(\d+)\.\s*/, '（$1）')))
         } else {
           assert.equal(await noticeLines.count(), 0)
         }
@@ -1094,8 +1126,10 @@ async function assertActualPaperSurfaceArtifacts() {
         )
         const compactBodyText = bodyText.replaceAll(/\s/g, '')
         for (const block of canonical.promptBlocks) {
+          const displayedText = canonical.answerRegion.drawingArea
+            ? block.text.replace(/^(\d+)\.\s*/, '（$1）') : block.text
           assert.equal(
-            compactBodyText.split(block.text.replaceAll(/\s/g, '')).length - 1,
+            compactBodyText.split(displayedText.replaceAll(/\s/g, '')).length - 1,
             1,
           )
         }

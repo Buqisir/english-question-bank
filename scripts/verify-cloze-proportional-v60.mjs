@@ -43,8 +43,8 @@ for (const attack of read('test-fixtures/paper-canonical/cloze-rhythm-v5-conform
   assert.equal(result.ok, false, attack.caseId)
   assert(result.issues.some(issue => issue.code === 'RENDERER_CLOZE_RHYTHM_INVALID'), attack.caseId)
 }
-assert.equal(consumerContractRefs.screen.version, '47')
-assert.equal(consumerContractRefs.print_pdf.version, '48')
+assert.equal(consumerContractRefs.screen.version, '48')
+assert.equal(consumerContractRefs.print_pdf.version, '49')
 for (const ref of Object.values(consumerContractRefs)) {
   assert.equal(resolveConsumerPresentation(ref).policy.continuationMaterialAlignment, 'justify_except_last_line')
 }
