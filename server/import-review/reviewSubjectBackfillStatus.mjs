@@ -1,4 +1,4 @@
-import { reviewCompatibilityShapeAvailable } from './reviewCompatibilitySchema.mjs'
+import { reviewCompatibilityShapeAvailable, readReviewCompatibilitySchemaStatus } from './reviewCompatibilitySchema.mjs'
 import { isTransientReviewFailure, reviewBackfillRetryState, reviewCompatibilityAutorunEnabled } from './reviewRecoveryPolicy.mjs'
 export const reviewSubjectBackfillEnabled = () => reviewCompatibilityAutorunEnabled() && process.env.EQB_REVIEW_SUBJECT_BACKFILL !== '0'
 export const backfillScopeSql = `FROM import_review_revisions r
@@ -9,13 +9,14 @@ export const backfillScopeSql = `FROM import_review_revisions r
 // Read-only, small row/aggregate queries; no subject, preview or file hashing.
 export function readReviewSubjectBackfillStatus(db, revisionId = null) {
   const enabled = reviewSubjectBackfillEnabled()
+  const schema = readReviewCompatibilitySchemaStatus(db)
   const has = name => Boolean(db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?").get(name))
   if (!reviewCompatibilityShapeAvailable(db)) return {
-    enabled: false, reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', completed: false,
+    schema, enabled: false, reasonCode: 'REVIEW_COMPATIBILITY_SCHEMA_UNAVAILABLE', completed: false,
     inserted: 0, skipped: 0, skippedByReason: {}, pending: null, revision: null,
   }
   if (!has('review_subject_backfill')) return {
-    enabled, completed: false, inserted: 0, skipped: 0, skippedByReason: {}, pending: null, revision: null,
+    schema, enabled, completed: false, inserted: 0, skipped: 0, skippedByReason: {}, pending: null, revision: null,
   }
   const inserted = db.prepare(`SELECT COUNT(*) n ${backfillScopeSql}
     AND EXISTS (SELECT 1 FROM review_subject s WHERE s.revision_id=r.id AND s.origin='stored_evidence')`).get().n
@@ -57,7 +58,7 @@ export function readReviewSubjectBackfillStatus(db, revisionId = null) {
     revision.diagnostic = JSON.parse(revision.diagnostic_json || 'null')
     delete revision.diagnostic_json
   }
-  return { enabled, completed: missing === skipped + exhausted, inserted, skipped, exhausted,
+  return { schema, enabled, completed: missing === skipped + exhausted, inserted, skipped, exhausted,
     skippedByReason: Object.fromEntries(skippedRows.map(row => [row.reason_code, row.n])),
     pending: missing - skipped - exhausted, revision,
     lastCheckedAt: db.prepare(hasAttempts ? `SELECT MAX(checked_at) value FROM (

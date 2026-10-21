@@ -20,6 +20,7 @@ import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCo
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 import { verifyReviewListScale } from '../test-fixtures/review-compatibility/list-scale.mjs'
 import { verifyReviewCompatibilityScheduling } from '../test-fixtures/review-compatibility/scheduling.mjs'
+import { verifyReviewCompatibilitySchema } from '../test-fixtures/review-compatibility/schema.mjs'
 import { inspectSealedReviewFiles } from '../server/import-review/sealedReviewFiles.mjs'
 import { acquireReviewCompatibilityLeader, beginReviewActivity } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
@@ -53,6 +54,7 @@ try {
   } finally { isolatedLeader.release() }
   pass('verifier lock root is isolated and leader records identify the owning process')
   await verifyReviewCompatibilityScheduling(pass)
+  await verifyReviewCompatibilitySchema(root, pass)
 
   const empty = new DatabaseSync(':memory:')
   empty.exec('PRAGMA foreign_keys=ON; CREATE TABLE import_review_revisions(id TEXT PRIMARY KEY)')

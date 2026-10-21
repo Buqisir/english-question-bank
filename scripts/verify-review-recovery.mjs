@@ -11,6 +11,8 @@ import { pathToFileURL } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
+import { installV1Subject } from '../test-fixtures/review-compatibility/schema-v1.mjs'
+import { verifyHistoricalReviewTargets } from '../test-fixtures/review-compatibility/historical-targets.mjs'
 import { ensureReviewCompatibilityShape } from '../server/import-review/reviewCompatibilitySchema.mjs'
 import { appendReviewCompatibility, createReviewCompatibilityStore, captureReviewCompatibilitySnapshot } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { createAutomaticReviewSubjectBackfillStore, reviewBackfillInputToken, readBackfillRetryState } from '../server/import-review/automaticReviewSubjectBackfill.mjs'
@@ -71,6 +73,7 @@ try {
   const filesRoot = path.join(output, 'files')
   const target = reviewBuildIdentityProvider()()
   const revision = fixture.revision
+  await verifyHistoricalReviewTargets({ root, fixture, filesRoot, pass })
   const canaryPath = path.join(root, 'canary.sqlite')
   copyFileSync(fixture.dbPath, canaryPath)
   dbRun(canaryPath, db => db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject'))
@@ -159,7 +162,7 @@ try {
     ['equal', 'CONTENT_EQUAL'], ['different', 'CONTENT_DIFFERENT'],
     ...['MISSING_BASELINE', 'BACKFILL_PENDING', 'WORKER_TIMEOUT', 'WORKER_OOM', 'WORKER_RSS_LIMIT', 'WORKER_EXIT',
       'IO_ERROR', 'EXHAUSTED', 'TARGET_IDENTITY_UNAVAILABLE', 'TARGET_IDENTITY_PENDING',
-      'LEGACY_REVIEW_SUBJECTS_PRESENT', 'NOT_CHECKED'].map(reason => ['unknown', reason]),
+      'REVIEW_COMPATIBILITY_SCHEMA_UNAVAILABLE', 'NOT_CHECKED'].map(reason => ['unknown', reason]),
   ]) {
     for (const stale of [false, true]) {
       const dbPath = path.join(root, `${reasonCode}-${stale}.sqlite`)
@@ -236,6 +239,33 @@ try {
   assert.equal(recoveredStore.listPapers()[0].compatibility.eligible, true)
   assert.equal(recoveredStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner').revisionId, revision.id)
   pass('only a later validated equal for the current trusted target supersedes another target difference')
+  for (const kind of ['unknown', 'other_equal', 'earlier_equal', 'invalid_equal']) {
+    const dbPath = path.join(root, `retained-${kind}.sqlite`)
+    copyFileSync(fixture.dbPath, dbPath)
+    dbRun(dbPath, db => {
+      const subjectDigest = db.prepare('SELECT subject_digest FROM review_subject').get().subject_digest
+      db.exec('DELETE FROM review_compatibility; BEGIN IMMEDIATE')
+      const append = (result, targetBuildId) => appendReviewCompatibility(db, revision, null, {
+        result, reasonCode: result === 'equal' ? 'CONTENT_EQUAL' : result === 'different' ? 'CONTENT_DIFFERENT' : 'MISSING_BASELINE',
+        subjectDigest, targetBuildId,
+      })
+      if (kind === 'earlier_equal') append('equal', target.targetBuildId)
+      append('different', 'sha256:' + 'e'.repeat(64))
+      if (kind === 'unknown') append('unknown', target.targetBuildId)
+      if (kind === 'other_equal') append('equal', 'sha256:' + 'f'.repeat(64))
+      if (kind === 'invalid_equal') {
+        append('equal', target.targetBuildId)
+        db.prepare("UPDATE review_compatibility SET evidence_json='{}' WHERE target_build_id=?").run(target.targetBuildId)
+      }
+      db.exec('COMMIT')
+    })
+    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: revision.rendererBuildId })
+    assert.equal(store.compatibilityForRevision(revision.id).reasonCode, 'RETAINED_CONTENT_DIFFERENT')
+    assert.equal(store.listPapers()[0].compatibility.reasonCode, 'RETAINED_CONTENT_DIFFERENT')
+    assert.throws(() => store.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner'),
+      { code: 'IMPORT_REVIEW_RENDERER_STALE' })
+    pass(`${kind} cannot supersede a retained cross-target difference through detail, list or approve`)
+  }
   // Actual empty subject/missing attempt and cold identity states.
   const emptyPath = path.join(root, 'missing.sqlite')
   copyFileSync(fixture.dbPath, emptyPath)
@@ -263,9 +293,7 @@ try {
     dbRun(dbPath, db => {
       db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject')
       if (state === 'missing_preview') db.exec('DELETE FROM import_review_product_previews')
-      if (state === 'nonempty_v1') db.exec(`DROP TABLE review_subject;
-        CREATE TABLE review_subject(revision_id TEXT, subject_version TEXT CHECK(subject_version='review-content-subject-v1'), subject_json TEXT);
-        INSERT INTO review_subject VALUES('legacy','review-content-subject-v1','{"preserved":true}')`)
+      if (state === 'nonempty_v1') installV1Subject(db, revision.id)
     })
     const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: revision.rendererBuildId })
     const service = serviceFor(store, directory)
@@ -274,7 +302,8 @@ try {
     }, 'owner')
     assert.equal(result.status, 'published')
     assert.equal((await service.promote(revision.paperId, { ...store.getRevision(revision.id).approval, intent: 'retry_ship' }, 'owner')).status, 'idempotent')
-    assert.equal(dbRun(dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject').get().n), state === 'nonempty_v1' ? 1 : 0)
+    assert.equal(dbRun(dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject').get().n), 0)
+    if (state === 'nonempty_v1') assert.equal(dbRun(dbPath, db => db.prepare('SELECT subject_json FROM review_subject_legacy_v1').get().subject_json), '{"preserved":true}')
     pass(`${state}: real approve/publish/reconciliation succeeds under legacy renderer without a manufactured subject`)
   }
   for (const race of ['revision', 'renderer', 'different']) {
@@ -366,10 +395,8 @@ try {
   const migration = path.join(root, 'migration.sqlite')
   copyFileSync(fixture.dbPath, migration)
   dbRun(migration, db => {
-    db.exec(`DELETE FROM review_subject; DROP TABLE review_subject;
-      CREATE TABLE review_subject(revision_id TEXT PRIMARY KEY REFERENCES import_review_revisions(id),
-        subject_version TEXT CHECK(subject_version='review-content-subject-v1'), subject_json TEXT);
-      INSERT INTO review_subject_backfill(revision_id,input_token,outcome,reason_code,checked_at)
+    installV1Subject(db, revision.id)
+    db.exec(`INSERT INTO review_subject_backfill(revision_id,input_token,outcome,reason_code,checked_at)
         SELECT id,'legacy-token','skipped','MISSING_BASELINE','2026-10-20' FROM import_review_revisions;`)
   })
   const before = dbRun(migration, db => ({
@@ -384,31 +411,43 @@ try {
       assert.deepEqual(db.prepare(`SELECT * FROM ${table}`).all(), before[key])
     }
   })
-  const oldStoreSource = execFileSync('git', ['show', '97c63a3b:server/import-review/importReviewStore.mjs'],
-    { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' })
-  const oldModule = path.join(root, 'legacy-importReviewStore.mjs')
-  // Resolve the old module's relative imports against this task's release.
-  const moduleUrl = new URL('../server/import-review/importReviewStore.mjs', import.meta.url)
-  writeFileSync(oldModule, oldStoreSource.replace(/from (['"])(\.[^'"]+)\1/g,
-    (_all, _quote, name) => `from ${JSON.stringify(new URL(name, moduleUrl).href)}`))
-  const { createImportReviewStore: oldCreate } = await import(pathToFileURL(oldModule).href)
+  // Keep a real finalized v2 row as well as nonempty v1 evidence across rollback;
+  // an empty v2 table would make the overwrite assertion vacuous.
+  const finalizedV2 = dbRun(fixture.dbPath, db => db.prepare('SELECT * FROM review_subject WHERE revision_id=?').get(revision.id))
+  dbRun(migration, db => db.prepare(`INSERT INTO review_subject (${Object.keys(finalizedV2).join(',')})
+    VALUES (${Object.keys(finalizedV2).map(() => '?').join(',')})`).run(...Object.values(finalizedV2)))
+  // Run exact old release dependencies too, not old store source against new helpers.
+  const oldRelease = path.join(root, '97c63a3b-release')
+  mkdirSync(oldRelease)
+  const archive = execFileSync('git', ['archive', '97c63a3b', 'server', 'shared', 'scripts', 'schemas', 'prompts', 'standards'],
+    { cwd: path.resolve(import.meta.dirname, '..'), maxBuffer: 128 * 1024 ** 2 })
+  execFileSync('tar', ['-x', '-C', oldRelease], { input: archive })
+  symlinkSync(path.resolve(import.meta.dirname, '../server/node_modules'), path.join(oldRelease, 'server/node_modules'), 'dir')
+  const { createImportReviewStore: oldCreate } = await import(pathToFileURL(path.join(oldRelease, 'server/import-review/importReviewStore.mjs')).href)
+  const stableNewRows = dbRun(migration, db => Object.fromEntries([
+    'review_subject', 'review_subject_legacy_v1', 'review_compatibility', 'review_compatibility_schema_migration',
+  ].map(table => [table, db.prepare(`SELECT * FROM ${table}`).all()])))
   const oldStore = oldCreate({ dbPath: migration, filesRoot, rendererBuildId: revision.rendererBuildId })
   assert.deepEqual(oldStore.getRevision(revision.id), revision)
   assert.equal(oldStore.listPapers()[0].paperId, revision.paperId)
   assert.deepEqual(oldStore.productPreviewForRevision(revision.id).preview,
     fixture.store.productPreviewForRevision(revision.id).preview)
-  pass('offline empty v1 upgrade is idempotent, FK-clean, raw-row preserving and readable by exact 97c63a3b store code')
-  dbRun(migration, db => db.exec(`DROP TABLE review_subject;
-    CREATE TABLE review_subject(revision_id TEXT,subject_version TEXT CHECK(subject_version='review-content-subject-v1'),subject_json TEXT);
-    INSERT INTO review_subject VALUES('legacy','review-content-subject-v1','{"preserve":true}');`))
+  // A normal old-release write must coexist with the retained evidence tables.
+  assert.equal(oldStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'rollback-smoke').revisionId, revision.id)
+  dbRun(migration, db => {
+    ensureReviewCompatibilityShape(db)
+    ensureReviewCompatibilityShape(db)
+    for (const [table, rows] of Object.entries(stableNewRows)) {
+      assert.deepEqual(db.prepare(`SELECT * FROM ${table}`).all(), rows)
+    }
+    assert.equal(db.prepare('PRAGMA integrity_check').get().integrity_check, 'ok')
+    assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), [])
+  })
+  pass('exact 97c63a3b release opens, lists, reads preview and approves the migrated DB; forward again does not grow archive or overwrite v2/compatibility')
   const legacyStore = createImportReviewStore({ dbPath: migration, filesRoot, rendererBuildId: revision.rendererBuildId })
-  assert.equal(legacyStore.compatibilityForRevision(revision.id).reasonCode, 'LEGACY_REVIEW_SUBJECTS_PRESENT')
-  assert.equal(legacyStore.listPapers()[0].rendererStale, false)
-  assert.equal(legacyStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner').revisionId, revision.id)
-  assert.equal(createReviewCompatibilityStore({ dbPath: migration, filesRoot }).scan().length, 0)
-  assert.equal(createAutomaticReviewSubjectBackfillStore({ dbPath: migration, filesRoot }).prepare(revision.id), null)
-  assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject').get().subject_json), '{"preserve":true}')
-  pass('nonempty v1 starts, lists, falls back for approval, disables both workers and preserves legacy bytes')
+  assert.equal(legacyStore.agentPaperStatus(revision.paperId).subjectBackfill.schema.legacyPresent, true)
+  assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject_legacy_v1').get().subject_json), '{"preserved":true}')
+  pass('nonempty v1 migration remains visible in the authenticated single-paper status without disclosing legacy content')
 
   const bankPath = path.join(root, 'legacy-api-bank.sqlite')
   dbRun(bankPath, db => db.exec(readFileSync(new URL('../data/sql/schema.sql', import.meta.url), 'utf8')))
@@ -440,12 +479,15 @@ try {
         })
         assert.equal(response.status, 200, apiLog)
         status = await response.json()
-        if (status.compatibility.reasonCode === 'LEGACY_REVIEW_SUBJECTS_PRESENT') break
+        if (status.subjectBackfill?.schema?.legacyPresent) break
       }
       await yieldFor(100)
     }
-    assert.equal(status?.compatibility.reasonCode, 'LEGACY_REVIEW_SUBJECTS_PRESENT', apiLog)
-    assert.match(apiLog, /review-compatibility-disabled/)
+    assert.equal(status?.subjectBackfill.schema.legacyPresent, true, apiLog)
+    assert.equal(status.subjectBackfill.enabled, true)
+    assert.equal(status.subjectBackfill.schema.migration.legacyRowCount, 1)
+    assert.equal(status.subjectBackfill.schema.migration.fromSchemaVersion, 'review-compatibility-schema-v1')
+    assert.equal(JSON.stringify(status.subjectBackfill.schema).includes('preserved'), false)
   } finally {
     api.kill('SIGTERM')
     let deadline
@@ -456,8 +498,8 @@ try {
       assert.deepEqual(result, { code: 0, signal: null }, apiLog)
     } finally { clearTimeout(deadline) }
   }
-  assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject').get().subject_json), '{"preserve":true}')
-  pass('real HTTP API starts with nonempty v1, returns authenticated status, warns, shuts down cleanly and preserves legacy bytes')
+  assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject_legacy_v1').get().subject_json), '{"preserved":true}')
+  pass('real HTTP API exposes durable legacy migration status, keeps workers enabled, shuts down cleanly and preserves legacy bytes')
 
   const release = makeReviewRelease(path.join(root, 'identity-release'))
   symlinkSync(path.resolve(import.meta.dirname, '../data'), path.join(release, 'data'), 'dir')

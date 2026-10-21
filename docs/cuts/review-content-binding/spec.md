@@ -86,8 +86,9 @@ BACKFILL_PENDING。比较期间最小 HTTP 探针全部成功，最高 p95 2.13 
 - 完整分支 80 个变化路径的 machine plan 为 `unknown-fallback / all`；
   `round3-ci-plan.json` 仅为路线分类。本轮没有 Ship，正式 natural Actions
   Full/E2E 和新候选独立 Astra 审查仍未完成，专项检查不能替代这些门禁。
-- 上线前还需 BUB-104 所列 2 核/2 GiB Linux 限制实测、受支持的生产有界只读
-  schema/精确 revision 核对，以及随后单独授权的实际迁移。BUB-104 的旧“默认关闭”
+- 上线前还需 BUB-104 所列 2 核/2 GiB Linux 限制实测，以及明确包含迁移的部署授权。
+  R5 用停流量/快照后的严格 schema 自检查、事务迁移与上线后有界观察替代新增生产
+  schema 查询命令的硬门槛；执行步骤、失败期限及代码回退见 [rollout.md](rollout.md)。BUB-104 的旧“默认关闭”
   说明已被 Owner 本轮“默认开启、保留应急关闭”的明确决定覆盖；不得据旧文字
   把默认行为改回关闭。本轮没有安装主机软件、连接生产或修改 controller/host。
 
@@ -95,11 +96,12 @@ BACKFILL_PENDING。比较期间最小 HTTP 探针全部成功，最高 p95 2.13 
 
 - 批准资格：确定 `equal` 允许，确定 `different` 拒绝且不能被后续 unknown 覆盖。无确定结果时回退到修复前的 renderer 指纹守卫，只有历史 renderer 等于当前 renderer 才允许批准；继续执行旧版封存文件、投影身份、听力、issue、权限与业务状态检查，不制造历史 subject。响应提供 `eligible/guard/fallback/fallbackReason/legacyRendererStale`，日志事件 `review-compatibility-fallback` 记录原因及是否放行。
 - 回退例外（2026-10-21 收敛）：封存 Candidate 缺 `products/manifest-v1.json`（无冻结产品）时不走上述 renderer 回退，即使 renderer 相同也以 `MISSING_FROZEN_PRODUCTS` 拒绝批准、publication request 和实时投影，冷启动同样适用。这包括旧协议下合法的无产品 analyzed package：它们没有本契约要求的冻结内容证据，backfill/比较也无法补建基准，因此本轮退役其旧资格路径。原缓存预览、已有冻结证据和已发布内容的只读访问不受影响；恢复路径是按现行流程重新送审并生成四款冻结产品。依据：现行导卷流程每次送审都生成冻结产品，2026-10-21 本地 59 套演练中 58 套具备完整冻结产品，余下 1 套为缺原 preview。
-- 相同资格覆盖独立批准、Owner“批准并发布”、scoped promotion 和实际 writer。确定 equal 保留原 subject/实际 writer 映射；不可用时走修复前的 renderer/file/投影身份/Canonical admission 守卫，不制造历史 subject。归档前后以 Review 原始行 token 和 renderer 做 CAS，最终 writer 在同一 Review 写事务里重新核验；已准备的内容绑定不能中途降级为旧模式，guard 模式变化拒绝并保留证据。缺 subject/preview 或非空 v1 时，幂等对账使用旧版封存投影路径，仍验证已提交目标和冻结字节。
+- 相同资格覆盖独立批准、Owner“批准并发布”、scoped promotion 和实际 writer。确定 equal 保留原 subject/实际 writer 映射；不可用时走修复前的 renderer/file/投影身份/Canonical admission 守卫，不制造历史 subject。归档前后以 Review 原始行 token 和 renderer 做 CAS，最终 writer 在同一 Review 写事务里重新核验；已准备的内容绑定不能中途降级为旧模式，guard 模式变化拒绝并保留证据。缺 subject/preview 时，幂等对账使用旧版封存投影路径，仍验证已提交目标和冻结字节。
 - `reviewRecoveryPolicy.mjs` 集中预算：比较 384 MiB/300 秒、每批 1 卷、任务间让出 5 秒；backfill 128 MiB/30 秒；身份 384 MiB/30 秒。调用方只能降低 worker 上限。普通比较最多重试 2 次，30 秒/5 分钟退避，只统计瞬态失败，不计 MISSING_BASELINE/BACKFILL_PENDING。
 - backfill 瞬态失败追加到 `review_subject_backfill_attempt`，初次失败后最多 5 次重试，依次间隔 1/5/15/60/240 分钟。耗尽显示 exhausted，保留诊断；确定性内容缺失或不合法仍按 input token 封存。原 skip/attempt 行不删改。受控恢复函数 `createAutomaticReviewSubjectBackfillStore({ dbPath, filesRoot }).resetTransientBudget(revisionId, { actor, reason })` 要求具名操作员和原因，追加 `TRANSIENT_BUDGET_RESET` 记录，仅重置该 revision 当前 token 的瞬态额度，不清除锁、不重置业务状态、不改变确定性失败。
 - 身份 timeout/OOM/exit/临时 I/O 与确定性身份错误分开。初始化与 fresh 共用 single-flight，瞬态失败最少 60 秒后重试，`ready()` 不永久缓存为失败。fresh 的瞬态失败保留上一份有效描述符，但在成功刷新之前不对外提供它，防止旧 equal 授权；文件或 runtime 变化照常清空缓存。
-- 空 v1 subject 表升级为 v2，保留已有 skip/compatibility/业务行。非空 v1 表原样保留、告警 `LEGACY_REVIEW_SUBJECTS_PRESENT`，不建新表且禁用比较/backfill；API 正常启动，批准按上述旧守卫回退。所有生产 schema/数据核对及迁移仍需要授权。
+- **R5 schema 规则（覆盖历史规则）：** 缺表新建；按 e664eecd 实际 DDL 识别的 v1 subject，无论空/非空均在函数级 SAVEPOINT 内 rename 为固定 `review_subject_legacy_v1` 后建 v2。旧列值逐字保留；v2 不读取 archive。v1 与同名 archive 并存具名失败，不覆盖、不加后缀。已知 v2 重启不再 rename。列/主键/完整 CHECK token、外键、显式/自动索引及其他兼容表均先验证；未知形状、入向 FK、相关视图/触发器及同名索引冲突在任何 DDL 前具名拒绝启动，不返回 enabled:false、不静默回退。已知旧 backfill 仅 ALTER 增加 nullable diagnostic_json；保持 foreign_keys=ON、user_version 与旧业务/compatibility/skip 行不变。持久表 `review_compatibility_schema_migration` 记录来源版本、时间和 legacy 行数，经 `subjectBackfill.schema` 返回；部署 ensure 丢弃 stdout 也不丢迁移证据。迁移授权及 pre-traffic 备份/恢复边界见 [rollout.md](rollout.md)。
+- **历史判定保留：** 旧 equal 不授权当前 target；旧 different 保持阻断，只有当前可信 target、绑定有效、追加顺序更晚的 equal 才解除。unknown、别的 target equal、更早 equal 或无效 equal 均不能解除；同 target 的 different 终态不能被后来 equal 覆盖。不按旧 release SHA 排除记录。
 
 ### 生产只读核对路径调查（仅查本地实现，未连接生产）
 
@@ -112,22 +114,20 @@ BACKFILL_PENDING。比较期间最小 HTTP 探针全部成功，最高 p95 2.13 
 | `ops-mcp` 固定只读工具 | 服务/健康/磁盘/版本与有界日志摘要；没有 SQL/schema/raw-row 工具 | 现有受限运维身份及独立读取授权；摘要负载低，日志按窗口限量 |
 | `import-ops/lib/probe.mjs`、`scripts/pull-run-push.mjs pull`、controller 内部 `snapshotDatabases` | probe 只读本地 question-bank；pull 不导出 Review DB；snapshot 是部署持久化事务的内部备份步骤 | pull/backup 会写远端临时快照，完整备份/完整性扫描的 I/O 更大，不能作为“生产零写入”的 schema 核对路径 |
 
-现有受支持入口不能交付迁移决策所需的 SQLite `sqlite_master`、
-`PRAGMA table_info(review_subject)`、subject 数量和指定 revision 原始单元格。
-生产核对仍是未满足的上线前条件。后续应单独授权有界只读主机操作，或评审固定
-controller 查询扩展：以 `readOnly: true`、`PRAGMA query_only=ON`、短 busy timeout
-打开 `import-ops.sqlite`，先查 schema/数量，再用参数化精确 revision 查询
-revision/preview/subject/backfill/compatibility/guard 原始行。schema 查询很轻；
-COUNT 随表规模增长；精确 ID 查询应走索引，一次一卷。不要为检查 schema 启动部署、
-全库备份或 integrity 扫描，不接受通用任意 SQL 接口。
+现有受支持入口不导出 SQLite 原始 schema/单元格；R5 不再把新增查询命令作为
+上线硬门槛。严格 schema 自检查在 reviewed-persistence 的停流量、离线三库快照后
+执行；未知结构立即停止激活，按既有 pre-traffic 恢复分支处理。已有鉴权列表/单卷
+状态足以观察新 target 比较、基准和资格恢复，执行方法及仍存在的可用性风险见
+[rollout.md](rollout.md)。本轮未连接生产，也不把本地演练视为生产迁移证明。
 
 ### 本地证据与证明边界
 
 恢复验证覆盖 equal/different 与各不可用状态在 renderer 相同/不同时的真实批准，
 瞬态额度耗尽及具名恢复、身份 single-flight/60 秒退避与确定性错误隔离；空 v1
 离线迁移同时核对原始行、外键及精确 `97c63a3b` store 的 revision/list/preview 读回。
-非空 v1 验证 store 正常构造、列表、批准回退和两个 worker 禁用；另启动真实 HTTP
-API，验证鉴权状态返回、停用告警、正常关闭及旧 subject 字节保留。缺 subject、
+R5 改为用实际 v1 DDL 覆盖非空迁移、未知依赖/结构拒绝、函数级回滚与并发启动；
+真实 HTTP API 验证迁移元信息可见、worker 保持启用、正常关闭及 legacy 字节保留。
+精确 97c63a3b release 的读/批准后再次前进，验证 archive 不增长、v2/compatibility 不被覆盖。缺 subject、
 缺 preview 和非空 v1 均验证实际发布和幂等对账；归档期间 revision/renderer/
 确定 different 的变化均在写入前拒绝，保留 shipping guard。
 
@@ -155,9 +155,9 @@ supervisor 主线程的最小 HTTP 服务，不是完整 API；RSS 每 50 ms 采
 
 ### 2.1 迁移方式及 DDL
 
-基线没有编号式 migration runner。`server/import-review/importReviewStore.mjs:442` 的 `ensureShape()` 使用幂等建表和 `PRAGMA table_info`，初始化在 816–818。新增 `server/import-review/reviewCompatibilitySchema.mjs`，导出 `ensureReviewCompatibilityShape(db)`，由旧表就绪后的 `ensureShape()` 调用；标识 `review-compatibility-schema-v1`，不编造全库编号或修改 bank DB 的 user_version。
+基线没有编号式 migration runner。`server/import-review/importReviewStore.mjs:442` 的 `ensureShape()` 使用幂等建表和 `PRAGMA table_info`，初始化在 816–818。新增 `server/import-review/reviewCompatibilitySchema.mjs`，导出 `ensureReviewCompatibilityShape(db)`，由旧表就绪后的 `ensureShape()` 调用；标识 `review-compatibility-schema-v2`，不编造全库编号或修改 bank DB 的 user_version。
 
-三表及索引在短 `BEGIN IMMEDIATE` 中一起创建，不做文件 I/O、历史扫描或回填；已有外层事务时不得嵌套 BEGIN。首次生产执行属于明确授权的 schema 扩展 Goal。
+表及索引在短事务中创建；独立调用先 BEGIN IMMEDIATE，内部一律使用 SAVEPOINT，兼容外层事务。不做文件 I/O 或内容回填；仅迁移时计数 legacy 行并持久记录。首次生产执行属于明确授权的 schema 扩展 Goal。
 
 ```sql
 CREATE TABLE IF NOT EXISTS review_subject (
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS review_subject_backfill (
 字段及约束：
 
 - `subject_version='review-content-subject-v2'`、`review-compatibility-schema-v2`；`comparator_version='review-content-equivalence-v1'`。v2 将 sidecar/media JSON 改存 descriptor + `jsonDigest=digestJson(json)`，不重复保存完整 JSON；完整消费载荷和产品清单仍保留。内容范围、允许差异和比较算法不变。发布现场需要的 config/source manifest/pagination JSON 来自实际严格投影，使用前逐项匹配 subject 的 jsonDigest，不能仅相信新投影。
-- #542 已部署后由 #544 回滚；原回填 inserted=0。OCR revision 不进入 Candidate subject/finalize 分支。升级仅自动替换**空** v1 subject 表的 CHECK；若发现任何 v1 subject，保留原数据并以 `LEGACY_REVIEW_SUBJECTS_PRESENT` 拒绝启动，交由明确迁移决定，不覆盖历史 subject。原 skip/attempt 全部保留；backfill 表仅增 nullable `diagnostic_json`。
+- #542/e664eecd 后由 #544/97c63a3b 的 revert 提交撤回代码；不能由此推断生产 v1 行数。空/非空已知 v1 一律 rename-aside，执行上述 R5 自保护规则；OCR 不进入 Candidate subject/finalize 分支。原 skip/attempt/compatibility 全部保留；旧 backfill 仅增 nullable diagnostic_json。
 - `source_renderer_build_id` 仅记录原 revision 身份，不参加与当前网站代码的比较。
 - `origin=stored_evidence` 表示从原服务端记录及封存文件提取，不表示用当前代码补造旧结果。两种 origin 使用完全相同的内容契约。
 - 各 digest 用 `sha256:<64 lowercase hex>`。JSON 用 `digestJson`；文件用流式 Node crypto SHA-256。subject_json 保存具名内容对象/摘要和文件描述，不重复保存 PDF、音频、源文档二进制；上限 8 MiB，超限 unknown，不截断。
@@ -491,6 +491,8 @@ CLI 只提取旧 preview、revision/manifest/DB inventory、确认记录和逐�
 本轮生产恢复选择正常部署后由 API 进程默认执行 §6 的有界阶段。回填只需要应用自身已有的 Review DB/封存文件权限，不增加 controlled SSH/controller 维护命令，也不修改 root-owned host；扩权既无必要，也会制造独立维护入口。部署批准应明确包括这个默认开启的 additive 行为；本轮仅进行本地实现、相关验证和生产只读 GET 证据采集，未修改生产 DB/R2 或部署。
 
 ## 8. 迁移、回滚与证据
+
+R5 的可执行观察、明确失败阈值和受支持代码回退以 [rollout.md](rollout.md) 为准，覆盖下列历史基线建议。
 
 - `review_subject`、`review_compatibility`、`review_subject_backfill` 及索引为 additive，不改旧表和 PDF。迁移前备份 Review DB 并记录原行摘要，后查 schema、foreign_key_check、原行未变及服务健康。
 - 默认不做 down migration；删新表会丢证据。代码回滚保留表，旧代码不查询它们，结构上无害。

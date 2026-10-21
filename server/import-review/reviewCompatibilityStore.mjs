@@ -69,7 +69,7 @@ export function enforceRetainedReviewDifference(db, revisionId, difference, valu
 }
 
 export function getReviewCompatibility(db, revision, targetDescriptor) {
-  if (!reviewCompatibilityShapeAvailable(db)) return { result: 'unknown', reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', pending: false }
+  if (!reviewCompatibilityShapeAvailable(db)) return { result: 'unknown', reasonCode: 'REVIEW_COMPATIBILITY_SCHEMA_UNAVAILABLE', pending: false }
   const subject = hasTable(db, 'review_subject')
     ? db.prepare(`${subjectWithPreview} WHERE s.revision_id = ?`).get(revision.id) : null
   const rows = hasTable(db, 'review_compatibility') ? db.prepare(`SELECT * FROM review_compatibility
@@ -128,7 +128,7 @@ function compatibilitySummary(revision, subject, row, target) {
   } catch { return pending }
 }
 export function getReviewCompatibilitySummary(db, revision, target) {
-  if (!reviewCompatibilityShapeAvailable(db)) return { result: 'unknown', reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', pending: false }
+  if (!reviewCompatibilityShapeAvailable(db)) return { result: 'unknown', reasonCode: 'REVIEW_COMPATIBILITY_SCHEMA_UNAVAILABLE', pending: false }
   const subject = db.prepare(`${summarySubject} WHERE s.revision_id=?`).get(revision.id)
   const row = db.prepare(`SELECT * FROM review_compatibility WHERE revision_id=?
     AND target_build_id=? AND comparator_version=? ORDER BY (result='different') DESC, attempt_no DESC LIMIT 1`)
@@ -138,7 +138,7 @@ export function getReviewCompatibilitySummary(db, revision, target) {
 
 export function getLatestReviewCompatibilities(db, revisions, targetDescriptor) {
   if (!reviewCompatibilityShapeAvailable(db)) return new Map(revisions.map(revision =>
-    [revision.id, { result: 'unknown', reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT', pending: false }]))
+    [revision.id, { result: 'unknown', reasonCode: 'REVIEW_COMPATIBILITY_SCHEMA_UNAVAILABLE', pending: false }]))
   const subjects = new Map(db.prepare(`${summarySubject}
     JOIN import_review_papers p ON p.latest_revision_id = s.revision_id`).all().map(row => [row.revision_id, row]))
   const attempts = new Map(db.prepare(`SELECT c.* FROM review_compatibility c
@@ -156,7 +156,7 @@ export function getLatestReviewCompatibilities(db, revisions, targetDescriptor) 
 // Caller owns BEGIN IMMEDIATE. These are INSERT-only; no UPDATE/REPLACE/DELETE.
 // Used by finalize in its existing preview/state transaction and by CAS below.
 export function appendReviewCompatibility(db, revision, baseline, comparison) {
-  if (!reviewCompatibilityShapeAvailable(db)) return { appended: false, reasonCode: 'LEGACY_REVIEW_SUBJECTS_PRESENT' }
+  if (!reviewCompatibilityShapeAvailable(db)) return { appended: false, reasonCode: 'REVIEW_COMPATIBILITY_SCHEMA_UNAVAILABLE' }
   if (!db.isTransaction) throw error('REVIEW_TRANSACTION_REQUIRED')
   const subject = db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id)
   const previous = reviewCompatibilityAttempts(db, revision.id, comparison.targetBuildId)
