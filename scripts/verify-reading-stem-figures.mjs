@@ -1,5 +1,5 @@
 // verify-resource: browser-render
-// Source-proven v5 -> confirmed admission -> archive/reopen -> public consumers.
+// Source-proven v6 -> confirmed admission -> archive/reopen -> public consumers.
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
@@ -7,11 +7,12 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { makeSyntheticNck1OcrFixture } from '../test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs'
 import { verifyReadingStemFigures } from '../test-fixtures/paper-import/nck1-ocr-evidence-v1/stem-figures.mjs'
+import { makeDrawingAreaSourceInput } from '../test-fixtures/paper-canonical/applicationDrawingAreaFixture.mjs'
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { consumerContractRefs, consumerContractRefsForAuthority } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { buildCanonicalReadingConsumptionSurfaceData } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
-import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, withoutKey } from '../shared/paper-canonical/stable.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { admitCanonicalPaperImport, loadPaperForConsumption, loadPaperForConsumptionSync, validateCanonicalPublicationBundle } from '../server/paper-canonical/publication.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
@@ -26,6 +27,29 @@ import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
 
 const bytes = value => new TextEncoder().encode(JSON.stringify(value))
+// v6 inherits Drawing Area admission and its presentation policy; v5 keeps its
+// exact historical authority, publication schema and default consumers.
+for (const version of [5, 6]) {
+  const input = makeDrawingAreaSourceInput({ listening: false })
+  const materialization = JSON.parse(new TextDecoder().decode(input.materializationBytes))
+  materialization.schemaVersion = `nck1-source-materialization-v${version}`
+  input.materializationBytes = bytes(materialization)
+  const imported = importCanonicalCandidate(input)
+  assert.deepEqual(imported.issues, [])
+  const confirmation = { schemaVersion: 'teacher-confirmation-v1',
+    candidateDigest: imported.candidate.candidateDigest, sourceDigest: imported.candidate.source.sha256, confirmed: true }
+  const { request } = materializeNck1CanonicalRequest(input, confirmation)
+  const admitted = admitCanonicalPaperImport({ request, sourceAssetVersion: 1 })
+  assert.equal(admitted.ok, true, JSON.stringify(admitted.diagnostics))
+  assert.equal(admitted.sealed.manifest.schemaVersion, `canonical-paper-publication-v${version === 5 ? 69 : 70}`)
+  for (const consumption of Object.values(admitted.consumers)) {
+    assert.equal(consumption.authorityRef.manifestVersion, version === 5 ? '69' : '71')
+    const groupId = materialization.groups.find(group => group.family === 'application-writing').groupId
+    assert.equal(projectCanonicalConsumerGroup({ consumption, groupId,
+      familyContractId: 'application-writing' }).answerRegion.drawingArea.text, '作图处')
+  }
+}
+console.log('PASS v5 historical Drawing Area and v6 inherited Drawing Area admission and both consumers')
 const paperId = 'paper-synthetic-jinan-stem-map'
 const fixture = await verifyReadingStemFigures(await makeSyntheticNck1OcrFixture({ paperId }), { onlyPositive: true })
 const sourceInput = structuredClone(fixture.candidate.sourceInput)
@@ -51,7 +75,7 @@ const { request } = materializeNck1CanonicalRequest(sourceInput, confirmation)
 const admitted = admitCanonicalPaperImport({ request, sourceAssetVersion: 1 })
 assert.equal(admitted.ok, true, JSON.stringify(admitted.diagnostics))
 const { sealed } = admitted
-assert.equal(sealed.manifest.schemaVersion, 'canonical-paper-publication-v69')
+assert.equal(sealed.manifest.schemaVersion, 'canonical-paper-publication-v70')
 const scratch = mkdtempSync(path.join(tmpdir(), 'eqb-reading-stem-figures-'))
 const outputArg = process.argv.indexOf('--output-dir')
 const outputDir = outputArg < 0 ? null : path.resolve(process.argv[outputArg + 1])
@@ -77,7 +101,7 @@ function rebind(consumption) {
   return consumption
 }
 try {
-  const manifestPath = 'canonical/canonical-paper-publication-v69.json'
+  const manifestPath = 'canonical/canonical-paper-publication-v71.json'
   for (const [file, value] of Object.entries({ ...sealed.artifacts, ...sealed.sourceEvidence,
     [manifestPath]: bytes(sealed.manifest), 'canonical/source-asset.bin': sealed.sourceAsset })) save(scratch, file, value)
   const ref = { paperId, versionName: 'v1', sourceAssetVersion: 1, publicationDigest: sealed.manifest.publicationDigest }
@@ -86,6 +110,22 @@ try {
     readVersionArtifact: (_ref, file) => existsSync(path.join(scratch, file)) ? readFileSync(path.join(scratch, file)) : null }
   const reopened = validateCanonicalPublicationBundle({ manifest: JSON.parse(readFileSync(path.join(scratch, manifestPath))),
     sourceAsset: store.readSourceAsset(), readArtifact: file => store.readVersionArtifact(ref, file) })
+  assert.throws(() => validateCanonicalPublicationBundle({
+    manifest: { ...sealed.manifest, unexpectedField: true }, sourceAsset: sealed.sourceAsset,
+    readArtifact: file => store.readVersionArtifact(ref, file),
+  }), { code: 'CANONICAL_PUBLICATION_SCHEMA_INVALID' })
+  const invalidReportManifest = structuredClone(sealed.manifest)
+  const reportDescriptor = invalidReportManifest.artifacts.find(artifact => artifact.role === 'normalization_report')
+  const invalidReport = bytes({
+    ...JSON.parse(store.readVersionArtifact(ref, reportDescriptor.relativePath)), unexpectedField: true,
+  })
+  Object.assign(reportDescriptor, { byteLength: invalidReport.byteLength, sha256: sha256(invalidReport) })
+  invalidReportManifest.publicationDigest = digestJson(withoutKey(invalidReportManifest, 'publicationDigest'))
+  assert.throws(() => validateCanonicalPublicationBundle({
+    manifest: invalidReportManifest, sourceAsset: sealed.sourceAsset,
+    readArtifact: file => file === reportDescriptor.relativePath ? invalidReport : store.readVersionArtifact(ref, file),
+  }), error => error.code === 'CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID')
+  console.log('PASS v71 binds v70 publication/report schemas and rejects unknown fields with recomputed digests')
   const consumers = Object.fromEntries(['screen', 'print_pdf'].map(consumerId => {
     const result = loadPaperForConsumptionSync({ paperId, consumerId }, store)
     assert.equal(result.disposition, 'ready', JSON.stringify(result.diagnostics))
@@ -102,13 +142,13 @@ try {
   assert.deepEqual(await loadPaperForConsumption({ paperId, consumerId: 'screen' }, store), consumers.screen)
   const model = buildCanonicalReadingConsumptionSurfaceData({ consumption: consumers.screen, groupId: publicGroup(consumers.screen).groupId })
   assert.equal(model.surfaceData.questions[0].stemFigures.length, 2)
-  assert.equal(reopened.plan.authorityRef.manifestVersion, '69')
+  assert.equal(reopened.plan.authorityRef.manifestVersion, '71')
   for (const consumerContract of Object.values(consumerContractRefs)) {
     const old = loadPaperForConsumptionSync({ paperId, consumerContract }, store)
     assert.equal(old.disposition, 'incompatible')
     assert.equal(old.diagnostics[0].code, 'CANONICAL_CONSUMER_STEM_FIGURE_UNAVAILABLE')
   }
-  console.log('PASS v69 confirmed admission, disk archive/reopen, source crop + rendition, both public consumers and normalization')
+  console.log('PASS v71 confirmed admission, disk archive/reopen, source crop + rendition, both public consumers and normalization')
   const mediaDocuments = reopened.sourceCapture.documents.filter(document =>
     /^(source|candidate)_media_/u.test(document.inputKey))
   assert.equal(mediaDocuments.length, 3, 'Two original crops and the selected rendition must each remain archived')
@@ -198,8 +238,8 @@ try {
     save(outputDir, 'print.html', html)
     save(outputDir, 'answerOnly.html', answerHtml)
     save(outputDir, 'source-question.pdf', sourceInput.documents[0].bytes)
-    save(outputDir, 'publication-v69.json', bytes(sealed.manifest))
-    save(outputDir, 'materialization-v5.json', bytes(mat))
+    save(outputDir, 'publication-v70.json', bytes(sealed.manifest))
+    save(outputDir, 'materialization-v6.json', bytes(mat))
     for (const [file, value] of Object.entries({ ...sealed.artifacts, ...sealed.sourceEvidence,
       [manifestPath]: bytes(sealed.manifest), 'canonical/source-asset.bin': sealed.sourceAsset })) {
       save(outputDir, `sealed/${file}`, value)

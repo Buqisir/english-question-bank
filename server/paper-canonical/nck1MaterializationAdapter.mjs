@@ -1455,7 +1455,7 @@ export function deriveNck1SemanticSource(
           `observation:stem-figure:${figure.blockId}`, 'source_question_figure',
           figure.source, { blockId: figure.blockId, mediaId: figure.mediaId }, documentsById,
         )
-        observation.extraction.version = '9'
+        observation.extraction.version = '10'
         source.observations.push(observation)
       }
     }
@@ -1508,7 +1508,7 @@ export function deriveNck1SemanticSource(
                 },
               }
             : {}),
-          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),
@@ -1901,7 +1901,7 @@ export function replaceOcrStructuredAnswerRegions(raw, expected, resolved, confi
 // B1 derives ownership from the immutable confirmed source stream. The old
 // producer is deliberately unchanged: it supplies question identity/locator and
 // options, while these contiguous media markers were previously unassociated.
-// A subsequent authority must admit the complete v5 reader before publication.
+// A subsequent authority must admit the complete v6 reader before publication.
 function confirmedStemFigures(raw, resolved, expected) {
   const same = (left, right) => digestJson(left) === digestJson(right)
   const reject = message => { throw new Error(message) }
@@ -2024,7 +2024,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       if (!same(original.extraction.region, locator.region)) {
         // Only an ordinary, source-order body figure may tighten its top.
         // Keep the immutable parent and the A-D bank path separate.
-        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(raw.schemaVersion)
+        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(raw.schemaVersion)
           || !matchesCrop(original, locator)
           || resolved.contentMedia.filter(value => value.mediaId === mediaId).length !== 1) {
           reject('OCR top-trim requires one confirmed PDF content figure with its original media ID')
@@ -2165,7 +2165,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       claim(mediaId)
       continue
     }
-    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(raw.schemaVersion)) {
+    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(raw.schemaVersion)) {
       reject('OCR option banks require the existing figure-option materialization contract')
     }
     // Recover afterItemId from the verified immutable closure, never from a
@@ -2523,9 +2523,9 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     validation.issues.push(adapterIssue('MATERIALIZATION_STEM_FIGURE_CONFIRMATION_REQUIRED',
       'Stem figures require a verified v3 OCR question-source stream'))
   }
-  if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5'].includes(materialization.schemaVersion)
+  if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6'].includes(materialization.schemaVersion)
     || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
-    && !['62', '64', '66', '67', '68', '69'].includes(authorityRef.manifestVersion)) {
+    && !['62', '64', '66', '67', '68', '69', '71'].includes(authorityRef.manifestVersion)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require a registered source-presentation closure'))
   }
   if ((materialization.schemaVersion === 'nck1-source-materialization-v5'
@@ -2533,7 +2533,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     && !closureAdmitsApplicationDrawingArea(resolveCanonicalAuthority(authorityRef).closure)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_DRAWING_AREA_UNSUPPORTED', 'Application drawing areas require their registered successor authority'))
   }
-  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
+  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Listening instruction correction requires its registered successor authority'))
   }
   if (validation.issues.length > 0) {

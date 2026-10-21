@@ -2853,7 +2853,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion),
+    ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion),
     (family.familyContractId === 'reading' && ['2', '3', '4'].includes(closure.artifacts['rich-content']?.version))
       || (['application-writing', 'continuation-writing'].includes(family.familyContractId)
         && closure.artifacts['rich-content']?.version === '4'),
@@ -2864,7 +2864,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion)
+    ? ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
@@ -2923,7 +2923,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {
@@ -2974,7 +2974,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (sourceGroup.sourcePresentation !== undefined
-    && (!['62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion)
+    && (!['62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion)
       || !sourcePresentationMatchesCapture(sourceGroup.sourcePresentation, capture))) {
     diagnostics.push(diagnostic('SOURCE_PRESENTATION_INVALID', 'incomplete_source', '$.sourcePresentation',
       'Source presentation must match captured source observations under a registered source-presentation authority'))
@@ -3315,12 +3315,14 @@ function makeReport({
   inactiveSourceClosures = [],
   diagnostics = [],
 }) {
+  // v71 is the first raw successor after the presentation-only v70 manifest.
+  const reportVersion = authority?.manifestVersion === '71' ? '70' : authority?.manifestVersion || '2'
   const legacyAuthority = authority?.manifestVersion === '1'
   const closureDigests = inactiveSourceClosures.map(
     (closure) => closure.closureDigest,
   )
   const report = {
-    schemaVersion: `normalization-report-v${authority?.manifestVersion || '2'}`,
+    schemaVersion: `normalization-report-v${reportVersion}`,
     disposition,
     authority,
     captureDigest: capture.digest,
@@ -3512,7 +3514,7 @@ export function compileCanonicalPaper(
     inactiveSourceClosures,
     diagnostics,
   })
-  const reportIssues = validateJsonSchema(report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.normalizationReport')
+  const reportIssues = validateJsonSchema(report, closure.schemas[report.schemaVersion], '$.normalizationReport')
   if (reportIssues.length > 0) {
     const mapped = reportIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message))
     return blockedResult('needs_review', capture, closure.authorityRef, [...diagnostics, ...mapped], transformations.records, effectiveReviewDecisions)

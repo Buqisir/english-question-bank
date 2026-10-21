@@ -5,7 +5,7 @@ import { validateNck1SourceMaterialization } from '../../../shared/paper-canonic
 import { projectCanonicalConsumerGroup } from '../../../shared/paper-canonical/consumerProjection.mjs'
 import { nck1MaterializationCandidateAuthorityRef, validateJsonSchema } from '../../../shared/paper-canonical/authority.mjs'
 import { buildNck1ReviewConsumption } from '../../../server/import-review/revisionProjection.mjs'
-import materializationV5Schema from '../../../schemas/paper-canonical/nck1-source-materialization-v5.schema.json' with { type: 'json' }
+import materializationV6Schema from '../../../schemas/paper-canonical/nck1-source-materialization-v6.schema.json' with { type: 'json' }
 import { sha256 } from '../../../shared/paper-canonical/stable.mjs'
 import { rasterPdfRegion } from '../../../server/paper-canonical/pdfRegionRaster.mjs'
 import { produceNck1OcrMaterialization } from '../../../server/paper-import/nck1OcrMaterializationProducer.mjs'
@@ -16,7 +16,7 @@ const bytes = value => new TextEncoder().encode(JSON.stringify(value))
 
 // Exercise the public import seam using original synthetic map drawings. The
 // producer remains unchanged: B1 supplies only the new, independently proven
-// ownership and v5 envelope, as the future producer will.
+// ownership and v6 envelope, as the future producer will.
 export async function verifyReadingStemFigures(fixture, { onlyPositive = false } = {}) {
   const { paperId } = fixture
   const confirmation = clone(fixture.confirmation)
@@ -83,7 +83,7 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
   const resolved = resolveConfirmedNck1OcrEvidence({ paperId, documents, evidence, confirmation })
   assert.deepEqual(resolved.issues, [])
   const mat = clone(produced.materialization)
-  mat.schemaVersion = 'nck1-source-materialization-v5'
+  mat.schemaVersion = 'nck1-source-materialization-v6'
   mat.sourcePresentation = { listeningExample: null, instructions: [
     ['reading.a', '阅读下列短文，从每题所给的四个选项中选出最佳选项。'],
     ['seven-choices', '阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。'],
@@ -125,7 +125,7 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
       documents: docs.map(({ documentId, bytes }) => ({ documentId, bytes })), media: files, ocrSourceBytes: closure })
   }
   assert.deepEqual(validateNck1SourceMaterialization(mat), [])
-  assert.deepEqual(validateJsonSchema(mat, materializationV5Schema), [])
+  assert.deepEqual(validateJsonSchema(mat, materializationV6Schema), [])
   const accepted = imported()
   assert.deepEqual(accepted.issues, [], JSON.stringify(accepted.issues))
   const derived = accepted.candidate.interpretation.groups.find(value => value.groupId === group.groupId)
@@ -139,7 +139,7 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
   }
   const preview = compileNck1MaterializationCandidatePreview(accepted.candidate)
   assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
-  assert.equal(preview.compilation.artifacts.canonicalPaper.paperPlan.authorityRef.manifestVersion, '69')
+  assert.equal(preview.compilation.artifacts.canonicalPaper.paperPlan.authorityRef.manifestVersion, '71')
   const oldAuthority = importCanonicalCandidate(accepted.candidate.sourceInput, undefined,
     { materializationAuthorityRef: nck1MaterializationCandidateAuthorityRef })
   assert(oldAuthority.issues.some(issue => issue.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'))
@@ -216,7 +216,7 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
     'crop-out-of-bounds', 'pdf-sha-mismatch', 'image-sha-mismatch', 'image-dimensions-mismatch',
     'crop-replay-mismatch', 'top-trim', 'wrong-question-source', 'combined-question-answers-source',
     'figure-inside-options', 'figure-after-next-question', 'cross-unconsumed-text',
-    'reversed-figures', 'missing-confirmation', 'legacy-v4-field', 'non-reading-field',
+    'reversed-figures', 'missing-confirmation', 'legacy-v4-field', 'legacy-v5-field', 'non-reading-field',
     'empty-stem-figures', 'null-stem-figure', 'non-figure-stem-block', 'invented-caption', 'confirmed-label-caption',
   ]
   for (const name of cases) {
@@ -294,6 +294,7 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
         ({ before: ep.observations[index].observationId, after: value.observationId }))
       visual.afterItemId = extraItem.itemId
     } else if (name === 'reversed-figures') q.stemFigures.reverse()
+    else if (name === 'legacy-v5-field') invalid.schemaVersion = 'nck1-source-materialization-v5'
     else if (name === 'legacy-v4-field') invalid.schemaVersion = 'nck1-source-materialization-v4'
     else if (name === 'non-reading-field') { invalid.groups.find(value => value.family === 'cloze').questions[0].stemFigures = q.stemFigures; delete q.stemFigures }
     else if (name === 'empty-stem-figures') q.stemFigures = []
@@ -320,7 +321,7 @@ export async function verifyReadingStemFigures(fixture, { onlyPositive = false }
       assert.deepEqual(imported(invalid, files, sourceBytes(ev, cf)).issues, [],
         'confirmed map labels remain valid inside the crop with an empty caption')
       figure.caption = label.text
-      assert(validateJsonSchema(figure, materializationV5Schema.$defs.stemFigure).length > 0)
+      assert(validateJsonSchema(figure, materializationV6Schema.$defs.stemFigure).length > 0)
       assert(validateNck1SourceMaterialization(invalid).some(issue => issue.code === 'MATERIALIZATION_STEM_FIGURE_CAPTION_INVALID'))
     }
     ev.evidenceDigest = nck1OcrEvidenceDigest(ev)

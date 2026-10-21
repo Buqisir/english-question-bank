@@ -64,6 +64,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v71.json',
   'canonical-paper-publication-v69.json',
   'canonical-paper-publication-v68.json',
   'canonical-paper-publication-v67.json',
@@ -151,6 +152,15 @@ function publicationError(code, message) {
   const error = new Error(message)
   error.code = code
   return error
+}
+
+// Publication schemas have independent successor numbers from authority manifests.
+function publicationSchemaVersion(closure) {
+  return closure.authorityRef.manifestVersion === '71' ? '70' : closure.authorityRef.manifestVersion
+}
+
+function publicationSchema(closure) {
+  return closure.schemas[`canonical-paper-publication-v${publicationSchemaVersion(closure)}`]
 }
 
 function artifactPathsFor(authorityRef) {
@@ -428,13 +438,13 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
 }
 
 function capturedListeningAudio(sourceCapture, groups, closure) {
-  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(closure.authorityRef.manifestVersion)) return null
+  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(closure.authorityRef.manifestVersion)) return null
   const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
   const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
   if (!active && documents.length === 0) return null
   if (!active || documents.length !== 1) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Listening requires one confirmed playback descriptor')
   const descriptor = readJsonBytes(decodeBase64(documents[0].encodedBytes, 'listening audio'), 'listening audio')
-  const schema = closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`].properties.listeningAudio
+  const schema = publicationSchema(closure).properties.listeningAudio
   if (validateJsonSchema(descriptor, schema).length) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Invalid playback descriptor')
   return descriptor
 }
@@ -528,7 +538,7 @@ export function sealCanonicalPublication({
     artifactDescriptor('normalization_report', normalizationReport, artifactPaths),
   ]
   const manifestBase = {
-    schemaVersion: `canonical-paper-publication-v${closure.authorityRef.manifestVersion}`,
+    schemaVersion: `canonical-paper-publication-v${publicationSchemaVersion(closure)}`,
     paperId: canonicalPaper.paperPlan.paperId,
     sourceAssetVersion,
     sourceAssetDigest,
@@ -562,7 +572,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   // Strict optional envelope extension: validate it separately without changing
   // any historical authority schema. The full manifest still enters the digest.
   validatedPaperHeaderTitle(manifest.paperHeader)
-  const manifestIssues = validateJsonSchema(withoutKey(manifest, 'paperHeader'), closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`], '$.publication')
+  const manifestIssues = validateJsonSchema(withoutKey(manifest, 'paperHeader'), publicationSchema(closure), '$.publication')
   if (manifestIssues.length > 0) throw publicationError('CANONICAL_PUBLICATION_SCHEMA_INVALID', JSON.stringify(manifestIssues))
   if (manifest.publicationDigest !== digestJson(withoutKey(manifest, 'publicationDigest'))) throw publicationError('CANONICAL_PUBLICATION_DIGEST_INVALID', 'Publication manifest digest differs')
   assertPaperId(manifest.paperId)
@@ -578,7 +588,7 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   }
   const sourceCaptureIssues = validateJsonSchema(artifacts.source_capture, closure.schemas['source-capture-v1'], '$.sourceCapture')
   const planIssues = validateJsonSchema(artifacts.paper_plan, closure.schemas['canonical-paper-plan-v1'], '$.plan')
-  const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.report')
+  const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${publicationSchemaVersion(closure)}`], '$.report')
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
   const listeningAudio = capturedListeningAudio(artifacts.source_capture, artifacts.question_groups.groups, closure)
   if (digestJson(listeningAudio) !== digestJson(manifest.listeningAudio || null)) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Publication audio differs from the confirmed source')
@@ -1662,7 +1672,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         || projectedOccurrences.some(occurrence => occurrence.sourcePresentation !== undefined)
         || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1674,7 +1684,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

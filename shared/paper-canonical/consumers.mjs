@@ -1,3 +1,5 @@
+import screenV49 from '../../standards/paper-canonical/consumers/screen-v49.json' with { type: 'json' }
+import printPdfV50 from '../../standards/paper-canonical/consumers/print-pdf-v50.json' with { type: 'json' }
 import screenV48 from '../../standards/paper-canonical/consumers/screen-v48.json' with { type: 'json' }
 import printPdfV49 from '../../standards/paper-canonical/consumers/print-pdf-v49.json' with { type: 'json' }
 import screen from '../../standards/paper-canonical/consumers/screen-v39.json' with { type: 'json' }
@@ -18,8 +20,6 @@ import screenV46 from '../../standards/paper-canonical/consumers/screen-v46.json
 import printPdfV47 from '../../standards/paper-canonical/consumers/print-pdf-v47.json' with { type: 'json' }
 import screenV47 from '../../standards/paper-canonical/consumers/screen-v47.json' with { type: 'json' }
 import printPdfV48 from '../../standards/paper-canonical/consumers/print-pdf-v48.json' with { type: 'json' }
-import screenV48 from '../../standards/paper-canonical/consumers/screen-v48.json' with { type: 'json' }
-import printPdfV49 from '../../standards/paper-canonical/consumers/print-pdf-v49.json' with { type: 'json' }
 
 import { authorityRefForManifestDigest, closureAdmitsApplicationDrawingArea, closureRendersApplicationDrawingArea, closureAdmitsReadingStemFigures, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'

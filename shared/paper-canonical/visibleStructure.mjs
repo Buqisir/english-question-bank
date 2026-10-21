@@ -1,3 +1,6 @@
+import manifestV71 from '../../standards/paper-canonical/manifest-v71.json' with { type: 'json' }
+import nck1V18 from '../../standards/paper-canonical/profiles/nck1-v18.json' with { type: 'json' }
+import zhejiangLegacyV15 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v15.json' with { type: 'json' }
 import manifestV31 from '../../standards/paper-canonical/manifest-v31.json' with { type: 'json' }
 import manifestV32 from '../../standards/paper-canonical/manifest-v32.json' with { type: 'json' }
 import manifestV33 from '../../standards/paper-canonical/manifest-v33.json' with { type: 'json' }
@@ -52,7 +55,7 @@ import { digestJson } from './stable.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const registeredProfiles = new Map([
-  ...[nck1V17, zhejiangLegacyV14].map(profile => [`${profile.profileId}@${profile.version}`, profile]),
+  ...[nck1V18, nationalLegacyV5, zhejiangLegacyV15, nck1V17, zhejiangLegacyV14].map(profile => [`${profile.profileId}@${profile.version}`, profile]),
   ...[nck1V16, nationalLegacyV4, zhejiangLegacyV13].map((profile) => [
     `${profile.profileId}@${profile.version}`, profile,
   ]),
@@ -329,6 +332,13 @@ const registeredManifestProfiles = new Map([
       { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
     ])),
   ],
+  [
+    `${manifestV71.manifestId}@${manifestV71.version}@${digestJson(manifestV71)}`,
+    new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV15].map((profile) => [
+      profile.profileId,
+      { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
+    ])),
+  ],
 ])
 
 function reject(message) {
@@ -449,7 +459,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(
@@ -462,7 +472,7 @@ function sourceInstructionOverrides(consumption) {
       if (occurrence.sourcePresentation !== undefined) {
         const presentation = occurrence.sourcePresentation
         const instruction = presentation?.instruction
-        if (!['62', '64', '66', '67', '68', '69'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
+        if (!['62', '64', '66', '67', '68', '69', '71'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
           || !validCanonicalSourcePresentation(presentation)
           || digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence)) {
           reject('source-backed presentation proof is invalid')
