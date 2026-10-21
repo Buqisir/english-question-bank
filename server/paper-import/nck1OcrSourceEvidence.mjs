@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -121,7 +121,49 @@ export function nck1OcrEvidenceDigest(evidence) {
   return digestJson(evidenceWithoutDigest(evidence))
 }
 
+// Retain only small successful raster descriptors, never PDF/PNG/RGBA bytes.
+// Each lookup hashes the current bytes (not a claimed digest or object identity)
+// and fingerprints the executable tool versions. Independent callers still
+// reopen/verify their inputs and compare the resulting descriptor to evidence.
+const pdfRasterMemo = new Map()
+const PDF_RASTER_MEMO_LIMIT = 256
+
+function pdfRasterKey(bytes, page) {
+  const toolchain = []
+  for (const [command, args] of [['pdftoppm', ['-v']], ['magick', ['-version']]]) {
+    const result = spawnSync(command, args, { encoding: 'utf8', timeout: 5000, maxBuffer: 64 * 1024 })
+    // An unavailable fingerprint disables reuse; it must not create a new
+    // admission failure for a page that the ordinary raster path can replay.
+    if (result.status !== 0 || result.error) return null
+    const version = `${result.stdout || ''}${result.stderr || ''}`.trim()
+    if (!version) return null
+    toolchain.push(version)
+  }
+  return digestJson({
+    recipe: 'ocr-pdf-page-raster-v1',
+    pdf: sha256(bytes), page, density: RASTER_DENSITY, region: FULL_PAGE,
+    toolchain,
+  })
+}
+
 function rasterPage(document, page) {
+  if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) return replayImagePage(document, page)
+  const key = pdfRasterKey(document.bytes, page)
+  if (key && pdfRasterMemo.has(key)) {
+    const raster = pdfRasterMemo.get(key)
+    pdfRasterMemo.delete(key)
+    pdfRasterMemo.set(key, raster)
+    return structuredClone(raster)
+  }
+  const raster = replayPdfPage(document, page)
+  if (key) {
+    pdfRasterMemo.set(key, structuredClone(raster))
+    if (pdfRasterMemo.size > PDF_RASTER_MEMO_LIMIT) pdfRasterMemo.delete(pdfRasterMemo.keys().next().value)
+  }
+  return raster
+}
+
+function replayImagePage(document, page) {
   if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
     const sourcePage = nck1ImageBundlePage(document, page)
     return {
@@ -132,6 +174,9 @@ function rasterPage(document, page) {
       ...nck1ImagePageRgba(sourcePage),
     }
   }
+}
+
+function replayPdfPage(document, page) {
   const raster = rasterPdfRegion({
     pdfBytes: document.bytes,
     page,

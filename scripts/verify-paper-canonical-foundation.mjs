@@ -66,6 +66,16 @@ const second = compileCanonicalPaper(request)
 
 assert.equal(first.disposition, 'ready')
 assert.deepEqual(second, first)
+// A native Base64 fast path must encode only the supplied view, never the
+// surrounding ArrayBuffer. Verify the public compiler's complete output.
+const sourceBytes = request.evidence.documents[0].bytes
+const surroundedBytes = new Uint8Array(sourceBytes.length + 16).fill(255)
+surroundedBytes.set(sourceBytes, 7)
+assert.deepEqual(compileCanonicalPaper({
+  ...request,
+  evidence: { ...request.evidence, documents: request.evidence.documents.map((document, index) =>
+    index ? document : { ...document, bytes: surroundedBytes.subarray(7, 7 + sourceBytes.length) }) },
+}), first)
 assert.equal(stableStringify(request), requestBefore)
 assert.equal('canonicalPaper' in first.artifacts, true)
 assert.equal('semanticDigest' in first.artifacts.normalizationReport, true)

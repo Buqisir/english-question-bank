@@ -165,6 +165,11 @@ function asBytes(value) {
 }
 
 function bytesToBase64(bytes) {
+  // Node can encode the exact view without copying bytes into a large binary
+  // string. Keep the browser's existing chunked fallback and byte semantics.
+  const nativeBuffer = typeof process !== 'undefined' && typeof process.getBuiltinModule === 'function'
+    ? process.getBuiltinModule('node:buffer').Buffer : null
+  if (nativeBuffer) return nativeBuffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength).toString('base64')
   let binary = ''
   for (let offset = 0; offset < bytes.length; offset += 0x8000) binary += String.fromCharCode(...bytes.subarray(offset, offset + 0x8000))
   return btoa(binary)
