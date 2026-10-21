@@ -1,5 +1,6 @@
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
+import { readFile } from 'node:fs/promises'
 
 const execute = promisify(execFile)
 const terminated = new WeakMap()
@@ -50,4 +51,36 @@ export function killReviewProcessTree(child, pids = []) {
   })()
   terminated.set(child, disposal)
   return disposal
+}
+
+let bootIdentity
+export async function reviewProcessIdentity(pid = process.pid) {
+  if (!bootIdentity) {
+    bootIdentity = process.platform === 'linux'
+      ? (await readFile('/proc/sys/kernel/random/boot_id', 'utf8')).trim()
+      : (await execute('sysctl', ['-n', 'kern.boottime'])).stdout.trim()
+  }
+  try {
+    let startId
+    if (process.platform === 'linux') {
+      const stat = await readFile(`/proc/${pid}/stat`, 'utf8')
+      startId = stat.slice(stat.lastIndexOf(')') + 2).split(' ')[19]
+    } else {
+      startId = (await execute('ps', ['-p', String(pid), '-o', 'lstart='])).stdout.trim()
+    }
+    if (!startId) return null
+    return { bootId: bootIdentity, pid, startId }
+  } catch (error) {
+    if (error.code === 'ENOENT' || error.code === 1) return null
+    throw error
+  }
+}
+export async function matchingReviewProcess(identity) {
+  if (!identity) return 'unknown'
+  const current = await reviewProcessIdentity(identity.pid)
+  if (!current) return 'dead'
+  return current.bootId === identity.bootId && current.startId === identity.startId ? 'live' : 'different'
+}
+export async function reviewProcessGroupMembers(groupId) {
+  return (await processInventory()).filter(row => row.group === groupId && !row.state?.startsWith('Z'))
 }

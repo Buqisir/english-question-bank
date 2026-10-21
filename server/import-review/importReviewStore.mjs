@@ -1,4 +1,6 @@
 import { reviewCompatibilityEligibility } from './reviewRecoveryPolicy.mjs'
+import { ensurePromotionOperationShape, linkPromotionOperation, operationForExecution,
+  promotionOperationError } from './promotionOperationStore.mjs'
 import { createHash, randomUUID } from 'node:crypto'
 import {
   closeSync,
@@ -617,6 +619,7 @@ function ensureShape(db) {
     db.exec('ALTER TABLE import_review_papers ADD COLUMN discussion_thread_id TEXT')
   }
   ensureReviewCompatibilityShape(db)
+  ensurePromotionOperationShape(db)
 }
 
 function revisionRow(row) {
@@ -817,15 +820,20 @@ export function createImportReviewStore({
   filesRoot,
   rendererBuildId,
   projectRevision = buildImportReviewProjection,
+  busyTimeoutMs = 5000,
+  initializeSchema = true,
 }) {
+  if (!Number.isInteger(busyTimeoutMs) || busyTimeoutMs < 0 || busyTimeoutMs > 5000) throw new Error('Invalid Review busy timeout')
   assertPaperStorageMounted([filesRoot])
-  mkdirSync(path.dirname(dbPath), { recursive: true })
-  mkdirSync(filesRoot, { recursive: true })
-  const initialize = new DatabaseSync(dbPath)
-  try {
-    initialize.exec('PRAGMA busy_timeout=5000')
-    ensureShape(initialize)
-  } finally { initialize.close() }
+  if (initializeSchema) {
+    mkdirSync(path.dirname(dbPath), { recursive: true })
+    mkdirSync(filesRoot, { recursive: true })
+    const initialize = new DatabaseSync(dbPath)
+    try {
+      initialize.exec(`PRAGMA busy_timeout=${busyTimeoutMs}`)
+      ensureShape(initialize)
+    } finally { initialize.close() }
+  }
   const projectionCache = new Map()
   const targetBuild = reviewBuildIdentityProvider()
 
@@ -896,8 +904,13 @@ export function createImportReviewStore({
     if (write) assertPaperStorageMounted([filesRoot])
     const db = new DatabaseSync(dbPath, { readOnly: !write })
     db.exec('PRAGMA foreign_keys = ON')
+    db.exec(`PRAGMA busy_timeout=${busyTimeoutMs}`)
     try {
       return callback(db)
+    } catch (error) {
+      if (error.errcode === 5 || error.code === 'SQLITE_BUSY'
+        || /database is locked|database is busy/.test(error.message)) throw promotionOperationError('BUSY')
+      throw error
     } finally {
       db.close()
     }
@@ -2532,7 +2545,54 @@ export function createImportReviewStore({
     `).get(paperId)))
   }
 
-  function beginPromotion(paperId, input, actor) {
+  // Small admission facts only. No projections, approvals, consumption, paths
+  // or credential hashes cross the process boundary.
+  function publicationGrantDigest(row) {
+    return digestJson(Object.fromEntries(['id', 'paper_id', 'revision_id', 'approval_id',
+      'source_digest', 'candidate_digest', 'visible_structure_digest', 'analysis_digest',
+      'bundle_digest', 'renderer_build_id', 'requested_by', 'granted_by', 'granted_at',
+      'expires_at'].map(key => [key, row[key]])))
+  }
+  function preparePromotionOperation(paperId, mode, input, actor, secretHash = null) {
+    const principal = requiredString(actor, 'actor', 200)
+    return withDb(false, db => {
+      db.exec('BEGIN')
+      try {
+      if (mode === 'scoped') {
+        const row = db.prepare('SELECT * FROM import_review_publication_requests WHERE id=?').get(input.requestId)
+        if (!row || row.paper_id !== paperId || row.requested_by !== principal
+          || !SHA256.test(secretHash || '') || row.secret_hash !== secretHash) {
+          throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_FORBIDDEN', 'Publication request capability is invalid', 403)
+        }
+        if (!['granted', 'consumed'].includes(row.state)) throw storeError('IMPORT_REVIEW_PUBLICATION_GRANT_REQUIRED', 'Exact Owner publication grant is required', 403)
+        if (row.state !== 'consumed' && Date.parse(row.expires_at) <= Date.now()) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_EXPIRED', 'Publication request expired', 410)
+        return { requestId: row.id, revisionId: row.revision_id, grantDigest: publicationGrantDigest(row) }
+      }
+      if (mode === 'owner_publish') {
+        const revision = revisionRow(db.prepare('SELECT * FROM import_review_revisions WHERE id=? AND paper_id=?').get(input.revisionId, paperId))
+        const paper = db.prepare('SELECT latest_revision_id FROM import_review_papers WHERE paper_id=?').get(paperId)
+        if (!paper) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Paper not found', 404)
+        if (input.intent !== 'publish' || !revision || paper?.latest_revision_id !== revision.id
+          || revision.reviewKind !== 'candidate' || revision.bundleDigest !== input.bundleDigest
+          || revision.rendererBuildId !== input.rendererBuildId) throw storeError('IMPORT_REVIEW_PROMOTION_STALE', 'Exact latest Candidate changed')
+        return { revisionId: revision.id, intent: 'publish', bundleDigest: revision.bundleDigest, rendererBuildId: revision.rendererBuildId }
+      }
+      if (!['ship', 'retry_ship'].includes(mode) || input.intent !== mode) throw storeError('IMPORT_REVIEW_PROMOTION_INTENT_INVALID', 'Promotion intent is invalid', 400)
+      const expected = promotionIdentity(input)
+      if (!db.prepare('SELECT 1 FROM import_review_papers WHERE paper_id=?').get(paperId)) {
+        throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Paper not found', 404)
+      }
+      const revision = db.prepare('SELECT paper_id FROM import_review_revisions WHERE id=?').get(expected.revisionId)
+      if (!revision || revision.paper_id !== paperId) throw storeError('IMPORT_REVIEW_PROMOTION_STALE', 'Exact Candidate changed')
+      return { ...expected, intent: mode }
+      } finally { db.exec('ROLLBACK') }
+    })
+  }
+  function operationPromotion(promotionId) {
+    return withDb(false, db => promotionRow(db, db.prepare('SELECT * FROM import_review_promotions WHERE id=?').get(promotionId)))
+  }
+
+  function beginPromotion(paperId, input, actor, operation = null) {
     const expected = promotionIdentity(input)
     const intent = requiredString(input?.intent, 'intent', 30)
     if (!['ship', 'retry_ship'].includes(intent)) {
@@ -2543,6 +2603,13 @@ export function createImportReviewStore({
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
+        const execution = operationForExecution(db, operation, paperId, requestedBy)
+        if (execution) {
+          const same = execution.mode === 'owner_publish'
+            ? execution.expected.bundleDigest === expected.bundleDigest && execution.revision_id === expected.revisionId
+            : execution.mode === intent && digestJson(execution.expected) === digestJson({ ...expected, intent })
+          if (!same) throw promotionOperationError('UNKNOWN', operation.id)
+        }
         const existing = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE approval_id = ?
         `).get(expected.approvalId))
@@ -2556,6 +2623,7 @@ export function createImportReviewStore({
           assertPromotionIdentity(existing, expected)
           if (existing.state === 'published') {
             assertCurrentApprovedRevision(db, paperId, expected, { reconciliation: true })
+            linkPromotionOperation(db, operation, existing)
             db.exec('COMMIT')
             return { action: 'already_published', promotion: existing }
           }
@@ -2582,6 +2650,7 @@ export function createImportReviewStore({
                 'Interrupted publishing requires a current retry-ship authorization',
               )
             }
+            linkPromotionOperation(db, operation, existing)
             db.exec('COMMIT')
             return { action: 'resume', promotion: existing }
           }
@@ -2620,6 +2689,7 @@ export function createImportReviewStore({
           const promotion = promotionRow(db, db.prepare(`
             SELECT * FROM import_review_promotions WHERE id = ?
           `).get(existing.promotionId))
+          linkPromotionOperation(db, operation, promotion)
           db.exec('COMMIT')
           return { action: 'retry', promotion, contentBinding: compatibility }
         }
@@ -2669,6 +2739,7 @@ export function createImportReviewStore({
         const promotion = promotionRow(db, db.prepare(`
           SELECT * FROM import_review_promotions WHERE id = ?
         `).get(promotionId))
+        linkPromotionOperation(db, operation, promotion)
         db.exec('COMMIT')
         return { action: 'publish', promotion, contentBinding: compatibility }
       } catch (error) {
@@ -2832,17 +2903,22 @@ export function createImportReviewStore({
     })
   }
 
-  function beginScopedPromotion(paperId, requestId, secretHash, actor) {
+  function beginScopedPromotion(paperId, requestId, secretHash, actor, operation = null) {
     const principal = requiredString(actor, 'actor', 200)
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
+        const execution = operationForExecution(db, operation, paperId, principal)
         const row = db.prepare('SELECT * FROM import_review_publication_requests WHERE id = ?').get(requestId)
-        if (!row || row.paper_id !== paperId || row.requested_by !== principal || !SHA256.test(secretHash || '') || row.secret_hash !== secretHash) {
+        if (!row || row.paper_id !== paperId || row.requested_by !== principal || (execution
+          ? execution.mode !== 'scoped' || execution.request_id !== requestId
+            || execution.expected.grantDigest !== publicationGrantDigest(row)
+          : !SHA256.test(secretHash || '') || row.secret_hash !== secretHash)) {
           throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_FORBIDDEN', 'Publication request capability is invalid', 403)
         }
         if (row.state === 'consumed') {
           const request = publicationRequestRow(db, row)
+          linkPromotionOperation(db, operation, request.promotion)
           db.exec('COMMIT')
           return { action: 'consumed', promotion: request.promotion }
         }
@@ -2878,6 +2954,7 @@ export function createImportReviewStore({
           consumed_at = ?, promotion_id = ?, updated_at = ? WHERE id = ?`)
           .run(timestamp, promotionId, timestamp, requestId)
         const promotion = promotionRow(db, db.prepare('SELECT * FROM import_review_promotions WHERE id = ?').get(promotionId))
+        linkPromotionOperation(db, operation, promotion)
         db.exec('COMMIT')
         return { action: 'publish', promotion, contentBinding: checked.compatibility }
       } catch (error) { db.exec('ROLLBACK'); throw error }
@@ -3390,6 +3467,8 @@ export function createImportReviewStore({
     ready: targetBuild.ready,
     compatibilityForRevision,
     agentPaperStatus,
+    preparePromotionOperation,
+    operationPromotion,
     beginPromotion,
     beginScopedPromotion,
     completeFileUpload,

@@ -44,6 +44,8 @@ function sendError(response, context, error) {
     ...(error?.reasonCode ? { reasonCode: error.reasonCode } : {}),
     ...(error?.compatibility ? { compatibility: error.compatibility } : {}),
     ...(error?.metrics ? { metrics: error.metrics } : {}),
+    ...(error?.operationId ? { operationId: error.operationId } : {}),
+    ...(error?.retryable !== undefined ? { retryable: error.retryable } : {}),
   })
 }
 
@@ -418,6 +420,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     context.sendJson(response, result.status === 'published' ? 201 : 200, {
       status: result.status,
       promotion: result.promotion,
+      ...(result.operationId ? { operationId: result.operationId } : {}),
     })
   })))
 
