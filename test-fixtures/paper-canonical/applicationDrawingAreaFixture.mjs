@@ -7,7 +7,7 @@ import { importCanonicalCandidate, rederiveConfirmedCanonicalCandidate } from '.
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 
-export function makeDrawingAreaMaterialization({ drawing = true, longOpening = false, listening = true, labelFirst = false } = {}) {
+export function makeDrawingAreaMaterialization({ drawing = true, longOpening = false, listening = true, labelFirst = false, structuredAnswerRegion = false } = {}) {
   const materialization = makeFixture({ listening, mixedTable: false })
   materialization.schemaVersion = drawing ? 'nck1-source-materialization-v5' : 'nck1-source-materialization-v4'
   const group = materialization.groups.find(item => item.slotId === 'writing.application')
@@ -27,6 +27,22 @@ export function makeDrawingAreaMaterialization({ drawing = true, longOpening = f
   if (drawing && labelFirst) {
     const index = group.blocks.findIndex(block => block.blockId === group.writingTask.drawingArea.labelBlockRef)
     group.blocks.unshift(...group.blocks.splice(index, 1))
+  }
+  if (structuredAnswerRegion) {
+    materialization.documents.find(document => document.documentId === 'paper').pageCount = 9
+    materialization.sourceCoverage.reviewedPages = Array.from({ length: 9 }, (_, i) => i + 1)
+    materialization.sourceCoverage.visuals.push({
+      visualId: 'visual:application-template', page: 9,
+      region: { x: 0.087322, y: 0.743468, width: 0.832074, height: 0.150238 },
+      disposition: 'structured_answer_region', targetId: group.groupId,
+    })
+    group.writingTask.drawingArea.source = {
+      kind: 'page_region', documentId: 'paper', page: 9,
+      region: { x: 0.75, y: 0.75, width: 0.12, height: 0.12 },
+    }
+    const label = group.blocks.find(block => block.blockId === group.writingTask.drawingArea.labelBlockRef)
+    label.content[0].text = '（做图处）'
+    label.source = structuredClone(group.writingTask.drawingArea.source)
   }
   materialization.sourcePresentation = {
     instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slotId => listening || !slotId.startsWith('listening.')).map(slotId => ({

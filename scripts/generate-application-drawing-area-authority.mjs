@@ -22,6 +22,11 @@ raw.version = '69'
 const materialization = read(schemaPath('nck1-source-materialization-v4'))
 materialization.$id = 'nck1-source-materialization-v5'
 materialization.properties.schemaVersion.const = materialization.$id
+materialization.$defs.sourceVisual.properties.disposition.enum.push('structured_answer_region')
+materialization.$defs.sourceVisual.allOf = [{
+  if: { required: ['disposition'], properties: { disposition: { const: 'structured_answer_region' } } },
+  then: { required: ['region'], properties: { targetId: { type: 'string', minLength: 1 } } },
+}]
 materialization.$defs.writingTask.properties.drawingArea = {
   type: 'object', additionalProperties: false,
   required: ['placement', 'labelBlockRef', 'source'],

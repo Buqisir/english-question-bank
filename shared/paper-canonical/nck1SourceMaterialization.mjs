@@ -828,7 +828,18 @@ function nestedBlocks(blocks) {
     : [block])
 }
 
-function validateSourceCoverage(sourceCoverage, groups, media, documents, issues) {
+// Normalized coordinates may differ by one millionth through crop rounding.
+const structuredAnswerRegionTolerance = 1e-6
+function regionContains(outer, inner) {
+  return outer && inner
+    && ['x', 'y', 'width', 'height'].every(key => Number.isFinite(outer[key]) && Number.isFinite(inner[key]))
+    && inner.x >= outer.x - structuredAnswerRegionTolerance
+    && inner.y >= outer.y - structuredAnswerRegionTolerance
+    && inner.x + inner.width <= outer.x + outer.width + structuredAnswerRegionTolerance
+    && inner.y + inner.height <= outer.y + outer.height + structuredAnswerRegionTolerance
+}
+
+function validateSourceCoverage(sourceCoverage, groups, media, documents, issues, allowStructuredAnswerRegion = false) {
   if (!isRecordValue(sourceCoverage) || !exactKeys(sourceCoverage, [
     'documentId', 'reviewedPages', 'visuals',
   ])) {
@@ -854,6 +865,7 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
   const tableIds = new Set(groups.flatMap((group) =>
     nestedBlocks(group.blocks).filter((block) => block.kind === 'table').map((block) => block.blockId)))
   const mediaIds = new Set(media.filter((item) => item?.usage === 'content').map((item) => item.mediaId))
+  const groupsById = new Map(groups.map(group => [group.groupId, group]))
   const expectedTargets = new Set([...tableIds, ...mediaIds])
   const seenVisualIds = new Set()
   const seenTargets = new Set()
@@ -874,7 +886,8 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
       || !Number.isInteger(visual.page)
       || visual.page < 1
       || visual.page > (document?.pageCount || 0)
-      || !['semantic_table', 'content_media', 'furniture'].includes(visual.disposition)
+      || !['semantic_table', 'content_media', 'furniture',
+        ...(allowStructuredAnswerRegion ? ['structured_answer_region'] : [])].includes(visual.disposition)
       || (visual.disposition === 'furniture'
         ? visual.targetId !== null
         : !nonEmptyString(visual.targetId))
@@ -891,14 +904,40 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
       )
     }
     seenVisualIds.add(visual.visualId)
+    if (visual.disposition === 'structured_answer_region') {
+      const group = groupsById.get(visual.targetId)
+      const drawingSource = group?.writingTask?.drawingArea?.source
+      if (group?.family !== 'application-writing' || group.writingTask?.taskType !== 'application'
+        || drawingSource?.kind !== 'page_region'
+        || drawingSource.documentId !== sourceCoverage.documentId
+        || drawingSource.page !== visual.page
+        || !regionContains(visual.region, drawingSource.region)) {
+        issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID', `${path}.targetId`,
+          'Structured answer visual must bind an application group with a drawing area inside the same source document/page/region'))
+      }
+      const conflictingMedia = media.some(item => {
+        const crop = item?.extraction
+        if (item?.usage !== 'content' || crop?.kind !== 'pdf_crop'
+          || crop.documentId !== sourceCoverage.documentId || crop.page !== visual.page
+          || !visual.region || !crop.region) return false
+        return Math.min(visual.region.x + visual.region.width, crop.region.x + crop.region.width)
+            - Math.max(visual.region.x, crop.region.x) > structuredAnswerRegionTolerance
+          && Math.min(visual.region.y + visual.region.height, crop.region.y + crop.region.height)
+            - Math.max(visual.region.y, crop.region.y) > structuredAnswerRegionTolerance
+      })
+      if (conflictingMedia) issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_CONTENT_CONFLICT', path,
+        'A structured answer visual cannot also be consumed by overlapping content media'))
+    }
     if (visual.targetId !== null) {
       if (seenTargets.has(visual.targetId)) {
-        issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_TARGET_DUPLICATE', `${path}.targetId`, 'A semantic table or content media target may be inventoried only once'))
+        issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_TARGET_DUPLICATE', `${path}.targetId`, 'Each semantic table, content media or structured answer group may be inventoried only once'))
       }
       seenTargets.add(visual.targetId)
       const validTarget = visual.disposition === 'semantic_table'
         ? tableIds.has(visual.targetId)
-        : mediaIds.has(visual.targetId)
+        : visual.disposition === 'structured_answer_region'
+          ? groupsById.has(visual.targetId)
+          : mediaIds.has(visual.targetId)
       if (!validTarget) issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID', `${path}.targetId`, 'Visual disposition must bind its exact semantic table or content media target'))
     }
   }
@@ -1132,7 +1171,8 @@ export function validateNck1SourceMaterialization(value) {
       }
     }
   }
-  const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues)
+  const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues,
+    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5)
   validateListening(value.listening, documents, sourceCoverage, issues)
   return issues
 }
