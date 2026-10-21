@@ -8,7 +8,7 @@ import { performance } from 'node:perf_hooks'
 import { DatabaseSync } from 'node:sqlite'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { buildImportReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
-import { finalizeInventory } from '../server/import-review/finalizeComputation.mjs'
+import { finalizeContentSubject, finalizeInventory } from '../server/import-review/finalizeComputation.mjs'
 import { runFinalizeWorker } from '../server/import-review/runFinalizeWorker.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { buildProductPreviewPayload } from '../server/import-review/reviewSubject.mjs'
@@ -166,6 +166,28 @@ try {
       'unknown diagnostics without a subject still require intact evidence')
     evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
       .run(evidence, asyncResult.id)
+    // Historical production manifests may omit `files`; the fallback guard must
+    // treat that as missing frozen products instead of failing the whole list.
+    const manifestJson = evidenceDb.prepare('SELECT manifest_json FROM import_review_revisions WHERE id=?')
+      .get(asyncResult.id).manifest_json
+    const { files: _files, ...withoutFiles } = JSON.parse(manifestJson)
+    for (const [label, files] of [['missing'], ['null', null], ['object', {}], ['string', 'files'], ['number', 1]]) {
+      const malformed = label === 'missing' ? withoutFiles : { ...withoutFiles, files }
+      evidenceDb.prepare('UPDATE import_review_revisions SET manifest_json=? WHERE id=?')
+        .run(JSON.stringify(malformed), asyncResult.id)
+      const listed = asyncCase.store.listPapers()[0]
+      assert.equal(listed.compatibility.eligible, false,
+        `a candidate manifest with ${label} files lists as ineligible instead of throwing`)
+      assert.equal(listed.hasMediaCandidates, false, label)
+      assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).eligible, false, label)
+      assert.equal(asyncCase.store.agentPaperStatus(asyncResult.paperId).compatibility.eligible, false, label)
+      assert.deepEqual(finalizeContentSubject(root, asyncCase.store.getRevision(asyncResult.id), synchronous),
+        { ok: false, reasonCode: 'MISSING_FROZEN_PRODUCTS' }, label)
+      assert.throws(() => asyncCase.store.verifiedFileForRead(asyncResult.id, 'products/manifest-v1.json'),
+        { code: 'IMPORT_REVIEW_NOT_FOUND', status: 404 }, label)
+    }
+    evidenceDb.prepare('UPDATE import_review_revisions SET manifest_json=? WHERE id=?')
+      .run(manifestJson, asyncResult.id)
   } finally { evidenceDb.close() }
   function preview(dbPath) {
     const db = new DatabaseSync(dbPath, { readOnly: true })

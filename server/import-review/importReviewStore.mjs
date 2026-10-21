@@ -844,7 +844,8 @@ export function createImportReviewStore({
     // Renderer fallback cannot supply missing frozen products. Check the sealed
     // inventory even when target identity is unavailable and masks that reason.
     if (value.fallback && revision?.reviewKind === 'candidate'
-      && !revision.manifest?.files.some(file => file.path === 'products/manifest-v1.json')) {
+      && (!Array.isArray(revision.manifest?.files)
+        || !revision.manifest.files.some(file => file?.path === 'products/manifest-v1.json'))) {
       return { ...value, eligible: false }
     }
     return value
@@ -1528,8 +1529,8 @@ export function createImportReviewStore({
         state: row.state || 'uploading',
         reviewKind: kind,
         bundleDigest: row.bundle_digest,
-        hasMediaCandidates: (manifest.files || [])
-          .some(file => file.role === 'content_media_candidate'),
+        hasMediaCandidates: Array.isArray(manifest.files)
+          && manifest.files.some(file => file?.role === 'content_media_candidate'),
         rendererBuildId: row.renderer_build_id,
         compatibility,
         rendererStale: kind === 'candidate' && !compatibility.eligible,
@@ -1724,7 +1725,9 @@ export function createImportReviewStore({
 
   function verifiedFileForRead(revisionId, relativePath) {
     const revision = getRevision(revisionId)
-    const file = revision?.manifest.files.find(file => file.path === relativePath)
+    const file = Array.isArray(revision?.manifest?.files)
+      ? revision.manifest.files.find(file => file?.path === relativePath)
+      : undefined
     if (!revision || revision.state === 'uploading' || !file) {
       throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Finalized revision file not found', 404)
     }
