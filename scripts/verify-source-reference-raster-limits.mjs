@@ -33,9 +33,16 @@ const trace = path.join(directory, 'calls.log')
 try {
   const localTmp = path.join(directory, 'tmp')
   mkdirSync(localTmp)
+  const samplePdf = pagePdf(72, 96)
+  const samplePage = rasterPdfRegion({ pdfBytes: samplePdf, page: 1, density: 288,
+    region: { x: 0, y: 0, width: 1, height: 1 } })
+  const sampleCrop = rasterPdfRegion({ pdfBytes: samplePdf, page: 1, region, density: 288 })
+  const pagePng = path.join(directory, 'sample-page.png'), cropPng = path.join(directory, 'sample-crop.png')
+  writeFileSync(pagePng, samplePage.bytes)
+  writeFileSync(cropPng, sampleCrop.bytes)
   const stall = path.join(directory, 'stall.mjs')
   // Finite, idle delay: even a broken timeout cannot hang or exhaust resources.
-  writeFileSync(stall, 'setTimeout(() => process.exit(86), 1000)\n')
+  writeFileSync(stall, 'setTimeout(() => process.exit(86), 3000)\n')
   for (const tool of ['pdfinfo', 'pdftoppm', 'magick']) {
     const native = execFileSync('which', [tool], { encoding: 'utf8' }).trim()
     writeFileSync(path.join(directory, tool), `#!/bin/sh
@@ -52,6 +59,19 @@ fi
 printf '%s|%s\\n' "$stage" "$*" >> ${quote(trace)}
 if [ "$stage" = pdftoppm ] && [ "$EQB_RASTER_TEST_FORBID_RENDER" = 1 ]; then exit 85; fi
 if [ "$stage" = "$EQB_RASTER_TEST_STALL" ]; then exec ${quote(process.execPath)} ${quote(stall)}; fi
+if [ -n "$EQB_RASTER_TEST_STALL" ]; then
+  case "$stage" in
+    pdfinfo) printf 'Page    1 MediaBox: 0.00 0.00 72.00 96.00\\n'; exit 0 ;;
+    pdftoppm) for last; do :; done; exec /bin/cp ${quote(pagePng)} "$last.png" ;;
+    magick-identify-page) printf '${samplePage.pixelWidth},${samplePage.pixelHeight}'; exit 0 ;;
+    magick-identify-crop) printf '${sampleCrop.pixelWidth},${sampleCrop.pixelHeight}'; exit 0 ;;
+    magick-crop)
+      for last; do :; done
+      case "$last" in
+        png32:*/crop.png) exec /bin/cp ${quote(cropPng)} "\${last#png32:}" ;;
+      esac ;;
+  esac
+fi
 exec ${quote(native)} "$@"
 `, { mode: 0o755 })
   }
@@ -76,14 +96,17 @@ exec ${quote(native)} "$@"
     delete process.env.EQB_RASTER_TEST_FORBID_RENDER
     console.log('PASS reference recrop page dimensions/pixels bounded before rendering; caller may only lower budgets')
   }
+  // During timeout injection, preceding stages replay precomputed valid output.
+  // Their real startup/CPU time must not consume the tiny target-stage budget.
+  // Budget checks and all pixel-compatibility cases still use the real tools.
   for (const stage of ['pdfinfo', 'pdftoppm', 'magick-identify-page', 'magick-crop', 'magick-identify-crop']) {
     writeFileSync(trace, '')
     process.env.EQB_RASTER_TEST_STALL = stage
     assert.throws(() => captureSourceReferenceFigure({
-      pdfBytes: pagePdf(72, 96), page: 1, region, resourceLimits: { timeoutMs: 500 },
+      pdfBytes: pagePdf(72, 96), page: 1, region, resourceLimits: { timeoutMs: 2000 },
     }), { code: 'SOURCE_REFERENCES_FIGURE_RASTER_TIMEOUT' }, `hard timeout at ${stage}`)
     const calls = readFileSync(trace, 'utf8').trim().split('\n')
-    assert(calls.at(-1).startsWith(`${stage}|`), `timeout really reached ${stage}`)
+    assert(calls.at(-1).startsWith(`${stage}|`), `timeout really reached ${stage}; observed ${JSON.stringify(calls)}`)
     for (const call of calls.filter(call => call.startsWith('magick'))) {
       for (const limit of ['memory 128MiB', 'map 128MiB', 'disk 0', 'thread 1', 'time 10']) {
         assert(call.includes(`-limit ${limit}`), `${stage}: ImageMagick resource ${limit}`)
