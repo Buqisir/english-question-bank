@@ -147,6 +147,8 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
   let searchedCandidates = 0
   let regularAllOverLimit = true
+  const minimumApplication = html.includes('data-canonical-drawing-area-id=')
+    ? applicationDrawingAreaPolicy.minimumApplicationHeightMm : 24
   const fonts = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
   // Finish every ordinary font tier before lifting the opening. One extra
   // profile per tier gets at most 13 break trials + 14 box-restoration renders.
@@ -157,7 +159,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     const minimumContinuation = fontSizePt === 12 ? 27 : 24
     // Prefer full-size source media and normal answer space. Compact geometry
     // is a measured fallback, never the default carried over from a sample.
-    const profiles = coverLift ? [['natural', 24, minimumContinuation]] : [
+    const profiles = coverLift ? [['natural', minimumApplication, minimumContinuation]] : [
       ['natural', 65, 57], ['float80', 65, 57], ['natural', 65, minimumContinuation],
       ['float80', 65, minimumContinuation], ['float80', 24, minimumContinuation],
     ]

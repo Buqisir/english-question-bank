@@ -198,6 +198,8 @@ for (const edition of ['economy8', 'largeNoListening']) {
 // Actual Chromium measurement: inherited body type is insufficient for source
 // captions/table cells, and a too-wide option must change the whole grid.
 const coverLiftProfile = 'student-friendly-cover-lift-v2'
+const drawingHtml = html.replace('class="canonical-application-response"',
+  'class="canonical-application-response" data-canonical-drawing-area-id="fixture-drawing"')
 for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
   const limit = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0).targetPages
   for (const regularFits of [false, true]) {
@@ -238,18 +240,20 @@ for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
   } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
   assert.ok(failed.some(source => source.includes(coverLiftProfile)), 'try fallback before failing closed')
   assert.ok(failed.length <= (edition === 'economy8' ? 60 : 30))
-  for (const failureMode of ['all-overflow', 'natural-overflow', 'break-overflow']) {
+  for (const drawing of [false, true]) for (const failureMode of ['all-overflow', 'natural-overflow', 'break-overflow']) {
     let overflowCount = 0
     let measuredCount = 0
     let liftedCount = 0
-    await assert.rejects(() => planStudentProductPdf(html, { edition, render: async source => {
+    await assert.rejects(() => planStudentProductPdf(drawing ? drawingHtml : html, { edition, render: async source => {
       if (source.includes(coverLiftProfile)) {
         liftedCount += 1
         return { pageCount: limit, inspection }
       }
       const broken = /data-canonical-group-id="[^"]+" data-pdf-planned-break/.test(source)
       const overflow = failureMode === 'all-overflow'
-        || (failureMode === 'natural-overflow' && !broken && geometry(source).application === 24)
+        || (failureMode === 'natural-overflow' && !broken
+          && geometry(source).application === (drawing ? 65 : 24)
+          && (!drawing || source.includes('float:right!important')))
         || (failureMode === 'break-overflow' && broken)
       if (overflow) {
         overflowCount += 1
@@ -260,11 +264,35 @@ for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
       return { pageCount: limit + 1, inspection: [inspection[0], {
         ...inspection[1], pages: [7, 8], continuationMaterialPages: [7, 8],
       }] }
-    } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE', `${edition}: ${failureMode}`)
+    } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE', `${edition}: drawing=${drawing}, ${failureMode}`)
     assert.ok(overflowCount > 0, `${failureMode} really exercises an unknown page count`)
     assert.equal(measuredCount > 0, failureMode !== 'all-overflow')
     assert.equal(liftedCount, 0, 'unknown ordinary results never authorize the cover lift')
   }
+  for (const coverFits of [true, false]) {
+    let lifted = 0
+    const attempt = () => planStudentProductPdf(drawingHtml, { edition, render: async source => {
+      assert.equal(geometry(source).application, 65, 'drawing-area boxes never enter a compressed trial')
+      const cover = source.includes(coverLiftProfile)
+      if (cover) lifted += 1
+      return { pageCount: cover && coverFits ? limit : limit + 1, inspection }
+    } })
+    if (coverFits) {
+      const selected = await attempt()
+      assert.equal(selected.layout.profile, coverLiftProfile)
+      assert.deepEqual(selected.layout.answerBoxHeightsMm, { application: 65, continuation: 57 })
+    } else await assert.rejects(attempt, error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+    assert.ok(lifted > 0, 'a 65mm cover-lift seed remains reachable after all ordinary trials exceed the limit')
+  }
+  let invalidReplayRenders = 0
+  await assert.rejects(() => renderExplicitStudentProductPdf(drawingHtml, {
+    edition, layout: { ...layout, profile: coverLiftProfile, answerBoxHeightsMm: { application: 24, continuation: 27 } },
+    plannedBreakGroupIds: [], render: async () => {
+      invalidReplayRenders += 1
+      return { pageCount: limit, inspection }
+    },
+  }), error => error.code === 'PAPER_LAYOUT_OVERFLOW')
+  assert.equal(invalidReplayRenders, 0, 'undersized drawing-area replay fails before rendering')
 }
 // A content-integrity failure within the ceiling does not authorize moving the cover.
 await assert.rejects(() => planStudentProductPdf(html, { edition: 'largeNoListening',
