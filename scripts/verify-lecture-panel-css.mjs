@@ -44,6 +44,9 @@ const HOOK_ONLY = new Set([
   'pi-writing-model-answer-line',
   'pi-writing-panel',
   'pi-writing-section-title',
+  // 作图区几何由 shared/paper-canonical/applicationDrawingArea.mjs 的版本化
+  // 渲染策略以内联样式提供（Screen/Print 共用同一份数值），类名只作 QA 钩子。
+  'pi-writing-drawing-area',
 ])
 
 const FAMILY = /^pi-(ps-analysis|cloze|gf|seven|writing)(-|$)/
