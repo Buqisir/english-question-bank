@@ -30,6 +30,7 @@ import {
 } from '../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import {
   buildNck1OcrSourceEvidence,
+  captureNck1OcrPageRasters,
   nck1OcrEvidenceDigest,
   resolveConfirmedNck1OcrEvidence,
 } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
@@ -47,6 +48,7 @@ import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { replaceOcrStructuredAnswerRegions } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresentation.mjs'
+import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')
@@ -55,6 +57,70 @@ execFileSync(process.execPath, [path.join(root, 'scripts/generate-paper-ocr-emph
   cwd: root,
   stdio: 'inherit',
 })
+// Public capture seam: exact content reuse must preserve every invalidation
+// boundary, and returned metadata must never mutate the private cache.
+{
+  const bytes = productPdfBytes(1, 'OCR cache regression')
+  const document = { documentId: 'cache-test', role: 'question_source', mediaType: 'application/pdf',
+    bytes, sha256: sha256(bytes), byteLength: bytes.length, pageCount: 1 }
+  const nativeExec = childProcess.execFileSync
+  const nativeSpawn = childProcess.spawnSync
+  let replays = 0
+  let toolVariant = '', fingerprintAvailable = true, failReplay = false
+  childProcess.execFileSync = function(command, args) {
+    if (command === 'pdftoppm' && args[0] !== '-v') {
+      replays++
+      if (failReplay) throw new Error('synthetic raster failure')
+    }
+    return nativeExec.apply(this, arguments)
+  }
+  childProcess.spawnSync = function(command, args) {
+    const result = nativeSpawn.apply(this, arguments)
+    if ((command === 'pdftoppm' && args[0] === '-v') || (command === 'magick' && args[0] === '-version')) {
+      if (!fingerprintAvailable) return { ...result, status: 1 }
+      return { ...result, stdout: `${result.stdout || ''}${toolVariant}` }
+    }
+    return result
+  }
+  syncBuiltinESMExports()
+  try {
+    const first = captureNck1OcrPageRasters([document])
+    const copied = { ...document, documentId: 'different-id', bytes: new Uint8Array(bytes) }
+    const second = captureNck1OcrPageRasters([copied])
+    assert.deepEqual(second[0].pages, first[0].pages)
+    assert.equal(replays, 1, 'same actual content across byte copies/IDs must replay once')
+    first[0].pages[0].raster.recipe.region.width = 0.1
+    first[0].pages[0].raster.sha256 = 'mutated-result'
+    assert.deepEqual(captureNck1OcrPageRasters([document])[0].pages, second[0].pages,
+      'returned metadata cannot poison the private cache')
+    document.bytes[document.bytes.length - 1] ^= 1
+    assert.throws(() => captureNck1OcrPageRasters([document]),
+      /cannot close/, 'mutating the same byte object must fail the source digest check')
+    document.sha256 = sha256(document.bytes)
+    captureNck1OcrPageRasters([document])
+    assert.equal(replays, 2, 'new actual content with the same object/ID must reraster')
+    toolVariant = ' synthetic-new-tool-version'
+    captureNck1OcrPageRasters([document])
+    assert.equal(replays, 3, 'tool version changes must reraster the same content')
+    fingerprintAvailable = false
+    captureNck1OcrPageRasters([document])
+    captureNck1OcrPageRasters([document])
+    assert.equal(replays, 5, 'unavailable fingerprints disable reuse without changing successful admission')
+    fingerprintAvailable = true
+    const freshBytes = productPdfBytes(1, 'OCR cache failed replay')
+    const fresh = { ...document, bytes: freshBytes, sha256: sha256(freshBytes), byteLength: freshBytes.length }
+    failReplay = true
+    assert.throws(() => captureNck1OcrPageRasters([fresh]), /synthetic raster failure/)
+    failReplay = false
+    captureNck1OcrPageRasters([fresh])
+    assert.equal(replays, 7, 'failed replays must never populate the cache')
+    console.log('PASS exact-content raster reuse, detached results, mutable input rehash, tool version invalidation, unavailable fingerprints and failed replays')
+  } finally {
+    childProcess.execFileSync = nativeExec
+    childProcess.spawnSync = nativeSpawn
+    syncBuiltinESMExports()
+  }
+}
 const fixture = await makeSyntheticNck1OcrFixture({ paperId })
 await verifyReadingStemFigures(fixture)
 
