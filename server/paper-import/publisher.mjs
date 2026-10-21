@@ -1,6 +1,7 @@
 import { withSealedReviewSnapshot } from '../import-review/sealedReviewFiles.mjs'
 import { assertPreparedReviewContent } from '../import-review/preparedReviewContent.mjs'
 import { buildProductPreviewPayload } from '../import-review/reviewSubject.mjs'
+import { reviewProjectionForTrustedBaseline } from '../import-review/reviewComparisonProjection.mjs'
 import { reviewContentDifferences } from '../import-review/reviewCompatibility.mjs'
 import { createHash, randomUUID } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
@@ -1287,7 +1288,8 @@ function publishUniversalNck1ImportSnapshot({
     })
   }
   const projectedDifferences = approvedReviewSubject ? reviewContentDifferences(approvedReviewSubject.components.consumer,
-    buildProductPreviewPayload({ id: approvedReviewSubject.revisionId }, projection)).differences : []
+    buildProductPreviewPayload({ id: approvedReviewSubject.revisionId },
+      reviewProjectionForTrustedBaseline(approvedReviewSubject, projection))).differences : []
   if (projectedDifferences.length) {
     throw Object.assign(new Error('Publisher projection differs from the original Review subject'), {
       code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'SUBJECT_CHANGED',

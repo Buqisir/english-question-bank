@@ -20,6 +20,7 @@ import {
   assertPaperImportSourceReferences,
 } from '../paper-import/storage.mjs'
 import { buildProductPreviewPayload } from './reviewSubject.mjs'
+import { reviewProjectionForTrustedBaseline } from './reviewComparisonProjection.mjs'
 import { reviewContentDifferences } from './reviewCompatibility.mjs'
 import { inspectSealedReviewFiles } from './sealedReviewFiles.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -357,7 +358,7 @@ export function createSinglePaperPromotionService({
         })
         const context = store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, value => {
           const differences = value.subject ? reviewContentDifferences(value.subject.components.consumer,
-            buildProductPreviewPayload(revision, projection)).differences : []
+            buildProductPreviewPayload(revision, reviewProjectionForTrustedBaseline(value.subject, projection))).differences : []
           const evidence = inspectSealedReviewFiles(reviewRootDir, revision.manifest.files)
           const changed = evidence.find(file => {
             const expected = revision.manifest.files.find(item => item.path === file.path)

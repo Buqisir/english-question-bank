@@ -6,6 +6,7 @@ import { loadCanonicalOnlyConsumers } from '../paper-canonical/publication.mjs'
 import { buildPaperImportOutputInventory } from '../paper-import/storage.mjs'
 import { buildNck1ReviewConsumption } from './revisionProjection.mjs'
 import { compareReviewPublicationContent } from './reviewPublicationContent.mjs'
+import { reviewConsumptionForTrustedBaseline } from './reviewComparisonProjection.mjs'
 
 const same = (a, b) => digestJson(a) === digestJson(b)
 function reject(reasonCode, differences = []) {
@@ -68,12 +69,10 @@ function assertPreparedReviewContentInternal({
   }
   if (baseline.listeningAudio && !playback) reject('UNSUPPORTED_PUBLICATION_MAPPING', ['/listeningPlayback'])
   function decorate(consumption, consumerId) {
-    const value = structuredClone(consumption)
-    if (consumerId !== 'compilation') {
-      if (!same(value.consumerContractRef, consumerContractRefs[consumerId])) reject('UNSUPPORTED_PUBLICATION_MAPPING')
-      // Print and Screen contracts are execution metadata, not paper content.
-      value.consumerContractRef = baseline.consumerContractRef
-    } else {
+    const expectedRef = consumerContractRefs[consumerId === 'compilation' ? 'screen' : consumerId]
+    if (!expectedRef || !same(consumption.consumerContractRef, expectedRef)) reject('UNSUPPORTED_PUBLICATION_MAPPING')
+    const value = reviewConsumptionForTrustedBaseline(subject, consumption)
+    if (consumerId === 'compilation') {
       value.sourceAssetVersion = version
       value.publicationDigest = manifest.publicationDigest
       value.sourceAssetDigest = manifest.sourceAssetDigest
