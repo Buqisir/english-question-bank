@@ -26,6 +26,7 @@ import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-co
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { applyStudentProductLayout } from '../server/draft-paper/studentProductPdf.mjs'
 import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
+import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -326,6 +327,15 @@ try {
   assert.deepEqual(dbRun(db => JSON.parse(db.prepare('SELECT subject_json FROM review_subject WHERE revision_id=?')
     .get(revision.id).subject_json)), subject, 'published references do not migrate the approved subject')
   pass(`${references.schemaVersion} publishes exact bytes and retains its original approved subject`)
+  const publishedDb = openDatabase()
+  try {
+    const frozen = readSourceReferencePublication({ db: publishedDb,
+      paperAssetsDir: path.join(root, 'normal-envelope'), consumption: Object.values(published.publish.consumers)[0] })
+    assert(frozen.sourceReferencesBytes.equals(retained))
+    const html = buildAnswerOnlyHtml(frozen)
+    assert.equal(html.includes('data-reference-figure='), Boolean(figureReferences))
+    pass(`${references.schemaVersion} exact published consumer replays SQLite commitment and frozen answer rendering`)
+  } finally { publishedDb.close() }
   if (!process.argv.includes('--references-only')) {
   const frozenPath = path.join(source, 'products/economy8.pdf')
   const frozenBytes = readFileSync(frozenPath)
