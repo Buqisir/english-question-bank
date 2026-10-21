@@ -10,7 +10,7 @@ import {
 import { compareReviewSubjects } from '../server/import-review/reviewCompatibility.mjs'
 import './verify-review-consumer-succession.mjs'
 import { consumerContractRefs, reviewConsumerPairs } from '../shared/paper-canonical/consumers.mjs'
-import { nck1MaterializationHistoricalAuthorityRef66 } from '../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef66, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { reviewProjectionForTrustedBaseline } from '../server/import-review/reviewComparisonProjection.mjs'
 import {
   compareReviewPublicationContent, mapReviewPublicationConsumer,
@@ -191,6 +191,43 @@ const baseline = buildStoredReviewSubject(f)
   }
   console.log('PASS succession is applied before subject hashing; simultaneous contract/content mutations remain different')
 }
+for (const [baselinePair, actualPair, authority] of [
+  [0, 2, nck1MaterializationHistoricalAuthorityRef66],
+  [1, 2, nck1DrawingAreaAuthorityRef],
+  [2, 2, nck1ReadingStemFiguresAuthorityRef],
+]) {
+  const historical = clone(f)
+  historical.projection.consumption.authorityRef = authority
+  historical.projection.consumption.consumerContractRef = reviewConsumerPairs[baselinePair].screen
+  if (baselinePair === 1) historical.projection.consumption.selections[0].projectedOccurrences[0].drawingArea = { label: '作图处' }
+  const payload = buildProductPreviewPayload(historical.revision, historical.projection)
+  historical.preview.payload_json = JSON.stringify(payload)
+  historical.preview.payload_digest = digestJson(payload)
+  const stored = buildStoredReviewSubject(historical)
+  assert.equal(stored.ok, true)
+  const actual = clone(historical.projection)
+  actual.consumption.consumerContractRef = reviewConsumerPairs[actualPair].screen
+  const mapped = reviewProjectionForTrustedBaseline(stored.subject, actual)
+  const targetFor = projection => buildTargetReviewSubject({ ...historical, projection, inventory: historical.storedFiles })
+  assert.equal(compareReviewSubjects({ baseline: stored, target: targetFor(mapped), targetBuildId }).result, 'equal')
+  actual.paperAsset.content.questions.q1.stem += ' changed'
+  assert.equal(compareReviewSubjects({ baseline: stored,
+    target: targetFor(reviewProjectionForTrustedBaseline(stored.subject, actual)), targetBuildId }).result, 'different')
+}
+{
+  const historical = clone(f)
+  historical.projection.consumption.authorityRef = nck1ReadingStemFiguresAuthorityRef
+  historical.projection.consumption.consumerContractRef = reviewConsumerPairs[1].screen
+  const payload = buildProductPreviewPayload(historical.revision, historical.projection)
+  historical.preview.payload_json = JSON.stringify(payload)
+  historical.preview.payload_digest = digestJson(payload)
+  const stored = buildStoredReviewSubject(historical)
+  const actual = clone(historical.projection)
+  actual.consumption.consumerContractRef = reviewConsumerPairs[2].screen
+  assert.throws(() => reviewProjectionForTrustedBaseline(stored.subject, actual),
+    error => error.reasonCode === 'UNSUPPORTED_CONSUMER_SUCCESSION')
+}
+console.log('PASS trusted subject hashing: 47->49, drawing 48->49, 49 identity, real differences and stem closure fail-closed')
 {
   const actual = await fixture({ publicProfile: true, ocrReport: true })
   const report = actual.storedFiles.find(file => file.path === 'agent-ocr-correction-report-v2.json')

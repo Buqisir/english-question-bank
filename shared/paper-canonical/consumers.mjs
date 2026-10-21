@@ -117,13 +117,23 @@ const drawingAreaEvidence = Object.freeze({
   // under one renderer (verify-review-consumer-succession + release acceptance).
   evidence: '20c8e048 vs 4575c609: conditional drawing-area renderer branches; verify-application-drawing-area.mjs; preview-application-drawing-area.mjs',
 })
+const stemFigureEvidence = Object.freeze({
+  addedCapabilities: Object.freeze(['reading-stem-figures']),
+  // #551 keeps every no-stem renderer branch unchanged. Acceptance compares
+  // v5/v6 Screen models and Print bytes, baseline PaperSurface DOM/geometry/
+  // lossless pixels, and the historical v5 three-product 17-page PDF replay.
+  evidence: '#551 vs ae982562: conditional stemFigures renderer branches; verify-reading-stem-figures.mjs; stem-figures/render-acceptance historical v5 17-page pixel and rebase2 Screen parity',
+})
 export const reviewConsumerSuccessions = Object.freeze([
   Object.freeze({ from: refFor(screenV47), to: refFor(screenV48), ...drawingAreaEvidence }),
   Object.freeze({ from: refFor(printPdfV48), to: refFor(printPdfV49), ...drawingAreaEvidence }),
+  Object.freeze({ from: refFor(screenV48), to: refFor(screenV49), ...stemFigureEvidence }),
+  Object.freeze({ from: refFor(printPdfV49), to: refFor(printPdfV50), ...stemFigureEvidence }),
 ])
 export const reviewConsumerPairs = Object.freeze([
   Object.freeze({ screen: refFor(screenV47), print_pdf: refFor(printPdfV48) }),
   Object.freeze({ screen: refFor(screenV48), print_pdf: refFor(printPdfV49) }),
+  Object.freeze({ screen: refFor(screenV49), print_pdf: refFor(printPdfV50), ...stemFigureEvidence }),
 ])
 
 // Validate declarations at startup. This does not grant callers permission to
@@ -135,7 +145,7 @@ export function validateReviewConsumerRelations(edges, pairs) {
     if (!resolveConsumerContract(edge.from).ok || !resolveConsumerContract(edge.to).ok
       || edge.from.id !== edge.to.id || sameRef(edge.from, edge.to)
       || !edge.evidence || !edge.addedCapabilities?.length
-      || edge.addedCapabilities.some(capability => capability !== 'application-drawing-area')) {
+      || edge.addedCapabilities.some(capability => !['application-drawing-area', 'reading-stem-figures'].includes(capability))) {
       throw new Error('Invalid Review consumer succession')
     }
     const next = graph.get(key(edge.from)) || []
@@ -204,10 +214,14 @@ export function proveReviewConsumerComparison({ baselineRef, actualRef, paperAut
   if (!authority.ok) return rejected()
   if (edges.length) {
     for (const edge of edges) for (const capability of edge.addedCapabilities) {
-      // Deliberately conservative: even an unused drawing area on a new
-      // admission closure cannot justify this legacy-only equivalence edge.
-      if (capability !== 'application-drawing-area'
-        || closureAdmitsApplicationDrawingArea(authority.closure)) return rejected()
+      // Evaluate only this edge's delta. A drawing-capable paper can cross
+      // the stem-only edge, but cannot cross the earlier drawing-area edge.
+      const admitsCapability = capability === 'application-drawing-area'
+        ? closureAdmitsApplicationDrawingArea(authority.closure)
+        : capability === 'reading-stem-figures'
+          ? closureAdmitsReadingStemFigures(authority.closure)
+          : true
+      if (admitsCapability) return rejected()
     }
   }
   return { ok: true, edges, paired }

@@ -1,5 +1,5 @@
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
+import { consumerContractRefsForAuthority } from '../../shared/paper-canonical/consumers.mjs'
 import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 import { PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { loadCanonicalOnlyConsumers } from '../paper-canonical/publication.mjs'
@@ -49,6 +49,7 @@ function assertPreparedReviewContentInternal({
     packageData, version, canonicalPublication: sealed, publishReport, validationReport,
   })
   const outputFiles = new Map(outputInventory.files.map(file => [file.path, file.bytes]))
+  const consumerContractRefs = consumerContractRefsForAuthority(manifest.authority)
   const baseline = subject.components.consumer.consumption
   let playback = null
   const derivativeFiles = Object.keys(sealed.playbackDerivatives || {})
