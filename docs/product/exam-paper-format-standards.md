@@ -877,6 +877,19 @@ Word 左右细线框、框里只有能打的字和矩形对照时,三面由共�
 - 历史 `legacy_opaque` 写作仍是未确认归属的兼容数据，不代表“没有给定文字”。
   必须先依据源卷确认并修订到结构化写作，再认可其版式；不得由 Screen/Print/PDF
   按 Dear、卷名或末几行猜测搬移。旧发布物保持不变，修订沿用已有 revision/QA 流程。
+- 源卷明确要求作图时，应用文可在标准答题框内右上保留一个来源可追溯的
+  `drawingArea`，标签引用同题组非空 paragraph，且不再归属题干或给定语。
+  `application-writing-drawing-area-v1` 固定区域宽为框内可用宽度的 25%，
+  宽高比 1:1（含标签）；标签原样放在区域内左上，以与答题框同宽的细线围框，
+  不加横线或提示。框内上部左列排给定开头并自动折行、右列作图，下方保留全宽
+  书写空间，署名仍在框内右下。尺寸由渲染策略管理，导卷不填写坐标或尺寸。
+  `largeComplete`、`largeNoListening`、`economy8` 显示此区域并保留标准约 65mm
+  框高，不接受 24mm 压缩；放不下即报告版面不适配。`answerOnly` 不显示作图区。
+- v5 源卷作答模板图由结构化作答区替代时，`sourceCoverage.visuals` 使用
+  `structured_answer_region`，`targetId` 引用带 `drawingArea` 的 application
+  `groupId`；必须给出 visual region，作图区来源须在同文档同页的该区域内
+  （归一化坐标容差 `1e-6`），每组最多一个，不得与 content media 重叠消费；
+  整张模板保留独立 Source Span 并映射到作图区，不作为 prompt 图片渲染。
 
 ## 9. 分页保护
 

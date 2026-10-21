@@ -1,3 +1,4 @@
+import { applicationDrawingAreaStyles } from '../shared/paper-canonical/applicationDrawingArea.mjs'
 /**
  * Print Renderer — generates semantic HTML + CSS for Vivliostyle PDF.
  * Input: renderer-neutral Print contract
@@ -863,13 +864,19 @@ function renderCanonicalApplicationWriting(
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}" data-canonical-application-writing-rhythm-role="${part.role === 'title' ? 'given_title' : position === 'bottom' ? 'given_closing' : 'given_addressee'}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
   const prompt = renderCanonicalWritingBlocks(canonicalGroup.promptBlocks, 'application')
   const response = canonicalGroup.answerRegion
+  const css = style => Object.entries(style).map(([key, value]) =>
+    `${key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}:${value}`).join(';')
+  const drawing = response.drawingArea
+  const top = drawing
+    ? `<div class="canonical-application-given-top" style="${css(applicationDrawingAreaStyles.top)}"><div style="${css(applicationDrawingAreaStyles.given)}">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-drawing-area" data-canonical-drawing-area-id="${escapeHtml(drawing.drawingAreaId)}" data-canonical-drawing-label-block-ref="${escapeHtml(drawing.labelBlockRef)}" style="${css(applicationDrawingAreaStyles.area)};--drawing-area-border:var(--writing-box-rule)">${renderCanonicalInlineNodes(drawing.inlines)}</div></div>`
+    : `<div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div>`
   const chrome = renderCanonicalWritingChrome(
     writingChrome,
     'canonical-application-instruction',
     'application',
     previousFamilyBoundary,
   )
-  return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${chrome}<div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-application-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${applicationWritingRhythm.responseGeometry.widthMm}mm;height:${applicationWritingRhythm.responseGeometry.heightMm}mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
+  return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${chrome}<div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-application-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${applicationWritingRhythm.responseGeometry.widthMm}mm;height:${applicationWritingRhythm.responseGeometry.heightMm}mm;">${top}<div class="canonical-application-given-bottom"${drawing ? ' style="flex-shrink:0"' : ''}>${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
 }
 
 function renderCanonicalContinuationWriting(canonicalGroup, writingChrome, consumerContractRef) {

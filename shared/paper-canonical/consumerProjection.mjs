@@ -6,8 +6,8 @@ import {
   layoutFixedFourColumnClozeOptionSet,
   layoutListeningOptionSet,
 } from './abcdLayout.mjs'
-import { authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
-import { consumerRendersApplicationPromptFigures } from './consumers.mjs'
+import { authorityAdmitsApplicationDrawingArea, authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
+import { consumerRendersApplicationDrawingArea, consumerRendersApplicationPromptFigures } from './consumers.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
 import { validateMediaPresentation } from './mediaPresentation.mjs'
 import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
@@ -50,7 +50,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(input.consumption.authorityRef?.manifestVersion)
+  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -994,9 +994,28 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     occurrence.answerRegion.givenBottom,
     'answer_region_bottom',
   )
+  let drawingArea
+  if (Object.hasOwn(occurrence.answerRegion, 'drawingArea')) {
+    const area = occurrence.answerRegion.drawingArea
+    const block = contentById.get(area?.labelBlockRef)
+    if (!authorityAdmitsApplicationDrawingArea(input.consumption.authorityRef)
+      || !consumerRendersApplicationDrawingArea(input.consumption.consumerContractRef)
+      || area?.drawingAreaId !== `drawing-area:${groupId}:1`
+      || area.placement !== 'top_right' || block?.kind !== 'paragraph'
+      || !textContent(block.inlines).trim()
+      || promptBlockIds.has(area.labelBlockRef) || seenGivenBlockRefs.has(area.labelBlockRef)
+      || occurrence.anchors?.drawingAreaIds?.join(',') !== area.drawingAreaId) {
+      throw rejected(`Canonical Application Writing occurrence ${groupId} requires one exclusively owned source drawing label and capable authority/consumer`)
+    }
+    drawingArea = {
+      drawingAreaId: area.drawingAreaId, placement: area.placement,
+      labelBlockRef: area.labelBlockRef, text: textContent(block.inlines),
+      inlines: structuredClone(block.inlines),
+    }
+  }
 
-  if (hasPromptFigures) {
-    const expectedPrompt = occurrence.content.blocks.filter(block => !seenGivenBlockRefs.has(block.nodeId))
+  if (hasPromptFigures || drawingArea) {
+    const expectedPrompt = occurrence.content.blocks.filter(block => !seenGivenBlockRefs.has(block.nodeId) && block.nodeId !== drawingArea?.labelBlockRef)
     const firstGivenIndex = occurrence.content.blocks.findIndex(block => seenGivenBlockRefs.has(block.nodeId))
     if (expectedPrompt.length !== promptBlocks.length
       || expectedPrompt.some((block, index) => block.nodeId !== promptBlocks[index].nodeId)
@@ -1028,6 +1047,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     responseSlotId: occurrence.answerRegion.responseSlotId,
     givenTop,
     givenBottom,
+    ...(drawingArea ? { drawingArea } : {}),
   }
   const semantic = {
     paperId: input.consumption.paperId,
@@ -1060,6 +1080,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
         .map((part) => part.givenPartId),
       answerRegionRef: answerRegion.answerRegionRef,
       responseSlotId: answerRegion.responseSlotId,
+      ...(drawingArea ? { drawingAreaId: drawingArea.drawingAreaId } : {}),
     }),
     semanticSignature: digestJson(semantic),
   })
@@ -1361,11 +1382,11 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1439,7 +1460,7 @@ export function projectCanonicalConsumerGroup(input) {
     throw rejected(`Canonical occurrence ${groupId} belongs to another family`)
   }
   if (occurrence.sourcePresentation !== undefined
-    && (!['62', '64', '66', '67', '68'].includes(input.consumption.authorityRef?.manifestVersion)
+    && (!['62', '64', '66', '67', '68', '69'].includes(input.consumption.authorityRef?.manifestVersion)
       || !validCanonicalSourcePresentation(occurrence.sourcePresentation))) {
     throw rejected(`Canonical occurrence ${groupId} has invalid source presentation`)
   }
@@ -1516,7 +1537,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

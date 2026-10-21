@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict'
+import { verifyDrawingAreaContract } from './verify-application-drawing-area.mjs'
+verifyDrawingAreaContract()
 import { execFileSync } from 'node:child_process'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'

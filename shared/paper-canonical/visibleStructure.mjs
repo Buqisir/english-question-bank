@@ -28,6 +28,9 @@ import manifestV64 from '../../standards/paper-canonical/manifest-v64.json' with
 import manifestV66 from '../../standards/paper-canonical/manifest-v66.json' with { type: 'json' }
 import manifestV67 from '../../standards/paper-canonical/manifest-v67.json' with { type: 'json' }
 import manifestV68 from '../../standards/paper-canonical/manifest-v68.json' with { type: 'json' }
+import manifestV69 from '../../standards/paper-canonical/manifest-v69.json' with { type: 'json' }
+import nck1V17 from '../../standards/paper-canonical/profiles/nck1-v17.json' with { type: 'json' }
+import zhejiangLegacyV14 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v14.json' with { type: 'json' }
 import nck1V16 from '../../standards/paper-canonical/profiles/nck1-v16.json' with { type: 'json' }
 import nationalLegacyV4 from '../../standards/paper-canonical/profiles/national-legacy-v4.json' with { type: 'json' }
 import zhejiangLegacyV13 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v13.json' with { type: 'json' }
@@ -48,6 +51,7 @@ import { digestJson } from './stable.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const registeredProfiles = new Map([
+  ...[nck1V17, zhejiangLegacyV14].map(profile => [`${profile.profileId}@${profile.version}`, profile]),
   ...[nck1V16, nationalLegacyV4, zhejiangLegacyV13].map((profile) => [
     `${profile.profileId}@${profile.version}`, profile,
   ]),
@@ -317,6 +321,13 @@ const registeredManifestProfiles = new Map([
       { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
     ])),
   ],
+  [
+    `${manifestV69.manifestId}@${manifestV69.version}@${digestJson(manifestV69)}`,
+    new Map([nck1V17, nationalLegacyV4, zhejiangLegacyV14].map((profile) => [
+      profile.profileId,
+      { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
+    ])),
+  ],
 ])
 
 function reject(message) {
@@ -437,7 +448,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(
@@ -450,7 +461,7 @@ function sourceInstructionOverrides(consumption) {
       if (occurrence.sourcePresentation !== undefined) {
         const presentation = occurrence.sourcePresentation
         const instruction = presentation?.instruction
-        if (!['62', '64', '66', '67', '68'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
+        if (!['62', '64', '66', '67', '68', '69'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
           || !validCanonicalSourcePresentation(presentation)
           || digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence)) {
           reject('source-backed presentation proof is invalid')

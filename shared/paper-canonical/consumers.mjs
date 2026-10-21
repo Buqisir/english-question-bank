@@ -1,3 +1,5 @@
+import screenV48 from '../../standards/paper-canonical/consumers/screen-v48.json' with { type: 'json' }
+import printPdfV49 from '../../standards/paper-canonical/consumers/print-pdf-v49.json' with { type: 'json' }
 import screen from '../../standards/paper-canonical/consumers/screen-v39.json' with { type: 'json' }
 import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v40.json' with { type: 'json' }
 import screenV40 from '../../standards/paper-canonical/consumers/screen-v40.json' with { type: 'json' }
@@ -17,11 +19,11 @@ import printPdfV47 from '../../standards/paper-canonical/consumers/print-pdf-v47
 import screenV47 from '../../standards/paper-canonical/consumers/screen-v47.json' with { type: 'json' }
 import printPdfV48 from '../../standards/paper-canonical/consumers/print-pdf-v48.json' with { type: 'json' }
 
-import { authorityRefForManifestDigest, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
+import { authorityRefForManifestDigest, closureRendersApplicationDrawingArea, closureRendersApplicationPromptFigures, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
 
-const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43, screenV43, printPdfV44, screenV44, printPdfV45, screenV45, printPdfV46, screenV46, printPdfV47]
-const contracts = [screenV47, printPdfV48]
+const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43, screenV43, printPdfV44, screenV44, printPdfV45, screenV45, printPdfV46, screenV46, printPdfV47, screenV47, printPdfV48]
+const contracts = [screenV48, printPdfV49]
 const allContracts = [...historicalContracts, ...contracts]
 
 function validateContract(contract) {
@@ -75,4 +77,11 @@ export function consumerRendersApplicationPromptFigures(ref) {
   if (!resolved.ok) return false
   const authority = resolveCanonicalAuthority(authorityRefForManifestDigest(resolved.contract.authorityManifestDigest))
   return authority.ok && closureRendersApplicationPromptFigures(authority.closure)
+}
+
+export function consumerRendersApplicationDrawingArea(ref) {
+  const result = resolveConsumerContract(ref)
+  if (!result.ok) return false
+  const authority = resolveCanonicalAuthority(authorityRefForManifestDigest(result.contract.authorityManifestDigest))
+  return authority.ok && closureRendersApplicationDrawingArea(authority.closure)
 }
