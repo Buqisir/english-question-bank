@@ -166,6 +166,18 @@ try {
       'unknown diagnostics without a subject still require intact evidence')
     evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
       .run(evidence, asyncResult.id)
+    // Historical production manifests may omit `files`; the fallback guard must
+    // treat that as missing frozen products instead of failing the whole list.
+    const manifestJson = evidenceDb.prepare('SELECT manifest_json FROM import_review_revisions WHERE id=?')
+      .get(asyncResult.id).manifest_json
+    const { files: _files, ...withoutFiles } = JSON.parse(manifestJson)
+    evidenceDb.prepare('UPDATE import_review_revisions SET manifest_json=? WHERE id=?')
+      .run(JSON.stringify(withoutFiles), asyncResult.id)
+    assert.equal(asyncCase.store.listPapers()[0].compatibility.eligible, false,
+      'a candidate manifest without files lists as ineligible instead of throwing')
+    assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).eligible, false)
+    evidenceDb.prepare('UPDATE import_review_revisions SET manifest_json=? WHERE id=?')
+      .run(manifestJson, asyncResult.id)
   } finally { evidenceDb.close() }
   function preview(dbPath) {
     const db = new DatabaseSync(dbPath, { readOnly: true })

@@ -844,7 +844,7 @@ export function createImportReviewStore({
     // Renderer fallback cannot supply missing frozen products. Check the sealed
     // inventory even when target identity is unavailable and masks that reason.
     if (value.fallback && revision?.reviewKind === 'candidate'
-      && !revision.manifest?.files.some(file => file.path === 'products/manifest-v1.json')) {
+      && !revision.manifest?.files?.some(file => file.path === 'products/manifest-v1.json')) {
       return { ...value, eligible: false }
     }
     return value
