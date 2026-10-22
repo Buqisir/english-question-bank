@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v17'
+  'nck1-docx-materialization-producer-v18'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -102,7 +102,8 @@ function hasSourceLocator(documentId, sourceIndex) {
 
 function listeningCue(text) {
   const value = normalized(text)
-  if (LISTENING_PAUSE_REPEAT_SEQUENCE.test(value)) {
+  if (LISTENING_PAUSE_REPEAT_SEQUENCE.test(value)
+    || /^停顿\d{2}′[0-5]\d′′$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'standalone_pause_or_repeat_cue', kind: 'pause_repeat_cue' }
   }
   if (/^第一节到此结束[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
@@ -138,16 +139,16 @@ function listeningCue(text) {
   if (/^这是[^。.!！?？\n]{1,100}听力部分[。. ]该部分分为第一[、,]第二两节[。.!！.]?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_opening_notice', kind: 'listening_opening_notice', nextTextNumber: 1 }
   }
-  if (/^注意[,，]回答听力部分时[，,]请先将答案标在试卷上[。. ]听力部分结束前[,，]你将有(?:\d+|两)分钟(?:的)?时间将你的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！.]?$/u.test(value)) {
+  if (/^注意[:：,，]回答听力部分时[，,]请先将答案标在试卷上[。. ]听力部分结束前[,，]你将有(?:\d+|两)分钟(?:的)?时间将你的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！.]?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_answer_instruction', kind: 'listening_answer_instruction', nextTextNumber: 1 }
   }
   if (/^请看听力部分第一节[。.!！]?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_transition', kind: 'section_direction', nextTextNumber: 1 }
   }
-  if (/^第一节[:：]听下面5段(录音|对话)[。.]每段\1后有一个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听完每段\1后[,，]你都有\d+秒钟的时间来回答有关小题和阅读下一小题[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+  if (/^第一节[:：]?听下面5段(录音|对话)[。.]每段\1后有一个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听完每段\1后[,，]你都有\d+秒钟的时间来回答有关小题和阅读下一小题[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_direction', kind: 'section_direction', nextTextNumber: 1 }
   }
-  if (/^第二节[:：]听下面5段(录音|对话或独白)[。.]每段\1后有几个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听每段\1前[,，]你将有时间阅读各个小题[,，]每小题\d+秒钟[;；]听完后[,，](?:每小题都有|各小题将给出)\d+秒钟的作答时间[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+  if (/^第二节[:：]?听下面5段(录音|对话或独白)[。.]每段\1后有几个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听每段\1前[,，]你将有时间阅读各个小题[,，]每小题\d+秒钟[;；]听完后[,，](?:每小题都有|各小题将给出)\d+秒钟的作答时间[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_direction', kind: 'section_direction', nextTextNumber: 6 }
   }
   return null
@@ -1227,6 +1228,26 @@ function activeAnswers(paperId, answerMap, issues, answerDocumentId) {
 }
 
 function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues }) {
+  // OCR may split a fixed broadcast across a heading and two printed lines.
+  // Match the complete anchored cue; retain each original item and locator in the partition.
+  const wrappedCues = new Map()
+  for (let index = 0; index < answerBody.length; index += 1) {
+    const first = answerBody[index]
+    if (first.kind !== 'paragraph'
+      || !/^(?:注意[:：,，]|第[一二]节[:：]?$)/u.test(normalized(first.text))) continue
+    let joined = normalized(first.text)
+    for (let end = index + 1; end < Math.min(index + 3, answerBody.length); end += 1) {
+      const next = answerBody[end]
+      if (next.kind !== 'paragraph' || !normalized(next.text)
+        || LISTENING_TEXT_MARKER.test(normalized(next.text))) break
+      joined += normalized(next.text)
+      const cue = listeningCue(joined)
+      if (!cue) continue
+      for (let item = index; item <= end; item += 1) wrappedCues.set(answerBody[item], cue)
+      break
+    }
+  }
+  const cueFor = item => wrappedCues.get(item) || listeningCue(item?.text)
   const listeningHeading = optionalExactPosition(
     questionBody,
     /^第一部分\s*听力/u,
@@ -1334,7 +1355,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     index > lastMarkerIndex && isAnswerExplanationHeading(item))
   const listeningEndIndexes = lastMarkerIndex < 0 ? [] : answerBody.flatMap((item, index) =>
     index > lastMarkerIndex && item.kind === 'paragraph'
-      && listeningCue(item.text)?.kind === 'listening_end'
+      && cueFor(item)?.kind === 'listening_end'
       ? [index]
       : [])
   const terminalIndex = listeningEndIndexes.length === 1 ? listeningEndIndexes[0] : -1
@@ -1371,7 +1392,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     } else {
       while (cursor >= 0) {
         const item = answerBody[cursor]
-        const cue = item?.kind === 'paragraph' ? listeningCue(item.text) : null
+        const cue = item?.kind === 'paragraph' ? cueFor(item) : null
         if (!cue && !(item?.kind === 'paragraph' && !normalized(item.text))) break
         openingPreambleIndexes.unshift(cursor)
         cursor -= 1
@@ -1392,7 +1413,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     : null
   const recordPreambleItem = (index) => {
     const item = answerBody[index]
-    const cue = item?.kind === 'paragraph' ? listeningCue(item.text) : null
+    const cue = item?.kind === 'paragraph' ? cueFor(item) : null
     const empty = item?.kind === 'paragraph' && !normalized(item.text)
     const supported = Boolean(cue || empty)
     if (!supported || !hasSourceLocator(answerDocumentId, item?.sourceIndex)) {
@@ -1409,7 +1430,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const openingPreamble = openingPreambleIndexes.map(recordPreambleItem)
   for (const record of openingPreamble) {
-    const cue = listeningCue(record.text)
+    const cue = cueFor(answerBody[record.sourceOrder])
     if (cue && Object.hasOwn(cue, 'nextTextNumber') && cue.nextTextNumber !== markers[0]?.number) {
       addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
         'A section or end cue occurs in the opening preamble at the wrong source boundary',
@@ -1421,7 +1442,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
         ? [markers[0].number]
         : longRanges[markers[0].number - 6]?.questionNumbers || []
       : []
-    const actualNumbers = listeningCue(record.text)?.questionNumbers || []
+    const actualNumbers = cueFor(answerBody[record.sourceOrder])?.questionNumbers || []
     if (!markers[0] || digestJson(actualNumbers) !== digestJson(expectedNumbers)
       || actualNumbers.some((number) => !questions.some((question) => question.canonicalNumber === number))) {
       addIssue(issues, 'NCK1_DOCX_LISTENING_ANNOUNCEMENT_RANGE_AMBIGUOUS', 'listening.transcript',
@@ -1446,7 +1467,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
         'unresolved_source_timing', 'timing_requires_exact_agent_transcription')
       return { record, text: null }
     }
-    const cue = listeningCue(text)
+    const cue = cueFor(item)
     if (cue) {
       if (Object.hasOwn(cue, 'nextTextNumber') && cue.nextTextNumber !== (nextMarker?.number ?? null)) {
         addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
@@ -1543,7 +1564,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       }
       const firstBodyItem = answerBody.slice(marker.index + 1, boundary).find((item) =>
         item.kind === 'paragraph' && normalized(item.text)
-          && !listeningCue(item.text) && !timingSourceIndexes.has(item.sourceIndex)
+          && !cueFor(item) && !timingSourceIndexes.has(item.sourceIndex)
           && hasSourceLocator(answerDocumentId, item.sourceIndex))
       transcript.push({
         segmentId: `listening-text-${marker.number}`,

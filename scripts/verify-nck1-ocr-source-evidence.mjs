@@ -360,7 +360,7 @@ for (const classification of ['semantic_table', 'content_media']) {
   confirmation.evidenceDigest = evidence.evidenceDigest
   const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
   assert.deepEqual(produced.review.required, [], JSON.stringify(produced.review.required))
-  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v20')
+  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v22')
   if (classification === 'semantic_table') {
     assert.equal(produced.materialization.groups.find(group => group.slotId === 'reading.c')
       .blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text,
@@ -1514,7 +1514,7 @@ try {
     JSON.stringify({ ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }))
   const v3Job = { paperDir: v3Dir, manifest: JSON.parse(readFileSync(path.join(v3Dir, 'universal-source-manifest.json'))) }
   assert.equal(runNck1MaterializationJob(v3Job).disposition, 'ready_for_verification')
-  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v20')
+  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v22')
   assert.equal(runNck1MaterializationJob(v3Job).cached, true, 'v3 output, review and receipt must agree on the current producer')
   const v3ReviewFile = path.join(v3Dir, 'materialization/nck1-ocr-materialization-review-v1.json')
   const v3ReviewBytes = readFileSync(v3ReviewFile)
