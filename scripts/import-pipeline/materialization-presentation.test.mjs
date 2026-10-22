@@ -74,6 +74,64 @@ test('existing presentation keeps manual fields, fills missing sections and is i
   assert.deepEqual(restoreOcrSourcePresentation({ ...input, materialization: result }), result)
 })
 
+for (const version of [5, 6]) {
+  function currentPresentationFixture() {
+    const input = fixture()
+    input.materialization = restoreOcrSourcePresentation(input)
+    input.materialization.schemaVersion = `nck1-source-materialization-v${version}`
+    const source = input.materialization.sourcePresentation.instructions[0].source
+    input.materialization.groups = [{
+      groupId: 'writing', family: 'application-writing',
+      writingTask: { drawingArea: { placement: 'top_right', labelBlockRef: 'drawing-label', source } },
+    }]
+    if (version === 6) input.materialization.groups.push({
+      groupId: 'reading', family: 'reading',
+      questions: [{ questionId: 'q21', stemFigures: [{
+        kind: 'figure', blockId: 'stem-map', mediaId: 'map', caption: '', source,
+      }] }],
+    })
+    return input
+  }
+
+  test(`v${version} presentation recovery preserves drawing/stem fields, schema and identity`, () => {
+    const input = currentPresentationFixture()
+    const before = structuredClone(input.materialization)
+    const result = restoreOcrSourcePresentation(input)
+    assert.deepEqual(result, before)
+    assert.equal(digestJson(result), digestJson(before))
+    assert.deepEqual(input.materialization, before)
+  })
+
+  test(`v${version} cache hit preserves materialization bytes and producer identity`, t => {
+    const job = cachedJob(t, currentPresentationFixture())
+    const file = job.file('nck1-source-materialization-v1.json')
+    const before = readFileSync(file)
+    const receipt = readFileSync(job.file('nck1-ocr-materialization-producer-receipt-v1.json'))
+    assert.equal(inspectNck1Materialization(job).outputState, 'producer_output_unchanged')
+    const result = runNck1MaterializationJob(job)
+    assert.equal(result.cached, true)
+    assert.deepEqual(readFileSync(file), before)
+    assert.equal(result.outputState, 'producer_output_unchanged')
+    assert.deepEqual(readFileSync(job.file('nck1-ocr-materialization-producer-receipt-v1.json')), receipt)
+  })
+}
+
+test('v2/v3 presentation recovery upgrades only legacy schemas to v4', () => {
+  for (const version of [2, 3]) {
+    const input = fixture()
+    input.materialization.schemaVersion = `nck1-source-materialization-v${version}`
+    assert.equal(restoreOcrSourcePresentation(input).schemaVersion, 'nck1-source-materialization-v4')
+  }
+})
+
+test('presentation recovery rejects unknown schemas without rewriting the input', () => {
+  const input = fixture()
+  input.materialization.schemaVersion = 'nck1-source-materialization-v7'
+  const before = structuredClone(input)
+  assert.throws(() => restoreOcrSourcePresentation(input), /Unsupported materialization schema/u)
+  assert.deepEqual(input, before)
+})
+
 test('answer-source directions cannot supply or conflict with question-source directions', () => {
   const input = fixture()
   const answer = structuredClone(input.confirmation.documents[0])

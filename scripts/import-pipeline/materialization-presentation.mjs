@@ -24,6 +24,11 @@ function itemSource(documentId, page, item, observations) {
 // This is the source-presentation materialization pass, never a listening-rule OCR fallback.
 // Keep existing Agent edits; only restore missing slots from confirmed question-bearing items.
 export function restoreOcrSourcePresentation({ materialization, evidence, confirmation }) {
+  if (!/^nck1-source-materialization-v[1-6]$/u.test(materialization.schemaVersion)) {
+    throw new Error(`Unsupported materialization schema: ${materialization.schemaVersion}`)
+  }
+  const schemaVersion = /^nck1-source-materialization-v[1-3]$/u.test(materialization.schemaVersion)
+    ? 'nck1-source-materialization-v4' : materialization.schemaVersion
   if (!confirmation?.confirmed || confirmation.paperId !== materialization.paperId
     || evidence?.paperId !== materialization.paperId
     || !evidence.sourceSetDigest || !evidence.evidenceDigest
@@ -73,7 +78,7 @@ export function restoreOcrSourcePresentation({ materialization, evidence, confir
       page: Math.min(...firstQuestion.pages.map(page => page.page)),
       region: { x: 0, y: 0, width: 1, height: 1 } },
   } : null
-  return { ...materialization, schemaVersion: 'nck1-source-materialization-v4',
+  return { ...materialization, schemaVersion,
     sourcePresentation: { ...existing, instructions,
       listeningExample: existing?.listeningExample ?? example } }
 }
