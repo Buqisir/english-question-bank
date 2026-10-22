@@ -3624,7 +3624,7 @@ try {
   // caches, otherwise promoted groups stay invisible to 配相似 until restart.
   {
     const apiSource = readFileSync(path.join(root, 'server/api.mjs'), 'utf8')
-    const wiring = apiSource.match(/createSinglePaperPromotionService\(\{[\s\S]*?\}\)/)?.[0] || ''
+    const wiring = apiSource.match(/createPromotionWorkerService\(\{[\s\S]*?\}\)/)?.[0] || ''
     assert.match(wiring, /afterPublish/, 'api.mjs promotion service wires afterPublish')
     assert.match(wiring, /similarQuestionsStore\.invalidate\(\)/, 'publish clears the similar-questions raw index cache')
     assert.match(wiring, /teachingFacetIndex\.invalidate\(\)/, 'publish clears the teaching facet index')
