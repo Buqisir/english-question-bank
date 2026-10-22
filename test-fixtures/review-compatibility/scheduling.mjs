@@ -29,6 +29,17 @@ function leaveOrphan(activity = false) {
   return json(record.file)
 }
 
+async function waitForStopped(child) {
+  const deadline = Date.now() + 2_000
+  while (Date.now() < deadline) {
+    const state = execFileSync('ps', ['-o', 'stat=', '-p', String(child.pid)],
+      { encoding: 'utf8', timeout: 1_000 }).trim()
+    if (state.startsWith('T')) return
+    await new Promise(resolve => setTimeout(resolve, 10))
+  }
+  throw new Error(`Contender did not stop: ${child.pid}`)
+}
+
 // Both contenders stop *inside* the liveness probe after reading the old record.
 // SIGCONT releases that exact race, rather than hoping two starts overlap.
 async function compete(oldPid, probe = 1) {
@@ -95,6 +106,8 @@ async function compete(oldPid, probe = 1) {
       await Promise.all(ready)
       for (const child of children) child.send('go')
       await Promise.all(observed)
+      // The stdout marker can arrive before SIGSTOP; wait for T so SIGCONT cannot be lost.
+      await Promise.all(children.map(waitForStopped))
       for (const child of children) child.kill('SIGCONT')
       return results
     }
