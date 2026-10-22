@@ -626,6 +626,7 @@ try {
       }
     },
   })
+  await bindingStore.ready()
   function finalizeBindingCase(materialization, entry) {
     const report = { ...candidateReport, entries: [entry] }
     const bytes = Buffer.from(JSON.stringify({ materialization, report }))

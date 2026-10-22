@@ -3,11 +3,10 @@ import {
   mkdirSync,
   readdirSync,
   readFileSync,
-  statSync,
   writeFileSync,
 } from 'node:fs'
 import { createServer } from 'node:http'
-import { createHash, randomUUID } from 'node:crypto'
+import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
@@ -55,12 +54,13 @@ import { createQuestionBankStewardImplementation } from './search/questionBankSt
 import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, normalizeSynonymCardId, normalizeSynonymConfidence, normalizeSynonymBoolean, uniqueSynonymFlags, formatSynonymDifficultyKnowledgeForReadingPrompt } from './ai-parse/synonymDifficultyService.mjs'
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
 import { createImportReviewStore } from './import-review/importReviewStore.mjs'
-import { rendererBuildIdProvider } from './import-review/rendererBuildIdProvider.mjs'
+import { rendererBuildId } from './import-review/promotionBootstrap.mjs'
 import { createReviewCompatibilityStore } from './import-review/reviewCompatibilityStore.mjs'
 import { startReviewCompatibilityWorker } from './import-review/runReviewCompatibilityWorker.mjs'
 import { createAutomaticReviewSubjectBackfillStore } from './import-review/automaticReviewSubjectBackfill.mjs'
 import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
-import { createSinglePaperPromotionService } from './import-review/singlePaperPromotion.mjs'
+import { createPromotionWorkerService } from './import-review/runPromotionWorker.mjs'
+import { inspectPromotionReservation, acquireReviewCompatibilityLeader } from './import-review/reviewCompatibilityScheduling.mjs'
 import { createSourceIntakeNotifier } from './source-intake/sourceIntakeNotifier.mjs'
 import { createSourceIntakeRoutes } from './source-intake/sourceIntakeRoutes.mjs'
 import { createSourceIntakeStore } from './source-intake/sourceIntakeStore.mjs'
@@ -85,45 +85,6 @@ const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.lo
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 const vocabularyAppOrigin = process.env.QUESTION_BANK_PUBLIC_ORIGIN || 'https://eqbank.cc'
 
-function rendererFiles(target) {
-  if (!existsSync(target)) return []
-  if (!statSync(target).isDirectory()) return [target]
-  return readdirSync(target, { withFileTypes: true })
-    .sort((left, right) => left.name.localeCompare(right.name))
-    .flatMap((entry) => rendererFiles(path.join(target, entry.name)))
-}
-
-function actualRendererBuildId() {
-  const roots = [
-    path.join(rootDir, 'app/dist'),
-    path.join(rootDir, 'app/src'),
-    path.join(rootDir, 'app/pnpm-lock.yaml'),
-    path.join(rootDir, 'shared'),
-    path.join(rootDir, 'server/figures'),
-    path.join(rootDir, 'server/import-review/revisionProjection.mjs'),
-    path.join(rootDir, 'server/import-review/reviewPagination.mjs'),
-    path.join(rootDir, 'server/draft-paper/fixedPagePdfPlanner.mjs'),
-    path.join(rootDir, 'server/draft-paper/studentProductPdf.mjs'),
-    path.join(rootDir, 'server/draft-paper/paginationRenderer.mjs'),
-    path.join(rootDir, 'server/paper-import/paginationPlan.mjs'),
-    path.join(rootDir, 'server/paper-canonical'),
-    path.join(rootDir, 'server/print-renderer.mjs'),
-  ]
-  const hash = createHash('sha256')
-  for (const filePath of roots.flatMap(rendererFiles).sort()) {
-    hash.update(path.relative(rootDir, filePath))
-    hash.update('\0')
-    hash.update(readFileSync(filePath))
-    hash.update('\0')
-  }
-  return `sha256:${hash.digest('hex')}`
-}
-
-const rendererBuildId = rendererBuildIdProvider({
-  explicitBuildId: process.env.QUESTION_BANK_BUILD_ID,
-  production: process.env.NODE_ENV === 'production',
-  compute: actualRendererBuildId,
-})
 let importReviewStore = null
 function getImportReviewStore() {
   if (!importReviewStore) {
@@ -131,6 +92,10 @@ function getImportReviewStore() {
       dbPath: importReviewDbPath,
       filesRoot: importReviewFilesRoot,
       rendererBuildId,
+      busyTimeoutMs: 0,
+      // An accepted executor can outlive this API. Its Review transaction must
+      // not be blocked by re-running DDL during restart.
+      initializeSchema: inspectPromotionReservation().state === 'missing',
     })
   }
   return importReviewStore
@@ -146,10 +111,8 @@ function getSourceIntakeStore() {
   return sourceIntakeStore
 }
 const sourceIntakeNotifier = createSourceIntakeNotifier()
-const singlePaperPromotionService = createSinglePaperPromotionService({
+const singlePaperPromotionService = createPromotionWorkerService({
   getStore: getImportReviewStore,
-  openDatabase,
-  paperAssetsDir,
   afterPublish() {
     similarQuestionsStore.invalidate()
     teachingFacetIndex.invalidate()
@@ -623,7 +586,7 @@ function openDatabase({ readOnly = true } = {}) {
   }
 
   const db = new DatabaseSync(dbPath, { readOnly })
-  db.exec('PRAGMA foreign_keys = ON')
+  db.exec('PRAGMA foreign_keys = ON; PRAGMA busy_timeout=0')
   return db
 }
 
@@ -4132,16 +4095,25 @@ const server = createServer(async (request, response) => {
     sendJson(response, 404, { error: 'Not found' })
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
-    sendJson(response, 500, { error: message })
+    if (error.errcode === 5 || error.code === 'SQLITE_BUSY' || /database is locked|database is busy/.test(message)) {
+      sendJson(response, 409, { error: '数据库正忙，稍后重试。', code: 'DATABASE_BUSY', retryable: true })
+    } else sendJson(response, 500, { error: message })
   }
 })
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
-  ensureDatabaseShape()
+  // Cleanup mutates the publisher journal's working directories. Serialize it
+  // with admission; an API restart must preserve an orphan executor's files.
+  const cleanupLeader = acquireReviewCompatibilityLeader()
+  try {
+    if (cleanupLeader) ensureDatabaseShape()
+    getImportReviewStore()
+    if (cleanupLeader && singlePaperPromotionService.canCleanup()) cleanupPaperImportTempArtifacts(paperAssetsDir)
+  } finally { cleanupLeader?.release() }
   openUserDatabase({ readOnly: false }).close()
-  cleanupPaperImportTempArtifacts(paperAssetsDir)
   ensureMySpaceFilesRoot(userSpaceFilesDir)
   getImportReviewStore()
+  void singlePaperPromotionService.ready().catch(error => console.error('[promotion-recovery]', error.code || 'RECOVERY_BLOCKED'))
   // Both stores share the executing identity worker/cache. The scheduler awaits
   // initialization; requests remain available and report pending meanwhile.
   const compatibilityStore = createReviewCompatibilityStore({
@@ -4151,7 +4123,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     backfillStore: createAutomaticReviewSubjectBackfillStore({ dbPath: importReviewDbPath, filesRoot: importReviewFilesRoot }),
     onError(error) { console.error('[review-compatibility]', error.code || 'WORKER_FAILED') },
   })
-  server.once('close', () => { void compatibilityWorker.stop() })
+  server.once('close', () => { singlePaperPromotionService.stop(); void compatibilityWorker.stop() })
   const shutdown = async () => {
     const closed = new Promise(resolve => server.close(resolve))
     server.closeIdleConnections()

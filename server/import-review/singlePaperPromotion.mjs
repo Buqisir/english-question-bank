@@ -484,7 +484,21 @@ export function createSinglePaperPromotionService({
       }
   }
   return {
-    promoteOwner(paperId, revisionId, input, actor) {
+    // Read-only, independent reconciliation. In particular this MUST NOT call
+    // recoverInterruptedPaperImportPublish (which can mutate journal/files).
+    inspectReceipt(paperId, promotionId) {
+      const store = getStore()
+      const promotion = store.operationPromotion(promotionId)
+      if (!promotion || promotion.paperId !== paperId || promotion.state !== 'published') return null
+      const revision = store.getRevision(promotion.revisionId)
+      const db = openDatabase({ readOnly: true })
+      try {
+        const committed = inspectCommittedPromotion({ db, paperAssetsDir, promotion,
+          packageData: originalPromotionEvidence(store, revision) })
+        return committed ? { status: 'idempotent', promotion } : null
+      } finally { db.close() }
+    },
+    promoteOwner(paperId, revisionId, input, actor, operation = null) {
       const store = getStore()
       const detail = store.paperDetail(paperId, { includeProjection: false })
       const revision = detail.latest
@@ -508,15 +522,15 @@ export function createSinglePaperPromotionService({
       // Both calls are synchronous until the durable guard is acquired. The
       // store rechecks latest revision, content compatibility, approval and issues in its
       // transaction, including races with another process.
-      return execute(paperId, store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor))
+      return execute(paperId, store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor, operation))
     },
-    promote(paperId, input, actor) {
+    promote(paperId, input, actor, operation = null) {
       const store = getStore()
-      return execute(paperId, store.beginPromotion(paperId, input, actor))
+      return execute(paperId, store.beginPromotion(paperId, input, actor, operation))
     },
-    promoteScoped(paperId, requestId, secretHash, actor) {
+    promoteScoped(paperId, requestId, secretHash, actor, operation = null) {
       const store = getStore()
-      return execute(paperId, store.beginScopedPromotion(paperId, requestId, secretHash, actor))
+      return execute(paperId, store.beginScopedPromotion(paperId, requestId, secretHash, actor, operation))
     },
   }
 }

@@ -1,5 +1,5 @@
 import { fork } from 'node:child_process'
-import { readReviewProcessTree, killReviewProcessTree } from './reviewProcessTree.mjs'
+import { readReviewProcessTree, killReviewProcessTree, reviewProcessIdentity } from './reviewProcessTree.mjs'
 import { mkdtempSync, realpathSync, rmSync, statfsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -8,6 +8,7 @@ import { REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
 import {
   acquireReviewCompatibilityLeader, reviewCompatibilityBusy, reviewCompatibilityLockDiagnostics,
   validReviewCompatibilityLease,
+  beginReviewCompatibilityWork, reconcileDeadReviewCompatibilityLeader,
 } from './reviewCompatibilityScheduling.mjs'
 
 import { REVIEW_WORKER_BUDGET, REVIEW_BACKFILL_WORKER_BUDGET, reviewCompatibilityAutorunEnabled } from './reviewRecoveryPolicy.mjs'
@@ -21,6 +22,7 @@ export async function runReviewCompatibilityWorker(input, {
   signal, leaderLease,
 } = {}) {
   const budget = input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET
+  if (!leaderLease) await reconcileDeadReviewCompatibilityLeader()
   const owned = leaderLease ? null : acquireReviewCompatibilityLeader()
   const lease = leaderLease || owned?.lease
   const unknown = reasonCode => ({ baseline: null, comparison: {
@@ -41,6 +43,8 @@ export async function runReviewCompatibilityWorker(input, {
   let onAbort
   let ownsRunning = false
   let workspace
+  let custody
+  let inputSent = false
   try {
     if (!validReviewCompatibilityLease(lease)) return unknown('LEADER_BUSY')
     if (running.has(lease)) return unknown('LEADER_BUSY')
@@ -53,16 +57,24 @@ export async function runReviewCompatibilityWorker(input, {
     if (signal?.aborted) return unknown('WORKER_EXIT')
     // A killed child cannot clean its own temporary files. Custody stays here.
     workspace = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-job-'))
+    custody = beginReviewCompatibilityWork(lease)
+    if (!custody) return unknown('LEADER_BUSY')
     worker = fork(new URL('./reviewCompatibilityWorker.mjs', import.meta.url), [], {
       execArgv: [`--max-old-space-size=${heapMb}`, '--expose-gc'], serialization: 'advanced', detached: true,
       stdio: ['ignore', 'ignore', 'pipe', 'ipc'],
       env: { ...process.env, TMPDIR: workspace, TMP: workspace, TEMP: workspace },
     })
     exited = new Promise(resolve => worker.once('exit', resolve))
+    worker.on('error', () => {}) // Startup errors may precede async identity capture.
     worker.stderr.on('data', bytes => {
       stderr = (stderr + bytes.toString()).slice(-8192)
       sawOom ||= /heap out of memory|Allocation failed/i.test(stderr)
     })
+    // Business input/GO is sent only after exact child custody is durable.
+    if (!worker.pid) throw new Error('Compatibility worker failed to spawn')
+    const identity = await reviewProcessIdentity(worker.pid)
+    if (!identity || worker.exitCode !== null || worker.signalCode) throw new Error('Compatibility worker exited before custody')
+    custody.record(identity)
     return await new Promise((resolve, reject) => {
       let settled = false
       let failureReason = null
@@ -102,6 +114,7 @@ export async function runReviewCompatibilityWorker(input, {
       // is drained. Classify after close; an EPIPE must not mask WORKER_OOM.
       worker.once('error', () => { if (!worker.pid) finish(unknown('WORKER_EXIT')) })
       worker.once('close', () => finish(unknown(sawOom ? 'WORKER_OOM' : 'WORKER_EXIT')))
+      inputSent = true
       worker.send(input, error => { if (error && !worker.pid) finish(unknown('WORKER_EXIT')) })
     })
   } catch (error) {
@@ -116,6 +129,7 @@ export async function runReviewCompatibilityWorker(input, {
         await killReviewProcessTree(worker, pids)
         await exited
       }
+      await custody?.finish({ notStarted: !inputSent, pid: worker?.pid })
     } finally {
       try { if (workspace) rmSync(workspace, { recursive: true, force: true }) }
       finally { if (ownsRunning) running.delete(lease); owned?.release() }
