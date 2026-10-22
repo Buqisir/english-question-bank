@@ -799,6 +799,7 @@ function compile(paperId) {
       }
       const tables = compileSemanticTables(draft, resolvedItems, {
         documentId: document.documentId, page: tracePage.page, ...pngSize(tracePage.imagePath),
+        words: tracePage.words,
       })
       figures.push(...tables.map(({ visual: _visual, ...table }) => ({ key: label, ...table })))
       const visualClassifications = tables.map(table => table.visual)

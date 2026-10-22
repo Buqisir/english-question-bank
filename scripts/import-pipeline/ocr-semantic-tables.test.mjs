@@ -4,6 +4,7 @@ import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { buildSourceReferences, joinTranscriptTurns } from './ocr-proofread.mjs'
 import { validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 
 function fixture() {
   const items = Array.from({ length: 14 }, (_, index) => ({
@@ -20,6 +21,86 @@ function fixture() {
   const context = { documentId: 'answers', page: 1, width: 1000, height: 1000 }
   return { items, draft, context }
 }
+
+function geometricFixture(region, box) {
+  const value = fixture()
+  value.draft.semanticTables[0].region = region
+  value.context.width = 1191
+  value.context.height = 1684
+  value.items.forEach((item, i) => { item.numbers = [i + 1] })
+  value.context.words = value.items.map((item, i) => ({
+    number: i + 1, box: i === 1 ? box
+      : { left: region.x + 10, top: region.y + 10 + i, width: 10, height: 10 },
+  }))
+  return value
+}
+
+function resolveGeometry(value, table, extraObservations = []) {
+  const { items, context } = value
+  return resolveOcrContentVisual({
+    paperId: 'paper-table-test',
+    document: { documentId: context.documentId, role: 'official_answers', mediaType: 'application/pdf' },
+    visual: table.visual, region: table, claimedItems: new Set(),
+    page: { page: context.page, orderedItems: items, furnitureObservationIds: [],
+      observations: [...context.words.map(({ box }, i) => ({
+        observationId: items[i].observationIds[0],
+        region: { x: box.left / context.width, y: box.top / context.height,
+          width: box.width / context.width, height: box.height / context.height },
+      })), ...extraObservations] },
+  })
+}
+
+test('fits all eight diagnosed edge overflows before the unchanged containment validator', () => {
+  const cases = [
+    // Qiangji w13: top 55 vs declared 57.
+    [{ x: 52, y: 57, width: 1087, height: 358 }, { left: 738, top: 55, width: 21, height: 39 }, 2, 'top'],
+    ...[
+      [158, 605, 876, 697, 5], // Jiangsu eight cities
+      [109, 1322, 910, 212, 3], [242, 138, 777, 71, 3], [109, 209, 910, 878, 2], // four schools
+      [178, 1142, 835, 378, 4], [178, 1004, 835, 484, 5], [178, 145, 835, 304, 5], // Zhengzhou
+    ].map(([x, y, width, height, overflow]) => [
+      { x, y, width, height }, { left: x + 20, top: y + height - 20, width: 20, height: 20 + overflow }, overflow, 'bottom',
+    ]),
+  ]
+  for (const [region, box, overflow, edge] of cases) {
+    const value = geometricFixture(region, box)
+    const before = structuredClone(value)
+    const [original] = compileSemanticTables(value.draft, value.items, { ...value.context, words: [] })
+    assert.throws(() => resolveGeometry(value, original), /within the classified/)
+    const [table] = compileSemanticTables(value.draft, value.items, value.context)
+    assert.deepEqual(table.pixels, { ...region, y: region.y - (edge === 'top' ? overflow : 0),
+      height: region.height + overflow })
+    assert.doesNotThrow(() => resolveGeometry(value, table))
+    assert.deepEqual(value, before, 'drafts and OCR words are immutable inputs')
+  }
+})
+
+test('overflow above 5px leaves the whole rectangle unchanged and is still rejected', () => {
+  const region = { x: 178, y: 145, width: 835, height: 304 }
+  const value = geometricFixture(region, { left: 176, top: 430, width: 20, height: 25 })
+  const [table] = compileSemanticTables(value.draft, value.items, value.context)
+  assert.deepEqual(table.pixels, region, 'do not partly fit the 2px left overflow when bottom exceeds threshold')
+  assert.throws(() => resolveGeometry(value, table), /within the classified/)
+})
+
+test('left/right fitting uses only bound words and newly enclosed foreign words still fail', () => {
+  const region = { x: 100, y: 200, width: 800, height: 600 }
+  for (const box of [
+    { left: 95, top: 210, width: 10, height: 10 },
+    { left: 895, top: 210, width: 10, height: 10 },
+  ]) {
+    const value = geometricFixture(region, box)
+    value.context.words.push({ number: 99, box: { left: 1, top: 1, width: 1, height: 1 } })
+    const [table] = compileSemanticTables(value.draft, value.items, value.context)
+    assert.equal(table.pixels.width, 805)
+    assert.equal(table.pixels.y, 200)
+  }
+  const value = geometricFixture(region, { left: 95, top: 210, width: 10, height: 10 })
+  const [table] = compileSemanticTables(value.draft, value.items, value.context)
+  assert.throws(() => resolveGeometry(value, table, [{
+    observationId: 'foreign', region: { x: 96 / 1191, y: 250 / 1684, width: 2 / 1191, height: 2 / 1684 },
+  }]), /must be accounted for/)
+})
 
 test('compiles explicit 7 by 2 cells to the existing semantic table confirmation', () => {
   const { items, draft, context } = fixture()
