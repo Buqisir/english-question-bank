@@ -1,10 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
-export function importSubmissionIssues({ materialization, listeningReview }) {
+export function importSubmissionIssues({ materialization, listeningReview, analyzedPackage = null }) {
   const issues = []
   const transcript = materialization.listening?.transcript || []
-  if (materialization.listening?.state === 'captured' || transcript.length) {
+  // External packages use Owner Screen/PDF review and cannot author this raw-source sidecar.
+  if (!analyzedPackage && (materialization.listening?.state === 'captured' || transcript.length)) {
     const groups = listeningReview?.groups || []
     const unresolved = transcript.filter(source => {
       const matches = groups.filter(group => group.segmentId === source.segmentId)
@@ -87,14 +88,14 @@ export function importSubmissionIssues({ materialization, listeningReview }) {
   return issues
 }
 
-export function assertImportSubmissionReady(paperDir, materialization = null) {
+export function assertImportSubmissionReady(paperDir, materialization = null, { analyzedPackage = null } = {}) {
   if (!materialization) {
     const manifest = JSON.parse(readFileSync(path.join(paperDir, 'universal-source-manifest.json'), 'utf8'))
     materialization = JSON.parse(readFileSync(path.resolve(paperDir, manifest.materializationPath), 'utf8'))
   }
   const reviewFile = path.join(paperDir, 'listening-review-v1.json')
-  const listeningReview = existsSync(reviewFile) ? JSON.parse(readFileSync(reviewFile, 'utf8')) : null
-  const issues = importSubmissionIssues({ materialization, listeningReview })
+  const listeningReview = !analyzedPackage && existsSync(reviewFile) ? JSON.parse(readFileSync(reviewFile, 'utf8')) : null
+  const issues = importSubmissionIssues({ materialization, listeningReview, analyzedPackage })
   if (issues.length) throw Object.assign(new Error(`送审门禁拒绝：\n${issues.map(issue =>
     `${issue.code}: ${issue.groups?.join(', ') || `${issue.field}: ${issue.matches.join(', ')}`}`).join('\n')}`),
   { code: issues[0].code, issues })

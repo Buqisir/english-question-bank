@@ -345,7 +345,8 @@ async function linkThread(paperId) {
 
 async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
-  assertImportSubmissionReady(paperDir, loadNck1ReviewSource(paperDir).materialization)
+  const loaded = loadNck1ReviewSource(paperDir)
+  assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
   const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
   const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
   if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
