@@ -28,13 +28,7 @@ export function stableStringify(value) {
   throw new TypeError(`Unsupported canonical value: ${typeof value}`)
 }
 
-// Node exposes builtins synchronously without an import, which keeps this
-// module loadable in the browser bundle. Import validation hashes hundreds of
-// MB of page pixels, which the portable implementation below takes seconds on.
-const nodeCrypto = globalThis.process?.getBuiltinModule?.('node:crypto')
-
 function sha256Hex(bytes) {
-  if (nodeCrypto) return nodeCrypto.createHash('sha256').update(bytes).digest('hex')
   const bitLength = bytes.length * 8
   const paddedLength = Math.ceil((bytes.length + 9) / 64) * 64
   const padded = new Uint8Array(paddedLength)
