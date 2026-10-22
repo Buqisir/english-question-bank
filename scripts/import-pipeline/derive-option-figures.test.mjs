@@ -61,3 +61,32 @@ test('source hash, duplicate bytes, wrong page and mismatched raster dimensions 
   outside.crops[0].pixels[1] = 600
   assert.throws(() => derive({ plan: outside }), /parent visual/)
 })
+
+test('v2 figure derivation selects v3 and preserves later envelopes', () => {
+  for (const version of [2, 3, 4, 5, 6]) {
+    const input = { ...structuredClone(materialization),
+      schemaVersion: `nck1-source-materialization-v${version}` }
+    const result = derive({ materialization: input }).materialization
+    assert.equal(result.schemaVersion, `nck1-source-materialization-v${Math.max(3, version)}`)
+    assert.equal(input.schemaVersion, `nck1-source-materialization-v${version}`)
+  }
+})
+
+test('Xiamen Q29 unequal reviewed crop widths bind independently and reject overlap', () => {
+  const input = structuredClone(materialization)
+  input.schemaVersion = 'nck1-source-materialization-v2'
+  input.groups[0].questions[0].canonicalNumber = 29
+  input.groups[0].questions[0].stem = 'Which picture can illustrate the animal in paragraph 4?'
+  input.sourceCoverage.visuals[0].region = { x: 137 / 1191, y: 1110 / 1684, width: 914 / 1191, height: 135 / 1684 }
+  const actualPlan = { ...plan, questionNumber: 29, pagePixels: [1191, 1684],
+    crops: [[137, 1110, 252, 135], [389, 1110, 205, 135], [594, 1110, 250, 135], [844, 1110, 207, 135]]
+      .map((pixels, i) => ({ label: 'ABCD'[i], pixels })) }
+  const result = derive({ materialization: input, plan: actualPlan, raster: ({ region }) => ({
+    bytes: Buffer.from(JSON.stringify(region)), pixelWidth: Math.round(region.width * 1191), pixelHeight: 135,
+  }) })
+  assert.equal(result.materialization.schemaVersion, 'nck1-source-materialization-v3')
+  assert.deepEqual(result.materialization.media.map(media => media.pixelWidth), [252, 205, 250, 207])
+  assert.equal(result.materialization.groups[0].questions[0].stem, input.groups[0].questions[0].stem)
+  actualPlan.crops[1].pixels[0] = 388
+  assert.throws(() => optionCropRegions(actualPlan), /overlap/)
+})

@@ -42,6 +42,11 @@ export function deriveOptionFigures({ materialization, plan, document, pdfBytes,
   'Plan must bind the immutable source PDF')
   assert(Number.isInteger(plan.page) && plan.page > 0 && plan.page <= document.pageCount, 'Invalid source page')
   const result = structuredClone(materialization)
+  // OCR producers emit v2; Reading figure options require the existing v3 contract.
+  // Preserve later envelopes, including sourcePresentation and stemFigures.
+  if (result.schemaVersion === 'nck1-source-materialization-v2') {
+    result.schemaVersion = 'nck1-source-materialization-v3'
+  }
   const question = result.groups.flatMap(g => g.questions).find(q => q.canonicalNumber === plan.questionNumber)
   assert(question && question.source.documentId === plan.documentId && question.source.page === plan.page,
     'Question must be on the planned source page')

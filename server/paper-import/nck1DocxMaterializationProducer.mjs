@@ -467,11 +467,35 @@ function contentBlocks(items, context) {
   })
 }
 
+function parseFigureOptions(items) {
+  const source = items.filter(item => item.kind !== 'paragraph' || normalized(item.text) || item.containsDrawing)
+  const first = source.findIndex(item => item.kind === 'paragraph' && /^A[.、]?$/u.test(normalized(item.text)))
+  if (first < 1) return null
+  const tail = source.slice(first)
+  // Bind explicit source labels only. A composite A–D image needs a reviewed crop plan.
+  if (tail.length !== 8) return null
+  const options = []
+  for (const [index, label] of ['A', 'B', 'C', 'D'].entries()) {
+    const marker = tail[index * 2]
+    const image = tail[index * 2 + 1]
+    if (marker.kind !== 'paragraph' || marker.containsDrawing
+      || !new RegExp(`^${label}[.、]?$`, 'u').test(normalized(marker.text))
+      || image.kind !== 'paragraph' || normalized(image.text)
+      || !image.containsDrawing || !image.materializedMedia?.mediaId) return null
+    options.push({ label, figure: { mediaId: image.materializedMedia.mediaId } })
+  }
+  if (new Set(options.map(option => option.figure.mediaId)).size !== 4
+    || source.slice(0, first).some(item => item.kind !== 'paragraph' || item.containsDrawing)) return null
+  return { leadingText: source.slice(0, first).map(item => item.text).join('\n')
+    .replace(/^\s*\d{1,3}[.．、]\s*/u, ''), options }
+}
+
 function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, questionItems, blankItem = questionItem, prompt = null, documentId, issues }) {
   const sourceNumber = Number(/^(\d{1,3})[.．、]/u.exec(normalized(questionItem?.text))?.[1])
   const labels = family === 'listening' ? ['A', 'B', 'C'] : ['A', 'B', 'C', 'D']
   const parsedOptions = ['reading', 'cloze', 'listening'].includes(family)
-    ? parseOptionsWithLeadingText(questionItems, labels)
+    ? ((family === 'reading' ? parseFigureOptions(questionItems) : null)
+        || parseOptionsWithLeadingText(questionItems, labels))
     : { options: [] }
   const options = parsedOptions?.options || null
   if (!Number.isInteger(sourceNumber)) {
@@ -489,7 +513,8 @@ function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, que
     ? `blank:${paperId}:${canonicalNumber}`
     : null
   const stem = ['reading', 'listening'].includes(family)
-    ? parsedOptions?.leadingText || ''
+    ? parsedOptions?.leadingText || (family === 'reading' && questionItems.some(item => item.containsDrawing)
+        ? questionItem.text.replace(/^\s*\d{1,3}[.．、]\s*/u, '') : '')
     : ''
   return {
     questionId,
@@ -1783,7 +1808,14 @@ function referencedGroupMediaIds(groups) {
       }
     }
   }
-  for (const candidate of groups) visitBlocks(candidate.blocks)
+  for (const candidate of groups) {
+    visitBlocks(candidate.blocks)
+    for (const question of candidate.questions) {
+      for (const option of question.options) {
+        if (option.figure) ids.add(option.figure.mediaId)
+      }
+    }
+  }
   return ids
 }
 
@@ -1969,7 +2001,9 @@ export function produceNck1MaterializationFromStructures({
       })
   const listening = listeningResult.materialization
   const materialization = {
-    schemaVersion: selectedMedia.length > 0
+    schemaVersion: groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
+      ? 'nck1-source-materialization-v3'
+      : selectedMedia.length > 0
       ? 'nck1-source-materialization-v2'
       : 'nck1-source-materialization-v1',
     paperId,
