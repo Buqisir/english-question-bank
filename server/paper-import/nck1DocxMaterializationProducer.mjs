@@ -490,6 +490,13 @@ function parseFigureOptions(items) {
     .replace(/^\s*\d{1,3}[.．、]\s*/u, ''), options }
 }
 
+function unboundFigureQuestionStem(items) {
+  const end = items.findIndex(item => item.kind !== 'paragraph' || item.containsDrawing
+    || /^[A-D](?:[.、](?:\s|$)|\s|$)/u.test(normalized(item.text)))
+  return items.slice(0, end < 0 ? items.length : end).map(item => item.text).join('\n')
+    .replace(/^\s*\d{1,3}[.．、]\s*/u, '')
+}
+
 function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, questionItems, blankItem = questionItem, prompt = null, documentId, issues }) {
   const sourceNumber = Number(/^(\d{1,3})[.．、]/u.exec(normalized(questionItem?.text))?.[1])
   const labels = family === 'listening' ? ['A', 'B', 'C'] : ['A', 'B', 'C', 'D']
@@ -514,7 +521,7 @@ function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, que
     : null
   const stem = ['reading', 'listening'].includes(family)
     ? parsedOptions?.leadingText || (family === 'reading' && questionItems.some(item => item.containsDrawing)
-        ? questionItem.text.replace(/^\s*\d{1,3}[.．、]\s*/u, '') : '')
+        ? unboundFigureQuestionStem(questionItems) : '')
     : ''
   return {
     questionId,
