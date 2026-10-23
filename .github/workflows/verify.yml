@@ -83,7 +83,8 @@ jobs:
               exit 1
             fi
             # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
+            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
               if [ -f "$source" ]; then
                 sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
               fi
@@ -180,7 +181,8 @@ jobs:
               exit 1
             fi
             # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
+            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
               if [ -f "$source" ]; then
                 sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
               fi
@@ -440,7 +442,8 @@ jobs:
               exit 1
             fi
             # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
+            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
               if [ -f "$source" ]; then
                 sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
               fi
@@ -555,7 +558,8 @@ jobs:
               exit 1
             fi
             # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
+            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
               if [ -f "$source" ]; then
                 sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
               fi
