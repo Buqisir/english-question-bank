@@ -207,16 +207,17 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   const primaryWindow = retain(appleEvidence, 'apple')
   if (primaryWindow.audioSha256 !== audioHash) throw new Error('LISTENING_APPLE_INPUT_BINDING_MISMATCH')
   const playbackEndSeconds = Math.min(durationSeconds, primaryWindow.endSeconds ?? durationSeconds)
+  const ruleCodeSha256 = digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs')))
   write(path.join(attempt, 'input.json'), {
     rule: { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }, normalization: LISTENING_EQUIVALENCES,
     normalizationAlgorithm: 'listening-equivalences-v4; source-preserving listening-spoken-projection-v1 (recorded exclusions and source locations); finite spelling aliases and negative/positive auxiliary contractions; context-bound s/d expansions (ambiguous s/d retained); integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; typed year/time/cardinal/ordinal expressions; year equivalence requires a four-digit literal and an explicit word reading (2001..2099), standalone or in year context; shared source/ASR character spans, original acoustic run boundaries',
     sourceTextSha256: digest(Buffer.from(JSON.stringify(groups))),
     materializationSha256: digest(materializationBytes), audioSha256: audioHash,
-    ruleCodeSha256: digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs'))),
+    ruleCodeSha256,
     adapterSha256: digest(readFileSync(fileURLToPath(import.meta.url))), subject,
     ...(historical ? { historicalAttempt: path.resolve(replayAttempt),
       historicalRuleVersion: historical.input.rule.version, inference: 'not_run',
-      ruleCacheKey: digestJson({ subject, rule: LISTENING_SEGMENT_RULE, fuzzyAnchors }) } : {}),
+      ruleCacheKey: digestJson({ subject, rule: LISTENING_SEGMENT_RULE, ruleCodeSha256, fuzzyAnchors }) } : {}),
   })
   if (historical) {
     const silence = json(path.join(replayAttempt, 'silence.json'))

@@ -98,7 +98,7 @@ function assertCounterevidenceBlocks(partial, full, label) {
     assert.ok(result.issues.includes('ENGINE_CONFLICT'), label)
   }
 }
-test('Astra P1: a late not in a missing-tail candidate cannot be clipped by reference body times', () => {
+test('a short late not with complete independent boundaries becomes an isolated edge note', () => {
   const first = astraText.replace('over there', 'over here')
   const full = astraEngine(astraText, null, {engine: 'faster-whisper'})
   assert.equal(reconcileListeningEngines(astraEngine(first), full)[0].decision, 'usable')
@@ -107,7 +107,11 @@ test('Astra P1: a late not in a missing-tail candidate cannot be clipped by refe
     segments[0].words.at(-1).end = 8.2
     segments[0].end = 8.2
   })
-  assertCounterevidenceBlocks(partial, full, 'not at 8.0–8.2 after reference body end 6.8')
+  for (const pair of [[partial, full], [full, partial]]) {
+    const result = reconcileListeningEngines(...pair)[0]
+    assert.equal(result.decision, 'usable')
+    assert.ok(result.engineNotes.some(n => n.kind === 'isolated_edge_asr'))
+  }
 })
 test('unanchored internal word differences become notes against complete reference readings', () => {
   const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
@@ -125,7 +129,7 @@ test('unanchored internal word differences become notes against complete referen
     }
   }
 })
-test('reference envelope edges retain negative, modal and numeric observations in both directions', () => {
+test('short isolated envelope words become notes in both engine directions', () => {
   const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
   const full = astraEngine(astraText, null, {engine: 'faster-whisper',
     pauses: [{startSeconds: 0.1, endSeconds: 0.4}, {startSeconds: 8.5, endSeconds: 9.5},
@@ -145,7 +149,11 @@ test('reference envelope edges retain negative, modal and numeric observations i
           segments[0].end = 8.2
         }
       })
-      assertCounterevidenceBlocks(partial, full, `${side} ${word} in ${anchored}`)
+      for (const pair of [[partial, full], [full, partial]]) {
+        const result = reconcileListeningEngines(...pair)[0]
+        assert.equal(result.decision, 'usable', `${side} ${word} in ${anchored}`)
+        assert.ok(result.engineNotes.some(n => n.kind === 'isolated_edge_asr'))
+      }
     }
   }
 })
@@ -169,7 +177,7 @@ test('unanchored raw speech spanning two physical readings has no safe subset as
   assert.equal(partial.groups[0].partialOccurrences.length, 0)
   assertCounterevidenceBlocks(partial, astraEngine(astraText, null, {engine: 'faster-whisper'}), 'ambiguous raw run')
 })
-test('unexplained ordinary edge speech cannot be treated as an unobserved prefix or suffix', () => {
+test('short ordinary edge speech is recorded explicitly instead of clipping it', () => {
   const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
   const full = astraEngine(astraText, null, {engine: 'faster-whisper',
     pauses: [{startSeconds: 0.1, endSeconds: 0.4}, {startSeconds: 8.5, endSeconds: 9.5},
@@ -180,7 +188,11 @@ test('unexplained ordinary edge speech cannot be treated as an unobserved prefix
       segments[0].words[side === 'start' ? 'unshift' : 'push'](extra)
       segments[0][side] = side === 'start' ? 1 : 8.2
     })
-    assertCounterevidenceBlocks(partial, full, `${side} ordinary ${word}`)
+    for (const pair of [[partial, full], [full, partial]]) {
+      const result = reconcileListeningEngines(...pair)[0]
+      assert.equal(result.decision, 'usable', `${side} ordinary ${word}`)
+      assert.ok(result.engineNotes.some(n => n.kind === 'isolated_edge_asr'))
+    }
   }
 })
 test('an anchor inside a long acoustic run cannot explain extra edge words in that run', () => {
@@ -418,11 +430,11 @@ test('Apple omissions plus complete Whisper evidence may pass', () => {
 test('two-engine identity or boundary conflict blocks', () => {
   const apple = evaluate()
   const whisper = evaluate({ engine: 'faster-whisper' })
-  whisper.occurrences[0].playback.startSeconds += 1
+  whisper.occurrences[0].playback.startSeconds += 1.5
   const conflict = reconcileListeningEngines({ groups: [apple] }, { groups: [whisper] })[0]
   assert.ok(conflict.issues.includes('ENGINE_CONFLICT'))
-  assert.equal(conflict.engineConflicts.find(c => c.kind === 'playback_boundary').startDeltaSeconds, 1)
-  whisper.occurrences[0].playback.startSeconds -= 1
+  assert.ok(Math.abs(conflict.engineConflicts.find(c => c.kind === 'playback_boundary').startDeltaSeconds - 1.5) < 1e-9)
+  whisper.occurrences[0].playback.startSeconds -= 1.5
   whisper.issues.push('ANNOUNCEMENT_CONFLICT')
   assert.equal(reconcileListeningEngines({ groups: [apple] }, { groups: [whisper] })[0].decision, 'review_required')
 })

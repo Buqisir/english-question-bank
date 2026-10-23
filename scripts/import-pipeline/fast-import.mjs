@@ -603,8 +603,11 @@ async function afterProofread(ctx, args) {
     if (cached?.finishedAt) {
       const attempt = cached.result?.attempt
       const ruleFile = attempt && path.join(attempt, 'rule-result.json')
+      const inputFile = attempt && path.join(attempt, 'input.json')
       if (!ruleFile || !existsSync(ruleFile)
-        || readJson(ruleFile).rule.version !== LISTENING_SEGMENT_RULE.version) {
+        || readJson(ruleFile).rule.version !== LISTENING_SEGMENT_RULE.version
+        || !existsSync(inputFile)
+        || readJson(inputFile).ruleCodeSha256 !== sha256(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs')))) {
         throw new Stop(`听力缓存属于历史规则；保留旧证据，用当前规则重算（不运行 ASR）：\n`
           + `fast-import.mjs after-proofread ${ctx.paperId} --redo-from asr-apple-rule-v2`
           + ` --listening-replay-attempt ${attempt || '<保留的 attempt 目录>'}`)

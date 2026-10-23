@@ -113,7 +113,7 @@ test('fuzzy candidates keep physical boundary, reading count and engine conflict
     .issues.includes('READING_COUNT_MISMATCH'))
   const primary = evaluate({ actual })
   const secondary = evaluate({ engine: 'faster-whisper' })
-  secondary.occurrences[0].playback.endSeconds += 1
+  secondary.occurrences[0].playback.startSeconds += 2.1
   assert.equal(reconcileListeningEngines({ groups: [primary] }, { groups: [secondary] })[0].decision, 'review_required')
 })
 test('each reading has its own single-substitution allowance and exact opposite endpoint', () => {

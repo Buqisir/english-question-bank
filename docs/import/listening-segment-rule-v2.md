@@ -19,7 +19,8 @@ Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻�
 | 两遍时长比 | 第一遍 / 第二遍须在 0.85–1.15 |
 | 局部边界证据 | 相邻静音需距首尾 run ≤2 秒，边界位于静音内，包住完整 run，至少多留 0.02 秒 |
 | 静音检测 | `-35dB`，最短 0.08 秒 |
-| 双引擎边界冲突容差 | 有物理边界证据的播放边界相差 >0.5 秒即复核 |
+| 双引擎边界冲突容差 | >0.5 秒仍复核；仅满足下述无词争议区间规则时取并集 |
+| 单引擎孤立边词 | 最多 3 词，整个边缘词串总跨度最多 1.5 秒（含端点）；另一引擎须覆盖该区间且完全无词 |
 
 印刷遍数仍解析原卷说明，记录原文、来源定位及组级/节级；组级优先。同级冲突或未知
 均 `review_required`。支持中文一/两/二/1/2 遍以及英文 once/twice。
@@ -92,10 +93,29 @@ Apple 缺词而 Whisper 提供完整唯一证据时允许通过；身份、次�
 `observed_critical_word_difference` 在独立完整引擎确定全部遍次时移到 `engineNotes`；
 没有完整参考时不据此放行。`playback_boundary`（仍为 0.5 秒容差）、
 `occurrence_identity_or_order`、`partial_occurrence_identity`、`observed_speech_identity`、
-`unassigned_edge_speech` 等边界/身份问题保留在 `engineConflicts`，继续阻塞。
+`unassigned_edge_speech` 等边界/身份问题默认保留在 `engineConflicts`，继续阻塞。
 两引擎都完整时，采用包含更多可靠遍次的参考，避免只播放其中一遍。
 第一类不能解释为两引擎给出了相反身份。顺序冲突由合并后的
 骨架统一裁定，不再把先前某引擎的派生顺序失败直接当作跨引擎矛盾。
+
+Owner 2026-10-23 补充，仍使用尚未发布的 v4：
+
+- A：只有一个引擎识别的孤立边词，可记录为 `engineNotes.isolated_edge_asr`。
+  必须同时满足最多 3 词、整个词串跨度 ≤1.5 秒、位于本遍开头/结尾或两遍间隙，
+  且另一引擎原始窗口覆盖该时间段并完全无词。正文内部不适用；
+  同一边缘区域的词一起计数和计时，不通过拆分长串放行。两引擎在相同区域识别同词、
+  相邻材料开头、Text N/第 N 段播报或说明指令均不适用。中文提示保留原始 run 检查，
+  不能因英文规范化后没有 token 而消失。原始证据不删除，规则比较及合并语音重查仅排除
+  已满足 A 的词串。
+- B：物理播放边界相差 >0.5 秒时，两个边界之间的争议区间必须被两引擎原始窗口覆盖，
+  并且都无识别词，或只有满足 A 的词，才记录 `silent_playback_boundary_union`，
+  每遍取最早起点和最晚终点，并同步组级播放范围及对应静音证据。
+  任一非 A 词仍阻塞；所有候选并集一起检查，不得重叠另一遍或相邻组。
+  之后仍执行全卷顺序及合并语音边界检查。notes 记录原差值、争议区间和并集范围。
+
+这两项不替代独立完整参考、首尾成对、遍数证明、正文门槛、时长、身份或顺序门禁。
+例如同一 Thank/you 词串跨度为 2.04 秒时仍不能用 A 放行；另一引擎同区间识别到
+I'm 时，单引擎的 And 也不满足“另一引擎无词”。
 
 ## 本地运行和证据
 
@@ -132,7 +152,7 @@ node scripts/import-pipeline/listening-segment.mjs \
 该分支校验旧 evidence 的字节 SHA/长度、来源说明和静音参数，只读取原始 Apple /
 Whisper JSON 与静音记录；不读取模型、不启动 ASR、不重试 UNKNOWN 任务。
 所有旧 receipt 按 historical 保留，不改签；新 attempt 记录当前规则版本、
-`historicalRuleVersion`、`inference: not_run` 和新 `ruleCacheKey`。
+`historicalRuleVersion`、`inference: not_run` 和新 `ruleCacheKey`（包含规则代码 SHA）。
 保留旧 attempt 中已有的所有回退证据，即使主引擎在新规则下通过，也继续核查其边界反证。
 当前 `listening-review-v1` 的严格字段不变，notes 放在规则证据及报告 `limits` 中。
 
@@ -145,7 +165,7 @@ node scripts/import-pipeline/fast-import.mjs finish <paperId>
 ```
 
 只有该 flag 才保证重算阶段不启动 ASR；单独 `--redo-from` 仍可能调度 Whisper。
-旧版本的已完成缓存不能冒充 v4，编排会提示上述重算命令。redo 保留旧证据，但会归档后续
+旧版本或规则代码 SHA 不同的已完成缓存不能冒充当前 v4，编排会提示上述重算命令。redo 保留旧证据，但会归档后续
 sidecar/PDF 完成标记；`finish` 可能需要重新完成下游产物。批次私有 continuation /
 `--pre-import` 增量须由唯一写入者另行保留整合，本命令不隐含这些未随主线提供的选项。
 
