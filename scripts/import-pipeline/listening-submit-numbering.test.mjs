@@ -49,6 +49,24 @@ test('Chinese instructions remain blocked beside English words with Chinese glos
   assert.deepEqual(issues('要点：（1）介绍 badge(徽章) 的用途。'), [])
 })
 
+test('nested parentheses cannot hide Han inside an inner English-word gloss', () => {
+  for (const stem of [
+    '(1) Receive a badge(gloss(徽章)) after class.',
+    '(1) Receive a badge（gloss（徽章）） after class.',
+    '(1) Receive a badge(gloss（徽章）) after class.',
+    { runs: [{ text: '(1) Receive a badge(gloss' }, { text: '(徽章)' }, { text: ') after class.' }] },
+  ]) assert.deepEqual(issues(stem).flatMap(issue => issue.matches), ['(1)'])
+})
+
+test('gloss eligibility uses original text before masking English quotes', () => {
+  for (const stem of [
+    '(1) Receive a badge(徽章 "badge") after class.',
+    '(1) Receive a badge(徽章 “badge”) after class.',
+    '(1) Receive a badge（徽章 「badge」） after class.',
+    { runs: [{ text: '(1) Receive a badge(徽章 ' }, { text: '"badge"' }, { text: ') after class.' }] },
+  ]) assert.deepEqual(issues(stem).flatMap(issue => issue.matches), ['(1)'])
+})
+
 test('push preflight accepts a loaded external listening package without a raw-source sidecar', async t => {
   const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
   process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
