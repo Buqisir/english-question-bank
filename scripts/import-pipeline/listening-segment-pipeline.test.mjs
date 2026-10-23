@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { chmodSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { segmentListening } from './listening-segment.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
@@ -181,5 +181,193 @@ test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
     calls.push([args.group.segmentId, args.startSeconds, args.endSeconds])
     throw new Error('frozen fallback intentionally unavailable')
   } })
-  assert.deepEqual(calls, [['listening-text-1', 0, 30], ['listening-text-2', 0, 30]])
+  assert.deepEqual(calls, [['listening-text-1', 0, 30]], 'identical raw window is inferred once')
+})
+
+// Exercise the real pipeline invocation, files, receipts and persistent cache
+// without loading an ASR model. Wrapper process semantics are tested separately.
+function offlineRunner(dir) {
+  const config = path.join(dir, 'runner-config.json'), count = path.join(dir, 'runner-count.json')
+  const executable = path.join(dir, 'offline-runner')
+  const model = path.join(dir, 'model')
+  mkdirSync(model)
+  writeFileSync(path.join(model, 'model.bin'), 'frozen-model')
+  writeFileSync(config, JSON.stringify({ mode: 'finished' }))
+  writeFileSync(executable, `#!${process.execPath}
+const fs = require('node:fs'), path = require('node:path')
+const config = JSON.parse(fs.readFileSync(${JSON.stringify(config)}))
+const counter = ${JSON.stringify(count)}
+fs.writeFileSync(counter, JSON.stringify((fs.existsSync(counter) ? JSON.parse(fs.readFileSync(counter)) : 0) + 1))
+const binding = JSON.parse(process.env.EQB_ASR_JOB_BINDING)
+if (process.env.EQB_ASR_CONCURRENCY !== '1' || process.env.ASR_RUN_TIMEOUT !== '900') throw Error('single slot and 900s run budget required')
+const rows = [{ phase: 'started', binding, inferenceStarted: false }]
+if (config.mode !== 'queue_timeout') rows.push({ phase: 'acquired', binding, inferenceStarted: false })
+if (config.mode !== 'unknown') rows.push({ phase: config.mode === 'finished' ? 'finished' : 'timeout',
+  binding, inferenceStarted: config.mode !== 'queue_timeout',
+  code: config.mode === 'queue_timeout' ? 'ASR_QUEUE_TIMEOUT' : config.mode === 'run_timeout' ? 'ASR_RUN_TIMEOUT' : null })
+if (config.mode === 'wrong_binding') rows.forEach(r => r.binding = { ...binding, audioSha256: 'wrong-audio' })
+fs.writeFileSync(process.env.EQB_ASR_RECEIPT, rows.map(r => JSON.stringify(r)).join('\\n') + '\\n')
+if (config.mode !== 'finished') process.exit(1)
+const output = process.argv[process.argv.indexOf('--model-snapshot') - 1]
+fs.mkdirSync(output)
+const record = ${JSON.stringify(fixture)}
+record.language = 'en'
+record.sampleSha256 = 'sha256:frozen'
+for (const [name, value] of Object.entries({
+  'input.json': { engine: { name: 'faster-whisper', modelSnapshot: 'frozen', version: 'offline' } },
+  'settings.json': { language: 'en', vad_filter: false },
+  'completed.json': { inputsUnchanged: true, windows: [{ path: 'window.json' }] },
+  'window.json': record
+})) fs.writeFileSync(path.join(output, name), JSON.stringify(value))
+`)
+  chmodSync(executable, 0o755)
+  return { options: { whisperPython: executable, whisperModel: model },
+    calls: () => JSON.parse(readFileSync(count)), mode: mode => writeFileSync(config, JSON.stringify({ mode })) }
+}
+const readJson = file => JSON.parse(readFileSync(file, 'utf8'))
+
+test('completed fallback is reused across attempts only for identical audio, model and effective window', t => {
+  const { dir, options } = workspace(t, { ...fixture, error: 'primary unavailable' })
+  const runner = offlineRunner(dir)
+  const first = segmentListening({ ...options, ...runner.options })
+  const bytes = readFileSync(first.review)
+  assert.equal(first.usable, 1)
+  const second = segmentListening({ ...options, ...runner.options })
+  assert.equal(second.usable, 1)
+  assert.equal(runner.calls(), 1, 'same model/audio/window must not infer again')
+  assert.deepEqual(readFileSync(first.review), bytes)
+  const input = readJson(path.join(second.attempt, 'whisper-1/job-input.json'))
+  assert.equal(input.reusedFrom, path.join(first.attempt, 'whisper-1'))
+  assert.equal(input.binding.settings.vad_filter, false)
+  assert.equal(input.binding.settings.language, 'en')
+  const primary = readJson(options.appleEvidence)
+  primary.endSeconds = 29.9999
+  writeFileSync(options.appleEvidence, JSON.stringify(primary))
+  segmentListening({ ...options, ...runner.options })
+  assert.equal(runner.calls(), 2, 'a changed effective raw window is distinct work')
+  writeFileSync(path.join(runner.options.whisperModel, 'model.bin'), 'different-model')
+  segmentListening({ ...options, ...runner.options })
+  assert.equal(runner.calls(), 3, 'a changed model digest cannot hit cache')
+  const audio = Buffer.from('changed synthetic audio')
+  writeFileSync(path.join(dir, 'materialization/listening-audio/playback.mp3'), audio)
+  primary.audioSha256 = hash(audio)
+  options.request.report.subject.playbackAudioSha256 = hash(audio)
+  writeFileSync(options.appleEvidence, JSON.stringify(primary))
+  segmentListening({ ...options, ...runner.options })
+  assert.equal(runner.calls(), 4, 'a changed audio digest cannot hit cache')
+})
+
+test('queue timeout remains scheduling evidence and a later attempt may resume without spending fallback budget', t => {
+  const { dir, options } = workspace(t, { ...fixture, error: 'primary unavailable' })
+  const runner = offlineRunner(dir)
+  runner.mode('queue_timeout')
+  const first = segmentListening({ ...options, ...runner.options })
+  const rules = readJson(path.join(first.attempt, 'rule-result.json'))
+  const failure = readJson(path.join(first.attempt, 'whisper-1/failure.json'))
+  assert.equal(failure.code, 'ASR_QUEUE_TIMEOUT')
+  assert.equal(failure.inferenceStarted, false)
+  assert.equal(failure.fallbackBudgetConsumed, false)
+  assert.equal(rules.groups[0].engineAttempts.length, 1, 'queue timeout is not a second engine empty result')
+  assert.ok(rules.groups[0].issues.includes('ASR_QUEUE_TIMEOUT'))
+  assert.equal(first.usable, 0)
+  const review = readJson(first.review)
+  assert.ok(review.evidence.some(e => e.path.endsWith('-slot.json') && e.kind === 'review_notes'))
+  runner.mode('finished')
+  assert.equal(segmentListening({ ...options, ...runner.options }).usable, 1)
+  assert.equal(runner.calls(), 2)
+})
+
+test('run timeout, acquired UNKNOWN and mismatched receipts cannot silently replay a started job', t => {
+  for (const mode of ['run_timeout', 'unknown', 'wrong_binding']) {
+    const { dir, options } = workspace(t, { ...fixture, error: 'primary unavailable' })
+    const runner = offlineRunner(dir)
+    runner.mode(mode)
+    const first = segmentListening({ ...options, ...runner.options })
+    const failure = readJson(path.join(first.attempt, 'whisper-1/failure.json'))
+    assert.equal(failure.fallbackBudgetConsumed, true, mode)
+    if (mode === 'run_timeout') assert.equal(failure.code, 'ASR_RUN_TIMEOUT')
+    else assert.equal(readJson(path.join(first.attempt, 'rule-result.json')).groups[0].engineAttempts.length, 1,
+      'UNKNOWN is not an empty second-engine result')
+    runner.mode('finished')
+    const second = segmentListening({ ...options, ...runner.options })
+    assert.equal(second.usable, 0, mode)
+    assert.equal(runner.calls(), 1, `${mode} requires reconciliation before replay`)
+  }
+})
+
+test('corrupt cached raw evidence fails closed instead of starting another inference', t => {
+  const { dir, options } = workspace(t, { ...fixture, error: 'primary unavailable' })
+  const runner = offlineRunner(dir)
+  const first = segmentListening({ ...options, ...runner.options })
+  writeFileSync(path.join(first.attempt, 'whisper-1/cached-0.json'), '{}')
+  const second = segmentListening({ ...options, ...runner.options })
+  assert.equal(second.usable, 0)
+  assert.equal(runner.calls(), 1)
+  assert.match(readJson(path.join(second.attempt, 'whisper-1/failure.json')).error, /ASR_CACHE_EVIDENCE_CHANGED/u)
+})
+
+test('sharing an identical raw fallback window preserves independent judgments for each group', t => {
+  const { dir, options, subject } = workspace(t, { ...fixture, error: 'primary unavailable' })
+  const other = { segmentId: 'listening-text-2', questionNumbers: [2],
+    text: 'Fresh apples grow around this quiet village and our neighbors deliver baskets every summer.' }
+  const groups = [group, other]
+  options.request.transcript = groups
+  subject.transcriptDigest = digestJson(groups)
+  const source = readJson(path.join(dir, 'source.json'))
+  source.listening.transcript = groups
+  writeFileSync(path.join(dir, 'source.json'), JSON.stringify(source))
+  const tokens = other.text.toLowerCase().replace('.', '').split(' ')
+  const raw = structuredClone(fixture)
+  raw.result.segments.push({ start: 15, end: 15 + tokens.length * 0.2, text: other.text,
+    words: tokens.map((word, i) => ({ word, start: 15 + i * 0.2, end: 15 + (i + 1) * 0.2 })) })
+  let calls = 0
+  const result = segmentListening({ ...options, pauses: [...pauses,
+    { startSeconds: 14, endSeconds: 14.9 }, { startSeconds: 18.3, endSeconds: 20 }],
+    runWhisper: () => { calls++; return raw } })
+  assert.equal(calls, 1)
+  assert.equal(result.usable, 2)
+  const rules = readJson(path.join(result.attempt, 'rule-result.json'))
+  assert.deepEqual(rules.groups.map(g => g.questionNumbers), [[1], [2]])
+  assert.notEqual(rules.groups[0].playback.startSeconds, rules.groups[1].playback.startSeconds)
+})
+
+test('three groups sharing a queued window can resume through retained reuse chains', t => {
+  for (const invalidChain of [null, 'cycle', 'binding_mismatch']) {
+    const { dir, options, subject } = workspace(t, { ...fixture, error: 'primary unavailable' })
+    const groups = [group,
+      { segmentId: 'listening-text-2', questionNumbers: [2], text: 'Fresh apples grow beside our quiet river.' },
+      { segmentId: 'listening-text-3', questionNumbers: [3], text: 'Please bring the red basket tomorrow morning.' }]
+    options.request.transcript = groups
+    subject.transcriptDigest = digestJson(groups)
+    const source = readJson(path.join(dir, 'source.json'))
+    source.listening.transcript = groups
+    writeFileSync(path.join(dir, 'source.json'), JSON.stringify(source))
+    const runner = offlineRunner(dir)
+    runner.mode('queue_timeout')
+    const first = segmentListening({ ...options, ...runner.options })
+    assert.equal(runner.calls(), 1, 'one shared queued job, not three inference attempts')
+    assert.ok(readJson(path.join(first.attempt, 'rule-result.json')).groups
+      .every(g => g.issues.includes('ASR_QUEUE_TIMEOUT')))
+    const secondJob = path.join(first.attempt, 'whisper-2')
+    const thirdJob = path.join(first.attempt, 'whisper-3')
+    const thirdInput = readJson(path.join(thirdJob, 'job-input.json'))
+    thirdInput.reusedFrom = invalidChain === 'cycle' ? thirdJob : secondJob
+    writeFileSync(path.join(thirdJob, 'job-input.json'), JSON.stringify(thirdInput))
+    if (invalidChain === 'binding_mismatch') {
+      const secondInput = readJson(path.join(secondJob, 'job-input.json'))
+      secondInput.binding.startSeconds = 1
+      writeFileSync(path.join(secondJob, 'job-input.json'), JSON.stringify(secondInput))
+    }
+    runner.mode('finished')
+    const resumed = segmentListening({ ...options, ...runner.options })
+    const resolved = readJson(path.join(resumed.attempt, 'rule-result.json')).groups
+    if (invalidChain) {
+      assert.equal(runner.calls(), 1, `${invalidChain} is not proof that inference never started`)
+      assert.ok(resolved.every(g => g.issues.includes('ASR_STATUS_UNKNOWN')))
+    } else {
+      assert.equal(runner.calls(), 2, 'the next schedule resumes one inference after a proven queue timeout')
+      assert.ok(resolved.every(g => !g.issues.includes('ASR_STATUS_UNKNOWN')))
+      assert.equal(resumed.usable, 1, 'each group still compares its own source against the shared raw result')
+    }
+  }
 })

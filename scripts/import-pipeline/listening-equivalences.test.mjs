@@ -10,7 +10,7 @@ const ordinal = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'sevent
   'twenty seventh', 'twenty eighth', 'twenty ninth', 'thirtieth', 'thirty first']
 const suffix = n => n >= 11 && n <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th')
 test('v2 equates exactly the first thirty-one ordinal spellings, preserving their value', () => {
-  assert.equal(LISTENING_SEGMENT_RULE.normalizationVersion, 'listening-equivalences-v3')
+  assert.equal(LISTENING_SEGMENT_RULE.normalizationVersion, 'listening-equivalences-v4')
   ordinal.forEach((word, i) => {
     assert.deepEqual(normal(`${i + 1}${suffix(i + 1)}`), normal(word))
     assert.deepEqual(normal(word.replaceAll(' ', '-')), normal(word))
