@@ -9,7 +9,7 @@ import {
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-pdf-materialization-producer-v14'
+  'nck1-pdf-materialization-producer-v16'
 
 const PDF = 'application/pdf'
 

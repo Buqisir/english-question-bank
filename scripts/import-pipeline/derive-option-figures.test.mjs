@@ -52,6 +52,26 @@ test('overlapping, clipped and reordered crop plans fail before rasterization', 
   assert.throws(() => optionCropRegions({ ...plan, crops: [...plan.crops].reverse() }), /A–D/)
 })
 
+test('reviewed crops preserve unresolved stem boundaries and their options ambiguity', () => {
+  const input = structuredClone(materialization)
+  const question = input.groups[0].questions[0]
+  question.stem = 'Which picture fits?\nA small animal is shown in the following pictures.\nA.Option caption'
+  const boundary = { code: 'NCK1_OCR_STEM_OPTIONS_BOUNDARY_AMBIGUOUS', path: 'questions.30.options' }
+  input.issues.push(boundary)
+  const result = derive({ materialization: input })
+  const output = result.materialization
+  assert.equal(output.groups[0].questions[0].stem, question.stem)
+  assert.deepEqual(output.answers, input.answers)
+  assert.equal(output.groups[0].questions[0].options.length, 4)
+  assert.deepEqual(output.issues, [input.issues[0], input.issues[2], boundary])
+  assert.deepEqual(result.audit.resolves, [input.issues[1]])
+
+  // A different question's unresolved text must not block this crop's binding.
+  input.issues.at(-1).path = 'questions.31.options'
+  assert(!derive({ materialization: input }).materialization.issues.some(issue =>
+    issue.code === 'NCK1_OCR_OPTIONS_AMBIGUOUS' && issue.path === 'questions.30.options'))
+})
+
 test('source hash, duplicate bytes, wrong page and mismatched raster dimensions fail closed', () => {
   assert.throws(() => derive({ pdfBytes: Buffer.from('changed PDF') }), /immutable/)
   assert.throws(() => derive({ raster: () => ({ bytes: Buffer.from('same'), pixelWidth: 150, pixelHeight: 100 }) }), /distinct/)
@@ -60,4 +80,33 @@ test('source hash, duplicate bytes, wrong page and mismatched raster dimensions 
   const outside = structuredClone(plan)
   outside.crops[0].pixels[1] = 600
   assert.throws(() => derive({ plan: outside }), /parent visual/)
+})
+
+test('v2 figure derivation selects v3 and preserves later envelopes', () => {
+  for (const version of [2, 3, 4, 5, 6]) {
+    const input = { ...structuredClone(materialization),
+      schemaVersion: `nck1-source-materialization-v${version}` }
+    const result = derive({ materialization: input }).materialization
+    assert.equal(result.schemaVersion, `nck1-source-materialization-v${Math.max(3, version)}`)
+    assert.equal(input.schemaVersion, `nck1-source-materialization-v${version}`)
+  }
+})
+
+test('Xiamen Q29 unequal reviewed crop widths bind independently and reject overlap', () => {
+  const input = structuredClone(materialization)
+  input.schemaVersion = 'nck1-source-materialization-v2'
+  input.groups[0].questions[0].canonicalNumber = 29
+  input.groups[0].questions[0].stem = 'Which picture can illustrate the animal in paragraph 4?'
+  input.sourceCoverage.visuals[0].region = { x: 137 / 1191, y: 1110 / 1684, width: 914 / 1191, height: 135 / 1684 }
+  const actualPlan = { ...plan, questionNumber: 29, pagePixels: [1191, 1684],
+    crops: [[137, 1110, 252, 135], [389, 1110, 205, 135], [594, 1110, 250, 135], [844, 1110, 207, 135]]
+      .map((pixels, i) => ({ label: 'ABCD'[i], pixels })) }
+  const result = derive({ materialization: input, plan: actualPlan, raster: ({ region }) => ({
+    bytes: Buffer.from(JSON.stringify(region)), pixelWidth: Math.round(region.width * 1191), pixelHeight: 135,
+  }) })
+  assert.equal(result.materialization.schemaVersion, 'nck1-source-materialization-v3')
+  assert.deepEqual(result.materialization.media.map(media => media.pixelWidth), [252, 205, 250, 207])
+  assert.equal(result.materialization.groups[0].questions[0].stem, input.groups[0].questions[0].stem)
+  actualPlan.crops[1].pixels[0] = 388
+  assert.throws(() => optionCropRegions(actualPlan), /overlap/)
 })

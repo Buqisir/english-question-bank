@@ -42,6 +42,11 @@ export function deriveOptionFigures({ materialization, plan, document, pdfBytes,
   'Plan must bind the immutable source PDF')
   assert(Number.isInteger(plan.page) && plan.page > 0 && plan.page <= document.pageCount, 'Invalid source page')
   const result = structuredClone(materialization)
+  // OCR producers emit v2; Reading figure options require the existing v3 contract.
+  // Preserve later envelopes, including sourcePresentation and stemFigures.
+  if (result.schemaVersion === 'nck1-source-materialization-v2') {
+    result.schemaVersion = 'nck1-source-materialization-v3'
+  }
   const question = result.groups.flatMap(g => g.questions).find(q => q.canonicalNumber === plan.questionNumber)
   assert(question && question.source.documentId === plan.documentId && question.source.page === plan.page,
     'Question must be on the planned source page')
@@ -72,8 +77,12 @@ export function deriveOptionFigures({ materialization, plan, document, pdfBytes,
   result.sourceCoverage.visuals = result.sourceCoverage.visuals.filter(v => v !== original).concat(
     media.map(m => ({ visualId: m.mediaId.replace(/^media:/u, 'visual:'), page: plan.page,
       region: m.extraction.region, disposition: 'content_media', targetId: m.mediaId })))
+  const optionsPath = `questions.${plan.questionNumber}.options`
+  // The reviewed pixels close image binding, not an uncertain text boundary.
+  const boundaryAmbiguous = result.issues.some(i =>
+    i.code === 'NCK1_OCR_STEM_OPTIONS_BOUNDARY_AMBIGUOUS' && i.path === optionsPath)
   const resolved = result.issues.filter(i =>
-    (i.code === 'NCK1_OCR_OPTIONS_AMBIGUOUS' && i.path === `questions.${plan.questionNumber}.options`)
+    (!boundaryAmbiguous && i.code === 'NCK1_OCR_OPTIONS_AMBIGUOUS' && i.path === optionsPath)
     || (i.code === 'NCK1_OCR_MEDIA_ASSOCIATION_AMBIGUOUS' && i.path === `media.${original.targetId}`))
   result.issues = result.issues.filter(i => !resolved.includes(i))
   return { materialization: result, files, audit: { target: `/questions/${plan.questionNumber}/options`,

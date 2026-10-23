@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v17'
+  'nck1-docx-materialization-producer-v19'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -102,7 +102,8 @@ function hasSourceLocator(documentId, sourceIndex) {
 
 function listeningCue(text) {
   const value = normalized(text)
-  if (LISTENING_PAUSE_REPEAT_SEQUENCE.test(value)) {
+  if (LISTENING_PAUSE_REPEAT_SEQUENCE.test(value)
+    || /^停顿\d{2}′[0-5]\d′′$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'standalone_pause_or_repeat_cue', kind: 'pause_repeat_cue' }
   }
   if (/^第一节到此结束[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
@@ -138,16 +139,16 @@ function listeningCue(text) {
   if (/^这是[^。.!！?？\n]{1,100}听力部分[。. ]该部分分为第一[、,]第二两节[。.!！.]?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_opening_notice', kind: 'listening_opening_notice', nextTextNumber: 1 }
   }
-  if (/^注意[,，]回答听力部分时[，,]请先将答案标在试卷上[。. ]听力部分结束前[,，]你将有(?:\d+|两)分钟(?:的)?时间将你的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！.]?$/u.test(value)) {
+  if (/^注意[:：,，]回答听力部分时[，,]请先将答案标在试卷上[。. ]听力部分结束前[,，]你将有(?:\d+|两)分钟(?:的)?时间将你的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！.]?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_answer_instruction', kind: 'listening_answer_instruction', nextTextNumber: 1 }
   }
   if (/^请看听力部分第一节[。.!！]?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_transition', kind: 'section_direction', nextTextNumber: 1 }
   }
-  if (/^第一节[:：]听下面5段(录音|对话)[。.]每段\1后有一个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听完每段\1后[,，]你都有\d+秒钟的时间来回答有关小题和阅读下一小题[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+  if (/^第一节[:：]?听下面5段(录音|对话)[。.]每段\1后有一个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听完每段\1后[,，]你都有\d+秒钟的时间来回答有关小题和阅读下一小题[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_direction', kind: 'section_direction', nextTextNumber: 1 }
   }
-  if (/^第二节[:：]听下面5段(录音|对话或独白)[。.]每段\1后有几个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听每段\1前[,，]你将有时间阅读各个小题[,，]每小题\d+秒钟[;；]听完后[,，](?:每小题都有|各小题将给出)\d+秒钟的作答时间[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
+  if (/^第二节[:：]?听下面5段(录音|对话或独白)[。.]每段\1后有几个小题[,，]从题中所给的A、\s*B、\s*C三个选项中选出最佳选项(?:[,，]并标在试卷的相应位置)?[。.]听每段\1前[,，]你将有时间阅读各个小题[,，]每小题\d+秒钟[;；]听完后[,，](?:每小题都有|各小题将给出)\d+秒钟的作答时间[。.]每段\1(?:播放|读)两遍[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_direction', kind: 'section_direction', nextTextNumber: 6 }
   }
   return null
@@ -466,11 +467,77 @@ function contentBlocks(items, context) {
   })
 }
 
+function figureOptionMarker(item) {
+  if (item.kind !== 'paragraph' || item.containsDrawing) return null
+  const text = normalized(item.text)
+  const match = /^(?:([A-D])[.、)]|\(([A-D])\))\s*(.*)$/u.exec(text)
+  if (match) return { label: match[1] || match[2], caption: match[3] }
+  return /^[A-D]$/u.test(text) ? { label: text, caption: '' } : null
+}
+
+function figureQuestionBoundary(items) {
+  const source = items.filter(item => item.kind !== 'paragraph' || normalized(item.text) || item.containsDrawing)
+  const first = source.findIndex(item => figureOptionMarker(item))
+  const tail = source.slice(first)
+  const image = item => item?.kind === 'paragraph' && item.containsDrawing && !normalized(item.text)
+  const plain = item => item.kind === 'paragraph' && !item.containsDrawing
+  // A caption, even without a space after its label, must belong to a complete
+  // ordered group backed by images. "A small animal ..." is ordinary prose.
+  const alternating = tail.length === 8 && ['A', 'B', 'C', 'D'].every((label, i) =>
+    figureOptionMarker(tail[i * 2])?.label === label && image(tail[i * 2 + 1]))
+  const composite = tail.length === 5 && ['A', 'B', 'C', 'D'].every((label, i) =>
+    figureOptionMarker(tail[i])?.label === label) && image(tail[4])
+  const firstImage = source.findIndex(item => item.containsDrawing)
+  const unlabelled = first === -1 && firstImage > 0
+    && source.slice(0, firstImage).every(plain) && source.slice(firstImage).every(image)
+  const certain = (first > 0 && source.slice(0, first).every(plain) && (alternating || composite)) || unlabelled
+  // Unproven boundaries retain all text for review instead of discarding a
+  // plausible stem continuation or silently admitting captions into the stem.
+  const leading = certain ? source.slice(0, unlabelled ? firstImage : first) : source
+  return { source, first, alternating, certain,
+    stem: leading.filter(item => item.kind === 'paragraph' && normalized(item.text))
+      .map(item => item.text).join('\n').replace(/^\s*\d{1,3}[.．、]\s*/u, '') }
+}
+
+function parseFigureOptions(items) {
+  const { source, first, alternating, certain, stem } = figureQuestionBoundary(items)
+  if (!certain || !alternating) return null
+  const tail = source.slice(first)
+  // Bind explicit source labels only. A composite A–D image needs a reviewed crop plan.
+  const options = []
+  for (const [index, label] of ['A', 'B', 'C', 'D'].entries()) {
+    const marker = tail[index * 2]
+    const image = tail[index * 2 + 1]
+    if (figureOptionMarker(marker).caption || !image.materializedMedia?.mediaId) return null
+    options.push({ label, figure: { mediaId: image.materializedMedia.mediaId } })
+  }
+  if (new Set(options.map(option => option.figure.mediaId)).size !== 4) return null
+  return { leadingText: stem, options }
+}
+
+function parseTextOptionsAfterFigures(items, labels) {
+  const lastImage = items.findLastIndex(item => item.containsDrawing)
+  const leading = items.slice(0, lastImage + 1)
+  if (leading.some(item => item.kind !== 'paragraph' || figureOptionMarker(item))) return null
+  const tail = items.slice(lastImage + 1)
+  if (tail.some(item => item.kind !== 'paragraph')) return null
+  const parsed = parseOptionsWithLeadingText(tail, labels)
+  // Stem illustrations may precede a complete text-only options block.
+  // Never flatten interleaved image captions into text-only options.
+  if (!parsed || normalized(parsed.leadingText)) return null
+  return { ...parsed, leadingText: leading.filter(item => normalized(item.text))
+    .map(item => item.text).join('\n').replace(/^\s*\d{1,3}[.．、]\s*/u, '') }
+}
+
 function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, questionItems, blankItem = questionItem, prompt = null, documentId, issues }) {
   const sourceNumber = Number(/^(\d{1,3})[.．、]/u.exec(normalized(questionItem?.text))?.[1])
   const labels = family === 'listening' ? ['A', 'B', 'C'] : ['A', 'B', 'C', 'D']
+  const figureBoundary = family === 'reading' && questionItems.some(item => item.containsDrawing)
+    ? figureQuestionBoundary(questionItems) : null
   const parsedOptions = ['reading', 'cloze', 'listening'].includes(family)
-    ? parseOptionsWithLeadingText(questionItems, labels)
+    ? (figureBoundary
+        ? parseFigureOptions(questionItems) || parseTextOptionsAfterFigures(questionItems, labels)
+        : parseOptionsWithLeadingText(questionItems, labels))
     : { options: [] }
   const options = parsedOptions?.options || null
   if (!Number.isInteger(sourceNumber)) {
@@ -483,12 +550,17 @@ function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, que
       `questions.${canonicalNumber}.options`, `Expected ${labels.join('-')} in source order`,
       sourceRef(documentId, questionItem?.sourceIndex))
   }
+  if (figureBoundary && !parsedOptions && !figureBoundary.certain) {
+    addIssue(issues, 'NCK1_DOCX_STEM_OPTIONS_BOUNDARY_AMBIGUOUS',
+      `questions.${canonicalNumber}.options`, 'Stem/option boundary needs source review; figure crops alone cannot resolve it',
+      sourceRef(documentId, questionItem?.sourceIndex))
+  }
   const questionId = `question:${paperId}:${canonicalNumber}`
   const blankId = ['seven-choices', 'cloze', 'grammar-fill'].includes(family)
     ? `blank:${paperId}:${canonicalNumber}`
     : null
   const stem = ['reading', 'listening'].includes(family)
-    ? parsedOptions?.leadingText || ''
+    ? parsedOptions?.leadingText || figureBoundary?.stem || ''
     : ''
   return {
     questionId,
@@ -1227,6 +1299,26 @@ function activeAnswers(paperId, answerMap, issues, answerDocumentId) {
 }
 
 function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues }) {
+  // OCR may split a fixed broadcast across a heading and two printed lines.
+  // Match the complete anchored cue; retain each original item and locator in the partition.
+  const wrappedCues = new Map()
+  for (let index = 0; index < answerBody.length; index += 1) {
+    const first = answerBody[index]
+    if (first.kind !== 'paragraph'
+      || !/^(?:注意[:：,，]|第[一二]节[:：]?$)/u.test(normalized(first.text))) continue
+    let joined = normalized(first.text)
+    for (let end = index + 1; end < Math.min(index + 3, answerBody.length); end += 1) {
+      const next = answerBody[end]
+      if (next.kind !== 'paragraph' || !normalized(next.text)
+        || LISTENING_TEXT_MARKER.test(normalized(next.text))) break
+      joined += normalized(next.text)
+      const cue = listeningCue(joined)
+      if (!cue) continue
+      for (let item = index; item <= end; item += 1) wrappedCues.set(answerBody[item], cue)
+      break
+    }
+  }
+  const cueFor = item => wrappedCues.get(item) || listeningCue(item?.text)
   const listeningHeading = optionalExactPosition(
     questionBody,
     /^第一部分\s*听力/u,
@@ -1334,7 +1426,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     index > lastMarkerIndex && isAnswerExplanationHeading(item))
   const listeningEndIndexes = lastMarkerIndex < 0 ? [] : answerBody.flatMap((item, index) =>
     index > lastMarkerIndex && item.kind === 'paragraph'
-      && listeningCue(item.text)?.kind === 'listening_end'
+      && cueFor(item)?.kind === 'listening_end'
       ? [index]
       : [])
   const terminalIndex = listeningEndIndexes.length === 1 ? listeningEndIndexes[0] : -1
@@ -1371,7 +1463,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     } else {
       while (cursor >= 0) {
         const item = answerBody[cursor]
-        const cue = item?.kind === 'paragraph' ? listeningCue(item.text) : null
+        const cue = item?.kind === 'paragraph' ? cueFor(item) : null
         if (!cue && !(item?.kind === 'paragraph' && !normalized(item.text))) break
         openingPreambleIndexes.unshift(cursor)
         cursor -= 1
@@ -1392,7 +1484,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     : null
   const recordPreambleItem = (index) => {
     const item = answerBody[index]
-    const cue = item?.kind === 'paragraph' ? listeningCue(item.text) : null
+    const cue = item?.kind === 'paragraph' ? cueFor(item) : null
     const empty = item?.kind === 'paragraph' && !normalized(item.text)
     const supported = Boolean(cue || empty)
     if (!supported || !hasSourceLocator(answerDocumentId, item?.sourceIndex)) {
@@ -1409,7 +1501,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const openingPreamble = openingPreambleIndexes.map(recordPreambleItem)
   for (const record of openingPreamble) {
-    const cue = listeningCue(record.text)
+    const cue = cueFor(answerBody[record.sourceOrder])
     if (cue && Object.hasOwn(cue, 'nextTextNumber') && cue.nextTextNumber !== markers[0]?.number) {
       addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
         'A section or end cue occurs in the opening preamble at the wrong source boundary',
@@ -1421,7 +1513,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
         ? [markers[0].number]
         : longRanges[markers[0].number - 6]?.questionNumbers || []
       : []
-    const actualNumbers = listeningCue(record.text)?.questionNumbers || []
+    const actualNumbers = cueFor(answerBody[record.sourceOrder])?.questionNumbers || []
     if (!markers[0] || digestJson(actualNumbers) !== digestJson(expectedNumbers)
       || actualNumbers.some((number) => !questions.some((question) => question.canonicalNumber === number))) {
       addIssue(issues, 'NCK1_DOCX_LISTENING_ANNOUNCEMENT_RANGE_AMBIGUOUS', 'listening.transcript',
@@ -1446,7 +1538,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
         'unresolved_source_timing', 'timing_requires_exact_agent_transcription')
       return { record, text: null }
     }
-    const cue = listeningCue(text)
+    const cue = cueFor(item)
     if (cue) {
       if (Object.hasOwn(cue, 'nextTextNumber') && cue.nextTextNumber !== (nextMarker?.number ?? null)) {
         addIssue(issues, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS', 'listening.transcript',
@@ -1543,7 +1635,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       }
       const firstBodyItem = answerBody.slice(marker.index + 1, boundary).find((item) =>
         item.kind === 'paragraph' && normalized(item.text)
-          && !listeningCue(item.text) && !timingSourceIndexes.has(item.sourceIndex)
+          && !cueFor(item) && !timingSourceIndexes.has(item.sourceIndex)
           && hasSourceLocator(answerDocumentId, item.sourceIndex))
       transcript.push({
         segmentId: `listening-text-${marker.number}`,
@@ -1762,7 +1854,14 @@ function referencedGroupMediaIds(groups) {
       }
     }
   }
-  for (const candidate of groups) visitBlocks(candidate.blocks)
+  for (const candidate of groups) {
+    visitBlocks(candidate.blocks)
+    for (const question of candidate.questions) {
+      for (const option of question.options) {
+        if (option.figure) ids.add(option.figure.mediaId)
+      }
+    }
+  }
   return ids
 }
 
@@ -1948,7 +2047,9 @@ export function produceNck1MaterializationFromStructures({
       })
   const listening = listeningResult.materialization
   const materialization = {
-    schemaVersion: selectedMedia.length > 0
+    schemaVersion: groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
+      ? 'nck1-source-materialization-v3'
+      : selectedMedia.length > 0
       ? 'nck1-source-materialization-v2'
       : 'nck1-source-materialization-v1',
     paperId,
