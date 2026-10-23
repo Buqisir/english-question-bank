@@ -1,5 +1,6 @@
 import { applicationDrawingAreaPolicy } from '../../shared/paper-canonical/applicationDrawingArea.mjs'
 import { applyPlannedGroupBreaks, inspectGroups, searchFixedPagePdf } from './fixedPagePdfPlanner.mjs'
+import { finishPaginationTiming, timedCandidateRender } from './paginationTiming.mjs'
 
 // Separate edition IDs preserve the meaning and digests of saved v1–v3 plans.
 export const STUDENT_PRODUCT_EDITIONS = ['largeComplete', 'largeNoListening', 'economy8']
@@ -145,85 +146,122 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit })
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
+  const timed = timedCandidateRender(render, { edition, accepts: result => withinPages(result) && accept(result) })
+  const fontSizes = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
+  const layoutFor = (fontSizePt, figureLayout, application, continuation, coverLift = false) => ({
+    profile: coverLift ? coverLiftProfile : edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
+    answerBoxHeightsMm: { application, continuation } })
   let searchedCandidates = 0
   let regularAllOverLimit = true
   const minimumApplication = html.includes('data-canonical-drawing-area-id=')
     ? applicationDrawingAreaPolicy.minimumApplicationHeightMm : 24
-  const fonts = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
-  // Finish every ordinary font tier before lifting the opening. One extra
-  // profile per tier gets at most 13 break trials + 14 box-restoration renders.
-  const tiers = [false, true].flatMap(coverLift => fonts.map(fontSizePt => ({ fontSizePt, coverLift })))
-  for (const { fontSizePt, coverLift } of tiers) {
-    if (coverLift && (!regularAllOverLimit || searchedCandidates === 0)) break
+  const measureCandidate = async (source, options, layout) => {
+    const ordinary = layout.profile !== coverLiftProfile
+    try {
+      const result = await timed.measure(source, options, layout)
+      if (ordinary && !(Number.isInteger(result.pageCount) && result.pageCount > policy.targetPages)) regularAllOverLimit = false
+      return result
+    } catch (error) {
+      // Unknown geometry never authorizes moving the opening into the margin.
+      if (ordinary) regularAllOverLimit = false
+      throw error
+    }
+  }
+  const measure = async (selected, breaks = []) => {
+    searchedCandidates += 1
+    return measureCandidate(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups }, selected)
+  }
+  const fitProfile = async (layout, tierStart) => {
+    let natural
+    try { natural = await measure(layout) } catch (error) {
+      if (error.code === 'PAPER_LAYOUT_OVERFLOW') return null
+      throw error
+    }
+    // Semantic breaks can redistribute an overfull paper, but cannot justify
+    // unbounded trial renders. Reserve room to restore both response boxes.
+    let fit
+    try {
+      fit = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
+        ...policy, natural, accept, renderLimit: withinPages(natural) && accept(natural) ? 13 : 5,
+        balanceWhitespace: policy.atMost,
+        rejectOverflowCandidates: true,
+        render: async (...args) => { searchedCandidates += 1; return measureCandidate(...args, layout) },
+      })
+    } catch (error) {
+      if (error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' || error.code === 'PAPER_LAYOUT_OVERFLOW') return null
+      throw error
+    }
+    ;({ fit, layout } = await restoreAnswerSpace(fit, layout, {
+      measure, accept: result => withinPages(result) && accept(result),
+      canMeasure: () => searchedCandidates - tierStart < (layout.profile === coverLiftProfile ? 27 : 48),
+    }))
+    // Height restoration can change group fragments. Re-score its measured
+    // result without another render, retaining the exact chosen breaks.
+    const rescored = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
+      ...policy, natural: fit, accept, renderLimit: 1, render, balanceWhitespace: policy.atMost,
+    })
+    return { ...rescored, plannedBreakGroupIds: fit.plannedBreakGroupIds,
+      edition, layout, fontSizePt: layout.fontSizePt, lineHeightPt: layout.fontSizePt === 12 ? 19.5 : 18,
+      searchedCandidates, explicitPlan: false, timing: finishPaginationTiming(timed.timing) }
+  }
+  const triedHeights = new Map()
+  for (const fontSizePt of fontSizes) {
     const tierStart = searchedCandidates
     const minimumContinuation = fontSizePt === 12 ? 27 : 24
     // Prefer full-size source media and normal answer space. Compact geometry
     // is a measured fallback, never the default carried over from a sample.
-    const profiles = coverLift ? [['natural', minimumApplication, minimumContinuation]] : [
+    const profiles = [
       ['natural', 65, 57], ['float80', 65, 57], ['natural', 65, minimumContinuation],
       ['float80', 65, minimumContinuation], ['float80', 24, minimumContinuation],
     ]
+    triedHeights.set(fontSizePt, new Set(profiles.map(([, application, continuation]) => `${application}/${continuation}`)))
     for (const [figureLayout, application, continuation] of profiles) {
       if (html.includes('data-canonical-drawing-area-id=') && application < applicationDrawingAreaPolicy.minimumApplicationHeightMm) continue
-      let layout = { profile: coverLift ? coverLiftProfile : edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
-        answerBoxHeightsMm: { application, continuation } }
-      const measure = async (selected, breaks = []) => {
-        searchedCandidates += 1
-        try {
-          const result = await render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
-          if (!coverLift && !(Number.isInteger(result.pageCount) && result.pageCount > policy.targetPages)) regularAllOverLimit = false
-          return result
-        } catch (error) {
-          // Overflow can mean broken content, not a measured excess page count.
-          if (!coverLift) regularAllOverLimit = false
-          throw error
-        }
-      }
-      let natural
-      try { natural = await measure(layout) } catch (error) {
-        if (error.code === 'PAPER_LAYOUT_OVERFLOW') continue
-        throw error
-      }
-      // Semantic breaks can redistribute an overfull paper, but cannot justify
-      // unbounded trial renders. Reserve room to restore both response boxes.
-      let fit
-      try {
-        fit = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
-          ...policy, natural, accept, renderLimit: withinPages(natural) && accept(natural) ? 13 : 5,
-          balanceWhitespace: policy.atMost,
-          rejectOverflowCandidates: true,
-          render: async (...args) => {
-            searchedCandidates += 1
-            try {
-              const result = await render(...args)
-              if (!coverLift && !(Number.isInteger(result.pageCount) && result.pageCount > policy.targetPages)) regularAllOverLimit = false
-              return result
-            } catch (error) {
-              // Record unknowns before searchFixedPagePdf rejects the trial.
-              if (!coverLift) regularAllOverLimit = false
-              throw error
-            }
-          },
-        })
-      } catch (error) {
-        if (error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' || error.code === 'PAPER_LAYOUT_OVERFLOW') continue
-        throw error
-      }
-      ;({ fit, layout } = await restoreAnswerSpace(fit, layout, {
-        measure, accept: result => withinPages(result) && accept(result),
-        canMeasure: () => searchedCandidates - tierStart < (coverLift ? 27 : 48),
-      }))
-      // Height restoration can change group fragments. Re-score its measured
-      // result without another render, retaining the exact chosen breaks.
-      const rescored = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
-        ...policy, natural: fit, accept, renderLimit: 1, render, balanceWhitespace: policy.atMost,
-      })
-      return { ...rescored, plannedBreakGroupIds: fit.plannedBreakGroupIds,
-        edition, layout, fontSizePt, lineHeightPt: fontSizePt === 12 ? 19.5 : 18,
-        searchedCandidates, explicitPlan: false }
+      const planned = await fitProfile(layoutFor(fontSizePt, figureLayout, application, continuation), tierStart)
+      if (planned) return planned
     }
   }
-  throw impossible(edition, searchedCandidates, economyPageLimit)
+  // The compact profiles assume each box renders at its contract minimum. A box
+  // whose own content needs more room (e.g. a two-line starter or a printed
+  // salutation) overflows there, so every compact profile was skipped and no
+  // intermediate height was ever measured. Only papers that would otherwise fail
+  // reach this pass; it restarts from the smallest heights that actually render.
+  for (const fontSizePt of fontSizes) {
+    const tierStart = searchedCandidates
+    const heights = {}
+    for (const family of ['application', 'continuation']) {
+      let low = family === 'application' ? minimumApplication : fontSizePt === 12 ? 27 : 24
+      let high = normalHeights[family]
+      while (low < high) {
+        const height = Math.floor((low + high) / 2)
+        try {
+          await measure(layoutFor(fontSizePt, 'natural', ...['application', 'continuation'].map(entry =>
+            entry === family ? height : normalHeights[entry])))
+          high = height
+        } catch (error) {
+          if (error.code !== 'PAPER_LAYOUT_OVERFLOW') throw error
+          low = height + 1
+        }
+      }
+      heights[family] = high
+    }
+    if (triedHeights.get(fontSizePt).has(`${heights.application}/${heights.continuation}`)) continue
+    for (const figureLayout of ['natural', 'float80']) {
+      const planned = await fitProfile(layoutFor(fontSizePt, figureLayout, heights.application, heights.continuation), tierStart)
+      if (planned) return planned
+    }
+  }
+  // Preserve both ordinary passes (including measured content minima) before
+  // main's cover-lift fallback. Each extra tier reserves at most 27 renders.
+  if (regularAllOverLimit && searchedCandidates > 0) {
+    for (const fontSizePt of fontSizes) {
+      const tierStart = searchedCandidates
+      const minimumContinuation = fontSizePt === 12 ? 27 : 24
+      const planned = await fitProfile(layoutFor(fontSizePt, 'natural', minimumApplication, minimumContinuation, true), tierStart)
+      if (planned) return planned
+    }
+  }
+  throw Object.assign(impossible(edition, searchedCandidates, economyPageLimit), { timing: finishPaginationTiming(timed.timing) })
 }
 
 export async function renderExplicitStudentProductPdf(html, {
@@ -234,9 +272,10 @@ export async function renderExplicitStudentProductPdf(html, {
     throw new Error('九页上限省纸版须保持10.5pt正文及18pt行距')
   }
   let searchedCandidates = 0
+  const timed = timedCandidateRender(render, { edition, accepts: result => accept(result) })
   const measure = (selected, breaks) => {
     searchedCandidates += 1
-    return render(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups })
+    return timed.measure(applyPlannedGroupBreaks(applyStudentProductLayout(html, selected, edition), breaks), { inspect: inspectGroups }, selected)
   }
   const accept = result => (policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages)
     && acceptableWriting(result, html)
@@ -254,5 +293,5 @@ export async function renderExplicitStudentProductPdf(html, {
   })
   return { ...summarized, edition, layout: structuredClone(layout), plannedBreakGroupIds,
     fontSizePt: layout.fontSizePt, lineHeightPt: layout.fontSizePt === 12 ? 19.5 : 18,
-    searchedCandidates, explicitPlan: true }
+    searchedCandidates, explicitPlan: true, timing: finishPaginationTiming(timed.timing) }
 }

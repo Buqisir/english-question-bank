@@ -415,7 +415,7 @@ async function assertAnalysisValidation() {
     validateGrammarFillShape(cleftAnalysis, authority)
     assert(`cleft accepts normalized authoritative ${answer}`, true)
   }
-  for (const answer of ['who', 'it', 'because', 'that/who', 'who/that', 'that/', '/that', '']) {
+  for (const answer of ['who', 'it', 'because', 'that/who', 'who/that', 'that/', '/that', 'that//that', '', '   ', 'That.', "that's"]) {
     await assertRejects(`cleft rejects authoritative ${answer} even with a matching AI answer`, () => {
       const authority = structuredClone(cleftInput)
       authority.group.questions[0].answerKey = answer
@@ -423,12 +423,12 @@ async function assertAnalysisValidation() {
       Object.values(invalid.blanks)[0].answer = answer.split('/')[0]
       validateGrammarFillShape(invalid, authority)
     }, /cleft-that.*权威答案 that/)
+    await assertRejects(`cleft rejects AI answer ${answer} against authoritative that`, () => {
+      const invalid = structuredClone(cleftAnalysis)
+      Object.values(invalid.blanks)[0].answer = answer
+      validateGrammarFillShape(invalid, cleftInput)
+    }, /cleft-that.*权威答案 that/)
   }
-  await assertRejects('cleft rejects a wrong AI answer against authoritative that', () => {
-    const invalid = structuredClone(cleftAnalysis)
-    Object.values(invalid.blanks)[0].answer = 'who'
-    validateGrammarFillShape(invalid, cleftInput)
-  }, /cleft-that.*权威答案 that/)
 
   // Original synthetic group, independent of the existing source/answer fixture.
   for (const conversion of [false, true]) {

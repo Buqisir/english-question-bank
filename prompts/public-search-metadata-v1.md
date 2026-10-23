@@ -16,12 +16,20 @@ from authority. For grammar author only `questionId`, `facetKey`, `role`, `simil
 certain; any explicit IDs stay in source order, belong to that group, and include the target blank's
 paragraph.
 
+For a no-hint blank supplying `that` in `It is/was … that …`, use
+`grammar-fill.no-hint.conjunction.cleft` (强调句连接标记), route `cleft-that`,
+`features: []`, and `role: null`. For example, `It was in the park ___ we met
+our friends.` takes `that`. The existing pronoun route `cleft-it` only applies
+when the blank supplies `it`; noun-clause routes require the clause to occupy
+a noun slot. Do not use either for this emphatic connector. This cleft facet
+does not cover `who` or other routes.
+
 Family metadata shapes are closed:
 - reading: `{slot, questions:[{questionId, similarityProfile:{family,subtype,detailScope,technique}}]}`
 - seven-choices: `{questions:[{questionId,positionFacet,roleFacet,primaryMechanismFacet}]}`
 - cloze: `{questions:[{questionId,pos,signatureFacet}]}`
 - grammar-fill: `{questions:[{questionId,facetKey,role,similarityProfile,contextParagraphIds}]}`; `role`
-  is one of subject/predicative/object/attributive/adverbial/object-complement/subject-complement only
+  is one of subject/predicative/object/attributive/adverbial/appositive/object-complement/subject-complement only
   for non-finite, and is `null` otherwise
 - application-writing: `{writingTaskId,form,function}`; form/function are concise source-grounded
   strings, not a closed invented vocabulary, and topic is represented only by group `topicLabels`
@@ -33,6 +41,24 @@ from the supplied values for that `family`. Set `detailScope` to `single` or
 to a supplied reading technique only for family `writing-method`; otherwise it
 must be `null`, including for `inference` / `writing-purpose`. Do not attach an
 extra technique merely because the source uses one.
+
+For a gerund phrase explaining a noun's content, use the existing non-finite
+facet with `role: "appositive"`, route `appositive-gerund`, and `features: []`.
+Original synthetic example: `The club shared one principle — helping new
+members settle in.` Here `helping ...` explains `principle`; a dash or abstract
+noun alone is insufficient. Distinguish this relation from an adverbial,
+attributive modifier or derived noun. `attributive-abstract-content` remains
+limited to infinitives after abstract nouns. The new route only accepts
+ordinary active `doing`, derived by the program from the authoritative answer,
+never caller-authored forms; it rejects infinitives, passive and perfect forms
+such as `being done`, `having done`, and `having been done`. This is a route
+boundary, not a claim that all apposition must be a gerund. For noun-to-verb
+conversion, inherit it through route `non-finite-result` and exactly
+`features: ["appositive-gerund"]`, with `role: null` and the same form limit.
+For both routes, each answer alternative must be a single `-ing` word with an
+optional `not` prefix (e.g. `helping`, `not helping`, `helping / assisting`).
+All slash-separated alternatives must qualify, with no empty alternatives.
+This form check does not establish part of speech or syntax; classify by context.
 
 Do not output summaries, teaching notes, explanations, reasons, evidence/highlight coordinates,
 translations, essays, endings, difficulty, CEFR, embeddings, or unknown fields. Structural paragraph

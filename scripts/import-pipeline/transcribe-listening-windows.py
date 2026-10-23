@@ -42,6 +42,8 @@ def main():
         parser.error("whole-file requires start=0; use --end for a bounded follow-up")
     bound = {str(p): {"sha256": digest(p), "byteLength": p.stat().st_size} for p in [audio, source]}
     from faster_whisper import WhisperModel
+    import numpy
+    import wave
     settings = {"language": None if args.language == "auto" else args.language, "beam_size": 5,
         "temperature": 0, "condition_on_previous_text": False, "vad_filter": args.vad, "word_timestamps": True}
     engine = {"name": "faster-whisper", "version": importlib.metadata.version("faster-whisper"),
@@ -66,7 +68,11 @@ def main():
         with tempfile.NamedTemporaryFile(suffix=".wav", dir=args.output) as sample:
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(start), "-i", str(audio),
                 "-t", str(stop - start), "-ac", "1", "-ar", "16000", sample.name], check=True)
-            segments, info = model.transcribe(sample.name, **settings)
+            # Decode the 16 kHz mono PCM ourselves: faster-whisper's file path route calls
+            # av.open(metadata_errors=...), which PyAV 15+ rejects.
+            with wave.open(sample.name, "rb") as pcm:
+                samples = numpy.frombuffer(pcm.readframes(pcm.getnframes()), dtype=numpy.int16)
+            segments, info = model.transcribe(samples.astype(numpy.float32) / 32768.0, **settings)
             rows = [dataclasses.asdict(segment) for segment in segments]
             record = {"window": len(windows), "startSeconds": start, "endSeconds": stop,
                 "sampleSha256": digest(Path(sample.name)), "language": info.language, "segments": rows,

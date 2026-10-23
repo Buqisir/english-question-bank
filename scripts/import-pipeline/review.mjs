@@ -19,6 +19,7 @@ import {
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { tmpdir } from 'node:os'
+import tls from 'node:tls'
 
 import {
   inspectPublicationReceipt,
@@ -72,6 +73,8 @@ import { publishUniversalNck1Import } from '../../server/paper-import/publisher.
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
+import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
+import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { applyListeningInstructionCorrection, correctedListeningCount, LISTENING_INSTRUCTION_CORRECTION_FILE, LISTENING_INSTRUCTION_CORRECTION_POLICY } from '../../server/paper-import/listeningInstructionCorrection.mjs'
@@ -80,6 +83,7 @@ import {
   renderReviewFixedEdition,
 } from '../../server/import-review/reviewPagination.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
+import { finishPaginationTiming } from '../../server/draft-paper/paginationTiming.mjs'
 import { fixedPageLayoutPolicy } from '../../server/draft-paper/fixedPagePdfPlanner.mjs'
 import { STUDENT_PRODUCT_EDITIONS, studentProductPolicy } from '../../server/draft-paper/studentProductPdf.mjs'
 import { assertApplicationGivenOwnership } from './lib-nck1-new-paper-locks.mjs'
@@ -92,6 +96,10 @@ import {
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
+
+// OpenSSL 3.5+ adds a post-quantum hybrid key share by default; the larger ClientHello spans
+// several TCP segments and some proxy paths reset most such handshakes to the Review host.
+if (tls.DEFAULT_ECDH_CURVE === 'auto') tls.DEFAULT_ECDH_CURVE = 'X25519:P-256:P-384'
 
 function fail(message) {
   throw new Error(message)
@@ -115,15 +123,60 @@ function origin() {
 
 function token() {
   const value = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '')
-  if (!value) fail('QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN is required')
+  if (!value) fail('QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN or QUESTION_BANK_IMPORT_OPS_AGENT_USERNAME is required')
   return value
 }
 
 function shippingToken() {
   const value = String(process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '')
   if (!value) fail('QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN is required for promotion')
-  if (value === token()) fail('Import Agent and shipping tokens must be different')
+  if (value === String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '')) {
+    fail('Import Agent and shipping tokens must be different')
+  }
   return value
+}
+
+const AGENT_KEYCHAIN_SERVICE = 'eqbank-import-agent'
+let agentSessionCookie = null
+
+function agentUsername() {
+  return String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_USERNAME || '').trim()
+}
+
+function agentPassword(username) {
+  const supplied = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_PASSWORD || '')
+  if (supplied) return supplied
+  try {
+    return execFileSync('security', ['find-generic-password', '-a', username, '-s', AGENT_KEYCHAIN_SERVICE, '-w'], {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).replace(/\n$/u, '')
+  } catch {
+    return fail(`import_agent ${username} needs QUESTION_BANK_IMPORT_OPS_AGENT_PASSWORD or Keychain item ${AGENT_KEYCHAIN_SERVICE}`)
+  }
+}
+
+// The server accepts the shared Agent bearer token or an import_agent web session for the
+// same Agent routes. A session never carries shipping authority; promotion still needs its token.
+async function agentCredentialHeaders(targetOrigin) {
+  const username = agentUsername()
+  if (process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || !username) return { authorization: `Bearer ${token()}` }
+  if (!agentSessionCookie) {
+    const response = await fetch(`${targetOrigin}/api/auth/login`, {
+      method: 'POST',
+      redirect: 'error',
+      headers: { 'content-type': 'application/json', origin: targetOrigin },
+      body: JSON.stringify({ username, password: agentPassword(username) }),
+    })
+    const body = await response.json().catch(() => null)
+    if (!response.ok) fail(`import_agent login failed: ${response.status} ${body?.error || ''}`.trim())
+    if (body?.user?.accountKind !== 'import_agent') fail(`${username} is not an import_agent account`)
+    const session = response.headers.getSetCookie()
+      .map((cookie) => /^eqb_session=([^;]+)/u.exec(cookie)?.[1]).find(Boolean)
+    if (!session) fail('import_agent login returned no session cookie')
+    agentSessionCookie = `eqb_session=${session}`
+  }
+  return { cookie: agentSessionCookie, origin: targetOrigin }
 }
 
 function publicationCapabilityPath(paperId) {
@@ -155,12 +208,14 @@ async function api(
   { allowNotFound = false, binary = false, credential = 'agent' } = {},
 ) {
   const targetOrigin = origin()
-  const credentialToken = credential === 'shipping' ? shippingToken() : token()
+  const credentialHeaders = credential === 'shipping'
+    ? { authorization: `Bearer ${shippingToken()}` }
+    : await agentCredentialHeaders(targetOrigin)
   const response = await fetch(`${targetOrigin}${pathname}`, {
     ...init,
     redirect: 'error',
     headers: {
-      authorization: `Bearer ${credentialToken}`,
+      ...credentialHeaders,
       ...(init.headers || {}),
     },
   })
@@ -180,7 +235,10 @@ async function api(
     && body?.code === 'IMPORT_REVIEW_NOT_FOUND'
   ) return null
   if (!response.ok) {
-    fail(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
+    const error = new Error(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
+    error.status = response.status
+    if (body?.metrics) error.metrics = body.metrics
+    throw error
   }
   return body
 }
@@ -209,31 +267,10 @@ function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
 }
 
 async function uploadReviewBundle(paperDir, manifest) {
-  const created = await api('/api/import-agent-reviews/revisions', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(manifest),
+  return uploadBundle({
+    paperDir, manifest, api, resolveReviewFile,
+    timelinePath: path.join(root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl'),
   })
-  for (const relativePath of created.missingFiles || []) {
-    const file = manifest.files.find((candidate) => candidate.path === relativePath)
-    if (!file) fail(`Server requested an unknown file: ${relativePath}`)
-    await api(
-      `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}`
-        + `/files?path=${encodeURIComponent(relativePath)}`,
-      {
-        method: 'PUT',
-        headers: {
-          'content-length': String(file.byteLength),
-          'content-type': file.mediaType,
-        },
-        body: readFileSync(resolveReviewFile(paperDir, relativePath)),
-      },
-    )
-  }
-  return api(
-    `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}/finalize`,
-    { method: 'POST' },
-  )
 }
 
 function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId(), approvedBaseRevisionId) {
@@ -308,6 +345,8 @@ async function linkThread(paperId) {
 
 async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
+  const loaded = loadNck1ReviewSource(paperDir)
+  assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
   const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
   const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
   if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
@@ -463,6 +502,7 @@ async function paginationQa(paperId) {
       mode: rendered.mode,
       pageCount: rendered.pageCount,
       searchedCandidates: rendered.searchedCandidates,
+      ...(rendered.timing ? { timing: finishPaginationTiming(rendered.timing) } : {}),
       selectedPlan: selectedEdition,
       groups: rendered.inspection.map(({ id, type, pages, optionBankPages }) => ({
         groupId: id,
@@ -523,6 +563,7 @@ async function paginationQa(paperId) {
       targetPages: policy?.targetPages ?? null,
       actualPages: error.actualPages ?? diagnostic?.pageCount ?? null,
       searchedCandidates: error.searchedCandidates ?? null,
+      ...(error.timing ? { timing: finishPaginationTiming(error.timing) } : {}),
       error: { code: error.code || null, message: error.message },
       diagnosticError,
       diagnosticPolicy: policy ? {
@@ -542,6 +583,15 @@ async function paginationQa(paperId) {
     })
   } finally {
     await closeChromiumPool()
+    // Refresh process elapsed time after Chromium teardown, including rasterization.
+    for (const name of ['report.json', 'failure-report.json']) {
+      const file = path.join(outputDir, name)
+      if (!existsSync(file)) continue
+      const report = JSON.parse(readFileSync(file, 'utf8'))
+      if (!report.timing) continue
+      report.timing = finishPaginationTiming(report.timing)
+      writeFileSync(file, `${JSON.stringify(report, null, 2)}\n`)
+    }
   }
 }
 
@@ -594,7 +644,7 @@ async function hydrate(paperId) {
       mkdirSync(path.dirname(filePath), { recursive: true })
       writeFileSync(filePath, downloaded.bytes)
     }
-    const projection = buildNck1ReviewProjection(temporary, { requireAnalyses: false })
+    const projection = buildNck1ReviewProjection(temporary, { requireAnalyses: false, expectedCandidateDigest: revision.candidateDigest })
     const identity = {
       sourceDigest: projection.sourceDigest,
       candidateDigest: projection.candidateDigest,
@@ -853,11 +903,11 @@ async function status(paperId) {
 async function preflight(paperId) {
   paperDirectory(paperId)
   const configuredOrigin = String(process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || '').trim()
-  const configuredToken = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '').trim()
+  const configuredToken = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '').trim() || agentUsername()
   if (Boolean(configuredOrigin) !== Boolean(configuredToken)) {
     fail(
-      'Preflight requires both QUESTION_BANK_IMPORT_OPS_ORIGIN and '
-        + 'QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN, or neither while materializing locally',
+      'Preflight requires both QUESTION_BANK_IMPORT_OPS_ORIGIN and an Agent credential '
+        + '(QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN or _USERNAME), or neither while materializing locally',
     )
   }
   const reviewChecked = Boolean(configuredOrigin && configuredToken)

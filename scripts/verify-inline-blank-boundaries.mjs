@@ -77,7 +77,10 @@ for (const normalize of [canonicalizeVisibleEnglishTypography, replayCanonicalVi
     assert.deepEqual(check([text(normalized), blank, text(' after.')]), [])
     assert.equal(normalize(normalized, '4'), normalized)
   }
-  assert.deepEqual(check([text(normalize('shuttle(接驳车)', '4')), blank]).map(x => x.code),
+  const glossWithoutSeparator = normalize('shuttle(接驳车)', '4')
+  assert.equal(glossWithoutSeparator, 'shuttle (接驳车)', 'normalization must not invent absent source spacing')
+  assert.deepEqual(check([text(glossWithoutSeparator), blank]), [], 'the Chinese gloss itself delimits the blank')
+  assert.deepEqual(check([text(normalize('shuttle(bus)', '4')), blank]).map(x => x.code),
     ['INLINE_BLANK_SEPARATOR_MISSING'], 'normalization must not invent absent source spacing')
   assert.equal(normalize('word（释义）  , next', '4'), 'word (释义), next')
 }

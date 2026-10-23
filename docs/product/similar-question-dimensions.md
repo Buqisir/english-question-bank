@@ -305,7 +305,7 @@ Watkins predictions 题属于写作手法，不能作为句段作用题的例证
 
 ## 语法填空相似 v2（owner 2026-08-31 已确认）
 
-语法填空继续以具体空为小题相似单位，复用现有 22 个叶级考点，但逐类复核
+语法填空继续以具体空为小题相似单位，复用现有 24 个叶级考点，但逐类复核
 真正决定相似的解题动作；不能把“已经有细标签”等同于配方已经足够细。
 
 ### 谓语动词（已确认）
@@ -459,6 +459,27 @@ AI 应在导入解析时自动判断是否作状语，不要求老师逐题提�
 除不及物动词 `done` 自带的完成 / 状态意义外，不再增加“与主句动作谁先谁后”
 的时间维度。最终匹配按“不定式子类 + 形式”或“分词位置 + 形式 / 关系”的
 完整组合进行；当前 18 个存量定语空均可归入该框架。
+
+#### 作同位语（2026-10-19 通用缺项补齐）
+
+动名词短语解释名词的内容时，使用既有非谓语 facet，`role: appositive`、
+`route: appositive-gerund`、`features: []`，不增加 facet。原创合成例：
+`The club shared one principle — helping new members settle in.` 中，
+`helping ...` 解释 `principle` 的内容。破折号或抽象名词本身不是充分条件；
+须区分内容解释、名词修饰和动作修饰，也不能改归派生名词。
+
+本次路线仅支持程序从答案派生的普通主动 `doing`；不接收不定式、被动式、
+完成式等形式。这是当前路线的实现边界，不表示同位语只能使用动名词。
+每个答案备选须为单个 `-ing` 词，可带 `not` 前缀，例如 `helping`、
+`not helping`、`helping / assisting`；slash 分隔的全部备选都须满足限制，
+空备选拒绝。形式检查不自动证明词性或句法，仍须由作者按语境分类。
+`attributive-abstract-content` 仍仅表示抽象名词后的不定式定语。
+`noun-to-verb` 沿既有镜像机制，以 `non-finite-result` 加唯一 feature
+`appositive-gerund` 继承本路线，`role` 仍为 `null`，形式限制相同。
+
+当前公共检索投影保留 `role`，不保留 `similarityProfile`；新增角色使同位语
+与状语在既有角色池中双向隔离，并显示「同位语」。排序器未因此消费新路线，
+不宣称已实现路线精排；名词转动词也仍按既有派生 facet 检索。
 
 #### 作宾语（已确认）
 
@@ -620,7 +641,7 @@ astonished` 是状态型分词宾补。第一层相似须保留角色区别；�
    `remark → remarkable`、`sleep → asleep` 等非分词派生。
 
 答案为 `-ed/-ing` 时句法功能优先：作定语、表语、状语、宾补或主补均归
-非谓语七格，不得以“看起来像形容词”为由归动词变形容词。当前原始数据有
+非谓语成分分类，不得以“看起来像形容词”为由归动词变形容词。当前原始数据有
 16 个动词变名词空；原标 9 个动词变形容词空中，`astonished`、`excited`、
 `educated`、`shared`、`recommended`、`existing` 六个应重归非谓语，真正
 派生形容词只余 3 个。当前无动词变副词空，且通常涉及连续派生，暂不建立
@@ -850,6 +871,15 @@ one-of-a-kind` 与 `an hour / an 81-year-old` 等拼写和读音不一致的特�
 为回指 `photography` 的 `it`；`that/those` 由 owner 根据模拟题命题事实
 确认保留。暂不把 `one/ones`、`another` 及所有不定代词预先展开为“代词
 大全”，以后有真实设空再增加。
+
+### 无提示词强调句连接标记（2026-10-19 导入缺项补齐）
+
+`grammar-fill.no-hint.conjunction.cleft`（强调句连接标记）仅表示空格补
+`It is/was … that …` 中的强调连接标记 `that`，路线只允许 `cleft-that`，
+`blankType` 为 `no-hint`、`features` 为 `[]`、`role` 为 `null`。
+例如原创合成句 `It was in the park ___ we met our friends.` 填 `that`。
+原有代词路线 `cleft-it` 仍只表示补 `it`；名词性从句路线要求从句占名词
+位置，不能用来容纳此强调连接标记。本项不扩展到 `who` 或其他路线。
 
 ### 无提示词并列连词（已确认）
 

@@ -1,0 +1,25 @@
+{
+  "ownerDecision": "2026-10-19 / Linear BUB-78；已逐卷核对原图，18 套导入、2 套本批不导。无听力声明不得推广到未核查来源。",
+  "sources": {
+    "广东模拟题/26届深圳一模英语试题": { "listening": "absent-by-exam-design" },
+    "广东模拟题/26年3月汕头一模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：2026届大湾区普通高中毕业年级联合模拟考试英语": { "listening": "absent-by-exam-design", "note": "写作第一节是漫画短文，须保留漫画材料" },
+    "广东模拟题/含词汇整理：2026届广州市高三年级8月阶段训练英语试题": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：2026年港澳台联考英语样题": { "excluded": true, "note": "本批不导：港澳台联考题型体系待支持" },
+    "广东模拟题/含词汇整理：25年12月广州零调英语": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：25年8月广东六校第一次联考": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26届广东六校第二次联考": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26届广东第二次联考": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年1月佛山一模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年1月惠州二调英语": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年1月汕头高三上学期期末考": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年3月广东一模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年3月广州一模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年4月佛山二模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年4月广东二模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年4月广州二模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：26年4月深圳二模": { "listening": "absent-by-exam-design" },
+    "广东模拟题/含词汇整理：大湾区2024-2025学年高二年级第二学期期末统一测试英语": { "listening": "absent-by-exam-design", "examMonth": "2025-06", "note": "高二卷；不计入 2026 届高三模拟，考试年月已按题头核对" },
+    "广东模拟题/含词汇整理：深圳中学2026届高三年级第一次摸底考试英语": { "excluded": true, "note": "本批不导：单选 1–15 题、10 题组，题型待支持" }
+  }
+}

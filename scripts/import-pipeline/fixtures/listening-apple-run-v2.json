@@ -1,0 +1,34 @@
+{
+  "fixtureProvenance": "Synthetic dialogue in the frozen SpeechAnalyzer attributed-run output shape; no copyrighted source passage.",
+  "startSeconds": 0,
+  "endSeconds": 30,
+  "engine": { "name": "Apple SpeechAnalyzer/SpeechTranscriber", "model": "not_exposed", "actualLocale": "en_US" },
+  "result": { "segments": [
+    { "start": 2, "end": 7.2, "text": "Could you bring the blue folder to the station before the morning train leaves? Yes I will meet you there at seven.",
+      "runs": [
+        { "text": "Could", "start": 2, "end": 2.2 },
+        { "text": " you", "start": 2.2, "end": 2.4 },
+        { "text": " bring", "start": 2.4, "end": 2.6 },
+        { "text": " the", "start": 2.6, "end": 2.8 },
+        { "text": " blue", "start": 2.8, "end": 3 },
+        { "text": " folder", "start": 3, "end": 3.2 },
+        { "text": " to", "start": 3.2, "end": 3.4 },
+        { "text": " the", "start": 3.4, "end": 3.6 },
+        { "text": " station", "start": 3.6, "end": 3.8 },
+        { "text": " before", "start": 3.8, "end": 4 },
+        { "text": " the", "start": 4, "end": 4.2 },
+        { "text": " morning", "start": 4.2, "end": 4.4 },
+        { "text": " train", "start": 4.4, "end": 4.6 },
+        { "text": " leaves?", "start": 4.6, "end": 4.8 },
+        { "text": " Yes", "start": 5, "end": 5.2 },
+        { "text": " I", "start": 5.2, "end": 5.4 },
+        { "text": " will", "start": 5.4, "end": 5.6 },
+        { "text": " meet", "start": 5.6, "end": 5.8 },
+        { "text": " you", "start": 5.8, "end": 6 },
+        { "text": " there", "start": 6, "end": 6.2 },
+        { "text": " at", "start": 6.2, "end": 6.4 },
+        { "text": " seven.", "start": 6.4, "end": 6.8 }
+      ]
+    }
+  ] }
+}

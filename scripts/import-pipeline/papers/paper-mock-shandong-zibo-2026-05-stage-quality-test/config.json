@@ -1,0 +1,16 @@
+{
+  "paperId": "paper-mock-shandong-zibo-2026-05-stage-quality-test",
+  "format": "universal-nck1",
+  "importProfile": "public-paper-v1",
+  "pdfProductsRequired": true,
+  "spellingReview": "source-text-review-v3",
+  "provenance": {
+    "paperName": "淄博市2025—2026学年度高三教学质量阶段性检测英语试题",
+    "source": "山东模拟题/含词汇整理：26年5月淄博二模",
+    "year": 2026,
+    "month": 5
+  },
+  "universalSourceManifestPath": "universal-source-manifest.json",
+  "canonicalRequestPath": "canonical-evidence/canonical-import-request.json",
+  "headerTitle": "淄博市2025—2026学年度高三教学质量阶段性检测"
+}

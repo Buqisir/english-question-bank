@@ -281,6 +281,9 @@ function envFor(fixture, port) {
     USER_DATA_DB: fixture.userDataDbPath,
     QUESTION_BANK_PAPER_ASSET_ROOT: fixture.paperAssetsDir,
     QUESTION_BANK_USER_SPACE_ROOT: fixture.userSpaceRoot,
+    // Startup migrations require the Review leader. Independent fixture DBs
+    // must not lose that migration to another verifier's host-wide lock.
+    EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT: path.join(fixture.tempRoot, 'review-locks'),
     QUESTION_BANK_API_PORT: String(port),
   }
 }

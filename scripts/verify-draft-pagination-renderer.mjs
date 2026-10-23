@@ -26,6 +26,7 @@
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { applyPlannedGroupBreaks } from '../server/draft-paper/fixedPagePdfPlanner.mjs'
 
 let passed = 0
 let failed = 0
@@ -152,6 +153,37 @@ function findLandingPage(html, marker) {
 console.log('Draft-paper pagination renderer determinism verify')
 
 async function main() {
+  // Grammar-fill chrome is wrapped to keep its heading/instruction together
+  // naturally. An explicit group break must move that whole opening as well.
+  const grammarFixture = `<html><head><style>
+    @page { size: A4; margin: 20mm }
+    .canonical-grammar-fill-opening { break-inside: avoid; break-after: avoid }
+    </style></head><body><p>Previous group</p>
+    <div class="canonical-grammar-fill-opening">
+      <h2 class="section-header">Grammar fill</h2>
+      <p class="reading-meta-instruction">Complete the passage.</p>
+    </div>
+    <section data-canonical-group-id="grammar"><p>Grammar passage body.</p></section>
+    </body></html>`
+  for (const planned of [false, true]) {
+    const result = await renderPaginatedPaper(
+      planned ? applyPlannedGroupBreaks(grammarFixture, ['grammar']) : grammarFixture, {
+        inspect: page => page.evaluate(() => {
+          const root = document.querySelector('.pagedjs_pages')
+          return ['.section-header', '.reading-meta-instruction', 'section[data-canonical-group-id="grammar"]']
+            .map(selector => Number(root.querySelector(selector).closest('.pagedjs_page').dataset.pageNumber))
+        }),
+      },
+    )
+    const expectedPage = planned ? 2 : 1
+    assert(
+      `grammar-fill heading, instruction and body stay on page ${expectedPage} (${planned ? 'planned break' : 'natural'})`,
+      result.inspection.every(page => page === expectedPage),
+      `pages: ${result.inspection.join(', ')}`,
+    )
+    assert(`grammar-fill ${planned ? 'planned break' : 'natural'} page count`, result.pageCount === expectedPage)
+  }
+
   const html = buildFixtureHtml()
 
   const runs = []

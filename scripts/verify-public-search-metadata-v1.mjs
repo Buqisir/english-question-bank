@@ -15,7 +15,9 @@ import {
   finalizePublicSearchMetadata,
   preparePublicSearchMetadataRequest,
   validatePublicSearchMetadata,
+  validateAuthoredPublicSearchMetadata,
 } from '../server/paper-import-ai/publicSearchMetadata.mjs'
+import { ensureSearchMetadata } from './import-pipeline/search-metadata-check.mjs'
 import { buildNck1CompatibilityPackage } from '../server/import-review/revisionProjection.mjs'
 import { stableStringify } from '../shared/paper-canonical/stable.mjs'
 import { createTeachingFacetIndex, queryGroupsByTeaching, readPublicFacetEntries } from '../server/search/teachingFacets.mjs'
@@ -86,6 +88,57 @@ const authored = { groups: prepared.sourceGroups.map((group) => {
   return { groupId: group.groupId, family: group.family, topicLabels: [labelA, labelB], genre: '记叙', metadata }
 }) }
 assert.equal(authoredContractValidate(authored), true, JSON.stringify(authoredContractValidate.errors))
+
+assert.deepEqual(validateAuthoredPublicSearchMetadata({ authored, ...binding }), [])
+const badTopic = structuredClone(authored)
+badTopic.groups[0].topicLabels = ['人与自我-生活与学习-积极的人生态度']
+const topicIssues = validateAuthoredPublicSearchMetadata({ authored: badTopic, ...binding })
+assert.equal(topicIssues[0].path, '/groups/0/topicLabels/0')
+assert.equal(topicIssues[0].code, 'PUBLIC_METADATA_AUTHORED_SHAPE_INVALID')
+assert(topicIssues[0].allowedValues.includes(labelA))
+const badTopics = structuredClone(badTopic)
+badTopics.groups[1].topicLabels = ['invented-topic']
+assert.equal(validateAuthoredPublicSearchMetadata({ authored: badTopics, ...binding }).length, 2,
+  'one rewrite receives all schema errors, without irrelevant oneOf family failures')
+const badRoute = structuredClone(authored)
+badRoute.groups.find(group => group.family === 'grammar-fill').metadata.questions[0].similarityProfile.route = 'invented-route'
+const routeIssues = validateAuthoredPublicSearchMetadata({ authored: badRoute, ...binding })
+assert.equal(routeIssues[0].code, 'PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID')
+assert(routeIssues[0].allowedValues.route.includes('present-stable-description'))
+const reorderedRoute = structuredClone(badRoute)
+reorderedRoute.groups.reverse()
+const reorderedIndex = reorderedRoute.groups.findIndex(group => group.family === 'grammar-fill')
+assert.equal(validateAuthoredPublicSearchMetadata({ authored: reorderedRoute, ...binding })[0].path,
+  `$.groups[${reorderedIndex}].metadata.questions[0].similarityProfile`)
+const repairedTopic = structuredClone(badTopic)
+let authoredRewrites = 0
+await ensureSearchMetadata({
+  check: () => validateAuthoredPublicSearchMetadata({ authored: repairedTopic, ...binding }),
+  rewrite: async issues => {
+    assert.deepEqual(issues, topicIssues)
+    repairedTopic.groups[0].topicLabels = [...authored.groups[0].topicLabels]
+    authoredRewrites += 1
+  },
+})
+assert.equal(authoredRewrites, 1, 'a writer stub fixes the reported field and the real validator accepts it')
+for (const successAt of [0, 1, 2]) {
+  let rewrites = 0
+  await ensureSearchMetadata({
+    check: () => rewrites >= successAt ? [] : topicIssues,
+    rewrite: async (issues, attempt) => {
+      assert.deepEqual(issues, topicIssues)
+      assert.equal(attempt, rewrites + 1)
+      rewrites += 1
+    },
+  })
+  assert.equal(rewrites, successAt, 'valid output continues immediately after the successful rewrite')
+}
+let exhausted = 0
+await assert.rejects(ensureSearchMetadata({
+  check: () => routeIssues,
+  rewrite: async () => { exhausted += 1 },
+}), error => error.kind === 'search_metadata_check_failed'
+  && error.message.includes('PUBLIC_METADATA_GRAMMAR_SIMILARITY_INVALID') && exhausted === 2)
 
 const rejectsAuthored = (mutate, code) => {
   const value = structuredClone(authored)
@@ -242,6 +295,7 @@ Object.assign(cleftItem, {
   contextParagraphIds: cleftRequest.deterministic.find((group) => group.groupId === cleftGroup.groupId).paragraphIds,
 })
 assert.equal(new Ajv({ strict: true }).compile(cleftRequest.outputContract)(cleftAuthored), true)
+assert.deepEqual(validateAuthoredPublicSearchMetadata({ authored: cleftAuthored, ...cleftBinding }), [])
 const cleftFinal = finalizePublicSearchMetadata({ authored: cleftAuthored, ...cleftBinding })
 const cleftResultGroup = cleftFinal.groups.find((group) => group.groupId === cleftGroup.groupId)
 const cleftResult = cleftResultGroup.metadata.questions.find((question) => question.questionId === cleftQuestion.questionId)
@@ -267,6 +321,7 @@ assert.equal(preparePublicSearchMetadataRequest(cleftBinding).sourceGroups
 for (const answer of ['that', '  THAT  ', 'that / THAT']) {
   const normalizedBinding = structuredClone(cleftBinding)
   normalizedBinding.materialization.answers.find((item) => item.questionId === cleftQuestion.questionId).value = answer
+  assert.deepEqual(validateAuthoredPublicSearchMetadata({ authored: cleftAuthored, ...normalizedBinding }), [])
   const completed = finalizePublicSearchMetadata({ authored: cleftAuthored, ...normalizedBinding })
   assert.deepEqual(validatePublicSearchMetadata({
     sidecar: JSON.parse(stableStringify(completed)), ...normalizedBinding,
@@ -276,9 +331,11 @@ const cleftAuthorityDir = mkdtempSync(path.join(tmpdir(), 'public-metadata-cleft
 try {
   const sidecarPath = path.join(cleftAuthorityDir, 'public-search-metadata-v1.json')
   writeFileSync(sidecarPath, stableStringify(cleftFinal))
-  for (const answer of ['who', 'it', 'because', 'that/who', 'who/that', 'that/', '/that', '']) {
+  for (const answer of ['who', 'it', 'because', 'that/who', 'who/that', 'that/', '/that', 'that//that', '', '   ', 'That.', "that's"]) {
     const invalidBinding = structuredClone(cleftBinding)
     invalidBinding.materialization.answers.find((item) => item.questionId === cleftQuestion.questionId).value = answer
+    assert.ok(validateAuthoredPublicSearchMetadata({ authored: cleftAuthored, ...invalidBinding })
+      .some(({ code }) => code === 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'), answer)
     assert.throws(() => finalizePublicSearchMetadata({ authored: cleftAuthored, ...invalidBinding }),
       /PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID/, `cleft finalization rejects authoritative ${answer}`)
     assert.ok(validatePublicSearchMetadata({ sidecar: cleftFinal, ...invalidBinding })
@@ -301,7 +358,7 @@ for (const [patch, code] of [
   const invalidAuthored = structuredClone(cleftAuthored)
   Object.assign(invalidAuthored.groups.find((group) => group.family === 'grammar-fill').metadata.questions
     .find((question) => question.questionId === cleftQuestion.questionId), patch)
-
+  assert.ok(validateAuthoredPublicSearchMetadata({ authored: invalidAuthored, ...cleftBinding }).some((issue) => issue.code === code))
   assert.throws(() => finalizePublicSearchMetadata({ authored: invalidAuthored, ...cleftBinding }), new RegExp(code))
   const invalidFinal = structuredClone(cleftPersisted)
   Object.assign(invalidFinal.groups.find((group) => group.family === 'grammar-fill').metadata.questions
@@ -418,7 +475,7 @@ for (const conversion of [false, true]) {
   assert.ok(sample.request.controlledValues.grammarSimilarity
     .find(({ facet_key }) => facet_key === 'grammar-fill.given.conversion.noun-to-verb').features.includes('appositive-gerund'))
   assert.equal(new Ajv({ strict: true }).compile(sample.request.outputContract)(sample.authored), true)
-
+  assert.deepEqual(validateAuthoredPublicSearchMetadata({ ...sample.input, authored: sample.authored }), [])
   const completed = finalizePublicSearchMetadata({ ...sample.input, authored: sample.authored })
   const roundtrip = JSON.parse(stableStringify(completed))
   assert.deepEqual(validatePublicSearchMetadata({ ...sample.input, sidecar: roundtrip }), [])
@@ -430,7 +487,7 @@ for (const conversion of [false, true]) {
   for (const answer of ['not helping', 'helping / assisting', 'helping/not helping', '  HELPING / not   helping  ']) {
     const valid = appositiveCase(`appositive-supported-form-${conversion}`, { conversion, answer })
     const authorityBefore = stableStringify(valid.input.materialization)
-
+    assert.deepEqual(validateAuthoredPublicSearchMetadata({ ...valid.input, authored: valid.authored }), [], answer)
     const finalized = finalizePublicSearchMetadata({ ...valid.input, authored: valid.authored })
     const persisted = JSON.parse(stableStringify(finalized))
     assert.deepEqual(validatePublicSearchMetadata({ ...valid.input, sidecar: persisted }), [], answer)
@@ -449,7 +506,7 @@ for (const conversion of [false, true]) {
   ]) {
     const invalid = structuredClone(sample.authored)
     Object.assign(invalid.groups[0].metadata.questions[0], patch)
-
+    assert.ok(validateAuthoredPublicSearchMetadata({ ...sample.input, authored: invalid }).length > 0)
     assert.throws(() => finalizePublicSearchMetadata({ ...sample.input, authored: invalid }), /PUBLIC_METADATA_GRAMMAR_/)
     const persistedInvalid = structuredClone(roundtrip)
     Object.assign(persistedInvalid.groups[0].metadata.questions[0], patch)
@@ -458,7 +515,8 @@ for (const conversion of [false, true]) {
   for (const answer of ['to help', 'to be helped', 'being helped', 'having helped', 'having been helped', 'to have helped', 'helped', 'not to sing', 'not to be helping', 'not having been helping',
     'helping / not to sing', 'not to be helping / helping', '/helping', 'helping/', 'helping // assisting']) {
     const invalid = appositiveCase(`appositive-form-${conversion}`, { conversion, answer })
-
+    assert.ok(validateAuthoredPublicSearchMetadata({ ...invalid.input, authored: invalid.authored })
+      .some(({ code }) => code === 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'), answer)
     assert.throws(() => finalizePublicSearchMetadata({ ...invalid.input, authored: invalid.authored }), /PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID/)
     const forged = structuredClone(roundtrip)
     // Same identity, changed authoritative answer; caller's fake doing cannot authorize it.

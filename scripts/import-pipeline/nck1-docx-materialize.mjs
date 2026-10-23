@@ -34,6 +34,7 @@ import {
   assertNck1ImageBundlePageArtifacts,
 } from '../../server/paper-import/nck1ImageSourceBundle.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 
 const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
 
@@ -344,10 +345,21 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
         throw new Error('Digest-bound producer review is missing; refusing to overwrite the existing materialization')
       }
       const inspected = inspectNck1Materialization({ paperDir, manifest })
+      let outputState = inspected.outputState
+      if (producer === OCR_PRODUCER && inspected.disposition === 'ready_for_verification') {
+        const materialization = JSON.parse(readFileSync(outputPath, 'utf8'))
+        if (materialization.listening?.state === 'captured') {
+          const restored = restoreOcrSourcePresentation({ materialization, ...producerInputs })
+          if (digestJson(restored) !== digestJson(materialization)) {
+            atomicJson(outputPath, restored)
+            outputState = 'agent_modified'
+          }
+        }
+      }
       return {
         cached: true,
         disposition: inspected.disposition,
-        outputState: inspected.outputState,
+        outputState,
         sourceDigest,
         outputPath,
         reviewPath,
@@ -380,6 +392,12 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     documents,
     ...producerInputs,
   })
+  // The raw producer stays receipt-bound. This local post-pass closes presentation before
+  // a ready OCR materialization leaves this job; independent presentation runs are idempotent.
+  const presented = producer === OCR_PRODUCER && produced.disposition === 'ready_for_verification'
+    && produced.materialization.listening?.state === 'captured'
+    ? restoreOcrSourcePresentation({ materialization: produced.materialization, ...producerInputs })
+    : produced.materialization
   const mediaById = new Map(produced.materialization.media.map((media) => [
     media.mediaId,
     media,
@@ -422,10 +440,12 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     listeningSourcePartitionDigest: digestJson(produced.review.listeningSourcePartition),
     mediaFiles,
   })
+  const presentationChanged = digestJson(presented) !== digestJson(produced.materialization)
+  if (presentationChanged) atomicJson(outputPath, presented)
   return {
     cached: false,
     disposition: produced.disposition,
-    outputState: 'producer_output_written',
+    outputState: presentationChanged ? 'agent_modified' : 'producer_output_written',
     sourceDigest,
     outputPath,
     reviewPath,

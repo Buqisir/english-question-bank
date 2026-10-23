@@ -19,7 +19,13 @@ const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
 // Labels that open an official sample; scoring or prompt text may precede them.
 const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
-const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*[:：]?$/iu
+// Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
+// Zhenhai also prints "Text 8 打听一位画家（第10题为推断题）".
+// Match the whole marker, keeping its Chinese title/note out of speech.
+const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*(?:\((?=[^()]*\p{Script=Han})[^()]+\)\s*|(?=[^()\n]*\p{Script=Han})[\p{Script=Han}A-Za-z0-9\s()、，,]+)?[:：]?$/iu
+// English samples never open a paragraph with Chinese; such a paragraph is the key's own
+// commentary (【审题重点】, 主题语境：…). Chinese version labels still separate alternatives.
+const WRITING_SAMPLE_COMMENTARY = /^(?:【|(?!(?:参考)?范文|考场作文)\p{Script=Han})/u
 const LISTENING_PAUSE_REPEAT_SEQUENCE = /^(?:(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\)|\(\s*重复\s*\)))+$/u
 const SLOT_SPECS = [
   ['reading.a', 'reading', 21, 23],
@@ -38,6 +44,24 @@ function normalized(value) {
 
 function trimEdgeSpaces(value) {
   return String(value || '').replace(/^\p{Zs}+|\p{Zs}+$/gu, '')
+}
+
+// Only continuous listening speech has this page-boundary rule. DOCX paragraphs,
+// headings, questions and tables keep their existing separators.
+export function joinListeningTranscriptPages(items) {
+  let text = ''
+  let previous = null
+  for (const item of items) {
+    const lastLine = text.trimEnd().split('\n').at(-1) || ''
+    const firstLine = item.text.trimStart().split('\n')[0] || ''
+    const adjacentPages = previous?.page != null && item.page === previous.page + 1
+    const sentenceEnded = /[.!?。？！:：][”’"'）)\]】}」』》〉]*$/u.test(lastLine)
+    const continues = adjacentPages && lastLine && !sentenceEnded && /^[a-z]/u.test(firstLine)
+    text = !text ? item.text : continues
+      ? `${text.trimEnd()} ${item.text.trimStart()}` : `${text}\n${item.text}`
+    previous = item
+  }
+  return text
 }
 
 function sourceLocator(documentId, sourceIndex) {
@@ -258,9 +282,12 @@ function abbreviationLetter(text, match) {
 }
 
 // A label whose text opens with another dotted capital ("D. C.", "A. J. Smith") may be the start of
-// an abbreviation rather than an option, so it is never accepted as a label.
+// an abbreviation rather than an option. Zhenhai's "C. P. E." instead contains
+// the complete subject abbreviation P. E. after its genuine C label.
 function startsAbbreviation(text, match) {
-  return /^[A-Z][.．](?![A-Za-z])/u.test(text.slice(match.index + match[0].length))
+  const after = text.slice(match.index + match[0].length)
+  return /^[A-Z][.．](?![A-Za-z])/u.test(after)
+    && !/^P[.．]\s*E[.．](?![A-Za-z])/u.test(after)
 }
 
 // When the plain label scan fails, accept exactly one label sequence whose skipped candidates
@@ -805,7 +832,8 @@ function textAnswerValue(rawValue) {
   if (
     !shape
     || value.length > 80
-    || shape.split(' ').length > 4
+    // Separators are not words; spacing around "/" must not change admission.
+    || shape.replace(/\s*\/\s*/gu, '/').split(' ').length > 4
     || /[.!?。！？,，;；:：（）()“”"\p{Script=Han}\d]/u.test(shape)
   ) return null
   return value
@@ -876,7 +904,7 @@ function writingAnswerSectionHeading(text) {
   return NUMBERED_WRITING_ANSWER_SECTION.test(text) || BARE_WRITING_ANSWER_SECTION.test(text)
 }
 
-function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
+export function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
   const answers = new Map()
   const locate = (item) => sourceLocator(answerDocumentId, item.kind === 'table'
     ? item.source || { kind: 'docx_part', documentId: answerDocumentId, part: 'word/document.xml', selector: item.selector }
@@ -948,15 +976,19 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       else ambiguousGrid(grid.numbers, item)
       continue
     }
-    for (const match of text.matchAll(/(\d{1,2})\s*[-–—~～－至]\s*(\d{1,2})\s*([A-G]+)/gu)) {
+    for (const match of text.matchAll(/(\d{1,2})\s*[-–—~～－至]\s*(\d{1,2})\s*([A-G]+)((?:[ \t\u3000]+[A-G]+)*)/gu)) {
       const from = Number(match[1])
       const to = Number(match[2])
-      if (match[3].length !== to - from + 1) {
+      // Some keys space one long range into groups of five ("1-20 CBAAB CBBCC …").
+      // The groups count only when they complete the range exactly.
+      const grouped = match[3] + match[4].replace(/[ \t\u3000]+/gu, '')
+      const letters = match[3].length !== to - from + 1 && grouped.length === to - from + 1 ? grouped : match[3]
+      if (letters.length !== to - from + 1) {
         addIssue(issues, 'NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS', `answers.${from}-${to}`,
           'Official answer range length does not match its labels', at(item))
         continue
       }
-      ;[...match[3]].forEach((value, offset) => add(from + offset, value, item))
+      ;[...letters].forEach((value, offset) => add(from + offset, value, item))
     }
     const pairs = unpunctuatedAnswerPairs(text)
     if (pairs) {
@@ -1039,12 +1071,20 @@ function writingSampleText(answerBody, from, to) {
   // A section label directly followed by another label ("参考范文" then
   // "Possible Version 1") is a heading for that label, not an alternative.
   if (labels.length >= 2 && labels[1] === labels[0] + 1) labels.shift()
-  const start = labels.length ? labels[0] + (labels.length === 1 ? 1 : 0) : from
+  // A later explicitly numbered alternative cannot erase an unlabelled first
+  // sample. It remains part of the captured sample stream.
+  const startsWithLaterAlternative = labels.length && labels[0] > from
+    && /(?:范文|作文|样例|示例|Version)\s*[二三2-3](?:】)?\s*[:：]?$/iu
+      .test(normalized(answerBody[labels[0]].text))
+  const start = labels.length && !startsWithLaterAlternative
+    ? labels[0] + (labels.length === 1 ? 1 : 0) : from
   const boundary = answerBody.findIndex((item, index) =>
     index >= start
       && index < to
       && item.kind === 'paragraph'
       && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
+        || (!WRITING_SAMPLE_LABEL.test(normalized(item.text))
+          && WRITING_SAMPLE_COMMENTARY.test(normalized(item.text)))
         || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
         || LISTENING_TEXT_MARKER.test(normalized(item.text))
         || listeningCue(item.text)))
@@ -1059,19 +1099,42 @@ function writingSampleText(answerBody, from, to) {
   return lines.join('\n')
 }
 
-function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
+export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
   // OCR engines may return one source region containing several visually
   // distinct paragraphs. Split only for this answer-sample boundary parser;
   // every derived paragraph retains the exact source locator. DOCX/PDF
   // paragraph streams are unchanged by this normalization.
-  const sampleBody = answerBody.flatMap((item) =>
+  let sampleBody = answerBody.flatMap((item) =>
     item.kind === 'paragraph' && String(item.text).includes('\n')
       ? String(item.text).split('\n').map((text) => ({ ...item, text }))
       : [item])
+  // Answer books can repeat the complete writing section in their explanations.
+  // Only an explicit explanation divider after the key's writing heading closes
+  // that key; detailed-only sources with explanations before writing stay intact.
+  const firstWriting = sampleBody.findIndex((item) =>
+    item.kind === 'paragraph' && writingAnswerSectionHeading(normalized(item.text)))
+  const explanation = firstWriting < 0 ? -1 : sampleBody.findIndex((item, index) =>
+    index > firstWriting && isAnswerExplanationHeading(item))
+  if (explanation >= 0) sampleBody = sampleBody.slice(0, explanation)
+  // "第二节 读后续写" followed by "读后续写" names one sample.
+  // Keep the last adjacent heading; any intervening prose keeps the ambiguity.
+  const adjacentContinuationHeadings = (positions) => positions.filter((position, index) =>
+    index === positions.length - 1 || !sampleBody.slice(position + 1, positions[index + 1])
+      .every((item) => item.kind === 'paragraph' && (!normalized(item.text)
+        || CONTINUATION_HEADINGS.some((pattern) => pattern.test(normalized(item.text))))))
   const numberedSections = writingSamplePosition(sampleBody, [NUMBERED_WRITING_ANSWER_SECTION], 0)
-  const writingSections = numberedSections.length
+  let writingSections = numberedSections.length
     ? numberedSections
     : writingSamplePosition(sampleBody, [BARE_WRITING_ANSWER_SECTION], 0)
+  // A key can print its writing heading block twice before any sample text.
+  // Headings alone between the copies make them one section, starting at the last.
+  if (writingSections.length > 1 && sampleBody.slice(writingSections[0], writingSections.at(-1))
+    .every((item) => item.kind === 'paragraph' && (!normalized(item.text)
+      || writingAnswerSectionHeading(normalized(item.text))
+      || BARE_APPLICATION_HEADING.test(normalized(item.text))
+      || BARE_CONTINUATION_HEADING.test(normalized(item.text))))) {
+    writingSections = [writingSections.at(-1)]
+  }
   let applicationPatterns = APPLICATION_HEADINGS
   let continuationPatterns = CONTINUATION_HEADINGS
   if (writingSections.length === 0) {
@@ -1081,7 +1144,7 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     const typedApplication = APPLICATION_HEADINGS.filter((pattern) => pattern !== BARE_APPLICATION_HEADING)
     const typedContinuation = CONTINUATION_HEADINGS.filter((pattern) => pattern !== BARE_CONTINUATION_HEADING)
     const application = writingSamplePosition(sampleBody, typedApplication, 0)
-    const continuation = writingSamplePosition(sampleBody, typedContinuation, 0)
+    const continuation = adjacentContinuationHeadings(writingSamplePosition(sampleBody, typedContinuation, 0))
     if (application.length === 1 && continuation.length === 1 && application[0] < continuation[0]) {
       writingSections.push(application[0] - 1)
       applicationPatterns = typedApplication
@@ -1117,7 +1180,7 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
     return writingSamplePosition(sampleBody, [barePattern], writingStart + 1)
   }
   const applicationHeadings = headings(applicationPatterns, BARE_APPLICATION_HEADING)
-  const continuationHeadings = headings(continuationPatterns, BARE_CONTINUATION_HEADING)
+  const continuationHeadings = adjacentContinuationHeadings(headings(continuationPatterns, BARE_CONTINUATION_HEADING))
   if (applicationHeadings.length !== 1 || continuationHeadings.length !== 1
     || applicationHeadings[0] >= continuationHeadings[0]) {
     addIssue(
@@ -1215,7 +1278,10 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   const ranges = []
   for (const item of questionBody.slice(listeningHeading + 1, readingStart)) {
     if (item.kind !== 'paragraph') continue
+    // "听第6段材料，回答6、7题。" omits 第 only in this complete announcement.
+    // Require both endpoints, a supported separator and the terminal 题.
     const match = /回答第\s*(\d+)\s*(?:和|、|至|到|[-–—])\s*第?\s*(\d+)/u.exec(normalized(item.text))
+      || /^听第\d+段材料[,，]\s*回答\s*(\d+)\s*(?:、|至|-)\s*(\d+)\s*题[。.]?$/u.exec(normalized(item.text))
     if (match) ranges.push({
       questionNumbers: Array.from(
         { length: Number(match[2]) - Number(match[1]) + 1 },
@@ -1454,14 +1520,17 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
             'Speech resumes after an apparent broadcast; the boundary is not proven',
             sourceRef(answerDocumentId, answerBody[index].sourceIndex))
         }
-        if (inspected.text !== null) bodyTexts.push(inspected.text)
+        if (inspected.text !== null) bodyTexts.push({
+          text: inspected.text,
+          page: sourceLocator(answerDocumentId, answerBody[index].sourceIndex).page ?? null,
+        })
       }
       const questionNumbers = marker.number <= 5
         ? [marker.number]
         : longRanges[marker.number - 6]?.questionNumbers || []
       const markerRecord = listeningItemRecord(marker.item, marker.index, answerDocumentId,
         'segment_boundary', 'exact_ordered_text_marker', 'text_marker')
-      const text = bodyTexts.join('\n')
+      const text = joinListeningTranscriptPages(bodyTexts)
       if (!normalized(text)) {
         addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
           `Text ${marker.number} has no nonempty retained transcript body`,

@@ -531,11 +531,12 @@ buildGroup({
 })
 
 // ═══════════════════════════════════════════════════════════════════════
-// Fixture data — small-question endpoint: grammarFill non-finite role (7 格全含)
+// Fixture data — small-question endpoint: grammarFill non-finite roles
 // ═══════════════════════════════════════════════════════════════════════
 
 const ROLE_LABELS = {
   adverbial: '状语',
+  appositive: '同位语',
   attributive: '定语',
   subject: '主语',
   object: '宾语',
@@ -543,10 +544,10 @@ const ROLE_LABELS = {
   'object-complement': '宾语补足语',
   'subject-complement': '主语补足语',
 }
-const ALL_SEVEN_ROLES = Object.keys(ROLE_LABELS)
+const ALL_ROLES = Object.keys(ROLE_LABELS)
 const roleSeedGroupByRole = {}
 const roleCandGroupByRole = {}
-for (const role of ALL_SEVEN_ROLES) {
+for (const role of ALL_ROLES) {
   const seedGroupId = `group-sq-role-seed-${role}`
   const candGroupId = `group-sq-role-cand-${role}`
   roleSeedGroupByRole[role] = seedGroupId
@@ -895,10 +896,10 @@ assert(
   })(),
 )
 
-// ═══ §2: grammarFill — non-finite role (全七格，含 predicative/subject-complement) ═
-console.log('=== §2 /api/similar-questions（语法填空·非谓语 role 七格） ===')
+// ═══ §2: grammarFill — non-finite roles ═
+console.log('=== §2 /api/similar-questions（语法填空·非谓语 role） ===')
 
-for (const role of ALL_SEVEN_ROLES) {
+for (const role of ALL_ROLES) {
   const r = store.findSimilar(db, { seeds: [{ questionId: `q-sq-role-seed-${role}-1` }] })
   const cand = findResult(r, roleCandGroupByRole[role])
   assert(
@@ -910,11 +911,20 @@ for (const role of ALL_SEVEN_ROLES) {
   // never the same role) — using the shared 'object'-role mismatch fixture
   // would be a false negative for the 'object' role's own iteration (it
   // would legitimately match, not be excluded).
-  const otherRole = ALL_SEVEN_ROLES[(ALL_SEVEN_ROLES.indexOf(role) + 1) % ALL_SEVEN_ROLES.length]
+  const otherRole = ALL_ROLES[(ALL_ROLES.indexOf(role) + 1) % ALL_ROLES.length]
   assert(
     `非谓语 role: '${role}' 种子排除 '${otherRole}' 候选（角色不匹配整组不入池）`,
     !findResult(r, roleCandGroupByRole[otherRole]),
   )
+}
+for (const [role, excludedRole] of [['appositive', 'adverbial'], ['adverbial', 'appositive']]) {
+  const result = store.findSimilar(db, { seeds: [{ questionId: `q-sq-role-seed-${role}-1` }] })
+  assert(`${role} and ${excludedRole} similarity pools are isolated in both directions`,
+    !findResult(result, roleCandGroupByRole[excludedRole])
+      && !findResult(result, roleSeedGroupByRole[excludedRole]))
+  const candidate = findResult(result, roleCandGroupByRole[role])
+  assert(`${role} matchedQuestionIds preserve the matching blank`,
+    JSON.stringify(candidate?.matchedQuestionIds) === JSON.stringify([`q-sq-role-cand-${role}-1`]))
 }
 {
   // Generic role-mismatch fixture check, independent of the round-robin above.

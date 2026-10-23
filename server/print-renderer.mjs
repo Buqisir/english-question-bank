@@ -1786,7 +1786,11 @@ export function buildPrintHtml({
           blockIndex === firstGrammarFillPredecessorBlockIndex
             ? ` data-canonical-grammar-fill-preceding-for="${escapeHtml(canonicalGrammarFillGroupIds[0])}" data-canonical-grammar-fill-previous-family-group-id="${escapeHtml(canonicalClozeGroupIds.at(-1) || '')}"`
             : ''
-        sections.push(`<p class="reading-meta-instruction"${chromeLayoutAttr}${readingRhythmAttrs}${readingPredecessorAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${grammarFillRhythmAttrs}${grammarFillPredecessorAttrs}>${escapeHtml(block.text)}</p>`)
+        const instructionHtml = `<p class="reading-meta-instruction"${chromeLayoutAttr}${readingRhythmAttrs}${readingPredecessorAttrs}${sevenChoicesRhythmAttrs}${sevenChoicesPredecessorAttrs}${clozeRhythmAttrs}${clozePredecessorAttrs}${grammarFillRhythmAttrs}${grammarFillPredecessorAttrs}>${escapeHtml(block.text)}</p>`
+        if (isGrammarFillChromeBlock(blockIndex) && blocks[blockIndex - 1]?.type === 'section_header'
+          && sections.at(-1)?.startsWith('<h2 ')) {
+          sections[sections.length - 1] = `<div class="canonical-grammar-fill-opening">${sections.at(-1)}${instructionHtml}</div>`
+        } else sections.push(instructionHtml)
       } else if (block.type === 'page_break') {
         sections.push('<div class="page-break"></div>')
       } else if (block.type === 'question_group' && block.questionGroupId) {
@@ -2513,6 +2517,11 @@ body {
   margin-top: 0;
   margin-bottom: ${grammarFillRhythm.rendererMapping.printPdf.instructionMarginBottomPt}pt;
   line-height: ${grammarFillRhythm.rendererMapping.printPdf.baselineStepPt}pt;
+}
+
+.canonical-grammar-fill-opening {
+  break-inside: avoid;
+  break-after: avoid;
 }
 
 .section-header[data-canonical-grammar-fill-rhythm-role="next_section"] {

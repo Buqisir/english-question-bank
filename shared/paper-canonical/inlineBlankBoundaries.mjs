@@ -40,6 +40,10 @@ export function validateInlineBlankTextBoundaries(questionGroups) {
           // delimit answers too; ambiguous quotes/apostrophes/hyphens need review.
           if (edge === '—') continue
           if (side === 'left' ? edge === '“' : edge === '”') continue
+          // Source Chinese glosses delimit the preceding word even when the
+          // answer line touches their closing parenthesis. Canonical text may
+          // already have NFKC-normalized the fullwidth parentheses.
+          if (side === 'left' && /[（(][\p{Script=Han}\p{P}\s]*\p{Script=Han}[\p{Script=Han}\p{P}\s]*[）)]$/u.test(text)) continue
           if (side === 'right' ? /[.,;:!?\)\]\}]/u.test(edge) : /[\(\[\{]/u.test(edge)) continue
           const missing = (!edge && adjacentBlank) || /[\p{L}\p{N}]/u.test(edge)
             || (side === 'left' && /[.,;:!?\)\]\}]/u.test(edge))
