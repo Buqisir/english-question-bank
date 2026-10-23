@@ -564,6 +564,35 @@ test('Yantai section and parenthesized sample label on one line preserve both of
   assert(outsideWriting.groups.every(g => g.essays.state === 'not_supplied'))
 })
 
+test('Nantong bare continuation heading keeps the two source samples separate', () => {
+  const result = referencesFixture(['第四部分 写作', '第一节 应用文',
+    'One possible version:', 'Our club plants herbs.', '读后续写',
+    'One possible version:', 'Mia opened the gate.'], ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Our club plants herbs.'], ['Mia opened the gate.']])
+})
+
+test('Yantai score heading touches its parenthesized sample label without whitespace', () => {
+  const result = referencesFixture(['第四部分 写作（共两节，满分40分）',
+    '第一节（满分15分）(One possible version)', 'Dear Sam,', 'Our club plants herbs.',
+    '第二节（满分25分）(One possible version)', 'Mia opened the gate.'],
+  ['application', 'continuation'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries[0].sourceLabel),
+    ['(One possible version)', '(One possible version)'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries.flatMap(e => e.paragraphs.map(p => p.text))),
+    [['Dear Sam,', 'Our club plants herbs.'], ['Mia opened the gate.']])
+})
+
+test('bare continuation heading still excludes reprinted prompts and scoring from essays', () => {
+  const result = referencesFixture(['读后续写',
+    '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
+    'A reprinted story.', '参考范文', 'Mia opened the gate.',
+    '评分标准', '注意内容完整。'])
+  assert.deepEqual(result.groups[0].essays.entries.flatMap(e => e.paragraphs.map(p => p.text)),
+    ['Mia opened the gate.'])
+  assert.equal(result.groups[0].scoring.entries.length, 1)
+})
+
 test('an adjacent sample label establishes writing context without a part heading', () => {
   const result = referencesFixture(['第一节', '21—23 ABC', '第二节', '36—40 ABCDE',
     '第一节', 'One possible version:', 'Dear Daniel,', 'A source application.',
