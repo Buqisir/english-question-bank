@@ -65,6 +65,24 @@ for (const rule of LINE_ROLE_RULES) {
   })
 }
 
+test('recording directions require an explicit per-recording question count', () => {
+  for (const [text, expected] of [
+    ['听下面5段录音。每段录音后有一个小题，选择答案。', 'listening.short-dialogue'],
+    ['听下面5段录音。每段录音后有几个小题，选择答案。', 'listening.long-form'],
+    ['听下面5段录音。', null],
+    ['听下面5段录音。每段录音播放两遍。', null],
+    ['听下面5段录音。每段录音后有一个小题组。', null],
+    ['听下面5段录音。每段录音后有几个小题组。', null],
+    ['听下面5段录音。每段录音后有一个小题或几个小题。', null],
+    ['听第6段录音，回答第6、7题。', null],
+  ]) {
+    const facts = computeLineFacts({ text })
+    assert.equal(firstLineRole('direction', facts)?.value ?? null, expected, text)
+    assert.equal(matchesLineRole('direction.listening-short', facts), expected === 'listening.short-dialogue', text)
+    assert.equal(matchesLineRole('direction.listening-long', facts), expected === 'listening.long-form', text)
+  }
+})
+
 test('candidate priorities are unique within each phase, preserve precedence and reject unknown rules', () => {
   assert.equal(new Set(LINE_ROLE_RULES.map(rule => rule.id)).size, LINE_ROLE_RULES.length)
   assert.equal(new Set(LINE_ROLE_RULES.map(rule => `${rule.phase}:${rule.priority}`)).size, LINE_ROLE_RULES.length)
