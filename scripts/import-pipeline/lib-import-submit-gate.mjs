@@ -23,6 +23,16 @@ export function importSubmissionIssues({ materialization, listeningReview, analy
   const quotes = /“[^”]*”|"[^"]*"|‘[^’]*’|「[^」]*」|『[^』]*』/gu
   const englishQuote = text => /[a-z]/iu.test(text) && !hasChinese(text)
   const maskEnglishQuotes = text => text.replace(quotes, quote => englishQuote(quote) ? ' '.repeat(quote.length) : quote)
+  // A Chinese gloss on an English word does not make its sentence Chinese.
+  // Keep offsets and English words; Han outside a gloss still blocks numbering.
+  const maskChineseGlosses = text => text.replace(
+    /(?<![\p{L}\p{N}_])([A-Za-z]+(?:[’'-][A-Za-z]+)*)[ \t]*(?:（([^()（）\r\n]*)）|\(([^()（）\r\n]*)\))/gu,
+    (match, word, fullWidth, halfWidth) => {
+      const inside = fullWidth ?? halfWidth
+      return hasChinese(inside) && /^[\p{Script=Han} \t…，、；：。！？—·“”‘’「」《》〈〉.,;:!?-]+$/u.test(inside)
+        ? word + ' '.repeat(match.length - word.length) : match
+    },
+  )
   function numbering(text, chunks = null) {
     return [...text.matchAll(/\(\s*\d{1,3}\s*\)/gu)].filter(match => {
       const quote = [...text.matchAll(quotes)]
@@ -40,7 +50,7 @@ export function importSubmissionIssues({ materialization, listeningReview, analy
         }
         offset += chunk.length
       }
-      local = maskEnglishQuotes(local)
+      local = maskChineseGlosses(maskEnglishQuotes(local))
       const boundary = /\(\s*\d{1,3}\s*\)|[。！？.!?;；\n]/u
       const after = local.slice(index + match[0].length).split(boundary)[0]
       // Classify the whole entry, not just its first word (DIY / BBQ).

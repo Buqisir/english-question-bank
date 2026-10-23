@@ -29,6 +29,26 @@ test('English quotes stay exempt while Han outside quotes still belongs to its e
     ['(1)', '(2)'])
 })
 
+test('English numbered sentences retain their language when words have Chinese glosses', () => {
+  for (const stem of [
+    '(20) Receive a badge(徽章) after class.',
+    '(20) Receive a badge （徽章） after class.',
+    '听力材料：(20) Receive a badge (徽章，纪念品) after class.',
+    '中文说明。(20) Receive a badge(徽章) after class.',
+    { runs: [{ text: '(20) Receive a ' }, { text: 'badge' }, { text: '(徽章) after class.' }] },
+  ]) assert.deepEqual(issues(stem), [])
+})
+
+test('Chinese instructions remain blocked beside English words with Chinese glosses', () => {
+  for (const stem of [
+    '要点：(1) 介绍 badge(徽章) 的用途；(2) DIY 活动。',
+    { runs: [{ text: '要点：(' }, { text: '1' }, { text: ') 介绍 badge(徽章) 的用途' }] },
+    '(1) Receive a badge(徽章) 并介绍它。',
+    '(1) Receive a badge(徽章 badge) after class.',
+  ]) assert.ok(issues(stem).some(issue => issue.matches.includes('(1)')))
+  assert.deepEqual(issues('要点：（1）介绍 badge(徽章) 的用途。'), [])
+})
+
 test('push preflight accepts a loaded external listening package without a raw-source sidecar', async t => {
   const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
   process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
