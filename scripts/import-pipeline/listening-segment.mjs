@@ -55,6 +55,22 @@ function slotState(receipt, expectedBinding) {
 
 // Only completed, hash-bound raw results are reusable. A queue timeout proves
 // that inference never started; acquired/missing/truncated receipts do not.
+function queueTimeoutProven(job, binding) {
+  const visited = new Set()
+  while (!visited.has(job)) {
+    visited.add(job)
+    const input = json(path.join(job, 'job-input.json'))
+    if (digestJson(input.binding) !== digestJson(binding)) return false
+    if (!input.reusedFrom) {
+      return slotState(path.join(job, 'slot-receipt.jsonl'), jobBinding(input)).code === 'ASR_QUEUE_TIMEOUT'
+    }
+    // Reused jobs have no slot receipt of their own. Follow all retained
+    // links, validating each binding; a cycle never proves an unstarted job.
+    job = path.resolve(input.reusedFrom)
+  }
+  return false
+}
+
 function previousFallback(output, binding) {
   for (const entry of readdirSync(output).filter(name => name.startsWith('attempt-')).sort().reverse()) {
     const directory = path.join(output, entry)
@@ -67,10 +83,7 @@ function previousFallback(output, binding) {
       if (existsSync(resultFile)) {
         const result = json(resultFile)
         if (result.state === 'queue_timeout') {
-          const origin = input.reusedFrom || job
-          const originInput = json(path.join(origin, 'job-input.json'))
-          if (digestJson(originInput.binding) === digestJson(binding)
-            && slotState(path.join(origin, 'slot-receipt.jsonl'), jobBinding(originInput)).code === 'ASR_QUEUE_TIMEOUT') continue
+          if (queueTimeoutProven(job, binding)) continue
           return { state: 'unknown', files: [], priorJob: job }
         }
         const files = result.files.map(item => {
@@ -81,7 +94,7 @@ function previousFallback(output, binding) {
         return { ...result, files, priorJob: job }
       }
       // Reconcile a response loss before any replay.
-      if (slotState(path.join(job, 'slot-receipt.jsonl'), jobBinding(input)).code === 'ASR_QUEUE_TIMEOUT') continue
+      if (queueTimeoutProven(job, binding)) continue
       return { state: 'unknown', files: [], priorJob: job }
     }
   }

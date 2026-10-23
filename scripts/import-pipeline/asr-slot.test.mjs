@@ -53,3 +53,33 @@ with tempfile.TemporaryDirectory(prefix='eqb-slot-') as tmp:
 `], { encoding: 'utf8', timeout: 15_000 })
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`)
 })
+
+test('standalone wrapper receipts do not precreate an exclusive transcriber output directory', () => {
+  const result = spawnSync('python3', ['-c', `
+import subprocess, tempfile, os, pathlib, json, runpy, sys
+wrapper = ${JSON.stringify(new URL('./asr-slot.py', import.meta.url).pathname)}
+target = runpy.run_path(wrapper)['timing_target']
+with tempfile.TemporaryDirectory(prefix='eqb-slot-output-') as tmp:
+    root = pathlib.Path(tmp)
+    transcriber = root/'transcribe-listening-windows.py'
+    transcriber.write_text("import pathlib,sys\\noutput = pathlib.Path(sys.argv[3])\\noutput.mkdir(parents=True, exist_ok=False)\\n(output/'completed.json').write_text('frozen output; no model loaded')\\n")
+    env = {**os.environ, 'EQB_ASR_LOCK_DIR': str(root/'locks'), 'EQB_ASR_CONCURRENCY': '1',
+        'ASR_QUEUE_TIMEOUT': '5', 'ASR_RUN_TIMEOUT': '5', 'EQB_ASR_RECEIPT': str(root/'receipts/job.jsonl')}
+    for name in ['raw', 'another-raw']:
+        output = root/'standalone'/name
+        command = [sys.executable, str(transcriber), 'audio.mp3', 'source.json', str(output)]
+        receipt, job, paper = target(command)
+        assert not output.exists()
+        completed = subprocess.run([sys.executable, wrapper, *command], env=env, capture_output=True, text=True, timeout=8)
+        assert completed.returncode == 0, completed.stderr
+        assert output.is_dir()
+        assert not receipt.is_relative_to(output), receipt
+        rows = [json.loads(line) for line in receipt.read_text().splitlines()]
+        assert [r['phase'] for r in rows] == ['started', 'acquired', 'finished']
+        original = (output/'completed.json').read_bytes()
+        repeated = subprocess.run([sys.executable, wrapper, *command], env=env, capture_output=True, text=True, timeout=8)
+        assert repeated.returncode != 0 and 'FileExistsError' in repeated.stderr
+        assert (output/'completed.json').read_bytes() == original
+`], { encoding: 'utf8', timeout: 20_000 })
+  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`)
+})

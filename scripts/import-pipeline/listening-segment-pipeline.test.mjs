@@ -330,3 +330,44 @@ test('sharing an identical raw fallback window preserves independent judgments f
   assert.deepEqual(rules.groups.map(g => g.questionNumbers), [[1], [2]])
   assert.notEqual(rules.groups[0].playback.startSeconds, rules.groups[1].playback.startSeconds)
 })
+
+test('three groups sharing a queued window can resume through retained reuse chains', t => {
+  for (const invalidChain of [null, 'cycle', 'binding_mismatch']) {
+    const { dir, options, subject } = workspace(t, { ...fixture, error: 'primary unavailable' })
+    const groups = [group,
+      { segmentId: 'listening-text-2', questionNumbers: [2], text: 'Fresh apples grow beside our quiet river.' },
+      { segmentId: 'listening-text-3', questionNumbers: [3], text: 'Please bring the red basket tomorrow morning.' }]
+    options.request.transcript = groups
+    subject.transcriptDigest = digestJson(groups)
+    const source = readJson(path.join(dir, 'source.json'))
+    source.listening.transcript = groups
+    writeFileSync(path.join(dir, 'source.json'), JSON.stringify(source))
+    const runner = offlineRunner(dir)
+    runner.mode('queue_timeout')
+    const first = segmentListening({ ...options, ...runner.options })
+    assert.equal(runner.calls(), 1, 'one shared queued job, not three inference attempts')
+    assert.ok(readJson(path.join(first.attempt, 'rule-result.json')).groups
+      .every(g => g.issues.includes('ASR_QUEUE_TIMEOUT')))
+    const secondJob = path.join(first.attempt, 'whisper-2')
+    const thirdJob = path.join(first.attempt, 'whisper-3')
+    const thirdInput = readJson(path.join(thirdJob, 'job-input.json'))
+    thirdInput.reusedFrom = invalidChain === 'cycle' ? thirdJob : secondJob
+    writeFileSync(path.join(thirdJob, 'job-input.json'), JSON.stringify(thirdInput))
+    if (invalidChain === 'binding_mismatch') {
+      const secondInput = readJson(path.join(secondJob, 'job-input.json'))
+      secondInput.binding.startSeconds = 1
+      writeFileSync(path.join(secondJob, 'job-input.json'), JSON.stringify(secondInput))
+    }
+    runner.mode('finished')
+    const resumed = segmentListening({ ...options, ...runner.options })
+    const resolved = readJson(path.join(resumed.attempt, 'rule-result.json')).groups
+    if (invalidChain) {
+      assert.equal(runner.calls(), 1, `${invalidChain} is not proof that inference never started`)
+      assert.ok(resolved.every(g => g.issues.includes('ASR_STATUS_UNKNOWN')))
+    } else {
+      assert.equal(runner.calls(), 2, 'the next schedule resumes one inference after a proven queue timeout')
+      assert.ok(resolved.every(g => !g.issues.includes('ASR_STATUS_UNKNOWN')))
+      assert.equal(resumed.usable, 1, 'each group still compares its own source against the shared raw result')
+    }
+  }
+})

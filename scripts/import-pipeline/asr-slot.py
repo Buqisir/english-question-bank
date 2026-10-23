@@ -34,7 +34,10 @@ def timing_target(command):
     if output is None:
         return None, job, paper_id
     fast = next((parent for parent in [output, *output.parents] if parent.name == "fast"), None)
-    return (fast or output) / "slot-timeline.jsonl", job, paper_id
+    # A transcriber exclusively creates its output directory. Startup receipts
+    # must live beside it, or emit("started") would create it before the child.
+    timeline = fast / "slot-timeline.jsonl" if fast else output.parent / f"{output.name}-slot-timeline.jsonl"
+    return timeline, job, paper_id
 
 
 def record_timing(target, record):
