@@ -27,7 +27,7 @@ const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*
 // without another "第…部分" heading. That divider ends the key's writing scope.
 const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u
 
-const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
+const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
@@ -165,6 +165,11 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('writing.inline-sample', 'inline-sample', 10,
     /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)\s+(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu,
     '第一节（满分15分） (One possible version)', '第一节（阅读理解） (One possible version)'),
+  // Only 作答示例 accepts the producer's optional colon/space separator.
+  // Possible Version retains its existing whitespace and parentheses rule.
+  pattern('writing.inline-answer-sample', 'inline-sample', 20,
+    /^(第[一二]节)\s*[:：]?\s*(作答示例\s*[:：]?)$/u,
+    '第一节：作答示例', '第一节：作答示例说明如下。'),
   pattern('writing.repeated-heading', 'repeated-heading', 10, /^写作\s*[:：]?$/u, '写作', '第四部分 写作'),
   pattern('writing.part', 'writing-part', 10, WRITING_PART, '第四部分 写作', '第三部分 语言知识运用'),
   pattern('writing.bare-section', 'bare-section', 10, BARE_WRITING_SECTION, '第一节', '第一节（阅读理解）'),
@@ -238,7 +243,9 @@ export function firstLineRole(phase, facts, context = {}) {
 // Capture extraction uses the same regex as its named candidate, never another
 // recognition path. These captures do not mutate the printed source text.
 export function speakerLabel(text) { return byId.get('transcript.speaker').capture(text)?.[0] || null }
-export function inlineSampleParts(text) { return byId.get('writing.inline-sample').capture(text)?.slice(1) }
+export function inlineSampleParts(text) {
+  return firstLineRole('inline-sample', computeLineFacts({ text }))?.capture(text)?.slice(1)
+}
 export function bareSectionNumber(text) { return byId.get('writing.bare-section').capture(text)?.[1] || null }
 export function watermarkMatches(text) { return byId.get('worksheet.watermark').scan(text) }
 

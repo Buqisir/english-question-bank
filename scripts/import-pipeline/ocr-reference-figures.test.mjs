@@ -43,21 +43,24 @@ function fixture({ figure = false } = {}) {
 const capture = f => buildSourceReferences(f.materialization, f.evidence, f.confirmation,
   { sourceDocuments: f.sourceDocuments })
 
-test('merged 作答示例 headings capture both writing tasks with original labels and locators', () => {
+for (const [separator, label] of [
+  ...[' ', '：', ': ', ''].map(separator => [separator, '作答示例']),
+  [' ： ', '作答示例 ：'],
+]) test(`merged headings ${JSON.stringify([separator, label])} capture both tasks and original locators`, () => {
   const f = fixture()
   f.materialization.groups.push({ groupId: 'writing:continuation', writingTask: { taskType: 'continuation' } })
   const items = f.confirmation.documents[0].pages[0].orderedItems
-  items[1].text = '第一节 作答示例'
+  items[1].text = `第一节${separator}${label}`
   items.splice(2, 1)
   const second = items.find(item => item.text === 'Possible Version 2')
-  second.text = '第二节 作答示例'
+  second.text = `第二节${separator}${label}`
   const before = structuredClone(f)
   const result = capture(f)
   for (const [index, heading] of [items[1], second].entries()) {
     const section = result.groups[index].essays
     assert.equal(section.state, 'captured')
     assert.equal(section.entries.length, 1)
-    assert.equal(section.entries[0].sourceLabel, '作答示例')
+    assert.equal(section.entries[0].sourceLabel, label)
     const observation = f.evidence.documents[0].pages[0].observations
       .find(item => item.observationId === heading.observationIds[0])
     assert.equal(section.entries[0].labelSource.locator.region.y, observation.region.y)
@@ -67,6 +70,20 @@ test('merged 作答示例 headings capture both writing tasks with original labe
     'Our design shows how we could share a cheerful moment.')
   assert.equal(result.groups[1].essays.entries[0].paragraphs[0].text, 'World Smile Day remains legitimate prose.')
   assert.deepEqual(structuredClone(f), before)
+})
+
+test('non-writing headings and explanatory suffixes cannot open a reference section', t => {
+  const diagnostics = []
+  t.mock.method(console, 'error', message => diagnostics.push(message))
+  t.mock.method(process, 'exit', code => { throw new Error(`exit:${code}`) })
+  for (const text of ['第一节 阅读理解 作答示例', '第一节：作答示例说明如下。']) {
+    const f = fixture()
+    const items = f.confirmation.documents[0].pages[0].orderedItems
+    items[1].text = text
+    items.splice(2, 1)
+    assert.throws(() => capture(f), /exit:1/, text)
+    assert.match(diagnostics.at(-1), /No answer-document section found for application/)
+  }
 })
 
 test('numbered possible versions become separate source-labeled entries', () => {

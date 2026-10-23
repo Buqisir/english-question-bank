@@ -8,8 +8,17 @@ test('作答示例 is an essay label and splits from an exact section heading', 
   assert.equal(firstLineRole('entry-label', computeLineFacts({ text: '作答示例' }))?.id, 'entry.general')
   assert.equal(firstLineRole('entry-kind', computeLineFacts({ text: '作答示例' }))?.value, 'essays')
   for (const section of ['第一节', '第二节']) {
-    assert.deepEqual(inlineSampleParts(`${section} 作答示例`), [section, '作答示例'])
+    for (const separator of [' ', '：', ': ', '']) {
+      for (const label of ['作答示例', '作答示例：', '作答示例 ：']) {
+        assert.deepEqual(inlineSampleParts(`${section}${separator}${label}`), [section, label])
+        assert.equal(firstLineRole('entry-label', computeLineFacts({ text: label }))?.id, 'entry.general')
+      }
+    }
     assert.equal(inlineSampleParts(`${section} 阅读理解 作答示例`), undefined)
+    assert.equal(inlineSampleParts(`${section}：作答示例说明如下。`), undefined)
+    for (const separator of ['', '：', ': ']) {
+      assert.equal(inlineSampleParts(`${section}${separator}(One possible version)`), undefined)
+    }
   }
   assert.equal(firstLineRole('entry-label', computeLineFacts({ text: '作答示例说明如下。' })), null)
 })

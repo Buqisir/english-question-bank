@@ -5,12 +5,15 @@ import { joinTranscriptTurns } from './ocr-proofread.mjs'
 
 const body = (texts) => texts.map((text, sourceIndex) => ({ kind: 'paragraph', text, sourceIndex }))
 
-test('section 作答示例 aliases preserve both essays and stop before scoring', () => {
+for (const [separator, label] of [
+  ...[' ', '：', ': ', ''].map(separator => [separator, '作答示例']),
+  [' ： ', '作答示例 ：'],
+]) test(`section headings ${JSON.stringify([separator, label])} preserve essays and stop before scoring`, () => {
   const issues = []
   const result = parseOfficialWritingSamples(body([
-    '第四部分 写作', '第一节 作答示例', 'Our club shares books.',
+    '第四部分 写作', `第一节${separator}${label}`, 'Our club shares books.',
     '评分原则', '只按内容评分。',
-    '第二节 作答示例', 'Mina returned the key.', '评分细则', '只按情节评分。',
+    `第二节${separator}${label}`, 'Mina returned the key.', '评分细则', '只按情节评分。',
   ]), 'answers', issues)
   assert.deepEqual(issues, [])
   assert.deepEqual(result, { application: 'Our club shares books.', continuation: 'Mina returned the key.' })
@@ -22,6 +25,7 @@ for (const [name, lines] of [
     '第二节 作答示例', 'A short story.']],
   ['empty', ['第一节 作答示例', '第二节 作答示例', 'A short story.']],
   ['unrelated section', ['第一节 阅读理解 作答示例', 'A club notice.', '第二节 作答示例', 'A short story.']],
+  ['explanatory suffix', ['第一节：作答示例说明如下。', 'A club notice.', '第二节 作答示例', 'A short story.']],
 ]) test(`作答示例 rejects ${name} boundaries`, () => {
   const issues = []
   assert.deepEqual(parseOfficialWritingSamples(body(['第四部分 写作', ...lines]), 'answers', issues),
