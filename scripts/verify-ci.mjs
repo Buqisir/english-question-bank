@@ -77,6 +77,7 @@ const registry = {
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-import-review-target.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-source-reference-scoring-v4.mjs',
   'scripts/verify-nck1-writing-notice-numbering.mjs',
   'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
   'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
@@ -281,6 +282,7 @@ const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
 const paperScripts = uniqueRegistered(
   [
     ...registry.scripts.filter((script) => paperScriptPattern.test(script)),
+    'scripts/verify-source-reference-scoring-v4.mjs',
     'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
     'scripts/verify-universal-nck1-publish.mjs',
     'scripts/verify-listening-audio-intake.mjs',

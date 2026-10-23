@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source-references-v4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "sourceDigest",
+    "candidateDigest",
+    "materializationDigest",
+    "groups"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "source-references-v4"
+    },
+    "paperId": {
+      "$ref": "source-references-v1#/properties/paperId"
+    },
+    "sourceDigest": {
+      "$ref": "source-references-v1#/$defs/digest"
+    },
+    "candidateDigest": {
+      "$ref": "source-references-v1#/$defs/digest"
+    },
+    "materializationDigest": {
+      "$ref": "source-references-v1#/$defs/digest"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "groupId",
+          "taskType",
+          "essays",
+          "scoring"
+        ],
+        "properties": {
+          "groupId": {
+            "$ref": "source-references-v1#/$defs/id"
+          },
+          "taskType": {
+            "enum": [
+              "application",
+              "continuation"
+            ]
+          },
+          "essays": {
+            "$ref": "source-references-v3#/$defs/essays"
+          },
+          "scoring": {
+            "$ref": "#/$defs/scoring"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "evidence",
+        "entries"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "captured",
+            "not_supplied",
+            "unprocessed"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "source-references-v1#/$defs/source"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "referenceId",
+              "authority",
+              "sourceLabel",
+              "labelSource",
+              "blocks"
+            ],
+            "properties": {
+              "referenceId": {
+                "$ref": "source-references-v1#/$defs/id"
+              },
+              "authority": {
+                "const": "source_reference"
+              },
+              "sourceLabel": {
+                "$ref": "source-references-v1#/$defs/section/properties/entries/items/properties/sourceLabel"
+              },
+              "labelSource": {
+                "$ref": "source-references-v1#/$defs/section/properties/entries/items/properties/labelSource"
+              },
+              "blocks": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "kind",
+                        "paragraph"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "const": "paragraph"
+                        },
+                        "paragraph": {
+                          "$ref": "source-references-v1#/$defs/section/properties/entries/items/properties/paragraphs/items"
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "kind",
+                        "tableId",
+                        "rows"
+                      ],
+                      "properties": {
+                        "kind": {
+                          "const": "table"
+                        },
+                        "tableId": {
+                          "$ref": "source-references-v1#/$defs/id"
+                        },
+                        "rows": {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "cellId",
+                                "text",
+                                "source"
+                              ],
+                              "properties": {
+                                "cellId": {
+                                  "$ref": "source-references-v1#/$defs/id"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "source": {
+                                  "$ref": "source-references-v1#/$defs/source"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "$ref": "#/$defs/figure"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "figure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "figureId",
+        "source",
+        "sourceRegionId",
+        "raster"
+      ],
+      "properties": {
+        "figureId": {
+          "$ref": "source-references-v1#/$defs/id"
+        },
+        "source": {
+          "allOf": [
+            {
+              "$ref": "source-references-v1#/$defs/source"
+            },
+            {
+              "properties": {
+                "locator": {
+                  "properties": {
+                    "kind": {
+                      "const": "page_region"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "sourceRegionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "raster": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "profile",
+            "mediaType",
+            "sha256",
+            "byteLength",
+            "pixelWidth",
+            "pixelHeight",
+            "base64"
+          ],
+          "properties": {
+            "profile": {
+              "const": "source-reference-pdf-crop-v1"
+            },
+            "mediaType": {
+              "const": "image/png"
+            },
+            "sha256": {
+              "$ref": "source-references-v1#/$defs/digest"
+            },
+            "byteLength": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2097152
+            },
+            "pixelWidth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4096
+            },
+            "pixelHeight": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4096
+            },
+            "base64": {
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 2796204
+            }
+          }
+        },
+        "kind": {
+          "const": "figure"
+        }
+      }
+    }
+  }
+}

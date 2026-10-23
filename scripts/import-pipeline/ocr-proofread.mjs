@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url'
 
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
+import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -1079,6 +1080,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
   const lineFacts = new WeakMap()
   const referenceFigures = []
   const assignedFigures = new Set()
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]))
+  let hasScoringFigures = false
   const factsFor = line => {
     if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
     return lineFacts.get(line)
@@ -1128,10 +1131,24 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       line.right = facts.right
       sourceOrder.set(line, lines.length)
       lines.push(line)
+      // Only scoring uses ordered figure blocks. The confirmed item sequence,
+      // not visualClassifications array order or page coordinates, determines
+      // placement. A table contributes its exact final confirmed item boundary.
+      const tableVisual = tableStarts.has(item.itemId)
+        ? page.visualClassifications.find(visual => visual.classification === 'semantic_table'
+          && visual.rows[0].cells[0][0] === item.itemId) : null
+      const boundary = tableVisual ? tableVisual.rows.at(-1).cells.at(-1).at(-1) : item.itemId
+      const followingFigures = referenceFigures.filter(figure => figure.source.page === page.page
+        && figure.afterItem.itemId === boundary && scoringScopes.get(boundary))
+      if (followingFigures.length > 1) throw new Error('Scoring figures sharing one anchor lack a confirmed source-object order')
+      for (const figure of followingFigures) {
+        lines.push({ figure, page: page.page, text: '', boxes: [] })
+      }
     }
   }
   const edgeTexts = new Map()
   for (const line of lines) {
+    if (line.figure) continue
     const facts = factsFor(line)
     if (!facts.atEdge) continue
     const text = facts.edgeText
@@ -1144,6 +1161,11 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
   const scope = createWritingScope(sections)
   for (const [lineIndex, line] of lines.entries()) {
     if (scope.ended) break
+    if (line.figure) {
+      if (!scope.current) throw new Error('Scoring figure has no explicit writing-task scope')
+      scope.current.lines.push(line)
+      continue
+    }
     if (line.table) {
       if (!scope.current) fail(`Source table ${line.table.tableId} has no writing-task scope`)
       scope.current.lines.push(line)
@@ -1202,7 +1224,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     // scoring tables, watermarks or the listening column elsewhere on the same page.
     const margins = new Map()
     for (const page of new Set(section.lines.map((line) => line.page))) {
-      const local = section.lines.filter((line) => line.page === page)
+      const local = section.lines.filter((line) => line.page === page && !line.figure)
       const english = local.filter((line) => matchesLineRole('writing.margin-body', factsFor(line)))
       const body = english.length ? english : local
       margins.set(page, { left: Math.min(...body.map((line) => line.left)),
@@ -1230,6 +1252,19 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     }
     for (const line of section.lines) {
       if (capture.ended) break
+      if (line.figure) {
+        const ownership = scoringScopes.get(line.figure.afterItem.itemId)
+        if (entry?.kind !== 'scoring' || !ownership || ownership.taskType !== taskType
+          || ownership.labelItemId !== entry.labelItemId) {
+          throw new Error('Reference figure has no exact scoring entry in its confirmed Writing Task')
+        }
+        flush()
+        entry.paragraphs.push({ figure: line.figure })
+        previous = null
+        previousLocation = null
+        hasScoringFigures = true
+        continue
+      }
       if (line.table) {
         if (entry?.kind !== 'scoring') fail(`Source table ${line.table.tableId} is outside a scoring entry`)
         flush()
@@ -1252,7 +1287,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         capture.start(kind)
         const index = entries[kind].length + 1
         entry = { kind, referenceId: `source-${kind === 'scoring' ? 'score' : 'ref'}-${short}-${index}`, authority: 'source_reference',
-          sourceLabel: line.text, labelSource: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
+          labelItemId: line.itemId, sourceLabel: line.text, labelSource: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
             page: line.page, region: unionRegion(line.boxes) } }, paragraphs: [] }
         entries[kind].push(entry)
         previous = null
@@ -1315,8 +1350,22 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         return { state: 'not_supplied', entries: [], evidence: pages.map((page) => ({ documentSha256,
           locator: { kind: 'page_region', documentId: answerDocument.documentId, page: page.page, region: { ...FULL_PAGE } } })) }
       }
-      return { state: 'captured', evidence: [], entries: list.map(({ kind: _kind, paragraphs, ...rest }) => {
+      return { state: 'captured', evidence: [], entries: list.map(({ kind: _kind, labelItemId: _labelItemId, paragraphs, ...rest }) => {
+        const frozenFigure = figure => {
+          const document = sourceDocuments.find(document => document.documentId === answerDocument.documentId)
+          if (!document?.bytes || sha256(document.bytes) !== documentSha256) {
+            throw new Error('Reference figure capture requires exact source PDF bytes')
+          }
+          if (assignedFigures.has(figure)) throw new Error('Reference figure occurs more than once')
+          assignedFigures.add(figure)
+          return { figureId: `source-figure-${referenceFigures.indexOf(figure) + 1}`,
+            sourceRegionId: figure.sourceRegionId,
+            source: { documentSha256, locator: figure.source },
+            raster: captureSourceReferenceFigure({ pdfBytes: document.bytes,
+              page: figure.source.page, region: figure.source.region }) }
+        }
         const blocks = paragraphs.map((item, index) => {
+          if (item.figure) return { kind: 'figure', ...frozenFigure(item.figure) }
           if (item.table) return item.table
           const byPage = new Map()
           for (const line of item.lines) {
@@ -1338,17 +1387,9 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
           if (paragraphs[index].lines.at(-1).itemId !== figure.afterItem.itemId || assignedFigures.has(figure)) {
             throw new Error('Reference figure anchor must end one surviving essay paragraph')
           }
-          const document = sourceDocuments.find(document => document.documentId === answerDocument.documentId)
-          if (!document?.bytes || sha256(document.bytes) !== documentSha256) {
-            throw new Error('Reference figure capture requires exact source PDF bytes')
-          }
-          assignedFigures.add(figure)
-          return [{ figureId: `source-figure-${referenceFigures.indexOf(figure) + 1}`,
-            afterParagraphId: blocks[index].paragraph.paragraphId,
-            sourceRegionId: figure.sourceRegionId,
-            source: { documentSha256, locator: figure.source },
-            raster: captureSourceReferenceFigure({ pdfBytes: document.bytes,
-              page: figure.source.page, region: figure.source.region }) }]
+          const { figureId, sourceRegionId, source, raster } = frozenFigure(figure)
+          return [{ figureId, afterParagraphId: blocks[index].paragraph.paragraphId,
+            sourceRegionId, source, raster }]
         }) : []
         return { ...rest, ...(kind === 'scoring' && (structuredScoring || referenceFigures.length)
           ? { blocks } : { paragraphs: blocks.map(block => block.paragraph) }),
@@ -1357,8 +1398,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  if (assignedFigures.size !== referenceFigures.length) throw new Error('Reference figure has no surviving essay anchor')
-  return { groups, review, structuredScoring, ...(referenceFigures.length ? { schemaVersion: 'source-references-v3' } : {}) }
+  if (assignedFigures.size !== referenceFigures.length) throw new Error('Reference figure has no surviving essay anchor or explicit scoring entry')
+  return { groups, review, structuredScoring, ...(referenceFigures.length ? { schemaVersion: hasScoringFigures ? 'source-references-v4' : 'source-references-v3' } : {}) }
 }
 
 // Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt

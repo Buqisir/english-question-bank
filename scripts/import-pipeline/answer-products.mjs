@@ -6,7 +6,7 @@ import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/im
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
   assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
-  sourceReferenceBlocks, structuredSourceReferencesSchema, figureSourceReferencesSchema,
+  sourceReferenceBlocks, structuredSourceReferencesSchema, figureSourceReferencesSchema, scoringFigureSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
@@ -49,12 +49,16 @@ try {
   if (command === 'prepare') {
     const structuredScoring = process.argv.includes('--structured-scoring')
     const figures = process.argv.includes('--figures')
+    const scoringFigures = process.argv.includes('--scoring-figures')
     const template = prepareSourceReferences({ ...binding, structuredScoring })
     if (figures) template.schemaVersion = 'source-references-v3'
+    if (scoringFigures) template.schemaVersion = 'source-references-v4'
     writeNew(output, `${JSON.stringify({
       schemaVersion: 'source-references-request-v1',
-      outputSchema: figures ? figureSourceReferencesSchema : structuredScoring ? structuredSourceReferencesSchema : sourceReferencesSchema,
-      ...(structuredScoring ? { schemaDependencies: [sourceReferencesSchema] } : {}),
+      outputSchema: scoringFigures ? scoringFigureSourceReferencesSchema : figures ? figureSourceReferencesSchema : structuredScoring ? structuredSourceReferencesSchema : sourceReferencesSchema,
+      ...((structuredScoring || figures || scoringFigures) ? { schemaDependencies: [sourceReferencesSchema,
+        ...(figures || scoringFigures ? [structuredSourceReferencesSchema] : []),
+        ...(scoringFigures ? [figureSourceReferencesSchema] : [])] } : {}),
       sourceDocuments: loaded.manifest.documents,
       instructions: 'Capture all source essays/labels/paragraphs and scoring references. Keep scoring paragraphs and tables in source order; each table cell needs its exact source locator and text, including empty cells. Do not flatten tables into essays or invent merged-cell structure. Source text only; no AI writing, summaries or legacy modelAnswer conversion. Review every answer-bearing document before declaring not_supplied. Keep unprocessed when incomplete. This is local capture, not Review/publication or source-fidelity approval.',
       template,
@@ -125,9 +129,11 @@ try {
           grammarRows: collect('.answer-keys--5 tr').map(row => [...row.querySelectorAll('[data-answer-number]')]
             .map(answer => Number(answer.dataset.answerNumber))),
           paragraphs: texts('[data-reference-paragraph]', 'data-reference-paragraph'),
+          figures: collect('[data-reference-figure]').map(node => ({ id: node.dataset.referenceFigure,
+            loaded: node.querySelector('img').complete && node.querySelector('img').naturalWidth > 0 })),
           cells: texts('[data-reference-cell]', 'data-reference-cell'),
-          referenceBlocks: [...new Set(collect('[data-reference-paragraph],[data-reference-table]')
-            .map(node => node.dataset.referenceParagraph ?? node.dataset.referenceTable))],
+          referenceBlocks: [...new Set(collect('[data-reference-paragraph],[data-reference-table],[data-reference-figure]')
+            .map(node => node.dataset.referenceParagraph ?? node.dataset.referenceTable ?? node.dataset.referenceFigure))],
           tableRows: collect('[data-reference-table] tr').map(row => ({
             tableId: row.closest('[data-reference-table]').dataset.referenceTable,
             cells: [...row.querySelectorAll('[data-reference-cell]')].map(cell => cell.dataset.referenceCell),
@@ -181,7 +187,13 @@ try {
               throw new Error(`Rendered source label changed: ${entry.referenceId}`)
             }
             for (const block of sourceReferenceBlocks(entry)) {
-              referenceBlocks.push(block.kind === 'table' ? block.tableId : block.paragraph.paragraphId)
+              referenceBlocks.push(block.kind === 'figure' ? block.figureId : block.kind === 'table' ? block.tableId : block.paragraph.paragraphId)
+              if (block.kind === 'figure') {
+                if (!rendered.inspection.figures.some(item => item.id === block.figureId && item.loaded)) {
+                  throw new Error(`Rendered scoring figure missing: ${block.figureId}`)
+                }
+                continue
+              }
               if (block.kind === 'table') {
                 for (const row of block.rows) {
                   tableRows.push({ tableId: block.tableId, cells: row.map(cell => cell.cellId) })
@@ -194,6 +206,12 @@ try {
                 }
               } else {
                 const { paragraph } = block
+                for (const figure of (entry.figures ?? []).filter(figure => figure.afterParagraphId === paragraph.paragraphId)) {
+                  referenceBlocks.push(figure.figureId)
+                  if (!rendered.inspection.figures.some(item => item.id === figure.figureId && item.loaded)) {
+                    throw new Error(`Rendered essay figure missing: ${figure.figureId}`)
+                  }
+                }
                 if (normalize(rendered.inspection.paragraphs[paragraph.paragraphId] || '') !== normalize(paragraph.text)) {
                   throw new Error(`Rendered source paragraph changed: ${paragraph.paragraphId}`)
                 }
