@@ -59,6 +59,29 @@ test('legacy materialization restores both listening sections from confirmed tex
   assert.deepEqual(input, original)
 })
 
+test('recording directions retain confirmed wording and distinguish one question from several', () => {
+  const input = fixture()
+  const texts = [
+    '听下面5段录音。每段录音后有一个小题，从选项中选出最佳选项。每段录音播放两遍。',
+    '听下面5段录音。每段录音后有几个小题，从选项中选出最佳选项。每段录音播放两遍。',
+  ]
+  texts.forEach((text, i) => {
+    input.confirmation.documents[0].pages[0].orderedItems[i].text = text
+    input.evidence.documents[0].pages[1].observations[i].text = text
+  })
+  const original = structuredClone(input)
+  const result = restoreOcrSourcePresentation(input)
+  assert.deepEqual(result.sourcePresentation.instructions.slice(0, 2), texts.map((text, i) => ({
+    slotId: i === 0 ? 'listening.short-dialogue' : 'listening.long-form',
+    text,
+    source: { kind: 'page_region', documentId: 'renamed-question', page: 1,
+      region: { x: 0.1, y: 0.1 + i * 0.1, width: 0.8, height: 0.05 } },
+  })))
+  assert.deepEqual(result.groups, input.materialization.groups)
+  assert.deepEqual(input, original)
+  assert.deepEqual(restoreOcrSourcePresentation({ ...input, materialization: result }), result)
+})
+
 test('existing presentation keeps manual fields, fills missing sections and is idempotent', () => {
   const input = fixture()
   const complete = restoreOcrSourcePresentation(input)
