@@ -55,6 +55,9 @@ const execFileAsync = promisify(execFile)
 const EVIDENCE_DENSITY = 144
 const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
+// Extraction output changed; retain historical sidecars/receipts unchanged.
+// This is separate from the Canonical Materialization producer's version.
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v2'
 
 function fail(message) {
   console.error(message)
@@ -1035,13 +1038,14 @@ function figureSizes(paperId) {
   console.log(JSON.stringify({ ok: true, paperId, changes }, null, 2))
 }
 
-// OCR can keep a bare section on the writing-part heading's item.
+// OCR can keep a bare or named section on the writing-part heading's item.
 export function writingSectionAfterPart(text) {
   const normalized = String(text).normalize('NFKC')
   if (!matchesLineRole('writing.part', computeLineFacts({ text: normalized }))) return null
-  const rest = normalized.replace(/^第[三四]部分[^\n)]*\)?/u, '').trim()
+  const rest = normalized.replace(/^第[三四]部分\s*[:：]?\s*写作\s*(?:\([^)]*\))?/u, '').trim()
   const number = bareSectionNumber(rest)
-  return number ? (number === '一' ? 'application' : 'continuation') : null
+  return number ? (number === '一' ? 'application' : 'continuation')
+    : firstLineRole('writing-section', computeLineFacts({ text: rest }))?.value || null
 }
 
 function joinLines(lines) {
@@ -1213,7 +1217,12 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       continue
     }
     if (matchesLineRole('writing.part-boundary', facts)) {
-      scope.enterPart(matchesLineRole('writing.part', facts), writingSectionAfterPart(line.text))
+      // NCK1's fourth part may be confirmed simply as "第四部分 / （略）".
+      // Require that exact adjacent omission; a missing heading/sample alone
+      // must still fail closed, and earlier omitted parts are not writing.
+      const omittedWritingPart = matchesLineRole('writing.bare-fourth-part', facts)
+        && lines[lineIndex + 1] && matchesLineRole('writing.omission', factsFor(lines[lineIndex + 1]), { inWriting: true })
+      scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, writingSectionAfterPart(line.text))
     } else if (scope.current) scope.current.lines.push(line)
   }
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
@@ -1236,19 +1245,20 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     let paragraph = null
     let previous = null
     let previousLocation = null
+    let awaitingSourceLabel = false
     const capture = createReferenceCapture()
     const pageSource = pageLines => ({ documentSha256, locator: {
       kind: 'page_region', documentId: answerDocument.documentId, page: pageLines[0].page,
       region: unionRegion(pageLines.flatMap(line => line.boxes)),
     } })
     const flush = () => { if (paragraph) { entry.paragraphs.push(paragraph); paragraph = null } }
-    const skip = (line, reason) => {
+    const skip = (line, reason, until = 'the next label or English line') => {
       flush()
       entry = null
       previous = null
       previousLocation = null
       capture.pause()
-      review.push({ itemId: line.itemId, issue: `${reason}; skipped until the next label or English line` })
+      review.push({ itemId: line.itemId, issue: `${reason}; skipped until ${until}` })
     }
     for (const line of section.lines) {
       if (capture.ended) break
@@ -1274,6 +1284,15 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         continue
       }
       const facts = factsFor(line)
+      // Reprinted question material and paragraph starters are not samples.
+      // Unlike commentary, their English body cannot restart capture: only
+      // the next explicit source entry label can leave this prompt scope.
+      if (taskType === 'continuation' && capture.kind !== 'scoring'
+        && matchesLineRole('writing.continuation-prompt', facts)) {
+        skip(line, 'reprinted continuation question prompt', 'the next explicit source entry label')
+        awaitingSourceLabel = true
+        continue
+      }
       // Student scripts end only this task's official-reference capture.
       if (matchesLineRole('writing.student-script', facts)) {
         capture.end()
@@ -1285,6 +1304,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }
         flush()
         capture.start(kind)
+        awaitingSourceLabel = false
         const index = entries[kind].length + 1
         entry = { kind, referenceId: `source-${kind === 'scoring' ? 'score' : 'ref'}-${short}-${index}`, authority: 'source_reference',
           labelItemId: line.itemId, sourceLabel: line.text, labelSource: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
@@ -1294,6 +1314,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         previousLocation = null
         continue
       }
+      if (awaitingSourceLabel) continue
       if (matchesLineRole('writing.commentary', facts, { entryKind: capture.kind, skipping: capture.paused })) {
         if (!capture.paused) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
         continue
@@ -1419,6 +1440,7 @@ function references(paperId) {
   console.log(JSON.stringify({
     ok: true,
     output,
+    producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
     outline: groups.map((group) => ({ taskType: group.taskType, scoring: group.scoring.state,
       essays: group.essays.entries.map((item) => `${item.sourceLabel} :: ${item.paragraphs.map((p) =>
         `${p.role}@p${p.source.locator.page}[${p.text.slice(0, 18)}…${p.text.slice(-12)}]`).join(' | ')}`) })),
