@@ -124,12 +124,13 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, timing =
       }
     })
 
-    // Planned exports move a group with its immediately preceding chrome.
+    // Planned exports move a group with its immediately preceding chrome,
+    // including grammar-fill's wrapped heading and instruction as one unit.
     // Natural preview/Print HTML never contains these markers and is untouched.
     await page.evaluate(() => {
       for (const group of document.querySelectorAll('section[data-pdf-planned-break]')) {
         let anchor = group
-        while (anchor.previousElementSibling?.matches('.section-header, .reading-meta-instruction, .page-break')) {
+        while (anchor.previousElementSibling?.matches('.section-header, .reading-meta-instruction, .page-break, .canonical-grammar-fill-opening')) {
           anchor = anchor.previousElementSibling
         }
         if (anchor !== group) {
