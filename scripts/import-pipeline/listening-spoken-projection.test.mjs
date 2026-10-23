@@ -76,17 +76,18 @@ test('anchors, critical alignment and both engines share the projection without 
   const changed = structuredClone(fixture)
   changed.result.segments[0].runs.at(-1).text = 'eight'
   assert.equal(reconcileListeningEngines(primary, evaluate(target,
-    { windows: [changed], engine: 'faster-whisper' }))[0].decision, 'review_required')
+    { windows: [changed], engine: 'faster-whisper' }))[0].decision, 'usable')
 })
 
-test('projection does not change expected readings, duplicate-window count or unexplained edge speech', () => {
+test('projection preserves readings and duplicate count while reconciliation notes isolated edge speech', () => {
   const single = evaluate(target, { windows: [fixture, structuredClone(fixture)] })
   assert.equal(single.groups[0].occurrences.length, 1)
   const twice = evaluate(target, { instructions: [{ slotId: 'listening.short-dialogue', text: '每段读两遍' }] })
+  assert.equal(twice.groups[0].decision, 'review_required')
   assert.ok(twice.groups[0].issues.includes('READING_COUNT_MISMATCH'))
   const extra = structuredClone(fixture)
   extra.result.segments[0].runs.push({ text: 'not', start: 8, end: 8.2 })
   const result = reconcileListeningEngines(single, evaluate(target, { windows: [extra], engine: 'faster-whisper' }))[0]
-  assert.equal(result.decision, 'review_required')
-  assert.ok(result.engineConflicts.some(c => c.kind === 'unassigned_edge_speech'))
+  assert.equal(result.decision, 'usable')
+  assert.ok(result.engineNotes.some(c => c.kind === 'isolated_edge_asr'))
 })

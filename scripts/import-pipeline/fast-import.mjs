@@ -29,6 +29,7 @@ import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNi
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
 import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
+import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -598,17 +599,36 @@ async function afterProofread(ctx, args) {
     return { summaryParts: ctx.state.data.summaryParts.length, listeningParts: ctx.state.data.listeningParts?.length ?? 0 }
   })
   if (hasListening(ctx)) {
+    const cached = ctx.state.steps['asr-apple-rule-v2']
+    if (cached?.finishedAt) {
+      const attempt = cached.result?.attempt
+      const ruleFile = attempt && path.join(attempt, 'rule-result.json')
+      const inputFile = attempt && path.join(attempt, 'input.json')
+      if (!ruleFile || !existsSync(ruleFile)
+        || readJson(ruleFile).rule.version !== LISTENING_SEGMENT_RULE.version
+        || !existsSync(inputFile)
+        || readJson(inputFile).ruleCodeSha256 !== sha256(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs')))) {
+        throw new Stop(`听力缓存属于历史规则；保留旧证据，用当前规则重算（不运行 ASR）：\n`
+          + `fast-import.mjs after-proofread ${ctx.paperId} --redo-from asr-apple-rule-v2`
+          + ` --listening-replay-attempt ${attempt || '<保留的 attempt 目录>'}`)
+      }
+    }
     await step(ctx, 'asr-apple-rule-v2', async () => {
-      for (const name of startAsr(ctx)) {
+      const replayAttempt = option(args, '--listening-replay-attempt')
+      if (args.includes('--listening-replay-attempt') && (!replayAttempt || replayAttempt.startsWith('--'))) {
+        fail('--listening-replay-attempt 需要保留的 attempt 目录；未启动 ASR')
+      }
+      for (const name of replayAttempt ? [] : startAsr(ctx)) {
         const ready = () => existsSync(path.join(ctx.fast, name, 'completed.json'))
           && readJson(path.join(ctx.fast, name, 'completed.json')).audioSha256
             === sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))
         if (!ready()) await waitBackground(ctx, name, ready)
       }
-      const primary = readJson(path.join(ctx.fast, 'asr-apple-v2/completed.json'))
+      const primary = replayAttempt ? null : readJson(path.join(ctx.fast, 'asr-apple-v2/completed.json'))
       const result = await run(ctx, 'listening-segment-v2', cli('listening-segment.mjs',
         '--paper-dir', ctx.paperDir, '--request', path.join(ctx.fast, 'listening-review-request.json'),
-        '--apple-evidence', primary.evidence, '--output', path.join(ctx.fast, 'listening-segment-attempts')))
+        ...(replayAttempt ? ['--replay-attempt', path.resolve(replayAttempt)] : ['--apple-evidence', primary.evidence]),
+        '--output', path.join(ctx.fast, 'listening-segment-attempts')))
       ctx.state.data.listeningSegmentAttempt = result
       // An old cached installation must not survive a fresh stricter rule run.
       // Preserve the old sidecar and require finish to install this attempt.

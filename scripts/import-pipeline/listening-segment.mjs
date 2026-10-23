@@ -7,7 +7,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
-  LISTENING_SEGMENT_RULE, LISTENING_EQUIVALENCES, evaluateListeningEngine, reconcileListeningEngines,
+  LISTENING_SEGMENT_RULE, LISTENING_EQUIVALENCES, evaluateListeningEngine, expectedListeningReadings, reconcileListeningEngines,
 } from './lib-listening-segment-rule.mjs'
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
@@ -122,6 +122,28 @@ export function parseListeningPauses(stderr, durationSeconds) {
   return pauses.filter(p => p.endSeconds > p.startSeconds)
 }
 
+export function measureListeningSilence(audio, durationSeconds) {
+  const detected = spawnSync('ffmpeg', ['-hide_banner', '-nostats', '-i', audio,
+    '-af', `silencedetect=noise=${LISTENING_SEGMENT_RULE.silenceThresholdDb}dB:d=${LISTENING_SEGMENT_RULE.minimumSilenceSeconds}`,
+    '-f', 'null', '-'], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
+  return { status: detected.status, error: detected.error?.message || null, stderr: detected.stderr || '',
+    pauses: detected.status === 0 ? parseListeningPauses(detected.stderr, durationSeconds) : [],
+    method: { noiseDb: LISTENING_SEGMENT_RULE.silenceThresholdDb,
+      minimumSilenceSeconds: LISTENING_SEGMENT_RULE.minimumSilenceSeconds } }
+}
+
+export function remeasureListeningReplaySilence(audio, durationSeconds, saved) {
+  if (saved.method?.noiseDb !== LISTENING_SEGMENT_RULE.silenceThresholdDb
+    || saved.method?.minimumSilenceSeconds !== LISTENING_SEGMENT_RULE.minimumSilenceSeconds) {
+    throw new Error('LISTENING_REPLAY_SILENCE_SETTINGS_CHANGED')
+  }
+  const measured = measureListeningSilence(audio, durationSeconds)
+  if (measured.status !== 0) throw new Error('LISTENING_REPLAY_SILENCE_MEASUREMENT_FAILED')
+  if (saved.status !== 0 || digestJson(saved.pauses ?? parseListeningPauses(saved.stderr, durationSeconds))
+    !== digestJson(measured.pauses)) throw new Error('LISTENING_REPLAY_SILENCE_CHANGED')
+  return measured
+}
+
 function engineDescriptor(file, bytes, record, durationSeconds) {
   const engine = record.engine || {}
   const failed = Boolean(record.error) || !(record.result?.segments || record.segments)?.length
@@ -138,7 +160,7 @@ function engineDescriptor(file, bytes, record, durationSeconds) {
 // One attempt, one retained primary. Identical raw fallback work is shared;
 // every group still receives an independent source comparison.
 export function segmentListening({ paperDir, request, appleEvidence, output, whisperPython, whisperModel, pauses = null,
-  runWhisper = null, fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled }) {
+  runWhisper = null, replayAttempt = null, fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled }) {
   mkdirSync(output, { recursive: true })
   assertListeningDiskSpace(output)
   const attemptId = `${new Date().toISOString().replace(/[:.]/gu, '-')}-${randomUUID().slice(0, 8)}`
@@ -171,27 +193,74 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     evidence.push(engineDescriptor(relative, readFileSync(target), record, durationSeconds))
     return { ...record, evidencePaths: [relative] }
   }
+  // Rule-only replay has no path to an inference runner, model lookup or job
+  // scheduler. Historical receipts remain untouched; only raw bytes are reused.
+  let historical = null
+  if (replayAttempt) {
+    if (runWhisper) throw new Error('LISTENING_REPLAY_CANNOT_RUN_ASR')
+    const input = json(path.join(replayAttempt, 'input.json'))
+    const review = json(path.join(replayAttempt, 'review.json'))
+    if (digestJson(input.subject) !== digestJson(subject)
+      || digestJson(review.subject) !== digestJson(subject)
+      || input.materializationSha256 !== digest(materializationBytes)
+      || input.sourceTextSha256 !== digest(Buffer.from(JSON.stringify(groups)))) {
+      throw new Error('LISTENING_REPLAY_INPUT_BINDING_MISMATCH')
+    }
+    for (const item of review.evidence) {
+      if (!/^listening-review-evidence\/[^/\\\\]+\.json$/u.test(item.path)) {
+        throw new Error('LISTENING_REPLAY_EVIDENCE_PATH_INVALID')
+      }
+      const bytes = readFileSync(path.join(replayAttempt, item.path))
+      if (digest(bytes) !== item.sha256 || bytes.length !== item.byteLength) {
+        throw new Error('LISTENING_REPLAY_EVIDENCE_CHANGED')
+      }
+    }
+    const oldGroups = json(path.join(replayAttempt, 'apple-rule.json')).groups
+    if (groups.some(group => {
+      const old = oldGroups.find(g => g.segmentId === group.segmentId)
+      const expected = expectedListeningReadings(group, instructions)
+      return !old || old.sourceText !== group.text
+        || digestJson(old.sources) !== digestJson(expected.sources)
+    })) throw new Error('LISTENING_REPLAY_INSTRUCTIONS_CHANGED')
+    historical = { input, review, oldGroups }
+    appleEvidence = path.join(replayAttempt, review.evidence.find(e =>
+      e.path.endsWith('-apple.json'))?.path || 'missing-apple-evidence')
+  }
   const primaryWindow = retain(appleEvidence, 'apple')
   if (primaryWindow.audioSha256 !== audioHash) throw new Error('LISTENING_APPLE_INPUT_BINDING_MISMATCH')
   const playbackEndSeconds = Math.min(durationSeconds, primaryWindow.endSeconds ?? durationSeconds)
-  write(path.join(attempt, 'input.json'), {
+  const ruleCodeSha256 = digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs')))
+  const input = {
     rule: { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }, normalization: LISTENING_EQUIVALENCES,
     normalizationAlgorithm: 'listening-equivalences-v4; source-preserving listening-spoken-projection-v1 (recorded exclusions and source locations); finite spelling aliases and negative/positive auxiliary contractions; context-bound s/d expansions (ambiguous s/d retained); integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; typed year/time/cardinal/ordinal expressions; year equivalence requires a four-digit literal and an explicit word reading (2001..2099), standalone or in year context; shared source/ASR character spans, original acoustic run boundaries',
     sourceTextSha256: digest(Buffer.from(JSON.stringify(groups))),
     materializationSha256: digest(materializationBytes), audioSha256: audioHash,
-    ruleCodeSha256: digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs'))),
+    ruleCodeSha256,
     adapterSha256: digest(readFileSync(fileURLToPath(import.meta.url))), subject,
-  })
-  if (pauses === null) {
-    // Keep full stderr, including silence detections, under this immutable attempt.
-    const detected = spawnSync('ffmpeg', ['-hide_banner', '-nostats', '-i', audio,
-      '-af', `silencedetect=noise=${LISTENING_SEGMENT_RULE.silenceThresholdDb}dB:d=${LISTENING_SEGMENT_RULE.minimumSilenceSeconds}`,
-      '-f', 'null', '-'], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
-    write(path.join(attempt, 'silence.json'), { status: detected.status, error: detected.error?.message || null,
-      stderr: detected.stderr || '', method: { noiseDb: LISTENING_SEGMENT_RULE.silenceThresholdDb,
-        minimumSilenceSeconds: LISTENING_SEGMENT_RULE.minimumSilenceSeconds } })
-    pauses = detected.status === 0 ? parseListeningPauses(detected.stderr, durationSeconds) : []
+    ...(historical ? { historicalAttempt: path.resolve(replayAttempt),
+      historicalRuleVersion: historical.input.rule.version, inference: 'not_run',
+      ruleCacheKey: digestJson({ subject, rule: LISTENING_SEGMENT_RULE, ruleCodeSha256, fuzzyAnchors }) } : {}),
   }
+  if (historical) {
+    const bytes = readFileSync(path.join(replayAttempt, 'silence.json'))
+    if (historical.input.silenceSha256 && historical.input.silenceSha256 !== digest(bytes)) {
+      throw new Error('LISTENING_REPLAY_SILENCE_CHANGED')
+    }
+    const silence = remeasureListeningReplaySilence(audio, durationSeconds, JSON.parse(bytes))
+    silence.historicalSha256 = digest(bytes)
+    write(path.join(attempt, 'silence.json'), silence)
+    pauses = silence.pauses
+  }
+  if (!historical && pauses !== null) write(path.join(attempt, 'silence.json'), {
+    status: 0, pauses, method: { noiseDb: LISTENING_SEGMENT_RULE.silenceThresholdDb,
+      minimumSilenceSeconds: LISTENING_SEGMENT_RULE.minimumSilenceSeconds, supplied: true } })
+  if (pauses === null) {
+    const silence = measureListeningSilence(audio, durationSeconds)
+    write(path.join(attempt, 'silence.json'), silence)
+    pauses = silence.pauses
+  }
+  input.silenceSha256 = fileDigest(path.join(attempt, 'silence.json'))
+  write(path.join(attempt, 'input.json'), input)
   const base = { groups, instructions, pauses, durationSeconds, fuzzyAnchors,
     questions: materialization.listening.questions, globalAnchorWindows: [primaryWindow] }
   const apple = evaluateListeningEngine({ ...base, windows: [primaryWindow] })
@@ -200,6 +269,17 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   const scheduled = new Map()
   let modelSha256
   for (const [index, failed] of apple.groups.entries()) {
+    if (historical) {
+      const number = Number(failed.segmentId.match(/(\d+)$/u)[1])
+      const retained = historical.review.evidence.filter(e =>
+        e.path.includes(`-whisper-${number}-`) && (e.kind === 'asr_window' || e.path.endsWith('-failure.json')))
+      if (!retained.length) continue
+      const windows = retained.map((e, i) => retain(path.join(replayAttempt, e.path), `whisper-${number}-${i}`))
+      fallback.push(...evaluateListeningEngine({ ...base,
+        groups: groups.filter(g => g.segmentId === failed.segmentId), corpus: groups, windows,
+        requireWholePaper: false, engine: 'faster-whisper' }).groups)
+      continue
+    }
     if (failed.decision === 'usable') continue
     assertListeningDiskSpace(attempt)
     const previous = apple.groups.slice(0, index).filter(g => g.independentlyAnchored && g.decision === 'usable').flatMap(g => g.occurrences)
@@ -351,9 +431,13 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     method: 'asr_source_comparison', evidence,
     groups: resolved.map(group => ({
       segmentId: group.segmentId, questionNumbers: group.questionNumbers, decision: group.decision,
-      reason: group.decision === 'usable' ? `${LISTENING_SEGMENT_RULE.version}：正文、次数、顺序及完整播放边界有证据`
+      reason: group.decision === 'usable' ? `${LISTENING_SEGMENT_RULE.version}：原文为准，实际 ${group.occurrences.length} 遍，正文、顺序及完整播放边界有证据`
         : `${LISTENING_SEGMENT_RULE.version}：${group.issues.join(', ')}`,
-      limits: ['仅 ASR 与权威原文对照；非直接听审、逐字认证或全录音安全认证。'],
+      limits: ['仅 ASR 与权威原文对照；非直接听审、逐字认证或全录音安全认证。',
+        ...(group.notes?.length ? [`记录性差异：${group.notes.join(', ')}`] : []),
+        ...(group.engineNotes?.length ? ['两引擎字词差异已记录；不据此改写原文。'] : []),
+        ...(group.readingCountEvidence?.instructionCorrectionRequired
+          ? ['新交付卷面须通过 listening-instruction-correction 校正遍数说明；保留原 PDF、音频和旧 revision。'] : [])],
       playback: group.playback,
       occurrences: group.decision === 'usable' ? group.occurrences.map(o => ({
         ...o.playback, evidencePaths: o.evidencePaths,
@@ -364,7 +448,7 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     throw new Error('LISTENING_INPUT_CHANGED')
   }
   write(path.join(attempt, 'review.json'), review)
-  return { attempt, review: path.join(attempt, 'review.json'), groups: resolved.length,
+  return { attempt, review: path.join(attempt, 'review.json'), ruleVersion: LISTENING_SEGMENT_RULE.version, groups: resolved.length,
     usable: resolved.filter(g => g.decision === 'usable').length,
     reviewRequired: resolved.filter(g => g.decision !== 'usable').length, fallbackGroups: fallback.length }
 }
@@ -372,13 +456,17 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
 // Kept outside the pure rule module so Linux fixture tests need no Apple APIs.
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const option = name => process.argv[process.argv.indexOf(name) + 1]
-  const required = ['--paper-dir', '--request', '--apple-evidence', '--output']
+  const required = ['--paper-dir', '--request', '--output',
+    process.argv.includes('--replay-attempt') ? '--replay-attempt' : '--apple-evidence']
   if (required.some(name => !process.argv.includes(name))) throw new Error(`Required: ${required.join(' ')}`)
   const venv = process.env.EQB_ASR_VENV || path.join(homedir(), '.local/share/eqbank-listening-asr')
   const model = process.env.EQB_ASR_MODEL || path.join(homedir(),
     '.cache/huggingface/hub/models--Systran--faster-whisper-small.en/snapshots/d1d751a5f8271d482d14ca55d9e2deeebbae577f')
   console.log(JSON.stringify(segmentListening({ paperDir: path.resolve(option('--paper-dir')),
-    request: json(option('--request')), appleEvidence: path.resolve(option('--apple-evidence')),
+    request: json(option('--request')),
+    ...(process.argv.includes('--replay-attempt')
+      ? { replayAttempt: path.resolve(option('--replay-attempt')) }
+      : { appleEvidence: path.resolve(option('--apple-evidence')) }),
     output: path.resolve(option('--output')), whisperPython: path.join(venv, 'bin/python'), whisperModel: model,
     fuzzyAnchors: process.argv.includes('--no-fuzzy-anchors') ? false
       : process.argv.includes('--fuzzy-anchors') ? true : LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled }), null, 2))

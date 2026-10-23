@@ -44,10 +44,17 @@ test('same final there with overlapping timestamps and a shared later pause is o
   crossesPause[0].end = 4.7
   assert.equal(reconcileListeningEngines(primary, run(crossesPause, endPauses,
     {groups: [group(1, text), group(2, nextText)], engine: 'faster-whisper'}))[0].decision, 'review_required')
-  for (const prompt of ['Text Two', '请准备', 'note', 'there']) {
+  for (const prompt of ['Text Two', '请准备']) {
     const extra = run([...shifted, segment(prompt, 4.5, 0.1)], endPauses,
       {groups: [group(1, text), group(2, nextText)], engine: 'faster-whisper'})
     assert.equal(reconcileListeningEngines(primary, extra)[0].decision, 'review_required', prompt)
+  }
+  for (const word of ['note', 'there']) {
+    const extra = run([...shifted, segment(word, 4.5, 0.1)], endPauses,
+      {groups: [group(1, text), group(2, nextText)], engine: 'faster-whisper'})
+    const result = reconcileListeningEngines(primary, extra)[0]
+    assert.equal(result.decision, 'usable', word)
+    assert.ok(result.engineNotes.some(n => n.kind === 'isolated_edge_asr'))
   }
 })
 test('Astra: a farther ending pause cannot include Text Two between 4.200 and 4.620', () => {
@@ -74,16 +81,21 @@ test('unclassified and Chinese timed prompts in any observed window also obstruc
     }
   }
 })
-test('reconciliation cannot approve a primary boundary across speech observed only by the other engine', () => {
+test('reconciliation notes isolated other-engine words; missing group evidence cannot grant the exception', () => {
   const clean = [segment(firstText, 2), segment(nextText, 8.2)]
   const primary = run(clean, endPauses)
   assert.equal(primary.groups[0].decision, 'usable')
   const secondary = run([...clean, segment('note', 4.25, 0.3)], endPauses, {engine: 'faster-whisper'})
   for (const fallback of [secondary, {groups: [secondary.groups[1]]}]) {
     const resolved = reconcileListeningEngines(primary, fallback)
-    assert.equal(resolved[0].decision, 'review_required')
-    assert.ok(resolved[0].issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
-    assert.equal(resolved[0].playback, null)
+    if (fallback === secondary) {
+      assert.equal(resolved[0].decision, 'usable')
+      assert.ok(resolved[0].engineNotes.some(n => n.kind === 'isolated_edge_asr'))
+    } else {
+      assert.equal(resolved[0].decision, 'review_required')
+      assert.ok(resolved[0].issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
+      assert.equal(resolved[0].playback, null)
+    }
     assert.equal(primary.groups[0].decision, 'usable')
     assert.ok(primary.groups[0].occurrences[0].playback)
   }

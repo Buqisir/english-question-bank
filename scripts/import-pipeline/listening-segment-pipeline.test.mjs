@@ -13,12 +13,12 @@ const fixture = JSON.parse(readFileSync(new URL('./fixtures/listening-apple-run-
 const group = { segmentId: 'listening-text-1', questionNumbers: [1],
   text: 'M: Could you bring the blue folder to the station before the morning train leaves?\nW: Yes I will meet you there at seven.' }
 const pauses = [{ startSeconds: 0, endSeconds: 1.9 }, { startSeconds: 6.9, endSeconds: 10 }]
-function workspace(t, primary) {
+function workspace(t, primary, measurableAudio = false) {
   const scratch = path.resolve('.scratch')
   mkdirSync(scratch, { recursive: true })
   const dir = mkdtempSync(path.join(scratch, 'listening-v2-test-'))
   t.after(() => rmSync(dir, { recursive: true, force: true }))
-  const audio = Buffer.from('synthetic audio hash binding; no actual decoder needed in frozen-output test')
+  const audio = measurableAudio ? syntheticWave() : Buffer.from('synthetic audio hash binding; no actual decoder needed in frozen-output test')
   mkdirSync(path.join(dir, 'materialization/listening-audio'), { recursive: true })
   writeFileSync(path.join(dir, 'materialization/listening-audio/playback.mp3'), audio)
   const materialization = { paperId: 'paper-synthetic', listening: { state: 'captured', transcript: [group] },
@@ -37,6 +37,18 @@ function workspace(t, primary) {
   return { dir, subject, options: { paperDir: dir, request, appleEvidence, output: path.join(dir, 'attempts'),
     pauses, whisperPython: 'unused', whisperModel: 'frozen-synthetic' } }
 }
+function syntheticWave() {
+  const rate = 8000, samples = rate * 30, bytes = Buffer.alloc(44 + samples * 2)
+  bytes.write('RIFF'); bytes.writeUInt32LE(bytes.length - 8, 4); bytes.write('WAVEfmt ', 8)
+  bytes.writeUInt32LE(16, 16); bytes.writeUInt16LE(1, 20); bytes.writeUInt16LE(1, 22)
+  bytes.writeUInt32LE(rate, 24); bytes.writeUInt32LE(rate * 2, 28)
+  bytes.writeUInt16LE(2, 32); bytes.writeUInt16LE(16, 34)
+  bytes.write('data', 36); bytes.writeUInt32LE(samples * 2, 40)
+  for (let i = rate * 2; i < rate * 6.8; i++) {
+    bytes.writeInt16LE(Math.round(4000 * Math.sin(2 * Math.PI * 440 * i / rate)), 44 + i * 2)
+  }
+  return bytes
+}
 test('successful frozen Apple evidence produces a sidecar accepted by the unchanged server contract', t => {
   const { dir, subject, options } = workspace(t, fixture)
   const result = segmentListening({ ...options, runWhisper: () => assert.fail('usable primary must not run fallback') })
@@ -46,6 +58,51 @@ test('successful frozen Apple evidence produces a sidecar accepted by the unchan
   assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
   writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
   assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
+})
+test('rule-only replay retains historical raw bytes and never opens an ASR runner or model', t => {
+  const { subject, options } = workspace(t, {...fixture, error: 'primary unavailable'}, true)
+  options.pauses = null
+  const first = segmentListening({...options, runWhisper: () => fixture})
+  const oldInput = readJson(path.join(first.attempt, 'input.json'))
+  oldInput.rule.version = 'listening-segment-rule-v3'
+  writeFileSync(path.join(first.attempt, 'input.json'), JSON.stringify(oldInput))
+  const oldBytes = readFileSync(first.review)
+  const originalEvidence = readJson(first.review).evidence.map(e => ({
+    path: e.path, bytes: readFileSync(path.join(first.attempt, e.path)),
+  }))
+  const replay = {...options, replayAttempt: first.attempt, appleEvidence: 'must-not-be-read',
+    whisperPython: '/no-python-may-be-opened', whisperModel: '/no-model-may-be-opened'}
+  const result = segmentListening(replay)
+  assert.equal(result.usable, 1)
+  const input = readJson(path.join(result.attempt, 'input.json'))
+  assert.equal(input.rule.version, 'listening-segment-rule-v4')
+  assert.equal(input.historicalRuleVersion, 'listening-segment-rule-v3')
+  assert.equal(input.inference, 'not_run')
+  assert.match(input.ruleCacheKey, /^sha256:/u)
+  assert.equal(input.silenceSha256, hash(readFileSync(path.join(result.attempt, 'silence.json'))))
+  validateListeningReview(result.attempt, readJson(result.review), subject, [group])
+  assert.deepEqual(readFileSync(first.review), oldBytes)
+  for (const e of originalEvidence) assert.deepEqual(readFileSync(path.join(first.attempt, e.path)), e.bytes)
+  assert.throws(() => segmentListening({...replay, runWhisper: () => assert.fail('no inference')}),
+    /LISTENING_REPLAY_CANNOT_RUN_ASR/u)
+  const changed = structuredClone(options.request)
+  changed.sourceInstructions[0].text = '读两遍'
+  assert.throws(() => segmentListening({...replay, request: changed}),
+    /LISTENING_REPLAY_INSTRUCTIONS_CHANGED/u)
+  const silenceFile = path.join(first.attempt, 'silence.json'), silenceBytes = readFileSync(silenceFile)
+  const changedSilence = JSON.parse(silenceBytes)
+  changedSilence.pauses[0].endSeconds += 0.2
+  writeFileSync(silenceFile, JSON.stringify(changedSilence))
+  assert.throws(() => segmentListening(replay), /LISTENING_REPLAY_SILENCE_CHANGED/u)
+  // Historical attempts without a digest still require an acoustic remeasurement.
+  const legacyInput = {...oldInput}; delete legacyInput.silenceSha256
+  writeFileSync(path.join(first.attempt, 'input.json'), JSON.stringify(legacyInput))
+  assert.throws(() => segmentListening(replay), /LISTENING_REPLAY_SILENCE_CHANGED/u)
+  writeFileSync(silenceFile, silenceBytes)
+  writeFileSync(path.join(first.attempt, 'input.json'), JSON.stringify(oldInput))
+  const raw = originalEvidence.find(e => e.path.includes('-whisper-'))
+  writeFileSync(path.join(first.attempt, raw.path), '{}')
+  assert.throws(() => segmentListening(replay), /LISTENING_REPLAY_EVIDENCE_CHANGED/u)
 })
 test('failed primary gets exactly one fallback; reruns append attempts without changing old evidence', t => {
   const { options, subject } = workspace(t, { ...fixture, error: 'Apple fixture engine failed', result: { segments: [] } })
@@ -124,7 +181,7 @@ test('two readings sharing one silence produce nonoverlapping occurrences accept
   assert.ok(review.groups[0].occurrences[0].endSeconds <= review.groups[0].occurrences[1].startSeconds)
   assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
 })
-test('missing first tail falls back once to two complete readings; critical partial evidence still blocks submit', t => {
+test('missing first tail falls back once to complete readings; internal word differences are retained notes', t => {
   for (const critical of [false, true]) {
     const full = structuredClone(fixture)
     const second = structuredClone(full.result.segments[0])
@@ -146,19 +203,37 @@ test('missing first tail falls back once to two complete readings; critical part
     const review = JSON.parse(readFileSync(result.review, 'utf8'))
     validateListeningReview(result.attempt, review, subject, [group])
     writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
-    if (critical) {
-      assert.equal(result.usable, 0)
-      assert.equal(review.groups[0].playback, null)
-      assert.throws(() => assertImportSubmissionReady(dir), {code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE'})
-    } else {
-      assert.equal(result.usable, 1)
-      assert.equal(review.groups[0].occurrences.length, 2)
-      const rules = JSON.parse(readFileSync(path.join(result.attempt, 'rule-result.json'), 'utf8'))
-      assert.equal(rules.groups[0].selectedEngine, 'faster-whisper')
-      assert.equal(rules.groups[0].engineAttempts[0].occurrences.length, 1)
-      assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
-    }
+    assert.equal(result.usable, 1)
+    assert.equal(review.groups[0].occurrences.length, 2)
+    const rules = JSON.parse(readFileSync(path.join(result.attempt, 'rule-result.json'), 'utf8'))
+    assert.equal(rules.groups[0].selectedEngine, 'faster-whisper')
+    assert.equal(rules.groups[0].engineAttempts[0].occurrences.length, 1)
+    if (critical) assert.ok(rules.groups[0].engineNotes.length)
+    assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
   }
+})
+test('a second reading with both anchors misrecognized must still invoke the frozen Whisper fallback', t => {
+  const text = 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over there'
+  const parts = [2, 12].map(start => ({start, end: start + text.split(' ').length * 0.2, text,
+    words: text.split(' ').map((word, i) => ({word, start: start + i * 0.2, end: start + (i + 1) * 0.2}))}))
+  const full = {startSeconds: 0, endSeconds: 30, result: {segments: parts}}, primary = structuredClone(full)
+  primary.result.segments[1].words[0].word = 'Blazing'
+  primary.result.segments[1].words.at(-1).word = 'here'
+  primary.result.segments[1].text = text.replace('Bright', 'Blazing').replace('over there', 'over here')
+  const {subject, options} = workspace(t, primary)
+  options.request.transcript = [{...group, text}]
+  subject.transcriptDigest = digestJson(options.request.transcript)
+  options.request.sourceInstructions[0].text = '每段录音读两遍。'
+  let calls = 0
+  const result = segmentListening({...options,
+    pauses: parts.flatMap(s => [{startSeconds: s.start - 1, endSeconds: s.start - 0.05},
+      {startSeconds: s.end + 0.05, endSeconds: s.end + 1}]),
+    runWhisper: () => { calls++; return full }})
+  assert.equal(calls, 1)
+  const apple = readJson(path.join(result.attempt, 'apple-rule.json')).groups[0]
+  assert.equal(apple.decision, 'review_required')
+  assert.ok(apple.issues.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.usable, 1, 'the independently complete fallback may prove both readings')
 })
 test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
   const { options, dir, subject } = workspace(t, fixture)
@@ -169,6 +244,8 @@ test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
   subject.transcriptDigest = digestJson(groups)
   const tokens = other.text.toLowerCase().replace('.', '').split(' ')
   const primary = JSON.parse(readFileSync(options.appleEvidence, 'utf8'))
+  primary.result.segments[0].runs.at(-1).text = 'eight'
+  tokens[tokens.length - 1] = 'winter'
   primary.result.segments.push({ text: other.text, start: 15, end: 18,
     words: tokens.map((word, i) => ({ word, start: 15 + i * 0.2, end: 15 + (i + 1) * 0.2 })) })
   writeFileSync(options.appleEvidence, JSON.stringify(primary))
