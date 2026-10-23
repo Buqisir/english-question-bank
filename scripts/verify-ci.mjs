@@ -330,7 +330,6 @@ const featureScripts = uniqueRegistered([
   'scripts/verify-h11a-http-client.mjs',
 ])
 const importPaperScripts = uniqueRegistered([
-  'scripts/verify-source-reference-scoring-v4.mjs',
   'scripts/verify-import-pagination-qa.mjs',
   'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-listening-signal.mjs',
