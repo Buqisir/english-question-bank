@@ -82,7 +82,13 @@ jobs:
               echo "::error::System dependency download failed after two bounded attempts"
               exit 1
             fi
-            echo "::warning::System dependency download failed or timed out; retrying once"
+            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
+            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+              if [ -f "$source" ]; then
+                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
+              fi
+            done
+            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
           done
           sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
           /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
@@ -173,7 +179,13 @@ jobs:
               echo "::error::System dependency download failed after two bounded attempts"
               exit 1
             fi
-            echo "::warning::System dependency download failed or timed out; retrying once"
+            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
+            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+              if [ -f "$source" ]; then
+                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
+              fi
+            done
+            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
           done
           sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
           /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
@@ -427,7 +439,13 @@ jobs:
               echo "::error::System dependency download failed after two bounded attempts"
               exit 1
             fi
-            echo "::warning::System dependency download failed or timed out; retrying once"
+            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
+            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+              if [ -f "$source" ]; then
+                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
+              fi
+            done
+            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
           done
           sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
           /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
@@ -536,7 +554,13 @@ jobs:
               echo "::error::System dependency download failed after two bounded attempts"
               exit 1
             fi
-            echo "::warning::System dependency download failed or timed out; retrying once"
+            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
+            for source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+              if [ -f "$source" ]; then
+                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
+              fi
+            done
+            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
           done
           sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
           /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
