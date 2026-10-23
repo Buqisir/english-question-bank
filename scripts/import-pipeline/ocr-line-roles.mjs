@@ -158,10 +158,10 @@ export const LINE_ROLE_RULES = Object.freeze([
     Boolean(firstLineRole('entry-label', f)) && ESSAY_LABEL.test(f.text),
   '参考范文（80词）', '二、评分原则'),
   pattern('writing.inline-sample', 'inline-sample', 10,
-    /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)\s+(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu,
+    /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)(?:\s+|(?<=[）)]))(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu,
     '第一节（满分15分） (One possible version)', '第一节（阅读理解） (One possible version)'),
   // Only 作答示例 accepts the producer's optional colon/space separator.
-  // Possible Version retains its existing whitespace and parentheses rule.
+  // A score parenthesis also separates a touching parenthesized sample label.
   pattern('writing.inline-answer-sample', 'inline-sample', 20,
     /^(第[一二]节)\s*[:：]?\s*(作答示例\s*[:：]?)$/u,
     '第一节：作答示例', '第一节：作答示例说明如下。'),
@@ -171,6 +171,8 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('writing.bare-section', 'bare-section', 10, BARE_WRITING_SECTION, '第一节', '第一节（阅读理解）'),
   pattern('writing.application', 'writing-section', 10, WRITING_SECTION[0][1], '第一节（应用文）', '第一节（阅读理解）', { value: 'application' }),
   pattern('writing.continuation', 'writing-section', 20, WRITING_SECTION[1][1], '第二节 读后续写', '第二节(语法填空)', { value: 'continuation' }),
+  pattern('writing.bare-continuation', 'writing-section', 25, /^读后续写\s*[:：]?$/u,
+    '读后续写', '读后续写评分标准', { value: 'continuation' }),
   rule('writing.numbered-application', 'writing-section', 30, f => NUMBERED_APPLICATION_SECTION.test(f.nfkc),
     '（二）应用文写作', '（二）语法适用', { value: 'application' }),
   rule('writing.numbered-continuation', 'writing-section', 40, f => NUMBERED_CONTINUATION_SECTION.test(f.nfkc),

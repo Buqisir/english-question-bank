@@ -120,11 +120,108 @@ test('the public rule accepts equivalent notation after normalization', () => {
 test('unequal ordinals, clocks, years, amounts and negation remain critical differences', () => {
   for (const [a,b] of [['first','2nd'], ['third','4th'], ['twenty first','22nd'],
     ['at 7:30','at 7:13'], ['at 7:30 pm','at 7:30 am'], ['in 2026','in twenty twenty-seven'],
-    ['$25','$26'], ['folder to','folder not to'], ['too','two'], ['at 09:30','at 930'],
-    ['at 7:30','at 7.30']]) {
+    ['$25','$26'], ['folder to','folder not to'], ['too','two'], ['at 09:30','at 931'],
+    ['at 7:30','at 7.31']]) {
     const result = evaluate(a,b)
     assert.equal(result.decision, result.issues.includes('BODY_ALIGNMENT_LOW') ? 'review_required' : 'usable', `${a} / ${b}`)
     assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'), `${a} / ${b}: ${result.issues}`)
+  }
+})
+test('only a source colon clock licenses compact, decimal and spaced ASR clock forms', () => {
+  for (const [source, forms] of [
+    ['10:35', ['1035', '10.35', '10 35', 'ten thirty-five']],
+    ['9:35', ['935', '0935', '9.35', '9 35', 'nine thirty-five']],
+    ['9:05', ['905', '0905', '9.05', '9 05', 'nine oh five']],
+    ['9:00', ['900', '0900', '9.00', '9 00', "nine o'clock"]],
+  ]) for (const actual of forms) {
+    const result = evaluate(`at ${source}`, `at ${actual}`)
+    assert.equal(result.decision, 'usable', `${source} / ${actual}: ${result.issues}`)
+    assert.ok(![...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
+  }
+  for (const [source, actual] of [
+    ['10.35', '1035'], ['1035', 'ten thirty-five'], ['10 35', '1035'],
+    ['10:35', '10.36'], ['10:35', '1036'], ['10:35', '10 36'],
+    ['10:35', '$10.35'], ['10:35', '10350'], ['10:35', '11035'],
+    ['25:35', '2535'], ['10:65', '1065'], ['in 2026', 'in 20 26'],
+  ]) {
+    const result = evaluate(source, actual)
+    assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'), `${source} / ${actual}`)
+  }
+})
+test('complete meridiem clocks keep precedence over a bare clock alias in the same group', () => {
+  for (const meridiem of ['am', 'pm', 'a.m.', 'p.m.']) {
+    for (const clock of ['10.35', '1035', '10 .35']) {
+      const result = evaluate(`at 10:35 and at 10:35 ${meridiem}`,
+        `at 10:35 and at ${clock} ${meridiem}`)
+      assert.equal(result.decision, 'usable', `${clock} ${meridiem}: ${result.issues}`)
+      assert.equal(result.occurrences[0].alignment.editDistance, 0)
+      const qualified = result.observedWindows[0].words.filter(w => w.expressionText === `${clock} ${meridiem}`)
+      assert.equal(qualified.length, 4)
+      assert.ok(qualified.every(w => w.expressionType === 'time'))
+    }
+  }
+})
+
+test('a bare clock in another source group cannot intercept a complete meridiem clock', () => {
+  for (const meridiem of ['am', 'pm', 'a.m.', 'p.m.']) {
+    const groups = [
+      { segmentId: 'listening-text-1', questionNumbers: [1], text: 'We meet at 10:35 beside the quiet harbor today' },
+      { segmentId: 'listening-text-2', questionNumbers: [2], text: `We arrive at 10:35 ${meridiem} beside the village garden today` },
+    ]
+    const parts = groups[1].text.replace('10:35', '10.35').split(' ')
+    const end = 2 + parts.length * .2
+    const result = evaluateListeningEngine({ groups: [groups[1]], corpus: groups, windows: [windowFor(parts)],
+      instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}], durationSeconds: 100,
+      pauses: [{startSeconds: 1, endSeconds: 1.95}, {startSeconds: end + .05, endSeconds: end + 1}],
+    }).groups[0]
+    assert.equal(result.decision, 'usable', `${meridiem}: ${result.issues}`)
+    assert.equal(result.occurrences[0].alignment.editDistance, 0)
+    assert.ok(!result.observedWindows[0].words.some(w => w.expressionType === 'source_clock_alias'))
+  }
+})
+
+test('source-licensed clock aliases retain raw timing and never cross invalid acoustic boundaries', () => {
+  const group = { segmentId: 'listening-text-1', questionNumbers: [1],
+    text: 'We arrive at 10:35 beside the quiet village harbor today' }
+  const run = window => evaluateListeningEngine({ groups: [group], windows: [window],
+    instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}], durationSeconds: 100 }).groups[0]
+  for (const parts of [['10', '.35'], ['10', '35'], ['1035']]) {
+    const raw = windowFor(['We', 'arrive', 'at', ...parts, 'beside', 'the', 'quiet', 'village', 'harbor', 'today'])
+    const result = run(raw)
+    assert.equal(result.occurrences[0].alignment.editDistance, 0)
+    const clock = result.observedWindows[0].words.filter(w => w.expressionType === 'source_clock_alias')
+    assert.deepEqual(clock.map(w => w.token), ['ten', 'thirty', 'five'])
+    assert.ok(clock.every(w => w.rawRunText === parts.join(' ') && w.expressionText === parts.join(' ')))
+    assert.ok(clock.every(w => w.runStartSeconds === 2.6 && w.runEndSeconds === 2 + (3 + parts.length) * .2))
+  }
+  for (const edit of [
+    words => { words[4].start += 3; words[4].end += 3 },
+    words => { words[4].end = NaN },
+    words => { words[4].start = 1; words[4].end = 1.5 },
+  ]) {
+    const raw = windowFor(['We', 'arrive', 'at', '10', '.35', 'beside', 'the', 'quiet', 'village', 'harbor', 'today'])
+    edit(raw.result.segments[0].words)
+    assert.ok(!run(raw).observedWindows[0].words.some(w => w.expressionType === 'source_clock_alias'))
+  }
+  const raw = windowFor(['We', 'arrive', 'at', '10', '.35', 'beside', 'the', 'quiet', 'village', 'harbor', 'today'])
+  const words = raw.result.segments[0].words
+  raw.result.segments = [words.slice(0, 4), words.slice(4)].map(part => ({ words: part }))
+  assert.ok(!run(raw).observedWindows[0].words.some(w => w.expressionType === 'source_clock_alias'))
+})
+
+test('a clock in a different source group cannot turn this group quantity into a time', () => {
+  const groups = [
+    { segmentId: 'listening-text-1', questionNumbers: [1], text: 'We meet at 10:35 tomorrow beside the village harbor' },
+    { segmentId: 'listening-text-2', questionNumbers: [2],
+      text: 'Our club welcomes young readers beside the village harbor with 1035 books inside a quiet reading room where children study together every day' },
+  ]
+  for (const [actual, equal] of [[groups[1].text, true],
+    [groups[1].text.replace('1035', 'one thousand thirty-five'), true],
+    [groups[1].text.replace('1035', 'ten thirty-five'), false]]) {
+    const result = evaluateListeningEngine({ groups: [groups[1]], corpus: groups, windows: [windowFor(actual.split(' '))],
+      instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}], durationSeconds: 100 }).groups[0]
+    assert.equal(result.occurrences[0].alignment.editDistance === 0, equal, actual)
+    assert.equal([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'), !equal, actual)
   }
 })
 for (const [source, actual] of [['by 2026', 'by 20:26'], ['before 2013', 'before 20:13'],

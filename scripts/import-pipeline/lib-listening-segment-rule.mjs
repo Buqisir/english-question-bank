@@ -91,11 +91,14 @@ function numberWords(value) {
 }
 
 const meridiemPattern = '[ap]\\s*\\.?\\s*m\\.?'
-const listeningLexemes = new RegExp([
-  '[$£]\\d+(?:,\\d{3})*(?:\\.\\d{2})?',
+const listeningClockLexemes = [
   `\\b\\d{1,2}\\s*:\\s*\\d{2}(?:\\s*${meridiemPattern}(?![a-z]))?`,
   `\\b\\d{1,2}\\s*\\.\\s*\\d{2}\\s*${meridiemPattern}(?![a-z])`,
   `\\b\\d{1,4}\\s*${meridiemPattern}(?![a-z])`,
+]
+const listeningLexemes = new RegExp([
+  '[$£]\\d+(?:,\\d{3})*(?:\\.\\d{2})?',
+  ...listeningClockLexemes,
   '\\b[ap]\\s*\\.\\s*m\\.?(?![a-z])',
   "\\bo\\s*['’]\\s*clock\\b",
   '\\b\\d+(?:st|nd|rd|th)\\b',
@@ -133,8 +136,16 @@ function lexemeWords(raw) {
 }
 // One normalization path for source text and timed ASR, retaining raw character
 // ranges. A run boundary cannot split "1" + ".15pm" or "o" + "'clock".
-function normalizeListeningUnits(value) {
+function normalizeListeningUnits(value, aliases = []) {
   const text = String(value ?? '')
+  // Only exact, valid colon clocks in the source license these ambiguous ASR
+  // spellings. Match whole numeric expressions; never a price or digit suffix.
+  const lexemes = aliases.length ? new RegExp([
+    // Consume the full explicit clock before an alias can take its numeric prefix.
+    ...listeningClockLexemes,
+    ...aliases.map(({ pattern }) => `(?<![\\w$£.,:])(?:${pattern})(?!\\w|\\s*[.:]\\s*\\d)`),
+    listeningLexemes.source,
+  ].join('|'), 'giu') : listeningLexemes
   const yearContext = new Set(['in', 'since', 'during', 'until', 'by', 'before', 'after', 'from', 'year'])
   const quantityUnits = new Set(['dollar', 'dollars', 'pound', 'pounds', 'cent', 'cents', 'euro', 'euros',
     'yuan', 'yen', 'hundred', 'thousand', 'million', 'hours', 'minutes', 'seconds'])
@@ -144,9 +155,10 @@ function normalizeListeningUnits(value) {
     return ((!prefix && /^[\s.!?。！？]*$/u.test(text.slice(end))) || yearContext.has(context))
       && !quantityUnits.has(text.slice(end).match(/^\s*([a-z]+)/iu)?.[1]?.toLowerCase())
   }
-  let units = [...text.matchAll(listeningLexemes)].flatMap(match => {
+  let units = [...text.matchAll(lexemes)].flatMap(match => {
     const raw = match[0], start = match.index, end = start + raw.length
-    const words = lexemeWords(raw)
+    const alias = aliases.find(({ matches }) => matches.test(raw))
+    const words = lexemeWords(alias ? `${alias.hour}:${String(alias.minute).padStart(2, '0')}` : raw)
     const expressionForm = /\d/u.test(raw) ? 'literal' : 'words'
     let expressionType = /\d/u.test(raw) ? 'cardinal'
       : words.some(w => ordinalSmall.includes(w) || ['twentieth', 'thirtieth'].includes(w)) ? 'ordinal'
@@ -155,8 +167,14 @@ function normalizeListeningUnits(value) {
     else if (raw.includes(':') || /\d[\s\S]*[ap]\s*\.?\s*m\.?$/iu.test(raw)
       || words.some(w => ["o'clock", 'am', 'pm'].includes(w))) expressionType = 'time'
     else if (/^\d{4}$/u.test(raw) && yearPosition(start, end)) expressionType = 'year'
+    const clock = raw.match(/^(\d{1,2})\s*:\s*(\d{2})$/u)
+    const clockValue = clock && Number(clock[1]) <= 23 && Number(clock[2]) <= 59
+      ? Number(clock[1]) * 60 + Number(clock[2]) : undefined
+    if (alias) expressionType = 'source_clock_alias'
     return words.map(token => ({ token, start, end, expressionType, expressionForm, expressionText: raw,
-      ...(expressionType === 'year' ? { expressionValue: Number(raw) } : {}) }))
+      ...(alias ? { expressionValue: alias.hour * 60 + alias.minute }
+        : clockValue !== undefined ? { expressionValue: clockValue }
+          : expressionType === 'year' ? { expressionValue: Number(raw) } : {}) }))
   })
   const adjacent = (a, b) => a.end >= b.start || /^[\s-]*$/u.test(text.slice(a.end, b.start))
   const span = (tokens, first, last, expressionType, expressionValue) => tokens.map(token =>
@@ -237,6 +255,28 @@ function normalizeListeningUnits(value) {
 }
 export function normalizeListeningText(value) {
   return normalizeListeningUnits(value).map(unit => unit.token)
+}
+
+function sourceClockAliases(corpus) {
+  const turns = corpus.flatMap(group => listeningSourceTurnText(group, corpus))
+    .map(text => normalizeListeningUnits(text))
+  const clocks = new Set(turns.flat().filter(unit => unit.expressionType === 'time'
+    && unit.expressionValue !== undefined).map(unit => unit.expressionValue))
+  return [...clocks].flatMap(value => {
+    const hour = Math.floor(value / 60), minute = value % 60
+    const mm = String(minute).padStart(2, '0')
+    return [...new Set([String(hour), String(hour).padStart(2, '0')])].flatMap(h =>
+      [[`${h}${mm}`, `${h}${mm}`], [`${h}.${mm}`, `${h}\\s*\\.\\s*${mm}`], [`${h} ${mm}`, `${h}\\s+${mm}`]]
+        // If the source also contains this quantity/year reading, the ASR
+        // spelling is ambiguous. Keep its ordinary numeric meaning rather than
+        // breaking valid quantities or assigning them to the clock.
+        .filter(([raw]) => {
+          const tokens = normalizeListeningText(raw)
+          return !turns.some(units => positions(units, tokens)
+            .some(index => units.slice(index, index + tokens.length).every(unit => unit.expressionType !== 'time')))
+        })
+        .map(([, pattern]) => ({ hour, minute, pattern, matches: new RegExp(`^(?:${pattern})$`, 'u') })))
+  })
 }
 
 // Square brackets are ambiguous in isolation. Confirm the document's annotation
@@ -372,7 +412,7 @@ export function expectedListeningReadings(group, instructions = []) {
 
 // Apple attributed runs may contain several lexical words. Interpolation is explicitly
 // labelled; only the first/last token of a run may assert its acoustic outer boundary.
-function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths) {
+function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths, clockAliases) {
   let cursor = 0
   const spans = runs.map((run, index) => {
     const text = String(run.word ?? run.text)
@@ -386,7 +426,7 @@ function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths) {
   const joined = spans.map(s => s.text).join(' ')
   const units = []
   let first = 0
-  for (const unit of normalizeListeningUnits(joined)) {
+  for (const unit of normalizeListeningUnits(joined, clockAliases)) {
     while (first < spans.length && spans[first].high <= unit.start) first++
     const touched = []
     for (let i = first; i < spans.length && spans[i].low < unit.end; i++) touched.push(spans[i])
@@ -415,7 +455,7 @@ function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths) {
       evidencePaths }
   })
 }
-export function listeningAsrTokens(windows) {
+export function listeningAsrTokens(windows, clockAliases = []) {
   const words = []
   const markers = []
   const windowsWithWords = []
@@ -449,7 +489,7 @@ export function listeningAsrTokens(windows) {
           endSeconds: timed.length ? offset + timed.at(-1).run.end : segmentEnd })
       }
       inWindow.push(...timedListeningUnits(runs, offset, window.endSeconds,
-        `${windowIndex}:${segmentIndex}`, window.evidencePaths || []))
+        `${windowIndex}:${segmentIndex}`, window.evidencePaths || [], clockAliases))
     }
     inWindow.sort((a, b) => a.startSeconds - b.startSeconds || a.endSeconds - b.endSeconds)
     windowsWithWords.push({ window, words: inWindow })
@@ -528,6 +568,11 @@ function compatibleYearExpressions(source, target) {
 }
 export function alignListeningOccurrence(source, target, sourceUnits = []) {
   const equal = (i, j) => source[i] === target[j].token && compatibleYearExpressions(sourceUnits[i], target[j])
+    // A clock elsewhere in the corpus cannot license a quantity in this
+    // occurrence, even if its expanded words happen to be identical.
+    && (target[j].expressionType !== 'source_clock_alias'
+      || (sourceUnits[i]?.expressionType === 'time'
+        && sourceUnits[i].expressionValue === target[j].expressionValue))
   const trace = [new Uint8Array(target.length + 1).fill(2)]
   let previous = Array.from({ length: target.length + 1 }, (_, i) => i)
   for (let i = 1; i <= source.length; i++) {
@@ -795,11 +840,12 @@ export function validateListeningOrder(results) {
 export function evaluateListeningEngine({ groups, instructions = [], windows = [], pauses = [], durationSeconds,
   engine = 'Apple SpeechAnalyzer', corpus = groups, requireWholePaper = true, questions,
   fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled, globalAnchorWindows = windows }) {
-  const { words, markers, observedWindows } = listeningAsrTokens(windows)
+  const clockAliases = sourceClockAliases(corpus)
+  const { words, markers, observedWindows } = listeningAsrTokens(windows, clockAliases)
   const speechRuns = boundarySpeechRuns([...new Set([...windows, ...globalAnchorWindows])], pauses, engine)
   const boundarySpeech = mergeSpeechIntervals(speechRuns.map(r => [r.startSeconds, r.endSeconds]))
   const fuzzy = fuzzyAnchors ? {
-    globalWords: globalAnchorWindows === windows ? words : listeningAsrTokens(globalAnchorWindows).words,
+    globalWords: globalAnchorWindows === windows ? words : listeningAsrTokens(globalAnchorWindows, clockAliases).words,
     globalCoverage: coversRecording(globalAnchorWindows, durationSeconds),
   } : null
   const orderedGroups = [...groups].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
@@ -821,7 +867,7 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
     const turns = listeningSourceTurns(result)
     const source = turns.flat()
-    const sourceUnits = listeningSourceTurnText(result).flatMap(normalizeListeningUnits)
+    const sourceUnits = listeningSourceTurnText(result).flatMap(text => normalizeListeningUnits(text))
     const sourceRawWords = listeningSourceRawWords(result)
     if (!source.length) return problem(result, 'SOURCE_EMPTY')
     const anchor = anchorsFor(group, corpus, words, expected.expectedReadings, fuzzy)
@@ -1095,7 +1141,7 @@ function compareObservedWords(observed, reference) {
   const conflicts = []
   const overlaps = (a, b) => a.startSeconds < b.endSeconds && a.endSeconds > b.startSeconds
   const match = span => reference.occurrences.flatMap((o, i) => overlaps(span, o) ? [i] : [])
-  const sourceUnits = listeningSourceTurnText({ ...reference, text: reference.sourceText }).flatMap(normalizeListeningUnits)
+  const sourceUnits = listeningSourceTurnText({ ...reference, text: reference.sourceText }).flatMap(text => normalizeListeningUnits(text))
   const source = sourceUnits.map(u => u.token)
   // Anchors are unnecessary for counterevidence. Inspect every original window,
   // rather than cropping an anchored candidate to the other ASR's body ±0.5s.
