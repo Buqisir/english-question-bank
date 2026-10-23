@@ -774,7 +774,7 @@ async function sourceReferences(ctx) {
   archive(ctx, path.join(ctx.paperDir, 'source-references-v1.json'))
   await run(ctx, 'answer-products-finalize', cli('answer-products.mjs', 'finalize', '--paper-dir', ctx.paperDir,
     '--input', input, '--output', path.join(ctx.paperDir, 'source-references-v1.json')))
-  return { outline: outline.outline }
+  return { producerVersion: outline.producerVersion, outline: outline.outline }
 }
 
 function screenAccount() {

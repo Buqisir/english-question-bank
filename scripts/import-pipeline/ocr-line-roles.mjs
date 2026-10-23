@@ -27,6 +27,10 @@ const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|作答示例|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
 const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
+// A Chinese parenthetical note may be truncated before its closing bracket.
+// A wrapped gloss followed by English is still source prose, even while paused.
+const PARENTHESIZED_COMMENTARY_LINE = /^[（(]\s*\p{Script=Han}[^）)\r\n]*(?:[）)]\s*)?$/u
+const parenthesizedEnglish = f => /^[（(]/u.test(f.trimmed) && /\p{Script=Latin}/u.test(f.text)
 const STUDENT_SCRIPT_BOUNDARY = /^[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*样卷\s*[:：]?$/u
 const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
 const SALUTATION = /^Dear\s.+,$/u
@@ -163,6 +167,7 @@ export const LINE_ROLE_RULES = Object.freeze([
     '第一节：作答示例', '第一节：作答示例说明如下。'),
   pattern('writing.repeated-heading', 'repeated-heading', 10, /^写作\s*[:：]?$/u, '写作', '第四部分 写作'),
   pattern('writing.part', 'writing-part', 10, WRITING_PART, '第四部分 写作', '第三部分 语言知识运用'),
+  pattern('writing.bare-fourth-part', 'bare-writing-part', 10, /^第四部分\s*[:：]?$/u, '第四部分', '第三部分'),
   pattern('writing.bare-section', 'bare-section', 10, BARE_WRITING_SECTION, '第一节', '第一节（阅读理解）'),
   pattern('writing.application', 'writing-section', 10, WRITING_SECTION[0][1], '第一节（应用文）', '第一节（阅读理解）', { value: 'application' }),
   pattern('writing.continuation', 'writing-section', 20, WRITING_SECTION[1][1], '第二节 读后续写', '第二节(语法填空)', { value: 'continuation' }),
@@ -182,10 +187,20 @@ export const LINE_ROLE_RULES = Object.freeze([
     /^(第[一二三四五]部分|(?:附\s*[:：]\s*)?听力)/u.test(f.text) || TRANSCRIPT_MARKER.test(f.text),
     '附：听力录音稿', '第二节 读后续写'),
   pattern('writing.student-script', 'capture-stop', 10, STUDENT_SCRIPT_BOUNDARY, '（五）样卷', '（四）作答示例'),
-  rule('writing.commentary', 'commentary', 10, (f, c) => c.entryKind !== 'scoring'
-    && (COMMENTARY_LINE.test(f.text) || (c.skipping && f.hasHan)),
+  pattern('writing.continuation-prompt', 'question-prompt', 10,
+    /^阅读下面(?:短文|材料)[，,](?:根据|依据).*续写/u,
+    '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。', 'A student read the story and continued writing.'),
+  rule('writing.commentary', 'commentary', 10, (f, c) => {
+    if (c.entryKind === 'scoring') return false
+    if (/^[（(]/u.test(f.trimmed)) {
+      return !parenthesizedEnglish(f)
+        && (PARENTHESIZED_COMMENTARY_LINE.test(f.trimmed) || COMMENTARY_LINE.test(f.trimmed))
+    }
+    return COMMENTARY_LINE.test(f.text) || (c.skipping && f.hasHan)
+  },
   '1. 故事概述', { text: '1. 本题总分为15分。', context: { entryKind: 'scoring' } }),
-  rule('writing.skipped-fragment', 'skipped-fragment', 10, (f, c) => c.skipping && !f.startsUpperOrQuote,
+  rule('writing.skipped-fragment', 'skipped-fragment', 10, (f, c) =>
+    c.skipping && !f.startsUpperOrQuote && !parenthesizedEnglish(f),
   { text: 'leave the next day.', context: { skipping: true } },
   { text: 'A completed sample.', context: { skipping: true } }),
   rule('writing.margin-body', 'margin-body', 10, f => f.startsEnglishOrQuote && f.observationCount > 3,

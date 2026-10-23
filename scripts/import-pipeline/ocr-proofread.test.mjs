@@ -392,6 +392,102 @@ test('third writing part may carry its first bare section in the same OCR item',
     [['Our team brought seeds.'], ['Leo opened the garden gate.']])
 })
 
+test('a writing part and a named task heading in one confirmed item open the exact task', () => {
+  for (const [section, task] of [
+    ['第一节 应用文（15分）', 'application'],
+    ['第二节 读后续写（25分）', 'continuation'],
+  ]) {
+    const heading = `第四部分 写作\n${section}`
+    assert.equal(writingSectionAfterPart(heading), task)
+    const result = referencesFixture([heading, 'A complete official sample.'], [task])
+    assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text),
+      ['A complete official sample.'])
+  }
+  for (const heading of ['第四部分 写作\n第一节 阅读理解', '第二部分 阅读\n第一节 应用文']) {
+    assert.equal(writingSectionAfterPart(heading), null)
+  }
+})
+
+test('confirmed bare fourth-part omission captures absence without inventing a model answer', () => {
+  const result = referencesFixture(['第三部分', '56. on', '第四部分', '（略）',
+    '听力部分原文', '第一节', 'Text 1', 'M: Not a model answer.'], ['application', 'continuation'])
+  for (const group of result.groups) {
+    assert.equal(group.essays.state, 'not_supplied')
+    assert.deepEqual(group.essays.entries, [])
+    assert(group.essays.evidence.length)
+  }
+})
+
+test('an unconfirmed missing writing section still fails closed', t => {
+  const diagnostics = []
+  t.mock.method(console, 'error', text => diagnostics.push(text))
+  t.mock.method(process, 'exit', () => { throw new Error('missing writing section') })
+  for (const texts of [
+    ['第四部分', '听力部分原文'], ['第四部分', 'A mystery sample.'],
+    ['第三部分', '（略）', '听力部分原文'], ['略', '听力部分原文'],
+  ]) {
+    assert.throws(() => referencesFixture(texts, ['application', 'continuation']), /missing writing section/)
+    assert.match(diagnostics.at(-1), /No answer-document section found for application/)
+  }
+})
+
+test('reprinted continuation prompt and givens stay outside samples until an explicit source label', () => {
+  const result = referencesFixture(['（三）读后续写（满分25分）',
+    '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
+    'It was early May, my first day as a volunteer.',
+    '注意：', 'Paragraph 1:', 'I had a lot of cleanup to do.',
+    'Paragraph 2:', 'Something seemed to be changing in me, too.',
+    '2. 参考范文', 'I had a lot of cleanup to do. The garden needed everyone.',
+    'Something seemed to be changing in me, too. I learned to listen.',
+    '（故事情节构思中需重点关注以下关键点的回应和转变：①我对工作态度',
+    '的转变：从回避交流到主动沟通）', '4. 评分细则', '按内容和语言给分。'])
+  assert.equal(result.groups[0].essays.entries.length, 1)
+  assert.equal(result.groups[0].essays.entries[0].sourceLabel, '2. 参考范文')
+  assert.equal(result.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '),
+    'I had a lot of cleanup to do. The garden needed everyone. Something seemed to be changing in me, too. I learned to listen.')
+  assert.equal(result.groups[0].scoring.entries[0].paragraphs[0].text, '按内容和语言给分。')
+  const legitimate = referencesFixture(['第二节 读后续写', 'A volunteer trimmed weeds（杂草）.',
+    '(1) The neighbors helped.', '（中文评分说明）', '4. 评分细则', '（中文评分正文）'])
+  assert.equal(legitimate.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '),
+    'A volunteer trimmed weeds（杂草）. (1) The neighbors helped.')
+  assert.equal(legitimate.groups[0].scoring.entries[0].paragraphs[0].text, '（中文评分正文）')
+})
+
+test('an unlabeled sample after a reprinted prompt requires confirmation instead of claiming absence', t => {
+  const diagnostics = []
+  t.mock.method(console, 'error', message => diagnostics.push(message))
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
+  for (const ending of [[], ['听力原文'], ['（五）样卷'], ['4. 评分细则', '按内容给分。']]) {
+    assert.throws(() => referencesFixture(['第二节 读后续写',
+      '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
+      'An original story.', 'Paragraph 1:', 'The neighbors joined the cleanup.', ...ending]),
+    /unresolved source reference/)
+    assert.match(diagnostics.at(-1), /Unresolved continuation reference.*confirm/iu)
+  }
+  const omitted = referencesFixture(['第二节 读后续写',
+    '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
+    'An original story.', 'Paragraph 1:', 'A given starter.', '（略）'])
+  assert.equal(omitted.groups[0].essays.state, 'not_supplied')
+  assert.deepEqual(omitted.groups[0].essays.entries, [])
+})
+
+test('parenthesized Chinese glosses retain their same-line English prose even after commentary', () => {
+  for (const text of ['（幼苗） and planted it beside the gate.', '(幼苗) and planted it beside the gate.',
+    '（幼苗 and roots）', '（幼苗） café seedlings grew.', '（一）幼苗 and planted it beside the gate.']) {
+    for (const preceding of [[], ['（中文指导）']]) {
+      const result = referencesFixture(['第二节 读后续写', '参考范文', 'They picked a seedling',
+        ...preceding, text])
+      const body = result.groups[0].essays.entries.flatMap(entry => entry.paragraphs.map(p => p.text)).join(' ')
+      assert(body.includes(text), JSON.stringify({ text, preceding }))
+      assert(!body.includes('中文指导'))
+    }
+  }
+  for (const text of ['（中文指导）后续说明', '(中文指导)后续说明']) {
+    const result = referencesFixture(['第二节 读后续写', '参考范文', text])
+    assert.equal(result.groups[0].essays.entries[0].paragraphs[0].text, text)
+  }
+})
+
 test('numbered source sample and scoring labels establish and preserve writing boundaries', () => {
   const result = referencesFixture(['第四部分', '第一节（满分15分）',
     '一、参考范文：', 'Dear Alex,', 'A source application.', '二、评分原则',
