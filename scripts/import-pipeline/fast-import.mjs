@@ -719,7 +719,7 @@ async function installSummaries(ctx) {
 
 async function installListening(ctx) {
   const result = ctx.state.data.listeningSegmentAttempt
-  if (!result?.review || !existsSync(result.review)) fail('缺少 listening-segment-rule-v2 结果；先运行 after-proofread')
+  if (!result?.review || !existsSync(result.review)) fail('缺少听力分段规则结果；先运行 after-proofread')
   const report = readJson(result.review)
   for (const file of report.evidence) {
     const source = path.join(result.attempt, file.path)
@@ -734,7 +734,7 @@ async function installListening(ctx) {
   await run(ctx, 'finalize-listening', cli('review.mjs', 'finalize-listening-review', ctx.paperId, '--input', result.review))
   await run(ctx, 'verify-listening', cli('review.mjs', 'verify-listening-review', ctx.paperId))
   return { groups: report.groups.length, usable: report.groups.filter(g => g.decision === 'usable').length,
-    evidence: report.evidence.length, ruleVersion: 'listening-segment-rule-v2' }
+    evidence: report.evidence.length, ruleVersion: readJson(path.join(result.attempt, 'rule-result.json')).rule.version }
 }
 
 async function sourceReferences(ctx) {
@@ -970,7 +970,7 @@ async function report(ctx, args) {
         [path.join(ctx.work, 'materialization-edits.json'), paper('source-references-v1.json')]),
       answerTranscription: check(`校对 worker 对照答案页原图逐题抄录，与答案键比对 ${steps['answer-check'].result.compared}/${steps['answer-check'].result.compared} 一致，无 AI 解题。`,
         [qa('answer-key-comparison.json'), paper('signals/ai-answer-check.json')]),
-      ...(listening ? { listeningPlayback: check(`Apple SpeechAnalyzer 主转写，失败组 Whisper 单次复核；按 listening-segment-rule-v2 判定，${listening.groups} 组中 ${listening.usable} 组 usable，保留 ${listening.evidence} 份证据。仅为 ASR 与源文比对的教师导航结论，不是直接听审、逐字或全录音认证。`,
+      ...(listening ? { listeningPlayback: check(`Apple SpeechAnalyzer 主转写，失败组 Whisper 单次复核；按 ${listening.ruleVersion} 判定，${listening.groups} 组中 ${listening.usable} 组 usable，保留 ${listening.evidence} 份证据。仅为 ASR 与源文比对的教师导航结论，不是直接听审、逐字或全录音认证。`,
         [paper('listening-review-v1.json')]) } : !selection.hasListening ? {
         listeningPlayback: { status: 'not_applicable', detail: '来源明确声明原卷设计无听力，Canonical 听力题组为零，不执行音频与 ASR 步骤。' },
       } : {}),

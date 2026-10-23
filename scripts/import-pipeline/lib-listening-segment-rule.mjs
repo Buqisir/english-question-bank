@@ -1,7 +1,7 @@
 // Pure, platform-independent navigation rule. ASR is evidence, never a source-text editor.
 export const LISTENING_SEGMENT_RULE = Object.freeze({
-  version: 'listening-segment-rule-v2',
-  normalizationVersion: 'listening-equivalences-v3',
+  version: 'listening-segment-rule-v3',
+  normalizationVersion: 'listening-equivalences-v4',
   anchorWords: 6,
   expandedAnchorWords: 12,
   fuzzyAnchorsEnabled: false,
@@ -237,19 +237,101 @@ export function normalizeListeningText(value) {
   return normalizeListeningUnits(value).map(unit => unit.token)
 }
 
-function listeningSourceTurnText(text) {
-  return String(text ?? '').split('参考答案')[0]
-    .replace(/^\s*text\s+\d+[^\n]*(?:\n|$)/gimu, '')
-    .replace(/^\s*\d+\.\s*/u, '')
-    .split(/(?:^|\n)\s*(?:\d+\.\s*)?(?:M|W|Speaker \d+):\s*/u)
-    .map(turn => turn.replace(/\(\d+\)|[①-⑳]/gu, '').trim())
-    .filter(Boolean)
+// Square brackets are ambiguous in isolation. Confirm the document's annotation
+// convention from question-bound, sentence/turn-leading marks across groups AND
+// a repeated question mark with numbered evidence points (e.g. [7]① / [7]②).
+// An unknown source layout keeps its brackets and fails closed.
+function questionMarks(group) {
+  return [...String(group.text ?? '').matchAll(/\[(\d{1,2})\]([①-⑳]?)/gu)]
+    .filter(m => group.questionNumbers?.includes(Number(m[1]))
+      && /(?:^|[.!?。！？]\s*|(?:^|\n)\s*(?:M|W|Speaker \d+):\s*)$/u.test(group.text.slice(0, m.index))
+      && /^[\s]*[A-Z]/u.test(group.text.slice(m.index + m[0].length)))
 }
-export function listeningSourceTurns(text) {
-  return listeningSourceTurnText(text).map(normalizeListeningText).filter(turn => turn.length)
+function annotationLayout(group, corpus) {
+  const documentId = group.source?.kind === 'page_region' && group.source.documentId
+  if (!documentId) return null
+  const peers = corpus.filter(g => g.source?.kind === 'page_region' && g.source.documentId === documentId)
+    .map(g => ({ group: g, marks: questionMarks(g) })).filter(g => g.marks.length)
+  const pointSeries = peers.some(({ marks }) => marks.some(a => a[2]
+    && marks.some(b => a[1] === b[1] && b[2] && a[2] !== b[2])))
+  if (peers.length < 2 || new Set(peers.flatMap(p => p.marks.map(m => m[1]))).size < 3 || !pointSeries) return null
+  return peers.map(p => ({ segmentId: p.group.segmentId, source: p.group.source,
+    spans: p.marks.map(m => ({ start: m.index, end: m.index + m[0].length, text: m[0] })) }))
 }
-function listeningSourceRawWords(text) {
-  return listeningSourceTurnText(text).flatMap(turn =>
+
+export function projectListeningSpokenText(group, corpus = [group]) {
+  if (typeof group === 'string') group = { text: group }
+  const sourceText = String(group.text ?? '')
+  const exclusions = []
+  const exclude = (start, end, reason, evidence = null) => {
+    if (start >= end || exclusions.some(s => start < s.end && end > s.start)) return
+    exclusions.push({ start, end, text: sourceText.slice(start, end), reason,
+      source: group.source ?? null, segmentId: group.segmentId ?? null, evidence })
+  }
+  const groupNumber = Number(group.segmentId?.match(/(\d+)$/u)?.[1])
+  // Recognize complete furniture lines, never arbitrary text before a speaker.
+  let prefix = true
+  for (const line of sourceText.matchAll(/[^\n]+/gu)) {
+    const text = line[0].trim()
+    if (prefix && /^(?:Text\s+\d+|\(Text\s+\d+\)|第[一二]节)$/iu.test(text)) {
+      const number = text.match(/\d+/u)?.[0]
+      if (!number || Number(number) === groupNumber) {
+        exclude(line.index, line.index + line[0].length, 'group_heading')
+        continue
+      }
+    }
+    // Finite Chinese exam-instruction grammar. The entire line must consist
+    // of recognized instruction sentences; a mixed line retains spoken text.
+    const sentences = text.match(/[^。]+。?/gu) || []
+    const instruction = sentence => /^(?:听下面\d+段录音|每段录音后有(?:一个|几个)小题，从题中所给的A、B、C三个选项中选出最佳选项|听完每段录音后，你都有\d+秒钟的时间来回答有关小题和阅读下一小题|每段录音(?:播放|读)[一两二12]遍|现在，你有\d+秒钟的时间阅读第\d+小题的有关内容|听下面的录音，回答第\d+(?:和第\d+)?小题|听每段录音前，你将有时间阅读各个小题，每小题\d+秒钟；听完后，每小题都有\d+秒钟的作答时间|现在，你有\d+秒钟的时间阅读这两个小题)。?$/u.test(sentence.trim())
+    if (prefix && sentences.length && sentences.every(instruction)) {
+      exclude(line.index, line.index + line[0].length, 'playback_instruction')
+      continue
+    }
+    prefix = false
+  }
+  const layout = annotationLayout(group, corpus)
+  if (layout) for (const mark of questionMarks(group)) {
+    exclude(mark.index, mark.index + mark[0].length, 'question_evidence_annotation', layout)
+  }
+  // Retain the historical parenthesized question/circled-point convention,
+  // now bound to this group's questions and recorded with source coordinates.
+  for (const mark of sourceText.matchAll(/\((\d+)\)([①-⑳]?)|[①-⑳]/gu)) {
+    if (!mark[1] || group.questionNumbers?.includes(Number(mark[1]))) {
+      exclude(mark.index, mark.index + mark[0].length, 'source_annotation')
+    }
+  }
+  for (const match of sourceText.matchAll(/(?:^|\n)\s*(?:\d+\.\s*)?(?:M|W|Speaker \d+):\s*/gu)) {
+    exclude(match.index, match.index + match[0].length, 'speaker_label')
+  }
+  exclusions.sort((a, b) => a.start - b.start)
+  // Mask rather than concatenate: coordinates still address the exact source,
+  // and removing an annotation cannot accidentally join two lexical words.
+  let cursor = 0, text = ''
+  for (const span of exclusions) {
+    text += sourceText.slice(cursor, span.start) + span.text.replace(/[^\n]/gu, ' ')
+    cursor = span.end
+  }
+  text += sourceText.slice(cursor)
+  return { version: 'listening-spoken-projection-v1', sourceText, text, exclusions }
+}
+function listeningSourceTurnText(group, corpus) {
+  const projection = group.sourceProjection ?? projectListeningSpokenText(group, corpus)
+  const turns = []
+  let start = 0
+  for (const span of projection.exclusions.filter(s => s.reason === 'speaker_label')) {
+    turns.push(projection.text.slice(start, span.start).trim())
+    start = span.end
+  }
+  turns.push(projection.text.slice(start).trim())
+  return turns.filter(Boolean)
+}
+export function listeningSourceTurns(group, corpus) {
+  if (typeof group === 'string') group = { text: group }
+  return listeningSourceTurnText(group, corpus).map(normalizeListeningText).filter(turn => turn.length)
+}
+function listeningSourceRawWords(group, corpus) {
+  return listeningSourceTurnText(group, corpus).flatMap(turn =>
     normalizeListeningUnits(turn).map(unit => turn.slice(unit.start, unit.end)))
 }
 
@@ -524,7 +606,7 @@ function coversRecording(windows, durationSeconds) {
   return end >= durationSeconds - 0.001
 }
 function anchorsFor(group, corpus, words, expected, fuzzy = null) {
-  const source = listeningSourceTurns(group.text).flat()
+  const source = listeningSourceTurns(group, corpus).flat()
   let exact
   for (const length of [LISTENING_SEGMENT_RULE.anchorWords, LISTENING_SEGMENT_RULE.expandedAnchorWords]) {
     const width = Math.min(length, source.length)
@@ -532,7 +614,7 @@ function anchorsFor(group, corpus, words, expected, fuzzy = null) {
     const uniqueSource = [head, tail].every(anchor =>
       positions(source, anchor).length === 1
       && corpus.filter(other => other.segmentId !== group.segmentId)
-        .every(other => positions(listeningSourceTurns(other.text).flat(), anchor).length === 0))
+        .every(other => positions(listeningSourceTurns(other, corpus).flat(), anchor).length === 0))
     const heads = positions(words, head), tails = positions(words, tail)
     const uniqueAudio = expected === 'unknown' || (heads.length <= expected && tails.length <= expected)
     exact = { width, head, tail, heads, tails, identityAmbiguous: !uniqueSource,
@@ -550,7 +632,7 @@ function anchorsFor(group, corpus, words, expected, fuzzy = null) {
     const self = substitutionMatches(source, a)
     return self.length === 1 && self[0].index === (i ? source.length - width : 0)
       && corpus.filter(other => other.segmentId !== group.segmentId)
-        .every(other => !substitutionMatches(listeningSourceTurns(other.text).flat(), a).length)
+        .every(other => !substitutionMatches(listeningSourceTurns(other, corpus).flat(), a).length)
   })
   const globalHeads = substitutionMatches(fuzzy.globalWords, head)
   const globalTails = substitutionMatches(fuzzy.globalWords, tail)
@@ -730,14 +812,15 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     const expected = expectedListeningReadings(group, instructions)
     const result = { segmentId: group.segmentId, questionNumbers: group.questionNumbers, engine,
       ...expected, decision: 'usable', issues: [], occurrences: [], playback: null,
-      sourceText: group.text, boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [],
+      sourceText: group.text, sourceProjection: projectListeningSpokenText(group, corpus),
+      boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [],
       observedWindows }
     if (expected.issue) problem(result, expected.issue)
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
-    const turns = listeningSourceTurns(group.text)
+    const turns = listeningSourceTurns(result)
     const source = turns.flat()
-    const sourceUnits = listeningSourceTurnText(group.text).flatMap(normalizeListeningUnits)
-    const sourceRawWords = listeningSourceRawWords(group.text)
+    const sourceUnits = listeningSourceTurnText(result).flatMap(normalizeListeningUnits)
+    const sourceRawWords = listeningSourceRawWords(result)
     if (!source.length) return problem(result, 'SOURCE_EMPTY')
     const anchor = anchorsFor(group, corpus, words, expected.expectedReadings, fuzzy)
     const protectedQuestion = questionWords(group, questions)
@@ -967,7 +1050,7 @@ function compareObservedWords(observed, reference) {
   const conflicts = []
   const overlaps = (a, b) => a.startSeconds < b.endSeconds && a.endSeconds > b.startSeconds
   const match = span => reference.occurrences.flatMap((o, i) => overlaps(span, o) ? [i] : [])
-  const sourceUnits = listeningSourceTurnText(reference.sourceText).flatMap(normalizeListeningUnits)
+  const sourceUnits = listeningSourceTurnText({ ...reference, text: reference.sourceText }).flatMap(normalizeListeningUnits)
   const source = sourceUnits.map(u => u.token)
   // Anchors are unnecessary for counterevidence. Inspect every original window,
   // rather than cropping an anchored candidate to the other ASR's body ±0.5s.
