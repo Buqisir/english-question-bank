@@ -15,24 +15,38 @@ export const structuredSourceReferencesSchema = JSON.parse(readFileSync(
 export const figureSourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-v3.schema.json', import.meta.url), 'utf8',
 ))
+export const scoringFigureSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-v4.schema.json', import.meta.url), 'utf8',
+))
 const ajv = new Ajv({ allErrors: true, strict: false })
 const validateV1 = ajv.compile(sourceReferencesSchema)
 const validateV2 = ajv.compile(structuredSourceReferencesSchema)
 const validateV3 = ajv.compile(figureSourceReferencesSchema)
+const validateV4 = ajv.compile(scoringFigureSourceReferencesSchema)
 
 export function parseSourceReferencesBytes(bytes) {
   const buffer = Buffer.from(bytes)
   const sidecar = JSON.parse(buffer.toString('utf8'))
-  if (sidecar?.schemaVersion === 'source-references-v3' && buffer.byteLength > SOURCE_REFERENCE_IMAGE_LIMITS.jsonBytes) {
-    throw Object.assign(new Error('v3 source-reference JSON exceeds 16 MiB'), { code: 'SOURCE_REFERENCES_FIGURE_LIMIT' })
+  if (['source-references-v3', 'source-references-v4'].includes(sidecar?.schemaVersion) && buffer.byteLength > SOURCE_REFERENCE_IMAGE_LIMITS.jsonBytes) {
+    throw Object.assign(new Error('Source-reference JSON exceeds 16 MiB'), { code: 'SOURCE_REFERENCES_FIGURE_LIMIT' })
   }
   return sidecar
 }
 
 // v1 paragraphs and v2 scoring blocks share one ordered render/QA path.
-// v3 essay figures stay outside this paragraph/table contract.
+// v3 essay figures stay separate; v4 scoring figures are ordered blocks.
 export function sourceReferenceBlocks(entry) {
   return entry.blocks ?? entry.paragraphs.map(paragraph => ({ kind: 'paragraph', paragraph }))
+}
+
+// One inventory for admission, integrity budgets and published consumers.
+export function sourceReferenceFigures(sidecar) {
+  return sidecar?.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
+    group[kind].entries.flatMap(entry => [
+      ...(entry.figures ?? []).map(figure => ({ figure, entry, group, kind })),
+      ...(entry.blocks ?? []).filter(block => block.kind === 'figure')
+        .map(figure => ({ figure, entry, group, kind })),
+    ]))) ?? []
 }
 
 // Preparing never infers absence or converts legacy/AI modelAnswer into source.
@@ -55,7 +69,8 @@ export function prepareSourceReferences({ materialization, sourceDigest, candida
 export function validateSourceReferences({
   sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null, sourceInput = null,
 }) {
-  const validateSchema = sidecar?.schemaVersion === 'source-references-v3' ? validateV3
+  const validateSchema = sidecar?.schemaVersion === 'source-references-v4' ? validateV4
+    : sidecar?.schemaVersion === 'source-references-v3' ? validateV3
     : sidecar?.schemaVersion === 'source-references-v2' ? validateV2 : validateV1
   if (!validateSchema(sidecar)) {
     if (sidecar?.schemaVersion === 'source-references-v3' && validateSchema.errors.some(error =>
@@ -69,8 +84,8 @@ export function validateSourceReferences({
   }
   const issues = []
   const issue = (code, path, message) => issues.push({ code, path, message })
-  const figures = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry => entry.figures ?? []))
-  if (sidecar.schemaVersion === 'source-references-v3'
+  const figures = sourceReferenceFigures(sidecar).map(item => item.figure)
+  if (['source-references-v3', 'source-references-v4'].includes(sidecar.schemaVersion)
     && (figures.length > SOURCE_REFERENCE_IMAGE_LIMITS.sidecarFigures
       || figures.reduce((total, figure) => total + figure.raster.byteLength, 0) > SOURCE_REFERENCE_IMAGE_LIMITS.totalPngBytes
       || Buffer.byteLength(JSON.stringify(sidecar)) > SOURCE_REFERENCE_IMAGE_LIMITS.jsonBytes)) {
@@ -199,11 +214,14 @@ export function validateSourceReferences({
         }
         if (entry.labelSource) sourceBinding(entry.labelSource, `${entryPath}.labelSource`, entry.sourceLabel)
         let previousAnchor = -1
-        for (const [f, figure] of (entry.figures ?? []).entries()) {
-          const figurePath = `${entryPath}.figures[${f}]`
+        const entryFigures = [...(entry.figures ?? []), ...sourceReferenceBlocks(entry).filter(block => block.kind === 'figure')]
+        if (entryFigures.length > SOURCE_REFERENCE_IMAGE_LIMITS.entryFigures) issue('SOURCE_REFERENCES_FIGURE_LIMIT', entryPath, 'At most four figures per entry')
+        for (const [f, figure] of entryFigures.entries()) {
+          const scoringFigure = kind === 'scoring' && sidecar.schemaVersion === 'source-references-v4' && figure.kind === 'figure'
+          const figurePath = scoringFigure ? `${entryPath}.blocks[${entry.blocks.indexOf(figure)}]` : `${entryPath}.figures[${f}]`
           unique(figure.figureId, `${figurePath}.figureId`)
-          const anchor = entry.paragraphs.findIndex(paragraph => paragraph.paragraphId === figure.afterParagraphId)
-          if (kind !== 'essays' || section.state !== 'captured' || anchor < 0 || anchor < previousAnchor) {
+          const anchor = (entry.paragraphs ?? []).findIndex(paragraph => paragraph.paragraphId === figure.afterParagraphId)
+          if (section.state !== 'captured' || (!scoringFigure && (kind !== 'essays' || anchor < 0 || anchor < previousAnchor))) {
             issue('SOURCE_REFERENCES_FIGURE_ANCHOR_INVALID', figurePath,
               'Only captured essays support figures after surviving paragraphs in the same entry and nondecreasing order; before-first, image-only and cross-entry figures are unsupported')
           }
@@ -217,7 +235,9 @@ export function validateSourceReferences({
           // Neither changing regionId nor assigning another figureId permits
           // the same source crop to be printed twice.
           const regionKeys = [digestJson([locator.documentId, locator.page, locator.region]),
-            digestJson([locator.documentId, locator.page, figure.sourceRegionId])]
+            digestJson([locator.documentId, locator.page, figure.sourceRegionId]),
+            ...(sidecar.schemaVersion === 'source-references-v4'
+              ? [digestJson([locator.documentId, figure.sourceRegionId])] : [])]
           if (regionKeys.some(key => seenFigureRegions.has(key))) {
             issue('SOURCE_REFERENCES_FIGURE_DUPLICATE', figurePath, 'A source figure region may occur only once')
           }
@@ -255,7 +275,7 @@ export function validateSourceReferences({
                 previous = continuation
               }
             }
-          } else {
+          } else if (block.kind === 'table') {
             unique(block.tableId, `${blockPath}.tableId`)
             if (block.rows.some(row => row.length !== block.rows[0].length)) {
               issue('SOURCE_REFERENCES_TABLE_INVALID', blockPath, 'Scoring tables must be rectangular; merged cells require a separate supported representation')

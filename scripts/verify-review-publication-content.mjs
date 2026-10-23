@@ -19,8 +19,9 @@ import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1M
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
-import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferenceFigures } from '../server/paper-import/sourceReferences.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
+import { scoringFiguresFixture, captureScoringReferences } from '../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { sourceReferenceFiguresFixture } from '../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
@@ -81,9 +82,12 @@ try {
   config.provenance.month = 10
   json(path.join(source, 'config.json'), config)
   let figureReferences = null
-  if (process.argv.includes('--v3-figures')) {
+  const scoringFigures = process.argv.includes('--v4-scoring-figures')
+  if (process.argv.includes('--v3-figures') || scoringFigures) {
     const sourceManifest = readJson(path.join(source, 'universal-source-manifest.json'))
-    const fixture = sourceReferenceFiguresFixture(readJson(path.join(source, sourceManifest.materializationPath)))
+    const materialization = readJson(path.join(source, sourceManifest.materializationPath))
+    const fixture = scoringFigures ? scoringFiguresFixture({ materialization }) : sourceReferenceFiguresFixture(materialization)
+    if (scoringFigures) fixture.sourceReferences = captureScoringReferences(fixture)
     sourceManifest.documents = sourceManifest.documents.map(document => ({
       ...document, ...fixture.materialization.documents.find(item => item.documentId === document.documentId),
     }))
@@ -94,7 +98,7 @@ try {
     json(path.join(source, 'materialization/nck1-ocr-source-evidence-v1.json'), fixture.evidence)
     json(path.join(source, 'materialization/nck1-ocr-source-confirmation-v1.json'), fixture.confirmation)
     const imported = importCanonicalCandidate(loadNck1ReviewSource(source).sourceInput)
-    assert.deepEqual(imported.issues, [], 'v3 fixture must use the real source admission')
+    assert.deepEqual(imported.issues, [], 'figure fixtures must use the real source admission')
     figureReferences = { ...fixture.sourceReferences, sourceDigest: imported.candidate.source.sha256,
       candidateDigest: imported.candidate.candidateDigest }
     json(path.join(source, SOURCE_REFERENCES_FILE), figureReferences)
@@ -133,7 +137,7 @@ try {
     const payload = canonicalConsumptionPrintPayload(consumption, projection.paperName)
     const items = payload.items.map(({ questionGroupId }) => ({ detail: payload.details.get(questionGroupId) }))
     const html = buildPrintHtml({ ...payload, items, canonicalConsumption: consumption, versionType: 'student' })
-    const raster = figureReferences.groups[0].essays.entries[0].figures[0].raster
+    const raster = sourceReferenceFigures(figureReferences)[0].figure.raster
     const hidden = html => {
       assert(!html.includes(raster.base64), 'answer PNG must not reach the student image registry')
       assert.doesNotMatch(html, /data-reference-figure=|World Smile Day/u)
@@ -145,12 +149,12 @@ try {
     }
     const writing = items.filter(item => item.detail.questions.length === 0)
     hidden(buildPrintHtml({ ...payload, items: writing, blocks: [], canonicalConsumption: consumption, versionType: 'student' }))
-    assert.match(buildAnswerOnlyHtml({ ...projection, sourceDocuments: projection.sourceInput.documents }),
+    assert.match(buildAnswerOnlyHtml({ ...projection, includeScoring: scoringFigures, sourceDocuments: projection.sourceInput.documents }),
       /data-reference-figure=/u)
     assert.equal(projection.materialization.media.length, 0)
     assert(!JSON.stringify(projection.materialization.sourceCoverage).includes('answers:figure'))
     assert(!JSON.stringify(projection.compilation.artifacts.canonicalPaper).includes('figure:smile'))
-    pass('v3 PNG stays outside materialization/Canonical media and all three student products/assembly, and appears in answerOnly')
+    pass(`${references.schemaVersion} PNG stays outside materialization/Canonical media and all student products; answerOnly respects includeScoring`)
   }
   const files = reviewBundleFilePaths(source).map(file => {
     const bytes = readFileSync(path.join(source, file.path))
@@ -236,23 +240,27 @@ try {
   if (figureReferences) {
     const mutateReferences = change => ({ packageData }) => {
       const references = JSON.parse(Buffer.from(packageData.sourceReferencesBytes).toString('utf8'))
-      change(references.groups[0].essays.entries[0])
+      change(scoringFigures ? references.groups[0].scoring.entries[0] : references.groups[0].essays.entries[0])
       packageData.sourceReferencesBytes = Buffer.from(JSON.stringify(references))
     }
-    rejected('v3 approved PNG bytes cannot change', mutateReferences(entry => {
-      const raster = entry.figures[0].raster
+    rejected(`${scoringFigures ? 'v4' : 'v3'} approved PNG bytes cannot change`, mutateReferences(entry => {
+      const raster = (scoringFigures ? entry.blocks.find(block => block.kind === 'figure') : entry.figures[0]).raster
       const bytes = Buffer.from(raster.base64, 'base64')
       bytes[bytes.length - 1] ^= 1
       raster.base64 = bytes.toString('base64')
       raster.sha256 = sha256(bytes)
     }))
-    rejected('v3 approved crop cannot change', mutateReferences(entry => {
-      entry.figures[0].source.locator.region.x -= 0.01
+    rejected(`${scoringFigures ? 'v4' : 'v3'} approved crop cannot change`, mutateReferences(entry => {
+      (scoringFigures ? entry.blocks.find(block => block.kind === 'figure') : entry.figures[0]).source.locator.region.x -= 0.01
     }))
-    rejected('v3 approved anchor cannot change', mutateReferences(entry => {
-      entry.figures[0].afterParagraphId = entry.paragraphs[1].paragraphId
+    rejected(`${scoringFigures ? 'v4' : 'v3'} approved anchor cannot change`, mutateReferences(entry => {
+      if (scoringFigures) entry.blocks.reverse()
+      else entry.figures[0].afterParagraphId = entry.paragraphs[1].paragraphId
     }))
-    rejected('v3 approved figure cannot be deleted', mutateReferences(entry => { delete entry.figures }))
+    rejected(`${scoringFigures ? 'v4' : 'v3'} approved figure cannot be deleted`, mutateReferences(entry => {
+      if (scoringFigures) entry.blocks = entry.blocks.filter(block => block.kind !== 'figure')
+      else delete entry.figures
+    }))
   }
   if (!process.argv.includes('--references-only')) {
   rejected('preview unchanged but actual admission consumer changes a question', ({ admission }) => {
@@ -375,7 +383,11 @@ try {
       paperAssetsDir: path.join(root, 'normal-envelope'), consumption: Object.values(published.publish.consumers)[0] })
     assert(frozen.sourceReferencesBytes.equals(retained))
     const html = buildAnswerOnlyHtml(frozen)
-    assert.equal(html.includes('data-reference-figure='), Boolean(figureReferences))
+    assert.equal(html.includes('data-reference-figure='), Boolean(figureReferences) && !scoringFigures)
+    if (scoringFigures) {
+      const included = buildAnswerOnlyHtml({ ...frozen, includeScoring: true })
+      for (const { figure } of sourceReferenceFigures(references)) assert(included.includes(figure.raster.base64))
+    }
     pass(`${references.schemaVersion} exact published consumer replays SQLite commitment and frozen answer rendering`)
   } finally { publishedDb.close() }
   if (!process.argv.includes('--references-only')) {
@@ -526,9 +538,10 @@ try {
 
 // Existing publication CI seam owns these new independent rejection layers;
 // no change to the CI planner or publication mapping is required.
-if (!process.argv.includes('--v3-figures') && !process.argv.includes('--v2-references')) {
+if (!process.argv.includes('--v3-figures') && !process.argv.includes('--v2-references')
+  && !process.argv.includes('--v4-scoring-figures')) {
   await import('./verify-source-reference-figures.mjs')
-  for (const version of ['--v2-references', '--v3-figures']) {
+  for (const version of ['--v2-references', '--v3-figures', '--v4-scoring-figures']) {
     execFileSync(process.execPath, [import.meta.filename, version, '--references-only'], { stdio: 'inherit' })
   }
 }

@@ -4,7 +4,7 @@ import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck
 import { assertSourceReferences, sourceReferenceBlocks } from './paper-import/sourceReferences.mjs'
 import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
-import { sourceReferenceFigurePresentation } from './paper-import/sourceReferencePresentation.mjs'
+import { sourceReferenceFigurePresentation, sourceReferenceFigureItemPresentation } from './paper-import/sourceReferencePresentation.mjs'
 
 function assertAnswerSource(materialization, sourceInput) {
   if (materialization.documents) {
@@ -50,6 +50,10 @@ function referenceNumber(number) {
   return ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'][number - 1] ?? ` ${number}`
 }
 
+function referenceFigureHtml(figure) {
+  return `<figure class="reference-figure${figure.scoring ? ' reference-figure--scoring' : ''}" id="${figure.domId}" data-reference-figure="${escapeHtml(figure.figureId)}"><img alt="" src="${figure.dataUrl}" style="width:${figure.widthMm}mm;height:${figure.heightMm}mm"></figure>`
+}
+
 function referenceSection(group, kind, starters = [], labelOverride = null, namespace = null) {
   const section = group[kind]
   const label = labelOverride ?? (kind === 'essays'
@@ -73,6 +77,9 @@ function referenceSection(group, kind, starters = [], labelOverride = null, name
       const labelHtml = `<h3 class="reference-label" data-reference-label="${escapeHtml(entry.referenceId)}">${sourceLabel}</h3>`
       const blocks = sourceReferenceBlocks(entry)
       const paragraphs = blocks.map(block => {
+        if (block.kind === 'figure') return referenceFigureHtml({
+          ...sourceReferenceFigureItemPresentation(entry, block, namespace), scoring: true,
+        })
         if (block.kind === 'table') {
           return `<table class="reference-table" data-reference-table="${escapeHtml(block.tableId)}"><tbody>${block.rows.map(row =>
             `<tr>${row.map(cell => `<td data-reference-cell="${escapeHtml(cell.cellId)}">${textHtml(cell.text)}</td>`).join('')}</tr>`,
@@ -86,7 +93,7 @@ function referenceSection(group, kind, starters = [], labelOverride = null, name
             .find(value => value && paragraph.text.startsWith(value)) : null
         const prose = starter ? `<em class="continuation-starter">${textHtml(starter)}</em>${textHtml(paragraph.text.slice(starter.length))}` : textHtml(paragraph.text)
         const figures = kind === 'essays' ? sourceReferenceFigurePresentation(entry, paragraph.paragraphId, namespace)
-          .map(figure => `<figure class="reference-figure" id="${figure.domId}" data-reference-figure="${escapeHtml(figure.figureId)}"><img alt="" src="${figure.dataUrl}" style="width:${figure.widthMm}mm;height:${figure.heightMm}mm"></figure>`).join('') : ''
+          .map(referenceFigureHtml).join('') : ''
         return `<p class="reference-paragraph reference-paragraph--${paragraph.role}" data-reference-paragraph="${escapeHtml(paragraph.paragraphId)}">${prose}</p>${figures}`
       })
       // Keep the section, source label and first source paragraph together.
@@ -137,13 +144,15 @@ ${keyTable(slice(56, 65), 5)}</section>`
   const references = `<h2>第四部分　写作（共两节，满分40分）</h2>`
     + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters,
       null, [materialization.paperId, sourceDigest, candidateDigest])).join('\n')
-    + (includeScoring ? groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'scoring')).join('\n') : '')
+    + (includeScoring ? groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'scoring', [], null,
+      [materialization.paperId, sourceDigest, candidateDigest])).join('\n') : '')
   const transcripts = listening.state === 'captured'
     ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${listening.transcript.map((segment, index) =>
       `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
     ).join('\n')}</section>`
     : ''
-  return answerDocument(paperName, `${keys}${references}${transcripts}`)
+  return answerDocument(paperName, `${keys}${references}${transcripts}`,
+    includeScoring && sourceReferences.schemaVersion === 'source-references-v4')
 }
 
 // Assembly numbering is the question renderer's continuous item/question order.
@@ -211,7 +220,13 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
     ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${transcriptHtml}</section>` : ''))
 }
 
-function answerDocument(paperName, content) {
+function answerDocument(paperName, content, scoringFigures = false) {
+  // Override the essay illustration cap only for v4 scoring charts. The
+  // printable A4 height is 297 - 21 - 24mm, less the figure's 12pt margins.
+  // Keep historical v1/v2/v3 HTML bytes unchanged.
+  const scoringFigureCss = scoringFigures
+    ? '.reference-figure--scoring img{max-height:calc(252mm - 12pt)}\n' : ''
+
   if (typeof paperName !== 'string' || !paperName.trim()) throw new Error('Owner-provided paper name is required')
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
 <title>${escapeHtml(paperName)} · 纯答案版</title>
@@ -259,7 +274,7 @@ p{margin:0;orphans:2;widows:2;overflow-wrap:break-word}
 .reference-table tr{break-inside:avoid}
 .reference-figure{margin:6pt 0;break-inside:avoid;page-break-inside:avoid}
 .reference-figure img{display:block;max-width:100%;max-height:60mm;object-fit:contain;object-position:left center}
-.source-absent{color:${paperSurfaceTokens.paperMuted}}
+${scoringFigureCss}.source-absent{color:${paperSurfaceTokens.paperMuted}}
 .transcript-label{font-weight:700;margin-top:13pt}
 .transcript{white-space:normal}
 </style></head><body data-pdf-edition="answerOnly" data-answer-layout="reference-v2">

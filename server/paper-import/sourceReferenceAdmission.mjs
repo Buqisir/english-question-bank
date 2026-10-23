@@ -1,5 +1,6 @@
+import { sourceReferenceScoringScopes } from './sourceReferenceScoringScope.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { assertSourceReferences, sourceReferenceBlocks } from './sourceReferences.mjs'
+import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 
@@ -55,7 +56,7 @@ function survivingConfirmedText(confirmation, evidence, referenceFigures) {
       return page.orderedItems.filter(item => !pictureItems.has(item.itemId)).map(item => {
         const boxes = item.observationIds.map(id => observations.get(id).region)
         const x = Math.min(...boxes.map(box => box.x)), y = Math.min(...boxes.map(box => box.y))
-        return { text: item.text, sourceIndex: { kind: 'page_region', documentId: document.documentId,
+        return { itemId: item.itemId, text: item.text, sourceIndex: { kind: 'page_region', documentId: document.documentId,
           page: page.page, region: { x, y,
             width: Math.max(...boxes.map(box => box.x + box.width)) - x,
             height: Math.max(...boxes.map(box => box.y + box.height)) - y } } }
@@ -72,8 +73,7 @@ export function assertSourceReferenceAdmission({
 }) {
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
-  const figures = sidecar?.groups.flatMap(group => group.essays.entries.flatMap(entry =>
-    (entry.figures ?? []).map(figure => ({ figure, entry, group })))) ?? []
+  const figures = sourceReferenceFigures(sidecar)
   const ocr = sourceInput.ocrSourceBytes
   if (!ocr) {
     if (figures.length) reject('Reference figures require sealed OCR confirmation and writing-scope anchors')
@@ -85,8 +85,8 @@ export function assertSourceReferenceAdmission({
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
   if (!hasReferenceVisual && !figures.length) return
-  if (!sidecar || sidecar.schemaVersion !== 'source-references-v3') {
-    reject('Confirmed official-answer content figures require a complete source-references-v3 sidecar; v1/v2 cannot omit them')
+  if (!sidecar || !['source-references-v3', 'source-references-v4'].includes(sidecar.schemaVersion)) {
+    reject('Confirmed official-answer content figures require a complete source-references-v3/v4 sidecar; v1/v2 cannot omit them')
   }
   const documents = materialization.documents.map(document => ({ ...document,
     bytes: sourceInput.documents.find(source => source.documentId === document.documentId)?.bytes }))
@@ -106,7 +106,7 @@ export function assertSourceReferenceAdmission({
     group[kind].entries.flatMap(entry => [
       ...(entry.sourceLabel === null ? [] : [{ text: entry.sourceLabel, source: entry.labelSource }]),
       ...sourceReferenceBlocks(entry).flatMap(block => block.kind === 'paragraph'
-        ? [block.paragraph] : block.rows.flat()),
+        ? [block.paragraph] : block.kind === 'table' ? block.rows.flat() : []),
     ])))
   for (const text of texts) {
     const sources = [text.source, ...(text.continuationSources ?? [])]
@@ -121,13 +121,40 @@ export function assertSourceReferenceAdmission({
     }
   }
   const scopes = writingScopes(confirmation, answerIds)
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds)
+  const sourceItems = source => (confirmedTexts.get(source?.locator.documentId) ?? [])
+    .filter(item => containsSource(source, item.sourceIndex))
+  const boundaryItems = block => block.kind === 'paragraph'
+    ? [block.paragraph.source, ...(block.paragraph.continuationSources ?? [])].flatMap(sourceItems)
+    : block.kind === 'table' ? block.rows.flat().flatMap(cell => sourceItems(cell.source)) : []
+
   const seen = new Set()
-  for (const { figure, entry, group } of figures) {
+  for (const { figure, entry, group, kind } of figures) {
     const matches = expected.filter(reference => reference.sourceRegionId === figure.sourceRegionId
       && digestJson(reference.source) === digestJson(figure.source.locator))
     if (matches.length !== 1 || seen.has(matches[0])) reject('Missing, extra, duplicated or substituted source figure region')
     const reference = matches[0]
     seen.add(reference)
+    const scoringScope = scoringScopes.get(reference.afterItem.itemId)
+    if (kind === 'scoring') {
+      const labels = sourceItems(entry.labelSource).filter(item => normalize(item.text) === normalize(entry.sourceLabel ?? ''))
+      if (!scoringScope || scoringScope.taskType !== group.taskType
+        || labels.length !== 1 || labels[0].itemId !== scoringScope.labelItemId) {
+        reject('Scoring figure requires its exact confirmed scoring label and Writing Task')
+      }
+      const blocks = sourceReferenceBlocks(entry)
+      const index = blocks.indexOf(figure)
+      const previous = index === 0 ? labels : boundaryItems(blocks[index - 1])
+      if (!previous.length || previous.at(-1).itemId !== reference.afterItem.itemId) {
+        reject('Scoring figure must follow the exact label, paragraph or final table boundary in source order')
+      }
+      assertSourceReferenceFigureReplay({ figure,
+        document: documents.find(document => document.documentId === figure.source.locator.documentId) })
+      continue
+    }
+    if (sidecar.schemaVersion === 'source-references-v4' && scoringScope) {
+      reject('Confirmed scoring figures cannot be reassigned to essays')
+    }
     if (scopes.get(reference.afterItem.itemId) !== group.taskType) {
       reject('Figure anchor requires an explicit confirmed source writing scope matching its Writing Task')
     }
