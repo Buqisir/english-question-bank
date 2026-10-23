@@ -70,12 +70,12 @@ jobs:
       - name: Install server dependencies
         run: npm --prefix server ci
       - name: Install verification system dependencies
-        timeout-minutes: 4
+        timeout-minutes: 8
         run: |
           # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
           for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 30s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
+            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
+              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
               break
             fi
             if [ "$attempt" = 2 ]; then
@@ -161,12 +161,12 @@ jobs:
       - name: Install server dependencies
         run: npm --prefix server ci
       - name: Install verification system dependencies
-        timeout-minutes: 4
+        timeout-minutes: 8
         run: |
           # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
           for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 30s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
+            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
+              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
               break
             fi
             if [ "$attempt" = 2 ]; then
@@ -415,12 +415,12 @@ jobs:
           { echo '## Isolated render lane'; echo '```json'; cat "$lane"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Install verification system dependencies
         if: ${{ steps.lane.outputs.count != '0' }}
-        timeout-minutes: 4
+        timeout-minutes: 8
         run: |
           # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
           for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 30s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
+            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
+              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
               break
             fi
             if [ "$attempt" = 2 ]; then
@@ -524,12 +524,12 @@ jobs:
           { echo '## Isolated render lane'; echo '```json'; cat "$lane"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Install verification system dependencies
         if: ${{ steps.lane.outputs.count != '0' }}
-        timeout-minutes: 4
+        timeout-minutes: 8
         run: |
           # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
           for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 30s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
+            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
+              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
               break
             fi
             if [ "$attempt" = 2 ]; then
