@@ -23,8 +23,8 @@ def main():
     parser.add_argument("--locale", default="en_US")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
-    if shutil.disk_usage(args.output).free < 10_000_000_000:
-        raise RuntimeError("LISTENING_DISK_PAUSE: less than 10 GB available")
+    if shutil.disk_usage(args.output).free < 8_000_000_000:
+        raise RuntimeError("LISTENING_DISK_PAUSE: less than 8 GB available")
     attempt = args.output / (time.strftime("attempt-%Y%m%dT%H%M%S") + "-" + uuid.uuid4().hex[:8])
     attempt.mkdir()
     script = Path(__file__).resolve().with_suffix(".swift")

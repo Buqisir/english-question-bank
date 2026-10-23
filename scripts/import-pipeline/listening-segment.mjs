@@ -103,8 +103,8 @@ function previousFallback(output, binding) {
 
 export function assertListeningDiskSpace(directory) {
   const disk = statfsSync(directory)
-  if (disk.bavail * disk.bsize < 10_000_000_000) {
-    throw Object.assign(new Error('磁盘少于 10 GB，暂停听力处理'), { code: 'LISTENING_DISK_PAUSE' })
+  if (disk.bavail * disk.bsize < 8_000_000_000) {
+    throw Object.assign(new Error('磁盘少于 8 GB，暂停听力处理'), { code: 'LISTENING_DISK_PAUSE' })
   }
 }
 

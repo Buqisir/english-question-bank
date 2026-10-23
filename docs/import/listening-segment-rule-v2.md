@@ -124,7 +124,7 @@ I'm 时，单引擎的 And 也不满足“另一引擎无词”。
 
 `fast-import prep` 启动 Apple，`after-proofread` 生成规则 attempt，
 `finish` 把已绑定的证据和 sidecar 装入本地纸卷工作区。旧 worker 听力判词不再作为安装输入。
-Apple 和 Whisper 共用既有 `asr-slot.py` 整机锁；磁盘不足 10 GB 暂停。
+Apple 和 Whisper 共用既有 `asr-slot.py` 整机锁；磁盘不足 8 GB 暂停（与导卷开新卷线一致；整卷步骤停止线 6 GB）。
 
 单独运行适配器（仅本地，不送审）：
 
