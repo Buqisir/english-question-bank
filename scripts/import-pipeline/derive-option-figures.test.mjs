@@ -52,6 +52,26 @@ test('overlapping, clipped and reordered crop plans fail before rasterization', 
   assert.throws(() => optionCropRegions({ ...plan, crops: [...plan.crops].reverse() }), /A–D/)
 })
 
+test('reviewed crops preserve unresolved stem boundaries and their options ambiguity', () => {
+  const input = structuredClone(materialization)
+  const question = input.groups[0].questions[0]
+  question.stem = 'Which picture fits?\nA small animal is shown in the following pictures.\nA.Option caption'
+  const boundary = { code: 'NCK1_OCR_STEM_OPTIONS_BOUNDARY_AMBIGUOUS', path: 'questions.30.options' }
+  input.issues.push(boundary)
+  const result = derive({ materialization: input })
+  const output = result.materialization
+  assert.equal(output.groups[0].questions[0].stem, question.stem)
+  assert.deepEqual(output.answers, input.answers)
+  assert.equal(output.groups[0].questions[0].options.length, 4)
+  assert.deepEqual(output.issues, [input.issues[0], input.issues[2], boundary])
+  assert.deepEqual(result.audit.resolves, [input.issues[1]])
+
+  // A different question's unresolved text must not block this crop's binding.
+  input.issues.at(-1).path = 'questions.31.options'
+  assert(!derive({ materialization: input }).materialization.issues.some(issue =>
+    issue.code === 'NCK1_OCR_OPTIONS_AMBIGUOUS' && issue.path === 'questions.30.options'))
+})
+
 test('source hash, duplicate bytes, wrong page and mismatched raster dimensions fail closed', () => {
   assert.throws(() => derive({ pdfBytes: Buffer.from('changed PDF') }), /immutable/)
   assert.throws(() => derive({ raster: () => ({ bytes: Buffer.from('same'), pixelWidth: 150, pixelHeight: 100 }) }), /distinct/)

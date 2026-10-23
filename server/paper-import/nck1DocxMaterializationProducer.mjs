@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v18'
+  'nck1-docx-materialization-producer-v19'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -467,42 +467,77 @@ function contentBlocks(items, context) {
   })
 }
 
-function parseFigureOptions(items) {
+function figureOptionMarker(item) {
+  if (item.kind !== 'paragraph' || item.containsDrawing) return null
+  const text = normalized(item.text)
+  const match = /^(?:([A-D])[.、)]|\(([A-D])\))\s*(.*)$/u.exec(text)
+  if (match) return { label: match[1] || match[2], caption: match[3] }
+  return /^[A-D]$/u.test(text) ? { label: text, caption: '' } : null
+}
+
+function figureQuestionBoundary(items) {
   const source = items.filter(item => item.kind !== 'paragraph' || normalized(item.text) || item.containsDrawing)
-  const first = source.findIndex(item => item.kind === 'paragraph' && /^A[.、]?$/u.test(normalized(item.text)))
-  if (first < 1) return null
+  const first = source.findIndex(item => figureOptionMarker(item))
+  const tail = source.slice(first)
+  const image = item => item?.kind === 'paragraph' && item.containsDrawing && !normalized(item.text)
+  const plain = item => item.kind === 'paragraph' && !item.containsDrawing
+  // A caption, even without a space after its label, must belong to a complete
+  // ordered group backed by images. "A small animal ..." is ordinary prose.
+  const alternating = tail.length === 8 && ['A', 'B', 'C', 'D'].every((label, i) =>
+    figureOptionMarker(tail[i * 2])?.label === label && image(tail[i * 2 + 1]))
+  const composite = tail.length === 5 && ['A', 'B', 'C', 'D'].every((label, i) =>
+    figureOptionMarker(tail[i])?.label === label) && image(tail[4])
+  const firstImage = source.findIndex(item => item.containsDrawing)
+  const unlabelled = first === -1 && firstImage > 0
+    && source.slice(0, firstImage).every(plain) && source.slice(firstImage).every(image)
+  const certain = (first > 0 && source.slice(0, first).every(plain) && (alternating || composite)) || unlabelled
+  // Unproven boundaries retain all text for review instead of discarding a
+  // plausible stem continuation or silently admitting captions into the stem.
+  const leading = certain ? source.slice(0, unlabelled ? firstImage : first) : source
+  return { source, first, alternating, certain,
+    stem: leading.filter(item => item.kind === 'paragraph' && normalized(item.text))
+      .map(item => item.text).join('\n').replace(/^\s*\d{1,3}[.．、]\s*/u, '') }
+}
+
+function parseFigureOptions(items) {
+  const { source, first, alternating, certain, stem } = figureQuestionBoundary(items)
+  if (!certain || !alternating) return null
   const tail = source.slice(first)
   // Bind explicit source labels only. A composite A–D image needs a reviewed crop plan.
-  if (tail.length !== 8) return null
   const options = []
   for (const [index, label] of ['A', 'B', 'C', 'D'].entries()) {
     const marker = tail[index * 2]
     const image = tail[index * 2 + 1]
-    if (marker.kind !== 'paragraph' || marker.containsDrawing
-      || !new RegExp(`^${label}[.、]?$`, 'u').test(normalized(marker.text))
-      || image.kind !== 'paragraph' || normalized(image.text)
-      || !image.containsDrawing || !image.materializedMedia?.mediaId) return null
+    if (figureOptionMarker(marker).caption || !image.materializedMedia?.mediaId) return null
     options.push({ label, figure: { mediaId: image.materializedMedia.mediaId } })
   }
-  if (new Set(options.map(option => option.figure.mediaId)).size !== 4
-    || source.slice(0, first).some(item => item.kind !== 'paragraph' || item.containsDrawing)) return null
-  return { leadingText: source.slice(0, first).map(item => item.text).join('\n')
-    .replace(/^\s*\d{1,3}[.．、]\s*/u, ''), options }
+  if (new Set(options.map(option => option.figure.mediaId)).size !== 4) return null
+  return { leadingText: stem, options }
 }
 
-function unboundFigureQuestionStem(items) {
-  const end = items.findIndex(item => item.kind !== 'paragraph' || item.containsDrawing
-    || /^[A-D](?:[.、](?:\s|$)|\s|$)/u.test(normalized(item.text)))
-  return items.slice(0, end < 0 ? items.length : end).map(item => item.text).join('\n')
-    .replace(/^\s*\d{1,3}[.．、]\s*/u, '')
+function parseTextOptionsAfterFigures(items, labels) {
+  const lastImage = items.findLastIndex(item => item.containsDrawing)
+  const leading = items.slice(0, lastImage + 1)
+  if (leading.some(item => item.kind !== 'paragraph' || figureOptionMarker(item))) return null
+  const tail = items.slice(lastImage + 1)
+  if (tail.some(item => item.kind !== 'paragraph')) return null
+  const parsed = parseOptionsWithLeadingText(tail, labels)
+  // Stem illustrations may precede a complete text-only options block.
+  // Never flatten interleaved image captions into text-only options.
+  if (!parsed || normalized(parsed.leadingText)) return null
+  return { ...parsed, leadingText: leading.filter(item => normalized(item.text))
+    .map(item => item.text).join('\n').replace(/^\s*\d{1,3}[.．、]\s*/u, '') }
 }
 
 function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, questionItems, blankItem = questionItem, prompt = null, documentId, issues }) {
   const sourceNumber = Number(/^(\d{1,3})[.．、]/u.exec(normalized(questionItem?.text))?.[1])
   const labels = family === 'listening' ? ['A', 'B', 'C'] : ['A', 'B', 'C', 'D']
+  const figureBoundary = family === 'reading' && questionItems.some(item => item.containsDrawing)
+    ? figureQuestionBoundary(questionItems) : null
   const parsedOptions = ['reading', 'cloze', 'listening'].includes(family)
-    ? ((family === 'reading' ? parseFigureOptions(questionItems) : null)
-        || parseOptionsWithLeadingText(questionItems, labels))
+    ? (figureBoundary
+        ? parseFigureOptions(questionItems) || parseTextOptionsAfterFigures(questionItems, labels)
+        : parseOptionsWithLeadingText(questionItems, labels))
     : { options: [] }
   const options = parsedOptions?.options || null
   if (!Number.isInteger(sourceNumber)) {
@@ -515,13 +550,17 @@ function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, que
       `questions.${canonicalNumber}.options`, `Expected ${labels.join('-')} in source order`,
       sourceRef(documentId, questionItem?.sourceIndex))
   }
+  if (figureBoundary && !parsedOptions && !figureBoundary.certain) {
+    addIssue(issues, 'NCK1_DOCX_STEM_OPTIONS_BOUNDARY_AMBIGUOUS',
+      `questions.${canonicalNumber}.options`, 'Stem/option boundary needs source review; figure crops alone cannot resolve it',
+      sourceRef(documentId, questionItem?.sourceIndex))
+  }
   const questionId = `question:${paperId}:${canonicalNumber}`
   const blankId = ['seven-choices', 'cloze', 'grammar-fill'].includes(family)
     ? `blank:${paperId}:${canonicalNumber}`
     : null
   const stem = ['reading', 'listening'].includes(family)
-    ? parsedOptions?.leadingText || (family === 'reading' && questionItems.some(item => item.containsDrawing)
-        ? unboundFigureQuestionStem(questionItems) : '')
+    ? parsedOptions?.leadingText || figureBoundary?.stem || ''
     : ''
   return {
     questionId,
