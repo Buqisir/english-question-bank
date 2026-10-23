@@ -17,6 +17,7 @@ import path from 'node:path'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { nck1MaterializationHistoricalAuthorityRef62 } from '../shared/paper-canonical/authority.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
 import historicalScreen from '../standards/paper-canonical/consumers/screen-v46.json' with { type: 'json' }
 import {
@@ -215,6 +216,55 @@ assert.deepEqual(
   ['paragraph', 'figure', 'figure', 'table'],
 )
 assert.equal(mediaProduced.mediaFiles.length, 3)
+
+// Empty OCR drawing carriers after 注意 are content, never response givens.
+// Interleaving them with real text must not shift the title onto a figure.
+for (const texts of [[], ['Our Reading Corner'], ['Dear Mina,'], ['Dear Mina,', 'Please join us.']]) {
+  for (let imageIndex = 0; imageIndex <= texts.length; imageIndex += 1) {
+    const [question, coverage, answer] = fixture.sourceDocuments
+    const questionStructure = extractDocxDocumentStructure(question.bytes)
+    const titleIndex = questionStructure.body.findIndex(item => item.text === 'Should We Join the Reading Club?')
+    assert(titleIndex > 0)
+    const source = { kind: 'page_region', documentId: coverage.documentId, page: 1,
+      region: { x: .2, y: .7, width: .5, height: .15 } }
+    const media = structuredClone(mediaProduced.materialization.media[0])
+    media.extraction = { ...source, kind: 'pdf_crop', density: 144 }
+    const drawing = { kind: 'paragraph', text: '', containsDrawing: true,
+      sourceIndex: source, materializedMedia: { mediaId: media.mediaId } }
+    const givenItems = texts.map((text, index) => ({ kind: 'paragraph', text,
+      sourceIndex: 900 + index, containsDrawing: false }))
+    givenItems.splice(imageIndex, 0, drawing)
+    questionStructure.body.splice(titleIndex, 1, ...givenItems)
+    const visual = { visualId: 'visual:synthetic-application', page: 1, region: source.region,
+      disposition: 'content_media', targetId: media.mediaId }
+    const result = produceNck1MaterializationFromStructures({
+      paperId: fixture.paperId, documents: fixture.sourceDocuments, question, answer, coverage,
+      questionStructure, answerStructure: extractDocxDocumentStructure(answer.bytes),
+      mediaInventory: [media], mediaFiles: [mediaProduced.mediaFiles[0]], sourceVisuals: [visual],
+      issues: [], codePrefix: 'NCK1_DOCX', producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+      reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
+      sourceDigest: nck1DocxProducerSourceDigest(fixture.sourceDocuments),
+    })
+    assert.equal(result.disposition, 'ready_for_verification', JSON.stringify(result.review.required))
+    const group = result.materialization.groups.find(group => group.slotId === 'writing.application')
+    const [figure] = group.blocks.filter(block => block.kind === 'figure')
+    assert.equal(figure.caption, '')
+    assert.equal(Object.hasOwn(figure, 'role'), false)
+    assert.equal(figure.mediaId, media.mediaId)
+    assert.deepEqual(figure.source, source)
+    assert.deepEqual(result.materialization.media, [media])
+    assert.deepEqual(result.mediaFiles, [mediaProduced.mediaFiles[0]])
+    assert.deepEqual(result.materialization.sourceCoverage.visuals.find(item => item.visualId === visual.visualId), visual)
+    const expected = texts.map((text, index) => ({ text,
+      role: text.startsWith('Dear') ? 'salutation' : index === 1 ? 'opening' : 'title' }))
+    assert.deepEqual(group.writingTask.givenSkeleton, expected)
+    const titles = group.blocks.filter(block => block.kind === 'paragraph' && block.role === 'title')
+    assert.deepEqual(titles.map(block => block.content[0].text), expected.filter(item => item.role === 'title').map(item => item.text))
+    if (titles.length) assert.equal(titles[0].source.selector, '(/w:document/w:body//w:p)[900]')
+    assert.deepEqual(validateNck1SourceMaterialization(result.materialization), [])
+  }
+}
+
 const importedMedia = importCanonicalCandidate({
   kind: 'nck1-source-materialization',
   materializationBytes: new TextEncoder().encode(JSON.stringify(

@@ -43,6 +43,32 @@ function fixture({ figure = false } = {}) {
 const capture = f => buildSourceReferences(f.materialization, f.evidence, f.confirmation,
   { sourceDocuments: f.sourceDocuments })
 
+test('merged 作答示例 headings capture both writing tasks with original labels and locators', () => {
+  const f = fixture()
+  f.materialization.groups.push({ groupId: 'writing:continuation', writingTask: { taskType: 'continuation' } })
+  const items = f.confirmation.documents[0].pages[0].orderedItems
+  items[1].text = '第一节 作答示例'
+  items.splice(2, 1)
+  const second = items.find(item => item.text === 'Possible Version 2')
+  second.text = '第二节 作答示例'
+  const before = structuredClone(f)
+  const result = capture(f)
+  for (const [index, heading] of [items[1], second].entries()) {
+    const section = result.groups[index].essays
+    assert.equal(section.state, 'captured')
+    assert.equal(section.entries.length, 1)
+    assert.equal(section.entries[0].sourceLabel, '作答示例')
+    const observation = f.evidence.documents[0].pages[0].observations
+      .find(item => item.observationId === heading.observationIds[0])
+    assert.equal(section.entries[0].labelSource.locator.region.y, observation.region.y)
+    assert.equal(section.entries[0].labelSource.locator.documentId, 'answers')
+  }
+  assert.equal(result.groups[0].essays.entries[0].paragraphs[0].text,
+    'Our design shows how we could share a cheerful moment.')
+  assert.equal(result.groups[1].essays.entries[0].paragraphs[0].text, 'World Smile Day remains legitimate prose.')
+  assert.deepEqual(structuredClone(f), before)
+})
+
 test('numbered possible versions become separate source-labeled entries', () => {
   const f = fixture()
   const before = structuredClone(f)

@@ -11,6 +11,10 @@ const WRITING_SECTION = [
   ['application', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:应用文|书面表达)\s*[）)]|应用文|书面表达)/u],
   ['continuation', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:读后续写|续写)\s*[）)]|读后续写|续写)/u],
 ]
+// Numbering varies between answer books. Only the explicit task word gives
+// these fully anchored headings their scope; NFKC is a matching view only.
+const NUMBERED_APPLICATION_SECTION = /^\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)\s*应用文(?:写作)?\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
+const NUMBERED_CONTINUATION_SECTION = /^\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)\s*读后续写\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
 const WRITING_SCORING_SECTION = [
   ['application', /^应用文评分细则\s*[:：]?$/u],
   ['continuation', /^读后续写评分细则\s*[:：]?$/u],
@@ -23,13 +27,14 @@ const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*
 // without another "第…部分" heading. That divider ends the key's writing scope.
 const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u
 
-const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
+const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
+const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
 const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
 const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[）)]$/iu
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
-const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
+const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|作答示例|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
 const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
 const STUDENT_SCRIPT_BOUNDARY = /^[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*样卷\s*[:：]?$/u
@@ -150,19 +155,25 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('entry.parenthesized', 'entry-label', 50, PARENTHESIZED_SAMPLE_LABEL, '(One possible version)', 'One possible version:'),
   pattern('entry.version', 'entry-label', 60, /^(?:(?:A|One)\s+)?Possible\s+Version\s*\d+[:：]?$/iu,
     'Possible Version 2', 'Possible Version 2 describes a design.'),
+  rule('entry.arabic-numbered', 'entry-label', 70, f => NUMBERED_ENTRY_LABEL.test(f.nfkc),
+    '4. 评分细则', '4. 评分时应考虑内容。'),
   pattern('entry.scoring-kind', 'entry-kind', 10, SCORING_LABEL, '二、评分原则', '参考范文', { value: 'scoring' }),
   pattern('entry.essay-kind', 'entry-kind', 20, ESSAY_LABEL, '参考范文', '二、评分原则', { value: 'essays' }),
   rule('entry.sample-label', 'sample-label', 10, f =>
     Boolean(firstLineRole('entry-label', f)) && ESSAY_LABEL.test(f.text),
   '参考范文（80词）', '二、评分原则'),
   pattern('writing.inline-sample', 'inline-sample', 10,
-    /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)\s+([（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu,
+    /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)\s+(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu,
     '第一节（满分15分） (One possible version)', '第一节（阅读理解） (One possible version)'),
   pattern('writing.repeated-heading', 'repeated-heading', 10, /^写作\s*[:：]?$/u, '写作', '第四部分 写作'),
   pattern('writing.part', 'writing-part', 10, WRITING_PART, '第四部分 写作', '第三部分 语言知识运用'),
   pattern('writing.bare-section', 'bare-section', 10, BARE_WRITING_SECTION, '第一节', '第一节（阅读理解）'),
   pattern('writing.application', 'writing-section', 10, WRITING_SECTION[0][1], '第一节（应用文）', '第一节（阅读理解）', { value: 'application' }),
   pattern('writing.continuation', 'writing-section', 20, WRITING_SECTION[1][1], '第二节 读后续写', '第二节(语法填空)', { value: 'continuation' }),
+  rule('writing.numbered-application', 'writing-section', 30, f => NUMBERED_APPLICATION_SECTION.test(f.nfkc),
+    '（二）应用文写作', '（二）语法适用', { value: 'application' }),
+  rule('writing.numbered-continuation', 'writing-section', 40, f => NUMBERED_CONTINUATION_SECTION.test(f.nfkc),
+    '（三）读后续写（满分25分）', '（三）读后续写需要审题。', { value: 'continuation' }),
   pattern('writing.application-scoring', 'scoring-section', 10, WRITING_SCORING_SECTION[0][1], '应用文评分细则', '本篇应用文评分细则需要另行讨论。', { value: 'application' }),
   pattern('writing.continuation-scoring', 'scoring-section', 20, WRITING_SCORING_SECTION[1][1], '读后续写评分细则：', '读后续写评分细则分析', { value: 'continuation' }),
   rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && ANSWER_EXPLANATION_START.test(f.text),
