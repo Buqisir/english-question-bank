@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
 import { readExamDate } from '../../shared/examDate.mjs'
+import { OCR_NUMBERING_REPORT_VERSION, validateOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
 import { configuredPaperHeader, validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 
 import {
@@ -1007,7 +1008,7 @@ function jsonPointerValue(root, pointer) {
 
 export function validateAgentOcrCorrectionSidecar(sidecar, { materialization, paperId, documents, sourceDocuments, sourceDigest, candidateDigest }) {
   const invalid = (message) => fail(message, 'IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID')
-  if (sidecar?.schemaVersion !== 'agent-ocr-correction-report-v2'
+  if (!['agent-ocr-correction-report-v2', OCR_NUMBERING_REPORT_VERSION].includes(sidecar?.schemaVersion)
     || sidecar.paperId !== paperId
     || typeof sidecar.ocrConfirmationId !== 'string'
     || typeof sidecar.ocrRevisionId !== 'string'
@@ -1038,6 +1039,11 @@ export function validateAgentOcrCorrectionSidecar(sidecar, { materialization, pa
     }
     if (jsonPointerValue(materialization, entry.materializationTarget.jsonPointer) !== entry.after) {
       invalid(`Agent OCR correction report entry ${index} no longer matches current Materialization`)
+    }
+    if (Object.hasOwn(entry, 'standardizationProjection')
+      && !validateOcrNumberingProjection(sidecar, entry, materialization,
+        entry.standardizationProjection?.historicalConfirmedText)) {
+      invalid(`Agent OCR correction report entry ${index} has an invalid standardization projection`)
     }
   }
   return sidecar

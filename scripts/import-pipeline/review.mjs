@@ -18,6 +18,7 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
+import { addOcrNumberingProjections } from '../../shared/ocrNumberingProjection.mjs'
 import { tmpdir } from 'node:os'
 import tls from 'node:tls'
 
@@ -868,7 +869,7 @@ function finalizeOcrCorrectionReport(paperId) {
   if (!imported.candidate || imported.issues.length) fail('Materialization must pass before preparing its report')
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   if (!preview.compilation) fail('Candidate must compile before preparing its report')
-  const report = {
+  let report = {
     schemaVersion: 'agent-ocr-correction-report-v2',
     paperId,
     sourceDigest: preview.candidate.source.sha256,
@@ -880,6 +881,7 @@ function finalizeOcrCorrectionReport(paperId) {
     entries: authored.entries,
   }
   const materialization = JSON.parse(new TextDecoder().decode(loaded.sourceInput.materializationBytes))
+  report = addOcrNumberingProjections(report, receipt, materialization)
   validateAgentOcrCorrectionSidecar(report, {
     materialization,
     paperId, documents: loaded.manifest.documents,

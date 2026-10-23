@@ -37,7 +37,7 @@ bound report. Legacy `source_typo` receipts remain historical evidence and are n
 
 The CLI finalizer and server use the same historical-item binding check. For
 `ocr_misrecognition`, `before` remains the exact historical OCR text. `after`
-must equal the confirmed text, except for two proved structural projections:
+must equal the confirmed text, except for the proved projections below:
 an exact `<source question number>. ` prefix may move out of a question's
 `stem` into its number field; or one LF may separate two complete, consecutive
 confirmed items represented by adjacent text runs in the same table cell.
@@ -45,6 +45,20 @@ Both projections require the target's source document/page to match the
 historical item, and the table's next run must equal the next confirmed item.
 These are not source errors. No general whitespace trimming, fuzzy text match,
 receipt rewrite, or deletion of correction entries is permitted.
+
+New `agent-ocr-correction-report-v3` reports additionally permit the versioned
+`chinese-context-numbering-fullwidth-v1` projection: only the enclosing ASCII
+parentheses of Chinese-context numbered entries become `（` / `）`. The CLI
+finalizer records `standardizationProjection` with the exact receipt identity,
+historical confirmed text, target JSON pointer and UTF-16 change ranges; CLI
+and server recompute it from the receipt and source-backed target context using
+the submission gate's language rules. English clauses, English quotations and
+English sentences with Chinese word glosses remain excluded. The complete OCR
+item must map to one text run; unprovable cross-run mappings fail closed.
+Digits, spaces and all other characters remain exact. Historical `before` and
+category remain unchanged, v2 reports retain their original rules, and the
+compatible sidecar filename remains `agent-ocr-correction-report-v2.json`.
+This is not a source error or a `source-text-review-v3` punctuation correction.
 
 ### Source-text preprocessing, without intermediate Owner approval
 

@@ -292,7 +292,7 @@ function revisionEvidence(revision, storedFiles) {
   const manifest = revision.manifest
   if (!manifest.paperName || !manifest.producerBuildId
     || (manifest.schemaVersion === 'web-import-review-bundle-v3'
-      && (manifest.ocrCorrectionReportVersion !== 'agent-ocr-correction-report-v2'
+      && (!['agent-ocr-correction-report-v2', 'agent-ocr-correction-report-v3'].includes(manifest.ocrCorrectionReportVersion)
         || !SHA.test(manifest.ocrCorrectionReportDigest)))) fail('MISSING_EVIDENCE', '/identity')
   const files = inventory(manifest.files)
   if (!same(files, inventory(storedFiles))) fail('BASELINE_UNTRUSTED', '/inventory')

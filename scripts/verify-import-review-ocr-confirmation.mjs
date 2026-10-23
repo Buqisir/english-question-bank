@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
+import { verifyCjkNumberingProjection } from './lib/verifyCjkNumberingProjection.mjs'
+import { addOcrNumberingProjections } from '../shared/ocrNumberingProjection.mjs'
 
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
@@ -278,6 +280,7 @@ function send(response, status, body, contentType) {
 export { writeSyntheticSource, reviewManifest, uploadRevision }
 
 if (process.env.EQB_OCR_REVIEW_FIXTURE_ONLY !== '1') {
+verifyCjkNumberingProjection()
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-import-review-ocr-'))
 const stagingRoot = path.join(tempRoot, 'staging')
 let server = null
@@ -493,7 +496,8 @@ try {
       })),
     })),
   }
-  legacyConfirmation.documents[0].pages[0].orderedItems[0].text += ' [owner checked]'
+  const syntheticCorrection = ' (1)测试编号； [owner checked]'
+  legacyConfirmation.documents[0].pages[0].orderedItems[0].text += syntheticCorrection
   legacyConfirmation.documents[0].pages[0].orderedItems.reverse()
   store.confirmOcrRevision(paperId, finalized.id, {
     bundleDigest: finalized.bundleDigest, confirmation: legacyConfirmation,
@@ -563,7 +567,7 @@ try {
   assert.equal(receipt.correctionReport.entries[0].correctedText, editedItem.text)
   assert.equal(receipt.correctionReport.entries[0].page, 1)
   assert.equal(receipt.correctionReport.sourceSetDigest, fixture.evidence.sourceSetDigest)
-  assert.equal(receipt.correctionReport.entries[0].ocrText, editedItem.text.replace(' [owner checked]', ''))
+  assert.equal(receipt.correctionReport.entries[0].ocrText, editedItem.text.replace(syntheticCorrection, ''))
   const finalApproval = await fetch(
     `${origin}/api/import-reviews/papers/${paperId}/revisions/${publicRevision.id}/approve`,
     { method: 'POST', headers: { authorization: `Bearer ${agentToken}`, 'content-type': 'application/json' }, body: '{}' },
@@ -627,8 +631,9 @@ try {
     },
   })
   await bindingStore.ready()
-  function finalizeBindingCase(materialization, entry) {
-    const report = { ...candidateReport, entries: [entry] }
+  function finalizeBindingCase(materialization, entry, projectNumbering = false, manifestVersion = null) {
+    const authored = { ...candidateReport, entries: [entry] }
+    const report = projectNumbering ? addOcrNumberingProjections(authored, receipt, materialization) : authored
     const bytes = Buffer.from(JSON.stringify({ materialization, report }))
     const input = {
       schemaVersion: 'web-import-review-bundle-v3', paperId,
@@ -637,7 +642,7 @@ try {
       visibleStructureDigest: sha256(Buffer.from('synthetic-visible-structure')),
       paragraphSummariesDigest: sha256(Buffer.from('synthetic-summaries')),
       publicSearchMetadataDigest: sha256(Buffer.from('synthetic-search-metadata')),
-      ocrCorrectionReportVersion: report.schemaVersion, ocrCorrectionReportDigest: digestJson(report),
+      ocrCorrectionReportVersion: manifestVersion || report.schemaVersion, ocrCorrectionReportDigest: digestJson(report),
       producerBuildId: 'synthetic-ocr-structural-mapping',
       files: [{ path: 'marker.json', mediaType: 'application/json', role: 'synthetic-projection',
         sha256: sha256(bytes), byteLength: bytes.byteLength }],
@@ -649,6 +654,20 @@ try {
     return bindingStore.finalizeRevision(created.revision.id)
   }
   const source = { kind: 'page_region', documentId: 'question-source-1', page: 1 }
+  const numberingEntry = {
+    ocrItemId: editedItem.itemId, category: 'ocr_misrecognition',
+    before: receipt.correctionReport.entries[0].ocrText,
+    after: editedItem.text.replace('(1)', '（1）'), reason: 'Project Chinese-context numbering only',
+    sourceLocator: source, materializationTarget: { jsonPointer: '/groups/0/blocks/0/content/0/text' },
+  }
+  const numberingMaterialization = { groups: [{ blocks: [{
+    kind: 'paragraph', source, content: [{ kind: 'text', text: numberingEntry.after }],
+  }] }] }
+  assert.equal(finalizeBindingCase(numberingMaterialization, numberingEntry, true).state, 'awaiting_review',
+    'Versioned numbering projection finalizes against the immutable server-held OCR receipt')
+  assert.throws(() => finalizeBindingCase(numberingMaterialization, numberingEntry, true,
+    'agent-ocr-correction-report-v2'), error => error.code === 'IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID',
+  'Manifest cannot relabel a v3 report as v2')
   const stem = questionItem.text.slice('1. '.length)
   const questionEntry = {
     ocrItemId: questionItem.itemId, category: 'ocr_misrecognition',
