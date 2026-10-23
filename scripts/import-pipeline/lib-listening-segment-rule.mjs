@@ -91,11 +91,14 @@ function numberWords(value) {
 }
 
 const meridiemPattern = '[ap]\\s*\\.?\\s*m\\.?'
-const listeningLexemes = new RegExp([
-  '[$£]\\d+(?:,\\d{3})*(?:\\.\\d{2})?',
+const listeningClockLexemes = [
   `\\b\\d{1,2}\\s*:\\s*\\d{2}(?:\\s*${meridiemPattern}(?![a-z]))?`,
   `\\b\\d{1,2}\\s*\\.\\s*\\d{2}\\s*${meridiemPattern}(?![a-z])`,
   `\\b\\d{1,4}\\s*${meridiemPattern}(?![a-z])`,
+]
+const listeningLexemes = new RegExp([
+  '[$£]\\d+(?:,\\d{3})*(?:\\.\\d{2})?',
+  ...listeningClockLexemes,
   '\\b[ap]\\s*\\.\\s*m\\.?(?![a-z])',
   "\\bo\\s*['’]\\s*clock\\b",
   '\\b\\d+(?:st|nd|rd|th)\\b',
@@ -138,6 +141,8 @@ function normalizeListeningUnits(value, aliases = []) {
   // Only exact, valid colon clocks in the source license these ambiguous ASR
   // spellings. Match whole numeric expressions; never a price or digit suffix.
   const lexemes = aliases.length ? new RegExp([
+    // Consume the full explicit clock before an alias can take its numeric prefix.
+    ...listeningClockLexemes,
     ...aliases.map(({ pattern }) => `(?<![\\w$£.,:])(?:${pattern})(?!\\w|\\s*[.:]\\s*\\d)`),
     listeningLexemes.source,
   ].join('|'), 'giu') : listeningLexemes

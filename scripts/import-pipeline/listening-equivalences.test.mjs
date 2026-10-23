@@ -148,6 +148,38 @@ test('only a source colon clock licenses compact, decimal and spaced ASR clock f
     assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'), `${source} / ${actual}`)
   }
 })
+test('complete meridiem clocks keep precedence over a bare clock alias in the same group', () => {
+  for (const meridiem of ['am', 'pm', 'a.m.', 'p.m.']) {
+    for (const clock of ['10.35', '1035', '10 .35']) {
+      const result = evaluate(`at 10:35 and at 10:35 ${meridiem}`,
+        `at 10:35 and at ${clock} ${meridiem}`)
+      assert.equal(result.decision, 'usable', `${clock} ${meridiem}: ${result.issues}`)
+      assert.equal(result.occurrences[0].alignment.editDistance, 0)
+      const qualified = result.observedWindows[0].words.filter(w => w.expressionText === `${clock} ${meridiem}`)
+      assert.equal(qualified.length, 4)
+      assert.ok(qualified.every(w => w.expressionType === 'time'))
+    }
+  }
+})
+
+test('a bare clock in another source group cannot intercept a complete meridiem clock', () => {
+  for (const meridiem of ['am', 'pm', 'a.m.', 'p.m.']) {
+    const groups = [
+      { segmentId: 'listening-text-1', questionNumbers: [1], text: 'We meet at 10:35 beside the quiet harbor today' },
+      { segmentId: 'listening-text-2', questionNumbers: [2], text: `We arrive at 10:35 ${meridiem} beside the village garden today` },
+    ]
+    const parts = groups[1].text.replace('10:35', '10.35').split(' ')
+    const end = 2 + parts.length * .2
+    const result = evaluateListeningEngine({ groups: [groups[1]], corpus: groups, windows: [windowFor(parts)],
+      instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}], durationSeconds: 100,
+      pauses: [{startSeconds: 1, endSeconds: 1.95}, {startSeconds: end + .05, endSeconds: end + 1}],
+    }).groups[0]
+    assert.equal(result.decision, 'usable', `${meridiem}: ${result.issues}`)
+    assert.equal(result.occurrences[0].alignment.editDistance, 0)
+    assert.ok(!result.observedWindows[0].words.some(w => w.expressionType === 'source_clock_alias'))
+  }
+})
+
 test('source-licensed clock aliases retain raw timing and never cross invalid acoustic boundaries', () => {
   const group = { segmentId: 'listening-text-1', questionNumbers: [1],
     text: 'We arrive at 10:35 beside the quiet village harbor today' }
