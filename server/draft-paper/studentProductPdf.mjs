@@ -162,8 +162,11 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
       if (ordinary && !(Number.isInteger(result.pageCount) && result.pageCount > policy.targetPages)) regularAllOverLimit = false
       return result
     } catch (error) {
-      // Unknown geometry never authorizes moving the opening into the margin.
-      if (ordinary) regularAllOverLimit = false
+      // A measured answer-box height can repair its own vertical content
+      // overflow. Other unknown geometry still forbids moving the opening.
+      const answerHeightOverflow = error.code === 'PAPER_LAYOUT_OVERFLOW'
+        && ['application', 'continuation'].includes(error.answerBoxFamily)
+      if (ordinary && !answerHeightOverflow) regularAllOverLimit = false
       throw error
     }
   }
@@ -205,6 +208,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
       searchedCandidates, explicitPlan: false, timing: finishPaginationTiming(timed.timing) }
   }
   const triedHeights = new Map()
+  const measuredMinimumHeights = new Map()
   for (const fontSizePt of fontSizes) {
     const tierStart = searchedCandidates
     const minimumContinuation = fontSizePt === 12 ? 27 : 24
@@ -245,6 +249,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
       }
       heights[family] = high
     }
+    measuredMinimumHeights.set(fontSizePt, heights)
     if (triedHeights.get(fontSizePt).has(`${heights.application}/${heights.continuation}`)) continue
     for (const figureLayout of ['natural', 'float80']) {
       const planned = await fitProfile(layoutFor(fontSizePt, figureLayout, heights.application, heights.continuation), tierStart)
@@ -256,8 +261,8 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   if (regularAllOverLimit && searchedCandidates > 0) {
     for (const fontSizePt of fontSizes) {
       const tierStart = searchedCandidates
-      const minimumContinuation = fontSizePt === 12 ? 27 : 24
-      const planned = await fitProfile(layoutFor(fontSizePt, 'natural', minimumApplication, minimumContinuation, true), tierStart)
+      const heights = measuredMinimumHeights.get(fontSizePt)
+      const planned = await fitProfile(layoutFor(fontSizePt, 'natural', heights.application, heights.continuation, true), tierStart)
       if (planned) return planned
     }
   }

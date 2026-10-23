@@ -127,6 +127,36 @@ assert.deepEqual(mediaRestored.layout.answerBoxHeightsMm, { application: 65, con
 await assert.rejects(() => planStudentProductPdf(html, { edition: 'largeComplete', render: async () => ({ pageCount: 13, inspection }) }),
   error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
 
+// Keqiao: 27–32mm cannot contain the supplied continuation starters. These
+// known box-content failures must leave the cover-lift fallback reachable,
+// seeded with the measured 33mm minimum, then restore usable answer space.
+for (const family of ['application', 'continuation']) {
+  const seen = []
+  const minimum = family === 'application' ? 38 : 33
+  const result = await planStudentProductPdf(html, { edition: 'largeComplete', render: async source => {
+    const sizes = geometry(source)
+    const lifted = source.includes('student-friendly-cover-lift-v2')
+    seen.push({ ...sizes, lifted })
+    if (sizes[family] < minimum) throw Object.assign(new Error('supplied text exceeds answer height'), {
+      code: 'PAPER_LAYOUT_OVERFLOW', answerBoxFamily: family,
+    })
+    const fits = lifted && sizes.application <= (family === 'application' ? 42 : 28) && sizes.continuation <= 55
+    return { pageCount: fits ? 12 : 13, inspection }
+  } })
+  assert.equal(result.pageCount, 12)
+  assert.equal(result.layout.profile, 'student-friendly-cover-lift-v2')
+  const firstLift = seen.findIndex(entry => entry.lifted)
+  assert.deepEqual(seen[firstLift], {
+    font: 12, application: family === 'application' ? minimum : 24,
+    continuation: family === 'continuation' ? minimum : 27, lifted: true,
+  }, 'cover-lift reuses both measured content minima')
+  assert.ok(seen.slice(0, firstLift).some(entry => entry[family] === minimum - 1))
+  assert.deepEqual(result.layout.answerBoxHeightsMm, {
+    application: family === 'application' ? 42 : 28, continuation: 55,
+  }, 'cover-lift restores answer space after fitting the measured minima')
+  assert.equal(result.searchedCandidates, seen.length)
+}
+
 const layout = { profile: 'student-friendly-v1', fontSizePt: 12, figureLayout: 'natural', answerBoxHeightsMm: { application: 65, continuation: 57 } }
 const identity = { paperId: 'fixture', sourceDigest: 'source', candidateDigest: 'candidate',
   slotBindings: [{ slotId: 'writing.application', groupId: 'application', familyContractId: 'application-writing' },
@@ -327,6 +357,27 @@ assert.throws(() => applyStudentProductLayout(html, {
   ...layout, profile: coverLiftProfile, figureLayout: 'float80',
 }, 'largeNoListening'), /Invalid/)
 try {
+  // Exercise the renderer's actual error classification, not just synthetic
+  // planner errors: horizontal and page-area failures remain unknown.
+  for (const family of ['application', 'continuation']) {
+    for (const failure of ['height', 'width', 'page-area', 'mixed-child', 'mixed-block', 'mixed-options']) {
+      const starterStyle = failure === 'width' ? 'width:200mm'
+        : failure === 'mixed-child' ? 'height:40mm;position:relative;left:-10mm'
+          : failure === 'height' || failure.startsWith('mixed-') ? 'height:40mm' : ''
+      const fixture = `<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}
+        body{margin:0}.writing-answer-box{box-sizing:border-box}
+        </style></head><body><div class="writing-answer-box canonical-${family}-response"
+        ${failure === 'page-area' ? 'style="position:relative;left:-30mm"' : ''}>
+        <div class="writing-starter-line" style="${starterStyle}">Supplied starter</div>
+        </div>${failure === 'mixed-block' ? '<div class="writing-answer-box" style="width:200mm;height:10mm"></div>'
+          : failure === 'mixed-options' ? `<div class="canonical-options"><span>${'W'.repeat(200)}</span></div>` : ''}</body></html>`
+      const selected = { ...layout, answerBoxHeightsMm: { application: 24, continuation: 27 } }
+      await assert.rejects(() => renderPaginatedPaper(applyStudentProductLayout(fixture, selected, 'largeComplete')),
+        error => error.code === 'PAPER_LAYOUT_OVERFLOW'
+          && error.answerBoxFamily === (failure === 'height' ? family : undefined),
+        `${family}: only an in-bounds box's vertical content overflow identifies a reparable answer height`)
+    }
+  }
   const coverFixture = `<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}
     body,p{margin:0}.canonical-paper-opening{margin-top:0}</style></head><body>
     <header class="canonical-paper-opening"><p>Source paper title</p><p>English</p></header>
