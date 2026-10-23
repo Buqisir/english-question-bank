@@ -46,25 +46,27 @@ test('a missing first tail is absence of evidence, paired by time with the compl
   assert.equal(result.selectedEngine, 'faster-whisper')
   assert.equal(reconcileListeningEngines(full, missing)[0].decision, 'usable')
 })
-test('extra readings remain blocked with a distinct observed-count reason', () => {
+test('complete exact readings follow audio count and cover every repetition', () => {
   const result = reconcileListeningEngines(repeatedEngine({third: true}), repeatedEngine({engine: 'faster-whisper'}))[0]
-  assert.equal(result.decision, 'review_required')
-  assert.ok(result.issues.includes('OBSERVED_READING_COUNT_EXCEEDED'))
+  assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
+  assert.equal(result.occurrences.length, 3)
+  assert.ok(result.notes.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.playback.endSeconds, result.occurrences.at(-1).playback.endSeconds)
   assert.ok(!result.engineAttempts[0].issues.includes('ANCHOR_AMBIGUOUS'))
 })
-test('critical counterevidence in a missing-tail candidate blocks either direction', () => {
+test('word differences in a missing-tail engine are notes when the other engine locates every reading', () => {
   const text = 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over here'
   for (const first of [text.replace('can buy', 'can not buy'), text.replace('can buy', 'could buy'),
     text.replace('twenty dollars', 'thirty dollars'), text.replace('before seven', 'before eight')]) {
     const partial = repeatedEngine({first}), full = repeatedEngine({engine: 'faster-whisper'})
     for (const pair of [[partial, full], [full, partial]]) {
       const result = reconcileListeningEngines(...pair)[0]
-      assert.equal(result.decision, 'review_required', first)
-      assert.ok(result.issues.includes('ENGINE_CONFLICT'), first)
+      assert.equal(result.decision, 'usable', first)
+      assert.ok(result.engineNotes.some(n => n.kind === 'observed_critical_word_difference'), first)
     }
   }
 })
-test('missing-head tail candidates also retain critical counterevidence in either engine', () => {
+test('missing-head candidates retain word notes alongside complete boundaries from the other engine', () => {
   const text = 'Blazing birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over there'
   const full = repeatedEngine({engine: 'faster-whisper'})
   assert.equal(reconcileListeningEngines(repeatedEngine({first: text}), full)[0].decision, 'usable')
@@ -72,7 +74,9 @@ test('missing-head tail candidates also retain critical counterevidence in eithe
     text.replace('twenty dollars', 'thirty dollars'), text.replace('before seven', 'before eight')]) {
     const partial = repeatedEngine({first})
     for (const pair of [[partial, full], [full, partial]]) {
-      assert.equal(reconcileListeningEngines(...pair)[0].decision, 'review_required', first)
+      const result = reconcileListeningEngines(...pair)[0]
+      assert.equal(result.decision, 'usable', first)
+      assert.ok(result.engineNotes.length)
     }
   }
 })
@@ -105,7 +109,7 @@ test('Astra P1: a late not in a missing-tail candidate cannot be clipped by refe
   })
   assertCounterevidenceBlocks(partial, full, 'not at 8.0–8.2 after reference body end 6.8')
 })
-test('Astra P1: both anchors may be missing while observed can/could still blocks fallback', () => {
+test('unanchored internal word differences become notes against complete reference readings', () => {
   const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
   const full = astraEngine(astraText, null, {engine: 'faster-whisper'})
   const clean = astraEngine(first)
@@ -114,7 +118,11 @@ test('Astra P1: both anchors may be missing while observed can/could still block
   for (const pair of [[clean, full], [full, clean]]) assert.equal(reconcileListeningEngines(...pair)[0].decision, 'usable')
   for (const changed of [first.replace('can buy', 'could buy'), first.replace('can buy', 'can not buy'),
     first.replace('twenty dollars', 'thirty dollars'), first.replace('before seven', 'before eight')]) {
-    assertCounterevidenceBlocks(astraEngine(changed), full, changed)
+    for (const pair of [[astraEngine(changed), full], [full, astraEngine(changed)]]) {
+      const result = reconcileListeningEngines(...pair)[0]
+      assert.equal(result.decision, 'usable', changed)
+      assert.ok(result.engineNotes.length, changed)
+    }
   }
 })
 test('reference envelope edges retain negative, modal and numeric observations in both directions', () => {
@@ -141,7 +149,7 @@ test('reference envelope edges retain negative, modal and numeric observations i
     }
   }
 })
-test('counterevidence in a discarded overlapping window also blocks a complete reference engine', () => {
+test('discarded overlapping windows retain internal word notes without blocking complete boundaries', () => {
   const segments = [windowFor(astraText, 2), windowFor(astraText, 12)].flatMap(w => w.result.segments)
   const changed = astraText.replace('Bright', 'Blazing').replace('over there', 'over here').replace('can buy', 'could buy')
   const bad = astraEngine(astraText, null, {windows: [
@@ -149,7 +157,9 @@ test('counterevidence in a discarded overlapping window also blocks a complete r
     {...windowFor(changed, 2), endSeconds: 9},
   ]})
   assert.equal(bad.groups[0].decision, 'usable', 'the chosen anchor clock remains complete')
-  assertCounterevidenceBlocks(bad, astraEngine(astraText, null, {engine: 'faster-whisper'}), 'discarded window could')
+  const result = reconcileListeningEngines(bad, astraEngine(astraText, null, {engine: 'faster-whisper'}))[0]
+  assert.equal(result.decision, 'usable')
+  assert.ok(result.engineNotes.some(n => n.kind === 'observed_critical_word_difference'))
 })
 test('unanchored raw speech spanning two physical readings has no safe subset assignment', () => {
   const text = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
@@ -229,8 +239,13 @@ test('boundary search skips an overlapping silence that cannot retain padding an
     pauses: [{startSeconds: 1, endSeconds: 1.9}, {startSeconds: end - 0.08, endSeconds: end + 0.003}]})
   assert.ok(noLaterPause.issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
 })
-test('reading count is never inferred from one occurrence', () => {
-  assert.equal(evaluate({ instructions: two }).decision, 'review_required')
+test('fewer complete readings require full recording coverage; print count is retained as a note', () => {
+  const result = evaluate({ instructions: two })
+  assert.equal(result.decision, 'usable')
+  assert.ok(result.notes.includes('READING_COUNT_MISMATCH'))
+  const crop = evaluate({ instructions: two, windows: [{...fixture, startSeconds: 1, endSeconds: 12}] })
+  assert.equal(crop.decision, 'review_required')
+  assert.ok(crop.issues.includes('READING_COUNT_MISMATCH'))
   assert.equal(evaluate({ instructions: [] }).expectedReadings, 'unknown')
 })
 test('group instructions override section, conflicting same-level instructions block', () => {
@@ -290,15 +305,17 @@ test('insertions have an independent edit penalty', () => {
   assert.equal(result.sourceMatchRate, 1)
   assert.ok(result.editSimilarity < 0.95)
 })
-test('missing a critical number or negation blocks regardless of score', () => {
+test('missing a critical number or negation is recorded after boundaries pass', () => {
   const text = source.replace('to the station', 'not to the station')
-  assert.ok(evaluate({ groups: [{ ...group, text }] }).issues.includes('CRITICAL_WORD_MISSING'))
+  const result = evaluate({ groups: [{ ...group, text }] })
+  assert.equal(result.decision, 'usable')
+  assert.ok(result.notes.includes('CRITICAL_WORD_MISSING'))
 })
-test('inserted critical words cannot pass merely because every source word matched', () => {
+test('internal critical insertions are retained as notes with unchanged source', () => {
   const raw = windowFor(source.replace(/(?:M|W):/gu, '').replace('folder to', 'folder not to'))
   const result = evaluate({ windows: [raw], pauses: surrounding([raw]) })
-  assert.equal(result.decision, 'review_required')
-  assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+  assert.equal(result.decision, 'usable')
+  assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
 })
 test('alignment checks critical insertions, deletions and replacements on both sides', () => {
   const plain = source.replace(/(?:M|W):/gu, '')
@@ -308,8 +325,8 @@ test('alignment checks critical insertions, deletions and replacements on both s
       [plain.replace('station', word), plain], [plain, plain.replace('station', word)]]) {
       const raw = windowFor(actual)
       const result = evaluate({ groups: [{ ...group, text }], windows: [raw], pauses: surrounding([raw]) })
-      assert.equal(result.decision, 'review_required', `${text} / ${actual}`)
-      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+      assert.equal(result.decision, result.issues.includes('BODY_ALIGNMENT_LOW') ? 'review_required' : 'usable', `${text} / ${actual}`)
+      assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
       const critical = word === "don't" ? 'not' : word
       assert.ok(result.occurrences[0].alignment.differences.some(d => d.sourceWord === critical || d.targetWord === critical))
     }
@@ -352,7 +369,7 @@ test('Chinese announcements must agree with group number and question range', ()
 test('missing announcements alone does not fail unique complete evidence', () => {
   assert.equal(evaluate().decision, 'usable')
 })
-test('a failed previous reading count does not reassign its old announcement to the next body', () => {
+test('a corrected previous reading count does not reassign its announcement to the next body', () => {
   const other = { segmentId: 'listening-text-2', questionNumbers: [2],
     text: 'Fresh apples grow around this quiet village and our neighbors deliver baskets every summer.' }
   const a = windowFor(source.replace(/(?:M|W):/gu, ''), 2), b = windowFor(other.text, 15)
@@ -362,7 +379,7 @@ test('a failed previous reading count does not reassign its old announcement to 
   ] } }]
   const result = evaluateListeningEngine({ groups: [{ ...group, instruction: '本段读两遍' }, other],
     instructions: one, windows, pauses: surrounding([a, b]), durationSeconds: 100 })
-  assert.deepEqual(result.groups.map(g => g.decision), ['review_required', 'usable'])
+  assert.deepEqual(result.groups.map(g => g.decision), ['usable', 'usable'])
   assert.deepEqual(result.groups[1].occurrences[0].announcements.map(m => m.groupNumber), [2])
 })
 test('no local silence evidence means no approved playback', () => {
@@ -503,8 +520,8 @@ test('overlapping playback in the skeleton gap fails both groups before sidecar 
 test('all occurrences of an unannounced failed group must remain in its skeleton interval', () => {
   const result = orderScenario([2, 60, 40], [], '本段读两遍')
   assert.ok(result.groups[1].issues.includes('WHOLE_PAPER_ORDER_CONFLICT'))
-  assert.ok(result.groups[1].issues.includes('READING_COUNT_MISMATCH'))
-  assert.equal(result.groups[2].decision, 'usable')
+  assert.ok(result.groups[1].notes.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.groups[2].decision, 'review_required')
 })
 test('unknown expected reading count is not a numeric count mismatch', () => {
   const result = evaluate({ instructions: [] })
@@ -523,4 +540,46 @@ test('adjacent readings share a silence boundary without clipping complete acous
   assert.ok(first.playback.endSeconds <= second.playback.startSeconds)
   assert.ok(first.playback.endSeconds >= first.endSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
   assert.ok(second.playback.startSeconds <= second.startSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
+})
+
+test('printed once and two complete audio readings pass with a correction note and both occurrences', () => {
+  const text = astraText
+  const parts = [windowFor(text, 2), windowFor(text, 12)]
+  const result = evaluate({ groups: [{...group, text}], instructions: one,
+    windows: [{startSeconds: 0, endSeconds: 100, result: {segments: parts.flatMap(w => w.result.segments)}}],
+    pauses: surrounding(parts), durationSeconds: 100 })
+  assert.equal(result.decision, 'usable', result.issues.join(','))
+  assert.equal(result.expectedReadings, 1, 'keep the original printed count for audit')
+  assert.equal(result.occurrences.length, 2)
+  assert.deepEqual(result.readingCountEvidence, {printedReadings: 1, observedReadings: 2,
+    complete: true, instructionCorrectionRequired: true})
+  assert.ok(result.notes.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.playback.endSeconds, result.occurrences[1].playback.endSeconds)
+})
+
+test('a second observed head without its tail cannot become an approved single reading', () => {
+  const result = repeatedEngine({first: astraText.replace('over there', 'over here')}).groups[0]
+  assert.equal(result.decision, 'review_required')
+  assert.ok(result.issues.includes('OCCURRENCE_TAIL_MISSING_OR_AMBIGUOUS'))
+  assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.playback, null)
+  assert.ok(!result.readingCountEvidence?.complete)
+})
+
+test('word notes never remove a long edge or a cross-engine playback boundary conflict', () => {
+  const primary = astraEngine(astraText.replace('twenty dollars', 'thirty dollars'))
+  const secondary = astraEngine(astraText, null, {engine: 'faster-whisper'})
+  assert.equal(primary.groups[0].decision, 'usable')
+  assert.ok(primary.groups[0].notes.includes('CRITICAL_WORD_DIFFERENCE'))
+  secondary.groups[0].occurrences[0].playback.startSeconds += 0.6
+  const resolved = reconcileListeningEngines(primary, secondary)[0]
+  assert.equal(resolved.decision, 'review_required')
+  assert.ok(resolved.engineConflicts.some(c => c.kind === 'playback_boundary'))
+  const longEdge = astraEngine(astraText.replace('twenty dollars', 'thirty dollars'), segments => {
+    segments[0].words[0].start = 0
+    segments[0].words[0].end = 2.2
+  }).groups[0]
+  assert.equal(longEdge.decision, 'review_required')
+  assert.ok(longEdge.issues.includes('EDGE_WORD_SPAN_LONG'))
+  assert.equal(longEdge.playback, null)
 })

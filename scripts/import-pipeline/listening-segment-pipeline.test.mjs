@@ -47,6 +47,38 @@ test('successful frozen Apple evidence produces a sidecar accepted by the unchan
   writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
   assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
 })
+test('rule-only replay retains historical raw bytes and never opens an ASR runner or model', t => {
+  const { subject, options } = workspace(t, {...fixture, error: 'primary unavailable'})
+  const first = segmentListening({...options, runWhisper: () => fixture})
+  const oldInput = readJson(path.join(first.attempt, 'input.json'))
+  oldInput.rule.version = 'listening-segment-rule-v3'
+  writeFileSync(path.join(first.attempt, 'input.json'), JSON.stringify(oldInput))
+  const oldBytes = readFileSync(first.review)
+  const originalEvidence = readJson(first.review).evidence.map(e => ({
+    path: e.path, bytes: readFileSync(path.join(first.attempt, e.path)),
+  }))
+  const replay = {...options, replayAttempt: first.attempt, appleEvidence: 'must-not-be-read',
+    whisperPython: '/no-python-may-be-opened', whisperModel: '/no-model-may-be-opened'}
+  const result = segmentListening(replay)
+  assert.equal(result.usable, 1)
+  const input = readJson(path.join(result.attempt, 'input.json'))
+  assert.equal(input.rule.version, 'listening-segment-rule-v4')
+  assert.equal(input.historicalRuleVersion, 'listening-segment-rule-v3')
+  assert.equal(input.inference, 'not_run')
+  assert.match(input.ruleCacheKey, /^sha256:/u)
+  validateListeningReview(result.attempt, readJson(result.review), subject, [group])
+  assert.deepEqual(readFileSync(first.review), oldBytes)
+  for (const e of originalEvidence) assert.deepEqual(readFileSync(path.join(first.attempt, e.path)), e.bytes)
+  assert.throws(() => segmentListening({...replay, runWhisper: () => assert.fail('no inference')}),
+    /LISTENING_REPLAY_CANNOT_RUN_ASR/u)
+  const changed = structuredClone(options.request)
+  changed.sourceInstructions[0].text = '读两遍'
+  assert.throws(() => segmentListening({...replay, request: changed}),
+    /LISTENING_REPLAY_INSTRUCTIONS_CHANGED/u)
+  const raw = originalEvidence.find(e => e.path.includes('-whisper-'))
+  writeFileSync(path.join(first.attempt, raw.path), '{}')
+  assert.throws(() => segmentListening(replay), /LISTENING_REPLAY_EVIDENCE_CHANGED/u)
+})
 test('failed primary gets exactly one fallback; reruns append attempts without changing old evidence', t => {
   const { options, subject } = workspace(t, { ...fixture, error: 'Apple fixture engine failed', result: { segments: [] } })
   let calls = 0
@@ -124,7 +156,7 @@ test('two readings sharing one silence produce nonoverlapping occurrences accept
   assert.ok(review.groups[0].occurrences[0].endSeconds <= review.groups[0].occurrences[1].startSeconds)
   assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
 })
-test('missing first tail falls back once to two complete readings; critical partial evidence still blocks submit', t => {
+test('missing first tail falls back once to complete readings; internal word differences are retained notes', t => {
   for (const critical of [false, true]) {
     const full = structuredClone(fixture)
     const second = structuredClone(full.result.segments[0])
@@ -146,18 +178,13 @@ test('missing first tail falls back once to two complete readings; critical part
     const review = JSON.parse(readFileSync(result.review, 'utf8'))
     validateListeningReview(result.attempt, review, subject, [group])
     writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
-    if (critical) {
-      assert.equal(result.usable, 0)
-      assert.equal(review.groups[0].playback, null)
-      assert.throws(() => assertImportSubmissionReady(dir), {code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE'})
-    } else {
-      assert.equal(result.usable, 1)
-      assert.equal(review.groups[0].occurrences.length, 2)
-      const rules = JSON.parse(readFileSync(path.join(result.attempt, 'rule-result.json'), 'utf8'))
-      assert.equal(rules.groups[0].selectedEngine, 'faster-whisper')
-      assert.equal(rules.groups[0].engineAttempts[0].occurrences.length, 1)
-      assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
-    }
+    assert.equal(result.usable, 1)
+    assert.equal(review.groups[0].occurrences.length, 2)
+    const rules = JSON.parse(readFileSync(path.join(result.attempt, 'rule-result.json'), 'utf8'))
+    assert.equal(rules.groups[0].selectedEngine, 'faster-whisper')
+    assert.equal(rules.groups[0].engineAttempts[0].occurrences.length, 1)
+    if (critical) assert.ok(rules.groups[0].engineNotes.length)
+    assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
   }
 })
 test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
@@ -169,6 +196,8 @@ test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
   subject.transcriptDigest = digestJson(groups)
   const tokens = other.text.toLowerCase().replace('.', '').split(' ')
   const primary = JSON.parse(readFileSync(options.appleEvidence, 'utf8'))
+  primary.result.segments[0].runs.at(-1).text = 'eight'
+  tokens[tokens.length - 1] = 'winter'
   primary.result.segments.push({ text: other.text, start: 15, end: 18,
     words: tokens.map((word, i) => ({ word, start: 15 + i * 0.2, end: 15 + (i + 1) * 0.2 })) })
   writeFileSync(options.appleEvidence, JSON.stringify(primary))

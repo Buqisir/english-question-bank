@@ -1,6 +1,6 @@
 // Pure, platform-independent navigation rule. ASR is evidence, never a source-text editor.
 export const LISTENING_SEGMENT_RULE = Object.freeze({
-  version: 'listening-segment-rule-v3',
+  version: 'listening-segment-rule-v4',
   normalizationVersion: 'listening-equivalences-v4',
   anchorWords: 6,
   expandedAnchorWords: 12,
@@ -616,9 +616,9 @@ function anchorsFor(group, corpus, words, expected, fuzzy = null) {
       && corpus.filter(other => other.segmentId !== group.segmentId)
         .every(other => positions(listeningSourceTurns(other, corpus).flat(), anchor).length === 0))
     const heads = positions(words, head), tails = positions(words, tail)
-    const uniqueAudio = expected === 'unknown' || (heads.length <= expected && tails.length <= expected)
+    // Exact repetitions are counted from audio, not capped by print.
     exact = { width, head, tail, heads, tails, identityAmbiguous: !uniqueSource,
-      countExceeded: !uniqueAudio, ambiguous: !uniqueSource || !uniqueAudio }
+      countExceeded: false, ambiguous: !uniqueSource }
     if (!exact.ambiguous) break
   }
   const incomplete = expected === 'unknown' ? !exact.heads.length || !exact.tails.length
@@ -811,7 +811,7 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     const allHeads = skeleton.flatMap(g => g.occurrences.map(o => ({ segmentId: g.segmentId, index: o.startWordIndex })))
     const expected = expectedListeningReadings(group, instructions)
     const result = { segmentId: group.segmentId, questionNumbers: group.questionNumbers, engine,
-      ...expected, decision: 'usable', issues: [], occurrences: [], playback: null,
+      ...expected, notes: [], decision: 'usable', issues: [], occurrences: [], playback: null,
       sourceText: group.text, sourceProjection: projectListeningSpokenText(group, corpus),
       boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [],
       observedWindows }
@@ -983,6 +983,41 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     if (result.occurrences.some(o => o.requiresExactCorroboration)) {
       problem(result, 'FUZZY_ANCHOR_OVERLAP_NEEDS_EXACT_ENGINE')
     }
+    // Owner 2026-10-23: source words are authoritative, but only after every
+    // observed reading has reliable outer boundaries and passes the body gates.
+    const lexical = new Set(['CRITICAL_WORD_MISSING', 'CRITICAL_WORD_DIFFERENCE'])
+    const count = new Set(['READING_COUNT_MISMATCH', 'OBSERVED_READING_COUNT_EXCEEDED'])
+    const completeBoundaries = result.occurrences.length > 0 && !result.partialOccurrences.length
+      && anchor.heads.length === result.occurrences.length && anchor.tails.length === result.occurrences.length
+      && result.occurrences.every(o => o.playback && o.issues.every(code => lexical.has(code)))
+      && result.issues.every(code => lexical.has(code) || count.has(code))
+    if (completeBoundaries) {
+      const globalWords = globalAnchorWindows === windows ? words : listeningAsrTokens(globalAnchorWindows).words
+      const globalAnchor = anchorsFor(group, corpus, globalWords, 'unknown')
+      // A crop alone cannot prove that a printed second reading is absent.
+      const completeCount = coversRecording(globalAnchorWindows, durationSeconds)
+        && !anchor.fuzzy && !globalAnchor.identityAmbiguous
+        && globalAnchor.heads.length === result.occurrences.length
+        && globalAnchor.tails.length === result.occurrences.length
+        && [globalAnchor.heads, globalAnchor.tails].every((indices, side) => indices.every((index, i) =>
+          Math.abs((side ? globalWords[index + globalAnchor.width - 1].runEndSeconds
+            : globalWords[index].runStartSeconds)
+            - (side ? result.occurrences[i].endSeconds : result.occurrences[i].startSeconds))
+              <= LISTENING_SEGMENT_RULE.engineBoundaryToleranceSeconds))
+      const recorded = result.issues.filter(code => lexical.has(code) || (completeCount && count.has(code)))
+      result.notes.push(...recorded)
+      result.issues = result.issues.filter(code => !recorded.includes(code))
+      for (const occurrence of result.occurrences) {
+        occurrence.notes = occurrence.issues.filter(code => lexical.has(code))
+        occurrence.issues = occurrence.issues.filter(code => !lexical.has(code))
+      }
+      if (completeCount && result.occurrences.length !== expected.expectedReadings) {
+        result.readingCountEvidence = { printedReadings: expected.expectedReadings,
+          observedReadings: result.occurrences.length, complete: true,
+          instructionCorrectionRequired: true }
+      }
+      result.decision = result.issues.length ? 'review_required' : 'usable'
+    }
     if (result.decision === 'usable' && result.occurrences.length) result.playback = {
       startSeconds: result.occurrences[0].playback.startSeconds,
       endSeconds: result.occurrences.at(-1).playback.endSeconds,
@@ -1122,13 +1157,13 @@ export function reconcileListeningEngines(apple, whisper) {
   // Legacy/incomplete evidence with no run identity remains an obstruction.
   const unknownSpeech = allAttempts.filter(g => !g.boundarySpeechRuns).flatMap(g => g.boundarySpeech || [])
   const hardConflict = new Set(['ANNOUNCEMENT_CONFLICT', 'READINGS_OVERLAP', 'READING_DURATION_CONFLICT',
-    'ANCHOR_AMBIGUOUS', 'CRITICAL_WORD_MISSING', 'CRITICAL_WORD_DIFFERENCE'])
+    'ANCHOR_AMBIGUOUS'])
   const blockingEvidence = new Set(['OBSERVED_READING_COUNT_EXCEEDED', 'ANCHOR_IDENTITY_AMBIGUOUS'])
   const results = apple.groups.map(primary => {
     const secondary = whisper?.groups.find(g => g.segmentId === primary.segmentId)
     const attempts = [primary, ...(secondary ? [secondary] : [])]
     let chosen = primary, conflict = false
-    const engineConflicts = []
+    const engineConflicts = [], engineNotes = []
     const evidenceIssues = attempts.flatMap(a => a.issues.filter(code => blockingEvidence.has(code)))
     if (secondary) {
       conflict = attempts.some(a => a.issues.some(code => hardConflict.has(code)))
@@ -1136,9 +1171,11 @@ export function reconcileListeningEngines(apple, whisper) {
         engineConflicts.push({ kind: 'attempt_hard_conflict', engine: attempt.engine, code })
       }
       const complete = a => a.decision === 'usable' && a.independentlyAnchored
-        && a.expectedReadings !== 'unknown' && a.occurrences.length === a.expectedReadings
+        && a.expectedReadings !== 'unknown' && (a.occurrences.length === a.expectedReadings
+          || a.readingCountEvidence?.complete === true)
         && a.occurrences.every(o => o.playback && !o.issues.length)
-      const reference = complete(primary) ? primary : complete(secondary) ? secondary : null
+      const reference = attempts.filter(complete)
+        .sort((a, b) => b.occurrences.length - a.occurrences.length)[0] ?? null
       if (reference) {
         engineConflicts.push(...compareObservedReadings(reference === primary ? secondary : primary,
           reference, reference === secondary))
@@ -1150,8 +1187,18 @@ export function reconcileListeningEngines(apple, whisper) {
             primary: primary.occurrences.length, secondary: secondary.occurrences.length})
         }
       }
+      // Word contradictions are retained as notes only when an independently
+      // complete engine establishes all physical readings. Edge speech, timing,
+      // identity and order conflicts always remain blocking.
+      if (reference) {
+        for (let i = engineConflicts.length - 1; i >= 0; i--) {
+          if (engineConflicts[i].kind === 'observed_critical_word_difference') {
+            engineNotes.unshift(...engineConflicts.splice(i, 1))
+          }
+        }
+      }
       conflict ||= engineConflicts.length > 0
-      if (!conflict && !evidenceIssues.length && primary.decision !== 'usable' && complete(secondary)) chosen = secondary
+      if (!conflict && !evidenceIssues.length && reference) chosen = reference
     }
     const blocked = conflict || evidenceIssues.length > 0
     return { ...chosen, decision: blocked ? 'review_required' : chosen.decision,
@@ -1159,7 +1206,7 @@ export function reconcileListeningEngines(apple, whisper) {
       occurrences: chosen.occurrences.map(o => ({...o, playback: o.playback ? {...o.playback} : null,
         issues: [...o.issues], boundaryEvidence: o.boundaryEvidence ? {...o.boundaryEvidence} : undefined})),
       issues: [...new Set([...chosen.issues, ...evidenceIssues, ...(conflict ? ['ENGINE_CONFLICT'] : [])])],
-      selectedEngine: chosen.engine, engineAttempts: attempts, engineConflicts }
+      selectedEngine: chosen.engine, engineAttempts: attempts, engineConflicts, engineNotes }
   })
   // A successful primary may have been evaluated before another group's
   // fallback observed speech near its edge. Recheck the union before approval.

@@ -114,7 +114,7 @@ test('the public rule accepts equivalent notation after normalization', () => {
     ['in 2026','in twenty twenty-six']]) {
     const result = evaluate(a,b)
     assert.equal(result.decision, 'usable', `${a} / ${b}: ${result.issues}`)
-    assert.ok(!result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+    assert.ok(![...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
   }
 })
 test('unequal ordinals, clocks, years, amounts and negation remain critical differences', () => {
@@ -123,16 +123,16 @@ test('unequal ordinals, clocks, years, amounts and negation remain critical diff
     ['$25','$26'], ['folder to','folder not to'], ['too','two'], ['at 09:30','at 930'],
     ['at 7:30','at 7.30']]) {
     const result = evaluate(a,b)
-    assert.equal(result.decision, 'review_required', `${a} / ${b}`)
-    assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'), `${a} / ${b}: ${result.issues}`)
+    assert.equal(result.decision, result.issues.includes('BODY_ALIGNMENT_LOW') ? 'review_required' : 'usable', `${a} / ${b}`)
+    assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'), `${a} / ${b}: ${result.issues}`)
   }
 })
 for (const [source, actual] of [['by 2026', 'by 20:26'], ['before 2013', 'before 20:13'],
   ['in 2026', 'in 20 26']]) {
   test(`a year cannot equal a time or separate numeric runs: ${source} / ${actual}`, () => {
     const result = evaluate(source, actual)
-    assert.equal(result.decision, 'review_required')
-    assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+    assert.equal(result.decision, result.issues.includes('BODY_ALIGNMENT_LOW') ? 'review_required' : 'usable')
+    assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
   })
 }
 test('year literals accept explicit word readings in either direction, including and', () => {
@@ -146,7 +146,7 @@ test('mixed digits and words cannot masquerade as a year even when their expande
     for (const [source, target] of [['in 2026', actual], [actual, 'in 2026']]) {
       const result = evaluate(source, target)
       assert.equal(result.decision, 'review_required', `${source} / ${target}`)
-      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+      assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
     }
   }
 })
@@ -162,8 +162,8 @@ test('a four-digit literal licenses year rewriting; identical expressions remain
     assert.equal(evaluate(text, text).decision, 'usable')
   }
   const result = evaluate('in twenty twenty-six', 'in two thousand and twenty-six')
-  assert.equal(result.decision, 'review_required')
-  assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+  assert.equal(result.decision, result.issues.includes('BODY_ALIGNMENT_LOW') ? 'review_required' : 'usable')
+  assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
   assert.deepEqual(normal('2026.'), normal('twenty twenty-six.'))
 })
 
@@ -179,8 +179,8 @@ test('v3 expands finite negative auxiliaries and preserves not', () => {
     for (const [source, actual] of [[a, b], [b, a]]) assert.equal(evaluate(source, actual).decision, 'usable')
     for (const [source, actual] of [[a, b.replace(' not', '')], [b.replace(' not', ''), a]]) {
       const result = evaluate(source, actual)
-      assert.equal(result.decision, 'review_required')
-      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'), `${source} / ${actual}`)
+      assert.equal(result.decision, result.issues.includes('BODY_ALIGNMENT_LOW') ? 'review_required' : 'usable')
+      assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'), `${source} / ${actual}`)
     }
   }
 })
@@ -259,13 +259,14 @@ test('all nine modal auxiliaries are critical for deletion, insertion and substi
     for (const [source, actual] of [[`we ${word} go`, 'we go'], ['we go', `we ${word} go`],
       [`we ${word} go`, 'we often go'], ['we often go', `we ${word} go`]]) {
       const result = evaluate(source, actual)
-      assert.equal(result.decision, 'review_required', `${source} / ${actual}`)
-      assert.ok(result.issues.includes('CRITICAL_WORD_DIFFERENCE'))
+      assert.equal(result.decision, result.issues.includes('BODY_ALIGNMENT_LOW') ? 'review_required' : 'usable', `${source} / ${actual}`)
+      assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
     }
   }
   for (const [a, b] of [["we'll go", 'we go'], ["we'd be glad", 'we are glad']]) {
     for (const [source, actual] of [[a, b], [b, a]]) {
-      assert.ok(evaluate(source, actual).issues.includes('CRITICAL_WORD_DIFFERENCE'))
+      const result = evaluate(source, actual)
+      assert.ok([...result.issues, ...result.notes].includes('CRITICAL_WORD_DIFFERENCE'))
     }
   }
   for (const [a, b] of [["we'll go", 'we will go'], ["we'd go", 'we would go'],
