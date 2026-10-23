@@ -453,6 +453,41 @@ test('reprinted continuation prompt and givens stay outside samples until an exp
   assert.equal(legitimate.groups[0].scoring.entries[0].paragraphs[0].text, '（中文评分正文）')
 })
 
+test('an unlabeled sample after a reprinted prompt requires confirmation instead of claiming absence', t => {
+  const diagnostics = []
+  t.mock.method(console, 'error', message => diagnostics.push(message))
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
+  for (const ending of [[], ['听力原文'], ['（五）样卷'], ['4. 评分细则', '按内容给分。']]) {
+    assert.throws(() => referencesFixture(['第二节 读后续写',
+      '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
+      'An original story.', 'Paragraph 1:', 'The neighbors joined the cleanup.', ...ending]),
+    /unresolved source reference/)
+    assert.match(diagnostics.at(-1), /Unresolved continuation reference.*confirm/iu)
+  }
+  const omitted = referencesFixture(['第二节 读后续写',
+    '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
+    'An original story.', 'Paragraph 1:', 'A given starter.', '（略）'])
+  assert.equal(omitted.groups[0].essays.state, 'not_supplied')
+  assert.deepEqual(omitted.groups[0].essays.entries, [])
+})
+
+test('parenthesized Chinese glosses retain their same-line English prose even after commentary', () => {
+  for (const text of ['（幼苗） and planted it beside the gate.', '(幼苗) and planted it beside the gate.',
+    '（幼苗 and roots）', '（幼苗） café seedlings grew.', '（一）幼苗 and planted it beside the gate.']) {
+    for (const preceding of [[], ['（中文指导）']]) {
+      const result = referencesFixture(['第二节 读后续写', '参考范文', 'They picked a seedling',
+        ...preceding, text])
+      const body = result.groups[0].essays.entries.flatMap(entry => entry.paragraphs.map(p => p.text)).join(' ')
+      assert(body.includes(text), JSON.stringify({ text, preceding }))
+      assert(!body.includes('中文指导'))
+    }
+  }
+  for (const text of ['（中文指导）后续说明', '(中文指导)后续说明']) {
+    const result = referencesFixture(['第二节 读后续写', '参考范文', text])
+    assert.equal(result.groups[0].essays.entries[0].paragraphs[0].text, text)
+  }
+})
+
 test('numbered source sample and scoring labels establish and preserve writing boundaries', () => {
   const result = referencesFixture(['第四部分', '第一节（满分15分）',
     '一、参考范文：', 'Dear Alex,', 'A source application.', '二、评分原则',

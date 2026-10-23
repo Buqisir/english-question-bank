@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v2'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v3'
 
 function fail(message) {
   console.error(message)
@@ -1212,6 +1212,9 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     // An explicit omission belongs to the active section, or to both tasks
     // when the key omits the entire writing part. Never invent a model answer.
     if (matchesLineRole('writing.omission', facts, { inWriting: scope.inWriting, current: scope.current })) {
+      // Retain task-local absence declarations for the reference capture pass:
+      // they can explicitly resolve a preceding reprinted prompt.
+      if (scope.current) scope.current.lines.push(line)
       scope.omit()
       review.push({ itemId: line.itemId, issue: 'source explicitly supplies no writing sample (not_supplied)' })
       continue
@@ -1304,7 +1307,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }
         flush()
         capture.start(kind)
-        awaitingSourceLabel = false
+        // A scoring label supplies no evidence that the essay is absent.
+        if (kind === 'essays') awaitingSourceLabel = false
         const index = entries[kind].length + 1
         entry = { kind, referenceId: `source-${kind === 'scoring' ? 'score' : 'ref'}-${short}-${index}`, authority: 'source_reference',
           labelItemId: line.itemId, sourceLabel: line.text, labelSource: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
@@ -1314,7 +1318,11 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         previousLocation = null
         continue
       }
-      if (awaitingSourceLabel) continue
+      if (matchesLineRole('writing.omission', facts, { inWriting: true })) {
+        awaitingSourceLabel = false
+        continue
+      }
+      if (awaitingSourceLabel && capture.kind !== 'scoring') continue
       if (matchesLineRole('writing.commentary', facts, { entryKind: capture.kind, skipping: capture.paused })) {
         if (!capture.paused) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
         continue
@@ -1360,6 +1368,9 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       previous = { role: paragraph.role, right: line.right, page: line.page,
         text: line.text, sourceIndex: sourceOrder.get(line), margin }
       previousLocation = decision.location.after
+    }
+    if (awaitingSourceLabel) {
+      fail('Unresolved continuation reference after reprinted prompt; confirm the source sample label or explicit omission')
     }
     flush()
     const section_ = (kind) => {

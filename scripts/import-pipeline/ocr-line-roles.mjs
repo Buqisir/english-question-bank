@@ -26,7 +26,11 @@ const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[�
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|作答示例|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
-const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
+const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
+// A Chinese parenthetical note may be truncated before its closing bracket.
+// A wrapped gloss followed by English is still source prose, even while paused.
+const PARENTHESIZED_COMMENTARY_LINE = /^[（(]\s*\p{Script=Han}[^）)\r\n]*(?:[）)]\s*)?$/u
+const parenthesizedEnglish = f => /^[（(]/u.test(f.trimmed) && /\p{Script=Latin}/u.test(f.text)
 const STUDENT_SCRIPT_BOUNDARY = /^[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*样卷\s*[:：]?$/u
 const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
 const SALUTATION = /^Dear\s.+,$/u
@@ -186,10 +190,17 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('writing.continuation-prompt', 'question-prompt', 10,
     /^阅读下面(?:短文|材料)[，,](?:根据|依据).*续写/u,
     '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。', 'A student read the story and continued writing.'),
-  rule('writing.commentary', 'commentary', 10, (f, c) => c.entryKind !== 'scoring'
-    && (COMMENTARY_LINE.test(f.text) || (c.skipping && f.hasHan)),
+  rule('writing.commentary', 'commentary', 10, (f, c) => {
+    if (c.entryKind === 'scoring') return false
+    if (/^[（(]/u.test(f.trimmed)) {
+      return !parenthesizedEnglish(f)
+        && (PARENTHESIZED_COMMENTARY_LINE.test(f.trimmed) || COMMENTARY_LINE.test(f.trimmed))
+    }
+    return COMMENTARY_LINE.test(f.text) || (c.skipping && f.hasHan)
+  },
   '1. 故事概述', { text: '1. 本题总分为15分。', context: { entryKind: 'scoring' } }),
-  rule('writing.skipped-fragment', 'skipped-fragment', 10, (f, c) => c.skipping && !f.startsUpperOrQuote,
+  rule('writing.skipped-fragment', 'skipped-fragment', 10, (f, c) =>
+    c.skipping && !f.startsUpperOrQuote && !parenthesizedEnglish(f),
   { text: 'leave the next day.', context: { skipping: true } },
   { text: 'A completed sample.', context: { skipping: true } }),
   rule('writing.margin-body', 'margin-body', 10, f => f.startsEnglishOrQuote && f.observationCount > 3,
