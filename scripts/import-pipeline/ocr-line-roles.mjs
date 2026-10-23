@@ -107,9 +107,10 @@ export const LINE_ROLE_RULES = Object.freeze([
     context: { speechLeft: 28, last: { top: 15, right: 100, height: 10 }, columnRight: 100 } }),
 
   pattern('presentation.example', 'presentation', 10, /^例[：:]/u, '例：', 'Text 1'),
-  pattern('direction.listening-long', 'direction', 10, /^听下面\d+段对话或独白/u,
+  // "录音" alone does not identify a section; require its explicit question count.
+  pattern('direction.listening-long', 'direction', 10, /^听下面\d+段(?:对话或独白|录音。每段录音后有几个小题(?=[，。]))/u,
     '听下面5段对话或独白', '听下面5段对话。', { value: 'listening.long-form' }),
-  pattern('direction.listening-short', 'direction', 20, /^听下面\d+段对话。/u,
+  pattern('direction.listening-short', 'direction', 20, /^听下面\d+段(?:对话。|录音。每段录音后有一个小题(?=[，。]))/u,
     '听下面5段对话。', '听下面5段对话或独白', { value: 'listening.short-dialogue' }),
   pattern('direction.seven-choices', 'direction', 30, /多余选项/u,
     '有两项为多余选项', '括号内单词的正确形式', { value: 'seven-choices' }),
