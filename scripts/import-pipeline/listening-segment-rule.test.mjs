@@ -46,12 +46,13 @@ test('a missing first tail is absence of evidence, paired by time with the compl
   assert.equal(result.selectedEngine, 'faster-whisper')
   assert.equal(reconcileListeningEngines(full, missing)[0].decision, 'usable')
 })
-test('complete exact readings follow audio count and cover every repetition', () => {
+test('three complete readings remain blocked even if the other engine finds only two', () => {
   const result = reconcileListeningEngines(repeatedEngine({third: true}), repeatedEngine({engine: 'faster-whisper'}))[0]
-  assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
+  assert.equal(result.decision, 'review_required')
   assert.equal(result.occurrences.length, 3)
-  assert.ok(result.notes.includes('READING_COUNT_MISMATCH'))
-  assert.equal(result.playback.endSeconds, result.occurrences.at(-1).playback.endSeconds)
+  assert.ok(result.issues.includes('OBSERVED_READING_COUNT_EXCEEDED'))
+  assert.equal(result.playback, null)
+  assert.ok(!result.readingCountEvidence?.complete)
   assert.ok(!result.engineAttempts[0].issues.includes('ANCHOR_AMBIGUOUS'))
 })
 test('word differences in a missing-tail engine are notes when the other engine locates every reading', () => {
@@ -251,10 +252,11 @@ test('boundary search skips an overlapping silence that cannot retain padding an
     pauses: [{startSeconds: 1, endSeconds: 1.9}, {startSeconds: end - 0.08, endSeconds: end + 0.003}]})
   assert.ok(noLaterPause.issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
 })
-test('fewer complete readings require full recording coverage; print count is retained as a note', () => {
+test('fewer complete readings stay blocked even with full recording coverage', () => {
   const result = evaluate({ instructions: two })
-  assert.equal(result.decision, 'usable')
-  assert.ok(result.notes.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.decision, 'review_required')
+  assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
+  assert.ok(!result.readingCountEvidence?.complete)
   const crop = evaluate({ instructions: two, windows: [{...fixture, startSeconds: 1, endSeconds: 12}] })
   assert.equal(crop.decision, 'review_required')
   assert.ok(crop.issues.includes('READING_COUNT_MISMATCH'))
@@ -391,7 +393,7 @@ test('a corrected previous reading count does not reassign its announcement to t
   ] } }]
   const result = evaluateListeningEngine({ groups: [{ ...group, instruction: '本段读两遍' }, other],
     instructions: one, windows, pauses: surrounding([a, b]), durationSeconds: 100 })
-  assert.deepEqual(result.groups.map(g => g.decision), ['usable', 'usable'])
+  assert.deepEqual(result.groups.map(g => g.decision), ['review_required', 'usable'])
   assert.deepEqual(result.groups[1].occurrences[0].announcements.map(m => m.groupNumber), [2])
 })
 test('no local silence evidence means no approved playback', () => {
@@ -532,8 +534,8 @@ test('overlapping playback in the skeleton gap fails both groups before sidecar 
 test('all occurrences of an unannounced failed group must remain in its skeleton interval', () => {
   const result = orderScenario([2, 60, 40], [], '本段读两遍')
   assert.ok(result.groups[1].issues.includes('WHOLE_PAPER_ORDER_CONFLICT'))
-  assert.ok(result.groups[1].notes.includes('READING_COUNT_MISMATCH'))
-  assert.equal(result.groups[2].decision, 'review_required')
+  assert.ok(result.groups[1].issues.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.groups[2].decision, 'usable', 'failed count must not become a neighboring skeleton')
 })
 test('unknown expected reading count is not a numeric count mismatch', () => {
   const result = evaluate({ instructions: [] })
@@ -576,6 +578,54 @@ test('a second observed head without its tail cannot become an approved single r
   assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
   assert.equal(result.playback, null)
   assert.ok(!result.readingCountEvidence?.complete)
+})
+
+test('a second reading with both head and tail misrecognized cannot certify a lower count', () => {
+  const result = astraEngine(astraText, segments => {
+    segments[1].words[0].word = 'Blazing'
+    segments[1].words.at(-1).word = 'here'
+    segments[1].text = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
+  }).groups[0]
+  assert.equal(result.occurrences.length, 1)
+  assert.equal(result.decision, 'review_required')
+  assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
+  assert.ok(!result.readingCountEvidence?.complete)
+  assert.equal(result.playback, null)
+  assert.equal(astraEngine().groups[0].decision, 'usable', 'two intact readings still pass')
+})
+
+test('duration consistency checks every pair, including the third reading', () => {
+  const make = slow => {
+    const parts = [windowFor(astraText, 2), windowFor(astraText, 12), windowFor(astraText, 22)]
+    if (slow) {
+      const segment = parts[2].result.segments[0]
+      segment.words.forEach(w => { w.start = 22 + (w.start - 22) * 2; w.end = 22 + (w.end - 22) * 2 })
+      segment.end = segment.words.at(-1).end
+    }
+    return evaluate({groups: [{...group, text: astraText}], instructions: two,
+      windows: [{startSeconds: 0, endSeconds: 100, result: {segments: parts.flatMap(w => w.result.segments)}}],
+      pauses: surrounding(parts), durationSeconds: 100})
+  }
+  const equal = make(false), slow = make(true)
+  assert.equal(equal.durationRatios.length, 3)
+  assert.ok(!equal.issues.includes('READING_DURATION_CONFLICT'))
+  assert.ok(slow.issues.includes('READING_DURATION_CONFLICT'))
+  assert.equal(slow.decision, 'review_required')
+})
+
+test('only actual once/twice counts are approvable by the existing correction contract', () => {
+  for (const count of [1, 2]) {
+    const parts = Array.from({length: count}, (_, i) => windowFor(astraText, 2 + i * 10))
+    const result = evaluate({groups: [{...group, text: astraText}], instructions: one,
+      windows: [{startSeconds: 0, endSeconds: 100, result: {segments: parts.flatMap(w => w.result.segments)}}],
+      pauses: surrounding(parts), durationSeconds: 100})
+    assert.equal(result.decision, 'usable')
+    assert.equal(result.occurrences.length, count)
+  }
+  const three = repeatedEngine({third: true}).groups[0]
+  assert.equal(three.decision, 'review_required')
+  assert.ok(three.issues.includes('OBSERVED_READING_COUNT_EXCEEDED'))
+  assert.ok(!three.readingCountEvidence?.instructionCorrectionRequired)
 })
 
 test('word notes never remove a long edge or a cross-engine playback boundary conflict', () => {

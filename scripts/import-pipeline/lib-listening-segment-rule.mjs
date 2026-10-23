@@ -956,6 +956,8 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     }
     if (expected.expectedReadings !== 'unknown'
       && result.occurrences.length !== expected.expectedReadings) problem(result, 'READING_COUNT_MISMATCH')
+    // The downstream instruction-correction contract only supports once/twice.
+    if (result.occurrences.length > 2) problem(result, 'OBSERVED_READING_COUNT_EXCEEDED')
     for (const [i, current] of result.occurrences.entries()) {
       const previous = result.occurrences[i - 1]
       if (!previous?.playback || !current.playback
@@ -976,11 +978,12 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       current.playback.startSeconds = seam
     }
     if (result.occurrences.some((o, i, list) => i && o.startSeconds < list[i - 1].endSeconds)) problem(result, 'READINGS_OVERLAP')
-    if (result.occurrences.length === 2) {
-      const [a, b] = result.occurrences.map(o => o.endSeconds - o.startSeconds)
-      result.durationRatio = a / b
-      if (result.durationRatio < LISTENING_SEGMENT_RULE.durationRatioMinimum
-        || result.durationRatio > LISTENING_SEGMENT_RULE.durationRatioMaximum) problem(result, 'READING_DURATION_CONFLICT')
+    if (result.occurrences.length >= 2) {
+      const durations = result.occurrences.map(o => o.endSeconds - o.startSeconds)
+      result.durationRatios = durations.flatMap((a, i) => durations.slice(i + 1).map(b => a / b))
+      result.durationRatio = result.durationRatios[0]
+      if (result.durationRatios.some(ratio => ratio < LISTENING_SEGMENT_RULE.durationRatioMinimum
+        || ratio > LISTENING_SEGMENT_RULE.durationRatioMaximum)) problem(result, 'READING_DURATION_CONFLICT')
     }
     if (result.occurrences.some(o => o.requiresExactCorroboration)) {
       problem(result, 'FUZZY_ANCHOR_OVERLAP_NEEDS_EXACT_ENGINE')
@@ -997,7 +1000,12 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       const globalWords = globalAnchorWindows === windows ? words : listeningAsrTokens(globalAnchorWindows).words
       const globalAnchor = anchorsFor(group, corpus, globalWords, 'unknown')
       // A crop alone cannot prove that a printed second reading is absent.
-      const completeCount = coversRecording(globalAnchorWindows, durationSeconds)
+      // Missing both anchors can hide a whole reading even in a full recording.
+      // Never infer fewer readings than print, or approve unsupported counts.
+      const completeCount = [1, 2].includes(result.occurrences.length)
+        && (expected.expectedReadings === 'unknown'
+          || result.occurrences.length >= expected.expectedReadings)
+        && coversRecording(globalAnchorWindows, durationSeconds)
         && !anchor.fuzzy && !globalAnchor.identityAmbiguous
         && globalAnchor.heads.length === result.occurrences.length
         && globalAnchor.tails.length === result.occurrences.length

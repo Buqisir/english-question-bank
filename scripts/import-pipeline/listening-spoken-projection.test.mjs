@@ -83,7 +83,8 @@ test('projection preserves readings and duplicate count while reconciliation not
   const single = evaluate(target, { windows: [fixture, structuredClone(fixture)] })
   assert.equal(single.groups[0].occurrences.length, 1)
   const twice = evaluate(target, { instructions: [{ slotId: 'listening.short-dialogue', text: '每段读两遍' }] })
-  assert.ok(twice.groups[0].notes.includes('READING_COUNT_MISMATCH'))
+  assert.equal(twice.groups[0].decision, 'review_required')
+  assert.ok(twice.groups[0].issues.includes('READING_COUNT_MISMATCH'))
   const extra = structuredClone(fixture)
   extra.result.segments[0].runs.push({ text: 'not', start: 8, end: 8.2 })
   const result = reconcileListeningEngines(single, evaluate(target, { windows: [extra], engine: 'faster-whisper' }))[0]

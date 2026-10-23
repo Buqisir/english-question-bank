@@ -122,6 +122,28 @@ export function parseListeningPauses(stderr, durationSeconds) {
   return pauses.filter(p => p.endSeconds > p.startSeconds)
 }
 
+export function measureListeningSilence(audio, durationSeconds) {
+  const detected = spawnSync('ffmpeg', ['-hide_banner', '-nostats', '-i', audio,
+    '-af', `silencedetect=noise=${LISTENING_SEGMENT_RULE.silenceThresholdDb}dB:d=${LISTENING_SEGMENT_RULE.minimumSilenceSeconds}`,
+    '-f', 'null', '-'], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
+  return { status: detected.status, error: detected.error?.message || null, stderr: detected.stderr || '',
+    pauses: detected.status === 0 ? parseListeningPauses(detected.stderr, durationSeconds) : [],
+    method: { noiseDb: LISTENING_SEGMENT_RULE.silenceThresholdDb,
+      minimumSilenceSeconds: LISTENING_SEGMENT_RULE.minimumSilenceSeconds } }
+}
+
+export function remeasureListeningReplaySilence(audio, durationSeconds, saved) {
+  if (saved.method?.noiseDb !== LISTENING_SEGMENT_RULE.silenceThresholdDb
+    || saved.method?.minimumSilenceSeconds !== LISTENING_SEGMENT_RULE.minimumSilenceSeconds) {
+    throw new Error('LISTENING_REPLAY_SILENCE_SETTINGS_CHANGED')
+  }
+  const measured = measureListeningSilence(audio, durationSeconds)
+  if (measured.status !== 0) throw new Error('LISTENING_REPLAY_SILENCE_MEASUREMENT_FAILED')
+  if (saved.status !== 0 || digestJson(saved.pauses ?? parseListeningPauses(saved.stderr, durationSeconds))
+    !== digestJson(measured.pauses)) throw new Error('LISTENING_REPLAY_SILENCE_CHANGED')
+  return measured
+}
+
 function engineDescriptor(file, bytes, record, durationSeconds) {
   const engine = record.engine || {}
   const failed = Boolean(record.error) || !(record.result?.segments || record.segments)?.length
@@ -208,7 +230,7 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   if (primaryWindow.audioSha256 !== audioHash) throw new Error('LISTENING_APPLE_INPUT_BINDING_MISMATCH')
   const playbackEndSeconds = Math.min(durationSeconds, primaryWindow.endSeconds ?? durationSeconds)
   const ruleCodeSha256 = digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs')))
-  write(path.join(attempt, 'input.json'), {
+  const input = {
     rule: { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }, normalization: LISTENING_EQUIVALENCES,
     normalizationAlgorithm: 'listening-equivalences-v4; source-preserving listening-spoken-projection-v1 (recorded exclusions and source locations); finite spelling aliases and negative/positive auxiliary contractions; context-bound s/d expansions (ambiguous s/d retained); integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; typed year/time/cardinal/ordinal expressions; year equivalence requires a four-digit literal and an explicit word reading (2001..2099), standalone or in year context; shared source/ASR character spans, original acoustic run boundaries',
     sourceTextSha256: digest(Buffer.from(JSON.stringify(groups))),
@@ -218,29 +240,27 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     ...(historical ? { historicalAttempt: path.resolve(replayAttempt),
       historicalRuleVersion: historical.input.rule.version, inference: 'not_run',
       ruleCacheKey: digestJson({ subject, rule: LISTENING_SEGMENT_RULE, ruleCodeSha256, fuzzyAnchors }) } : {}),
-  })
+  }
   if (historical) {
-    const silence = json(path.join(replayAttempt, 'silence.json'))
-    if (silence.method.noiseDb !== LISTENING_SEGMENT_RULE.silenceThresholdDb
-      || silence.method.minimumSilenceSeconds !== LISTENING_SEGMENT_RULE.minimumSilenceSeconds) {
-      throw new Error('LISTENING_REPLAY_SILENCE_SETTINGS_CHANGED')
+    const bytes = readFileSync(path.join(replayAttempt, 'silence.json'))
+    if (historical.input.silenceSha256 && historical.input.silenceSha256 !== digest(bytes)) {
+      throw new Error('LISTENING_REPLAY_SILENCE_CHANGED')
     }
+    const silence = remeasureListeningReplaySilence(audio, durationSeconds, JSON.parse(bytes))
+    silence.historicalSha256 = digest(bytes)
     write(path.join(attempt, 'silence.json'), silence)
-    pauses = silence.status === 0 ? silence.pauses ?? parseListeningPauses(silence.stderr, durationSeconds) : []
+    pauses = silence.pauses
   }
   if (!historical && pauses !== null) write(path.join(attempt, 'silence.json'), {
     status: 0, pauses, method: { noiseDb: LISTENING_SEGMENT_RULE.silenceThresholdDb,
       minimumSilenceSeconds: LISTENING_SEGMENT_RULE.minimumSilenceSeconds, supplied: true } })
   if (pauses === null) {
-    // Keep full stderr, including silence detections, under this immutable attempt.
-    const detected = spawnSync('ffmpeg', ['-hide_banner', '-nostats', '-i', audio,
-      '-af', `silencedetect=noise=${LISTENING_SEGMENT_RULE.silenceThresholdDb}dB:d=${LISTENING_SEGMENT_RULE.minimumSilenceSeconds}`,
-      '-f', 'null', '-'], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
-    write(path.join(attempt, 'silence.json'), { status: detected.status, error: detected.error?.message || null,
-      stderr: detected.stderr || '', method: { noiseDb: LISTENING_SEGMENT_RULE.silenceThresholdDb,
-        minimumSilenceSeconds: LISTENING_SEGMENT_RULE.minimumSilenceSeconds } })
-    pauses = detected.status === 0 ? parseListeningPauses(detected.stderr, durationSeconds) : []
+    const silence = measureListeningSilence(audio, durationSeconds)
+    write(path.join(attempt, 'silence.json'), silence)
+    pauses = silence.pauses
   }
+  input.silenceSha256 = fileDigest(path.join(attempt, 'silence.json'))
+  write(path.join(attempt, 'input.json'), input)
   const base = { groups, instructions, pauses, durationSeconds, fuzzyAnchors,
     questions: materialization.listening.questions, globalAnchorWindows: [primaryWindow] }
   const apple = evaluateListeningEngine({ ...base, windows: [primaryWindow] })

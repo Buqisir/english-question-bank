@@ -16,7 +16,7 @@ Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻�
 | 可选模糊锚 | 默认关闭；至少 20 词，12 词连续锚中恰好 1 处替换，每遍另一端须精确 |
 | 短材料 / 其他材料 | 少于 40 词：源词匹配率和含插入惩罚的编辑相似度均 ≥0.95；其他均 ≥0.90 |
 | 边词时间跨度 / 开头词间空档异常 | >2 秒即复核，不据此截断 |
-| 两遍时长比 | 第一遍 / 第二遍须在 0.85–1.15 |
+| ≥2 遍时长比 | 任意先后两遍的时长比均须在 0.85–1.15 |
 | 局部边界证据 | 相邻静音需距首尾 run ≤2 秒，边界位于静音内，包住完整 run，至少多留 0.02 秒 |
 | 静音检测 | `-35dB`，最短 0.08 秒 |
 | 双引擎边界冲突容差 | >0.5 秒仍复核；仅满足下述无词争议区间规则时取并集 |
@@ -26,6 +26,9 @@ Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻�
 均 `review_required`。支持中文一/两/二/1/2 遍以及英文 once/twice。
 Owner 2026-10-23：音频实际遍数优先；每一遍首尾均可靠定位、所有首尾候选均配对、
 没有部分遍次或其他阻塞时，`READING_COUNT_MISMATCH` 降为 `notes`，播放范围覆盖全部遍。
+自动放行仅覆盖实际 1 或 2 遍，且观察遍数必须 ≥ 印刷遍数；观察不足印刷值时一律
+保留 `READING_COUNT_MISMATCH` 并进入失败组复核，不据全录音覆盖推断缺失遍不存在。
+观察到 ≥3 遍保留 `OBSERVED_READING_COUNT_EXCEEDED`，不扩展下游 once/twice 校正契约。
 遍数校正还须有完整录音覆盖和对应的全局精确首尾证据；单个裁窗不能证明另一遍不存在。
 原印刷值保留在 `expectedReadings`，实际值由 `occurrences.length` 表示，
 `readingCountEvidence` 记录差异及说明校正需求。第二遍缺尾等情况仍拦。
@@ -149,8 +152,10 @@ node scripts/import-pipeline/listening-segment.mjs \
   --replay-attempt <旧 attempt 目录> --output <新的输出目录>
 ```
 
-该分支校验旧 evidence 的字节 SHA/长度、来源说明和静音参数，只读取原始 Apple /
-Whisper JSON 与静音记录；不读取模型、不启动 ASR、不重试 UNKNOWN 任务。
+该分支校验旧 evidence 的字节 SHA/长度、来源说明和静音参数，读取原始 Apple /
+Whisper JSON，并用同参数 ffmpeg 静音检测重新测量音频，与保存区间逐一比对，不一致拒绝 replay。
+新 attempt 的 `input.json.silenceSha256` 绑定新静音文件；已有此摘要的旧 attempt 也必须先通过
+静音文件字节校验。旧 attempt 无摘要时仍必须通过复测。不读取模型、不启动 ASR、不重试 UNKNOWN 任务。
 所有旧 receipt 按 historical 保留，不改签；新 attempt 记录当前规则版本、
 `historicalRuleVersion`、`inference: not_run` 和新 `ruleCacheKey`（包含规则代码 SHA）。
 保留旧 attempt 中已有的所有回退证据，即使主引擎在新规则下通过，也继续核查其边界反证。
