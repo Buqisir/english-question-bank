@@ -1551,7 +1551,13 @@ for (const [authority, separator] of [[nck1MaterializationCandidateAuthorityRef,
   const groups = compiled.artifacts.canonicalPaper.questionGroups
   const block = groups.find(group => group.variant.family === 'grammar-fill').content.blocks[0]
   assert.equal(block.inlines[firstBlankIndex - 1].text, `Take a shuttle (接驳车)${separator}`)
-  assert.deepEqual(validateInlineBlankTextBoundaries(groups).map(issue => issue.code),
+  assert.deepEqual(validateInlineBlankTextBoundaries(groups), [], 'a Chinese gloss delimits the blank without adding source spacing')
+  // Keep the negative separator canary on an English parenthetical, which
+  // cannot use the Chinese-gloss boundary rule. Preserve the compiled spacing.
+  const englishParentheticalGroups = structuredClone(groups)
+  const englishBlock = englishParentheticalGroups.find(group => group.variant.family === 'grammar-fill').content.blocks[0]
+  englishBlock.inlines[firstBlankIndex - 1].text = block.inlines[firstBlankIndex - 1].text.replace('接驳车', 'bus')
+  assert.deepEqual(validateInlineBlankTextBoundaries(englishParentheticalGroups).map(issue => issue.code),
     separator ? [] : ['INLINE_BLANK_SEPARATOR_MISSING'])
   const request = materializeNck1CanonicalRequest(glossBlankInput, confirmation(imported.candidate))
   assert.equal(request.request.authority.manifestDigest, authority.manifestDigest, 'retained confirmation must replay its own authority')
