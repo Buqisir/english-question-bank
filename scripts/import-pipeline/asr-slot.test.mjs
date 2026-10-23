@@ -45,7 +45,9 @@ with tempfile.TemporaryDirectory(prefix='eqb-slot-') as tmp:
     finally:
         if child.poll() is None: child.kill(); child.wait()
     rows = [json.loads(line) for line in pathlib.Path(tmp+'/paper-test/fast/slot-timeline.jsonl').read_text().splitlines()]
-    assert len(rows) == 6
+    assert len([r for r in rows if r['phase'] == 'started']) == 7
+    assert len([r for r in rows if r['phase'] == 'acquired']) == 7
+    assert len([r for r in rows if r['phase'] == 'finished']) == 6
     assert all(row['paperId'] == 'paper-test' and row['runSeconds'] >= 0 and row['waitSeconds'] >= 0 for row in rows)
     assert rows[-1]['waitSeconds'] > .7
 `], { encoding: 'utf8', timeout: 15_000 })

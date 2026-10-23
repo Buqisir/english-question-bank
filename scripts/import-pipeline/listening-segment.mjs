@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash, randomUUID } from 'node:crypto'
-import { copyFileSync, mkdirSync, readFileSync, statfsSync, writeFileSync } from 'node:fs'
+import { closeSync, copyFileSync, existsSync, mkdirSync, openSync, readFileSync, readSync, readdirSync, statfsSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -14,6 +14,79 @@ const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex
 const json = file => JSON.parse(readFileSync(file, 'utf8'))
 const write = (file, value) => writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, { flag: 'wx' })
 const scripts = import.meta.dirname
+const whisperSettings = Object.freeze({ language: 'en', beam_size: 5, temperature: 0,
+  condition_on_previous_text: false, vad_filter: false, word_timestamps: true,
+  device: 'cpu', compute_type: 'int8', cpu_threads: 4, num_workers: 1,
+  window_seconds: 180, stride_seconds: 175 })
+
+function fileDigest(file) {
+  const hash = createHash('sha256'), buffer = Buffer.alloc(1024 * 1024)
+  const fd = openSync(file, 'r')
+  try {
+    let n
+    while ((n = readSync(fd, buffer, 0, buffer.length, null))) hash.update(buffer.subarray(0, n))
+    return `sha256:${hash.digest('hex')}`
+  } finally { closeSync(fd) }
+}
+
+function asrTimeout(name) {
+  const seconds = Number(process.env[name] ?? 900)
+  if (!Number.isFinite(seconds) || seconds <= 0) throw new Error(`${name} must be finite and positive`)
+  return seconds
+}
+
+const jobBinding = input => ({ attemptId: input.attemptId, jobId: input.jobId, ...input.binding })
+
+function slotState(receipt, expectedBinding) {
+  if (!existsSync(receipt)) return { code: 'ASR_STATUS_UNKNOWN', inferenceStarted: null }
+  const rows = readFileSync(receipt, 'utf8').trim().split('\n').filter(Boolean).map(line => JSON.parse(line))
+  if (!rows.length || rows[0].phase !== 'started'
+    || rows.some(row => digestJson(row.binding) !== digestJson(expectedBinding))) {
+    return { code: 'ASR_STATUS_UNKNOWN', inferenceStarted: null }
+  }
+  const last = rows.at(-1)
+  if (last?.phase === 'timeout' && last.code === 'ASR_QUEUE_TIMEOUT' && !rows.some(r => r.phase === 'acquired')) {
+    return { code: 'ASR_QUEUE_TIMEOUT', inferenceStarted: false }
+  }
+  return { code: last?.code || (last?.phase === 'finished' && Number.isInteger(last.exit)
+    ? last.exit === 0 ? 'ASR_OUTPUT_INCOMPLETE' : 'ASR_ENGINE_FAILED' : 'ASR_STATUS_UNKNOWN'),
+    inferenceStarted: rows.some(r => r.phase === 'acquired') ? true : null }
+}
+
+// Only completed, hash-bound raw results are reusable. A queue timeout proves
+// that inference never started; acquired/missing/truncated receipts do not.
+function previousFallback(output, binding) {
+  for (const entry of readdirSync(output).filter(name => name.startsWith('attempt-')).sort().reverse()) {
+    const directory = path.join(output, entry)
+    for (const name of readdirSync(directory).filter(name => /^whisper-\d+$/u.test(name))) {
+      const job = path.join(directory, name)
+      if (!existsSync(path.join(job, 'job-input.json'))) continue
+      const input = json(path.join(job, 'job-input.json'))
+      if (digestJson(input.binding) !== digestJson(binding)) continue
+      const resultFile = path.join(job, 'job-result.json')
+      if (existsSync(resultFile)) {
+        const result = json(resultFile)
+        if (result.state === 'queue_timeout') {
+          const origin = input.reusedFrom || job
+          const originInput = json(path.join(origin, 'job-input.json'))
+          if (digestJson(originInput.binding) === digestJson(binding)
+            && slotState(path.join(origin, 'slot-receipt.jsonl'), jobBinding(originInput)).code === 'ASR_QUEUE_TIMEOUT') continue
+          return { state: 'unknown', files: [], priorJob: job }
+        }
+        const files = result.files.map(item => {
+          const file = path.join(job, item.path)
+          if (fileDigest(file) !== item.sha256) throw new Error('ASR_CACHE_EVIDENCE_CHANGED')
+          return file
+        })
+        return { ...result, files, priorJob: job }
+      }
+      // Reconcile a response loss before any replay.
+      if (slotState(path.join(job, 'slot-receipt.jsonl'), jobBinding(input)).code === 'ASR_QUEUE_TIMEOUT') continue
+      return { state: 'unknown', files: [], priorJob: job }
+    }
+  }
+  return null
+}
 
 export function assertListeningDiskSpace(directory) {
   const disk = statfsSync(directory)
@@ -49,8 +122,8 @@ function engineDescriptor(file, bytes, record, durationSeconds) {
       computeType: engine.computeType || 'not_exposed' } }
 }
 
-// One attempt, one retained raw primary, at most one Whisper invocation per
-// failed group. Both engine results and failures survive every rerun.
+// One attempt, one retained primary. Identical raw fallback work is shared;
+// every group still receives an independent source comparison.
 export function segmentListening({ paperDir, request, appleEvidence, output, whisperPython, whisperModel, pauses = null,
   runWhisper = null, fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled }) {
   mkdirSync(output, { recursive: true })
@@ -90,7 +163,7 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   const playbackEndSeconds = Math.min(durationSeconds, primaryWindow.endSeconds ?? durationSeconds)
   write(path.join(attempt, 'input.json'), {
     rule: { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }, normalization: LISTENING_EQUIVALENCES,
-    normalizationAlgorithm: 'listening-equivalences-v3; finite spelling aliases and negative/positive auxiliary contractions; context-bound s/d expansions (ambiguous s/d retained); integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; typed year/time/cardinal/ordinal expressions; year equivalence requires a four-digit literal and an explicit word reading (2001..2099), standalone or in year context; shared source/ASR character spans, original acoustic run boundaries',
+    normalizationAlgorithm: 'listening-equivalences-v4; source-preserving listening-spoken-projection-v1 (recorded exclusions and source locations); finite spelling aliases and negative/positive auxiliary contractions; context-bound s/d expansions (ambiguous s/d retained); integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; typed year/time/cardinal/ordinal expressions; year equivalence requires a four-digit literal and an explicit word reading (2001..2099), standalone or in year context; shared source/ASR character spans, original acoustic run boundaries',
     sourceTextSha256: digest(Buffer.from(JSON.stringify(groups))),
     materializationSha256: digest(materializationBytes), audioSha256: audioHash,
     ruleCodeSha256: digest(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs'))),
@@ -111,6 +184,8 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   const apple = evaluateListeningEngine({ ...base, windows: [primaryWindow] })
   write(path.join(attempt, 'apple-rule.json'), apple)
   const fallback = []
+  const scheduled = new Map()
+  let modelSha256
   for (const [index, failed] of apple.groups.entries()) {
     if (failed.decision === 'usable') continue
     assertListeningDiskSpace(attempt)
@@ -123,23 +198,58 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     const fallbackDir = path.join(attempt, `whisper-${index + 1}`)
     mkdirSync(fallbackDir)
     const windows = []
+    const receipt = path.join(fallbackDir, 'slot-receipt.jsonl')
+    let state = 'finished', inferenceStarted = false
+    let reused = null, input = null
+    const retainedFiles = []
     try {
       if (!(startSeconds < endSeconds)) throw new Error('LISTENING_FALLBACK_CROP_UNRESOLVED')
-      if (runWhisper) {
+      modelSha256 ??= runWhisper ? 'injected-offline-runner' : fileDigest(path.join(whisperModel, 'model.bin'))
+      const binding = { audioSha256: audioHash, materializationSha256: digest(materializationBytes),
+        modelSnapshot: path.resolve(whisperModel), modelSha256, pythonExecutable: path.resolve(whisperPython),
+        settings: whisperSettings,
+        adapterSha256: fileDigest(path.join(scripts, 'transcribe-listening-windows.py')),
+        startSeconds, endSeconds }
+      const key = digestJson(binding)
+      // Injected fixture callbacks have no installed model/version authority;
+      // share them within this invocation only, never across process attempts.
+      reused = scheduled.get(key) || (!runWhisper ? previousFallback(output, binding) : null)
+      input = { attemptId, jobId: `${attemptId}/whisper-${index + 1}`,
+        segmentId: failed.segmentId, binding, reusedFrom: reused?.priorJob ?? null }
+      write(path.join(fallbackDir, 'job-input.json'), input)
+      if (reused?.state === 'unknown') throw Object.assign(new Error('ASR_PRIOR_ATTEMPT_REQUIRES_RECONCILIATION'),
+        { code: 'ASR_STATUS_UNKNOWN', inferenceStarted: null })
+      if (reused) {
+        state = reused.state
+        inferenceStarted = state !== 'queue_timeout'
+        for (const [n, file] of reused.files.entries()) {
+          windows.push(retain(file, `whisper-${index + 1}-${n}`))
+          retainedFiles.push(file)
+        }
+      } else if (runWhisper) {
+        inferenceStarted = true
         const raw = runWhisper({ group: failed, startSeconds, endSeconds, output: fallbackDir })
         for (const [n, record] of (Array.isArray(raw) ? raw : [raw]).entries()) {
           const file = path.join(fallbackDir, `raw-${n}.json`)
           write(file, record)
           windows.push(retain(file, `whisper-${index + 1}-${n}`))
+          retainedFiles.push(file)
         }
       } else {
+        const queueSeconds = asrTimeout('ASR_QUEUE_TIMEOUT'), runSeconds = asrTimeout('ASR_RUN_TIMEOUT')
         execFileSync(whisperPython, [path.join(scripts, 'asr-slot.py'), whisperPython,
           path.join(scripts, 'transcribe-listening-windows.py'), audio, sourceFile,
           path.join(fallbackDir, 'raw'), '--model-snapshot', whisperModel, '--language', 'en',
           '--start', String(startSeconds), '--end', String(endSeconds)],
-        { encoding: 'utf8', timeout: 900_000, maxBuffer: 16 * 1024 * 1024,
-          env: { ...process.env, TMPDIR: fallbackDir } })
+        { encoding: 'utf8', timeout: (queueSeconds + runSeconds + 30) * 1000, killSignal: 'SIGTERM',
+          maxBuffer: 16 * 1024 * 1024,
+          env: { ...process.env, TMPDIR: fallbackDir, EQB_ASR_CONCURRENCY: '1',
+            ASR_QUEUE_TIMEOUT: String(queueSeconds), ASR_RUN_TIMEOUT: String(runSeconds),
+            EQB_ASR_RECEIPT: receipt,
+            EQB_ASR_JOB_BINDING: JSON.stringify(jobBinding(input)) } })
+        inferenceStarted = true
         const completed = json(path.join(fallbackDir, 'raw/completed.json'))
+        if (completed.inputsUnchanged !== true) throw new Error('ASR_COMPLETION_INPUTS_UNPROVEN')
         const settings = json(path.join(fallbackDir, 'raw/input.json')).engine
         write(path.join(fallbackDir, 'engine.json'), settings)
         for (const [n, item] of completed.windows.entries()) {
@@ -152,22 +262,63 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
             pcm: { sampleRate: 16000, channels: 1, encoding: 'signed_16_bit_little_endian',
               cropOffsetSeconds: raw.startSeconds, sha256: raw.sampleSha256 } })
           windows.push(retain(withMetadata, `whisper-${index + 1}-${n}`))
+          retainedFiles.push(withMetadata)
         }
       }
+      // Store local immutable copies so reuse never depends on another
+      // attempt's future location, and verify their bytes before later reuse.
+      const files = retainedFiles.map((file, n) => {
+        const target = path.join(fallbackDir, `cached-${n}.json`)
+        copyFileSync(file, target)
+        return { path: path.basename(target), sha256: fileDigest(target) }
+      })
+      write(path.join(fallbackDir, 'job-result.json'), { state, inferenceStarted, files })
+      scheduled.set(key, { state, files: files.map(f => path.join(fallbackDir, f.path)), priorJob: fallbackDir })
     } catch (error) {
+      let classification
+      try { classification = slotState(receipt, input ? jobBinding(input) : null) }
+      catch { classification = { code: 'ASR_STATUS_UNKNOWN', inferenceStarted: null } }
+      const code = error.code === 'ASR_QUEUE_TIMEOUT' || error.code === 'ASR_STATUS_UNKNOWN'
+        ? error.code : classification.code === 'ASR_QUEUE_TIMEOUT' || classification.code === 'ASR_RUN_TIMEOUT'
+          ? classification.code : error.code || classification.code
+      inferenceStarted = error.inferenceStarted !== undefined ? error.inferenceStarted
+        : inferenceStarted || classification.inferenceStarted
+      state = code === 'ASR_QUEUE_TIMEOUT' && inferenceStarted === false ? 'queue_timeout'
+        : code === 'ASR_STATUS_UNKNOWN' || inferenceStarted === null ? 'unknown' : 'failed'
       const file = path.join(fallbackDir, 'failure.json')
       write(file, { engine: { name: 'faster-whisper', modelSnapshot: whisperModel, version: 'not_exposed',
         requestedLocale: 'en', actualLocale: 'not_exposed',
         apiOptions: { language: 'en', beam_size: 5, temperature: 0, condition_on_previous_text: false,
           vad_filter: false, word_timestamps: true } },
-        error: error.message, stderr: String(error.stderr || ''), startSeconds, endSeconds,
+        error: error.message, code, inferenceStarted, fallbackBudgetConsumed: inferenceStarted !== false,
+        attemptId, jobId: `${attemptId}/whisper-${index + 1}`, receipt: existsSync(receipt) ? 'slot-receipt.jsonl' : null,
+        reusedFrom: reused?.priorJob ?? null, stderr: String(error.stderr || ''), startSeconds, endSeconds,
         platform: primaryWindow.platform || { system: process.platform, architecture: process.arch,
           macOSVersion: 'not_applicable', macOSBuild: 'not_applicable' },
         adapterSha256: digest(readFileSync(path.join(scripts, 'transcribe-listening-windows.py'))),
         pcm: { sampleRate: 16000, channels: 1, encoding: 'signed_16_bit_little_endian',
           cropOffsetSeconds: startSeconds, sha256: 'not_exposed' },
-        audioSha256: audioHash, retryPolicy: 'one fallback only; retained; no automatic retry' })
+        audioSha256: audioHash, retryPolicy: state === 'queue_timeout'
+          ? 'inference not started; a later schedule may resume this work item'
+          : 'started or unknown; reconcile retained receipts before any replay' })
       windows.push(retain(file, `whisper-${index + 1}-failure`))
+      write(path.join(fallbackDir, 'job-result.json'), { state, inferenceStarted,
+        files: [{ path: 'failure.json', sha256: fileDigest(file) }] })
+      if (existsSync(path.join(fallbackDir, 'job-input.json'))) {
+        const key = digestJson(json(path.join(fallbackDir, 'job-input.json')).binding)
+        scheduled.set(key, { state, files: [file], priorJob: fallbackDir })
+      }
+    }
+    if (existsSync(receipt)) {
+      const file = path.join(fallbackDir, 'slot-receipts.json')
+      write(file, { raw: readFileSync(receipt, 'utf8'), job: input })
+      retain(file, `whisper-${index + 1}-slot`)
+    }
+    if (state === 'queue_timeout' || state === 'unknown') {
+      // Scheduling did not supply engine observations. Do not turn queue
+      // starvation into ASR_NO_TIMED_WORDS or consume the inference budget.
+      failed.issues.push(state === 'queue_timeout' ? 'ASR_QUEUE_TIMEOUT' : 'ASR_STATUS_UNKNOWN')
+      continue
     }
     const result = evaluateListeningEngine({ ...base,
       groups: [groups.find(g => g.segmentId === failed.segmentId)], corpus: groups, windows,
