@@ -10,6 +10,8 @@ import { sourceReferenceFiguresFixture } from '../test-fixtures/paper-import/sou
 import { assertSourceReferenceAdmission } from '../server/paper-import/sourceReferenceAdmission.mjs'
 import { validateSourceReferences, sourceReferenceFigures } from '../server/paper-import/sourceReferences.mjs'
 import { sourceReferenceScoringScopes } from '../server/paper-import/sourceReferenceScoringScope.mjs'
+import { computeLineFacts } from './import-pipeline/ocr-line-facts.mjs'
+import { matchesLineRole } from './import-pipeline/ocr-line-roles.mjs'
 import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
@@ -53,6 +55,15 @@ for (const [name, change] of [
   ['forged sourceRegionId', value => { figure(value).sourceRegionId = 'unconfirmed' }],
   ['omitted scoring image', value => { scoring(value).blocks = scoring(value).blocks.filter(block => block !== figure(value)) }],
   ['reordered scoring blocks', value => { scoring(value).blocks.reverse() }],
+  ['swapped paragraph/figure pairs', value => {
+    const [a, f1, b, f2, c] = scoring(value).blocks
+    scoring(value).blocks = [b, f2, a, f1, c]
+  }],
+  ['overlapping paragraph source ranges', value => {
+    const blocks = scoring(value).blocks
+    blocks[blocks.length - 1] = structuredClone(blocks[2])
+    blocks.at(-1).paragraph.paragraphId += '-overlap'
+  }],
   ['false scoring label', value => { scoring(value).sourceLabel = '评分原则' }],
   ['wrong Writing Task', value => {
     value.groups[1].scoring.entries.push(scoring(value))
@@ -99,6 +110,63 @@ for (const boundary of ['听力原文', '试题解析', '（五）样卷']) {
   }
 }
 console.log('PASS forged regions/IDs/PNG/SHA, omissions, order, task/entry swaps, missing PDF and no scoring/boundary fail closed')
+
+// Keep local paragraph/figure anchors valid while moving whole pairs across a
+// page turn in one scoring entry. Both source pages must remain monotonic.
+const crossPageInput = scoringFiguresFixture({ crossPageScoring: true })
+const crossPageSidecar = captureScoringReferences(crossPageInput)
+assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageSidecar })
+const crossPageChanged = structuredClone(crossPageSidecar)
+const crossPageBlocks = scoring(crossPageChanged).blocks
+const p04FigureIndex = crossPageBlocks.findIndex(block => block.kind === 'figure' && block.source.locator.page === 4)
+assert(p04FigureIndex > 1 && crossPageBlocks[p04FigureIndex - 1].kind === 'paragraph')
+const p04Pair = crossPageBlocks.splice(p04FigureIndex - 1, 2)
+const p03Pair = crossPageBlocks.splice(0, 2, ...p04Pair)
+crossPageBlocks.splice(p04FigureIndex - 1, 0, ...p03Pair)
+assert.throws(() => assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageChanged }),
+  /source order|overlap/iu, 'swapped cross-page paragraph/figure pairs')
+console.log('PASS paired paragraph/figure swaps within and across pages, and overlapping blocks fail closed')
+
+// Rebind genuine OCR text so admission cannot reject merely stale evidence.
+const explanationInput = structuredClone(input)
+const explanationPage = explanationInput.confirmation.documents[1].pages[3]
+const explanationItem = explanationPage.orderedItems.find(item => item.text === '—Use clear links between ideas.')
+const explanationText = '21. A 本文是一篇应用文。'
+explanationItem.text = explanationText
+explanationInput.evidence.documents[1].pages[3].observations.find(observation =>
+  observation.observationId === explanationItem.observationIds[0]).text = explanationText
+const { evidenceDigest: _oldDigest, ...evidenceBody } = explanationInput.evidence
+explanationInput.evidence.evidenceDigest = digestJson(evidenceBody)
+explanationInput.confirmation.evidenceDigest = explanationInput.evidence.evidenceDigest
+explanationInput.sourceInput.ocrSourceBytes = {
+  evidenceBytes: Buffer.from(JSON.stringify(explanationInput.evidence)),
+  confirmationBytes: Buffer.from(JSON.stringify(explanationInput.confirmation)),
+}
+assert(matchesLineRole('writing.explanations', computeLineFacts({ text: explanationText }), { sectionCount: 1 }))
+const explanationSidecar = structuredClone(sidecar)
+explanationSidecar.groups[1].scoring.entries[0].blocks[0].paragraph.text = explanationText
+assert.throws(() => captureScoringReferences(explanationInput), /anchor|scope|section/iu,
+  'producer rejects a genuine explanation image after numbered analysis')
+assert.throws(() => assertSourceReferenceAdmission({ ...explanationInput, sidecar: explanationSidecar }),
+  /scoring label|Writing Task/iu, 'independently authored sidecar cannot reassign explanation images to scoring')
+const laterHeadings = structuredClone(explanationInput.confirmation)
+laterHeadings.documents[1].pages[3].orderedItems.push(
+  { itemId: 'later-task', text: '第二节（续写）' }, { itemId: 'later-score', text: '评分标准' })
+const explanationScopes = sourceReferenceScoringScopes(laterHeadings, new Set(['answers']))
+assert.equal(explanationScopes.get(explanationItem.itemId), null)
+assert.equal(explanationScopes.get('later-score'), null,
+  'later writing/scoring headings cannot reopen the numbered-analysis boundary')
+console.log('PASS numbered explanation boundary closes producer and independent admission permanently')
+
+for (const colon of ['：', ':']) for (const writingHeading of [
+  [`第四部分${colon}写作\n第一节`], [`第四部分${colon}写作`, '第一节'],
+]) {
+  const colonInput = scoringFiguresFixture({ writingHeading })
+  const colonSidecar = captureScoringReferences(colonInput)
+  assertSourceReferenceAdmission({ ...colonInput, sidecar: colonSidecar })
+  assert.equal(colonSidecar.groups[0].scoring.entries[0].blocks[1].kind, 'figure')
+}
+console.log('PASS Chinese/ASCII colon writing-part headings retain exact producer → admission ownership')
 
 const labelInput = scoringFiguresFixture({ labelFirst: true, essays: false })
 const labelSidecar = captureScoringReferences(labelInput)

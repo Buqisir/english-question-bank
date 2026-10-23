@@ -1,4 +1,8 @@
+import { WRITING_PART, WRITING_SECTION, ANSWER_EXPLANATION_START } from './sourceReferenceWritingRules.mjs'
+
 const normalize = text => text.normalize('NFKC').replace(/\s+/gu, '')
+// Preserve the scoring helper's existing alternate part title.
+const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
 
 // Conservative ownership for new scoring figures, replayed by producer and
 // admission alike. Only explicit source headings and scoring labels authorize
@@ -12,27 +16,28 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
       const text = normalize(item.text)
       let heading = text
       if (/^第[一二三四五六]部分/u.test(text)) {
-        writing = /^第[三四]部分(?:写作|书面表达)/u.test(text)
+        writing = WRITING_PART.test(text) || ALTERNATE_WRITING_PART.test(text)
         startedWriting ||= writing
         taskType = null
         label = null
         ended = false
-        heading = text.replace(/^第[三四]部分(?:写作|书面表达)(?:\([^)]*\))?/u, '')
+        heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
-      if (/^(?:(?:附[:：]?)?听力|录音原文|试题解析|参考答案解析|答案解析|答案详解|参考答案详解|【(?:解题导语|语篇导读|语篇解读)】|Text\d)/iu.test(heading)) {
+      if (ANSWER_EXPLANATION_START.test(heading)
+        || /^(?:(?:附[:：]?)?听力|录音原文|参考答案解析|Text\d)/iu.test(heading)) {
         writing = false
         taskType = null
         label = null
         ended = true
         terminal = startedWriting
+        scopes.set(item.itemId, null)
+        continue
       }
-      let task = null
+      let task = WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] ?? null
       if ((writing && /^第一节(?:\(|$)/u.test(heading))
-        || /^(?:第一节(?:\([^)]*\))?)?(?:应用文(?:写作)?|书面表达)(?:评分细则[:：]?)?$/u.test(heading)
-        || /^第[一二]节[:：]?(?:\(?(?:应用文|书面表达))/u.test(heading)) task = 'application'
+        || /^(?:第一节(?:\([^)]*\))?)?(?:应用文(?:写作)?|书面表达)(?:评分细则[:：]?)?$/u.test(heading)) task ??= 'application'
       if ((writing && /^第二节(?:\(|$)/u.test(heading))
-        || /^(?:第二节(?:\([^)]*\))?)?读后续写(?:评分细则[:：]?)?$/u.test(heading)
-        || /^第[一二]节[:：]?\(?读后续写/u.test(heading)) task = 'continuation'
+        || /^(?:第二节(?:\([^)]*\))?)?读后续写(?:评分细则[:：]?)?$/u.test(heading)) task ??= 'continuation'
       if (task) {
         writing = true
         startedWriting = true

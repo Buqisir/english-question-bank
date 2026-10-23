@@ -128,13 +128,53 @@ export function assertSourceReferenceAdmission({
     ? [block.paragraph.source, ...(block.paragraph.continuationSources ?? [])].flatMap(sourceItems)
     : block.kind === 'table' ? block.rows.flat().flatMap(cell => sourceItems(cell.source)) : []
 
-  const seen = new Set()
-  for (const { figure, entry, group, kind } of figures) {
+  const seen = new Set(), figureReferences = new Map()
+  for (const { figure } of figures) {
     const matches = expected.filter(reference => reference.sourceRegionId === figure.sourceRegionId
       && digestJson(reference.source) === digestJson(figure.source.locator))
     if (matches.length !== 1 || seen.has(matches[0])) reject('Missing, extra, duplicated or substituted source figure region')
     const reference = matches[0]
     seen.add(reference)
+    figureReferences.set(figure, reference)
+  }
+  if (sidecar.schemaVersion === 'source-references-v4') {
+    // Local paragraph→figure adjacency alone permits swapping intact pairs.
+    // Index the sealed page/item sequence, including picture-consumed items.
+    const positions = new Map(confirmation.documents.flatMap(document =>
+      document.pages.flatMap(page => page.orderedItems).map((item, index) =>
+        [item.itemId, { documentId: document.documentId, index }])))
+    for (const group of sidecar.groups) for (const entry of group.scoring.entries) {
+      let documentId = entry.labelSource?.locator.documentId
+      let previousEnd = -1
+      const range = items => {
+        const selected = items.map(item => positions.get(item.itemId))
+        documentId ??= selected[0]?.documentId
+        if (!selected.length || selected.some(position => !position || position.documentId !== documentId)) {
+          reject('Scoring blocks require confirmed source order in one answer document')
+        }
+        return { start: Math.min(...selected.map(position => position.index)),
+          end: Math.max(...selected.map(position => position.index)) }
+      }
+      if (entry.labelSource) previousEnd = range(sourceItems(entry.labelSource)).end
+      for (const block of sourceReferenceBlocks(entry)) {
+        let current
+        if (block.kind === 'figure') {
+          const reference = figureReferences.get(block)
+          // Empty pictures occupy the gap after their proven anchor; pictures
+          // containing OCR items also reserve their entire consumed range.
+          const anchor = range([reference.afterItem])
+          current = { start: anchor.end + .5, end: reference.itemIds.length
+            ? range(reference.itemIds.map(itemId => ({ itemId }))).end : anchor.end + .5 }
+        } else current = range(boundaryItems(block))
+        if (current.start <= previousEnd) {
+          reject('Scoring blocks must follow confirmed source order without overlapping source ranges')
+        }
+        previousEnd = current.end
+      }
+    }
+  }
+  for (const { figure, entry, group, kind } of figures) {
+    const reference = figureReferences.get(figure)
     const scoringScope = scoringScopes.get(reference.afterItem.itemId)
     if (kind === 'scoring') {
       const labels = sourceItems(entry.labelSource).filter(item => normalize(item.text) === normalize(entry.sourceLabel ?? ''))
