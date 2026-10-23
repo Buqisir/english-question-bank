@@ -309,6 +309,7 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, timing =
     // Paged.js created despite break-inside: avoid for oversized content.
     const layoutFailure = await page.evaluate((fixedPage) => {
       const pagesByBlock = new Map()
+      let answerHeightFailure = null
       const fixedPageAtoms = fixedPage
         ? ', .pagedjs_pages .question, .pagedjs_pages .canonical-option-bank-item' : ''
       for (const element of document.querySelectorAll('.pagedjs_pages .canonical-reading-framed-columns, .pagedjs_pages .canonical-reading-figure, .pagedjs_pages .question[data-canonical-stem-figures], .pagedjs_pages .writing-answer-box, .pagedjs_pages [data-canonical-group-type="listening"] .question' + fixedPageAtoms)) {
@@ -339,26 +340,38 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, timing =
         }
         for (const child of [element, ...element.querySelectorAll('td, figcaption, .writing-continuation-row, .writing-starter-line, .canonical-application-given, .canonical-application-drawing-area')]) {
           const rect = child.getBoundingClientRect()
-          if (child.scrollWidth > child.clientWidth + 1
-            || child.scrollHeight > child.clientHeight + 1
+          const horizontalOverflow = child.scrollWidth > child.clientWidth + 1
+            || rect.left < box.left - 1 || rect.right > box.right + 1
+          const verticalOverflow = child.scrollHeight > child.clientHeight + 1
             || rect.top < box.top - 1 || rect.bottom > box.bottom + 1
-            || rect.left < box.left - 1 || rect.right > box.right + 1) {
-            return { id, reason: 'content exceeds its layout box' }
+          if (horizontalOverflow || verticalOverflow) {
+            // Only vertical overflow inside an otherwise in-bounds answer box
+            // can be repaired by measuring a larger response height.
+            const reparableHeight = !horizontalOverflow && rect.top >= box.top - 1
+            const answerBoxFamily = reparableHeight && element.matches('.canonical-application-response')
+              ? 'application' : reparableHeight && element.matches('.canonical-continuation-response')
+                ? 'continuation' : undefined
+            const failure = { id, reason: 'content exceeds its layout box', answerBoxFamily }
+            if (!answerBoxFamily) return failure
+            // A later child or block can still reveal unknown geometry. Such
+            // failures take priority over the reparable answer-box height.
+            answerHeightFailure ??= failure
           }
         }
       }
-      return null
+      return answerHeightFailure
     }, printHtml.includes('data-pdf-planned-break'))
-    if (layoutFailure) {
-      throw Object.assign(new Error(`试卷内容超出排版区域：${layoutFailure.id || 'block'} (${layoutFailure.reason})`), {
-        code: 'PAPER_LAYOUT_OVERFLOW',
-        blockId: layoutFailure.id,
-      })
-    }
     if (studentProduct) {
       const failures = await page.evaluate(measureOptions, { ...optionSafety, prepare: false })
       if (failures.length) throw Object.assign(new Error(`选项文字超出列宽：${failures.join(', ')}`), {
         code: 'PAPER_LAYOUT_OVERFLOW',
+      })
+    }
+    if (layoutFailure) {
+      throw Object.assign(new Error(`试卷内容超出排版区域：${layoutFailure.id || 'block'} (${layoutFailure.reason})`), {
+        code: 'PAPER_LAYOUT_OVERFLOW',
+        blockId: layoutFailure.id,
+        answerBoxFamily: layoutFailure.answerBoxFamily,
       })
     }
     const inspection = typeof inspect === 'function'
