@@ -360,7 +360,7 @@ for (const classification of ['semantic_table', 'content_media']) {
   confirmation.evidenceDigest = evidence.evidenceDigest
   const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
   assert.deepEqual(produced.review.required, [], JSON.stringify(produced.review.required))
-  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v24')
+  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v26')
   if (classification === 'semantic_table') {
     assert.equal(produced.materialization.groups.find(group => group.slotId === 'reading.c')
       .blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text,
@@ -437,13 +437,27 @@ for (const classification of ['semantic_table', 'content_media']) {
   confirmation.evidenceDigest = evidence.evidenceDigest
   const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
   const expected = cloneJson(produced.materialization)
-  // The producer's historical draft cannot admit an application figure;
-  // the v5 replacement below resolves precisely these representation issues.
-  assert.deepEqual(produced.review.required.map(issue => issue.code).sort(), [
-    'NCK1_OCR_MATERIALIZATION_FIGURE_INVALID',
-    'NCK1_OCR_MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID',
-    'NCK1_OCR_MATERIALIZATION_WRITING_TASK_INVALID',
-  ])
+  // These synthetic OCR items share a confirmed content_media region. The
+  // producer retains its crop, not a second transcription or an empty title.
+  // The v5/v6 path below is an optional, source-checked representation change.
+  assert.deepEqual(produced.review.required, [])
+  assert.deepEqual(produced.materialization.issues, [])
+  assert.deepEqual(validateNck1SourceMaterialization(produced.materialization), [])
+  const application = produced.materialization.groups.find(group => group.family === 'application-writing')
+  assert.deepEqual(application.writingTask.givenSkeleton, [])
+  const sourceFigure = application.blocks.find(block => block.kind === 'figure')
+  assert(sourceFigure)
+  assert.equal(sourceFigure.role, undefined)
+  assert.equal(sourceFigure.caption, '')
+  assert.deepEqual(sourceFigure.source, { kind: 'page_region', documentId: fixture.sourceDocuments[0].documentId,
+    page: page.page, region })
+  const sourceMedia = produced.materialization.media.find(media => media.mediaId === sourceFigure.mediaId)
+  const sourceFile = produced.mediaFiles.find(file => file.mediaId === sourceFigure.mediaId)
+  const crop = rasterPdfRegion({ pdfBytes: fixture.sourceDocuments[0].bytes, page: page.page, region, density: 144 })
+  assert.deepEqual(sourceFile.bytes, crop.bytes, 'the figure retains the complete immutable source crop')
+  assert.equal(sourceMedia.sha256, sha256(crop.bytes))
+  assert.deepEqual(produced.materialization.sourceCoverage.visuals.filter(visual =>
+    visual.disposition === 'content_media').map(visual => visual.targetId), [sourceFigure.mediaId])
   const original = cloneJson(expected)
   const unchanged = replaceOcrStructuredAnswerRegions(produced.materialization, expected)
   assert.strictEqual(unchanged.expected, expected)
@@ -451,9 +465,80 @@ for (const classification of ['semantic_table', 'content_media']) {
   assert.equal(unchanged.replacements.size, 0)
   const resolved = resolveConfirmedNck1OcrEvidence({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
   assert.deepEqual(resolved.issues, [])
+  const carrier = resolved.structures.get(fixture.sourceDocuments[0].documentId).body
+    .find(item => item.materializedMedia?.mediaId === sourceFigure.mediaId)
+  assert.equal(carrier.text, '', 'confirmed image text is represented by the crop, not silently retyped as givens')
+  for (const name of ['unclaimed-text', 'outside-region']) {
+    const ev = cloneJson(evidence)
+    const conf = cloneJson(confirmation)
+    const ep = ev.documents[0].pages.find(value => value.page === page.page)
+    const cp = conf.documents[0].pages.find(value => value.page === page.page)
+    if (name === 'unclaimed-text') {
+      cp.visualClassifications.find(value => value.regionId === 'structured-template').itemIds.pop()
+    } else {
+      const moved = ep.observations.find(value => value.observationId === extras[1].observationIds[0])
+      moved.region.x = region.x + region.width + .001
+      ep.regions.find(value => value.regionId === moved.regionId).region = cloneJson(moved.region)
+    }
+    rebound(ev)
+    conf.evidenceDigest = ev.evidenceDigest
+    const invalid = produceNck1OcrMaterialization({
+      paperId, documents: fixture.sourceDocuments, evidence: ev, confirmation: conf,
+    })
+    const message = name === 'unclaimed-text'
+      ? /Every text observation inside a content visual must be accounted for/
+      : /Visual text observations must lie within the classified source region/
+    assert(invalid.review.required.some(issue => issue.code === 'NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED'
+      && message.test(issue.message)), `${name}: ${JSON.stringify(invalid.review.required)}`)
+  }
+  // Real text outside the selected crop is still response-box content. It
+  // must survive next to the figure with its own source, order and role.
+  {
+    const ev = cloneJson(evidence)
+    const conf = cloneJson(confirmation)
+    const ep = ev.documents[0].pages.find(value => value.page === page.page)
+    const cp = conf.documents[0].pages.find(value => value.page === page.page)
+    const givens = [
+      { role: 'salutation', text: 'Dear students,' },
+      { role: 'opening', text: 'This is the real opening.' },
+      { role: 'closing', text: 'Yours,' },
+      { role: 'signature', text: 'Li Hua' },
+    ]
+    const items = givens.map((given, i) => {
+      const id = `outside-template-${i}`
+      const box = { x: region.x, y: region.y + region.height + .001 * (i + 1),
+        width: region.width * .4, height: .0005 }
+      ep.regions.push({ regionId: id, kind: 'text', region: box })
+      ep.observations.push({ ...cloneJson(labelObservation), observationId: id,
+        regionId: id, text: given.text, region: box })
+      return { itemId: id, observationIds: [id], text: given.text }
+    })
+    cp.orderedItems.splice(index + 1 + extras.length, 0, ...items)
+    rebound(ev)
+    conf.evidenceDigest = ev.evidenceDigest
+    const withGivens = produceNck1OcrMaterialization({
+      paperId, documents: fixture.sourceDocuments, evidence: ev, confirmation: conf,
+    })
+    assert.deepEqual(withGivens.review.required, [])
+    const owner = withGivens.materialization.groups.find(group => group.family === 'application-writing')
+    assert.deepEqual(owner.writingTask.givenSkeleton, givens)
+    for (const [i, given] of givens.entries()) {
+      const blocks = owner.blocks.filter(block => block.kind === 'paragraph'
+        && block.content.map(value => value.text).join('') === given.text)
+      assert.equal(blocks.length, 1)
+      const box = ep.observations.find(value => value.observationId === items[i].observationIds[0]).region
+      assert.deepEqual(blocks[0].source, { kind: 'page_region',
+        documentId: fixture.sourceDocuments[0].documentId, page: page.page,
+        region: { x: box.x, y: box.y, width: box.x + box.width - box.x, height: box.y + box.height - box.y } })
+    }
+    assert.deepEqual(withGivens.mediaFiles, produced.mediaFiles)
+    assert.deepEqual(imported(withGivens, {
+      evidenceBytes: new TextEncoder().encode(JSON.stringify(ev)),
+      confirmationBytes: new TextEncoder().encode(JSON.stringify(conf)),
+    }).issues, [])
+  }
   const changed = cloneJson(produced.materialization)
   changed.schemaVersion = 'nck1-source-materialization-v5'
-  changed.issues = []
   const group = changed.groups.find(group => group.family === 'application-writing')
   const figureIndex = group.blocks.findIndex(block => block.kind === 'figure')
   const figure = group.blocks[figureIndex]
@@ -487,6 +572,7 @@ for (const classification of ['semantic_table', 'content_media']) {
   assert.deepEqual(validateNck1SourceMaterialization(changed), [])
   const sourceBytes = { evidenceBytes: new TextEncoder().encode(JSON.stringify(evidence)),
     confirmationBytes: new TextEncoder().encode(JSON.stringify(confirmation)) }
+  assert.deepEqual(imported(produced, sourceBytes).issues, [], 'unchanged source figure is independently admissible')
   const importChanged = materialization => imported({ ...produced, materialization,
     mediaFiles: produced.mediaFiles.filter(file => materialization.media.some(media => media.mediaId === file.mediaId)) }, sourceBytes)
   assert.deepEqual(importChanged(changed).issues, [], 'confirmed figure -> structured region with retained proof')
@@ -504,7 +590,7 @@ for (const classification of ['semantic_table', 'content_media']) {
   assert.deepEqual(changed, immutableRaw, 'only the expected side is rewritten')
   assert.equal(transformed.replacements.size, 1)
   assert(!transformed.expected.groups.find(value => value.groupId === group.groupId).blocks.some(value => value.kind === 'figure'))
-  for (const name of ['region', 'group', 'multiple', 'content', 'drawing', 'text', 'source']) {
+  for (const name of ['region', 'group', 'multiple', 'content', 'drawing', 'text', 'source', 'given-text', 'given-source']) {
     const raw = cloneJson(changed)
     const exp = cloneJson(produced.materialization)
     const owner = raw.groups.find(value => value.groupId === group.groupId)
@@ -515,14 +601,20 @@ for (const classification of ['semantic_table', 'content_media']) {
     if (name === 'drawing') delete owner.writingTask.drawingArea
     if (name === 'text') owner.blocks.find(value => value.blockId === paragraphs[0].blockId).content[0].text = 'Invented label'
     if (name === 'source') owner.blocks.find(value => value.blockId === paragraphs[0].blockId).source.region.x += .001
-    const suffix = { content: 'CONTENT_CONFLICT', text: 'TEXT_UNCONFIRMED', source: 'TEXT_SOURCE_INVALID' }[name] || 'UNMATCHED'
+    if (name === 'given-text') {
+      owner.writingTask.givenSkeleton[0].text = 'Invented opening'
+      owner.blocks.find(value => value.blockId === paragraphs[1].blockId).content[0].text = 'Invented opening'
+    }
+    if (name === 'given-source') owner.blocks.find(value => value.blockId === paragraphs[1].blockId).source.region.x += .001
+    const suffix = { content: 'CONTENT_CONFLICT', text: 'TEXT_UNCONFIRMED', source: 'TEXT_SOURCE_INVALID',
+      'given-text': 'TEXT_UNCONFIRMED', 'given-source': 'TEXT_SOURCE_INVALID' }[name] || 'UNMATCHED'
     for (const version of [5, 6]) {
       raw.schemaVersion = `nck1-source-materialization-v${version}`
       assert.throws(() => replaceOcrStructuredAnswerRegions(raw, cloneJson(exp), resolved, confirmation, evidence),
         error => error.code === `OCR_STRUCTURED_ANSWER_REGION_${suffix}`, `v${version} ${name}`)
     }
   }
-  console.log('PASS OCR-v3 controlled structured answer replacement for v5/v6: exact owner/region/text/source, proof/absence, closed media and unchanged legacy path')
+  console.log('PASS OCR-v3 source crop and real givens, visual text closure, controlled v5/v6 replacement: exact owner/region/text/source, proof/absence, closed media and unchanged legacy path')
 }
 
 // Prepare immutable native page fixtures once for the media-negative matrix.
@@ -1514,7 +1606,7 @@ try {
     JSON.stringify({ ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }))
   const v3Job = { paperDir: v3Dir, manifest: JSON.parse(readFileSync(path.join(v3Dir, 'universal-source-manifest.json'))) }
   assert.equal(runNck1MaterializationJob(v3Job).disposition, 'ready_for_verification')
-  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v24')
+  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v26')
   assert.equal(runNck1MaterializationJob(v3Job).cached, true, 'v3 output, review and receipt must agree on the current producer')
   const v3ReviewFile = path.join(v3Dir, 'materialization/nck1-ocr-materialization-review-v1.json')
   const v3ReviewBytes = readFileSync(v3ReviewFile)

@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v19'
+  'nck1-docx-materialization-producer-v20'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -828,7 +828,8 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
     meaningful = meaningful.slice(0, noticeEnd + 1)
       .concat(cell.sourceParagraphs.filter((item) => normalized(item.text)))
   }
-  const givens = meaningful.slice(noticeEnd + 1).filter((item) => item.kind === 'paragraph')
+  const givens = meaningful.slice(noticeEnd + 1)
+    .filter((item) => item.kind === 'paragraph' && normalized(item.text))
   const skeleton = family === 'application-writing'
     ? givens.map((item, index) => ({
         text: trimEdgeSpaces(item.text),
@@ -851,8 +852,12 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
     paperId, slotId, documentId, issues, role: 'body', blanks: new Map(),
   })
   if (family === 'application-writing') {
-    for (let index = noticeEnd + 1; index < blocks.length; index += 1) {
-      if (skeleton[index - noticeEnd - 1]?.role === 'title') blocks[index].role = 'title'
+    // Givens omit empty drawing carriers; match the original locators instead
+    // of shifting skeleton indices onto neighboring figures or paragraphs.
+    const titleSources = new Set(givens.flatMap((item, index) => skeleton[index]?.role === 'title'
+      ? [digestJson(sourceLocator(documentId, item.sourceIndex))] : []))
+    for (const block of blocks) {
+      if (block.kind === 'paragraph' && titleSources.has(digestJson(block.source))) block.role = 'title'
     }
   }
   const task = {
@@ -1114,11 +1119,13 @@ const BARE_APPLICATION_HEADING = /^第一节\s*(?:\([^)]*\))?\s*[:：]?$/u
 const BARE_CONTINUATION_HEADING = /^第二节\s*(?:\([^)]*\))?\s*[:：]?$/u
 const APPLICATION_HEADINGS = [
   /^第一节(?:\s*[:：])?.*(?:应用文(?:写作)?|参考范文|One possible version)/iu,
+  /^第一节\s*[:：]?\s*作答示例\s*[:：]?$/u,
   /^(?:[一1][、.．]\s*|\(\s*[一1]\s*\)\s*)?(?:应用文(?:写作)?|书面表达)\s*(?:\([^)]*\))?\s*[:：]?$/u,
   BARE_APPLICATION_HEADING,
 ]
 const CONTINUATION_HEADINGS = [
   /^第二节(?:\s*[:：])?.*(?:读后续写|参考范文|One possible version)/iu,
+  /^第二节\s*[:：]?\s*作答示例\s*[:：]?$/u,
   /^(?:[二2][、.．]\s*|\(\s*[二2]\s*\)\s*)?读后续写\s*(?:\([^)]*\))?\s*[:：]?$/u,
   BARE_CONTINUATION_HEADING,
 ]

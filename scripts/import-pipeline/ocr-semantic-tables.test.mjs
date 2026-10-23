@@ -6,6 +6,73 @@ import { validateSourceReferences } from '../../server/paper-import/sourceRefere
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 
+test('parenthesized task and numbered labels retain a 7 by 7 scoring table across pages 4 to 6', () => {
+  const documentSha256 = `sha256:${'a'.repeat(64)}`
+  const items = Array.from({ length: 49 }, (_, index) => ({
+    itemId: `cell-item-${index}`, cell: `cell-${index}`, observationIds: [`cell-word-${index}`],
+    text: `评分格${index + 1}`,
+  }))
+  const [table] = compileSemanticTables({ semanticTables: [{ name: 'application-score',
+    region: { x: 100, y: 200, width: 700, height: 600 },
+    rows: Array.from({ length: 7 }, (_, row) => ({
+      header: row === 0, cells: Array.from({ length: 7 }, (_, col) => [`cell-${row * 7 + col}`]),
+    })),
+  }] }, items, { documentId: 'answers', page: 6, width: 1000, height: 1000 })
+  const line = (text, id) => ({ text, itemId: id, observationIds: [`word-${id}`] })
+  const pages = [
+    { page: 4, orderedItems: [line('（二）应用文写作', 'task')] },
+    { page: 5, orderedItems: [line('2. 参考范文', 'sample'), line('Our club welcomes new readers.', 'essay')] },
+    { page: 6, orderedItems: [line('4. 评分细则', 'scoring'), ...items], visualClassifications: [table.visual] },
+    { page: 7, orderedItems: [line('（三）读后续写（满分25分）', 'continuation'),
+      line('2. 参考范文', 'continuation-sample'), line('Mina found the owner.', 'continuation-essay')] },
+  ]
+  const evidencePages = Array.from({ length: 7 }, (_, index) => ({
+    observations: (pages.find(page => page.page === index + 1)?.orderedItems || []).map((item, i) => ({
+      observationId: item.observationIds[0], text: item.text,
+      region: { x: Number((.1 + (i % 7) * .1).toFixed(6)),
+        y: Number((.2 + Math.floor(i / 7) * .08).toFixed(6)), width: .08, height: .02 },
+    })),
+  }))
+  const materialization = { paperId: 'paper-table-test',
+    documents: [{ documentId: 'answers', role: 'official_answers', sha256: documentSha256,
+      mediaType: 'application/pdf', pageCount: 7 }],
+    groups: [{ groupId: 'application', writingTask: { taskType: 'application' } },
+      { groupId: 'continuation', writingTask: { taskType: 'continuation' } }],
+  }
+  const before = structuredClone(materialization)
+  const { groups, structuredScoring } = buildSourceReferences(materialization,
+    { documents: [{ documentId: 'answers', pages: evidencePages }] },
+    { documents: [{ documentId: 'answers', pages }] })
+  assert.equal(structuredScoring, true)
+  const [entry] = groups[0].scoring.entries
+  assert.equal(entry.sourceLabel, '4. 评分细则')
+  assert.equal(entry.labelSource.locator.page, 6)
+  assert.equal(entry.blocks.length, 1)
+  const [block] = entry.blocks
+  assert.equal(block.kind, 'table')
+  assert.equal(block.rows.length, 7)
+  assert(block.rows.every(row => row.length === 7))
+  block.rows.flat().forEach((cell, index) => {
+    assert.equal(cell.text, items[index].text)
+    assert.deepEqual(cell.source, { documentSha256, locator: {
+      kind: 'page_region', documentId: 'answers', page: 6,
+      region: evidencePages[5].observations[index + 1].region,
+    } })
+  })
+  assert.equal(new Set(block.rows.flat().map(cell => JSON.stringify(cell.source.locator))).size, 49)
+  assert.equal(groups[0].essays.entries[0].sourceLabel, '2. 参考范文')
+  assert.equal(groups[0].essays.entries[0].paragraphs[0].text, 'Our club welcomes new readers.')
+  assert.equal(groups[1].scoring.state, 'not_supplied')
+  assert.equal(groups[1].essays.entries[0].paragraphs[0].text, 'Mina found the owner.')
+  assert.deepEqual(materialization, before, 'references must not mutate student-facing question material')
+  assert(!JSON.stringify(materialization.groups).includes('评分格'))
+  const sourceDigest = `sha256:${'b'.repeat(64)}`, candidateDigest = `sha256:${'c'.repeat(64)}`
+  assert.deepEqual(validateSourceReferences({ materialization, sourceDigest, candidateDigest, sidecar: {
+    schemaVersion: 'source-references-v2', paperId: materialization.paperId, sourceDigest, candidateDigest,
+    materializationDigest: digestJson(materialization), groups,
+  } }), [])
+})
+
 function fixture() {
   const items = Array.from({ length: 14 }, (_, index) => ({
     cell: `cell-${index}`, itemId: `item-${index}`, observationIds: [`word-${index}`],

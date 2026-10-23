@@ -1,8 +1,58 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { LINE_ROLE_RULES, firstLineRole, matchesLineRole } from './ocr-line-roles.mjs'
+import { LINE_ROLE_RULES, firstLineRole, matchesLineRole, inlineSampleParts } from './ocr-line-roles.mjs'
 import { referenceLineBoundary } from './ocr-proofread.mjs'
+
+test('作答示例 is an essay label and splits from an exact section heading', () => {
+  assert.equal(firstLineRole('entry-label', computeLineFacts({ text: '作答示例' }))?.id, 'entry.general')
+  assert.equal(firstLineRole('entry-kind', computeLineFacts({ text: '作答示例' }))?.value, 'essays')
+  for (const section of ['第一节', '第二节']) {
+    for (const separator of [' ', '：', ': ', '']) {
+      for (const label of ['作答示例', '作答示例：', '作答示例 ：']) {
+        assert.deepEqual(inlineSampleParts(`${section}${separator}${label}`), [section, label])
+        assert.equal(firstLineRole('entry-label', computeLineFacts({ text: label }))?.id, 'entry.general')
+      }
+    }
+    assert.equal(inlineSampleParts(`${section} 阅读理解 作答示例`), undefined)
+    assert.equal(inlineSampleParts(`${section}：作答示例说明如下。`), undefined)
+    for (const separator of ['', '：', ': ']) {
+      assert.equal(inlineSampleParts(`${section}${separator}(One possible version)`), undefined)
+    }
+  }
+  assert.equal(firstLineRole('entry-label', computeLineFacts({ text: '作答示例说明如下。' })), null)
+})
+
+test('parenthesized writing headings use explicit task words rather than their ordinal', () => {
+  for (const [text, task] of [
+    ['（二）应用文写作', 'application'], ['（三）读后续写（满分25分）', 'continuation'],
+    ['（三）应用文写作', 'application'], ['（二）读后续写（满分25分）', 'continuation'],
+    ['（２）应用文写作', 'application'], ['（３）读后续写（满分２５分）', 'continuation'],
+  ]) for (const variant of new Set([text, text.normalize('NFKC')])) {
+    const facts = computeLineFacts({ text: variant })
+    assert.equal(firstLineRole('writing-section', facts)?.value, task, variant)
+    assert.equal(facts.text, variant)
+  }
+  for (const text of ['（二）语法适用', '（三）语法填空', '（二）', '说明：（二）应用文写作',
+    '（二）应用文写作需要认真审题。', '（三）读后续写评分说明如下。']) {
+    assert.equal(firstLineRole('writing-section', computeLineFacts({ text })), null, text)
+  }
+})
+
+test('Arabic entry numbers are limited to exact known sample and scoring labels', () => {
+  for (const [text, kind] of [
+    ['2. 参考范文', 'essays'], ['4. 评分细则', 'scoring'], ['２． 作答示例', 'essays'],
+    ['４． 评分原则：', 'scoring'],
+  ]) for (const variant of new Set([text, text.normalize('NFKC')])) {
+    const facts = computeLineFacts({ text: variant })
+    assert(firstLineRole('entry-label', facts), variant)
+    assert.equal(firstLineRole('entry-kind', facts)?.value, kind, variant)
+  }
+  for (const text of ['4. 评分时应考虑要点。', '2. 参考范文说明如下', '4. 【任意标签】',
+    '4. 语法适用', '正文 2. 参考范文', '100. 评分细则']) {
+    assert.equal(firstLineRole('entry-label', computeLineFacts({ text })), null, text)
+  }
+})
 
 for (const rule of LINE_ROLE_RULES) {
   for (const [label, samples, expected] of [
