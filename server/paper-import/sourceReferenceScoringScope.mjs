@@ -1,4 +1,7 @@
-import { WRITING_PART, WRITING_SECTION, ANSWER_EXPLANATION_START } from './sourceReferenceWritingRules.mjs'
+import {
+  WRITING_PART, WRITING_SECTION, ANSWER_EXPLANATION_START,
+  NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL,
+} from './sourceReferenceWritingRules.mjs'
 
 const normalize = text => text.normalize('NFKC').replace(/\s+/gu, '')
 // Preserve the scoring helper's existing alternate part title.
@@ -34,6 +37,8 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         continue
       }
       let task = WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] ?? null
+      if (NUMBERED_APPLICATION_SECTION.test(heading)) task = 'application'
+      if (NUMBERED_CONTINUATION_SECTION.test(heading)) task = 'continuation'
       if ((writing && /^第一节(?:\(|$)/u.test(heading))
         || /^(?:第一节(?:\([^)]*\))?)?(?:应用文(?:写作)?|书面表达)(?:评分细则[:：]?)?$/u.test(heading)) task ??= 'application'
       if ((writing && /^第二节(?:\(|$)/u.test(heading))
@@ -49,10 +54,15 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         ended = true
         label = null
       }
-      const scoringLabel = /^(?:[一二三四五六七八九十]+、)?评分(?:原则|标准|说明|细则|要求|建议)[:：]?$/u.test(text)
+      // Keep spaces for the shared English sample-label predicate. Source text
+      // and sourceLabel remain untouched; matching alone uses NFKC.
+      const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(item.text.normalize('NFKC').trim())
+      const scoringLabel = (numberedEntryLabel && /评分/u.test(text))
+        || /^(?:[一二三四五六七八九十]+、)?评分(?:原则|标准|说明|细则|要求|建议)[:：]?$/u.test(text)
         || /^(?:【|\[)[^】\]]*(?:评分|阅卷|评卷|给分|档次)[^】\]]*(?:】|\])[:：]?$/u.test(text)
       if (!ended && taskType && scoringLabel) label = item
-      else if (/^(?:(?:[一二三四五六七八九十]+、)?(?:参考范文|考场作文|参考答案|范文)|(?:(?:A|One)?PossibleVersion)|【|\[)/iu.test(text)) label = null
+      else if (numberedEntryLabel
+        || /^(?:(?:[一二三四五六七八九十]+、)?(?:参考范文|考场作文|作答示例|参考答案|范文)|(?:(?:A|One)?PossibleVersion)|【|\[)/iu.test(text)) label = null
       scopes.set(item.itemId, !ended && taskType && label
         ? { taskType, labelItemId: label.itemId, sourceLabel: label.text } : null)
     }

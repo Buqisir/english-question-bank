@@ -1,17 +1,16 @@
 // Pure line-role candidates. Priorities are local to a phase; lower runs first.
 // Rules recognize candidates only: callers retain state transitions and output assembly.
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { WRITING_PART, WRITING_SECTION, ANSWER_EXPLANATION_START } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import {
+  WRITING_PART, WRITING_SECTION, ANSWER_EXPLANATION_START,
+  NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL,
+} from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
 const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
 const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|语言|[一二三四五六]、)/u
 const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
 
-// Numbering varies between answer books. Only the explicit task word gives
-// these fully anchored headings their scope; NFKC is a matching view only.
-const NUMBERED_APPLICATION_SECTION = /^\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)\s*应用文(?:写作)?\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
-const NUMBERED_CONTINUATION_SECTION = /^\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)\s*读后续写\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
 const WRITING_SCORING_SECTION = [
   ['application', /^应用文评分细则\s*[:：]?$/u],
   ['continuation', /^读后续写评分细则\s*[:：]?$/u],
@@ -20,7 +19,6 @@ const WRITING_SCORING_SECTION = [
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
 
 const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
-const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
 const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u

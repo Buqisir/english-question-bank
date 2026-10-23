@@ -3,6 +3,62 @@ import { test } from 'node:test'
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import { LINE_ROLE_RULES, firstLineRole, matchesLineRole, inlineSampleParts } from './ocr-line-roles.mjs'
 import { referenceLineBoundary } from './ocr-proofread.mjs'
+import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+
+function scoringScopes(texts) {
+  return sourceReferenceScoringScopes({ documents: [{ documentId: 'answers', pages: [{
+    orderedItems: texts.map((text, index) => ({ itemId: `item-${index}`, text })),
+  }] }] }, new Set(['answers']))
+}
+
+test('scoring scope shares exact parenthesized task headings and numbered scoring labels with OCR roles', () => {
+  for (const [heading, task] of [
+    ['（二）应用文写作', 'application'], ['（三）读后续写（满分25分）', 'continuation'],
+    ['（三）应用文写作', 'application'], ['（二）读后续写（满分25分）', 'continuation'],
+    ['（２）应用文写作', 'application'], ['（３）读后续写（满分２５分）', 'continuation'],
+  ]) for (const rawLabel of ['4. 评分细则', '４． 评分原则：']) {
+    for (const text of new Set([heading, heading.normalize('NFKC')])) {
+      const scopes = scoringScopes([text, rawLabel, '按内容和语言给分。'])
+      assert.equal(firstLineRole('writing-section', computeLineFacts({ text }))?.value, task)
+      assert.equal(firstLineRole('entry-kind', computeLineFacts({ text: rawLabel }))?.value, 'scoring')
+      assert.equal(scopes.get('item-0'), null, 'a heading alone cannot authorize scoring')
+      assert.deepEqual(scopes.get('item-2'), {
+        taskType: task, labelItemId: 'item-1', sourceLabel: rawLabel,
+      })
+    }
+  }
+  const switched = scoringScopes([
+    '（二）读后续写', '4. 评分细则', '续写评分正文',
+    '（三）应用文写作', '新标题后的无标签正文', '４． 评分原则：', '应用文评分正文',
+  ])
+  assert.equal(switched.get('item-2').taskType, 'continuation')
+  assert.equal(switched.get('item-4'), null, 'new task must not borrow the previous scoring label')
+  assert.equal(switched.get('item-6').taskType, 'application')
+})
+
+test('scoring scope rejects numbered near misses and closes at sample and explanation boundaries', () => {
+  for (const heading of ['（二）语法适用', '（三）语法填空', '（二）', '说明：（二）应用文写作',
+    '（二）应用文写作需要认真审题。', '（三）读后续写评分说明如下。']) {
+    assert.equal(scoringScopes([heading, '4. 评分细则', '正文']).get('item-2'), null, heading)
+  }
+  for (const label of ['4. 评分时应考虑要点。', '4. 【任意标签】', '正文 4. 评分细则', '100. 评分细则']) {
+    assert.equal(scoringScopes(['（二）应用文写作', label, '正文']).get('item-2'), null, label)
+  }
+  for (const sample of ['2. 参考范文', '２． 作答示例', '2. One possible version', '作答示例']) {
+    const scopes = scoringScopes(['（二）应用文写作', '4. 评分细则', '评分正文', sample, 'Sample text.'])
+    assert(scopes.get('item-2'))
+    assert.equal(scopes.get('item-3'), null, sample)
+    assert.equal(scopes.get('item-4'), null, sample)
+  }
+  for (const boundary of ['（五）样卷', '试题解析', '听力原文']) {
+    const scopes = scoringScopes(['（二）应用文写作', '4. 评分细则', boundary, '4. 评分细则', '正文'])
+    assert.equal(scopes.get('item-4'), null, boundary)
+    if (boundary !== '（五）样卷') {
+      assert.equal(scoringScopes(['（二）应用文写作', '4. 评分细则', boundary,
+        '（三）读后续写', '４． 评分原则：', '正文']).get('item-5'), null, boundary)
+    }
+  }
+})
 
 test('作答示例 is an essay label and splits from an exact section heading', () => {
   assert.equal(firstLineRole('entry-label', computeLineFacts({ text: '作答示例' }))?.id, 'entry.general')
