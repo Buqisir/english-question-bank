@@ -191,7 +191,7 @@ const PUNCTUATION_SPANS = [
   /“ +/gu,
   / +”/gu,
 ]
-const GRAMMAR_WORDS = /^[A-Za-z]+(?:['’][A-Za-z]+)*(?: [A-Za-z]+(?:['’][A-Za-z]+)*)*$/u
+const GRAMMAR_WORDS = /^[A-Za-z]+(?:['’][A-Za-z]+)*['’]?(?: [A-Za-z]+(?:['’][A-Za-z]+)*['’]?)*$/u
 const WORD_CHAR = /[\p{L}\p{N}'’_-]/u
 
 function mechanicalCorrections(text) {

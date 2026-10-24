@@ -5,10 +5,36 @@ import { test } from 'node:test'
 import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { produceNck1DocxMaterialization } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import { LISTENING_SIGNAL_ATTACHMENTS } from '../../server/paper-import/listeningAudioEvidence.mjs'
-import { prepareSpellingReview } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, isSpellingTokenCorrection, prepareSpellingReview, TEXT_REVIEW_POLICY } from '../../server/paper-import/spellingReview.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { makeSyntheticNck1DocxFixture } from '../../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
 import { loadSpellingSourceEmphasis } from './spelling-source-emphasis.mjs'
+
+test('spelling and grammar receipts accept terminal possessive apostrophes without widening other edits', () => {
+  for (const apostrophe of ["'", '’']) for (const category of ['spelling', 'grammar']) {
+    const before = `second${apostrophe}s`, after = `seconds${apostrophe}`
+    assert(isSpellingTokenCorrection(before, after))
+    const bytes = Buffer.from(JSON.stringify({ groups: [{ questions: [{ stem: `Two ${before} silence.` }] }] }))
+    const report = prepareSpellingReview(bytes, TEXT_REVIEW_POLICY)
+    report.reviewedBy = 'import_agent'
+    report.reviewedAt = '2026-10-24T00:00:00Z'
+    Object.assign(report.targets[0], { decision: 'correct', corrections: [
+      { start: 4, before, after, category, certainty: 'unambiguous', reason: '复数所有格词形修正' },
+    ] })
+    assert.equal(applySpellingReview(bytes, Buffer.from(JSON.stringify(report))).groups[0].questions[0].stem,
+      `Two ${after} silence.`)
+    for (const invalid of [`${after}${apostrophe}`, `${apostrophe}seconds`, 'seconds-', 'second_s', 'seconds!', 'two seconds']) {
+      assert.equal(isSpellingTokenCorrection(before, invalid), false, invalid)
+    }
+    report.targets[0].corrections[0].before = 'second'
+    assert.throws(() => applySpellingReview(bytes, Buffer.from(JSON.stringify(report))), /only exact/)
+    report.targets[0].corrections[0].before = before
+    report.targets[0].corrections[0].after = `${after}!`
+    assert.throws(() => applySpellingReview(bytes, Buffer.from(JSON.stringify(report))), /only exact/)
+  }
+  assert.equal(isSpellingTokenCorrection('7-yeer-old', '8-year-old'), false)
+  assert.equal(isSpellingTokenCorrection('well-knwon', "well-known'"), false)
+})
 
 test('spelling source coordinates survive a validated listening-count overlay and reject actual drift', () => {
   const scratch = path.resolve(import.meta.dirname, '../../.scratch')
