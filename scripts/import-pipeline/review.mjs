@@ -75,6 +75,7 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
+import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
@@ -812,11 +813,11 @@ async function proofreadOcr(paperId) {
   const revision = reviewStatus.revisions.find((entry) => entry.id === revisionId)
   if (!revision || revision.manifest.sourceSetDigest !== projection.sourceSetDigest
     || revision.manifest.evidenceDigest !== projection.evidenceDigest) fail('OCR revision does not match local evidence')
-  const result = await api(
-    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/revisions/${encodeURIComponent(revisionId)}/proofread-ocr`,
-    { method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ ...input, bundleDigest: revision.bundleDigest }) },
-  )
+  const targetOrigin = origin()
+  const result = await confirmOcrWithReconciliation({
+    origin: targetOrigin, credentialHeaders: await agentCredentialHeaders(targetOrigin),
+    paperId, revisionId, input: { ...input, bundleDigest: revision.bundleDigest },
+  })
   console.log(JSON.stringify({ paperId, revisionId, reviewerKind: result.receipt.reviewerKind,
     confirmationId: result.receipt.confirmationId,
     nextCommand: `node scripts/import-pipeline/review.mjs pull-ocr-confirmation ${paperId} --revision ${revisionId}`,
