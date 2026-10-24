@@ -5,6 +5,64 @@ import { joinTranscriptTurns } from './ocr-proofread.mjs'
 
 const body = (texts) => texts.map((text, sourceIndex) => ({ kind: 'paragraph', text, sourceIndex }))
 
+for (const marker of ['略', '略。', '（略）', '(略).']) {
+  test(`Jinan retains the application sample when continuation explicitly says ${marker}`, () => {
+    const issues = []
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作（共两节，满分40分）', '第一节 应用文', 'One possible version:',
+      'Dear Charles,', '读后续写', marker,
+    ]), 'official-answers-2', issues)
+    assert.deepEqual(issues, [])
+    assert.deepEqual(result, { application: 'Dear Charles,', continuation: null })
+  })
+  test(`Qingdao explicitly omits the whole writing part with ${marker}`, () => {
+    const issues = []
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作（共两节，满分40分）', marker, '听力材料', 'Text 1', 'M: A transcript.',
+    ]), 'official-answers-2', issues)
+    assert.deepEqual(issues, [])
+    assert.deepEqual(result, { application: null, continuation: null })
+  })
+}
+
+test('an explicitly omitted application does not erase the continuation sample', () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', '（略）', '第二节 读后续写', 'One possible version:',
+    'Mina returned the key.',
+  ]), 'answers', issues), { application: null, continuation: 'Mina returned the key.' })
+  assert.deepEqual(issues, [])
+})
+
+test('both named writing sections may explicitly omit their labelled samples', () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'One possible version:', '略。',
+    '第二节 读后续写', '参考范文', '（略）', '评分细则', '按内容给分。',
+  ]), 'answers', issues), { application: null, continuation: null })
+  assert.deepEqual(issues, [])
+})
+
+test('an omission after completed prose retains the existing commentary boundary', () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short notice.',
+    '第二节 读后续写', 'Mina returned the key.', '略。', '听下面的录音，回答第1小题。', 'Text 1',
+  ]), 'answers', issues), { application: 'A short notice.', continuation: 'Mina returned the key.' })
+  assert.deepEqual(issues, [])
+})
+
+for (const lines of [
+  ['略有说明'], ['（略）', 'A competing sample.'], ['略', '略'],
+  ['略', '第一节 应用文', 'A competing sample.'],
+  ['第一节 应用文', 'Dear Charles,', '读后续写'],
+  ['第一节 应用文', 'Dear Charles,', '读后续写', '略', 'A competing sample.'],
+]) test(`omission does not excuse ambiguous or competing writing text ${JSON.stringify(lines)}`, () => {
+  const issues = []
+  parseOfficialWritingSamples(body(['第四部分 写作', ...lines]), 'answers', issues)
+  assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+})
+
 for (const [separator, label] of [
   ...[' ', '：', ': ', ''].map(separator => [separator, '作答示例']),
   [' ： ', '作答示例 ：'],

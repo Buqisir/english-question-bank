@@ -360,7 +360,7 @@ for (const classification of ['semantic_table', 'content_media']) {
   confirmation.evidenceDigest = evidence.evidenceDigest
   const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
   assert.deepEqual(produced.review.required, [], JSON.stringify(produced.review.required))
-  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v26')
+  assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v28')
   if (classification === 'semantic_table') {
     assert.equal(produced.materialization.groups.find(group => group.slotId === 'reading.c')
       .blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text,
@@ -1152,7 +1152,7 @@ try {
     'changed-question-source', 'changed-source-number', 'overlap', 'duplicate-id', 'same-region-new-id', 'not-one-row',
     'swap-A-D', 'parent-and-children', 'parent-consumed-twice', 'child-in-body', 'missing-ordinary',
     'missing-option', 'extra-media', 'coverage-target', 'coverage-page', 'coverage-region', 'coverage-duplicate',
-    'parent-not-labels',
+    'parent-not-labels', 'parent-only-A-label',
     'tampered-bytes', 'tampered-bytes-and-hash',
   ]
   for (const name of cases) {
@@ -1254,10 +1254,11 @@ try {
     else if (name === 'coverage-page') visual.page = page.page === 1 ? 2 : 1
     else if (name === 'coverage-region') visual.region.x += 0.0001
     else if (name === 'coverage-duplicate') mat.sourceCoverage.visuals.push({ ...cloneJson(visual), visualId: 'visual:duplicate' })
-    else if (name === 'parent-not-labels') {
+    else if (['parent-not-labels', 'parent-only-A-label'].includes(name)) {
       const changed = cloneJson(confirmation)
       changed.documents[0].pages.find(value => value.page === page.page).orderedItems
-        .find(value => value.itemId === labelItem.itemId).text = 'A. an ordinary illustration B. C. D.'
+        .find(value => value.itemId === labelItem.itemId).text = name === 'parent-only-A-label'
+          ? 'A.' : 'A. an ordinary illustration B. C. D.'
       invalidSourceBytes = { ...sourceBytes, confirmationBytes: new TextEncoder().encode(JSON.stringify(changed)) }
     } else {
       const supplied = invalid.mediaFiles.find(value => value.mediaId === first.mediaId)
@@ -1606,7 +1607,7 @@ try {
     JSON.stringify({ ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }))
   const v3Job = { paperDir: v3Dir, manifest: JSON.parse(readFileSync(path.join(v3Dir, 'universal-source-manifest.json'))) }
   assert.equal(runNck1MaterializationJob(v3Job).disposition, 'ready_for_verification')
-  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v26')
+  assert.equal(inspectNck1Materialization(v3Job).producerVersion, 'nck1-ocr-materialization-producer-v28')
   assert.equal(runNck1MaterializationJob(v3Job).cached, true, 'v3 output, review and receipt must agree on the current producer')
   const v3ReviewFile = path.join(v3Dir, 'materialization/nck1-ocr-materialization-review-v1.json')
   const v3ReviewBytes = readFileSync(v3ReviewFile)
