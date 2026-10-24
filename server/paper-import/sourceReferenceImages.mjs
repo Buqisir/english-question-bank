@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
-import { fitSourceReferencePng, REFERENCE_DOWNSAMPLE_DPIS } from './sourceReferencePngSizing.mjs'
+import { fitSourceReferencePng } from './sourceReferencePngSizing.mjs'
 
 export const SOURCE_REFERENCE_IMAGE_LIMITS = Object.freeze({
   pngBytes: 2 * 1024 * 1024, dimension: 4096, pixels: 4_000_000,
@@ -12,7 +12,6 @@ export const SOURCE_REFERENCE_IMAGE_LIMITS = Object.freeze({
   jsonBytes: 16 * 1024 * 1024,
 })
 export const SOURCE_REFERENCE_IMAGE_PROFILE = 'source-reference-pdf-crop-v1'
-export const SOURCE_REFERENCE_DOWNSAMPLED_PROFILE = 'source-reference-pdf-crop-v2'
 export const SOURCE_REFERENCE_IMAGE_DPI = 288
 export const SOURCE_REFERENCE_RASTER_LIMITS = Object.freeze({
   maxPagePixels: 16_000_000, maxPageDimension: 8192, timeoutMs: 15_000,
@@ -77,7 +76,7 @@ function inspectPng(bytes) {
 
 export function decodeSourceReferencePng(raster) {
   const limits = SOURCE_REFERENCE_IMAGE_LIMITS
-  if (![SOURCE_REFERENCE_IMAGE_PROFILE, SOURCE_REFERENCE_DOWNSAMPLED_PROFILE].includes(raster?.profile) || raster.mediaType !== 'image/png'
+  if (raster?.profile !== SOURCE_REFERENCE_IMAGE_PROFILE || raster.mediaType !== 'image/png'
     || typeof raster.base64 !== 'string' || !raster.base64.length
     || raster.base64.length > 4 * Math.ceil(limits.pngBytes / 3)
     || raster.base64.length % 4 !== 0 || !/^[A-Za-z0-9+/]*={0,2}$/u.test(raster.base64)) {
@@ -88,16 +87,6 @@ export function decodeSourceReferencePng(raster) {
     || bytes.length !== raster.byteLength || sha256(bytes) !== raster.sha256) invalid('PNG base64, byte length or SHA disagrees')
   const { width, height } = inspectPng(bytes)
   if (width !== raster.pixelWidth || height !== raster.pixelHeight) invalid('PNG dimensions disagree with the raster descriptor')
-  if (raster.profile === SOURCE_REFERENCE_DOWNSAMPLED_PROFILE) {
-    const s = raster.sizing
-    if (!s || !REFERENCE_DOWNSAMPLE_DPIS.includes(s.dpi) || s.reason !== 'png_exceeds_2_mib'
-      || ![s.originalPixelWidth, s.originalPixelHeight, s.originalByteLength].every(Number.isSafeInteger)
-      || s.originalPixelWidth < 1 || s.originalPixelHeight < 1
-      || s.originalPixelWidth > limits.dimension || s.originalPixelHeight > limits.dimension
-      || s.originalPixelWidth * s.originalPixelHeight > limits.pixels || s.originalByteLength <= limits.pngBytes
-      || width !== Math.ceil(s.originalPixelWidth * s.dpi / SOURCE_REFERENCE_IMAGE_DPI)
-      || height !== Math.ceil(s.originalPixelHeight * s.dpi / SOURCE_REFERENCE_IMAGE_DPI)) invalid('Invalid downsample receipt or resolution')
-  } else if (raster.sizing !== undefined) invalid('Historical v1 rasters cannot declare downsampling')
   const directory = mkdtempSync(path.join(tmpdir(), 'eqb-reference-png-'))
   try {
     const file = path.join(directory, 'image.png')
@@ -123,7 +112,7 @@ export function decodeSourceReferencePng(raster) {
 // helper rounds x/y/width/height to nearest pixel, +repage, PNG32. Compare sRGB
 // 8-bit RGBA pixels, so compression/metadata differences cannot change meaning.
 // The exact admitted PNG byte SHA remains the publication commitment.
-export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceLimits, allowDownsample = true, onProcessing }) {
+export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceLimits, onProcessing }) {
   // Diagnostic overrides can only tighten the consumer's fixed ceilings.
   const budgets = Object.fromEntries(Object.entries(SOURCE_REFERENCE_RASTER_LIMITS)
     .map(([key, ceiling]) => [key, Math.min(resourceLimits?.[key] ?? ceiling, ceiling)]))
@@ -138,14 +127,11 @@ export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceL
     throw error
   }
   inspectPng(Buffer.from(crop.bytes))
-  const fitted = fitSourceReferencePng(crop, SOURCE_REFERENCE_IMAGE_LIMITS, { allowDownsample })
+  const fitted = fitSourceReferencePng(crop, SOURCE_REFERENCE_IMAGE_LIMITS)
   const bytes = Buffer.from(fitted.bytes), processing = fitted.processing
-  const downsampled = processing?.method === 'downsample'
-  const raster = { profile: downsampled ? SOURCE_REFERENCE_DOWNSAMPLED_PROFILE : SOURCE_REFERENCE_IMAGE_PROFILE, mediaType: 'image/png',
+  const raster = { profile: SOURCE_REFERENCE_IMAGE_PROFILE, mediaType: 'image/png',
     sha256: sha256(bytes), byteLength: bytes.length, pixelWidth: fitted.pixelWidth,
-    pixelHeight: fitted.pixelHeight, base64: bytes.toString('base64'),
-    ...(downsampled ? { sizing: { originalPixelWidth: crop.pixelWidth, originalPixelHeight: crop.pixelHeight,
-      originalByteLength: crop.bytes.length, dpi: processing.dpi, reason: processing.reason } } : {}) }
+    pixelHeight: fitted.pixelHeight, base64: bytes.toString('base64') }
   decodeSourceReferencePng(raster)
   if (processing) onProcessing?.(processing)
   return raster
@@ -160,15 +146,10 @@ export function assertSourceReferenceFigureReplay({ figure, document }) {
   }
   const frozen = decodeSourceReferencePng(figure.raster)
   const locator = figure.source.locator
-  const replayRaster = captureSourceReferenceFigure({
+  const replay = decodeSourceReferencePng(captureSourceReferenceFigure({
     pdfBytes: document.bytes, page: locator.page, region: locator.region,
-    allowDownsample: figure.raster.profile === SOURCE_REFERENCE_DOWNSAMPLED_PROFILE,
-  })
-  const replay = decodeSourceReferencePng(replayRaster)
+  }))
   if (frozen.pixelWidth !== replay.pixelWidth || frozen.pixelHeight !== replay.pixelHeight
-    || replayRaster.profile !== figure.raster.profile
-    || (figure.raster.sizing && Object.keys(replayRaster.sizing ?? {}).some(key =>
-      replayRaster.sizing[key] !== figure.raster.sizing[key]))
     || !frozen.pixels.equals(replay.pixels)) {
     throw Object.assign(new Error('Frozen PNG does not replay its immutable source PDF region'),
       { code: 'SOURCE_REFERENCES_FIGURE_SOURCE_DISAGREES' })

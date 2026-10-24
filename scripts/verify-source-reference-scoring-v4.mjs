@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 // verify-resource: browser-render
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
 import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
@@ -247,8 +245,3 @@ try {
   }
   console.log('PASS includeScoring Screen/Print HTML → paginated DOM/PDF retain all scoring PNGs in order and inside page bounds; default hides scoring')
 } finally { await closeChromiumPool() }
-
-execFileSync(process.execPath, ['--test', fileURLToPath(new URL(
-  '../server/paper-import/sourceReferencePngSizing.test.mjs', import.meta.url,
-))], { stdio: 'inherit', timeout: 90_000 })
-console.log('PASS fresh PNG sizing regression cases run through the registered v4 verification entry')
