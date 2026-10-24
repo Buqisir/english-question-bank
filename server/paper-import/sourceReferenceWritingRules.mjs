@@ -15,5 +15,8 @@ export const WRITING_SCORING_SECTION = [
   ['continuation', /^(?:读后)?续写评分(?:细则|标准)\s*[:：]?$/u],
 ]
 export const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
+// Match complete rubric titles only; parentheses are a numbering style, not
+// permission to treat ordinary scoring commentary as a new entry.
+export const SCORING_ENTRY_LABEL = /^(?:(?:[一二三四五六七八九十]+、|\(\s*[一二三四五六七八九十]+\s*\))\s*)?(?:评分(?:原则|标准|说明|细则|要求|建议)|各档次给分范围和要求)\s*[:：]?$/u
 // Reading explanations can start directly after samples, without a part title.
 export const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u

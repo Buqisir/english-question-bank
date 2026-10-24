@@ -2,7 +2,6 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
@@ -41,8 +40,10 @@ test('existing exact bindings are preserved when another target wraps the phrase
 
 // Exercise the real auto CLI and final admission together, with a minimal
 // source workspace. Only short Heze/Zaozhuang excerpts are retained here.
-function autoFixture(text, quote, after, run) {
-  const dir = mkdtempSync(path.join(tmpdir(), 'eqb-spelling-flags-'))
+function autoFixture(text, quote, after, run, category = 'spelling') {
+  const scratch = path.resolve(import.meta.dirname, '../../.scratch')
+  mkdirSync(scratch, { recursive: true })
+  const dir = mkdtempSync(path.join(scratch, 'eqb-spelling-flags-'))
   try {
     const materialization = { paperId: 'paper-spelling-test', documents: [], media: [],
       groups: [{ family: 'continuation-writing', blocks: [], questions: [],
@@ -56,7 +57,7 @@ function autoFixture(text, quote, after, run) {
     save('universal-source-manifest.json', { schemaVersion: 'universal-nck1-source-manifest-v1',
       paperId: materialization.paperId, documents: [], materializationPath: 'materialization.json' })
     save('request.json', { paperId: materialization.paperId, materialization, report })
-    save('flags/source.json', { flags: [{ quote, after, category: 'spelling', reason: '原印拼写有误，更正完整词形。' }] })
+    save('flags/source.json', { flags: [{ quote, after, category, reason: '原印拼写有误，更正完整词形。' }] })
     const output = path.join(dir, 'review.json')
     const result = spawnSync(process.execPath, [
       fileURLToPath(new URL('./text-review-parts.mjs', import.meta.url)), 'auto',
@@ -68,6 +69,17 @@ function autoFixture(text, quote, after, run) {
     rmSync(dir, { recursive: true, force: true })
   }
 }
+
+test('terminal possessive source flags survive auto and admission for spelling and grammar', () => {
+  for (const apostrophe of ["'", '’']) for (const category of ['spelling', 'grammar']) {
+    const quote = `second${apostrophe}s`, after = `seconds${apostrophe}`
+    autoFixture(`Two ${quote} silence.`, quote, after, ({ result, output, bytes }) => {
+      assert.equal(result.status, 0, result.stderr)
+      const reviewed = applySpellingReview(bytes, readFileSync(output))
+      assert.deepEqual(reviewed.groups[0].writingTask.material, Array(2).fill(`Two ${after} silence.`))
+    }, category)
+  }
+})
 
 test('compound source flags survive auto and final validation with duplicate targets synchronized', () => {
   for (const [text, quote, after] of [

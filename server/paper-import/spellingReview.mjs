@@ -12,7 +12,7 @@ const reviewPolicies = [SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVI
 
 // Shared by source-flag authoring and final admission. Policies keep their
 // existing envelopes and every legacy apostrophe form; compounds are additive.
-const SPELLING_TOKEN = /^(?:[A-Za-z]+(?:['’][A-Za-z]+)*|[A-Za-z]+(?:-[A-Za-z]+)+|\d+(?:-[A-Za-z]+)+)$/u
+const SPELLING_TOKEN = /^(?:[A-Za-z]+(?:['’][A-Za-z]+)*['’]?|[A-Za-z]+(?:-[A-Za-z]+)+|\d+(?:-[A-Za-z]+)+)$/u
 export function isSpellingTokenCorrection(before, after) {
   return typeof before === 'string' && typeof after === 'string'
     && SPELLING_TOKEN.test(before) && SPELLING_TOKEN.test(after)
@@ -194,7 +194,7 @@ export function applySpellingReview(materializationBytes, reportBytes) {
         && /\S/u.test(target.before[correction.start - 1] ?? '')
         && /^word\/document\.xml#w:p\[[1-9]\d*\]$/u.test(correction.sourceParagraphLocator)
         && /\p{Script=Han}/u.test(correction.reason ?? '')
-      const words = /^[A-Za-z]+(?:['’][A-Za-z]+)*(?: [A-Za-z]+(?:['’][A-Za-z]+)*)*$/
+      const words = /^[A-Za-z]+(?:['’][A-Za-z]+)*['’]?(?: [A-Za-z]+(?:['’][A-Za-z]+)*['’]?)*$/
       if (!(terminalWhitespace
           ? terminalValid
           : exactKeys(correction, ['start', 'before', 'after', 'category', 'certainty', 'reason']))

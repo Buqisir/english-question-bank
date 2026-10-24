@@ -1,6 +1,6 @@
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
-  NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL,
+  NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from './sourceReferenceWritingRules.mjs'
 
 const normalize = text => text.normalize('NFKC').replace(/\s+/gu, '')
@@ -60,7 +60,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
       // and sourceLabel remain untouched; matching alone uses NFKC.
       const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(item.text.normalize('NFKC').trim())
       const scoringLabel = Boolean(scoringTask) || (numberedEntryLabel && /评分/u.test(text))
-        || /^(?:[一二三四五六七八九十]+、)?评分(?:原则|标准|说明|细则|要求|建议)[:：]?$/u.test(text)
+        || SCORING_ENTRY_LABEL.test(text)
         || /^(?:【|\[)[^】\]]*(?:评分|阅卷|评卷|给分|档次)[^】\]]*(?:】|\])[:：]?$/u.test(text)
       if (!ended && taskType && scoringLabel) label = item
       else if (numberedEntryLabel

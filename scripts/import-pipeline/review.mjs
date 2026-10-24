@@ -76,6 +76,7 @@ import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 import { resolveReviewOrigin } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
+import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
@@ -207,7 +208,7 @@ function exactApprovalIdentity(approval, paperId) {
 async function api(
   pathname,
   init = {},
-  { allowNotFound = false, binary = false, credential = 'agent' } = {},
+  { allowNotFound = false, notFoundValue = null, binary = false, credential = 'agent' } = {},
 ) {
   const targetOrigin = origin()
   const credentialHeaders = credential === 'shipping'
@@ -235,7 +236,7 @@ async function api(
     allowNotFound
     && response.status === 404
     && body?.code === 'IMPORT_REVIEW_NOT_FOUND'
-  ) return null
+  ) return notFoundValue
   if (!response.ok) {
     const error = new Error(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
     error.status = response.status
@@ -861,6 +862,18 @@ async function pullOcrConfirmation(paperId) {
   } finally {
     rmSync(temporaryRoot, { recursive: true, force: true })
   }
+}
+
+async function reuseOcrConfirmation(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const input = option('--input')
+  if (!input) fail('reuse-ocr-confirmation requires --input <proofread-input.json>')
+  const result = await reuseSealedOcrConfirmation({
+    paperId, paperDir, proofreadInputPath: path.resolve(input),
+    loadProjection: () => buildNck1OcrReviewProjection(paperDir),
+    readRemote: (pathname, options) => api(pathname, {}, options),
+  })
+  console.log(JSON.stringify(result, null, 2))
 }
 
 function finalizeOcrCorrectionReport(paperId) {
@@ -1706,6 +1719,7 @@ async function main() {
   else if (command === 'push-ocr') await pushOcrReview(paperId)
   else if (command === 'proofread-ocr') await proofreadOcr(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
+  else if (command === 'reuse-ocr-confirmation') await reuseOcrConfirmation(paperId)
   else if (command === 'finalize-ocr-correction-report') finalizeOcrCorrectionReport(paperId)
   else if (['prepare-spelling', 'finalize-spelling', 'verify-spelling'].includes(command)) spellingReview(paperId, command)
   else if (command === 'preprocessing-report') await preprocessingReport(paperId)
@@ -1732,7 +1746,7 @@ async function main() {
       + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--large-complete-page-limit 13 | --large-no-listening-page-limit 11 (Owner 2026-10-24 BUB-138)] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
       + 'cleanup-plan <paperId> --revision rev-id (inspection only; never deletes or certifies eligibility) | '
       + 'link-thread <paperId> --thread T-id [--from T-id] (explicit discussion handoff only) | '
-      + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | '
+      + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | reuse-ocr-confirmation <paperId> --input proofread-input.json | '
       + 'finalize-ocr-correction-report <paperId> --input <entries.json> | '
       + 'prepare-spelling <paperId> --output <request.json> | finalize-spelling <paperId> --input <review.json> | verify-spelling <paperId> | '
       + 'preprocessing-report <paperId> --evidence <evidence.json> --output <report.md> | '

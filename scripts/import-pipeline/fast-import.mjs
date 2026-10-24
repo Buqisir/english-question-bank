@@ -531,6 +531,12 @@ async function afterProofread(ctx, args) {
   })
   await step(ctx, 'compile', () => run(ctx, 'compile', cli('ocr-proofread.mjs', 'compile', ctx.paperId)))
   await step(ctx, 'ocr-review', async () => {
+    const sealed = await run(ctx, 'reuse-ocr', cli('review.mjs', 'reuse-ocr-confirmation', ctx.paperId,
+      '--input', path.join(ctx.work, 'proofread-input.json')), { review: true })
+    if (sealed.reused) {
+      say(`= 复用已封存 OCR（${sealed.revisionId}）`)
+      return sealed
+    }
     const pushed = await run(ctx, 'push-ocr', cli('review.mjs', 'push-ocr', ctx.paperId), { review: true })
     const revisionId = pushed.revisionId
     if (!revisionId) fail('push-ocr 没有返回 revisionId')
