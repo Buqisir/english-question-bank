@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v9'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v10'
 
 function fail(message) {
   console.error(message)
@@ -1343,7 +1343,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       review.push({ itemId: line.itemId, issue: 'source explicitly supplies no writing sample (not_supplied)' })
       continue
     }
-    if (matchesLineRole('writing.part-boundary', facts)) {
+    if (firstLineRole('part-boundary', facts)) {
       // NCK1's fourth part may be confirmed simply as "第四部分 / （略）".
       // Require that exact adjacent omission; a missing heading/sample alone
       // must still fail closed, and earlier omitted parts are not writing.

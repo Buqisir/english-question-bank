@@ -3,7 +3,7 @@
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
-  WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START,
+  WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
@@ -195,6 +195,8 @@ export const LINE_ROLE_RULES = Object.freeze([
   rule('writing.part-boundary', 'part-boundary', 10, f =>
     /^(第[一二三四五]部分|(?:附\s*[:：]\s*)?听力)/u.test(f.text) || TRANSCRIPT_MARKER.test(f.text),
     '附：听力录音稿', '第二节 读后续写'),
+  rule('writing.other-section', 'part-boundary', 20, f => NON_WRITING_SECTION.test(f.nfkc),
+    '第二节（阅读理解）', '（二）各档次给分范围和要求'),
   pattern('writing.student-script', 'capture-stop', 10, STUDENT_SCRIPT_BOUNDARY, '（五）样卷', '（四）作答示例'),
   pattern('writing.continuation-prompt', 'question-prompt', 10,
     /^阅读下面(?:短文|材料)[，,](?:根据|依据).*续写/u,

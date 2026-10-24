@@ -1,6 +1,6 @@
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
-  WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START,
+  WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from './sourceReferenceWritingRules.mjs'
 
@@ -30,6 +30,14 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         continue
       }
       let heading = text
+      if (NON_WRITING_SECTION.test(heading)) {
+        writing = false
+        taskType = null
+        label = null
+        ended = true
+        scopes.set(item.itemId, null)
+        continue
+      }
       if (/^第[一二三四五六]部分/u.test(text)) {
         writing = WRITING_PART.test(text) || ALTERNATE_WRITING_PART.test(text)
         startedWriting ||= writing

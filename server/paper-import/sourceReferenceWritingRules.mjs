@@ -20,6 +20,9 @@ export const WRITING_SCORING_SECTION = [
 // source heading allows leaving listening; task and entry labels are still required.
 export const WRITING_SCORING_OVERVIEW = /^写作评分说明\s*[:：]?$/u
 export const LISTENING_REFERENCE_START = /^(?:(?:附\s*[:：]?\s*)?听力|录音原文|\(?Text\s*\d)/iu
+// Numbered headings for other exam tasks end writing ownership, including
+// parenthesized titles and optional source score/count annotations.
+export const NON_WRITING_SECTION = /^(?:第[一二三四五六七八九十\d]+(?:部分|节)|\([一二三四五六七八九十\d]+\)|[一二三四五六七八九十\d]+[、.])\s*[:：]?\s*\(?\s*(?:阅读(?:理解)?|七选五|完形填空|语法填空|语言(?:知识)?运用|短文改错|词汇运用|听力(?:理解)?)\s*\)?(?:\s*\([^)]*\))*\s*[:：]?$/u
 export const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
 // Match complete rubric titles only; parentheses are a numbering style, not
 // permission to treat ordinary scoring commentary as a new entry.

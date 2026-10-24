@@ -154,3 +154,43 @@ test('answer-first application samples printed as omitted or actually absent sta
   }
   assert.equal(firstLineRole('writing-section', computeLineFacts({ text: '应用文需要审题。' })), null)
 })
+
+const otherTaskHeadings = ['第二节 阅读理解', '第二节（阅读理解）', '（三）语法填空',
+  '(三)语法填空（共10小题，满分15分）', '三、完形填空', '3. 七选五']
+
+test('producer closes resumed scoring at other task headings instead of capturing their images', () => {
+  for (const label of otherTaskHeadings) {
+    const input = fixture({ label })
+    assert.throws(() => captureScoringReferences(input),
+      /no surviving essay anchor or explicit scoring entry/u, label)
+    const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+    assert.equal(scopes.get('answers:p3:i3'), null, label)
+    assert.equal(scopes.get('answers:p3:i5'), null, label)
+  }
+})
+
+test('independent admission rejects other-task images assigned to the resumed writing rubric', () => {
+  const original = captureScoringReferences(fixture())
+  for (const label of otherTaskHeadings) {
+    const input = fixture({ label })
+    const sidecar = structuredClone(original)
+    for (const block of sidecar.groups[0].scoring.entries[0].blocks) {
+      if (block.kind === 'paragraph') {
+        block.paragraph.text = block.paragraph.text.replace('二、各档次的给分范围和要求', label)
+      }
+    }
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
+      /exact confirmed scoring label and Writing Task/u, label)
+  }
+})
+
+test('a listening boundary after an empty sample label cannot become essay text at admission', () => {
+  for (const boundary of ['Text 1', '(Text 1)', '录音原文', '听力原文']) {
+    const input = fixture({ sampleHeading: '应用文',
+      applicationSample: ['One possible version:', boundary, 'M: This is a synthetic recording.'] })
+    const sidecar = captureScoringReferences(input)
+    assert.equal(sidecar.groups[0].essays.state, 'not_supplied')
+    assert.deepEqual(sidecar.groups[0].essays.entries, [])
+    assert.doesNotThrow(() => assertSourceReferenceAdmission({ ...input, sidecar }), boundary)
+  }
+})

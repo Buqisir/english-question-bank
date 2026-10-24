@@ -3,7 +3,8 @@ import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
-import { BARE_APPLICATION_SECTION, WRITING_SECTION } from './sourceReferenceWritingRules.mjs'
+import { BARE_APPLICATION_SECTION, WRITING_SECTION, LISTENING_REFERENCE_START,
+  NON_WRITING_SECTION } from './sourceReferenceWritingRules.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -25,7 +26,8 @@ function writingScopes(confirmation, answerIds) {
         task = null
       }
       const heading = text.replace(/^第[三四]部分(?:写作|书面表达)(?:\([^)]*\))?/u, '')
-      if (/^(?:听力(?:原文|录音|材料)|录音原文|试题解析|参考答案解析)/u.test(heading)) {
+      if (LISTENING_REFERENCE_START.test(heading) || NON_WRITING_SECTION.test(heading)
+        || /^(?:试题解析|参考答案解析)/u.test(heading)) {
         writing = false
         task = null
       }
@@ -52,6 +54,10 @@ function assertLabeledSamplesPresent(sidecar, confirmation, answerIds) {
     for (const page of document.pages) for (const item of page.orderedItems) {
       const task = scopes.get(item.itemId)
       const text = item.text.normalize('NFKC').trim()
+      if (LISTENING_REFERENCE_START.test(text)) {
+        pending = null
+        continue
+      }
       if (pending && pending === task && !sampleLabel.test(text)
         && /[A-Za-z]/u.test(text) && !/\p{Script=Han}/u.test(text)) {
         const essays = sidecar?.groups.find(group => group.taskType === task)?.essays
