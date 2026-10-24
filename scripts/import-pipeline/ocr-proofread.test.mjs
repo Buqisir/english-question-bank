@@ -289,6 +289,48 @@ test('an incomplete salutation in a rubric cannot manufacture an official essay'
   assert(result.groups[0].scoring.entries.some(e => e.paragraphs.some(p => p.text === 'Dear Sam,')))
 })
 
+test('standalone sample numbers before a repeated inset title preserve separate application essays', () => {
+  const texts = ['第一节 应用文', '（1）', 'Our School Garden',
+    'Our class planted herbs.', 'We shared the harvest.',
+    '（2）', 'Our School Garden', 'Our team grew beans.', 'We cooked them together.']
+  const regions = texts.map((_, i) => [2, 6].includes(i)
+    ? { x: .35, width: .3 } : [3, 4, 7, 8].includes(i) ? { x: .14, width: .76 } : {})
+  const entries = referencesFixture(texts, ['application'], { regions }).groups[0].essays.entries
+  assert.equal(entries.length, 2)
+  assert.deepEqual(entries.map(e => e.sourceLabel), ['（1）', '（2）'])
+  assert.deepEqual(entries.map(e => e.paragraphs.map(p => [p.role, p.text])), [
+    [['title', texts[2]], ['body', texts[3]], ['body', texts[4]]],
+    [['title', texts[6]], ['body', texts[7]], ['body', texts[8]]],
+  ])
+  for (const [index, lineIndex] of [1, 5].entries()) {
+    assert.equal(entries[index].labelSource.locator.region.y, .15 + lineIndex * .025)
+    assert.equal(entries[index].paragraphs[0].source.locator.region.x, .35)
+  }
+})
+
+test('ordinary numbering, unmatched titles, continuation and scoring cannot create numbered application samples', () => {
+  for (const [task, middle, title, inset] of [
+    ['application', '(2) We shared the harvest.', 'Our School Garden', true],
+    ['application', '(2)', 'A Different Heading', true],
+    ['application', '(3)', 'Our School Garden', true],
+    ['application', '(2)', 'Our School Garden', false],
+    ['continuation', '(2)', 'Our School Garden', true],
+  ]) {
+    const texts = [task === 'application' ? '第一节 应用文' : '第二节 读后续写',
+      '(1)', 'Our School Garden', 'Our class planted herbs.', middle, title, 'We shared the harvest.']
+    const regions = texts.map((_, i) => inset && [2, 5].includes(i) ? { x: .35, width: .3 } : {})
+    const result = referencesFixture(texts, [task], { regions })
+    assert.equal(result.groups[0].essays.entries.length, 1)
+    assert(!result.groups[0].essays.entries[0].paragraphs.some(p => p.role === 'title'))
+  }
+  const texts = ['应用文评分标准', '(1)', 'Our School Garden', 'Our class planted herbs.',
+    '(2)', 'Our School Garden', 'We shared the harvest.']
+  const regions = texts.map((_, i) => [2, 5].includes(i) ? { x: .35, width: .3 } : {})
+  const scoring = referencesFixture(texts, ['application'], { regions }).groups[0]
+  assert.equal(scoring.essays.state, 'not_supplied')
+  assert.equal(scoring.scoring.entries.length, 1)
+})
+
 test('a complete letter after the final objective answers establishes a bare application section', () => {
   for (const lastQuestion of [55, 65]) {
     const texts = [`${lastQuestion - 1}. a ${lastQuestion}. growing`, '第一节', 'Dear Sam,',
