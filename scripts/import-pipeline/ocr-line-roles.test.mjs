@@ -11,6 +11,20 @@ function scoringScopes(texts) {
   }] }] }, new Set(['answers']))
 }
 
+test('parenthesized rubric titles open exact scoring entries and reject commentary', () => {
+  for (const label of ['（一）评分原则：', '(一)评分原则:', '（二）各档次给分范围和要求']) {
+    assert(firstLineRole('entry-label', computeLineFacts({ text: label })))
+    assert.equal(firstLineRole('entry-kind', computeLineFacts({ text: label }))?.value, 'scoring')
+    assert.deepEqual(scoringScopes(['第一节 应用文', label, '评分正文']).get('item-2'),
+      { taskType: 'application', labelItemId: 'item-1', sourceLabel: label })
+    assert.equal(scoringScopes([label, '评分正文']).get('item-1'), null, 'rubric needs a writing task')
+  }
+  for (const text of ['（一）评分原则如下。', '（二）各档次给分范围和要求分析', '注意：（一）评分原则：']) {
+    assert.equal(firstLineRole('entry-label', computeLineFacts({ text })), null)
+    assert.equal(scoringScopes(['第一节 应用文', text, '正文']).get('item-2'), null)
+  }
+})
+
 test('scoring scope shares exact parenthesized task headings and numbered scoring labels with OCR roles', () => {
   for (const [heading, task] of [
     ['（二）应用文写作', 'application'], ['（三）读后续写（满分25分）', 'continuation'],

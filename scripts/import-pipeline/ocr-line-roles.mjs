@@ -3,7 +3,7 @@
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
-  NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL,
+  NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
@@ -150,6 +150,8 @@ export const LINE_ROLE_RULES = Object.freeze([
     '4. 评分细则', '4. 评分时应考虑内容。'),
   rule('entry.task-scoring', 'entry-label', 80, f => Boolean(firstLineRole('scoring-section', f)),
     '续写评分标准', '续写评分标准分析'),
+  rule('entry.scoring-label', 'entry-label', 90, f => SCORING_ENTRY_LABEL.test(f.nfkc),
+    '（二）各档次给分范围和要求', '（二）各档次给分范围和要求如下。'),
   pattern('entry.scoring-kind', 'entry-kind', 10, SCORING_LABEL, '二、评分原则', '参考范文', { value: 'scoring' }),
   pattern('entry.essay-kind', 'entry-kind', 20, ESSAY_LABEL, '参考范文', '二、评分原则', { value: 'essays' }),
   rule('entry.sample-label', 'sample-label', 10, f =>

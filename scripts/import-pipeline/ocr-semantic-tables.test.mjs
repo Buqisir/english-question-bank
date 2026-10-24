@@ -6,7 +6,8 @@ import { validateSourceReferences } from '../../server/paper-import/sourceRefere
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 
-test('parenthesized task and numbered labels retain a 7 by 7 scoring table across pages 4 to 6', () => {
+for (const scoringLabel of ['4. 评分细则', '（一）评分原则：', '（二）各档次给分范围和要求']) {
+test(`parenthesized task and ${scoringLabel} retain a 7 by 7 scoring table across pages 4 to 6`, () => {
   const documentSha256 = `sha256:${'a'.repeat(64)}`
   const items = Array.from({ length: 49 }, (_, index) => ({
     itemId: `cell-item-${index}`, cell: `cell-${index}`, observationIds: [`cell-word-${index}`],
@@ -22,7 +23,7 @@ test('parenthesized task and numbered labels retain a 7 by 7 scoring table acros
   const pages = [
     { page: 4, orderedItems: [line('（二）应用文写作', 'task')] },
     { page: 5, orderedItems: [line('2. 参考范文', 'sample'), line('Our club welcomes new readers.', 'essay')] },
-    { page: 6, orderedItems: [line('4. 评分细则', 'scoring'), ...items], visualClassifications: [table.visual] },
+    { page: 6, orderedItems: [line(scoringLabel, 'scoring'), ...items], visualClassifications: [table.visual] },
     { page: 7, orderedItems: [line('（三）读后续写（满分25分）', 'continuation'),
       line('2. 参考范文', 'continuation-sample'), line('Mina found the owner.', 'continuation-essay')] },
   ]
@@ -45,7 +46,7 @@ test('parenthesized task and numbered labels retain a 7 by 7 scoring table acros
     { documents: [{ documentId: 'answers', pages }] })
   assert.equal(structuredScoring, true)
   const [entry] = groups[0].scoring.entries
-  assert.equal(entry.sourceLabel, '4. 评分细则')
+  assert.equal(entry.sourceLabel, scoringLabel)
   assert.equal(entry.labelSource.locator.page, 6)
   assert.equal(entry.blocks.length, 1)
   const [block] = entry.blocks
@@ -72,6 +73,7 @@ test('parenthesized task and numbered labels retain a 7 by 7 scoring table acros
     materializationDigest: digestJson(materialization), groups,
   } }), [])
 })
+}
 
 function fixture() {
   const items = Array.from({ length: 14 }, (_, index) => ({
