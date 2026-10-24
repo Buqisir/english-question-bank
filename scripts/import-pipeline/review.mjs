@@ -208,7 +208,7 @@ function exactApprovalIdentity(approval, paperId) {
 async function api(
   pathname,
   init = {},
-  { allowNotFound = false, binary = false, credential = 'agent' } = {},
+  { allowNotFound = false, notFoundValue = null, binary = false, credential = 'agent' } = {},
 ) {
   const targetOrigin = origin()
   const credentialHeaders = credential === 'shipping'
@@ -236,7 +236,7 @@ async function api(
     allowNotFound
     && response.status === 404
     && body?.code === 'IMPORT_REVIEW_NOT_FOUND'
-  ) return null
+  ) return notFoundValue
   if (!response.ok) {
     const error = new Error(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
     error.status = response.status
@@ -871,7 +871,7 @@ async function reuseOcrConfirmation(paperId) {
   const result = await reuseSealedOcrConfirmation({
     paperId, paperDir, proofreadInputPath: path.resolve(input),
     loadProjection: () => buildNck1OcrReviewProjection(paperDir),
-    readRemote: api,
+    readRemote: (pathname, options) => api(pathname, {}, options),
   })
   console.log(JSON.stringify(result, null, 2))
 }
