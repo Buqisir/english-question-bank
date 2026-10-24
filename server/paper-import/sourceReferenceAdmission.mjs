@@ -48,7 +48,7 @@ function writingScopes(confirmation, answerIds) {
 // a label followed by "略"/nothing. This check also runs for books without images.
 function assertLabeledSamplesPresent(sidecar, confirmation, answerIds) {
   const scopes = writingScopes(confirmation, answerIds)
-  const sampleLabel = /^(?:参考范文|考场作文|作答示例|范文|(?:(?:A|One)\s+)?Possible\s+Version)\s*[:：]?$/iu
+  const sampleLabel = /^(?:参考范文|考场作文|作答示例|范文|(?:(?:A|One)\s+)?Possible\s+Versions?)\s*[:：]?$/iu
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     let pending = null
     for (const page of document.pages) for (const item of page.orderedItems) {

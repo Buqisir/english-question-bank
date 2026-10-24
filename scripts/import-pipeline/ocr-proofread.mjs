@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v10'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v11'
 
 function fail(message) {
   console.error(message)

@@ -19,7 +19,14 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
     for (const page of document.pages) for (const item of page.orderedItems) {
       if (terminal) { scopes.set(item.itemId, null); continue }
       const text = normalize(item.text)
-      if (afterListening) {
+      // A transcript before the first writing task is ordinary source order.
+      // After writing has started, only the explicit rubric appendix can reopen it.
+      const firstWritingHeading = afterListening && !startedWriting
+        && (WRITING_PART.test(text) || ALTERNATE_WRITING_PART.test(text)
+          || WRITING_SECTION.some(([, pattern]) => pattern.test(text))
+          || BARE_APPLICATION_SECTION.test(text) || /^读后续写[:：]?$/u.test(text)
+          || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text))
+      if (afterListening && !firstWritingHeading) {
         // An explanation remains terminal, even between a transcript and rubric.
         if (ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
         if (!terminal && WRITING_SCORING_OVERVIEW.test(text)) {
@@ -29,6 +36,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         scopes.set(item.itemId, null)
         continue
       }
+      if (firstWritingHeading) afterListening = false
       let heading = text
       if (NON_WRITING_SECTION.test(heading)) {
         writing = false

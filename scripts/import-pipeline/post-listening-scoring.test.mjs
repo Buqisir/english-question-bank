@@ -194,3 +194,78 @@ test('a listening boundary after an empty sample label cannot become essay text 
     assert.doesNotThrow(() => assertSourceReferenceAdmission({ ...input, sidecar }), boundary)
   }
 })
+
+const firstWritingHeadings = [
+  ['第四部分 写作（满分40分）\n第一节'],
+  ['第四部分 写作', '第一节'],
+  ['第一节（应用文）'],
+]
+
+function listeningFirstFixture(writingHeading) {
+  const input = scoringFiguresFixture({ writingHeading })
+  input.confirmation.documents[1].pages[0].orderedItems[0].text = '听力原文'
+  input.evidence.documents[1].pages[0].observations[0].text = '听力原文'
+  const { evidenceDigest: _oldDigest, ...body } = input.evidence
+  input.evidence.evidenceDigest = digestJson(body)
+  input.confirmation.evidenceDigest = input.evidence.evidenceDigest
+  input.sourceInput.ocrSourceBytes = {
+    evidenceBytes: Buffer.from(JSON.stringify(input.evidence)),
+    confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)),
+  }
+  return input
+}
+
+test('producer accepts the first explicit writing heading after an earlier transcript', () => {
+  for (const writingHeading of firstWritingHeadings) {
+    const input = listeningFirstFixture(writingHeading)
+    const sidecar = captureScoringReferences(input)
+    assert.deepEqual(sidecar.groups.map(group => group.essays.entries.flatMap(entry =>
+      entry.paragraphs.map(p => p.text))), [['Our original sample is short.'], ['Another original sample.']])
+    assert.equal(sidecar.groups.flatMap(group => group.scoring.entries.flatMap(entry =>
+      entry.blocks.filter(block => block.kind === 'figure'))).length, 3)
+    assertSourceReferenceAdmission({ ...input, sidecar })
+  }
+})
+
+test('independent admission accepts scoring at the first writing heading after a transcript', () => {
+  for (const writingHeading of firstWritingHeadings) {
+    const sidecar = captureScoringReferences(scoringFiguresFixture({ writingHeading }))
+    const input = listeningFirstFixture(writingHeading)
+    assert.doesNotThrow(() => assertSourceReferenceAdmission({ ...input, sidecar }))
+  }
+})
+
+test('singular and plural possible-version labels capture only their following sample body', () => {
+  for (const label of ['One possible version:', 'One possible versions:']) {
+    const input = fixture({ applicationSample: [label, 'Our original application sample.'] })
+    const sidecar = captureScoringReferences(input)
+    const essays = sidecar.groups[0].essays
+    assert.equal(essays.state, 'captured')
+    assert.equal(essays.entries[0].sourceLabel, label)
+    assert.deepEqual(essays.entries[0].paragraphs.map(p => p.text), ['Our original application sample.'])
+    assertSourceReferenceAdmission({ ...input, sidecar })
+  }
+})
+
+test('singular and plural possible-version labels without a sample body stay not_supplied', () => {
+  for (const label of ['One possible version:', 'One possible versions:']) {
+    for (const tail of [[], ['略'], [label], ['Text 1', 'M: This is a synthetic recording.']]) {
+      const input = fixture({ applicationSample: [label, ...tail] })
+      const sidecar = captureScoringReferences(input)
+      assert.equal(sidecar.groups[0].essays.state, 'not_supplied', `${label} ${tail}`)
+      assert.deepEqual(sidecar.groups[0].essays.entries, [])
+      assertSourceReferenceAdmission({ ...input, sidecar })
+    }
+  }
+})
+
+test('admission rejects false not_supplied for plural possible-version samples too', () => {
+  const input = fixture({ applicationSample: ['One possible versions:', 'Our original application sample.'] })
+  const sidecar = captureScoringReferences(input)
+  const essays = sidecar.groups[0].essays
+  essays.evidence = [essays.entries[0].labelSource ?? essays.entries[0].paragraphs[0].source]
+  essays.state = 'not_supplied'
+  essays.entries = []
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
+    { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+})

@@ -15,7 +15,7 @@ const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s
 // Some keys head the samples only with "第一节（满分15分）".
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
 
-const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
+const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Versions?|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
 const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
