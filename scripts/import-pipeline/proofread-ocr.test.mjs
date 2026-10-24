@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict'
+import { once } from 'node:events'
+import { createServer } from 'node:http'
 import { test } from 'node:test'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 
@@ -42,6 +44,11 @@ function assertUnknown(error, attempts, observed) {
   assert.match(error.message, /UNKNOWN.*revision=rev-test/u)
   assert.match(error.message, new RegExp(`POST attempts=${attempts}`))
   assert.match(error.message, observed)
+  assert.match(error.message, /origin=http:\/\/localhost; paperId=paper-test/u)
+  assert.ok(error.message.includes(`expectedBundleDigest=${bundleDigest}`))
+  assert.ok(error.message.includes("QUESTION_BANK_IMPORT_OPS_ORIGIN='http://localhost' node scripts/import-pipeline/review.mjs status 'paper-test'"))
+  assert.ok(error.message.includes('GET http://localhost/api/import-agent-reviews/revisions/rev-test/ocr-confirmation'))
+  assert.doesNotMatch(error.message, /Bearer test/u)
   return true
 }
 
@@ -53,7 +60,7 @@ test('network failure -> pending/latest awaiting_review -> identical POST succee
   assert.equal(f.calls[2].url, 'http://localhost/api/import-agent-reviews/papers/paper-test')
   assert.deepEqual(f.calls[0], f.calls[3], 'replay must keep exact URL, credentials and body')
   assert.deepEqual(f.waits, [30_000])
-  assert.ok(f.calls.every(c => c.redirect === 'error'))
+  assert.ok(f.calls.every(c => c.redirect === 'manual'))
 })
 
 test('network failure -> approved receipt reconciles without a second POST', async () => {
@@ -87,7 +94,7 @@ for (const status of [
   })
 }
 
-for (const status of [400, 401, 404, 409, 500, 503]) {
+for (const status of [302, 307, 400, 401, 404, 409, 500, 503]) {
   test(`HTTP ${status} never reconciles or retries`, async () => {
     const f = fixture([() => json({ code: 'TEST_ERROR', error: 'terminated' }, status)])
     await assert.rejects(f.run(), error => error.status === status)
@@ -96,13 +103,38 @@ for (const status of [400, 401, 404, 409, 500, 503]) {
   })
 }
 
-test('HTTP headers received then body terminated never reconciles', async () => {
-  const f = fixture([{
-    status: 200, ok: true, headers: new Headers({ 'content-type': 'application/json' }),
+function interruptedBody(status = 200) {
+  return {
+    status, ok: status === 200, headers: new Headers({ 'content-type': 'application/json' }),
     json: async () => { throw new TypeError('terminated') },
-  }])
-  await assert.rejects(f.run(), /terminated/u)
-  assert.equal(f.calls.length, 1)
+  }
+}
+
+test('HTTP body terminated -> matching receipt succeeds through one read-only check', async () => {
+  const f = fixture([interruptedBody(), () => json(success)])
+  assert.deepEqual(await f.run(), success)
+  assert.deepEqual(f.calls.map(c => c.method), ['POST', 'GET'])
+  assert.match(f.logs.at(-1), /reconciled after network error/u)
+})
+
+for (const response of [
+  pending,
+  () => json({ receipt: { ...receipt, bundleDigest: 'other' } }),
+  () => json({ code: 'FAILED' }, 500),
+  network(),
+]) {
+  test('HTTP body interrupted without an exact receipt is UNKNOWN and never replays', async () => {
+    const f = fixture([interruptedBody(), response])
+    await assert.rejects(f.run(), error => assertUnknown(error, 1, /lastObserved=/u))
+    assert.deepEqual(f.calls.map(c => c.method), ['POST', 'GET'])
+    assert.deepEqual(f.waits, [30_000])
+  })
+}
+
+test('HTTP failure with unreadable body cannot authorize replay either', async () => {
+  const f = fixture([interruptedBody(500), pending])
+  await assert.rejects(f.run(), error => assertUnknown(error, 1, /confirmation=404/u))
+  assert.deepEqual(f.calls.map(c => c.method), ['POST', 'GET'])
 })
 
 test('normal success preserves result and emits no retry diagnostics', async () => {
@@ -166,6 +198,21 @@ test('non-network POST failure is not retried', async () => {
   assert.equal(f.calls.length, 1)
 })
 
+for (const error of [
+  new TypeError('fetch failed'),
+  new TypeError('fetch failed', { cause: new Error('unexpected redirect') }),
+  new TypeError('invalid request'),
+  new Error('socket hang up'),
+  Object.assign(new TypeError('fetch failed'), { code: 'UND_ERR_REQ_CONTENT_LENGTH_MISMATCH' }),
+]) {
+  test(`unproven transport error ${error.code || error.message} cannot authorize replay`, async () => {
+    const f = fixture([error])
+    await assert.rejects(f.run(), actual => actual === error)
+    assert.equal(f.calls.length, 1)
+    assert.deepEqual(f.waits, [])
+  })
+}
+
 test('HTTP 500 on a replay stops immediately without another reconciliation', async () => {
   const f = fixture([network(), pending, () => json(awaiting), () => json({ code: 'FAILED' }, 500)])
   await assert.rejects(f.run(), error => error.status === 500)
@@ -201,7 +248,9 @@ test('malformed confirmation JSON is UNKNOWN without retrying a received HTTP re
 for (const error of [
   Object.assign(new Error('connection reset'), { code: 'ECONNRESET' }),
   Object.assign(new Error('closed'), { code: 'UND_ERR_SOCKET' }),
-  new Error('socket hang up'), new Error('terminated'),
+  Object.assign(new Error('socket hang up'), { code: 'ECONNRESET' }),
+  new TypeError('fetch failed', { cause: Object.assign(new Error('timeout'), { code: 'UND_ERR_CONNECT_TIMEOUT' }) }),
+  new Error('terminated'),
 ]) {
   test(`network classification supports ${error.code || error.message}`, async () => {
     const f = fixture([error, () => json(success)])
@@ -209,3 +258,35 @@ for (const error of [
     assert.equal(f.calls.length, 2)
   })
 }
+
+test('real HTTP 302 with pending/latest GET routes sends exactly one POST and never follows Location', async t => {
+  const calls = []
+  const server = createServer((request, response) => {
+    calls.push({ method: request.method, url: request.url })
+    request.resume()
+    if (request.method === 'POST') {
+      response.writeHead(302, { location: '/redirect-target', 'content-type': 'text/plain' })
+      response.end('redirect')
+      return
+    }
+    const confirmationPending = request.url.endsWith('/ocr-confirmation')
+    response.writeHead(confirmationPending ? 404 : 200, { 'content-type': 'application/json' })
+    response.end(JSON.stringify(confirmationPending
+      ? { code: 'IMPORT_REVIEW_OCR_CONFIRMATION_PENDING' } : awaiting))
+  })
+  server.listen(0, '127.0.0.1')
+  await once(server, 'listening')
+  t.after(() => new Promise(resolve => server.close(resolve)))
+  const logs = []
+  await assert.rejects(confirmOcrWithReconciliation({
+    origin: `http://127.0.0.1:${server.address().port}`,
+    credentialHeaders: { authorization: 'Bearer test' },
+    paperId, revisionId, input: { bundleDigest },
+    wait: async () => {}, log: message => logs.push(message),
+  }), error => error.status === 302)
+  assert.deepEqual(calls, [{
+    method: 'POST',
+    url: '/api/import-agent-reviews/papers/paper-test/revisions/rev-test/proofread-ocr',
+  }])
+  assert.deepEqual(logs, [])
+})
