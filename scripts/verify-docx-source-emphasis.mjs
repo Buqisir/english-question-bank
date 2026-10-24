@@ -180,3 +180,4 @@ for (const authority of [nck1MaterializationHistoricalAuthorityRef54, nck1Materi
   assert.equal(admission.sealed.manifest.authority.manifestVersion, authority.manifestVersion)
 }
 console.log('PASS source-native Candidate and Canonical marks; v54/v57 unmarked compilation and publication admission replay remain valid')
+await import('./import-pipeline/spelling-source-emphasis.test.mjs')

@@ -119,9 +119,10 @@ function loadPublicSearchMetadata(rootDir, loaded, sourceDigest, candidateDigest
   return { sidecar, bytes, digest: sha256(bytes) }
 }
 
-function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
+function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID', status) {
   const error = new Error(message)
   error.code = code
+  if (status !== undefined) error.status = status
   throw error
 }
 
@@ -424,7 +425,10 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
   return {
     config,
     manifest,
-    materialization: reviewedMaterialization,
+    // Spelling reports bind the original bytes and UTF-16 coordinates. Keep
+    // the validated count overlay in sourceInput for later Candidate replay,
+    // but do not mix its corrected projection into a raw spelling request.
+    materialization: preparingSpelling ? materialization : reviewedMaterialization,
     spellingReviewSummary: spellingReviewBytes
       ? summarizeSpellingReview(JSON.parse(new TextDecoder().decode(spellingReviewBytes)))
       : null,
@@ -829,7 +833,13 @@ export function loadNck1OcrReviewSource(rootDir) {
   const blocking = reviewFindings.filter((item) =>
     !NCK1_OCR_REVIEW_CODES.includes(item.code))
   if (blocking.length > 0) {
-    fail(`${blocking[0].code}: ${blocking[0].message}`, blocking[0].code)
+    const finding = blocking[0]
+    // This branch means raster replay succeeded but the supplied descriptor
+    // differs. A subprocess replay failure keeps its existing server status.
+    const status = finding.code === 'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE'
+      && finding.message === 'OCR page raster no longer replays from the immutable source'
+      ? 422 : undefined
+    fail(`${finding.code}: ${finding.message} (${finding.path})`, finding.code, status)
   }
   return { config, manifest, documents, evidence, reviewFindings }
 }

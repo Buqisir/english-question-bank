@@ -205,3 +205,4 @@ try {
   await new Promise(resolve => server ? server.close(resolve) : resolve())
   rmSync(root, { recursive: true, force: true })
 }
+await import('./import-pipeline/ocr-raster-finalize.test.mjs')
