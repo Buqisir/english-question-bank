@@ -6,7 +6,7 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v20'
+  'nck1-docx-materialization-producer-v21'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -1138,7 +1138,26 @@ function writingSamplePosition(answerBody, patterns, from) {
   })
 }
 
+const WRITING_SAMPLE_OMISSION = /^(?:略|\(略\))[。.]?$/u
+
+function writingSampleOmission(answerBody, from, to) {
+  // An omission must be the whole source section, never a substring or an
+  // excuse to discard competing prose. Listening/scoring remains outside it.
+  const boundary = answerBody.findIndex((item, index) => index >= from && index < to
+    && item.kind === 'paragraph' && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
+      || LISTENING_TEXT_MARKER.test(normalized(item.text)) || listeningCue(item.text)))
+  const items = answerBody.slice(from, boundary < 0 ? to : boundary)
+    .filter(item => item.kind !== 'paragraph' || normalized(item.text))
+  if (items[0]?.kind === 'paragraph' && WRITING_SAMPLE_LABEL.test(normalized(items[0].text))) items.shift()
+  if (items[0]?.kind !== 'paragraph' || !WRITING_SAMPLE_OMISSION.test(normalized(items[0].text))) return undefined
+  return items.length === 1
+}
+
 function writingSampleText(answerBody, from, to) {
+  const omitted = writingSampleOmission(answerBody, from, to)
+  // null is the existing missing officialModelAnswer representation; an
+  // empty string still signals ambiguous boundaries to the caller.
+  if (omitted !== undefined) return omitted ? null : ''
   // A source can put scoring prose/tables before the explicit sample label.
   // Only that exact label establishes the sample start; do not infer it from
   // English-looking text or discard scoring from the captured source stream.
@@ -1260,6 +1279,10 @@ export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues
   }
   const applicationHeadings = headings(applicationPatterns, BARE_APPLICATION_HEADING)
   const continuationHeadings = adjacentContinuationHeadings(headings(continuationPatterns, BARE_CONTINUATION_HEADING))
+  if (!applicationHeadings.length && !continuationHeadings.length
+    && writingSampleOmission(sampleBody, writingStart + 1, sampleBody.length) === true) {
+    return { application: null, continuation: null }
+  }
   if (applicationHeadings.length !== 1 || continuationHeadings.length !== 1
     || applicationHeadings[0] >= continuationHeadings[0]) {
     addIssue(
@@ -1273,7 +1296,7 @@ export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues
   }
   const application = writingSampleText(sampleBody, applicationHeadings[0] + 1, continuationHeadings[0])
   const continuation = writingSampleText(sampleBody, continuationHeadings[0] + 1, sampleBody.length)
-  if (!normalized(application) || !normalized(continuation)) {
+  if (application === '' || continuation === '') {
     addIssue(
       issues,
       'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
