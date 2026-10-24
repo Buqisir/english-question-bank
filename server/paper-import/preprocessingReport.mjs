@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
 import { TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY_V4 } from './spellingReview.mjs'
-import { economyPageLimitForPlan } from './paginationPlan.mjs'
+import { economyPageLimitForPlan, productPageLimitsForPlan } from './paginationPlan.mjs'
 import { ABSENT_BY_EXAM_DESIGN, sourceProductEditions } from './pdfProductSet.mjs'
 
 const editions = [
@@ -58,8 +58,12 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
     : Object.keys(PAPER_PDF_PRODUCTS)
   const selectedProducts = fourProducts ? selectedEditions.map(id => [id, PAPER_PDF_PRODUCTS[id]]).map(([id, label]) =>
     [id, label, id === 'answerOnly' ? null : productEditions.find(entry => entry[0] === id)[2]]) : productEditions
-  const expectedEditions = products ? selectedProducts.map(entry => entry[0] === 'economy8' && economyPageLimit === 9
-    ? ['economy8', '省纸版（不含听力，最多9页）', 9] : entry) : longPaper ? longEditions : editions
+  const pageLimits = productPageLimitsForPlan(projection.paginationPlan)
+  const expectedEditions = products ? selectedProducts.map(entry => {
+    if (entry[0] === 'answerOnly') return entry
+    const limit = pageLimits[`${entry[0] === 'economy8' ? 'economy' : entry[0]}PageLimit`]
+    return [entry[0], limit === entry[2] ? entry[1] : `${entry[1]}（最多${limit}页）`, limit]
+  }) : longPaper ? longEditions : editions
   const editionLabel = noListeningProducts || (products && !fourProducts) ? '三版' : '四版'
   const checked = (key) => {
     const check = evidence.checks?.[key]

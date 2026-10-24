@@ -10,7 +10,8 @@ import path from 'node:path'
 import tls from 'node:tls'
 import { pathToFileURL } from 'node:url'
 import { checkSearchMetadataFiles, ensureSearchMetadata } from './search-metadata-check.mjs'
-import { importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
+import { importEconomyPageLimit, importLargePageLimits, largePageLimitArgs } from './lib-economy-page-allowance.mjs'
+import { productPageLimitsForPlan } from '../../server/paper-import/paginationPlan.mjs'
 import { answerOnlyCoveredNumbers } from './answer-only-coverage.mjs'
 import { appendTiming } from './lib-timing.mjs'
 import { fastProductSet, declareFastListening } from './lib-fast-products.mjs'
@@ -461,7 +462,7 @@ async function repair(ctx, paper, result, attempt, tier = 'sol', previous = null
 }
 
 export function checkPdfs(paperId) {
-  const economyPageLimit = importEconomyPageLimit(paperId, fastState(paperId).data?.economyPageLimit)
+  const stateLimits = { ...importLargePageLimits(fastState(paperId).data), economyPageLimit: importEconomyPageLimit(paperId, fastState(paperId).data?.economyPageLimit) }
   if (!paperIdValid(paperId)) fail('paperId 格式无效')
   const dir = path.join(papersRoot, paperId)
   const config = json(path.join(dir, 'config.json'))
@@ -495,7 +496,9 @@ export function checkPdfs(paperId) {
       const fonts = textCommand('pdffonts', [pdf]).trim().split('\n').slice(2)
       const unembedded = fonts.filter((line) => !/\s+yes\s+(?:yes|no)\s+(?:yes|no)\s+\d+\s+\d+\s*$/u.test(line))
       if (!fonts.length || unembedded.length) errors.push('存在未嵌入字体或无法识别的字体记录')
-      const limit = product === 'economy8' ? economyPageLimit : plan.editions?.[product]?.targetPages
+      const key = `${product === 'economy8' ? 'economy' : product}PageLimit`
+      const limit = productPageLimitsForPlan(plan)[key]
+      if (product !== 'answerOnly' && (plan.editions?.[product]?.targetPages !== limit || limit !== stateLimits[key])) errors.push('分页计划与逐卷授权上限不一致')
       if (product === 'economy8') {
         if (plan.editions?.economy8?.targetPages !== limit) errors.push('省纸分页计划与 fast state 页数不一致')
         if (limit === 9 ? pages > 9 : pages !== 8) errors.push(`省纸版${limit === 9 ? '最多 9' : '必须 8'}页，实际 ${pages}`)
@@ -1013,6 +1016,7 @@ async function processPaper(ctx, paper) {
 function validateQueue(item) {
   if (!paperIdValid(item.paperId)) fail('队列 paperId 格式无效')
   importEconomyPageLimit(item.paperId, item.economyPageLimit)
+  importLargePageLimits(item)
   if (typeof item.paperName !== 'string' || !item.paperName.trim() || item.provenance?.paperName !== item.paperName
     || typeof item.provenance?.source !== 'string' || !item.provenance.source.trim()) fail('队列卷名与 provenance 不完整')
   if (!Number.isInteger(item.provenance.year) || item.provenance.year < 2000 || item.provenance.year > new Date().getFullYear() + 2
@@ -1024,7 +1028,7 @@ function validateQueue(item) {
   if (![item.question, item.answer].every((file) => /\.pdf$/iu.test(file))) fail('题卷和答案源必须是 PDF')
 }
 function economyFinishArgs(item) {
-  return importEconomyPageLimit(item.paperId, item.economyPageLimit) === 9 ? ['--economy-page-limit', '9'] : []
+  return [...largePageLimitArgs(item), ...(importEconomyPageLimit(item.paperId, item.economyPageLimit) === 9 ? ['--economy-page-limit', '9'] : [])]
 }
 function queue(ctx) {
   const dir = path.join(ctx.dir, 'queue')

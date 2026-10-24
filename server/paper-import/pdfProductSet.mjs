@@ -1,3 +1,4 @@
+import { productPageLimitsForManifest } from './pdfPageLimits.mjs'
 import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
 
 export const ABSENT_BY_EXAM_DESIGN = 'absent-by-exam-design'
@@ -25,6 +26,11 @@ export function productFiles(editions) {
 
 // Historical v1/v2 four-product records keep their original meaning.
 export function manifestProductFiles(manifest) {
+  if (manifest?.schemaVersion === 'paper-pdf-products-v4') {
+    productPageLimitsForManifest(manifest)
+    if (manifest.listening === undefined) return productFiles(PAPER_PDF_EDITIONS)
+    if (manifest.listening === ABSENT_BY_EXAM_DESIGN && manifest.pageLimits.largeCompletePageLimit === 12) return productFiles(NO_LISTENING_EDITIONS)
+  }
   if (manifest?.schemaVersion === NO_LISTENING_PRODUCT_SCHEMA
     && manifest.listening === ABSENT_BY_EXAM_DESIGN
     && [8, 9].includes(manifest.economyPageLimit)) return productFiles(NO_LISTENING_EDITIONS)

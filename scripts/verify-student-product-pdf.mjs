@@ -3,10 +3,16 @@ import { verifyDrawingAreaProductPolicy } from './verify-application-drawing-are
 await verifyDrawingAreaProductPolicy()
 import { readFileSync } from 'node:fs'
 import { applyStudentProductLayout, planStudentProductPdf, renderExplicitStudentProductPdf, studentProductPolicy } from '../server/draft-paper/studentProductPdf.mjs'
-import { validatePaperPaginationPlan, paginationPlanEdition } from '../server/paper-import/paginationPlan.mjs'
+import { validatePaperPaginationPlan, paginationPlanEdition, productPageLimitsForPlan, productPlanAuthorization } from '../server/paper-import/paginationPlan.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import { searchFixedPagePdf, inspectGroups } from '../server/draft-paper/fixedPagePdfPlanner.mjs'
+import { reviewPaginationMetadata } from '../server/import-review/reviewPagination.mjs'
+import { importLargePageLimits, largePageLimitArgs } from './import-pipeline/lib-economy-page-allowance.mjs'
+import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../server/paper-import/pdfPageLimits.mjs'
+import { readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
+import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
+import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { embeddedPaperFontCss } from '../server/paper-fonts.mjs'
 
 const html = '<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}</style></head><body><section data-canonical-group-id="application"><div class="canonical-application-response"></div></section><section data-canonical-group-id="continuation"><div class="canonical-continuation-response">Both supplied starters</div></section></body></html>'
@@ -199,6 +205,83 @@ for (const pages of [8, 9, 10]) {
     edition: 'economy8', layout: nineLayout, plannedBreakGroupIds: ['continuation'], render,
   }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE', 'absent opt-in remains exactly eight pages')
 }
+// The successor opts in per edition; old plans remain byte-identical and bounded.
+const historicalBytes = JSON.stringify(ninePlan)
+const extendedIdentity = { ...identity, slotBindings: [
+  { slotId: 'listening.short', groupId: 'short', familyContractId: 'listening' },
+  { slotId: 'listening.long', groupId: 'long', familyContractId: 'listening' },
+  ...identity.slotBindings,
+] }
+for (const [edition, ceiling] of [['largeComplete', 13], ['largeNoListening', 11]]) {
+  const entry = { ...plan.editions.largeNoListening, includeListening: edition === 'largeComplete', targetPages: ceiling }
+  const extended = { ...plan, schemaVersion: 'paper-pagination-plan-v6',
+    ...productPlanAuthorization('paper-pagination-plan-v6'), editions: { [edition]: entry } }
+  assert.deepEqual(validatePaperPaginationPlan(extended, extendedIdentity), extended)
+  assert.equal(reviewPaginationMetadata({ ...extendedIdentity, paginationSlotBindings: extendedIdentity.slotBindings,
+    paginationPlan: extended }).editions.find(value => value.edition === edition).targetPages, ceiling)
+  const automatic = await planStudentProductPdf(html, { edition, [`${edition}PageLimit`]: ceiling,
+    render: async () => ({ pageCount: ceiling, inspection }) })
+  assert.equal(automatic.pageCount, ceiling)
+  assert.deepEqual(automatic.layout.answerBoxHeightsMm, { application: 65, continuation: 57 })
+  assert.equal(productPageLimitsForPlan(extended)[`${edition}PageLimit`], ceiling)
+  for (const version of ['paper-pagination-plan-v4', 'paper-pagination-plan-v5']) {
+    const legacy = { ...extended, schemaVersion: version }
+    delete legacy.pageLimitAuthorization
+    if (version.endsWith('v5')) legacy.editions = { ...legacy.editions, economy8: ninePlan.editions.economy8 }
+    assert.throws(() => validatePaperPaginationPlan(legacy, extendedIdentity), /policy/)
+  }
+  for (const targetPages of [ceiling - 2, ceiling + 1]) assert.throws(() =>
+    validatePaperPaginationPlan({ ...extended, editions: { [edition]: { ...entry, targetPages } } }, extendedIdentity))
+  for (const authorization of [undefined, { ...LARGE_PAGE_LIMIT_AUTHORIZATION, basis: 'unknown' }]) {
+    assert.throws(() => validatePaperPaginationPlan({ ...extended, pageLimitAuthorization: authorization }, extendedIdentity))
+  }
+  for (const pages of [ceiling - 1, ceiling, ceiling + 1]) {
+    const replay = options => renderExplicitStudentProductPdf(html, { edition, layout,
+      plannedBreakGroupIds: [], render: async () => ({ pageCount: pages, inspection }), ...options })
+    if (pages <= ceiling) assert.equal((await replay({ [`${edition}PageLimit`]: ceiling })).pageCount, pages)
+    else await assert.rejects(() => replay({ [`${edition}PageLimit`]: ceiling }), { code: 'PAPER_FIXED_PAGE_IMPOSSIBLE' })
+    if (pages >= ceiling) await assert.rejects(() => replay({}), { code: 'PAPER_FIXED_PAGE_IMPOSSIBLE' })
+  }
+  assert.throws(() => studentProductPolicy(edition, 2, { [`${edition}PageLimit`]: ceiling + 1 }))
+}
+assert.equal(JSON.stringify(ninePlan), historicalBytes)
+assert.deepEqual(productPageLimitsForPlan(null), { largeCompletePageLimit: 12, largeNoListeningPageLimit: 10, economyPageLimit: 8 })
+assert.equal(productPageLimitsForPlan(ninePlan).largeNoListeningPageLimit, 10)
+
+// Real PDF bytes exercise the frozen validator, including absent/mismatched declarations.
+const frozenBytes = Object.fromEntries(PRODUCT_FILES.map((file, i) => [file.path,
+  productPdfBytes([13, 11, 9, 2][i], file.path)]))
+const manifest = { schemaVersion: 'paper-pdf-products-v4', paperName: 'explicit allowance fixture',
+  pageLimits: { largeCompletePageLimit: 13, largeNoListeningPageLimit: 11, economyPageLimit: 9 },
+  pageLimitAuthorization: LARGE_PAGE_LIMIT_AUTHORIZATION, inputDigest: sha256(Buffer.from('fixture')),
+  files: PRODUCT_FILES.map((file, i) => ({ ...file, pageCount: [13, 11, 9, 2][i],
+    sha256: sha256(frozenBytes[file.path]), byteLength: frozenBytes[file.path].length })) }
+const readFrozen = (changed = manifest, options = {}) => readFrozenProducts('', { ...options,
+  readArtifact: file => file === PRODUCT_MANIFEST ? Buffer.from(JSON.stringify(changed)) : frozenBytes[file] })
+assert.equal(readFrozen().manifest.files[0].pageCount, 13)
+for (const changed of [
+  { ...manifest, schemaVersion: 'paper-pdf-products-v1' },
+  { ...manifest, pageLimitAuthorization: undefined },
+  { ...manifest, pageLimits: undefined },
+  { ...manifest, pageLimits: { ...manifest.pageLimits, largeCompletePageLimit: 14 } },
+  { ...manifest, pageLimits: { ...manifest.pageLimits, largeCompletePageLimit: 12 } },
+  { ...manifest, pageLimits: { ...manifest.pageLimits, largeNoListeningPageLimit: 10 } },
+  { ...manifest, pageLimits: { ...manifest.pageLimits, economyPageLimit: 8 } },
+]) assert.throws(() => readFrozen(changed))
+assert.throws(() => readFrozen(manifest, { largeCompletePageLimit: 12 }), /清单/)
+assert.throws(() => readFrozen(manifest, { largeNoListeningPageLimit: 10 }), /清单/)
+const absentManifest = { ...manifest, listening: 'absent-by-exam-design',
+  pageLimits: { ...manifest.pageLimits, largeCompletePageLimit: 12 },
+  files: manifest.files.filter(file => file.path !== 'products/largeComplete.pdf') }
+assert.equal(readFrozen(absentManifest, { config: { listening: 'absent-by-exam-design' }, listeningCount: 0 }).manifest.files.length, 3)
+assert.throws(() => readFrozen({ ...absentManifest, pageLimits: manifest.pageLimits }))
+assert.throws(() => readFrozen(absentManifest, { config: {}, listeningCount: 2 }), /清单/)
+assert.deepEqual(importLargePageLimits(), { largeCompletePageLimit: 12, largeNoListeningPageLimit: 10 })
+assert.deepEqual(largePageLimitArgs({ largeCompletePageLimit: 13, largeNoListeningPageLimit: 11 }),
+  ['--large-complete-page-limit', '13', '--large-no-listening-page-limit', '11'])
+for (const value of [null, 14, '13']) assert.throws(() => studentProductPolicy('largeComplete', 2, { largeCompletePageLimit: value }))
+assert.throws(() => importLargePageLimits({ largeNoListeningPageLimit: 12 }))
+
 const initialized = await renderExplicitStudentProductPdf(html, {
   edition: 'economy8', economyPageLimit: 9, layout: nineLayout, plannedBreakGroupIds: ['continuation'],
   restoreAnswerBoxes: true, render: async source => {

@@ -8,7 +8,7 @@
 //
 //   prep <paperId> [--audio <file>] [--proofreaders 7] [-- <universal-nck1 init args>]
 //   after-proofread <paperId> [--issues-resolved]
-//   finish <paperId> [--economy-page-limit 9] through frozen PDFs and their contact sheets
+//   finish <paperId> [--large-complete-page-limit 13] [--large-no-listening-page-limit 11] [--economy-page-limit 9] through frozen PDFs and their contact sheets
 //   submit <paperId>                 after PDF QA: push the Candidate, then Screen tiles
 //   report <paperId> --screen "<what was checked>" --pdf "<what was checked>"
 //   status <paperId>
@@ -23,9 +23,10 @@ import path from 'node:path'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import {
-  PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan,
+  PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan, productPlanVersion, productPlanAuthorization,
 } from '../../server/paper-import/paginationPlan.mjs'
-import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit } from './lib-economy-page-allowance.mjs'
+import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit, importLargePageLimits } from './lib-economy-page-allowance.mjs'
+import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
 import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
@@ -473,18 +474,21 @@ function splitSummaries(ctx, parts) {
 }
 
 function startPagination(ctx, candidateDigest, editions = productSet(ctx).editions, economyPageLimit = ctx.state.data.economyPageLimit ?? 8) {
+  const limits = { ...importLargePageLimits(ctx.state.data), economyPageLimit }
   for (const edition of editions) {
+    const limit = limits[`${edition === 'economy8' ? 'economy' : edition}PageLimit`]
     const out = path.join(ctx.fast, 'pagination', edition)
     const report = path.join(out, 'report.json')
     const previous = existsSync(report) ? readJson(report) : null
     if (previous?.status === 'success' && previous.candidateDigest === candidateDigest
-      && (edition !== 'economy8' || previous.selectedPlan?.targetPages === economyPageLimit)) continue
+      && previous.selectedPlan?.targetPages === limit) continue
     archive(ctx, out)
     mkdirSync(out, { recursive: true })
     // One process per edition: the Chromium pool renders serially inside a process.
     background(ctx, `pagination-${edition}`, process.execPath, cli('review.mjs', 'pagination-qa', ctx.paperId,
       '--edition', edition, '--auto', '--output', out,
-      ...(edition === 'economy8' && economyPageLimit === 9 ? ['--economy-page-limit', '9'] : [])))
+      ...(limit === ({ economy8: 9, largeComplete: 13, largeNoListening: 11 })[edition]
+        ? [({ economy8: '--economy-page-limit', largeComplete: '--large-complete-page-limit', largeNoListening: '--large-no-listening-page-limit' })[edition], String(limit)] : [])))
   }
 }
 
@@ -698,14 +702,20 @@ async function mergePagination(ctx) {
   productSet(ctx, projection)
   const stale = editions.filter((edition) => reports[edition].candidateDigest !== projection.candidateDigest)
   if (stale.length) fail(`分页报告绑定的 Candidate 已过期：${stale.join(', ')}；删除对应目录后重跑 finish`)
+  const largeLimits = importLargePageLimits(ctx.state.data)
+  for (const edition of editions.filter(value => value.startsWith('large'))) {
+    if (reports[edition].selectedPlan.targetPages !== largeLimits[`${edition}PageLimit`]) fail(`${edition} 分页报告与本卷授权上限不一致`)
+  }
   if (reports.economy8.selectedPlan.targetPages !== (ctx.state.data.economyPageLimit ?? 8)) {
     fail('省纸分页报告与本卷 fast state 页数不一致')
   }
   const sourceHasListening = projection.paginationSlotBindings.some((entry) => entry.familyContractId === 'listening')
   const binding = { paperId: projection.paperId, sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest }
   // Same assembly as `review.mjs pagination-qa --auto --save-plan` run once per edition.
+  const selectedEditions = Object.fromEntries(editions.map((edition) => [edition, reports[edition].selectedPlan]))
+  const schemaVersion = productPlanVersion(selectedEditions)
   const plan = validatePaperPaginationPlan({
-    schemaVersion: reports.economy8.selectedPlan.targetPages === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4',
+    schemaVersion, ...productPlanAuthorization(schemaVersion),
     ...binding,
     editions: Object.fromEntries(editions.map((edition) => [edition, reports[edition].selectedPlan])),
   }, { ...binding, slotBindings: projection.paginationSlotBindings, sourceHasListening })
@@ -864,6 +874,27 @@ function pdfContactSheets(ctx) {
 }
 
 async function finish(ctx, args) {
+  for (const [flag, edition, expected] of [
+    ['--large-complete-page-limit', 'largeComplete', '13'],
+    ['--large-no-listening-page-limit', 'largeNoListening', '11'],
+  ]) {
+    if (!args.includes(flag)) continue
+    if (option(args, flag) !== expected) fail(`${flag} 只接受显式授权值 ${expected}`)
+    if (!productSet(ctx).editions.includes(edition)) fail(`${edition} 不属于本卷产品`)
+    const key = `${edition}PageLimit`
+    if (ctx.state.data[key] === Number(expected)) continue
+    if (ctx.state.steps.push?.startedAt) fail('已开始送审的卷不可原地更改页数授权')
+    if (Object.entries(ctx.state.background).some(([name, job]) => name.startsWith('pagination-') && alive(job.pid))) fail('分页仍在运行；待其退出后再修改授权')
+    for (const name of ['pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']) delete ctx.state.steps[name]
+    archive(ctx, path.join(ctx.fast, 'pagination', edition))
+    archive(ctx, path.join(ctx.paperDir, 'products'))
+    delete ctx.state.background[`pagination-${edition}`]
+    ctx.state.data[key] = Number(expected)
+    ctx.state.data[`${key}Authorization`] = {
+      ...LARGE_PAGE_LIMIT_AUTHORIZATION, recordedAt: new Date().toISOString(), pageLimit: Number(expected),
+    }
+    save(ctx)
+  }
   const supplied = args.includes('--economy-page-limit')
   const requested = option(args, '--economy-page-limit')
   if (supplied && requested !== '9') fail('--economy-page-limit 只接受显式九页授权值 9')

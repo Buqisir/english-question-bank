@@ -1,3 +1,4 @@
+import { productPageLimitsForManifest } from './pdfPageLimits.mjs'
 import { existsSync, readFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import path from 'node:path'
@@ -38,7 +39,7 @@ export function productInputDigest(rootDir, files, reviewedListening = null) {
 // digest excludes products, avoiding a circular digest and binding config,
 // source documents, answer references, pagination and all other print inputs.
 // Only a validated navigation review may exclude its exact private evidence.
-export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, config, listeningCount, required = false, readArtifact = null } = {}) {
+export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, config, listeningCount, required = false, readArtifact = null } = {}) {
   const read = readArtifact || (relative => {
     const file = path.join(rootDir, relative)
     return existsSync(file) ? readFileSync(file) : null
@@ -50,14 +51,17 @@ export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, con
   }
   const manifest = JSON.parse(manifestBytes.toString('utf8'))
   const expectedFiles = manifestProductFiles(manifest)
-  const noListening = manifest.schemaVersion === NO_LISTENING_PRODUCT_SCHEMA
   if (config !== undefined || listeningCount !== undefined) {
     const editions = sourceProductEditions(config, listeningCount)
     if (editions.length !== expectedFiles.length) reject('听力声明与产品清单不同')
   }
-  const manifestPageLimit = manifest.schemaVersion === 'paper-pdf-products-v2' || noListening ? manifest.economyPageLimit : 8
-  if (!['paper-pdf-products-v1', 'paper-pdf-products-v2', NO_LISTENING_PRODUCT_SCHEMA].includes(manifest.schemaVersion)
+  let pageLimits
+  try { pageLimits = productPageLimitsForManifest(manifest) } catch (error) { reject(error.message) }
+  const manifestPageLimit = pageLimits.economyPageLimit
+  if (!['paper-pdf-products-v1', 'paper-pdf-products-v2', NO_LISTENING_PRODUCT_SCHEMA, 'paper-pdf-products-v4'].includes(manifest.schemaVersion)
     || (manifest.schemaVersion === 'paper-pdf-products-v2' && manifestPageLimit !== 9)
+    || (largeCompletePageLimit !== undefined && pageLimits.largeCompletePageLimit !== largeCompletePageLimit)
+    || (largeNoListeningPageLimit !== undefined && pageLimits.largeNoListeningPageLimit !== largeNoListeningPageLimit)
     || (economyPageLimit !== undefined && manifestPageLimit !== economyPageLimit)
     || !/^sha256:[a-f0-9]{64}$/.test(manifest.inputDigest || '')
     || (inputDigest && manifest.inputDigest !== inputDigest)
@@ -82,7 +86,7 @@ export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, con
     if (actualPages !== file.pageCount) reject(`PDF 实际页数与清单不同：${expected.path}`)
     const edition = path.basename(expected.path, '.pdf')
     if (edition !== 'answerOnly') {
-      const policy = studentProductPolicy(edition, 2, { economyPageLimit: manifestPageLimit })
+      const policy = studentProductPolicy(edition, 2, pageLimits)
       if (policy.atMost ? actualPages > policy.targetPages : actualPages !== policy.targetPages) {
         reject(`PDF 页数不符合产品规格：${expected.path}`)
       }
