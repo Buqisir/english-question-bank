@@ -1,5 +1,5 @@
 import {
-  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
+  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from './sourceReferenceWritingRules.mjs'
@@ -53,6 +53,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
       const scoringTask = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0]
       task ??= scoringTask
       if (NUMBERED_APPLICATION_SECTION.test(heading)) task = 'application'
+      if (BARE_APPLICATION_SECTION.test(heading)) task = 'application'
       if (NUMBERED_CONTINUATION_SECTION.test(heading)) task = 'continuation'
       if ((writing && /^第一节(?:\(|$)/u.test(heading))
         || /^(?:第一节(?:\([^)]*\))?)?(?:应用文(?:写作)?|书面表达)(?:评分细则[:：]?)?$/u.test(heading)) task ??= 'application'

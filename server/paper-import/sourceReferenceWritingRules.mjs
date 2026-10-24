@@ -2,6 +2,8 @@
 // recognition identical without importing the CLI producer into the server.
 // Answer keys may number writing as the third part when listening is absent.
 export const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
+// Answer-first keys may name the task without a writing-part or section number.
+export const BARE_APPLICATION_SECTION = /^应用文\s*[:：]?$/u
 export const WRITING_SECTION = [
   ['application', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:应用文|书面表达)\s*[）)]|应用文|书面表达)/u],
   ['continuation', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:读后续写|续写)\s*[）)]|读后续写|续写)/u],

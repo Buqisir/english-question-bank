@@ -9,12 +9,13 @@ import { firstLineRole } from './ocr-line-roles.mjs'
 
 // Synthetic source order: samples, transcript, then explicitly headed rubrics.
 function fixture({ overview = '写作评分说明', boundary = '听力原文', task = '第一节：应用文写作（满分15分）',
-  label = '二、各档次的给分范围和要求', rubric = '评分标准' } = {}) {
+  label = '二、各档次的给分范围和要求', rubric = '评分标准',
+  sampleHeading = '第一节 应用文', applicationSample = ['参考范文', 'Our original application sample.'] } = {}) {
   const input = scoringFiguresFixture({ essays: false, writingHeading: [overview, task] })
   const answers = input.confirmation.documents[1]
   const evidence = input.evidence.documents[1]
   for (const [pageIndex, texts] of [
-    [0, ['第一节 应用文', '参考范文', 'Our original application sample.',
+    [0, [sampleHeading, ...applicationSample,
       '第二节 读后续写', '参考范文', 'Our original continuation sample.']],
     [1, [boundary, 'Text 1', 'M: This is a synthetic recording.']],
   ]) {
@@ -104,4 +105,52 @@ test('independent admission rejects a sidecar whose rubric overview is absent fr
   const input = fixture({ overview: '教师笔记' })
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
     /exact confirmed scoring label and Writing Task/u)
+})
+
+test('an answer-first application heading preserves its labeled sample without a writing-part heading', () => {
+  for (const sampleHeading of ['应用文', '应用文：', '应用文:']) {
+    const input = fixture({ sampleHeading })
+    const sidecar = captureScoringReferences(input)
+    const application = sidecar.groups[0].essays
+    assert.equal(application.state, 'captured')
+    assert.deepEqual(application.entries.map(entry => entry.paragraphs.map(p => p.text)),
+      [['Our original application sample.']])
+    assert.equal(application.entries[0].sourceLabel, '参考范文')
+    assert.equal(application.entries[0].labelSource.locator.page, 1)
+    assertSourceReferenceAdmission({ ...input, sidecar })
+  }
+})
+
+test('admission rejects false not_supplied for a confirmed labeled sample, including books without figures', () => {
+  for (const withoutFigures of [false, true]) {
+    const input = fixture()
+    const sidecar = captureScoringReferences(input)
+    const essays = sidecar.groups[0].essays
+    essays.evidence = [essays.entries[0].labelSource]
+    essays.state = 'not_supplied'
+    essays.entries = []
+    if (withoutFigures) {
+      for (const document of input.confirmation.documents) for (const page of document.pages) {
+        page.visualClassifications = page.visualClassifications.filter(visual => visual.classification !== 'content_media')
+      }
+      input.sourceInput.ocrSourceBytes.confirmationBytes = Buffer.from(JSON.stringify(input.confirmation))
+      for (const group of sidecar.groups) for (const entry of group.scoring.entries) {
+        entry.blocks = entry.blocks.filter(block => block.kind !== 'figure')
+      }
+    }
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+  }
+})
+
+test('answer-first application samples printed as omitted or actually absent stay not_supplied', () => {
+  for (const applicationSample of [['参考范文', '略'], ['参考范文', '（略）'],
+    ['One possible version:'], ['One possible version:', 'One possible version:'], []]) {
+    const input = fixture({ sampleHeading: '应用文', applicationSample })
+    const sidecar = captureScoringReferences(input)
+    assert.equal(sidecar.groups[0].essays.state, 'not_supplied')
+    assert.deepEqual(sidecar.groups[0].essays.entries, [])
+    assertSourceReferenceAdmission({ ...input, sidecar })
+  }
+  assert.equal(firstLineRole('writing-section', computeLineFacts({ text: '应用文需要审题。' })), null)
 })

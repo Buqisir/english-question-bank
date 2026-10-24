@@ -2,7 +2,7 @@
 // Rules recognize candidates only: callers retain state transitions and output assembly.
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
-  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
+  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
@@ -171,6 +171,8 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('writing.bare-fourth-part', 'bare-writing-part', 10, /^第四部分\s*[:：]?$/u, '第四部分', '第三部分'),
   pattern('writing.bare-section', 'bare-section', 10, BARE_WRITING_SECTION, '第一节', '第一节（阅读理解）'),
   pattern('writing.application', 'writing-section', 10, WRITING_SECTION[0][1], '第一节（应用文）', '第一节（阅读理解）', { value: 'application' }),
+  pattern('writing.bare-application', 'writing-section', 15, BARE_APPLICATION_SECTION,
+    '应用文', '应用文需要审题。', { value: 'application' }),
   pattern('writing.continuation', 'writing-section', 20, WRITING_SECTION[1][1], '第二节 读后续写', '第二节(语法填空)', { value: 'continuation' }),
   pattern('writing.bare-continuation', 'writing-section', 25, /^读后续写\s*[:：]?$/u,
     '读后续写', '读后续写评分标准', { value: 'continuation' }),
