@@ -29,7 +29,8 @@ function check(label, fn) {
 // Small, invented source facts. No compilation, rendering, pdfinfo or original
 // copyrighted passage. PDF bytes stand for a previously finalized commitment:
 // this suite tests hash preservation, not first-finalize PDF validation.
-async function fixture({ publicProfile = false, noListening = false, ocrReport = false, sidecarPadding = 0, payloadPadding = 0 } = {}) {
+async function fixture({ publicProfile = false, noListening = false, ocrReport = false,
+  ocrReportVersion = 'agent-ocr-correction-report-v2', sidecarPadding = 0, payloadPadding = 0 } = {}) {
   const paperId = 'paper-mock-review-2026'
   const projection = {
     paperId, sourceDigest: hash('source'), candidateDigest: hash('candidate'),
@@ -87,7 +88,7 @@ async function fixture({ publicProfile = false, noListening = false, ocrReport =
   }
   add('config.json', 'config', 'application/json', { provenance: { year: 2026, paperName: '内容审查 fixture', source: 'fixture' } })
   if (ocrReport) add('agent-ocr-correction-report-v2.json', 'agent_ocr_correction_report', 'application/json',
-    { schemaVersion: 'agent-ocr-correction-report-v2', paperId,
+    { schemaVersion: ocrReportVersion, paperId,
       ocrRevisionId: 'rev-ocr-fixture', ocrConfirmationId: 'ocr-confirmation-fixture',
       originalSourceSetDigest: hash('source-set'), ocrEvidenceDigest: hash('ocr-evidence'),
       sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
@@ -137,7 +138,7 @@ async function fixture({ publicProfile = false, noListening = false, ocrReport =
     producerBuildId: 'original-producer', files,
   }
   if (ocrReport) {
-    bundle.ocrCorrectionReportVersion = 'agent-ocr-correction-report-v2'
+    bundle.ocrCorrectionReportVersion = ocrReportVersion
     bundle.ocrCorrectionReportDigest = digestJson(JSON.parse(raw.get('agent-ocr-correction-report-v2.json')))
   }
   bundle.bundleDigest = reviewSubjectBundleDigest(bundle)
@@ -228,8 +229,8 @@ for (const [baselinePair, actualPair, authority] of [
     error => error.reasonCode === 'UNSUPPORTED_CONSUMER_SUCCESSION')
 }
 console.log('PASS trusted subject hashing: 47->49, drawing 48->49, 49 identity, real differences and stem closure fail-closed')
-{
-  const actual = await fixture({ publicProfile: true, ocrReport: true })
+for (const ocrReportVersion of ['agent-ocr-correction-report-v2', 'agent-ocr-correction-report-v3']) {
+  const actual = await fixture({ publicProfile: true, ocrReport: true, ocrReportVersion })
   const report = actual.storedFiles.find(file => file.path === 'agent-ocr-correction-report-v2.json')
   assert.notEqual(report.sha256, actual.revision.manifest.ocrCorrectionReportDigest)
   assert.equal(buildStoredReviewSubject(actual).ok, true)
@@ -241,7 +242,7 @@ console.log('PASS trusted subject hashing: 47->49, drawing 48->49, 49 identity, 
     changed.preview.bundle_digest = changed.revision.bundleDigest
     assert.equal(buildStoredReviewSubject(changed).reasonCode, 'BASELINE_UNTRUSTED', key)
   }
-  console.log('PASS v3 OCR canonical JSON digest differs from byte SHA; all three sidecar digest guards still reject wrong values')
+  console.log(`PASS ${ocrReportVersion} canonical JSON digest differs from byte SHA; all three sidecar digest guards still reject wrong values`)
 }
 {
   const large = await fixture({ sidecarPadding: 9 * 1024 ** 2 })

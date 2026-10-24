@@ -17,6 +17,7 @@ import { DatabaseSync } from 'node:sqlite'
 
 import { MEDIA_AI_CONFIRMATION_CHECKS } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { OCR_NUMBERING_REPORT_VERSION, validateOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
 import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
 import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
@@ -92,7 +93,8 @@ function matchesMaterializedOcrText(text, entry, materialization, followingText)
 }
 
 export function validateAgentOcrCorrectionReceipt(report, receipt, materialization) {
-  if (receipt?.paperId !== report.paperId
+  if (!['agent-ocr-correction-report-v2', OCR_NUMBERING_REPORT_VERSION].includes(report?.schemaVersion)
+    || receipt?.paperId !== report.paperId
     || receipt?.revisionId !== report.ocrRevisionId
     || receipt?.confirmationId !== report.ocrConfirmationId
     || receipt?.reviewerKind !== 'import_agent'
@@ -109,11 +111,16 @@ export function validateAgentOcrCorrectionReceipt(report, receipt, materializati
   for (const entry of report.entries) {
     const confirmed = confirmedItems.get(entry.ocrItemId)
     const note = ocrNotes.get(entry.ocrItemId)
+    const hasProjection = Object.hasOwn(entry, 'standardizationProjection')
     if (!confirmed || confirmed.documentId !== entry.sourceLocator.documentId
       || confirmed.page !== entry.sourceLocator.page
+      || (hasProjection && (!note || note.documentId !== confirmed.documentId
+        || note.page !== confirmed.page || note.correctedText !== confirmed.text
+        || !validateOcrNumberingProjection(report, entry, materialization, note.correctedText)))
       || (entry.category === 'ocr_misrecognition'
         ? (!note || note.ocrText !== entry.before
-          || !matchesMaterializedOcrText(note.correctedText, entry, materialization, confirmed.followingText))
+          || (!hasProjection
+            && !matchesMaterializedOcrText(note.correctedText, entry, materialization, confirmed.followingText)))
         : entry.before !== (note?.sourceText || confirmed.text))) {
       throw storeError('IMPORT_REVIEW_OCR_CORRECTION_RECEIPT_INVALID', 'Report entry does not match its exact historical OCR item')
     }
@@ -377,7 +384,7 @@ export function validateReviewBundleManifest(input) {
     throw storeError('IMPORT_REVIEW_PROFILE_INVALID', 'Unsupported public-paper import profile', 400)
   }
   if (input.schemaVersion === 'web-import-review-bundle-v3'
-    && manifest.ocrCorrectionReportVersion !== 'agent-ocr-correction-report-v2') {
+    && !['agent-ocr-correction-report-v2', OCR_NUMBERING_REPORT_VERSION].includes(manifest.ocrCorrectionReportVersion)) {
     throw storeError('IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID', 'Unsupported OCR correction report version', 400)
   }
   const computed = reviewBundleDigest(manifest)
@@ -1375,7 +1382,8 @@ export function createImportReviewStore({
     }
     if (status.revision.manifest.schemaVersion === 'web-import-review-bundle-v3') {
       const report = projection.ocrCorrectionReport
-      if (!report || digestJson(report) !== status.revision.manifest.ocrCorrectionReportDigest) {
+      if (!report || report.schemaVersion !== status.revision.manifest.ocrCorrectionReportVersion
+        || digestJson(report) !== status.revision.manifest.ocrCorrectionReportDigest) {
         throw storeError('IMPORT_REVIEW_OCR_CORRECTION_REPORT_INVALID', 'Candidate OCR correction report is missing or stale')
       }
       const ocrRevision = withDb(false, (db) => revisionRow(db.prepare(`
