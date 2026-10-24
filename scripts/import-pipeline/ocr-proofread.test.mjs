@@ -228,18 +228,83 @@ test('excludes English quote fragments from writing commentary and resumes at a 
     [['A completed sample.'], ['Another real sample.']])
 })
 
-function referencesFixture(texts, taskTypes = ['continuation']) {
+function referencesFixture(texts, taskTypes = ['continuation'], { lastQuestion, role = 'official_answers' } = {}) {
   const observations = texts.map((text, i) => ({
     observationId: `o${i}`, region: { x: .1, y: .15 + i * .025, width: .8, height: .02 },
   }))
   return buildSourceReferences({
-    documents: [{ documentId: 'answers', role: 'official_answers', sha256: 'abc' }],
-    groups: taskTypes.map(taskType => ({ groupId: taskType, writingTask: { taskType } })),
+    documents: [{ documentId: 'answers', role, sha256: 'abc' }],
+    groups: [
+      ...(lastQuestion ? [{ questions: [{ sourceNumber: lastQuestion }] }] : []),
+      ...taskTypes.map(taskType => ({ groupId: taskType, writingTask: { taskType } })),
+    ],
   }, { documents: [{ documentId: 'answers', pages: [{ observations }] }] },
   { documents: [{ documentId: 'answers', pages: [{ page: 1,
     orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
   }] }] })
 }
+
+test('a complete letter after the final objective answers establishes a bare application section', () => {
+  for (const lastQuestion of [55, 65]) {
+    const texts = [`${lastQuestion - 1}. a ${lastQuestion}. growing`, '第一节', 'Dear Sam,',
+      'Our club meets on Friday.', 'Please bring seeds.', 'We hope you can join us.',
+      'Yours sincerely,', 'Alex', '第二节', 'Mia opened the garden gate.']
+    const result = referencesFixture(texts, ['application', 'continuation'], { lastQuestion })
+    assert.deepEqual(result.groups.map(g => [g.essays.state, g.essays.entries.length]),
+      [['captured', 1], ['captured', 1]])
+    const entry = result.groups[0].essays.entries[0]
+    assert.equal(entry.sourceLabel, null)
+    assert.deepEqual(entry.paragraphs.map(p => [p.role, p.text]), [
+      ['salutation', texts[2]], ['body', texts.slice(3, 6).join(' ')],
+      ['closing', texts[6]], ['signature', texts[7]],
+    ])
+    assert.deepEqual(entry.paragraphs[0].source, { documentSha256: 'abc',
+      locator: { kind: 'page_region', documentId: 'answers', page: 1,
+        region: { x: .1, y: .2, width: .8, height: .02 } } })
+    assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), [texts[9]])
+  }
+  const wrappedDate = referencesFixture(['65. growing', '第一节', 'Dear Sam,',
+    'Our club meets on May', '30th.', 'Yours sincerely,', 'Alex'], ['application'], { lastQuestion: 65 })
+  assert.deepEqual(wrappedDate.groups[0].essays.entries[0].paragraphs.map(p => p.text),
+    ['Dear Sam,', 'Our club meets on May 30th.', 'Yours sincerely,', 'Alex'])
+})
+
+test('bare sections reject incomplete letters, non-writing material and unbounded letter quotes', t => {
+  const diagnostics = []
+  t.mock.method(console, 'error', message => diagnostics.push(message))
+  t.mock.method(process, 'exit', () => { throw new Error('missing application section') })
+  const letter = ['Dear Sam,', 'Our club meets on Friday.', 'Yours sincerely,', 'Alex']
+  const cases = [
+    ['65. growing', '第一节', 'A story began beside the gate.'],
+    ['65. growing', '第一节', 'Dear Sam,'],
+    ['65. growing', '第一节', ...letter.slice(0, 2)],
+    ['65. growing', '第一节', ...letter.slice(0, 3)],
+    ['65. growing', '第一节', ...letter.slice(0, 3), 'The story ended beside the gate.'],
+    ['65. growing', '第一节', 'Dear Sam,', 'Yours sincerely,', 'Alex'],
+    ['65. growing', '第一节', 'Dear Sam,', 'Our club meets', 'Yours sincerely,', 'Alex'],
+    ['65. growing', '第二节', ...letter],
+    ['65. growing', '第一节', 'Paragraph 1:', ...letter],
+    ['65. growing', '第一节', 'Dear Sam,', '第二节', ...letter.slice(1)],
+    ['65. growing', '第一节', 'Dear Sam,', '21. A reading question.', ...letter.slice(1)],
+    ['65. growing', '第一节', 'Dear Sam,', '答案解析', ...letter.slice(1)],
+    ['65. growing', '第一节', 'Dear Sam,', 'Text 1', ...letter.slice(1)],
+    ['65. growing', '第一节', 'Dear Sam,', 'M: Our club meets on Friday.', ...letter.slice(2)],
+    ['65. growing', '第一节', ...letter, 'The story continues after the quoted letter.'],
+    ['64. growing', '第一节', ...letter],
+    ['第一节', ...letter],
+    ...['第二部分 阅读', '第一部分 听力', '第三部分 语言运用', '听力原文', 'Text 1', '答案解析']
+      .map(heading => ['65. growing', heading, '第一节', ...letter]),
+  ]
+  for (const texts of cases) {
+    assert.throws(() => referencesFixture(texts, ['application'], { lastQuestion: 65 }),
+      /missing application section/, JSON.stringify(texts))
+    assert.match(diagnostics.at(-1), /No answer-document section found for application/)
+  }
+  assert.throws(() => referencesFixture(['65. growing', '第一节', ...letter], ['application'],
+    { lastQuestion: 65, role: 'question_and_answers' }), /missing application section/)
+  assert.throws(() => referencesFixture(['65. growing', '第一节', ...letter], ['application']),
+    /missing application section/)
+})
 
 test('Arabic-numbered Chinese story commentary does not become an unlabeled reference', () => {
   const result = referencesFixture([

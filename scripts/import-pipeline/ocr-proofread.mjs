@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v3'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v4'
 
 function fail(message) {
   console.error(message)
@@ -1068,6 +1068,48 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
   return referenceBoundaryFromFacts(previous, computeLineFacts(line), margin, previousMargin)
 }
 
+// A standalone key can omit both the writing-part heading and sample label.
+// Admit only a complete letter immediately after its final objective answer;
+// never borrow a closing/signature across another section, prompt or transcript.
+function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
+  if (!lastQuestion || bareSectionNumber(factsFor(lines[index]).nfkc) !== '一') return false
+  const previous = lines[index - 1] && factsFor(lines[index - 1])
+  if (!previous || !/^\d+\s*[.．、]\s*[A-Za-z]/u.test(previous.text) || previous.hasHan) return false
+  const answers = [...previous.text.matchAll(/(?:^|\s)(\d+)\s*[.．、]\s*/gu)]
+  if (Number(answers.at(-1)?.[1]) !== lastQuestion) return false
+  const salutation = lines[index + 1] && factsFor(lines[index + 1])
+  if (!salutation || !matchesLineRole('paragraph.salutation', salutation)) return false
+  const boundary = line => {
+    const facts = factsFor(line)
+    return line.figure || line.table || bareSectionNumber(facts.nfkc)
+      || firstLineRole('writing-section', facts) || firstLineRole('scoring-section', facts)
+      || firstLineRole('entry-label', facts) || matchesLineRole('writing.part-boundary', facts)
+      || matchesLineRole('writing.explanations', facts, { sectionCount: 1 })
+      || matchesLineRole('writing.continuation-prompt', facts)
+      || matchesLineRole('paragraph.numbered', facts) || matchesLineRole('transcript.speaker', facts)
+      || matchesLineRole('writing.student-script', facts) || /^\d+\s*[.．、)]/u.test(facts.trimmed)
+  }
+  let body = ''
+  for (let i = index + 2; i < lines.length; i++) {
+    const line = lines[i]
+    if (boundary(line)) return false
+    const facts = factsFor(line)
+    if (matchesLineRole('paragraph.closing', facts)) {
+      const signature = lines[i + 1]
+      return /[.!?]["”']?\s*$/u.test(body) && Boolean(signature)
+        && !boundary(signature)
+        && /^\p{Lu}[\p{Script=Latin}’'-]*\.?(?:\s+\p{Lu}[\p{Script=Latin}’'-]*\.?){0,3}$/u.test(factsFor(signature).trimmed)
+        && (!lines[i + 2] || Boolean(boundary(lines[i + 2])))
+    }
+    // A date can wrap onto its own OCR line ("May" / "30th.").
+    const wrappedDate = body && /^(?:[1-9]|[12]\d|3[01])(?:st|nd|rd|th)\b/iu.test(facts.trimmed)
+    if (facts.hasHan || (!facts.startsEnglishOrQuote && !wrappedDate)
+      || matchesLineRole('paragraph.salutation', facts)) return false
+    body += ` ${facts.text}`
+  }
+  return false
+}
+
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation, { sourceDocuments = [] } = {}) {
   const answerDocuments = materialization.documents.filter((document) =>
@@ -1163,6 +1205,9 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
   const structuredScoring = pages.some(page =>
     page.visualClassifications?.some(visual => visual.classification === 'semantic_table'))
   const scope = createWritingScope(sections)
+  const lastObjectiveQuestion = Math.max(0, ...materialization.groups
+    .flatMap(group => group.writingTask ? [] : (group.questions || []).map(question => question.sourceNumber))
+    .filter(Number.isInteger))
   for (const [lineIndex, line] of lines.entries()) {
     if (scope.ended) break
     if (line.figure) {
@@ -1188,13 +1233,15 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     }
     // A heading can share its OCR item with a sample label. Some answer books
     // omit the writing-part heading entirely; require an adjacent sample label
-    // before treating a bare "第一节" outside writing as a writing section.
+    // or the tightly bounded standalone-key letter before opening writing.
     const inlineSample = inlineSampleParts(facts.text)
     const [heading, ...rest] = inlineSample || facts.text.split('\n')
     const sectionText = writingSectionText(facts, heading, rest, scope.inWriting)
     const mergedText = rest.length === 1 ? rest[0].trim() : null
     const mergedLabel = mergedText && matchesLineRole('entry.sample-label', computeLineFacts({ text: mergedText })) ? mergedText : null
-    const bare = (scope.inWriting || mergedLabel || (lines[lineIndex + 1]
+    const unlabeledApplicationLetter = answerDocument.role === 'official_answers' && !sections.size && !scope.inWriting
+      && completeApplicationLetter(lines, lineIndex, lastObjectiveQuestion, factsFor)
+    const bare = (scope.inWriting || mergedLabel || unlabeledApplicationLetter || (lines[lineIndex + 1]
       && matchesLineRole('entry.sample-label', factsFor(lines[lineIndex + 1]))))
       && bareSectionNumber((mergedLabel ? heading : sectionText).normalize('NFKC'))
     const started = bare ? (bare === '一' ? 'application' : 'continuation')
