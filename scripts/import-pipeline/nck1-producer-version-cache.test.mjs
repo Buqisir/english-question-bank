@@ -20,13 +20,13 @@ const pdfDocuments = ['question_source', 'official_answers'].map((role, index) =
     pageCount: 1, byteLength: bytes.length, sha256: sha256(bytes), path: `source-${index + 1}.pdf`, bytes }
 })
 const variants = [
-  { name: 'DOCX', carrier: 'docx', oldVersion: 'nck1-docx-materialization-producer-v19',
+  { name: 'DOCX', carrier: 'docx', oldVersion: 'nck1-docx-materialization-producer-v20',
     version: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION, digest: nck1DocxProducerSourceDigest },
-  { name: 'PDF', carrier: 'pdf', oldVersion: 'nck1-pdf-materialization-producer-v16',
+  { name: 'PDF', carrier: 'pdf', oldVersion: 'nck1-pdf-materialization-producer-v17',
     version: NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION, digest: nck1PdfProducerSourceDigest },
   ...[1, 2, 3].map(confirmationVersion => ({
     name: `OCR confirmation v${confirmationVersion}`, carrier: 'ocr',
-    oldVersion: `nck1-ocr-materialization-producer-v${confirmationVersion === 3 ? 24 : 23}`,
+    oldVersion: `nck1-ocr-materialization-producer-v${confirmationVersion === 3 ? 26 : 25}`,
     confirmation: { schemaVersion: `nck1-ocr-source-confirmation-v${confirmationVersion}` },
     version: nck1OcrProducerVersion({ schemaVersion: `nck1-ocr-source-confirmation-v${confirmationVersion}` }),
     digest: nck1OcrProducerSourceDigest,
@@ -92,7 +92,8 @@ for (const variant of variants) test(`${variant.name} retains old receipts witho
       assert.throws(() => runNck1MaterializationJob(job), /refusing to overwrite/)
       paths.forEach((file, index) => assert.deepEqual(readFileSync(file), retained[index]))
       if (variant.carrier === 'ocr') {
-        const otherVersion = `nck1-ocr-materialization-producer-v${producerVersion.endsWith('24') ? 23 : 24}`
+        const oldNumber = Number(producerVersion.split('-v').at(-1))
+        const otherVersion = `nck1-ocr-materialization-producer-v${oldNumber % 2 ? oldNumber + 1 : oldNumber - 1}`
         const otherDigest = variant.digest(job.documents, { ...job.inputs, producerVersion: otherVersion })
         const otherPartition = { ...partition, producerVersion: otherVersion, producerSourceDigest: otherDigest }
         writeFileSync(receiptPath, JSON.stringify({ ...receipt, producerVersion: otherVersion,
