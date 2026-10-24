@@ -280,11 +280,13 @@ for (const [name, boundary] of [
     for (const continuation of [[], ['第二节', 'Mia opened the garden gate.']]) {
       const result = referencesFixture(['65. growing', '第一节', ...letter,
         boundary, 'An unrelated story follows.', '参考范文', 'Another unrelated sample.',
+        '评分标准', '这段评分文字已经越过边界。',
         ...continuation], continuation.length ? ['application', 'continuation'] : ['application'],
       { lastQuestion: 65 })
       const application = result.groups[0].essays
       assert.equal(application.state, 'captured')
       assert.equal(application.entries.length, 1)
+      assert.equal(result.groups[0].scoring.state, 'not_supplied')
       assert.deepEqual(application.entries[0].paragraphs.map(p => [p.role, p.text]),
         [['salutation', letter[0]], ['body', letter[1]], ['closing', letter[2]], ['signature', letter[3]]])
       assert.deepEqual(application.entries[0].paragraphs.at(-1).source, { documentSha256: 'abc',
@@ -295,6 +297,51 @@ for (const [name, boundary] of [
         assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), [continuation[1]])
       }
     }
+  })
+}
+
+test('an admitted bare-section letter preserves explicit scoring labels and exact sources after its signature', () => {
+  const letter = ['Dear Sam,', 'Our club meets on Friday.', 'Yours sincerely,', 'Alex']
+  const scoring = ['1. 本题总分为15分，按五个档次给分。', '2. 内容完整，语言准确。']
+  for (const label of ['评分标准', '评分建议']) {
+    for (const taskHeading of [[], ['应用文评分细则']]) {
+      const texts = ['65. growing', '第一节', ...letter, ...taskHeading, label, ...scoring]
+      const result = referencesFixture(texts, ['application'], { lastQuestion: 65 })
+      const named = referencesFixture(texts.map((text, i) => i === 1 ? '第一节 应用文' : text),
+        ['application'], { lastQuestion: 65 })
+      assert.deepEqual(result.groups, named.groups)
+      assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text), letter)
+      const captured = result.groups[0].scoring
+      assert.equal(captured.state, 'captured')
+      assert.equal(captured.entries.length, 1)
+      assert.equal(captured.entries[0].sourceLabel, label)
+      assert.equal(captured.entries[0].paragraphs.map(p => p.text).join(' '), scoring.join(' '))
+      const labelIndex = texts.indexOf(label)
+      assert.deepEqual(captured.entries[0].labelSource, { documentSha256: 'abc',
+        locator: { kind: 'page_region', documentId: 'answers', page: 1,
+          region: { x: .1, y: Number((.15 + labelIndex * .025).toFixed(6)), width: .8, height: .02 } } })
+    }
+  }
+})
+
+for (const [name, boundary] of [
+  ['question number', '21. A reading question.'],
+  ['listening speaker', 'M: A listening speech.'],
+  ['numbered continuation paragraph', 'Paragraph 1:'],
+  ['continuation prompt', '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。'],
+]) {
+  test(`a ${name} after scoring ends only the admitted application's references`, () => {
+    const letter = ['Dear Sam,', 'Our club meets on Friday.', 'Yours sincerely,', 'Alex']
+    const scoring = '1. 本题总分为15分，按五个档次给分。'
+    const result = referencesFixture(['65. growing', '第一节', ...letter, '评分标准', scoring,
+      boundary, 'An unrelated story follows.', '评分建议', '边界后不得重新采集。',
+      '第二节', 'Mia opened the garden gate.'], ['application', 'continuation'], { lastQuestion: 65 })
+    assert.deepEqual(result.groups[0].essays.entries.map(e => e.paragraphs.map(p => p.text)), [letter])
+    assert.equal(result.groups[0].scoring.state, 'captured')
+    assert.deepEqual(result.groups[0].scoring.entries.map(e => [e.sourceLabel, e.paragraphs.map(p => p.text)]),
+      [['评分标准', [scoring]]])
+    assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text),
+      ['Mia opened the garden gate.'])
   })
 }
 

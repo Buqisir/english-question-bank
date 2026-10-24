@@ -1111,6 +1111,37 @@ function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
   return false
 }
 
+function applicationLetterReferenceLines(section, factsFor) {
+  if (!section.letterEnd) return section.lines
+  const selected = []
+  let afterLetter = false
+  let inScoring = false
+  for (const line of section.lines) {
+    if (afterLetter) {
+      if (line.figure || line.table) {
+        if (!inScoring) break
+      } else {
+        const facts = factsFor(line)
+        const label = firstLineRole('entry-label', facts)
+        if (label && firstLineRole('entry-kind', facts)?.value === 'scoring') {
+          inScoring = true
+        } else if (!inScoring || label
+          || matchesLineRole('writing.part-boundary', facts)
+          || matchesLineRole('writing.explanations', facts, { sectionCount: 1 })
+          || matchesLineRole('writing.continuation-prompt', facts)
+          || matchesLineRole('paragraph.numbered', facts)
+          || matchesLineRole('transcript.speaker', facts)
+          || matchesLineRole('writing.student-script', facts)
+          // Preserve numbered Chinese scoring points using their existing role.
+          || (/^\d+\s*[.．、)]/u.test(facts.trimmed) && !matchesLineRole('writing.commentary', facts))) break
+      }
+    }
+    selected.push(line)
+    if (line === section.letterEnd) afterLetter = true
+  }
+  return selected
+}
+
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation, { sourceDocuments = [] } = {}) {
   const answerDocuments = materialization.documents.filter((document) =>
@@ -1281,12 +1312,9 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     const taskType = group.writingTask.taskType
     const section = sections.get(taskType)
     if (!section) fail(`No answer-document section found for ${taskType}`)
-    // The unlabeled-letter admission proves only the text through its signature.
-    // Apply that same endpoint to both paragraph capture and margin calculation;
-    // later questions, speech and prompts cannot resume this reference.
-    const sectionLines = section.letterEnd
-      ? section.lines.filter(line => sourceOrder.get(line) <= sourceOrder.get(section.letterEnd))
-      : section.lines
+    // The signature ends only the admitted model answer. Explicit scoring may
+    // follow, but questions, speech and prompts terminate both capture lanes.
+    const sectionLines = applicationLetterReferenceLines(section, factsFor)
     // Derive English sample margins within this writing section, not from unrelated
     // scoring tables, watermarks or the listening column elsewhere on the same page.
     const margins = new Map()
