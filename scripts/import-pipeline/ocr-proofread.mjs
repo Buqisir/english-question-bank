@@ -1096,10 +1096,11 @@ function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
     const facts = factsFor(line)
     if (matchesLineRole('paragraph.closing', facts)) {
       const signature = lines[i + 1]
-      return /[.!?]["”']?\s*$/u.test(body) && Boolean(signature)
+      const complete = /[.!?]["”']?\s*$/u.test(body) && Boolean(signature)
         && !boundary(signature)
         && /^\p{Lu}[\p{Script=Latin}’'-]*\.?(?:\s+\p{Lu}[\p{Script=Latin}’'-]*\.?){0,3}$/u.test(factsFor(signature).trimmed)
         && (!lines[i + 2] || Boolean(boundary(lines[i + 2])))
+      return complete ? { end: signature } : null
     }
     // A date can wrap onto its own OCR line ("May" / "30th.").
     const wrappedDate = body && /^(?:[1-9]|[12]\d|3[01])(?:st|nd|rd|th)\b/iu.test(facts.trimmed)
@@ -1253,6 +1254,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     }
     if (started) {
       scope.startTask(started)
+      if (unlabeledApplicationLetter) scope.current.letterEnd = unlabeledApplicationLetter.end
       if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
       continue
     }
@@ -1279,11 +1281,17 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     const taskType = group.writingTask.taskType
     const section = sections.get(taskType)
     if (!section) fail(`No answer-document section found for ${taskType}`)
+    // The unlabeled-letter admission proves only the text through its signature.
+    // Apply that same endpoint to both paragraph capture and margin calculation;
+    // later questions, speech and prompts cannot resume this reference.
+    const sectionLines = section.letterEnd
+      ? section.lines.filter(line => sourceOrder.get(line) <= sourceOrder.get(section.letterEnd))
+      : section.lines
     // Derive English sample margins within this writing section, not from unrelated
     // scoring tables, watermarks or the listening column elsewhere on the same page.
     const margins = new Map()
-    for (const page of new Set(section.lines.map((line) => line.page))) {
-      const local = section.lines.filter((line) => line.page === page && !line.figure)
+    for (const page of new Set(sectionLines.map((line) => line.page))) {
+      const local = sectionLines.filter((line) => line.page === page && !line.figure)
       const english = local.filter((line) => matchesLineRole('writing.margin-body', factsFor(line)))
       const body = english.length ? english : local
       margins.set(page, { left: Math.min(...body.map((line) => line.left)),
@@ -1310,7 +1318,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       capture.pause()
       review.push({ itemId: line.itemId, issue: `${reason}; skipped until ${until}` })
     }
-    for (const line of section.lines) {
+    for (const line of sectionLines) {
       if (capture.ended) break
       if (line.figure) {
         const ownership = scoringScopes.get(line.figure.afterItem.itemId)

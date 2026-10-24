@@ -269,6 +269,35 @@ test('a complete letter after the final objective answers establishes a bare app
     ['Dear Sam,', 'Our club meets on May 30th.', 'Yours sincerely,', 'Alex'])
 })
 
+for (const [name, boundary] of [
+  ['question number', '21. A reading question.'],
+  ['listening speaker', 'M: A listening speech.'],
+  ['numbered continuation paragraph', 'Paragraph 1:'],
+  ['continuation prompt', '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。'],
+]) {
+  test(`a ${name} after the signature ends the admitted bare-section letter capture`, () => {
+    const letter = ['Dear Sam,', 'Our club meets on Friday.', 'Yours sincerely,', 'Alex']
+    for (const continuation of [[], ['第二节', 'Mia opened the garden gate.']]) {
+      const result = referencesFixture(['65. growing', '第一节', ...letter,
+        boundary, 'An unrelated story follows.', '参考范文', 'Another unrelated sample.',
+        ...continuation], continuation.length ? ['application', 'continuation'] : ['application'],
+      { lastQuestion: 65 })
+      const application = result.groups[0].essays
+      assert.equal(application.state, 'captured')
+      assert.equal(application.entries.length, 1)
+      assert.deepEqual(application.entries[0].paragraphs.map(p => [p.role, p.text]),
+        [['salutation', letter[0]], ['body', letter[1]], ['closing', letter[2]], ['signature', letter[3]]])
+      assert.deepEqual(application.entries[0].paragraphs.at(-1).source, { documentSha256: 'abc',
+        locator: { kind: 'page_region', documentId: 'answers', page: 1,
+          region: { x: .1, y: .275, width: .8, height: .02 } } })
+      if (continuation.length) {
+        assert.equal(result.groups[1].essays.state, 'captured')
+        assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), [continuation[1]])
+      }
+    }
+  })
+}
+
 test('bare sections reject incomplete letters, non-writing material and unbounded letter quotes', t => {
   const diagnostics = []
   t.mock.method(console, 'error', message => diagnostics.push(message))
