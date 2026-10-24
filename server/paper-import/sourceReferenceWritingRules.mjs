@@ -8,8 +8,12 @@ export const WRITING_SECTION = [
 ]
 // Numbering varies between answer books. Only the explicit task word gives
 // these fully anchored headings their scope; NFKC is a matching view only.
-export const NUMBERED_APPLICATION_SECTION = /^\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)\s*应用文(?:写作)?\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
-export const NUMBERED_CONTINUATION_SECTION = /^\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)\s*读后续写\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
+export const NUMBERED_APPLICATION_SECTION = /^(?:\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)|[1-9]\d?\.)\s*应用文(?:写作)?\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
+export const NUMBERED_CONTINUATION_SECTION = /^(?:\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)|[1-9]\d?\.)\s*读后续写\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
+export const WRITING_SCORING_SECTION = [
+  ['application', /^应用文评分(?:细则|标准)\s*[:：]?$/u],
+  ['continuation', /^(?:读后)?续写评分(?:细则|标准)\s*[:：]?$/u],
+]
 export const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
 // Reading explanations can start directly after samples, without a part title.
 export const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u

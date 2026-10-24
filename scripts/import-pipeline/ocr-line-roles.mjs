@@ -2,7 +2,7 @@
 // Rules recognize candidates only: callers retain state transitions and output assembly.
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
-  WRITING_PART, WRITING_SECTION, ANSWER_EXPLANATION_START,
+  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
@@ -11,10 +11,6 @@ const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
 const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|语言|[一二三四五六]、)/u
 const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
 
-const WRITING_SCORING_SECTION = [
-  ['application', /^应用文评分细则\s*[:：]?$/u],
-  ['continuation', /^读后续写评分细则\s*[:：]?$/u],
-]
 // Some keys head the samples only with "第一节（满分15分）".
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
 
@@ -152,6 +148,8 @@ export const LINE_ROLE_RULES = Object.freeze([
     'Possible Version 2', 'Possible Version 2 describes a design.'),
   rule('entry.arabic-numbered', 'entry-label', 70, f => NUMBERED_ENTRY_LABEL.test(f.nfkc),
     '4. 评分细则', '4. 评分时应考虑内容。'),
+  rule('entry.task-scoring', 'entry-label', 80, f => Boolean(firstLineRole('scoring-section', f)),
+    '续写评分标准', '续写评分标准分析'),
   pattern('entry.scoring-kind', 'entry-kind', 10, SCORING_LABEL, '二、评分原则', '参考范文', { value: 'scoring' }),
   pattern('entry.essay-kind', 'entry-kind', 20, ESSAY_LABEL, '参考范文', '二、评分原则', { value: 'essays' }),
   rule('entry.sample-label', 'sample-label', 10, f =>

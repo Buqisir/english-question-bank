@@ -16,6 +16,7 @@ test('scoring scope shares exact parenthesized task headings and numbered scorin
     ['（二）应用文写作', 'application'], ['（三）读后续写（满分25分）', 'continuation'],
     ['（三）应用文写作', 'application'], ['（二）读后续写（满分25分）', 'continuation'],
     ['（２）应用文写作', 'application'], ['（３）读后续写（满分２５分）', 'continuation'],
+    ['66. 应用文', 'application'], ['６６． 应用文', 'application'], ['67. 读后续写', 'continuation'],
   ]) for (const rawLabel of ['4. 评分细则', '４． 评分原则：']) {
     for (const text of new Set([heading, heading.normalize('NFKC')])) {
       const scopes = scoringScopes([text, rawLabel, '按内容和语言给分。'])
@@ -34,6 +35,25 @@ test('scoring scope shares exact parenthesized task headings and numbered scorin
   assert.equal(switched.get('item-2').taskType, 'continuation')
   assert.equal(switched.get('item-4'), null, 'new task must not borrow the previous scoring label')
   assert.equal(switched.get('item-6').taskType, 'application')
+})
+
+test('exact task scoring standards share ownership between source extraction and scoring admission', () => {
+  for (const [heading, task] of [
+    ['应用文评分标准', 'application'], ['读后续写评分标准：', 'continuation'],
+    ['续写评分标准', 'continuation'], ['续写评分细则', 'continuation'],
+  ]) {
+    const facts = computeLineFacts({ text: heading })
+    assert.equal(firstLineRole('scoring-section', facts)?.value, task)
+    assert.equal(firstLineRole('entry-kind', facts)?.value, 'scoring')
+    assert(firstLineRole('entry-label', facts))
+    assert.deepEqual(scoringScopes([heading, '评分正文']).get('item-1'), {
+      taskType: task, labelItemId: 'item-0', sourceLabel: heading,
+    })
+  }
+  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。']) {
+    assert.equal(firstLineRole('scoring-section', computeLineFacts({ text: heading })), null)
+    assert.equal(scoringScopes([heading, '评分正文']).get('item-1'), null)
+  }
 })
 
 test('scoring scope rejects numbered near misses and closes at sample and explanation boundaries', () => {

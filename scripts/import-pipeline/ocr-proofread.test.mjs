@@ -228,9 +228,11 @@ test('excludes English quote fragments from writing commentary and resumes at a 
     [['A completed sample.'], ['Another real sample.']])
 })
 
-function referencesFixture(texts, taskTypes = ['continuation'], { lastQuestion, role = 'official_answers' } = {}) {
+function referencesFixture(texts, taskTypes = ['continuation'], {
+  lastQuestion, role = 'official_answers', regions = [], visualClassifications = [],
+} = {}) {
   const observations = texts.map((text, i) => ({
-    observationId: `o${i}`, region: { x: .1, y: .15 + i * .025, width: .8, height: .02 },
+    observationId: `o${i}`, region: { x: .1, y: .15 + i * .025, width: .8, height: .02, ...regions[i] },
   }))
   return buildSourceReferences({
     documents: [{ documentId: 'answers', role, sha256: 'abc' }],
@@ -241,8 +243,93 @@ function referencesFixture(texts, taskTypes = ['continuation'], { lastQuestion, 
   }, { documents: [{ documentId: 'answers', pages: [{ observations }] }] },
   { documents: [{ documentId: 'answers', pages: [{ page: 1,
     orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
+    visualClassifications,
   }] }] })
 }
+
+test('numbered tasks and task scoring standards bind tables without mixing the following letter', () => {
+  const texts = ['66. 应用文', '应用文评分标准', '本题总分为15分。',
+    'Dear Sam,', 'Our club meets on Friday.', 'Yours,', 'Alex',
+    '续写评分标准', '二、评分原则', '本题总分为25分。', '档次', '描述', '第五档', '与所给短文融洽度高。']
+  const result = referencesFixture(texts, ['application', 'continuation'], {
+    visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-1:table-1',
+      rows: [{ cells: [['i10'], ['i11']] }, { cells: [['i12'], ['i13']] }] }],
+  })
+  const [app, cont] = result.groups
+  assert.deepEqual(app.essays.entries[0].paragraphs.map(p => [p.role, p.text]), [
+    ['salutation', 'Dear Sam,'], ['body', 'Our club meets on Friday.'],
+    ['closing', 'Yours,'], ['signature', 'Alex'],
+  ])
+  assert.equal(app.scoring.entries[0].sourceLabel, '应用文评分标准')
+  assert.deepEqual(app.scoring.entries[0].blocks.map(b => b.paragraph.text), ['本题总分为15分。'])
+  assert.equal(cont.essays.state, 'not_supplied')
+  assert.equal(cont.scoring.entries[0].sourceLabel, '二、评分原则')
+  const table = cont.scoring.entries[0].blocks.at(-1)
+  assert.equal(table.kind, 'table')
+  assert.deepEqual(table.rows.map(row => row.map(cell => cell.text)),
+    [['档次', '描述'], ['第五档', '与所给短文融洽度高。']])
+  assert.equal(table.rows[1][1].source.locator.documentId, 'answers')
+})
+
+test('task mentions and unscoped tables cannot invent writing ownership', t => {
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unscoped source') })
+  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。', '评分标准']) {
+    assert.throws(() => referencesFixture([heading, '档次', '描述'], ['application'], {
+      visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-1:table-1',
+        rows: [{ cells: [['i1'], ['i2']] }] }],
+    }), /unscoped source/)
+  }
+})
+
+test('an incomplete salutation in a rubric cannot manufacture an official essay', () => {
+  const result = referencesFixture(['应用文评分标准', '格式示例：', 'Dear Sam,',
+    'Yours,', 'Alex', '二、评分原则', '注意内容完整。'], ['application'])
+  assert.equal(result.groups[0].essays.state, 'not_supplied')
+  assert(result.groups[0].scoring.entries.some(e => e.paragraphs.some(p => p.text === 'Dear Sam,')))
+})
+
+test('standalone sample numbers before a repeated inset title preserve separate application essays', () => {
+  const texts = ['第一节 应用文', '（1）', 'Our School Garden',
+    'Our class planted herbs.', 'We shared the harvest.',
+    '（2）', 'Our School Garden', 'Our team grew beans.', 'We cooked them together.']
+  const regions = texts.map((_, i) => [2, 6].includes(i)
+    ? { x: .35, width: .3 } : [3, 4, 7, 8].includes(i) ? { x: .14, width: .76 } : {})
+  const entries = referencesFixture(texts, ['application'], { regions }).groups[0].essays.entries
+  assert.equal(entries.length, 2)
+  assert.deepEqual(entries.map(e => e.sourceLabel), ['（1）', '（2）'])
+  assert.deepEqual(entries.map(e => e.paragraphs.map(p => [p.role, p.text])), [
+    [['title', texts[2]], ['body', texts[3]], ['body', texts[4]]],
+    [['title', texts[6]], ['body', texts[7]], ['body', texts[8]]],
+  ])
+  for (const [index, lineIndex] of [1, 5].entries()) {
+    assert.equal(entries[index].labelSource.locator.region.y, .15 + lineIndex * .025)
+    assert.equal(entries[index].paragraphs[0].source.locator.region.x, .35)
+  }
+})
+
+test('ordinary numbering, unmatched titles, continuation and scoring cannot create numbered application samples', () => {
+  for (const [task, middle, title, inset] of [
+    ['application', '(2) We shared the harvest.', 'Our School Garden', true],
+    ['application', '(2)', 'A Different Heading', true],
+    ['application', '(3)', 'Our School Garden', true],
+    ['application', '(2)', 'Our School Garden', false],
+    ['continuation', '(2)', 'Our School Garden', true],
+  ]) {
+    const texts = [task === 'application' ? '第一节 应用文' : '第二节 读后续写',
+      '(1)', 'Our School Garden', 'Our class planted herbs.', middle, title, 'We shared the harvest.']
+    const regions = texts.map((_, i) => inset && [2, 5].includes(i) ? { x: .35, width: .3 } : {})
+    const result = referencesFixture(texts, [task], { regions })
+    assert.equal(result.groups[0].essays.entries.length, 1)
+    assert(!result.groups[0].essays.entries[0].paragraphs.some(p => p.role === 'title'))
+  }
+  const texts = ['应用文评分标准', '(1)', 'Our School Garden', 'Our class planted herbs.',
+    '(2)', 'Our School Garden', 'We shared the harvest.']
+  const regions = texts.map((_, i) => [2, 5].includes(i) ? { x: .35, width: .3 } : {})
+  const scoring = referencesFixture(texts, ['application'], { regions }).groups[0]
+  assert.equal(scoring.essays.state, 'not_supplied')
+  assert.equal(scoring.scoring.entries.length, 1)
+})
 
 test('a complete letter after the final objective answers establishes a bare application section', () => {
   for (const lastQuestion of [55, 65]) {

@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v4'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v6'
 
 function fail(message) {
   console.error(message)
@@ -1077,7 +1077,11 @@ function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
   if (!previous || !/^\d+\s*[.．、]\s*[A-Za-z]/u.test(previous.text) || previous.hasHan) return false
   const answers = [...previous.text.matchAll(/(?:^|\s)(\d+)\s*[.．、]\s*/gu)]
   if (Number(answers.at(-1)?.[1]) !== lastQuestion) return false
-  const salutation = lines[index + 1] && factsFor(lines[index + 1])
+  return completeSourceLetter(lines, index + 1, factsFor)
+}
+
+function completeSourceLetter(lines, index, factsFor) {
+  const salutation = lines[index] && factsFor(lines[index])
   if (!salutation || !matchesLineRole('paragraph.salutation', salutation)) return false
   const boundary = line => {
     const facts = factsFor(line)
@@ -1090,7 +1094,7 @@ function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
       || matchesLineRole('writing.student-script', facts) || /^\d+\s*[.．、)]/u.test(facts.trimmed)
   }
   let body = ''
-  for (let i = index + 2; i < lines.length; i++) {
+  for (let i = index + 1; i < lines.length; i++) {
     const line = lines[i]
     if (boundary(line)) return false
     const facts = factsFor(line)
@@ -1140,6 +1144,27 @@ function applicationLetterReferenceLines(section, factsFor) {
     if (line === section.letterEnd) afterLetter = true
   }
   return selected
+}
+
+// A bare "(1)" can also be prose or a rubric point. Only a consecutive
+// application-sample sequence with the same inset English title supplies
+// enough evidence to treat those numbers as labels. Keep the source spelling.
+function numberedApplicationSamples(lines, factsFor) {
+  const candidates = []
+  for (const [index, line] of lines.entries()) {
+    if (line.figure || line.table) continue
+    const number = /^\(([1-9]\d?)\)$/u.exec(factsFor(line).nfkc)
+    const title = lines[index + 1], body = lines[index + 2]
+    if (!number || !title || !body || title.figure || title.table || body.figure || body.table) continue
+    const titleFacts = factsFor(title), bodyFacts = factsFor(body)
+    if (titleFacts.hasHan || !titleFacts.startsUpperOrQuote || /[.!?:：]$/u.test(titleFacts.trimmed)
+      || !bodyFacts.startsEnglishOrQuote || bodyFacts.hasHan
+      || !(title.left > body.left && title.right < body.right)) continue
+    candidates.push({ line, title, number: Number(number[1]) })
+  }
+  if (candidates.length < 2 || candidates.some((item, index) =>
+    item.number !== index + 1 || item.title.text !== candidates[0].title.text)) return new Map()
+  return new Map(candidates.map(({ line, title }) => [line, title]))
 }
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
@@ -1281,6 +1306,10 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     const scoringSection = firstLineRole('scoring-section', facts)?.value
     if (scoringSection) {
       scope.startTask(scoringSection, { reuse: true })
+      // This task heading also labels its rubric. A following explicit entry
+      // label owns the body instead; avoid manufacturing an empty parent entry.
+      const next = lines[lineIndex + 1]
+      if (!next || !firstLineRole('entry-label', factsFor(next))) scope.current.lines.push(line)
       continue
     }
     if (started) {
@@ -1315,6 +1344,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     // The signature ends only the admitted model answer. Explicit scoring may
     // follow, but questions, speech and prompts terminate both capture lanes.
     const sectionLines = applicationLetterReferenceLines(section, factsFor)
+    const numberedSamples = taskType === 'application' ? numberedApplicationSamples(sectionLines, factsFor) : new Map()
+    const sampleTitles = new Set(numberedSamples.values())
     // Derive English sample margins within this writing section, not from unrelated
     // scoring tables, watermarks or the listening column elsewhere on the same page.
     const margins = new Map()
@@ -1346,7 +1377,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       capture.pause()
       review.push({ itemId: line.itemId, issue: `${reason}; skipped until ${until}` })
     }
-    for (const line of sectionLines) {
+    for (const [lineIndex, line] of sectionLines.entries()) {
       if (capture.ended) break
       if (line.figure) {
         const ownership = scoringScopes.get(line.figure.afterItem.itemId)
@@ -1370,6 +1401,16 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         continue
       }
       const facts = factsFor(line)
+      // Some keys place an unlabelled complete application letter after their
+      // rubric. A salutation fragment alone cannot end scoring capture.
+      if (taskType === 'application' && capture.kind === 'scoring'
+        && completeSourceLetter(sectionLines, lineIndex, factsFor)) {
+        flush()
+        entry = null
+        capture.start('essays')
+        previous = null
+        previousLocation = null
+      }
       // Reprinted question material and paragraph starters are not samples.
       // Unlike commentary, their English body cannot restart capture: only
       // the next explicit source entry label can leave this prompt scope.
@@ -1385,8 +1426,9 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         review.push({ itemId: line.itemId, issue: 'student-script column ends this writing section’s reference capture' })
         continue
       }
-      if (firstLineRole('entry-label', facts)) {
-        const kind = firstLineRole('entry-kind', facts)?.value || null
+      const numberedSample = capture.kind !== 'scoring' && numberedSamples.has(line)
+      if (firstLineRole('entry-label', facts) || numberedSample) {
+        const kind = numberedSample ? 'essays' : firstLineRole('entry-kind', facts)?.value || null
         if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }
         flush()
         capture.start(kind)
@@ -1427,7 +1469,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         if (lineRegion && box.y < lineRegion.y + lineRegion.height && box.y + box.height > lineRegion.y
           && box.x >= line.right && box.x < margin.right) margin.right = box.x
       }
-      const special = firstLineRole('paragraph-role', facts)?.value || null
+      const special = entry.kind === 'essays' && sampleTitles.has(line)
+        ? 'title' : firstLineRole('paragraph-role', facts)?.value || null
       const afterClosing = previous?.role === 'closing'
       const decision = decideLineJoin({
         content: 'reference', previous, current: facts,
