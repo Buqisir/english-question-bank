@@ -503,7 +503,25 @@ test('captures three official examples per task and stops at each numbered stude
     [[['Dear Sam,', 'Our club will plant herbs.'], ['Dear Sam,', 'Please join our garden walk.'],
       ['Dear Sam,', 'We could visit the greenhouse.']],
     [['Ada brought a watering can.'], ['A tiny green shoot appeared.'], ['They met beside the greenhouse.']]])
-  assert.deepEqual(result.groups.map(g => g.scoring.entries), [[], []])
+  // #579 recognizes the explicit parenthesized rubric; retain its exact source capture.
+  assert.deepEqual(result.groups.map(g => g.scoring.entries), [[{
+    referenceId: 'source-score-app-1',
+    authority: 'source_reference',
+    sourceLabel: '（二）评分说明',
+    labelSource: { documentSha256: 'abc', locator: {
+      kind: 'page_region', documentId: 'answers', page: 1,
+      region: { x: .1, y: .225, width: .8, height: .02 },
+    } },
+    paragraphs: [{
+      paragraphId: 'source-score-app-1-p1',
+      role: 'body',
+      text: '注意表达清楚。 (四)作答示例',
+      source: { documentSha256: 'abc', locator: {
+        kind: 'page_region', documentId: 'answers', page: 1,
+        region: { x: .1, y: .25, width: .8, height: .045 },
+      } },
+    }],
+  }], []])
   for (const group of result.groups) {
     assert.equal(group.essays.state, 'captured')
     assert(group.essays.entries.every(entry => entry.paragraphs.length > 0))
