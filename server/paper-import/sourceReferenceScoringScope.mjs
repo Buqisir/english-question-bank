@@ -1,5 +1,5 @@
 import {
-  WRITING_PART, WRITING_SECTION, ANSWER_EXPLANATION_START,
+  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL,
 } from './sourceReferenceWritingRules.mjs'
 
@@ -37,6 +37,8 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         continue
       }
       let task = WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] ?? null
+      const scoringTask = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0]
+      task ??= scoringTask
       if (NUMBERED_APPLICATION_SECTION.test(heading)) task = 'application'
       if (NUMBERED_CONTINUATION_SECTION.test(heading)) task = 'continuation'
       if ((writing && /^第一节(?:\(|$)/u.test(heading))
@@ -57,7 +59,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
       // Keep spaces for the shared English sample-label predicate. Source text
       // and sourceLabel remain untouched; matching alone uses NFKC.
       const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(item.text.normalize('NFKC').trim())
-      const scoringLabel = (numberedEntryLabel && /评分/u.test(text))
+      const scoringLabel = Boolean(scoringTask) || (numberedEntryLabel && /评分/u.test(text))
         || /^(?:[一二三四五六七八九十]+、)?评分(?:原则|标准|说明|细则|要求|建议)[:：]?$/u.test(text)
         || /^(?:【|\[)[^】\]]*(?:评分|阅卷|评卷|给分|档次)[^】\]]*(?:】|\])[:：]?$/u.test(text)
       if (!ended && taskType && scoringLabel) label = item

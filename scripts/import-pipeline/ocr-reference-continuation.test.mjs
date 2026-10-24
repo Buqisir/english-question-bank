@@ -172,11 +172,23 @@ test('producer retains consecutive fragments across three pages', () => {
 for (const [name, pages] of [
   ['sentence-final punctuation', [[...heading, line('We finished our work.', .7)], [line('and returned later.', .2)]]],
   ['non-adjacent pages', [[...heading, line('We found a place where we could', .7)], [], [line('learn together.', .2)]]],
-  ['a filtered non-furniture heading', [[...heading, line('We found a place where we could', .7)],
-    [line('读后续写评分细则', .15), line('learn together.', .2)]]],
 ]) test(`producer keeps split locators for ${name}`, () => {
   const result = buildSourceReferences(...fixture(pages))
   assert.equal(paragraphs(result).length, 2)
   assert(paragraphs(result).every(p => !p.continuationSources))
   assert.equal(result.review.filter(r => r.issue.includes('across a page turn')).length, 1)
+})
+
+test('a task scoring heading switches capture instead of joining rubric text into a cross-page essay', () => {
+  const result = buildSourceReferences(...fixture([
+    [...heading, line('We found a place where we could', .7)],
+    [line('读后续写评分细则', .15), line('learn together.', .2)],
+  ]))
+  assert.deepEqual(paragraphs(result).map(p => [p.text, p.source.locator.page]),
+    [['We found a place where we could', 1]])
+  assert.equal(paragraphs(result)[0].continuationSources, undefined)
+  const [scoring] = result.groups[0].scoring.entries
+  assert.equal(scoring.sourceLabel, '读后续写评分细则')
+  assert.deepEqual(scoring.paragraphs.map(p => [p.text, p.source.locator.page]), [['learn together.', 2]])
+  assert.deepEqual(result.review, [])
 })

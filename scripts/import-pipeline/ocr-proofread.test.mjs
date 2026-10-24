@@ -228,9 +228,11 @@ test('excludes English quote fragments from writing commentary and resumes at a 
     [['A completed sample.'], ['Another real sample.']])
 })
 
-function referencesFixture(texts, taskTypes = ['continuation'], { lastQuestion, role = 'official_answers' } = {}) {
+function referencesFixture(texts, taskTypes = ['continuation'], {
+  lastQuestion, role = 'official_answers', regions = [], visualClassifications = [],
+} = {}) {
   const observations = texts.map((text, i) => ({
-    observationId: `o${i}`, region: { x: .1, y: .15 + i * .025, width: .8, height: .02 },
+    observationId: `o${i}`, region: { x: .1, y: .15 + i * .025, width: .8, height: .02, ...regions[i] },
   }))
   return buildSourceReferences({
     documents: [{ documentId: 'answers', role, sha256: 'abc' }],
@@ -241,8 +243,51 @@ function referencesFixture(texts, taskTypes = ['continuation'], { lastQuestion, 
   }, { documents: [{ documentId: 'answers', pages: [{ observations }] }] },
   { documents: [{ documentId: 'answers', pages: [{ page: 1,
     orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
+    visualClassifications,
   }] }] })
 }
+
+test('numbered tasks and task scoring standards bind tables without mixing the following letter', () => {
+  const texts = ['66. 应用文', '应用文评分标准', '本题总分为15分。',
+    'Dear Sam,', 'Our club meets on Friday.', 'Yours,', 'Alex',
+    '续写评分标准', '二、评分原则', '本题总分为25分。', '档次', '描述', '第五档', '与所给短文融洽度高。']
+  const result = referencesFixture(texts, ['application', 'continuation'], {
+    visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-1:table-1',
+      rows: [{ cells: [['i10'], ['i11']] }, { cells: [['i12'], ['i13']] }] }],
+  })
+  const [app, cont] = result.groups
+  assert.deepEqual(app.essays.entries[0].paragraphs.map(p => [p.role, p.text]), [
+    ['salutation', 'Dear Sam,'], ['body', 'Our club meets on Friday.'],
+    ['closing', 'Yours,'], ['signature', 'Alex'],
+  ])
+  assert.equal(app.scoring.entries[0].sourceLabel, '应用文评分标准')
+  assert.deepEqual(app.scoring.entries[0].blocks.map(b => b.paragraph.text), ['本题总分为15分。'])
+  assert.equal(cont.essays.state, 'not_supplied')
+  assert.equal(cont.scoring.entries[0].sourceLabel, '二、评分原则')
+  const table = cont.scoring.entries[0].blocks.at(-1)
+  assert.equal(table.kind, 'table')
+  assert.deepEqual(table.rows.map(row => row.map(cell => cell.text)),
+    [['档次', '描述'], ['第五档', '与所给短文融洽度高。']])
+  assert.equal(table.rows[1][1].source.locator.documentId, 'answers')
+})
+
+test('task mentions and unscoped tables cannot invent writing ownership', t => {
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unscoped source') })
+  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。', '评分标准']) {
+    assert.throws(() => referencesFixture([heading, '档次', '描述'], ['application'], {
+      visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-1:table-1',
+        rows: [{ cells: [['i1'], ['i2']] }] }],
+    }), /unscoped source/)
+  }
+})
+
+test('an incomplete salutation in a rubric cannot manufacture an official essay', () => {
+  const result = referencesFixture(['应用文评分标准', '格式示例：', 'Dear Sam,',
+    'Yours,', 'Alex', '二、评分原则', '注意内容完整。'], ['application'])
+  assert.equal(result.groups[0].essays.state, 'not_supplied')
+  assert(result.groups[0].scoring.entries.some(e => e.paragraphs.some(p => p.text === 'Dear Sam,')))
+})
 
 test('a complete letter after the final objective answers establishes a bare application section', () => {
   for (const lastQuestion of [55, 65]) {
