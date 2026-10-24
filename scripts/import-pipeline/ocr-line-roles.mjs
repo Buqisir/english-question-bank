@@ -2,7 +2,8 @@
 // Rules recognize candidates only: callers retain state transitions and output assembly.
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
-  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
+  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
+  WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
@@ -14,7 +15,7 @@ const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s
 // Some keys head the samples only with "第一节（满分15分）".
 const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
 
-const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
+const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Versions?|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
 const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
@@ -170,6 +171,8 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('writing.bare-fourth-part', 'bare-writing-part', 10, /^第四部分\s*[:：]?$/u, '第四部分', '第三部分'),
   pattern('writing.bare-section', 'bare-section', 10, BARE_WRITING_SECTION, '第一节', '第一节（阅读理解）'),
   pattern('writing.application', 'writing-section', 10, WRITING_SECTION[0][1], '第一节（应用文）', '第一节（阅读理解）', { value: 'application' }),
+  pattern('writing.bare-application', 'writing-section', 15, BARE_APPLICATION_SECTION,
+    '应用文', '应用文需要审题。', { value: 'application' }),
   pattern('writing.continuation', 'writing-section', 20, WRITING_SECTION[1][1], '第二节 读后续写', '第二节(语法填空)', { value: 'continuation' }),
   pattern('writing.bare-continuation', 'writing-section', 25, /^读后续写\s*[:：]?$/u,
     '读后续写', '读后续写评分标准', { value: 'continuation' }),
@@ -179,6 +182,10 @@ export const LINE_ROLE_RULES = Object.freeze([
     '（三）读后续写（满分25分）', '（三）读后续写需要审题。', { value: 'continuation' }),
   pattern('writing.application-scoring', 'scoring-section', 10, WRITING_SCORING_SECTION[0][1], '应用文评分细则', '本篇应用文评分细则需要另行讨论。', { value: 'application' }),
   pattern('writing.continuation-scoring', 'scoring-section', 20, WRITING_SCORING_SECTION[1][1], '读后续写评分细则：', '读后续写评分细则分析', { value: 'continuation' }),
+  rule('writing.scoring-overview', 'scoring-overview', 10, f => WRITING_SCORING_OVERVIEW.test(f.nfkc),
+    '写作评分说明', '写作评分说明如下。'),
+  rule('writing.listening-boundary', 'listening-boundary', 10, f => LISTENING_REFERENCE_START.test(f.nfkc),
+    'Text 1', '第二节 读后续写'),
   rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && ANSWER_EXPLANATION_START.test(f.text),
     { text: '【解题导语】本文是一篇应用文。', context: { sectionCount: 1 } },
     { text: '参考范文', context: { sectionCount: 1 } }),
@@ -188,6 +195,8 @@ export const LINE_ROLE_RULES = Object.freeze([
   rule('writing.part-boundary', 'part-boundary', 10, f =>
     /^(第[一二三四五]部分|(?:附\s*[:：]\s*)?听力)/u.test(f.text) || TRANSCRIPT_MARKER.test(f.text),
     '附：听力录音稿', '第二节 读后续写'),
+  rule('writing.other-section', 'part-boundary', 20, f => NON_WRITING_SECTION.test(f.nfkc),
+    '第二节（阅读理解）', '（二）各档次给分范围和要求'),
   pattern('writing.student-script', 'capture-stop', 10, STUDENT_SCRIPT_BOUNDARY, '（五）样卷', '（四）作答示例'),
   pattern('writing.continuation-prompt', 'question-prompt', 10,
     /^阅读下面(?:短文|材料)[，,](?:根据|依据).*续写/u,

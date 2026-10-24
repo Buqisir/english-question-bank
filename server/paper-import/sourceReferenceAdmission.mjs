@@ -3,6 +3,8 @@ import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
+import { BARE_APPLICATION_SECTION, WRITING_SECTION, LISTENING_REFERENCE_START,
+  NON_WRITING_SECTION } from './sourceReferenceWritingRules.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -24,18 +26,49 @@ function writingScopes(confirmation, answerIds) {
         task = null
       }
       const heading = text.replace(/^第[三四]部分(?:写作|书面表达)(?:\([^)]*\))?/u, '')
-      if (/^(?:听力(?:原文|录音|材料)|录音原文|试题解析|参考答案解析)/u.test(heading)) {
+      if (LISTENING_REFERENCE_START.test(heading) || NON_WRITING_SECTION.test(heading)
+        || /^(?:试题解析|参考答案解析)/u.test(heading)) {
         writing = false
         task = null
       }
       if ((writing && /^第一节(?:\(|$)/u.test(heading))
+        || BARE_APPLICATION_SECTION.test(heading) || WRITING_SECTION[0][1].test(heading)
         || /^(?:第一节(?:\([^)]*\))?)?(?:应用文写作|书面表达)$/u.test(heading)) task = 'application'
       if ((writing && /^第二节(?:\(|$)/u.test(heading))
+        || WRITING_SECTION[1][1].test(heading)
         || /^(?:第二节(?:\([^)]*\))?)?读后续写$/u.test(heading)) task = 'continuation'
       scopes.set(item.itemId, task)
     }
   }
   return scopes
+}
+
+// A task heading, an explicit sample label and its immediate English text
+// independently disprove absence. Do not infer a sample from rubric prose or
+// a label followed by "略"/nothing. This check also runs for books without images.
+function assertLabeledSamplesPresent(sidecar, confirmation, answerIds) {
+  const scopes = writingScopes(confirmation, answerIds)
+  const sampleLabel = /^(?:参考范文|考场作文|作答示例|范文|(?:(?:A|One)\s+)?Possible\s+Versions?)\s*[:：]?$/iu
+  for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
+    let pending = null
+    for (const page of document.pages) for (const item of page.orderedItems) {
+      const task = scopes.get(item.itemId)
+      const text = item.text.normalize('NFKC').trim()
+      if (LISTENING_REFERENCE_START.test(text)) {
+        pending = null
+        continue
+      }
+      if (pending && pending === task && !sampleLabel.test(text)
+        && /[A-Za-z]/u.test(text) && !/\p{Script=Han}/u.test(text)) {
+        const essays = sidecar?.groups.find(group => group.taskType === task)?.essays
+        if (essays?.state !== 'captured' || !essays.entries.length) {
+          throw Object.assign(new Error('Confirmed labeled writing sample cannot be declared not_supplied'),
+            { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+        }
+      }
+      pending = task && sampleLabel.test(text) ? task : null
+    }
+  }
 }
 function containsSource(source, inner) {
   const outer = source?.locator
@@ -82,6 +115,7 @@ export function assertSourceReferenceAdmission({
   const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
   const answerIds = new Set(materialization.documents.filter(document => document.role === 'official_answers')
     .map(document => document.documentId))
+  assertLabeledSamplesPresent(sidecar, confirmation, answerIds)
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
   if (!hasReferenceVisual && !figures.length) return

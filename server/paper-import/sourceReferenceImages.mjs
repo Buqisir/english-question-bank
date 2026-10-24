@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
+import { fitSourceReferencePng } from './sourceReferencePngSizing.mjs'
 
 export const SOURCE_REFERENCE_IMAGE_LIMITS = Object.freeze({
   pngBytes: 2 * 1024 * 1024, dimension: 4096, pixels: 4_000_000,
@@ -111,7 +112,7 @@ export function decodeSourceReferencePng(raster) {
 // helper rounds x/y/width/height to nearest pixel, +repage, PNG32. Compare sRGB
 // 8-bit RGBA pixels, so compression/metadata differences cannot change meaning.
 // The exact admitted PNG byte SHA remains the publication commitment.
-export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceLimits }) {
+export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceLimits, onProcessing }) {
   // Diagnostic overrides can only tighten the consumer's fixed ceilings.
   const budgets = Object.fromEntries(Object.entries(SOURCE_REFERENCE_RASTER_LIMITS)
     .map(([key, ceiling]) => [key, Math.min(resourceLimits?.[key] ?? ceiling, ceiling)]))
@@ -125,11 +126,14 @@ export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceL
     }
     throw error
   }
-  const bytes = Buffer.from(crop.bytes)
+  inspectPng(Buffer.from(crop.bytes))
+  const fitted = fitSourceReferencePng(crop, SOURCE_REFERENCE_IMAGE_LIMITS)
+  const bytes = Buffer.from(fitted.bytes), processing = fitted.processing
   const raster = { profile: SOURCE_REFERENCE_IMAGE_PROFILE, mediaType: 'image/png',
-    sha256: sha256(bytes), byteLength: bytes.length, pixelWidth: crop.pixelWidth,
-    pixelHeight: crop.pixelHeight, base64: bytes.toString('base64') }
+    sha256: sha256(bytes), byteLength: bytes.length, pixelWidth: fitted.pixelWidth,
+    pixelHeight: fitted.pixelHeight, base64: bytes.toString('base64') }
   decodeSourceReferencePng(raster)
+  if (processing) onProcessing?.(processing)
   return raster
 }
 
