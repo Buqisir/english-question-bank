@@ -14,6 +14,10 @@ export const WRITING_SCORING_SECTION = [
   ['application', /^应用文评分(?:细则|标准)\s*[:：]?$/u],
   ['continuation', /^(?:读后)?续写评分(?:细则|标准)\s*[:：]?$/u],
 ]
+// A transcript may precede a separate rubric appendix. Only its complete
+// source heading allows leaving listening; task and entry labels are still required.
+export const WRITING_SCORING_OVERVIEW = /^写作评分说明\s*[:：]?$/u
+export const LISTENING_REFERENCE_START = /^(?:(?:附\s*[:：]?\s*)?听力|录音原文|\(?Text\s*\d)/iu
 export const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
 // Match complete rubric titles only; parentheses are a numbering style, not
 // permission to treat ordinary scoring commentary as a new entry.

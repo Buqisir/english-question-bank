@@ -3,6 +3,7 @@
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
+  WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
@@ -179,6 +180,10 @@ export const LINE_ROLE_RULES = Object.freeze([
     '（三）读后续写（满分25分）', '（三）读后续写需要审题。', { value: 'continuation' }),
   pattern('writing.application-scoring', 'scoring-section', 10, WRITING_SCORING_SECTION[0][1], '应用文评分细则', '本篇应用文评分细则需要另行讨论。', { value: 'application' }),
   pattern('writing.continuation-scoring', 'scoring-section', 20, WRITING_SCORING_SECTION[1][1], '读后续写评分细则：', '读后续写评分细则分析', { value: 'continuation' }),
+  rule('writing.scoring-overview', 'scoring-overview', 10, f => WRITING_SCORING_OVERVIEW.test(f.nfkc),
+    '写作评分说明', '写作评分说明如下。'),
+  rule('writing.listening-boundary', 'listening-boundary', 10, f => LISTENING_REFERENCE_START.test(f.nfkc),
+    'Text 1', '第二节 读后续写'),
   rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && ANSWER_EXPLANATION_START.test(f.text),
     { text: '【解题导语】本文是一篇应用文。', context: { sectionCount: 1 } },
     { text: '参考范文', context: { sectionCount: 1 } }),

@@ -1,5 +1,6 @@
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START,
+  WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
 } from './sourceReferenceWritingRules.mjs'
 
@@ -14,9 +15,20 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
   const scopes = new Map()
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
+    let afterListening = false
     for (const page of document.pages) for (const item of page.orderedItems) {
       if (terminal) { scopes.set(item.itemId, null); continue }
       const text = normalize(item.text)
+      if (afterListening) {
+        // An explanation remains terminal, even between a transcript and rubric.
+        if (ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
+        if (!terminal && WRITING_SCORING_OVERVIEW.test(text)) {
+          afterListening = false
+          ended = false
+        }
+        scopes.set(item.itemId, null)
+        continue
+      }
       let heading = text
       if (/^第[一二三四五六]部分/u.test(text)) {
         writing = WRITING_PART.test(text) || ALTERNATE_WRITING_PART.test(text)
@@ -27,12 +39,13 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
       if (ANSWER_EXPLANATION_START.test(heading)
-        || /^(?:(?:附[:：]?)?听力|录音原文|参考答案解析|Text\d)/iu.test(heading)) {
+        || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading)) {
         writing = false
         taskType = null
         label = null
         ended = true
-        terminal = startedWriting
+        afterListening = LISTENING_REFERENCE_START.test(heading)
+        terminal = !afterListening && startedWriting
         scopes.set(item.itemId, null)
         continue
       }

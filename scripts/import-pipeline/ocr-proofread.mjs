@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v6'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v7'
 
 function fail(message) {
   console.error(message)
@@ -1262,6 +1262,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
   const structuredScoring = pages.some(page =>
     page.visualClassifications?.some(visual => visual.classification === 'semantic_table'))
   const scope = createWritingScope(sections)
+  let afterListening = false, postListeningScoring = false
   const lastObjectiveQuestion = Math.max(0, ...materialization.groups
     .flatMap(group => group.writingTask ? [] : (group.questions || []).map(question => question.sourceNumber))
     .filter(Number.isInteger))
@@ -1286,6 +1287,18 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     if (firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
       furniture.add(line)
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
+      continue
+    }
+    if (afterListening && firstLineRole('scoring-overview', facts)) {
+      scope.enterPart(false)
+      afterListening = false
+      postListeningScoring = true
+      continue
+    }
+    if (firstLineRole('listening-boundary', facts)) {
+      scope.enterPart(false)
+      afterListening = true
+      postListeningScoring = false
       continue
     }
     // A heading can share its OCR item with a sample label. Some answer books
@@ -1313,7 +1326,9 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       continue
     }
     if (started) {
-      scope.startTask(started)
+      // A rubric appendix supplements the original samples; an ordinary task
+      // restart still replaces its prior section as before.
+      scope.startTask(started, { reuse: postListeningScoring })
       if (unlabeledApplicationLetter) scope.current.letterEnd = unlabeledApplicationLetter.end
       if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
       continue
@@ -1335,7 +1350,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       const omittedWritingPart = matchesLineRole('writing.bare-fourth-part', facts)
         && lines[lineIndex + 1] && matchesLineRole('writing.omission', factsFor(lines[lineIndex + 1]), { inWriting: true })
       scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, writingSectionAfterPart(line.text))
-    } else if (scope.current) scope.current.lines.push(line)
+    } else if (scope.current && (!postListeningScoring || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
   }
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
     const taskType = group.writingTask.taskType
