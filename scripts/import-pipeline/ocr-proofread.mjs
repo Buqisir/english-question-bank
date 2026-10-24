@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v7'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v8'
 
 function fail(message) {
   console.error(message)
@@ -1535,7 +1535,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
             sourceRegionId: figure.sourceRegionId,
             source: { documentSha256, locator: figure.source },
             raster: captureSourceReferenceFigure({ pdfBytes: document.bytes,
-              page: figure.source.page, region: figure.source.region }) }
+              page: figure.source.page, region: figure.source.region,
+              onProcessing: processing => review.push({ sourceRegionId: figure.sourceRegionId, processing }) }) }
         }
         const blocks = paragraphs.map((item, index) => {
           if (item.figure) return { kind: 'figure', ...frozenFigure(item.figure) }
