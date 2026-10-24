@@ -10,6 +10,7 @@ import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/impo
 import { reviewPaginationMetadata } from '../server/import-review/reviewPagination.mjs'
 import { reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { ABSENT_BY_EXAM_DESIGN, NO_LISTENING_PRODUCT_SCHEMA, manifestProductFiles, sourceProductEditions } from '../server/paper-import/pdfProductSet.mjs'
+import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../server/paper-import/pdfPageLimits.mjs'
 import { PRODUCT_MANIFEST, frozenProductResult, productInputDigest, readFrozenProducts, loadStoredProducts } from '../server/paper-import/frozenProducts.mjs'
 import { buildPreprocessingReport } from '../server/paper-import/preprocessingReport.mjs'
 import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
@@ -116,7 +117,7 @@ try {
     }
     json(path.join(root, PRODUCT_MANIFEST), manifest)
   }
-  const frozen = buildNck1ReviewProjection(root)
+  let frozen = buildNck1ReviewProjection(root)
   assert.equal(frozen.frozenProducts.manifest.schemaVersion, NO_LISTENING_PRODUCT_SCHEMA)
   assert.throws(() => frozenProductResult(frozen.frozenProducts, 'largeComplete'), /产品不存在/)
   const pdfs = frozen.frozenProducts.manifest.files.map(file => ({
@@ -131,12 +132,44 @@ try {
   assert.throws(() => buildPreprocessingReport({ ...frozen, config: {} }, reportEvidence), /explicit/)
   assert.throws(() => buildPreprocessingReport(frozen, { ...reportEvidence,
     pdfs: [...pdfs, { ...pdfs[0], edition: 'largeComplete' }] }), /invalid or duplicate PDF/)
-  const manifest = frozen.frozenProducts.manifest
+  let manifest = frozen.frozenProducts.manifest
   const read = changed => file => file === PRODUCT_MANIFEST ? Buffer.from(JSON.stringify(changed)) : frozen.frozenProducts.bytes[file]
   assert.throws(() => readFrozenProducts(root, { readArtifact: read({ ...manifest, schemaVersion: 'paper-pdf-products-v1' }) }), /版本或听力声明/)
   assert.throws(() => readFrozenProducts(root, { readArtifact: read({ ...manifest, files: manifest.files.slice(1) }) }), /文件清单/)
   assert.throws(() => readFrozenProducts(root, { config: {}, listeningCount: 0 }), /听力声明/)
   assert.throws(() => readFrozenProducts(root, { config, listeningCount: 2 }), /听力声明/)
+  if (!previewRoot) {
+    // Keep the historical v3 checks above, then publish a v6/v4 successor through
+    // the same exact Review/store seam; a manifest alone cannot opt the paper in.
+    const entry = { targetPages: 11, includeListening: false, omitCover: false,
+      coverGapsPt: null, allowSplitOptionBank: false, breakSlotIds: [],
+      layout: { profile: 'student-friendly-v1', fontSizePt: 12, figureLayout: 'natural',
+        answerBoxHeightsMm: { application: 65, continuation: 57 } } }
+    const plan = { schemaVersion: 'paper-pagination-plan-v6', paperId: projection.paperId,
+      sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+      pageLimitAuthorization: LARGE_PAGE_LIMIT_AUTHORIZATION, editions: { largeNoListening: entry } }
+    const extended = { ...manifest, schemaVersion: 'paper-pdf-products-v4',
+      pageLimits: { largeCompletePageLimit: 12, largeNoListeningPageLimit: 11, economyPageLimit: 8 },
+      pageLimitAuthorization: LARGE_PAGE_LIMIT_AUTHORIZATION }
+    delete extended.economyPageLimit
+    extended.files = extended.files.map(file => {
+      if (file.path !== 'products/largeNoListening.pdf') return file
+      const bytes = productPdfBytes(11, file.path)
+      writeFileSync(path.join(root, file.path), bytes)
+      return { ...file, pageCount: 11, sha256: sha256(bytes), byteLength: bytes.length }
+    })
+    json(path.join(root, PRODUCT_MANIFEST), extended)
+    assert.throws(() => buildNck1ReviewProjection(root), /文件清单/,
+      'a v4 manifest cannot expand an undeclared paper')
+    json(path.join(root, 'pagination-plan.json'), plan)
+    extended.inputDigest = productInputDigest(root, reviewBundleFilePaths(root))
+    json(path.join(root, PRODUCT_MANIFEST), extended)
+    frozen = buildNck1ReviewProjection(root)
+    manifest = frozen.frozenProducts.manifest
+    assert.equal(reviewPaginationMetadata(frozen).editions[0].targetPages, 11)
+    assert.equal(manifest.files[0].pageCount, 11)
+    assert.deepEqual(frozen.paginationPlan.pageLimitAuthorization, LARGE_PAGE_LIMIT_AUTHORIZATION)
+  }
   const files = reviewBundleFilePaths(root).map(file => {
     const bytes = readFileSync(path.join(root, file.path))
     return { ...file, sha256: sha256(bytes), byteLength: bytes.length }

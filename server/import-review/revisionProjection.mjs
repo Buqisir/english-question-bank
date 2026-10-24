@@ -21,6 +21,7 @@ import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-imp
 import { assertSourceReferenceAdmission } from '../paper-import/sourceReferenceAdmission.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
+import { productPageLimitsForManifest } from '../paper-import/pdfPageLimits.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
 import { buildStoredReviewSubject, buildTargetReviewSubject } from './reviewSubject.mjs'
@@ -55,7 +56,7 @@ import {
 import { assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME,
-  economyPageLimitForPlan,
+  productPageLimitsForPlan,
   loadPaperPaginationPlan,
   paginationSlotBindings,
 } from '../paper-import/paginationPlan.mjs'
@@ -1708,13 +1709,14 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
           || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
           fail('Sealed product input identity differs')
         }
-        const pageLimit = ['paper-pdf-products-v2', 'paper-pdf-products-v3'].includes(manifest.schemaVersion)
-          ? manifest.economyPageLimit : 8
-        if (options.economyPageLimit !== undefined && options.economyPageLimit !== pageLimit) fail('Sealed product page limit differs')
+        const pageLimits = productPageLimitsForManifest(manifest)
+        for (const key of Object.keys(pageLimits)) {
+          if (options[key] !== undefined && options[key] !== pageLimits[key]) fail('Sealed product page limit differs')
+        }
         for (const file of manifest.files) {
           const edition = path.basename(file.path, '.pdf')
           if (edition === 'answerOnly') continue
-          const policy = studentProductPolicy(edition, 2, { economyPageLimit: pageLimit })
+          const policy = studentProductPolicy(edition, 2, pageLimits)
           if (policy.atMost ? file.pageCount > policy.targetPages : file.pageCount !== policy.targetPages) {
             fail('Sealed product page count differs')
           }
@@ -1855,7 +1857,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
     ? readProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
         config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
-        economyPageLimit: economyPageLimitForPlan(paginationPlan?.plan) }) : null
+        ...productPageLimitsForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
     fail('四款 PDF 必须保留完整的源参考答案捕获；不能只提交答案 PDF')
   }

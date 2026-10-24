@@ -91,7 +91,7 @@ import { assertApplicationGivenOwnership } from './lib-nck1-new-paper-locks.mjs'
 import {
   FIXED_PAGINATION_EDITIONS,
   PAPER_PAGINATION_PLAN_FILE_NAME,
-  economyPageLimitForPlan,
+  economyPageLimitForPlan, productPageLimitsForPlan, productPlanVersion, productPlanAuthorization,
   validatePaperPaginationPlan,
 } from '../../server/paper-import/paginationPlan.mjs'
 
@@ -372,6 +372,11 @@ async function paginationQa(paperId) {
   const breakOption = option('--break-slots')
   const coverOption = option('--cover-gaps')
   const pageLimitOption = option('--economy-page-limit')
+  const largeLimitOption = option(edition === 'largeComplete' ? '--large-complete-page-limit' : '--large-no-listening-page-limit')
+  for (const [flag, selected, value] of [
+    ['--large-complete-page-limit', 'largeComplete', '13'],
+    ['--large-no-listening-page-limit', 'largeNoListening', '11'],
+  ]) if (option(flag) !== null && (edition !== selected || option(flag) !== value)) fail(`${flag} requires --edition ${selected} and value ${value}`)
   const productLayoutOption = option('--product-layout')
   const product = STUDENT_PRODUCT_EDITIONS.includes(edition)
   if (pageLimitOption !== null && (edition !== 'economy8' || pageLimitOption !== '9')) {
@@ -410,8 +415,13 @@ async function paginationQa(paperId) {
     const listeningCount = projection.paginationSlotBindings.filter((entry) =>
       entry.familyContractId === 'listening').length
     const economyPageLimit = pageLimitOption === '9' ? 9 : economyPageLimitForPlan(projection.paginationPlan)
-    const productPlanVersion = economyPageLimit === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4'
-    const selectedPolicy = product ? studentProductPolicy(edition, listeningCount, { economyPageLimit })
+    const pageLimits = { ...productPageLimitsForPlan(projection.paginationPlan), economyPageLimit,
+      ...(largeLimitOption !== null ? { [`${edition}PageLimit`]: Number(largeLimitOption) } : {}) }
+    const selectedPlanVersion = productPlanVersion({
+      ...projection.paginationPlan?.editions,
+      [edition]: { targetPages: product ? studentProductPolicy(edition, listeningCount, pageLimits).targetPages : null },
+    })
+    const selectedPolicy = product ? studentProductPolicy(edition, listeningCount, pageLimits)
       : fixedPageLayoutPolicy(edition, listeningCount, sourceHasListening)
     policy = { targetPages: selectedPolicy.targetPages, includeListening: selectedPolicy.includeListening, omitCover: selectedPolicy.omitCover }
     let candidatePlan = projection.paginationPlan
@@ -429,8 +439,9 @@ async function paginationQa(paperId) {
           ? null
           : String(coverOption).split(',').map(Number)
       candidatePlan = {
-        schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5'].includes(projection.paginationPlan?.schemaVersion) ? productPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
+        schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5', 'paper-pagination-plan-v6'].includes(projection.paginationPlan?.schemaVersion) ? selectedPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
           : projection.paginationPlan?.schemaVersion || 'paper-pagination-plan-v1',
+        ...productPlanAuthorization(selectedPlanVersion),
         paperId: projection.paperId,
         sourceDigest: projection.sourceDigest,
         candidateDigest: projection.candidateDigest,
@@ -447,6 +458,7 @@ async function paginationQa(paperId) {
       }
     }
     const useAuto = process.argv.includes('--auto') || !candidatePlan?.editions?.[edition]
+      || (!explicitEdit && largeLimitOption !== null && candidatePlan.editions[edition].targetPages !== policy.targetPages)
     if (!useAuto) {
       candidatePlan = validatePaperPaginationPlan(candidatePlan, {
         paperId: projection.paperId,
@@ -461,7 +473,7 @@ async function paginationQa(paperId) {
       paginationPlan: candidatePlan,
     }
     const rendered = await renderReviewFixedEdition(renderedProjection, edition, buildPrintHtml, undefined, {
-      economyPageLimit, restoreAnswerBoxes: productLayoutOption !== null,
+      ...pageLimits, restoreAnswerBoxes: productLayoutOption !== null,
     })
     slotByGroup = new Map(projection.paginationSlotBindings.map(({ groupId, slotId }) => [groupId, slotId]))
     const selectedEdition = useAuto ? {
@@ -477,8 +489,9 @@ async function paginationQa(paperId) {
       ...(product ? { layout: rendered.layout } : {}),
     }
     const plan = validatePaperPaginationPlan({
-      schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5'].includes(candidatePlan?.schemaVersion) ? productPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
+      schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5', 'paper-pagination-plan-v6'].includes(candidatePlan?.schemaVersion) ? selectedPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
         : candidatePlan?.schemaVersion || 'paper-pagination-plan-v1',
+      ...productPlanAuthorization(selectedPlanVersion),
       paperId: projection.paperId,
       sourceDigest: projection.sourceDigest,
       candidateDigest: projection.candidateDigest,
@@ -505,6 +518,7 @@ async function paginationQa(paperId) {
       searchedCandidates: rendered.searchedCandidates,
       ...(rendered.timing ? { timing: finishPaginationTiming(rendered.timing) } : {}),
       selectedPlan: selectedEdition,
+      ...productPlanAuthorization(selectedPlanVersion),
       groups: rendered.inspection.map(({ id, type, pages, optionBankPages }) => ({
         groupId: id,
         slotId: slotByGroup.get(id),
@@ -1714,7 +1728,7 @@ async function main() {
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
       + 'prepare-listening-review <paperId> --output <request.json> | finalize-listening-review <paperId> --input <review.json> | verify-listening-review <paperId> | '
       + 'prepare-listening-instruction-correction <paperId> --slot <listening slot> --count 1|2 --output <request.json> | finalize-listening-instruction-correction <paperId> --input <correction.json> | verify-listening-instruction-correction <paperId> | '
-      + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
+      + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--large-complete-page-limit 13 | --large-no-listening-page-limit 11 (Owner 2026-10-24 BUB-138)] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
       + 'cleanup-plan <paperId> --revision rev-id (inspection only; never deletes or certifies eligibility) | '
       + 'link-thread <paperId> --thread T-id [--from T-id] (explicit discussion handoff only) | '
       + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | '

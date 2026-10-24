@@ -1,3 +1,4 @@
+import { validateProductPageLimits } from '../paper-import/pdfPageLimits.mjs'
 import { applicationDrawingAreaPolicy } from '../../shared/paper-canonical/applicationDrawingArea.mjs'
 import { applyPlannedGroupBreaks, inspectGroups, searchFixedPagePdf } from './fixedPagePdfPlanner.mjs'
 import { finishPaginationTiming, timedCandidateRender } from './paginationTiming.mjs'
@@ -9,13 +10,13 @@ const economyProfile = 'student-friendly-economy-v2'
 const coverLiftProfile = 'student-friendly-cover-lift-v2'
 const normalHeights = { application: 65, continuation: 57 }
 
-export function studentProductPolicy(edition, listeningCount, { economyPageLimit = 8 } = {}) {
+export function studentProductPolicy(edition, listeningCount, { economyPageLimit = 8, largeCompletePageLimit = 12, largeNoListeningPageLimit = 10 } = {}) {
   if (!STUDENT_PRODUCT_EDITIONS.includes(edition)) throw new Error('Unknown student product')
-  if (![8, 9].includes(economyPageLimit)) throw new Error('省纸版只支持默认八页或显式九页上限')
+  validateProductPageLimits({ economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
   if (edition === 'largeComplete' && listeningCount !== 2) {
     throw new Error('大字完整版需要完整的两个听力题组')
   }
-  return { targetPages: edition === 'economy8' ? economyPageLimit : edition === 'largeComplete' ? 12 : 10,
+  return { targetPages: edition === 'economy8' ? economyPageLimit : edition === 'largeComplete' ? largeCompletePageLimit : largeNoListeningPageLimit,
     includeListening: edition === 'largeComplete', omitCover: false,
     atMost: edition !== 'economy8' || economyPageLimit === 9 }
 }
@@ -142,8 +143,8 @@ async function restoreAnswerSpace(fit, layout, { measure, accept, canMeasure }) 
   return { fit, layout }
 }
 
-export async function planStudentProductPdf(html, { edition, render, economyPageLimit = 8 }) {
-  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit })
+export async function planStudentProductPdf(html, { edition, render, economyPageLimit = 8, largeCompletePageLimit = 12, largeNoListeningPageLimit = 10 }) {
+  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
   const timed = timedCandidateRender(render, { edition, accepts: result => withinPages(result) && accept(result) })
@@ -270,9 +271,9 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
 }
 
 export async function renderExplicitStudentProductPdf(html, {
-  edition, layout, plannedBreakGroupIds, render, economyPageLimit = 8, restoreAnswerBoxes = false,
+  edition, layout, plannedBreakGroupIds, render, economyPageLimit = 8, largeCompletePageLimit = 12, largeNoListeningPageLimit = 10, restoreAnswerBoxes = false,
 }) {
-  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit })
+  const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
   if (edition === 'economy8' && economyPageLimit === 9 && layout.fontSizePt !== 10.5) {
     throw new Error('九页上限省纸版须保持10.5pt正文及18pt行距')
   }

@@ -11,7 +11,7 @@ import {
 } from '../draft-paper/fixedPagePdfPlanner.mjs'
 import { renderPaginatedPaper } from '../draft-paper/paginationRenderer.mjs'
 import { STUDENT_PRODUCT_EDITIONS, studentProductPolicy, planStudentProductPdf, renderExplicitStudentProductPdf } from '../draft-paper/studentProductPdf.mjs'
-import { economyPageLimitForPlan, paginationPlanEdition } from '../paper-import/paginationPlan.mjs'
+import { productPageLimitsForPlan, paginationPlanEdition } from '../paper-import/paginationPlan.mjs'
 import { printConsumption } from './revisionProjection.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertCanonicalConsumptionVisibleStructure } from '../../shared/paper-canonical/visibleStructure.mjs'
@@ -85,7 +85,7 @@ export function reviewPaginationMetadata(projection) {
     planDigest: projection.paginationPlanDigest,
     editions: editions.filter(edition => edition !== 'answerOnly').map((edition) => ({
       edition,
-      ...studentProductPolicy(edition, listeningCount, { economyPageLimit: economyPageLimitForPlan(projection.paginationPlan) }),
+      ...studentProductPolicy(edition, listeningCount, productPageLimitsForPlan(projection.paginationPlan)),
       mode: projection.paginationPlan?.editions?.[edition] ? 'explicit' : 'bounded_auto',
       plan: projection.paginationPlan?.editions?.[edition] || null,
     })).concat([{ edition: 'answerOnly', mode: 'natural', available: Boolean(projection.sourceReferences),
@@ -110,12 +110,15 @@ export async function renderReviewPdfProduct(projection, edition, buildPrintHtml
 }
 
 export async function renderReviewFixedEdition(projection, edition, buildPrintHtml, render = renderPaginatedPaper, {
-  economyPageLimit = economyPageLimitForPlan(projection.paginationPlan), restoreAnswerBoxes = false,
+  economyPageLimit = productPageLimitsForPlan(projection.paginationPlan).economyPageLimit,
+  largeCompletePageLimit = productPageLimitsForPlan(projection.paginationPlan).largeCompletePageLimit,
+  largeNoListeningPageLimit = productPageLimitsForPlan(projection.paginationPlan).largeNoListeningPageLimit,
+  restoreAnswerBoxes = false,
 } = {}) {
   const listeningCount = projection.paginationSlotBindings.filter((entry) =>
     entry.familyContractId === 'listening').length
   const product = STUDENT_PRODUCT_EDITIONS.includes(edition)
-  const policy = product ? studentProductPolicy(edition, listeningCount, { economyPageLimit })
+  const policy = product ? studentProductPolicy(edition, listeningCount, { economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
     : fixedPageLayoutPolicy(edition, listeningCount, listeningCount === 2)
   const html = reviewPrintHtml(projection, 'student', buildPrintHtml, {
     includeListening: policy.includeListening,
@@ -126,8 +129,8 @@ export async function renderReviewFixedEdition(projection, edition, buildPrintHt
     projection.paginationSlotBindings,
   )
   const result = explicit
-    ? await (product ? renderExplicitStudentProductPdf : renderExplicitFixedPagePdf)(html, { ...explicit, economyPageLimit, restoreAnswerBoxes, render })
-    : await (product ? planStudentProductPdf : edition === 'long10' || edition === 'long12' ? planLongPaperPdf : planFixedPagePdf)(html, { ...policy, edition, economyPageLimit, render })
+    ? await (product ? renderExplicitStudentProductPdf : renderExplicitFixedPagePdf)(html, { ...explicit, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, restoreAnswerBoxes, render })
+    : await (product ? planStudentProductPdf : edition === 'long10' || edition === 'long12' ? planLongPaperPdf : planFixedPagePdf)(html, { ...policy, edition, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, render })
   return { ...result, edition, mode: explicit ? 'explicit' : 'bounded_auto' }
 }
 

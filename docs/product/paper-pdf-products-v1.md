@@ -46,6 +46,46 @@ raw-source 和新产品工作区一律核对声明，冻结新产品仍须显式
 精确 Screen revision 校验；历史 v1–v4 报告不改义。本地实现和合成样张不代表已部署、
 真实卷源内容已验收或已获送审／发布授权。
 
+## 单卷额外一页上限（Owner 2026-10-24，BUB-138）
+
+对现行合同全部手段均无法排入默认页数、已经诊断确认的卷，Owner 允许对应
+产品最多增加一页：`largeComplete` 最多 13 页、`largeNoListening` 最多 11 页、
+`economy8` 最多 9 页。默认仍是 12／10／严格 8 页；大字版不会自动重试加页，
+不按 paperId 判断，不将本次授权推广为默认值。省纸版沿用下节既有九页流程。
+首批诊断适用卷为德州（完整版 13）和淄博（完整版 13、无听力版 11）。
+
+大字版加页使用 `paper-pagination-plan-v6`，逐 edition 显式保存 `targetPages`
+上限；未声明的 edition 保留默认。根字段 `pageLimitAuthorization` 必须完整保存
+`{ "authorizedBy": "Owner", "authorizedOn": "2026-10-24", "basis": "BUB-138" }`。
+v6 至少包含一个大字版加页声明，且仍绑定 paperId、Source、Candidate 与断点。
+历史 v1／v2／v4／v5 不改义、不迁移、不改字节；v5 的省纸上限仍为 9。
+
+正式入口（在新工作副本运行；每次先诊断默认页数失败原因）：
+
+```bash
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition largeComplete \
+  --large-complete-page-limit 13 --auto --save-plan --output <new-qa-directory>
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition largeNoListening \
+  --large-no-listening-page-limit 11 --auto --save-plan --output <new-qa-directory>
+node scripts/import-pipeline/fast-import.mjs finish <paperId> \
+  --large-complete-page-limit 13 --large-no-listening-page-limit 11
+```
+
+只传该卷实际获准产品的参数；原卷无听力时不传完整版参数。批量 queue 可显式填写
+`largeCompletePageLimit: 13`、`largeNoListeningPageLimit: 11`；fast state 保存授权依据、
+记录时间和每产品上限，分页报告也保留授权。成功后才保存计划，失败不保存。
+
+冻结清单使用 `paper-pdf-products-v4`，`pageLimits` 完整记录
+`largeCompletePageLimit`／`largeNoListeningPageLimit`／`economyPageLimit`，
+并保存同一 `pageLimitAuthorization`；无听力源继续保留
+`listening: "absent-by-exam-design"`，不生成完整版。Review、封存投影、冻结与发布
+读取均校验显式上限及绑定；清单不能自行放宽分页计划。历史清单 v1／v2／v3 不变。
+
+只扩展页数。大字版仍为 12pt／19.5pt；省纸九页仍为 10.5pt／18pt。
+应用文／续写框优先恢复到 65／57mm，既有最小高度、同页、七选五选项库完整、
+不删字、不裁图、不裁框等规则全部保留。不补空白页凑满上限；超过上限或缺少
+显式声明一律失败。本地出样与授权记录不代替试卷送审、批准、发布或网站部署。
+
 ## 单卷九页省纸上限（2026-10-13 Owner授权）
 
 M174在默认八页有界搜索失败后，Owner允许本卷超过八页，并授权共享合同支持、

@@ -11,7 +11,8 @@ import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../../server/i
 import { renderReviewPdfProduct } from '../../server/import-review/reviewPagination.mjs'
 import { PRODUCT_MANIFEST, productInputDigest, readFrozenProducts } from '../../server/paper-import/frozenProducts.mjs'
 import { ABSENT_BY_EXAM_DESIGN, NO_LISTENING_PRODUCT_SCHEMA, productFiles, sourceProductEditions } from '../../server/paper-import/pdfProductSet.mjs'
-import { economyPageLimitForPlan } from '../../server/paper-import/paginationPlan.mjs'
+import { productPageLimitsForPlan } from '../../server/paper-import/paginationPlan.mjs'
+import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 
@@ -58,7 +59,9 @@ async function freeze(args) {
   if (existsSync(path.join(rootDir, 'products'))) throw new Error('产品目录已存在；保留旧字节，请在新 revision 工作副本生成')
   const projection = buildNck1ReviewProjection(rootDir, { requireAnalyses: true })
   const examDate = readExamDate(projection.config.provenance, { required: true })
-  const economyPageLimit = economyPageLimitForPlan(projection.paginationPlan)
+  const pageLimits = productPageLimitsForPlan(projection.paginationPlan)
+  const { economyPageLimit } = pageLimits
+  const extendedLarge = projection.paginationPlan?.schemaVersion === 'paper-pagination-plan-v6'
   const listeningCount = projection.paginationSlotBindings.filter(entry => entry.familyContractId === 'listening').length
   const selectedFiles = productFiles(sourceProductEditions(projection.config, listeningCount))
   const inputDigest = currentInputDigest(rootDir, projection)
@@ -79,11 +82,12 @@ async function freeze(args) {
   }
   if (currentInputDigest(rootDir, projection) !== inputDigest) throw new Error(`生成期间输入改变；保留失败产物 ${staging}`)
   const noListening = projection.config.listening === ABSENT_BY_EXAM_DESIGN
-  const manifest = { schemaVersion: noListening ? NO_LISTENING_PRODUCT_SCHEMA : economyPageLimit === 9 ? 'paper-pdf-products-v2' : 'paper-pdf-products-v1',
-    ...(noListening ? { listening: ABSENT_BY_EXAM_DESIGN, economyPageLimit } : economyPageLimit === 9 ? { economyPageLimit } : {}), paperId: projection.paperId,
+  const manifest = { schemaVersion: extendedLarge ? 'paper-pdf-products-v4' : noListening ? NO_LISTENING_PRODUCT_SCHEMA : economyPageLimit === 9 ? 'paper-pdf-products-v2' : 'paper-pdf-products-v1',
+    ...(extendedLarge ? { pageLimits, pageLimitAuthorization: LARGE_PAGE_LIMIT_AUTHORIZATION,
+      ...(noListening ? { listening: ABSENT_BY_EXAM_DESIGN } : {}) } : noListening ? { listening: ABSENT_BY_EXAM_DESIGN, economyPageLimit } : economyPageLimit === 9 ? { economyPageLimit } : {}), paperId: projection.paperId,
     paperName: projection.paperName, examDate, inputDigest, files }
   writeFileSync(path.join(staging, PRODUCT_MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'wx' })
-  readFrozenProducts(staging, { inputDigest, economyPageLimit, config: projection.config, listeningCount, required: true })
+  readFrozenProducts(staging, { inputDigest, ...pageLimits, config: projection.config, listeningCount, required: true })
   renameSync(path.join(staging, 'products'), path.join(rootDir, 'products'))
   rmdirSync(staging)
   console.log(JSON.stringify({ status: 'local_products_frozen', paperId: projection.paperId, files,

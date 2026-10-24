@@ -1,3 +1,4 @@
+import { DEFAULT_PRODUCT_PAGE_LIMITS, LARGE_PAGE_LIMIT_AUTHORIZATION, validatePageLimitAuthorization } from './pdfPageLimits.mjs'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
@@ -8,10 +9,28 @@ import { STUDENT_PRODUCT_EDITIONS, studentProductPolicy, validateStudentProductL
 export const PAPER_PAGINATION_PLAN_FILE_NAME = 'pagination-plan.json'
 export const FIXED_PAGINATION_EDITIONS = ['friendly8', 'friendly10', 'long10', 'long12', ...STUDENT_PRODUCT_EDITIONS]
 
-// Only a source/Candidate-bound v5 plan opts this paper into the nine-page
-// ceiling. Absent and historical plans retain the exact eight-page policy.
+// Source/Candidate-bound v5 and v6 plans explicitly declare the economy ceiling.
+// Absent and earlier plans retain the exact eight-page policy.
 export function economyPageLimitForPlan(plan) {
-  return plan?.schemaVersion === 'paper-pagination-plan-v5' ? 9 : 8
+  return productPageLimitsForPlan(plan).economyPageLimit
+}
+
+export function productPageLimitsForPlan(plan) {
+  if (plan?.schemaVersion === 'paper-pagination-plan-v6') return {
+    economyPageLimit: plan.editions?.economy8?.targetPages ?? 8,
+    largeCompletePageLimit: plan.editions?.largeComplete?.targetPages ?? 12,
+    largeNoListeningPageLimit: plan.editions?.largeNoListening?.targetPages ?? 10,
+  }
+  return { ...DEFAULT_PRODUCT_PAGE_LIMITS, economyPageLimit: plan?.schemaVersion === 'paper-pagination-plan-v5' ? 9 : 8 }
+}
+
+export function productPlanVersion(editions) {
+  return editions?.largeComplete?.targetPages === 13 || editions?.largeNoListening?.targetPages === 11
+    ? 'paper-pagination-plan-v6' : editions?.economy8?.targetPages === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4'
+}
+
+export function productPlanAuthorization(schemaVersion) {
+  return schemaVersion === 'paper-pagination-plan-v6' ? { pageLimitAuthorization: { ...LARGE_PAGE_LIMIT_AUTHORIZATION } } : {}
 }
 
 function invalid(message) {
@@ -34,14 +53,23 @@ export function validatePaperPaginationPlan(plan, {
   slotBindings,
   sourceHasListening,
 } = {}) {
-  exactKeys(plan, ['schemaVersion', 'paperId', 'sourceDigest', 'candidateDigest', 'editions'], 'root')
-  if (!['paper-pagination-plan-v1', 'paper-pagination-plan-v2', 'paper-pagination-plan-v4', 'paper-pagination-plan-v5'].includes(plan.schemaVersion)) invalid('schemaVersion is unsupported')
+  exactKeys(plan, ['schemaVersion', 'paperId', 'sourceDigest', 'candidateDigest', 'editions',
+    ...(plan?.schemaVersion === 'paper-pagination-plan-v6' ? ['pageLimitAuthorization'] : [])], 'root')
+  if (!['paper-pagination-plan-v1', 'paper-pagination-plan-v2', 'paper-pagination-plan-v4', 'paper-pagination-plan-v5', 'paper-pagination-plan-v6'].includes(plan.schemaVersion)) invalid('schemaVersion is unsupported')
   if (plan.paperId !== paperId || plan.sourceDigest !== sourceDigest
     || plan.candidateDigest !== candidateDigest) invalid('source or Candidate identity is stale')
   exactKeys(plan.editions, Object.keys(plan.editions), 'editions')
   if (Object.keys(plan.editions).length === 0) invalid('at least one edition is required')
-  const economyPageLimit = economyPageLimitForPlan(plan)
-  if (economyPageLimit === 9 && !plan.editions.economy8) invalid('v5 requires an explicit economy8 edition')
+  const pageLimits = productPageLimitsForPlan(plan)
+  const { economyPageLimit } = pageLimits
+  if (plan.schemaVersion === 'paper-pagination-plan-v6') {
+    try {
+      validatePageLimitAuthorization(plan.pageLimitAuthorization)
+      studentProductPolicy('largeNoListening', 0, pageLimits)
+    } catch (error) { invalid(error.message) }
+    if (productPlanVersion(plan.editions) !== 'paper-pagination-plan-v6') invalid('v6 requires an explicit large-edition allowance')
+  }
+  if (plan.schemaVersion === 'paper-pagination-plan-v5' && !plan.editions.economy8) invalid('v5 requires an explicit economy8 edition')
   const bindingBySlot = new Map(slotBindings.map((entry) => [entry.slotId, entry]))
   const listeningSlotCount = slotBindings.filter((entry) =>
     entry.familyContractId === 'listening').length
@@ -54,7 +82,7 @@ export function validatePaperPaginationPlan(plan, {
     const entry = plan.editions[edition]
     const product = STUDENT_PRODUCT_EDITIONS.includes(edition)
     if (product) {
-      if (!['paper-pagination-plan-v4', 'paper-pagination-plan-v5'].includes(plan.schemaVersion)) invalid(`${edition} requires paper-pagination-plan-v4 or v5`)
+      if (!['paper-pagination-plan-v4', 'paper-pagination-plan-v5', 'paper-pagination-plan-v6'].includes(plan.schemaVersion)) invalid(`${edition} requires paper-pagination-plan-v4, v5 or v6`)
       try { validateStudentProductLayout(entry?.layout, edition) } catch (error) { invalid(error.message) }
       if (edition === 'economy8' && economyPageLimit === 9 && (entry.layout.fontSizePt !== 10.5
         || entry.layout.profile !== 'student-friendly-economy-v2')) invalid('nine-page economy must retain its 10.5pt economy-v2 layout')
@@ -78,7 +106,7 @@ export function validatePaperPaginationPlan(plan, {
       }
     }
     const expectedTarget = product
-      ? studentProductPolicy(edition, 2, { economyPageLimit }).targetPages
+      ? studentProductPolicy(edition, 2, pageLimits).targetPages
       : { friendly8: 8, friendly10: 10, long10: 10, long12: 12 }[edition]
     const expectedListening = edition === 'friendly10' || edition === 'long12' || edition === 'largeComplete'
     if (entry.targetPages !== expectedTarget || entry.includeListening !== expectedListening) {
