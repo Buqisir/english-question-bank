@@ -115,14 +115,18 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
       }
       // Keep spaces for the shared English sample-label predicate. Source text
       // and sourceLabel remain untouched; matching alone uses NFKC.
-      const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(item.text.normalize('NFKC').trim())
+      const labelView = item.text.normalize('NFKC').trim()
+      const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(labelView)
+      // A citation such as “范文1中…” is rubric prose. NFKC also handles
+      // full-width/circled ordinals; spaces distinguish an inline English body.
+      const sampleLabel = /^(?:[一二三四五六七八九十]+、)?(?:参考)?范文(?:\d+|[一二三四五六七八九十]+)?(?:$|[:：]|\s+[A-Za-z])/u.test(labelView)
       const scoringLabel = isScoringLabel(item.text, scoringTask)
       if (!ended && taskType && scoringLabel) label = item
       // A reprinted "写作二" starts the sample between rubric sections, not
       // another scoring paragraph; only the next rubric label restores scoring.
-      else if (numberedEntryLabel || isWritingVersionLabel(item.text)
+      else if (numberedEntryLabel || sampleLabel || isWritingVersionLabel(item.text)
         || /^写作[一二](?:范文[:：]?)?$/u.test(text)
-        || /^(?:(?:[一二三四五六七八九十]+、)?(?:参考范文|考场作文|作答示例|参考答案|范文)|(?:(?:A|One)?PossibleVersion)|【|\[)/iu.test(text)) label = null
+        || /^(?:(?:[一二三四五六七八九十]+、)?(?:考场作文|作答示例|参考答案)|(?:(?:A|One)?PossibleVersion)|【|\[)/iu.test(text)) label = null
       scopes.set(item.itemId, !ended && taskType && label
         ? { taskType, labelItemId: label.itemId, sourceLabel: label.text } : null)
     }
