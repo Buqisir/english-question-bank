@@ -29,7 +29,7 @@ export function isSourceReferenceSampleLabel(text) {
 // Answer keys may number writing as the third part when listening is absent.
 export const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
 // Answer-first keys may name the task without a writing-part or section number.
-export const BARE_APPLICATION_SECTION = /^应用文\s*[:：]?$/u
+export const BARE_APPLICATION_SECTION = /^(?:应用文|书面表达)\s*[:：]?$/u
 // These are the existing producer's bare/combined section predicates.
 export const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
 export const INLINE_WRITING_SAMPLE = /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)(?:\s+|(?<=[）)]))(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu

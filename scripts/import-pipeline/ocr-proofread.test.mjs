@@ -247,6 +247,35 @@ function referencesFixture(texts, taskTypes = ['continuation'], {
   }] }] })
 }
 
+test('standalone written-expression headings capture application samples after objective answers', () => {
+  for (const heading of ['书面表达', '书面表达:', '书面表达：']) {
+    const result = referencesFixture(['64. but 65. better', heading,
+      'Physical or online bookstores, which do you prefer?',
+      'Nowadays, opinions vary among people towards physical and online bookstores.',
+      '读后续写：', 'Mia opened the garden gate.'], ['application', 'continuation'], {
+      lastQuestion: 65, regions: [{}, {}, { x: .25, width: .5 }],
+    })
+    assert.deepEqual(result.groups.map(group => group.essays.state), ['captured', 'captured'])
+    assert.equal(result.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '), [
+      'Physical or online bookstores, which do you prefer?',
+      'Nowadays, opinions vary among people towards physical and online bookstores.',
+    ].join(' '))
+    assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), ['Mia opened the garden gate.'])
+  }
+})
+
+test('explicit task subheadings replace a written-expression overview without capturing overview prose', () => {
+  for (const [application, continuation] of [
+    ['第一节', '第二节'], ['应用文', '读后续写'],
+  ]) {
+    const result = referencesFixture(['书面表达：', 'Overview text must not become a sample.',
+      application, '参考范文', 'Our class planted herbs.',
+      continuation, '参考范文', 'Mia opened the garden gate.'], ['application', 'continuation'])
+    assert.deepEqual(result.groups.map(group => group.essays.entries.map(entry => entry.paragraphs.map(p => p.text))),
+      [[['Our class planted herbs.']], [['Mia opened the garden gate.']]])
+  }
+})
+
 test('numbered tasks and task scoring standards bind tables without mixing the following letter', () => {
   const texts = ['66. 应用文', '应用文评分标准', '本题总分为15分。',
     'Dear Sam,', 'Our club meets on Friday.', 'Yours,', 'Alex',
@@ -274,7 +303,7 @@ test('numbered tasks and task scoring standards bind tables without mixing the f
 test('task mentions and unscoped tables cannot invent writing ownership', t => {
   t.mock.method(console, 'error', () => {})
   t.mock.method(process, 'exit', () => { throw new Error('unscoped source') })
-  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。', '评分标准']) {
+  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。', '评分标准', '书面表达需要审题', '说明：书面表达：']) {
     assert.throws(() => referencesFixture([heading, '档次', '描述'], ['application'], {
       visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-1:table-1',
         rows: [{ cells: [['i1'], ['i2']] }] }],

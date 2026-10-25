@@ -4,12 +4,45 @@ import { computeLineFacts } from './ocr-line-facts.mjs'
 import { LINE_ROLE_RULES, firstLineRole, matchesLineRole, inlineSampleParts } from './ocr-line-roles.mjs'
 import { referenceLineBoundary } from './ocr-proofread.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 
 function scoringScopes(texts) {
   return sourceReferenceScoringScopes({ documents: [{ documentId: 'answers', pages: [{
     orderedItems: texts.map((text, index) => ({ itemId: `item-${index}`, text })),
   }] }] }, new Set(['answers']))
 }
+
+test('standalone written-expression aliases share exact role, scoring and admission boundaries', () => {
+  const admission = texts => assertSourceReferenceAdmission({
+    sidecar: null, materialization: { documents: [{ documentId: 'answers', role: 'official_answers' }] },
+    sourceInput: { ocrSourceBytes: { confirmationBytes: Buffer.from(JSON.stringify({
+      documents: [{ documentId: 'answers', pages: [{ visualClassifications: [],
+        orderedItems: texts.map((text, index) => ({ itemId: `item-${index}`, text })) }] }],
+    })) } },
+  })
+  for (const heading of ['应用文', '书面表达', '书面表达:', '书面表达：']) {
+    assert.equal(firstLineRole('writing-section', computeLineFacts({ text: heading }))?.value, 'application')
+    assert.equal(scoringScopes([heading, '评分原则', '按内容和语言给分。']).get('item-2').taskType, 'application')
+    assert.throws(() => admission([heading, '参考范文', 'Our class planted herbs.']),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+    assert.doesNotThrow(() => admission([heading, '参考范文', '略']))
+  }
+  for (const heading of ['书面表达需要审题', '说明：书面表达：']) {
+    assert.equal(firstLineRole('writing-section', computeLineFacts({ text: heading })), null)
+    assert.equal(scoringScopes([heading, '评分原则', '按内容和语言给分。']).get('item-2'), null)
+    assert.doesNotThrow(() => admission([heading, '参考范文', 'Our class planted herbs.']))
+  }
+  for (const [application, continuation] of [
+    ['第一节', '第二节'], ['应用文', '读后续写'],
+  ]) {
+    const scopes = scoringScopes(['书面表达：', application, '评分原则', '应用文评分正文',
+      continuation, '评分原则', '续写评分正文'])
+    assert.equal(scopes.get('item-3').taskType, 'application')
+    assert.equal(scopes.get('item-6').taskType, 'continuation')
+    assert.throws(() => admission(['书面表达：', application, '参考范文', 'Our class planted herbs.']),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+  }
+})
 
 test('parenthesized rubric titles open exact scoring entries and reject commentary', () => {
   for (const label of ['（一）评分原则：', '(一)评分原则:', '（二）各档次给分范围和要求']) {
