@@ -158,7 +158,7 @@ function cli(script, ...args) {
 
 // Runs one repository CLI; full output goes to fast/logs/<label>.log, the parsed final JSON
 // document is returned. `review` routes the command to the bound Review target.
-function run(ctx, label, args, { review = false, retainLog = true } = {}) {
+function run(ctx, label, args, { review = false } = {}) {
   const viaLocal = review && target.local
   const argv = viaLocal ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
   return new Promise((resolve, reject) => {
@@ -170,10 +170,8 @@ function run(ctx, label, args, { review = false, retainLog = true } = {}) {
     child.on('error', reject)
     child.on('close', (code) => {
       const log = path.join(ctx.logs, `${label}.log`)
-      if (retainLog) {
-        mkdirSync(ctx.logs, { recursive: true })
-        writeFileSync(log, `$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}`)
-      }
+      mkdirSync(ctx.logs, { recursive: true })
+      writeFileSync(log, `$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}`)
       if (code === 0) resolve(lastJson(out) ?? { stdout: out.trim() })
       else reject(new Error(`${label} 失败（exit ${code}），日志 ${path.relative(root, log)}\n${tail(err || out)}`))
     })
@@ -890,46 +888,22 @@ function referencesCurrent(ctx) {
     && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
 }
 
-function referenceStop(ctx, code, message, cause) {
-  throw Object.assign(new Error(`${code}: ${message}；保留封存副本，先只读运行 `
-    + `node scripts/import-pipeline/review.mjs status ${ctx.paperId} 对账。`, { cause }), { code })
-}
-
-async function readCandidateStatus(ctx) {
-  // Status failure/ambiguity must not even overwrite a local log.
-  return run(ctx, 'references-status', cli('review.mjs', 'status', ctx.paperId),
-    { review: true, retainLog: false })
-}
-
-async function assertReferencesMutable(ctx, readStatus) {
+function assertReferencesMutable(ctx) {
   const submitted = ['push', 'local-preview', 'screen', 'local-screen']
-    .some(name => ctx.state.steps[name])
+    .some(name => ctx.state.steps[name]?.finishedAt)
   const retained = ['signals/review-restore.json', 'canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
     'signals/locally-published.json'].some(file => existsSync(path.join(ctx.paperDir, file)))
-    || existsSync(path.join(ctx.fast, 'upload-timeline.jsonl'))
     || existsSync(path.join(ctx.work, 'handoff/evidence.json'))
   const initialization = path.join(ctx.paperDir, 'signals/source-intake-initialization.json')
   const hasBase = existsSync(initialization) && readJson(initialization).baseRevisionId
+  // OCR and Candidate uploads share upload-timeline.jsonl; it proves neither kind.
+  // Local rebuilds do not contact Review. Submission retains its existing bound transaction.
   if (submitted || retained || hasBase || ctx.state.data.candidateRevisionId || ctx.state.data.revisionId
+    || ctx.state.data.baseRevisionId
     || ctx.state.data.localReport || ctx.state.data.status === 'local_ready') {
-    referenceStop(ctx, 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED', '已有 Candidate、push 或 preview 记录，禁止自动重建源参考')
-  }
-  let status
-  try { status = await readStatus(ctx) } catch (cause) {
-    referenceStop(ctx, 'SOURCE_REFERENCES_REMOTE_UNKNOWN', '远端 Candidate 状态 UNKNOWN，禁止自动重建源参考', cause)
-  }
-  const unknown = () => referenceStop(ctx, 'SOURCE_REFERENCES_REMOTE_UNKNOWN',
-    '远端 Candidate 状态缺失或不明确，禁止自动重建源参考')
-  if (status?.paperId !== ctx.paperId || !Array.isArray(status.revisions)
-    || status.revisions.some(item => !item || item.paperId !== ctx.paperId
-      || typeof item.id !== 'string' || !item.id || typeof item.state !== 'string'
-      || !['ocr', 'candidate'].includes(item.reviewKind))) unknown()
-  const latest = status.revisions.find(item => item.id === status.latestRevisionId)
-  if (status.revisions.length
-    ? !latest || status.latest?.id !== latest.id || status.latest?.reviewKind !== latest.reviewKind
-    : status.latestRevisionId !== null || status.latest !== null) unknown()
-  if (status.revisions.some(item => item.reviewKind === 'candidate')) {
-    referenceStop(ctx, 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED', '远端已有 Candidate revision，禁止自动重建源参考')
+    throw Object.assign(new Error('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: '
+      + '已有本地 Candidate、push 或 preview 记录，禁止自动重建源参考；保留封存副本，在既有持锁 Review 绑定事务内只读对账。'),
+    { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
   }
 }
 
@@ -952,10 +926,10 @@ export function assertReferenceProductsReady(ctx) {
 }
 
 // Stage overrides keep the orchestration testable without launching rendering or Review writes.
-export async function finish(ctx, args, { readStatus = readCandidateStatus, referenceStages = {} } = {}) {
-  // Reconcile before page-limit edits, sidecar installs, or any state/log write.
+export async function finish(ctx, args, { referenceStages = {} } = {}) {
+  // Check Candidate-only local evidence before any state/log or product write.
   if (!referencesCurrent(ctx)) {
-    await assertReferencesMutable(ctx, readStatus)
+    assertReferencesMutable(ctx)
     redoFrom(ctx, 'source-references')
   }
   for (const [flag, edition, expected] of [
@@ -1163,6 +1137,15 @@ function redoFrom(ctx, name) {
   const redoPagination = index <= STEP_ORDER.indexOf('pagination-run')
   const paginationJobs = Object.entries(ctx.state.background).filter(([key]) => key.startsWith('pagination-'))
   if (redoPagination && paginationJobs.some(([, job]) => alive(job.pid))) fail('分页仍在运行；待其退出后再重做')
+  // Retain PDF QA for the superseded products, without moving upstream answer checks or Screen tiles.
+  const qa = path.join(ctx.work, 'handoff/qa')
+  if (index <= STEP_ORDER.indexOf('pdf-qa') && existsSync(qa)) {
+    for (const file of readdirSync(qa)) {
+      if (/^(?:contact-(?:largeComplete|largeNoListening|economy8|answerOnly)\.png|(?:largeComplete|largeNoListening|economy8|answerOnly)\.txt)$/u.test(file)) {
+        archive(ctx, path.join(qa, file))
+      }
+    }
+  }
   for (const later of STEP_ORDER.slice(index)) delete ctx.state.steps[later]
   if (index <= STEP_ORDER.indexOf('asr-apple-rule-v2')) delete ctx.state.data.listeningSegmentAttempt
   delete ctx.state.data.status
@@ -1197,11 +1180,11 @@ function redoFrom(ctx, name) {
   save(ctx)
 }
 
-export async function requestedRedo(ctx, name, { readStatus = readCandidateStatus } = {}) {
+export async function requestedRedo(ctx, name) {
   // An explicit redo must not erase submission evidence before finish sees it.
   if (STEP_ORDER.includes(name) && (!referencesCurrent(ctx)
     || STEP_ORDER.indexOf(name) <= STEP_ORDER.indexOf('pdf-qa'))) {
-    await assertReferencesMutable(ctx, readStatus)
+    assertReferencesMutable(ctx)
   }
   redoFrom(ctx, name)
 }

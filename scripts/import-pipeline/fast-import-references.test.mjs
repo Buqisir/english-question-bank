@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
@@ -6,6 +7,7 @@ import { assertReferenceProductsReady, finish, requestedRedo, submit } from './f
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
+import { uploadReviewBundle } from './lib-review-upload.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
 const oldTime = '2026-01-01T00:00:00.000Z'
@@ -54,9 +56,17 @@ function fixture(t, referencesVersion = version) {
     json(path.join(ctx.paperDir, file), { old: file })
   }
   json(path.join(ctx.fast, 'pagination/economy8/report.json'), { old: true })
+  // Real uploader timing shape: OCR push writes this same untyped timeline as Candidate push.
+  json(path.join(ctx.fast, 'upload-timeline.jsonl'), { paperId: ctx.paperId, startedAt: oldTime,
+    manifestFiles: 3, uploadedFiles: 3, uploadedBytes: 120, putSeconds: 0.1, putWallSeconds: 0.1,
+    putAttempts: 3, putRetries: 0, finalizeSeconds: 0.1, putMode: 'parallel', putConcurrency: 4, completed: true })
+  for (const product of ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']) {
+    json(path.join(ctx.work, `handoff/qa/contact-${product}.png`), { retained: product })
+    json(path.join(ctx.work, `handoff/qa/${product}.txt`), { retained: product })
+  }
+  json(path.join(ctx.work, 'handoff/qa/answer-key-comparison.json'), { upstream: true })
+  json(path.join(ctx.work, 'handoff/qa/screen-tile-00.png'), { screen: true })
   json(ctx.statePath, ctx.state)
-  const ocr = { id: 'rev-sealed-ocr', paperId: ctx.paperId, reviewKind: 'ocr', state: 'approved' }
-  const remote = { paperId: ctx.paperId, revisions: [ocr], latestRevisionId: ocr.id, latest: ocr }
   const calls = []
   const referenceStages = Object.fromEntries(downstream.map(name => [name, async () => {
     calls.push(name)
@@ -68,18 +78,70 @@ function fixture(t, referencesVersion = version) {
     if (name === 'freeze') json(path.join(ctx.paperDir, 'products/answerOnly.pdf'), { regenerated: true })
     return name === 'pdf-qa' ? { dir: 'new-qa' } : { regenerated: true }
   }]))
-  return { dir, ctx, remote, calls, options: { readStatus: async () => remote, referenceStages } }
+  return { dir, ctx, calls, options: { referenceStages } }
 }
 
 test('producer and driver import the same pure version constant; current results remain cache hits', async t => {
   assert.equal(producerVersion, version)
   const { dir, ctx, calls, options } = fixture(t)
-  options.readStatus = () => { throw new Error('cache hit must not read remote state') }
   const before = snapshot(dir)
   await finish(ctx, [], options)
   assert.deepEqual(calls, [])
   assert.deepEqual(snapshot(dir), before)
   assertReferenceProductsReady(ctx)
+})
+
+test('first finish after normal push-ocr accepts the shared upload timeline', async t => {
+  const { ctx, calls, options } = fixture(t)
+  for (const name of downstream) delete ctx.state.steps[name]
+  json(ctx.statePath, ctx.state)
+  await uploadReviewBundle({
+    paperDir: ctx.paperDir,
+    manifest: { schemaVersion: 'web-import-ocr-review-bundle-v1', paperId: ctx.paperId, files: [] },
+    timelinePath: path.join(ctx.fast, 'upload-timeline.jsonl'),
+    resolveReviewFile: () => { throw new Error('empty OCR fixture has no uploads') },
+    api: async () => ({ revision: { id: 'rev-sealed-ocr', reviewKind: 'ocr' }, missingFiles: [] }),
+  })
+  const timeline = readFileSync(path.join(ctx.fast, 'upload-timeline.jsonl'))
+  await finish(ctx, [], options)
+  assert.deepEqual(calls, downstream)
+  assert.deepEqual(readFileSync(path.join(ctx.fast, 'upload-timeline.jsonl')), timeline)
+  assert.equal(ctx.state.steps['ocr-review'].result.revisionId, 'rev-sealed-ocr')
+  assertReferenceProductsReady(ctx)
+})
+
+test('dead loopback binding never invokes a network client or local Review wrapper during finish/redo', t => {
+  const { ctx } = fixture(t, 'old-version')
+  const input = path.join(ctx.fast, 'test-context.json')
+  json(input, ctx)
+  const binding = path.resolve(import.meta.dirname, '../../.amp/import-review-origin')
+  const moduleUrl = new URL('./fast-import.mjs', import.meta.url).href
+  const child = spawnSync(process.execPath, ['--input-type=module', '--eval', `
+    import assert from 'node:assert/strict'
+    import fs from 'node:fs'
+    import cp from 'node:child_process'
+    import { syncBuiltinESMExports } from 'node:module'
+    const read = fs.readFileSync, exists = fs.existsSync
+    const binding = ${JSON.stringify(binding)}
+    fs.existsSync = file => String(file) === binding || exists(file)
+    fs.readFileSync = (file, ...args) => String(file) === binding
+      ? 'http://127.0.0.1:19023' : read(file, ...args)
+    let externalCalls = 0
+    const external = () => { externalCalls++; throw new Error('unexpected network or Review wrapper') }
+    cp.spawn = cp.spawnSync = cp.execFileSync = external
+    globalThis.fetch = external
+    syncBuiltinESMExports()
+    const { finish, requestedRedo } = await import(${JSON.stringify(moduleUrl)})
+    const ctx = JSON.parse(read(${JSON.stringify(input)}, 'utf8'))
+    await requestedRedo(ctx, 'source-references')
+    const referenceStages = Object.fromEntries(${JSON.stringify(downstream)}.map(name => [name, () =>
+      name === 'source-references' ? { producerVersion: ${JSON.stringify(version)}, outline: [] }
+        : name === 'pdf-qa' ? { dir: 'new-qa' } : {}
+    ]))
+    await finish(ctx, [], { referenceStages })
+    assert.equal(externalCalls, 0)
+  `], { encoding: 'utf8', timeout: 30000 })
+  assert.equal(child.status, 0, child.stderr || child.stdout)
 })
 
 for (const old of ['ocr-source-references-producer-v1', undefined]) {
@@ -89,6 +151,7 @@ for (const old of ['ocr-source-references-producer-v1', undefined]) {
     if (old === undefined) delete ctx.state.steps['source-references'].result.producerVersion
     const before = snapshot(path.join(ctx.paperDir, 'materialization'))
     const input = readFileSync(path.join(ctx.work, 'proofread-input.json'))
+    const qaBefore = snapshot(path.join(ctx.work, 'handoff/qa'))
     await finish(ctx, [], options)
     assert.deepEqual(calls, downstream)
     assert.deepEqual(snapshot(path.join(ctx.paperDir, 'materialization')), before)
@@ -97,6 +160,15 @@ for (const old of ['ocr-source-references-producer-v1', undefined]) {
     const archived = snapshot(path.join(ctx.work, 'superseded'))
     for (const name of ['source-references-v1.json', PAPER_PAGINATION_PLAN_FILE_NAME, 'products/answerOnly.pdf',
       'pagination/economy8/report.json']) assert(Object.keys(archived).some(file => file.endsWith(name)), name)
+    for (const [name, bytes] of Object.entries(qaBefore)) {
+      if (name === 'answer-key-comparison.json' || name === 'screen-tile-00.png') {
+        assert.equal(snapshot(path.join(ctx.work, 'handoff/qa'))[name], bytes)
+      } else {
+        const retained = Object.keys(archived).find(file => file.endsWith(name))
+        assert(retained, name)
+        assert.equal(archived[retained], bytes)
+      }
+    }
     assertReferenceProductsReady(ctx)
     const completedState = readFileSync(ctx.statePath)
     await finish(ctx, [], options)
@@ -129,9 +201,8 @@ for (const interrupted of ['source-references', 'pagination-plan', 'freeze', 'pd
 for (const marker of ['push', 'local-preview', 'screen', 'local-screen']) {
   test(`${marker} evidence blocks stale invalidation before page-limit changes or any writes`, async t => {
     const { dir, ctx, options } = fixture(t, 'old-version')
-    ctx.state.steps[marker] = { startedAt: oldTime }
+    ctx.state.steps[marker] = completed({ revisionId: 'rev-candidate' })
     json(ctx.statePath, ctx.state)
-    options.readStatus = () => { throw new Error('local evidence already requires reconciliation') }
     const before = snapshot(dir), state = structuredClone(ctx.state)
     await assert.rejects(() => finish(ctx, ['--economy-page-limit', '9'], options),
       { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
@@ -143,10 +214,10 @@ for (const marker of ['push', 'local-preview', 'screen', 'local-screen']) {
 for (const name of ['source-references', 'pagination-run', 'pdf-qa']) {
   for (const current of [true, false]) test(`explicit redo from ${name} (${current ? 'current' : 'old'} references) cannot erase submission evidence`, async t => {
     const { dir, ctx, options } = fixture(t, current ? version : 'old-version')
-    ctx.state.steps.push = { startedAt: oldTime }
+    ctx.state.steps.push = completed({ revisionId: 'rev-candidate' })
     json(ctx.statePath, ctx.state)
     const before = snapshot(dir)
-    await assert.rejects(() => requestedRedo(ctx, name, options),
+    await assert.rejects(() => requestedRedo(ctx, name),
       { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
     assert.deepEqual(snapshot(dir), before)
   })
@@ -162,7 +233,7 @@ test('active pagination retains all state and artifacts until the job exits', as
 })
 
 for (const file of ['signals/review-restore.json', 'canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
-  'signals/source-intake-initialization.json', '../work/fast/upload-timeline.jsonl', '../work/handoff/evidence.json']) {
+  'signals/locally-published.json', 'signals/source-intake-initialization.json', '../work/handoff/evidence.json']) {
   test(`retained ${file} blocks stale invalidation without a push marker`, async t => {
     const { dir, ctx, options } = fixture(t, 'old-version')
     json(path.join(ctx.paperDir, file), { baseRevisionId: 'rev-candidate' })
@@ -172,28 +243,12 @@ for (const file of ['signals/review-restore.json', 'canonical-evidence/web-revie
   })
 }
 
-for (const state of ['uploading', 'awaiting_review', 'approved', 'superseded', 'UNKNOWN']) {
-  test(`remote Candidate ${state} is retained without local push evidence`, async t => {
-    const { dir, ctx, remote, options } = fixture(t, 'old-version')
-    // OCR may remain latest while an interrupted Candidate registration exists in revisions.
-    remote.revisions.push({ id: 'rev-candidate', paperId: ctx.paperId, reviewKind: 'candidate', state })
-    const before = snapshot(dir)
-    await assert.rejects(() => finish(ctx, [], options), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
-    assert.deepEqual(snapshot(dir), before)
-  })
-}
-
-for (const response of [null, {}, { paperId: 'wrong', revisions: [] }, 'network-failure', 'hidden-latest', 'unknown-kind']) {
-  test(`UNKNOWN remote (${JSON.stringify(response)}) never writes or invalidates state`, async t => {
-    const { dir, ctx, remote, options } = fixture(t, 'old-version')
-    options.readStatus = async () => {
-      if (response === 'network-failure') throw new Error('EOF')
-      if (response === 'hidden-latest') return { ...remote, latestRevisionId: 'hidden' }
-      if (response === 'unknown-kind') return { ...remote, revisions: [{ ...remote.latest, reviewKind: null }] }
-      return response
-    }
+for (const field of ['candidateRevisionId', 'revisionId', 'baseRevisionId', 'localReport', 'status']) {
+  test(`local Candidate evidence in data.${field} never writes or invalidates state`, async t => {
+    const { dir, ctx, options } = fixture(t, 'old-version')
+    ctx.state.data[field] = field === 'status' ? 'local_ready' : 'retained-candidate'
     const before = snapshot(dir), state = structuredClone(ctx.state)
-    await assert.rejects(() => finish(ctx, [], options), { code: 'SOURCE_REFERENCES_REMOTE_UNKNOWN' })
+    await assert.rejects(() => finish(ctx, [], options), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
     assert.deepEqual(snapshot(dir), before)
     assert.deepEqual(ctx.state, state)
   })
