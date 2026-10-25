@@ -26,11 +26,18 @@ trace 中全部逐页 drafts。清单逐文件记录输入类型、绝对原路�
 任务/命令中锁定 digest，并传 `--expect-corpus-digest`；不匹配时在执行回放前失败。
 
 `--baseline` 和 `--candidate` 均解析成完整 commit SHA。通过 `git show`
-导出对应版本的静态相对模块依赖闭包到本工作树 `.scratch/`，不复制仓库资产、不安装依赖。
+导出对应版本的静态相对模块依赖闭包（含静态 JSON import）到本工作树 `.scratch/`，不复制试卷资产、不安装依赖。
 仅在导出的入口末尾附加已有 `pageLines` / `expand` 的 export。
 不会改写生产规则函数体。静态闭包不覆盖动态 import 或模块运行时读取的 JSON 资源：
 检测到 `import(`（允许空白）就 fail closed；新增运行时 JSON 资源须先显式支持、
-冻结和校验，不能凭静态闭包声称已覆盖。外部依赖或不支持的模块类型也会失败。
+冻结和校验，不能凭静态闭包声称已覆盖。目前显式支持 `sourceReferences.mjs`
+通过 `new URL(..., import.meta.url)` 加载的 v1–v4 schema：读取相应 ref 的原始字节，
+与模块一起记入 `modules` 和 `moduleDigest`。
+外部依赖仅放行 `ajv/dist/2020.js`；从 ref 对应且 lockfile 匹配的本地
+`server/node_modules` 复制 Ajv 及其运行时依赖到快照，核对安装版本与 lockfile，
+逐文件记录字节摘要。两侧均使用本地已安装依赖，报告中的摘要明确绑定实际字节，
+不声称重新安装了历史依赖；历史 lockfile 不匹配时前置失败。
+其他外部依赖、不支持的模块类型及动态 import 仍会失败。
 `--repo` 可指定 ref 所在仓库。诊断注入可用 `--candidate-worktree <absolute-path>`：
 要求该工作树 HEAD 与 candidate ref 一致，读取其模块闭包，报告每个模块字节摘要及
 整体 moduleDigest，明确表示有工作树覆盖；不会把脏代码冒充提交内容。

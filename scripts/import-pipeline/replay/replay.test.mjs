@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
+import { pathToFileURL } from 'node:url'
 import { applyDeclarations, compare, validateDeclarations } from './compare.mjs'
 import { digest, sha256, verifyCorpus } from './corpus.mjs'
 import { run } from './runner.mjs'
@@ -126,8 +128,8 @@ function expand() {}
     const inputs = {}
     const values = {
       materialization: { paperId, documents: [{ documentId: 'answers', role: 'official_answers', sha256: 'abc' }], groups: [] },
-      evidence: { documents: [{ documentId: 'answers', pages: [] }] },
-      confirmation: { documents: [{ documentId: 'answers', pages: [] }] },
+      evidence: { documents: [{ documentId: 'answers', pages: [{ page: 1, observations: [] }] }] },
+      confirmation: { documents: [{ documentId: 'answers', pages: [{ page: 1, orderedItems: [] }] }] },
     }
     for (const [type, value] of Object.entries(values)) {
       const bytes = Buffer.from(JSON.stringify(value))
@@ -156,7 +158,7 @@ for (const [name, fault, error] of [
       const report = run({ corpus: fixture.corpus, baseline: 'HEAD', candidate: 'HEAD', channels: 'R',
         'candidate-worktree': fixture.candidate, 'expect-corpus-digest': fixture.corpusDigest })
       assert.equal(report.ok, false)
-      assert.equal(report.records[0].status, 'PASS')
+      assert.equal(report.records[0].status, 'PASS', JSON.stringify(report.records[0]))
       assert.equal(report.records[1].status, 'ERROR')
       assert.match(report.records[1].metrics.candidate.error, error)
       assert.deepEqual(report.executedCoverage.R, { baseline: 2, candidate: 1, required: 2 })
@@ -185,6 +187,44 @@ test('snapshot rejects dynamic imports instead of omitting their dependency clos
   try {
     assert.throws(() => snapshot(repo, resolveRef(repo, 'HEAD'), path.join(fixture.directory, 'snapshot'), fixture.candidate),
       /dynamic import/iu)
+  } finally {
+    rmSync(fixture.directory, { recursive: true, force: true })
+  }
+})
+
+test('snapshot freezes the Ajv 2020 subpath, transitive dependencies and eager JSON resources', () => {
+  const directory = mkdtempSync(path.join(scratch, 'replay-ajv-'))
+  try {
+    const result = snapshot(repo, resolveRef(repo, 'HEAD'), directory)
+    for (const relative of [
+      'node_modules/ajv/dist/2020.js',
+      'node_modules/ajv/node_modules/fast-uri/index.js',
+      'server/package-lock.json',
+      'schemas/paper-import/source-references-v1.schema.json',
+      'standards/paper-canonical/manifest-v71.json',
+    ]) {
+      assert.equal(result.modules[relative], sha256(readFileSync(path.join(directory, relative))))
+    }
+    const child = spawnSync(process.execPath, ['--input-type=module', '-e', `
+      import Ajv from ${JSON.stringify(pathToFileURL(path.join(directory, 'node_modules/ajv/dist/2020.js')).href)}
+      import { buildSourceReferences } from ${JSON.stringify(pathToFileURL(path.join(directory, 'scripts/import-pipeline/ocr-proofread.mjs')).href)}
+      const validate = new Ajv().compile({ type: 'string', format: undefined })
+      if (!validate('ready') || validate(42) || typeof buildSourceReferences !== 'function') process.exit(1)
+    `], { encoding: 'utf8' })
+    assert.equal(child.status, 0, child.stderr)
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+})
+
+test('snapshot still rejects external subpaths without explicit support', () => {
+  const fixture = runnerFixture()
+  try {
+    const entry = path.join(fixture.candidate, 'scripts/import-pipeline/ocr-proofread.mjs')
+    const source = readFileSync(entry, 'utf8')
+    writeFileSync(entry, `import Ajv from 'ajv/dist/2019.js'\n${source}`)
+    assert.throws(() => snapshot(repo, resolveRef(repo, 'HEAD'), path.join(fixture.directory, 'snapshot'), fixture.candidate),
+      /External replay dependency needs explicit support: ajv\/dist\/2019.js/u)
   } finally {
     rmSync(fixture.directory, { recursive: true, force: true })
   }
