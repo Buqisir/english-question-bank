@@ -1579,6 +1579,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   const lastMarkerIndex = markers.at(-1)?.index ?? -1
   const analysis = lastMarkerIndex < 0 ? -1 : answerBody.findIndex((item, index) =>
     index > lastMarkerIndex && (isAnswerExplanationHeading(item)
+      || (item.kind === 'paragraph' && /^(?:【)?文章大意(?:】)?/u.test(normalized(item.text)))
       || (item.kind === 'paragraph' && /^试题答案[:：]?$/u.test(normalized(item.text)))))
   const listeningEndIndexes = lastMarkerIndex < 0 ? [] : answerBody.flatMap((item, index) =>
     index > lastMarkerIndex && item.kind === 'paragraph'
