@@ -32,6 +32,7 @@ import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrConten
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
+import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2,
@@ -1679,12 +1680,22 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         const blocks = paragraphs.map((item, index) => {
           if (item.figure) return { kind: 'figure', ...frozenFigure(item.figure) }
           if (item.table) return item.table
-          const byPage = new Map()
+          // Keep each contiguous page/column fragment narrow: a page-wide
+          // union at a column wrap would also claim unrelated source items.
+          const fragments = []
           for (const line of item.lines) {
-            if (!byPage.has(line.page)) byPage.set(line.page, [])
-            byPage.get(line.page).push(line)
+            const previous = fragments.at(-1)
+            if (!previous || previous.page !== line.page
+              || line.left >= previous.right - SOURCE_REFERENCE_REGION_TOLERANCE
+              || line.right <= previous.left + SOURCE_REFERENCE_REGION_TOLERANCE) {
+              fragments.push({ page: line.page, left: line.left, right: line.right, lines: [line] })
+            } else {
+              previous.lines.push(line)
+              previous.left = Math.min(previous.left, line.left)
+              previous.right = Math.max(previous.right, line.right)
+            }
           }
-          const sources = [...byPage.values()].map(pageSource)
+          const sources = fragments.map(fragment => pageSource(fragment.lines))
           return { kind: 'paragraph', paragraph: {
             paragraphId: `${rest.referenceId}-p${index + 1}`,
             role: item.role,

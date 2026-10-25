@@ -1,6 +1,7 @@
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from './sourceReferenceScoringScope.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures } from './sourceReferences.mjs'
+import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
+  SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { BARE_APPLICATION_SECTION, WRITING_SECTION, LISTENING_REFERENCE_START,
@@ -74,9 +75,9 @@ function containsSource(source, inner) {
   const outer = source?.locator
   if (outer?.kind !== 'page_region' || outer.documentId !== inner.documentId || outer.page !== inner.page) return false
   const a = outer.region, b = inner.region
-  return b.x >= a.x - 0.000001 && b.y >= a.y - 0.000001
-    && b.x + b.width <= a.x + a.width + 0.000001
-    && b.y + b.height <= a.y + a.height + 0.000001
+  return b.x >= a.x - SOURCE_REFERENCE_REGION_TOLERANCE && b.y >= a.y - SOURCE_REFERENCE_REGION_TOLERANCE
+    && b.x + b.width <= a.x + a.width + SOURCE_REFERENCE_REGION_TOLERANCE
+    && b.y + b.height <= a.y + a.height + SOURCE_REFERENCE_REGION_TOLERANCE
 }
 
 function survivingConfirmedText(confirmation, evidence, referenceFigures) {
@@ -151,10 +152,12 @@ export function assertSourceReferenceAdmission({
     if (!sources.some(source => illustratedDocuments.has(source.locator.documentId))) continue
     // The resolver has already consumed exactly the selected image itemIds and
     // observationIds. Replay the surviving items, never remove words by value.
-    const surviving = [...new Set(sources.flatMap(source =>
+    const fragments = sources.map(source =>
       (confirmedTexts.get(source.locator.documentId) ?? [])
-        .filter(item => containsSource(source, item.sourceIndex))))]
-    if (!surviving.length || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
+        .filter(item => containsSource(source, item.sourceIndex)))
+    const surviving = fragments.flat()
+    if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length
+      || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
       reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')
     }
   }

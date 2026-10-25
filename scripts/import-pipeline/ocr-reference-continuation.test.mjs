@@ -99,6 +99,20 @@ function fixture(pageLines) {
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
 const paragraphs = output => output.groups[0].essays.entries.flatMap(e => e.paragraphs)
 
+test('Liaoning-shaped scoring wrap keeps left-bottom and right-top provenance separate', () => {
+  const first = '2. 情节合理性：情绪转变是否自然（从愤怒到体谅需有过'
+  const second = '渡），冲突解决方式是否符合“亲情包容”的核心；'
+  const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line(first, .804038, .083123, .407221), line(second, .072447, .528128, .329134)]])
+  const output = buildSourceReferences(...input)
+  const p = output.groups[0].scoring.entries[0].paragraphs[0]
+  assert.equal(p.text, first + second)
+  assert.deepEqual(p.source.locator.region, { x: .083123, y: .804038, width: .407221, height: .02 })
+  assert.equal(p.continuationSources.length, 1)
+  assert.equal(p.continuationSources[0].locator.page, 1)
+  assert.deepEqual(p.continuationSources[0].locator.region, { x: .528128, y: .072447, width: .329134, height: .02 })
+})
+
 test('reference English hyphen glue retains a compound without a space', () => {
   const input = fixture([[...heading, line('We provide AI-', .3), line('based feedback.', .34)]])
   assert.deepEqual(paragraphs(buildSourceReferences(...input)).map(p => p.text), ['We provide AI-based feedback.'])

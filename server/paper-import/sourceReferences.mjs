@@ -6,6 +6,8 @@ import { deriveNck1AnalyzedPackageBundle, parseStrictPackageJson } from '../pape
 import { decodeSourceReferencePng, SOURCE_REFERENCE_IMAGE_LIMITS } from './sourceReferenceImages.mjs'
 
 export const SOURCE_REFERENCES_FILE = 'source-references-v1.json'
+// Existing normalized-region containment precision, shared with admission.
+export const SOURCE_REFERENCE_REGION_TOLERANCE = 0.000001
 export const sourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-v1.schema.json', import.meta.url), 'utf8',
 ))
@@ -253,8 +255,8 @@ export function validateSourceReferences({
             sourceBinding(block.paragraph.source, `${blockPath}.source`, block.paragraph.text)
             if (block.paragraph.continuationSources) {
               const { source, continuationSources, role, text } = block.paragraph
-              if (kind !== 'essays' || role !== 'body') {
-                issue('SOURCE_REFERENCES_CONTINUATION_ROLE_INVALID', blockPath, 'Only essay body paragraphs may span source pages')
+              if (kind !== 'scoring' && (kind !== 'essays' || role !== 'body')) {
+                issue('SOURCE_REFERENCES_CONTINUATION_ROLE_INVALID', blockPath, 'Only essay body and scoring prose paragraphs may span source regions')
               }
               if (source.locator.kind !== 'page_region') {
                 issue('SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID', `${blockPath}.source`, 'Continued paragraphs must start with a page region')
@@ -267,10 +269,13 @@ export function validateSourceReferences({
                   || continuation.documentSha256 !== source.documentSha256) {
                   issue('SOURCE_REFERENCES_CONTINUATION_SOURCE_INVALID', continuationPath, 'All paragraph fragments must bind the same source document and SHA')
                 }
-                if (continuation.locator.kind !== 'page_region'
-                  || previous.locator.kind !== 'page_region'
-                  || continuation.locator.page !== previous.locator.page + 1) {
-                  issue('SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID', continuationPath, 'Paragraph fragments must use consecutive, strictly increasing page regions')
+                const before = previous.locator, after = continuation.locator
+                const pageRegions = before.kind === 'page_region' && after.kind === 'page_region'
+                const rightColumn = pageRegions && after.page === before.page
+                  && after.region.x > before.region.x
+                  && after.region.x >= before.region.x + before.region.width - SOURCE_REFERENCE_REGION_TOLERANCE
+                if (!pageRegions || (after.page !== before.page + 1 && !rightColumn)) {
+                  issue('SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID', continuationPath, 'Paragraph fragments must use consecutive pages or disjoint rightward regions on the same page')
                 }
                 previous = continuation
               }

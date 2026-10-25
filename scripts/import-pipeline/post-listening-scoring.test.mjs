@@ -222,6 +222,13 @@ test('admission compares retained and historically spaced source hyphens without
   wrong.groups[0].essays.entries[0].paragraphs[0].text = 'We provide AI-based guidance.'
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: wrong }),
     /Reference text must replay surviving confirmed OCR items/u)
+  const emptyFragment = structuredClone(captured)
+  const paragraph = emptyFragment.groups[0].essays.entries[0].paragraphs[0]
+  const continuation = structuredClone(paragraph.source)
+  continuation.locator.region = { x: .999, y: .95, width: .001, height: .001 }
+  paragraph.continuationSources = [continuation]
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: emptyFragment }),
+    /Reference text must replay surviving confirmed OCR items/u, 'each region must replay at least one surviving item')
   assert.deepEqual(captured, original)
 })
 
