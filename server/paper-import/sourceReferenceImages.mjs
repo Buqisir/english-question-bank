@@ -14,7 +14,9 @@ export const SOURCE_REFERENCE_IMAGE_LIMITS = Object.freeze({
 export const SOURCE_REFERENCE_IMAGE_PROFILE = 'source-reference-pdf-crop-v1'
 export const SOURCE_REFERENCE_IMAGE_DPI = 288
 export const SOURCE_REFERENCE_RASTER_LIMITS = Object.freeze({
-  maxPagePixels: 16_000_000, maxPageDimension: 8192, timeoutMs: 15_000,
+  // A valid scanned answers page alone took 30.12s under import contention.
+  // Keep one finite deadline for pdfinfo, pdftoppm, identify and crop together.
+  maxPagePixels: 16_000_000, maxPageDimension: 8192, timeoutMs: 45_000,
 })
 const signature = Buffer.from('89504e470d0a1a0a', 'hex')
 

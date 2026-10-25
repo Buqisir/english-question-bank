@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import childProcess from 'node:child_process'
 import { syncBuiltinESMExports } from 'node:module'
 import { test } from 'node:test'
+import { writeFileSync } from 'node:fs'
 import { crc32, deflateSync } from 'node:zlib'
 import { fitSourceReferencePng } from './sourceReferencePngSizing.mjs'
 import { SOURCE_REFERENCE_IMAGE_LIMITS as limits, decodeSourceReferencePng } from './sourceReferenceImages.mjs'
@@ -18,12 +19,12 @@ function chunk(type, data) {
   bytes.writeUInt32BE(crc32(bytes.subarray(4, -4)), bytes.length - 4)
   return bytes
 }
-function syntheticCrop(width, height, noise = false) {
+function syntheticCrop(width, height, noise = false, alpha = 255) {
   const data = Buffer.alloc(height * (width * 4 + 1))
   let seed = 73
   for (let y = 0; y < height; y++) for (let x = 0; x < width * 4; x++) {
     seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5
-    data[y * (width * 4 + 1) + x + 1] = noise ? seed & 255 : x % 4 === 3 ? 255 : 90
+    data[y * (width * 4 + 1) + x + 1] = noise ? seed & 255 : x % 4 === 3 ? alpha : 90
   }
   const header = Buffer.alloc(13)
   header.writeUInt32BE(width); header.writeUInt32BE(height, 4)
@@ -48,6 +49,7 @@ test('an oversized synthetic PNG fits losslessly without changing a single RGBA 
   const fitted = fitSourceReferencePng(crop, limits)
   assert(fitted.bytes.length <= limits.pngBytes)
   assert.equal(fitted.processing.method, 'lossless')
+  assert.equal(fitted.processing.codec, 'png24', 'opaque crops skip the redundant PNG32 encoding')
   assert.equal(fitted.pixelWidth, crop.pixelWidth)
   assert.equal(fitted.pixelHeight, crop.pixelHeight)
   const pixels = decodeSourceReferencePng({ profile: 'source-reference-pdf-crop-v1', mediaType: 'image/png',
@@ -56,6 +58,80 @@ test('an oversized synthetic PNG fits losslessly without changing a single RGBA 
   for (let i = 0; i < pixels.length; i++) assert.equal(pixels[i], i % 4 === 3 ? 255 : 90)
   assert.deepEqual(fitSourceReferencePng(crop, limits), fitted, 'repeat input yields exact bytes, SHA and receipt')
 })
+
+test('transparent crops keep PNG32 and preserve every RGBA value', () => {
+  const crop = syntheticCrop(800, 800, false, 127)
+  const fitted = fitSourceReferencePng(crop, limits)
+  assert.equal(fitted.processing.codec, 'png32')
+  const { pixels } = decodeSourceReferencePng({ profile: 'source-reference-pdf-crop-v1', mediaType: 'image/png',
+    sha256: sha256(fitted.bytes), byteLength: fitted.bytes.length, base64: fitted.bytes.toString('base64'),
+    pixelWidth: crop.pixelWidth, pixelHeight: crop.pixelHeight })
+  for (let i = 0; i < pixels.length; i++) assert.equal(pixels[i], i % 4 === 3 ? 127 : 90)
+})
+
+test('opaque sizing uses three native calls within one shrinking hard budget', t => {
+  const original = Buffer.from([90, 90, 90, 255])
+  let now = 0
+  const clock = t.mock.method(performance, 'now', () => now)
+  const calls = []
+  const stub = t.mock.method(childProcess, 'execFileSync', (tool, args, options) => {
+    calls.push({ tool, args, options })
+    now += 10_000
+    if (args.at(-1) === 'rgba:-') return original
+    const output = args.at(-1)
+    assert(output.startsWith('png24:'), 'encode opaque pixels directly as PNG24')
+    writeFileSync(output.slice('png24:'.length), Buffer.from('encoded'))
+    return Buffer.alloc(0)
+  })
+  syncBuiltinESMExports()
+  try {
+    const fitted = fitSourceReferencePng({ bytes: Buffer.alloc(limits.pngBytes + 1),
+      pixelWidth: 1, pixelHeight: 1 }, limits)
+    assert.equal(fitted.processing.codec, 'png24')
+    assert.equal(calls.length, 3, 'decode original, encode once, replay pixels once')
+    assert.deepEqual(calls.map(call => call.options.timeout), [30_000, 20_000, 10_000])
+    for (const { tool, args, options } of calls) {
+      assert.equal(tool, 'magick')
+      assert.equal(options.killSignal, 'SIGKILL')
+      assert.equal(options.maxBuffer, limits.pixels * 4 + 1024)
+      for (const limit of ['memory 128MiB', 'map 128MiB', 'disk 0', 'thread 1', 'time 20']) {
+        assert(args.join(' ').includes(`-limit ${limit}`), limit)
+      }
+      assert(args.includes('-regard-warnings'))
+    }
+  } finally {
+    stub.mock.restore()
+    clock.mock.restore()
+    syncBuiltinESMExports()
+  }
+})
+
+for (const expired of [false, true]) {
+  test(`sizing rejects ${expired ? 'an exhausted shared deadline' : 'a changed replay pixel'}`, t => {
+    let now = 0, calls = 0
+    const clock = t.mock.method(performance, 'now', () => now)
+    const stub = t.mock.method(childProcess, 'execFileSync', (_tool, args) => {
+      calls++
+      if (expired) now += 15_000
+      if (args.at(-1) === 'rgba:-') return Buffer.from([calls === 1 ? 90 : 91, 90, 90, 255])
+      writeFileSync(args.at(-1).slice('png24:'.length), Buffer.from('encoded'))
+      return Buffer.alloc(0)
+    })
+    syncBuiltinESMExports()
+    try {
+      assert.throws(() => fitSourceReferencePng({ bytes: Buffer.alloc(limits.pngBytes + 1),
+        pixelWidth: 1, pixelHeight: 1 }, limits), {
+        code: 'SOURCE_REFERENCES_FIGURE_PNG_INVALID',
+        message: expired ? /total subprocess time budget/u : /changed source pixels/u,
+      })
+      assert.equal(calls, expired ? 2 : 3)
+    } finally {
+      stub.mock.restore()
+      clock.mock.restore()
+      syncBuiltinESMExports()
+    }
+  })
+}
 
 test('a PNG still above 2 MiB after lossless compression fails without resizing', () => {
   assert.throws(() => fitSourceReferencePng(syntheticCrop(900, 900, true), limits),
