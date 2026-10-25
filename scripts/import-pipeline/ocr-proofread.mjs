@@ -28,10 +28,7 @@ import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
-import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
-import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
-import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView,
-  SOURCE_REFERENCE_ANSWER_ROLES } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -47,10 +44,11 @@ import { planHeadingRepairs } from './ocr-heading-repair.mjs'
 import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs'
 import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { matchesLineRole, firstLineRole,
-  inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches,
+import { matchesLineRole, firstLineRole, watermarkMatches,
   REFERENCE_MARGIN_TOLERANCE } from './ocr-line-roles.mjs'
-import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
+import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle,
+  sourceReferenceUnionRegion as unionRegion } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
+export { writingSectionAfterPart } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
@@ -1007,13 +1005,6 @@ function worksheets(paperId) {
   console.log(JSON.stringify({ ok: true, pages: trace.pages.length, draftsReset: force }))
 }
 
-function unionRegion(observations) {
-  const left = Math.min(...observations.map((item) => item.region.x))
-  const top = Math.min(...observations.map((item) => item.region.y))
-  const right = Math.max(...observations.map((item) => item.region.x + item.region.width))
-  const bottom = Math.max(...observations.map((item) => item.region.y + item.region.height))
-  return { x: round(left), y: round(top), width: round(right - left), height: round(bottom - top) }
-}
 
 function presentation(paperId) {
   const { paperDir } = context(paperId)
@@ -1064,16 +1055,6 @@ function figureSizes(paperId) {
   console.log(JSON.stringify({ ok: true, paperId, changes }, null, 2))
 }
 
-// OCR can keep a bare or named section on the writing-part heading's item.
-export function writingSectionAfterPart(text) {
-  const normalized = String(text).normalize('NFKC')
-  if (!matchesLineRole('writing.part', computeLineFacts({ text: normalized }))) return null
-  const rest = normalized.replace(/^第[三四]部分\s*[:：]?\s*写作\s*(?:\([^)]*\))?/u, '').trim()
-  const number = bareSectionNumber(rest)
-  return number ? (number === '一' ? 'application' : 'continuation')
-    : firstLineRole('writing-section', computeLineFacts({ text: rest }))?.value || null
-}
-
 function joinLines(lines, { reference = false } = {}) {
   // Text glue only. Semantic boundaries have already passed decideLineJoin;
   // reference/annotation CJK spacing intentionally differs from speech hyphens.
@@ -1095,407 +1076,30 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
   return referenceBoundaryFromFacts(previous, computeLineFacts(line), margin, previousMargin)
 }
 
-// A standalone key can omit both the writing-part heading and sample label.
-// Admit only a complete letter immediately after its final objective answer;
-// never borrow a closing/signature across another section, prompt or transcript.
-function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
-  if (!lastQuestion || bareSectionNumber(factsFor(lines[index]).nfkc) !== '一') return false
-  const previous = lines[index - 1] && factsFor(lines[index - 1])
-  if (!previous || !/^\d+\s*[.．、]\s*[A-Za-z]/u.test(previous.text) || previous.hasHan) return false
-  const answers = [...previous.text.matchAll(/(?:^|\s)(\d+)\s*[.．、]\s*/gu)]
-  if (Number(answers.at(-1)?.[1]) !== lastQuestion) return false
-  return completeSourceLetter(lines, index + 1, factsFor)
-}
-
-function completeSourceLetter(lines, index, factsFor) {
-  const salutation = lines[index] && factsFor(lines[index])
-  if (!salutation || !matchesLineRole('paragraph.salutation', salutation)) return false
-  const boundary = line => {
-    const facts = factsFor(line)
-    return line.figure || line.table || bareSectionNumber(facts.nfkc)
-      || firstLineRole('writing-section', facts) || firstLineRole('scoring-section', facts)
-      || firstLineRole('entry-label', facts) || matchesLineRole('writing.part-boundary', facts)
-      || matchesLineRole('writing.explanations', facts, { sectionCount: 1 })
-      || matchesLineRole('writing.continuation-prompt', facts)
-      || matchesLineRole('paragraph.numbered', facts) || matchesLineRole('transcript.speaker', facts)
-      || matchesLineRole('writing.student-script', facts) || /^\d+\s*[.．、)]/u.test(facts.trimmed)
-  }
-  let body = ''
-  for (let i = index + 1; i < lines.length; i++) {
-    const line = lines[i]
-    if (boundary(line)) return false
-    const facts = factsFor(line)
-    if (matchesLineRole('paragraph.closing', facts)) {
-      const signature = lines[i + 1]
-      const complete = /[.!?]["”']?\s*$/u.test(body) && Boolean(signature)
-        && !boundary(signature)
-        && /^\p{Lu}[\p{Script=Latin}’'-]*\.?(?:\s+\p{Lu}[\p{Script=Latin}’'-]*\.?){0,3}$/u.test(factsFor(signature).trimmed)
-        && (!lines[i + 2] || Boolean(boundary(lines[i + 2])))
-      return complete ? { end: signature } : null
-    }
-    // A date can wrap onto its own OCR line ("May" / "30th.").
-    const wrappedDate = body && /^(?:[1-9]|[12]\d|3[01])(?:st|nd|rd|th)\b/iu.test(facts.trimmed)
-    if (facts.hasHan || (!facts.startsEnglishOrQuote && !wrappedDate)
-      || matchesLineRole('paragraph.salutation', facts)) return false
-    body += ` ${facts.text}`
-  }
-  return false
-}
-
-function applicationLetterReferenceLines(section, factsFor) {
-  if (!section.letterEnd) return section.lines
-  const selected = []
-  let afterLetter = false
-  let inScoring = false
-  for (const line of section.lines) {
-    if (afterLetter) {
-      if (line.figure || line.table) {
-        if (!inScoring) break
-      } else {
-        const facts = factsFor(line)
-        const label = firstLineRole('entry-label', facts)
-        if (label && firstLineRole('entry-kind', facts)?.value === 'scoring') {
-          inScoring = true
-        } else if (!inScoring || label
-          || matchesLineRole('writing.part-boundary', facts)
-          || matchesLineRole('writing.explanations', facts, { sectionCount: 1 })
-          || matchesLineRole('writing.continuation-prompt', facts)
-          || matchesLineRole('paragraph.numbered', facts)
-          || matchesLineRole('transcript.speaker', facts)
-          || matchesLineRole('writing.student-script', facts)
-          // Preserve numbered Chinese scoring points using their existing role.
-          || (/^\d+\s*[.．、)]/u.test(facts.trimmed) && !matchesLineRole('writing.commentary', facts))) break
-      }
-    }
-    selected.push(line)
-    if (line === section.letterEnd) afterLetter = true
-  }
-  return selected
-}
-
-// A bare "(1)" can also be prose or a rubric point. Only a consecutive
-// application-sample sequence with the same inset English title supplies
-// enough evidence to treat those numbers as labels. Keep the source spelling.
-function numberedApplicationSamples(lines, factsFor) {
-  const candidates = []
-  for (const [index, line] of lines.entries()) {
-    if (line.figure || line.table) continue
-    const number = /^\(([1-9]\d?)\)$/u.exec(factsFor(line).nfkc)
-    const title = lines[index + 1], body = lines[index + 2]
-    if (!number || !title || !body || title.figure || title.table || body.figure || body.table) continue
-    const titleFacts = factsFor(title), bodyFacts = factsFor(body)
-    if (titleFacts.hasHan || !titleFacts.startsUpperOrQuote || /[.!?:：]$/u.test(titleFacts.trimmed)
-      || !bodyFacts.startsEnglishOrQuote || bodyFacts.hasHan
-      || !(title.left > body.left && title.right < body.right)) continue
-    candidates.push({ line, title, number: Number(number[1]) })
-  }
-  if (candidates.length < 2 || candidates.some((item, index) =>
-    item.number !== index + 1 || item.title.text !== candidates[0].title.text)) return new Map()
-  return new Map(candidates.map(({ line, title }) => [line, title]))
-}
-
-// Choice grids may omit labels. Short English answers require both labels in
-// every pair, and cannot mix with choice letters within or across answer rows.
-function isObjectiveAnswerGrid(rows) {
-  if (rows.length < 2 || rows.length % 2 !== 0
-    || !rows[0].length || rows.some(row => row.length !== rows[0].length)) return false
-  const choice = /^[A-G]$/u
-  const shortAnswer = /^[A-Za-z'’-]+(?: [A-Za-z'’-]+){0,2}(?:\/[A-Za-z'’-]+(?: [A-Za-z'’-]+){0,2})*$/u
-  let previous = 0, answerKind = null
-  for (let index = 0; index < rows.length; index += 2) {
-    const numberLabel = /^(?:题号|序号)$/u.test(rows[index][0])
-    const answerLabel = rows[index + 1][0] === '答案'
-    const numbers = numberLabel ? rows[index].slice(1) : rows[index]
-    const answers = answerLabel ? rows[index + 1].slice(1) : rows[index + 1]
-    if (!numbers.length || numbers.length !== answers.length) return false
-    const kind = answers.every(answer => choice.test(answer)) ? 'choice'
-      : numberLabel && answerLabel && answers.every(answer => !choice.test(answer) && shortAnswer.test(answer))
-        ? 'words' : null
-    if (!kind || (answerKind && answerKind !== kind)) return false
-    answerKind = kind
-    for (const number of numbers) {
-      if (!/^[1-9]\d*$/u.test(number) || Number(number) <= previous) return false
-      previous = Number(number)
-    }
-  }
-  return true
-}
-
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation,
-  { sourceDocuments = [], paperName = materialization.paperName } = {}) {
-  const answerDocuments = materialization.documents.filter((document) =>
-    SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
-  if (answerDocuments.length !== 1) fail('Expected exactly one answer-bearing document')
-  const [answerDocument] = answerDocuments
-  const documentSha256 = answerDocument.sha256
-  const evidencePages = evidence.documents.find((document) => document.documentId === answerDocument.documentId).pages
-  const pages = confirmation.documents.find((document) => document.documentId === answerDocument.documentId).pages
-  const lines = []
-  const review = []
-  const sourceOrder = new WeakMap()
-  const furniture = new WeakSet()
-  const lineFacts = new WeakMap()
-  const referenceFigures = []
+  { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture } = {}) {
+  let source, lifecycle
+  try {
+    source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName })
+    lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
+  } catch (error) {
+    if (error.code === 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID') fail(error.message)
+    throw error
+  }
+  const { answerDocument, documentSha256, pages, lines, sourceOrder, factsFor, referenceFigures, scoringScopes } = source
+  const { sections, furniture, review } = lifecycle
   const assignedFigures = new Set()
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]))
   let hasScoringFigures = false
-  const factsFor = line => {
-    if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
-    return lineFacts.get(line)
-  }
-  for (const page of pages) {
-    const evidencePage = evidencePages[page.page - 1]
-    const observations = new Map(evidencePage.observations.map((item) => [item.observationId, item]))
-    const pictureItems = new Set()
-    for (const visual of page.visualClassifications || []) {
-      if (visual.classification !== 'content_media') continue
-      const resolved = resolveOcrContentVisual({ paperId: materialization.paperId, document: answerDocument,
-        page: { ...page, observations: evidencePage.observations }, visual,
-        region: evidencePage.regions.find(region => region.regionId === visual.regionId), claimedItems: pictureItems })
-      if (!resolved.referenceFigure) throw new Error('Reference figures require a separate official_answers PDF')
-      referenceFigures.push(resolved.referenceFigure)
-      resolved.itemIds.forEach(id => pictureItems.add(id))
-    }
-    const tableStarts = new Map()
-    const tableItems = new Set()
-    const items = new Map(page.orderedItems.map(item => [item.itemId, item]))
-    for (const visual of page.visualClassifications || []) {
-      if (visual.classification !== 'semantic_table') continue
-      const ids = visual.rows.flatMap(row => row.cells.flat())
-      ids.forEach(id => tableItems.add(id))
-      tableStarts.set(ids[0], {
-        kind: 'table', tableId: `source-${visual.regionId.replace(/:/gu, '-')}`,
-        rows: visual.rows.map((row, r) => row.cells.map((cell, c) => {
-          const selected = cell.map(id => items.get(id))
-          return {
-            cellId: `source-${visual.regionId.replace(/:/gu, '-')}-r${r}-c${c}`,
-            text: selected.map(item => item.text).join('\n'),
-            source: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
-              page: page.page, region: unionRegion(selected.flatMap(item =>
-                item.observationIds.map(id => observations.get(id)))) } },
-          }
-        })),
-      })
-    }
-    for (const item of page.orderedItems) {
-      if (pictureItems.has(item.itemId)) continue
-      if (tableItems.has(item.itemId) && !tableStarts.has(item.itemId)) continue
-      const boxes = item.observationIds.map((id) => observations.get(id))
-      const line = { itemId: item.itemId, page: page.page, text: item.text, boxes,
-        ...(tableStarts.has(item.itemId) ? { table: tableStarts.get(item.itemId) } : {}) }
-      const facts = factsFor(line)
-      line.left = facts.left
-      line.right = facts.right
-      sourceOrder.set(line, lines.length)
-      lines.push(line)
-      // Only scoring uses ordered figure blocks. The confirmed item sequence,
-      // not visualClassifications array order or page coordinates, determines
-      // placement. A table contributes its exact final confirmed item boundary.
-      const tableVisual = tableStarts.has(item.itemId)
-        ? page.visualClassifications.find(visual => visual.classification === 'semantic_table'
-          && visual.rows[0].cells[0][0] === item.itemId) : null
-      const boundary = tableVisual ? tableVisual.rows.at(-1).cells.at(-1).at(-1) : item.itemId
-      const followingFigures = referenceFigures.filter(figure => figure.source.page === page.page
-        && figure.afterItem.itemId === boundary && scoringScopes.get(boundary))
-      if (followingFigures.length > 1) throw new Error('Scoring figures sharing one anchor lack a confirmed source-object order')
-      for (const figure of followingFigures) {
-        lines.push({ figure, page: page.page, text: '', boxes: [] })
-      }
-    }
-  }
-  // A reprint can use the original question document's cover title rather
-  // than the answer book's abbreviated title. Match exact confirmed title
-  // lines in this paper's first pages; reuse the existing furniture role.
-  const firstPageTitles = new Set()
-  for (const document of confirmation.documents) {
-    const first = document.pages[0]
-    const proof = evidence.documents.find(item => item.documentId === document.documentId)?.pages[first.page - 1]
-    if (!proof) continue
-    const observations = new Map(proof.observations.map(item => [item.observationId, item]))
-    for (const item of first.orderedItems) {
-      const facts = computeLineFacts({ text: item.text,
-        boxes: item.observationIds.map(id => observations.get(id)) })
-      if (facts.region?.y < .12 && matchesLineRole('furniture.repeated-title', facts, { repeated: true })) {
-        firstPageTitles.add(writingRuleMatchingView(item.text))
-      }
-    }
-  }
-  const fullTitles = [...firstPageTitles, ...(paperName ? [writingRuleMatchingView(paperName)] : [])]
-  const titleFurniture = new WeakSet()
-  for (const [index, line] of lines.entries()) {
-    if (line.figure || line.table || line.page === 1 || !firstPageTitles.has(writingRuleMatchingView(line.text))) continue
-    const facts = factsFor(line)
-    if (!(facts.region?.y < .12) || !matchesLineRole('furniture.repeated-title', facts, { repeated: true })) continue
-    titleFurniture.add(line)
-    const header = [line]
-    // A subtitle needs independent full-title evidence, not the keyword from
-    // the already matched title authorizing arbitrary text beneath it.
-    for (const next of lines.slice(index + 1)) {
-      if (next.page !== line.page || next.figure || next.table) break
-      const nextFacts = factsFor(next)
-      if (nextFacts.left < facts.left || nextFacts.right > facts.right || nextFacts.region.y < facts.region.y) break
-      // Keep the existing title-block height cap when selecting a possible
-      // subtitle; only the independent full title authorizes its exclusion.
-      if (nextFacts.region.y + nextFacts.region.height - facts.region.y > .06) break
-      const candidate = writingRuleMatchingView([...header, next].map(item => item.text).join(''))
-      if (firstLineRole('entry-label', nextFacts) || /^第[一二三四五六七八九十\d]+档|^(?:零分|不得分)/u.test(nextFacts.nfkc)
-        || !fullTitles.some(title => title.startsWith(candidate))) {
-        review.push({ itemId: next.itemId, issue: 'unproven title subtitle retained for review' })
-        break
-      }
-      titleFurniture.add(next)
-      header.push(next)
-    }
-  }
-  const edgeTexts = new Map()
-  for (const line of lines) {
-    if (line.figure) continue
-    const facts = factsFor(line)
-    if (!facts.atEdge) continue
-    const text = facts.edgeText
-    if (!edgeTexts.has(text)) edgeTexts.set(text, new Set())
-    edgeTexts.get(text).add(line.page)
-  }
-  const sections = new Map()
   const structuredScoring = pages.some(page =>
     page.visualClassifications?.some(visual => visual.classification === 'semantic_table'))
-  const scope = createWritingScope(sections)
-  let afterListening = false, scoringAppendix = false, afterExplanations = false
-  const lastObjectiveQuestion = Math.max(0, ...materialization.groups
-    .flatMap(group => group.writingTask ? [] : (group.questions || []).map(question => question.sourceNumber))
-    .filter(Number.isInteger))
-  for (const [lineIndex, line] of lines.entries()) {
-    if (scope.ended) {
-      if (!afterExplanations) break
-      if (isExplicitScoringAppendixStart(line.text, lines[lineIndex + 1]?.text)) {
-        scope.enterPart(false)
-        const task = scoredWritingRubricTask(line.text, lines[lineIndex + 1]?.text)
-        if (task) scope.startTask(task, { reuse: true })
-        afterExplanations = false
-        afterListening = false
-        scoringAppendix = true
-        review.push({ itemId: line.itemId, issue: 'explicit rubric appendix reopens scoring after answer explanations' })
-      }
-      continue
-    }
-    // An exam specification appendix describes question coverage, not writing
-    // scoring. Its explicit column header ends reference capture, including
-    // continuation tables on later pages. Keep every source word/table intact.
-    const header = line.table ? line.table.rows[0].map(cell => cell.text).join('') : line.text
-    if (/^题号题型分值考查的主要内容及知识点难度$/u.test(header.replace(/\s+/gu, ''))) {
-      scope.end()
-      review.push({ itemId: line.itemId, issue: 'exam specification appendix ends the writing-reference scope' })
-      for (const excluded of lines.slice(lineIndex).filter(item => item.table)) {
-        review.push({ itemId: excluded.itemId, tableId: excluded.table.tableId,
-          issue: 'exam specification table excluded from writing references; retained in source evidence' })
-      }
-      continue
-    }
-    if (line.figure) {
-      if (!scope.current) throw new Error('Scoring figure has no explicit writing-task scope')
-      scope.current.lines.push(line)
-      continue
-    }
-    if (line.table) {
-      const rows = line.table.rows.map(row => row.map(cell => cell.text.trim()))
-      if (isObjectiveAnswerGrid(rows)) {
-        review.push({ itemId: line.itemId, tableId: line.table.tableId,
-          issue: 'objective answer table excluded from writing references; retained in source evidence' })
-        continue
-      }
-      if (!scope.current) fail(`Source table ${line.table.tableId} has no writing-task scope`)
-      scope.current.lines.push(line)
-      continue
-    }
-    const facts = factsFor(line)
-    if (matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
-      scope.end()
-      afterExplanations = true
-      review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
-      continue
-    }
-    if (titleFurniture.has(line) || firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
-      furniture.add(line)
-      review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
-      continue
-    }
-    const appendixTask = afterListening && scoredWritingRubricTask(line.text, lines[lineIndex + 1]?.text)
-    if (afterListening && (firstLineRole('scoring-overview', facts) || appendixTask)) {
-      scope.enterPart(false)
-      if (appendixTask) scope.startTask(appendixTask, { reuse: true })
-      afterListening = false
-      scoringAppendix = true
-      if (appendixTask) review.push({ itemId: line.itemId,
-        issue: 'exact scored writing section and adjacent rubric label reopen scoring after listening' })
-      continue
-    }
-    if (firstLineRole('listening-boundary', facts)) {
-      scope.enterPart(false)
-      afterListening = true
-      scoringAppendix = false
-      continue
-    }
-    // A heading can share its OCR item with a sample label. Some answer books
-    // omit the writing-part heading entirely; require an adjacent sample label
-    // or the tightly bounded standalone-key letter before opening writing.
-    const inlineSample = inlineSampleParts(facts.text)
-    const [heading, ...rest] = inlineSample || facts.text.split('\n')
-    const sectionText = writingSectionText(facts, heading, rest, scope.inWriting)
-    const mergedText = rest.length === 1 ? rest[0].trim() : null
-    const mergedLabel = mergedText && matchesLineRole('entry.sample-label', computeLineFacts({ text: mergedText })) ? mergedText : null
-    const unlabeledApplicationLetter = answerDocument.role === 'official_answers' && !sections.size && !scope.inWriting
-      && completeApplicationLetter(lines, lineIndex, lastObjectiveQuestion, factsFor)
-    const bare = (scope.inWriting || mergedLabel || unlabeledApplicationLetter || (lines[lineIndex + 1]
-      && matchesLineRole('entry.sample-label', factsFor(lines[lineIndex + 1]))))
-      && bareSectionNumber((mergedLabel ? heading : sectionText).normalize('NFKC'))
-    const started = bare ? (bare === '一' ? 'application' : 'continuation')
-      : firstLineRole('writing-section', facts)?.value
-    const scoringSection = firstLineRole('scoring-section', facts)?.value
-    if (scoringSection) {
-      scope.startTask(scoringSection, { reuse: true })
-      // This task heading also labels its rubric. A following explicit entry
-      // label owns the body instead; avoid manufacturing an empty parent entry.
-      const next = lines[lineIndex + 1]
-      if (!next || !firstLineRole('entry-label', factsFor(next))) scope.current.lines.push(line)
-      continue
-    }
-    if (started) {
-      // A rubric appendix supplements the original samples; an ordinary task
-      // restart still replaces its prior section as before.
-      scope.startTask(started, { reuse: scoringAppendix })
-      if (unlabeledApplicationLetter) scope.current.letterEnd = unlabeledApplicationLetter.end
-      if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
-      continue
-    }
-    // An explicit omission belongs to the active section, or to both tasks
-    // when the key omits the entire writing part. Never invent a model answer.
-    if (matchesLineRole('writing.omission', facts, { inWriting: scope.inWriting, current: scope.current })) {
-      // Retain task-local absence declarations for the reference capture pass:
-      // they can explicitly resolve a preceding reprinted prompt.
-      if (scope.current) scope.current.lines.push(line)
-      scope.omit()
-      review.push({ itemId: line.itemId, issue: 'source explicitly supplies no writing sample (not_supplied)' })
-      continue
-    }
-    if (firstLineRole('part-boundary', facts)) {
-      // NCK1's fourth part may be confirmed simply as "第四部分 / （略）".
-      // Require that exact adjacent omission; a missing heading/sample alone
-      // must still fail closed, and earlier omitted parts are not writing.
-      const omittedWritingPart = matchesLineRole('writing.bare-fourth-part', facts)
-        && lines[lineIndex + 1] && matchesLineRole('writing.omission', factsFor(lines[lineIndex + 1]), { inWriting: true })
-      scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, writingSectionAfterPart(line.text))
-    } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
-  }
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
     const taskType = group.writingTask.taskType
     const section = sections.get(taskType)
     if (!section) fail(`No answer-document section found for ${taskType}`)
     // The signature ends only the admitted model answer. Explicit scoring may
     // follow, but questions, speech and prompts terminate both capture lanes.
-    const sectionLines = applicationLetterReferenceLines(section, factsFor)
-    const numberedSamples = taskType === 'application' ? numberedApplicationSamples(sectionLines, factsFor) : new Map()
-    const sampleTitles = new Set(numberedSamples.values())
+    const { sectionLines, sampleTitles } = section
     // Derive English sample margins within this writing section, not from unrelated
     // scoring tables, watermarks or the listening column elsewhere on the same page.
     const margins = new Map()
@@ -1523,24 +1127,21 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     let paragraph = null
     let previous = null
     let previousLocation = null
-    let awaitingSourceLabel = false
-    const capture = createReferenceCapture()
     const pageSource = pageLines => ({ documentSha256, locator: {
       kind: 'page_region', documentId: answerDocument.documentId, page: pageLines[0].page,
       region: unionRegion(pageLines.flatMap(line => line.boxes)),
     } })
     const flush = () => { if (paragraph) { entry.paragraphs.push(paragraph); paragraph = null } }
-    const skip = (line, reason, until = 'the next label or English line') => {
-      flush()
-      entry = null
-      previous = null
-      previousLocation = null
-      capture.pause()
-      review.push({ itemId: line.itemId, issue: `${reason}; skipped until ${until}` })
-    }
-    for (const [lineIndex, line] of sectionLines.entries()) {
-      if (capture.ended) break
-      if (line.figure) {
+    for (const step of section.steps) {
+      const { line, action, state } = step
+      if (step.resetEntry || action === 'pause') {
+        flush()
+        entry = null
+        previous = null
+        previousLocation = null
+      }
+      review.push(...step.reviews)
+      if (action === 'figure') {
         const ownership = scoringScopes.get(line.figure.afterItem.itemId)
         if (entry?.kind !== 'scoring' || !ownership || ownership.taskType !== taskType
           || ownership.labelItemId !== entry.labelItemId) {
@@ -1553,7 +1154,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
         hasScoringFigures = true
         continue
       }
-      if (line.table) {
+      if (action === 'table') {
         if (entry?.kind !== 'scoring') fail(`Source table ${line.table.tableId} is outside a scoring entry`)
         flush()
         entry.paragraphs.push({ table: line.table })
@@ -1561,40 +1162,9 @@ export function buildSourceReferences(materialization, evidence, confirmation,
         previousLocation = null
         continue
       }
-      const facts = factsFor(line)
-      // Some keys place an unlabelled complete application letter after their
-      // rubric. A salutation fragment alone cannot end scoring capture.
-      if (taskType === 'application' && capture.kind === 'scoring'
-        && completeSourceLetter(sectionLines, lineIndex, factsFor)) {
+      if (action === 'entry') {
+        const kind = state.kind
         flush()
-        entry = null
-        capture.start('essays')
-        previous = null
-        previousLocation = null
-      }
-      // Reprinted question material and paragraph starters are not samples.
-      // Unlike commentary, their English body cannot restart capture: only
-      // the next explicit source entry label can leave this prompt scope.
-      if (taskType === 'continuation' && capture.kind !== 'scoring'
-        && matchesLineRole('writing.continuation-prompt', facts)) {
-        skip(line, 'reprinted continuation question prompt', 'the next explicit source entry label')
-        awaitingSourceLabel = true
-        continue
-      }
-      // Student scripts end only this task's official-reference capture.
-      if (matchesLineRole('writing.student-script', facts)) {
-        capture.end()
-        review.push({ itemId: line.itemId, issue: 'student-script column ends this writing section’s reference capture' })
-        continue
-      }
-      const numberedSample = capture.kind !== 'scoring' && numberedSamples.has(line)
-      if (firstLineRole('entry-label', facts) || numberedSample) {
-        const kind = numberedSample ? 'essays' : firstLineRole('entry-kind', facts)?.value || null
-        if (!kind) { skip(line, `commentary "${line.text}" is neither a source sample nor scoring`); continue }
-        flush()
-        capture.start(kind)
-        // A scoring label supplies no evidence that the essay is absent.
-        if (kind === 'essays') awaitingSourceLabel = false
         const index = entries[kind].length + 1
         entry = { kind, referenceId: `source-${kind === 'scoring' ? 'score' : 'ref'}-${short}-${index}`, authority: 'source_reference',
           labelItemId: line.itemId, sourceLabel: line.text, labelSource: { documentSha256, locator: { kind: 'page_region', documentId: answerDocument.documentId,
@@ -1604,19 +1174,9 @@ export function buildSourceReferences(materialization, evidence, confirmation,
         previousLocation = null
         continue
       }
-      if (matchesLineRole('writing.omission', facts, { inWriting: true })) {
-        awaitingSourceLabel = false
-        continue
-      }
-      if (awaitingSourceLabel && capture.kind !== 'scoring') continue
-      if (matchesLineRole('writing.commentary', facts, { entryKind: capture.kind, skipping: capture.paused })) {
-        if (!capture.paused) skip(line, `Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
-        continue
-      }
-      // English quote fragments in teaching notes cannot restart an unlabeled sample.
-      if (matchesLineRole('writing.skipped-fragment', facts, { skipping: capture.paused })) continue
-      capture.resume()
-      if (!entry) {
+      if (action !== 'body') continue
+      const facts = factsFor(line)
+      if (step.openEntry) {
         entry = { kind: 'essays', referenceId: `source-ref-${short}-${entries.essays.length + 1}`, authority: 'source_reference',
           sourceLabel: null, labelSource: null, paragraphs: [] }
         entries.essays.push(entry)
@@ -1653,11 +1213,12 @@ export function buildSourceReferences(materialization, evidence, confirmation,
         paragraph = { role: special || (afterClosing ? 'signature' : 'body'), lines: [] }
       }
       paragraph.lines.push(line)
+      onWritingCapture?.({ itemId: line.itemId, task: taskType, kind: entry.kind })
       previous = { role: paragraph.role, right: line.right, page: line.page,
         text: line.text, sourceIndex: sourceOrder.get(line), margin, columnMargin: columnMargins.get(line) }
       previousLocation = decision.location.after
     }
-    if (awaitingSourceLabel) {
+    if (section.awaitingSourceLabel) {
       fail('Unresolved continuation reference after reprinted prompt; confirm the source sample label or explicit omission')
     }
     flush()
