@@ -185,6 +185,9 @@ in the existing source-references sidecar; never insert them into student groups
 明确的命题细目表头（题号／题型／分值／考查的主要内容及知识点／难度）结束写作参考
 采集，其附录与续表保留在原件、OCR evidence 和 confirmation 中，并在 references review
 记录排除原因；不把它们当作评分，也不据此把真实评分标为 `not_supplied`。
+精确的两行客观答案网格（“题号”＋递增题号／“答案”＋逐题 A–G）同样只保留为源答案证据，
+排除于写作参考并逐表记录。详解结束写作参考采集后，仅独立的完整评分总标题紧邻完整的任务
+评分标题才可重新开启评分采集，复用原有范文；详解正文提到“评分”不构成重新开启的依据。
 The v8 OCR producer receipt binds this new confirmation; preserve older output
 and receipts before starting a new source-input revision, and rebind sidecars.
 

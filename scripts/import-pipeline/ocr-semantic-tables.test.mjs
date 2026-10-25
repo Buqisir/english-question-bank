@@ -7,7 +7,8 @@ import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { spawnSync } from 'node:child_process'
 
-for (const scoringLabel of ['4. 评分细则', '（一）评分原则：', '（二）各档次给分范围和要求']) {
+for (const scoringLabel of ['4. 评分细则', '（一）评分原则：', '（二）各档次给分范围和要求',
+  '二、各档次给分范围及要求']) {
 test(`parenthesized task and ${scoringLabel} retain a 7 by 7 scoring table across pages 4 to 6`, () => {
   const documentSha256 = `sha256:${'a'.repeat(64)}`
   const items = Array.from({ length: 49 }, (_, index) => ({
@@ -125,6 +126,48 @@ test('an unscoped table without an explicit specification header still fails clo
     { encoding: 'utf8' })
   assert.equal(result.status, 1)
   assert.match(result.stderr, /Source table .* has no writing-task scope/u)
+})
+
+function objectiveAnswerTableFixture() {
+  const input = specificationAppendixFixture()
+  const page = input[2].documents[0].pages[0]
+  const proof = input[1].documents[0].pages[0]
+  const items = ['题号', '21', '22', '答案', 'C', 'B'].map((text, i) => ({
+    text, itemId: `objective-${i}`, observationIds: [`objective-word-${i}`],
+  }))
+  page.orderedItems.unshift(...items)
+  page.visualClassifications.push({ classification: 'semantic_table', regionId: 'answers:page-1:objective',
+    rows: [true, false].map((header, r) => ({ header,
+      cells: items.slice(r * 3, r * 3 + 3).map(item => [item.itemId]) })) })
+  proof.observations.unshift(...items.map((item, i) => ({
+    observationId: item.observationIds[0], text: item.text,
+    region: { x: .1 + i % 3 * .2, y: .05 + Math.floor(i / 3) * .03, width: .1, height: .02 },
+  })))
+  return input
+}
+
+test('objective question/answer grids stay source evidence without entering writing scoring', () => {
+  const input = objectiveAnswerTableFixture()
+  const before = structuredClone(input)
+  const result = buildSourceReferences(...input)
+  assert.deepEqual(input, before)
+  assert.deepEqual(result.groups.map(group => group.scoring.state), ['captured', 'captured'])
+  assert(!JSON.stringify(result.groups).includes('source-answers-page-1-objective'))
+  assert(result.review.some(item => item.tableId === 'source-answers-page-1-objective'
+    && /objective answer table.*retained in source evidence/u.test(item.issue)))
+})
+
+test('tables resembling answer grids without exact labels, increasing numbers and choice letters still fail closed', () => {
+  for (const [index, text] of [[0, '档次'], [1, '21–25'], [2, '21'], [3, '参考答案'], [4, '内容完整']]) {
+    const input = objectiveAnswerTableFixture()
+    input[2].documents[0].pages[0].orderedItems[index].text = text
+    const script = `import { buildSourceReferences } from ${JSON.stringify(new URL('./ocr-proofread.mjs', import.meta.url).href)};
+      buildSourceReferences(...JSON.parse(process.argv[1]));`
+    const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, JSON.stringify(input)],
+      { encoding: 'utf8' })
+    assert.equal(result.status, 1, text)
+    assert.match(result.stderr, /Source table .* has no writing-task scope/u)
+  }
 })
 
 function fixture() {

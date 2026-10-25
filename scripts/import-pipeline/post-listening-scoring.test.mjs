@@ -10,6 +10,7 @@ import { firstLineRole } from './ocr-line-roles.mjs'
 // Synthetic source order: samples, transcript, then explicitly headed rubrics.
 function fixture({ overview = '写作评分说明', boundary = '听力原文', task = '第一节：应用文写作（满分15分）',
   label = '二、各档次的给分范围和要求', rubric = '评分标准',
+  continuationTask = '第二节 读后续写',
   sampleHeading = '第一节 应用文', applicationSample = ['参考范文', 'Our original application sample.'] } = {}) {
   const input = scoringFiguresFixture({ essays: false, writingHeading: [overview, task] })
   const answers = input.confirmation.documents[1]
@@ -39,6 +40,9 @@ function fixture({ overview = '写作评分说明', boundary = '听力原文', t
     item.text = after
     evidence.pages[2].observations.find(observation => observation.observationId === item.observationIds[0]).text = after
   }
+  const continuation = answers.pages[3].orderedItems[0]
+  continuation.text = continuationTask
+  evidence.pages[3].observations.find(item => item.observationId === continuation.observationIds[0]).text = continuationTask
   const { evidenceDigest: _oldDigest, ...body } = input.evidence
   input.evidence.evidenceDigest = digestJson(body)
   input.confirmation.evidenceDigest = input.evidence.evidenceDigest
@@ -93,10 +97,42 @@ test('an overview alone, a task alone or ordinary commentary cannot authorize un
     /no surviving essay anchor or explicit scoring entry/u)
 })
 
-test('answer explanation remains terminal even with an exact later rubric overview', () => {
+test('answer explanation remains terminal with an overview followed by an ordinary task heading', () => {
   for (const boundary of ['试题解析', '21. A 本文是一篇应用文。']) {
     assert.throws(() => captureScoringReferences(fixture({ boundary })),
       /no surviving essay anchor or explicit scoring entry/u)
+  }
+})
+
+test('a separate rubric overview followed immediately by a full task rubric reopens after explanations', () => {
+  const input = fixture({ boundary: '答案详解', overview: '写作评分标准',
+    task: '一、应用文各档次的给分范围和要求：', label: '（三）各档次的给分范围和要求',
+    continuationTask: '二、读后续写各档次的给分范围和要求：' })
+  const before = structuredClone(input.confirmation)
+  const sidecar = captureScoringReferences(input)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  assert.deepEqual(sidecar.groups.map(group => group.scoring.state), ['captured', 'captured'])
+  assert.deepEqual(sidecar.groups.map(group => group.essays.entries[0].paragraphs[0].text),
+    ['Our original application sample.', 'Our original continuation sample.'])
+  assert.deepEqual(input.confirmation, before)
+  const absentOverview = fixture({ boundary: '答案详解', overview: '正文中提到评分。',
+    task: '一、应用文各档次的给分范围和要求：',
+    label: '（三）各档次的给分范围和要求',
+    continuationTask: '二、读后续写各档次的给分范围和要求：' })
+  assert.throws(() => assertSourceReferenceAdmission({ ...absentOverview, sidecar }),
+    /exact confirmed scoring label and Writing Task/u)
+})
+
+test('mentions of scoring in explanations or an overview without an adjacent full task rubric cannot reopen', () => {
+  for (const options of [
+    { overview: '解析中提到写作评分标准。', task: '一、应用文各档次的给分范围和要求：' },
+    { overview: '写作评分标准如下。', task: '一、应用文各档次的给分范围和要求：' },
+    { overview: '写作评分标准', task: '一、应用文各档次的给分范围和要求分析' },
+    { overview: '写作评分标准', task: '正文中提到评分。' },
+  ]) {
+    const input = fixture({ boundary: '答案详解', ...options })
+    assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
+    assert.equal(sourceReferenceScoringScopes(input.confirmation, new Set(['answers'])).get('answers:p3:i4'), null)
   }
 })
 

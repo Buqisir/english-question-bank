@@ -156,7 +156,7 @@ const explanationScopes = sourceReferenceScoringScopes(laterHeadings, new Set(['
 assert.equal(explanationScopes.get(explanationItem.itemId), null)
 assert.equal(explanationScopes.get('later-score'), null,
   'later writing/scoring headings cannot reopen the numbered-analysis boundary')
-console.log('PASS numbered explanation boundary closes producer and independent admission permanently')
+console.log('PASS numbered explanation boundary stays closed without an explicit task-rubric appendix')
 
 for (const colon of ['：', ':']) for (const writingHeading of [
   [`第四部分${colon}写作\n第一节`], [`第四部分${colon}写作`, '第一节'],
@@ -247,3 +247,6 @@ try {
 // The small PDF fixtures never cross 2 MiB. Exercise native PNG sizing in this
 // registered CI verifier too, including Ubuntu's ImageMagick 6 warning behavior.
 await import('../server/paper-import/sourceReferencePngSizing.test.mjs')
+// Covers producer → independent admission across transcript/explanation
+// boundaries, including the exact overview + task-rubric reopening pair.
+await import('./import-pipeline/post-listening-scoring.test.mjs')
