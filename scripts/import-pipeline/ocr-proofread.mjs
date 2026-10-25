@@ -62,7 +62,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v14'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v15'
 
 function fail(message) {
   console.error(message)
@@ -1191,6 +1191,25 @@ function numberedApplicationSamples(lines, factsFor) {
   return new Map(candidates.map(({ line, title }) => [line, title]))
 }
 
+// Only alternating number/choice rows are objective grids. Source labels can
+// be omitted; 南昌 uses 序号. Free-text answers and writing rubrics stay scoped.
+function isObjectiveAnswerGrid(rows) {
+  if (rows.length < 2 || rows.length % 2 !== 0
+    || !rows[0].length || rows.some(row => row.length !== rows[0].length)) return false
+  let previous = 0
+  for (let index = 0; index < rows.length; index += 2) {
+    const numbers = /^(?:题号|序号)$/u.test(rows[index][0]) ? rows[index].slice(1) : rows[index]
+    const answers = rows[index + 1][0] === '答案' ? rows[index + 1].slice(1) : rows[index + 1]
+    if (!numbers.length || numbers.length !== answers.length
+      || !answers.every(answer => /^[A-G]$/u.test(answer))) return false
+    for (const number of numbers) {
+      if (!/^[1-9]\d*$/u.test(number) || Number(number) <= previous) return false
+      previous = Number(number)
+    }
+  }
+  return true
+}
+
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation, { sourceDocuments = [] } = {}) {
   const answerDocuments = materialization.documents.filter((document) =>
@@ -1324,11 +1343,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     }
     if (line.table) {
       const rows = line.table.rows.map(row => row.map(cell => cell.text.trim()))
-      if (rows.length === 2 && rows[0].length > 1 && rows[1].length === rows[0].length
-        && rows[0][0] === '题号' && rows[1][0] === '答案'
-        && rows[0].slice(1).every((number, i) => /^[1-9]\d*$/u.test(number)
-          && (i === 0 || Number(number) > Number(rows[0][i])))
-        && rows[1].slice(1).every(answer => /^[A-G]$/u.test(answer))) {
+      if (isObjectiveAnswerGrid(rows)) {
         review.push({ itemId: line.itemId, tableId: line.table.tableId,
           issue: 'objective answer table excluded from writing references; retained in source evidence' })
         continue
