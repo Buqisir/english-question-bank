@@ -19,9 +19,9 @@ const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试�
 // only; the prefix-based writing boundary must not match arbitrary prose.
 const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
-// Read bilingual rubric headings before masking glosses. NFKC folds brackets
-// and colons; a heading delimiter avoids treating prose about content as a rubric.
-const BILINGUAL_WRITING_SCORING_HEADING = /^(?:Content|Organi[sz]ation|Language(?:\s+(?:use|accuracy))?|Grammar|Vocabulary|Coherence|Cohesion|Mechanics|Scoring(?:\s+criteria)?)\s*\((?=[^()\n]*\p{Script=Han})[^()\n]+\)\s*(?:[:：]|$)/iu
+// Read bilingual rubric labels and scoring syntax before masking glosses.
+const BILINGUAL_WRITING_SCORING_LABEL = /^(?:Content|Organi[sz]ation|Language(?:\s+(?:use|accuracy))?|Grammar|Vocabulary|Coherence|Cohesion|Mechanics|Scoring(?:\s+criteria)?)\s*\(((?=[^()\n]*\p{Script=Han})[^()\n]+)\)(.*)$/iu
+const WRITING_SCORE_MARKER = /\p{N}|分|\b(?:points?|marks?)\b/iu
 // Labels that open an official sample; scoring or prompt text may precede them.
 const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
@@ -1159,14 +1159,33 @@ function writingSampleOmission(answerBody, from, to) {
   return items.length === 1
 }
 
-// Mask only closed Chinese glosses following English on the same source line.
+function bilingualWritingScoringHeading(text) {
+  const label = BILINGUAL_WRITING_SCORING_LABEL.exec(text)
+  if (!label) return false
+  const suffix = label[2].trim().replace(/^[—–-]\s*/u, '')
+  const scoreAnnotation = /^\(([^()]*)\)/u.exec(suffix)
+  return WRITING_SCORE_MARKER.test(label[1]) || !suffix || /^[:：]/u.test(suffix)
+    || /^\d+(?:\.\d+)?\s*(?:分|points?\b|marks?\b)/iu.test(suffix)
+    || Boolean(scoreAnnotation && WRITING_SCORE_MARKER.test(scoreAnnotation[1]))
+}
+
+function shortWritingSampleTitle(text) {
+  const line = normalized(text)
+  // A wrapped, still-open gloss is not a self-contained title line.
+  return /^[A-Za-z]+(?:\s+[A-Za-z]+){0,2}\s*\([^()]*\)/u.test(line)
+    && !/[.!?。！？]/u.test(line)
+    && (line.match(/[A-Za-z]+/gu) || []).length <= 3
+}
+
+// Mask only pure Han word glosses following English on the same source line.
+// Scores, digits, English scoring terms and punctuated notes stay unmasked.
 // A wrapped gloss must be two adjacent, nonempty Han-only word fragments.
 // Never span an independent commentary line, punctuation or a third line.
 // Keep newlines aligned; returned sample text is never changed by this mask.
 function maskWritingGlosses(text) {
-  return text.replace(/\([^()\n（）]*\)|（[^()\n（）]*）|\(\p{Script=Han}+\n\p{Script=Han}+\)|（\p{Script=Han}+\n\p{Script=Han}+）/gu, (gloss, offset) => {
+  return text.replace(/\(\p{Script=Han}+(?:\n\p{Script=Han}+)?\)|（\p{Script=Han}+(?:\n\p{Script=Han}+)?）/gu, (gloss, offset) => {
     const prefix = text.slice(text.lastIndexOf('\n', offset) + 1, offset)
-    return /\p{Script=Han}/u.test(gloss) && /[A-Za-z]/u.test(prefix)
+    return !WRITING_SCORE_MARKER.test(gloss) && /[A-Za-z]/u.test(prefix)
       ? gloss.replace(/[^\n]/gu, ' ') : gloss
   })
 }
@@ -1201,7 +1220,7 @@ function writingSampleText(answerBody, from, to) {
       && index < to
       && item.kind === 'paragraph'
       && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
-        || BILINGUAL_WRITING_SCORING_HEADING.test(normalized(item.text))
+        || bilingualWritingScoringHeading(normalized(item.text))
         || (!WRITING_SAMPLE_LABEL.test(normalized(item.text))
           && WRITING_SAMPLE_COMMENTARY.test(normalized(glossMaskedLines[index - start])))
         || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
@@ -1215,7 +1234,9 @@ function writingSampleText(answerBody, from, to) {
   // With no label, only English-dominant prose whose Chinese is entirely in
   // closed parenthetical glosses is safe. Chinese titles/scoring stay for review.
   const first = lines[0] || ''
-  if (!labels.length && /\p{Script=Han}/u.test(first)
+  const unlabelledStart = !labels.length || startsWithLaterAlternative
+  if (unlabelledStart && shortWritingSampleTitle(first)) return ''
+  if (unlabelledStart && /\p{Script=Han}/u.test(first)
     && (/\p{Script=Han}/u.test(maskWritingGlosses(lines.join('\n')).split('\n')[0])
       || (first.match(/[A-Za-z]/gu) || []).length <= (first.match(/\p{Script=Han}/gu) || []).length)) return ''
   return lines.join('\n')

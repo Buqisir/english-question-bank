@@ -12,6 +12,15 @@ for (const heading of [
   'Content(内容): 5 points',
   'Organization(结构): 5 points',
   'Content(15分): cover all required points.',
+  'Content（内容） 5 points',
+  'Content（内容）（5分）',
+  'Organization（结构）— 5 points',
+  'Content（内容） 5 marks',
+  'Language（语言）',
+  'Organization (结构) 5 points',
+  'Content(内容)(5 marks)',
+  'Organization(结构) - 5 marks',
+  'Content（内容）（五分）',
 ]) {
   test(`bilingual scoring heading is never an unlabelled essay: ${heading}`, () => {
     const issues = []
@@ -34,6 +43,62 @@ for (const heading of [
     assert.equal(result.continuation, sample)
   })
 }
+
+for (const first of [
+  'Topic（主题）', 'Personal Growth（成长）', 'A New Day（新的一天）',
+  'Mark felt tired（疲惫）',
+]) test(`an unlabelled short title cannot establish the sample start: ${first}`, () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', first, 'A later English-looking paragraph.',
+  ]), 'answers', issues), { application: null, continuation: null })
+  assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+})
+
+for (const gloss of ['五分', '5分', '五\n分', '强势 5 points', '强势 marks', '强势2', '强势，直接']) {
+  test(`a score or non-word annotation is not masked as a Chinese gloss: ${gloss}`, () => {
+    const issues = []
+    assert.deepEqual(parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.', '第二节 读后续写',
+      `The next day, Mark looked aggressive（${gloss}）last night.`,
+    ]), 'answers', issues), { application: null, continuation: null })
+    assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+  })
+}
+
+for (const sample of [
+  'Content（内容） matters greatly to readers.',
+  'Content（内容）（主题） matters greatly to readers.',
+  'Language（语言） opens a window onto another culture.',
+  'I felt tired（疲惫）.',
+  'The next day Mark felt tired（疲惫）',
+]) test(`ordinary English narration still establishes a sample: ${sample}`, () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.', '第二节 读后续写', sample,
+  ]), 'answers', issues), { application: 'A short sample.', continuation: sample })
+  assert.deepEqual(issues, [])
+})
+
+test('the short-title start restriction is limited to unlabelled samples', () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', 'One possible version:', 'A New Day（新的一天）', 'Mark smiled.',
+  ]), 'answers', issues), { application: 'A short sample.', continuation: 'A New Day（新的一天）\nMark smiled.' })
+  assert.deepEqual(issues, [])
+})
+
+test('a later numbered version does not label an earlier short title as prose', () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', 'Topic（主题）', 'A later English-looking paragraph.',
+    'Possible Version 2:', 'Another sample.',
+  ]), 'answers', issues), { application: null, continuation: null })
+  assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+})
 
 for (const [open, close] of [['（', '）'], ['(', ')']]) {
   for (const commentary of ['内容完整，语言连贯。', '主题表达完整', '【审题重点】', '评分标准']) {
