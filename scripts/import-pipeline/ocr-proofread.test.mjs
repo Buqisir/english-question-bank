@@ -1,7 +1,14 @@
 import assert from 'node:assert/strict'
-import { test } from 'node:test'
-import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart, buildSourceReferences,
+import { test, after } from 'node:test'
+import { checkedSourceReferences as buildSourceReferences, writingOwnershipChecks } from './ocr-writing-ownership-test-helpers.mjs'
+import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart,
   buildTranscriptJoinDocuments } from './ocr-proofread.mjs'
+import { prepareSourceReferences, validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
+import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
+
+after(() => console.log(`Writing ownership differential: ${JSON.stringify(writingOwnershipChecks)}`))
 
 function fixture(texts, lefts = []) {
   const items = texts.map((text, i) => ({ lines: `L${i + 1}`, text }))
@@ -247,6 +254,262 @@ function referencesFixture(texts, taskTypes = ['continuation'], {
   }] }] })
 }
 
+function standaloneApplicationAdmission(heading, application, continuation, {
+  prefix = [], suffix = [], texts: sourceTexts, lastQuestion,
+} = {}) {
+  const texts = sourceTexts ?? [...prefix, heading, '第一节', '参考范文', application,
+    '第二节', '参考范文', continuation, ...suffix]
+  const bytes = Buffer.from('%PDF-1.4\nSynthetic standalone writing answer source.\n')
+  const materialization = {
+    paperId: 'paper-standalone-application-admission',
+    documents: [{ documentId: 'answers', role: 'official_answers', mediaType: 'application/pdf',
+      sha256: sha256(bytes), pageCount: 1 }],
+    groups: [
+      ...(lastQuestion ? [{ questions: [{ sourceNumber: lastQuestion }] }] : []),
+      ...['application', 'continuation'].map(taskType =>
+        ({ groupId: `writing-${taskType}`, writingTask: { taskType } })),
+    ],
+  }
+  const observations = texts.map((text, i) => ({ observationId: `o${i}`,
+    region: { x: .1, y: .15 + i * Math.min(.06, .7 / texts.length), width: .8, height: .02 } }))
+  const evidence = { documents: [{ documentId: 'answers', pages: [{ observations }] }] }
+  const confirmation = { documents: [{ documentId: 'answers', pages: [{ page: 1,
+    visualClassifications: [],
+    orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
+  }] }] }
+  const captured = buildSourceReferences(materialization, evidence, confirmation)
+  const input = { materialization, sourceDigest: sha256('standalone source'),
+    candidateDigest: sha256('standalone candidate'), sourceInput: {
+      documents: [{ documentId: 'answers', bytes }],
+      ocrSourceBytes: { evidenceBytes: Buffer.from(JSON.stringify(evidence)),
+        confirmationBytes: Buffer.from(JSON.stringify(confirmation)) },
+    } }
+  const sidecar = { ...prepareSourceReferences(input), groups: captured.groups }
+  assert.deepEqual(validateSourceReferences({ ...input, sidecar,
+    sourceDocuments: input.sourceInput.documents }), [])
+  return { ...input, sidecar }
+}
+
+const taskHeadingFamilies = [
+  ['named', [], '第一节 应用文', '第二节 读后续写'],
+  ['named alternative', [], '第二节 书面表达', '第一节 续写'],
+  ['parenthesized task', [], '第一节（应用文）', '第二节（读后续写）'],
+  ['ASCII parenthesized task', [], '第一节(书面表达)', '第二节(续写)'],
+  ['bare application', [], '应用文：', '读后续写：'],
+  ['bare written expression', [], '书面表达：', '读后续写：'],
+  ['parenthesized Chinese number', [], '（二）应用文写作', '（三）读后续写（满分25分）'],
+  ['ASCII parenthesized number', [], '(2) 应用文', '(3) 读后续写 (满分25分)'],
+  ['fullwidth number', [], '（２）应用文写作', '（３）读后续写（满分２５分）'],
+  ['Arabic number', [], '66. 应用文', '67. 读后续写'],
+  ['bare section with part', ['第四部分 写作'], '第一节', '第二节'],
+  ['bare section with adjacent sample', [], '第一节', '第二节'],
+  ['scored bare section', ['第四部分 写作'], '第一节（满分15分）', '第二节（满分25分）'],
+  ['inline answer sample', [], '第一节：作答示例', '第二节：作答示例'],
+  ['inline possible version', [], '第一节（满分15分） (One possible version)', '第二节（满分25分） (One possible version)'],
+  ['merged sample item', [], '第一节\n参考范文', '第二节\n参考范文'],
+  ['part with bare task', [], '第四部分 写作\n第一节', '第二节'],
+  ['part with named task', [], '第四部分 写作（满分40分）第一节 应用文', '第二节 读后续写'],
+  ['part with numbered task', [], '第四部分 写作\n（二）应用文写作', '（三）读后续写'],
+  ['repeated writing heading', ['第四部分 写作'], '写作\n第一节', '写作 第二节'],
+  ['task scoring heading', [], '应用文评分标准', '读后续写评分标准'],
+  ['numbered scoring heading', [], '（一）应用文写作评分细则：', '（二）读后续写各档次的给分范围和要求'],
+]
+const taskHeadingCases = taskHeadingFamilies.map(([name, prefix, application, continuation]) => ({
+  name, texts: [...prefix, application, '参考范文', '略', continuation, '参考范文', 'Mia opened the garden gate.'],
+  expected: ['not_supplied', 'captured'],
+}))
+taskHeadingCases.push(
+  { name: 'objective key and complete letter', lastQuestion: 65,
+    texts: ['65. growing', '第一节', 'Dear Sam,', 'Our class planted herbs.', 'Yours,', 'Alex', '第二节', '参考范文', '略'],
+    expected: ['captured', 'not_supplied'] },
+  { name: 'whole writing part omitted', texts: ['第四部分', '（略）'], expected: ['not_supplied', 'not_supplied'] },
+  { name: 'explicit scored appendix after listening',
+    texts: ['听力原文', '第一节（满分15分）', '评分原则', '注意内容完整。',
+      '第二节 读后续写', '评分原则', '注意衔接自然。'],
+    expected: ['not_supplied', 'not_supplied'] },
+  { name: 'overview and named scoring appendix after listening',
+    texts: ['听力原文', '写作评分说明', '应用文评分标准', '注意内容完整。',
+      '读后续写评分标准', '注意衔接自然。'],
+    expected: ['not_supplied', 'not_supplied'] },
+)
+for (const [application, continuation] of [
+  ['（二）应用文写作', '（三）读后续写'],
+  ['(2) 应用文', '(3) 读后续写'],
+  ['（２）应用文写作', '（３）读后续写'],
+  ['66. 应用文', '67. 读后续写'],
+]) for (const student of ['（五）样卷', '(五)样卷：']) {
+  test(`student-script public lifecycle: ${application} / ${student}`, () => {
+    const input = standaloneApplicationAdmission(null, null, null, {
+      texts: [application, student, '参考范文', 'A student-script example.',
+        continuation, '参考范文', 'Mia opened the garden gate.'],
+    })
+    assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
+    assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+    input.sidecar.groups[1].essays = standaloneApplicationAdmission('第四部分 写作', '略', '略').sidecar.groups[1].essays
+    assert.deepEqual(validateSourceReferences({ ...input,
+      sourceDocuments: input.sourceInput.documents }), [])
+    assert.throws(() => assertSourceReferenceAdmission(input),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+  })
+}
+
+const omittedHeadingEssays = standaloneApplicationAdmission('第四部分 写作', '略', '略').sidecar.groups[0].essays
+for (const [application, continuation] of [
+  ['（二）应用文写作', '（三）读后续写'],
+  ['(2) 应用文', '(3) 读后续写'],
+  ['（２）应用文写作', '（３）读后续写'],
+  ['66. 应用文', '67. 读后续写'],
+]) for (const student of ['（五）样卷', '(五)样卷：']) {
+  for (const restart of ['ordinary replacement', 'ordinary capture restart', 'scoring reuse']) {
+    test(`student-script ${restart}: ${application} / ${student}`, () => {
+      const texts = restart !== 'scoring reuse'
+        ? [application, '参考范文', 'A superseded official sample.', student,
+          '参考范文', 'A student-script example.', application, '参考范文',
+          restart === 'ordinary capture restart' ? 'A new official sample after the task restart.' : '略']
+        : [application, student, '参考范文', 'A student-script example.',
+          '应用文评分标准', '评分原则', '注意内容完整。', '参考范文', 'A reprinted example after scoring reuse.']
+      const input = standaloneApplicationAdmission(null, null, null, {
+        texts: [...texts, continuation, '参考范文', 'Mia opened the garden gate.'],
+      })
+      assert.deepEqual(input.sidecar.groups.map(group => group.essays.state),
+        [restart === 'ordinary capture restart' ? 'captured' : 'not_supplied', 'captured'])
+      assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+      input.sidecar.groups[1].essays = structuredClone(omittedHeadingEssays)
+      assert.deepEqual(validateSourceReferences({ ...input,
+        sourceDocuments: input.sourceInput.documents }), [])
+      assert.throws(() => assertSourceReferenceAdmission(input),
+        { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+    })
+  }
+}
+
+test('shared writing lifecycle is deterministic and preserves ordered source inputs', () => {
+  const input = standaloneApplicationAdmission(null, null, null, {
+    texts: ['66. 应用文', '（五）样卷', '参考范文', 'A student-script example.',
+      '67. 读后续写', '参考范文', 'Mia opened the garden gate.', '试题解析', '书面表达：'],
+  })
+  const evidence = JSON.parse(input.sourceInput.ocrSourceBytes.evidenceBytes)
+  const confirmation = JSON.parse(input.sourceInput.ocrSourceBytes.confirmationBytes)
+  const before = structuredClone({ materialization: input.materialization, evidence, confirmation })
+  const source = prepareSourceReferenceWritingItems(input.materialization, evidence, confirmation)
+  source.lines.forEach(Object.freeze)
+  const first = sourceReferenceWritingLifecycle(source.lines, source)
+  const second = sourceReferenceWritingLifecycle(source.lines, source)
+  assert.deepEqual([...first.items], [...second.items])
+  assert.equal(first.items.get('i3').ended, true)
+  assert.equal(first.items.get('i3').capturing, false)
+  assert.equal(first.items.get('i6').task, 'continuation')
+  assert.equal(first.items.get('i6').capturing, true)
+  assert.equal(first.items.get('i7').ended, true)
+  assert.equal(first.items.get('i8').ended, true)
+  assert.deepEqual({ materialization: input.materialization, evidence, confirmation }, before)
+})
+
+for (const { name, texts, expected, lastQuestion } of taskHeadingCases) {
+  for (const divider of ['试题解析', '答案详解']) {
+    for (const reprintHeading of ['书面表达：', '应用文：']) {
+      test(`task-heading matrix: ${name} / ${divider} / ${reprintHeading}`, () => {
+        const input = standaloneApplicationAdmission(null, null, null, {
+          lastQuestion, texts: [...texts, divider, reprintHeading, '参考范文', 'Our class planted herbs.',
+            '读后续写：', '参考范文', 'A reprinted story must stay outside references.'],
+        })
+        assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), expected)
+        assert(!JSON.stringify(input.sidecar.groups).includes('A reprinted story'))
+        assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+        // A labeled genuine sample before the divider must still disprove
+        // absence, for every heading family. The complete-letter route has no
+        // sample label and retains its dedicated bounded-letter regressions.
+        const capturedIndex = expected.indexOf('captured')
+        if (capturedIndex !== -1 && !lastQuestion) {
+          input.sidecar.groups[capturedIndex].essays = structuredClone(omittedHeadingEssays)
+          assert.deepEqual(validateSourceReferences({ ...input,
+            sourceDocuments: input.sourceInput.documents }), [])
+          assert.throws(() => assertSourceReferenceAdmission(input),
+            { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+        }
+      })
+    }
+  }
+}
+
+for (const heading of ['书面表达：', '应用文：']) {
+  for (const divider of ['试题解析', '答案详解']) {
+    test(`${heading} cannot reopen essay admission after ${divider} through the public pipeline`, () => {
+      const input = standaloneApplicationAdmission('第四部分 写作', '略', 'Mia opened the garden gate.', {
+        suffix: [divider, heading, '参考范文', 'Our class planted herbs.'],
+      })
+      assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
+      assert.deepEqual(input.sidecar.groups[1].essays.entries.flatMap(entry => entry.paragraphs.map(p => p.text)),
+        ['Mia opened the garden gate.'])
+      assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+    })
+
+    test(`${heading} still owns real samples after ${divider} before writing has started`, () => {
+      for (const prefix of [[divider], ['第四部分 写作', divider]]) {
+        const input = standaloneApplicationAdmission(heading, 'Our class planted herbs.', '略', { prefix })
+        assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['captured', 'not_supplied'])
+        assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+        input.sidecar.groups[0].essays = structuredClone(omittedHeadingEssays)
+        assert.deepEqual(validateSourceReferences({ ...input,
+          sourceDocuments: input.sourceInput.documents }), [])
+        assert.throws(() => assertSourceReferenceAdmission(input),
+          { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+      }
+    })
+  }
+
+  test(`${heading} admits a supplied continuation after an omitted application through the public pipeline`, () => {
+    const input = standaloneApplicationAdmission(heading, '略', 'Mia opened the garden gate.')
+    assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
+    assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+  })
+
+  test(`${heading} admits a supplied application followed by an omitted continuation`, () => {
+    const input = standaloneApplicationAdmission(heading, 'Our class planted herbs.', '略')
+    assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['captured', 'not_supplied'])
+    assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+  })
+
+  test(`${heading} still rejects falsely omitted labeled English application samples`, () => {
+    const input = standaloneApplicationAdmission(heading, 'Our class planted herbs.', '略')
+    const omitted = standaloneApplicationAdmission(heading, '略', '略')
+    input.sidecar.groups[0].essays = omitted.sidecar.groups[0].essays
+    assert.deepEqual(validateSourceReferences({ ...input,
+      sourceDocuments: input.sourceInput.documents }), [])
+    assert.throws(() => assertSourceReferenceAdmission(input),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+  })
+}
+
+test('standalone written-expression headings capture application samples after objective answers', () => {
+  for (const heading of ['书面表达', '书面表达:', '书面表达：']) {
+    const result = referencesFixture(['64. but 65. better', heading,
+      'Physical or online bookstores, which do you prefer?',
+      'Nowadays, opinions vary among people towards physical and online bookstores.',
+      '读后续写：', 'Mia opened the garden gate.'], ['application', 'continuation'], {
+      lastQuestion: 65, regions: [{}, {}, { x: .25, width: .5 }],
+    })
+    assert.deepEqual(result.groups.map(group => group.essays.state), ['captured', 'captured'])
+    assert.equal(result.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '), [
+      'Physical or online bookstores, which do you prefer?',
+      'Nowadays, opinions vary among people towards physical and online bookstores.',
+    ].join(' '))
+    assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), ['Mia opened the garden gate.'])
+  }
+})
+
+test('explicit task subheadings replace a written-expression overview without capturing overview prose', () => {
+  for (const [application, continuation] of [
+    ['第一节', '第二节'], ['应用文', '读后续写'],
+  ]) {
+    const result = referencesFixture(['书面表达：', 'Overview text must not become a sample.',
+      application, '参考范文', 'Our class planted herbs.',
+      continuation, '参考范文', 'Mia opened the garden gate.'], ['application', 'continuation'])
+    assert.deepEqual(result.groups.map(group => group.essays.entries.map(entry => entry.paragraphs.map(p => p.text))),
+      [[['Our class planted herbs.']], [['Mia opened the garden gate.']]])
+  }
+})
+
 test('numbered tasks and task scoring standards bind tables without mixing the following letter', () => {
   const texts = ['66. 应用文', '应用文评分标准', '本题总分为15分。',
     'Dear Sam,', 'Our club meets on Friday.', 'Yours,', 'Alex',
@@ -274,7 +537,7 @@ test('numbered tasks and task scoring standards bind tables without mixing the f
 test('task mentions and unscoped tables cannot invent writing ownership', t => {
   t.mock.method(console, 'error', () => {})
   t.mock.method(process, 'exit', () => { throw new Error('unscoped source') })
-  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。', '评分标准']) {
+  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。', '评分标准', '书面表达需要审题', '说明：书面表达：']) {
     assert.throws(() => referencesFixture([heading, '档次', '描述'], ['application'], {
       visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-1:table-1',
         rows: [{ cells: [['i1'], ['i2']] }] }],
