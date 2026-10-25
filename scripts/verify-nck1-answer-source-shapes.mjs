@@ -347,6 +347,200 @@ assertRejected(produceNck1DocxMaterialization({
 }), proseListeningHeading.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
 
 const broadcastParagraph = text => `<w:p><w:r><w:t xml:space="preserve">${text}</w:t></w:r></w:p>`
+// Answer-PDF excerpts: Wuxi's continuation ends with a wrapped word count;
+// only a closed count belonging to the recognized writing sample closes it.
+for (const [ending, accepted] of [
+  ['(76 words)', true],
+  ['(76\nwords)', true],
+  ['(76</w:t></w:r></w:p><w:p><w:r><w:t>words)', true],
+  ['（76词）', true],
+  ['(76 words', false],
+  ['（76词', false],
+  ['76 words)', false],
+  ['words)', false],
+  ['(76</w:t></w:r></w:p><w:p><w:r><w:t>unknown words)', false],
+]) {
+  const excerpt = `swelled within us. We hadn't just trained a dog, but had made her a lifeline for someone we would never meet. ${ending}`
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('听力原文'), '')
+      .replace(expectedWritingSamples.continuation.split('\n')[1], excerpt),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  if (accepted) {
+    assert.equal(result.disposition, 'ready_for_verification', JSON.stringify(result.review.required))
+    assert.deepEqual(result.materialization.listening.transcript.map(segment => segment.text),
+      Array.from({ length: 10 }, (_, index) => `Synthetic transcript ${index + 1}.`))
+  } else assertRejected(result, fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+{
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true, answerShape: 'key_only', listeningHeading: '(76 words)',
+  })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+
+// 9+1: scoring precedes the explicitly labelled alternatives, and scoring
+// after a sample plus the whole-line transcript title must remain outside it.
+for (const sampleLabel of ['Version one:', 'Version 1:', '一、Version one:', '(一) Version 1:', '参考范文：', 'One possible version']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true, listeningHeading: '【听力文本】',
+    transformXml: xml => xml
+      .replace('第一节：应用文（满分15分）',
+        `第一节：应用文（满分15分）</w:t></w:r></w:p>${broadcastParagraph('一、评分原则')}${broadcastParagraph('1. 本题总分为15分，按五个档次进行评分。')}<w:p><w:r><w:t>${sampleLabel}`)
+      .replace('Should We Join the Reading Club?', 'Dear Mr. Smith,')
+      .replace(broadcastParagraph('Join us on Friday to read and share ideas.'),
+        `${broadcastParagraph('I am writing to propose a one-day study trip for our international students, exploring “Tradition and Modernity” right here in our city.')}${broadcastParagraph('Version two:')}${broadcastParagraph('Dear Mr. Smith,')}${broadcastParagraph('For the “Tradition and Modernity” study trip, I recommend a route from a historical museum to a digital art gallery to trace our city’s evolution in an enlightening and engaging way.')}${broadcastParagraph('评分标准：后置内容不得进入范文。')}`)
+      .replace('第二节：读后续写（满分25分）',
+        '第二节：读后续写（满分25分）</w:t></w:r></w:p><w:p><w:r><w:t>一、评分原则</w:t></w:r></w:p><w:p><w:r><w:t>One possible version'),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  assert.equal(result.disposition, 'ready_for_verification', JSON.stringify(result.review.required))
+  const samples = result.materialization.groups.filter(group => group.writingTask)
+    .map(group => group.writingTask.officialModelAnswer)
+  assert(samples[0].startsWith(`${sampleLabel}\nDear Mr. Smith,`))
+  assert(samples[0].includes('Version two:\nDear Mr. Smith,'))
+  assert(!/评分|听力/u.test(samples.join('\n')))
+  assert.equal(samples[1], expectedWritingSamples.continuation)
+}
+for (const scoringMention of ['评分时可参考 Version one 的结构。', 'Version one is mentioned in the scoring guidance.']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    transformXml: xml => xml.replace('第一节：应用文（满分15分）',
+      `第一节：应用文（满分15分）</w:t></w:r></w:p>${broadcastParagraph('一、评分原则')}<w:p><w:r><w:t>${scoringMention}`),
+  })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+}
+// A version label cannot erase an essay title, salutation or sentence already
+// present before it, including the review's exact two-drafts example.
+for (const label of ['Version one:', 'Version 1:', '一、Version one:', '(一) Version 1:']) {
+  for (const opening of [
+    'Should We Join the Reading Club?',
+    'Dear Mr. Smith,',
+    'Our club compared two drafts for the final announcement.',
+  ]) {
+    const fixture = makeSyntheticNck1DocxFixture({
+      listening: true,
+      transformXml: xml => xml.replace(broadcastParagraph('Should We Join the Reading Club?'),
+        [opening, 'Our club compared two drafts for the final announcement.', label]
+          .map(broadcastParagraph).join('')),
+    })
+    assertRejected(produceNck1DocxMaterialization({
+      paperId: fixture.paperId, documents: fixture.sourceDocuments,
+    }), fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+  }
+}
+// Equal text in an earlier sample is not proof of ownership of this count.
+// Also cover a split count and several logical lines sharing one source item.
+for (const tail of [
+  ['评分标准：以下不是范文。', 'Unknown source content after the scoring section.', '(76 words)'],
+  ['评分标准：以下不是范文。', 'Unknown source content after the scoring section. (76', 'words)'],
+  ['评分标准：以下不是范文。\nUnknown source content after the scoring section.\n(76 words)'],
+]) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('听力原文'), '')
+      .replace('Join us on Friday to read and share ideas.', 'Join us on Friday to read and share ideas. (76 words)')
+      .replace(broadcastParagraph(expectedWritingSamples.continuation.split('\n')[1]),
+        [expectedWritingSamples.continuation.split('\n')[1], ...tail].map(broadcastParagraph).join('')),
+  })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+{
+  // Even one sourceIndex cannot prove ownership if its retained sample ends
+  // before later logical lines containing scoring and an unrelated count.
+  const last = expectedWritingSamples.continuation.split('\n')[1]
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('听力原文'), '')
+      .replace('Join us on Friday to read and share ideas.', 'Join us on Friday to read and share ideas. (76 words)')
+      .replace(broadcastParagraph(last), broadcastParagraph(
+        `${last}\n评分标准：以下不是范文。\nUnknown source content.\n(76 words)`)),
+  })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+for (const listeningHeading of ['【听力文本】', '【听力原文】', '听力材料', '听力稿']) {
+  const fixture = makeSyntheticNck1DocxFixture({ listening: true, listeningHeading })
+  const result = produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.equal(result.review.listeningSourcePartition.heading.text, listeningHeading)
+  assert.equal(result.materialization.listening.transcript.length, 10)
+}
+for (const listeningHeading of ['听力文本介绍如下。', '这段正文谈到了听力。', '【听力文本】的评分说明',
+  '听力稿介绍如下。', '下面是听力稿。', '【听力稿】的评分说明']) {
+  const fixture = makeSyntheticNck1DocxFixture({ listening: true, listeningHeading })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+for (const speech of ['M: 请把听力稿发给我。', '听力稿 includes the words “please wait outside”.']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace('Synthetic transcript 4.', speech),
+  })
+  const result = produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.deepEqual(result.materialization.listening.transcript.map(segment => segment.text),
+    Array.from({ length: 10 }, (_, index) => index === 3 ? speech : `Synthetic transcript ${index + 1}.`))
+}
+
+// Suizhou: the paired sound check is source-backed preamble, never Text 1.
+for (const [trialEnd, formalStart, accepted] of [
+  ['试音到此结束。', '听力考试正式开始。', true],
+  ['', '听力考试正式开始。', false],
+  ['试音到此结束。', '', false],
+  ['试音到此结束。', 'M: 听力考试正式开始。', false],
+]) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('Text 1'),
+      ['现在是听力试音时间。', 'M: Hello. International Friends Club. Can I help you?',
+        'W: Oh, hello. I read about your club in the paper today and I thought I’d phone to find out a',
+        'bit more.', trialEnd, formalStart, 'Text 1'].filter(Boolean).map(broadcastParagraph).join('')),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  if (!accepted) {
+    assertRejected(result, fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_CUE_BOUNDARY_AMBIGUOUS')
+    continue
+  }
+  assertReady(result, fixture.sourceDocuments, 'International Friends Club', expectedWritingSamples)
+  assert.equal(result.review.listeningSourcePartition.openingPreamble.length, 6)
+  assert(result.review.listeningSourcePartition.openingPreamble.every(item =>
+    item.disposition === 'excluded_exam_broadcast' && item.source))
+}
+for (const ending of ['听力结束', '听力部分到此结束。']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('Synthetic transcript 10.'),
+      ['Synthetic transcript 10.', ending, '试题答案', '后置答案内容。'].map(broadcastParagraph).join('')),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  assertReady(result, fixture.sourceDocuments, '后置答案内容。', expectedWritingSamples)
+  assert.equal(result.review.listeningSourcePartition.analysisBoundary.text, '试题答案')
+  assert.equal(result.materialization.listening.transcript.at(-1).text, 'Synthetic transcript 10.')
+}
+for (const tail of ['试题答案如下，尚未结束。', 'M: 听力结束后见。']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('Synthetic transcript 10.'),
+      ['Synthetic transcript 10.', '听力部分到此结束。', tail].map(broadcastParagraph).join('')),
+  })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+console.log('PASS closed sample word counts, labelled samples after scoring, paired sound checks and explicit answer tails')
 const headmasterText = 'Hello, everyone. Please listen to the school announcement. Let us take a break, then stay safe.'
 const broadcastFixture = makeSyntheticNck1DocxFixture({
   listening: true,
