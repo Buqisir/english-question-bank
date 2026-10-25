@@ -5,9 +5,28 @@ import path from 'node:path'
 
 const nativeLimits = ['-limit', 'memory', '128MiB', '-limit', 'map', '128MiB',
   '-limit', 'disk', '0', '-limit', 'thread', '1', '-limit', 'time', '10']
-const encoding = ['-define', 'png:compression-level=9', '-define', 'png:compression-filter=5',
+// Let libpng select its default filters: IM6 rejects the IM7 filter value 5
+// as a warning, which -regard-warnings correctly treats as a failed encoding.
+const encoding = ['-define', 'png:compression-level=9',
   '-define', 'png:exclude-chunks=tEXt,zTXt,iTXt,tIME']
 const fail = (message, cause) => { throw Object.assign(new Error(message, { cause }), { code: 'SOURCE_REFERENCES_FIGURE_PNG_INVALID' }) }
+
+function nativeFailureSummary(error, directory) {
+  // Never expose execFileSync's message/arguments. Keep only bounded native
+  // diagnostics, stripping quoted/unquoted absolute paths before publication.
+  const stderr = (Buffer.isBuffer(error.stderr)
+    ? error.stderr.subarray(0, 4096).toString('utf8') : String(error.stderr ?? '').slice(0, 4096))
+    .replaceAll(directory, '<path>')
+    .replace(/(["'`])(?:[A-Za-z]:[\\/]|\/)[^\r\n]*?\1/gu, '<path>')
+    .replace(/(?:[A-Za-z]:[\\/]|\/)[^\s"'`<>]*/gu, '<path>')
+    .replace(/[\u0000-\u001f\u007f-\u009f]/gu, ' ')
+    .replace(/\s+/gu, ' ').trim().slice(0, 384)
+  const code = String(error.code ?? '').replace(/[^A-Z0-9_]/gu, '').slice(0, 32)
+  const signal = /^SIG[A-Z0-9]+$/u.test(error.signal ?? '') ? error.signal : null
+  return [`exit=${Number.isInteger(error.status) ? error.status : 'unknown'}`,
+    ...(code ? [`code=${code}`] : []), ...(signal ? [`signal=${signal}`] : []),
+    ...(stderr ? [`stderr=${stderr}`] : [])].join('; ')
+}
 
 // This seam accepts only a freshly rendered, bounded PNG32 crop. Small crops
 // keep their exact historical bytes. Frozen assets never pass through it.
@@ -51,7 +70,7 @@ export function fitSourceReferencePng(crop, limits) {
     fail('PNG exceeds 2 MiB after lossless compression')
   } catch (error) {
     if (error.code === 'SOURCE_REFERENCES_FIGURE_PNG_INVALID') throw error
-    fail('PNG sizing failed bounded native processing', error)
+    fail(`PNG sizing failed bounded native processing (${nativeFailureSummary(error, directory)})`, error)
   } finally {
     rmSync(directory, { recursive: true, force: true })
   }

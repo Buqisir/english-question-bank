@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict'
+import childProcess from 'node:child_process'
+import { syncBuiltinESMExports } from 'node:module'
 import { test } from 'node:test'
 import { crc32, deflateSync } from 'node:zlib'
 import { fitSourceReferencePng } from './sourceReferencePngSizing.mjs'
@@ -40,7 +42,8 @@ test('small new PNGs keep the exact original bytes and digest', () => {
 })
 
 test('an oversized synthetic PNG fits losslessly without changing a single RGBA value', () => {
-  const crop = syntheticCrop(800, 800)
+  // Match the production scoring crop dimensions without retaining source content.
+  const crop = syntheticCrop(1754, 1470)
   assert(crop.bytes.length > limits.pngBytes)
   const fitted = fitSourceReferencePng(crop, limits)
   assert(fitted.bytes.length <= limits.pngBytes)
@@ -49,7 +52,7 @@ test('an oversized synthetic PNG fits losslessly without changing a single RGBA 
   assert.equal(fitted.pixelHeight, crop.pixelHeight)
   const pixels = decodeSourceReferencePng({ profile: 'source-reference-pdf-crop-v1', mediaType: 'image/png',
     sha256: sha256(fitted.bytes), byteLength: fitted.bytes.length, base64: fitted.bytes.toString('base64'),
-    pixelWidth: 800, pixelHeight: 800 }).pixels
+    pixelWidth: crop.pixelWidth, pixelHeight: crop.pixelHeight }).pixels
   for (let i = 0; i < pixels.length; i++) assert.equal(pixels[i], i % 4 === 3 ? 255 : 90)
   assert.deepEqual(fitSourceReferencePng(crop, limits), fitted, 'repeat input yields exact bytes, SHA and receipt')
 })
@@ -58,6 +61,37 @@ test('a PNG still above 2 MiB after lossless compression fails without resizing'
   assert.throws(() => fitSourceReferencePng(syntheticCrop(900, 900, true), limits),
     { code: 'SOURCE_REFERENCES_FIGURE_PNG_INVALID', message: /after lossless compression/u })
 })
+
+for (const nativeError of [
+  Object.assign(new Error('spawnSync magick ENOENT /private/internal-command'), { code: 'ENOENT' }),
+  Object.assign(new Error('Command failed with private arguments'), {
+    status: 1, signal: null,
+    stderr: Buffer.from("convert: cache resources exhausted '/opt/private source/image.png' "
+      + '`/Users/private user/crop.png` C:\\private\\crop.png @ error/cache.c/123\n' + 'x'.repeat(2000)),
+  }),
+  Object.assign(new Error('spawnSync magick ETIMEDOUT'), { code: 'ETIMEDOUT', signal: 'SIGKILL' }),
+]) {
+  test(`native failure includes bounded safe diagnostics (${nativeError.code ?? 'stderr'})`, t => {
+    const stub = t.mock.method(childProcess, 'execFileSync', () => { throw nativeError })
+    syncBuiltinESMExports()
+    try {
+      assert.throws(() => fitSourceReferencePng(syntheticCrop(800, 800), limits), error => {
+        assert.equal(error.code, 'SOURCE_REFERENCES_FIGURE_PNG_INVALID')
+        assert.match(error.message, /PNG sizing failed bounded native processing/u)
+        if (nativeError.code) assert(error.message.includes(nativeError.code))
+        else assert.match(error.message, /exit=1.*cache resources exhausted/u)
+        if (nativeError.signal) assert(error.message.includes(nativeError.signal))
+        assert(!/private|internal-command|[\\/]|[\r\n]/u.test(error.message), error.message)
+        assert(error.message.length < 700)
+        assert.equal(error.cause, nativeError)
+        return true
+      })
+    } finally {
+      stub.mock.restore()
+      syncBuiltinESMExports()
+    }
+  })
+}
 
 test('unchanged v1 schema and PDF pixel replay accept PNG24 re-encoding', () => {
   const input = scoringFiguresFixture()
