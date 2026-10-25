@@ -1,5 +1,10 @@
 // Existing OCR producer predicates shared with scoring admission. Keep source
 // recognition identical without importing the CLI producer into the server.
+// The #586 sample parser is also the authority for Version one/two/three
+// (or 1–3), including its optional Chinese ordinal and whole-label boundary.
+export const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?<version>one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
+export const isWritingVersionLabel = text =>
+  Boolean(WRITING_SAMPLE_LABEL.exec(text.normalize('NFKC').trim())?.groups?.version)
 // Answer keys may number writing as the third part when listening is absent.
 export const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
 // Answer-first keys may name the task without a writing-part or section number.
@@ -19,12 +24,23 @@ export const WRITING_SCORING_SECTION = [
 // A transcript may precede a separate rubric appendix. Only its complete
 // source heading allows leaving listening; task and entry labels are still required.
 export const WRITING_SCORING_OVERVIEW = /^(?:写作评分说明|写作评分标准|评分细则)\s*[:：]?$/u
-// Explanations remain closed unless the source supplies both a standalone
-// rubric overview and an immediately adjacent, fully named task rubric.
+// Explanations reopen only for an adjacent overview + fully named task rubric,
+// or the exact NCK1 section/score + rubric-label pair below.
 export function isExplicitScoringAppendixStart(text, nextText = '') {
   const matchingView = value => value.normalize('NFKC').replace(/\s+/gu, '')
-  return WRITING_SCORING_OVERVIEW.test(matchingView(text))
-    && WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(matchingView(nextText)))
+  return Boolean(scoredWritingRubricTask(text, nextText))
+    || (WRITING_SCORING_OVERVIEW.test(matchingView(text))
+      && WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(matchingView(nextText))))
+}
+// NCK1's bare rubric headings identify a task only with its exact section/score
+// pair AND an adjacent complete rubric label. A bare section or prose mentioning
+// scoring cannot reopen explanations; do not recapture the reprinted samples.
+export function scoredWritingRubricTask(text, nextText = '') {
+  const normalize = value => value.normalize('NFKC').replace(/\s+/gu, '')
+  if (!SCORING_ENTRY_LABEL.test(normalize(nextText))) return null
+  const heading = normalize(text)
+  return /^第一节\(满分15分\)[:：]?$/u.test(heading) ? 'application'
+    : /^第二节\(满分25分\)[:：]?$/u.test(heading) ? 'continuation' : null
 }
 export const LISTENING_REFERENCE_START = /^(?:(?:附\s*[:：]?\s*)?听力|录音原文|\(?Text\s*\d)/iu
 // Numbered headings for other exam tasks end writing ownership, including

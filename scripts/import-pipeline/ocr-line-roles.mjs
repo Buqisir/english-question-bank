@@ -5,6 +5,7 @@ import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
+  isWritingVersionLabel,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
@@ -153,10 +154,13 @@ export const LINE_ROLE_RULES = Object.freeze([
     '续写评分标准', '续写评分标准分析'),
   rule('entry.scoring-label', 'entry-label', 90, f => SCORING_ENTRY_LABEL.test(f.nfkc),
     '（二）各档次给分范围和要求', '（二）各档次给分范围和要求如下。'),
+  rule('entry.source-version', 'entry-label', 100, f => isWritingVersionLabel(f.text),
+    'Version one:', 'Version one is mentioned in the scoring guidance.'),
   pattern('entry.scoring-kind', 'entry-kind', 10, SCORING_LABEL, '二、评分原则', '参考范文', { value: 'scoring' }),
-  pattern('entry.essay-kind', 'entry-kind', 20, ESSAY_LABEL, '参考范文', '二、评分原则', { value: 'essays' }),
+  rule('entry.essay-kind', 'entry-kind', 20, f => ESSAY_LABEL.test(f.text) || isWritingVersionLabel(f.text),
+    '参考范文', '二、评分原则', { value: 'essays' }),
   rule('entry.sample-label', 'sample-label', 10, f =>
-    Boolean(firstLineRole('entry-label', f)) && ESSAY_LABEL.test(f.text),
+    Boolean(firstLineRole('entry-label', f)) && (ESSAY_LABEL.test(f.text) || isWritingVersionLabel(f.text)),
   '参考范文（80词）', '二、评分原则'),
   pattern('writing.inline-sample', 'inline-sample', 10,
     /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)(?:\s+|(?<=[）)]))(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu,
