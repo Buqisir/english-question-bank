@@ -30,7 +30,7 @@ import { fileURLToPath } from 'node:url'
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
-import { isExplicitScoringAppendixStart, scoredWritingRubricTask } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -46,7 +46,8 @@ import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs
 import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import { matchesLineRole, firstLineRole,
-  inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches } from './ocr-line-roles.mjs'
+  inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches,
+  REFERENCE_MARGIN_TOLERANCE } from './ocr-line-roles.mjs'
 import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
@@ -1301,6 +1302,43 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       }
     }
   }
+  // A reprint can use the original question document's cover title rather
+  // than the answer book's abbreviated title. Match exact confirmed title
+  // lines in this paper's first pages; reuse the existing furniture role.
+  const firstPageTitles = new Set()
+  for (const document of confirmation.documents) {
+    const first = document.pages[0]
+    const proof = evidence.documents.find(item => item.documentId === document.documentId)?.pages[first.page - 1]
+    if (!proof) continue
+    const observations = new Map(proof.observations.map(item => [item.observationId, item]))
+    for (const item of first.orderedItems) {
+      const facts = computeLineFacts({ text: item.text,
+        boxes: item.observationIds.map(id => observations.get(id)) })
+      if (facts.region?.y < .12 && matchesLineRole('furniture.repeated-title', facts, { repeated: true })) {
+        firstPageTitles.add(writingRuleMatchingView(item.text))
+      }
+    }
+  }
+  const titleFurniture = new WeakSet()
+  for (const [index, line] of lines.entries()) {
+    if (line.figure || line.table || line.page === 1 || !firstPageTitles.has(writingRuleMatchingView(line.text))) continue
+    const facts = factsFor(line)
+    if (!(facts.region?.y < .12) || !matchesLineRole('furniture.repeated-title', facts, { repeated: true })) continue
+    titleFurniture.add(line)
+    const header = [line]
+    // A centered subtitle may be a separate confirmed item. Its whole block
+    // must still fit the existing title furniture's edge/height/text bounds.
+    for (const next of lines.slice(index + 1)) {
+      if (next.page !== line.page || next.figure || next.table) break
+      const nextFacts = factsFor(next)
+      if (nextFacts.left < facts.left || nextFacts.right > facts.right || nextFacts.region.y < facts.region.y) break
+      const boxes = [...header, next].flatMap(item => item.boxes)
+      const combined = computeLineFacts({ text: [...header, next].map(item => item.text).join(''), boxes })
+      if (!matchesLineRole('furniture.repeated-title', combined, { repeated: true })) break
+      titleFurniture.add(next)
+      header.push(next)
+    }
+  }
   const edgeTexts = new Map()
   for (const line of lines) {
     if (line.figure) continue
@@ -1368,7 +1406,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
       continue
     }
-    if (firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
+    if (titleFurniture.has(line) || firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
       furniture.add(line)
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
       continue
@@ -1458,6 +1496,17 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       const body = english.length ? english : local
       margins.set(page, { left: Math.min(...body.map((line) => line.left)),
         right: Math.max(...body.map((line) => line.right)) })
+    }
+    // The Chinese wrap veto needs the previous line's own column, not the
+    // English sample or the opposite column. Keep the existing paragraph
+    // geometry/margins unchanged; only this veto consumes these local rights.
+    const columnMargins = new WeakMap()
+    const chineseBody = sectionLines.filter(line => !line.figure && !line.table
+      && factsFor(line).hasHan && !firstLineRole('entry-label', factsFor(line)))
+    for (const line of chineseBody) {
+      const column = chineseBody.filter(other => other.page === line.page
+        && Math.abs(other.left - line.left) <= REFERENCE_MARGIN_TOLERANCE)
+      columnMargins.set(line, { right: Math.max(...column.map(other => other.right)) })
     }
     const short = taskType === 'application' ? 'app' : 'cont'
     const entries = { essays: [], scoring: [] }
@@ -1577,7 +1626,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       const afterClosing = previous?.role === 'closing'
       const decision = decideLineJoin({
         content: 'reference', previous, current: facts,
-        geometry: { unit: 'normalized', margin, previousMargin: previous?.margin || margin },
+        geometry: { unit: 'normalized', margin, previousMargin: previous?.margin || margin,
+          previousColumnMargin: previous?.columnMargin },
         roles: { hasParagraph: Boolean(paragraph), special, afterClosing,
           numbered: matchesLineRole('paragraph.numbered', facts) },
         referenceContext: { entryKind: entry.kind,
@@ -1595,7 +1645,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       }
       paragraph.lines.push(line)
       previous = { role: paragraph.role, right: line.right, page: line.page,
-        text: line.text, sourceIndex: sourceOrder.get(line), margin }
+        text: line.text, sourceIndex: sourceOrder.get(line), margin, columnMargin: columnMargins.get(line) }
       previousLocation = decision.location.after
     }
     if (awaitingSourceLabel) {

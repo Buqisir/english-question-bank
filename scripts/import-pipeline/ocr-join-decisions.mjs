@@ -1,11 +1,11 @@
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { matchesLineRole, speakerLabel } from './ocr-line-roles.mjs'
+import { matchesLineRole, speakerLabel, referenceLineIsFull } from './ocr-line-roles.mjs'
 
 /** @typedef {ReturnType<typeof computeLineFacts>} LineFacts */
 /** @typedef {{first: object, last: object, firstFacts: LineFacts, lastFacts: LineFacts}} PhysicalEdges */
 /**
  * @typedef {{unit: 'normalized', margin: {left: number, right: number},
- *   previousMargin?: {left: number, right: number}} |
+ *   previousMargin?: {left: number, right: number}, previousColumnMargin?: {right: number}} |
  *   {unit: 'pixels', before: PhysicalEdges|null, after: PhysicalEdges|null, rights: Array<LineFacts['box']>} |
  *   {unit: 'text'}} JoinGeometry
  */
@@ -56,8 +56,7 @@ function referenceCrossPageRule({ previous, current, geometry, roles, referenceC
     && /^sha256:[a-f0-9]{64}$/u.test(source.documentSha256)
     && Number.isInteger(source.locator.page) && source.locator.page > 0
   const previousMargin = geometry.previousMargin
-  const fullLine = Number.isFinite(previous.right) && Number.isFinite(previousMargin?.right)
-    && previous.right >= previousMargin.right - .06
+  const fullLine = referenceLineIsFull(previous, previousMargin)
   const currentMarginKnown = Number.isFinite(geometry.margin?.left) && Number.isFinite(current.left)
   // Inspect a copy: OCR may space out punctuation and nested closing marks.
   // Only a word ending proves an unfinished tail; sentence stops, deferred
@@ -87,6 +86,7 @@ function referencePolicy(input) {
     && !roles.special && !roles.afterClosing && !roles.numbered
     && ((current.startsLower && previousTail && !/[.!?:]$/u.test(previousTail))
       || (current.startsHan && /\p{Script=Han}/u.test(previousTail)
+        && referenceLineIsFull(previous, geometry.previousColumnMargin || geometry.previousMargin || geometry.margin)
         && !/[。！？；：]$/u.test(previousTail) && !numberedOrLabel))
   const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues && !unfinished
     && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered))

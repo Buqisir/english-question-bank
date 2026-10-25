@@ -209,6 +209,22 @@ test('post-listening rubric resumes capture and admission without replacing eith
   ])
 })
 
+test('admission compares retained and historically spaced source hyphens without accepting different words', () => {
+  const input = fixture({ applicationSample: ['参考范文', 'We provide AI-\nbased feedback.'] })
+  const captured = captureScoringReferences(input)
+  const original = structuredClone(captured)
+  for (const text of ['We provide AI-based feedback.', 'We provide AI- based feedback.']) {
+    const sidecar = structuredClone(captured)
+    sidecar.groups[0].essays.entries[0].paragraphs[0].text = text
+    assertSourceReferenceAdmission({ ...input, sidecar })
+  }
+  const wrong = structuredClone(captured)
+  wrong.groups[0].essays.entries[0].paragraphs[0].text = 'We provide AI-based guidance.'
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: wrong }),
+    /Reference text must replay surviving confirmed OCR items/u)
+  assert.deepEqual(captured, original)
+})
+
 test('post-listening capture reuses shared parenthesized rubric labels without changing recognition', () => {
   for (const label of ['（二）各档次给分范围和要求：', '（一）评分原则：']) {
     const input = fixture({ label })

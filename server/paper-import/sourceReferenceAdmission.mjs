@@ -11,7 +11,7 @@ function reject(message) {
 }
 
 const normalize = text => text.replace(/\s+/gu, ' ').trim()
-const joinedText = text => text.normalize('NFKC').replace(/(\p{L})-\s+(?=\p{L})/gu, '$1').replace(/\s+/gu, '')
+const joinedText = text => text.normalize('NFKC').replace(/(\p{L})-\s*(?=\p{L})/gu, '$1').replace(/\s+/gu, '')
 
 // Only explicit confirmed NCK1 writing headings establish task ownership.
 // Missing/ambiguous scopes fail closed rather than borrowing the nearest task.

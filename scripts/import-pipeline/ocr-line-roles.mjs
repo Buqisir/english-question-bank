@@ -49,6 +49,12 @@ const pattern = (id, phase, priority, regex, example, counterExample, extra) =>
 const edge = { y: 0.04, height: 0.02 }
 const boundary = { previous: { role: 'body', right: 0.81, page: 1 }, margin: { left: 0.1, right: 0.9 } }
 
+// Shared normalized-page tolerance from reference.previous-short.
+export const REFERENCE_MARGIN_TOLERANCE = .06
+export const referenceLineIsFull = (line, margin) =>
+  Number.isFinite(line?.right) && Number.isFinite(margin?.right)
+    && line.right >= margin.right - REFERENCE_MARGIN_TOLERANCE
+
 export const LINE_ROLE_RULES = Object.freeze([
   rule('worksheet.footer', 'worksheet', 10, (f, c) =>
     (c.index >= c.lineCount - 2 && FOOTER.test(f.text))
@@ -235,7 +241,7 @@ export const LINE_ROLE_RULES = Object.freeze([
     { text: 'Unexpectedly everything changed.', page: 2, context: boundary },
     { text: 'Unexpectedly everything changed.', page: 1, context: boundary }),
   rule('reference.previous-short', 'previous-short', 10, (f, c) =>
-    c.previous && c.previous.right < c.margin.right - 0.06
+    c.previous && !referenceLineIsFull(c.previous, c.margin)
       && c.previous.right + f.firstObservationWidth + 0.003 < c.margin.right,
   { text: 'Unexpectedly everything changed.', context: boundary },
   { text: 'Unexpectedly everything changed.', boxes: [{ region: { x: .1, y: .3, width: .1, height: .02 } }], context: boundary }),
