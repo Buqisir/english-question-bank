@@ -10,7 +10,12 @@ export function applicationWritingNoticeLines(
 export type WritingNoticeGroup = {
   readonly startIndex: number
   readonly blockCount: number
-  readonly lines: ReadonlyArray<ApplicationWritingNoticeLine>
+  readonly lines: ReadonlyArray<ApplicationWritingNoticeLine & {
+    /** Source block offset relative to this group's startIndex. */
+    readonly blockOffset: number
+    /** Display line within that source block. */
+    readonly lineIndex: number
+  }>
 }
 
 export function writingNoticeGroup(

@@ -831,15 +831,15 @@ function renderCanonicalWritingBlocks(blocks, family) {
     if (notice && index > notice.startIndex && index < notice.startIndex + notice.blockCount) return ''
     const isNotice = notice?.startIndex === index
     const role = isNotice ? 'notice_line' : family === 'application' ? 'prompt_line' : 'material_paragraph'
-    const content = isNotice ? notice.lines.map((line, lineIndex) => {
-      const sourceBlock = notice.blockCount > 1 ? blocks[index + lineIndex] : block
+    const content = isNotice ? notice.lines.map(line => {
+      const sourceBlock = blocks[index + line.blockOffset]
       const marked = sourceBlock.inlines.some(inline => inline.marks?.length)
-      const blockAttr = notice.blockCount > 1 && lineIndex > 0
+      const blockAttr = line.blockOffset > 0
         ? ` data-canonical-block-id="${escapeHtml(sourceBlock.nodeId)}"` : ''
-      const inlineAttr = !marked && (notice.blockCount > 1 || lineIndex === 0)
+      const inlineAttr = !marked && (line.blockOffset > 0 || line.lineIndex === 0)
         ? ` data-canonical-content-node-id="${escapeHtml(sourceBlock.inlines[0].nodeId)}"` : ''
       const lineContent = marked
-        ? renderCanonicalInlineNodes(writingNoticeDisplayInlines(sourceBlock.inlines, notice.blockCount > 1 ? 0 : lineIndex))
+        ? renderCanonicalInlineNodes(writingNoticeDisplayInlines(sourceBlock.inlines, line.lineIndex))
         : escapeHtml(line.text)
       return `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}"${blockAttr}${inlineAttr} data-canonical-${family}-notice-line="${line.kind}">${lineContent}</span>`
     }).join('') : renderCanonicalInlineNodes(block.inlines)

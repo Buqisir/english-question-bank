@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { produceNck1DocxMaterialization } from '../server/paper-import/nck1DocxMaterializationProducer.mjs'
@@ -246,4 +248,7 @@ assert.equal(writingNoticeGroup(['注意：', '（1）词数80左右；', '（3�
   'the historical label-only notice behavior is unchanged')
 console.log('Combined first instruction and consecutive source blocks: PASS')
 
+const rendered = spawnSync(process.execPath, ['--test', fileURLToPath(
+  new URL('./import-pipeline/writing-notice-render.test.mjs', import.meta.url))], { stdio: 'inherit' })
+assert.equal(rendered.status, 0, 'actual Print/Screen notice source-line and published-byte regressions')
 console.log('verify-nck1-writing-notice-numbering: PASS')

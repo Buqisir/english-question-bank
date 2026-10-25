@@ -69,8 +69,11 @@ export function applicationWritingNoticeLines(text) {
 export function writingNoticeGroups(texts) {
   const groups = []
   for (let startIndex = 0; startIndex < texts.length; startIndex += 1) {
-    const lines = applicationWritingNoticeLines(texts[startIndex])
-    if (!lines) continue
+    const sourceLines = applicationWritingNoticeLines(texts[startIndex])
+    if (!sourceLines) continue
+    // A combined paragraph can contribute several lines before a split tail.
+    // Keep both source coordinates instead of equating line and block counts.
+    const lines = sourceLines.map((line, lineIndex) => ({ ...line, blockOffset: 0, lineIndex }))
     let previousNumber = null
     if (lines.length > 1) {
       const numbers = lines.slice(1).map(line => splitNoticeInstructionNumber(line.text))
@@ -90,7 +93,7 @@ export function writingNoticeGroups(texts) {
         if (number !== previousNumber + 1) break
         previousNumber = number
       }
-      lines.push({ kind: 'instruction', text: instruction })
+      lines.push({ kind: 'instruction', text: instruction, blockOffset: blockCount, lineIndex: 0 })
       blockCount += 1
     }
     groups.push({ startIndex, blockCount, lines })
