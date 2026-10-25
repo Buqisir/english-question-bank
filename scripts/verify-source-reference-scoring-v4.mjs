@@ -245,3 +245,7 @@ try {
   }
   console.log('PASS includeScoring Screen/Print HTML → paginated DOM/PDF retain all scoring PNGs in order and inside page bounds; default hides scoring')
 } finally { await closeChromiumPool() }
+
+// The small PDF fixtures never cross 2 MiB. Exercise native PNG sizing in this
+// registered CI verifier too, including Ubuntu's ImageMagick 6 warning behavior.
+await import('../server/paper-import/sourceReferencePngSizing.test.mjs')

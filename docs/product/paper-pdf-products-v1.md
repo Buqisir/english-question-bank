@@ -258,7 +258,8 @@ image registry；三款题卷及组卷题卷不消费源参考图。
 与共享 PDF 裁图 helper：归一化坐标乘栅格宽高后各自四舍五入，裁剪后 +repage、
 PNG32 输出；接收端完整解码为 sRGB 8-bit RGBA，按像素重放比对来源。
 冻结 PNG 的精确字节 SHA 继续绑定审批与发布；导出只读批准版本，不临时重裁。
-新裁图超过 2 MiB 时，先固定 zlib level 9、PNG filter 5 重编码；
+新裁图超过 2 MiB 时，固定 zlib level 9、沿用编码器默认 PNG filters 重编码
+（兼容 ImageMagick 6/7；IM6 不接受 `png:compression-filter=5`）；
 仅在 RGBA 逐字节相等后接受无损结果，不透明图可移除 alpha 通道转 PNG24。
 未超限图保持原字节；已有封存图及摘要不重编码。
 无损后仍超限即拒绝，不改变分辨率、v1 profile 或 schema。
