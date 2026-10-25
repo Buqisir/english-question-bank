@@ -110,12 +110,28 @@ test('sample citations remain scoring prose through the continuation appendix', 
 })
 
 test('complete Chinese sample labels still end scoring ownership', () => {
-  for (const label of ['范文1：', '范文一', '参考范文①：', '范文２ An English sample.']) {
-    const input = textReferences([['第二节 读后续写', '评分标准', '评分正文。', label, 'An English sample.']])
+  for (const label of ['范文1：', '范文一']) {
+    const input = textReferences([['第一节 应用文', '参考范文', 'An application sample.'],
+      ['第二节 读后续写', '评分标准', '评分正文。', label, 'An English sample.']])
+    assert.equal(input.capture().groups[1].essays.entries[0].sourceLabel, label)
     const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
-    assert.equal(scopes.get('p1:i2')?.labelItemId, 'p1:i1')
-    assert.equal(scopes.get('p1:i3'), null, label)
-    assert.equal(scopes.get('p1:i4'), null, label)
+    assert.equal(scopes.get('p2:i2')?.labelItemId, 'p2:i1')
+    assert.equal(scopes.get('p2:i3'), null, label)
+    assert.equal(scopes.get('p2:i4'), null, label)
+  }
+})
+
+test('scope retains text outside the producer complete entry-label grammar', () => {
+  // These formerly scope-only matches never created a producer essay entry.
+  // Keep both inputs and prove ownership now follows that same complete grammar.
+  for (const text of ['参考范文①：', '范文２ An English sample.']) {
+    const input = textReferences([['第一节 应用文', '参考范文', 'An application sample.'],
+      ['第二节 读后续写', '评分标准', '评分正文。', text, 'An English sample.']])
+    const output = input.capture().groups[1]
+    assert.equal(output.essays.entries.length, 0)
+    assert(JSON.stringify(output.scoring).includes(text))
+    const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+    for (const itemId of ['p2:i2', 'p2:i3', 'p2:i4']) assert.equal(scopes.get(itemId)?.labelItemId, 'p2:i1')
   }
 })
 

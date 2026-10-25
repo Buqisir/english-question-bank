@@ -6,6 +6,7 @@ import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-product
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
 function fixture(pageLines) {
@@ -41,6 +42,100 @@ function reseal(input) {
   input.sourceInput.ocrSourceBytes = { evidenceBytes: Buffer.from(JSON.stringify(input.evidence)),
     confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)) }
 }
+
+function adjacentEssay({ label = '参考范文', combined = false, twoEntries = false } = {}) {
+  const input = scoringFiguresFixture()
+  if (combined) {
+    input.materialization.documents[1].role = input.sourceDocuments[1].role = 'question_and_answers'
+    input.evidence.sourceSetDigest = input.confirmation.sourceSetDigest = nck1OcrSourceSetDigest(input.sourceDocuments)
+    input.sourceInput.materializationBytes = Buffer.from(JSON.stringify(input.materialization))
+  }
+  for (const document of input.confirmation.documents) for (const page of document.pages) page.visualClassifications = []
+  for (const document of input.evidence.documents) for (const page of document.pages) {
+    page.regions = page.regions.filter(region => region.kind !== 'visual')
+  }
+  const page = input.confirmation.documents[1].pages[2], proof = input.evidence.documents[1].pages[2]
+  const template = proof.observations[0]
+  const rows = [
+    ['第四部分 写作（满分40分）\n第一节', .08, .1, .8],
+    [label, .12, .1, .35],
+    ...(twoEntries ? [['First sample closes.', .16, .1, .35], ['范文二', .20, .1, .35]] : []),
+    ['Our original', .24, .1, .35], ['sample is short.', .1, .6, .3],
+    ['评分标准', .4, .1, .8], ['Source criterion closes.', .44, .1, .8],
+  ]
+  proof.observations = rows.map(([text, y, x, width], i) => ({
+    ...structuredClone(template), text, observationId: `answers:interior:w${i}`,
+    regionId: `answers:interior:r${i}`, region: { x, y, width, height: .02 },
+  }))
+  proof.regions = proof.observations.map(o => ({ regionId: o.regionId, kind: 'text', region: o.region }))
+  proof.readingOrderEdges = proof.observations.slice(1).map((o, i) => ({
+    before: proof.observations[i].observationId, after: o.observationId,
+  }))
+  page.orderedItems = proof.observations.map((o, i) => ({
+    itemId: `answers:interior:i${i}`, observationIds: [o.observationId], text: o.text,
+  }))
+  reseal(input)
+  const sidecar = captureScoringReferences(input)
+  sidecar.schemaVersion ??= 'source-references-v1'
+  return { input, sidecar }
+}
+
+test('rereview P1-1 enlarged first fragment cannot include another essay entry', () => {
+  const { input, sidecar } = adjacentEssay({ twoEntries: true })
+  assert.equal(sidecar.groups[0].essays.entries.length, 2)
+  const p = sidecar.groups[0].essays.entries[1].paragraphs[0]
+  assert.equal(p.text, 'Our original sample is short.')
+  assert.equal(p.continuationSources.length, 1)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  p.source.locator.region = { x: .1, y: .16, width: .35, height: .10 }
+  p.text = 'First sample closes. 范文二 Our original sample is short.'
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /continuation.*ownership/iu)
+})
+
+test('rereview P1-1 a gap inside one fragment is rejected even when every item has the same essay owner', () => {
+  const { input, sidecar } = adjacentEssay()
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  const page = input.confirmation.documents[1].pages[2], proof = input.evidence.documents[1].pages[2]
+  const first = page.orderedItems.find(item => item.text === 'Our original')
+  const original = proof.observations.find(o => o.observationId === first.observationIds[0])
+  const additions = [
+    { text: 'Skipped source words.', x: .48, width: .05 },
+    { text: 'more', x: .11, width: .2 },
+  ].map(({ text, x, width }, i) => ({ ...structuredClone(original), text,
+    observationId: `answers:gap:w${i}`, regionId: `answers:gap:r${i}`,
+    region: { ...original.region, x, width } }))
+  proof.observations.push(...additions)
+  proof.regions.push(...additions.map(o => ({ regionId: o.regionId, kind: 'text', region: o.region })))
+  page.orderedItems.splice(page.orderedItems.indexOf(first) + 1, 0, ...additions.map((o, i) => ({
+    itemId: `answers:gap:i${i}`, text: o.text, observationIds: [o.observationId],
+  })))
+  reseal(input)
+  sidecar.groups[0].essays.entries[0].paragraphs[0].text = 'Our original more sample is short.'
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /continuation.*source order/iu)
+})
+
+for (const options of [
+  { combined: true }, { label: '考场作文' }, { label: '参考答案' },
+  { label: '(One possible version)' }, { label: '【示例二】' },
+]) test(`rereview P1-${options.combined ? 2 : 3} adjacent essay accepts ${JSON.stringify(options)}`, () => {
+  const { input, sidecar } = adjacentEssay(options)
+  const entry = sidecar.groups[0].essays.entries[0]
+  assert.equal(entry.sourceLabel, options.label ?? '参考范文')
+  assert.equal(entry.paragraphs[0].text, 'Our original sample is short.')
+  assert.equal(entry.paragraphs[0].continuationSources.length, 1)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+})
+
+test('rereview P1-3 Chinese sample citations remain rubric prose rather than entry labels', () => {
+  for (const citation of ['范文1中“结构清晰”值得参考。', '范文2的衔接自然。']) {
+    const input = fixture([[line('第一节 应用文', .08), line('评分标准', .12), line(citation, .16)]])
+    input[0].groups[0].writingTask.taskType = 'application'
+    assert(sourceReferenceScoringScopes(input[2], new Set(['answers'])).get('p1-i2'))
+    const output = buildSourceReferences(...input)
+    assert.equal(output.groups[0].essays.entries.length, 0)
+    assert.equal(output.groups[0].scoring.entries[0].paragraphs[0].text, citation)
+  }
+})
 
 test('P1-1 admission preserves lexical hyphens while accepting whitespace after a hyphen', () => {
   const input = scoringFiguresFixture()

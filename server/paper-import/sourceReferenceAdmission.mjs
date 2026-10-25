@@ -5,7 +5,7 @@ import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { BARE_APPLICATION_SECTION, WRITING_SECTION, LISTENING_REFERENCE_START,
-  NON_WRITING_SECTION, isSourceReferenceSampleLabel } from './sourceReferenceWritingRules.mjs'
+  NON_WRITING_SECTION, isSourceReferenceSampleLabel, SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -127,7 +127,7 @@ export function assertSourceReferenceAdmission({
     return
   }
   const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
-  const answerIds = new Set(materialization.documents.filter(document => document.role === 'official_answers')
+  const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
     .map(document => document.documentId))
   assertLabeledSamplesPresent(sidecar, confirmation, answerIds)
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
@@ -200,20 +200,21 @@ export function assertSourceReferenceAdmission({
       || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
       reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')
     }
-    for (let index = 1; index < sources.length; index++) {
-      if (!samePagePair(sources, index)) continue
-      const before = fragments[index - 1].at(-1), after = fragments[index][0]
-      const a = sourceOrder.get(before.itemId), b = sourceOrder.get(after.itemId)
-      const ownerA = sourceOwners.get(before.itemId), ownerB = sourceOwners.get(after.itemId)
+    if (hasSamePageContinuation(text)) {
+      const labelItemId = sourceOwners.get(surviving[0].itemId)?.labelItemId
       const labels = text.entry.labelSource
         ? (confirmedTexts.get(text.entry.labelSource.locator.documentId) ?? [])
           .filter(item => containsSource(text.entry.labelSource, item.sourceIndex)).map(item => item.itemId) : []
-      if (!a || !b || a.documentId !== b.documentId || b.index !== a.index + 1
-        || !ownerA || !ownerB || ownerA.taskType !== text.group.taskType || ownerB.taskType !== ownerA.taskType
-        || ownerA.kind !== text.kind || ownerB.kind !== ownerA.kind
-        || ownerA.labelItemId !== ownerB.labelItemId
-        || (text.entry.labelSource && !labels.includes(ownerA.labelItemId))) {
-        reject('Same-page continuation must prove adjacent source order and the same task/entry ownership')
+      let previous = null
+      for (const item of surviving) {
+        const position = sourceOrder.get(item.itemId), owner = sourceOwners.get(item.itemId)
+        if (!position || !owner || owner.taskType !== text.group.taskType || owner.kind !== text.kind
+          || owner.labelItemId !== labelItemId
+          || (text.entry.labelSource && !labels.includes(owner.labelItemId))
+          || (previous && (position.documentId !== previous.documentId || position.index !== previous.index + 1))) {
+          reject('Same-page continuation must prove adjacent source order and the same task/entry ownership')
+        }
+        previous = position
       }
     }
   }

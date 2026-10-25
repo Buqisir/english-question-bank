@@ -30,7 +30,8 @@ import { fileURLToPath } from 'node:url'
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
-import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView,
+  SOURCE_REFERENCE_ANSWER_ROLES } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -1225,7 +1226,7 @@ function isObjectiveAnswerGrid(rows) {
 export function buildSourceReferences(materialization, evidence, confirmation,
   { sourceDocuments = [], paperName = materialization.paperName } = {}) {
   const answerDocuments = materialization.documents.filter((document) =>
-    ['official_answers', 'question_and_answers'].includes(document.role))
+    SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
   if (answerDocuments.length !== 1) fail('Expected exactly one answer-bearing document')
   const [answerDocument] = answerDocuments
   const documentSha256 = answerDocument.sha256

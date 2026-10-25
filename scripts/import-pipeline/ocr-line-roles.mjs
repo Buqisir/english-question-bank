@@ -8,6 +8,8 @@ import {
   isWritingVersionLabel, writingRuleMatchingView,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
   WORD_COUNT_SAMPLE_LABEL, NUMBERED_SAMPLE_LABEL,
+  ENTRY_LABEL, EXAMPLE_SAMPLE_LABEL, PARENTHESIZED_SAMPLE_LABEL, NUMBERED_VERSION_SAMPLE_LABEL,
+  SCORING_LABEL, isSourceReferenceSampleLabel,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
@@ -15,11 +17,6 @@ const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
 const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|语言|[一二三四五六]、)/u
 const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
 
-const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Versions?|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
-const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
-const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[）)]$/iu
-const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
-const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|作答示例|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
 const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
 // A Chinese parenthetical note may be truncated before its closing bracket.
@@ -149,7 +146,7 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('entry.numbered', 'entry-label', 30, NUMBERED_SAMPLE_LABEL, '范文一（83词）：', '范文分析'),
   pattern('entry.example', 'entry-label', 40, EXAMPLE_SAMPLE_LABEL, '【示例二】建议调整活动安排', '【示例一】An English sentence follows.'),
   pattern('entry.parenthesized', 'entry-label', 50, PARENTHESIZED_SAMPLE_LABEL, '(One possible version)', 'One possible version:'),
-  pattern('entry.version', 'entry-label', 60, /^(?:(?:A|One)\s+)?Possible\s+Version\s*\d+[:：]?$/iu,
+  pattern('entry.version', 'entry-label', 60, NUMBERED_VERSION_SAMPLE_LABEL,
     'Possible Version 2', 'Possible Version 2 describes a design.'),
   rule('entry.arabic-numbered', 'entry-label', 70, f => NUMBERED_ENTRY_LABEL.test(f.nfkc),
     '4. 评分细则', '4. 评分时应考虑内容。'),
@@ -161,10 +158,9 @@ export const LINE_ROLE_RULES = Object.freeze([
     'Version one:', 'Version one is mentioned in the scoring guidance.'),
   rule('entry.scoring-kind', 'entry-kind', 10, f => SCORING_LABEL.test(writingRuleMatchingView(f.text)),
     '二、评分原则', '参考范文', { value: 'scoring' }),
-  rule('entry.essay-kind', 'entry-kind', 20, f => ESSAY_LABEL.test(f.text) || isWritingVersionLabel(f.text),
+  rule('entry.essay-kind', 'entry-kind', 20, f => isSourceReferenceSampleLabel(f.text),
     '参考范文', '二、评分原则', { value: 'essays' }),
-  rule('entry.sample-label', 'sample-label', 10, f =>
-    Boolean(firstLineRole('entry-label', f)) && (ESSAY_LABEL.test(f.text) || isWritingVersionLabel(f.text)),
+  rule('entry.sample-label', 'sample-label', 10, f => isSourceReferenceSampleLabel(f.text),
   '参考范文（80词）', '二、评分原则'),
   pattern('writing.inline-sample', 'inline-sample', 10,
     INLINE_WRITING_SAMPLE,

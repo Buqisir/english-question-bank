@@ -2,21 +2,29 @@
 // recognition identical without importing the CLI producer into the server.
 // Scoring predicates share this matching view; captured source text is untouched.
 export const writingRuleMatchingView = text => text.normalize('NFKC').replace(/\s+/gu, '')
+export const SOURCE_REFERENCE_ANSWER_ROLES = Object.freeze(['official_answers', 'question_and_answers'])
 // The #586 sample parser is also the authority for Version one/two/three
 // (or 1–3), including its optional Chinese ordinal and whole-label boundary.
 export const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?<version>one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 export const isWritingVersionLabel = text =>
   Boolean(WRITING_SAMPLE_LABEL.exec(text.normalize('NFKC').trim())?.groups?.version)
-// The producer's complete word-count/numbered label grammar is also used by
-// scoring ownership. Inline English text may follow a complete source label;
-// Chinese citations such as “范文1中…” never match that label.
+// These are the producer's entry-label and entry-kind predicates. Keep their
+// complete-label boundaries shared with admission and scoring ownership.
+export const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Versions?|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
 export const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
 export const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
-export function isSourceReferenceSampleLabel(sourceText) {
-  const text = sourceText.normalize('NFKC').trim()
-  const complete = label => WRITING_SAMPLE_LABEL.test(label)
-    || WORD_COUNT_SAMPLE_LABEL.test(label) || NUMBERED_SAMPLE_LABEL.test(label)
-  return complete(text) || complete(text.match(/^(.*?)\s+(?=[A-Za-z])/u)?.[1] ?? '')
+export const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
+export const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[）)]$/iu
+export const NUMBERED_VERSION_SAMPLE_LABEL = /^(?:(?:A|One)\s+)?Possible\s+Version\s*\d+[:：]?$/iu
+export const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
+const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|作答示例|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
+export function isSourceReferenceSampleLabel(text) {
+  const version = isWritingVersionLabel(text)
+  const complete = ENTRY_LABEL.test(text) || WORD_COUNT_SAMPLE_LABEL.test(text)
+    || NUMBERED_SAMPLE_LABEL.test(text) || EXAMPLE_SAMPLE_LABEL.test(text)
+    || PARENTHESIZED_SAMPLE_LABEL.test(text) || NUMBERED_VERSION_SAMPLE_LABEL.test(text)
+    || NUMBERED_ENTRY_LABEL.test(text.normalize('NFKC')) || version
+  return complete && !SCORING_LABEL.test(writingRuleMatchingView(text)) && (ESSAY_LABEL.test(text) || version)
 }
 // Answer keys may number writing as the third part when listening is absent.
 export const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
