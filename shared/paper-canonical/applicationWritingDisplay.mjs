@@ -10,6 +10,21 @@ function normalizedSplitNoticeInstruction(value) {
   return /^[一二三四五六七八九十]+[.．、]/u.test(text) ? text : null
 }
 
+// Reuse the split-notice recognizer before reading its ordinal. Unsupported
+// or ambiguous ordinals cannot extend a combined source paragraph.
+function splitNoticeInstructionNumber(value) {
+  const instruction = normalizedSplitNoticeInstruction(value)
+  if (!instruction) return null
+  const marker = instruction.match(NUMBERED_INSTRUCTION_PATTERN)?.[0]
+  const number = marker?.replace(/[（()）.．、]/gu, '') || ''
+  if (/^\d+$/u.test(number)) return Number(number) > 0 ? Number(number) : null
+  if (!/^(?:[一二三四五六七八九]|[一二三四五六七八九]?十[一二三四五六七八九]?)$/u.test(number)) return null
+  const digit = value => '一二三四五六七八九'.indexOf(value) + 1
+  if (!number.includes('十')) return digit(number)
+  const [tens, ones] = number.split('十')
+  return (tens ? digit(tens) : 1) * 10 + (ones ? digit(ones) : 0)
+}
+
 export function writingWordCount(text) {
   const value = String(text ?? '').normalize('NFKC')
   const chinese = value.match(/词数[^0-9]{0,20}(\d{2,3})/u)
@@ -56,14 +71,25 @@ export function writingNoticeGroups(texts) {
   for (let startIndex = 0; startIndex < texts.length; startIndex += 1) {
     const lines = applicationWritingNoticeLines(texts[startIndex])
     if (!lines) continue
+    let previousNumber = null
     if (lines.length > 1) {
-      groups.push({ startIndex, blockCount: 1, lines })
-      continue
+      const numbers = lines.slice(1).map(line => splitNoticeInstructionNumber(line.text))
+      if (numbers.some((number, index) => number === null
+        || (index > 0 && number !== numbers[index - 1] + 1))) {
+        groups.push({ startIndex, blockCount: 1, lines })
+        continue
+      }
+      previousNumber = numbers.at(-1)
     }
     let blockCount = 1
     for (const followingText of texts.slice(startIndex + 1)) {
       const instruction = normalizedSplitNoticeInstruction(followingText)
       if (!instruction) break
+      if (previousNumber !== null) {
+        const number = splitNoticeInstructionNumber(instruction)
+        if (number !== previousNumber + 1) break
+        previousNumber = number
+      }
       lines.push({ kind: 'instruction', text: instruction })
       blockCount += 1
     }

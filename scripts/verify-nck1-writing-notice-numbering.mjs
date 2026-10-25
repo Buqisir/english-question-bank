@@ -214,4 +214,36 @@ function adapterIssues(imported) {
   console.log('Regression guard (raw vs NFKC detection): PASS')
 }
 
+// A notice label and its first instruction can share one source paragraph.
+// Only consecutive numbered paragraphs may extend this combined first block.
+for (const [first, second, third] of [
+  ['（1）', '（2）', '（3）'], ['(1)', '(2)', '(3)'],
+  ['1.', '2.', '3.'], ['1．', '2．', '3．'], ['1、', '2、', '3、'],
+  ['一、', '二、', '三、'],
+]) {
+  const texts = [`注意：\n${first}词数80左右；`,
+    `${second}可适当增加细节，使内容充实，行文连贯。`, `${third}请按如下格式作答。`, 'Dear Mary,']
+  const before = structuredClone(texts)
+  const notice = writingNoticeGroup(texts)
+  assert.equal(notice.blockCount, 3, `combined first instruction extends with ${first} numbering`)
+  assert.equal(notice.lines.length, 4)
+  assert.deepEqual(texts, before, 'source paragraphs remain unchanged')
+}
+const fuzhou = writingNoticeGroup(['注意：\n（1）词数80左右；',
+  '（2）可适当增加细节，使内容充实，行文连贯。'])
+assert.equal(fuzhou.blockCount, 2, 'Fuzhou notice covers both exact source blocks')
+assert.equal(fuzhou.lines[2].text, '（2）可适当增加细节，使内容充实，行文连贯。')
+assert.equal(writingNoticeGroup(['注意：\n（1）词数80左右；', 'Dear Mary,']).blockCount, 1,
+  'a normal given sentence is not absorbed')
+assert.equal(writingNoticeGroup(['注意：\n（1）词数80左右；', '（3）请按如下格式作答。']).blockCount, 1,
+  'a skipped instruction number is not absorbed')
+assert.equal(writingNoticeGroup(['注意：\n（1）词数80左右；',
+  '（2）可适当增加细节。', '（4）请按如下格式作答。']).blockCount, 2,
+  'extension stops at the first nonconsecutive block')
+assert.equal(writingNoticeGroup(['注意：Write about 80 words.', '（2）Given title']).blockCount, 1,
+  'an unnumbered combined notice preserves its previous boundary')
+assert.equal(writingNoticeGroup(['注意：', '（1）词数80左右；', '（3）请按如下格式作答。']).blockCount, 3,
+  'the historical label-only notice behavior is unchanged')
+console.log('Combined first instruction and consecutive source blocks: PASS')
+
 console.log('verify-nck1-writing-notice-numbering: PASS')
