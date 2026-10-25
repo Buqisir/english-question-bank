@@ -505,6 +505,20 @@ for (const heading of ['写作评分说明', '写作评分标准', '评分细则
   })
 }
 
+for (const heading of ['4. 评分细则', '【评分标准】']) {
+  for (const boundary of ['producer', 'admission']) {
+    test(`C-anchored figure after ${heading}: ${boundary} rejects omitted scoring figure`, () => {
+      const input = withObjectiveFigures(scoringFiguresFixture(), { anchors: ['C'], prefixTexts: [heading] })
+      if (boundary === 'producer') {
+        assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
+      } else {
+        const sidecar = captureScoringReferences(scoringFiguresFixture())
+        assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /one-to-one/u)
+      }
+    })
+  }
+}
+
 test('an ordinary sentence mentioning a scoring heading does not become an exclusion cutoff', () => {
   const input = withObjectiveFigures(scoringFiguresFixture(), {
     anchors: ['C'], prefixTexts: ['本段提到写作评分说明，但不是评分标题。'],

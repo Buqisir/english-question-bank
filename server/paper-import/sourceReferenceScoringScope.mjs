@@ -10,6 +10,15 @@ import {
 // Preserve the scoring helper's existing alternate part title.
 const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
 
+// Share the existing complete scoring-label predicate with the objective cutoff.
+function isScoringLabel(sourceText, scoringTask) {
+  const text = writingRuleMatchingView(sourceText)
+  const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(sourceText.normalize('NFKC').trim())
+  return Boolean(scoringTask) || (numberedEntryLabel && /评分/u.test(text))
+    || SCORING_ENTRY_LABEL.test(text)
+    || /^(?:【|\[)[^】\]]*(?:评分|阅卷|评卷|给分|档次)[^】\]]*(?:】|\])[:：]?$/u.test(text)
+}
+
 // Conservative ownership for new scoring figures, replayed by producer and
 // admission alike. Only explicit source headings and scoring labels authorize
 // capture. A nearby Writing Task or a caller's declared entry is insufficient.
@@ -107,9 +116,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
       // Keep spaces for the shared English sample-label predicate. Source text
       // and sourceLabel remain untouched; matching alone uses NFKC.
       const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(item.text.normalize('NFKC').trim())
-      const scoringLabel = Boolean(scoringTask) || (numberedEntryLabel && /评分/u.test(text))
-        || SCORING_ENTRY_LABEL.test(text)
-        || /^(?:【|\[)[^】\]]*(?:评分|阅卷|评卷|给分|档次)[^】\]]*(?:】|\])[:：]?$/u.test(text)
+      const scoringLabel = isScoringLabel(item.text, scoringTask)
       if (!ended && taskType && scoringLabel) label = item
       // A reprinted "写作二" starts the sample between rubric sections, not
       // another scoring paragraph; only the next rubric label restores scoring.
@@ -138,7 +145,8 @@ export function sourceReferenceObjectiveFigureAnchors(confirmation, answerIds) {
     const explicitStart = items.findIndex(item => {
       const heading = writingRuleMatchingView(item.text)
       return item.itemId === starts.get(document.documentId)
-        || WRITING_SCORING_OVERVIEW.test(heading) || SCORING_ENTRY_LABEL.test(heading)
+        || WRITING_SCORING_OVERVIEW.test(heading)
+        || isScoringLabel(item.text, WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(heading)))
     })
     if (explicitStart < 0) continue
     // Earlier bare/combined producer headings also cap this exclusion. When
