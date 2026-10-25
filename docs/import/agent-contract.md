@@ -23,6 +23,21 @@ Run the returned exact `pull-ocr-confirmation` command; the server records the
 real Agent identity and returns a source-bound correction report. No Owner
 receipt is authored by the worker. Final Candidate approval stays Owner-only.
 
+If a printed region has no OCR words, run `ocr-proofread.mjs evidence <paperId>
+--work <work> --regions <requests.json>` against the existing v2 trace. The JSON is
+an array of `{ "page": "official-answers-2-p04", "bbox": { "x": 170, "y": 610,
+"width": 310, "height": 40 } }` in original 144 dpi page pixels; only page and bbox
+fields are accepted, never text. The same Tesseract version runs `chi_sim+eng`,
+PSM 6 at 3x scale on the immutable source raster. Original observations, word
+numbers and draft references stay intact; words overlapping earlier observations
+are discarded. New word numbers append to the worksheet. The trace's
+`regionReobservations` ledger links each new observation to engine parameters,
+source PDF/raster digests and retained raw TSV; trace words mark
+`source: "region-reobserve"`. Canonical observations retain their existing closed
+schema. Assign new word ranges only after comparing the source, then use the
+unchanged compile, push-ocr, proofread-ocr and pull-ocr-confirmation gates to
+produce fresh evidence and receipt bindings. Never hand-author observations.
+
 After pulling that immutable receipt, author only the publishable correction entries and run
 `review.mjs finalize-ocr-correction-report <paperId> --input <entries.json>`. Each entry has
 `ocrItemId`, `before`, `after`, `sourceLocator: { documentId, page }`,

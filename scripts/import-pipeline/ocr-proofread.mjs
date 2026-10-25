@@ -4,6 +4,8 @@
 //   evidence <paperId>        raster every immutable source page at the evidence density,
 //                             run Tesseract, keep word-level engine output, then write one
 //                             worksheet plus one editable page draft per page.
+//                             --regions <requests.json> appends real region OCR to an existing
+//                             trace, preserving all original observations and page draft refs.
 //   worksheets <paperId>      rebuild worksheets (and, with --reset-drafts, drafts) from the trace.
 //   compile <paperId>         build and stage the evidence (with any declared figure regions),
 //                             then write the evidence-bound confirmation and correctionNotes
@@ -15,7 +17,8 @@
 //                             real OCR repairs in the current Materialization for
 //                             `review.mjs finalize-ocr-correction-report`.
 //
-// The tool never edits OCR observations or writes Owner receipts. Page drafts are the Agent's
+// The tool never edits existing OCR observations or writes Owner receipts. Region additions
+// come only from retained Tesseract TSV, never request text. Page drafts are the Agent's
 // page-by-page source reading; every gate stays in the existing CLI and server.
 import { execFile, execFileSync, spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
@@ -48,6 +51,7 @@ import { createWritingScope, createReferenceCapture } from './ocr-section-state.
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
+import { reobserveRegions } from './ocr-region-reobserve.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -154,6 +158,25 @@ function tesseractVersion() {
 
 async function evidence(paperId) {
   const { paperDir, documents, work } = context(paperId)
+  const regionRequests = option('--regions')
+  if (process.argv.includes('--regions') && (!regionRequests || regionRequests.startsWith('--'))) {
+    throw new Error('--regions requires a request JSON path')
+  }
+  if (regionRequests) {
+    const trace = readJson(path.join(work, 'trace.json'), 'Existing OCR trace for region re-observation')
+    if (trace.paperId !== paperId) throw new Error('OCR trace paper identity mismatch')
+    const output = await reobserveRegions({ trace, documents, work,
+      requests: readJson(path.resolve(regionRequests), 'Region requests') })
+    writeJson(path.join(work, 'trace.json'), output)
+    // Drafts are deliberately preserved: new word ranges must be assigned after source comparison.
+    for (const page of output.pages.filter(page => output.regionReobservations?.some(run => run.page === page.key))) {
+      writeWorksheet(work, page)
+    }
+    console.log(JSON.stringify({ ok: true, paperId, trace: path.join(work, 'trace.json'),
+      regionReobservations: output.regionReobservations,
+      next: 'Assign the new worksheet word ranges to source-checked draft items, then run compile' }, null, 2))
+    return
+  }
   const language = option('--lang', 'chi_sim+eng')
   const jobs = Number(option('--jobs', String(Math.max(1, Math.min(6, os.cpus().length - 2)))))
   const pages = documents.flatMap((document) =>
@@ -1652,7 +1675,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'presentation') presentation(paperId)
   else if (command === 'references') references(paperId)
   else if (command === 'figure-sizes') figureSizes(paperId)
-  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|presentation|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--lang chi_sim+eng] [--jobs N]')
+  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|presentation|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
 } catch (error) {
   fail(error.stack || String(error))
 }
