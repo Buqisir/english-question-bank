@@ -250,19 +250,24 @@ function referencesFixture(texts, taskTypes = ['continuation'], {
   }] }] })
 }
 
-function standaloneApplicationAdmission(heading, application, continuation, { prefix = [], suffix = [] } = {}) {
-  const texts = [...prefix, heading, '第一节', '参考范文', application,
+function standaloneApplicationAdmission(heading, application, continuation, {
+  prefix = [], suffix = [], texts: sourceTexts, lastQuestion,
+} = {}) {
+  const texts = sourceTexts ?? [...prefix, heading, '第一节', '参考范文', application,
     '第二节', '参考范文', continuation, ...suffix]
   const bytes = Buffer.from('%PDF-1.4\nSynthetic standalone writing answer source.\n')
   const materialization = {
     paperId: 'paper-standalone-application-admission',
     documents: [{ documentId: 'answers', role: 'official_answers', mediaType: 'application/pdf',
       sha256: sha256(bytes), pageCount: 1 }],
-    groups: ['application', 'continuation'].map(taskType =>
-      ({ groupId: `writing-${taskType}`, writingTask: { taskType } })),
+    groups: [
+      ...(lastQuestion ? [{ questions: [{ sourceNumber: lastQuestion }] }] : []),
+      ...['application', 'continuation'].map(taskType =>
+        ({ groupId: `writing-${taskType}`, writingTask: { taskType } })),
+    ],
   }
   const observations = texts.map((text, i) => ({ observationId: `o${i}`,
-    region: { x: .1, y: .15 + i * .06, width: .8, height: .02 } }))
+    region: { x: .1, y: .15 + i * Math.min(.06, .7 / texts.length), width: .8, height: .02 } }))
   const evidence = { documents: [{ documentId: 'answers', pages: [{ observations }] }] }
   const confirmation = { documents: [{ documentId: 'answers', pages: [{ page: 1,
     visualClassifications: [],
@@ -279,6 +284,76 @@ function standaloneApplicationAdmission(heading, application, continuation, { pr
   assert.deepEqual(validateSourceReferences({ ...input, sidecar,
     sourceDocuments: input.sourceInput.documents }), [])
   return { ...input, sidecar }
+}
+
+const taskHeadingFamilies = [
+  ['named', [], '第一节 应用文', '第二节 读后续写'],
+  ['named alternative', [], '第二节 书面表达', '第一节 续写'],
+  ['parenthesized task', [], '第一节（应用文）', '第二节（读后续写）'],
+  ['ASCII parenthesized task', [], '第一节(书面表达)', '第二节(续写)'],
+  ['bare application', [], '应用文：', '读后续写：'],
+  ['bare written expression', [], '书面表达：', '读后续写：'],
+  ['parenthesized Chinese number', [], '（二）应用文写作', '（三）读后续写（满分25分）'],
+  ['ASCII parenthesized number', [], '(2) 应用文', '(3) 读后续写 (满分25分)'],
+  ['fullwidth number', [], '（２）应用文写作', '（３）读后续写（满分２５分）'],
+  ['Arabic number', [], '66. 应用文', '67. 读后续写'],
+  ['bare section with part', ['第四部分 写作'], '第一节', '第二节'],
+  ['bare section with adjacent sample', [], '第一节', '第二节'],
+  ['scored bare section', ['第四部分 写作'], '第一节（满分15分）', '第二节（满分25分）'],
+  ['inline answer sample', [], '第一节：作答示例', '第二节：作答示例'],
+  ['inline possible version', [], '第一节（满分15分） (One possible version)', '第二节（满分25分） (One possible version)'],
+  ['merged sample item', [], '第一节\n参考范文', '第二节\n参考范文'],
+  ['part with bare task', [], '第四部分 写作\n第一节', '第二节'],
+  ['part with named task', [], '第四部分 写作（满分40分）第一节 应用文', '第二节 读后续写'],
+  ['part with numbered task', [], '第四部分 写作\n（二）应用文写作', '（三）读后续写'],
+  ['repeated writing heading', ['第四部分 写作'], '写作\n第一节', '写作 第二节'],
+  ['task scoring heading', [], '应用文评分标准', '读后续写评分标准'],
+  ['numbered scoring heading', [], '（一）应用文写作评分细则：', '（二）读后续写各档次的给分范围和要求'],
+]
+const taskHeadingCases = taskHeadingFamilies.map(([name, prefix, application, continuation]) => ({
+  name, texts: [...prefix, application, '参考范文', '略', continuation, '参考范文', 'Mia opened the garden gate.'],
+  expected: ['not_supplied', 'captured'],
+}))
+taskHeadingCases.push(
+  { name: 'objective key and complete letter', lastQuestion: 65,
+    texts: ['65. growing', '第一节', 'Dear Sam,', 'Our class planted herbs.', 'Yours,', 'Alex', '第二节', '参考范文', '略'],
+    expected: ['captured', 'not_supplied'] },
+  { name: 'whole writing part omitted', texts: ['第四部分', '（略）'], expected: ['not_supplied', 'not_supplied'] },
+  { name: 'explicit scored appendix after listening',
+    texts: ['听力原文', '第一节（满分15分）', '评分原则', '注意内容完整。',
+      '第二节 读后续写', '评分原则', '注意衔接自然。'],
+    expected: ['not_supplied', 'not_supplied'] },
+  { name: 'overview and named scoring appendix after listening',
+    texts: ['听力原文', '写作评分说明', '应用文评分标准', '注意内容完整。',
+      '读后续写评分标准', '注意衔接自然。'],
+    expected: ['not_supplied', 'not_supplied'] },
+)
+const omittedHeadingEssays = standaloneApplicationAdmission('第四部分 写作', '略', '略').sidecar.groups[0].essays
+for (const { name, texts, expected, lastQuestion } of taskHeadingCases) {
+  for (const divider of ['试题解析', '答案详解']) {
+    for (const reprintHeading of ['书面表达：', '应用文：']) {
+      test(`task-heading matrix: ${name} / ${divider} / ${reprintHeading}`, () => {
+        const input = standaloneApplicationAdmission(null, null, null, {
+          lastQuestion, texts: [...texts, divider, reprintHeading, '参考范文', 'Our class planted herbs.',
+            '读后续写：', '参考范文', 'A reprinted story must stay outside references.'],
+        })
+        assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), expected)
+        assert(!JSON.stringify(input.sidecar.groups).includes('A reprinted story'))
+        assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+        // A labeled genuine sample before the divider must still disprove
+        // absence, for every heading family. The complete-letter route has no
+        // sample label and retains its dedicated bounded-letter regressions.
+        const capturedIndex = expected.indexOf('captured')
+        if (capturedIndex !== -1 && !lastQuestion) {
+          input.sidecar.groups[capturedIndex].essays = structuredClone(omittedHeadingEssays)
+          assert.deepEqual(validateSourceReferences({ ...input,
+            sourceDocuments: input.sourceInput.documents }), [])
+          assert.throws(() => assertSourceReferenceAdmission(input),
+            { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+        }
+      })
+    }
+  }
 }
 
 for (const heading of ['书面表达：', '应用文：']) {

@@ -47,10 +47,12 @@ import { planHeadingRepairs } from './ocr-heading-repair.mjs'
 import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs'
 import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { matchesLineRole, firstLineRole,
-  inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches,
+import { matchesLineRole, firstLineRole, watermarkMatches,
   REFERENCE_MARGIN_TOLERANCE } from './ocr-line-roles.mjs'
 import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
+import { sourceReferenceWritingTaskHeading, sourceReferenceLastObjectiveQuestion,
+  writingSectionAfterPart, completeSourceLetter } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
+export { writingSectionAfterPart } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
@@ -1064,16 +1066,6 @@ function figureSizes(paperId) {
   console.log(JSON.stringify({ ok: true, paperId, changes }, null, 2))
 }
 
-// OCR can keep a bare or named section on the writing-part heading's item.
-export function writingSectionAfterPart(text) {
-  const normalized = String(text).normalize('NFKC')
-  if (!matchesLineRole('writing.part', computeLineFacts({ text: normalized }))) return null
-  const rest = normalized.replace(/^第[三四]部分\s*[:：]?\s*写作\s*(?:\([^)]*\))?/u, '').trim()
-  const number = bareSectionNumber(rest)
-  return number ? (number === '一' ? 'application' : 'continuation')
-    : firstLineRole('writing-section', computeLineFacts({ text: rest }))?.value || null
-}
-
 function joinLines(lines, { reference = false } = {}) {
   // Text glue only. Semantic boundaries have already passed decideLineJoin;
   // reference/annotation CJK spacing intentionally differs from speech hyphens.
@@ -1093,53 +1085,6 @@ export function isAnswerFurniture(text, region, repeated = false) {
 
 export function referenceLineBoundary(previous, line, margin, previousMargin = margin) {
   return referenceBoundaryFromFacts(previous, computeLineFacts(line), margin, previousMargin)
-}
-
-// A standalone key can omit both the writing-part heading and sample label.
-// Admit only a complete letter immediately after its final objective answer;
-// never borrow a closing/signature across another section, prompt or transcript.
-function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
-  if (!lastQuestion || bareSectionNumber(factsFor(lines[index]).nfkc) !== '一') return false
-  const previous = lines[index - 1] && factsFor(lines[index - 1])
-  if (!previous || !/^\d+\s*[.．、]\s*[A-Za-z]/u.test(previous.text) || previous.hasHan) return false
-  const answers = [...previous.text.matchAll(/(?:^|\s)(\d+)\s*[.．、]\s*/gu)]
-  if (Number(answers.at(-1)?.[1]) !== lastQuestion) return false
-  return completeSourceLetter(lines, index + 1, factsFor)
-}
-
-function completeSourceLetter(lines, index, factsFor) {
-  const salutation = lines[index] && factsFor(lines[index])
-  if (!salutation || !matchesLineRole('paragraph.salutation', salutation)) return false
-  const boundary = line => {
-    const facts = factsFor(line)
-    return line.figure || line.table || bareSectionNumber(facts.nfkc)
-      || firstLineRole('writing-section', facts) || firstLineRole('scoring-section', facts)
-      || firstLineRole('entry-label', facts) || matchesLineRole('writing.part-boundary', facts)
-      || matchesLineRole('writing.explanations', facts, { sectionCount: 1 })
-      || matchesLineRole('writing.continuation-prompt', facts)
-      || matchesLineRole('paragraph.numbered', facts) || matchesLineRole('transcript.speaker', facts)
-      || matchesLineRole('writing.student-script', facts) || /^\d+\s*[.．、)]/u.test(facts.trimmed)
-  }
-  let body = ''
-  for (let i = index + 1; i < lines.length; i++) {
-    const line = lines[i]
-    if (boundary(line)) return false
-    const facts = factsFor(line)
-    if (matchesLineRole('paragraph.closing', facts)) {
-      const signature = lines[i + 1]
-      const complete = /[.!?]["”']?\s*$/u.test(body) && Boolean(signature)
-        && !boundary(signature)
-        && /^\p{Lu}[\p{Script=Latin}’'-]*\.?(?:\s+\p{Lu}[\p{Script=Latin}’'-]*\.?){0,3}$/u.test(factsFor(signature).trimmed)
-        && (!lines[i + 2] || Boolean(boundary(lines[i + 2])))
-      return complete ? { end: signature } : null
-    }
-    // A date can wrap onto its own OCR line ("May" / "30th.").
-    const wrappedDate = body && /^(?:[1-9]|[12]\d|3[01])(?:st|nd|rd|th)\b/iu.test(facts.trimmed)
-    if (facts.hasHan || (!facts.startsEnglishOrQuote && !wrappedDate)
-      || matchesLineRole('paragraph.salutation', facts)) return false
-    body += ` ${facts.text}`
-  }
-  return false
 }
 
 function applicationLetterReferenceLines(section, factsFor) {
@@ -1362,9 +1307,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     page.visualClassifications?.some(visual => visual.classification === 'semantic_table'))
   const scope = createWritingScope(sections)
   let afterListening = false, scoringAppendix = false, afterExplanations = false
-  const lastObjectiveQuestion = Math.max(0, ...materialization.groups
-    .flatMap(group => group.writingTask ? [] : (group.questions || []).map(question => question.sourceNumber))
-    .filter(Number.isInteger))
+  const lastObjectiveQuestion = sourceReferenceLastObjectiveQuestion(materialization)
   for (const [lineIndex, line] of lines.entries()) {
     if (scope.ended) {
       if (!afterExplanations) break
@@ -1439,19 +1382,10 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     // A heading can share its OCR item with a sample label. Some answer books
     // omit the writing-part heading entirely; require an adjacent sample label
     // or the tightly bounded standalone-key letter before opening writing.
-    const inlineSample = inlineSampleParts(facts.text)
-    const [heading, ...rest] = inlineSample || facts.text.split('\n')
-    const sectionText = writingSectionText(facts, heading, rest, scope.inWriting)
-    const mergedText = rest.length === 1 ? rest[0].trim() : null
-    const mergedLabel = mergedText && matchesLineRole('entry.sample-label', computeLineFacts({ text: mergedText })) ? mergedText : null
-    const unlabeledApplicationLetter = answerDocument.role === 'official_answers' && !sections.size && !scope.inWriting
-      && completeApplicationLetter(lines, lineIndex, lastObjectiveQuestion, factsFor)
-    const bare = (scope.inWriting || mergedLabel || unlabeledApplicationLetter || (lines[lineIndex + 1]
-      && matchesLineRole('entry.sample-label', factsFor(lines[lineIndex + 1]))))
-      && bareSectionNumber((mergedLabel ? heading : sectionText).normalize('NFKC'))
-    const started = bare ? (bare === '一' ? 'application' : 'continuation')
-      : firstLineRole('writing-section', facts)?.value
-    const scoringSection = firstLineRole('scoring-section', facts)?.value
+    const { bare, started, scoringSection, mergedLabel, unlabeledApplicationLetter } = sourceReferenceWritingTaskHeading(lines, lineIndex, {
+      inWriting: scope.inWriting, sectionCount: sections.size, lastObjectiveQuestion,
+      answerRole: answerDocument.role, factsFor,
+    })
     if (scoringSection) {
       scope.startTask(scoringSection, { reuse: true })
       // This task heading also labels its rubric. A following explicit entry
