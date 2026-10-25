@@ -15,7 +15,9 @@ const BLANK = /(?<![\p{L}\p{N}_])_+\d{1,3}_+|(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)
 const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]{0,120}英语试(?:题|卷)(?:参考)?)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?[:：]?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
 const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试题|测试)?(?:原文|材料|录音稿|录音原文|录音材料|录音文稿|文稿)|录音(?:原文|文稿|稿)|答案及听力材料)`
-const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?${LISTENING_TRANSCRIPT_TITLE}(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
+// Some answer sheets use only 英语听力. Keep this alternative whole-heading
+// only; the prefix-based writing boundary must not match arbitrary prose.
+const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
 // Labels that open an official sample; scoring or prompt text may precede them.
 const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
@@ -1145,6 +1147,7 @@ function writingSampleOmission(answerBody, from, to) {
   // excuse to discard competing prose. Listening/scoring remains outside it.
   const boundary = answerBody.findIndex((item, index) => index >= from && index < to
     && item.kind === 'paragraph' && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
+      || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
       || LISTENING_TEXT_MARKER.test(normalized(item.text)) || listeningCue(item.text)))
   const items = answerBody.slice(from, boundary < 0 ? to : boundary)
     .filter(item => item.kind !== 'paragraph' || normalized(item.text))
