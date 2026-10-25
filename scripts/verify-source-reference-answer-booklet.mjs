@@ -110,7 +110,8 @@ export function assemblyFixture() {
 }
 
 function continuationContractChecks() {
-  for (const structuredScoring of [false, true]) {
+  for (const schemaVersion of ['source-references-v1', 'source-references-v2', 'source-references-v3', 'source-references-v4']) {
+    const structuredScoring = schemaVersion !== 'source-references-v1'
     const input = fixture({ structuredScoring })
     const bytes = Buffer.from('Synthetic four-page PDF answer source')
     const document = { documentId: 'answers', role: 'official_answers', mediaType: 'application/pdf',
@@ -137,12 +138,12 @@ function continuationContractChecks() {
     }
     // PDF table cells need distinct locations, just like native DOCX cells.
     if (structuredScoring) {
-      input.sourceReferences.schemaVersion = 'source-references-v2'
       const cells = groups[0].scoring.entries[0].blocks[1].rows.flat()
       cells.forEach((cell, index) => {
         cell.source.locator.region = { x: 0, y: index / cells.length, width: 1, height: 1 / cells.length }
       })
     }
+    input.sourceReferences.schemaVersion = schemaVersion
     const validate = sidecar => validateSourceReferences({ ...input, sidecar })
     const body = sidecar => sidecar.groups[0].essays.entries[0].paragraphs[2]
     assert.deepEqual(validate(input.sourceReferences), [], 'legacy shape remains valid')
@@ -186,17 +187,48 @@ function continuationContractChecks() {
       p.source.locator.page = 4
       p.continuationSources[0].locator.page = 5
     }, 'SOURCE_REFERENCES_LOCATION_INVALID')
-    reject('scoring paragraph', (p, sidecar) => {
-      const scoring = sourceReferenceBlocks(sidecar.groups[0].scoring.entries[0])[0].paragraph
-      scoring.continuationSources = structuredClone(p.continuationSources)
-    }, roleError)
+    for (const kind of ['scoring', 'essays']) {
+      const select = sidecar => kind === 'essays' ? body(sidecar)
+        : sourceReferenceBlocks(sidecar.groups[0].scoring.entries[0])[0].paragraph
+      const continued = structuredClone(input.sourceReferences)
+      const p = select(continued)
+      p.continuationSources = [location(2)]
+      assert.deepEqual(validate(continued), [], `${schemaVersion}: ${kind} across pages`)
+      p.source.locator.region = { x: .08, y: .8, width: .4, height: .02 }
+      p.continuationSources = [location(1)]
+      p.continuationSources[0].locator.region = { x: .53, y: .07, width: .33, height: .02 }
+      assert.deepEqual(validate(continued), [], `${schemaVersion}: ${kind} right column`)
+      const invalid = (label, change) => {
+        const changed = structuredClone(continued)
+        change(select(changed))
+        assert(validate(changed).some(issue => issue.code === locationError), `${schemaVersion}: ${kind} ${label}`)
+      }
+      invalid('overlap', p => { p.continuationSources[0].locator.region = { x: .3, y: .8, width: .4, height: .02 } })
+      invalid('leftward column', p => { p.continuationSources[0].locator.region.x = .01 })
+      invalid('above only', p => { p.continuationSources[0].locator.region.x = .08 })
+      invalid('overlap beyond precision', p => { p.continuationSources[0].locator.region.x = .48 - .000002 })
+      invalid('skipped page', p => { p.continuationSources[0].locator.page = 3 })
+      const tolerance = structuredClone(continued)
+      select(tolerance).continuationSources[0].locator.region.x = .48 - .0000005
+      assert.deepEqual(validate(tolerance), [], `${schemaVersion}: ${kind} region precision tolerance`)
+    }
+    if (structuredScoring) {
+      const tableContinuation = structuredClone(input.sourceReferences)
+      tableContinuation.groups[0].scoring.entries[0].blocks[1].continuationSources = [location(2)]
+      assert(validate(tableContinuation).some(issue => issue.code === 'SOURCE_REFERENCES_SCHEMA_INVALID'),
+        `${schemaVersion}: tables cannot acquire continuation sources`)
+      delete tableContinuation.groups[0].scoring.entries[0].blocks[1].continuationSources
+      tableContinuation.groups[0].scoring.entries[0].blocks[1].rows[0][0].continuationSources = [location(2)]
+      assert(validate(tableContinuation).some(issue => issue.code === 'SOURCE_REFERENCES_SCHEMA_INVALID'),
+        `${schemaVersion}: table cells cannot acquire continuation sources`)
+    }
     for (const role of ['title', 'label', 'salutation', 'closing', 'signature']) {
       reject(`non-body ${role}`, p => { p.role = role }, roleError)
     }
     body(input.sourceReferences).continuationSources.push(location(3), location(4))
     assert.deepEqual(validate(input.sourceReferences), [], 'all ordered fragments are validated')
   }
-  console.log('PASS v1/v2 continued paragraph provenance, legacy output, single-p rendering and fail-closed mutations')
+  console.log('PASS v1/v2/v3/v4 essay/scoring continuation provenance, rightward columns, legacy rendering and fail-closed mutations')
 }
 
 function answerLabelChecks() {

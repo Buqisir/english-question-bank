@@ -1,17 +1,26 @@
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from './sourceReferenceScoringScope.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures } from './sourceReferences.mjs'
+import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
+  SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { BARE_APPLICATION_SECTION, WRITING_SECTION, LISTENING_REFERENCE_START,
-  NON_WRITING_SECTION } from './sourceReferenceWritingRules.mjs'
+  NON_WRITING_SECTION, isSourceReferenceSampleLabel, SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
 }
 
 const normalize = text => text.replace(/\s+/gu, ' ').trim()
-const joinedText = text => text.normalize('NFKC').replace(/(\p{L})-\s+(?=\p{L})/gu, '$1').replace(/\s+/gu, '')
+const joinedText = text => text.normalize('NFKC').replace(/-\s+/gu, '-').replace(/\s+/gu, '')
+const paragraphSources = paragraph => [paragraph.source, ...(paragraph.continuationSources ?? [])]
+const samePagePair = (sources, index) => index > 0
+  && sources[index].locator.kind === 'page_region' && sources[index - 1].locator.kind === 'page_region'
+  && sources[index].locator.page === sources[index - 1].locator.page
+const hasSamePageContinuation = paragraph => {
+  const sources = paragraphSources(paragraph)
+  return sources.some((_, index) => samePagePair(sources, index))
+}
 
 // Only explicit confirmed NCK1 writing headings establish task ownership.
 // Missing/ambiguous scopes fail closed rather than borrowing the nearest task.
@@ -74,9 +83,9 @@ function containsSource(source, inner) {
   const outer = source?.locator
   if (outer?.kind !== 'page_region' || outer.documentId !== inner.documentId || outer.page !== inner.page) return false
   const a = outer.region, b = inner.region
-  return b.x >= a.x - 0.000001 && b.y >= a.y - 0.000001
-    && b.x + b.width <= a.x + a.width + 0.000001
-    && b.y + b.height <= a.y + a.height + 0.000001
+  return b.x >= a.x - SOURCE_REFERENCE_REGION_TOLERANCE && b.y >= a.y - SOURCE_REFERENCE_REGION_TOLERANCE
+    && b.x + b.width <= a.x + a.width + SOURCE_REFERENCE_REGION_TOLERANCE
+    && b.y + b.height <= a.y + a.height + SOURCE_REFERENCE_REGION_TOLERANCE
 }
 
 function survivingConfirmedText(confirmation, evidence, referenceFigures) {
@@ -107,19 +116,25 @@ export function assertSourceReferenceAdmission({
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
   const figures = sourceReferenceFigures(sidecar)
+  const continued = sidecar?.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
+    group[kind].entries.flatMap(entry => sourceReferenceBlocks(entry)
+      .filter(block => block.kind === 'paragraph').map(block => block.paragraph))))
+    .some(hasSamePageContinuation)
   const ocr = sourceInput.ocrSourceBytes
   if (!ocr) {
     if (figures.length) reject('Reference figures require sealed OCR confirmation and writing-scope anchors')
+    if (continued) reject('Same-page continuation requires sealed confirmation source order and ownership')
     return
   }
   const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
-  const answerIds = new Set(materialization.documents.filter(document => document.role === 'official_answers')
+  const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
     .map(document => document.documentId))
   assertLabeledSamplesPresent(sidecar, confirmation, answerIds)
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
-  if (!hasReferenceVisual && !figures.length) return
-  if (!sidecar || !['source-references-v3', 'source-references-v4'].includes(sidecar.schemaVersion)) {
+  if (!hasReferenceVisual && !figures.length && !continued) return
+  if ((hasReferenceVisual || figures.length)
+    && (!sidecar || !['source-references-v3', 'source-references-v4'].includes(sidecar.schemaVersion))) {
     reject('Confirmed official-answer content figures require a complete source-references-v3/v4 sidecar; v1/v2 cannot omit them')
   }
   const documents = materialization.documents.map(document => ({ ...document,
@@ -140,26 +155,69 @@ export function assertSourceReferenceAdmission({
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
   const illustratedDocuments = new Set(allExpected.map(reference => reference.source.documentId))
+  const scopes = writingScopes(confirmation, answerIds)
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds)
+  const pictureItems = new Set(allExpected.flatMap(reference => reference.itemIds))
+  const sourceOrder = new Map(), sourceOwners = new Map()
+  for (const document of confirmation.documents) {
+    let previousTask = null, essayLabel = null, index = 0
+    for (const page of document.pages) for (const item of page.orderedItems) {
+      // Confirmation furniture and the resolver's picture-consumed identities
+      // are the only permitted gaps. No geometric or text-value exclusions.
+      if (pictureItems.has(item.itemId)
+        || (item.observationIds.length && item.observationIds.every(id => page.furnitureObservationIds.includes(id)))) continue
+      sourceOrder.set(item.itemId, { documentId: document.documentId, index: index++ })
+      const taskType = scopes.get(item.itemId)
+      if (taskType !== previousTask) essayLabel = null
+      previousTask = taskType
+      const scoring = scoringScopes.get(item.itemId)
+      if (scoring) {
+        essayLabel = null
+        sourceOwners.set(item.itemId, { kind: 'scoring', ...scoring })
+      } else if (taskType) {
+        if (isSourceReferenceSampleLabel(item.text)) essayLabel = item.itemId
+        sourceOwners.set(item.itemId, { kind: 'essays', taskType, labelItemId: essayLabel })
+      }
+    }
+  }
   const texts = sidecar.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
     group[kind].entries.flatMap(entry => [
       ...(entry.sourceLabel === null ? [] : [{ text: entry.sourceLabel, source: entry.labelSource }]),
       ...sourceReferenceBlocks(entry).flatMap(block => block.kind === 'paragraph'
         ? [block.paragraph] : block.kind === 'table' ? block.rows.flat() : []),
-    ])))
+    ].map(text => ({ ...text, group, kind, entry })))))
   for (const text of texts) {
     const sources = [text.source, ...(text.continuationSources ?? [])]
-    if (!sources.some(source => illustratedDocuments.has(source.locator.documentId))) continue
+    if (!hasSamePageContinuation(text)
+      && !sources.some(source => illustratedDocuments.has(source.locator.documentId))) continue
     // The resolver has already consumed exactly the selected image itemIds and
     // observationIds. Replay the surviving items, never remove words by value.
-    const surviving = [...new Set(sources.flatMap(source =>
+    const fragments = sources.map(source =>
       (confirmedTexts.get(source.locator.documentId) ?? [])
-        .filter(item => containsSource(source, item.sourceIndex))))]
-    if (!surviving.length || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
+        .filter(item => containsSource(source, item.sourceIndex)))
+    const surviving = fragments.flat()
+    if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length
+      || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
       reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')
     }
+    if (hasSamePageContinuation(text)) {
+      const labelItemId = sourceOwners.get(surviving[0].itemId)?.labelItemId
+      const labels = text.entry.labelSource
+        ? (confirmedTexts.get(text.entry.labelSource.locator.documentId) ?? [])
+          .filter(item => containsSource(text.entry.labelSource, item.sourceIndex)).map(item => item.itemId) : []
+      let previous = null
+      for (const item of surviving) {
+        const position = sourceOrder.get(item.itemId), owner = sourceOwners.get(item.itemId)
+        if (!position || !owner || owner.taskType !== text.group.taskType || owner.kind !== text.kind
+          || owner.labelItemId !== labelItemId
+          || (text.entry.labelSource && !labels.includes(owner.labelItemId))
+          || (previous && (position.documentId !== previous.documentId || position.index !== previous.index + 1))) {
+          reject('Same-page continuation must prove adjacent source order and the same task/entry ownership')
+        }
+        previous = position
+      }
+    }
   }
-  const scopes = writingScopes(confirmation, answerIds)
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds)
   const sourceItems = source => (confirmedTexts.get(source?.locator.documentId) ?? [])
     .filter(item => containsSource(source, item.sourceIndex))
   const boundaryItems = block => block.kind === 'paragraph'

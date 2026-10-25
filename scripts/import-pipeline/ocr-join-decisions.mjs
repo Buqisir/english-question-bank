@@ -1,11 +1,11 @@
 import { computeLineFacts } from './ocr-line-facts.mjs'
-import { matchesLineRole, speakerLabel } from './ocr-line-roles.mjs'
+import { matchesLineRole, speakerLabel, referenceLineIsFull } from './ocr-line-roles.mjs'
 
 /** @typedef {ReturnType<typeof computeLineFacts>} LineFacts */
 /** @typedef {{first: object, last: object, firstFacts: LineFacts, lastFacts: LineFacts}} PhysicalEdges */
 /**
  * @typedef {{unit: 'normalized', margin: {left: number, right: number},
- *   previousMargin?: {left: number, right: number}} |
+ *   previousMargin?: {left: number, right: number}, previousColumnMargin?: {right: number}} |
  *   {unit: 'pixels', before: PhysicalEdges|null, after: PhysicalEdges|null, rights: Array<LineFacts['box']>} |
  *   {unit: 'text'}} JoinGeometry
  */
@@ -56,8 +56,7 @@ function referenceCrossPageRule({ previous, current, geometry, roles, referenceC
     && /^sha256:[a-f0-9]{64}$/u.test(source.documentSha256)
     && Number.isInteger(source.locator.page) && source.locator.page > 0
   const previousMargin = geometry.previousMargin
-  const fullLine = Number.isFinite(previous.right) && Number.isFinite(previousMargin?.right)
-    && previous.right >= previousMargin.right - .06
+  const fullLine = referenceLineIsFull(previous, previousMargin)
   const currentMarginKnown = Number.isFinite(geometry.margin?.left) && Number.isFinite(current.left)
   // Inspect a copy: OCR may space out punctuation and nested closing marks.
   // Only a word ending proves an unfinished tail; sentence stops, deferred
@@ -77,9 +76,22 @@ function referencePolicy(input) {
   const { previous, current, geometry, roles, location } = input
   const boundary = referenceBoundaryFromFacts(previous, current, geometry.margin, geometry.previousMargin)
   const crossPage = referenceCrossPageRule(input, boundary)
-  const { indented, previousShort, pageTurn, continues } = boundary
-  const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues
-    && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered))
+  const { indented, previousShort, pageTurn } = boundary
+  const lettered = /^(?:[a-z][.)]|\([a-z]\))\s/u.test(current.trimmed)
+  const continues = boundary.continues && !lettered
+  // Veto geometric false starts only within an existing reference body.
+  // Keep the stricter cross-page proof and semantic role boundaries intact.
+  const previousTail = (previous?.text || '').replace(/[\s”’"'）)\]】」』]+$/u, '')
+  const numberedOrLabel = /^(?:[一二三四五六七八九十]+、|\([一二三四五六七八九十\d]+\)|\d+[.、)]|[·●]|\p{Script=Han}{1,8}[:：])/u.test(current.nfkc.trim())
+    || /^[①-⑳]/u.test(current.trimmed)
+  const unfinished = !pageTurn && roles.hasParagraph && previous?.role === 'body'
+    && !roles.special && !roles.afterClosing && !roles.numbered && !lettered
+    && ((current.startsLower && previousTail && !/[.!?:]$/u.test(previousTail))
+      || (current.startsHan && /\p{Script=Han}/u.test(previousTail)
+        && referenceLineIsFull(previous, geometry.previousColumnMargin || geometry.previousMargin || geometry.margin)
+        && !/[。！？；：]$/u.test(previousTail) && !numberedOrLabel))
+  const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues && !unfinished
+    && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered || lettered))
   const reviews = []
   if (crossPage?.resolution === 'separate'
     || (!crossPage && pageTurn && !roles.special && !roles.afterClosing && !indented && !previousShort)) {
@@ -89,7 +101,8 @@ function referencePolicy(input) {
   if (current.endsHyphen) reviews.push({ itemId: location.after.itemId,
     issue: 'line ends with a hyphen; joined with a space' })
   const reason = !roles.hasParagraph ? 'reference.first-line' : roles.special ? `reference.${roles.special}`
-    : roles.afterClosing ? 'reference.after-closing' : continues ? 'reference.lowercase-continuation'
+    : roles.afterClosing ? 'reference.after-closing' : unfinished ? 'reference.unfinished-line'
+      : continues ? 'reference.lowercase-continuation'
       : previous.role !== 'body' ? 'reference.role-boundary' : indented ? 'reference.indented'
         : previousShort ? 'reference.previous-short' : pageTurn ? 'reference.page-turn'
           : roles.numbered ? 'reference.numbered' : 'reference.body-wrap'

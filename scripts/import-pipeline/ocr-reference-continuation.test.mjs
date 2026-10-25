@@ -99,6 +99,114 @@ function fixture(pageLines) {
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
 const paragraphs = output => output.groups[0].essays.entries.flatMap(e => e.paragraphs)
 
+test('Liaoning-shaped scoring wrap keeps left-bottom and right-top provenance separate', () => {
+  const first = '2. 情节合理性：情绪转变是否自然（从愤怒到体谅需有过'
+  const second = '渡），冲突解决方式是否符合“亲情包容”的核心；'
+  const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line('前项评分完整。', .75, .083123, .407221),
+    line(first, .804038, .083123, .407221), line(second, .072447, .528128, .329134)]])
+  const output = buildSourceReferences(...input)
+  const p = output.groups[0].scoring.entries[0].paragraphs[1]
+  assert.equal(p.text, first + second)
+  assert.deepEqual(p.source.locator.region, { x: .083123, y: .804038, width: .407221, height: .02 })
+  assert.equal(p.continuationSources.length, 1)
+  assert.equal(p.continuationSources[0].locator.page, 1)
+  assert.deepEqual(p.continuationSources[0].locator.region, { x: .528128, y: .072447, width: .329134, height: .02 })
+})
+
+test('reference English hyphen glue retains a compound without a space', () => {
+  const input = fixture([[...heading, line('We provide AI-', .3), line('based feedback.', .34)]])
+  assert.deepEqual(paragraphs(buildSourceReferences(...input)).map(p => p.text), ['We provide AI-based feedback.'])
+})
+
+for (const [previous, current, expected] of [
+  ['He understood Lucas', 'was trying to help.', 'He understood Lucas was trying to help.'],
+  ['Get that paint off your', 'face before dinner.', 'Get that paint off your face before dinner.'],
+  ['We provide AI-', 'based feedback.', 'We provide AI-based feedback.'],
+]) test(`reference English wrapping vetoes false indented paragraphs: ${previous}`, () => {
+  const input = fixture([[...heading, line(previous, .3), line(current, .34, .14, .76)]])
+  assert.deepEqual(paragraphs(buildSourceReferences(...input)).map(p => p.text), [expected])
+})
+
+for (const [previous, current, expected] of [
+  ['说明功能：清晰阐述平台的主要功能，如AI口语测评、个', '性化词汇推送等，需准确且简洁。',
+    '说明功能：清晰阐述平台的主要功能，如AI口语测评、个性化词汇推送等，需准确且简洁。'],
+  ['阐述帮助：说明平台对学习的具体帮助，如提升口语流利', '度、提高记词效率等，体现平台的实用价值。',
+    '阐述帮助：说明平台对学习的具体帮助，如提升口语流利度、提高记词效率等，体现平台的实用价值。'],
+  ['结尾表达：合理表达希望对方尝试并反馈的意愿，使邮件', '有完整的收尾。',
+    '结尾表达：合理表达希望对方尝试并反馈的意愿，使邮件有完整的收尾。'],
+]) test(`reference Chinese scoring wrapping vetoes false indented paragraphs: ${previous}`, () => {
+  const input = fixture([[line('第二节 读后续写', .2), line('参考范文', .24), line('A complete sample.', .28),
+    line('评分标准', .32), line(previous, .36), line(current, .4, .14, .76)]])
+  const scoring = buildSourceReferences(...input).groups[0].scoring
+  assert.deepEqual(scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)), [expected])
+})
+
+for (const [previous, current] of [
+  ['We finished our work.', 'Another day began.'],
+  ['We finished our work!”', 'Another day began.'],
+  ['We considered this:', 'another approach followed.'],
+]) test(`reference veto preserves English paragraph boundary: ${previous}`, () => {
+  const input = fixture([[...heading, line(previous, .3), line(current, .34, .14, .76)]])
+  assert.deepEqual(paragraphs(buildSourceReferences(...input)).map(p => p.text), [previous, current])
+})
+
+for (const [previous, current] of [
+  ...['。', '！', '？', '；', '：', '。”）'].map(end => [`评分正文${end}`, '新的评分段落。']),
+  ...['阐述帮助：说明具体帮助。', '一、评分侧重点', '（一）评分侧重点', '1. 评分侧重点',
+    '①评分侧重点', '· 评分侧重点', '●评分侧重点'].map(text => ['评分正文尚未结束', text]),
+]) test(`reference veto preserves Chinese sentence/label boundary: ${current}/${previous}`, () => {
+  const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line(previous, .36), line(current, .4, .14, .76)]])
+  const scoring = buildSourceReferences(...input).groups[0].scoring
+  assert.deepEqual(scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)), [previous, current])
+})
+
+for (const title of ['第五档（13–15分）', '零分', '（三）各档次的给分范围和要求',
+  '不得分（0分）', '读后续写注意事项']) test(`short Chinese scoring titles keep their boundary: ${title}`, () => {
+  const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line(title, .36, .1, .22), line('评分内容完整，逻辑清楚。', .4)]])
+  const scoring = buildSourceReferences(...input).groups[0].scoring
+  assert.deepEqual(scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)), [title, '评分内容完整，逻辑清楚。'])
+})
+
+test('full Chinese reference lines use their own column instead of the other column right edge', () => {
+  const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line('说明功能：提供个', .36, .1, .38), line('性化词汇推送。', .4, .14, .25),
+    line('另一栏的评分内容完整。', .44, .55, .4)]])
+  const scoring = buildSourceReferences(...input).groups[0].scoring
+  assert.equal(scoring.entries[0].paragraphs[0].text, '说明功能：提供个性化词汇推送。')
+})
+
+function titleFixture({ title = '联合考试高三', y = .06 } = {}) {
+  const input = fixture([
+    [...heading, line('A complete sample.', .28), line('评分标准', .32), line('前页评分完整。', .4)],
+    [line(title, y, .25, .5), line('英语', y + .034, .48, .04), line('后页评分仍须保留。', .25)],
+  ])
+  // The original paper's title is confirmed independently from the answer book.
+  input[0].paperName = '联合考试高三英语试题'
+  const original = fixture([[line('联合考试高三', .06, .25, .5)]])
+  input[0].documents.push({ ...original[0].documents[0], documentId: 'question', role: 'question_source' })
+  input[1].documents.push({ ...original[1].documents[0], documentId: 'question' })
+  input[2].documents.push({ ...original[2].documents[0], documentId: 'question' })
+  return input
+}
+
+test('reprinted top title paragraphs are furniture without ending scoring capture', () => {
+  const input = titleFixture()
+  const before = structuredClone(input)
+  const output = buildSourceReferences(...input)
+  const scoring = output.groups[0].scoring.entries.flatMap(e => e.paragraphs.map(p => p.text))
+  assert.deepEqual(scoring, ['前页评分完整。', '后页评分仍须保留。'])
+  assert.deepEqual(input, before)
+})
+
+for (const options of [{ y: .4 }, { title: '另一份高三考试' }]) test(
+  `title furniture requires an edge and the same confirmed title: ${JSON.stringify(options)}`, () => {
+  const output = buildSourceReferences(...titleFixture(options))
+  assert(JSON.stringify(output.groups[0].scoring).includes(options.title || '联合考试高三'))
+})
+
 for (const [name, previousText] of [
   ['space before closing quote', 'He said, “The project is finished. ”'],
   ['closing guillemet', 'He said, «The project is finished.»'],

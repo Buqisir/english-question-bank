@@ -90,6 +90,51 @@ test('9+1 Version one/two labels end scoring and retain both complete source sam
   }
 })
 
+test('sample citations remain scoring prose through the continuation appendix', () => {
+  for (const citation of ['范文1中“人物的转变合理”。', '范文2的情节符合线索。', '参考范文①中“主题积极”。']) {
+    const texts = ['（二）读后续写评分参考标准', '一、原文线索分析', citation,
+      '（二）Para. 2: The brothers worked together.', '三、评分侧重点总结',
+      '1. 线索关联度：紧扣原文；', '2. 情节合理性：转变自然；',
+      '3. 细节生动性：动作真实；', '4. 主题深化度：体现亲情。']
+    const input = textReferences([['第一节 应用文', '参考范文', 'An application sample.',
+      '第二节 读后续写', '参考范文', 'A continuation sample.', '听力原文', '写作评分说明', ...texts]])
+    const before = structuredClone(input.confirmation)
+    const scoring = input.capture().groups[1].scoring
+    assert.equal(scoring.state, 'captured')
+    const captured = scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)).join('\n')
+    for (const text of texts.slice(1)) assert(captured.includes(text), text)
+    const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+    for (let i = 8; i < 8 + texts.length; i++) assert.equal(scopes.get(`p1:i${i}`)?.labelItemId, 'p1:i8')
+    assert.deepEqual(input.confirmation, before)
+  }
+})
+
+test('complete Chinese sample labels still end scoring ownership', () => {
+  for (const label of ['范文1：', '范文一']) {
+    const input = textReferences([['第一节 应用文', '参考范文', 'An application sample.'],
+      ['第二节 读后续写', '评分标准', '评分正文。', label, 'An English sample.']])
+    assert.equal(input.capture().groups[1].essays.entries[0].sourceLabel, label)
+    const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+    assert.equal(scopes.get('p2:i2')?.labelItemId, 'p2:i1')
+    assert.equal(scopes.get('p2:i3'), null, label)
+    assert.equal(scopes.get('p2:i4'), null, label)
+  }
+})
+
+test('scope retains text outside the producer complete entry-label grammar', () => {
+  // These formerly scope-only matches never created a producer essay entry.
+  // Keep both inputs and prove ownership now follows that same complete grammar.
+  for (const text of ['参考范文①：', '范文２ An English sample.']) {
+    const input = textReferences([['第一节 应用文', '参考范文', 'An application sample.'],
+      ['第二节 读后续写', '评分标准', '评分正文。', text, 'An English sample.']])
+    const output = input.capture().groups[1]
+    assert.equal(output.essays.entries.length, 0)
+    assert(JSON.stringify(output.scoring).includes(text))
+    const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+    for (const itemId of ['p2:i2', 'p2:i3', 'p2:i4']) assert.equal(scopes.get(itemId)?.labelItemId, 'p2:i1')
+  }
+})
+
 test('mentions of Version and versions outside the shared one-to-three grammar remain scoring prose', () => {
   for (const text of ['Version one is mentioned in the scoring guidance.', '评分时可参考 Version one 的结构。',
     'Version four:', 'Version 4:']) {
@@ -178,6 +223,29 @@ test('post-listening rubric resumes capture and admission without replacing eith
       ['评分标准', 'answers:page-3:figure-extra']],
     [['评分标准', 'answers:page-4:figure-5']],
   ])
+})
+
+test('admission compares retained and historically spaced source hyphens without accepting different words', () => {
+  const input = fixture({ applicationSample: ['参考范文', 'We provide AI-\nbased feedback.'] })
+  const captured = captureScoringReferences(input)
+  const original = structuredClone(captured)
+  for (const text of ['We provide AI-based feedback.', 'We provide AI- based feedback.']) {
+    const sidecar = structuredClone(captured)
+    sidecar.groups[0].essays.entries[0].paragraphs[0].text = text
+    assertSourceReferenceAdmission({ ...input, sidecar })
+  }
+  const wrong = structuredClone(captured)
+  wrong.groups[0].essays.entries[0].paragraphs[0].text = 'We provide AI-based guidance.'
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: wrong }),
+    /Reference text must replay surviving confirmed OCR items/u)
+  const emptyFragment = structuredClone(captured)
+  const paragraph = emptyFragment.groups[0].essays.entries[0].paragraphs[0]
+  const continuation = structuredClone(paragraph.source)
+  continuation.locator.region = { x: .999, y: .95, width: .001, height: .001 }
+  paragraph.continuationSources = [continuation]
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: emptyFragment }),
+    /Reference text must replay surviving confirmed OCR items/u, 'each region must replay at least one surviving item')
+  assert.deepEqual(captured, original)
 })
 
 test('post-listening capture reuses shared parenthesized rubric labels without changing recognition', () => {

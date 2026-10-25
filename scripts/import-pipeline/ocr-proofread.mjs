@@ -30,8 +30,10 @@ import { fileURLToPath } from 'node:url'
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
-import { isExplicitScoringAppendixStart, scoredWritingRubricTask } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView,
+  SOURCE_REFERENCE_ANSWER_ROLES } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
+import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2,
@@ -46,7 +48,8 @@ import { missingFigureHints, missingFigureMessage } from './ocr-figure-guard.mjs
 import { writeFigureCrosscheck } from './ocr-figure-crosscheck.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import { matchesLineRole, firstLineRole,
-  inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches } from './ocr-line-roles.mjs'
+  inlineSampleParts, bareSectionNumber, writingSectionText, watermarkMatches,
+  REFERENCE_MARGIN_TOLERANCE } from './ocr-line-roles.mjs'
 import { createWritingScope, createReferenceCapture } from './ocr-section-state.mjs'
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
@@ -62,7 +65,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v15'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v16'
 
 function fail(message) {
   console.error(message)
@@ -93,7 +96,7 @@ function context(paperId) {
     bytes: new Uint8Array(readFileSync(path.join(paperDir, document.path))),
   }))
   const work = path.resolve(option('--work') || path.join(root, 'imports/ocr-proofread', paperId))
-  return { paperId, paperDir, documents, work }
+  return { paperId, paperDir, documents, work, paperName: manifest.provenance?.paperName }
 }
 
 function pad(value) {
@@ -1072,13 +1075,14 @@ export function writingSectionAfterPart(text) {
     : firstLineRole('writing-section', computeLineFacts({ text: rest }))?.value || null
 }
 
-function joinLines(lines) {
+function joinLines(lines, { reference = false } = {}) {
   // Text glue only. Semantic boundaries have already passed decideLineJoin;
   // reference/annotation CJK spacing intentionally differs from speech hyphens.
   return lines.reduce((text, line) => {
     if (!text) return line
     const cjk = /[\u3000-\u9fff\uff00-\uffef]$/u.test(text) && /^[\u3000-\u9fff\uff00-\uffef]/u.test(line)
-    return `${text}${cjk ? '' : ' '}${line}`
+    const hyphen = reference && /[A-Za-z]-$/u.test(text) && /^[a-z]/u.test(line)
+    return `${text}${cjk || hyphen ? '' : ' '}${line}`
   }, '')
 }
 
@@ -1219,9 +1223,10 @@ function isObjectiveAnswerGrid(rows) {
 }
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
-export function buildSourceReferences(materialization, evidence, confirmation, { sourceDocuments = [] } = {}) {
+export function buildSourceReferences(materialization, evidence, confirmation,
+  { sourceDocuments = [], paperName = materialization.paperName } = {}) {
   const answerDocuments = materialization.documents.filter((document) =>
-    ['official_answers', 'question_and_answers'].includes(document.role))
+    SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
   if (answerDocuments.length !== 1) fail('Expected exactly one answer-bearing document')
   const [answerDocument] = answerDocuments
   const documentSha256 = answerDocument.sha256
@@ -1300,6 +1305,50 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       }
     }
   }
+  // A reprint can use the original question document's cover title rather
+  // than the answer book's abbreviated title. Match exact confirmed title
+  // lines in this paper's first pages; reuse the existing furniture role.
+  const firstPageTitles = new Set()
+  for (const document of confirmation.documents) {
+    const first = document.pages[0]
+    const proof = evidence.documents.find(item => item.documentId === document.documentId)?.pages[first.page - 1]
+    if (!proof) continue
+    const observations = new Map(proof.observations.map(item => [item.observationId, item]))
+    for (const item of first.orderedItems) {
+      const facts = computeLineFacts({ text: item.text,
+        boxes: item.observationIds.map(id => observations.get(id)) })
+      if (facts.region?.y < .12 && matchesLineRole('furniture.repeated-title', facts, { repeated: true })) {
+        firstPageTitles.add(writingRuleMatchingView(item.text))
+      }
+    }
+  }
+  const fullTitles = [...firstPageTitles, ...(paperName ? [writingRuleMatchingView(paperName)] : [])]
+  const titleFurniture = new WeakSet()
+  for (const [index, line] of lines.entries()) {
+    if (line.figure || line.table || line.page === 1 || !firstPageTitles.has(writingRuleMatchingView(line.text))) continue
+    const facts = factsFor(line)
+    if (!(facts.region?.y < .12) || !matchesLineRole('furniture.repeated-title', facts, { repeated: true })) continue
+    titleFurniture.add(line)
+    const header = [line]
+    // A subtitle needs independent full-title evidence, not the keyword from
+    // the already matched title authorizing arbitrary text beneath it.
+    for (const next of lines.slice(index + 1)) {
+      if (next.page !== line.page || next.figure || next.table) break
+      const nextFacts = factsFor(next)
+      if (nextFacts.left < facts.left || nextFacts.right > facts.right || nextFacts.region.y < facts.region.y) break
+      // Keep the existing title-block height cap when selecting a possible
+      // subtitle; only the independent full title authorizes its exclusion.
+      if (nextFacts.region.y + nextFacts.region.height - facts.region.y > .06) break
+      const candidate = writingRuleMatchingView([...header, next].map(item => item.text).join(''))
+      if (firstLineRole('entry-label', nextFacts) || /^第[一二三四五六七八九十\d]+档|^(?:零分|不得分)/u.test(nextFacts.nfkc)
+        || !fullTitles.some(title => title.startsWith(candidate))) {
+        review.push({ itemId: next.itemId, issue: 'unproven title subtitle retained for review' })
+        break
+      }
+      titleFurniture.add(next)
+      header.push(next)
+    }
+  }
   const edgeTexts = new Map()
   for (const line of lines) {
     if (line.figure) continue
@@ -1367,7 +1416,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
       continue
     }
-    if (firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
+    if (titleFurniture.has(line) || firstLineRole('furniture', facts, { repeated: edgeTexts.get(facts.edgeText)?.size > 1 })) {
       furniture.add(line)
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
       continue
@@ -1457,6 +1506,17 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       const body = english.length ? english : local
       margins.set(page, { left: Math.min(...body.map((line) => line.left)),
         right: Math.max(...body.map((line) => line.right)) })
+    }
+    // The Chinese wrap veto needs the previous line's own column, not the
+    // English sample or the opposite column. Keep the existing paragraph
+    // geometry/margins unchanged; only this veto consumes these local rights.
+    const columnMargins = new WeakMap()
+    const chineseBody = sectionLines.filter(line => !line.figure && !line.table
+      && factsFor(line).hasHan && !firstLineRole('entry-label', factsFor(line)))
+    for (const line of chineseBody) {
+      const column = chineseBody.filter(other => other !== line && other.page === line.page
+        && Math.abs(other.left - line.left) <= REFERENCE_MARGIN_TOLERANCE)
+      columnMargins.set(line, { right: Math.max(...column.map(other => other.right)) })
     }
     const short = taskType === 'application' ? 'app' : 'cont'
     const entries = { essays: [], scoring: [] }
@@ -1576,7 +1636,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       const afterClosing = previous?.role === 'closing'
       const decision = decideLineJoin({
         content: 'reference', previous, current: facts,
-        geometry: { unit: 'normalized', margin, previousMargin: previous?.margin || margin },
+        geometry: { unit: 'normalized', margin, previousMargin: previous?.margin || margin,
+          previousColumnMargin: previous?.columnMargin },
         roles: { hasParagraph: Boolean(paragraph), special, afterClosing,
           numbered: matchesLineRole('paragraph.numbered', facts) },
         referenceContext: { entryKind: entry.kind,
@@ -1594,7 +1655,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       }
       paragraph.lines.push(line)
       previous = { role: paragraph.role, right: line.right, page: line.page,
-        text: line.text, sourceIndex: sourceOrder.get(line), margin }
+        text: line.text, sourceIndex: sourceOrder.get(line), margin, columnMargin: columnMargins.get(line) }
       previousLocation = decision.location.after
     }
     if (awaitingSourceLabel) {
@@ -1628,16 +1689,26 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
         const blocks = paragraphs.map((item, index) => {
           if (item.figure) return { kind: 'figure', ...frozenFigure(item.figure) }
           if (item.table) return item.table
-          const byPage = new Map()
+          // Keep each contiguous page/column fragment narrow: a page-wide
+          // union at a column wrap would also claim unrelated source items.
+          const fragments = []
           for (const line of item.lines) {
-            if (!byPage.has(line.page)) byPage.set(line.page, [])
-            byPage.get(line.page).push(line)
+            const previous = fragments.at(-1)
+            if (!previous || previous.page !== line.page
+              || line.left >= previous.right - SOURCE_REFERENCE_REGION_TOLERANCE
+              || line.right <= previous.left + SOURCE_REFERENCE_REGION_TOLERANCE) {
+              fragments.push({ page: line.page, left: line.left, right: line.right, lines: [line] })
+            } else {
+              previous.lines.push(line)
+              previous.left = Math.min(previous.left, line.left)
+              previous.right = Math.max(previous.right, line.right)
+            }
           }
-          const sources = [...byPage.values()].map(pageSource)
+          const sources = fragments.map(fragment => pageSource(fragment.lines))
           return { kind: 'paragraph', paragraph: {
             paragraphId: `${rest.referenceId}-p${index + 1}`,
             role: item.role,
-            text: joinLines(item.lines.map((line) => line.text)),
+            text: joinLines(item.lines.map((line) => line.text), { reference: true }),
             source: sources[0],
             ...(sources.length > 1 ? { continuationSources: sources.slice(1) } : {}),
           } }
@@ -1676,13 +1747,13 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
 // from line geometry (first-line indent or a short previous line), never from the Materialization,
 // so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
 function references(paperId) {
-  const { paperDir, work, documents } = context(paperId)
+  const { paperDir, work, documents, paperName } = context(paperId)
   const directory = path.join(paperDir, 'materialization')
   const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
   const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
   const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
   const { groups, review, structuredScoring, schemaVersion } = buildSourceReferences(materialization, evidence, confirmation,
-    { sourceDocuments: documents })
+    { sourceDocuments: documents, paperName })
   const output = path.join(work, 'source-references-draft.json')
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups })

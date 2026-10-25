@@ -2,9 +2,10 @@ import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
-  isExplicitScoringAppendixStart, scoredWritingRubricTask, isWritingVersionLabel, writingRuleMatchingView,
+  isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView,
   OBJECTIVE_ANSWER_FIGURE_MARKER,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
+  isSourceReferenceSampleLabel,
 } from './sourceReferenceWritingRules.mjs'
 
 // Preserve the scoring helper's existing alternate part title.
@@ -113,16 +114,16 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
         ended = true
         label = null
       }
-      // Keep spaces for the shared English sample-label predicate. Source text
-      // and sourceLabel remain untouched; matching alone uses NFKC.
-      const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(item.text.normalize('NFKC').trim())
+      // Share the producer's complete essay-label grammar; Chinese citations
+      // such as “范文1中…” remain rubric prose.
+      const sampleLabel = isSourceReferenceSampleLabel(item.text)
       const scoringLabel = isScoringLabel(item.text, scoringTask)
       if (!ended && taskType && scoringLabel) label = item
       // A reprinted "写作二" starts the sample between rubric sections, not
       // another scoring paragraph; only the next rubric label restores scoring.
-      else if (numberedEntryLabel || isWritingVersionLabel(item.text)
+      else if (sampleLabel
         || /^写作[一二](?:范文[:：]?)?$/u.test(text)
-        || /^(?:(?:[一二三四五六七八九十]+、)?(?:参考范文|考场作文|作答示例|参考答案|范文)|(?:(?:A|One)?PossibleVersion)|【|\[)/iu.test(text)) label = null
+        || /^(?:【|\[)/u.test(text)) label = null
       scopes.set(item.itemId, !ended && taskType && label
         ? { taskType, labelItemId: label.itemId, sourceLabel: label.text } : null)
     }

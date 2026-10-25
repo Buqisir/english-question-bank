@@ -7,6 +7,9 @@ import {
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isWritingVersionLabel, writingRuleMatchingView,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
+  WORD_COUNT_SAMPLE_LABEL, NUMBERED_SAMPLE_LABEL,
+  ENTRY_LABEL, EXAMPLE_SAMPLE_LABEL, PARENTHESIZED_SAMPLE_LABEL, NUMBERED_VERSION_SAMPLE_LABEL,
+  SCORING_LABEL, isSourceReferenceSampleLabel,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
@@ -14,13 +17,6 @@ const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
 const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|语言|[一二三四五六]、)/u
 const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
 
-const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Versions?|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
-const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
-const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
-const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
-const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[）)]$/iu
-const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
-const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|作答示例|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
 // The key's own teaching commentary (【审题重点】, 主题语境：…) is neither a source sample nor scoring.
 const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*\p{Script=Han}|\d+\s*[.．、]\s*\p{Script=Han})/u
 // A Chinese parenthetical note may be truncated before its closing bracket.
@@ -48,6 +44,12 @@ const pattern = (id, phase, priority, regex, example, counterExample, extra) =>
       scan: text => text.matchAll(new RegExp(regex.source, `${regex.flags}g`)), ...extra })
 const edge = { y: 0.04, height: 0.02 }
 const boundary = { previous: { role: 'body', right: 0.81, page: 1 }, margin: { left: 0.1, right: 0.9 } }
+
+// Shared normalized-page tolerance from reference.previous-short.
+export const REFERENCE_MARGIN_TOLERANCE = .06
+export const referenceLineIsFull = (line, margin) =>
+  Number.isFinite(line?.right) && Number.isFinite(margin?.right)
+    && line.right >= margin.right - REFERENCE_MARGIN_TOLERANCE
 
 export const LINE_ROLE_RULES = Object.freeze([
   rule('worksheet.footer', 'worksheet', 10, (f, c) =>
@@ -144,7 +146,7 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('entry.numbered', 'entry-label', 30, NUMBERED_SAMPLE_LABEL, '范文一（83词）：', '范文分析'),
   pattern('entry.example', 'entry-label', 40, EXAMPLE_SAMPLE_LABEL, '【示例二】建议调整活动安排', '【示例一】An English sentence follows.'),
   pattern('entry.parenthesized', 'entry-label', 50, PARENTHESIZED_SAMPLE_LABEL, '(One possible version)', 'One possible version:'),
-  pattern('entry.version', 'entry-label', 60, /^(?:(?:A|One)\s+)?Possible\s+Version\s*\d+[:：]?$/iu,
+  pattern('entry.version', 'entry-label', 60, NUMBERED_VERSION_SAMPLE_LABEL,
     'Possible Version 2', 'Possible Version 2 describes a design.'),
   rule('entry.arabic-numbered', 'entry-label', 70, f => NUMBERED_ENTRY_LABEL.test(f.nfkc),
     '4. 评分细则', '4. 评分时应考虑内容。'),
@@ -156,10 +158,9 @@ export const LINE_ROLE_RULES = Object.freeze([
     'Version one:', 'Version one is mentioned in the scoring guidance.'),
   rule('entry.scoring-kind', 'entry-kind', 10, f => SCORING_LABEL.test(writingRuleMatchingView(f.text)),
     '二、评分原则', '参考范文', { value: 'scoring' }),
-  rule('entry.essay-kind', 'entry-kind', 20, f => ESSAY_LABEL.test(f.text) || isWritingVersionLabel(f.text),
+  rule('entry.essay-kind', 'entry-kind', 20, f => isSourceReferenceSampleLabel(f.text),
     '参考范文', '二、评分原则', { value: 'essays' }),
-  rule('entry.sample-label', 'sample-label', 10, f =>
-    Boolean(firstLineRole('entry-label', f)) && (ESSAY_LABEL.test(f.text) || isWritingVersionLabel(f.text)),
+  rule('entry.sample-label', 'sample-label', 10, f => isSourceReferenceSampleLabel(f.text),
   '参考范文（80词）', '二、评分原则'),
   pattern('writing.inline-sample', 'inline-sample', 10,
     INLINE_WRITING_SAMPLE,
@@ -235,7 +236,7 @@ export const LINE_ROLE_RULES = Object.freeze([
     { text: 'Unexpectedly everything changed.', page: 2, context: boundary },
     { text: 'Unexpectedly everything changed.', page: 1, context: boundary }),
   rule('reference.previous-short', 'previous-short', 10, (f, c) =>
-    c.previous && c.previous.right < c.margin.right - 0.06
+    c.previous && !referenceLineIsFull(c.previous, c.margin)
       && c.previous.right + f.firstObservationWidth + 0.003 < c.margin.right,
   { text: 'Unexpectedly everything changed.', context: boundary },
   { text: 'Unexpectedly everything changed.', boxes: [{ region: { x: .1, y: .3, width: .1, height: .02 } }], context: boundary }),
