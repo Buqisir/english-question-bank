@@ -417,3 +417,76 @@ test('admission rejects false not_supplied for plural possible-version samples t
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
     { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
 })
+
+function withObjectiveFigures(input, { pageIndex = 0, anchors = ['听力', 'C'] } = {}) {
+  const page = input.confirmation.documents[1].pages[pageIndex]
+  const proof = input.evidence.documents[1].pages[pageIndex]
+  proof.observations = anchors.flatMap((text, index) => [
+    { observationId: `objective:${index}:anchor`, regionId: `objective:${index}:anchor-region`, text,
+      region: { x: .1, y: .1 + index * .2, width: .6, height: .02 }, confidence: 1, alternatives: [] },
+    { observationId: `objective:${index}:picture`, regionId: `objective:${index}:picture-region`,
+      text: 'Synthetic objective answer chart',
+      region: { x: .1, y: .15 + index * .2, width: .6, height: .02 }, confidence: 1, alternatives: [] },
+  ])
+  proof.regions = proof.observations.map(item => ({ regionId: item.regionId, kind: 'text', region: item.region }))
+  proof.readingOrderEdges = proof.observations.slice(1).map((item, index) => ({
+    before: proof.observations[index].observationId, after: item.observationId,
+  }))
+  page.orderedItems = proof.observations.map(item => ({
+    itemId: `${item.observationId}:item`, text: item.text, observationIds: [item.observationId],
+  }))
+  page.visualClassifications = anchors.map((_, index) => {
+    const regionId = `answers:page-${pageIndex + 1}:objective-${index}`
+    proof.regions.push({ regionId, kind: 'visual',
+      region: { x: .08, y: .14 + index * .2, width: .75, height: .06 } })
+    return { regionId, classification: 'content_media',
+      itemIds: [`objective:${index}:picture:item`], afterItemId: `objective:${index}:anchor:item` }
+  })
+  const { evidenceDigest: _oldDigest, ...body } = input.evidence
+  input.evidence.evidenceDigest = digestJson(body)
+  input.confirmation.evidenceDigest = input.evidence.evidenceDigest
+  input.sourceInput.ocrSourceBytes = { evidenceBytes: Buffer.from(JSON.stringify(input.evidence)),
+    confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)) }
+  return input
+}
+
+test('Nanchang objective figures before writing stay source evidence and preserve all consumed scoring figures', () => {
+  const input = withObjectiveFigures(scoringFiguresFixture())
+  const before = structuredClone(input)
+  const result = buildSourceReferences(input.materialization, input.evidence, input.confirmation,
+    { sourceDocuments: input.sourceDocuments })
+  assert.equal(result.review.filter(item => /objective answer figure/u.test(item.issue)).length, 2)
+  assert.deepEqual(structuredClone(input), before)
+  const sidecar = captureScoringReferences(input)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  assert.equal(sidecar.groups.flatMap(group => group.scoring.entries.flatMap(entry =>
+    entry.blocks.filter(block => block.kind === 'figure'))).length, 3)
+  const missingScoring = structuredClone(sidecar)
+  missingScoring.groups[0].scoring.entries[0].blocks =
+    missingScoring.groups[0].scoring.entries[0].blocks.filter(block => block.kind !== 'figure')
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: missingScoring }),
+    /one-to-one/u, 'objective exclusion must not hide omitted real scoring figures')
+})
+
+test('objective-looking figures after the first writing task still fail closed in producer and admission', () => {
+  for (const sampleHeading of ['第一节 应用文', '第一节', '第一节 作答示例']) {
+    const base = fixture({ sampleHeading })
+    const continuation = base.confirmation.documents[1].pages[0].orderedItems
+      .find(item => item.text === '第二节 读后续写')
+    continuation.text = '第二节'
+    base.evidence.documents[1].pages[0].observations
+      .find(item => item.observationId === continuation.observationIds[0]).text = '第二节'
+    const input = withObjectiveFigures(base, { pageIndex: 1 })
+    assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u,
+      sampleHeading)
+    const sidecar = captureScoringReferences(fixture({ sampleHeading }))
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /one-to-one/u, sampleHeading)
+  }
+})
+
+test('ordinary sentence anchors before writing cannot silently discard a reference figure', () => {
+  const input = withObjectiveFigures(scoringFiguresFixture(), { anchors: ['An ordinary sentence.'] })
+  assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
+  const sidecar = captureScoringReferences(scoringFiguresFixture())
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /one-to-one/u)
+})

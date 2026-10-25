@@ -3,6 +3,8 @@ import {
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isExplicitScoringAppendixStart, scoredWritingRubricTask, isWritingVersionLabel, writingRuleMatchingView,
+  OBJECTIVE_ANSWER_FIGURE_MARKER,
+  BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
 } from './sourceReferenceWritingRules.mjs'
 
 // Preserve the scoring helper's existing alternate part title.
@@ -11,7 +13,7 @@ const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
 // Conservative ownership for new scoring figures, replayed by producer and
 // admission alike. Only explicit source headings and scoring labels authorize
 // capture. A nearby Writing Task or a caller's declared entry is insufficient.
-export function sourceReferenceScoringScopes(confirmation, answerIds) {
+export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritingStart } = {}) {
   const scopes = new Map()
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
@@ -62,6 +64,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
       }
       if (/^第[一二三四五六]部分/u.test(text)) {
         writing = WRITING_PART.test(text) || ALTERNATE_WRITING_PART.test(text)
+        if (writing && !startedWriting) onWritingStart?.(document.documentId, item.itemId)
         startedWriting ||= writing
         taskType = null
         label = null
@@ -91,6 +94,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         || /^(?:第二节(?:\([^)]*\))?)?读后续写(?:评分细则[:：]?)?$/u.test(heading)) task ??= 'continuation'
       if (task) {
         writing = true
+        if (!startedWriting) onWritingStart?.(document.documentId, item.itemId)
         startedWriting = true
         taskType = task
         label = null
@@ -117,4 +121,30 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
     }
   }
   return scopes
+}
+
+// Positive source evidence is required so an unconsumed real rubric image
+// cannot disappear merely because its writing anchor was lost.
+export function sourceReferenceObjectiveFigureAnchors(confirmation, answerIds) {
+  const starts = new Map()
+  sourceReferenceScoringScopes(confirmation, answerIds, {
+    onWritingStart: (documentId, itemId) => starts.set(documentId, itemId),
+  })
+  const anchors = new Set()
+  for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
+    const items = document.pages.flatMap(page => page.orderedItems)
+    const explicitStart = items.findIndex(item => item.itemId === starts.get(document.documentId))
+    if (explicitStart < 0) continue
+    // Earlier bare/combined producer headings also cap this exclusion. When
+    // their task context is ambiguous, retain the image rather than discard it.
+    const start = items.findIndex((item, index) => {
+      const text = item.text.normalize('NFKC').trim()
+      return index === explicitStart || BARE_WRITING_SECTION.test(text.split('\n')[0].trim())
+        || INLINE_WRITING_SAMPLE.test(text) || INLINE_WRITING_ANSWER_SAMPLE.test(text)
+    })
+    for (const item of items.slice(0, start)) {
+      if (OBJECTIVE_ANSWER_FIGURE_MARKER.test(item.text.trim())) anchors.add(item.itemId)
+    }
+  }
+  return anchors
 }

@@ -29,7 +29,7 @@ import { fileURLToPath } from 'node:url'
 
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
-import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { isExplicitScoringAppendixStart, scoredWritingRubricTask } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -1659,7 +1659,16 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  if (assignedFigures.size !== referenceFigures.length) throw new Error('Reference figure has no surviving essay anchor or explicit scoring entry')
+  const objectiveAnchors = sourceReferenceObjectiveFigureAnchors(confirmation, new Set([answerDocument.documentId]))
+  const excludedFigures = referenceFigures.filter(figure =>
+    !assignedFigures.has(figure) && objectiveAnchors.has(figure.afterItem.itemId))
+  for (const figure of excludedFigures) {
+    review.push({ itemId: figure.afterItem.itemId, sourceRegionId: figure.sourceRegionId,
+      issue: 'objective answer figure excluded from writing references; retained in source evidence' })
+  }
+  if (assignedFigures.size + excludedFigures.length !== referenceFigures.length) {
+    throw new Error('Reference figure has no surviving essay anchor or explicit scoring entry')
+  }
   return { groups, review, structuredScoring, ...(referenceFigures.length ? { schemaVersion: hasScoringFigures ? 'source-references-v4' : 'source-references-v3' } : {}) }
 }
 
