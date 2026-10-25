@@ -179,9 +179,17 @@ function normalizeListeningUnits(value, aliases = []) {
           : expressionType === 'year' ? { expressionValue: Number(raw) } : {}) }))
   })
   const adjacent = (a, b) => a.end >= b.start || /^[\s-]*$/u.test(text.slice(a.end, b.start))
+  // Later time/context rewrites must retain the original compound spelling,
+  // not just their new expressionText ("halfpast seven" -> "seven thirty").
+  const compoundSpanEvidence = (first, last) => {
+    const proofs = units.filter(u => u.start >= first.start && u.end <= last.end).flatMap(compoundProofs)
+    const evidence = [...new Map(proofs.map(proof => [JSON.stringify(proof), proof])).values()]
+    return evidence.length ? { compoundEvidence: evidence } : {}
+  }
   const span = (tokens, first, last, expressionType, expressionValue) => tokens.map(token =>
     ({ token, start: first.start, end: last.end, expressionType, expressionValue,
-      expressionForm: 'words', expressionText: text.slice(first.start, last.end) }))
+      expressionForm: 'words', expressionText: text.slice(first.start, last.end),
+      ...compoundSpanEvidence(first, last) }))
   const result = []
   for (let i = 0; i < units.length; i++) {
     const a = units[i], b = units[i + 1], c = units[i + 2]
@@ -249,7 +257,7 @@ function normalizeListeningUnits(value, aliases = []) {
     const a = units[i], b = units[i + 1], c = units[i + 2]
     if (smallNumbers.indexOf(a.token) >= 1 && smallNumbers.indexOf(a.token) <= 12
       && b?.token === "o'clock" && ['am', 'pm'].includes(c?.token) && adjacent(a, b) && adjacent(b, c)) {
-      withoutOptionalClock.push({ ...a, end: b.end }); i++; continue
+      withoutOptionalClock.push({ ...a, end: b.end, ...compoundSpanEvidence(a, b) }); i++; continue
     }
     withoutOptionalClock.push(a)
   }
@@ -470,6 +478,7 @@ function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths, c
       expressionType: unit.expressionType, expressionForm: unit.expressionForm,
       expressionText: unit.expressionText, expressionValue: unit.expressionValue,
       ...(unit.compoundValue ? { compoundValue: unit.compoundValue } : {}),
+      ...(unit.compoundEvidence ? { compoundEvidence: unit.compoundEvidence } : {}),
       startSeconds: a.start + (a.end - a.start) * left.indexOf(i) / left.length,
       endSeconds: b.start + (b.end - b.start) * (right.indexOf(i) + 1) / right.length,
       runStartSeconds: a.start, runEndSeconds: b.end,
@@ -544,10 +553,11 @@ export function listeningAsrTokens(windows, clockAliases = []) {
     startSeconds: window.startSeconds, endSeconds: window.endSeconds,
     evidencePaths: window.evidencePaths || [],
     words: words.map(({token, startSeconds, endSeconds, runStartSeconds, runEndSeconds, rawRunText,
-      expressionType, expressionForm, expressionText, expressionValue, compoundValue}) => ({
+      expressionType, expressionForm, expressionText, expressionValue, compoundValue, compoundEvidence}) => ({
       token, startSeconds, endSeconds, runStartSeconds, runEndSeconds, rawRunText,
       expressionType, expressionForm, expressionText, expressionValue,
-      ...(compoundValue ? { compoundValue } : {})})),
+      ...(compoundValue ? { compoundValue } : {}),
+      ...(compoundEvidence ? { compoundEvidence } : {})})),
   }))
   return { words, markers, observedWindows }
 }
@@ -593,14 +603,26 @@ function compatibleYearExpressions(source, target) {
   const words = text => text.toLowerCase().replace(/[-\s]+/gu, ' ')
   return words(source.expressionText) === words(target.expressionText)
 }
+function compoundProofs(unit) {
+  return [...(unit?.compoundEvidence || []),
+    ...(unit?.compoundValue ? [{ value: unit.compoundValue, text: unit.expressionText }] : [])]
+}
 function compatibleCompoundExpressions(source, target) {
   if (source?.compoundValue !== target.compoundValue) return false
-  if (!source?.compoundValue) return true
+  const raw = text => text.toLowerCase().replace(/\s+/gu, ' ')
+  if (!source?.compoundValue) {
+    const a = compoundProofs(source), b = compoundProofs(target)
+    // Native half past / half-past may still equal an ordinary clock. Only a
+    // joined spelling actually rewritten by a compound alias needs permission.
+    const licensed = (own, other) => own.every(proof => raw(proof.text) !== proof.value
+      || other.some(peer => peer.value === proof.value
+        && (peer.text.includes('-') || raw(peer.text) === raw(proof.text))))
+    return licensed(a, b) && licensed(b, a)
+  }
   // A hyphen elsewhere in the recording/corpus cannot license a joined/spaced
   // rewrite here. Identical spellings still match without such a rewrite.
-  const raw = unit => unit.expressionText.toLowerCase().replace(/\s+/gu, ' ')
   return source.expressionText.includes('-') || target.expressionText.includes('-')
-    || raw(source) === raw(target)
+    || raw(source.expressionText) === raw(target.expressionText)
 }
 export function alignListeningOccurrence(source, target, sourceUnits = []) {
   const equal = (i, j) => source[i] === target[j].token && compatibleYearExpressions(sourceUnits[i], target[j])
@@ -947,9 +969,10 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
         result.partialOccurrences.push({startSeconds: words[startIndex].runStartSeconds,
           anchorEndSeconds: words[startIndex + anchor.width - 1].runEndSeconds,
           words: words.slice(startIndex, foreignHead).map(({token, startSeconds, endSeconds,
-            expressionType, expressionForm, expressionText, expressionValue, compoundValue}) => ({
+            expressionType, expressionForm, expressionText, expressionValue, compoundValue, compoundEvidence}) => ({
             token, startSeconds, endSeconds, expressionType, expressionForm, expressionText, expressionValue,
-            ...(compoundValue ? {compoundValue} : {})}))})
+            ...(compoundValue ? {compoundValue} : {}),
+            ...(compoundEvidence ? {compoundEvidence} : {})}))})
         continue
       }
       const endIndex = tails[0] + anchor.width

@@ -477,3 +477,48 @@ test('an ASR hyphen attached to either adjacent run licenses the joined source',
     assert.equal(result.occurrences[0].alignment.editDistance, 0)
   }
 })
+
+const halfPastSentence = phrase => `Bright birds gather around our quiet garden at ${phrase} beside the peaceful village harbor today`
+function halfPastEngine(source, actual, candidate, engine = 'Apple SpeechAnalyzer') {
+  const text = halfPastSentence(source)
+  const group = {segmentId: 'listening-text-1', questionNumbers: [1], text}
+  const window = windowFor(halfPastSentence(actual).split(' '))
+  if (candidate === 'segment') window.result.segments[0].text = halfPastSentence('half-past seven')
+  const corpus = [group, ...(candidate === 'other-group'
+    ? [{segmentId: 'listening-text-2', questionNumbers: [2], text: 'Meet at half-past seven'}] : [])]
+  return evaluateListeningEngine({groups: [group], corpus, windows: [window], engine, durationSeconds: 100,
+    instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}],
+    pauses: [{startSeconds: 1, endSeconds: 1.95},
+      {startSeconds: window.result.segments[0].end + .05, endSeconds: window.result.segments[0].end + 1}]})
+}
+for (const candidate of ['segment', 'other-group']) {
+  test(`a ${candidate} half-past candidate cannot license an unhyphenated time rewrite`, () => {
+    for (const [source, actual] of [['half past seven', 'halfpast seven'], ['halfpast seven', 'half past seven']]) {
+      const baseline = halfPastEngine(source, actual).groups[0]
+      const result = halfPastEngine(source, actual, candidate).groups[0]
+      assert.equal(baseline.decision, 'review_required')
+      assert.ok(result.occurrences[0].alignment.editDistance > 0, `${source} / ${actual}`)
+      assert.equal(result.decision, 'review_required', `${source} / ${actual}`)
+    }
+  })
+}
+test('time rewrites retain compound licensing in both engine observation directions', () => {
+  for (const [source, actual] of [['half past seven', 'halfpast seven'], ['halfpast seven', 'half past seven']]) {
+    const reference = halfPastEngine(source, source)
+    const observed = halfPastEngine(source, actual, 'segment', 'faster-whisper')
+    for (const pair of [[reference, observed], [observed, reference]]) {
+      const result = reconcileListeningEngines(...pair)[0]
+      const notes = [...result.engineNotes, ...result.engineConflicts]
+      assert.ok(notes.some(n => n.kind === 'observed_critical_word_difference'), `${source} / ${actual}`)
+    }
+  }
+})
+test('half-past candidates preserve ordinary clock equivalence and literal hyphen permission', () => {
+  for (const [source, actual] of [['half past seven', '7:30'], ['7:30', 'half past seven'],
+    ['half-past seven', 'halfpast seven'], ['halfpast seven', 'half-past seven'],
+    ['half-past seven', '7:30'], ['7:30', 'half-past seven']]) {
+    const result = halfPastEngine(source, actual, 'segment').groups[0]
+    assert.equal(result.occurrences[0].alignment.editDistance, 0, `${source} / ${actual}`)
+    assert.equal(result.decision, 'usable', `${source} / ${actual}`)
+  }
+})

@@ -1,8 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { createHash } from 'node:crypto'
-import * as historicalV4 from './lib-listening-segment-rule-v4.mjs'
 import {
   LISTENING_SEGMENT_RULE, alignListeningOccurrence, evaluateListeningEngine, expectedListeningReadings,
   listeningAsrTokens, normalizeListeningText, parseListeningAnnouncements, reconcileListeningEngines, validateListeningOrder,
@@ -25,23 +23,6 @@ function windowFor(text, at = 2) {
     result: { segments: [{ start: at, end: at + tokens.length * 0.2, text,
       words: tokens.map((word, i) => ({ word, start: at + i * 0.2, end: at + (i + 1) * 0.2 })) }] } }
 }
-test('v4 replay stays byte-exact while v5 resolves a joined hyphen compound', () => {
-  assert.equal(createHash('sha256').update(readFileSync(new URL('./lib-listening-segment-rule-v4.mjs', import.meta.url))).digest('hex'),
-    '0bd403ac43153434c720bba902ec6e663e188314110e692416ba50e5764982e1')
-  assert.equal(historicalV4.LISTENING_SEGMENT_RULE.version, 'listening-segment-rule-v4')
-  const text = 'Bright birds gather around our quiet second-hand shop beside the peaceful village harbor today'
-  const window = windowFor(text.replace('second-hand', 'secondhand'))
-  const input = {groups: [{...group, text}], windows: [window], instructions: one,
-    durationSeconds: 100, pauses: surrounding([window])}
-  const before = historicalV4.evaluateListeningEngine(input).groups[0]
-  const after = evaluateListeningEngine(input).groups[0]
-  assert.equal(before.occurrences[0].alignment.editDistance, 2)
-  assert.ok(before.issues.includes('BODY_ALIGNMENT_LOW'))
-  assert.ok(before.issues.includes('CRITICAL_WORD_DIFFERENCE'))
-  assert.equal(after.occurrences[0].alignment.editDistance, 0)
-  assert.equal(after.decision, 'usable')
-  assert.deepEqual(historicalV4.evaluateListeningEngine(input).groups[0], before)
-})
 function surrounding(windows) {
   return windows.flatMap(w => w.result.segments.map(s => [
     { startSeconds: s.start - 1, endSeconds: s.start - 0.05 },

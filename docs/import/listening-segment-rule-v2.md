@@ -94,12 +94,14 @@ v5 追加连字符复合词等价：比较任一侧有字母复合词 `a-b`（�
 连字符的拼接/拆词。既有序数、数字、年份表达式优先保留原规则。
 两侧保留原表达式与 `compoundValue`；ASR 扩展沿用完整原 run 范围，
 不跨无效/倒序时间戳、超过 2 秒停顿或 segment，不制造内部播放边界。
+后续时间或上下文转换将复合词原拼写保存在 `compoundEvidence`，继续核对许可；
+仅 segment/其他组的 `half-past` 候选不能授权两侧无连字符的 `halfpast` / `half past`。
+正常的 `half past seven` / `7:30` 等价保持不变。
 
 这个等价会改变 v4 判定，因此新 attempt 使用 v5 和新的规则代码摘要。
-`lib-listening-segment-rule-v4.mjs` 是逐字冻结的 v4 实现
-（SHA-256 `0bd403ac43153434c720bba902ec6e663e188314110e692416ba50e5764982e1`），
-历史 v4 封存结果核验应从此模块导入原有 evaluate/reconcile 函数。
-下述 `--replay-attempt` 命令则明确生成当前 v5 的新 attempt；它不替换或改签历史结果。
+历史实现通过 Git 和保留的 attempt 证据追溯，不维护没有运行消费者的旧规则副本。
+下述 `--replay-attempt` 命令明确复用旧 ASR 并生成当前 v5 的新 attempt，
+不按旧版本重算、不替换或改签历史结果。
 
 Apple 缺词而 Whisper 提供完整唯一证据时允许通过；身份、次数、顺序或物理边界出现
 可证实冲突时保留 `review_required`。所有 unresolved 组都不输出已批准 playback。
