@@ -466,17 +466,33 @@ for (const tail of [
     paperId: fixture.paperId, documents: fixture.sourceDocuments,
   }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
 }
-for (const listeningHeading of ['【听力文本】', '【听力原文】', '听力材料']) {
+for (const listeningHeading of ['【听力文本】', '【听力原文】', '听力材料', '听力稿']) {
   const fixture = makeSyntheticNck1DocxFixture({ listening: true, listeningHeading })
-  assertReady(produceNck1DocxMaterialization({
+  const result = produceNck1DocxMaterialization({
     paperId: fixture.paperId, documents: fixture.sourceDocuments,
-  }), fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.equal(result.review.listeningSourcePartition.heading.text, listeningHeading)
+  assert.equal(result.materialization.listening.transcript.length, 10)
 }
-for (const listeningHeading of ['听力文本介绍如下。', '这段正文谈到了听力。', '【听力文本】的评分说明']) {
+for (const listeningHeading of ['听力文本介绍如下。', '这段正文谈到了听力。', '【听力文本】的评分说明',
+  '听力稿介绍如下。', '下面是听力稿。', '【听力稿】的评分说明']) {
   const fixture = makeSyntheticNck1DocxFixture({ listening: true, listeningHeading })
   assertRejected(produceNck1DocxMaterialization({
     paperId: fixture.paperId, documents: fixture.sourceDocuments,
   }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+for (const speech of ['M: 请把听力稿发给我。', '听力稿 includes the words “please wait outside”.']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace('Synthetic transcript 4.', speech),
+  })
+  const result = produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.deepEqual(result.materialization.listening.transcript.map(segment => segment.text),
+    Array.from({ length: 10 }, (_, index) => index === 3 ? speech : `Synthetic transcript ${index + 1}.`))
 }
 
 // Suizhou: the paired sound check is source-backed preamble, never Text 1.

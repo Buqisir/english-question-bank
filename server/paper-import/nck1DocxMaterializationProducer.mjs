@@ -15,9 +15,9 @@ const BLANK = /(?<![\p{L}\p{N}_])_+\d{1,3}_+|(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)
 const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]{0,120}英语试(?:题|卷)(?:参考)?)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?[:：]?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
 const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试题|测试)?(?:原文|材料|录音稿|录音原文|录音材料|录音文稿|文稿)|录音(?:原文|文稿|稿)|答案及听力材料)`
-// Some answer sheets use only 英语听力 or 听力文本. Keep these alternatives
+// Some answer sheets use only 英语听力, 听力文本 or 听力稿. Keep these alternatives
 // whole-heading only; the prefix-based writing boundary must not match prose.
-const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力|听力文本)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
+const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力|听力文本|听力稿)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
 // Owner-defined closed scoring vocabulary and complete number + unit syntax.
 const WRITING_SCORING_DIMENSION = /^(?:Content|Organization|Organisation|Structure|Language|Vocabulary|Grammar|Coherence|Cohesion|Accuracy|Fluency|Task|Communication|Overall|Expression|Style|Format|Word count|Handwriting)(.*)$/iu
