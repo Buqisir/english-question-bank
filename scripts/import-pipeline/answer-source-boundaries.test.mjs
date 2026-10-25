@@ -5,6 +5,50 @@ import { joinTranscriptTurns } from './ocr-proofread.mjs'
 
 const body = (texts) => texts.map((text, sourceIndex) => ({ kind: 'paragraph', text, sourceIndex }))
 
+for (const heading of [
+  'Content（内容）: 5 points',
+  'Organization（结构）: 5 points',
+  'Content（15分）: cover all required points.',
+  'Content(内容): 5 points',
+  'Organization(结构): 5 points',
+  'Content(15分): cover all required points.',
+]) {
+  test(`bilingual scoring heading is never an unlabelled essay: ${heading}`, () => {
+    const issues = []
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.',
+      '第二节 读后续写', heading, 'Cover all key information.',
+    ]), 'answers', issues)
+    assert.deepEqual(result, { application: null, continuation: null })
+    assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+  })
+
+  test(`bilingual scoring following a real gloss sample is excluded: ${heading}`, () => {
+    const issues = []
+    const sample = 'He looked aggressive（强势）last night.'
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.',
+      '第二节 读后续写', sample, heading, 'Cover all key information.',
+    ]), 'answers', issues)
+    assert.deepEqual(issues, [])
+    assert.equal(result.continuation, sample)
+  })
+}
+
+for (const [open, close] of [['（', '）'], ['(', ')']]) {
+  for (const commentary of ['内容完整，语言连贯。', '主题表达完整', '【审题重点】', '评分标准']) {
+    test(`a gloss cannot cross an independent commentary paragraph: ${open}${commentary}${close}`, () => {
+      const issues = []
+      const result = parseOfficialWritingSamples(body([
+        '第四部分 写作', '第一节 应用文', 'A short sample.', '第二节 读后续写',
+        `He looked aggressive${open}强`, commentary, `势${close}last night.`,
+      ]), 'answers', issues)
+      assert.deepEqual(result, { application: null, continuation: null })
+      assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+    })
+  }
+}
+
 for (const sample of [
   ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive（强势）last night?”'],
   ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive（强',

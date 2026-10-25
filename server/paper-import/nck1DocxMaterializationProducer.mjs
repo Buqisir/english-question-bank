@@ -19,6 +19,9 @@ const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试�
 // only; the prefix-based writing boundary must not match arbitrary prose.
 const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
+// Read bilingual rubric headings before masking glosses. NFKC folds brackets
+// and colons; a heading delimiter avoids treating prose about content as a rubric.
+const BILINGUAL_WRITING_SCORING_HEADING = /^(?:Content|Organi[sz]ation|Language(?:\s+(?:use|accuracy))?|Grammar|Vocabulary|Coherence|Cohesion|Mechanics|Scoring(?:\s+criteria)?)\s*\((?=[^()\n]*\p{Script=Han})[^()\n]+\)\s*(?:[:：]|$)/iu
 // Labels that open an official sample; scoring or prompt text may precede them.
 const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
@@ -1157,10 +1160,11 @@ function writingSampleOmission(answerBody, from, to) {
 }
 
 // Mask only closed Chinese glosses following English on the same source line.
-// Keep newlines aligned so OCR wrapping inside a gloss does not turn its next
-// line into Chinese commentary. Returned sample text is never changed.
+// A wrapped gloss must be two adjacent, nonempty Han-only word fragments.
+// Never span an independent commentary line, punctuation or a third line.
+// Keep newlines aligned; returned sample text is never changed by this mask.
 function maskWritingGlosses(text) {
-  return text.replace(/\([^()（）]*\)|（[^()（）]*）/gu, (gloss, offset) => {
+  return text.replace(/\([^()\n（）]*\)|（[^()\n（）]*）|\(\p{Script=Han}+\n\p{Script=Han}+\)|（\p{Script=Han}+\n\p{Script=Han}+）/gu, (gloss, offset) => {
     const prefix = text.slice(text.lastIndexOf('\n', offset) + 1, offset)
     return /\p{Script=Han}/u.test(gloss) && /[A-Za-z]/u.test(prefix)
       ? gloss.replace(/[^\n]/gu, ' ') : gloss
@@ -1197,6 +1201,7 @@ function writingSampleText(answerBody, from, to) {
       && index < to
       && item.kind === 'paragraph'
       && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
+        || BILINGUAL_WRITING_SCORING_HEADING.test(normalized(item.text))
         || (!WRITING_SAMPLE_LABEL.test(normalized(item.text))
           && WRITING_SAMPLE_COMMENTARY.test(normalized(glossMaskedLines[index - start])))
         || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
