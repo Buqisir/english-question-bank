@@ -52,13 +52,17 @@ export function mapRegionTsv(tsv, bbox, scale = SCALE) {
   return rows.filter(row => row.level === '5' && row.text.trim()).map(row => {
     const [left, top, width, height, conf] = ['left', 'top', 'width', 'height', 'conf'].map(key => Number(row[key]))
     if (![left, top, width, height, conf].every(Number.isFinite) || conf < 0 || conf > 100
+      || ![left, top, width, height].every(Number.isSafeInteger)
       || left < 0 || top < 0 || width <= 0 || height <= 0
       || left + width > bbox.width * scale || top + height > bbox.height * scale) {
       throw new Error('Region Tesseract word has invalid geometry or confidence')
     }
+    // Native Tesseract boxes use integer page pixels. Enclose the full mapped
+    // glyph rather than leaking subpixel band boundaries to figure auto-cropping.
+    const x0 = Math.floor(bbox.x + left / scale), y0 = Math.floor(bbox.y + top / scale)
+    const x1 = Math.ceil(bbox.x + (left + width) / scale), y1 = Math.ceil(bbox.y + (top + height) / scale)
     return { text: row.text, conf, line: `${row.block_num}:${row.par_num}:${row.line_num}`,
-      box: { left: round(bbox.x + left / scale), top: round(bbox.y + top / scale),
-        width: round(width / scale), height: round(height / scale) } }
+      box: { left: x0, top: y0, width: x1 - x0, height: y1 - y0 } }
   })
 }
 
@@ -68,9 +72,27 @@ function overlaps(a, b) {
 }
 
 export function appendRegionObservations(page, candidates, provenance, size) {
+  if (![size.width, size.height].every(value => Number.isSafeInteger(value) && value > 0)) {
+    throw new Error('Region observation page size must use positive finite integer pixels')
+  }
+  const bounded = candidates.map(word => {
+    if (!word.box || !['left', 'top', 'width', 'height'].every(key => Number.isSafeInteger(word.box[key]))
+      || word.box.width <= 0 || word.box.height <= 0) {
+      throw new Error('Region observation boxes must use finite integer pixels with positive extent')
+    }
+    const clip = (value, limit) => Math.max(0, Math.min(limit, value))
+    const left = clip(word.box.left, size.width), top = clip(word.box.top, size.height)
+    const right = clip(word.box.left + word.box.width, size.width)
+    const bottom = clip(word.box.top + word.box.height, size.height)
+    const box = { left, top, width: right - left, height: bottom - top }
+    if (!Object.values(box).every(Number.isSafeInteger) || box.width <= 0 || box.height <= 0) {
+      throw new Error('Region observation boxes must enclose positive finite integer pixels inside the page')
+    }
+    return { ...word, box }
+  })
   // Compare with earlier observations, including earlier region runs, without
   // rejecting overlapping glyph boxes emitted together by Tesseract itself.
-  const accepted = candidates.filter(word => !page.words.some(old => overlaps(word.box, old.box)))
+  const accepted = bounded.filter(word => !page.words.some(old => overlaps(word.box, old.box)))
   let number = Math.max(0, ...page.words.map(word => word.number))
   const words = accepted.map(word => ({ ...word, number: ++number,
     line: `region-${provenance.runId}:${word.line}`,
@@ -131,7 +153,8 @@ export async function reobserveRegions({ trace, documents, work, requests }) {
     if (bbox.x + bbox.width > raster.pixelWidth || bbox.y + bbox.height > raster.pixelHeight) {
       throw new Error(`${page.key}: region bbox exceeds the immutable page raster`)
     }
-    const parameters = { language: LANGUAGE, psm: PSM, scale: SCALE, density: DENSITY, ompThreadLimit: 1 }
+    const parameters = { language: LANGUAGE, psm: PSM, scale: SCALE, density: DENSITY, ompThreadLimit: 1,
+      pixelMapping: 'outward-integer-v1' }
     const identity = { page: page.key, bbox, sourceDocumentDigest: document.sha256,
       sourceImageDigest: sha256(raster.bytes), engine: { name: 'tesseract', version }, parameters }
     const runId = sha256(stableStringify(identity)).slice('sha256:'.length)
