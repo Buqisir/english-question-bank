@@ -1,10 +1,14 @@
 import assert from 'node:assert/strict'
-import { test } from 'node:test'
-import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart, buildSourceReferences,
+import { test, after } from 'node:test'
+import { checkedSourceReferences as buildSourceReferences, writingOwnershipChecks } from './ocr-writing-ownership-test-helpers.mjs'
+import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart,
   buildTranscriptJoinDocuments } from './ocr-proofread.mjs'
 import { prepareSourceReferences, validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
+
+after(() => console.log(`Writing ownership differential: ${JSON.stringify(writingOwnershipChecks)}`))
 
 function fixture(texts, lefts = []) {
   const items = texts.map((text, i) => ({ lines: `L${i + 1}`, text }))
@@ -328,7 +332,79 @@ taskHeadingCases.push(
       '读后续写评分标准', '注意衔接自然。'],
     expected: ['not_supplied', 'not_supplied'] },
 )
+for (const [application, continuation] of [
+  ['（二）应用文写作', '（三）读后续写'],
+  ['(2) 应用文', '(3) 读后续写'],
+  ['（２）应用文写作', '（３）读后续写'],
+  ['66. 应用文', '67. 读后续写'],
+]) for (const student of ['（五）样卷', '(五)样卷：']) {
+  test(`student-script public lifecycle: ${application} / ${student}`, () => {
+    const input = standaloneApplicationAdmission(null, null, null, {
+      texts: [application, student, '参考范文', 'A student-script example.',
+        continuation, '参考范文', 'Mia opened the garden gate.'],
+    })
+    assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
+    assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+    input.sidecar.groups[1].essays = standaloneApplicationAdmission('第四部分 写作', '略', '略').sidecar.groups[1].essays
+    assert.deepEqual(validateSourceReferences({ ...input,
+      sourceDocuments: input.sourceInput.documents }), [])
+    assert.throws(() => assertSourceReferenceAdmission(input),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+  })
+}
+
 const omittedHeadingEssays = standaloneApplicationAdmission('第四部分 写作', '略', '略').sidecar.groups[0].essays
+for (const [application, continuation] of [
+  ['（二）应用文写作', '（三）读后续写'],
+  ['(2) 应用文', '(3) 读后续写'],
+  ['（２）应用文写作', '（３）读后续写'],
+  ['66. 应用文', '67. 读后续写'],
+]) for (const student of ['（五）样卷', '(五)样卷：']) {
+  for (const restart of ['ordinary replacement', 'ordinary capture restart', 'scoring reuse']) {
+    test(`student-script ${restart}: ${application} / ${student}`, () => {
+      const texts = restart !== 'scoring reuse'
+        ? [application, '参考范文', 'A superseded official sample.', student,
+          '参考范文', 'A student-script example.', application, '参考范文',
+          restart === 'ordinary capture restart' ? 'A new official sample after the task restart.' : '略']
+        : [application, student, '参考范文', 'A student-script example.',
+          '应用文评分标准', '评分原则', '注意内容完整。', '参考范文', 'A reprinted example after scoring reuse.']
+      const input = standaloneApplicationAdmission(null, null, null, {
+        texts: [...texts, continuation, '参考范文', 'Mia opened the garden gate.'],
+      })
+      assert.deepEqual(input.sidecar.groups.map(group => group.essays.state),
+        [restart === 'ordinary capture restart' ? 'captured' : 'not_supplied', 'captured'])
+      assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+      input.sidecar.groups[1].essays = structuredClone(omittedHeadingEssays)
+      assert.deepEqual(validateSourceReferences({ ...input,
+        sourceDocuments: input.sourceInput.documents }), [])
+      assert.throws(() => assertSourceReferenceAdmission(input),
+        { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+    })
+  }
+}
+
+test('shared writing lifecycle is deterministic and preserves ordered source inputs', () => {
+  const input = standaloneApplicationAdmission(null, null, null, {
+    texts: ['66. 应用文', '（五）样卷', '参考范文', 'A student-script example.',
+      '67. 读后续写', '参考范文', 'Mia opened the garden gate.', '试题解析', '书面表达：'],
+  })
+  const evidence = JSON.parse(input.sourceInput.ocrSourceBytes.evidenceBytes)
+  const confirmation = JSON.parse(input.sourceInput.ocrSourceBytes.confirmationBytes)
+  const before = structuredClone({ materialization: input.materialization, evidence, confirmation })
+  const source = prepareSourceReferenceWritingItems(input.materialization, evidence, confirmation)
+  source.lines.forEach(Object.freeze)
+  const first = sourceReferenceWritingLifecycle(source.lines, source)
+  const second = sourceReferenceWritingLifecycle(source.lines, source)
+  assert.deepEqual([...first.items], [...second.items])
+  assert.equal(first.items.get('i3').ended, true)
+  assert.equal(first.items.get('i3').capturing, false)
+  assert.equal(first.items.get('i6').task, 'continuation')
+  assert.equal(first.items.get('i6').capturing, true)
+  assert.equal(first.items.get('i7').ended, true)
+  assert.equal(first.items.get('i8').ended, true)
+  assert.deepEqual({ materialization: input.materialization, evidence, confirmation }, before)
+})
+
 for (const { name, texts, expected, lastQuestion } of taskHeadingCases) {
   for (const divider of ['试题解析', '答案详解']) {
     for (const reprintHeading of ['书面表达：', '应用文：']) {
@@ -373,6 +449,11 @@ for (const heading of ['书面表达：', '应用文：']) {
         const input = standaloneApplicationAdmission(heading, 'Our class planted herbs.', '略', { prefix })
         assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['captured', 'not_supplied'])
         assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+        input.sidecar.groups[0].essays = structuredClone(omittedHeadingEssays)
+        assert.deepEqual(validateSourceReferences({ ...input,
+          sourceDocuments: input.sourceInput.documents }), [])
+        assert.throws(() => assertSourceReferenceAdmission(input),
+          { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
       }
     })
   }

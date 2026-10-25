@@ -43,7 +43,7 @@ function reseal(input) {
     confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)) }
 }
 
-function adjacentEssay({ label = '参考范文', combined = false, twoEntries = false } = {}) {
+function adjacentEssay({ label = '参考范文', combined = false, twoEntries = false, unlabeledLetter = false } = {}) {
   const input = scoringFiguresFixture()
   if (combined) {
     input.materialization.documents[1].role = input.sourceDocuments[1].role = 'question_and_answers'
@@ -58,10 +58,12 @@ function adjacentEssay({ label = '参考范文', combined = false, twoEntries = 
   const template = proof.observations[0]
   const rows = [
     ['第四部分 写作（满分40分）\n第一节', .08, .1, .8],
-    [label, .12, .1, .35],
+    ...(unlabeledLetter ? [['评分标准', .12, .1, .35], ['注意内容完整。', .16, .1, .35],
+      ['Dear Sam,', .20, .1, .35]] : [[label, .12, .1, .35]]),
     ...(twoEntries ? [['First sample closes.', .16, .1, .35], ['范文二', .20, .1, .35]] : []),
     ['Our original', .24, .1, .35], ['sample is short.', .1, .6, .3],
-    ['评分标准', .4, .1, .8], ['Source criterion closes.', .44, .1, .8],
+    ...(unlabeledLetter ? [['Yours,', .14, .6, .3], ['Alex', .18, .6, .3]]
+      : [['评分标准', .4, .1, .8], ['Source criterion closes.', .44, .1, .8]]),
   ]
   proof.observations = rows.map(([text, y, x, width], i) => ({
     ...structuredClone(template), text, observationId: `answers:interior:w${i}`,
@@ -79,6 +81,16 @@ function adjacentEssay({ label = '参考范文', combined = false, twoEntries = 
   sidecar.schemaVersion ??= 'source-references-v1'
   return { input, sidecar }
 }
+
+test('shared capture ownership of an unlabeled letter takes precedence over an open scoring label', () => {
+  const { input, sidecar } = adjacentEssay({ unlabeledLetter: true })
+  const paragraph = sidecar.groups[0].essays.entries[0].paragraphs.find(p => p.role === 'body')
+  assert.equal(paragraph.text, 'Our original sample is short.')
+  assert.equal(paragraph.continuationSources.length, 1)
+  const item = input.confirmation.documents[1].pages[2].orderedItems.find(item => item.text === 'Our original')
+  assert(sourceReferenceScoringScopes(input.confirmation, new Set(['answers'])).get(item.itemId))
+  assertSourceReferenceAdmission({ ...input, sidecar })
+})
 
 test('rereview P1-1 enlarged first fragment cannot include another essay entry', () => {
   const { input, sidecar } = adjacentEssay({ twoEntries: true })

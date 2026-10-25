@@ -4,8 +4,8 @@ import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
   SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
-import { LISTENING_REFERENCE_START, isSourceReferenceSampleLabel, SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
-import { sourceReferenceEssayTaskScopes as writingScopes } from './sourceReferenceWritingTask.mjs'
+import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
+import { sourceReferenceEssayTaskStates } from './sourceReferenceWritingTask.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -25,27 +25,23 @@ const hasSamePageContinuation = paragraph => {
 // A task heading, an explicit sample label and its immediate English text
 // independently disprove absence. Do not infer a sample from rubric prose or
 // a label followed by "略"/nothing. This check also runs for books without images.
-function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, materialization) {
-  const scopes = writingScopes(confirmation, answerIds, materialization)
+function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates) {
   const sampleLabel = /^(?:参考范文|考场作文|作答示例|范文|(?:(?:A|One)\s+)?Possible\s+Versions?)\s*[:：]?$/iu
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
-    let pending = null
-    for (const page of document.pages) for (const item of page.orderedItems) {
-      const task = scopes.get(item.itemId)
+    const items = document.pages.flatMap(page => page.orderedItems)
+    for (const [index, item] of items.entries()) {
+      const state = writingStates.get(item.itemId)
+      const previous = items[index - 1]
       const text = item.text.normalize('NFKC').trim()
-      if (LISTENING_REFERENCE_START.test(text)) {
-        pending = null
-        continue
-      }
-      if (pending && pending === task && !sampleLabel.test(text)
-        && /[A-Za-z]/u.test(text) && !/\p{Script=Han}/u.test(text)) {
-        const essays = sidecar?.groups.find(group => group.taskType === task)?.essays
+      if (state?.capturing && previous && state.labelItemId === previous.itemId
+        && sampleLabel.test(previous.text.normalize('NFKC').trim())
+        && !sampleLabel.test(text) && /[A-Za-z]/u.test(text) && !/\p{Script=Han}/u.test(text)) {
+        const essays = sidecar?.groups.find(group => group.taskType === state.task)?.essays
         if (essays?.state !== 'captured' || !essays.entries.length) {
           throw Object.assign(new Error('Confirmed labeled writing sample cannot be declared not_supplied'),
             { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
         }
       }
-      pending = task && sampleLabel.test(text) ? task : null
     }
   }
 }
@@ -99,7 +95,9 @@ export function assertSourceReferenceAdmission({
   const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
   const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
     .map(document => document.documentId))
-  assertLabeledSamplesPresent(sidecar, confirmation, answerIds, materialization)
+  const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
+  const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence)
+  assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates)
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
   if (!hasReferenceVisual && !figures.length && !continued) return
@@ -109,7 +107,6 @@ export function assertSourceReferenceAdmission({
   }
   const documents = materialization.documents.map(document => ({ ...document,
     bytes: sourceInput.documents.find(source => source.documentId === document.documentId)?.bytes }))
-  const evidence = JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8'))
   const resolved = resolveConfirmedNck1OcrEvidence({ paperId: materialization.paperId, documents,
     evidence, confirmation })
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
@@ -125,28 +122,25 @@ export function assertSourceReferenceAdmission({
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
   const illustratedDocuments = new Set(allExpected.map(reference => reference.source.documentId))
-  const scopes = writingScopes(confirmation, answerIds, materialization)
   const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds)
   const pictureItems = new Set(allExpected.flatMap(reference => reference.itemIds))
   const sourceOrder = new Map(), sourceOwners = new Map()
   for (const document of confirmation.documents) {
-    let previousTask = null, essayLabel = null, index = 0
+    let index = 0
     for (const page of document.pages) for (const item of page.orderedItems) {
       // Confirmation furniture and the resolver's picture-consumed identities
       // are the only permitted gaps. No geometric or text-value exclusions.
       if (pictureItems.has(item.itemId)
         || (item.observationIds.length && item.observationIds.every(id => page.furnitureObservationIds.includes(id)))) continue
       sourceOrder.set(item.itemId, { documentId: document.documentId, index: index++ })
-      const taskType = scopes.get(item.itemId)
-      if (taskType !== previousTask) essayLabel = null
-      previousTask = taskType
+      const writing = writingStates.get(item.itemId)
       const scoring = scoringScopes.get(item.itemId)
-      if (scoring) {
-        essayLabel = null
+      // A complete unlabeled letter may resume essays after a rubric. The
+      // actual shared capture state owns it even if a raw scoring label is open.
+      if (writing?.capturing) {
+        sourceOwners.set(item.itemId, { kind: 'essays', taskType: writing.task, labelItemId: writing.labelItemId })
+      } else if (scoring) {
         sourceOwners.set(item.itemId, { kind: 'scoring', ...scoring })
-      } else if (taskType) {
-        if (isSourceReferenceSampleLabel(item.text)) essayLabel = item.itemId
-        sourceOwners.set(item.itemId, { kind: 'essays', taskType, labelItemId: essayLabel })
       }
     }
   }

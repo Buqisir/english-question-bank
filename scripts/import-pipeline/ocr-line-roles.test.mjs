@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
-import { test } from 'node:test'
+import { test, after } from 'node:test'
+import { checkWritingRoleFixture, writingOwnershipChecks } from './ocr-writing-ownership-test-helpers.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import { LINE_ROLE_RULES, firstLineRole, matchesLineRole, inlineSampleParts } from './ocr-line-roles.mjs'
 import { referenceLineBoundary } from './ocr-proofread.mjs'
@@ -7,6 +8,7 @@ import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceRe
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 
 function scoringScopes(texts) {
+  checkWritingRoleFixture(texts)
   return sourceReferenceScoringScopes({ documents: [{ documentId: 'answers', pages: [{
     orderedItems: texts.map((text, index) => ({ itemId: `item-${index}`, text })),
   }] }] }, new Set(['answers']))
@@ -184,9 +186,17 @@ for (const rule of LINE_ROLE_RULES) {
     assert(samples.length > 0)
     for (const { context = {}, ...line } of samples) {
       assert.equal(Boolean(matchesLineRole(rule.id, computeLineFacts(line), context)), expected, line.text)
+      if (/^(?:writing|entry|paragraph)\./u.test(rule.id)) {
+        checkWritingRoleFixture([
+          ...(context.entryKind === 'scoring' ? ['评分原则'] : context.skipping ? ['范文分析'] : []),
+          line.text,
+        ], line)
+      }
     }
   })
 }
+
+after(() => console.log(`Writing role ownership differential: ${JSON.stringify(writingOwnershipChecks)}`))
 
 test('recording directions require an explicit per-recording question count', () => {
   for (const [text, expected] of [
