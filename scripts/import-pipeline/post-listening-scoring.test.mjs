@@ -133,6 +133,29 @@ for (const afterTranscript of [false, true]) test(
   assert.deepEqual(input.confirmation, before)
 })
 
+test('spaced rubric labels reopen scoring and capture entries through the same matching view', () => {
+  for (const boundary of ['听力原文', '答案详解']) {
+    for (const label of ['一、评 分 原 则', '各档次　给分范围和要求']) {
+      const input = textReferences([
+        ['第一节 应用文', '参考范文', 'Original application sample.',
+          '第二节 读后续写', '参考范文', 'Original continuation sample.', boundary],
+        ['第一节（满分１５分）', label, '1. 本题总分为15分，按五个档次进行评分。', 'Content (5 points)'],
+      ])
+      const before = structuredClone(input.confirmation)
+      const { groups } = input.capture()
+      assert.equal(groups[0].scoring.state, 'captured')
+      assert.equal(groups[0].scoring.entries[0].sourceLabel, label, 'matching must preserve the exact source label')
+      assert.match(JSON.stringify(groups[0].scoring), /Content \(5 points\)/u)
+      assert.deepEqual(groups.map(g => g.essays.entries.map(e => e.paragraphs.map(p => p.text))),
+        [[['Original application sample.']], [['Original continuation sample.']]])
+      const ownership = sourceReferenceScoringScopes(input.confirmation, new Set(['answers'])).get('p2:i3')
+      assert.equal(ownership.taskType, 'application')
+      assert.equal(ownership.sourceLabel, label)
+      assert.deepEqual(input.confirmation, before)
+    }
+  }
+})
+
 test('a bare scored section cannot reopen explanations without its exact score and adjacent rubric label', () => {
   for (const [heading, label] of [['第一节', '一、评分原则'], ['第一节（满分25分）', '一、评分原则'],
     ['第一节（满分15分）', '评分原则如下。'], ['第一节（满分15分）分析', '一、评分原则']]) {

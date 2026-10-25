@@ -1,5 +1,7 @@
 // Existing OCR producer predicates shared with scoring admission. Keep source
 // recognition identical without importing the CLI producer into the server.
+// Scoring predicates share this matching view; captured source text is untouched.
+export const writingRuleMatchingView = text => text.normalize('NFKC').replace(/\s+/gu, '')
 // The #586 sample parser is also the authority for Version one/two/three
 // (or 1–3), including its optional Chinese ordinal and whole-label boundary.
 export const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?<version>one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
@@ -27,18 +29,16 @@ export const WRITING_SCORING_OVERVIEW = /^(?:写作评分说明|写作评分标�
 // Explanations reopen only for an adjacent overview + fully named task rubric,
 // or the exact NCK1 section/score + rubric-label pair below.
 export function isExplicitScoringAppendixStart(text, nextText = '') {
-  const matchingView = value => value.normalize('NFKC').replace(/\s+/gu, '')
   return Boolean(scoredWritingRubricTask(text, nextText))
-    || (WRITING_SCORING_OVERVIEW.test(matchingView(text))
-      && WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(matchingView(nextText))))
+    || (WRITING_SCORING_OVERVIEW.test(writingRuleMatchingView(text))
+      && WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(writingRuleMatchingView(nextText))))
 }
 // NCK1's bare rubric headings identify a task only with its exact section/score
 // pair AND an adjacent complete rubric label. A bare section or prose mentioning
 // scoring cannot reopen explanations; do not recapture the reprinted samples.
 export function scoredWritingRubricTask(text, nextText = '') {
-  const normalize = value => value.normalize('NFKC').replace(/\s+/gu, '')
-  if (!SCORING_ENTRY_LABEL.test(normalize(nextText))) return null
-  const heading = normalize(text)
+  if (!SCORING_ENTRY_LABEL.test(writingRuleMatchingView(nextText))) return null
+  const heading = writingRuleMatchingView(text)
   return /^第一节\(满分15分\)[:：]?$/u.test(heading) ? 'application'
     : /^第二节\(满分25分\)[:：]?$/u.test(heading) ? 'continuation' : null
 }

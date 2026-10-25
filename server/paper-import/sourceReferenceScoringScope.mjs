@@ -2,10 +2,9 @@ import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
-  isExplicitScoringAppendixStart, scoredWritingRubricTask, isWritingVersionLabel,
+  isExplicitScoringAppendixStart, scoredWritingRubricTask, isWritingVersionLabel, writingRuleMatchingView,
 } from './sourceReferenceWritingRules.mjs'
 
-const normalize = text => text.normalize('NFKC').replace(/\s+/gu, '')
 // Preserve the scoring helper's existing alternate part title.
 const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
 
@@ -29,7 +28,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         }
         if (!appendixTask) { scopes.set(item.itemId, null); continue }
       }
-      const text = normalize(item.text)
+      const text = writingRuleMatchingView(item.text)
       // A transcript before the first writing task is ordinary source order.
       // After writing has started, only the explicit rubric appendix can reopen it.
       const firstWritingHeading = afterListening && !startedWriting
