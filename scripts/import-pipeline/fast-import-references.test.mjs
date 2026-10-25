@@ -177,6 +177,20 @@ for (const old of ['ocr-source-references-producer-v1', undefined]) {
   })
 }
 
+test('redo from chinese-numbering retains materialization and immutable OCR, invalidates reports and digests', async t => {
+  const { ctx } = fixture(t)
+  const before = snapshot(path.join(ctx.paperDir, 'materialization'))
+  json(path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json'), { finalized: true })
+  ctx.state.steps['chinese-numbering'] = completed({ changes: [] })
+  await requestedRedo(ctx, 'chinese-numbering')
+  assert.deepEqual(snapshot(path.join(ctx.paperDir, 'materialization')), before)
+  assert(ctx.state.steps['ocr-review'])
+  for (const name of ['chinese-numbering', 'spelling', 'ocr-correction-report', ...downstream]) {
+    assert(!ctx.state.steps[name], name)
+  }
+  assert(!Object.hasOwn(snapshot(ctx.paperDir), 'agent-ocr-correction-report-v2.json'))
+})
+
 for (const interrupted of ['source-references', 'pagination-plan', 'freeze', 'pdf-qa']) {
   test(`finish resumes after interruption in ${interrupted}`, async t => {
     const { ctx, calls, options } = fixture(t, 'old-version')

@@ -13,6 +13,7 @@
 //                             word closure and missing-figure hints for those pages and writes nothing.
 //   presentation <paperId>    after materialize, fill missing v4 sourcePresentation directions
 //                             from confirmed items; --output <path> previews without overwriting.
+//   numbering <paperId>       before spelling/digests, normalize only proved Chinese numbering.
 //   report-entries <paperId>  after pull-ocr-confirmation + materialize, locate the receipt's
 //                             real OCR repairs in the current Materialization for
 //                             `review.mjs finalize-ocr-correction-report`.
@@ -54,6 +55,8 @@ import { createWritingScope, createReferenceCapture } from './ocr-section-state.
 import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions.mjs'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
+import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
+import { computeOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
 import { reobserveRegions } from './ocr-region-reobserve.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
 export { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
@@ -933,11 +936,7 @@ function valueAt(rootValue, pointer) {
     value?.[raw.replace(/~1/gu, '/').replace(/~0/gu, '~')], rootValue)
 }
 
-function reportEntries(paperId) {
-  const { paperDir, work } = context(paperId)
-  const receipt = readJson(path.join(paperDir, 'signals', 'agent-proofreading-receipt.json'), 'Agent OCR receipt')
-  const materialization = readJson(
-    path.join(paperDir, 'materialization', 'nck1-source-materialization-v1.json'), 'Materialization')
+export function buildOcrReportEntries(receipt, materialization) {
   const strings = walkStrings(materialization, '', [])
   const entries = []
   const skipped = []
@@ -945,7 +944,12 @@ function reportEntries(paperId) {
     if (note.kind !== 'ocr_repair' || joinTokens(note.ocrText.split('\n')) === note.correctedText) continue
     const stem = /^(\d+)\.\s(.+)$/su.exec(note.correctedText)
     const candidates = strings.filter(({ pointer, value }) => value === note.correctedText
-      || (stem && value === stem[2] && /\/questions\/\d+\/stem$/u.test(pointer)))
+      || (stem && value === stem[2] && /\/questions\/\d+\/stem$/u.test(pointer))
+      || computeOcrNumberingProjection({}, {
+        category: 'ocr_misrecognition', after: value,
+        sourceLocator: { documentId: note.documentId, page: note.page },
+        materializationTarget: { jsonPointer: pointer },
+      }, materialization, note.correctedText))
     // Text runs carry no locator of their own; the nearest ancestor with `source` owns the page.
     const ownerSource = (pointer) => {
       const parts = pointer.split('/')
@@ -984,6 +988,15 @@ function reportEntries(paperId) {
       category: 'ocr_misrecognition',
     })
   }
+  return { entries, skipped }
+}
+
+function reportEntries(paperId) {
+  const { paperDir, work } = context(paperId)
+  const receipt = readJson(path.join(paperDir, 'signals', 'agent-proofreading-receipt.json'), 'Agent OCR receipt')
+  const materialization = readJson(
+    path.join(paperDir, 'materialization', 'nck1-source-materialization-v1.json'), 'Materialization')
+  const { entries, skipped } = buildOcrReportEntries(receipt, materialization)
   const output = path.join(work, 'ocr-correction-entries.json')
   writeJson(output, { entries })
   console.log(JSON.stringify({
@@ -995,6 +1008,17 @@ function reportEntries(paperId) {
     skippedItems: skipped,
     next: `node scripts/import-pipeline/review.mjs finalize-ocr-correction-report ${paperId} --input ${output}`,
   }, null, 2))
+}
+
+function numbering(paperId) {
+  const { paperDir } = context(paperId)
+  const file = path.join(paperDir, 'materialization', 'nck1-source-materialization-v1.json')
+  const result = normalizeMaterializationNumbering(readJson(file, 'Materialization'))
+  if (result.changes.length && existsSync(path.join(paperDir, 'agent-ocr-correction-report-v2.json'))) {
+    fail(`已 finalized 的 OCR 报告须正式重建：fast-import.mjs after-proofread ${paperId} --redo-from chinese-numbering`)
+  }
+  if (result.changes.length) writeJson(file, result.materialization)
+  console.log(JSON.stringify({ ok: true, ruleVersion: result.ruleVersion, changes: result.changes }, null, 2))
 }
 
 function worksheets(paperId) {
@@ -1775,9 +1799,10 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'compile') compile(paperId)
   else if (command === 'report-entries') reportEntries(paperId)
   else if (command === 'presentation') presentation(paperId)
+  else if (command === 'numbering') numbering(paperId)
   else if (command === 'references') references(paperId)
   else if (command === 'figure-sizes') figureSizes(paperId)
-  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|presentation|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
+  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
 } catch (error) {
   fail(error.stack || String(error))
 }
