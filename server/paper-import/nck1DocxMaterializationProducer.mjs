@@ -1198,7 +1198,7 @@ function maskWritingGlosses(text) {
   })
 }
 
-function writingSampleText(answerBody, from, to) {
+function writingSampleText(answerBody, from, to, sampleRanges) {
   const omitted = writingSampleOmission(answerBody, from, to)
   // null is the existing missing officialModelAnswer representation; an
   // empty string still signals ambiguous boundaries to the caller.
@@ -1219,6 +1219,20 @@ function writingSampleText(answerBody, from, to) {
   const startsWithLaterAlternative = labels.length && labels[0] > from
     && /(?:范文|作文|样例|示例|Version)\s*(?:[二三2-3]|two|three)(?:】)?\s*[:：]?$/iu
       .test(normalized(answerBody[labels[0]].text))
+  if (labels.length && /^Version\s+(?:one|1)\s*[:：]?$/iu.test(normalized(answerBody[labels[0]].text))) {
+    // A newly recognized first-version label may follow a rubric, but never
+    // erase an English title, salutation or prose already started in this part.
+    let scoringStarted = false
+    for (const item of answerBody.slice(from, labels[0])) {
+      if (item.kind !== 'paragraph') return ''
+      const text = normalized(item.text)
+      if (!text || WRITING_SAMPLE_LABEL.test(text)) continue
+      if (WRITING_SAMPLE_BOUNDARY.test(text) || writingScoringLine(text)
+        || WRITING_SAMPLE_COMMENTARY.test(text)) {
+        scoringStarted = true
+      } else if (!scoringStarted || /[A-Za-z]/u.test(text)) return ''
+    }
+  }
   const start = labels.length && !startsWithLaterAlternative
     ? labels[0] + (labels.length === 1 ? 1 : 0) : from
   const glossMaskedLines = maskWritingGlosses(answerBody.slice(start, to)
@@ -1245,18 +1259,24 @@ function writingSampleText(answerBody, from, to) {
   const unlabelledStart = !labels.length || startsWithLaterAlternative
   if (unlabelledStart && /\p{Script=Han}/u.test(first)
     && /\p{Script=Han}/u.test(maskWritingGlosses(lines.join('\n')).split('\n')[0])) return ''
-  return lines.join('\n')
+  const text = lines.join('\n')
+  sampleRanges.push({
+    text,
+    items: answerBody.slice(start, end)
+      .filter(item => item.kind === 'paragraph' && normalized(item.text)),
+  })
+  return text
 }
 
-export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
+function officialWritingSamples(answerBody, answerDocumentId, issues, sampleRanges = []) {
   // OCR engines may return one source region containing several visually
   // distinct paragraphs. Split only for this answer-sample boundary parser;
   // every derived paragraph retains the exact source locator. DOCX/PDF
   // paragraph streams are unchanged by this normalization.
-  let sampleBody = answerBody.flatMap((item) =>
+  let sampleBody = answerBody.flatMap((item, sourceOrder) =>
     item.kind === 'paragraph' && String(item.text).includes('\n')
-      ? String(item.text).split('\n').map((text) => ({ ...item, text }))
-      : [item])
+      ? String(item.text).split('\n').map((text, sourceLine) => ({ ...item, text, sourceOrder, sourceLine }))
+      : [{ ...item, sourceOrder, sourceLine: 0 }])
   // Answer books can repeat the complete writing section in their explanations.
   // Only an explicit explanation divider after the key's writing heading closes
   // that key; detailed-only sources with explanations before writing stay intact.
@@ -1345,8 +1365,8 @@ export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues
     )
     return { application: null, continuation: null }
   }
-  const application = writingSampleText(sampleBody, applicationHeadings[0] + 1, continuationHeadings[0])
-  const continuation = writingSampleText(sampleBody, continuationHeadings[0] + 1, sampleBody.length)
+  const application = writingSampleText(sampleBody, applicationHeadings[0] + 1, continuationHeadings[0], sampleRanges)
+  const continuation = writingSampleText(sampleBody, continuationHeadings[0] + 1, sampleBody.length, sampleRanges)
   if (application === '' || continuation === '') {
     addIssue(
       issues,
@@ -1358,6 +1378,10 @@ export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues
     return { application: null, continuation: null }
   }
   return { application, continuation }
+}
+
+export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
+  return officialWritingSamples(answerBody, answerDocumentId, issues)
 }
 
 function activeAnswers(paperId, answerMap, issues, answerDocumentId) {
@@ -1383,15 +1407,27 @@ function closesWritingSampleWordCount(answerBody, index, answerDocumentId) {
   const item = answerBody[index]
   if (item?.kind !== 'paragraph') return false
   let ending = normalized(item.text)
+  let firstCountOrder = index
   // Wuxi prints "(76" at the end of the essay line and "words)" on
   // the next one. Never treat an unpaired suffix as a closed boundary.
   if (/^(?:words?|词)\s*\)$/iu.test(ending) && answerBody[index - 1]?.kind === 'paragraph') {
     ending = normalized(`${answerBody[index - 1].text} ${item.text}`)
+    firstCountOrder -= 1
   }
   if (!/\(\s*\d+\s*(?:words?|词)\s*\)$/iu.test(ending)) return false
-  const samples = parseOfficialWritingSamples(answerBody, answerDocumentId, [])
-  return Object.values(samples).some(sample => sample && normalized(sample).endsWith(ending)
-    && /[A-Za-z]/u.test(normalized(sample).replace(/\(\s*\d+\s*(?:words?|词)\s*\)$/iu, '')))
+  const ranges = []
+  const issues = []
+  officialWritingSamples(answerBody, answerDocumentId, issues, ranges)
+  if (issues.length) return false
+  const lastSourceLine = String(item.text).split('\n').findLastIndex(line => normalized(line))
+  return ranges.some(range => {
+    const last = range.items.at(-1)
+    // Bind both count fragments to this exact retained source range. Logical
+    // line position matters when OCR packs prose, scoring and a count together.
+    return last?.sourceOrder === index && last.sourceLine === lastSourceLine
+      && [firstCountOrder, index].every(order => range.items.some(part => part.sourceOrder === order))
+      && /[A-Za-z]/u.test(normalized(range.text).replace(/\(\s*\d+\s*(?:words?|词)\s*\)$/iu, ''))
+  })
 }
 
 function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues }) {

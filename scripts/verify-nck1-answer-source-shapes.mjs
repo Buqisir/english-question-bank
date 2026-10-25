@@ -384,7 +384,7 @@ for (const [ending, accepted] of [
 
 // 9+1: scoring precedes the explicitly labelled alternatives, and scoring
 // after a sample plus the whole-line transcript title must remain outside it.
-for (const sampleLabel of ['Version one:', '参考范文：', 'One possible version']) {
+for (const sampleLabel of ['Version one:', 'Version 1:', '参考范文：', 'One possible version']) {
   const fixture = makeSyntheticNck1DocxFixture({
     listening: true, listeningHeading: '【听力文本】',
     transformXml: xml => xml
@@ -413,6 +413,58 @@ for (const scoringMention of ['评分时可参考 Version one 的结构。', 'Ve
   assertRejected(produceNck1DocxMaterialization({
     paperId: fixture.paperId, documents: fixture.sourceDocuments,
   }), fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+}
+// A version label cannot erase an essay title, salutation or sentence already
+// present before it, including the review's exact two-drafts example.
+for (const label of ['Version one:', 'Version 1:']) {
+  for (const opening of [
+    'Should We Join the Reading Club?',
+    'Dear Mr. Smith,',
+    'Our club compared two drafts for the final announcement.',
+  ]) {
+    const fixture = makeSyntheticNck1DocxFixture({
+      listening: true,
+      transformXml: xml => xml.replace(broadcastParagraph('Should We Join the Reading Club?'),
+        [opening, 'Our club compared two drafts for the final announcement.', label]
+          .map(broadcastParagraph).join('')),
+    })
+    assertRejected(produceNck1DocxMaterialization({
+      paperId: fixture.paperId, documents: fixture.sourceDocuments,
+    }), fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+  }
+}
+// Equal text in an earlier sample is not proof of ownership of this count.
+// Also cover a split count and several logical lines sharing one source item.
+for (const tail of [
+  ['评分标准：以下不是范文。', 'Unknown source content after the scoring section.', '(76 words)'],
+  ['评分标准：以下不是范文。', 'Unknown source content after the scoring section. (76', 'words)'],
+  ['评分标准：以下不是范文。\nUnknown source content after the scoring section.\n(76 words)'],
+]) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('听力原文'), '')
+      .replace('Join us on Friday to read and share ideas.', 'Join us on Friday to read and share ideas. (76 words)')
+      .replace(broadcastParagraph(expectedWritingSamples.continuation.split('\n')[1]),
+        [expectedWritingSamples.continuation.split('\n')[1], ...tail].map(broadcastParagraph).join('')),
+  })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+{
+  // Even one sourceIndex cannot prove ownership if its retained sample ends
+  // before later logical lines containing scoring and an unrelated count.
+  const last = expectedWritingSamples.continuation.split('\n')[1]
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    transformXml: xml => xml.replace(broadcastParagraph('听力原文'), '')
+      .replace('Join us on Friday to read and share ideas.', 'Join us on Friday to read and share ideas. (76 words)')
+      .replace(broadcastParagraph(last), broadcastParagraph(
+        `${last}\n评分标准：以下不是范文。\nUnknown source content.\n(76 words)`)),
+  })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
 }
 for (const listeningHeading of ['【听力文本】', '【听力原文】', '听力材料']) {
   const fixture = makeSyntheticNck1DocxFixture({ listening: true, listeningHeading })
