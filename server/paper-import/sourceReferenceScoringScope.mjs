@@ -5,6 +5,7 @@ import {
   isExplicitScoringAppendixStart, scoredWritingRubricTask, isWritingVersionLabel, writingRuleMatchingView,
   OBJECTIVE_ANSWER_FIGURE_MARKER,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
+  isSourceReferenceSampleLabel,
 } from './sourceReferenceWritingRules.mjs'
 
 // Preserve the scoring helper's existing alternate part title.
@@ -119,7 +120,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
       const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(labelView)
       // A citation such as “范文1中…” is rubric prose. NFKC also handles
       // full-width/circled ordinals; spaces distinguish an inline English body.
-      const sampleLabel = /^(?:[一二三四五六七八九十]+、)?(?:参考)?范文(?:\d+|[一二三四五六七八九十]+)?(?:$|[:：]|\s+[A-Za-z])/u.test(labelView)
+      const sampleLabel = isSourceReferenceSampleLabel(item.text)
       const scoringLabel = isScoringLabel(item.text, scoringTask)
       if (!ended && taskType && scoringLabel) label = item
       // A reprinted "写作二" starts the sample between rubric sections, not

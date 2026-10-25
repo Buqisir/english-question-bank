@@ -95,7 +95,7 @@ function context(paperId) {
     bytes: new Uint8Array(readFileSync(path.join(paperDir, document.path))),
   }))
   const work = path.resolve(option('--work') || path.join(root, 'imports/ocr-proofread', paperId))
-  return { paperId, paperDir, documents, work }
+  return { paperId, paperDir, documents, work, paperName: manifest.provenance?.paperName }
 }
 
 function pad(value) {
@@ -1222,7 +1222,8 @@ function isObjectiveAnswerGrid(rows) {
 }
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
-export function buildSourceReferences(materialization, evidence, confirmation, { sourceDocuments = [] } = {}) {
+export function buildSourceReferences(materialization, evidence, confirmation,
+  { sourceDocuments = [], paperName = materialization.paperName } = {}) {
   const answerDocuments = materialization.documents.filter((document) =>
     ['official_answers', 'question_and_answers'].includes(document.role))
   if (answerDocuments.length !== 1) fail('Expected exactly one answer-bearing document')
@@ -1320,6 +1321,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       }
     }
   }
+  const fullTitles = [...firstPageTitles, ...(paperName ? [writingRuleMatchingView(paperName)] : [])]
   const titleFurniture = new WeakSet()
   for (const [index, line] of lines.entries()) {
     if (line.figure || line.table || line.page === 1 || !firstPageTitles.has(writingRuleMatchingView(line.text))) continue
@@ -1327,15 +1329,21 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     if (!(facts.region?.y < .12) || !matchesLineRole('furniture.repeated-title', facts, { repeated: true })) continue
     titleFurniture.add(line)
     const header = [line]
-    // A centered subtitle may be a separate confirmed item. Its whole block
-    // must still fit the existing title furniture's edge/height/text bounds.
+    // A subtitle needs independent full-title evidence, not the keyword from
+    // the already matched title authorizing arbitrary text beneath it.
     for (const next of lines.slice(index + 1)) {
       if (next.page !== line.page || next.figure || next.table) break
       const nextFacts = factsFor(next)
       if (nextFacts.left < facts.left || nextFacts.right > facts.right || nextFacts.region.y < facts.region.y) break
-      const boxes = [...header, next].flatMap(item => item.boxes)
-      const combined = computeLineFacts({ text: [...header, next].map(item => item.text).join(''), boxes })
-      if (!matchesLineRole('furniture.repeated-title', combined, { repeated: true })) break
+      // Keep the existing title-block height cap when selecting a possible
+      // subtitle; only the independent full title authorizes its exclusion.
+      if (nextFacts.region.y + nextFacts.region.height - facts.region.y > .06) break
+      const candidate = writingRuleMatchingView([...header, next].map(item => item.text).join(''))
+      if (firstLineRole('entry-label', nextFacts) || /^第[一二三四五六七八九十\d]+档|^(?:零分|不得分)/u.test(nextFacts.nfkc)
+        || !fullTitles.some(title => title.startsWith(candidate))) {
+        review.push({ itemId: next.itemId, issue: 'unproven title subtitle retained for review' })
+        break
+      }
       titleFurniture.add(next)
       header.push(next)
     }
@@ -1505,7 +1513,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     const chineseBody = sectionLines.filter(line => !line.figure && !line.table
       && factsFor(line).hasHan && !firstLineRole('entry-label', factsFor(line)))
     for (const line of chineseBody) {
-      const column = chineseBody.filter(other => other.page === line.page
+      const column = chineseBody.filter(other => other !== line && other.page === line.page
         && Math.abs(other.left - line.left) <= REFERENCE_MARGIN_TOLERANCE)
       columnMargins.set(line, { right: Math.max(...column.map(other => other.right)) })
     }
@@ -1738,13 +1746,13 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
 // from line geometry (first-line indent or a short previous line), never from the Materialization,
 // so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
 function references(paperId) {
-  const { paperDir, work, documents } = context(paperId)
+  const { paperDir, work, documents, paperName } = context(paperId)
   const directory = path.join(paperDir, 'materialization')
   const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
   const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
   const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
   const { groups, review, structuredScoring, schemaVersion } = buildSourceReferences(materialization, evidence, confirmation,
-    { sourceDocuments: documents })
+    { sourceDocuments: documents, paperName })
   const output = path.join(work, 'source-references-draft.json')
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups })

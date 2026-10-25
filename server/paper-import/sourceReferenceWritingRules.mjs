@@ -7,6 +7,17 @@ export const writingRuleMatchingView = text => text.normalize('NFKC').replace(/\
 export const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?<version>one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 export const isWritingVersionLabel = text =>
   Boolean(WRITING_SAMPLE_LABEL.exec(text.normalize('NFKC').trim())?.groups?.version)
+// The producer's complete word-count/numbered label grammar is also used by
+// scoring ownership. Inline English text may follow a complete source label;
+// Chinese citations such as “范文1中…” never match that label.
+export const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
+export const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
+export function isSourceReferenceSampleLabel(sourceText) {
+  const text = sourceText.normalize('NFKC').trim()
+  const complete = label => WRITING_SAMPLE_LABEL.test(label)
+    || WORD_COUNT_SAMPLE_LABEL.test(label) || NUMBERED_SAMPLE_LABEL.test(label)
+  return complete(text) || complete(text.match(/^(.*?)\s+(?=[A-Za-z])/u)?.[1] ?? '')
+}
 // Answer keys may number writing as the third part when listening is absent.
 export const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
 // Answer-first keys may name the task without a writing-part or section number.

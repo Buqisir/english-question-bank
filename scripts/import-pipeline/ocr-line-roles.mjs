@@ -7,6 +7,7 @@ import {
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isWritingVersionLabel, writingRuleMatchingView,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
+  WORD_COUNT_SAMPLE_LABEL, NUMBERED_SAMPLE_LABEL,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
@@ -15,8 +16,6 @@ const TRANSCRIPT_END = /^(?:第[一二三四五六]部分|参考|写作|阅读|�
 const SPEAKER_LABEL = /^\(?[A-Z][A-Za-z]{0,15}(?:\.?\s[A-Z][A-Za-z]{0,15})?\)?\s*[:：]/u
 
 const ENTRY_LABEL = /^(?:[一二三四五六七八九十]+、\s*)?(参考范文|考场作文|作答示例\s*|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Versions?|评分(?:原则|标准|说明|细则|要求|建议)|【[^】]+】|\[[^\]]+\])[:：]?$/iu
-const WORD_COUNT_SAMPLE_LABEL = /^参考范文(?:[一二三四五六七八九十]+)?\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))[:：]?$/u
-const NUMBERED_SAMPLE_LABEL = /^范文\s*(?:[一二三四五六七八九十]+|\d+)\s*(?:（\s*\d+\s*词\s*）|\(\s*\d+\s*词\s*\))?[:：]?$/u
 const EXAMPLE_SAMPLE_LABEL = /^【示例[一二三四五六七八九十]+】(?:\s*[:：]?\s*\p{Script=Han}[^\r\n]*)?$/u
 const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Version[）)]$/iu
 const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u

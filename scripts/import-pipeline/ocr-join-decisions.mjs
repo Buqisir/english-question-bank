@@ -76,20 +76,22 @@ function referencePolicy(input) {
   const { previous, current, geometry, roles, location } = input
   const boundary = referenceBoundaryFromFacts(previous, current, geometry.margin, geometry.previousMargin)
   const crossPage = referenceCrossPageRule(input, boundary)
-  const { indented, previousShort, pageTurn, continues } = boundary
+  const { indented, previousShort, pageTurn } = boundary
+  const lettered = /^(?:[a-z][.)]|\([a-z]\))\s/u.test(current.trimmed)
+  const continues = boundary.continues && !lettered
   // Veto geometric false starts only within an existing reference body.
   // Keep the stricter cross-page proof and semantic role boundaries intact.
   const previousTail = (previous?.text || '').replace(/[\s”’"'）)\]】」』]+$/u, '')
   const numberedOrLabel = /^(?:[一二三四五六七八九十]+、|\([一二三四五六七八九十\d]+\)|\d+[.、)]|[·●]|\p{Script=Han}{1,8}[:：])/u.test(current.nfkc.trim())
     || /^[①-⑳]/u.test(current.trimmed)
   const unfinished = !pageTurn && roles.hasParagraph && previous?.role === 'body'
-    && !roles.special && !roles.afterClosing && !roles.numbered
+    && !roles.special && !roles.afterClosing && !roles.numbered && !lettered
     && ((current.startsLower && previousTail && !/[.!?:]$/u.test(previousTail))
       || (current.startsHan && /\p{Script=Han}/u.test(previousTail)
         && referenceLineIsFull(previous, geometry.previousColumnMargin || geometry.previousMargin || geometry.margin)
         && !/[。！？；：]$/u.test(previousTail) && !numberedOrLabel))
   const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues && !unfinished
-    && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered))
+    && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered || lettered))
   const reviews = []
   if (crossPage?.resolution === 'separate'
     || (!crossPage && pageTurn && !roles.special && !roles.afterClosing && !indented && !previousShort)) {

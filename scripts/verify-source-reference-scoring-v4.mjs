@@ -250,3 +250,5 @@ await import('../server/paper-import/sourceReferencePngSizing.test.mjs')
 // Covers producer → independent admission across transcript/explanation
 // boundaries, including the exact overview + task-rubric reopening pair.
 await import('./import-pipeline/post-listening-scoring.test.mjs')
+// Retain the adversarial source fidelity and continuation ownership cases in CI.
+await import('./import-pipeline/ocr-reference-review.test.mjs')

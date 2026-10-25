@@ -103,9 +103,10 @@ test('Liaoning-shaped scoring wrap keeps left-bottom and right-top provenance se
   const first = '2. 情节合理性：情绪转变是否自然（从愤怒到体谅需有过'
   const second = '渡），冲突解决方式是否符合“亲情包容”的核心；'
   const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line('前项评分完整。', .75, .083123, .407221),
     line(first, .804038, .083123, .407221), line(second, .072447, .528128, .329134)]])
   const output = buildSourceReferences(...input)
-  const p = output.groups[0].scoring.entries[0].paragraphs[0]
+  const p = output.groups[0].scoring.entries[0].paragraphs[1]
   assert.equal(p.text, first + second)
   assert.deepEqual(p.source.locator.region, { x: .083123, y: .804038, width: .407221, height: .02 })
   assert.equal(p.continuationSources.length, 1)
@@ -177,13 +178,14 @@ test('full Chinese reference lines use their own column instead of the other col
   assert.equal(scoring.entries[0].paragraphs[0].text, '说明功能：提供个性化词汇推送。')
 })
 
-function titleFixture({ title = '联合考试高三英语', y = .06 } = {}) {
+function titleFixture({ title = '联合考试高三', y = .06 } = {}) {
   const input = fixture([
     [...heading, line('A complete sample.', .28), line('评分标准', .32), line('前页评分完整。', .4)],
     [line(title, y, .25, .5), line('英语', y + .034, .48, .04), line('后页评分仍须保留。', .25)],
   ])
   // The original paper's title is confirmed independently from the answer book.
-  const original = fixture([[line('联合考试高三英语', .06, .25, .5)]])
+  input[0].paperName = '联合考试高三英语试题'
+  const original = fixture([[line('联合考试高三', .06, .25, .5)]])
   input[0].documents.push({ ...original[0].documents[0], documentId: 'question', role: 'question_source' })
   input[1].documents.push({ ...original[1].documents[0], documentId: 'question' })
   input[2].documents.push({ ...original[2].documents[0], documentId: 'question' })
@@ -202,7 +204,7 @@ test('reprinted top title paragraphs are furniture without ending scoring captur
 for (const options of [{ y: .4 }, { title: '另一份高三考试' }]) test(
   `title furniture requires an edge and the same confirmed title: ${JSON.stringify(options)}`, () => {
   const output = buildSourceReferences(...titleFixture(options))
-  assert(JSON.stringify(output.groups[0].scoring).includes(options.title || '联合考试高三英语'))
+  assert(JSON.stringify(output.groups[0].scoring).includes(options.title || '联合考试高三'))
 })
 
 for (const [name, previousText] of [
