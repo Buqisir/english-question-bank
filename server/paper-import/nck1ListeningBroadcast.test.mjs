@@ -68,3 +68,60 @@ test('existing single paragraph broadcasts remain accepted', () => {
     cues.transition = [transition[0], transition.slice(1).join('')]
   }).review.required, [])
 })
+
+test('文章大意 heading ends the listening transcript before reading explanations', () => {
+  for (const heading of ['文章大意：本文是一篇应用文。', '【文章大意】：本文是一篇应用文。',
+    '文章大意', '【文章大意】本文是一篇应用文。']) {
+    const fixture = makeSyntheticNck1DocxFixture({ listening: true, transformXml: xml => xml
+      .replace('Synthetic transcript 10.', 'Leave a positive impact on our planet. Thank you.')
+      .replace(paragraph('【答案解析】'), [heading, '阅读理解解析。', '评分标准：按档次给分。'].map(paragraph).join('')),
+    })
+    const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+    assert.deepEqual(result.review.required, [], heading)
+    assert.equal(result.materialization.listening.transcript.at(-1).text,
+      'Leave a positive impact on our planet. Thank you.', heading)
+  }
+})
+
+test('文章大意 within listening speech does not end the transcript', () => {
+  const speech = 'M: The phrase 文章大意 means the main idea. Keep reading. Thank you.'
+  const fixture = makeSyntheticNck1DocxFixture({ listening: true, transformXml: xml => xml
+    .replace('Synthetic transcript 10.', speech),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  assert.deepEqual(result.review.required, [])
+  assert.equal(result.materialization.listening.transcript.at(-1).text, speech)
+})
+
+test('文章大意 commentary before a labelled writing sample preserves both model answers', () => {
+  const fixture = makeSyntheticNck1DocxFixture()
+  const baseline = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  const changed = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.replace(
+    paragraph('第二节：读后续写（满分25分）'),
+    ['第二节：读后续写（满分25分）', '文章大意：本文讲述了学生归还笔记本的故事。',
+      'One possible version:'].map(paragraph).join(''),
+  ) })
+  const result = produceNck1DocxMaterialization({ paperId: changed.paperId, documents: changed.sourceDocuments })
+  const samples = produced => produced.materialization.groups.filter(group => group.writingTask)
+    .map(group => group.writingTask.officialModelAnswer)
+  assert.equal(result.disposition, 'ready_for_verification')
+  assert.deepEqual(result.review.required, [])
+  assert.equal(samples(baseline).length, 2)
+  assert(samples(baseline).every(sample => typeof sample === 'string' && sample.length > 0))
+  assert.deepEqual(samples(result), samples(baseline))
+})
+
+test('文章大意 and answer lines in the same source paragraph preserve the answer key', () => {
+  const fixture = makeSyntheticNck1DocxFixture()
+  const baseline = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  const changed = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.replace(
+    paragraph('21-23ABC24-27DABC28-31BCDA32-35CDAB'),
+    '<w:p><w:r><w:t>文章大意：本文是一篇应用文。</w:t><w:br/><w:t>21-23ABC24-27DABC28-31BCDA32-35CDAB</w:t></w:r></w:p>',
+  ) })
+  const result = produceNck1DocxMaterialization({ paperId: changed.paperId, documents: changed.sourceDocuments })
+  const answers = produced => produced.materialization.answers.map(({ questionId, value }) => ({ questionId, value }))
+  assert.equal(result.materialization.answers.length, baseline.materialization.answers.length)
+  assert.deepEqual(answers(result), answers(baseline))
+  assert.equal(result.disposition, 'ready_for_verification')
+  assert.deepEqual(result.review.required, [])
+})
