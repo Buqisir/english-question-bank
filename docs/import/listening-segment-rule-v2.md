@@ -1,4 +1,4 @@
-# 听力导航切段：listening-segment-rule-v4
+# 听力导航切段：listening-segment-rule-v5
 
 实现仅位于 `scripts/import-pipeline/`，沿用服务端 `listening-review-v1` 契约。
 Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻骨架组收窄裁窗，由已安装的 Whisper
@@ -11,7 +11,7 @@ Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻�
 
 | 参数 | 值 |
 | --- | --- |
-| 规则 / 等价表版本 | `listening-segment-rule-v4` / `listening-equivalences-v4` |
+| 规则 / 等价表版本 | `listening-segment-rule-v5` / `listening-equivalences-v5` |
 | 首尾连续锚 | 6 词；歧义扩为 12 词，仍歧义则复核 |
 | 可选模糊锚 | 默认关闭；至少 20 词，12 词连续锚中恰好 1 处替换，每遍另一端须精确 |
 | 短材料 / 其他材料 | 少于 40 词：源词匹配率和含插入惩罚的编辑相似度均 ≥0.95；其他均 ≥0.90 |
@@ -61,7 +61,7 @@ Owner 2026-10-23：当全部遍次首尾与正文门槛都通过时，
 `READINGS_OVERLAP`。`boundaryAdjustments` 保留原边界、静音区间及共同分界点。
 
 等价规则先于关键字门禁执行，源文与 ASR 使用同一规范化路径；全部插入、删除、替换仍检查
-规范化后的两侧数值、序数、货币、否定和时间。当前版本 `listening-equivalences-v4`
+规范化后的两侧数值、序数、货币、否定和时间。当前版本 `listening-equivalences-v5`
 保留下列 v2 规则，并追加文末列出的有限缩写规则：
 
 | 类别 | 确定等价范围 | 保守边界 |
@@ -86,6 +86,22 @@ Apple attributed run 可包含多个词。新路径先保留字符范围，再�
 `interpolated_within_run` 或 `interpolated_within_normalized_span`；只有原 run 的最外
 规范化 token 可证明发音边界，内部 token 不会获得新的物理边界。表达式不能跨越失败、
 倒序时间戳、超过 2 秒的空档或 segment 边界。源词原文同样按字符范围映射，不覆盖源文。
+
+v5 追加连字符复合词等价：比较任一侧有字母复合词 `a-b`（可多段）时，
+仅接受完全拼接的 `ab` 或空格分词 `a b`，大小写不敏感，双向成立。
+`second-hand` / `secondhand` / `second hand` 对齐为相同词序列；
+`second` 缺词和 `second hard` 错词不等价。另一组的连字符不能授权当前组两侧都没有
+连字符的拼接/拆词。既有序数、数字、年份表达式优先保留原规则。
+两侧保留原表达式与 `compoundValue`；ASR 扩展沿用完整原 run 范围，
+不跨无效/倒序时间戳、超过 2 秒停顿或 segment，不制造内部播放边界。
+后续时间或上下文转换将复合词原拼写保存在 `compoundEvidence`，继续核对许可；
+仅 segment/其他组的 `half-past` 候选不能授权两侧无连字符的 `halfpast` / `half past`。
+正常的 `half past seven` / `7:30` 等价保持不变。
+
+这个等价会改变 v4 判定，因此新 attempt 使用 v5 和新的规则代码摘要。
+历史实现通过 Git 和保留的 attempt 证据追溯，不维护没有运行消费者的旧规则副本。
+下述 `--replay-attempt` 命令明确复用旧 ASR 并生成当前 v5 的新 attempt，
+不按旧版本重算、不替换或改签历史结果。
 
 Apple 缺词而 Whisper 提供完整唯一证据时允许通过；身份、次数、顺序或物理边界出现
 可证实冲突时保留 `review_required`。所有 unresolved 组都不输出已批准 playback。
@@ -170,7 +186,7 @@ node scripts/import-pipeline/fast-import.mjs finish <paperId>
 ```
 
 只有该 flag 才保证重算阶段不启动 ASR；单独 `--redo-from` 仍可能调度 Whisper。
-旧版本或规则代码 SHA 不同的已完成缓存不能冒充当前 v4，编排会提示上述重算命令。redo 保留旧证据，但会归档后续
+旧版本或规则代码 SHA 不同的已完成缓存不能冒充当前 v5，编排会提示上述重算命令。redo 保留旧证据，但会归档后续
 sidecar/PDF 完成标记；`finish` 可能需要重新完成下游产物。批次私有 continuation /
 `--pre-import` 增量须由唯一写入者另行保留整合，本命令不隐含这些未随主线提供的选项。
 

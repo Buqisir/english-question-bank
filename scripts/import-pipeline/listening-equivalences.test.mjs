@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { LISTENING_SEGMENT_RULE, evaluateListeningEngine, listeningAsrTokens, normalizeListeningText } from './lib-listening-segment-rule.mjs'
+import { LISTENING_SEGMENT_RULE, evaluateListeningEngine, listeningAsrTokens, normalizeListeningText, reconcileListeningEngines } from './lib-listening-segment-rule.mjs'
 
 const normal = normalizeListeningText
 const ordinal = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth',
@@ -10,7 +10,7 @@ const ordinal = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'sevent
   'twenty seventh', 'twenty eighth', 'twenty ninth', 'thirtieth', 'thirty first']
 const suffix = n => n >= 11 && n <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th')
 test('v2 equates exactly the first thirty-one ordinal spellings, preserving their value', () => {
-  assert.equal(LISTENING_SEGMENT_RULE.normalizationVersion, 'listening-equivalences-v4')
+  assert.equal(LISTENING_SEGMENT_RULE.normalizationVersion, 'listening-equivalences-v5')
   ordinal.forEach((word, i) => {
     assert.deepEqual(normal(`${i + 1}${suffix(i + 1)}`), normal(word))
     assert.deepEqual(normal(word.replaceAll(' ', '-')), normal(word))
@@ -369,5 +369,156 @@ test('all nine modal auxiliaries are critical for deletion, insertion and substi
   for (const [a, b] of [["we'll go", 'we will go'], ["we'd go", 'we would go'],
     ["we'd been waiting", 'we had been waiting']]) {
     for (const [source, actual] of [[a, b], [b, a]]) assert.equal(evaluate(source, actual).decision, 'usable')
+  }
+})
+
+test('hyphen compounds accept only exact joined or spaced spellings in either direction', () => {
+  for (const [a, b] of [['second-hand', 'secondhand'], ['second-hand', 'second hand'],
+    ['Second-Hand', 'SECONDHAND'], ['well-known', 'wellknown'],
+    ['state-of-the-art', 'stateoftheart'], ['state-of-the-art', 'state of the art']]) {
+    for (const [source, actual] of [[a, b], [b, a]]) {
+      const result = evaluate(source, actual)
+      assert.equal(result.occurrences[0].alignment.editDistance, 0, `${source} / ${actual}`)
+      assert.equal(result.decision, 'usable', `${source} / ${actual}: ${result.issues}`)
+    }
+  }
+  for (const [a, b] of [['second-hand', 'second'], ['secondhand', 'second hard'],
+    ['second-hand', 'second hard'], ['secondhand', 'second hand']]) {
+    for (const [source, actual] of [[a, b], [b, a]]) {
+      assert.ok(evaluate(source, actual).occurrences[0].alignment.editDistance > 0, `${source} / ${actual}`)
+    }
+  }
+})
+
+test('compound spans retain raw runs and cannot cross invalid timing, silence or segments', () => {
+  const source = 'Bright birds gather around our second-hand shop beside the peaceful village harbor today'
+  const run = raw => evaluateListeningEngine({ groups: [{segmentId: 'listening-text-1', questionNumbers: [1], text: source}],
+    windows: [raw], instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}], durationSeconds: 100 }).groups[0]
+  for (const spelling of ['secondhand', 'second-hand', 'second hand', 'second -hand', 'second- hand']) {
+    const raw = windowFor(source.replace('second-hand', spelling).split(' '))
+    const words = run(raw).observedWindows[0].words.filter(w => w.compoundValue === 'secondhand')
+    assert.deepEqual(words.map(w => w.token), ['second', 'hand'])
+    assert.ok(words.every(w => w.rawRunText === spelling))
+    assert.ok(words.every(w => w.runStartSeconds === words[0].runStartSeconds
+      && w.runEndSeconds === words[0].runEndSeconds))
+  }
+  for (const edit of [
+    words => { words[6].start += 3; words[6].end += 3 },
+    words => { words[6].end = NaN },
+    words => { words[6].start = 1; words[6].end = 1.5 },
+  ]) {
+    const raw = windowFor(source.replace('second-hand', 'second hand').split(' '))
+    edit(raw.result.segments[0].words)
+    const result = run(raw)
+    assert.ok(result.occurrences.every(o => o.alignment.editDistance > 0))
+    assert.ok(!result.observedWindows[0].words.some(w => w.compoundValue))
+  }
+  const raw = windowFor(source.replace('second-hand', 'second hand').split(' '))
+  const words = raw.result.segments[0].words
+  raw.result.segments = [words.slice(0, 6), words.slice(6)].map(words => ({words}))
+  assert.ok(run(raw).occurrences[0].alignment.editDistance > 0)
+  assert.ok(!run(raw).observedWindows[0].words.some(w => w.compoundValue))
+})
+
+test('compound expansion never grants an internal token a playback boundary', () => {
+  const aliases = [{pattern: 'secondhand|second-hand|second\\s+hand',
+    matches: /^(?:secondhand|second-hand|second\s+hand)$/iu,
+    compoundValue: 'secondhand', tokens: ['second', 'hand']}]
+  for (const parts of [['secondhand'], ['second-hand'], ['second', 'hand']]) {
+    const words = listeningAsrTokens([windowFor(parts)], aliases).words
+    assert.deepEqual(words.map(w => w.token), ['second', 'hand'])
+    assert.equal(words[0].startBoundary, true)
+    assert.equal(words[0].endBoundary, false)
+    assert.equal(words[1].startBoundary, false)
+    assert.equal(words[1].endBoundary, true)
+    assert.equal(words[0].runStartSeconds, words[1].runStartSeconds)
+    assert.equal(words[0].runEndSeconds, words[1].runEndSeconds)
+    assert.ok(words.every(w => w.rawRunText === parts.join(' ')))
+  }
+})
+
+test('reconciliation uses each engine normalization context for the same source', () => {
+  const text = 'Bright birds gather around our quiet secondhand shop beside the peaceful village harbor today'
+  const engine = (actual, name) => {
+    const window = windowFor(actual.split(' '))
+    return evaluateListeningEngine({groups: [{segmentId: 'listening-text-1', questionNumbers: [1], text}],
+      windows: [window], engine: name, durationSeconds: 100,
+      instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}],
+      pauses: [{startSeconds: 1, endSeconds: 1.95},
+        {startSeconds: window.result.segments[0].end + .05, endSeconds: window.result.segments[0].end + 1}]})
+  }
+  const joined = engine(text, 'Apple SpeechAnalyzer')
+  const hyphen = engine(text.replace('secondhand', 'second-hand'), 'faster-whisper')
+  for (const pair of [[joined, hyphen], [hyphen, joined]]) {
+    const result = reconcileListeningEngines(...pair)[0]
+    assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
+    assert.ok(!result.engineNotes.some(n => n.kind === 'observed_critical_word_difference'))
+  }
+})
+
+test('a different source group cannot license an unhyphenated word split here', () => {
+  const text = 'Bright birds gather around our quiet secondhand shop beside the peaceful village harbor today'
+  const group = {segmentId: 'listening-text-1', questionNumbers: [1], text}
+  const other = {segmentId: 'listening-text-2', questionNumbers: [2], text: 'A second-hand book'}
+  const result = evaluateListeningEngine({groups: [group], corpus: [group, other],
+    windows: [windowFor(text.replace('secondhand', 'second hand').split(' '))], durationSeconds: 100,
+    instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}]}).groups[0]
+  assert.ok(result.occurrences[0].alignment.editDistance > 0)
+})
+
+test('an ASR hyphen attached to either adjacent run licenses the joined source', () => {
+  const text = 'Bright birds gather around our quiet secondhand shop beside the peaceful village harbor today'
+  for (const spelling of ['second -hand', 'second- hand']) {
+    const window = windowFor(text.replace('secondhand', spelling).split(' '))
+    window.result.segments[0].text = text.replace('secondhand', 'second-hand')
+    const result = evaluateListeningEngine({groups: [{segmentId: 'listening-text-1', questionNumbers: [1], text}],
+      windows: [window], durationSeconds: 100,
+      instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}]}).groups[0]
+    assert.equal(result.occurrences[0].alignment.editDistance, 0)
+  }
+})
+
+const halfPastSentence = phrase => `Bright birds gather around our quiet garden at ${phrase} beside the peaceful village harbor today`
+function halfPastEngine(source, actual, candidate, engine = 'Apple SpeechAnalyzer') {
+  const text = halfPastSentence(source)
+  const group = {segmentId: 'listening-text-1', questionNumbers: [1], text}
+  const window = windowFor(halfPastSentence(actual).split(' '))
+  if (candidate === 'segment') window.result.segments[0].text = halfPastSentence('half-past seven')
+  const corpus = [group, ...(candidate === 'other-group'
+    ? [{segmentId: 'listening-text-2', questionNumbers: [2], text: 'Meet at half-past seven'}] : [])]
+  return evaluateListeningEngine({groups: [group], corpus, windows: [window], engine, durationSeconds: 100,
+    instructions: [{slotId: 'listening.short-dialogue', text: '读一遍'}],
+    pauses: [{startSeconds: 1, endSeconds: 1.95},
+      {startSeconds: window.result.segments[0].end + .05, endSeconds: window.result.segments[0].end + 1}]})
+}
+for (const candidate of ['segment', 'other-group']) {
+  test(`a ${candidate} half-past candidate cannot license an unhyphenated time rewrite`, () => {
+    for (const [source, actual] of [['half past seven', 'halfpast seven'], ['halfpast seven', 'half past seven']]) {
+      const baseline = halfPastEngine(source, actual).groups[0]
+      const result = halfPastEngine(source, actual, candidate).groups[0]
+      assert.equal(baseline.decision, 'review_required')
+      assert.ok(result.occurrences[0].alignment.editDistance > 0, `${source} / ${actual}`)
+      assert.equal(result.decision, 'review_required', `${source} / ${actual}`)
+    }
+  })
+}
+test('time rewrites retain compound licensing in both engine observation directions', () => {
+  for (const [source, actual] of [['half past seven', 'halfpast seven'], ['halfpast seven', 'half past seven']]) {
+    const reference = halfPastEngine(source, source)
+    const observed = halfPastEngine(source, actual, 'segment', 'faster-whisper')
+    for (const pair of [[reference, observed], [observed, reference]]) {
+      const result = reconcileListeningEngines(...pair)[0]
+      const notes = [...result.engineNotes, ...result.engineConflicts]
+      assert.ok(notes.some(n => n.kind === 'observed_critical_word_difference'), `${source} / ${actual}`)
+    }
+  }
+})
+test('half-past candidates preserve ordinary clock equivalence and literal hyphen permission', () => {
+  for (const [source, actual] of [['half past seven', '7:30'], ['7:30', 'half past seven'],
+    ['half-past seven', 'halfpast seven'], ['halfpast seven', 'half-past seven'],
+    ['half-past seven', '7:30'], ['7:30', 'half-past seven']]) {
+    const result = halfPastEngine(source, actual, 'segment').groups[0]
+    assert.equal(result.occurrences[0].alignment.editDistance, 0, `${source} / ${actual}`)
+    assert.equal(result.decision, 'usable', `${source} / ${actual}`)
   }
 })
