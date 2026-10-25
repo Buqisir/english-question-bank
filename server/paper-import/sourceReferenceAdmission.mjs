@@ -40,6 +40,9 @@ function writingScopes(confirmation, answerIds) {
         writing = false
         task = null
       }
+      // A standalone application task also opens writing, as in the producer
+      // and scoring scope, so a following bare 第二节 can own continuation.
+      if (BARE_APPLICATION_SECTION.test(heading)) writing = true
       if ((writing && /^第一节(?:\(|$)/u.test(heading))
         || BARE_APPLICATION_SECTION.test(heading) || WRITING_SECTION[0][1].test(heading)
         || /^(?:第一节(?:\([^)]*\))?)?(?:应用文写作|书面表达)$/u.test(heading)) task = 'application'

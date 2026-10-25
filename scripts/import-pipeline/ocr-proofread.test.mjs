@@ -2,6 +2,9 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart, buildSourceReferences,
   buildTranscriptJoinDocuments } from './ocr-proofread.mjs'
+import { prepareSourceReferences, validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
+import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 function fixture(texts, lefts = []) {
   const items = texts.map((text, i) => ({ lines: `L${i + 1}`, text }))
@@ -245,6 +248,61 @@ function referencesFixture(texts, taskTypes = ['continuation'], {
     orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
     visualClassifications,
   }] }] })
+}
+
+function standaloneApplicationAdmission(heading, application, continuation) {
+  const texts = [heading, '第一节', '参考范文', application,
+    '第二节', '参考范文', continuation]
+  const bytes = Buffer.from('%PDF-1.4\nSynthetic standalone writing answer source.\n')
+  const materialization = {
+    paperId: 'paper-standalone-application-admission',
+    documents: [{ documentId: 'answers', role: 'official_answers', mediaType: 'application/pdf',
+      sha256: sha256(bytes), pageCount: 1 }],
+    groups: ['application', 'continuation'].map(taskType =>
+      ({ groupId: `writing-${taskType}`, writingTask: { taskType } })),
+  }
+  const observations = texts.map((text, i) => ({ observationId: `o${i}`,
+    region: { x: .1, y: .15 + i * .06, width: .8, height: .02 } }))
+  const evidence = { documents: [{ documentId: 'answers', pages: [{ observations }] }] }
+  const confirmation = { documents: [{ documentId: 'answers', pages: [{ page: 1,
+    visualClassifications: [],
+    orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
+  }] }] }
+  const captured = buildSourceReferences(materialization, evidence, confirmation)
+  const input = { materialization, sourceDigest: sha256('standalone source'),
+    candidateDigest: sha256('standalone candidate'), sourceInput: {
+      documents: [{ documentId: 'answers', bytes }],
+      ocrSourceBytes: { evidenceBytes: Buffer.from(JSON.stringify(evidence)),
+        confirmationBytes: Buffer.from(JSON.stringify(confirmation)) },
+    } }
+  const sidecar = { ...prepareSourceReferences(input), groups: captured.groups }
+  assert.deepEqual(validateSourceReferences({ ...input, sidecar,
+    sourceDocuments: input.sourceInput.documents }), [])
+  return { ...input, sidecar }
+}
+
+for (const heading of ['书面表达：', '应用文：']) {
+  test(`${heading} admits a supplied continuation after an omitted application through the public pipeline`, () => {
+    const input = standaloneApplicationAdmission(heading, '略', 'Mia opened the garden gate.')
+    assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
+    assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+  })
+
+  test(`${heading} admits a supplied application followed by an omitted continuation`, () => {
+    const input = standaloneApplicationAdmission(heading, 'Our class planted herbs.', '略')
+    assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['captured', 'not_supplied'])
+    assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+  })
+
+  test(`${heading} still rejects falsely omitted labeled English application samples`, () => {
+    const input = standaloneApplicationAdmission(heading, 'Our class planted herbs.', '略')
+    const omitted = standaloneApplicationAdmission(heading, '略', '略')
+    input.sidecar.groups[0].essays = omitted.sidecar.groups[0].essays
+    assert.deepEqual(validateSourceReferences({ ...input,
+      sourceDocuments: input.sourceInput.documents }), [])
+    assert.throws(() => assertSourceReferenceAdmission(input),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+  })
 }
 
 test('standalone written-expression headings capture application samples after objective answers', () => {
