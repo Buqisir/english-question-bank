@@ -1191,17 +1191,25 @@ function numberedApplicationSamples(lines, factsFor) {
   return new Map(candidates.map(({ line, title }) => [line, title]))
 }
 
-// Only alternating number/choice rows are objective grids. Source labels can
-// be omitted; 南昌 uses 序号. Free-text answers and writing rubrics stay scoped.
+// Choice grids may omit labels. Short English answers require both labels in
+// every pair, and cannot mix with choice letters within or across answer rows.
 function isObjectiveAnswerGrid(rows) {
   if (rows.length < 2 || rows.length % 2 !== 0
     || !rows[0].length || rows.some(row => row.length !== rows[0].length)) return false
-  let previous = 0
+  const choice = /^[A-G]$/u
+  const shortAnswer = /^[A-Za-z'’-]+(?: [A-Za-z'’-]+){0,2}(?:\/[A-Za-z'’-]+(?: [A-Za-z'’-]+){0,2})*$/u
+  let previous = 0, answerKind = null
   for (let index = 0; index < rows.length; index += 2) {
-    const numbers = /^(?:题号|序号)$/u.test(rows[index][0]) ? rows[index].slice(1) : rows[index]
-    const answers = rows[index + 1][0] === '答案' ? rows[index + 1].slice(1) : rows[index + 1]
-    if (!numbers.length || numbers.length !== answers.length
-      || !answers.every(answer => /^[A-G]$/u.test(answer))) return false
+    const numberLabel = /^(?:题号|序号)$/u.test(rows[index][0])
+    const answerLabel = rows[index + 1][0] === '答案'
+    const numbers = numberLabel ? rows[index].slice(1) : rows[index]
+    const answers = answerLabel ? rows[index + 1].slice(1) : rows[index + 1]
+    if (!numbers.length || numbers.length !== answers.length) return false
+    const kind = answers.every(answer => choice.test(answer)) ? 'choice'
+      : numberLabel && answerLabel && answers.every(answer => !choice.test(answer) && shortAnswer.test(answer))
+        ? 'words' : null
+    if (!kind || (answerKind && answerKind !== kind)) return false
+    answerKind = kind
     for (const number of numbers) {
       if (!/^[1-9]\d*$/u.test(number) || Number(number) <= previous) return false
       previous = Number(number)
