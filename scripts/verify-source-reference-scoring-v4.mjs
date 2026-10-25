@@ -156,7 +156,7 @@ const explanationScopes = sourceReferenceScoringScopes(laterHeadings, new Set(['
 assert.equal(explanationScopes.get(explanationItem.itemId), null)
 assert.equal(explanationScopes.get('later-score'), null,
   'later writing/scoring headings cannot reopen the numbered-analysis boundary')
-console.log('PASS numbered explanation boundary closes producer and independent admission permanently')
+console.log('PASS numbered explanation boundary stays closed without an explicit task-rubric appendix')
 
 for (const colon of ['：', ':']) for (const writingHeading of [
   [`第四部分${colon}写作\n第一节`], [`第四部分${colon}写作`, '第一节'],
@@ -175,18 +175,16 @@ assert.equal(labelSidecar.groups[0].essays.state, 'not_supplied')
 assertSourceReferenceAdmission({ ...labelInput, sidecar: labelSidecar })
 console.log('PASS actual scoring label authorizes a first figure block with no fabricated essay/paragraph')
 
-// B can serialize/render a table followed by an image. The current v3
-// confirmation resolver still rejects consumed table/image anchors (A's seam).
-// Keeping that rejection is deliberate; B does not introduce afterVisual.
+// The final confirmed item of a surviving semantic table identifies the
+// after-table boundary; no synthetic paragraph or new afterVisual is needed.
 const tableInput = scoringFiguresFixture({ table: true })
 const tableSidecar = captureScoringReferences(tableInput)
 assert.deepEqual(tableSidecar.groups[0].scoring.entries[0].blocks.slice(0, 2).map(block => block.kind), ['table', 'figure'])
 assert.deepEqual(validateSourceReferences({ ...tableInput, sidecar: tableSidecar }), [])
-assert.throws(() => assertSourceReferenceAdmission({ ...tableInput, sidecar: tableSidecar }),
-  /anchor cannot be consumed/iu, 'B must preserve the independent A boundary')
+assertSourceReferenceAdmission({ ...tableInput, sidecar: tableSidecar })
 const tableHtml = buildAnswerOnlyHtml({ ...tableInput, sourceReferences: tableSidecar, includeScoring: true })
 assert(tableHtml.indexOf('data-reference-table=') < tableHtml.indexOf('data-reference-figure='))
-console.log('PASS v4 table → figure serialization/render order; consumed table anchor still rejected by unchanged confirmation v3')
+console.log('PASS v4 table → figure serialization, independent admission and render order at the exact table boundary')
 
 // Include scoring in the aggregate budget, even when each entry fits.
 const many = structuredClone(sidecar)
@@ -249,3 +247,6 @@ try {
 // The small PDF fixtures never cross 2 MiB. Exercise native PNG sizing in this
 // registered CI verifier too, including Ubuntu's ImageMagick 6 warning behavior.
 await import('../server/paper-import/sourceReferencePngSizing.test.mjs')
+// Covers producer → independent admission across transcript/explanation
+// boundaries, including the exact overview + task-rubric reopening pair.
+await import('./import-pipeline/post-listening-scoring.test.mjs')

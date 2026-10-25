@@ -2,6 +2,7 @@ import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
+  isExplicitScoringAppendixStart,
 } from './sourceReferenceWritingRules.mjs'
 
 const normalize = text => text.normalize('NFKC').replace(/\s+/gu, '')
@@ -16,8 +17,17 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
     let afterListening = false
-    for (const page of document.pages) for (const item of page.orderedItems) {
-      if (terminal) { scopes.set(item.itemId, null); continue }
+    const items = document.pages.flatMap(page => page.orderedItems)
+    for (const [index, item] of items.entries()) {
+      if (terminal) {
+        if (isExplicitScoringAppendixStart(item.text, items[index + 1]?.text)) {
+          terminal = false
+          afterListening = false
+          ended = false
+        }
+        scopes.set(item.itemId, null)
+        continue
+      }
       const text = normalize(item.text)
       // A transcript before the first writing task is ordinary source order.
       // After writing has started, only the explicit rubric appendix can reopen it.
@@ -27,7 +37,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
           || BARE_APPLICATION_SECTION.test(text) || /^读后续写[:：]?$/u.test(text)
           || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text))
       if (afterListening && !firstWritingHeading) {
-        // An explanation remains terminal, even between a transcript and rubric.
+        // Only the explicit overview + task-rubric pair can leave explanations.
         if (ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
         if (!terminal && WRITING_SCORING_OVERVIEW.test(text)) {
           afterListening = false

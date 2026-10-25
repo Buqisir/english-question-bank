@@ -27,6 +27,7 @@ import { fileURLToPath } from 'node:url'
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { isExplicitScoringAppendixStart } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -57,7 +58,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v11'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v13'
 
 function fail(message) {
   console.error(message)
@@ -1262,18 +1263,51 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
   const structuredScoring = pages.some(page =>
     page.visualClassifications?.some(visual => visual.classification === 'semantic_table'))
   const scope = createWritingScope(sections)
-  let afterListening = false, postListeningScoring = false
+  let afterListening = false, scoringAppendix = false, afterExplanations = false
   const lastObjectiveQuestion = Math.max(0, ...materialization.groups
     .flatMap(group => group.writingTask ? [] : (group.questions || []).map(question => question.sourceNumber))
     .filter(Number.isInteger))
   for (const [lineIndex, line] of lines.entries()) {
-    if (scope.ended) break
+    if (scope.ended) {
+      if (!afterExplanations) break
+      if (isExplicitScoringAppendixStart(line.text, lines[lineIndex + 1]?.text)) {
+        scope.enterPart(false)
+        afterExplanations = false
+        afterListening = false
+        scoringAppendix = true
+        review.push({ itemId: line.itemId, issue: 'explicit rubric appendix reopens scoring after answer explanations' })
+      }
+      continue
+    }
+    // An exam specification appendix describes question coverage, not writing
+    // scoring. Its explicit column header ends reference capture, including
+    // continuation tables on later pages. Keep every source word/table intact.
+    const header = line.table ? line.table.rows[0].map(cell => cell.text).join('') : line.text
+    if (/^题号题型分值考查的主要内容及知识点难度$/u.test(header.replace(/\s+/gu, ''))) {
+      scope.end()
+      review.push({ itemId: line.itemId, issue: 'exam specification appendix ends the writing-reference scope' })
+      for (const excluded of lines.slice(lineIndex).filter(item => item.table)) {
+        review.push({ itemId: excluded.itemId, tableId: excluded.table.tableId,
+          issue: 'exam specification table excluded from writing references; retained in source evidence' })
+      }
+      continue
+    }
     if (line.figure) {
       if (!scope.current) throw new Error('Scoring figure has no explicit writing-task scope')
       scope.current.lines.push(line)
       continue
     }
     if (line.table) {
+      const rows = line.table.rows.map(row => row.map(cell => cell.text.trim()))
+      if (rows.length === 2 && rows[0].length > 1 && rows[1].length === rows[0].length
+        && rows[0][0] === '题号' && rows[1][0] === '答案'
+        && rows[0].slice(1).every((number, i) => /^[1-9]\d*$/u.test(number)
+          && (i === 0 || Number(number) > Number(rows[0][i])))
+        && rows[1].slice(1).every(answer => /^[A-G]$/u.test(answer))) {
+        review.push({ itemId: line.itemId, tableId: line.table.tableId,
+          issue: 'objective answer table excluded from writing references; retained in source evidence' })
+        continue
+      }
       if (!scope.current) fail(`Source table ${line.table.tableId} has no writing-task scope`)
       scope.current.lines.push(line)
       continue
@@ -1281,6 +1315,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     const facts = factsFor(line)
     if (matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
       scope.end()
+      afterExplanations = true
       review.push({ itemId: line.itemId, issue: 'answer explanations end the writing-reference scope' })
       continue
     }
@@ -1292,13 +1327,13 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     if (afterListening && firstLineRole('scoring-overview', facts)) {
       scope.enterPart(false)
       afterListening = false
-      postListeningScoring = true
+      scoringAppendix = true
       continue
     }
     if (firstLineRole('listening-boundary', facts)) {
       scope.enterPart(false)
       afterListening = true
-      postListeningScoring = false
+      scoringAppendix = false
       continue
     }
     // A heading can share its OCR item with a sample label. Some answer books
@@ -1328,7 +1363,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     if (started) {
       // A rubric appendix supplements the original samples; an ordinary task
       // restart still replaces its prior section as before.
-      scope.startTask(started, { reuse: postListeningScoring })
+      scope.startTask(started, { reuse: scoringAppendix })
       if (unlabeledApplicationLetter) scope.current.letterEnd = unlabeledApplicationLetter.end
       if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
       continue
@@ -1350,7 +1385,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       const omittedWritingPart = matchesLineRole('writing.bare-fourth-part', facts)
         && lines[lineIndex + 1] && matchesLineRole('writing.omission', factsFor(lines[lineIndex + 1]), { inWriting: true })
       scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, writingSectionAfterPart(line.text))
-    } else if (scope.current && (!postListeningScoring || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
+    } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
   }
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
     const taskType = group.writingTask.taskType

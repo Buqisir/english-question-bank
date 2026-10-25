@@ -170,8 +170,11 @@ OCR confirmation v3 adds explicit `semantic_table` and `content_media` visual
 classifications. A table supplies rectangular `rows: [{header, cells}]`, each
 cell containing confirmed `itemId`s, not rewritten text. An image supplies
 `itemIds` for all OCR text inside its region and `afterItemId` for a surviving
-preceding item; its immutable PDF region is cropped, never regenerated. Every
-observation inside a visual must be accounted for exactly once. Images and tables
+preceding item; its immutable PDF region is cropped, never regenerated. An
+image may also follow the exact final confirmed item of a surviving semantic
+table, meaning the boundary after that whole table; interior table cells and
+items consumed by another image cannot anchor it. Every observation inside a
+visual must be accounted for exactly once. Images and tables
 retain the source-parser's question group and neighboring source anchors;
 moving intact visuals between groups does not preserve their binding.
 Images currently require a separate PDF question source; tables require separate question
@@ -179,6 +182,12 @@ and answer sources. Merged/nested tables and emphasized
 cell text remain blocked rather than flattened silently. Answer-source tables
 stay answer evidence: capture scoring references against those answer locators
 in the existing source-references sidecar; never insert them into student groups.
+明确的命题细目表头（题号／题型／分值／考查的主要内容及知识点／难度）结束写作参考
+采集，其附录与续表保留在原件、OCR evidence 和 confirmation 中，并在 references review
+记录排除原因；不把它们当作评分，也不据此把真实评分标为 `not_supplied`。
+精确的两行客观答案网格（“题号”＋递增题号／“答案”＋逐题 A–G）同样只保留为源答案证据，
+排除于写作参考并逐表记录。详解结束写作参考采集后，仅独立的完整评分总标题紧邻完整的任务
+评分标题才可重新开启评分采集，复用原有范文；详解正文提到“评分”不构成重新开启的依据。
 The v8 OCR producer receipt binds this new confirmation; preserve older output
 and receipts before starting a new source-input revision, and rebind sidecars.
 

@@ -821,7 +821,12 @@ export function resolveConfirmedNck1OcrEvidence({
       }
       for (const replacement of replacements) {
         const anchor = confirmedPage.orderedItems[replacement.insertAt - 1]?.itemId
-        if ((replacement.media || replacement.referenceFigure) && claimedItems.has(anchor)) {
+        // A semantic table replaces its cell prose but survives as one object.
+        // Only its exact final boundary can anchor a following image; interior
+        // cell IDs and text consumed by another image remain illegal anchors.
+        const afterTable = replacements.some(table => table.item?.kind === 'table'
+          && table.itemIds.at(-1) === anchor && table.insertAt + table.itemIds.length === replacement.insertAt)
+        if ((replacement.media || replacement.referenceFigure) && claimedItems.has(anchor) && !afterTable) {
           issues.push(issue('NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED', 'ocrConfirmation',
             'Image placement anchor cannot be consumed by another visual', document.documentId, confirmedPage.page))
         }
