@@ -36,6 +36,7 @@ import {
   makeApplicationWritingReferenceFixture,
 } from '../test-fixtures/paper-canonical/applicationWritingReferenceFixture.mjs'
 import { applicationWritingRhythm } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
+import { writingNoticeGroups } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 
 const persistActualArtifacts =
   process.env.EQB_PERSIST_ACTUAL_ARTIFACTS === '1'
@@ -291,7 +292,10 @@ function inspectPdf(pdfPath) {
   const match = info.match(/^Pages:\s+([1-9]\d*)$/m)
   assert.ok(match)
   const text = execFileSync('pdftotext', ['-layout', pdfPath, '-'], { encoding: 'utf8' })
-  const inspection = { pageCount: Number(match[1]), text, pages: text.split('\f') }
+  // Mixed-font numeric markers can be reordered by layout reconstruction.
+  // Check source content in PDF stream order; keep layout text for geometry.
+  const contentText = execFileSync('pdftotext', ['-raw', pdfPath, '-'], { encoding: 'utf8' })
+  const inspection = { pageCount: Number(match[1]), text, contentText, pages: text.split('\f') }
   pdfInspections.set(digest, inspection)
   return inspection
 }
@@ -503,11 +507,34 @@ function assertApplicationFixedPartPdfAlignment(pdfPath, canonical, label) {
   }
 }
 
+function expectedApplicationPromptTexts(canonical) {
+  const texts = canonical.promptBlocks.map(block => block.text)
+  const expected = [...texts]
+  for (const { startIndex, blockCount, lines } of writingNoticeGroups(texts)) {
+    const mixed = lines.some(line => line.blockOffset === 0 && line.kind === 'instruction')
+    for (let index = startIndex + 1; index < startIndex + blockCount; index += 1) {
+      // Mixed groups preserve the trimmed source; only label-only groups
+      // retain the historical normalization of split numeric markers.
+      if (mixed) {
+        expected[index] = texts[index].trim()
+        continue
+      }
+      expected[index] = texts[index].replace(
+        /^[（(](\d+)[）)]|^(\d+)[.．、](?!\d)\s*/u,
+        (_marker, parenthesized, dotted) => `（${parenthesized ?? dotted}）`,
+      )
+    }
+  }
+  return expected
+}
+
 function assertNumberedNoticePdfLayout(pdfPath, canonical, label) {
-  const block = canonical.promptBlocks.find(
-    (candidate) => candidate.text === providedNoticeText,
+  const texts = expectedApplicationPromptTexts(canonical)
+  const group = writingNoticeGroups(canonical.promptBlocks.map(block => block.text)).find(
+    ({ startIndex, blockCount }) => texts.slice(startIndex, startIndex + blockCount)
+      .join('') === providedNoticeText,
   )
-  if (!block) return
+  if (!group) return
   const bounds = providedNoticeLines.map((line) =>
     pdfTextBounds(pdfPath, line, `${label} notice`))
   assert.ok(bounds[1].top > bounds[0].top)
@@ -938,6 +965,7 @@ async function assertActualPaperSurfaceArtifacts() {
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
   const viteServer = await vite.createServer({
     root: path.resolve('app'),
+    cacheDir: path.join(tmpdir(), 'eqb-canonical-application-vite'),
     server: { host: '127.0.0.1', port: 0 },
   })
   await viteServer.listen()
@@ -1084,9 +1112,12 @@ async function assertActualPaperSurfaceArtifacts() {
         const noticeLines = page.locator(
           '[data-canonical-application-notice-line]',
         )
-        const numberedNoticeBlock = canonical.promptBlocks.find((block) =>
-          /^注意[：:]\s*[(（]\d+[)）]/.test(block.text))
-        if (numberedNoticeBlock) {
+        const numberedNoticeGroup = writingNoticeGroups(canonical.promptBlocks.map(block => block.text || ''))
+          .find(({ startIndex }) => /^注意[：:]\s*[(（]\d+[)）]/.test(canonical.promptBlocks[startIndex].text))
+        if (numberedNoticeGroup) {
+          const { startIndex, blockCount } = numberedNoticeGroup
+          const numberedNoticeText = expectedApplicationPromptTexts(canonical)
+            .slice(startIndex, startIndex + blockCount).join('')
           const renderedNoticeLines = await noticeLines.evaluateAll(
             (elements) => elements.map((element) => ({
               kind: element.getAttribute(
@@ -1107,9 +1138,9 @@ async function assertActualPaperSurfaceArtifacts() {
           }
           assert.equal(
             renderedNoticeLines.map((line) => line.text).join(''),
-            numberedNoticeBlock.text.replaceAll(/\s/g, ''),
+            numberedNoticeText.replaceAll(/\s/g, ''),
           )
-          if (numberedNoticeBlock.text === providedNoticeText) {
+          if (numberedNoticeText === providedNoticeText) {
             assert.deepEqual(
               renderedNoticeLines.map(({ kind, text }) => ({ kind, text })),
               providedNoticeLines.map((text, index) => ({
@@ -1165,9 +1196,7 @@ async function assertActualPaperSurfaceArtifacts() {
           teacher,
         )
         const compactBodyText = bodyText.replaceAll(/\s/g, '')
-        for (const block of canonical.promptBlocks) {
-          const displayedText = canonical.answerRegion.drawingArea
-            ? block.text.replace(/^(\d+)\.\s*/, '（$1）') : block.text
+        for (const displayedText of expectedApplicationPromptTexts(canonical)) {
           assert.equal(
             compactBodyText.split(displayedText.replaceAll(/\s/g, '')).length - 1,
             1,
@@ -1292,9 +1321,9 @@ async function assertActualPaperSurfaceArtifacts() {
         const writingText = await writingPage.innerText()
         assert.equal(writingText.includes('POISONED LEGACY'), false)
         const compactWritingText = writingText.replaceAll(/\s/g, '')
-        for (const block of canonical.promptBlocks) {
+        for (const displayedText of expectedApplicationPromptTexts(canonical)) {
           assert.equal(
-            compactWritingText.split(block.text.replaceAll(/\s/g, '')).length - 1,
+            compactWritingText.split(displayedText.replaceAll(/\s/g, '')).length - 1,
             1,
           )
         }
@@ -1609,13 +1638,14 @@ async function assertActualPaperSurfaceArtifacts() {
         const priorPageCount = printGeometry.get(pageCountKey)
         if (priorPageCount) assert.equal(renderedPageCount, priorPageCount)
         else printGeometry.set(pageCountKey, renderedPageCount)
-        const pdfText = inspectPdf(pdfPath).text
+        const pdfText = inspectPdf(pdfPath).contentText
         const compactPdfText = pdfText.replaceAll(/\s/g, '')
         assert.equal(compactPdfText.includes('POISONEDLEGACY'), false)
-        for (const block of canonical.promptBlocks) {
+        for (const displayedText of expectedApplicationPromptTexts(canonical)) {
           assert.equal(
-            compactPdfText.split(block.text.replaceAll(/\s/g, '')).length - 1,
+            compactPdfText.split(displayedText.replaceAll(/\s/g, '')).length - 1,
             1,
+            `PDF ${label} ${versionType}: one source block ${JSON.stringify(displayedText)}`,
           )
         }
         for (const part of [

@@ -608,9 +608,7 @@ function CanonicalContinuationWritingMaterial({
           data-canonical-continuation-writing-rhythm-role="notice_line"
         >
           {notice.lines.map((line, index) => {
-            const block = notice.blockCount === 1
-              ? blocks[notice.startIndex]
-              : blocks[notice.startIndex + index]
+            const block = blocks[notice.startIndex + line.blockOffset]
             const marked = block.inlines.some(inline => inline.marks?.length)
             return (
               <span
@@ -625,7 +623,7 @@ function CanonicalContinuationWritingMaterial({
                 data-canonical-continuation-notice-line={line.kind}
               >
                 {marked
-                  ? writingNoticeDisplayInlines(block.inlines, notice.blockCount === 1 ? index : 0).map((inline, part) => (
+                  ? writingNoticeDisplayInlines(block.inlines, line.lineIndex, line.preserveSourceNumbering).map((inline, part) => (
                       <span key={`${inline.nodeId}:${part}`} data-canonical-content-node-id={inline.nodeId} data-source-marks={inline.marks?.join(' ')}>{inline.text}</span>
                     ))
                   : line.text}
@@ -666,7 +664,7 @@ function CanonicalApplicationWritingPrompt({
           : null
         const displayedNoticeLines = notice?.startIndex === index
           ? notice.lines
-          : noticeLines
+          : noticeLines?.map((line, lineIndex) => ({ ...line, blockOffset: 0, lineIndex }))
         return (
           <p
             key={block.nodeId}
@@ -677,10 +675,9 @@ function CanonicalApplicationWritingPrompt({
             }
           >
             {displayedNoticeLines
-              ? displayedNoticeLines.map((line, lineIndex) => {
+              ? displayedNoticeLines.map(line => {
                   const lineBlock = notice?.startIndex === index
-                    && notice.blockCount > 1
-                    ? blocks[index + lineIndex]
+                    ? blocks[index + line.blockOffset]
                     : block
                   // Notice runs never include a figure (it ends the run).
                   const sourceBlock = lineBlock.kind === 'figure' ? block : lineBlock
@@ -690,19 +687,19 @@ function CanonicalApplicationWritingPrompt({
                         key={`${sourceBlock.nodeId}:${line.kind}:${line.text}`}
                         className={`ps-canonical-application-notice-line ps-canonical-application-notice-line--${line.kind}`}
                         data-canonical-block-id={
-                          notice && notice.blockCount > 1 && lineIndex > 0
+                          line.blockOffset > 0
                             ? sourceBlock.nodeId
                             : undefined
                         }
                         data-canonical-content-node-id={
-                          !marked && ((notice && notice.blockCount > 1) || lineIndex === 0)
+                          !marked && (line.blockOffset > 0 || line.lineIndex === 0)
                             ? sourceBlock.inlines[0]?.nodeId
                             : undefined
                         }
                         data-canonical-application-notice-line={line.kind}
                       >
                         {marked
-                          ? writingNoticeDisplayInlines(sourceBlock.inlines, notice?.startIndex === index && notice.blockCount > 1 ? 0 : lineIndex).map((inline, part) => (
+                          ? writingNoticeDisplayInlines(sourceBlock.inlines, line.lineIndex, line.preserveSourceNumbering).map((inline, part) => (
                               <span key={`${inline.nodeId}:${part}`} data-canonical-content-node-id={inline.nodeId} data-source-marks={inline.marks?.join(' ')}>{inline.text}</span>
                             ))
                           : line.text}

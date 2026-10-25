@@ -11,6 +11,10 @@ export const isWritingVersionLabel = text =>
 export const WRITING_PART = /^第[三四]部分\s*[:：]?\s*写作/u
 // Answer-first keys may name the task without a writing-part or section number.
 export const BARE_APPLICATION_SECTION = /^应用文\s*[:：]?$/u
+// These are the existing producer's bare/combined section predicates.
+export const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
+export const INLINE_WRITING_SAMPLE = /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)(?:\s+|(?<=[）)]))(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu
+export const INLINE_WRITING_ANSWER_SAMPLE = /^(第[一二]节)\s*[:：]?\s*(作答示例\s*[:：]?)$/u
 export const WRITING_SECTION = [
   ['application', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:应用文|书面表达)\s*[）)]|应用文|书面表达)/u],
   ['continuation', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:读后续写|续写)\s*[）)]|读后续写|续写)/u],
@@ -45,7 +49,10 @@ export function scoredWritingRubricTask(text, nextText = '') {
 export const LISTENING_REFERENCE_START = /^(?:(?:附\s*[:：]?\s*)?听力|录音原文|\(?Text\s*\d)/iu
 // Numbered headings for other exam tasks end writing ownership, including
 // parenthesized titles and optional source score/count annotations.
-export const NON_WRITING_SECTION = /^(?:第[一二三四五六七八九十\d]+(?:部分|节)|\([一二三四五六七八九十\d]+\)|[一二三四五六七八九十\d]+[、.])\s*[:：]?\s*\(?\s*(?:阅读(?:理解)?|七选五|完形填空|语法填空|语言(?:知识)?运用|短文改错|词汇运用|听力(?:理解)?)\s*\)?(?:\s*\([^)]*\))*\s*[:：]?$/u
+const OBJECTIVE_SECTION_NAMES = '阅读(?:理解)?|七选五|完形填空|语法填空|语言(?:知识)?运用|短文改错|词汇运用|听力(?:理解)?'
+export const NON_WRITING_SECTION = new RegExp(
+  String.raw`^(?:第[一二三四五六七八九十\d]+(?:部分|节)|\([一二三四五六七八九十\d]+\)|[一二三四五六七八九十\d]+[、.])\s*[:：]?\s*\(?\s*(?:${OBJECTIVE_SECTION_NAMES})\s*\)?(?:\s*\([^)]*\))*\s*[:：]?$`, 'u')
+export const OBJECTIVE_ANSWER_FIGURE_MARKER = new RegExp(`^(?:${OBJECTIVE_SECTION_NAMES}|完形|[A-G])$`, 'u')
 export const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|作答示例|参考答案|范文|(?:(?:A|One)\s+)?Possible\s+Version|评分(?:原则|标准|说明|细则|要求|建议))[:：]?$/iu
 // Match complete rubric titles only; parentheses are a numbering style, not
 // permission to treat ordinary scoring commentary as a new entry.

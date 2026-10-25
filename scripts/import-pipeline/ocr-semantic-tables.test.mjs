@@ -128,17 +128,21 @@ test('an unscoped table without an explicit specification header still fails clo
   assert.match(result.stderr, /Source table .* has no writing-task scope/u)
 })
 
-function objectiveAnswerTableFixture() {
+function objectiveAnswerTableFixture(rows = [['题号', '21', '22'], ['答案', 'C', 'B']]) {
   const input = specificationAppendixFixture()
   const page = input[2].documents[0].pages[0]
   const proof = input[1].documents[0].pages[0]
-  const items = ['题号', '21', '22', '答案', 'C', 'B'].map((text, i) => ({
+  const items = rows.flat().map((text, i) => ({
     text, itemId: `objective-${i}`, observationIds: [`objective-word-${i}`],
   }))
   page.orderedItems.unshift(...items)
+  let offset = 0
   page.visualClassifications.push({ classification: 'semantic_table', regionId: 'answers:page-1:objective',
-    rows: [true, false].map((header, r) => ({ header,
-      cells: items.slice(r * 3, r * 3 + 3).map(item => [item.itemId]) })) })
+    rows: rows.map((row, r) => {
+      const cells = items.slice(offset, offset + row.length).map(item => [item.itemId])
+      offset += row.length
+      return { header: r % 2 === 0, cells }
+    }) })
   proof.observations.unshift(...items.map((item, i) => ({
     observationId: item.observationIds[0], text: item.text,
     region: { x: .1 + i % 3 * .2, y: .05 + Math.floor(i / 3) * .03, width: .1, height: .02 },
@@ -146,8 +150,21 @@ function objectiveAnswerTableFixture() {
   return input
 }
 
-test('objective question/answer grids stay source evidence without entering writing scoring', () => {
-  const input = objectiveAnswerTableFixture()
+for (const [label, rows] of [
+  ['two rows', [['题号', '21', '22'], ['答案', 'C', 'B']]],
+  ['four rows', [['题号', '21', '22'], ['答案', 'C', 'B'],
+    ['题号', '23', '24'], ['答案', 'A', 'G']]],
+  ['six rows', [['题号', '21', '22'], ['答案', 'C', 'B'],
+    ['题号', '23', '24'], ['答案', 'A', 'G'], ['题号', '25', '26'], ['答案', 'E', 'F']]],
+  ['source 序号 label', [['序号', '21', '22'], ['答案', 'C', 'B'],
+    ['序号', '23', '24'], ['答案', 'A', 'G']]],
+  ['without labels', [['21', '22'], ['C', 'B'], ['23', '24'], ['A', 'G']]],
+  ['labeled word answers', [['序号', '56', '57'], ['答案', 'impressive', 'houses'],
+    ['序号', '58', '59'], ['答案', 'acknowledged', 'incredibly']]],
+  ['short phrases and alternatives', [['题号', '56', '57'], ['答案', 'who/that', 'has been told/was told'],
+    ['序号', '58', '59'], ['答案', "don't", 'well-known/one’s own']]],
+]) test(`objective question/answer grid with ${label} stays source evidence without entering writing scoring`, () => {
+  const input = objectiveAnswerTableFixture(rows)
   const before = structuredClone(input)
   const result = buildSourceReferences(...input)
   assert.deepEqual(input, before)
@@ -155,6 +172,45 @@ test('objective question/answer grids stay source evidence without entering writ
   assert(!JSON.stringify(result.groups).includes('source-answers-page-1-objective'))
   assert(result.review.some(item => item.tableId === 'source-answers-page-1-objective'
     && /objective answer table.*retained in source evidence/u.test(item.issue)))
+})
+
+for (const [label, rows] of [
+  ['odd row count', [['题号', '21', '22'], ['答案', 'C', 'B'], ['题号', '23', '24']]],
+  ['decreasing numbers within a pair', [['题号', '22', '21'], ['答案', 'C', 'B']]],
+  ['decreasing numbers across pairs', [['题号', '21', '22'], ['答案', 'C', 'B'],
+    ['题号', '20', '23'], ['答案', 'A', 'G']]],
+  ['repeated number across pairs', [['题号', '21', '22'], ['答案', 'C', 'B'],
+    ['题号', '22', '23'], ['答案', 'A', 'G']]],
+  ['unlabeled word answers', [['56', '57'], ['impressive', 'houses']]],
+  ['word answers without number label', [['56', '57', '58'], ['答案', 'impressive', 'houses']]],
+  ['word answers without answer label', [['题号', '56', '57'], ['impressive', 'houses', 'adding']]],
+  ['Chinese answer text', [['题号', '56', '57'], ['答案', 'impressive', '房子']]],
+  ['digits in an answer', [['题号', '56', '57'], ['答案', 'impressive', 'word2']]],
+  ['fraction answer', [['题号', '56', '57'], ['答案', 'impressive', '1/2']]],
+  ['four-word answer', [['题号', '56', '57'], ['答案', 'impressive', 'one two three four']]],
+  ['double-spaced answer', [['题号', '56', '57'], ['答案', 'impressive', 'has  been']]],
+  ['punctuated answer', [['题号', '56', '57'], ['答案', 'impressive', 'houses.']]],
+  ['empty alternative', [['题号', '56', '57'], ['答案', 'impressive', 'who/']]],
+  ['mixed choices and words in a row', [['题号', '56', '57'], ['答案', 'C', 'houses']]],
+  ['mixed choices and words across rows', [['题号', '21', '22'], ['答案', 'C', 'B'],
+    ['题号', '56', '57'], ['答案', 'impressive', 'houses']]],
+  ['blank answer', [['题号', '21', '22'], ['答案', 'C', '']]],
+  ['non-choice letter', [['题号', '21', '22'], ['答案', 'C', 'H']]],
+  ['unequal paired row widths', [['题号', '21', '22'], ['答案', 'C']]],
+  ['unequal widths across pairs', [['题号', '21', '22'], ['答案', 'C', 'B'],
+    ['题号', '23'], ['答案', 'A']]],
+  ['writing scoring table', [['档次', '分值', '描述'], ['第五档', '13–15', '覆盖全部要点。'],
+    ['第四档', '10–12', '内容完整。'], ['第三档', '7–9', '语言基本连贯。']]],
+]) test(`a table with ${label} is not excluded as an objective answer grid`, () => {
+  const input = objectiveAnswerTableFixture(rows)
+  const before = structuredClone(input)
+  const script = `import { buildSourceReferences } from ${JSON.stringify(new URL('./ocr-proofread.mjs', import.meta.url).href)};
+    buildSourceReferences(...JSON.parse(process.argv[1]));`
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, JSON.stringify(input)],
+    { encoding: 'utf8' })
+  assert.equal(result.status, 1)
+  assert.match(result.stderr, /Source table .* has no writing-task scope/u)
+  assert.deepEqual(input, before)
 })
 
 test('tables resembling answer grids without exact labels, increasing numbers and choice letters still fail closed', () => {

@@ -1,4 +1,4 @@
-import { sourceReferenceScoringScopes } from './sourceReferenceScoringScope.mjs'
+import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from './sourceReferenceScoringScope.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
@@ -128,14 +128,18 @@ export function assertSourceReferenceAdmission({
   const resolved = resolveConfirmedNck1OcrEvidence({ paperId: materialization.paperId, documents,
     evidence, confirmation })
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
-  const expected = resolved.referenceFigures ?? []
+  const allExpected = resolved.referenceFigures ?? []
+  const objectiveAnchors = sourceReferenceObjectiveFigureAnchors(confirmation, answerIds)
+  const expected = allExpected.filter(reference => !objectiveAnchors.has(reference.afterItem.itemId)
+    || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
+      && digestJson(reference.source) === digestJson(figure.source.locator)))
   if (expected.length !== figures.length) reject('All confirmed official-answer content figures must match sidecar figures one-to-one')
   // Layout resolution moves table items out of paragraphs. Index validated
   // confirmation text before layout, excluding only picture-consumed identities.
-  const confirmedTexts = survivingConfirmedText(confirmation, evidence, expected)
+  const confirmedTexts = survivingConfirmedText(confirmation, evidence, allExpected)
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
-  const illustratedDocuments = new Set(expected.map(reference => reference.source.documentId))
+  const illustratedDocuments = new Set(allExpected.map(reference => reference.source.documentId))
   const texts = sidecar.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
     group[kind].entries.flatMap(entry => [
       ...(entry.sourceLabel === null ? [] : [{ text: entry.sourceLabel, source: entry.labelSource }]),
