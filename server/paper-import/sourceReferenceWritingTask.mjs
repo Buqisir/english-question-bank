@@ -567,8 +567,3 @@ export function sourceReferenceEssayTaskStates(confirmation, answerIds, material
   }
   return states
 }
-
-export function sourceReferenceEssayTaskScopes(confirmation, answerIds, materialization, evidence) {
-  return new Map([...sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence)]
-    .map(([itemId, state]) => [itemId, state.capturing ? state.task : null]))
-}

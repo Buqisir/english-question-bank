@@ -255,7 +255,8 @@ export function assertSourceReferenceAdmission({
     if (sidecar.schemaVersion === 'source-references-v4' && scoringScope) {
       reject('Confirmed scoring figures cannot be reassigned to essays')
     }
-    if (scopes.get(reference.afterItem.itemId) !== group.taskType) {
+    const writingState = writingStates.get(reference.afterItem.itemId)
+    if (writingState?.capturing !== true || writingState.task !== group.taskType) {
       reject('Figure anchor requires an explicit confirmed source writing scope matching its Writing Task')
     }
     // An exact surviving item proves the paragraph and entry. Task ownership
