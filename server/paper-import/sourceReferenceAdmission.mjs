@@ -5,7 +5,8 @@ import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { BARE_APPLICATION_SECTION, WRITING_SECTION, LISTENING_REFERENCE_START,
-  NON_WRITING_SECTION, isSourceReferenceSampleLabel, SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
+  NON_WRITING_SECTION, ANSWER_EXPLANATION_START,
+  isSourceReferenceSampleLabel, SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -27,9 +28,16 @@ const hasSamePageContinuation = paragraph => {
 function writingScopes(confirmation, answerIds) {
   const scopes = new Map()
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
-    let writing = false, task = null
+    let writing = false, task = null, startedWriting = false, ended = false
     for (const page of document.pages) for (const item of page.orderedItems) {
       const text = item.text.normalize('NFKC').replace(/\s+/gu, '')
+      // Explanations after writing end essay ownership permanently, matching
+      // producer capture. Explicit scoring appendices use the separate scopes.
+      if (ended || (startedWriting && ANSWER_EXPLANATION_START.test(text))) {
+        ended = true
+        scopes.set(item.itemId, null)
+        continue
+      }
       if (/^第[一二三四五六]部分/u.test(text)) {
         writing = /^第[三四]部分(?:写作|书面表达)/u.test(text)
         task = null
@@ -49,6 +57,9 @@ function writingScopes(confirmation, answerIds) {
       if ((writing && /^第二节(?:\(|$)/u.test(heading))
         || WRITING_SECTION[1][1].test(heading)
         || /^(?:第二节(?:\([^)]*\))?)?读后续写$/u.test(heading)) task = 'continuation'
+      // Producer explanation boundaries require an established task section,
+      // not the writing-part title alone.
+      startedWriting ||= task !== null
       scopes.set(item.itemId, task)
     }
   }

@@ -250,9 +250,9 @@ function referencesFixture(texts, taskTypes = ['continuation'], {
   }] }] })
 }
 
-function standaloneApplicationAdmission(heading, application, continuation) {
-  const texts = [heading, '第一节', '参考范文', application,
-    '第二节', '参考范文', continuation]
+function standaloneApplicationAdmission(heading, application, continuation, { prefix = [], suffix = [] } = {}) {
+  const texts = [...prefix, heading, '第一节', '参考范文', application,
+    '第二节', '参考范文', continuation, ...suffix]
   const bytes = Buffer.from('%PDF-1.4\nSynthetic standalone writing answer source.\n')
   const materialization = {
     paperId: 'paper-standalone-application-admission',
@@ -282,6 +282,26 @@ function standaloneApplicationAdmission(heading, application, continuation) {
 }
 
 for (const heading of ['书面表达：', '应用文：']) {
+  for (const divider of ['试题解析', '答案详解']) {
+    test(`${heading} cannot reopen essay admission after ${divider} through the public pipeline`, () => {
+      const input = standaloneApplicationAdmission('第四部分 写作', '略', 'Mia opened the garden gate.', {
+        suffix: [divider, heading, '参考范文', 'Our class planted herbs.'],
+      })
+      assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
+      assert.deepEqual(input.sidecar.groups[1].essays.entries.flatMap(entry => entry.paragraphs.map(p => p.text)),
+        ['Mia opened the garden gate.'])
+      assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+    })
+
+    test(`${heading} still owns real samples after ${divider} before writing has started`, () => {
+      for (const prefix of [[divider], ['第四部分 写作', divider]]) {
+        const input = standaloneApplicationAdmission(heading, 'Our class planted herbs.', '略', { prefix })
+        assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['captured', 'not_supplied'])
+        assert.doesNotThrow(() => assertSourceReferenceAdmission(input))
+      }
+    })
+  }
+
   test(`${heading} admits a supplied continuation after an omitted application through the public pipeline`, () => {
     const input = standaloneApplicationAdmission(heading, '略', 'Mia opened the garden gate.')
     assert.deepEqual(input.sidecar.groups.map(group => group.essays.state), ['not_supplied', 'captured'])
