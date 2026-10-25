@@ -1,7 +1,7 @@
 // Pure, platform-independent navigation rule. ASR is evidence, never a source-text editor.
 export const LISTENING_SEGMENT_RULE = Object.freeze({
-  version: 'listening-segment-rule-v4',
-  normalizationVersion: 'listening-equivalences-v4',
+  version: 'listening-segment-rule-v5',
+  normalizationVersion: 'listening-equivalences-v5',
   anchorWords: 6,
   expandedAnchorWords: 12,
   fuzzyAnchorsEnabled: false,
@@ -158,7 +158,8 @@ function normalizeListeningUnits(value, aliases = []) {
   let units = [...text.matchAll(lexemes)].flatMap(match => {
     const raw = match[0], start = match.index, end = start + raw.length
     const alias = aliases.find(({ matches }) => matches.test(raw))
-    const words = lexemeWords(alias ? `${alias.hour}:${String(alias.minute).padStart(2, '0')}` : raw)
+    const words = alias?.compoundValue ? alias.tokens
+      : lexemeWords(alias ? `${alias.hour}:${String(alias.minute).padStart(2, '0')}` : raw)
     const expressionForm = /\d/u.test(raw) ? 'literal' : 'words'
     let expressionType = /\d/u.test(raw) ? 'cardinal'
       : words.some(w => ordinalSmall.includes(w) || ['twentieth', 'thirtieth'].includes(w)) ? 'ordinal'
@@ -170,9 +171,10 @@ function normalizeListeningUnits(value, aliases = []) {
     const clock = raw.match(/^(\d{1,2})\s*:\s*(\d{2})$/u)
     const clockValue = clock && Number(clock[1]) <= 23 && Number(clock[2]) <= 59
       ? Number(clock[1]) * 60 + Number(clock[2]) : undefined
-    if (alias) expressionType = 'source_clock_alias'
+    if (alias) expressionType = alias.compoundValue ? 'hyphen_compound' : 'source_clock_alias'
     return words.map(token => ({ token, start, end, expressionType, expressionForm, expressionText: raw,
-      ...(alias ? { expressionValue: alias.hour * 60 + alias.minute }
+      ...(alias?.compoundValue ? { compoundValue: alias.compoundValue }
+        : alias ? { expressionValue: alias.hour * 60 + alias.minute }
         : clockValue !== undefined ? { expressionValue: clockValue }
           : expressionType === 'year' ? { expressionValue: Number(raw) } : {}) }))
   })
@@ -256,6 +258,28 @@ function normalizeListeningUnits(value, aliases = []) {
 export function normalizeListeningText(value) {
   return normalizeListeningUnits(value).map(unit => unit.token)
 }
+
+// A literal hyphen spelling on one side licenses only its exact joined/spaced
+// forms. Do not invent a dictionary of arbitrary word splits. Existing typed
+// number/ordinal/year expressions keep their established normalization.
+function compoundAliases(spellings = []) {
+  return [...new Set(spellings)].sort((a, b) => b.length - a.length).flatMap(spelling => {
+    const parts = spelling.toLowerCase().split('-')
+    const units = normalizeListeningUnits(parts.join(' '))
+    if (!units.some(u => u.expressionType === 'text')) return []
+    // Joining attributed runs inserts a space even when a literal hyphen is
+    // attached to the neighboring run (second + -hand / second- + hand).
+    const pattern = `(?:${parts.join('')}|${parts.join('\\s*-\\s*')}|${parts.join('\\s+')})`
+    return [{ pattern: `(?<![a-z'-])${pattern}(?![a-z'-])`,
+      matches: new RegExp(`^${pattern}$`, 'iu'),
+      compoundValue: parts.join(''), tokens: units.map(u => u.token) }]
+  })
+}
+function compoundSpellings(texts) {
+  return [...new Set(texts.flatMap(text => [...String(text).matchAll(/(?<![a-z'-])[a-z]+(?:-[a-z]+)+(?![a-z'-])/giu)]
+    .map(match => match[0].toLowerCase())))]
+}
+const groupCompoundAliases = group => compoundAliases(group.compoundSpellings)
 
 function sourceClockAliases(corpus) {
   const turns = corpus.flatMap(group => listeningSourceTurnText(group, corpus))
@@ -370,11 +394,12 @@ function listeningSourceTurnText(group, corpus) {
 }
 export function listeningSourceTurns(group, corpus) {
   if (typeof group === 'string') group = { text: group }
-  return listeningSourceTurnText(group, corpus).map(normalizeListeningText).filter(turn => turn.length)
+  return listeningSourceTurnText(group, corpus).map(text =>
+    normalizeListeningUnits(text, groupCompoundAliases(group)).map(u => u.token)).filter(turn => turn.length)
 }
 function listeningSourceRawWords(group, corpus) {
   return listeningSourceTurnText(group, corpus).flatMap(turn =>
-    normalizeListeningUnits(turn).map(unit => turn.slice(unit.start, unit.end)))
+    normalizeListeningUnits(turn, groupCompoundAliases(group)).map(unit => turn.slice(unit.start, unit.end)))
 }
 
 function countReadings(text) {
@@ -444,6 +469,7 @@ function timedListeningUnits(runs, offset, windowEnd, idPrefix, evidencePaths, c
     return { token: unit.token,
       expressionType: unit.expressionType, expressionForm: unit.expressionForm,
       expressionText: unit.expressionText, expressionValue: unit.expressionValue,
+      ...(unit.compoundValue ? { compoundValue: unit.compoundValue } : {}),
       startSeconds: a.start + (a.end - a.start) * left.indexOf(i) / left.length,
       endSeconds: b.start + (b.end - b.start) * (right.indexOf(i) + 1) / right.length,
       runStartSeconds: a.start, runEndSeconds: b.end,
@@ -518,9 +544,10 @@ export function listeningAsrTokens(windows, clockAliases = []) {
     startSeconds: window.startSeconds, endSeconds: window.endSeconds,
     evidencePaths: window.evidencePaths || [],
     words: words.map(({token, startSeconds, endSeconds, runStartSeconds, runEndSeconds, rawRunText,
-      expressionType, expressionForm, expressionText, expressionValue}) => ({
+      expressionType, expressionForm, expressionText, expressionValue, compoundValue}) => ({
       token, startSeconds, endSeconds, runStartSeconds, runEndSeconds, rawRunText,
-      expressionType, expressionForm, expressionText, expressionValue})),
+      expressionType, expressionForm, expressionText, expressionValue,
+      ...(compoundValue ? { compoundValue } : {})})),
   }))
   return { words, markers, observedWindows }
 }
@@ -566,8 +593,20 @@ function compatibleYearExpressions(source, target) {
   const words = text => text.toLowerCase().replace(/[-\s]+/gu, ' ')
   return words(source.expressionText) === words(target.expressionText)
 }
+function compatibleCompoundExpressions(source, target) {
+  if (source?.compoundValue !== target.compoundValue) return false
+  if (!source?.compoundValue) return true
+  // A hyphen elsewhere in the recording/corpus cannot license a joined/spaced
+  // rewrite here. Identical spellings still match without such a rewrite.
+  const raw = unit => unit.expressionText.toLowerCase().replace(/\s+/gu, ' ')
+  return source.expressionText.includes('-') || target.expressionText.includes('-')
+    || raw(source) === raw(target)
+}
 export function alignListeningOccurrence(source, target, sourceUnits = []) {
   const equal = (i, j) => source[i] === target[j].token && compatibleYearExpressions(sourceUnits[i], target[j])
+    // Spaced words in separate segments or across invalid timing never acquired
+    // the common complete span, so cannot complete a hyphen compound.
+    && compatibleCompoundExpressions(sourceUnits[i], target[j])
     // A clock elsewhere in the corpus cannot license a quantity in this
     // occurrence, even if its expanded words happen to be identical.
     && (target[j].expressionType !== 'source_clock_alias'
@@ -840,7 +879,15 @@ export function validateListeningOrder(results) {
 export function evaluateListeningEngine({ groups, instructions = [], windows = [], pauses = [], durationSeconds,
   engine = 'Apple SpeechAnalyzer', corpus = groups, requireWholePaper = true, questions,
   fuzzyAnchors = LISTENING_SEGMENT_RULE.fuzzyAnchorsEnabled, globalAnchorWindows = windows }) {
-  const clockAliases = sourceClockAliases(corpus)
+  const spellings = compoundSpellings([
+    ...corpus.flatMap(group => listeningSourceTurnText(group, corpus)),
+    ...windows.flatMap(window => (window.result?.segments || window.segments || []).flatMap(segment =>
+      [segment.text || '', (segment.runs || segment.words || []).map(run => run.word ?? run.text).join(' ')])),
+  ])
+  const withCompounds = group => ({ ...group, compoundSpellings: spellings })
+  groups = groups.map(withCompounds)
+  corpus = corpus.map(withCompounds)
+  const clockAliases = [...sourceClockAliases(corpus), ...compoundAliases(spellings)]
   const { words, markers, observedWindows } = listeningAsrTokens(windows, clockAliases)
   const speechRuns = boundarySpeechRuns([...new Set([...windows, ...globalAnchorWindows])], pauses, engine)
   const boundarySpeech = mergeSpeechIntervals(speechRuns.map(r => [r.startSeconds, r.endSeconds]))
@@ -861,13 +908,14 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     const result = { segmentId: group.segmentId, questionNumbers: group.questionNumbers, engine,
       ...expected, notes: [], decision: 'usable', issues: [], occurrences: [], playback: null,
       sourceText: group.text, sourceProjection: projectListeningSpokenText(group, corpus),
+      compoundSpellings: spellings,
       boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [],
       observedWindows }
     if (expected.issue) problem(result, expected.issue)
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
     const turns = listeningSourceTurns(result)
     const source = turns.flat()
-    const sourceUnits = listeningSourceTurnText(result).flatMap(text => normalizeListeningUnits(text))
+    const sourceUnits = listeningSourceTurnText(result).flatMap(text => normalizeListeningUnits(text, groupCompoundAliases(result)))
     const sourceRawWords = listeningSourceRawWords(result)
     if (!source.length) return problem(result, 'SOURCE_EMPTY')
     const anchor = anchorsFor(group, corpus, words, expected.expectedReadings, fuzzy)
@@ -899,8 +947,9 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
         result.partialOccurrences.push({startSeconds: words[startIndex].runStartSeconds,
           anchorEndSeconds: words[startIndex + anchor.width - 1].runEndSeconds,
           words: words.slice(startIndex, foreignHead).map(({token, startSeconds, endSeconds,
-            expressionType, expressionForm, expressionText, expressionValue}) => ({
-            token, startSeconds, endSeconds, expressionType, expressionForm, expressionText, expressionValue}))})
+            expressionType, expressionForm, expressionText, expressionValue, compoundValue}) => ({
+            token, startSeconds, endSeconds, expressionType, expressionForm, expressionText, expressionValue,
+            ...(compoundValue ? {compoundValue} : {})}))})
         continue
       }
       const endIndex = tails[0] + anchor.width
@@ -1141,7 +1190,10 @@ function compareObservedWords(observed, reference) {
   const conflicts = []
   const overlaps = (a, b) => a.startSeconds < b.endSeconds && a.endSeconds > b.startSeconds
   const match = span => reference.occurrences.flatMap((o, i) => overlaps(span, o) ? [i] : [])
-  const sourceUnits = listeningSourceTurnText({ ...reference, text: reference.sourceText }).flatMap(text => normalizeListeningUnits(text))
+  // Each engine's observed words retain its own normalization context. Rebuild
+  // the same source under that context rather than comparing unlike tokenizations.
+  const sourceUnits = listeningSourceTurnText({ ...reference, text: reference.sourceText })
+    .flatMap(text => normalizeListeningUnits(text, groupCompoundAliases(observed)))
   const source = sourceUnits.map(u => u.token)
   // Anchors are unnecessary for counterevidence. Inspect every original window,
   // rather than cropping an anchored candidate to the other ASR's body ±0.5s.
