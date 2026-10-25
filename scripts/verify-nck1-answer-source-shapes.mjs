@@ -32,12 +32,13 @@ import {
 const root = path.resolve(import.meta.dirname, '..')
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')
 
-// Natural CI runs this registered verifier, so the answer/gloss regressions
+// Natural CI runs this registered verifier, so the answer/gloss and reference-cache regressions
 // must be invoked here rather than relying on automatic node:test discovery.
 execFileSync(process.execPath, [
   '--test',
   'scripts/import-pipeline/answer-key-comparison.test.mjs',
   'scripts/import-pipeline/answer-source-boundaries.test.mjs',
+  'scripts/import-pipeline/fast-import-references.test.mjs',
 ], { cwd: root, stdio: 'inherit' })
 
 function sourceInput(produced, documents) {

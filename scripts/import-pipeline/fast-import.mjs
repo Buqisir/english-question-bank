@@ -20,6 +20,7 @@ import {
 import { createRequire } from 'node:module'
 import os from 'node:os'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import {
@@ -32,6 +33,7 @@ import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
 import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -112,7 +114,6 @@ function context(paperId) {
   if (!/^paper-[a-z0-9-]+$/u.test(paperId || '')) fail('paperId must look like paper-…')
   const work = path.join(root, 'imports/ocr-proofread', paperId)
   const fast = path.join(work, 'fast')
-  mkdirSync(path.join(fast, 'logs'), { recursive: true })
   const statePath = path.join(fast, 'state.json')
   return {
     paperId,
@@ -157,7 +158,7 @@ function cli(script, ...args) {
 
 // Runs one repository CLI; full output goes to fast/logs/<label>.log, the parsed final JSON
 // document is returned. `review` routes the command to the bound Review target.
-function run(ctx, label, args, { review = false } = {}) {
+function run(ctx, label, args, { review = false, retainLog = true } = {}) {
   const viaLocal = review && target.local
   const argv = viaLocal ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
   return new Promise((resolve, reject) => {
@@ -169,7 +170,10 @@ function run(ctx, label, args, { review = false } = {}) {
     child.on('error', reject)
     child.on('close', (code) => {
       const log = path.join(ctx.logs, `${label}.log`)
-      writeFileSync(log, `$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}`)
+      if (retainLog) {
+        mkdirSync(ctx.logs, { recursive: true })
+        writeFileSync(log, `$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}`)
+      }
       if (code === 0) resolve(lastJson(out) ?? { stdout: out.trim() })
       else reject(new Error(`${label} 失败（exit ${code}），日志 ${path.relative(root, log)}\n${tail(err || out)}`))
     })
@@ -177,6 +181,7 @@ function run(ctx, label, args, { review = false } = {}) {
 }
 
 function background(ctx, name, command, args) {
+  mkdirSync(ctx.logs, { recursive: true })
   const log = path.join(ctx.logs, `${name}.log`)
   const fd = openSync(log, 'a')
   const child = spawn(command, args, { cwd: root, env, detached: true, stdio: ['ignore', fd, fd] })
@@ -879,7 +884,80 @@ function pdfContactSheets(ctx) {
   return { dir: path.relative(root, qa) }
 }
 
-async function finish(ctx, args) {
+function referencesCurrent(ctx) {
+  const references = ctx.state.steps['source-references']
+  return Boolean(references?.finishedAt
+    && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+}
+
+function referenceStop(ctx, code, message, cause) {
+  throw Object.assign(new Error(`${code}: ${message}；保留封存副本，先只读运行 `
+    + `node scripts/import-pipeline/review.mjs status ${ctx.paperId} 对账。`, { cause }), { code })
+}
+
+async function readCandidateStatus(ctx) {
+  // Status failure/ambiguity must not even overwrite a local log.
+  return run(ctx, 'references-status', cli('review.mjs', 'status', ctx.paperId),
+    { review: true, retainLog: false })
+}
+
+async function assertReferencesMutable(ctx, readStatus) {
+  const submitted = ['push', 'local-preview', 'screen', 'local-screen']
+    .some(name => ctx.state.steps[name])
+  const retained = ['signals/review-restore.json', 'canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
+    'signals/locally-published.json'].some(file => existsSync(path.join(ctx.paperDir, file)))
+    || existsSync(path.join(ctx.fast, 'upload-timeline.jsonl'))
+    || existsSync(path.join(ctx.work, 'handoff/evidence.json'))
+  const initialization = path.join(ctx.paperDir, 'signals/source-intake-initialization.json')
+  const hasBase = existsSync(initialization) && readJson(initialization).baseRevisionId
+  if (submitted || retained || hasBase || ctx.state.data.candidateRevisionId || ctx.state.data.revisionId
+    || ctx.state.data.localReport || ctx.state.data.status === 'local_ready') {
+    referenceStop(ctx, 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED', '已有 Candidate、push 或 preview 记录，禁止自动重建源参考')
+  }
+  let status
+  try { status = await readStatus(ctx) } catch (cause) {
+    referenceStop(ctx, 'SOURCE_REFERENCES_REMOTE_UNKNOWN', '远端 Candidate 状态 UNKNOWN，禁止自动重建源参考', cause)
+  }
+  const unknown = () => referenceStop(ctx, 'SOURCE_REFERENCES_REMOTE_UNKNOWN',
+    '远端 Candidate 状态缺失或不明确，禁止自动重建源参考')
+  if (status?.paperId !== ctx.paperId || !Array.isArray(status.revisions)
+    || status.revisions.some(item => !item || item.paperId !== ctx.paperId
+      || typeof item.id !== 'string' || !item.id || typeof item.state !== 'string'
+      || !['ocr', 'candidate'].includes(item.reviewKind))) unknown()
+  const latest = status.revisions.find(item => item.id === status.latestRevisionId)
+  if (status.revisions.length
+    ? !latest || status.latest?.id !== latest.id || status.latest?.reviewKind !== latest.reviewKind
+    : status.latestRevisionId !== null || status.latest !== null) unknown()
+  if (status.revisions.some(item => item.reviewKind === 'candidate')) {
+    referenceStop(ctx, 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED', '远端已有 Candidate revision，禁止自动重建源参考')
+  }
+}
+
+export function assertReferenceProductsReady(ctx) {
+  if (!referencesCurrent(ctx)) throw Object.assign(new Error(
+    'SOURCE_REFERENCES_FINISH_REQUIRED: 源参考 producerVersion 旧或缺失；先运行 finish 并重新目检 PDF，再送审。'),
+  { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
+  // A completion marker alone cannot prove that QA followed this reference generation.
+  let previous = -Infinity
+  for (const name of ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']) {
+    const entry = ctx.state.steps[name]
+    const started = Date.parse(entry?.startedAt), finished = Date.parse(entry?.finishedAt)
+    if (!Number.isFinite(started) || !Number.isFinite(finished) || started < previous || finished < started) {
+      throw Object.assign(new Error(
+        `SOURCE_REFERENCES_QA_REQUIRED: ${name} 未在本次源参考之后完成；先运行 finish ${ctx.paperId} --redo-from ${name} 并重新目检 PDF，再送审。`),
+      { code: 'SOURCE_REFERENCES_QA_REQUIRED' })
+    }
+    previous = finished
+  }
+}
+
+// Stage overrides keep the orchestration testable without launching rendering or Review writes.
+export async function finish(ctx, args, { readStatus = readCandidateStatus, referenceStages = {} } = {}) {
+  // Reconcile before page-limit edits, sidecar installs, or any state/log write.
+  if (!referencesCurrent(ctx)) {
+    await assertReferencesMutable(ctx, readStatus)
+    redoFrom(ctx, 'source-references')
+  }
   for (const [flag, edition, expected] of [
     ['--large-complete-page-limit', 'largeComplete', '13'],
     ['--large-no-listening-page-limit', 'largeNoListening', '11'],
@@ -936,20 +1014,25 @@ async function finish(ctx, args) {
   })
   // Confirmed answer figures require their admitted v3 sidecar before the
   // pagination projection can load the Candidate.
-  await step(ctx, 'source-references', () => sourceReferences(ctx))
-  await step(ctx, 'pagination-run', () => {
-    const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
-    const { candidateDigest } = projection
-    productSet(ctx, projection)
-    startPagination(ctx, candidateDigest)
-    return { candidateDigest }
-  })
-  await step(ctx, 'pagination-plan', () => mergePagination(ctx))
-  await step(ctx, 'freeze', async () => {
-    const frozen = await run(ctx, 'freeze', cli('freeze-products.mjs', '--paper-dir', ctx.paperDir, '--parallel'))
-    return Object.fromEntries(frozen.files.map((file) => [path.basename(file.path, '.pdf'), file.pageCount]))
-  })
-  const qa = await step(ctx, 'pdf-qa', () => pdfContactSheets(ctx))
+  const stages = {
+    'source-references': () => sourceReferences(ctx),
+    'pagination-run': () => {
+      const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+      const { candidateDigest } = projection
+      productSet(ctx, projection)
+      startPagination(ctx, candidateDigest)
+      return { candidateDigest }
+    },
+    'pagination-plan': () => mergePagination(ctx),
+    freeze: async () => {
+      const frozen = await run(ctx, 'freeze', cli('freeze-products.mjs', '--paper-dir', ctx.paperDir, '--parallel'))
+      return Object.fromEntries(frozen.files.map((file) => [path.basename(file.path, '.pdf'), file.pageCount]))
+    },
+    'pdf-qa': () => pdfContactSheets(ctx),
+    ...referenceStages,
+  }
+  for (const [name, produce] of Object.entries(stages)) await step(ctx, name, produce)
+  const qa = ctx.state.steps['pdf-qa'].result
   const steps = ctx.state.steps
   say('\n待主 Agent 目检 PDF：')
   say(`- ${productSet(ctx).products.length} 份 PDF 缩略总览：${qa.dir}/contact-{${productSet(ctx).products.join(',')}}.png；文字版 ${qa.dir}/<产品>.txt`)
@@ -960,7 +1043,8 @@ async function finish(ctx, args) {
 
 // The Candidate upload. Under the batch submission rule it runs only after PDF QA found nothing
 // blocking; `--resolves` carries Owner issues fixed by this revision.
-async function submit(ctx, args) {
+export async function submit(ctx, args) {
+  assertReferenceProductsReady(ctx)
   // Always re-read before a possibly cached push step; no preview/submit bypass.
   assertImportSubmissionReady(ctx.paperDir)
   const localPreview = args.includes('--local-preview')
@@ -1113,10 +1197,19 @@ function redoFrom(ctx, name) {
   save(ctx)
 }
 
+export async function requestedRedo(ctx, name, { readStatus = readCandidateStatus } = {}) {
+  // An explicit redo must not erase submission evidence before finish sees it.
+  if (STEP_ORDER.includes(name) && (!referencesCurrent(ctx)
+    || STEP_ORDER.indexOf(name) <= STEP_ORDER.indexOf('pdf-qa'))) {
+    await assertReferencesMutable(ctx, readStatus)
+  }
+  redoFrom(ctx, name)
+}
+
 const [command, paperId, ...args] = process.argv.slice(2)
-try {
+if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
   const ctx = context(paperId)
-  if (option(args, '--redo-from')) redoFrom(ctx, option(args, '--redo-from'))
+  if (option(args, '--redo-from')) await requestedRedo(ctx, option(args, '--redo-from'))
   if (command === 'prep') await prep(ctx, args)
   else if (command === 'after-proofread') await afterProofread(ctx, args)
   else if (command === 'finish') await finish(ctx, args)
