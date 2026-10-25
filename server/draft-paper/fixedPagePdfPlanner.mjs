@@ -103,12 +103,20 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+function plannedGroupBreakPattern(groupId) {
+  return new RegExp(`(<section\\b[^>]*data-canonical-group-id="${escapeRegExp(groupId)}"[^>]*)(>)`)
+}
+
+export function hasPlannedGroupBreakAnchor(html, groupId) {
+  return typeof groupId === 'string' && groupId.length > 0 && plannedGroupBreakPattern(groupId).test(html)
+}
+
 export function applyPlannedGroupBreaks(html, groupIds) {
   const bankBreak = html.includes('data-pdf-option-bank-fallback') ? 'auto' : 'avoid'
   const bankStyle = `<style>.canonical-option-bank-region{break-inside:${bankBreak};page-break-inside:${bankBreak}}</style>`
   let planned = html.replace('</head>', `${PLANNED_BREAK_STYLE}${bankStyle}</head>`)
   for (const groupId of groupIds) {
-    const pattern = new RegExp(`(<section\\b[^>]*data-canonical-group-id="${escapeRegExp(groupId)}"[^>]*)(>)`)
+    const pattern = plannedGroupBreakPattern(groupId)
     if (!pattern.test(planned)) {
       throw Object.assign(new Error(`无法定位题组 ${groupId} 的 PDF 分页锚点`), { code: 'PAPER_FIXED_PAGE_IMPOSSIBLE' })
     }
@@ -486,6 +494,7 @@ export async function renderDiagnosticFixedPagePdf(html, {
 export async function searchFixedPagePdf(html, {
   targetPages, render, renderLimit, natural, atMost = false, accept = () => true,
   rejectOverflowCandidates = false, balanceWhitespace = false,
+  requiredBreakGroupIds = [],
 }) {
   if (![8, 10, 12].includes(targetPages) && !([9, 11, 13].includes(targetPages) && atMost === true)) {
     throw new Error('targetPages must be 8, 10 or 12, or an explicit 9, 11 or 13-page ceiling')
@@ -506,14 +515,19 @@ export async function searchFixedPagePdf(html, {
   // protection still applies; stored explicit plans are not rewritten.
   const candidates = natural.inspection.slice(1)
     .filter(group => !balanceWhitespace || group.type !== 'listening')
+    .filter(group => !requiredBreakGroupIds.includes(group.id))
     .map(({ id }) => id)
+  const groupOrder = natural.inspection.map(({ id }) => id)
+  const withRequiredBreaks = breaks => [...new Set([...requiredBreakGroupIds, ...breaks])]
+    .sort((a, b) => groupOrder.indexOf(a) - groupOrder.indexOf(b))
+  const baseBreaks = withRequiredBreaks([])
   // A real render creates both a complete paginated HTML document and PDF.
   // Keep the search small, and retain neither artifact for unsuccessful
   // candidates. Twenty-four serial renders is an explicit worst-case bound,
   // rather than the former 256-render powerset walk.
   const maxRenders = Math.min(renderLimit, 1 + candidates.length * 2)
-  const queue = [{ breaks: [], summary: summarize(natural) }]
-  const seen = new Set([''])
+  const queue = [{ breaks: baseBreaks, summary: summarize(natural) }]
+  const seen = new Set([baseBreaks.join('\u0000')])
   let bestFit
 
   function summarize(result) {
@@ -590,17 +604,17 @@ export async function searchFixedPagePdf(html, {
         splitOptionBankCount: result.inspection.filter((group) => group.optionBankPages?.length > 1).length }
     }
   }
-  retain(natural, [], queue[0].summary)
+  retain(natural, baseBreaks, queue[0].summary)
   if (bestFit?.layoutPenalty === 0) {
     return { ...bestFit, searchedCandidates: 1 }
   }
 
   // Nine groups / eight pages: grammar and application share by default.
   // Queue this seed too; the common search can remove breaks if A overruns.
-  const idealBreaks = preferWholeGroups ? natural.inspection.slice(1).filter((group, index) =>
+  const idealBreaks = preferWholeGroups ? withRequiredBreaks(natural.inspection.slice(1).filter((group, index) =>
     !(group.type === 'writing' && natural.inspection[index].type === 'grammarFill'))
-    .map(({ id }) => id) : []
-  if (idealBreaks.length && seen.size < maxRenders) {
+    .map(({ id }) => id)) : []
+  if (idealBreaks.length && !seen.has(idealBreaks.join('\u0000')) && seen.size < maxRenders) {
     seen.add(idealBreaks.join('\u0000'))
     const result = await renderPlan(idealBreaks)
     if (result) {
@@ -630,9 +644,9 @@ export async function searchFixedPagePdf(html, {
     // budget on siblings; retained alternatives still cover a later dead end.
     for (const id of remaining) {
       if (seen.size >= maxRenders) break
-      const breaks = (state.breaks.includes(id)
+      const breaks = withRequiredBreaks(state.breaks.includes(id)
         ? state.breaks.filter((existing) => existing !== id)
-        : [...state.breaks, id]).sort((a, b) => candidates.indexOf(a) - candidates.indexOf(b))
+        : [...state.breaks, id])
       const key = breaks.join('\u0000')
       if (seen.has(key)) continue
       seen.add(key)

@@ -321,7 +321,10 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, timing =
           || element.getAttribute('data-canonical-question-id')
         if (id) {
           const previous = pagesByBlock.get(id)
-          if (previous && previous !== page) return { id, reason: 'atomic block split across pages' }
+          if (previous && previous !== page) {
+            const splitGroupId = element.closest('[data-canonical-group-id]')?.getAttribute('data-canonical-group-id')
+            return { id, reason: 'atomic block split across pages', ...(splitGroupId ? { splitGroupId } : {}) }
+          }
           pagesByBlock.set(id, page)
         }
         if (box.top < area.top - 1 || box.bottom > area.bottom + 1
@@ -372,6 +375,7 @@ export async function renderPaginatedPaper(printHtml, { inspect = null, timing =
         code: 'PAPER_LAYOUT_OVERFLOW',
         blockId: layoutFailure.id,
         answerBoxFamily: layoutFailure.answerBoxFamily,
+        ...(layoutFailure.splitGroupId ? { splitGroupId: layoutFailure.splitGroupId } : {}),
       })
     }
     const inspection = typeof inspect === 'function'

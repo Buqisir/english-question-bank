@@ -1,6 +1,6 @@
 import { validateProductPageLimits } from '../paper-import/pdfPageLimits.mjs'
 import { applicationDrawingAreaPolicy } from '../../shared/paper-canonical/applicationDrawingArea.mjs'
-import { applyPlannedGroupBreaks, inspectGroups, searchFixedPagePdf } from './fixedPagePdfPlanner.mjs'
+import { applyPlannedGroupBreaks, hasPlannedGroupBreakAnchor, inspectGroups, searchFixedPagePdf } from './fixedPagePdfPlanner.mjs'
 import { finishPaginationTiming, timedCandidateRender } from './paginationTiming.mjs'
 
 // Separate edition IDs preserve the meaning and digests of saved v1–v3 plans.
@@ -177,16 +177,25 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   }
   const fitProfile = async (layout, tierStart) => {
     let natural
+    let requiredBreakGroupIds = []
     try { natural = await measure(layout) } catch (error) {
-      if (error.code === 'PAPER_LAYOUT_OVERFLOW') return null
-      throw error
+      if (error.code !== 'PAPER_LAYOUT_OVERFLOW') throw error
+      if (!hasPlannedGroupBreakAnchor(html, error.splitGroupId)) return null
+      // Retry only the identified atomic split, with the same legal group
+      // anchor used by explicit plans. This break stays mandatory thereafter.
+      requiredBreakGroupIds = [error.splitGroupId]
+      try { natural = await measure(layout, requiredBreakGroupIds) } catch (retryError) {
+        if (retryError.code !== 'PAPER_LAYOUT_OVERFLOW') throw retryError
+        return null
+      }
     }
     // Semantic breaks can redistribute an overfull paper, but cannot justify
     // unbounded trial renders. Reserve room to restore both response boxes.
     let fit
     try {
       fit = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
-        ...policy, natural, accept, renderLimit: withinPages(natural) && accept(natural) ? 13 : 5,
+        ...policy, natural, accept, requiredBreakGroupIds,
+        renderLimit: (withinPages(natural) && accept(natural) ? 13 : 5) - requiredBreakGroupIds.length,
         balanceWhitespace: policy.atMost,
         rejectOverflowCandidates: true,
         render: async (...args) => { searchedCandidates += 1; return measureCandidate(...args, layout) },
@@ -203,6 +212,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     // result without another render, retaining the exact chosen breaks.
     const rescored = await searchFixedPagePdf(applyStudentProductLayout(html, layout, edition), {
       ...policy, natural: fit, accept, renderLimit: 1, render, balanceWhitespace: policy.atMost,
+      requiredBreakGroupIds: fit.plannedBreakGroupIds,
     })
     return { ...rescored, plannedBreakGroupIds: fit.plannedBreakGroupIds,
       edition, layout, fontSizePt: layout.fontSizePt, lineHeightPt: layout.fontSizePt === 12 ? 19.5 : 18,

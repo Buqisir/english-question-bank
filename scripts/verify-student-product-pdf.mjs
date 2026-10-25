@@ -6,7 +6,7 @@ import { applyStudentProductLayout, planStudentProductPdf, renderExplicitStudent
 import { validatePaperPaginationPlan, paginationPlanEdition, productPageLimitsForPlan, productPlanAuthorization } from '../server/paper-import/paginationPlan.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
-import { searchFixedPagePdf, inspectGroups } from '../server/draft-paper/fixedPagePdfPlanner.mjs'
+import { applyPlannedGroupBreaks, searchFixedPagePdf, inspectGroups } from '../server/draft-paper/fixedPagePdfPlanner.mjs'
 import { reviewPaginationMetadata } from '../server/import-review/reviewPagination.mjs'
 import { importLargePageLimits, largePageLimitArgs } from './import-pipeline/lib-economy-page-allowance.mjs'
 import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../server/paper-import/pdfPageLimits.mjs'
@@ -26,6 +26,84 @@ const geometry = source => ({
   application: Number(source.match(/canonical-application-response\{height:(\d+)mm/)?.[1]),
   continuation: Number(source.match(/canonical-continuation-response\{height:(\d+)mm/)?.[1]),
 })
+
+// Atomic split recovery is a single legal group-break retry per profile.
+// Keep it through semantic search, writing-space restoration and plan replay.
+{
+  const splitGroupId = 'listening-long'
+  const listeningHtml = html.replace('<body>', '<body><section data-canonical-group-id="listening-short"></section><section data-canonical-group-id="listening-long"></section>')
+  const listeningInspection = [
+    { id: 'listening-short', type: 'listening', pages: [1] },
+    { id: splitGroupId, type: 'listening', pages: [2, 3] }, ...inspection,
+  ]
+  const hasBreak = source => source.includes(`data-canonical-group-id="${splitGroupId}" data-pdf-planned-break`)
+  for (const restore of [false, true]) {
+    const seen = []
+    const selected = await planStudentProductPdf(listeningHtml, { edition: 'largeComplete', largeCompletePageLimit: 13,
+      render: async source => {
+        seen.push(source)
+        if (!hasBreak(source)) throw Object.assign(new Error('atomic block split across pages'), {
+          code: 'PAPER_LAYOUT_OVERFLOW', splitGroupId,
+        })
+        return { pageCount: restore && geometry(source).continuation > 40 ? 14 : 12,
+          inspection: listeningInspection }
+      } })
+    assert.equal(selected.pageCount, 12)
+    assert.ok(selected.plannedBreakGroupIds.includes(splitGroupId))
+    assert.equal(selected.layout.answerBoxHeightsMm.continuation, restore ? 40 : 57)
+    assert.equal(selected.searchedCandidates, seen.length, 'the failed baseline and retry both count')
+    if (!restore) assert.equal(seen.length, 2, 'one baseline plus exactly one group-break retry')
+    else assert.ok(seen.some(source => hasBreak(source) && geometry(source).continuation === 41),
+      'restoration probes the failure boundary while preserving the required break')
+    const slotBindings = [
+      { slotId: 'listening.short-form', groupId: 'listening-short', familyContractId: 'listening' },
+      { slotId: 'listening.long-form', groupId: splitGroupId, familyContractId: 'listening' },
+      { slotId: 'writing.application', groupId: 'application', familyContractId: 'application-writing' },
+      { slotId: 'writing.continuation', groupId: 'continuation', familyContractId: 'continuation-writing' },
+    ]
+    const saved = { schemaVersion: 'paper-pagination-plan-v6', paperId: 'split-fixture',
+      sourceDigest: 'source', candidateDigest: 'candidate', ...productPlanAuthorization('paper-pagination-plan-v6'),
+      editions: { largeComplete: { targetPages: 13, includeListening: true, omitCover: false, coverGapsPt: null,
+        allowSplitOptionBank: false, layout: selected.layout,
+        breakSlotIds: selected.plannedBreakGroupIds.map(id => slotBindings.find(binding => binding.groupId === id).slotId) } } }
+    assert.deepEqual(validatePaperPaginationPlan(saved, { paperId: saved.paperId,
+      sourceDigest: saved.sourceDigest, candidateDigest: saved.candidateDigest, slotBindings }), saved)
+    assert.deepEqual(paginationPlanEdition(saved, 'largeComplete', slotBindings).plannedBreakGroupIds,
+      selected.plannedBreakGroupIds)
+  }
+  for (const mode of ['no-group', 'unknown-group', 'retry-overflow']) {
+    const seen = []
+    await assert.rejects(() => planStudentProductPdf(listeningHtml, { edition: 'largeComplete',
+      render: async source => {
+        seen.push(source)
+        throw Object.assign(new Error('atomic block split across pages'), { code: 'PAPER_LAYOUT_OVERFLOW',
+          ...(mode === 'no-group' ? {} : { splitGroupId: mode === 'unknown-group' ? 'foreign' : splitGroupId }) })
+      } }), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' && error.searchedCandidates === seen.length)
+    assert.equal(seen.filter(hasBreak).length, mode === 'retry-overflow' ? 5 : 0,
+      'only the five profile baselines retry; no recursive retry or unknown-anchor trial')
+  }
+}
+
+// Search can add/remove optional breaks, but never remove the recovery break.
+{
+  const seen = []
+  const natural = { pageCount: 8, inspection: [
+    { id: 'a', type: 'reading', pages: [1] },
+    { id: 'b', type: 'reading', pages: [2, 3] },
+    { id: 'c', type: 'reading', pages: [3, 4] },
+  ] }
+  const selected = await searchFixedPagePdf('<head></head><section data-canonical-group-id="b"></section><section data-canonical-group-id="c"></section>', {
+    targetPages: 8, natural, renderLimit: 5, requiredBreakGroupIds: ['b'],
+    render: async source => {
+      seen.push(source)
+      assert.match(source, /data-canonical-group-id="b" data-pdf-planned-break/)
+      return natural
+    },
+  })
+  assert.ok(seen.length > 0)
+  assert.ok(selected.plannedBreakGroupIds.includes('b'))
+  assert.equal(selected.searchedCandidates, seen.length + 1)
+}
 
 // A modest tail is worth a whole reading group; half a blank page is not.
 // Old/economy callers must retain exactly their prior selection policy.
@@ -440,6 +518,18 @@ assert.throws(() => applyStudentProductLayout(html, {
   ...layout, profile: coverLiftProfile, figureLayout: 'float80',
 }, 'largeNoListening'), /Invalid/)
 try {
+  // The renderer's geometry pass lives inside page.evaluate; exercise real
+  // Paged.js fragments rather than extracting or weakening its checks.
+  for (const grouped of [false, true]) {
+    const atomic = `<div class="question" data-canonical-block-id="split-question">${'<p>Question line</p>'.repeat(80)}</div>`
+    const fixture = `<html><head><style>@page{size:A4;margin:20mm}body,p{margin:0;line-height:20px}</style></head><body>${
+      grouped ? `<section data-canonical-group-id="outer"><section data-canonical-group-id="nearest">${atomic}</section></section>` : atomic
+    }</body></html>`
+    await assert.rejects(() => renderPaginatedPaper(applyPlannedGroupBreaks(fixture, [])),
+      error => error.code === 'PAPER_LAYOUT_OVERFLOW'
+        && error.message.endsWith('(atomic block split across pages)')
+        && (grouped ? error.splitGroupId === 'nearest' : !Object.hasOwn(error, 'splitGroupId')))
+  }
   // Exercise the renderer's actual error classification, not just synthetic
   // planner errors: horizontal and page-area failures remain unknown.
   for (const family of ['application', 'continuation']) {
