@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
+import childProcess from 'node:child_process'
+import { syncBuiltinESMExports } from 'node:module'
 import { mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -116,6 +118,33 @@ exec ${quote(native)} "$@"
   }
   delete process.env.EQB_RASTER_TEST_STALL
   console.log('PASS hard timeout at all five native recrop stages; ImageMagick memory/map/disk/thread/time limits')
+  const nativeExec = childProcess.execFileSync
+  const budgets = []
+  let budgeted
+  childProcess.execFileSync = (tool, args, options) => {
+    budgets.push({ tool, timeout: options?.timeout, killSignal: options?.killSignal })
+    return nativeExec(tool, args, options)
+  }
+  syncBuiltinESMExports()
+  try {
+    budgeted = captureSourceReferenceFigure({ pdfBytes: samplePdf, page: 1, region,
+      resourceLimits: { timeoutMs: 1_000_000 } })
+  } finally {
+    childProcess.execFileSync = nativeExec
+    syncBuiltinESMExports()
+  }
+  const recropCalls = budgets.slice(0, 5)
+  assert.deepEqual(recropCalls.map(call => call.tool), ['pdfinfo', 'pdftoppm', 'magick', 'magick', 'magick'])
+  assert(recropCalls[0].timeout > 15_000 && recropCalls[0].timeout <= 45_000,
+    'consumer hard ceiling is 45 seconds even when a caller asks for more')
+  for (let i = 0; i < recropCalls.length; i++) {
+    assert.equal(recropCalls[i].killSignal, 'SIGKILL')
+    assert(recropCalls[i].timeout > 0)
+    assert(recropCalls[i].timeout <= (i ? recropCalls[i - 1].timeout : 45_000),
+      'each stage receives only the remaining shared budget')
+  }
+  assert.equal(budgeted.pixelWidth, sampleCrop.pixelWidth)
+  console.log('PASS reference recrop shares one 45s ceiling; callers cannot raise it and stages retain SIGKILL')
   for (const rotation of [0, 90, 180, 270]) {
     const pdfBytes = pagePdf(72, 96, rotation)
     const legacy = rasterPdfRegion({ pdfBytes, page: 1, region, density: 288 })

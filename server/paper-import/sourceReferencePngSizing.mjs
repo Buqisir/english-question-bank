@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 const nativeLimits = ['-limit', 'memory', '128MiB', '-limit', 'map', '128MiB',
-  '-limit', 'disk', '0', '-limit', 'thread', '1', '-limit', 'time', '10']
+  '-limit', 'disk', '0', '-limit', 'thread', '1', '-limit', 'time', '20']
 // Let libpng select its default filters: IM6 rejects the IM7 filter value 5
 // as a warning, which -regard-warnings correctly treats as a failed encoding.
 const encoding = ['-define', 'png:compression-level=9',
@@ -38,7 +38,8 @@ export function fitSourceReferencePng(crop, limits) {
     fail('PNG decoded dimensions exceed limits')
   }
   const directory = mkdtempSync(path.join(tmpdir(), 'eqb-reference-size-'))
-  const deadline = performance.now() + 15_000
+  // Shared wall-clock ceiling includes scheduler contention across all stages.
+  const deadline = performance.now() + 30_000
   try {
     const input = path.join(directory, 'source.png')
     writeFileSync(input, crop.bytes)
@@ -55,17 +56,17 @@ export function fitSourceReferencePng(crop, limits) {
     if (original.length !== width * height * 4) fail('PNG sizing dimensions disagree with the fresh crop')
     let opaque = true
     for (let i = 3; i < original.length; i += 4) if (original[i] !== 255) { opaque = false; break }
-    // Dropping an opaque alpha channel is lossless only after exact RGBA replay.
-    for (const codec of opaque ? ['png32', 'png24'] : ['png32']) {
-      const file = path.join(directory, `${codec}.png`)
-      run([input, ...encoding, `${codec}:${file}`])
-      if (!pixels(file).equals(original)) fail('Lossless PNG encoding changed source pixels')
-      const bytes = readFileSync(file)
-      if (bytes.length <= limits.pngBytes) return {
-        bytes, pixelWidth: width, pixelHeight: height,
-        processing: { method: 'lossless', originalByteLength: crop.bytes.length,
-          byteLength: bytes.length, codec, reason: 'png_exceeds_2_mib' },
-      }
+    // Opaque crops need only PNG24; avoid a redundant PNG32 encode + decode.
+    // Dropping alpha is still accepted only after exact RGBA replay.
+    const codec = opaque ? 'png24' : 'png32'
+    const file = path.join(directory, `${codec}.png`)
+    run([input, ...encoding, `${codec}:${file}`])
+    if (!pixels(file).equals(original)) fail('Lossless PNG encoding changed source pixels')
+    const bytes = readFileSync(file)
+    if (bytes.length <= limits.pngBytes) return {
+      bytes, pixelWidth: width, pixelHeight: height,
+      processing: { method: 'lossless', originalByteLength: crop.bytes.length,
+        byteLength: bytes.length, codec, reason: 'png_exceeds_2_mib' },
     }
     fail('PNG exceeds 2 MiB after lossless compression')
   } catch (error) {

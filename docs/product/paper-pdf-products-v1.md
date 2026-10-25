@@ -260,10 +260,12 @@ PNG32 输出；接收端完整解码为 sRGB 8-bit RGBA，按像素重放比对�
 冻结 PNG 的精确字节 SHA 继续绑定审批与发布；导出只读批准版本，不临时重裁。
 新裁图超过 2 MiB 时，固定 zlib level 9、沿用编码器默认 PNG filters 重编码
 （兼容 ImageMagick 6/7；IM6 不接受 `png:compression-filter=5`）；
-仅在 RGBA 逐字节相等后接受无损结果，不透明图可移除 alpha 通道转 PNG24。
+仅在 RGBA 逐字节相等后接受无损结果；全不透明图直接移除 alpha 通道转 PNG24，
+省去一次 PNG32 编码与解码，有透明像素的图继续使用 PNG32。
 未超限图保持原字节；已有封存图及摘要不重编码。
 无损后仍超限即拒绝，不改变分辨率、v1 profile 或 schema。
-无损压缩使用有界原生处理，另共享 15 秒截止时间。
+无损压缩使用有界原生处理，另共享 30 秒截止时间，超时 SIGKILL；
+ImageMagick 限制 memory/map 各 128 MiB、disk 0、thread 1、time 20 秒。
 仅接受 canonical base64 的单帧 PNG，完整解码并拒绝动画、截断、尾随数据及
 不属于裁图 profile 的压缩元数据（zTXt/iTXt/iCCP），避免旁路解压预算。
 限额集中在 `SOURCE_REFERENCE_IMAGE_LIMITS`：每图 2 MiB、单边 4096 px、
@@ -273,7 +275,7 @@ PNG32 输出；接收端完整解码为 sRGB 8-bit RGBA，按像素重放比对�
 
 参考图接收重裁额外限制整页栅格：单边 8192 px、总计 1600 万像素；
 渲染前按精确源 PDF 的 MediaBox 换算检查，保守增加 1 px 覆盖尺寸舍入。
-pdfinfo、pdftoppm、两次 identify 和 crop 共用 15 秒截止时间，超时 SIGKILL；
+pdfinfo、pdftoppm、两次 identify 和 crop 共用 45 秒截止时间，超时 SIGKILL；
 ImageMagick 另限制 memory/map 各 128 MiB、disk 0、thread 1、time 10 秒。
 超过预算返回 `SOURCE_REFERENCES_FIGURE_RASTER_LIMIT`，超时返回
 `SOURCE_REFERENCES_FIGURE_RASTER_TIMEOUT`，原生进程失败返回
