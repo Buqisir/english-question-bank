@@ -133,7 +133,13 @@ export function sourceReferenceObjectiveFigureAnchors(confirmation, answerIds) {
   const anchors = new Set()
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     const items = document.pages.flatMap(page => page.orderedItems)
-    const explicitStart = items.findIndex(item => item.itemId === starts.get(document.documentId))
+    // Scoring can begin before any named task. Its first complete overview
+    // or entry label already rules out treating a following A–G image as objective.
+    const explicitStart = items.findIndex(item => {
+      const heading = writingRuleMatchingView(item.text)
+      return item.itemId === starts.get(document.documentId)
+        || WRITING_SCORING_OVERVIEW.test(heading) || SCORING_ENTRY_LABEL.test(heading)
+    })
     if (explicitStart < 0) continue
     // Earlier bare/combined producer headings also cap this exclusion. When
     // their task context is ambiguous, retain the image rather than discard it.
