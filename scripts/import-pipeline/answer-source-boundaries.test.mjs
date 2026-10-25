@@ -5,6 +5,50 @@ import { joinTranscriptTurns } from './ocr-proofread.mjs'
 
 const body = (texts) => texts.map((text, sourceIndex) => ({ kind: 'paragraph', text, sourceIndex }))
 
+for (const sample of [
+  ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive（强势）last night?”'],
+  ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive（强',
+    '势）last night?” “Aggressive?” Li Wei smiled bitterly. “It’s our great honour to treat a guest,'],
+  ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive(强',
+    '势)last night?”'],
+  ['She was grateful（感激）and relieved (宽慰).'],
+]) test(`unlabelled English sample keeps parenthesized Chinese glosses: ${sample.join('\\n')}`, () => {
+  const issues = []
+  const result = parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节（满分15分）', 'Dear Charles,',
+    '第二节（满分25分）', ...sample, '评分细则', '内容完整，语言准确。',
+  ]), 'answers', issues)
+  assert.deepEqual(issues, [])
+  assert.deepEqual(result, { application: 'Dear Charles,', continuation: sample.join('\n') })
+})
+
+for (const first of [
+  '范文（仅供参考）', '（评分标准）内容完整，语言准确。',
+  'Content（内容完整语言准确表达连贯）', 'This sample 包含中文说明。',
+  'The sample has an unclosed gloss（强势', 'This is a mismatched gloss（强势)',
+]) test(`unlabelled scoring, Chinese titles and non-gloss Chinese remain ambiguous: ${first}`, () => {
+  const issues = []
+  const result = parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', first, 'An English-looking scoring example.',
+  ]), 'answers', issues)
+  assert.deepEqual(result, { application: null, continuation: null })
+  assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+})
+
+test('a cross-line gloss never absorbs later scoring or commentary paragraphs', () => {
+  for (const boundary of ['评分标准', '【审题重点】', '主题语境：人与社会']) {
+    const issues = []
+    const sample = 'Mark was aggressive（强\n势）last night.'
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.',
+      '第二节 读后续写', ...sample.split('\n'), boundary, 'Never include this scoring example.',
+    ]), 'answers', issues)
+    assert.deepEqual(issues, [])
+    assert.equal(result.continuation, sample)
+  }
+})
+
 for (const marker of ['略', '略。', '（略）', '(略).']) {
   test(`Jinan retains the application sample when continuation explicitly says ${marker}`, () => {
     const issues = []

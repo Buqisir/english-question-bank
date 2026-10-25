@@ -1156,6 +1156,17 @@ function writingSampleOmission(answerBody, from, to) {
   return items.length === 1
 }
 
+// Mask only closed Chinese glosses following English on the same source line.
+// Keep newlines aligned so OCR wrapping inside a gloss does not turn its next
+// line into Chinese commentary. Returned sample text is never changed.
+function maskWritingGlosses(text) {
+  return text.replace(/\([^()（）]*\)|（[^()（）]*）/gu, (gloss, offset) => {
+    const prefix = text.slice(text.lastIndexOf('\n', offset) + 1, offset)
+    return /\p{Script=Han}/u.test(gloss) && /[A-Za-z]/u.test(prefix)
+      ? gloss.replace(/[^\n]/gu, ' ') : gloss
+  })
+}
+
 function writingSampleText(answerBody, from, to) {
   const omitted = writingSampleOmission(answerBody, from, to)
   // null is the existing missing officialModelAnswer representation; an
@@ -1179,13 +1190,15 @@ function writingSampleText(answerBody, from, to) {
       .test(normalized(answerBody[labels[0]].text))
   const start = labels.length && !startsWithLaterAlternative
     ? labels[0] + (labels.length === 1 ? 1 : 0) : from
+  const glossMaskedLines = maskWritingGlosses(answerBody.slice(start, to)
+    .map(item => item.kind === 'paragraph' ? item.text : '').join('\n')).split('\n')
   const boundary = answerBody.findIndex((item, index) =>
     index >= start
       && index < to
       && item.kind === 'paragraph'
       && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
         || (!WRITING_SAMPLE_LABEL.test(normalized(item.text))
-          && WRITING_SAMPLE_COMMENTARY.test(normalized(item.text)))
+          && WRITING_SAMPLE_COMMENTARY.test(normalized(glossMaskedLines[index - start])))
         || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
         || LISTENING_TEXT_MARKER.test(normalized(item.text))
         || listeningCue(item.text)))
@@ -1194,9 +1207,12 @@ function writingSampleText(answerBody, from, to) {
     .slice(start, end)
     .filter((item) => item.kind === 'paragraph' && normalized(item.text))
     .map((item) => trimEdgeSpaces(item.text))
-  // With no sample label, Chinese text first is scoring or instructions, not
-  // the sample; leave it for review instead of keeping it.
-  if (!labels.length && /\p{Script=Han}/u.test(lines[0] || '')) return ''
+  // With no label, only English-dominant prose whose Chinese is entirely in
+  // closed parenthetical glosses is safe. Chinese titles/scoring stay for review.
+  const first = lines[0] || ''
+  if (!labels.length && /\p{Script=Han}/u.test(first)
+    && (/\p{Script=Han}/u.test(maskWritingGlosses(lines.join('\n')).split('\n')[0])
+      || (first.match(/[A-Za-z]/gu) || []).length <= (first.match(/\p{Script=Han}/gu) || []).length)) return ''
   return lines.join('\n')
 }
 
