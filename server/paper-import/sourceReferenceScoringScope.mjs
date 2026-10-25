@@ -2,10 +2,9 @@ import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
-  isExplicitScoringAppendixStart,
+  isExplicitScoringAppendixStart, scoredWritingRubricTask, isWritingVersionLabel, writingRuleMatchingView,
 } from './sourceReferenceWritingRules.mjs'
 
-const normalize = text => text.normalize('NFKC').replace(/\s+/gu, '')
 // Preserve the scoring helper's existing alternate part title.
 const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
 
@@ -19,16 +18,17 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
     let afterListening = false
     const items = document.pages.flatMap(page => page.orderedItems)
     for (const [index, item] of items.entries()) {
+      let appendixTask = null
       if (terminal) {
         if (isExplicitScoringAppendixStart(item.text, items[index + 1]?.text)) {
           terminal = false
           afterListening = false
           ended = false
+          appendixTask = scoredWritingRubricTask(item.text, items[index + 1]?.text)
         }
-        scopes.set(item.itemId, null)
-        continue
+        if (!appendixTask) { scopes.set(item.itemId, null); continue }
       }
-      const text = normalize(item.text)
+      const text = writingRuleMatchingView(item.text)
       // A transcript before the first writing task is ordinary source order.
       // After writing has started, only the explicit rubric appendix can reopen it.
       const firstWritingHeading = afterListening && !startedWriting
@@ -36,6 +36,10 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
           || WRITING_SECTION.some(([, pattern]) => pattern.test(text))
           || BARE_APPLICATION_SECTION.test(text) || /^读后续写[:：]?$/u.test(text)
           || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text))
+      if (afterListening) {
+        appendixTask = scoredWritingRubricTask(item.text, items[index + 1]?.text)
+        if (appendixTask) { afterListening = false; ended = false }
+      }
       if (afterListening && !firstWritingHeading) {
         // Only the explicit overview + task-rubric pair can leave explanations.
         if (ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
@@ -75,7 +79,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         scopes.set(item.itemId, null)
         continue
       }
-      let task = WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] ?? null
+      let task = appendixTask || WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] || null
       const scoringTask = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0]
       task ??= scoringTask
       if (NUMBERED_APPLICATION_SECTION.test(heading)) task = 'application'
@@ -103,7 +107,10 @@ export function sourceReferenceScoringScopes(confirmation, answerIds) {
         || SCORING_ENTRY_LABEL.test(text)
         || /^(?:【|\[)[^】\]]*(?:评分|阅卷|评卷|给分|档次)[^】\]]*(?:】|\])[:：]?$/u.test(text)
       if (!ended && taskType && scoringLabel) label = item
-      else if (numberedEntryLabel
+      // A reprinted "写作二" starts the sample between rubric sections, not
+      // another scoring paragraph; only the next rubric label restores scoring.
+      else if (numberedEntryLabel || isWritingVersionLabel(item.text)
+        || /^写作[一二](?:范文[:：]?)?$/u.test(text)
         || /^(?:(?:[一二三四五六七八九十]+、)?(?:参考范文|考场作文|作答示例|参考答案|范文)|(?:(?:A|One)?PossibleVersion)|【|\[)/iu.test(text)) label = null
       scopes.set(item.itemId, !ended && taskType && label
         ? { taskType, labelItemId: label.itemId, sourceLabel: label.text } : null)

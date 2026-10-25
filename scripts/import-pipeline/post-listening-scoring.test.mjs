@@ -6,6 +6,7 @@ import { assertSourceReferenceAdmission } from '../../server/paper-import/source
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import { firstLineRole } from './ocr-line-roles.mjs'
+import { buildSourceReferences } from './ocr-proofread.mjs'
 
 // Synthetic source order: samples, transcript, then explicitly headed rubrics.
 function fixture({ overview = '写作评分说明', boundary = '听力原文', task = '第一节：应用文写作（满分15分）',
@@ -52,6 +53,117 @@ function fixture({ overview = '写作评分说明', boundary = '听力原文', t
   }
   return input
 }
+
+// Short confirmed-source excerpts; synthetic bodies avoid storing whole essays.
+function textReferences(pageTexts) {
+  const pages = pageTexts.map((texts, p) => ({ page: p + 1, visualClassifications: [],
+    orderedItems: texts.map((text, i) => ({ text, itemId: `p${p + 1}:i${i}`, observationIds: [`p${p + 1}:w${i}`] })) }))
+  const confirmation = { documents: [{ documentId: 'answers', pages }] }
+  const evidence = { documents: [{ documentId: 'answers', pages: pages.map(page => ({
+    observations: page.orderedItems.map((item, i) => ({ observationId: item.observationIds[0], text: item.text,
+      region: { x: .1, y: .1 + i * .03, width: .7, height: .02 } })),
+  })) }] }
+  const materialization = { paperId: 'paper-writing-labels-test',
+    documents: [{ documentId: 'answers', role: 'official_answers', sha256: `sha256:${'a'.repeat(64)}` }],
+    groups: ['application', 'continuation'].map(taskType => ({ groupId: taskType, writingTask: { taskType } })) }
+  return { confirmation, capture: () => buildSourceReferences(materialization, evidence, confirmation) }
+}
+
+test('9+1 Version one/two labels end scoring and retain both complete source samples', () => {
+  for (const label of ['Version one:', 'Version 1:', '一、Version one:', '(一) Version 1:']) {
+    const input = textReferences([
+      ['第一节 应用文写作（满分15分）', '一、评分原则', '1. 本题总分为15分，按五个档次进行评分。'],
+      [label, 'Dear Mr. Smith,', 'Our study trip starts at the museum.', 'Version two:', 'Dear Mr. Smith,',
+        'Our second route ends at the gallery.', 'Yours,', 'Li Hua', '第二节 读后续写', '参考范文', 'A synthetic ending.'],
+    ])
+    const before = structuredClone(input.confirmation)
+    const { groups } = input.capture()
+    const application = groups[0]
+    assert.deepEqual(application.essays.entries.map(entry => entry.sourceLabel), [label, 'Version two:'])
+    assert.match(application.essays.entries[0].paragraphs.map(p => p.text).join('\n'), /museum\./u)
+    assert.match(application.essays.entries[1].paragraphs.map(p => p.text).join('\n'), /gallery\./u)
+    assert(!/Version|Dear Mr|museum|gallery/u.test(JSON.stringify(application.scoring)))
+    const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+    assert.equal(scopes.get('p2:i0'), null)
+    assert.equal(scopes.get('p2:i1'), null)
+    assert.deepEqual(input.confirmation, before)
+  }
+})
+
+test('mentions of Version and versions outside the shared one-to-three grammar remain scoring prose', () => {
+  for (const text of ['Version one is mentioned in the scoring guidance.', '评分时可参考 Version one 的结构。',
+    'Version four:', 'Version 4:']) {
+    const input = textReferences([['第一节 应用文', '评分原则', text,
+      '第二节 读后续写', '参考范文', 'A synthetic ending.']])
+    assert.match(JSON.stringify(input.capture().groups[0].scoring), new RegExp(text.replace(/[.]/gu, '\\.')))
+    assert(sourceReferenceScoringScopes(input.confirmation, new Set(['answers'])).get('p1:i2'))
+  }
+})
+
+for (const afterTranscript of [false, true]) test(
+  `Yuanchuang exact scored-section and scoring-principles pair reopens p10–12 after ${afterTranscript ? 'transcript and bracketed explanations' : 'explanations'} without reprinted samples`, () => {
+  const texts = Array.from({ length: 12 }, () => [])
+  texts[1] = ['第四部分 写作', '第一节 应用文', '参考范文', 'Original application sample.',
+    '第二节 读后续写', '参考范文', 'Original continuation sample.']
+  texts[5] = ['答案详解', '21. A 本文是一篇应用文。']
+  if (afterTranscript) {
+    texts[2] = ['听力部分录音稿', 'Text 1', 'M: Synthetic transcript.']
+    texts[5] = ['英语试卷参考答案与解析', '第一部分 听力（共两节，满分30分）',
+      '第二部分 阅读（共两节，满分50分）', '21. C【解析】细节理解题。']
+  }
+  texts[9] = ['第一节（满分15分）', '一、评分原则', '1. 本题总分为15分，按各档次评分标准给分。',
+    '二、各档次的给分范围和要求：', '第五档（13–15分）', '完全完成了试题规定的任务。']
+  texts[10] = ['第一档（1–3分）', '遗漏大部分内容要点。', '写作二', 'Reprinted continuation sample.',
+    '第二节（满分25分）', '一、评分原则', '1. 本题总分为25分，按5个档次给分。']
+  texts[11] = ['2. 评分时，先根据所续写短文的内容和语言确定档次。', '二、各档次的给分范围和要求：',
+    '第五档（21–25分）', '情节合理，语言连贯。']
+  const input = textReferences(texts)
+  const before = structuredClone(input.confirmation)
+  const result = input.capture()
+  assert.deepEqual(result.groups.map(g => g.scoring.state), ['captured', 'captured'])
+  assert.deepEqual(result.groups.map(g => g.essays.entries[0].paragraphs[0].text),
+    ['Original application sample.', 'Original continuation sample.'])
+  assert(!JSON.stringify(result.groups).includes('Reprinted'))
+  assert.deepEqual(result.groups.map(g => [...new Set(g.scoring.entries.flatMap(e => e.paragraphs.map(p => p.source.locator.page)))]),
+    [[10, 11], [11, 12]])
+  const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+  assert.equal(scopes.get('p10:i2').taskType, 'application')
+  assert.equal(scopes.get('p11:i3'), null)
+  assert.equal(scopes.get('p12:i0').taskType, 'continuation')
+  assert.deepEqual(input.confirmation, before)
+})
+
+test('spaced rubric labels reopen scoring and capture entries through the same matching view', () => {
+  for (const boundary of ['听力原文', '答案详解']) {
+    for (const label of ['一、评 分 原 则', '各档次　给分范围和要求']) {
+      const input = textReferences([
+        ['第一节 应用文', '参考范文', 'Original application sample.',
+          '第二节 读后续写', '参考范文', 'Original continuation sample.', boundary],
+        ['第一节（满分１５分）', label, '1. 本题总分为15分，按五个档次进行评分。', 'Content (5 points)'],
+      ])
+      const before = structuredClone(input.confirmation)
+      const { groups } = input.capture()
+      assert.equal(groups[0].scoring.state, 'captured')
+      assert.equal(groups[0].scoring.entries[0].sourceLabel, label, 'matching must preserve the exact source label')
+      assert.match(JSON.stringify(groups[0].scoring), /Content \(5 points\)/u)
+      assert.deepEqual(groups.map(g => g.essays.entries.map(e => e.paragraphs.map(p => p.text))),
+        [[['Original application sample.']], [['Original continuation sample.']]])
+      const ownership = sourceReferenceScoringScopes(input.confirmation, new Set(['answers'])).get('p2:i3')
+      assert.equal(ownership.taskType, 'application')
+      assert.equal(ownership.sourceLabel, label)
+      assert.deepEqual(input.confirmation, before)
+    }
+  }
+})
+
+test('a bare scored section cannot reopen explanations without its exact score and adjacent rubric label', () => {
+  for (const [heading, label] of [['第一节', '一、评分原则'], ['第一节（满分25分）', '一、评分原则'],
+    ['第一节（满分15分）', '评分原则如下。'], ['第一节（满分15分）分析', '一、评分原则']]) {
+    const input = textReferences([['第一节 应用文', '参考范文', 'Original application sample.',
+      '第二节 读后续写', '参考范文', 'Original continuation sample.', '答案详解', heading, label, '评分正文。']])
+    assert.deepEqual(input.capture().groups.map(g => g.scoring.state), ['not_supplied', 'not_supplied'])
+  }
+})
 
 test('post-listening rubric resumes capture and admission without replacing either source essay', () => {
   const input = fixture()

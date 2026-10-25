@@ -27,7 +27,7 @@ import { fileURLToPath } from 'node:url'
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
-import { isExplicitScoringAppendixStart } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { isExplicitScoringAppendixStart, scoredWritingRubricTask } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -58,7 +58,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v13'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v14'
 
 function fail(message) {
   console.error(message)
@@ -1272,6 +1272,8 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       if (!afterExplanations) break
       if (isExplicitScoringAppendixStart(line.text, lines[lineIndex + 1]?.text)) {
         scope.enterPart(false)
+        const task = scoredWritingRubricTask(line.text, lines[lineIndex + 1]?.text)
+        if (task) scope.startTask(task, { reuse: true })
         afterExplanations = false
         afterListening = false
         scoringAppendix = true
@@ -1324,10 +1326,14 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
       review.push({ itemId: line.itemId, issue: 'answer-book page furniture excluded from writing references' })
       continue
     }
-    if (afterListening && firstLineRole('scoring-overview', facts)) {
+    const appendixTask = afterListening && scoredWritingRubricTask(line.text, lines[lineIndex + 1]?.text)
+    if (afterListening && (firstLineRole('scoring-overview', facts) || appendixTask)) {
       scope.enterPart(false)
+      if (appendixTask) scope.startTask(appendixTask, { reuse: true })
       afterListening = false
       scoringAppendix = true
+      if (appendixTask) review.push({ itemId: line.itemId,
+        issue: 'exact scored writing section and adjacent rubric label reopen scoring after listening' })
       continue
     }
     if (firstLineRole('listening-boundary', facts)) {

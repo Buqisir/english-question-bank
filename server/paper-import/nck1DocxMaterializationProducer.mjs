@@ -4,6 +4,7 @@ import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapt
 import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { WRITING_SAMPLE_LABEL } from './sourceReferenceWritingRules.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
   'nck1-docx-materialization-producer-v21'
@@ -27,8 +28,6 @@ const WRITING_SCORE_START = new RegExp(`^(?:${WRITING_SCORE_EXPRESSION})`, 'iu')
 const WRITING_SCORE_AFTER_GLOSS = new RegExp(
   String.raw`\((?=[^()\n]*\p{Script=Han})[^()\n]*\)[ \t:：—–()\-]*${WRITING_SCORE_EXPRESSION}`, 'iu',
 )
-// Labels that open an official sample; scoring or prompt text may precede them.
-const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?<version>one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
 // Zhenhai also prints "Text 8 打听一位画家（第10题为推断题）".
 // Match the whole marker, keeping its Chinese title/note out of speech.
