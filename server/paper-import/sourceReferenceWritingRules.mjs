@@ -13,12 +13,12 @@ export const WRITING_SECTION = [
 export const NUMBERED_APPLICATION_SECTION = /^(?:\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)|[1-9]\d?\.)\s*应用文(?:写作)?\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
 export const NUMBERED_CONTINUATION_SECTION = /^(?:\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)|[1-9]\d?\.)\s*读后续写\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
 export const WRITING_SCORING_SECTION = [
-  ['application', /^应用文评分(?:细则|标准)\s*[:：]?$/u],
-  ['continuation', /^(?:读后)?续写评分(?:细则|标准)\s*[:：]?$/u],
+  ['application', /^(?:[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*)?应用文(?:写作)?评分(?:细则|(?:参考)?标准)\s*[:：]?$/u],
+  ['continuation', /^(?:[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*)?(?:读后)?续写评分(?:细则|(?:参考)?标准)\s*[:：]?$/u],
 ]
 // A transcript may precede a separate rubric appendix. Only its complete
 // source heading allows leaving listening; task and entry labels are still required.
-export const WRITING_SCORING_OVERVIEW = /^写作评分说明\s*[:：]?$/u
+export const WRITING_SCORING_OVERVIEW = /^(?:写作评分说明|评分细则)\s*[:：]?$/u
 export const LISTENING_REFERENCE_START = /^(?:(?:附\s*[:：]?\s*)?听力|录音原文|\(?Text\s*\d)/iu
 // Numbered headings for other exam tasks end writing ownership, including
 // parenthesized titles and optional source score/count annotations.

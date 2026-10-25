@@ -57,7 +57,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v11'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v12'
 
 function fail(message) {
   console.error(message)
@@ -1268,6 +1268,19 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
     .filter(Number.isInteger))
   for (const [lineIndex, line] of lines.entries()) {
     if (scope.ended) break
+    // An exam specification appendix describes question coverage, not writing
+    // scoring. Its explicit column header ends reference capture, including
+    // continuation tables on later pages. Keep every source word/table intact.
+    const header = line.table ? line.table.rows[0].map(cell => cell.text).join('') : line.text
+    if (/^题号题型分值考查的主要内容及知识点难度$/u.test(header.replace(/\s+/gu, ''))) {
+      scope.end()
+      review.push({ itemId: line.itemId, issue: 'exam specification appendix ends the writing-reference scope' })
+      for (const excluded of lines.slice(lineIndex).filter(item => item.table)) {
+        review.push({ itemId: excluded.itemId, tableId: excluded.table.tableId,
+          issue: 'exam specification table excluded from writing references; retained in source evidence' })
+      }
+      continue
+    }
     if (line.figure) {
       if (!scope.current) throw new Error('Scoring figure has no explicit writing-task scope')
       scope.current.lines.push(line)

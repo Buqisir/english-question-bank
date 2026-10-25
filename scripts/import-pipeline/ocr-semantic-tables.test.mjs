@@ -5,6 +5,7 @@ import { buildSourceReferences, joinTranscriptTurns } from './ocr-proofread.mjs'
 import { validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
+import { spawnSync } from 'node:child_process'
 
 for (const scoringLabel of ['4. 评分细则', '（一）评分原则：', '（二）各档次给分范围和要求']) {
 test(`parenthesized task and ${scoringLabel} retain a 7 by 7 scoring table across pages 4 to 6`, () => {
@@ -74,6 +75,57 @@ test(`parenthesized task and ${scoringLabel} retain a 7 by 7 scoring table acros
   } }), [])
 })
 }
+
+function specificationAppendixFixture(header = '题号 题型 分值 考查的主要内容及知识点 难度') {
+  const texts = [
+    ['第一节 应用文', '参考范文', 'Dear Jack,', 'Our club welcomes you.', 'Yours,', 'Li Hua',
+      '第二节 读后续写', '参考范文', 'Mina found the owner.'],
+    ['听力原文', 'Text 1', 'M: Hello.', '评分细则', '（一）应用文写作评分参考标准',
+      '覆盖全部要点。', '（二）读后续写评分参考标准', '情节合理，语言连贯。'],
+    [header, '第四部分', '第一节', '应用文写作', '15', '体裁：告知信。'],
+    ['续表', '题号', '题型', '分值', '考查的主要内容及知识点', '难度',
+      '第二节', '读后续写', '25', '体裁：记叙文。', '中'],
+  ]
+  const pages = texts.map((rows, p) => ({ page: p + 1,
+    orderedItems: rows.map((text, i) => ({ text, itemId: `p${p}-i${i}`, observationIds: [`p${p}-w${i}`] })),
+    visualClassifications: [] }))
+  pages[3].visualClassifications.push({ regionId: 'answers:page-4:table-1', classification: 'semantic_table',
+    rows: [true, false].map((header, r) => ({ header,
+      cells: Array.from({ length: 5 }, (_, c) => [`p3-i${1 + r * 5 + c}`]) })) })
+  return [{ paperId: 'paper-specification-test',
+    documents: [{ documentId: 'answers', role: 'official_answers', sha256: `sha256:${'a'.repeat(64)}` }],
+    groups: ['application', 'continuation'].map(taskType => ({ groupId: taskType, writingTask: { taskType } })),
+  }, { documents: [{ documentId: 'answers', pages: pages.map(page => ({
+    observations: page.orderedItems.map((item, i) => ({ observationId: item.observationIds[0],
+      text: item.text, region: { x: .1, y: .1 + i * .04, width: .8, height: .02 } })),
+  })) }] }, { documents: [{ documentId: 'answers', pages }] }]
+}
+
+for (const header of ['题号 题型 分值 考查的主要内容及知识点 难度', '其他材料']) test(
+  `specification header in ${header === '其他材料' ? 'table cells' : 'plain text'} retains source tables and both real scoring sections`, () => {
+  const input = specificationAppendixFixture(header)
+  const before = structuredClone(input)
+  const result = buildSourceReferences(...input)
+  assert.deepEqual(input, before, 'source table, words and confirmation remain immutable')
+  assert.deepEqual(result.groups.map(group => group.scoring.state), ['captured', 'captured'])
+  assert.deepEqual(result.groups.map(group => group.essays.entries.length), [1, 1])
+  assert.deepEqual(result.groups.map(group => group.scoring.entries[0].blocks[0].paragraph.text),
+    ['覆盖全部要点。', '情节合理，语言连贯。'])
+  assert(!JSON.stringify(result.groups).includes('体裁'))
+  assert(result.review.some(item => item.tableId === 'source-answers-page-4-table-1'
+    && /specification/u.test(item.issue)), 'excluded source table is named in the review')
+})
+
+test('an unscoped table without an explicit specification header still fails closed', () => {
+  const input = specificationAppendixFixture('其他材料')
+  input[2].documents[0].pages[3].orderedItems[4].text = '其他说明'
+  const script = `import { buildSourceReferences } from ${JSON.stringify(new URL('./ocr-proofread.mjs', import.meta.url).href)};
+    buildSourceReferences(...JSON.parse(process.argv[1]));`
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, JSON.stringify(input)],
+    { encoding: 'utf8' })
+  assert.equal(result.status, 1)
+  assert.match(result.stderr, /Source table .* has no writing-task scope/u)
+})
 
 function fixture() {
   const items = Array.from({ length: 14 }, (_, index) => ({

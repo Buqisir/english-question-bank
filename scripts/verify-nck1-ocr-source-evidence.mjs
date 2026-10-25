@@ -124,6 +124,54 @@ execFileSync(process.execPath, [path.join(root, 'scripts/generate-paper-ocr-emph
 const fixture = await makeSyntheticNck1OcrFixture({ paperId })
 await verifyReadingStemFigures(fixture)
 
+// A table survives as one source object. Its exact final item is a legal
+// after-table boundary, even though its cell prose is consumed by that object.
+for (const documentIndex of [0, 1]) {
+  const evidence = cloneJson(fixture.evidence)
+  const confirmation = cloneJson(fixture.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
+  const page = confirmation.documents[documentIndex].pages[0]
+  const observed = evidence.documents[documentIndex].pages[0]
+  const ids = page.orderedItems.map(item => item.itemId)
+  observed.regions.push({ regionId: 'anchor-table', kind: 'visual',
+    region: { x: 0, y: 0, width: 1, height: 1 } },
+  { regionId: 'after-table-image', kind: 'visual', region: { x: .98, y: .8, width: .01, height: .01 } })
+  page.visualClassifications.push({ regionId: 'anchor-table', classification: 'semantic_table',
+    rows: [{ header: false, cells: [[ids[0]], ids.slice(1)] }] },
+  { regionId: 'after-table-image', classification: 'content_media', itemIds: [], afterItemId: ids.at(-1) })
+  rebound(evidence)
+  confirmation.evidenceDigest = evidence.evidenceDigest
+  const resolve = (value, sourceEvidence = evidence) => resolveConfirmedNck1OcrEvidence({ paperId,
+    documents: fixture.sourceDocuments, evidence: sourceEvidence, confirmation: value })
+  const result = resolve(confirmation)
+  assert.deepEqual(result.issues, [], 'image after the exact surviving table boundary')
+  assert.equal(result.structures.get(fixture.sourceDocuments[documentIndex].documentId).body[0].kind, 'table')
+  const reversed = cloneJson(confirmation)
+  reversed.documents[documentIndex].pages[0].visualClassifications.reverse()
+  assert.deepEqual(resolve(reversed), result, 'boundary does not depend on visual array order')
+  const interior = cloneJson(confirmation)
+  interior.documents[documentIndex].pages[0].visualClassifications.at(-1).afterItemId = ids[0]
+  assert(resolve(interior).issues.some(issue => /anchor cannot be consumed/u.test(issue.message)),
+    'a table interior cannot position an image')
+  const imageAnchor = cloneJson(confirmation)
+  imageAnchor.documents[documentIndex].pages[0].visualClassifications.splice(-2, 1,
+    { regionId: 'anchor-table', classification: 'content_media', itemIds: ids.slice(1), afterItemId: ids[0] })
+  const imageEvidence = cloneJson(evidence)
+  const imagePage = imageEvidence.documents[documentIndex].pages[0]
+  const consumed = new Set(page.orderedItems.slice(1).flatMap(item => item.observationIds))
+  const boxes = imagePage.observations.filter(item => consumed.has(item.observationId)).map(item => item.region)
+  const x = Math.min(...boxes.map(box => box.x)), y = Math.min(...boxes.map(box => box.y))
+  imagePage.regions.find(region => region.regionId === 'anchor-table').region = {
+    x, y, width: Math.max(...boxes.map(box => box.x + box.width)) - x,
+    height: Math.max(...boxes.map(box => box.y + box.height)) - y,
+  }
+  rebound(imageEvidence)
+  imageAnchor.evidenceDigest = imageEvidence.evidenceDigest
+  assert(resolve(imageAnchor, imageEvidence).issues.some(issue => /anchor cannot be consumed/u.test(issue.message)),
+    'a consumed image item cannot serve as another image anchor')
+}
+console.log('PASS exact after-table image boundary, visual-order independence, and rejected interior/image anchors')
+
 function validRegion(region) {
   return region
     && [region.x, region.y, region.width, region.height].every(Number.isFinite)

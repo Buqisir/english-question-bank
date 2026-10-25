@@ -175,18 +175,16 @@ assert.equal(labelSidecar.groups[0].essays.state, 'not_supplied')
 assertSourceReferenceAdmission({ ...labelInput, sidecar: labelSidecar })
 console.log('PASS actual scoring label authorizes a first figure block with no fabricated essay/paragraph')
 
-// B can serialize/render a table followed by an image. The current v3
-// confirmation resolver still rejects consumed table/image anchors (A's seam).
-// Keeping that rejection is deliberate; B does not introduce afterVisual.
+// The final confirmed item of a surviving semantic table identifies the
+// after-table boundary; no synthetic paragraph or new afterVisual is needed.
 const tableInput = scoringFiguresFixture({ table: true })
 const tableSidecar = captureScoringReferences(tableInput)
 assert.deepEqual(tableSidecar.groups[0].scoring.entries[0].blocks.slice(0, 2).map(block => block.kind), ['table', 'figure'])
 assert.deepEqual(validateSourceReferences({ ...tableInput, sidecar: tableSidecar }), [])
-assert.throws(() => assertSourceReferenceAdmission({ ...tableInput, sidecar: tableSidecar }),
-  /anchor cannot be consumed/iu, 'B must preserve the independent A boundary')
+assertSourceReferenceAdmission({ ...tableInput, sidecar: tableSidecar })
 const tableHtml = buildAnswerOnlyHtml({ ...tableInput, sourceReferences: tableSidecar, includeScoring: true })
 assert(tableHtml.indexOf('data-reference-table=') < tableHtml.indexOf('data-reference-figure='))
-console.log('PASS v4 table → figure serialization/render order; consumed table anchor still rejected by unchanged confirmation v3')
+console.log('PASS v4 table → figure serialization, independent admission and render order at the exact table boundary')
 
 // Include scoring in the aggregate budget, even when each entry fits.
 const many = structuredClone(sidecar)
