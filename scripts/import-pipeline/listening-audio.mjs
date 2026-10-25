@@ -221,8 +221,9 @@ export function stageSignalListeningAudio({ paperDir, paperId, sourcePath }) {
   mkdirSync(path.dirname(originalPath), { recursive: true })
   copyFileSync(sourcePath, originalPath)
   const workDir = artifactPath(paperDir, 'materialization/listening-audio/signal-work')
+  // A 25-minute track segments in ~14 s alone but exceeded 120 s while OCR and Ovis shared the CPU.
   execFileSync('python3', [path.join(import.meta.dirname, 'segment-listening.py'), originalPath, workDir], {
-    stdio: 'pipe', timeout: 120_000,
+    stdio: 'pipe', timeout: 600_000,
   })
   const result = readJson(path.join(workDir, 'candidates.json'), 'Signal segmentation')
   // Encode the SAME fully decoded PCM used for timing, not another MP3 seek clock.
