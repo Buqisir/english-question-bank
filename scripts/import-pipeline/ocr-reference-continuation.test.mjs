@@ -99,6 +99,54 @@ function fixture(pageLines) {
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
 const paragraphs = output => output.groups[0].essays.entries.flatMap(e => e.paragraphs)
 
+test('reference English hyphen glue retains a compound without a space', () => {
+  const input = fixture([[...heading, line('We provide AI-', .3), line('based feedback.', .34)]])
+  assert.deepEqual(paragraphs(buildSourceReferences(...input)).map(p => p.text), ['We provide AI-based feedback.'])
+})
+
+for (const [previous, current, expected] of [
+  ['He understood Lucas', 'was trying to help.', 'He understood Lucas was trying to help.'],
+  ['Get that paint off your', 'face before dinner.', 'Get that paint off your face before dinner.'],
+  ['We provide AI-', 'based feedback.', 'We provide AI-based feedback.'],
+]) test(`reference English wrapping vetoes false indented paragraphs: ${previous}`, () => {
+  const input = fixture([[...heading, line(previous, .3), line(current, .34, .14, .76)]])
+  assert.deepEqual(paragraphs(buildSourceReferences(...input)).map(p => p.text), [expected])
+})
+
+for (const [previous, current, expected] of [
+  ['说明功能：清晰阐述平台的主要功能，如AI口语测评、个', '性化词汇推送等，需准确且简洁。',
+    '说明功能：清晰阐述平台的主要功能，如AI口语测评、个性化词汇推送等，需准确且简洁。'],
+  ['阐述帮助：说明平台对学习的具体帮助，如提升口语流利', '度、提高记词效率等，体现平台的实用价值。',
+    '阐述帮助：说明平台对学习的具体帮助，如提升口语流利度、提高记词效率等，体现平台的实用价值。'],
+  ['结尾表达：合理表达希望对方尝试并反馈的意愿，使邮件', '有完整的收尾。',
+    '结尾表达：合理表达希望对方尝试并反馈的意愿，使邮件有完整的收尾。'],
+]) test(`reference Chinese scoring wrapping vetoes false indented paragraphs: ${previous}`, () => {
+  const input = fixture([[line('第二节 读后续写', .2), line('参考范文', .24), line('A complete sample.', .28),
+    line('评分标准', .32), line(previous, .36), line(current, .4, .14, .76)]])
+  const scoring = buildSourceReferences(...input).groups[0].scoring
+  assert.deepEqual(scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)), [expected])
+})
+
+for (const [previous, current] of [
+  ['We finished our work.', 'Another day began.'],
+  ['We finished our work!”', 'Another day began.'],
+  ['We considered this:', 'another approach followed.'],
+]) test(`reference veto preserves English paragraph boundary: ${previous}`, () => {
+  const input = fixture([[...heading, line(previous, .3), line(current, .34, .14, .76)]])
+  assert.deepEqual(paragraphs(buildSourceReferences(...input)).map(p => p.text), [previous, current])
+})
+
+for (const [previous, current] of [
+  ...['。', '！', '？', '；', '：', '。”）'].map(end => [`评分正文${end}`, '新的评分段落。']),
+  ...['阐述帮助：说明具体帮助。', '一、评分侧重点', '（一）评分侧重点', '1. 评分侧重点',
+    '①评分侧重点', '· 评分侧重点', '●评分侧重点'].map(text => ['评分正文尚未结束', text]),
+]) test(`reference veto preserves Chinese sentence/label boundary: ${current}/${previous}`, () => {
+  const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line(previous, .36), line(current, .4, .14, .76)]])
+  const scoring = buildSourceReferences(...input).groups[0].scoring
+  assert.deepEqual(scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)), [previous, current])
+})
+
 for (const [name, previousText] of [
   ['space before closing quote', 'He said, “The project is finished. ”'],
   ['closing guillemet', 'He said, «The project is finished.»'],

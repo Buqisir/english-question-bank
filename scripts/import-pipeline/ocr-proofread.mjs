@@ -62,7 +62,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 // Extraction output changed; retain historical sidecars/receipts unchanged.
 // This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v15'
+export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v16'
 
 function fail(message) {
   console.error(message)
@@ -1072,13 +1072,14 @@ export function writingSectionAfterPart(text) {
     : firstLineRole('writing-section', computeLineFacts({ text: rest }))?.value || null
 }
 
-function joinLines(lines) {
+function joinLines(lines, { reference = false } = {}) {
   // Text glue only. Semantic boundaries have already passed decideLineJoin;
   // reference/annotation CJK spacing intentionally differs from speech hyphens.
   return lines.reduce((text, line) => {
     if (!text) return line
     const cjk = /[\u3000-\u9fff\uff00-\uffef]$/u.test(text) && /^[\u3000-\u9fff\uff00-\uffef]/u.test(line)
-    return `${text}${cjk ? '' : ' '}${line}`
+    const hyphen = reference && /[A-Za-z]-$/u.test(text) && /^[a-z]/u.test(line)
+    return `${text}${cjk || hyphen ? '' : ' '}${line}`
   }, '')
 }
 
@@ -1637,7 +1638,7 @@ export function buildSourceReferences(materialization, evidence, confirmation, {
           return { kind: 'paragraph', paragraph: {
             paragraphId: `${rest.referenceId}-p${index + 1}`,
             role: item.role,
-            text: joinLines(item.lines.map((line) => line.text)),
+            text: joinLines(item.lines.map((line) => line.text), { reference: true }),
             source: sources[0],
             ...(sources.length > 1 ? { continuationSources: sources.slice(1) } : {}),
           } }

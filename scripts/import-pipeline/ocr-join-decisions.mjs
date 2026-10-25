@@ -78,7 +78,17 @@ function referencePolicy(input) {
   const boundary = referenceBoundaryFromFacts(previous, current, geometry.margin, geometry.previousMargin)
   const crossPage = referenceCrossPageRule(input, boundary)
   const { indented, previousShort, pageTurn, continues } = boundary
-  const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues
+  // Veto geometric false starts only within an existing reference body.
+  // Keep the stricter cross-page proof and semantic role boundaries intact.
+  const previousTail = (previous?.text || '').replace(/[\s”’"'）)\]】」』]+$/u, '')
+  const numberedOrLabel = /^(?:[一二三四五六七八九十]+、|\([一二三四五六七八九十\d]+\)|\d+[.、)]|[·●]|\p{Script=Han}{1,8}[:：])/u.test(current.nfkc.trim())
+    || /^[①-⑳]/u.test(current.trimmed)
+  const unfinished = !pageTurn && roles.hasParagraph && previous?.role === 'body'
+    && !roles.special && !roles.afterClosing && !roles.numbered
+    && ((current.startsLower && previousTail && !/[.!?:]$/u.test(previousTail))
+      || (current.startsHan && /\p{Script=Han}/u.test(previousTail)
+        && !/[。！？；：]$/u.test(previousTail) && !numberedOrLabel))
+  const starts = !roles.hasParagraph || roles.special || roles.afterClosing || (!continues && !unfinished
     && (previous.role !== 'body' || indented || previousShort || pageTurn || roles.numbered))
   const reviews = []
   if (crossPage?.resolution === 'separate'
@@ -89,7 +99,8 @@ function referencePolicy(input) {
   if (current.endsHyphen) reviews.push({ itemId: location.after.itemId,
     issue: 'line ends with a hyphen; joined with a space' })
   const reason = !roles.hasParagraph ? 'reference.first-line' : roles.special ? `reference.${roles.special}`
-    : roles.afterClosing ? 'reference.after-closing' : continues ? 'reference.lowercase-continuation'
+    : roles.afterClosing ? 'reference.after-closing' : unfinished ? 'reference.unfinished-line'
+      : continues ? 'reference.lowercase-continuation'
       : previous.role !== 'body' ? 'reference.role-boundary' : indented ? 'reference.indented'
         : previousShort ? 'reference.previous-short' : pageTurn ? 'reference.page-turn'
           : roles.numbered ? 'reference.numbered' : 'reference.body-wrap'
