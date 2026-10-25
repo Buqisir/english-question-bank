@@ -199,28 +199,35 @@ for (const interrupted of ['source-references', 'pagination-plan', 'freeze', 'pd
 }
 
 for (const marker of ['push', 'local-preview', 'screen', 'local-screen']) {
-  test(`${marker} evidence blocks stale invalidation before page-limit changes or any writes`, async t => {
+  for (const finished of [false, true]) test(`${marker} ${finished ? 'completed' : 'started-only'} evidence blocks stale invalidation before any writes`, async t => {
     const { dir, ctx, options } = fixture(t, 'old-version')
-    ctx.state.steps[marker] = completed({ revisionId: 'rev-candidate' })
+    ctx.state.steps[marker] = finished ? completed({ revisionId: 'rev-candidate' }) : { startedAt: oldTime }
     json(ctx.statePath, ctx.state)
     const before = snapshot(dir), state = structuredClone(ctx.state)
+    const stateBytes = readFileSync(ctx.statePath)
     await assert.rejects(() => finish(ctx, ['--economy-page-limit', '9'], options),
       { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
     assert.deepEqual(snapshot(dir), before)
     assert.deepEqual(ctx.state, state)
+    assert.deepEqual(readFileSync(ctx.statePath), stateBytes)
   })
 }
 
 for (const name of ['source-references', 'pagination-run', 'pdf-qa']) {
-  for (const current of [true, false]) test(`explicit redo from ${name} (${current ? 'current' : 'old'} references) cannot erase submission evidence`, async t => {
-    const { dir, ctx, options } = fixture(t, current ? version : 'old-version')
-    ctx.state.steps.push = completed({ revisionId: 'rev-candidate' })
-    json(ctx.statePath, ctx.state)
-    const before = snapshot(dir)
-    await assert.rejects(() => requestedRedo(ctx, name),
-      { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
-    assert.deepEqual(snapshot(dir), before)
-  })
+  for (const current of [true, false]) for (const marker of ['push', 'local-preview', 'screen', 'local-screen']) {
+    for (const finished of [false, true]) test(`explicit redo from ${name} (${current ? 'current' : 'old'} references) retains ${marker} ${finished ? 'completed' : 'started-only'} evidence`, async t => {
+      const { dir, ctx } = fixture(t, current ? version : 'old-version')
+      ctx.state.steps[marker] = finished ? completed({ revisionId: 'rev-candidate' }) : { startedAt: oldTime }
+      json(ctx.statePath, ctx.state)
+      const before = snapshot(dir), state = structuredClone(ctx.state)
+      const stateBytes = readFileSync(ctx.statePath)
+      await assert.rejects(() => requestedRedo(ctx, name),
+        { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+      assert.deepEqual(snapshot(dir), before)
+      assert.deepEqual(ctx.state, state)
+      assert.deepEqual(readFileSync(ctx.statePath), stateBytes)
+    })
+  }
 }
 
 test('active pagination retains all state and artifacts until the job exits', async t => {

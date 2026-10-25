@@ -890,7 +890,8 @@ function referencesCurrent(ctx) {
 
 function assertReferencesMutable(ctx) {
   const submitted = ['push', 'local-preview', 'screen', 'local-screen']
-    .some(name => ctx.state.steps[name]?.finishedAt)
+    // An unfinished upload is Candidate-specific UNKNOWN evidence until reconciled.
+    .some(name => ctx.state.steps[name])
   const retained = ['signals/review-restore.json', 'canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
     'signals/locally-published.json'].some(file => existsSync(path.join(ctx.paperDir, file)))
     || existsSync(path.join(ctx.work, 'handoff/evidence.json'))
