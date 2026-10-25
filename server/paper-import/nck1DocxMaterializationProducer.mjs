@@ -28,7 +28,7 @@ const WRITING_SCORE_AFTER_GLOSS = new RegExp(
   String.raw`\((?=[^()\n]*\p{Script=Han})[^()\n]*\)[ \t:：—–()\-]*${WRITING_SCORE_EXPRESSION}`, 'iu',
 )
 // Labels that open an official sample; scoring or prompt text may precede them.
-const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?:one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
+const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?<version>one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
 // Zhenhai also prints "Text 8 打听一位画家（第10题为推断题）".
 // Match the whole marker, keeping its Chinese title/note out of speech.
@@ -1219,7 +1219,12 @@ function writingSampleText(answerBody, from, to, sampleRanges) {
   const startsWithLaterAlternative = labels.length && labels[0] > from
     && /(?:范文|作文|样例|示例|Version)\s*(?:[二三2-3]|two|three)(?:】)?\s*[:：]?$/iu
       .test(normalized(answerBody[labels[0]].text))
-  if (labels.length && /^Version\s+(?:one|1)\s*[:：]?$/iu.test(normalized(answerBody[labels[0]].text))) {
+  // Read the version from the same label parser that accepted its optional
+  // ordinal prefix, so every accepted first-version spelling gets this guard.
+  const version = labels.length
+    ? WRITING_SAMPLE_LABEL.exec(normalized(answerBody[labels[0]].text))?.groups?.version?.toLowerCase()
+    : undefined
+  if (version === 'one' || version === '1') {
     // A newly recognized first-version label may follow a rubric, but never
     // erase an English title, salutation or prose already started in this part.
     let scoringStarted = false

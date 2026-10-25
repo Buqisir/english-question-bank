@@ -384,7 +384,7 @@ for (const [ending, accepted] of [
 
 // 9+1: scoring precedes the explicitly labelled alternatives, and scoring
 // after a sample plus the whole-line transcript title must remain outside it.
-for (const sampleLabel of ['Version one:', 'Version 1:', '参考范文：', 'One possible version']) {
+for (const sampleLabel of ['Version one:', 'Version 1:', '一、Version one:', '(一) Version 1:', '参考范文：', 'One possible version']) {
   const fixture = makeSyntheticNck1DocxFixture({
     listening: true, listeningHeading: '【听力文本】',
     transformXml: xml => xml
@@ -416,7 +416,7 @@ for (const scoringMention of ['评分时可参考 Version one 的结构。', 'Ve
 }
 // A version label cannot erase an essay title, salutation or sentence already
 // present before it, including the review's exact two-drafts example.
-for (const label of ['Version one:', 'Version 1:']) {
+for (const label of ['Version one:', 'Version 1:', '一、Version one:', '(一) Version 1:']) {
   for (const opening of [
     'Should We Join the Reading Club?',
     'Dear Mr. Smith,',
