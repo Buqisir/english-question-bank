@@ -50,6 +50,29 @@ for (const family of ['application', 'continuation']) {
   }
 }
 
+for (const family of ['application', 'continuation']) {
+  for (const marker of ['(2)', '2.']) {
+    for (const marked of [false, true]) {
+      test(`${family}: mixed notice preserves source tail ${marker}, marks=${marked}`, () => {
+        const tail = `  ${marker} 可适当增加细节，以使行文连贯。  `
+        const texts = [`注意：(1)词数${family === 'application' ? '80' : '150'}左右；`, tail]
+        const fixture = writingNoticeFixture({ family, texts, marked })
+        assert.equal(writingNoticeGroup(texts).lines.at(-1).text, tail.trim())
+        const sourceTail = fixture.sourceBlocks.find(block =>
+          block.inlines?.map(node => node.text).join('').trim() === tail.trim())
+        assert(sourceTail)
+        for (const html of [buildPrintHtml(fixture.printInput),
+          renderToStaticMarkup(createElement(PaperSurface, fixture.screenProps))]) {
+          assert(html.replace(/<[^>]*>/gu, '').includes(
+            sourceTail.inlines.map(node => node.text).join('').trim(),
+          ), 'mixed tail display equals trimmed source, including its numeric marker')
+          if (marked) assert(html.includes('>增加细节</span>'))
+        }
+      })
+    }
+  }
+}
+
 // Frozen before the mapping change from each published paper's exact notice
 // block, compiled into the same structured fixture used by the real consumers.
 const historicalBytes = {

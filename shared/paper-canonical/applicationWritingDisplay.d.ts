@@ -1,6 +1,8 @@
 export type ApplicationWritingNoticeLine = {
   readonly kind: 'label' | 'instruction'
   readonly text: string
+  /** Mixed-group tails retain their source marker; label-only groups normalize. */
+  readonly preserveSourceNumbering?: boolean
 }
 
 export function applicationWritingNoticeLines(
@@ -29,6 +31,7 @@ export function writingNoticeGroups(
 export function writingNoticeDisplayInlines<T extends { readonly text: string }>(
   nodes: ReadonlyArray<T>,
   lineIndex?: number,
+  preserveSourceNumbering?: boolean,
 ): ReadonlyArray<T>
 
 export function writingWordCount(text: string): number | null

@@ -510,10 +510,15 @@ function assertApplicationFixedPartPdfAlignment(pdfPath, canonical, label) {
 function expectedApplicationPromptTexts(canonical) {
   const texts = canonical.promptBlocks.map(block => block.text)
   const expected = [...texts]
-  for (const { startIndex, blockCount } of writingNoticeGroups(texts)) {
+  for (const { startIndex, blockCount, lines } of writingNoticeGroups(texts)) {
+    const mixed = lines.some(line => line.blockOffset === 0 && line.kind === 'instruction')
     for (let index = startIndex + 1; index < startIndex + blockCount; index += 1) {
-      // Only absorbed source paragraphs normalize their leading numeric marker.
-      // Keep the remaining source text as an independent content oracle.
+      // Mixed groups preserve the trimmed source; only label-only groups
+      // retain the historical normalization of split numeric markers.
+      if (mixed) {
+        expected[index] = texts[index].trim()
+        continue
+      }
       expected[index] = texts[index].replace(
         /^[（(](\d+)[）)]|^(\d+)[.．、](?!\d)\s*/u,
         (_marker, parenthesized, dotted) => `（${parenthesized ?? dotted}）`,

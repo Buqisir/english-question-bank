@@ -839,7 +839,7 @@ function renderCanonicalWritingBlocks(blocks, family) {
       const inlineAttr = !marked && (line.blockOffset > 0 || line.lineIndex === 0)
         ? ` data-canonical-content-node-id="${escapeHtml(sourceBlock.inlines[0].nodeId)}"` : ''
       const lineContent = marked
-        ? renderCanonicalInlineNodes(writingNoticeDisplayInlines(sourceBlock.inlines, line.lineIndex))
+        ? renderCanonicalInlineNodes(writingNoticeDisplayInlines(sourceBlock.inlines, line.lineIndex, line.preserveSourceNumbering))
         : escapeHtml(line.text)
       return `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}"${blockAttr}${inlineAttr} data-canonical-${family}-notice-line="${line.kind}">${lineContent}</span>`
     }).join('') : renderCanonicalInlineNodes(block.inlines)

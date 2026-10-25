@@ -623,7 +623,7 @@ function CanonicalContinuationWritingMaterial({
                 data-canonical-continuation-notice-line={line.kind}
               >
                 {marked
-                  ? writingNoticeDisplayInlines(block.inlines, line.lineIndex).map((inline, part) => (
+                  ? writingNoticeDisplayInlines(block.inlines, line.lineIndex, line.preserveSourceNumbering).map((inline, part) => (
                       <span key={`${inline.nodeId}:${part}`} data-canonical-content-node-id={inline.nodeId} data-source-marks={inline.marks?.join(' ')}>{inline.text}</span>
                     ))
                   : line.text}
@@ -699,7 +699,7 @@ function CanonicalApplicationWritingPrompt({
                         data-canonical-application-notice-line={line.kind}
                       >
                         {marked
-                          ? writingNoticeDisplayInlines(sourceBlock.inlines, line.lineIndex).map((inline, part) => (
+                          ? writingNoticeDisplayInlines(sourceBlock.inlines, line.lineIndex, line.preserveSourceNumbering).map((inline, part) => (
                               <span key={`${inline.nodeId}:${part}`} data-canonical-content-node-id={inline.nodeId} data-source-marks={inline.marks?.join(' ')}>{inline.text}</span>
                             ))
                           : line.text}

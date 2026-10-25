@@ -74,6 +74,7 @@ export function writingNoticeGroups(texts) {
     // A combined paragraph can contribute several lines before a split tail.
     // Keep both source coordinates instead of equating line and block counts.
     const lines = sourceLines.map((line, lineIndex) => ({ ...line, blockOffset: 0, lineIndex }))
+    const preserveSourceNumbering = sourceLines.length > 1
     let previousNumber = null
     if (lines.length > 1) {
       const numbers = lines.slice(1).map(line => splitNoticeInstructionNumber(line.text))
@@ -93,7 +94,11 @@ export function writingNoticeGroups(texts) {
         if (number !== previousNumber + 1) break
         previousNumber = number
       }
-      lines.push({ kind: 'instruction', text: instruction, blockOffset: blockCount, lineIndex: 0 })
+      lines.push({ kind: 'instruction',
+        text: preserveSourceNumbering ? String(followingText).trim() : instruction,
+        blockOffset: blockCount, lineIndex: 0,
+        ...(preserveSourceNumbering ? { preserveSourceNumbering: true } : {}),
+      })
       blockCount += 1
     }
     groups.push({ startIndex, blockCount, lines })
@@ -108,8 +113,8 @@ export function writingNoticeGroup(texts) {
 
 // Slice source nodes rather than flattening a displayed notice. Combined
 // paragraphs keep exact text offsets; split numbered paragraphs retain the
-// existing display-only marker normalization and each source node's marks.
-export function writingNoticeDisplayInlines(nodes, lineIndex = 0) {
+// existing display-only marker normalization only for a label-only first block.
+export function writingNoticeDisplayInlines(nodes, lineIndex = 0, preserveSourceNumbering = false) {
   const text = nodes.map(node => node.text).join('')
   const start = text.length - text.trimStart().length
   const end = text.trimEnd().length
@@ -122,6 +127,7 @@ export function writingNoticeDisplayInlines(nodes, lineIndex = 0) {
       return value ? [{ ...node, text: value }] : []
     })
   }
+  if (preserveSourceNumbering) return slice(start, end)
   const lines = applicationWritingNoticeLines(text)
   if (lines) {
     const from = start + lines.slice(0, lineIndex).reduce((sum, line) => sum + line.text.length, 0)
