@@ -68,3 +68,27 @@ test('existing single paragraph broadcasts remain accepted', () => {
     cues.transition = [transition[0], transition.slice(1).join('')]
   }).review.required, [])
 })
+
+test('文章大意 heading ends the listening transcript before reading explanations', () => {
+  for (const heading of ['文章大意：本文是一篇应用文。', '【文章大意】：本文是一篇应用文。',
+    '文章大意', '【文章大意】本文是一篇应用文。']) {
+    const fixture = makeSyntheticNck1DocxFixture({ listening: true, transformXml: xml => xml
+      .replace('Synthetic transcript 10.', 'Leave a positive impact on our planet. Thank you.')
+      .replace(paragraph('【答案解析】'), [heading, '阅读理解解析。', '评分标准：按档次给分。'].map(paragraph).join('')),
+    })
+    const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+    assert.deepEqual(result.review.required, [], heading)
+    assert.equal(result.materialization.listening.transcript.at(-1).text,
+      'Leave a positive impact on our planet. Thank you.', heading)
+  }
+})
+
+test('文章 within listening speech does not end the transcript', () => {
+  const speech = 'M: The word 文章 means article. Keep reading. Thank you.'
+  const fixture = makeSyntheticNck1DocxFixture({ listening: true, transformXml: xml => xml
+    .replace('Synthetic transcript 10.', speech),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  assert.deepEqual(result.review.required, [])
+  assert.equal(result.materialization.listening.transcript.at(-1).text, speech)
+})
