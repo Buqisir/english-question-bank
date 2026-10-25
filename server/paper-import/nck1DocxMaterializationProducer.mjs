@@ -15,9 +15,9 @@ const BLANK = /(?<![\p{L}\p{N}_])_+\d{1,3}_+|(?:(?<!\d)\d{1,3}[.．、]?\p{Zs}*)
 const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]{0,120}英语试(?:题|卷)(?:参考)?)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?[:：]?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
 const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试题|测试)?(?:原文|材料|录音稿|录音原文|录音材料|录音文稿|文稿)|录音(?:原文|文稿|稿)|答案及听力材料)`
-// Some answer sheets use only 英语听力. Keep this alternative whole-heading
-// only; the prefix-based writing boundary must not match arbitrary prose.
-const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
+// Some answer sheets use only 英语听力 or 听力文本. Keep these alternatives
+// whole-heading only; the prefix-based writing boundary must not match prose.
+const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力|听力文本)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
 // Owner-defined closed scoring vocabulary and complete number + unit syntax.
 const WRITING_SCORING_DIMENSION = /^(?:Content|Organization|Organisation|Structure|Language|Vocabulary|Grammar|Coherence|Cohesion|Accuracy|Fluency|Task|Communication|Overall|Expression|Style|Format|Word count|Handwriting)(.*)$/iu
@@ -28,7 +28,7 @@ const WRITING_SCORE_AFTER_GLOSS = new RegExp(
   String.raw`\((?=[^()\n]*\p{Script=Han})[^()\n]*\)[ \t:：—–()\-]*${WRITING_SCORE_EXPRESSION}`, 'iu',
 )
 // Labels that open an official sample; scoring or prompt text may precede them.
-const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
+const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|Version\s+(?:one|two|three|[1-3])|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
 // Zhenhai also prints "Text 8 打听一位画家（第10题为推断题）".
 // Match the whole marker, keeping its Chinese title/note out of speech.
@@ -119,7 +119,10 @@ function listeningCue(text) {
   if (/^第一节到此结束[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_section_transition', kind: 'section_transition', nextTextNumber: 6 }
   }
-  if (/^听力部分到此结束[。.!！]?$/u.test(value)) {
+  if (/^听力考试正式开始[。.!！]?$/u.test(value)) {
+    return { disposition: 'excluded_exam_broadcast', reason: 'anchored_formal_listening_start', kind: 'listening_opening_notice', nextTextNumber: 1 }
+  }
+  if (/^(?:听力部分到此结束|听力结束)[。.!！]?$/u.test(value)) {
     return { disposition: 'excluded_exam_broadcast', reason: 'anchored_listening_end_cue', kind: 'listening_end', nextTextNumber: null }
   }
   if (/^第二节到此结束(?:[。.!！,，])?现在[,，]?你有(?:\d+|两|三|四|五|十)分钟(?:的)?时间将试卷上的答案转涂到(?:客观题答题卡|答题纸|答题卡)上[。.!！]?(?:\(\s*停顿\s*\d+(?:\.\d+)?\s*(?:秒|分钟|分)\s*\))?$/u.test(value)) {
@@ -1214,7 +1217,7 @@ function writingSampleText(answerBody, from, to) {
   // A later explicitly numbered alternative cannot erase an unlabelled first
   // sample. It remains part of the captured sample stream.
   const startsWithLaterAlternative = labels.length && labels[0] > from
-    && /(?:范文|作文|样例|示例|Version)\s*[二三2-3](?:】)?\s*[:：]?$/iu
+    && /(?:范文|作文|样例|示例|Version)\s*(?:[二三2-3]|two|three)(?:】)?\s*[:：]?$/iu
       .test(normalized(answerBody[labels[0]].text))
   const start = labels.length && !startsWithLaterAlternative
     ? labels[0] + (labels.length === 1 ? 1 : 0) : from
@@ -1376,6 +1379,21 @@ function activeAnswers(paperId, answerMap, issues, answerDocumentId) {
   return answers
 }
 
+function closesWritingSampleWordCount(answerBody, index, answerDocumentId) {
+  const item = answerBody[index]
+  if (item?.kind !== 'paragraph') return false
+  let ending = normalized(item.text)
+  // Wuxi prints "(76" at the end of the essay line and "words)" on
+  // the next one. Never treat an unpaired suffix as a closed boundary.
+  if (/^(?:words?|词)\s*\)$/iu.test(ending) && answerBody[index - 1]?.kind === 'paragraph') {
+    ending = normalized(`${answerBody[index - 1].text} ${item.text}`)
+  }
+  if (!/\(\s*\d+\s*(?:words?|词)\s*\)$/iu.test(ending)) return false
+  const samples = parseOfficialWritingSamples(answerBody, answerDocumentId, [])
+  return Object.values(samples).some(sample => sample && normalized(sample).endsWith(ending)
+    && /[A-Za-z]/u.test(normalized(sample).replace(/\(\s*\d+\s*(?:words?|词)\s*\)$/iu, '')))
+}
+
 function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues }) {
   // OCR may split a fixed broadcast across a heading and two printed lines.
   // Match the complete anchored cue; retain each original item and locator in the partition.
@@ -1396,7 +1414,26 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       break
     }
   }
-  const cueFor = item => wrappedCues.get(item) || listeningCue(item?.text)
+  // A sound check is not question-bearing speech. Exclude it only when its
+  // explicit start/end pair precedes one formal start and the first Text
+  // marker; malformed, duplicate or in-segment trials remain review items.
+  const firstText = answerBody.findIndex(item =>
+    item.kind === 'paragraph' && LISTENING_TEXT_MARKER.test(normalized(item.text)))
+  const preamblePositions = pattern => answerBody.flatMap((item, index) =>
+    index < firstText && item.kind === 'paragraph' && pattern.test(normalized(item.text)) ? [index] : [])
+  const trialStarts = preamblePositions(/^(?:现在是)?听力试音(?:时间)?[。.!！]?$/u)
+  const trialEnds = preamblePositions(/^试音到此结束[。.!！]?$/u)
+  const formalStarts = preamblePositions(/^听力考试正式开始[。.!！]?$/u)
+  const trialItems = new Set()
+  if (trialStarts.length === 1 && trialEnds.length === 1 && formalStarts.length === 1
+    && trialStarts[0] < trialEnds[0] && trialEnds[0] < formalStarts[0]) {
+    for (let index = trialStarts[0]; index <= trialEnds[0]; index += 1) {
+      if (answerBody[index].kind === 'paragraph') trialItems.add(answerBody[index])
+    }
+  }
+  const cueFor = item => trialItems.has(item)
+    ? { disposition: 'excluded_exam_broadcast', reason: 'paired_sound_check_before_formal_start', kind: 'listening_opening_notice' }
+    : wrappedCues.get(item) || listeningCue(item?.text)
   const listeningHeading = optionalExactPosition(
     questionBody,
     /^第一部分\s*听力/u,
@@ -1501,7 +1538,8 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const lastMarkerIndex = markers.at(-1)?.index ?? -1
   const analysis = lastMarkerIndex < 0 ? -1 : answerBody.findIndex((item, index) =>
-    index > lastMarkerIndex && isAnswerExplanationHeading(item))
+    index > lastMarkerIndex && (isAnswerExplanationHeading(item)
+      || (item.kind === 'paragraph' && /^试题答案[:：]?$/u.test(normalized(item.text)))))
   const listeningEndIndexes = lastMarkerIndex < 0 ? [] : answerBody.flatMap((item, index) =>
     index > lastMarkerIndex && item.kind === 'paragraph'
       && cueFor(item)?.kind === 'listening_end'
@@ -1550,7 +1588,8 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     }
   }
   if (headingIndex < 0 && precedingBoundaryIndex >= 0
-    && !/^略[。. ]?$/u.test(normalized(answerBody[precedingBoundaryIndex]?.text))) {
+    && !/^略[。. ]?$/u.test(normalized(answerBody[precedingBoundaryIndex]?.text))
+    && !closesWritingSampleWordCount(answerBody, precedingBoundaryIndex, answerDocumentId)) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
       'Headingless Listening needs a closed preceding answer boundary; unknown preamble text cannot be discarded',
       sourceRef(answerDocumentId, answerBody[precedingBoundaryIndex]?.sourceIndex))
