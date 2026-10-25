@@ -211,6 +211,58 @@ for (const listeningHeading of ['答案及听力材料', '听力原文（录音�
   assert.equal(result.materialization.listening.transcript.length, 10)
 }
 
+// Wuhan May prints a standalone 英语听力 followed by (Text 1), without
+// 原文/材料/录音稿. It is a source title, not unknown headingless preamble.
+for (const listeningHeading of ['英语听力', '英语听力：', '附：英语听力', '【英语听力】']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true,
+    listeningHeading,
+    transformXml: xml => xml.replace(/>Text (\d+)</gu, '>(Text $1)<'),
+  })
+  const result = produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.equal(result.review.listeningSourcePartition.heading.text, listeningHeading)
+  assert.equal(result.materialization.listening.transcript.length, 10)
+  assert.deepEqual(result.materialization.listening.transcript.map(segment => segment.text),
+    Array.from({ length: 10 }, (_, index) => `Synthetic transcript ${index + 1}.`))
+}
+for (const listeningHeading of ['英语听力教学说明。', '下面是英语听力。', '英语听力（教学说明）']) {
+  const fixture = makeSyntheticNck1DocxFixture({ listening: true, listeningHeading })
+  assertRejected(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+}
+{
+  const paragraph = text => `<w:p><w:r><w:t xml:space="preserve">${text}</w:t></w:r></w:p>`
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true, listeningHeading: '英语听力',
+    transformXml: xml => xml.replace(paragraph('Mia carried the notebook to the school office. The teacher found its owner.'),
+      paragraph('略。')).replace(paragraph('The next morning, a student came to thank her. They became friends.'), ''),
+  })
+  assertReady(produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  }), fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', {
+    application: expectedWritingSamples.application, continuation: null,
+  })
+}
+for (const transformXml of [
+  xml => xml.replace('>英语听力<', '>英语听力</w:t></w:r></w:p><w:p><w:r><w:t>英语听力<'),
+  xml => xml.replace('>Text 4<', '>Text 5<'),
+  xml => xml.replace('>Text 1<', '>未知前言</w:t></w:r></w:p><w:p><w:r><w:t>Text 1<'),
+]) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    listening: true, listeningHeading: '英语听力', transformXml,
+  })
+  const result = produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  })
+  assert.equal(result.disposition, 'needs_agent_review')
+  assert(result.review.required.some(issue => issue.path === 'listening.transcript'))
+}
+console.log('PASS standalone 英语听力 title with ordered Text 1-10; unknown preamble remains rejected')
+
 for (const wrap of [number => `(Text ${number})`, number => `（Text ${number}）`, number => `Text ${number}:`, number => `Text ${number}：`]) {
   const fixture = makeSyntheticNck1DocxFixture({
     listening: true,
