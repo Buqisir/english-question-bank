@@ -55,6 +55,8 @@ import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 import { reobserveRegions } from './ocr-region-reobserve.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
+export { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const HEADING_REPAIRS_FILE = 'heading-repairs.json'
@@ -63,9 +65,6 @@ const execFileAsync = promisify(execFile)
 const EVIDENCE_DENSITY = 144
 const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
-// Extraction output changed; retain historical sidecars/receipts unchanged.
-// This is separate from the Canonical Materialization producer's version.
-export const OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v16'
 
 function fail(message) {
   console.error(message)
