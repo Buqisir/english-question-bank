@@ -4,12 +4,53 @@ import { normalizeMaterializationNumbering } from './materialization-numbering.m
 import { buildOcrReportEntries } from './ocr-proofread.mjs'
 import { importSubmissionIssues } from './lib-import-submit-gate.mjs'
 import { addOcrNumberingProjections, validateOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
+import { validateAgentOcrCorrectionReceipt } from '../../server/import-review/importReviewStore.mjs'
 
 const source = { documentId: 'question', page: 7 }
 const text = value => ({ kind: 'text', text: value })
 const fixture = values => ({ groups: [{ blocks: values.map(value => ({
   kind: 'paragraph', source, content: [text(value)],
 })) }] })
+
+for (const [name, values, expected] of [
+  ['single run', ['(1) DIY only (2) BBQ 晚会'], ['(1) DIY only （2） BBQ 晚会']],
+  ['multiple runs', ['(1) DIY only ', '(2) BBQ 晚会'], ['(1) DIY only ', '（2） BBQ 晚会']],
+]) test(`mixed English/Chinese ${name} keeps item boundaries and original receipt admission`, () => {
+  const input = { groups: [{ blocks: [{ kind: 'paragraph', source, content: values.map(text) }] }] }
+  const receipt = {
+    paperId: 'paper-mixed-numbering', revisionId: 'revision', confirmationId: 'confirmation',
+    reviewerKind: 'import_agent', sourceSetDigest: 'source-digest', evidenceDigest: 'evidence-digest',
+    confirmation: { documents: [{ documentId: source.documentId, pages: [{ page: source.page,
+      orderedItems: values.map((value, i) => ({ itemId: `item-${i}`, text: value })),
+    }] }] },
+    correctionReport: { sourceSetDigest: 'source-digest', entries: values.map((value, i) => ({
+      itemId: `item-${i}`, kind: 'ocr_repair', ocrText: `raw OCR ${i}`, correctedText: value,
+      ...source, reason: '核对原页修正数字',
+    })) },
+  }
+  const receiptBefore = structuredClone(receipt)
+  assert.deepEqual(importSubmissionIssues({ materialization: input }).flatMap(issue => issue.matches), ['(2)'])
+  const first = normalizeMaterializationNumbering(input)
+  assert.equal(first.changes.length, 1)
+  assert.deepEqual(first.materialization.groups[0].blocks[0].content.map(run => run.text), expected)
+  assert.deepEqual(importSubmissionIssues({ materialization: first.materialization }), [])
+  const second = normalizeMaterializationNumbering(first.materialization)
+  assert.deepEqual(second.changes, [])
+  assert.strictEqual(second.materialization, first.materialization)
+  for (const materialization of [first.materialization, second.materialization]) {
+    const { entries, skipped } = buildOcrReportEntries(receipt, materialization)
+    assert.equal(entries.length, values.length)
+    assert.deepEqual(skipped, [])
+    const report = addOcrNumberingProjections({
+      schemaVersion: 'agent-ocr-correction-report-v2', paperId: receipt.paperId,
+      ocrRevisionId: receipt.revisionId, ocrConfirmationId: receipt.confirmationId,
+      originalSourceSetDigest: receipt.sourceSetDigest, ocrEvidenceDigest: receipt.evidenceDigest, entries,
+    }, receipt, materialization)
+    assert.equal(report.entries.filter(entry => entry.standardizationProjection).length, 1)
+    assert.strictEqual(validateAgentOcrCorrectionReceipt(report, receipt, materialization), report)
+  }
+  assert.deepEqual(receipt, receiptBefore)
+})
 
 for (const [name, values] of [
   ['Jinan six forms', ['(1) 你的一次志愿者服务经历；', '(2) 你的感受和倡议。',

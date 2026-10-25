@@ -1,8 +1,6 @@
 import { chineseContextNumbering } from '../../shared/chineseContextNumbering.mjs'
 import { CJK_NUMBERING_RULE, computeOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
 
-export { CJK_NUMBERING_RULE }
-
 // Only complete source-backed paragraph/table runs qualify. The same proof used
 // by report admission must be recomputable on the final output, not just on a
 // convenient concatenated string. Unprovable cross-run numbering stays blocked.
