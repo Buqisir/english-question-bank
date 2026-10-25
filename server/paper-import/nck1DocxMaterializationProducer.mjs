@@ -19,6 +19,14 @@ const LISTENING_TRANSCRIPT_TITLE = String.raw`(?:(?:英语)?听力(?:部分|试�
 // only; the prefix-based writing boundary must not match arbitrary prose.
 const LISTENING_TRANSCRIPT_HEADING = new RegExp(String.raw`^(?:附[:：]?\s*)?(?:【)?(?:${LISTENING_TRANSCRIPT_TITLE}|英语听力)(?:[（(]录音稿[）)])?(?:】)?[:：]?$`, 'u')
 const WRITING_SAMPLE_BOUNDARY = new RegExp(String.raw`^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*)?(?:附[:：，,]?\s*)?(?:【)?(?:(?:应用文|读后续写|续写|书面表达)(?:写作)?)?(?:评分|给分)|(?:【)?(?:答案(?:解析|详解)|解析|详解)|(?:附[:：]?\s*)?各档次|${LISTENING_TRANSCRIPT_TITLE}|AI\s+editions?\b)`, 'iu')
+// Owner-defined closed scoring vocabulary and complete number + unit syntax.
+const WRITING_SCORING_DIMENSION = /^(?:Content|Organization|Organisation|Structure|Language|Vocabulary|Grammar|Coherence|Cohesion|Accuracy|Fluency|Task|Communication|Overall|Expression|Style|Format|Word count|Handwriting)(.*)$/iu
+const WRITING_SCORE_EXPRESSION = String.raw`(?:\d+(?:\.\d+)?|[零〇一二两三四五六七八九十百千万亿]+)\s*(?:分|points?\b|marks?\b)`
+const WRITING_SCORE = new RegExp(WRITING_SCORE_EXPRESSION, 'iu')
+const WRITING_SCORE_START = new RegExp(`^(?:${WRITING_SCORE_EXPRESSION})`, 'iu')
+const WRITING_SCORE_AFTER_GLOSS = new RegExp(
+  String.raw`\((?=[^()\n]*\p{Script=Han})[^()\n]*\)[ \t:：—–()\-]*${WRITING_SCORE_EXPRESSION}`, 'iu',
+)
 // Labels that open an official sample; scoring or prompt text may precede them.
 const WRITING_SAMPLE_LABEL = /^(?:(?:[一二三四五六七八九十]+[、.．]\s*|\(\s*[一二三四五六七八九十]+\s*\)\s*))?(?:(?:(?:A|One)\s+)?Possible\s+Version(?:\s+\d+)?|(?:【)?(?:参考范文|范文|参考作文|写作样例|作答示例)(?:\s*[一二三1-3])?(?:】)?)\s*[:：]?$/iu
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
@@ -1156,6 +1164,37 @@ function writingSampleOmission(answerBody, from, to) {
   return items.length === 1
 }
 
+function writingScoringLine(text) {
+  const line = normalized(text)
+  // (a) A closed-list dimension immediately followed by a Chinese annotation,
+  // colon or score; ordinary English continuations do not satisfy this rule.
+  const dimension = WRITING_SCORING_DIMENSION.exec(line)
+  if (dimension) {
+    const suffix = dimension[1].trimStart()
+    if (/^\((?=[^()]*\p{Script=Han})[^()]*\)|^[:：]/u.test(suffix)
+      || WRITING_SCORE_START.test(suffix)) return true
+  }
+  // (b) A leading English phrase whose parenthetical annotation has a score.
+  const phrase = /^[A-Za-z]+(?:[ \t'-]+[A-Za-z]+)*[ \t]*\(([^()]*)\)/u.exec(line)
+  if (phrase && WRITING_SCORE.test(phrase[1])) return true
+  // (c) A Chinese annotation followed by a score through the allowed separators.
+  return WRITING_SCORE_AFTER_GLOSS.test(line)
+}
+
+// Mask closed Chinese word glosses after an English word, allowing the specified
+// synonym separators and spaces. Digits and complete scores are not glosses;
+// the character 分 alone (e.g. 分心) is not a score.
+// A wrapped gloss must be two adjacent, nonempty Han-only word fragments.
+// Never span an independent commentary line, punctuation or a third line.
+// Keep newlines aligned; returned sample text is never changed by this mask.
+function maskWritingGlosses(text) {
+  return text.replace(/\((?:[\p{Script=Han}，、；\/,; ]+|\p{Script=Han}+\n\p{Script=Han}+)\)|（(?:[\p{Script=Han}，、；\/,; ]+|\p{Script=Han}+\n\p{Script=Han}+)）/gu, (gloss, offset) => {
+    const prefix = text.slice(text.lastIndexOf('\n', offset) + 1, offset)
+    return /\p{Script=Han}/u.test(gloss) && !WRITING_SCORE.test(gloss) && /[A-Za-z][ \t]*$/u.test(prefix)
+      ? gloss.replace(/[^\n]/gu, ' ') : gloss
+  })
+}
+
 function writingSampleText(answerBody, from, to) {
   const omitted = writingSampleOmission(answerBody, from, to)
   // null is the existing missing officialModelAnswer representation; an
@@ -1179,13 +1218,16 @@ function writingSampleText(answerBody, from, to) {
       .test(normalized(answerBody[labels[0]].text))
   const start = labels.length && !startsWithLaterAlternative
     ? labels[0] + (labels.length === 1 ? 1 : 0) : from
+  const glossMaskedLines = maskWritingGlosses(answerBody.slice(start, to)
+    .map(item => item.kind === 'paragraph' ? item.text : '').join('\n')).split('\n')
   const boundary = answerBody.findIndex((item, index) =>
     index >= start
       && index < to
       && item.kind === 'paragraph'
       && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
+        || writingScoringLine(item.text)
         || (!WRITING_SAMPLE_LABEL.test(normalized(item.text))
-          && WRITING_SAMPLE_COMMENTARY.test(normalized(item.text)))
+          && WRITING_SAMPLE_COMMENTARY.test(normalized(glossMaskedLines[index - start])))
         || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
         || LISTENING_TEXT_MARKER.test(normalized(item.text))
         || listeningCue(item.text)))
@@ -1194,9 +1236,12 @@ function writingSampleText(answerBody, from, to) {
     .slice(start, end)
     .filter((item) => item.kind === 'paragraph' && normalized(item.text))
     .map((item) => trimEdgeSpaces(item.text))
-  // With no sample label, Chinese text first is scoring or instructions, not
-  // the sample; leave it for review instead of keeping it.
-  if (!labels.length && /\p{Script=Han}/u.test(lines[0] || '')) return ''
+  // With no label, Chinese outside a recognized word gloss still needs review.
+  // Titles and physical line length do not decide whether source prose is valid.
+  const first = lines[0] || ''
+  const unlabelledStart = !labels.length || startsWithLaterAlternative
+  if (unlabelledStart && /\p{Script=Han}/u.test(first)
+    && /\p{Script=Han}/u.test(maskWritingGlosses(lines.join('\n')).split('\n')[0])) return ''
   return lines.join('\n')
 }
 

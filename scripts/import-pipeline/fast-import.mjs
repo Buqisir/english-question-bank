@@ -31,6 +31,7 @@ import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading
 import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
+import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -426,7 +427,6 @@ function answerCheck(ctx, verified) {
   const materialization = readJson(materializationPath(ctx))
   const expected = [...(materialization.listening?.answers || []), ...(materialization.answers || [])]
   const transcribed = Object.assign({}, ...readFlags(ctx).map((flag) => flag.answers || {}))
-  const normalize = (value) => String(value ?? '').replace(/[’]/gu, '\'').replace(/\s+/gu, ' ').trim()
   const entries = expected.map((answer) => ({
     number: answer.canonicalNumber,
     answerKey: answer.value,
@@ -434,7 +434,7 @@ function answerCheck(ctx, verified) {
   }))
   const missing = entries.filter((entry) => entry.transcribed === null).map((entry) => entry.number)
   const mismatches = entries.filter((entry) => entry.transcribed !== null
-    && normalize(entry.transcribed).toLowerCase() !== normalize(entry.answerKey).toLowerCase())
+    && !answerKeyValuesMatch(entry.transcribed, entry.answerKey))
   writeJson(path.join(ctx.work, 'handoff/qa/answer-key-comparison.json'), {
     paperId: ctx.paperId, method: 'proofreader-page-transcription-vs-answerKey', compared: entries.length,
     missing, mismatches, entries })

@@ -5,6 +5,202 @@ import { joinTranscriptTurns } from './ocr-proofread.mjs'
 
 const body = (texts) => texts.map((text, sourceIndex) => ({ kind: 'paragraph', text, sourceIndex }))
 
+const scoringDimensions = [
+  'Content', 'Organization', 'Organisation', 'Structure', 'Language', 'Vocabulary', 'Grammar',
+  'Coherence', 'Cohesion', 'Accuracy', 'Fluency', 'Task', 'Communication', 'Overall', 'Expression',
+  'Style', 'Format', 'Word count', 'Handwriting',
+]
+
+for (const heading of [
+  'Content（内容）: 5 points',
+  'Organization（结构）: 5 points',
+  'Content（15分）: cover all required points.',
+  'Content(内容): 5 points',
+  'Organization(结构): 5 points',
+  'Content(15分): cover all required points.',
+  'Content（内容） 5 points',
+  'Content（内容）（5分）',
+  'Organization（结构）— 5 points',
+  'Content（内容） 5 marks',
+  'Language（语言）',
+  'Organization (结构) 5 points',
+  'Content(内容)(5 marks)',
+  'Organization(结构) - 5 marks',
+  'Content（内容）（五分）',
+  ...scoringDimensions.flatMap(dimension => [
+    `  ${dimension.toLowerCase()}（评分项）`,
+    `${dimension}: cover the required points.`,
+    `${dimension} 5 points`,
+  ]),
+  'Writing quality（五分）',
+  'Writing quality (15 points)',
+  'Sentence variety（十五分）',
+  'Your work was strong, but length（字数）: (15 points)',
+  'Your work was strong, but length（字数）—五分',
+  'Your work was strong, but length（字数） (1 mark)',
+  'Content（内容） matters greatly to readers.',
+  'Content（内容）（主题） matters greatly to readers.',
+  'Language（语言） opens a window onto another culture.',
+]) {
+  test(`bilingual scoring heading is never an unlabelled essay: ${heading}`, () => {
+    const issues = []
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.',
+      '第二节 读后续写', heading, 'Cover all key information.',
+    ]), 'answers', issues)
+    assert.deepEqual(result, { application: null, continuation: null })
+    assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+  })
+
+  test(`bilingual scoring following a real gloss sample is excluded: ${heading}`, () => {
+    const issues = []
+    const sample = 'He looked aggressive（强势）last night.'
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.',
+      '第二节 读后续写', sample, heading, 'Cover all key information.',
+    ]), 'answers', issues)
+    assert.deepEqual(issues, [])
+    assert.equal(result.continuation, sample)
+  })
+}
+
+for (const first of [
+  'Topic（主题）', 'Personal Growth（成长）', 'A New Day（新的一天）',
+  'Mark felt tired（疲惫）',
+]) test(`short titles and short source lines remain part of unlabelled samples: ${first}`, () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', first, 'A later English-looking paragraph.',
+  ]), 'answers', issues), { application: 'A short sample.', continuation: `${first}\nA later English-looking paragraph.` })
+  assert.deepEqual(issues, [])
+})
+
+for (const gloss of ['五分', '5分', '五\n分', '强势 5 points', '强势 marks', '强势2']) {
+  test(`a score or non-word annotation is not masked as a Chinese gloss: ${gloss}`, () => {
+    const issues = []
+    assert.deepEqual(parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.', '第二节 读后续写',
+      `The next day, Mark looked aggressive（${gloss}）last night.`,
+    ]), 'answers', issues), { application: null, continuation: null })
+    assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+  })
+}
+
+for (const sample of [
+  'He felt distracted（分心）as the rain fell.',
+  'He looked aggressive（强势，咄咄逼人）last night.',
+  'He looked aggressive（强势，直接）last night.',
+  'He looked aggressive（强势、咄咄逼人；直接/坚决,果断;毫不犹豫）last night.',
+  'He felt distracted(分心) as the rain fell.',
+  'He looked aggressive(强势，咄咄逼人) last night.',
+  'Contentment（满足） grew as he read.',
+  'Mechanics（写作技巧） helped him improve.',
+  'He smiled（欣喜若狂喜不自胜）.',
+  'I felt tired（疲惫）.',
+  'The next day Mark felt tired（疲惫）',
+  'I spent 5 hours (about 300 minutes) on it.',
+]) test(`ordinary English narration still establishes a sample: ${sample}`, () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.', '第二节 读后续写', sample,
+  ]), 'answers', issues), { application: 'A short sample.', continuation: sample })
+  assert.deepEqual(issues, [])
+})
+
+for (const [name, sample, expected] of [
+  ['same sentence', ['I felt tired（疲惫） after working all night.'], 'I felt tired（疲惫） after working all night.'],
+  ['paragraph newline', ['I felt tired（疲惫）\nafter working all night.'], 'I felt tired（疲惫）\nafter working all night.'],
+  ['adjacent source items', ['I felt tired（疲惫）', 'after working all night.'], 'I felt tired（疲惫）\nafter working all night.'],
+  ['half-width paragraph newline', ['I felt tired(疲惫)\nafter working all night.'], 'I felt tired(疲惫)\nafter working all night.'],
+  ['salutation', ['Dear Tom,', 'I hope you are well.'], 'Dear Tom,\nI hope you are well.'],
+  ['essay title', ['A Letter of Thanks', 'Dear Tom,', 'Thank you for your help.'], 'A Letter of Thanks\nDear Tom,\nThank you for your help.'],
+]) test(`source prose survives ordinary line structure: ${name}`, () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.', '第二节 读后续写', ...sample,
+  ]), 'answers', issues), { application: 'A short sample.', continuation: expected })
+  assert.deepEqual(issues, [])
+})
+
+test('explicitly labelled samples may retain a short title', () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', 'One possible version:', 'A New Day（新的一天）', 'Mark smiled.',
+  ]), 'answers', issues), { application: 'A short sample.', continuation: 'A New Day（新的一天）\nMark smiled.' })
+  assert.deepEqual(issues, [])
+})
+
+test('a later numbered version preserves the earlier source title and prose', () => {
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', 'Topic（主题）', 'A later English-looking paragraph.',
+    'Possible Version 2:', 'Another sample.',
+  ]), 'answers', issues), { application: 'A short sample.',
+    continuation: 'Topic（主题）\nA later English-looking paragraph.\nPossible Version 2:\nAnother sample.' })
+  assert.deepEqual(issues, [])
+})
+
+for (const [open, close] of [['（', '）'], ['(', ')']]) {
+  for (const commentary of ['内容完整，语言连贯。', '主题表达完整', '【审题重点】', '评分标准']) {
+    test(`a gloss cannot cross an independent commentary paragraph: ${open}${commentary}${close}`, () => {
+      const issues = []
+      const result = parseOfficialWritingSamples(body([
+        '第四部分 写作', '第一节 应用文', 'A short sample.', '第二节 读后续写',
+        `He looked aggressive${open}强`, commentary, `势${close}last night.`,
+      ]), 'answers', issues)
+      assert.deepEqual(result, { application: null, continuation: null })
+      assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+    })
+  }
+}
+
+for (const sample of [
+  ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive（强势）last night?”'],
+  ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive（强',
+    '势）last night?” “Aggressive?” Li Wei smiled bitterly. “It’s our great honour to treat a guest,'],
+  ['The next day, Mark asked Li Wei, “Why were you and Director Zhang so aggressive(强',
+    '势)last night?”'],
+  ['She was grateful（感激）and relieved (宽慰).'],
+]) test(`unlabelled English sample keeps parenthesized Chinese glosses: ${sample.join('\\n')}`, () => {
+  const issues = []
+  const result = parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节（满分15分）', 'Dear Charles,',
+    '第二节（满分25分）', ...sample, '评分细则', '内容完整，语言准确。',
+  ]), 'answers', issues)
+  assert.deepEqual(issues, [])
+  assert.deepEqual(result, { application: 'Dear Charles,', continuation: sample.join('\n') })
+})
+
+for (const first of [
+  '范文（仅供参考）', '（评分标准）内容完整，语言准确。',
+  'Content（内容完整语言准确表达连贯）', 'This sample 包含中文说明。',
+  'The sample has an unclosed gloss（强势', 'This is a mismatched gloss（强势)',
+]) test(`unlabelled scoring, Chinese titles and non-gloss Chinese remain ambiguous: ${first}`, () => {
+  const issues = []
+  const result = parseOfficialWritingSamples(body([
+    '第四部分 写作', '第一节 应用文', 'A short sample.',
+    '第二节 读后续写', first, 'An English-looking scoring example.',
+  ]), 'answers', issues)
+  assert.deepEqual(result, { application: null, continuation: null })
+  assert(issues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+})
+
+test('a cross-line gloss never absorbs later scoring or commentary paragraphs', () => {
+  for (const boundary of ['评分标准', '【审题重点】', '主题语境：人与社会']) {
+    const issues = []
+    const sample = 'Mark was aggressive（强\n势）last night.'
+    const result = parseOfficialWritingSamples(body([
+      '第四部分 写作', '第一节 应用文', 'A short sample.',
+      '第二节 读后续写', ...sample.split('\n'), boundary, 'Never include this scoring example.',
+    ]), 'answers', issues)
+    assert.deepEqual(issues, [])
+    assert.equal(result.continuation, sample)
+  }
+})
+
 for (const marker of ['略', '略。', '（略）', '(略).']) {
   test(`Jinan retains the application sample when continuation explicitly says ${marker}`, () => {
     const issues = []
