@@ -40,6 +40,8 @@ execFileSync(process.execPath, [
   'scripts/import-pipeline/answer-source-boundaries.test.mjs',
   'scripts/import-pipeline/fast-import-references.test.mjs',
   'scripts/import-pipeline/materialization-numbering.test.mjs',
+  'scripts/import-pipeline/materialization-paragraph-joins.test.mjs',
+  'scripts/import-pipeline/materialization-paragraph-joins-redo.test.mjs',
 ], { cwd: root, stdio: 'inherit' })
 
 function sourceInput(produced, documents) {

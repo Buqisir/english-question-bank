@@ -1252,6 +1252,25 @@ export async function startOcrGeneration(ctx, planPath, checkPlan = async () => 
   // their binding so the existing rule creates a new attempt for the new input.
 }
 
+// Source-relationship edits start after producer/presentation. Reuse the
+// existing redo archive and Candidate/submission guards, retaining sealed OCR.
+// No OCR generation, push/reuse or CAS behavior changes here.
+export async function invalidateParagraphJoinDownstream(paperId, expectedMaterializationSha256) {
+  const ctx = context(paperId)
+  if (sha256(readFileSync(materializationPath(ctx))) !== expectedMaterializationSha256) {
+    fail('Paragraph join Materialization changed after plan validation')
+  }
+  assertReferencesMutable(ctx)
+  await requestedRedo(ctx, 'spelling')
+  const retained = path.join(ctx.work, 'superseded',
+    `${new Date().toISOString().replace(/[:.]/gu, '-')}-paragraph-join-materialization.json`)
+  mkdirSync(path.dirname(retained), { recursive: true })
+  copyFileSync(materializationPath(ctx), retained)
+  archive(ctx, path.join(ctx.paperDir, 'spelling-review-v1.json'))
+  archive(ctx, path.join(ctx.paperDir, 'canonical-evidence'))
+  return { retained, invalidatedFrom: 'spelling' }
+}
+
 const [command, paperId, ...args] = process.argv.slice(2)
 if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
   const ctx = context(paperId)
