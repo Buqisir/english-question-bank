@@ -14,7 +14,8 @@
 混合 item 允许 UTF-16 slice，所有受影响 item 必须逐字完整覆盖。
 公共 resolver 先对 cue fragment 做 NFKC 校验视图，片段必须含中文；每个
 字母（`\p{L}`）只允许 Han 或孤立的原始 ASCII 大写 A–G 标签，标签两侧
-不得有任何字母或数字（`\p{L}` / `\p{N}`，包括相邻汉字），并检查原 item
+不得有非汉字字母（`\p{L}` 且不是 `\p{Script=Han}`）或数字（`\p{N}`）；
+汉字、中文标点、空白和片段边界允许相邻，并检查原 item
 的规范化邻字符与组合字符边界。数学字母、全角标签、西里尔/希腊同形字、
 变音字母及 M:/W: 均拒绝；规范化不能让兼容字符获得 ASCII 标签许可。
 原文、UTF-16 偏移和证据字节不变。
@@ -35,7 +36,7 @@ apply 另需 `--plan`、`--agent-confirmed`。输出只是隔离作者产物，`
 
 | New verifier | Distinct failure caught | CI |
 | --- | --- | --- |
-| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, short speech-tail loss, multiple short cues or split speaker prefixes, punctuation-only speech loss and incomplete mixed-item Chinese announcements. Public resolver/admission/compile now reject whole-item mathematical speech, fullwidth labels, Cyrillic/Greek lookalikes, accented and compatibility letters through an NFKC letter whitelist; accept separated ASCII `A、B、C` with Chinese; reject all letter/number adjacency (including Han), combining-sequence slice tricks and fragments without Chinese. Retains next Text/question/section checks, forged transcript/older-authority rejection and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
+| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, short speech-tail loss, multiple short cues or split speaker prefixes, punctuation-only speech loss and incomplete mixed-item Chinese announcements. Public resolver/admission/compile reject whole-item mathematical speech, fullwidth labels, Cyrillic/Greek lookalikes, accented and compatibility letters through an NFKC letter whitelist; accept native ASCII labels next to Han, including `的A、B、C三` and `从A到G`; reject non-Han letter or number adjacency such as `aA`, `Аb`, `A1`, combining-sequence slice tricks and fragments without Chinese. Retains next Text/question/section checks, forged transcript/older-authority rejection and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
 
 图内字母只为 Reading 既有 A–D figure options 提供显式来源证明。先核读原 PDF，
 作者在 `selection.json` 明确填写 `groupId`、`questionId`、`parentMediaId`、

@@ -21,7 +21,9 @@ function permitsExclusionLetters(text, start, original) {
     if (!/\p{L}/u.test(point) || /\p{Script=Han}/u.test(point)) continue
     const left = points[index - 1] ?? [...before].at(-1) ?? ''
     const right = points[index + 1] ?? [...after][0] ?? ''
-    if (!/^[A-G]$/u.test(point) || /[\p{L}\p{N}]/u.test(left + right)) return false
+    const blockedNeighbor = [left, right].some(neighbor =>
+      /\p{N}/u.test(neighbor) || /\p{L}/u.test(neighbor) && !/\p{Script=Han}/u.test(neighbor))
+    if (!/^[A-G]$/u.test(point) || blockedNeighbor) return false
   }
   return true
 }
