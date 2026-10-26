@@ -5,8 +5,29 @@
 
 | Focused check | Distinct failure caught | CI |
 | --- | --- | --- |
+| `node --test scripts/import-pipeline/in-image-option-labels.test.mjs` | 捕获图内 A–D 缺失/重复、标签越出父图或对应子图、child/option/crop/SHA 不符、封存 evidence/confirmation/PDF 或题目 anchor 漂移、父图冒用、重复消费、未核读原图、降版绕过与听力冒用；正向证明 v9 reader → Canonical compile → Review projection → live admission 保留四张原裁图，不改 OCR。 | yes, via `verify-nck1-ocr-source-evidence.mjs` |
 | `node --test scripts/import-pipeline/listening-cut-padding.test.mjs scripts/import-pipeline/listening-segment-pipeline.test.mjs scripts/import-pipeline/listening-owner-edge-rule.test.mjs scripts/import-pipeline/listening-boundary-safety.test.mjs` | 捕获默认剪到长静音中点而非词边 ±0.8 秒、短于 1.6 秒停顿吞入邻语音、录音首尾越界、跨引擎静音并集扩大缓冲、历史 attempt 被改写，以及装入 Owner 最终切点时二次加缓冲；合成数据只证明导航切点规则，不证明真实词级定位准确。 | focused/manual; existing listening rule/pipeline checks remain in daily packs |
 | `node --test scripts/import-pipeline/listening-owner-review-pack.test.mjs` | 合成音频证明逐遍精切不会重复整段，0.8 秒缓冲不跨相邻停顿中点，上下文从精切扩 3 秒且受整录音端点约束；捕获缺首尾/停顿、音频 SHA 改变、错误段/遍选择、经符号链接写回卷目录、输入被改写、中文页面首末句/绝对时钟遗漏，以及 manifest 缺规则/SHA 或误称 Owner 已审。需本机 ffmpeg/ffprobe；此检查不证明真实录音内容与原文一致。 | manual; not in daily packs |
+
+图内字母只为 Reading 既有 A–D figure options 提供显式来源证明。先核读原 PDF，
+作者在 `selection.json` 明确填写 `groupId`、`questionId`、`parentMediaId`、
+`parentRegionId`、`parentSource`、`anchorItemId`、`labels`、`reason`。
+`parentSource` 是原 PDF 的 `{kind:"page_region",documentId,page,region}`；
+`labels` 必须按 A–D 各含一条 `{label,childMediaId,childSha256,childRegion,labelRegion}`。
+所有 region 为原 PDF 页面的归一化坐标，`labelRegion` 须位于对应 child 和 parent 内。
+字母和 child 的对应关系由作者声明，框的几何位置不识别字母。
+
+```sh
+node scripts/import-pipeline/in-image-option-labels.mjs plan <paperId> --paper-dir <source-dir> --selection <selection.json> --output .scratch/image-labels-plan.json
+node scripts/import-pipeline/in-image-option-labels.mjs apply <paperId> --paper-dir <source-dir> --plan .scratch/image-labels-plan.json --output .scratch/image-labels-materialization.json --agent-confirmed
+node scripts/generate-in-image-option-labels-authority.mjs --check
+```
+
+plan/apply 均只创建源目录外的新文件，拒绝覆盖及经符号链接写回源目录。
+apply 重读绑定，验证原 materialization/evidence/confirmation/PDF 字节并重放公共 adapter。
+输出是显式 v9 materialization 预览工件，须由调用者作为新输入走通常的 import/compile；
+该命令不安装回原卷、不修改封存 OCR、已有 edits、crop 或下游 receipt。
+旧版本及未提供 decision 的空标签仍被拒绝；Listening/B2 不在支持范围。
 
 `source-references-v4` 的评分图只进入显式 `includeScoring` 的答案册；范文仍用
 v3 的 `figures` / `afterParagraphId`。既有 publication/receipt 继续绑定原 sidecar
