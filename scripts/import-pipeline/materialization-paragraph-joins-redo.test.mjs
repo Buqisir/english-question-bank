@@ -2,8 +2,10 @@ import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
-import { invalidateParagraphJoinDownstream } from './fast-import.mjs'
+import { finish, invalidateParagraphJoinDownstream, requestedRedo, splitSummaries } from './fast-import.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { makeFixture } from '../verify-nck1-source-materialization.mjs'
+import { enumerateParagraphSummaryTargets, validateParagraphSummaries } from '../../server/paper-import-ai/paragraphSummaries.mjs'
 
 test('paragraph join redo archives downstream while retaining sealed OCR; stale and Candidate guards write nothing', async t => {
   const root = path.resolve(import.meta.dirname, '../..')
@@ -51,4 +53,71 @@ test('paragraph join redo archives downstream while retaining sealed OCR; stale 
   for (const file of staleFiles) assert(Object.entries(archive).some(([name, bytes]) =>
     name.endsWith(file) && bytes === before.paper[file]), file)
   assert(Object.values(archive).includes(digest))
+})
+
+test('paragraph join requires newly authored summaries after request/split; ordinary redo still reuses matching IDs', async t => {
+  const root = path.resolve(import.meta.dirname, '../..')
+  const paperId = `paper-synthetic-paragraph-authored-${process.pid}`
+  const paperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
+  const work = path.join(root, 'imports/ocr-proofread', paperId), fast = path.join(work, 'fast')
+  assert(!existsSync(paperDir) && !existsSync(work))
+  t.after(() => { rmSync(paperDir, { recursive: true, force: true }); rmSync(work, { recursive: true, force: true }) })
+  const json = (file, value) => { mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, JSON.stringify(value)) }
+  const ctx = { paperId, paperDir, work, fast, statePath: path.join(fast, 'state.json'),
+    state: { paperId, steps: {}, data: {}, background: {} } }
+  const materialization = { ...makeFixture(), paperId }
+  const materializationFile = path.join(paperDir, 'materialization/nck1-source-materialization-v1.json')
+  json(materializationFile, materialization)
+  const targets = enumerateParagraphSummaryTargets(materialization)
+  const request = { schemaVersion: 'paragraph-summaries-request-v1', paperId,
+    sourceDigest: sha256('old-source'), candidateDigest: sha256('old-candidate'), outputFile: 'paragraph-summaries-v1.json',
+    groups: materialization.groups.filter(group => targets.some(target => target.groupId === group.groupId))
+      .map(group => ({ groupId: group.groupId, sourceGroup: group, authoritativeAnswers: materialization.answers,
+        targets: targets.filter(target => target.groupId === group.groupId) })) }
+  const requestFile = path.join(fast, 'summaries-request.json')
+  json(requestFile, request)
+  ctx.state.data.summaryParts = splitSummaries(ctx, 3)
+  const authoredGroup = group => ({ groupId: group.groupId,
+    paragraphs: group.targets.map(target => ({ paragraphId: target.paragraphId, summary: 'OLD_AUTHORED_SUMMARY' })) })
+  const authoredFiles = ctx.state.data.summaryParts.map(part => {
+    const file = part.file.replace(/request-(\d+)\.json$/u, 'part-$1.json')
+    json(file, { groups: JSON.parse(readFileSync(part.file)).groups.map(authoredGroup) })
+    return { file, bytes: readFileSync(file) }
+  })
+  const oldSidecar = { schemaVersion: 'paragraph-summaries-v1', paperId,
+    sourceDigest: request.sourceDigest, candidateDigest: request.candidateDigest, groups: request.groups.map(authoredGroup) }
+  assert.deepEqual(validateParagraphSummaries({ sidecar: oldSidecar, materialization, ...request }), [])
+  const installed = path.join(paperDir, request.outputFile)
+  json(installed, oldSidecar)
+  const metadata = path.join(fast, 'search-metadata-authored.json'), prompts = path.join(fast, 'round2.json')
+  json(metadata, { groups: [{ groupId: request.groups[0].groupId, summary: 'OLD_AUTHORED_METADATA' }] })
+  json(prompts, [{ outputs: authoredFiles.map(({ file }) => file), prompt: 'old authoring request' }])
+  const metadataBytes = readFileSync(metadata), promptBytes = readFileSync(prompts)
+  await requestedRedo(ctx, 'spelling')
+  ctx.state.data.summaryParts = splitSummaries(ctx, 3)
+  for (const { file, bytes } of authoredFiles) assert.deepEqual(readFileSync(file), bytes, 'ordinary redo retains authored parts')
+  assert.deepEqual(readFileSync(metadata), metadataBytes)
+  json(installed, oldSidecar)
+  await invalidateParagraphJoinDownstream(paperId, sha256(readFileSync(materializationFile)))
+  ctx.state = JSON.parse(readFileSync(ctx.statePath))
+  const nextRequest = { ...request, sourceDigest: sha256('new-source'), candidateDigest: sha256('new-candidate') }
+  json(requestFile, nextRequest)
+  ctx.state.data.summaryParts = splitSummaries(ctx, 3)
+  // A paragraph join preserves source IDs: even the real summary validator cannot detect reused prose.
+  assert.deepEqual(validateParagraphSummaries({ sidecar: { ...oldSidecar,
+    sourceDigest: nextRequest.sourceDigest, candidateDigest: nextRequest.candidateDigest }, materialization, ...nextRequest }), [])
+  for (const { file } of authoredFiles) assert(!existsSync(file), 'old authored summary must not survive a paragraph join')
+  assert(!existsSync(metadata), 'old authored metadata must not survive a paragraph join')
+  assert(!existsSync(prompts), 'old authoring instructions must move aside')
+  const archived = readdirSync(path.join(work, 'superseded'))
+  const partsArchive = archived.find(name => name.endsWith('-summaries-parts'))
+  assert(partsArchive)
+  for (const { file, bytes } of authoredFiles) assert.deepEqual(
+    readFileSync(path.join(work, 'superseded', partsArchive, path.basename(file))), bytes)
+  for (const [file, bytes] of [[metadata, metadataBytes], [prompts, promptBytes]]) assert.deepEqual(
+    readFileSync(path.join(work, 'superseded', archived.find(name => name.endsWith(`-${path.basename(file)}`)))), bytes)
+  await assert.rejects(finish(ctx, []), /缺少摘要分片/)
+  assert(!existsSync(installed), 'finish must not install old summaries with new digests')
+  assert(!ctx.state.steps.summaries.finishedAt)
+  assert(!ctx.state.steps['search-metadata'])
 })

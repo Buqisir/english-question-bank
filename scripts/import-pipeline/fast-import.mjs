@@ -452,7 +452,7 @@ function answerCheck(ctx, verified) {
   return { compared: entries.length }
 }
 
-function splitSummaries(ctx, parts) {
+export function splitSummaries(ctx, parts) {
   const request = readJson(path.join(ctx.fast, 'summaries-request.json'))
   const weight = (group) => group.targets.reduce((sum, target) => sum + JSON.stringify(target.content).length, 0)
   const buckets = Array.from({ length: Math.min(parts, request.groups.length) }, () => ({ groups: [], weight: 0 }))
@@ -1268,6 +1268,11 @@ export async function invalidateParagraphJoinDownstream(paperId, expectedMateria
   copyFileSync(materializationPath(ctx), retained)
   archive(ctx, path.join(ctx.paperDir, 'spelling-review-v1.json'))
   archive(ctx, path.join(ctx.paperDir, 'canonical-evidence'))
+  // Joins change paragraph meaning while preserving IDs; require fresh authoring
+  // instead of the matching-ID reuse intentionally retained by ordinary redo.
+  for (const file of ['summaries-parts', 'search-metadata-authored.json', 'round2.json']) {
+    archive(ctx, path.join(ctx.fast, file))
+  }
   return { retained, invalidatedFrom: 'spelling' }
 }
 
