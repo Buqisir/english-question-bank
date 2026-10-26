@@ -97,7 +97,7 @@ test('existing presentation keeps manual fields, fills missing sections and is i
   assert.deepEqual(restoreOcrSourcePresentation({ ...input, materialization: result }), result)
 })
 
-for (const version of [5, 6, 7]) {
+for (const version of [5, 6, 7, 8, 9, 10, 11]) {
   function currentPresentationFixture() {
     const input = fixture()
     input.materialization = restoreOcrSourcePresentation(input)

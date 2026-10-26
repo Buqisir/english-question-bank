@@ -5,9 +5,19 @@
 
 | Focused check | Distinct failure caught | CI |
 | --- | --- | --- |
+| `node --test scripts/import-pipeline/ocr-option-emphasis.test.mjs` | 捕获源强调越界、选项不存在、伪造文字/marks、跨选项或标签、错误/重复 question anchor、编辑跨强调边界，以及旧 authority 冒用 v11；正向验证封存 OCR → 原始 UTF-16 选项范围 → Canonical compile → Review projection → live admission，并保留逐节点 source spans。 | yes, via `verify-nck1-ocr-source-evidence.mjs` |
 | `node --test scripts/import-pipeline/in-image-option-labels.test.mjs` | 捕获图内 A–D 缺失/重复、标签越出父图或对应子图、child/option/crop/SHA 不符、封存 evidence/confirmation/PDF 或题目 anchor 漂移、父图冒用、重复消费、未核读原图、降版绕过与听力冒用；正向证明 v9 reader → Canonical compile → Review projection → live admission 保留四张原裁图，不改 OCR。 | yes, via `verify-nck1-ocr-source-evidence.mjs` |
 | `node --test scripts/import-pipeline/listening-cut-padding.test.mjs scripts/import-pipeline/listening-segment-pipeline.test.mjs scripts/import-pipeline/listening-owner-edge-rule.test.mjs scripts/import-pipeline/listening-boundary-safety.test.mjs` | 捕获默认剪到长静音中点而非词边 ±0.8 秒、短于 1.6 秒停顿吞入邻语音、录音首尾越界、跨引擎静音并集扩大缓冲、历史 attempt 被改写，以及装入 Owner 最终切点时二次加缓冲；合成数据只证明导航切点规则，不证明真实词级定位准确。 | focused/manual; existing listening rule/pipeline checks remain in daily packs |
 | `node --test scripts/import-pipeline/listening-owner-review-pack.test.mjs` | 合成音频证明逐遍精切不会重复整段，0.8 秒缓冲不跨相邻停顿中点，上下文从精切扩 3 秒且受整录音端点约束；捕获缺首尾/停顿、音频 SHA 改变、错误段/遍选择、经符号链接写回卷目录、输入被改写、中文页面首末句/绝对时钟遗漏，以及 manifest 缺规则/SHA 或误称 Owner 已审。需本机 ffmpeg/ffprobe；此检查不证明真实录音内容与原文一致。 | manual; not in daily packs |
+
+`materialization-option-emphasis.mjs --paper-dir <只读卷目录> --output <新的外部文件>`
+在拼写审阅前显式选择 v11 / adapter15 / registry30 / manifest77。它只改变
+Materialization envelope 版本，复用已确认 OCR 的下划线/加粗范围；
+不更改封存确认、不增加内容决策、不自动升级历史卷。支持阅读题的文字选项，
+不把图像选项、表格或其他题型强行当成文字选项。新文件必须通过精确源顺序
+回放；卷写者装入后，针对新字节重新 prepare-spelling 并逐项核验审阅，
+不能修改旧审阅收据的 SHA 来跳过复核。输出已存在、写回源卷目录或存在拼写
+overlay 时拒绝；旧 authority 继续拒绝选项强调。
 
 `listening-source.mjs plan/apply` 是显式、有界的听力来源作者入口。只选择
 答案 PDF 中的完整标题/起点/排他终点，以及 example / cue / speech 原件角色；

@@ -47,6 +47,17 @@ test('explicit image-only A-D proof admits, compiles and projects four unchanged
   assert(oldAuthority.issues.some(issue => issue.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'))
 })
 
+test('v11 image-label authoring retains the option-emphasis successor and replays publicly', () => {
+  const raw = { ...fixture.materialization, schemaVersion: 'nck1-source-materialization-v11' }
+  const successor = { ...input, materializationBytes: encode(raw) }
+  const selected = planInImageOptionLabels(successor, selection)
+  const result = applyInImageOptionLabelsPlan(successor, selected, { confirmed: true })
+  assert.equal(result.materialization.schemaVersion, raw.schemaVersion)
+  const imported = importCanonicalCandidate({ ...successor, materializationBytes: result.materializationBytes })
+  assert.deepEqual(imported.issues, [])
+  assert(compileNck1MaterializationCandidatePreview(imported.candidate).compilation)
+})
+
 test('author plan requires original-image confirmation and exact materialization/OCR/PDF generation', () => {
   assert.throws(() => applyInImageOptionLabelsPlan(input, plan), /agent-confirmed/u)
   for (const field of ['materializationSha256', 'evidenceSha256', 'confirmationSha256']) {

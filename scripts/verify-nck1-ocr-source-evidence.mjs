@@ -59,8 +59,10 @@ execFileSync(process.execPath, ['--test', '--test-concurrency=1',
   'scripts/import-pipeline/materialization-listening-source.test.mjs',
 
   'scripts/import-pipeline/in-image-option-labels.test.mjs',
+  'scripts/import-pipeline/ocr-option-emphasis.test.mjs',
   'server/paper-import/nck1OcrContentVisuals.test.mjs',
 ], { cwd: root, stdio: 'inherit' })
+execFileSync(process.execPath, ['scripts/generate-ocr-option-emphasis-authority.mjs', '--check'], { cwd: root, stdio: 'inherit' })
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')
 const paperId = `paper-synthetic-ocr-evidence-${process.pid}`
 execFileSync(process.execPath, [path.join(root, 'scripts/generate-paper-ocr-emphasis-authority.mjs'), '--check'], {

@@ -291,6 +291,7 @@ export function validateReadingContract({
   assertions,
   allowFigureOptions = false,
   allowStemMarks = false,
+  allowOptionMarks = false,
   allowStemFigures = false,
 }) {
   const issues = []
@@ -415,7 +416,7 @@ export function validateReadingContract({
         issues.push(issue('READING_OPTION_INVALID', 'needs_review', `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`, 'Reading Option fields are closed'))
       } else {
         registerSemanticId(option.optionId, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`)
-        issues.push(...literalInlineIssues(option.content, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}].content`))
+        issues.push(...literalInlineIssues(option.content, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}].content`, allowOptionMarks))
         for (const inline of option.content || []) {
           registerSemanticId(inline.nodeId, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}].content`)
         }

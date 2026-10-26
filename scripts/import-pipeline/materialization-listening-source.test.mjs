@@ -58,6 +58,15 @@ test('bounded author decisions replay through public OCR import/compile and reje
   assert.equal(planMaterializationListeningSource(input, receiptBytes, splitSpeech).transcriptAfter[4].text,
     mixed.text.slice(0, cut), 'adjacent speech slices must not invent a newline or trim source whitespace')
   const applied = applyMaterializationListeningSourcePlan(input, receiptBytes, plan, { confirmed: true })
+  const successorInput = { ...input, materializationBytes: encode({
+    ...produced.materialization, schemaVersion: 'nck1-source-materialization-v11',
+  }) }
+  const successorPlan = planMaterializationListeningSource(successorInput, receiptBytes, options)
+  const successor = applyMaterializationListeningSourcePlan(successorInput, receiptBytes, successorPlan, { confirmed: true })
+  assert.equal(successor.materialization.schemaVersion, 'nck1-source-materialization-v11')
+  assert.deepEqual(successor.materialization.listeningSourceDecision, applied.materialization.listeningSourceDecision)
+  assert.deepEqual(successor.publicReplay.issues, [])
+  assert(successor.publicReplay.compiled)
   assert.deepEqual(produced, retained, 'producer output and source generation must not be mutated')
   assert.deepEqual(applied.materialization.groups, produced.materialization.groups)
   assert.deepEqual(applied.materialization.answers, produced.materialization.answers)
