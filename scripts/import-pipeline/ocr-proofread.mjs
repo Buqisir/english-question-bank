@@ -1068,6 +1068,12 @@ function writingGivens(paperId) {
   console.log(JSON.stringify({ ok: true, paperId, output, schemaVersion: result.schemaVersion }))
 }
 
+async function paragraphJoin(paperId, applying) {
+  // Keep the JSON-only R/T replay closure independent of the full import runtime.
+  execFileSync(process.execPath, [path.join(import.meta.dirname, 'paragraph-join.mjs'),
+    applying ? 'apply' : 'plan', paperId, ...process.argv.slice(4)], { cwd: root, stdio: 'inherit' })
+}
+
 function presentation(paperId) {
   const { paperDir } = context(paperId)
   const directory = path.join(paperDir, 'materialization')
@@ -1399,10 +1405,12 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'report-entries') reportEntries(paperId)
   else if (command === 'presentation') presentation(paperId)
   else if (command === 'writing-givens') writingGivens(paperId)
+  else if (command === 'paragraph-join-plan') await paragraphJoin(paperId, false)
+  else if (command === 'paragraph-join-apply') await paragraphJoin(paperId, true)
   else if (command === 'numbering') numbering(paperId)
   else if (command === 'references') references(paperId)
   else if (command === 'figure-sizes') figureSizes(paperId)
-  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
+  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
 } catch (error) {
   fail(error.stack || String(error))
 }

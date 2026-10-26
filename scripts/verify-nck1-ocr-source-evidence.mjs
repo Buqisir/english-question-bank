@@ -55,6 +55,7 @@ const root = path.resolve(import.meta.dirname, '..')
 // verify-ci does not automatically discover node:test files.
 execFileSync(process.execPath, ['--test', '--test-concurrency=1',
   'scripts/import-pipeline/ocr-page-top-figures.test.mjs',
+  'scripts/import-pipeline/materialization-paragraph-joins-public.test.mjs',
   'server/paper-import/nck1OcrContentVisuals.test.mjs',
 ], { cwd: root, stdio: 'inherit' })
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')

@@ -1,3 +1,4 @@
+import { resolveCrossPageParagraphJoins } from './crossPageParagraphJoin.mjs'
 import {
   digestJson,
   exactKeys,
@@ -30,6 +31,8 @@ export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6 =
 // v7 adds explicit source-backed application givens; older envelopes stay closed.
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7 =
   'nck1-source-materialization-v7'
+export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8 =
+  'nck1-source-materialization-v8'
 
 const slots = Object.freeze([
   ['reading.a', 'reading', 21, 23],
@@ -1157,6 +1160,7 @@ export function validateNck1SourceMaterialization(value) {
     !isRecordValue(value)
     || !exactKeys(value, [
       'schemaVersion',
+      ...(value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8 ? ['paragraphJoins'] : []),
       'paperId',
       'profileId',
       'documents',
@@ -1166,7 +1170,7 @@ export function validateNck1SourceMaterialization(value) {
       'sourceCoverage',
       'listening',
       'issues',
-      ...([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion) && (value.schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7 || Object.hasOwn(value, 'sourcePresentation')) ? ['sourcePresentation'] : []),
+      ...([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion) && (![NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion) || Object.hasOwn(value, 'sourcePresentation')) ? ['sourcePresentation'] : []),
     ])
     || ![
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION,
@@ -1176,6 +1180,7 @@ export function validateNck1SourceMaterialization(value) {
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7,
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8,
     ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
     || value.profileId !== 'nck1'
@@ -1214,8 +1219,8 @@ export function validateNck1SourceMaterialization(value) {
       documents.set(document.documentId, document)
     }
   }
-  if ([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion)
-    && (value.schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7 || Object.hasOwn(value, 'sourcePresentation'))) {
+  if ([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion)
+    && (![NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion) || Object.hasOwn(value, 'sourcePresentation'))) {
     const presentation = value.sourcePresentation
     const required = Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slot =>
       !slot.startsWith('listening.') || value.listening?.state !== 'not_supplied')
@@ -1246,10 +1251,10 @@ export function validateNck1SourceMaterialization(value) {
   }
   const mediaReferences = []
   const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues,
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion),
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion),
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion),
-    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7)
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion),
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion),
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion),
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion))
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {
@@ -1274,8 +1279,12 @@ export function validateNck1SourceMaterialization(value) {
     }
   }
   const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues,
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion))
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8].includes(value.schemaVersion))
   validateListening(value.listening, documents, sourceCoverage, issues)
+  if (value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8) {
+    try { resolveCrossPageParagraphJoins(value) }
+    catch (error) { issues.push(issue('MATERIALIZATION_PARAGRAPH_JOIN_INVALID', '$.paragraphJoins', error.message)) }
+  }
   return issues
 }
 

@@ -61,10 +61,13 @@ function question(number) {
     + '</div>'
 }
 
-function reading(letter, from, to, { table = false } = {}) {
+function reading(letter, from, to, { table = false, crossPageParagraph = false } = {}) {
   return [
     paragraph(letter),
-    paragraph(`${letter} passage keeps one small promise.`),
+    ...(crossPageParagraph ? [
+      paragraph('A small device can locate your dog accurately, with'),
+      '<p style="break-before:page">a battery that lasts up to 14 days.</p>',
+    ] : [paragraph(`${letter} passage keeps one small promise.`)]),
     ...(table ? [
       '<table><tbody>'
         + '<tr><td>Day</td><td>Task</td></tr>'
@@ -75,7 +78,7 @@ function reading(letter, from, to, { table = false } = {}) {
   ].join('')
 }
 
-function questionHtml({ includeTable = true } = {}) {
+function questionHtml({ includeTable = true, crossPageParagraph = false } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`A short guide has ${36 + index}._____ for learners.`)).join('')
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
@@ -89,7 +92,7 @@ function questionHtml({ includeTable = true } = {}) {
     paragraph('第二部分 阅读 (共两节，满分50分)'),
     paragraph('第一节(共15小题；每小题2.5分，满分37.5分)'),
     paragraph('阅读下列短文，从每题所给的四个选项中选出最佳选项。'),
-    reading('A', 21, 23, { table: includeTable }),
+    reading('A', 21, 23, { table: includeTable, crossPageParagraph }),
     reading('B', 24, 27),
     reading('C', 28, 31),
     reading('D', 32, 35),
@@ -231,10 +234,11 @@ export async function makeSyntheticNck1PdfFixture({
   includeAnswerShapes = false,
   includeTable = true,
   includeExtractionCases = true,
+  crossPageParagraph = false,
 } = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'chromium' })
   try {
-    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable })))
+    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable, crossPageParagraph })))
     const answerBytes = await renderPdf(browser, documentHtml(answerHtml()))
     const answerShapeBytes = includeAnswerShapes ? {
       keyOnly: await renderPdf(browser, documentHtml(answerHtml({ answerShape: 'key_only' }))),

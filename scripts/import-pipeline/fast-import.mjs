@@ -452,7 +452,7 @@ function answerCheck(ctx, verified) {
   return { compared: entries.length }
 }
 
-function splitSummaries(ctx, parts) {
+export function splitSummaries(ctx, parts) {
   const request = readJson(path.join(ctx.fast, 'summaries-request.json'))
   const weight = (group) => group.targets.reduce((sum, target) => sum + JSON.stringify(target.content).length, 0)
   const buckets = Array.from({ length: Math.min(parts, request.groups.length) }, () => ({ groups: [], weight: 0 }))
@@ -1250,6 +1250,30 @@ export async function startOcrGeneration(ctx, planPath, checkPlan = async () => 
   ].entries()) archive(ctx, file, `ocr-generation-${index}-`)
   // Retain old listening attempt directories as evidence; redoFrom forgets
   // their binding so the existing rule creates a new attempt for the new input.
+}
+
+// Source-relationship edits start after producer/presentation. Reuse the
+// existing redo archive and Candidate/submission guards, retaining sealed OCR.
+// No OCR generation, push/reuse or CAS behavior changes here.
+export async function invalidateParagraphJoinDownstream(paperId, expectedMaterializationSha256) {
+  const ctx = context(paperId)
+  if (sha256(readFileSync(materializationPath(ctx))) !== expectedMaterializationSha256) {
+    fail('Paragraph join Materialization changed after plan validation')
+  }
+  assertReferencesMutable(ctx)
+  await requestedRedo(ctx, 'spelling')
+  const retained = path.join(ctx.work, 'superseded',
+    `${new Date().toISOString().replace(/[:.]/gu, '-')}-paragraph-join-materialization.json`)
+  mkdirSync(path.dirname(retained), { recursive: true })
+  copyFileSync(materializationPath(ctx), retained)
+  archive(ctx, path.join(ctx.paperDir, 'spelling-review-v1.json'))
+  archive(ctx, path.join(ctx.paperDir, 'canonical-evidence'))
+  // Joins change paragraph meaning while preserving IDs; require fresh authoring
+  // instead of the matching-ID reuse intentionally retained by ordinary redo.
+  for (const file of ['summaries-parts', 'search-metadata-authored.json', 'round2.json']) {
+    archive(ctx, path.join(ctx.fast, file))
+  }
+  return { retained, invalidatedFrom: 'spelling' }
 }
 
 const [command, paperId, ...args] = process.argv.slice(2)
