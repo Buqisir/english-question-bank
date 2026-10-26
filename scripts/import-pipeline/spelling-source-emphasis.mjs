@@ -3,6 +3,7 @@ import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1O
 import { extractDocxParagraphEmphasis } from '../../server/paper-canonical/docxSourceAdapter.mjs'
 import { resolveDocxParagraphSelector, sourceOrderedParagraphEntries } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { resolveOcrQuestionTextEmphasis } from '../../server/paper-canonical/ocrQuestionTextEmphasis.mjs'
 
 // Use the same confirmed paragraphs, clipping and original UTF-16 coordinates
 // as the Candidate's source-emphasis mapping. Never locate text by search.
@@ -15,6 +16,7 @@ export function loadSpellingSourceEmphasis(paperDir, request) {
   }
   const documents = new Map(sourceInput.documents.map(document => [document.documentId, document]))
   const ocrParagraphs = new Map()
+  let ocrStructures
   if (sourceInput.ocrSourceBytes) {
     const resolved = resolveConfirmedNck1OcrEvidence({
       paperId: raw.paperId,
@@ -23,6 +25,7 @@ export function loadSpellingSourceEmphasis(paperDir, request) {
       confirmation: JSON.parse(new TextDecoder().decode(sourceInput.ocrSourceBytes.confirmationBytes)),
     })
     if (resolved.issues.length) throw new Error(resolved.issues[0].message)
+    ocrStructures = resolved.structures
     for (const structure of resolved.structures.values()) {
       for (const paragraph of structure.paragraphs) {
         if (paragraph.sourceEmphasis) ocrParagraphs.set(digestJson(paragraph.sourceIndex), paragraph)
@@ -68,6 +71,15 @@ export function loadSpellingSourceEmphasis(paperDir, request) {
       }
     }
     for (const [index, question] of group.questions.entries()) {
+      if (raw.schemaVersion === 'nck1-source-materialization-v11' && group.family === 'reading'
+        && question.options.every(option => !option.figure)) {
+        const mapped = resolveOcrQuestionTextEmphasis(question, ocrStructures?.get(question.source.documentId))
+        for (const target of mapped.targets) {
+          const field = target.key === 'stem' ? 'stem' : `options/${target.key.split(':')[1]}/text`
+          result.set(`/groups/${groupIndex}/questions/${index}/${field}`, target.ranges)
+        }
+        continue
+      }
       const paragraph = ocrParagraphs.get(digestJson(question.source))
       if (!paragraph?.sourceEmphasis?.length) continue
       const prefix = paragraph.text.match(/^\s*\d+[.．、]\s*/u)?.[0]

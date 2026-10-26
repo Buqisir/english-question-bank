@@ -18,7 +18,7 @@ export const regionContains = (outer, inner) => region(outer) && region(inner)
 export function resolveInImageOptionLabels(raw) {
   if (!Object.hasOwn(raw, 'inImageOptionLabels')) return []
   const reject = message => { throw new Error(`In-image option labels: ${message}`) }
-  if (!['nck1-source-materialization-v9', 'nck1-source-materialization-v10'].includes(raw.schemaVersion)
+  if (!['nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(raw.schemaVersion)
     || !Array.isArray(raw.inImageOptionLabels) || !raw.inImageOptionLabels.length) reject('requires nonempty opt-in v9 decisions')
   const consumed = new Set()
   return raw.inImageOptionLabels.map(decision => {

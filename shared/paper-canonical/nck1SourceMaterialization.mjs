@@ -1159,6 +1159,13 @@ function validateListening(listening, documents, sourceCoverage, issues) {
 }
 
 export function validateNck1SourceMaterialization(value) {
+  if (value?.schemaVersion === 'nck1-source-materialization-v11') {
+    const legacy = { ...value, schemaVersion: Object.hasOwn(value, 'listeningSourceDecision')
+      ? 'nck1-source-materialization-v10' : Object.hasOwn(value, 'inImageOptionLabels')
+        ? 'nck1-source-materialization-v9' : Object.hasOwn(value, 'paragraphJoins')
+          ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7' }
+    return validateNck1SourceMaterialization(legacy)
+  }
   if (value?.schemaVersion === 'nck1-source-materialization-v10') {
     const { listeningSourceDecision, ...legacy } = value
     legacy.schemaVersion = Object.hasOwn(legacy, 'inImageOptionLabels')
