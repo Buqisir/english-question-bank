@@ -11,9 +11,12 @@
 `listening-source.mjs plan/apply` 是显式、有界的听力来源作者入口。只选择
 答案 PDF 中的完整标题/起点/排他终点，以及 example / cue / speech 原件角色；
 混合 item 允许 UTF-16 slice，所有受影响 item 必须逐字完整覆盖。
-公共 resolver 只允许含中文的 cue fragment 使用孤立的单个大写 A–G 标签；
-两侧不得有拉丁字母或数字，且检查原 item 的相邻字符，不能切片造出单字母。
-连续字母、小写字母、M:/W: 前缀及无中文的单字母均拒绝，英文 cue 暂不接受。
+公共 resolver 先对 cue fragment 做 NFKC 校验视图，片段必须含中文；每个
+字母（`\p{L}`）只允许 Han 或孤立的原始 ASCII 大写 A–G 标签，标签两侧
+不得有任何字母或数字（`\p{L}` / `\p{N}`，包括相邻汉字），并检查原 item
+的规范化邻字符与组合字符边界。数学字母、全角标签、西里尔/希腊同形字、
+变音字母及 M:/W: 均拒绝；规范化不能让兼容字符获得 ASCII 标签许可。
+原文、UTF-16 偏移和证据字节不变。
 与 speech 同 item 的 cue/example 排除范围遵循同一字符限制，按原 item 合并
 相邻片段检查：须位于 item 首尾，并以中文句末标点或 item 边界闭合为既有识别器
 可证明的完整中文报幕句。完整例题仍须在 Text 1 前闭合。
@@ -31,7 +34,7 @@ apply 另需 `--plan`、`--agent-confirmed`。输出只是隔离作者产物，`
 
 | New verifier | Distinct failure caught | CI |
 | --- | --- | --- |
-| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, dropping real M/W speech as cue, Astra's short `a lot.` speech-tail loss, multiple short cues or split speaker prefixes, punctuation-only speech loss and incomplete mixed-item Chinese announcements; permits Chinese `A、B、C` and other isolated A–G labels while rejecting `Thanks`/`OK`/`a`, Unicode Latin, digit adjacency and letters split across fragments. Exercises the public resolver/admission/compile and retains complete Chinese cue/example positives, next Text/question/section checks, forged transcript/older-authority rejection and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
+| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, short speech-tail loss, multiple short cues or split speaker prefixes, punctuation-only speech loss and incomplete mixed-item Chinese announcements. Public resolver/admission/compile now reject whole-item mathematical speech, fullwidth labels, Cyrillic/Greek lookalikes, accented and compatibility letters through an NFKC letter whitelist; accept separated ASCII `A、B、C` with Chinese; reject all letter/number adjacency (including Han), combining-sequence slice tricks and fragments without Chinese. Retains next Text/question/section checks, forged transcript/older-authority rejection and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
 
 `source-references-v4` 的评分图只进入显式 `includeScoring` 的答案册；范文仍用
 v3 的 `figures` / `afterParagraphId`。既有 publication/receipt 继续绑定原 sidecar

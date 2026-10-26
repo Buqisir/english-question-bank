@@ -99,24 +99,32 @@ test('bounded author decisions replay through public OCR import/compile and reje
     forged.listening.transcript[5].text = attempt.text
     assert.deepEqual(validateNck1SourceMaterialization(forged), [], attempt.name)
     assert.throws(() => resolveListeningSourceDecision({ ...replayContext, decision: forged.listeningSourceDecision }),
-      /Latin|complete Chinese broadcast/u, `${attempt.name}: public resolver must reject the exclusion itself`)
+      /letters|complete Chinese broadcast/u, `${attempt.name}: public resolver must reject the exclusion itself`)
     const rejected = importCanonicalCandidate({ ...input, materializationBytes: encode(forged) })
     assert(rejected.issues.length, `${attempt.name}: public admission must refuse silent speech loss`)
     assert(!compileNck1MaterializationCandidatePreview(rejected.candidate).compilation,
       `${attempt.name}: public compile must refuse silent speech loss`)
   })
   for (const [text, accepted, split] of [
-    ['请从A、B、C中选择。', true],
-    ['请从D、E、F、G中选择。', true],
-    ['请选择G。', true],
+    ['𝑊: 𝑇ℎ𝑎𝑛𝑘𝑠 𝑎 𝑙𝑜𝑡.', false],
+    ['请看𝑎。', false], ['请看 А。', false], ['ОК.', false],
+    ['请看 ＡＢ。', false], ['请看 Α。', false],
+    ['请看 𝐀。', false], ['请看 Ⓐ。', false],
+    ['请看 A\u0301。', false],
+    ['请从 A、B、C 中选择。', true],
+    ['请从 D、E、F、G 中选择。', true],
+    ['请选择 G。', true],
+    ['请从A、B、C中选择。', false], ['请选择G。', false],
     ['请看Thanks。', false], ['请看OK。', false], ['请看a。', false],
     ['请看M:。', false], ['请看W:。', false],
     ['请选择AB。', false], ['请看H。', false],
     ['请看A1。', false], ['请看1A。', false], ['请看A١。', false],
-    ['请看é。', false], ['请看Ａ。', false], ['A', false],
+    ['请看é。', false], ['请看 Ａ。', false], ['A', false],
+    ['。', false], ['123。', false],
     ['请选择AB中文。', false, 4],
     ['请选择A1中文。', false, 4],
-  ]) await t.test(`Latin exclusion labels: ${text}${split ? ' split across fragments' : ''}`, () => {
+    ['请看 A\u0301中文。', false, 4],
+  ]) await t.test(`NFKC exclusion letters: ${text}${split ? ' split across fragments' : ''}`, () => {
     const changed = structuredClone(replayContext)
     const item = changed.confirmation.documents[1].pages.flatMap(p => p.orderedItems).find(i => i.itemId === labels.itemId)
     const source = changed.resolved.structures.get(options.documentId).body.find(i => i.text === item.text)
@@ -129,8 +137,19 @@ test('bounded author decisions replay through public OCR import/compile and reje
       { role: 'cue', nextTextNumber: null, questionNumbers: [], fragments: [fragment(0, split)] },
       { role: 'cue', nextTextNumber: null, questionNumbers: [], fragments: [fragment(split, text.length)] })
     const resolve = () => resolveListeningSourceDecision(changed)
-    if (accepted) assert.doesNotThrow(resolve)
-    else assert.throws(resolve, /Latin/u)
+    const raw = structuredClone(applied.materialization)
+    raw.listeningSourceDecision = changed.decision
+    const publicResult = importCanonicalCandidate({ ...input, materializationBytes: encode(raw),
+      ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: changed.confirmationBytes } })
+    if (accepted) {
+      assert.deepEqual(publicResult.issues, [])
+      assert(compileNck1MaterializationCandidatePreview(publicResult.candidate).compilation)
+      assert.doesNotThrow(resolve)
+    } else {
+      assert(publicResult.issues.length, `public admission must reject ${text}`)
+      assert(!compileNck1MaterializationCandidatePreview(publicResult.candidate).compilation)
+      assert.throws(resolve, /Latin|letters|Chinese/u)
+    }
   })
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation)

@@ -4,15 +4,24 @@ import { listeningTextMarkerNumber as markerNumber, listeningCue } from './nck1D
 
 const same = (a, b) => digestJson(a) === digestJson(b)
 const normalized = text => text.normalize('NFKC').replace(/\s+/gu, ' ').trim()
-const latin = /\p{Script_Extensions=Latin}/u
-function permitsExclusionLatin(text, start, original) {
-  if (!latin.test(text)) return true
-  if (!/\p{Script=Han}/u.test(text)) return false
-  for (const match of text.matchAll(/\p{Script_Extensions=Latin}/gu)) {
-    const offset = start + match.index
-    const before = [...original.slice(0, offset)].at(-1) || ''
-    const after = [...original.slice(offset + match[0].length)][0] || ''
-    if (!/^[A-G]$/u.test(match[0]) || latin.test(before + after) || /\p{Number}/u.test(before + after)) return false
+function permitsExclusionLetters(text, start, original) {
+  const value = text.normalize('NFKC')
+  if (!/\p{Script=Han}/u.test(value)) return false
+  const before = original.slice(0, start).normalize('NFKC')
+  const after = original.slice(start + text.length).normalize('NFKC')
+  // A slice cannot manufacture a label by separating a combining sequence.
+  if (before + value + after !== original.normalize('NFKC')) return false
+  // Compatibility characters must not acquire the ASCII label exception.
+  for (const point of text) {
+    if (!/^[A-G]$/u.test(point) && /[A-G]/u.test(point.normalize('NFKC'))) return false
+  }
+  const points = [...value]
+  for (let index = 0; index < points.length; index++) {
+    const point = points[index]
+    if (!/\p{L}/u.test(point) || /\p{Script=Han}/u.test(point)) continue
+    const left = points[index - 1] ?? [...before].at(-1) ?? ''
+    const right = points[index + 1] ?? [...after][0] ?? ''
+    if (!/^[A-G]$/u.test(point) || /[\p{L}\p{N}]/u.test(left + right)) return false
   }
   return true
 }
@@ -101,8 +110,8 @@ export function resolveListeningSourceDecision(context) {
     if (role.role === 'speech' && from <= first) fail('speech must belong to a Text segment')
     if (role.role === 'cue') {
       if (role.nextTextNumber !== next) fail('cue does not match the next Text boundary')
-      if (located.some(({ fragment, index }) => !permitsExclusionLatin(fragment.text, fragment.start, body[index].text))) {
-        fail('Latin in cue requires isolated A–G labels in a Chinese fragment; speech cannot be discarded')
+      if (located.some(({ fragment, index }) => !permitsExclusionLetters(fragment.text, fragment.start, body[index].text))) {
+        fail('cue letters require Han or isolated original ASCII A–G labels after NFKC; fragment must contain Chinese')
       }
       // Cross-item announcements still have to agree with the source question
       // range. The producer checks this declared range against the question PDF.
@@ -132,8 +141,8 @@ export function resolveListeningSourceDecision(context) {
     const excluded = []
     for (const { fragment, role } of parts) {
       if (role.role === 'speech') continue
-      if (!permitsExclusionLatin(fragment.text, fragment.start, body[index].text)) {
-        fail('Latin in mixed-item exclusions requires isolated A–G labels in a Chinese fragment')
+      if (!permitsExclusionLetters(fragment.text, fragment.start, body[index].text)) {
+        fail('mixed-item exclusion letters require Han or isolated original ASCII A–G labels after NFKC')
       }
       const previous = excluded.at(-1)
       if (previous?.end === fragment.start) previous.end = fragment.end
@@ -141,7 +150,7 @@ export function resolveListeningSourceDecision(context) {
     }
     for (const { start, end } of excluded) {
       const original = body[index].text, text = original.slice(start, end)
-      if (!permitsExclusionLatin(text, start, original) || !/\p{Script=Han}/u.test(text)
+      if (!permitsExclusionLetters(text, start, original)
         || start !== 0 && end !== original.length
         || start !== 0 && !/[。！？]$/u.test(original.slice(0, start).trimEnd())
         || end !== original.length && !/[。！？]$/u.test(text.trimEnd())
