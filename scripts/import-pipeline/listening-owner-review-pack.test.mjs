@@ -123,6 +123,37 @@ test('explicit paper/segment/reading selection and multiple papers do not repeat
   } finally { rmSync(f.temp, { recursive: true, force: true }) }
 })
 
+test('review-pack anchors apply the shared pause projection to retained v1 attempts without changing display or input', () => {
+  for (const prefix of ['', 'M: (Text 1)\n']) {
+    const f = fixture()
+    try {
+      const literal = `${prefix}${sourceText} （停10秒）`
+      const tokens = [...(prefix ? ['Text', '1'] : []),
+        ...f.group.observedWindows[0].words.filter(w => w.startSeconds < 6).map(w => w.token)]
+      const words = [2, 8].flatMap(start => tokens.map((token, i) => ({
+        token, rawRunText: token, startSeconds: start + i * 3 / tokens.length,
+        endSeconds: start + (i + 1) * 3 / tokens.length,
+      })))
+      put(path.join(f.attempt, 'raw.json'), { words })
+      const file = path.join(f.attempt, 'rule-result.json')
+      put(file, { groups: [{ ...f.group, sourceText: literal,
+        observedWindows: [{ ...f.group.observedWindows[0], words }],
+        sourceProjection: { version: 'listening-spoken-projection-v1', sourceText: literal,
+          text: literal.replace(/^M: /gmu, '   '), exclusions: [] } }] })
+      const before = hash(file)
+      const manifest = buildReviewPack(f)
+      assert.deepEqual(manifest.segments[0].readings.map(r => r.reading), [1, 2])
+      assert.equal(manifest.segments[0].sourceText, literal)
+      assert.ok(readFileSync(path.join(f.output, 'index.html'), 'utf8').includes(literal))
+      assert.equal(hash(file), before)
+      assert.equal(manifest.ownerReviewed, false)
+      assert.equal(manifest.segments[0].readings[0].asrFirstWord.token, prefix ? 'text' : 'bright',
+        'masking a speaker cannot turn its spoken (Text 1) into a heading on reprojection')
+      assert.equal(manifest.segments[0].readings[0].wordStartSeconds, 2)
+    } finally { rmSync(f.temp, { recursive: true, force: true }) }
+  }
+})
+
 test('rejects source-directory/symlink output, bad selections, changed audio and missing edge evidence before output exists', () => {
   const f = fixture()
   try {

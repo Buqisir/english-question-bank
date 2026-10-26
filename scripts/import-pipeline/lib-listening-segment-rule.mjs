@@ -1,6 +1,6 @@
 // Pure, platform-independent navigation rule. ASR is evidence, never a source-text editor.
 export const LISTENING_SEGMENT_RULE = Object.freeze({
-  version: 'listening-segment-rule-v6',
+  version: 'listening-segment-rule-v7',
   normalizationVersion: 'listening-equivalences-v5',
   anchorWords: 6,
   expandedAnchorWords: 12,
@@ -393,6 +393,12 @@ export function projectListeningSpokenText(group, corpus = [group]) {
   if (layout) for (const mark of questionMarks(group)) {
     exclude(mark.index, mark.index + mark[0].length, 'question_evidence_annotation', layout)
   }
+  // Only a complete Chinese pause-duration direction is non-spoken furniture.
+  // Keep other parentheses and all source bytes; paired bracket forms are exact.
+  const pauseDuration = String.raw`\s*停(?:顿)?\s*(?:[0-9]+|[零〇一二两三四五六七八九十百千万亿]+)\s*秒(?:钟)?\s*`
+  for (const mark of sourceText.matchAll(new RegExp(`（${pauseDuration}）|\\(${pauseDuration}\\)`, 'gu'))) {
+    exclude(mark.index, mark.index + mark[0].length, 'pause_duration_direction')
+  }
   // Retain the historical parenthesized question/circled-point convention,
   // now bound to this group's questions and recorded with source coordinates.
   for (const mark of sourceText.matchAll(/\((\d+)\)([①-⑳]?)|[①-⑳]/gu)) {
@@ -412,7 +418,7 @@ export function projectListeningSpokenText(group, corpus = [group]) {
     cursor = span.end
   }
   text += sourceText.slice(cursor)
-  return { version: 'listening-spoken-projection-v1', sourceText, text, exclusions }
+  return { version: 'listening-spoken-projection-v2', sourceText, text, exclusions }
 }
 function listeningSourceTurnText(group, corpus) {
   const projection = group.sourceProjection ?? projectListeningSpokenText(group, corpus)

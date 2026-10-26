@@ -21,6 +21,51 @@ const evaluate = (group, overrides = {}) => evaluateListeningEngine({
   windows: [structuredClone(fixture)], durationSeconds: 30, pauses, ...overrides,
 })
 
+test('only parenthesized Chinese pause durations are masked, with literal source coordinates retained', () => {
+  for (const note of ['（停10秒）', '（停5秒）', '（停15秒）', '（停20秒）',
+    '(停顿 5 秒)', '（停十秒钟）', '（ 停顿 二十 秒钟 ）', '(停 10 秒钟)']) {
+    for (const value of [`M: Bring the folder.${note}`, `M: Bring${note}the folder.`]) {
+      const group = { ...target, text: value }
+      const projection = projectListeningSpokenText(group)
+      assert.equal(projection.version, 'listening-spoken-projection-v2')
+      assert.equal(projection.sourceText, value)
+      assert.equal(projection.text.length, value.length)
+      assert.deepEqual(normalizeListeningText(projection.text), ['bring', 'the', 'folder'])
+      const span = projection.exclusions.find(e => e.reason === 'pause_duration_direction')
+      assert.equal(span.text, note)
+      assert.equal(value.slice(span.start, span.end), note)
+      assert.deepEqual(span.source, source)
+      assert.equal(span.segmentId, group.segmentId)
+    }
+  }
+})
+
+test('other parentheses, speaker labels and spoken numbers keep their existing projection behavior', () => {
+  for (const note of ['（Text 1）', '(Text 1)', '(Pause)', '(in a quiet voice)',
+    '（停10秒后回答）', '(停10秒，继续)', '（10秒）', '停10秒', '(停5.5秒)',
+    '（停10秒)', '(停十秒）', '（停5秒 and wait）']) {
+    const value = `M: Bring ${note} the 10 folders.\nSpeaker 2: Yes, at 5.`
+    const projection = projectListeningSpokenText({ ...target, text: value })
+    assert.ok(projection.text.includes(note), note)
+    assert.ok(!projection.exclusions.some(e => e.reason === 'pause_duration_direction'), note)
+    assert.deepEqual(normalizeListeningText(projection.text),
+      normalizeListeningText(`Bring ${note} the 10 folders. Yes, at 5.`))
+    assert.deepEqual(projection.exclusions.filter(e => e.reason === 'speaker_label').map(e => e.text),
+      ['M: ', '\nSpeaker 2: '])
+    assert.equal(projection.sourceText, value)
+  }
+})
+
+test('pause directions cannot add a tail token or change a clean recording decision', () => {
+  const clean = { ...target, text }
+  const annotated = { ...clean, text: `${text} （停10秒）` }
+  const before = evaluate(clean).groups[0], after = evaluate(annotated).groups[0]
+  assert.deepEqual(listeningSourceTurns(annotated), listeningSourceTurns(clean))
+  assert.equal(after.decision, 'usable', JSON.stringify(after.issues))
+  assert.deepEqual(after.playback, before.playback)
+  assert.equal(after.sourceText, annotated.text)
+})
+
 test('question annotations require source layout proof; raw source and exact exclusions survive', () => {
   assert.ok(normalizeListeningText(projectListeningSpokenText(target).text).includes('one'),
     'a matching question number by itself is insufficient')
