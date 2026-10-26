@@ -6,7 +6,7 @@ import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-product
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
-import { prepareSourceReferenceWritingItems } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
+import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 
@@ -56,6 +56,42 @@ test('bare sections share task ownership and a proven objective region stays onl
   const sidecar = captureScoringReferences(input)
   assert.deepEqual(sidecar.groups.map(g => g.scoring.entries.flatMap(e => e.blocks.filter(b => b.kind === 'figure')).length), [2, 1])
   assertSourceReferenceAdmission({ ...input, sidecar })
+})
+
+test('merged second-section sample heading preserves task switch through producer and admission', () => {
+  const input = scoringFiguresFixture({ writingHeading: ['第四部分', '第一节'] })
+  const page = input.confirmation.documents[1].pages[3]
+  const [heading, sample] = page.orderedItems.splice(0, 2)
+  page.orderedItems.unshift({ ...heading, text: '第二节\n参考范文',
+    observationIds: [...heading.observationIds, ...sample.observationIds] })
+  reseal(input)
+  const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
+  const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+  assert.equal(lifecycle.items.get(heading.itemId).action, 'entry')
+  assert.equal(lifecycle.taskStarts.get(heading.itemId), 'continuation')
+  const scopes = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']))
+  const rubric = page.orderedItems.find(item => item.text === '评分标准')
+  assert.equal(scopes.get(rubric.itemId).taskType, 'continuation')
+  const sidecar = captureScoringReferences(input)
+  assert.deepEqual(sidecar.groups.map(g => g.scoring.entries.flatMap(e => e.blocks.filter(b => b.kind === 'figure')).length), [2, 1])
+  assertSourceReferenceAdmission({ ...input, sidecar })
+})
+
+test('ordinary entries are not task starts and cannot restart scoring after a sample', () => {
+  const rows = ['第四部分', '第一节', '参考范文', 'An original sample.',
+    '评分标准', 'Source criterion.', '参考范文', 'Another original sample.',
+    '评分标准', 'Another criterion.']
+  const [materialization, evidence, confirmation] = fixture([rows.map((text, i) => line(text, .1 + i * .06))])
+  const lines = confirmation.documents[0].pages[0].orderedItems.map(item => ({ ...item, page: 1 }))
+  const lifecycle = sourceReferenceWritingLifecycle(lines, { materialization, answerDocument: { role: 'official_answers' } })
+  assert.deepEqual([...lifecycle.taskStarts], [['p1-i1', 'application']])
+  assert.equal(lifecycle.items.get('p1-i6').action, 'entry')
+  const scopes = sourceReferenceScoringScopes(confirmation, new Set(['answers']))
+  assert.equal(scopes.get('p1-i5').labelItemId, 'p1-i4')
+  assert.equal(scopes.get('p1-i6'), null)
+  assert.equal(scopes.get('p1-i7'), null)
+  assert.equal(scopes.get('p1-i9').labelItemId, 'p1-i8')
+  assert.equal(scopes.get('p1-i9').taskType, 'application')
 })
 
 for (const text of [

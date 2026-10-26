@@ -99,8 +99,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
         scopes.set(item.itemId, null)
         continue
       }
-      const writingState = lifecycle.items.get(item.itemId)
-      const sharedTask = !ended && !afterListening && writingState?.action === 'task' ? writingState.task : null
+      const sharedTask = !ended && !afterListening ? lifecycle.taskStarts.get(item.itemId) : null
       let task = appendixTask || sharedTask || WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] || null
       const scoringTask = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0]
       task ??= scoringTask
