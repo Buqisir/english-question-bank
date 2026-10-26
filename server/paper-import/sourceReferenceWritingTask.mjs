@@ -8,6 +8,15 @@ import { createWritingScope, createReferenceCapture } from '../../scripts/import
 import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion } from './sourceReferenceSemantics.mjs'
+
+// Bind nested task/letter and capture role lookups to the same source semantics.
+function sourceReferenceLineRoles(producerVersion) {
+  return {
+    matchesLineRole: (id, facts, context = {}) => matchesLineRole(id, facts, { ...context, producerVersion }),
+    firstLineRole: (phase, facts, context = {}) => firstLineRole(phase, facts, { ...context, producerVersion }),
+  }
+}
 
 // OCR can keep a bare or named section on the writing-part heading's item.
 export function writingSectionAfterPart(text) {
@@ -22,16 +31,17 @@ export function writingSectionAfterPart(text) {
 // A standalone key can omit both the writing-part heading and sample label.
 // Admit only a complete letter immediately after its final objective answer;
 // never borrow a closing/signature across another section, prompt or transcript.
-function completeApplicationLetter(lines, index, lastQuestion, factsFor) {
+function completeApplicationLetter(lines, index, lastQuestion, factsFor, producerVersion) {
   if (!lastQuestion || bareSectionNumber(factsFor(lines[index]).nfkc) !== '一') return false
   const previous = lines[index - 1] && factsFor(lines[index - 1])
   if (!previous || !/^\d+\s*[.．、]\s*[A-Za-z]/u.test(previous.text) || previous.hasHan) return false
   const answers = [...previous.text.matchAll(/(?:^|\s)(\d+)\s*[.．、]\s*/gu)]
   if (Number(answers.at(-1)?.[1]) !== lastQuestion) return false
-  return completeSourceLetter(lines, index + 1, factsFor)
+  return completeSourceLetter(lines, index + 1, factsFor, producerVersion)
 }
 
-export function completeSourceLetter(lines, index, factsFor) {
+export function completeSourceLetter(lines, index, factsFor, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION) {
+  const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const salutation = lines[index] && factsFor(lines[index])
   if (!salutation || !matchesLineRole('paragraph.salutation', salutation)) return false
   const boundary = line => {
@@ -73,7 +83,9 @@ export function completeSourceLetter(lines, index, factsFor) {
 export function sourceReferenceWritingTaskHeading(lines, lineIndex, {
   inWriting = false, sectionCount = 0, lastObjectiveQuestion = 0,
   answerRole = 'official_answers', factsFor = computeLineFacts,
+  producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
 } = {}) {
+  const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const line = lines[lineIndex]
   const facts = factsFor(line)
   const inlineSample = inlineSampleParts(facts.text)
@@ -82,7 +94,7 @@ export function sourceReferenceWritingTaskHeading(lines, lineIndex, {
   const mergedText = rest.length === 1 ? rest[0].trim() : null
   const mergedLabel = mergedText && matchesLineRole('entry.sample-label', computeLineFacts({ text: mergedText })) ? mergedText : null
   const unlabeledApplicationLetter = answerRole === 'official_answers' && !sectionCount && !inWriting
-    && completeApplicationLetter(lines, lineIndex, lastObjectiveQuestion, factsFor)
+    && completeApplicationLetter(lines, lineIndex, lastObjectiveQuestion, factsFor, producerVersion)
   const bare = (inWriting || mergedLabel || unlabeledApplicationLetter || (lines[lineIndex + 1]
     && matchesLineRole('entry.sample-label', factsFor(lines[lineIndex + 1]))))
     && bareSectionNumber((mergedLabel ? heading : sectionText).normalize('NFKC'))
@@ -114,7 +126,8 @@ function scopeError(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
 }
 
-function applicationLetterReferenceLines(section, factsFor) {
+function applicationLetterReferenceLines(section, factsFor, producerVersion) {
+  const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   if (!section.letterEnd) return section.lines
   const selected = []
   let afterLetter = false
@@ -195,7 +208,9 @@ function isObjectiveAnswerGrid(rows) {
 
 // Pure source-item preparation, including confirmed tables, figures and furniture.
 export function prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
-  { paperName = materialization.paperName } = {}) {
+  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+  assertSourceReferenceProducerVersion(producerVersion)
+  const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const answerDocuments = materialization.documents.filter((document) =>
     SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
   if (answerDocuments.length !== 1) scopeError('Expected exactly one answer-bearing document')
@@ -209,7 +224,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
   const sourceOrder = new WeakMap()
   const lineFacts = new WeakMap()
   const referenceFigures = []
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]))
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]), { producerVersion })
   const factsFor = line => {
     if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
     return lineFacts.get(line)
@@ -327,7 +342,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
     if (!edgeTexts.has(text)) edgeTexts.set(text, new Set())
     edgeTexts.get(text).add(line.page)
   }
-  return { materialization, answerDocument, documentSha256, pages, lines, review,
+  return { materialization, answerDocument, documentSha256, pages, lines, review, producerVersion,
     sourceOrder, factsFor, referenceFigures, scoringScopes, titleFurniture, edgeTexts }
 }
 
@@ -337,7 +352,10 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
 export function sourceReferenceWritingLifecycle(lines, {
   materialization, answerDocument, factsFor = computeLineFacts, scoringScopes = new Map(),
   titleFurniture = new WeakSet(), edgeTexts = new Map(), review: sourceReview = [],
+  producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
 }) {
+  assertSourceReferenceProducerVersion(producerVersion)
+  const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const review = [...sourceReview]
   const furniture = new WeakSet()
   const items = new Map(lines.filter(line => line.itemId).map(line => [line.itemId,
@@ -433,7 +451,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     // or the tightly bounded standalone-key letter before opening writing.
     const { bare, started, scoringSection, mergedLabel, unlabeledApplicationLetter } = sourceReferenceWritingTaskHeading(lines, lineIndex, {
       inWriting: scope.inWriting, sectionCount: sections.size, lastObjectiveQuestion,
-      answerRole: answerDocument.role, factsFor,
+      answerRole: answerDocument.role, factsFor, producerVersion,
     })
     if (scoringSection) {
       scope.startTask(scoringSection, { reuse: true })
@@ -475,7 +493,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
   }
   for (const section of sections.values()) {
-    Object.assign(section, planReferenceCapture(section, factsFor))
+    Object.assign(section, planReferenceCapture(section, factsFor, producerVersion))
     for (const step of section.steps) if (step.line.itemId) items.set(step.line.itemId, step.state)
   }
   return { sections, items, taskStarts, furniture, review }
@@ -483,8 +501,9 @@ export function sourceReferenceWritingLifecycle(lines, {
 
 // Reference-capture policy belongs here, never in either consumer. Steps are
 // assembly instructions; their states also describe independent source ownership.
-function planReferenceCapture(section, factsFor) {
-  const sectionLines = applicationLetterReferenceLines(section, factsFor)
+function planReferenceCapture(section, factsFor, producerVersion) {
+  const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
+  const sectionLines = applicationLetterReferenceLines(section, factsFor, producerVersion)
   const taskType = section.taskType
   const numberedSamples = taskType === 'application' ? numberedApplicationSamples(sectionLines, factsFor) : new Map()
   const sampleTitles = new Set(numberedSamples.values())
@@ -511,7 +530,7 @@ function planReferenceCapture(section, factsFor) {
     if (line.table) { emit('table'); continue }
     const facts = factsFor(line)
     if (taskType === 'application' && capture.kind === 'scoring'
-      && completeSourceLetter(sectionLines, lineIndex, factsFor)) {
+      && completeSourceLetter(sectionLines, lineIndex, factsFor, producerVersion)) {
       hasEntry = false
       labelItemId = null
       capture.start('essays')

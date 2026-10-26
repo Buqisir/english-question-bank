@@ -9,6 +9,8 @@ import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+  sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
 
@@ -244,6 +246,73 @@ test('explanation mentions and unknown bracketed answer titles do not authorize 
     const entries = buildSourceReferences(...input).groups[0].essays.entries
     assert(entries.every(entry => entry.sourceLabel !== text))
     assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3, .5])
+  }
+})
+
+for (const label of ['【范文四】', '[Possible Version 2]', '【范文十二】', '[范文12]', '【One possible version 12】',
+  '【范文四（80词）】', '[范文12(80词)]', '【参考范文四（80词）】']) {
+  test(`numbered bracketed sample preserves label, range and ownership: ${label}`, () => {
+    const input = fixture([[line('第二节 读后续写', .1), line(label, .2),
+      line('A source continuation paragraph.', .3, .14, .76)]])
+    const captured = []
+    const output = buildSourceReferences(...input, { onWritingCapture: item => captured.push(item) })
+    assert.equal(output.producerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    assert.equal(output.groups[0].essays.entries.length, 1)
+    const entry = output.groups[0].essays.entries[0]
+    assert.equal(entry.sourceLabel, label)
+    assert.deepEqual(entry.labelSource, { documentSha256: input[0].documents[0].sha256,
+      locator: { kind: 'page_region', documentId: 'answers', page: 1,
+        region: { x: .1, y: .2, width: .8, height: .02 } } })
+    assert.equal(entry.paragraphs[0].text, 'A source continuation paragraph.')
+    assert.equal(entry.paragraphs[0].source.locator.region.y, .3)
+    assert.deepEqual(captured, [{ itemId: 'p1-i2', task: 'continuation', kind: 'essays' }])
+    const prepared = prepareSourceReferenceWritingItems(...input, { producerVersion: output.producerVersion })
+    assert.deepEqual(sourceReferenceWritingLifecycle(prepared.lines, prepared).items.get('p1-i2'),
+      { task: 'continuation', capturing: true, ended: false, kind: 'essays', action: 'body', labelItemId: 'p1-i1' })
+  })
+}
+
+test('historical unversioned sidecar keeps v17 scoring figure admission under new code', () => {
+  const input = scoringFiguresFixture()
+  for (const document of input.confirmation.documents) for (const page of document.pages) {
+    const item = page.orderedItems.find(item => item.text === '3. Additional source criterion.')
+    if (item) item.text = '解析'
+  }
+  for (const document of input.evidence.documents) for (const page of document.pages) {
+    const item = page.observations.find(item => item.text === '3. Additional source criterion.')
+    if (item) item.text = '解析'
+  }
+  reseal(input)
+  const historical = captureScoringReferences(input, { producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  assert.equal(Object.hasOwn(historical, 'producerVersion'), false)
+  assert.equal(sourceReferenceProducerVersion(historical), LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  assert.equal(historical.groups.flatMap(g => g.scoring.entries.flatMap(e => e.blocks)).filter(b => b.kind === 'figure').length, 3)
+  const original = structuredClone(historical)
+  assertSourceReferenceAdmission({ ...input, sidecar: historical })
+  assertSourceReferenceAdmission({ ...input, sidecar: { ...historical, producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } })
+  assert.deepEqual(historical, original)
+  // The same ranges cannot claim v18 semantics; no external override can
+  // reinterpret a bound sidecar as the caller's preferred version.
+  assert.throws(() => assertSourceReferenceAdmission({ ...input,
+    sidecar: { ...historical, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION },
+    producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
+  { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
+  const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
+  const boundary = prepared.lines.find(line => line.text === '解析')
+  const state = sourceReferenceWritingLifecycle(prepared.lines, prepared).items.get(boundary.itemId)
+  assert.deepEqual(state, { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
+})
+
+test('source-reference semantic discriminator is explicit and rejects unknown versions', () => {
+  for (const schemaVersion of ['source-references-v1', 'source-references-v2', 'source-references-v3',
+    'source-references-v4', 'source-references-v5']) {
+    assert.equal(sourceReferenceProducerVersion({ schemaVersion }), LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
+      OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  }
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19']) {
+    assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
+      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }
 })
 

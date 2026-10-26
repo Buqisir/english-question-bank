@@ -72,6 +72,9 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
   const binding = { materialization, sourceInput, sourceDocuments: documents,
     sourceDigest: sha256('synthetic-source'), candidateDigest: sha256('synthetic-candidate') }
   const sourceReferences = prepareSourceReferences(binding)
+  // This fixture is the frozen historical envelope, before producerVersion was
+  // persisted. Keep its original bytes/HTML; do not relabel it as a new capture.
+  delete sourceReferences.producerVersion
   sourceReferences.schemaVersion = 'source-references-v3'
   const source = region => ({ documentSha256: answer.sha256, locator: {
     kind: 'page_region', documentId: answer.documentId, page: 1, region,

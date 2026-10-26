@@ -61,6 +61,7 @@ import { confirmMaterializationWritingGivens } from './materialization-writing-g
 import { computeOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
 import { reobserveRegions } from './ocr-region-reobserve.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
+import { LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 export { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
@@ -1152,17 +1153,18 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation,
-  { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [] } = {}) {
+  { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [],
+    producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
   let source, lifecycle
   try {
-    source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName })
+    source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName, producerVersion })
     lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
   } catch (error) {
     if (error.code === 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID') fail(error.message)
     throw error
   }
   const { answerDocument, documentSha256, pages, lines, sourceOrder, factsFor, referenceFigures, scoringScopes } = source
-  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions)
+  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions, { producerVersion })
   const { sections, furniture, review } = lifecycle
   const assignedFigures = new Set()
   let hasScoringFigures = false
@@ -1365,7 +1367,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures)
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures, { producerVersion })
   const excludedFigures = referenceFigures.filter(figure =>
     !assignedFigures.has(figure) && (objectiveFigures.has(sourceReferenceFigureIdentity(figure))
       || explanationFigures.has(sourceReferenceFigureIdentity(figure))))
@@ -1379,7 +1381,9 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     const unresolved = referenceFigures.filter(figure => !assignedFigures.has(figure) && !excludedFigures.includes(figure))
     throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
   }
-  return { groups, review, structuredScoring, ...(figureExclusions.length
+  return { groups, review, structuredScoring,
+    ...(producerVersion !== LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+      ? { producerVersion } : {}), ...(figureExclusions.length
     ? { schemaVersion: 'source-references-v5', figureExclusions }
     : referenceFigures.length ? { schemaVersion: hasScoringFigures ? 'source-references-v4' : 'source-references-v3' } : {}) }
 }
@@ -1399,10 +1403,10 @@ function references(paperId) {
   const retained = existsSync(output) ? readJson(output, 'Source references draft')
     : existsSync(path.join(paperDir, 'source-references-v1.json'))
       ? readJson(path.join(paperDir, 'source-references-v1.json'), 'Source references') : null
-  const { groups, review, structuredScoring, schemaVersion, figureExclusions } = buildSourceReferences(materialization, evidence, confirmation,
+  const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion } = buildSourceReferences(materialization, evidence, confirmation,
     { sourceDocuments: documents, paperName, figureExclusions: retained?.figureExclusions ?? [] })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
-    materializationDigest: null, groups, ...(figureExclusions ? { figureExclusions } : {}) })
+    materializationDigest: null, groups, producerVersion, ...(figureExclusions ? { figureExclusions } : {}) })
   console.log(JSON.stringify({
     ok: true,
     output,

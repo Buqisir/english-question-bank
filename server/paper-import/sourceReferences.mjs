@@ -4,6 +4,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
 import { deriveNck1AnalyzedPackageBundle, parseStrictPackageJson } from '../paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { decodeSourceReferencePng, SOURCE_REFERENCE_IMAGE_LIMITS } from './sourceReferenceImages.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../scripts/import-pipeline/ocr-source-references-version.mjs'
 
 export const SOURCE_REFERENCES_FILE = 'source-references-v1.json'
 // Existing normalized-region containment precision, shared with admission.
@@ -59,6 +60,7 @@ export function sourceReferenceFigures(sidecar) {
 export function prepareSourceReferences({ materialization, sourceDigest, candidateDigest, structuredScoring = false }) {
   return {
     schemaVersion: structuredScoring ? 'source-references-v2' : 'source-references-v1',
+    producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
     paperId: materialization.paperId,
     sourceDigest,
     candidateDigest,
