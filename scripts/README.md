@@ -8,6 +8,25 @@
 | `node --test scripts/import-pipeline/listening-cut-padding.test.mjs scripts/import-pipeline/listening-segment-pipeline.test.mjs scripts/import-pipeline/listening-owner-edge-rule.test.mjs scripts/import-pipeline/listening-boundary-safety.test.mjs` | 捕获默认剪到长静音中点而非词边 ±0.8 秒、短于 1.6 秒停顿吞入邻语音、录音首尾越界、跨引擎静音并集扩大缓冲、历史 attempt 被改写，以及装入 Owner 最终切点时二次加缓冲；合成数据只证明导航切点规则，不证明真实词级定位准确。 | focused/manual; existing listening rule/pipeline checks remain in daily packs |
 | `node --test scripts/import-pipeline/listening-owner-review-pack.test.mjs` | 合成音频证明逐遍精切不会重复整段，0.8 秒缓冲不跨相邻停顿中点，上下文从精切扩 3 秒且受整录音端点约束；捕获缺首尾/停顿、音频 SHA 改变、错误段/遍选择、经符号链接写回卷目录、输入被改写、中文页面首末句/绝对时钟遗漏，以及 manifest 缺规则/SHA 或误称 Owner 已审。需本机 ffmpeg/ffprobe；此检查不证明真实录音内容与原文一致。 | manual; not in daily packs |
 
+`listening-source.mjs plan/apply` 是显式、有界的听力来源作者入口。只选择
+答案 PDF 中的完整标题/起点/排他终点，以及 example / cue / speech 原件角色；
+混合 item 允许 UTF-16 slice，所有受影响 item 必须逐字完整覆盖。
+`--request` 提供 `documentId`、`headingItemId`（可 null）、`startItemId`、
+`endItemId`（null 表示文档末尾）、`reason`、`roles`。每个 role 提供
+`role`、`nextTextNumber`、`questionNumbers`、`fragments`；fragment 提供
+`itemId` 和可选 `start/end`（省略表示完整 item）。
+两步均强制新的 `--output`，禁止写入源卷目录或其 OCR work 目录；
+apply 另需 `--plan`、`--agent-confirmed`。输出只是隔离作者产物，`publicReplay`
+如实记录 admission/compile 的独立阻塞，绝不是发布通过凭证。
+原写者安装前必须通过既有 redo 从 spelling 起失效下游，保留封存 OCR、
+原 producer receipt 与 materialization-edits；再重新执行完整公共流程。
+新决策仅在 Materialization v9 / authority v75 生效，旧 schema/authority 不接收新字段，
+无决策 producer 的输出保持原路径。已存在的段落合并应先于本入口完成。
+
+| New verifier | Distinct failure caught | CI |
+| --- | --- | --- |
+| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, dropping real M/W speech as cue, wrong next Text/question/section order, forged transcript/admission and older-authority acceptance; requires public OCR import/compile and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
+
 `source-references-v4` 的评分图只进入显式 `includeScoring` 的答案册；范文仍用
 v3 的 `figures` / `afterParagraphId`。既有 publication/receipt 继续绑定原 sidecar
 bytes，不重写旧版，不提升未变的 OCR confirmation/Materialization producer。

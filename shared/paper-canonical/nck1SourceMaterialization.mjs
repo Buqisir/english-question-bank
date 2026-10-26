@@ -1,4 +1,5 @@
 import { resolveCrossPageParagraphJoins } from './crossPageParagraphJoin.mjs'
+import { validateListeningSourceDecision } from './listeningSourceDecision.mjs'
 import {
   digestJson,
   exactKeys,
@@ -1155,6 +1156,15 @@ function validateListening(listening, documents, sourceCoverage, issues) {
 }
 
 export function validateNck1SourceMaterialization(value) {
+  if (value?.schemaVersion === 'nck1-source-materialization-v9') {
+    const { listeningSourceDecision, ...legacy } = value
+    legacy.schemaVersion = Object.hasOwn(legacy, 'paragraphJoins')
+      ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7'
+    const issues = validateNck1SourceMaterialization(legacy)
+    try { validateListeningSourceDecision(listeningSourceDecision) }
+    catch (error) { issues.push(issue('MATERIALIZATION_LISTENING_SOURCE_DECISION_INVALID', '$.listeningSourceDecision', error.message)) }
+    return issues
+  }
   const issues = []
   if (
     !isRecordValue(value)

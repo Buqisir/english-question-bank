@@ -78,7 +78,7 @@ function reading(letter, from, to, { table = false, crossPageParagraph = false }
   ].join('')
 }
 
-function questionHtml({ includeTable = true, crossPageParagraph = false } = {}) {
+function questionHtml({ includeTable = true, crossPageParagraph = false, listening = false } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`A short guide has ${36 + index}._____ for learners.`)).join('')
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
@@ -89,6 +89,17 @@ function questionHtml({ includeTable = true, crossPageParagraph = false } = {}) 
     `${56 + index}._____(${index % 2 === 0 ? 'learn' : 'word'})`).join(' and ')
   return [
     paragraph('Synthetic NCK1 PDF paper'),
+    ...(listening ? [
+      paragraph('第一部分 听力'), paragraph('第一节'),
+      paragraph('听下面5段对话。每段对话仅读一遍。'),
+      ...Array.from({ length: 20 }, (_, index) => [
+        ...(index === 5 ? [paragraph('第二节')] : []),
+        ...([5, 7, 10, 13, 16].includes(index)
+          ? [paragraph(`听第${[5, 7, 10, 13, 16].indexOf(index) + 6}段材料，回答第${index + 1}至第${({ 5: 7, 7: 10, 10: 13, 13: 16, 16: 20 })[index]}题。`)] : []),
+        paragraph(`${index + 1}. Which listening choice fits?`),
+        paragraph('A. Alpha'), paragraph('B. Bravo'), paragraph('C. Charlie'),
+      ]).flat(),
+    ] : []),
     paragraph('第二部分 阅读 (共两节，满分50分)'),
     paragraph('第一节(共15小题；每小题2.5分，满分37.5分)'),
     paragraph('阅读下列短文，从每题所给的四个选项中选出最佳选项。'),
@@ -134,9 +145,11 @@ function answerHtml({
   answerShape = 'detailed',
   answerHeading = true,
   ambiguousTextAnswer = false,
+  listening = false,
 } = {}) {
   const key = [
     paragraph('Synthetic official answers'),
+    ...(listening ? [paragraph('1-5ABCAB6-10BCABC11-15ABCAB16-20BCABC')] : []),
     paragraph('21-23ABC24-27DABC28-31BCDA32-35CDAB'),
     paragraph('36-40ABCDE'),
     paragraph('41-45ABCDA46-50BCDAB51-55CDABC'),
@@ -160,6 +173,16 @@ function answerHtml({
     paragraph('第二节：读后续写（满分25分）'),
     paragraph('Mia carried the notebook to the school office. The teacher found its owner.'),
     paragraph('The next morning, a student came to thank her. They became friends.'),
+    ...(listening ? [
+      paragraph('高三听力录音原文'),
+      paragraph('听力考试正式开始。'),
+      paragraph('例如：先听例题。'), paragraph('M: This is the example only.'),
+      ...Array.from({ length: 10 }, (_, index) => [
+        paragraph(`Text ${index + 1}`),
+        paragraph(index === 4 ? 'M: Keep every word 😀.第一节到此结束。' : `M: Synthetic speech ${index + 1}.`),
+      ]).flat(),
+      paragraph('应用文评分标准'), paragraph('Scoring appendix must remain in the source.'),
+    ] : []),
     paragraph('【答案详解】'),
     paragraph('21. This deliberately untrusted explanation must not enter Canonical output.'),
   ].join('')
@@ -235,11 +258,12 @@ export async function makeSyntheticNck1PdfFixture({
   includeTable = true,
   includeExtractionCases = true,
   crossPageParagraph = false,
+  listening = false,
 } = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'chromium' })
   try {
-    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable, crossPageParagraph })))
-    const answerBytes = await renderPdf(browser, documentHtml(answerHtml()))
+    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable, crossPageParagraph, listening })))
+    const answerBytes = await renderPdf(browser, documentHtml(answerHtml({ listening })))
     const answerShapeBytes = includeAnswerShapes ? {
       keyOnly: await renderPdf(browser, documentHtml(answerHtml({ answerShape: 'key_only' }))),
       ambiguous: await renderPdf(browser, documentHtml(answerHtml({
