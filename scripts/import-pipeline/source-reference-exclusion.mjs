@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, linkSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
+import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { buildSourceReferences } from './ocr-proofread.mjs'
@@ -14,10 +15,14 @@ const within = (file, directory) => file === directory || file.startsWith(`${dir
 
 export async function excludeExplanationFigure(paperId, {
   paperDir = path.join(root, 'scripts/import-pipeline/papers', paperId),
-  output, figureId, figureIdentitySha256, anchorItemId, reason, confirmed,
+  output, figureId, figureIdentitySha256, anchorItemId, reason, confirmed, figures,
 } = {}) {
   if (!/^paper-[a-z0-9-]+$/u.test(paperId || '')) fail('A valid paperId is required')
   if (confirmed !== true) fail('Explanation figure exclusion requires --agent-confirmed original-page review')
+  const requested = figures ?? [{ figureId, figureIdentitySha256, anchorItemId, reason }]
+  if (!Array.isArray(requested) || !requested.length || requested.length > 128) {
+    fail('Provide 1–128 explanation figure declarations')
+  }
   paperDir = path.resolve(paperDir)
   output = output && path.resolve(output)
   const local = path.join(root, 'scripts/import-pipeline/papers', paperId)
@@ -47,15 +52,15 @@ export async function excludeExplanationFigure(paperId, {
     .map(document => ({ ...document, bytes: bytes(path.join(paperDir, document.path)) }))
   const resolved = resolveConfirmedNck1OcrEvidence({ paperId, documents, evidence, confirmation })
   if (resolved.issues.length) fail(`Invalid source evidence: ${resolved.issues[0].message}`)
-  const declaration = confirmSourceReferenceFigureExclusion(materialization, evidence, confirmation,
-    resolved.referenceFigures, { figureId, figureIdentitySha256, anchorItemId, reason, confirmed })
+  const declarations = requested.map(declaration => confirmSourceReferenceFigureExclusion(materialization, evidence, confirmation,
+    resolved.referenceFigures, { ...declaration, confirmed }))
   const draftFile = path.join(work, 'source-references-draft.json')
   // External paper previews never borrow this checkout's authored decisions.
   const retainedFile = paperDir === local && existsSync(draftFile) ? draftFile
     : path.join(paperDir, 'source-references-v1.json')
   const retained = existsSync(retainedFile) ? json(retainedFile) : null
   if (retained && retained.paperId !== paperId) fail('Retained reference paper identity differs')
-  const figureExclusions = [...(retained?.figureExclusions ?? []), declaration]
+  const figureExclusions = [...(retained?.figureExclusions ?? []), ...declarations]
   const captured = buildSourceReferences(materialization, evidence, confirmation,
     { sourceDocuments: documents, paperName: manifest.provenance?.paperName, figureExclusions })
   // Prove the same figure/text admission as finalize, without claiming a new
@@ -77,8 +82,40 @@ export async function excludeExplanationFigure(paperId, {
   }
   const target = output || draftFile
   mkdirSync(path.dirname(target), { recursive: true })
-  writeFileSync(target, `${JSON.stringify(draft, null, 2)}\n`, { flag: 'wx' })
-  return { ok: true, paperId, output: target, mode: output ? 'preview' : 'applied', declaration, rebuild }
+  const temporary = `${target}.${randomUUID()}.tmp`
+  try {
+    writeFileSync(temporary, `${JSON.stringify(draft, null, 2)}\n`, { flag: 'wx' })
+    // Install the complete validated set atomically, preserving no-clobber.
+    linkSync(temporary, target)
+  } finally {
+    if (existsSync(temporary)) unlinkSync(temporary)
+  }
+  return { ok: true, paperId, output: target, mode: output ? 'preview' : 'applied',
+    ...(declarations.length === 1 ? { declaration: declarations[0] } : {}), declarations, rebuild }
+}
+
+// Each --figure starts one declaration; its following binding/reason flags
+// belong only to that figure. Never reuse the first figure's options.
+function figureOptions(args) {
+  const figures = []
+  const fields = { '--figure-sha256': 'figureIdentitySha256', '--anchor': 'anchorItemId', '--reason': 'reason' }
+  for (let index = 0; index < args.length; index++) {
+    const flag = args[index]
+    if (flag !== '--figure' && !fields[flag]) continue
+    const value = args[++index]
+    if (!value || value.startsWith('--')) fail(`${flag} requires a value`)
+    if (flag === '--figure') figures.push({ figureId: value })
+    else {
+      const figure = figures.at(-1)
+      if (!figure) fail(`${flag} must follow its --figure`)
+      if (figure[fields[flag]] !== undefined) fail(`Duplicate ${flag} for --figure ${figure.figureId}`)
+      figure[fields[flag]] = value
+    }
+  }
+  for (const figure of figures) for (const [flag, field] of Object.entries(fields)) {
+    if (!figure[field]) fail(`--figure ${figure.figureId} requires its own ${flag}`)
+  }
+  return figures
 }
 
 if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) {
@@ -86,8 +123,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) {
   try {
     console.log(JSON.stringify(await excludeExplanationFigure(process.argv[2], {
       paperDir: option('--paper-dir'), output: option('--output'),
-      figureId: option('--figure'), figureIdentitySha256: option('--figure-sha256'),
-      anchorItemId: option('--anchor'), reason: option('--reason'),
+      figures: figureOptions(process.argv.slice(3)),
       confirmed: process.argv.includes('--agent-confirmed'),
     }), null, 2))
   } catch (error) {

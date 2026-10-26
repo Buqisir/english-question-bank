@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import test from 'node:test'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { makeFixture } from '../verify-nck1-source-materialization.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { buildSourceReferences } from './ocr-proofread.mjs'
@@ -11,27 +11,31 @@ import { invalidateExplanationFigureDownstream } from './fast-import.mjs'
 import { confirmSourceReferenceFigureExclusion } from '../../server/paper-import/sourceReferenceFigureExclusions.mjs'
 import { prepareSourceReferenceWritingItems } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const json = (file, value) => { mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, JSON.stringify(value)) }
-function fixture(paperId) {
+function fixture(paperId, { figurePages = [0], figureText = 'A source diagram' } = {}) {
   const input = scoringFiguresFixture(paperId ? { materialization: { ...makeFixture({ listening: false }), paperId } } : {})
   // A chart in the source index, outside every essay/scoring scope. The
   // wording deliberately carries no exclusion authority.
-  const page = input.confirmation.documents[1].pages[0], proof = input.evidence.documents[1].pages[0]
-  const first = page.orderedItems[0], observation = proof.observations[0]
-  page.orderedItems.push({ ...first, itemId: 'answers:explanation-text', text: 'A source diagram',
-    observationIds: ['answers:explanation-word'] })
-  proof.observations.push({ ...observation, observationId: 'answers:explanation-word', regionId: 'answers:explanation-text-region',
-    text: 'A source diagram', region: { x: .1, y: .33, width: .7, height: .02 } })
-  proof.regions.push({ regionId: 'answers:explanation-text-region', kind: 'text', region: proof.observations[1].region },
-    { regionId: 'answers:explanation-figure', kind: 'visual', region: { x: .08, y: .32, width: .75, height: .09 } })
-  proof.readingOrderEdges.push({ before: observation.observationId, after: 'answers:explanation-word' })
-  page.visualClassifications.push({ regionId: 'answers:explanation-figure', classification: 'content_media',
-    itemIds: ['answers:explanation-text'], afterItemId: first.itemId })
+  for (const pageIndex of figurePages) {
+    const page = input.confirmation.documents[1].pages[pageIndex], proof = input.evidence.documents[1].pages[pageIndex]
+    const first = page.orderedItems[0], observation = proof.observations[0]
+    const prefix = `answers:explanation${pageIndex ? `-${pageIndex + 1}` : ''}`
+    page.orderedItems.push({ ...first, itemId: `${prefix}-text`, text: figureText,
+      observationIds: [`${prefix}-word`] })
+    proof.observations.push({ ...observation, observationId: `${prefix}-word`, regionId: `${prefix}-text-region`,
+      text: figureText, region: { x: .1, y: .33, width: .7, height: .02 } })
+    proof.regions.push({ regionId: `${prefix}-text-region`, kind: 'text', region: proof.observations[1].region },
+      { regionId: `${prefix}-figure`, kind: 'visual', region: { x: .08, y: .32, width: .75, height: .09 } })
+    proof.readingOrderEdges.push({ before: observation.observationId, after: `${prefix}-word` })
+    page.visualClassifications.push({ regionId: `${prefix}-figure`, classification: 'content_media',
+      itemIds: [`${prefix}-text`], afterItemId: first.itemId })
+  }
   const { evidenceDigest: _, ...body } = input.evidence
   input.evidence.evidenceDigest = digestJson(body)
   input.confirmation.evidenceDigest = input.evidence.evidenceDigest
@@ -39,9 +43,9 @@ function fixture(paperId) {
     confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)) }
   return input
 }
-function declaration(input) {
+function declaration(input, figureId = 'answers:explanation-figure') {
   const figures = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation).referenceFigures
-  const figure = figures.find(figure => figure.sourceRegionId === 'answers:explanation-figure')
+  const figure = figures.find(figure => figure.sourceRegionId === figureId)
   return confirmSourceReferenceFigureExclusion(input.materialization, input.evidence, input.confirmation, figures, {
     figureId: figure.sourceRegionId, figureIdentitySha256: sourceReferenceFigureIdentity(figure),
     anchorItemId: figure.afterItem.itemId, reason: 'Original page reviewed: diagram explains the source, outside model answers and rubrics.',
@@ -114,6 +118,85 @@ test('explanation declarations reject missing confirmation, duplicate/foreign id
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /binding changed/u)
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: capture(input, [original]),
     sourceInput: { documents: input.sourceDocuments } }), /sealed OCR/u)
+})
+
+test('confirmed scoring titles and standalone sample labels inside a figure cannot be excluded by helper, producer or admission', () => {
+  const original = fixture(), sidecar = capture(original, [declaration(original)])
+  for (const figureText of ['应用文评分标准', '参考范文', '范文1', 'Possible Version 2']) {
+    const input = fixture(undefined, { figureText })
+    const resolved = resolveConfirmedNck1OcrEvidence({ paperId: input.materialization.paperId,
+      documents: input.sourceDocuments, evidence: input.evidence, confirmation: input.confirmation })
+    assert.deepEqual(resolved.issues, [])
+    assert.throws(() => declaration(input), /surviving essay or explicit scoring/u, figureText)
+    // Forge a correctly bound confirmed declaration to exercise both consumers,
+    // rather than relying only on the author helper to reject the contradiction.
+    const forged = { ...sidecar.figureExclusions[0], evidenceDigest: digestJson(input.evidence),
+      confirmationDigest: digestJson(input.confirmation), confirmed: true }
+    assert.throws(() => capture(input, [forged]), /surviving essay or explicit scoring/u, figureText)
+    assert.throws(() => assertSourceReferenceAdmission({ ...input,
+      sidecar: { ...sidecar, figureExclusions: [forged] } }), /surviving essay or explicit scoring/u, figureText)
+  }
+  // Mentioning a sample in commentary is not an independent sample label.
+  const commentary = fixture(undefined, { figureText: '范文1中人物的情感变化' })
+  assertSourceReferenceAdmission({ ...commentary, sidecar: capture(commentary, [declaration(commentary)]) })
+})
+
+test('CLI atomically initializes two explanation declarations together; either single and mismatched per-figure bindings reject without a draft', t => {
+  const paperId = `paper-synthetic-explanation-multiple-${process.pid}`
+  const paperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
+  const work = path.join(root, 'imports/ocr-proofread', paperId)
+  assert(!existsSync(paperDir) && !existsSync(work))
+  t.after(() => { rmSync(paperDir, { recursive: true, force: true }); rmSync(work, { recursive: true, force: true }) })
+  const input = fixture(paperId, { figurePages: [0, 1] })
+  const declarations = ['answers:explanation-figure', 'answers:explanation-2-figure'].map(id => declaration(input, id))
+  declarations[1].reason = 'Second original page reviewed independently: a separate explanatory diagram.'
+  const documents = input.sourceDocuments.map((document, i) => {
+    const file = `sources/${i}.pdf`
+    mkdirSync(path.join(paperDir, 'sources'), { recursive: true })
+    writeFileSync(path.join(paperDir, file), document.bytes)
+    const { bytes: _, ...entry } = document
+    return { ...entry, path: file }
+  })
+  json(path.join(paperDir, 'universal-source-manifest.json'), { documents })
+  for (const [file, value] of [['nck1-source-materialization-v1.json', input.materialization],
+    ['nck1-ocr-source-evidence-v1.json', input.evidence], ['nck1-ocr-source-confirmation-v1.json', input.confirmation]]) {
+    json(path.join(paperDir, 'materialization', file), value)
+  }
+  const draftFile = path.join(work, 'source-references-draft.json')
+  const flags = d => ['--figure', d.figureId, '--figure-sha256', d.figureIdentitySha256,
+    '--anchor', d.anchorItemId, '--reason', d.reason]
+  const run = args => spawnSync(process.execPath, [path.join(root, 'scripts/import-pipeline/ocr-proofread.mjs'),
+    'exclude-explanation-figure', paperId, ...args, '--agent-confirmed'], { cwd: root, encoding: 'utf8' })
+  for (const [index, d] of declarations.entries()) {
+    const result = run(flags(d))
+    assert.notEqual(result.status, 0)
+    assert.match(result.stderr, /no surviving essay anchor/u)
+    assert(result.stderr.includes(declarations[1 - index].figureId), result.stderr)
+    assert.match(result.stderr, /repeated --figure/u)
+    assert(!existsSync(draftFile))
+  }
+  const mismatched = run([...flags(declarations[0]),
+    ...flags({ ...declarations[1], figureIdentitySha256: declarations[0].figureIdentitySha256 })])
+  assert.notEqual(mismatched.status, 0)
+  assert.match(mismatched.stderr, /binding changed/u)
+  assert(!existsSync(draftFile))
+  const missing = run([...flags(declarations[0]), '--figure', declarations[1].figureId,
+    '--figure-sha256', declarations[1].figureIdentitySha256, '--reason', declarations[1].reason])
+  assert.notEqual(missing.status, 0)
+  assert.match(missing.stderr, /requires its own --anchor/u)
+  assert(!existsSync(draftFile))
+  const before = JSON.stringify({ evidence: input.evidence, confirmation: input.confirmation })
+  const result = run(declarations.flatMap(flags))
+  assert.equal(result.status, 0, result.stderr)
+  const draft = JSON.parse(readFileSync(draftFile))
+  assert.equal(draft.sourceDigest, null)
+  assert.deepEqual(draft.figureExclusions, declarations)
+  assertSourceReferenceAdmission({ ...input, sidecar: { ...draft, sourceDigest: input.sourceDigest,
+    candidateDigest: input.candidateDigest, materializationDigest: digestJson(input.materialization) } })
+  assert.deepEqual(readdirSync(work).filter(name => name.includes('source-references-draft')), ['source-references-draft.json'])
+  const sealed = ['nck1-ocr-source-evidence-v1.json', 'nck1-ocr-source-confirmation-v1.json']
+    .map(file => JSON.parse(readFileSync(path.join(paperDir, 'materialization', file))))
+  assert.equal(JSON.stringify({ evidence: sealed[0], confirmation: sealed[1] }), before)
 })
 
 test('explanation redo retains upstream authoring but archives references and products; Candidate and UNKNOWN reject before writes', async t => {

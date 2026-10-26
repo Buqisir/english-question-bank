@@ -1376,7 +1376,8 @@ export function buildSourceReferences(materialization, evidence, confirmation,
         : 'objective answer figure excluded from writing references; retained in source evidence' })
   }
   if (assignedFigures.size + excludedFigures.length !== referenceFigures.length) {
-    throw new Error('Reference figure has no surviving essay anchor or explicit scoring entry')
+    const unresolved = referenceFigures.filter(figure => !assignedFigures.has(figure) && !excludedFigures.includes(figure))
+    throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
   }
   return { groups, review, structuredScoring, ...(figureExclusions.length
     ? { schemaVersion: 'source-references-v5', figureExclusions }
