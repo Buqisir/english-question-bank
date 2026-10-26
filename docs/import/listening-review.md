@@ -64,6 +64,41 @@ doubts in `limits`; unresolved material questions remain `review_required` or
 An ASR-empty tail is not proven silence or safety; report it within the actual
 inspection scope. Do not claim direct listening when only ASR was read.
 
+## 出听核包
+
+已有 attempt 的首尾、遍数或正文仍不确定，需要 Owner 耳听裁决时，运行只读命令：
+
+```sh
+node scripts/import-pipeline/listening-owner-review-pack.mjs <paperId> [另一个paperId] \
+  --output /absolute/path/outside-the-repository/new-listening-pack
+# 只出指定段／遍；--select 可重复，all 表示该段所有遍
+node scripts/import-pipeline/listening-owner-review-pack.mjs <paperId> \
+  --select <paperId>:listening-text-3:1 \
+  --output /absolute/path/outside-the-repository/new-listening-pack-t3
+```
+
+默认从每卷最新已有 `rule-result.json` 的 attempt 选 `decision != usable` 的段和全部遍次。
+用 `--attempt <paperId=/absolute/attempt-directory>` 固定历史 attempt（多卷可重复），
+`--root <worktree>` 指定数据所在树；卷名取本卷 `config.json`。输出须为仓库外的新目录，
+禁止原地覆盖、经符号链接写回卷目录。仅依赖 Node 24、`ffmpeg` 和 `ffprobe`，不运行 ASR。
+
+每遍独立按已有首尾词锚与 `silence.json` 精切，前后各加最多 **0.8 秒**，
+不得越过相邻语音间停顿的中点；另附从精切前后各扩 **3 秒**的上下文版，受录音端点限制。
+保持原速和内部停顿，不拼接、不淡入淡出。首词/末词须匹配，内部锚允许 ASR 差异；
+定位不足、遍数歧义、停顿缺证或音频 SHA 不符时退出失败，不能用宽剪辑冒充精切。
+此时保留原 attempt，先补齐已有证据的定位；不重写 producer 或听力 sidecar。
+
+交付整个目录：中文 `index.html`、`clips/*.mp3`、`manifest.json`。页面显示应听首句/末句、
+逐遍播放器、整录音绝对时间和回复示例。manifest 保留原文、两种切点、实际缓冲、
+词锚/停顿证据、输入 SHA、规则、片段 SHA/ffprobe 时长，且始终 `ownerReviewed=false`。
+浏览器打开 `index.html` 即可；相对音频路径须与 `clips/` 一并保留。
+
+Owner 回复示例：「福州五月质量检测 listening-text-3 第 1 遍：首尾完整，正文一致」；
+有差异则写缺字/多了报题、听到的正文和整录音时间。Agent 将答复作为带原话、时间、
+包 manifest SHA、卷/段/遍与输入绑定的审查证据，逐遍核对后按本文既有
+`prepare-listening-review` → `finalize-listening-review` → `verify-listening-review` 装入，
+未核实段继续 `review_required`。包本身不批准 usable，不自动安装结论，也不改变封存修订。
+
 ## Immutable evidence and PDF reuse
 
 `listening-review-v1.json` is a Review-layer sidecar, not Canonical source

@@ -1,5 +1,12 @@
 # Verify Script Index
 
+听核包只读命令：`node scripts/import-pipeline/listening-owner-review-pack.mjs --help`。
+标准操作见 `docs/import/listening-review.md`「出听核包」。
+
+| Focused check | Distinct failure caught | CI |
+| --- | --- | --- |
+| `node --test scripts/import-pipeline/listening-owner-review-pack.test.mjs` | 合成音频证明逐遍精切不会重复整段，0.8 秒缓冲不跨相邻停顿中点，上下文从精切扩 3 秒且受整录音端点约束；捕获缺首尾/停顿、音频 SHA 改变、错误段/遍选择、经符号链接写回卷目录、输入被改写、中文页面首末句/绝对时钟遗漏，以及 manifest 缺规则/SHA 或误称 Owner 已审。需本机 ffmpeg/ffprobe；此检查不证明真实录音内容与原文一致。 | manual; not in daily packs |
+
 `source-references-v4` 的评分图只进入显式 `includeScoring` 的答案册；范文仍用
 v3 的 `figures` / `afterParagraphId`。既有 publication/receipt 继续绑定原 sidecar
 bytes，不重写旧版，不提升未变的 OCR confirmation/Materialization producer。
