@@ -116,11 +116,12 @@ test('an ending midpoint cannot cross a successful neighboring skeleton playback
   assert.ok(result.groups[0].playback.endSeconds <= result.groups[1].playback.startSeconds)
   assert.ok(result.groups[0].playback.endSeconds >= 4.22)
 })
-test('a neighbor limit outside the selected pause cannot become a physical boundary', () => {
+test('a capped buffer stops before a distant pause instead of stretching to a neighbor limit', () => {
   const result = run([segment(firstText, 2), segment(nextText, 6.3)], [
     pause(1, 1.9), pause(3.9, 5.4), pause(4.12, 4.203), pause(5.6, 7.2), pause(8.6, 10),
   ])
-  assert.equal(result.groups[0].decision, 'review_required')
-  assert.ok(result.groups[0].issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
-  assert.equal(result.groups[0].playback, null)
+  assert.equal(result.groups[0].decision, 'usable')
+  const occurrence = result.groups[0].occurrences[0]
+  assert.equal(occurrence.playback.endSeconds, occurrence.endSeconds + 0.8)
+  assert.ok(occurrence.playback.endSeconds < 5.6)
 })

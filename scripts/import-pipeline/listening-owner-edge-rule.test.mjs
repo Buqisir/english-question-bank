@@ -24,16 +24,22 @@ const primary = (extras, options) => engine('Apple SpeechAnalyzer', extras, opti
 const secondary = (extras, options) => engine('faster-whisper', extras, options)
 const isolated = result => result.engineNotes.filter(n => n.kind === 'isolated_edge_asr')
 const unions = result => result.engineNotes.filter(n => n.kind === 'silent_playback_boundary_union')
-function blocks(a, b) {
+function blocks(a, b, label = '') {
   for (const pair of [[a, b], [b, a]]) {
     const result = reconcileListeningEngines(...pair)[0]
-    assert.equal(result.decision, 'review_required', JSON.stringify(result.engineNotes))
+    assert.equal(result.decision, 'review_required', `${label}: ${JSON.stringify(result.engineNotes)}`)
     assert.equal(result.playback, null)
     assert.equal(isolated(result).length, 0)
   }
 }
 function earlierStart(extras = []) {
   return secondary(extras, {pauses: [{startSeconds: 0, endSeconds: 1.3}, ...pauses.slice(1)]})
+}
+// Retain a >0.5s disputed interval inside v6's 0.8s buffer ceiling.
+function narrowStart(attempt) {
+  attempt.groups[0].playback.startSeconds = 1.9
+  attempt.groups[0].occurrences[0].playback.startSeconds = 1.9
+  return attempt
 }
 
 test('A: isolated edge words pass at the inclusive three-word / 1.5-second limits in either engine', () => {
@@ -69,9 +75,17 @@ test('A: interior alignment words never get the isolated edge exception', () => 
     assert.equal(isolated(reconcileListeningEngines(...pair)[0]).length, 0)
   }
 })
-test('A: adjacent source prefixes, announcements and instructions remain blocked', () => {
+test('A: adjacent source prefixes and instructions block; Chinese prompts never receive an isolated-word exception', () => {
   for (const words of ['Fresh', 'Fresh apples', 'Text Two', '第2段', '请准备']) {
-    blocks(primary([segment(words, 5, 0.6)]), secondary())
+    const a = primary([segment(words, 4.8, 0.6)]), b = secondary()
+    if (words === '请准备') {
+      for (const pair of [[a, b], [b, a]]) {
+        const result = reconcileListeningEngines(...pair)[0]
+        assert.equal(isolated(result).length, 0)
+        if (result.decision === 'usable') assert.ok(result.playback.endSeconds <= 4.8)
+        else assert.equal(result.playback, null)
+      }
+    } else blocks(a, b, words)
   }
   const options = {instructions: [{slotId: 'listening.short-dialogue', text: '每段录音读一遍。Please prepare.'}]}
   for (const words of ['prepare', 'please prepare now']) {
@@ -91,7 +105,7 @@ test('A: missing other-engine coverage and unknown reading count cannot certify 
   assert.equal(isolated(result).length, 0)
 })
 test('B: silent disputed starts use the earlier playback boundary and preserve all evidence', () => {
-  const a = primary(), b = earlierStart(), before = JSON.stringify([a, b])
+  const a = narrowStart(primary()), b = earlierStart(), before = JSON.stringify([a, b])
   const result = reconcileListeningEngines(a, b)[0]
   assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
   assert.equal(unions(result).length, 1)
@@ -101,25 +115,25 @@ test('B: silent disputed starts use the earlier playback boundary and preserve a
   assert.equal(JSON.stringify([a, b]), before)
 })
 test('B: a disputed interval containing A-qualified words can use the union', () => {
-  const result = reconcileListeningEngines(primary([segment('Tien', 1.05, 0.2)]), earlierStart())[0]
+  const result = reconcileListeningEngines(narrowStart(primary([segment('Tien', 1.25, 0.2)])), earlierStart())[0]
   assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
   assert.equal(isolated(result).length, 1)
   assert.equal(unions(result).length, 1)
 })
-test('B: silent disputed endings use the later boundary for both occurrence and group', () => {
+test('B: silent disputed ending unions retain the v6 word-edge buffer ceiling', () => {
   const a = primary(), b = secondary()
   b.groups[0].occurrences[0].playback.endSeconds += 0.7
   for (const pair of [[a, b], [b, a]]) {
     const result = reconcileListeningEngines(...pair)[0]
     assert.equal(result.decision, 'usable')
     assert.equal(unions(result).length, 1)
-    assert.equal(result.playback.endSeconds, b.groups[0].occurrences[0].playback.endSeconds)
+    assert.equal(result.playback.endSeconds, result.occurrences[0].endSeconds + 0.8)
     assert.equal(result.occurrences[0].playback.endSeconds, result.playback.endSeconds)
   }
 })
 test('B: spoken instructions and Chinese-only runs in the disputed interval still block', () => {
   for (const words of ['Text One', '请准备']) {
-    const result = reconcileListeningEngines(primary([segment(words, 1.05, 0.2)]), earlierStart())[0]
+    const result = reconcileListeningEngines(narrowStart(primary([segment(words, 1.25, 0.2)])), earlierStart())[0]
     assert.equal(result.decision, 'review_required', words)
     assert.equal(unions(result).length, 0)
     assert.ok(result.engineConflicts.some(c => c.kind === 'playback_boundary'), words)
@@ -132,8 +146,8 @@ test('B: a disputed boundary through body words and a missing coverage interval 
   assert.equal(result.decision, 'review_required')
   assert.equal(unions(result).length, 0)
   const missing = earlierStart()
-  missing.groups[0].observedWindows[0].startSeconds = 1
-  assert.equal(reconcileListeningEngines(a, missing)[0].decision, 'review_required')
+  missing.groups[0].observedWindows[0].startSeconds = 1.3
+  assert.equal(reconcileListeningEngines(narrowStart(a), missing)[0].decision, 'review_required')
 })
 test('B: silence does not authorize a union overlapping a neighboring group', () => {
   for (const failedCount of [false, true]) {
@@ -156,7 +170,7 @@ test('B: proposed unions are checked together against every other occurrence', (
   const a = primary([], options), b = secondary([], options)
   assert.equal(a.groups[0].decision, 'usable')
   b.groups[0].occurrences[0].playback.endSeconds = 7.1
-  b.groups[0].occurrences[1].playback.startSeconds = 6.9
+  b.groups[0].occurrences[1].playback.startSeconds = 6.8
   const result = reconcileListeningEngines(a, b)[0]
   assert.equal(result.decision, 'review_required')
   assert.equal(unions(result).length, 0)

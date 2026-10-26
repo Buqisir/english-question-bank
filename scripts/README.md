@@ -5,6 +5,7 @@
 
 | Focused check | Distinct failure caught | CI |
 | --- | --- | --- |
+| `node --test scripts/import-pipeline/listening-cut-padding.test.mjs scripts/import-pipeline/listening-segment-pipeline.test.mjs scripts/import-pipeline/listening-owner-edge-rule.test.mjs scripts/import-pipeline/listening-boundary-safety.test.mjs` | 捕获默认剪到长静音中点而非词边 ±0.8 秒、短于 1.6 秒停顿吞入邻语音、录音首尾越界、跨引擎静音并集扩大缓冲、历史 attempt 被改写，以及装入 Owner 最终切点时二次加缓冲；合成数据只证明导航切点规则，不证明真实词级定位准确。 | focused/manual; existing listening rule/pipeline checks remain in daily packs |
 | `node --test scripts/import-pipeline/listening-owner-review-pack.test.mjs` | 合成音频证明逐遍精切不会重复整段，0.8 秒缓冲不跨相邻停顿中点，上下文从精切扩 3 秒且受整录音端点约束；捕获缺首尾/停顿、音频 SHA 改变、错误段/遍选择、经符号链接写回卷目录、输入被改写、中文页面首末句/绝对时钟遗漏，以及 manifest 缺规则/SHA 或误称 Owner 已审。需本机 ffmpeg/ffprobe；此检查不证明真实录音内容与原文一致。 | manual; not in daily packs |
 
 `source-references-v4` 的评分图只进入显式 `includeScoring` 的答案册；范文仍用

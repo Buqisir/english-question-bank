@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { normalizeListeningText } from './lib-listening-segment-rule.mjs'
+import { normalizeListeningText, padListeningWordEdges } from './lib-listening-segment-rule.mjs'
 
 const DEFAULT_ROOT = path.resolve(import.meta.dirname, '../..')
 const sha = file => `sha256:${createHash('sha256').update(readFileSync(file)).digest('hex')}`
@@ -36,11 +36,13 @@ export function reviewCuts({ wordStartSeconds: start, wordEndSeconds: end, pause
   if (!before || !after) fail('REVIEW_PACK_PAUSE_MISSING', `${start}–${end}`)
   const leadingMidpoint = (before.startSeconds + before.endSeconds) / 2
   const trailingMidpoint = (after.startSeconds + after.endSeconds) / 2
-  const a = Math.max(0, start - 0.8, leadingMidpoint)
-  const z = Math.min(durationSeconds, end + 0.8, trailingMidpoint)
-  if (a > start || z < end) fail('REVIEW_PACK_INVALID_PAUSE', `${a}–${z}`)
+  const padded = padListeningWordEdges({wordStartSeconds: start, wordEndSeconds: end,
+    durationSeconds, leadingMidpoint, trailingMidpoint})
+  if (!padded) fail('REVIEW_PACK_INVALID_PAUSE', `${start}–${end}`)
+  const {startSeconds: a, endSeconds: z} = padded
   return { wordStartSeconds: start, wordEndSeconds: end, startSeconds: round(a), endSeconds: round(z),
-    requestedBufferSeconds: 0.8, actualLeadingBufferSeconds: round(start - a), actualTrailingBufferSeconds: round(z - end),
+    requestedBufferSeconds: padded.requestedBufferSeconds,
+    actualLeadingBufferSeconds: round(start - a), actualTrailingBufferSeconds: round(z - end),
     signalEvidence: { leadingPause: before, trailingPause: after, leadingMidpoint, trailingMidpoint },
     clips: [
       { kind: 'exact', sourceStartSeconds: round(a), sourceEndSeconds: round(z) },
