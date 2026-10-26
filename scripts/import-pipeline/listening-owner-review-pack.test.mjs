@@ -123,6 +123,24 @@ test('explicit paper/segment/reading selection and multiple papers do not repeat
   } finally { rmSync(f.temp, { recursive: true, force: true }) }
 })
 
+test('review-pack anchors apply the shared pause projection to retained v1 attempts without changing display or input', () => {
+  const f = fixture()
+  try {
+    const literal = `${sourceText} （停10秒）`
+    const file = path.join(f.attempt, 'rule-result.json')
+    put(file, { groups: [{ ...f.group, sourceText: literal,
+      sourceProjection: { version: 'listening-spoken-projection-v1', sourceText: literal,
+        text: literal.replace('M: ', '   '), exclusions: [] } }] })
+    const before = hash(file)
+    const manifest = buildReviewPack(f)
+    assert.deepEqual(manifest.segments[0].readings.map(r => r.reading), [1, 2])
+    assert.equal(manifest.segments[0].sourceText, literal)
+    assert.ok(readFileSync(path.join(f.output, 'index.html'), 'utf8').includes(literal))
+    assert.equal(hash(file), before)
+    assert.equal(manifest.ownerReviewed, false)
+  } finally { rmSync(f.temp, { recursive: true, force: true }) }
+})
+
 test('rejects source-directory/symlink output, bad selections, changed audio and missing edge evidence before output exists', () => {
   const f = fixture()
   try {

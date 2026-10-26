@@ -1,4 +1,4 @@
-# 听力导航切段：listening-segment-rule-v6
+# 听力导航切段：listening-segment-rule-v7
 
 实现仅位于 `scripts/import-pipeline/`，沿用服务端 `listening-review-v1` 契约。
 Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻骨架组收窄裁窗，由已安装的 Whisper
@@ -11,7 +11,7 @@ Apple SpeechAnalyzer 为主引擎；失败组只按独立锚定成功的相邻�
 
 | 参数 | 值 |
 | --- | --- |
-| 规则 / 等价表版本 | `listening-segment-rule-v6` / `listening-equivalences-v5` |
+| 规则 / 等价表版本 | `listening-segment-rule-v7` / `listening-equivalences-v5` |
 | 首尾连续锚 | 6 词；歧义扩为 12 词，仍歧义则复核 |
 | 可选模糊锚 | 默认关闭；至少 20 词，12 词连续锚中恰好 1 处替换，每遍另一端须精确 |
 | 短材料 / 其他材料 | 少于 40 词：源词匹配率和含插入惩罚的编辑相似度均 ≥0.95；其他均 ≥0.90 |
@@ -33,7 +33,15 @@ Owner 2026-10-26：v6 有意改变新 attempt 的默认播放切点。先定位�
 `padListeningWordEdges` 由自动切段与只读听核包共用；跨引擎静音并集也不得扩大
 所选首末词的 0.8 秒上限及中点护栏。
 
-版本只提升听力 producer 的规则标识和代码摘要（`listening-segment-rule-v6`），
+本次 v7 使用 `listening-spoken-projection-v2`：仅从对齐投影中排除全角或半角配对括号内
+完整的「停 / 停顿 + 阿拉伯数字或中文数字 + 秒 / 秒钟」，允许词间和括号内空白。
+例如 `（停10秒）`、`(停顿 5 秒)`、`（停十秒钟）`；句中和句尾同样处理。
+保留原文、字符坐标、来源和 `pause_duration_direction` 排除记录；不改写 transcript 或显示。
+`(Pause)`、英文说明、`（Text 1）` 和正文数字不属于新增排除范围，原说话人/标题规则不变。
+听核包从保留的旧投影取词时也显式应用同一当前投影，原文显示及旧 attempt 保持不变。
+这是会改变尾锚及 usable/review_required 判定的显式 successor，不静默沿用 v6 标识。
+
+版本只提升听力 producer 的规则标识和代码摘要（`listening-segment-rule-v7`），
 不提升未变的 OCR/Materialization producer、等价表或 `listening-review-v1` schema。
 历史 attempt、封存卷和已送审 revision 仍读取原 bytes；旧缓存只提示显式重放，
 不会自动重算。Owner 已确认 sidecar 中的切点是最终值，装入和读取时逐字保留，
@@ -117,7 +125,7 @@ v5 追加连字符复合词等价：比较任一侧有字母复合词 `a-b`（�
 
 这个等价会改变 v4 判定，因此新 attempt 使用 v5 和新的规则代码摘要。
 历史实现通过 Git 和保留的 attempt 证据追溯，不维护没有运行消费者的旧规则副本。
-下述 `--replay-attempt` 命令明确复用旧 ASR 并生成当前 v6 的新 attempt，
+下述 `--replay-attempt` 命令明确复用旧 ASR 并生成当前 v7 的新 attempt，
 不按旧版本重算、不替换或改签历史结果。
 
 Apple 缺词而 Whisper 提供完整唯一证据时允许通过；身份、次数、顺序或物理边界出现

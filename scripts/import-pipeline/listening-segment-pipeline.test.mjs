@@ -91,7 +91,7 @@ test('rule-only replay retains historical raw bytes and never opens an ASR runne
   const result = segmentListening(replay)
   assert.equal(result.usable, 1)
   const input = readJson(path.join(result.attempt, 'input.json'))
-  assert.equal(input.rule.version, 'listening-segment-rule-v6')
+  assert.equal(input.rule.version, 'listening-segment-rule-v7')
   assert.equal(input.historicalRuleVersion, 'listening-segment-rule-v3')
   assert.equal(input.inference, 'not_run')
   assert.match(input.ruleCacheKey, /^sha256:/u)

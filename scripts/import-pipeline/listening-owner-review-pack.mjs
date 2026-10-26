@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { normalizeListeningText, padListeningWordEdges } from './lib-listening-segment-rule.mjs'
+import { normalizeListeningText, padListeningWordEdges, projectListeningSpokenText } from './lib-listening-segment-rule.mjs'
 
 const DEFAULT_ROOT = path.resolve(import.meta.dirname, '../..')
 const sha = file => `sha256:${createHash('sha256').update(readFileSync(file)).digest('hex')}`
@@ -108,7 +108,10 @@ function anchors(streams, text, low, high, kind) {
 
 function locate(group, streams, pauses, durationSeconds) {
   const low = group.orderEvidence?.afterSeconds ?? 0, high = group.orderEvidence?.beforeSeconds ?? durationSeconds
-  const text = group.sourceProjection?.text ?? group.sourceText
+  // Retained v1 projections can still contain pause durations. Apply the current
+  // shared projection for this derivative's anchors without rewriting the attempt.
+  const text = projectListeningSpokenText({ ...group,
+    text: group.sourceProjection?.text ?? group.sourceText }).text
   const heads = anchors(streams, text, low, high, 'head'), tails = anchors(streams, text, low, high, 'tail')
   if (!Number.isInteger(group.expectedReadings) || group.expectedReadings < 1 || heads.length !== group.expectedReadings) {
     fail('REVIEW_PACK_READING_COUNT_AMBIGUOUS', `${group.segmentId}: expected ${group.expectedReadings}, found ${heads.length}`)
