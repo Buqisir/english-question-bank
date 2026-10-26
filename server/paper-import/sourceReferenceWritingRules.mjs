@@ -18,7 +18,14 @@ export const PARENTHESIZED_SAMPLE_LABEL = /^[（(](?:(?:A|One)\s+)?Possible\s+Ve
 export const NUMBERED_VERSION_SAMPLE_LABEL = /^(?:(?:A|One)\s+)?Possible\s+Version\s*\d+[:：]?$/iu
 export const SCORING_LABEL = /阅卷|评分|评卷|给分|档次/u
 const ESSAY_LABEL = /范文|例文|范例|答案|考场作文|作答示例|Possible\s+Version|【示例[一二三四五六七八九十]+】/iu
+// Brackets classify an entry candidate, not its authority as a sample. Only
+// known complete sample titles may supply essays; never strip arbitrary brackets.
+const BRACKETED_SAMPLE_TITLE = String.raw`(?:参考范文|考场作文|作答示例|参考答案|范文|参考作文|写作样例|例文|范例)(?:\s*[一二三1-3])?|(?:(?:A|One)\s+)?Possible\s+Versions?`
+const BRACKETED_SAMPLE_LABEL = new RegExp(
+  String.raw`^(?:[一二三四五六七八九十]+、\s*)?(?:【(?:${BRACKETED_SAMPLE_TITLE})】|\[(?:${BRACKETED_SAMPLE_TITLE})\])[:：]?$`, 'iu')
 export function isSourceReferenceSampleLabel(text) {
+  if (/[【\[]/u.test(text)
+    && !BRACKETED_SAMPLE_LABEL.test(text) && !EXAMPLE_SAMPLE_LABEL.test(text)) return false
   const version = isWritingVersionLabel(text)
   const complete = ENTRY_LABEL.test(text) || WORD_COUNT_SAMPLE_LABEL.test(text)
     || NUMBERED_SAMPLE_LABEL.test(text) || EXAMPLE_SAMPLE_LABEL.test(text)
@@ -78,3 +85,9 @@ export const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|
 export const SCORING_ENTRY_LABEL = /^(?:(?:[一二三四五六七八九十]+、|\(\s*[一二三四五六七八九十]+\s*\))\s*)?(?:评分(?:原则|标准|说明|细则|要求|建议)|各档次给分范围(?:和|及)要求)\s*[:：]?$/u
 // Reading explanations can start directly after samples, without a part title.
 export const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u
+// New bare/bracketed dividers require the whole heading. NFKC and trimming
+// are matching-only; preserve source text and the existing prefix rules.
+const ANSWER_EXPLANATION_HEADING = /^(?:解析|答案解析|【解析】|【答案解析】)[:：]?$/u
+export const isSourceReferenceExplanationStart = text =>
+  ANSWER_EXPLANATION_START.test(text)
+    || ANSWER_EXPLANATION_HEADING.test(text.normalize('NFKC').trim())

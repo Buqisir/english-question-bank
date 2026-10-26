@@ -5,7 +5,7 @@ import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
-  isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView,
+  isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, isSourceReferenceExplanationStart,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
   isSourceReferenceSampleLabel,
 } from './sourceReferenceWritingRules.mjs'
@@ -61,7 +61,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
       }
       if (afterListening && !firstWritingHeading) {
         // Only the explicit overview + task-rubric pair can leave explanations.
-        if (ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
+        if (isSourceReferenceExplanationStart(item.text) || ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
         if (!terminal && WRITING_SCORING_OVERVIEW.test(text)) {
           afterListening = false
           ended = false
@@ -88,7 +88,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
         ended = false
         heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
-      if (ANSWER_EXPLANATION_START.test(heading)
+      if (isSourceReferenceExplanationStart(item.text) || ANSWER_EXPLANATION_START.test(heading)
         || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading)) {
         writing = false
         taskType = null

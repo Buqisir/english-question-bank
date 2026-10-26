@@ -184,6 +184,93 @@ function fixture(pageLines) {
   ]
 }
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
+for (const divider of ['解析', '答案解析', '【解析】', '【答案解析】']) {
+  for (const suffix of ['', ':', '：']) test(`whole explanation heading ends essay ownership: ${divider}${suffix}`, () => {
+    const input = fixture([
+      [...heading, line('The first source paragraph.', .3), line('The second source paragraph.', .4, .14, .76)],
+      [line(`　${divider}${suffix}　`, .1), line('A', .2), line('Reading explanation in English.', .3),
+        line('第二节 读后续写', .4), line('参考范文', .5), line('A reprinted sample.', .6)],
+      [line('English on the following page stays outside references.', .2)],
+    ])
+    const before = structuredClone(input)
+    const prepared = prepareSourceReferenceWritingItems(...input)
+    const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+    for (const item of input[2].documents[0].pages.slice(1).flatMap(page => page.orderedItems)) {
+      assert.deepEqual(lifecycle.items.get(item.itemId),
+        { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
+    }
+    const captured = []
+    const output = buildSourceReferences(...input, { onWritingCapture: item => captured.push(item) })
+    assert.deepEqual(captured, ['p1-i2', 'p1-i3'].map(itemId =>
+      ({ itemId, task: 'continuation', kind: 'essays' })))
+    const entries = output.groups[0].essays.entries
+    assert.equal(entries.length, 1)
+    assert.deepEqual(entries[0].paragraphs.map(p => p.text),
+      ['The first source paragraph.', 'The second source paragraph.'])
+    assert.deepEqual(entries[0].paragraphs.map(p => p.source.locator),
+      [[.3, .1, .8], [.4, .14, .76]].map(([y, x, width]) =>
+        ({ kind: 'page_region', documentId: 'answers', page: 1, region: { x, y, width, height: .02 } })))
+    assert.deepEqual(input, before, 'matching must preserve sealed source bytes and order')
+    const scopes = sourceReferenceScoringScopes(input[2], new Set(['answers']))
+    for (const item of input[2].documents[0].pages.slice(1).flatMap(page => page.orderedItems)) {
+      assert.equal(scopes.get(item.itemId), null)
+    }
+  })
+}
+
+test('A remains legitimate essay prose before an explanation boundary', () => {
+  const input = fixture([[...heading, line('A', .3), line('A complete source paragraph.', .4, .14, .76)]])
+  const prepared = prepareSourceReferenceWritingItems(...input)
+  const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+  assert.equal(lifecycle.items.get('p1-i2').task, 'continuation')
+  assert.equal(lifecycle.items.get('p1-i2').capturing, true)
+  const entry = buildSourceReferences(...input).groups[0].essays.entries[0]
+  assert.equal(entry.paragraphs[0].text, 'A')
+  assert.equal(entry.paragraphs[0].source.locator.region.y, .3)
+})
+
+test('explanation mentions and unknown bracketed answer titles do not authorize essay labels', () => {
+  for (const text of ['解析如下这篇范文…', '【答案补充】', '[答案补充]', '【参考答案补充】']) {
+    const input = fixture([[...heading, line('The source paragraph.', .3), line(text, .4),
+      line('The next source paragraph.', .5)]])
+    const prepared = prepareSourceReferenceWritingItems(...input)
+    const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+    const state = lifecycle.items.get('p1-i3')
+    assert.equal(state.ended, false, text)
+    assert.equal(state.capturing, false, text)
+    assert.notEqual(state.action, 'entry', text)
+    assert.equal(lifecycle.items.get('p1-i4').task, 'continuation')
+    assert.equal(lifecycle.items.get('p1-i4').capturing, true)
+    const entries = buildSourceReferences(...input).groups[0].essays.entries
+    assert(entries.every(entry => entry.sourceLabel !== text))
+    assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3, .5])
+  }
+})
+
+for (const appendix of [
+  ['写作评分说明', '读后续写评分标准', '评分标准'],
+  ['第二节（满分25分）', '评分标准'],
+]) test(`explicit scoring appendix alone reopens after explanation: ${appendix[0]}`, () => {
+  const input = fixture([
+    [...heading, line('A complete source sample.', .3), line('【答案解析】：', .4)],
+    [...appendix, '按内容和语言给分。', '参考范文', 'A reprinted sample.']
+      .map((text, i) => line(text, .1 + i * .1)),
+  ])
+  const prepared = prepareSourceReferenceWritingItems(...input)
+  const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups[0].essays.entries.map(e => e.paragraphs.map(p => p.text)),
+    [['A complete source sample.']])
+  assert.deepEqual(scoringTexts(output), ['按内容和语言给分。'])
+  const criterion = `p2-i${appendix.length}`
+  assert.equal(lifecycle.items.get(criterion).kind, 'scoring')
+  assert.equal(lifecycle.items.get(criterion).capturing, false)
+  assert.equal(sourceReferenceScoringScopes(input[2], new Set(['answers'])).get(criterion).taskType, 'continuation')
+  const reprint = `p2-i${appendix.length + 2}`
+  assert.equal(lifecycle.items.get(reprint).capturing, false)
+  assert.equal(sourceReferenceScoringScopes(input[2], new Set(['answers'])).get(reprint), null)
+})
+
 const scoringTexts = output => output.groups[0].scoring.entries.flatMap(e =>
   (e.paragraphs ?? e.blocks.filter(b => b.kind === 'paragraph').map(b => b.paragraph)).map(p => p.text))
 function reseal(input) {

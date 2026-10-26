@@ -2,7 +2,7 @@
 // Rules recognize candidates only: callers retain state transitions and output assembly.
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
-  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
+  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, isSourceReferenceExplanationStart, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isWritingVersionLabel, writingRuleMatchingView,
@@ -194,7 +194,7 @@ export const LINE_ROLE_RULES = Object.freeze([
     '写作评分说明', '写作评分说明如下。'),
   rule('writing.listening-boundary', 'listening-boundary', 10, f => LISTENING_REFERENCE_START.test(f.nfkc),
     'Text 1', '第二节 读后续写'),
-  rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && ANSWER_EXPLANATION_START.test(f.text),
+  rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && isSourceReferenceExplanationStart(f.text),
     { text: '【解题导语】本文是一篇应用文。', context: { sectionCount: 1 } },
     { text: '参考范文', context: { sectionCount: 1 } }),
   rule('writing.omission', 'omission', 10, (f, c) => (c.inWriting || c.current)
