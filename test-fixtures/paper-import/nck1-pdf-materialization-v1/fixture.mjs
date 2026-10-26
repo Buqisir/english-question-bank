@@ -177,9 +177,11 @@ function answerHtml({
       paragraph('高三听力录音原文'),
       paragraph('听力考试正式开始。'),
       paragraph('例如：先听例题。'), paragraph('M: This is the example only.'),
+      // Linux emoji font metrics split/reorder the mixed speech/cue PDF item.
+      // The C1 regression probes UTF-16 surrogate refusal with explicit OCR text.
       ...Array.from({ length: 10 }, (_, index) => [
         paragraph(`Text ${index + 1}`),
-        paragraph(index === 4 ? 'M: Keep every word 😀。第一节到此结束。' : `M: Synthetic speech ${index + 1}.`),
+        paragraph(index === 4 ? 'M: Keep every word 。第一节到此结束。' : `M: Synthetic speech ${index + 1}.`),
         ...(index === 5 ? [paragraph('W: OK, the underground, and then a short walk. Thanks a lot.')] : []),
       ]).flat(),
       paragraph('请从A、B、C中选择。'),
