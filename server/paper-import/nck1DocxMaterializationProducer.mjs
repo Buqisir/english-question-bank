@@ -52,6 +52,11 @@ function normalized(value) {
     .trim()
 }
 
+export function listeningTextMarkerNumber(text) {
+  const match = LISTENING_TEXT_MARKER.exec(normalized(text))
+  return match ? Number(match[1] || match[2]) : null
+}
+
 function trimEdgeSpaces(value) {
   return String(value || '').replace(/^\p{Zs}+|\p{Zs}+$/gu, '')
 }
@@ -67,7 +72,11 @@ export function joinListeningTranscriptPages(items) {
     const adjacentPages = previous?.page != null && item.page === previous.page + 1
     const sentenceEnded = /[.!?。？！:：][”’"'）)\]】}」』》〉]*$/u.test(lastLine)
     const continues = adjacentPages && lastLine && !sentenceEnded && /^[a-z]/u.test(firstLine)
-    text = !text ? item.text : continues
+    const adjacentFragments = previous?.sourceFragment && item.sourceFragment
+      && previous.sourceFragment.itemId === item.sourceFragment.itemId
+      && previous.sourceFragment.end === item.sourceFragment.start
+    text = !text ? item.text : adjacentFragments ? `${text}${item.text}` : continues
+      && !previous?.sourceFragment && !item.sourceFragment
       ? `${text.trimEnd()} ${item.text.trimStart()}` : `${text}\n${item.text}`
     previous = item
   }
@@ -110,7 +119,7 @@ function hasSourceLocator(documentId, sourceIndex) {
     && sourceIndex.region.height > 0
 }
 
-function listeningCue(text) {
+export function listeningCue(text) {
   const value = normalized(text)
   if (LISTENING_PAUSE_REPEAT_SEQUENCE.test(value)
     || /^停顿\d{2}′[0-5]\d′′$/u.test(value)) {
@@ -218,6 +227,7 @@ function listeningItemRecord(item, index, documentId, disposition, reason, kind 
     disposition,
     reason,
     ...(kind ? { kind } : {}),
+    ...(item?.listeningSourceFragment ? { sourceFragment: structuredClone(item.listeningSourceFragment) } : {}),
   }
 }
 
@@ -1412,7 +1422,8 @@ function closesWritingSampleWordCount(answerBody, index, answerDocumentId) {
   })
 }
 
-function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues }) {
+function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues, listeningSource = null }) {
+  if (listeningSource) answerBody = listeningSource.body
   // OCR may split a fixed broadcast across a heading and two printed lines.
   // Match the complete anchored cue; retain each original item and locator in the partition.
   const wrappedCues = new Map()
@@ -1449,7 +1460,15 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       if (answerBody[index].kind === 'paragraph') trialItems.add(answerBody[index])
     }
   }
-  const cueFor = item => trialItems.has(item)
+  const cueFor = item => item?.listeningSourceRole
+    ? item.listeningSourceRole.role === 'speech' ? null
+      : { disposition: 'excluded_exam_broadcast', reason: `agent_reviewed_${item.listeningSourceRole.role}`,
+          kind: item.listeningSourceRole.role === 'example' ? 'source_example' : 'source_direction',
+          ...(item.listeningSourceRole.role === 'cue' ? {
+            nextTextNumber: item.listeningSourceRole.nextTextNumber,
+            ...(item.listeningSourceRole.questionNumbers.length ? { questionNumbers: item.listeningSourceRole.questionNumbers } : {}),
+          } : {}) }
+    : trialItems.has(item)
     ? { disposition: 'excluded_exam_broadcast', reason: 'paired_sound_check_before_formal_start', kind: 'listening_opening_notice' }
     : wrappedCues.get(item) || listeningCue(item?.text)
   const listeningHeading = optionalExactPosition(
@@ -1525,7 +1544,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const firstMarkerIndex = answerBody.findIndex((item) =>
     item.kind === 'paragraph' && LISTENING_TEXT_MARKER.test(normalized(item.text)))
-  const headingIndexes = answerBody.flatMap((item, index) =>
+  const headingIndexes = listeningSource?.heading >= 0 ? [listeningSource.heading] : answerBody.flatMap((item, index) =>
     index < firstMarkerIndex
       && item.kind === 'paragraph' && LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
       ? [index]
@@ -1571,11 +1590,11 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       : [])
   const terminalIndex = listeningEndIndexes.length === 1 ? listeningEndIndexes[0] : -1
   const analysisBeforeEnd = analysis >= 0 && (terminalIndex < 0 || analysis < terminalIndex)
-  const transcriptEnd = terminalIndex >= 0 && !analysisBeforeEnd
+  const transcriptEnd = listeningSource ? listeningSource.end : terminalIndex >= 0 && !analysisBeforeEnd
     ? terminalIndex + 1
     : analysis >= 0 ? analysis : answerBody.length
   const unresolvedAnalysisTail = new Set()
-  if (analysisTitle >= 0 && transcriptEnd === analysisTitle) {
+  if (!listeningSource && analysisTitle >= 0 && transcriptEnd === analysisTitle) {
     const speechIndexes = answerBody.flatMap((item, index) =>
       index > lastMarkerIndex && index < analysisTitle
         && !(item.kind === 'paragraph' && (!normalized(item.text) || cueFor(item)))
@@ -1617,6 +1636,9 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       for (let index = headingIndex + 1; index < markers[0].index; index += 1) {
         openingPreambleIndexes.push(index)
       }
+    } else if (listeningSource) {
+      for (let index = listeningSource.start; index < markers[0].index; index += 1) openingPreambleIndexes.push(index)
+      precedingBoundaryIndex = listeningSource.start - 1
     } else {
       while (cursor >= 0) {
         const item = answerBody[cursor]
@@ -1628,7 +1650,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       precedingBoundaryIndex = cursor
     }
   }
-  if (headingIndex < 0 && precedingBoundaryIndex >= 0
+  if (!listeningSource && headingIndex < 0 && precedingBoundaryIndex >= 0
     && !/^略[。. ]?$/u.test(normalized(answerBody[precedingBoundaryIndex]?.text))
     && !closesWritingSampleWordCount(answerBody, precedingBoundaryIndex, answerDocumentId)) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
@@ -1697,7 +1719,8 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
         'unsupported_mixed_source_item')
       return { record, text: null }
     }
-    const text = typeof item.text === 'string' ? trimEdgeSpaces(item.text) : ''
+    const text = typeof item.text === 'string'
+      ? item.listeningSourceRole?.role === 'speech' ? item.text : trimEdgeSpaces(item.text) : ''
     if (timingSourceIndexes.has(item.sourceIndex)) {
       const record = listeningItemRecord(item, index, answerDocumentId,
         'unresolved_source_timing', 'timing_requires_exact_agent_transcription')
@@ -1780,6 +1803,8 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
         if (inspected.text !== null) bodyTexts.push({
           text: inspected.text,
           page: sourceLocator(answerDocumentId, answerBody[index].sourceIndex).page ?? null,
+          ...(answerBody[index].listeningSourceFragment
+            ? { sourceFragment: answerBody[index].listeningSourceFragment } : {}),
         })
       }
       const questionNumbers = marker.number <= 5
@@ -1827,7 +1852,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const trailingItems = []
   const trailingEnd = analysis >= 0 ? analysis : answerBody.length
-  if (terminalIndex >= 0) {
+  if (!listeningSource && terminalIndex >= 0) {
     for (let index = terminalIndex + 1; index < trailingEnd; index += 1) {
       const item = answerBody[index]
       const isBlank = item?.kind === 'paragraph' && !normalized(item.text)
@@ -1866,6 +1891,10 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       : null,
     ...(terminalIndex < 0 && analysis < 0 ? { endBoundary: 'source_document_end' } : {}),
     trailingItems,
+    ...(listeningSource ? { authoredEndBoundary: transcriptEnd < answerBody.length
+      ? listeningItemRecord(answerBody[transcriptEnd], transcriptEnd, answerDocumentId,
+        'source_section_boundary', 'agent_reviewed_exclusive_transcript_end')
+      : 'source_document_end' } : {}),
   }
   return {
     materialization: {
@@ -2066,6 +2095,7 @@ export function produceNck1MaterializationFromStructures({
   sourceDigest,
   mediaInventory = [],
   mediaFiles = [],
+  listeningSource = null,
 }) {
   const body = questionStructure.body
   const answerBody = answerStructure.body
@@ -2209,6 +2239,7 @@ export function produceNck1MaterializationFromStructures({
         paperId, questionBody: body, readingStart, answerBody, answerMap,
         questionDocumentId: question.documentId, answerDocumentId: answer.documentId,
         coverageDocumentId: sourceCoverage.documentId, issues,
+        listeningSource,
       })
   const listening = listeningResult.materialization
   const materialization = {

@@ -9,6 +9,35 @@
 | `node --test scripts/import-pipeline/listening-cut-padding.test.mjs scripts/import-pipeline/listening-segment-pipeline.test.mjs scripts/import-pipeline/listening-owner-edge-rule.test.mjs scripts/import-pipeline/listening-boundary-safety.test.mjs` | 捕获默认剪到长静音中点而非词边 ±0.8 秒、短于 1.6 秒停顿吞入邻语音、录音首尾越界、跨引擎静音并集扩大缓冲、历史 attempt 被改写，以及装入 Owner 最终切点时二次加缓冲；合成数据只证明导航切点规则，不证明真实词级定位准确。 | focused/manual; existing listening rule/pipeline checks remain in daily packs |
 | `node --test scripts/import-pipeline/listening-owner-review-pack.test.mjs` | 合成音频证明逐遍精切不会重复整段，0.8 秒缓冲不跨相邻停顿中点，上下文从精切扩 3 秒且受整录音端点约束；捕获缺首尾/停顿、音频 SHA 改变、错误段/遍选择、经符号链接写回卷目录、输入被改写、中文页面首末句/绝对时钟遗漏，以及 manifest 缺规则/SHA 或误称 Owner 已审。需本机 ffmpeg/ffprobe；此检查不证明真实录音内容与原文一致。 | manual; not in daily packs |
 
+`listening-source.mjs plan/apply` 是显式、有界的听力来源作者入口。只选择
+答案 PDF 中的完整标题/起点/排他终点，以及 example / cue / speech 原件角色；
+混合 item 允许 UTF-16 slice，所有受影响 item 必须逐字完整覆盖。
+公共 resolver 先对 cue fragment 做 NFKC 校验视图，片段必须含中文；每个
+字母（`\p{L}`）只允许 Han 或孤立的原始 ASCII 大写 A–G 标签，标签两侧
+不得有非汉字字母（`\p{L}` 且不是 `\p{Script=Han}`）或数字（`\p{N}`）；
+汉字、中文标点、空白和片段边界允许相邻，并检查原 item
+的规范化邻字符与组合字符边界。数学字母、全角标签、西里尔/希腊同形字、
+变音字母及 M:/W: 均拒绝；规范化不能让兼容字符获得 ASCII 标签许可。
+原文、UTF-16 偏移和证据字节不变。
+与 speech 同 item 的 cue/example 排除范围遵循同一字符限制，按原 item 合并
+相邻片段检查：须位于 item 首尾，并以中文句末标点或 item 边界闭合为既有识别器
+可证明的完整中文报幕句。完整例题仍须在 Text 1 前闭合。
+`--request` 提供 `documentId`、`headingItemId`（可 null）、`startItemId`、
+`endItemId`（null 表示文档末尾）、`reason`、`roles`。每个 role 提供
+`role`、`nextTextNumber`、`questionNumbers`、`fragments`；fragment 提供
+`itemId` 和可选 `start/end`（省略表示完整 item）。
+两步均强制新的 `--output`，禁止写入源卷目录或其 OCR work 目录；
+apply 另需 `--plan`、`--agent-confirmed`。输出只是隔离作者产物，`publicReplay`
+如实记录 admission/compile 的独立阻塞，绝不是发布通过凭证。
+原写者安装前必须通过既有 redo 从 spelling 起失效下游，保留封存 OCR、
+原 producer receipt 与 materialization-edits；再重新执行完整公共流程。
+新决策仅在 Materialization v10 / authority v76 生效，旧 schema/authority 不接收新字段，
+无决策 producer 的输出保持原路径。已存在的段落合并应先于本入口完成。
+
+| New verifier | Distinct failure caught | CI |
+| --- | --- | --- |
+| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, short speech-tail loss, multiple short cues or split speaker prefixes, punctuation-only speech loss and incomplete mixed-item Chinese announcements. Public resolver/admission/compile reject whole-item mathematical speech, fullwidth labels, Cyrillic/Greek lookalikes, accented and compatibility letters through an NFKC letter whitelist; accept native ASCII labels next to Han, including `的A、B、C三` and `从A到G`; reject non-Han letter or number adjacency such as `aA`, `Аb`, `A1`, combining-sequence slice tricks and fragments without Chinese. Retains next Text/question/section checks, forged transcript/older-authority rejection and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
+
 图内字母只为 Reading 既有 A–D figure options 提供显式来源证明。先核读原 PDF，
 作者在 `selection.json` 明确填写 `groupId`、`questionId`、`parentMediaId`、
 `parentRegionId`、`parentSource`、`anchorItemId`、`labels`、`reason`。
