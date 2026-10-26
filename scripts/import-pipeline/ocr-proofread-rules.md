@@ -78,12 +78,16 @@
 Tesseract 底稿不带图形标记。校对员必须对照整页图自行补齐 `figure` 和 `figureRegion`
 （页面图片像素坐标 `{ "x": 100, "y": 200, "width": 600, "height": 300 }`），
 包括应用文题的海报、阅读里的流程图和图表。把图内对应的连续 items 标为同一 `figure` 名称，
-在首个图形 item 写 `figureRegion`；图前保留一个文字 item 作为锚点，图中文字仍须归属 OCR 词。
+在首个图形 item 写 `figureRegion`；图前保留真实存在的文字 item 作为锚点，图中文字仍须归属 OCR 词。
+题卷图片若就是本页首个内容对象，直接放在 `items` 首位；不补造同页文字，也不借上一页锚点。
+`compile` 以显式 `afterItemId: null` 表示本页起点，页首已确认的 furniture 不算正文。
+图前或图旁未解释的正文仍会阻塞；答案来源图片仍须同页前置文字锚点。
 
 若图形区域完全没有 OCR 词，在前一条普通文字 item 后插入纯图条目：
 `{ "figure": "espresso", "figureRegion": { "x": 720, "y": 730, "width": 370, "height": 220 }, "imageOnly": true, "reason": "图形及图注未识别出 OCR 词，按原页保留" }`。
 必须填写 `figureRegion` 和理由，不带 `lines`、`words`、`text`、`emphasis`，同名 figure 只能有这一条。
-区域只框图形及图注，不借用旁边正文的词；编译后图插在前一条普通文字 item 之后，正文与强调仍保留。
+题卷的纯图若是本页首个内容对象，同样直接放在 `items` 首位；范围与 OCR 词不重叠的检查保持。
+区域只框图形及图注，不借用旁边正文的词；编译后图按上述本页边界插入，正文与强调仍保留。
 区域内只要有 OCR 词（包括部分重叠）就不能用纯图条目，应改用上面的词归属 figure 写法。
 
 `compile --pages` 和整卷 `compile` 会检查正文指图线索；本页或紧邻下一页都没有

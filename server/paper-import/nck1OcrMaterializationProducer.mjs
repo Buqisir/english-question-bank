@@ -56,6 +56,14 @@ function closeIssueSource(item, document) {
 }
 
 export function nck1OcrProducerVersion(confirmation) {
+  if (confirmation?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
+    && Array.isArray(confirmation.documents)
+    && confirmation.documents.some(document => Array.isArray(document?.pages)
+      && document.pages.some(page => Array.isArray(page?.visualClassifications)
+        && page.visualClassifications.some(visual =>
+          visual?.classification === 'content_media' && visual.afterItemId === null)))) {
+    return 'nck1-ocr-materialization-producer-v29'
+  }
   return confirmation?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
     ? 'nck1-ocr-materialization-producer-v28' : NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION
 }

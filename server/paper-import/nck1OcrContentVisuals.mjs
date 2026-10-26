@@ -43,7 +43,16 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
   if (indexes.some((index, i) => i > 0 && index !== indexes[i - 1] + 1)) {
     reject('Content visual items must occupy one consecutive source-order range')
   }
-  if (image && (typeof visual.afterItemId !== 'string'
+  // v3's explicit null boundary is question-source-only. Missing/unknown
+  // string anchors never fall back to the beginning of this or another page.
+  const pageTop = image && visual.afterItemId === null
+  if (pageTop && (document.role !== 'question_source'
+    || (indexes.length && indexes[0] !== 0)
+    || page.visualClassifications.filter(value =>
+      value.classification === 'content_media' && value.afterItemId === null).length !== 1)) {
+    reject('A page-top image requires the unique question-source boundary before all page content')
+  }
+  if (image && !pageTop && (typeof visual.afterItemId !== 'string'
     || !items.has(visual.afterItemId) || ids.includes(visual.afterItemId)
     || (indexes.length && indexes[0] !== items.get(visual.afterItemId).index + 1))) {
     reject('An image must follow an exact surviving item immediately before its text range')
@@ -57,6 +66,11 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
   // The page validator already requires disjoint content/furniture claims.
   // A confirmed watermark remains in the source, but is not table-cell text.
   const furniture = new Set(page.furnitureObservationIds)
+  if (pageTop && page.observations.some(observation =>
+    !selected.has(observation.observationId) && !furniture.has(observation.observationId)
+    && observation.region.y < region.region.y + region.region.height - 0.000001)) {
+    reject('A page-top image cannot precede unexplained content above or beside its crop')
+  }
   if (page.observations.some(observation => contains(region.region, observation.region)
     && !selected.has(observation.observationId) && !furniture.has(observation.observationId))) {
     reject('Every text observation inside a content visual must be accounted for')
@@ -92,7 +106,7 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
           source: { ...source, region: anchorRegion } } } }
   }
   const mediaId = `media:${paperId}:${suffix}`
-  return { itemIds: ids, insertAt: items.get(visual.afterItemId).index + 1, item: {
+  return { itemIds: ids, insertAt: pageTop ? 0 : items.get(visual.afterItemId).index + 1, item: {
     kind: 'paragraph', text: '', containsDrawing: true, sourceIndex: source,
     materializedMedia: { mediaId },
   }, media: { mediaId, source }, visual: {
