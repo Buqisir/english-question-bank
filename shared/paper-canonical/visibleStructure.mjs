@@ -1,3 +1,4 @@
+import manifestV73 from '../../standards/paper-canonical/manifest-v73.json' with { type: 'json' }
 import manifestV71 from '../../standards/paper-canonical/manifest-v71.json' with { type: 'json' }
 import nck1V18 from '../../standards/paper-canonical/profiles/nck1-v18.json' with { type: 'json' }
 import zhejiangLegacyV15 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v15.json' with { type: 'json' }
@@ -339,6 +340,13 @@ const registeredManifestProfiles = new Map([
       { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
     ])),
   ],
+  [
+    `${manifestV73.manifestId}@${manifestV73.version}@${digestJson(manifestV73)}`,
+    new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV15].map((profile) => [
+      profile.profileId,
+      { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
+    ])),
+  ],
 ])
 
 function reject(message) {
@@ -459,7 +467,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(
@@ -472,7 +480,7 @@ function sourceInstructionOverrides(consumption) {
       if (occurrence.sourcePresentation !== undefined) {
         const presentation = occurrence.sourcePresentation
         const instruction = presentation?.instruction
-        if (!['62', '64', '66', '67', '68', '69', '71'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
+        if (!['62', '64', '66', '67', '68', '69', '71', '73'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
           || !validCanonicalSourcePresentation(presentation)
           || digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence)) {
           reject('source-backed presentation proof is invalid')

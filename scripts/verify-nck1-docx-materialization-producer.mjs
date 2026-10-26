@@ -51,6 +51,39 @@ const produced = produceNck1DocxMaterialization({
 })
 
 assert.equal(produced.disposition, 'ready_for_verification')
+const responseTitle = '<w:p><w:r><w:t xml:space="preserve">Should We Join the Reading Club?</w:t></w:r></w:p>'
+const materialParagraph = '<w:p><w:r><w:t>Animal clue one.</w:t></w:r></w:p>'
+const boxFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('Write a short notice')
+  ? xml.replace(responseTitle,
+    `${materialParagraph}<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="9000"/></w:tblGrid><w:tr><w:tc><w:tcPr/>${responseTitle}</w:tc></w:tr></w:tbl>`) : xml })
+const boxed = produceNck1DocxMaterialization({ paperId: boxFixture.paperId, documents: boxFixture.sourceDocuments })
+assert.equal(boxed.disposition, 'needs_agent_review')
+assert.equal(boxed.materialization.groups[7].writingTask.givenBlockRefs, undefined)
+// A material lead-in followed by a one-cell table is not a response boundary.
+// Keep the base producer's fail-closed outcome; only the Agent can declare refs.
+const activityFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('Write a short notice')
+  ? xml.replace(responseTitle,
+    '<w:p><w:r><w:t>Use the following club details in your notice.</w:t></w:r></w:p>'
+    + '<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="9000"/></w:tblGrid><w:tr><w:tc><w:tcPr/>'
+    + '<w:p><w:r><w:t>Time: Friday 4 pm; Place: School library</w:t></w:r></w:p>'
+    + '</w:tc></w:tr></w:tbl>') : xml })
+const activity = produceNck1DocxMaterialization({
+  paperId: activityFixture.paperId, documents: activityFixture.sourceDocuments,
+})
+assert.equal(activity.disposition, 'needs_agent_review')
+assert.equal(activity.materialization.schemaVersion, 'nck1-source-materialization-v1')
+assert(activity.review.required.some(issue => issue.code === 'NCK1_DOCX_WRITING_SKELETON_AMBIGUOUS'))
+assert.equal(activity.materialization.groups[7].writingTask.givenBlockRefs, undefined)
+const ambiguousFixture = makeSyntheticNck1DocxFixture({
+  transformXml: xml => xml.includes('Write a short notice')
+    ? xml.replace(responseTitle, `${materialParagraph}${responseTitle}`) : xml,
+})
+const ambiguous = produceNck1DocxMaterialization({
+  paperId: ambiguousFixture.paperId, documents: ambiguousFixture.sourceDocuments,
+})
+assert.equal(ambiguous.disposition, 'needs_agent_review')
+assert.equal(ambiguous.materialization.groups[7].writingTask.givenBlockRefs, undefined)
+console.log('PASS material plus terminal one-cell table and unboxed material retain base Agent review')
 // Zhenhai's source has a title abbreviation in the stem and a dotted subject name.
 // Neither Mrs. nor P. E. can steal the genuine A./B./C./D. option boundaries.
 for (const options of ['A. Math.  B. Drama.  C. Physics.  D. English.']) {

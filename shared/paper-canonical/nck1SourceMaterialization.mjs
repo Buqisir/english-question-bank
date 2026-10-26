@@ -27,6 +27,10 @@ export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5 =
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6 =
   'nck1-source-materialization-v6'
 
+// v7 adds explicit source-backed application givens; older envelopes stay closed.
+export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7 =
+  'nck1-source-materialization-v7'
+
 const slots = Object.freeze([
   ['reading.a', 'reading', 21, 23],
   ['reading.b', 'reading', 24, 27],
@@ -436,7 +440,7 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
   }
 }
 
-function validateWritingTask(task, family, path, documents, issues, allowDrawingArea = false) {
+function validateWritingTask(task, family, path, documents, issues, allowDrawingArea = false, allowGivenBlockRefs = false) {
   if (
     !isRecordValue(task)
     || !exactKeys(task, [
@@ -445,6 +449,7 @@ function validateWritingTask(task, family, path, documents, issues, allowDrawing
       'material',
       'starters',
       'givenSkeleton',
+      ...(allowGivenBlockRefs && Object.hasOwn(task, 'givenBlockRefs') ? ['givenBlockRefs'] : []),
       'wordCountTarget',
       'officialModelAnswer',
       'source',
@@ -468,6 +473,10 @@ function validateWritingTask(task, family, path, documents, issues, allowDrawing
   ) {
     issues.push(issue('MATERIALIZATION_WRITING_TASK_INVALID', path, 'Writing task must preserve its complete source prompt and response givens'))
     return
+  }
+  if (Object.hasOwn(task, 'givenBlockRefs') && (family !== 'application-writing'
+    || !Array.isArray(task.givenBlockRefs) || task.givenBlockRefs.some(ref => !nonEmptyString(ref)))) {
+    issues.push(issue('MATERIALIZATION_WRITING_GIVEN_REFS_INVALID', `${path}.givenBlockRefs`, 'Explicit givens require application-only ordered block ids'))
   }
   if (family === 'application-writing' && (task.material.length > 0 || task.starters.length > 0)) {
     issues.push(issue('MATERIALIZATION_APPLICATION_SHAPE_INVALID', path, 'Application Writing does not carry continuation material or starters'))
@@ -509,6 +518,35 @@ function writingParagraphs(blocks) {
         .map((item) => item.text)
         .join('')),
     }))
+}
+
+// Explicit references may select only one contiguous terminal response run.
+// Material before that run stays in the prompt, including figures. This shared
+// resolver never guesses from matching words scattered through source material.
+export function resolveWritingGivenBlocks(blocks, task, family) {
+  const paragraphs = writingParagraphs(blocks).filter(block => block.blockId !== task.drawingArea?.labelBlockRef)
+  const notices = writingNoticeGroups(paragraphs.map(paragraph => paragraph.text))
+  if (notices.length !== 1) return null
+  const end = notices[0].startIndex + notices[0].blockCount
+  if (!Object.hasOwn(task, 'givenBlockRefs')) {
+    return paragraphs.slice(end).map(paragraph => blocks.find(block => block.blockId === paragraph.blockId))
+  }
+  const refs = task.givenBlockRefs
+  if (family !== 'application-writing' || !Array.isArray(refs) || !Array.isArray(task.givenSkeleton)
+    || refs.length !== task.givenSkeleton.length || !refs.length || new Set(refs).size !== refs.length) return null
+  const selected = refs.map(ref => blocks.filter(block => block.blockId === ref))
+  if (selected.some(matches => matches.length !== 1)) return null
+  const result = selected.map(matches => matches[0])
+  const first = blocks.indexOf(result[0])
+  // Require exact raw text (no compatibility/whitespace normalization), and
+  // exclude labels, media, missing locators and anything before/inside 注意.
+  if (blocks.length - first !== result.length || result.some((block, index) =>
+    blocks[first + index] !== block || block.kind !== 'paragraph' || !block.source
+    || block.blockId === task.drawingArea?.labelBlockRef
+    || paragraphs.findIndex(paragraph => paragraph.blockId === block.blockId) < end
+    || !Array.isArray(block.content) || block.content.some(item => item.kind !== 'text')
+    || block.content.map(item => item.text).join('') !== task.givenSkeleton[index]?.text)) return null
+  return result
 }
 
 function matchingParagraphIndexes(paragraphs, text) {
@@ -587,13 +625,19 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
     }
   }
 
-  const sourceGivens = paragraphs.slice(notice.end + 1).map((paragraph) => paragraph.text)
+  const explicit = Object.hasOwn(task, 'givenBlockRefs')
+  const resolvedGivens = explicit ? resolveWritingGivenBlocks(blocks, task, family) : []
+  const sourceGivens = explicit
+    ? resolvedGivens?.map(block =>
+        normalizedWritingText(block.content.map(item => item.text).join(''))) || []
+    : paragraphs.slice(notice.end + 1).map(paragraph => paragraph.text)
   const declaredGivens = (family === 'continuation-writing'
     ? task.starters
     : task.givenSkeleton.map((item) => item.text))
     .map(normalizedWritingText)
   if (
-    sourceGivens.length !== declaredGivens.length
+    resolvedGivens === null
+    || sourceGivens.length !== declaredGivens.length
     || sourceGivens.some((text, index) => text !== declaredGivens[index])
   ) {
     issues.push(issue(
@@ -604,7 +648,7 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
   }
 }
 
-function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false) {
+function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false, allowGivenBlockRefs = false) {
   if (!Array.isArray(groups) || groups.length !== slots.length) {
     issues.push(issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'NCK1 requires exactly nine active groups'))
     return { questionIds: new Map(), ids: new Set() }
@@ -637,7 +681,7 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
       if (!Array.isArray(group.questions) || group.questions.length !== 0 || !Array.isArray(group.optionBank) || group.optionBank.length !== 0) {
         issues.push(issue('MATERIALIZATION_WRITING_QUESTIONS_FORBIDDEN', path, 'Writing groups have no Questions or option bank'))
       }
-      validateWritingTask(group.writingTask, expectedFamily, `${path}.writingTask`, documents, issues, allowDrawingArea)
+      validateWritingTask(group.writingTask, expectedFamily, `${path}.writingTask`, documents, issues, allowDrawingArea, allowGivenBlockRefs)
       validateWritingBlocks(group.blocks, group.writingTask, expectedFamily, path, issues)
       continue
     }
@@ -1122,7 +1166,7 @@ export function validateNck1SourceMaterialization(value) {
       'sourceCoverage',
       'listening',
       'issues',
-      ...([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion) ? ['sourcePresentation'] : []),
+      ...([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion) && (value.schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7 || Object.hasOwn(value, 'sourcePresentation')) ? ['sourcePresentation'] : []),
     ])
     || ![
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION,
@@ -1131,6 +1175,7 @@ export function validateNck1SourceMaterialization(value) {
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6,
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7,
     ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
     || value.profileId !== 'nck1'
@@ -1169,7 +1214,8 @@ export function validateNck1SourceMaterialization(value) {
       documents.set(document.documentId, document)
     }
   }
-  if ([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion)) {
+  if ([NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion)
+    && (value.schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7 || Object.hasOwn(value, 'sourcePresentation'))) {
     const presentation = value.sourcePresentation
     const required = Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slot =>
       !slot.startsWith('listening.') || value.listening?.state !== 'not_supplied')
@@ -1200,9 +1246,10 @@ export function validateNck1SourceMaterialization(value) {
   }
   const mediaReferences = []
   const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues,
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion),
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion),
-    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6)
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion),
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion),
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion),
+    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7)
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {
@@ -1227,7 +1274,7 @@ export function validateNck1SourceMaterialization(value) {
     }
   }
   const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues,
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6].includes(value.schemaVersion))
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7].includes(value.schemaVersion))
   validateListening(value.listening, documents, sourceCoverage, issues)
   return issues
 }

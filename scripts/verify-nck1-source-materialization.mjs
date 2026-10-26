@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { pathToFileURL } from 'node:url'
+import { confirmMaterializationWritingGivens } from './import-pipeline/materialization-writing-givens.mjs'
 
 import {
   digestNck1SourceMaterialization,
@@ -558,5 +559,93 @@ drawingGroup.writingTask.drawingArea = { placement: 'top_right', labelBlockRef: 
 assert.deepEqual(validateNck1SourceMaterialization(drawing), [])
 drawing.schemaVersion = 'nck1-source-materialization-v4'
 assert(validateNck1SourceMaterialization(drawing).length, 'v4 must reject the drawing extension')
+
+// Application source material may follow 注意 before one terminal response run.
+const explicit = structuredClone(plain)
+explicit.schemaVersion = 'nck1-source-materialization-v7'
+const application = explicit.groups[7]
+const given = application.blocks.at(-1)
+const closing = { ...structuredClone(given), blockId: 'given:closing',
+  content: [{ kind: 'text', text: 'Yours,' }] }
+application.blocks.push(closing)
+application.writingTask.givenSkeleton.push({ role: 'closing', text: 'Yours,' })
+application.blocks.splice(application.blocks.indexOf(given), 0,
+  ...Array.from({ length: 17 }, (_, index) => ({
+    ...structuredClone(given), blockId: `material:${index}`,
+    content: [{ kind: 'text', text: `Animal clue ${index + 1}` }],
+  })))
+application.writingTask.givenBlockRefs = [given.blockId, closing.blockId]
+assert.deepEqual(validateNck1SourceMaterialization(explicit), [])
+const invalidGivenRefs = [
+  ['duplicate', group => { group.writingTask.givenBlockRefs[1] = given.blockId }],
+  ['reversed', group => { group.writingTask.givenBlockRefs.reverse() }],
+  ['before notice', group => { group.writingTask.givenBlockRefs[0] = group.blocks[0].blockId }],
+  ['different text', group => { group.writingTask.givenSkeleton[0].text += ' ' }],
+  ['material', group => { group.writingTask.givenBlockRefs[0] = 'material:0' }],
+  ['count mismatch', group => { group.writingTask.givenBlockRefs.pop() }],
+  ['scattered matching words', group => {
+    group.blocks.find(block => block.blockId === 'material:0').content = structuredClone(given.content)
+    group.writingTask.givenBlockRefs[0] = 'material:0'
+  }],
+]
+for (const [name, mutate] of invalidGivenRefs) {
+  const invalid = structuredClone(explicit)
+  mutate(invalid.groups[7])
+  assert(validateNck1SourceMaterialization(invalid).some(item =>
+    item.code === 'MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID'), name)
+}
+for (const version of [1, 2, 3, 4, 5, 6]) {
+  const legacy = structuredClone(explicit)
+  legacy.schemaVersion = `nck1-source-materialization-v${version}`
+  if (version >= 4) legacy.sourcePresentation = structuredClone(drawing.sourcePresentation)
+  assert(validateNck1SourceMaterialization(legacy).some(item =>
+    item.code === 'MATERIALIZATION_WRITING_TASK_INVALID'), `v${version} remains closed`)
+}
+const { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } =
+  await import('../shared/paper-canonical/compiler.mjs')
+const { sha256 } = await import('../shared/paper-canonical/stable.mjs')
+const { deriveNck1MaterializationBundle } = await import('../server/paper-canonical/nck1MaterializationAdapter.mjs')
+const { nck1ReadingStemFiguresAuthorityRef } = await import('../shared/paper-canonical/authority.mjs')
+const documents = explicit.documents.map(document => {
+  const bytes = new TextEncoder().encode(`%PDF-1.7 synthetic ${document.documentId}`.padEnd(100, 'x'))
+  document.sha256 = sha256(bytes)
+  return { documentId: document.documentId, bytes }
+})
+const input = { kind: 'nck1-source-materialization', documents, media: [],
+  materializationBytes: new TextEncoder().encode(JSON.stringify(explicit)) }
+for (const [name, mutate] of invalidGivenRefs) {
+  const invalid = structuredClone(explicit)
+  mutate(invalid.groups[7])
+  assert(importCanonicalCandidate({ ...input,
+    materializationBytes: new TextEncoder().encode(JSON.stringify(invalid)),
+  }).issues.some(item => item.code === 'MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID'),
+  `${name}: real adapter must reject before compilation`)
+}
+const undeclaredBoundary = structuredClone(explicit)
+delete undeclaredBoundary.groups[7].writingTask.givenBlockRefs
+assert(validateNck1SourceMaterialization(undeclaredBoundary).some(item =>
+  item.code === 'MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID'),
+'even v7 without explicit refs retains the strict whole-suffix rule')
+const authorInput = structuredClone(undeclaredBoundary)
+authorInput.schemaVersion = 'nck1-source-materialization-v1'
+const authorBefore = structuredClone(authorInput)
+const declaration = { confirmed: true, groupId: application.groupId,
+  givenBlockRefs: application.writingTask.givenBlockRefs }
+assert.throws(() => confirmMaterializationWritingGivens(authorInput, {
+  ...declaration, confirmed: false,
+}), /explicit Agent confirmation/u)
+assert.throws(() => confirmMaterializationWritingGivens(authorInput, {
+  ...declaration, givenBlockRefs: ['material:0', closing.blockId],
+}), /MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID/u)
+assert.deepEqual(confirmMaterializationWritingGivens(authorInput, declaration), explicit)
+assert.deepEqual(authorInput, authorBefore, 'author entry never mutates its source or producer evidence')
+assert.deepEqual(confirmMaterializationWritingGivens(explicit, declaration), explicit, 'author entry is idempotent')
+assert(deriveNck1MaterializationBundle(input, nck1ReadingStemFiguresAuthorityRef).issues.some(item =>
+  item.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'), 'old authority cannot admit v7')
+const imported = importCanonicalCandidate(input)
+assert.deepEqual(imported.issues, [])
+const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+console.log('PASS explicit writing givens: source-run boundaries, old closed versions, authority isolation and real Canonical compile')
 console.log('verify-nck1-source-materialization: PASS')
 }

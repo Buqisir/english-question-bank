@@ -97,7 +97,7 @@ test('existing presentation keeps manual fields, fills missing sections and is i
   assert.deepEqual(restoreOcrSourcePresentation({ ...input, materialization: result }), result)
 })
 
-for (const version of [5, 6]) {
+for (const version of [5, 6, 7]) {
   function currentPresentationFixture() {
     const input = fixture()
     input.materialization = restoreOcrSourcePresentation(input)
@@ -107,12 +107,13 @@ for (const version of [5, 6]) {
       groupId: 'writing', family: 'application-writing',
       writingTask: { drawingArea: { placement: 'top_right', labelBlockRef: 'drawing-label', source } },
     }]
-    if (version === 6) input.materialization.groups.push({
+    if (version >= 6) input.materialization.groups.push({
       groupId: 'reading', family: 'reading',
       questions: [{ questionId: 'q21', stemFigures: [{
         kind: 'figure', blockId: 'stem-map', mediaId: 'map', caption: '', source,
       }] }],
     })
+    if (version === 7) input.materialization.groups[0].writingTask.givenBlockRefs = ['given-1', 'given-2']
     return input
   }
 
@@ -137,6 +138,17 @@ for (const version of [5, 6]) {
     assert.equal(result.outputState, 'producer_output_unchanged')
     assert.deepEqual(readFileSync(job.file('nck1-ocr-materialization-producer-receipt-v1.json')), receipt)
   })
+
+  test(`v${version} missing presentation recovery preserves all group fields`, () => {
+    const input = currentPresentationFixture()
+    const complete = structuredClone(input.materialization)
+    input.materialization.sourcePresentation.instructions.shift()
+    const result = restoreOcrSourcePresentation(input)
+    assert.deepEqual(result.groups, complete.groups)
+    assert.equal(result.schemaVersion, complete.schemaVersion)
+    assert.equal(result.sourcePresentation.instructions.length, 6)
+    assert.deepEqual(restoreOcrSourcePresentation({ ...input, materialization: result }), result)
+  })
 }
 
 test('v2/v3 presentation recovery upgrades only legacy schemas to v4', () => {
@@ -149,7 +161,7 @@ test('v2/v3 presentation recovery upgrades only legacy schemas to v4', () => {
 
 test('presentation recovery rejects unknown schemas without rewriting the input', () => {
   const input = fixture()
-  input.materialization.schemaVersion = 'nck1-source-materialization-v7'
+  input.materialization.schemaVersion = 'nck1-source-materialization-v99'
   const before = structuredClone(input)
   assert.throws(() => restoreOcrSourcePresentation(input), /Unsupported materialization schema/u)
   assert.deepEqual(input, before)
