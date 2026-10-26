@@ -3,7 +3,7 @@ import { test } from 'node:test'
 import { buildSourceReferences } from './ocr-proofread.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
-import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
@@ -272,7 +272,30 @@ for (const label of ['【范文四】', '[Possible Version 2]', '【范文十二
   })
 }
 
-test('historical unversioned sidecar keeps v17 scoring figure admission under new code', () => {
+test('first admission rejects missing, legacy and unknown producer versions before sealing', () => {
+  const input = scoringFiguresFixture()
+  const sidecar = captureScoringReferences(input)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+    'ocr-source-references-producer-v19', null]) {
+    const changed = structuredClone(sidecar)
+    if (version === undefined) delete changed.producerVersion
+    else changed.producerVersion = version
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed,
+      producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+      sealedDigest: sha256(Buffer.from(JSON.stringify(changed))), legacy: true }),
+    { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' }, String(version))
+  }
+  for (const schemaVersion of ['source-references-v1', 'source-references-v2', 'source-references-v3',
+    'source-references-v4', 'source-references-v5']) {
+    const changed = { ...sidecar, schemaVersion }
+    delete changed.producerVersion
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed }),
+      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' }, schemaVersion)
+  }
+})
+
+test('sealed v17 replay requires the exact receipt digest and source identity', () => {
   const input = scoringFiguresFixture()
   for (const document of input.confirmation.documents) for (const page of document.pages) {
     const item = page.orderedItems.find(item => item.text === '3. Additional source criterion.')
@@ -285,11 +308,37 @@ test('historical unversioned sidecar keeps v17 scoring figure admission under ne
   reseal(input)
   const historical = captureScoringReferences(input, { producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
   assert.equal(Object.hasOwn(historical, 'producerVersion'), false)
-  assert.equal(sourceReferenceProducerVersion(historical), LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  assert.throws(() => sourceReferenceProducerVersion(historical), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   assert.equal(historical.groups.flatMap(g => g.scoring.entries.flatMap(e => e.blocks)).filter(b => b.kind === 'figure').length, 3)
   const original = structuredClone(historical)
-  assertSourceReferenceAdmission({ ...input, sidecar: historical })
-  assertSourceReferenceAdmission({ ...input, sidecar: { ...historical, producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } })
+  const sourceReferencesBytes = Buffer.from(JSON.stringify(historical))
+  // A pre-existing receipt is kept fixed while replay bytes are varied.
+  const receipt = Object.freeze({ revisionId: 'sealed-v17-revision', bundleDigest: sha256('sealed-v17-bundle'),
+    paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+    sourceReferencesDigest: sha256(sourceReferencesBytes) })
+  const replay = { ...input, sourceReferencesBytes, receipt }
+  assertSealedSourceReferenceReplay(replay)
+  const explicitV17Bytes = Buffer.from(JSON.stringify({ ...historical, producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION }))
+  assertSealedSourceReferenceReplay({ ...replay, sourceReferencesBytes: explicitV17Bytes,
+    receipt: { ...receipt, sourceReferencesDigest: sha256(explicitV17Bytes) } })
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: historical, receipt }),
+    { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  for (const bytes of [
+    Buffer.concat([sourceReferencesBytes, Buffer.from('\n')]),
+    Buffer.from(JSON.stringify({ ...historical, producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })),
+    Buffer.from(JSON.stringify({ ...historical, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION })),
+  ]) assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, sourceReferencesBytes: bytes }),
+    { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  for (const key of ['paperId', 'sourceDigest', 'candidateDigest', 'sourceReferencesDigest']) {
+    assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, receipt: { ...receipt, [key]: sha256('changed') } }),
+      { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  }
+  assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, receipt: undefined }),
+    { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  const changedBinding = structuredClone(input.materialization)
+  changedBinding.paperName = 'Changed source binding'
+  assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, materialization: changedBinding }),
+    { code: 'SOURCE_REFERENCES_BINDING_STALE' })
   assert.deepEqual(historical, original)
   // The same ranges cannot claim v18 semantics; no external override can
   // reinterpret a bound sidecar as the caller's preferred version.
@@ -306,7 +355,8 @@ test('historical unversioned sidecar keeps v17 scoring figure admission under ne
 test('source-reference semantic discriminator is explicit and rejects unknown versions', () => {
   for (const schemaVersion of ['source-references-v1', 'source-references-v2', 'source-references-v3',
     'source-references-v4', 'source-references-v5']) {
-    assert.equal(sourceReferenceProducerVersion({ schemaVersion }), LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    assert.throws(() => sourceReferenceProducerVersion({ schemaVersion }),
+      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }

@@ -10,13 +10,13 @@ export function assertSourceReferenceProducerVersion(version) {
   return version
 }
 
-// Original v1–v5 envelopes have no producerVersion: this historical shape
-// permanently selects v17. New captures persist an explicit version within
-// the existing whole-sidecar byte/digest binding. Cache state, file dates,
-// current producer code and caller overrides never select sidecar semantics.
+// First admission is never a historical replay. Missing/self-declared legacy
+// versions cannot authorize the old ownership rules before a seal exists.
 export function sourceReferenceProducerVersion(sidecar) {
   if (!sidecar) return OCR_SOURCE_REFERENCES_PRODUCER_VERSION
-  if (Object.hasOwn(sidecar, 'producerVersion')) return assertSourceReferenceProducerVersion(sidecar.producerVersion)
-  if (/^source-references-v[1-5]$/u.test(sidecar.schemaVersion)) return LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
-  return assertSourceReferenceProducerVersion(undefined)
+  if (!Object.hasOwn(sidecar, 'producerVersion') || sidecar.producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION) {
+    throw Object.assign(new Error('First source-reference admission requires the current producer version'),
+      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  }
+  return sidecar.producerVersion
 }

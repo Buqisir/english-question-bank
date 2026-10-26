@@ -6,7 +6,6 @@
   "required": ["schemaVersion", "paperId", "sourceDigest", "candidateDigest", "materializationDigest", "groups"],
   "properties": {
     "schemaVersion": { "const": "source-references-v2" },
-    "producerVersion": { "$ref": "source-references-v1#/properties/producerVersion" },
     "paperId": { "$ref": "source-references-v1#/properties/paperId" },
     "sourceDigest": { "$ref": "source-references-v1#/$defs/digest" },
     "candidateDigest": { "$ref": "source-references-v1#/$defs/digest" },

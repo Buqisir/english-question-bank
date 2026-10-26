@@ -1,13 +1,13 @@
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from './sourceReferenceScoringScope.mjs'
 import { sourceReferenceExplanationFigures } from './sourceReferenceFigureExclusions.mjs'
-import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
-  SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
+  SOURCE_REFERENCE_REGION_TOLERANCE, parseSourceReferencesBytes } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
-import { sourceReferenceProducerVersion } from './sourceReferenceSemantics.mjs'
+import { sourceReferenceProducerVersion, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './sourceReferenceSemantics.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -78,12 +78,37 @@ function survivingConfirmedText(confirmation, evidence, referenceFigures) {
 // Acceptance/finalize boundary. This always uses exact input bytes, and has no
 // bypass flag. Published consumers use the separate integrity validator and
 // SQLite's approved sidecar-byte commitment; they never recrop during export.
-export function assertSourceReferenceAdmission({
+export function assertSourceReferenceAdmission(input) {
+  return assertSourceReferenceContent(input, sourceReferenceProducerVersion(input.sidecar))
+}
+
+// Replay only: receipt must come from an already persisted/validated revision,
+// never from a new draft, request options or a digest computed at first finalize.
+// Parse the exact committed bytes here; do not accept a separately supplied
+// sidecar object whose semantics could disagree with the verified byte stream.
+export function assertSealedSourceReferenceReplay({ sourceReferencesBytes, receipt, ...input }) {
+  const bytes = sourceReferencesBytes instanceof Uint8Array ? Buffer.from(sourceReferencesBytes) : null
+  if (!bytes || !receipt?.revisionId || !/^sha256:[a-f0-9]{64}$/u.test(receipt.bundleDigest || '')
+    || !/^sha256:[a-f0-9]{64}$/u.test(receipt.sourceReferencesDigest || '')
+    || sha256(bytes) !== receipt.sourceReferencesDigest
+    || receipt.paperId !== input.materialization.paperId
+    || receipt.sourceDigest !== input.sourceDigest || receipt.candidateDigest !== input.candidateDigest) {
+    throw Object.assign(new Error('Historical references differ from the trusted sealed revision receipt'),
+      { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  }
+  const sidecar = parseSourceReferencesBytes(bytes)
+  const legacy = (!Object.hasOwn(sidecar, 'producerVersion')
+    || sidecar.producerVersion === LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    && /^source-references-v[1-5]$/u.test(sidecar.schemaVersion)
+  const producerVersion = legacy ? LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION : sourceReferenceProducerVersion(sidecar)
+  return assertSourceReferenceContent({ ...input, sidecar }, producerVersion)
+}
+
+function assertSourceReferenceContent({
   sidecar, materialization, sourceDigest, candidateDigest, sourceInput,
-}) {
+}, producerVersion) {
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
-  const producerVersion = sourceReferenceProducerVersion(sidecar)
   const figures = sourceReferenceFigures(sidecar)
   const continued = sidecar?.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
     group[kind].entries.flatMap(entry => sourceReferenceBlocks(entry)

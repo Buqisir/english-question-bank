@@ -7,7 +7,7 @@ import { prepareSourceReferences } from '../../../server/paper-import/sourceRefe
 
 // Invented OCR text on deterministic blank PDFs: tests evidence plumbing and
 // exact crop replay, not OCR accuracy. Real page/figure quality is separate QA.
-export function sourceReferenceFiguresFixture(materialization = makeFixture({ listening: false }), { scoringTable = false } = {}) {
+export function sourceReferenceFiguresFixture(materialization = makeFixture({ listening: false }), { scoringTable = false, currentCapture = false } = {}) {
   const documents = materialization.documents.map(document => {
     const bytes = productPdfBytes(1, `Synthetic ${document.documentId}`)
     Object.assign(document, { sha256: sha256(bytes), byteLength: bytes.length, pageCount: 1 })
@@ -72,9 +72,9 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
   const binding = { materialization, sourceInput, sourceDocuments: documents,
     sourceDigest: sha256('synthetic-source'), candidateDigest: sha256('synthetic-candidate') }
   const sourceReferences = prepareSourceReferences(binding)
-  // This fixture is the frozen historical envelope, before producerVersion was
-  // persisted. Keep its original bytes/HTML; do not relabel it as a new capture.
-  delete sourceReferences.producerVersion
+  // Default remains the frozen historical envelope with its original SHA/HTML.
+  // First-admission tests must explicitly request a current capture.
+  if (!currentCapture) delete sourceReferences.producerVersion
   sourceReferences.schemaVersion = 'source-references-v3'
   const source = region => ({ documentSha256: answer.sha256, locator: {
     kind: 'page_region', documentId: answer.documentId, page: 1, region,

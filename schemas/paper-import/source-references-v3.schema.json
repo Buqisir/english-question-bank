@@ -12,7 +12,6 @@
     "groups"
   ],
   "properties": {
-    "producerVersion": { "$ref": "source-references-v1#/properties/producerVersion" },
     "schemaVersion": {
       "const": "source-references-v3"
     },

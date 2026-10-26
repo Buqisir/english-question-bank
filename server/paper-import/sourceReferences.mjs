@@ -24,12 +24,24 @@ export const scoringFigureSourceReferencesSchema = JSON.parse(readFileSync(
 export const exclusionSourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-v5.schema.json', import.meta.url), 'utf8',
 ))
+export const currentSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-capture-v18.schema.json', import.meta.url), 'utf8',
+))
 const ajv = new Ajv({ allErrors: true, strict: false })
 const validateV1 = ajv.compile(sourceReferencesSchema)
 const validateV2 = ajv.compile(structuredSourceReferencesSchema)
 const validateV3 = ajv.compile(figureSourceReferencesSchema)
 const validateV4 = ajv.compile(scoringFigureSourceReferencesSchema)
 const validateV5 = ajv.compile(exclusionSourceReferencesSchema)
+const validateCurrent = ajv.compile(currentSourceReferencesSchema)
+// Integrity-only recognition of explicit v17 metadata on already sealed bytes.
+// This never selects semantics: first admission separately requires v18, and
+// legacy replay separately proves the persisted whole-sidecar commitment.
+const validateDeclaredLegacy = ajv.compile({ ...currentSourceReferencesSchema,
+  $id: 'source-references-sealed-v17',
+  properties: { ...currentSourceReferencesSchema.properties,
+    producerVersion: { const: 'ocr-source-references-producer-v17' } },
+})
 
 export function parseSourceReferencesBytes(bytes) {
   const buffer = Buffer.from(bytes)
@@ -77,7 +89,9 @@ export function prepareSourceReferences({ materialization, sourceDigest, candida
 export function validateSourceReferences({
   sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null, sourceInput = null,
 }) {
-  const validateSchema = sidecar?.schemaVersion === 'source-references-v5' ? validateV5
+  const validateSchema = sidecar && Object.hasOwn(sidecar, 'producerVersion')
+    ? sidecar.producerVersion === 'ocr-source-references-producer-v17' ? validateDeclaredLegacy : validateCurrent
+    : sidecar?.schemaVersion === 'source-references-v5' ? validateV5
     : sidecar?.schemaVersion === 'source-references-v4' ? validateV4
     : sidecar?.schemaVersion === 'source-references-v3' ? validateV3
     : sidecar?.schemaVersion === 'source-references-v2' ? validateV2 : validateV1

@@ -6,7 +6,6 @@
   "required": ["schemaVersion", "paperId", "sourceDigest", "candidateDigest", "materializationDigest", "groups"],
   "properties": {
     "schemaVersion": { "const": "source-references-v1" },
-    "producerVersion": { "enum": ["ocr-source-references-producer-v17", "ocr-source-references-producer-v18"] },
     "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
     "sourceDigest": { "$ref": "#/$defs/digest" },
     "candidateDigest": { "$ref": "#/$defs/digest" },

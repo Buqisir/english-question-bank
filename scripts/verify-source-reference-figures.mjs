@@ -24,7 +24,7 @@ for (const group of sidecar.groups) for (const kind of ['essays', 'scoring']) {
 assert.deepEqual(validateSourceReferences({ ...binding, sidecar }), [], 'v3 supports the unchanged no-figure shape')
 console.log('PASS v3 supports the unchanged no-figure shape')
 
-const input = sourceReferenceFiguresFixture()
+const input = sourceReferenceFiguresFixture(undefined, { currentCapture: true })
 const entry = value => value.groups[0].essays.entries[0]
 const figure = value => entry(value).figures[0]
 const validate = value => validateSourceReferences({ ...input, sidecar: value })
@@ -39,7 +39,7 @@ entry(imageProse).paragraphs.push({ ...entry(imageProse).paragraphs[0],
   } } })
 assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: imageProse }),
   { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' }, 'selected image observations must never reappear as prose')
-const withTable = sourceReferenceFiguresFixture(undefined, { scoringTable: true })
+const withTable = sourceReferenceFiguresFixture(undefined, { scoringTable: true, currentCapture: true })
 assert.deepEqual(validateSourceReferences({ ...withTable, sidecar: withTable.sourceReferences }), [])
 const tableResolved = resolveConfirmedNck1OcrEvidence({ paperId: withTable.materialization.paperId,
   documents: withTable.sourceDocuments, evidence: withTable.evidence, confirmation: withTable.confirmation })

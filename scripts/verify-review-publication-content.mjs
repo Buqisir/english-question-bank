@@ -86,7 +86,8 @@ try {
   if (process.argv.includes('--v3-figures') || scoringFigures) {
     const sourceManifest = readJson(path.join(source, 'universal-source-manifest.json'))
     const materialization = readJson(path.join(source, sourceManifest.materializationPath))
-    const fixture = scoringFigures ? scoringFiguresFixture({ materialization }) : sourceReferenceFiguresFixture(materialization)
+    const fixture = scoringFigures ? scoringFiguresFixture({ materialization })
+      : sourceReferenceFiguresFixture(materialization, { currentCapture: true })
     if (scoringFigures) fixture.sourceReferences = captureScoringReferences(fixture)
     sourceManifest.documents = sourceManifest.documents.map(document => ({
       ...document, ...fixture.materialization.documents.find(item => item.documentId === document.documentId),
@@ -165,6 +166,33 @@ try {
     candidateDigest: projection.candidateDigest, visibleStructureDigest: projection.visibleStructureDigest,
     analysisDigest: projection.analysisDigest, producerBuildId: 'fixture', files }
   manifest.bundleDigest = reviewBundleDigest(manifest)
+  // Recompute every uploaded digest, as an attacker can on first admission.
+  // A newly valid bundle is not evidence that v17 references were ever sealed.
+  const firstAdmission = createImportReviewStore({
+    dbPath: path.join(root, 'first-admission.sqlite'), filesRoot: path.join(root, 'first-admission-files'),
+    rendererBuildId: 'first-admission-regression',
+  })
+  await firstAdmission.ready()
+  for (const producerVersion of [undefined, 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v19', null]) {
+    const changed = structuredClone(references)
+    if (producerVersion === undefined) delete changed.producerVersion
+    else changed.producerVersion = producerVersion
+    const bytes = Buffer.from(JSON.stringify(changed))
+    const changedFiles = files.map(file => file.path === SOURCE_REFERENCES_FILE
+      ? { ...file, sha256: sha256(bytes), byteLength: bytes.length } : file)
+    const changedManifest = { ...manifest, files: changedFiles }
+    changedManifest.bundleDigest = reviewBundleDigest(changedManifest)
+    const draft = firstAdmission.createRevision(changedManifest).revision
+    for (const file of changedFiles) {
+      const { destination } = firstAdmission.fileForUpload(draft.id, file.path)
+      mkdirSync(path.dirname(destination), { recursive: true })
+      writeFileSync(destination, file.path === SOURCE_REFERENCES_FILE ? bytes : readFileSync(path.join(source, file.path)))
+      firstAdmission.completeFileUpload(draft.id, file.path, file)
+    }
+    assert.throws(() => firstAdmission.finalizeRevision(draft.id), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+    assert.equal(firstAdmission.getRevision(draft.id).finalizedAt, null)
+  }
+  pass('first finalize rejects missing, v17, unknown and null producer versions before any seal, even with recomputed bundle digests')
   const reviewDb = path.join(root, 'review.sqlite')
   const store = createImportReviewStore({ dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
     rendererBuildId: 'publication-fixture-renderer' })

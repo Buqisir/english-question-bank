@@ -30,7 +30,7 @@ import { readPublishedProducts } from '../paper-import/frozenProducts.mjs'
 import { archiveReviewFiles, configuredBlobStore } from '../paper-import/blobStore.mjs'
 import {
   buildNck1CompatibilityPackage,
-  buildNck1ReviewProjection,
+  buildNck1SealedReviewProjection,
 } from './revisionProjection.mjs'
 
 function promotionError(code, message, status = 409) {
@@ -250,7 +250,7 @@ function failureFromResult(result) {
 // End the complete projection/materialization activation before archiving or
 // entering publisher. Only the second (or non-archiving) pass owns write inputs.
 function preparePromotionContent({ store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage }) {
-  const projection = buildNck1ReviewProjection(reviewRootDir, {
+  const projection = buildNck1SealedReviewProjection(reviewRootDir, revision, {
     requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
   })
   const materialized = materializeNck1CanonicalRequest(projection.sourceInput, {

@@ -10,7 +10,7 @@ import {
   NCK1_STAGED_ANALYSIS_FILES,
 } from '../import-review/nck1AnalysisProjection.mjs'
 import {
-  buildNck1ReviewProjection,
+  buildNck1SealedReviewProjection,
   loadNck1ReviewSource,
   resolveReviewFile,
 } from '../import-review/revisionProjection.mjs'
@@ -70,8 +70,10 @@ function assertSealedRevision({ dbPath, filesRoot, revisionId, expectedPaperId }
       fail(descriptor.path, 'Sealed revision file changed', 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH')
     }
   }
-  const projection = buildNck1ReviewProjection(rootDir, { requireAnalyses: true })
   const manifest = JSON.parse(row.manifest_json)
+  const projection = buildNck1SealedReviewProjection(rootDir, { id: row.id, state: row.state,
+    paperId: row.paper_id, sourceDigest: row.source_digest, candidateDigest: row.candidate_digest,
+    bundleDigest: row.bundle_digest, manifest }, { requireAnalyses: true })
   for (const [actual, expected, label] of [
     [projection.sourceDigest, row.source_digest, 'sourceDigest'],
     [projection.candidateDigest, row.candidate_digest, 'candidateDigest'],
