@@ -37,6 +37,9 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 
 const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
+export const NCK1_MATERIALIZATION_BINDING_MISMATCH = 'NCK1_MATERIALIZATION_BINDING_MISMATCH'
+export const NCK1_MATERIALIZATION_BINDING_MISMATCH_MESSAGE =
+  'Existing materialization artifacts are not bound to this source and producer; refusing to overwrite them'
 
 const DOCX_PRODUCER = Object.freeze({
   version: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
@@ -401,7 +404,9 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     }
   }
   if (existsSync(outputPath) || existsSync(reviewPath) || existsSync(receiptPath)) {
-    throw new Error('Existing materialization artifacts are not bound to this source and producer; refusing to overwrite them')
+    const error = new Error(NCK1_MATERIALIZATION_BINDING_MISMATCH_MESSAGE)
+    error.code = NCK1_MATERIALIZATION_BINDING_MISMATCH
+    throw error
   }
   const produced = producer.produce({
     paperId: manifest.paperId,
