@@ -41,6 +41,8 @@ import {
 import {
   makeSyntheticNck1DocxFixture,
 } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
+import { retireRecoveredSourceBlock } from './import-pipeline/recovered-source-block.mjs'
+import { NCK1_MATERIALIZATION_BINDING_MISMATCH_MESSAGE } from './import-pipeline/nck1-docx-materialize.mjs'
 
 const fixture = makeSyntheticNck1DocxFixture()
 const produced = produceNck1DocxMaterialization({
@@ -799,6 +801,13 @@ try {
   const previousBytes = previousPaths.map(file => readFileSync(file))
   assert.equal(inspectNck1Materialization({ paperDir: tempRoot, manifest: fixture.manifest }).producerState,
     'historical', 'pre-fix output remains inspectable but cannot masquerade as the new parser')
+  mkdirSync(path.join(tempRoot, 'signals'), { recursive: true })
+  writeFileSync(path.join(tempRoot, 'universal-source-manifest.json'), JSON.stringify(fixture.manifest))
+  const blockedPath = path.join(tempRoot, 'signals/blocked.json')
+  const blockerBytes = Buffer.from(JSON.stringify({ code: 'source_incomplete', note: NCK1_MATERIALIZATION_BINDING_MISMATCH_MESSAGE }))
+  writeFileSync(blockedPath, blockerBytes)
+  retireRecoveredSourceBlock(tempRoot)
+  assert.deepEqual(readFileSync(blockedPath), blockerBytes, 'a valid historical receipt cannot retire a current-producer blocker')
   assert.throws(() => runNck1DocxMaterializationJob({ paperDir: tempRoot, manifest: fixture.manifest }), /refusing to overwrite/u)
   previousPaths.forEach((file, index) => assert.deepEqual(readFileSync(file), previousBytes[index]))
   const historicalVersion = 'nck1-docx-materialization-producer-v9'
@@ -862,3 +871,5 @@ try {
 }
 
 console.log('verify-nck1-docx-materialization-producer: PASS')
+// Keep recovery coverage in the existing producer verification lane.
+await import('./verify-recovered-materialization-block.mjs')

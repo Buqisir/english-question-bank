@@ -68,6 +68,7 @@ import {
 } from './listening-audio.mjs'
 import { buildNck1ReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { TEXT_REVIEW_POLICY } from '../../server/paper-import/spellingReview.mjs'
+import { retireRecoveredSourceBlock } from './recovered-source-block.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -98,29 +99,10 @@ function writeBlockedSignal(paperId, error) {
   mkdirSync(signalsDir, { recursive: true })
   writeFileSync(path.join(signalsDir, 'blocked.json'), `${JSON.stringify({
     code: 'source_incomplete',
+    ...(error.code ? { errorCode: error.code } : {}),
     at: new Date().toISOString(),
     note: String(error.message).slice(0, 240),
   }, null, 2)}\n`)
-}
-
-function retireRecoveredSourceBlock(paperDir) {
-  const blockedPath = path.join(paperDir, 'signals', 'blocked.json')
-  if (!existsSync(blockedPath)) return
-  const bytes = readFileSync(blockedPath)
-  let blocked
-  try { blocked = JSON.parse(bytes.toString('utf8')) } catch { return }
-  if (blocked.code !== 'source_incomplete') return
-  // Called only after full source verification, including audio bytes and binding.
-  // A refused restage is recovered by valid signal evidence, not by deleting it.
-  const recoveredSignal = blocked.note === 'Signal audio requires a fresh attachment-free source manifest'
-    && JSON.parse(readFileSync(path.join(paperDir, 'universal-source-manifest.json'), 'utf8'))
-      .schemaVersion === 'universal-nck1-source-manifest-v3'
-  if (!blocked.note?.startsWith('Spelling review:') && !recoveredSignal) return
-  const historyDir = path.join(paperDir, 'signals', 'history')
-  const historyPath = path.join(historyDir, `blocked-${sha256(bytes)}.json`)
-  mkdirSync(historyDir, { recursive: true })
-  if (existsSync(historyPath)) throw new Error('Recovered blocker history already exists')
-  renameSync(blockedPath, historyPath)
 }
 
 function runPaperCommand(paperId, operation, { blockOnFailure = false } = {}) {
