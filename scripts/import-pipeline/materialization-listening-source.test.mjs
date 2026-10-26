@@ -32,6 +32,7 @@ test('bounded author decisions replay through public OCR import/compile and reje
   const fragment = item => ({ itemId: item.itemId })
   const heading = find('高三听力录音原文'), example = find('例如'), exampleSpeech = find('example only')
   const mixed = find('Keep every word'), end = find('应用文评分标准')
+  const labels = find('请从')
   const cut = mixed.text.indexOf('第一节')
   const input = { kind: 'nck1-source-materialization', materializationBytes: encode(produced.materialization),
     documents: f.sourceDocuments.map(d => ({ documentId: d.documentId, bytes: d.bytes })), media: [],
@@ -46,6 +47,7 @@ test('bounded author decisions replay through public OCR import/compile and reje
       { role: 'example', fragments: [fragment(example), fragment(exampleSpeech)] },
       { role: 'speech', fragments: [{ itemId: mixed.itemId, start: 0, end: cut }] },
       { role: 'cue', nextTextNumber: 6, fragments: [{ itemId: mixed.itemId, start: cut, end: mixed.text.length }] },
+      { role: 'cue', nextTextNumber: null, fragments: [fragment(labels)] },
     ] }
   const plan = planMaterializationListeningSource(input, receiptBytes, options)
   const splitSpeech = structuredClone(options)
@@ -67,6 +69,69 @@ test('bounded author decisions replay through public OCR import/compile and reje
   const importedInput = { ...input, materializationBytes: applied.materializationBytes }
   const imported = importCanonicalCandidate(importedInput)
   assert.deepEqual(imported.issues, [])
+  const replayContext = { decision: plan.decision, documents: f.sourceDocuments, evidence: f.evidence, confirmation,
+    confirmationBytes: input.ocrSourceBytes.confirmationBytes,
+    resolved: resolveConfirmedNck1OcrEvidence({ paperId: f.paperId, documents: f.sourceDocuments, evidence: f.evidence, confirmation }) }
+  const tail = find('Thanks a lot.')
+  const sourceFragment = (start, end) => ({ itemId: tail.itemId, start, end, text: tail.text.slice(start, end) })
+  const role = (kind, start, end) => ({ role: kind, nextTextNumber: kind === 'cue' ? 7 : null,
+    questionNumbers: [], fragments: [sourceFragment(start, end)] })
+  // Bypass the CLI: forge the exact transcript that the old reader accepted,
+  // with fully covered, correctly addressed source and unchanged digest proof.
+  const discardedTail = tail.text.indexOf('a lot.')
+  const adversarial = [
+    { name: 'Astra short English speech tail', roles: [role('speech', 0, discardedTail),
+      role('cue', discardedTail, tail.text.length)],
+      text: applied.materialization.listening.transcript[5].text.slice(0, -'a lot.'.length) },
+    { name: 'several short cues', roles: [role('speech', 0, discardedTail),
+      role('cue', discardedTail, discardedTail + 2), role('cue', discardedTail + 2, tail.text.length)],
+      text: applied.materialization.listening.transcript[5].text.slice(0, -'a lot.'.length) },
+    { name: 'split speaker prefix and letters', roles: Array.from(tail.text,
+      (_, start) => role('cue', start, start + 1)),
+      text: applied.materialization.listening.transcript[5].text.slice(0, -tail.text.length - 1) },
+    { name: 'discard punctuation from speech', roles: [role('speech', 0, tail.text.length - 1),
+      role('cue', tail.text.length - 1, tail.text.length)],
+      text: applied.materialization.listening.transcript[5].text.slice(0, -1) },
+  ]
+  for (const attempt of adversarial) await t.test(attempt.name, () => {
+    const forged = structuredClone(applied.materialization)
+    forged.listeningSourceDecision.roles.splice(-1, 0, ...attempt.roles)
+    forged.listening.transcript[5].text = attempt.text
+    assert.deepEqual(validateNck1SourceMaterialization(forged), [], attempt.name)
+    assert.throws(() => resolveListeningSourceDecision({ ...replayContext, decision: forged.listeningSourceDecision }),
+      /Latin|complete Chinese broadcast/u, `${attempt.name}: public resolver must reject the exclusion itself`)
+    const rejected = importCanonicalCandidate({ ...input, materializationBytes: encode(forged) })
+    assert(rejected.issues.length, `${attempt.name}: public admission must refuse silent speech loss`)
+    assert(!compileNck1MaterializationCandidatePreview(rejected.candidate).compilation,
+      `${attempt.name}: public compile must refuse silent speech loss`)
+  })
+  for (const [text, accepted, split] of [
+    ['请从A、B、C中选择。', true],
+    ['请从D、E、F、G中选择。', true],
+    ['请选择G。', true],
+    ['请看Thanks。', false], ['请看OK。', false], ['请看a。', false],
+    ['请看M:。', false], ['请看W:。', false],
+    ['请选择AB。', false], ['请看H。', false],
+    ['请看A1。', false], ['请看1A。', false], ['请看A١。', false],
+    ['请看é。', false], ['请看Ａ。', false], ['A', false],
+    ['请选择AB中文。', false, 4],
+    ['请选择A1中文。', false, 4],
+  ]) await t.test(`Latin exclusion labels: ${text}${split ? ' split across fragments' : ''}`, () => {
+    const changed = structuredClone(replayContext)
+    const item = changed.confirmation.documents[1].pages.flatMap(p => p.orderedItems).find(i => i.itemId === labels.itemId)
+    const source = changed.resolved.structures.get(options.documentId).body.find(i => i.text === item.text)
+    item.text = source.text = text
+    changed.confirmationBytes = encode(changed.confirmation)
+    changed.decision.confirmationSha256 = sha256(changed.confirmationBytes)
+    const fragment = (start, end) => ({ itemId: labels.itemId, start, end, text: text.slice(start, end) })
+    changed.decision.roles.at(-1).fragments = [fragment(0, text.length)]
+    if (split) changed.decision.roles.splice(-1, 1,
+      { role: 'cue', nextTextNumber: null, questionNumbers: [], fragments: [fragment(0, split)] },
+      { role: 'cue', nextTextNumber: null, questionNumbers: [], fragments: [fragment(split, text.length)] })
+    const resolve = () => resolveListeningSourceDecision(changed)
+    if (accepted) assert.doesNotThrow(resolve)
+    else assert.throws(resolve, /Latin/u)
+  })
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation)
   const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
@@ -77,9 +142,13 @@ test('bounded author decisions replay through public OCR import/compile and reje
   assert.equal(admitted.compilation.disposition, 'ready')
   assert(isLiveConfirmedNck1MaterializationAdmission(admitted))
   assert(importCanonicalCandidate(importedInput, undefined, { materializationAuthorityRef: nck1ParagraphJoinAuthorityRef }).issues.length)
-  const replayContext = { decision: plan.decision, documents: f.sourceDocuments, evidence: f.evidence, confirmation,
-    confirmationBytes: input.ocrSourceBytes.confirmationBytes,
-    resolved: resolveConfirmedNck1OcrEvidence({ paperId: f.paperId, documents: f.sourceDocuments, evidence: f.evidence, confirmation }) }
+  const splitChineseCue = structuredClone(plan.decision)
+  const chinese = splitChineseCue.roles[2]
+  const firstCueFragment = { ...chinese.fragments[0], end: cut + 3, text: mixed.text.slice(cut, cut + 3) }
+  const secondCueFragment = { ...chinese.fragments[0], start: cut + 3, text: mixed.text.slice(cut + 3) }
+  splitChineseCue.roles.splice(2, 1, { ...chinese, fragments: [firstCueFragment] }, { ...chinese, fragments: [secondCueFragment] })
+  assert.doesNotThrow(() => resolveListeningSourceDecision({ ...replayContext, decision: splitChineseCue }),
+    'adjacent Chinese exclusions must be checked as the complete original sentence')
   for (const change of [
     d => { d.roles[1].fragments[0].end-- ; d.roles[1].fragments[0].text = d.roles[1].fragments[0].text.slice(0, -1) },
     d => { d.roles[2].fragments[0].start-- ; d.roles[2].fragments[0].text = mixed.text.slice(cut - 1) },
@@ -87,6 +156,18 @@ test('bounded author decisions replay through public OCR import/compile and reje
     d => { d.roles[0].fragments.push({ ...d.roles[1].fragments[0] }) },
     d => { d.roles[2].nextTextNumber = 7 },
     d => { d.roles[1].role = 'cue'; d.roles[1].nextTextNumber = 6 },
+    d => { // Complete Chinese cue remains anchored; its preceding speech punctuation cannot be discarded.
+      d.roles[1].fragments[0].end = cut - 1
+      d.roles[1].fragments[0].text = mixed.text.slice(0, cut - 1)
+      d.roles[2].fragments[0].start = cut - 1
+      d.roles[2].fragments[0].text = mixed.text.slice(cut - 1)
+    },
+    d => { // A suffix of a Chinese announcement is not a complete announcement.
+      d.roles[1].fragments[0].end = cut + 1
+      d.roles[1].fragments[0].text = mixed.text.slice(0, cut + 1)
+      d.roles[2].fragments[0].start = cut + 1
+      d.roles[2].fragments[0].text = mixed.text.slice(cut + 1)
+    },
     d => { d.heading.itemId = 'foreign:item' },
     d => { d.end = { itemId: find('Synthetic speech 10.').itemId, text: find('Synthetic speech 10.').text } },
     d => { d.confirmationSha256 = sha256('stale') },

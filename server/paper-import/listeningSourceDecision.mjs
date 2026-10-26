@@ -1,9 +1,21 @@
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { validateListeningSourceDecision, listeningDecisionFailure as fail } from '../../shared/paper-canonical/listeningSourceDecision.mjs'
-import { listeningTextMarkerNumber as markerNumber } from './nck1DocxMaterializationProducer.mjs'
+import { listeningTextMarkerNumber as markerNumber, listeningCue } from './nck1DocxMaterializationProducer.mjs'
 
 const same = (a, b) => digestJson(a) === digestJson(b)
 const normalized = text => text.normalize('NFKC').replace(/\s+/gu, ' ').trim()
+const latin = /\p{Script_Extensions=Latin}/u
+function permitsExclusionLatin(text, start, original) {
+  if (!latin.test(text)) return true
+  if (!/\p{Script=Han}/u.test(text)) return false
+  for (const match of text.matchAll(/\p{Script_Extensions=Latin}/gu)) {
+    const offset = start + match.index
+    const before = [...original.slice(0, offset)].at(-1) || ''
+    const after = [...original.slice(offset + match[0].length)][0] || ''
+    if (!/^[A-G]$/u.test(match[0]) || latin.test(before + after) || /\p{Number}/u.test(before + after)) return false
+  }
+  return true
+}
 const splitsSurrogate = (text, offset) => offset > 0 && offset < text.length
   && /[\uD800-\uDBFF]/u.test(text[offset - 1]) && /[\uDC00-\uDFFF]/u.test(text[offset])
 
@@ -89,8 +101,9 @@ export function resolveListeningSourceDecision(context) {
     if (role.role === 'speech' && from <= first) fail('speech must belong to a Text segment')
     if (role.role === 'cue') {
       if (role.nextTextNumber !== next) fail('cue does not match the next Text boundary')
-      if (/(?:^|\n)\s*(?:M|W|Man|Woman|Boy|Girl)\s*[:：]/u.test(text)
-        || /[A-Za-z]{4,}/u.test(text.replace(/\b(?:Text|pause|repeat|seconds)\b/giu, ''))) fail('cue cannot discard question-bearing speech')
+      if (located.some(({ fragment, index }) => !permitsExclusionLatin(fragment.text, fragment.start, body[index].text))) {
+        fail('Latin in cue requires isolated A–G labels in a Chinese fragment; speech cannot be discarded')
+      }
       // Cross-item announcements still have to agree with the source question
       // range. The producer checks this declared range against the question PDF.
       const match = /(?:回答|阅读)第\s*(\d+)(?:\s*(?:至|到|和|、|[-–—])\s*第?\s*(\d+))?/u.exec(normalized(text))
@@ -111,6 +124,31 @@ export function resolveListeningSourceDecision(context) {
       offset = fragment.end
     }
     if (offset !== body[index].text.length) fail('affected item is not fully covered')
+    const parts = assignments.get(index)
+    if (!parts.some(part => part.role.role === 'speech')) continue
+    // Inspect the original item, coalescing adjacent exclusions even when an
+    // author splits them across several roles. Coverage alone cannot prove that
+    // speech was retained.
+    const excluded = []
+    for (const { fragment, role } of parts) {
+      if (role.role === 'speech') continue
+      if (!permitsExclusionLatin(fragment.text, fragment.start, body[index].text)) {
+        fail('Latin in mixed-item exclusions requires isolated A–G labels in a Chinese fragment')
+      }
+      const previous = excluded.at(-1)
+      if (previous?.end === fragment.start) previous.end = fragment.end
+      else excluded.push({ start: fragment.start, end: fragment.end })
+    }
+    for (const { start, end } of excluded) {
+      const original = body[index].text, text = original.slice(start, end)
+      if (!permitsExclusionLatin(text, start, original) || !/\p{Script=Han}/u.test(text)
+        || start !== 0 && end !== original.length
+        || start !== 0 && !/[。！？]$/u.test(original.slice(0, start).trimEnd())
+        || end !== original.length && !/[。！？]$/u.test(text.trimEnd())
+        || !listeningCue(text)) {
+        fail('mixed-item exclusions require a complete Chinese broadcast sentence at an item edge')
+      }
+    }
   }
   const projected = [], positions = new Map()
   body.forEach((item, index) => {

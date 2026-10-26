@@ -179,8 +179,10 @@ function answerHtml({
       paragraph('例如：先听例题。'), paragraph('M: This is the example only.'),
       ...Array.from({ length: 10 }, (_, index) => [
         paragraph(`Text ${index + 1}`),
-        paragraph(index === 4 ? 'M: Keep every word 😀.第一节到此结束。' : `M: Synthetic speech ${index + 1}.`),
+        paragraph(index === 4 ? 'M: Keep every word 😀。第一节到此结束。' : `M: Synthetic speech ${index + 1}.`),
+        ...(index === 5 ? [paragraph('W: OK, the underground, and then a short walk. Thanks a lot.')] : []),
       ]).flat(),
+      paragraph('请从A、B、C中选择。'),
       paragraph('应用文评分标准'), paragraph('Scoring appendix must remain in the source.'),
     ] : []),
     paragraph('【答案详解】'),

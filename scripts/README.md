@@ -11,6 +11,12 @@
 `listening-source.mjs plan/apply` 是显式、有界的听力来源作者入口。只选择
 答案 PDF 中的完整标题/起点/排他终点，以及 example / cue / speech 原件角色；
 混合 item 允许 UTF-16 slice，所有受影响 item 必须逐字完整覆盖。
+公共 resolver 只允许含中文的 cue fragment 使用孤立的单个大写 A–G 标签；
+两侧不得有拉丁字母或数字，且检查原 item 的相邻字符，不能切片造出单字母。
+连续字母、小写字母、M:/W: 前缀及无中文的单字母均拒绝，英文 cue 暂不接受。
+与 speech 同 item 的 cue/example 排除范围遵循同一字符限制，按原 item 合并
+相邻片段检查：须位于 item 首尾，并以中文句末标点或 item 边界闭合为既有识别器
+可证明的完整中文报幕句。完整例题仍须在 Text 1 前闭合。
 `--request` 提供 `documentId`、`headingItemId`（可 null）、`startItemId`、
 `endItemId`（null 表示文档末尾）、`reason`、`roles`。每个 role 提供
 `role`、`nextTextNumber`、`questionNumbers`、`fragments`；fragment 提供
@@ -25,7 +31,7 @@ apply 另需 `--plan`、`--agent-confirmed`。输出只是隔离作者产物，`
 
 | New verifier | Distinct failure caught | CI |
 | --- | --- | --- |
-| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, dropping real M/W speech as cue, wrong next Text/question/section order, forged transcript/admission and older-authority acceptance; requires public OCR import/compile and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
+| `materialization-listening-source.test.mjs` | Catches examples or scoring appendices leaking into transcript, whole-heading rewriting, overlapping/gapped/skipped source slices, surrogate splits, stale PDF/evidence/confirmation/materialization/receipt plans, dropping real M/W speech as cue, Astra's short `a lot.` speech-tail loss, multiple short cues or split speaker prefixes, punctuation-only speech loss and incomplete mixed-item Chinese announcements; permits Chinese `A、B、C` and other isolated A–G labels while rejecting `Thanks`/`OK`/`a`, Unicode Latin, digit adjacency and letters split across fragments. Exercises the public resolver/admission/compile and retains complete Chinese cue/example positives, next Text/question/section checks, forged transcript/older-authority rejection and atomic no-clobber outputs outside immutable input directories. | yes, via `verify-nck1-ocr-source-evidence.mjs` |
 
 `source-references-v4` 的评分图只进入显式 `includeScoring` 的答案册；范文仍用
 v3 的 `figures` / `afterParagraphId`。既有 publication/receipt 继续绑定原 sidecar

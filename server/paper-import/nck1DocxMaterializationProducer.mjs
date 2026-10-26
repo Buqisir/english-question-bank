@@ -119,7 +119,7 @@ function hasSourceLocator(documentId, sourceIndex) {
     && sourceIndex.region.height > 0
 }
 
-function listeningCue(text) {
+export function listeningCue(text) {
   const value = normalized(text)
   if (LISTENING_PAUSE_REPEAT_SEQUENCE.test(value)
     || /^停顿\d{2}′[0-5]\d′′$/u.test(value)) {
