@@ -94,6 +94,23 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
   旧 OCR 证据、确认和回执一并挪入 `superseded/`，compile 形成新 staged evidence。
   普通 resume 遇到远端旧 approved OCR 仍会以 `SEALED_OCR_PULL_REQUIRED` 停止，不自动推断重封意图。
 
+### 出听核包
+
+听力 attempt 仍有需 Owner 耳听的不确定段时：
+
+```sh
+node scripts/import-pipeline/listening-owner-review-pack.mjs <id> [另一个id] \
+  --output /absolute/path/outside-the-repository/new-listening-pack
+```
+
+默认选最新已完成规则判定 attempt 的不确定段；`--select <id>:listening-text-3:1`
+可重复指定段/遍，`all` 指该段全部遍，`--attempt <id=/absolute/attempt>` 固定已有证据。
+每遍按词边界各加 0.8 秒且不跨相邻停顿中点，另附精切前后各 3 秒上下文，原速。
+交付整个 `index.html + clips/ + manifest.json`，Owner 按「卷名、段、遍、首尾/正文情况、
+整录音时间」回复。包只读，不装结论、不改 producer；`ownerReviewed=false`。
+如何保留答复及通过正式听力审查装入，见
+[出听核包](listening-review.md#出听核包)；出包不能替代 submit 的 usable 门禁。
+
 ### 显式创建下一代 OCR（源文件字节不变）
 
 仅适用于已完成上述 compile、远端最新仍为 approved OCR 且从未存在 Candidate 的卷。
