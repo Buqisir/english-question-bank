@@ -1,6 +1,6 @@
 // Pure, platform-independent navigation rule. ASR is evidence, never a source-text editor.
 export const LISTENING_SEGMENT_RULE = Object.freeze({
-  version: 'listening-segment-rule-v5',
+  version: 'listening-segment-rule-v6',
   normalizationVersion: 'listening-equivalences-v5',
   anchorWords: 6,
   expandedAnchorWords: 12,
@@ -15,12 +15,37 @@ export const LISTENING_SEGMENT_RULE = Object.freeze({
   durationRatioMaximum: 1.15,
   boundarySearchSeconds: 2,
   boundaryPaddingSeconds: 0.02,
+  playbackBufferSeconds: 0.8,
   silenceThresholdDb: -35,
   minimumSilenceSeconds: 0.08,
   engineBoundaryToleranceSeconds: 0.5,
   isolatedEdgeMaximumWords: 3,
   isolatedEdgeMaximumSeconds: 1.5,
 })
+
+// Shared by the automatic producer and the read-only Owner review pack.
+// Inputs are established word edges and the limits of their neighboring gaps;
+// this function never locates words or changes an installed Owner sidecar.
+export function padListeningWordEdges({ wordStartSeconds: start, wordEndSeconds: end,
+  durationSeconds, previousSpeechEndSeconds = null, nextSpeechStartSeconds = null,
+  leadingMidpoint = 0, trailingMidpoint = durationSeconds }) {
+  if (![start, end, durationSeconds, leadingMidpoint, trailingMidpoint].every(Number.isFinite)
+    || start < 0 || end <= start || end > durationSeconds
+    || (previousSpeechEndSeconds !== null && (!Number.isFinite(previousSpeechEndSeconds)
+      || previousSpeechEndSeconds < 0 || previousSpeechEndSeconds > start))
+    || (nextSpeechStartSeconds !== null && (!Number.isFinite(nextSpeechStartSeconds)
+      || nextSpeechStartSeconds < end || nextSpeechStartSeconds > durationSeconds))) return null
+  const lower = Math.max(leadingMidpoint, previousSpeechEndSeconds === null
+    ? 0 : (previousSpeechEndSeconds + start) / 2)
+  const upper = Math.min(trailingMidpoint, nextSpeechStartSeconds === null
+    ? durationSeconds : (end + nextSpeechStartSeconds) / 2)
+  const startSeconds = Math.max(0, start - LISTENING_SEGMENT_RULE.playbackBufferSeconds, lower)
+  const endSeconds = Math.min(durationSeconds, end + LISTENING_SEGMENT_RULE.playbackBufferSeconds, upper)
+  if (startSeconds > start || endSeconds < end) return null
+  return { startSeconds, endSeconds, leadingMidpoint: lower, trailingMidpoint: upper,
+    requestedBufferSeconds: LISTENING_SEGMENT_RULE.playbackBufferSeconds,
+    actualLeadingBufferSeconds: start - startSeconds, actualTrailingBufferSeconds: endSeconds - end }
+}
 
 const ordinalSmall = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth',
   'ninth', 'tenth', 'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth',
@@ -825,31 +850,43 @@ function boundsFor(first, last, pauses, duration, speechRuns, terminalRun, endLi
     && first.runStartSeconds - p.endSeconds <= LISTENING_SEGMENT_RULE.boundarySearchSeconds)
   const before = beforeCandidates.filter(p =>
     p.startSeconds <= Math.max(0, first.runStartSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)).at(-1)
+    ?? (first.runStartSeconds === 0 ? {startSeconds: 0, endSeconds: 0} : null)
   const afterCandidates = pauses.filter(p => p.endSeconds > last.runEndSeconds
     && p.startSeconds >= last.runStartSeconds
     && p.startSeconds - last.runEndSeconds <= LISTENING_SEGMENT_RULE.boundarySearchSeconds)
   const after = afterCandidates.find(p =>
     p.endSeconds >= Math.min(duration, last.runEndSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds))
+    ?? (last.runEndSeconds === duration ? {startSeconds: duration, endSeconds: duration} : null)
   const evidence = {beforePause: before ?? null, afterPause: after ?? null,
     skippedBefore: before ? beforeCandidates.slice(beforeCandidates.indexOf(before) + 1) : [],
     skippedAfter: after ? afterCandidates.slice(0, afterCandidates.indexOf(after)) : [],
     endLimitSeconds: Number.isFinite(endLimitSeconds) ? endLimitSeconds : null}
   if (!before || !after || !first.startBoundary || !last.endBoundary) return {playback: null, evidence}
-  // ASR word intervals often include silence. Keep the entire acoustic run and
-  // choose a point inside the adjacent pause, including when they overlap.
-  const startSeconds = Math.max(0, Math.min(first.runStartSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds,
-    (before.startSeconds + before.endSeconds) / 2))
-  const endSeconds = Math.min(duration, endLimitSeconds, Math.max(last.runEndSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds,
-    (after.startSeconds + after.endSeconds) / 2))
+  // Prefer neighboring timed speech (including prompts) for the gap midpoint.
+  // The measured pause supplies a conservative fallback when ASR has no neighbor.
+  const previousEnd = Math.max(-Infinity, ...speechRuns.filter(r => r.endSeconds <= first.runStartSeconds)
+    .map(r => r.endSeconds))
+  const nextStart = Math.min(Infinity, ...speechRuns.filter(r => r.startSeconds >= last.runEndSeconds)
+    .map(r => r.startSeconds))
+  const padded = padListeningWordEdges({wordStartSeconds: first.runStartSeconds,
+    wordEndSeconds: last.runEndSeconds, durationSeconds: duration,
+    ...(Number.isFinite(previousEnd) ? {previousSpeechEndSeconds: previousEnd}
+      : {leadingMidpoint: (before.startSeconds + before.endSeconds) / 2}),
+    ...(Number.isFinite(nextStart) ? {nextSpeechStartSeconds: nextStart}
+      : {trailingMidpoint: (after.startSeconds + after.endSeconds) / 2})})
+  evidence.padding = padded
+  if (!padded) return {playback: null, evidence}
+  const {startSeconds, endSeconds} = padded
   const occurrence = {startSeconds: first.runStartSeconds, endSeconds: last.runEndSeconds,
     terminalRun, boundaryEvidence: evidence}
   const speech = mergeSpeechIntervals(speechRuns.filter(run => !sameTerminalPronunciation(run, occurrence))
     .map(run => [run.startSeconds, run.endSeconds]))
   evidence.obstructions = boundaryObstructions(first.runStartSeconds, last.runEndSeconds, evidence, speech)
-  const valid = startSeconds >= before.startSeconds && startSeconds <= before.endSeconds
-    && endSeconds >= after.startSeconds && endSeconds <= after.endSeconds
-    && startSeconds < first.runStartSeconds && endSeconds > last.runEndSeconds
-    && endSeconds >= Math.min(duration, last.runEndSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
+  // A capped buffer may stop before the measured pause starts (or after it
+  // ends). Do not stretch it to reach that pause; retain the speech obstruction gate.
+  const valid = startSeconds >= Math.min(before.startSeconds, padded.leadingMidpoint)
+    && endSeconds <= Math.max(after.endSeconds, padded.trailingMidpoint)
+    && startSeconds <= first.runStartSeconds && endSeconds >= last.runEndSeconds
     && endSeconds <= endLimitSeconds && !evidence.obstructions.length
   return {playback: valid ? {startSeconds, endSeconds} : null, evidence}
 }
@@ -1460,9 +1497,23 @@ export function reconcileListeningEngines(apple, whisper) {
     if (blocked) unions = []
     const occurrences = chosen.occurrences.map((o, i) => {
       const union = unions.find(u => u.occurrence === i)
-      return {...o, playback: union ? {...union.playback} : o.playback ? {...o.playback} : null,
+      // A silent union cannot enlarge the chosen word edges' v6 buffer/guards.
+      const padding = union ? {
+        leadingMidpoint: union.before.boundaryEvidence?.padding?.leadingMidpoint,
+        trailingMidpoint: union.after.boundaryEvidence?.padding?.trailingMidpoint,
+      } : o.boundaryEvidence?.padding
+      const playback = union ? {startSeconds: Math.max(union.playback.startSeconds,
+        o.startSeconds - LISTENING_SEGMENT_RULE.playbackBufferSeconds, padding?.leadingMidpoint ?? 0),
+      endSeconds: Math.min(union.playback.endSeconds,
+        o.endSeconds + LISTENING_SEGMENT_RULE.playbackBufferSeconds, padding?.trailingMidpoint ?? Infinity)}
+        : o.playback ? {...o.playback} : null
+      return {...o, playback,
         issues: [...o.issues], boundaryEvidence: o.boundaryEvidence ? {...o.boundaryEvidence,
-          ...(union ? {beforePause: union.before.boundaryEvidence.beforePause,
+          ...(union ? {padding: {...o.boundaryEvidence.padding, ...padding,
+            startSeconds: playback.startSeconds, endSeconds: playback.endSeconds,
+            actualLeadingBufferSeconds: o.startSeconds - playback.startSeconds,
+            actualTrailingBufferSeconds: playback.endSeconds - o.endSeconds},
+            beforePause: union.before.boundaryEvidence.beforePause,
             afterPause: union.after.boundaryEvidence.afterPause} : {})} : undefined}
     })
     return { ...chosen, decision: blocked ? 'review_required' : chosen.decision,
@@ -1492,7 +1543,22 @@ export function reconcileListeningEngines(apple, whisper) {
     const endLimit = Math.min(result.occurrences[index + 1]?.startSeconds ?? Infinity,
       ...skeleton.filter(g => g.segmentId !== result.segmentId && g.startSeconds > occurrence.endSeconds)
         .map(g => g.startSeconds))
-    if (obstructions.length || includedPrompt || occurrence.playback.endSeconds > endLimit) {
+    // A neighbor discovered only by fallback still limits padding at its gap
+    // midpoint, even when that speech starts exactly at the old cut's end.
+    const neighbors = allObservedRuns.filter(run => !ignoredEdgeWord(run, run, isolated))
+    const previousEnd = Math.max(-Infinity, ...neighbors.filter(r => r.endSeconds <= occurrence.startSeconds)
+      .map(r => r.endSeconds))
+    const nextStart = Math.min(Infinity, ...neighbors.filter(r => r.startSeconds >= occurrence.endSeconds)
+      .map(r => r.startSeconds))
+    // This is only an intersection with an already audio-bounded playback.
+    const duration = Math.max(occurrence.playback.endSeconds, Number.isFinite(nextStart) ? nextStart : 0)
+    const padding = padListeningWordEdges({wordStartSeconds: occurrence.startSeconds,
+      wordEndSeconds: occurrence.endSeconds, durationSeconds: duration,
+      leadingMidpoint: occurrence.boundaryEvidence?.padding?.leadingMidpoint ?? 0,
+      trailingMidpoint: occurrence.boundaryEvidence?.padding?.trailingMidpoint ?? duration,
+      ...(Number.isFinite(previousEnd) ? {previousSpeechEndSeconds: previousEnd} : {}),
+      ...(Number.isFinite(nextStart) ? {nextSpeechStartSeconds: nextStart} : {})})
+    if (obstructions.length || includedPrompt || !padding || occurrence.playback.endSeconds > endLimit) {
       occurrence.boundaryEvidence ??= {}
       occurrence.boundaryEvidence.reconciledObstructions = obstructions
       if (includedPrompt) occurrence.boundaryEvidence.includedPrompt = includedPrompt
@@ -1500,7 +1566,18 @@ export function reconcileListeningEngines(apple, whisper) {
       if (!occurrence.issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT')) occurrence.issues.push('BOUNDARY_EVIDENCE_INSUFFICIENT')
       problem(result, 'BOUNDARY_EVIDENCE_INSUFFICIENT')
       result.independentlyAnchored = false
+    } else {
+      occurrence.playback.startSeconds = Math.max(occurrence.playback.startSeconds, padding.startSeconds)
+      occurrence.playback.endSeconds = Math.min(occurrence.playback.endSeconds, padding.endSeconds)
+      occurrence.boundaryEvidence ??= {}
+      occurrence.boundaryEvidence.padding = {...padding, ...occurrence.playback,
+        actualLeadingBufferSeconds: occurrence.startSeconds - occurrence.playback.startSeconds,
+        actualTrailingBufferSeconds: occurrence.playback.endSeconds - occurrence.endSeconds}
     }
   }
+  for (const result of results) if (result.playback) result.playback = result.occurrences.every(o => o.playback)
+    ? {startSeconds: result.occurrences[0].playback.startSeconds,
+      endSeconds: result.occurrences.at(-1).playback.endSeconds}
+    : null
   return validateListeningOrder(results)
 }

@@ -59,6 +59,22 @@ test('successful frozen Apple evidence produces a sidecar accepted by the unchan
   writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
   assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
 })
+test('audio-reviewed final sidecar cuts are loaded literally without applying the producer buffer again', t => {
+  const {subject, options} = workspace(t, fixture)
+  const result = segmentListening({...options, runWhisper: () => assert.fail('no fallback')})
+  const review = readJson(result.review)
+  review.method = 'audio_source_comparison'
+  const finalCut = {startSeconds: 1.234567, endSeconds: 7.765432}
+  review.groups[0].playback = {...finalCut}
+  Object.assign(review.groups[0].occurrences[0], finalCut)
+  const bytes = JSON.stringify(review)
+  writeFileSync(result.review, bytes)
+  const loaded = validateListeningReview(result.attempt, readJson(result.review), subject, [group]).review
+  assert.deepEqual(loaded.groups[0].playback, finalCut)
+  assert.equal(loaded.groups[0].occurrences[0].startSeconds, finalCut.startSeconds)
+  assert.equal(loaded.groups[0].occurrences[0].endSeconds, finalCut.endSeconds)
+  assert.equal(readFileSync(result.review, 'utf8'), bytes)
+})
 test('rule-only replay retains historical raw bytes and never opens an ASR runner or model', t => {
   const { subject, options } = workspace(t, {...fixture, error: 'primary unavailable'}, true)
   options.pauses = null
@@ -75,7 +91,7 @@ test('rule-only replay retains historical raw bytes and never opens an ASR runne
   const result = segmentListening(replay)
   assert.equal(result.usable, 1)
   const input = readJson(path.join(result.attempt, 'input.json'))
-  assert.equal(input.rule.version, 'listening-segment-rule-v5')
+  assert.equal(input.rule.version, 'listening-segment-rule-v6')
   assert.equal(input.historicalRuleVersion, 'listening-segment-rule-v3')
   assert.equal(input.inference, 'not_run')
   assert.match(input.ruleCacheKey, /^sha256:/u)
