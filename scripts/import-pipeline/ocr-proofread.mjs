@@ -29,7 +29,7 @@ import { promisify } from 'node:util'
 import { fileURLToPath } from 'node:url'
 
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
-import { sourceReferenceObjectiveFigureAnchors } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -1314,9 +1314,9 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  const objectiveAnchors = sourceReferenceObjectiveFigureAnchors(confirmation, new Set([answerDocument.documentId]))
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures)
   const excludedFigures = referenceFigures.filter(figure =>
-    !assignedFigures.has(figure) && objectiveAnchors.has(figure.afterItem.itemId))
+    !assignedFigures.has(figure) && objectiveFigures.has(sourceReferenceFigureIdentity(figure)))
   for (const figure of excludedFigures) {
     review.push({ itemId: figure.afterItem.itemId, sourceRegionId: figure.sourceRegionId,
       issue: 'objective answer figure excluded from writing references; retained in source evidence' })

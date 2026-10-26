@@ -1,4 +1,4 @@
-import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from './sourceReferenceScoringScope.mjs'
+import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from './sourceReferenceScoringScope.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
   SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
@@ -111,8 +111,8 @@ export function assertSourceReferenceAdmission({
     evidence, confirmation })
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
   const allExpected = resolved.referenceFigures ?? []
-  const objectiveAnchors = sourceReferenceObjectiveFigureAnchors(confirmation, answerIds)
-  const expected = allExpected.filter(reference => !objectiveAnchors.has(reference.afterItem.itemId)
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected)
+  const expected = allExpected.filter(reference => !objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
       && digestJson(reference.source) === digestJson(figure.source.locator)))
   if (expected.length !== figures.length) reject('All confirmed official-answer content figures must match sidecar figures one-to-one')

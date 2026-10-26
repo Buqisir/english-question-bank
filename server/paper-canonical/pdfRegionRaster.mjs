@@ -65,8 +65,17 @@ export function rasterPdfRegion({ pdfBytes, page, region, density = 300, resourc
       fail('LIMIT', 'PDF page exceeds the reference raster dimension or pixel budget')
     }
   }
+  // Q16-HDRI RGBA uses 16 bytes/pixel. PNG32 encoding can clone the crop,
+  // so bound three caches (page + full-page crop + encoder copy) by the
+  // existing page budget, plus 16 MiB for cache metadata/alignment.
+  // The reference ceiling is 749 MiB;
+  // disk spill remains disabled and all native deadlines stay unchanged.
+  const cacheBytes = resourceLimits ? 3 * 16 * Math.min(resourceLimits.maxPagePixels,
+    resourceLimits.maxPageDimension ** 2) + 16 * 1024 * 1024 : 0
+  if (!Number.isSafeInteger(cacheBytes)) fail('LIMIT', 'PDF raster cache budget exceeds safe integer bounds')
+  const cacheLimit = `${Math.ceil(cacheBytes / (1024 * 1024))}MiB`
   const magickLimits = resourceLimits
-    ? ['-limit', 'memory', '128MiB', '-limit', 'map', '128MiB', '-limit', 'disk', '0',
+    ? ['-limit', 'memory', cacheLimit, '-limit', 'map', cacheLimit, '-limit', 'disk', '0',
       '-limit', 'thread', '1', '-limit', 'time', '10'] : []
   const temp = mkdtempSync(path.join(tmpdir(), 'eqb-pdf-region-raster-'))
   try {

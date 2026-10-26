@@ -5,10 +5,112 @@ import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixt
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { prepareSourceReferenceWritingItems } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
+
+// Bare part/sections plus a variable-width answer grid reproduce the alliance
+// layout without copying its passages, answers or raster assets.
+const objectiveGrid = '题序 1 2 3\n答案 A B C\n题序 4 5\n答案 D A'
+function bareSectionsWithObjectiveFigure() {
+  const input = scoringFiguresFixture({ writingHeading: ['第四部分', '第一节'] })
+  const page = input.confirmation.documents[1].pages[0]
+  const proof = input.evidence.documents[1].pages[0]
+  const template = proof.observations[0]
+  proof.observations = ['高三英语参考答案', objectiveGrid].map((text, i) => ({
+    ...structuredClone(template), observationId: `answers:p1:grid-w${i}`, regionId: `answers:p1:grid-r${i}`,
+    text, region: { x: .1, y: .1 + i * .1, width: .7, height: .02 },
+  }))
+  const region = { regionId: 'answers:p1:objective-grid', kind: 'visual',
+    region: { x: .08, y: .19, width: .75, height: .05 } }
+  proof.regions = [...proof.observations.map(o => ({ regionId: o.regionId, kind: 'text', region: o.region })), region]
+  proof.readingOrderEdges = [{ before: proof.observations[0].observationId, after: proof.observations[1].observationId }]
+  page.orderedItems = proof.observations.map((o, i) => ({
+    itemId: `answers:p1:grid-i${i}`, text: o.text, observationIds: [o.observationId],
+  }))
+  page.visualClassifications = [{ regionId: region.regionId, classification: 'content_media',
+    itemIds: [page.orderedItems[1].itemId], afterItemId: page.orderedItems[0].itemId }]
+  input.confirmation.documents[1].pages[3].orderedItems[0].text = '第二节'
+  input.evidence.documents[1].pages[3].observations[0].text = '第二节'
+  reseal(input)
+  return input
+}
+function objectiveFigures(input) {
+  const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
+  return { prepared, objective: sourceReferenceObjectiveFigures(input.confirmation, new Set(['answers']), prepared.referenceFigures) }
+}
+function replaceGrid(input, text) {
+  input.confirmation.documents[1].pages[0].orderedItems[1].text = text
+  input.evidence.documents[1].pages[0].observations[1].text = text
+  reseal(input)
+}
+
+test('bare sections share task ownership and a proven objective region stays only in source evidence', () => {
+  const input = bareSectionsWithObjectiveFigure()
+  const { prepared, objective } = objectiveFigures(input)
+  assert.equal(prepared.referenceFigures.length, 4)
+  assert.deepEqual([...objective], [sourceReferenceFigureIdentity(prepared.referenceFigures[0])])
+  const sidecar = captureScoringReferences(input)
+  assert.deepEqual(sidecar.groups.map(g => g.scoring.entries.flatMap(e => e.blocks.filter(b => b.kind === 'figure')).length), [2, 1])
+  assertSourceReferenceAdmission({ ...input, sidecar })
+})
+
+for (const text of [
+  '第五档（13—15分）\n内容完整，语言准确。',
+  '题序 1 3\n答案 A C',
+  '题序 1 2 3\n答案 A B',
+  '题序 1 2\n答案 A B\n题序 2 3\n答案 C D',
+  '题序 1 2\n答案 A B\n题序 4 5\n答案 C D',
+  '题序 1 2\n答案 A G',
+  '题序 1 2\n答案 A B\n评分标准',
+  '',
+]) test(`generic answer heading cannot exempt an unproven figure: ${JSON.stringify(text)}`, () => {
+  const input = bareSectionsWithObjectiveFigure()
+  replaceGrid(input, text)
+  assert.equal(objectiveFigures(input).objective.size, 0)
+  assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
+})
+
+test('objective-shaped figure after writing starts remains a required scoring region', () => {
+  const input = bareSectionsWithObjectiveFigure()
+  const page = input.confirmation.documents[1].pages[3], proof = input.evidence.documents[1].pages[3]
+  const visual = page.visualClassifications[0]
+  const picture = page.orderedItems.find(item => visual.itemIds.includes(item.itemId))
+  picture.text = objectiveGrid
+  proof.observations.find(o => picture.observationIds.includes(o.observationId)).text = objectiveGrid
+  reseal(input)
+  assert.equal(objectiveFigures(input).objective.size, 1)
+  const sidecar = captureScoringReferences(input)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  for (const e of sidecar.groups[1].scoring.entries) e.blocks = e.blocks.filter(b => b.kind !== 'figure')
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /one-to-one/u)
+})
+
+test('a second unknown region sharing the objective anchor cannot borrow its exemption', () => {
+  const input = bareSectionsWithObjectiveFigure()
+  const page = input.confirmation.documents[1].pages[0], proof = input.evidence.documents[1].pages[0]
+  const original = page.visualClassifications[0]
+  proof.regions.push({ regionId: 'answers:p1:unknown', kind: 'visual',
+    region: { x: .08, y: .5, width: .75, height: .05 } })
+  page.visualClassifications.push({ ...original, regionId: 'answers:p1:unknown', itemIds: [] })
+  reseal(input)
+  assert.equal(objectiveFigures(input).objective.size, 1)
+  assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
+})
+
+test('bare section plus adjacent sample cannot reopen ended explanations or listening', () => {
+  for (const boundary of ['答案解析', '听力原文']) {
+    const rows = ['第一节 应用文', '参考范文', 'An original sample.', boundary,
+      '第二节', '参考范文', '评分标准', 'Source criterion.']
+    const input = fixture([rows.map((text, i) => line(text, .1 + i * .08))])
+    const scopes = sourceReferenceScoringScopes(input[2], new Set(['answers']))
+    assert.equal(scopes.get('p1-i6'), null)
+    assert.equal(scopes.get('p1-i7'), null)
+  }
+})
 function fixture(pageLines) {
   const evidencePages = []
   const pages = pageLines.map((rows, p) => {
