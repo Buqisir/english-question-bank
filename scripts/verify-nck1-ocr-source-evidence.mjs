@@ -57,6 +57,8 @@ execFileSync(process.execPath, ['--test', '--test-concurrency=1',
   'scripts/import-pipeline/ocr-page-top-figures.test.mjs',
   'scripts/import-pipeline/materialization-paragraph-joins-public.test.mjs',
   'scripts/import-pipeline/materialization-listening-source.test.mjs',
+
+  'scripts/import-pipeline/in-image-option-labels.test.mjs',
   'server/paper-import/nck1OcrContentVisuals.test.mjs',
 ], { cwd: root, stdio: 'inherit' })
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')

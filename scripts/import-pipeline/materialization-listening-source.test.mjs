@@ -154,7 +154,7 @@ test('bounded author decisions replay through public OCR import/compile and reje
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation)
   const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
-  assert.equal(consumption.authorityRef.manifestVersion, '75')
+  assert.equal(consumption.authorityRef.manifestVersion, '76')
   const request = materializeNck1CanonicalRequest(importedInput, { schemaVersion: 'teacher-confirmation-v1', confirmed: true,
     sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest })
   const admitted = admitLiveConfirmedNck1MaterializationImport(request.request)
