@@ -808,7 +808,8 @@ async function sourceReferences(ctx) {
   archive(ctx, request)
   const draft = readJson(path.join(ctx.work, 'source-references-draft.json'))
   await run(ctx, 'answer-products-prepare', cli('answer-products.mjs', 'prepare', '--paper-dir', ctx.paperDir,
-    '--output', request, ...(draft.schemaVersion === 'source-references-v4' ? ['--scoring-figures']
+    '--output', request, ...(draft.schemaVersion === 'source-references-v5' ? ['--figure-exclusions']
+      : draft.schemaVersion === 'source-references-v4' ? ['--scoring-figures']
       : draft.schemaVersion === 'source-references-v3' ? ['--figures']
       : draft.schemaVersion === 'source-references-v2' ? ['--structured-scoring'] : [])))
   const template = readJson(request).template
@@ -1274,6 +1275,33 @@ export async function invalidateParagraphJoinDownstream(paperId, expectedMateria
     archive(ctx, path.join(ctx.fast, file))
   }
   return { retained, invalidatedFrom: 'spelling' }
+}
+
+// Explanation decisions change only reference capture, not the source Candidate
+// or upstream authored summaries. Archive all reference drafts/inputs so old
+// reference content cannot be installed with freshly bound digests.
+export function assertExplanationFigureMutable(paperId, sourcePaths = {}) {
+  const ctx = { ...context(paperId), ...sourcePaths }
+  const stateFile = path.join(ctx.fast, 'state.json')
+  ctx.state = existsSync(stateFile) ? readJson(stateFile) : { paperId, steps: {}, background: {}, data: {} }
+  const operation = path.join(ctx.fast, 'ocr-generation-operation.json')
+  if (existsSync(path.join(ctx.fast, 'ocr-generation.lock'))
+    || (existsSync(operation) && !readJson(operation).completedAt)) {
+    fail('OCR_GENERATION_RECONCILIATION_REQUIRED: unresolved OCR operation; retain evidence')
+  }
+  assertReferencesMutable(ctx)
+}
+
+export async function invalidateExplanationFigureDownstream(paperId, expectedMaterializationSha256) {
+  const ctx = context(paperId)
+  if (sha256(readFileSync(materializationPath(ctx))) !== expectedMaterializationSha256) {
+    fail('Explanation figure Materialization changed during validation')
+  }
+  assertExplanationFigureMutable(paperId)
+  await requestedRedo(ctx, 'source-references')
+  for (const file of [path.join(ctx.work, 'source-references-draft.json'),
+    path.join(ctx.fast, 'source-references-request.json'), path.join(ctx.fast, 'source-references-input.json')]) archive(ctx, file)
+  return { invalidatedFrom: 'source-references' }
 }
 
 const [command, paperId, ...args] = process.argv.slice(2)

@@ -1,4 +1,5 @@
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from './sourceReferenceScoringScope.mjs'
+import { sourceReferenceExplanationFigures } from './sourceReferenceFigureExclusions.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
   SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
@@ -88,6 +89,7 @@ export function assertSourceReferenceAdmission({
     .some(hasSamePageContinuation)
   const ocr = sourceInput.ocrSourceBytes
   if (!ocr) {
+    if (sidecar?.figureExclusions?.length) reject('Explanation figure exclusions require sealed OCR evidence')
     if (figures.length) reject('Reference figures require sealed OCR confirmation and writing-scope anchors')
     if (continued) reject('Same-page continuation requires sealed confirmation source order and ownership')
     return
@@ -100,9 +102,9 @@ export function assertSourceReferenceAdmission({
   assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates)
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
-  if (!hasReferenceVisual && !figures.length && !continued) return
+  if (!hasReferenceVisual && !figures.length && !continued && !sidecar?.figureExclusions?.length) return
   if ((hasReferenceVisual || figures.length)
-    && (!sidecar || !['source-references-v3', 'source-references-v4'].includes(sidecar.schemaVersion))) {
+    && (!sidecar || !['source-references-v3', 'source-references-v4', 'source-references-v5'].includes(sidecar.schemaVersion))) {
     reject('Confirmed official-answer content figures require a complete source-references-v3/v4 sidecar; v1/v2 cannot omit them')
   }
   const documents = materialization.documents.map(document => ({ ...document,
@@ -111,10 +113,16 @@ export function assertSourceReferenceAdmission({
     evidence, confirmation })
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
   const allExpected = resolved.referenceFigures ?? []
+  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, allExpected, sidecar?.figureExclusions ?? [])
+  if (figures.some(({ figure }) => allExpected.some(reference =>
+    explanationFigures.has(sourceReferenceFigureIdentity(reference)) && reference.sourceRegionId === figure.sourceRegionId))) {
+    reject('An excluded explanation figure cannot also appear in writing references')
+  }
   const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected)
-  const expected = allExpected.filter(reference => !objectiveFigures.has(sourceReferenceFigureIdentity(reference))
+  const expected = allExpected.filter(reference => !explanationFigures.has(sourceReferenceFigureIdentity(reference))
+    && (!objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
-      && digestJson(reference.source) === digestJson(figure.source.locator)))
+      && digestJson(reference.source) === digestJson(figure.source.locator))))
   if (expected.length !== figures.length) reject('All confirmed official-answer content figures must match sidecar figures one-to-one')
   // Layout resolution moves table items out of paragraphs. Index validated
   // confirmation text before layout, excluding only picture-consumed identities.
@@ -207,7 +215,7 @@ export function assertSourceReferenceAdmission({
     seen.add(reference)
     figureReferences.set(figure, reference)
   }
-  if (sidecar.schemaVersion === 'source-references-v4') {
+  if (['source-references-v4', 'source-references-v5'].includes(sidecar.schemaVersion)) {
     // Local paragraph→figure adjacency alone permits swapping intact pairs.
     // Index the sealed page/item sequence, including picture-consumed items.
     const positions = new Map(confirmation.documents.flatMap(document =>
@@ -262,7 +270,7 @@ export function assertSourceReferenceAdmission({
         document: documents.find(document => document.documentId === figure.source.locator.documentId) })
       continue
     }
-    if (sidecar.schemaVersion === 'source-references-v4' && scoringScope) {
+    if (['source-references-v4', 'source-references-v5'].includes(sidecar.schemaVersion) && scoringScope) {
       reject('Confirmed scoring figures cannot be reassigned to essays')
     }
     const writingState = writingStates.get(reference.afterItem.itemId)

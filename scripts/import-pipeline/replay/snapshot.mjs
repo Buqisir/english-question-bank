@@ -89,7 +89,7 @@ export function snapshot(repo, sha, directory, worktree = null) {
     // These source-reference schemas are loaded eagerly through import.meta.url.
     // Freeze their exact ref bytes alongside modules, rather than reading live assets.
     if (relative === 'server/paper-import/sourceReferences.mjs') {
-      for (const match of source.matchAll(/new URL\(\s*'(\.\.\/\.\.\/schemas\/paper-import\/source-references-v[1-4]\.schema\.json)',\s*import\.meta\.url\s*\)/gu)) {
+      for (const match of source.matchAll(/new URL\(\s*'(\.\.\/\.\.\/schemas\/paper-import\/source-references-v[1-5]\.schema\.json)',\s*import\.meta\.url\s*\)/gu)) {
         const resource = path.posix.normalize(path.posix.join(path.posix.dirname(relative), match[1]))
         write(resource, read(resource))
       }

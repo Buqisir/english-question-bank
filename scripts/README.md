@@ -6,11 +6,17 @@ bytes，不重写旧版，不提升未变的 OCR confirmation/Materialization pr
 
 | New verifier | Distinct failure caught | CI |
 | --- | --- | --- |
+| `source-reference-exclusion.test.mjs` | Catches undeclared explanation-image omission, stale PDF/crop/anchor/OCR bindings, duplicate/forged confirmations, essay or scoring images (including labels consumed inside the image) laundered as explanation, multi-image first-declaration deadlock or cross-bound figure options, missing admission closure, and stale reference drafts/requests/products surviving redo; Candidate/UNKNOWN must reject without writes and unmodified source evidence/essay/scoring content must survive. | yes, via `verify-nck1-answer-source-shapes.mjs` |
 | `verify-source-reference-scoring-v4.mjs` | p03 标题/段落及 p04 续段的评分图在 compile → capture → admission → answerOnly 分页/PDF 丢失或乱序；伪造区域、重复 ID、越界归属、图片预算漏算，以及旧 v3 bytes/SHA 漂移。表→图的 v4 序列可表达和渲染，但现有 confirmation v3 的 consumed-anchor 拒绝必须保留（方案 A 不在本次范围）。 | yes |
 
 既有 `verify-review-publication-content.mjs` 增加 `--v4-scoring-figures`
 子场景：独立捕获“已审评分 PNG/crop/order 被替换或删除”、冻结 sidecar 承诺失效，
 并验证所有学生产品不含答案图；发布读取只消费冻结 PNG，不重新裁源 PDF。
+
+讲解图声明可在 `ocr-proofread.mjs exclude-explanation-figure <paperId>` 后重复
+`--figure <id> --figure-sha256 <digest> --anchor <itemId> --reason <原页理由>`，
+每组绑定各自的图，共用一次 `--agent-confirmed`。完整集合通过 producer/admission
+后才原子安装 draft；单图声明仍须满足整卷图像闭合，不能依靠未验证的中间 draft 累积。
 
 This directory contains many cut-specific verify scripts. Prefer the
 smallest script that proves the current risk. Do not run every script
