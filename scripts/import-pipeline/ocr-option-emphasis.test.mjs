@@ -8,11 +8,35 @@ import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } 
 import { deriveNck1MaterializationBundle, withNck1MaterializationSourceCache } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { nck1ListeningSourceDecisionAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { buildNck1ReviewConsumption } from '../../server/import-review/revisionProjection.mjs'
-import { materializeNck1CanonicalRequest, admitLiveConfirmedNck1MaterializationImport } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
+import { materializeNck1CanonicalRequest, admitLiveConfirmedNck1MaterializationImport, isLiveConfirmedNck1MaterializationAdmission } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
+import { sealCanonicalPublication, validateCanonicalPublicationBundle, publishCanonicalPaperPublication } from '../../server/paper-canonical/publication.mjs'
 import { upgradeOcrOptionEmphasis } from './materialization-option-emphasis.mjs'
 import { reviewPrintHtml } from '../../server/import-review/reviewPagination.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { buildCanonicalReadingConsumptionSurfaceData } from '../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import path from 'node:path'
+import { mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { DatabaseSync } from 'node:sqlite'
+
+async function assertScreenMarkup(model) {
+  const { createServer } = await import('../../app/node_modules/vite/dist/node/index.js')
+  const { createElement } = await import('../../app/node_modules/react/index.js')
+  const { renderToStaticMarkup } = await import('../../app/node_modules/react-dom/server.node.js')
+  const vite = await createServer({ root: path.resolve('app'), server: { middlewareMode: true } })
+  try {
+    const { PaperSurface } = await vite.ssrLoadModule('/src/shared-ui/papersurface/PaperSurface.tsx')
+    const html = renderToStaticMarkup(createElement(PaperSurface, {
+      ...model.surfaceData, annotations: [], evidence: [], canonicalReadingBlocks: model.richBlocks,
+      canonicalReadingPassageLetter: model.passageLetter, canonicalReadingSemanticSignature: model.semanticDigest,
+      mode: 'lecture', lectureFocus: null, readingFocusBySection: {}, onFocusIntent() {},
+    }))
+    const marked = model.surfaceData.questions.flatMap(q => q.options)
+      .flatMap(o => o.canonicalContent).find(node => node.marks?.includes('underline'))
+    assert(html.includes(`data-canonical-content-node-id="${marked.nodeId}" data-source-marks="underline"`),
+      'actual PaperSurface option DOM must consume the same source marks as Print/PDF')
+  } finally { await vite.close() }
+}
 
 const source = { kind: 'page_region', documentId: 'question', page: 1, region: { x: .1, y: .1, width: .8, height: .1 } }
 const fixture = () => {
@@ -45,6 +69,33 @@ test('separate option paragraphs retain repeated words and UTF-16 coordinates wi
   assert.deepEqual(mapped.targets[2].ranges, [{ start: 8, end: 12, marks: ['bold', 'underline'] }])
   assert.equal(mapped.targets[2].text.slice(8, 12), 'same')
 })
+for (const [name, separator, punctuation] of [
+  ['line-start bare', '\n', ''], ['double-space bare', '  ', ''], ['tab bare', '\t', ''],
+  ['CRLF bare', '\r\n', ''], ['ASCII dot', ' ', '.'], ['fullwidth dot', ' ', '．'],
+  ['ideographic comma', ' ', '、'],
+]) test(`producer label syntax replays ${name}, with and without emphasis`, () => {
+  for (const marked of [false, true]) {
+    const f = fixture()
+    f.paragraph.text = `21. ${f.question.stem}${f.question.options.map(option =>
+      `${separator}${option.label}${punctuation} ${option.text}`).join('')}`
+    const start = f.paragraph.text.indexOf('http://')
+    f.paragraph.sourceEmphasis = marked ? [{ start, end: start + 20, marks: ['underline'] }] : []
+    const mapped = resolveOcrQuestionTextEmphasis(f.question, f.structure)
+    assert.equal(mapped.targets[2].text, f.question.options[1].text)
+    assert.deepEqual(mapped.targets[2].ranges, marked ? [{ start: 6, end: 26, marks: ['underline'] }] : [])
+  }
+})
+for (const [name, change] of [
+  ['single-space bare labels', text => text.replaceAll('. ', ' ').replace(/^21 /u, '21. ')],
+  ['missing label', text => text.replace('B.', '')],
+  ['misordered bare labels', text => text.replace('B.', 'E')],
+  ['changed option text', text => text.replace('Connect phone.', 'Connect tablet.')],
+]) test(`producer label replay rejects ${name}`, () => {
+  const f = fixture()
+  f.paragraph.text = change(f.paragraph.text)
+  f.paragraph.sourceEmphasis = []
+  assert.throws(() => resolveOcrQuestionTextEmphasis(f.question, f.structure), /does not replay/u)
+})
 for (const [name, mutate, error] of [
   ['out-of-range span', f => { f.paragraph.sourceEmphasis[0].end = f.paragraph.text.length + 1 }, /outside/u],
   ['nonexistent option', f => { f.question.options[1].label = 'E' }, /ordered/u],
@@ -62,6 +113,10 @@ test('public OCR import compiles and admits sealed option marks; legacy readers 
   const f = await makeSyntheticNck1OcrFixture()
   const confirmation = structuredClone(f.confirmation)
   confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
+  const unmarked = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.text.startsWith('29. Which choice fits item 29?'))
+  assert(unmarked)
+  unmarked.text = unmarked.text.replace(/\s([A-D])[.．、]\s*/gu, '\n$1 ')
   const item = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
     .find(item => item.text.startsWith('30. Which choice fits item 30?'))
   assert(item)
@@ -80,6 +135,7 @@ test('public OCR import compiles and admits sealed option marks; legacy readers 
   const upgraded = upgradeOcrOptionEmphasis(input)
   assert.deepEqual(input.materializationBytes, baseline, 'upgrade must not mutate its historical input')
   const joined = { ...input, materializationBytes: upgraded.materializationBytes }
+  let screenModel
   withNck1MaterializationSourceCache(() => {
     const imported = importCanonicalCandidate(joined)
     assert.deepEqual(imported.issues, [])
@@ -92,6 +148,7 @@ test('public OCR import compiles and admits sealed option marks; legacy readers 
     const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
     assert.equal(consumption.disposition, 'ready')
     const surface = buildCanonicalReadingConsumptionSurfaceData({ consumption, groupId: group.groupId })
+    screenModel = surface
     assert.deepEqual(surface.surfaceData.questions.find(question => question.id.endsWith(':30')).options[1].canonicalContent,
       option.content, 'Screen surface data retains the exact marked option inlines')
     const html = reviewPrintHtml({ consumption, paperId: f.paperId, paperName: 'Synthetic option emphasis', paperAsset: {} }, 'student', buildPrintHtml)
@@ -101,9 +158,31 @@ test('public OCR import compiles and admits sealed option marks; legacy readers 
     assert.equal(preview.compilation.artifacts.canonicalPaper.paperPlan.authorityRef.manifestVersion, '77')
     const request = materializeNck1CanonicalRequest(joined, { schemaVersion: 'teacher-confirmation-v1', confirmed: true,
       sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest })
-    assert.equal(admitLiveConfirmedNck1MaterializationImport(request.request).compilation.disposition, 'ready')
+    const admitted = admitLiveConfirmedNck1MaterializationImport(request.request)
+    assert.equal(admitted.compilation.disposition, 'ready')
+    assert(isLiveConfirmedNck1MaterializationAdmission(admitted))
+    const sealed = sealCanonicalPublication({ compilation: admitted.compilation, sourceAsset: admitted.sourceAsset,
+      sourceAssetVersion: 1, nck1MaterializationConfirmationProof: admitted.proof })
+    const published = validateCanonicalPublicationBundle({ manifest: sealed.manifest, sourceAsset: sealed.sourceAsset,
+      readArtifact: path => sealed.artifacts[path] ?? sealed.sourceEvidence[path] })
+    assert.equal(published.manifest.authority.manifestVersion, '77')
+    const publishedOption = published.groups.find(g => g.identity.groupId === group.groupId)
+      .variant.choiceOwnership.sets.find(set => set.questionId.endsWith(':30')).options[1]
+    assert.deepEqual(publishedOption.content, option.content, 'full publication preserves exact source-marked option')
+    const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-option-emphasis-publication-'))
+    const db = new DatabaseSync(':memory:')
+    try {
+      const publication = publishCanonicalPaperPublication({ rootDir, db, request: request.request, sourceAssetVersion: 1 })
+      assert.equal(publication.status, 'published', JSON.stringify(publication.diagnostics))
+      assert.equal(publication.consumers.screen.disposition, 'ready')
+      assert.equal(publication.consumers.print_pdf.disposition, 'ready')
+    } finally {
+      db.close()
+      rmSync(rootDir, { recursive: true, force: true })
+    }
     assert(deriveNck1MaterializationBundle(joined, nck1ListeningSourceDecisionAuthorityRef).issues.some(issue => issue.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'))
   })
+  await assertScreenMarkup(screenModel)
   for (const [name, mutate] of [
     ['range outside sealed paragraph', (m, c) => { c.documents[0].pages.flatMap(page => page.orderedItems).find(value => value.itemId === item.itemId).sourceEmphasis[0].end = item.text.length + 1 }],
     ['nonexistent option label', m => { m.groups.find(group => group.questions.some(q => q.sourceNumber === 30)).questions.find(q => q.sourceNumber === 30).options[1].label = 'E' }],

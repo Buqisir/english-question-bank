@@ -27,7 +27,10 @@ export function resolveOcrQuestionTextEmphasis(question, structure) {
     let cursor = prefix.length + question.stem.length
     const targets = [{ key: 'stem', start: prefix.length, end: cursor, text: question.stem }]
     for (const [optionIndex, option] of options.entries()) {
-      const label = text.slice(cursor).match(new RegExp(`^\\s+${option.label}[.．、]\\s*`, 'u'))
+      // Match the producer's dotted labels, or bare labels only after a
+      // newline/tab/two spaces. Keep every source byte and target offset.
+      const label = text.slice(cursor).match(new RegExp(
+        `^(?:\\s+${option.label}[.．、]\\s*|\\s*(?:[\\t\\n]| {2,})${option.label}\\s+)`, 'u'))
       if (!label) break
       cursor += label[0].length
       if (text.slice(cursor, cursor + option.text.length) !== option.text) break

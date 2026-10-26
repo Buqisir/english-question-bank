@@ -278,7 +278,10 @@ export function isLiveConfirmedNck1MaterializationAdmission(admission) {
     nck1InImageOptionLabelsAuthorityRef,
   ) || isLiveConfirmedNck1Admission(
     admission,
-    nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef,
+    nck1ListeningSourceDecisionAuthorityRef,
+  ) || isLiveConfirmedNck1Admission(
+    admission,
+    nck1OcrOptionEmphasisAuthorityRef,
   )
 }
 

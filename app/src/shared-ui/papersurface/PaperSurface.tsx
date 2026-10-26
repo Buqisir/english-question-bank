@@ -1594,6 +1594,7 @@ function PaperSurfaceQuestionItem({
                         <span
                           key={inline.nodeId}
                           data-canonical-content-node-id={inline.nodeId}
+                          data-source-marks={inline.marks?.join(' ')}
                         >
                           {inline.text}
                         </span>
@@ -1795,6 +1796,7 @@ function PaperSurfaceOptionList({
                     <span
                       key={inline.nodeId}
                       data-canonical-content-node-id={inline.nodeId}
+                      data-source-marks={inline.marks?.join(' ')}
                     >
                       {inline.text}
                     </span>
