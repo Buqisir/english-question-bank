@@ -21,7 +21,7 @@ import { createRequire } from 'node:module'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan, productPlanVersion, productPlanAuthorization,
@@ -223,9 +223,9 @@ function productSet(ctx, projection = null) {
     projection ? projection.paginationSlotBindings.filter(entry => entry.familyContractId === 'listening').length : undefined)
 }
 
-function archive(ctx, file) {
+function archive(ctx, file, label = '') {
   if (!existsSync(file)) return
-  const target = path.join(ctx.work, 'superseded', `${new Date().toISOString().replace(/[:.]/gu, '-')}-${path.basename(file)}`)
+  const target = path.join(ctx.work, 'superseded', `${new Date().toISOString().replace(/[:.]/gu, '-')}-${label}${path.basename(file)}`)
   mkdirSync(path.dirname(target), { recursive: true })
   renameSync(file, target)
 }
@@ -523,10 +523,40 @@ function round2Prompts(ctx) {
   return prompts
 }
 
+export async function runOcrReview(ctx, generationPlan = null, execute = run) {
+  const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
+  const sealed = generationPlan ? { reused: false } : await execute(ctx, 'reuse-ocr', cli('review.mjs', 'reuse-ocr-confirmation', ctx.paperId,
+    '--input', path.join(ctx.work, 'proofread-input.json')), { review: true })
+  if (sealed.reused) {
+    say(`= 复用已封存 OCR（${sealed.revisionId}）`)
+    return sealed
+  }
+  const pushed = await execute(ctx, 'push-ocr', cli('review.mjs', 'push-ocr', ctx.paperId,
+    ...(generationPlan ? ['--ocr-generation-plan', path.resolve(generationPlan)] : [])), { review: true })
+  const revisionId = pushed.revisionId
+  if (!revisionId) fail('push-ocr 没有返回 revisionId')
+  if (generationPlan) writeJson(operationPath, { ...readJson(operationPath), revisionId })
+  await execute(ctx, 'proofread-ocr', cli('review.mjs', 'proofread-ocr', ctx.paperId, '--revision', revisionId,
+    '--input', path.join(ctx.work, 'proofread-input.json')), { review: true })
+  await execute(ctx, 'pull-ocr', cli('review.mjs', 'pull-ocr-confirmation', ctx.paperId, '--revision', revisionId), { review: true })
+  if (generationPlan) {
+    writeJson(operationPath, { ...readJson(operationPath), completedAt: new Date().toISOString() })
+    rmSync(path.join(ctx.fast, 'ocr-generation.lock'), { recursive: true })
+  }
+  return { revisionId }
+}
+
 async function afterProofread(ctx, args) {
+  const generationPlan = option(args, '--ocr-generation-plan')
+  const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
+  if (existsSync(path.join(ctx.fast, 'ocr-generation.lock'))
+    || (existsSync(operationPath) && !readJson(operationPath).completedAt)) {
+    fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 新代操作未闭合；保留计划、日志与操作记录，先只读 status 对账，不重放上传')
+  }
   if (hasListening(ctx) && !existsSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3'))) {
     fail('来源有听力但缺播放音频；请补齐音频。原卷无听力须在 prep 显式声明 --listening absent-by-exam-design')
   }
+  if (generationPlan) await startOcrGeneration(ctx, generationPlan)
   await step(ctx, 'flags-present', () => {
     const covered = new Set(readFlags(ctx).flatMap((flag) => flag.pages || []))
     const missing = readJson(path.join(ctx.work, 'trace.json')).pages.map((page) => page.key).filter((key) => !covered.has(key))
@@ -534,21 +564,7 @@ async function afterProofread(ctx, args) {
     return { pages: covered.size }
   })
   await step(ctx, 'compile', () => run(ctx, 'compile', cli('ocr-proofread.mjs', 'compile', ctx.paperId)))
-  await step(ctx, 'ocr-review', async () => {
-    const sealed = await run(ctx, 'reuse-ocr', cli('review.mjs', 'reuse-ocr-confirmation', ctx.paperId,
-      '--input', path.join(ctx.work, 'proofread-input.json')), { review: true })
-    if (sealed.reused) {
-      say(`= 复用已封存 OCR（${sealed.revisionId}）`)
-      return sealed
-    }
-    const pushed = await run(ctx, 'push-ocr', cli('review.mjs', 'push-ocr', ctx.paperId), { review: true })
-    const revisionId = pushed.revisionId
-    if (!revisionId) fail('push-ocr 没有返回 revisionId')
-    await run(ctx, 'proofread-ocr', cli('review.mjs', 'proofread-ocr', ctx.paperId, '--revision', revisionId,
-      '--input', path.join(ctx.work, 'proofread-input.json')), { review: true })
-    await run(ctx, 'pull-ocr', cli('review.mjs', 'pull-ocr-confirmation', ctx.paperId, '--revision', revisionId), { review: true })
-    return { revisionId }
-  })
+  await step(ctx, 'ocr-review', () => runOcrReview(ctx, generationPlan))
   await step(ctx, 'materialize', async () => {
     await run(ctx, 'materialize', cli('universal-nck1.mjs', 'materialize', ctx.paperId))
     return { issues: (readJson(materializationPath(ctx)).issues || []).length }
@@ -1200,12 +1216,64 @@ export async function requestedRedo(ctx, name) {
   redoFrom(ctx, name)
 }
 
+export async function startOcrGeneration(ctx, planPath, checkPlan = async () => run(ctx, 'check-ocr-generation',
+  cli('review.mjs', 'check-ocr-generation', ctx.paperId, '--ocr-generation-plan', path.resolve(planPath)), { review: true })) {
+  assertReferencesMutable(ctx)
+  const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
+  if (existsSync(operationPath) && !readJson(operationPath).completedAt) fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 已有未闭合新代操作；先只读对账，勿自动重放')
+  if (!ctx.state.steps.compile?.finishedAt) fail('显式新代要求先完成 compile 并审查计划，不在执行计划时重新 compile')
+  const plan = readJson(path.resolve(planPath))
+  await checkPlan()
+  for (const [file, digest] of [
+    ['signals/agent-proofreading-receipt.json', plan.baseReceiptDigest],
+    ['materialization/nck1-ocr-source-confirmation-v1.json', plan.baseConfirmationDigest],
+  ]) {
+    const installed = path.join(ctx.paperDir, file)
+    if (existsSync(installed) && digestJson(readJson(installed)) !== digest) fail('本地旧 OCR 安装与计划不符；保留证据并对账')
+  }
+  // Use the existing publication-operation lock convention: retain it on
+  // failure and never infer that a response loss means no remote mutation.
+  mkdirSync(path.join(ctx.fast, 'ocr-generation.lock'), { mode: 0o700 })
+  if (existsSync(operationPath)) archive(ctx, operationPath)
+  writeJson(operationPath, { plan, startedAt: new Date().toISOString() }, 'wx')
+  writeJson(path.join(ctx.work, 'superseded', `ocr-generation-${digestJson(plan).slice(7)}-state.json`), ctx.state, 'wx')
+  redoFrom(ctx, 'ocr-review')
+  for (const [index, file] of [
+    path.join(ctx.paperDir, 'signals/agent-proofreading-receipt.json'),
+    path.join(ctx.paperDir, 'materialization/nck1-ocr-source-confirmation-v1.json'),
+    path.join(ctx.paperDir, 'materialization/agent-proofreading-receipt.json'),
+    path.join(ctx.paperDir, 'canonical-evidence'),
+    path.join(ctx.work, 'ocr-correction-entries.json'),
+    path.join(ctx.work, 'materialization-edits.json'),
+    ...['summaries-parts', 'search-metadata-authored.json', 'spelling-request.json', 'spelling-review.json',
+      'round2.json'].map(file => path.join(ctx.fast, file)),
+  ].entries()) archive(ctx, file, `ocr-generation-${index}-`)
+  // Retain old listening attempt directories as evidence; redoFrom forgets
+  // their binding so the existing rule creates a new attempt for the new input.
+}
+
 const [command, paperId, ...args] = process.argv.slice(2)
 if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
   const ctx = context(paperId)
+  if (args.includes('--ocr-generation-plan') && (command !== 'after-proofread' || args.includes('--redo-from'))) {
+    fail('--ocr-generation-plan 仅用于 after-proofread，不能与 --redo-from 合用')
+  }
+  if (args.includes('--ocr-generation-plan') && (!option(args, '--ocr-generation-plan')
+    || option(args, '--ocr-generation-plan').startsWith('--'))) fail('--ocr-generation-plan requires <plan.json>')
+  const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
+  if ((existsSync(path.join(ctx.fast, 'ocr-generation.lock'))
+    || (existsSync(operationPath) && !readJson(operationPath).completedAt)) && command !== 'status') {
+    fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 新代操作未闭合；仅可只读 status 对账，禁止重放或 redo')
+  }
   if (option(args, '--redo-from')) await requestedRedo(ctx, option(args, '--redo-from'))
   if (command === 'prep') await prep(ctx, args)
   else if (command === 'after-proofread') await afterProofread(ctx, args)
+  else if (command === 'plan-ocr-generation') {
+    const output = option(args, '--output'), reason = option(args, '--reason')
+    if (!output || !reason) fail('plan-ocr-generation requires --reason and --output')
+    say(JSON.stringify(await run(ctx, 'plan-ocr-generation', cli('review.mjs', 'plan-ocr-generation', ctx.paperId,
+      '--reason', reason, '--output', path.resolve(output)), { review: true }), null, 2))
+  }
   else if (command === 'finish') await finish(ctx, args)
   else if (command === 'submit') await submit(ctx, args)
   else if (command === 'preview-local') await submit(ctx, [...args, '--local-preview'])

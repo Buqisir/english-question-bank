@@ -77,6 +77,7 @@ import { resolveReviewOrigin } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
+import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
@@ -778,13 +779,42 @@ async function cleanupPlan(paperId) {
   }, null, 2))
 }
 
+function ocrGenerationContext(paperId, projection = buildNck1OcrReviewProjection(paperDirectory(paperId))) {
+  const inputPath = path.join(root, 'imports/ocr-proofread', paperId, 'proofread-input.json')
+  return { paperId, origin: origin(), projection,
+    proofreadInput: JSON.parse(readFileSync(inputPath, 'utf8')),
+    readRemote: pathname => api(pathname) }
+}
+
+async function inspectOcrGeneration(paperId, check = false) {
+  const context = ocrGenerationContext(paperId)
+  const planPath = option('--ocr-generation-plan')
+  if (check && !planPath) fail('check-ocr-generation requires --ocr-generation-plan')
+  const plan = check
+    ? await checkOcrGenerationPlan(JSON.parse(readFileSync(path.resolve(planPath), 'utf8')), context)
+    : await planOcrGeneration({ ...context, reason: option('--reason') })
+  if (!check) {
+    const output = option('--output')
+    if (!output) fail('plan-ocr-generation requires --output')
+    writeFileSync(path.resolve(output), `${JSON.stringify(plan, null, 2)}\n`, { flag: 'wx' })
+  }
+  console.log(JSON.stringify(plan, null, 2))
+}
+
 async function pushOcrReview(paperId) {
+  if (process.argv.includes('--ocr-generation-plan') && (!option('--ocr-generation-plan')
+    || option('--ocr-generation-plan').startsWith('--'))) fail('--ocr-generation-plan requires <plan.json>')
   const paperDir = paperDirectory(paperId)
   const projection = buildNck1OcrReviewProjection(paperDir)
+  const planPath = option('--ocr-generation-plan')
+  const generation = planPath ? await checkOcrGenerationPlan(
+    JSON.parse(readFileSync(path.resolve(planPath), 'utf8')), ocrGenerationContext(paperId, projection),
+  ) : null
   const input = {
     schemaVersion: 'web-import-ocr-review-bundle-v1',
     paperId: projection.paperId,
     paperName: projection.paperName,
+    ...(generation ? { expectedBaseRevisionId: generation.expectedBaseRevisionId } : {}),
     sourceSetDigest: projection.sourceSetDigest,
     evidenceDigest: projection.evidenceDigest,
     reviewStructureDigest: projection.reviewStructureDigest,
@@ -1717,6 +1747,8 @@ async function main() {
   else if (command === 'link-thread') await linkThread(paperId)
   else if (command === 'cleanup-plan') await cleanupPlan(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
+  else if (command === 'plan-ocr-generation') await inspectOcrGeneration(paperId)
+  else if (command === 'check-ocr-generation') await inspectOcrGeneration(paperId, true)
   else if (command === 'proofread-ocr') await proofreadOcr(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
   else if (command === 'reuse-ocr-confirmation') await reuseOcrConfirmation(paperId)
@@ -1746,7 +1778,8 @@ async function main() {
       + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--large-complete-page-limit 13 | --large-no-listening-page-limit 11 (Owner 2026-10-24 BUB-138)] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
       + 'cleanup-plan <paperId> --revision rev-id (inspection only; never deletes or certifies eligibility) | '
       + 'link-thread <paperId> --thread T-id [--from T-id] (explicit discussion handoff only) | '
-      + 'push-ocr <paperId> | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | reuse-ocr-confirmation <paperId> --input proofread-input.json | '
+      + 'plan-ocr-generation <paperId> --reason <reason> --output <plan.json> | check-ocr-generation <paperId> --ocr-generation-plan <plan.json> | '
+      + 'push-ocr <paperId> [--ocr-generation-plan <plan.json>] | proofread-ocr <paperId> --revision rev-id --input review.json | pull-ocr-confirmation <paperId> [--revision rev-id] | reuse-ocr-confirmation <paperId> --input proofread-input.json | '
       + 'finalize-ocr-correction-report <paperId> --input <entries.json> | '
       + 'prepare-spelling <paperId> --output <request.json> | finalize-spelling <paperId> --input <review.json> | verify-spelling <paperId> | '
       + 'preprocessing-report <paperId> --evidence <evidence.json> --output <report.md> | '

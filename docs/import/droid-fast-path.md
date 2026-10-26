@@ -91,7 +91,37 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
   不重跑 producer、不修改封存 OCR；规则执行和实际变换分别记录在该步骤结果中。
   已发布版本不迁移，未命中时不重写 Materialization。
   OCR 已确认后又改了校对草稿（例如补漏标的图）用 `--redo-from compile`：
-  旧 OCR 证据、确认和回执一并挪走，重新 push-ocr 建新 OCR revision（Review 里旧的变 superseded）。
+  旧 OCR 证据、确认和回执一并挪入 `superseded/`，compile 形成新 staged evidence。
+  普通 resume 遇到远端旧 approved OCR 仍会以 `SEALED_OCR_PULL_REQUIRED` 停止，不自动推断重封意图。
+
+### 显式创建下一代 OCR（源文件字节不变）
+
+仅适用于已完成上述 compile、远端最新仍为 approved OCR 且从未存在 Candidate 的卷。
+先核实已有锁与原事务已闭合，再生成只读计划：
+
+```sh
+node scripts/import-pipeline/fast-import.mjs plan-ocr-generation <id> \
+  --reason "对照原图补充漏识别区域；原 source bytes 不变" --output <plan.json>
+```
+
+检查计划中的 paperId、Review origin、expectedBaseRevisionId、旧 bundle/evidence/receipt/confirmation
+摘要、原 sourceSet、新 evidence/structure/proofread-input 摘要及理由。计划不上传、不确认修订。
+新旧 evidence 相同、源字节改变、远端状态不明、存在任何 Candidate 或并发上传时均拒绝。
+显式执行审查后的计划：
+
+```sh
+node scripts/import-pipeline/fast-import.mjs after-proofread <id> --ocr-generation-plan <plan.json>
+```
+
+不能与 `--redo-from` 同用。执行前再次只读校验计划，使用既有归档/redo 机制保留旧安装、entries、
+Canonical 确认和第二轮作者稿，重建全部下游；旧听核 attempt 保留在原目录，不改绑。
+服务端在注册和 finalize 两处检查同一精确 base，禁止默默替代 Candidate。
+新 exact OCR revision 才能 proofread/pull；完成后不再传新代参数，用普通 `after-proofread`、`finish` 继续。
+
+`fast/ocr-generation-operation.json` 与 `fast/ocr-generation.lock` 保留操作身份和未知结果。
+失败、断连或崩溃后先用 `review.mjs status <id>` 只读对账；不得删除锁、手填 fast state 或重放上传。
+已送审或已发布卷使用已有明确修订事务，不属于本入口。未选择本模式的请求不增加 manifest 字段、
+不迁移、不重封，历史 digest 与普通 resume 行为保持不变。
 
 ## 批量编排（batch-run.mjs）
 

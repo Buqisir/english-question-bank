@@ -73,6 +73,8 @@ const registry = {
   'scripts/verify-universal-nck1-source-only-intake.mjs',
   'scripts/verify-universal-nck1-source-only-boundaries.mjs',
   'scripts/verify-import-review-ocr-confirmation.mjs',
+  'scripts/import-pipeline/ocr-generation.test.mjs',
+  'scripts/import-pipeline/sealed-ocr-resume.test.mjs',
   'scripts/verify-import-review-ocr-worker.mjs',
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-import-review-target.mjs',
