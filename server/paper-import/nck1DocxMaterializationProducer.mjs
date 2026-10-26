@@ -1,3 +1,4 @@
+import { answerGridPairs as parseAnswerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { execFileSync } from 'node:child_process'
 
 import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
@@ -932,6 +933,8 @@ function choiceAnswerValue(rawValue) {
   return /^[A-G]$/u.test(normalized(rawValue)) ? normalized(rawValue) : null
 }
 
+const answerGridPairs = (numbers, values) => parseAnswerGridPairs(numbers, values, answerValueFor)
+
 function answerValueFor(number, rawValue) {
   return number <= 55 ? choiceAnswerValue(rawValue) : textAnswerValue(rawValue)
 }
@@ -958,31 +961,6 @@ function unpunctuatedAnswerPairs(text) {
   return values.every(Boolean) ? pairs.map(([number], index) => [number, values[index]]) : null
 }
 
-const ANSWER_GRID_NUMBER_LABEL = /^(?:题号|题序|序号|小题)$/u
-const ANSWER_GRID_VALUE_LABEL = /^答案$/u
-
-// One number row and the answer row printed under it, from a table or from
-// two transcribed lines ("序号 1 2 3" / "答案 C C B"). Text lines carry no cell
-// boundaries, so their answers must be one word each; tables keep phrases.
-function answerGridPairs(numberCells, valueCells) {
-  const label = (cells, pattern) => (pattern.test(normalized(cells[0])) ? cells.slice(1) : null)
-  const numbers = label(numberCells, ANSWER_GRID_NUMBER_LABEL)
-  const values = label(valueCells, ANSWER_GRID_VALUE_LABEL)
-  if (!numbers || !values) return null
-  const used = numbers.findLastIndex((cell) => normalized(cell)) + 1
-  const parsedNumbers = numbers.slice(0, used).map((cell) =>
-    (/^\d{1,2}$/u.test(normalized(cell)) ? Number(normalized(cell)) : null))
-  if (used < 2 || parsedNumbers.some((number) => number === null) || !consecutive(parsedNumbers)) return { ambiguous: true }
-  if (values.length < used || values.slice(used).some((cell) => normalized(cell))) return { ambiguous: true, numbers: parsedNumbers }
-  const parsedValues = parsedNumbers.map((number, index) => answerValueFor(number, values[index]))
-  return parsedValues.every(Boolean)
-    ? { pairs: parsedNumbers.map((number, index) => [number, parsedValues[index]]) }
-    : { ambiguous: true, numbers: parsedNumbers }
-}
-
-function answerLineCells(text) {
-  return normalized(text).replace(/^(\S+?) ?[|｜:：] ?/u, '$1 ').split(' ')
-}
 
 const NUMBERED_WRITING_ANSWER_SECTION = /^(?:第四部分|四[、.．])\s*[:：]?\s*(?:写作|书面表达)/u
 // Some answer books print only "写作" above the samples; it counts only when no

@@ -1,11 +1,11 @@
-import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigureAnchors } from './sourceReferenceScoringScope.mjs'
+import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from './sourceReferenceScoringScope.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
   SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
-import { sourceReferenceEssayTaskStates } from './sourceReferenceWritingTask.mjs'
+import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -111,8 +111,8 @@ export function assertSourceReferenceAdmission({
     evidence, confirmation })
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
   const allExpected = resolved.referenceFigures ?? []
-  const objectiveAnchors = sourceReferenceObjectiveFigureAnchors(confirmation, answerIds)
-  const expected = allExpected.filter(reference => !objectiveAnchors.has(reference.afterItem.itemId)
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected)
+  const expected = allExpected.filter(reference => !objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
       && digestJson(reference.source) === digestJson(figure.source.locator)))
   if (expected.length !== figures.length) reject('All confirmed official-answer content figures must match sidecar figures one-to-one')
@@ -160,8 +160,18 @@ export function assertSourceReferenceAdmission({
       (confirmedTexts.get(source.locator.documentId) ?? [])
         .filter(item => containsSource(source, item.sourceIndex)))
     const surviving = fragments.flat()
+    // The shared lifecycle projects a merged bare heading/sample item to its
+    // sample label. Permit that exact projection only for the essay label owned
+    // by this item/task; prose and scoring still replay the complete item.
+    const owner = surviving.length === 1 && writingStates.get(surviving[0].itemId)
+    const merged = text.kind === 'essays' && text.source === text.entry.labelSource
+      && owner?.capturing && owner.labelItemId === surviving[0].itemId
+      && owner.task === text.group.taskType
+      ? sourceReferenceWritingTaskHeading(surviving, 0) : null
+    const replayText = merged?.bare && merged.started === owner.task && merged.mergedLabel
+      ? merged.mergedLabel : surviving.map(item => item.text).join(' ')
     if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length
-      || joinedText(surviving.map(item => item.text).join(' ')) !== joinedText(text.text)) {
+      || joinedText(replayText) !== joinedText(text.text)) {
       reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')
     }
     if (hasSamePageContinuation(text)) {

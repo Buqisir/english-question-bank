@@ -343,6 +343,9 @@ export function sourceReferenceWritingLifecycle(lines, {
   const items = new Map(lines.filter(line => line.itemId).map(line => [line.itemId,
     { task: null, capturing: false, ended: false, kind: null, action: 'outside' }]))
   const sections = new Map()
+  // Capture can replace a merged heading's item state with an entry state.
+  // Keep task starts independent so consumers never infer switches from entries.
+  const taskStarts = new Map()
   const scope = createWritingScope(sections)
   let afterListening = false, scoringAppendix = false, afterExplanations = false
   const lastObjectiveQuestion = sourceReferenceLastObjectiveQuestion(materialization)
@@ -434,6 +437,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     })
     if (scoringSection) {
       scope.startTask(scoringSection, { reuse: true })
+      taskStarts.set(line.itemId, scoringSection)
       items.set(line.itemId, { task: scoringSection, capturing: false, ended: false, kind: null, action: 'task' })
       // This task heading also labels its rubric. A following explicit entry
       // label owns the body instead; avoid manufacturing an empty parent entry.
@@ -445,6 +449,7 @@ export function sourceReferenceWritingLifecycle(lines, {
       // A rubric appendix supplements the original samples; an ordinary task
       // restart still replaces its prior section as before.
       scope.startTask(started, { reuse: scoringAppendix })
+      taskStarts.set(line.itemId, started)
       items.set(line.itemId, { task: started, capturing: false, ended: false, kind: null, action: 'task' })
       if (unlabeledApplicationLetter) scope.current.letterEnd = unlabeledApplicationLetter.end
       if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
@@ -473,7 +478,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     Object.assign(section, planReferenceCapture(section, factsFor))
     for (const step of section.steps) if (step.line.itemId) items.set(step.line.itemId, step.state)
   }
-  return { sections, items, furniture, review }
+  return { sections, items, taskStarts, furniture, review }
 }
 
 // Reference-capture policy belongs here, never in either consumer. Steps are

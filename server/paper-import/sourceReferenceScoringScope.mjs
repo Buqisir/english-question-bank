@@ -1,9 +1,11 @@
+import { sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
+import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView,
-  OBJECTIVE_ANSWER_FIGURE_MARKER,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
   isSourceReferenceSampleLabel,
 } from './sourceReferenceWritingRules.mjs'
@@ -29,6 +31,11 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
     let afterListening = false
     const items = document.pages.flatMap(page => page.orderedItems)
+    // Reuse extraction's task recognition, including adjacent/merged sample
+    // labels. Existing scoring termination/reopening rules remain authoritative.
+    const lifecycle = sourceReferenceWritingLifecycle(items, {
+      materialization: { groups: [] }, answerDocument: { role: 'official_answers' },
+    })
     for (const [index, item] of items.entries()) {
       let appendixTask = null
       if (terminal) {
@@ -92,7 +99,8 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
         scopes.set(item.itemId, null)
         continue
       }
-      let task = appendixTask || WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] || null
+      const sharedTask = !ended && !afterListening ? lifecycle.taskStarts.get(item.itemId) : null
+      let task = appendixTask || sharedTask || WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] || null
       const scoringTask = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0]
       task ??= scoringTask
       if (NUMBERED_APPLICATION_SECTION.test(heading)) task = 'application'
@@ -131,35 +139,45 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
   return scopes
 }
 
-// Positive source evidence is required so an unconsumed real rubric image
-// cannot disappear merely because its writing anchor was lost.
-export function sourceReferenceObjectiveFigureAnchors(confirmation, answerIds) {
+// Identity includes the document/page/crop, never just the shared text anchor.
+export const sourceReferenceFigureIdentity = figure =>
+  digestJson([figure.sourceRegionId, figure.source])
+
+// The visual resolver must already have proved crop/observation closure.
+// No heading alone can authorize this new path: consume every confirmed word.
+export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures) {
+  const objective = new Set()
   const starts = new Map()
   sourceReferenceScoringScopes(confirmation, answerIds, {
     onWritingStart: (documentId, itemId) => starts.set(documentId, itemId),
   })
-  const anchors = new Set()
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     const items = document.pages.flatMap(page => page.orderedItems)
-    // Scoring can begin before any named task. Its first complete overview
-    // or entry label already rules out treating a following A–G image as objective.
-    const explicitStart = items.findIndex(item => {
-      const heading = writingRuleMatchingView(item.text)
-      return item.itemId === starts.get(document.documentId)
-        || WRITING_SCORING_OVERVIEW.test(heading)
-        || isScoringLabel(item.text, WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(heading)))
-    })
-    if (explicitStart < 0) continue
-    // Earlier bare/combined producer headings also cap this exclusion. When
-    // their task context is ambiguous, retain the image rather than discard it.
-    const start = items.findIndex((item, index) => {
-      const text = item.text.normalize('NFKC').trim()
-      return index === explicitStart || BARE_WRITING_SECTION.test(text.split('\n')[0].trim())
-        || INLINE_WRITING_SAMPLE.test(text) || INLINE_WRITING_ANSWER_SAMPLE.test(text)
-    })
-    for (const item of items.slice(0, start)) {
-      if (OBJECTIVE_ANSWER_FIGURE_MARKER.test(item.text.trim())) anchors.add(item.itemId)
+    const positions = new Map(items.map((item, index) => [item.itemId, index]))
+    const start = items.findIndex(item => item.itemId === starts.get(document.documentId)
+      || WRITING_SCORING_OVERVIEW.test(writingRuleMatchingView(item.text))
+      || isScoringLabel(item.text, WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(writingRuleMatchingView(item.text))))
+      || BARE_WRITING_SECTION.test(item.text.normalize('NFKC').split('\n')[0].trim())
+      || INLINE_WRITING_SAMPLE.test(item.text.normalize('NFKC').trim())
+      || INLINE_WRITING_ANSWER_SAMPLE.test(item.text.normalize('NFKC').trim()))
+    for (const figure of figures.filter(figure => figure.source.documentId === document.documentId)) {
+      if (start < 0 || !figure.itemIds.length
+        || figure.itemIds.some(id => !positions.has(id) || positions.get(id) >= start)
+        || positions.get(figure.afterItem.itemId) >= start) continue
+      const selected = figure.itemIds.map(id => items[positions.get(id)])
+      const rows = selected.flatMap(item => item.text.split(/\r?\n/u)).map(answerLineCells)
+      if (rows.length < 2 || rows.length % 2) continue
+      let previous = null, valid = true
+      for (let index = 0; index < rows.length; index += 2) {
+        const parsed = answerGridPairs(rows[index], rows[index + 1], (number, value) =>
+          number >= 1 && number <= 55 && (number <= 20 ? /^[A-C]$/u : number >= 36 && number <= 40 ? /^[A-G]$/u : /^[A-D]$/u).test(value.trim())
+            ? value.trim() : null)
+        if (!parsed?.pairs || parsed.pairs.some(([number], i) =>
+          i === 0 && previous !== null && number !== previous + 1)) { valid = false; break }
+        previous = parsed.pairs.at(-1)[0]
+      }
+      if (valid) objective.add(sourceReferenceFigureIdentity(figure))
     }
   }
-  return anchors
+  return objective
 }
