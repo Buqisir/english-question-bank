@@ -7,7 +7,8 @@ import { produceNck1OcrMaterialization } from '../../server/paper-import/nck1Ocr
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { deriveNck1MaterializationBundle, withNck1MaterializationSourceCache } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { nck1ListeningSourceDecisionAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
-import { buildNck1ReviewConsumption } from '../../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewConsumption, buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
+import { makeOptionEmphasisMediaFixture, writeOptionEmphasisMediaReviewFixture } from '../../test-fixtures/paper-import/nck1-ocr-evidence-v1/option-emphasis-media.mjs'
 import { materializeNck1CanonicalRequest, admitLiveConfirmedNck1MaterializationImport, isLiveConfirmedNck1MaterializationAdmission } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { sealCanonicalPublication, validateCanonicalPublicationBundle, publishCanonicalPaperPublication } from '../../server/paper-canonical/publication.mjs'
 import { upgradeOcrOptionEmphasis } from './materialization-option-emphasis.mjs'
@@ -39,6 +40,53 @@ async function assertScreenMarkup(model) {
 }
 
 const source = { kind: 'page_region', documentId: 'question', page: 1, region: { x: .1, y: .1, width: .8, height: .1 } }
+test('public v11 option emphasis preserves non-default media through capture, Review and publication readback', async () => {
+  const f = await makeOptionEmphasisMediaFixture()
+  const upgraded = upgradeOcrOptionEmphasis(f.input)
+  const input = { ...f.input, materializationBytes: upgraded.materializationBytes }
+  const imported = importCanonicalCandidate(input)
+  assert.deepEqual(imported.issues, [])
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const captured = preview.compilation.artifacts.sourceCapture.observations
+    .find(observation => observation.kind === 'source_media' && observation.value.mediaId === f.media.mediaId)
+  assert.deepEqual(captured.value.presentation, f.media.presentation)
+  assert.deepEqual(captured.value.publication, f.media.publication)
+  const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-option-emphasis-media-'))
+  const db = new DatabaseSync(':memory:')
+  try {
+    writeOptionEmphasisMediaReviewFixture(rootDir, f, upgraded.materializationBytes)
+    const review = buildNck1ReviewProjection(rootDir)
+    const derivation = review.mediaDerivations.find(media => media.mediaId === f.media.mediaId)
+    assert(derivation, 'actual Review must keep the source media derivation')
+    assert.deepEqual(derivation.presentation, f.media.presentation)
+    assert.deepEqual(derivation.publication, f.media.publication)
+    const assertMedia = consumption => {
+      const occurrences = consumption.selections.flatMap(selection => selection.projectedOccurrences)
+      const media = occurrences.flatMap(occurrence => occurrence.media).find(media => media.mediaId === f.media.mediaId)
+      assert.deepEqual(media.presentation, f.media.presentation)
+      const marked = consumption.selections.filter(selection => selection.familyContractId === 'reading')
+        .flatMap(selection => selection.groupIds).flatMap(groupId =>
+          buildCanonicalReadingConsumptionSurfaceData({ consumption, groupId }).surfaceData.questions)
+        .flatMap(question => question.options).flatMap(option => option.canonicalContent || [])
+        .filter(node => node.marks?.includes('underline'))
+      assert(marked.some(node => node.text === f.emphasizedText), 'media and option marks must coexist')
+    }
+    assertMedia(review.consumption)
+    const request = materializeNck1CanonicalRequest(input, { schemaVersion: 'teacher-confirmation-v1',
+      confirmed: true, sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest })
+    const publication = publishCanonicalPaperPublication({ rootDir: path.join(rootDir, 'publication'),
+      db, request: request.request, sourceAssetVersion: 1 })
+    assert.equal(publication.status, 'published', JSON.stringify(publication.diagnostics))
+    for (const consumer of ['screen', 'print_pdf']) {
+      assert.equal(publication.consumers[consumer].disposition, 'ready')
+      assertMedia(publication.consumers[consumer])
+    }
+  } finally {
+    db.close()
+    rmSync(rootDir, { recursive: true, force: true })
+  }
+})
 const fixture = () => {
   const question = { sourceNumber: 21, stem: 'Which address?', source,
     options: ['Visit home.', 'Visit http://192.168.100.1.', 'Connect phone.', 'Enter password.'].map((text, index) => ({ label: String.fromCharCode(65 + index), text })) }

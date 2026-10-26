@@ -135,3 +135,19 @@ test('existing explicit givens and cached presentation preserve v8 relations', (
   assert.deepEqual(restoreOcrSourcePresentation({ materialization: withGivens, evidence: f.proof.evidence,
     confirmation: f.proof.confirmation }), withGivens)
 })
+
+test('v11 authoring retains the successor when joining paragraphs and confirming writing givens', () => {
+  const f = fixture()
+  const raw = { ...f.m, schemaVersion: 'nck1-source-materialization-v11' }
+  const input = { ...f.input, materializationBytes: encode(raw) }
+  const plan = planMaterializationParagraphJoin(input, f.receiptBytes, f.options)
+  const joined = applyMaterializationParagraphJoinPlan(input, f.receiptBytes, plan, { confirmed: true }).materialization
+  assert.equal(joined.schemaVersion, raw.schemaVersion)
+  assert.deepEqual(joined.groups, raw.groups)
+  const withGivens = confirmMaterializationWritingGivens(joined, {
+    groupId: joined.groups[7].groupId, givenBlockRefs: ['block:application-salutation'], confirmed: true,
+  })
+  assert.equal(withGivens.schemaVersion, raw.schemaVersion)
+  assert.deepEqual(withGivens.paragraphJoins, joined.paragraphJoins)
+  assert.deepEqual(validateNck1SourceMaterialization(withGivens), [])
+})

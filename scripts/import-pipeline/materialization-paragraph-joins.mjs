@@ -12,7 +12,7 @@ function context(input, receiptBytes) {
   const evidence = parse(input.ocrSourceBytes?.evidenceBytes)
   const confirmation = parse(input.ocrSourceBytes?.confirmationBytes)
   const receipt = parse(receiptBytes)
-  if (!/^nck1-source-materialization-v(?:[1-9]|10)$/u.test(materialization.schemaVersion)
+  if (!/^nck1-source-materialization-v(?:[1-9]|1[01])$/u.test(materialization.schemaVersion)
     || confirmation.schemaVersion !== 'nck1-ocr-source-confirmation-v3' || confirmation.confirmed !== true
     || materialization.paperId !== evidence.paperId || materialization.paperId !== confirmation.paperId
     || materialization.paperId !== receipt.paperId || receipt.reviewerKind !== 'import_agent'
@@ -78,7 +78,7 @@ export function applyMaterializationParagraphJoinPlan(input, receiptBytes, plan,
   })
   if (!same(plan, regenerated)) throw new Error('Paragraph join plan differs from its bound complete source fragments')
   const result = structuredClone(materialization)
-  if (!['nck1-source-materialization-v9', 'nck1-source-materialization-v10'].includes(result.schemaVersion)) {
+  if (!['nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(result.schemaVersion)) {
     result.schemaVersion = 'nck1-source-materialization-v8'
   }
   result.paragraphJoins = [...(result.paragraphJoins || []), structuredClone(plan.relation)]

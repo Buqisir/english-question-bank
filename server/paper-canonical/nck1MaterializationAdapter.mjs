@@ -1524,7 +1524,7 @@ export function deriveNck1SemanticSource(
                 },
               }
             : {}),
-          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),

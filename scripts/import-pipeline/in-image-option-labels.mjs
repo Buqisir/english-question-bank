@@ -17,7 +17,7 @@ function context(input) {
   const raw = parse(input.materializationBytes)
   const evidence = parse(input.ocrSourceBytes?.evidenceBytes)
   const confirmation = parse(input.ocrSourceBytes?.confirmationBytes)
-  if (!/^nck1-source-materialization-v[3-9]$/u.test(raw.schemaVersion)
+  if (!/^nck1-source-materialization-v(?:[3-9]|1[01])$/u.test(raw.schemaVersion)
     || confirmation.schemaVersion !== 'nck1-ocr-source-confirmation-v3' || confirmation.confirmed !== true
     || raw.paperId !== evidence.paperId || raw.paperId !== confirmation.paperId
     || confirmation.evidenceDigest !== evidence.evidenceDigest || confirmation.sourceSetDigest !== evidence.sourceSetDigest
@@ -54,7 +54,9 @@ export function planInImageOptionLabels(input, selection) {
     sourceReview: { reviewedBy: 'import_agent', labelsInParentPixels: true, reason: selection.reason },
     labels: structuredClone(selection.labels),
   }
-  resolveInImageOptionLabels({ ...raw, schemaVersion: 'nck1-source-materialization-v9',
+  resolveInImageOptionLabels({ ...raw, schemaVersion:
+    ['nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(raw.schemaVersion)
+      ? raw.schemaVersion : 'nck1-source-materialization-v9',
     inImageOptionLabels: [...(raw.inImageOptionLabels || []), decision] })
   const plan = { schemaVersion: PLAN_VERSION, paperId: raw.paperId, binding, decision }
   return { ...plan, planDigest: digestJson(plan) }
@@ -73,7 +75,9 @@ export function applyInImageOptionLabelsPlan(input, plan, { confirmed = false } 
     parentSource: d.parentSource, anchorItemId: d.anchorItemId, labels: d.labels, reason: d.sourceReview?.reason,
   })
   if (!same(plan, regenerated)) fail('In-image label plan differs from its exact source-bound selection')
-  const materialization = { ...raw, schemaVersion: 'nck1-source-materialization-v9',
+  const materialization = { ...raw, schemaVersion:
+    ['nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(raw.schemaVersion)
+      ? raw.schemaVersion : 'nck1-source-materialization-v9',
     inImageOptionLabels: [...(raw.inImageOptionLabels || []), structuredClone(d)] }
   const materializationBytes = encode(materialization)
   // The ordinary adapter replays the immutable question/parent ordering, child
