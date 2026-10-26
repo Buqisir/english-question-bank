@@ -14,7 +14,7 @@ const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
 
 // Bare part/sections plus a variable-width answer grid reproduce the alliance
 // layout without copying its passages, answers or raster assets.
-const objectiveGrid = '题序 1 2 3\n答案 A B C\n题序 4 5\n答案 D A'
+const objectiveGrid = '题序 1 2 3\n答案 A B C\n题序 4 5\n答案 C A'
 function bareSectionsWithObjectiveFigure() {
   const input = scoringFiguresFixture({ writingHeading: ['第四部分', '第一节'] })
   const page = input.confirmation.documents[1].pages[0]
@@ -65,6 +65,7 @@ for (const text of [
   '题序 1 2\n答案 A B\n题序 2 3\n答案 C D',
   '题序 1 2\n答案 A B\n题序 4 5\n答案 C D',
   '题序 1 2\n答案 A G',
+  '题序 1 2\n答案 A D',
   '题序 1 2\n答案 A B\n评分标准',
   '',
 ]) test(`generic answer heading cannot exempt an unproven figure: ${JSON.stringify(text)}`, () => {
@@ -89,9 +90,10 @@ test('objective-shaped figure after writing starts remains a required scoring re
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /one-to-one/u)
 })
 
-test('a second unknown region sharing the objective anchor cannot borrow its exemption', () => {
+for (const anchor of ['高三英语参考答案', 'A', '阅读']) test(`a second unknown region cannot borrow ${anchor}'s exemption`, () => {
   const input = bareSectionsWithObjectiveFigure()
   const page = input.confirmation.documents[1].pages[0], proof = input.evidence.documents[1].pages[0]
+  page.orderedItems[0].text = proof.observations[0].text = anchor
   const original = page.visualClassifications[0]
   proof.regions.push({ regionId: 'answers:p1:unknown', kind: 'visual',
     region: { x: .08, y: .5, width: .75, height: .05 } })
@@ -99,6 +101,17 @@ test('a second unknown region sharing the objective anchor cannot borrow its exe
   reseal(input)
   assert.equal(objectiveFigures(input).objective.size, 1)
   assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
+})
+
+for (const anchor of ['阅读', 'A']) test(`objective marker ${anchor} cannot hide a scoring image from producer or admission`, () => {
+  const input = bareSectionsWithObjectiveFigure()
+  const sidecar = captureScoringReferences(input)
+  input.confirmation.documents[1].pages[0].orderedItems[0].text = anchor
+  input.evidence.documents[1].pages[0].observations[0].text = anchor
+  replaceGrid(input, '第五档（13—15分）\n内容完整，语言准确。')
+  assert.equal(objectiveFigures(input).objective.size, 0)
+  assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /one-to-one/u)
 })
 
 test('bare section plus adjacent sample cannot reopen ended explanations or listening', () => {

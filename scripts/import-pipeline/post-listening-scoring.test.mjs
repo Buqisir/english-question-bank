@@ -486,14 +486,15 @@ test('admission rejects false not_supplied for plural possible-version samples t
     { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
 })
 
-function withObjectiveFigures(input, { pageIndex = 0, anchors = ['听力', 'C'], prefixTexts = [] } = {}) {
+function withObjectiveFigures(input, { pageIndex = 0, anchors = ['听力', 'C'], prefixTexts = [],
+  pictureText = '题序 21 22\n答案 A D' } = {}) {
   const page = input.confirmation.documents[1].pages[pageIndex]
   const proof = input.evidence.documents[1].pages[pageIndex]
   proof.observations = anchors.flatMap((text, index) => [
     { observationId: `objective:${index}:anchor`, regionId: `objective:${index}:anchor-region`, text,
       region: { x: .1, y: .1 + index * .2, width: .6, height: .02 }, confidence: 1, alternatives: [] },
     { observationId: `objective:${index}:picture`, regionId: `objective:${index}:picture-region`,
-      text: 'Synthetic objective answer chart',
+      text: pictureText,
       region: { x: .1, y: .15 + index * .2, width: .6, height: .02 }, confidence: 1, alternatives: [] },
   ])
   proof.observations.unshift(...prefixTexts.map((text, index) => ({
@@ -557,7 +558,8 @@ test('objective-looking figures after the first writing task still fail closed i
 })
 
 test('ordinary sentence anchors before writing cannot silently discard a reference figure', () => {
-  const input = withObjectiveFigures(scoringFiguresFixture(), { anchors: ['An ordinary sentence.'] })
+  const input = withObjectiveFigures(scoringFiguresFixture(), { anchors: ['An ordinary sentence.'],
+    pictureText: 'Synthetic unknown reference chart' })
   assert.throws(() => captureScoringReferences(input), /no surviving essay anchor or explicit scoring entry/u)
   const sidecar = captureScoringReferences(scoringFiguresFixture())
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /one-to-one/u)
