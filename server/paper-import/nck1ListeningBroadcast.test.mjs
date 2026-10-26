@@ -136,7 +136,7 @@ function analysisTitleRun(change = () => {}) {
   const questionStructure = extractDocxDocumentStructure(question.bytes)
   const answerStructure = extractDocxDocumentStructure(answer.bytes)
   const titleIndex = answerStructure.body.findIndex(item => item.text === '【答案解析】')
-  change(answerStructure.body, titleIndex)
+  change(answerStructure.body, titleIndex, answer.documentId)
   const retained = JSON.stringify(answerStructure)
   const result = produceNck1MaterializationFromStructures({
     paperId: fixture.paperId, documents, question, answer, coverage,
@@ -165,10 +165,14 @@ test('standalone 英语试卷 analysis titles close ordered Text 10 without cons
 test('unproven separate line before a new analysis title withholds T10 and requires author review', () => {
   for (const extra of ['2026届高三年级阶段训练', 'Another independent source paragraph.']) {
     const baseline = analysisTitleRun()
-    const result = analysisTitleRun((body, i) => {
+    const result = analysisTitleRun((body, i, documentId) => {
+      body[i - 1].sourceIndex = { kind: 'page_region', documentId, page: 1,
+        region: { x: .1, y: .8, width: .8, height: .05 } }
       body[i].text = '英语试卷参考答案与解析'
+      body[i].sourceIndex = { kind: 'page_region', documentId, page: 2,
+        region: { x: .1, y: .08, width: .8, height: .03 } }
       body.splice(i, 0, { kind: 'paragraph', text: extra,
-        sourceIndex: { kind: 'page_region', page: 2, region: { x: .1, y: .01, width: .8, height: .03 } } })
+        sourceIndex: { kind: 'page_region', documentId, page: 2, region: { x: .1, y: .01, width: .8, height: .03 } } })
     })
     assert.equal(result.disposition, 'needs_agent_review')
     assert(result.review.required.some(issue => issue.code === 'NCK1_DOCX_LISTENING_ANALYSIS_TAIL_AMBIGUOUS' && issue.source))
@@ -177,6 +181,8 @@ test('unproven separate line before a new analysis title withholds T10 and requi
       baseline.materialization.listening.transcript.slice(0, 9))
     const partition = result.review.listeningSourcePartition
     assert.equal(partition.analysisBoundary.text, '英语试卷参考答案与解析')
+    assert.equal(partition.analysisBoundary.source.page, 2)
+    assert.equal(partition.segments[9].bodyItems[0].source.page, 1)
     assert(partition.segments[9].bodyItems.some(item => item.text === extra && item.disposition === 'unresolved'))
   }
 })
