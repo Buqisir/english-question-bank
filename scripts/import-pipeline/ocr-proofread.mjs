@@ -723,9 +723,9 @@ export function* buildTranscriptJoinDocuments({ documents, trace, drafts, only =
   }
 }
 
-function compile(paperId) {
-  const { paperDir, documents, work } = context(paperId)
-  const trace = readJson(path.join(work, 'trace.json'), 'OCR trace')
+// Compile the same source-bound drafts as the CLI without staging or writing.
+// Reads only the supplied page rasters for crop geometry.
+export function compileOcrDrafts({ paperId, documents, trace, drafts, noFigures = [], only = null }) {
   if (trace.schemaVersion !== 'ocr-proofread-trace-v2') fail('OCR trace predates staged-at-compile evidence; rerun `evidence`')
   const confirmation = {
     schemaVersion: NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2,
@@ -738,17 +738,10 @@ function compile(paperId) {
   const figures = []
   const correctionNotes = []
   const problems = []
-  const only = option('--pages')?.split(',').map((value) => value.trim())
-  const flagsDir = path.join(work, 'source-flags')
-  const noFigures = existsSync(flagsDir) ? readdirSync(flagsDir).filter((name) => name.endsWith('.json'))
-    .flatMap((name) => readJson(path.join(flagsDir, name), 'Source flags').noFigures || []) : []
-  const drafts = {}
   const figureHints = missingFigureHints({
     only,
     noFigures,
     pages: trace.pages.map((page) => {
-      const file = path.join(work, 'drafts', `${page.key}.json`)
-      drafts[page.key] = existsSync(file) ? readJson(file, `Page draft ${page.key}`) : null
       return { ...page, role: documents.find((document) => document.documentId === page.documentId)?.role,
         draft: drafts[page.key] }
     }),
@@ -782,7 +775,8 @@ function compile(paperId) {
             || ['lines', 'words', 'text', 'emphasis'].some((key) => key in item)) {
             fail(`${itemLabel}: imageOnly requires figure and reason, without lines, words, text or emphasis`)
           }
-          if (!resolvedItems.at(-1)?.itemId || resolvedItems.at(-1).figure) {
+          if (!(index === 0 && document.role === 'question_source')
+            && (!resolvedItems.at(-1)?.itemId || resolvedItems.at(-1).figure)) {
             fail(`${itemLabel}: imageOnly needs a preceding ordinary item to anchor it`)
           }
           if (draftItems.filter((entry) => entry.figure === item.figure).length !== 1) {
@@ -839,7 +833,8 @@ function compile(paperId) {
         if (!name || resolvedItems[start - 1]?.figure === name) continue
         let end = start + 1
         while (resolvedItems[end]?.figure === name) end += 1
-        if (start === 0 || !resolvedItems[start - 1].itemId) fail(`${label}: figure "${name}" needs a preceding item to anchor it`)
+        const pageTop = start === 0 && document.role === 'question_source'
+        if (!pageTop && !resolvedItems[start - 1]?.itemId) fail(`${label}: figure "${name}" needs a preceding item to anchor it`)
         const figureLabel = `${label} figure ${name}`
         const regionId = `${document.documentId}:page-${tracePage.page}:figure-${figures.length + 1}`
         figures.push({ key: label, regionId, ...figureRegion(tracePage, resolvedItems, start, end, figureLabel) })
@@ -847,7 +842,7 @@ function compile(paperId) {
           regionId,
           classification: 'content_media',
           itemIds: resolvedItems.slice(start, end).filter((item) => !item.imageOnly).map((item) => item.itemId),
-          afterItemId: resolvedItems[start - 1].itemId,
+          afterItemId: pageTop ? null : resolvedItems[start - 1].itemId,
         })
       }
       pages.push({
@@ -861,6 +856,22 @@ function compile(paperId) {
     confirmation.documents.push({ documentId: document.documentId, pages })
   }
   if (problems.length) fail(`Page drafts do not close every OCR word:\n${problems.slice(0, 60).join('\n')}`)
+  return { confirmation, figures, correctionNotes, corrected, transcriptJoins }
+}
+
+function compile(paperId) {
+  const { documents, work } = context(paperId)
+  const trace = readJson(path.join(work, 'trace.json'), 'OCR trace')
+  const only = option('--pages')?.split(',').map((value) => value.trim())
+  const flagsDir = path.join(work, 'source-flags')
+  const noFigures = existsSync(flagsDir) ? readdirSync(flagsDir).filter((name) => name.endsWith('.json'))
+    .flatMap((name) => readJson(path.join(flagsDir, name), 'Source flags').noFigures || []) : []
+  const drafts = Object.fromEntries(trace.pages.map(page => {
+    const file = path.join(work, 'drafts', `${page.key}.json`)
+    return [page.key, existsSync(file) ? readJson(file, `Page draft ${page.key}`) : null]
+  }))
+  const { confirmation, figures, correctionNotes, corrected, transcriptJoins } =
+    compileOcrDrafts({ paperId, documents, trace, drafts, noFigures, only })
   if (only) {
     console.log(JSON.stringify({
       ok: true,

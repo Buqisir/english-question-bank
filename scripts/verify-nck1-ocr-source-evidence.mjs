@@ -51,6 +51,12 @@ import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresen
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
+// Keep page-boundary compile/resolver regressions in the existing OCR pack;
+// verify-ci does not automatically discover node:test files.
+execFileSync(process.execPath, ['--test', '--test-concurrency=1',
+  'scripts/import-pipeline/ocr-page-top-figures.test.mjs',
+  'server/paper-import/nck1OcrContentVisuals.test.mjs',
+], { cwd: root, stdio: 'inherit' })
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')
 const paperId = `paper-synthetic-ocr-evidence-${process.pid}`
 execFileSync(process.execPath, [path.join(root, 'scripts/generate-paper-ocr-emphasis-authority.mjs'), '--check'], {
