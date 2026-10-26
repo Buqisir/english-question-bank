@@ -44,10 +44,10 @@ for (const imageOnly of [false, true]) {
     assert.deepEqual(result.figures[0].pixels, { x: 100, y: 100, width: 800, height: 300 })
     assert.deepEqual(input, before)
     const v3 = { ...result.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }
-    assert.equal(nck1OcrProducerVersion(v3), 'nck1-ocr-materialization-producer-v29')
+    assert.equal(nck1OcrProducerVersion(v3), 'nck1-ocr-materialization-producer-v32')
     page.visualClassifications[0].afterItemId = 'ordinary-anchor'
-    assert.equal(nck1OcrProducerVersion(v3), 'nck1-ocr-materialization-producer-v28')
-    assert.equal(nck1OcrProducerVersion(result.confirmation), 'nck1-ocr-materialization-producer-v27')
+    assert.equal(nck1OcrProducerVersion(v3), 'nck1-ocr-materialization-producer-v31')
+    assert.equal(nck1OcrProducerVersion(result.confirmation), 'nck1-ocr-materialization-producer-v30')
   })
 }
 

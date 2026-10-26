@@ -32,6 +32,17 @@ const variants = [
     digest: nck1OcrProducerSourceDigest,
   })),
 ]
+// The immediately preceding identities must remain inspectable, but may not
+// return stale contaminated transcripts as current producer cache hits.
+variants.push(
+  { ...variants[0], name: 'DOCX previous v21', oldVersion: 'nck1-docx-materialization-producer-v21' },
+  { ...variants[1], name: 'PDF previous v18', oldVersion: 'nck1-pdf-materialization-producer-v18' },
+  ...[1, 2, 3].map(confirmationVersion => ({
+    ...variants[confirmationVersion + 1], name: `OCR previous confirmation v${confirmationVersion}`,
+    oldVersion: `nck1-ocr-materialization-producer-v${confirmationVersion === 3 ? 28 : 27}`,
+  })),
+  { ...variants[4], name: 'OCR previous page-top v29', oldVersion: 'nck1-ocr-materialization-producer-v29' },
+)
 
 function sourceWindow(root, variant) {
   const documents = variant.carrier === 'docx' ? docx.sourceDocuments : pdfDocuments
@@ -92,8 +103,8 @@ for (const variant of variants) test(`${variant.name} retains old receipts witho
       assert.throws(() => runNck1MaterializationJob(job), /refusing to overwrite/)
       paths.forEach((file, index) => assert.deepEqual(readFileSync(file), retained[index]))
       if (variant.carrier === 'ocr') {
-        const oldNumber = Number(producerVersion.split('-v').at(-1))
-        const otherVersion = `nck1-ocr-materialization-producer-v${oldNumber % 2 ? oldNumber + 1 : oldNumber - 1}`
+        const otherVersion = variant.confirmation.schemaVersion.endsWith('-v3')
+          ? 'nck1-ocr-materialization-producer-v27' : 'nck1-ocr-materialization-producer-v28'
         const otherDigest = variant.digest(job.documents, { ...job.inputs, producerVersion: otherVersion })
         const otherPartition = { ...partition, producerVersion: otherVersion, producerSourceDigest: otherDigest }
         writeFileSync(receiptPath, JSON.stringify({ ...receipt, producerVersion: otherVersion,

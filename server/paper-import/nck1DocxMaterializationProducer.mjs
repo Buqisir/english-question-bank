@@ -8,7 +8,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { WRITING_SAMPLE_LABEL } from './sourceReferenceWritingRules.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v21'
+  'nck1-docx-materialization-producer-v22'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 // A number enclosed by underscores is a complete blank, even when OCR kept
@@ -1555,8 +1555,13 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       sourceRef(answerDocumentId, answerBody[headingIndex]?.sourceIndex))
   }
   const lastMarkerIndex = markers.at(-1)?.index ?? -1
+  // This additional title belongs only to the closed, ordered listening run.
+  // Do not widen isAnswerExplanationHeading: its writing/answer consumers differ.
+  const analysisTitle = runIsOrdered ? answerBody.findIndex((item, index) =>
+    index > lastMarkerIndex && item.kind === 'paragraph'
+      && /^英语试卷(?:详解答案|参考答案(?:与|及)解析)[:：]?$/u.test(item.text?.trim())) : -1
   const analysis = lastMarkerIndex < 0 ? -1 : answerBody.findIndex((item, index) =>
-    index > lastMarkerIndex && (isAnswerExplanationHeading(item)
+    index > lastMarkerIndex && (index === analysisTitle || isAnswerExplanationHeading(item)
       || (item.kind === 'paragraph' && /^(?:【)?文章大意(?:】)?/u.test(normalized(item.text)))
       || (item.kind === 'paragraph' && /^试题答案[:：]?$/u.test(normalized(item.text)))))
   const listeningEndIndexes = lastMarkerIndex < 0 ? [] : answerBody.flatMap((item, index) =>
@@ -1569,6 +1574,23 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   const transcriptEnd = terminalIndex >= 0 && !analysisBeforeEnd
     ? terminalIndex + 1
     : analysis >= 0 ? analysis : answerBody.length
+  const unresolvedAnalysisTail = new Set()
+  if (analysisTitle >= 0 && transcriptEnd === analysisTitle) {
+    const speechIndexes = answerBody.flatMap((item, index) =>
+      index > lastMarkerIndex && index < analysisTitle
+        && !(item.kind === 'paragraph' && (!normalized(item.text) || cueFor(item)))
+        ? [index] : [])
+    // A separate source paragraph is not evidence that it continues Text 10.
+    // Confirmed OCR furniture is already absent from answerBody. Without that
+    // evidence (or an authored paragraph join), keep the whole final body
+    // unresolved rather than silently dropping a line or publishing a partial T10.
+    if (speechIndexes.length > 1) {
+      speechIndexes.forEach(index => unresolvedAnalysisTail.add(index))
+      addIssue(issues, 'NCK1_DOCX_LISTENING_ANALYSIS_TAIL_AMBIGUOUS', 'listening.transcript',
+        'Independent source items between Text 10 and the answer-analysis title need author confirmation as speech or furniture; final transcript withheld',
+        sourceRef(answerDocumentId, answerBody[speechIndexes[1]].sourceIndex))
+    }
+  }
   if (listeningEndIndexes.length > 1) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
       'Listening source contains duplicate end cues',
@@ -1660,6 +1682,13 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   const transcript = []
   const segmentRecords = []
   const inspectItem = (item, index, nextMarker) => {
+    if (unresolvedAnalysisTail.has(index)) {
+      return {
+        record: listeningItemRecord(item, index, answerDocumentId, 'unresolved',
+          'unproven_speech_before_answer_analysis_title'),
+        text: null,
+      }
+    }
     if (item?.kind !== 'paragraph') {
       addIssue(issues, 'NCK1_DOCX_LISTENING_MIXED_CONTENT_AMBIGUOUS', 'listening.transcript',
         'Listening source contains a table or unsupported mixed content inside the marker-bounded region',

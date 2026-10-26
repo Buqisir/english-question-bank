@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { produceNck1DocxMaterialization } from './nck1DocxMaterializationProducer.mjs'
+import { produceNck1DocxMaterialization, produceNck1MaterializationFromStructures } from './nck1DocxMaterializationProducer.mjs'
+import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
 import { makeSyntheticNck1DocxFixture } from '../../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
 
 // Beidou's actual broadcast layout, with synthetic question speech.
@@ -124,4 +125,76 @@ test('文章大意 and answer lines in the same source paragraph preserve the an
   assert.deepEqual(answers(result), answers(baseline))
   assert.equal(result.disposition, 'ready_for_verification')
   assert.deepEqual(result.review.required, [])
+})
+
+function analysisTitleRun(change = () => {}) {
+  const fixture = makeSyntheticNck1DocxFixture({ listening: true })
+  const documents = fixture.sourceDocuments
+  const question = documents.find(item => item.role === 'question_source' && item.mediaType.includes('wordprocessingml'))
+  const answer = documents.find(item => item.role === 'official_answers')
+  const coverage = documents.find(item => item.documentId === question.renditionDocumentId)
+  const questionStructure = extractDocxDocumentStructure(question.bytes)
+  const answerStructure = extractDocxDocumentStructure(answer.bytes)
+  const titleIndex = answerStructure.body.findIndex(item => item.text === '【答案解析】')
+  change(answerStructure.body, titleIndex)
+  const retained = JSON.stringify(answerStructure)
+  const result = produceNck1MaterializationFromStructures({
+    paperId: fixture.paperId, documents, question, answer, coverage,
+    questionStructure, answerStructure, issues: [], codePrefix: 'NCK1_DOCX',
+    producerVersion: 'boundary-test', sourceDigest: 'boundary-test',
+    reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
+  })
+  assert.equal(JSON.stringify(answerStructure), retained, 'answers source structure must remain byte-identical')
+  return result
+}
+
+test('standalone 英语试卷 analysis titles close ordered Text 10 without consuming answers', () => {
+  const baseline = analysisTitleRun()
+  for (const title of ['英语试卷详解答案', '英语试卷参考答案与解析：', '英语试卷参考答案及解析:']) {
+    const result = analysisTitleRun((body, i) => { body[i].text = title })
+    assert.deepEqual(result.review.required, [])
+    assert.equal(result.disposition, 'ready_for_verification')
+    assert.equal(result.materialization.listening.transcript[9].text, 'Synthetic transcript 10.')
+    assert.deepEqual(result.materialization.listening.transcript.slice(0, 9),
+      baseline.materialization.listening.transcript.slice(0, 9))
+    assert.equal(result.review.listeningSourcePartition.analysisBoundary.text, title)
+    assert.deepEqual(result.materialization.answers, baseline.materialization.answers)
+  }
+})
+
+test('unproven separate line before a new analysis title withholds T10 and requires author review', () => {
+  for (const extra of ['2026届高三年级阶段训练', 'Another independent source paragraph.']) {
+    const baseline = analysisTitleRun()
+    const result = analysisTitleRun((body, i) => {
+      body[i].text = '英语试卷参考答案与解析'
+      body.splice(i, 0, { kind: 'paragraph', text: extra,
+        sourceIndex: { kind: 'page_region', page: 2, region: { x: .1, y: .01, width: .8, height: .03 } } })
+    })
+    assert.equal(result.disposition, 'needs_agent_review')
+    assert(result.review.required.some(issue => issue.code === 'NCK1_DOCX_LISTENING_ANALYSIS_TAIL_AMBIGUOUS' && issue.source))
+    assert.equal(result.materialization.listening.transcript[9].text, '')
+    assert.deepEqual(result.materialization.listening.transcript.slice(0, 9),
+      baseline.materialization.listening.transcript.slice(0, 9))
+    const partition = result.review.listeningSourcePartition
+    assert.equal(partition.analysisBoundary.text, '英语试卷参考答案与解析')
+    assert(partition.segments[9].bodyItems.some(item => item.text === extra && item.disposition === 'unresolved'))
+  }
+})
+
+test('new analysis boundary requires a whole standalone paragraph after a unique ordered Text 1–10 run', () => {
+  for (const text of ['M: 英语试卷详解答案 is a heading.', '英语试卷详解答案 extra',
+    '英语试卷详解答案\nReading explanation.']) {
+    const result = analysisTitleRun((body, i) => { body[i].text = text })
+    assert.equal(result.review.listeningSourcePartition.analysisBoundary, null)
+    assert(result.materialization.listening.transcript[9].text.includes(text))
+  }
+  for (const change of [
+    (body, i) => { body[i] = { ...body[i], kind: 'table', text: '英语试卷详解答案' } },
+    (body, i) => { body[i].text = '英语试卷详解答案'; body.find(item => item.text === 'Text 9').text = 'Text 8' },
+    (body, i) => { body[i].text = '英语试卷详解答案'; body.find(item => item.text === 'Text 9').text = 'Text 10' },
+    (body, i) => { body[i].text = 'Unrecognized end'; body.find(item => item.text === 'Synthetic transcript 9.').text = '英语试卷详解答案' },
+  ]) {
+    const result = analysisTitleRun(change)
+    assert.equal(result.review.listeningSourcePartition.analysisBoundary, null)
+  }
 })
