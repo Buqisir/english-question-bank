@@ -108,10 +108,14 @@ function anchors(streams, text, low, high, kind) {
 
 function locate(group, streams, pauses, durationSeconds) {
   const low = group.orderEvidence?.afterSeconds ?? 0, high = group.orderEvidence?.beforeSeconds ?? durationSeconds
-  // Retained v1 projections can still contain pause durations. Apply the current
-  // shared projection for this derivative's anchors without rewriting the attempt.
-  const text = projectListeningSpokenText({ ...group,
-    text: group.sourceProjection?.text ?? group.sourceText }).text
+  // Find pause spans in the literal source, then mask only those spans in a
+  // retained projection. Reprojecting masked text could turn spoken "(Text 1)"
+  // after a removed speaker label into a heading. Historical bytes stay intact.
+  const projection = projectListeningSpokenText({ ...group, text: group.sourceText })
+  let text = group.sourceProjection?.text ?? projection.text
+  for (const span of projection.exclusions.filter(e => e.reason === 'pause_duration_direction')) {
+    text = text.slice(0, span.start) + projection.text.slice(span.start, span.end) + text.slice(span.end)
+  }
   const heads = anchors(streams, text, low, high, 'head'), tails = anchors(streams, text, low, high, 'tail')
   if (!Number.isInteger(group.expectedReadings) || group.expectedReadings < 1 || heads.length !== group.expectedReadings) {
     fail('REVIEW_PACK_READING_COUNT_AMBIGUOUS', `${group.segmentId}: expected ${group.expectedReadings}, found ${heads.length}`)
