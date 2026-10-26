@@ -186,6 +186,14 @@ classifications. A table supplies rectangular `rows: [{header, cells}]`, each
 cell containing confirmed `itemId`s, not rewritten text. An image supplies
 `itemIds` for all OCR text inside its region and `afterItemId` for a surviving
 preceding item; its immutable PDF region is cropped, never regenerated. An
+explicit `afterItemId: null` in this closed v3 image shape instead denotes the
+unique page-top boundary, only for a separate PDF `question_source`. Its text
+items must start at index 0 (or be empty for an imageOnly crop), and no
+unaccounted content may precede or sit beside the crop; confirmed furniture
+above it is allowed. Missing or unknown string anchors never imply page top.
+This capability selects OCR producer v29; confirmations without it retain
+their existing producer version, bytes and image IDs. Answer figures still
+require their exact same-page preceding text anchor. An
 image may also follow the exact final confirmed item of a surviving semantic
 table, meaning the boundary after that whole table; interior table cells and
 items consumed by another image cannot anchor it. Every observation inside a
