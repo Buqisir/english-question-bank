@@ -57,18 +57,23 @@ const boxFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.inclu
   ? xml.replace(responseTitle,
     `${materialParagraph}<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="9000"/></w:tblGrid><w:tr><w:tc><w:tcPr/>${responseTitle}</w:tc></w:tr></w:tbl>`) : xml })
 const boxed = produceNck1DocxMaterialization({ paperId: boxFixture.paperId, documents: boxFixture.sourceDocuments })
-assert.equal(boxed.disposition, 'ready_for_verification', JSON.stringify(boxed.review.required))
-assert.equal(boxed.materialization.schemaVersion, 'nck1-source-materialization-v7')
-const boxedApplication = boxed.materialization.groups[7]
-assert.deepEqual(boxedApplication.writingTask.givenBlockRefs, [boxedApplication.blocks.at(-1).blockId])
-assert.equal(boxedApplication.blocks.at(-2).content[0].text, 'Animal clue one.')
-const boxedInput = { kind: 'nck1-source-materialization',
-  materializationBytes: new TextEncoder().encode(JSON.stringify(boxed.materialization)),
-  documents: boxFixture.sourceDocuments.map(document => ({ documentId: document.documentId, bytes: document.bytes })),
-  media: [] }
-const boxedCandidate = importCanonicalCandidate(boxedInput)
-assert.deepEqual(boxedCandidate.issues, [])
-assert(compileNck1MaterializationCandidatePreview(boxedCandidate.candidate).compilation)
+assert.equal(boxed.disposition, 'needs_agent_review')
+assert.equal(boxed.materialization.groups[7].writingTask.givenBlockRefs, undefined)
+// A material lead-in followed by a one-cell table is not a response boundary.
+// Keep the base producer's fail-closed outcome; only the Agent can declare refs.
+const activityFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('Write a short notice')
+  ? xml.replace(responseTitle,
+    '<w:p><w:r><w:t>Use the following club details in your notice.</w:t></w:r></w:p>'
+    + '<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="9000"/></w:tblGrid><w:tr><w:tc><w:tcPr/>'
+    + '<w:p><w:r><w:t>Time: Friday 4 pm; Place: School library</w:t></w:r></w:p>'
+    + '</w:tc></w:tr></w:tbl>') : xml })
+const activity = produceNck1DocxMaterialization({
+  paperId: activityFixture.paperId, documents: activityFixture.sourceDocuments,
+})
+assert.equal(activity.disposition, 'needs_agent_review')
+assert.equal(activity.materialization.schemaVersion, 'nck1-source-materialization-v1')
+assert(activity.review.required.some(issue => issue.code === 'NCK1_DOCX_WRITING_SKELETON_AMBIGUOUS'))
+assert.equal(activity.materialization.groups[7].writingTask.givenBlockRefs, undefined)
 const ambiguousFixture = makeSyntheticNck1DocxFixture({
   transformXml: xml => xml.includes('Write a short notice')
     ? xml.replace(responseTitle, `${materialParagraph}${responseTitle}`) : xml,
@@ -78,7 +83,7 @@ const ambiguous = produceNck1DocxMaterialization({
 })
 assert.equal(ambiguous.disposition, 'needs_agent_review')
 assert.equal(ambiguous.materialization.groups[7].writingTask.givenBlockRefs, undefined)
-console.log('PASS terminal source response box selects v7 refs; unboxed material remains Agent confirmation')
+console.log('PASS material plus terminal one-cell table and unboxed material retain base Agent review')
 // Zhenhai's source has a title abbreviation in the stem and a dotted subject name.
 // Neither Mrs. nor P. E. can steal the genuine A./B./C./D. option boundaries.
 for (const options of ['A. Math.  B. Drama.  C. Physics.  D. English.']) {

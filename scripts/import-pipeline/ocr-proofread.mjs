@@ -14,6 +14,8 @@
 //   presentation <paperId>    after materialize, fill missing v4 sourcePresentation directions
 //                             from confirmed items; --output <path> previews without overwriting.
 //   numbering <paperId>       before spelling/digests, normalize only proved Chinese numbering.
+//   writing-givens <paperId>  explicit Agent edit: --group <groupId> --refs <blockId,...>
+//                             --agent-confirmed; --output previews without overwriting.
 //   report-entries <paperId>  after pull-ocr-confirmation + materialize, locate the receipt's
 //                             real OCR repairs in the current Materialization for
 //                             `review.mjs finalize-ocr-correction-report`.
@@ -54,6 +56,7 @@ import { decideLineJoin, referenceBoundaryFromFacts } from './ocr-join-decisions
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
+import { confirmMaterializationWritingGivens } from './materialization-writing-givens.mjs'
 import { computeOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
 import { reobserveRegions } from './ocr-region-reobserve.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
@@ -1041,6 +1044,30 @@ function worksheets(paperId) {
 }
 
 
+function writingGivens(paperId) {
+  if (!paperId || !/^paper-[a-z0-9-]+$/u.test(paperId)) fail('A valid paperId is required')
+  const input = option('--input')
+  if (input && !option('--output')) fail('Writing givens --input requires --output for a separate preview')
+  const paperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
+  const file = path.resolve(input || path.join(paperDir, 'materialization', 'nck1-source-materialization-v1.json'))
+  const output = path.resolve(option('--output') || file)
+  if (input && output === file) fail('Writing givens --input preview must not overwrite its source')
+  // Apply this source edit before downstream digest-bound reports; existing
+  // producer receipts remain untouched and inspection reports agent_modified.
+  if (output === file && existsSync(path.join(paperDir, 'agent-ocr-correction-report-v2.json'))) {
+    fail('Writing givens must be confirmed before finalizing the OCR correction report')
+  }
+  const materialization = readJson(file, 'Materialization')
+  if (materialization.paperId !== paperId) fail('Materialization paperId does not match the command')
+  const result = confirmMaterializationWritingGivens(materialization, {
+    groupId: option('--group'),
+    givenBlockRefs: option('--refs')?.split(','),
+    confirmed: process.argv.includes('--agent-confirmed'),
+  })
+  writeJson(output, result)
+  console.log(JSON.stringify({ ok: true, paperId, output, schemaVersion: result.schemaVersion }))
+}
+
 function presentation(paperId) {
   const { paperDir } = context(paperId)
   const directory = path.join(paperDir, 'materialization')
@@ -1371,10 +1398,11 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'compile') compile(paperId)
   else if (command === 'report-entries') reportEntries(paperId)
   else if (command === 'presentation') presentation(paperId)
+  else if (command === 'writing-givens') writingGivens(paperId)
   else if (command === 'numbering') numbering(paperId)
   else if (command === 'references') references(paperId)
   else if (command === 'figure-sizes') figureSizes(paperId)
-  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
+  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
 } catch (error) {
   fail(error.stack || String(error))
 }

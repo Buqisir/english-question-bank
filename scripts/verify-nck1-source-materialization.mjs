@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { pathToFileURL } from 'node:url'
+import { confirmMaterializationWritingGivens } from './import-pipeline/materialization-writing-givens.mjs'
 
 import {
   digestNck1SourceMaterialization,
@@ -625,6 +626,20 @@ delete undeclaredBoundary.groups[7].writingTask.givenBlockRefs
 assert(validateNck1SourceMaterialization(undeclaredBoundary).some(item =>
   item.code === 'MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID'),
 'even v7 without explicit refs retains the strict whole-suffix rule')
+const authorInput = structuredClone(undeclaredBoundary)
+authorInput.schemaVersion = 'nck1-source-materialization-v1'
+const authorBefore = structuredClone(authorInput)
+const declaration = { confirmed: true, groupId: application.groupId,
+  givenBlockRefs: application.writingTask.givenBlockRefs }
+assert.throws(() => confirmMaterializationWritingGivens(authorInput, {
+  ...declaration, confirmed: false,
+}), /explicit Agent confirmation/u)
+assert.throws(() => confirmMaterializationWritingGivens(authorInput, {
+  ...declaration, givenBlockRefs: ['material:0', closing.blockId],
+}), /MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID/u)
+assert.deepEqual(confirmMaterializationWritingGivens(authorInput, declaration), explicit)
+assert.deepEqual(authorInput, authorBefore, 'author entry never mutates its source or producer evidence')
+assert.deepEqual(confirmMaterializationWritingGivens(explicit, declaration), explicit, 'author entry is idempotent')
 assert(deriveNck1MaterializationBundle(input, nck1ReadingStemFiguresAuthorityRef).issues.some(item =>
   item.code === 'MATERIALIZATION_AUTHORITY_UNSUPPORTED'), 'old authority cannot admit v7')
 const imported = importCanonicalCandidate(input)
