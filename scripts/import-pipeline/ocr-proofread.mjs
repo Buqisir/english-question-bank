@@ -32,6 +32,7 @@ import { fileURLToPath } from 'node:url'
 
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
+import { sourceReferenceExplanationFigures } from '../../server/paper-import/sourceReferenceFigureExclusions.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -1074,6 +1075,11 @@ async function paragraphJoin(paperId, applying) {
     applying ? 'apply' : 'plan', paperId, ...process.argv.slice(4)], { cwd: root, stdio: 'inherit' })
 }
 
+function referenceFigureExclusion(paperId) {
+  execFileSync(process.execPath, [path.join(import.meta.dirname, 'source-reference-exclusion.mjs'),
+    paperId, ...process.argv.slice(4)], { cwd: root, stdio: 'inherit' })
+}
+
 function presentation(paperId) {
   const { paperDir } = context(paperId)
   const directory = path.join(paperDir, 'materialization')
@@ -1146,7 +1152,7 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
 
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation,
-  { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture } = {}) {
+  { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [] } = {}) {
   let source, lifecycle
   try {
     source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName })
@@ -1156,6 +1162,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     throw error
   }
   const { answerDocument, documentSha256, pages, lines, sourceOrder, factsFor, referenceFigures, scoringScopes } = source
+  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions)
   const { sections, furniture, review } = lifecycle
   const assignedFigures = new Set()
   let hasScoringFigures = false
@@ -1360,15 +1367,20 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   })
   const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures)
   const excludedFigures = referenceFigures.filter(figure =>
-    !assignedFigures.has(figure) && objectiveFigures.has(sourceReferenceFigureIdentity(figure)))
+    !assignedFigures.has(figure) && (objectiveFigures.has(sourceReferenceFigureIdentity(figure))
+      || explanationFigures.has(sourceReferenceFigureIdentity(figure))))
   for (const figure of excludedFigures) {
     review.push({ itemId: figure.afterItem.itemId, sourceRegionId: figure.sourceRegionId,
-      issue: 'objective answer figure excluded from writing references; retained in source evidence' })
+      issue: explanationFigures.has(sourceReferenceFigureIdentity(figure))
+        ? 'agent-confirmed explanation figure excluded from writing references; retained in source evidence'
+        : 'objective answer figure excluded from writing references; retained in source evidence' })
   }
   if (assignedFigures.size + excludedFigures.length !== referenceFigures.length) {
     throw new Error('Reference figure has no surviving essay anchor or explicit scoring entry')
   }
-  return { groups, review, structuredScoring, ...(referenceFigures.length ? { schemaVersion: hasScoringFigures ? 'source-references-v4' : 'source-references-v3' } : {}) }
+  return { groups, review, structuredScoring, ...(figureExclusions.length
+    ? { schemaVersion: 'source-references-v5', figureExclusions }
+    : referenceFigures.length ? { schemaVersion: hasScoringFigures ? 'source-references-v4' : 'source-references-v3' } : {}) }
 }
 
 // Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
@@ -1380,11 +1392,16 @@ function references(paperId) {
   const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
   const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
   const confirmation = readJson(path.join(directory, 'nck1-ocr-source-confirmation-v1.json'), 'Pulled OCR confirmation')
-  const { groups, review, structuredScoring, schemaVersion } = buildSourceReferences(materialization, evidence, confirmation,
-    { sourceDocuments: documents, paperName })
   const output = path.join(work, 'source-references-draft.json')
+  // The existing draft carries authored source-role declarations through redo;
+  // generated references are always rebuilt and each declaration is replayed.
+  const retained = existsSync(output) ? readJson(output, 'Source references draft')
+    : existsSync(path.join(paperDir, 'source-references-v1.json'))
+      ? readJson(path.join(paperDir, 'source-references-v1.json'), 'Source references') : null
+  const { groups, review, structuredScoring, schemaVersion, figureExclusions } = buildSourceReferences(materialization, evidence, confirmation,
+    { sourceDocuments: documents, paperName, figureExclusions: retained?.figureExclusions ?? [] })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
-    materializationDigest: null, groups })
+    materializationDigest: null, groups, ...(figureExclusions ? { figureExclusions } : {}) })
   console.log(JSON.stringify({
     ok: true,
     output,
@@ -1407,10 +1424,11 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'writing-givens') writingGivens(paperId)
   else if (command === 'paragraph-join-plan') await paragraphJoin(paperId, false)
   else if (command === 'paragraph-join-apply') await paragraphJoin(paperId, true)
+  else if (command === 'exclude-explanation-figure') referenceFigureExclusion(paperId)
   else if (command === 'numbering') numbering(paperId)
   else if (command === 'references') references(paperId)
   else if (command === 'figure-sizes') figureSizes(paperId)
-  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
+  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|exclude-explanation-figure|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
 } catch (error) {
   fail(error.stack || String(error))
 }

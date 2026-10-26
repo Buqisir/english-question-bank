@@ -6,6 +6,7 @@ bytes，不重写旧版，不提升未变的 OCR confirmation/Materialization pr
 
 | New verifier | Distinct failure caught | CI |
 | --- | --- | --- |
+| `source-reference-exclusion.test.mjs` | Catches undeclared explanation-image omission, stale PDF/crop/anchor/OCR bindings, duplicate/forged confirmations, essay or scoring images laundered as explanation, missing admission closure, and stale reference drafts/requests/products surviving redo; Candidate/UNKNOWN must reject without writes and unmodified source evidence/essay/scoring content must survive. | yes, via `verify-nck1-answer-source-shapes.mjs` |
 | `verify-source-reference-scoring-v4.mjs` | p03 标题/段落及 p04 续段的评分图在 compile → capture → admission → answerOnly 分页/PDF 丢失或乱序；伪造区域、重复 ID、越界归属、图片预算漏算，以及旧 v3 bytes/SHA 漂移。表→图的 v4 序列可表达和渲染，但现有 confirmation v3 的 consumed-anchor 拒绝必须保留（方案 A 不在本次范围）。 | yes |
 
 既有 `verify-review-publication-content.mjs` 增加 `--v4-scoring-figures`

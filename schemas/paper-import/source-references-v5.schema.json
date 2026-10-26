@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source-references-v5",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paperId", "sourceDigest", "candidateDigest", "materializationDigest", "groups", "figureExclusions"],
+  "properties": {
+    "schemaVersion": { "const": "source-references-v5" },
+    "paperId": { "$ref": "source-references-v1#/properties/paperId" },
+    "sourceDigest": { "$ref": "source-references-v1#/$defs/digest" },
+    "candidateDigest": { "$ref": "source-references-v1#/$defs/digest" },
+    "materializationDigest": { "$ref": "source-references-v1#/$defs/digest" },
+    "groups": { "$ref": "source-references-v4#/properties/groups" },
+    "figureExclusions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["figureId", "figureIdentitySha256", "anchorItemId", "sourceDocumentSha256", "evidenceDigest", "confirmationDigest", "reason", "confirmed"],
+        "properties": {
+          "figureId": { "$ref": "source-references-v1#/$defs/id" },
+          "figureIdentitySha256": { "$ref": "source-references-v1#/$defs/digest" },
+          "anchorItemId": { "$ref": "source-references-v1#/$defs/id" },
+          "sourceDocumentSha256": { "$ref": "source-references-v1#/$defs/digest" },
+          "evidenceDigest": { "$ref": "source-references-v1#/$defs/digest" },
+          "confirmationDigest": { "$ref": "source-references-v1#/$defs/digest" },
+          "reason": { "type": "string", "minLength": 1, "maxLength": 2000 },
+          "confirmed": { "const": true }
+        }
+      }
+    }
+  }
+}

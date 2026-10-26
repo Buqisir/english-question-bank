@@ -152,7 +152,7 @@ ${keyTable(slice(56, 65), 5)}</section>`
     ).join('\n')}</section>`
     : ''
   return answerDocument(paperName, `${keys}${references}${transcripts}`,
-    includeScoring && sourceReferences.schemaVersion === 'source-references-v4')
+    includeScoring && ['source-references-v4', 'source-references-v5'].includes(sourceReferences.schemaVersion))
 }
 
 // Assembly numbering is the question renderer's continuous item/question order.
