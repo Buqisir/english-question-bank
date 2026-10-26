@@ -85,7 +85,12 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
   `after-proofread <id> --redo-from asr-apple-rule-v2`；旧 attempt 保留。
 - `--redo-from <步骤>`：忘掉该步骤及之后所有步骤，并把对应已装 sidecar 和 `products/` 挪进
   `superseded/`。上游改了 Materialization 后从 `figure-sizes` 或更早重做；第二轮作者稿按 ID
-  复用，不需要重派 worker。OCR 已确认后又改了校对草稿（例如补漏标的图）用 `--redo-from compile`：
+  复用，不需要重派 worker。中文编号后处理位于 materialize 之后、拼写和下游 digest 之前，
+  只改现有投影能证明的完整源 paragraph/table run。已有 Materialization（包括已有 finalized
+  OCR 报告）用 `after-proofread <id> --redo-from chinese-numbering` 正式归档下游并重建，
+  不重跑 producer、不修改封存 OCR；规则执行和实际变换分别记录在该步骤结果中。
+  已发布版本不迁移，未命中时不重写 Materialization。
+  OCR 已确认后又改了校对草稿（例如补漏标的图）用 `--redo-from compile`：
   旧 OCR 证据、确认和回执一并挪走，重新 push-ocr 建新 OCR revision（Review 里旧的变 superseded）。
 
 ## 批量编排（batch-run.mjs）

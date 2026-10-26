@@ -22,6 +22,8 @@ test('one entry cannot inherit Han from the next numbered entry or separator', (
   for (const text of ['(1) DIY only；(2) BBQ 晚会', '(1) DIY only (2) BBQ 晚会']) {
     assert.deepEqual(issues(text).flatMap(x => x.matches), ['(2)'])
   }
+  assert.deepEqual(issues('(1) DIY only （2） BBQ 晚会'), [])
+  assert.deepEqual(issues({ runs: [{ text: '(1) DIY only ' }, { text: '（2） BBQ 晚会' }] }), [])
 })
 test('English quotes stay exempt while Han outside quotes still belongs to its entry', () => {
   assert.deepEqual(issues('请阅读句子 “Include (1) a title.” 并翻译。'), [])

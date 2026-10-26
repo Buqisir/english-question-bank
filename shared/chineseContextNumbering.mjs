@@ -47,7 +47,9 @@ export function chineseContextNumbering(text, chunks = null) {
     // Decide gloss eligibility from original text: masking a quoted English
     // word first must not turn a mixed-language parenthesis into pure Han.
     local = maskEnglishQuotes(maskChineseGlosses(local))
-    const boundary = /\(\s*\d{1,3}\s*\)|[。！？.!?;；\n]/u
+    // Normalized entries still delimit their neighbors; only the outer matcher
+    // selects halfwidth numbering for submission/projection/normalization.
+    const boundary = /\(\s*\d{1,3}\s*\)|（\s*\d{1,3}\s*）|[。！？.!?;；\n]/u
     const after = local.slice(index + match[0].length).split(boundary)[0]
     // Classify the whole entry, not just its first word (DIY / BBQ).
     if (/\p{L}/u.test(after)) return hasChinese(after)

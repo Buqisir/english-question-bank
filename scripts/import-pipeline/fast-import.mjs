@@ -34,6 +34,7 @@ import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
 import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
+import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -551,6 +552,15 @@ async function afterProofread(ctx, args) {
   await step(ctx, 'materialize', async () => {
     await run(ctx, 'materialize', cli('universal-nck1.mjs', 'materialize', ctx.paperId))
     return { issues: (readJson(materializationPath(ctx)).issues || []).length }
+  })
+  await step(ctx, 'chinese-numbering', () => {
+    // An old cached spelling/build must be invalidated before changing its input.
+    const later = STEP_ORDER.slice(STEP_ORDER.indexOf('chinese-numbering') + 1)
+    if (later.some(name => ctx.state.steps[name])
+      && normalizeMaterializationNumbering(readJson(materializationPath(ctx))).changes.length) {
+      throw new Stop(`中文编号标准化需要重建下游：after-proofread ${ctx.paperId} --redo-from chinese-numbering`)
+    }
+    return run(ctx, 'chinese-numbering', cli('ocr-proofread.mjs', 'numbering', ctx.paperId))
   })
   const materialization = readJson(materializationPath(ctx))
   const trailingHeadings = trailingHeadingHints(materialization)
@@ -1124,7 +1134,7 @@ function status(ctx) {
 }
 
 const STEP_ORDER = [
-  'flags-present', 'compile', 'ocr-review', 'materialize', 'presentation', 'figure-sizes', 'subtitles-watermarks',
+  'flags-present', 'compile', 'ocr-review', 'materialize', 'chinese-numbering', 'presentation', 'figure-sizes', 'subtitles-watermarks',
   'spelling', 'verify', 'answer-check', 'build', 'round2-requests', 'asr-wait', 'asr-apple-rule-v2',
   'summaries', 'search-metadata', 'listening-review', 'ocr-correction-report', 'source-references', 'pagination-run',
   'pagination-plan', 'freeze', 'pdf-qa', 'local-preview', 'local-screen', 'push', 'screen',
