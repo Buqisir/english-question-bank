@@ -292,6 +292,9 @@ export function ocrReviewBundleDigest(input) {
     schemaVersion: input.schemaVersion,
     paperId: input.paperId,
     paperName: input.paperName,
+    ...(Object.hasOwn(input, 'expectedBaseRevisionId')
+      ? { expectedBaseRevisionId: input.expectedBaseRevisionId }
+      : {}),
     sourceSetDigest: input.sourceSetDigest,
     evidenceDigest: input.evidenceDigest,
     reviewStructureDigest: input.reviewStructureDigest,
@@ -416,6 +419,9 @@ export function validateOcrReviewBundleManifest(input) {
     schemaVersion: input.schemaVersion,
     paperId,
     paperName: requiredString(input.paperName, 'paperName', 300),
+    ...(Object.hasOwn(input, 'expectedBaseRevisionId')
+      ? { expectedBaseRevisionId: requiredString(input.expectedBaseRevisionId, 'expectedBaseRevisionId', 100) }
+      : {}),
     sourceSetDigest: requiredString(input.sourceSetDigest, 'sourceSetDigest', 160),
     evidenceDigest: requiredString(input.evidenceDigest, 'evidenceDigest', 160),
     reviewStructureDigest: requiredString(
@@ -949,6 +955,29 @@ export function createImportReviewStore({
     }
   }
 
+  // Explicit OCR generations alone use this narrow transaction. Legacy OCR
+  // bundles retain their existing identity and behavior when the base is absent.
+  function assertOcrGenerationBase(db, manifest, ownRevisionId = null) {
+    if (reviewKind(manifest) !== 'ocr' || !manifest.expectedBaseRevisionId) return
+    const revisions = db.prepare('SELECT * FROM import_review_revisions WHERE paper_id = ?')
+      .all(manifest.paperId).map(revisionRow)
+    const base = revisions.find(item => item.id === manifest.expectedBaseRevisionId)
+    const latestId = db.prepare('SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?')
+      .get(manifest.paperId)?.latest_revision_id
+    const own = revisions.find(item => item.id === ownRevisionId)
+    const completedSame = own && latestId === own.id && own.state !== 'uploading'
+      && own.state !== 'superseded' && own.bundleDigest === manifest.bundleDigest
+    if (revisions.some(item => item.reviewKind !== 'ocr')
+      || !base || base.reviewKind !== 'ocr'
+      || (completedSame ? base.state !== 'superseded' : base.state !== 'approved')
+      || base.manifest.sourceSetDigest !== manifest.sourceSetDigest
+      || base.manifest.evidenceDigest === manifest.evidenceDigest
+      || revisions.some(item => item.id !== ownRevisionId && item.id !== base.id && item.state !== 'superseded')) {
+      throw storeError('IMPORT_REVIEW_OCR_GENERATION_INVALID',
+        'Explicit OCR generation requires an approved OCR base, unchanged sources, new evidence and no Candidate or competing operation')
+    }
+  }
+
   function createRevision(rawManifest, { actor = 'internal' } = {}) {
     const metrics = {}
     const timer = reviewUploadMetrics('register', { actor }, ['registration', 'reuse'], metrics)
@@ -1025,6 +1054,7 @@ export function createImportReviewStore({
             )
           }
         }
+        assertOcrGenerationBase(db, manifest, existing?.id)
         if (existing) {
           db.exec('COMMIT')
           return { revision: revisionRow(existing), created: false }
@@ -1442,6 +1472,7 @@ export function createImportReviewStore({
             )
           }
         }
+        assertOcrGenerationBase(db, current.manifest, current.id)
         assertSelectedMediaConfirmations(db, projection, current)
         const newerFinalized = db.prepare(`
           SELECT id FROM import_review_revisions
