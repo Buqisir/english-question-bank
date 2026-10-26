@@ -51,6 +51,34 @@ const produced = produceNck1DocxMaterialization({
 })
 
 assert.equal(produced.disposition, 'ready_for_verification')
+const responseTitle = '<w:p><w:r><w:t xml:space="preserve">Should We Join the Reading Club?</w:t></w:r></w:p>'
+const materialParagraph = '<w:p><w:r><w:t>Animal clue one.</w:t></w:r></w:p>'
+const boxFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('Write a short notice')
+  ? xml.replace(responseTitle,
+    `${materialParagraph}<w:tbl><w:tblPr/><w:tblGrid><w:gridCol w:w="9000"/></w:tblGrid><w:tr><w:tc><w:tcPr/>${responseTitle}</w:tc></w:tr></w:tbl>`) : xml })
+const boxed = produceNck1DocxMaterialization({ paperId: boxFixture.paperId, documents: boxFixture.sourceDocuments })
+assert.equal(boxed.disposition, 'ready_for_verification', JSON.stringify(boxed.review.required))
+assert.equal(boxed.materialization.schemaVersion, 'nck1-source-materialization-v7')
+const boxedApplication = boxed.materialization.groups[7]
+assert.deepEqual(boxedApplication.writingTask.givenBlockRefs, [boxedApplication.blocks.at(-1).blockId])
+assert.equal(boxedApplication.blocks.at(-2).content[0].text, 'Animal clue one.')
+const boxedInput = { kind: 'nck1-source-materialization',
+  materializationBytes: new TextEncoder().encode(JSON.stringify(boxed.materialization)),
+  documents: boxFixture.sourceDocuments.map(document => ({ documentId: document.documentId, bytes: document.bytes })),
+  media: [] }
+const boxedCandidate = importCanonicalCandidate(boxedInput)
+assert.deepEqual(boxedCandidate.issues, [])
+assert(compileNck1MaterializationCandidatePreview(boxedCandidate.candidate).compilation)
+const ambiguousFixture = makeSyntheticNck1DocxFixture({
+  transformXml: xml => xml.includes('Write a short notice')
+    ? xml.replace(responseTitle, `${materialParagraph}${responseTitle}`) : xml,
+})
+const ambiguous = produceNck1DocxMaterialization({
+  paperId: ambiguousFixture.paperId, documents: ambiguousFixture.sourceDocuments,
+})
+assert.equal(ambiguous.disposition, 'needs_agent_review')
+assert.equal(ambiguous.materialization.groups[7].writingTask.givenBlockRefs, undefined)
+console.log('PASS terminal source response box selects v7 refs; unboxed material remains Agent confirmation')
 // Zhenhai's source has a title abbreviation in the stem and a dotted subject name.
 // Neither Mrs. nor P. E. can steal the genuine A./B./C./D. option boundaries.
 for (const options of ['A. Math.  B. Drama.  C. Physics.  D. English.']) {

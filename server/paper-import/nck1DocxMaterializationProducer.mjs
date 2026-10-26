@@ -2,7 +2,7 @@ import { answerGridPairs as parseAnswerGridPairs, answerLineCells } from './obje
 import { execFileSync } from 'node:child_process'
 
 import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
-import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { validateNck1SourceMaterialization, resolveWritingGivenBlocks } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { WRITING_SAMPLE_LABEL } from './sourceReferenceWritingRules.mjs'
@@ -831,17 +831,23 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
   }
   const noticeEnd = noticeIndex + notice.blockCount - 1
   const tail = meaningful.slice(noticeEnd + 1)
-  const box = tail.length === 1 && tail[0].kind === 'table' ? tail[0] : null
+  // Only an actual terminal one-cell source response box proves the new
+  // boundary. Plain paragraph tails still require Agent confirmation.
+  const box = tail.length === 1 && tail[0].kind === 'table' ? tail[0]
+    : family === 'application-writing' && tail.at(-1)?.kind === 'table' ? tail.at(-1) : null
+  let explicitGivens = null
   const cell = box?.rows.length === 1 && box.rows[0].cells.length === 1 ? box.rows[0].cells[0] : null
   if (box?.columnCount === 1 && box.nestedTableCount === 0
     && cell?.columnSpan === 1 && cell.verticalMerge === null
     && !cell.containsDrawing && !cell.containsNestedTable && cell.sourceParagraphs) {
     // A one-cell response box after 注意 is not a semantic data table. Retain
     // each original w:p and its locator, including the two separate starters.
-    meaningful = meaningful.slice(0, noticeEnd + 1)
-      .concat(cell.sourceParagraphs.filter((item) => normalized(item.text)))
+    const boxIndex = meaningful.indexOf(box)
+    const response = cell.sourceParagraphs.filter((item) => normalized(item.text))
+    if (boxIndex > noticeEnd + 1) explicitGivens = response
+    meaningful = meaningful.slice(0, boxIndex).concat(response)
   }
-  const givens = meaningful.slice(noticeEnd + 1)
+  const givens = (explicitGivens || meaningful.slice(noticeEnd + 1))
     .filter((item) => item.kind === 'paragraph' && normalized(item.text))
   const skeleton = family === 'application-writing'
     ? givens.map((item, index) => ({
@@ -886,6 +892,16 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
     wordCountTarget: writingWordCount(meaningful.slice(noticeIndex, noticeEnd + 1).map(item => item.text).join(' ')),
     officialModelAnswer,
     source: sourceLocator(documentId, promptItem.sourceIndex),
+  }
+  if (explicitGivens && !skeleton.some(item => item.role === null)) {
+    const sources = new Set(explicitGivens.map(item => digestJson(sourceLocator(documentId, item.sourceIndex))))
+    task.givenBlockRefs = blocks.filter(block => sources.has(digestJson(block.source))).map(block => block.blockId)
+    if (!resolveWritingGivenBlocks(blocks, task, family)) {
+      delete task.givenBlockRefs
+      addIssue(issues, 'NCK1_DOCX_WRITING_SKELETON_AMBIGUOUS',
+        `groups.${slotId}.writingTask.givenBlockRefs`,
+        'Source response box does not resolve one-for-one; Agent confirmation is required', sourceRef(documentId))
+    }
   }
   if (!task.wordCountTarget) {
     addIssue(issues, 'NCK1_DOCX_WRITING_WORD_COUNT_AMBIGUOUS',
@@ -2183,7 +2199,9 @@ export function produceNck1MaterializationFromStructures({
       })
   const listening = listeningResult.materialization
   const materialization = {
-    schemaVersion: groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
+    schemaVersion: groups.some(group => group.writingTask?.givenBlockRefs)
+      ? 'nck1-source-materialization-v7'
+      : groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
       ? 'nck1-source-materialization-v3'
       : selectedMedia.length > 0
       ? 'nck1-source-materialization-v2'
