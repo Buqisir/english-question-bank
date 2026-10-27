@@ -24,6 +24,7 @@ import { createSinglePaperPromotionService } from '../server/import-review/singl
 import { createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 import { startReviewCompatibilityWorker } from '../server/import-review/runReviewCompatibilityWorker.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './import-pipeline/ocr-source-references-version.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -434,10 +435,10 @@ try {
   assert.equal(oldStore.listPapers()[0].paperId, revision.paperId)
   assert.deepEqual(oldStore.productPreviewForRevision(revision.id).preview,
     fixture.store.productPreviewForRevision(revision.id).preview)
-  // This is a newly captured v23 envelope. The exact old release can read its
+  // This is a newly captured current envelope. The exact old release can read its
   // sealed record/preview but must not approve semantics it does not implement.
   assert.equal(JSON.parse(readFileSync(path.join(filesRoot, revision.id, 'source-references-v1.json'))).producerVersion,
-    'ocr-source-references-producer-v23')
+    OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   assert.throws(() => oldStore.approveRevision(revision.paperId, revision.id,
     { bundleDigest: revision.bundleDigest }, 'rollback-smoke'), { code: 'SOURCE_REFERENCES_SCHEMA_INVALID' })
   dbRun(migration, db => {
@@ -449,7 +450,7 @@ try {
     assert.equal(db.prepare('PRAGMA integrity_check').get().integrity_check, 'ok')
     assert.deepEqual(db.prepare('PRAGMA foreign_key_check').all(), [])
   })
-  pass('exact 97c63a3b release opens, lists and reads preview, rejects v21 reapproval; forward again does not grow archive or overwrite v2/compatibility')
+  pass('exact 97c63a3b release opens, lists and reads preview, rejects current envelope reapproval; forward again does not grow archive or overwrite v2/compatibility')
   const legacyStore = createImportReviewStore({ dbPath: migration, filesRoot, rendererBuildId: revision.rendererBuildId })
   assert.equal(legacyStore.agentPaperStatus(revision.paperId).subjectBackfill.schema.legacyPresent, true)
   assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject_legacy_v1').get().subject_json), '{"preserved":true}')
