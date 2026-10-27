@@ -495,6 +495,23 @@ test('admission rejects fake absence for new task headings and missing source ta
   { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
 })
 
+test('admission finds explicit tasks across separate official-answer documents', () => {
+  const input = writingFixture(['第一节 应用文写作（范文略）'])
+  const continuation = writingFixture(['第二节 读后续写（范文略）'])
+  for (const [index, part] of continuation.entries()) {
+    const document = structuredClone(part.documents[0])
+    document.documentId = 'continuation-answers'
+    input[index].documents.push(document)
+  }
+  for (const document of input[2].documents) {
+    for (const page of document.pages) page.visualClassifications ??= []
+  }
+  const sourceInput = { documents: [], ocrSourceBytes: {
+    evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+  } }
+  assert.doesNotThrow(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }))
+})
+
 for (const heading of ['高三英语试题听力录音稿', '2026届高中毕业班适应性练习英语听力部分录音稿']) {
   test(`complete transcript heading requires adjacent Text1 and closes scoring: ${heading}`, () => {
     const input = writingFixture(['应用文', '评分原则', '评分正文。', heading, '(Text 1)', 'M: A transcript.'], ['application'])

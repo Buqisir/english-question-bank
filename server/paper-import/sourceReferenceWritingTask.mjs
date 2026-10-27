@@ -676,15 +676,20 @@ function planReferenceCapture(section, factsFor, producerVersion) {
 // sealed evidence and therefore uses exactly the producer's visual/furniture view.
 export function sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, options) {
   const states = new Map()
-  for (const document of materialization.documents.filter(document => answerIds.has(document.documentId))) {
+  const documents = materialization.documents.filter(document => answerIds.has(document.documentId))
+  const taskTypes = new Set()
+  for (const document of documents) {
     const source = prepareSourceReferenceWritingItems({ ...materialization, documents: [document] }, evidence, confirmation, options)
     const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
-    if (usesExplicitWritingTitles(source.producerVersion)) for (const group of materialization.groups ?? []) {
-      if (group.writingTask && !lifecycle.sections.has(group.writingTask.taskType)) {
+    for (const taskType of lifecycle.sections.keys()) taskTypes.add(taskType)
+    for (const [itemId, state] of lifecycle.items) states.set(itemId, state)
+  }
+  if (documents.length && usesExplicitWritingTitles(options?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION)) {
+    for (const group of materialization.groups ?? []) {
+      if (group.writingTask && !taskTypes.has(group.writingTask.taskType)) {
         scopeError(`No answer-document section found for ${group.writingTask.taskType}`)
       }
     }
-    for (const [itemId, state] of lifecycle.items) states.set(itemId, state)
   }
   return states
 }
