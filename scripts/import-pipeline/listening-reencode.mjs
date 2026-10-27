@@ -6,7 +6,8 @@ import path from 'node:path'
 import { randomUUID } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { LISTENING_REVIEW_VERSION, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
+import { LISTENING_REVIEW_VERSION, LISTENING_RULE_EVIDENCE_VERSION, assertListeningRuleEvidence,
+  assertListeningUploadBudget, summarizeListeningGroup } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { assertListeningDiskSpace } from './listening-segment.mjs'
 import { expectedListeningReadings } from './lib-listening-segment-rule.mjs'
@@ -44,6 +45,8 @@ export function reencodeListeningAttempt({ paperDir, attempt: oldAttempt, output
     || sha256(readFileSync(path.join(oldAttempt, 'silence.json'))) !== oldInput.silenceSha256) fail('input changed')
   const apple = loadListeningResult(path.join(oldAttempt, 'apple-rule.json'))
   const resolved = loadListeningResult(path.join(oldAttempt, 'rule-result.json'))
+  const appleEntry = json(path.join(oldAttempt, 'apple-rule.json'))
+  const resolvedEntry = json(path.join(oldAttempt, 'rule-result.json'))
   if (transcript.some(group => {
     const old = apple.groups.find(item => item.segmentId === group.segmentId)
     return !old || old.sourceText !== group.text
@@ -53,6 +56,7 @@ export function reencodeListeningAttempt({ paperDir, attempt: oldAttempt, output
   // Validate both the original attempt and the optional Owner override. We never
   // authorize a new revision merely because an old local JSON was parseable.
   const all = new Map()
+  const ruleNotes = new Set()
   for (const file of [...previous.evidence, ...review.evidence]) {
     if (all.has(file.path) && digestJson(all.get(file.path)) !== digestJson(file)) fail(`conflicting descriptor: ${file.path}`)
     all.set(file.path, file)
@@ -64,11 +68,35 @@ export function reencodeListeningAttempt({ paperDir, attempt: oldAttempt, output
     const bytes = readFileSync(from)
     if (sha256(bytes) !== file.sha256 || bytes.length !== file.byteLength) fail(`evidence changed: ${file.path}`)
     const record = JSON.parse(bytes)
-    if (file.kind === 'review_notes' && record.rule && record.groups) continue
+    if (file.kind === 'review_notes' && (Object.hasOwn(record, 'rule') || Object.hasOwn(record, 'groups'))) {
+      ruleNotes.add(file.path)
+      if (!record.input || !record.normalization || !record.rule || !Array.isArray(record.groups)
+        || digestJson(record.input) !== digestJson(oldInput)
+        || digestJson(record.normalization) !== digestJson(oldInput.normalization)
+        || digestJson(record.rule) !== digestJson(oldInput.rule)
+        || digestJson(record.rule) !== digestJson(resolved.rule)) fail(`rule notes input/rule changed: ${file.path}`)
+      if (!Object.hasOwn(record, 'schemaVersion')) {
+        if (Object.hasOwn(appleEntry, 'schemaVersion') || Object.hasOwn(resolvedEntry, 'schemaVersion')
+          || digestJson(record.groups) !== digestJson(resolved.groups)) fail(`legacy rule notes changed: ${file.path}`)
+      } else if (record.schemaVersion === LISTENING_RULE_EVIDENCE_VERSION) {
+        assertListeningRuleEvidence(record, previous, transcript)
+        if (appleEntry.schemaVersion !== 'listening-local-result-v2'
+          || resolvedEntry.schemaVersion !== 'listening-local-result-v2'
+          || digestJson(record.groups) !== digestJson(resolved.groups.map(summarizeListeningGroup))
+          || digestJson(record.diagnostic) !== digestJson(resolvedEntry.diagnostic)
+          || digestJson(record.diagnostic) !== digestJson(appleEntry.diagnostic)
+          || digestJson(resolvedEntry.rule) !== digestJson(resolved.rule)
+          || digestJson(appleEntry.rule) !== digestJson(apple.rule ?? resolved.rule)) {
+          fail(`v2 rule notes diagnostic changed: ${file.path}`)
+        }
+      } else fail(`unknown rule notes version: ${file.path}`)
+      continue
+    }
     // Full diagnostics still refer to the original observations even when an
     // Owner override only lists its own human comparison notes.
     retained.push({ file, from })
   }
+  if (previous.evidence.filter(file => ruleNotes.has(file.path)).length !== 1) fail('exactly one original rule notes required')
   mkdirSync(output, { recursive: true })
   assertListeningDiskSpace(output)
   const attempt = path.join(output, `attempt-reencoded-${randomUUID()}`)

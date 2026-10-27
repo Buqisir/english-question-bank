@@ -5,7 +5,7 @@ import { chmodSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, w
 import path from 'node:path'
 import { segmentListening } from './listening-segment.mjs'
 import { reencodeListeningAttempt } from './listening-reencode.mjs'
-import { loadListeningResult } from './lib-listening-evidence.mjs'
+import { loadListeningResult, writeListeningEvidence } from './lib-listening-evidence.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
@@ -16,7 +16,7 @@ const group = { segmentId: 'listening-text-1', questionNumbers: [1],
   text: 'M: Could you bring the blue folder to the station before the morning train leaves?\nW: Yes I will meet you there at seven.' }
 const pauses = [{ startSeconds: 0, endSeconds: 1.9 }, { startSeconds: 6.9, endSeconds: 10 }]
 function workspace(t, primary, measurableAudio = false) {
-  const scratch = path.resolve('.scratch')
+  const scratch = path.resolve(process.env.TMPDIR || '.scratch')
   mkdirSync(scratch, { recursive: true })
   const dir = mkdtempSync(path.join(scratch, 'listening-v2-test-'))
   t.after(() => rmSync(dir, { recursive: true, force: true }))
@@ -64,13 +64,18 @@ test('successful frozen Apple evidence produces a sidecar accepted by the v2 ser
 test('pure re-encoding preserves an Owner override and old bytes without invoking ASR or rules', t => {
   const { dir, options } = workspace(t, fixture)
   const old = segmentListening({ ...options, runWhisper: () => assert.fail('no fallback') })
-  const output = mkdtempSync(path.join(path.resolve('.scratch'), 'reencode-test-'))
+  const output = mkdtempSync(path.join(path.dirname(dir), 'reencode-test-'))
   t.after(() => rmSync(output, { recursive: true, force: true }))
   // Exercise the ordinary reader for a historical full, unversioned result.
   const resolved = loadListeningResult(path.join(old.attempt, 'rule-result.json'))
   const apple = loadListeningResult(path.join(old.attempt, 'apple-rule.json'))
   writeFileSync(path.join(old.attempt, 'rule-result.json'), JSON.stringify(resolved))
   writeFileSync(path.join(old.attempt, 'apple-rule.json'), JSON.stringify(apple))
+  const input = readJson(path.join(old.attempt, 'input.json'))
+  replaceRuleNotes(old, { ...resolved, input, normalization: input.normalization })
+  const previous = readJson(old.review)
+  previous.schemaVersion = 'listening-review-v1'
+  writeFileSync(old.review, JSON.stringify(previous))
   const owner = readJson(old.review)
   owner.schemaVersion = 'listening-review-v1'
   owner.method = 'audio_source_comparison'
@@ -114,6 +119,134 @@ test('pure re-encoding preserves an Owner override and old bytes without invokin
   const raw = owner.evidence.find(file => file.kind === 'asr_window')
   writeFileSync(path.join(old.attempt, raw.path), '{"changed":true}')
   assert.throws(() => reencodeListeningAttempt(args), /evidence changed/u)
+})
+
+function replaceRuleNotes(old, notes) {
+  const review = readJson(old.review)
+  const descriptor = review.evidence.find(file => file.kind === 'review_notes'
+    && readJson(path.join(old.attempt, file.path)).rule)
+  const bytes = Buffer.from(JSON.stringify(notes))
+  writeFileSync(path.join(old.attempt, descriptor.path), bytes)
+  Object.assign(descriptor, { sha256: hash(bytes), byteLength: bytes.length })
+  writeFileSync(old.review, JSON.stringify(review))
+}
+
+function rewriteLocalEvidence(old, apple, resolved, input) {
+  // Remove only these three generated fixture files. Retain the old notes and
+  // their descriptor so a self-consistent codec cannot conceal changed results.
+  for (const name of ['diagnostics.json.gz', 'apple-rule.json', 'rule-result.json']) {
+    rmSync(path.join(old.attempt, name))
+  }
+  return writeListeningEvidence({ attempt: old.attempt, apple, resolved, input,
+    rawEvidence: readJson(old.review).evidence })
+}
+
+test('re-encoding binds legacy and v2 rule notes before creating any attempt', async t => {
+  const mutations = ['issues', 'engineNotes', 'input', 'notes-input', 'unknown-version',
+    'missing-original', 'multiple-original', 'owner-conflict', 'mixed-entry', 'entry-rule', 'descriptor-only',
+    'hidden-diagnostic']
+  for (const version of ['legacy', 'v2']) {
+    for (const mutation of mutations) {
+      if (version === 'legacy' && ['entry-rule', 'descriptor-only', 'hidden-diagnostic'].includes(mutation)) continue
+      await t.test(`${version}: ${mutation}`, t => {
+        const { dir, options } = workspace(t, fixture)
+        const old = segmentListening({ ...options, runWhisper: () => assert.fail('no fallback') })
+        const input = readJson(path.join(old.attempt, 'input.json'))
+        const apple = loadListeningResult(path.join(old.attempt, 'apple-rule.json'))
+        const resolved = loadListeningResult(path.join(old.attempt, 'rule-result.json'))
+        resolved.groups[0].decision = 'blocked'
+        resolved.groups[0].issues = ['CRITICAL_WORD_DIFFERENCE']
+        resolved.groups[0].engineNotes = ['frozen blocking diagnosis']
+        const notes = rewriteLocalEvidence(old, apple, resolved, input)
+        replaceRuleNotes(old, version === 'legacy'
+          ? { ...resolved, input, normalization: input.normalization } : notes)
+        if (version === 'legacy') {
+          writeFileSync(path.join(old.attempt, 'apple-rule.json'), JSON.stringify(apple))
+          writeFileSync(path.join(old.attempt, 'rule-result.json'), JSON.stringify(resolved))
+        }
+        const previous = readJson(old.review)
+        previous.schemaVersion = version === 'legacy' ? 'listening-review-v1' : 'listening-review-v2'
+        // Human audio navigation may remain usable despite the frozen rule block.
+        previous.method = 'audio_source_comparison'
+        writeFileSync(old.review, JSON.stringify(previous))
+        const owner = structuredClone(previous)
+        const cut = { startSeconds: 1.234567, endSeconds: 7.765432 }
+        owner.groups[0].playback = { ...cut }
+        Object.assign(owner.groups[0].occurrences[0], cut)
+        const ownerReview = path.join(dir, 'owner.json')
+        writeFileSync(ownerReview, JSON.stringify(owner))
+        const output = mkdtempSync(path.join(path.dirname(dir), 'reencode-binding-'))
+        t.after(() => rmSync(output, { recursive: true, force: true }))
+        const args = { paperDir: dir, attempt: old.attempt, output, request: options.request, ownerReview }
+        const baseline = reencodeListeningAttempt(args)
+        assert.deepEqual(readJson(baseline.review).groups, owner.groups)
+        assert.deepEqual(loadListeningResult(path.join(baseline.attempt, 'rule-result.json')), resolved)
+        assert.deepEqual(resolved.groups[0].issues, ['CRITICAL_WORD_DIFFERENCE'])
+        const before = readdirSync(output)
+        const descriptor = previous.evidence.find(file => file.kind === 'review_notes'
+          && readJson(path.join(old.attempt, file.path)).rule)
+        const originalNotes = readJson(path.join(old.attempt, descriptor.path))
+        if (['issues', 'engineNotes', 'hidden-diagnostic'].includes(mutation)) {
+          if (mutation === 'issues') resolved.groups[0].issues = []
+          else if (mutation === 'engineNotes') resolved.groups[0].engineNotes = []
+          else apple.diagnosticNote = 'changed full result outside summary'
+          if (version === 'v2') {
+            rewriteLocalEvidence(old, apple, resolved, input)
+            // Both local readers still accept the rewritten codec.
+            assert.deepEqual(loadListeningResult(path.join(old.attempt, 'rule-result.json')), resolved)
+            assert.deepEqual(loadListeningResult(path.join(old.attempt, 'apple-rule.json')), apple)
+          } else writeFileSync(path.join(old.attempt, 'rule-result.json'), JSON.stringify(resolved))
+        } else if (mutation === 'input') {
+          input.adapterSha256 = hash('changed adapter')
+          writeFileSync(path.join(old.attempt, 'input.json'), JSON.stringify(input))
+        } else if (mutation === 'notes-input') {
+          originalNotes.input.adapterSha256 = hash('changed notes adapter')
+          replaceRuleNotes(old, originalNotes)
+          // Keep the Owner inventory consistent with the original descriptor.
+          owner.evidence = readJson(old.review).evidence
+          writeFileSync(ownerReview, JSON.stringify(owner))
+        } else if (mutation === 'unknown-version') {
+          originalNotes.schemaVersion = 'listening-rule-evidence-v999'
+          replaceRuleNotes(old, originalNotes)
+          owner.evidence = readJson(old.review).evidence
+          writeFileSync(ownerReview, JSON.stringify(owner))
+        } else if (mutation === 'missing-original') {
+          previous.evidence = previous.evidence.filter(file => file.path !== descriptor.path)
+          writeFileSync(old.review, JSON.stringify(previous))
+        } else if (['multiple-original', 'owner-conflict'].includes(mutation)) {
+          if (mutation === 'owner-conflict') originalNotes.groups[0].issues = []
+          const bytes = Buffer.from(JSON.stringify(originalNotes))
+          const extra = { ...descriptor, path: 'listening-review-evidence/extra-rule.json',
+            sha256: hash(bytes), byteLength: bytes.length }
+          writeFileSync(path.join(old.attempt, extra.path), bytes)
+          if (mutation === 'multiple-original') {
+            previous.evidence.push(extra)
+            writeFileSync(old.review, JSON.stringify(previous))
+          } else {
+            owner.evidence.push(extra)
+            writeFileSync(ownerReview, JSON.stringify(owner))
+          }
+        } else if (mutation === 'mixed-entry') {
+          if (version === 'v2') {
+            writeFileSync(path.join(old.attempt, 'apple-rule.json'), JSON.stringify(apple))
+            writeFileSync(path.join(old.attempt, 'rule-result.json'), JSON.stringify(resolved))
+          } else rewriteLocalEvidence(old, apple, resolved, input)
+        } else if (mutation === 'entry-rule') {
+          const entry = readJson(path.join(old.attempt, 'apple-rule.json'))
+          entry.rule.version = 'tampered-rule'
+          writeFileSync(path.join(old.attempt, 'apple-rule.json'), JSON.stringify(entry))
+        } else if (mutation === 'descriptor-only') {
+          originalNotes.diagnostic.decodedSha256 = hash('different diagnostic')
+          replaceRuleNotes(old, originalNotes)
+          owner.evidence = readJson(old.review).evidence
+          writeFileSync(ownerReview, JSON.stringify(owner))
+        }
+        assert.throws(() => reencodeListeningAttempt(args),
+          /LISTENING_REENCODE_BINDING_INVALID|Listening rule evidence/u)
+        assert.deepEqual(readdirSync(output), before, 'rejection must not create an attempt')
+      })
+    }
+  }
 })
 test('audio-reviewed final sidecar cuts are loaded literally without applying the producer buffer again', t => {
   const {subject, options} = workspace(t, fixture)
