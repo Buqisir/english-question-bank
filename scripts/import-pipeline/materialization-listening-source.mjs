@@ -16,7 +16,7 @@ export const isListeningBoundaryIssue = issue => /_LISTENING_(?:CUE_BOUNDARY|TRA
 function context(input, receiptBytes) {
   const materialization = parse(input.materializationBytes), evidence = parse(input.ocrSourceBytes?.evidenceBytes)
   const confirmation = parse(input.ocrSourceBytes?.confirmationBytes), receipt = parse(receiptBytes)
-  if (!/^nck1-source-materialization-v(?:[1-9]|11)$/u.test(materialization.schemaVersion)
+  if (!/^nck1-source-materialization-v(?:[1-9]|11|12)$/u.test(materialization.schemaVersion)
     || Object.hasOwn(materialization, 'listeningSourceDecision')
     || materialization.listening?.state !== 'captured'
     || !['nck1-ocr-source-confirmation-v2', 'nck1-ocr-source-confirmation-v3'].includes(confirmation.schemaVersion) || confirmation.confirmed !== true
@@ -99,7 +99,7 @@ export function applyMaterializationListeningSourcePlan(input, receiptBytes, pla
     startItemId: d?.start?.itemId, endItemId: d?.end?.itemId, reason: d?.sourceReview?.reason, roles: d?.roles })
   if (!same(plan, regenerated)) fail('plan differs from the bound original source')
   const materialization = structuredClone(ctx.materialization)
-  if (materialization.schemaVersion !== 'nck1-source-materialization-v11') {
+  if (!['nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(materialization.schemaVersion)) {
     materialization.schemaVersion = 'nck1-source-materialization-v10'
   }
   materialization.listeningSourceDecision = structuredClone(d)

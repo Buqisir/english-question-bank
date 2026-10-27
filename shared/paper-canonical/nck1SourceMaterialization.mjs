@@ -1159,6 +1159,19 @@ function validateListening(listening, documents, sourceCoverage, issues) {
 }
 
 export function validateNck1SourceMaterialization(value) {
+  if (value?.schemaVersion === 'nck1-source-materialization-v12') {
+    // Validate relations against their real envelope before reusing the older
+    // field validators. A v2 relation must never be interpreted as legacy v8.
+    const issues = []
+    try {
+      if (!Object.hasOwn(value, 'paragraphJoins')) throw new Error('Materialization v12 requires opt-in paragraph relations')
+      resolveCrossPageParagraphJoins(value)
+    } catch (error) {
+      issues.push(issue('MATERIALIZATION_PARAGRAPH_JOIN_INVALID', '$.paragraphJoins', error.message))
+    }
+    const { paragraphJoins, ...fields } = value
+    return [...issues, ...validateNck1SourceMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' })]
+  }
   if (value?.schemaVersion === 'nck1-source-materialization-v11') {
     const legacy = { ...value, schemaVersion: Object.hasOwn(value, 'listeningSourceDecision')
       ? 'nck1-source-materialization-v10' : Object.hasOwn(value, 'inImageOptionLabels')
