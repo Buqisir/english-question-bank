@@ -1231,7 +1231,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78'].includes(
+        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
