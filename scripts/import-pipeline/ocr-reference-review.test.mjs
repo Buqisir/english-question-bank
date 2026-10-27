@@ -417,7 +417,8 @@ const articleFixture = (texts, pagesAfter = []) => {
 }
 
 test('answer-first given-title article and numbered continuation capture once and stop before explanations and a late empty title', () => {
-  const input = articleFixture(['61 exhibited; 62 to observe; 63 consistency; 64 which; 65 a',
+  const input = articleFixture(['听力：1—5 AACBC', '阅读理解：21—23 DCB',
+    '61 exhibited; 62 to observe; 63 consistency; 64 which; 65 a',
     givenArticleTitle, 'Recently, our campus has suffered damage.',
     'Let us keep our school beautiful.',
     '67. 读后续写参考例文（文章来源 Chicken soup for the teenage soul）',
@@ -435,6 +436,11 @@ test('answer-first given-title article and numbered continuation capture once an
   assert.equal(lifeFor(input).items.get('p2-i0').ended, true)
   assert(!JSON.stringify(output.groups).includes('Reading explanation'))
   assert(!JSON.stringify(output.groups).includes('transcript'))
+  const starts = []
+  sourceReferenceScoringScopes(input[2], new Set(['answers']), {
+    materialization: input[0], onWritingStart: (_document, itemId) => starts.push(itemId),
+  })
+  assert.deepEqual(starts, ['p1-i3'], 'objective listening answers cannot hide the given-title writing start')
 })
 
 test('numbered sample grammar is closed and v19 keeps its exact old heading semantics', () => {

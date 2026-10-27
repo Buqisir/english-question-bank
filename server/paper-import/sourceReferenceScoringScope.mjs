@@ -63,7 +63,8 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
           || WRITING_SECTION.some(([, pattern]) => pattern.test(text))
           || BARE_APPLICATION_SECTION.test(text) || /^读后续写[:：]?$/u.test(text)
           || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text)
-          || explicitWritingHeading(item.text, producerVersion))
+          || explicitWritingHeading(item.text, producerVersion)
+          || (usesGivenTitleWritingSamples(producerVersion) && lifecycle.taskStarts.has(item.itemId)))
       if (afterListening) {
         appendixTask = scoredWritingRubricTask(item.text, items[index + 1]?.text)
         if (appendixTask) { afterListening = false; ended = false }
@@ -78,7 +79,13 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         scopes.set(item.itemId, null)
         continue
       }
-      if (firstWritingHeading) afterListening = false
+      if (firstWritingHeading) {
+        afterListening = false
+        // Objective listening answer rows can precede the first given-title
+        // article. The lifecycle's full proof, never an English title alone,
+        // establishes that first writing start after those rows.
+        if (usesGivenTitleWritingSamples(producerVersion) && lifecycle.taskStarts.has(item.itemId)) ended = false
+      }
       let heading = text
       if (NON_WRITING_SECTION.test(heading)) {
         writing = false
