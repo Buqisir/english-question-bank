@@ -7,6 +7,55 @@ import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { spawnSync } from 'node:child_process'
 
+function rubricHeadingFixture(headingPage, intervening = false) {
+  const line = (text, id) => ({ text, itemId: id, observationIds: [`w-${id}`] })
+  const heading = line('三、各档次的给分范围和要求', 'rubric')
+  const rows = ['第五档', '第四档', '第三档', '第二档', '第一档', '0分']
+    .map((name, index) => [line(name, `grade-${index}`), line('评分描述。', `description-${index}`)])
+  const pages = [
+    { page: 1, orderedItems: [line('第四部分 写作', 'part'), line('第一节（满分15分）', 'application'),
+      line('参考范文', 'sample'), line('A short source sample.', 'essay'),
+      line('二、内容要点', 'points'), line('内容要点说明。', 'points-body'),
+      ...(headingPage === 1 ? [heading] : [])], visualClassifications: [] },
+    { page: 2, orderedItems: [...(headingPage === 2 ? [heading] : []),
+      ...(intervening ? [line('读后续写评分标准', 'other-task')] : []),
+      ...rows.flat(), ...(!intervening ? [line('第二节（满分25分）', 'continuation'),
+        line('参考范文', 'next-sample'), line('A continuation sample.', 'next-essay')] : [])],
+      visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-2:rubric',
+        rows: rows.map(row => ({ header: false, cells: row.map(cell => [cell.itemId]) })) }] },
+  ]
+  const materialization = { paperId: 'paper-rubric-heading-test',
+    documents: [{ documentId: 'answers', role: 'official_answers', sha256: `sha256:${'a'.repeat(64)}` }],
+    groups: ['application', 'continuation'].map(taskType => ({ groupId: taskType, writingTask: { taskType } })) }
+  const evidence = { documents: [{ documentId: 'answers', pages: pages.map(page => ({
+    observations: page.orderedItems.map((item, i) => ({ observationId: item.observationIds[0], text: item.text,
+      region: { x: .1, y: .05 + i * .025, width: .6, height: .02 } })),
+  })) }] }
+  return [materialization, evidence, { documents: [{ documentId: 'answers', pages }] }]
+}
+
+for (const headingPage of [1, 2]) test(`v23 rubric heading on page ${headingPage} owns the page 2 table`, () => {
+  const input = rubricHeadingFixture(headingPage)
+  const result = buildSourceReferences(...input)
+  assert.equal(result.groups[0].scoring.entries.at(-1).sourceLabel, '三、各档次的给分范围和要求')
+  const table = result.groups[0].scoring.entries.at(-1).blocks.find(block => block.kind === 'table')
+  assert.equal(table.rows[0][0].text, '第五档')
+  assert.equal(table.rows.length, 6)
+  assert.equal(result.groups[1].scoring.state, 'not_supplied')
+  const script = `import { buildSourceReferences } from ${JSON.stringify(new URL('./ocr-proofread.mjs', import.meta.url).href)};
+    buildSourceReferences(...JSON.parse(process.argv[1]), { producerVersion: 'ocr-source-references-producer-v22' });`
+  const historical = spawnSync(process.execPath, ['--input-type=module', '-e', script, JSON.stringify(input)], { encoding: 'utf8' })
+  assert.equal(historical.status, 1)
+  assert.match(historical.stderr, /Unresolved writing task visual ownership/u)
+})
+
+test('intervening continuation scoring heading prevents application from owning the table', () => {
+  const input = rubricHeadingFixture(1, true)
+  const result = buildSourceReferences(...input)
+  assert(!JSON.stringify(result.groups[0].scoring).includes('第五档'))
+  assert.equal(result.groups[1].scoring.entries[0].blocks[0].kind, 'table')
+})
+
 for (const scoringLabel of ['4. 评分细则', '（一）评分原则：', '（二）各档次给分范围和要求',
   '二、各档次给分范围及要求']) {
 test(`parenthesized task and ${scoringLabel} retain a 7 by 7 scoring table across pages 4 to 6`, () => {

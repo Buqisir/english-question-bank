@@ -11,7 +11,7 @@ import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMat
   isWritingTranscriptTitle, isSourceReferenceExplanationStart, isReadingAnswerPair } from './sourceReferenceWritingRules.mjs'
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
-import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
   usesGivenTitleWritingSamples, usesComposedWritingLabels } from './sourceReferenceSemantics.mjs'
 
 // Bind nested task/letter and capture role lookups to the same source semantics.
@@ -485,7 +485,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     }
     const facts = factsFor(line)
     const next = lines[lineIndex + 1]
-    const readingPairCandidate = producerVersion === 'ocr-source-references-producer-v22' && scope.current
+    const readingPairCandidate = usesTitleAbbreviation(producerVersion) && scope.current
       && next && !next.figure && !next.table && line.nextSourceItemId === next.itemId
       && isReadingAnswerPair(line.text, next.text)
     const priorStep = readingPairCandidate

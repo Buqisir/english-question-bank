@@ -2,7 +2,7 @@ import { sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mj
 import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { inlineSampleParts } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
   usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
@@ -107,7 +107,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
       const completeTranscript = usesExplicitWritingTitles(producerVersion) && lifecycle.listeningStarts.has(item.itemId)
-      const readingBoundary = producerVersion === 'ocr-source-references-producer-v22'
+      const readingBoundary = usesTitleAbbreviation(producerVersion)
         && lifecycle.items.get(item.itemId)?.ended && isReadingAnswerPair(item.text, items[index + 1]?.text)
       if (readingBoundary || isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(heading)
         || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading) || completeTranscript) {

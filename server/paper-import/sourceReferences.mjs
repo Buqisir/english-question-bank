@@ -25,7 +25,7 @@ export const exclusionSourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-v5.schema.json', import.meta.url), 'utf8',
 ))
 export const currentSourceReferencesSchema = JSON.parse(readFileSync(
-  new URL('../../schemas/paper-import/source-references-capture-v22.schema.json', import.meta.url), 'utf8',
+  new URL('../../schemas/paper-import/source-references-capture-v23.schema.json', import.meta.url), 'utf8',
 ))
 const ajv = new Ajv({ allErrors: true, strict: false })
 const validateV1 = ajv.compile(sourceReferencesSchema)
@@ -53,6 +53,9 @@ const validateGivenTitles = ajv.compile(JSON.parse(readFileSync(
 )))
 const validateComposedLabels = ajv.compile(JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-capture-v21.schema.json', import.meta.url), 'utf8',
+)))
+const validateTitleAbbreviation = ajv.compile(JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-capture-v22.schema.json', import.meta.url), 'utf8',
 )))
 
 export function parseSourceReferencesBytes(bytes) {
@@ -106,7 +109,8 @@ export function validateSourceReferences({
       : sidecar.producerVersion === 'ocr-source-references-producer-v18' ? validatePrevious
         : sidecar.producerVersion === 'ocr-source-references-producer-v19' ? validateExplicitTitles
           : sidecar.producerVersion === 'ocr-source-references-producer-v20' ? validateGivenTitles
-            : sidecar.producerVersion === 'ocr-source-references-producer-v21' ? validateComposedLabels : validateCurrent
+            : sidecar.producerVersion === 'ocr-source-references-producer-v21' ? validateComposedLabels
+              : sidecar.producerVersion === 'ocr-source-references-producer-v22' ? validateTitleAbbreviation : validateCurrent
     : sidecar?.schemaVersion === 'source-references-v5' ? validateV5
     : sidecar?.schemaVersion === 'source-references-v4' ? validateV4
     : sidecar?.schemaVersion === 'source-references-v3' ? validateV3
