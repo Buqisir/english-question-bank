@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto'
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-import { buildReviewPack, edgeSentences, reviewCuts } from './listening-owner-review-pack.mjs'
+import { anchors, buildReviewPack, edgeSentences, reviewCuts } from './listening-owner-review-pack.mjs'
 import { writeListeningEvidence } from './lib-listening-evidence.mjs'
 
 const hash = file => `sha256:${createHash('sha256').update(readFileSync(file)).digest('hex')}`
@@ -13,6 +13,27 @@ const put = (file, data) => { mkdirSync(path.dirname(file), { recursive: true })
 const pauses = [{ startSeconds: 1, endSeconds: 2 }, { startSeconds: 5, endSeconds: 7.5 },
   { startSeconds: 7.5, endSeconds: 8 }, { startSeconds: 11, endSeconds: 14 }]
 const sourceText = 'M: Bright birds gather beside our quiet river. W: Fresh apples grow beyond those hills.'
+
+test('compound edge anchors join only adjacent tokens in either direction and retain edge times', () => {
+  const stream = tokens => ({ engine: 'fixture', words: tokens.map((token, i) => ({ token, startSeconds: i, endSeconds: i + 0.5 })) })
+  for (const [kind, source, tokens, edge] of [
+    ['head', 'Dinnertime brings everyone back home now', ['dinner', 'time', 'brings', 'everyone', 'back', 'home', 'now'], 0],
+    ['tail', 'Everyone will come back home for dinnertime', ['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'time'], 7.5],
+    ['head', 'Dinner time brings everyone back home now', ['dinnertime', 'brings', 'everyone', 'back', 'home', 'now'], 0],
+    ['tail', 'Everyone will come back home for dinner time', ['everyone', 'will', 'come', 'back', 'home', 'for', 'dinnertime'], 6.5],
+  ]) {
+    const hits = anchors([stream(tokens)], source, 0, 20, kind)
+    assert.equal(hits.length, 1)
+    assert.equal(kind === 'head' ? hits[0].start : hits[0].end, edge)
+  }
+  const separated = stream(['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'extra', 'time'])
+  assert.equal(anchors([separated], 'Everyone will come back home for dinnertime', 0, 20, 'tail').length, 0)
+  const hidden = stream(['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'extra', 'time'])
+  hidden.words[7].startSeconds = NaN
+  assert.equal(anchors([hidden], 'Everyone will come back home for dinnertime', 0, 20, 'tail').length, 0)
+  const repeated = stream(['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'time', 'everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'time'])
+  assert.equal(anchors([repeated], 'Everyone will come back home for dinnertime', 0, 30, 'tail').length, 2)
+})
 
 function fixture() {
   const temp = realpathSync(mkdtempSync(path.join(tmpdir(), 'eqb-review-pack-'))), root = path.join(temp, 'repo')
@@ -37,6 +58,22 @@ function fixture() {
   put(path.join(attempt, 'rule-result.json'), { groups: [group] })
   return { temp, root, papers: [paperId], paperId, paperDir, attempt, audio, group, output: path.join(temp, 'pack') }
 }
+
+test('two compound tail matches in one reading remain ambiguous', () => {
+  const f = fixture()
+  try {
+    const words = f.group.observedWindows[0].words.filter(w => w.startSeconds < 6).map(w => ({ ...w }))
+    const last = words.pop()
+    words.push({ ...last, token: 'hill', endSeconds: last.startSeconds + 0.1 },
+      { ...last, token: 'side', startSeconds: last.startSeconds + 0.1 })
+    const tail = words.slice(-6).map(w => ({ ...w, startSeconds: w.startSeconds + 7, endSeconds: w.endSeconds + 7 }))
+    put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
+      sourceText: sourceText.replace('hills.', 'hillside.'), expectedReadings: 1,
+      observedWindows: [{ ...f.group.observedWindows[0], words: [...words, ...tail] }] }] })
+    assert.throws(() => buildReviewPack(f), /REVIEW_PACK_TAIL_AMBIGUOUS.*: 2/u)
+    assert.equal(existsSync(f.output), false)
+  } finally { rmSync(f.temp, { recursive: true, force: true }) }
+})
 
 test('compressed diagnostics produce identical Owner sentences, rounds, cuts and clip bytes; fingerprint includes gzip', () => {
   const f = fixture()
