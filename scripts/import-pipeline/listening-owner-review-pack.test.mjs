@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto'
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-import { buildReviewPack, edgeSentences, reviewCuts } from './listening-owner-review-pack.mjs'
+import { anchors, buildReviewPack, edgeSentences, reviewCuts } from './listening-owner-review-pack.mjs'
 import { writeListeningEvidence } from './lib-listening-evidence.mjs'
 
 const hash = file => `sha256:${createHash('sha256').update(readFileSync(file)).digest('hex')}`
@@ -13,6 +13,47 @@ const put = (file, data) => { mkdirSync(path.dirname(file), { recursive: true })
 const pauses = [{ startSeconds: 1, endSeconds: 2 }, { startSeconds: 5, endSeconds: 7.5 },
   { startSeconds: 7.5, endSeconds: 8 }, { startSeconds: 11, endSeconds: 14 }]
 const sourceText = 'M: Bright birds gather beside our quiet river. W: Fresh apples grow beyond those hills.'
+
+test('compound edge anchors join only adjacent tokens in either direction and retain edge times', () => {
+  const stream = tokens => ({ engine: 'fixture', words: tokens.map((token, i) => ({ token, startSeconds: i, endSeconds: i + 0.5 })) })
+  for (const [kind, source, tokens, edge] of [
+    ['head', 'Dinnertime brings everyone back home now', ['dinner', 'time', 'brings', 'everyone', 'back', 'home', 'now'], 0],
+    ['tail', 'Everyone will come back home for dinnertime', ['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'time'], 7.5],
+    ['head', 'Dinner time brings everyone back home now', ['dinnertime', 'brings', 'everyone', 'back', 'home', 'now'], 0],
+    ['tail', 'Everyone will come back home for dinner time', ['everyone', 'will', 'come', 'back', 'home', 'for', 'dinnertime'], 6.5],
+  ]) {
+    const hits = anchors([stream(tokens)], source, 0, 20, kind)
+    assert.equal(hits.length, 1)
+    assert.equal(kind === 'head' ? hits[0].start : hits[0].end, edge)
+  }
+  const separated = stream(['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'extra', 'time'])
+  assert.equal(anchors([separated], 'Everyone will come back home for dinnertime', 0, 20, 'tail').length, 0)
+  const hidden = stream(['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'extra', 'time'])
+  hidden.words[7].startSeconds = NaN
+  assert.equal(anchors([hidden], 'Everyone will come back home for dinnertime', 0, 20, 'tail').length, 0)
+  const repeated = stream(['everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'time', 'everyone', 'will', 'come', 'back', 'home', 'for', 'dinner', 'time'])
+  assert.equal(anchors([repeated], 'Everyone will come back home for dinnertime', 0, 30, 'tail').length, 2)
+})
+
+test('ordinary and split compound evidence at the same edge are merged', () => {
+  for (const kind of ['head', 'tail']) {
+    const source = kind === 'head'
+      ? 'Dinnertime brings everyone back home now'
+      : 'Everyone comes back home for dinnertime'
+    const ordinary = kind === 'head'
+      ? ['dinnertime', 'brings', 'everyone', 'back', 'home', 'now']
+      : ['everyone', 'comes', 'back', 'home', 'for', 'dinnertime']
+    const split = kind === 'head'
+      ? ['dinner', 'time', ...ordinary.slice(1)]
+      : [...ordinary.slice(0, -1), 'dinner', 'time']
+    const make = tokens => ({ engine: 'fixture', words: tokens.map((token, i) => {
+      const start = kind === 'head' ? (i < 2 && tokens.length === 7 ? i * 0.2 : (i - (tokens.length === 7 ? 1 : 0)))
+        : (tokens.length === 7 && i === 6 ? 5.2 : i)
+      return { token, startSeconds: start, endSeconds: start + (token === 'dinnertime' ? 0.5 : 0.3) }
+    }) })
+    assert.equal(anchors([make(ordinary), make(split)], source, 0, 20, kind).length, 1)
+  }
+})
 
 function fixture() {
   const temp = realpathSync(mkdtempSync(path.join(tmpdir(), 'eqb-review-pack-'))), root = path.join(temp, 'repo')
@@ -37,6 +78,88 @@ function fixture() {
   put(path.join(attempt, 'rule-result.json'), { groups: [group] })
   return { temp, root, papers: [paperId], paperId, paperDir, attempt, audio, group, output: path.join(temp, 'pack') }
 }
+
+for (const kind of ['head', 'tail']) {
+  test(`overlapping ${kind} contexts with distinct edge words remain ambiguous`, () => {
+    const f = fixture()
+    try {
+      const source = kind === 'head'
+        ? 'Dinnertime brings everyone back home now. Fresh apples grow beyond those hills.'
+        : 'Bright birds gather beside our quiet river. Everyone comes back home for dinnertime.'
+      const entries = kind === 'head'
+        ? [['dinner', 2], ['time', 2.2], ['dinnertime', 7.4], ['brings', 7.6],
+          ['everyone', 7.8], ['back', 8], ['home', 8.2], ['now', 8.4]]
+        : [['everyone', 11.3], ['comes', 11.5], ['back', 11.7], ['home', 11.9],
+          ['for', 12.1], ['dinnertime', 12.2], ['dinner', 17.4], ['time', 17.6]]
+      const words = entries.map(([token, startSeconds]) => ({ token, startSeconds, endSeconds: startSeconds + 0.1 }))
+      const otherTokens = kind === 'head'
+        ? ['fresh', 'apples', 'grow', 'beyond', 'those', 'hills']
+        : ['bright', 'birds', 'gather', 'beside', 'our', 'quiet', 'river']
+      const other = otherTokens.map((token, i) => ({
+        token, startSeconds: (kind === 'head' ? 22 : 2) + i * 0.15,
+        endSeconds: (kind === 'head' ? 22 : 2) + i * 0.15 + 0.1,
+      }))
+      put(path.join(f.attempt, 'input.json'),
+        { audioSha256: hash(f.audio), subject: { durationSeconds: 30, paperId: f.paperId } })
+      put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
+        sourceText: source, expectedReadings: 1,
+        observedWindows: [{ words, evidencePaths: [] }, { words: other, evidencePaths: [] }] }] })
+      assert.throws(() => buildReviewPack(f), kind === 'head'
+        ? /REVIEW_PACK_READING_COUNT_AMBIGUOUS.*found 2/u
+        : /REVIEW_PACK_TAIL_AMBIGUOUS.*: 2/u)
+      assert.equal(existsSync(f.output), false)
+    } finally { rmSync(f.temp, { recursive: true, force: true }) }
+  })
+
+  test(`compound ${kind} candidate cannot bridge two ordinary hits`, () => {
+    const f = fixture()
+    try {
+      const source = kind === 'head'
+        ? 'Dinnertime brings everyone back home now. Fresh apples grow beyond those hills.'
+        : 'Bright birds gather beside our quiet river. Everyone comes back home for dinnertime.'
+      const timed = (tokens, start) => tokens.map((token, i) => ({
+        token, startSeconds: start + i * 0.15, endSeconds: start + i * 0.15 + 0.1,
+      }))
+      const ordinary = kind === 'head'
+        ? ['dinnertime', 'brings', 'everyone', 'back', 'home', 'now']
+        : ['everyone', 'comes', 'back', 'home', 'for', 'dinnertime']
+      const compound = kind === 'head'
+        ? ['dinner', 'time', 'brings', 'everyone', 'back', 'home', 'now']
+        : ['everyone', 'comes', 'back', 'home', 'for', 'dinner', 'time']
+      const other = kind === 'head'
+        ? ['fresh', 'apples', 'grow', 'beyond', 'those', 'hills']
+        : ['bright', 'birds', 'gather', 'beside', 'our', 'quiet', 'river']
+      const starts = kind === 'head' ? [2, 5.85, 9.5] : [11.25, 15, 18.75]
+      const windows = [timed(ordinary, starts[0]), timed(compound, starts[1]),
+        timed(ordinary, starts[2]), timed(other, kind === 'head' ? 22 : 2)]
+        .map(words => ({ words, evidencePaths: [] }))
+      put(path.join(f.attempt, 'input.json'),
+        { audioSha256: hash(f.audio), subject: { durationSeconds: 30, paperId: f.paperId } })
+      put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
+        sourceText: source, expectedReadings: 1, observedWindows: windows }] })
+      assert.throws(() => buildReviewPack(f), kind === 'head'
+        ? /REVIEW_PACK_READING_COUNT_AMBIGUOUS.*found 3/u
+        : /REVIEW_PACK_TAIL_AMBIGUOUS.*: 3/u)
+      assert.equal(existsSync(f.output), false)
+    } finally { rmSync(f.temp, { recursive: true, force: true }) }
+  })
+}
+
+test('two compound tail matches in one reading remain ambiguous', () => {
+  const f = fixture()
+  try {
+    const words = f.group.observedWindows[0].words.filter(w => w.startSeconds < 6).map(w => ({ ...w }))
+    const last = words.pop()
+    words.push({ ...last, token: 'hill', endSeconds: last.startSeconds + 0.1 },
+      { ...last, token: 'side', startSeconds: last.startSeconds + 0.1 })
+    const tail = words.slice(-6).map(w => ({ ...w, startSeconds: w.startSeconds + 7, endSeconds: w.endSeconds + 7 }))
+    put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
+      sourceText: sourceText.replace('hills.', 'hillside.'), expectedReadings: 1,
+      observedWindows: [{ ...f.group.observedWindows[0], words: [...words, ...tail] }] }] })
+    assert.throws(() => buildReviewPack(f), /REVIEW_PACK_TAIL_AMBIGUOUS.*: 2/u)
+    assert.equal(existsSync(f.output), false)
+  } finally { rmSync(f.temp, { recursive: true, force: true }) }
+})
 
 test('compressed diagnostics produce identical Owner sentences, rounds, cuts and clip bytes; fingerprint includes gzip', () => {
   const f = fixture()

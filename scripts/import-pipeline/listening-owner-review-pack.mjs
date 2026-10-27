@@ -78,24 +78,46 @@ function similarity(a, b) {
   return 2 * row.at(-1) / (a.length + b.length)
 }
 
-function anchors(streams, text, low, high, kind) {
+export function anchors(streams, text, low, high, kind) {
   const source = normalizeListeningText(text.replace(/(?:^|(?<=[.!?\n])\s*)[MW]:/gmu, ''))
   const needle = kind === 'head' ? source.slice(0, 6) : source.slice(-6)
   if (needle.length < 3) fail('REVIEW_PACK_SOURCE_TOO_SHORT', text)
-  const hits = []
+  const hits = [], compoundHits = [], edgeSpans = new WeakMap()
   for (const stream of streams) {
+    const positions = new WeakMap()
     const words = stream.words.flatMap(w => normalizeListeningText(w.token ?? w.rawRunText ?? '')
-      .map(token => ({ ...w, token }))).filter(w => Number.isFinite(w.startSeconds) && Number.isFinite(w.endSeconds)
+      .map(token => ({ ...w, token }))).map((w, index) => { positions.set(w, index); return w })
+      .filter(w => Number.isFinite(w.startSeconds) && Number.isFinite(w.endSeconds)
         && w.startSeconds >= low && w.endSeconds <= high && w.endSeconds >= w.startSeconds)
     for (let i = 0; i < words.length; i++) {
       for (let n = Math.max(3, needle.length - 2); n <= needle.length + 2; n++) {
         const block = words.slice(i, i + n)
         if (block.length !== n || block.at(-1).endSeconds - block[0].startSeconds > Math.max(9, n * 1.4)) continue
-        if (kind === 'head' ? block[0].token !== needle[0] : block.at(-1).token !== needle.at(-1)) continue
-        const score = similarity(needle, block.map(w => w.token))
+        let sourceTokens = needle, observedTokens = block.map(w => w.token)
+        const head = kind === 'head'
+        const sourceEdge = head ? needle[0] : needle.at(-1)
+        const observedEdge = head ? block[0] : block.at(-1)
+        const compound = sourceEdge !== observedEdge.token
+        let splitEdge = false
+        if (compound) {
+          const adjacent = head ? block[1] : block.at(-2)
+          const sourcePair = head ? needle.slice(0, 2) : needle.slice(-2)
+          const observedPair = head ? block.slice(0, 2) : block.slice(-2)
+          if (adjacent && positions.get(observedPair[1]) === positions.get(observedPair[0]) + 1
+              && observedPair.map(w => w.token).join('') === sourceEdge) {
+            splitEdge = true
+            observedTokens = head ? [sourceEdge, ...observedTokens.slice(2)] : [...observedTokens.slice(0, -2), sourceEdge]
+          } else if (sourcePair.join('') === observedEdge.token) {
+            sourceTokens = head ? [observedEdge.token, ...needle.slice(2)] : [...needle.slice(0, -2), observedEdge.token]
+          } else continue
+        }
+        const score = similarity(sourceTokens, observedTokens)
         if (score < 0.72) continue
-        hits.push({ score, start: block[0].startSeconds, end: block.at(-1).endSeconds,
-          engine: stream.engine, evidencePaths: stream.evidencePaths, words: block })
+        const hit = { score, start: block[0].startSeconds, end: block.at(-1).endSeconds,
+          engine: stream.engine, evidencePaths: stream.evidencePaths, words: block }
+        const edgeWords = head ? block.slice(0, splitEdge ? 2 : 1) : block.slice(splitEdge ? -2 : -1)
+        edgeSpans.set(hit, { start: edgeWords[0].startSeconds, end: edgeWords.at(-1).endSeconds })
+        ;(compound ? compoundHits : hits).push(hit)
       }
     }
   }
@@ -103,6 +125,15 @@ function anchors(streams, text, low, high, kind) {
   const quality = h => h.score + (h.engine === 'Whisper raw' ? 0.025 : /whisper/iu.test(h.engine) ? 0.015 : 0)
   for (const h of hits.sort((a, b) => quality(b) - quality(a))) {
     if (!kept.some(k => Math.abs(h[field] - k[field]) < 4)) kept.push(h)
+  }
+  // Context can overlap across distinct utterances; compare only the actual
+  // edge word (both tokens when ASR splits the compound).
+  for (const h of compoundHits.sort((a, b) => quality(b) - quality(a))) {
+    const edge = edgeSpans.get(h)
+    if (!kept.some(k => {
+      const other = edgeSpans.get(k)
+      return edge.start < other.end && other.start < edge.end
+    })) kept.push(h)
   }
   return kept.sort((a, b) => a.start - b.start)
 }
