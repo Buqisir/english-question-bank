@@ -43,7 +43,7 @@ import {
   recoverInterruptedPaperImportPublish,
   rollbackPaperImportPublication,
 } from '../server/paper-import/publisher.mjs'
-import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
 import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import { sendPaperAssetStatic } from '../server/paper-import/paperAssetStatic.mjs'
@@ -84,6 +84,7 @@ import { LEGACY_LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } 
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 import { freezeReviewFixture, finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
+import { syntheticReviewAnswerPdf, syntheticReviewReferences, syntheticApplicationSample, syntheticContinuationSample } from './lib/syntheticReviewAnswerFixture.mjs'
 import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
 import {
@@ -93,8 +94,8 @@ import {
 
 const root = path.resolve(import.meta.dirname, '..')
 const paperId = 'paper-mock-contract-2026-m1'
-const officialApplicationSample = 'Official application sample from the supplied answer source.'
-const officialContinuationSample = 'Official continuation sample from the supplied answer source.'
+const officialApplicationSample = syntheticApplicationSample
+const officialContinuationSample = syntheticContinuationSample
 
 function writeJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true })
@@ -449,9 +450,7 @@ export function makeReviewRoot(
   const questionBytes = Buffer.from(
     `%PDF-1.7 ${questionSourceLabel}`.padEnd(100, 'q'),
   )
-  const answerBytes = Buffer.from(
-    '%PDF-1.7 deterministic official answer source'.padEnd(100, 'a'),
-  )
+  const answerBytes = syntheticReviewAnswerPdf()
   const materialization = makeFixture({ listening })
   materialization.paperId = fixturePaperId
   if (listening) {
@@ -3297,25 +3296,10 @@ await reviewBuildIdentityProvider().ready()
 // must survive the same atomic receipt, recovery and rollback as Canonical.
 // These cases are authored here for Ship; preview builds do not execute them.
 function attachSourceReferences(context, { continuedParagraph = false } = {}) {
-  const sidecar = prepareSourceReferences(context.projection)
-  const documents = context.projection.materialization.documents.filter(document => document.role === 'official_answers')
-  const evidence = documents.map(document => ({ documentSha256: document.sha256,
-    locator: { kind: 'page_region', documentId: document.documentId, page: 1,
-      region: { x: 0, y: 0, width: 1, height: 1 } } }))
-  for (const group of sidecar.groups) for (const kind of ['essays', 'scoring']) {
-    group[kind] = { state: 'not_supplied', evidence, entries: [] }
-  }
+  const sidecar = syntheticReviewReferences(context.projection)
+  assert(sidecar, 'expected the synthetic answer PDF')
   if (continuedParagraph) {
-    const source = structuredClone(evidence[0])
-    const continuation = structuredClone(source)
-    continuation.locator.page = source.locator.page + 1
-    sidecar.groups[0].essays = { state: 'captured', evidence: [], entries: [{
-      referenceId: 'reference:cross-page', authority: 'source_reference',
-      sourceLabel: null, labelSource: null,
-      paragraphs: [{ paragraphId: 'paragraph:cross-page', role: 'body',
-        text: 'This single source paragraph continues onto the next answer page.',
-        source, continuationSources: [continuation] }],
-    }] }
+    assert.equal(sidecar.groups[0].essays.entries[0].paragraphs[0].continuationSources[0].locator.page, 2)
   }
   writeJson(path.join(context.reviewRoot, SOURCE_REFERENCES_FILE), sidecar)
   context.projection = buildNck1ReviewProjection(context.reviewRoot, { requireAnalyses: true })

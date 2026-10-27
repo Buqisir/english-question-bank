@@ -9,6 +9,7 @@ import { manifestProductFiles, ABSENT_BY_EXAM_DESIGN } from '../../server/paper-
 import { productInputDigest, PRODUCT_MANIFEST } from '../../server/paper-import/frozenProducts.mjs'
 import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../../server/paper-import/sourceReferences.mjs'
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
+import { syntheticReviewReferences } from './syntheticReviewAnswerFixture.mjs'
 
 const json = (file, value) => writeFileSync(file, JSON.stringify(value))
 const read = file => JSON.parse(readFileSync(file))
@@ -28,7 +29,7 @@ export function freezeReviewFixture(directory, { expectedCandidateDigest } = {})
   const options = { expectedCandidateDigest, requireAnalyses: true }
   const projection = buildNck1ReviewProjection(directory, options)
   if (!existsSync(path.join(directory, SOURCE_REFERENCES_FILE))) {
-    const references = prepareSourceReferences(projection)
+    const references = syntheticReviewReferences(projection) || prepareSourceReferences(projection)
     const documents = projection.materialization.documents || []
     const evidence = documents.filter(file => file.role === 'official_answers').map(file => ({
       documentSha256: file.sha256, locator: { kind: 'page_region', documentId: file.documentId,
@@ -41,7 +42,7 @@ export function freezeReviewFixture(directory, { expectedCandidateDigest } = {})
       })))
     for (const group of references.groups) for (const kind of ['essays', 'scoring']) {
       // prepareSourceReferences already supplies the original package's provenance.
-      if (evidence.length) group[kind] = { state: 'not_supplied', evidence, entries: [] }
+      if (evidence.length && group[kind].state === 'unprocessed') group[kind] = { state: 'not_supplied', evidence, entries: [] }
     }
     json(path.join(directory, SOURCE_REFERENCES_FILE), references)
   }
