@@ -82,7 +82,7 @@ export function anchors(streams, text, low, high, kind) {
   const source = normalizeListeningText(text.replace(/(?:^|(?<=[.!?\n])\s*)[MW]:/gmu, ''))
   const needle = kind === 'head' ? source.slice(0, 6) : source.slice(-6)
   if (needle.length < 3) fail('REVIEW_PACK_SOURCE_TOO_SHORT', text)
-  const hits = []
+  const hits = [], compoundHits = []
   for (const stream of streams) {
     const positions = new WeakMap()
     const words = stream.words.flatMap(w => normalizeListeningText(w.token ?? w.rawRunText ?? '')
@@ -97,7 +97,8 @@ export function anchors(streams, text, low, high, kind) {
         const head = kind === 'head'
         const sourceEdge = head ? needle[0] : needle.at(-1)
         const observedEdge = head ? block[0] : block.at(-1)
-        if (sourceEdge !== observedEdge.token) {
+        const compound = sourceEdge !== observedEdge.token
+        if (compound) {
           const adjacent = head ? block[1] : block.at(-2)
           const sourcePair = head ? needle.slice(0, 2) : needle.slice(-2)
           const observedPair = head ? block.slice(0, 2) : block.slice(-2)
@@ -110,7 +111,7 @@ export function anchors(streams, text, low, high, kind) {
         }
         const score = similarity(sourceTokens, observedTokens)
         if (score < 0.72) continue
-        hits.push({ score, start: block[0].startSeconds, end: block.at(-1).endSeconds,
+        ;(compound ? compoundHits : hits).push({ score, start: block[0].startSeconds, end: block.at(-1).endSeconds,
           engine: stream.engine, evidencePaths: stream.evidencePaths, words: block })
       }
     }
@@ -119,6 +120,11 @@ export function anchors(streams, text, low, high, kind) {
   const quality = h => h.score + (h.engine === 'Whisper raw' ? 0.025 : /whisper/iu.test(h.engine) ? 0.015 : 0)
   for (const h of hits.sort((a, b) => quality(b) - quality(a))) {
     if (!kept.some(k => Math.abs(h[field] - k[field]) < 4)) kept.push(h)
+  }
+  // A compound match is duplicate evidence only when its interval overlaps
+  // an already retained hit. Never let it bridge distinct ordinary hits.
+  for (const h of compoundHits.sort((a, b) => quality(b) - quality(a))) {
+    if (!kept.some(k => h.start < k.end && k.start < h.end)) kept.push(h)
   }
   return kept.sort((a, b) => a.start - b.start)
 }

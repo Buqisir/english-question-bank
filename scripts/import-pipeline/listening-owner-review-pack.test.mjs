@@ -59,6 +59,41 @@ function fixture() {
   return { temp, root, papers: [paperId], paperId, paperDir, attempt, audio, group, output: path.join(temp, 'pack') }
 }
 
+for (const kind of ['head', 'tail']) {
+  test(`compound ${kind} candidate cannot bridge two ordinary hits`, () => {
+    const f = fixture()
+    try {
+      const source = kind === 'head'
+        ? 'Dinnertime brings everyone back home now. Fresh apples grow beyond those hills.'
+        : 'Bright birds gather beside our quiet river. Everyone comes back home for dinnertime.'
+      const timed = (tokens, start) => tokens.map((token, i) => ({
+        token, startSeconds: start + i * 0.15, endSeconds: start + i * 0.15 + 0.1,
+      }))
+      const ordinary = kind === 'head'
+        ? ['dinnertime', 'brings', 'everyone', 'back', 'home', 'now']
+        : ['everyone', 'comes', 'back', 'home', 'for', 'dinnertime']
+      const compound = kind === 'head'
+        ? ['dinner', 'time', 'brings', 'everyone', 'back', 'home', 'now']
+        : ['everyone', 'comes', 'back', 'home', 'for', 'dinner', 'time']
+      const other = kind === 'head'
+        ? ['fresh', 'apples', 'grow', 'beyond', 'those', 'hills']
+        : ['bright', 'birds', 'gather', 'beside', 'our', 'quiet', 'river']
+      const starts = kind === 'head' ? [2, 5.85, 9.5] : [11.25, 15, 18.75]
+      const windows = [timed(ordinary, starts[0]), timed(compound, starts[1]),
+        timed(ordinary, starts[2]), timed(other, kind === 'head' ? 22 : 2)]
+        .map(words => ({ words, evidencePaths: [] }))
+      put(path.join(f.attempt, 'input.json'),
+        { audioSha256: hash(f.audio), subject: { durationSeconds: 30, paperId: f.paperId } })
+      put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
+        sourceText: source, expectedReadings: 1, observedWindows: windows }] })
+      assert.throws(() => buildReviewPack(f), kind === 'head'
+        ? /REVIEW_PACK_READING_COUNT_AMBIGUOUS.*found 3/u
+        : /REVIEW_PACK_TAIL_AMBIGUOUS.*: 3/u)
+      assert.equal(existsSync(f.output), false)
+    } finally { rmSync(f.temp, { recursive: true, force: true }) }
+  })
+}
+
 test('two compound tail matches in one reading remain ambiguous', () => {
   const f = fixture()
   try {
