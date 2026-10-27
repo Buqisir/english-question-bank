@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Offline capture/layout lane only. No Review, DB, promotion or production API.
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, linkSync, unlinkSync } from 'node:fs'
+import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
@@ -10,6 +11,7 @@ import {
   exclusionSourceReferencesSchema, currentSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { wholeDocumentAbsenceSubject, WHOLE_DOCUMENT_ABSENCE_KIND } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
@@ -25,13 +27,23 @@ function writeNew(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true })
   writeFileSync(filePath, value, { flag: 'wx' })
 }
+function writeFinalized(filePath, value) {
+  mkdirSync(path.dirname(filePath), { recursive: true })
+  const temporary = path.join(path.dirname(filePath), `.${path.basename(filePath)}.${randomUUID()}.tmp`)
+  try {
+    writeFileSync(temporary, value, { flag: 'wx' })
+    linkSync(temporary, filePath)
+  } finally {
+    if (existsSync(temporary)) unlinkSync(temporary)
+  }
+}
 
 const normalize = value => value.replace(/\s+/gu, ' ').trim()
 
 let activeQaOutput = null
 try {
   const command = process.argv[2]
-  if (!['prepare', 'finalize', 'qa'].includes(command)) throw new Error('Use prepare|finalize|qa --paper-dir <workspace> --output <new path>; finalize adds --input, qa adds --references')
+  if (!['prepare', 'finalize', 'verify', 'qa'].includes(command)) throw new Error('Use prepare|finalize|verify|qa --paper-dir <workspace>')
   const paperDir = option('--paper-dir')
   const loaded = loadNck1ReviewSource(paperDir)
   if (loaded.analyzedPackage) throw new Error('This capture lane requires raw-source materialization')
@@ -46,7 +58,7 @@ try {
     candidateDigest: imported.candidate.candidateDigest,
     sourceDocuments: loaded.sourceInput.documents,
   }
-  const output = option('--output')
+  const output = command === 'verify' ? null : option('--output')
   if (command === 'prepare') {
     const structuredScoring = process.argv.includes('--structured-scoring')
     const figures = process.argv.includes('--figures')
@@ -56,6 +68,28 @@ try {
     if (figures) template.schemaVersion = 'source-references-v3'
     if (scoringFigures) template.schemaVersion = 'source-references-v4'
     if (figureExclusions) { template.schemaVersion = 'source-references-v5'; template.figureExclusions = [] }
+    let absenceRequest
+    if (process.argv.includes('--whole-document-writing-absence')) {
+      const index = process.argv.indexOf('--author-session-id')
+      const authorSessionId = index < 0 ? null : process.argv[index + 1]
+      if (!authorSessionId || authorSessionId.startsWith('--')) throw new Error('Actual --author-session-id is required')
+      if (structuredScoring || figures || scoringFigures || figureExclusions) throw new Error('Whole absence requires v1 capture')
+      const document = loaded.materialization.documents.find(doc => doc.role === 'official_answers')
+      const ocr = loaded.sourceInput.ocrSourceBytes
+      if (!document || !ocr?.evidenceBytes || !ocr?.confirmationBytes) throw new Error('Whole absence requires OCR-backed official answer PDF')
+      const evidence = JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8'))
+      const proposal = structuredClone(template)
+      for (const group of proposal.groups) for (const kind of ['essays', 'scoring']) {
+        group[kind] = { state: 'not_supplied', entries: [], evidence: Array.from({ length: document.pageCount }, (_, i) => ({
+          documentSha256: document.sha256, locator: { kind: 'page_region', documentId: document.documentId,
+            page: i + 1, region: { x: 0, y: 0, width: 1, height: 1 } },
+        })) }
+      }
+      proposal.wholeDocumentWritingAbsence = { kind: WHOLE_DOCUMENT_ABSENCE_KIND, sourceSetDigest: evidence.sourceSetDigest,
+        evidenceSha256: sha256(ocr.evidenceBytes), confirmationSha256: sha256(ocr.confirmationBytes), authorSessionId, review: null }
+      const { subject, subjectDigest } = wholeDocumentAbsenceSubject({ sidecar: proposal, ...binding, sourceInput: loaded.sourceInput, requireReview: false })
+      absenceRequest = { proposal, subject, subjectDigest, review: null }
+    }
     writeNew(output, `${JSON.stringify({
       schemaVersion: 'source-references-request-v1',
       outputSchema: currentSourceReferencesSchema,
@@ -63,14 +97,17 @@ try {
         scoringFigureSourceReferencesSchema, exclusionSourceReferencesSchema],
       sourceDocuments: loaded.manifest.documents,
       instructions: 'Capture all source essays/labels/paragraphs and scoring references. Keep scoring paragraphs and tables in source order; each table cell needs its exact source locator and text, including empty cells. Do not flatten tables into essays or invent merged-cell structure. Source text only; no AI writing, summaries or legacy modelAnswer conversion. Review every answer-bearing document before declaring not_supplied. Keep unprocessed when incomplete. This is local capture, not Review/publication or source-fidelity approval.',
-      template,
+      template, ...(absenceRequest ? { wholeDocumentWritingAbsenceRequest: absenceRequest } : {}),
     }, null, 2)}\n`)
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {
     assertSourceReferences({ ...binding, sidecar: sourceReferences })
     assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput })
-    if (command === 'finalize') {
-      writeNew(output, `${stableStringify(sourceReferences)}\n`)
+    if (command === 'verify') {
+      console.log(JSON.stringify({ status: 'local_capture_verified', paperId: loaded.materialization.paperId,
+        sourceReferencesDigest: sha256(readFileSync(referencePath)) }))
+    } else if (command === 'finalize') {
+      writeFinalized(output, `${stableStringify(sourceReferences)}\n`)
       console.log(JSON.stringify({ status: 'local_capture_finalized', output, sourceReferencesDigest: sha256(readFileSync(output)), sourceFidelity: 'native_docx_paragraphs_replayed_pdf_text_requires_source_review' }))
     } else {
       if (existsSync(output)) throw new Error('QA output must be a new directory; preserve previous evidence')

@@ -33,6 +33,8 @@ import { fileURLToPath } from 'node:url'
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceExplanationFigures } from '../../server/paper-import/sourceReferenceFigureExclusions.mjs'
+import { wholeDocumentAbsenceSubject } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
+import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -1155,7 +1157,7 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation,
   { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [],
-    producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+    producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, absenceSidecar, sourceInput, sourceDigest, candidateDigest } = {}) {
   let source, lifecycle
   try {
     source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName, producerVersion })
@@ -1167,6 +1169,12 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   const { answerDocument, documentSha256, pages, lines, sourceOrder, factsFor, referenceFigures, scoringScopes } = source
   const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions, { producerVersion })
   const { sections, furniture, review } = lifecycle
+  const wholeAbsence = absenceSidecar?.wholeDocumentWritingAbsence
+    ? wholeDocumentAbsenceSubject({ sidecar: absenceSidecar, materialization, sourceInput, sourceDigest, candidateDigest }) : null
+  if (wholeAbsence) {
+    return { groups: absenceSidecar.groups, review, structuredScoring: false, producerVersion,
+      wholeDocumentWritingAbsence: absenceSidecar.wholeDocumentWritingAbsence }
+  }
   const assignedFigures = new Set()
   let hasScoringFigures = false
   const structuredScoring = pages.some(page =>
@@ -1405,6 +1413,20 @@ function references(paperId) {
   const retained = existsSync(output) ? readJson(output, 'Source references draft')
     : existsSync(path.join(paperDir, 'source-references-v1.json'))
       ? readJson(path.join(paperDir, 'source-references-v1.json'), 'Source references') : null
+  if (retained?.wholeDocumentWritingAbsence) {
+    const loaded = loadNck1ReviewSource(paperDir)
+    const imported = importNck1ReviewCandidate(paperDir, loaded, retained.candidateDigest)
+    if (!imported.candidate || imported.issues.length) throw new Error('Invalid source candidate for absence replay')
+    const result = buildSourceReferences(loaded.materialization, evidence, confirmation, {
+      sourceDocuments: loaded.sourceInput.documents, sourceInput: loaded.sourceInput,
+      sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest,
+      absenceSidecar: retained,
+    })
+    writeJson(output, { ...retained, groups: result.groups })
+    console.log(JSON.stringify({ ok: true, output, producerVersion: result.producerVersion,
+      next: 'answer-products finalize' }))
+    return
+  }
   const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion } = buildSourceReferences(materialization, evidence, confirmation,
     { sourceDocuments: documents, paperName, figureExclusions: retained?.figureExclusions ?? [] })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,

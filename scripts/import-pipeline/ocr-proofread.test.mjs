@@ -1029,6 +1029,9 @@ test('v23 recognizes an unlabeled continuation only with both ordered given star
   const second = "Slowly, the baby's cries softened. The room grew quiet."
   const result = referencesFixture([...prompt, first, second], ['continuation'], { starters })
   assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '), `${first} ${second}`)
+  const historical = referencesFixture([...prompt, first, second], ['continuation'],
+    { starters, producerVersion: 'ocr-source-references-producer-v23' })
+  assert.deepEqual(historical.groups, result.groups)
   const wrapped = referencesFixture([...prompt, 'Mary paused at the gate. She asked her',
     'mother for help.', "Slowly, the baby's cries softened.", 'The room grew quiet.', '英语听力部分录音稿'], ['continuation'], { starters })
   assert.equal(wrapped.groups[0].essays.state, 'captured')

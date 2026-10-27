@@ -7,7 +7,8 @@ import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
-import { sourceReferenceProducerVersion, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
+import { sourceReferenceProducerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
   assertSourceReferenceProducerVersion, usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
 
 function reject(message) {
@@ -114,6 +115,17 @@ function assertSourceReferenceContent({
 }, producerVersion) {
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
+  if (sidecar?.wholeDocumentWritingAbsence) {
+    wholeDocumentAbsenceSubject({ sidecar, materialization, sourceInput, sourceDigest, candidateDigest })
+    const ocr = sourceInput.ocrSourceBytes
+    const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
+    const evidence = JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8'))
+    const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
+      .map(document => document.documentId))
+    sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence,
+      { producerVersion, sidecar, sourceInput, sourceDigest, candidateDigest })
+    return
+  }
   const figures = sourceReferenceFigures(sidecar)
   const continued = sidecar?.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
     group[kind].entries.flatMap(entry => sourceReferenceBlocks(entry)
@@ -121,6 +133,11 @@ function assertSourceReferenceContent({
     .some(hasSamePageContinuation)
   const ocr = sourceInput.ocrSourceBytes
   if (!ocr) {
+    if (producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION && sidecar?.groups?.length === 2
+      && sidecar.groups.every(group => ['essays', 'scoring'].every(kind => group[kind].state === 'not_supplied'))
+      && materialization.documents?.some(document => document.role === 'official_answers' && document.mediaType === 'application/pdf')) {
+      reject('Whole-document PDF absence requires complete OCR evidence and confirmation')
+    }
     if (sidecar?.figureExclusions?.length) reject('Explanation figure exclusions require sealed OCR evidence')
     if (figures.length) reject('Reference figures require sealed OCR confirmation and writing-scope anchors')
     if (continued) reject('Same-page continuation requires sealed confirmation source order and ownership')

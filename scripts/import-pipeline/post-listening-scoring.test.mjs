@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
-import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import { firstLineRole } from './ocr-line-roles.mjs'
@@ -230,6 +230,7 @@ test('post-listening scoring figure scopes retain version-specific rubric labels
   for (const [version, label] of [
     ['ocr-source-references-producer-v22', '评分标准'],
     ['ocr-source-references-producer-v23', '二、各档次的给分范围和要求'],
+    ['ocr-source-references-producer-v24', '二、各档次的给分范围和要求'],
   ]) {
     const scope = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']),
       { producerVersion: version, materialization: input.materialization })
@@ -240,7 +241,19 @@ test('post-listening scoring figure scopes retain version-specific rubric labels
     const figures = captured.groups[0].scoring.entries.flatMap(entry =>
       entry.blocks.filter(block => block.kind === 'figure').map(block => [entry.sourceLabel, block.sourceRegionId]))
     assert.deepEqual(figures, [[label, 'answers:page-3:figure-4'], [label, 'answers:page-3:figure-extra']])
-    if (version.endsWith('v23')) assertSourceReferenceAdmission({ ...input, sidecar: captured })
+    if (version.endsWith('v24')) assertSourceReferenceAdmission({ ...input, sidecar: captured })
+    if (version.endsWith('v23')) {
+      assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: captured }),
+        { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+      const sourceReferencesBytes = Buffer.from(JSON.stringify(captured))
+      const receipt = { revisionId: 'synthetic-v23', bundleDigest: sha256('synthetic-bundle'),
+        paperId: input.materialization.paperId, sourceDigest: input.sourceDigest,
+        candidateDigest: input.candidateDigest, sourceReferencesDigest: sha256(sourceReferencesBytes) }
+      assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt })
+      assert.throws(() => assertSealedSourceReferenceReplay({ ...input, receipt,
+        sourceReferencesBytes: Buffer.concat([sourceReferencesBytes, Buffer.from(' ')]) }),
+      { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+    }
   }
 })
 
