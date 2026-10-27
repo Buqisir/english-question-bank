@@ -210,7 +210,7 @@ function exactApprovalIdentity(approval, paperId) {
 async function api(
   pathname,
   init = {},
-  { allowNotFound = false, notFoundValue = null, binary = false, credential = 'agent' } = {},
+  { allowNotFound = false, notFoundValue = null, binary = false, credential = 'agent', rawResponse = false } = {},
 ) {
   const targetOrigin = origin()
   const credentialHeaders = credential === 'shipping'
@@ -231,9 +231,10 @@ async function api(
       contentType,
     }
   }
-  const body = contentType.includes('application/json')
-    ? await response.json()
-    : await response.text()
+  const raw = rawResponse ? await response.text() : null
+  if (rawResponse && response.ok) return raw
+  const body = rawResponse ? (contentType.includes('application/json') ? JSON.parse(raw) : raw)
+    : contentType.includes('application/json') ? await response.json() : await response.text()
   if (
     allowNotFound
     && response.status === 404
@@ -957,10 +958,13 @@ function finalizeOcrCorrectionReport(paperId) {
 }
 
 async function status(paperId) {
+  const raw = process.argv.includes('--raw-response')
   const result = await api(
     `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+    {}, { rawResponse: raw },
   )
-  console.log(JSON.stringify(result, null, 2))
+  if (raw) process.stdout.write(result)
+  else console.log(JSON.stringify(result, null, 2))
 }
 
 async function preflight(paperId) {
