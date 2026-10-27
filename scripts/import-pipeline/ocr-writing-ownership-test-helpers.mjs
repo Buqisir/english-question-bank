@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { buildSourceReferences as produce } from './ocr-proofread.mjs'
 import { sourceReferenceEssayTaskStates } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
+import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 export const writingOwnershipChecks = { fixtures: 0, essayItems: 0 }
@@ -46,13 +47,28 @@ export function checkWritingRoleFixture(texts, sourceLine = {}) {
   if (boxes && texts.length === 1) {
     observations.splice(target, 1, ...boxes.map((box, index) => ({ ...box, observationId: `fixture-${index}` })))
   }
-  return checkedSourceReferences({
+  const materialization = {
     documents: [{ documentId: 'answers', role: 'official_answers', sha256: 'role-fixture' }],
     groups: ['application', 'continuation'].map(taskType => ({ groupId: taskType, writingTask: { taskType } })),
-  }, { documents: [{ documentId: 'answers', pages: [{ observations }] }] },
-  { documents: [{ documentId: 'answers', pages: [{ page: 1, visualClassifications: [],
+  }
+  const evidence = { documents: [{ documentId: 'answers', pages: [{ observations }] }] }
+  const confirmation = { documents: [{ documentId: 'answers', pages: [{ page: 1, visualClassifications: [],
     orderedItems: lines.map((text, index) => ({ itemId: `role-${index}`, text,
       observationIds: boxes && texts.length === 1 && index === target
         ? boxes.map((_, index) => `fixture-${index}`) : [`o${index}`] })),
-  }] }] })
+  }] }] }
+  try {
+    sourceReferenceEssayTaskStates(confirmation, new Set(['answers']), materialization, evidence)
+  } catch (error) {
+    if (error.code !== 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID'
+      || !/^(Repeated writing section|Unresolved writing overview before repeated task)/u.test(error.message)) {
+      return checkedSourceReferences(materialization, evidence, confirmation)
+    }
+    assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization, sourceInput: {
+      ocrSourceBytes: { evidenceBytes: Buffer.from(JSON.stringify(evidence)),
+        confirmationBytes: Buffer.from(JSON.stringify(confirmation)) },
+    } }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    return
+  }
+  return checkedSourceReferences(materialization, evidence, confirmation)
 }

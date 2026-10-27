@@ -91,7 +91,8 @@ test('parenthesized rubric titles open exact scoring entries and reject unresolv
   t.mock.method(process, 'exit', () => { throw new Error('unresolved task range') })
   for (const text of ['（一）评分原则如下。', '（二）各档次给分范围和要求分析', '注意：（一）评分原则：']) {
     assert.equal(firstLineRole('entry-label', computeLineFacts({ text })), null)
-    assert.throws(() => scoringScopes(['第一节 应用文', text, '正文']), /unresolved task range/)
+    assert.throws(() => scoringScopes(['第一节 应用文', text, '正文']),
+      /unresolved task range|Unresolved nonempty writing task range/)
   }
 })
 
@@ -123,7 +124,7 @@ test('scoring scope shares exact parenthesized task headings and numbered scorin
   t.mock.method(process, 'exit', () => { throw new Error('unresolved new task range') })
   assert.throws(() => scoringScopes(['（二）读后续写', '4. 评分细则', '续写评分正文',
     '（三）应用文写作', '新标题后的无标签正文', '４． 评分原则：', '应用文评分正文']),
-  /unresolved new task range/)
+  /unresolved new task range|Unresolved nonempty writing task range/)
 })
 
 test('exact task scoring standards share ownership between source extraction and scoring admission', () => {
@@ -170,7 +171,8 @@ test('scoring scope rejects numbered near misses and closes at sample and explan
   t.mock.method(console, 'error', () => {})
   t.mock.method(process, 'exit', () => { throw new Error('unresolved rubric range') })
   for (const label of ['4. 评分时应考虑要点。', '正文 4. 评分细则', '100. 评分细则']) {
-    assert.throws(() => scoringScopes(['（二）应用文写作', label, '正文']), /unresolved rubric range/)
+    assert.throws(() => scoringScopes(['（二）应用文写作', label, '正文']),
+      /unresolved rubric range|Unresolved nonempty writing task range/)
   }
 })
 

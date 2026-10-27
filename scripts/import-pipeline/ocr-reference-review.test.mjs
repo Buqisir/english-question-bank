@@ -172,6 +172,30 @@ test('v21 preserves earlier essays across empty and multi-version repeated bare 
   }
 })
 
+test('v21 protects samples after explicit and named task headings across repeated sections', () => {
+  for (const heading of ['应用文参考范文', '应用文']) {
+    for (const [tail, expected] of [
+      [['第一节 One possible version:', '第二节'], ['Original application.']],
+      [['第一节 Version two:', 'Another application.', '第二节'], ['Original application.', 'Another application.']],
+      [['应用文参考范文', 'Another application.', '第二节'], ['Original application.', 'Another application.']],
+    ]) {
+      const input = writingFixture([heading, 'Original application.', ...tail], ['application'])
+      const output = buildSourceReferences(...input)
+      assert.deepEqual(output.groups[0].essays.entries.map(entry => entry.paragraphs[0].text), expected)
+    }
+    const input = writingFixture([heading, 'Original application.', '第一节', 'Unlabeled application.', '第二节'], ['application'])
+    assert.throws(() => prepareSourceReferenceWritingItems(...input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    const sourceInput = { documents: [], ocrSourceBytes: {
+      evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+    } }
+    assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    const part = writingFixture([heading, 'Original application.', '第四部分 写作\n第一节',
+      '参考范文', 'Another application.'], ['application'])
+    assert.throws(() => prepareSourceReferenceWritingItems(...part), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+})
+
 test('v21 retains a complete unlabeled letter when a later bare section supplies another sample', () => {
   const input = writingFixture(['65. A', '第一节', 'Dear Sam,', 'Our class meets tomorrow.',
     'Yours,', 'Alex', '第二节 读后续写', '参考范文', 'A short continuation.',
@@ -193,9 +217,16 @@ test('v21 rejects unlabeled content after a repeated bare section in producer an
     { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
 })
 
-test('v21 admission rejects omission of either repeated-section sample', () => {
-  const input = scoringFiguresFixture({ writingHeading: ['第四部分 写作', '第一节'] })
+for (const writingHeading of [['第四部分 写作', '第一节'], ['应用文参考范文'], ['应用文']]) {
+test(`v21 admission rejects omission of either repeated-section sample: ${writingHeading.join(' / ')}`, () => {
+  const input = scoringFiguresFixture({ writingHeading })
   const page = input.confirmation.documents[1].pages[2], proof = input.evidence.documents[1].pages[2]
+  if (writingHeading.length === 1) {
+    const removed = page.orderedItems.splice(1, 1)[0]
+    const observations = proof.observations.filter(item => removed.observationIds.includes(item.observationId))
+    proof.observations = proof.observations.filter(item => !removed.observationIds.includes(item.observationId))
+    proof.regions = proof.regions.filter(region => !observations.some(item => item.regionId === region.regionId))
+  }
   const sample = page.orderedItems.find(item => item.text === 'Our original sample is short.')
   const at = page.orderedItems.indexOf(sample) + 1
   const template = proof.observations[0]
@@ -223,6 +254,7 @@ test('v21 admission rejects omission of either repeated-section sample', () => {
       { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
   }
 })
+}
 
 test('v17–v20 repeated-section lifecycle retains exact pre-fix replay bytes', () => {
   const texts = ['第四部分 写作', '第一节', '参考范文', 'First original sample.',

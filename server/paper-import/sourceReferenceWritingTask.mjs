@@ -542,19 +542,25 @@ export function sourceReferenceWritingLifecycle(lines, {
         review.push({ itemId: line.itemId, issue: 'empty repeated sample heading before listening retains the proven article' })
         continue
       }
-      // v21 preserves prior content when a bare task is reprinted. A repeated
-      // bare heading without a label needs fresh evidence before more prose.
+      // v21 never replaces an existing nonempty task. Repeated headings need
+      // fresh entry ownership before further content can be captured.
       const prior = sections.get(started)
-      const repeatedBare = usesComposedWritingLabels(producerVersion) && bare && prior
-        && (prior.bareEstablished || prior.letterEnd || prior.articleEnd
-          || prior.lines.some(existing => !existing.figure && !existing.table
-            && matchesLineRole('entry.sample-label', factsFor(existing))))
-      scope.startTask(started, { reuse: scoringAppendix || repeatedBare })
+      const repeatedTask = usesComposedWritingLabels(producerVersion) && !scoringAppendix && prior
+        && (prior.bareEstablished || prior.lines.length > 0 || prior.letterEnd || prior.articleEnd)
+      if (repeatedTask && prior.genericOverview && prior.lines.length && !prior.explicitSample
+        && !prior.lines.some(existing => !existing.figure && !existing.table
+          && matchesLineRole('entry.sample-label', factsFor(existing)))) {
+        scopeError('Unresolved writing overview before repeated task')
+      }
+      scope.startTask(started, { reuse: scoringAppendix || repeatedTask })
+      if (usesComposedWritingLabels(producerVersion) && !repeatedTask && !scoringAppendix) {
+        scope.current.genericOverview = /^书面表达\s*[:：]?$/u.test(line.text.trim())
+      }
       if (usesComposedWritingLabels(producerVersion) && bare) scope.current.bareEstablished = true
-      if (repeatedBare) {
+      if (repeatedTask) {
         scope.current.repeatedTask = true
         scope.current.lines.push({ ...line, itemId: null, repeatedTaskBoundary: true,
-          needsLabel: !mergedLabel })
+          needsLabel: !mergedLabel && !explicitHeading?.sample })
       }
       taskStarts.set(line.itemId, started)
       items.set(line.itemId, { task: started, capturing: false, ended: false, kind: null, action: 'task' })
@@ -591,7 +597,13 @@ export function sourceReferenceWritingLifecycle(lines, {
       // must still fail closed, and earlier omitted parts are not writing.
       const omittedWritingPart = matchesLineRole('writing.bare-fourth-part', facts)
         && lines[lineIndex + 1] && matchesLineRole('writing.omission', factsFor(lines[lineIndex + 1]), { inWriting: true })
-      scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, writingSectionAfterPart(line.text, producerVersion))
+      const trailingTask = writingSectionAfterPart(line.text, producerVersion)
+      const previous = sections.get(trailingTask)
+      if (usesComposedWritingLabels(producerVersion) && previous
+        && (previous.lines.length || previous.letterEnd || previous.articleEnd)) {
+        scopeError('Unresolved repeated writing task on part heading')
+      }
+      scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, trailingTask)
     } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
   }
   for (const section of sections.values()) {

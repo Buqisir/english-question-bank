@@ -402,6 +402,13 @@ for (const [application, continuation] of [
           restart === 'ordinary capture restart' ? 'A new official sample after the task restart.' : '略']
         : [application, student, '参考范文', 'A student-script example.',
           '应用文评分标准', '评分原则', '注意内容完整。', '参考范文', 'A reprinted example after scoring reuse.']
+      if (restart !== 'scoring reuse') {
+        const lines = [...texts, continuation].map((text, i) => ({ text, itemId: `i${i}`, page: 1 }))
+        assert.throws(() => sourceReferenceWritingLifecycle(lines, {
+          materialization: { groups: [] }, answerDocument: { role: 'official_answers' },
+        }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+        return
+      }
       const input = standaloneApplicationAdmission(null, null, null, {
         texts: [...texts, continuation, '参考范文', 'Mia opened the garden gate.'],
       })
@@ -532,15 +539,16 @@ test('standalone written-expression headings capture application samples after o
   }
 })
 
-test('explicit task subheadings replace a written-expression overview without capturing overview prose', () => {
+test('ambiguous written-expression overview before task subheadings fails closed', () => {
   for (const [application, continuation] of [
     ['第一节', '第二节'], ['应用文', '读后续写'],
   ]) {
-    const result = referencesFixture(['书面表达：', 'Overview text must not become a sample.',
-      application, '参考范文', 'Our class planted herbs.',
-      continuation, '参考范文', 'Mia opened the garden gate.'], ['application', 'continuation'])
-    assert.deepEqual(result.groups.map(group => group.essays.entries.map(entry => entry.paragraphs.map(p => p.text))),
-      [[['Our class planted herbs.']], [['Mia opened the garden gate.']]])
+    const lines = ['书面表达：', 'Overview text must not become a sample.',
+      application, '参考范文', 'Our class planted herbs.', continuation,
+      '参考范文', 'Mia opened the garden gate.'].map((text, i) => ({ text, itemId: `i${i}`, page: 1 }))
+    assert.throws(() => sourceReferenceWritingLifecycle(lines, {
+      materialization: { groups: [] }, answerDocument: { role: 'official_answers' },
+    }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   }
 })
 
@@ -1302,12 +1310,12 @@ test('task omission preserves prior samples and permits later source lines and a
   assert.deepEqual(result.review.map(r => r.itemId), ['i4', 'i8'])
 })
 
-test('ordinary task restarts replace prior sections while scoring headings reuse them', () => {
+test('ordinary task restarts and scoring headings preserve prior sections', () => {
   const result = referencesFixture(['第一节 应用文', '参考范文', 'Our club will plant herbs.',
     '第一节 应用文', '参考范文', 'Please join our garden walk.',
     '应用文评分细则', '评分原则', '1. 注意内容完整。'], ['application'])
   assert.deepEqual(result.groups[0].essays.entries.map(e => [e.referenceId, e.paragraphs[0].text]),
-    [['source-ref-app-1', 'Please join our garden walk.']])
+    [['source-ref-app-1', 'Our club will plant herbs.'], ['source-ref-app-2', 'Please join our garden walk.']])
   assert.equal(result.groups[0].scoring.entries[0].sourceLabel, '评分原则')
   assert.deepEqual(result.review, [])
 })
