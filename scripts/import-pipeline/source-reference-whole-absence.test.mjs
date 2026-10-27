@@ -7,6 +7,7 @@ import { scoringFiguresFixture } from '../../test-fixtures/paper-import/source-r
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { prepareSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { WHOLE_DOCUMENT_ABSENCE_KIND, wholeDocumentAbsenceSubject } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
 import { buildSourceReferences } from './ocr-proofread.mjs'
 
@@ -89,7 +90,9 @@ test('synthetic whole-document declaration requires exact review and source bind
 
 test('explicit writing contradictions anywhere in confirmed source block the new gate', () => {
   for (const text of ['参考范文', '应用文评分细则', 'Dear Alex,', 'Paragraph 1: The rain stopped.',
-    '第二节 读后续写', '写作评分说明', '第四部分 写作', 'Dear Alex']) {
+    '第二节 读后续写', '写作评分说明', '第四部分 写作', 'Dear Alex',
+    '范文一：支持立场', '范文二：反对立场', '2. 评分参考', '4. 评分细则',
+    '（2）评分标准', '一、评分原则']) {
     const input = fixture()
     const page = input.confirmation.documents.find(d => d.documentId === 'answers').pages[3]
     const proof = input.evidence.documents.find(d => d.documentId === 'answers').pages[3]
@@ -97,7 +100,23 @@ test('explicit writing contradictions anywhere in confirmed source block the new
     reseal(input)
     input.sidecar.wholeDocumentWritingAbsence.evidenceSha256 = sha256(input.sourceInput.ocrSourceBytes.evidenceBytes)
     input.sidecar.wholeDocumentWritingAbsence.confirmationSha256 = sha256(input.sourceInput.ocrSourceBytes.confirmationBytes)
-    assert.throws(() => wholeDocumentAbsenceSubject({ ...input, requireReview: false }), undefined, text)
+    const rejection = /writing contradiction|writing or scoring scope exists/
+    assert.throws(() => wholeDocumentAbsenceSubject({ ...input, requireReview: false }), rejection, text)
+    assert.throws(() => assertSourceReferenceAdmission(input), rejection, text)
+    assert.throws(() => buildSourceReferences(input.materialization, input.evidence, input.confirmation, {
+      absenceSidecar: input.sidecar, sourceInput: input.sourceInput,
+      sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+    }), rejection, text)
+  }
+  for (const text of ['语法填空每小题1.5分，评分时按答案给分。', '4. 评分时应考虑内容。']) {
+    const input = fixture()
+    const page = input.confirmation.documents.find(d => d.documentId === 'answers').pages[3]
+    const proof = input.evidence.documents.find(d => d.documentId === 'answers').pages[3]
+    page.orderedItems[0].text = proof.observations[0].text = text
+    reseal(input)
+    input.sidecar.wholeDocumentWritingAbsence.evidenceSha256 = sha256(input.sourceInput.ocrSourceBytes.evidenceBytes)
+    input.sidecar.wholeDocumentWritingAbsence.confirmationSha256 = sha256(input.sourceInput.ocrSourceBytes.confirmationBytes)
+    assert.doesNotThrow(() => wholeDocumentAbsenceSubject({ ...input, requireReview: false }), text)
   }
 })
 
@@ -158,6 +177,26 @@ test('synthetic public capture installs atomically and verifies without replacin
   run(['finalize', '--paper-dir', paper, '--input', authorInput, '--output', output])
   const bytes = readFileSync(output)
   run(['verify', '--paper-dir', paper, '--references', output])
+  // Deterministically simulate a replacement on a second read, without changing
+  // the file or relying on a race. The validated snapshot must supply the SHA.
+  const hook = path.join(dir, 'replace-on-reread.cjs'), counts = path.join(dir, 'read-count.txt')
+  writeFileSync(hook, `
+const fs = require('node:fs')
+const { syncBuiltinESMExports } = require('node:module')
+const original = fs.readFileSync
+let count = 0
+fs.readFileSync = function(file, ...args) {
+  if (String(file) === process.env.SNAPSHOT_TEST_PATH && ++count > 1) return Buffer.from('null\\n')
+  return original.call(this, file, ...args)
+}
+syncBuiltinESMExports()
+process.on('exit', () => fs.writeFileSync(process.env.SNAPSHOT_TEST_COUNT, String(count)))
+`)
+  const verified = JSON.parse(execFileSync(process.execPath,
+    ['--require', hook, cli, 'verify', '--paper-dir', paper, '--references', output],
+    { encoding: 'utf8', env: { ...process.env, SNAPSHOT_TEST_PATH: output, SNAPSHOT_TEST_COUNT: counts } }))
+  assert.equal(verified.sourceReferencesDigest, sha256(bytes))
+  assert.equal(readFileSync(counts, 'utf8'), '1')
   assert.throws(() => run(['finalize', '--paper-dir', paper, '--input', authorInput, '--output', output]))
   assert.deepEqual(readFileSync(output), bytes)
   assert(existsSync(output))
@@ -180,5 +219,30 @@ test('synthetic public capture installs atomically and verifies without replacin
     assert.throws(() => run(['finalize', '--paper-dir', paper, '--input', source, '--output', target]))
     assert.equal(existsSync(target), false)
     assert.throws(() => run(['verify', '--paper-dir', paper, '--references', source]))
+  }
+  for (const [index, text] of ['范文一：支持立场', '范文二：反对立场', '2. 评分参考', '4. 评分细则'].entries()) {
+    const changed = structuredClone(input)
+    changed.confirmation.documents.find(d => d.documentId === 'answers').pages[3].orderedItems[0].text = text
+    changed.evidence.documents.find(d => d.documentId === 'answers').pages[3].observations[0].text = text
+    reseal(changed)
+    put('materialization/nck1-ocr-source-evidence-v1.json', changed.sourceInput.ocrSourceBytes.evidenceBytes)
+    put('materialization/nck1-ocr-source-confirmation-v1.json', changed.sourceInput.ocrSourceBytes.confirmationBytes)
+    const sidecar = structuredClone(proposal.proposal)
+    const loaded = loadNck1ReviewSource(paper)
+    const imported = importNck1ReviewCandidate(paper, loaded)
+    assert.equal(imported.issues.length, 0)
+    sidecar.sourceDigest = imported.candidate.source.sha256
+    sidecar.candidateDigest = imported.candidate.candidateDigest
+    sidecar.wholeDocumentWritingAbsence.evidenceSha256 = sha256(changed.sourceInput.ocrSourceBytes.evidenceBytes)
+    sidecar.wholeDocumentWritingAbsence.confirmationSha256 = sha256(changed.sourceInput.ocrSourceBytes.confirmationBytes)
+    const source = path.join(dir, `contradiction-${index}.json`)
+    writeFileSync(source, JSON.stringify(sidecar), { flag: 'wx' })
+    for (const args of [
+      ['prepare', '--paper-dir', paper, '--whole-document-writing-absence', '--author-session-id', 'fixture-author', '--output', path.join(dir, `contradiction-request-${index}.json`)],
+      ['finalize', '--paper-dir', paper, '--input', source, '--output', path.join(dir, `contradiction-final-${index}.json`)],
+      ['verify', '--paper-dir', paper, '--references', source],
+    ]) {
+      assert.throws(() => run(args), error => /writing contradiction/.test(String(error.stderr)), `${text}: ${args[0]}`)
+    }
   }
 })

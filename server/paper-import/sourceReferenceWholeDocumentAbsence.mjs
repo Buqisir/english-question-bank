@@ -5,7 +5,7 @@ import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { firstLineRole, matchesLineRole } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { computeLineFacts } from '../../scripts/import-pipeline/ocr-line-facts.mjs'
-import { isSourceReferenceSampleLabel, explicitWritingHeading } from './sourceReferenceWritingRules.mjs'
+import { isSourceReferenceSampleLabel, explicitWritingHeading, applicationStanceLabel, continuationScoringLabel } from './sourceReferenceWritingRules.mjs'
 import { assertSourceReferences } from './sourceReferences.mjs'
 
 export const WHOLE_DOCUMENT_ABSENCE_KIND = 'both_writing_tasks_absent_from_whole_answer_document'
@@ -60,6 +60,10 @@ export function wholeDocumentAbsenceSubject({ sidecar, materialization, sourceIn
         || firstLineRole('scoring-section', facts, { producerVersion: sidecar.producerVersion })
         || firstLineRole('scoring-overview', facts, { producerVersion: sidecar.producerVersion })
         || matchesLineRole('entry.scoring-label', facts, { producerVersion: sidecar.producerVersion })
+        || matchesLineRole('entry.arabic-numbered', facts)
+        || applicationStanceLabel(text, 'application') || continuationScoringLabel(text, 'continuation')
+        || matchesLineRole('entry.scoring-label', computeLineFacts({ text: normalized.replace(/^\(\s*\d+\s*\)\s*/u, '') }),
+          { producerVersion: sidecar.producerVersion })
         || matchesLineRole('writing.part', facts) || matchesLineRole('writing.bare-fourth-part', facts)
         || matchesLineRole('writing.continuation-prompt', facts)
         || matchesLineRole('paragraph.salutation', facts) || matchesLineRole('paragraph.numbered', facts)

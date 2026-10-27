@@ -49,7 +49,8 @@ try {
   if (loaded.analyzedPackage) throw new Error('This capture lane requires raw-source materialization')
   const referencePath = command === 'prepare' ? path.join(paperDir, SOURCE_REFERENCES_FILE)
     : option(command === 'finalize' ? '--input' : '--references')
-  const sourceReferences = existsSync(referencePath) ? JSON.parse(readFileSync(referencePath, 'utf8')) : null
+  const referenceBytes = existsSync(referencePath) ? readFileSync(referencePath) : null
+  const sourceReferences = referenceBytes ? JSON.parse(referenceBytes.toString('utf8')) : null
   const imported = importNck1ReviewCandidate(paperDir, loaded, sourceReferences?.candidateDigest)
   if (!imported.candidate || imported.issues.length) throw new Error(`Invalid source candidate: ${imported.issues[0]?.code}`)
   const binding = {
@@ -105,7 +106,7 @@ try {
     assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput })
     if (command === 'verify') {
       console.log(JSON.stringify({ status: 'local_capture_verified', paperId: loaded.materialization.paperId,
-        sourceReferencesDigest: sha256(readFileSync(referencePath)) }))
+        sourceReferencesDigest: sha256(referenceBytes) }))
     } else if (command === 'finalize') {
       writeFinalized(output, `${stableStringify(sourceReferences)}\n`)
       console.log(JSON.stringify({ status: 'local_capture_finalized', output, sourceReferencesDigest: sha256(readFileSync(output)), sourceFidelity: 'native_docx_paragraphs_replayed_pdf_text_requires_source_review' }))
@@ -276,7 +277,7 @@ try {
         status: 'local_layout_candidate', edition: 'answerOnly', layout: 'reference-v2',
         paperId: binding.materialization.paperId,
         sourceDigest: binding.sourceDigest, candidateDigest: binding.candidateDigest,
-        sourceReferencesDigest: sha256(readFileSync(referencePath)), materializationDigest: sourceReferences.materializationDigest,
+        sourceReferencesDigest: sha256(referenceBytes), materializationDigest: sourceReferences.materializationDigest,
         pdfSha256: sha256(rendered.pdfBytes), pageCount: rendered.pageCount,
         geometryPx: geometry, typographyPx: rendered.inspection.typography,
         includeScoring, inspectedAnswerNumbers: rendered.inspection.keys.map(key => key.number),
