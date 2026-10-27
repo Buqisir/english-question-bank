@@ -11,7 +11,7 @@ import { confirmMaterializationWritingGivens } from './materialization-writing-g
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 const encode = value => new TextEncoder().encode(JSON.stringify(value))
 const hash = value => sha256(encode(value))
-function fixture() {
+function fixture(confirmationVersion = 'nck1-ocr-source-confirmation-v3') {
   const m = makeFixture(), group = m.groups[0]
   group.blocks[0].content = [{ kind: 'text', text: 'This paragraph continues with' }]
   group.blocks[1].content = [{ kind: 'text', text: 'the same sentence on the next page.' }]
@@ -27,7 +27,7 @@ function fixture() {
     documents: [{ documentId: 'paper', pages: pages.map((page, index) => ({
       page: page.page, observations: [{ observationId: `word-${index + 1}`, region: group.blocks[index].source.region }],
     })) }] }
-  const confirmation = { schemaVersion: 'nck1-ocr-source-confirmation-v3', paperId: m.paperId,
+  const confirmation = { schemaVersion: confirmationVersion, paperId: m.paperId,
     sourceSetDigest: evidence.sourceSetDigest, evidenceDigest: evidence.evidenceDigest, confirmed: true,
     documents: [{ documentId: 'paper', pages }] }
   const receipt = { paperId: m.paperId, revisionId: 'rev-one', confirmationId: 'confirmation-one',
@@ -68,6 +68,7 @@ test('confirmation, plan and all bound bytes fail closed before mutation', () =>
     input => { input.materializationBytes = encode({ ...f.m, paperId: 'paper-other' }) },
     input => { input.ocrSourceBytes.evidenceBytes = encode({ ...f.proof.evidence, extra: true }) },
     input => { input.ocrSourceBytes.confirmationBytes = encode({ ...f.proof.confirmation, extra: true }) },
+    input => { input.ocrSourceBytes.confirmationBytes = encode({ ...f.proof.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v2' }) },
     input => { input.documents[0].bytes = encode('changed source') },
   ]) {
     const input = structuredClone(f.input); change(input)
@@ -88,6 +89,8 @@ test('structural boundaries reject cross-group, skipped pages, duplicate consump
     m => { m.groups[0].blocks[1].source.page = 3; m.paragraphJoins[0].fragments[1].source.page = 3 },
     m => { m.paragraphJoins.push(structuredClone(m.paragraphJoins[0])) },
     m => { m.paragraphJoins[0].fragments.reverse() },
+    m => { m.paragraphJoins[0].fragments.push(structuredClone(m.paragraphJoins[0].fragments[1])) },
+    m => { m.groups[0].family = 'seven-choices' },
     m => { m.paragraphJoins[0].fragments[0].source.region.x += 0.01 },
     m => { m.paragraphJoins[0].separator = '  ' },
     m => { m.paragraphJoins[0].sourceReview.sameNaturalParagraph = false },
@@ -119,12 +122,12 @@ test('immutable stream rejects intervening item/image, wrong ownership, observat
   }
 })
 
-test('existing explicit givens and cached presentation preserve v8 relations', () => {
+test('existing explicit givens and cached presentation preserve v12 relations', () => {
   const f = fixture()
   const withGivens = confirmMaterializationWritingGivens(f.result, {
     groupId: f.result.groups[7].groupId, givenBlockRefs: ['block:application-salutation'], confirmed: true,
   })
-  assert.equal(withGivens.schemaVersion, 'nck1-source-materialization-v8')
+  assert.equal(withGivens.schemaVersion, 'nck1-source-materialization-v12')
   assert.deepEqual(withGivens.paragraphJoins, f.result.paragraphJoins)
   withGivens.sourcePresentation = {
     instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).filter(slot => !slot.startsWith('listening.'))
@@ -142,12 +145,67 @@ test('v11 authoring retains the successor when joining paragraphs and confirming
   const input = { ...f.input, materializationBytes: encode(raw) }
   const plan = planMaterializationParagraphJoin(input, f.receiptBytes, f.options)
   const joined = applyMaterializationParagraphJoinPlan(input, f.receiptBytes, plan, { confirmed: true }).materialization
-  assert.equal(joined.schemaVersion, raw.schemaVersion)
+  assert.equal(joined.schemaVersion, 'nck1-source-materialization-v12')
   assert.deepEqual(joined.groups, raw.groups)
   const withGivens = confirmMaterializationWritingGivens(joined, {
     groupId: joined.groups[7].groupId, givenBlockRefs: ['block:application-salutation'], confirmed: true,
   })
-  assert.equal(withGivens.schemaVersion, raw.schemaVersion)
+  assert.equal(withGivens.schemaVersion, 'nck1-source-materialization-v12')
   assert.deepEqual(withGivens.paragraphJoins, joined.paragraphJoins)
   assert.deepEqual(validateNck1SourceMaterialization(withGivens), [])
+})
+
+test('sealed v2 Reading uses a new relation/envelope without changing confirmation bytes', () => {
+  const f = fixture('nck1-ocr-source-confirmation-v2')
+  assert.equal(f.plan.schemaVersion, 'cross-page-paragraph-join-plan-v2')
+  assert.equal(f.result.schemaVersion, 'nck1-source-materialization-v12')
+  assert.equal(f.result.paragraphJoins[0].schemaVersion, 'cross-page-paragraph-join-v2')
+  assert.equal(verifyCrossPageParagraphJoinEvidence(f.result, f.proof).length, 1)
+  assert.deepEqual(f.plan.before, f.proof.confirmation.documents[0].pages.map(page => page.orderedItems[0].text))
+  assert.deepEqual(f.input.ocrSourceBytes.confirmationBytes, f.proof.confirmationBytes)
+})
+
+test('historical v1 retains its v3-only interpretation; v2 cannot be downgraded', () => {
+  const f = fixture()
+  const historical = structuredClone(f.result)
+  historical.schemaVersion = 'nck1-source-materialization-v8'
+  historical.paragraphJoins[0].schemaVersion = 'cross-page-paragraph-join-v1'
+  assert.deepEqual(validateNck1SourceMaterialization(historical), [])
+  assert.equal(verifyCrossPageParagraphJoinEvidence(historical, f.proof).length, 1)
+  const v2 = { ...f.proof, confirmation: { ...f.proof.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v2' } }
+  assert.throws(() => verifyCrossPageParagraphJoinEvidence(historical, v2), /version/)
+  for (const version of [8, 9, 10, 11, 13]) {
+    const downgraded = { ...f.result, schemaVersion: `nck1-source-materialization-v${version}` }
+    assert(validateNck1SourceMaterialization(downgraded).length, `reject v${version}`)
+  }
+  const missing = structuredClone(f.result); delete missing.paragraphJoins
+  assert(validateNck1SourceMaterialization(missing).length)
+})
+
+test('unsupported confirmations, receipt drift and recomputed plan tampering fail closed', () => {
+  const f = fixture()
+  for (const version of ['nck1-ocr-source-confirmation-v1', 'nck1-ocr-source-confirmation-v4']) {
+    const confirmation = { ...f.proof.confirmation, schemaVersion: version }
+    const receipt = { ...JSON.parse(new TextDecoder().decode(f.receiptBytes)), confirmation }
+    assert.throws(() => planMaterializationParagraphJoin({ ...f.input,
+      ocrSourceBytes: { ...f.input.ocrSourceBytes, confirmationBytes: encode(confirmation) } }, encode(receipt), f.options))
+  }
+  for (const field of ['revisionId', 'confirmationId', 'paperId', 'sourceSetDigest', 'evidenceDigest', 'reviewerKind']) {
+    const receipt = JSON.parse(new TextDecoder().decode(f.receiptBytes)); receipt[field] = 'changed'
+    assert.throws(() => applyMaterializationParagraphJoinPlan(f.input, encode(receipt), f.plan, { confirmed: true }))
+  }
+  for (const change of [
+    plan => { plan.relation.sourceReview.reason = 'unreviewed reason' },
+    plan => { plan.relation.fragments[0].itemId = 'another-item' },
+    plan => { plan.relation.groupId = f.m.groups[1].groupId },
+    plan => { plan.schemaVersion = 'cross-page-paragraph-join-plan-v1' },
+  ]) {
+    const plan = structuredClone(f.plan); change(plan)
+    const { planDigest, ...body } = plan; plan.planDigest = digestJson(body)
+    assert.throws(() => applyMaterializationParagraphJoinPlan(f.input, f.receiptBytes, plan, { confirmed: true }))
+  }
+  const confirmation = { ...f.proof.confirmation, confirmed: false }
+  const receipt = { ...JSON.parse(new TextDecoder().decode(f.receiptBytes)), confirmation }
+  assert.throws(() => planMaterializationParagraphJoin({ ...f.input,
+    ocrSourceBytes: { ...f.input.ocrSourceBytes, confirmationBytes: encode(confirmation) } }, encode(receipt), f.options))
 })

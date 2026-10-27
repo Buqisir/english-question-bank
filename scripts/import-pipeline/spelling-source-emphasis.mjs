@@ -71,7 +71,7 @@ export function loadSpellingSourceEmphasis(paperDir, request) {
       }
     }
     for (const [index, question] of group.questions.entries()) {
-      if (raw.schemaVersion === 'nck1-source-materialization-v11' && group.family === 'reading'
+      if (['nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion) && group.family === 'reading'
         && question.options.every(option => !option.figure)) {
         const mapped = resolveOcrQuestionTextEmphasis(question, ocrStructures?.get(question.source.documentId))
         for (const target of mapped.targets) {

@@ -1,3 +1,4 @@
+import { paragraphJoinBoundaryNeedsTrim, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { resolveInImageOptionLabels } from '../../shared/paper-canonical/inImageOptionLabels.mjs'
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
@@ -10,11 +11,11 @@ import {
   nck1ListeningInstructionAuthorityRef,
   nck1DrawingAreaAuthorityRef,
   nck1ReadingStemFiguresAuthorityRef,
-  nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef,
+  nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef,
   closureAdmitsListeningSourceDecisions,
   closureAdmitsReadingStemFigures,
   closureAdmitsWritingGivenRefs,
-  closureAdmitsParagraphJoins,
+  closureAdmitsParagraphJoins, closureAdmitsCrossPageJoinV2,
   nck1InImageOptionLabelsAuthorityRef, closureAdmitsInImageOptionLabels,
   validateJsonSchema,
   nck1MaterializationHistoricalAuthorityRef58,
@@ -1524,7 +1525,7 @@ export function deriveNck1SemanticSource(
                 },
               }
             : {}),
-          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),
@@ -1831,7 +1832,7 @@ export function replaceOcrStructuredAnswerRegions(raw, expected, resolved, confi
   ])
   for (const visual of visuals) {
     const group = raw.groups.find(group => group.groupId === visual.targetId)
-    if (!['nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(raw.schemaVersion) || group?.family !== 'application-writing'
+    if (!['nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion) || group?.family !== 'application-writing'
       || group.writingTask?.taskType !== 'application' || !group.writingTask.drawingArea) {
       reject('UNMATCHED', 'Structured OCR replacement requires a v5/v6 application group with drawingArea')
     }
@@ -2043,7 +2044,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       if (!same(original.extraction.region, locator.region)) {
         // Only an ordinary, source-order body figure may tighten its top.
         // Keep the immutable parent and the A-D bank path separate.
-        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(raw.schemaVersion)
+        if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion)
           || !matchesCrop(original, locator)
           || resolved.contentMedia.filter(value => value.mediaId === mediaId).length !== 1) {
           reject('OCR top-trim requires one confirmed PDF content figure with its original media ID')
@@ -2184,7 +2185,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
       claim(mediaId)
       continue
     }
-    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(raw.schemaVersion)) {
+    if (!['nck1-source-materialization-v3', 'nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion)) {
       reject('OCR option banks require the existing figure-option materialization contract')
     }
     // Recover afterItemId from the verified immutable closure, never from a
@@ -2353,26 +2354,30 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         throw new Error('Authored listening transcript must replay exactly, without unresolved source boundaries')
       }
     }
-    if (confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3) {
-      const flatten = blocks => blocks.flatMap(block => block.kind === 'framed_columns'
-        ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
-      const blocks = raw.groups.flatMap(group => flatten(group.blocks))
+    let expected = null
+    if (confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
+      || (raw.schemaVersion === 'nck1-source-materialization-v12' && raw.paragraphJoins)) {
       const question = raw.documents.find(document => !document.renditionOf && document.role === 'question_source')
       const answer = raw.documents.find(document => !document.renditionOf && document.role === 'official_answers')
       // Reuse the producer's source-order parser, not the mutable Candidate's
       // claimed group. This also excludes answer-source tables from student content.
-      const expected = authoredExpected || (question && answer ? produceNck1MaterializationFromStructures({
+      expected = authoredExpected || (question && answer ? produceNck1MaterializationFromStructures({
         paperId: raw.paperId, documents: raw.documents, question, answer, coverage: question,
         questionStructure: resolved.structures.get(question.documentId),
         answerStructure: resolved.structures.get(answer.documentId),
         issues: [], sourceVisuals: resolved.sourceVisuals, mediaInventory: raw.media,
         codePrefix: 'NCK1_OCR',
       }).materialization : { groups: [], sourceCoverage: { visuals: resolved.sourceVisuals } })
-      if (raw.paragraphJoins && ['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(raw.schemaVersion)) {
+      if (raw.paragraphJoins && ['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion)) {
         paragraphJoins = verifyCrossPageParagraphJoinEvidence(raw, {
           evidence, confirmation, confirmationBytes: ocrSourceBytes.confirmationBytes, resolved, expected,
         })
       }
+    }
+    if (confirmation.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3) {
+      const flatten = blocks => blocks.flatMap(block => block.kind === 'framed_columns'
+        ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
+      const blocks = raw.groups.flatMap(group => flatten(group.blocks))
       const replacement = replaceOcrStructuredAnswerRegions(raw, expected, resolved, confirmation, evidence)
       restoredParagraphs = replacement.paragraphs
       const expectedGroups = expected.groups
@@ -2558,21 +2563,22 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
     if (consumed.size !== marked.size) throw new Error('OCR source emphasis has an unmatched or unsupported target')
     // Join after source emphasis and editorial mapping. The two original text
     // segments retain their inline IDs, exact report pointers and source spans.
-    for (const { join, blocks } of paragraphJoins) {
+    for (const { join, blocks, confirmedItems } of paragraphJoins) {
       const group = source.groups.find(group => group.groupId === join.groupId)
       const index = group.content.blocks.findIndex(block => block.nodeId === blocks[0].blockId)
       const left = group.content.blocks[index], right = group.content.blocks[index + 1]
       if (left?.kind !== 'paragraph' || right?.kind !== 'paragraph' || right.nodeId !== blocks[1].blockId
-        || left.inlines.some(node => node.kind !== 'text') || right.inlines.some(node => node.kind !== 'text')
-        || /\s$/u.test(left.inlines.at(-1)?.text || '') || /^\s/u.test(right.inlines[0]?.text || '')) {
+        || [left, right].some(paragraph => paragraph.inlines.some(node => node.kind !== 'text'
+          && !(join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 && group.family !== 'reading' && node.kind === 'blank_ref')))
+        || paragraphJoinBoundaryNeedsTrim(left.inlines) || paragraphJoinBoundaryNeedsTrim(right.inlines)) {
         throw new Error('Cross-page paragraph join cannot map its two effective text segments')
       }
       const refs = join.fragments.map((fragment, fragmentIndex) => {
         const observation = observationForLocator(`observation:paragraph-join:${join.joinId}:${fragmentIndex + 1}`,
           'source_cross_page_paragraph_fragment', fragment.source,
-          { relation: structuredClone(join), fragmentIndex, text: blocks[fragmentIndex].content.map(part => part.text).join('') },
+          { relation: structuredClone(join), fragmentIndex, text: join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 ? confirmedItems[fragmentIndex].text : blocks[fragmentIndex].content.map(part => part.text).join('') },
           documentsById)
-        observation.extraction.version = '12'
+        observation.extraction.version = join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 ? '16' : '12'
         source.observations.push(observation)
         const ref = `source-span:${observation.observationId}`
         const paragraph = fragmentIndex === 0 ? left : right
@@ -2585,6 +2591,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       const separator = { kind: 'text', nodeId: `text:paragraph-join:${join.joinId}:separator`, text: ' ' }
       group.sourceSpanRefsByTarget[`content_node:${left.nodeId}`] = refs
       group.sourceSpanRefsByTarget[`content_node:${separator.nodeId}`] = refs
+      if (join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2) delete group.sourceSpanRefsByTarget[`content_node:${right.nodeId}`]
       left.inlines.push(separator, ...right.inlines)
       group.content.blocks.splice(index + 1, 1)
     }
@@ -2604,6 +2611,7 @@ export function withNck1MaterializationSourceCache(callback) {
 }
 
 export function nck1MaterializationAuthorityForInput(input) {
+  if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v12') return nck1CrossPageJoinV2AuthorityRef
   if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v11') return nck1OcrOptionEmphasisAuthorityRef
   if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v10') return nck1ListeningSourceDecisionAuthorityRef
   if (parseMaterialization(input.materializationBytes)?.schemaVersion === 'nck1-source-materialization-v9') return nck1InImageOptionLabelsAuthorityRef
@@ -2644,6 +2652,11 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
   }
   // Authority checks append issues; keep that list private to this derivation.
   const validation = { ...prepared.validation, issues: [...prepared.validation.issues] }
+  if (materialization.schemaVersion === 'nck1-source-materialization-v12'
+    && (!input.ocrSourceBytes || authorityRef.manifestDigest !== nck1CrossPageJoinV2AuthorityRef.manifestDigest
+      || !closureAdmitsCrossPageJoinV2(resolveCanonicalAuthority(authorityRef).closure))) {
+    validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v12 requires the cross-page join v2 successor authority and verified OCR bytes'))
+  }
   if (materialization.schemaVersion === 'nck1-source-materialization-v11'
     && (!input.ocrSourceBytes || authorityRef.manifestDigest !== nck1OcrOptionEmphasisAuthorityRef.manifestDigest)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v11 requires the OCR option emphasis successor authority and verified OCR bytes'))
@@ -2662,15 +2675,17 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
   }
   if ((materialization.schemaVersion === 'nck1-source-materialization-v8' || materialization.paragraphJoins)
     && (!input.ocrSourceBytes
-      || parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3
+      || !(materialization.paragraphJoins?.every(join => join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2)
+        ? [NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3]
+        : [NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3]).includes(parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion)
       || !closureAdmitsParagraphJoins(resolveCanonicalAuthority(authorityRef).closure))) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v8 requires the explicit paragraph join reader and verified OCR bytes'))
   }
-  if (['nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(materialization.schemaVersion)
+  if (['nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(materialization.schemaVersion)
     && !closureAdmitsWritingGivenRefs(resolveCanonicalAuthority(authorityRef).closure)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v7 requires the explicit writing given refs reader authority'))
   }
-  if (['nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(materialization.schemaVersion)
+  if (['nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(materialization.schemaVersion)
     && !closureAdmitsReadingStemFigures(resolveCanonicalAuthority(authorityRef).closure)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v6 requires the complete Reading stem figure reader authority'))
   }
@@ -2679,9 +2694,9 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     validation.issues.push(adapterIssue('MATERIALIZATION_STEM_FIGURE_CONFIRMATION_REQUIRED',
       'Stem figures require a verified v3 OCR question-source stream'))
   }
-  if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(materialization.schemaVersion)
+  if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(materialization.schemaVersion)
     || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
-    && !['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77'].includes(authorityRef.manifestVersion)) {
+    && !['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78'].includes(authorityRef.manifestVersion)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require a registered source-presentation closure'))
   }
   if ((materialization.schemaVersion === 'nck1-source-materialization-v5'
@@ -2689,7 +2704,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     && !closureAdmitsApplicationDrawingArea(resolveCanonicalAuthority(authorityRef).closure)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_DRAWING_AREA_UNSUPPORTED', 'Application drawing areas require their registered successor authority'))
   }
-  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
+  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Listening instruction correction requires its registered successor authority'))
   }
   if (validation.issues.length > 0) {
@@ -2740,7 +2755,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     derivationIssues,
     { authorityRef, listeningInstructionCorrection },
   )
-  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
+  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
     nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
@@ -2748,14 +2763,14 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
       derivationIssues)
   }
   if (input.ocrSourceBytes) {
-    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
       derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
     } else {
       appendOcrReadingSourceEmphasis(source, rawMaterialization, validation.documentsById, input.ocrSourceBytes,
         input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
         ['4', '5'].includes(resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version),
-        authorityRef.manifestDigest === nck1OcrOptionEmphasisAuthorityRef.manifestDigest)
+        [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest))
     }
   }
   if (derivationIssues.length > 0) {
