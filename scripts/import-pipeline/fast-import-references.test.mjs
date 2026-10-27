@@ -30,12 +30,21 @@ function fakeStatus(ctx, candidates = []) {
 }
 
 function failedPush(ctx, attemptId = '11111111-1111-4111-8111-111111111111', message = '500 SOURCE_REFERENCES_PRODUCER_VERSION_INVALID rejected') {
-  ctx.state.steps.push = { startedAt: oldTime, attemptId }
+  ctx.state.steps.push = { startedAt: message.startsWith('500 SOURCE_') ? oldTime : new Date().toISOString(), attemptId }
   json(ctx.statePath, ctx.state)
   const file = path.join(ctx.logs, `push-${attemptId}.log`)
   mkdirSync(ctx.logs, { recursive: true })
   appendFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), `${JSON.stringify({ paperId: ctx.paperId, ...ctx.state.steps.push })}\n`)
   writeFileSync(file, `${JSON.stringify({ type: 'fast-push-attempt-v1', paperId: ctx.paperId, ...ctx.state.steps.push })}\n$ review push\n--- stderr\n${message}\n${JSON.stringify({ type: 'fast-push-exit-v1', attemptId, code: 1, signal: null })}\n`)
+  return file
+}
+
+function legacyPush(ctx, startedAt = oldTime) {
+  ctx.state.steps.push = { startedAt }
+  json(ctx.statePath, ctx.state)
+  mkdirSync(ctx.logs, { recursive: true })
+  const file = path.join(ctx.logs, 'push.log')
+  writeFileSync(file, 'IMPORT_REVIEW_SIZE_INVALID\n')
   return file
 }
 const completed = result => ({ startedAt: oldTime, finishedAt: oldTime, seconds: 0, result })
@@ -408,6 +417,65 @@ test('legacy push without attempt identity cannot be reconciled', async t => {
   delete ctx.state.steps.push.attemptId
   json(ctx.statePath, ctx.state)
   await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => fakeStatus(ctx) }), /UNKNOWN/)
+})
+
+test('zero Candidate permits an old legacy push and retains its evidence', async t => {
+  fakeReviewOrigin(t)
+  const { ctx, options } = fixture(t, 'old-version'), file = legacyPush(ctx)
+  const original = readFileSync(file)
+  const ocr = { id: 'ocr-1', paperId: ctx.paperId, reviewKind: 'ocr', state: 'approved' }
+  const raw = JSON.stringify({ paperId: ctx.paperId, latestRevisionId: ocr.id, latest: ocr, revisions: [ocr] })
+  const receipt = await reconcilePush(ctx, file, { readStatus: async () => raw })
+  assert.equal(receipt.method, 'zero-candidate')
+  assert.equal(receipt.failurePath, file)
+  assert.equal(JSON.parse(readFileSync(path.join(ctx.fast, 'push-reconciliation', receipt.statusReceipt))).response, raw)
+  await finish(ctx, [], options)
+  assert.deepEqual(readFileSync(file), original)
+  // An appended attempt consumes the old receipt even before state is saved.
+  appendFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), `${JSON.stringify({ paperId: ctx.paperId, startedAt: new Date().toISOString(), attemptId: '22222222-2222-4222-8222-222222222222' })}\n`)
+  await assert.rejects(() => requestedRedo(ctx, 'push'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+})
+
+test('zero Candidate also reconciles an old identified attempt without HTTP evidence', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version')
+  const file = failedPush(ctx)
+  writeFileSync(file, readFileSync(file, 'utf8').replace('500 SOURCE_REFERENCES_PRODUCER_VERSION_INVALID rejected', 'network failure'))
+  const receipt = await reconcilePush(ctx, file, { readStatus: async () => fakeStatus(ctx) })
+  assert.equal(receipt.method, 'zero-candidate')
+  await requestedRedo(ctx, 'source-references')
+})
+
+test('zero Candidate rejects a newer attempt recorded while status is read', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version'), file = legacyPush(ctx)
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => {
+    appendFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), `${JSON.stringify({ paperId: ctx.paperId, startedAt: new Date().toISOString(), attemptId: '22222222-2222-4222-8222-222222222222' })}\n`)
+    return fakeStatus(ctx)
+  } }), /UNKNOWN/)
+})
+
+for (const state of ['uploading', 'superseded', 'awaiting_review', 'finalized']) {
+  test(`zero Candidate refuses ${state}`, async t => {
+    fakeReviewOrigin(t)
+    const { ctx } = fixture(t, 'old-version'), file = legacyPush(ctx)
+    const status = fakeStatus(ctx, [{ id: 'candidate-1', state, finalizedAt: state === 'uploading' ? null : oldTime }])
+    await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => status }), /UNKNOWN/)
+    await assert.rejects(() => requestedRedo(ctx, 'push'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+  })
+}
+
+test('zero Candidate rejects a recent attempt, failed status and malformed status', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version')
+  let file = legacyPush(ctx, new Date().toISOString())
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => fakeStatus(ctx) }), /UNKNOWN/)
+  file = legacyPush(ctx)
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => { throw new Error('status failed') } }), /status failed/)
+  for (const raw of ['{', '{}', JSON.stringify({ paperId: ctx.paperId, latest: null, latestRevisionId: null, revisions: [{}] })]) {
+    await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => raw }), /UNKNOWN/)
+  }
+  await assert.rejects(() => requestedRedo(ctx, 'push'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
 })
 
 for (const tamper of ['receipt', 'status', 'failure', 'startedAt', 'new-push']) {
