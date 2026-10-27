@@ -17,7 +17,8 @@ import { runRoutes } from '../server/router/index.mjs'
 import { productPdfBytes as pdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
-import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
@@ -238,14 +239,8 @@ try {
   assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /听力声明/,
     'a complete listening source cannot declare listening absent')
   await writeFile(configPath, JSON.stringify(config))
-  const references = prepareSourceReferences(fixture.projection)
-  const evidence = fixture.projection.materialization.documents.filter(file => file.role === 'official_answers').map(file => ({
-    documentSha256: file.sha256, locator: { kind: 'page_region', documentId: file.documentId,
-      page: 1, region: { x: 0, y: 0, width: 1, height: 1 } },
-  }))
-  for (const group of references.groups) for (const kind of ['essays', 'scoring']) {
-    group[kind] = { state: 'not_supplied', evidence, entries: [] }
-  }
+  const references = syntheticReviewReferences(fixture.projection)
+  assert(references, 'expected the synthetic answer PDF')
   const referencesPath = path.join(fixture.reviewRoot, SOURCE_REFERENCES_FILE)
   await writeFile(referencesPath, JSON.stringify(references))
   const inputIdentity = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })

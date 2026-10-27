@@ -78,14 +78,17 @@ for (const [name, mutate, code] of [
   assert(validate(changed).some(issue => issue.code === code), name)
 }
 for (const schemaVersion of ['source-references-v1', 'source-references-v2']) {
-  const historical = structuredClone(sidecar)
-  historical.schemaVersion = schemaVersion
-  assert.deepEqual(validateSourceReferences({ ...binding, sidecar: historical }), [])
-  const before = JSON.stringify(historical)
-  assertSourceReferenceAdmission({ ...binding, sidecar: historical, sourceInput: {} })
-  assert.equal(JSON.stringify(historical), before, 'historical references are not migrated')
+  const noFigure = structuredClone(sidecar)
+  noFigure.schemaVersion = schemaVersion
+  assert.deepEqual(validateSourceReferences({ ...binding, sidecar: noFigure }), [])
+  const before = JSON.stringify(noFigure)
+  assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: noFigure, sourceInput: {} }), {
+    code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID',
+    message: 'Whole-document PDF absence requires complete OCR evidence and confirmation',
+  })
+  assert.equal(JSON.stringify(noFigure), before, 'rejected references are not migrated')
 }
-console.log('PASS v1/v2 unchanged; v3 anchors, state, IDs, region uniqueness and unsupported structures')
+console.log('PASS v1/v2 no-figure shapes unchanged; current producer rejects unconfirmed PDF absence; v3 anchors, state, IDs, region uniqueness and unsupported structures')
 
 function pngChunk(type, data) {
   const bytes = Buffer.alloc(data.length + 12)

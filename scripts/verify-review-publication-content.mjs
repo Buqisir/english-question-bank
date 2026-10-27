@@ -19,7 +19,8 @@ import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1M
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
-import { prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferenceFigures } from '../server/paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCES_FILE, sourceReferenceFigures } from '../server/paper-import/sourceReferences.mjs'
+import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { sourceReferenceFiguresFixture } from '../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
@@ -111,15 +112,9 @@ try {
     editions: { friendly8: { targetPages: 8, includeListening: false, omitCover: true,
       coverGapsPt: null, breakSlotIds: [], allowSplitOptionBank: false } },
   })
-  const references = figureReferences ?? prepareSourceReferences({ ...projection,
-    structuredScoring: process.argv.includes('--v2-references') })
-  const evidence = projection.materialization.documents.filter(file => file.role === 'official_answers').map(file => ({
-    documentSha256: file.sha256, locator: { kind: 'page_region', documentId: file.documentId,
-      page: 1, region: { x: 0, y: 0, width: 1, height: 1 } },
-  }))
-  for (const group of figureReferences ? [] : references.groups) for (const kind of ['essays', 'scoring']) {
-    group[kind] = { state: 'not_supplied', evidence, entries: [] }
-  }
+  const references = figureReferences ?? syntheticReviewReferences(projection)
+  assert(references, 'expected the synthetic answer PDF or figure references')
+  if (!figureReferences && process.argv.includes('--v2-references')) references.schemaVersion = 'source-references-v2'
   json(path.join(source, SOURCE_REFERENCES_FILE), references)
   mkdirSync(path.join(source, 'products'))
   const products = { schemaVersion: 'paper-pdf-products-v1',
@@ -174,7 +169,7 @@ try {
   })
   await firstAdmission.ready()
   for (const producerVersion of [undefined, 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v24', null]) {
+    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v25', null]) {
     const changed = structuredClone(references)
     if (producerVersion === undefined) delete changed.producerVersion
     else changed.producerVersion = producerVersion
@@ -193,7 +188,7 @@ try {
     assert.throws(() => firstAdmission.finalizeRevision(draft.id), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
     assert.equal(firstAdmission.getRevision(draft.id).finalizedAt, null)
   }
-  pass('first finalize rejects missing, v17 through v22, unknown and null producer versions before any seal, even with recomputed bundle digests')
+  pass('first finalize rejects missing, v17 through v23, unknown and null producer versions before any seal, even with recomputed bundle digests')
   const reviewDb = path.join(root, 'review.sqlite')
   const store = createImportReviewStore({ dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
     rendererBuildId: 'publication-fixture-renderer' })

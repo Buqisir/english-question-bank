@@ -11,7 +11,7 @@ import {
   ENTRY_LABEL, EXAMPLE_SAMPLE_LABEL, PARENTHESIZED_SAMPLE_LABEL, NUMBERED_VERSION_SAMPLE_LABEL,
   SCORING_LABEL, isSourceReferenceSampleLabel, explicitWritingHeading, verifiedParenthesizedEnglish, composedWritingSampleParts,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
-import { usesExplicitWritingTitles, OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../server/paper-import/sourceReferenceSemantics.mjs'
+import { usesExplicitWritingTitles, OCR_SOURCE_REFERENCES_PRODUCER_VERSION, usesV23WritingCapabilities } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
 const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
@@ -157,7 +157,7 @@ export const LINE_ROLE_RULES = Object.freeze([
   rule('entry.task-scoring', 'entry-label', 80, f => Boolean(firstLineRole('scoring-section', f)),
     '续写评分标准', '续写评分标准分析'),
   rule('entry.scoring-label', 'entry-label', 90, (f, c) => SCORING_ENTRY_LABEL.test(writingRuleMatchingView(f.text))
-    || (c.producerVersion === 'ocr-source-references-producer-v23'
+    || (usesV23WritingCapabilities(c.producerVersion)
       && /^(?:[一二三四五六七八九十]+、|\([一二三四五六七八九十]+\))?各档次的给分范围和要求[:：]?$/u.test(writingRuleMatchingView(f.text))),
     '（二）各档次给分范围和要求', '（二）各档次给分范围和要求如下。'),
   rule('entry.source-version', 'entry-label', 100, f => isWritingVersionLabel(f.text),

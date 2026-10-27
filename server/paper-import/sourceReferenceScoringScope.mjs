@@ -4,7 +4,7 @@ import { inlineSampleParts, matchesLineRole } from '../../scripts/import-pipelin
 import { computeLineFacts } from '../../scripts/import-pipeline/ocr-line-facts.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
-  usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
+  usesGivenTitleWritingSamples, usesV23WritingCapabilities } from './sourceReferenceSemantics.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
@@ -22,7 +22,7 @@ const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
 function isScoringLabel(sourceText, scoringTask, producerVersion) {
   const text = writingRuleMatchingView(sourceText)
   const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(sourceText.normalize('NFKC').trim())
-  return Boolean(scoringTask) || (producerVersion === 'ocr-source-references-producer-v23'
+  return Boolean(scoringTask) || (usesV23WritingCapabilities(producerVersion)
     && matchesLineRole('entry.scoring-label', computeLineFacts({ text: sourceText }), { producerVersion }))
     || (numberedEntryLabel && /评分/u.test(text))
     || SCORING_ENTRY_LABEL.test(text)

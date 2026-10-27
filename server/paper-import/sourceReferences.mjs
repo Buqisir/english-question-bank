@@ -24,8 +24,11 @@ export const scoringFigureSourceReferencesSchema = JSON.parse(readFileSync(
 export const exclusionSourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-v5.schema.json', import.meta.url), 'utf8',
 ))
-export const currentSourceReferencesSchema = JSON.parse(readFileSync(
+export const v23SourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-capture-v23.schema.json', import.meta.url), 'utf8',
+))
+export const currentSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-capture-v24.schema.json', import.meta.url), 'utf8',
 ))
 const ajv = new Ajv({ allErrors: true, strict: false })
 const validateV1 = ajv.compile(sourceReferencesSchema)
@@ -34,12 +37,13 @@ const validateV3 = ajv.compile(figureSourceReferencesSchema)
 const validateV4 = ajv.compile(scoringFigureSourceReferencesSchema)
 const validateV5 = ajv.compile(exclusionSourceReferencesSchema)
 const validateCurrent = ajv.compile(currentSourceReferencesSchema)
+const validateV23 = ajv.compile(v23SourceReferencesSchema)
 // Integrity-only recognition of explicit v17 metadata on already sealed bytes.
 // This never selects semantics: first admission separately requires v22, and
 // legacy replay separately proves the persisted whole-sidecar commitment.
-const validateDeclaredLegacy = ajv.compile({ ...currentSourceReferencesSchema,
+const validateDeclaredLegacy = ajv.compile({ ...v23SourceReferencesSchema,
   $id: 'source-references-sealed-v17',
-  properties: { ...currentSourceReferencesSchema.properties,
+  properties: { ...v23SourceReferencesSchema.properties,
     producerVersion: { const: 'ocr-source-references-producer-v17' } },
 })
 const validatePrevious = ajv.compile(JSON.parse(readFileSync(
@@ -110,7 +114,8 @@ export function validateSourceReferences({
         : sidecar.producerVersion === 'ocr-source-references-producer-v19' ? validateExplicitTitles
           : sidecar.producerVersion === 'ocr-source-references-producer-v20' ? validateGivenTitles
             : sidecar.producerVersion === 'ocr-source-references-producer-v21' ? validateComposedLabels
-              : sidecar.producerVersion === 'ocr-source-references-producer-v22' ? validateTitleAbbreviation : validateCurrent
+              : sidecar.producerVersion === 'ocr-source-references-producer-v22' ? validateTitleAbbreviation
+                : sidecar.producerVersion === 'ocr-source-references-producer-v23' ? validateV23 : validateCurrent
     : sidecar?.schemaVersion === 'source-references-v5' ? validateV5
     : sidecar?.schemaVersion === 'source-references-v4' ? validateV4
     : sidecar?.schemaVersion === 'source-references-v3' ? validateV3

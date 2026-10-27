@@ -24,7 +24,8 @@ import { verifyReviewCompatibilitySchema } from '../test-fixtures/review-compati
 import { inspectSealedReviewFiles } from '../server/import-review/sealedReviewFiles.mjs'
 import { acquireReviewCompatibilityLeader, beginReviewActivity } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
-import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 
@@ -79,14 +80,8 @@ try {
   config.provenance.month = 10
   json(path.join(source, 'config.json'), config)
   const projection = buildNck1ReviewProjection(source)
-  const references = prepareSourceReferences(projection)
-  const evidence = projection.materialization.documents.filter(file => file.role === 'official_answers').map(file => ({
-    documentSha256: file.sha256, locator: { kind: 'page_region', documentId: file.documentId,
-      page: 1, region: { x: 0, y: 0, width: 1, height: 1 } },
-  }))
-  for (const group of references.groups) for (const kind of ['essays', 'scoring']) {
-    group[kind] = { state: 'not_supplied', evidence, entries: [] }
-  }
+  const references = syntheticReviewReferences(projection)
+  assert(references, 'expected the synthetic answer PDF')
   json(path.join(source, SOURCE_REFERENCES_FILE), references)
   mkdirSync(path.join(source, 'products'))
   const products = { schemaVersion: 'paper-pdf-products-v3', listening: 'absent-by-exam-design',

@@ -12,7 +12,8 @@ import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMat
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
-  usesGivenTitleWritingSamples, usesComposedWritingLabels } from './sourceReferenceSemantics.mjs'
+  usesGivenTitleWritingSamples, usesComposedWritingLabels, usesV23WritingCapabilities } from './sourceReferenceSemantics.mjs'
+import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
 
 // Bind nested task/letter and capture role lookups to the same source semantics.
 function sourceReferenceLineRoles(producerVersion) {
@@ -677,7 +678,7 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
   // Only open an unlabeled sample when the first given starts immediately
   // after the prompt, and the second follows continuous prose in source order.
   const confirmedUnlabeled = promptIndex => {
-    if (producerVersion !== 'ocr-source-references-producer-v23' || given.length !== 2
+    if (!usesV23WritingCapabilities(producerVersion) || given.length !== 2
       || given.some(s => !s || !/[.!?]$/u.test(s)) || given[0] === given[1]) return null
     const first = sectionLines[promptIndex + 1]
     if (!first || !startsWithGiven(first, given[0])) return null
@@ -919,6 +920,12 @@ export function sourceReferenceEssayTaskStates(confirmation, answerIds, material
     for (const [itemId, state] of lifecycle.items) states.set(itemId, state)
   }
   if (documents.length && usesExplicitWritingTitles(options?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION)) {
+    const missing = (materialization.groups ?? []).filter(group => group.writingTask && !taskTypes.has(group.writingTask.taskType))
+    if (missing.length && options?.sidecar?.wholeDocumentWritingAbsence) {
+      wholeDocumentAbsenceSubject({ sidecar: options.sidecar, materialization, sourceInput: options.sourceInput,
+        sourceDigest: options.sourceDigest, candidateDigest: options.candidateDigest })
+      return states
+    }
     for (const group of materialization.groups ?? []) {
       if (group.writingTask && !taskTypes.has(group.writingTask.taskType)) {
         scopeError(`No answer-document section found for ${group.writingTask.taskType}`)

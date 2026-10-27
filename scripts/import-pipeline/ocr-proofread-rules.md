@@ -102,6 +102,13 @@ Tesseract 底稿不带图形标记。校对员必须对照整页图自行补齐 
 
 ## 疑点
 
+整份独立答案 PDF 均无两项写作参考时，可在 `answer-products prepare` 显式传入
+`--whole-document-writing-absence --author-session-id <真实会话>` 生成待审 proposal。
+另一名未编写声明的导入 Agent 必须逐页看原图、确认 subject 和每页 raster，
+独立填写 review；作者只原样装入该 review。不同 session 字符串不能证明身份独立，
+机器仅核对输入绑定、页全集和明确矛盾，不能识别所有无标题范文。源文件或任一
+绑定变化后必须重新复核；未复核时不得 finalize。
+
 看不清或拿不准的字词：保留最可能的源读法，在 item 加 `"uncertain": "简短中文原因"`，继续完成，不要停下来问。
 改动识别文字时可以写 `"reason"`（中文）；不写时工具自动生成“「原识别」改为「校正」”的说明。
 

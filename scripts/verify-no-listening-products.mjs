@@ -13,7 +13,8 @@ import { ABSENT_BY_EXAM_DESIGN, NO_LISTENING_PRODUCT_SCHEMA, manifestProductFile
 import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../server/paper-import/pdfPageLimits.mjs'
 import { PRODUCT_MANIFEST, frozenProductResult, productInputDigest, readFrozenProducts, loadStoredProducts } from '../server/paper-import/frozenProducts.mjs'
 import { buildPreprocessingReport } from '../server/paper-import/preprocessingReport.mjs'
-import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
@@ -81,14 +82,8 @@ try {
   const projection = buildNck1ReviewProjection(root)
   assert.deepEqual(reviewPaginationMetadata(projection).editions.map(entry => entry.edition),
     ['largeNoListening', 'economy8', 'answerOnly'])
-  const references = prepareSourceReferences(projection)
-  const evidence = projection.materialization.documents.filter(file => file.role === 'official_answers').map(file => ({
-    documentSha256: file.sha256, locator: { kind: 'page_region', documentId: file.documentId,
-      page: 1, region: { x: 0, y: 0, width: 1, height: 1 } },
-  }))
-  for (const group of references.groups) for (const kind of ['essays', 'scoring']) {
-    group[kind] = { state: 'not_supplied', evidence, entries: [] }
-  }
+  const references = syntheticReviewReferences(projection)
+  assert(references, 'expected the synthetic answer PDF')
   json(path.join(root, SOURCE_REFERENCES_FILE), references)
   if (previewRoot) {
     // The tiny fixture needs explicit group breaks to exercise strict eight pages.
