@@ -16,7 +16,10 @@ import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 
-const input = scoringFiguresFixture()
+// v23 recognizes the range heading as a label, not a paragraph. Add an
+// actual criterion so the existing paragraph/figure adversarial cases retain
+// two anchored pairs and genuinely overlapping paragraph ranges.
+const input = scoringFiguresFixture({ scoringIntro: true })
 const compiled = importCanonicalCandidate(input.sourceInput)
 assert.deepEqual(compiled.issues, [], 'real Canonical source compile remains closed')
 Object.assign(input, { sourceDigest: compiled.candidate.source.sha256,
@@ -113,7 +116,7 @@ console.log('PASS forged regions/IDs/PNG/SHA, omissions, order, task/entry swaps
 
 // Keep local paragraph/figure anchors valid while moving whole pairs across a
 // page turn in one scoring entry. Both source pages must remain monotonic.
-const crossPageInput = scoringFiguresFixture({ crossPageScoring: true })
+const crossPageInput = scoringFiguresFixture({ crossPageScoring: true, scoringIntro: true })
 const crossPageSidecar = captureScoringReferences(crossPageInput)
 assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageSidecar })
 const crossPageChanged = structuredClone(crossPageSidecar)
@@ -164,7 +167,7 @@ for (const colon of ['：', ':']) for (const writingHeading of [
   const colonInput = scoringFiguresFixture({ writingHeading })
   const colonSidecar = captureScoringReferences(colonInput)
   assertSourceReferenceAdmission({ ...colonInput, sidecar: colonSidecar })
-  assert.equal(colonSidecar.groups[0].scoring.entries[0].blocks[1].kind, 'figure')
+  assert.equal(colonSidecar.groups[0].scoring.entries[0].blocks[0].kind, 'figure')
 }
 console.log('PASS Chinese/ASCII colon writing-part headings retain exact producer → admission ownership')
 

@@ -274,9 +274,9 @@ test('v17–v20 repeated-section lifecycle retains exact pre-fix replay bytes', 
   }
 })
 
-test('sealed v17–v21 references retain exact bytes and are rejected on first admission', () => {
+test('sealed v17–v22 references retain exact bytes and are rejected on first admission', () => {
   const input = scoringFiguresFixture()
-  for (const version of [17, 18, 19, 20, 21]) {
+  for (const version of [17, 18, 19, 20, 21, 22]) {
     const sidecar = captureScoringReferences(input, { producerVersion: `ocr-source-references-producer-v${version}` })
     const sourceReferencesBytes = Buffer.from(JSON.stringify(sidecar))
     assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt: {
@@ -495,7 +495,7 @@ test('first admission rejects missing, legacy and unknown producer versions befo
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
   for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23', null]) {
+    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v24', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -578,7 +578,7 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v24']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }
@@ -1254,7 +1254,12 @@ test('P1-2 even adjacent source items cannot cross essay/scoring ownership', () 
   reseal(input)
   const sidecar = captureScoringReferences(input)
   const p = sidecar.groups[0].essays.entries[0].paragraphs[0]
-  p.continuationSources = [structuredClone(sidecar.groups[0].scoring.entries[0].labelSource)]
+  p.source.locator.page = page.page
+  p.source.locator.region = structuredClone(proof.observations.find(o => o.observationId === sample.observationIds[0]).region)
+  p.text = sample.text
+  const labelSource = structuredClone(p.source)
+  labelSource.locator.region = structuredClone(proof.observations.find(o => o.observationId === label.observationIds[0]).region)
+  p.continuationSources = [labelSource]
   p.text += ` ${label.text}`
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), /continuation.*ownership/iu)
 })

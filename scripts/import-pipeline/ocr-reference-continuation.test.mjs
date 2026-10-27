@@ -212,12 +212,21 @@ for (const [previous, current] of [
   assert.deepEqual(scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)), [previous, current])
 })
 
-for (const title of ['第五档（13–15分）', '零分', '（三）各档次的给分范围和要求',
+for (const title of ['第五档（13–15分）', '零分',
   '不得分（0分）', '读后续写注意事项']) test(`short Chinese scoring titles keep their boundary: ${title}`, () => {
   const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
     line(title, .36, .1, .22), line('评分内容完整，逻辑清楚。', .4)]])
   const scoring = buildSourceReferences(...input).groups[0].scoring
   assert.deepEqual(scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)), [title, '评分内容完整，逻辑清楚。'])
+})
+
+test('v23 treats the complete rubric heading as a scoring entry label', () => {
+  const title = '（三）各档次的给分范围和要求'
+  const input = fixture([[...heading, line('A complete sample.', .28), line('评分标准', .32),
+    line(title, .36, .1, .22), line('评分内容完整，逻辑清楚。', .4)]])
+  const entries = buildSourceReferences(...input).groups[0].scoring.entries
+  assert.equal(entries.at(-1).sourceLabel, title)
+  assert.deepEqual(entries.at(-1).paragraphs.map(p => p.text), ['评分内容完整，逻辑清楚。'])
 })
 
 test('full Chinese reference lines use their own column instead of the other column right edge', () => {

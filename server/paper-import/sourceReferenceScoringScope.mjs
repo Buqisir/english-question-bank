@@ -1,8 +1,9 @@
 import { sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
-import { inlineSampleParts } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
+import { inlineSampleParts, matchesLineRole } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
+import { computeLineFacts } from '../../scripts/import-pipeline/ocr-line-facts.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
   usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
@@ -18,10 +19,12 @@ import {
 const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
 
 // Share the existing complete scoring-label predicate with the objective cutoff.
-function isScoringLabel(sourceText, scoringTask) {
+function isScoringLabel(sourceText, scoringTask, producerVersion) {
   const text = writingRuleMatchingView(sourceText)
   const numberedEntryLabel = NUMBERED_ENTRY_LABEL.test(sourceText.normalize('NFKC').trim())
-  return Boolean(scoringTask) || (numberedEntryLabel && /评分/u.test(text))
+  return Boolean(scoringTask) || (producerVersion === 'ocr-source-references-producer-v23'
+    && matchesLineRole('entry.scoring-label', computeLineFacts({ text: sourceText }), { producerVersion }))
+    || (numberedEntryLabel && /评分/u.test(text))
     || SCORING_ENTRY_LABEL.test(text)
     || /^(?:【|\[)[^】\]]*(?:评分|阅卷|评卷|给分|档次)[^】\]]*(?:】|\])[:：]?$/u.test(text)
 }
@@ -107,7 +110,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
       const completeTranscript = usesExplicitWritingTitles(producerVersion) && lifecycle.listeningStarts.has(item.itemId)
-      const readingBoundary = producerVersion === 'ocr-source-references-producer-v22'
+      const readingBoundary = usesTitleAbbreviation(producerVersion)
         && lifecycle.items.get(item.itemId)?.ended && isReadingAnswerPair(item.text, items[index + 1]?.text)
       if (readingBoundary || isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(heading)
         || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading) || completeTranscript) {
@@ -146,7 +149,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
       // Share the producer's complete essay-label grammar; Chinese citations
       // such as “范文1中…” remain rubric prose.
       const sampleLabel = isSourceReferenceSampleLabel(item.text, producerVersion)
-      const scoringLabel = isScoringLabel(item.text, scoringTask)
+      const scoringLabel = isScoringLabel(item.text, scoringTask, producerVersion)
       if (!ended && taskType && scoringLabel) label = item
       // A reprinted "写作二" starts the sample between rubric sections, not
       // another scoring paragraph; only the next rubric label restores scoring.
@@ -188,7 +191,7 @@ export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures
     const positions = new Map(items.map((item, index) => [item.itemId, index]))
     const start = items.findIndex(item => item.itemId === starts.get(document.documentId)
       || WRITING_SCORING_OVERVIEW.test(writingRuleMatchingView(item.text))
-      || isScoringLabel(item.text, WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(writingRuleMatchingView(item.text))))
+      || isScoringLabel(item.text, WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(writingRuleMatchingView(item.text))), producerVersion)
       || BARE_WRITING_SECTION.test(item.text.normalize('NFKC').split('\n')[0].trim())
       // Contextual v21 starts come from the lifecycle above; without writing
       // context only the historical inline forms can establish this cutoff.

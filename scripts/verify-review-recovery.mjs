@@ -434,10 +434,10 @@ try {
   assert.equal(oldStore.listPapers()[0].paperId, revision.paperId)
   assert.deepEqual(oldStore.productPreviewForRevision(revision.id).preview,
     fixture.store.productPreviewForRevision(revision.id).preview)
-  // This is a newly captured v22 envelope. The exact old release can read its
+  // This is a newly captured v23 envelope. The exact old release can read its
   // sealed record/preview but must not approve semantics it does not implement.
   assert.equal(JSON.parse(readFileSync(path.join(filesRoot, revision.id, 'source-references-v1.json'))).producerVersion,
-    'ocr-source-references-producer-v22')
+    'ocr-source-references-producer-v23')
   assert.throws(() => oldStore.approveRevision(revision.paperId, revision.id,
     { bundleDigest: revision.bundleDigest }, 'rollback-smoke'), { code: 'SOURCE_REFERENCES_SCHEMA_INVALID' })
   dbRun(migration, db => {
