@@ -10,7 +10,7 @@ import {
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, isSourceReferenceExplanationStart,
   BARE_WRITING_SECTION,
-  isSourceReferenceSampleLabel, explicitWritingHeading,
+  isSourceReferenceSampleLabel, explicitWritingHeading, isReadingAnswerPair,
   continuationThoughtHeading, applicationStanceLabel,
 } from './sourceReferenceWritingRules.mjs'
 
@@ -38,6 +38,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
     let afterListening = false
     const items = document.pages.flatMap((page, index) =>
       page.orderedItems.map(item => ({ ...item, page: page.page ?? index + 1 })))
+    items.forEach((item, index) => { item.nextSourceItemId = items[index + 1]?.itemId })
     // Reuse extraction's task recognition, including adjacent/merged sample
     // labels. Existing scoring termination/reopening rules remain authoritative.
     const lifecycle = sourceReferenceWritingLifecycle(items, {
@@ -106,7 +107,9 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
       const completeTranscript = usesExplicitWritingTitles(producerVersion) && lifecycle.listeningStarts.has(item.itemId)
-      if (isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(heading)
+      const readingBoundary = producerVersion === 'ocr-source-references-producer-v22'
+        && lifecycle.items.get(item.itemId)?.ended && isReadingAnswerPair(item.text, items[index + 1]?.text)
+      if (readingBoundary || isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(heading)
         || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading) || completeTranscript) {
         writing = false
         taskType = null

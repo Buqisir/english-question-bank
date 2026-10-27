@@ -1272,6 +1272,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
       const afterClosing = previous?.role === 'closing'
       const decision = decideLineJoin({
         content: 'reference', previous, current: facts,
+        titleAbbreviationContinuation: producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
         geometry: { unit: 'normalized', margin, previousMargin: previous?.margin || margin,
           previousColumnMargin: previous?.columnMargin },
         roles: { hasParagraph: Boolean(paragraph), special, afterClosing,

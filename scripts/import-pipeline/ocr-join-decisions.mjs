@@ -83,10 +83,16 @@ function referencePolicy(input) {
   // Keep the stricter cross-page proof and semantic role boundaries intact.
   const previousTail = (previous?.text || '').replace(/[\s”’"'）)\]】」』]+$/u, '')
   const numberedOrLabel = /^(?:[一二三四五六七八九十]+、|\([一二三四五六七八九十\d]+\)|\d+[.、)]|[·●]|\p{Script=Han}{1,8}[:：])/u.test(current.nfkc.trim())
-    || /^[①-⑳]/u.test(current.trimmed)
+    || /^[①-⑳]/u.test(current.trimmed) || /^[A-Za-z][A-Za-z ]{0,39}[:：]/u.test(current.trimmed)
+    || /^(?:[A-Z][.)]|\([A-Z]\))\s/u.test(current.trimmed)
   const unfinished = !pageTurn && roles.hasParagraph && previous?.role === 'body'
     && !roles.special && !roles.afterClosing && !roles.numbered && !lettered
     && ((current.startsLower && previousTail && !/[.!?:]$/u.test(previousTail))
+      || (input.titleAbbreviationContinuation && !previousShort
+        && referenceLineIsFull(previous, geometry.previousMargin || geometry.margin)
+        && /^[A-Z]/u.test(current.trimmed) && !numberedOrLabel
+        && (/(?:^|\s)(?:Mr|Mrs|Ms|Dr|Prof)\.$/u.test(previousTail)
+          || (!indented && /(?:^|\s)(?:St|Mt)\.$/u.test(previousTail))))
       || (current.startsHan && /\p{Script=Han}/u.test(previousTail)
         && referenceLineIsFull(previous, geometry.previousColumnMargin || geometry.previousMargin || geometry.margin)
         && !/[。！？；：]$/u.test(previousTail) && !numberedOrLabel))
