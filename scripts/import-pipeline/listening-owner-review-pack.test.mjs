@@ -6,6 +6,7 @@ import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync,
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { buildReviewPack, edgeSentences, reviewCuts } from './listening-owner-review-pack.mjs'
+import { writeListeningEvidence } from './lib-listening-evidence.mjs'
 
 const hash = file => `sha256:${createHash('sha256').update(readFileSync(file)).digest('hex')}`
 const put = (file, data) => { mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, JSON.stringify(data)) }
@@ -36,6 +37,30 @@ function fixture() {
   put(path.join(attempt, 'rule-result.json'), { groups: [group] })
   return { temp, root, papers: [paperId], paperId, paperDir, attempt, audio, group, output: path.join(temp, 'pack') }
 }
+
+test('compressed diagnostics produce identical Owner sentences, rounds, cuts and clip bytes; fingerprint includes gzip', () => {
+  const f = fixture()
+  try {
+    const old = buildReviewPack({ ...f, attempts: { [f.paperId]: f.attempt } })
+    const attempt = path.join(path.dirname(f.attempt), 'attempt-compact')
+    cpSync(f.attempt, attempt, { recursive: true })
+    rmSync(path.join(attempt, 'rule-result.json'))
+    writeListeningEvidence({ attempt, apple: { groups: [f.group] }, resolved: { groups: [f.group] },
+      input: { normalization: {} }, rawEvidence: [] })
+    const next = buildReviewPack({ ...f, output: path.join(f.temp, 'compact-pack'), attempts: { [f.paperId]: attempt } })
+    // Only the newly allocated attempt directory changes; compare every other
+    // value, including nested anchor evidence and actual encoded clip digests.
+    const semantic = manifest => JSON.parse(JSON.stringify(manifest.segments)
+      .replaceAll(f.attempt, '<attempt>').replaceAll(attempt, '<attempt>'))
+    assert.deepEqual(semantic(next), semantic(old))
+    assert.equal(next.inputSha256[path.join(attempt, 'diagnostics.json.gz')], hash(path.join(attempt, 'diagnostics.json.gz')))
+    const compressed = path.join(attempt, 'diagnostics.json.gz')
+    writeFileSync(compressed, 'corrupt')
+    assert.throws(() => buildReviewPack({ ...f, output: path.join(f.temp, 'bad-pack'),
+      attempts: { [f.paperId]: attempt } }), /DIAGNOSTIC_INVALID/u)
+    assert.equal(existsSync(path.join(f.temp, 'bad-pack')), false)
+  } finally { rmSync(f.temp, { recursive: true, force: true }) }
+})
 
 test('0.8-second buffer stops at adjacent pause midpoints; context expands exact cut by 3 seconds', () => {
   const r = reviewCuts({ wordStartSeconds: 2, wordEndSeconds: 5, pauses, durationSeconds: 16 })

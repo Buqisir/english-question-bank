@@ -4,6 +4,8 @@ import { createHash } from 'node:crypto'
 import { chmodSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { segmentListening } from './listening-segment.mjs'
+import { reencodeListeningAttempt } from './listening-reencode.mjs'
+import { loadListeningResult } from './lib-listening-evidence.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
@@ -49,7 +51,7 @@ function syntheticWave() {
   }
   return bytes
 }
-test('successful frozen Apple evidence produces a sidecar accepted by the unchanged server contract', t => {
+test('successful frozen Apple evidence produces a sidecar accepted by the v2 server contract', t => {
   const { dir, subject, options } = workspace(t, fixture)
   const result = segmentListening({ ...options, runWhisper: () => assert.fail('usable primary must not run fallback') })
   const review = JSON.parse(readFileSync(result.review, 'utf8'))
@@ -58,6 +60,60 @@ test('successful frozen Apple evidence produces a sidecar accepted by the unchan
   assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
   writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
   assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
+})
+test('pure re-encoding preserves an Owner override and old bytes without invoking ASR or rules', t => {
+  const { dir, options } = workspace(t, fixture)
+  const old = segmentListening({ ...options, runWhisper: () => assert.fail('no fallback') })
+  const output = mkdtempSync(path.join(path.resolve('.scratch'), 'reencode-test-'))
+  t.after(() => rmSync(output, { recursive: true, force: true }))
+  // Exercise the ordinary reader for a historical full, unversioned result.
+  const resolved = loadListeningResult(path.join(old.attempt, 'rule-result.json'))
+  const apple = loadListeningResult(path.join(old.attempt, 'apple-rule.json'))
+  writeFileSync(path.join(old.attempt, 'rule-result.json'), JSON.stringify(resolved))
+  writeFileSync(path.join(old.attempt, 'apple-rule.json'), JSON.stringify(apple))
+  const owner = readJson(old.review)
+  owner.schemaVersion = 'listening-review-v1'
+  owner.method = 'audio_source_comparison'
+  const cut = { startSeconds: 1.234567, endSeconds: 7.765432 }
+  owner.groups[0].playback = { ...cut }
+  Object.assign(owner.groups[0].occurrences[0], cut)
+  const ownerReview = path.join(dir, 'owner-original.json')
+  writeFileSync(ownerReview, JSON.stringify(owner))
+  const files = ['input.json', 'apple-rule.json', 'rule-result.json', 'review.json', 'silence.json']
+    .map(name => path.join(old.attempt, name)).concat(ownerReview)
+  const before = files.map(file => hash(readFileSync(file)))
+  const args = { paperDir: dir, attempt: old.attempt, output, request: options.request, ownerReview }
+  const result = reencodeListeningAttempt(args)
+  assert.equal(result.inference, 'not_run')
+  assert.equal(result.ruleEvaluation, 'not_run')
+  assert.equal(result.navigationUnchanged, true)
+  assert.deepEqual(readJson(result.review).groups, owner.groups)
+  assert.deepEqual(loadListeningResult(path.join(result.attempt, 'rule-result.json')), resolved)
+  assert.deepEqual(files.map(file => hash(readFileSync(file))), before)
+  assert.equal(readJson(path.join(result.attempt, 'input.json')).reencodedFrom.navigationReviewSha256,
+    hash(readFileSync(ownerReview)))
+  const ownerOnly = structuredClone(owner)
+  const notePath = 'listening-review-evidence/owner-only.json'
+  const noteBytes = Buffer.from('{"schemaVersion":"owner-listening-review-notes-v1","checked":true}')
+  writeFileSync(path.join(old.attempt, notePath), noteBytes)
+  ownerOnly.evidence = [{ path: notePath, sha256: hash(noteBytes), byteLength: noteBytes.length,
+    kind: 'review_notes', window: null, settings: null }]
+  ownerOnly.groups[0].occurrences[0].evidencePaths = [notePath]
+  const ownerOnlyFile = path.join(dir, 'owner-only.json')
+  writeFileSync(ownerOnlyFile, JSON.stringify(ownerOnly))
+  const retained = reencodeListeningAttempt({ ...args, ownerReview: ownerOnlyFile })
+  assert.deepEqual(readJson(retained.review).groups, ownerOnly.groups)
+  for (const file of readJson(old.review).evidence.filter(file => file.kind === 'asr_window')) {
+    assert.equal(hash(readFileSync(path.join(retained.attempt, file.path))), file.sha256,
+      'Original ASR survives a narrowed Owner evidence inventory')
+  }
+  assert.throws(() => reencodeListeningAttempt({ ...args, output: path.join(old.attempt, 'bad') }), /outside/u)
+  const changed = structuredClone(options.request)
+  changed.sourceInstructions[0].text = '每段录音读两遍。'
+  assert.throws(() => reencodeListeningAttempt({ ...args, request: changed }), /instructions/u)
+  const raw = owner.evidence.find(file => file.kind === 'asr_window')
+  writeFileSync(path.join(old.attempt, raw.path), '{"changed":true}')
+  assert.throws(() => reencodeListeningAttempt(args), /evidence changed/u)
 })
 test('audio-reviewed final sidecar cuts are loaded literally without applying the producer buffer again', t => {
   const {subject, options} = workspace(t, fixture)

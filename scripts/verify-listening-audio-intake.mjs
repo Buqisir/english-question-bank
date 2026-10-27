@@ -25,6 +25,7 @@ import { assertListeningPlaybackUi, firstListeningSectionRange } from '../shared
 import { mockPaperCoverName } from '../shared/paper-canonical/listeningPresentation.mjs'
 import { validateListeningReview, readListeningReview, reviewedPlaybackSegments } from '../server/paper-import/listeningReview.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
+import { withListeningRuleFixture } from './lib/listeningRuleEvidenceFixture.mjs'
 
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-listening-audio-'))
 const paperId = 'paper-listening-audio-verifier'
@@ -99,7 +100,7 @@ try {
     originalAudioSha256: `sha256:${'c'.repeat(64)}`, playbackAudioSha256: `sha256:${'d'.repeat(64)}`,
     durationSeconds: 90, timebase: 'normalized_playback_seconds', transcriptDigest: digestJson(navigationTranscript) }
   const navigationReview = {
-    schemaVersion: 'listening-review-v1', subject, reviewedBy: 'import_agent', reviewedAt: '2026-10-16T00:00:00.000Z',
+    schemaVersion: 'listening-review-v2', subject, reviewedBy: 'import_agent', reviewedAt: '2026-10-16T00:00:00.000Z',
     method: 'asr_source_comparison', untrustedContentHandledAsData: true,
     scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
     evidence: [{ path: 'listening-review-evidence/window.json', sha256: sha256(evidenceBytes), byteLength: evidenceBytes.length,
@@ -113,7 +114,8 @@ try {
   }
   assert.equal(readListeningReview(navigationRoot, subject, navigationTranscript), null)
   assert.deepEqual(reviewedPlaybackSegments(null), [], 'No positional fallback without review')
-  const validateNavigation = review => validateListeningReview(navigationRoot, review, subject, navigationTranscript)
+  const validateNavigation = review => validateListeningReview(navigationRoot,
+    withListeningRuleFixture(navigationRoot, review, navigationTranscript), subject, navigationTranscript)
   const checkedNavigation = validateNavigation(navigationReview)
   assert.deepEqual(reviewedPlaybackSegments(checkedNavigation).map(group => [group.firstQuestionId, group.startSeconds, group.endSeconds]),
     [['question:listening:1', 3, 31], ['question:listening:2', 43, 71]])

@@ -6,6 +6,8 @@ import { homedir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { LISTENING_REVIEW_VERSION, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
+import { loadListeningResult, writeListeningEvidence } from './lib-listening-evidence.mjs'
 import {
   LISTENING_SEGMENT_RULE, LISTENING_EQUIVALENCES, evaluateListeningEngine, expectedListeningReadings, reconcileListeningEngines,
 } from './lib-listening-segment-rule.mjs'
@@ -215,7 +217,7 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
         throw new Error('LISTENING_REPLAY_EVIDENCE_CHANGED')
       }
     }
-    const oldGroups = json(path.join(replayAttempt, 'apple-rule.json')).groups
+    const oldGroups = loadListeningResult(path.join(replayAttempt, 'apple-rule.json')).groups
     if (groups.some(group => {
       const old = oldGroups.find(g => g.segmentId === group.segmentId)
       const expected = expectedListeningReadings(group, instructions)
@@ -235,6 +237,8 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     normalizationAlgorithm: 'listening-equivalences-v5; source-preserving listening-spoken-projection-v2 (recorded exclusions and source locations; parenthesized Chinese pause durations excluded); finite spelling aliases and negative/positive auxiliary contractions; context-bound s/d expansions (ambiguous s/d retained); integers 0..999999; $/£ and .xx cents; ordinals 1st..31st; AM/PM; HH:MM, explicit-meridiem H.MM/HMM, half past 1..12; typed year/time/cardinal/ordinal expressions; year equivalence requires a four-digit literal and an explicit word reading (2001..2099), standalone or in year context; exact hyphen compound joined/spaced forms licensed by a literal hyphen on either side, with original spelling evidence retained through later time/context rewrites; shared source/ASR character spans, original acoustic run boundaries',
     sourceTextSha256: digest(Buffer.from(JSON.stringify(groups))),
     materializationSha256: digest(materializationBytes), audioSha256: audioHash,
+    instructionsSha256: digestJson(instructions),
+    questionsSha256: digestJson(materialization.listening.questions || []),
     ruleCodeSha256,
     adapterSha256: digest(readFileSync(fileURLToPath(import.meta.url))), subject,
     ...(historical ? { historicalAttempt: path.resolve(replayAttempt),
@@ -264,7 +268,9 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   const base = { groups, instructions, pauses, durationSeconds, fuzzyAnchors,
     questions: materialization.listening.questions, globalAnchorWindows: [primaryWindow] }
   const apple = evaluateListeningEngine({ ...base, windows: [primaryWindow] })
-  write(path.join(attempt, 'apple-rule.json'), apple)
+  // Preserve the primary result at the same point as the historical writer;
+  // scheduling below may append queue issues to apple.groups.
+  const appleDiagnostic = structuredClone(apple)
   const fallback = []
   const scheduled = new Map()
   let modelSha256
@@ -420,14 +426,14 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
   }
   const resolved = reconcileListeningEngines(apple, { groups: fallback })
   const effectiveRule = { ...LISTENING_SEGMENT_RULE, fuzzyAnchorsEnabled: fuzzyAnchors }
-  write(path.join(attempt, 'rule-result.json'), { rule: effectiveRule, groups: resolved })
+  const summary = writeListeningEvidence({ attempt, apple: appleDiagnostic,
+    resolved: { rule: effectiveRule, groups: resolved }, input, rawEvidence: evidence })
   const notes = `listening-review-evidence/${attemptId}-rule.json`
   const notesFile = path.join(attempt, notes)
-  write(notesFile, { rule: effectiveRule, normalization: LISTENING_EQUIVALENCES,
-    input: json(path.join(attempt, 'input.json')), groups: resolved })
+  writeFileSync(notesFile, `${JSON.stringify(summary)}\n`, { flag: 'wx' })
   const bytes = readFileSync(notesFile)
   evidence.push({ path: notes, sha256: digest(bytes), byteLength: bytes.length, kind: 'review_notes', window: null, settings: null })
-  const review = { ...request.report, reviewedAt: new Date().toISOString(),
+  const review = { ...request.report, schemaVersion: LISTENING_REVIEW_VERSION, reviewedAt: new Date().toISOString(),
     method: 'asr_source_comparison', evidence,
     groups: resolved.map(group => ({
       segmentId: group.segmentId, questionNumbers: group.questionNumbers, decision: group.decision,
@@ -444,6 +450,7 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
       })) : [],
     })),
   }
+  assertListeningUploadBudget(evidence)
   if (digest(readFileSync(audio)) !== audioHash || digest(readFileSync(sourceFile)) !== digest(materializationBytes)) {
     throw new Error('LISTENING_INPUT_CHANGED')
   }
