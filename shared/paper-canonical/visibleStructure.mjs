@@ -1,3 +1,4 @@
+import manifestV78 from '../../standards/paper-canonical/manifest-v78.json' with { type: 'json' }
 import manifestV77 from '../../standards/paper-canonical/manifest-v77.json' with { type: 'json' }
 import manifestV76 from '../../standards/paper-canonical/manifest-v76.json' with { type: 'json' }
 import manifestV75 from '../../standards/paper-canonical/manifest-v75.json' with { type: 'json' }
@@ -174,6 +175,13 @@ const manifestV50Profiles = new Map([
   },
 ]))
 const registeredManifestProfiles = new Map([
+  [
+    `${manifestV78.manifestId}@${manifestV78.version}@${digestJson(manifestV78)}`,
+    new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV15].map((profile) => [
+      profile.profileId,
+      { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
+    ])),
+  ],
   [
     `${manifestV77.manifestId}@${manifestV77.version}@${digestJson(manifestV77)}`,
     new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV15].map((profile) => [
@@ -499,7 +507,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(
@@ -512,7 +520,7 @@ function sourceInstructionOverrides(consumption) {
       if (occurrence.sourcePresentation !== undefined) {
         const presentation = occurrence.sourcePresentation
         const instruction = presentation?.instruction
-        if (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
+        if (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
           || !validCanonicalSourcePresentation(presentation)
           || digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence)) {
           reject('source-backed presentation proof is invalid')

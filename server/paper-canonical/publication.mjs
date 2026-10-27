@@ -158,7 +158,7 @@ function publicationError(code, message) {
 
 // Publication schemas have independent successor numbers from authority manifests.
 function publicationSchemaVersion(closure) {
-  return ['71', '73', '74', '75', '76', '77'].includes(closure.authorityRef.manifestVersion) ? '70' : closure.authorityRef.manifestVersion
+  return ['71', '73', '74', '75', '76', '77', '78'].includes(closure.authorityRef.manifestVersion) ? '70' : closure.authorityRef.manifestVersion
 }
 
 function publicationSchema(closure) {
@@ -440,7 +440,7 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
 }
 
 function capturedListeningAudio(sourceCapture, groups, closure) {
-  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77'].includes(closure.authorityRef.manifestVersion)) return null
+  if (!['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78'].includes(closure.authorityRef.manifestVersion)) return null
   const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
   const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
   if (!active && documents.length === 0) return null
@@ -1674,7 +1674,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         || projectedOccurrences.some(occurrence => occurrence.sourcePresentation !== undefined)
         || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1686,7 +1686,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

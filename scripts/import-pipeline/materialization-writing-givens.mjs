@@ -4,7 +4,7 @@ import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/
 // not rewrite producer receipts, resolve other review issues or confirm a Candidate.
 export function confirmMaterializationWritingGivens(materialization, { groupId, givenBlockRefs, confirmed }) {
   if (confirmed !== true) throw new Error('Writing givens require explicit Agent confirmation')
-  if (!/^nck1-source-materialization-v(?:[1-9]|1[01])$/u.test(materialization?.schemaVersion)) {
+  if (!/^nck1-source-materialization-v(?:[1-9]|1[012])$/u.test(materialization?.schemaVersion)) {
     throw new Error(`Unsupported materialization schema: ${materialization?.schemaVersion}`)
   }
   const result = structuredClone(materialization)
@@ -15,7 +15,7 @@ export function confirmMaterializationWritingGivens(materialization, { groupId, 
   if (!Array.isArray(givenBlockRefs) || !givenBlockRefs.length) {
     throw new Error('Writing givens require the complete ordered source block IDs')
   }
-  if (!['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11'].includes(result.schemaVersion)) result.schemaVersion = 'nck1-source-materialization-v7'
+  if (!['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(result.schemaVersion)) result.schemaVersion = 'nck1-source-materialization-v7'
   groups[0].writingTask.givenBlockRefs = [...givenBlockRefs]
   const issues = validateNck1SourceMaterialization(result)
   if (issues.length) throw new Error(`Confirmed writing givens are invalid: ${JSON.stringify(issues)}`)
