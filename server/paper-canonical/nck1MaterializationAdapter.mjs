@@ -2704,7 +2704,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     && !closureAdmitsApplicationDrawingArea(resolveCanonicalAuthority(authorityRef).closure)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_DRAWING_AREA_UNSUPPORTED', 'Application drawing areas require their registered successor authority'))
   }
-  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
+  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Listening instruction correction requires its registered successor authority'))
   }
   if (validation.issues.length > 0) {

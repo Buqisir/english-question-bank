@@ -2,6 +2,9 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { makeSyntheticNck1OcrFixture } from '../../test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs'
 import { produceNck1OcrMaterialization } from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
+import { applyListeningInstructionCorrection } from '../../server/paper-import/listeningInstructionCorrection.mjs'
+import { planMaterializationListeningSource, applyMaterializationListeningSourcePlan } from './materialization-listening-source.mjs'
+import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1OcrOptionEmphasisAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
@@ -236,4 +239,122 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
   for (const relation of splitRaw.paragraphJoins) relation.confirmationSha256 = sha256(encode(split))
   assert(importCanonicalCandidate({ ...input, materializationBytes: encode(splitRaw),
     ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(split) } }).issues.length)
+})
+
+test('v12 cross-page join admits a bound listening-count correction and rejects digest drift', async () => {
+  const fixture = await makeSyntheticNck1OcrFixture({ listening: true, crossPageParagraph: true })
+  const confirmation = { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }
+  const produced = produceNck1OcrMaterialization({ paperId: fixture.paperId,
+    documents: fixture.sourceDocuments, evidence: fixture.evidence, confirmation })
+  const answerItems = confirmation.documents[1].pages.flatMap(page => page.orderedItems)
+  const find = (items, text) => {
+    const matches = items.filter(item => item.text.includes(text))
+    assert.equal(matches.length, 1, text)
+    return matches[0]
+  }
+  const heading = find(answerItems, '高三听力录音原文')
+  const example = find(answerItems, '例如')
+  const exampleSpeech = find(answerItems, 'example only')
+  const mixed = find(answerItems, 'Keep every word')
+  const end = find(answerItems, '应用文评分标准')
+  const labels = find(answerItems, '请从')
+  const cut = mixed.text.indexOf('第一节')
+  const fragment = item => ({ itemId: item.itemId })
+  const receipt = encode({ paperId: fixture.paperId, revisionId: 'ocr-revision', confirmationId: 'ocr-confirmation',
+    reviewerKind: 'import_agent', sourceSetDigest: confirmation.sourceSetDigest, evidenceDigest: confirmation.evidenceDigest, confirmation })
+  let input = { kind: 'nck1-source-materialization', materializationBytes: encode(produced.materialization),
+    documents: fixture.sourceDocuments.map(d => ({ documentId: d.documentId, bytes: d.bytes })),
+    media: produced.mediaFiles, ocrSourceBytes: { evidenceBytes: encode(fixture.evidence), confirmationBytes: encode(confirmation) } }
+  const listeningPlan = planMaterializationListeningSource(input, receipt, {
+    documentId: heading.itemId.split(':')[0], headingItemId: heading.itemId,
+    startItemId: answerItems[answerItems.indexOf(heading) + 1].itemId, endItemId: end.itemId,
+    reason: 'Reviewed the synthetic recording transcript and source boundaries.',
+    roles: [
+      { role: 'example', fragments: [fragment(example), fragment(exampleSpeech)] },
+      { role: 'speech', fragments: [{ itemId: mixed.itemId, start: 0, end: cut }] },
+      { role: 'cue', nextTextNumber: 6, fragments: [{ itemId: mixed.itemId, start: cut, end: mixed.text.length }] },
+      { role: 'cue', nextTextNumber: null, fragments: [fragment(labels)] },
+    ],
+  })
+  const listening = applyMaterializationListeningSourcePlan(input, receipt, listeningPlan, { confirmed: true })
+  let raw = listening.materialization
+  const questionDocument = confirmation.documents[0]
+  const questionItems = questionDocument.pages.flatMap(page => {
+    const observations = fixture.evidence.documents.find(d => d.documentId === questionDocument.documentId)
+      .pages.find(p => p.page === page.page).observations
+    return page.orderedItems.map(item => ({ item, source: paragraphJoinSourceLocator(questionDocument.documentId, page.page, item, observations) }))
+  })
+  const direction = (slotId, text) => {
+    const found = questionItems.filter(entry => entry.item.text.replace(/\s/gu, '').includes(text.replace(/\s/gu, '')))
+    assert.equal(found.length, 1, text)
+    return { slotId, text: found[0].item.text, source: found[0].source }
+  }
+  raw.sourcePresentation = {
+    instructions: [
+      direction('listening.short-dialogue', '每段对话仅读一遍'),
+      direction('listening.long-form', '听第6段材料'),
+      direction('seven-choices', '从短文后的选项中选出'),
+      direction('cloze', '阅读下面短文，从每题所给的四个选项中选出'),
+    ],
+    listeningExample: { state: 'not_supplied', source: { kind: 'page_region', documentId: questionDocument.documentId,
+      page: 1, region: { x: 0, y: 0, width: 1, height: 1 } } },
+  }
+  raw = restoreOcrSourcePresentation({ materialization: raw, evidence: fixture.evidence, confirmation })
+  input = { ...input, materializationBytes: encode(raw) }
+  const reading = raw.groups.find(group => group.slotId === 'reading.a')
+  const itemIds = reading.blocks.map(block => {
+    const match = questionItems.find(entry => digestJson(entry.source) === digestJson(block.source))
+    assert(match)
+    return match.item.itemId
+  })
+  const plan = planMaterializationParagraphJoin(input, receipt,
+    { groupId: reading.groupId, itemIds, reason: 'Synthetic original pages show one continued paragraph.' })
+  const joined = applyMaterializationParagraphJoinPlan(input, receipt, plan, { confirmed: true })
+  assert.equal(joined.materialization.schemaVersion, 'nck1-source-materialization-v12')
+  assert.equal(joined.materialization.paragraphJoins[0].schemaVersion, 'cross-page-paragraph-join-v2')
+  const audio = new TextEncoder().encode('fixture audio')
+  input = { ...input, materializationBytes: joined.materializationBytes,
+    listeningAudio: { relativePath: 'listening/playback.mp3', sha256: sha256(audio),
+      byteLength: audio.length, durationSeconds: 300, mediaType: 'audio/mpeg' } }
+  const instruction = joined.materialization.sourcePresentation.instructions.find(entry => entry.slotId === 'listening.short-dialogue')
+  const content = JSON.stringify({ segments: ['Synthetic repetition evidence'] })
+  const correction = {
+    schemaVersion: 'listening-instruction-correction-v1', policy: 'verified-recording-count-v1',
+    paperId: fixture.paperId, materializationSha256: sha256(input.materializationBytes),
+    transcriptDigest: digestJson(joined.materialization.listening.transcript),
+    originalAudioSha256: sha256(new TextEncoder().encode('fixture original')), playbackAudioSha256: input.listeningAudio.sha256,
+    durationSeconds: 300, reviewedBy: 'import_agent', reviewedAt: '2026-10-16T00:00:00.000Z',
+    method: 'asr_source_comparison', untrustedContentHandledAsData: true,
+    evidence: [{ evidenceId: 'fixture', content, sha256: sha256(new TextEncoder().encode(content)),
+      byteLength: new TextEncoder().encode(content).length, window: { startSeconds: 0, endSeconds: 300 },
+      settings: { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' } }],
+    instructions: [{ slotId: instruction.slotId, source: instruction.source, before: instruction.text,
+      after: instruction.text.replace('仅读一遍', '读两遍'), playCount: 2, reason: 'Synthetic recording has two complete passes.',
+      groups: joined.materialization.listening.transcript.filter(group => group.questionNumbers.every(n => n <= 5))
+        .map((group, index) => ({ segmentId: group.segmentId, occurrences: [0, 1].map(pass => ({
+          startSeconds: index * 40 + pass * 15 + 2, endSeconds: index * 40 + pass * 15 + 12, evidenceIds: ['fixture'],
+        })) })) }],
+  }
+  const correctionBytes = encode(correction)
+  assert.equal(applyListeningInstructionCorrection(input.materializationBytes, correctionBytes, input.listeningAudio)
+    .materialization.sourcePresentation.instructions.find(entry => entry.slotId === instruction.slotId).text, correction.instructions[0].after)
+  const corrected = { ...input, listeningInstructionCorrectionBytes: correctionBytes }
+  const imported = importCanonicalCandidate(corrected)
+  assert.deepEqual(imported.issues, [])
+  assert.equal(imported.candidate.authority.manifestVersion, '78')
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
+  const occurrence = consumption.selections.find(selection => selection.familyContractId === 'listening').projectedOccurrences[0]
+  assert.equal(occurrence.sourcePresentation.instruction.text, correction.instructions[0].after)
+  const request = materializeNck1CanonicalRequest(corrected, { schemaVersion: 'teacher-confirmation-v1', confirmed: true,
+    sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest })
+  const admitted = admitLiveConfirmedNck1MaterializationImport(request.request)
+  assert.equal(admitted.compilation.disposition, 'ready')
+  assert(isLiveConfirmedNck1MaterializationAdmission(admitted))
+  for (const field of ['materializationSha256', 'transcriptDigest', 'playbackAudioSha256']) {
+    const invalid = { ...correction, [field]: `sha256:${'0'.repeat(64)}` }
+    const rejected = importCanonicalCandidate({ ...input, listeningInstructionCorrectionBytes: encode(invalid) })
+    assert(rejected.issues.some(issue => issue.code === 'LISTENING_INSTRUCTION_CORRECTION_INVALID'), field)
+  }
 })
