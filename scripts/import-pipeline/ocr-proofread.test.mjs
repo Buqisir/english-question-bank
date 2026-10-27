@@ -270,7 +270,7 @@ test('excludes English quote fragments from writing commentary and resumes at a 
 })
 
 function referencesFixture(texts, taskTypes = ['continuation'], {
-  lastQuestion, role = 'official_answers', regions = [], visualClassifications = [],
+  lastQuestion, role = 'official_answers', regions = [], visualClassifications = [], starters, producerVersion,
 } = {}) {
   const observations = texts.map((text, i) => ({
     observationId: `o${i}`, region: { x: .1, y: .15 + i * .025, width: .8, height: .02, ...regions[i] },
@@ -279,13 +279,13 @@ function referencesFixture(texts, taskTypes = ['continuation'], {
     documents: [{ documentId: 'answers', role, sha256: 'abc' }],
     groups: [
       ...(lastQuestion ? [{ questions: [{ sourceNumber: lastQuestion }] }] : []),
-      ...taskTypes.map(taskType => ({ groupId: taskType, writingTask: { taskType } })),
+      ...taskTypes.map(taskType => ({ groupId: taskType, writingTask: { taskType, ...(taskType === 'continuation' && starters ? { starters } : {}) } })),
     ],
   }, { documents: [{ documentId: 'answers', pages: [{ observations }] }] },
   { documents: [{ documentId: 'answers', pages: [{ page: 1,
     orderedItems: texts.map((text, i) => ({ itemId: `i${i}`, text, observationIds: [`o${i}`] })),
     visualClassifications,
-  }] }] })
+  }] }] }, { producerVersion })
 }
 
 function standaloneApplicationAdmission(heading, application, continuation, {
@@ -1020,6 +1020,25 @@ test('an unlabeled sample after a reprinted prompt requires confirmation instead
     'An original story.', 'Paragraph 1:', 'A given starter.', '（略）'])
   assert.equal(omitted.groups[0].essays.state, 'not_supplied')
   assert.deepEqual(omitted.groups[0].essays.entries, [])
+})
+
+test('v23 recognizes an unlabeled continuation only with both ordered given starters', t => {
+  const starters = ['Paragraph 1: Mary paused at the gate.', 'Paragraph 2: Slowly, the baby’s cries softened.']
+  const prompt = ['第二节 读后续写', '阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。']
+  const first = 'Mary paused at the gate. She asked her mother for help.'
+  const second = "Slowly, the baby's cries softened. The room grew quiet."
+  const result = referencesFixture([...prompt, first, second], ['continuation'], { starters })
+  assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '), `${first} ${second}`)
+  const diagnostics = []
+  t.mock.method(console, 'error', message => diagnostics.push(message))
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
+  for (const body of [[first], [second, first], [first, '4. 评分细则', second],
+    [first, '（一）其他小节', second], ['Mary paused at the gates. She waited.', second],
+    ['Mary paused at the gate.', second]]) {
+    assert.throws(() => referencesFixture([...prompt, ...body], ['continuation'], { starters }), /unresolved source reference/)
+  }
+  assert.throws(() => referencesFixture([...prompt, first, second], ['continuation'],
+    { starters, producerVersion: 'ocr-source-references-producer-v22' }), /unresolved source reference/)
 })
 
 test('parenthesized Chinese glosses retain English prose and unresolved nonempty samples block capture', t => {

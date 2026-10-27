@@ -489,7 +489,7 @@ export function sourceReferenceWritingLifecycle(lines, {
       && next && !next.figure && !next.table && line.nextSourceItemId === next.itemId
       && isReadingAnswerPair(line.text, next.text)
     const priorStep = readingPairCandidate
-      ? planReferenceCapture(scope.current, factsFor, producerVersion, scoringScopes).steps.at(-1) : null
+      ? planReferenceCapture(scope.current, factsFor, producerVersion, scoringScopes, materialization).steps.at(-1) : null
     const readingPair = priorStep?.state.capturing === true && priorStep.action === 'body'
     if (readingPair || matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
       scope.end()
@@ -616,7 +616,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
   }
   for (const section of sections.values()) {
-    Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes))
+    Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization))
     for (const step of section.steps) if (step.line.itemId) {
       if (section.repeatedTask) step.state.repeatedTask = true
       items.set(step.line.itemId, step.state)
@@ -627,7 +627,7 @@ export function sourceReferenceWritingLifecycle(lines, {
 
 // Reference-capture policy belongs here, never in either consumer. Steps are
 // assembly instructions; their states also describe independent source ownership.
-function planReferenceCapture(section, factsFor, producerVersion, scoringScopes) {
+function planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization) {
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const sectionLines = applicationLetterReferenceLines(section, factsFor, producerVersion)
   const taskType = section.taskType
@@ -653,6 +653,40 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes)
   }
   const capture = createReferenceCapture()
   const steps = []
+  const continuationTasks = (materialization.groups || []).filter(group => group.writingTask?.taskType === 'continuation')
+  const starters = continuationTasks.length === 1 ? continuationTasks[0].writingTask.starters : null
+  const normalized = text => String(text).normalize('NFKC').replace(/[‘’]/gu, "'").replace(/[“”]/gu, '"')
+    .replace(/\s+/gu, ' ').trim()
+  const given = Array.isArray(starters) && starters.length === 2
+    ? starters.map((text, index) => normalized(text).replace(new RegExp(`^Paragraph\\s*${index + 1}\\s*[:：]\\s*`, 'iu'), ''))
+    : []
+  const startsWithGiven = (line, starter) => normalized(line.text).startsWith(starter)
+    && (!normalized(line.text).slice(starter.length) || /^\s/u.test(normalized(line.text).slice(starter.length)))
+  // Only open an unlabeled sample when the first given starts immediately
+  // after the prompt, and the second follows continuous prose in source order.
+  const confirmedUnlabeled = promptIndex => {
+    if (producerVersion !== 'ocr-source-references-producer-v23' || given.length !== 2
+      || given.some(s => !s || !/[.!?]$/u.test(s)) || given[0] === given[1]) return null
+    const first = sectionLines[promptIndex + 1]
+    if (!first || !startsWithGiven(first, given[0])) return null
+    let body = normalized(first.text).slice(given[0].length).trim()
+    for (const line of sectionLines.slice(promptIndex + 2)) {
+      const facts = factsFor(line)
+      if (line.figure || line.table || line.repeatedTaskBoundary || facts.hasHan
+        || firstLineRole('entry-label', facts) || firstLineRole('writing-section', facts)
+        || firstLineRole('scoring-section', facts) || matchesLineRole('writing.part-boundary', facts)
+        || matchesLineRole('writing.continuation-prompt', facts)
+        || matchesLineRole('writing.student-script', facts) || matchesLineRole('writing.omission', facts, { inWriting: true })
+        || !facts.startsEnglishOrQuote) return null
+      if (startsWithGiven(line, given[1])) return body ? first : null
+      if (startsWithGiven(line, given[0])) return null
+      body += normalized(line.text)
+    }
+    return null
+  }
+  const inferredStarts = new Set(sectionLines.flatMap((line, index) =>
+    taskType === 'continuation' && matchesLineRole('writing.continuation-prompt', factsFor(line))
+      ? [confirmedUnlabeled(index)].filter(Boolean) : []))
   let awaitingSourceLabel = false, hasEntry = false, labelItemId = null, explanationPause = false, englishBodyAnchor = false
   let repeatedNeedsLabel = false
   for (const [lineIndex, line] of sectionLines.entries()) {
@@ -697,6 +731,12 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes)
       continue
     }
     const facts = factsFor(line)
+    if (awaitingSourceLabel && inferredStarts.has(line)) {
+      awaitingSourceLabel = false
+      capture.start('essays')
+      hasEntry = false
+      labelItemId = null
+    }
     // Two complete letters can be printed without intervening version labels.
     // A new salutation requires the preceding closing/signature AND a complete
     // bounded new letter; an English line alone never creates this boundary.
