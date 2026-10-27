@@ -974,12 +974,33 @@ function attemptFailure(ctx, push, file, bytes) {
   } catch (error) { fail(`UNKNOWN: 不能证明失败证据属于最新 push：${error.message}`) }
 }
 
+// The append-only attempt history takes precedence over the legacy push marker.
+// A newer or malformed record makes the observation unusable.
+function zeroCandidateAttempt(ctx, push, file, observedAt) {
+  if (digestJson(readJson(ctx.statePath).steps?.push) !== digestJson(push)) fail('UNKNOWN: push 状态已变化')
+  const history = path.join(ctx.fast, 'push-attempts.jsonl')
+  if (existsSync(history)) {
+    const lines = readFileSync(history, 'utf8').trim().split('\n')
+    const attempts = lines.map(line => JSON.parse(line))
+    const last = attempts.at(-1)
+    if (!last || last.paperId !== ctx.paperId || last.startedAt !== push.startedAt
+      || !last.attemptId || last.attemptId !== push.attemptId) fail('UNKNOWN: push 不是最新尝试')
+  } else if (push.attemptId) fail('UNKNOWN: push 尝试记录缺失')
+  const expected = push.attemptId ? `push-${push.attemptId}.log` : 'push.log'
+  if (path.resolve(file) !== path.resolve(ctx.logs, expected)) fail('UNKNOWN: push 日志路径不符')
+  const started = Date.parse(push.startedAt), observed = Date.parse(observedAt)
+  if (!Number.isFinite(started) || !Number.isFinite(observed) || observed - started <= 30 * 60 * 1000) {
+    fail('UNKNOWN: 最后一次 push 未超过 30 分钟')
+  }
+}
+
 function statusObservation(raw, paperId, startedAt) {
   const status = JSON.parse(raw)
   if (status.paperId !== paperId || !Array.isArray(status.revisions)
     || !Object.hasOwn(status, 'latest') || !Object.hasOwn(status, 'latestRevisionId')) fail('UNKNOWN: Review status 不完整或 paperId 不匹配')
   if ((status.latest?.id ?? null) !== (status.latestRevisionId ?? null)
-    || (status.latest && !status.revisions.some(revision => revision.id === status.latest.id))) fail('UNKNOWN: Review latest 不一致')
+    || (status.latest && !status.revisions.some(revision => revision.id === status.latest.id))
+    || (status.revisions.length > 0 && !status.latest)) fail('UNKNOWN: Review latest 不一致')
   const started = Date.parse(startedAt)
   if (!Number.isFinite(started)) fail('UNKNOWN: push startedAt 无效')
   const candidates = []
@@ -1019,8 +1040,12 @@ function reconciliationReceipt(ctx, origin) {
       if (statusReceipt.origin !== origin || statusReceipt.paperId !== ctx.paperId
         || !Number.isFinite(Date.parse(statusReceipt.observedAt))
         || sha256(statusReceipt.response) !== statusReceipt.responseSha256) continue
-      if (stableStringify(attemptFailure(ctx, push, receipt.failurePath, failure)) !== stableStringify(receipt.failure)
-        || stableStringify(statusObservation(statusReceipt.response, ctx.paperId, push.startedAt)) !== stableStringify(receipt.observation)) continue
+      const observation = statusObservation(statusReceipt.response, ctx.paperId, push.startedAt)
+      if (stableStringify(observation) !== stableStringify(receipt.observation)) continue
+      if (receipt.method === 'zero-candidate') {
+        zeroCandidateAttempt(ctx, push, receipt.failurePath, statusReceipt.observedAt)
+        if (observation.candidates.length !== 0) continue
+      } else if (stableStringify(attemptFailure(ctx, push, receipt.failurePath, failure)) !== stableStringify(receipt.failure)) continue
       return true
     }
   } catch { return false }
@@ -1037,7 +1062,13 @@ export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {
   if (!failurePath) fail('reconcile-push 需要 --failure-receipt <路径>')
   const file = path.resolve(failurePath)
   const failureBytes = readFileSync(file)
-  const failure = attemptFailure(ctx, push, file, failureBytes)
+  let failure, method
+  try {
+    failure = attemptFailure(ctx, push, file, failureBytes)
+  } catch {
+    method = 'zero-candidate'
+    zeroCandidateAttempt(ctx, push, file, new Date().toISOString())
+  }
   origin ||= reconciliationOrigin()
   const statusReader = readStatus || (() => {
     const args = cli('review.mjs', 'status', ctx.paperId, '--raw-response')
@@ -1046,7 +1077,8 @@ export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {
     if (result.error || result.status !== 0 || result.signal) fail(`UNKNOWN: Review status 失败 ${result.error?.message || result.stderr || ''}`)
     return result.stdout
   })
-  const raw = await statusReader()
+  let raw
+  try { raw = await statusReader() } catch (error) { fail(`UNKNOWN: Review status 失败：${error.message}`) }
   if (typeof raw !== 'string') fail('UNKNOWN: Review status 响应无效')
   const dir = path.join(ctx.fast, 'push-reconciliation')
   mkdirSync(dir, { recursive: true })
@@ -1055,13 +1087,19 @@ export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {
   const statusReceipt = { paperId: ctx.paperId, origin, observedAt: new Date().toISOString(),
     responseSha256: sha256(raw), response: raw }
   writeJson(path.join(dir, statusName), statusReceipt, 'wx')
-  const observation = statusObservation(raw, ctx.paperId, push.startedAt)
+  let observation
+  try { observation = statusObservation(raw, ctx.paperId, push.startedAt) } catch (error) {
+    fail(`UNKNOWN: Review status 无法对账：${error.message}`)
+  }
   // Fail closed if another process changed the in-memory or persisted push while status was read.
-  latestPushAttempt(ctx, push)
+  if (method === 'zero-candidate') {
+    zeroCandidateAttempt(ctx, push, file, statusReceipt.observedAt)
+    if (observation.candidates.length) fail('UNKNOWN: 已存在 Candidate')
+  } else latestPushAttempt(ctx, push)
   writeFileSync(path.join(dir, failureName), failureBytes, { flag: 'wx' })
   const receipt = { schema: 'fast-push-reconciliation-v1', paperId: ctx.paperId, origin,
     pushStartedAt: push.startedAt, pushDigest: digestJson(push), pushRecord: structuredClone(push), failurePath: file,
-    failureSnapshot: failureName, failureSha256: sha256(failureBytes), failure,
+    failureSnapshot: failureName, failureSha256: sha256(failureBytes), ...(method ? { method } : { failure }),
     statusReceipt: statusName, statusReceiptSha256: sha256(readFileSync(path.join(dir, statusName))), observation }
   const receiptPath = path.join(dir, `receipt-${digestJson(receipt).slice(7)}.json`)
   writeJson(receiptPath, receipt, 'wx')
