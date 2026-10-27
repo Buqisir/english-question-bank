@@ -121,21 +121,25 @@ test('explanation declarations reject missing confirmation, duplicate/foreign id
     sourceInput: { documents: input.sourceDocuments } }), /sealed OCR/u)
 })
 
-test('confirmed scoring titles and standalone sample labels inside a figure cannot be excluded by helper, producer or admission', () => {
+test('confirmed scoring titles and standalone sample labels inside a figure cannot be excluded by helper, producer or admission', t => {
   const original = fixture(), sidecar = capture(original, [declaration(original)])
+  let producerError
+  t.mock.method(console, 'error', message => { producerError = message })
+  t.mock.method(process, 'exit', () => { throw new Error(producerError) })
+  const rejection = /surviving essay or explicit scoring|Unresolved repeated writing task on part heading/u
   for (const figureText of ['应用文评分标准', '参考范文', '范文1', 'Possible Version 2']) {
     const input = fixture(undefined, { figureText })
     const resolved = resolveConfirmedNck1OcrEvidence({ paperId: input.materialization.paperId,
       documents: input.sourceDocuments, evidence: input.evidence, confirmation: input.confirmation })
     assert.deepEqual(resolved.issues, [])
-    assert.throws(() => declaration(input), /surviving essay or explicit scoring/u, figureText)
+    assert.throws(() => declaration(input), rejection, figureText)
     // Forge a correctly bound confirmed declaration to exercise both consumers,
     // rather than relying only on the author helper to reject the contradiction.
     const forged = { ...sidecar.figureExclusions[0], evidenceDigest: digestJson(input.evidence),
       confirmationDigest: digestJson(input.confirmation), confirmed: true }
-    assert.throws(() => capture(input, [forged]), /surviving essay or explicit scoring/u, figureText)
+    assert.throws(() => capture(input, [forged]), rejection, figureText)
     assert.throws(() => assertSourceReferenceAdmission({ ...input,
-      sidecar: { ...sidecar, figureExclusions: [forged] } }), /surviving essay or explicit scoring/u, figureText)
+      sidecar: { ...sidecar, figureExclusions: [forged] } }), rejection, figureText)
   }
   // Mentioning a sample in commentary is not an independent sample label.
   const commentary = fixture(undefined, { figureText: '范文1中人物的情感变化' })
