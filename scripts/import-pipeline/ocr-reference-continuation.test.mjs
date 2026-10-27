@@ -99,9 +99,9 @@ function fixture(pageLines) {
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
 const paragraphs = output => output.groups[0].essays.entries.flatMap(e => e.paragraphs)
 
-test('title abbreviations join indented names only in the current producer', () => {
+test('personal titles join indented names only in the current producer', () => {
   for (const [title, name] of [['Ms.', 'White’s'], ['Dr.', 'Smith'], ['Mr.', 'Jones'],
-    ['Mrs.', 'Brown'], ['St.', 'Louis'], ['Mt.', 'Everest'], ['Prof.', 'Green']]) {
+    ['Mrs.', 'Brown'], ['Prof.', 'Green']]) {
     const input = fixture([[...heading, line(`We met ${title}`, .28), line(`${name} yesterday.`, .31, .115114),
       line('Another complete line.', .34)]])
     const current = paragraphs(buildSourceReferences(...input))
@@ -109,6 +109,27 @@ test('title abbreviations join indented names only in the current producer', () 
     assert.match(current[0].text, new RegExp(`^We met ${title.replace('.', '\\.')} ${name} yesterday\\.`))
     assert.equal(old[0].text, `We met ${title}`)
     assert(old[1].text.startsWith(`${name} yesterday.`))
+  }
+})
+
+test('abbreviation continuation respects short lines and ambiguous place endings', () => {
+  const cases = [
+    ['They lived on Main St.', 'The next morning, they left for school.', .3, .14, false, false],
+    ['They lived on Main St.', 'The next morning, they left for school.', .8, .14, false, false],
+    ['They visited St.', 'Louis the next morning.', .8, .1, true, true],
+    ['Tears welled up in Ms.', 'White’s eyes.', .8, .115114, true, false],
+    ['They met Ms.', 'White arrived the next morning.', .3, .14, false, false],
+    ['They climbed Mt.', 'Everest the next morning.', .8, .14, false, false],
+  ]
+  for (const [first, second, width, left, joined, oldJoined] of cases) {
+    const input = fixture([[...heading, line(first, .28, .1, width), line(second, .31, left),
+      line('Another complete line.', .34)]])
+    for (const [options, expected] of [[{}, joined],
+      [{ producerVersion: 'ocr-source-references-producer-v21' }, oldJoined]]) {
+      const result = paragraphs(buildSourceReferences(...input, options))
+      assert.equal(result[0].text.startsWith(`${first} ${second}`), expected, `${first} / ${second}`)
+      if (!expected) assert.equal(result[0].text, first, `${first} / ${second}`)
+    }
   }
 })
 

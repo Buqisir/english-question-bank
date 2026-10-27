@@ -88,8 +88,11 @@ function referencePolicy(input) {
   const unfinished = !pageTurn && roles.hasParagraph && previous?.role === 'body'
     && !roles.special && !roles.afterClosing && !roles.numbered && !lettered
     && ((current.startsLower && previousTail && !/[.!?:]$/u.test(previousTail))
-      || (input.titleAbbreviationContinuation && /^[A-Z]/u.test(current.trimmed) && !numberedOrLabel
-        && /(?:^|\s)(?:Mr|Mrs|Ms|Dr|St|Mt|Prof)\.$/u.test(previousTail))
+      || (input.titleAbbreviationContinuation && !previousShort
+        && referenceLineIsFull(previous, geometry.previousMargin || geometry.margin)
+        && /^[A-Z]/u.test(current.trimmed) && !numberedOrLabel
+        && (/(?:^|\s)(?:Mr|Mrs|Ms|Dr|Prof)\.$/u.test(previousTail)
+          || (!indented && /(?:^|\s)(?:St|Mt)\.$/u.test(previousTail))))
       || (current.startsHan && /\p{Script=Han}/u.test(previousTail)
         && referenceLineIsFull(previous, geometry.previousColumnMargin || geometry.previousMargin || geometry.margin)
         && !/[。！？；：]$/u.test(previousTail) && !numberedOrLabel))
