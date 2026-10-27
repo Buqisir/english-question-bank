@@ -219,10 +219,29 @@ test('post-listening rubric resumes capture and admission without replacing eith
     entry.paragraphs.map(p => p.text))), [[['Our original application sample.']], [['Our original continuation sample.']]])
   assert.deepEqual(captured.groups.map(group => group.scoring.entries.flatMap(entry =>
     entry.blocks.filter(block => block.kind === 'figure').map(block => [entry.sourceLabel, block.sourceRegionId]))), [
-    [['评分标准', 'answers:page-3:figure-4'],
-      ['评分标准', 'answers:page-3:figure-extra']],
+    [['二、各档次的给分范围和要求', 'answers:page-3:figure-4'],
+      ['二、各档次的给分范围和要求', 'answers:page-3:figure-extra']],
     [['评分标准', 'answers:page-4:figure-5']],
   ])
+})
+
+test('post-listening scoring figure scopes retain version-specific rubric labels', () => {
+  const input = fixture()
+  for (const [version, label] of [
+    ['ocr-source-references-producer-v22', '评分标准'],
+    ['ocr-source-references-producer-v23', '二、各档次的给分范围和要求'],
+  ]) {
+    const scope = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']),
+      { producerVersion: version, materialization: input.materialization })
+    const captured = captureScoringReferences(input, { producerVersion: version })
+    for (const itemId of ['answers:p3:i3', 'answers:p3:i5']) {
+      assert.equal(scope.get(itemId)?.sourceLabel, label, `${version}: ${itemId}`)
+    }
+    const figures = captured.groups[0].scoring.entries.flatMap(entry =>
+      entry.blocks.filter(block => block.kind === 'figure').map(block => [entry.sourceLabel, block.sourceRegionId]))
+    assert.deepEqual(figures, [[label, 'answers:page-3:figure-4'], [label, 'answers:page-3:figure-extra']])
+    if (version.endsWith('v23')) assertSourceReferenceAdmission({ ...input, sidecar: captured })
+  }
 })
 
 test('admission compares retained and historically spaced source hyphens without accepting different words', () => {
@@ -390,6 +409,7 @@ test('independent admission rejects other-task images assigned to the resumed wr
   for (const label of otherTaskHeadings) {
     const input = fixture({ label })
     const sidecar = structuredClone(original)
+    sidecar.groups[0].scoring.entries[0].sourceLabel = label
     for (const block of sidecar.groups[0].scoring.entries[0].blocks) {
       if (block.kind === 'paragraph') {
         block.paragraph.text = block.paragraph.text.replace('二、各档次的给分范围和要求', label)

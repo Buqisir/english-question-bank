@@ -33,7 +33,7 @@ BT /F1 5 Tf 45 ${y + 2} Td (Complete / clear links) Tj ET Q`
 // Original short synthetic rows mirror four-school answer p03 figure-4
 // (scoring heading) and p04 figure-5 (continued criteria), never its passages.
 export function scoringFiguresFixture({ table = false, reverseVisuals = false, labelFirst = false, essays = true,
-  crossPageScoring = false, writingHeading = ['第四部分 写作（满分40分）\n第一节'],
+  crossPageScoring = false, scoringIntro = false, writingHeading = ['第四部分 写作（满分40分）\n第一节'],
   materialization = makeFixture({ listening: false }) } = {}) {
   const documents = materialization.documents.map(document => {
     const pages = document.role === 'official_answers' ? 4 : 1
@@ -50,6 +50,7 @@ export function scoringFiguresFixture({ table = false, reverseVisuals = false, l
       ...(essays ? [['参考范文', .14], ['Our original sample is short.', .18]] : []),
       ['评分标准', .23], ...(table ? [['内容', .27, .1, .3], ['要求', .27, .5, .3]]
         : labelFirst ? [] : [['二、各档次的给分范围和要求', .27]]),
+      ...(scoringIntro ? [['2. First source criterion.', .29]] : []),
       ['Synthetic p03 scoring chart', .33],
       ['3. Additional source criterion.', .5], ['Second synthetic chart', .56],
       ['4. Closing source criterion.', .7],
