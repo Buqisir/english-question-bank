@@ -516,7 +516,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
   }
   for (const section of sections.values()) {
-    Object.assign(section, planReferenceCapture(section, factsFor, producerVersion))
+    Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes))
     for (const step of section.steps) if (step.line.itemId) items.set(step.line.itemId, step.state)
   }
   return { sections, items, taskStarts, listeningStarts, furniture, review }
@@ -524,7 +524,7 @@ export function sourceReferenceWritingLifecycle(lines, {
 
 // Reference-capture policy belongs here, never in either consumer. Steps are
 // assembly instructions; their states also describe independent source ownership.
-function planReferenceCapture(section, factsFor, producerVersion) {
+function planReferenceCapture(section, factsFor, producerVersion, scoringScopes) {
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const sectionLines = applicationLetterReferenceLines(section, factsFor, producerVersion)
   const taskType = section.taskType
@@ -567,7 +567,16 @@ function planReferenceCapture(section, factsFor, producerVersion) {
     }
     if (capture.ended) { emit('ended'); continue }
     if (line.figure) { emit('figure'); continue }
-    if (line.table) { emit('table'); continue }
+    if (line.table) {
+      // A reused appendix entry cannot lend its rubric to a later unscoped
+      // table. Confirmed source ownership must independently name this task.
+      if (explicitTitles && capture.kind === 'scoring'
+        && scoringScopes.get(line.itemId)?.taskType !== taskType) {
+        scopeError(`Source table ${line.table.tableId} has no writing-task scope`)
+      }
+      emit('table')
+      continue
+    }
     const facts = factsFor(line)
     // Two complete letters can be printed without intervening version labels.
     // A new salutation requires the preceding closing/signature AND a complete

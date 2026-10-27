@@ -11,9 +11,28 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
   PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
-import { explicitWritingHeading } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { explicitWritingHeading, isSourceReferenceExplanationStart } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
+
+test('the complete detailed-answer divider ends v19 capture without changing historical title semantics', () => {
+  const texts = ['应用文参考范文', 'Dear Sam,', 'Our club welcomes you.', 'Yours,', 'Li Hua',
+    '读后续写参考范文', 'Mia found the owner.', '【答案详解】', '21. This explanation stays outside references.']
+  const lines = texts.map((text, i) => ({ ...line(text, .1 + i * .03), itemId: `detail:${i}` }))
+  const result = sourceReferenceWritingLifecycle(lines, {
+    materialization: { groups: [] }, answerDocument: { role: 'official_answers' },
+  })
+  assert.equal(result.items.get('detail:7').ended, true)
+  assert.equal(result.items.get('detail:8').ended, true)
+  assert.deepEqual(result.sections.get('continuation').steps.filter(step => step.action === 'body')
+    .map(step => step.line.text), ['Mia found the owner.'])
+  for (const version of [LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION]) {
+    assert.equal(isSourceReferenceExplanationStart('【答案详解】', version), false)
+  }
+  for (const text of ['【答案详解 AI 指导】', '【答案详解】unknown text']) {
+    assert.equal(isSourceReferenceExplanationStart(text), false, text)
+  }
+})
 
 // Bare part/sections plus a variable-width answer grid reproduce the alliance
 // layout without copying its passages, answers or raster assets.

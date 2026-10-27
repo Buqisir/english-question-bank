@@ -100,6 +100,7 @@ export const isSourceReferenceExplanationStart = (text, producerVersion = OCR_SO
   ANSWER_EXPLANATION_START.test(text)
     || (producerVersion !== LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
       && ANSWER_EXPLANATION_HEADING.test(text.normalize('NFKC').trim()))
+    || (usesExplicitWritingTitles(producerVersion) && /^【答案详解】[:：]?$/u.test(text.normalize('NFKC').trim()))
 
 // v19 additions are whole source headings, never substring/score inference.
 // Original item bytes and geometry remain the capture/admission authority.
