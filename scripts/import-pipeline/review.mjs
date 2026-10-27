@@ -81,6 +81,7 @@ import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { LISTENING_REVIEW_VERSION, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { applyListeningInstructionCorrection, correctedListeningCount, LISTENING_INSTRUCTION_CORRECTION_FILE, LISTENING_INSTRUCTION_CORRECTION_POLICY } from '../../server/paper-import/listeningInstructionCorrection.mjs'
 import {
   renderReviewDiagnosticEdition,
@@ -260,7 +261,7 @@ function producerBuildId() {
 }
 
 function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
-  return files.map((file) => {
+  const descriptors = files.map((file) => {
     const bytes = readFileSync(resolveReviewFile(paperDir, file.path))
     return {
       ...file,
@@ -268,6 +269,8 @@ function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
       byteLength: bytes.byteLength,
     }
   })
+  assertListeningUploadBudget(descriptors)
+  return descriptors
 }
 
 async function uploadReviewBundle(paperDir, manifest) {
@@ -1091,7 +1094,7 @@ function listeningReview(paperId, command) {
       transcript,
       sourceInstructions: loaded.materialization.sourcePresentation?.instructions || [],
       report: {
-        schemaVersion: 'listening-review-v1', subject, reviewedBy: 'import_agent', reviewedAt: null,
+        schemaVersion: LISTENING_REVIEW_VERSION, subject, reviewedBy: 'import_agent', reviewedAt: null,
         method: 'asr_source_comparison', untrustedContentHandledAsData: true,
         scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
         evidence: [],

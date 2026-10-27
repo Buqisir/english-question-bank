@@ -16,7 +16,7 @@ import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mj
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
-import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } from '../paper-import/listeningReview.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
@@ -571,10 +571,13 @@ function primarySourceType(materialization, analyzedPackage = false) {
   return source?.mediaType?.includes('wordprocessingml') ? 'docx' : 'pdf'
 }
 
-function loadReviewedListening(rootDir, loaded, candidate = null) {
+function loadReviewedListening(rootDir, loaded, candidate = null, sealedListening = null) {
   if (!existsSync(resolveReviewFile(rootDir, LISTENING_REVIEW_FILE))) return null
   const subject = listeningReviewSubject(loaded, candidate || importNck1ReviewCandidate(rootDir, loaded).candidate)
-  return readListeningReview(rootDir, subject, loaded.materialization.listening.transcript)
+  return sealedListening
+    ? readSealedListeningReview(rootDir, subject, loaded.materialization.listening.transcript,
+      sealedListening.revision, sealedListening.manifest)
+    : readListeningReview(rootDir, subject, loaded.materialization.listening.transcript)
 }
 
 export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest = null) {
@@ -1711,7 +1714,8 @@ function sealedReferenceReceipt(revision, manifest = revision.manifest) {
 
 export function buildNck1SealedReviewProjection(rootDir, revision, { manifest = revision.manifest, ...options } = {}) {
   return buildNck1ReviewProjectionInternal(rootDir,
-    { ...options, expectedCandidateDigest: revision.candidateDigest }, readFrozenProducts, sealedReferenceReceipt(revision, manifest))
+    { ...options, expectedCandidateDigest: revision.candidateDigest }, readFrozenProducts,
+    sealedReferenceReceipt(revision, manifest), { revision, manifest })
 }
 
 // Only this entry constructs the private product reader. There is no public
@@ -1760,7 +1764,7 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
       }
       const projection = buildNck1ReviewProjectionInternal(snapshot.directory,
         { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts,
-        sealedReferenceReceipt(revision))
+        sealedReferenceReceipt(revision), { revision, manifest: revision.manifest })
       onMemory('projection')
       baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence,
         validatedListeningReview: projection.reviewedListening })
@@ -1780,22 +1784,22 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
   })
 }
 
-function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null) {
-  return withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir, options, readProducts, referenceReceipt))
+function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null, sealedListening = null) {
+  return withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir, options, readProducts, referenceReceipt, sealedListening))
 }
 
 function buildNck1ReviewProjectionUncached(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
-} = {}, readProducts, referenceReceipt) {
+} = {}, readProducts, referenceReceipt, sealedListening) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest)
   if (!imported.candidate || imported.issues.length > 0) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
   }
-  const reviewedListening = loadReviewedListening(rootDir, loaded, imported.candidate)
+  const reviewedListening = loadReviewedListening(rootDir, loaded, imported.candidate, sealedListening)
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   if (!preview.compilation) {
     const issue = preview.unresolvedIssues?.[0]

@@ -4,7 +4,7 @@ import { DatabaseSync } from 'node:sqlite'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { validateMediaPublication } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mjs'
-import { readListeningReview } from '../paper-import/listeningReview.mjs'
+import { readSealedListeningReview } from '../paper-import/listeningReview.mjs'
 import { applySpellingReview, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import { reviewBackfillDiagnostic } from './reviewBackfillDiagnostic.mjs'
 import { buildStoredReviewSubject } from './reviewSubject.mjs'
@@ -47,7 +47,7 @@ export function extractStoredListeningReview(directory, revision, preview, evide
     durationSeconds: audio.durationSeconds, timebase: 'normalized_playback_seconds',
     transcriptDigest: digestJson(transcript),
   }
-  try { return readListeningReview(directory, subject, transcript) }
+  try { return readSealedListeningReview(directory, subject, transcript, revision) }
   catch (error) {
     const review = evidence.find(file => file.path === 'listening-review-v1.json')?.json
     error.pointer ||= review?.subject?.transcriptDigest !== subject.transcriptDigest

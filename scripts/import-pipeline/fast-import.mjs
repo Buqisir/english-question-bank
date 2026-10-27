@@ -644,6 +644,7 @@ async function afterProofread(ctx, args) {
       const ruleFile = attempt && path.join(attempt, 'rule-result.json')
       const inputFile = attempt && path.join(attempt, 'input.json')
       if (!ruleFile || !existsSync(ruleFile)
+        || readJson(ruleFile).schemaVersion !== 'listening-local-result-v2'
         || readJson(ruleFile).rule.version !== LISTENING_SEGMENT_RULE.version
         || !existsSync(inputFile)
         || readJson(inputFile).ruleCodeSha256 !== sha256(readFileSync(path.join(scripts, 'lib-listening-segment-rule.mjs')))) {
