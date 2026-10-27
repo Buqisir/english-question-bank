@@ -118,7 +118,7 @@ function fixture(t, referencesVersion = version) {
 }
 
 test('producer and driver import the same pure version constant; current results remain cache hits', async t => {
-  assert.equal(version, 'ocr-source-references-producer-v21')
+  assert.equal(version, 'ocr-source-references-producer-v22')
   assert.equal(producerVersion, version)
   const { dir, ctx, calls, options } = fixture(t)
   const before = snapshot(dir)
@@ -181,7 +181,7 @@ test('dead loopback binding never invokes a network client or local Review wrapp
   assert.equal(child.status, 0, child.stderr || child.stdout)
 })
 
-for (const old of ['ocr-source-references-producer-v1', 'ocr-source-references-producer-v16', 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18', undefined]) {
+for (const old of ['ocr-source-references-producer-v1', 'ocr-source-references-producer-v16', 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18', 'ocr-source-references-producer-v21', undefined]) {
   test(`stale/missing version (${old}) rebuilds downstream once and preserves sealed OCR bytes`, async t => {
     const { ctx, calls, options } = fixture(t, old)
     // Explicit undefined removes the field instead of using fixture's default.

@@ -274,9 +274,9 @@ test('v17–v20 repeated-section lifecycle retains exact pre-fix replay bytes', 
   }
 })
 
-test('sealed v17–v20 references retain exact bytes and are rejected on first admission', () => {
+test('sealed v17–v21 references retain exact bytes and are rejected on first admission', () => {
   const input = scoringFiguresFixture()
-  for (const version of [17, 18, 19, 20]) {
+  for (const version of [17, 18, 19, 20, 21]) {
     const sidecar = captureScoringReferences(input, { producerVersion: `ocr-source-references-producer-v${version}` })
     const sourceReferencesBytes = Buffer.from(JSON.stringify(sidecar))
     assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt: {
@@ -495,7 +495,7 @@ test('first admission rejects missing, legacy and unknown producer versions befo
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
   for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v22', null]) {
+    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -578,7 +578,7 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v22']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }

@@ -99,6 +99,35 @@ function fixture(pageLines) {
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
 const paragraphs = output => output.groups[0].essays.entries.flatMap(e => e.paragraphs)
 
+test('title abbreviations join indented names only in the current producer', () => {
+  for (const [title, name] of [['Ms.', 'White’s'], ['Dr.', 'Smith'], ['Mr.', 'Jones'],
+    ['Mrs.', 'Brown'], ['St.', 'Louis'], ['Mt.', 'Everest'], ['Prof.', 'Green']]) {
+    const input = fixture([[...heading, line(`We met ${title}`, .28), line(`${name} yesterday.`, .31, .115114),
+      line('Another complete line.', .34)]])
+    const current = paragraphs(buildSourceReferences(...input))
+    const old = paragraphs(buildSourceReferences(...input, { producerVersion: 'ocr-source-references-producer-v21' }))
+    assert.match(current[0].text, new RegExp(`^We met ${title.replace('.', '\\.')} ${name} yesterday\\.`))
+    assert.equal(old[0].text, `We met ${title}`)
+    assert(old[1].text.startsWith(`${name} yesterday.`))
+  }
+})
+
+test('title abbreviation continuation excludes labels, numbering, other abbreviations and case variants', () => {
+  for (const [previous, next, numbered] of [['Mrs.', '1. A new paragraph', false],
+    ['Mrs.', 'Paragraph 1: A new paragraph', true], ['Mrs.', 'Note: A new paragraph', false],
+    ['Mrs.', 'A. A new paragraph', false],
+    ['U.S.', 'Another paragraph', false], ['ms.', 'White arrived', false], ['Ms.', 'a lowercase line', false]]) {
+    const input = boundary()
+    input.previous = { role: 'body', text: `It ended with ${previous}`, right: .9, page: 1 }
+    input.current = computeLineFacts({ text: next, page: 1, left: .14 })
+    input.geometry.margin = { left: .1, right: .9 }
+    input.roles = { hasParagraph: true, numbered }
+    input.titleAbbreviationContinuation = true
+    delete input.referenceContext
+    assert.equal(decideLineJoin(input).resolution, 'separate', `${previous} / ${next}`)
+  }
+})
+
 test('Liaoning-shaped scoring wrap keeps left-bottom and right-top provenance separate', () => {
   const first = '2. 情节合理性：情绪转变是否自然（从愤怒到体谅需有过'
   const second = '渡），冲突解决方式是否符合“亲情包容”的核心；'
