@@ -36,6 +36,7 @@ import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
 import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
 import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
+import { retainOwnerListening } from './lib-finish-owner-listening.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -798,6 +799,12 @@ async function installListening(ctx) {
   const result = ctx.state.data.listeningSegmentAttempt
   if (!result?.review || !existsSync(result.review)) fail('缺少听力分段规则结果；先运行 after-proofread')
   const report = readJson(result.review)
+  const retained = await retainOwnerListening({
+    paperDir: ctx.paperDir, attempt: result.attempt, report,
+    verify: () => run(ctx, 'verify-listening', cli('review.mjs', 'verify-listening-review', ctx.paperId)),
+    log: say,
+  })
+  if (retained) return retained
   for (const file of report.evidence) {
     const source = path.join(result.attempt, file.path)
     const target = path.join(ctx.paperDir, file.path)
