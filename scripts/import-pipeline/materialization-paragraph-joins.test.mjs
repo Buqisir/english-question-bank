@@ -5,6 +5,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { resolveCrossPageParagraphJoins } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { verifyCrossPageParagraphJoinEvidence } from '../../server/paper-import/crossPageParagraphJoinEvidence.mjs'
+import { nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { planMaterializationParagraphJoin, applyMaterializationParagraphJoinPlan } from './materialization-paragraph-joins.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 import { confirmMaterializationWritingGivens } from './materialization-writing-givens.mjs'
@@ -38,7 +39,7 @@ function fixture(confirmationVersion = 'nck1-ocr-source-confirmation-v3') {
   const options = { groupId: group.groupId, itemIds: pages.map(page => page.orderedItems[0].itemId), reason: '原页续行不缩进；属于同一自然段' }
   const plan = planMaterializationParagraphJoin(input, receiptBytes, options)
   const result = applyMaterializationParagraphJoinPlan(input, receiptBytes, plan, { confirmed: true }).materialization
-  const proof = { evidence, confirmation, confirmationBytes: input.ocrSourceBytes.confirmationBytes,
+  const proof = { evidence, confirmation, confirmationBytes: input.ocrSourceBytes.confirmationBytes, authorityRef: nck1CrossPageJoinV2AuthorityRef,
     expected: structuredClone(m), resolved: { issues: [], structures: new Map([['paper', {
       body: group.blocks.map(block => ({ kind: 'paragraph', text: block.content[0].text, sourceIndex: block.source })),
     }]]) } }
@@ -163,6 +164,54 @@ test('sealed v2 Reading uses a new relation/envelope without changing confirmati
   assert.equal(verifyCrossPageParagraphJoinEvidence(f.result, f.proof).length, 1)
   assert.deepEqual(f.plan.before, f.proof.confirmation.documents[0].pages.map(page => page.orderedItems[0].text))
   assert.deepEqual(f.input.ocrSourceBytes.confirmationBytes, f.proof.confirmationBytes)
+})
+
+test('v79 scopes producer issues to the separate answer document without mutating them', () => {
+  const allowed = [
+    { code: 'NCK1_OCR_LISTENING_TRANSCRIPT_AMBIGUOUS', path: 'listening.transcript', message: 'ambiguous', source: { documentId: 'answers' } },
+    { code: 'NCK1_OCR_ANSWER_MISSING', path: 'answers.21', message: 'missing', source: { documentId: 'answers' } },
+    { code: 'NCK1_OCR_ANSWER_RANGE_AMBIGUOUS', path: 'answers.1-65', message: 'ambiguous', source: { documentId: 'answers' } },
+  ]
+  for (const version of ['nck1-ocr-source-confirmation-v2', 'nck1-ocr-source-confirmation-v3']) {
+    for (const issues of [...allowed.map(issue => [issue]), allowed]) {
+      const f = fixture(version)
+      f.proof.authorityRef = nck1CrossPageProducerIssueAuthorityRef
+      f.proof.expected.issues = structuredClone(issues)
+      const before = structuredClone(f.proof.expected.issues)
+      assert.equal(verifyCrossPageParagraphJoinEvidence(f.result, f.proof).length, 1)
+      assert.deepEqual(f.proof.expected.issues, before)
+      f.proof.authorityRef = nck1CrossPageJoinV2AuthorityRef
+      assert.throws(() => verifyCrossPageParagraphJoinEvidence(f.result, f.proof), /complete verified OCR/)
+    }
+  }
+  const bad = [
+    i => { i.path = 'answers.20' },
+    i => { i.path = 'answers.21.extra' },
+    i => { i.source = null },
+    i => { i.source.documentId = 'paper' },
+    i => { i.source.documentId = 'unknown' },
+    i => { i.source = { documentId: 'answers', page: 99, region: { x: 0, y: 0, width: 1, height: 1 } } },
+    i => { i.extra = true },
+    i => { i.code = 'NCK1_OCR_OTHER' },
+  ]
+  for (const mutate of bad) {
+    const f = fixture(); f.proof.authorityRef = nck1CrossPageProducerIssueAuthorityRef
+    const issue = structuredClone(allowed[1]); mutate(issue)
+    f.proof.expected.issues = [allowed[0], issue]
+    assert.throws(() => verifyCrossPageParagraphJoinEvidence(f.result, f.proof),
+      error => error.code === 'MATERIALIZATION_PARAGRAPH_JOIN_PRODUCER_ISSUE')
+  }
+  for (const mutate of [
+    f => { f.proof.expected.groups[1].groupId = f.proof.expected.groups[0].groupId },
+    f => { f.proof.expected.groups[0].questions[1].canonicalNumber = f.proof.expected.groups[0].questions[0].canonicalNumber },
+    f => { f.result.documents.find(document => document.role === 'official_answers').role = 'question_and_answers' },
+  ]) {
+    const f = fixture(); f.proof.authorityRef = nck1CrossPageProducerIssueAuthorityRef
+    f.proof.expected.issues = [allowed[1]]; mutate(f)
+    assert.throws(() => verifyCrossPageParagraphJoinEvidence(f.result, f.proof))
+  }
+  const f = fixture(); delete f.proof.authorityRef
+  assert.throws(() => verifyCrossPageParagraphJoinEvidence(f.result, f.proof), /authority policy/)
 })
 
 test('historical v1 retains its v3-only interpretation; v2 cannot be downgraded', () => {

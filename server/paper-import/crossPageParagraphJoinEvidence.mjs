@@ -1,10 +1,48 @@
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { resolveCrossPageParagraphJoins, paragraphFragmentText, paragraphJoinSourceLocator,
   CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
+import { validateNck1ProducerGroups } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 
 const same = (a, b) => digestJson(a) === digestJson(b)
 const flatten = blocks => blocks.flatMap(block => block.kind === 'framed_columns'
   ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
+
+function scopedProducerIssue(issue, materialization, relation, evidence, confirmation, resolved) {
+  if (!issue || typeof issue !== 'object' || Array.isArray(issue)
+    || Object.keys(issue).sort().join(',') !== 'code,message,path,source'
+    || typeof issue.message !== 'string') return false
+  const answer = materialization.documents.filter(document => !document.renditionOf && document.role === 'official_answers')
+  const questions = materialization.documents.filter(document => !document.renditionOf && document.role === 'question_source')
+  if (answer.length !== 1 || questions.length !== 1 || answer[0].documentId === questions[0].documentId
+    || !['reading', 'cloze', 'grammar-fill'].includes(relation.group.family)
+    || relation.join.fragments.some(fragment => fragment.source.documentId !== questions[0].documentId)) return false
+  const src = issue.source
+  if (!src || typeof src !== 'object' || Array.isArray(src) || src.documentId !== answer[0].documentId) return false
+  const keys = Object.keys(src).sort().join(',')
+  if (keys !== 'documentId' && keys !== 'documentId,page,region') return false
+  if (keys !== 'documentId') {
+    const region = src.region
+    if (!Number.isInteger(src.page) || src.page < 1 || src.page > answer[0].pageCount
+      || !region || Object.keys(region).sort().join(',') !== 'height,width,x,y'
+      || !['x', 'y', 'width', 'height'].every(key => Number.isFinite(region[key]))
+      || region.x < 0 || region.y < 0 || region.width <= 0 || region.height <= 0
+      || region.x + region.width > 1 || region.y + region.height > 1
+      || evidence.documents.filter(d => d.documentId === src.documentId).flatMap(d => d.pages.filter(p => p.page === src.page)).length !== 1
+      || confirmation.documents.filter(d => d.documentId === src.documentId).flatMap(d => d.pages.filter(p => p.page === src.page)).length !== 1
+      || !(resolved.structures.get(src.documentId)?.body || []).some(item => item.sourceIndex?.page === src.page && same(item.sourceIndex.region, region))) return false
+  }
+  if (issue.code === 'NCK1_OCR_LISTENING_TRANSCRIPT_AMBIGUOUS') return issue.path === 'listening.transcript'
+  if (issue.code === 'NCK1_OCR_ANSWER_MISSING') {
+    const match = /^answers\.([1-9]\d*)$/u.exec(issue.path)
+    return !!match && Number(match[1]) >= 21 && Number(match[1]) <= 65
+  }
+  if (issue.code === 'NCK1_OCR_ANSWER_RANGE_AMBIGUOUS') {
+    const match = /^answers\.([1-9]\d*)-([1-9]\d*)$/u.exec(issue.path)
+    return !!match && Number(match[1]) <= Number(match[2]) && Number(match[2]) <= 65
+  }
+  return false
+}
 
 function verifyBlankIdentity(group, expected, blocks, reject) {
   const mapping = owner => owner.questions.map(({ questionId, sourceNumber, canonicalNumber, blankId }) =>
@@ -22,10 +60,15 @@ function verifyBlankIdentity(group, expected, blocks, reject) {
 
 // Call only after resolveConfirmedNck1OcrEvidence accepted the complete source
 // bytes. The producer's unmodified groups are the ownership authority here.
-export function verifyCrossPageParagraphJoinEvidence(materialization, { evidence, confirmation, confirmationBytes, resolved, expected }) {
+export function verifyCrossPageParagraphJoinEvidence(materialization, { evidence, confirmation, confirmationBytes, resolved, expected, authorityRef }) {
   const relations = resolveCrossPageParagraphJoins(materialization)
   const reject = message => { throw new Error(`Cross-page paragraph join evidence: ${message}`) }
   if (!relations.length) return relations
+  const policy = authorityRef && same(authorityRef, nck1CrossPageProducerIssueAuthorityRef) ? 'scoped'
+    : authorityRef && (same(authorityRef, nck1CrossPageJoinV2AuthorityRef)
+      || (relations.every(relation => relation.join.schemaVersion !== CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2)
+        && resolveCanonicalAuthority(authorityRef).ok)) ? 'legacy' : null
+  if (!policy) reject('unknown or missing authority policy')
   if (confirmation?.confirmed !== true
     || evidence?.paperId !== materialization.paperId || confirmation.paperId !== materialization.paperId
     || resolved?.issues?.length || !expected?.groups) reject('requires the complete verified OCR stream for its confirmation version')
@@ -34,7 +77,27 @@ export function verifyCrossPageParagraphJoinEvidence(materialization, { evidence
     const mixed = join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2
     if (!(mixed ? ['nck1-ocr-source-confirmation-v2', 'nck1-ocr-source-confirmation-v3']
       : ['nck1-ocr-source-confirmation-v3']).includes(confirmation.schemaVersion)
-      || (mixed && expected.issues?.length)) reject('requires the complete verified OCR stream for its relation and confirmation version')
+      ) reject('requires the complete verified OCR stream for its relation and confirmation version')
+    if (mixed && (!Array.isArray(expected.issues) || expected.issues.length)) {
+      if (policy === 'legacy') reject('requires the complete verified OCR stream for its relation and confirmation version')
+      const blockedIndex = Array.isArray(expected.issues)
+        ? expected.issues.findIndex(issue => !scopedProducerIssue(issue, materialization, relation, evidence, confirmation, resolved))
+        : 0
+      if (blockedIndex !== -1) {
+        const blocked = Array.isArray(expected.issues) ? expected.issues[blockedIndex] : null
+        const error = new Error(`Cross-page producer issue blocks join ${join.joinId} group ${group.groupId}: ${JSON.stringify(blocked)}`)
+        error.code = 'MATERIALIZATION_PARAGRAPH_JOIN_PRODUCER_ISSUE'
+        throw error
+      }
+      if (policy === 'scoped') {
+        const groupIssues = validateNck1ProducerGroups(expected)
+        if (groupIssues.length) {
+          const error = new Error(`Cross-page producer issue blocks join ${join.joinId} group ${group.groupId}: ${JSON.stringify(groupIssues[0])}`)
+          error.code = 'MATERIALIZATION_PARAGRAPH_JOIN_PRODUCER_ISSUE'
+          throw error
+        }
+      }
+    }
     if (join.sourceSetDigest !== evidence.sourceSetDigest
       || join.sourceSetDigest !== confirmation.sourceSetDigest
       || join.evidenceDigest !== evidence.evidenceDigest

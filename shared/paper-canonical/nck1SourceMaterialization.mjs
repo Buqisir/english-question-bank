@@ -738,6 +738,15 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
   return { questionIds, ids }
 }
 
+// Replay the producer's group checks without suppressing or modifying its issues.
+export function validateNck1ProducerGroups(value) {
+  if (!Array.isArray(value?.documents)) return [issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'Producer documents are required')]
+  const documents = new Map(value.documents.map(document => [document.documentId, document]))
+  const issues = []
+  validateGroups(value.groups, documents, [], issues, true, true, true, true)
+  return issues
+}
+
 function validateAnswers(answers, questionIds, documents, issues) {
   if (!Array.isArray(answers) || answers.length !== 45) {
     issues.push(issue('MATERIALIZATION_ANSWERS_INCOMPLETE', '$.answers', 'Official answers must cover canonical questions 21-65 exactly once'))

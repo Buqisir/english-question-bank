@@ -7,7 +7,9 @@ import { planMaterializationListeningSource, applyMaterializationListeningSource
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
-import { nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1OcrOptionEmphasisAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
+import { nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
+import { verifyCrossPageParagraphJoinEvidence } from '../../server/paper-import/crossPageParagraphJoinEvidence.mjs'
+import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { paragraphJoinSourceLocator } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { projectCanonicalConsumerGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
@@ -67,12 +69,18 @@ test('confirmed cross-page relation joins only Canonical, survives public admiss
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
   const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
-  assert.equal(consumption.authorityRef.manifestVersion, '78')
+  assert.equal(consumption.authorityRef.manifestVersion, '79')
   const request = materializeNck1CanonicalRequest(joinedInput, { schemaVersion: 'teacher-confirmation-v1', confirmed: true,
     sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest })
   const admitted = admitLiveConfirmedNck1MaterializationImport(request.request)
   assert.equal(admitted.compilation.disposition, 'ready')
   assert(isLiveConfirmedNck1MaterializationAdmission(admitted))
+  const v78 = importCanonicalCandidate(joinedInput, undefined, { materializationAuthorityRef: nck1CrossPageJoinV2AuthorityRef })
+  assert.deepEqual(v78.issues, [])
+  const legacyRequest = materializeNck1CanonicalRequest(joinedInput, { schemaVersion: 'teacher-confirmation-v1', confirmed: true,
+    sourceDigest: v78.candidate.source.sha256, candidateDigest: v78.candidate.candidateDigest })
+  assert.equal(legacyRequest.request.authority.manifestVersion, '78')
+  assert.equal(admitLiveConfirmedNck1MaterializationImport(legacyRequest.request).compilation.disposition, 'ready')
   const historical = structuredClone(applied.materialization)
   historical.schemaVersion = 'nck1-source-materialization-v8'
   historical.paragraphJoins[0].schemaVersion = 'cross-page-paragraph-join-v1'
@@ -139,6 +147,24 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
   }
   const imported = importCanonicalCandidate(input)
   assert.deepEqual(imported.issues, [])
+  const replay = resolveConfirmedNck1OcrEvidence({ paperId: m.paperId, documents: fixture.sourceDocuments,
+    evidence: fixture.evidence, confirmation })
+  const answerId = m.documents.find(document => document.role === 'official_answers').documentId
+  const producerIssues = [
+    { code: 'NCK1_OCR_ANSWER_MISSING', path: 'answers.61', message: 'missing', source: { documentId: answerId } },
+    { code: 'NCK1_OCR_ANSWER_RANGE_AMBIGUOUS', path: 'answers.32-36', message: 'range', source: { documentId: answerId } },
+    { code: 'NCK1_OCR_LISTENING_TRANSCRIPT_AMBIGUOUS', path: 'listening.transcript', message: 'transcript', source: { documentId: answerId } },
+  ]
+  const expected = { ...structuredClone(m), issues: structuredClone(producerIssues) }
+  const scoped = verifyCrossPageParagraphJoinEvidence(decode(input.materializationBytes), {
+    evidence: fixture.evidence, confirmation, confirmationBytes: input.ocrSourceBytes.confirmationBytes,
+    resolved: replay, expected, authorityRef: nck1CrossPageProducerIssueAuthorityRef,
+  })
+  assert.equal(scoped.length, 3)
+  assert.deepEqual(expected.issues, producerIssues)
+  const unresolved = decode(input.materializationBytes)
+  unresolved.issues = producerIssues
+  assert(importCanonicalCandidate({ ...input, materializationBytes: encode(unresolved) }).issues.length)
   const derived = deriveNck1MaterializationBundle(input)
   assert.deepEqual(derived.issues, [])
   for (const group of derived.source.groups.filter(g => !relations.some(r => r.groupId === g.groupId))) {
@@ -162,7 +188,7 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
     assert(!Object.hasOwn(group.sourceSpanRefsByTarget, `content_node:${raw.blocks[1].blockId}`))
     for (const [index, fragment] of relation.fragments.entries()) {
       const observation = derived.source.observations.find(o => o.observationId === `observation:paragraph-join:${relation.joinId}:${index + 1}`)
-      assert.equal(observation.extraction.version, '16')
+      assert.equal(observation.extraction.version, '17')
       assert.equal(observation.value.text, sourceItems.find(value => value.item.itemId === fragment.itemId).item.text)
       for (const part of raw.blocks[index].content) {
         if (part.kind !== 'blank_ref') continue
@@ -191,7 +217,7 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
     sourceAssetVersion: 1, nck1MaterializationConfirmationProof: admitted.proof })
   const published = validateCanonicalPublicationBundle({ manifest: sealed.manifest, sourceAsset: sealed.sourceAsset,
     readArtifact: path => sealed.artifacts[path] ?? sealed.sourceEvidence[path] })
-  assert.equal(published.manifest.authority.manifestVersion, '78')
+  assert.equal(published.manifest.authority.manifestVersion, '79')
   for (const relation of relations) {
     const group = published.groups.find(g => g.identity.groupId === relation.groupId)
     assert.deepEqual(group.content, preview.compilation.artifacts.canonicalPaper.questionGroups.find(g => g.identity.groupId === relation.groupId).content,
@@ -341,7 +367,7 @@ test('v12 cross-page join admits a bound listening-count correction and rejects 
   const corrected = { ...input, listeningInstructionCorrectionBytes: correctionBytes }
   const imported = importCanonicalCandidate(corrected)
   assert.deepEqual(imported.issues, [])
-  assert.equal(imported.candidate.authority.manifestVersion, '78')
+  assert.equal(imported.candidate.authority.manifestVersion, '79')
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
   const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
