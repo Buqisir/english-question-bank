@@ -1367,7 +1367,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures, { producerVersion })
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures, { producerVersion, materialization })
   const excludedFigures = referenceFigures.filter(figure =>
     !assignedFigures.has(figure) && (objectiveFigures.has(sourceReferenceFigureIdentity(figure))
       || explanationFigures.has(sourceReferenceFigureIdentity(figure))))

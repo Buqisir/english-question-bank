@@ -8,10 +8,11 @@ import { createWritingScope, createReferenceCapture } from '../../scripts/import
 import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, SOURCE_REFERENCE_ANSWER_ROLES,
   explicitWritingHeading, applicationStanceLabel, continuationScoringLabel, continuationThoughtHeading,
   applicationScoringPoint, verifiedParenthesizedEnglish, isCompleteWritingTranscriptHeading,
-  isWritingTranscriptTitle } from './sourceReferenceWritingRules.mjs'
+  isWritingTranscriptTitle, isSourceReferenceExplanationStart } from './sourceReferenceWritingRules.mjs'
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
-import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
+  usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
 
 // Bind nested task/letter and capture role lookups to the same source semantics.
 function sourceReferenceLineRoles(producerVersion) {
@@ -42,6 +43,35 @@ function completeApplicationLetter(lines, index, lastQuestion, factsFor, produce
   const answers = [...previous.text.matchAll(/(?:^|\s)(\d+)\s*[.．、]\s*/gu)]
   if (Number(answers.at(-1)?.[1]) !== lastQuestion) return false
   return completeSourceLetter(lines, index + 1, factsFor, producerVersion)
+}
+
+// An answer-first article has no letter scaffold. Its exact source-given title,
+// adjacent final objective answer and bounded continuous body jointly establish
+// ownership. A matching title alone never opens writing or reopens explanations.
+function completeGivenTitleArticle(lines, index, lastQuestion, givenTitle, factsFor, producerVersion) {
+  const title = lines[index], previous = lines[index - 1]
+  if (!lastQuestion || !givenTitle || !previous || title.page !== previous.page
+    || factsFor(title).trimmed !== givenTitle.trim()) return false
+  const answer = factsFor(previous).trimmed
+  if (!/^(?:[1-9]\d*\s*[.．、]?\s*[A-Za-z][A-Za-z'’-]*(?:\s+[A-Za-z][A-Za-z'’-]*)?\s*[;；]?\s*)+$/u.test(answer)) return false
+  const numbers = [...answer.matchAll(/(?:^|[;；]\s*)([1-9]\d*)\s*[.．、]?\s*/gu)].map(match => Number(match[1]))
+  if (numbers.at(-1) !== lastQuestion || numbers.some((number, i) => i && number <= numbers[i - 1])) return false
+  const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
+  let end = null
+  for (const line of lines.slice(index + 1)) {
+    const facts = factsFor(line)
+    const boundary = explicitWritingHeading(line.text, producerVersion)?.taskType === 'continuation'
+      || matchesLineRole('writing.explanations', facts, { sectionCount: 1 })
+      || firstLineRole('listening-boundary', facts)
+    if (boundary) return end && /[.!?]["”'’]?\s*$/u.test(end.text) ? { end } : false
+    if (line.page !== title.page || line.figure || line.table || facts.hasHan || !facts.startsEnglishOrQuote
+      || firstLineRole('writing-section', facts) || firstLineRole('entry-label', facts)
+      || matchesLineRole('writing.part-boundary', facts) || matchesLineRole('writing.continuation-prompt', facts)
+      || matchesLineRole('paragraph.salutation', facts) || matchesLineRole('paragraph.numbered', facts)
+      || matchesLineRole('transcript.speaker', facts) || matchesLineRole('writing.student-script', facts)) return false
+    end = line
+  }
+  return false
 }
 
 export function completeSourceLetter(lines, index, factsFor, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION) {
@@ -85,7 +115,7 @@ export function completeSourceLetter(lines, index, factsFor, producerVersion = O
 // Lifecycle boundaries, scoring-appendix reopening and output assembly remain
 // with the caller. A writing-part heading alone does not establish a task.
 export function sourceReferenceWritingTaskHeading(lines, lineIndex, {
-  inWriting = false, sectionCount = 0, lastObjectiveQuestion = 0,
+  inWriting = false, sectionCount = 0, lastObjectiveQuestion = 0, applicationGivenTitle = null,
   answerRole = 'official_answers', factsFor = computeLineFacts,
   producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
 } = {}) {
@@ -99,13 +129,16 @@ export function sourceReferenceWritingTaskHeading(lines, lineIndex, {
   const mergedLabel = mergedText && matchesLineRole('entry.sample-label', computeLineFacts({ text: mergedText })) ? mergedText : null
   const unlabeledApplicationLetter = answerRole === 'official_answers' && !sectionCount && !inWriting
     && completeApplicationLetter(lines, lineIndex, lastObjectiveQuestion, factsFor, producerVersion)
+  const givenTitleArticle = usesGivenTitleWritingSamples(producerVersion) && answerRole === 'official_answers'
+    && !sectionCount && !inWriting
+    && completeGivenTitleArticle(lines, lineIndex, lastObjectiveQuestion, applicationGivenTitle, factsFor, producerVersion)
   const bare = (inWriting || mergedLabel || unlabeledApplicationLetter || (lines[lineIndex + 1]
     && matchesLineRole('entry.sample-label', factsFor(lines[lineIndex + 1]))))
     && bareSectionNumber((mergedLabel ? heading : sectionText).normalize('NFKC'))
-  const started = bare ? (bare === '一' ? 'application' : 'continuation')
+  const started = givenTitleArticle ? 'application' : bare ? (bare === '一' ? 'application' : 'continuation')
     : firstLineRole('writing-section', facts)?.value
   const scoringSection = firstLineRole('scoring-section', facts)?.value
-  return { bare, started, scoringSection, mergedLabel, unlabeledApplicationLetter,
+  return { bare, started, scoringSection, mergedLabel, unlabeledApplicationLetter, givenTitleArticle,
     explicitHeading: explicitWritingHeading(facts.text, producerVersion) }
 }
 
@@ -133,7 +166,8 @@ function scopeError(message) {
 
 function applicationLetterReferenceLines(section, factsFor, producerVersion) {
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
-  if (!section.letterEnd) return section.lines
+  const sampleEnd = section.letterEnd || section.articleEnd
+  if (!sampleEnd) return section.lines
   const selected = []
   let afterLetter = false
   let inScoring = false
@@ -158,7 +192,7 @@ function applicationLetterReferenceLines(section, factsFor, producerVersion) {
       }
     }
     selected.push(line)
-    if (line === section.letterEnd) afterLetter = true
+    if (line === sampleEnd) afterLetter = true
   }
   return selected
 }
@@ -229,7 +263,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
   const sourceOrder = new WeakMap()
   const lineFacts = new WeakMap()
   const referenceFigures = []
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]), { producerVersion })
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]), { producerVersion, materialization })
   const factsFor = line => {
     if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
     return lineFacts.get(line)
@@ -371,9 +405,13 @@ export function sourceReferenceWritingLifecycle(lines, {
   const taskStarts = new Map()
   const listeningStarts = new Set()
   const scope = createWritingScope(sections)
-  let afterListening = false, scoringAppendix = false, afterExplanations = false
+  let afterListening = false, scoringAppendix = false, afterExplanations = false, articleBlocked = false
   const lastObjectiveQuestion = sourceReferenceLastObjectiveQuestion(materialization)
+  const titles = (materialization.groups ?? []).filter(group => group.writingTask?.taskType === 'application')
+    .flatMap(group => group.writingTask.givenSkeleton ?? []).filter(item => item.role === 'title')
+  const applicationGivenTitle = titles.length === 1 ? titles[0].text : null
   for (const [lineIndex, line] of lines.entries()) {
+    articleBlocked ||= isSourceReferenceExplanationStart(line.text, producerVersion)
     if (usesExplicitWritingTitles(producerVersion)
       && /^备选试题参考答案[:：]?$/u.test(line.text.normalize('NFKC').trim())) {
       scopeError('Unresolved alternate writing tasks after 备选试题参考答案; main tasks cannot own alternate references')
@@ -464,8 +502,9 @@ export function sourceReferenceWritingLifecycle(lines, {
     // A heading can share its OCR item with a sample label. Some answer books
     // omit the writing-part heading entirely; require an adjacent sample label
     // or the tightly bounded standalone-key letter before opening writing.
-    const { bare, started, scoringSection, mergedLabel, unlabeledApplicationLetter, explicitHeading } = sourceReferenceWritingTaskHeading(lines, lineIndex, {
+    const { bare, started, scoringSection, mergedLabel, unlabeledApplicationLetter, givenTitleArticle, explicitHeading } = sourceReferenceWritingTaskHeading(lines, lineIndex, {
       inWriting: scope.inWriting, sectionCount: sections.size, lastObjectiveQuestion,
+      applicationGivenTitle: articleBlocked ? null : applicationGivenTitle,
       answerRole: answerDocument.role, factsFor, producerVersion,
     })
     if (scoringSection) {
@@ -479,12 +518,25 @@ export function sourceReferenceWritingLifecycle(lines, {
       continue
     }
     if (started) {
+      // A later empty reprint immediately before listening supplies no new
+      // sample and cannot erase an already proven given-title article.
+      if (usesGivenTitleWritingSamples(producerVersion) && explicitHeading?.sample
+        && sections.get(started)?.articleEnd && lines[lineIndex + 1]
+        && firstLineRole('listening-boundary', factsFor(lines[lineIndex + 1]))) {
+        review.push({ itemId: line.itemId, issue: 'empty repeated sample heading before listening retains the proven article' })
+        continue
+      }
       // A rubric appendix supplements the original samples; an ordinary task
       // restart still replaces its prior section as before.
       scope.startTask(started, { reuse: scoringAppendix })
       taskStarts.set(line.itemId, started)
       items.set(line.itemId, { task: started, capturing: false, ended: false, kind: null, action: 'task' })
       if (unlabeledApplicationLetter) scope.current.letterEnd = unlabeledApplicationLetter.end
+      if (givenTitleArticle) {
+        scope.current.articleEnd = givenTitleArticle.end
+        scope.current.articleTitle = line
+        scope.current.lines.push(line)
+      }
       if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
       if (explicitHeading?.sample) {
         scope.current.explicitSample = true
@@ -540,6 +592,7 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes)
   }
   const numberedSamples = taskType === 'application' ? numberedApplicationSamples(sectionLines, factsFor) : new Map()
   const sampleTitles = new Set(numberedSamples.values())
+  if (section.articleTitle) sampleTitles.add(section.articleTitle)
   if (explicitTitles && taskType === 'application') for (const [index, line] of sectionLines.entries()) {
     if (!applicationStanceLabel(line.text, taskType)) continue
     const title = sectionLines[index + 1], body = sectionLines[index + 2]

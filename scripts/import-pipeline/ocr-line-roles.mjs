@@ -102,7 +102,9 @@ export const LINE_ROLE_RULES = Object.freeze([
   rule('transcript.split-colon', 'split-colon', 10, (f, c) => c.hanging && /^[:：;；]$/u.test(f.text),
     { text: ';', context: { hanging: true } }, { text: 'M', context: { hanging: true } }),
   rule('transcript.wrap', 'wrap', 10, (f, c) =>
-    !(f.box.left > c.speechLeft + c.last.height * 0.35)
+    // Source boxes use integer pixels; quantize the derived fractional edge
+    // to that same grid. The next integer pixel still starts a new paragraph.
+    !(f.box.left > Math.ceil(c.speechLeft + c.last.height * 0.35))
       && f.box.top >= c.last.top && f.box.top - c.last.top <= c.last.height * 3
       && c.last.right + c.last.height * 0.5 + f.firstWordWidth > c.columnRight,
   { text: 'and these continue that turn', words: [{ box: { left: 28, top: 30, width: 90, height: 10 } }],

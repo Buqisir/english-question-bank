@@ -2,7 +2,7 @@
 // recognition identical without importing the CLI producer into the server.
 // Scoring predicates share this matching view; captured source text is untouched.
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
+  usesExplicitWritingTitles, usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
 export const writingRuleMatchingView = text => text.normalize('NFKC').replace(/\s+/gu, '')
 export const SOURCE_REFERENCE_ANSWER_ROLES = Object.freeze(['official_answers', 'question_and_answers'])
 // The #586 sample parser is also the authority for Version one/two/three
@@ -115,6 +115,14 @@ export function explicitWritingHeading(text, producerVersion = OCR_SOURCE_REFERE
   }
   const sample = /^(应用文|读后续写)参考范文\s*[:：]?$/u.exec(view)
   if (sample) return { taskType: sample[1] === '应用文' ? 'application' : 'continuation', sample: true, omission: false }
+  if (usesGivenTitleWritingSamples(producerVersion)) {
+    // A source citation is allowed only on continuation samples, with its
+    // explicit provenance prefix and a complete, nonempty parenthesis pair.
+    const numberedSample = /^(?:[1-9]\d?\.\s*)?(应用文|读后续写)参考例文(?:\s*\(文章来源\s+([^()\r\n]+)\))?\s*[:：]?$/u.exec(view)
+    if (numberedSample && (!numberedSample[2] || (numberedSample[1] === '读后续写' && numberedSample[2].trim()))) {
+      return { taskType: numberedSample[1] === '应用文' ? 'application' : 'continuation', sample: true, omission: false }
+    }
+  }
   const omission = /^(第一节\s*应用文写作|第二节\s*读后续写)\s*\(范文略\)\s*[:：]?$/u.exec(view)
   return omission ? { taskType: omission[1].startsWith('第一节') ? 'application' : 'continuation',
     sample: false, omission: true } : null
