@@ -11,7 +11,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
   PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
-import { explicitWritingHeading, isSourceReferenceExplanationStart } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { explicitWritingHeading, isSourceReferenceExplanationStart, isReadingAnswerPair } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
 
@@ -274,9 +274,9 @@ test('v17–v20 repeated-section lifecycle retains exact pre-fix replay bytes', 
   }
 })
 
-test('sealed v17–v20 references retain exact bytes and are rejected on first admission', () => {
+test('sealed v17–v21 references retain exact bytes and are rejected on first admission', () => {
   const input = scoringFiguresFixture()
-  for (const version of [17, 18, 19, 20]) {
+  for (const version of [17, 18, 19, 20, 21]) {
     const sidecar = captureScoringReferences(input, { producerVersion: `ocr-source-references-producer-v${version}` })
     const sourceReferencesBytes = Buffer.from(JSON.stringify(sidecar))
     assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt: {
@@ -495,7 +495,7 @@ test('first admission rejects missing, legacy and unknown producer versions befo
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
   for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v22', null]) {
+    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -578,7 +578,7 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v22']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }
@@ -593,6 +593,48 @@ const lifeFor = input => {
   const source = prepareSourceReferenceWritingItems(...input)
   return sourceReferenceWritingLifecycle(source.lines, source)
 }
+
+test('v22 ends a captured sample at adjacent reading answer pair and retains a later rubric', () => {
+  const input = fixture([
+    [...heading, line('The last part came', .3), line('true.', .33), line('【A篇】', .4),
+      line('21-23 BAC', .43), line('【主题语境】人与社会', .46)],
+    ['第二节（满分25分）', '评分标准', '按内容和语言给分。'].map((text, i) => line(text, .1 + i * .1)),
+  ])
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups[0].essays.entries[0].paragraphs.map(p => p.text), ['The last part came true.'])
+  assert.deepEqual(scoringTexts(output), ['按内容和语言给分。'])
+  const lifecycle = lifeFor(input)
+  assert.equal(lifecycle.items.get('p1-i3').capturing, true)
+  assert.equal(lifecycle.items.get('p1-i4').ended, true)
+  assert.equal(lifecycle.items.get('p1-i5').ended, true)
+  assert.throws(() => prepareSourceReferenceWritingItems(...input, { producerVersion: 'ocr-source-references-producer-v21' }),
+    /Unresolved writing reference title/u)
+})
+
+test('reading answer boundary requires the exact complete pair and a captured essay', () => {
+  for (const [title, answers] of [['【A篇】', '21-23 BA'], ['【A篇】', '21-23 BAC extra'],
+    ['【E篇】', '21-23 BAC'], ['[A篇]', '21-23 BAC'], ['【A篇】 extra', '21-23 BAC'],
+    ['【A篇】', '23-21 BAC'], ['【A篇】', '21–23 BAC'], ['【A篇】', '21-23 BaC']]) {
+    assert.equal(isReadingAnswerPair(title, answers), false, `${title} / ${answers}`)
+  }
+  for (const title of ['【A篇】', '【B篇】', '【C篇】', '【D篇】']) {
+    assert.equal(isReadingAnswerPair(title, '21-23 BAC'), true)
+  }
+  for (const suffix of [['【A篇】', 'The next sentence.'], ['【A篇】', '21-23 BA'],
+    ['【A篇】', 'Intervening item.', '21-23 BAC']]) {
+    const input = writingFixture(['第二节 读后续写', '参考范文', 'A complete sample.', ...suffix], ['continuation'])
+    assert.throws(() => lifeFor(input), /Unresolved writing reference title/u)
+  }
+  const outside = writingFixture(['【A篇】', '21-23 BAC'], [])
+  assert.equal(lifeFor(outside).sections.size, 0)
+  const noBody = writingFixture(['第二节 读后续写', '参考范文', '【A篇】', '21-23 BAC'], ['continuation'])
+  assert.throws(() => lifeFor(noBody), /Unresolved writing reference title/u)
+  const input = writingFixture(['第二节 读后续写', '参考范文', 'A complete sample.', '【A篇】', '21-23 BAC'], ['continuation'])
+  const prepared = prepareSourceReferenceWritingItems(...input)
+  const candidate = prepared.lines.find(item => item.text === '【A篇】')
+  candidate.nextSourceItemId = 'intervening-source-item'
+  assert.throws(() => sourceReferenceWritingLifecycle(prepared.lines, prepared), /Unresolved writing reference title/u)
+})
 
 const givenArticleTitle = 'Protect Our Campus: Say No to Graffiti'
 const articleFixture = (texts, pagesAfter = []) => {

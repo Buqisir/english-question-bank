@@ -99,6 +99,56 @@ function fixture(pageLines) {
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
 const paragraphs = output => output.groups[0].essays.entries.flatMap(e => e.paragraphs)
 
+test('personal titles join indented names only in the current producer', () => {
+  for (const [title, name] of [['Ms.', 'White’s'], ['Dr.', 'Smith'], ['Mr.', 'Jones'],
+    ['Mrs.', 'Brown'], ['Prof.', 'Green']]) {
+    const input = fixture([[...heading, line(`We met ${title}`, .28), line(`${name} yesterday.`, .31, .115114),
+      line('Another complete line.', .34)]])
+    const current = paragraphs(buildSourceReferences(...input))
+    const old = paragraphs(buildSourceReferences(...input, { producerVersion: 'ocr-source-references-producer-v21' }))
+    assert.match(current[0].text, new RegExp(`^We met ${title.replace('.', '\\.')} ${name} yesterday\\.`))
+    assert.equal(old[0].text, `We met ${title}`)
+    assert(old[1].text.startsWith(`${name} yesterday.`))
+  }
+})
+
+test('abbreviation continuation respects short lines and ambiguous place endings', () => {
+  const cases = [
+    ['They lived on Main St.', 'The next morning, they left for school.', .3, .14, false, false],
+    ['They lived on Main St.', 'The next morning, they left for school.', .8, .14, false, false],
+    ['They visited St.', 'Louis the next morning.', .8, .1, true, true],
+    ['Tears welled up in Ms.', 'White’s eyes.', .8, .115114, true, false],
+    ['They met Ms.', 'White arrived the next morning.', .3, .14, false, false],
+    ['They climbed Mt.', 'Everest the next morning.', .8, .14, false, false],
+  ]
+  for (const [first, second, width, left, joined, oldJoined] of cases) {
+    const input = fixture([[...heading, line(first, .28, .1, width), line(second, .31, left),
+      line('Another complete line.', .34)]])
+    for (const [options, expected] of [[{}, joined],
+      [{ producerVersion: 'ocr-source-references-producer-v21' }, oldJoined]]) {
+      const result = paragraphs(buildSourceReferences(...input, options))
+      assert.equal(result[0].text.startsWith(`${first} ${second}`), expected, `${first} / ${second}`)
+      if (!expected) assert.equal(result[0].text, first, `${first} / ${second}`)
+    }
+  }
+})
+
+test('title abbreviation continuation excludes labels, numbering, other abbreviations and case variants', () => {
+  for (const [previous, next, numbered] of [['Mrs.', '1. A new paragraph', false],
+    ['Mrs.', 'Paragraph 1: A new paragraph', true], ['Mrs.', 'Note: A new paragraph', false],
+    ['Mrs.', 'A. A new paragraph', false],
+    ['U.S.', 'Another paragraph', false], ['ms.', 'White arrived', false], ['Ms.', 'a lowercase line', false]]) {
+    const input = boundary()
+    input.previous = { role: 'body', text: `It ended with ${previous}`, right: .9, page: 1 }
+    input.current = computeLineFacts({ text: next, page: 1, left: .14 })
+    input.geometry.margin = { left: .1, right: .9 }
+    input.roles = { hasParagraph: true, numbered }
+    input.titleAbbreviationContinuation = true
+    delete input.referenceContext
+    assert.equal(decideLineJoin(input).resolution, 'separate', `${previous} / ${next}`)
+  }
+})
+
 test('Liaoning-shaped scoring wrap keeps left-bottom and right-top provenance separate', () => {
   const first = '2. 情节合理性：情绪转变是否自然（从愤怒到体谅需有过'
   const second = '渡），冲突解决方式是否符合“亲情包容”的核心；'

@@ -108,6 +108,16 @@ export const NUMBERED_ENTRY_LABEL = /^[1-9]\d?\.\s*(?:参考范文|考场作文|
 export const SCORING_ENTRY_LABEL = /^(?:(?:[一二三四五六七八九十]+、|\(\s*[一二三四五六七八九十]+\s*\))\s*)?(?:评分(?:原则|标准|说明|细则|要求|建议)|各档次给分范围(?:和|及)要求)\s*[:：]?$/u
 // Reading explanations can start directly after samples, without a part title.
 export const ANSWER_EXPLANATION_START = /^(?:【(?:解题导语|语篇导读|语篇解读)】|答案详解|参考答案详解|试题解析|答案解析|(?:2[1-9]|[3-5]\d|6[0-5])\s*[.．、]\s*[A-G]\s*\p{Script=Han})/u
+// This pair is evidence only inside an already captured writing sample. Match
+// the literal source characters and complete lines; never normalize or rewrite.
+export function isReadingAnswerPair(text, nextText) {
+  if (!/^【[A-D]篇】$/u.test(text)) return false
+  const match = /^([1-9]\d*)-([1-9]\d*)[ \t]+([A-Z]+)$/u.exec(nextText || '')
+  if (!match) return false
+  const start = Number(match[1]), end = Number(match[2])
+  return Number.isSafeInteger(start) && Number.isSafeInteger(end)
+    && end >= start && end - start + 1 === match[3].length
+}
 // New bare/bracketed dividers require the whole heading. NFKC and trimming
 // are matching-only; preserve source text and the existing prefix rules.
 const ANSWER_EXPLANATION_HEADING = /^(?:解析|答案解析|【解析】|【答案解析】)[:：]?$/u

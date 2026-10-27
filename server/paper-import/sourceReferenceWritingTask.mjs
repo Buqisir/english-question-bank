@@ -8,7 +8,7 @@ import { createWritingScope, createReferenceCapture } from '../../scripts/import
 import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, SOURCE_REFERENCE_ANSWER_ROLES,
   explicitWritingHeading, applicationStanceLabel, continuationScoringLabel, continuationThoughtHeading,
   applicationScoringPoint, verifiedParenthesizedEnglish, isCompleteWritingTranscriptHeading,
-  isWritingTranscriptTitle, isSourceReferenceExplanationStart } from './sourceReferenceWritingRules.mjs'
+  isWritingTranscriptTitle, isSourceReferenceExplanationStart, isReadingAnswerPair } from './sourceReferenceWritingRules.mjs'
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
@@ -274,6 +274,8 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
   const evidencePages = evidence?.documents.find((document) => document.documentId === answerDocument.documentId)?.pages || []
   const pages = confirmation.documents.find((document) => document.documentId === answerDocument.documentId).pages
     .map((page, index) => page.page ? page : { ...page, page: index + 1 })
+  const originalItems = pages.flatMap(page => page.orderedItems)
+  const nextItemIds = new Map(originalItems.map((item, index) => [item.itemId, originalItems[index + 1]?.itemId]))
   const lines = []
   const review = []
   const sourceOrder = new WeakMap()
@@ -322,7 +324,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
       if (pictureItems.has(item.itemId)) continue
       if (tableItems.has(item.itemId) && !tableStarts.has(item.itemId)) continue
       const boxes = (item.observationIds || []).map((id) => observations.get(id))
-      const line = { itemId: item.itemId, page: page.page, text: item.text, boxes,
+      const line = { itemId: item.itemId, nextSourceItemId: nextItemIds.get(item.itemId), page: page.page, text: item.text, boxes,
         ...(tableStarts.has(item.itemId) ? { table: tableStarts.get(item.itemId) } : {}) }
       const facts = factsFor(line)
       line.left = facts.left
@@ -482,7 +484,14 @@ export function sourceReferenceWritingLifecycle(lines, {
       continue
     }
     const facts = factsFor(line)
-    if (matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
+    const next = lines[lineIndex + 1]
+    const readingPairCandidate = producerVersion === 'ocr-source-references-producer-v22' && scope.current
+      && next && !next.figure && !next.table && line.nextSourceItemId === next.itemId
+      && isReadingAnswerPair(line.text, next.text)
+    const priorStep = readingPairCandidate
+      ? planReferenceCapture(scope.current, factsFor, producerVersion, scoringScopes).steps.at(-1) : null
+    const readingPair = priorStep?.state.capturing === true && priorStep.action === 'body'
+    if (readingPair || matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
       scope.end()
       items.set(line.itemId, { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
       afterExplanations = true
