@@ -13,6 +13,7 @@
 //   report <paperId> --screen "<what was checked>" --pdf "<what was checked>"
 //   status <paperId>
 import { execFileSync, spawn, spawnSync } from 'node:child_process'
+import { randomUUID } from 'node:crypto'
 import {
   appendFileSync, copyFileSync, existsSync, mkdirSync, mkdtempSync, openSync, readFileSync,
   readdirSync, renameSync, rmSync, writeFileSync,
@@ -142,7 +143,14 @@ async function step(ctx, name, fn) {
     return done.result
   }
   const started = Date.now()
-  ctx.state.steps[name] = { startedAt: new Date(started).toISOString() }
+  const entry = { startedAt: new Date(started).toISOString() }
+  if (name === 'push') {
+    entry.attemptId = randomUUID()
+    mkdirSync(ctx.fast, { recursive: true })
+    // Append before updating state: an interruption must invalidate older receipts.
+    appendFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), `${JSON.stringify({ paperId: ctx.paperId, ...entry })}\n`)
+  }
+  ctx.state.steps[name] = entry
   save(ctx)
   const result = await fn()
   const seconds = Math.round((Date.now() - started) / 100) / 10
@@ -162,6 +170,7 @@ function cli(script, ...args) {
 function run(ctx, label, args, { review = false } = {}) {
   const viaLocal = review && target.local
   const argv = viaLocal ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
+  const pushAttempt = label === 'push' ? { ...ctx.state.steps.push } : null
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, argv, { cwd: root, env: review ? reviewEnv : env, stdio: ['ignore', 'pipe', 'pipe'] })
     let out = ''
@@ -170,9 +179,11 @@ function run(ctx, label, args, { review = false } = {}) {
     child.stderr.on('data', (chunk) => { err += chunk })
     child.on('error', reject)
     child.on('close', (code) => {
-      const log = path.join(ctx.logs, `${label}.log`)
+      const log = path.join(ctx.logs, pushAttempt ? `push-${pushAttempt.attemptId}.log` : `${label}.log`)
       mkdirSync(ctx.logs, { recursive: true })
-      writeFileSync(log, `$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}`)
+      const header = pushAttempt ? `${JSON.stringify({ type: 'fast-push-attempt-v1', paperId: ctx.paperId, ...pushAttempt })}\n` : ''
+      const footer = pushAttempt ? `\n${JSON.stringify({ type: 'fast-push-exit-v1', attemptId: pushAttempt.attemptId, code, signal: child.signalCode })}\n` : ''
+      writeFileSync(log, `${header}$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}${footer}`, pushAttempt ? { flag: 'wx' } : {})
       if (code === 0) resolve(lastJson(out) ?? { stdout: out.trim() })
       else reject(new Error(`${label} 失败（exit ${code}），日志 ${path.relative(root, log)}\n${tail(err || out)}`))
     })
@@ -916,10 +927,151 @@ function referencesCurrent(ctx) {
     && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
 }
 
+function reconciliationOrigin() {
+  if (!target.local) return target.origin
+  const state = readJson(path.join(root, 'imports/local-review/state.json'))
+  const url = new URL(state.apiOrigin)
+  if (url.protocol !== 'http:' || !['127.0.0.1', 'localhost'].includes(url.hostname)) fail('Local Review origin invalid')
+  return url.origin
+}
+
+function failureDetails(bytes) {
+  const text = bytes.toString('utf8')
+  let parsed
+  try { parsed = JSON.parse(text) } catch { /* Review CLI error lines are also supported. */ }
+  const matches = [...text.matchAll(/^(?:HTTP\s+)?([45]\d\d)\s+([A-Z][A-Z0-9_]+)(?:\s|$)/gmu)]
+  const found = matches.map(m => ({ httpStatus: Number(m[1]), errorCode: m[2] }))
+  if (parsed && Number.isInteger(parsed.httpStatus ?? parsed.statusCode)
+    && typeof parsed.errorCode === 'string') {
+    found.push({ httpStatus: parsed.httpStatus ?? parsed.statusCode, errorCode: parsed.errorCode })
+  }
+  if (found.length !== 1 || found[0].httpStatus < 400 || found[0].httpStatus > 599
+    || !/^[A-Z][A-Z0-9_]+$/u.test(found[0].errorCode)) fail('UNKNOWN: 失败证据缺少唯一明确的 HTTP 4xx/5xx 和错误 code')
+  return found[0]
+}
+
+function latestPushAttempt(ctx, push) {
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/u.test(push?.attemptId || '')) fail('UNKNOWN: push 缺少尝试身份')
+  const lines = readFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), 'utf8').trim().split('\n')
+  const attempts = lines.map(line => JSON.parse(line))
+  const last = attempts.at(-1)
+  if (!last || last.paperId !== ctx.paperId || last.attemptId !== push.attemptId || last.startedAt !== push.startedAt
+    || attempts.filter(item => item.attemptId === push.attemptId).length !== 1
+    || digestJson(readJson(ctx.statePath).steps?.push) !== digestJson(push)) fail('UNKNOWN: push 不是最新尝试')
+}
+
+function attemptFailure(ctx, push, file, bytes) {
+  try {
+    latestPushAttempt(ctx, push)
+    if (path.resolve(file) !== path.resolve(ctx.logs, `push-${push.attemptId}.log`)) fail('日志路径不符')
+    const lines = bytes.toString('utf8').trim().split('\n')
+    const header = JSON.parse(lines[0]), exit = JSON.parse(lines.at(-1))
+    if (header.type !== 'fast-push-attempt-v1' || header.paperId !== ctx.paperId
+      || header.attemptId !== push.attemptId || header.startedAt !== push.startedAt
+      || exit.type !== 'fast-push-exit-v1' || exit.attemptId !== push.attemptId
+      || !Number.isInteger(exit.code) || exit.code === 0 || exit.signal !== null) fail('尝试结果不符')
+    return failureDetails(bytes)
+  } catch (error) { fail(`UNKNOWN: 不能证明失败证据属于最新 push：${error.message}`) }
+}
+
+function statusObservation(raw, paperId, startedAt) {
+  const status = JSON.parse(raw)
+  if (status.paperId !== paperId || !Array.isArray(status.revisions)
+    || !Object.hasOwn(status, 'latest') || !Object.hasOwn(status, 'latestRevisionId')) fail('UNKNOWN: Review status 不完整或 paperId 不匹配')
+  if ((status.latest?.id ?? null) !== (status.latestRevisionId ?? null)
+    || (status.latest && !status.revisions.some(revision => revision.id === status.latest.id))) fail('UNKNOWN: Review latest 不一致')
+  const started = Date.parse(startedAt)
+  if (!Number.isFinite(started)) fail('UNKNOWN: push startedAt 无效')
+  const candidates = []
+  for (const revision of status.revisions) {
+    if (!revision || revision.paperId !== paperId || !revision.id || !['candidate', 'ocr'].includes(revision.reviewKind)
+      || typeof revision.state !== 'string') fail('UNKNOWN: Review revision 不完整')
+    if (revision.reviewKind !== 'candidate') continue
+    if (revision.state === 'uploading' && !revision.finalizedAt) {
+      candidates.push({ id: revision.id, state: revision.state, finalizedAt: null })
+      continue
+    }
+    const finalized = Date.parse(revision.finalizedAt)
+    if (!Number.isFinite(finalized)) fail('UNKNOWN: Candidate 缺少有效 finalizedAt')
+    fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: 已存在 finalize 的 Candidate')
+  }
+  return { latestRevisionId: status.latestRevisionId, latest: status.latest && {
+    id: status.latest.id, reviewKind: status.latest.reviewKind, state: status.latest.state,
+  }, candidates }
+}
+
+function reconciliationReceipt(ctx, origin) {
+  const push = ctx.state.steps.push
+  if (!push?.startedAt || push.finishedAt) return false
+  try {
+    const dir = path.join(ctx.fast, 'push-reconciliation')
+    for (const name of readdirSync(dir).filter(name => /^receipt-[0-9a-f]{64}\.json$/u.test(name))) {
+      const receipt = readJson(path.join(dir, name))
+      if (name !== `receipt-${digestJson(receipt).slice(7)}.json` || receipt.schema !== 'fast-push-reconciliation-v1'
+        || receipt.paperId !== ctx.paperId || receipt.origin !== origin || receipt.pushStartedAt !== push.startedAt
+        || receipt.pushDigest !== digestJson(push) || digestJson(receipt.pushRecord) !== receipt.pushDigest) continue
+      const failure = readFileSync(receipt.failurePath)
+      const snapshot = readFileSync(path.join(dir, receipt.failureSnapshot))
+      const statusBytes = readFileSync(path.join(dir, receipt.statusReceipt))
+      if (sha256(failure) !== receipt.failureSha256 || sha256(snapshot) !== receipt.failureSha256
+        || sha256(statusBytes) !== receipt.statusReceiptSha256) continue
+      const statusReceipt = JSON.parse(statusBytes)
+      if (statusReceipt.origin !== origin || statusReceipt.paperId !== ctx.paperId
+        || !Number.isFinite(Date.parse(statusReceipt.observedAt))
+        || sha256(statusReceipt.response) !== statusReceipt.responseSha256) continue
+      if (stableStringify(attemptFailure(ctx, push, receipt.failurePath, failure)) !== stableStringify(receipt.failure)
+        || stableStringify(statusObservation(statusReceipt.response, ctx.paperId, push.startedAt)) !== stableStringify(receipt.observation)) continue
+      return true
+    }
+  } catch { return false }
+  return false
+}
+
+function reconciledPush(ctx) {
+  try { return reconciliationReceipt(ctx, reconciliationOrigin()) } catch { return false }
+}
+
+export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {}) {
+  const push = ctx.state.steps.push
+  if (!push?.startedAt || push.finishedAt || !Number.isFinite(Date.parse(push.startedAt))) fail('需要未完成的 push 记录')
+  if (!failurePath) fail('reconcile-push 需要 --failure-receipt <路径>')
+  const file = path.resolve(failurePath)
+  const failureBytes = readFileSync(file)
+  const failure = attemptFailure(ctx, push, file, failureBytes)
+  origin ||= reconciliationOrigin()
+  const statusReader = readStatus || (() => {
+    const args = cli('review.mjs', 'status', ctx.paperId, '--raw-response')
+    const argv = target.local ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
+    const result = spawnSync(process.execPath, argv, { cwd: root, env: reviewEnv, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
+    if (result.error || result.status !== 0 || result.signal) fail(`UNKNOWN: Review status 失败 ${result.error?.message || result.stderr || ''}`)
+    return result.stdout
+  })
+  const raw = await statusReader()
+  if (typeof raw !== 'string') fail('UNKNOWN: Review status 响应无效')
+  const dir = path.join(ctx.fast, 'push-reconciliation')
+  mkdirSync(dir, { recursive: true })
+  const id = randomUUID()
+  const statusName = `status-${id}.json`, failureName = `failure-${id}.bin`
+  const statusReceipt = { paperId: ctx.paperId, origin, observedAt: new Date().toISOString(),
+    responseSha256: sha256(raw), response: raw }
+  writeJson(path.join(dir, statusName), statusReceipt, 'wx')
+  const observation = statusObservation(raw, ctx.paperId, push.startedAt)
+  // Fail closed if another process changed the in-memory or persisted push while status was read.
+  latestPushAttempt(ctx, push)
+  writeFileSync(path.join(dir, failureName), failureBytes, { flag: 'wx' })
+  const receipt = { schema: 'fast-push-reconciliation-v1', paperId: ctx.paperId, origin,
+    pushStartedAt: push.startedAt, pushDigest: digestJson(push), pushRecord: structuredClone(push), failurePath: file,
+    failureSnapshot: failureName, failureSha256: sha256(failureBytes), failure,
+    statusReceipt: statusName, statusReceiptSha256: sha256(readFileSync(path.join(dir, statusName))), observation }
+  const receiptPath = path.join(dir, `receipt-${digestJson(receipt).slice(7)}.json`)
+  writeJson(receiptPath, receipt, 'wx')
+  return { receipt: receiptPath, ...receipt }
+}
+
 function assertReferencesMutable(ctx) {
   const submitted = ['push', 'local-preview', 'screen', 'local-screen']
     // An unfinished upload is Candidate-specific UNKNOWN evidence until reconciled.
-    .some(name => ctx.state.steps[name])
+    .some(name => ctx.state.steps[name] && (name !== 'push' || !reconciledPush(ctx)))
   const retained = ['signals/review-restore.json', 'canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
     'signals/locally-published.json'].some(file => existsSync(path.join(ctx.paperDir, file)))
     || existsSync(path.join(ctx.work, 'handoff/evidence.json'))
@@ -1051,11 +1203,14 @@ export async function submit(ctx, args) {
   // Always re-read before a possibly cached push step; no preview/submit bypass.
   assertImportSubmissionReady(ctx.paperDir)
   const localPreview = args.includes('--local-preview')
+  if (!localPreview && ctx.state.steps.push && !ctx.state.steps.push.finishedAt && !reconciledPush(ctx)) {
+    fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: 未完成的 push 须先只读对账，禁止重放')
+  }
   if (localPreview && !target.local) fail('preview-local 只允许已绑定的 loopback Review，禁止访问生产')
   if (!ctx.state.steps['pdf-qa']?.finishedAt) fail('先运行 finish，并在 PDF 目检后再送审')
   const resolves = option(args, '--resolves')
   const pushed = await step(ctx, localPreview ? 'local-preview' : 'push', async () => {
-    const result = await run(ctx, 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
+    const result = await run(ctx, localPreview ? 'local-preview' : 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
     return { revisionId: result.revisionId, state: result.state ?? result.status ?? null, target: target.local ? 'local' : target.origin }
   })
   const qa = path.join(ctx.work, 'handoff/qa')
@@ -1175,7 +1330,11 @@ function redoFrom(ctx, name) {
       }
     }
   }
-  for (const later of STEP_ORDER.slice(index)) delete ctx.state.steps[later]
+  for (const later of STEP_ORDER.slice(index)) {
+    // The old push remains the binding until a later actual push starts.
+    if (later === 'push' && reconciledPush(ctx)) continue
+    delete ctx.state.steps[later]
+  }
   if (index <= STEP_ORDER.indexOf('asr-apple-rule-v2')) delete ctx.state.data.listeningSegmentAttempt
   delete ctx.state.data.status
   delete ctx.state.data.localReport
@@ -1212,7 +1371,8 @@ function redoFrom(ctx, name) {
 export async function requestedRedo(ctx, name) {
   // An explicit redo must not erase submission evidence before finish sees it.
   if (STEP_ORDER.includes(name) && (!referencesCurrent(ctx)
-    || STEP_ORDER.indexOf(name) <= STEP_ORDER.indexOf('pdf-qa'))) {
+    || STEP_ORDER.indexOf(name) <= STEP_ORDER.indexOf('pdf-qa')
+    || (ctx.state.steps.push && STEP_ORDER.indexOf(name) <= STEP_ORDER.indexOf('push')))) {
     assertReferencesMutable(ctx)
   }
   redoFrom(ctx, name)
@@ -1314,6 +1474,9 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   if (args.includes('--ocr-generation-plan') && (!option(args, '--ocr-generation-plan')
     || option(args, '--ocr-generation-plan').startsWith('--'))) fail('--ocr-generation-plan requires <plan.json>')
   const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
+  if (command === 'reconcile-push' && (args.length !== 2 || args[0] !== '--failure-receipt' || !args[1] || args[1].startsWith('--'))) {
+    fail('Usage: fast-import.mjs reconcile-push <paperId> --failure-receipt <路径>')
+  }
   if ((existsSync(path.join(ctx.fast, 'ocr-generation.lock'))
     || (existsSync(operationPath) && !readJson(operationPath).completedAt)) && command !== 'status') {
     fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 新代操作未闭合；仅可只读 status 对账，禁止重放或 redo')
@@ -1328,12 +1491,13 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
       '--reason', reason, '--output', path.resolve(output)), { review: true }), null, 2))
   }
   else if (command === 'finish') await finish(ctx, args)
+  else if (command === 'reconcile-push') say(JSON.stringify(await reconcilePush(ctx, option(args, '--failure-receipt')), null, 2))
   else if (command === 'submit') await submit(ctx, args)
   else if (command === 'preview-local') await submit(ctx, [...args, '--local-preview'])
   else if (command === 'report') await report(ctx, args)
   else if (command === 'status') status(ctx)
   else if (command === 'asr-extra') await asrExtra(ctx, args)
-  else fail('Usage: fast-import.mjs <prep|after-proofread|finish|submit|report|status|asr-extra> <paperId> …')
+  else fail('Usage: fast-import.mjs <prep|after-proofread|finish|submit|reconcile-push|report|status|asr-extra> <paperId> …')
 } catch (error) {
   if (error instanceof Stop) {
     console.error(`\n需要处理：${error.message}`)
