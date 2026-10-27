@@ -39,6 +39,13 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     if (isAnswer) observations.unshift({ observationId: `${answer.documentId}:word:scope`,
       regionId: `${answer.documentId}:text:scope`, text: '第四部分 写作 第一节',
       region: { x: 0.1, y: 0.1, width: 0.5, height: 0.02 }, confidence: 1, alternatives: [] })
+    // Current admission requires source-backed task absence. Keep the frozen
+    // historical observations/confirmation and sidecar bytes unchanged.
+    if (isAnswer && currentCapture) observations.push({
+      observationId: `${answer.documentId}:word:continuation-omission`,
+      regionId: `${answer.documentId}:text:continuation-omission`, text: '第二节 读后续写（范文略）',
+      region: { x: 0.1, y: 0.9, width: 0.5, height: 0.02 }, confidence: 1, alternatives: [],
+    })
     return { documentId: document.documentId, pages: [{ page: 1,
       regions: [...observations.map(item => ({ regionId: item.regionId, kind: 'text', region: item.region })),
         ...(isAnswer ? [{ regionId: 'answers:figure:smile', kind: 'visual', region: figureRegion },

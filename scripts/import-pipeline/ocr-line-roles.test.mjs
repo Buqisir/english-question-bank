@@ -34,15 +34,16 @@ test('explanation dividers use a whole matching view and preserve existing expla
   }
 })
 
-test('only known bracketed sample titles can authorize essays', () => {
+test('only known bracketed sample titles can authorize essays; unknown ranges block capture', t => {
   for (const text of ['【参考答案】', '[参考答案]', '【参考范文】', '[范文]', '一、【考场作文】',
     '【示例二】建议调整活动安排']) {
     assert.equal(firstLineRole('entry-kind', computeLineFacts({ text }))?.value, 'essays', text)
   }
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
   for (const text of ['【答案补充】', '[答案补充]', '【未知范文标题】', '一、【答案另见后页】']) {
     assert.equal(firstLineRole('entry-kind', computeLineFacts({ text })), null, text)
-    const output = checkWritingRoleFixture([text])
-    assert(output.groups.every(group => group.essays.entries.every(entry => entry.sourceLabel !== text)))
+    assert.throws(() => checkWritingRoleFixture([text]), /unresolved source reference/)
   }
 })
 

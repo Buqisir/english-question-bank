@@ -114,12 +114,6 @@ export function explicitWritingHeading(text, producerVersion = OCR_SOURCE_REFERE
   }
   const sample = /^(应用文|读后续写)参考范文\s*[:：]?$/u.exec(view)
   if (sample) return { taskType: sample[1] === '应用文' ? 'application' : 'continuation', sample: true, omission: false }
-  if (/^66\.\s*应用文参考例文\s*[:：]?$/u.test(view)) {
-    return { taskType: 'application', sample: true, omission: false }
-  }
-  if (/^67\.\s*读后续写参考例文(?:\s*\(文章来源 Chicken soup for the teenage soul\))?\s*[:：]?$/u.test(view)) {
-    return { taskType: 'continuation', sample: true, omission: false }
-  }
   const omission = /^(第一节\s*应用文写作|第二节\s*读后续写)\s*\(范文略\)\s*[:：]?$/u.exec(view)
   return omission ? { taskType: omission[1].startsWith('第一节') ? 'application' : 'continuation',
     sample: false, omission: true } : null

@@ -617,6 +617,11 @@ function planReferenceCapture(section, factsFor, producerVersion) {
       const kind = continuationScoring || line === scoringPoints[0] ? 'scoring'
         : numberedSample || taskSample || stanceSample ? 'essays' : firstLineRole('entry-kind', facts)?.value || null
       if (!kind) {
+        // These existing whole teaching headings explicitly identify analysis.
+        // Every other unknown bracketed range needs source clarification.
+        if (explicitTitles && !/^【(?:审题重点|谋篇布局)】[:：]?$/u.test(facts.trimmed)) {
+          scopeError(`Unresolved writing reference title: ${line.itemId}`)
+        }
         pause(`commentary "${line.text}" is neither a source sample nor scoring`)
         explanationPause = explicitTitles
         continue
@@ -637,6 +642,11 @@ function planReferenceCapture(section, factsFor, producerVersion) {
     }
     if (awaitingSourceLabel && capture.kind !== 'scoring') { emit('awaiting-label'); continue }
     if (matchesLineRole('writing.commentary', facts, { entryKind: capture.kind, skipping: capture.paused })) {
+      if (explicitTitles && (capture.kind === 'essays' || (capture.paused && !explanationPause))
+        && /^[（(]/u.test(facts.trimmed)
+        && facts.hasHan && /\p{Script=Latin}/u.test(facts.text)) {
+        scopeError(`Unresolved mixed-language source sample text: ${line.itemId}`)
+      }
       if (!capture.paused) {
         pause(`Chinese commentary "${line.text.slice(0, 12)}…" follows the sample`)
         explanationPause = explicitTitles && !(englishBodyAnchor
@@ -656,6 +666,16 @@ function planReferenceCapture(section, factsFor, producerVersion) {
     if (!hasEntry) { hasEntry = true; labelItemId = null }
     englishBodyAnchor ||= !facts.hasHan && facts.startsEnglishOrQuote
     emit('body')
+  }
+  if (explicitTitles) for (const [index, step] of steps.entries()) {
+    if (step.action !== 'entry' || step.state.kind !== 'essays') continue
+    const following = steps.slice(index + 1)
+    const end = following.findIndex(next => next.action === 'entry' || next.action === 'omission')
+    const range = end < 0 ? following : following.slice(0, end)
+    if (!range.some(next => next.action === 'body' && next.state.capturing)
+      && range.some(next => ['pause', 'commentary', 'fragment'].includes(next.action) && next.line.text.trim())) {
+      scopeError(`Unresolved nonempty source sample range after label: ${step.line.itemId}`)
+    }
   }
   if (explicitTitles && section.explicitOmission && steps.some(step => step.state.capturing && step.action === 'body')) {
     scopeError('Explicit 范文略 conflicts with captured source sample text')

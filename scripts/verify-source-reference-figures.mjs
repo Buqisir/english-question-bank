@@ -238,8 +238,13 @@ assert.equal(resolved.referenceFigures.length, 1)
 assert.equal(resolved.contentMedia.length, 0)
 assert.equal(resolved.sourceVisuals.length, 0)
 const answerParagraphs = resolved.structures.get('answers').paragraphs
-assert.equal(answerParagraphs.length, 4)
-assert.equal(answerParagraphs[1].text, 'This is my design for World Smile Day.')
+assert.deepEqual(answerParagraphs.map(item => item.text), [
+  '第四部分 写作 第一节',
+  'This is my design for World Smile Day.',
+  'The design encourages kindness.',
+  'Another complete sample keeps its own words.',
+  '第二节 读后续写（范文略）',
+])
 assert(!answerParagraphs.some(item => item.text === 'World Smile Day'))
 const page = { ...input.confirmation.documents[1].pages[0], observations: input.evidence.documents[1].pages[0].observations }
 const visual = page.visualClassifications[0]

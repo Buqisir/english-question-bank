@@ -233,7 +233,7 @@ test('A remains legitimate essay prose before an explanation boundary', () => {
 })
 
 test('explanation mentions and unknown bracketed answer titles do not authorize essay labels', () => {
-  for (const text of ['解析如下这篇范文…', '【答案补充】', '[答案补充]', '【参考答案补充】']) {
+  for (const text of ['解析如下这篇范文…']) {
     const input = fixture([[...heading, line('The source paragraph.', .3), line(text, .4),
       line('The next source paragraph.', .5)]])
     const prepared = prepareSourceReferenceWritingItems(...input)
@@ -247,6 +247,14 @@ test('explanation mentions and unknown bracketed answer titles do not authorize 
     const entries = buildSourceReferences(...input).groups[0].essays.entries
     assert(entries.every(entry => entry.sourceLabel !== text))
     assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3])
+  }
+  for (const text of ['【答案补充】', '[答案补充]', '【参考答案补充】']) {
+    const input = fixture([[...heading, line('The source paragraph.', .3), line(text, .4),
+      line('The next source paragraph.', .5)]])
+    assert.throws(() => {
+      const source = prepareSourceReferenceWritingItems(...input)
+      sourceReferenceWritingLifecycle(source.lines, source)
+    }, { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, text)
   }
 })
 
@@ -382,8 +390,6 @@ test('v19 explicit tasks accept only full named headings and task-compatible sco
     ['应用文', 'application'], ['应用文写作（满分15分）：', 'application'],
     ['书面表达（满分15分）', 'application'], ['读后续写（满分25分）：', 'continuation'],
     ['应用文参考范文：', 'application'], ['读后续写参考范文：', 'continuation'],
-    ['66. 应用文参考例文', 'application'],
-    ['67. 读后续写参考例文（文章来源 Chicken soup for the teenage soul）', 'continuation'],
   ]) {
     assert.equal(explicitWritingHeading(title)?.taskType, taskType, title)
     const input = writingFixture([title, 'A source paragraph.'], [taskType])
@@ -464,8 +470,45 @@ test('same-item task omissions remain task-local and reject contradictory sample
     { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
 })
 
+test('unresolved nonempty sample ranges fail capture and admission instead of claiming absence', () => {
+  for (const [supplied, suffix] of [
+    [false, ['（幼苗 and roots）']],
+    [false, ['【参考范文补充说明】', 'An actual source sample.']],
+    [true, ['【参考范文补充说明】', 'An actual second sample.']],
+    [true, ['（幼苗 and roots）']],
+    [true, ['（中文指导）', '（幼苗 and roots）']],
+    [false, ['（1）借助 AI 学习。', '参考范文', 'A later resolved sample.']],
+  ]) {
+    const prefix = ['第二节 读后续写', '参考范文', ...(supplied ? ['A complete first sample.'] : [])]
+    const input = writingFixture([...prefix, ...suffix], ['continuation'])
+    const retained = writingFixture(supplied ? prefix : [...prefix, '略'], ['continuation'])
+    const bytes = Buffer.from('Synthetic answer document')
+    for (const value of [input, retained]) value[0].documents[0].sha256 = sha256(bytes)
+    for (const page of input[2].documents[0].pages) page.visualClassifications = []
+    const output = buildSourceReferences(...retained)
+    const sidecar = { schemaVersion: 'source-references-v1', producerVersion: output.producerVersion,
+      paperId: input[0].paperId, sourceDigest: sha256('source'), candidateDigest: sha256('candidate'),
+      materializationDigest: digestJson(input[0]), groups: output.groups }
+    const sourceInput = { documents: [{ ...input[0].documents[0], bytes }], ocrSourceBytes: {
+      evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+    } }
+    assert.throws(() => lifeFor(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    assert.throws(() => assertSourceReferenceAdmission({ sidecar, materialization: input[0], sourceInput,
+      sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest }),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+})
+
+test('deferred 66/67 example titles do not supply a writing task or sample', () => {
+  for (const title of ['66. 应用文参考例文', '67. 读后续写参考例文',
+    '67. 读后续写参考例文（文章来源 Chicken soup for the teenage soul）']) {
+    assert.equal(explicitWritingHeading(title), null)
+    assert.equal(lifeFor(writingFixture([title, 'A source sample.'])).sections.size, 0)
+  }
+})
+
 test('empty explicit sample range cannot borrow a transcript or silently become not_supplied', () => {
-  assert.throws(() => lifeFor(writingFixture(['66. 应用文参考例文', '(Text 1)', 'M: A transcript.'], ['application'])),
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '(Text 1)', 'M: A transcript.'], ['application'])),
     { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '范文一：支持立场', 'A source sample.',
     '范文二：反对立场', '(Text 1)'], ['application'])),

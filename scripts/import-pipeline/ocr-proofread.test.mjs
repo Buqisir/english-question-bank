@@ -980,7 +980,7 @@ test('an unlabeled sample after a reprinted prompt requires confirmation instead
   assert.deepEqual(omitted.groups[0].essays.entries, [])
 })
 
-test('parenthesized Chinese glosses retain their same-line English prose even after commentary', () => {
+test('parenthesized Chinese glosses retain English prose and unresolved nonempty samples block capture', t => {
   for (const text of ['（幼苗） and planted it beside the gate.', '(幼苗) and planted it beside the gate.',
     '（幼苗） café seedlings grew.']) {
     for (const preceding of [[], ['（中文指导）']]) {
@@ -991,10 +991,11 @@ test('parenthesized Chinese glosses retain their same-line English prose even af
       assert(!body.includes('中文指导'))
     }
   }
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
   for (const text of ['（中文指导）后续说明', '(中文指导)后续说明', '（幼苗 and roots）',
     '（一）幼苗 and planted it beside the gate.', '（1）借助 AI 学习。', '（中文 AI 指导', '（注释）“…”']) {
-    const result = referencesFixture(['第二节 读后续写', '参考范文', text])
-    assert.equal(result.groups[0].essays.state, 'not_supplied')
+    assert.throws(() => referencesFixture(['第二节 读后续写', '参考范文', text]), /unresolved source reference/)
   }
 })
 
