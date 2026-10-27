@@ -1113,7 +1113,7 @@ test('an adjacent sample label establishes writing context without a part headin
   assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), ['A source story.'])
 })
 
-test('task scoring headings capture separately labelled official essays without teaching notes', () => {
+test('task scoring headings require resolved notes before separately labelled official essays', t => {
   const labels = ['范文一（83词）：', '范文二(97词)：', '范文1：', '范文2']
   const texts = ['第四部分 写作（共两节，满分40分）', '应用文评分细则',
     '写作 第一节（满分15分）', '请介绍校园花园。', '一、参考范文',
@@ -1123,6 +1123,10 @@ test('task scoring headings capture separately labelled official essays without 
     '读后续写评分细则：', '一、.参考范文', labels[2], 'Rae found a packet of seeds.',
     '范文分析', '这是一段中文讲解。', labels[3], 'A new leaf appeared by the window.',
     '二、评分原则（采取双评）', '1. 本题总分为25分。']
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved task prompt') })
+  assert.throws(() => referencesFixture(texts, ['application', 'continuation']), /unresolved task prompt/)
+  texts.splice(3, 0, '【审题重点】')
   const result = referencesFixture(texts, ['application', 'continuation'])
   const essays = result.groups.flatMap(group => group.essays.entries)
   assert.deepEqual(essays.map(entry => entry.sourceLabel), labels)

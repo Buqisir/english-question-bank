@@ -25,6 +25,7 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     { x: 0.1, y: 0.4, width: 0.5, height: 0.02 },
   ]
   const tableRegion = { x: 0.08, y: 0.54, width: 0.6, height: 0.05 }
+  const scoringHeadingRegion = { x: 0.1, y: 0.5, width: 0.5, height: 0.02 }
   if (scoringTable) {
     texts.push('Content and coherence', '13–15')
     regions.push({ x: 0.1, y: 0.55, width: 0.35, height: 0.02 },
@@ -39,6 +40,12 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     if (isAnswer) observations.unshift({ observationId: `${answer.documentId}:word:scope`,
       regionId: `${answer.documentId}:text:scope`, text: '第四部分 写作 第一节',
       region: { x: 0.1, y: 0.1, width: 0.5, height: 0.02 }, confidence: 1, alternatives: [] })
+    if (isAnswer && currentCapture && scoringTable) observations.splice(
+      observations.findIndex(item => item.observationId === `${answer.documentId}:word:4`), 0, {
+        observationId: `${answer.documentId}:word:scoring-heading`,
+        regionId: `${answer.documentId}:text:scoring-heading`, text: '评分标准',
+        region: scoringHeadingRegion, confidence: 1, alternatives: [],
+      })
     // Current admission requires source-backed task absence. Keep the frozen
     // historical observations/confirmation and sidecar bytes unchanged.
     if (isAnswer && currentCapture) observations.push({
@@ -101,7 +108,8 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     raster: captureSourceReferenceFigure({ pdfBytes: answer.bytes, page: 1, region: figureRegion }) }]
   sourceReferences.groups[0].essays = { state: 'captured', evidence: [], entries }
   if (scoringTable) sourceReferences.groups[0].scoring = { state: 'captured', evidence: [], entries: [{
-    referenceId: 'reference:score:0', authority: 'source_reference', sourceLabel: null, labelSource: null,
+    referenceId: 'reference:score:0', authority: 'source_reference',
+    sourceLabel: currentCapture ? '评分标准' : null, labelSource: currentCapture ? source(scoringHeadingRegion) : null,
     blocks: [{ kind: 'table', tableId: 'table:score', rows: [[4, 5].map(index => ({
       cellId: `cell:score:${index}`, text: texts[index], source: source(regions[index]),
     }))] }],

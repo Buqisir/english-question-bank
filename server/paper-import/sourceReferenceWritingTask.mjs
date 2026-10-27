@@ -667,14 +667,38 @@ function planReferenceCapture(section, factsFor, producerVersion) {
     englishBodyAnchor ||= !facts.hasHan && facts.startsEnglishOrQuote
     emit('body')
   }
-  if (explicitTitles) for (const [index, step] of steps.entries()) {
-    if (step.action !== 'entry' || step.state.kind !== 'essays') continue
-    const following = steps.slice(index + 1)
-    const end = following.findIndex(next => next.action === 'entry' || next.action === 'omission')
-    const range = end < 0 ? following : following.slice(0, end)
-    if (!range.some(next => next.action === 'body' && next.state.capturing)
-      && range.some(next => ['pause', 'commentary', 'fragment'].includes(next.action) && next.line.text.trim())) {
-      scopeError(`Unresolved nonempty source sample range after label: ${step.line.itemId}`)
+  if (explicitTitles) {
+    // A task owns its initial range even without a separate sample label.
+    // Validate in source order: a later entry cannot erase unresolved content.
+    let sourceBody = false, explanation = false
+    for (const [index, step] of steps.entries()) {
+      if (step.action === 'entry' || step.action === 'omission') {
+        sourceBody = false
+        explanation = false
+      }
+      if (step.action === 'body' && step.state.capturing) sourceBody = true
+      if (step.action === 'table' || step.action === 'figure') {
+        if (!explanation && step.state.kind !== 'scoring') {
+          scopeError(`Unresolved writing task visual ownership: ${step.line.itemId}`)
+        }
+        continue
+      }
+      const facts = factsFor(step.line)
+      // A whole numbered example heading immediately followed by its source
+      // label is label scaffolding, not an unclassified content range.
+      if (step.action === 'pause' && /^\([一二三四五六七八九十]+\)作答示例[:：]?$/u.test(facts.nfkc)
+        && steps[index + 1]?.action === 'entry' && steps[index + 1].state.kind === 'essays') continue
+      if (step.action === 'pause' && (continuationThoughtHeading(step.line.text)
+        || /^【(?:审题重点|谋篇布局)】[:：]?$/u.test(facts.trimmed)
+        || /^(?:\d+\s*[.、]|\([一二三四五六七八九十]+\))\s*(?:故事概述|续写方向|考查目标与写作情境)[:：]?$/u.test(facts.nfkc)
+        || matchesLineRole('writing.continuation-prompt', facts))) explanation = true
+      const unknownMixed = /^[（(]/u.test(facts.trimmed) && facts.hasHan
+        && /\p{Script=Latin}/u.test(facts.text) && !verifiedParenthesizedEnglish(step.line.text)
+      if (!explanation && step.state.kind !== 'scoring'
+        && ['pause', 'commentary', 'fragment'].includes(step.action) && facts.trimmed
+        && (!sourceBody || unknownMixed)) {
+        scopeError(`Unresolved nonempty writing task range: ${step.line.itemId}`)
+      }
     }
   }
   if (explicitTitles && section.explicitOmission && steps.some(step => step.state.capturing && step.action === 'body')) {

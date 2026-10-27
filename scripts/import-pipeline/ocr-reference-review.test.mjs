@@ -499,6 +499,75 @@ test('unresolved nonempty sample ranges fail capture and admission instead of cl
   }
 })
 
+test('task ranges reject unresolved content without requiring a sample label', t => {
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved task range rejected') })
+  for (const [task, titles] of [
+    ['application', ['应用文', '应用文写作（满分15分）：', '应用文(满分15分):', '书面表达（满分15分）']],
+    ['continuation', ['读后续写', '读后续写（满分25分）', '读后续写(满分25分):', '读后续写（满分25分）：']],
+  ]) for (const title of titles) for (const suffix of [
+    ['（幼苗 and roots）'],
+    ['（中文 AI 指导）', 'An actual source sample.'],
+    ['（中文指导）', '（幼苗 and roots）'],
+    ['未决中文内容。'],
+    ['（中文 AI 指导）', '参考范文', 'A later source sample.'],
+    ['（中文 AI 指导）', '评分标准', 'A later source criterion.'],
+  ]) {
+    const input = writingFixture([title, ...suffix], [task])
+    const retained = writingFixture([title, '略'], [task])
+    const bytes = Buffer.from('Synthetic task answer document')
+    for (const value of [input, retained]) {
+      value[0].documents[0].sha256 = sha256(bytes)
+      for (const page of value[2].documents[0].pages) page.visualClassifications = []
+    }
+    const output = buildSourceReferences(...retained)
+    const sidecar = { schemaVersion: 'source-references-v1', producerVersion: output.producerVersion,
+      paperId: input[0].paperId, sourceDigest: sha256('source'), candidateDigest: sha256('candidate'),
+      materializationDigest: digestJson(input[0]), groups: output.groups }
+    const sourceInput = { documents: [{ ...input[0].documents[0], bytes }], ocrSourceBytes: {
+      evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+    } }
+    assert.throws(() => lifeFor(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
+    assert.throws(() => buildSourceReferences(...input), /unresolved task range rejected/, title)
+    for (const value of [sidecar, null]) assert.throws(() => assertSourceReferenceAdmission({
+      sidecar: value, materialization: input[0], sourceInput,
+      sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest,
+    }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
+  }
+})
+
+test('task-adjacent tables need explicit scoring ownership, including inline scoring task headings', t => {
+  const input = scoringFiguresFixture({ table: true, essays: false, writingHeading: ['应用文评分细则'] })
+  const page = input.confirmation.documents[1].pages[2]
+  const proof = input.evidence.documents[1].pages[2]
+  const removed = new Set(page.orderedItems.find(item => item.text === '评分标准').observationIds)
+  page.orderedItems = page.orderedItems.filter(item => item.text !== '评分标准')
+  const removedRegions = new Set(proof.observations.filter(o => removed.has(o.observationId)).map(o => o.regionId))
+  proof.observations = proof.observations.filter(o => !removed.has(o.observationId))
+  proof.regions = proof.regions.filter(r => !removedRegions.has(r.regionId))
+  proof.readingOrderEdges = proof.observations.slice(1).map((o, i) =>
+    ({ before: proof.observations[i].observationId, after: o.observationId }))
+  reseal(input)
+  const sidecar = captureScoringReferences(input)
+  assert(sidecar.groups[0].scoring.entries.flatMap(e => e.blocks).some(b => b.kind === 'table'))
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  // The same confirmed table under an ordinary task has no scoring owner.
+  page.orderedItems[0].text = '应用文写作（满分15分）'
+  proof.observations[0].text = page.orderedItems[0].text
+  reseal(input)
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved task table rejected') })
+  assert.throws(() => captureScoringReferences(input), /unresolved task table rejected/)
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: null }),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  for (const title of ['应用文（满分15分）', '读后续写（满分25分）']) {
+    const prepared = prepareSourceReferenceWritingItems(...writingFixture([title, 'Source table cell.']))
+    prepared.lines[1].table = { kind: 'table', rows: [[{ text: 'Source table cell.' }]] }
+    assert.throws(() => sourceReferenceWritingLifecycle(prepared.lines, prepared),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+})
+
 test('deferred 66/67 example titles do not supply a writing task or sample', () => {
   for (const title of ['66. 应用文参考例文', '67. 读后续写参考例文',
     '67. 读后续写参考例文（文章来源 Chicken soup for the teenage soul）']) {
