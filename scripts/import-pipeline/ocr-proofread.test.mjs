@@ -22,6 +22,36 @@ function fixture(texts, lefts = []) {
   return { items, lines }
 }
 
+test('Text 9 joins the 88px wrap and preserves source coverage while 89px, short lines and new speakers stay separate', () => {
+  for (const [left, tail, right, joins] of [
+    [88, 'located upstairs.', 1138, 1], [89, 'located upstairs.', 1138, 0],
+    [88, 'W: Another speaker.', 1138, 0], [88, 'located upstairs.', 800, 0],
+  ]) {
+    const texts = ['Text 9', 'M: This is the room we are in. It’s', tail]
+    const { items, lines } = fixture(texts)
+    lines[1].words = [
+      { number: 101, text: 'M:', box: { left: 55, top: 535, width: 20, height: 28 } },
+      { number: 102, text: texts[1].slice(3), box: { left: 78, top: 535, width: right - 78, height: 28 } },
+    ]
+    lines[2].words = [
+      { number: 201, text: 'located', box: { left, top: 571, width: 64, height: 28 } },
+      { number: 202, text: 'upstairs.', box: { left: 160, top: 571, width: 180, height: 28 } },
+    ]
+    // Fix the full column independently of the candidate line's fullness.
+    lines[0].words = Array.from({ length: 4 }, (_, i) => ({
+      number: i + 1, text: 'heading', box: { left: 55 + i * 270, top: 480, width: i === 3 ? 273 : 270, height: 28 },
+    }))
+    const original = structuredClone({ items, lines })
+    const result = joinTranscriptTurns(items, lines, {}, 'integer-pixels')
+    assert.equal(result.joins, joins, `${left}/${tail}/${right}`)
+    if (joins) {
+      assert.equal(result.items[1].text, `${texts[1]} ${tail}`)
+      assert.equal(result.items[1].lines, 'L2,L3')
+    } else assert.deepEqual(result.items.map(item => item.text), texts)
+    assert.deepEqual({ items, lines }, original)
+  }
+})
+
 test('production transcript orchestration owns roles, rendition filtering, trace order and document/page state', () => {
   const documents = [
     { documentId: 'question', role: 'question_source' },
@@ -82,7 +112,8 @@ test('keeps speakers, Text headings and genuine paragraph indents separate', () 
     'Text 2（推断题）', 'Here are some more words', 'A new paragraph starts here',
   ], [10, 10, 10, 10, 10, 40])
   assert.equal(joinTranscriptTurns(items, lines, {}, 'fixture').joins, 0)
-  const indented = fixture(['Text 1', 'M: These are some words', 'A new paragraph starts here'], [10, 10, 32])
+  // The integer ceiling is 32px; the first proven indent is the next pixel.
+  const indented = fixture(['Text 1', 'M: These are some words', 'A new paragraph starts here'], [10, 10, 33])
   assert.equal(joinTranscriptTurns(indented.items, indented.lines, {}, 'fixture').joins, 0)
   const hanging = fixture(['Text 1', 'M: These are some words', 'and these continue that turn'], [10, 10, 28])
   assert.equal(joinTranscriptTurns(hanging.items, hanging.lines, {}, 'fixture').joins, 1)
@@ -112,10 +143,13 @@ test('joins a hanging continuation when OCR splits its speaker label from the ph
   assert.equal(result.items[2].text, 'W: Thank you.')
 
   const paragraph = make()
-  paragraph.lines[3].words.forEach((word) => { word.box.left += 20 })
+  // speechLeft=29px and height=10px give a 33px integer ceiling.
+  paragraph.lines[3].words.forEach((word) => { word.box.left += 21 })
   assert.equal(joinTranscriptTurns(paragraph.items, paragraph.lines, {}, 'fixture').joins, 0)
   const separateLine = make()
   separateLine.lines[1].words[0].box.top = 2
+  // Without a hanging label, last.left=11px gives a 15px integer ceiling.
+  separateLine.lines[3].words.forEach((word) => { word.box.left += 1 })
   assert.equal(joinTranscriptTurns(separateLine.items, separateLine.lines, {}, 'fixture').joins, 0)
 })
 

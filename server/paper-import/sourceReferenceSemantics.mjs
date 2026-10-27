@@ -2,11 +2,14 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../scripts/import-pip
 export { OCR_SOURCE_REFERENCES_PRODUCER_VERSION }
 export const LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v17'
 export const PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v18'
-export const usesExplicitWritingTitles = version => version === OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+export const EXPLICIT_TITLES_OCR_SOURCE_REFERENCES_PRODUCER_VERSION = 'ocr-source-references-producer-v19'
+export const usesExplicitWritingTitles = version =>
+  [EXPLICIT_TITLES_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(version)
+export const usesGivenTitleWritingSamples = version => version === OCR_SOURCE_REFERENCES_PRODUCER_VERSION
 
 export function assertSourceReferenceProducerVersion(version) {
   if (![LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-    OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(version)) {
+    EXPLICIT_TITLES_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(version)) {
     throw Object.assign(new Error('Unsupported source-reference producer semantics'),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }

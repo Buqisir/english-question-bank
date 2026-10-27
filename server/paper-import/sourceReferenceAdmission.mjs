@@ -151,7 +151,7 @@ function assertSourceReferenceContent({
     explanationFigures.has(sourceReferenceFigureIdentity(reference)) && reference.sourceRegionId === figure.sourceRegionId))) {
     reject('An excluded explanation figure cannot also appear in writing references')
   }
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected, { producerVersion })
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected, { producerVersion, materialization })
   const expected = allExpected.filter(reference => !explanationFigures.has(sourceReferenceFigureIdentity(reference))
     && (!objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
@@ -163,7 +163,7 @@ function assertSourceReferenceContent({
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
   const illustratedDocuments = new Set(allExpected.map(reference => reference.source.documentId))
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion })
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion, materialization })
   const pictureItems = new Set(allExpected.flatMap(reference => reference.itemIds))
   const sourceOrder = new Map(), sourceOwners = new Map()
   for (const document of confirmation.documents) {

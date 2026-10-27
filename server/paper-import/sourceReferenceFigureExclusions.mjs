@@ -17,7 +17,7 @@ export function sourceReferenceExplanationFigures(materialization, evidence, con
   if (!exclusions.length) return excluded
   const answerIds = new Set(materialization.documents.filter(document => document.role === 'official_answers')
     .map(document => document.documentId))
-  const scoring = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion })
+  const scoring = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion, materialization })
   const essays = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion })
   const confirmedItems = new Map(confirmation.documents.filter(document => answerIds.has(document.documentId))
     .flatMap(document => document.pages.flatMap(page => page.orderedItems))

@@ -12,6 +12,20 @@ const reference = () => ({
   roles: { hasParagraph: true, special: null, afterClosing: false, numbered: false }, location,
 })
 
+test('integer transcript coordinates quantize the fractional indent ceiling without losing the next pixel boundary', () => {
+  const first = [{ text: 'M:', box: { left: 55, top: 535, width: 20, height: 28 } },
+    { text: 'This is the room we are in. It’s', box: { left: 78, top: 535, width: 1060, height: 28 } }]
+  for (const [left, continuation, expected] of [[88, true, 'join'], [89, true, 'separate'], [88, false, 'separate']]) {
+    const next = [{ text: 'located', box: { left, top: 571, width: 64, height: 28 } }]
+    const before = { first, last: first, firstFacts: computeLineFacts({ words: first }), lastFacts: computeLineFacts({ words: first }) }
+    const after = { first: next, last: next, firstFacts: computeLineFacts({ words: next }), lastFacts: computeLineFacts({ words: next }) }
+    const result = decideLineJoin({ content: 'transcript', previous: computeLineFacts({ text: 'M: This is the room we are in. It’s' }),
+      current: computeLineFacts({ text: 'located upstairs.' }), geometry: { unit: 'pixels', before, after, rights: [before.lastFacts.box] },
+      roles: { turnContinuation: continuation }, location })
+    assert.equal(result.resolution, expected, `${left}/${continuation}`)
+  }
+})
+
 test('review decisions carry the old deterministic resolution, exact reviews and both source locators', () => {
   const input = reference()
   const before = structuredClone(input)
