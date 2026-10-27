@@ -16,7 +16,7 @@ import { execFileSync, spawn, spawnSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import {
   appendFileSync, copyFileSync, existsSync, mkdirSync, mkdtempSync, openSync, readFileSync,
-  readdirSync, renameSync, rmSync, statSync, writeFileSync,
+  readdirSync, renameSync, rmSync, rmdirSync, statSync, writeFileSync,
 } from 'node:fs'
 import { createRequire } from 'node:module'
 import os from 'node:os'
@@ -1108,47 +1108,66 @@ export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {
 
 export async function reconcileOcrGeneration(ctx, failurePath, { readStatus, origin } = {}) {
   const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
-  const lock = path.join(ctx.fast, 'ocr-generation.lock')
   if (!existsSync(operationPath)) fail('UNKNOWN: OCR operation 缺失')
-  const operationBytes = readFileSync(operationPath)
-  const op = JSON.parse(operationBytes), plan = op.plan
-  if ((!existsSync(lock) && op.completedAt) || op.revisionId
-    || plan?.schemaVersion !== 'fast-ocr-generation-plan-v1' || plan.paperId !== ctx.paperId
-    || !plan.expectedBaseRevisionId || !/^sha256:[a-f0-9]{64}$/u.test(plan.evidenceDigest || '')
-    || !Number.isFinite(Date.parse(op.startedAt))) fail('UNKNOWN: OCR operation 无法安全闭合')
-  if (!failurePath || path.resolve(failurePath) !== path.resolve(ctx.logs, 'push-ocr.log')) fail('UNKNOWN: push-ocr 日志路径不符')
-  const bytes = readFileSync(failurePath), lines = bytes.toString('utf8').split('\n')
-  const prefix = `$ scripts/import-pipeline/review.mjs push-ocr ${ctx.paperId} --ocr-generation-plan `
-  if (!lines[0].startsWith(prefix) || !lines.includes('--- stderr')
-    || statSync(failurePath).mtimeMs < Date.parse(op.startedAt)) fail('UNKNOWN: push-ocr 日志与操作不符')
-  const loggedPlan = lines[0].slice(prefix.length)
-  if (!loggedPlan || digestJson(readJson(path.resolve(root, loggedPlan))) !== digestJson(plan)) fail('UNKNOWN: push-ocr 计划不符')
-  const failure = failureDetails(Buffer.from(lines.slice(lines.indexOf('--- stderr') + 1).join('\n')))
-  if (failure.httpStatus >= 500) fail('UNKNOWN: 服务端失败不能闭合 OCR operation')
-  origin ||= reconciliationOrigin()
-  if (plan.origin !== origin) fail('UNKNOWN: Review origin 与计划不符')
-  const statusReader = readStatus || (() => {
-    const args = cli('review.mjs', 'status', ctx.paperId, '--raw-response')
-    const argv = target.local ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
-    const result = spawnSync(process.execPath, argv, { cwd: root, env: reviewEnv, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
-    if (result.error || result.status !== 0 || result.signal) fail(`UNKNOWN: Review status 失败 ${result.error?.message || result.stderr || ''}`)
-    return result.stdout
+  const initialOperation = readFileSync(operationPath)
+  return withOcrReconcileLock(ctx, async () => {
+    if (!existsSync(operationPath) || !readFileSync(operationPath).equals(initialOperation)) fail('UNKNOWN: OCR operation 已变化')
+    const lock = path.join(ctx.fast, 'ocr-generation.lock')
+    if (!existsSync(operationPath)) fail('UNKNOWN: OCR operation 缺失')
+    const operationBytes = readFileSync(operationPath)
+    const op = JSON.parse(operationBytes), plan = op.plan
+    if ((!existsSync(lock) && op.completedAt) || op.revisionId
+      || plan?.schemaVersion !== 'fast-ocr-generation-plan-v1' || plan.paperId !== ctx.paperId
+      || !plan.expectedBaseRevisionId || !/^sha256:[a-f0-9]{64}$/u.test(plan.evidenceDigest || '')
+      || !Number.isFinite(Date.parse(op.startedAt))) fail('UNKNOWN: OCR operation 无法安全闭合')
+    if (!failurePath || path.resolve(failurePath) !== path.resolve(ctx.logs, 'push-ocr.log')) fail('UNKNOWN: push-ocr 日志路径不符')
+    const bytes = readFileSync(failurePath), lines = bytes.toString('utf8').split('\n')
+    const prefix = `$ scripts/import-pipeline/review.mjs push-ocr ${ctx.paperId} --ocr-generation-plan `
+    if (!lines[0].startsWith(prefix) || !lines.includes('--- stderr')
+      || statSync(failurePath).mtimeMs < Date.parse(op.startedAt)) fail('UNKNOWN: push-ocr 日志与操作不符')
+    const loggedPlan = lines[0].slice(prefix.length)
+    if (!loggedPlan || digestJson(readJson(path.resolve(root, loggedPlan))) !== digestJson(plan)) fail('UNKNOWN: push-ocr 计划不符')
+    const logText = bytes.toString('utf8')
+    const statusLines = [...logText.matchAll(/^(?:HTTP\s+)?[1-5]\d\d(?:\s|$)/gmu)]
+    if (statusLines.length !== 1 || /fetch\s+failed|econnreset|etimedout|timeout|socket|abort(?:ed)?|\b5\d\d\b/iu.test(logText)) {
+      fail('UNKNOWN: 失败日志含不明确的网络、超时或 HTTP 状态')
+    }
+    const failure = failureDetails(Buffer.from(lines.slice(lines.indexOf('--- stderr') + 1).join('\n')))
+    if (![400, 409, 422].includes(failure.httpStatus)) fail('UNKNOWN: HTTP 状态不允许闭合 OCR operation')
+    origin ||= reconciliationOrigin()
+    if (plan.origin !== origin) fail('UNKNOWN: Review origin 与计划不符')
+    const statusReader = readStatus || (() => {
+      const args = cli('review.mjs', 'status', ctx.paperId, '--raw-response')
+      const argv = target.local ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
+      const result = spawnSync(process.execPath, argv, { cwd: root, env: reviewEnv, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
+      if (result.error || result.status !== 0 || result.signal) fail(`UNKNOWN: Review status 失败 ${result.error?.message || result.stderr || ''}`)
+      return result.stdout
+    })
+    const status = JSON.parse(await statusReader())
+    if (status.paperId !== ctx.paperId || status.latestRevisionId !== plan.expectedBaseRevisionId
+      || status.latest?.id !== status.latestRevisionId || !Array.isArray(status.revisions)
+      || !status.revisions.some(revision => revision?.id === status.latestRevisionId)
+      || status.revisions.some(revision => !revision || revision.paperId !== ctx.paperId || !revision.id
+        || !revision.manifest || typeof revision.candidateDigest !== 'string'
+        || [revision.candidateDigest, revision.evidenceDigest, revision.manifest.candidateDigest,
+          revision.manifest.evidenceDigest].includes(plan.evidenceDigest))) fail('UNKNOWN: Review status 不完整或已有新修订')
+    if (!readFileSync(operationPath).equals(operationBytes) || !readFileSync(failurePath).equals(bytes)) fail('UNKNOWN: 对账期间证据发生变化')
+    const now = new Date().toISOString()
+    writeJson(operationPath, { ...op, rejectedAt: now, rejection: { status: failure.httpStatus,
+      code: failure.errorCode, receiptSha256: sha256(bytes) }, reconciledAt: now })
+    archive(ctx, operationPath)
+    if (existsSync(lock)) rmSync(lock, { recursive: true })
+    return { reconciledAt: now, status: failure.httpStatus, code: failure.errorCode }
   })
-  const status = JSON.parse(await statusReader())
-  if (status.paperId !== ctx.paperId || status.latestRevisionId !== plan.expectedBaseRevisionId
-    || status.latest?.id !== status.latestRevisionId || !Array.isArray(status.revisions)
-    || !status.revisions.some(revision => revision?.id === status.latestRevisionId)
-    || status.revisions.some(revision => !revision || revision.paperId !== ctx.paperId || !revision.id
-      || !revision.manifest || typeof revision.candidateDigest !== 'string'
-      || [revision.candidateDigest, revision.evidenceDigest, revision.manifest.candidateDigest,
-        revision.manifest.evidenceDigest].includes(plan.evidenceDigest))) fail('UNKNOWN: Review status 不完整或已有新修订')
-  if (!readFileSync(operationPath).equals(operationBytes) || !readFileSync(failurePath).equals(bytes)) fail('UNKNOWN: 对账期间证据发生变化')
-  const now = new Date().toISOString()
-  writeJson(operationPath, { ...op, rejectedAt: now, rejection: { status: failure.httpStatus,
-    code: failure.errorCode, receiptSha256: sha256(bytes) }, reconciledAt: now })
-  archive(ctx, operationPath)
-  if (existsSync(lock)) rmSync(lock, { recursive: true })
-  return { reconciledAt: now, status: failure.httpStatus, code: failure.errorCode }
+}
+
+async function withOcrReconcileLock(ctx, action) {
+  const lock = path.join(ctx.fast, 'ocr-generation-reconcile.lock')
+  try { mkdirSync(lock, { mode: 0o700 }) } catch (error) {
+    if (error.code === 'EEXIST') fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 对账或新代启动正在进行')
+    throw error
+  }
+  try { return await action() } finally { rmdirSync(lock) }
 }
 
 function assertReferencesMutable(ctx) {
@@ -1463,40 +1482,42 @@ export async function requestedRedo(ctx, name) {
 
 export async function startOcrGeneration(ctx, planPath, checkPlan = async () => run(ctx, 'check-ocr-generation',
   cli('review.mjs', 'check-ocr-generation', ctx.paperId, '--ocr-generation-plan', path.resolve(planPath)), { review: true })) {
-  assertReferencesMutable(ctx)
-  const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
-  if (existsSync(operationPath) && !readJson(operationPath).completedAt) fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 已有未闭合新代操作；先只读对账，勿自动重放')
-  if (!ctx.state.steps.compile?.finishedAt) fail('显式新代要求先完成 compile 并审查计划，不在执行计划时重新 compile')
-  const plan = readJson(path.resolve(planPath))
-  await checkPlan()
-  for (const [file, digest] of [
-    ['signals/agent-proofreading-receipt.json', plan.baseReceiptDigest],
-    ['materialization/nck1-ocr-source-confirmation-v1.json', plan.baseConfirmationDigest],
-  ]) {
-    const installed = path.join(ctx.paperDir, file)
-    if (existsSync(installed) && digestJson(readJson(installed)) !== digest) fail('本地旧 OCR 安装与计划不符；保留证据并对账')
-  }
-  // Use the existing publication-operation lock convention: retain it on
-  // failure and never infer that a response loss means no remote mutation.
-  mkdirSync(path.join(ctx.fast, 'ocr-generation.lock'), { mode: 0o700 })
-  if (existsSync(operationPath)) archive(ctx, operationPath)
-  writeJson(operationPath, { plan, startedAt: new Date().toISOString() }, 'wx')
-  const stateSnapshot = path.join(ctx.work, 'superseded', `ocr-generation-${digestJson(plan).slice(7)}-state.json`)
-  if (existsSync(stateSnapshot)) archive(ctx, stateSnapshot, 'prior-')
-  writeJson(stateSnapshot, ctx.state, 'wx')
-  redoFrom(ctx, 'ocr-review')
-  for (const [index, file] of [
-    path.join(ctx.paperDir, 'signals/agent-proofreading-receipt.json'),
-    path.join(ctx.paperDir, 'materialization/nck1-ocr-source-confirmation-v1.json'),
-    path.join(ctx.paperDir, 'materialization/agent-proofreading-receipt.json'),
-    path.join(ctx.paperDir, 'canonical-evidence'),
-    path.join(ctx.work, 'ocr-correction-entries.json'),
-    path.join(ctx.work, 'materialization-edits.json'),
-    ...['summaries-parts', 'search-metadata-authored.json', 'spelling-request.json', 'spelling-review.json',
-      'round2.json'].map(file => path.join(ctx.fast, file)),
-  ].entries()) archive(ctx, file, `ocr-generation-${index}-`)
-  // Retain old listening attempt directories as evidence; redoFrom forgets
-  // their binding so the existing rule creates a new attempt for the new input.
+  return withOcrReconcileLock(ctx, async () => {
+    assertReferencesMutable(ctx)
+    const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
+    if (existsSync(operationPath) && !readJson(operationPath).completedAt) fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 已有未闭合新代操作；先只读对账，勿自动重放')
+    if (!ctx.state.steps.compile?.finishedAt) fail('显式新代要求先完成 compile 并审查计划，不在执行计划时重新 compile')
+    const plan = readJson(path.resolve(planPath))
+    await checkPlan()
+    for (const [file, digest] of [
+      ['signals/agent-proofreading-receipt.json', plan.baseReceiptDigest],
+      ['materialization/nck1-ocr-source-confirmation-v1.json', plan.baseConfirmationDigest],
+    ]) {
+      const installed = path.join(ctx.paperDir, file)
+      if (existsSync(installed) && digestJson(readJson(installed)) !== digest) fail('本地旧 OCR 安装与计划不符；保留证据并对账')
+    }
+    // Use the existing publication-operation lock convention: retain it on
+    // failure and never infer that a response loss means no remote mutation.
+    mkdirSync(path.join(ctx.fast, 'ocr-generation.lock'), { mode: 0o700 })
+    if (existsSync(operationPath)) archive(ctx, operationPath)
+    writeJson(operationPath, { plan, startedAt: new Date().toISOString() }, 'wx')
+    const stateSnapshot = path.join(ctx.work, 'superseded', `ocr-generation-${digestJson(plan).slice(7)}-state.json`)
+    if (existsSync(stateSnapshot)) archive(ctx, stateSnapshot, 'prior-')
+    writeJson(stateSnapshot, ctx.state, 'wx')
+    redoFrom(ctx, 'ocr-review')
+    for (const [index, file] of [
+      path.join(ctx.paperDir, 'signals/agent-proofreading-receipt.json'),
+      path.join(ctx.paperDir, 'materialization/nck1-ocr-source-confirmation-v1.json'),
+      path.join(ctx.paperDir, 'materialization/agent-proofreading-receipt.json'),
+      path.join(ctx.paperDir, 'canonical-evidence'),
+      path.join(ctx.work, 'ocr-correction-entries.json'),
+      path.join(ctx.work, 'materialization-edits.json'),
+      ...['summaries-parts', 'search-metadata-authored.json', 'spelling-request.json', 'spelling-review.json',
+        'round2.json'].map(file => path.join(ctx.fast, file)),
+    ].entries()) archive(ctx, file, `ocr-generation-${index}-`)
+    // Retain old listening attempt directories as evidence; redoFrom forgets
+    // their binding so the existing rule creates a new attempt for the new input.
+  })
 }
 
 // Source-relationship edits start after producer/presentation. Reuse the
