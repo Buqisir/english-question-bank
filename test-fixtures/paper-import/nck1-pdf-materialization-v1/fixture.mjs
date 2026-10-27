@@ -78,7 +78,7 @@ function reading(letter, from, to, { table = false, crossPageParagraph = false }
   ].join('')
 }
 
-function questionHtml({ includeTable = true, crossPageParagraph = false, listening = false } = {}) {
+function questionHtml({ includeTable = true, crossPageParagraph = false, crossPageBlanks = false, listening = false } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`A short guide has ${36 + index}._____ for learners.`)).join('')
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
@@ -114,11 +114,17 @@ function questionHtml({ includeTable = true, crossPageParagraph = false, listeni
     paragraph('第三部分 语言运用 (共两节，满分30分)'),
     paragraph('第一节(共15小题；每小题1分，满分15分)'),
     paragraph('阅读下面短文，从每题所给的四个选项中选出最佳选项。'),
-    paragraph(`A learner finished the plan: ${clozeText}.`),
+    ...(crossPageBlanks ? [
+      paragraph(`A learner finished the plan: ${clozeText} standing desks`),
+      '<p style="break-before:page">too.</p>',
+    ] : [paragraph(`A learner finished the plan: ${clozeText}.`)]),
     ...Array.from({ length: 15 }, (_, index) => question(41 + index)),
     paragraph('第二节(共10小题；每小题1.5分，满分15分)'),
     paragraph('阅读下面材料，在空白处填入适当的单词或括号内单词的正确形式。'),
-    paragraph(`Practice helps: ${grammarText}.`),
+    ...(crossPageBlanks ? [
+      paragraph(`Practice helps: ${grammarText.split(' and ').slice(0, 5).join(' and ')} not`),
+      `<p style="break-before:page">${escaped(grammarText.split(' and ').slice(5).join(' and '))}.</p>`,
+    ] : [paragraph(`Practice helps: ${grammarText}.`)]),
     paragraph('第四部分 写作 (共两节，满分40分)'),
     paragraph('第一节(满分15分)'),
     paragraph('Write a short notice for the reading club.'),
@@ -262,11 +268,12 @@ export async function makeSyntheticNck1PdfFixture({
   includeTable = true,
   includeExtractionCases = true,
   crossPageParagraph = false,
+  crossPageBlanks = false,
   listening = false,
 } = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'chromium' })
   try {
-    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable, crossPageParagraph, listening })))
+    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable, crossPageParagraph, crossPageBlanks, listening })))
     const answerBytes = await renderPdf(browser, documentHtml(answerHtml({ listening })))
     const answerShapeBytes = includeAnswerShapes ? {
       keyOnly: await renderPdf(browser, documentHtml(answerHtml({ answerShape: 'key_only' }))),
