@@ -35,6 +35,26 @@ test('compound edge anchors join only adjacent tokens in either direction and re
   assert.equal(anchors([repeated], 'Everyone will come back home for dinnertime', 0, 30, 'tail').length, 2)
 })
 
+test('ordinary and split compound evidence at the same edge are merged', () => {
+  for (const kind of ['head', 'tail']) {
+    const source = kind === 'head'
+      ? 'Dinnertime brings everyone back home now'
+      : 'Everyone comes back home for dinnertime'
+    const ordinary = kind === 'head'
+      ? ['dinnertime', 'brings', 'everyone', 'back', 'home', 'now']
+      : ['everyone', 'comes', 'back', 'home', 'for', 'dinnertime']
+    const split = kind === 'head'
+      ? ['dinner', 'time', ...ordinary.slice(1)]
+      : [...ordinary.slice(0, -1), 'dinner', 'time']
+    const make = tokens => ({ engine: 'fixture', words: tokens.map((token, i) => {
+      const start = kind === 'head' ? (i < 2 && tokens.length === 7 ? i * 0.2 : (i - (tokens.length === 7 ? 1 : 0)))
+        : (tokens.length === 7 && i === 6 ? 5.2 : i)
+      return { token, startSeconds: start, endSeconds: start + (token === 'dinnertime' ? 0.5 : 0.3) }
+    }) })
+    assert.equal(anchors([make(ordinary), make(split)], source, 0, 20, kind).length, 1)
+  }
+})
+
 function fixture() {
   const temp = realpathSync(mkdtempSync(path.join(tmpdir(), 'eqb-review-pack-'))), root = path.join(temp, 'repo')
   const paperId = 'paper-mock-review-test', paperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
@@ -60,6 +80,37 @@ function fixture() {
 }
 
 for (const kind of ['head', 'tail']) {
+  test(`overlapping ${kind} contexts with distinct edge words remain ambiguous`, () => {
+    const f = fixture()
+    try {
+      const source = kind === 'head'
+        ? 'Dinnertime brings everyone back home now. Fresh apples grow beyond those hills.'
+        : 'Bright birds gather beside our quiet river. Everyone comes back home for dinnertime.'
+      const entries = kind === 'head'
+        ? [['dinner', 2], ['time', 2.2], ['dinnertime', 7.4], ['brings', 7.6],
+          ['everyone', 7.8], ['back', 8], ['home', 8.2], ['now', 8.4]]
+        : [['everyone', 11.3], ['comes', 11.5], ['back', 11.7], ['home', 11.9],
+          ['for', 12.1], ['dinnertime', 12.2], ['dinner', 17.4], ['time', 17.6]]
+      const words = entries.map(([token, startSeconds]) => ({ token, startSeconds, endSeconds: startSeconds + 0.1 }))
+      const otherTokens = kind === 'head'
+        ? ['fresh', 'apples', 'grow', 'beyond', 'those', 'hills']
+        : ['bright', 'birds', 'gather', 'beside', 'our', 'quiet', 'river']
+      const other = otherTokens.map((token, i) => ({
+        token, startSeconds: (kind === 'head' ? 22 : 2) + i * 0.15,
+        endSeconds: (kind === 'head' ? 22 : 2) + i * 0.15 + 0.1,
+      }))
+      put(path.join(f.attempt, 'input.json'),
+        { audioSha256: hash(f.audio), subject: { durationSeconds: 30, paperId: f.paperId } })
+      put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
+        sourceText: source, expectedReadings: 1,
+        observedWindows: [{ words, evidencePaths: [] }, { words: other, evidencePaths: [] }] }] })
+      assert.throws(() => buildReviewPack(f), kind === 'head'
+        ? /REVIEW_PACK_READING_COUNT_AMBIGUOUS.*found 2/u
+        : /REVIEW_PACK_TAIL_AMBIGUOUS.*: 2/u)
+      assert.equal(existsSync(f.output), false)
+    } finally { rmSync(f.temp, { recursive: true, force: true }) }
+  })
+
   test(`compound ${kind} candidate cannot bridge two ordinary hits`, () => {
     const f = fixture()
     try {

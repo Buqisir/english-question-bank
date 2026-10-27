@@ -82,7 +82,7 @@ export function anchors(streams, text, low, high, kind) {
   const source = normalizeListeningText(text.replace(/(?:^|(?<=[.!?\n])\s*)[MW]:/gmu, ''))
   const needle = kind === 'head' ? source.slice(0, 6) : source.slice(-6)
   if (needle.length < 3) fail('REVIEW_PACK_SOURCE_TOO_SHORT', text)
-  const hits = [], compoundHits = []
+  const hits = [], compoundHits = [], edgeSpans = new WeakMap()
   for (const stream of streams) {
     const positions = new WeakMap()
     const words = stream.words.flatMap(w => normalizeListeningText(w.token ?? w.rawRunText ?? '')
@@ -98,12 +98,14 @@ export function anchors(streams, text, low, high, kind) {
         const sourceEdge = head ? needle[0] : needle.at(-1)
         const observedEdge = head ? block[0] : block.at(-1)
         const compound = sourceEdge !== observedEdge.token
+        let splitEdge = false
         if (compound) {
           const adjacent = head ? block[1] : block.at(-2)
           const sourcePair = head ? needle.slice(0, 2) : needle.slice(-2)
           const observedPair = head ? block.slice(0, 2) : block.slice(-2)
           if (adjacent && positions.get(observedPair[1]) === positions.get(observedPair[0]) + 1
               && observedPair.map(w => w.token).join('') === sourceEdge) {
+            splitEdge = true
             observedTokens = head ? [sourceEdge, ...observedTokens.slice(2)] : [...observedTokens.slice(0, -2), sourceEdge]
           } else if (sourcePair.join('') === observedEdge.token) {
             sourceTokens = head ? [observedEdge.token, ...needle.slice(2)] : [...needle.slice(0, -2), observedEdge.token]
@@ -111,8 +113,11 @@ export function anchors(streams, text, low, high, kind) {
         }
         const score = similarity(sourceTokens, observedTokens)
         if (score < 0.72) continue
-        ;(compound ? compoundHits : hits).push({ score, start: block[0].startSeconds, end: block.at(-1).endSeconds,
-          engine: stream.engine, evidencePaths: stream.evidencePaths, words: block })
+        const hit = { score, start: block[0].startSeconds, end: block.at(-1).endSeconds,
+          engine: stream.engine, evidencePaths: stream.evidencePaths, words: block }
+        const edgeWords = head ? block.slice(0, splitEdge ? 2 : 1) : block.slice(splitEdge ? -2 : -1)
+        edgeSpans.set(hit, { start: edgeWords[0].startSeconds, end: edgeWords.at(-1).endSeconds })
+        ;(compound ? compoundHits : hits).push(hit)
       }
     }
   }
@@ -121,10 +126,14 @@ export function anchors(streams, text, low, high, kind) {
   for (const h of hits.sort((a, b) => quality(b) - quality(a))) {
     if (!kept.some(k => Math.abs(h[field] - k[field]) < 4)) kept.push(h)
   }
-  // A compound match is duplicate evidence only when its interval overlaps
-  // an already retained hit. Never let it bridge distinct ordinary hits.
+  // Context can overlap across distinct utterances; compare only the actual
+  // edge word (both tokens when ASR splits the compound).
   for (const h of compoundHits.sort((a, b) => quality(b) - quality(a))) {
-    if (!kept.some(k => h.start < k.end && k.start < h.end)) kept.push(h)
+    const edge = edgeSpans.get(h)
+    if (!kept.some(k => {
+      const other = edgeSpans.get(k)
+      return edge.start < other.end && other.start < edge.end
+    })) kept.push(h)
   }
   return kept.sort((a, b) => a.start - b.start)
 }
