@@ -980,7 +980,11 @@ function publish(context, options = {}) {
 
 const publicationFixtures = new Map()
 function publishReviewedFixture(input) {
-  if (input.approvedReviewSubject) return publishUniversalNck1Import(input)
+  return publishUniversalNck1Import(reviewedFixtureInput(input))
+}
+
+function reviewedFixtureInput(input) {
+  if (input.approvedReviewSubject) return input
   const key = `${input.reviewRootDir}:${input.approvedManifest?.bundleDigest || JSON.stringify(input.approvedIdentity)}`
   let fixture = publicationFixtures.get(key)
   if (!fixture) {
@@ -993,13 +997,13 @@ function publishReviewedFixture(input) {
     publicationFixtures.set(key, fixture)
   }
   const reviewed = publicationFixtureInput(fixture)
-  return publishUniversalNck1Import({ ...reviewed, ...input,
+  return { ...reviewed, ...input,
     approvedManifest: input.approvedManifest || fixture.manifest,
-    approvedIdentity: { ...fixture.approval, ...input.approvedIdentity,
-      revisionId: fixture.revision.id, approvalId: fixture.approval.approvalId },
+    // Only the real finalized store supplies a sealed approval identity.
+    approvedIdentity: { ...fixture.approval },
     withPreparedReviewSubject: reviewed.withPreparedReviewSubject,
     onPrepared(target) { reviewed.onPrepared(target); input.onPrepared?.(target) },
-  })
+  }
 }
 
 function publishedVersionCount(context) {
@@ -3198,17 +3202,24 @@ for (const [label, mutate] of [
   const context = makeContext(label)
   try {
     freezeReviewFixture(context.reviewRoot)
-    const identity = approvedIdentity(context.projection)
     const request = loadCanonicalImportRequest(context.requestPath)
-    mutate({ identity, request })
-    const result = publishReviewedFixture({
+    const input = reviewedFixtureInput({
       reviewRootDir: context.reviewRoot,
-      approvedIdentity: identity,
+      approvedIdentity: approvedIdentity(context.projection),
       canonicalRequest: request,
       db: context.db,
       paperAssetsDir: context.paperAssetsDir,
     })
-    assert.equal(result.ok, false)
+    assert.equal(input.approvedIdentity.candidateDigest, input.approvedManifest.candidateDigest)
+    assert.equal(input.approvedIdentity.bundleDigest, reviewBundleDigest(input.approvedManifest))
+    mutate({ identity: input.approvedIdentity, request })
+    if (label === 'stale-approval') {
+      // A corrupted approval is rejected before canonical admission returns a result.
+      assert.throws(() => publishUniversalNck1Import(input),
+        { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+    } else {
+      assert.equal(publishUniversalNck1Import(input).ok, false)
+    }
     assert(!existsSync(context.paperAssetsDir))
     assert.equal(publishedVersionCount(context), 0)
   } finally {
@@ -3309,9 +3320,7 @@ function attachSourceReferences(context, { continuedParagraph = false } = {}) {
   writeJson(path.join(context.reviewRoot, SOURCE_REFERENCES_FILE), sidecar)
   context.projection = buildNck1ReviewProjection(context.reviewRoot, { requireAnalyses: true })
   const approvedManifest = reviewManifestFor(context.reviewRoot, context.projection)
-  return { approvedManifest, approvedIdentity: { ...approvedIdentity(context.projection),
-    bundleDigest: approvedManifest.bundleDigest, approvalId: 'approval-source-reference-fixture',
-    revisionId: 'revision-source-reference-fixture' } }
+  return { approvedManifest, approvedIdentity: approvedIdentity(context.projection) }
 }
 
 const referencePreCommit = makeContext('references-precommit')
