@@ -7,7 +7,7 @@ import { DatabaseSync } from 'node:sqlite'
 import { createImportReviewStore, ocrReviewBundleDigest, validateOcrReviewBundleManifest } from '../../server/import-review/importReviewStore.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.mjs'
-import { runOcrReview, startOcrGeneration } from './fast-import.mjs'
+import { reconcileOcrGeneration, runOcrReview, startOcrGeneration } from './fast-import.mjs'
 import { buildNck1OcrReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { nck1OcrEvidenceDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 
@@ -231,6 +231,82 @@ test('fast generation UNKNOWN retains lock/intent; repeat never reaches another 
   assert.equal(uploads, 1)
   assert(existsSync(path.join(ctx.fast, 'ocr-generation.lock')))
   assert.equal(JSON.parse(readFileSync(path.join(ctx.fast, 'ocr-generation-operation.json'))).completedAt, undefined)
+}))
+
+async function rejectedGeneration(run) {
+  return fastFixture(async ({ ctx, planPath }) => {
+    ctx.logs = path.join(ctx.fast, 'logs')
+    await startOcrGeneration(ctx, planPath, async () => {})
+    mkdirSync(ctx.logs, { recursive: true })
+    const file = path.join(ctx.logs, 'push-ocr.log')
+    const receipt = status => `$ scripts/import-pipeline/review.mjs push-ocr ${paperId} --ocr-generation-plan ${planPath}\n\n--- stderr\n${status}\n`
+    writeFileSync(file, receipt('400 IMPORT_REVIEW_BUNDLE_DIGEST_MISMATCH rejected'))
+    const f = planningFixture()
+    f.base.candidateDigest = f.base.manifest.evidenceDigest
+    const options = { origin: f.context.origin, readStatus: async () => JSON.stringify(f.status) }
+    await run({ ctx, planPath, file, receipt, options, status: f.status })
+  })
+}
+
+test('reconcile rejected OCR archives evidence, releases lock and permits same plan', () => rejectedGeneration(async ({ ctx, planPath, file, options }) => {
+  const hash = sha256(readFileSync(file))
+  await reconcileOcrGeneration(ctx, file, options)
+  assert.equal(existsSync(path.join(ctx.fast, 'ocr-generation.lock')), false)
+  const name = readdirSync(path.join(ctx.work, 'superseded')).find(name => name.endsWith('ocr-generation-operation.json'))
+  const op = JSON.parse(readFileSync(path.join(ctx.work, 'superseded', name)))
+  assert.deepEqual(op.rejection, { status: 400, code: 'IMPORT_REVIEW_BUNDLE_DIGEST_MISMATCH', receiptSha256: hash })
+  assert(op.rejectedAt && op.reconciledAt)
+  await startOcrGeneration(ctx, planPath, async () => {})
+  assert(existsSync(path.join(ctx.fast, 'ocr-generation.lock')))
+}))
+
+for (const scenario of ['500', 'timeout', '408', '408 timeout', '429', 'fetch then 400', '503 then 400', 'revisionId', 'new revision', 'latest changed', 'wrong origin', 'status error']) {
+  test(`reconcile rejects ${scenario} without altering operation or lock`, () => rejectedGeneration(async ({ ctx, file, receipt, options, status }) => {
+    const operation = path.join(ctx.fast, 'ocr-generation-operation.json')
+    if (scenario === '500') writeFileSync(file, receipt('500 INTERNAL_ERROR failed'))
+    if (scenario === 'timeout') writeFileSync(file, receipt('timeout'))
+    if (scenario === '408') writeFileSync(file, receipt('408 REQUEST_REJECTED rejected'))
+    if (scenario === '408 timeout') writeFileSync(file, receipt('408 REQUEST_TIMEOUT rejected'))
+    if (scenario === '429') writeFileSync(file, receipt('429 RATE_LIMIT rejected'))
+    if (scenario === 'fetch then 400') writeFileSync(file, receipt('fetch failed\n400 IMPORT_REVIEW_BUNDLE_DIGEST_MISMATCH rejected'))
+    if (scenario === '503 then 400') writeFileSync(file, receipt('503 SERVICE_UNAVAILABLE failed\n400 IMPORT_REVIEW_BUNDLE_DIGEST_MISMATCH rejected'))
+    if (scenario === 'revisionId') {
+      const op = JSON.parse(readFileSync(operation)); op.revisionId = 'rev-new'
+      writeFileSync(operation, JSON.stringify(op))
+    }
+    if (scenario === 'new revision') {
+      const plan = JSON.parse(readFileSync(operation)).plan
+      status.revisions.push({ ...status.latest, id: 'rev-new', candidateDigest: plan.evidenceDigest })
+    }
+    if (scenario === 'latest changed') status.latestRevisionId = 'rev-other'
+    if (scenario === 'wrong origin') options.origin = 'http://127.0.0.1:12345'
+    if (scenario === 'status error') options.readStatus = async () => { throw new Error('connection lost') }
+    const before = readFileSync(operation)
+    await assert.rejects(() => reconcileOcrGeneration(ctx, file, options))
+    assert.deepEqual(readFileSync(operation), before)
+    assert(existsSync(path.join(ctx.fast, 'ocr-generation.lock')))
+  }))
+}
+
+test('concurrent reconciliation and generation restart cannot enter while reconciliation is reading status', () => rejectedGeneration(async ({ ctx, planPath, file, options }) => {
+  let resume, entered
+  const active = new Promise(resolve => { entered = resolve })
+  const waiting = new Promise(resolve => { resume = resolve })
+  const originalReader = options.readStatus
+  const first = reconcileOcrGeneration(ctx, file, { ...options, readStatus: async () => {
+    entered()
+    await waiting
+    return originalReader()
+  } })
+  await active
+  try {
+    await assert.rejects(() => reconcileOcrGeneration(ctx, file, options), /正在进行/)
+    await assert.rejects(() => startOcrGeneration(ctx, planPath, async () => { throw new Error('must not inspect') }), /正在进行/)
+    assert(existsSync(path.join(ctx.fast, 'ocr-generation.lock')))
+    assert(existsSync(path.join(ctx.fast, 'ocr-generation-operation.json')))
+  } finally { resume() }
+  await first
+  assert.equal(existsSync(path.join(ctx.fast, 'ocr-generation-reconcile.lock')), false)
 }))
 
 test('fast generation refuses local submission evidence before inspecting or archiving anything', () => fastFixture(async ({ ctx, planPath }) => {
