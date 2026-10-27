@@ -1029,12 +1029,23 @@ test('v23 recognizes an unlabeled continuation only with both ordered given star
   const second = "Slowly, the baby's cries softened. The room grew quiet."
   const result = referencesFixture([...prompt, first, second], ['continuation'], { starters })
   assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '), `${first} ${second}`)
+  const wrapped = referencesFixture([...prompt, 'Mary paused at the gate. She asked her',
+    'mother for help.', "Slowly, the baby's cries softened.", 'The room grew quiet.'], ['continuation'], { starters })
+  assert.equal(wrapped.groups[0].essays.state, 'captured')
   const diagnostics = []
   t.mock.method(console, 'error', message => diagnostics.push(message))
   t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
   for (const body of [[first], [second, first], [first, '4. 评分细则', second],
     [first, '（一）其他小节', second], ['Mary paused at the gates. She waited.', second],
-    ['Mary paused at the gate.', second]]) {
+    ['Mary paused at the gate.', second],
+    ['Mary paused at the gate.', 'Paragraph 2:', "Slowly, the baby's cries softened."],
+    ['Mary paused at the gate.', 'Write about 150 words in total.', "Slowly, the baby's cries softened."],
+    ['Mary paused at the gate.', 'Your answer should be 150 words.', "Slowly, the baby's cries softened."],
+    ['Mary paused at the gate.', '____________________', "Slowly, the baby's cries softened."],
+    ['Mary paused at the gate.', '--------------------', "Slowly, the baby's cries softened."],
+    [first, "Slowly, the baby's cries softened."],
+    [first, "Slowly, the baby's cries softened. Write about 150 words in total."],
+    ['Mary paused at the gate. Paragraph 2:', second]]) {
     assert.throws(() => referencesFixture([...prompt, ...body], ['continuation'], { starters }), /unresolved source reference/)
   }
   assert.throws(() => referencesFixture([...prompt, first, second], ['continuation'],

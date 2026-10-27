@@ -662,6 +662,13 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
     : []
   const startsWithGiven = (line, starter) => normalized(line.text).startsWith(starter)
     && (!normalized(line.text).slice(starter.length) || /^\s/u.test(normalized(line.text).slice(starter.length)))
+  const nonNarrative = text => /(?:\bparagraph\s*[12]\s*[:：]|\b(?:write|continue)\s+(?:about|at least|no more than|the story|your story|two paragraphs)\b|\b(?:please\s+write|your (?:answer|continuation|story) should|word count|words in total)\b|第[一二12]段|注意|词数|字数)/iu.test(text)
+    || /(?:^|[.!?]\s+)(?:please\s+)?(?:write|continue|use|include|ensure|make sure|do not)\b/iu.test(text.trim())
+    || /_{3,}|(?:^|\s)[\-–—]{3,}(?:\s|$)/u.test(text)
+  // Require a complete extra sentence, not just the two supplied openers,
+  // labels, writing instructions or empty answer lines.
+  const hasNarrativeSentence = text =>
+    /\b[A-Za-z]+(?:['’-][A-Za-z]+)*\s+(?:[A-Za-z]+(?:['’-][A-Za-z]+)*\b[\s,;:'"()\-–—]*)+[^.!?]*[.!?]/u.test(text)
   // Only open an unlabeled sample when the first given starts immediately
   // after the prompt, and the second follows continuous prose in source order.
   const confirmedUnlabeled = promptIndex => {
@@ -669,7 +676,9 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       || given.some(s => !s || !/[.!?]$/u.test(s)) || given[0] === given[1]) return null
     const first = sectionLines[promptIndex + 1]
     if (!first || !startsWithGiven(first, given[0])) return null
-    let body = normalized(first.text).slice(given[0].length).trim()
+    const body = [normalized(first.text).slice(given[0].length).trim(), '']
+    if (nonNarrative(body[0])) return null
+    let paragraph = 0
     for (const line of sectionLines.slice(promptIndex + 2)) {
       const facts = factsFor(line)
       if (line.figure || line.table || line.repeatedTaskBoundary || facts.hasHan
@@ -677,10 +686,18 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
         || firstLineRole('scoring-section', facts) || matchesLineRole('writing.part-boundary', facts)
         || matchesLineRole('writing.continuation-prompt', facts)
         || matchesLineRole('writing.student-script', facts) || matchesLineRole('writing.omission', facts, { inWriting: true })
-        || !facts.startsEnglishOrQuote) return null
-      if (startsWithGiven(line, given[1])) return body ? first : null
+        || !facts.startsEnglishOrQuote || nonNarrative(normalized(line.text))) return null
+      if (startsWithGiven(line, given[1])) {
+        if (paragraph || !hasNarrativeSentence(body[0])) return null
+        paragraph = 1
+        body[1] = normalized(line.text).slice(given[1].length).trim()
+        if (nonNarrative(body[1])) return null
+        if (hasNarrativeSentence(body[1])) return first
+        continue
+      }
       if (startsWithGiven(line, given[0])) return null
-      body += normalized(line.text)
+      body[paragraph] += ` ${normalized(line.text)}`
+      if (paragraph === 1 && hasNarrativeSentence(body[1])) return first
     }
     return null
   }
