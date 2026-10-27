@@ -823,10 +823,26 @@ export function resolveConfirmedNck1OcrEvidence({
         const anchor = confirmedPage.orderedItems[replacement.insertAt - 1]?.itemId
         // A semantic table replaces its cell prose but survives as one object.
         // Only its exact final boundary can anchor a following image; interior
-        // cell IDs and text consumed by another image remain illegal anchors.
+        // cell IDs remain illegal anchors.
         const afterTable = replacements.some(table => table.item?.kind === 'table'
           && table.itemIds.at(-1) === anchor && table.insertAt + table.itemIds.length === replacement.insertAt)
-        if ((replacement.media || replacement.referenceFigure) && claimedItems.has(anchor) && !afterTable) {
+        // Only a resolved question-PDF image may expose its exact final item
+        // as the boundary of another nonempty, disjoint image on this page.
+        const owners = replacements.filter(item => item.itemIds.includes(anchor))
+        const predecessor = owners.length === 1 ? owners[0] : null
+        const first = predecessor?.media?.source
+        const second = replacement.media?.source
+        const exactItems = item => item.itemIds.length > 0
+          && item.itemIds.every((id, offset) => confirmedPage.orderedItems[item.insertAt + offset]?.itemId === id)
+        const a = first?.region, b = second?.region
+        const disjoint = a && b && (a.x + a.width <= b.x + 0.000001 || b.x + b.width <= a.x + 0.000001
+          || a.y + a.height <= b.y + 0.000001 || b.y + b.height <= a.y + 0.000001)
+        const afterImage = document.role === 'question_source' && document.mediaType === 'application/pdf'
+          && first?.documentId === document.documentId && second?.documentId === document.documentId
+          && first?.page === confirmedPage.page && second?.page === confirmedPage.page
+          && predecessor.itemIds.at(-1) === anchor && exactItems(predecessor) && exactItems(replacement)
+          && predecessor.insertAt + predecessor.itemIds.length === replacement.insertAt && disjoint
+        if ((replacement.media || replacement.referenceFigure) && claimedItems.has(anchor) && !afterTable && !afterImage) {
           issues.push(issue('NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED', 'ocrConfirmation',
             'Image placement anchor cannot be consumed by another visual', document.documentId, confirmedPage.page))
         }
