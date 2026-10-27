@@ -1030,7 +1030,7 @@ test('v23 recognizes an unlabeled continuation only with both ordered given star
   const result = referencesFixture([...prompt, first, second], ['continuation'], { starters })
   assert.deepEqual(result.groups[0].essays.entries[0].paragraphs.map(p => p.text).join(' '), `${first} ${second}`)
   const wrapped = referencesFixture([...prompt, 'Mary paused at the gate. She asked her',
-    'mother for help.', "Slowly, the baby's cries softened.", 'The room grew quiet.'], ['continuation'], { starters })
+    'mother for help.', "Slowly, the baby's cries softened.", 'The room grew quiet.', '英语听力部分录音稿'], ['continuation'], { starters })
   assert.equal(wrapped.groups[0].essays.state, 'captured')
   const diagnostics = []
   t.mock.method(console, 'error', message => diagnostics.push(message))
@@ -1045,11 +1045,22 @@ test('v23 recognizes an unlabeled continuation only with both ordered given star
     ['Mary paused at the gate.', '--------------------', "Slowly, the baby's cries softened."],
     [first, "Slowly, the baby's cries softened."],
     [first, "Slowly, the baby's cries softened. Write about 150 words in total."],
+    ['Mary paused at the gate. Your answer', 'should be 150 words.',
+      "Slowly, the baby's cries softened. Your continuation", 'should be 150 words.'],
+    ['Mary paused at the gate. Your answer', 'should be 150 words.', second],
+    [first, "Slowly, the baby's cries softened. Your continuation", 'should be 150 words.'],
+    [first, second, 'Your answer', 'should be 150 words.'],
+    ['Mary paused at the gate. __', '__', second],
+    [first, "Slowly, the baby's cries softened. __", '__'],
     ['Mary paused at the gate. Paragraph 2:', second]]) {
     assert.throws(() => referencesFixture([...prompt, ...body], ['continuation'], { starters }), /unresolved source reference/)
   }
   assert.throws(() => referencesFixture([...prompt, first, second], ['continuation'],
     { starters, producerVersion: 'ocr-source-references-producer-v22' }), /unresolved source reference/)
+  assert.throws(() => referencesFixture([...prompt, 'Mary paused at the gate. Your answer',
+    'should be 150 words.', "Slowly, the baby's cries softened. Your continuation",
+    'should be 150 words.'], ['continuation'],
+  { starters, producerVersion: 'ocr-source-references-producer-v22' }), /unresolved source reference/)
 })
 
 test('parenthesized Chinese glosses retain English prose and unresolved nonempty samples block capture', t => {
