@@ -12,7 +12,7 @@ import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMat
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
-  usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
+  usesGivenTitleWritingSamples, usesComposedWritingLabels } from './sourceReferenceSemantics.mjs'
 
 // Bind nested task/letter and capture role lookups to the same source semantics.
 function sourceReferenceLineRoles(producerVersion) {
@@ -122,7 +122,7 @@ export function sourceReferenceWritingTaskHeading(lines, lineIndex, {
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const line = lines[lineIndex]
   const facts = factsFor(line)
-  const inlineSample = inlineSampleParts(facts.text)
+  const inlineSample = inlineSampleParts(facts.text, { producerVersion, inWriting })
   const [heading, ...rest] = inlineSample || facts.text.split('\n')
   const sectionText = writingSectionText(facts, heading, rest, inWriting)
   const mergedText = rest.length === 1 ? rest[0].trim() : null
@@ -171,10 +171,21 @@ function applicationLetterReferenceLines(section, factsFor, producerVersion) {
   const selected = []
   let afterLetter = false
   let inScoring = false
-  for (const line of section.lines) {
+  for (const [index, line] of section.lines.entries()) {
+    if (line.repeatedTaskBoundary) {
+      afterLetter = false
+      inScoring = false
+      selected.push(line)
+      continue
+    }
     if (afterLetter) {
       if (line.figure || line.table) {
-        if (!inScoring) break
+        if (!inScoring) {
+          if (section.repeatedTask && section.lines.slice(index + 1).some(item => item.repeatedTaskBoundary)) {
+            scopeError('Unresolved content before repeated writing section')
+          }
+          break
+        }
       } else {
         const facts = factsFor(line)
         const label = firstLineRole('entry-label', facts)
@@ -188,7 +199,12 @@ function applicationLetterReferenceLines(section, factsFor, producerVersion) {
           || matchesLineRole('transcript.speaker', facts)
           || matchesLineRole('writing.student-script', facts)
           // Preserve numbered Chinese scoring points using their existing role.
-          || (/^\d+\s*[.．、)]/u.test(facts.trimmed) && !matchesLineRole('writing.commentary', facts))) break
+          || (/^\d+\s*[.．、)]/u.test(facts.trimmed) && !matchesLineRole('writing.commentary', facts))) {
+          if (section.repeatedTask && section.lines.slice(index + 1).some(item => item.repeatedTaskBoundary)) {
+            scopeError('Unresolved content before repeated writing section')
+          }
+          break
+        }
       }
     }
     selected.push(line)
@@ -526,9 +542,26 @@ export function sourceReferenceWritingLifecycle(lines, {
         review.push({ itemId: line.itemId, issue: 'empty repeated sample heading before listening retains the proven article' })
         continue
       }
-      // A rubric appendix supplements the original samples; an ordinary task
-      // restart still replaces its prior section as before.
-      scope.startTask(started, { reuse: scoringAppendix })
+      // v21 never replaces an existing nonempty task. Repeated headings need
+      // fresh entry ownership before further content can be captured.
+      const prior = sections.get(started)
+      const repeatedTask = usesComposedWritingLabels(producerVersion) && !scoringAppendix && prior
+        && (prior.bareEstablished || prior.lines.length > 0 || prior.letterEnd || prior.articleEnd)
+      if (repeatedTask && prior.genericOverview && prior.lines.length && !prior.explicitSample
+        && !prior.lines.some(existing => !existing.figure && !existing.table
+          && matchesLineRole('entry.sample-label', factsFor(existing)))) {
+        scopeError('Unresolved writing overview before repeated task')
+      }
+      scope.startTask(started, { reuse: scoringAppendix || repeatedTask })
+      if (usesComposedWritingLabels(producerVersion) && !repeatedTask && !scoringAppendix) {
+        scope.current.genericOverview = /^书面表达\s*[:：]?$/u.test(line.text.trim())
+      }
+      if (usesComposedWritingLabels(producerVersion) && bare) scope.current.bareEstablished = true
+      if (repeatedTask) {
+        scope.current.repeatedTask = true
+        scope.current.lines.push({ ...line, itemId: null, repeatedTaskBoundary: true,
+          needsLabel: !mergedLabel && !explicitHeading?.sample })
+      }
       taskStarts.set(line.itemId, started)
       items.set(line.itemId, { task: started, capturing: false, ended: false, kind: null, action: 'task' })
       if (unlabeledApplicationLetter) scope.current.letterEnd = unlabeledApplicationLetter.end
@@ -564,12 +597,21 @@ export function sourceReferenceWritingLifecycle(lines, {
       // must still fail closed, and earlier omitted parts are not writing.
       const omittedWritingPart = matchesLineRole('writing.bare-fourth-part', facts)
         && lines[lineIndex + 1] && matchesLineRole('writing.omission', factsFor(lines[lineIndex + 1]), { inWriting: true })
-      scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, writingSectionAfterPart(line.text, producerVersion))
+      const trailingTask = writingSectionAfterPart(line.text, producerVersion)
+      const previous = sections.get(trailingTask)
+      if (usesComposedWritingLabels(producerVersion) && previous
+        && (previous.lines.length || previous.letterEnd || previous.articleEnd)) {
+        scopeError('Unresolved repeated writing task on part heading')
+      }
+      scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, trailingTask)
     } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
   }
   for (const section of sections.values()) {
     Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes))
-    for (const step of section.steps) if (step.line.itemId) items.set(step.line.itemId, step.state)
+    for (const step of section.steps) if (step.line.itemId) {
+      if (section.repeatedTask) step.state.repeatedTask = true
+      items.set(step.line.itemId, step.state)
+    }
   }
   return { sections, items, taskStarts, listeningStarts, furniture, review }
 }
@@ -603,6 +645,7 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes)
   const capture = createReferenceCapture()
   const steps = []
   let awaitingSourceLabel = false, hasEntry = false, labelItemId = null, explanationPause = false, englishBodyAnchor = false
+  let repeatedNeedsLabel = false
   for (const [lineIndex, line] of sectionLines.entries()) {
     const step = { line, action: 'ended', reviews: [], resetEntry: false }
     const emit = action => {
@@ -618,6 +661,20 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes)
       step.reviews.push({ itemId: line.itemId, issue: `${reason}; skipped until ${until}` })
       emit('pause')
     }
+    if (line.repeatedTaskBoundary) {
+      if (capture.ended) scopeError('Repeated writing section follows a terminated reference range')
+      repeatedNeedsLabel = line.needsLabel
+      step.resetEntry = true
+      hasEntry = false
+      labelItemId = null
+      emit('task')
+      continue
+    }
+    if (repeatedNeedsLabel && (line.figure || line.table
+      || !firstLineRole('entry-label', factsFor(line)))) {
+      scopeError(`Repeated writing section requires an explicit entry label: ${line.itemId}`)
+    }
+    if (repeatedNeedsLabel) repeatedNeedsLabel = false
     if (capture.ended) { emit('ended'); continue }
     if (line.figure) { emit('figure'); continue }
     if (line.table) {

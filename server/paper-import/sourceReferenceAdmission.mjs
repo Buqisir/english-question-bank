@@ -132,6 +132,34 @@ function assertSourceReferenceContent({
   const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
   const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion })
   assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion)
+  // Repeated task headings must not let a sidecar omit one of the preserved
+  // samples. Bind each captured source body to its own entry and label.
+  if (sidecar && [...writingStates.values()].some(state => state.repeatedTask && state.capturing && state.action === 'body')) {
+    if (!evidence) throw Object.assign(new Error('Repeated writing task requires OCR evidence'),
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+    const normalizedConfirmation = { documents: confirmation.documents.filter(document => answerIds.has(document.documentId))
+      .map(document => ({ ...document, pages: document.pages.map((page, index) =>
+        ({ ...page, page: page.page ?? index + 1 })) })) }
+    const normalizedEvidence = { documents: evidence.documents.map(document => ({ ...document,
+      pages: document.pages.map((page, index) => ({ ...page, page: page.page ?? index + 1 })) })) }
+    const confirmed = survivingConfirmedText(normalizedConfirmation, normalizedEvidence, [])
+    for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
+      const items = confirmed.get(document.documentId)
+      const byId = new Map(items.map(item => [item.itemId, item]))
+      for (const item of items) {
+        const state = writingStates.get(item.itemId)
+        if (!state?.repeatedTask || !state.capturing || state.action !== 'body') continue
+        const label = state.labelItemId && byId.get(state.labelItemId)
+        const entries = sidecar.groups.find(group => group.taskType === state.task)?.essays.entries ?? []
+        const covered = entries.some(entry =>
+          (!state.labelItemId || (label && entry.labelSource && containsSource(entry.labelSource, label.sourceIndex)))
+          && sourceReferenceBlocks(entry).some(block => block.kind === 'paragraph'
+            && paragraphSources(block.paragraph).some(source => containsSource(source, item.sourceIndex))))
+        if (!covered) throw Object.assign(new Error('Repeated writing task omits a confirmed sample body'),
+          { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+      }
+    }
+  }
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
   if (!hasReferenceVisual && !figures.length && !continued && !sidecar?.figureExclusions?.length) return
@@ -208,7 +236,7 @@ function assertSourceReferenceContent({
     const merged = text.kind === 'essays' && text.source === text.entry.labelSource
       && owner?.capturing && owner.labelItemId === surviving[0].itemId
       && owner.task === text.group.taskType
-      ? sourceReferenceWritingTaskHeading(surviving, 0, { producerVersion }) : null
+      ? sourceReferenceWritingTaskHeading(surviving, 0, { producerVersion, inWriting: true }) : null
     const replayText = merged?.bare && merged.started === owner.task && merged.mergedLabel
       ? merged.mergedLabel : surviving.map(item => item.text).join(' ')
     if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length
