@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
+import fs from 'node:fs'
 import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
-import { assertReferenceProductsReady, finish, requestedRedo, submit } from './fast-import.mjs'
+import { assertReferenceProductsReady, finish, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
@@ -11,6 +13,30 @@ import { uploadReviewBundle } from './lib-review-upload.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
 const oldTime = '2026-01-01T00:00:00.000Z'
+
+function fakeReviewOrigin(t) {
+  const runtimeState = path.resolve(import.meta.dirname, '../../imports/local-review/state.json')
+  const original = fs.readFileSync
+  fs.readFileSync = (file, ...args) => String(file) === runtimeState
+    ? JSON.stringify({ apiOrigin: 'http://127.0.0.1:18890' }) : original(file, ...args)
+  syncBuiltinESMExports()
+  t.after(() => { fs.readFileSync = original; syncBuiltinESMExports() })
+}
+
+function fakeStatus(ctx, candidates = []) {
+  const revisions = candidates.map(revision => ({ paperId: ctx.paperId, reviewKind: 'candidate', ...revision }))
+  return JSON.stringify({ paperId: ctx.paperId, latestRevisionId: revisions.at(-1)?.id ?? null,
+    latest: revisions.at(-1) ?? null, revisions })
+}
+
+function failedPush(ctx) {
+  ctx.state.steps.push = { startedAt: oldTime }
+  json(ctx.statePath, ctx.state)
+  const file = path.join(ctx.logs, 'push.log')
+  mkdirSync(ctx.logs, { recursive: true })
+  writeFileSync(file, '$ review push\n--- stderr\n500 SOURCE_REFERENCES_PRODUCER_VERSION_INVALID rejected\n')
+  return file
+}
 const completed = result => ({ startedAt: oldTime, finishedAt: oldTime, seconds: 0, result })
 const json = (file, value) => {
   mkdirSync(path.dirname(file), { recursive: true })
@@ -298,5 +324,67 @@ for (const name of downstream.slice(1)) {
     const before = snapshot(dir)
     await assert.rejects(() => submit(ctx, []), { code: 'SOURCE_REFERENCES_QA_REQUIRED' })
     assert.deepEqual(snapshot(dir), before)
+  })
+}
+
+test('known HTTP failure and only uploading Candidate permit rebuild while preserving push evidence', async t => {
+  fakeReviewOrigin(t)
+  const { ctx, options, calls } = fixture(t, 'old-version')
+  const file = failedPush(ctx), original = readFileSync(file), push = structuredClone(ctx.state.steps.push)
+  const status = fakeStatus(ctx, [{ id: 'rev-uploading', state: 'uploading', finalizedAt: null }])
+  const result = await reconcilePush(ctx, file, { readStatus: async () => status })
+  assert.equal(result.failure.httpStatus, 500)
+  assert.equal(result.observation.candidates[0].id, 'rev-uploading')
+  const statusReceipt = JSON.parse(readFileSync(path.join(ctx.fast, 'push-reconciliation', result.statusReceipt)))
+  assert.equal(statusReceipt.response, status)
+  await finish(ctx, [], options)
+  assert.deepEqual(calls, downstream)
+  assert.deepEqual(ctx.state.steps.push, push)
+  assert.deepEqual(readFileSync(file), original)
+  await requestedRedo(ctx, 'source-references')
+  assert.deepEqual(ctx.state.steps.push, push)
+})
+
+for (const failure of ['fetch failed: ECONNRESET', 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID', '500 without code']) {
+  test(`UNKNOWN failure is rejected: ${failure}`, async t => {
+    fakeReviewOrigin(t)
+    const { ctx } = fixture(t, 'old-version')
+    const file = failedPush(ctx)
+    writeFileSync(file, failure)
+    let called = false
+    await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => { called = true; return fakeStatus(ctx) } }), /UNKNOWN/)
+    assert.equal(called, false)
+    await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+  })
+}
+
+test('failed status and wrong paper status remain blocked', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => { throw new Error('status failed') } }), /status failed/)
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => JSON.stringify({ paperId: 'paper-other', latest: null, latestRevisionId: null, revisions: [] }) }), /UNKNOWN/)
+  await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+})
+
+test('Candidate finalized after push prevents reconciliation', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
+  const status = fakeStatus(ctx, [{ id: 'rev-finalized', state: 'awaiting_review', finalizedAt: '2026-01-01T00:01:00Z' }])
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => status }), /RECONCILIATION_REQUIRED/)
+  await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+})
+
+for (const tamper of ['receipt', 'status', 'failure', 'startedAt', 'new-push']) {
+  test(`tampered or stale ${tamper} evidence cannot unblock redo`, async t => {
+    fakeReviewOrigin(t)
+    const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
+    const result = await reconcilePush(ctx, file, { readStatus: async () => fakeStatus(ctx) })
+    if (tamper === 'receipt') writeFileSync(result.receipt, '{}')
+    if (tamper === 'status') writeFileSync(path.join(ctx.fast, 'push-reconciliation', result.statusReceipt), '{}')
+    if (tamper === 'failure') writeFileSync(file, '500 OTHER_ERROR changed')
+    if (tamper === 'startedAt') ctx.state.steps.push.startedAt = '2026-01-02T00:00:00Z'
+    if (tamper === 'new-push') ctx.state.steps.push = { startedAt: '2026-01-03T00:00:00Z' }
+    await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+    await assert.rejects(() => requestedRedo(ctx, 'push'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
   })
 }
