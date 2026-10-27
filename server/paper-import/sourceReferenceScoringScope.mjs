@@ -1,7 +1,8 @@
 import { sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
+  usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
@@ -28,17 +29,20 @@ function isScoringLabel(sourceText, scoringTask) {
 // admission alike. Only explicit source headings and scoring labels authorize
 // capture. A nearby Writing Task or a caller's declared entry is insufficient.
 export function sourceReferenceScoringScopes(confirmation, answerIds,
-  { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+  { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization = { groups: [] } } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const scopes = new Map()
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
     let afterListening = false
-    const items = document.pages.flatMap(page => page.orderedItems)
+    const items = document.pages.flatMap((page, index) =>
+      page.orderedItems.map(item => ({ ...item, page: page.page ?? index + 1 })))
     // Reuse extraction's task recognition, including adjacent/merged sample
     // labels. Existing scoring termination/reopening rules remain authoritative.
     const lifecycle = sourceReferenceWritingLifecycle(items, {
-      materialization: { groups: [] }, answerDocument: { role: 'official_answers' }, producerVersion,
+      materialization: usesGivenTitleWritingSamples(producerVersion) ? materialization : { groups: [] },
+      answerDocument: { role: materialization.documents?.find(source =>
+        source.documentId === document.documentId)?.role ?? 'official_answers' }, producerVersion,
     })
     for (const [index, item] of items.entries()) {
       let appendixTask = null
@@ -59,7 +63,8 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
           || WRITING_SECTION.some(([, pattern]) => pattern.test(text))
           || BARE_APPLICATION_SECTION.test(text) || /^读后续写[:：]?$/u.test(text)
           || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text)
-          || explicitWritingHeading(item.text, producerVersion))
+          || explicitWritingHeading(item.text, producerVersion)
+          || (usesGivenTitleWritingSamples(producerVersion) && lifecycle.taskStarts.has(item.itemId)))
       if (afterListening) {
         appendixTask = scoredWritingRubricTask(item.text, items[index + 1]?.text)
         if (appendixTask) { afterListening = false; ended = false }
@@ -74,7 +79,13 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         scopes.set(item.itemId, null)
         continue
       }
-      if (firstWritingHeading) afterListening = false
+      if (firstWritingHeading) {
+        afterListening = false
+        // Objective listening answer rows can precede the first given-title
+        // article. The lifecycle's full proof, never an English title alone,
+        // establishes that first writing start after those rows.
+        if (usesGivenTitleWritingSamples(producerVersion) && lifecycle.taskStarts.has(item.itemId)) ended = false
+      }
       let heading = text
       if (NON_WRITING_SECTION.test(heading)) {
         writing = false
@@ -160,11 +171,12 @@ export const sourceReferenceFigureIdentity = figure =>
 
 // The visual resolver must already have proved crop/observation closure.
 // No heading alone can authorize this new path: consume every confirmed word.
-export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures, { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures,
+  { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization } = {}) {
   const objective = new Set()
   const starts = new Map()
   sourceReferenceScoringScopes(confirmation, answerIds, {
-    producerVersion,
+    producerVersion, materialization,
     onWritingStart: (documentId, itemId) => starts.set(documentId, itemId),
   })
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
