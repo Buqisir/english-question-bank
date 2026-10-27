@@ -16,7 +16,7 @@ import { execFileSync, spawn, spawnSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import {
   appendFileSync, copyFileSync, existsSync, mkdirSync, mkdtempSync, openSync, readFileSync,
-  readdirSync, renameSync, rmSync, writeFileSync,
+  readdirSync, renameSync, rmSync, statSync, writeFileSync,
 } from 'node:fs'
 import { createRequire } from 'node:module'
 import os from 'node:os'
@@ -1106,6 +1106,51 @@ export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {
   return { receipt: receiptPath, ...receipt }
 }
 
+export async function reconcileOcrGeneration(ctx, failurePath, { readStatus, origin } = {}) {
+  const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
+  const lock = path.join(ctx.fast, 'ocr-generation.lock')
+  if (!existsSync(operationPath)) fail('UNKNOWN: OCR operation 缺失')
+  const operationBytes = readFileSync(operationPath)
+  const op = JSON.parse(operationBytes), plan = op.plan
+  if ((!existsSync(lock) && op.completedAt) || op.revisionId
+    || plan?.schemaVersion !== 'fast-ocr-generation-plan-v1' || plan.paperId !== ctx.paperId
+    || !plan.expectedBaseRevisionId || !/^sha256:[a-f0-9]{64}$/u.test(plan.evidenceDigest || '')
+    || !Number.isFinite(Date.parse(op.startedAt))) fail('UNKNOWN: OCR operation 无法安全闭合')
+  if (!failurePath || path.resolve(failurePath) !== path.resolve(ctx.logs, 'push-ocr.log')) fail('UNKNOWN: push-ocr 日志路径不符')
+  const bytes = readFileSync(failurePath), lines = bytes.toString('utf8').split('\n')
+  const prefix = `$ scripts/import-pipeline/review.mjs push-ocr ${ctx.paperId} --ocr-generation-plan `
+  if (!lines[0].startsWith(prefix) || !lines.includes('--- stderr')
+    || statSync(failurePath).mtimeMs < Date.parse(op.startedAt)) fail('UNKNOWN: push-ocr 日志与操作不符')
+  const loggedPlan = lines[0].slice(prefix.length)
+  if (!loggedPlan || digestJson(readJson(path.resolve(root, loggedPlan))) !== digestJson(plan)) fail('UNKNOWN: push-ocr 计划不符')
+  const failure = failureDetails(Buffer.from(lines.slice(lines.indexOf('--- stderr') + 1).join('\n')))
+  if (failure.httpStatus >= 500) fail('UNKNOWN: 服务端失败不能闭合 OCR operation')
+  origin ||= reconciliationOrigin()
+  if (plan.origin !== origin) fail('UNKNOWN: Review origin 与计划不符')
+  const statusReader = readStatus || (() => {
+    const args = cli('review.mjs', 'status', ctx.paperId, '--raw-response')
+    const argv = target.local ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
+    const result = spawnSync(process.execPath, argv, { cwd: root, env: reviewEnv, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
+    if (result.error || result.status !== 0 || result.signal) fail(`UNKNOWN: Review status 失败 ${result.error?.message || result.stderr || ''}`)
+    return result.stdout
+  })
+  const status = JSON.parse(await statusReader())
+  if (status.paperId !== ctx.paperId || status.latestRevisionId !== plan.expectedBaseRevisionId
+    || status.latest?.id !== status.latestRevisionId || !Array.isArray(status.revisions)
+    || !status.revisions.some(revision => revision?.id === status.latestRevisionId)
+    || status.revisions.some(revision => !revision || revision.paperId !== ctx.paperId || !revision.id
+      || !revision.manifest || typeof revision.candidateDigest !== 'string'
+      || [revision.candidateDigest, revision.evidenceDigest, revision.manifest.candidateDigest,
+        revision.manifest.evidenceDigest].includes(plan.evidenceDigest))) fail('UNKNOWN: Review status 不完整或已有新修订')
+  if (!readFileSync(operationPath).equals(operationBytes) || !readFileSync(failurePath).equals(bytes)) fail('UNKNOWN: 对账期间证据发生变化')
+  const now = new Date().toISOString()
+  writeJson(operationPath, { ...op, rejectedAt: now, rejection: { status: failure.httpStatus,
+    code: failure.errorCode, receiptSha256: sha256(bytes) }, reconciledAt: now })
+  archive(ctx, operationPath)
+  if (existsSync(lock)) rmSync(lock, { recursive: true })
+  return { reconciledAt: now, status: failure.httpStatus, code: failure.errorCode }
+}
+
 function assertReferencesMutable(ctx) {
   const submitted = ['push', 'local-preview', 'screen', 'local-screen']
     // An unfinished upload is Candidate-specific UNKNOWN evidence until reconciled.
@@ -1436,7 +1481,9 @@ export async function startOcrGeneration(ctx, planPath, checkPlan = async () => 
   mkdirSync(path.join(ctx.fast, 'ocr-generation.lock'), { mode: 0o700 })
   if (existsSync(operationPath)) archive(ctx, operationPath)
   writeJson(operationPath, { plan, startedAt: new Date().toISOString() }, 'wx')
-  writeJson(path.join(ctx.work, 'superseded', `ocr-generation-${digestJson(plan).slice(7)}-state.json`), ctx.state, 'wx')
+  const stateSnapshot = path.join(ctx.work, 'superseded', `ocr-generation-${digestJson(plan).slice(7)}-state.json`)
+  if (existsSync(stateSnapshot)) archive(ctx, stateSnapshot, 'prior-')
+  writeJson(stateSnapshot, ctx.state, 'wx')
   redoFrom(ctx, 'ocr-review')
   for (const [index, file] of [
     path.join(ctx.paperDir, 'signals/agent-proofreading-receipt.json'),
@@ -1512,11 +1559,11 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   if (args.includes('--ocr-generation-plan') && (!option(args, '--ocr-generation-plan')
     || option(args, '--ocr-generation-plan').startsWith('--'))) fail('--ocr-generation-plan requires <plan.json>')
   const operationPath = path.join(ctx.fast, 'ocr-generation-operation.json')
-  if (command === 'reconcile-push' && (args.length !== 2 || args[0] !== '--failure-receipt' || !args[1] || args[1].startsWith('--'))) {
-    fail('Usage: fast-import.mjs reconcile-push <paperId> --failure-receipt <路径>')
+  if (['reconcile-push', 'reconcile-ocr-generation'].includes(command) && (args.length !== 2 || args[0] !== '--failure-receipt' || !args[1] || args[1].startsWith('--'))) {
+    fail(`Usage: fast-import.mjs ${command} <paperId> --failure-receipt <路径>`)
   }
   if ((existsSync(path.join(ctx.fast, 'ocr-generation.lock'))
-    || (existsSync(operationPath) && !readJson(operationPath).completedAt)) && command !== 'status') {
+    || (existsSync(operationPath) && !readJson(operationPath).completedAt)) && !['status', 'reconcile-ocr-generation'].includes(command)) {
     fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 新代操作未闭合；仅可只读 status 对账，禁止重放或 redo')
   }
   if (option(args, '--redo-from')) await requestedRedo(ctx, option(args, '--redo-from'))
@@ -1530,6 +1577,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   }
   else if (command === 'finish') await finish(ctx, args)
   else if (command === 'reconcile-push') say(JSON.stringify(await reconcilePush(ctx, option(args, '--failure-receipt')), null, 2))
+  else if (command === 'reconcile-ocr-generation') say(JSON.stringify(await reconcileOcrGeneration(ctx, option(args, '--failure-receipt')), null, 2))
   else if (command === 'submit') await submit(ctx, args)
   else if (command === 'preview-local') await submit(ctx, [...args, '--local-preview'])
   else if (command === 'report') await report(ctx, args)
