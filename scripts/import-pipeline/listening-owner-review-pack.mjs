@@ -6,6 +6,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, writeFi
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { normalizeListeningText, padListeningWordEdges, projectListeningSpokenText } from './lib-listening-segment-rule.mjs'
+import { loadListeningResult } from './lib-listening-evidence.mjs'
 
 const DEFAULT_ROOT = path.resolve(import.meta.dirname, '../..')
 const sha = file => `sha256:${createHash('sha256').update(readFileSync(file)).digest('hex')}`
@@ -179,6 +180,7 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
   const read = file => JSON.parse(readFileSync(track(file), 'utf8'))
   track(fileURLToPath(import.meta.url))
   track(path.join(import.meta.dirname, 'lib-listening-segment-rule.mjs'))
+  track(path.join(import.meta.dirname, 'lib-listening-evidence.mjs'))
   if (Object.keys(attempts).some(p => !papers.includes(p))) fail('REVIEW_PACK_ARGUMENT', '--attempt 卷号未列入输入')
   for (const selection of selections) {
     if (!papers.some(p => selection.startsWith(`${p}:`))) fail('REVIEW_PACK_SELECTION_INVALID', selection)
@@ -189,7 +191,8 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
     const attempt = realpathSync(attempts[paperId] ?? path.join(base,
       readdirSync(base).filter(n => n.startsWith('attempt-') && existsSync(path.join(base, n, 'rule-result.json'))).sort().at(-1) ?? 'missing'))
     if (inside(attempt, output) || inside(realpathSync(paperDir), output)) fail('REVIEW_PACK_OUTPUT_INSIDE_SOURCE', output)
-    const input = read(path.join(attempt, 'input.json')), rule = read(path.join(attempt, 'rule-result.json'))
+    const input = read(path.join(attempt, 'input.json'))
+    const rule = loadListeningResult(path.join(attempt, 'rule-result.json'), { track })
     if (input.subject?.paperId && input.subject.paperId !== paperId) fail('REVIEW_PACK_ATTEMPT_MISMATCH', paperId)
     const configFile = path.join(paperDir, 'config.json')
     const config = existsSync(configFile) ? read(configFile) : {}

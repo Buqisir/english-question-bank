@@ -1,6 +1,9 @@
 import { existsSync, readFileSync, realpathSync } from 'node:fs'
 import path from 'node:path'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { LISTENING_REVIEW_VERSION, LISTENING_RULE_EVIDENCE_VERSION,
+  assertListeningRuleEvidence, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
+import { reviewSubjectBundleDigest } from '../import-review/reviewSubject.mjs'
 
 export const LISTENING_REVIEW_FILE = 'listening-review-v1.json'
 const evidencePrefix = 'listening-review-evidence/'
@@ -46,9 +49,13 @@ function evidencePath(rootDir, relative) {
 // Owner approval, verbatim certification, or whole-recording safety proof.
 // Every live group must be accounted for, including unresolved groups.
 export function validateListeningReview(rootDir, review, subject, transcript) {
+  return validateReview(rootDir, review, subject, transcript, LISTENING_REVIEW_VERSION)
+}
+
+function validateReview(rootDir, review, subject, transcript, version) {
   if (!exactKeys(review, ['schemaVersion', 'subject', 'reviewedBy', 'reviewedAt',
     'method', 'untrustedContentHandledAsData', 'scope', 'evidence', 'groups'])
-    || review.schemaVersion !== 'listening-review-v1'
+    || review.schemaVersion !== version
     || digestJson(review.subject) !== digestJson(subject)
     || review.reviewedBy !== 'import_agent' || !Number.isFinite(Date.parse(review.reviewedAt))
     || !['asr_source_comparison', 'audio_source_comparison'].includes(review.method)
@@ -56,7 +63,9 @@ export function validateListeningReview(rootDir, review, subject, transcript) {
     || digestJson(review.scope) !== digestJson({ purpose: 'teacher_navigation',
       verbatim: 'not_certified', wholeRecordingContent: 'not_certified' })) fail('invalid subject, attestation or scope')
   if (!Array.isArray(review.evidence) || review.evidence.length === 0) fail('missing retained evidence')
+  assertListeningUploadBudget(review.evidence)
   const paths = new Set()
+  const ruleNotes = []
   for (const file of review.evidence) {
     if (!exactKeys(file, ['path', 'sha256', 'byteLength', 'kind', 'window', 'settings'])
       || paths.has(file.path) || !digest(file.sha256) || !Number.isSafeInteger(file.byteLength)
@@ -70,8 +79,30 @@ export function validateListeningReview(rootDir, review, subject, transcript) {
     } else if (file.window !== null || file.settings !== null) fail('notes cannot assert ASR settings')
     const bytes = readFileSync(evidencePath(rootDir, file.path))
     if (bytes.length !== file.byteLength || sha256(bytes) !== file.sha256) fail(`changed evidence: ${file.path}`)
-    JSON.parse(bytes.toString('utf8'))
+    const record = JSON.parse(bytes.toString('utf8'))
+    if (version === LISTENING_REVIEW_VERSION && file.kind === 'asr_window'
+      && (record.rule || record.groups || record.engineAttempts
+        || /^listening-rule-evidence-/u.test(record.schemaVersion || ''))) fail('rule evidence cannot claim ASR settings')
+    if (version === LISTENING_REVIEW_VERSION && file.kind === 'review_notes') {
+      if (record.schemaVersion === LISTENING_RULE_EVIDENCE_VERSION) ruleNotes.push(record)
+      else {
+        // Do not guess authority from a filename. A second legacy/stripped rule
+        // cannot hide behind an otherwise valid v2 evidence file.
+        if (record.rule || record.groups || record.input || record.engineAttempts
+          || /^listening-rule-evidence-/u.test(record.schemaVersion || '')) fail('legacy/unknown rule evidence')
+        if (review.method === 'asr_source_comparison'
+          && !(record.error && record.engine) && !(typeof record.raw === 'string' && record.job)) {
+          fail('unrecognized automatic notes')
+        }
+      }
+    }
     paths.add(file.path)
+  }
+  if (version === LISTENING_REVIEW_VERSION) {
+    if (ruleNotes.length > 1 || (review.method === 'asr_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
+    for (const notes of ruleNotes) {
+      try { assertListeningRuleEvidence(notes, review, transcript) } catch (error) { fail(error.message) }
+    }
   }
   if (review.method === 'asr_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
     fail('ASR comparison requires retained ASR windows')
@@ -128,6 +159,32 @@ export function readListeningReview(rootDir, subject, transcript) {
   if (!existsSync(full)) return null
   const bytes = readFileSync(full)
   const validated = validateListeningReview(rootDir, JSON.parse(bytes.toString('utf8')), subject, transcript)
+  return { ...validated, digest: sha256(bytes) }
+}
+
+// Only persisted revision/approval consumers call this entry, after their
+// stored-file checks. No draft option or HTTP field enables legacy admission.
+// Recheck the exact sealed descriptors here too, including ASR evidence.
+export function readSealedListeningReview(rootDir, subject, transcript, revision, manifest = revision?.manifest) {
+  const full = path.join(rootDir, LISTENING_REVIEW_FILE)
+  const sealed = manifest?.files?.find(file => file.path === LISTENING_REVIEW_FILE)
+  if (!sealed && !existsSync(full)) return null
+  const persistedApproval = revision?.schemaVersion === 'web-import-review-approval-v1' && revision.approvalId
+  if (!sealed || !(revision?.id ?? revision?.revisionId)
+    || (!revision.state && !persistedApproval) || revision.state === 'uploading'
+    || revision.bundleDigest !== manifest.bundleDigest
+    || reviewSubjectBundleDigest(manifest) !== revision.bundleDigest
+    || ['paperId', 'sourceDigest', 'candidateDigest'].some(key =>
+      revision[key] !== manifest[key] || revision[key] !== subject[key])) fail('untrusted sealed listening identity')
+  const bytes = readFileSync(full)
+  if (bytes.length !== sealed.byteLength || sha256(bytes) !== sealed.sha256) fail('changed sealed sidecar')
+  const review = JSON.parse(bytes.toString('utf8'))
+  if (!['listening-review-v1', LISTENING_REVIEW_VERSION].includes(review.schemaVersion)) fail('unknown sealed version')
+  for (const file of review.evidence || []) {
+    const stored = manifest.files.find(item => item.path === file.path)
+    if (!stored || stored.sha256 !== file.sha256 || stored.byteLength !== file.byteLength) fail('unsealed listening evidence')
+  }
+  const validated = validateReview(rootDir, review, subject, transcript, review.schemaVersion)
   return { ...validated, digest: sha256(bytes) }
 }
 

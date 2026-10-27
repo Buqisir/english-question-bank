@@ -12,6 +12,7 @@ import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuild
 import { saveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 import { freezeReviewFixture, finalizeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { extractStoredListeningReview } from '../server/import-review/reviewSubjectBackfill.mjs'
+import { reviewSubjectBundleDigest } from '../server/import-review/reviewSubject.mjs'
 import { prepareSpellingReview } from '../server/paper-import/spellingReview.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { mkdirSync } from 'node:fs'
@@ -100,6 +101,18 @@ try {
     ]
     const preview = { payload_json: JSON.stringify({ consumption: { listeningAudio: {
       sha256: sha256('playback'), byteLength: 8, durationSeconds: 30 } } }) }
+    // Historical reading now requires the persisted revision's exact manifest,
+    // independently of whether a source-reference sidecar exists.
+    const sidecarBytes = readFileSync(path.join(directory, 'listening-review-v1.json'))
+    const manifest = { schemaVersion: 'web-import-review-bundle-v1', ...revision,
+      paperName: 'Historical spelling fixture', visibleStructureDigest: sha256('structure'), producerBuildId: 'old',
+      files: [{ path: 'listening-review-v1.json', sha256: sha256(sidecarBytes), byteLength: sidecarBytes.length,
+        role: 'listening_review', mediaType: 'application/json' },
+      ...review.evidence.map(file => ({ path: file.path, sha256: file.sha256, byteLength: file.byteLength,
+        role: 'listening_review_evidence', mediaType: 'application/json' }))] }
+    manifest.bundleDigest = reviewSubjectBundleDigest(manifest)
+    Object.assign(revision, { id: 'rev-historical-spelling', state: 'awaiting_review',
+      bundleDigest: manifest.bundleDigest, manifest })
     assert.throws(() => extractStoredListeningReview(directory, revision, preview, evidence), error =>
       error.code === 'LISTENING_REVIEW_INVALID'
       && error.pointer === 'listening-review-v1.json#/subject/transcriptDigest'
