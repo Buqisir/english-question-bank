@@ -18,13 +18,13 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
-import { assertSourceReferenceAdmission } from '../paper-import/sourceReferenceAdmission.mjs'
+import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import { productPageLimitsForManifest } from '../paper-import/pdfPageLimits.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
-import { buildStoredReviewSubject, buildTargetReviewSubject } from './reviewSubject.mjs'
+import { buildStoredReviewSubject, buildTargetReviewSubject, reviewSubjectBundleDigest } from './reviewSubject.mjs'
 import { reviewProjectionForTrustedBaseline } from './reviewComparisonProjection.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
@@ -1691,6 +1691,29 @@ export function buildNck1ReviewProjection(rootDir, options = {}) {
   return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts)
 }
 
+// Server replay path only: revision is loaded from the persisted Review store,
+// not supplied as a draft option. Its existing manifest owns the sealed digest.
+function sealedReferenceReceipt(revision, manifest = revision.manifest) {
+  const descriptor = manifest.files.find(file => file.path === SOURCE_REFERENCES_FILE)
+  if (!descriptor) return null
+  const revisionId = revision.id ?? revision.revisionId
+  const persistedApproval = revision.schemaVersion === 'web-import-review-approval-v1' && revision.approvalId
+  if (!revisionId || (!revision.state && !persistedApproval) || revision.state === 'uploading'
+    || revision.bundleDigest !== manifest.bundleDigest
+    || reviewSubjectBundleDigest(manifest) !== revision.bundleDigest
+    || ['paperId', 'sourceDigest', 'candidateDigest'].some(key => revision[key] !== manifest[key])) {
+    fail('Untrusted sealed source-reference revision', 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID')
+  }
+  return { revisionId, bundleDigest: revision.bundleDigest,
+    paperId: revision.paperId, sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
+    sourceReferencesDigest: descriptor.sha256 }
+}
+
+export function buildNck1SealedReviewProjection(rootDir, revision, { manifest = revision.manifest, ...options } = {}) {
+  return buildNck1ReviewProjectionInternal(rootDir,
+    { ...options, expectedCandidateDigest: revision.candidateDigest }, readFrozenProducts, sealedReferenceReceipt(revision, manifest))
+}
+
 // Only this entry constructs the private product reader. There is no public
 // skip-pdfinfo option and callers cannot supply projection/listening objects.
 export function computeSealedReviewSubjects({ directory, revision, preview, storedFiles, onMemory = () => {} }) {
@@ -1736,7 +1759,8 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
         return { manifest, digest: products.sha256, bytes: {} }
       }
       const projection = buildNck1ReviewProjectionInternal(snapshot.directory,
-        { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts)
+        { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts,
+        sealedReferenceReceipt(revision))
       onMemory('projection')
       baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence,
         validatedListeningReview: projection.reviewedListening })
@@ -1756,15 +1780,15 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
   })
 }
 
-function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts) {
-  return withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir, options, readProducts))
+function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null) {
+  return withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir, options, readProducts, referenceReceipt))
 }
 
 function buildNck1ReviewProjectionUncached(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
-} = {}, readProducts) {
+} = {}, readProducts, referenceReceipt) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest)
   if (!imported.candidate || imported.issues.length > 0) {
@@ -1816,13 +1840,16 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const referencesPath = resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE)
   const sourceReferencesBytes = existsSync(referencesPath) ? readFileSync(referencesPath) : null
   const sourceReferences = sourceReferencesBytes ? parseSourceReferencesBytes(sourceReferencesBytes) : null
-  assertSourceReferenceAdmission({
+  const referenceBinding = {
     sidecar: sourceReferences,
     materialization: loaded.materialization,
     sourceDigest: preview.candidate.source.sha256,
     candidateDigest: preview.candidate.candidateDigest,
     sourceInput: loaded.sourceInput,
-  })
+  }
+  if (referenceReceipt) assertSealedSourceReferenceReplay({ ...referenceBinding,
+    sourceReferencesBytes, receipt: referenceReceipt })
+  else assertSourceReferenceAdmission(referenceBinding)
   const slotBindings = paginationSlotBindings(consumption)
   // Historical analyzed packages without a PDF commitment retain their separate
   // source contract. Raw-source and product workspaces must declare absence.

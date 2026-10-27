@@ -120,10 +120,11 @@ export function scoringFiguresFixture({ table = false, reverseVisuals = false, l
     candidateDigest: sha256('synthetic-scoring-candidate') }
 }
 
-export function captureScoringReferences(input) {
+export function captureScoringReferences(input, options = {}) {
   const captured = buildSourceReferences(input.materialization, input.evidence, input.confirmation,
-    { sourceDocuments: input.sourceDocuments })
+    { sourceDocuments: input.sourceDocuments, ...options })
   return { schemaVersion: captured.schemaVersion, paperId: input.materialization.paperId,
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
-    materializationDigest: digestJson(input.materialization), groups: captured.groups }
+    materializationDigest: digestJson(input.materialization), groups: captured.groups,
+    ...(captured.producerVersion ? { producerVersion: captured.producerVersion } : {}) }
 }

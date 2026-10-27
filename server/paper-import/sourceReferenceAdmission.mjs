@@ -1,12 +1,13 @@
 import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from './sourceReferenceScoringScope.mjs'
 import { sourceReferenceExplanationFigures } from './sourceReferenceFigureExclusions.mjs'
-import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
-  SOURCE_REFERENCE_REGION_TOLERANCE } from './sourceReferences.mjs'
+  SOURCE_REFERENCE_REGION_TOLERANCE, parseSourceReferencesBytes } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
+import { sourceReferenceProducerVersion, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './sourceReferenceSemantics.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -77,9 +78,35 @@ function survivingConfirmedText(confirmation, evidence, referenceFigures) {
 // Acceptance/finalize boundary. This always uses exact input bytes, and has no
 // bypass flag. Published consumers use the separate integrity validator and
 // SQLite's approved sidecar-byte commitment; they never recrop during export.
-export function assertSourceReferenceAdmission({
+export function assertSourceReferenceAdmission(input) {
+  return assertSourceReferenceContent(input, sourceReferenceProducerVersion(input.sidecar))
+}
+
+// Replay only: receipt must come from an already persisted/validated revision,
+// never from a new draft, request options or a digest computed at first finalize.
+// Parse the exact committed bytes here; do not accept a separately supplied
+// sidecar object whose semantics could disagree with the verified byte stream.
+export function assertSealedSourceReferenceReplay({ sourceReferencesBytes, receipt, ...input }) {
+  const bytes = sourceReferencesBytes instanceof Uint8Array ? Buffer.from(sourceReferencesBytes) : null
+  if (!bytes || !receipt?.revisionId || !/^sha256:[a-f0-9]{64}$/u.test(receipt.bundleDigest || '')
+    || !/^sha256:[a-f0-9]{64}$/u.test(receipt.sourceReferencesDigest || '')
+    || sha256(bytes) !== receipt.sourceReferencesDigest
+    || receipt.paperId !== input.materialization.paperId
+    || receipt.sourceDigest !== input.sourceDigest || receipt.candidateDigest !== input.candidateDigest) {
+    throw Object.assign(new Error('Historical references differ from the trusted sealed revision receipt'),
+      { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  }
+  const sidecar = parseSourceReferencesBytes(bytes)
+  const legacy = (!Object.hasOwn(sidecar, 'producerVersion')
+    || sidecar.producerVersion === LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    && /^source-references-v[1-5]$/u.test(sidecar.schemaVersion)
+  const producerVersion = legacy ? LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION : sourceReferenceProducerVersion(sidecar)
+  return assertSourceReferenceContent({ ...input, sidecar }, producerVersion)
+}
+
+function assertSourceReferenceContent({
   sidecar, materialization, sourceDigest, candidateDigest, sourceInput,
-}) {
+}, producerVersion) {
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
   const figures = sourceReferenceFigures(sidecar)
@@ -98,7 +125,7 @@ export function assertSourceReferenceAdmission({
   const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
     .map(document => document.documentId))
   const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
-  const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence)
+  const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion })
   assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates)
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
@@ -113,12 +140,13 @@ export function assertSourceReferenceAdmission({
     evidence, confirmation })
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
   const allExpected = resolved.referenceFigures ?? []
-  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, allExpected, sidecar?.figureExclusions ?? [])
+  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, allExpected,
+    sidecar?.figureExclusions ?? [], { producerVersion })
   if (figures.some(({ figure }) => allExpected.some(reference =>
     explanationFigures.has(sourceReferenceFigureIdentity(reference)) && reference.sourceRegionId === figure.sourceRegionId))) {
     reject('An excluded explanation figure cannot also appear in writing references')
   }
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected)
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected, { producerVersion })
   const expected = allExpected.filter(reference => !explanationFigures.has(sourceReferenceFigureIdentity(reference))
     && (!objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
@@ -130,7 +158,7 @@ export function assertSourceReferenceAdmission({
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
   const illustratedDocuments = new Set(allExpected.map(reference => reference.source.documentId))
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds)
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion })
   const pictureItems = new Set(allExpected.flatMap(reference => reference.itemIds))
   const sourceOrder = new Map(), sourceOwners = new Map()
   for (const document of confirmation.documents) {
@@ -175,7 +203,7 @@ export function assertSourceReferenceAdmission({
     const merged = text.kind === 'essays' && text.source === text.entry.labelSource
       && owner?.capturing && owner.labelItemId === surviving[0].itemId
       && owner.task === text.group.taskType
-      ? sourceReferenceWritingTaskHeading(surviving, 0) : null
+      ? sourceReferenceWritingTaskHeading(surviving, 0, { producerVersion }) : null
     const replayText = merged?.bare && merged.started === owner.task && merged.mergedLabel
       ? merged.mergedLabel : surviving.map(item => item.text).join(' ')
     if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length

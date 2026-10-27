@@ -56,6 +56,7 @@ function capture(input, exclusions) {
   const result = buildSourceReferences(input.materialization, input.evidence, input.confirmation,
     { sourceDocuments: input.sourceDocuments, figureExclusions: exclusions })
   return { schemaVersion: result.schemaVersion, paperId: input.materialization.paperId,
+    producerVersion: result.producerVersion,
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
     materializationDigest: digestJson(input.materialization), groups: result.groups, figureExclusions: result.figureExclusions }
 }

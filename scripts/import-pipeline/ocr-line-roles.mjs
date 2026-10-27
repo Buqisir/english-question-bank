@@ -2,7 +2,7 @@
 // Rules recognize candidates only: callers retain state transitions and output assembly.
 import { computeLineFacts } from './ocr-line-facts.mjs'
 import {
-  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
+  WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, isSourceReferenceExplanationStart, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isWritingVersionLabel, writingRuleMatchingView,
@@ -158,9 +158,9 @@ export const LINE_ROLE_RULES = Object.freeze([
     'Version one:', 'Version one is mentioned in the scoring guidance.'),
   rule('entry.scoring-kind', 'entry-kind', 10, f => SCORING_LABEL.test(writingRuleMatchingView(f.text)),
     '二、评分原则', '参考范文', { value: 'scoring' }),
-  rule('entry.essay-kind', 'entry-kind', 20, f => isSourceReferenceSampleLabel(f.text),
+  rule('entry.essay-kind', 'entry-kind', 20, (f, c) => isSourceReferenceSampleLabel(f.text, c.producerVersion),
     '参考范文', '二、评分原则', { value: 'essays' }),
-  rule('entry.sample-label', 'sample-label', 10, f => isSourceReferenceSampleLabel(f.text),
+  rule('entry.sample-label', 'sample-label', 10, (f, c) => isSourceReferenceSampleLabel(f.text, c.producerVersion),
   '参考范文（80词）', '二、评分原则'),
   pattern('writing.inline-sample', 'inline-sample', 10,
     INLINE_WRITING_SAMPLE,
@@ -194,7 +194,7 @@ export const LINE_ROLE_RULES = Object.freeze([
     '写作评分说明', '写作评分说明如下。'),
   rule('writing.listening-boundary', 'listening-boundary', 10, f => LISTENING_REFERENCE_START.test(f.nfkc),
     'Text 1', '第二节 读后续写'),
-  rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && ANSWER_EXPLANATION_START.test(f.text),
+  rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && isSourceReferenceExplanationStart(f.text, c.producerVersion),
     { text: '【解题导语】本文是一篇应用文。', context: { sectionCount: 1 } },
     { text: '参考范文', context: { sectionCount: 1 } }),
   rule('writing.omission', 'omission', 10, (f, c) => (c.inWriting || c.current)

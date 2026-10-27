@@ -14,6 +14,38 @@ function scoringScopes(texts) {
   }] }] }, new Set(['answers']))
 }
 
+test('explanation dividers use a whole matching view and preserve existing explanation prefixes', () => {
+  for (const text of ['解析', '答案解析', '【解析】', '【答案解析】']) {
+    for (const suffix of ['', ':', '：']) {
+      const original = `　${text}${suffix}　`
+      const facts = computeLineFacts({ text: original })
+      assert(matchesLineRole('writing.explanations', facts, { sectionCount: 1 }), original)
+      assert.equal(facts.text, original)
+      assert(!matchesLineRole('writing.explanations', facts, { sectionCount: 0 }))
+    }
+  }
+  for (const text of ['解析如下这篇范文…', '【解析】内容另见下文', '【答案补充】',
+    '参考范文解析', '解 析', '【答案 解析】']) {
+    assert(!matchesLineRole('writing.explanations', computeLineFacts({ text }), { sectionCount: 1 }), text)
+  }
+  for (const text of ['答案详解', '参考答案详解', '试题解析', '【解题导语】本文…',
+    '【语篇导读】本文…', '【语篇解读】本文…']) {
+    assert(matchesLineRole('writing.explanations', computeLineFacts({ text }), { sectionCount: 1 }), text)
+  }
+})
+
+test('only known bracketed sample titles can authorize essays', () => {
+  for (const text of ['【参考答案】', '[参考答案]', '【参考范文】', '[范文]', '一、【考场作文】',
+    '【示例二】建议调整活动安排']) {
+    assert.equal(firstLineRole('entry-kind', computeLineFacts({ text }))?.value, 'essays', text)
+  }
+  for (const text of ['【答案补充】', '[答案补充]', '【未知范文标题】', '一、【答案另见后页】']) {
+    assert.equal(firstLineRole('entry-kind', computeLineFacts({ text })), null, text)
+    const output = checkWritingRoleFixture([text])
+    assert(output.groups.every(group => group.essays.entries.every(entry => entry.sourceLabel !== text)))
+  }
+})
+
 test('standalone written-expression aliases share exact role, scoring and admission boundaries', () => {
   const admission = texts => assertSourceReferenceAdmission({
     sidecar: null, materialization: { documents: [{ documentId: 'answers', role: 'official_answers' }] },

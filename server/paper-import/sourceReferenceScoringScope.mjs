@@ -1,11 +1,12 @@
 import { sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion } from './sourceReferenceSemantics.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
-  isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView,
+  isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, isSourceReferenceExplanationStart,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
   isSourceReferenceSampleLabel,
 } from './sourceReferenceWritingRules.mjs'
@@ -25,7 +26,9 @@ function isScoringLabel(sourceText, scoringTask) {
 // Conservative ownership for new scoring figures, replayed by producer and
 // admission alike. Only explicit source headings and scoring labels authorize
 // capture. A nearby Writing Task or a caller's declared entry is insufficient.
-export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritingStart } = {}) {
+export function sourceReferenceScoringScopes(confirmation, answerIds,
+  { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+  assertSourceReferenceProducerVersion(producerVersion)
   const scopes = new Map()
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
@@ -34,7 +37,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
     // Reuse extraction's task recognition, including adjacent/merged sample
     // labels. Existing scoring termination/reopening rules remain authoritative.
     const lifecycle = sourceReferenceWritingLifecycle(items, {
-      materialization: { groups: [] }, answerDocument: { role: 'official_answers' },
+      materialization: { groups: [] }, answerDocument: { role: 'official_answers' }, producerVersion,
     })
     for (const [index, item] of items.entries()) {
       let appendixTask = null
@@ -61,7 +64,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
       }
       if (afterListening && !firstWritingHeading) {
         // Only the explicit overview + task-rubric pair can leave explanations.
-        if (ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
+        if (isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(text) || /^参考答案解析/u.test(text)) terminal = true
         if (!terminal && WRITING_SCORING_OVERVIEW.test(text)) {
           afterListening = false
           ended = false
@@ -88,7 +91,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
         ended = false
         heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
-      if (ANSWER_EXPLANATION_START.test(heading)
+      if (isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(heading)
         || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading)) {
         writing = false
         taskType = null
@@ -124,7 +127,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds, { onWritin
       }
       // Share the producer's complete essay-label grammar; Chinese citations
       // such as “范文1中…” remain rubric prose.
-      const sampleLabel = isSourceReferenceSampleLabel(item.text)
+      const sampleLabel = isSourceReferenceSampleLabel(item.text, producerVersion)
       const scoringLabel = isScoringLabel(item.text, scoringTask)
       if (!ended && taskType && scoringLabel) label = item
       // A reprinted "写作二" starts the sample between rubric sections, not
@@ -145,10 +148,11 @@ export const sourceReferenceFigureIdentity = figure =>
 
 // The visual resolver must already have proved crop/observation closure.
 // No heading alone can authorize this new path: consume every confirmed word.
-export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures) {
+export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures, { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
   const objective = new Set()
   const starts = new Map()
   sourceReferenceScoringScopes(confirmation, answerIds, {
+    producerVersion,
     onWritingStart: (documentId, itemId) => starts.set(documentId, itemId),
   })
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {

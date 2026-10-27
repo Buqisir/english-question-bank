@@ -3,12 +3,14 @@ import { test } from 'node:test'
 import { buildSourceReferences } from './ocr-proofread.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
-import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+  sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
 
@@ -184,6 +186,210 @@ function fixture(pageLines) {
   ]
 }
 const heading = [line('第二节 读后续写', .2), line('参考范文', .24)]
+for (const divider of ['解析', '答案解析', '【解析】', '【答案解析】']) {
+  for (const suffix of ['', ':', '：']) test(`whole explanation heading ends essay ownership: ${divider}${suffix}`, () => {
+    const input = fixture([
+      [...heading, line('The first source paragraph.', .3), line('The second source paragraph.', .4, .14, .76)],
+      [line(`　${divider}${suffix}　`, .1), line('A', .2), line('Reading explanation in English.', .3),
+        line('第二节 读后续写', .4), line('参考范文', .5), line('A reprinted sample.', .6)],
+      [line('English on the following page stays outside references.', .2)],
+    ])
+    const before = structuredClone(input)
+    const prepared = prepareSourceReferenceWritingItems(...input)
+    const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+    for (const item of input[2].documents[0].pages.slice(1).flatMap(page => page.orderedItems)) {
+      assert.deepEqual(lifecycle.items.get(item.itemId),
+        { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
+    }
+    const captured = []
+    const output = buildSourceReferences(...input, { onWritingCapture: item => captured.push(item) })
+    assert.deepEqual(captured, ['p1-i2', 'p1-i3'].map(itemId =>
+      ({ itemId, task: 'continuation', kind: 'essays' })))
+    const entries = output.groups[0].essays.entries
+    assert.equal(entries.length, 1)
+    assert.deepEqual(entries[0].paragraphs.map(p => p.text),
+      ['The first source paragraph.', 'The second source paragraph.'])
+    assert.deepEqual(entries[0].paragraphs.map(p => p.source.locator),
+      [[.3, .1, .8], [.4, .14, .76]].map(([y, x, width]) =>
+        ({ kind: 'page_region', documentId: 'answers', page: 1, region: { x, y, width, height: .02 } })))
+    assert.deepEqual(input, before, 'matching must preserve sealed source bytes and order')
+    const scopes = sourceReferenceScoringScopes(input[2], new Set(['answers']))
+    for (const item of input[2].documents[0].pages.slice(1).flatMap(page => page.orderedItems)) {
+      assert.equal(scopes.get(item.itemId), null)
+    }
+  })
+}
+
+test('A remains legitimate essay prose before an explanation boundary', () => {
+  const input = fixture([[...heading, line('A', .3), line('A complete source paragraph.', .4, .14, .76)]])
+  const prepared = prepareSourceReferenceWritingItems(...input)
+  const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+  assert.equal(lifecycle.items.get('p1-i2').task, 'continuation')
+  assert.equal(lifecycle.items.get('p1-i2').capturing, true)
+  const entry = buildSourceReferences(...input).groups[0].essays.entries[0]
+  assert.equal(entry.paragraphs[0].text, 'A')
+  assert.equal(entry.paragraphs[0].source.locator.region.y, .3)
+})
+
+test('explanation mentions and unknown bracketed answer titles do not authorize essay labels', () => {
+  for (const text of ['解析如下这篇范文…', '【答案补充】', '[答案补充]', '【参考答案补充】']) {
+    const input = fixture([[...heading, line('The source paragraph.', .3), line(text, .4),
+      line('The next source paragraph.', .5)]])
+    const prepared = prepareSourceReferenceWritingItems(...input)
+    const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+    const state = lifecycle.items.get('p1-i3')
+    assert.equal(state.ended, false, text)
+    assert.equal(state.capturing, false, text)
+    assert.notEqual(state.action, 'entry', text)
+    assert.equal(lifecycle.items.get('p1-i4').task, 'continuation')
+    assert.equal(lifecycle.items.get('p1-i4').capturing, true)
+    const entries = buildSourceReferences(...input).groups[0].essays.entries
+    assert(entries.every(entry => entry.sourceLabel !== text))
+    assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3, .5])
+  }
+})
+
+for (const label of ['【范文四】', '[Possible Version 2]', '【范文十二】', '[范文12]', '【One possible version 12】',
+  '【范文四（80词）】', '[范文12(80词)]', '【参考范文四（80词）】']) {
+  test(`numbered bracketed sample preserves label, range and ownership: ${label}`, () => {
+    const input = fixture([[line('第二节 读后续写', .1), line(label, .2),
+      line('A source continuation paragraph.', .3, .14, .76)]])
+    const captured = []
+    const output = buildSourceReferences(...input, { onWritingCapture: item => captured.push(item) })
+    assert.equal(output.producerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    assert.equal(output.groups[0].essays.entries.length, 1)
+    const entry = output.groups[0].essays.entries[0]
+    assert.equal(entry.sourceLabel, label)
+    assert.deepEqual(entry.labelSource, { documentSha256: input[0].documents[0].sha256,
+      locator: { kind: 'page_region', documentId: 'answers', page: 1,
+        region: { x: .1, y: .2, width: .8, height: .02 } } })
+    assert.equal(entry.paragraphs[0].text, 'A source continuation paragraph.')
+    assert.equal(entry.paragraphs[0].source.locator.region.y, .3)
+    assert.deepEqual(captured, [{ itemId: 'p1-i2', task: 'continuation', kind: 'essays' }])
+    const prepared = prepareSourceReferenceWritingItems(...input, { producerVersion: output.producerVersion })
+    assert.deepEqual(sourceReferenceWritingLifecycle(prepared.lines, prepared).items.get('p1-i2'),
+      { task: 'continuation', capturing: true, ended: false, kind: 'essays', action: 'body', labelItemId: 'p1-i1' })
+  })
+}
+
+test('first admission rejects missing, legacy and unknown producer versions before sealing', () => {
+  const input = scoringFiguresFixture()
+  const sidecar = captureScoringReferences(input)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+    'ocr-source-references-producer-v19', null]) {
+    const changed = structuredClone(sidecar)
+    if (version === undefined) delete changed.producerVersion
+    else changed.producerVersion = version
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed,
+      producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+      sealedDigest: sha256(Buffer.from(JSON.stringify(changed))), legacy: true }),
+    { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' }, String(version))
+  }
+  for (const schemaVersion of ['source-references-v1', 'source-references-v2', 'source-references-v3',
+    'source-references-v4', 'source-references-v5']) {
+    const changed = { ...sidecar, schemaVersion }
+    delete changed.producerVersion
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed }),
+      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' }, schemaVersion)
+  }
+})
+
+test('sealed v17 replay requires the exact receipt digest and source identity', () => {
+  const input = scoringFiguresFixture()
+  for (const document of input.confirmation.documents) for (const page of document.pages) {
+    const item = page.orderedItems.find(item => item.text === '3. Additional source criterion.')
+    if (item) item.text = '解析'
+  }
+  for (const document of input.evidence.documents) for (const page of document.pages) {
+    const item = page.observations.find(item => item.text === '3. Additional source criterion.')
+    if (item) item.text = '解析'
+  }
+  reseal(input)
+  const historical = captureScoringReferences(input, { producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  assert.equal(Object.hasOwn(historical, 'producerVersion'), false)
+  assert.throws(() => sourceReferenceProducerVersion(historical), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  assert.equal(historical.groups.flatMap(g => g.scoring.entries.flatMap(e => e.blocks)).filter(b => b.kind === 'figure').length, 3)
+  const original = structuredClone(historical)
+  const sourceReferencesBytes = Buffer.from(JSON.stringify(historical))
+  // A pre-existing receipt is kept fixed while replay bytes are varied.
+  const receipt = Object.freeze({ revisionId: 'sealed-v17-revision', bundleDigest: sha256('sealed-v17-bundle'),
+    paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+    sourceReferencesDigest: sha256(sourceReferencesBytes) })
+  const replay = { ...input, sourceReferencesBytes, receipt }
+  assertSealedSourceReferenceReplay(replay)
+  const explicitV17Bytes = Buffer.from(JSON.stringify({ ...historical, producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION }))
+  assertSealedSourceReferenceReplay({ ...replay, sourceReferencesBytes: explicitV17Bytes,
+    receipt: { ...receipt, sourceReferencesDigest: sha256(explicitV17Bytes) } })
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: historical, receipt }),
+    { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  for (const bytes of [
+    Buffer.concat([sourceReferencesBytes, Buffer.from('\n')]),
+    Buffer.from(JSON.stringify({ ...historical, producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })),
+    Buffer.from(JSON.stringify({ ...historical, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION })),
+  ]) assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, sourceReferencesBytes: bytes }),
+    { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  for (const key of ['paperId', 'sourceDigest', 'candidateDigest', 'sourceReferencesDigest']) {
+    assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, receipt: { ...receipt, [key]: sha256('changed') } }),
+      { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  }
+  assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, receipt: undefined }),
+    { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  const changedBinding = structuredClone(input.materialization)
+  changedBinding.paperName = 'Changed source binding'
+  assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, materialization: changedBinding }),
+    { code: 'SOURCE_REFERENCES_BINDING_STALE' })
+  assert.deepEqual(historical, original)
+  // The same ranges cannot claim v18 semantics; no external override can
+  // reinterpret a bound sidecar as the caller's preferred version.
+  assert.throws(() => assertSourceReferenceAdmission({ ...input,
+    sidecar: { ...historical, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION },
+    producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
+  { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
+  const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
+  const boundary = prepared.lines.find(line => line.text === '解析')
+  const state = sourceReferenceWritingLifecycle(prepared.lines, prepared).items.get(boundary.itemId)
+  assert.deepEqual(state, { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
+})
+
+test('source-reference semantic discriminator is explicit and rejects unknown versions', () => {
+  for (const schemaVersion of ['source-references-v1', 'source-references-v2', 'source-references-v3',
+    'source-references-v4', 'source-references-v5']) {
+    assert.throws(() => sourceReferenceProducerVersion({ schemaVersion }),
+      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+    assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
+      OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  }
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19']) {
+    assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
+      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  }
+})
+
+for (const appendix of [
+  ['写作评分说明', '读后续写评分标准', '评分标准'],
+  ['第二节（满分25分）', '评分标准'],
+]) test(`explicit scoring appendix alone reopens after explanation: ${appendix[0]}`, () => {
+  const input = fixture([
+    [...heading, line('A complete source sample.', .3), line('【答案解析】：', .4)],
+    [...appendix, '按内容和语言给分。', '参考范文', 'A reprinted sample.']
+      .map((text, i) => line(text, .1 + i * .1)),
+  ])
+  const prepared = prepareSourceReferenceWritingItems(...input)
+  const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups[0].essays.entries.map(e => e.paragraphs.map(p => p.text)),
+    [['A complete source sample.']])
+  assert.deepEqual(scoringTexts(output), ['按内容和语言给分。'])
+  const criterion = `p2-i${appendix.length}`
+  assert.equal(lifecycle.items.get(criterion).kind, 'scoring')
+  assert.equal(lifecycle.items.get(criterion).capturing, false)
+  assert.equal(sourceReferenceScoringScopes(input[2], new Set(['answers'])).get(criterion).taskType, 'continuation')
+  const reprint = `p2-i${appendix.length + 2}`
+  assert.equal(lifecycle.items.get(reprint).capturing, false)
+  assert.equal(sourceReferenceScoringScopes(input[2], new Set(['answers'])).get(reprint), null)
+})
+
 const scoringTexts = output => output.groups[0].scoring.entries.flatMap(e =>
   (e.paragraphs ?? e.blocks.filter(b => b.kind === 'paragraph').map(b => b.paragraph)).map(p => p.text))
 function reseal(input) {

@@ -7,7 +7,7 @@ import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { sourceReferenceFiguresFixture } from '../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
-import { assertSourceReferenceAdmission } from '../server/paper-import/sourceReferenceAdmission.mjs'
+import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../server/paper-import/sourceReferenceAdmission.mjs'
 import { validateSourceReferences, sourceReferenceFigures } from '../server/paper-import/sourceReferences.mjs'
 import { sourceReferenceScoringScopes } from '../server/paper-import/sourceReferenceScoringScope.mjs'
 import { computeLineFacts } from './import-pipeline/ocr-line-facts.mjs'
@@ -207,7 +207,10 @@ assert.equal(legacySha, 'sha256:a28d4e32293270549baf3d01bada57b71f94ce9f5abdc9f4
 const legacyHtml = buildAnswerOnlyHtml(legacy)
 assert.equal(sha256(legacyHtml), 'sha256:14611297eba4f84bd960c817351416965f30eb580ae64012a328634f1c0860f6',
   'v3 exact HTML from b06ed92c must stay unchanged')
-assertSourceReferenceAdmission({ ...legacy, sidecar: legacy.sourceReferences })
+assertSealedSourceReferenceReplay({ ...legacy, sourceReferencesBytes: legacyBytes,
+  receipt: { revisionId: 'frozen-v3-fixture', bundleDigest: sha256('frozen-v3-bundle'),
+    paperId: legacy.materialization.paperId, sourceDigest: legacy.sourceDigest,
+    candidateDigest: legacy.candidateDigest, sourceReferencesDigest: legacySha } })
 assert.equal(sha256(Buffer.from(JSON.stringify(legacy.sourceReferences))), legacySha)
 assert.equal(buildAnswerOnlyHtml(legacy), legacyHtml)
 assert.equal(legacy.sourceReferences.schemaVersion, 'source-references-v3')

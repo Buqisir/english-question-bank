@@ -56,6 +56,7 @@ import {
 import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
+  buildNck1SealedReviewProjection,
   reviewBundleFilePathsForProjection,
   resolveReviewFile,
 } from '../import-review/revisionProjection.mjs'
@@ -1265,9 +1266,12 @@ function prepareUniversalNck1ImportSnapshot({
 }) {
   let projection
   try {
-    projection = buildNck1ReviewProjection(reviewRootDir, {
-      requireAnalyses: true, expectedCandidateDigest: approvedIdentity?.candidateDigest,
-    })
+    projection = approvedIdentity?.approvalId && approvedManifest
+      ? buildNck1SealedReviewProjection(reviewRootDir, approvedIdentity,
+        { requireAnalyses: true, manifest: approvedManifest })
+      : buildNck1ReviewProjection(reviewRootDir, {
+        requireAnalyses: true, expectedCandidateDigest: approvedIdentity?.candidateDigest,
+      })
   } catch (error) {
     if (error.code !== 'IMPORT_REVIEW_PROJECTION_MISMATCH') throw error
     return canonicalAdmissionFailure({

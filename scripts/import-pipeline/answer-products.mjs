@@ -7,7 +7,7 @@ import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs
 import {
   assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
   sourceReferenceBlocks, structuredSourceReferencesSchema, figureSourceReferencesSchema, scoringFigureSourceReferencesSchema,
-  exclusionSourceReferencesSchema,
+  exclusionSourceReferencesSchema, currentSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
@@ -58,11 +58,9 @@ try {
     if (figureExclusions) { template.schemaVersion = 'source-references-v5'; template.figureExclusions = [] }
     writeNew(output, `${JSON.stringify({
       schemaVersion: 'source-references-request-v1',
-      outputSchema: figureExclusions ? exclusionSourceReferencesSchema : scoringFigures ? scoringFigureSourceReferencesSchema : figures ? figureSourceReferencesSchema : structuredScoring ? structuredSourceReferencesSchema : sourceReferencesSchema,
-      ...((structuredScoring || figures || scoringFigures || figureExclusions) ? { schemaDependencies: [sourceReferencesSchema,
-        ...(figures || scoringFigures || figureExclusions ? [structuredSourceReferencesSchema] : []),
-        ...(scoringFigures || figureExclusions ? [figureSourceReferencesSchema] : []),
-        ...(figureExclusions ? [scoringFigureSourceReferencesSchema] : [])] } : {}),
+      outputSchema: currentSourceReferencesSchema,
+      schemaDependencies: [sourceReferencesSchema, structuredSourceReferencesSchema, figureSourceReferencesSchema,
+        scoringFigureSourceReferencesSchema, exclusionSourceReferencesSchema],
       sourceDocuments: loaded.manifest.documents,
       instructions: 'Capture all source essays/labels/paragraphs and scoring references. Keep scoring paragraphs and tables in source order; each table cell needs its exact source locator and text, including empty cells. Do not flatten tables into essays or invent merged-cell structure. Source text only; no AI writing, summaries or legacy modelAnswer conversion. Review every answer-bearing document before declaring not_supplied. Keep unprocessed when incomplete. This is local capture, not Review/publication or source-fidelity approval.',
       template,

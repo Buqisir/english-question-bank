@@ -67,7 +67,8 @@ export async function excludeExplanationFigure(paperId, {
   // Candidate or rebinding any upstream report. Draft digests remain unset.
   const binding = { sourceDigest: sha256('unbound source preview'), candidateDigest: sha256('unbound candidate preview') }
   const sidecar = { schemaVersion: captured.schemaVersion, paperId, ...binding,
-    materializationDigest: digestJson(materialization), groups: captured.groups, figureExclusions }
+    materializationDigest: digestJson(materialization), groups: captured.groups,
+    producerVersion: captured.producerVersion, figureExclusions }
   assertSourceReferenceAdmission({ ...binding, sidecar, materialization,
     sourceInput: { documents, ocrSourceBytes: {
       evidenceBytes: originals.get(evidenceFile), confirmationBytes: originals.get(confirmationFile),

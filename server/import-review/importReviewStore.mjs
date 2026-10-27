@@ -35,6 +35,7 @@ import { beginReviewActivity } from './reviewCompatibilityScheduling.mjs'
 import { restoreFinalizeError, runFinalizeWorker } from './runFinalizeWorker.mjs'
 import {
   buildImportReviewProjection,
+  buildNck1SealedReviewProjection,
   resolveReviewFile,
 } from './revisionProjection.mjs'
 
@@ -1705,6 +1706,13 @@ export function createImportReviewStore({
     }
   }
 
+  function projectStoredRevision(revision, options) {
+    const directory = revisionDirectory(revision.id)
+    return projectRevision === buildImportReviewProjection && revision.reviewKind === 'candidate'
+      ? buildNck1SealedReviewProjection(directory, revision, options)
+      : projectRevision(directory, options)
+  }
+
   function projectionForRevision(revisionId) {
     const revision = getRevision(revisionId)
     if (!revision || revision.state === 'uploading') {
@@ -1713,8 +1721,8 @@ export function createImportReviewStore({
     if (revision.reviewKind === 'candidate') withDb(false, db => assertReviewCompatible(db, revision))
     assertStoredRevisionFiles(revision)
     if (!projectionCache.has(revisionId)) {
-      const projection = projectRevision(
-        revisionDirectory(revisionId),
+      const projection = projectStoredRevision(
+        revision,
         { reviewKind: revision.reviewKind, requireAnalyses: false, expectedCandidateDigest: revision.candidateDigest },
       )
       assertProjectionIdentity(projection, revision)
@@ -2227,7 +2235,7 @@ export function createImportReviewStore({
         if (approvalCompatibility.fallback) {
           // Exact pre-BUB-90 approval validation: renderer match plus the sealed
           // projection identity and listening rules. Do not manufacture a subject.
-          legacyProjection = projectRevision(revisionDirectory(revision.id), {
+          legacyProjection = projectStoredRevision(revision, {
             reviewKind: revision.reviewKind, requireAnalyses: !revision.manifest.importProfile,
             expectedCandidateDigest: revision.candidateDigest,
           })
@@ -2338,7 +2346,7 @@ export function createImportReviewStore({
     return withDb(false, (db) => {
       const { revision, approval } = assertCurrentApprovedRevision(db, paperId, expected)
       assertStoredRevisionFiles(revision, db)
-      const projection = projectRevision(revisionDirectory(revision.id), {
+      const projection = projectStoredRevision(revision, {
         reviewKind: revision.reviewKind,
         requireAnalyses: true,
         expectedCandidateDigest: revision.candidateDigest,
