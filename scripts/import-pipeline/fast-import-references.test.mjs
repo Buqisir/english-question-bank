@@ -82,7 +82,7 @@ function fixture(t, referencesVersion = version) {
 }
 
 test('producer and driver import the same pure version constant; current results remain cache hits', async t => {
-  assert.equal(version, 'ocr-source-references-producer-v20')
+  assert.equal(version, 'ocr-source-references-producer-v21')
   assert.equal(producerVersion, version)
   const { dir, ctx, calls, options } = fixture(t)
   const before = snapshot(dir)

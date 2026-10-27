@@ -1,5 +1,6 @@
 import { sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
+import { inlineSampleParts } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles,
   usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
@@ -8,7 +9,7 @@ import {
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, isSourceReferenceExplanationStart,
-  BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
+  BARE_WRITING_SECTION,
   isSourceReferenceSampleLabel, explicitWritingHeading,
   continuationThoughtHeading, applicationStanceLabel,
 } from './sourceReferenceWritingRules.mjs'
@@ -186,8 +187,9 @@ export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures
       || WRITING_SCORING_OVERVIEW.test(writingRuleMatchingView(item.text))
       || isScoringLabel(item.text, WRITING_SCORING_SECTION.some(([, pattern]) => pattern.test(writingRuleMatchingView(item.text))))
       || BARE_WRITING_SECTION.test(item.text.normalize('NFKC').split('\n')[0].trim())
-      || INLINE_WRITING_SAMPLE.test(item.text.normalize('NFKC').trim())
-      || INLINE_WRITING_ANSWER_SAMPLE.test(item.text.normalize('NFKC').trim()))
+      // Contextual v21 starts come from the lifecycle above; without writing
+      // context only the historical inline forms can establish this cutoff.
+      || inlineSampleParts(item.text.normalize('NFKC').trim(), { producerVersion }))
     for (const figure of figures.filter(figure => figure.source.documentId === document.documentId)) {
       if (start < 0 || !figure.itemIds.length
         || figure.itemIds.some(id => !positions.has(id) || positions.get(id) >= start)

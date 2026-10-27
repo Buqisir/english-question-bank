@@ -9,7 +9,7 @@ import {
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
   WORD_COUNT_SAMPLE_LABEL, NUMBERED_SAMPLE_LABEL,
   ENTRY_LABEL, EXAMPLE_SAMPLE_LABEL, PARENTHESIZED_SAMPLE_LABEL, NUMBERED_VERSION_SAMPLE_LABEL,
-  SCORING_LABEL, isSourceReferenceSampleLabel, explicitWritingHeading, verifiedParenthesizedEnglish,
+  SCORING_LABEL, isSourceReferenceSampleLabel, explicitWritingHeading, verifiedParenthesizedEnglish, composedWritingSampleParts,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { usesExplicitWritingTitles, OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 
@@ -174,6 +174,11 @@ export const LINE_ROLE_RULES = Object.freeze([
   pattern('writing.inline-answer-sample', 'inline-sample', 20,
     INLINE_WRITING_ANSWER_SAMPLE,
     '第一节：作答示例', '第一节：作答示例说明如下。'),
+  rule('writing.composed-sample', 'inline-sample', 30,
+    (f, c) => c.inWriting && Boolean(composedWritingSampleParts(f.text, c.producerVersion)),
+    { text: '第一节 One possible version:', context: { inWriting: true } },
+    { text: '第一节 One possible version: additional text', context: { inWriting: true } },
+    { capture: (text, context) => composedWritingSampleParts(text, context.producerVersion) }),
   pattern('writing.repeated-heading', 'repeated-heading', 10, /^写作\s*[:：]?$/u, '写作', '第四部分 写作'),
   pattern('writing.part', 'writing-part', 10, WRITING_PART, '第四部分 写作', '第三部分 语言知识运用'),
   pattern('writing.bare-fourth-part', 'bare-writing-part', 10, /^第四部分\s*[:：]?$/u, '第四部分', '第三部分'),
@@ -279,8 +284,11 @@ export function firstLineRole(phase, facts, context = {}) {
 // Capture extraction uses the same regex as its named candidate, never another
 // recognition path. These captures do not mutate the printed source text.
 export function speakerLabel(text) { return byId.get('transcript.speaker').capture(text)?.[0] || null }
-export function inlineSampleParts(text) {
-  return firstLineRole('inline-sample', computeLineFacts({ text }))?.capture(text)?.slice(1)
+export function inlineSampleParts(text, context = {}) {
+  const candidate = firstLineRole('inline-sample', computeLineFacts({ text }), context)
+  if (!candidate) return undefined
+  const parts = candidate.capture(text, context)
+  return candidate.id === 'writing.composed-sample' ? parts : parts?.slice(1)
 }
 export function bareSectionNumber(text) { return byId.get('writing.bare-section').capture(text)?.[1] || null }
 export function watermarkMatches(text) { return byId.get('worksheet.watermark').scan(text) }

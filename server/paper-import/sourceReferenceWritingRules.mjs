@@ -2,7 +2,7 @@
 // recognition identical without importing the CLI producer into the server.
 // Scoring predicates share this matching view; captured source text is untouched.
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  usesExplicitWritingTitles, usesGivenTitleWritingSamples } from './sourceReferenceSemantics.mjs'
+  usesExplicitWritingTitles, usesGivenTitleWritingSamples, usesComposedWritingLabels } from './sourceReferenceSemantics.mjs'
 export const writingRuleMatchingView = text => text.normalize('NFKC').replace(/\s+/gu, '')
 export const SOURCE_REFERENCE_ANSWER_ROLES = Object.freeze(['official_answers', 'question_and_answers'])
 // The #586 sample parser is also the authority for Version one/two/three
@@ -49,6 +49,21 @@ export const BARE_APPLICATION_SECTION = /^(?:应用文|书面表达)\s*[:：]?$/
 export const BARE_WRITING_SECTION = /^第([一二])节\s*(?:\(满分\s*\d+\s*分\))?\s*[:：]?$/u
 export const INLINE_WRITING_SAMPLE = /^(第[一二]节\s*(?:[（(]满分\s*\d+\s*分[）)])?)(?:\s+|(?<=[）)]))(作答示例[:：]?|[（(](?:(?:A|One)\s+)?Possible\s+Version[）)])$/iu
 export const INLINE_WRITING_ANSWER_SAMPLE = /^(第[一二]节)\s*[:：]?\s*(作答示例\s*[:：]?)$/u
+// Split only at actual horizontal whitespace, then apply both existing whole
+// predicates. The example-label predicate also permits commentary, which is
+// not a complete label in a composed heading.
+export function composedWritingSampleParts(text, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION) {
+  if (!usesComposedWritingLabels(producerVersion) || /[\r\n]/u.test(text)) return undefined
+  const view = text.trim()
+  for (const separator of view.matchAll(/[^\S\r\n]+/gu)) {
+    const heading = view.slice(0, separator.index)
+    const label = view.slice(separator.index + separator[0].length)
+    if (BARE_WRITING_SECTION.test(heading.normalize('NFKC'))
+      && isSourceReferenceSampleLabel(label, producerVersion)
+      && (!/^【示例/u.test(label) || /^【示例[一二三四五六七八九十]+】$/u.test(label))) return [heading, label]
+  }
+  return undefined
+}
 export const WRITING_SECTION = [
   ['application', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:应用文|书面表达)\s*[）)]|应用文|书面表达)/u],
   ['continuation', /^第[一二]节\s*[:：]?\s*(?:[（(]\s*(?:读后续写|续写)\s*[）)]|读后续写|续写)/u],

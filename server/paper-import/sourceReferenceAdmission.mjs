@@ -208,7 +208,7 @@ function assertSourceReferenceContent({
     const merged = text.kind === 'essays' && text.source === text.entry.labelSource
       && owner?.capturing && owner.labelItemId === surviving[0].itemId
       && owner.task === text.group.taskType
-      ? sourceReferenceWritingTaskHeading(surviving, 0, { producerVersion }) : null
+      ? sourceReferenceWritingTaskHeading(surviving, 0, { producerVersion, inWriting: true }) : null
     const replayText = merged?.bare && merged.started === owner.task && merged.mergedLabel
       ? merged.mergedLabel : surviving.map(item => item.text).join(' ')
     if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length

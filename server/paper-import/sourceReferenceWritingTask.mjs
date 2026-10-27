@@ -122,7 +122,7 @@ export function sourceReferenceWritingTaskHeading(lines, lineIndex, {
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const line = lines[lineIndex]
   const facts = factsFor(line)
-  const inlineSample = inlineSampleParts(facts.text)
+  const inlineSample = inlineSampleParts(facts.text, { producerVersion, inWriting })
   const [heading, ...rest] = inlineSample || facts.text.split('\n')
   const sectionText = writingSectionText(facts, heading, rest, inWriting)
   const mergedText = rest.length === 1 ? rest[0].trim() : null

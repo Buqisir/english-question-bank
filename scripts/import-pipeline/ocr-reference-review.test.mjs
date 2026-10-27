@@ -99,6 +99,75 @@ test('merged second-section sample heading preserves task switch through produce
   assertSourceReferenceAdmission({ ...input, sidecar })
 })
 
+test('v21 composed source labels retain their regions, task boundaries and figure ownership through admission', () => {
+  const input = scoringFiguresFixture({ writingHeading: ['第四部分 写作', '第一节 One possible version:'] })
+  const pages = input.confirmation.documents[1].pages
+  const proof = input.evidence.documents[1].pages
+  const appHeading = pages[2].orderedItems[1]
+  const removedApp = pages[2].orderedItems.splice(2, 1)[0]
+  const continuation = pages[3].orderedItems[0]
+  continuation.text = '第二节 One possible version:'
+  proof[3].observations[0].text = continuation.text
+  const removedContinuation = pages[3].orderedItems.splice(1, 1)[0]
+  for (const [page, removed] of [[proof[2], removedApp], [proof[3], removedContinuation]]) {
+    page.observations = page.observations.filter(observation => !removed.observationIds.includes(observation.observationId))
+    page.regions = page.regions.filter(region => page.observations.some(observation => observation.regionId === region.regionId)
+      || region.kind === 'visual')
+    page.readingOrderEdges = page.observations.slice(1).map((observation, index) => ({
+      before: page.observations[index].observationId, after: observation.observationId,
+    }))
+  }
+  reseal(input)
+  const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
+  const lifecycle = sourceReferenceWritingLifecycle(prepared.lines, prepared)
+  assert.equal(lifecycle.taskStarts.get(appHeading.itemId), 'application')
+  assert.equal(lifecycle.taskStarts.get(continuation.itemId), 'continuation')
+  const sidecar = captureScoringReferences(input)
+  const essays = sidecar.groups.map(group => group.essays.entries[0])
+  assert.deepEqual(essays.map(entry => entry.sourceLabel), ['One possible version:', 'One possible version:'])
+  assert.deepEqual(essays.map(entry => entry.paragraphs.map(p => p.text)),
+    [['Our original sample is short.'], ['Another original sample.']])
+  for (const [index, item] of [appHeading, continuation].entries()) {
+    assert.deepEqual(essays[index].labelSource.locator.region,
+      proof[index + 2].observations.find(observation => observation.observationId === item.observationIds[0]).region)
+  }
+  assert.deepEqual(sidecar.groups.map(group => group.scoring.entries.flatMap(entry =>
+    entry.blocks.filter(block => block.kind === 'figure')).length), [2, 1])
+  assertSourceReferenceAdmission({ ...input, sidecar })
+})
+
+test('v21 rejects composed labels outside writing, and historical versions do not open them', () => {
+  for (const texts of [
+    ['第三部分 阅读理解', '第一节 One possible version:', 'A source paragraph.'],
+    ['第二节 阅读理解', '第一节 One possible version:', 'A source paragraph.'],
+    ['第一节 One possible version:', 'A source paragraph.'],
+  ]) {
+    const input = writingFixture(texts, [])
+    assert.equal(lifeFor(input).sections.size, 0)
+  }
+  const input = writingFixture(['第四部分 写作', '第一节 One possible version:', 'An application.',
+    '第二节 One possible version:', 'A continuation.'])
+  const current = lifeFor(input)
+  assert.deepEqual([...current.sections.keys()], ['application', 'continuation'])
+  for (const version of [17, 18, 19, 20]) {
+    const source = prepareSourceReferenceWritingItems(...input, { producerVersion: `ocr-source-references-producer-v${version}` })
+    assert.equal(sourceReferenceWritingLifecycle(source.lines, source).sections.size, 0)
+  }
+})
+
+test('sealed v20 references retain replay semantics and are rejected on first admission', () => {
+  const input = scoringFiguresFixture()
+  const sidecar = captureScoringReferences(input, { producerVersion: 'ocr-source-references-producer-v20' })
+  const sourceReferencesBytes = Buffer.from(JSON.stringify(sidecar))
+  assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt: {
+    revisionId: 'sealed-v20-revision', bundleDigest: sha256('sealed-v20-bundle'),
+    paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+    sourceReferencesDigest: sha256(sourceReferencesBytes),
+  } })
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
+    { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+})
+
 test('ordinary entries are not task starts and cannot restart scoring after a sample', () => {
   const rows = ['第四部分', '第一节', '参考范文', 'An original sample.',
     '评分标准', 'Source criterion.', '参考范文', 'Another original sample.',
@@ -305,7 +374,7 @@ test('first admission rejects missing, legacy and unknown producer versions befo
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
   for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v21', null]) {
+    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v22', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -388,7 +457,7 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v21']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v22']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }

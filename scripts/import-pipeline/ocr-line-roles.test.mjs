@@ -193,6 +193,31 @@ test('作答示例 is an essay label and splits from an exact section heading', 
   assert.equal(firstLineRole('entry-label', computeLineFacts({ text: '作答示例说明如下。' })), null)
 })
 
+test('v21 composes whole bare sections and sample labels only in writing context', () => {
+  const context = { inWriting: true }
+  for (const [heading, label] of [
+    ['第一节', 'One possible version:'], ['第二节', 'oNe PoSsIbLe VeRsIoN：'],
+    ['第一节（满分15分）', '参考范文'], ['第二节:', 'Version one:'],
+    ['第一节', '（One possible version）'], ['第二节', '作答示例'],
+    ['第一节', '【参考范文】'], ['第二节', '参考范文（80词）'],
+  ]) for (const space of [' ', '\t', '　']) {
+    const input = `${heading}${space}${label}`
+    assert.deepEqual(inlineSampleParts(input, context), [heading, label], input)
+    for (const version of [17, 18, 19, 20]) {
+      // Legacy inline forms may already match, so compare the new-only examples.
+      if (label.startsWith('One') || label.startsWith('oNe') || label === '参考范文') {
+        assert.equal(inlineSampleParts(input, { ...context, producerVersion: `ocr-source-references-producer-v${version}` }), undefined, input)
+      }
+    }
+  }
+  for (const input of ['第一节 One possible version: explanation', '第一节 One possible version:正文',
+    '第一节One possible version:', '第一节 One possible', '第一节 阅读理解 One possible version:',
+    '第一节 【示例一】额外说明', '第一节\nOne possible version:']) {
+    assert.equal(inlineSampleParts(input, context), undefined, input)
+  }
+  assert.equal(inlineSampleParts('第一节 One possible version:', { inWriting: false }), undefined)
+})
+
 test('parenthesized writing headings use explicit task words rather than their ordinal', () => {
   for (const [text, task] of [
     ['（二）应用文写作', 'application'], ['（三）读后续写（满分25分）', 'continuation'],
