@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
-import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
@@ -29,12 +29,13 @@ function fakeStatus(ctx, candidates = []) {
     latest: revisions.at(-1) ?? null, revisions })
 }
 
-function failedPush(ctx) {
-  ctx.state.steps.push = { startedAt: oldTime }
+function failedPush(ctx, attemptId = '11111111-1111-4111-8111-111111111111', message = '500 SOURCE_REFERENCES_PRODUCER_VERSION_INVALID rejected') {
+  ctx.state.steps.push = { startedAt: oldTime, attemptId }
   json(ctx.statePath, ctx.state)
-  const file = path.join(ctx.logs, 'push.log')
+  const file = path.join(ctx.logs, `push-${attemptId}.log`)
   mkdirSync(ctx.logs, { recursive: true })
-  writeFileSync(file, '$ review push\n--- stderr\n500 SOURCE_REFERENCES_PRODUCER_VERSION_INVALID rejected\n')
+  appendFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), `${JSON.stringify({ paperId: ctx.paperId, ...ctx.state.steps.push })}\n`)
+  writeFileSync(file, `${JSON.stringify({ type: 'fast-push-attempt-v1', paperId: ctx.paperId, ...ctx.state.steps.push })}\n$ review push\n--- stderr\n${message}\n${JSON.stringify({ type: 'fast-push-exit-v1', attemptId, code: 1, signal: null })}\n`)
   return file
 }
 const completed = result => ({ startedAt: oldTime, finishedAt: oldTime, seconds: 0, result })
@@ -349,8 +350,7 @@ for (const failure of ['fetch failed: ECONNRESET', 'SOURCE_REFERENCES_PRODUCER_V
   test(`UNKNOWN failure is rejected: ${failure}`, async t => {
     fakeReviewOrigin(t)
     const { ctx } = fixture(t, 'old-version')
-    const file = failedPush(ctx)
-    writeFileSync(file, failure)
+    const file = failedPush(ctx, undefined, failure)
     let called = false
     await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => { called = true; return fakeStatus(ctx) } }), /UNKNOWN/)
     assert.equal(called, false)
@@ -372,6 +372,42 @@ test('Candidate finalized after push prevents reconciliation', async t => {
   const status = fakeStatus(ctx, [{ id: 'rev-finalized', state: 'awaiting_review', finalizedAt: '2026-01-01T00:01:00Z' }])
   await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => status }), /RECONCILIATION_REQUIRED/)
   await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+})
+
+test('Candidate finalized before push also prevents reconciliation', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
+  const status = fakeStatus(ctx, [{ id: 'rev-previous', state: 'approved', finalizedAt: '2025-12-31T23:59:00Z' }])
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => status }), /RECONCILIATION_REQUIRED/)
+  await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+})
+
+test('a prior HTTP 500 cannot reconcile a later network-failed attempt', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version')
+  const previous = failedPush(ctx)
+  await reconcilePush(ctx, previous, { readStatus: async () => fakeStatus(ctx) })
+  const next = failedPush(ctx, '22222222-2222-4222-8222-222222222222', 'fetch failed: ECONNRESET')
+  await assert.rejects(() => reconcilePush(ctx, previous, { readStatus: async () => fakeStatus(ctx) }), /UNKNOWN/)
+  await assert.rejects(() => reconcilePush(ctx, next, { readStatus: async () => fakeStatus(ctx) }), /UNKNOWN/)
+  await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+})
+
+test('new attempt history invalidates old evidence even if old state remains in memory', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
+  await reconcilePush(ctx, file, { readStatus: async () => fakeStatus(ctx) })
+  appendFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), `${JSON.stringify({ paperId: ctx.paperId, startedAt: oldTime, attemptId: '22222222-2222-4222-8222-222222222222' })}\n`)
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => fakeStatus(ctx) }), /UNKNOWN/)
+  await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+})
+
+test('legacy push without attempt identity cannot be reconciled', async t => {
+  fakeReviewOrigin(t)
+  const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
+  delete ctx.state.steps.push.attemptId
+  json(ctx.statePath, ctx.state)
+  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => fakeStatus(ctx) }), /UNKNOWN/)
 })
 
 for (const tamper of ['receipt', 'status', 'failure', 'startedAt', 'new-push']) {

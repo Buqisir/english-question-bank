@@ -143,7 +143,14 @@ async function step(ctx, name, fn) {
     return done.result
   }
   const started = Date.now()
-  ctx.state.steps[name] = { startedAt: new Date(started).toISOString() }
+  const entry = { startedAt: new Date(started).toISOString() }
+  if (name === 'push') {
+    entry.attemptId = randomUUID()
+    mkdirSync(ctx.fast, { recursive: true })
+    // Append before updating state: an interruption must invalidate older receipts.
+    appendFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), `${JSON.stringify({ paperId: ctx.paperId, ...entry })}\n`)
+  }
+  ctx.state.steps[name] = entry
   save(ctx)
   const result = await fn()
   const seconds = Math.round((Date.now() - started) / 100) / 10
@@ -163,6 +170,7 @@ function cli(script, ...args) {
 function run(ctx, label, args, { review = false } = {}) {
   const viaLocal = review && target.local
   const argv = viaLocal ? [path.join(scripts, 'local-review.mjs'), 'run', '--', process.execPath, ...args] : args
+  const pushAttempt = label === 'push' ? { ...ctx.state.steps.push } : null
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, argv, { cwd: root, env: review ? reviewEnv : env, stdio: ['ignore', 'pipe', 'pipe'] })
     let out = ''
@@ -171,11 +179,11 @@ function run(ctx, label, args, { review = false } = {}) {
     child.stderr.on('data', (chunk) => { err += chunk })
     child.on('error', reject)
     child.on('close', (code) => {
-      let log = path.join(ctx.logs, `${label}.log`)
+      const log = path.join(ctx.logs, pushAttempt ? `push-${pushAttempt.attemptId}.log` : `${label}.log`)
       mkdirSync(ctx.logs, { recursive: true })
-      // Candidate push evidence must survive a subsequent attempt.
-      if (label === 'push' && existsSync(log)) log = path.join(ctx.logs, `push-${randomUUID()}.log`)
-      writeFileSync(log, `$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}`)
+      const header = pushAttempt ? `${JSON.stringify({ type: 'fast-push-attempt-v1', paperId: ctx.paperId, ...pushAttempt })}\n` : ''
+      const footer = pushAttempt ? `\n${JSON.stringify({ type: 'fast-push-exit-v1', attemptId: pushAttempt.attemptId, code, signal: child.signalCode })}\n` : ''
+      writeFileSync(log, `${header}$ ${args.map((arg) => path.relative(root, arg) || arg).join(' ')}\n${out}\n--- stderr\n${err}${footer}`, pushAttempt ? { flag: 'wx' } : {})
       if (code === 0) resolve(lastJson(out) ?? { stdout: out.trim() })
       else reject(new Error(`${label} 失败（exit ${code}），日志 ${path.relative(root, log)}\n${tail(err || out)}`))
     })
@@ -942,6 +950,30 @@ function failureDetails(bytes) {
   return found[0]
 }
 
+function latestPushAttempt(ctx, push) {
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/u.test(push?.attemptId || '')) fail('UNKNOWN: push 缺少尝试身份')
+  const lines = readFileSync(path.join(ctx.fast, 'push-attempts.jsonl'), 'utf8').trim().split('\n')
+  const attempts = lines.map(line => JSON.parse(line))
+  const last = attempts.at(-1)
+  if (!last || last.paperId !== ctx.paperId || last.attemptId !== push.attemptId || last.startedAt !== push.startedAt
+    || attempts.filter(item => item.attemptId === push.attemptId).length !== 1
+    || digestJson(readJson(ctx.statePath).steps?.push) !== digestJson(push)) fail('UNKNOWN: push 不是最新尝试')
+}
+
+function attemptFailure(ctx, push, file, bytes) {
+  try {
+    latestPushAttempt(ctx, push)
+    if (path.resolve(file) !== path.resolve(ctx.logs, `push-${push.attemptId}.log`)) fail('日志路径不符')
+    const lines = bytes.toString('utf8').trim().split('\n')
+    const header = JSON.parse(lines[0]), exit = JSON.parse(lines.at(-1))
+    if (header.type !== 'fast-push-attempt-v1' || header.paperId !== ctx.paperId
+      || header.attemptId !== push.attemptId || header.startedAt !== push.startedAt
+      || exit.type !== 'fast-push-exit-v1' || exit.attemptId !== push.attemptId
+      || !Number.isInteger(exit.code) || exit.code === 0 || exit.signal !== null) fail('尝试结果不符')
+    return failureDetails(bytes)
+  } catch (error) { fail(`UNKNOWN: 不能证明失败证据属于最新 push：${error.message}`) }
+}
+
 function statusObservation(raw, paperId, startedAt) {
   const status = JSON.parse(raw)
   if (status.paperId !== paperId || !Array.isArray(status.revisions)
@@ -961,8 +993,7 @@ function statusObservation(raw, paperId, startedAt) {
     }
     const finalized = Date.parse(revision.finalizedAt)
     if (!Number.isFinite(finalized)) fail('UNKNOWN: Candidate 缺少有效 finalizedAt')
-    if (finalized >= started) fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: push 后存在已 finalize 的 Candidate')
-    candidates.push({ id: revision.id, state: revision.state, finalizedAt: revision.finalizedAt })
+    fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: 已存在 finalize 的 Candidate')
   }
   return { latestRevisionId: status.latestRevisionId, latest: status.latest && {
     id: status.latest.id, reviewKind: status.latest.reviewKind, state: status.latest.state,
@@ -988,7 +1019,7 @@ function reconciliationReceipt(ctx, origin) {
       if (statusReceipt.origin !== origin || statusReceipt.paperId !== ctx.paperId
         || !Number.isFinite(Date.parse(statusReceipt.observedAt))
         || sha256(statusReceipt.response) !== statusReceipt.responseSha256) continue
-      if (stableStringify(failureDetails(failure)) !== stableStringify(receipt.failure)
+      if (stableStringify(attemptFailure(ctx, push, receipt.failurePath, failure)) !== stableStringify(receipt.failure)
         || stableStringify(statusObservation(statusReceipt.response, ctx.paperId, push.startedAt)) !== stableStringify(receipt.observation)) continue
       return true
     }
@@ -1006,7 +1037,7 @@ export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {
   if (!failurePath) fail('reconcile-push 需要 --failure-receipt <路径>')
   const file = path.resolve(failurePath)
   const failureBytes = readFileSync(file)
-  const failure = failureDetails(failureBytes)
+  const failure = attemptFailure(ctx, push, file, failureBytes)
   origin ||= reconciliationOrigin()
   const statusReader = readStatus || (() => {
     const args = cli('review.mjs', 'status', ctx.paperId, '--raw-response')
@@ -1026,7 +1057,7 @@ export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {
   writeJson(path.join(dir, statusName), statusReceipt, 'wx')
   const observation = statusObservation(raw, ctx.paperId, push.startedAt)
   // Fail closed if another process changed the in-memory or persisted push while status was read.
-  if (existsSync(ctx.statePath) && digestJson(readJson(ctx.statePath).steps?.push) !== digestJson(push)) fail('UNKNOWN: push 记录已变化')
+  latestPushAttempt(ctx, push)
   writeFileSync(path.join(dir, failureName), failureBytes, { flag: 'wx' })
   const receipt = { schema: 'fast-push-reconciliation-v1', paperId: ctx.paperId, origin,
     pushStartedAt: push.startedAt, pushDigest: digestJson(push), pushRecord: structuredClone(push), failurePath: file,
@@ -1179,7 +1210,7 @@ export async function submit(ctx, args) {
   if (!ctx.state.steps['pdf-qa']?.finishedAt) fail('先运行 finish，并在 PDF 目检后再送审')
   const resolves = option(args, '--resolves')
   const pushed = await step(ctx, localPreview ? 'local-preview' : 'push', async () => {
-    const result = await run(ctx, 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
+    const result = await run(ctx, localPreview ? 'local-preview' : 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
     return { revisionId: result.revisionId, state: result.state ?? result.status ?? null, target: target.local ? 'local' : target.origin }
   })
   const qa = path.join(ctx.work, 'handoff/qa')
