@@ -980,9 +980,9 @@ test('an unlabeled sample after a reprinted prompt requires confirmation instead
   assert.deepEqual(omitted.groups[0].essays.entries, [])
 })
 
-test('parenthesized Chinese glosses retain their same-line English prose even after commentary', () => {
+test('parenthesized Chinese glosses retain English prose and unresolved nonempty samples block capture', t => {
   for (const text of ['（幼苗） and planted it beside the gate.', '(幼苗) and planted it beside the gate.',
-    '（幼苗 and roots）', '（幼苗） café seedlings grew.', '（一）幼苗 and planted it beside the gate.']) {
+    '（幼苗） café seedlings grew.']) {
     for (const preceding of [[], ['（中文指导）']]) {
       const result = referencesFixture(['第二节 读后续写', '参考范文', 'They picked a seedling',
         ...preceding, text])
@@ -991,9 +991,11 @@ test('parenthesized Chinese glosses retain their same-line English prose even af
       assert(!body.includes('中文指导'))
     }
   }
-  for (const text of ['（中文指导）后续说明', '(中文指导)后续说明']) {
-    const result = referencesFixture(['第二节 读后续写', '参考范文', text])
-    assert.equal(result.groups[0].essays.entries[0].paragraphs[0].text, text)
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
+  for (const text of ['（中文指导）后续说明', '(中文指导)后续说明', '（幼苗 and roots）',
+    '（一）幼苗 and planted it beside the gate.', '（1）借助 AI 学习。', '（中文 AI 指导', '（注释）“…”']) {
+    assert.throws(() => referencesFixture(['第二节 读后续写', '参考范文', text]), /unresolved source reference/)
   }
 })
 
@@ -1111,7 +1113,7 @@ test('an adjacent sample label establishes writing context without a part headin
   assert.deepEqual(result.groups[1].essays.entries[0].paragraphs.map(p => p.text), ['A source story.'])
 })
 
-test('task scoring headings capture separately labelled official essays without teaching notes', () => {
+test('task scoring headings require resolved notes before separately labelled official essays', t => {
   const labels = ['范文一（83词）：', '范文二(97词)：', '范文1：', '范文2']
   const texts = ['第四部分 写作（共两节，满分40分）', '应用文评分细则',
     '写作 第一节（满分15分）', '请介绍校园花园。', '一、参考范文',
@@ -1121,6 +1123,10 @@ test('task scoring headings capture separately labelled official essays without 
     '读后续写评分细则：', '一、.参考范文', labels[2], 'Rae found a packet of seeds.',
     '范文分析', '这是一段中文讲解。', labels[3], 'A new leaf appeared by the window.',
     '二、评分原则（采取双评）', '1. 本题总分为25分。']
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved task prompt') })
+  assert.throws(() => referencesFixture(texts, ['application', 'continuation']), /unresolved task prompt/)
+  texts.splice(3, 0, '【审题重点】')
   const result = referencesFixture(texts, ['application', 'continuation'])
   const essays = result.groups.flatMap(group => group.essays.entries)
   assert.deepEqual(essays.map(entry => entry.sourceLabel), labels)
@@ -1206,7 +1212,7 @@ test('part boundaries leave writing scope and bare sections cannot reopen it wit
   assert.deepEqual(result.review, [])
 })
 
-test('commentary pause skips fragments and mixed teaching text but resumes at an uppercase English line', () => {
+test('explanation pause skips English fragments and requires an explicit entry to resume', () => {
   const result = referencesFixture(['第二节 读后续写', '参考范文', 'A completed sample.',
     '首句衔接要点：第一段需与原文', 'leave the next day.',
     'Arthur arrived.”自然衔接，呼应关键意象。', 'Another real sample.'])
@@ -1214,7 +1220,6 @@ test('commentary pause skips fragments and mixed teaching text but resumes at an
     label: e.sourceLabel, id: e.referenceId, text: e.paragraphs.map(p => p.text),
   })), [
     { label: '参考范文', id: 'source-ref-cont-1', text: ['A completed sample.'] },
-    { label: null, id: 'source-ref-cont-2', text: ['Another real sample.'] },
   ])
   assert.equal(result.review.length, 1)
   assert.equal(result.review[0].itemId, 'i3')

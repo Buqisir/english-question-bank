@@ -10,9 +10,29 @@ import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } f
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
+  PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
+import { explicitWritingHeading, isSourceReferenceExplanationStart } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
+
+test('the complete detailed-answer divider ends v19 capture without changing historical title semantics', () => {
+  const texts = ['应用文参考范文', 'Dear Sam,', 'Our club welcomes you.', 'Yours,', 'Li Hua',
+    '读后续写参考范文', 'Mia found the owner.', '【答案详解】', '21. This explanation stays outside references.']
+  const lines = texts.map((text, i) => ({ ...line(text, .1 + i * .03), itemId: `detail:${i}` }))
+  const result = sourceReferenceWritingLifecycle(lines, {
+    materialization: { groups: [] }, answerDocument: { role: 'official_answers' },
+  })
+  assert.equal(result.items.get('detail:7').ended, true)
+  assert.equal(result.items.get('detail:8').ended, true)
+  assert.deepEqual(result.sections.get('continuation').steps.filter(step => step.action === 'body')
+    .map(step => step.line.text), ['Mia found the owner.'])
+  for (const version of [LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION]) {
+    assert.equal(isSourceReferenceExplanationStart('【答案详解】', version), false)
+  }
+  for (const text of ['【答案详解 AI 指导】', '【答案详解】unknown text']) {
+    assert.equal(isSourceReferenceExplanationStart(text), false, text)
+  }
+})
 
 // Bare part/sections plus a variable-width answer grid reproduce the alliance
 // layout without copying its passages, answers or raster assets.
@@ -232,7 +252,7 @@ test('A remains legitimate essay prose before an explanation boundary', () => {
 })
 
 test('explanation mentions and unknown bracketed answer titles do not authorize essay labels', () => {
-  for (const text of ['解析如下这篇范文…', '【答案补充】', '[答案补充]', '【参考答案补充】']) {
+  for (const text of ['解析如下这篇范文…']) {
     const input = fixture([[...heading, line('The source paragraph.', .3), line(text, .4),
       line('The next source paragraph.', .5)]])
     const prepared = prepareSourceReferenceWritingItems(...input)
@@ -242,10 +262,18 @@ test('explanation mentions and unknown bracketed answer titles do not authorize 
     assert.equal(state.capturing, false, text)
     assert.notEqual(state.action, 'entry', text)
     assert.equal(lifecycle.items.get('p1-i4').task, 'continuation')
-    assert.equal(lifecycle.items.get('p1-i4').capturing, true)
+    assert.equal(lifecycle.items.get('p1-i4').capturing, false)
     const entries = buildSourceReferences(...input).groups[0].essays.entries
     assert(entries.every(entry => entry.sourceLabel !== text))
-    assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3, .5])
+    assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3])
+  }
+  for (const text of ['【答案补充】', '[答案补充]', '【参考答案补充】']) {
+    const input = fixture([[...heading, line('The source paragraph.', .3), line(text, .4),
+      line('The next source paragraph.', .5)]])
+    assert.throws(() => {
+      const source = prepareSourceReferenceWritingItems(...input)
+      sourceReferenceWritingLifecycle(source.lines, source)
+    }, { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, text)
   }
 })
 
@@ -276,8 +304,8 @@ test('first admission rejects missing, legacy and unknown producer versions befo
   const input = scoringFiguresFixture()
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
-  for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-    'ocr-source-references-producer-v19', null]) {
+  for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
+    'ocr-source-references-producer-v20', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -340,12 +368,12 @@ test('sealed v17 replay requires the exact receipt digest and source identity', 
   assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, materialization: changedBinding }),
     { code: 'SOURCE_REFERENCES_BINDING_STALE' })
   assert.deepEqual(historical, original)
-  // The same ranges cannot claim v18 semantics; no external override can
+  // The same ranges cannot claim current semantics; no external override can
   // reinterpret a bound sidecar as the caller's preferred version.
   assert.throws(() => assertSourceReferenceAdmission({ ...input,
     sidecar: { ...historical, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION },
     producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
-  { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
+  { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
   const boundary = prepared.lines.find(line => line.text === '解析')
   const state = sourceReferenceWritingLifecycle(prepared.lines, prepared).items.get(boundary.itemId)
@@ -360,10 +388,297 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v20']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }
+})
+
+const writingFixture = (texts, tasks = ['application', 'continuation']) => {
+  const input = fixture([texts.map((text, index) => line(text, .1 + index * .025))])
+  input[0].groups = tasks.map(taskType => ({ groupId: `writing-${taskType}`, writingTask: { taskType } }))
+  return input
+}
+const lifeFor = input => {
+  const source = prepareSourceReferenceWritingItems(...input)
+  return sourceReferenceWritingLifecycle(source.lines, source)
+}
+
+test('v19 explicit tasks accept only full named headings and task-compatible scores', () => {
+  for (const [title, taskType] of [
+    ['应用文', 'application'], ['应用文写作（满分15分）：', 'application'],
+    ['书面表达（满分15分）', 'application'], ['读后续写（满分25分）：', 'continuation'],
+    ['应用文参考范文：', 'application'], ['读后续写参考范文：', 'continuation'],
+  ]) {
+    assert.equal(explicitWritingHeading(title)?.taskType, taskType, title)
+    const input = writingFixture([title, 'A source paragraph.'], [taskType])
+    const output = buildSourceReferences(...input)
+    assert.equal(output.groups[0].essays.entries.length, 1, title)
+    assert.equal(output.groups[0].essays.entries[0].paragraphs[0].text, 'A source paragraph.')
+    assert.equal(lifeFor(input).taskStarts.get('p1-i0'), taskType)
+  }
+  for (const title of ['满分15分', '应用文（满分25分）', '读后续写（满分15分）',
+    '应用文需要审题。', '67. 读后续写参考例文（任意尾注）', '68. 应用文参考例文',
+    '应用文参考范文分析', '67. 应用文参考例文']) assert.equal(explicitWritingHeading(title), null, title)
+})
+
+test('application stance labels preserve two entries with independent source ranges', () => {
+  const input = writingFixture(['应用文参考范文：', '范文一：支持立场',
+    'A first source paragraph.', 'Another first paragraph.', 'Last first paragraph.',
+    '范文二：反对立场', 'A second source paragraph.', 'Another second paragraph.', 'Last second paragraph.',
+    '读后续写参考范文：', 'The first continuation paragraph.', 'The second continuation paragraph.'])
+  // Real short paragraph ends supply the geometric separation; full-width
+  // fixture lines would correctly join as a single printed paragraph.
+  for (const index of [2, 3, 6, 7]) {
+    const ids = input[2].documents[0].pages[0].orderedItems[index].observationIds
+    for (const [offset, id] of ids.entries()) {
+      const observation = input[1].documents[0].pages[0].observations.find(item => item.observationId === id)
+      observation.region.x = .1 + .1 * offset
+      observation.region.width = .1
+    }
+  }
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups.map(g => g.essays.entries.length), [2, 1])
+  assert.deepEqual(output.groups[0].essays.entries.map(e => e.sourceLabel), ['范文一：支持立场', '范文二：反对立场'])
+  assert.deepEqual(output.groups[0].essays.entries.map(e => e.paragraphs.length), [3, 3])
+  assert.notDeepEqual(output.groups[0].essays.entries[0].labelSource, output.groups[0].essays.entries[1].labelSource)
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '范文一：任意立场', 'A paragraph.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => lifeFor(writingFixture(['读后续写参考范文：', '范文一：支持立场', 'A paragraph.'], ['continuation'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.equal(lifeFor(writingFixture(['范文一：支持立场', 'A paragraph.'])).sections.size, 0)
+})
+
+const applicationRubric = ['1. 内容要点：', '（1）描述使用 AI 的经历。', '（2）阐述 AI 的作用。',
+  '2. 语言：符合征文特征。', '3. 阅卷原则：公正公平。', '4. 阅卷标准：要点齐全。']
+test('complete application scoring sequence and continuation rubric exclude explanation ownership', () => {
+  const input = writingFixture(['第一节 应用文写作', 'One possible version:', 'An official source sample.',
+    ...applicationRubric, '第二节 读后续写', 'One possible version:', 'A source continuation.',
+    '1. 续写思路：', '（1）AI 只是这里的中文解释。', '（注释） A quoted English fragment.',
+    '2. 评分参考', '（2）关注语言逻辑。', '（3）注重意义的传达。', '(Text 1)', 'M: A transcript.'])
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups.map(g => g.essays.entries.length), [1, 1])
+  assert.deepEqual(output.groups.map(g => g.scoring.entries.map(e => e.sourceLabel)), [['1. 内容要点：'], ['2. 评分参考']])
+  const scoring = output.groups[0].scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)).join('')
+  for (const text of applicationRubric.slice(1)) assert(scoring.includes(text), text)
+  const source = prepareSourceReferenceWritingItems(...input)
+  const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
+  const scopes = sourceReferenceScoringScopes(input[2], new Set(['answers']))
+  for (const step of lifecycle.sections.get('application').steps.filter(s => s.action === 'body' && s.state.kind === 'scoring')) {
+    assert.deepEqual(scopes.get(step.line.itemId), { taskType: 'application', labelItemId: 'p1-i3', sourceLabel: '1. 内容要点：' })
+  }
+  assert.equal(scopes.get('p1-i13'), null, 'continuation thought cannot inherit scoring')
+  for (const rubric of [applicationRubric.slice(0, -1),
+    [...applicationRubric.slice(0, 3), applicationRubric[4], applicationRubric[3], applicationRubric[5]],
+    [...applicationRubric, applicationRubric[5]]]) {
+    assert.throws(() => lifeFor(writingFixture(['第一节 应用文写作', 'A sample.', ...rubric], ['application'])),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+})
+
+test('same-item task omissions remain task-local and reject contradictory sample prose', () => {
+  const input = writingFixture(['第一节 应用文写作（范文略）', '评分细则：', '应用文评分正文。',
+    '第二节 读后续写（范文略）', '评分原则', '续写评分正文。'])
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups.map(g => g.essays.state), ['not_supplied', 'not_supplied'])
+  assert.deepEqual(output.groups.map(g => g.scoring.entries[0].paragraphs[0].text), ['应用文评分正文。', '续写评分正文。'])
+  assert.deepEqual([...lifeFor(input).taskStarts], [['p1-i0', 'application'], ['p1-i3', 'continuation']])
+  const missing = writingFixture(['第一节 应用文写作（范文略）', '评分细则：', '应用文评分正文。', '评分原则', '续写评分正文。'])
+  assert.equal(lifeFor(missing).sections.has('continuation'), false, 'missing OCR heading cannot be inferred from rubric content')
+  assert.throws(() => lifeFor(writingFixture(['第一节 应用文写作（范文略）', 'A source sample.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+})
+
+test('unresolved nonempty sample ranges fail capture and admission instead of claiming absence', () => {
+  for (const [supplied, suffix] of [
+    [false, ['（幼苗 and roots）']],
+    [false, ['【参考范文补充说明】', 'An actual source sample.']],
+    [true, ['【参考范文补充说明】', 'An actual second sample.']],
+    [true, ['（幼苗 and roots）']],
+    [true, ['（中文指导）', '（幼苗 and roots）']],
+    [false, ['（1）借助 AI 学习。', '参考范文', 'A later resolved sample.']],
+  ]) {
+    const prefix = ['第二节 读后续写', '参考范文', ...(supplied ? ['A complete first sample.'] : [])]
+    const input = writingFixture([...prefix, ...suffix], ['continuation'])
+    const retained = writingFixture(supplied ? prefix : [...prefix, '略'], ['continuation'])
+    const bytes = Buffer.from('Synthetic answer document')
+    for (const value of [input, retained]) value[0].documents[0].sha256 = sha256(bytes)
+    for (const page of input[2].documents[0].pages) page.visualClassifications = []
+    const output = buildSourceReferences(...retained)
+    const sidecar = { schemaVersion: 'source-references-v1', producerVersion: output.producerVersion,
+      paperId: input[0].paperId, sourceDigest: sha256('source'), candidateDigest: sha256('candidate'),
+      materializationDigest: digestJson(input[0]), groups: output.groups }
+    const sourceInput = { documents: [{ ...input[0].documents[0], bytes }], ocrSourceBytes: {
+      evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+    } }
+    assert.throws(() => lifeFor(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    assert.throws(() => assertSourceReferenceAdmission({ sidecar, materialization: input[0], sourceInput,
+      sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest }),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+})
+
+test('task ranges reject unresolved content without requiring a sample label', t => {
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved task range rejected') })
+  for (const [task, titles] of [
+    ['application', ['应用文', '应用文写作（满分15分）：', '应用文(满分15分):', '书面表达（满分15分）']],
+    ['continuation', ['读后续写', '读后续写（满分25分）', '读后续写(满分25分):', '读后续写（满分25分）：']],
+  ]) for (const title of titles) for (const suffix of [
+    ['（幼苗 and roots）'],
+    ['（中文 AI 指导）', 'An actual source sample.'],
+    ['（中文指导）', '（幼苗 and roots）'],
+    ['未决中文内容。'],
+    ['（中文 AI 指导）', '参考范文', 'A later source sample.'],
+    ['（中文 AI 指导）', '评分标准', 'A later source criterion.'],
+  ]) {
+    const input = writingFixture([title, ...suffix], [task])
+    const retained = writingFixture([title, '略'], [task])
+    const bytes = Buffer.from('Synthetic task answer document')
+    for (const value of [input, retained]) {
+      value[0].documents[0].sha256 = sha256(bytes)
+      for (const page of value[2].documents[0].pages) page.visualClassifications = []
+    }
+    const output = buildSourceReferences(...retained)
+    const sidecar = { schemaVersion: 'source-references-v1', producerVersion: output.producerVersion,
+      paperId: input[0].paperId, sourceDigest: sha256('source'), candidateDigest: sha256('candidate'),
+      materializationDigest: digestJson(input[0]), groups: output.groups }
+    const sourceInput = { documents: [{ ...input[0].documents[0], bytes }], ocrSourceBytes: {
+      evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+    } }
+    assert.throws(() => lifeFor(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
+    assert.throws(() => buildSourceReferences(...input), /unresolved task range rejected/, title)
+    for (const value of [sidecar, null]) assert.throws(() => assertSourceReferenceAdmission({
+      sidecar: value, materialization: input[0], sourceInput,
+      sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest,
+    }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
+  }
+})
+
+test('task-adjacent tables need explicit scoring ownership, including inline scoring task headings', t => {
+  const input = scoringFiguresFixture({ table: true, essays: false, writingHeading: ['应用文评分细则'] })
+  const page = input.confirmation.documents[1].pages[2]
+  const proof = input.evidence.documents[1].pages[2]
+  const removed = new Set(page.orderedItems.find(item => item.text === '评分标准').observationIds)
+  page.orderedItems = page.orderedItems.filter(item => item.text !== '评分标准')
+  const removedRegions = new Set(proof.observations.filter(o => removed.has(o.observationId)).map(o => o.regionId))
+  proof.observations = proof.observations.filter(o => !removed.has(o.observationId))
+  proof.regions = proof.regions.filter(r => !removedRegions.has(r.regionId))
+  proof.readingOrderEdges = proof.observations.slice(1).map((o, i) =>
+    ({ before: proof.observations[i].observationId, after: o.observationId }))
+  reseal(input)
+  const sidecar = captureScoringReferences(input)
+  assert(sidecar.groups[0].scoring.entries.flatMap(e => e.blocks).some(b => b.kind === 'table'))
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  // The same confirmed table under an ordinary task has no scoring owner.
+  page.orderedItems[0].text = '应用文写作（满分15分）'
+  proof.observations[0].text = page.orderedItems[0].text
+  reseal(input)
+  t.mock.method(console, 'error', () => {})
+  t.mock.method(process, 'exit', () => { throw new Error('unresolved task table rejected') })
+  assert.throws(() => captureScoringReferences(input), /unresolved task table rejected/)
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: null }),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  for (const title of ['应用文（满分15分）', '读后续写（满分25分）']) {
+    const prepared = prepareSourceReferenceWritingItems(...writingFixture([title, 'Source table cell.']))
+    prepared.lines[1].table = { kind: 'table', rows: [[{ text: 'Source table cell.' }]] }
+    assert.throws(() => sourceReferenceWritingLifecycle(prepared.lines, prepared),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+})
+
+test('deferred 66/67 example titles do not supply a writing task or sample', () => {
+  for (const title of ['66. 应用文参考例文', '67. 读后续写参考例文',
+    '67. 读后续写参考例文（文章来源 Chicken soup for the teenage soul）']) {
+    assert.equal(explicitWritingHeading(title), null)
+    assert.equal(lifeFor(writingFixture([title, 'A source sample.'])).sections.size, 0)
+  }
+})
+
+test('empty explicit sample range cannot borrow a transcript or silently become not_supplied', () => {
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '(Text 1)', 'M: A transcript.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '范文一：支持立场', 'A source sample.',
+    '范文二：反对立场', '(Text 1)'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', 'A main sample.',
+    '备选试题参考答案', '应用文参考范文：', 'An alternate sample.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+})
+
+test('admission rejects fake absence for new task headings and missing source task boundaries', () => {
+  for (const texts of [
+    ['应用文参考范文：', 'A confirmed sample.'],
+    ['第一节 应用文写作', ...applicationRubric],
+    ['第一节 应用文写作（范文略）', '评分细则', '应用文评分正文。'],
+  ]) {
+    const input = writingFixture(texts)
+    const sourceInput = { documents: [], ocrSourceBytes: {
+      evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+    } }
+    assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+  const input = writingFixture(['应用文参考范文：', 'A confirmed sample.'], ['application'])
+  assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0],
+    sourceInput: { documents: [], ocrSourceBytes: { evidenceBytes: Buffer.from(JSON.stringify(input[1])),
+      confirmationBytes: Buffer.from(JSON.stringify(input[2])) } } }),
+  { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+})
+
+test('admission finds explicit tasks across separate official-answer documents', () => {
+  const input = writingFixture(['第一节 应用文写作（范文略）'])
+  const continuation = writingFixture(['第二节 读后续写（范文略）'])
+  for (const [index, part] of continuation.entries()) {
+    const document = structuredClone(part.documents[0])
+    document.documentId = 'continuation-answers'
+    input[index].documents.push(document)
+  }
+  for (const document of input[2].documents) {
+    for (const page of document.pages) page.visualClassifications ??= []
+  }
+  const sourceInput = { documents: [], ocrSourceBytes: {
+    evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+  } }
+  assert.doesNotThrow(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }))
+})
+
+for (const heading of ['高三英语试题听力录音稿', '2026届高中毕业班适应性练习英语听力部分录音稿']) {
+  test(`complete transcript heading requires adjacent Text1 and closes scoring: ${heading}`, () => {
+    const input = writingFixture(['应用文', '评分原则', '评分正文。', heading, '(Text 1)', 'M: A transcript.'], ['application'])
+    const output = buildSourceReferences(...input)
+    assert.equal(output.groups[0].scoring.entries[0].paragraphs[0].text, '评分正文。')
+    assert.equal(sourceReferenceScoringScopes(input[2], new Set(['answers'])).get('p1-i3'), null)
+    const unmatched = writingFixture(['应用文', '评分原则', '评分正文。', heading, 'A line without Text1.'], ['application'])
+    assert(sourceReferenceScoringScopes(unmatched[2], new Set(['answers'])).get('p1-i3'))
+  })
+}
+
+test('v18 sealed replay keeps its semantics, while first admission and altered bytes fail closed', () => {
+  const input = scoringFiguresFixture()
+  const sidecar = captureScoringReferences(input, { producerVersion: PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  assert.equal(sidecar.producerVersion, PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  const sourceReferencesBytes = Buffer.from(JSON.stringify(sidecar))
+  const receipt = Object.freeze({ revisionId: 'sealed-v18-revision', bundleDigest: sha256('sealed-v18-bundle'),
+    paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+    sourceReferencesDigest: sha256(sourceReferencesBytes) })
+  assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt })
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar, receipt }), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  for (const bytes of [Buffer.concat([sourceReferencesBytes, Buffer.from('\n')]),
+    Buffer.from(JSON.stringify({ ...sidecar, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }))]) {
+    assert.throws(() => assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt }),
+      { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  }
+  assert.equal(explicitWritingHeading('应用文参考范文：', PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION), null)
+  const mergedPart = writingFixture(['第四部分 写作 应用文参考范文：', 'A source sample.'], ['application'])
+  const previousSource = prepareSourceReferenceWritingItems(...mergedPart,
+    { producerVersion: PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  assert.equal(sourceReferenceWritingLifecycle(previousSource.lines, previousSource).sections.size, 0)
+  const historical = writingFixture(['第二节 读后续写', '参考范文', 'A source sample.', '范文分析', 'A'], ['continuation'])
+  const before = buildSourceReferences(...historical, { producerVersion: PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  const after = buildSourceReferences(...historical)
+  assert.equal(before.groups[0].essays.entries.length, 2)
+  assert.equal(after.groups[0].essays.entries.length, 1)
 })
 
 for (const appendix of [

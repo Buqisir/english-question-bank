@@ -5,6 +5,10 @@ import { makeSyntheticNck1OcrFixture } from './fixture.mjs'
 import { produceNck1OcrMaterialization } from '../../../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import { reviewMediaFileName } from '../../../server/import-review/revisionProjection.mjs'
 import { NCK1_OCR_CONFIRMATION_FILE_NAME, NCK1_OCR_EVIDENCE_FILE_NAME } from '../../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { importCanonicalCandidate } from '../../../shared/paper-canonical/compiler.mjs'
+import { digestJson } from '../../../shared/paper-canonical/stable.mjs'
+import { buildSourceReferences } from '../../../scripts/import-pipeline/ocr-proofread.mjs'
+import { SOURCE_REFERENCES_FILE } from '../../../server/paper-import/sourceReferences.mjs'
 
 const encode = value => Buffer.from(JSON.stringify(value))
 
@@ -55,4 +59,17 @@ export function writeOptionEmphasisMediaReviewFixture(rootDir, fixture, material
   }
   write(path.join('materialization', NCK1_OCR_EVIDENCE_FILE_NAME), fixture.input.ocrSourceBytes.evidenceBytes)
   write(path.join('materialization', NCK1_OCR_CONFIRMATION_FILE_NAME), fixture.input.ocrSourceBytes.confirmationBytes)
+  // Review must receive the real samples present in this synthetic answer PDF.
+  // Bind to the caller's upgraded materialization, preserving media and marks.
+  const materialization = JSON.parse(Buffer.from(materializationBytes).toString('utf8'))
+  const imported = importCanonicalCandidate({ ...fixture.input, materializationBytes })
+  assert.deepEqual(imported.issues, [])
+  const captured = buildSourceReferences(materialization, fixture.evidence, fixture.confirmation,
+    { sourceDocuments: fixture.sourceDocuments })
+  write(SOURCE_REFERENCES_FILE, encode({
+    schemaVersion: captured.schemaVersion || (captured.structuredScoring ? 'source-references-v2' : 'source-references-v1'),
+    producerVersion: captured.producerVersion, paperId: fixture.paperId,
+    sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest,
+    materializationDigest: digestJson(materialization), groups: captured.groups,
+  }))
 }

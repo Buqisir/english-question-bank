@@ -7,7 +7,8 @@ import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
-import { sourceReferenceProducerVersion, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './sourceReferenceSemantics.mjs'
+import { sourceReferenceProducerVersion, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+  assertSourceReferenceProducerVersion, usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -27,7 +28,7 @@ const hasSamePageContinuation = paragraph => {
 // A task heading, an explicit sample label and its immediate English text
 // independently disprove absence. Do not infer a sample from rubric prose or
 // a label followed by "略"/nothing. This check also runs for books without images.
-function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates) {
+function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion) {
   const sampleLabel = /^(?:参考范文|考场作文|作答示例|范文|(?:(?:A|One)\s+)?Possible\s+Versions?)\s*[:：]?$/iu
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     const items = document.pages.flatMap(page => page.orderedItems)
@@ -35,12 +36,15 @@ function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingSt
       const state = writingStates.get(item.itemId)
       const previous = items[index - 1]
       const text = item.text.normalize('NFKC').trim()
-      if (state?.capturing && previous && state.labelItemId === previous.itemId
+      const explicitBody = usesExplicitWritingTitles(producerVersion) && state?.action === 'body'
+        && (state.capturing || state.kind === 'scoring')
+      if (explicitBody || (state?.capturing && previous && state.labelItemId === previous.itemId
         && sampleLabel.test(previous.text.normalize('NFKC').trim())
-        && !sampleLabel.test(text) && /[A-Za-z]/u.test(text) && !/\p{Script=Han}/u.test(text)) {
-        const essays = sidecar?.groups.find(group => group.taskType === state.task)?.essays
-        if (essays?.state !== 'captured' || !essays.entries.length) {
-          throw Object.assign(new Error('Confirmed labeled writing sample cannot be declared not_supplied'),
+        && !sampleLabel.test(text) && /[A-Za-z]/u.test(text) && !/\p{Script=Han}/u.test(text))) {
+        const kind = explicitBody ? state.kind : 'essays'
+        const section = sidecar?.groups.find(group => group.taskType === state.task)?.[kind]
+        if (section?.state !== 'captured' || !section.entries.length) {
+          throw Object.assign(new Error('Confirmed writing reference body cannot be declared not_supplied'),
             { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
         }
       }
@@ -100,7 +104,8 @@ export function assertSealedSourceReferenceReplay({ sourceReferencesBytes, recei
   const legacy = (!Object.hasOwn(sidecar, 'producerVersion')
     || sidecar.producerVersion === LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
     && /^source-references-v[1-5]$/u.test(sidecar.schemaVersion)
-  const producerVersion = legacy ? LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION : sourceReferenceProducerVersion(sidecar)
+  const producerVersion = legacy ? LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+    : assertSourceReferenceProducerVersion(sidecar.producerVersion)
   return assertSourceReferenceContent({ ...input, sidecar }, producerVersion)
 }
 
@@ -126,7 +131,7 @@ function assertSourceReferenceContent({
     .map(document => document.documentId))
   const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
   const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion })
-  assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates)
+  assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion)
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
   if (!hasReferenceVisual && !figures.length && !continued && !sidecar?.figureExclusions?.length) return
