@@ -1,14 +1,15 @@
 import { sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion } from './sourceReferenceSemantics.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
 import {
   WRITING_PART, WRITING_SECTION, WRITING_SCORING_SECTION, ANSWER_EXPLANATION_START, BARE_APPLICATION_SECTION,
   WRITING_SCORING_OVERVIEW, LISTENING_REFERENCE_START, NON_WRITING_SECTION,
   NUMBERED_APPLICATION_SECTION, NUMBERED_CONTINUATION_SECTION, NUMBERED_ENTRY_LABEL, SCORING_ENTRY_LABEL,
   isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, isSourceReferenceExplanationStart,
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
-  isSourceReferenceSampleLabel,
+  isSourceReferenceSampleLabel, explicitWritingHeading,
+  continuationThoughtHeading, applicationStanceLabel,
 } from './sourceReferenceWritingRules.mjs'
 
 // Preserve the scoring helper's existing alternate part title.
@@ -57,7 +58,8 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         && (WRITING_PART.test(text) || ALTERNATE_WRITING_PART.test(text)
           || WRITING_SECTION.some(([, pattern]) => pattern.test(text))
           || BARE_APPLICATION_SECTION.test(text) || /^读后续写[:：]?$/u.test(text)
-          || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text))
+          || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text)
+          || explicitWritingHeading(item.text, producerVersion))
       if (afterListening) {
         appendixTask = scoredWritingRubricTask(item.text, items[index + 1]?.text)
         if (appendixTask) { afterListening = false; ended = false }
@@ -91,13 +93,14 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         ended = false
         heading = text.replace(WRITING_PART, '').replace(ALTERNATE_WRITING_PART, '').replace(/^\([^)]*\)/u, '')
       }
+      const completeTranscript = usesExplicitWritingTitles(producerVersion) && lifecycle.listeningStarts.has(item.itemId)
       if (isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(heading)
-        || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading)) {
+        || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading) || completeTranscript) {
         writing = false
         taskType = null
         label = null
         ended = true
-        afterListening = LISTENING_REFERENCE_START.test(heading)
+        afterListening = LISTENING_REFERENCE_START.test(heading) || completeTranscript
         terminal = !afterListening && startedWriting
         scopes.set(item.itemId, null)
         continue
@@ -134,7 +137,16 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
       // another scoring paragraph; only the next rubric label restores scoring.
       else if (sampleLabel
         || /^写作[一二](?:范文[:：]?)?$/u.test(text)
-        || /^(?:【|\[)/u.test(text)) label = null
+        || /^(?:【|\[)/u.test(text)
+        || (usesExplicitWritingTitles(producerVersion) && (applicationStanceLabel(item.text, taskType)
+          || continuationThoughtHeading(item.text)))) label = null
+      // The new contextual sequence and continuation rubric are recognized by
+      // the shared capture planner, including their exact label-item identity.
+      const state = lifecycle.items.get(item.itemId)
+      if (usesExplicitWritingTitles(producerVersion) && !ended && !afterListening
+        && state?.kind === 'scoring' && state.labelItemId) {
+        label = items.find(candidate => candidate.itemId === state.labelItemId)
+      }
       scopes.set(item.itemId, !ended && taskType && label
         ? { taskType, labelItemId: label.itemId, sourceLabel: label.text } : null)
     }

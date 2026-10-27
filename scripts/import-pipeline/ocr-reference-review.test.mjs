@@ -10,7 +10,8 @@ import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } f
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
+  PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
+import { explicitWritingHeading } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 
 const line = (text, y, left = .1, width = .8) => ({ text, y, left, width })
 
@@ -242,10 +243,10 @@ test('explanation mentions and unknown bracketed answer titles do not authorize 
     assert.equal(state.capturing, false, text)
     assert.notEqual(state.action, 'entry', text)
     assert.equal(lifecycle.items.get('p1-i4').task, 'continuation')
-    assert.equal(lifecycle.items.get('p1-i4').capturing, true)
+    assert.equal(lifecycle.items.get('p1-i4').capturing, false)
     const entries = buildSourceReferences(...input).groups[0].essays.entries
     assert(entries.every(entry => entry.sourceLabel !== text))
-    assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3, .5])
+    assert.deepEqual(entries.flatMap(entry => entry.paragraphs.map(p => p.source.locator.region.y)), [.3])
   }
 })
 
@@ -276,8 +277,8 @@ test('first admission rejects missing, legacy and unknown producer versions befo
   const input = scoringFiguresFixture()
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
-  for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-    'ocr-source-references-producer-v19', null]) {
+  for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
+    'ocr-source-references-producer-v20', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -340,12 +341,12 @@ test('sealed v17 replay requires the exact receipt digest and source identity', 
   assert.throws(() => assertSealedSourceReferenceReplay({ ...replay, materialization: changedBinding }),
     { code: 'SOURCE_REFERENCES_BINDING_STALE' })
   assert.deepEqual(historical, original)
-  // The same ranges cannot claim v18 semantics; no external override can
+  // The same ranges cannot claim current semantics; no external override can
   // reinterpret a bound sidecar as the caller's preferred version.
   assert.throws(() => assertSourceReferenceAdmission({ ...input,
     sidecar: { ...historical, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION },
     producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
-  { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
+  { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
   const boundary = prepared.lines.find(line => line.text === '解析')
   const state = sourceReferenceWritingLifecycle(prepared.lines, prepared).items.get(boundary.itemId)
@@ -360,10 +361,176 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v20']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }
+})
+
+const writingFixture = (texts, tasks = ['application', 'continuation']) => {
+  const input = fixture([texts.map((text, index) => line(text, .1 + index * .025))])
+  input[0].groups = tasks.map(taskType => ({ groupId: `writing-${taskType}`, writingTask: { taskType } }))
+  return input
+}
+const lifeFor = input => {
+  const source = prepareSourceReferenceWritingItems(...input)
+  return sourceReferenceWritingLifecycle(source.lines, source)
+}
+
+test('v19 explicit tasks accept only full named headings and task-compatible scores', () => {
+  for (const [title, taskType] of [
+    ['应用文', 'application'], ['应用文写作（满分15分）：', 'application'],
+    ['书面表达（满分15分）', 'application'], ['读后续写（满分25分）：', 'continuation'],
+    ['应用文参考范文：', 'application'], ['读后续写参考范文：', 'continuation'],
+    ['66. 应用文参考例文', 'application'],
+    ['67. 读后续写参考例文（文章来源 Chicken soup for the teenage soul）', 'continuation'],
+  ]) {
+    assert.equal(explicitWritingHeading(title)?.taskType, taskType, title)
+    const input = writingFixture([title, 'A source paragraph.'], [taskType])
+    const output = buildSourceReferences(...input)
+    assert.equal(output.groups[0].essays.entries.length, 1, title)
+    assert.equal(output.groups[0].essays.entries[0].paragraphs[0].text, 'A source paragraph.')
+    assert.equal(lifeFor(input).taskStarts.get('p1-i0'), taskType)
+  }
+  for (const title of ['满分15分', '应用文（满分25分）', '读后续写（满分15分）',
+    '应用文需要审题。', '67. 读后续写参考例文（任意尾注）', '68. 应用文参考例文',
+    '应用文参考范文分析', '67. 应用文参考例文']) assert.equal(explicitWritingHeading(title), null, title)
+})
+
+test('application stance labels preserve two entries with independent source ranges', () => {
+  const input = writingFixture(['应用文参考范文：', '范文一：支持立场',
+    'A first source paragraph.', 'Another first paragraph.', 'Last first paragraph.',
+    '范文二：反对立场', 'A second source paragraph.', 'Another second paragraph.', 'Last second paragraph.',
+    '读后续写参考范文：', 'The first continuation paragraph.', 'The second continuation paragraph.'])
+  // Real short paragraph ends supply the geometric separation; full-width
+  // fixture lines would correctly join as a single printed paragraph.
+  for (const index of [2, 3, 6, 7]) {
+    const ids = input[2].documents[0].pages[0].orderedItems[index].observationIds
+    for (const [offset, id] of ids.entries()) {
+      const observation = input[1].documents[0].pages[0].observations.find(item => item.observationId === id)
+      observation.region.x = .1 + .1 * offset
+      observation.region.width = .1
+    }
+  }
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups.map(g => g.essays.entries.length), [2, 1])
+  assert.deepEqual(output.groups[0].essays.entries.map(e => e.sourceLabel), ['范文一：支持立场', '范文二：反对立场'])
+  assert.deepEqual(output.groups[0].essays.entries.map(e => e.paragraphs.length), [3, 3])
+  assert.notDeepEqual(output.groups[0].essays.entries[0].labelSource, output.groups[0].essays.entries[1].labelSource)
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '范文一：任意立场', 'A paragraph.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => lifeFor(writingFixture(['读后续写参考范文：', '范文一：支持立场', 'A paragraph.'], ['continuation'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.equal(lifeFor(writingFixture(['范文一：支持立场', 'A paragraph.'])).sections.size, 0)
+})
+
+const applicationRubric = ['1. 内容要点：', '（1）描述使用 AI 的经历。', '（2）阐述 AI 的作用。',
+  '2. 语言：符合征文特征。', '3. 阅卷原则：公正公平。', '4. 阅卷标准：要点齐全。']
+test('complete application scoring sequence and continuation rubric exclude explanation ownership', () => {
+  const input = writingFixture(['第一节 应用文写作', 'One possible version:', 'An official source sample.',
+    ...applicationRubric, '第二节 读后续写', 'One possible version:', 'A source continuation.',
+    '1. 续写思路：', '（1）AI 只是这里的中文解释。', '（注释） A quoted English fragment.',
+    '2. 评分参考', '（2）关注语言逻辑。', '（3）注重意义的传达。', '(Text 1)', 'M: A transcript.'])
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups.map(g => g.essays.entries.length), [1, 1])
+  assert.deepEqual(output.groups.map(g => g.scoring.entries.map(e => e.sourceLabel)), [['1. 内容要点：'], ['2. 评分参考']])
+  const scoring = output.groups[0].scoring.entries.flatMap(e => e.paragraphs.map(p => p.text)).join('')
+  for (const text of applicationRubric.slice(1)) assert(scoring.includes(text), text)
+  const source = prepareSourceReferenceWritingItems(...input)
+  const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
+  const scopes = sourceReferenceScoringScopes(input[2], new Set(['answers']))
+  for (const step of lifecycle.sections.get('application').steps.filter(s => s.action === 'body' && s.state.kind === 'scoring')) {
+    assert.deepEqual(scopes.get(step.line.itemId), { taskType: 'application', labelItemId: 'p1-i3', sourceLabel: '1. 内容要点：' })
+  }
+  assert.equal(scopes.get('p1-i13'), null, 'continuation thought cannot inherit scoring')
+  for (const rubric of [applicationRubric.slice(0, -1),
+    [...applicationRubric.slice(0, 3), applicationRubric[4], applicationRubric[3], applicationRubric[5]],
+    [...applicationRubric, applicationRubric[5]]]) {
+    assert.throws(() => lifeFor(writingFixture(['第一节 应用文写作', 'A sample.', ...rubric], ['application'])),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+})
+
+test('same-item task omissions remain task-local and reject contradictory sample prose', () => {
+  const input = writingFixture(['第一节 应用文写作（范文略）', '评分细则：', '应用文评分正文。',
+    '第二节 读后续写（范文略）', '评分原则', '续写评分正文。'])
+  const output = buildSourceReferences(...input)
+  assert.deepEqual(output.groups.map(g => g.essays.state), ['not_supplied', 'not_supplied'])
+  assert.deepEqual(output.groups.map(g => g.scoring.entries[0].paragraphs[0].text), ['应用文评分正文。', '续写评分正文。'])
+  assert.deepEqual([...lifeFor(input).taskStarts], [['p1-i0', 'application'], ['p1-i3', 'continuation']])
+  const missing = writingFixture(['第一节 应用文写作（范文略）', '评分细则：', '应用文评分正文。', '评分原则', '续写评分正文。'])
+  assert.equal(lifeFor(missing).sections.has('continuation'), false, 'missing OCR heading cannot be inferred from rubric content')
+  assert.throws(() => lifeFor(writingFixture(['第一节 应用文写作（范文略）', 'A source sample.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+})
+
+test('empty explicit sample range cannot borrow a transcript or silently become not_supplied', () => {
+  assert.throws(() => lifeFor(writingFixture(['66. 应用文参考例文', '(Text 1)', 'M: A transcript.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '范文一：支持立场', 'A source sample.',
+    '范文二：反对立场', '(Text 1)'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', 'A main sample.',
+    '备选试题参考答案', '应用文参考范文：', 'An alternate sample.'], ['application'])),
+    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+})
+
+test('admission rejects fake absence for new task headings and missing source task boundaries', () => {
+  for (const texts of [
+    ['应用文参考范文：', 'A confirmed sample.'],
+    ['第一节 应用文写作', ...applicationRubric],
+    ['第一节 应用文写作（范文略）', '评分细则', '应用文评分正文。'],
+  ]) {
+    const input = writingFixture(texts)
+    const sourceInput = { documents: [], ocrSourceBytes: {
+      evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
+    } }
+    assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  }
+  const input = writingFixture(['应用文参考范文：', 'A confirmed sample.'], ['application'])
+  assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0],
+    sourceInput: { documents: [], ocrSourceBytes: { evidenceBytes: Buffer.from(JSON.stringify(input[1])),
+      confirmationBytes: Buffer.from(JSON.stringify(input[2])) } } }),
+  { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+})
+
+for (const heading of ['高三英语试题听力录音稿', '2026届高中毕业班适应性练习英语听力部分录音稿']) {
+  test(`complete transcript heading requires adjacent Text1 and closes scoring: ${heading}`, () => {
+    const input = writingFixture(['应用文', '评分原则', '评分正文。', heading, '(Text 1)', 'M: A transcript.'], ['application'])
+    const output = buildSourceReferences(...input)
+    assert.equal(output.groups[0].scoring.entries[0].paragraphs[0].text, '评分正文。')
+    assert.equal(sourceReferenceScoringScopes(input[2], new Set(['answers'])).get('p1-i3'), null)
+    const unmatched = writingFixture(['应用文', '评分原则', '评分正文。', heading, 'A line without Text1.'], ['application'])
+    assert(sourceReferenceScoringScopes(unmatched[2], new Set(['answers'])).get('p1-i3'))
+  })
+}
+
+test('v18 sealed replay keeps its semantics, while first admission and altered bytes fail closed', () => {
+  const input = scoringFiguresFixture()
+  const sidecar = captureScoringReferences(input, { producerVersion: PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  assert.equal(sidecar.producerVersion, PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  const sourceReferencesBytes = Buffer.from(JSON.stringify(sidecar))
+  const receipt = Object.freeze({ revisionId: 'sealed-v18-revision', bundleDigest: sha256('sealed-v18-bundle'),
+    paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+    sourceReferencesDigest: sha256(sourceReferencesBytes) })
+  assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt })
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar, receipt }), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  for (const bytes of [Buffer.concat([sourceReferencesBytes, Buffer.from('\n')]),
+    Buffer.from(JSON.stringify({ ...sidecar, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }))]) {
+    assert.throws(() => assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt }),
+      { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  }
+  assert.equal(explicitWritingHeading('应用文参考范文：', PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION), null)
+  const mergedPart = writingFixture(['第四部分 写作 应用文参考范文：', 'A source sample.'], ['application'])
+  const previousSource = prepareSourceReferenceWritingItems(...mergedPart,
+    { producerVersion: PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  assert.equal(sourceReferenceWritingLifecycle(previousSource.lines, previousSource).sections.size, 0)
+  const historical = writingFixture(['第二节 读后续写', '参考范文', 'A source sample.', '范文分析', 'A'], ['continuation'])
+  const before = buildSourceReferences(...historical, { producerVersion: PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
+  const after = buildSourceReferences(...historical)
+  assert.equal(before.groups[0].essays.entries.length, 2)
+  assert.equal(after.groups[0].essays.entries.length, 1)
 })
 
 for (const appendix of [

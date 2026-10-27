@@ -982,7 +982,7 @@ test('an unlabeled sample after a reprinted prompt requires confirmation instead
 
 test('parenthesized Chinese glosses retain their same-line English prose even after commentary', () => {
   for (const text of ['（幼苗） and planted it beside the gate.', '(幼苗) and planted it beside the gate.',
-    '（幼苗 and roots）', '（幼苗） café seedlings grew.', '（一）幼苗 and planted it beside the gate.']) {
+    '（幼苗） café seedlings grew.']) {
     for (const preceding of [[], ['（中文指导）']]) {
       const result = referencesFixture(['第二节 读后续写', '参考范文', 'They picked a seedling',
         ...preceding, text])
@@ -991,9 +991,10 @@ test('parenthesized Chinese glosses retain their same-line English prose even af
       assert(!body.includes('中文指导'))
     }
   }
-  for (const text of ['（中文指导）后续说明', '(中文指导)后续说明']) {
+  for (const text of ['（中文指导）后续说明', '(中文指导)后续说明', '（幼苗 and roots）',
+    '（一）幼苗 and planted it beside the gate.', '（1）借助 AI 学习。', '（中文 AI 指导', '（注释）“…”']) {
     const result = referencesFixture(['第二节 读后续写', '参考范文', text])
-    assert.equal(result.groups[0].essays.entries[0].paragraphs[0].text, text)
+    assert.equal(result.groups[0].essays.state, 'not_supplied')
   }
 })
 
@@ -1206,7 +1207,7 @@ test('part boundaries leave writing scope and bare sections cannot reopen it wit
   assert.deepEqual(result.review, [])
 })
 
-test('commentary pause skips fragments and mixed teaching text but resumes at an uppercase English line', () => {
+test('explanation pause skips English fragments and requires an explicit entry to resume', () => {
   const result = referencesFixture(['第二节 读后续写', '参考范文', 'A completed sample.',
     '首句衔接要点：第一段需与原文', 'leave the next day.',
     'Arthur arrived.”自然衔接，呼应关键意象。', 'Another real sample.'])
@@ -1214,7 +1215,6 @@ test('commentary pause skips fragments and mixed teaching text but resumes at an
     label: e.sourceLabel, id: e.referenceId, text: e.paragraphs.map(p => p.text),
   })), [
     { label: '参考范文', id: 'source-ref-cont-1', text: ['A completed sample.'] },
-    { label: null, id: 'source-ref-cont-2', text: ['Another real sample.'] },
   ])
   assert.equal(result.review.length, 1)
   assert.equal(result.review[0].itemId, 'i3')

@@ -9,8 +9,9 @@ import {
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
   WORD_COUNT_SAMPLE_LABEL, NUMBERED_SAMPLE_LABEL,
   ENTRY_LABEL, EXAMPLE_SAMPLE_LABEL, PARENTHESIZED_SAMPLE_LABEL, NUMBERED_VERSION_SAMPLE_LABEL,
-  SCORING_LABEL, isSourceReferenceSampleLabel,
+  SCORING_LABEL, isSourceReferenceSampleLabel, explicitWritingHeading, verifiedParenthesizedEnglish,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
+import { usesExplicitWritingTitles, OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 
 const FOOTER = /第\s*\d+\s*页|共\s*\d+\s*页/u
 const TRANSCRIPT_MARKER = /^\(?Text\s*\d{1,2}\)?\s*[:：.．]?(?=\s|$|[（(])/iu
@@ -22,7 +23,8 @@ const COMMENTARY_LINE = /^(?:\p{Script=Han}|[（(]\s*[一二三四五六七八�
 // A Chinese parenthetical note may be truncated before its closing bracket.
 // A wrapped gloss followed by English is still source prose, even while paused.
 const PARENTHESIZED_COMMENTARY_LINE = /^[（(]\s*\p{Script=Han}[^）)\r\n]*(?:[）)]\s*)?$/u
-const parenthesizedEnglish = f => /^[（(]/u.test(f.trimmed) && /\p{Script=Latin}/u.test(f.text)
+const parenthesizedEnglish = (f, c) => usesExplicitWritingTitles(c.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  ? verifiedParenthesizedEnglish(f.text) : /^[（(]/u.test(f.trimmed) && /\p{Script=Latin}/u.test(f.text)
 const STUDENT_SCRIPT_BOUNDARY = /^[（(]\s*[一二三四五六七八九十]+\s*[）)]\s*样卷\s*[:：]?$/u
 const VERSION_LABEL = /^(Possible Version|Version|范文)\s*\d+[:：]?$/iu
 const SALUTATION = /^Dear\s.+,$/u
@@ -184,6 +186,12 @@ export const LINE_ROLE_RULES = Object.freeze([
     '（二）应用文写作', '（二）语法适用', { value: 'application' }),
   rule('writing.numbered-continuation', 'writing-section', 40, f => NUMBERED_CONTINUATION_SECTION.test(f.nfkc),
     '（三）读后续写（满分25分）', '（三）读后续写需要审题。', { value: 'continuation' }),
+  rule('writing.explicit-application', 'writing-section', 50, (f, c) =>
+    explicitWritingHeading(f.text, c.producerVersion)?.taskType === 'application',
+    '应用文参考范文：', '应用文（满分25分）', { value: 'application' }),
+  rule('writing.explicit-continuation', 'writing-section', 60, (f, c) =>
+    explicitWritingHeading(f.text, c.producerVersion)?.taskType === 'continuation',
+    '读后续写（满分25分）', '读后续写参考范文分析', { value: 'continuation' }),
   rule('writing.application-scoring', 'scoring-section', 10,
     f => WRITING_SCORING_SECTION[0][1].test(writingRuleMatchingView(f.text)),
     '应用文评分细则', '本篇应用文评分细则需要另行讨论。', { value: 'application' }),
@@ -212,14 +220,15 @@ export const LINE_ROLE_RULES = Object.freeze([
   rule('writing.commentary', 'commentary', 10, (f, c) => {
     if (c.entryKind === 'scoring') return false
     if (/^[（(]/u.test(f.trimmed)) {
-      return !parenthesizedEnglish(f)
-        && (PARENTHESIZED_COMMENTARY_LINE.test(f.trimmed) || COMMENTARY_LINE.test(f.trimmed))
+      return !parenthesizedEnglish(f, c)
+        && (PARENTHESIZED_COMMENTARY_LINE.test(f.trimmed) || COMMENTARY_LINE.test(f.trimmed)
+          || (usesExplicitWritingTitles(c.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION) && f.hasHan))
     }
     return COMMENTARY_LINE.test(f.text) || (c.skipping && f.hasHan)
   },
   '1. 故事概述', { text: '1. 本题总分为15分。', context: { entryKind: 'scoring' } }),
   rule('writing.skipped-fragment', 'skipped-fragment', 10, (f, c) =>
-    c.skipping && !f.startsUpperOrQuote && !parenthesizedEnglish(f),
+    c.skipping && !f.startsUpperOrQuote && !parenthesizedEnglish(f, c),
   { text: 'leave the next day.', context: { skipping: true } },
   { text: 'A completed sample.', context: { skipping: true } }),
   rule('writing.margin-body', 'margin-body', 10, f => f.startsEnglishOrQuote && f.observationCount > 3,

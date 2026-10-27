@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source-references-capture-v19",
+  "description": "Current capture envelope. schemaVersion selects the unchanged v1-v5 content layout; producerVersion binds extraction semantics. Historical schemas remain immutable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "producerVersion", "paperId", "sourceDigest", "candidateDigest", "materializationDigest", "groups"],
+  "properties": {
+    "schemaVersion": { "enum": ["source-references-v1", "source-references-v2", "source-references-v3", "source-references-v4", "source-references-v5"] },
+    "producerVersion": { "const": "ocr-source-references-producer-v19" },
+    "paperId": { "$ref": "source-references-v1#/properties/paperId" },
+    "sourceDigest": { "$ref": "source-references-v1#/$defs/digest" },
+    "candidateDigest": { "$ref": "source-references-v1#/$defs/digest" },
+    "materializationDigest": { "$ref": "source-references-v1#/$defs/digest" },
+    "groups": { "type": "array" },
+    "figureExclusions": { "$ref": "source-references-v5#/properties/figureExclusions" }
+  },
+  "allOf": [
+    { "if": { "properties": { "schemaVersion": { "const": "source-references-v1" } } },
+      "then": { "properties": { "groups": { "$ref": "source-references-v1#/properties/groups" } } } },
+    { "if": { "properties": { "schemaVersion": { "const": "source-references-v2" } } },
+      "then": { "properties": { "groups": { "$ref": "source-references-v2#/properties/groups" } } } },
+    { "if": { "properties": { "schemaVersion": { "const": "source-references-v3" } } },
+      "then": { "properties": { "groups": { "$ref": "source-references-v3#/properties/groups" } } } },
+    { "if": { "properties": { "schemaVersion": { "const": "source-references-v4" } } },
+      "then": { "properties": { "groups": { "$ref": "source-references-v4#/properties/groups" } } } },
+    { "if": { "properties": { "schemaVersion": { "const": "source-references-v5" } } },
+      "then": { "required": ["figureExclusions"], "properties": { "groups": { "$ref": "source-references-v5#/properties/groups" } } } },
+    { "if": { "required": ["figureExclusions"] },
+      "then": { "properties": { "schemaVersion": { "const": "source-references-v5" } } } }
+  ]
+}

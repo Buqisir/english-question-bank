@@ -173,7 +173,7 @@ try {
     rendererBuildId: 'first-admission-regression',
   })
   await firstAdmission.ready()
-  for (const producerVersion of [undefined, 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v19', null]) {
+  for (const producerVersion of [undefined, 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18', 'ocr-source-references-producer-v20', null]) {
     const changed = structuredClone(references)
     if (producerVersion === undefined) delete changed.producerVersion
     else changed.producerVersion = producerVersion
@@ -192,7 +192,7 @@ try {
     assert.throws(() => firstAdmission.finalizeRevision(draft.id), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
     assert.equal(firstAdmission.getRevision(draft.id).finalizedAt, null)
   }
-  pass('first finalize rejects missing, v17, unknown and null producer versions before any seal, even with recomputed bundle digests')
+  pass('first finalize rejects missing, v17, v18, unknown and null producer versions before any seal, even with recomputed bundle digests')
   const reviewDb = path.join(root, 'review.sqlite')
   const store = createImportReviewStore({ dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
     rendererBuildId: 'publication-fixture-renderer' })
