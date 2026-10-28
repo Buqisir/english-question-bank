@@ -28,7 +28,10 @@ If a printed region has no OCR words, run `ocr-proofread.mjs evidence <paperId>
 an array of `{ "page": "official-answers-2-p04", "bbox": { "x": 170, "y": 610,
 "width": 310, "height": 40 } }` in original 144 dpi page pixels; only page and bbox
 fields are accepted, never text. The same Tesseract version runs `chi_sim+eng`,
-PSM 6 at 3x scale on the immutable source raster. Original observations, word
+PSM 6 by default at 3x scale on the immutable source raster. For a region
+requiring single-line recognition, explicitly add `--region-psm 13` (or
+`--region-psm 6` for the default); other values and use without `--regions`
+are rejected. Original observations, word
 numbers and draft references stay intact; words overlapping earlier observations
 are discarded. New word numbers append to the worksheet. The trace's
 `regionReobservations` ledger links each new observation to engine parameters,

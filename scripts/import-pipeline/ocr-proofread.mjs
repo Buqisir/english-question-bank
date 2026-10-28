@@ -168,16 +168,20 @@ function tesseractVersion() {
 }
 
 async function evidence(paperId) {
-  const { paperDir, documents, work } = context(paperId)
   const regionRequests = option('--regions')
   if (process.argv.includes('--regions') && (!regionRequests || regionRequests.startsWith('--'))) {
     throw new Error('--regions requires a request JSON path')
   }
+  const regionPsm = option('--region-psm', '6')
+  if (process.argv.filter(arg => arg === '--region-psm').length > 1) throw new Error('--region-psm may be specified only once')
+  if (process.argv.includes('--region-psm') && !regionRequests) throw new Error('--region-psm requires --regions')
+  if (regionPsm !== '6' && regionPsm !== '13') throw new Error('--region-psm must be 6 or 13')
+  const { paperDir, documents, work } = context(paperId)
   if (regionRequests) {
     const trace = readJson(path.join(work, 'trace.json'), 'Existing OCR trace for region re-observation')
     if (trace.paperId !== paperId) throw new Error('OCR trace paper identity mismatch')
     const output = await reobserveRegions({ trace, documents, work,
-      requests: readJson(path.resolve(regionRequests), 'Region requests') })
+      requests: readJson(path.resolve(regionRequests), 'Region requests'), psm: Number(regionPsm) })
     writeJson(path.join(work, 'trace.json'), output)
     // Drafts are deliberately preserved: new word ranges must be assigned after source comparison.
     for (const page of output.pages.filter(page => output.regionReobservations?.some(run => run.page === page.key))) {
@@ -1445,6 +1449,7 @@ function references(paperId) {
 
 const [command, paperId] = process.argv.slice(2)
 if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
+  if (command !== 'evidence' && process.argv.includes('--region-psm')) throw new Error('--region-psm requires evidence --regions')
   if (command === 'evidence') await evidence(paperId)
   else if (command === 'worksheets') worksheets(paperId)
   else if (command === 'compile') compile(paperId)
@@ -1457,7 +1462,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'numbering') numbering(paperId)
   else if (command === 'references') references(paperId)
   else if (command === 'figure-sizes') figureSizes(paperId)
-  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|exclude-explanation-figure|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--lang chi_sim+eng] [--jobs N]')
+  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|exclude-explanation-figure|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--region-psm 6|13] [--lang chi_sim+eng] [--jobs N]')
 } catch (error) {
   fail(error.stack || String(error))
 }
