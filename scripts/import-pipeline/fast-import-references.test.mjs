@@ -89,7 +89,7 @@ function fixture(t, referencesVersion = version) {
   json(path.join(ctx.paperDir, 'signals/agent-proofreading-receipt.json'), { revisionId: 'rev-sealed-ocr' })
   json(path.join(ctx.work, 'proofread-input.json'), { sealed: 'unchanged input' })
   for (const file of ['source-references-v1.json', PAPER_PAGINATION_PLAN_FILE_NAME, 'products/answerOnly.pdf']) {
-    json(path.join(ctx.paperDir, file), { old: file })
+    json(path.join(ctx.paperDir, file), { old: file, ...(file === 'source-references-v1.json' ? { groups: [] } : {}) })
   }
   json(path.join(ctx.fast, 'pagination/economy8/report.json'), { old: true })
   // Real uploader timing shape: OCR push writes this same untyped timeline as Candidate push.
@@ -107,7 +107,8 @@ function fixture(t, referencesVersion = version) {
   const referenceStages = Object.fromEntries(downstream.map(name => [name, async () => {
     calls.push(name)
     if (name === 'source-references') {
-      json(path.join(ctx.paperDir, 'source-references-v1.json'), { regenerated: version })
+      json(path.join(ctx.work, 'source-references-draft.json'), { regenerated: version, groups: [] })
+      json(path.join(ctx.paperDir, 'source-references-v1.json'), { regenerated: version, groups: [] })
       return { producerVersion: version, outline: [] }
     }
     if (name === 'pagination-plan') json(path.join(ctx.paperDir, PAPER_PAGINATION_PLAN_FILE_NAME), { regenerated: true })
@@ -125,6 +126,33 @@ test('producer and driver import the same pure version constant; current results
   await finish(ctx, [], options)
   assert.deepEqual(calls, [])
   assert.deepEqual(snapshot(dir), before)
+  assertReferenceProductsReady(ctx)
+})
+
+for (const artifact of ['draft', 'finalized']) for (const [shape, value] of [
+  ['old group content', { groups: ['OLD_REFERENCE_CONTENT'] }],
+  ['missing section', { groups: [{ essays: { entries: [] } }] }],
+  ['missing groups', {}],
+  ['invalid JSON', '{'],
+]) test(`current marker cannot reuse ${artifact} with ${shape}; rebuild retains Candidate guards and sealed OCR`, async t => {
+  const { dir, ctx, calls, options } = fixture(t)
+  const file = artifact === 'draft' ? path.join(ctx.work, 'source-references-draft.json')
+    : path.join(ctx.paperDir, 'source-references-v1.json')
+  if (shape === 'invalid JSON') {
+    mkdirSync(path.dirname(file), { recursive: true })
+    writeFileSync(file, value)
+  } else json(file, value)
+  assert.throws(() => assertReferenceProductsReady(ctx), { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
+  ctx.state.data.candidateRevisionId = 'retained-candidate'
+  const before = snapshot(dir)
+  await assert.rejects(() => finish(ctx, [], options), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+  assert.deepEqual(snapshot(dir), before)
+  assert.deepEqual(calls, [])
+  delete ctx.state.data.candidateRevisionId
+  const sealed = snapshot(path.join(ctx.paperDir, 'materialization'))
+  await finish(ctx, [], options)
+  assert.deepEqual(calls, downstream)
+  assert.deepEqual(snapshot(path.join(ctx.paperDir, 'materialization')), sealed)
   assertReferenceProductsReady(ctx)
 })
 

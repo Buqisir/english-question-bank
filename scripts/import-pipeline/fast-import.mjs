@@ -940,13 +940,17 @@ function pdfContactSheets(ctx) {
 }
 
 function referencesCurrent(ctx) {
-  const references = ctx.state.steps['source-references']
-  const draftPath = path.join(ctx.work, 'source-references-draft.json')
-  const finalizedPath = path.join(ctx.paperDir, 'source-references-v1.json')
-  const draft = existsSync(draftPath) ? readJson(draftPath) : null
-  const finalized = existsSync(finalizedPath) ? readJson(finalizedPath) : null
-  if (sourceReferenceCellContinuations(draft).length || sourceReferenceCellContinuations(finalized).length) {
-    try {
+  // This is only a cache probe. Old/partial artifacts are stale, never an
+  // admission success or a reason to block the guarded native rebuild.
+  try {
+    const references = ctx.state.steps['source-references']
+    const draftPath = path.join(ctx.work, 'source-references-draft.json')
+    const finalizedPath = path.join(ctx.paperDir, 'source-references-v1.json')
+    const hasDraft = existsSync(draftPath)
+    const draft = hasDraft ? readJson(draftPath) : null
+    const finalized = existsSync(finalizedPath) ? readJson(finalizedPath) : null
+    if (!Array.isArray(finalized?.groups) || (hasDraft && !Array.isArray(draft?.groups))) return false
+    if (sourceReferenceCellContinuations(draft).length || sourceReferenceCellContinuations(finalized).length) {
       const loaded = loadNck1ReviewSource(ctx.paperDir)
       const imported = importNck1ReviewCandidate(ctx.paperDir, loaded)
       if (!imported.candidate || imported.issues.length) return false
@@ -955,10 +959,10 @@ function referencesCurrent(ctx) {
       const refreshed = refreshSourceReferenceCellContinuations(input, draft ?? finalized)
       if (refreshed.pending || digestJson(refreshed.sidecar) !== digestJson(finalized)) return false
       assertSourceReferenceAdmission({ ...input, sidecar: finalized })
-    } catch { return false }
-  }
-  return Boolean(references?.finishedAt
-    && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    }
+    return Boolean(references?.finishedAt
+      && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  } catch { return false }
 }
 
 function reconciliationOrigin() {
