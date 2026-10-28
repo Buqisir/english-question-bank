@@ -31,6 +31,7 @@ import {
   applicationWritingNoticeLines,
   writingNoticeDisplayInlines,
   writingNoticeGroup,
+  writingNoticeGroups,
 } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import {
   assertCanonicalReadingCompanion,
@@ -182,6 +183,7 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   /** Optional fixture-backed visible bank heading; production source may omit it. */
   readonly optionBankHeading?: string
   /** Ordered canonical Application Writing prompt rendered without legacy inference. */
+  readonly multipleApplicationNotices?: boolean
   readonly canonicalApplicationPromptBlocks?: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
   /** Ordered canonical Continuation Writing material rendered without legacy parsing. */
   readonly canonicalContinuationMaterialBlocks?: ReadonlyArray<{
@@ -247,6 +249,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
     clozeFollowingSectionId,
     optionBankHeading,
     canonicalApplicationPromptBlocks,
+    multipleApplicationNotices,
     canonicalContinuationMaterialBlocks,
     listeningPresentation,
     listeningPlayers,
@@ -417,6 +420,7 @@ function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
         {canonicalApplicationPromptBlocks && (
           <CanonicalApplicationWritingPrompt
             blocks={canonicalApplicationPromptBlocks}
+            multipleApplicationNotices={multipleApplicationNotices}
           />
         )}
         {canonicalContinuationMaterialBlocks && (
@@ -638,13 +642,17 @@ function CanonicalContinuationWritingMaterial({
 
 function CanonicalApplicationWritingPrompt({
   blocks,
+  multipleApplicationNotices = false,
 }: {
   blocks: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
+  multipleApplicationNotices?: boolean
 }): ReactNode {
   // A source figure contributes no text, so it ends any notice run while
   // every paragraph keeps its source block index.
-  const notice = writingNoticeGroup(blocks.map((block) =>
-    block.kind === 'figure' ? '' : block.inlines.map((inline) => inline.text).join('')))
+  const texts = blocks.map((block) => block.kind === 'figure' ? '' : block.inlines.map((inline) => inline.text).join(''))
+  const notices = multipleApplicationNotices ? writingNoticeGroups(texts) : [writingNoticeGroup(texts)].filter((notice) => notice !== null)
+  const starts = new Map(notices.map(notice => [notice.startIndex, notice]))
+  const covered = new Set(notices.flatMap(notice => Array.from({ length: notice.blockCount - 1 }, (_, index) => notice.startIndex + index + 1)))
   return (
     <div
       className="ps-canonical-application-prompt"
@@ -654,11 +662,8 @@ function CanonicalApplicationWritingPrompt({
         if (block.kind === 'figure') {
           return <CanonicalSourceFigure key={block.nodeId} block={block} />
         }
-        if (
-          notice
-          && index > notice.startIndex
-          && index < notice.startIndex + notice.blockCount
-        ) return null
+        if (covered.has(index)) return null
+        const notice = starts.get(index)
         const noticeLines = block.inlines.length === 1
           ? applicationWritingNoticeLines(block.inlines[0].text)
           : null

@@ -577,13 +577,11 @@ test('numbered tasks and task scoring standards bind tables without mixing the f
 })
 
 test('task mentions and unscoped tables cannot invent writing ownership', t => {
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unscoped source') })
   for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。', '评分标准', '书面表达需要审题', '说明：书面表达：']) {
     assert.throws(() => referencesFixture([heading, '档次', '描述'], ['application'], {
       visualClassifications: [{ classification: 'semantic_table', regionId: 'answers:page-1:table-1',
         rows: [{ cells: [['i1'], ['i2']] }] }],
-    }), /unscoped source/)
+    }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   }
 })
 
@@ -738,9 +736,6 @@ for (const [name, boundary] of [
 }
 
 test('bare sections reject incomplete letters, non-writing material and unbounded letter quotes', t => {
-  const diagnostics = []
-  t.mock.method(console, 'error', message => diagnostics.push(message))
-  t.mock.method(process, 'exit', () => { throw new Error('missing application section') })
   const letter = ['Dear Sam,', 'Our club meets on Friday.', 'Yours sincerely,', 'Alex']
   const cases = [
     ['65. growing', '第一节', 'A story began beside the gate.'],
@@ -765,13 +760,12 @@ test('bare sections reject incomplete letters, non-writing material and unbounde
   ]
   for (const texts of cases) {
     assert.throws(() => referencesFixture(texts, ['application'], { lastQuestion: 65 }),
-      /missing application section/, JSON.stringify(texts))
-    assert.match(diagnostics.at(-1), /No answer-document section found for application/)
+      { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ }, JSON.stringify(texts))
   }
   assert.throws(() => referencesFixture(['65. growing', '第一节', ...letter], ['application'],
-    { lastQuestion: 65, role: 'question_and_answers' }), /missing application section/)
+    { lastQuestion: 65, role: 'question_and_answers' }), { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ })
   assert.throws(() => referencesFixture(['65. growing', '第一节', ...letter], ['application']),
-    /missing application section/)
+    { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ })
 })
 
 test('Arabic-numbered Chinese story commentary does not become an unlabeled reference', () => {
@@ -970,15 +964,11 @@ test('confirmed bare fourth-part omission captures absence without inventing a m
 })
 
 test('an unconfirmed missing writing section still fails closed', t => {
-  const diagnostics = []
-  t.mock.method(console, 'error', text => diagnostics.push(text))
-  t.mock.method(process, 'exit', () => { throw new Error('missing writing section') })
   for (const texts of [
     ['第四部分', '听力部分原文'], ['第四部分', 'A mystery sample.'],
     ['第三部分', '（略）', '听力部分原文'], ['略', '听力部分原文'],
   ]) {
-    assert.throws(() => referencesFixture(texts, ['application', 'continuation']), /missing writing section/)
-    assert.match(diagnostics.at(-1), /No answer-document section found for application/)
+    assert.throws(() => referencesFixture(texts, ['application', 'continuation']), { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ })
   }
 })
 
@@ -1005,15 +995,11 @@ test('reprinted continuation prompt and givens stay outside samples until an exp
 })
 
 test('an unlabeled sample after a reprinted prompt requires confirmation instead of claiming absence', t => {
-  const diagnostics = []
-  t.mock.method(console, 'error', message => diagnostics.push(message))
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
   for (const ending of [[], ['听力原文'], ['（五）样卷'], ['4. 评分细则', '按内容给分。']]) {
     assert.throws(() => referencesFixture(['第二节 读后续写',
       '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
       'An original story.', 'Paragraph 1:', 'The neighbors joined the cleanup.', ...ending]),
-    /unresolved source reference/)
-    assert.match(diagnostics.at(-1), /Unresolved continuation reference.*confirm/iu)
+    { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ })
   }
   const omitted = referencesFixture(['第二节 读后续写',
     '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
@@ -1035,9 +1021,6 @@ test('v23 recognizes an unlabeled continuation only with both ordered given star
   const wrapped = referencesFixture([...prompt, 'Mary paused at the gate. She asked her',
     'mother for help.', "Slowly, the baby's cries softened.", 'The room grew quiet.', '英语听力部分录音稿'], ['continuation'], { starters })
   assert.equal(wrapped.groups[0].essays.state, 'captured')
-  const diagnostics = []
-  t.mock.method(console, 'error', message => diagnostics.push(message))
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
   for (const body of [[first], [second, first], [first, '4. 评分细则', second],
     [first, '（一）其他小节', second], ['Mary paused at the gates. She waited.', second],
     ['Mary paused at the gate.', second],
@@ -1056,14 +1039,14 @@ test('v23 recognizes an unlabeled continuation only with both ordered given star
     ['Mary paused at the gate. __', '__', second],
     [first, "Slowly, the baby's cries softened. __", '__'],
     ['Mary paused at the gate. Paragraph 2:', second]]) {
-    assert.throws(() => referencesFixture([...prompt, ...body], ['continuation'], { starters }), /unresolved source reference/)
+    assert.throws(() => referencesFixture([...prompt, ...body], ['continuation'], { starters }), { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ })
   }
   assert.throws(() => referencesFixture([...prompt, first, second], ['continuation'],
-    { starters, producerVersion: 'ocr-source-references-producer-v22' }), /unresolved source reference/)
+    { starters, producerVersion: 'ocr-source-references-producer-v22' }), { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ })
   assert.throws(() => referencesFixture([...prompt, 'Mary paused at the gate. Your answer',
     'should be 150 words.', "Slowly, the baby's cries softened. Your continuation",
     'should be 150 words.'], ['continuation'],
-  { starters, producerVersion: 'ocr-source-references-producer-v22' }), /unresolved source reference/)
+  { starters, producerVersion: 'ocr-source-references-producer-v22' }), { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ })
 })
 
 test('parenthesized Chinese glosses retain English prose and unresolved nonempty samples block capture', t => {
@@ -1077,11 +1060,10 @@ test('parenthesized Chinese glosses retain English prose and unresolved nonempty
       assert(!body.includes('中文指导'))
     }
   }
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
   for (const text of ['（中文指导）后续说明', '(中文指导)后续说明', '（幼苗 and roots）',
     '（一）幼苗 and planted it beside the gate.', '（1）借助 AI 学习。', '（中文 AI 指导', '（注释）“…”']) {
-    assert.throws(() => referencesFixture(['第二节 读后续写', '参考范文', text]), /unresolved source reference/)
+    assert.throws(() => referencesFixture(['第二节 读后续写', '参考范文', text]),
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID', message: /Unresolved (nonempty writing task range|mixed-language source sample text)/ })
   }
 })
 
@@ -1209,9 +1191,7 @@ test('task scoring headings require resolved notes before separately labelled of
     '读后续写评分细则：', '一、.参考范文', labels[2], 'Rae found a packet of seeds.',
     '范文分析', '这是一段中文讲解。', labels[3], 'A new leaf appeared by the window.',
     '二、评分原则（采取双评）', '1. 本题总分为25分。']
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved task prompt') })
-  assert.throws(() => referencesFixture(texts, ['application', 'continuation']), /unresolved task prompt/)
+  assert.throws(() => referencesFixture(texts, ['application', 'continuation']), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   texts.splice(3, 0, '【审题重点】')
   const result = referencesFixture(texts, ['application', 'continuation'])
   const essays = result.groups.flatMap(group => group.essays.entries)

@@ -647,5 +647,8 @@ assert.deepEqual(imported.issues, [])
 const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
 assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
 console.log('PASS explicit writing givens: source-run boundaries, old closed versions, authority isolation and real Canonical compile')
+const { spawnSync } = await import('node:child_process')
+const multipleNotices = spawnSync(process.execPath, ['--test', new URL('./import-pipeline/multiple-writing-notices.test.mjs', import.meta.url).pathname], { stdio: 'inherit' })
+assert.equal(multipleNotices.status, 0, 'multiple writing notices public seams')
 console.log('verify-nck1-source-materialization: PASS')
 }

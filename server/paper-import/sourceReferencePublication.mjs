@@ -93,6 +93,6 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
   const sourceReferences = parseSourceReferencesBytes(referenceBytes)
   assertSourceReferences({ sidecar: sourceReferences, materialization,
     sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, sourceDocuments, sourceInput })
-  return { paperName: commitment.paperName, materialization, sourceReferences, sourceReferencesBytes: referenceBytes, sourceDocuments,
+  return { authorityRef: consumption.authorityRef, paperName: commitment.paperName, materialization, sourceReferences, sourceReferencesBytes: referenceBytes, sourceDocuments,
     sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, commitment, ...(sourceInput ? { sourceInput } : {}) }
 }

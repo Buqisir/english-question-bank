@@ -61,6 +61,7 @@ import {
   continuationStarterDisplayText,
   writingNoticeDisplayInlines,
   writingNoticeGroup,
+  writingNoticeGroups,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   readingPassageLetterGeometryForLetter,
@@ -818,17 +819,21 @@ function renderCanonicalOpaqueWriting(
 
 // Both writing families keep source blocks/inline identities while presenting
 // a split or combined notice as the same visual group used by Screen.
-function renderCanonicalWritingBlocks(blocks, family) {
+function renderCanonicalWritingBlocks(blocks, family, multipleApplicationNotices = false) {
   // A source figure contributes no text, so it ends any notice run while
   // paragraphs keep their source block indices.
-  const notice = writingNoticeGroup(blocks.map(block => block.kind === 'figure'
-    ? '' : block.inlines.map(inline => inline.text || '').join('')))
+  const texts = blocks.map(block => block.kind === 'figure' ? '' : block.inlines.map(inline => inline.text || '').join(''))
+  const notices = family === 'application' && multipleApplicationNotices
+    ? writingNoticeGroups(texts) : [writingNoticeGroup(texts)].filter(Boolean)
+  const starts = new Map(notices.map(notice => [notice.startIndex, notice]))
+  const covered = new Set(notices.flatMap(notice => Array.from({ length: notice.blockCount - 1 }, (_, index) => notice.startIndex + index + 1)))
   return blocks.map((block, index) => {
     if (block.kind === 'figure') {
       if (family !== 'application') rejectCanonicalPrint('Only Application Writing prompts own source figures')
       return renderCanonicalSourceFigure(block)
     }
-    if (notice && index > notice.startIndex && index < notice.startIndex + notice.blockCount) return ''
+    if (covered.has(index)) return ''
+    const notice = starts.get(index)
     const isNotice = notice?.startIndex === index
     const role = isNotice ? 'notice_line' : family === 'application' ? 'prompt_line' : 'material_paragraph'
     const content = isNotice ? notice.lines.map(line => {
@@ -862,7 +867,7 @@ function renderCanonicalApplicationWriting(
   }
   const renderGivenParts = (parts, position) => parts.map((part) =>
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}" data-canonical-application-writing-rhythm-role="${part.role === 'title' ? 'given_title' : position === 'bottom' ? 'given_closing' : 'given_addressee'}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
-  const prompt = renderCanonicalWritingBlocks(canonicalGroup.promptBlocks, 'application')
+  const prompt = renderCanonicalWritingBlocks(canonicalGroup.promptBlocks, 'application', canonicalGroup.multipleApplicationNotices)
   const response = canonicalGroup.answerRegion
   const css = style => Object.entries(style).map(([key, value]) =>
     `${key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}:${value}`).join(';')

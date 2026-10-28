@@ -495,7 +495,7 @@ test('first admission rejects missing, legacy and unknown producer versions befo
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
   for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v25', null]) {
+    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24', 'ocr-source-references-producer-v999', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -578,7 +578,7 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v25']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24', 'ocr-source-references-producer-v999']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }
@@ -883,8 +883,6 @@ test('unresolved nonempty sample ranges fail capture and admission instead of cl
 })
 
 test('task ranges reject unresolved content without requiring a sample label', t => {
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved task range rejected') })
   for (const [task, titles] of [
     ['application', ['应用文', '应用文写作（满分15分）：', '应用文(满分15分):', '书面表达（满分15分）']],
     ['continuation', ['读后续写', '读后续写（满分25分）', '读后续写(满分25分):', '读后续写（满分25分）：']],
@@ -911,7 +909,7 @@ test('task ranges reject unresolved content without requiring a sample label', t
       evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
     } }
     assert.throws(() => lifeFor(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
-    assert.throws(() => buildSourceReferences(...input), /unresolved task range rejected/, title)
+    assert.throws(() => buildSourceReferences(...input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
     for (const value of [sidecar, null]) assert.throws(() => assertSourceReferenceAdmission({
       sidecar: value, materialization: input[0], sourceInput,
       sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest,
@@ -938,9 +936,7 @@ test('task-adjacent tables need explicit scoring ownership, including inline sco
   page.orderedItems[0].text = '应用文写作（满分15分）'
   proof.observations[0].text = page.orderedItems[0].text
   reseal(input)
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved task table rejected') })
-  assert.throws(() => captureScoringReferences(input), /unresolved task table rejected/)
+  assert.throws(() => captureScoringReferences(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: null }),
     { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   for (const title of ['应用文（满分15分）', '读后续写（满分25分）']) {

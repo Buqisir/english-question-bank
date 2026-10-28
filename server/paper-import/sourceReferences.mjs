@@ -28,7 +28,13 @@ export const v23SourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-capture-v23.schema.json', import.meta.url), 'utf8',
 ))
 export const currentSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-capture-v25.schema.json', import.meta.url), 'utf8',
+))
+export const v24SourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-capture-v24.schema.json', import.meta.url), 'utf8',
+))
+export const cellContinuationSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-v6.schema.json', import.meta.url), 'utf8',
 ))
 const ajv = new Ajv({ allErrors: true, strict: false })
 const validateV1 = ajv.compile(sourceReferencesSchema)
@@ -36,6 +42,8 @@ const validateV2 = ajv.compile(structuredSourceReferencesSchema)
 const validateV3 = ajv.compile(figureSourceReferencesSchema)
 const validateV4 = ajv.compile(scoringFigureSourceReferencesSchema)
 const validateV5 = ajv.compile(exclusionSourceReferencesSchema)
+const validateV6 = ajv.compile(cellContinuationSourceReferencesSchema)
+const validateV24 = ajv.compile(v24SourceReferencesSchema)
 const validateCurrent = ajv.compile(currentSourceReferencesSchema)
 const validateV23 = ajv.compile(v23SourceReferencesSchema)
 // Integrity-only recognition of explicit v17 metadata on already sealed bytes.
@@ -115,7 +123,9 @@ export function validateSourceReferences({
           : sidecar.producerVersion === 'ocr-source-references-producer-v20' ? validateGivenTitles
             : sidecar.producerVersion === 'ocr-source-references-producer-v21' ? validateComposedLabels
               : sidecar.producerVersion === 'ocr-source-references-producer-v22' ? validateTitleAbbreviation
-                : sidecar.producerVersion === 'ocr-source-references-producer-v23' ? validateV23 : validateCurrent
+                : sidecar.producerVersion === 'ocr-source-references-producer-v23' ? validateV23
+                  : sidecar.producerVersion === 'ocr-source-references-producer-v24' ? validateV24 : validateCurrent
+    : sidecar?.schemaVersion === 'source-references-v6' ? validateV6
     : sidecar?.schemaVersion === 'source-references-v5' ? validateV5
     : sidecar?.schemaVersion === 'source-references-v4' ? validateV4
     : sidecar?.schemaVersion === 'source-references-v3' ? validateV3
@@ -335,6 +345,8 @@ export function validateSourceReferences({
               const cellPath = `${blockPath}.rows[${r}][${c}]`
               unique(cell.cellId, `${cellPath}.cellId`)
               sourceBinding(cell.source, `${cellPath}.source`, cell.text)
+              if (cell.adjacentPageContinuation) sourceBinding(
+                cell.adjacentPageContinuation.fragment.source, `${cellPath}.adjacentPageContinuation.fragment.source`)
             }
             const cells = block.rows.flat()
             const documentId = cells[0].source.locator.documentId

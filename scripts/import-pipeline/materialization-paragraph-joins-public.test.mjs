@@ -7,7 +7,7 @@ import { planMaterializationListeningSource, applyMaterializationListeningSource
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
 import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
-import { nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
+import { nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { verifyCrossPageParagraphJoinEvidence } from '../../server/paper-import/crossPageParagraphJoinEvidence.mjs'
 import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -218,6 +218,27 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
   const published = validateCanonicalPublicationBundle({ manifest: sealed.manifest, sourceAsset: sealed.sourceAsset,
     readArtifact: path => sealed.artifacts[path] ?? sealed.sourceEvidence[path] })
   assert.equal(published.manifest.authority.manifestVersion, '79')
+  // The multiple-notice successor inherits exact OCR/joins/marks and sealed
+  // publication semantics; no new source shape or producer capability.
+  const successor = importCanonicalCandidate(input, undefined, { materializationAuthorityRef: nck1MultipleWritingNoticesAuthorityRef })
+  assert.deepEqual(successor.issues, [])
+  const successorPreview = compileNck1MaterializationCandidatePreview(successor.candidate)
+  assert(successorPreview.compilation, JSON.stringify(successorPreview.unresolvedIssues))
+  const successorRequest = materializeNck1CanonicalRequest(input, { schemaVersion: 'teacher-confirmation-v1', confirmed: true,
+    sourceDigest: successor.candidate.source.sha256, candidateDigest: successor.candidate.candidateDigest })
+  const successorAdmission = admitLiveConfirmedNck1MaterializationImport(successorRequest.request)
+  assert.equal(successorAdmission.compilation.disposition, 'ready')
+  const successorSeal = sealCanonicalPublication({ compilation: successorAdmission.compilation, sourceAsset: successorAdmission.sourceAsset,
+    sourceAssetVersion: 1, nck1MaterializationConfirmationProof: successorAdmission.proof })
+  const successorRead = validateCanonicalPublicationBundle({ manifest: successorSeal.manifest, sourceAsset: successorSeal.sourceAsset,
+    readArtifact: path => successorSeal.artifacts[path] ?? successorSeal.sourceEvidence[path] })
+  assert.equal(successorRead.manifest.authority.manifestVersion, '80')
+  assert.deepEqual(successor.candidate.interpretation.groups.find(g => g.slotId === 'reading.a').content, reading.content)
+  assert.deepEqual(verifyCrossPageParagraphJoinEvidence(decode(input.materializationBytes), {
+    evidence: fixture.evidence, confirmation, confirmationBytes: input.ocrSourceBytes.confirmationBytes,
+    resolved: replay, expected, authorityRef: nck1MultipleWritingNoticesAuthorityRef,
+  }), scoped)
+
   for (const relation of relations) {
     const group = published.groups.find(g => g.identity.groupId === relation.groupId)
     assert.deepEqual(group.content, preview.compilation.artifacts.canonicalPaper.questionGroups.find(g => g.identity.groupId === relation.groupId).content,
@@ -365,6 +386,14 @@ test('v12 cross-page join admits a bound listening-count correction and rejects 
   assert.equal(applyListeningInstructionCorrection(input.materializationBytes, correctionBytes, input.listeningAudio)
     .materialization.sourcePresentation.instructions.find(entry => entry.slotId === instruction.slotId).text, correction.instructions[0].after)
   const corrected = { ...input, listeningInstructionCorrectionBytes: correctionBytes }
+  const successor = importCanonicalCandidate(corrected, undefined, { materializationAuthorityRef: nck1MultipleWritingNoticesAuthorityRef })
+  assert.deepEqual(successor.issues, [])
+  const successorPreview = compileNck1MaterializationCandidatePreview(successor.candidate)
+  assert(successorPreview.compilation, JSON.stringify(successorPreview.unresolvedIssues))
+  const successorConsumption = buildNck1ReviewConsumption(successor.candidate, successorPreview.compilation)
+  assert.equal(successorConsumption.selections.find(s => s.familyContractId === 'listening').projectedOccurrences[0].sourcePresentation.instruction.text,
+    correction.instructions[0].after)
+
   const imported = importCanonicalCandidate(corrected)
   assert.deepEqual(imported.issues, [])
   assert.equal(imported.candidate.authority.manifestVersion, '79')
@@ -381,6 +410,10 @@ test('v12 cross-page join admits a bound listening-count correction and rejects 
   for (const field of ['materializationSha256', 'transcriptDigest', 'playbackAudioSha256']) {
     const invalid = { ...correction, [field]: `sha256:${'0'.repeat(64)}` }
     const rejected = importCanonicalCandidate({ ...input, listeningInstructionCorrectionBytes: encode(invalid) })
+    const successorRejected = importCanonicalCandidate({ ...input, listeningInstructionCorrectionBytes: encode(invalid) }, undefined,
+      { materializationAuthorityRef: nck1MultipleWritingNoticesAuthorityRef })
+    assert(successorRejected.issues.some(issue => issue.code === 'LISTENING_INSTRUCTION_CORRECTION_INVALID'), field)
+
     assert(rejected.issues.some(issue => issue.code === 'LISTENING_INSTRUCTION_CORRECTION_INVALID'), field)
   }
 })

@@ -6,7 +6,7 @@ import path from 'node:path'
 import { scoringFiguresFixture } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { prepareSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
-import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { WHOLE_DOCUMENT_ABSENCE_KIND, wholeDocumentAbsenceSubject } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
 import { buildSourceReferences } from './ocr-proofread.mjs'
@@ -52,6 +52,20 @@ function reseal(input) {
   input.sourceInput.ocrSourceBytes = { evidenceBytes: Buffer.from(JSON.stringify(input.evidence)),
     confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)) }
 }
+
+test('v24 whole-document absence retains exact sealed replay after v25 becomes current', () => {
+  const input = fixture(), sidecar = input.sidecar
+  sidecar.producerVersion = 'ocr-source-references-producer-v24'
+  const { subjectDigest } = wholeDocumentAbsenceSubject({ ...input, requireReview: false })
+  sidecar.wholeDocumentWritingAbsence.review.reviewedSubjectDigest = subjectDigest
+  const bytes = Buffer.from(JSON.stringify(sidecar))
+  assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt: {
+    revisionId: 'synthetic-v24-whole-absence', bundleDigest: sha256('synthetic-bundle'),
+    sourceReferencesDigest: sha256(bytes), paperId: sidecar.paperId,
+    sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+  } })
+  assert.throws(() => assertSourceReferenceAdmission(input), /current producer/u)
+})
 
 test('synthetic whole-document declaration requires exact review and source bindings', () => {
   const input = fixture()

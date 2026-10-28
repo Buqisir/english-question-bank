@@ -45,3 +45,5 @@ export function continuationStarterDisplayInlines<T extends { readonly text: str
   nodes: ReadonlyArray<T>,
   starterIndex: number,
 ): ReadonlyArray<T>
+
+export function writingNoticeWordCountsAgree(notices: ReadonlyArray<WritingNoticeGroup>, target: number): boolean

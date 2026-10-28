@@ -7,7 +7,7 @@ import { buildCanonicalApplicationWritingConsumptionSurfaceData,
   buildCanonicalContinuationWritingConsumptionSurfaceData } from '../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 // Compile the actual source-block layout before exercising either consumer.
-export function writingNoticeFixture({ family = 'application', texts, marked = false }) {
+export function writingNoticeFixture({ family = 'application', texts, marked = false, multiple = false }) {
   const sourceInput = makeDrawingAreaSourceInput({ drawing: false, listening: false })
   const materialization = JSON.parse(Buffer.from(sourceInput.materializationBytes))
   const sourceGroup = materialization.groups.find(group => group.family === `${family}-writing`)
@@ -18,6 +18,10 @@ export function writingNoticeFixture({ family = 'application', texts, marked = f
     content: (marked ? text.split(/(80|150|增加细节)/u).filter(Boolean) : [text])
       .map(text => ({ kind: 'text', text })),
   })))
+  if (multiple) {
+    materialization.schemaVersion = 'nck1-source-materialization-v7'
+    sourceGroup.writingTask.givenBlockRefs = sourceGroup.blocks.slice(-2).map(block => block.blockId)
+  }
   sourceInput.materializationBytes = Buffer.from(JSON.stringify(materialization))
   const imported = importCanonicalCandidate(sourceInput)
   assert.deepEqual(imported.issues, [])
@@ -53,8 +57,8 @@ export function writingNoticeFixture({ family = 'application', texts, marked = f
     printInput: { title: 'Writing notice source lines', versionType: 'student', printStyle: 'exam',
       items: [item], blocks: [{ type: 'question_group', questionGroupId: item.detail.id, score: item.score }],
       questionNumberStart: 1, canonicalConsumption: printConsumption },
-    screenProps: { ...screen.surfaceData, [prop]: screen[key], annotations: [], mode: 'lecture',
+    screenProps: { ...screen.surfaceData, multipleApplicationNotices: screen.multipleApplicationNotices, [prop]: screen[key], annotations: [], mode: 'lecture',
       lectureFocus: null, readingFocusBySection: {}, onFocusIntent() {} },
-    sourceBlocks: screen[key],
+    sourceBlocks: screen[key], sourceInput, imported, compilation,
   }
 }

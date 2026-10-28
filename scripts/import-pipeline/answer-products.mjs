@@ -8,10 +8,11 @@ import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs
 import {
   assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
   sourceReferenceBlocks, structuredSourceReferencesSchema, figureSourceReferencesSchema, scoringFigureSourceReferencesSchema,
-  exclusionSourceReferencesSchema, currentSourceReferencesSchema,
+  exclusionSourceReferencesSchema, currentSourceReferencesSchema, cellContinuationSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import { wholeDocumentAbsenceSubject, WHOLE_DOCUMENT_ABSENCE_KIND } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
+import { prepareSourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
@@ -54,6 +55,7 @@ try {
   const imported = importNck1ReviewCandidate(paperDir, loaded, sourceReferences?.candidateDigest)
   if (!imported.candidate || imported.issues.length) throw new Error(`Invalid source candidate: ${imported.issues[0]?.code}`)
   const binding = {
+    authorityRef: imported.candidate.authority,
     materialization: loaded.materialization,
     sourceDigest: imported.candidate.source.sha256,
     candidateDigest: imported.candidate.candidateDigest,
@@ -69,7 +71,19 @@ try {
     if (figures) template.schemaVersion = 'source-references-v3'
     if (scoringFigures) template.schemaVersion = 'source-references-v4'
     if (figureExclusions) { template.schemaVersion = 'source-references-v5'; template.figureExclusions = [] }
-    let absenceRequest
+    let absenceRequest, cellRequest
+    const cellSelectors = process.argv.includes('--adjacent-cell-continuations')
+    const cellSidecar = process.argv.includes('--adjacent-cell-sidecar')
+    if (cellSelectors || cellSidecar) {
+      if (cellSelectors && cellSidecar || figures || scoringFigures || figureExclusions
+        || process.argv.includes('--whole-document-writing-absence')) throw new Error('Cell continuation cannot combine figures, exclusions or absence')
+      const input = { ...binding, sourceInput: loaded.sourceInput }
+      const prepared = cellSidecar
+        ? refreshSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-sidecar'), 'utf8')))
+        : prepareSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-continuations'), 'utf8')))
+      cellRequest = { proposal: prepared.sidecar, requests: prepared.requests,
+        status: prepared.pending === false ? 'review_record_retained' : 'awaiting_independent_source_page_review' }
+    }
     if (process.argv.includes('--whole-document-writing-absence')) {
       const index = process.argv.indexOf('--author-session-id')
       const authorSessionId = index < 0 ? null : process.argv[index + 1]
@@ -95,10 +109,11 @@ try {
       schemaVersion: 'source-references-request-v1',
       outputSchema: currentSourceReferencesSchema,
       schemaDependencies: [sourceReferencesSchema, structuredSourceReferencesSchema, figureSourceReferencesSchema,
-        scoringFigureSourceReferencesSchema, exclusionSourceReferencesSchema],
+        scoringFigureSourceReferencesSchema, exclusionSourceReferencesSchema, cellContinuationSourceReferencesSchema],
       sourceDocuments: loaded.manifest.documents,
       instructions: 'Capture all source essays/labels/paragraphs and scoring references. Keep scoring paragraphs and tables in source order; each table cell needs its exact source locator and text, including empty cells. Do not flatten tables into essays or invent merged-cell structure. Source text only; no AI writing, summaries or legacy modelAnswer conversion. Review every answer-bearing document before declaring not_supplied. Keep unprocessed when incomplete. This is local capture, not Review/publication or source-fidelity approval.',
       template, ...(absenceRequest ? { wholeDocumentWritingAbsenceRequest: absenceRequest } : {}),
+      ...(cellRequest ? { adjacentPageCellContinuationRequest: cellRequest } : {}),
     }, null, 2)}\n`)
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {

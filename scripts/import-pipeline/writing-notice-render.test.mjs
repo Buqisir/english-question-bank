@@ -99,3 +99,19 @@ for (const paperId of ['paper-zj-2021-jun', 'paper-zj-2022-jun']) {
     })
   }
 }
+
+for (const marked of [false, true]) {
+  test(`multiple application notices retain independent numbering and identities, marks=${marked}`, () => {
+    const texts = ['注意：', '（1）词数80左右；', '（2）可适当增加细节。',
+      '注意：（1）词数80左右；', '（2）请按如下格式作答。', '参考词汇：World Youth Skills Day']
+    const fixture = writingNoticeFixture({ texts, marked, multiple: true })
+    assert.equal(fixture.screenProps.multipleApplicationNotices, true)
+    for (const html of [buildPrintHtml(fixture.printInput), renderToStaticMarkup(createElement(PaperSurface, fixture.screenProps))]) {
+      assert.equal((html.match(/data-canonical-application-notice=""/gu) || []).length, 2)
+      const plain = html.replace(/<[^>]*>/gu, '')
+      assert.equal((plain.match(/词数80左右/gu) || []).length, 2)
+      assert(plain.includes('参考词汇：World Youth Skills Day'))
+      for (const block of fixture.sourceBlocks) assert(html.includes(`data-canonical-block-id="${block.nodeId}"`))
+    }
+  })
+}

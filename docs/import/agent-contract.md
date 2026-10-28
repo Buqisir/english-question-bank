@@ -545,6 +545,37 @@ essays 沿用 v1 paragraphs，scoring 使用按源顺序排列的 paragraph/tabl
 表格逐单元格保存原文、独立 locator 与文档 SHA，保留空格子，不压成范文段落。
 v1 侧件继续读取，不静默迁移。原生 DOCX 须重放完整未合并表格，PDF 须逐格核源；
 只有既有 `includeScoring` 展示才渲染评分表，默认 answerOnly 不增加评分内容。
+同一 `official_answers` PDF 的评分表末行末格需要相邻页续接时，使用
+`source-references-v6` / capture-v25 / producer-v25；文件名不变，旧 content-v1–v5
+及 capture-v17–v24 字节与 sealed replay 规则不变，旧 producer 不能首次准入。
+先运行 `answer-products.mjs prepare --paper-dir <workspace>
+--adjacent-cell-continuations <selectors.json> --output <new-request.json>`。
+selectors 是数组，每项仅含 `groupId`、`referenceId`、`tableId`、`cellId`、
+`documentId`、`page`、`itemIds`、`authorSessionId`。这些身份须来自原确认表和
+严格下一页的完整首段；不能自造格、跳页、跨文档/栏/入口、选非末格、漏 item 或串链。
+prepare 从封存 OCR 与确定的完整段落重放 proposal，保留基础 `cell.source`，
+续片另存 locator、items/observations/geometry、PDF/OCR 摘要及双页 raster；
+格文唯一为基础 items 与续片 items 的原文按 LF 拼接，不做 NFKC 或删空白。
+续片从独立 paragraph 中消费一次，后表保持独立；暂不组合图片或 figure exclusions。
+
+新 request 的 `adjacentPageCellContinuationRequest` 必须待审。独立核读两页原图后，
+填写 proposal 内每项关系的真实 `review`：`reviewedBy: "import_agent"`、
+实际 `reviewerSessionId`、request 的 `subjectDigest` 作为 `reviewedSubjectDigest`、
+`verdict: "confirmed_continuation"`，以及两页准确的 document/page/rasterSha256/finding。
+subject 绑定 producer/rule、paper/source/candidate/materialization、目标表格/格、
+基础表、续片、before/after 与全侧件消费顺序。Transformation Record 只属于
+source references，不改 Canonical ledger。审核 session 仅审计，不认证审核者；
+离线 finalize 不认证提交 actor、不证明 QA 实际发生，记录不是签名或服务端回执，
+也不是旧 OCR 对跨页关系的确认。既有服务端提交认证与 Owner 批准/发布仍独立。
+不要为真实试卷生成模拟审核 finding。
+
+保存已填 review 的 proposal 到新的 input，再运行既有 finalize。缺审核、
+subject/源/目标/文本/几何/消费漂移均在 finalize 和首次 API admission 拒绝。
+`prepare --adjacent-cell-sidecar <draft.json>` 重算同一关系；仅 subject 完全一致
+才可复用已有记录，否则回到待审，绝不自动改审核摘要。
+fast-import 遇到待审关系必须停止 finalize/freeze，不能把待审标成完成；
+审核后的 proposal 保存为工作副本的 `source-references-draft.json` 后恢复。
+保留旧 refs/PDF/审核证据；返修使用隔离副本和新输出路径，不覆盖已审版本。
 细节见[本地版本迁移说明](../cuts/import-format-capabilities/manifest-v64-migration.md)。
 只有ABCD而缺56–65文本答案仍不完整；
 答案值与解释边界不清时必须停。听力原文继续按独立listening contract处理。

@@ -2,7 +2,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { resolveCrossPageParagraphJoins, paragraphFragmentText, paragraphJoinSourceLocator,
   CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { validateNck1ProducerGroups } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
-import { nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
+import { nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 
 const same = (a, b) => digestJson(a) === digestJson(b)
 const flatten = blocks => blocks.flatMap(block => block.kind === 'framed_columns'
@@ -64,7 +64,7 @@ export function verifyCrossPageParagraphJoinEvidence(materialization, { evidence
   const relations = resolveCrossPageParagraphJoins(materialization)
   const reject = message => { throw new Error(`Cross-page paragraph join evidence: ${message}`) }
   if (!relations.length) return relations
-  const policy = authorityRef && same(authorityRef, nck1CrossPageProducerIssueAuthorityRef) ? 'scoped'
+  const policy = authorityRef && [nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef].some(ref => same(authorityRef, ref)) ? 'scoped'
     : authorityRef && (same(authorityRef, nck1CrossPageJoinV2AuthorityRef)
       || (relations.every(relation => relation.join.schemaVersion !== CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2)
         && resolveCanonicalAuthority(authorityRef).ok)) ? 'legacy' : null

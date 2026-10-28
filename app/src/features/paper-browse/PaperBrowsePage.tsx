@@ -226,6 +226,7 @@ type GroupModel =
   | {
       kind: 'writing'
       model: Pick<WritingPaperViewModel, 'surfaceData' | 'pageModel'> & {
+        multipleApplicationNotices?: true
         canonicalPromptBlocks?: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
         canonicalContinuationMaterialBlocks?: ReadonlyArray<{
           readonly nodeId: string
@@ -1203,6 +1204,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                   surfaceData: canonicalWriting.surfaceData,
                   pageModel: canonicalWriting.pageModel,
                   canonicalPromptBlocks: canonicalWriting.promptBlocks,
+                  multipleApplicationNotices: canonicalWriting.multipleApplicationNotices,
                 },
               })
             } else {
@@ -2635,6 +2637,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             ? nextHeadingAfterCloze?.id
             : undefined
         }
+        multipleApplicationNotices={entry.kind === 'writing' ? entry.model.multipleApplicationNotices : undefined}
         canonicalApplicationPromptBlocks={
           entry.kind === 'writing'
             ? entry.model.canonicalPromptBlocks

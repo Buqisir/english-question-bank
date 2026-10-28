@@ -8,6 +8,7 @@ import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
 import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
+import { replaySourceReferenceCellContinuations } from './sourceReferenceCellContinuation.mjs'
 import { sourceReferenceProducerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
   assertSourceReferenceProducerVersion, usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
 
@@ -115,6 +116,9 @@ function assertSourceReferenceContent({
 }, producerVersion) {
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
+  // This must precede both the whole-absence and no-visual early returns:
+  // direct API callers get the same exact replay as the offline finalizer.
+  replaySourceReferenceCellContinuations({ sidecar, materialization, sourceInput, sourceDigest, candidateDigest })
   if (sidecar?.wholeDocumentWritingAbsence) {
     wholeDocumentAbsenceSubject({ sidecar, materialization, sourceInput, sourceDigest, candidateDigest })
     const ocr = sourceInput.ocrSourceBytes
@@ -237,7 +241,8 @@ function assertSourceReferenceContent({
         ? [block.paragraph] : block.kind === 'table' ? block.rows.flat() : []),
     ].map(text => ({ ...text, group, kind, entry })))))
   for (const text of texts) {
-    const sources = [text.source, ...(text.continuationSources ?? [])]
+    const sources = [text.source, ...(text.continuationSources ?? []),
+      ...(text.adjacentPageContinuation ? [text.adjacentPageContinuation.fragment.source] : [])]
     if (!hasSamePageContinuation(text)
       && !sources.some(source => illustratedDocuments.has(source.locator.documentId))) continue
     // The resolver has already consumed exactly the selected image itemIds and
@@ -282,7 +287,8 @@ function assertSourceReferenceContent({
     .filter(item => containsSource(source, item.sourceIndex))
   const boundaryItems = block => block.kind === 'paragraph'
     ? [block.paragraph.source, ...(block.paragraph.continuationSources ?? [])].flatMap(sourceItems)
-    : block.kind === 'table' ? block.rows.flat().flatMap(cell => sourceItems(cell.source)) : []
+    : block.kind === 'table' ? block.rows.flat().flatMap(cell =>
+      [cell.source, ...(cell.adjacentPageContinuation ? [cell.adjacentPageContinuation.fragment.source] : [])].flatMap(sourceItems)) : []
 
   const seen = new Set(), figureReferences = new Map()
   for (const { figure } of figures) {

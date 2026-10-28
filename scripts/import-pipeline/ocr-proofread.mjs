@@ -34,6 +34,8 @@ import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mj
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceExplanationFigures } from '../../server/paper-import/sourceReferenceFigureExclusions.mjs'
 import { wholeDocumentAbsenceSubject } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
+import { prepareSourceReferenceCellContinuations, replaySourceReferenceCellContinuations,
+  refreshSourceReferenceCellContinuations, sourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
@@ -76,8 +78,7 @@ const FULL_PAGE = { x: 0, y: 0, width: 1, height: 1 }
 const CJK = /[\u3000-\u303f\u3400-\u9fff\uff00-\uffef]/u
 
 function fail(message) {
-  console.error(message)
-  process.exit(1)
+  throw Object.assign(new Error(message), { code: 'OCR_PROOFREAD_INVALID' })
 }
 
 function option(name, fallback = null) {
@@ -1161,15 +1162,10 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
 // Pure source interpretation shared by the CLI and offline corpus replay.
 export function buildSourceReferences(materialization, evidence, confirmation,
   { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [],
-    producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, absenceSidecar, sourceInput, sourceDigest, candidateDigest } = {}) {
-  let source, lifecycle
-  try {
-    source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName, producerVersion })
-    lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
-  } catch (error) {
-    if (error.code === 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID') fail(error.message)
-    throw error
-  }
+    producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, absenceSidecar, sourceInput, sourceDigest, candidateDigest,
+    cellContinuations = [], continuationSidecar } = {}) {
+  const source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName, producerVersion })
+  const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
   const { answerDocument, documentSha256, pages, lines, sourceOrder, factsFor, referenceFigures, scoringScopes } = source
   const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions, { producerVersion })
   const { sections, furniture, review } = lifecycle
@@ -1395,11 +1391,25 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     const unresolved = referenceFigures.filter(figure => !assignedFigures.has(figure) && !excludedFigures.includes(figure))
     throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
   }
-  return { groups, review, structuredScoring,
+  const result = { groups, review, structuredScoring,
     ...(producerVersion !== LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
       ? { producerVersion } : {}), ...(figureExclusions.length
     ? { schemaVersion: 'source-references-v5', figureExclusions }
     : referenceFigures.length ? { schemaVersion: hasScoringFigures ? 'source-references-v4' : 'source-references-v3' } : {}) }
+  if (cellContinuations.length || continuationSidecar) {
+    if (producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION || figureExclusions.length || referenceFigures.length) {
+      throw new Error('Cell continuation requires current producer without figures/exclusions')
+    }
+    const input = { materialization, sourceInput, sourceDigest, candidateDigest }
+    if (continuationSidecar) {
+      replaySourceReferenceCellContinuations({ ...input, sidecar: continuationSidecar })
+      return { ...result, groups: continuationSidecar.groups, schemaVersion: 'source-references-v6' }
+    }
+    const proposal = prepareSourceReferenceCellContinuations(input, cellContinuations, result)
+    return { ...result, groups: proposal.sidecar.groups, schemaVersion: 'source-references-v6',
+      cellContinuationRequests: proposal.requests }
+  }
+  return result
 }
 
 // Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
@@ -1417,6 +1427,19 @@ function references(paperId) {
   const retained = existsSync(output) ? readJson(output, 'Source references draft')
     : existsSync(path.join(paperDir, 'source-references-v1.json'))
       ? readJson(path.join(paperDir, 'source-references-v1.json'), 'Source references') : null
+  if (sourceReferenceCellContinuations(retained).length) {
+    const loaded = loadNck1ReviewSource(paperDir)
+    const imported = importNck1ReviewCandidate(paperDir, loaded)
+    if (!imported.candidate || imported.issues.length) throw new Error('Invalid source candidate for cell continuation')
+    const refreshed = refreshSourceReferenceCellContinuations({ materialization: loaded.materialization,
+      sourceInput: loaded.sourceInput, sourceDigest: imported.candidate.source.sha256,
+      candidateDigest: imported.candidate.candidateDigest }, retained)
+    writeJson(output, refreshed.sidecar)
+    console.log(JSON.stringify({ ok: true, output, producerVersion: refreshed.sidecar.producerVersion,
+      status: refreshed.pending ? 'awaiting_independent_source_page_review' : 'review_record_retained',
+      next: 'answer-products prepare --adjacent-cell-sidecar; independent two-page QA before finalize' }))
+    return
+  }
   if (retained?.wholeDocumentWritingAbsence) {
     const loaded = loadNck1ReviewSource(paperDir)
     const imported = importNck1ReviewCandidate(paperDir, loaded, retained.candidateDigest)
@@ -1464,5 +1487,6 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'figure-sizes') figureSizes(paperId)
   else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|exclude-explanation-figure|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--region-psm 6|13] [--lang chi_sim+eng] [--jobs N]')
 } catch (error) {
-  fail(error.stack || String(error))
+  console.error(error.stack || String(error))
+  process.exitCode = 1
 }

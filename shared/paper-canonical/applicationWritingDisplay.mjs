@@ -33,6 +33,44 @@ export function writingWordCount(text) {
   return words ? Number(words[1]) : null
 }
 
+// Multiple notices must agree on every explicit declaration, including two
+// declarations in one instruction. Unsupported/ranged declarations fail closed.
+export function writingNoticeWordCountsAgree(notices, target) {
+  return notices.length > 0 && notices.every(notice => {
+    const counts = []
+    for (const line of notice.lines.filter(line => line.kind === 'instruction')) {
+      // Keep punctuation between digits inside a clause: neither decimal nor
+      // grouped-number prefixes may become an apparently valid integer.
+      for (const value of line.text.normalize('NFKC').split(/[；;]|(?<!\d)[，,。.．]|[，,。.．](?!\d)/u)) {
+        const declarations = [
+          ...value.matchAll(/词数[\s应为约大概在是须需要求]{0,20}(\d{2,3})(?![\d.,。．eExX零〇一二两三四五六七八九十百千万亿])/gu),
+          ...value.matchAll(/(?<![\dA-Za-z+−.,。．零〇一二两三四五六七八九十百千万亿-])(\d{2,3})(?![\d.,。．eExX零〇一二两三四五六七八九十百千万亿])\s*(?:个?(?:单)?词|words?\b)/giu),
+        ]
+        // A bare word/unit mention is not a count requirement. Trigger only
+        // on the count prefix or a quantity immediately followed by a unit.
+        // Unknown quantities trigger validation but are never guessed as 80.
+        const markers = [...value.matchAll(/词数|数\s*个(?:单)?词|(?:[0-9零〇一二两三四五六七八九十百千万亿]+|若干|几|多少|一些|少量|大量|适量)\s*个?(?:单)?词|\d+\s*words?\b|\b(?:some|several|many|few|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand)\s+words?\b/giu)]
+        // 同一 is an identity determiner, not the cardinal 一. Scope this
+        // distinction to its word noun phrase, never to the whole instruction:
+        // a separate 词数 prefix or quantity requirement must still be checked.
+        const references = [...value.matchAll(/同\s*一\s*个?\s*(?:单)?词/gu)]
+        const countMarkers = markers.filter(marker => !references.some(reference =>
+          marker.index >= reference.index
+          && marker.index + marker[0].length <= reference.index + reference[0].length))
+        if (countMarkers.some(marker => !declarations.some(declaration =>
+          marker.index >= declaration.index
+          && marker.index + marker[0].length <= declaration.index + declaration[0].length))) return false
+        // Reject ambiguous alternatives/ranges in this count clause, without
+        // interpreting unrelated numbers elsewhere in the source instruction.
+        if (declarations.length && ([...value.matchAll(/(?<!\d)\d{2,}(?!\d)/gu)]
+          .some(match => Number(match[0]) !== target) || /[0-9零〇一二两三四五六七八九十百千]\s*[-–—~～至到/或]\s*[0-9零〇一二两三四五六七八九十百千]/u.test(value))) return false
+        counts.push(...declarations.map(match => Number(match[1])))
+      }
+    }
+    return counts.length > 0 && counts.every(count => count === target)
+  })
+}
+
 /**
  * Translate one source prompt block into visual notice lines without changing
  * or persisting canonical text. Accept the same labels as source validation.

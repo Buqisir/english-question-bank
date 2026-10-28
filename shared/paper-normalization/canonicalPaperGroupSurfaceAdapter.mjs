@@ -493,6 +493,7 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
       ? { writingMode: canonicalGroup.writingMode }
       : {}),
     promptBlocks,
+    ...(canonicalGroup.multipleApplicationNotices ? { multipleApplicationNotices: true } : {}),
     pageModel: {
       blocks: [
         ...(writingChrome.part
