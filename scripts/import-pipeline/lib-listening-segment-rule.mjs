@@ -406,7 +406,7 @@ export function projectListeningSpokenText(group, corpus = [group]) {
       exclude(mark.index, mark.index + mark[0].length, 'source_annotation')
     }
   }
-  for (const match of sourceText.matchAll(/(?:^|\n)\s*(?:\d+\.\s*)?(?:M|W|Speaker \d+):\s*/gu)) {
+  for (const match of sourceText.matchAll(/(?:^|\n)\s*(?:(?:\d+\.\s*)?(?:【原文】[ \t]*)?|【原文】[ \t]*\d+\.[ \t]*)(?:M|W|Speaker \d+):\s*/gu)) {
     exclude(match.index, match.index + match[0].length, 'speaker_label')
   }
   exclusions.sort((a, b) => a.start - b.start)

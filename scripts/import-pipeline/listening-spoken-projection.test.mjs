@@ -21,6 +21,59 @@ const evaluate = (group, overrides = {}) => evaluateListeningEngine({
   windows: [structuredClone(fixture)], durationSeconds: 30, pauses, ...overrides,
 })
 
+test('literal original-text marker is masked only with a same-line speaker label', () => {
+  for (const prefix of ['【原文】M:', '【原文】 W:', '【原文】\tSpeaker 2:',
+    '2. 【原文】M:', '【原文】 2. W:', '2. M:', 'W:', 'Speaker 2:']) {
+    const value = `${prefix} Bring 10 folders.`
+    const projection = projectListeningSpokenText({ ...target, text: value })
+    assert.equal(projection.sourceText, value)
+    assert.equal(projection.text.length, value.length)
+    assert.deepEqual(normalizeListeningText(projection.text), ['bring', 'ten', 'folders'], prefix)
+    const span = projection.exclusions.find(e => e.reason === 'speaker_label')
+    assert.equal(span.text, `${prefix} `)
+    assert.equal(value.slice(span.start, span.end), span.text)
+    assert.deepEqual(span.source, source)
+    assert.equal(span.segmentId, target.segmentId)
+  }
+  for (const value of ['【原文】\nW: Bring folders.', '【原文】\nBring folders.',
+    'He said 【原文】W: Bring folders.', '“【原文】W: Bring folders.”',
+    '【其他】W: Bring folders.', '【原文】W brings folders.', 'W brings folders.',
+    'Bring folders.']) {
+    const projection = projectListeningSpokenText({ ...target, text: value })
+    assert.ok(projection.text.includes(value.split('\n')[0]), value)
+    assert.ok(!projection.exclusions.some(e => e.text.includes('【原文】')), value)
+  }
+})
+
+test('two engines pair both readings after the printed prefix without changing cuts', () => {
+  const repeated = structuredClone(fixture)
+  const segment = structuredClone(repeated.result.segments[0])
+  segment.start += 10
+  segment.end += 10
+  segment.runs.forEach(run => { run.start += 10; run.end += 10 })
+  repeated.result.segments.push(segment)
+  const twicePauses = [
+    { startSeconds: 0, endSeconds: 1.9 }, { startSeconds: 6.9, endSeconds: 11.9 },
+    { startSeconds: 16.9, endSeconds: 30 },
+  ]
+  const options = { windows: [repeated], pauses: twicePauses,
+    instructions: [{ slotId: 'listening.short-dialogue', text: '每段读两遍' }] }
+  const plain = { ...target, text }
+  const marked = { ...plain, text: `【原文】${text}` }
+  const primary = evaluate(marked, options)
+  const secondary = evaluate(marked, { ...options, engine: 'faster-whisper' })
+  const result = reconcileListeningEngines(primary, secondary)[0]
+  const baseline = reconcileListeningEngines(evaluate(plain, options),
+    evaluate(plain, { ...options, engine: 'faster-whisper' }))[0]
+  assert.equal(result.decision, 'usable', JSON.stringify(result.issues))
+  assert.equal(result.occurrences.length, 2)
+  assert.deepEqual(result.playback, baseline.playback)
+  assert.deepEqual(result.occurrences, baseline.occurrences)
+  assert.deepEqual(listeningSourceTurns(marked), listeningSourceTurns(plain))
+  assert.equal(listeningSourceTurns(marked)[0][0], 'could')
+  assert.equal(listeningSourceTurns(marked).at(-1).at(-1), 'seven')
+})
+
 test('only parenthesized Chinese pause durations are masked, with literal source coordinates retained', () => {
   for (const note of ['（停10秒）', '（停5秒）', '（停15秒）', '（停20秒）',
     '(停顿 5 秒)', '（停十秒钟）', '（ 停顿 二十 秒钟 ）', '(停 10 秒钟)']) {
