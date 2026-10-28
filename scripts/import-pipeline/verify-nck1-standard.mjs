@@ -354,7 +354,8 @@ if (published && isFormat3Config(config)) {
     const applicationGroup = (liveGroups.groups || []).find(
       (group) => group.variant?.family === 'application-writing',
     )
-    assertNck1ApplicationChrome(applicationGroup)
+    const plan = JSON.parse(readFileSync(path.join(liveLatestDir, 'canonical', 'canonical-paper-plan-v1.json'), 'utf8'))
+    assertNck1ApplicationChrome(applicationGroup, plan.authorityRef)
   })
 } else {
   skip(

@@ -29,6 +29,7 @@ import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { applyStudentProductLayout } from '../server/draft-paper/studentProductPdf.mjs'
 import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../server/paper-import/sourceReferenceSemantics.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -168,8 +169,13 @@ try {
     rendererBuildId: 'first-admission-regression',
   })
   await firstAdmission.ready()
+  assert.equal(references.producerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  const futureProducerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION.replace(/v(\d+)$/u,
+    (_, version) => `v${Number(version) + 1}`)
   for (const producerVersion of [undefined, 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v25', null]) {
+    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21',
+    'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24',
+    futureProducerVersion, null]) {
     const changed = structuredClone(references)
     if (producerVersion === undefined) delete changed.producerVersion
     else changed.producerVersion = producerVersion
@@ -188,7 +194,7 @@ try {
     assert.throws(() => firstAdmission.finalizeRevision(draft.id), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
     assert.equal(firstAdmission.getRevision(draft.id).finalizedAt, null)
   }
-  pass('first finalize rejects missing, v17 through v23, unknown and null producer versions before any seal, even with recomputed bundle digests')
+  pass('first finalize rejects missing, v17 through v24, future and null producer versions before any seal, even with recomputed bundle digests')
   const reviewDb = path.join(root, 'review.sqlite')
   const store = createImportReviewStore({ dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
     rendererBuildId: 'publication-fixture-renderer' })

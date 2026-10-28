@@ -105,7 +105,7 @@ export async function renderReviewPdfProduct(projection, edition, buildPrintHtml
   if (!projection.sourceReferences) throw new Error('此精确 revision 尚无完整的源参考答案捕获；不能以教师卷替代')
   const html = buildAnswerOnlyHtml({ paperName: projection.paperName, materialization: projection.materialization,
     sourceReferences: projection.sourceReferences, sourceDigest: projection.sourceDigest,
-    candidateDigest: projection.candidateDigest, sourceDocuments: projection.sourceInput.documents })
+    candidateDigest: projection.candidateDigest, authorityRef: projection.consumption.authorityRef, sourceDocuments: projection.sourceInput.documents })
   return { ...await render(html), edition, mode: 'natural' }
 }
 

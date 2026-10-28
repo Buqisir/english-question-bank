@@ -72,17 +72,14 @@ for (const [separator, label] of [
   assert.deepEqual(structuredClone(f), before)
 })
 
-test('non-writing headings and explanatory suffixes cannot open a reference section', t => {
-  const diagnostics = []
-  t.mock.method(console, 'error', message => diagnostics.push(message))
-  t.mock.method(process, 'exit', code => { throw new Error(`exit:${code}`) })
+test('non-writing headings and explanatory suffixes cannot open a reference section', () => {
   for (const text of ['第一节 阅读理解 作答示例', '第一节：作答示例说明如下。']) {
     const f = fixture()
     const items = f.confirmation.documents[0].pages[0].orderedItems
     items[1].text = text
     items.splice(2, 1)
-    assert.throws(() => capture(f), /exit:1/, text)
-    assert.match(diagnostics.at(-1), /No answer-document section found for application/)
+    assert.throws(() => capture(f),
+      { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ }, text)
   }
 })
 

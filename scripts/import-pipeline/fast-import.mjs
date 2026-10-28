@@ -23,7 +23,9 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewProjection, loadNck1ReviewSource, importNck1ReviewCandidate } from '../../server/import-review/revisionProjection.mjs'
+import { sourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
+import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan, productPlanVersion, productPlanAuthorization,
 } from '../../server/paper-import/paginationPlan.mjs'
@@ -821,23 +823,32 @@ async function installListening(ctx) {
     evidence: report.evidence.length, ruleVersion: readJson(path.join(result.attempt, 'rule-result.json')).rule.version }
 }
 
-async function sourceReferences(ctx) {
-  const outline = await run(ctx, 'references', cli('ocr-proofread.mjs', 'references', ctx.paperId))
+export async function sourceReferences(ctx, execute = run) {
+  const outline = await execute(ctx, 'references', cli('ocr-proofread.mjs', 'references', ctx.paperId))
   const request = path.join(ctx.fast, 'source-references-request.json')
   archive(ctx, request)
   const draft = readJson(path.join(ctx.work, 'source-references-draft.json'))
-  await run(ctx, 'answer-products-prepare', cli('answer-products.mjs', 'prepare', '--paper-dir', ctx.paperDir,
-    '--output', request, ...(draft.schemaVersion === 'source-references-v5' ? ['--figure-exclusions']
+  const cellContinuation = sourceReferenceCellContinuations(draft).length > 0
+  await execute(ctx, 'answer-products-prepare', cli('answer-products.mjs', 'prepare', '--paper-dir', ctx.paperDir,
+    '--output', request, ...(cellContinuation ? ['--adjacent-cell-sidecar', path.join(ctx.work, 'source-references-draft.json')]
+      : draft.schemaVersion === 'source-references-v5' ? ['--figure-exclusions']
       : draft.schemaVersion === 'source-references-v4' ? ['--scoring-figures']
       : draft.schemaVersion === 'source-references-v3' ? ['--figures']
       : draft.schemaVersion === 'source-references-v2' ? ['--structured-scoring'] : [])))
-  const template = readJson(request).template
+  const prepared = readJson(request)
+  const template = prepared.template
+  // Prepare may retain only an exactly bound existing review; it never fills
+  // reviewer/finding/verdict. Pending relations stop before finalize or freeze.
+  if (cellContinuation && prepared.adjacentPageCellContinuationRequest.status !== 'review_record_retained') {
+    throw new Stop(`相邻页评分格续接待独立双页原图审核：${request}；填写 proposal 中的实际 review 后保存到 source-references-draft.json，再恢复 finish`)
+  }
   const input = path.join(ctx.fast, 'source-references-input.json')
   archive(ctx, input)
-  writeJson(input, { ...draft, sourceDigest: template.sourceDigest, candidateDigest: template.candidateDigest,
-    materializationDigest: template.materializationDigest })
+  writeJson(input, cellContinuation ? prepared.adjacentPageCellContinuationRequest.proposal
+    : { ...draft, sourceDigest: template.sourceDigest, candidateDigest: template.candidateDigest,
+      materializationDigest: template.materializationDigest })
   archive(ctx, path.join(ctx.paperDir, 'source-references-v1.json'))
-  await run(ctx, 'answer-products-finalize', cli('answer-products.mjs', 'finalize', '--paper-dir', ctx.paperDir,
+  await execute(ctx, 'answer-products-finalize', cli('answer-products.mjs', 'finalize', '--paper-dir', ctx.paperDir,
     '--input', input, '--output', path.join(ctx.paperDir, 'source-references-v1.json')))
   return { producerVersion: outline.producerVersion, outline: outline.outline }
 }
@@ -929,9 +940,29 @@ function pdfContactSheets(ctx) {
 }
 
 function referencesCurrent(ctx) {
-  const references = ctx.state.steps['source-references']
-  return Boolean(references?.finishedAt
-    && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  // This is only a cache probe. Old/partial artifacts are stale, never an
+  // admission success or a reason to block the guarded native rebuild.
+  try {
+    const references = ctx.state.steps['source-references']
+    const draftPath = path.join(ctx.work, 'source-references-draft.json')
+    const finalizedPath = path.join(ctx.paperDir, 'source-references-v1.json')
+    const hasDraft = existsSync(draftPath)
+    const draft = hasDraft ? readJson(draftPath) : null
+    const finalized = existsSync(finalizedPath) ? readJson(finalizedPath) : null
+    if (!Array.isArray(finalized?.groups) || (hasDraft && !Array.isArray(draft?.groups))) return false
+    if (sourceReferenceCellContinuations(draft).length || sourceReferenceCellContinuations(finalized).length) {
+      const loaded = loadNck1ReviewSource(ctx.paperDir)
+      const imported = importNck1ReviewCandidate(ctx.paperDir, loaded)
+      if (!imported.candidate || imported.issues.length) return false
+      const input = { materialization: loaded.materialization, sourceInput: loaded.sourceInput,
+        sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest }
+      const refreshed = refreshSourceReferenceCellContinuations(input, draft ?? finalized)
+      if (refreshed.pending || digestJson(refreshed.sidecar) !== digestJson(finalized)) return false
+      assertSourceReferenceAdmission({ ...input, sidecar: finalized })
+    }
+    return Boolean(references?.finishedAt
+      && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+  } catch { return false }
 }
 
 function reconciliationOrigin() {

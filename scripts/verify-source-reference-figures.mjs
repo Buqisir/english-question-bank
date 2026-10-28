@@ -53,8 +53,20 @@ imageCell.groups[0].scoring.entries[0].blocks[0].rows[0][0] = {
   source: imageProse.groups[0].essays.entries[0].paragraphs.at(-1).source,
 }
 assert.throws(() => assertSourceReferenceAdmission({ ...withTable, sidecar: imageCell }),
-  { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
-console.log('PASS reference figure plus semantic scoring table; image text stays excluded from prose and cells')
+  { code: 'SOURCE_REFERENCES_CELL_CONTINUATION_INVALID' },
+  'whole-sidecar table replay rejects image observations before the figure coverage check')
+for (const [name, mutate] of [
+  ['omitted figure', value => { delete entry(value).figures }],
+  ['wrong surviving anchor', value => { figure(value).afterParagraphId = entry(value).paragraphs[1].paragraphId }],
+  ['changed table identity', value => { value.groups[0].scoring.entries[0].blocks[0].tableId += '-forged' }],
+]) {
+  const changed = structuredClone(withTable.sourceReferences)
+  mutate(changed)
+  assert.deepEqual(validateSourceReferences({ ...withTable, sidecar: changed }), [], name)
+  assert.throws(() => assertSourceReferenceAdmission({ ...withTable, sidecar: changed }),
+    { code: 'SOURCE_REFERENCES_CELL_CONTINUATION_INVALID' }, `mixed figure/table whole-sidecar replay: ${name}`)
+}
+console.log('PASS native reference figure plus semantic scoring table; image text, omitted figures, anchors and table identities remain replay-bound')
 const unchanged = JSON.stringify(input.sourceReferences)
 for (const [name, mutate, code] of [
   ['cross-entry anchor', value => { figure(value).afterParagraphId = value.groups[0].essays.entries[1].paragraphs[0].paragraphId }, 'SOURCE_REFERENCES_FIGURE_ANCHOR_INVALID'],
@@ -245,6 +257,7 @@ assert.deepEqual(answerParagraphs.map(item => item.text), [
   '第四部分 写作 第一节',
   'This is my design for World Smile Day.',
   'The design encourages kindness.',
+  'Possible Version 2',
   'Another complete sample keeps its own words.',
   '第二节 读后续写（范文略）',
 ])

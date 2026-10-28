@@ -184,6 +184,7 @@ type PeekModel =
         pageModel:
           | ReturnType<typeof buildCanonicalApplicationWritingConsumptionSurfaceData>['pageModel']
           | ReturnType<typeof buildCanonicalContinuationWritingConsumptionSurfaceData>['pageModel']
+        multipleApplicationNotices?: true
         canonicalPromptBlocks?: ReturnType<typeof buildCanonicalApplicationWritingConsumptionSurfaceData>['promptBlocks']
         canonicalContinuationMaterialBlocks?: ReturnType<typeof buildCanonicalContinuationWritingConsumptionSurfaceData>['materialBlocks']
       }
@@ -234,6 +235,7 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
           ? entry.model.canonicalReadingSemanticSignature
           : undefined
       }
+      multipleApplicationNotices={entry.kind === 'writing' ? entry.model.multipleApplicationNotices : undefined}
       canonicalApplicationPromptBlocks={
         entry.kind === 'writing'
           ? entry.model.canonicalPromptBlocks
@@ -427,6 +429,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               surfaceData: canonicalWriting.surfaceData,
               pageModel: canonicalWriting.pageModel,
               canonicalPromptBlocks: canonicalWriting.promptBlocks,
+              multipleApplicationNotices: canonicalWriting.multipleApplicationNotices,
             },
           }
         } else if (familyContractId === 'continuation-writing') {

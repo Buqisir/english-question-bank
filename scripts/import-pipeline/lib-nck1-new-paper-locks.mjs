@@ -1,3 +1,4 @@
+import { authorityAdmitsMultipleWritingNotices } from '../../shared/paper-canonical/authority.mjs'
 /**
  * New-paper locks that must hold for every future NCK1 import, not one mock.
  *
@@ -16,7 +17,7 @@ import {
 import {
   projectNck1StagedWritingAnalysis,
 } from '../../server/import-review/nck1AnalysisProjection.mjs'
-import { writingNoticeGroups, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
+import { writingNoticeGroups, writingWordCount, writingNoticeWordCountsAgree } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   isApplicationReviewCardV2,
   isCompleteApplicationReviewCard,
@@ -103,7 +104,7 @@ export function assertApplicationGivenOwnership(group) {
   }
 }
 
-export function assertNck1ApplicationChrome(group) {
+export function assertNck1ApplicationChrome(group, authorityRef) {
   assertApplicationGivenOwnership(group)
   const promptIds = new Set(group.variant.promptBlockRefs)
   const paragraphs = group.content.blocks.filter(block => promptIds.has(block.nodeId))
@@ -113,6 +114,10 @@ export function assertNck1ApplicationChrome(group) {
     throw new Error('application prompt must not glue the word-count suffix')
   }
   const notices = writingNoticeGroups(paragraphs)
+  if (notices.length > 1 && authorityAdmitsMultipleWritingNotices(authorityRef)) {
+    if (!writingNoticeWordCountsAgree(notices, group.variant.wordCountRuling.target)) throw new Error('application notice word counts conflict')
+    return
+  }
   if (notices.length !== 1 || writingWordCount(notices[0].lines.map(line => line.text).join(' ')) === null) {
     throw new Error('application notice block missing NCK1 注意 chrome')
   }

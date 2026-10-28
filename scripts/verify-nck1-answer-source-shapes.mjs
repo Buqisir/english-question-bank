@@ -43,6 +43,8 @@ execFileSync(process.execPath, [
   'scripts/import-pipeline/materialization-paragraph-joins.test.mjs',
   'scripts/import-pipeline/materialization-paragraph-joins-redo.test.mjs',
   'scripts/import-pipeline/source-reference-exclusion.test.mjs',
+  'scripts/import-pipeline/source-reference-whole-absence.test.mjs',
+  'server/paper-import/sourceReferenceCellContinuation.test.mjs',
 ], { cwd: root, stdio: 'inherit' })
 
 function sourceInput(produced, documents) {

@@ -17,7 +17,7 @@ export function confirmMaterializationWritingGivens(materialization, { groupId, 
   }
   if (!['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(result.schemaVersion)) result.schemaVersion = 'nck1-source-materialization-v7'
   groups[0].writingTask.givenBlockRefs = [...givenBlockRefs]
-  const issues = validateNck1SourceMaterialization(result)
+  const issues = validateNck1SourceMaterialization(result, { allowMultipleApplicationNotices: true })
   if (issues.length) throw new Error(`Confirmed writing givens are invalid: ${JSON.stringify(issues)}`)
   return result
 }

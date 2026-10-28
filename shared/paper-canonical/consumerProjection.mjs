@@ -6,7 +6,7 @@ import {
   layoutFixedFourColumnClozeOptionSet,
   layoutListeningOptionSet,
 } from './abcdLayout.mjs'
-import { authorityAdmitsApplicationDrawingArea, closureAdmitsReadingStemFigures, authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
+import { authorityAdmitsApplicationDrawingArea, authorityAdmitsMultipleWritingNotices, closureAdmitsReadingStemFigures, authorityAdmitsApplicationPromptFigures, resolveCanonicalAuthority } from './authority.mjs'
 import { isBase64String } from './base64.mjs'
 import { consumerRendersApplicationDrawingArea, consumerRendersReadingStemFigures, consumerRendersApplicationPromptFigures } from './consumers.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
@@ -51,7 +51,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79'].includes(input.consumption.authorityRef?.manifestVersion)
+  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -1085,6 +1085,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
   return Object.freeze({
     groupType: 'writing',
     ...semantic,
+    ...(authorityAdmitsMultipleWritingNotices(input.consumption.authorityRef) ? { multipleApplicationNotices: true } : {}),
     questions: Object.freeze([]),
     occurrenceSignature: digestJson({
       groupId,
@@ -1402,11 +1403,11 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1480,7 +1481,7 @@ export function projectCanonicalConsumerGroup(input) {
     throw rejected(`Canonical occurrence ${groupId} belongs to another family`)
   }
   if (occurrence.sourcePresentation !== undefined
-    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79'].includes(input.consumption.authorityRef?.manifestVersion)
+    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(input.consumption.authorityRef?.manifestVersion)
       || !validCanonicalSourcePresentation(occurrence.sourcePresentation))) {
     throw rejected(`Canonical occurrence ${groupId} has invalid source presentation`)
   }
@@ -1557,7 +1558,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

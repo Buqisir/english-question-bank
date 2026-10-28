@@ -11,7 +11,7 @@ import {
   validateMediaPublication,
 } from './mediaPresentation.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
-import { writingNoticeGroups, writingWordCount } from './applicationWritingDisplay.mjs'
+import { writingNoticeGroups, writingWordCount, writingNoticeWordCountsAgree } from './applicationWritingDisplay.mjs'
 import { SOURCE_INSTRUCTION_SLOTS, validSourceExample } from './sourcePresentation.mjs'
 
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION =
@@ -530,10 +530,30 @@ function writingParagraphs(blocks) {
 // Explicit references may select only one contiguous terminal response run.
 // Material before that run stays in the prompt, including figures. This shared
 // resolver never guesses from matching words scattered through source material.
-export function resolveWritingGivenBlocks(blocks, task, family) {
+export function resolveWritingGivenBlocks(blocks, task, family, { allowMultipleApplicationNotices = false } = {}) {
   const paragraphs = writingParagraphs(blocks).filter(block => block.blockId !== task.drawingArea?.labelBlockRef)
   const notices = writingNoticeGroups(paragraphs.map(paragraph => paragraph.text))
-  if (notices.length !== 1) return null
+  if (notices.length !== 1) {
+    if (!allowMultipleApplicationNotices || family !== 'application-writing') return null
+    const ordered = writingNoticeGroups(blocks.map(block =>
+      block.kind === 'paragraph' && block.blockId !== task.drawingArea?.labelBlockRef
+        ? paragraphRawText(block) : ''))
+    if (ordered.length < 2 || !writingNoticeWordCountsAgree(ordered, task.wordCountTarget)) return null
+    const refs = task.givenBlockRefs
+    if (!Array.isArray(refs) || !refs.length || !Array.isArray(task.givenSkeleton)
+      || refs.length !== task.givenSkeleton.length || new Set(refs).size !== refs.length) return null
+    const first = blocks.length - refs.length
+    const last = ordered.at(-1)
+    if (first < last.startIndex + last.blockCount) return null
+    const selected = blocks.slice(first)
+    if (selected.some((block, index) => block.blockId !== refs[index]
+      || blocks.filter(item => item.blockId === refs[index]).length !== 1
+      || block.kind !== 'paragraph' || !block.source
+      || block.blockId === task.drawingArea?.labelBlockRef
+      || !Array.isArray(block.content) || block.content.some(item => item.kind !== 'text')
+      || paragraphRawText(block) !== task.givenSkeleton[index]?.text)) return null
+    return selected
+  }
   const end = notices[0].startIndex + notices[0].blockCount
   if (!Object.hasOwn(task, 'givenBlockRefs')) {
     return paragraphs.slice(end).map(paragraph => blocks.find(block => block.blockId === paragraph.blockId))
@@ -556,13 +576,17 @@ export function resolveWritingGivenBlocks(blocks, task, family) {
   return result
 }
 
+function paragraphRawText(block) {
+  return Array.isArray(block.content) ? block.content.filter(item => item.kind === 'text').map(item => item.text).join('') : ''
+}
+
 function matchingParagraphIndexes(paragraphs, text) {
   const normalized = normalizedWritingText(text)
   return paragraphs.flatMap((paragraph, index) =>
     paragraph.text === normalized ? [index] : [])
 }
 
-function validateWritingBlocks(blocks, task, family, path, issues) {
+function validateWritingBlocks(blocks, task, family, path, issues, allowMultipleApplicationNotices = false, documents = new Map()) {
   if (
     !isRecordValue(task)
     || !nonEmptyString(task.prompt)
@@ -578,6 +602,23 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
     if (labels.length !== 1 || !labels[0].text) {
       issues.push(issue('MATERIALIZATION_DRAWING_LABEL_INVALID', `${path}.writingTask.drawingArea.labelBlockRef`, 'Drawing label must resolve to one nonempty paragraph in its own group'))
     }
+  }
+  const orderedNotices = writingNoticeGroups(blocks.map(block =>
+    block.kind === 'paragraph' && block.blockId !== task.drawingArea?.labelBlockRef ? paragraphRawText(block) : ''))
+  if (allowMultipleApplicationNotices && family === 'application-writing' && orderedNotices.length > 1) {
+    if (!writingNoticeWordCountsAgree(orderedNotices, task.wordCountTarget)) {
+      issues.push(issue('MATERIALIZATION_WRITING_WORD_COUNT_CONFLICT', path, 'Every notice must declare one consistent word count matching the task'))
+    }
+    const prompts = blocks.flatMap((block, index) => block.kind === 'paragraph'
+      && normalizedWritingText(paragraphRawText(block)) === normalizedWritingText(task.prompt) ? [index] : [])
+    if (prompts.length !== 1 || prompts[0] >= orderedNotices[0].startIndex) {
+      issues.push(issue('MATERIALIZATION_WRITING_PROMPT_PLACEMENT_INVALID', path, 'Prompt must uniquely precede the first notice'))
+    }
+    const givens = resolveWritingGivenBlocks(blocks, task, family, { allowMultipleApplicationNotices })
+    if (!givens || givens.some(block => !['question_source', 'question_and_answers'].includes(documents.get(block.source?.documentId)?.role))) {
+      issues.push(issue('MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID', path, 'Multiple notices require exact explicit terminal givens after the last notice'))
+    }
+    return
   }
   const notices = writingNoticeGroups(paragraphs.map(paragraph => paragraph.text))
     .map(notice => ({
@@ -655,7 +696,7 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
   }
 }
 
-function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false, allowGivenBlockRefs = false) {
+function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false, allowGivenBlockRefs = false, allowMultipleApplicationNotices = false) {
   if (!Array.isArray(groups) || groups.length !== slots.length) {
     issues.push(issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'NCK1 requires exactly nine active groups'))
     return { questionIds: new Map(), ids: new Set() }
@@ -689,7 +730,7 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
         issues.push(issue('MATERIALIZATION_WRITING_QUESTIONS_FORBIDDEN', path, 'Writing groups have no Questions or option bank'))
       }
       validateWritingTask(group.writingTask, expectedFamily, `${path}.writingTask`, documents, issues, allowDrawingArea, allowGivenBlockRefs)
-      validateWritingBlocks(group.blocks, group.writingTask, expectedFamily, path, issues)
+      validateWritingBlocks(group.blocks, group.writingTask, expectedFamily, path, issues, allowGivenBlockRefs && allowMultipleApplicationNotices, documents)
       continue
     }
     // Objective passage blocks do not own section-level answering directions.
@@ -1169,7 +1210,7 @@ function validateListening(listening, documents, sourceCoverage, issues) {
   }
 }
 
-export function validateNck1SourceMaterialization(value) {
+export function validateNck1SourceMaterialization(value, { allowMultipleApplicationNotices = false } = {}) {
   if (value?.schemaVersion === 'nck1-source-materialization-v12') {
     // Validate relations against their real envelope before reusing the older
     // field validators. A v2 relation must never be interpreted as legacy v8.
@@ -1181,14 +1222,14 @@ export function validateNck1SourceMaterialization(value) {
       issues.push(issue('MATERIALIZATION_PARAGRAPH_JOIN_INVALID', '$.paragraphJoins', error.message))
     }
     const { paragraphJoins, ...fields } = value
-    return [...issues, ...validateNck1SourceMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' })]
+    return [...issues, ...validateNck1SourceMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices })]
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v11') {
     const legacy = { ...value, schemaVersion: Object.hasOwn(value, 'listeningSourceDecision')
       ? 'nck1-source-materialization-v10' : Object.hasOwn(value, 'inImageOptionLabels')
         ? 'nck1-source-materialization-v9' : Object.hasOwn(value, 'paragraphJoins')
           ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7' }
-    return validateNck1SourceMaterialization(legacy)
+    return validateNck1SourceMaterialization(legacy, { allowMultipleApplicationNotices })
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v10') {
     const { listeningSourceDecision, ...legacy } = value
@@ -1196,7 +1237,7 @@ export function validateNck1SourceMaterialization(value) {
       ? 'nck1-source-materialization-v9'
       : Object.hasOwn(legacy, 'paragraphJoins')
         ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7'
-    const issues = validateNck1SourceMaterialization(legacy)
+    const issues = validateNck1SourceMaterialization(legacy, { allowMultipleApplicationNotices })
     try { validateListeningSourceDecision(listeningSourceDecision) }
     catch (error) { issues.push(issue('MATERIALIZATION_LISTENING_SOURCE_DECISION_INVALID', '$.listeningSourceDecision', error.message)) }
     return issues
@@ -1303,7 +1344,7 @@ export function validateNck1SourceMaterialization(value) {
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion))
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion), allowMultipleApplicationNotices)
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {
@@ -1373,8 +1414,8 @@ export function validateNck1AnalyzedPackageContent(value, members, contentMember
   return issues
 }
 
-export function digestNck1SourceMaterialization(value) {
-  const issues = validateNck1SourceMaterialization(value)
+export function digestNck1SourceMaterialization(value, options) {
+  const issues = validateNck1SourceMaterialization(value, options)
   if (issues.length > 0) {
     const error = new Error(issues[0].message)
     error.code = issues[0].code

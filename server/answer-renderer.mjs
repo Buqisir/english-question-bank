@@ -1,3 +1,4 @@
+import { authorityAdmitsMultipleWritingNotices } from '../shared/paper-canonical/authority.mjs'
 import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
@@ -6,9 +7,9 @@ import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedP
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { sourceReferenceFigurePresentation, sourceReferenceFigureItemPresentation } from './paper-import/sourceReferencePresentation.mjs'
 
-function assertAnswerSource(materialization, sourceInput) {
+function assertAnswerSource(materialization, sourceInput, authorityRef) {
   if (materialization.documents) {
-    const issues = validateNck1SourceMaterialization(materialization)
+    const issues = validateNck1SourceMaterialization(materialization, { allowMultipleApplicationNotices: authorityAdmitsMultipleWritingNotices(authorityRef) })
     if (issues.length) throw new Error(`Answer source is invalid: ${issues[0].code}`)
   } else {
     const derived = deriveNck1AnalyzedPackageBundle(sourceInput)
@@ -116,10 +117,10 @@ ${paragraphs.join('\n')}
 // Owner accepted reference-v2; source approval is a separate boundary.
 export function buildAnswerOnlyHtml({
   paperName, materialization, sourceReferences, sourceDigest, candidateDigest,
-  includeScoring = false, sourceDocuments = null, sourceInput = null,
+  includeScoring = false, sourceDocuments = null, sourceInput = null, authorityRef = null,
 }) {
   if (typeof paperName !== 'string' || !paperName.trim()) throw new Error('Owner-provided paper name is required')
-  assertAnswerSource(materialization, sourceInput)
+  assertAnswerSource(materialization, sourceInput, authorityRef)
   assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments, sourceInput })
   const answers = [...materialization.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber)
   const listening = materialization.listening
@@ -172,7 +173,7 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
     const { materialization, sourceReferences } = source
     if (detail.paperId !== materialization.paperId) throw new Error('选中的题组与答案源不属于同一卷')
     if (!validated.has(source)) {
-      assertAnswerSource(materialization, source.sourceInput)
+      assertAnswerSource(materialization, source.sourceInput, source.authorityRef)
       assertSourceReferences({ ...source, sidecar: sourceReferences })
       validated.add(source)
     }

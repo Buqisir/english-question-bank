@@ -310,6 +310,7 @@ export type CanonicalOpaqueWritingPageModel = {
 }
 
 type CanonicalApplicationWritingSurfaceCommon = {
+  readonly multipleApplicationNotices?: true
   readonly status: 'ready'
   readonly semanticDigest: string
   readonly occurrenceSignature: string

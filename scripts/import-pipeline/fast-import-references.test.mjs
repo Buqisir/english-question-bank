@@ -89,7 +89,7 @@ function fixture(t, referencesVersion = version) {
   json(path.join(ctx.paperDir, 'signals/agent-proofreading-receipt.json'), { revisionId: 'rev-sealed-ocr' })
   json(path.join(ctx.work, 'proofread-input.json'), { sealed: 'unchanged input' })
   for (const file of ['source-references-v1.json', PAPER_PAGINATION_PLAN_FILE_NAME, 'products/answerOnly.pdf']) {
-    json(path.join(ctx.paperDir, file), { old: file })
+    json(path.join(ctx.paperDir, file), { old: file, ...(file === 'source-references-v1.json' ? { groups: [] } : {}) })
   }
   json(path.join(ctx.fast, 'pagination/economy8/report.json'), { old: true })
   // Real uploader timing shape: OCR push writes this same untyped timeline as Candidate push.
@@ -107,7 +107,8 @@ function fixture(t, referencesVersion = version) {
   const referenceStages = Object.fromEntries(downstream.map(name => [name, async () => {
     calls.push(name)
     if (name === 'source-references') {
-      json(path.join(ctx.paperDir, 'source-references-v1.json'), { regenerated: version })
+      json(path.join(ctx.work, 'source-references-draft.json'), { regenerated: version, groups: [] })
+      json(path.join(ctx.paperDir, 'source-references-v1.json'), { regenerated: version, groups: [] })
       return { producerVersion: version, outline: [] }
     }
     if (name === 'pagination-plan') json(path.join(ctx.paperDir, PAPER_PAGINATION_PLAN_FILE_NAME), { regenerated: true })
@@ -118,13 +119,40 @@ function fixture(t, referencesVersion = version) {
 }
 
 test('producer and driver import the same pure version constant; current results remain cache hits', async t => {
-  assert.equal(version, 'ocr-source-references-producer-v24')
+  assert.equal(version, 'ocr-source-references-producer-v25')
   assert.equal(producerVersion, version)
   const { dir, ctx, calls, options } = fixture(t)
   const before = snapshot(dir)
   await finish(ctx, [], options)
   assert.deepEqual(calls, [])
   assert.deepEqual(snapshot(dir), before)
+  assertReferenceProductsReady(ctx)
+})
+
+for (const artifact of ['draft', 'finalized']) for (const [shape, value] of [
+  ['old group content', { groups: ['OLD_REFERENCE_CONTENT'] }],
+  ['missing section', { groups: [{ essays: { entries: [] } }] }],
+  ['missing groups', {}],
+  ['invalid JSON', '{'],
+]) test(`current marker cannot reuse ${artifact} with ${shape}; rebuild retains Candidate guards and sealed OCR`, async t => {
+  const { dir, ctx, calls, options } = fixture(t)
+  const file = artifact === 'draft' ? path.join(ctx.work, 'source-references-draft.json')
+    : path.join(ctx.paperDir, 'source-references-v1.json')
+  if (shape === 'invalid JSON') {
+    mkdirSync(path.dirname(file), { recursive: true })
+    writeFileSync(file, value)
+  } else json(file, value)
+  assert.throws(() => assertReferenceProductsReady(ctx), { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
+  ctx.state.data.candidateRevisionId = 'retained-candidate'
+  const before = snapshot(dir)
+  await assert.rejects(() => finish(ctx, [], options), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+  assert.deepEqual(snapshot(dir), before)
+  assert.deepEqual(calls, [])
+  delete ctx.state.data.candidateRevisionId
+  const sealed = snapshot(path.join(ctx.paperDir, 'materialization'))
+  await finish(ctx, [], options)
+  assert.deepEqual(calls, downstream)
+  assert.deepEqual(snapshot(path.join(ctx.paperDir, 'materialization')), sealed)
   assertReferenceProductsReady(ctx)
 })
 
@@ -181,7 +209,7 @@ test('dead loopback binding never invokes a network client or local Review wrapp
   assert.equal(child.status, 0, child.stderr || child.stdout)
 })
 
-for (const old of ['ocr-source-references-producer-v1', 'ocr-source-references-producer-v16', 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23', undefined]) {
+for (const old of ['ocr-source-references-producer-v1', 'ocr-source-references-producer-v16', 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24', undefined]) {
   test(`stale/missing version (${old}) rebuilds downstream once and preserves sealed OCR bytes`, async t => {
     const { ctx, calls, options } = fixture(t, old)
     // Explicit undefined removes the field instead of using fixture's default.

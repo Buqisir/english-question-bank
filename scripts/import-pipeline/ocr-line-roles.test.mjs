@@ -39,11 +39,9 @@ test('only known bracketed sample titles can authorize essays; unknown ranges bl
     '【示例二】建议调整活动安排']) {
     assert.equal(firstLineRole('entry-kind', computeLineFacts({ text }))?.value, 'essays', text)
   }
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved source reference') })
   for (const text of ['【答案补充】', '[答案补充]', '【未知范文标题】', '一、【答案另见后页】']) {
     assert.equal(firstLineRole('entry-kind', computeLineFacts({ text })), null, text)
-    assert.throws(() => checkWritingRoleFixture([text]), /unresolved source reference/)
+    assert.throws(() => checkWritingRoleFixture([text]), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   }
 })
 
@@ -87,12 +85,10 @@ test('parenthesized rubric titles open exact scoring entries and reject unresolv
       { taskType: 'application', labelItemId: 'item-1', sourceLabel: label })
     assert.equal(scoringScopes([label, '评分正文']).get('item-1'), null, 'rubric needs a writing task')
   }
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved task range') })
   for (const text of ['（一）评分原则如下。', '（二）各档次给分范围和要求分析', '注意：（一）评分原则：']) {
     assert.equal(firstLineRole('entry-label', computeLineFacts({ text })), null)
     assert.throws(() => scoringScopes(['第一节 应用文', text, '正文']),
-      /unresolved task range|Unresolved nonempty writing task range/)
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   }
 })
 
@@ -120,11 +116,9 @@ test('scoring scope shares exact parenthesized task headings and numbered scorin
   assert.equal(switched.get('item-2').taskType, 'continuation')
   assert.equal(switched.get('item-4'), null, 'new task must not borrow the previous scoring label')
   assert.equal(switched.get('item-6').taskType, 'application')
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved new task range') })
   assert.throws(() => scoringScopes(['（二）读后续写', '4. 评分细则', '续写评分正文',
     '（三）应用文写作', '新标题后的无标签正文', '４． 评分原则：', '应用文评分正文']),
-  /unresolved new task range|Unresolved nonempty writing task range/)
+  { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
 })
 
 test('exact task scoring standards share ownership between source extraction and scoring admission', () => {
@@ -168,11 +162,9 @@ test('scoring scope rejects numbered near misses and closes at sample and explan
         '（三）读后续写', '４． 评分原则：', '正文']).get('item-5'), null, boundary)
     }
   }
-  t.mock.method(console, 'error', () => {})
-  t.mock.method(process, 'exit', () => { throw new Error('unresolved rubric range') })
   for (const label of ['4. 评分时应考虑要点。', '正文 4. 评分细则', '100. 评分细则']) {
     assert.throws(() => scoringScopes(['（二）应用文写作', label, '正文']),
-      /unresolved rubric range|Unresolved nonempty writing task range/)
+      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
   }
 })
 
