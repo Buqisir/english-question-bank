@@ -4,6 +4,7 @@ import { digestJson, sha256 } from '../../../shared/paper-canonical/stable.mjs'
 import { buildNck1OcrSourceEvidence } from '../../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { captureSourceReferenceFigure } from '../../../server/paper-import/sourceReferenceImages.mjs'
 import { prepareSourceReferences } from '../../../server/paper-import/sourceReferences.mjs'
+import { buildSourceReferences } from '../../../scripts/import-pipeline/ocr-proofread.mjs'
 
 // Invented OCR text on deterministic blank PDFs: tests evidence plumbing and
 // exact crop replay, not OCR accuracy. Real page/figure quality is separate QA.
@@ -24,6 +25,9 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     { x: 0.1, y: 0.3, width: 0.5, height: 0.02 },
     { x: 0.1, y: 0.4, width: 0.5, height: 0.02 },
   ]
+  // The current producer derives paragraphs from geometry, so the paragraph
+  // after the figure needs a real first-line indent in the confirmed source.
+  if (currentCapture) Object.assign(regions[2], { x: 0.13, width: 0.47 })
   const tableRegion = { x: 0.08, y: 0.54, width: 0.6, height: 0.05 }
   const scoringHeadingRegion = { x: 0.1, y: 0.5, width: 0.5, height: 0.02 }
   if (scoringTable) {
@@ -40,6 +44,12 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
     if (isAnswer) observations.unshift({ observationId: `${answer.documentId}:word:scope`,
       regionId: `${answer.documentId}:text:scope`, text: '第四部分 写作 第一节',
       region: { x: 0.1, y: 0.1, width: 0.5, height: 0.02 }, confidence: 1, alternatives: [] })
+    if (isAnswer && currentCapture) observations.splice(
+      observations.findIndex(item => item.observationId === `${answer.documentId}:word:3`), 0, {
+        observationId: `${answer.documentId}:word:sample-heading`,
+        regionId: `${answer.documentId}:text:sample-heading`, text: 'Possible Version 2',
+        region: { x: 0.1, y: 0.36, width: 0.5, height: 0.02 }, confidence: 1, alternatives: [],
+      })
     if (isAnswer && currentCapture && scoringTable) observations.splice(
       observations.findIndex(item => item.observationId === `${answer.documentId}:word:4`), 0, {
         observationId: `${answer.documentId}:word:scoring-heading`,
@@ -86,9 +96,18 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
   const binding = { materialization, sourceInput, sourceDocuments: documents,
     sourceDigest: sha256('synthetic-source'), candidateDigest: sha256('synthetic-candidate') }
   const sourceReferences = prepareSourceReferences(binding)
+  if (currentCapture) {
+    // Exercise the native capture, including mixed figure/table replay, rather
+    // than manufacturing IDs, paragraph boundaries or entry ownership by hand.
+    const { groups, schemaVersion, producerVersion } = buildSourceReferences(
+      materialization, evidence, confirmation, { sourceDocuments: documents })
+    Object.assign(sourceReferences, { groups, schemaVersion, producerVersion })
+    return { ...binding, paperName: '合成源范文配图样张', sourceReferences, evidence, confirmation,
+      materializationDigest: digestJson(materialization) }
+  }
   // Default remains the frozen historical envelope with its original SHA/HTML.
   // First-admission tests must explicitly request a current capture.
-  if (!currentCapture) delete sourceReferences.producerVersion
+  delete sourceReferences.producerVersion
   sourceReferences.schemaVersion = 'source-references-v3'
   const source = region => ({ documentSha256: answer.sha256, locator: {
     kind: 'page_region', documentId: answer.documentId, page: 1, region,
@@ -109,7 +128,7 @@ export function sourceReferenceFiguresFixture(materialization = makeFixture({ li
   sourceReferences.groups[0].essays = { state: 'captured', evidence: [], entries }
   if (scoringTable) sourceReferences.groups[0].scoring = { state: 'captured', evidence: [], entries: [{
     referenceId: 'reference:score:0', authority: 'source_reference',
-    sourceLabel: currentCapture ? '评分标准' : null, labelSource: currentCapture ? source(scoringHeadingRegion) : null,
+    sourceLabel: null, labelSource: null,
     blocks: [{ kind: 'table', tableId: 'table:score', rows: [[4, 5].map(index => ({
       cellId: `cell:score:${index}`, text: texts[index], source: source(regions[index]),
     }))] }],
