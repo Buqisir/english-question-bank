@@ -12,7 +12,6 @@ const run = promisify(execFile)
 const round = value => Number(value.toFixed(6))
 const SCALE = 3
 const LANGUAGE = 'chi_sim+eng'
-const PSM = 6
 const DENSITY = 144
 
 function keysExactly(value, keys) {
@@ -119,7 +118,8 @@ export function appendRegionObservations(page, candidates, provenance, size) {
   } }, acceptedObservationIds: addedIds, discarded: candidates.length - accepted.length }
 }
 
-export async function reobserveRegions({ trace, documents, work, requests }) {
+export async function reobserveRegions({ trace, documents, work, requests, psm = 6 }) {
+  if (psm !== 6 && psm !== 13) throw new Error('Region PSM must be 6 or 13')
   if (trace.schemaVersion !== 'ocr-proofread-trace-v2'
     || trace.sourceSetDigest !== nck1OcrSourceSetDigest(documents)
     || documents.some(document => sha256(document.bytes) !== document.sha256
@@ -153,7 +153,7 @@ export async function reobserveRegions({ trace, documents, work, requests }) {
     if (bbox.x + bbox.width > raster.pixelWidth || bbox.y + bbox.height > raster.pixelHeight) {
       throw new Error(`${page.key}: region bbox exceeds the immutable page raster`)
     }
-    const parameters = { language: LANGUAGE, psm: PSM, scale: SCALE, density: DENSITY, ompThreadLimit: 1,
+    const parameters = { language: LANGUAGE, psm, scale: SCALE, density: DENSITY, ompThreadLimit: 1,
       pixelMapping: 'outward-integer-v1' }
     const identity = { page: page.key, bbox, sourceDocumentDigest: document.sha256,
       sourceImageDigest: sha256(raster.bytes), engine: { name: 'tesseract', version }, parameters }
@@ -166,7 +166,7 @@ export async function reobserveRegions({ trace, documents, work, requests }) {
     await run('magick', [page.imagePath, '-crop', `${bbox.width}x${bbox.height}+${bbox.x}+${bbox.y}`,
       '+repage', '-resize', `${bbox.width * SCALE}x${bbox.height * SCALE}!`,
       '-define', 'png:exclude-chunks=tEXt,zTXt,iTXt,tIME', crop])
-    await run('tesseract', [crop, tsvBase, '-l', LANGUAGE, '--psm', String(PSM), 'tsv'],
+    await run('tesseract', [crop, tsvBase, '-l', LANGUAGE, '--psm', String(psm), 'tsv'],
       { env: { ...process.env, OMP_THREAD_LIMIT: '1' }, maxBuffer: 8 * 1024 * 1024 })
     const tsv = readFileSync(`${tsvBase}.tsv`, 'utf8')
     const provenance = { source: 'region-reobserve', runId, ...identity,

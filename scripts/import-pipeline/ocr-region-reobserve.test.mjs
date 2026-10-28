@@ -3,13 +3,31 @@ import { execFileSync, spawnSync } from 'node:child_process'
 import { copyFileSync, mkdirSync, mkdtempSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { test } from 'node:test'
-import { appendRegionObservations, mapRegionTsv, parseRegionRequests } from './ocr-region-reobserve.mjs'
+import { appendRegionObservations, mapRegionTsv, parseRegionRequests, reobserveRegions } from './ocr-region-reobserve.mjs'
 
 const bbox = { x: 100, y: 200, width: 100, height: 50 }
 const header = 'level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext'
 const tsv = [header, '1\t1\t0\t0\t0\t0\t0\t0\t300\t150\t-1\t',
   '5\t1\t1\t1\t1\t1\t30\t15\t60\t30\t92.5\t标题',
   '5\t1\t1\t1\t2\t1\t120\t60\t30\t30\t0\t细则', ''].join('\n')
+
+test('region PSM is explicit, bounded and cannot bypass the CLI through the helper', async () => {
+  for (const psm of [0, 7, 12, '6', null, NaN]) {
+    await assert.rejects(reobserveRegions({ psm }), /Region PSM must be 6 or 13/)
+  }
+  const cli = path.join(import.meta.dirname, 'ocr-proofread.mjs')
+  for (const args of [
+    ['evidence', 'paper-test', '--region-psm', '13'],
+    ['evidence', 'paper-test', '--regions', 'requests.json', '--region-psm', '7'],
+    ['evidence', 'paper-test', '--regions', 'requests.json', '--region-psm'],
+    ['evidence', 'paper-test', '--regions', 'requests.json', '--region-psm', '6', '--region-psm', '13'],
+    ['worksheets', 'paper-test', '--region-psm', '13'],
+  ]) {
+    const result = spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' })
+    assert.equal(result.status, 1, result.stderr)
+    assert.match(result.stderr, /--region-psm/)
+  }
+})
 
 function pageFixture() {
   const id = 'answers:page-4:word-7'
