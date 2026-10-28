@@ -4,6 +4,7 @@ import {
 } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
+import { setTimeout as yieldFor } from 'node:timers/promises'
 import { matchingReviewProcess, reviewProcessGroupMembers } from './reviewProcessTree.mjs'
 
 // Production keeps one host-wide slot. Only verifiers set the inherited test
@@ -207,6 +208,17 @@ function readCompatibilityWorker(directory) {
     return identity
   } finally { closeSync(fd) }
 }
+async function waitForCompatibilityGroupExit(pid) {
+  // SIGKILL delivery and the direct child's exit do not prove its descendants
+  // have exited. Keep custody while observing the same group drain. This is a
+  // bounded disposal grace, not a retry of comparison or lock admission.
+  const deadline = performance.now() + 5000
+  while ((await reviewProcessGroupMembers(pid)).length) {
+    if (performance.now() >= deadline) return false
+    await yieldFor(20)
+  }
+  return true
+}
 // Reserve BEFORE fork. A parent-PID reap must never hide an independent
 // scanner/backfill executor. Missing worker metadata is a blocked spawn window.
 export function beginReviewCompatibilityWork(lease) {
@@ -228,11 +240,11 @@ export function beginReviewCompatibilityWork(lease) {
       if (notStarted) {
         // The live parent knows it never sent business input and has reaped
         // its own child. Still require the detached group to be empty.
-        if (pid && (await reviewProcessGroupMembers(pid)).length) return false
+        if (pid && !await waitForCompatibilityGroupExit(pid)) return false
       } else {
         const identity = readCompatibilityWorker(directory)
         if (await matchingReviewProcess(identity) !== 'dead'
-          || (await reviewProcessGroupMembers(identity.pid)).length) return false
+          || !await waitForCompatibilityGroupExit(identity.pid)) return false
       }
       renameSync(directory, path.join(root, `.compatibility-closed-${id}`))
       syncDirectory(root)

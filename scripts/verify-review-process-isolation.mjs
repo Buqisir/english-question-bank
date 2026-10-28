@@ -7,12 +7,13 @@ import { createServer } from 'node:http'
 import { mkdtempSync, writeFileSync, readdirSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-import { pathToFileURL } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { setTimeout as yieldFor } from 'node:timers/promises'
 import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 import { startReviewCompatibilityWorker } from '../server/import-review/runReviewCompatibilityWorker.mjs'
 import { reviewCompatibilityEligibility, isTransientReviewFailure } from '../server/import-review/reviewRecoveryPolicy.mjs'
 import { killReviewProcessTree } from '../server/import-review/reviewProcessTree.mjs'
+import { reviewCompatibilityLockDiagnostics } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-review-process-'))
 const server = createServer((_request, response) => response.end('alive'))
@@ -101,9 +102,20 @@ try {
     assert.equal(reviewCompatibilityEligibility(output.comparison, true).eligible, false)
     assert.equal((await fetch(`http://127.0.0.1:${server.address().port}`)).status, 200)
     assert.deepEqual(readdirSync(tmpdir()).filter(name => name.startsWith('eqb-review-job-')), before)
+    assert.equal(reviewCompatibilityLockDiagnostics().leader.state, 'missing',
+      `${mode} disposal must release its leader before the next verifier`)
     console.log(`PASS ${mode}: descendant RSS triggers kill; supervisor HTTP survives, legacy fallback applies and workspace is removed`)
   }
-  console.log(`PASS ${process.platform === 'darwin' ? 5 : 4} review process isolation checks`)
+  for (const args of [[], ['--hold']]) {
+    // Give each fault-injection subprocess its own lock root, just as a
+    // standalone verifier has; a retained live-owner test must not poison us.
+    const env = { ...process.env }
+    delete env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT
+    process.stdout.write(execFileSync(process.execPath,
+      [fileURLToPath(new URL('../test-fixtures/review-compatibility/disposal.mjs', import.meta.url)), ...args],
+      { env, timeout: 30000, encoding: 'utf8' }))
+  }
+  console.log(`PASS ${process.platform === 'darwin' ? 7 : 6} review process isolation checks`)
 } finally {
   delete process.env.REVIEW_TEST_PID
   delete process.env.EQB_REVIEW_COMPATIBILITY_AUTORUN
