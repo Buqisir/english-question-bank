@@ -231,6 +231,7 @@ test('post-listening scoring figure scopes retain version-specific rubric labels
     ['ocr-source-references-producer-v22', '评分标准'],
     ['ocr-source-references-producer-v23', '二、各档次的给分范围和要求'],
     ['ocr-source-references-producer-v24', '二、各档次的给分范围和要求'],
+    ['ocr-source-references-producer-v25', '二、各档次的给分范围和要求'],
   ]) {
     const scope = sourceReferenceScoringScopes(input.confirmation, new Set(['answers']),
       { producerVersion: version, materialization: input.materialization })
@@ -241,12 +242,12 @@ test('post-listening scoring figure scopes retain version-specific rubric labels
     const figures = captured.groups[0].scoring.entries.flatMap(entry =>
       entry.blocks.filter(block => block.kind === 'figure').map(block => [entry.sourceLabel, block.sourceRegionId]))
     assert.deepEqual(figures, [[label, 'answers:page-3:figure-4'], [label, 'answers:page-3:figure-extra']])
-    if (version.endsWith('v24')) assertSourceReferenceAdmission({ ...input, sidecar: captured })
-    if (version.endsWith('v23')) {
+    if (version.endsWith('v25')) assertSourceReferenceAdmission({ ...input, sidecar: captured })
+    if (version.endsWith('v23') || version.endsWith('v24')) {
       assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: captured }),
         { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
       const sourceReferencesBytes = Buffer.from(JSON.stringify(captured))
-      const receipt = { revisionId: 'synthetic-v23', bundleDigest: sha256('synthetic-bundle'),
+      const receipt = { revisionId: `synthetic-${version}`, bundleDigest: sha256('synthetic-bundle'),
         paperId: input.materialization.paperId, sourceDigest: input.sourceDigest,
         candidateDigest: input.candidateDigest, sourceReferencesDigest: sha256(sourceReferencesBytes) }
       assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt })
