@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { IN_IMAGE_OPTION_LABELS_VERSION, resolveInImageOptionLabels } from '../../shared/paper-canonical/inImageOptionLabels.mjs'
+import { IN_IMAGE_OPTION_LABELS_VERSION, IN_IMAGE_OPTION_LABELS_VERSION_V2, resolveInImageOptionLabels, verifyInImageOptionLabelsV2Ownership } from '../../shared/paper-canonical/inImageOptionLabels.mjs'
 import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 
@@ -17,7 +17,7 @@ function context(input) {
   const raw = parse(input.materializationBytes)
   const evidence = parse(input.ocrSourceBytes?.evidenceBytes)
   const confirmation = parse(input.ocrSourceBytes?.confirmationBytes)
-  if (!/^nck1-source-materialization-v(?:[3-9]|1[012])$/u.test(raw.schemaVersion)
+  if (!/^nck1-source-materialization-v(?:[3-9]|1[0123])$/u.test(raw.schemaVersion)
     || confirmation.schemaVersion !== 'nck1-ocr-source-confirmation-v3' || confirmation.confirmed !== true
     || raw.paperId !== evidence.paperId || raw.paperId !== confirmation.paperId
     || confirmation.evidenceDigest !== evidence.evidenceDigest || confirmation.sourceSetDigest !== evidence.sourceSetDigest
@@ -38,44 +38,64 @@ function context(input) {
 // four images, a coordinate sort, a filename, or an empty OCR itemIds array.
 export function planInImageOptionLabels(input, selection) {
   const { raw, evidence, confirmation, binding } = context(input)
-  if (!exactKeys(selection, ['groupId', 'questionId', 'parentMediaId', 'parentRegionId', 'parentSource', 'anchorItemId', 'labels', 'reason'])
+  const v2 = selection?.schemaVersion === 'reading-in-image-option-labels-selection-v2'
+  if (v2) {
+    binding.media = input.media.map(media => ({ mediaId: media.mediaId, sha256: sha256(media.bytes) }))
+    if (raw.media.some(media => {
+      const files = input.media.filter(file => file.mediaId === media.mediaId)
+      return files.length !== 1 || sha256(files[0].bytes) !== media.sha256
+    }) || input.media.length !== raw.media.length) fail('In-image v2 requires the exact candidate media bytes')
+  }
+  if (!exactKeys(selection, ['groupId', 'questionId', 'parentMediaId', 'parentRegionId', 'parentSource', 'anchorItemId', 'labels', 'reason', ...(v2 ? ['schemaVersion', 'layout', 'itemOwnership', 'sharedFigure', 'sourceReview'] : [])])
     || typeof selection.reason !== 'string' || !selection.reason.trim()) fail('Supply a closed explicit label selection and original-image review reason')
   const group = raw.groups.find(group => group.groupId === selection.groupId && group.family === 'reading')
   const question = group?.questions.find(question => question.questionId === selection.questionId)
   const document = raw.documents.find(document => document.documentId === selection.parentSource?.documentId)
   if (!question || !document) fail('Selection requires a Reading question and its original PDF')
   const decision = {
-    schemaVersion: IN_IMAGE_OPTION_LABELS_VERSION, groupId: selection.groupId, questionId: selection.questionId,
+    schemaVersion: v2 ? IN_IMAGE_OPTION_LABELS_VERSION_V2 : IN_IMAGE_OPTION_LABELS_VERSION, groupId: selection.groupId, questionId: selection.questionId,
     questionSource: structuredClone(question.source), anchorItemId: selection.anchorItemId,
     parentMediaId: selection.parentMediaId, parentRegionId: selection.parentRegionId,
     parentSource: structuredClone(selection.parentSource), sourceDocumentSha256: document.sha256,
     sourceSetDigest: evidence.sourceSetDigest, evidenceDigest: evidence.evidenceDigest,
     confirmationDigest: digestJson(confirmation),
-    sourceReview: { reviewedBy: 'import_agent', labelsInParentPixels: true, reason: selection.reason },
+    sourceReview: v2 ? structuredClone(selection.sourceReview)
+      : { reviewedBy: 'import_agent', labelsInParentPixels: true, reason: selection.reason },
+    ...(v2 ? { layout: selection.layout, itemOwnership: structuredClone(selection.itemOwnership),
+      sharedFigure: structuredClone(selection.sharedFigure) } : {}),
     labels: structuredClone(selection.labels),
   }
-  resolveInImageOptionLabels({ ...raw, schemaVersion:
-    ['nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion)
-      ? raw.schemaVersion : 'nck1-source-materialization-v9',
+  if (v2 && selection.sourceReview?.reason !== selection.reason) fail('Selection and source review reason must agree')
+  const schemaVersion = v2 || raw.schemaVersion === 'nck1-source-materialization-v13'
+    ? 'nck1-source-materialization-v13'
+    : ['nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion)
+      ? raw.schemaVersion : 'nck1-source-materialization-v9'
+  resolveInImageOptionLabels({ ...raw, schemaVersion,
     inImageOptionLabels: [...(raw.inImageOptionLabels || []), decision] })
-  const plan = { schemaVersion: PLAN_VERSION, paperId: raw.paperId, binding, decision }
+  if (v2) verifyInImageOptionLabelsV2Ownership(decision, confirmation, evidence)
+  const plan = { schemaVersion: v2 ? 'reading-in-image-option-labels-plan-v2' : PLAN_VERSION, paperId: raw.paperId, binding, decision }
   return { ...plan, planDigest: digestJson(plan) }
 }
 
 export function applyInImageOptionLabelsPlan(input, plan, { confirmed = false } = {}) {
   if (confirmed !== true) fail('In-image labels require --agent-confirmed original-image review')
   const { raw, binding } = context(input)
+  const v2 = plan?.schemaVersion === 'reading-in-image-option-labels-plan-v2'
+  if (v2) binding.media = input.media.map(media => ({ mediaId: media.mediaId, sha256: sha256(media.bytes) }))
   if (!exactKeys(plan, ['schemaVersion', 'paperId', 'binding', 'decision', 'planDigest'])
-    || plan.schemaVersion !== PLAN_VERSION || plan.paperId !== raw.paperId || !same(plan.binding, binding)) fail('In-image label plan is stale or belongs to another source generation')
+    || !(plan.schemaVersion === PLAN_VERSION || v2) || plan.paperId !== raw.paperId || !same(plan.binding, binding)) fail('In-image label plan is stale or belongs to another source generation')
   const { planDigest, ...body } = plan
   if (planDigest !== digestJson(body)) fail('In-image label plan digest is invalid')
   const d = plan.decision
   const regenerated = planInImageOptionLabels(input, {
     groupId: d.groupId, questionId: d.questionId, parentMediaId: d.parentMediaId, parentRegionId: d.parentRegionId,
     parentSource: d.parentSource, anchorItemId: d.anchorItemId, labels: d.labels, reason: d.sourceReview?.reason,
+    ...(v2 ? { schemaVersion: 'reading-in-image-option-labels-selection-v2', layout: d.layout,
+      itemOwnership: d.itemOwnership, sharedFigure: d.sharedFigure, sourceReview: d.sourceReview } : {}),
   })
   if (!same(plan, regenerated)) fail('In-image label plan differs from its exact source-bound selection')
-  const materialization = { ...raw, schemaVersion:
+  const materialization = { ...raw, schemaVersion: v2 || raw.schemaVersion === 'nck1-source-materialization-v13'
+    ? 'nck1-source-materialization-v13' :
     ['nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion)
       ? raw.schemaVersion : 'nck1-source-materialization-v9',
     inImageOptionLabels: [...(raw.inImageOptionLabels || []), structuredClone(d)] }

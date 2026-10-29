@@ -355,7 +355,7 @@ function validateBlocks(blocks, path, documents, mediaReferences, blankReference
   }
 }
 
-function validateQuestion(question, expectedNumber, family, path, documents, ids, issues, figureReferences = null, allowStemFigures = false) {
+function validateQuestion(question, expectedNumber, family, path, documents, ids, issues, figureReferences = null, allowStemFigures = false, inImageQuestionIds = new Set()) {
   if (
     !isRecordValue(question)
     || !exactKeys(question, [
@@ -384,7 +384,8 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
   validateLocator(question.source, `${path}.source`, documents, issues)
   if (Object.hasOwn(question, 'figureLayout') && !validateReadingFigureLayout(
     question.figureLayout, question.questionId, question.options,
-    documents.get(question.source?.documentId)?.sha256,
+    documents.get(question.source?.documentId)?.sha256, undefined, undefined,
+    { allowInImageLabelMeasurement: inImageQuestionIds.has(question.questionId) },
   )) {
     issues.push(issue('MATERIALIZATION_FIGURE_LAYOUT_INVALID', `${path}.figureLayout`, 'Source-measured Reading layout must bind its exact question, options, source document and measurement'))
   }
@@ -696,7 +697,7 @@ function validateWritingBlocks(blocks, task, family, path, issues, allowMultiple
   }
 }
 
-function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false, allowGivenBlockRefs = false, allowMultipleApplicationNotices = false) {
+function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false, allowGivenBlockRefs = false, allowMultipleApplicationNotices = false, inImageQuestionIds = new Set()) {
   if (!Array.isArray(groups) || groups.length !== slots.length) {
     issues.push(issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'NCK1 requires exactly nine active groups'))
     return { questionIds: new Map(), ids: new Set() }
@@ -753,7 +754,7 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
     for (let number = from; number <= to; number += 1) {
       const questionIndex = number - from
       const question = group.questions[questionIndex]
-      validateQuestion(question, number, expectedFamily, `${path}.questions[${questionIndex}]`, documents, ids, issues, allowFigureOptions ? mediaReferences : null, allowStemFigures)
+      validateQuestion(question, number, expectedFamily, `${path}.questions[${questionIndex}]`, documents, ids, issues, allowFigureOptions ? mediaReferences : null, allowStemFigures, inImageQuestionIds)
       if (nonEmptyString(question?.questionId)) {
         questionIds.set(question.questionId, { number, family: expectedFamily })
       }
@@ -1211,6 +1212,32 @@ function validateListening(listening, documents, sourceCoverage, issues) {
 }
 
 export function validateNck1SourceMaterialization(value, { allowMultipleApplicationNotices = false } = {}) {
+  return validateMaterialization(value, { allowMultipleApplicationNotices })
+}
+
+// This context is derived only from successfully resolved v13 decisions. Public
+// callers cannot grant a question or a legacy envelope the new measurement path.
+function validateMaterialization(value, { allowMultipleApplicationNotices = false } = {}, inImageQuestionIds = new Set()) {
+  if (value?.schemaVersion === 'nck1-source-materialization-v13') {
+    const issues = []
+    // Prove v2 against its actual envelope. Only unrelated legacy fields are
+    // delegated; a v2 decision is never reinterpreted by the legacy v9 reader.
+    try {
+      if (!Array.isArray(value.inImageOptionLabels)
+        || !value.inImageOptionLabels.some(decision => decision?.schemaVersion === 'reading-in-image-option-labels-v2')) {
+        throw new Error('Materialization v13 requires at least one image-option v2 decision')
+      }
+      inImageQuestionIds = new Set(resolveInImageOptionLabels(value)
+        .filter(({ decision }) => decision.schemaVersion === 'reading-in-image-option-labels-v2')
+        .map(({ question }) => question.questionId))
+    } catch (error) {
+      issues.push(issue('MATERIALIZATION_IN_IMAGE_OPTION_LABELS_INVALID', '$.inImageOptionLabels', error.message))
+    }
+    try { resolveCrossPageParagraphJoins(value) }
+    catch (error) { issues.push(issue('MATERIALIZATION_PARAGRAPH_JOIN_INVALID', '$.paragraphJoins', error.message)) }
+    const { inImageOptionLabels, paragraphJoins, ...fields } = value
+    return [...issues, ...validateMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices }, inImageQuestionIds)]
+  }
   if (value?.schemaVersion === 'nck1-source-materialization-v12') {
     // Validate relations against their real envelope before reusing the older
     // field validators. A v2 relation must never be interpreted as legacy v8.
@@ -1222,14 +1249,14 @@ export function validateNck1SourceMaterialization(value, { allowMultipleApplicat
       issues.push(issue('MATERIALIZATION_PARAGRAPH_JOIN_INVALID', '$.paragraphJoins', error.message))
     }
     const { paragraphJoins, ...fields } = value
-    return [...issues, ...validateNck1SourceMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices })]
+    return [...issues, ...validateMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices }, inImageQuestionIds)]
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v11') {
     const legacy = { ...value, schemaVersion: Object.hasOwn(value, 'listeningSourceDecision')
       ? 'nck1-source-materialization-v10' : Object.hasOwn(value, 'inImageOptionLabels')
         ? 'nck1-source-materialization-v9' : Object.hasOwn(value, 'paragraphJoins')
           ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7' }
-    return validateNck1SourceMaterialization(legacy, { allowMultipleApplicationNotices })
+    return validateMaterialization(legacy, { allowMultipleApplicationNotices }, inImageQuestionIds)
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v10') {
     const { listeningSourceDecision, ...legacy } = value
@@ -1237,7 +1264,7 @@ export function validateNck1SourceMaterialization(value, { allowMultipleApplicat
       ? 'nck1-source-materialization-v9'
       : Object.hasOwn(legacy, 'paragraphJoins')
         ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7'
-    const issues = validateNck1SourceMaterialization(legacy, { allowMultipleApplicationNotices })
+    const issues = validateMaterialization(legacy, { allowMultipleApplicationNotices }, inImageQuestionIds)
     try { validateListeningSourceDecision(listeningSourceDecision) }
     catch (error) { issues.push(issue('MATERIALIZATION_LISTENING_SOURCE_DECISION_INVALID', '$.listeningSourceDecision', error.message)) }
     return issues
@@ -1344,7 +1371,7 @@ export function validateNck1SourceMaterialization(value, { allowMultipleApplicat
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion), allowMultipleApplicationNotices)
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion), allowMultipleApplicationNotices, inImageQuestionIds)
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {
@@ -1363,6 +1390,7 @@ export function validateNck1SourceMaterialization(value, { allowMultipleApplicat
         question.figureLayout, question.questionId, question.options,
         documents.get(question.source?.documentId)?.sha256,
         question.source, Array.isArray(value.media) ? value.media : [],
+        { allowInImageLabelMeasurement: inImageQuestionIds.has(question.questionId) },
       )) {
         issues.push(issue('MATERIALIZATION_FIGURE_SOURCE_BINDING_INVALID', '$.groups', 'Measured options must bind the exact source page, media bytes and PDF crop geometry'))
       }

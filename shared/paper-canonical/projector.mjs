@@ -1,4 +1,4 @@
-import { closureAdmitsApplicationDrawingArea, closureAdmitsReadingStemFigures, closureAdmitsApplicationPromptFigures, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
+import { closureAdmitsInImageOptionLabelMeasurements, closureAdmitsApplicationDrawingArea, closureAdmitsReadingStemFigures, closureAdmitsApplicationPromptFigures, resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
 import { validateGrammarFillPromptContract } from './grammarFillPromptContract.mjs'
@@ -203,7 +203,7 @@ function assertCanonicalPackage(canonicalPackage) {
     )
     if (groupIssues.length > 0) throw projectionError('Canonical Group is schema-invalid', groupIssues)
     if (group.sourcePresentation !== undefined
-      && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(closure.authorityRef.manifestVersion)
+      && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(closure.authorityRef.manifestVersion)
         || !sourcePresentationMatchesCapture(group.sourcePresentation, sourceCapture))) {
       throw projectionError('Source presentation does not match captured source observations', [])
     }
@@ -230,7 +230,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(closure.authorityRef.manifestVersion),
+          ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -246,6 +246,7 @@ function assertCanonicalPackage(canonicalPackage) {
         allowStemMarks: ['3', '4', '5'].includes(closure.artifacts['rich-content']?.version),
         allowOptionMarks: closure.artifacts['rich-content']?.version === '5',
         allowStemFigures: closureAdmitsReadingStemFigures(closure),
+        allowInImageLabelMeasurement: closureAdmitsInImageOptionLabelMeasurements(closure),
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
     }
@@ -431,7 +432,7 @@ export function projectCanonicalPaper(canonicalPackage) {
         }
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(closure.authorityRef.manifestVersion)
+              ...(['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,
@@ -481,14 +482,14 @@ export function projectCanonicalPaper(canonicalPackage) {
                 number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,
                 stem: cloneJson(question.stem),
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
-                ...(['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(plan.authorityRef.manifestVersion)
+                ...(['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(plan.authorityRef.manifestVersion)
                   ? {}
                   : { correctOptionId: question.correctOptionId }),
               })),
               // v51 public consumption needs only coverage identities. Full
               // transcript/answers stay in source authority and Owner Review.
               transcriptSegments: group.variant.transcriptSegments.map((segment) =>
-                ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80'].includes(plan.authorityRef.manifestVersion)
+                ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(plan.authorityRef.manifestVersion)
                   ? { segmentId: segment.segmentId, questionIds: cloneJson(segment.questionIds) }
                   : cloneJson(segment)),
               anchors: {

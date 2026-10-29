@@ -1,3 +1,7 @@
+import measurementV2Schema from '../../schemas/paper-canonical/reading-source-layout-measurement-v2.schema.json' with { type: 'json' }
+import manifestV81 from '../../standards/paper-canonical/manifest-v81.json' with { type: 'json' }
+import sourceAdaptersV34 from '../../standards/paper-canonical/adapters/source-adapters-v34.json' with { type: 'json' }
+import materializationV13Schema from '../../schemas/paper-canonical/nck1-source-materialization-v13.schema.json' with { type: 'json' }
 import manifestV80 from '../../standards/paper-canonical/manifest-v80.json' with { type: 'json' }
 import sourceAdaptersV33 from '../../standards/paper-canonical/adapters/source-adapters-v33.json' with { type: 'json' }
 import manifestV79 from '../../standards/paper-canonical/manifest-v79.json' with { type: 'json' }
@@ -1515,7 +1519,7 @@ export function validateAuthorityClosure({
   const issues = []
   // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1575,7 +1579,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1751,7 +1755,7 @@ export function validateAuthorityClosure({
       ))
     }
     if (
-      coreArtifact?.groupSchemaId !== (['62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
+      coreArtifact?.groupSchemaId !== (['62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
       || !schemaById.has(coreArtifact.groupSchemaId)
     ) {
       issues.push(issue(
@@ -1770,7 +1774,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -2914,6 +2918,9 @@ const artifactsV79 = { ...artifactsV78, adapter: sourceAdaptersV32 }
 const schemasV79 = schemasV78
 const artifactsV80 = { ...artifactsV79, adapter: sourceAdaptersV33 }
 const schemasV80 = schemasV79
+const artifactsV81 = { ...artifactsV80, adapter: sourceAdaptersV34 }
+const schemasV81 = { ...schemasV80, 'nck1-source-materialization-v13': materializationV13Schema,
+  'reading-source-layout-measurement-v2': measurementV2Schema }
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -3051,6 +3058,7 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV78, artifacts: artifactsV78, schemas: schemasV78 }),
   validateAuthorityClosure({ manifest: manifestV79, artifacts: artifactsV79, schemas: schemasV79 }),
   validateAuthorityClosure({ manifest: manifestV80, artifacts: artifactsV80, schemas: schemasV80 }),
+  validateAuthorityClosure({ manifest: manifestV81, artifacts: artifactsV81, schemas: schemasV81 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -3146,6 +3154,7 @@ const authorities = [
   { manifest: manifestV78, artifacts: artifactsV78, schemas: schemasV78 },
   { manifest: manifestV79, artifacts: artifactsV79, schemas: schemasV79 },
   { manifest: manifestV80, artifacts: artifactsV80, schemas: schemasV80 },
+  { manifest: manifestV81, artifacts: artifactsV81, schemas: schemasV81 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -3300,4 +3309,21 @@ export function closureAdmitsMultipleWritingNotices(closure) {
 export function authorityAdmitsMultipleWritingNotices(ref) {
   const resolved = resolveCanonicalAuthority(ref)
   return resolved.ok && closureAdmitsMultipleWritingNotices(resolved.closure)
+}
+
+
+export const nck1InImageOptionLabelsV2AuthorityRef = authorities.find(authority => authority.manifest.version === '81').authorityRef
+export function closureAdmitsInImageOptionLabelsV2(closure) {
+  return digestJson(closure?.schemas?.['nck1-source-materialization-v13'] ?? null) === digestJson(materializationV13Schema)
+    && closure?.artifacts?.adapter?.adapters?.some(adapter =>
+      adapter.adapterId === 'nck1-source-materialization' && adapter.version === '19') === true
+}
+
+
+export function closureAdmitsInImageOptionLabelMeasurements(closure) {
+  return closureAdmitsInImageOptionLabelsV2(closure)
+    && digestJson(closure?.schemas?.['reading-source-layout-measurement-v2'] ?? null) === digestJson(measurementV2Schema)
+    && closure?.artifacts?.adapter?.adapters?.some(adapter =>
+      adapter.adapterId === 'nck1-source-materialization' && adapter.version === '19'
+      && adapter.capabilities?.includes('reading_in_image_label_measurement_v2')) === true
 }

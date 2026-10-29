@@ -31,7 +31,7 @@ export function resolveCrossPageParagraphJoins(materialization) {
   if (!Object.hasOwn(materialization, 'paragraphJoins')) return []
   const joins = materialization.paragraphJoins
   const reject = message => { throw new Error(`Cross-page paragraph join: ${message}`) }
-  if (!['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(materialization.schemaVersion)
+  if (!['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12', 'nck1-source-materialization-v13'].includes(materialization.schemaVersion)
     || !Array.isArray(joins) || !joins.length) reject('requires the opt-in v8 envelope and nonempty relations')
   const consumed = new Set()
   const ids = new Set()
@@ -40,7 +40,7 @@ export function resolveCrossPageParagraphJoins(materialization) {
     if (!exactKeys(join, ['schemaVersion', 'joinId', 'groupId', 'sourceSetDigest',
       'evidenceDigest', 'confirmationSha256', 'separator', 'sourceReview', 'fragments'])
       || !(join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION
-        || (mixed && materialization.schemaVersion === 'nck1-source-materialization-v12'))
+        || (mixed && ['nck1-source-materialization-v12', 'nck1-source-materialization-v13'].includes(materialization.schemaVersion)))
       || !nonempty(join.joinId) || ids.has(join.joinId) || !nonempty(join.groupId)
       || ![join.sourceSetDigest, join.evidenceDigest, join.confirmationSha256].every(digest)
       || join.separator !== ' '

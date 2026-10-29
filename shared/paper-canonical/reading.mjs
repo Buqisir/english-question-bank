@@ -293,6 +293,7 @@ export function validateReadingContract({
   allowStemMarks = false,
   allowOptionMarks = false,
   allowStemFigures = false,
+  allowInImageLabelMeasurement = false,
 }) {
   const issues = []
   if (blankIds.length !== 0) {
@@ -398,7 +399,7 @@ export function validateReadingContract({
     }
     const figureMode = allowFigureOptions && options.every((option) => option?.figure)
     if (Object.hasOwn(question, 'figureLayout')
-      && !validateReadingFigureLayout(question.figureLayout, questionId, options)) {
+      && !validateReadingFigureLayout(question.figureLayout, questionId, options, undefined, undefined, undefined, { allowInImageLabelMeasurement })) {
       issues.push(issue('READING_FIGURE_LAYOUT_INVALID', 'needs_review', `$.variant.questions[${index}]`, 'Source-measured layout must preserve its exact digest and A-D geometry'))
     }
     for (const [optionIndex, option] of options.entries()) {
