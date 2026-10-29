@@ -24,8 +24,11 @@ async function assertScreenMarkup(model) {
   const { createServer } = await import('../../app/node_modules/vite/dist/node/index.js')
   const { createElement } = await import('../../app/node_modules/react/index.js')
   const { renderToStaticMarkup } = await import('../../app/node_modules/react-dom/server.node.js')
-  const vite = await createServer({ root: path.resolve('app'), server: { middlewareMode: true } })
+  // Dependency trees may be shared read-only between worktrees.
+  const cacheDir = mkdtempSync(path.join(tmpdir(), 'eqb-option-emphasis-vite-'))
+  let vite
   try {
+    vite = await createServer({ root: path.resolve('app'), cacheDir, server: { middlewareMode: true } })
     const { PaperSurface } = await vite.ssrLoadModule('/src/shared-ui/papersurface/PaperSurface.tsx')
     const html = renderToStaticMarkup(createElement(PaperSurface, {
       ...model.surfaceData, annotations: [], evidence: [], canonicalReadingBlocks: model.richBlocks,
@@ -36,10 +39,58 @@ async function assertScreenMarkup(model) {
       .flatMap(o => o.canonicalContent).find(node => node.marks?.includes('underline'))
     assert(html.includes(`data-canonical-content-node-id="${marked.nodeId}" data-source-marks="underline"`),
       'actual PaperSurface option DOM must consume the same source marks as Print/PDF')
-  } finally { await vite.close() }
+  } finally {
+    try { await vite?.close() } finally { rmSync(cacheDir, { recursive: true, force: true }) }
+  }
 }
 
 const source = { kind: 'page_region', documentId: 'question', page: 1, region: { x: .1, y: .1, width: .8, height: .1 } }
+test('OCR body and option splits use their authority typography version while preserving historical boundaries', async () => {
+  const f = await makeSyntheticNck1OcrFixture()
+  for (const [text, start, end, accepted] of [
+    ['an avalanche(雪崩) claimed', 17, 24, true],
+    ['word(词) , next', 0, 8, true],
+    ['word（词） next', 0, 4, false],
+  ]) {
+    const confirmation = structuredClone(f.confirmation)
+    confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
+    const items = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    const body = items.find(item => item.text === 'A passage keeps one small promise.')
+    assert(body)
+    body.text = text
+    body.sourceEmphasis = [{ start, end, marks: ['bold'] }]
+    const question = items.find(item => item.text.startsWith('30. Which choice fits item 30?'))
+    assert(question)
+    question.text = question.text.replace(/B[.．、]\s*.*?(?=\s+C[.．、])/u, `B. ${text}`)
+    const optionStart = question.text.indexOf('B. ') + 3
+    question.sourceEmphasis = [{ start: optionStart + start, end: optionStart + end, marks: ['underline'] }]
+    const produced = produceNck1OcrMaterialization({ paperId: f.paperId, documents: f.sourceDocuments,
+      evidence: f.evidence, confirmation })
+    assert.equal(produced.disposition, 'ready_for_verification', JSON.stringify(produced.issues))
+    const encode = value => Buffer.from(JSON.stringify(value))
+    const input = { kind: 'nck1-source-materialization',
+      materializationBytes: encode({ ...produced.materialization, schemaVersion: 'nck1-source-materialization-v11' }),
+      documents: f.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })),
+      media: produced.mediaFiles || [], ocrSourceBytes: { evidenceBytes: encode(f.evidence), confirmationBytes: encode(confirmation) } }
+    const imported = importCanonicalCandidate(input)
+    const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+    if (!accepted) {
+      assert(imported.issues.some(issue => /normalization/.test(issue.message)))
+      assert(!preview.compilation)
+      continue
+    }
+    assert.deepEqual(imported.issues, [])
+    assert(preview.compilation?.artifacts?.canonicalPaper, JSON.stringify(preview.unresolvedIssues))
+    const groups = imported.candidate.interpretation.groups
+    const bodyInlines = groups.find(group => group.slotId === 'reading.a').content.blocks[0].inlines
+    const option = groups.flatMap(group => group.variant.choiceOwnership?.sets || [])
+      .find(set => set.questionId.endsWith(':30')).options[1]
+    for (const [inlines, mark] of [[bodyInlines, 'bold'], [option.content, 'underline']]) {
+      assert.equal(inlines.map(node => node.text).join(''), text)
+      assert.equal(inlines.filter(node => node.marks?.includes(mark)).map(node => node.text).join(''), text.slice(start, end))
+    }
+  }
+})
 test('public v11 option emphasis preserves non-default media through capture, Review and publication readback', async () => {
   const f = await makeOptionEmphasisMediaFixture()
   const upgraded = upgradeOcrOptionEmphasis(f.input)

@@ -22,7 +22,8 @@ export function mapSourceEmphasisEdits(text, ranges, corrections) {
   return { text, ranges: mapped }
 }
 
-export function splitSourceEmphasis(text, ranges, nodeId) {
+export function splitSourceEmphasis(text, ranges, nodeId, ruleVersion = '3') {
+  if (!['3', '4'].includes(ruleVersion)) throw new Error('Unknown source emphasis typography rule version')
   const nodes = []
   let cursor = 0
   const append = (start, end, marks) => {
@@ -39,8 +40,11 @@ export function splitSourceEmphasis(text, ranges, nodeId) {
     cursor = range.end
   }
   append(cursor, text.length)
-  if (nodes.map((node) => canonicalizeVisibleEnglishTypography(node.text, '3')).join('')
-    !== canonicalizeVisibleEnglishTypography(text, '3')) {
+  const closes = (version) => nodes.map((node) => canonicalizeVisibleEnglishTypography(node.text, version)).join('')
+    === canonicalizeVisibleEnglishTypography(text, version)
+  // Preserve every historically accepted split; only an explicit v4 rule may
+  // additionally admit a boundary that closes under v4 but not under v3.
+  if (!closes('3') && !(ruleVersion === '4' && closes('4'))) {
     throw new Error('Source emphasis boundary changes visible typography normalization')
   }
   return nodes

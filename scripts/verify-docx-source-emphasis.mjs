@@ -5,7 +5,9 @@ import { mapSourceEmphasisEdits, splitSourceEmphasis } from '../server/paper-can
 import { produceNck1DocxMaterialization } from '../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { deriveNck1MaterializationBundle, nck1MaterializationSourceSummary } from '../server/paper-canonical/nck1MaterializationAdapter.mjs'
-import { nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57 } from '../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57,
+  nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef66,
+  nck1MaterializationCandidateAuthorityRef, resolveCanonicalAuthority } from '../shared/paper-canonical/authority.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { admitCanonicalPaperImport } from '../server/paper-canonical/publication.mjs'
 import { buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
@@ -56,8 +58,78 @@ assert.throws(() => mapSourceEmphasisEdits('a obstacle', [{ start: 2, end: 10, m
   { start: 0, before: 'a obstacle', after: 'an obstacle' },
 ]), /crosses a mark boundary/)
 assert.throws(() => splitSourceEmphasis('word（词） next', [{ start: 0, end: 4, marks: ['bold'] }], 'test'), /normalization/)
+const claimedText = 'an avalanche(雪崩) claimed'
+const claimedRange = [{ start: 17, end: 24, marks: ['bold'] }]
+for (const version of [undefined, '3']) {
+  assert.throws(() => splitSourceEmphasis(claimedText, claimedRange, 'test', version), /normalization/)
+}
+assert.deepEqual(splitSourceEmphasis(claimedText, claimedRange, 'test', '4'), [
+  { kind: 'text', nodeId: 'test:run-1', text: 'an avalanche(雪崩) ' },
+  { kind: 'text', nodeId: 'test:run-2', text: 'claimed', marks: ['bold'] },
+])
+for (const version of [undefined, '3', '4']) {
+  assert.throws(() => splitSourceEmphasis('word（词） next', [{ start: 0, end: 4, marks: ['bold'] }], 'test', version), /normalization/)
+  assert.equal(splitSourceEmphasis('word(词) , next', [{ start: 0, end: 8, marks: ['bold'] }], 'test', version)
+    .map(node => node.text).join(''), 'word(词) , next')
+}
+for (const version of ['2', '5', '', null, 4]) {
+  assert.throws(() => splitSourceEmphasis('plain', [], 'test', version), /Unknown.*version/)
+}
 assert.equal(splitSourceEmphasis('plain marked end', [{ start: 6, end: 12, marks: ['bold'] }], 'test').map((n) => n.text).join(''), 'plain marked end')
 console.log('PASS emphasis mapping: length-changing edits before/inside/after, boundary rejection, typography closure')
+
+const boundaryInput = (text, start, end) => {
+  const f = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.replace(
+    'C passage keeps one small promise.',
+    `${text.slice(0, start)}</w:t></w:r>${run(text.slice(start, end), '<w:b/>')}<w:r><w:t xml:space="preserve">${text.slice(end)}`,
+  ) })
+  const p = produceNck1DocxMaterialization({ paperId: f.paperId, documents: f.sourceDocuments })
+  assert.equal(p.disposition, 'ready_for_verification')
+  return { kind: 'nck1-source-materialization', materializationBytes: new TextEncoder().encode(JSON.stringify(p.materialization)),
+    documents: f.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })), media: [] }
+}
+const v4Input = boundaryInput(claimedText, 17, 24)
+const v4Imported = importCanonicalCandidate(v4Input)
+assert.deepEqual(v4Imported.issues, [])
+const v4Block = v4Imported.candidate.interpretation.groups.find(group => group.slotId === 'reading.c').content.blocks[0]
+assert.deepEqual(v4Block.inlines.map(({ text, marks }) => ({ text, ...(marks ? { marks } : {}) })), [
+  { text: 'an avalanche(雪崩) ' }, { text: 'claimed', marks: ['bold'] },
+])
+assert(compileNck1MaterializationCandidatePreview(v4Imported.candidate).compilation)
+assert(deriveNck1MaterializationBundle(v4Input, nck1MaterializationHistoricalAuthorityRef58)
+  .issues.some(issue => /normalization/.test(issue.message)), 'DOCX must read the v3 authority rather than silently upgrading')
+const historicalBoundaryInput = boundaryInput('word(词) , next', 0, 8)
+// Frozen on the unmodified implementation. These bind the exact historical
+// Candidate and full Preview, including interpretations, node IDs and marks.
+for (const [authority, candidateDigest, previewDigest] of [
+  [nck1MaterializationHistoricalAuthorityRef58, 'sha256:4c903b62e947cc6c86191996d8c6965320a778a71f055b394f2d7f47939f8021', 'sha256:378d18f98c79e36d390e49eb88c398a2dfc02c5e50b83852af8810857e7323ab'],
+  [nck1MaterializationHistoricalAuthorityRef66, 'sha256:b152c26150b02cf7dcdf523e7e41dc2f3f54746ffacad0bc1c9799d959b8be6d', 'sha256:c47e3cc8ada4b8f4ef57ad48ca3b4a9b686186f979b9c7af32bcc98a0ad9f5e1'],
+  [nck1MaterializationCandidateAuthorityRef, 'sha256:0fcdf5af00f9c840f6e677225d44e786cfee5c289ed1e5039543f8ec5a52ee6b', 'sha256:f4394b6ac435d0763614c31c7e1fccd6a4695df584284d3e6ca7c26f864f7f1f'],
+]) {
+  const bundle = deriveNck1MaterializationBundle(historicalBoundaryInput, authority)
+  assert.deepEqual(bundle.issues, [])
+  const body = { schemaVersion: 'trusted-nck1-materialization-import-candidate-v1', authority,
+    source: nck1MaterializationSourceSummary(bundle), operatorChoices: {}, interpretation: bundle.source, issues: [] }
+  assert.equal(digestJson(body), candidateDigest)
+  const replay = compileNck1MaterializationCandidatePreview({ ...body, candidateDigest, sourceInput: historicalBoundaryInput })
+  assert(replay.compilation?.artifacts?.canonicalPaper)
+  assert.equal(digestJson(replay), previewDigest)
+}
+// Inject malformed registries only for a synchronous derive and restore them
+// before the next check, so these probes cannot affect other authorities.
+const normalization = resolveCanonicalAuthority(nck1MaterializationCandidateAuthorityRef).closure.artifacts.normalization
+const originalRules = normalization.rules
+const typography = originalRules.find(rule => rule.ruleId === 'canonical-visible-typography')
+try {
+  for (const rules of [undefined, originalRules.filter(rule => rule !== typography),
+    [...originalRules, { ...typography }], originalRules.map(rule => rule === typography ? { ...rule, version: '5' } : rule)]) {
+    normalization.rules = rules
+    assert(deriveNck1MaterializationBundle(v4Input).issues.some(issue => /one supported canonical-visible-typography/.test(issue.message)))
+  }
+} finally { normalization.rules = originalRules }
+assert(deriveNck1MaterializationBundle(v4Input, { ...nck1MaterializationCandidateAuthorityRef, manifestDigest: 'sha256:invalid' })
+  .issues.some(issue => issue.code === 'AUTHORITY_UNAVAILABLE'))
+console.log('PASS DOCX authority-bound v3/v4 admission, frozen v58/v66/v67 Candidate/Preview identity and fail-closed rule resolution')
 
 // Exercise the actual auto CLI, including source-run extraction and unchanged
 // notes, rather than only duplicating the boundary predicate in a unit test.
