@@ -1758,7 +1758,17 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
   ]
 }
 
-function appendReadingSourceEmphasis(source, raw, documentsById, review, issues) {
+function sourceEmphasisRuleVersion(closure) {
+  const rules = closure?.artifacts?.normalization?.rules
+  const matches = Array.isArray(rules)
+    ? rules.filter(rule => rule.ruleId === 'canonical-visible-typography') : []
+  if (matches.length !== 1 || !['3', '4'].includes(matches[0].version)) {
+    throw new Error('Source emphasis requires one supported canonical-visible-typography rule')
+  }
+  return matches[0].version
+}
+
+function appendReadingSourceEmphasis(source, raw, documentsById, review, issues, closure) {
   const paragraphsByDocument = new Map()
   const corrections = new Map((review?.targets || []).map((target) => [target.jsonPointer, target.corrections]))
   for (const [groupIndex, group] of raw.groups.entries()) {
@@ -1777,6 +1787,7 @@ function appendReadingSourceEmphasis(source, raw, documentsById, review, issues)
         if (matches.length !== 1 || !matches[0].exact) throw new Error('Source emphasis needs one exact run-complete paragraph')
         const paragraph = matches[0]
         if (!paragraph.ranges.length) continue
+        const ruleVersion = sourceEmphasisRuleVersion(closure)
         const rawText = block.content.map((item) => item.kind === 'text' ? item.text : '').join('')
         const leading = paragraph.text.length - paragraph.text.replace(/^\p{Zs}+/u, '').length
         if (paragraph.text.slice(leading).replace(/\p{Zs}+$/u, '') !== rawText
@@ -1794,7 +1805,7 @@ function appendReadingSourceEmphasis(source, raw, documentsById, review, issues)
           const mapped = mapSourceEmphasisEdits(item.text, ranges, corrections.get(pointer) || [])
           if (derived.inlines[index].text !== mapped.text) throw new Error('Source emphasis editorial mapping differs from effective text')
           inlines.push(...(ranges.length
-            ? splitSourceEmphasis(mapped.text, mapped.ranges, derived.inlines[index].nodeId)
+            ? splitSourceEmphasis(mapped.text, mapped.ranges, derived.inlines[index].nodeId, ruleVersion)
             : [derived.inlines[index]]))
           offset += item.text.length
         }
@@ -2321,8 +2332,9 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
   return topTrims
 }
 
-function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues, writingEmphasis = false, optionEmphasis = false, authorityRef) {
+function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues, writingEmphasis = false, optionEmphasis = false, authorityRef, closure) {
   try {
+    const ruleVersion = sourceEmphasisRuleVersion(closure)
     let restoredParagraphs = []
     let paragraphJoins = []
     const evidence = JSON.parse(textDecoder.decode(ocrSourceBytes.evidenceBytes))
@@ -2484,7 +2496,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         const mapped = mapSourceEmphasisEdits(part.text, localRanges, corrections.get(part.pointer) || [])
         if (mapped.text !== derived[index]?.text) throw new Error('OCR emphasis editorial mapping differs from effective text')
         offset += part.text.length
-        const nodes = localRanges.length ? splitSourceEmphasis(mapped.text, mapped.ranges, derived[index].nodeId) : [derived[index]]
+        const nodes = localRanges.length ? splitSourceEmphasis(mapped.text, mapped.ranges, derived[index].nodeId, ruleVersion) : [derived[index]]
         replacements.set(derived[index].nodeId, nodes.map(node => node.nodeId))
         return nodes
       })
@@ -2540,7 +2552,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
             if (original?.length !== 1 || original[0].kind !== 'text') throw new Error('OCR option emphasis target is not one literal text node')
             const effective = mapSourceEmphasisEdits(target.text, target.ranges, corrections.get(pointer) || [])
             if (effective.text !== original[0].text) throw new Error('OCR option emphasis editorial mapping differs from effective text')
-            const inlines = splitSourceEmphasis(effective.text, effective.ranges, original[0].nodeId)
+            const inlines = splitSourceEmphasis(effective.text, effective.ranges, original[0].nodeId, ruleVersion)
             const refs = target.fragments.map(({ paragraph }, fragmentIndex) => {
               const observation = observationForLocator(`observation:source-option-emphasis:${question.questionId}:${target.key}:${fragmentIndex + 1}`,
                 'source_reading_option_emphasis', paragraph.sourceIndex,
@@ -2641,7 +2653,12 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     rawInput.listeningAudio, rawInput.spellingReviewBytes, rawInput.ocrSourceBytes,
     rawInput.listeningInstructionCorrectionBytes,
   )
-  const options = { allowMultipleApplicationNotices: closureAdmitsMultipleWritingNotices(resolveCanonicalAuthority(authorityRef).closure) }
+  const authority = resolveCanonicalAuthority(authorityRef)
+  if (!authority.ok) {
+    return { input: cloneNck1MaterializationInput(rawInput), sourceDigest, materialization: null,
+      source: null, request: null, issues: authority.issues }
+  }
+  const options = { allowMultipleApplicationNotices: closureAdmitsMultipleWritingNotices(authority.closure) }
   const cacheKey = `${sourceDigest}:${authorityRef.manifestDigest}`
   let prepared = sourceCache?.get(cacheKey)
   if (prepared && bundleDigest(
@@ -2781,7 +2798,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
       input.spellingReviewBytes ? JSON.parse(new TextDecoder().decode(input.spellingReviewBytes)) : null,
-      derivationIssues)
+      derivationIssues, authority.closure)
   }
   if (input.ocrSourceBytes) {
     if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
@@ -2791,7 +2808,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
       appendOcrReadingSourceEmphasis(source, rawMaterialization, validation.documentsById, input.ocrSourceBytes,
         input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
         ['4', '5'].includes(resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version),
-        [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef)
+        [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure)
     }
   }
   if (derivationIssues.length > 0) {
