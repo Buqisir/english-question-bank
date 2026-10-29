@@ -589,8 +589,8 @@ const writingFixture = (texts, tasks = ['application', 'continuation']) => {
   input[0].groups = tasks.map(taskType => ({ groupId: `writing-${taskType}`, writingTask: { taskType } }))
   return input
 }
-const lifeFor = input => {
-  const source = prepareSourceReferenceWritingItems(...input)
+const lifeFor = (input, options) => {
+  const source = prepareSourceReferenceWritingItems(...input, options)
   return sourceReferenceWritingLifecycle(source.lines, source)
 }
 
@@ -963,8 +963,11 @@ test('empty explicit sample range cannot borrow a transcript or silently become 
   assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', '范文一：支持立场', 'A source sample.',
     '范文二：反对立场', '(Text 1)'], ['application'])),
     { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
-  assert.throws(() => lifeFor(writingFixture(['应用文参考范文：', 'A main sample.',
-    '备选试题参考答案', '应用文参考范文：', 'An alternate sample.'], ['application'])),
+  const unclosedAlternate = writingFixture(['应用文参考范文：', 'A main sample.',
+    '备选试题参考答案', '应用文参考范文：', 'An alternate sample.'], ['application'])
+  assert.throws(() => lifeFor(unclosedAlternate),
+    { code: 'SOURCE_REFERENCES_ALTERNATE_SCOPE_INVALID' })
+  assert.throws(() => lifeFor(unclosedAlternate, { producerVersion: 'ocr-source-references-producer-v25' }),
     { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
 })
 
@@ -1293,7 +1296,7 @@ test('P1-2 adjacent fragments in one essay pass with or without reference figure
   const missingConfirmation = { ...input.sourceInput }
   delete missingConfirmation.ocrSourceBytes
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sourceInput: missingConfirmation, sidecar }),
-    /continuation requires sealed confirmation/u)
+    /Native answer PDF requires complete sealed OCR bytes/u)
 })
 
 test('P1-4 a centered Chinese grade cannot prove its own column is full', () => {

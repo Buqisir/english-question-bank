@@ -47,6 +47,7 @@ import {
   NCK1_OCR_EVIDENCE_FILE_NAME,
   buildNck1OcrSourceEvidence,
   nck1OcrSourceSetDigest,
+  resolveReferenceSourceDocuments,
   resolveConfirmedNck1OcrEvidence,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { planHeadingRepairs } from './ocr-heading-repair.mjs'
@@ -1164,14 +1165,26 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
 export function buildSourceReferences(materialization, evidence, confirmation,
   { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [],
     producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, absenceSidecar, sourceInput, sourceDigest, candidateDigest,
-    cellContinuations = [], continuationSidecar } = {}) {
-  const source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName, producerVersion })
+    cellContinuations = [], continuationSidecar, referenceSourceManifest, referenceSourceDocuments } = {}) {
+  const retainedImages = producerVersion === 'ocr-source-references-producer-v26'
+    && confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
+    && materialization.documents.some(document => document.mediaType === 'application/vnd.eqb.nck1-image-source-bundle+json')
+  if (retainedImages && !referenceSourceDocuments) {
+    referenceSourceDocuments = resolveReferenceSourceDocuments(materialization, sourceDocuments, referenceSourceManifest)
+  }
+  const source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
+    { paperName, producerVersion, referenceSourceDocuments })
   const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
   const alternateAnswerScope = bindAlternateAnswerScope(source.alternateAnswerScope, evidence, confirmation, sourceInput?.ocrSourceBytes)
   if (alternateAnswerScope && absenceSidecar?.wholeDocumentWritingAbsence) {
     throw new Error('Alternate scope cannot combine with whole-document writing absence')
   }
   const { answerDocument, documentSha256, pages, lines, sourceOrder, factsFor, referenceFigures, scoringScopes } = source
+  // Absence may extend only to explicitly bound copies of this original.
+  const absenceDocuments = retainedImages
+    ? referenceSourceDocuments.filter(document => document.documentId === answerDocument.documentId
+      || document.renditionOf === answerDocument.documentId)
+    : null
   const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions, { producerVersion })
   const { sections, furniture, review } = lifecycle
   const wholeAbsence = absenceSidecar?.wholeDocumentWritingAbsence
@@ -1320,8 +1333,13 @@ export function buildSourceReferences(materialization, evidence, confirmation,
         review.push({ referenceId: empty.referenceId, issue: `label "${empty.sourceLabel}" has no following text; dropped` })
       }
       if (!list.length) {
-        return { state: 'not_supplied', entries: [], evidence: pages.map((page) => ({ documentSha256,
-          locator: { kind: 'page_region', documentId: answerDocument.documentId, page: page.page, region: { ...FULL_PAGE } } })) }
+        return { state: 'not_supplied', entries: [], evidence: absenceDocuments
+          ? absenceDocuments.flatMap(document => Array.from({ length: document.pageCount }, (_, index) => ({
+            documentSha256: document.sha256, locator: { kind: 'page_region',
+              documentId: document.documentId, page: index + 1, region: { ...FULL_PAGE } },
+          })))
+          : pages.map((page) => ({ documentSha256,
+            locator: { kind: 'page_region', documentId: answerDocument.documentId, page: page.page, region: { ...FULL_PAGE } } })) }
       }
       return { state: 'captured', evidence: [], entries: list.map(({ kind: _kind, labelItemId: _labelItemId, paragraphs, ...rest }) => {
         const frozenFigure = figure => {
@@ -1459,12 +1477,17 @@ function references(paperId) {
       next: 'answer-products finalize' }))
     return
   }
-  const sourceInput = { documents, ocrSourceBytes: {
+  const referenceSourceManifest = readJson(path.join(paperDir, 'universal-source-manifest.json'), 'Source manifest')
+  const referenceDocuments = confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
+    ? referenceSourceManifest.documents.map(document => ({ ...document,
+      bytes: new Uint8Array(readFileSync(path.join(paperDir, document.path))) })) : documents
+  const sourceInput = { documents: referenceDocuments, ocrSourceBytes: {
     evidenceBytes: readFileSync(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)),
     confirmationBytes: readFileSync(path.join(directory, 'nck1-ocr-source-confirmation-v1.json')),
   } }
   const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion, alternateAnswerScope } = buildSourceReferences(materialization, evidence, confirmation,
-    { sourceDocuments: documents, sourceInput, paperName, figureExclusions: retained?.figureExclusions ?? [] })
+    { sourceDocuments: referenceDocuments, sourceInput, paperName, referenceSourceManifest,
+      figureExclusions: retained?.figureExclusions ?? [] })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups, producerVersion, ...(figureExclusions ? { figureExclusions } : {}),
     ...(alternateAnswerScope ? { alternateAnswerScope } : {}) })

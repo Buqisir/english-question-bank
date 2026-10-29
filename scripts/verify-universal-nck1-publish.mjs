@@ -84,7 +84,9 @@ import { LEGACY_LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } 
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 import { freezeReviewFixture, finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
-import { syntheticReviewAnswerPdf, syntheticReviewReferences, syntheticApplicationSample, syntheticContinuationSample } from './lib/syntheticReviewAnswerFixture.mjs'
+import { syntheticReviewReferences, syntheticApplicationSample, syntheticContinuationSample,
+  prebindReviewFixtureReferences, removeOwnedReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
+import { makeCurrentReviewSource, locateCurrentReviewQuestions } from '../test-fixtures/paper-import/review-source-references-v26/fixture.mjs'
 import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
 import {
@@ -447,12 +449,11 @@ export function makeReviewRoot(
   { listening = false, sourceType = '自编题' } = {},
 ) {
   const reviewRoot = path.join(parentDir, 'review')
-  const questionBytes = Buffer.from(
-    `%PDF-1.7 ${questionSourceLabel}`.padEnd(100, 'q'),
-  )
-  const answerBytes = syntheticReviewAnswerPdf()
+  const { questionBytes, answerBytes, evidence: sourceEvidence, confirmation: sourceConfirmation } =
+    makeCurrentReviewSource({ paperId: fixturePaperId, questionSourceLabel, listening })
   const materialization = makeFixture({ listening })
   materialization.paperId = fixturePaperId
+  locateCurrentReviewQuestions(materialization)
   if (listening) {
     materialization.listening.transcript[0].text =
       'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
@@ -515,6 +516,8 @@ export function makeReviewRoot(
   mkdirSync(path.join(reviewRoot, 'source'), { recursive: true })
   writeFileSync(path.join(reviewRoot, 'source/questions.pdf'), questionBytes)
   writeFileSync(path.join(reviewRoot, 'source/answers.pdf'), answerBytes)
+  writeJson(path.join(reviewRoot, 'materialization/nck1-ocr-source-evidence-v1.json'), sourceEvidence)
+  writeJson(path.join(reviewRoot, 'materialization/nck1-ocr-source-confirmation-v1.json'), sourceConfirmation)
 
   if (listening) {
     const audioPath = path.join(parentDir, 'listening.mp3')
@@ -573,6 +576,7 @@ export function makeReviewRoot(
 
   writeStagedAnalyses(reviewRoot, materialization)
 
+  prebindReviewFixtureReferences(reviewRoot)
   const projection = buildNck1ReviewProjection(reviewRoot, { requireAnalyses: true })
   const writingTasks = Object.values(projection.paperAsset.content.writingTasks)
   assert.deepEqual(
@@ -634,7 +638,8 @@ export function makeReviewRoot(
   }
 }
 
-function convertToAnalyzedPackageReviewSource(reviewRoot) {
+export function convertToAnalyzedPackageReviewSource(reviewRoot) {
+  removeOwnedReviewReferences(reviewRoot)
   const rawManifest = JSON.parse(readFileSync(
     path.join(reviewRoot, 'universal-source-manifest.json'),
     'utf8',
@@ -743,6 +748,7 @@ function convertToAnalyzedPackageReviewSource(reviewRoot) {
   )
   rmSync(path.join(reviewRoot, 'source'), { recursive: true, force: true })
   rmSync(path.join(reviewRoot, 'materialization'), { recursive: true, force: true })
+  prebindReviewFixtureReferences(reviewRoot)
 }
 
 export function makeExternalAnalyzedPackage(reviewRoot, packageRoot) {
@@ -1070,6 +1076,7 @@ function makeOnlinePromotionContext(
     const retained = importCanonicalCandidate(loadNck1ReviewSource(fixture.reviewRoot).sourceInput, undefined,
       { materializationAuthorityRef: retainedAuthorityRef })
     assert.deepEqual(retained.issues, [])
+    prebindReviewFixtureReferences(fixture.reviewRoot, { expectedCandidateDigest: retained.candidate.candidateDigest })
     fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, {
       requireAnalyses: true, expectedCandidateDigest: retained.candidate.candidateDigest,
     })

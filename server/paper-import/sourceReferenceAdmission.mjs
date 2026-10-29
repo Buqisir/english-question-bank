@@ -3,7 +3,8 @@ import { sourceReferenceExplanationFigures } from './sourceReferenceFigureExclus
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
   SOURCE_REFERENCE_REGION_TOLERANCE, parseSourceReferencesBytes } from './sourceReferences.mjs'
-import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
+import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION,
+  NCK1_OCR_EVIDENCE_SCHEMA_VERSION, nck1ReferenceOcrSourceDocuments, resolveReferenceSourceDocuments } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
@@ -115,8 +116,50 @@ export function assertSealedSourceReferenceReplay({ sourceReferencesBytes, recei
 }
 
 function assertSourceReferenceContent({
-  sidecar, materialization, sourceDigest, candidateDigest, sourceInput,
+  sidecar, materialization, sourceDigest, candidateDigest, sourceInput: canonicalSourceInput, referenceOcrSourceBytes, referenceSourceManifest,
 }, producerVersion) {
+  let sourceInput = canonicalSourceInput
+  let referenceSourceDocuments
+  if (usesAlternateAnswerScope(producerVersion) && referenceOcrSourceBytes !== undefined) {
+    if (canonicalSourceInput.ocrSourceBytes) reject('Reference OCR cannot override Canonical OCR')
+    const { evidenceBytes, confirmationBytes } = referenceOcrSourceBytes ?? {}
+    if (!(evidenceBytes instanceof Uint8Array) || !evidenceBytes.byteLength
+      || !(confirmationBytes instanceof Uint8Array) || !confirmationBytes.byteLength) {
+      reject('Reference OCR requires complete nonempty retained bytes')
+    }
+    const evidence = JSON.parse(Buffer.from(evidenceBytes).toString('utf8'))
+    const confirmation = JSON.parse(Buffer.from(confirmationBytes).toString('utf8'))
+    if (evidence.schemaVersion !== NCK1_OCR_EVIDENCE_SCHEMA_VERSION
+      || confirmation.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION) {
+      reject('Reference-only OCR requires retained v1 evidence and confirmation')
+    }
+    const inventory = materialization.documents ?? []
+    const supplied = canonicalSourceInput.documents ?? []
+    const documents = inventory.map(document => ({ ...document,
+      bytes: supplied.find(source => source.documentId === document.documentId)?.bytes }))
+    if (supplied.length !== inventory.length || new Set(inventory.map(document => document.documentId)).size !== inventory.length
+      || new Set(supplied.map(document => document.documentId)).size !== supplied.length
+      || documents.some(document => !(document.bytes instanceof Uint8Array)
+        || document.bytes.byteLength !== document.byteLength || sha256(document.bytes) !== document.sha256)) {
+      reject('Reference OCR requires the complete immutable source inventory, including renditions')
+    }
+    referenceSourceDocuments = resolveReferenceSourceDocuments(materialization, supplied, referenceSourceManifest)
+    const resolved = resolveConfirmedNck1OcrEvidence({ paperId: materialization.paperId,
+      documents: nck1ReferenceOcrSourceDocuments(documents, confirmation, referenceSourceDocuments), evidence, confirmation })
+    if (resolved.issues.length) reject(`Invalid reference-only OCR closure: ${resolved.issues[0].message}`)
+    if (sidecar?.wholeDocumentWritingAbsence || sidecar?.alternateAnswerScope
+      || sidecar?.figureExclusions?.length || sourceReferenceCellContinuations(sidecar).length
+      || sourceReferenceFigures(sidecar).length) {
+      reject('Retained v1 reference OCR supports only current text capture')
+    }
+    sourceInput = { ...canonicalSourceInput, ocrSourceBytes: referenceOcrSourceBytes }
+    const baseline = buildSourceReferences(materialization, evidence, confirmation, {
+      producerVersion, sourceInput, sourceDocuments: supplied, sourceDigest, candidateDigest, referenceSourceDocuments,
+    })
+    if (baseline.alternateAnswerScope || digestJson(sidecar?.groups ?? null) !== digestJson(baseline.groups)) {
+      reject('Reference-only v1 groups must exactly replay the current producer')
+    }
+  }
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
   // Scope and full-content replay precede all no-image/absence early returns.
@@ -198,7 +241,7 @@ function assertSourceReferenceContent({
   const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
     .map(document => document.documentId))
   const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
-  const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion })
+  const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion, referenceSourceDocuments })
   assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion)
   // Repeated task headings must not let a sidecar omit one of the preserved
   // samples. Bind each captured source body to its own entry and label.

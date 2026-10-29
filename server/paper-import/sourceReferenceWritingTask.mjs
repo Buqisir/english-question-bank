@@ -15,6 +15,7 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVe
   usesGivenTitleWritingSamples, usesComposedWritingLabels, usesV23WritingCapabilities, usesAlternateAnswerScope } from './sourceReferenceSemantics.mjs'
 import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
 import { resolveAlternateAnswerScope } from './sourceReferenceAlternateAnswerScope.mjs'
+import { nck1ReferenceOcrSourceDocuments } from './nck1OcrSourceEvidence.mjs'
 
 // Bind nested task/letter and capture role lookups to the same source semantics.
 function sourceReferenceLineRoles(producerVersion) {
@@ -265,10 +266,12 @@ function isObjectiveAnswerGrid(rows) {
 
 // Pure source-item preparation, including confirmed tables, figures and furniture.
 export function prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
-  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, referenceSourceDocuments } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
-  const answerDocuments = materialization.documents.filter((document) =>
+  const sourceDocuments = usesAlternateAnswerScope(producerVersion)
+    ? nck1ReferenceOcrSourceDocuments(materialization.documents, confirmation, referenceSourceDocuments) : materialization.documents
+  const answerDocuments = sourceDocuments.filter((document) =>
     SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
   if (answerDocuments.length !== 1) scopeError('Expected exactly one answer-bearing document')
   const [answerDocument] = answerDocuments
@@ -951,7 +954,9 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
 // sealed evidence and therefore uses exactly the producer's visual/furniture view.
 export function sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, options) {
   const states = new Map()
-  const documents = materialization.documents.filter(document => answerIds.has(document.documentId))
+  const sourceDocuments = usesAlternateAnswerScope(options?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    ? nck1ReferenceOcrSourceDocuments(materialization.documents, confirmation, options?.referenceSourceDocuments) : materialization.documents
+  const documents = sourceDocuments.filter(document => answerIds.has(document.documentId))
   const taskTypes = new Set()
   for (const document of documents) {
     const source = prepareSourceReferenceWritingItems({ ...materialization, documents: [document] }, evidence, confirmation, options)

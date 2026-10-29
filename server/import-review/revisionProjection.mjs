@@ -49,6 +49,7 @@ import {
   NCK1_OCR_EVIDENCE_FILE_NAME,
   NCK1_OCR_REVIEW_CODES,
   loadNck1OcrSourceEmphasis,
+  loadReferenceOcrSourceBytes,
   nck1OcrSourceSetDigest,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
@@ -727,7 +728,11 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
     ...(loaded.sourceInput.listeningInstructionCorrectionBytes ? [{
       path: LISTENING_INSTRUCTION_CORRECTION_FILE, mediaType: 'application/json', role: 'listening_instruction_correction',
     }] : []),
-    ...(loaded.sourceInput.ocrSourceBytes
+    ...(loaded.sourceInput.ocrSourceBytes || loadReferenceOcrSourceBytes(rootDir, {
+      producerVersion: existsSync(resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE))
+        ? parseSourceReferencesBytes(readFileSync(resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE))).producerVersion : undefined,
+      canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
+    })
       ? [NCK1_OCR_EVIDENCE_FILE_NAME, NCK1_OCR_CONFIRMATION_FILE_NAME].map(fileName => ({
           path: `materialization/${fileName}`, mediaType: 'application/json', role: 'ocr_source_evidence',
         }))
@@ -1850,6 +1855,11 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     sourceDigest: preview.candidate.source.sha256,
     candidateDigest: preview.candidate.candidateDigest,
     sourceInput: loaded.sourceInput,
+    referenceSourceManifest: loaded.manifest,
+    referenceOcrSourceBytes: loadReferenceOcrSourceBytes(rootDir, {
+      producerVersion: sourceReferences ? sourceReferences.producerVersion : 'ocr-source-references-producer-v26',
+      canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
+    }),
   }
   if (referenceReceipt) assertSealedSourceReferenceReplay({ ...referenceBinding,
     sourceReferencesBytes, receipt: referenceReceipt })

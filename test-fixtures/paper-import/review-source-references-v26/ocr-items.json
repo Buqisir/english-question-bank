@@ -1,0 +1,5140 @@
+{
+  "documents": [
+    {
+      "documentId": "paper",
+      "pages": [
+        {
+          "page": 1,
+          "observations": [
+            {
+              "observationId": "paper:p1:o1",
+              "regionId": "paper:p1:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.1042404913772738,
+                "height": 0.02316226110438329
+              },
+              "text": "reading.a",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o2",
+              "regionId": "paper:p1:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12500984329474762,
+                "height": 0.009799418159546778
+              },
+              "text": "reading.a source text",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o3",
+              "regionId": "paper:p1:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.20922907315536657,
+                "height": 0.009799418159546778
+              },
+              "text": "reading.a second source paragraph",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o4",
+              "regionId": "paper:p1:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "21. Question 21?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o5",
+              "regionId": "paper:p1:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o6",
+              "regionId": "paper:p1:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "22. Question 22?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o7",
+              "regionId": "paper:p1:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o8",
+              "regionId": "paper:p1:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "23. Question 23?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p1:o9",
+              "regionId": "paper:p1:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p1:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.1042404913772738,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p1:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12500984329474762,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p1:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.20922907315536657,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p1:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p1:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p1:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p1:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p1:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p1:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p1:o1",
+              "after": "paper:p1:o2"
+            },
+            {
+              "before": "paper:p1:o2",
+              "after": "paper:p1:o3"
+            },
+            {
+              "before": "paper:p1:o3",
+              "after": "paper:p1:o4"
+            },
+            {
+              "before": "paper:p1:o4",
+              "after": "paper:p1:o5"
+            },
+            {
+              "before": "paper:p1:o5",
+              "after": "paper:p1:o6"
+            },
+            {
+              "before": "paper:p1:o6",
+              "after": "paper:p1:o7"
+            },
+            {
+              "before": "paper:p1:o7",
+              "after": "paper:p1:o8"
+            },
+            {
+              "before": "paper:p1:o8",
+              "after": "paper:p1:o9"
+            }
+          ]
+        },
+        {
+          "page": 2,
+          "observations": [
+            {
+              "observationId": "paper:p2:o1",
+              "regionId": "paper:p2:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10656350893771163,
+                "height": 0.02316226110438329
+              },
+              "text": "reading.b",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o2",
+              "regionId": "paper:p2:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12585636664304276,
+                "height": 0.009799418159546778
+              },
+              "text": "reading.b source text",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o3",
+              "regionId": "paper:p2:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "24. Question 24?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o4",
+              "regionId": "paper:p2:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o5",
+              "regionId": "paper:p2:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "25. Question 25?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o6",
+              "regionId": "paper:p2:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o7",
+              "regionId": "paper:p2:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "26. Question 26?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o8",
+              "regionId": "paper:p2:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o9",
+              "regionId": "paper:p2:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "27. Question 27?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p2:o10",
+              "regionId": "paper:p2:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p2:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10656350893771163,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p2:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12585636664304276,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p2:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p2:o1",
+              "after": "paper:p2:o2"
+            },
+            {
+              "before": "paper:p2:o2",
+              "after": "paper:p2:o3"
+            },
+            {
+              "before": "paper:p2:o3",
+              "after": "paper:p2:o4"
+            },
+            {
+              "before": "paper:p2:o4",
+              "after": "paper:p2:o5"
+            },
+            {
+              "before": "paper:p2:o5",
+              "after": "paper:p2:o6"
+            },
+            {
+              "before": "paper:p2:o6",
+              "after": "paper:p2:o7"
+            },
+            {
+              "before": "paper:p2:o7",
+              "after": "paper:p2:o8"
+            },
+            {
+              "before": "paper:p2:o8",
+              "after": "paper:p2:o9"
+            },
+            {
+              "before": "paper:p2:o9",
+              "after": "paper:p2:o10"
+            }
+          ]
+        },
+        {
+          "page": 3,
+          "observations": [
+            {
+              "observationId": "paper:p3:o1",
+              "regionId": "paper:p3:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10357114733443579,
+                "height": 0.02316226110438329
+              },
+              "text": "reading.c",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o2",
+              "regionId": "paper:p3:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12500984329474762,
+                "height": 0.009799418159546778
+              },
+              "text": "reading.c source text",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o3",
+              "regionId": "paper:p3:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "28. Question 28?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o4",
+              "regionId": "paper:p3:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o5",
+              "regionId": "paper:p3:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "29. Question 29?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o6",
+              "regionId": "paper:p3:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o7",
+              "regionId": "paper:p3:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "30. Question 30?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o8",
+              "regionId": "paper:p3:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o9",
+              "regionId": "paper:p3:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "31. Question 31?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p3:o10",
+              "regionId": "paper:p3:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p3:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10357114733443579,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p3:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12500984329474762,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p3:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p3:o1",
+              "after": "paper:p3:o2"
+            },
+            {
+              "before": "paper:p3:o2",
+              "after": "paper:p3:o3"
+            },
+            {
+              "before": "paper:p3:o3",
+              "after": "paper:p3:o4"
+            },
+            {
+              "before": "paper:p3:o4",
+              "after": "paper:p3:o5"
+            },
+            {
+              "before": "paper:p3:o5",
+              "after": "paper:p3:o6"
+            },
+            {
+              "before": "paper:p3:o6",
+              "after": "paper:p3:o7"
+            },
+            {
+              "before": "paper:p3:o7",
+              "after": "paper:p3:o8"
+            },
+            {
+              "before": "paper:p3:o8",
+              "after": "paper:p3:o9"
+            },
+            {
+              "before": "paper:p3:o9",
+              "after": "paper:p3:o10"
+            }
+          ]
+        },
+        {
+          "page": 4,
+          "observations": [
+            {
+              "observationId": "paper:p4:o1",
+              "regionId": "paper:p4:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10561855264194031,
+                "height": 0.02316226110438329
+              },
+              "text": "reading.d",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o2",
+              "regionId": "paper:p4:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12585636664304276,
+                "height": 0.009799418159546778
+              },
+              "text": "reading.d source text",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o3",
+              "regionId": "paper:p4:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "32. Question 32?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o4",
+              "regionId": "paper:p4:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o5",
+              "regionId": "paper:p4:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "33. Question 33?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o6",
+              "regionId": "paper:p4:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o7",
+              "regionId": "paper:p4:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "34. Question 34?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o8",
+              "regionId": "paper:p4:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o9",
+              "regionId": "paper:p4:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              },
+              "text": "35. Question 35?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p4:o10",
+              "regionId": "paper:p4:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p4:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10561855264194031,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p4:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.12585636664304276,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.10266556421765494,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p4:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p4:o1",
+              "after": "paper:p4:o2"
+            },
+            {
+              "before": "paper:p4:o2",
+              "after": "paper:p4:o3"
+            },
+            {
+              "before": "paper:p4:o3",
+              "after": "paper:p4:o4"
+            },
+            {
+              "before": "paper:p4:o4",
+              "after": "paper:p4:o5"
+            },
+            {
+              "before": "paper:p4:o5",
+              "after": "paper:p4:o6"
+            },
+            {
+              "before": "paper:p4:o6",
+              "after": "paper:p4:o7"
+            },
+            {
+              "before": "paper:p4:o7",
+              "after": "paper:p4:o8"
+            },
+            {
+              "before": "paper:p4:o8",
+              "after": "paper:p4:o9"
+            },
+            {
+              "before": "paper:p4:o9",
+              "after": "paper:p4:o10"
+            }
+          ]
+        },
+        {
+          "page": 5,
+          "observations": [
+            {
+              "observationId": "paper:p5:o1",
+              "regionId": "paper:p5:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.15385069690526812,
+                "height": 0.02316226110438329
+              },
+              "text": "seven-choices",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o2",
+              "regionId": "paper:p5:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.17471848177021812,
+                "height": 0.009799418159546778
+              },
+              "text": "A source-bound passage title",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o3",
+              "regionId": "paper:p5:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.8016182376565084,
+                "height": 0.009799418159546778
+              },
+              "text": "seven-choices source text ____36____ after 36 ____37____ after 37 ____38____ after 38 ____39____ after 39 ____40____ after 40",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o4",
+              "regionId": "paper:p5:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "36. 36",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o5",
+              "regionId": "paper:p5:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "37. 37",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o6",
+              "regionId": "paper:p5:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "38. 38",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o7",
+              "regionId": "paper:p5:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "39. 39",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o8",
+              "regionId": "paper:p5:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "40. 40",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o9",
+              "regionId": "paper:p5:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.07181667847862036,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o10",
+              "regionId": "paper:p5:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.07016300496102056,
+                "height": 0.009799418159546778
+              },
+              "text": "B. B option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o11",
+              "regionId": "paper:p5:r11",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.33593630378196293,
+                "width": 0.07016300496102056,
+                "height": 0.009799418159546778
+              },
+              "text": "C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o12",
+              "regionId": "paper:p5:r12",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.36206344566473186,
+                "width": 0.07181667847862036,
+                "height": 0.009799418159546778
+              },
+              "text": "D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o13",
+              "regionId": "paper:p5:r13",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.38819058754750074,
+                "width": 0.06846995826443027,
+                "height": 0.009799418159546778
+              },
+              "text": "E. E option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o14",
+              "regionId": "paper:p5:r14",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4143177294302696,
+                "width": 0.06589101504055438,
+                "height": 0.009799418159546778
+              },
+              "text": "F. F option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p5:o15",
+              "regionId": "paper:p5:r15",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4404448713130385,
+                "width": 0.07181667847862036,
+                "height": 0.009799418159546778
+              },
+              "text": "G. G option",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p5:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.15385069690526812,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p5:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.17471848177021812,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.8016182376565084,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2836820200164252,
+                "width": 0.07181667847862036,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30980916189919405,
+                "width": 0.07016300496102056,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r11",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.33593630378196293,
+                "width": 0.07016300496102056,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r12",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.36206344566473186,
+                "width": 0.07181667847862036,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r13",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.38819058754750074,
+                "width": 0.06846995826443027,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r14",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4143177294302696,
+                "width": 0.06589101504055438,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p5:r15",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4404448713130385,
+                "width": 0.07181667847862036,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p5:o1",
+              "after": "paper:p5:o2"
+            },
+            {
+              "before": "paper:p5:o2",
+              "after": "paper:p5:o3"
+            },
+            {
+              "before": "paper:p5:o3",
+              "after": "paper:p5:o4"
+            },
+            {
+              "before": "paper:p5:o4",
+              "after": "paper:p5:o5"
+            },
+            {
+              "before": "paper:p5:o5",
+              "after": "paper:p5:o6"
+            },
+            {
+              "before": "paper:p5:o6",
+              "after": "paper:p5:o7"
+            },
+            {
+              "before": "paper:p5:o7",
+              "after": "paper:p5:o8"
+            },
+            {
+              "before": "paper:p5:o8",
+              "after": "paper:p5:o9"
+            },
+            {
+              "before": "paper:p5:o9",
+              "after": "paper:p5:o10"
+            },
+            {
+              "before": "paper:p5:o10",
+              "after": "paper:p5:o11"
+            },
+            {
+              "before": "paper:p5:o11",
+              "after": "paper:p5:o12"
+            },
+            {
+              "before": "paper:p5:o12",
+              "after": "paper:p5:o13"
+            },
+            {
+              "before": "paper:p5:o13",
+              "after": "paper:p5:o14"
+            },
+            {
+              "before": "paper:p5:o14",
+              "after": "paper:p5:o15"
+            }
+          ]
+        },
+        {
+          "page": 6,
+          "observations": [
+            {
+              "observationId": "paper:p6:o1",
+              "regionId": "paper:p6:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.05677612410426018,
+                "height": 0.02316226110438329
+              },
+              "text": "cloze",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o2",
+              "regionId": "paper:p6:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.7747460429955114,
+                "height": 0.04187024122715441
+              },
+              "text": "cloze source text ____41____ after 41 ____42____ after 42 ____43____ after 43 ____44____ after 44 ____45____ after 45 ____46____ after 46 ____47____ after 47 ____48____ after 48 ____49____ after 49 ____50____ after 50 ____51____ after 51 ____52____ after 52 ____53____ after 53 ____54____ after 54 ____55____ after 55",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o3",
+              "regionId": "paper:p6:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.15898999178741943,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "41. 41",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o4",
+              "regionId": "paper:p6:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18511713367018834,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o5",
+              "regionId": "paper:p6:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.21124427555295722,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "42. 42",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o6",
+              "regionId": "paper:p6:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.23737141743572612,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o7",
+              "regionId": "paper:p6:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.26349855931849503,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "43. 43",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o8",
+              "regionId": "paper:p6:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2896257012012639,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o9",
+              "regionId": "paper:p6:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3157528430840328,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "44. 44",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o10",
+              "regionId": "paper:p6:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.34187998496680166,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o11",
+              "regionId": "paper:p6:r11",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3680071268495706,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "45. 45",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o12",
+              "regionId": "paper:p6:r12",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3941342687323395,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o13",
+              "regionId": "paper:p6:r13",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.42026141061510836,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "46. 46",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o14",
+              "regionId": "paper:p6:r14",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.44638855249787723,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o15",
+              "regionId": "paper:p6:r15",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.47251569438064617,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "47. 47",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o16",
+              "regionId": "paper:p6:r16",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.49864283626341505,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o17",
+              "regionId": "paper:p6:r17",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.524769978146184,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "48. 48",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o18",
+              "regionId": "paper:p6:r18",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5508971200289529,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o19",
+              "regionId": "paper:p6:r19",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5770242619117217,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "49. 49",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o20",
+              "regionId": "paper:p6:r20",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6031514037944906,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o21",
+              "regionId": "paper:p6:r21",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6292785456772595,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "50. 50",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o22",
+              "regionId": "paper:p6:r22",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6554056875600284,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o23",
+              "regionId": "paper:p6:r23",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6815328294427972,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "51. 51",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o24",
+              "regionId": "paper:p6:r24",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7076599713255661,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o25",
+              "regionId": "paper:p6:r25",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7337871132083351,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "52. 52",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o26",
+              "regionId": "paper:p6:r26",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.759914255091104,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o27",
+              "regionId": "paper:p6:r27",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7860413969738729,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "53. 53",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o28",
+              "regionId": "paper:p6:r28",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8121685388566418,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o29",
+              "regionId": "paper:p6:r29",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8382956807394106,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "54. 54",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o30",
+              "regionId": "paper:p6:r30",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8644228226221795,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o31",
+              "regionId": "paper:p6:r31",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8905499645049484,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "55. 55",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p6:o32",
+              "regionId": "paper:p6:r32",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.9166771063877173,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              },
+              "text": "A. A option   B. B option   C. C option   D. D option",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p6:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.05677612410426018,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p6:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.7747460429955114,
+                "height": 0.04187024122715441
+              }
+            },
+            {
+              "regionId": "paper:p6:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.15898999178741943,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18511713367018834,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.21124427555295722,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.23737141743572612,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.26349855931849503,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2896257012012639,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3157528430840328,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.34187998496680166,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r11",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3680071268495706,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r12",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3941342687323395,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r13",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.42026141061510836,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r14",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.44638855249787723,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r15",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.47251569438064617,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r16",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.49864283626341505,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r17",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.524769978146184,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r18",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5508971200289529,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r19",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5770242619117217,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r20",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6031514037944906,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r21",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6292785456772595,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r22",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6554056875600284,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r23",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6815328294427972,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r24",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7076599713255661,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r25",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7337871132083351,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r26",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.759914255091104,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r27",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7860413969738729,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r28",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8121685388566418,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r29",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8382956807394106,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r30",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8644228226221795,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r31",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8905499645049484,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p6:r32",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.9166771063877173,
+                "width": 0.29529884242853766,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p6:o1",
+              "after": "paper:p6:o2"
+            },
+            {
+              "before": "paper:p6:o2",
+              "after": "paper:p6:o3"
+            },
+            {
+              "before": "paper:p6:o3",
+              "after": "paper:p6:o4"
+            },
+            {
+              "before": "paper:p6:o4",
+              "after": "paper:p6:o5"
+            },
+            {
+              "before": "paper:p6:o5",
+              "after": "paper:p6:o6"
+            },
+            {
+              "before": "paper:p6:o6",
+              "after": "paper:p6:o7"
+            },
+            {
+              "before": "paper:p6:o7",
+              "after": "paper:p6:o8"
+            },
+            {
+              "before": "paper:p6:o8",
+              "after": "paper:p6:o9"
+            },
+            {
+              "before": "paper:p6:o9",
+              "after": "paper:p6:o10"
+            },
+            {
+              "before": "paper:p6:o10",
+              "after": "paper:p6:o11"
+            },
+            {
+              "before": "paper:p6:o11",
+              "after": "paper:p6:o12"
+            },
+            {
+              "before": "paper:p6:o12",
+              "after": "paper:p6:o13"
+            },
+            {
+              "before": "paper:p6:o13",
+              "after": "paper:p6:o14"
+            },
+            {
+              "before": "paper:p6:o14",
+              "after": "paper:p6:o15"
+            },
+            {
+              "before": "paper:p6:o15",
+              "after": "paper:p6:o16"
+            },
+            {
+              "before": "paper:p6:o16",
+              "after": "paper:p6:o17"
+            },
+            {
+              "before": "paper:p6:o17",
+              "after": "paper:p6:o18"
+            },
+            {
+              "before": "paper:p6:o18",
+              "after": "paper:p6:o19"
+            },
+            {
+              "before": "paper:p6:o19",
+              "after": "paper:p6:o20"
+            },
+            {
+              "before": "paper:p6:o20",
+              "after": "paper:p6:o21"
+            },
+            {
+              "before": "paper:p6:o21",
+              "after": "paper:p6:o22"
+            },
+            {
+              "before": "paper:p6:o22",
+              "after": "paper:p6:o23"
+            },
+            {
+              "before": "paper:p6:o23",
+              "after": "paper:p6:o24"
+            },
+            {
+              "before": "paper:p6:o24",
+              "after": "paper:p6:o25"
+            },
+            {
+              "before": "paper:p6:o25",
+              "after": "paper:p6:o26"
+            },
+            {
+              "before": "paper:p6:o26",
+              "after": "paper:p6:o27"
+            },
+            {
+              "before": "paper:p6:o27",
+              "after": "paper:p6:o28"
+            },
+            {
+              "before": "paper:p6:o28",
+              "after": "paper:p6:o29"
+            },
+            {
+              "before": "paper:p6:o29",
+              "after": "paper:p6:o30"
+            },
+            {
+              "before": "paper:p6:o30",
+              "after": "paper:p6:o31"
+            },
+            {
+              "before": "paper:p6:o31",
+              "after": "paper:p6:o32"
+            }
+          ]
+        },
+        {
+          "page": 7,
+          "observations": [
+            {
+              "observationId": "paper:p7:o1",
+              "regionId": "paper:p7:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.14018820379557445,
+                "height": 0.02316226110438329
+              },
+              "text": "grammar-fill",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o2",
+              "regionId": "paper:p7:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.8012835656350894,
+                "height": 0.025834829693350592
+              },
+              "text": "grammar-fill source text ____56____ (word) after ____57____ after 57 ____58____ (word) after ____59____ after 59 ____60____ (word) after ____61____ after 61 ____62____ (word) after ____63____ after 63 ____64____ (word) after ____65____ after 65",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o3",
+              "regionId": "paper:p7:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.14295458025361563,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "56. 56",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o4",
+              "regionId": "paper:p7:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1690817221363845,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "57. 57",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o5",
+              "regionId": "paper:p7:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1952088640191534,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "58. 58",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o6",
+              "regionId": "paper:p7:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2213360059019223,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "59. 59",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o7",
+              "regionId": "paper:p7:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2474631477846912,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "60. 60",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o8",
+              "regionId": "paper:p7:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2735902896674601,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "61. 61",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o9",
+              "regionId": "paper:p7:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.29971743155022895,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "62. 62",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o10",
+              "regionId": "paper:p7:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3258445734329979,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "63. 63",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o11",
+              "regionId": "paper:p7:r11",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.35197171531576676,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "64. 64",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p7:o12",
+              "regionId": "paper:p7:r12",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.37809885719853564,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              },
+              "text": "65. 65",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p7:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.14018820379557445,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p7:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.8012835656350894,
+                "height": 0.025834829693350592
+              }
+            },
+            {
+              "regionId": "paper:p7:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.14295458025361563,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1690817221363845,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1952088640191534,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2213360059019223,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2474631477846912,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2735902896674601,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.29971743155022895,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3258445734329979,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r11",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.35197171531576676,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p7:r12",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.37809885719853564,
+                "width": 0.03779825183085282,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p7:o1",
+              "after": "paper:p7:o2"
+            },
+            {
+              "before": "paper:p7:o2",
+              "after": "paper:p7:o3"
+            },
+            {
+              "before": "paper:p7:o3",
+              "after": "paper:p7:o4"
+            },
+            {
+              "before": "paper:p7:o4",
+              "after": "paper:p7:o5"
+            },
+            {
+              "before": "paper:p7:o5",
+              "after": "paper:p7:o6"
+            },
+            {
+              "before": "paper:p7:o6",
+              "after": "paper:p7:o7"
+            },
+            {
+              "before": "paper:p7:o7",
+              "after": "paper:p7:o8"
+            },
+            {
+              "before": "paper:p7:o8",
+              "after": "paper:p7:o9"
+            },
+            {
+              "before": "paper:p7:o9",
+              "after": "paper:p7:o10"
+            },
+            {
+              "before": "paper:p7:o10",
+              "after": "paper:p7:o11"
+            },
+            {
+              "before": "paper:p7:o11",
+              "after": "paper:p7:o12"
+            }
+          ]
+        },
+        {
+          "page": 8,
+          "observations": [
+            {
+              "observationId": "paper:p8:o1",
+              "regionId": "paper:p8:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.21273328608551856,
+                "height": 0.02316226110438329
+              },
+              "text": "writing.application",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p8:o2",
+              "regionId": "paper:p8:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.41095755571304826,
+                "height": 0.009799418159546778
+              },
+              "text": "application-writing prompt Write about the topic in about 80 words.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p8:o3",
+              "regionId": "paper:p8:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.04535790219702339,
+                "height": 0.009799418159546778
+              },
+              "text": "注意：",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p8:o4",
+              "regionId": "paper:p8:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.1494409008583353,
+                "height": 0.009799418159546778
+              },
+              "text": "1. Write about 80 words.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p8:o5",
+              "regionId": "paper:p8:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.16991495393338057,
+                "height": 0.009799418159546778
+              },
+              "text": "2. Use the following format.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p8:o6",
+              "regionId": "paper:p8:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.07000551224505866,
+                "height": 0.009799418159546778
+              },
+              "text": "Dear Chris,",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p8:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.21273328608551856,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p8:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.41095755571304826,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p8:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.04535790219702339,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p8:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.1494409008583353,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p8:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.16991495393338057,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p8:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.07000551224505866,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p8:o1",
+              "after": "paper:p8:o2"
+            },
+            {
+              "before": "paper:p8:o2",
+              "after": "paper:p8:o3"
+            },
+            {
+              "before": "paper:p8:o3",
+              "after": "paper:p8:o4"
+            },
+            {
+              "before": "paper:p8:o4",
+              "after": "paper:p8:o5"
+            },
+            {
+              "before": "paper:p8:o5",
+              "after": "paper:p8:o6"
+            }
+          ]
+        },
+        {
+          "page": 9,
+          "observations": [
+            {
+              "observationId": "paper:p9:o1",
+              "regionId": "paper:p9:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.23056933616820222,
+                "height": 0.02316226110438329
+              },
+              "text": "writing.continuation",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p9:o2",
+              "regionId": "paper:p9:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.1720804787778565,
+                "height": 0.009799418159546778
+              },
+              "text": "continuation-writing prompt",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p9:o3",
+              "regionId": "paper:p9:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.08640444129459013,
+                "height": 0.009799418159546778
+              },
+              "text": "Story material",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p9:o4",
+              "regionId": "paper:p9:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.04535790219702339,
+                "height": 0.009799418159546778
+              },
+              "text": "注意：",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p9:o5",
+              "regionId": "paper:p9:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.16670603984565713,
+                "height": 0.009799418159546778
+              },
+              "text": "(1) Write about 150 words.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p9:o6",
+              "regionId": "paper:p9:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.3495944562563981,
+                "height": 0.009799418159546778
+              },
+              "text": "(2) Write in the answer sheet following the given starters.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p9:o7",
+              "regionId": "paper:p9:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.13150641782817546,
+                "height": 0.009799418159546778
+              },
+              "text": "Paragraph one starter.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p9:o8",
+              "regionId": "paper:p9:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.13182140326009922,
+                "height": 0.009799418159546778
+              },
+              "text": "Paragraph two starter.",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p9:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.23056933616820222,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p9:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.1720804787778565,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p9:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12691916871981182,
+                "width": 0.08640444129459013,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p9:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1530463106025807,
+                "width": 0.04535790219702339,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p9:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.1791734524853496,
+                "width": 0.16670603984565713,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p9:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.20530059436811848,
+                "width": 0.3495944562563981,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p9:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2314277362508874,
+                "width": 0.13150641782817546,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "paper:p9:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2575548781336563,
+                "width": 0.13182140326009922,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p9:o1",
+              "after": "paper:p9:o2"
+            },
+            {
+              "before": "paper:p9:o2",
+              "after": "paper:p9:o3"
+            },
+            {
+              "before": "paper:p9:o3",
+              "after": "paper:p9:o4"
+            },
+            {
+              "before": "paper:p9:o4",
+              "after": "paper:p9:o5"
+            },
+            {
+              "before": "paper:p9:o5",
+              "after": "paper:p9:o6"
+            },
+            {
+              "before": "paper:p9:o6",
+              "after": "paper:p9:o7"
+            },
+            {
+              "before": "paper:p9:o7",
+              "after": "paper:p9:o8"
+            }
+          ]
+        },
+        {
+          "page": 10,
+          "observations": [
+            {
+              "observationId": "paper:p10:o1",
+              "regionId": "paper:p10:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10351208756595008,
+                "height": 0.02316226110438329
+              },
+              "text": "Listening",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o2",
+              "regionId": "paper:p10:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "1. Listening 1?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o3",
+              "regionId": "paper:p10:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12221433443298395,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o4",
+              "regionId": "paper:p10:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.14363664202892498,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "2. Listening 2?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o5",
+              "regionId": "paper:p10:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.16505894962486603,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o6",
+              "regionId": "paper:p10:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18648125722080705,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "3. Listening 3?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o7",
+              "regionId": "paper:p10:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2079035648167481,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o8",
+              "regionId": "paper:p10:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.22932587241268915,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "4. Listening 4?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o9",
+              "regionId": "paper:p10:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2507481800086302,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o10",
+              "regionId": "paper:p10:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2721704876045712,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "5. Listening 5?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o11",
+              "regionId": "paper:p10:r11",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.29359279520051224,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o12",
+              "regionId": "paper:p10:r12",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3150151027964533,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "6. Listening 6?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o13",
+              "regionId": "paper:p10:r13",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.33643741039239433,
+                "width": 0.5977832900228365,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. Ask the librarian for information about the new community reading programme.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o14",
+              "regionId": "paper:p10:r14",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3578597179883353,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "7. Listening 7?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o15",
+              "regionId": "paper:p10:r15",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.37928202558427637,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o16",
+              "regionId": "paper:p10:r16",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4007043331802174,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "8. Listening 8?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o17",
+              "regionId": "paper:p10:r17",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.42212664077615847,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o18",
+              "regionId": "paper:p10:r18",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4435489483720995,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              },
+              "text": "9. Listening 9?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o19",
+              "regionId": "paper:p10:r19",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4649712559680405,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o20",
+              "regionId": "paper:p10:r20",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.48639356356398156,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "10. Listening 10?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o21",
+              "regionId": "paper:p10:r21",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5078158711599227,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o22",
+              "regionId": "paper:p10:r22",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5292381787558637,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "11. Listening 11?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o23",
+              "regionId": "paper:p10:r23",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5506604863518046,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o24",
+              "regionId": "paper:p10:r24",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5720827939477457,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "12. Listening 12?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o25",
+              "regionId": "paper:p10:r25",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5935051015436867,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o26",
+              "regionId": "paper:p10:r26",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6149274091396277,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "13. Listening 13?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o27",
+              "regionId": "paper:p10:r27",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6363497167355688,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o28",
+              "regionId": "paper:p10:r28",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6577720243315098,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "14. Listening 14?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o29",
+              "regionId": "paper:p10:r29",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6791943319274509,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o30",
+              "regionId": "paper:p10:r30",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7006166395233919,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "15. Listening 15?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o31",
+              "regionId": "paper:p10:r31",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7220389471193329,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o32",
+              "regionId": "paper:p10:r32",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.743461254715274,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "16. Listening 16?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o33",
+              "regionId": "paper:p10:r33",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.764883562311215,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o34",
+              "regionId": "paper:p10:r34",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7863058699071561,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "17. Listening 17?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o35",
+              "regionId": "paper:p10:r35",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8077281775030971,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o36",
+              "regionId": "paper:p10:r36",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8291504850990381,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "18. Listening 18?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o37",
+              "regionId": "paper:p10:r37",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8505727926949792,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o38",
+              "regionId": "paper:p10:r38",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8719951002909202,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "19. Listening 19?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o39",
+              "regionId": "paper:p10:r39",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8934174078868613,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o40",
+              "regionId": "paper:p10:r40",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.9148397154828023,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              },
+              "text": "20. Listening 20?",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "paper:p10:o41",
+              "regionId": "paper:p10:r41",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.9362620230787433,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              },
+              "text": "A. A option   B. B option   C. C option",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "paper:p10:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.10351208756595008,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "paper:p10:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.12221433443298395,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.14363664202892498,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.16505894962486603,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18648125722080705,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2079035648167481,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.22932587241268915,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2507481800086302,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2721704876045712,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r11",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.29359279520051224,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r12",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3150151027964533,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r13",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.33643741039239433,
+                "width": 0.5977832900228365,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r14",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3578597179883353,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r15",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.37928202558427637,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r16",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4007043331802174,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r17",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.42212664077615847,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r18",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4435489483720995,
+                "width": 0.08256555634301914,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r19",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4649712559680405,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r20",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.48639356356398156,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r21",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5078158711599227,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r22",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5292381787558637,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r23",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5506604863518046,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r24",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5720827939477457,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r25",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5935051015436867,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r26",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6149274091396277,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r27",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6363497167355688,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r28",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6577720243315098,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r29",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6791943319274509,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r30",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7006166395233919,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r31",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7220389471193329,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r32",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.743461254715274,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r33",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.764883562311215,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r34",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.7863058699071561,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r35",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8077281775030971,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r36",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8291504850990381,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r37",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8505727926949792,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r38",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8719951002909202,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r39",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8934174078868613,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r40",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.9148397154828023,
+                "width": 0.09642491534766517,
+                "height": 0.008908561963224343
+              }
+            },
+            {
+              "regionId": "paper:p10:r41",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.9362620230787433,
+                "width": 0.2013938105362627,
+                "height": 0.008908561963224343
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "paper:p10:o1",
+              "after": "paper:p10:o2"
+            },
+            {
+              "before": "paper:p10:o2",
+              "after": "paper:p10:o3"
+            },
+            {
+              "before": "paper:p10:o3",
+              "after": "paper:p10:o4"
+            },
+            {
+              "before": "paper:p10:o4",
+              "after": "paper:p10:o5"
+            },
+            {
+              "before": "paper:p10:o5",
+              "after": "paper:p10:o6"
+            },
+            {
+              "before": "paper:p10:o6",
+              "after": "paper:p10:o7"
+            },
+            {
+              "before": "paper:p10:o7",
+              "after": "paper:p10:o8"
+            },
+            {
+              "before": "paper:p10:o8",
+              "after": "paper:p10:o9"
+            },
+            {
+              "before": "paper:p10:o9",
+              "after": "paper:p10:o10"
+            },
+            {
+              "before": "paper:p10:o10",
+              "after": "paper:p10:o11"
+            },
+            {
+              "before": "paper:p10:o11",
+              "after": "paper:p10:o12"
+            },
+            {
+              "before": "paper:p10:o12",
+              "after": "paper:p10:o13"
+            },
+            {
+              "before": "paper:p10:o13",
+              "after": "paper:p10:o14"
+            },
+            {
+              "before": "paper:p10:o14",
+              "after": "paper:p10:o15"
+            },
+            {
+              "before": "paper:p10:o15",
+              "after": "paper:p10:o16"
+            },
+            {
+              "before": "paper:p10:o16",
+              "after": "paper:p10:o17"
+            },
+            {
+              "before": "paper:p10:o17",
+              "after": "paper:p10:o18"
+            },
+            {
+              "before": "paper:p10:o18",
+              "after": "paper:p10:o19"
+            },
+            {
+              "before": "paper:p10:o19",
+              "after": "paper:p10:o20"
+            },
+            {
+              "before": "paper:p10:o20",
+              "after": "paper:p10:o21"
+            },
+            {
+              "before": "paper:p10:o21",
+              "after": "paper:p10:o22"
+            },
+            {
+              "before": "paper:p10:o22",
+              "after": "paper:p10:o23"
+            },
+            {
+              "before": "paper:p10:o23",
+              "after": "paper:p10:o24"
+            },
+            {
+              "before": "paper:p10:o24",
+              "after": "paper:p10:o25"
+            },
+            {
+              "before": "paper:p10:o25",
+              "after": "paper:p10:o26"
+            },
+            {
+              "before": "paper:p10:o26",
+              "after": "paper:p10:o27"
+            },
+            {
+              "before": "paper:p10:o27",
+              "after": "paper:p10:o28"
+            },
+            {
+              "before": "paper:p10:o28",
+              "after": "paper:p10:o29"
+            },
+            {
+              "before": "paper:p10:o29",
+              "after": "paper:p10:o30"
+            },
+            {
+              "before": "paper:p10:o30",
+              "after": "paper:p10:o31"
+            },
+            {
+              "before": "paper:p10:o31",
+              "after": "paper:p10:o32"
+            },
+            {
+              "before": "paper:p10:o32",
+              "after": "paper:p10:o33"
+            },
+            {
+              "before": "paper:p10:o33",
+              "after": "paper:p10:o34"
+            },
+            {
+              "before": "paper:p10:o34",
+              "after": "paper:p10:o35"
+            },
+            {
+              "before": "paper:p10:o35",
+              "after": "paper:p10:o36"
+            },
+            {
+              "before": "paper:p10:o36",
+              "after": "paper:p10:o37"
+            },
+            {
+              "before": "paper:p10:o37",
+              "after": "paper:p10:o38"
+            },
+            {
+              "before": "paper:p10:o38",
+              "after": "paper:p10:o39"
+            },
+            {
+              "before": "paper:p10:o39",
+              "after": "paper:p10:o40"
+            },
+            {
+              "before": "paper:p10:o40",
+              "after": "paper:p10:o41"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "documentId": "answers",
+      "pages": [
+        {
+          "page": 1,
+          "observations": [
+            {
+              "observationId": "answers:p1:o1",
+              "regionId": "answers:p1:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.09071580439404678,
+                "height": 0.02316226110438329
+              },
+              "text": "参考答案",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o2",
+              "regionId": "answers:p1:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.8262264745255532,
+                "height": 0.04187024122715441
+              },
+              "text": "21. A  22. A  23. A  24. A  25. A  26. A  27. A  28. A  29. A  30. A  31. A  32. A  33. A  34. A  35. A  36. A  37. A  38. A  39. A  40. A  41. A  42. A  43. A  44. A  45. A  46. A  47. A  48. A  49. A  50. A  51. A  52. A  53. A  54. A  55. A  56. answer  57. answer  58. answer  59. answer  60. answer  61. answer  62. answer  63. answer  64. answer  65. answer",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o3",
+              "regionId": "answers:p1:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.15898999178741943,
+                "width": 0.12810063784549963,
+                "height": 0.009799418159546778
+              },
+              "text": "听力答案：1—20 A",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o4",
+              "regionId": "answers:p1:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18511713367018834,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 1",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o5",
+              "regionId": "answers:p1:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2085717069639899,
+                "width": 0.5394716119379479,
+                "height": 0.008017705766901908
+              },
+              "text": "Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o6",
+              "regionId": "answers:p1:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2320262802577915,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 2",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o7",
+              "regionId": "answers:p1:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2554808535515931,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              },
+              "text": "Short listening transcript 2.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o8",
+              "regionId": "answers:p1:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2789354268453947,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 3",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o9",
+              "regionId": "answers:p1:r9",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30239000013919626,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              },
+              "text": "Short listening transcript 3.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o10",
+              "regionId": "answers:p1:r10",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3258445734329979,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 4",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o11",
+              "regionId": "answers:p1:r11",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.34929914672679946,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              },
+              "text": "Short listening transcript 4.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o12",
+              "regionId": "answers:p1:r12",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.37275372002060103,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 5",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o13",
+              "regionId": "answers:p1:r13",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.39620829331440266,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              },
+              "text": "Short listening transcript 5.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o14",
+              "regionId": "answers:p1:r14",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.41966286660820423,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 6",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o15",
+              "regionId": "answers:p1:r15",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4431174399020058,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              },
+              "text": "Long listening transcript 6.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o16",
+              "regionId": "answers:p1:r16",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.46657201319580743,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 7",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o17",
+              "regionId": "answers:p1:r17",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.490026586489609,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              },
+              "text": "Long listening transcript 7.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o18",
+              "regionId": "answers:p1:r18",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5134811597834106,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 8",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o19",
+              "regionId": "answers:p1:r19",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5369357330772122,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              },
+              "text": "Long listening transcript 8.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o20",
+              "regionId": "answers:p1:r20",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5603903063710137,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 9",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o21",
+              "regionId": "answers:p1:r21",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5838448796648154,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              },
+              "text": "Long listening transcript 9.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o22",
+              "regionId": "answers:p1:r22",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.607299452958617,
+                "width": 0.0373454602724624,
+                "height": 0.008017705766901908
+              },
+              "text": "Text 10",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o23",
+              "regionId": "answers:p1:r23",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6307540262524185,
+                "width": 0.14286557996692653,
+                "height": 0.008017705766901908
+              },
+              "text": "Long listening transcript 10.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o24",
+              "regionId": "answers:p1:r24",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8434877020086023,
+                "width": 0.09449562957713206,
+                "height": 0.009799418159546778
+              },
+              "text": "第一节 应用文",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o25",
+              "regionId": "answers:p1:r25",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8696148438913712,
+                "width": 0.06047720292936452,
+                "height": 0.009799418159546778
+              },
+              "text": "参考范文",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p1:o26",
+              "regionId": "answers:p1:r26",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8957419857741401,
+                "width": 0.1628474683045909,
+                "height": 0.009799418159546778
+              },
+              "text": "Official application sample",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "answers:p1:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0538689606213722,
+                "width": 0.09071580439404678,
+                "height": 0.02316226110438329
+              }
+            },
+            {
+              "regionId": "answers:p1:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10079202683704291,
+                "width": 0.8262264745255532,
+                "height": 0.04187024122715441
+              }
+            },
+            {
+              "regionId": "answers:p1:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.15898999178741943,
+                "width": 0.12810063784549963,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p1:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18511713367018834,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2085717069639899,
+                "width": 0.5394716119379479,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2320262802577915,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2554808535515931,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.2789354268453947,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r9",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.30239000013919626,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r10",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.3258445734329979,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r11",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.34929914672679946,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r12",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.37275372002060103,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r13",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.39620829331440266,
+                "width": 0.1375895739822033,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r14",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.41966286660820423,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r15",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.4431174399020058,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r16",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.46657201319580743,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r17",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.490026586489609,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r18",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5134811597834106,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r19",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5369357330772122,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r20",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5603903063710137,
+                "width": 0.03104575163398693,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r21",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.5838448796648154,
+                "width": 0.13656587132845105,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r22",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.607299452958617,
+                "width": 0.0373454602724624,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r23",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.6307540262524185,
+                "width": 0.14286557996692653,
+                "height": 0.008017705766901908
+              }
+            },
+            {
+              "regionId": "answers:p1:r24",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8434877020086023,
+                "width": 0.09449562957713206,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p1:r25",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8696148438913712,
+                "width": 0.06047720292936452,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p1:r26",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.8957419857741401,
+                "width": 0.1628474683045909,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "answers:p1:o1",
+              "after": "answers:p1:o2"
+            },
+            {
+              "before": "answers:p1:o2",
+              "after": "answers:p1:o3"
+            },
+            {
+              "before": "answers:p1:o3",
+              "after": "answers:p1:o4"
+            },
+            {
+              "before": "answers:p1:o4",
+              "after": "answers:p1:o5"
+            },
+            {
+              "before": "answers:p1:o5",
+              "after": "answers:p1:o6"
+            },
+            {
+              "before": "answers:p1:o6",
+              "after": "answers:p1:o7"
+            },
+            {
+              "before": "answers:p1:o7",
+              "after": "answers:p1:o8"
+            },
+            {
+              "before": "answers:p1:o8",
+              "after": "answers:p1:o9"
+            },
+            {
+              "before": "answers:p1:o9",
+              "after": "answers:p1:o10"
+            },
+            {
+              "before": "answers:p1:o10",
+              "after": "answers:p1:o11"
+            },
+            {
+              "before": "answers:p1:o11",
+              "after": "answers:p1:o12"
+            },
+            {
+              "before": "answers:p1:o12",
+              "after": "answers:p1:o13"
+            },
+            {
+              "before": "answers:p1:o13",
+              "after": "answers:p1:o14"
+            },
+            {
+              "before": "answers:p1:o14",
+              "after": "answers:p1:o15"
+            },
+            {
+              "before": "answers:p1:o15",
+              "after": "answers:p1:o16"
+            },
+            {
+              "before": "answers:p1:o16",
+              "after": "answers:p1:o17"
+            },
+            {
+              "before": "answers:p1:o17",
+              "after": "answers:p1:o18"
+            },
+            {
+              "before": "answers:p1:o18",
+              "after": "answers:p1:o19"
+            },
+            {
+              "before": "answers:p1:o19",
+              "after": "answers:p1:o20"
+            },
+            {
+              "before": "answers:p1:o20",
+              "after": "answers:p1:o21"
+            },
+            {
+              "before": "answers:p1:o21",
+              "after": "answers:p1:o22"
+            },
+            {
+              "before": "answers:p1:o22",
+              "after": "answers:p1:o23"
+            },
+            {
+              "before": "answers:p1:o23",
+              "after": "answers:p1:o24"
+            },
+            {
+              "before": "answers:p1:o24",
+              "after": "answers:p1:o25"
+            },
+            {
+              "before": "answers:p1:o25",
+              "after": "answers:p1:o26"
+            }
+          ]
+        },
+        {
+          "page": 2,
+          "observations": [
+            {
+              "observationId": "answers:p2:o1",
+              "regionId": "answers:p2:r1",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0565415292103395,
+                "width": 0.19983856996613908,
+                "height": 0.009799418159546778
+              },
+              "text": "from the supplied answer source.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p2:o2",
+              "regionId": "answers:p2:r2",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0826686710931084,
+                "width": 0.1058351051263879,
+                "height": 0.009799418159546778
+              },
+              "text": "应用文评分标准",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p2:o3",
+              "regionId": "answers:p2:r3",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10879581297587729,
+                "width": 0.22678951098511693,
+                "height": 0.009799418159546778
+              },
+              "text": "内容完整，语言准确，表达连贯。",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p2:o4",
+              "regionId": "answers:p2:r4",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.13492295485864617,
+                "width": 0.10961493030947318,
+                "height": 0.009799418159546778
+              },
+              "text": "第二节 读后续写",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p2:o5",
+              "regionId": "answers:p2:r5",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.16105009674141507,
+                "width": 0.06047720292936452,
+                "height": 0.009799418159546778
+              },
+              "text": "参考范文",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p2:o6",
+              "regionId": "answers:p2:r6",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18717723862418395,
+                "width": 0.374872037168281,
+                "height": 0.009799418159546778
+              },
+              "text": "Official continuation sample from the supplied answer source.",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p2:o7",
+              "regionId": "answers:p2:r7",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.21330438050695286,
+                "width": 0.12095440585872903,
+                "height": 0.009799418159546778
+              },
+              "text": "读后续写评分标准",
+              "confidence": 0.995,
+              "alternatives": []
+            },
+            {
+              "observationId": "answers:p2:o8",
+              "regionId": "answers:p2:r8",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.23943152238972173,
+                "width": 0.22678951098511693,
+                "height": 0.009799418159546778
+              },
+              "text": "情节合理，衔接自然，语言准确。",
+              "confidence": 0.995,
+              "alternatives": []
+            }
+          ],
+          "regions": [
+            {
+              "regionId": "answers:p2:r1",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0565415292103395,
+                "width": 0.19983856996613908,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p2:r2",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.0826686710931084,
+                "width": 0.1058351051263879,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p2:r3",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.10879581297587729,
+                "width": 0.22678951098511693,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p2:r4",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.13492295485864617,
+                "width": 0.10961493030947318,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p2:r5",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.16105009674141507,
+                "width": 0.06047720292936452,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p2:r6",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.18717723862418395,
+                "width": 0.374872037168281,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p2:r7",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.21330438050695286,
+                "width": 0.12095440585872903,
+                "height": 0.009799418159546778
+              }
+            },
+            {
+              "regionId": "answers:p2:r8",
+              "kind": "text",
+              "region": {
+                "x": 0.08571541066225687,
+                "y": 0.23943152238972173,
+                "width": 0.22678951098511693,
+                "height": 0.009799418159546778
+              }
+            }
+          ],
+          "readingOrderEdges": [
+            {
+              "before": "answers:p2:o1",
+              "after": "answers:p2:o2"
+            },
+            {
+              "before": "answers:p2:o2",
+              "after": "answers:p2:o3"
+            },
+            {
+              "before": "answers:p2:o3",
+              "after": "answers:p2:o4"
+            },
+            {
+              "before": "answers:p2:o4",
+              "after": "answers:p2:o5"
+            },
+            {
+              "before": "answers:p2:o5",
+              "after": "answers:p2:o6"
+            },
+            {
+              "before": "answers:p2:o6",
+              "after": "answers:p2:o7"
+            },
+            {
+              "before": "answers:p2:o7",
+              "after": "answers:p2:o8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "listeningPage": {
+    "objectId": 27,
+    "dictionary": "<</Type /Page\n/Resources <</ProcSet [/PDF /Text /ImageB /ImageC /ImageI]\n/ExtGState <</G3 3 0 R>>\n/Font <</F4 4 0 R\n/F5 5 0 R>>>>\n/MediaBox [0 0 594.95996 841.91998]\n/Contents 28 0 R\n/Tabs /S\n/Parent 30 0 R>>",
+    "size": 130,
+    "root": "32 0 R",
+    "previousXref": 44544
+  },
+  "noListening": {
+    "stream": "BT /FEnd 12 Tf 50 780 Td (End of question paper.) Tj ET\n",
+    "text": "End of question paper.",
+    "region": {
+      "x": 0.08403926879381933,
+      "y": 0.06331240648309594,
+      "width": 0.20294474942481844,
+      "height": 0.01318415082630537
+    }
+  }
+}

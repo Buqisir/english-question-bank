@@ -11,6 +11,7 @@ import {
   exclusionSourceReferencesSchema, currentSourceReferencesSchema, cellContinuationSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { loadReferenceOcrSourceBytes } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { wholeDocumentAbsenceSubject, WHOLE_DOCUMENT_ABSENCE_KIND } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
 import { prepareSourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
@@ -118,7 +119,11 @@ try {
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {
     assertSourceReferences({ ...binding, sidecar: sourceReferences })
-    assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput })
+    assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
+      referenceSourceManifest: loaded.manifest,
+      referenceOcrSourceBytes: loadReferenceOcrSourceBytes(paperDir, {
+        producerVersion: sourceReferences?.producerVersion, canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
+      }) })
     if (command === 'verify') {
       console.log(JSON.stringify({ status: 'local_capture_verified', paperId: loaded.materialization.paperId,
         sourceReferencesDigest: sha256(referenceBytes) }))
