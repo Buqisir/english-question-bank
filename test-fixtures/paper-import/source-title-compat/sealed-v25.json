@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "source-references-v1",
+  "producerVersion": "ocr-source-references-producer-v25",
+  "paperId": "paper-source-title-compat",
+  "sourceDigest": "sha256:270c0d536da1e328c882cda409fc95a131d86851b817f538836313cad3b9ed03",
+  "candidateDigest": "sha256:443197960c96d885eaa0ea7bf4e367184f0db64d2ebf180100b2ffe02d77c1e9",
+  "materializationDigest": "sha256:443197960c96d885eaa0ea7bf4e367184f0db64d2ebf180100b2ffe02d77c1e9",
+  "groups": [
+    {
+      "groupId": "application",
+      "taskType": "application",
+      "essays": {
+        "state": "captured",
+        "evidence": [],
+        "entries": [
+          {
+            "referenceId": "source-ref-app-1",
+            "authority": "source_reference",
+            "sourceLabel": "参考范文",
+            "labelSource": {
+              "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+              "locator": {
+                "kind": "page_region",
+                "documentId": "answers",
+                "page": 1,
+                "region": {
+                  "x": 0.1,
+                  "y": 0.17,
+                  "width": 0.7,
+                  "height": 0.02
+                }
+              }
+            },
+            "paragraphs": [
+              {
+                "paragraphId": "source-ref-app-1-p1",
+                "role": "body",
+                "text": "An original application sample.",
+                "source": {
+                  "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+                  "locator": {
+                    "kind": "page_region",
+                    "documentId": "answers",
+                    "page": 1,
+                    "region": {
+                      "x": 0.1,
+                      "y": 0.195,
+                      "width": 0.7,
+                      "height": 0.02
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "scoring": {
+        "state": "captured",
+        "evidence": [],
+        "entries": [
+          {
+            "referenceId": "source-score-app-1",
+            "authority": "source_reference",
+            "sourceLabel": "评分标准",
+            "labelSource": {
+              "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+              "locator": {
+                "kind": "page_region",
+                "documentId": "answers",
+                "page": 1,
+                "region": {
+                  "x": 0.1,
+                  "y": 0.22,
+                  "width": 0.7,
+                  "height": 0.02
+                }
+              }
+            },
+            "paragraphs": [
+              {
+                "paragraphId": "source-score-app-1-p1",
+                "role": "body",
+                "text": "应用文评分正文。",
+                "source": {
+                  "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+                  "locator": {
+                    "kind": "page_region",
+                    "documentId": "answers",
+                    "page": 1,
+                    "region": {
+                      "x": 0.1,
+                      "y": 0.245,
+                      "width": 0.7,
+                      "height": 0.02
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "groupId": "continuation",
+      "taskType": "continuation",
+      "essays": {
+        "state": "captured",
+        "evidence": [],
+        "entries": [
+          {
+            "referenceId": "source-ref-cont-1",
+            "authority": "source_reference",
+            "sourceLabel": "参考范文",
+            "labelSource": {
+              "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+              "locator": {
+                "kind": "page_region",
+                "documentId": "answers",
+                "page": 1,
+                "region": {
+                  "x": 0.1,
+                  "y": 0.295,
+                  "width": 0.7,
+                  "height": 0.02
+                }
+              }
+            },
+            "paragraphs": [
+              {
+                "paragraphId": "source-ref-cont-1-p1",
+                "role": "body",
+                "text": "An original continuation sample.",
+                "source": {
+                  "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+                  "locator": {
+                    "kind": "page_region",
+                    "documentId": "answers",
+                    "page": 1,
+                    "region": {
+                      "x": 0.1,
+                      "y": 0.32,
+                      "width": 0.7,
+                      "height": 0.02
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "scoring": {
+        "state": "captured",
+        "evidence": [],
+        "entries": [
+          {
+            "referenceId": "source-score-cont-1",
+            "authority": "source_reference",
+            "sourceLabel": "评分原则",
+            "labelSource": {
+              "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+              "locator": {
+                "kind": "page_region",
+                "documentId": "answers",
+                "page": 1,
+                "region": {
+                  "x": 0.1,
+                  "y": 0.345,
+                  "width": 0.7,
+                  "height": 0.02
+                }
+              }
+            },
+            "paragraphs": [
+              {
+                "paragraphId": "source-score-cont-1-p1",
+                "role": "body",
+                "text": "续写评分正文。",
+                "source": {
+                  "documentSha256": "sha256:43de41fc16ba310a90c79759526f298feae1605289c5ed1336ffe3c17b07c5f4",
+                  "locator": {
+                    "kind": "page_region",
+                    "documentId": "answers",
+                    "page": 1,
+                    "region": {
+                      "x": 0.1,
+                      "y": 0.37,
+                      "width": 0.7,
+                      "height": 0.02
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

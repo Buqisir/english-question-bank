@@ -14,7 +14,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
 import { makeSyntheticNck1ImageBundleFixture } from '../../test-fixtures/paper-import/nck1-image-source-bundle-v1/fixture.mjs'
 
-const current = 'ocr-source-references-producer-v26'
+const current = 'ocr-source-references-producer-v27'
 test('reference-only loader preserves Canonical v1 and ignores historical-producer beside files', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-reference-ocr-loader-'))
   const dir = path.join(root, 'materialization')
@@ -30,6 +30,7 @@ test('reference-only loader preserves Canonical v1 and ignores historical-produc
     assert.equal(read('ocr-source-references-producer-v25'), undefined)
     writeFileSync(path.join(dir, NCK1_OCR_EVIDENCE_FILE_NAME), evidenceBytes)
     const bytes = read(current)
+    assert.deepEqual(read('ocr-source-references-producer-v26'), bytes)
     assert.deepEqual(Buffer.from(bytes.evidenceBytes), evidenceBytes)
     assert.deepEqual(Buffer.from(bytes.confirmationBytes), confirmationBytes)
     assert.deepEqual(loadNck1OcrSourceEmphasis(root), {})
@@ -65,10 +66,16 @@ test('current retained-v1 writing chooses original answer when materialization o
   const before = structuredClone({ materialization, evidence, confirmation })
   assert.throws(() => prepareSourceReferenceWritingItems(materialization, evidence, confirmation), /verified Source Manifest/u)
   assert.equal(prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { referenceSourceDocuments }).answerDocument.documentId, 'answers')
-  const states = sourceReferenceEssayTaskStates(confirmation, new Set(['answers', 'answers-pdf']),
-    materialization, evidence, { producerVersion: current, referenceSourceDocuments })
-  assert.equal(states.get('i2').task, 'application')
-  assert.equal(states.get('i5').task, 'continuation')
+  for (const producerVersion of ['ocr-source-references-producer-v26', current]) {
+    const states = sourceReferenceEssayTaskStates(confirmation, new Set(['answers', 'answers-pdf']),
+      materialization, evidence, { producerVersion, referenceSourceDocuments })
+    assert.equal(states.get('i2').task, 'application')
+    assert.equal(states.get('i5').task, 'continuation')
+    const captured = buildSourceReferences(materialization, evidence, confirmation,
+      { referenceSourceDocuments, sourceDocuments: supplied, producerVersion })
+    assert(captured.groups.every(group => group.scoring.state === 'not_supplied'))
+    assert.deepEqual(captured.groups[0].scoring.evidence.map(item => item.locator.documentId), ['answers', 'answers-pdf'])
+  }
   assert.throws(() => prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
     { producerVersion: 'ocr-source-references-producer-v25' }), /exactly one/u)
   const captured = buildSourceReferences(materialization, evidence, confirmation,
@@ -158,10 +165,18 @@ test('real retained v1 OCR captures current text without changing Canonical iden
   assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar, sourceInput: changedBytes }), /including renditions/u)
   const historical = { ...sidecar, producerVersion: 'ocr-source-references-producer-v25' }
   assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: historical }), /PRODUCER|producer/u)
-  // This receipt is for this new current capture; historical receipts remain
-  // covered by the unchanged historical replay tests.
+  // Historical producer replay must retain the same original/rendition mapping.
+  const previous = { ...sidecar, producerVersion: 'ocr-source-references-producer-v26' }
+  const previousBytes = Buffer.from(JSON.stringify(previous))
+  assertSealedSourceReferenceReplay({ ...binding, sourceReferencesBytes: previousBytes, receipt: {
+    revisionId: 'sealed-v26-retained-v1', bundleDigest: sha256('synthetic-v26-bundle'),
+    sourceReferencesDigest: sha256(previousBytes), paperId: materialization.paperId,
+    sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest,
+  } })
+  assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: previous }), /current producer/u)
+  // This receipt is for the new current capture.
   const bytes = Buffer.from(JSON.stringify(sidecar))
-  const receipt = { revisionId: 'current-v26-test-revision', bundleDigest: digestJson({ current: true }),
+  const receipt = { revisionId: 'current-v27-test-revision', bundleDigest: digestJson({ current: true }),
     sourceReferencesDigest: sha256(bytes), paperId: materialization.paperId,
     sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest }
   assert.doesNotThrow(() => assertSealedSourceReferenceReplay({ ...binding, sourceReferencesBytes: bytes, receipt }))

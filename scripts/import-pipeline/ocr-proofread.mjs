@@ -1166,7 +1166,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [],
     producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, absenceSidecar, sourceInput, sourceDigest, candidateDigest,
     cellContinuations = [], continuationSidecar, referenceSourceManifest, referenceSourceDocuments } = {}) {
-  const retainedImages = producerVersion === 'ocr-source-references-producer-v26'
+  const retainedImages = ['ocr-source-references-producer-v26', OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(producerVersion)
     && confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
     && materialization.documents.some(document => document.mediaType === 'application/vnd.eqb.nck1-image-source-bundle+json')
   if (retainedImages && !referenceSourceDocuments) {

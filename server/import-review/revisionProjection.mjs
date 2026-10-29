@@ -18,6 +18,7 @@ import { digestJson, sha256, stableStringify } from '../../shared/paper-canonica
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceReferenceSemantics.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
@@ -1857,7 +1858,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     sourceInput: loaded.sourceInput,
     referenceSourceManifest: loaded.manifest,
     referenceOcrSourceBytes: loadReferenceOcrSourceBytes(rootDir, {
-      producerVersion: sourceReferences ? sourceReferences.producerVersion : 'ocr-source-references-producer-v26',
+      producerVersion: sourceReferences ? sourceReferences.producerVersion : OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
       canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
     }),
   }

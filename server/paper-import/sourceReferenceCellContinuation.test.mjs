@@ -92,25 +92,27 @@ function reviewed(input) {
   return prepared
 }
 
-test('sealed v25/v6 replay uses its original producer and never rewrites committed bytes', () => {
+for (const producerVersion of ['ocr-source-references-producer-v25', 'ocr-source-references-producer-v26']) {
+test(`sealed ${producerVersion}/v6 replay uses its original producer and never rewrites committed bytes`, () => {
   const input = fixture()
   const prepared = prepareSourceReferenceCellContinuations({
-    ...input, producerVersion: 'ocr-source-references-producer-v25',
+    ...input, producerVersion,
   }, [selection(input)])
   for (const [index, { relation }] of sourceReferenceCellContinuations(prepared.sidecar).entries()) {
-    relation.review = { reviewedBy: 'import_agent', reviewerSessionId: 'synthetic-v25-reviewer',
+    relation.review = { reviewedBy: 'import_agent', reviewerSessionId: `synthetic-${producerVersion}-reviewer`,
       verdict: 'confirmed_continuation', reviewedSubjectDigest: prepared.requests[index].subjectDigest,
       pages: relation.pages.map(page => ({ ...page, finding: 'Synthetic historical replay fixture only' })) }
   }
   const bytes = Buffer.from(JSON.stringify(prepared.sidecar)), before = sha256(bytes)
   assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt: {
-    revisionId: 'synthetic-v25-v6', bundleDigest: sha256('synthetic-bundle'),
+    revisionId: `synthetic-${producerVersion}-v6`, bundleDigest: sha256('synthetic-bundle'),
     sourceReferencesDigest: before, paperId: prepared.sidecar.paperId,
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
   } })
   assert.equal(sha256(bytes), before)
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: prepared.sidecar }), /current producer/u)
 })
+}
 
 test('public producer and direct admission replay the complete relation without visual early-return bypass', () => {
   const input = fixture(), pick = selection(input)
@@ -227,7 +229,7 @@ test('current analyzed-package admission accepts JSON pointers without native do
   for (const group of sidecar.groups) for (const kind of ['essays', 'scoring']) {
     group[kind] = { state: 'not_supplied', entries: [], evidence: [source('')] }
   }
-  assert.equal(sidecar.producerVersion, 'ocr-source-references-producer-v26')
+  assert.equal(sidecar.producerVersion, 'ocr-source-references-producer-v27')
   assert.equal(materialization.documents, undefined)
   assert.equal(sourceInput.ocrSourceBytes, undefined)
   assertSourceReferenceAdmission({ ...input, sidecar })

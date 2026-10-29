@@ -546,9 +546,19 @@ essays 沿用 v1 paragraphs，scoring 使用按源顺序排列的 paragraph/tabl
 v1 侧件继续读取，不静默迁移。原生 DOCX 须重放完整未合并表格，PDF 须逐格核源；
 只有既有 `includeScoring` 展示才渲染评分表，默认 answerOnly 不增加评分内容。
 同一 `official_answers` PDF 的评分表末行末格需要相邻页续接时，使用
-`source-references-v6` / capture-v26 / producer-v26；文件名不变，旧 content-v1–v6
-及 capture-v17–v25 字节与 sealed replay 规则不变，旧 producer 不能首次准入。
-producer-v26 只对一个独立 `official_answers` PDF 内唯一完整的
+`source-references-v6` / capture-v27 / producer-v27；文件名不变，旧 content-v1–v6
+及 capture-v17–v26 字节与 sealed replay 规则不变，旧 producer 不能首次准入。
+producer-v27 继承 v26 的来源分区、retained-v1 OCR、跨页续格及已审整文缺省能力。
+仅新增完整来源标题「【听力录音稿】」「英语听力原文」：两者必须在原始 confirmed
+items 中同文档、同页紧邻完整 `Text 1`，不能跳过页眉、正文或被视觉消费的 item。
+已开始写作后的新听力边界关闭范文捕获；只有既有完整评分附录相邻证据可恢复
+scoring-only，之后出现写作 task／范文必须拒绝。前置听力不阻止其后首次真实写作。
+「参考范文（略）」仅在已有明确 current task 时声明该 task 的 essays 缺省，
+不能推断 task 或整文缺省，不能与该 task 的真实范文并存，评分继续完整保留。
+「评分细则（格式错扣1分）：」仅在已有 task 内作评分标签，完整括号和原文定位保留。
+匹配仅做 NFKC 与首尾 trim，不删内部空白或任意括号；v27 普通 OCR references
+在公开准入重放全部 groups，拒绝删评分、改 task、改标签或源定位。
+继承的 v26 分区规则只对一个独立 `official_answers` PDF 内唯一完整的
 「备选试题参考答案」至完整听力标题（原始 orderedItems 紧邻 `Text 1`）推导
 `alternateAnswerScope`。正卷应用文及续写范文、评分须在备选标题前已经成立；
 备选区不得有表格/图片或跨界视觉，区内写作及评分归属均为空，听力标题后继续扫描。

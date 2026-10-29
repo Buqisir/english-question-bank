@@ -53,8 +53,8 @@ function reseal(input) {
     confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)) }
 }
 
-for (const producerVersion of ['ocr-source-references-producer-v24', 'ocr-source-references-producer-v25']) {
-test(`${producerVersion} whole-document absence retains exact sealed replay after v26 becomes current`, () => {
+for (const producerVersion of ['ocr-source-references-producer-v24', 'ocr-source-references-producer-v25', 'ocr-source-references-producer-v26']) {
+test(`${producerVersion} whole-document absence retains exact sealed replay after v27 becomes current`, () => {
   const input = fixture(), sidecar = input.sidecar
   sidecar.producerVersion = producerVersion
   const { subjectDigest } = wholeDocumentAbsenceSubject({ ...input, requireReview: false })

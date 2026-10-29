@@ -474,7 +474,7 @@ try {
   const referenceDraft = JSON.parse(readFileSync(referenceDraftPath))
   const preparedReferences = JSON.parse(readFileSync(preparedPath)).template
   for (const key of ['sourceDigest', 'candidateDigest', 'materializationDigest']) referenceDraft[key] = preparedReferences[key]
-  assert.equal(referenceDraft.producerVersion, 'ocr-source-references-producer-v26')
+  assert.equal(referenceDraft.producerVersion, 'ocr-source-references-producer-v27')
   writeFileSync(referenceDraftPath, JSON.stringify(referenceDraft))
   assert.match(execFileSync(process.execPath, [productsCli, 'finalize', '--paper-dir', cliPaperDir,
     '--input', referenceDraftPath, '--output', path.join(cliPaperDir, SOURCE_REFERENCES_FILE)],

@@ -13,7 +13,7 @@ import { replaySourceReferenceCellContinuations, sourceReferenceCellContinuation
 import { resolveAlternateAnswerScope, bindAlternateAnswerScope } from './sourceReferenceAlternateAnswerScope.mjs'
 import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
 import { sourceReferenceProducerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  V25_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion,
+  V25_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, V26_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, usesSourceTitleCompatibility, assertSourceReferenceProducerVersion,
   usesExplicitWritingTitles, usesAlternateAnswerScope } from './sourceReferenceSemantics.mjs'
 
 function reject(message) {
@@ -226,7 +226,7 @@ function assertSourceReferenceContent({
     .some(hasSamePageContinuation)
   const ocr = sourceInput.ocrSourceBytes
   if (!ocr) {
-    if ([V25_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(producerVersion)
+    if ([V25_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, V26_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(producerVersion)
       && sidecar?.groups?.length === 2
       && sidecar.groups.every(group => ['essays', 'scoring'].every(kind => group[kind].state === 'not_supplied'))
       && materialization.documents?.some(document => document.role === 'official_answers' && document.mediaType === 'application/pdf')) {
@@ -273,7 +273,40 @@ function assertSourceReferenceContent({
   }
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
     && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
-  if (!hasReferenceVisual && !figures.length && !continued && !sidecar?.figureExclusions?.length) return
+  const assertCurrentGroupsReplay = () => {
+    // These paths already rebuild/compare the complete source groups above.
+    if (!usesSourceTitleCompatibility(producerVersion) || !sidecar
+      || sidecar.alternateAnswerScope || sourceReferenceCellContinuations(sidecar).length || referenceSourceDocuments) return
+    if (!evidence) reject('Current OCR references require complete sealed evidence')
+    const documents = materialization.documents.map(document => ({ ...document,
+      bytes: sourceInput.documents.find(source => source.documentId === document.documentId)?.bytes }))
+    if (documents.some(document => !document.bytes || sha256(document.bytes) !== document.sha256)) {
+      reject('Current reference source document bytes changed')
+    }
+    const baseline = buildSourceReferences(materialization, evidence, confirmation, {
+      producerVersion, sourceInput, sourceDocuments: sourceInput.documents, sourceDigest, candidateDigest,
+      figureExclusions: sidecar.figureExclusions ?? [],
+    })
+    // Preserve the established prose whitespace/hyphen matching view. Labels,
+    // ownership, ordering, paragraph roles and every source locator stay exact.
+    const comparable = groups => {
+      const result = structuredClone(groups)
+      for (const group of result) for (const kind of ['essays', 'scoring']) {
+        for (const entry of group[kind].entries) for (const block of sourceReferenceBlocks(entry)) {
+          if (block.kind === 'paragraph') block.paragraph.text = joinedText(block.paragraph.text)
+          if (block.kind === 'table') for (const cell of block.rows.flat()) cell.text = joinedText(cell.text)
+        }
+      }
+      return digestJson(result)
+    }
+    if (comparable(sidecar.groups) !== comparable(baseline.groups)) {
+      reject('Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator')
+    }
+  }
+  if (!hasReferenceVisual && !figures.length && !continued && !sidecar?.figureExclusions?.length) {
+    assertCurrentGroupsReplay()
+    return
+  }
   if ((hasReferenceVisual || figures.length)
     && (!sidecar || !['source-references-v3', 'source-references-v4', 'source-references-v5'].includes(sidecar.schemaVersion))) {
     reject('Confirmed official-answer content figures require a complete source-references-v3/v4 sidecar; v1/v2 cannot omit them')
@@ -464,4 +497,5 @@ function assertSourceReferenceContent({
     assertSourceReferenceFigureReplay({ figure,
       document: documents.find(document => document.documentId === figure.source.locator.documentId) })
   }
+  assertCurrentGroupsReplay()
 }

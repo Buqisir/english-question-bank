@@ -9,7 +9,7 @@ import {
   BARE_WRITING_SECTION, INLINE_WRITING_SAMPLE, INLINE_WRITING_ANSWER_SAMPLE,
   WORD_COUNT_SAMPLE_LABEL, NUMBERED_SAMPLE_LABEL,
   ENTRY_LABEL, EXAMPLE_SAMPLE_LABEL, PARENTHESIZED_SAMPLE_LABEL, NUMBERED_VERSION_SAMPLE_LABEL,
-  SCORING_LABEL, isSourceReferenceSampleLabel, explicitWritingHeading, verifiedParenthesizedEnglish, composedWritingSampleParts,
+  SCORING_LABEL, isAnnotatedScoringLabel, isTaskLocalSampleOmission, isSourceReferenceSampleLabel, explicitWritingHeading, verifiedParenthesizedEnglish, composedWritingSampleParts,
 } from '../../server/paper-import/sourceReferenceWritingRules.mjs'
 import { usesExplicitWritingTitles, OCR_SOURCE_REFERENCES_PRODUCER_VERSION, usesV23WritingCapabilities } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 
@@ -156,7 +156,7 @@ export const LINE_ROLE_RULES = Object.freeze([
     '4. 评分细则', '4. 评分时应考虑内容。'),
   rule('entry.task-scoring', 'entry-label', 80, f => Boolean(firstLineRole('scoring-section', f)),
     '续写评分标准', '续写评分标准分析'),
-  rule('entry.scoring-label', 'entry-label', 90, (f, c) => SCORING_ENTRY_LABEL.test(writingRuleMatchingView(f.text))
+  rule('entry.scoring-label', 'entry-label', 90, (f, c) => isAnnotatedScoringLabel(f.text, c.producerVersion) || SCORING_ENTRY_LABEL.test(writingRuleMatchingView(f.text))
     || (usesV23WritingCapabilities(c.producerVersion)
       && /^(?:[一二三四五六七八九十]+、|\([一二三四五六七八九十]+\))?各档次的给分范围和要求[:：]?$/u.test(writingRuleMatchingView(f.text))),
     '（二）各档次给分范围和要求', '（二）各档次给分范围和要求如下。'),
@@ -214,7 +214,8 @@ export const LINE_ROLE_RULES = Object.freeze([
   rule('writing.explanations', 'section-stop', 10, (f, c) => c.sectionCount && isSourceReferenceExplanationStart(f.text, c.producerVersion),
     { text: '【解题导语】本文是一篇应用文。', context: { sectionCount: 1 } },
     { text: '参考范文', context: { sectionCount: 1 } }),
-  rule('writing.omission', 'omission', 10, (f, c) => (c.inWriting || c.current)
+  rule('writing.omission', 'omission', 10, (f, c) => (Boolean(c.taskType || c.current)
+    && isTaskLocalSampleOmission(f.text, c.producerVersion)) || (c.inWriting || c.current)
     && /^(?:略|[（(]略[）)]|(?:参考)?范文[：:]?\s*略|(?:源)?无范文|未提供范文)[。.]?$/u.test(f.trimmed),
   { text: '略', context: { inWriting: true } }, { text: '参考范文', context: { inWriting: true } }),
   rule('writing.part-boundary', 'part-boundary', 10, f =>
