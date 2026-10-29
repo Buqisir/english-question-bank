@@ -144,12 +144,18 @@ async function request(origin, pathname, {
   const requestHeaders = { ...headers }
   if (role) requestHeaders['x-verify-role'] = role
   if (body !== null) requestHeaders['content-type'] = 'application/json'
-  const response = await fetch(`${origin}${pathname}`, {
-    method,
-    headers: requestHeaders,
-    body: rawBody ?? (body !== null ? JSON.stringify(body) : undefined),
-  })
-  const bytes = Buffer.from(await response.arrayBuffer())
+  let response
+  let bytes
+  try {
+    response = await fetch(`${origin}${pathname}`, {
+      method,
+      headers: requestHeaders,
+      body: rawBody ?? (body !== null ? JSON.stringify(body) : undefined),
+    })
+    bytes = Buffer.from(await response.arrayBuffer())
+  } catch (cause) {
+    throw new Error(`Source intake verifier request failed: ${method} ${pathname}`, { cause })
+  }
   const contentType = response.headers.get('content-type') || ''
   return {
     status: response.status,
