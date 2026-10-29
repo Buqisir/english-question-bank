@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import './in-image-option-labels-v2-light.test.mjs'
 import { makeInImageOptionLabelsFixture } from '../../test-fixtures/paper-import/nck1-ocr-evidence-v1/in-image-option-labels.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { nck1ParagraphJoinAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
@@ -111,3 +112,6 @@ test('re-digested author plan cannot launder a foreign source anchor', () => {
   changed.planDigest = digestJson(body)
   assert.throws(() => applyInImageOptionLabelsPlan(input, changed, { confirmed: true }), /source-order anchor/u)
 })
+
+// Load after the legacy factory's top-level await to keep heavy generation serial.
+await import('./in-image-option-labels-v2-heavy.test.mjs')
