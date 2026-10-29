@@ -28,6 +28,15 @@ function api(env) {
   const child = fork(driver, [], { env, detached: true, execArgv: [], stdio: ['ignore', 'ignore', 'pipe', 'ipc'] })
   const pending = new Map()
   let stderr = ''
+  const calls = []
+  const safeTail = value => String(value).replace(/(bearer\s+)\S+/gi, '$1<redacted>')
+    .replace(/((?:token|nonce|secret|authorization)["']?\s*[:=]\s*["']?)[^\s"',}]+/gi, '$1<redacted>').slice(-4000)
+  const summary = value => ({
+    type: value?.type, code: value?.code, reasonCode: value?.reasonCode,
+    message: value?.message ? safeTail(value.message) : undefined,
+    error: value?.error ? safeTail(value.error) : undefined,
+    operationId: value?.operationId, status: value?.result?.status,
+  })
   child.stderr.on('data', bytes => { stderr = (stderr + bytes).slice(-8192) })
   let ready
   const opened = new Promise(resolve => { ready = resolve })
@@ -43,14 +52,23 @@ function api(env) {
     pending.clear()
   })
   return { child, opened,
+    diagnostics: () => ({ pid: child.pid, exitCode: child.exitCode, signalCode: child.signalCode,
+      calls: calls.slice(-8), stderrTail: safeTail(stderr) }),
     call(message) {
       const requestId = randomUUID()
+      const started = Date.now()
+      const record = { requestId, type: message.type, state: 'pending' }
+      calls.push(record)
+      if (calls.length > 8) calls.shift()
       return new Promise(resolve => {
         const timer = setTimeout(() => { pending.delete(requestId); resolve({ type: 'timeout', stderr }) }, 60_000)
         pending.set(requestId, value => { clearTimeout(timer); resolve(value) })
         child.send({ ...message, requestId }, error => {
           if (error) { clearTimeout(timer); pending.delete(requestId); resolve({ type: 'exited' }) }
         })
+      }).then(value => {
+        Object.assign(record, { state: 'settled', elapsedMs: Date.now() - started, reply: summary(value) })
+        return value
       })
     },
     async stop() {
@@ -85,6 +103,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         EQB_PROMOTION_FAULT_ACTION: action, EQB_PROMOTION_FAULT_MARKER: marker } : {}),
       ...budget }
     const clients = []
+    const started = Date.now()
     const ownedIdentities = []
     const ownedWorkspaces = []
     let passed = false
@@ -164,10 +183,27 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         assert.ok(!opened.exited, opened.stderr); client.port = opened.port
         return client
       },
-      checkpoint: stage => until(() => {
+      checkpoint: async (stage, pendingCall) => {
         const file = stage ? `${marker}.${stage}` : marker
-        return existsSync(file) && JSON.parse(readFileSync(file))
-      }, `${label}: ${stage || 'checkpoint'}`),
+        if (!pendingCall) return until(() => existsSync(file) && JSON.parse(readFileSync(file)),
+          `${label}: ${stage || 'checkpoint'}`)
+        // Only callers that require a checkpoint before the reply opt in.
+        // Do not race `until`: a losing poll would outlive trial cleanup.
+        let terminal
+        pendingCall?.then(value => { terminal = value })
+        const end = Date.now() + 20_000
+        while (Date.now() < end) {
+          if (existsSync(file)) return JSON.parse(readFileSync(file))
+          if (terminal) {
+            const reply = clients.flatMap(client => client.diagnostics().calls)
+              .find(call => call.requestId === terminal.requestId)?.reply
+              || clients.flatMap(client => client.diagnostics().calls).at(-1)?.reply
+            throw new Error(`Promotion call ended before ${label}: ${stage || 'checkpoint'}: ${JSON.stringify(reply)}`)
+          }
+          await yieldFor(25)
+        }
+        throw new Error(`Timed out: ${label}: ${stage || 'checkpoint'}`)
+      },
       async deadSupervisor(row) {
         const identity = { bootId: row.owner_boot_id, pid: row.supervisor_pid, startId: row.supervisor_start_id }
         await until(async () => await matchingReviewProcess(identity) === 'dead', 'exact supervisor death')
@@ -202,6 +238,23 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal(diskStopped, false, 'DISK_STOP_BELOW_10_GB')
       passed = true
       console.log(`PASS ${label}`)
+    } catch (error) {
+      // Read this trial before cleanup, not the successful seed operation.
+      const read = fn => { try { return fn() } catch (failure) { return { readError: failure.code || failure.name } } }
+      console.error(`PROMOTION_TRIAL_FAILURE ${JSON.stringify({
+        label, directory, elapsedMs: Date.now() - started,
+        rows: read(() => context.rows().map(row => {
+          const outcome = row.outcome_json ? JSON.parse(row.outcome_json) : {}
+          return { id: row.id, state: row.state, promotionId: row.promotion_id,
+            workerPid: row.worker_pid, supervisorPid: row.supervisor_pid,
+            reasonCode: outcome.reasonCode, status: outcome.status, failureCode: outcome.failure?.failureCode }
+        })),
+        promotions: read(() => context.promotions().map(row => ({
+          id: row.id, state: row.state, failureCode: row.failure_code,
+        }))),
+        clients: clients.map(client => client.diagnostics()),
+      })}`)
+      throw error
     } finally {
       clearInterval(diskMonitor)
       await emergencyCleanup
@@ -944,7 +997,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     await trial(`SIGKILL at ${stage} retains identity and never silently replays`, stage, 'block', async t => {
       const a = await t.client()
       const result = a.call(shipMessage)
-      const checkpoint = await t.checkpoint()
+      const checkpoint = await t.checkpoint(undefined, result)
       process.kill(checkpoint.pid, 'SIGKILL')
       const answer = await result
       assert.ok(['error', 'exited'].includes(answer.type))

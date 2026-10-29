@@ -96,7 +96,7 @@ for (const schemaVersion of ['source-references-v1', 'source-references-v2']) {
   const before = JSON.stringify(noFigure)
   assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: noFigure, sourceInput: {} }), {
     code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID',
-    message: 'Whole-document PDF absence requires complete OCR evidence and confirmation',
+    message: 'Native answer PDF requires complete sealed OCR bytes',
   })
   assert.equal(JSON.stringify(noFigure), before, 'rejected references are not migrated')
 }

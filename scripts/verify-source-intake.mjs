@@ -134,6 +134,8 @@ function sessionFor(request) {
   return null
 }
 
+const requestDiagnostics = new Map()
+let diagnosticRequestId = 0
 async function request(origin, pathname, {
   method = 'GET',
   role = null,
@@ -142,6 +144,11 @@ async function request(origin, pathname, {
   headers = {},
 } = {}) {
   const requestHeaders = { ...headers }
+  const diagnosticId = String(++diagnosticRequestId)
+  const diagnostic = { handlerEntered: false, socketErrors: [] }
+  requestDiagnostics.set(diagnosticId, diagnostic)
+  requestHeaders['x-verify-request-id'] = diagnosticId
+  const started = Date.now()
   if (role) requestHeaders['x-verify-role'] = role
   if (body !== null) requestHeaders['content-type'] = 'application/json'
   let response
@@ -154,7 +161,13 @@ async function request(origin, pathname, {
     })
     bytes = Buffer.from(await response.arrayBuffer())
   } catch (cause) {
+    console.error('SOURCE_INTAKE_REQUEST_FAILURE', JSON.stringify({
+      method, pathname, elapsedMs: Date.now() - started, ...diagnostic,
+      causeCode: cause.cause?.code || cause.code,
+    }))
     throw new Error(`Source intake verifier request failed: ${method} ${pathname}`, { cause })
+  } finally {
+    requestDiagnostics.delete(diagnosticId)
   }
   const contentType = response.headers.get('content-type') || ''
   return {
@@ -413,10 +426,27 @@ function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId, captureRe
   })
 }
 
-function makeValidAnalyzedPackageZip(parent, paperId) {
+async function makeValidAnalyzedPackageZip(parent, paperId) {
+  const started = Date.now()
+  // Keep the in-process HTTP server responsive while fixture producers run.
+  const run = (stage, command, args, options = {}) => new Promise((resolve, reject) => {
+    const child = spawn(command, args, { ...options, stdio: ['ignore', 'ignore', 'pipe'] })
+    let stderr = ''
+    child.stderr.on('data', chunk => { stderr = (stderr + chunk.toString()).slice(-4000) })
+    child.once('error', reject)
+    child.once('close', (code, signal) => {
+      if (code === 0) resolve()
+      else {
+        const safeStderr = stderr.replaceAll(agentToken, '[REDACTED]')
+          .replace(/Bearer\s+\S+/gi, 'Bearer [REDACTED]')
+          .replace(/((?:token|password|secret|authorization)\s*[:=]\s*)[^\s,;]+/gi, '$1[REDACTED]')
+        reject(new Error(`Analyzed package fixture ${stage} failed: code=${code} signal=${signal}; stderr tail: ${safeStderr || '(empty)'}`))
+      }
+    })
+  })
   const packageRoot = path.join(parent, 'valid-analyzed-package')
   const archivePath = path.join(parent, 'valid-analyzed-package.zip')
-  execFileSync(process.execPath, [
+  await run('producer', process.execPath, [
     '--input-type=module',
     '-e',
     `const { makeReviewRoot, makeExternalAnalyzedPackage } = await import('./scripts/verify-universal-nck1-publish.mjs'); const fixture = makeReviewRoot(process.argv[1], process.argv[2]); makeExternalAnalyzedPackage(fixture.reviewRoot, process.argv[3])`,
@@ -426,16 +456,19 @@ function makeValidAnalyzedPackageZip(parent, paperId) {
   ], {
     cwd: path.resolve(import.meta.dirname, '..'),
     env: { ...process.env, EQB_ANALYZED_PACKAGE_FIXTURE_ONLY: '1' },
-    stdio: 'ignore',
   })
-  execFileSync('python3', [
+  await run('archive', 'python3', [
     '-B',
     path.resolve(import.meta.dirname, 'import-pipeline/analyzed-package-archive.py'),
     '--create-from',
     packageRoot,
     archivePath,
   ])
-  return readFileSync(archivePath)
+  const bytes = readFileSync(archivePath)
+  console.log('SOURCE_INTAKE_FIXTURE_STAGE', JSON.stringify({
+    stage: 'analyzed-package', elapsedMs: Date.now() - started,
+  }))
+  return bytes
 }
 
 const store = createSourceIntakeStore({ dbPath, filesRoot, now: () => clock })
@@ -444,6 +477,17 @@ const routes = createSourceIntakeRoutes({ getStore: () => store, notifier, agent
 let stalledHeartbeatSubmission = null
 let lostHandoffResponseSubmission = null
 const server = createServer(async (incoming, response) => {
+  const diagnostic = requestDiagnostics.get(incoming.headers['x-verify-request-id'])
+  if (diagnostic) {
+    diagnostic.handlerEntered = true
+    const onError = error => {
+      if (diagnostic.socketErrors.length < 4) diagnostic.socketErrors.push(error.code || error.name)
+    }
+    incoming.socket.on('error', onError)
+    const detach = () => incoming.socket.removeListener('error', onError)
+    response.once('finish', detach)
+    response.once('close', detach)
+  }
   const url = new URL(incoming.url || '/', `http://${incoming.headers.host}`)
   if (stalledHeartbeatSubmission
     && url.pathname === `/api/import-agent-source-intakes/${stalledHeartbeatSubmission}/heartbeat`) {
@@ -1696,7 +1740,7 @@ try {
   const staleCorrection = await request(origin, `/api/source-intakes/${correctionId}/submit`, { method: 'POST', role: 'owner' })
   assert.equal(staleCorrection.status, 409)
   assert.equal(staleCorrection.json.code, 'ANALYZED_PACKAGE_REVISION_STALE')
-  const validPackageBytes = makeValidAnalyzedPackageZip(
+  const validPackageBytes = await makeValidAnalyzedPackageZip(
     tempRoot,
     'paper-2027-chengdu-opening',
   )
