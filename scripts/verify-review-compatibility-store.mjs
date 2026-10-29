@@ -25,13 +25,12 @@ import { inspectSealedReviewFiles } from '../server/import-review/sealedReviewFi
 import { acquireReviewCompatibilityLeader, beginReviewActivity } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
 import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
-import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { productInputDigest } from '../server/paper-import/frozenProducts.mjs'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
-const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
+const { makeReviewRoot, convertToAnalyzedPackageReviewSource } = await import('./verify-universal-nck1-publish.mjs')
 if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
 const { measureReviewOperation } = await import('./verify-review-identity-startup.mjs')
@@ -75,14 +74,16 @@ try {
 
   const fixture = makeReviewRoot(path.join(root, 'fixture'), 'paper-content-binding-store')
   const source = fixture.reviewRoot
+  // This store/CAS fixture must support comparison without native tools.
+  // Complete analyzed-package input has no OCR PDF pixel-replay dependency.
+  convertToAnalyzedPackageReviewSource(source)
   const config = readJson(path.join(source, 'config.json'))
   config.pdfProductsRequired = true
   config.provenance.month = 10
   json(path.join(source, 'config.json'), config)
   const projection = buildNck1ReviewProjection(source)
-  const references = syntheticReviewReferences(projection)
-  assert(references, 'expected the synthetic answer PDF')
-  json(path.join(source, SOURCE_REFERENCES_FILE), references)
+  const references = readJson(path.join(source, SOURCE_REFERENCES_FILE))
+  assert.equal(references.candidateDigest, projection.candidateDigest)
   mkdirSync(path.join(source, 'products'))
   const products = { schemaVersion: 'paper-pdf-products-v3', listening: 'absent-by-exam-design',
     economyPageLimit: 8, paperId: projection.paperId, paperName: projection.paperName,
@@ -357,14 +358,16 @@ try {
   assert.equal(leaf.comparison.reasonCode, 'SEALED_PATH_UNSAFE')
   unlinkSync(path.join(nextDir, 'config.json'))
   renameSync(path.join(nextDir, 'config-real.json'), path.join(nextDir, 'config.json'))
-  renameSync(path.join(nextDir, 'source'), path.join(nextDir, 'source-real'))
-  symlinkSync('source-real', path.join(nextDir, 'source'))
-  assert.equal(realpathSync(path.join(nextDir, 'source')), path.join(nextDir, 'source-real'))
-  assert.throws(() => inspectSealedReviewFiles(nextDir, files.filter(file => file.path.startsWith('source/'))),
+  renameSync(path.join(nextDir, 'analyzed-package'), path.join(nextDir, 'analyzed-package-real'))
+  symlinkSync('analyzed-package-real', path.join(nextDir, 'analyzed-package'))
+  assert.equal(realpathSync(path.join(nextDir, 'analyzed-package')), path.join(nextDir, 'analyzed-package-real'))
+  const packageFiles = files.filter(file => file.path.startsWith('analyzed-package/'))
+  assert(packageFiles.length > 0, 'symlink-parent check must inspect sealed package members')
+  assert.throws(() => inspectSealedReviewFiles(nextDir, packageFiles),
     { reasonCode: 'SEALED_PATH_UNSAFE' })
   assert.equal((await compatibility.checkRevision(next.id)).comparison.result, 'unknown')
-  unlinkSync(path.join(nextDir, 'source'))
-  renameSync(path.join(nextDir, 'source-real'), path.join(nextDir, 'source'))
+  unlinkSync(path.join(nextDir, 'analyzed-package'))
+  renameSync(path.join(nextDir, 'analyzed-package-real'), path.join(nextDir, 'analyzed-package'))
   pass('symlink leaf and every symlink parent rejected using actual filesystem counterexamples')
 
   await bump()

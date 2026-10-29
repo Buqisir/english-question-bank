@@ -1,5 +1,47 @@
-import { prepareSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { buildSourceReferences } from '../import-pipeline/ocr-proofread.mjs'
+import { currentReviewAnswerSha } from '../../test-fixtures/paper-import/review-source-references-v26/fixture.mjs'
+
+const ownedReferenceBytes = new Set()
+
+export function removeOwnedReviewReferences(directory) {
+  const file = path.join(directory, SOURCE_REFERENCES_FILE)
+  if (!existsSync(file) || !ownedReferenceBytes.has(sha256(readFileSync(file)))) return false
+  unlinkSync(file)
+  return true
+}
+
+// Bind directly from import, before the first projection. Rebinding is allowed
+// only for exact bytes this helper wrote; custom/tampered sidecars reach normal
+// validation unchanged.
+export function prebindReviewFixtureReferences(directory, { expectedCandidateDigest } = {}) {
+  const file = path.join(directory, SOURCE_REFERENCES_FILE)
+  if (existsSync(file) && !ownedReferenceBytes.has(sha256(readFileSync(file)))) return false
+  const loaded = loadNck1ReviewSource(directory)
+  const imported = importNck1ReviewCandidate(directory, loaded, expectedCandidateDigest)
+  if (!imported.candidate || imported.issues.length) throw new Error(`Invalid fixture candidate: ${imported.issues[0]?.code}`)
+  const binding = { materialization: loaded.materialization, sourceInput: loaded.sourceInput,
+    sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest }
+  const references = syntheticReviewReferences(binding) || prepareSourceReferences(binding)
+  const evidence = (loaded.materialization.documents || []).filter(document => document.role === 'official_answers')
+    .map(document => ({ documentSha256: document.sha256, locator: { kind: 'page_region',
+      documentId: document.documentId, page: 1, region: { x: 0, y: 0, width: 1, height: 1 } } }))
+  if (!evidence.length) evidence.push(...(loaded.sourceInput.members || []).filter(member => member.role === 'official_answers')
+    .map(member => ({ documentSha256: sha256(member.bytes),
+      locator: { kind: 'package_json_pointer', documentId: member.memberId, pointer: '' } })))
+  for (const group of references.groups) for (const kind of ['essays', 'scoring']) {
+    if (evidence.length && group[kind].state === 'unprocessed') group[kind] = { state: 'not_supplied', evidence, entries: [] }
+  }
+  mkdirSync(path.dirname(file), { recursive: true })
+  const bytes = Buffer.from(JSON.stringify(references))
+  writeFileSync(file, bytes)
+  ownedReferenceBytes.add(sha256(bytes))
+  return true
+}
 
 // These invented texts are rendered into the two source pages below. The first
 // sample deliberately continues across pages to exercise provenance recovery.
@@ -37,6 +79,16 @@ export function syntheticReviewAnswerPdf() {
 // This is fixture data, never an independent review or a production capture.
 export function syntheticReviewReferences(projection) {
   const document = projection.materialization.documents?.find(item => item.role === 'official_answers')
+  if (document?.sha256 === currentReviewAnswerSha()) {
+    const ocr = projection.sourceInput.ocrSourceBytes
+    const capture = buildSourceReferences(projection.materialization,
+      JSON.parse(Buffer.from(ocr.evidenceBytes)), JSON.parse(Buffer.from(ocr.confirmationBytes)), {
+        sourceInput: projection.sourceInput, sourceDocuments: projection.sourceInput.documents,
+        sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+      })
+    return { ...prepareSourceReferences({ ...projection, structuredScoring: capture.structuredScoring }),
+      ...(capture.schemaVersion ? { schemaVersion: capture.schemaVersion } : {}), groups: capture.groups }
+  }
   if (!document || document.sha256 !== sha256(syntheticReviewAnswerPdf())) return null
   const source = page => ({ documentSha256: document.sha256,
     locator: { kind: 'page_region', documentId: document.documentId, page,

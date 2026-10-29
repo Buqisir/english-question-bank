@@ -53,18 +53,35 @@ function reseal(input) {
     confirmationBytes: Buffer.from(JSON.stringify(input.confirmation)) }
 }
 
-test('v24 whole-document absence retains exact sealed replay after v25 becomes current', () => {
+for (const producerVersion of ['ocr-source-references-producer-v24', 'ocr-source-references-producer-v25']) {
+test(`${producerVersion} whole-document absence retains exact sealed replay after v26 becomes current`, () => {
   const input = fixture(), sidecar = input.sidecar
-  sidecar.producerVersion = 'ocr-source-references-producer-v24'
+  sidecar.producerVersion = producerVersion
   const { subjectDigest } = wholeDocumentAbsenceSubject({ ...input, requireReview: false })
   sidecar.wholeDocumentWritingAbsence.review.reviewedSubjectDigest = subjectDigest
   const bytes = Buffer.from(JSON.stringify(sidecar))
+  const before = sha256(bytes)
   assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt: {
-    revisionId: 'synthetic-v24-whole-absence', bundleDigest: sha256('synthetic-bundle'),
+    revisionId: `synthetic-${producerVersion}-whole-absence`, bundleDigest: sha256('synthetic-bundle'),
     sourceReferencesDigest: sha256(bytes), paperId: sidecar.paperId,
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
   } })
+  assert.equal(sha256(bytes), before)
   assert.throws(() => assertSourceReferenceAdmission(input), /current producer/u)
+})
+}
+
+test('sealed v25 cannot remove the absence declaration and OCR to bypass its original gate', () => {
+  const input = fixture(), sidecar = input.sidecar
+  sidecar.producerVersion = 'ocr-source-references-producer-v25'
+  delete sidecar.wholeDocumentWritingAbsence
+  delete input.sourceInput.ocrSourceBytes
+  const bytes = Buffer.from(JSON.stringify(sidecar))
+  assert.throws(() => assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt: {
+    revisionId: 'synthetic-v25-missing-ocr', bundleDigest: sha256('synthetic-bundle'),
+    sourceReferencesDigest: sha256(bytes), paperId: sidecar.paperId,
+    sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+  } }), /Whole-document PDF absence requires complete OCR/u)
 })
 
 test('synthetic whole-document declaration requires exact review and source bindings', () => {

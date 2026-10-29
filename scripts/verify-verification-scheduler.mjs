@@ -55,6 +55,32 @@ assert.deepEqual(verificationLaneScripts(['scripts/future-check.mjs'], 'verify')
 assert.deepEqual(verificationLaneScripts([], 'e2e'), [])
 assert.throws(() => verificationLaneScripts([], 'typo'), /Unknown verification lane/)
 
+// Use registry paths and real sources: intake mutates files covered by release
+// identity while storage/publication readers require a stable fingerprint.
+const identityScripts = ['scripts/verify-published-products-storage.mjs', 'scripts/verify-source-intake.mjs',
+  'scripts/verify-promotion-worker.mjs']
+const identityPolicies = identityScripts.map(script => verificationSchedulingPolicy(script,
+  readFileSync(new URL(`../${script}`, import.meta.url), 'utf8')))
+assert.deepEqual(identityPolicies.map(item => item.exclusive), [false, true, false])
+assert.equal(verificationSchedulingPolicy('other/verify-source-intake.mjs', '').exclusive, false)
+for (const order of [identityPolicies, [identityPolicies[1], identityPolicies[0], identityPolicies[2]]]) {
+  const activeScripts = new Set()
+  const executed = []
+  await runVerificationSchedule(order, {
+    concurrency: 3,
+    async run(item) {
+      assert.ok(!activeScripts.has(identityScripts[1]), 'reader must not overlap active intake')
+      if (item.exclusive) assert.equal(activeScripts.size, 0, 'intake waits for identity readers')
+      activeScripts.add(item.script)
+      executed.push(item.script)
+      await sleep(5)
+      activeScripts.delete(item.script)
+      return item.script
+    },
+  })
+  assert.deepEqual(executed.toSorted(), identityScripts.toSorted(), 'every selected script executes exactly once')
+}
+
 const items = [
   { name: 'a', delay: 35, status: 0, resourceKeys: [], exclusive: false },
   { name: 'render-a', delay: 20, status: 1, resourceKeys: ['browser-render'], exclusive: false },

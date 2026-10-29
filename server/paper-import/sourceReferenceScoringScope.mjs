@@ -3,6 +3,7 @@ import { answerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { inlineSampleParts, matchesLineRole } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { computeLineFacts } from '../../scripts/import-pipeline/ocr-line-facts.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { resolveAlternateAnswerScope } from './sourceReferenceAlternateAnswerScope.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
   usesGivenTitleWritingSamples, usesV23WritingCapabilities } from './sourceReferenceSemantics.mjs'
 import {
@@ -36,6 +37,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
   { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization = { groups: [] } } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const scopes = new Map()
+  const alternateAnswerScope = resolveAlternateAnswerScope(materialization, confirmation, { producerVersion })
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
     let afterListening = false
@@ -46,10 +48,18 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
     // labels. Existing scoring termination/reopening rules remain authoritative.
     const lifecycle = sourceReferenceWritingLifecycle(items, {
       materialization: usesGivenTitleWritingSamples(producerVersion) ? materialization : { groups: [] },
+      alternateAnswerScope,
       answerDocument: { role: materialization.documents?.find(source =>
         source.documentId === document.documentId)?.role ?? 'official_answers' }, producerVersion,
     })
     for (const [index, item] of items.entries()) {
+      if (lifecycle.items.get(item.itemId)?.action === 'alternate') {
+        writing = false
+        taskType = label = null
+        ended = terminal = afterListening = false
+        scopes.set(item.itemId, null)
+        continue
+      }
       let appendixTask = null
       if (terminal) {
         if (isExplicitScoringAppendixStart(item.text, items[index + 1]?.text)) {

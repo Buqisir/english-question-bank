@@ -12,8 +12,10 @@ import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMat
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
-  usesGivenTitleWritingSamples, usesComposedWritingLabels, usesV23WritingCapabilities } from './sourceReferenceSemantics.mjs'
+  usesGivenTitleWritingSamples, usesComposedWritingLabels, usesV23WritingCapabilities, usesAlternateAnswerScope } from './sourceReferenceSemantics.mjs'
 import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
+import { resolveAlternateAnswerScope } from './sourceReferenceAlternateAnswerScope.mjs'
+import { nck1ReferenceOcrSourceDocuments } from './nck1OcrSourceEvidence.mjs'
 
 // Bind nested task/letter and capture role lookups to the same source semantics.
 function sourceReferenceLineRoles(producerVersion) {
@@ -264,13 +266,16 @@ function isObjectiveAnswerGrid(rows) {
 
 // Pure source-item preparation, including confirmed tables, figures and furniture.
 export function prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
-  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, referenceSourceDocuments } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
-  const answerDocuments = materialization.documents.filter((document) =>
+  const sourceDocuments = usesAlternateAnswerScope(producerVersion)
+    ? nck1ReferenceOcrSourceDocuments(materialization.documents, confirmation, referenceSourceDocuments) : materialization.documents
+  const answerDocuments = sourceDocuments.filter((document) =>
     SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
   if (answerDocuments.length !== 1) scopeError('Expected exactly one answer-bearing document')
   const [answerDocument] = answerDocuments
+  const alternateAnswerScope = resolveAlternateAnswerScope(materialization, confirmation, { producerVersion, evidence })
   const documentSha256 = answerDocument.sha256
   const evidencePages = evidence?.documents.find((document) => document.documentId === answerDocument.documentId)?.pages || []
   const pages = confirmation.documents.find((document) => document.documentId === answerDocument.documentId).pages
@@ -400,7 +405,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
     if (!edgeTexts.has(text)) edgeTexts.set(text, new Set())
     edgeTexts.get(text).add(line.page)
   }
-  return { materialization, answerDocument, documentSha256, pages, lines, review, producerVersion,
+  return { materialization, answerDocument, documentSha256, pages, lines, review, producerVersion, alternateAnswerScope,
     sourceOrder, factsFor, referenceFigures, scoringScopes, titleFurniture, edgeTexts }
 }
 
@@ -411,6 +416,7 @@ export function sourceReferenceWritingLifecycle(lines, {
   materialization, answerDocument, factsFor = computeLineFacts, scoringScopes = new Map(),
   titleFurniture = new WeakSet(), edgeTexts = new Map(), review: sourceReview = [],
   producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+  alternateAnswerScope = null,
 }) {
   assertSourceReferenceProducerVersion(producerVersion)
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
@@ -429,7 +435,44 @@ export function sourceReferenceWritingLifecycle(lines, {
   const titles = (materialization.groups ?? []).filter(group => group.writingTask?.taskType === 'application')
     .flatMap(group => group.writingTask.givenSkeleton ?? []).filter(item => item.role === 'title')
   const applicationGivenTitle = titles.length === 1 ? titles[0].text : null
+  const alternateStart = alternateAnswerScope
+    ? lines.findIndex(line => line.itemId === alternateAnswerScope.startInclusiveItemId) : -1
+  const alternateEnd = alternateAnswerScope
+    ? lines.findIndex(line => line.itemId === alternateAnswerScope.endExclusiveItemId) : -1
+  if (alternateAnswerScope && (alternateStart < 0 || alternateEnd <= alternateStart)) scopeError('Alternate source boundary was consumed')
   for (const [lineIndex, line] of lines.entries()) {
+    if (alternateStart >= 0 && lineIndex >= alternateStart && lineIndex < alternateEnd) {
+      if (lineIndex === alternateStart) {
+        const tasks = (materialization.groups ?? []).filter(group => group.writingTask)
+        if (tasks.length !== 2 || new Set(tasks.map(group => group.writingTask.taskType)).size !== 2
+          || !['application', 'continuation'].every(task => {
+            const section = sections.get(task)
+            if (!section) return false
+            const { steps } = planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization)
+            return steps.some(step => step.state.capturing && step.action === 'body')
+              && steps.some(step => step.state.kind === 'scoring' && ['body', 'table', 'figure'].includes(step.action))
+          })) scopeError('Alternate range requires both complete main samples and scoring before its title')
+        scope.enterPart(false)
+        afterListening = scoringAppendix = afterExplanations = false
+      }
+      if (line.itemId) items.set(line.itemId, { task: null, capturing: false, ended: false, kind: null, action: 'alternate' })
+      continue
+    }
+    // A source-derived v26 partition requires all main writing before the
+    // alternate title. Inspect the entire transcript remainder before ended,
+    // furniture or ordinary appendix rules can hide/reopen later ownership.
+    if (alternateAnswerScope && usesAlternateAnswerScope(producerVersion) && lineIndex > alternateEnd) {
+      const facts = factsFor(line)
+      const heading = sourceReferenceWritingTaskHeading(lines, lineIndex, {
+        inWriting: true, sectionCount: sections.size, lastObjectiveQuestion, applicationGivenTitle,
+        answerRole: answerDocument.role, factsFor, producerVersion,
+      })
+      if (heading.started || heading.scoringSection || matchesLineRole('writing.part', facts)
+        || firstLineRole('scoring-overview', facts) || matchesLineRole('entry.sample-label', facts)
+        || (firstLineRole('entry-label', facts) && firstLineRole('entry-kind', facts)?.value === 'scoring')) {
+        scopeError('Alternate range cannot precede later writing or scoring')
+      }
+    }
     articleBlocked ||= isSourceReferenceExplanationStart(line.text, producerVersion)
     if (usesExplicitWritingTitles(producerVersion)
       && /^备选试题参考答案[:：]?$/u.test(line.text.normalize('NFKC').trim())) {
@@ -437,7 +480,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     }
     if (scope.ended) {
       if (line.itemId) items.set(line.itemId, { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
-      if (!afterExplanations) {
+      if (!afterExplanations && !alternateAnswerScope) {
         for (const remaining of lines.slice(lineIndex + 1)) if (remaining.itemId) {
           items.set(remaining.itemId, { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
         }
@@ -911,7 +954,9 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
 // sealed evidence and therefore uses exactly the producer's visual/furniture view.
 export function sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, options) {
   const states = new Map()
-  const documents = materialization.documents.filter(document => answerIds.has(document.documentId))
+  const sourceDocuments = usesAlternateAnswerScope(options?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    ? nck1ReferenceOcrSourceDocuments(materialization.documents, confirmation, options?.referenceSourceDocuments) : materialization.documents
+  const documents = sourceDocuments.filter(document => answerIds.has(document.documentId))
   const taskTypes = new Set()
   for (const document of documents) {
     const source = prepareSourceReferenceWritingItems({ ...materialization, documents: [document] }, evidence, confirmation, options)

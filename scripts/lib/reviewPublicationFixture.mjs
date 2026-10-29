@@ -7,9 +7,8 @@ import { createImportReviewStore, reviewBundleDigest } from '../../server/import
 import { buildNck1ReviewProjection, loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
 import { manifestProductFiles, ABSENT_BY_EXAM_DESIGN } from '../../server/paper-import/pdfProductSet.mjs'
 import { productInputDigest, PRODUCT_MANIFEST } from '../../server/paper-import/frozenProducts.mjs'
-import { prepareSourceReferences, SOURCE_REFERENCES_FILE } from '../../server/paper-import/sourceReferences.mjs'
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
-import { syntheticReviewReferences } from './syntheticReviewAnswerFixture.mjs'
+import { prebindReviewFixtureReferences } from './syntheticReviewAnswerFixture.mjs'
 
 const json = (file, value) => writeFileSync(file, JSON.stringify(value))
 const read = file => JSON.parse(readFileSync(file))
@@ -27,25 +26,8 @@ export function freezeReviewFixture(directory, { expectedCandidateDigest } = {})
   config.provenance.month ??= 10
   json(configPath, config)
   const options = { expectedCandidateDigest, requireAnalyses: true }
+  prebindReviewFixtureReferences(directory, { expectedCandidateDigest })
   const projection = buildNck1ReviewProjection(directory, options)
-  if (!existsSync(path.join(directory, SOURCE_REFERENCES_FILE))) {
-    const references = syntheticReviewReferences(projection) || prepareSourceReferences(projection)
-    const documents = projection.materialization.documents || []
-    const evidence = documents.filter(file => file.role === 'official_answers').map(file => ({
-      documentSha256: file.sha256, locator: { kind: 'page_region', documentId: file.documentId,
-        page: 1, region: { x: 0, y: 0, width: 1, height: 1 } },
-    }))
-    if (!evidence.length) evidence.push(...(projection.sourceInput.members || [])
-      .filter(member => member.role === 'official_answers').map(member => ({
-        documentSha256: sha256(member.bytes),
-        locator: { kind: 'package_json_pointer', documentId: member.memberId, pointer: '' },
-      })))
-    for (const group of references.groups) for (const kind of ['essays', 'scoring']) {
-      // prepareSourceReferences already supplies the original package's provenance.
-      if (evidence.length && group[kind].state === 'unprocessed') group[kind] = { state: 'not_supplied', evidence, entries: [] }
-    }
-    json(path.join(directory, SOURCE_REFERENCES_FILE), references)
-  }
   mkdirSync(path.join(directory, 'products'), { recursive: true })
   const noListening = projection.materialization.listening?.state !== 'captured'
   const manifest = { schemaVersion: noListening ? 'paper-pdf-products-v3' : 'paper-pdf-products-v1',

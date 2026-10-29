@@ -546,8 +546,16 @@ essays 沿用 v1 paragraphs，scoring 使用按源顺序排列的 paragraph/tabl
 v1 侧件继续读取，不静默迁移。原生 DOCX 须重放完整未合并表格，PDF 须逐格核源；
 只有既有 `includeScoring` 展示才渲染评分表，默认 answerOnly 不增加评分内容。
 同一 `official_answers` PDF 的评分表末行末格需要相邻页续接时，使用
-`source-references-v6` / capture-v25 / producer-v25；文件名不变，旧 content-v1–v5
-及 capture-v17–v24 字节与 sealed replay 规则不变，旧 producer 不能首次准入。
+`source-references-v6` / capture-v26 / producer-v26；文件名不变，旧 content-v1–v6
+及 capture-v17–v25 字节与 sealed replay 规则不变，旧 producer 不能首次准入。
+producer-v26 只对一个独立 `official_answers` PDF 内唯一完整的
+「备选试题参考答案」至完整听力标题（原始 orderedItems 紧邻 `Text 1`）推导
+`alternateAnswerScope`。正卷应用文及续写范文、评分须在备选标题前已经成立；
+备选区不得有表格/图片或跨界视觉，区内写作及评分归属均为空，听力标题后继续扫描。
+范围记录绑定文档与精确 OCR evidence/confirmation 字节及全部有序 itemIds；
+它不是作者授予的排除权限，不能与整文缺省声明组合。既有 references 命令
+自动生成该记录，finalize/API 独立重建全部主卷范文、评分、表格、图片及顺序，
+包括无图片情况；不得手删备选原文、改 OCR 或仅交一个 v2 空模板绕过。
 先运行 `answer-products.mjs prepare --paper-dir <workspace>
 --adjacent-cell-continuations <selectors.json> --output <new-request.json>`。
 selectors 是数组，每项仅含 `groupId`、`referenceId`、`tableId`、`cellId`、

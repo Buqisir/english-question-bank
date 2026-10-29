@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 // verify-resource: browser-render
+import './lib/reviewTestLockRoot.mjs'
 
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
   existsSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -18,7 +21,14 @@ import {
   importCanonicalCandidate,
 } from '../shared/paper-canonical/compiler.mjs'
 import { validateInlineBlankTextBoundaries } from '../shared/paper-canonical/inlineBlankBoundaries.mjs'
-import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { nck1MaterializationHistoricalAuthorityRef66 } from '../shared/paper-canonical/authority.mjs'
+import { buildNck1ReviewProjection, buildNck1SealedReviewProjection, loadNck1ReviewSource,
+  reviewBundleFilePaths, PARAGRAPH_SUMMARIES_FILE_NAME, PUBLIC_SEARCH_METADATA_FILE_NAME } from '../server/import-review/revisionProjection.mjs'
+import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
+import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
+import { NCK1_OCR_EVIDENCE_FILE_NAME, NCK1_OCR_CONFIRMATION_FILE_NAME } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { freezeReviewFixture, finalizeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
 import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
@@ -335,7 +345,7 @@ for (const pages of fixture.pageSets) {
   }
 }
 
-const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-image-bundle-'))
+const tempRoot = realpathSync(mkdtempSync(path.join(tmpdir(), 'eqb-nck1-image-bundle-')))
 const run = (...args) => execFileSync(process.execPath, [cliPath, ...args], {
   cwd: root,
   encoding: 'utf8',
@@ -444,6 +454,41 @@ try {
   spellingReview.reviewedAt = '2026-09-21T00:00:00Z'
   spellingReview.targets.forEach(target => { target.decision = 'unchanged' })
   writeFileSync(path.join(cliPaperDir, SPELLING_REVIEW_FILE), JSON.stringify(spellingReview))
+  // Retained v1 stays outside Canonical input. Capture/bind/finalize current
+  // references before the first projection instead of upgrading OCR to v2.
+  const loadedBeforeReferences = loadNck1ReviewSource(cliPaperDir)
+  assert.equal(loadedBeforeReferences.sourceInput.ocrSourceBytes, undefined)
+  const retainedBefore = importCanonicalCandidate(loadedBeforeReferences.sourceInput, undefined,
+    { materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef66 }).candidate
+  assert(retainedBefore)
+  const retainedPreviewBefore = compileNck1MaterializationCandidatePreview(retainedBefore)
+  assert(retainedPreviewBefore.compilation)
+  const captureWork = path.join(tempRoot, 'references')
+  execFileSync(process.execPath, [path.join(root, 'scripts/import-pipeline/ocr-proofread.mjs'),
+    'references', paperId, '--work', captureWork], { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] })
+  const preparedPath = path.join(tempRoot, 'references-prepared.json')
+  const productsCli = path.join(root, 'scripts/import-pipeline/answer-products.mjs')
+  execFileSync(process.execPath, [productsCli, 'prepare', '--paper-dir', cliPaperDir,
+    '--output', preparedPath], { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] })
+  const referenceDraftPath = path.join(captureWork, 'source-references-draft.json')
+  const referenceDraft = JSON.parse(readFileSync(referenceDraftPath))
+  const preparedReferences = JSON.parse(readFileSync(preparedPath)).template
+  for (const key of ['sourceDigest', 'candidateDigest', 'materializationDigest']) referenceDraft[key] = preparedReferences[key]
+  assert.equal(referenceDraft.producerVersion, 'ocr-source-references-producer-v26')
+  writeFileSync(referenceDraftPath, JSON.stringify(referenceDraft))
+  assert.match(execFileSync(process.execPath, [productsCli, 'finalize', '--paper-dir', cliPaperDir,
+    '--input', referenceDraftPath, '--output', path.join(cliPaperDir, SOURCE_REFERENCES_FILE)],
+  { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }), /local_capture_finalized/u)
+  assert.match(execFileSync(process.execPath, [productsCli, 'verify', '--paper-dir', cliPaperDir,
+    '--references', path.join(cliPaperDir, SOURCE_REFERENCES_FILE)],
+  { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }), /local_capture_verified/u)
+  const retainedAfter = importCanonicalCandidate(loadNck1ReviewSource(cliPaperDir).sourceInput, undefined,
+    { materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef66 }).candidate
+  assert.deepEqual(retainedAfter, retainedBefore)
+  assert.deepEqual(compileNck1MaterializationCandidatePreview(retainedAfter).compilation, retainedPreviewBefore.compilation)
+  for (const [file, original] of [[NCK1_OCR_EVIDENCE_FILE_NAME, evidence], [NCK1_OCR_CONFIRMATION_FILE_NAME, confirmation]]) {
+    assert.equal(readFileSync(path.join(cliPaperDir, 'materialization', file), 'utf8'), `${JSON.stringify(original, null, 2)}\n`)
+  }
   const blockedPath = path.join(cliPaperDir, 'signals/blocked.json')
   const historicalBlock = `${JSON.stringify({
     code: 'source_incomplete',
@@ -530,6 +575,116 @@ try {
     }),
     /"status": "search_metadata_verified"/u,
   )
+  // A new v26 capture can retain Canonical v66, including its downstream
+  // bindings. This creates no historical receipt or approval. Restore every
+  // original draft byte before the default-authority public CLI case continues.
+  const identityKeys = ['sourceDigest', 'candidateDigest', 'visibleStructureDigest',
+    'paragraphSummariesDigest', 'publicSearchMetadataDigest']
+  const reboundFiles = [SOURCE_REFERENCES_FILE, PARAGRAPH_SUMMARIES_FILE_NAME, PUBLIC_SEARCH_METADATA_FILE_NAME]
+    .map(file => ({ file: path.join(cliPaperDir, file), bytes: readFileSync(path.join(cliPaperDir, file)) }))
+  let retainedBindings
+  try {
+    for (const { file, bytes } of reboundFiles) {
+      writeFileSync(file, JSON.stringify({ ...JSON.parse(bytes), candidateDigest: retainedBefore.candidateDigest }))
+    }
+    const retainedProjection = freezeReviewFixture(cliPaperDir,
+      { expectedCandidateDigest: retainedBefore.candidateDigest })
+    retainedBindings = Object.fromEntries(identityKeys.map(key => [key, retainedProjection[key]]))
+    assert.equal(retainedBindings.sourceDigest, retainedBefore.source.sha256)
+    assert.equal(retainedBindings.candidateDigest, retainedBefore.candidateDigest)
+    const retainedManifest = reviewFixtureManifest(cliPaperDir, retainedProjection)
+    const retainedRoot = path.join(tempRoot, 'retained-v66-current-capture')
+    for (const file of retainedManifest.files) {
+      const destination = path.join(retainedRoot, file.path)
+      mkdirSync(path.dirname(destination), { recursive: true })
+      writeFileSync(destination, readFileSync(path.join(cliPaperDir, file.path)))
+    }
+    const retainedTransport = buildNck1ReviewProjection(retainedRoot,
+      { expectedCandidateDigest: retainedBefore.candidateDigest })
+    for (const key of identityKeys) assert.equal(retainedTransport[key], retainedBindings[key], `retained-v66 ${key}`)
+  } finally {
+    for (const { file, bytes } of reboundFiles) writeFileSync(file, bytes)
+  }
+  const beforeTransport = freezeReviewFixture(cliPaperDir)
+  const bundleManifest = reviewFixtureManifest(cliPaperDir, beforeTransport)
+  const ocrFiles = bundleManifest.files.filter(file => file.role === 'ocr_source_evidence')
+  assert.equal(ocrFiles.length, 2)
+  const unpackedRoot = path.join(tempRoot, 'unpacked-review')
+  for (const file of bundleManifest.files) {
+    const bytes = readFileSync(path.join(cliPaperDir, file.path))
+    mkdirSync(path.dirname(path.join(unpackedRoot, file.path)), { recursive: true })
+    writeFileSync(path.join(unpackedRoot, file.path), bytes)
+    assert.equal(sha256(bytes), file.sha256)
+  }
+  // Public boundaries must reject manifest relationship damage on transported
+  // retained-v1 inputs, before any PDF can disappear from the OCR inventory.
+  const transportedManifestPath = path.join(unpackedRoot, 'universal-source-manifest.json')
+  const transportedManifestBytes = readFileSync(transportedManifestPath)
+  const renditionCases = [
+    ['same-role-without-relation', manifest => { delete manifest.documents.find(doc => doc.renditionOf).renditionOf }],
+    ['dangling-target', manifest => { manifest.documents.find(doc => doc.renditionOf).renditionOf = 'missing-original' }],
+    ['pdf-target', manifest => {
+      const copy = manifest.documents.find(doc => doc.renditionOf); copy.renditionOf = copy.documentId
+    }],
+    ['wrong-role', manifest => { manifest.documents.find(doc => doc.renditionOf).role = 'unbound-role' }],
+    ['wrong-page-count', manifest => { manifest.documents.find(doc => doc.renditionOf).pageCount++ }],
+    ['missing-original', manifest => {
+      const copy = manifest.documents.find(doc => doc.renditionOf)
+      manifest.documents = manifest.documents.filter(doc => doc.documentId !== copy.renditionOf)
+    }],
+    ...['scoring', 'alternate'].map(kind => [`extra-${kind}-pdf`, manifest => {
+      const copy = manifest.documents.find(doc => doc.renditionOf)
+      const { renditionOf, ...independent } = copy
+      manifest.documents.push({ ...independent, documentId: `independent-${kind}-pdf` })
+    }]),
+  ]
+  try {
+    for (const [label, mutate] of renditionCases) {
+      const altered = JSON.parse(transportedManifestBytes); mutate(altered)
+      writeFileSync(transportedManifestPath, JSON.stringify(altered))
+      assert.throws(() => buildNck1ReviewProjection(unpackedRoot),
+        /rendition|Materialized document is unavailable/iu, `projection ${label}`)
+      const rejectedOutput = path.join(tempRoot, `rejected-${label}.json`)
+      assert.throws(() => execFileSync(process.execPath, [productsCli, 'finalize', '--paper-dir', unpackedRoot,
+        '--input', path.join(unpackedRoot, SOURCE_REFERENCES_FILE), '--output', rejectedOutput],
+      { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }), error =>
+        /rendition|Materialized document is unavailable/iu.test(String(error.stderr)), `finalize ${label}`)
+      assert.equal(existsSync(rejectedOutput), false, label)
+    }
+  } finally { writeFileSync(transportedManifestPath, transportedManifestBytes) }
+  console.log(`Public finalize/projection rendition negatives: PASS (${renditionCases.length} cases each)`)
+  const afterTransport = buildNck1ReviewProjection(unpackedRoot)
+  for (const key of identityKeys) assert.equal(afterTransport[key], beforeTransport[key], key)
+  for (const file of ocrFiles) {
+    const located = path.join(unpackedRoot, file.path)
+    const bytes = readFileSync(located)
+    rmSync(located)
+    assert.throws(() => buildNck1ReviewProjection(unpackedRoot), /Reference OCR|ENOENT/u)
+    writeFileSync(located, bytes)
+  }
+  await reviewBuildIdentityProvider().ready()
+  const sealed = finalizeReviewFixture({ directory: unpackedRoot, output: path.join(tempRoot, 'sealed-review'),
+    projection: afterTransport, approve: false })
+  const sealedRoot = sealed.store.revisionDirectory(sealed.revision.id)
+  const replayed = buildNck1SealedReviewProjection(sealedRoot, sealed.revision)
+  assert.equal(replayed.candidateDigest, beforeTransport.candidateDigest)
+  const sealedReferences = path.join(sealedRoot, SOURCE_REFERENCES_FILE)
+  const sealedBytes = readFileSync(sealedReferences)
+  writeFileSync(sealedReferences, Buffer.concat([sealedBytes, Buffer.from(' ')]))
+  assert.throws(() => buildNck1SealedReviewProjection(sealedRoot, sealed.revision), /sealed revision|sealed|digest/iu)
+  writeFileSync(sealedReferences, sealedBytes)
+  assert.deepEqual(reviewFixtureManifest(cliPaperDir, beforeTransport), bundleManifest)
+  assert.deepEqual(reviewBundleFilePaths(cliPaperDir), reviewBundleFilePaths(unpackedRoot))
+  console.log(JSON.stringify({ referenceOnlyV1: 'PASS', retainedAuthority: retainedBefore.authority,
+    retainedBindings,
+    retainedSourceDigest: retainedBefore.source.sha256, retainedCandidateDigest: retainedBefore.candidateDigest,
+    retainedCanonicalDigest: digestJson(retainedPreviewBefore.compilation),
+    sourceDigest: beforeTransport.sourceDigest, candidateDigest: beforeTransport.candidateDigest,
+    visibleStructureDigest: beforeTransport.visibleStructureDigest,
+    paragraphSummariesDigest: beforeTransport.paragraphSummariesDigest,
+    publicSearchMetadataDigest: beforeTransport.publicSearchMetadataDigest,
+    bundleDigest: bundleManifest.bundleDigest,
+    ocrFiles: ocrFiles.map(({ path, sha256 }) => ({ path, sha256 })) }))
   assert.match(
     execFileSync(process.execPath, [surfaceVerifierPath, paperId], {
       cwd: root,
@@ -563,4 +718,6 @@ try {
 }
 
 assert.equal(existsSync(cliPaperDir), false)
+// Keep supplemental-OCR closure/identity negatives in this existing CI lane.
+await import('../server/paper-import/sourceReferenceAdmissionReferenceOcr.test.mjs')
 console.log('verify-universal-nck1-image-source-bundle: PASS')

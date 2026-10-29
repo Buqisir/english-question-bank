@@ -38,6 +38,24 @@ export function loadNck1OcrSourceEmphasis(paperDir) {
   } }
 }
 
+// References may consume retained v1 OCR without adding it to Canonical input
+// (and thus without changing the historical Candidate identity).
+export function loadReferenceOcrSourceBytes(paperDir, { producerVersion, canonicalOcrSourceBytes } = {}) {
+  if (producerVersion !== 'ocr-source-references-producer-v26' || canonicalOcrSourceBytes) return undefined
+  const directory = path.join(paperDir, 'materialization')
+  const files = [NCK1_OCR_EVIDENCE_FILE_NAME, NCK1_OCR_CONFIRMATION_FILE_NAME]
+    .map(file => path.join(directory, file))
+  if (files.every(file => !existsSync(file))) return undefined
+  if (files.some(file => !existsSync(file))) throw new Error('Reference OCR requires both retained files')
+  const [evidenceBytes, confirmationBytes] = files.map(file => new Uint8Array(readFileSync(file)))
+  if (!evidenceBytes.byteLength || !confirmationBytes.byteLength) throw new Error('Reference OCR files must be nonempty')
+  if (JSON.parse(new TextDecoder().decode(evidenceBytes)).schemaVersion !== NCK1_OCR_EVIDENCE_SCHEMA_VERSION
+    || JSON.parse(new TextDecoder().decode(confirmationBytes)).schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION) {
+    throw new Error('Reference-only OCR requires retained v1 evidence and confirmation')
+  }
+  return { evidenceBytes, confirmationBytes }
+}
+
 export const NCK1_OCR_REVIEW_CODES = Object.freeze([
   'NCK1_OCR_TEXT_LAYER_REQUIRED',
   // Kept for compatibility with already-finalized OCR review revisions. New
@@ -208,6 +226,75 @@ function replayPdfPage(document, page) {
 
 export function nck1OcrSourceDocuments(documents) {
   return (documents || []).filter((document) => !document.renditionOf)
+}
+
+// Reference-only identity proof. The manifest already travels in the Review
+// bundle; materialization bytes deliberately remain unchanged for retained v1.
+const verifiedReferenceDocuments = new WeakSet()
+const referenceIdentityKeys = ['documentId', 'role', 'mediaType', 'sha256', 'byteLength', 'pageCount']
+
+export function resolveReferenceSourceDocuments(materialization, supplied, manifest) {
+  const fail = message => { throw Object.assign(new Error(`Invalid reference rendition: ${message}`),
+    { code: 'SOURCE_REFERENCES_RENDITION_INVALID' }) }
+  const inventory = materialization.documents ?? []
+  const declared = manifest?.documents
+  if (manifest?.paperId !== materialization.paperId || !Array.isArray(declared)
+    || !Array.isArray(supplied) || !inventory.length
+    || declared.length !== inventory.length || supplied.length !== inventory.length) {
+    fail('complete original Source Manifest and supplied inventory required')
+  }
+  for (const list of [inventory, declared, supplied]) {
+    if (new Set(list.map(doc => doc.documentId)).size !== list.length
+      || list.some(doc => !nonEmpty(doc.documentId))) fail('duplicate or missing document ID')
+  }
+  const result = inventory.map(document => {
+    const declaration = declared.find(doc => doc.documentId === document.documentId)
+    const bytes = supplied.find(doc => doc.documentId === document.documentId)?.bytes
+    if (!declaration || referenceIdentityKeys.some(key => declaration[key] !== document[key])
+      || !(bytes instanceof Uint8Array) || bytes.byteLength !== document.byteLength
+      || sha256(bytes) !== document.sha256 || !Number.isInteger(document.pageCount) || document.pageCount < 1) {
+      fail(`manifest/materialization/supplied bytes differ for ${document.documentId}`)
+    }
+    if (Object.hasOwn(document, 'renditionOf') && document.renditionOf !== declaration.renditionOf) {
+      fail(`conflicting rendition target for ${document.documentId}`)
+    }
+    if (Object.hasOwn(declaration, 'renditionOf') && !nonEmpty(declaration.renditionOf)) {
+      fail(`empty rendition target for ${document.documentId}`)
+    }
+    return Object.freeze({ ...document, ...(declaration.renditionOf ? { renditionOf: declaration.renditionOf } : {}) })
+  })
+  for (const document of result) {
+    if (!document.renditionOf) {
+      if (document.mediaType !== NCK1_IMAGE_BUNDLE_MEDIA_TYPE) fail(`independent PDF or unsupported original ${document.documentId}`)
+      continue
+    }
+    const target = result.find(doc => doc.documentId === document.renditionOf)
+    if (document.mediaType !== PDF || !target || target.renditionOf
+      || target.mediaType !== NCK1_IMAGE_BUNDLE_MEDIA_TYPE
+      || target.role !== document.role || target.pageCount !== document.pageCount) {
+      fail(`target must be an original image carrier with matching role/pages: ${document.documentId}`)
+    }
+  }
+  Object.freeze(result)
+  verifiedReferenceDocuments.add(result)
+  return result
+}
+
+export function nck1ReferenceOcrSourceDocuments(documents, confirmation, referenceSourceDocuments) {
+  if (confirmation?.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION
+    || !(documents || []).some(document => document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE)) {
+    return nck1OcrSourceDocuments(documents)
+  }
+  if (!verifiedReferenceDocuments.has(referenceSourceDocuments)
+    || documents.some(document => {
+      const bound = referenceSourceDocuments.find(doc => doc.documentId === document.documentId)
+      return !bound || referenceIdentityKeys.some(key => bound[key] !== document[key])
+        || (Object.hasOwn(document, 'renditionOf') && document.renditionOf !== bound.renditionOf)
+    })) {
+    throw Object.assign(new Error('Retained v1 image references require verified Source Manifest rendition relationships'),
+      { code: 'SOURCE_REFERENCES_RENDITION_INVALID' })
+  }
+  return documents.filter(document => !referenceSourceDocuments.find(doc => doc.documentId === document.documentId).renditionOf)
 }
 
 export function captureNck1OcrPageRasters(documents) {

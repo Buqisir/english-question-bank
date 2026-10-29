@@ -276,7 +276,12 @@ try {
   const withoutReferences = { ...productManifest,
     inputDigest: productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot)) }
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(withoutReferences))
-  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /源参考答案捕获/)
+  // The current source's confirmed sample bodies reject a missing sidecar at
+  // source admission, before the frozen-product missing-reference guard.
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), {
+    code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID',
+    message: 'Confirmed writing reference body cannot be declared not_supplied',
+  }, 'confirmed source samples cannot disappear when the reference sidecar is removed')
   await writeFile(referencesPath, JSON.stringify(references))
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
   const reviewFiles = reviewBundleFilePaths(fixture.reviewRoot).map(file => {

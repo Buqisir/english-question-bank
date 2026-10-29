@@ -31,6 +31,7 @@ import { NCK1_STAGED_ANALYSIS_FILES } from '../server/import-review/nck1Analysis
 import {
   buildNck1AnalyzedPackageReviewSourceManifest,
   buildNck1ReviewProjection,
+  buildNck1SealedReviewProjection,
   buildNck1ReviewConsumption,
   loadNck1ReviewSource,
   reviewBundleFilePaths,
@@ -84,7 +85,9 @@ import { LEGACY_LISTENING_WAVEFORM_FILE, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } 
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 import { freezeReviewFixture, finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
-import { syntheticReviewAnswerPdf, syntheticReviewReferences, syntheticApplicationSample, syntheticContinuationSample } from './lib/syntheticReviewAnswerFixture.mjs'
+import { syntheticReviewAnswerPdf, syntheticReviewReferences, syntheticApplicationSample, syntheticContinuationSample,
+  prebindReviewFixtureReferences, removeOwnedReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
+import { makeCurrentReviewSource, locateCurrentReviewQuestions } from '../test-fixtures/paper-import/review-source-references-v26/fixture.mjs'
 import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
 import {
@@ -444,15 +447,21 @@ export function makeReviewRoot(
   parentDir,
   fixturePaperId = paperId,
   questionSourceLabel = 'deterministic NCK1 question source',
-  { listening = false, sourceType = '自编题' } = {},
+  { listening = false, sourceType = '自编题', historicalSource = false } = {},
 ) {
   const reviewRoot = path.join(parentDir, 'review')
-  const questionBytes = Buffer.from(
-    `%PDF-1.7 ${questionSourceLabel}`.padEnd(100, 'q'),
-  )
-  const answerBytes = syntheticReviewAnswerPdf()
+  const { questionBytes, answerBytes, evidence: sourceEvidence, confirmation: sourceConfirmation } =
+    historicalSource
+      // Retain the pre-OCR fixture for v58 replay; current publication fixtures
+      // must keep their native answer PDF and bound OCR evidence.
+      ? {
+          questionBytes: Buffer.from(`%PDF-1.7 ${questionSourceLabel}`.padEnd(100, 'q')),
+          answerBytes: syntheticReviewAnswerPdf(),
+        }
+      : makeCurrentReviewSource({ paperId: fixturePaperId, questionSourceLabel, listening })
   const materialization = makeFixture({ listening })
   materialization.paperId = fixturePaperId
+  if (!historicalSource) locateCurrentReviewQuestions(materialization)
   if (listening) {
     materialization.listening.transcript[0].text =
       'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
@@ -515,6 +524,10 @@ export function makeReviewRoot(
   mkdirSync(path.join(reviewRoot, 'source'), { recursive: true })
   writeFileSync(path.join(reviewRoot, 'source/questions.pdf'), questionBytes)
   writeFileSync(path.join(reviewRoot, 'source/answers.pdf'), answerBytes)
+  if (!historicalSource) {
+    writeJson(path.join(reviewRoot, 'materialization/nck1-ocr-source-evidence-v1.json'), sourceEvidence)
+    writeJson(path.join(reviewRoot, 'materialization/nck1-ocr-source-confirmation-v1.json'), sourceConfirmation)
+  }
 
   if (listening) {
     const audioPath = path.join(parentDir, 'listening.mp3')
@@ -573,6 +586,8 @@ export function makeReviewRoot(
 
   writeStagedAnalyses(reviewRoot, materialization)
 
+  if (historicalSource) return { reviewRoot }
+  prebindReviewFixtureReferences(reviewRoot)
   const projection = buildNck1ReviewProjection(reviewRoot, { requireAnalyses: true })
   const writingTasks = Object.values(projection.paperAsset.content.writingTasks)
   assert.deepEqual(
@@ -634,7 +649,8 @@ export function makeReviewRoot(
   }
 }
 
-function convertToAnalyzedPackageReviewSource(reviewRoot) {
+export function convertToAnalyzedPackageReviewSource(reviewRoot) {
+  removeOwnedReviewReferences(reviewRoot)
   const rawManifest = JSON.parse(readFileSync(
     path.join(reviewRoot, 'universal-source-manifest.json'),
     'utf8',
@@ -743,6 +759,7 @@ function convertToAnalyzedPackageReviewSource(reviewRoot) {
   )
   rmSync(path.join(reviewRoot, 'source'), { recursive: true, force: true })
   rmSync(path.join(reviewRoot, 'materialization'), { recursive: true, force: true })
+  prebindReviewFixtureReferences(reviewRoot)
 }
 
 export function makeExternalAnalyzedPackage(reviewRoot, packageRoot) {
@@ -881,16 +898,54 @@ function verifyHistoricalAuthorityReplay() {
   const startedAt = performance.now()
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-review-v58-replay-'))
   try {
-    const { reviewRoot } = makeReviewRoot(root)
+    const { reviewRoot } = makeReviewRoot(root, paperId, undefined, { historicalSource: true })
     const loaded = loadNck1ReviewSource(reviewRoot)
     const previous = importCanonicalCandidate(loaded.sourceInput, undefined, {
       materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
     })
     assert.deepEqual(previous.issues, [])
-    const replayed = buildNck1ReviewProjection(reviewRoot, {
-      expectedCandidateDigest: previous.candidate.candidateDigest,
+    // Model an already sealed pre-v26 revision, not a new admission of old
+    // source bytes. Its references bind to the original v58 Candidate.
+    const references = syntheticReviewReferences({
+      materialization: loaded.materialization,
+      sourceInput: loaded.sourceInput,
+      sourceDigest: previous.candidate.source.sha256,
+      candidateDigest: previous.candidate.candidateDigest,
     })
-    const current = buildNck1ReviewProjection(reviewRoot)
+    references.producerVersion = 'ocr-source-references-producer-v25'
+    writeJson(path.join(reviewRoot, SOURCE_REFERENCES_FILE), references)
+    const manifest = {
+      schemaVersion: 'web-import-review-bundle-v1',
+      paperId,
+      paperName: '2026 Contract Mock',
+      sourceDigest: previous.candidate.source.sha256,
+      candidateDigest: previous.candidate.candidateDigest,
+      producerBuildId: 'historical-v58-fixture',
+      files: readdirSync(reviewRoot, { recursive: true, withFileTypes: true })
+        .filter(entry => entry.isFile()).map(entry => {
+          const filePath = path.relative(reviewRoot, path.join(entry.parentPath, entry.name))
+          const bytes = readFileSync(path.join(reviewRoot, filePath))
+          return { path: filePath, role: 'source', mediaType: filePath.endsWith('.pdf')
+            ? 'application/pdf' : 'application/json', sha256: sha256(bytes), byteLength: bytes.byteLength }
+        }),
+    }
+    manifest.bundleDigest = reviewBundleDigest(manifest)
+    const revisionPath = path.join(root, 'retained-revision.json')
+    writeJson(revisionPath, { id: 'historical-v58-fixture', state: 'ready',
+      paperId, sourceDigest: manifest.sourceDigest, candidateDigest: manifest.candidateDigest,
+      bundleDigest: manifest.bundleDigest, manifest })
+    const revision = JSON.parse(readFileSync(revisionPath, 'utf8'))
+    const replayed = buildNck1SealedReviewProjection(reviewRoot, revision)
+    assert.throws(() => buildNck1ReviewProjection(reviewRoot, {
+      expectedCandidateDigest: previous.candidate.candidateDigest,
+    }), /First source-reference admission requires the current producer version/)
+    const referencePath = path.join(reviewRoot, SOURCE_REFERENCES_FILE)
+    const referenceBytes = readFileSync(referencePath)
+    writeFileSync(referencePath, Buffer.concat([referenceBytes, Buffer.from(' ')]))
+    assert.throws(() => buildNck1SealedReviewProjection(reviewRoot, revision),
+      /Historical references differ from the trusted sealed revision receipt/)
+    writeFileSync(referencePath, referenceBytes)
+    const { projection: current } = makeReviewRoot(path.join(root, 'current'))
     assert.equal(replayed.candidateDigest, previous.candidate.candidateDigest)
     assert.equal(replayed.consumption.authorityRef.manifestVersion, '58')
     assert.equal(replayed.consumption.consumerContractRef.version, '48')
@@ -1070,6 +1125,7 @@ function makeOnlinePromotionContext(
     const retained = importCanonicalCandidate(loadNck1ReviewSource(fixture.reviewRoot).sourceInput, undefined,
       { materializationAuthorityRef: retainedAuthorityRef })
     assert.deepEqual(retained.issues, [])
+    prebindReviewFixtureReferences(fixture.reviewRoot, { expectedCandidateDigest: retained.candidate.candidateDigest })
     fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, {
       requireAnalyses: true, expectedCandidateDigest: retained.candidate.candidateDigest,
     })
