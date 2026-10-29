@@ -57,6 +57,53 @@ test('legacy materialization restores both listening sections from confirmed tex
   const { schemaVersion: oldSchema, ...before } = input.materialization
   assert.deepEqual(rest, before)
   assert.deepEqual(input, original)
+  assert.deepEqual(restoreOcrSourcePresentation({ ...input, materialization: result }), result)
+})
+
+test('comma dialogue directions retain the complete once-only source, locator and distinct long section', () => {
+  const input = fixture()
+  // n085 question-source-1:item-8 and item-20; source wording is not normalized.
+  const texts = [
+    '听下面5段对话，每段对话后有一个小题，从题中所给的A、B、C三个选项中选出最佳选项。听完每段对话后，你都有10秒钟的时间来回答有关小题和阅读下一小题，每段对话仅读一遍。',
+    '听下面5段对话或独白，每段对话或独白后有几个小题，从题中所给的A、B、C三个选项中选出最佳选项。听每段对话或独白前，你将有时间阅读各个小题，每小题5秒钟。听完后，各小题将给出5秒钟的作答时间。每段对话或独白读两遍。',
+  ]
+  texts.forEach((text, i) => {
+    input.confirmation.documents[0].pages[0].orderedItems[i].text = text
+    input.evidence.documents[0].pages[1].observations[i].text = text
+  })
+  const original = structuredClone(input)
+  const result = restoreOcrSourcePresentation(input)
+  assert.deepEqual(result.sourcePresentation.instructions.slice(0, 2), texts.map((text, i) => ({
+    slotId: i === 0 ? 'listening.short-dialogue' : 'listening.long-form',
+    text,
+    source: { kind: 'page_region', documentId: 'renamed-question', page: 1,
+      region: { x: 0.1, y: 0.1 + i * 0.1, width: 0.8, height: 0.05 } },
+  })))
+  assert.match(result.sourcePresentation.instructions[0].text, /每段对话仅读一遍。$/u)
+  assert.equal(result.sourcePresentation.instructions.length, 6)
+  const { sourcePresentation, schemaVersion, ...rest } = result
+  const { schemaVersion: oldSchema, ...before } = original.materialization
+  assert.deepEqual(rest, before)
+  assert.deepEqual(input, original)
+  assert.deepEqual(restoreOcrSourcePresentation({ ...input, materialization: result }), result)
+})
+
+test('long dialogue and ambiguous comma directions cannot fill the short section', () => {
+  for (const text of [
+    '听下面5段对话或独白。每段录音读两遍。',
+    '听下面5段对话，每段对话后有几个小题，选择答案。',
+    '听下面5段对话，每段对话后有一个小题组。',
+    '听下面5段对话，每段对话后有一个小题或几个小题。',
+    '听下面5段对话，每段对话仅读一遍。',
+  ]) {
+    const input = fixture()
+    input.confirmation.documents[0].pages[0].orderedItems[0].text = text
+    input.evidence.documents[0].pages[1].observations[0].text = text
+    const before = structuredClone(input)
+    assert.throws(() => restoreOcrSourcePresentation(input),
+      /No confirmed direction item matched: listening.short-dialogue/u)
+    assert.deepEqual(input, before)
+  }
 })
 
 test('recording directions retain confirmed wording and distinguish one question from several', () => {
