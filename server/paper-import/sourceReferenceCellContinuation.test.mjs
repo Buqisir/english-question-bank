@@ -7,6 +7,7 @@ import { scoringFiguresFixture } from '../../test-fixtures/paper-import/source-r
 import { buildNck1OcrSourceEvidence } from './nck1OcrSourceEvidence.mjs'
 import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from './sourceReferenceAdmission.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './sourceReferenceSemantics.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { prepareSourceReferences, validateSourceReferences } from './sourceReferences.mjs'
 import { makeFixture } from '../../scripts/verify-nck1-source-materialization.mjs'
@@ -444,20 +445,22 @@ test('historical producers v17–24 retain exact sealed replay and reject first 
   }
 })
 
-test('v26 and sealed v24/v25 preserve v23 scoring headings and chart capture', () => {
+test('current producer and sealed v24/v25/v26 preserve v23 scoring headings and chart capture', () => {
   const input = scoringFiguresFixture({ scoringIntro: true })
-  const versions = ['v23', 'v24', 'v25', 'v26'].map(version => `ocr-source-references-producer-${version}`)
+  const versions = [...['v23', 'v24', 'v25', 'v26'].map(version => `ocr-source-references-producer-${version}`),
+    OCR_SOURCE_REFERENCES_PRODUCER_VERSION]
   const captures = versions.map(producerVersion => buildSourceReferences(input.materialization, input.evidence,
     input.confirmation, { sourceDocuments: input.sourceDocuments, producerVersion }))
   assert.equal(captures[0].schemaVersion, 'source-references-v4')
   assert.deepEqual(captures[0].groups, captures[1].groups)
   assert.deepEqual(captures[1].groups, captures[2].groups)
   assert.deepEqual(captures[2].groups, captures[3].groups)
+  assert.deepEqual(captures[3].groups, captures[4].groups)
   assert.equal(captures[2].groups[0].scoring.entries[0].sourceLabel, '二、各档次的给分范围和要求')
-  const sidecar = { schemaVersion: 'source-references-v4', producerVersion: versions[3],
+  const sidecar = { schemaVersion: 'source-references-v4', producerVersion: versions.at(-1),
     paperId: input.materialization.paperId, sourceDigest: input.sourceDigest,
-    candidateDigest: input.candidateDigest, materializationDigest: digestJson(input.materialization), groups: captures[1].groups }
-  for (const producerVersion of versions.slice(1, 3)) {
+    candidateDigest: input.candidateDigest, materializationDigest: digestJson(input.materialization), groups: captures.at(-1).groups }
+  for (const producerVersion of versions.slice(1, -1)) {
     const historical = { ...sidecar, producerVersion }
     const bytes = Buffer.from(JSON.stringify(historical)), before = sha256(bytes)
     assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt: {

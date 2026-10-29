@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
 import { textInput, historicalTexts, qingdaoTexts } from '../../test-fixtures/paper-import/source-title-compat/fixture.mjs'
 import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
-import { prepareSourceReferences } from './sourceReferences.mjs'
+import { prepareSourceReferences, sourceReferenceBlocks, validateSourceReferences } from './sourceReferences.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from './sourceReferenceAdmission.mjs'
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { isAnnotatedScoringLabel, isTaskLocalSampleOmission, isSourceTitleTranscriptCandidate } from './sourceReferenceWritingRules.mjs'
@@ -279,5 +279,91 @@ test('fixed sealed v25/v26 bytes replay without first-admission authority or mut
       { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
     assert.throws(() => assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes,
       receipt: { ...receipt, candidateDigest: sha256('different') } }), { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
+  }
+})
+
+function v2ReplayFixture() {
+  // Page boundaries preserve two real paragraphs in each task's first rubric.
+  // A second application rubric also makes entry order independently testable.
+  const input = textInput([historicalTexts.slice(0, 6),
+    ['应用文评分第二段。', '评分细则', '应用文评分第三段。', ...historicalTexts.slice(6)],
+    ['续写评分第二段。']])
+  const capture = buildSourceReferences(input.materialization, input.evidence, input.confirmation)
+  const v1 = { ...prepareSourceReferences(input), groups: capture.groups }
+  const v2 = structuredClone(v1)
+  v2.schemaVersion = 'source-references-v2'
+  for (const group of v2.groups) for (const entry of group.scoring.entries) {
+    entry.blocks = sourceReferenceBlocks(entry)
+    delete entry.paragraphs
+  }
+  assert.equal(v2.groups[0].scoring.entries.length, 2)
+  for (const group of v2.groups) assert.equal(group.scoring.entries[0].blocks.length, 2)
+  return { input, v1, v2 }
+}
+
+test('v1 prose and v2 paragraph blocks retain identical source meaning at first admission', () => {
+  const { input, v1, v2 } = v2ReplayFixture()
+  const before = structuredClone({ input, v1, v2 })
+  assert.deepEqual(validateSourceReferences({ ...input, sidecar: v1 }), [])
+  assert.deepEqual(validateSourceReferences({ ...input, sidecar: v2 }), [])
+  assertSourceReferenceAdmission({ ...input, sidecar: v1 })
+  assertSourceReferenceAdmission({ ...input, sidecar: v2 })
+  assert.deepEqual(structuredClone({ input, v1, v2 }), before)
+})
+
+test('v2 block replay still rejects text, labels, ids, order, task ownership and source locator changes', () => {
+  const { input, v2 } = v2ReplayFixture()
+  const entry = sidecar => sidecar.groups[0].scoring.entries[0]
+  for (const [name, change] of [
+    ['text', sidecar => { entry(sidecar).blocks[0].paragraph.text += ' invented content' }],
+    ['label', sidecar => { entry(sidecar).sourceLabel = '评分原则' }],
+    ['entry id', sidecar => { entry(sidecar).referenceId += '-forged' }],
+    ['paragraph id', sidecar => { entry(sidecar).blocks[0].paragraph.paragraphId += '-forged' }],
+    ['paragraph role', sidecar => { entry(sidecar).blocks[0].paragraph.role = 'title' }],
+    ['one of two paragraphs omitted', sidecar => { entry(sidecar).blocks.shift() }],
+    ['duplicate content with unique id', sidecar => {
+      const duplicate = structuredClone(entry(sidecar).blocks[0])
+      duplicate.paragraph.paragraphId += '-duplicate'
+      entry(sidecar).blocks.push(duplicate)
+    }],
+    ['entry order', sidecar => { sidecar.groups[0].scoring.entries.reverse() }],
+    ['block order within entry', sidecar => { entry(sidecar).blocks.reverse() }],
+    ['entry ownership across legal groups', sidecar => {
+      const [application, continuation] = sidecar.groups
+      ;[application.scoring.entries[0], continuation.scoring.entries[0]] =
+        [continuation.scoring.entries[0], application.scoring.entries[0]]
+    }],
+    ['paragraph source', sidecar => { entry(sidecar).blocks[0].paragraph.source.locator.region.x += .01 }],
+    ['label source', sidecar => { entry(sidecar).labelSource.locator.region.y += .01 }],
+    ['group order', sidecar => { sidecar.groups.reverse() }],
+  ]) {
+    const changed = structuredClone(v2)
+    change(changed)
+    assert.notDeepEqual(changed, v2, name)
+    assert.deepEqual(validateSourceReferences({ ...input, sidecar: changed }), [], name)
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed }), {
+      code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID',
+      message: 'Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator',
+    }, name)
+  }
+})
+
+test('v2 malformed containers, duplicate ids and foreign groups retain their earlier admission errors', () => {
+  const { input, v2 } = v2ReplayFixture()
+  const entry = sidecar => sidecar.groups[0].scoring.entries[0]
+  for (const [name, change, code] of [
+    ['empty blocks', sidecar => { entry(sidecar).blocks = [] }, 'SOURCE_REFERENCES_SCHEMA_INVALID'],
+    ['duplicate id', sidecar => { entry(sidecar).blocks.push(structuredClone(entry(sidecar).blocks[0])) },
+      'SOURCE_REFERENCES_ID_DUPLICATE'],
+    ['foreign group', sidecar => { sidecar.groups[0].groupId = sidecar.groups[1].groupId },
+      'SOURCE_REFERENCES_GROUP_FOREIGN'],
+    ['dual paragraphs and blocks', sidecar => {
+      entry(sidecar).paragraphs = entry(sidecar).blocks.map(block => structuredClone(block.paragraph))
+    }, 'SOURCE_REFERENCES_SCHEMA_INVALID'],
+  ]) {
+    const changed = structuredClone(v2)
+    change(changed)
+    assert(validateSourceReferences({ ...input, sidecar: changed }).some(issue => issue.code === code), name)
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed }), { code }, name)
   }
 })

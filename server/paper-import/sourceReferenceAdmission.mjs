@@ -220,6 +220,7 @@ function assertSourceReferenceContent({
     return
   }
   const figures = sourceReferenceFigures(sidecar)
+  const replayedFigures = new Set()
   const continued = sidecar?.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
     group[kind].entries.flatMap(entry => sourceReferenceBlocks(entry)
       .filter(block => block.kind === 'paragraph').map(block => block.paragraph))))
@@ -277,6 +278,9 @@ function assertSourceReferenceContent({
     // These paths already rebuild/compare the complete source groups above.
     if (!usesSourceTitleCompatibility(producerVersion) || !sidecar
       || sidecar.alternateAnswerScope || sourceReferenceCellContinuations(sidecar).length || referenceSourceDocuments) return
+    if (figures.some(({ figure }) => !replayedFigures.has(figure))) {
+      reject('Current figure comparison requires independent source pixel replay for every figure')
+    }
     if (!evidence) reject('Current OCR references require complete sealed evidence')
     const documents = materialization.documents.map(document => ({ ...document,
       bytes: sourceInput.documents.find(source => source.documentId === document.documentId)?.bytes }))
@@ -292,10 +296,25 @@ function assertSourceReferenceContent({
     const comparable = groups => {
       const result = structuredClone(groups)
       for (const group of result) for (const kind of ['essays', 'scoring']) {
-        for (const entry of group[kind].entries) for (const block of sourceReferenceBlocks(entry)) {
-          if (block.kind === 'paragraph') block.paragraph.text = joinedText(block.paragraph.text)
-          if (block.kind === 'table') for (const cell of block.rows.flat()) cell.text = joinedText(cell.text)
+        for (const entry of group[kind].entries) {
+          // v1 paragraphs and v2 paragraph blocks share the existing ordered
+          // content contract. Compare that view while retaining every field.
+          const blocks = sourceReferenceBlocks(entry)
+          delete entry.paragraphs
+          entry.blocks = blocks
+          for (const block of blocks) {
+            if (block.kind === 'paragraph') block.paragraph.text = joinedText(block.paragraph.text)
+            if (block.kind === 'table') for (const cell of block.rows.flat()) cell.text = joinedText(cell.text)
+          }
         }
+      }
+      // Every admitted figure passed independent PDF/RGBA replay above. Only
+      // encoding bytes differ from the freshly captured baseline; dimensions,
+      // profile, media type, identity, source, ownership and order stay exact.
+      for (const { figure } of sourceReferenceFigures({ groups: result })) {
+        delete figure.raster.base64
+        delete figure.raster.sha256
+        delete figure.raster.byteLength
       }
       return digestJson(result)
     }
@@ -475,6 +494,7 @@ function assertSourceReferenceContent({
       }
       assertSourceReferenceFigureReplay({ figure,
         document: documents.find(document => document.documentId === figure.source.locator.documentId) })
+      replayedFigures.add(figure)
       continue
     }
     if (['source-references-v4', 'source-references-v5'].includes(sidecar.schemaVersion) && scoringScope) {
@@ -496,6 +516,7 @@ function assertSourceReferenceContent({
     }
     assertSourceReferenceFigureReplay({ figure,
       document: documents.find(document => document.documentId === figure.source.locator.documentId) })
+    replayedFigures.add(figure)
   }
   assertCurrentGroupsReplay()
 }
