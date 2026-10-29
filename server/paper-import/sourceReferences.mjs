@@ -28,6 +28,9 @@ export const v23SourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-capture-v23.schema.json', import.meta.url), 'utf8',
 ))
 export const currentSourceReferencesSchema = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-capture-v26.schema.json', import.meta.url), 'utf8',
+))
+export const v25SourceReferencesSchema = JSON.parse(readFileSync(
   new URL('../../schemas/paper-import/source-references-capture-v25.schema.json', import.meta.url), 'utf8',
 ))
 export const v24SourceReferencesSchema = JSON.parse(readFileSync(
@@ -44,6 +47,7 @@ const validateV4 = ajv.compile(scoringFigureSourceReferencesSchema)
 const validateV5 = ajv.compile(exclusionSourceReferencesSchema)
 const validateV6 = ajv.compile(cellContinuationSourceReferencesSchema)
 const validateV24 = ajv.compile(v24SourceReferencesSchema)
+const validateV25 = ajv.compile(v25SourceReferencesSchema)
 const validateCurrent = ajv.compile(currentSourceReferencesSchema)
 const validateV23 = ajv.compile(v23SourceReferencesSchema)
 // Integrity-only recognition of explicit v17 metadata on already sealed bytes.
@@ -124,7 +128,8 @@ export function validateSourceReferences({
             : sidecar.producerVersion === 'ocr-source-references-producer-v21' ? validateComposedLabels
               : sidecar.producerVersion === 'ocr-source-references-producer-v22' ? validateTitleAbbreviation
                 : sidecar.producerVersion === 'ocr-source-references-producer-v23' ? validateV23
-                  : sidecar.producerVersion === 'ocr-source-references-producer-v24' ? validateV24 : validateCurrent
+                  : sidecar.producerVersion === 'ocr-source-references-producer-v24' ? validateV24
+                    : sidecar.producerVersion === 'ocr-source-references-producer-v25' ? validateV25 : validateCurrent
     : sidecar?.schemaVersion === 'source-references-v6' ? validateV6
     : sidecar?.schemaVersion === 'source-references-v5' ? validateV5
     : sidecar?.schemaVersion === 'source-references-v4' ? validateV4

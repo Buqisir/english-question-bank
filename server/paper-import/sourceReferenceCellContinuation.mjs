@@ -5,7 +5,7 @@ import { sourceReferenceUnionRegion } from './sourceReferenceWritingTask.mjs'
 import { resolveConfirmedNck1OcrEvidence } from './nck1OcrSourceEvidence.mjs'
 import { sourceReferenceScoringScopes } from './sourceReferenceScoringScope.mjs'
 import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
-import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './sourceReferenceSemantics.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, usesCellContinuation } from './sourceReferenceSemantics.mjs'
 import { assertSourceReferences } from './sourceReferences.mjs'
 
 export const CELL_CONTINUATION_RULE = 'scoring-last-cell-adjacent-page-v1'
@@ -115,7 +115,7 @@ export function sourceReferenceCellContinuations(sidecar) {
           relation: cell.adjacentPageContinuation }] : [])) : [])))) ?? []
 }
 
-function closure({ materialization, sourceInput }) {
+function closure({ materialization, sourceInput, sidecar, producerVersion = sidecar?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION }) {
   const ocr = sourceInput?.ocrSourceBytes
   if (!ocr?.evidenceBytes || !ocr?.confirmationBytes) fail('exact OCR bytes are required')
   const evidence = JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8'))
@@ -135,7 +135,7 @@ function closure({ materialization, sourceInput }) {
     fail('images cannot be combined with scoring cell continuation')
   }
   const scopes = sourceReferenceScoringScopes(confirmation, new Set([document.documentId]),
-    { producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization })
+    { producerVersion, materialization })
   return { evidence, confirmation, document, cp, ep, scopes }
 }
 
@@ -145,14 +145,17 @@ function closure({ materialization, sourceInput }) {
 // The producer's recursive call has no selectors and therefore cannot recurse.
 export function prepareSourceReferenceCellContinuations(input, selectors, baseline = null) {
   const { materialization, sourceInput, sourceDigest, candidateDigest } = input
+  const producerVersion = input.producerVersion ?? input.sidecar?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+  if (!usesCellContinuation(producerVersion)) fail('v25/v26 producer required')
   if (!Array.isArray(selectors) || !selectors.length) fail('nonempty selectors required')
   const ctx = closure(input)
   const { evidence, confirmation, document, cp, ep, scopes } = ctx
   const capture = baseline ?? buildSourceReferences(materialization, evidence, confirmation,
-    { sourceDocuments: sourceInput.documents })
+    { sourceDocuments: sourceInput.documents, producerVersion, sourceInput, sourceDigest, candidateDigest })
   if (capture.figureExclusions?.length || input.sidecar?.figureExclusions
     || input.sidecar?.wholeDocumentWritingAbsence) fail('exclusions/absence cannot be combined with cell continuation')
-  const sidecar = { schemaVersion: 'source-references-v6', producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+  const sidecar = { schemaVersion: 'source-references-v6', producerVersion,
+    ...(capture.alternateAnswerScope ? { alternateAnswerScope: capture.alternateAnswerScope } : {}),
     paperId: materialization.paperId, sourceDigest, candidateDigest,
     materializationDigest: digestJson(materialization), groups: structuredClone(capture.groups) }
   if (!sourceDigest || !candidateDigest) fail('exact source/candidate binding required')
@@ -253,7 +256,7 @@ export function replaySourceReferenceCellContinuations(input, { requireReview = 
     if (sidecar?.schemaVersion === 'source-references-v6') fail('v6 requires a cell continuation')
     // Trigger from the confirmed PDF, never from removable sidecar fields or
     // its layout version. Historical sealed producers retain their own rules.
-    if (sidecar?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION) {
+    if (usesCellContinuation(sidecar?.producerVersion)) {
       const { materialization, sourceInput } = input
       const ocr = sourceInput?.ocrSourceBytes
       // Analyzed packages have members/JSON pointers, not native PDF documents;
@@ -274,14 +277,15 @@ export function replaySourceReferenceCellContinuations(input, { requireReview = 
         const resolved = resolveConfirmedNck1OcrEvidence({ paperId: materialization.paperId, documents, evidence, confirmation })
         if (resolved.issues.length) fail(`OCR closure invalid: ${resolved.issues[0].message}`)
         const baseline = buildSourceReferences(materialization, evidence, confirmation,
-          { sourceDocuments: sourceInput.documents, figureExclusions: sidecar.figureExclusions ?? [] })
+          { sourceDocuments: sourceInput.documents, figureExclusions: sidecar.figureExclusions ?? [],
+            producerVersion: sidecar.producerVersion, sourceInput, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest })
         if (!equal(sidecar.groups, baseline.groups)) fail('confirmed PDF table text, sources or whole-sidecar consumption changed')
       }
     }
     return []
   }
   if (sidecar.schemaVersion !== 'source-references-v6'
-    || sidecar.producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION) fail('v6/current producer required')
+    || !usesCellContinuation(sidecar.producerVersion)) fail('v6 with v25/v26 producer required')
   if (requireReview) assertSourceReferences({ ...input, sourceDocuments: input.sourceInput?.documents })
   const selectors = relations.map(({ group, kind, entry, table, cell, relation }) => {
     if (kind !== 'scoring') fail('only scoring tables support this relation')

@@ -8,9 +8,12 @@ import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
 import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
-import { replaySourceReferenceCellContinuations } from './sourceReferenceCellContinuation.mjs'
+import { replaySourceReferenceCellContinuations, sourceReferenceCellContinuations } from './sourceReferenceCellContinuation.mjs'
+import { resolveAlternateAnswerScope, bindAlternateAnswerScope } from './sourceReferenceAlternateAnswerScope.mjs'
+import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
 import { sourceReferenceProducerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  assertSourceReferenceProducerVersion, usesExplicitWritingTitles } from './sourceReferenceSemantics.mjs'
+  V25_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion,
+  usesExplicitWritingTitles, usesAlternateAnswerScope } from './sourceReferenceSemantics.mjs'
 
 function reject(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID' })
@@ -116,6 +119,49 @@ function assertSourceReferenceContent({
 }, producerVersion) {
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
     sourceDocuments: sourceInput.documents, sourceInput })
+  // Scope and full-content replay precede all no-image/absence early returns.
+  // Derive from sealed source first, including when the record was removed.
+  if (usesAlternateAnswerScope(producerVersion)) {
+    const ocr = sourceInput.ocrSourceBytes
+    // The materialized answer format supplies this requirement, independently
+    // of removable sidecar claims or whether any references were captured.
+    const nativeAnswerPdf = (materialization.documents ?? []).some(document =>
+      SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role) && document.mediaType === 'application/pdf')
+    if (nativeAnswerPdf && (!ocr?.evidenceBytes?.byteLength || !ocr?.confirmationBytes?.byteLength)) {
+      reject('Native answer PDF requires complete sealed OCR bytes')
+    }
+    if (sidecar?.alternateAnswerScope && (!ocr?.evidenceBytes || !ocr?.confirmationBytes)) {
+      reject('Alternate scope requires complete sealed OCR bytes')
+    }
+    if (ocr?.confirmationBytes) {
+      const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
+      const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
+      const scope = resolveAlternateAnswerScope(materialization, confirmation, { producerVersion, evidence })
+      if (scope || sidecar?.alternateAnswerScope) {
+        const bound = bindAlternateAnswerScope(scope, evidence, confirmation, ocr)
+        if (!scope || sidecar?.wholeDocumentWritingAbsence
+          || digestJson(bound) !== digestJson(sidecar?.alternateAnswerScope ?? null)) {
+          reject('Alternate scope record differs from the sealed source partition')
+        }
+        const documents = materialization.documents.map(document => ({ ...document,
+          bytes: sourceInput.documents.find(source => source.documentId === document.documentId)?.bytes }))
+        if (documents.some(document => !document.bytes || sha256(document.bytes) !== document.sha256)) {
+          reject('Alternate scope source PDF bytes changed')
+        }
+        const resolved = resolveConfirmedNck1OcrEvidence({ paperId: materialization.paperId, documents, evidence, confirmation })
+        if (resolved.issues.length) reject(`Invalid alternate scope OCR closure: ${resolved.issues[0].message}`)
+        const baseline = buildSourceReferences(materialization, evidence, confirmation, {
+          producerVersion, sourceInput, sourceDocuments: sourceInput.documents, sourceDigest, candidateDigest,
+          figureExclusions: sidecar.figureExclusions ?? [],
+        })
+        // v6's subsequent replay independently rebuilds and compares all groups
+        // after the reviewed cell transformation; ordinary content compares here.
+        if (!sourceReferenceCellContinuations(sidecar).length && digestJson(sidecar.groups) !== digestJson(baseline.groups)) {
+          reject('Alternate scope must preserve every main sample, scoring block, table, figure and source locator in order')
+        }
+      }
+    }
+  }
   // This must precede both the whole-absence and no-visual early returns:
   // direct API callers get the same exact replay as the offline finalizer.
   replaySourceReferenceCellContinuations({ sidecar, materialization, sourceInput, sourceDigest, candidateDigest })
@@ -137,7 +183,8 @@ function assertSourceReferenceContent({
     .some(hasSamePageContinuation)
   const ocr = sourceInput.ocrSourceBytes
   if (!ocr) {
-    if (producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION && sidecar?.groups?.length === 2
+    if ([V25_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(producerVersion)
+      && sidecar?.groups?.length === 2
       && sidecar.groups.every(group => ['essays', 'scoring'].every(kind => group[kind].state === 'not_supplied'))
       && materialization.documents?.some(document => document.role === 'official_answers' && document.mediaType === 'application/pdf')) {
       reject('Whole-document PDF absence requires complete OCR evidence and confirmation')

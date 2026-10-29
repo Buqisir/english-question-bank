@@ -16,7 +16,8 @@ const norm = text => String(text).normalize('NFKC').replace(/\s+/gu, ' ').trim()
 // closure and known contradictions for both prepare and final admission.
 export function wholeDocumentAbsenceSubject({ sidecar, materialization, sourceInput, sourceDigest, candidateDigest, requireReview = true }) {
   const claim = sidecar?.wholeDocumentWritingAbsence
-  if (!['ocr-source-references-producer-v24', 'ocr-source-references-producer-v25'].includes(sidecar?.producerVersion) || !claim
+  if (!['ocr-source-references-producer-v24', 'ocr-source-references-producer-v25', 'ocr-source-references-producer-v26'].includes(sidecar?.producerVersion)
+    || sidecar?.alternateAnswerScope || !claim
     || claim.kind !== WHOLE_DOCUMENT_ABSENCE_KIND) reject('v24 declaration required')
   if (!sourceDigest || !candidateDigest || sidecar.sourceDigest !== sourceDigest || sidecar.candidateDigest !== candidateDigest) reject('source or candidate binding changed')
   if (requireReview) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,

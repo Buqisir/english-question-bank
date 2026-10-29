@@ -34,6 +34,7 @@ import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mj
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceExplanationFigures } from '../../server/paper-import/sourceReferenceFigureExclusions.mjs'
 import { wholeDocumentAbsenceSubject } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
+import { bindAlternateAnswerScope } from '../../server/paper-import/sourceReferenceAlternateAnswerScope.mjs'
 import { prepareSourceReferenceCellContinuations, replaySourceReferenceCellContinuations,
   refreshSourceReferenceCellContinuations, sourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
@@ -1166,6 +1167,10 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     cellContinuations = [], continuationSidecar } = {}) {
   const source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation, { paperName, producerVersion })
   const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
+  const alternateAnswerScope = bindAlternateAnswerScope(source.alternateAnswerScope, evidence, confirmation, sourceInput?.ocrSourceBytes)
+  if (alternateAnswerScope && absenceSidecar?.wholeDocumentWritingAbsence) {
+    throw new Error('Alternate scope cannot combine with whole-document writing absence')
+  }
   const { answerDocument, documentSha256, pages, lines, sourceOrder, factsFor, referenceFigures, scoringScopes } = source
   const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions, { producerVersion })
   const { sections, furniture, review } = lifecycle
@@ -1391,7 +1396,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     const unresolved = referenceFigures.filter(figure => !assignedFigures.has(figure) && !excludedFigures.includes(figure))
     throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
   }
-  const result = { groups, review, structuredScoring,
+  const result = { groups, review, structuredScoring, ...(alternateAnswerScope ? { alternateAnswerScope } : {}),
     ...(producerVersion !== LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
       ? { producerVersion } : {}), ...(figureExclusions.length
     ? { schemaVersion: 'source-references-v5', figureExclusions }
@@ -1400,7 +1405,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     if (producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION || figureExclusions.length || referenceFigures.length) {
       throw new Error('Cell continuation requires current producer without figures/exclusions')
     }
-    const input = { materialization, sourceInput, sourceDigest, candidateDigest }
+    const input = { materialization, sourceInput, sourceDigest, candidateDigest, producerVersion }
     if (continuationSidecar) {
       replaySourceReferenceCellContinuations({ ...input, sidecar: continuationSidecar })
       return { ...result, groups: continuationSidecar.groups, schemaVersion: 'source-references-v6' }
@@ -1454,10 +1459,15 @@ function references(paperId) {
       next: 'answer-products finalize' }))
     return
   }
-  const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion } = buildSourceReferences(materialization, evidence, confirmation,
-    { sourceDocuments: documents, paperName, figureExclusions: retained?.figureExclusions ?? [] })
+  const sourceInput = { documents, ocrSourceBytes: {
+    evidenceBytes: readFileSync(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)),
+    confirmationBytes: readFileSync(path.join(directory, 'nck1-ocr-source-confirmation-v1.json')),
+  } }
+  const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion, alternateAnswerScope } = buildSourceReferences(materialization, evidence, confirmation,
+    { sourceDocuments: documents, sourceInput, paperName, figureExclusions: retained?.figureExclusions ?? [] })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
-    materializationDigest: null, groups, producerVersion, ...(figureExclusions ? { figureExclusions } : {}) })
+    materializationDigest: null, groups, producerVersion, ...(figureExclusions ? { figureExclusions } : {}),
+    ...(alternateAnswerScope ? { alternateAnswerScope } : {}) })
   console.log(JSON.stringify({
     ok: true,
     output,
