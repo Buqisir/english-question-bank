@@ -262,6 +262,36 @@ for (const rule of LINE_ROLE_RULES) {
 
 after(() => console.log(`Writing role ownership differential: ${JSON.stringify(writingOwnershipChecks)}`))
 
+test('comma dialogue directions require exactly one question and preserve source text', () => {
+  // n085 question-source-1:item-8, including its once-only instruction.
+  const source = '听下面5段对话，每段对话后有一个小题，从题中所给的A、B、C三个选项中选出最佳选项。听完每段对话后，你都有10秒钟的时间来回答有关小题和阅读下一小题，每段对话仅读一遍。'
+  for (const [text, expected] of [
+    [source, 'listening.short-dialogue'],
+    ['听下面5段对话，每段对话后有一个小题。每段对话仅读一遍。', 'listening.short-dialogue'],
+    ['听下面5段对话。每段录音读两遍。', 'listening.short-dialogue'],
+    ['听下面5段对话或独白，每段对话或独白后有几个小题，选择答案。', 'listening.long-form'],
+    ['听下面5段对话，每段对话后有几个小题，选择答案。', null],
+    ['听下面5段对话，每段对话后有一个小题组。', null],
+    ['听下面5段对话，每段对话后有一个小题或几个小题。', null],
+    ['听下面5段对话，每段对话后有一个小题', null],
+    ['听下面5段对话，每段对话仅读一遍。', null],
+    ['听下面5段对话，每段录音后有一个小题，选择答案。', null],
+    ...[',', '；', '：', '、'].map(separator =>
+      [`听下面5段对话${separator}每段对话后有一个小题，选择答案。`, null]),
+    ...[',', '；', '：', '、'].map(separator =>
+      [`听下面5段对话，每段对话后有一个小题${separator}选择答案。`, null]),
+  ]) {
+    const input = { text }
+    const before = structuredClone(input)
+    const facts = computeLineFacts(input)
+    assert.equal(firstLineRole('direction', facts)?.value ?? null, expected, text)
+    assert.equal(matchesLineRole('direction.listening-short', facts), expected === 'listening.short-dialogue', text)
+    assert.equal(matchesLineRole('direction.listening-long', facts), expected === 'listening.long-form', text)
+    assert.equal(facts.text, text)
+    assert.deepEqual(input, before)
+  }
+})
+
 test('recording directions require an explicit per-recording question count', () => {
   for (const [text, expected] of [
     ['听下面5段录音。每段录音后有一个小题，选择答案。', 'listening.short-dialogue'],
