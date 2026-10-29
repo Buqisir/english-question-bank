@@ -12,7 +12,61 @@ import { writeFixtureJson } from './faults.mjs'
 
 const hook = new URL('./hook.mjs', import.meta.url).pathname
 const driver = new URL('./api.mjs', import.meta.url)
-const latePublicationCheckpoints = new Set(['before-mark-published', 'after-mark-published', 'before-worker-ipc'])
+// Budgets describe the work preceding a checkpoint, not its stage name.
+// Full publication/recovery retains the existing 45s cap; harness IPC is 60s.
+// CI seed publication took about 14s; failing late checkpoints were still
+// running at 20s. Records below retain evidence of where the extra time goes.
+const checkpointBudgets = { control: 20_000, publication: 45_000, recovery: 45_000 }
+const publicationStages = ['before-publisher', 'after-bank-commit',
+  'before-mark-published', 'after-mark-published', 'before-worker-ipc']
+const publicationRecords = Object.fromEntries(publicationStages.map(stage => [stage, 'record']))
+const safeTail = value => String(value).replace(/(bearer\s+)\S+/gi, '$1<redacted>')
+  .replace(/((?:token|nonce|secret|authorization)["']?\s*[:=]\s*["']?)[^\s"',}]+/gi, '$1<redacted>').slice(-4000)
+function replySummary(value, transport) {
+  const reply = transport === 'http' ? value?.body : value
+  const summary = { transport, httpStatus: transport === 'http' ? value?.status : undefined }
+  for (const key of ['type', 'code', 'reasonCode', 'message', 'error', 'operationId']) {
+    if (['string', 'number', 'boolean'].includes(typeof reply?.[key])) summary[key] = safeTail(reply[key])
+  }
+  for (const key of ['status', 'completed', 'rejected', 'blocked']) {
+    if (['string', 'number', 'boolean'].includes(typeof reply?.result?.[key])) summary[key] = safeTail(reply.result[key])
+  }
+  return summary
+}
+function clientDiagnostics(client) {
+  try {
+    if (typeof client.diagnostics === 'function') return client.diagnostics()
+  } catch {}
+  // Manual HTTP clients have no IPC call ledger. Never mask the trial error.
+  return { pid: client.child?.pid, exitCode: client.child?.exitCode,
+    signalCode: client.child?.signalCode, diagnostics: 'unavailable' }
+}
+async function waitCheckpoint(marker, label, stage, pendingCall, { flow, transport }) {
+  assert.ok(stage && /^[a-z-]+$/.test(stage), 'exact checkpoint stage required')
+  assert.ok(Object.hasOwn(checkpointBudgets, flow), 'explicit checkpoint flow required')
+  assert.ok(['ipc', 'http', 'reconcile'].includes(transport), 'explicit call transport required')
+  assert.ok(pendingCall && typeof pendingCall.then === 'function', 'current pending call required')
+  const file = `${marker}.${stage}`
+  let terminal
+  pendingCall.then(value => { terminal = { value } }, error => { terminal = { error } })
+  const timeoutMs = checkpointBudgets[flow]
+  const end = Date.now() + timeoutMs
+  while (Date.now() < end) {
+    if (existsSync(file)) {
+      const value = JSON.parse(readFileSync(file))
+      assert.equal(value.stage, stage)
+      return value
+    }
+    if (terminal) {
+      const reply = terminal.error
+        ? { transport, error: safeTail(terminal.error.message || terminal.error) }
+        : replySummary(terminal.value, transport)
+      throw new Error(`Promotion call ended before ${label}: ${stage}: ${JSON.stringify(reply)}`)
+    }
+    await yieldFor(25)
+  }
+  throw new Error(`Timed out: ${label}: ${stage} (${flow}, ${timeoutMs}ms)`)
+}
 function query(file, sql, parameters = []) {
   const db = new DatabaseSync(file, { readOnly: true })
   try { return db.prepare(sql).all(...parameters) } finally { db.close() }
@@ -30,14 +84,7 @@ function api(env) {
   const pending = new Map()
   let stderr = ''
   const calls = []
-  const safeTail = value => String(value).replace(/(bearer\s+)\S+/gi, '$1<redacted>')
-    .replace(/((?:token|nonce|secret|authorization)["']?\s*[:=]\s*["']?)[^\s"',}]+/gi, '$1<redacted>').slice(-4000)
-  const summary = value => ({
-    type: value?.type, code: value?.code, reasonCode: value?.reasonCode,
-    message: value?.message ? safeTail(value.message) : undefined,
-    error: value?.error ? safeTail(value.error) : undefined,
-    operationId: value?.operationId, status: value?.result?.status,
-  })
+  const summary = value => replySummary(value, 'ipc')
   child.stderr.on('data', bytes => { stderr = (stderr + bytes).slice(-8192) })
   let ready
   const opened = new Promise(resolve => { ready = resolve })
@@ -162,7 +209,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       },
       plan(value) {
         const control = path.join(directory, 'fault-plan.json')
-        writeFixtureJson(control, value)
+        writeFixtureJson(control, { ...publicationRecords, ...value })
         env.NODE_OPTIONS = `--import=${hook}`
         env.EQB_PROMOTION_FAULT_STAGE = 'plan'
         env.EQB_PROMOTION_FAULT_CONTROL = control
@@ -184,34 +231,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         assert.ok(!opened.exited, opened.stderr); client.port = opened.port
         return client
       },
-      checkpoint: async (stage, pendingCall) => {
-        const file = stage ? `${marker}.${stage}` : marker
-        if (!pendingCall) return until(() => existsSync(file) && JSON.parse(readFileSync(file)),
-          `${label}: ${stage || 'checkpoint'}`)
-        // Only callers that require a checkpoint before the reply opt in.
-        // Do not race `until`: a losing poll would outlive trial cleanup.
-        let terminal
-        pendingCall?.then(value => { terminal = value })
-        // CI 40828896408: the same fixture's successful publication took
-        // 13,769ms requested-to-published; this late checkpoint was still
-        // running at 20s. Allow 3x that observed baseline rounded up to 45s
-        // only for checkpoints sharing this late publication/replay path.
-        // The API call still times out at 60s; supervisor deadline/RSS
-        // guards are unchanged. Stage records distinguish progress from a hang.
-        const timeoutMs = latePublicationCheckpoints.has(stage) ? 45_000 : 20_000
-        const end = Date.now() + timeoutMs
-        while (Date.now() < end) {
-          if (existsSync(file)) return JSON.parse(readFileSync(file))
-          if (terminal) {
-            const reply = clients.flatMap(client => client.diagnostics().calls)
-              .find(call => call.requestId === terminal.requestId)?.reply
-              || clients.flatMap(client => client.diagnostics().calls).at(-1)?.reply
-            throw new Error(`Promotion call ended before ${label}: ${stage || 'checkpoint'}: ${JSON.stringify(reply)}`)
-          }
-          await yieldFor(25)
-        }
-        throw new Error(`Timed out: ${label}: ${stage || 'checkpoint'}`)
-      },
+      checkpoint: (stage, pendingCall, options) => waitCheckpoint(marker, label, stage, pendingCall, options),
       async deadSupervisor(row) {
         const identity = { bootId: row.owner_boot_id, pid: row.supervisor_pid, startId: row.supervisor_start_id }
         await until(async () => await matchingReviewProcess(identity) === 'dead', 'exact supervisor death')
@@ -225,6 +245,8 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       },
     }
     try {
+      // Record instrumentation is appended without replacing any selected fault.
+      context.plan(stage ? { [stage]: action } : {})
       await body(context)
       // Acceptance evidence precedes cleanup. Include inspect roles retained in
       // slot metadata, not only the original two identities in the operation row.
@@ -261,8 +283,8 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         promotions: read(() => context.promotions().map(row => ({
           id: row.id, state: row.state, failureCode: row.failure_code,
         }))),
-        clients: clients.map(client => client.diagnostics()),
-        stages: read(() => ['before-publisher', 'after-bank-commit', 'before-mark-published']
+        clients: clients.map(clientDiagnostics),
+        stages: read(() => publicationStages
           .flatMap(stage => {
             const file = `${marker}.${stage}`
             if (!existsSync(file)) return []
@@ -317,8 +339,8 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       t.plan({ 'executor-before-begin': 'throw', 'api-before-ack': 'gate', 'supervisor-after-outcome': 'gate' })
       const a = await t.client()
       const running = a.call(shipMessage)
-      const checkpoint = await t.checkpoint('api-before-ack')
-      await t.checkpoint('supervisor-after-outcome')
+      const checkpoint = await t.checkpoint('api-before-ack', running, { flow: 'control', transport: 'ipc' })
+      await t.checkpoint('supervisor-after-outcome', running, { flow: 'control', transport: 'ipc' })
       const original = t.rows()[0]
       assert.equal(checkpoint.pid, a.child.pid)
       assert.equal(original.state, 'rejected')
@@ -387,8 +409,10 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       }).then(async response => ({ status: response.status, body: await response.json() }))
       const running = request()
       running.catch(() => {})
-      const ack = await t.checkpoint('supervisor-ack-before-recheck')
-      const apiAck = await t.checkpoint('api-after-ack')
+      // The intentional HTTP409/UNKNOWN is released only AFTER both markers.
+      // A reply/rejection before either marker is an unexpected early terminal.
+      const ack = await t.checkpoint('supervisor-ack-before-recheck', running, { flow: 'publication', transport: 'http' })
+      const apiAck = await t.checkpoint('api-after-ack', running, { flow: 'publication', transport: 'http' })
       const original = t.rows()[0]
       assert.equal(ack.pid, original.supervisor_pid)
       assert.equal(apiAck.pid, a.child.pid)
@@ -427,8 +451,8 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     }).then(async response => ({ status: response.status, body: await response.json() }))
     const running = request()
     running.catch(() => {})
-    const afterGo = await t.checkpoint('api-after-go')
-    const beforeOutcome = await t.checkpoint('supervisor-before-outcome')
+    const afterGo = await t.checkpoint('api-after-go', running, { flow: 'control', transport: 'http' })
+    const beforeOutcome = await t.checkpoint('supervisor-before-outcome', running, { flow: 'publication', transport: 'http' })
     const original = t.rows()[0]
     assert.equal(afterGo.pid, a.child.pid)
     assert.equal(afterGo.phase, 'running')
@@ -449,7 +473,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       'unknown-write-lock-acquired': 'record' }
     t.plan({ ...observations, 'api-unknown-callback': 'callback-gate' })
     writeFileSync(`${t.marker}.http-timeout.release`, '')
-    const callbackGate = await t.checkpoint('api-unknown-callback')
+    const callbackGate = await t.checkpoint('api-unknown-callback', running, { flow: 'control', transport: 'http' })
     assert.equal(callbackGate.pid, a.child.pid)
     assert.equal(callbackGate.phase, 'running')
     assert.equal(callbackGate.result, null)
@@ -571,7 +595,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     null, null, async t => {
       const { a, b, original, running, request } = await missedOutcome(t, 'ack-locked-before-release')
       const inspecting = b.call({ type: 'reconcile' })
-      const locked = await t.checkpoint('ack-locked-before-release')
+      const locked = await t.checkpoint('ack-locked-before-release', inspecting, { flow: 'recovery', transport: 'reconcile' })
       assert.notEqual(locked.pid, original.supervisor_pid)
       assert.ok(t.registered().some(record => record.pid === locked.pid && record.role.startsWith('supervisor-inspect-')))
       assert.equal(t.rows()[0].state, 'completed')
@@ -604,7 +628,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     null, null, async t => {
       const { a, b, original, running, request, observations } = await missedOutcome(t, 'supervisor-ack-before-recheck')
       const inspecting = b.call({ type: 'reconcile' })
-      const beforeAck = await t.checkpoint('supervisor-ack-before-recheck')
+      const beforeAck = await t.checkpoint('supervisor-ack-before-recheck', inspecting, { flow: 'recovery', transport: 'reconcile' })
       assert.notEqual(beforeAck.pid, original.supervisor_pid)
       assert.equal(t.rows()[0].state, 'completed')
       assert.equal(t.slot(original), 'reserved')
@@ -709,7 +733,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         // budget; responsiveness probes retain their 8s abort and 1200ms limit.
         { method: 'POST', headers, body: JSON.stringify({ ...ship, intent: 'ship' }) }, 60_000)
       publishing.catch(() => {}) // The awaited assertion below still observes rejection.
-      const checkpoint = await t.checkpoint()
+      const checkpoint = await t.checkpoint('guard-write-lock', publishing, { flow: 'publication', transport: 'http' })
       assert.equal(checkpoint.stage, 'guard-write-lock')
       assert.notEqual(checkpoint.pid, child.pid)
       const samples = []
@@ -746,7 +770,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       t.plan({ 'live-reserve-before-fork': 'gate' })
       const a = await t.client(), b = await t.client({ faults: false })
       const running = a.call(shipMessage)
-      await t.checkpoint()
+      await t.checkpoint('live-reserve-before-fork', running, { flow: 'control', transport: 'ipc' })
       const snapshot = t.rows()[0]
       assert.equal(snapshot.state, 'reserved')
       assert.equal(snapshot.supervisor_pid, null)
@@ -789,8 +813,8 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
   await trial('compatibility child survives API SIGKILL and blocks promotion until exact old tree is dead',
     'compatibility-input', 'block', async t => {
       const a = await t.client()
-      void a.call({ type: 'compatibility' })
-      const checkpoint = await t.checkpoint()
+      const running = a.call({ type: 'compatibility' })
+      const checkpoint = await t.checkpoint('compatibility-input', running, { flow: 'control', transport: 'ipc' })
       const identity = await reviewProcessIdentity(checkpoint.pid)
       assert.ok(identity)
       t.ownedIdentities.push(identity)
@@ -873,7 +897,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       const failedB = t.promotions()[0]
       t.plan({ 'before-worker-ipc': 'block' })
       const orphan = a.call({ type: 'start', mode: 'owner_publish', paperId: owner.paperId, input: owner })
-      await until(() => existsSync(t.marker) && JSON.parse(readFileSync(t.marker)).stage === 'before-worker-ipc', 'A published before IPC')
+      await t.checkpoint('before-worker-ipc', orphan, { flow: 'publication', transport: 'ipc' })
       const orphanRow = t.rows().find(row => row.paper_id === owner.paperId)
       process.kill(orphanRow.worker_pid, 'SIGKILL')
       assert.equal((await orphan).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
@@ -911,7 +935,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'after-slot-release', 'block', async t => {
       const a = await t.client()
       const running = a.call(shipMessage)
-      const checkpoint = await t.checkpoint()
+      const checkpoint = await t.checkpoint('after-slot-release', running, { flow: 'publication', transport: 'ipc' })
       const row = t.rows()[0]
       assert.equal(checkpoint.pid, row.supervisor_pid)
       assert.equal(row.state, 'completed')
@@ -928,11 +952,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       t.plan({ 'executor-before-begin': 'throw', 'after-slot-release': 'block' })
       const a = await t.client()
       const running = a.call(shipMessage)
-      const checkpoint = await until(() => {
-        if (!existsSync(t.marker)) return false
-        const value = JSON.parse(readFileSync(t.marker))
-        return value.stage === 'after-slot-release' && value
-      }, 'rejected receipt reached durable release')
+      const checkpoint = await t.checkpoint('after-slot-release', running, { flow: 'control', transport: 'ipc' })
       const row = t.rows()[0]
       assert.equal(checkpoint.pid, row.supervisor_pid)
       assert.equal(row.state, 'rejected')
@@ -951,7 +971,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       t.plan({ 'after-archive': 'block' })
       const a = await t.client()
       const originalRequest = a.call(shipMessage)
-      const checkpoint = await t.checkpoint()
+      const checkpoint = await t.checkpoint('after-archive', originalRequest, { flow: 'control', transport: 'ipc' })
       process.kill(checkpoint.pid, 'SIGKILL')
       assert.equal((await originalRequest).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       const original = t.rows()[0]
@@ -959,10 +979,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       await t.deadWorker(original)
       t.plan({ 'retry-after-handoff': 'gate' })
       const interruptedRetry = a.call(retryMessage)
-      await until(() => {
-        const value = JSON.parse(readFileSync(t.marker))
-        return value.stage === 'retry-after-handoff' && value
-      }, 'retry reached handoff before operation transaction')
+      await t.checkpoint('retry-after-handoff', interruptedRetry, { flow: 'control', transport: 'ipc' })
       const writer = new DatabaseSync(t.dbPath)
       try {
         writer.exec('PRAGMA busy_timeout=0;BEGIN IMMEDIATE')
@@ -986,7 +1003,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'before-archive', 'block', async t => {
       const a = await t.client(), b = await t.client({ faults: false })
       const running = a.call(shipMessage)
-      await t.checkpoint()
+      await t.checkpoint('before-archive', running, { flow: 'control', transport: 'ipc' })
       const operationId = t.rows()[0].id
       const duplicate = await b.call(shipMessage)
       assert.equal(duplicate.code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
@@ -1006,21 +1023,29 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal((await running).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       assert.equal(t.promotions().length, 1)
     })
-  for (const stage of ['after-host-slot', 'after-job-before-fork', 'api-before-go', 'supervisor-ready', 'supervisor-before-go',
-    'begin-before-commit', 'begin-after-commit', 'before-archive', 'after-archive', 'after-target-binding',
-    'before-on-prepared', 'after-on-prepared', 'after-version-rename', 'after-latest-swap',
-    'after-bank-commit', 'before-mark-published', 'after-mark-published', 'before-worker-ipc']) {
+  // Launch/archive controls precede publication. Preparation and durable output
+  // checkpoints traverse the real publisher; classify this flow explicitly.
+  const killCheckpoints = [
+    ...['after-host-slot', 'after-job-before-fork', 'api-before-go', 'supervisor-ready', 'supervisor-before-go',
+      'begin-before-commit', 'begin-after-commit', 'before-archive', 'after-archive']
+      .map(stage => ({ stage, flow: 'control' })),
+    ...['before-on-prepared', 'after-target-binding', 'after-on-prepared', 'after-version-rename', 'after-latest-swap',
+      'after-bank-commit', 'before-mark-published', 'after-mark-published', 'before-worker-ipc']
+      .map(stage => ({ stage, flow: 'publication' })),
+  ]
+  // Target binding occurs inside onPrepared, after the same publisher preparation.
+  for (const stage of ['before-on-prepared', 'after-target-binding', 'after-on-prepared']) {
+    assert.equal(killCheckpoints.find(checkpoint => checkpoint.stage === stage)?.flow, 'publication')
+  }
+  for (const { stage, flow } of killCheckpoints) {
     await trial(`SIGKILL at ${stage} retains identity and never silently replays`, stage, 'block', async t => {
-      if (latePublicationCheckpoints.has(stage)) t.plan({
-        'before-publisher': 'record', 'after-bank-commit': 'record', [stage]: 'block',
-      })
       const a = await t.client()
       const result = a.call(shipMessage)
       // Record-only markers must never satisfy the requested block checkpoint.
-      const checkpoint = await t.checkpoint(latePublicationCheckpoints.has(stage) ? stage : undefined, result)
-      if (latePublicationCheckpoints.has(stage)) {
-        console.log(`PROMOTION_CHECKPOINT_TIMING ${JSON.stringify(['before-publisher', 'after-bank-commit', stage]
-          .map(name => {
+      const checkpoint = await t.checkpoint(stage, result, { flow, transport: 'ipc' })
+      if (flow === 'publication') {
+        console.log(`PROMOTION_CHECKPOINT_TIMING ${JSON.stringify([...new Set([...publicationStages, stage])]
+          .filter(name => existsSync(`${t.marker}.${name}`)).map(name => {
             const { at, pid } = JSON.parse(readFileSync(`${t.marker}.${name}`))
             return { stage: name, at, pid }
           }))}`)
@@ -1041,7 +1066,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
           const recovered = reconciliation.result?.completed ? reconciliation : await until(async () => {
             const reply = await b.call({ type: 'reconcile' })
             return reply.result?.completed ? reply : false
-          }, 'published receipt reconciliation')
+          }, 'published receipt reconciliation', checkpointBudgets.recovery)
           assert.equal(recovered.invalidations, 1)
           assert.equal(t.rows()[0].state, 'completed')
         } else if (t.promotions().length) {
@@ -1064,7 +1089,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       const a = await t.client()
       const started = Date.now()
       const running = a.call(shipMessage)
-      const checkpoint = await t.checkpoint()
+      const checkpoint = await t.checkpoint('executor-before-begin', running, { flow: 'control', transport: 'ipc' })
       assert.equal(checkpoint.stage, 'executor-before-begin')
       if (action === 'native') {
         await until(() => existsSync(`${t.marker}.native`), 'native child actually blocked')
@@ -1105,14 +1130,14 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
   await trial('API SIGKILL after GO leaves supervisor alive; restart independently verifies exact receipt and invalidates caches',
     'before-archive', 'pause', async t => {
       const a = await t.client()
-      a.call(shipMessage)
-      await t.checkpoint()
+      const running = a.call(shipMessage)
+      await t.checkpoint('before-archive', running, { flow: 'control', transport: 'ipc' })
       const row = t.rows()[0]
       a.child.kill('SIGKILL')
       assert.equal(await matchingReviewProcess({ bootId: row.owner_boot_id, pid: row.supervisor_pid, startId: row.supervisor_start_id }), 'live')
       const b = await t.client({ faults: false })
-      await until(() => t.promotions()[0]?.state === 'published', 'orphan business completes')
-      await until(async () => (await b.call({ type: 'reconcile' })).result?.completed, 'restart receipt reconciled')
+      await until(() => t.promotions()[0]?.state === 'published', 'orphan business completes', checkpointBudgets.publication)
+      await until(async () => (await b.call({ type: 'reconcile' })).result?.completed, 'restart receipt reconciled', checkpointBudgets.recovery)
       assert.equal(t.rows()[0].state, 'completed')
       assert.equal(t.promotions().length, 1)
     })
@@ -1146,7 +1171,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'executor-before-begin', 'pause', async t => {
       const a = await t.client()
       const response = a.call({ type: 'start', mode: 'scoped', paperId: scoped.paperId, input: scoped })
-      await t.checkpoint()
+      await t.checkpoint('executor-before-begin', response, { flow: 'control', transport: 'ipc' })
       const db = new DatabaseSync(t.dbPath)
       try { db.prepare('UPDATE import_review_publication_requests SET expires_at=? WHERE id=?').run('2000-01-01T00:00:00.000Z', scoped.requestId) }
       finally { db.close() }

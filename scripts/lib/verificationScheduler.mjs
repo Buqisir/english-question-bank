@@ -92,7 +92,9 @@ export function verificationSchedulingPolicy(script, source) {
   ])
   return {
     script,
-    exclusive: false,
+    // Intake writes source-intake-inbox under the executing release identity.
+    // Drain readers and hold the existing queue barrier through its cleanup.
+    exclusive: script === 'scripts/verify-source-intake.mjs',
     resourceKeys: [
       ...new Set([
         ...declaredResources,
