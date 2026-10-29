@@ -7,6 +7,7 @@ import { scoringFiguresFixture } from '../../test-fixtures/paper-import/source-r
 import { buildNck1OcrSourceEvidence } from './nck1OcrSourceEvidence.mjs'
 import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from './sourceReferenceAdmission.mjs'
+import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './sourceReferenceSemantics.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { prepareSourceReferences, validateSourceReferences } from './sourceReferences.mjs'
 import { makeFixture } from '../../scripts/verify-nck1-source-materialization.mjs'
@@ -92,25 +93,27 @@ function reviewed(input) {
   return prepared
 }
 
-test('sealed v25/v6 replay uses its original producer and never rewrites committed bytes', () => {
+for (const producerVersion of ['ocr-source-references-producer-v25', 'ocr-source-references-producer-v26']) {
+test(`sealed ${producerVersion}/v6 replay uses its original producer and never rewrites committed bytes`, () => {
   const input = fixture()
   const prepared = prepareSourceReferenceCellContinuations({
-    ...input, producerVersion: 'ocr-source-references-producer-v25',
+    ...input, producerVersion,
   }, [selection(input)])
   for (const [index, { relation }] of sourceReferenceCellContinuations(prepared.sidecar).entries()) {
-    relation.review = { reviewedBy: 'import_agent', reviewerSessionId: 'synthetic-v25-reviewer',
+    relation.review = { reviewedBy: 'import_agent', reviewerSessionId: `synthetic-${producerVersion}-reviewer`,
       verdict: 'confirmed_continuation', reviewedSubjectDigest: prepared.requests[index].subjectDigest,
       pages: relation.pages.map(page => ({ ...page, finding: 'Synthetic historical replay fixture only' })) }
   }
   const bytes = Buffer.from(JSON.stringify(prepared.sidecar)), before = sha256(bytes)
   assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt: {
-    revisionId: 'synthetic-v25-v6', bundleDigest: sha256('synthetic-bundle'),
+    revisionId: `synthetic-${producerVersion}-v6`, bundleDigest: sha256('synthetic-bundle'),
     sourceReferencesDigest: before, paperId: prepared.sidecar.paperId,
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
   } })
   assert.equal(sha256(bytes), before)
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: prepared.sidecar }), /current producer/u)
 })
+}
 
 test('public producer and direct admission replay the complete relation without visual early-return bypass', () => {
   const input = fixture(), pick = selection(input)
@@ -227,7 +230,7 @@ test('current analyzed-package admission accepts JSON pointers without native do
   for (const group of sidecar.groups) for (const kind of ['essays', 'scoring']) {
     group[kind] = { state: 'not_supplied', entries: [], evidence: [source('')] }
   }
-  assert.equal(sidecar.producerVersion, 'ocr-source-references-producer-v26')
+  assert.equal(sidecar.producerVersion, 'ocr-source-references-producer-v27')
   assert.equal(materialization.documents, undefined)
   assert.equal(sourceInput.ocrSourceBytes, undefined)
   assertSourceReferenceAdmission({ ...input, sidecar })
@@ -442,20 +445,22 @@ test('historical producers v17–24 retain exact sealed replay and reject first 
   }
 })
 
-test('v26 and sealed v24/v25 preserve v23 scoring headings and chart capture', () => {
+test('current producer and sealed v24/v25/v26 preserve v23 scoring headings and chart capture', () => {
   const input = scoringFiguresFixture({ scoringIntro: true })
-  const versions = ['v23', 'v24', 'v25', 'v26'].map(version => `ocr-source-references-producer-${version}`)
+  const versions = [...['v23', 'v24', 'v25', 'v26'].map(version => `ocr-source-references-producer-${version}`),
+    OCR_SOURCE_REFERENCES_PRODUCER_VERSION]
   const captures = versions.map(producerVersion => buildSourceReferences(input.materialization, input.evidence,
     input.confirmation, { sourceDocuments: input.sourceDocuments, producerVersion }))
   assert.equal(captures[0].schemaVersion, 'source-references-v4')
   assert.deepEqual(captures[0].groups, captures[1].groups)
   assert.deepEqual(captures[1].groups, captures[2].groups)
   assert.deepEqual(captures[2].groups, captures[3].groups)
+  assert.deepEqual(captures[3].groups, captures[4].groups)
   assert.equal(captures[2].groups[0].scoring.entries[0].sourceLabel, '二、各档次的给分范围和要求')
-  const sidecar = { schemaVersion: 'source-references-v4', producerVersion: versions[3],
+  const sidecar = { schemaVersion: 'source-references-v4', producerVersion: versions.at(-1),
     paperId: input.materialization.paperId, sourceDigest: input.sourceDigest,
-    candidateDigest: input.candidateDigest, materializationDigest: digestJson(input.materialization), groups: captures[1].groups }
-  for (const producerVersion of versions.slice(1, 3)) {
+    candidateDigest: input.candidateDigest, materializationDigest: digestJson(input.materialization), groups: captures.at(-1).groups }
+  for (const producerVersion of versions.slice(1, -1)) {
     const historical = { ...sidecar, producerVersion }
     const bytes = Buffer.from(JSON.stringify(historical)), before = sha256(bytes)
     assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt: {

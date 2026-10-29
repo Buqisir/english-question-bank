@@ -1,3 +1,4 @@
+import { usesAlternateAnswerScope } from './sourceReferenceSemantics.mjs'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -41,7 +42,7 @@ export function loadNck1OcrSourceEmphasis(paperDir) {
 // References may consume retained v1 OCR without adding it to Canonical input
 // (and thus without changing the historical Candidate identity).
 export function loadReferenceOcrSourceBytes(paperDir, { producerVersion, canonicalOcrSourceBytes } = {}) {
-  if (producerVersion !== 'ocr-source-references-producer-v26' || canonicalOcrSourceBytes) return undefined
+  if (!usesAlternateAnswerScope(producerVersion) || canonicalOcrSourceBytes) return undefined
   const directory = path.join(paperDir, 'materialization')
   const files = [NCK1_OCR_EVIDENCE_FILE_NAME, NCK1_OCR_CONFIRMATION_FILE_NAME]
     .map(file => path.join(directory, file))

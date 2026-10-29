@@ -2,7 +2,7 @@
 // recognition identical without importing the CLI producer into the server.
 // Scoring predicates share this matching view; captured source text is untouched.
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  usesExplicitWritingTitles, usesGivenTitleWritingSamples, usesComposedWritingLabels } from './sourceReferenceSemantics.mjs'
+  usesExplicitWritingTitles, usesGivenTitleWritingSamples, usesComposedWritingLabels, usesSourceTitleCompatibility } from './sourceReferenceSemantics.mjs'
 export const writingRuleMatchingView = text => text.normalize('NFKC').replace(/\s+/gu, '')
 export const SOURCE_REFERENCE_ANSWER_ROLES = Object.freeze(['official_answers', 'question_and_answers'])
 // The #586 sample parser is also the authority for Version one/two/three
@@ -177,3 +177,14 @@ export function isCompleteWritingTranscriptHeading(text, nextText, producerVersi
   return isWritingTranscriptTitle(text, producerVersion)
     && /^\(?Text\s*1\)?\s*[:：.．]?$/iu.test(nextText?.normalize('NFKC').trim() || '')
 }
+
+
+// v27 recognizes these complete source strings only. NFKC/trim is a matching
+// view; internal spaces, annotations and original captured bytes stay intact.
+export const isSourceTitleTranscriptCandidate = (text, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION) =>
+  usesSourceTitleCompatibility(producerVersion)
+    && ['【听力录音稿】', '英语听力原文'].includes(text.normalize('NFKC').trim())
+export const isTaskLocalSampleOmission = (text, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION) =>
+  usesSourceTitleCompatibility(producerVersion) && text.normalize('NFKC').trim() === '参考范文(略)'
+export const isAnnotatedScoringLabel = (text, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION) =>
+  usesSourceTitleCompatibility(producerVersion) && text.normalize('NFKC').trim() === '评分细则(格式错扣1分):'

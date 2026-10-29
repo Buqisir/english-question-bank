@@ -45,6 +45,7 @@ execFileSync(process.execPath, [
   'scripts/import-pipeline/source-reference-exclusion.test.mjs',
   'scripts/import-pipeline/source-reference-whole-absence.test.mjs',
   'server/paper-import/sourceReferenceCellContinuation.test.mjs',
+  'server/paper-import/sourceReferenceSourceTitles.test.mjs',
 ], { cwd: root, stdio: 'inherit' })
 
 function sourceInput(produced, documents) {

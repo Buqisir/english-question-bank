@@ -42,7 +42,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
     let writing = false, taskType = null, label = null, ended = false, terminal = false, startedWriting = false
     let afterListening = false
     const items = document.pages.flatMap((page, index) =>
-      page.orderedItems.map(item => ({ ...item, page: page.page ?? index + 1 })))
+      page.orderedItems.map(item => ({ ...item, documentId: document.documentId, page: page.page ?? index + 1 })))
     items.forEach((item, index) => { item.nextSourceItemId = items[index + 1]?.itemId })
     // Reuse extraction's task recognition, including adjacent/merged sample
     // labels. Existing scoring termination/reopening rules remain authoritative.

@@ -8,7 +8,8 @@ import { fitSourceReferencePng } from './sourceReferencePngSizing.mjs'
 import { SOURCE_REFERENCE_IMAGE_LIMITS as limits, decodeSourceReferencePng } from './sourceReferenceImages.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
-import { validateSourceReferences } from './sourceReferences.mjs'
+import { sourceReferenceFiguresFixture } from '../../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
+import { sourceReferenceFigures, validateSourceReferences } from './sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from './sourceReferenceAdmission.mjs'
 
 function chunk(type, data) {
@@ -169,11 +170,7 @@ for (const nativeError of [
   })
 }
 
-test('unchanged v1 schema and PDF pixel replay accept PNG24 re-encoding', () => {
-  const input = scoringFiguresFixture()
-  const sidecar = captureScoringReferences(input)
-  const figure = sidecar.groups[0].scoring.entries[0].blocks.find(block => block.kind === 'figure')
-  const raster = figure.raster
+function reencodePng24(raster, tamper = false) {
   const { pixels, pixelWidth: width, pixelHeight: height } = decodeSourceReferencePng(raster)
   const rgb = Buffer.alloc(height * (width * 3 + 1))
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
@@ -181,6 +178,7 @@ test('unchanged v1 schema and PDF pixel replay accept PNG24 re-encoding', () => 
     assert.equal(pixels[offset + 3], 255)
     pixels.copy(rgb, y * (width * 3 + 1) + 1 + x * 3, offset, offset + 3)
   }
+  if (tamper) rgb[1] ^= 1
   const header = Buffer.alloc(13)
   header.writeUInt32BE(width); header.writeUInt32BE(height, 4)
   header[8] = 8; header[9] = 2
@@ -189,8 +187,65 @@ test('unchanged v1 schema and PDF pixel replay accept PNG24 re-encoding', () => 
   Object.assign(raster, { base64: bytes.toString('base64'), sha256: sha256(bytes), byteLength: bytes.length })
   assert.equal(bytes[25], 2, 'truecolor PNG24 uses the existing v1 profile')
   assert.equal(raster.profile, 'source-reference-pdf-crop-v1')
+}
+
+test('unchanged v1 schema and PDF pixel replay accept PNG24 re-encoding', () => {
+  const input = scoringFiguresFixture()
+  const sidecar = captureScoringReferences(input)
+  const figure = sidecar.groups[0].scoring.entries[0].blocks.find(block => block.kind === 'figure')
+  reencodePng24(figure.raster)
   assert.deepEqual(validateSourceReferences({ ...input, sidecar }), [])
   const frozen = JSON.stringify(sidecar)
   assertSourceReferenceAdmission({ ...input, sidecar })
   assert.equal(JSON.stringify(sidecar), frozen, 'receiver must not re-encode frozen assets')
 })
+
+for (const kind of ['essays', 'scoring']) {
+  test(`current ${kind} figure comparison ignores encoding bytes only after exact pixel replay`, () => {
+    const input = kind === 'essays'
+      ? sourceReferenceFiguresFixture(undefined, { currentCapture: true }) : scoringFiguresFixture()
+    const sidecar = kind === 'essays' ? input.sourceReferences : captureScoringReferences(input)
+    const figures = sourceReferenceFigures(sidecar)
+    assert(figures.length > 0)
+    for (const { figure } of figures) {
+      const original = figure.raster.sha256
+      const pixels = decodeSourceReferencePng(figure.raster).pixels
+      reencodePng24(figure.raster)
+      assert.notEqual(figure.raster.sha256, original, 'encoding bytes must actually differ')
+      assert.deepEqual(decodeSourceReferencePng(figure.raster).pixels, pixels)
+    }
+    assert.deepEqual(validateSourceReferences({ ...input, sidecar }), [])
+    const frozen = JSON.stringify(sidecar)
+    const sourceBefore = structuredClone(input.sourceInput)
+    assertSourceReferenceAdmission({ ...input, sidecar })
+    assert.equal(JSON.stringify(sidecar), frozen)
+    assert.deepEqual(structuredClone(input.sourceInput), sourceBefore)
+
+    const first = value => sourceReferenceFigures(value)[0].figure
+    const coverage = 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID'
+    const replayMessage = 'Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator'
+    for (const [name, change, code, message] of [
+      ['changed last figure pixel', value => {
+        reencodePng24(sourceReferenceFigures(value).at(-1).figure.raster, true)
+      }, 'SOURCE_REFERENCES_FIGURE_SOURCE_DISAGREES', 'Frozen PNG does not replay its immutable source PDF region'],
+      ['figure id', value => { first(value).figureId += '-forged' }, coverage, replayMessage],
+      ['source region id', value => { first(value).sourceRegionId += '-forged' }, coverage,
+        'Missing, extra, duplicated or substituted source figure region'],
+      ['source locator', value => { first(value).source.locator.region.x += .001 }, coverage,
+        'Missing, extra, duplicated or substituted source figure region'],
+      [kind === 'scoring' ? 'block order' : 'essay entry order', value => {
+        if (kind === 'scoring') value.groups[0].scoring.entries[0].blocks.reverse()
+        else value.groups[0].essays.entries.reverse()
+      }, coverage, kind === 'scoring'
+        ? 'Scoring blocks must follow confirmed source order without overlapping source ranges' : replayMessage],
+    ]) {
+      const changed = structuredClone(sidecar)
+      change(changed)
+      assert.notDeepEqual(changed, sidecar, name)
+      assert.deepEqual(validateSourceReferences({ ...input, sidecar: changed }), [], name)
+      const before = JSON.stringify(changed)
+      assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed }), { code, message }, name)
+      assert.equal(JSON.stringify(changed), before, name)
+    }
+  })
+}

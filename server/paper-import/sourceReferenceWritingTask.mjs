@@ -8,7 +8,8 @@ import { createWritingScope, createReferenceCapture } from '../../scripts/import
 import { isExplicitScoringAppendixStart, scoredWritingRubricTask, writingRuleMatchingView, SOURCE_REFERENCE_ANSWER_ROLES,
   explicitWritingHeading, applicationStanceLabel, continuationScoringLabel, continuationThoughtHeading,
   applicationScoringPoint, verifiedParenthesizedEnglish, isCompleteWritingTranscriptHeading,
-  isWritingTranscriptTitle, isSourceReferenceExplanationStart, isReadingAnswerPair } from './sourceReferenceWritingRules.mjs'
+  isWritingTranscriptTitle, isSourceReferenceExplanationStart, isReadingAnswerPair,
+  isSourceTitleTranscriptCandidate, isTaskLocalSampleOmission, isAnnotatedScoringLabel } from './sourceReferenceWritingRules.mjs'
 import { matchesLineRole, firstLineRole, inlineSampleParts, bareSectionNumber,
   writingSectionText } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVersion, usesExplicitWritingTitles, usesTitleAbbreviation,
@@ -330,7 +331,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
       if (pictureItems.has(item.itemId)) continue
       if (tableItems.has(item.itemId) && !tableStarts.has(item.itemId)) continue
       const boxes = (item.observationIds || []).map((id) => observations.get(id))
-      const line = { itemId: item.itemId, nextSourceItemId: nextItemIds.get(item.itemId), page: page.page, text: item.text, boxes,
+      const line = { documentId: answerDocument.documentId, itemId: item.itemId, nextSourceItemId: nextItemIds.get(item.itemId), page: page.page, text: item.text, boxes,
         ...(tableStarts.has(item.itemId) ? { table: tableStarts.get(item.itemId) } : {}) }
       const facts = factsFor(line)
       line.left = facts.left
@@ -431,6 +432,14 @@ export function sourceReferenceWritingLifecycle(lines, {
   const listeningStarts = new Set()
   const scope = createWritingScope(sections)
   let afterListening = false, scoringAppendix = false, afterExplanations = false, articleBlocked = false
+  let strictTranscriptClosure = false
+  const appendLine = line => {
+    if (strictTranscriptClosure && scoringAppendix) {
+      scope.current.scoringOnlyLines ??= new WeakSet()
+      scope.current.scoringOnlyLines.add(line)
+    }
+    scope.current.lines.push(line)
+  }
   const lastObjectiveQuestion = sourceReferenceLastObjectiveQuestion(materialization)
   const titles = (materialization.groups ?? []).filter(group => group.writingTask?.taskType === 'application')
     .flatMap(group => group.writingTask.givenSkeleton ?? []).filter(item => item.role === 'title')
@@ -473,6 +482,60 @@ export function sourceReferenceWritingLifecycle(lines, {
         scopeError('Alternate range cannot precede later writing or scoring')
       }
     }
+    // Check new complete titles before ended/furniture shortcuts. The raw item
+    // link prevents a consumed visual or skipped header from lending adjacency.
+    const adjacent = lines[lineIndex + 1]
+    const rawAdjacent = adjacent && !line.figure && !line.table && !adjacent.figure && !adjacent.table
+      && line.nextSourceItemId === adjacent.itemId && line.documentId === adjacent.documentId
+    const samePageRawAdjacent = rawAdjacent && line.page === adjacent.page
+    if (isSourceTitleTranscriptCandidate(line.text, producerVersion)) {
+      if (!samePageRawAdjacent || !/^\(?Text\s*1\)?\s*[:：.．]?$/iu.test(adjacent.text.normalize('NFKC').trim())) {
+        scopeError(`Transcript title requires the next confirmed same-page Text 1: ${line.itemId}`)
+      }
+      strictTranscriptClosure ||= sections.size > 0 || scope.inWriting
+      scope.enterPart(false)
+      listeningStarts.add(line.itemId)
+      afterListening = true
+      scoringAppendix = false
+      continue
+    }
+    if (isTaskLocalSampleOmission(line.text, producerVersion) && (!scope.current || scope.ended)) {
+      scopeError(`Source sample omission requires an established current task: ${line.itemId}`)
+    }
+    if (isAnnotatedScoringLabel(line.text, producerVersion) && (!scope.current || scope.ended)) {
+      scopeError(`Annotated scoring label requires an established current task: ${line.itemId}`)
+    }
+    // Once a new title closes existing writing, only a proven adjacent rubric
+    // pair may reopen it. This guard survives bare Text 1 and scope.end().
+    if (strictTranscriptClosure && !line.figure && !line.table) {
+      const facts = factsFor(line)
+      const heading = sourceReferenceWritingTaskHeading(lines, lineIndex, {
+        inWriting: scope.inWriting, sectionCount: sections.size, lastObjectiveQuestion,
+        answerRole: answerDocument.role, factsFor, producerVersion,
+      })
+      if ((afterListening || scope.ended || scoringAppendix)
+        && rawAdjacent && isExplicitScoringAppendixStart(line.text, adjacent.text)) {
+        scope.enterPart(false)
+        const task = scoredWritingRubricTask(line.text, adjacent.text)
+        if (task) scope.startTask(task, { reuse: true })
+        afterListening = afterExplanations = false
+        scoringAppendix = true
+        continue
+      }
+      // Inspect original stance labels before listening skips or scoring-scope
+      // filters can hide them; enterPart(false) has cleared the current task.
+      const essayStart = (heading.started && !heading.scoringSection)
+        || matchesLineRole('writing.part', facts) || heading.explicitHeading?.sample
+        || matchesLineRole('entry.sample-label', facts)
+        || applicationStanceLabel(line.text, sections.get('application')?.taskType
+          ?? materialization.groups?.find(group => group.writingTask?.taskType === 'application')?.writingTask.taskType)
+        || isTaskLocalSampleOmission(line.text, producerVersion)
+      const incompleteRubric = (afterListening || scope.ended)
+        && (heading.scoringSection || firstLineRole('scoring-overview', facts)
+          || (firstLineRole('entry-label', facts) && firstLineRole('entry-kind', facts)?.value === 'scoring'))
+      if (essayStart || incompleteRubric) scopeError(`Writing cannot reopen after a closed transcript boundary: ${line.itemId}`)
+      if (afterListening) continue
+    }
     articleBlocked ||= isSourceReferenceExplanationStart(line.text, producerVersion)
     if (usesExplicitWritingTitles(producerVersion)
       && /^备选试题参考答案[:：]?$/u.test(line.text.normalize('NFKC').trim())) {
@@ -480,7 +543,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     }
     if (scope.ended) {
       if (line.itemId) items.set(line.itemId, { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
-      if (!afterExplanations && !alternateAnswerScope) {
+      if (!afterExplanations && !alternateAnswerScope && !strictTranscriptClosure) {
         for (const remaining of lines.slice(lineIndex + 1)) if (remaining.itemId) {
           items.set(remaining.itemId, { task: null, capturing: false, ended: true, kind: null, action: 'ended' })
         }
@@ -513,7 +576,7 @@ export function sourceReferenceWritingLifecycle(lines, {
     }
     if (line.figure) {
       if (!scope.current) throw new Error('Scoring figure has no explicit writing-task scope')
-      scope.current.lines.push(line)
+      appendLine(line)
       continue
     }
     if (line.table) {
@@ -524,7 +587,7 @@ export function sourceReferenceWritingLifecycle(lines, {
         continue
       }
       if (!scope.current) scopeError(`Source table ${line.table.tableId} has no writing-task scope`)
-      scope.current.lines.push(line)
+      appendLine(line)
       continue
     }
     const facts = factsFor(line)
@@ -583,7 +646,7 @@ export function sourceReferenceWritingLifecycle(lines, {
       // This task heading also labels its rubric. A following explicit entry
       // label owns the body instead; avoid manufacturing an empty parent entry.
       const next = lines[lineIndex + 1]
-      if (!next || !firstLineRole('entry-label', factsFor(next))) scope.current.lines.push(line)
+      if (!next || !firstLineRole('entry-label', factsFor(next))) appendLine(line)
       continue
     }
     if (started) {
@@ -621,12 +684,12 @@ export function sourceReferenceWritingLifecycle(lines, {
       if (givenTitleArticle) {
         scope.current.articleEnd = givenTitleArticle.end
         scope.current.articleTitle = line
-        scope.current.lines.push(line)
+        appendLine(line)
       }
       if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
       if (explicitHeading?.sample) {
         scope.current.explicitSample = true
-        scope.current.lines.push(line)
+        appendLine(line)
       }
       if (explicitHeading?.omission) {
         scope.current.explicitOmission = true
@@ -639,7 +702,10 @@ export function sourceReferenceWritingLifecycle(lines, {
     if (matchesLineRole('writing.omission', facts, { inWriting: scope.inWriting, current: scope.current })) {
       // Retain task-local absence declarations for the reference capture pass:
       // they can explicitly resolve a preceding reprinted prompt.
-      if (scope.current) scope.current.lines.push(line)
+      if (scope.current) {
+        appendLine(line)
+        if (isTaskLocalSampleOmission(line.text, producerVersion)) scope.current.explicitOmission = true
+      }
       scope.omit()
       review.push({ itemId: line.itemId, issue: 'source explicitly supplies no writing sample (not_supplied)' })
       continue
@@ -657,7 +723,7 @@ export function sourceReferenceWritingLifecycle(lines, {
         scopeError('Unresolved repeated writing task on part heading')
       }
       scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, trailingTask)
-    } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) scope.current.lines.push(line)
+    } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) appendLine(line)
   }
   for (const section of sections.values()) {
     Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization))
@@ -734,7 +800,7 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
         || firstLineRole('scoring-section', facts) || matchesLineRole('writing.part-boundary', facts)
         || matchesLineRole('writing.continuation-prompt', facts)
         || /^(?:英语)?听力(?:部分)?录音稿$/u.test(facts.nfkc.trim())
-        || matchesLineRole('writing.student-script', facts) || matchesLineRole('writing.omission', facts, { inWriting: true })) {
+        || matchesLineRole('writing.student-script', facts) || matchesLineRole('writing.omission', facts, { inWriting: true, taskType })) {
         if (paragraph === 1) break
         return null
       }
@@ -797,6 +863,13 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       continue
     }
     const facts = factsFor(line)
+    if (section.scoringOnlyLines?.has(line)
+      && (matchesLineRole('entry.sample-label', facts)
+        || explicitWritingHeading(line.text, producerVersion)?.sample
+        || applicationStanceLabel(line.text, taskType)
+        || completeSourceLetter(sectionLines, lineIndex, factsFor, producerVersion))) {
+      scopeError(`Scoring-only appendix cannot reopen source essays: ${line.itemId}`)
+    }
     if (awaitingSourceLabel && inferredStarts.has(line)) {
       awaitingSourceLabel = false
       capture.start('essays')
@@ -869,7 +942,7 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       emit('entry')
       continue
     }
-    if (matchesLineRole('writing.omission', facts, { inWriting: true })) {
+    if (matchesLineRole('writing.omission', facts, { inWriting: true, taskType })) {
       awaitingSourceLabel = false
       emit('omission')
       continue
@@ -895,6 +968,9 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       continue
     }
     if (matchesLineRole('writing.skipped-fragment', facts, { skipping: capture.paused })) { emit('fragment'); continue }
+    if (section.scoringOnlyLines?.has(line) && capture.kind !== 'scoring') {
+      scopeError(`Scoring-only appendix requires an explicit rubric entry: ${line.itemId}`)
+    }
     capture.resume()
     step.openEntry = !hasEntry
     if (!hasEntry) { hasEntry = true; labelItemId = null }

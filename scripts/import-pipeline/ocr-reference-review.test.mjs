@@ -4,6 +4,7 @@ import { buildSourceReferences } from './ocr-proofread.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { prepareSourceReferences, validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
@@ -1292,10 +1293,20 @@ test('P1-2 adjacent fragments in one essay pass with or without reference figure
     entry.blocks = entry.blocks.filter(block => block.kind !== 'figure')
   }
   reseal(input)
-  assertSourceReferenceAdmission({ ...input, sidecar })
+  // Removing visual classifications releases the picture's OCR text into the
+  // rubric and changes paragraph boundaries. The old rubric is now incomplete.
+  assert.deepEqual(validateSourceReferences({ ...input, sidecar }), [])
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), {
+    code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID',
+    message: 'Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator',
+  })
+  const withoutFigures = { ...prepareSourceReferences(input), groups: captureScoringReferences(input).groups }
+  assert.deepEqual(withoutFigures.groups[0].essays.entries[0].paragraphs[0], p)
+  assert.deepEqual(validateSourceReferences({ ...input, sidecar: withoutFigures }), [])
+  assertSourceReferenceAdmission({ ...input, sidecar: withoutFigures })
   const missingConfirmation = { ...input.sourceInput }
   delete missingConfirmation.ocrSourceBytes
-  assert.throws(() => assertSourceReferenceAdmission({ ...input, sourceInput: missingConfirmation, sidecar }),
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sourceInput: missingConfirmation, sidecar: withoutFigures }),
     /Native answer PDF requires complete sealed OCR bytes/u)
 })
 

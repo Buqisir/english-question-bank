@@ -67,7 +67,7 @@ const produce = input => buildSourceReferences(input.materialization, input.evid
 
 test('no-image public admission preserves all main content and scans through the alternate interval', () => {
   const input = fixture(), before = digestJson(input)
-  assert.equal(currentSourceReferencesSchema.$id, 'source-references-capture-v26')
+  assert.equal(currentSourceReferencesSchema.$id, 'source-references-capture-v27')
   assertSourceReferenceAdmission(input)
   const source = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
   const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
