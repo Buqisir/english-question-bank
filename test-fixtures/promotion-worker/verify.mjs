@@ -12,6 +12,7 @@ import { writeFixtureJson } from './faults.mjs'
 
 const hook = new URL('./hook.mjs', import.meta.url).pathname
 const driver = new URL('./api.mjs', import.meta.url)
+const latePublicationCheckpoints = new Set(['before-mark-published', 'after-mark-published', 'before-worker-ipc'])
 function query(file, sql, parameters = []) {
   const db = new DatabaseSync(file, { readOnly: true })
   try { return db.prepare(sql).all(...parameters) } finally { db.close() }
@@ -191,7 +192,14 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         // Do not race `until`: a losing poll would outlive trial cleanup.
         let terminal
         pendingCall?.then(value => { terminal = value })
-        const end = Date.now() + 20_000
+        // CI 40828896408: the same fixture's successful publication took
+        // 13,769ms requested-to-published; this late checkpoint was still
+        // running at 20s. Allow 3x that observed baseline rounded up to 45s
+        // only for checkpoints sharing this late publication/replay path.
+        // The API call still times out at 60s; supervisor deadline/RSS
+        // guards are unchanged. Stage records distinguish progress from a hang.
+        const timeoutMs = latePublicationCheckpoints.has(stage) ? 45_000 : 20_000
+        const end = Date.now() + timeoutMs
         while (Date.now() < end) {
           if (existsSync(file)) return JSON.parse(readFileSync(file))
           if (terminal) {
@@ -247,12 +255,20 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
           const outcome = row.outcome_json ? JSON.parse(row.outcome_json) : {}
           return { id: row.id, state: row.state, promotionId: row.promotion_id,
             workerPid: row.worker_pid, supervisorPid: row.supervisor_pid,
+            startedAt: row.started_at, deadlineAt: row.deadline_at,
             reasonCode: outcome.reasonCode, status: outcome.status, failureCode: outcome.failure?.failureCode }
         })),
         promotions: read(() => context.promotions().map(row => ({
           id: row.id, state: row.state, failureCode: row.failure_code,
         }))),
         clients: clients.map(client => client.diagnostics()),
+        stages: read(() => ['before-publisher', 'after-bank-commit', 'before-mark-published']
+          .flatMap(stage => {
+            const file = `${marker}.${stage}`
+            if (!existsSync(file)) return []
+            const { at, pid } = JSON.parse(readFileSync(file))
+            return [{ stage, pid, elapsedMs: at - started }]
+          })),
       })}`)
       throw error
     } finally {
@@ -995,9 +1011,20 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'before-on-prepared', 'after-on-prepared', 'after-version-rename', 'after-latest-swap',
     'after-bank-commit', 'before-mark-published', 'after-mark-published', 'before-worker-ipc']) {
     await trial(`SIGKILL at ${stage} retains identity and never silently replays`, stage, 'block', async t => {
+      if (latePublicationCheckpoints.has(stage)) t.plan({
+        'before-publisher': 'record', 'after-bank-commit': 'record', [stage]: 'block',
+      })
       const a = await t.client()
       const result = a.call(shipMessage)
-      const checkpoint = await t.checkpoint(undefined, result)
+      // Record-only markers must never satisfy the requested block checkpoint.
+      const checkpoint = await t.checkpoint(latePublicationCheckpoints.has(stage) ? stage : undefined, result)
+      if (latePublicationCheckpoints.has(stage)) {
+        console.log(`PROMOTION_CHECKPOINT_TIMING ${JSON.stringify(['before-publisher', 'after-bank-commit', stage]
+          .map(name => {
+            const { at, pid } = JSON.parse(readFileSync(`${t.marker}.${name}`))
+            return { stage: name, at, pid }
+          }))}`)
+      }
       process.kill(checkpoint.pid, 'SIGKILL')
       const answer = await result
       assert.ok(['error', 'exited'].includes(answer.type))

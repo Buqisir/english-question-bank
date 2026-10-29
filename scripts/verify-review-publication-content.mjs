@@ -88,6 +88,17 @@ try {
   if (process.argv.includes('--v3-figures') || scoringFigures) {
     const sourceManifest = readJson(path.join(source, 'universal-source-manifest.json'))
     const materialization = readJson(path.join(source, sourceManifest.materializationPath))
+    // Both figure fixtures replace the question PDF with a one-page invented
+    // source. The v26 base now locates its questions on ten distinct pages;
+    // bind those locators to the replacement, not to pages it does not have.
+    const questionIds = new Set(materialization.documents
+      .filter(document => document.role === 'question_source').map(document => document.documentId))
+    function locateSyntheticQuestionPage(value) {
+      if (!value || typeof value !== 'object') return
+      if (value.kind === 'page_region' && questionIds.has(value.documentId)) value.page = 1
+      else for (const child of Object.values(value)) locateSyntheticQuestionPage(child)
+    }
+    locateSyntheticQuestionPage(materialization)
     const fixture = scoringFigures ? scoringFiguresFixture({ materialization })
       : sourceReferenceFiguresFixture(materialization, { currentCapture: true })
     if (scoringFigures) fixture.sourceReferences = captureScoringReferences(fixture)
@@ -115,7 +126,18 @@ try {
   })
   const references = figureReferences ?? syntheticReviewReferences(projection)
   assert(references, 'expected the synthetic answer PDF or figure references')
-  if (!figureReferences && process.argv.includes('--v2-references')) references.schemaVersion = 'source-references-v2'
+  if (!figureReferences && process.argv.includes('--v2-references')) {
+    references.schemaVersion = 'source-references-v2'
+    // The current sealed answer fixture contains scoring prose (the old
+    // two-page fixture had none). v2 stores that same prose as ordered blocks.
+    for (const group of references.groups) for (const entry of group.scoring.entries) {
+      const paragraphs = structuredClone(entry.paragraphs)
+      entry.blocks = entry.paragraphs.map(paragraph => ({ kind: 'paragraph', paragraph }))
+      delete entry.paragraphs
+      assert.deepEqual(entry.blocks.map(block => block.paragraph), paragraphs,
+        'v2 fixture conversion preserves every scoring paragraph and source locator')
+    }
+  }
   json(path.join(source, SOURCE_REFERENCES_FILE), references)
   mkdirSync(path.join(source, 'products'))
   const products = { schemaVersion: 'paper-pdf-products-v1',
@@ -455,11 +477,20 @@ try {
   dbRun(db => db.prepare('UPDATE import_review_revisions SET updated_at=? WHERE id=?').run(oldUpdatedAt, revision.id))
   pass('asynchronous archive revision race rejects and retains guard/evidence without publishing')
 
+  // A target-identity race is a content-binding test. A cold/pending target
+  // legitimately uses the legacy renderer guard, which does not bind origin.
+  // Close the preceding proven pre-write rejection and establish real equal
+  // before capturing the archive guard, as for the onPrepared race below.
+  await refreshEqualAfterRejectedFixture()
   const beforeOrigin = process.env.QUESTION_BANK_PUBLIC_ORIGIN
   let changedTarget = false
   const targetRace = { identity: blobStore.identity, async put(bytes, mediaType) {
     const result = await blobStore.put(bytes, mediaType)
     if (!changedTarget) {
+      const current = store.latestPromotion(projection.paperId)
+      const context = store.withPromotionContentGuard(projection.paperId, current.promotionId, null, value => value)
+      assert.ok(context.subject, 'target race must start with a real content-bound subject')
+      assert.notEqual(context.binding.guard, 'legacy_renderer')
       changedTarget = true
       process.env.QUESTION_BANK_PUBLIC_ORIGIN = 'https://review-target.invalid'
     }
@@ -511,7 +542,8 @@ try {
     const compatibility = await createReviewCompatibilityStore({
       dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
     }).checkRevision(revision.id)
-    assert.equal(compatibility.comparison.result, 'equal', JSON.stringify(compatibility))
+    assert.equal(compatibility.comparison?.result, 'equal', JSON.stringify(compatibility))
+    await store.ready()
     assert.equal(store.compatibilityForRevision(revision.id).result, 'equal')
   }
   await refreshEqualAfterRejectedFixture()
