@@ -110,6 +110,7 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   actually alters data-persistence writes or schema/migrations, the
   question-number-to-answer mapping, review/publication admission rules,
   student-version answer isolation, authentication or permissions,
+  breaking public schema/API changes, user-data deletion or bulk mutation,
   deployment/host configuration or the CI toolchain itself
   (`.github/workflows/`, `scripts/verify-ci.mjs`,
   `scripts/ci-pr-plan.mjs`, `.agents/setup`, `.agents/ship.md`, these
