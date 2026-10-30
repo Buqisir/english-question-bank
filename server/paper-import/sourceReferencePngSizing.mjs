@@ -68,7 +68,9 @@ export function fitSourceReferencePng(crop, limits) {
       processing: { method: 'lossless', originalByteLength: crop.bytes.length,
         byteLength: bytes.length, codec, reason: 'png_exceeds_2_mib' },
     }
-    fail('PNG exceeds 2 MiB after lossless compression')
+    const error = Object.assign(new Error('PNG exceeds 2 MiB after lossless compression'),
+      { code: 'SOURCE_REFERENCES_FIGURE_PNG_INVALID', fittedByteLength: bytes.length })
+    throw error
   } catch (error) {
     if (error.code === 'SOURCE_REFERENCES_FIGURE_PNG_INVALID') throw error
     fail(`PNG sizing failed bounded native processing (${nativeFailureSummary(error, directory)})`, error)
