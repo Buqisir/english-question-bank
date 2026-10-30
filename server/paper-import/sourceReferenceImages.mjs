@@ -116,11 +116,10 @@ export function decodeSourceReferencePng(raster) {
 // The exact admitted PNG byte SHA remains the publication commitment.
 // Deterministic lower density for a crop that itself exceeds a bound. Pixel
 // and dimension bounds scale with density; an oversized lossless PNG scales
-// roughly with density squared on the same region. The 0.97 margin keeps two
-// crops of the same page from landing between adjacent legal densities, which
-// would make pixel replay non-deterministic.
+// roughly with density squared on the same region. Each retry scales from the
+// density that produced the oversized crop, with a 0.97 margin for rounding.
 export function sourceReferenceFigureDensity({ pixelWidth, pixelHeight, byteLength,
-  fittedByteLength = null, limits = SOURCE_REFERENCE_IMAGE_LIMITS }) {
+  fittedByteLength = null, density = SOURCE_REFERENCE_IMAGE_DPI, limits = SOURCE_REFERENCE_IMAGE_LIMITS }) {
   const scales = []
   if (pixelWidth * pixelHeight > limits.pixels) {
     scales.push(Math.sqrt(limits.pixels / (pixelWidth * pixelHeight)))
@@ -130,8 +129,7 @@ export function sourceReferenceFigureDensity({ pixelWidth, pixelHeight, byteLeng
   }
   const bytes = fittedByteLength ?? byteLength
   if (bytes != null && bytes > limits.pngBytes) scales.push(Math.sqrt(limits.pngBytes / bytes))
-  return scales.length ? Math.floor(SOURCE_REFERENCE_IMAGE_DPI * Math.min(...scales) * 0.97)
-    : SOURCE_REFERENCE_IMAGE_DPI
+  return scales.length ? Math.floor(density * Math.min(...scales) * 0.97) : density
 }
 
 export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceLimits, onProcessing }) {
@@ -154,15 +152,17 @@ export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceL
       return { crop, error }
     }
   }
-  let { crop, fitted, error } = cropAt(SOURCE_REFERENCE_IMAGE_DPI)
+  let density = SOURCE_REFERENCE_IMAGE_DPI
+  let { crop, fitted, error } = cropAt(density)
   // Retry with a deterministically lower density only when the crop itself
   // exceeds a bound. Unaffected crops keep the exact historical path/bytes.
   for (let retry = 0; error && retry < 3; retry++) {
-    const density = sourceReferenceFigureDensity({
+    const next = sourceReferenceFigureDensity({
       pixelWidth: crop?.pixelWidth, pixelHeight: crop?.pixelHeight,
-      byteLength: crop?.bytes?.length, fittedByteLength: error.fittedByteLength,
+      byteLength: crop?.bytes?.length, fittedByteLength: error.fittedByteLength, density,
     })
-    if (density < 96 || density >= SOURCE_REFERENCE_IMAGE_DPI) break
+    if (next < 96 || next >= density) break
+    density = next
     ;({ crop, fitted, error } = cropAt(density))
   }
   if (error) throw error
