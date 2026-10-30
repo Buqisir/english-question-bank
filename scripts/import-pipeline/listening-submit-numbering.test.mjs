@@ -104,15 +104,30 @@ test('push preflight accepts a loaded external listening package without a raw-s
     { code: 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING' })
 })
 
-test('raw-source listening still requires a usable review in push preflight', t => {
+test('raw-source listening with audio defers non-usable groups to Owner listening', t => {
   const paperDir = mkdtempSync(path.join(tmpdir(), 'submit-raw-test-'))
   t.after(() => rmSync(paperDir, { recursive: true, force: true }))
   const group = { segmentId: 'listening-text-1', questionNumbers: [1] }
   const materialization = { listening: { state: 'captured', transcript: [group] } }
   const loaded = { materialization }
+  // No audio at all: the segment cannot be played, so submit still fails closed.
   assert.throws(() => assertImportSubmissionReady(paperDir, materialization, loaded),
     { code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE' })
+  mkdirSync(path.join(paperDir, 'materialization/listening-audio'), { recursive: true })
+  writeFileSync(path.join(paperDir, 'materialization/listening-audio/playback.mp3'), 'audio')
+  // With audio present, a usable review still passes plainly.
   writeFileSync(path.join(paperDir, 'listening-review-v1.json'),
     JSON.stringify({ groups: [{ ...group, decision: 'usable' }] }))
   assert.deepEqual(assertImportSubmissionReady(paperDir, materialization, loaded), { status: 'PASS' })
+  // A non-usable group with a matching review and audio is submitted as pending
+  // Owner listening rather than blocking the whole paper.
+  writeFileSync(path.join(paperDir, 'listening-review-v1.json'),
+    JSON.stringify({ groups: [{ ...group, decision: 'review_required', reason: 'READING_COUNT_MISMATCH' }] }))
+  assert.deepEqual(assertImportSubmissionReady(paperDir, materialization, loaded),
+    { status: 'PASS', pendingOwnerListening: [{ segmentId: 'listening-text-1', questionNumbers: [1], reason: 'READING_COUNT_MISMATCH' }] })
+  // A mismatched review identity still blocks even with audio.
+  writeFileSync(path.join(paperDir, 'listening-review-v1.json'),
+    JSON.stringify({ groups: [{ ...group, questionNumbers: [2], decision: 'review_required', reason: 'x' }] }))
+  assert.throws(() => assertImportSubmissionReady(paperDir, materialization, loaded),
+    { code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE' })
 })

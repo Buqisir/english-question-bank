@@ -1349,7 +1349,14 @@ export async function finish(ctx, args, { referenceStages = {} } = {}) {
 export async function submit(ctx, args) {
   assertReferenceProductsReady(ctx)
   // Always re-read before a possibly cached push step; no preview/submit bypass.
-  assertImportSubmissionReady(ctx.paperDir)
+  const gate = assertImportSubmissionReady(ctx.paperDir)
+  if (gate.pendingOwnerListening?.length) {
+    say('\n以下听力段保持非 usable 送审，待 Owner 听：')
+    for (const group of gate.pendingOwnerListening) {
+      say(`- ${group.segmentId}（题 ${group.questionNumbers.join('、')}）：${group.reason}`)
+    }
+    say(`生成听核包：node scripts/import-pipeline/listening-owner-review-pack.mjs ${ctx.paperId} --output <仓库外新目录>`)
+  }
   const localPreview = args.includes('--local-preview')
   if (!localPreview && ctx.state.steps.push && !ctx.state.steps.push.finishedAt && !reconciledPush(ctx)) {
     fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: 未完成的 push 须先只读对账，禁止重放')

@@ -2,16 +2,36 @@ import { chineseContextNumbering } from '../../shared/chineseContextNumbering.mj
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
-export function importSubmissionIssues({ materialization, listeningReview, analyzedPackage = null }) {
+// Groups awaiting Owner listening: decision stays non-usable in the sealed
+// sidecar, but playback.mp3 exists so they are submitted with a pending mark
+// instead of blocking the whole paper. Audio presence is the hard gate.
+export function pendingOwnerListeningGroups({ materialization, listeningReview, paperDir }) {
+  const transcript = materialization.listening?.transcript || []
+  if (!transcript.length || !existsSync(path.join(paperDir, 'materialization/listening-audio/playback.mp3'))) return []
+  const groups = listeningReview?.groups || []
+  return transcript.filter(source => {
+    const matches = groups.filter(group => group.segmentId === source.segmentId)
+    return matches.length === 1 && matches[0].decision !== 'usable'
+      && JSON.stringify(matches[0].questionNumbers) === JSON.stringify(source.questionNumbers)
+  }).map(source => {
+    const review = groups.find(group => group.segmentId === source.segmentId)
+    return { segmentId: source.segmentId, questionNumbers: source.questionNumbers, reason: review.reason || review.decision }
+  })
+}
+
+export function importSubmissionIssues({ materialization, listeningReview, analyzedPackage = null, paperDir = null }) {
   const issues = []
   const transcript = materialization.listening?.transcript || []
   // External packages use Owner Screen/PDF review and cannot author this raw-source sidecar.
   if (!analyzedPackage && (materialization.listening?.state === 'captured' || transcript.length)) {
     const groups = listeningReview?.groups || []
+    const pending = paperDir ? new Set(pendingOwnerListeningGroups({ materialization, listeningReview, paperDir })
+      .map(group => group.segmentId)) : new Set()
     const unresolved = transcript.filter(source => {
       const matches = groups.filter(group => group.segmentId === source.segmentId)
-      return matches.length !== 1 || matches[0].decision !== 'usable'
-        || JSON.stringify(matches[0].questionNumbers) !== JSON.stringify(source.questionNumbers)
+      return (matches.length !== 1 || matches[0].decision !== 'usable'
+        || JSON.stringify(matches[0].questionNumbers) !== JSON.stringify(source.questionNumbers))
+        && !pending.has(source.segmentId)
     }).map(group => group.segmentId)
     if (!transcript.length) unresolved.push('<missing listening transcript>')
     if (unresolved.length) issues.push({ code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE', groups: unresolved })
@@ -65,9 +85,11 @@ export function assertImportSubmissionReady(paperDir, materialization = null, { 
   }
   const reviewFile = path.join(paperDir, 'listening-review-v1.json')
   const listeningReview = !analyzedPackage && existsSync(reviewFile) ? JSON.parse(readFileSync(reviewFile, 'utf8')) : null
-  const issues = importSubmissionIssues({ materialization, listeningReview, analyzedPackage })
+  const issues = importSubmissionIssues({ materialization, listeningReview, analyzedPackage, paperDir })
   if (issues.length) throw Object.assign(new Error(`送审门禁拒绝：\n${issues.map(issue =>
     `${issue.code}: ${issue.groups?.join(', ') || `${issue.field}: ${issue.matches.join(', ')}`}`).join('\n')}`),
   { code: issues[0].code, issues })
-  return { status: 'PASS' }
+  const pendingOwnerListening = !analyzedPackage
+    ? pendingOwnerListeningGroups({ materialization, listeningReview, paperDir }) : []
+  return { status: 'PASS', ...(pendingOwnerListening.length ? { pendingOwnerListening } : {}) }
 }

@@ -327,7 +327,7 @@ test('failed primary gets exactly one fallback; reruns append attempts without c
   assert.equal(hash(readFileSync(first.review)), hash(bytes))
   assert.deepEqual(oldFiles.map(f => hash(readFileSync(path.join(first.attempt, 'listening-review-evidence', f)))), before)
 })
-test('both failures remain retained and submit fails closed', t => {
+test('both failures remain retained and submit defers the group to Owner listening', t => {
   const { dir, options } = workspace(t, { error: 'Apple unavailable' })
   let calls = 0
   const result = segmentListening({ ...options, runWhisper: () => { calls++; throw new Error('Whisper unavailable') } })
@@ -336,7 +336,10 @@ test('both failures remain retained and submit fails closed', t => {
   assert.equal(review.groups[0].decision, 'review_required')
   assert.equal(review.evidence.length, 3)
   writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
-  assert.throws(() => assertImportSubmissionReady(dir), { code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE' })
+  // playback.mp3 exists, so the non-usable group is submitted pending Owner
+  // listening rather than blocking the whole paper.
+  assert.deepEqual(assertImportSubmissionReady(dir).pendingOwnerListening,
+    [{ segmentId: 'listening-text-1', questionNumbers: [1], reason: review.groups[0].reason }])
 })
 test('submit guard reads current source on every call, including after prior success', t => {
   const { dir } = workspace(t, fixture)
