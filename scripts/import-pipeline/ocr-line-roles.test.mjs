@@ -125,6 +125,10 @@ test('exact task scoring standards share ownership between source extraction and
   for (const [heading, task] of [
     ['应用文评分标准', 'application'], ['读后续写评分标准：', 'continuation'],
     ['续写评分标准', 'continuation'], ['续写评分细则', 'continuation'],
+    // 菏泽一模 answer book attaches the application rubric with a bare 附 prefix
+    // and heads the continuation rubric with the compound 评分原则和评分标准.
+    ['附应用文评分标准', 'application'], ['附续写评分标准', 'continuation'],
+    ['读后续写评分原则和评分标准：', 'continuation'], ['应用文评分原则和评分标准', 'application'],
   ]) {
     const facts = computeLineFacts({ text: heading })
     assert.equal(firstLineRole('scoring-section', facts)?.value, task)
@@ -134,7 +138,9 @@ test('exact task scoring standards share ownership between source extraction and
       taskType: task, labelItemId: 'item-0', sourceLabel: heading,
     })
   }
-  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。']) {
+  for (const heading of ['应用文评分标准说明如下。', '续写评分标准分析', '66. 应用文需要审题。',
+    '附：应用文评分标准', '附应用文评分标准分析', '附范文评分标准',
+    '读后续写评分原则', '读后续写原则和评分标准', '读后续写评分原则和评分标准分析']) {
     assert.equal(firstLineRole('scoring-section', computeLineFacts({ text: heading })), null)
     assert.equal(scoringScopes([heading, '评分正文']).get('item-1'), null)
   }
