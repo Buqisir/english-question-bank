@@ -198,13 +198,16 @@ function continuationContractChecks() {
       p.continuationSources = [location(1)]
       p.continuationSources[0].locator.region = { x: .53, y: .07, width: .33, height: .02 }
       assert.deepEqual(validate(continued), [], `${schemaVersion}: ${kind} right column`)
+      const leftward = structuredClone(continued)
+      select(leftward).continuationSources[0].locator.region = { x: .03, y: .84, width: .03, height: .015 }
+      assert.deepEqual(validate(leftward), [], `${schemaVersion}: ${kind} disjoint leftward fragment`)
       const invalid = (label, change) => {
         const changed = structuredClone(continued)
         change(select(changed))
         assert(validate(changed).some(issue => issue.code === locationError), `${schemaVersion}: ${kind} ${label}`)
       }
       invalid('overlap', p => { p.continuationSources[0].locator.region = { x: .3, y: .8, width: .4, height: .02 } })
-      invalid('leftward column', p => { p.continuationSources[0].locator.region.x = .01 })
+      invalid('leftward overlap', p => { p.continuationSources[0].locator.region.x = .01 })
       invalid('above only', p => { p.continuationSources[0].locator.region.x = .08 })
       invalid('overlap beyond precision', p => { p.continuationSources[0].locator.region.x = .48 - .000002 })
       invalid('skipped page', p => { p.continuationSources[0].locator.page = 3 })
@@ -228,7 +231,7 @@ function continuationContractChecks() {
     body(input.sourceReferences).continuationSources.push(location(3), location(4))
     assert.deepEqual(validate(input.sourceReferences), [], 'all ordered fragments are validated')
   }
-  console.log('PASS v1/v2/v3/v4 essay/scoring continuation provenance, rightward columns, legacy rendering and fail-closed mutations')
+  console.log('PASS v1/v2/v3/v4 essay/scoring continuation provenance, disjoint same-page columns, legacy rendering and fail-closed mutations')
 }
 
 function answerLabelChecks() {

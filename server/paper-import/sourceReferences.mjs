@@ -337,11 +337,11 @@ export function validateSourceReferences({
                 }
                 const before = previous.locator, after = continuation.locator
                 const pageRegions = before.kind === 'page_region' && after.kind === 'page_region'
-                const rightColumn = pageRegions && after.page === before.page
-                  && after.region.x > before.region.x
-                  && after.region.x >= before.region.x + before.region.width - SOURCE_REFERENCE_REGION_TOLERANCE
-                if (!pageRegions || (after.page !== before.page + 1 && !rightColumn)) {
-                  issue('SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID', continuationPath, 'Paragraph fragments must use consecutive pages or disjoint rightward regions on the same page')
+                const disjointColumn = pageRegions && after.page === before.page
+                  && (after.region.x >= before.region.x + before.region.width - SOURCE_REFERENCE_REGION_TOLERANCE
+                    || after.region.x + after.region.width <= before.region.x + SOURCE_REFERENCE_REGION_TOLERANCE)
+                if (!pageRegions || (after.page !== before.page + 1 && !disjointColumn)) {
+                  issue('SOURCE_REFERENCES_CONTINUATION_LOCATION_INVALID', continuationPath, 'Paragraph fragments must use consecutive pages or horizontally disjoint regions on the same page')
                 }
                 previous = continuation
               }

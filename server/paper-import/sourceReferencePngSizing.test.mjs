@@ -5,7 +5,8 @@ import { test } from 'node:test'
 import { writeFileSync } from 'node:fs'
 import { crc32, deflateSync } from 'node:zlib'
 import { fitSourceReferencePng } from './sourceReferencePngSizing.mjs'
-import { SOURCE_REFERENCE_IMAGE_LIMITS as limits, decodeSourceReferencePng } from './sourceReferenceImages.mjs'
+import { SOURCE_REFERENCE_IMAGE_LIMITS as limits, decodeSourceReferencePng,
+  sourceReferenceFigureDensity, SOURCE_REFERENCE_IMAGE_DPI } from './sourceReferenceImages.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { scoringFiguresFixture, captureScoringReferences } from '../../test-fixtures/paper-import/source-reference-scoring-v4/fixture.mjs'
 import { sourceReferenceFiguresFixture } from '../../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
@@ -133,6 +134,24 @@ for (const expired of [false, true]) {
     }
   })
 }
+
+test('in-bounds crops keep 288 dpi; oversized crops pick a deterministic lower density', () => {
+  const dpi = SOURCE_REFERENCE_IMAGE_DPI
+  const under = { pixelWidth: 1000, pixelHeight: 1000, byteLength: 1_000_000 }
+  assert.equal(sourceReferenceFigureDensity(under), dpi, 'in-bounds crop keeps full density')
+  const pixelsOnly = { pixelWidth: 2500, pixelHeight: 2500, byteLength: null }
+  assert(sourceReferenceFigureDensity(pixelsOnly) < dpi, 'oversized pixels lower the density')
+  assert.equal(sourceReferenceFigureDensity(pixelsOnly), sourceReferenceFigureDensity(pixelsOnly),
+    'same crop yields the same density for replay')
+  const scaled = sourceReferenceFigureDensity(pixelsOnly)
+  const ratio = scaled / dpi
+  assert(Math.round(2500 * ratio) ** 2 <= limits.pixels, 'scaled crop fits the pixel budget')
+  const bytesOnly = { pixelWidth: 100, pixelHeight: 100, byteLength: null, fittedByteLength: 3_000_000 }
+  assert(sourceReferenceFigureDensity(bytesOnly) < dpi, 'oversized bytes lower the density')
+  const atCap = { pixelWidth: Math.sqrt(limits.pixels) - 1, pixelHeight: Math.sqrt(limits.pixels) - 1,
+    byteLength: limits.pngBytes - 1 }
+  assert.equal(sourceReferenceFigureDensity(atCap), dpi, 'boundary crop keeps full density')
+})
 
 test('a PNG still above 2 MiB after lossless compression fails without resizing', () => {
   assert.throws(() => fitSourceReferencePng(syntheticCrop(900, 900, true), limits),

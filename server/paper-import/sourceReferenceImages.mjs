@@ -114,22 +114,58 @@ export function decodeSourceReferencePng(raster) {
 // helper rounds x/y/width/height to nearest pixel, +repage, PNG32. Compare sRGB
 // 8-bit RGBA pixels, so compression/metadata differences cannot change meaning.
 // The exact admitted PNG byte SHA remains the publication commitment.
+// Deterministic lower density for a crop that itself exceeds a bound. Pixel
+// and dimension bounds scale with density; an oversized lossless PNG scales
+// roughly with density squared on the same region. The 0.97 margin keeps two
+// crops of the same page from landing between adjacent legal densities, which
+// would make pixel replay non-deterministic.
+export function sourceReferenceFigureDensity({ pixelWidth, pixelHeight, byteLength,
+  fittedByteLength = null, limits = SOURCE_REFERENCE_IMAGE_LIMITS }) {
+  const scales = []
+  if (pixelWidth * pixelHeight > limits.pixels) {
+    scales.push(Math.sqrt(limits.pixels / (pixelWidth * pixelHeight)))
+  }
+  if (Math.max(pixelWidth, pixelHeight) > limits.dimension) {
+    scales.push(limits.dimension / Math.max(pixelWidth, pixelHeight))
+  }
+  const bytes = fittedByteLength ?? byteLength
+  if (bytes != null && bytes > limits.pngBytes) scales.push(Math.sqrt(limits.pngBytes / bytes))
+  return scales.length ? Math.floor(SOURCE_REFERENCE_IMAGE_DPI * Math.min(...scales) * 0.97)
+    : SOURCE_REFERENCE_IMAGE_DPI
+}
+
 export function captureSourceReferenceFigure({ pdfBytes, page, region, resourceLimits, onProcessing }) {
   // Diagnostic overrides can only tighten the consumer's fixed ceilings.
   const budgets = Object.fromEntries(Object.entries(SOURCE_REFERENCE_RASTER_LIMITS)
     .map(([key, ceiling]) => [key, Math.min(resourceLimits?.[key] ?? ceiling, ceiling)]))
-  let crop
-  try {
-    crop = rasterPdfRegion({ pdfBytes, page, region, density: SOURCE_REFERENCE_IMAGE_DPI, resourceLimits: budgets })
-  } catch (error) {
-    if (error.code?.startsWith('PDF_REGION_RASTER_')) {
-      throw Object.assign(new Error(error.message, { cause: error }),
-        { code: error.code.replace('PDF_REGION_', 'SOURCE_REFERENCES_FIGURE_') })
+  const limits = SOURCE_REFERENCE_IMAGE_LIMITS
+  const cropAt = density => {
+    let crop
+    try {
+      crop = rasterPdfRegion({ pdfBytes, page, region, density, resourceLimits: budgets })
+      inspectPng(Buffer.from(crop.bytes))
+      return { crop, fitted: fitSourceReferencePng(crop, limits) }
+    } catch (error) {
+      if (error.code?.startsWith('PDF_REGION_RASTER_')) {
+        throw Object.assign(new Error(error.message, { cause: error }),
+          { code: error.code.replace('PDF_REGION_', 'SOURCE_REFERENCES_FIGURE_') })
+      }
+      if (error.code !== 'SOURCE_REFERENCES_FIGURE_PNG_INVALID') throw error
+      return { crop, error }
     }
-    throw error
   }
-  inspectPng(Buffer.from(crop.bytes))
-  const fitted = fitSourceReferencePng(crop, SOURCE_REFERENCE_IMAGE_LIMITS)
+  let { crop, fitted, error } = cropAt(SOURCE_REFERENCE_IMAGE_DPI)
+  // Retry with a deterministically lower density only when the crop itself
+  // exceeds a bound. Unaffected crops keep the exact historical path/bytes.
+  for (let retry = 0; error && retry < 3; retry++) {
+    const density = sourceReferenceFigureDensity({
+      pixelWidth: crop?.pixelWidth, pixelHeight: crop?.pixelHeight,
+      byteLength: crop?.bytes?.length, fittedByteLength: error.fittedByteLength,
+    })
+    if (density < 96 || density >= SOURCE_REFERENCE_IMAGE_DPI) break
+    ;({ crop, fitted, error } = cropAt(density))
+  }
+  if (error) throw error
   const bytes = Buffer.from(fitted.bytes), processing = fitted.processing
   const raster = { profile: SOURCE_REFERENCE_IMAGE_PROFILE, mediaType: 'image/png',
     sha256: sha256(bytes), byteLength: bytes.length, pixelWidth: fitted.pixelWidth,
