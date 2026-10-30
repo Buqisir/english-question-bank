@@ -60,7 +60,9 @@ For an existing PR, preserve its other body text and update this block with the
 new local head/current base **before** pushing that head, so the natural event
 captures the matching advice. A subsequent body edit does not update an
 already-running job's event snapshot. Missing, stale, duplicate or invalid
-advice runs Full; do not rerun CI just to reduce an already-selected pack.
+advice runs Full; advice whose pack does not cover the classifier's scripts is
+rejected (`agent-advice-below-classifier`). Do not rerun CI just to reduce an
+already-selected pack.
 
 The trusted-base planner accepts the Agent's pack only when the existing
 classifier permits reduction. Paper/security, authentication/isolation,

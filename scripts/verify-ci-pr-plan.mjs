@@ -80,8 +80,10 @@ for (const [files, pack] of [
   assert.equal(plan.pack, pack, files.join(','))
   assert(plan.scripts.length > 0, 'summary lists the nonempty executed pack')
   const chosen = applyAgentChoice(plan, parseRiskAdvice(block(suggestion), identity))
-  assert.equal(chosen.pack, pack === 'all' ? 'all' : 'ui', 'hard boundary wins; ordinary Agent choice wins')
-  if (pack === 'all') assert.deepEqual(chosen.scripts, plan.scripts)
+  // ui advice only ever contains its own scripts, so it is accepted only when
+  // the classifier already selected ui; every other pack stays untouched.
+  assert.equal(chosen.pack, pack, 'hard boundary wins; advice below the classifier is rejected')
+  assert.deepEqual(chosen.scripts, plan.scripts)
 }
 for (const dangerous of [
   { ...change('README.md'), status: 'D', newMode: '000000' },
@@ -97,6 +99,25 @@ assert.equal(classifyActionsChanges([change('app/src/concierge/conciergeSearch.t
 assert.equal(classifyActionsChanges([change('app/src/concierge/conciergeSearch.ts')], files => files
   ? { risk: 'ordinary-local-feature', pack: 'ui', scripts: [] }
   : { scripts: ['scripts/verify-ci-pr-plan.mjs'] }).pack, 'all')
+// Set-containment is the only ordering: advice is accepted only when its
+// pack's script set contains every script the classifier already selected.
+const realPlan = pack => JSON.parse(execFileSync(process.execPath,
+  ['scripts/verify-ci.mjs', '--plan-json', '--pack', pack], { encoding: 'utf8' }))
+const readRealPack = (_files, pack) => realPlan(pack)
+const rejectedAdvice = applyAgentChoice(realPlan('feature'), { status: 'valid', pack: 'ui' }, readRealPack)
+assert.equal(rejectedAdvice.pack, 'feature')
+assert.equal(rejectedAdvice.reason, 'agent-advice-below-classifier')
+assert.deepEqual(rejectedAdvice.scripts, realPlan('feature').scripts)
+const fakeSecurityPlan = { pack: 'security', scripts: ['scripts/verify-auth-gate.mjs', 'scripts/verify-fake-only.mjs'] }
+const crossDomainAdvice = applyAgentChoice(fakeSecurityPlan, { status: 'valid', pack: 'feature' }, readRealPack)
+assert.equal(crossDomainAdvice.pack, 'security')
+assert.equal(crossDomainAdvice.reason, 'agent-advice-below-classifier')
+const upwardAdvice = applyAgentChoice(realPlan('feature'), { status: 'valid', pack: 'all' }, readRealPack)
+assert.equal(upwardAdvice.pack, 'all')
+assert.equal(upwardAdvice.reason, 'agent-selected')
+const supersetAdvice = applyAgentChoice(realPlan('ui'), { status: 'valid', pack: 'feature' }, readRealPack)
+assert.equal(supersetAdvice.pack, 'feature')
+assert.equal(supersetAdvice.reason, 'agent-selected')
 const selectionFailure = applyAgentChoice({ pack: 'feature' }, { status: 'valid', pack: 'ui' }, (_files, pack) => {
   if (pack === 'ui') throw new Error('cannot load selected registry pack')
   return { scripts: ['scripts/verify-ci-pr-plan.mjs'] }
@@ -323,7 +344,7 @@ try {
   assert(plan.scripts.includes('scripts/verify-restart1-local-search-intent.mjs'))
   const eventPath = path.join(runnerTemp, 'event.json')
   for (const [body, status, expectedPack] of [
-    [block({ head, base, pack: 'ui', reason: 'Request less coverage' }), 'valid', 'ui'],
+    [block({ head, base, pack: 'ui', reason: 'Request less coverage' }), 'valid', 'feature'],
     [block({ head, base, pack: 'feature', reason: 'Feature consumers changed' }), 'valid', 'feature'],
     [block({ head, base, pack: 'all', reason: 'Broader uncertainty' }), 'valid', 'all'],
     [undefined, 'missing', 'all'], [block(suggestion), 'stale', 'all'], ['<!-- eqb-risk-plan\n!\n-->', 'invalid', 'all'],
