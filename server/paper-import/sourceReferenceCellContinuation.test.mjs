@@ -111,7 +111,7 @@ test(`sealed ${producerVersion}/v6 replay uses its original producer and never r
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
   } })
   assert.equal(sha256(bytes), before)
-  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: prepared.sidecar }), /current producer/u)
+  assertSourceReferenceAdmission({ ...input, sidecar: prepared.sidecar })
 })
 }
 
@@ -426,7 +426,7 @@ test('synthetic public CLI build → prepare → authored record → finalize �
   assert.deepEqual(readFileSync(output), exact, 'pending drift preserves prior finalized bytes')
 })
 
-test('historical producers v17–24 retain exact sealed replay and reject first admission', () => {
+test('historical producers v17–24 retain exact sealed replay and admit under their own rules', () => {
   const input = fixture()
   for (let version = 17; version <= 24; version++) {
     const producerVersion = `ocr-source-references-producer-v${version}`
@@ -439,7 +439,7 @@ test('historical producers v17–24 retain exact sealed replay and reject first 
       sourceReferencesDigest: sha256(bytes), paperId: input.materialization.paperId,
       sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest }
     assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt })
-    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), undefined, producerVersion)
+    assertSourceReferenceAdmission({ ...input, sidecar })
     assert.throws(() => assertSealedSourceReferenceReplay({ ...input,
       sourceReferencesBytes: Buffer.concat([bytes, Buffer.from(' ')]), receipt }))
   }
@@ -468,7 +468,7 @@ test('current producer and sealed v24/v25/v26 preserve v23 scoring headings and 
       paperId: sidecar.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
     } })
     assert.equal(sha256(bytes), before)
-    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: historical }), /current producer/u)
+    assertSourceReferenceAdmission({ ...input, sidecar: historical })
   }
   assertSourceReferenceAdmission({ ...input, sidecar })
 })

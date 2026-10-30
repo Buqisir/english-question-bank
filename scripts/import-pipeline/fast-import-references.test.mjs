@@ -89,7 +89,8 @@ function fixture(t, referencesVersion = version) {
   json(path.join(ctx.paperDir, 'signals/agent-proofreading-receipt.json'), { revisionId: 'rev-sealed-ocr' })
   json(path.join(ctx.work, 'proofread-input.json'), { sealed: 'unchanged input' })
   for (const file of ['source-references-v1.json', PAPER_PAGINATION_PLAN_FILE_NAME, 'products/answerOnly.pdf']) {
-    json(path.join(ctx.paperDir, file), { old: file, ...(file === 'source-references-v1.json' ? { groups: [] } : {}) })
+    json(path.join(ctx.paperDir, file), { old: file, ...(file === 'source-references-v1.json'
+      ? { groups: [], ...(typeof referencesVersion === 'string' ? { producerVersion: referencesVersion } : {}) } : {}) })
   }
   json(path.join(ctx.fast, 'pagination/economy8/report.json'), { old: true })
   // Real uploader timing shape: OCR push writes this same untyped timeline as Candidate push.
@@ -107,8 +108,8 @@ function fixture(t, referencesVersion = version) {
   const referenceStages = Object.fromEntries(downstream.map(name => [name, async () => {
     calls.push(name)
     if (name === 'source-references') {
-      json(path.join(ctx.work, 'source-references-draft.json'), { regenerated: version, groups: [] })
-      json(path.join(ctx.paperDir, 'source-references-v1.json'), { regenerated: version, groups: [] })
+      json(path.join(ctx.work, 'source-references-draft.json'), { producerVersion: version, groups: [] })
+      json(path.join(ctx.paperDir, 'source-references-v1.json'), { producerVersion: version, groups: [] })
       return { producerVersion: version, outline: [] }
     }
     if (name === 'pagination-plan') json(path.join(ctx.paperDir, PAPER_PAGINATION_PLAN_FILE_NAME), { regenerated: true })
@@ -209,7 +210,7 @@ test('dead loopback binding never invokes a network client or local Review wrapp
   assert.equal(child.status, 0, child.stderr || child.stdout)
 })
 
-for (const old of ['ocr-source-references-producer-v1', 'ocr-source-references-producer-v16', 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24', 'ocr-source-references-producer-v25', 'ocr-source-references-producer-v26', undefined]) {
+for (const old of ['ocr-source-references-producer-v1', 'ocr-source-references-producer-v16', 'ocr-source-references-producer-v999', undefined]) {
   test(`stale/missing version (${old}) rebuilds downstream once and preserves sealed OCR bytes`, async t => {
     const { ctx, calls, options } = fixture(t, old)
     // Explicit undefined removes the field instead of using fixture's default.
@@ -241,6 +242,36 @@ for (const old of ['ocr-source-references-producer-v1', 'ocr-source-references-p
     assert.deepEqual(readFileSync(ctx.statePath), completedState)
   })
 }
+
+// A completed workspace produced under any supported historical version is a
+// cache hit as generated; upgrading the producer never invalidates it.
+for (const old of ['ocr-source-references-producer-v17', 'ocr-source-references-producer-v18',
+  'ocr-source-references-producer-v21', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24',
+  'ocr-source-references-producer-v25', 'ocr-source-references-producer-v26']) {
+  test(`supported historical version (${old}) stays a cache hit and is submission-ready`, async t => {
+    const { dir, ctx, calls, options } = fixture(t, old)
+    json(path.join(ctx.paperDir, 'source-references-v1.json'), { producerVersion: old, groups: [] })
+    const before = snapshot(dir)
+    await finish(ctx, [], options)
+    assert.deepEqual(calls, [])
+    assert.deepEqual(snapshot(dir), before)
+    assertReferenceProductsReady(ctx)
+  })
+}
+
+// Any declared-version mismatch across state, draft and finalized sidecar is
+// stale and rebuilds, even when both versions are individually supported.
+for (const [stateVersion, fileVersion] of [
+  ['ocr-source-references-producer-v26', 'ocr-source-references-producer-v25'],
+  ['ocr-source-references-producer-v25', 'ocr-source-references-producer-v26'],
+]) test(`state/file version mismatch (${stateVersion} vs ${fileVersion}) rebuilds`, async t => {
+  const { ctx, calls, options } = fixture(t, stateVersion)
+  json(path.join(ctx.paperDir, 'source-references-v1.json'), { producerVersion: fileVersion, groups: [] })
+  await finish(ctx, [], options)
+  assert.deepEqual(calls, downstream)
+  assert.equal(ctx.state.steps['source-references'].result.producerVersion, version)
+  assertReferenceProductsReady(ctx)
+})
 
 test('redo from chinese-numbering retains materialization and immutable OCR, invalidates reports and digests', async t => {
   const { ctx } = fixture(t)

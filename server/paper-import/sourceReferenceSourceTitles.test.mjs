@@ -273,8 +273,7 @@ test('fixed sealed v25/v26 bytes replay without first-admission authority or mut
     assert.equal(sha256(bytes), receipt.sourceReferencesDigest)
     assert.deepEqual(capture(input, `ocr-source-references-producer-v${number}`), JSON.parse(bytes))
     assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt })
-    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: JSON.parse(bytes) }),
-      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+    assertSourceReferenceAdmission({ ...input, sidecar: JSON.parse(bytes) })
     assert.throws(() => assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: Buffer.concat([bytes, Buffer.from(' ')]), receipt }),
       { code: 'SOURCE_REFERENCES_SEALED_DIGEST_INVALID' })
     assert.throws(() => assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes,
