@@ -407,15 +407,13 @@ function changedPlan(files) {
     'test-fixtures/paper-canonical/publications/',
     'test-fixtures/paper-import/',
   ]
-  // A registered verification script changes no production seam directly, so
-  // it resolves to the domain of the pack tier that already covers it; a
-  // script covered only by Full keeps the existing fallback behavior.
+  // A registered verification script or test changes no production seam
+  // directly, so it resolves to the domain of the pack tier that already covers
+  // it; a script covered only by Full keeps the existing fallback behavior.
   const verificationDomain = (file) => {
     // The runner is the CI toolchain itself: it keeps the Full escalation.
     if (file === 'scripts/verify-ci.mjs') return 'unknown'
-    if (!/^scripts\/verify-[^/]*\.mjs$/u.test(file) || !registry.scripts.includes(file)) {
-      return null
-    }
+    if (!registry.scripts.includes(file)) return null
     if (packs['paper-data'].includes(file)) return 'paper-data'
     if (packs.security.includes(file)) return 'security'
     if (packs['import-paper'].includes(file)) return 'import-paper'
@@ -427,9 +425,10 @@ function changedPlan(files) {
   // Unregistered test/verification helpers do not escalate a PR on their own:
   // they change no production seam, so they contribute no domain (like .md).
   const testHelperPattern = /(?:^|\/)[^/]*(?:\.test|Fixture)\.mjs$/u
-  const isTestHelper = (file) => testHelperPattern.test(file)
-    || /^scripts\/verify-[^/]*\.mjs$/u.test(file)
-    || file.startsWith('test-fixtures/')
+  const isTestHelper = (file) => !registry.scripts.includes(file)
+    && (testHelperPattern.test(file)
+      || /^scripts\/verify-[^/]*\.mjs$/u.test(file)
+      || (file.startsWith('test-fixtures/') && !touchesAny([file], paperDataPatterns)))
   const paperPatterns = [
     'shared/paper-canonical/',
     'shared/paper-normalization/',
@@ -487,6 +486,10 @@ function changedPlan(files) {
 
   const domains = new Set(files.flatMap((file) => {
     if (file.endsWith('.md')) return []
+    if (touchesAny([file], securityPatterns)) return ['security']
+    const verification = verificationDomain(file)
+    if (verification) return [verification]
+    if (isTestHelper(file)) return []
     if (file === 'server/api.mjs') return ['unknown']
     if (file.startsWith('import-ops/')) return ['feature']
     if (/^scripts\/import-pipeline\/papers\/[^/]+\//u.test(file)) {
@@ -516,10 +519,7 @@ function changedPlan(files) {
       'app/src/',
       'server/',
       'shared/',
-    ].some((prefix) => file.startsWith(prefix)) && !isTestHelper(file)) return ['feature']
-    const verification = verificationDomain(file)
-    if (verification) return [verification]
-    if (isTestHelper(file)) return []
+    ].some((prefix) => file.startsWith(prefix))) return ['feature']
     return ['unknown']
   }))
   if (domains.size === 0) {
