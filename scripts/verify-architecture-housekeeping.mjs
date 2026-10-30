@@ -198,6 +198,18 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['.github/workflows/example.yml', 'unknown-fallback', 'all'],
   ['import-ops/server.mjs', 'ordinary-local-feature', 'feature'],
   ['scripts/import-pipeline/ship-checklist.mjs', 'ordinary-local-feature', 'feature'],
+  // A registered verifier resolves to the domain of the pack tier that covers
+  // it instead of escalating to unknown.
+  ['scripts/verify-paper-canonical-reading-publication.mjs', 'shared-renderer-contract', 'paper'],
+  ['scripts/verify-scoped-publication.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/verify-h5h-semantic-search.mjs', 'ordinary-local-feature', 'feature'],
+  ['scripts/verify-ci.mjs', 'unknown-fallback', 'all'],
+  ['scripts/verify-ci-pr-plan.mjs', 'unknown-fallback', 'all'],
+  // Unregistered test/verification helpers contribute no domain.
+  ['scripts/verify-source-reference-answer-booklet.mjs', 'ordinary-local-feature', 'feature'],
+  ['scripts/import-pipeline/ocr-line-roles.test.mjs', 'ordinary-local-feature', 'feature'],
+  ['server/services/sourceReferencePngSizing.test.mjs', 'ordinary-local-feature', 'feature'],
+  ['test-fixtures/review-compatibility/sample.json', 'ordinary-local-feature', 'feature'],
 ]) {
   const plan = routeFor(changedFile)
   if (!plan) continue
@@ -217,6 +229,20 @@ if (mixedHighRiskPlan) {
     'mixed security and Paper changes fall back to all',
     mixedHighRiskPlan.risk === 'mixed-high-risk-fallback' && mixedHighRiskPlan.pack === 'all',
     JSON.stringify(mixedHighRiskPlan),
+  )
+}
+
+const mixedHelperAndFeaturePlan = routeFor(
+  'server/services/questionBankSteward.mjs',
+  'server/services/sourceReferencePngSizing.test.mjs',
+  'test-fixtures/review-compatibility/sample.json',
+  'scripts/verify-source-reference-answer-booklet.mjs',
+)
+if (mixedHelperAndFeaturePlan) {
+  assert(
+    'test helpers do not escalate a feature change',
+    mixedHelperAndFeaturePlan.risk === 'ordinary-local-feature' && mixedHelperAndFeaturePlan.pack === 'feature',
+    JSON.stringify(mixedHelperAndFeaturePlan),
   )
 }
 

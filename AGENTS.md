@@ -104,16 +104,20 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 - All classified changes use the task-branch PR route. A
   `shared-renderer-contract` still requires the shared-renderer final gate
   above, including affected real Screen/Print/PDF verification.
-- `auth-persistence-migration`, `mixed-high-risk-fallback`,
-  `unknown-fallback`, and `git-diff-fallback` require the stronger PR review
-  and final gates. So do changes to
-  `.github/workflows/`, `scripts/verify-ci.mjs`, `.agents/setup`,
-  `.agents/ship.md`, these `AGENTS.md` Ship/verification rules, paths in
-  `EQB_PERSISTENCE_AUTHORITY_PATHS` or `EQB_HOST_CONFIGURATION_PATHS`,
-  destructive migrations, authentication/authorization, user-data deletion or
-  bulk mutation, breaking public schema/API changes, changes that cannot be
-  safely reverted as one commit, and any change the agent judges clearly high
-  risk. High-risk PRs require the relevant review, `verify:all`, and E2E; never
+- Classifier fallback labels (`unknown-fallback`,
+  `mixed-high-risk-fallback`, `git-diff-fallback`) only require the Full CI
+  pack. The stronger PR review and final gates apply only when the change
+  actually alters data-persistence writes or schema/migrations, the
+  question-number-to-answer mapping, review/publication admission rules,
+  student-version answer isolation, authentication or permissions,
+  breaking public schema/API changes, user-data deletion or bulk mutation,
+  deployment/host configuration or the CI toolchain itself
+  (`.github/workflows/`, `scripts/verify-ci.mjs`,
+  `scripts/ci-pr-plan.mjs`, `.agents/setup`, `.agents/ship.md`, these
+  `AGENTS.md` Ship/verification rules, `EQB_PERSISTENCE_AUTHORITY_PATHS`,
+  `EQB_HOST_CONFIGURATION_PATHS`), a change that cannot be safely reverted
+  as one commit, or any change the agent judges clearly high risk.
+  High-risk PRs require the relevant review, `verify:all`, and E2E; never
   push them directly to `main`.
 - After the Owner says Ship, run `git fetch origin`, rebase the task branch onto
   `origin/main`, require `git status --porcelain` to be empty, and complete

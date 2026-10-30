@@ -64,11 +64,20 @@ function readExistingPlan(files, pack = 'all') {
 export function applyAgentChoice(plan, advice, readPlan = readExistingPlan) {
   const metadata = { classifierPack: plan.pack, agentAdvice: advice }
   if (plan.pack === 'all') return { ...plan, ...metadata }
-  const pack = advice.status === 'valid' ? advice.pack : 'all'
   try {
-    const selected = readPlan(null, pack)
-    return { ...plan, ...metadata, pack, scripts: selected.scripts,
-      reason: advice.status === 'valid' ? 'agent-selected' : `agent-advice-${advice.status}` }
+    if (advice.status !== 'valid') {
+      const selected = readPlan(null, 'all')
+      return { ...plan, ...metadata, pack: 'all', scripts: selected.scripts,
+        reason: `agent-advice-${advice.status}` }
+    }
+    const selected = readPlan(null, advice.pack)
+    // Advice may only broaden coverage: accept it only when its pack's script
+    // set contains every script the classifier already selected.
+    if (!Array.isArray(plan.scripts)
+      || !plan.scripts.every((script) => selected.scripts.includes(script))) {
+      return { ...plan, ...metadata, reason: 'agent-advice-below-classifier' }
+    }
+    return { ...plan, ...metadata, pack: advice.pack, scripts: selected.scripts, reason: 'agent-selected' }
   } catch {
     return { ...plan, ...metadata, pack: 'all', scripts: readPlan(null, 'all').scripts, reason: 'agent-selection-failed' }
   }
