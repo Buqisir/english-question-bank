@@ -275,7 +275,7 @@ test('v17–v20 repeated-section lifecycle retains exact pre-fix replay bytes', 
   }
 })
 
-test('sealed v17–v23 references retain exact bytes and are rejected on first admission', () => {
+test('sealed v17–v23 references retain exact bytes; supported explicit versions admit under their own rules', () => {
   const input = scoringFiguresFixture()
   for (const version of [17, 18, 19, 20, 21, 22, 23]) {
     const sidecar = captureScoringReferences(input, { producerVersion: `ocr-source-references-producer-v${version}` })
@@ -285,7 +285,8 @@ test('sealed v17–v23 references retain exact bytes and are rejected on first a
       paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
       sourceReferencesDigest: sha256(sourceReferencesBytes),
     } })
-    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
+    if (sidecar.producerVersion) assertSourceReferenceAdmission({ ...input, sidecar })
+    else assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
   }
 })
@@ -491,12 +492,12 @@ for (const label of ['【范文四】', '[Possible Version 2]', '【范文十二
   })
 }
 
-test('first admission rejects missing, legacy and unknown producer versions before sealing', () => {
+test('first admission rejects missing and unknown producer versions before sealing', () => {
   const input = scoringFiguresFixture()
   const sidecar = captureScoringReferences(input)
   assertSourceReferenceAdmission({ ...input, sidecar })
-  for (const version of [undefined, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION, 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24', 'ocr-source-references-producer-v999', null]) {
+  for (const version of [undefined, 'ocr-source-references-producer-v16',
+    'ocr-source-references-producer-v999', null]) {
     const changed = structuredClone(sidecar)
     if (version === undefined) delete changed.producerVersion
     else changed.producerVersion = version
@@ -579,9 +580,15 @@ test('source-reference semantic discriminator is explicit and rejects unknown ve
     assert.equal(sourceReferenceProducerVersion({ schemaVersion, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
       OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   }
-  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24', 'ocr-source-references-producer-v999']) {
+  for (const producerVersion of [null, '', 'v18', 'ocr-source-references-producer-v16', 'ocr-source-references-producer-v999']) {
     assert.throws(() => sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }),
       { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  }
+  for (const producerVersion of ['ocr-source-references-producer-v17', 'ocr-source-references-producer-v19',
+    'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21', 'ocr-source-references-producer-v22',
+    'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24', 'ocr-source-references-producer-v25',
+    'ocr-source-references-producer-v26']) {
+    assert.equal(sourceReferenceProducerVersion({ schemaVersion: 'source-references-v4', producerVersion }), producerVersion)
   }
 })
 
@@ -697,7 +704,7 @@ test('a late empty application heading immediately before listening retains the 
   assert.equal(output.groups[1].essays.entries[0].paragraphs[0].text, 'A complete continuation.')
 })
 
-test('sealed v19 references replay with v19 predicates while new first admission rejects that envelope', () => {
+test('sealed v19 references replay and admit with v19 predicates', () => {
   const input = scoringFiguresFixture()
   const producerVersion = 'ocr-source-references-producer-v19'
   const sidecar = captureScoringReferences(input, { producerVersion })
@@ -707,8 +714,7 @@ test('sealed v19 references replay with v19 predicates while new first admission
     paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
     sourceReferencesDigest: sha256(sourceReferencesBytes),
   } })
-  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
-    { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  assertSourceReferenceAdmission({ ...input, sidecar })
 })
 
 test('given-title article survives independent admission and cannot be forged as absent or retitled', () => {
@@ -1020,7 +1026,7 @@ for (const heading of ['高三英语试题听力录音稿', '2026届高中毕业
   })
 }
 
-test('v18 sealed replay keeps its semantics, while first admission and altered bytes fail closed', () => {
+test('v18 sealed replay keeps its semantics, first admission accepts it and altered bytes fail closed', () => {
   const input = scoringFiguresFixture()
   const sidecar = captureScoringReferences(input, { producerVersion: PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION })
   assert.equal(sidecar.producerVersion, PREVIOUS_OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
@@ -1029,7 +1035,7 @@ test('v18 sealed replay keeps its semantics, while first admission and altered b
     paperId: input.materialization.paperId, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
     sourceReferencesDigest: sha256(sourceReferencesBytes) })
   assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes, receipt })
-  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar, receipt }), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  assertSourceReferenceAdmission({ ...input, sidecar, receipt })
   for (const bytes of [Buffer.concat([sourceReferencesBytes, Buffer.from('\n')]),
     Buffer.from(JSON.stringify({ ...sidecar, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION }))]) {
     assert.throws(() => assertSealedSourceReferenceReplay({ ...input, sourceReferencesBytes: bytes, receipt }),

@@ -67,7 +67,7 @@ test(`${producerVersion} whole-document absence retains exact sealed replay afte
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
   } })
   assert.equal(sha256(bytes), before)
-  assert.throws(() => assertSourceReferenceAdmission(input), /current producer/u)
+  assertSourceReferenceAdmission(input)
 })
 }
 

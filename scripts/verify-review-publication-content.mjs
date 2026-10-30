@@ -9,8 +9,9 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
-import { buildNck1ReviewProjection, loadNck1ReviewSource, printConsumption, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewProjection, importNck1ReviewCandidate, loadNck1ReviewSource, printConsumption, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
+import { nck1MaterializationHistoricalAuthorityRef58 } from '../shared/paper-canonical/authority.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { createReviewCompatibilityStore } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
@@ -194,10 +195,7 @@ try {
   assert.equal(references.producerVersion, OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
   const futureProducerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION.replace(/v(\d+)$/u,
     (_, version) => `v${Number(version) + 1}`)
-  for (const producerVersion of [undefined, 'ocr-source-references-producer-v17', 'ocr-source-references-producer-v18',
-    'ocr-source-references-producer-v19', 'ocr-source-references-producer-v20', 'ocr-source-references-producer-v21',
-    'ocr-source-references-producer-v22', 'ocr-source-references-producer-v23', 'ocr-source-references-producer-v24',
-    futureProducerVersion, null]) {
+  const admissionAttempt = producerVersion => {
     const changed = structuredClone(references)
     if (producerVersion === undefined) delete changed.producerVersion
     else changed.producerVersion = producerVersion
@@ -213,10 +211,64 @@ try {
       writeFileSync(destination, file.path === SOURCE_REFERENCES_FILE ? bytes : readFileSync(path.join(source, file.path)))
       firstAdmission.completeFileUpload(draft.id, file.path, file)
     }
+    return draft
+  }
+  for (const producerVersion of [undefined, 'ocr-source-references-producer-v16',
+    'ocr-source-references-producer-v999', futureProducerVersion, null]) {
+    const draft = admissionAttempt(producerVersion)
     assert.throws(() => firstAdmission.finalizeRevision(draft.id), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
     assert.equal(firstAdmission.getRevision(draft.id).finalizedAt, null)
   }
-  pass('first finalize rejects missing, v17 through v24, future and null producer versions before any seal, even with recomputed bundle digests')
+  pass('first finalize rejects missing, unsupported, future and null producer versions before any seal, even with recomputed bundle digests')
+  // A supported historical producer is admitted under its own rules: the
+  // pre-OCR v58 fixture derives its original Candidate authority from the
+  // admitted sidecar binding, and first finalize keeps every committed byte.
+  {
+    const historicalParent = path.join(root, 'historical-fixture')
+    const { reviewRoot: historical } = makeReviewRoot(historicalParent, 'paper-review-publication-historical', undefined, { historicalSource: true, listening: false })
+    rmSync(path.join(historical, 'materialization/nck1-ocr-source-evidence-v1.json'), { force: true })
+    rmSync(path.join(historical, 'materialization/nck1-ocr-source-confirmation-v1.json'), { force: true })
+    const loaded = loadNck1ReviewSource(historical)
+    const imported = importCanonicalCandidate(loaded.sourceInput, undefined, {
+      materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
+    })
+    assert.deepEqual(imported.issues, [])
+    const previous = imported.candidate
+    const historicalReferences = syntheticReviewReferences({
+      materialization: loaded.materialization,
+      sourceInput: loaded.sourceInput,
+      sourceDigest: previous.source.sha256,
+      candidateDigest: previous.candidateDigest,
+    })
+    historicalReferences.producerVersion = 'ocr-source-references-producer-v18'
+    json(path.join(historical, SOURCE_REFERENCES_FILE), historicalReferences)
+    const historicalFiles = reviewBundleFilePaths(historical).map(file => ({
+      ...file, sha256: sha256(readFileSync(path.join(historical, file.path))), byteLength: readFileSync(path.join(historical, file.path)).byteLength,
+    }))
+    const historicalManifest = { schemaVersion: 'web-import-review-bundle-v1', paperId: loaded.materialization.paperId,
+      paperName: '2026 Contract Mock', sourceDigest: previous.source.sha256,
+      candidateDigest: previous.candidateDigest, producerBuildId: 'historical-v18-fixture', files: historicalFiles }
+    const historicalProjection = buildNck1ReviewProjection(historical)
+    historicalManifest.visibleStructureDigest = historicalProjection.visibleStructureDigest
+    historicalManifest.analysisDigest = historicalProjection.analysisDigest
+    historicalManifest.bundleDigest = reviewBundleDigest(historicalManifest)
+    const historicalStore = createImportReviewStore({
+      dbPath: path.join(root, 'first-admission-historical.sqlite'),
+      filesRoot: path.join(root, 'first-admission-historical-files'),
+      rendererBuildId: 'first-admission-historical',
+    })
+    await historicalStore.ready()
+    const draft = historicalStore.createRevision(historicalManifest).revision
+    for (const file of historicalFiles) {
+      const { destination } = historicalStore.fileForUpload(draft.id, file.path)
+      mkdirSync(path.dirname(destination), { recursive: true })
+      writeFileSync(destination, readFileSync(path.join(historical, file.path)))
+      historicalStore.completeFileUpload(draft.id, file.path, file)
+    }
+    historicalStore.finalizeRevision(draft.id)
+    assert(historicalStore.getRevision(draft.id).finalizedAt)
+    pass('first finalize admits a supported historical producer and re-derives its original Candidate authority')
+  }
   const reviewDb = path.join(root, 'review.sqlite')
   const store = createImportReviewStore({ dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
     rendererBuildId: 'publication-fixture-renderer' })

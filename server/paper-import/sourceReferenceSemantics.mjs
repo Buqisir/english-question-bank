@@ -36,13 +36,11 @@ export function assertSourceReferenceProducerVersion(version) {
   return version
 }
 
-// First admission is never a historical replay. Missing/self-declared legacy
-// versions cannot authorize the old ownership rules before a seal exists.
+// First admission accepts the exact bytes as generated: a supported historical
+// producer version keeps its own rules, while missing, null, unknown or future
+// versions still fail closed. Sealed replay remains the separate receipt path.
 export function sourceReferenceProducerVersion(sidecar) {
   if (!sidecar) return OCR_SOURCE_REFERENCES_PRODUCER_VERSION
-  if (!Object.hasOwn(sidecar, 'producerVersion') || sidecar.producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION) {
-    throw Object.assign(new Error('First source-reference admission requires the current producer version'),
-      { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
-  }
-  return sidecar.producerVersion
+  return assertSourceReferenceProducerVersion(
+    Object.hasOwn(sidecar, 'producerVersion') ? sidecar.producerVersion : undefined)
 }

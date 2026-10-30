@@ -99,13 +99,21 @@ function navigation(root) {
         evidencePaths: ['listening-review-evidence/raw.json'] }] }] }, transcript)
   return { review, subject, transcript }
 }
-test('first admission rejects v1, stripped/unknown schemas, forged legacy option and hidden second rule', t => {
+test('first admission accepts v1/v2 and rejects stripped/unknown schemas and hidden second rule', t => {
   const root = workspace(t), { review, subject, transcript } = navigation(root)
   assert.equal(validateListeningReview(root, review, subject, transcript).review, review)
-  for (const version of [undefined, 'listening-review-v1', 'listening-review-v99']) {
-    assert.throws(() => validateListeningReview(root, { ...review, schemaVersion: version }, subject, transcript,
-      { allowLegacy: true, revisionId: 'forged', bundleDigest: sha256('fake') }))
+  // A real v1 review carries no rule summary and is validated by v1 rules.
+  const v1 = structuredClone(review)
+  v1.schemaVersion = 'listening-review-v1'
+  v1.evidence = v1.evidence.filter(file => file.path !== 'listening-review-evidence/fixture-rule.json')
+  assert.equal(validateListeningReview(root, v1, subject, transcript).review, v1)
+  // Stripped, missing or future versions still fail closed.
+  for (const version of [undefined, null, 'listening-review-v3', 'listening-review-v99']) {
+    assert.throws(() => validateListeningReview(root, { ...review, schemaVersion: version }, subject, transcript))
   }
+  // Extra options never authorize a stripped/forged schema.
+  assert.throws(() => validateListeningReview(root, { ...review, schemaVersion: undefined,
+    allowLegacy: true, revisionId: 'forged', bundleDigest: sha256('fake') }, subject, transcript))
   const rule = review.evidence.at(-1), summary = JSON.parse(readFileSync(path.join(root, rule.path)))
   for (const change of [
     v => { delete v.schemaVersion },
@@ -150,7 +158,8 @@ test('sealed v1 is readable only with the original manifest identity and exact s
   manifest.bundleDigest = reviewSubjectBundleDigest(manifest)
   const revision = { id: 'rev-original', state: 'awaiting_review', ...subject,
     bundleDigest: manifest.bundleDigest, manifest }
-  assert.throws(() => readListeningReview(root, subject, transcript))
+  // First admission now accepts the same v1 review under its own rules.
+  assert.deepEqual(readListeningReview(root, subject, transcript).review, review)
   assert.deepEqual(readSealedListeningReview(root, subject, transcript, revision).review, review)
   assert.deepEqual(readFileSync(sidecar), bytes)
   for (const mutate of [

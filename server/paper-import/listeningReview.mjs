@@ -49,7 +49,13 @@ function evidencePath(rootDir, relative) {
 // Owner approval, verbatim certification, or whole-recording safety proof.
 // Every live group must be accounted for, including unresolved groups.
 export function validateListeningReview(rootDir, review, subject, transcript) {
-  return validateReview(rootDir, review, subject, transcript, LISTENING_REVIEW_VERSION)
+  // First admission accepts a review produced under any supported historical
+  // schema; each version is checked by its own rules. Missing or unknown
+  // versions still fail closed.
+  if (!['listening-review-v1', LISTENING_REVIEW_VERSION].includes(review?.schemaVersion)) {
+    fail('invalid subject, attestation or scope')
+  }
+  return validateReview(rootDir, review, subject, transcript, review.schemaVersion)
 }
 
 function validateReview(rootDir, review, subject, transcript, version) {
@@ -163,8 +169,10 @@ export function readListeningReview(rootDir, subject, transcript) {
 }
 
 // Only persisted revision/approval consumers call this entry, after their
-// stored-file checks. No draft option or HTTP field enables legacy admission.
-// Recheck the exact sealed descriptors here too, including ASR evidence.
+// stored-file checks. First admission already accepts the supported historical
+// v1/v2 review under its own rules; the sealed path does the same for
+// committed bytes. Recheck the exact sealed descriptors here too, including
+// ASR evidence.
 export function readSealedListeningReview(rootDir, subject, transcript, revision, manifest = revision?.manifest) {
   const full = path.join(rootDir, LISTENING_REVIEW_FILE)
   const sealed = manifest?.files?.find(file => file.path === LISTENING_REVIEW_FILE)

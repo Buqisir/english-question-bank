@@ -37,6 +37,7 @@ import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
 import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
+import { sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
 import { retainOwnerListening } from './lib-finish-owner-listening.mjs'
 
@@ -956,12 +957,19 @@ function referencesCurrent(ctx) {
       if (!imported.candidate || imported.issues.length) return false
       const input = { materialization: loaded.materialization, sourceInput: loaded.sourceInput,
         sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest }
-      const refreshed = refreshSourceReferenceCellContinuations(input, draft ?? finalized)
+      const refreshed = refreshSourceReferenceCellContinuations(
+      { ...input, producerVersion: finalized.producerVersion }, draft ?? finalized)
       if (refreshed.pending || digestJson(refreshed.sidecar) !== digestJson(finalized)) return false
       assertSourceReferenceAdmission({ ...input, sidecar: finalized })
     }
-    return Boolean(references?.finishedAt
-      && references.result?.producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION)
+    // Any supported historical producer version is a cache hit as generated;
+    // only missing/unsupported versions or a changed binding force a rebuild.
+    // The draft/finalized pair keeps its declared version; the step marker
+    // must agree with it.
+    if (hasDraft && finalized.producerVersion !== draft.producerVersion) return false
+    const declared = finalized.producerVersion ?? draft?.producerVersion
+    if (!declared || references?.result?.producerVersion !== declared) return false
+    return Boolean(references?.finishedAt && sourceReferenceProducerVersion(finalized))
   } catch { return false }
 }
 
@@ -1230,7 +1238,7 @@ function assertReferencesMutable(ctx) {
 
 export function assertReferenceProductsReady(ctx) {
   if (!referencesCurrent(ctx)) throw Object.assign(new Error(
-    'SOURCE_REFERENCES_FINISH_REQUIRED: 源参考 producerVersion 旧或缺失；先运行 finish 并重新目检 PDF，再送审。'),
+    'SOURCE_REFERENCES_FINISH_REQUIRED: 源参考版本缺失、不受支持或绑定不一致；先运行 finish 并重新目检 PDF，再送审。'),
   { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
   // A completion marker alone cannot prove that QA followed this reference generation.
   let previous = -Infinity

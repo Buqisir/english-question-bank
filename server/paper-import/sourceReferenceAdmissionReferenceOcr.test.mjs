@@ -164,7 +164,7 @@ test('real retained v1 OCR captures current text without changing Canonical iden
   }) }
   assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar, sourceInput: changedBytes }), /including renditions/u)
   const historical = { ...sidecar, producerVersion: 'ocr-source-references-producer-v25' }
-  assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: historical }), /PRODUCER|producer/u)
+  assertSourceReferenceAdmission({ ...binding, sidecar: historical })
   // Historical producer replay must retain the same original/rendition mapping.
   const previous = { ...sidecar, producerVersion: 'ocr-source-references-producer-v26' }
   const previousBytes = Buffer.from(JSON.stringify(previous))
@@ -173,7 +173,7 @@ test('real retained v1 OCR captures current text without changing Canonical iden
     sourceReferencesDigest: sha256(previousBytes), paperId: materialization.paperId,
     sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest,
   } })
-  assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: previous }), /current producer/u)
+  assertSourceReferenceAdmission({ ...binding, sidecar: previous })
   // This receipt is for the new current capture.
   const bytes = Buffer.from(JSON.stringify(sidecar))
   const receipt = { revisionId: 'current-v27-test-revision', bundleDigest: digestJson({ current: true }),

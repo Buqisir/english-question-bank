@@ -936,9 +936,13 @@ function verifyHistoricalAuthorityReplay() {
       bundleDigest: manifest.bundleDigest, manifest })
     const revision = JSON.parse(readFileSync(revisionPath, 'utf8'))
     const replayed = buildNck1SealedReviewProjection(reviewRoot, revision)
-    assert.throws(() => buildNck1ReviewProjection(reviewRoot, {
+    // First admission of the same supported historical producer now succeeds
+    // under its own rules and re-derives the original Candidate authority from
+    // the admitted references.
+    const first = buildNck1ReviewProjection(reviewRoot, {
       expectedCandidateDigest: previous.candidate.candidateDigest,
-    }), /First source-reference admission requires the current producer version/)
+    })
+    assert.equal(first.candidateDigest, previous.candidate.candidateDigest)
     const referencePath = path.join(reviewRoot, SOURCE_REFERENCES_FILE)
     const referenceBytes = readFileSync(referencePath)
     writeFileSync(referencePath, Buffer.concat([referenceBytes, Buffer.from(' ')]))

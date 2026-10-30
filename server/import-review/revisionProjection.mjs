@@ -590,6 +590,16 @@ export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDige
       fail('Listening review has no exact Candidate binding', 'LISTENING_REVIEW_INVALID')
     }
   }
+  // Papers without a listening review bind through their admitted source
+  // references instead: the historical Candidate identity must be re-derived,
+  // never trusted from the label.
+  if (!expectedCandidateDigest) {
+    const referencesPath = resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE)
+    if (existsSync(referencesPath)) {
+      const bound = parseSourceReferencesBytes(readFileSync(referencesPath)).candidateDigest
+      if (/^sha256:[a-f0-9]{64}$/.test(bound || '')) expectedCandidateDigest = bound
+    }
+  }
   let imported = importCanonicalCandidate(loaded.sourceInput)
   // A navigation-only revision must not migrate an existing paper to the new
   // default authority. Re-derive the requested identity; never trust its label.

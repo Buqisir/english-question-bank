@@ -55,8 +55,9 @@ const validateV25 = ajv.compile(v25SourceReferencesSchema)
 const validateCurrent = ajv.compile(currentSourceReferencesSchema)
 const validateV23 = ajv.compile(v23SourceReferencesSchema)
 // Integrity-only recognition of explicit v17 metadata on already sealed bytes.
-// This never selects semantics: first admission separately requires v22, and
-// legacy replay separately proves the persisted whole-sidecar commitment.
+// This never selects semantics: first admission selects its declared producer
+// version separately, and legacy replay separately proves the persisted
+// whole-sidecar commitment.
 const validateDeclaredLegacy = ajv.compile({ ...v23SourceReferencesSchema,
   $id: 'source-references-sealed-v17',
   properties: { ...v23SourceReferencesSchema.properties,
