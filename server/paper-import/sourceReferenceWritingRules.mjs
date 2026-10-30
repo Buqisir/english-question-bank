@@ -72,9 +72,13 @@ export const WRITING_SECTION = [
 // these fully anchored headings their scope; NFKC is a matching view only.
 export const NUMBERED_APPLICATION_SECTION = /^(?:\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)|[1-9]\d?\.)\s*应用文(?:写作)?\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
 export const NUMBERED_CONTINUATION_SECTION = /^(?:\(\s*(?:[一二三四五六七八九十]+|[1-9]\d?)\s*\)|[1-9]\d?\.)\s*读后续写\s*(?:\(\s*满分\s*\d+\s*分\s*\))?\s*[:：]?$/u
+// An answer book may attach the rubric to its task with a bare 附 prefix
+// (菏泽一模「附应用文评分标准」) or use the compound phrase 评分原则和评分标准
+// (菏泽一模「读后续写评分原则和评分标准：」). Neither widens the complete
+// task-word boundary; they only stop the heading falling through to commentary.
 export const WRITING_SCORING_SECTION = [
-  ['application', /^(?:(?:[（(]\s*[一二三四五六七八九十]+\s*[）)]|[一二三四五六七八九十]+、)\s*)?(?:应用文(?:写作)?评分(?:细则|(?:参考)?标准)|应用文各档次的给分范围和要求)\s*[:：]?$/u],
-  ['continuation', /^(?:(?:[（(]\s*[一二三四五六七八九十]+\s*[）)]|[一二三四五六七八九十]+、)\s*)?(?:(?:读后)?续写评分(?:细则|(?:参考)?标准)|读后续写各档次的给分范围和要求)\s*[:：]?$/u],
+  ['application', /^附?\s*(?:(?:[（(]\s*[一二三四五六七八九十]+\s*[）)]|[一二三四五六七八九十]+、)\s*)?(?:应用文(?:写作)?评分(?:细则|(?:参考)?标准|原则和评分标准)|应用文各档次的给分范围和要求)\s*[:：]?$/u],
+  ['continuation', /^附?\s*(?:(?:[（(]\s*[一二三四五六七八九十]+\s*[）)]|[一二三四五六七八九十]+、)\s*)?(?:(?:读后)?续写评分(?:细则|(?:参考)?标准|原则和评分标准)|读后续写各档次的给分范围和要求)\s*[:：]?$/u],
 ]
 // A transcript may precede a separate rubric appendix. Only its complete
 // source heading allows leaving listening; task and entry labels are still required.
