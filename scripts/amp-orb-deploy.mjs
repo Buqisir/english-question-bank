@@ -140,6 +140,11 @@ async function deploy() {
     argv: process.argv.slice(2),
     resolveCandidate: candidate,
     revalidateCandidate: assertCandidateStillAuthoritative,
+    readProductionSha: () => withDeploymentCredentials((credentials) =>
+      parseDeploymentControllerPreflight(invokeController(['preflight'], credentials)).productionSha),
+    readChangedPaths: (previousSha, targetSha, paths) => runGit([
+      'diff', '--name-only', '--no-renames', previousSha, targetSha, '--', ...paths,
+    ]).trim().split('\n').filter(Boolean),
     invokeController: (sha, classification, digest) => withDeploymentCredentials((credentials) => invokeController(
       ['deploy', sha, ...(classification ? [classification, digest] : [])],
       credentials,

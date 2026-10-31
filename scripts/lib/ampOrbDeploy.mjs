@@ -2131,6 +2131,8 @@ export async function deployLatestRelease({
   argv,
   resolveCandidate,
   revalidateCandidate,
+  readProductionSha,
+  readChangedPaths,
   invokeController,
 } = {}) {
   requireDeployLatestAuthorization(argv)
@@ -2142,18 +2144,43 @@ export async function deployLatestRelease({
     throw new Error('Deployment execution dependencies are missing')
   }
   const classificationFlags = argv.filter(value => [
-    '--reviewed-code-only-digest', '--reviewed-migration-digest',
+    '--code-only', '--migration', '--reviewed-code-only-digest', '--reviewed-migration-digest',
   ].includes(value))
   if (classificationFlags.length > 1) throw new Error('Choose one reviewed deployment classification')
   const classificationFlag = classificationFlags[0]
-  const digest = classificationFlag ? argv[argv.indexOf(classificationFlag) + 1] : undefined
-  if (classificationFlag && !/^[a-f0-9]{64}$/u.test(digest || '')) {
+  const manualDigest = classificationFlag?.endsWith('-digest')
+  let digest = manualDigest ? argv[argv.indexOf(classificationFlag) + 1] : undefined
+  if (manualDigest && !/^[a-f0-9]{64}$/u.test(digest || '')) {
     throw new Error('Reviewed deployment classification requires an exact protected-path digest')
   }
-  const classification = classificationFlag
-    ? (classificationFlag === '--reviewed-code-only-digest' ? 'code-only' : 'migrate') : undefined
+  let classification = classificationFlag
+    ? (['--code-only', '--reviewed-code-only-digest'].includes(classificationFlag) ? 'code-only' : 'migrate') : undefined
   const candidate = await resolveCandidate()
   await revalidateCandidate(candidate)
+  if (!manualDigest && (classificationFlag || readProductionSha || readChangedPaths)) {
+    if (typeof readProductionSha !== 'function' || typeof readChangedPaths !== 'function') {
+      throw new Error('Automatic deployment digest dependencies are missing')
+    }
+    const productionSha = assertSha(await readProductionSha(), 'production SHA')
+    const changedPaths = await readChangedPaths(productionSha, candidate.sha, EQB_PERSISTENCE_AUTHORITY_PATHS)
+    if (!Array.isArray(changedPaths) || changedPaths.some(filePath =>
+      typeof filePath !== 'string' || !EQB_PERSISTENCE_AUTHORITY_PATHS.some(protectedPath =>
+        filePath === protectedPath || filePath.startsWith(`${protectedPath}/`)))) {
+      throw new Error('Deployment protected changed-path evidence is invalid')
+    }
+    if (changedPaths.length > 0) {
+      digest = deploymentChangedPathDigest(changedPaths)
+      if (!classification) {
+        throw new Error(`请判断是否含迁移，然后加 --code-only 或 --migration。变化的保护路径：\n${changedPaths.join('\n')}`)
+      }
+    } else {
+      if (classification === 'migrate') {
+        throw new Error('迁移保护路径差异为空：先对账，用保留的原摘要通过 --reviewed-migration-digest 进入恢复')
+      }
+      classification = undefined
+    }
+    await revalidateCandidate(candidate)
+  }
   const parseReceipt = classification === 'migrate'
     ? parseReviewedPersistenceControllerOutput : parseDeploymentControllerOutput
   const receipt = parseReceipt(
