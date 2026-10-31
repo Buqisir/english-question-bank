@@ -798,7 +798,7 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
   // by widening the regex surface.
   const declaredInSection = new Map()
   for (const [itemId, declaration] of roleDeclarations.byItemId) {
-    if (declaration.taskType === taskType && declaration.role !== 'not-writing') declaredInSection.set(itemId, declaration)
+    if (declaration.taskType === taskType || declaration.role === 'not-writing') declaredInSection.set(itemId, declaration)
   }
   const foreignDeclarations = [...roleDeclarations.byItemId.values()].filter(declaration =>
     declaration.taskType && declaration.taskType !== taskType
@@ -988,8 +988,8 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
     // their entry; only a declared label can retitle them, and only outside a
     // table do the closed grammars create a new entry boundary.
     const tableCell = tableItemIds.has(line.itemId)
-    if (declaredEntry && (declaredEntry.role === 'commentary')) {
-      pause(`declared commentary "${line.text.slice(0, 12)}" is neither a source sample nor scoring`)
+    if (declaredEntry && ['commentary', 'not-writing'].includes(declaredEntry.role)) {
+      pause(`declared ${declaredEntry.role} "${line.text.slice(0, 12)}" is neither a source sample nor scoring`)
       explanationPause = explicitTitles
       continue
     }
@@ -1075,7 +1075,8 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       // label is label scaffolding, not an unclassified content range.
       if (step.action === 'pause' && /^\([一二三四五六七八九十]+\)作答示例[:：]?$/u.test(facts.nfkc)
         && steps[index + 1]?.action === 'entry' && steps[index + 1].state.kind === 'essays') continue
-      if (step.action === 'pause' && (continuationThoughtHeading(step.line.text)
+      if (step.action === 'pause' && (['commentary', 'not-writing'].includes(declaredInSection.get(step.line.itemId)?.role)
+        || continuationThoughtHeading(step.line.text)
         || /^【(?:审题重点|谋篇布局)】[:：]?$/u.test(facts.trimmed)
         || /^(?:\d+\s*[.、]|\([一二三四五六七八九十]+\))\s*(?:故事概述|续写方向|考查目标与写作情境)[:：]?$/u.test(facts.nfkc)
         || matchesLineRole('writing.continuation-prompt', facts))) explanation = true

@@ -61,10 +61,10 @@ export function validateWritingRoleDeclarations(input, { materialization, confir
     if (role !== 'not-writing' && !WRITING_TASK_TYPES.includes(taskType)) {
       throw roleDeclarationError(`${where}.taskType must be application or continuation for role ${role}`)
     }
-    if (role === 'not-writing' && taskType !== undefined && !WRITING_TASK_TYPES.includes(taskType)) {
+    if (role === 'not-writing' && taskType != null && !WRITING_TASK_TYPES.includes(taskType)) {
       throw roleDeclarationError(`${where}.taskType must be application or continuation`)
     }
-    if (taskType !== undefined && !taskTypes.has(taskType)) {
+    if (taskType != null && !taskTypes.has(taskType)) {
       throw roleDeclarationError(`${where}.taskType ${taskType} does not name a materialized writing task`)
     }
     if (typeof reason !== 'string' || !/\S/u.test(reason)) {

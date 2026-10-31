@@ -678,6 +678,7 @@ export function resolveConfirmedNck1OcrEvidence({
   documents,
   evidence,
   confirmation,
+  retainItemIds = false,
 }) {
   const structuralIssues = validateNck1OcrSourceEvidence({
     paperId,
@@ -806,6 +807,7 @@ export function resolveConfirmedNck1OcrEvidence({
         item.observationIds.forEach((id) => claimedObservations.add(id))
         pageBody.push({
           kind: 'paragraph',
+          ...(retainItemIds ? { itemId: item.itemId } : {}),
           text: item.text,
           containsDrawing: false,
           ...(ranges ? { sourceEmphasis: structuredClone(ranges) } : {}),

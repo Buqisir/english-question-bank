@@ -4,6 +4,7 @@ import { resolveOcrQuestionTextEmphasis } from '../../server/paper-canonical/ocr
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 import { makeSyntheticNck1OcrFixture } from '../../test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs'
 import { produceNck1OcrMaterialization } from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
+import { nck1OcrEvidenceDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { deriveNck1MaterializationBundle, withNck1MaterializationSourceCache } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef } from '../../shared/paper-canonical/authority.mjs'
@@ -150,6 +151,47 @@ test('unmatched emphasis under a historical authority drops with a reviewable wa
   assert.deepEqual(current.issues, [])
   assert(current.warnings?.some(warning => warning.code === 'MATERIALIZATION_SOURCE_EMPHASIS_DROPPED'),
     JSON.stringify(current.warnings))
+})
+test('unconsumed standalone option emphasis stays blocking under a historical authority', async () => {
+  const f = await makeSyntheticNck1OcrFixture()
+  const confirmation = structuredClone(f.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
+  const page = confirmation.documents[0].pages.find(page =>
+    page.orderedItems.some(item => item.text.startsWith('30. Which choice fits item 30?')))
+  const index = page.orderedItems.findIndex(item => item.text.startsWith('30. Which choice fits item 30?'))
+  const question = page.orderedItems[index]
+  const split = question.text.indexOf('A.')
+  assert(split > 0)
+  const option = { itemId: `${question.itemId}:options`, text: question.text.slice(split),
+    observationIds: ['standalone-option-observation'] }
+  const start = option.text.indexOf('B.') + 3
+  option.sourceEmphasis = [{ start, end: start + 3, marks: ['underline'] }]
+  question.text = question.text.slice(0, split).trimEnd()
+  page.orderedItems.splice(index + 1, 0, option)
+  const evidence = structuredClone(f.evidence)
+  const evidencePage = evidence.documents[0].pages.find(item => item.page === page.page)
+  const original = evidencePage.observations.find(item => item.observationId === question.observationIds[0])
+  const observation = { ...original, observationId: option.observationIds[0],
+    regionId: 'standalone-option-region', text: option.text,
+    region: { ...original.region, y: original.region.y + .001 } }
+  evidencePage.observations.push(observation)
+  evidencePage.regions.push({ regionId: observation.regionId, kind: 'text', region: observation.region })
+  evidence.evidenceDigest = nck1OcrEvidenceDigest(evidence)
+  confirmation.evidenceDigest = evidence.evidenceDigest
+  const produced = produceNck1OcrMaterialization({ paperId: f.paperId, documents: f.sourceDocuments, evidence, confirmation })
+  assert.equal(produced.disposition, 'ready_for_verification', JSON.stringify(produced.issues))
+  const encode = value => Buffer.from(JSON.stringify(value))
+  const input = { kind: 'nck1-source-materialization',
+    materializationBytes: encode(produced.materialization),
+    documents: f.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })),
+    media: produced.mediaFiles || [],
+    ocrSourceBytes: { evidenceBytes: encode(evidence), confirmationBytes: encode(confirmation) } }
+  const historical = deriveNck1MaterializationBundle(input, nck1ListeningSourceDecisionAuthorityRef)
+  assert(historical.issues.some(issue => issue.code === 'MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED'),
+    JSON.stringify(historical.issues))
+  assert.equal((historical.warnings || []).length, 0)
+  const current = deriveNck1MaterializationBundle(input, nck1InImageOptionLabelsV2AuthorityRef)
+  assert.deepEqual(current.issues, [])
 })
 test('public v11 option emphasis preserves non-default media through capture, Review and publication readback', async () => {
   const f = await makeOptionEmphasisMediaFixture()

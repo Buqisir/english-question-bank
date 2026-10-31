@@ -2727,12 +2727,22 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       }
     }
     if (consumed.size !== marked.size) {
-      // OCR emphasis no surface consumes (e.g. bolded seven-choices subheads or
-      // answer-document marks) loses the style only; the text stays literal and
-      // each dropped mark is reported for review instead of blocking.
+      // Historical readers cannot silently discard marks on question/option
+      // text merely because their authority predates that rich-text consumer.
       if (!warnings) throw new Error('OCR source emphasis has an unmatched or unsupported target')
+      const questionMarks = new Set()
+      if (authorityRef.manifestDigest !== nck1InImageOptionLabelsV2AuthorityRef.manifestDigest) {
+        for (const group of raw.groups) for (const question of group.questions) {
+          questionMarks.add(digestJson(question.source))
+          if (!['reading', 'listening'].includes(group.family) || !question.options.length
+            || question.options.some(option => option.figure)) continue
+          const mapped = resolveOcrQuestionTextEmphasis(question, resolved.structures.get(question.source.documentId))
+          for (const paragraph of mapped.paragraphs) questionMarks.add(digestJson(paragraph.sourceIndex))
+        }
+      }
       for (const [key, paragraph] of marked) {
         if (consumed.has(key)) continue
+        if (questionMarks.has(key)) throw new Error('OCR source emphasis has an unmatched or unsupported question or option target')
         warnings.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_DROPPED',
           'OCR source emphasis has an unmatched or unsupported target',
           `ocrSourceEmphasis[${key.slice(0, 12)}…] ${JSON.stringify(paragraph.sourceIndex)}`))
@@ -2987,8 +2997,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
         input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
         ['4', '5'].includes(resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version),
         [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure, pendingMeasurements,
-        // Every accepted authority may soften dropped emphasis to warnings;
-        // emphasis outside any consumer's surface loses its style only.
+        // Historical authorities only soften marks outside question/option text.
         derivationWarnings)
     }
   }

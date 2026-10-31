@@ -178,6 +178,7 @@ export function produceNck1OcrMaterialization({
       documents,
       evidence,
       confirmation,
+      retainItemIds: Boolean(writingRoleDeclarations?.length),
     })
     issues.push(...resolved.issues)
     questionStructure = resolved.structures.get(question?.documentId) || emptyStructure()

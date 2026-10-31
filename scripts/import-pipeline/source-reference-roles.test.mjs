@@ -6,6 +6,7 @@ import { sourceReferenceWritingLifecycle } from '../../server/paper-import/sourc
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { prepareSourceReferences, validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
+import { parseOfficialWritingSamples } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
 
 function roleFixture(texts, { taskTypes = ['application', 'continuation'], declarations = [], regions = [], lastQuestion, bytes } = {}) {
   const observations = texts.map((text, i) => ({
@@ -128,7 +129,46 @@ test('identical input without declarations keeps the legacy output', () => {
   const empty = buildSourceReferences(without.materialization, without.evidence, without.confirmation,
     { writingRoleDeclarations: [] })
   assert.deepEqual(empty.groups, legacy.groups)
+  assert.equal(digestJson(empty), digestJson(legacy))
   assert.equal(empty.writingRoleDeclarations, undefined)
+})
+
+test('not-writing declarations pause essay capture until the next source label', () => {
+  for (const taskType of ['continuation', undefined]) {
+    const fixture = roleFixture([
+      '第二节 读后续写', '参考范文', 'Mia opened the garden gate.',
+      'Read the following story and continue it.', 'This is the reprinted question.',
+      '参考范文', 'Mia finally found her friend.',
+    ], { taskTypes: ['continuation'], declarations: [{ at: 3, role: 'not-writing', taskType }] })
+    const result = build(fixture)
+    assert.deepEqual(result.groups[0].essays.entries.flatMap(entry => entry.paragraphs.map(p => p.text)),
+      ['Mia opened the garden gate.', 'Mia finally found her friend.'])
+  }
+})
+
+test('producer locates identical declared sample headings by item identity and page', () => {
+  const texts = ['【参考范文】', 'Dear Sam, our class planted herbs.', '【评分细则】',
+    '【参考范文】', 'Mia opened the garden gate.', '【评分细则】']
+  const body = texts.map((text, index) => ({
+    kind: 'paragraph', itemId: `i${index}`, text,
+    sourceIndex: { kind: 'page_region', documentId: 'answers', page: index < 3 ? 1 : 2 },
+  }))
+  const declarations = [0, 2, 3, 5].map(index => ({
+    itemId: `i${index}`, page: body[index].sourceIndex.page, quote: texts[index],
+    role: [0, 3].includes(index) ? 'sample-heading' : 'scoring-heading',
+    taskType: index < 3 ? 'application' : 'continuation',
+  }))
+  const issues = []
+  assert.deepEqual(parseOfficialWritingSamples(body, 'answers', issues, declarations), {
+    application: texts[1], continuation: texts[4],
+  })
+  assert.deepEqual(issues, [])
+  for (const mismatch of [{ itemId: 'missing' }, { page: 9 }, { quote: 'wrong quote' }]) {
+    const invalidIssues = []
+    parseOfficialWritingSamples(body, 'answers', invalidIssues,
+      declarations.map((entry, index) => index === 0 ? { ...entry, ...mismatch } : entry))
+    assert(invalidIssues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+  }
 })
 
 test('admission accepts a sealed declaration artifact and rejects a forged one', () => {
