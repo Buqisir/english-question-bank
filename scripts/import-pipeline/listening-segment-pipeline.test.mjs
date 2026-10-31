@@ -349,7 +349,9 @@ test('submit guard reads current source on every call, including after prior suc
   const source = JSON.parse(readFileSync(sourceFile, 'utf8'))
   source.groups = [{ stem: '要点：(1) 经历' }]
   writeFileSync(sourceFile, JSON.stringify(source))
-  assert.throws(() => assertImportSubmissionReady(dir), { code: 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING' })
+  const warn = t.mock.method(console, 'warn', () => {})
+  assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
+  assert.match(warn.mock.calls[0].arguments[0], /IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING/u)
 })
 test('fallback crop end respects ffprobe duration when canonical PCM duration rounds upward', t => {
   const { options } = workspace(t, { ...fixture, endSeconds: 29.9999, error: 'Apple failed' })

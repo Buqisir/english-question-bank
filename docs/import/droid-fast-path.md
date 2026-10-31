@@ -34,11 +34,16 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 | 4 | 第二轮：4 个 worker 并行 | 摘要 3 片、metadata 1 份；听力由版本化机器规则判定 | 新流程待批量实测 |
 | 5 | `fast-import.mjs finish <id>` | 装摘要/metadata/听力审查 → OCR 更正报告 → 后台三版分页（三个进程）同时建写作源参考 → 合并分页计划 → 四款并行冻结 → 缩略总览与 pdftotext | 约 4 分（分页 168 s） |
 | 6 | 主 Agent 目检 PDF | 四款缩略总览逐页、写作源参考分段 | 约 2 分 |
-| 7 | `fast-import.mjs submit <id> [--resolves <ids>]` | 强制全部听力组 usable、中文语境无半角编号 → push Candidate → 登录 Review 截 Screen | 约 1 分 |
+| 7 | `fast-import.mjs submit <id> [--resolves <ids>]` | 听力音频与题段归属核对；匹配的非 usable 组标记待听核，中文半角编号只提示 → push Candidate → 登录 Review 截 Screen | 约 1 分 |
 | 8 | 主 Agent 抽查 Screen 截图后 `fast-import.mjs report <id> --screen "…" --pdf "…"` | 写 evidence v4 与 `校正报告与预处理完成表.md` | 数秒 |
 
 脚本遇到需要判断的情况以退出码 2 停下并说明（Materialization issues、答案不一致等），
 处理后加 `--issues-resolved` 重跑同一命令；已完成步骤自动跳过。
+
+识别问题（标题归属、分区、范文/评分归属、听力起止）默认由 Agent 对照原页，
+用现有声明通道处理：`source-reference-roles.json`（#646）、`listening-source` plan/apply、
+OCR 文本修订（#647）；缺失软项可留空（#648）。不为单卷修改识别代码；
+只有卷面/PDF 显示错误或题文、题号、选项、官方答案对应、音频/图片、学生版答案隔离的硬门问题才改代码。
 
 ### 原卷设计无听力与本地交付
 
@@ -113,7 +118,8 @@ node scripts/import-pipeline/listening-owner-review-pack.mjs <id> [另一个id] 
 交付整个 `index.html + clips/ + manifest.json`，Owner 按「卷名、段、遍、首尾/正文情况、
 整录音时间」回复。包只读，不装结论、不改 producer；`ownerReviewed=false`。
 如何保留答复及通过正式听力审查装入，见
-[出听核包](listening-review.md#出听核包)；出包不能替代 submit 的 usable 门禁。
+[出听核包](listening-review.md#出听核包)。有播放音频且审查记录的 segmentId、题号与原文匹配时，
+非 usable 组保持原结论并标记待 Owner 听核，照常送审；缺音频或归属不匹配仍阻塞。
 
 ### 显式创建下一代 OCR（源文件字节不变）
 
