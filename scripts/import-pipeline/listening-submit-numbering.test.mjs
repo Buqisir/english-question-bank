@@ -8,7 +8,7 @@ import { loadNck1ReviewSource } from '../../server/import-review/revisionProject
 import { prepareNck1AnalyzedPackageReview } from '../../server/paper-import/analyzedPackage.mjs'
 
 const issues = stem => importSubmissionIssues({ materialization: { groups: [{ stem }] } })
-test('Chinese numbered entries beginning with Latin acronyms are blocked', () => {
+test('Chinese numbered entries beginning with Latin acronyms are reported', () => {
   const found = issues('要点：(1) DIY 活动；(2) BBQ 晚会')
   assert.equal(found[0]?.code, 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING')
   assert.deepEqual(found.flatMap(x => x.matches), ['(1)', '(2)'])
@@ -41,7 +41,7 @@ test('English numbered sentences retain their language when words have Chinese g
   ]) assert.deepEqual(issues(stem), [])
 })
 
-test('Chinese instructions remain blocked beside English words with Chinese glosses', () => {
+test('Chinese instructions remain reported beside English words with Chinese glosses', () => {
   for (const stem of [
     '要点：(1) 介绍 badge(徽章) 的用途；(2) DIY 活动。',
     { runs: [{ text: '要点：(' }, { text: '1' }, { text: ') 介绍 badge(徽章) 的用途' }] },
@@ -100,8 +100,10 @@ test('push preflight accepts a loaded external listening package without a raw-s
   writeFileSync(sidecar, '{')
   assert.deepEqual(assertImportSubmissionReady(paperDir, loaded.materialization, loaded), { status: 'PASS' })
   loaded.materialization.groups[0].stem = '要点：(1) 介绍活动'
-  assert.throws(() => assertImportSubmissionReady(paperDir, loaded.materialization, loaded),
-    { code: 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING' })
+  const warn = t.mock.method(console, 'warn', () => {})
+  assert.deepEqual(assertImportSubmissionReady(paperDir, loaded.materialization, loaded), { status: 'PASS' })
+  assert.match(warn.mock.calls[0].arguments[0], /IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING: \$\.groups\[0\]\.stem: \(1\)/u)
+  assert.equal(loaded.materialization.groups[0].stem, '要点：(1) 介绍活动')
 })
 
 test('raw-source listening with audio defers non-usable groups to Owner listening', t => {
@@ -128,6 +130,9 @@ test('raw-source listening with audio defers non-usable groups to Owner listenin
   // A mismatched review identity still blocks even with audio.
   writeFileSync(path.join(paperDir, 'listening-review-v1.json'),
     JSON.stringify({ groups: [{ ...group, questionNumbers: [2], decision: 'review_required', reason: 'x' }] }))
+  materialization.groups = [{ stem: '要点：(1) 介绍活动' }]
+  const warn = t.mock.method(console, 'warn', () => {})
   assert.throws(() => assertImportSubmissionReady(paperDir, materialization, loaded),
     { code: 'IMPORT_SUBMIT_LISTENING_NOT_USABLE' })
+  assert.match(warn.mock.calls[0].arguments[0], /IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING/u)
 })

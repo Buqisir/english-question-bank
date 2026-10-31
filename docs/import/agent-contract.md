@@ -285,7 +285,7 @@ an Owner spelling-approval step. Historical workspaces without the policy remain
 compatible; adding a report explicitly opts their current Candidate into the
 overlay. Do not rewrite an existing finalized revision or claim it was reviewed.
 
-### Amp 送审、网页发布（Owner 2026-10-14 确认）
+### 当前送审、网页发布（Owner 2026-10-14 确认）
 
 当前流程为：在 Amp 准备和校对 → Owner 明确「可以送网页审核」→ Agent 提交
 该 Candidate → Owner 在 `/ops/` 点击卷名直接打开精确 revision 的 Screen →
@@ -873,8 +873,9 @@ Low 是模型模式，不代表计算资源规格。扫描/OCR、ASR 与渲染�
 ## 状态
 
 线上权威状态：`materializing` → `awaiting_review` ↔ `changes_requested` →
-`approved` →（Owner 另说“上线”）→ `publishing` → `published`，已知拒绝或
-明确中止为 `failed`。`approved` 与 `published` 是两个不同人类决定。
+`approved` → `publishing` → `published`，已知拒绝或明确中止为 `failed`。
+Owner 点击「发布到题库」同时表达认可与公开意图；服务端分别保存 approval 与 promotion，
+无需另说“上线”。聊天里的送审授权不等于发布授权。
 
 下面的 `locally_published` / `ready_to_ship` / `shipped` 只描述旧本地探针兼容，
 不授权、也不再驱动 Review-backed 生产上线。
@@ -903,8 +904,8 @@ node scripts/import-pipeline/review.mjs preflight <paperId>
 
 它返回 `state`、本地/Review 探针、`blockers` 和 `next.action`。它不上传 revision、
 不 accept、不 publish、不取得 shipping guard，并固定返回
-`production.pushAllowed: false`；上线授权只能来自 Owner 当前单独口令和后续 ship
-promotion 命令。
+`production.pushAllowed: false`。日常发布由 Owner 点击「发布到题库」；
+下述历史 CLI promotion 仍须对应事务的明确授权，preflight 本身不提供授权。
 
 ## 硬门禁
 
@@ -931,10 +932,9 @@ promotion 命令。
    fallback，会在 plan 中保存 `allowSplitOptionBank: true` 并由显式重放保持一致；单条选项仍不可拆。
    自动规划失败仍非零退出，但必须使用独立 diagnostic PDF/逐页图片和结构化失败报告继续
    修复，且不得保存 plan；`--auto` 不得与显式 break/cover 编辑参数混用。
-6. Owner 在网页认可后，Review API 保存绑定 source/Candidate/visible structure、当前 profile 的摘要或分析、files/bundle 的 approval；Agent 停下。无需在 Orb 生成本地 QA/发布收据，且不得因认可自动上线。
-7. 只有 Owner 后来在当前对话明确说 `上线 <paperId>`，才运行 `node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship`。命令先用低权限 Agent token 读取最新认可，再用**只在本次上线动作中提供**的独立 ship token 请求生产服务。服务端从不可变 Review bytes 重建 Teacher Confirmation、Canonical request 与当前 profile 的 sidecar，调用共享 publisher 原子写单卷正式 rows、Canonical current、`versions/vN`、`latest` 和媒体。不得从 Orb 上传整个 SQLite 或 broad assets。
+6. Agent 完成送审与精确预览交付后停下。Owner 在网页点击「发布到题库」，服务端保存绑定 source/Candidate/visible structure、当前 profile 的摘要或分析、files/bundle 的 approval，并执行既有单卷 publisher；无需另说上线，也无需本地 QA/发布收据。Agent 不代点发布。
 
-`materialize`、`verify` 与 `build` 都不会创建认可、approve、publish 或 ship。Teacher Confirmation、不可变 Review revision、Owner 网页认可和上线口令边界保持不变。
+`materialize`、`verify` 与 `build` 都不会创建认可、approve、publish 或 ship。Teacher Confirmation、不可变 Review revision 与 Owner 网页发布边界保持不变。
 
 以下旧格式编号步骤（包括分析、发布 dry-run 与 QA 门禁）仅供已经登记的存量入口继续复现；`public-paper-v1` 新卷不执行这些步骤：
 
@@ -961,10 +961,13 @@ promotion 命令。
 ## 停点
 
 - **不对答案（人）。** 答案随解析字段做全；托底是 AI Answer Transcription Check。
-- **网页 QA（人）必留。** Owner 在 `/ops/?view=review` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的真实 Screen，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。对 `public-paper-v1`，Owner 只认可最终渲染版式，不逐项核对摘要、metadata、原题准确性或答案映射；这些由前置自动门禁闭合。认可 receipt 必须明确该限制。历史 absent-profile / external `analyzed_package` 保持原审核合同，不能静默改类。问题绑定 immutable revision；网页认可写服务端精确 approval，但不发布。
-- **上线。** 网页认可后停。导题后台无生产按钮。Owner 必须**当前**另说「上线 <paperId>」之后，才按下一节执行服务端单卷 promotion。
+- **网页 QA（人）必留。** Owner 从 `/ops/` 卷列表打开精确 revision 的真实 Screen 与 PDF。对 `public-paper-v1`，Owner 只认可最终渲染版式，不逐项核对摘要、metadata、原题准确性或答案映射；这些由前置自动门禁闭合。认可 receipt 必须明确该限制。历史 absent-profile / external `analyzed_package` 保持原审核合同，不能静默改类。问题绑定 immutable revision。
+- **发布。** Owner 点击「发布到题库」同时认可并公开当前版本；Agent 送审后停下，不代点、不以聊天送审授权运行 promotion。
 
-## 上线
+## 历史 CLI 上线与恢复（非日常流程）
+
+以下命令仅供已明确授权的历史或恢复事务复现，保留其 token、锁与收据边界。
+它们不是当前网页「发布到题库」的前置步骤；本节的另说上线要求仅适用于该 CLI 路线。
 
 网页认可后仍然停下。只有 Owner 在**当前线程**直接说 `上线 <paperId>` 后，才可运行：
 
