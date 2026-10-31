@@ -67,6 +67,7 @@ import { confirmMaterializationWritingGivens } from './materialization-writing-g
 import { computeOcrNumberingProjection } from '../../shared/ocrNumberingProjection.mjs'
 import { reobserveRegions } from './ocr-region-reobserve.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
+import { validateWritingRoleDeclarations, WRITING_ROLE_DECLARATIONS_SCHEMA_VERSION } from '../../server/paper-import/sourceReferenceRoleDeclarations.mjs'
 import { LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 import { usesTitleAbbreviation } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 export { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
@@ -1165,7 +1166,8 @@ export function referenceLineBoundary(previous, line, margin, previousMargin = m
 export function buildSourceReferences(materialization, evidence, confirmation,
   { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [],
     producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, absenceSidecar, sourceInput, sourceDigest, candidateDigest,
-    cellContinuations = [], continuationSidecar, referenceSourceManifest, referenceSourceDocuments } = {}) {
+    cellContinuations = [], continuationSidecar, referenceSourceManifest, referenceSourceDocuments,
+    writingRoleDeclarations } = {}) {
   const retainedImages = ['ocr-source-references-producer-v26', OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(producerVersion)
     && confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
     && materialization.documents.some(document => document.mediaType === 'application/vnd.eqb.nck1-image-source-bundle+json')
@@ -1180,7 +1182,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     degraded.set(info.taskType, { reason: info.error?.message || String(info.error), itemId: info.error?.itemId ?? null })
   }
   const source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
-    { paperName, producerVersion, referenceSourceDocuments, onScopeError: degrade })
+    { paperName, producerVersion, referenceSourceDocuments, onScopeError: degrade, writingRoleDeclarations })
   const lifecycle = sourceReferenceWritingLifecycle(source.lines, { ...source, onScopeError: degrade })
   const alternateAnswerScope = bindAlternateAnswerScope(source.alternateAnswerScope, evidence, confirmation, sourceInput?.ocrSourceBytes)
   if (alternateAnswerScope && absenceSidecar?.wholeDocumentWritingAbsence) {
@@ -1438,7 +1440,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures, { producerVersion, materialization, onScopeError: degrade })
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures, { producerVersion, materialization, onScopeError: degrade, roleDeclarations: source.roleDeclarations })
   const excludedFigures = referenceFigures.filter(figure =>
     !assignedFigures.has(figure) && (objectiveFigures.has(sourceReferenceFigureIdentity(figure))
       || explanationFigures.has(sourceReferenceFigureIdentity(figure))))
@@ -1453,6 +1455,8 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
   }
   const result = { groups, review, structuredScoring, ...(alternateAnswerScope ? { alternateAnswerScope } : {}),
+    ...(source.roleDeclarations.declarations.length
+      ? { writingRoleDeclarations: source.roleDeclarations.declarations } : {}),
     ...(producerVersion !== LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
       ? { producerVersion } : {}), ...(figureExclusions.length
     ? { schemaVersion: 'source-references-v5', figureExclusions }
@@ -1516,6 +1520,13 @@ function references(paperId) {
     return
   }
   const referenceSourceManifest = readJson(path.join(paperDir, 'universal-source-manifest.json'), 'Source manifest')
+  // Optional agent-declared writing roles, retained with the sealed artifact
+  // so sealed replay and admission consume the same declared transitions.
+  const rolePath = path.join(work, 'source-reference-roles.json')
+  const roleFile = existsSync(rolePath) ? readJson(rolePath, 'Writing role declarations') : null
+  const writingRoleDeclarations = roleFile
+    ? validateWritingRoleDeclarations(roleFile.entries ?? roleFile, { materialization, confirmation })
+    : undefined
   const referenceDocuments = confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
     ? referenceSourceManifest.documents.map(document => ({ ...document,
       bytes: new Uint8Array(readFileSync(path.join(paperDir, document.path))) })) : documents
@@ -1525,9 +1536,10 @@ function references(paperId) {
   } }
   const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion, alternateAnswerScope } = buildSourceReferences(materialization, evidence, confirmation,
     { sourceDocuments: referenceDocuments, sourceInput, paperName, referenceSourceManifest,
-      figureExclusions: retained?.figureExclusions ?? [] })
+      figureExclusions: retained?.figureExclusions ?? [], writingRoleDeclarations })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups, producerVersion, ...(figureExclusions ? { figureExclusions } : {}),
+    ...(writingRoleDeclarations?.length ? { writingRoleDeclarations } : {}),
     ...(alternateAnswerScope ? { alternateAnswerScope } : {}) })
   console.log(JSON.stringify({
     ok: true,

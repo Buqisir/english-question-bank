@@ -8,6 +8,7 @@ import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION,
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_ANSWER_ROLES } from './sourceReferenceWritingRules.mjs'
 import { sourceReferenceEssayTaskStates, sourceReferenceWritingTaskHeading } from './sourceReferenceWritingTask.mjs'
+import { validateWritingRoleDeclarations, resolveWritingRoleDeclarations } from './sourceReferenceRoleDeclarations.mjs'
 import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
 import { replaySourceReferenceCellContinuations, sourceReferenceCellContinuations } from './sourceReferenceCellContinuation.mjs'
 import { resolveAlternateAnswerScope, bindAlternateAnswerScope } from './sourceReferenceAlternateAnswerScope.mjs'
@@ -120,6 +121,10 @@ function assertSourceReferenceContent({
 }, producerVersion) {
   let sourceInput = canonicalSourceInput
   let referenceSourceDocuments
+  const sealedRoleDeclarations = sidecar?.writingRoleDeclarations
+  let resolvedRoleDeclarations = null
+  const roleDeclarations = confirmation => resolvedRoleDeclarations ??= resolveWritingRoleDeclarations(
+    validateWritingRoleDeclarations(sealedRoleDeclarations, { materialization, confirmation }))
   if (usesAlternateAnswerScope(producerVersion) && referenceOcrSourceBytes !== undefined) {
     if (canonicalSourceInput.ocrSourceBytes) reject('Reference OCR cannot override Canonical OCR')
     const { evidenceBytes, confirmationBytes } = referenceOcrSourceBytes ?? {}
@@ -155,6 +160,7 @@ function assertSourceReferenceContent({
     sourceInput = { ...canonicalSourceInput, ocrSourceBytes: referenceOcrSourceBytes }
     const baseline = buildSourceReferences(materialization, evidence, confirmation, {
       producerVersion, sourceInput, sourceDocuments: supplied, sourceDigest, candidateDigest, referenceSourceDocuments,
+      writingRoleDeclarations: sealedRoleDeclarations,
     })
     if (baseline.alternateAnswerScope || digestJson(sidecar?.groups ?? null) !== digestJson(baseline.groups)) {
       reject('Reference-only v1 groups must exactly replay the current producer')
@@ -196,6 +202,7 @@ function assertSourceReferenceContent({
         const baseline = buildSourceReferences(materialization, evidence, confirmation, {
           producerVersion, sourceInput, sourceDocuments: sourceInput.documents, sourceDigest, candidateDigest,
           figureExclusions: sidecar.figureExclusions ?? [],
+          writingRoleDeclarations: sealedRoleDeclarations,
         })
         // v6's subsequent replay independently rebuilds and compares all groups
         // after the reviewed cell transformation; ordinary content compares here.
@@ -208,6 +215,9 @@ function assertSourceReferenceContent({
   // This must precede both the whole-absence and no-visual early returns:
   // direct API callers get the same exact replay as the offline finalizer.
   replaySourceReferenceCellContinuations({ sidecar, materialization, sourceInput, sourceDigest, candidateDigest })
+  if (sealedRoleDeclarations?.length && sidecar?.wholeDocumentWritingAbsence) {
+    reject('Writing role declarations cannot combine with whole-document writing absence')
+  }
   if (sidecar?.wholeDocumentWritingAbsence) {
     wholeDocumentAbsenceSubject({ sidecar, materialization, sourceInput, sourceDigest, candidateDigest })
     const ocr = sourceInput.ocrSourceBytes
@@ -216,7 +226,8 @@ function assertSourceReferenceContent({
     const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
       .map(document => document.documentId))
     sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence,
-      { producerVersion, sidecar, sourceInput, sourceDigest, candidateDigest })
+      { producerVersion, sidecar, sourceInput, sourceDigest, candidateDigest,
+        writingRoleDeclarations: sealedRoleDeclarations })
     return
   }
   const figures = sourceReferenceFigures(sidecar)
@@ -236,13 +247,17 @@ function assertSourceReferenceContent({
     if (sidecar?.figureExclusions?.length) reject('Explanation figure exclusions require sealed OCR evidence')
     if (figures.length) reject('Reference figures require sealed OCR confirmation and writing-scope anchors')
     if (continued) reject('Same-page continuation requires sealed confirmation source order and ownership')
+    // Declarations bind exact confirmed item text; without sealed OCR the
+    // artifact cannot prove its quotes, so it must not carry any.
+    if (sealedRoleDeclarations?.length) reject('Writing role declarations require sealed OCR evidence and confirmation')
     return
   }
   const confirmation = JSON.parse(Buffer.from(ocr.confirmationBytes).toString('utf8'))
   const answerIds = new Set(materialization.documents.filter(document => SOURCE_REFERENCE_ANSWER_ROLES.includes(document.role))
     .map(document => document.documentId))
   const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
-  const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion, referenceSourceDocuments })
+  const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence,
+    { producerVersion, referenceSourceDocuments, writingRoleDeclarations: sealedRoleDeclarations })
   assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion)
   // Repeated task headings must not let a sidecar omit one of the preserved
   // samples. Bind each captured source body to its own entry and label.
@@ -290,6 +305,7 @@ function assertSourceReferenceContent({
     const baseline = buildSourceReferences(materialization, evidence, confirmation, {
       producerVersion, sourceInput, sourceDocuments: sourceInput.documents, sourceDigest, candidateDigest,
       figureExclusions: sidecar.figureExclusions ?? [],
+      writingRoleDeclarations: sealedRoleDeclarations,
     })
     // Preserve the established prose whitespace/hyphen matching view. Labels,
     // ownership, ordering, paragraph roles and every source locator stay exact.
@@ -342,7 +358,7 @@ function assertSourceReferenceContent({
     explanationFigures.has(sourceReferenceFigureIdentity(reference)) && reference.sourceRegionId === figure.sourceRegionId))) {
     reject('An excluded explanation figure cannot also appear in writing references')
   }
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected, { producerVersion, materialization })
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected, { producerVersion, materialization, roleDeclarations: roleDeclarations(confirmation) })
   const expected = allExpected.filter(reference => !explanationFigures.has(sourceReferenceFigureIdentity(reference))
     && (!objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
@@ -354,7 +370,7 @@ function assertSourceReferenceContent({
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
   const illustratedDocuments = new Set(allExpected.map(reference => reference.source.documentId))
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion, materialization })
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion, materialization, roleDeclarations: roleDeclarations(confirmation) })
   const pictureItems = new Set(allExpected.flatMap(reference => reference.itemIds))
   const sourceOrder = new Map(), sourceOwners = new Map()
   for (const document of confirmation.documents) {

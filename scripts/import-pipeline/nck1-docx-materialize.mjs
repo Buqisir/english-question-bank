@@ -7,6 +7,7 @@ import {
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import {
   NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
@@ -74,6 +75,10 @@ const OCR_PRODUCER = Object.freeze({
     const directory = path.join(paperDir, 'materialization')
     const evidencePath = path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)
     const confirmationPath = path.join(directory, NCK1_OCR_CONFIRMATION_FILE_NAME)
+    const paperId = path.basename(paperDir)
+    const rolesPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..',
+      'imports', 'ocr-proofread', paperId, 'source-reference-roles.json')
+    const roleFile = existsSync(rolesPath) ? JSON.parse(readFileSync(rolesPath, 'utf8')) : null
     return {
       evidence: existsSync(evidencePath)
         ? JSON.parse(readFileSync(evidencePath, 'utf8'))
@@ -81,6 +86,7 @@ const OCR_PRODUCER = Object.freeze({
       confirmation: existsSync(confirmationPath)
         ? JSON.parse(readFileSync(confirmationPath, 'utf8'))
         : null,
+      writingRoleDeclarations: roleFile ? (roleFile.entries ?? roleFile) : null,
     }
   },
 })

@@ -963,6 +963,12 @@ function referencesCurrent(ctx) {
       if (refreshed.pending || digestJson(refreshed.sidecar) !== digestJson(finalized)) return false
       assertSourceReferenceAdmission({ ...input, sidecar: finalized })
     }
+    // An agent-authored role declaration is part of the reference input; any
+    // edit since the last finalize invalidates the generated groups.
+    const rolePath = path.join(ctx.work, 'source-reference-roles.json')
+    const roleFile = existsSync(rolePath) ? readJson(rolePath) : null
+    const declaredRoles = roleFile ? (roleFile.entries ?? roleFile) : []
+    if (digestJson(declaredRoles) !== digestJson(finalized.writingRoleDeclarations ?? [])) return false
     // Any supported historical producer version is a cache hit as generated;
     // only missing/unsupported versions or a changed binding force a rebuild.
     // The draft/finalized pair keeps its declared version; the step marker

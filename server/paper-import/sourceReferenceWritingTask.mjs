@@ -17,6 +17,7 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, assertSourceReferenceProducerVe
 import { wholeDocumentAbsenceSubject } from './sourceReferenceWholeDocumentAbsence.mjs'
 import { resolveAlternateAnswerScope } from './sourceReferenceAlternateAnswerScope.mjs'
 import { nck1ReferenceOcrSourceDocuments } from './nck1OcrSourceEvidence.mjs'
+import { validateWritingRoleDeclarations, resolveWritingRoleDeclarations, roleDeclarationError } from './sourceReferenceRoleDeclarations.mjs'
 
 // Bind nested task/letter and capture role lookups to the same source semantics.
 function sourceReferenceLineRoles(producerVersion) {
@@ -168,8 +169,11 @@ function scopeError(message) {
   throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
 }
 
-function applicationLetterReferenceLines(section, factsFor, producerVersion) {
+function applicationLetterReferenceLines(section, factsFor, producerVersion, roleDeclarations) {
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
+  const declared = line => line.itemId && roleDeclarations?.byItemId.get(line.itemId)
+  const declaredLabel = line => declared(line)
+    && ['section-heading', 'sample-heading', 'scoring-heading', 'commentary'].includes(declared(line).role)
   const sampleEnd = section.letterEnd || section.articleEnd
   if (!sampleEnd) return section.lines
   const selected = []
@@ -192,8 +196,8 @@ function applicationLetterReferenceLines(section, factsFor, producerVersion) {
         }
       } else {
         const facts = factsFor(line)
-        const label = firstLineRole('entry-label', facts)
-        if (label && firstLineRole('entry-kind', facts)?.value === 'scoring') {
+        const label = firstLineRole('entry-label', facts) || declaredLabel(line)
+        if (declared(line)?.role === 'scoring-heading' || (label && firstLineRole('entry-kind', facts)?.value === 'scoring')) {
           inScoring = true
         } else if (!inScoring || label
           || matchesLineRole('writing.part-boundary', facts)
@@ -267,9 +271,12 @@ function isObjectiveAnswerGrid(rows) {
 
 // Pure source-item preparation, including confirmed tables, figures and furniture.
 export function prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
-  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, referenceSourceDocuments, onScopeError } = {}) {
+  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, referenceSourceDocuments, onScopeError,
+    writingRoleDeclarations } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
+  const roleDeclarations = resolveWritingRoleDeclarations(
+    validateWritingRoleDeclarations(writingRoleDeclarations, { materialization, confirmation }))
   const sourceDocuments = usesAlternateAnswerScope(producerVersion)
     ? nck1ReferenceOcrSourceDocuments(materialization.documents, confirmation, referenceSourceDocuments) : materialization.documents
   const answerDocuments = sourceDocuments.filter((document) =>
@@ -288,7 +295,8 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
   const sourceOrder = new WeakMap()
   const lineFacts = new WeakMap()
   const referenceFigures = []
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]), { producerVersion, materialization, onScopeError })
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]),
+    { producerVersion, materialization, onScopeError, roleDeclarations })
   const factsFor = line => {
     if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
     return lineFacts.get(line)
@@ -407,7 +415,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
     edgeTexts.get(text).add(line.page)
   }
   return { materialization, answerDocument, documentSha256, pages, lines, review, producerVersion, alternateAnswerScope,
-    sourceOrder, factsFor, referenceFigures, scoringScopes, titleFurniture, edgeTexts }
+    sourceOrder, factsFor, referenceFigures, scoringScopes, titleFurniture, edgeTexts, roleDeclarations }
 }
 
 // The single ownership lifecycle used by extraction and admission. Inputs are
@@ -418,7 +426,9 @@ export function sourceReferenceWritingLifecycle(lines, {
   titleFurniture = new WeakSet(), edgeTexts = new Map(), review: sourceReview = [],
   producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
   alternateAnswerScope = null, onScopeError = null,
-}) {
+  roleDeclarations = resolveWritingRoleDeclarations(),
+  tableItemIds = new Set(),
+} = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const review = [...sourceReview]
@@ -591,12 +601,22 @@ export function sourceReferenceWritingLifecycle(lines, {
       continue
     }
     const facts = factsFor(line)
+    // A declared commentary/non-writing line belongs to its named task rather
+    // than ending the whole scope; it is appended and paused by the planner.
+    const inlineDeclared = line.itemId ? roleDeclarations.byItemId.get(line.itemId) : null
+    if (inlineDeclared && ['commentary', 'not-writing'].includes(inlineDeclared.role)) {
+      if (!scope.current || scope.current.taskType !== (inlineDeclared.taskType ?? scope.current.taskType)) {
+        throw roleDeclarationError(`Declared ${inlineDeclared.role} ${line.itemId} has no active ${inlineDeclared.taskType ?? 'writing'} section`)
+      }
+      appendLine(line)
+      continue
+    }
     const next = lines[lineIndex + 1]
     const readingPairCandidate = usesTitleAbbreviation(producerVersion) && scope.current
       && next && !next.figure && !next.table && line.nextSourceItemId === next.itemId
       && isReadingAnswerPair(line.text, next.text)
     const priorStep = readingPairCandidate
-      ? planReferenceCapture(scope.current, factsFor, producerVersion, scoringScopes, materialization).steps.at(-1) : null
+      ? planReferenceCapture(scope.current, factsFor, producerVersion, scoringScopes, materialization, roleDeclarations).steps.at(-1) : null
     const readingPair = priorStep?.state.capturing === true && priorStep.action === 'body'
     if (readingPair || matchesLineRole('writing.explanations', facts, { sectionCount: sections.size })) {
       scope.end()
@@ -634,21 +654,40 @@ export function sourceReferenceWritingLifecycle(lines, {
     // A heading can share its OCR item with a sample label. Some answer books
     // omit the writing-part heading entirely; require an adjacent sample label
     // or the tightly bounded standalone-key letter before opening writing.
-    const { bare, started, scoringSection, mergedLabel, unlabeledApplicationLetter, givenTitleArticle, explicitHeading } = sourceReferenceWritingTaskHeading(lines, lineIndex, {
+    const { bare, started: recognizedStart, scoringSection: recognizedScoring, mergedLabel, unlabeledApplicationLetter, givenTitleArticle, explicitHeading } = sourceReferenceWritingTaskHeading(lines, lineIndex, {
       inWriting: scope.inWriting, sectionCount: sections.size, lastObjectiveQuestion,
       applicationGivenTitle: articleBlocked ? null : applicationGivenTitle,
       answerRole: answerDocument.role, factsFor, producerVersion,
     })
-    if (scoringSection) {
-      scope.startTask(scoringSection, { reuse: true })
-      taskStarts.set(line.itemId, scoringSection)
-      items.set(line.itemId, { task: scoringSection, capturing: false, ended: false, kind: null, action: 'task' })
+    // Agent-declared item roles are authoritative transitions, not new regexes.
+    // A declared sample/section heading both names its task and opens its body;
+    // a declared scoring heading selects the rubric lane for the same task.
+    const declared = line.itemId ? roleDeclarations.byItemId.get(line.itemId) : null
+    if (declared?.role === 'scoring-heading' && declared.taskType) {
+      // A declared rubric heading joins its task's existing section rather than
+      // starting a new sample; reuse preserves any already captured essays.
+      const reuse = sections.has(declared.taskType)
+      scope.startTask(declared.taskType, { reuse })
+      taskStarts.set(line.itemId, declared.taskType)
+      items.set(line.itemId, { task: declared.taskType, capturing: false, ended: false, kind: null, action: 'task' })
+      const next = lines[lineIndex + 1]
+      if (!next || !firstLineRole('entry-label', factsFor(next))) appendLine(line)
+      continue
+    }
+    if (recognizedScoring) {
+      scope.startTask(recognizedScoring, { reuse: true })
+      taskStarts.set(line.itemId, recognizedScoring)
+      items.set(line.itemId, { task: recognizedScoring, capturing: false, ended: false, kind: null, action: 'task' })
       // This task heading also labels its rubric. A following explicit entry
       // label owns the body instead; avoid manufacturing an empty parent entry.
       const next = lines[lineIndex + 1]
       if (!next || !firstLineRole('entry-label', factsFor(next))) appendLine(line)
       continue
     }
+    const declaredStart = declared && (declared.role === 'section-heading' || declared.role === 'sample-heading')
+      ? declared.taskType : null
+    const declaredSample = declared?.role === 'sample-heading'
+    const started = declaredStart ?? recognizedStart
     if (started) {
       // A later empty reprint immediately before listening supplies no new
       // sample and cannot erase an already proven given-title article.
@@ -672,11 +711,11 @@ export function sourceReferenceWritingLifecycle(lines, {
       if (usesComposedWritingLabels(producerVersion) && !repeatedTask && !scoringAppendix) {
         scope.current.genericOverview = /^书面表达\s*[:：]?$/u.test(line.text.trim())
       }
-      if (usesComposedWritingLabels(producerVersion) && bare) scope.current.bareEstablished = true
+      if (usesComposedWritingLabels(producerVersion) && (bare || declaredStart)) scope.current.bareEstablished = true
       if (repeatedTask) {
         scope.current.repeatedTask = true
         scope.current.lines.push({ ...line, itemId: null, repeatedTaskBoundary: true,
-          needsLabel: !mergedLabel && !explicitHeading?.sample })
+          needsLabel: !mergedLabel && !explicitHeading?.sample && !declaredSample })
       }
       taskStarts.set(line.itemId, started)
       items.set(line.itemId, { task: started, capturing: false, ended: false, kind: null, action: 'task' })
@@ -687,7 +726,7 @@ export function sourceReferenceWritingLifecycle(lines, {
         appendLine(line)
       }
       if (bare && mergedLabel) scope.current.lines.push({ ...line, text: mergedLabel })
-      if (explicitHeading?.sample) {
+      if (explicitHeading?.sample || declaredSample) {
         scope.current.explicitSample = true
         appendLine(line)
       }
@@ -727,7 +766,7 @@ export function sourceReferenceWritingLifecycle(lines, {
   }
   for (const section of sections.values()) {
     try {
-      Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization))
+      Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization, roleDeclarations, tableItemIds))
     } catch (error) {
       // Soft-reference degradation: callers may collect a section failure and
       // degrade only that task's essays/scoring instead of blocking the paper.
@@ -735,7 +774,7 @@ export function sourceReferenceWritingLifecycle(lines, {
       if (!onScopeError || producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION
         || error?.code !== 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID') throw error
       section.captureError = error
-      section.sectionLines = section.sectionLines ?? applicationLetterReferenceLines(section, factsFor, producerVersion)
+      section.sectionLines = section.sectionLines ?? applicationLetterReferenceLines(section, factsFor, producerVersion, roleDeclarations)
       section.steps = section.steps ?? []
       onScopeError({ taskType: section.taskType, error, section })
     }
@@ -749,11 +788,24 @@ export function sourceReferenceWritingLifecycle(lines, {
 
 // Reference-capture policy belongs here, never in either consumer. Steps are
 // assembly instructions; their states also describe independent source ownership.
-function planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization) {
+function planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization, roleDeclarations = resolveWritingRoleDeclarations(), tableItemIds = new Set()) {
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
-  const sectionLines = applicationLetterReferenceLines(section, factsFor, producerVersion)
+  const sectionLines = applicationLetterReferenceLines(section, factsFor, producerVersion, roleDeclarations)
   const taskType = section.taskType
   const explicitTitles = usesExplicitWritingTitles(producerVersion)
+  // A declared heading is this section's own entry boundary even when its text
+  // pattern is not in the closed grammar; conflict checks happen below, not
+  // by widening the regex surface.
+  const declaredInSection = new Map()
+  for (const [itemId, declaration] of roleDeclarations.byItemId) {
+    if (declaration.taskType === taskType || declaration.role === 'not-writing') declaredInSection.set(itemId, declaration)
+  }
+  const foreignDeclarations = [...roleDeclarations.byItemId.values()].filter(declaration =>
+    declaration.taskType && declaration.taskType !== taskType
+    && sectionLines.some(line => line.itemId === declaration.itemId))
+  if (foreignDeclarations.length) {
+    throw roleDeclarationError(`Declared ${foreignDeclarations[0].taskType} heading ${foreignDeclarations[0].itemId} fell inside the ${taskType} section`)
+  }
   // All four numbered source headings must occur once, in source order, in
   // this application task. The later headings retain their inline body bytes
   // as ordinary scoring paragraphs instead of losing text at the colon.
@@ -858,7 +910,7 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       continue
     }
     if (repeatedNeedsLabel && (line.figure || line.table
-      || !firstLineRole('entry-label', factsFor(line)))) {
+      || !(firstLineRole('entry-label', factsFor(line)) || declaredInSection.has(line.itemId)))) {
       scopeError(`Repeated writing section requires an explicit entry label: ${line.itemId}`)
     }
     if (repeatedNeedsLabel) repeatedNeedsLabel = false
@@ -930,11 +982,24 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       emit('ended')
       continue
     }
+    const declaredEntry = declaredInSection.get(line.itemId)
     const numberedSample = capture.kind !== 'scoring' && numberedSamples.has(line)
-    if (firstLineRole('entry-label', facts) || numberedSample || taskSample || stanceSample
-      || continuationScoring || line === scoringPoints[0]) {
+    // Confirmed table cells reached by the scope view are layout rows inside
+    // their entry; only a declared label can retitle them, and only outside a
+    // table do the closed grammars create a new entry boundary.
+    const tableCell = tableItemIds.has(line.itemId)
+    if (declaredEntry && ['commentary', 'not-writing'].includes(declaredEntry.role)) {
+      pause(`declared ${declaredEntry.role} "${line.text.slice(0, 12)}" is neither a source sample nor scoring`)
+      explanationPause = explicitTitles
+      continue
+    }
+    if ((!tableCell || declaredEntry) && (firstLineRole('entry-label', facts) || numberedSample || taskSample || stanceSample
+      || continuationScoring || line === scoringPoints[0] || declaredEntry)) {
       const kind = continuationScoring || line === scoringPoints[0] ? 'scoring'
-        : numberedSample || taskSample || stanceSample ? 'essays' : firstLineRole('entry-kind', facts)?.value || null
+        : declaredEntry?.role === 'scoring-heading' ? 'scoring'
+          : numberedSample || taskSample || stanceSample || declaredEntry?.role === 'sample-heading' ? 'essays'
+            : declaredEntry?.role === 'section-heading' ? (capture.kind === 'scoring' ? 'scoring' : 'essays')
+              : firstLineRole('entry-kind', facts)?.value || null
       if (!kind) {
         // These existing whole teaching headings explicitly identify analysis.
         // Every other unknown bracketed range needs source clarification.
@@ -1010,7 +1075,8 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
       // label is label scaffolding, not an unclassified content range.
       if (step.action === 'pause' && /^\([一二三四五六七八九十]+\)作答示例[:：]?$/u.test(facts.nfkc)
         && steps[index + 1]?.action === 'entry' && steps[index + 1].state.kind === 'essays') continue
-      if (step.action === 'pause' && (continuationThoughtHeading(step.line.text)
+      if (step.action === 'pause' && (['commentary', 'not-writing'].includes(declaredInSection.get(step.line.itemId)?.role)
+        || continuationThoughtHeading(step.line.text)
         || /^【(?:审题重点|谋篇布局)】[:：]?$/u.test(facts.trimmed)
         || /^(?:\d+\s*[.、]|\([一二三四五六七八九十]+\))\s*(?:故事概述|续写方向|考查目标与写作情境)[:：]?$/u.test(facts.nfkc)
         || matchesLineRole('writing.continuation-prompt', facts))) explanation = true
@@ -1025,6 +1091,17 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
   }
   if (explicitTitles && section.explicitOmission && steps.some(step => step.state.capturing && step.action === 'body')) {
     scopeError('Explicit 范文略 conflicts with captured source sample text')
+  }
+  // A declared sample start is a hard commitment: silently degrading it to
+  // not_supplied would lose an official essay the agent explicitly marked.
+  for (const [itemId, declaration] of declaredInSection) {
+    if (declaration.role !== 'sample-heading') continue
+    const step = steps.find(candidate => candidate.line.itemId === itemId)
+    const captured = steps.some(candidate => candidate.action === 'body' && candidate.state.capturing
+      && candidate.state.kind === 'essays' && candidate.state.labelItemId === itemId)
+    if (!step || !captured) {
+      throw roleDeclarationError(`Declared sample-heading ${itemId} captured no essay body`)
+    }
   }
   if (explicitTitles && section.explicitSample && !steps.some(step => step.state.capturing && step.action === 'body')) {
     scopeError('Explicit source sample heading has an empty/unresolved sample range')

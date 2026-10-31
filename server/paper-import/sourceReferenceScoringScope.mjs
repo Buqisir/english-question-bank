@@ -15,6 +15,7 @@ import {
   isSourceReferenceSampleLabel, explicitWritingHeading, isReadingAnswerPair,
   continuationThoughtHeading, applicationStanceLabel,
 } from './sourceReferenceWritingRules.mjs'
+import { resolveWritingRoleDeclarations } from './sourceReferenceRoleDeclarations.mjs'
 
 // Preserve the scoring helper's existing alternate part title.
 const ALTERNATE_WRITING_PART = /^第[三四]部分[:：]?书面表达/u
@@ -34,7 +35,8 @@ function isScoringLabel(sourceText, scoringTask, producerVersion) {
 // admission alike. Only explicit source headings and scoring labels authorize
 // capture. A nearby Writing Task or a caller's declared entry is insufficient.
 export function sourceReferenceScoringScopes(confirmation, answerIds,
-  { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization = { groups: [] }, onScopeError } = {}) {
+  { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization = { groups: [] }, onScopeError,
+    roleDeclarations = resolveWritingRoleDeclarations() } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const scopes = new Map()
   const alternateAnswerScope = resolveAlternateAnswerScope(materialization, confirmation, { producerVersion })
@@ -44,11 +46,19 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
     const items = document.pages.flatMap((page, index) =>
       page.orderedItems.map(item => ({ ...item, documentId: document.documentId, page: page.page ?? index + 1 })))
     items.forEach((item, index) => { item.nextSourceItemId = items[index + 1]?.itemId })
+    // With declared roles, confirmed table cells are layout rows, never
+    // standalone entry labels: an in-table rubric header must not steal the
+    // open lane's label. Undeclared papers keep the legacy matching exactly.
+    const tableItemIds = roleDeclarations.declarations.length
+      ? new Set((document.pages ?? []).flatMap(page =>
+        (page.visualClassifications ?? []).filter(visual => visual.classification === 'semantic_table')
+          .flatMap(visual => visual.rows.flatMap(row => row.cells.flat()))))
+      : new Set()
     // Reuse extraction's task recognition, including adjacent/merged sample
     // labels. Existing scoring termination/reopening rules remain authoritative.
     const lifecycle = sourceReferenceWritingLifecycle(items, {
       materialization: usesGivenTitleWritingSamples(producerVersion) ? materialization : { groups: [] },
-      alternateAnswerScope, onScopeError,
+      alternateAnswerScope, onScopeError, roleDeclarations, tableItemIds,
       answerDocument: { role: materialization.documents?.find(source =>
         source.documentId === document.documentId)?.role ?? 'official_answers' }, producerVersion,
     })
@@ -60,9 +70,21 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         scopes.set(item.itemId, null)
         continue
       }
+      const text = writingRuleMatchingView(item.text)
+      const declared = roleDeclarations.byItemId.get(item.itemId)
+      const declaredTaskStart = declared
+        && ['section-heading', 'sample-heading'].includes(declared.role) ? declared.taskType : null
+      const declaredScoring = declared?.role === 'scoring-heading' ? declared.taskType : null
       let appendixTask = null
       if (terminal) {
-        if (isExplicitScoringAppendixStart(item.text, items[index + 1]?.text)) {
+        // A declared rubric heading names its task explicitly; it can reopen a
+        // terminated lane exactly like the proven appendix pair can.
+        if (declaredScoring) {
+          terminal = false
+          afterListening = false
+          ended = false
+          appendixTask = declaredScoring
+        } else if (isExplicitScoringAppendixStart(item.text, items[index + 1]?.text)) {
           terminal = false
           afterListening = false
           ended = false
@@ -70,7 +92,6 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         }
         if (!appendixTask) { scopes.set(item.itemId, null); continue }
       }
-      const text = writingRuleMatchingView(item.text)
       // A transcript before the first writing task is ordinary source order.
       // After writing has started, only the explicit rubric appendix can reopen it.
       const firstWritingHeading = afterListening && !startedWriting
@@ -79,6 +100,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
           || BARE_APPLICATION_SECTION.test(text) || /^读后续写[:：]?$/u.test(text)
           || NUMBERED_APPLICATION_SECTION.test(text) || NUMBERED_CONTINUATION_SECTION.test(text)
           || explicitWritingHeading(item.text, producerVersion)
+          || declaredTaskStart
           || (usesGivenTitleWritingSamples(producerVersion) && lifecycle.taskStarts.has(item.itemId)))
       if (afterListening) {
         appendixTask = scoredWritingRubricTask(item.text, items[index + 1]?.text)
@@ -122,8 +144,9 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
       const completeTranscript = usesExplicitWritingTitles(producerVersion) && lifecycle.listeningStarts.has(item.itemId)
       const readingBoundary = usesTitleAbbreviation(producerVersion)
         && lifecycle.items.get(item.itemId)?.ended && isReadingAnswerPair(item.text, items[index + 1]?.text)
-      if (readingBoundary || isSourceReferenceExplanationStart(item.text, producerVersion) || ANSWER_EXPLANATION_START.test(heading)
-        || /^参考答案解析/u.test(heading) || LISTENING_REFERENCE_START.test(heading) || completeTranscript) {
+      if (readingBoundary || (!declared && (isSourceReferenceExplanationStart(item.text, producerVersion)
+        || ANSWER_EXPLANATION_START.test(heading) || /^参考答案解析/u.test(heading)))
+        || (!declared && LISTENING_REFERENCE_START.test(heading)) || completeTranscript) {
         writing = false
         taskType = null
         label = null
@@ -134,7 +157,8 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
         continue
       }
       const sharedTask = !ended && !afterListening ? lifecycle.taskStarts.get(item.itemId) : null
-      let task = appendixTask || sharedTask || WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] || null
+      let task = appendixTask || sharedTask || declaredTaskStart || declaredScoring
+        || WRITING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0] || null
       const scoringTask = WRITING_SCORING_SECTION.find(([, pattern]) => pattern.test(heading))?.[0]
       task ??= scoringTask
       if (NUMBERED_APPLICATION_SECTION.test(heading)) task = 'application'
@@ -159,15 +183,19 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
       // Share the producer's complete essay-label grammar; Chinese citations
       // such as “范文1中…” remain rubric prose.
       const sampleLabel = isSourceReferenceSampleLabel(item.text, producerVersion)
-      const scoringLabel = isScoringLabel(item.text, scoringTask, producerVersion)
+      const inTable = tableItemIds.has(item.itemId)
+      const scoringLabel = !inTable && (declaredScoring ? true : isScoringLabel(item.text, scoringTask, producerVersion))
       if (!ended && taskType && scoringLabel) label = item
+      // A declared non-scoring item (commentary or non-writing) explicitly
+      // breaks an open rubric lane; it can never lend its text to scoring.
+      else if (declared && ['section-heading', 'sample-heading', 'commentary', 'not-writing'].includes(declared.role)) label = null
       // A reprinted "写作二" starts the sample between rubric sections, not
       // another scoring paragraph; only the next rubric label restores scoring.
-      else if (sampleLabel
+      else if (!inTable && (sampleLabel
         || /^写作[一二](?:范文[:：]?)?$/u.test(text)
         || /^(?:【|\[)/u.test(text)
         || (usesExplicitWritingTitles(producerVersion) && (applicationStanceLabel(item.text, taskType)
-          || continuationThoughtHeading(item.text)))) label = null
+          || continuationThoughtHeading(item.text))))) label = null
       // The new contextual sequence and continuation rubric are recognized by
       // the shared capture planner, including their exact label-item identity.
       const state = lifecycle.items.get(item.itemId)
@@ -189,11 +217,12 @@ export const sourceReferenceFigureIdentity = figure =>
 // The visual resolver must already have proved crop/observation closure.
 // No heading alone can authorize this new path: consume every confirmed word.
 export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures,
-  { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization, onScopeError } = {}) {
+  { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization, onScopeError,
+    roleDeclarations = resolveWritingRoleDeclarations() } = {}) {
   const objective = new Set()
   const starts = new Map()
   sourceReferenceScoringScopes(confirmation, answerIds, {
-    producerVersion, materialization, onScopeError,
+    producerVersion, materialization, onScopeError, roleDeclarations,
     onWritingStart: (documentId, itemId) => starts.set(documentId, itemId),
   })
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {

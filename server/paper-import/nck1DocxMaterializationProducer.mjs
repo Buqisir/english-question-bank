@@ -1260,7 +1260,71 @@ function writingSampleText(answerBody, from, to, sampleRanges) {
   return text
 }
 
-function officialWritingSamples(answerBody, answerDocumentId, issues, sampleRanges = []) {
+// Declared roles anchor the same boundaries the regex grammar looks for:
+// a sample heading opens its task's essay and a scoring heading ends it.
+// Item identity and page locate the boundary; its quote only verifies the text.
+function declaredWritingRanges(answerBody, declarations, answerDocumentId, issues) {
+  const positions = new Map()
+  for (const entry of declarations) {
+    const hits = answerBody.flatMap((item, index) => item.kind === 'paragraph'
+      && item.itemId === entry.itemId && item.sourceIndex?.page === entry.page ? [index] : [])
+    const index = hits.length === 1 && answerBody[hits[0]].text === entry.quote ? hits[0] : -1
+    positions.set(entry, index)
+    if (index < 0) addIssue(issues, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS', 'answers.writingSamples',
+      `Declared writing role ${entry.itemId} does not match one answer item on page ${entry.page} with its exact quote`,
+      sourceRef(answerDocumentId))
+  }
+  const find = entry => positions.get(entry) ?? -1
+  const sample = taskType => {
+    const declaration = declarations?.find(entry => entry.role === 'sample-heading' && entry.taskType === taskType)
+    return declaration ? find(declaration) : -1
+  }
+  const scoring = (taskType, from) => {
+    const hits = (declarations ?? []).filter(entry => entry.role === 'scoring-heading' && entry.taskType === taskType)
+      .map(entry => find(entry)).filter(index => index >= from).sort((a, b) => a - b)
+    return hits[0] ?? -1
+  }
+  return { sample, scoring, find }
+}
+
+function officialWritingSamples(answerBody, answerDocumentId, issues, sampleRanges = [], writingRoleDeclarations = null) {
+  // Agent-declared source roles take precedence over the closed heading grammar.
+  if (writingRoleDeclarations?.length) {
+    const { sample, scoring, find } = declaredWritingRanges(answerBody, writingRoleDeclarations, answerDocumentId, issues)
+    const extract = taskType => {
+      const heading = sample(taskType)
+      if (heading < 0) {
+        const declared = writingRoleDeclarations.find(entry => entry.role === 'sample-heading' && entry.taskType === taskType)
+        if (declared) {
+          addIssue(issues, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS', 'answers.writingSamples',
+            `Declared ${taskType} sample heading quote was not found in the answer body`, sourceRef(answerDocumentId))
+        }
+        return null
+      }
+      const scoringAt = scoring(taskType, heading + 1)
+      // Any other declared heading (the other task's sample/scoring start or
+      // commentary/not-writing material) also ends this task's essay range.
+      const declaredEnd = (writingRoleDeclarations ?? [])
+        .filter(entry => !(entry.role === 'sample-heading' && entry.taskType === taskType))
+        .map(entry => find(entry)).filter(index => index > heading).sort((a, b) => a - b)[0]
+      const end = [scoringAt, declaredEnd].filter(index => index >= 0).sort((a, b) => a - b)[0] ?? answerBody.length
+      const items = answerBody.slice(heading + 1, end)
+        .filter(item => item.kind === 'paragraph' && normalized(item.text))
+      if (!items.length) {
+        addIssue(issues, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS', 'answers.writingSamples',
+          `Declared ${taskType} sample heading has no essay body before its scoring material`,
+          sourceRef(answerDocumentId, answerBody[heading].sourceIndex))
+        return ''
+      }
+      const text = items.map(item => trimEdgeSpaces(item.text)).join('\n')
+      sampleRanges.push({ text, items })
+      return text
+    }
+    const application = extract('application')
+    const continuation = extract('continuation')
+    if (application === '' || continuation === '') return { application: null, continuation: null }
+    return { application, continuation }
+  }
   // OCR engines may return one source region containing several visually
   // distinct paragraphs. Split only for this answer-sample boundary parser;
   // every derived paragraph retains the exact source locator. DOCX/PDF
@@ -1372,8 +1436,8 @@ function officialWritingSamples(answerBody, answerDocumentId, issues, sampleRang
   return { application, continuation }
 }
 
-export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
-  return officialWritingSamples(answerBody, answerDocumentId, issues)
+export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues, writingRoleDeclarations = null) {
+  return officialWritingSamples(answerBody, answerDocumentId, issues, [], writingRoleDeclarations)
 }
 
 function activeAnswers(paperId, answerMap, issues, answerDocumentId) {
@@ -2096,6 +2160,7 @@ export function produceNck1MaterializationFromStructures({
   mediaInventory = [],
   mediaFiles = [],
   listeningSource = null,
+  writingRoleDeclarations = null,
 }) {
   const body = questionStructure.body
   const answerBody = answerStructure.body
@@ -2130,6 +2195,7 @@ export function produceNck1MaterializationFromStructures({
     answerBody,
     answer?.documentId,
     issues,
+    writingRoleDeclarations,
   )
   let groups = []
   if (question && answer && coverage

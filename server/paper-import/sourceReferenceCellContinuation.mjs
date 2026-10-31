@@ -278,7 +278,8 @@ export function replaySourceReferenceCellContinuations(input, { requireReview = 
         if (resolved.issues.length) fail(`OCR closure invalid: ${resolved.issues[0].message}`)
         const baseline = buildSourceReferences(materialization, evidence, confirmation,
           { sourceDocuments: sourceInput.documents, figureExclusions: sidecar.figureExclusions ?? [],
-            producerVersion: sidecar.producerVersion, sourceInput, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest })
+            producerVersion: sidecar.producerVersion, sourceInput, sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
+            writingRoleDeclarations: sidecar.writingRoleDeclarations })
         if (!equal(sidecar.groups, baseline.groups)) fail('confirmed PDF table text, sources or whole-sidecar consumption changed')
       }
     }

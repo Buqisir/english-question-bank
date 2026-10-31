@@ -45,6 +45,60 @@
     "figureExclusions": {
       "$ref": "source-references-v5#/properties/figureExclusions"
     },
+    "writingRoleDeclarations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "itemId",
+          "page",
+          "quote",
+          "role",
+          "reason"
+        ],
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^\\S(?:.*\\S)?$"
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "role": {
+            "enum": [
+              "section-heading",
+              "sample-heading",
+              "scoring-heading",
+              "commentary",
+              "not-writing"
+            ]
+          },
+          "taskType": {
+            "enum": [
+              "application",
+              "continuation"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "pattern": "\\S"
+          }
+        }
+      }
+    },
     "wholeDocumentWritingAbsence": {
       "type": "object",
       "additionalProperties": false,
