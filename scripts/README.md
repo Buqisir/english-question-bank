@@ -1,5 +1,25 @@
 # Verify Script Index
 
+以下既有 Review 检查从 storage 串联入口拆出，独立分片；仅 security/Full 包包含：
+
+| Verifier | Distinct failure caught |
+| --- | --- |
+| `verify-import-review-upload-reuse.mjs` | 私有上传重复使用与重试丢失原字节 |
+| `verify-import-review-finalize-worker.mjs` | 封存 worker 阻塞主线程或错误接纳 |
+| `verify-import-review-bundle-reuse.mjs` | 重复 bundle 创建错误 revision |
+| `verify-import-review-file-hash.mjs` | 上传文件哈希验证漂移 |
+| `verify-review-compatibility.mjs` | Review 兼容性判定错误 |
+| `verify-review-build-identity.mjs` | 构建身份失配仍可复用 |
+| `verify-review-compatibility-store.mjs` | 兼容性状态与持久化不一致 |
+| `verify-review-subject-backfill.mjs` | 历史 Review 归属回填错误 |
+| `verify-review-subject-backfill-automatic.mjs` | 自动回填越界或并发失效 |
+| `verify-review-eligibility.mjs` | 不合格 revision 进入发布 |
+| `verify-review-recovery.mjs` | 中断恢复重复写入或丢状态 |
+| `verify-review-process-isolation.mjs` | Review 子进程失去隔离 |
+| `verify-review-memory.mjs` | Review 内存回归 |
+| `verify-review-publication-content.mjs` | 封存内容与发布内容不一致或学生产品泄露答案 |
+
+
 听核包只读命令：`node scripts/import-pipeline/listening-owner-review-pack.mjs --help`。
 标准操作见 `docs/import/listening-review.md`「出听核包」。
 
