@@ -340,6 +340,58 @@ for (const name of ['source-references', 'pagination-run', 'pdf-qa']) {
   }
 }
 
+test('feedback fix redoes a returned Candidate and archives its submission evidence', async t => {
+  const { ctx, calls, options } = fixture(t)
+  ctx.state.steps.push = completed({ revisionId: 'rev-returned' })
+  ctx.state.steps.screen = completed({ url: 'old-screen' })
+  Object.assign(ctx.state.data, { candidateRevisionId: 'rev-returned', revisionId: 'rev-returned', localReport: 'old', status: 'reported' })
+  json(path.join(ctx.work, 'handoff/evidence.json'), { revisionId: 'rev-returned' })
+  json(ctx.statePath, ctx.state)
+  const before = readFileSync(ctx.statePath)
+  const status = { ...JSON.parse(fakeStatus(ctx, [{ id: 'rev-returned', state: 'changes_requested' }])),
+    issues: [{ id: 'issue-1', paperId: ctx.paperId, state: 'open' }] }
+  await finish(ctx, ['--feedback-fix', 'issue-1', '--redo-from', 'source-references'],
+    { ...options, readStatus: async () => JSON.stringify(status) })
+  assert.deepEqual(calls, downstream)
+  assert.equal(ctx.state.data.feedbackFix.baseRevisionId, 'rev-returned')
+  assert.deepEqual(ctx.state.data.feedbackFix.issues, ['issue-1'])
+  for (const name of ['candidateRevisionId', 'revisionId', 'localReport', 'status']) assert(!ctx.state.data[name], name)
+  assert(!ctx.state.steps.push && !ctx.state.steps.screen)
+  const archived = snapshot(path.join(ctx.work, 'superseded'))
+  assert(Object.entries(archived).some(([file, bytes]) => file.endsWith('state.json') && bytes === before.toString('hex')))
+  for (const suffix of ['evidence.json', 'products/answerOnly.pdf', 'screen-tile-00.png']) {
+    assert(Object.keys(archived).some(file => file.endsWith(suffix)), suffix)
+  }
+})
+
+test('feedback fix rejects wrong state, revision, issue or UNKNOWN push without local changes', async t => {
+  for (const invalid of ['state', 'revision', 'issue', 'unknown', 'missing-redo']) {
+    const { dir, ctx, options } = fixture(t)
+    ctx.state.steps.push = invalid === 'unknown' ? { startedAt: oldTime } : completed({ revisionId: 'rev-returned' })
+    json(ctx.statePath, ctx.state)
+    const before = snapshot(dir), state = structuredClone(ctx.state)
+    const status = { ...JSON.parse(fakeStatus(ctx, [{ id: invalid === 'revision' ? 'rev-other' : 'rev-returned',
+      state: invalid === 'state' ? 'awaiting_review' : 'changes_requested' }])),
+      issues: [{ id: 'issue-1', paperId: ctx.paperId, state: invalid === 'issue' ? 'closed' : 'open' }] }
+    await assert.rejects(() => finish(ctx, ['--feedback-fix', 'issue-1',
+      ...(invalid === 'missing-redo' ? [] : ['--redo-from', 'source-references'])],
+    { ...options, readStatus: async () => JSON.stringify(status) }), /feedback-fix|RECONCILIATION_REQUIRED/)
+    assert.deepEqual(snapshot(dir), before)
+    assert.deepEqual(ctx.state, state)
+  }
+})
+
+test('feedback fix submit requires the exact --resolves issue set before any writes', async t => {
+  const { dir, ctx } = fixture(t)
+  ctx.state.data.feedbackFix = { baseRevisionId: 'rev-returned', issues: ['issue-1', 'issue-2'], at: oldTime }
+  const before = snapshot(dir)
+  for (const args of [[], ['--resolves', 'issue-1'], ['--resolves', 'issue-1,issue-2,issue-other']]) {
+    await assert.rejects(() => submit(ctx, args), /--resolves/)
+    assert.deepEqual(snapshot(dir), before)
+    assert(ctx.state.data.feedbackFix)
+  }
+})
+
 test('active pagination retains all state and artifacts until the job exits', async t => {
   const { dir, ctx, options } = fixture(t, 'old-version')
   ctx.state.background['pagination-economy8'] = { pid: process.pid }
