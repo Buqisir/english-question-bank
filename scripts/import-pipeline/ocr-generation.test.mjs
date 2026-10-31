@@ -10,6 +10,7 @@ import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.
 import { reconcileOcrGeneration, runOcrReview, startOcrGeneration } from './fast-import.mjs'
 import { buildNck1OcrReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { nck1OcrEvidenceDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { deriveOcrConfirmationRevision } from '../../server/import-review/finalizeComputation.mjs'
 
 const identity = value => sha256(value)
 const paperId = 'paper-synthetic-ocr-generation'
@@ -288,6 +289,30 @@ for (const scenario of ['500', 'timeout', '408', '408 timeout', '429', 'fetch th
   }))
 }
 
+for (const remoteWritten of [false, true]) {
+  test(`same-evidence declaration reconciliation checks bundle identity (remote written: ${remoteWritten})`,
+    () => rejectedGeneration(async ({ ctx, planPath, file, options, status }) => {
+      const operation = path.join(ctx.fast, 'ocr-generation-operation.json')
+      const op = JSON.parse(readFileSync(operation))
+      op.plan.evidenceDigest = status.latest.manifest.evidenceDigest
+      op.plan.confirmationRevision = { baseRevisionId: status.latest.id }
+      op.plan.bundleDigest = identity('new text revision bundle')
+      writeFileSync(planPath, JSON.stringify(op.plan))
+      writeFileSync(operation, JSON.stringify(op))
+      if (remoteWritten) status.revisions.push({ ...status.latest, id: 'rev-new',
+        bundleDigest: op.plan.bundleDigest })
+      if (remoteWritten) {
+        const before = readFileSync(operation)
+        await assert.rejects(() => reconcileOcrGeneration(ctx, file, options), /UNKNOWN/)
+        assert.deepEqual(readFileSync(operation), before)
+        assert(existsSync(path.join(ctx.fast, 'ocr-generation.lock')))
+      } else {
+        await reconcileOcrGeneration(ctx, file, options)
+        assert.equal(existsSync(path.join(ctx.fast, 'ocr-generation.lock')), false)
+      }
+    }))
+}
+
 test('concurrent reconciliation and generation restart cannot enter while reconciliation is reading status', () => rejectedGeneration(async ({ ctx, planPath, file, options }) => {
   let resume, entered
   const active = new Promise(resolve => { entered = resolve })
@@ -325,7 +350,7 @@ test('ordinary fast OCR still invokes exact sealed reuse and preserves its resul
   assert.deepEqual(calls, ['reuse-ocr'])
 })
 
-test('real OCR source projection, finalize and Agent confirmation create a successor while preserving the historical receipt', async () => {
+for (const kind of ['evidence', 'text']) test(`real OCR ${kind} successor preserves the historical receipt and confirms exact intent`, async () => {
   const previous = process.env.EQB_OCR_REVIEW_FIXTURE_ONLY
   process.env.EQB_OCR_REVIEW_FIXTURE_ONLY = '1'
   const { writeSyntheticSource, reviewManifest, uploadRevision } = await import('../verify-import-review-ocr-confirmation.mjs')
@@ -335,6 +360,11 @@ test('real OCR source projection, finalize and Agent confirmation create a succe
   const staging = path.join(root, 'staging')
   try {
     const fixture = writeSyntheticSource(staging)
+    if (kind === 'text') {
+      fixture.evidence.documents[0].pages[0].observations[0].text = '( Text 1)'
+      fixture.evidence.evidenceDigest = nck1OcrEvidenceDigest(fixture.evidence)
+      writeFileSync(path.join(staging, 'materialization/nck1-ocr-source-evidence-v1.json'), JSON.stringify(fixture.evidence))
+    }
     const configPath = path.join(staging, 'config.json')
     writeFileSync(configPath, JSON.stringify({ ...JSON.parse(readFileSync(configPath)), importProfile: 'public-paper-v1' }))
     const store = createImportReviewStore({ dbPath: path.join(root, 'review.sqlite'),
@@ -353,25 +383,84 @@ test('real OCR source projection, finalize and Agent confirmation create a succe
     const oldReceipt = await store.confirmUploadedOcrRevision(oldManifest.paperId, oldRevision.id,
       { bundleDigest: oldManifest.bundleDigest, confirmation, correctionNotes: [] }, 'synthetic-agent', { reviewerKind: 'import_agent' })
     const historical = JSON.stringify(store.getRevision(oldRevision.id).approval)
+    const db = new DatabaseSync(path.join(root, 'review.sqlite'))
+    const receiptBytes = () => db.prepare('SELECT approval_receipt_json FROM import_review_revisions WHERE id = ?')
+      .get(oldRevision.id).approval_receipt_json
+    const historicalBytes = receiptBytes()
     const evidence = structuredClone(fixture.evidence)
-    evidence.documents[0].pages[0].observations[0].text += ' restored heading'
-    evidence.evidenceDigest = nck1OcrEvidenceDigest(evidence)
+    if (kind === 'evidence') {
+      evidence.documents[0].pages[0].observations[0].text += ' restored heading'
+      evidence.evidenceDigest = nck1OcrEvidenceDigest(evidence)
+    }
     writeFileSync(path.join(staging, 'materialization/nck1-ocr-source-evidence-v1.json'), JSON.stringify(evidence))
     const newConfirmation = structuredClone(confirmation)
     newConfirmation.evidenceDigest = evidence.evidenceDigest
-    newConfirmation.documents[0].pages[0].orderedItems[0].text = evidence.documents[0].pages[0].observations[0].text
-    const proofreadInput = { confirmation: newConfirmation, correctionNotes: [] }
+    const item = newConfirmation.documents[0].pages[0].orderedItems[0]
+    item.text = kind === 'text' ? '(Text 1)' : evidence.documents[0].pages[0].observations[0].text
+    const declaration = { baseRevisionId: oldRevision.id, baseConfirmationDigest: digestJson(confirmation),
+      entries: [{ page: 1, itemId: item.itemId, before: '( Text 1)', after: '(Text 1)', basis: '原页标题括号内无空格' }] }
+    const proofreadInput = { confirmation: newConfirmation, correctionNotes: kind === 'text'
+      ? [{ itemId: item.itemId, kind: 'ocr_repair', sourceText: item.text, reason: declaration.entries[0].basis }] : [] }
     const context = { paperId: oldManifest.paperId, origin: 'http://127.0.0.1:9999',
       projection: buildNck1OcrReviewProjection(staging), proofreadInput, reason: 'Supplement a source heading',
+      ...(kind === 'text' ? { confirmationRevision: declaration, bundleManifest: reviewManifest(staging) } : {}),
       readRemote: async url => url.endsWith('/ocr-confirmation')
         ? { receipt: oldReceipt, confirmation: oldReceipt.confirmation } : store.agentPaperStatus(oldManifest.paperId) }
     const plan = await planOcrGeneration(context)
     await checkOcrGenerationPlan(plan, context)
-    const nextManifest = { ...reviewManifest(staging), expectedBaseRevisionId: plan.expectedBaseRevisionId }
+    const nextManifest = { ...reviewManifest(staging), expectedBaseRevisionId: plan.expectedBaseRevisionId,
+      ...(kind === 'text' ? { confirmationRevision: declaration } : {}) }
     nextManifest.bundleDigest = ocrReviewBundleDigest(nextManifest)
+    if (kind === 'text') {
+      assert.equal(plan.bundleDigest, nextManifest.bundleDigest)
+      assert.deepEqual(validateOcrReviewBundleManifest(nextManifest).confirmationRevision, declaration)
+      assert.deepEqual(deriveOcrConfirmationRevision(nextManifest, store.getRevision(oldRevision.id)), newConfirmation)
+      const variants = [
+        { ...declaration, baseConfirmationDigest: identity('wrong') },
+        { ...declaration, baseRevisionId: 'rev-wrong' },
+        { ...declaration, entries: [{ ...declaration.entries[0], before: '(Text 1)' }] },
+        { ...declaration, entries: [{ ...declaration.entries[0], page: 2 }] },
+        { ...declaration, entries: [...declaration.entries, declaration.entries[0]] },
+      ]
+      for (const confirmationRevision of variants) {
+        const invalid = { ...nextManifest, confirmationRevision }
+        invalid.bundleDigest = ocrReviewBundleDigest(invalid)
+        assert.throws(() => store.createRevision(invalid), { code: 'IMPORT_REVIEW_OCR_GENERATION_INVALID' })
+      }
+      const alternate = structuredClone(nextManifest)
+      alternate.confirmationRevision.entries[0].after = '(Text 2)'
+      alternate.bundleDigest = ocrReviewBundleDigest(alternate)
+      assert.notEqual(alternate.bundleDigest, nextManifest.bundleDigest)
+      const other = store.createRevision(alternate)
+      assert.equal(store.createRevision(alternate).revision.id, other.revision.id)
+      // Retain a historical abandoned upload so the approved base has no competing operation.
+      db.prepare("UPDATE import_review_revisions SET state = 'superseded' WHERE id = ?").run(other.revision.id)
+      assert.notEqual(store.createRevision(nextManifest).revision.id, other.revision.id)
+      for (const mutate of [
+        c => { c.documents[0].pages[0].orderedItems[1].text += 'x' },
+        c => { c.documents[0].pages[0].orderedItems.reverse() },
+      ]) {
+        const changed = structuredClone(proofreadInput)
+        mutate(changed.confirmation)
+        await assert.rejects(() => planOcrGeneration({ ...context, proofreadInput: changed }),
+          { code: 'OCR_GENERATION_RECONCILIATION_REQUIRED' })
+      }
+    }
     const next = store.createRevision(nextManifest)
     uploadRevision(store, next, staging, nextManifest.files)
     const nextRevision = await store.finalizeUploadedRevision(next.revision.id)
+    if (kind === 'text') for (const mutate of [
+      c => { c.documents[0].pages[0].orderedItems[1].text += 'x' },
+      c => { c.documents[0].pages[0].orderedItems.reverse() },
+    ]) {
+      const changed = structuredClone(proofreadInput)
+      mutate(changed.confirmation)
+      for (const confirm of [store.confirmOcrRevision, store.confirmUploadedOcrRevision]) {
+        await assert.rejects(async () => confirm(oldManifest.paperId, nextRevision.id,
+          { ...changed, bundleDigest: nextManifest.bundleDigest }, 'synthetic-agent', { reviewerKind: 'import_agent' }),
+        { code: 'IMPORT_REVIEW_OCR_GENERATION_INVALID' })
+      }
+    }
     const nextReceipt = await store.confirmUploadedOcrRevision(oldManifest.paperId, nextRevision.id,
       { ...proofreadInput, bundleDigest: nextManifest.bundleDigest }, 'synthetic-agent', { reviewerKind: 'import_agent' })
     assert.equal(nextReceipt.revisionId, next.revision.id)
@@ -379,6 +468,13 @@ test('real OCR source projection, finalize and Agent confirmation create a succe
     assert.notEqual(nextReceipt.confirmationId, oldReceipt.confirmationId)
     assert.equal(store.getRevision(old.revision.id).state, 'superseded')
     assert.equal(JSON.stringify(store.getRevision(old.revision.id).approval), historical)
+    assert.equal(receiptBytes(), historicalBytes)
+    db.close()
+    if (kind === 'text') {
+      assert.deepEqual(nextReceipt.confirmationRevision, declaration)
+      assert.equal(nextReceipt.correctionReport.entries[0].ocrText, '( Text 1)')
+      assert.equal(nextReceipt.correctionReport.entries[0].correctedText, '(Text 1)')
+    }
     assert.equal(store.createRevision(nextManifest).revision.id, next.revision.id)
   } finally { rmSync(root, { recursive: true, force: true }) }
 })

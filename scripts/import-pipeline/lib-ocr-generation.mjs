@@ -1,5 +1,6 @@
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { ocrReviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
+import { deriveOcrConfirmationRevision, assertOcrConfirmationRevision } from '../../server/import-review/finalizeComputation.mjs'
 
 function stop(message) {
   throw Object.assign(new Error(`OCR_GENERATION_RECONCILIATION_REQUIRED: ${message}`),
@@ -8,7 +9,7 @@ function stop(message) {
 
 // Inspection only. A plan records intent; it never substitutes for the server's
 // register/finalize CAS, the exact new revision confirmation or local locks.
-export async function planOcrGeneration({ paperId, origin, projection, proofreadInput, reason, readRemote }) {
+export async function planOcrGeneration({ paperId, origin, projection, proofreadInput, confirmationRevision, bundleManifest, reason, readRemote }) {
   if (typeof reason !== 'string' || !reason.trim() || reason.length > 2000) stop('补证理由不能为空且不得超过 2000 字')
   const status = await readRemote(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`)
   if (status?.paperId !== paperId || !Array.isArray(status.revisions) || status.promotion) stop('远端状态不明或已有发布事务')
@@ -35,11 +36,19 @@ export async function planOcrGeneration({ paperId, origin, projection, proofread
     if (!/^sha256:[a-f0-9]{64}$/u.test(projection[key] || '')) stop('新 OCR 投影摘要不完整')
   }
   if (projection.paperId !== paperId || projection.sourceSetDigest !== base.manifest.sourceSetDigest
-    || projection.evidenceDigest === base.manifest.evidenceDigest
+    || (projection.evidenceDigest === base.manifest.evidenceDigest && !confirmationRevision)
     || proofreadInput?.confirmation?.paperId !== paperId
     || proofreadInput.confirmation.sourceSetDigest !== projection.sourceSetDigest
     || proofreadInput.confirmation.evidenceDigest !== projection.evidenceDigest) {
     stop('必须保持原 source bytes、改变 evidence，并重新编译该代 proofread input')
+  }
+  if (confirmationRevision) {
+    try {
+      assertOcrConfirmationRevision(proofreadInput.confirmation, deriveOcrConfirmationRevision({
+        ...projection, expectedBaseRevisionId: base.id, confirmationRevision,
+      }, { ...base, approval: receipt }))
+    } catch (error) { stop(error.message) }
+    if (!bundleManifest) stop('文字修订计划缺少新 bundle manifest')
   }
   return {
     schemaVersion: 'fast-ocr-generation-plan-v1', paperId, origin,
@@ -48,6 +57,8 @@ export async function planOcrGeneration({ paperId, origin, projection, proofread
     baseReceiptDigest: digestJson(receipt), baseEvidenceDigest: base.manifest.evidenceDigest,
     sourceSetDigest: projection.sourceSetDigest, evidenceDigest: projection.evidenceDigest,
     reviewStructureDigest: projection.reviewStructureDigest, proofreadInputDigest: digestJson(proofreadInput),
+    ...(confirmationRevision ? { confirmationRevision,
+      bundleDigest: ocrReviewBundleDigest({ ...bundleManifest, expectedBaseRevisionId: base.id, confirmationRevision }) } : {}),
     reason: reason.trim(),
   }
 }

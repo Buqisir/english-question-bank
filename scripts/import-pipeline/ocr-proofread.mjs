@@ -37,7 +37,8 @@ import { wholeDocumentAbsenceSubject } from '../../server/paper-import/sourceRef
 import { bindAlternateAnswerScope } from '../../server/paper-import/sourceReferenceAlternateAnswerScope.mjs'
 import { prepareSourceReferenceCellContinuations, replaySourceReferenceCellContinuations,
   refreshSourceReferenceCellContinuations, sourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
-import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { importNck1ReviewCandidate, loadNck1ReviewSource, buildNck1OcrReviewProjection } from '../../server/import-review/revisionProjection.mjs'
+import { deriveOcrConfirmationRevision } from '../../server/import-review/finalizeComputation.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -876,7 +877,27 @@ export function compileOcrDrafts({ paperId, documents, trace, drafts, noFigures 
 }
 
 function compile(paperId) {
-  const { documents, work } = context(paperId)
+  const { documents, work, paperDir } = context(paperId)
+  const declarationPath = path.join(paperDir, 'ocr-revision-declaration.json')
+  if (existsSync(declarationPath)) {
+    if (option('--pages')) fail('OCR text revision compile requires the complete confirmation')
+    const declaration = readJson(declarationPath, 'OCR revision declaration')
+    const receipt = readJson(path.join(paperDir, 'signals/agent-proofreading-receipt.json'), 'Base OCR receipt')
+    const projection = buildNck1OcrReviewProjection(paperDir)
+    const confirmation = deriveOcrConfirmationRevision({
+      ...projection, expectedBaseRevisionId: declaration.baseRevisionId, confirmationRevision: declaration,
+    }, { id: receipt.revisionId, bundleDigest: receipt.bundleDigest, manifest: receipt, approval: receipt })
+    const notes = new Map((receipt.correctionReport?.entries || []).map(entry => [entry.itemId, {
+      itemId: entry.itemId, kind: entry.kind, sourceText: entry.sourceText, reason: entry.reason,
+    }]))
+    for (const entry of declaration.entries) notes.set(entry.itemId, {
+      itemId: entry.itemId, kind: 'ocr_repair', sourceText: entry.after, reason: entry.basis,
+    })
+    const output = path.join(work, 'proofread-input.json')
+    writeJson(output, { confirmation, correctionNotes: [...notes.values()] })
+    console.log(JSON.stringify({ ok: true, paperId, output, revisedItems: declaration.entries.length }, null, 2))
+    return
+  }
   const trace = readJson(path.join(work, 'trace.json'), 'OCR trace')
   const only = option('--pages')?.split(',').map((value) => value.trim())
   const flagsDir = path.join(work, 'source-flags')
