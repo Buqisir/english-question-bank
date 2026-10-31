@@ -7,7 +7,7 @@ import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } fro
 import { prepareSourceReferences, validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { sourceReferenceScoringScopes } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
 import { sourceReferenceObjectiveFigures, sourceReferenceFigureIdentity } from '../../server/paper-import/sourceReferenceScoringScope.mjs'
-import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
+import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle, sourceReferenceEssayTaskStates } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { nck1OcrSourceSetDigest } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION, LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
@@ -623,6 +623,26 @@ const lifeFor = (input, options) => {
   const source = prepareSourceReferenceWritingItems(...input, options)
   return sourceReferenceWritingLifecycle(source.lines, source)
 }
+
+test('lifecycle scope errors leave unknown writing tasks empty in producer and admission', () => {
+  for (const prefix of [['参考范文（略）'], ['评分细则（格式错扣1分）：'],
+    ['【听力录音稿】', 'Unconfirmed adjacency.']]) {
+    const input = writingFixture([...prefix, '第一节 应用文', '参考范文', 'An application.',
+      '第二节 读后续写', '参考范文', 'A continuation.'])
+    const result = buildSourceReferences(...input)
+    assert.deepEqual(result.groups.map(group => [group.essays.state, group.scoring.state]),
+      [['not_supplied', 'not_supplied'], ['not_supplied', 'not_supplied']], prefix.join('/'))
+    assert(result.review.some(entry => /degraded to not_supplied/u.test(entry.issue)))
+    const states = sourceReferenceEssayTaskStates(input[2], new Set(['answers']), input[0], input[1])
+    assert(![...states.values()].some(state => state.capturing))
+  }
+  const input = writingFixture(['第一节 应用文', '参考范文', 'An application.',
+    '第四部分 写作\n第一节', '参考范文', 'An unowned repeat.',
+    '第二节 读后续写', '参考范文', 'A continuation.'])
+  const result = buildSourceReferences(...input)
+  assert.equal(result.groups[0].essays.state, 'not_supplied')
+  assert.equal(result.groups[1].essays.state, 'captured')
+})
 
 test('v22 ends a captured sample at adjacent reading answer pair and retains a later rubric', () => {
   const input = fixture([

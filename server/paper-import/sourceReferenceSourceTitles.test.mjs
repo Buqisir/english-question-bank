@@ -24,6 +24,11 @@ const lifecycle = input => {
   return sourceReferenceWritingLifecycle(source.lines, source)
 }
 const scopeError = { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }
+const assertDegraded = input => {
+  const sidecar = capture(input)
+  assert(sidecar.groups.some(group => group.essays.state === 'not_supplied' && group.scoring.state === 'not_supplied'))
+  assertSourceReferenceAdmission({ ...input, sidecar })
+}
 
 test('Qingdao task omission keeps both rubrics and exact annotated label; transcript never enters scoring', () => {
   const input = textInput([qingdaoTexts]), before = structuredClone(input)
@@ -75,9 +80,9 @@ test('near-miss titles keep every original word when already owned by a valid ru
 test('invalid raw adjacency cannot be rescued by a later bare Text 1', () => {
   for (const title of ['【听力录音稿】', '英语听力原文']) {
     for (const tail of [['普通正文', 'Text 1'], ['英语参考答案 第2页（共2页）', 'Text 1'], ['Text 2', 'Text 1']]) {
-      assert.throws(() => capture(textInput([[...historicalTexts, title, ...tail]])), scopeError)
+      assertDegraded(textInput([[...historicalTexts, title, ...tail]]))
     }
-    assert.throws(() => capture(textInput([[...historicalTexts, title], ['Text 1']])), scopeError)
+    assertDegraded(textInput([[...historicalTexts, title], ['Text 1']]))
     for (const mutate of [
       lines => { lines.at(-1).documentId = 'another-document' },
       lines => { lines.at(-1).table = { rows: [] } },
@@ -95,7 +100,7 @@ test('invalid raw adjacency cannot be rescued by a later bare Text 1', () => {
 test('new omission and scoring labels require a real current task', () => {
   for (const prefix of [[], ['第四部分 写作'], ['第四部分']]) {
     for (const label of ['参考范文（略）', '评分细则（格式错扣1分）：']) {
-      assert.throws(() => capture(textInput([[...prefix, label]])), scopeError)
+      assertDegraded(textInput([[...prefix, label]]))
     }
   }
   for (const lines of [
@@ -109,6 +114,17 @@ test('new omission and scoring labels require a real current task', () => {
     assert.equal(sidecar.groups[1].scoring.state, 'captured')
     assertSourceReferenceAdmission({ ...textInput([[...lines, '第二节 读后续写', '评分原则', '续写评分。']]), sidecar })
   }
+})
+
+test('an unowned source table degrades both tasks through the shared lifecycle callback', () => {
+  const input = textInput([['Unowned table.', ...historicalTexts]])
+  const source = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
+  source.lines[0].table = { tableId: 'unowned', rows: [[{ text: '评分内容' }]] }
+  const affected = new Set()
+  const result = sourceReferenceWritingLifecycle(source.lines, { ...source,
+    onScopeError: info => affected.add(info.taskType) })
+  assert.deepEqual([...affected].sort(), ['application', 'continuation'])
+  assert([...result.sections.values()].every(section => section.steps.length === 0))
 })
 
 test('task omission never spills into continuation essays', () => {
@@ -130,8 +146,8 @@ test('strict transcript closure survives Text 1, explanations and later task/sam
     ['写作评分说明'],
     ['写作评分说明', '第一节 应用文', '评分原则', '评分正文。'],
     ['第一节（满分25分）', '评分原则', '评分正文。'],
-  ]) assert.throws(() => capture(textInput([[...historicalTexts, '英语听力原文', 'Text 1',
-    'M: A synthetic recording.', ...tail]])), scopeError, tail.join('/'))
+  ]) assertDegraded(textInput([[...historicalTexts, '英语听力原文', 'Text 1',
+    'M: A synthetic recording.', ...tail]]))
 })
 
 test('only complete existing appendix proof reopens scoring after new transcript titles', () => {
@@ -167,8 +183,8 @@ test('strict closure rejects complete stance samples before transcript skipping 
         const sidecar = capture(clean)
         const input = textInput([[...prefix, label, 'A late source sample.',
           ...(appendix.length ? ['评分原则', '后续评分正文。'] : [])]])
-        assert.throws(() => capture(input), scopeError, `${title}/${label}/${appendix.length}`)
-        assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), scopeError,
+        assertDegraded(input)
+        assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }),
           `public admission: ${title}/${label}/${appendix.length}`)
       }
     }
@@ -220,8 +236,8 @@ test('appendix reopening rejects intervening source items, consumed gaps, figure
     const sidecar = capture(control)
     for (const inserted of ['插入的源正文。', '英语参考答案 第2页（共2页）']) {
       const input = textInput([[...prefix, heading, inserted], [rubric, '完整附录评分正文。']])
-      assert.throws(() => capture(input), scopeError)
-      assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), scopeError)
+      assertDegraded(input)
+      assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }))
     }
     for (const mutate of [
       head => { head.nextSourceItemId = 'consumed-between-the-pair' },

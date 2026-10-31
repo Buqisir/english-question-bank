@@ -441,6 +441,15 @@ export function sourceReferenceWritingLifecycle(lines, {
   const taskStarts = new Map()
   const listeningStarts = new Set()
   const scope = createWritingScope(sections)
+  const degraded = new Map()
+  const degradeScope = (error, taskType = null, itemId = null) => {
+    if (!onScopeError || producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+      || error?.code !== 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID') throw error
+    for (const task of taskType ? [taskType] : ['application', 'continuation']) {
+      degraded.set(task, error)
+      onScopeError({ taskType: task, error: Object.assign(error, { itemId }) })
+    }
+  }
   let afterListening = false, scoringAppendix = false, afterExplanations = false, articleBlocked = false
   let strictTranscriptClosure = false
   const appendLine = line => {
@@ -460,6 +469,8 @@ export function sourceReferenceWritingLifecycle(lines, {
     ? lines.findIndex(line => line.itemId === alternateAnswerScope.endExclusiveItemId) : -1
   if (alternateAnswerScope && (alternateStart < 0 || alternateEnd <= alternateStart)) scopeError('Alternate source boundary was consumed')
   for (const [lineIndex, line] of lines.entries()) {
+    let affectedTask = scope.current?.taskType ?? null
+    try {
     if (alternateStart >= 0 && lineIndex >= alternateStart && lineIndex < alternateEnd) {
       if (lineIndex === alternateStart) {
         const tasks = (materialization.groups ?? []).filter(group => group.writingTask)
@@ -499,6 +510,7 @@ export function sourceReferenceWritingLifecycle(lines, {
       && line.nextSourceItemId === adjacent.itemId && line.documentId === adjacent.documentId
     const samePageRawAdjacent = rawAdjacent && line.page === adjacent.page
     if (isSourceTitleTranscriptCandidate(line.text, producerVersion)) {
+      affectedTask = null
       if (!samePageRawAdjacent || !/^\(?Text\s*1\)?\s*[:：.．]?$/iu.test(adjacent.text.normalize('NFKC').trim())) {
         scopeError(`Transcript title requires the next confirmed same-page Text 1: ${line.itemId}`)
       }
@@ -705,6 +717,7 @@ export function sourceReferenceWritingLifecycle(lines, {
       if (repeatedTask && prior.genericOverview && prior.lines.length && !prior.explicitSample
         && !prior.lines.some(existing => !existing.figure && !existing.table
           && matchesLineRole('entry.sample-label', factsFor(existing)))) {
+        affectedTask = started
         scopeError('Unresolved writing overview before repeated task')
       }
       scope.startTask(started, { reuse: scoringAppendix || repeatedTask })
@@ -759,29 +772,43 @@ export function sourceReferenceWritingLifecycle(lines, {
       const previous = sections.get(trailingTask)
       if (usesComposedWritingLabels(producerVersion) && previous
         && (previous.lines.length || previous.letterEnd || previous.articleEnd)) {
+        affectedTask = trailingTask
         scopeError('Unresolved repeated writing task on part heading')
       }
       scope.enterPart(matchesLineRole('writing.part', facts) || omittedWritingPart, trailingTask)
     } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) appendLine(line)
+    } catch (error) {
+      degradeScope(error, affectedTask, line.itemId)
+      // Ownership is lost at this item. Resume only at a later explicit task;
+      // never append the unresolved remainder to the preceding sample.
+      scope.enterPart(false)
+    }
   }
   for (const section of sections.values()) {
+    if (degraded.has(section.taskType)) {
+      section.captureError = degraded.get(section.taskType)
+      section.sectionLines = []
+      section.steps = []
+      continue
+    }
     try {
       Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization, roleDeclarations, tableItemIds))
     } catch (error) {
       // Soft-reference degradation: callers may collect a section failure and
       // degrade only that task's essays/scoring instead of blocking the paper.
       // Without a callback the behavior stays fail-closed.
-      if (!onScopeError || producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION
-        || error?.code !== 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID') throw error
+      degradeScope(error, section.taskType)
       section.captureError = error
-      section.sectionLines = section.sectionLines ?? applicationLetterReferenceLines(section, factsFor, producerVersion, roleDeclarations)
-      section.steps = section.steps ?? []
-      onScopeError({ taskType: section.taskType, error, section })
+      section.sectionLines = []
+      section.steps = []
     }
     for (const step of section.steps) if (step.line.itemId) {
       if (section.repeatedTask) step.state.repeatedTask = true
       items.set(step.line.itemId, step.state)
     }
+  }
+  for (const [itemId, state] of items) if (degraded.has(state.task)) {
+    items.set(itemId, { ...state, capturing: false, action: 'degraded' })
   }
   return { sections, items, taskStarts, listeningStarts, furniture, review }
 }

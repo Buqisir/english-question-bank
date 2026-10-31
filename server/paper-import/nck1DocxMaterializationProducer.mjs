@@ -1276,28 +1276,30 @@ function declaredWritingRanges(answerBody, declarations, answerDocumentId, issue
   }
   const find = entry => positions.get(entry) ?? -1
   const sample = taskType => {
-    const declaration = declarations?.find(entry => entry.role === 'sample-heading' && entry.taskType === taskType)
-    return declaration ? find(declaration) : -1
+    const headings = declarations.filter(entry => entry.role === 'sample-heading' && entry.taskType === taskType)
+    return headings.length === 1 ? find(headings[0]) : -1
   }
   const scoring = (taskType, from) => {
     const hits = (declarations ?? []).filter(entry => entry.role === 'scoring-heading' && entry.taskType === taskType)
       .map(entry => find(entry)).filter(index => index >= from).sort((a, b) => a - b)
     return hits[0] ?? -1
   }
-  return { sample, scoring, find }
+  return { sample, scoring, find, invalid: [...positions.values()].some(index => index < 0) }
 }
 
 function officialWritingSamples(answerBody, answerDocumentId, issues, sampleRanges = [], writingRoleDeclarations = null) {
   // Agent-declared source roles take precedence over the closed heading grammar.
   if (writingRoleDeclarations?.length) {
-    const { sample, scoring, find } = declaredWritingRanges(answerBody, writingRoleDeclarations, answerDocumentId, issues)
+    const { sample, scoring, find, invalid } = declaredWritingRanges(answerBody, writingRoleDeclarations, answerDocumentId, issues)
+    // A missing declared boundary cannot be replaced by the document end.
+    if (invalid) return { application: null, continuation: null }
     const extract = taskType => {
       const heading = sample(taskType)
       if (heading < 0) {
         const declared = writingRoleDeclarations.find(entry => entry.role === 'sample-heading' && entry.taskType === taskType)
         if (declared) {
           addIssue(issues, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS', 'answers.writingSamples',
-            `Declared ${taskType} sample heading quote was not found in the answer body`, sourceRef(answerDocumentId))
+            `Declared ${taskType} sample has no unique matching heading in the answer body`, sourceRef(answerDocumentId))
         }
         return null
       }
@@ -2308,6 +2310,20 @@ export function produceNck1MaterializationFromStructures({
         listeningSource,
       })
   const listening = listeningResult.materialization
+  // These recognition-only fields are optional. Keep their source/reason in
+  // review, outside the blocking materialization/admission issue channel.
+  const notes = carrierIssues(issues.filter(issue => [
+    'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
+    'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED',
+  ].includes(issue.code)), codePrefix).map(issue => ({
+    ...issue,
+    message: `${issue.path === 'listening.timing' ? 'Listening duration/speed'
+      : `Writing ${Object.keys(officialWritingSamples).filter(task => officialWritingSamples[task] === null).join('/')} officialModelAnswer`} left empty: ${issue.message}`,
+  }))
+  for (let index = issues.length - 1; index >= 0; index--) {
+    if (['NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
+      'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'].includes(issues[index].code)) issues.splice(index, 1)
+  }
   const materialization = {
     schemaVersion: groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
       ? 'nck1-source-materialization-v3'
@@ -2357,6 +2373,7 @@ export function produceNck1MaterializationFromStructures({
       producerVersion,
       sourceDigest,
       required,
+      notes,
       listeningSourcePartition,
       agentTasks: [
         ...SLOT_SPECS.map(([slotId]) => ({

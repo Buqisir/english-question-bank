@@ -165,10 +165,16 @@ test('producer locates identical declared sample headings by item identity and p
   assert.deepEqual(issues, [])
   for (const mismatch of [{ itemId: 'missing' }, { page: 9 }, { quote: 'wrong quote' }]) {
     const invalidIssues = []
-    parseOfficialWritingSamples(body, 'answers', invalidIssues,
-      declarations.map((entry, index) => index === 0 ? { ...entry, ...mismatch } : entry))
+    assert.deepEqual(parseOfficialWritingSamples(body, 'answers', invalidIssues,
+      declarations.map((entry, index) => index === 0 ? { ...entry, ...mismatch } : entry)),
+    { application: null, continuation: null })
     assert(invalidIssues.some(issue => issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
   }
+  const invalidScoring = declarations.map((entry, index) => index === 2 ? { ...entry, quote: 'missing boundary' } : entry)
+  assert.deepEqual(parseOfficialWritingSamples(body, 'answers', [], invalidScoring),
+    { application: null, continuation: null })
+  assert.deepEqual(parseOfficialWritingSamples(body, 'answers', [], [...declarations, declarations[0]]),
+    { application: null, continuation: texts[4] })
 })
 
 test('admission accepts a sealed declaration artifact and rejects a forged one', () => {

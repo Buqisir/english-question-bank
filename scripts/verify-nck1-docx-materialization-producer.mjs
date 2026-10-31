@@ -496,9 +496,12 @@ const suppliedListeningTiming = produceNck1DocxMaterialization({
     listeningTiming: true,
   }).sourceDocuments,
 })
-assert.equal(suppliedListeningTiming.disposition, 'needs_agent_review')
+assert.equal(suppliedListeningTiming.disposition, 'ready_for_verification')
 assert.equal(suppliedListeningTiming.materialization.listening.questions.length, 20)
-assert(suppliedListeningTiming.review.required.some((item) =>
+assert.deepEqual(suppliedListeningTiming.materialization.issues, [])
+assert(suppliedListeningTiming.materialization.listening.timing.every(item => item.kind === 'section1_playback' && item.passes === 1))
+assert(!JSON.stringify(suppliedListeningTiming.materialization.listening.transcript).includes('语速'))
+assert(suppliedListeningTiming.review.notes.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
 const questionByNumber = (result, number) =>
@@ -548,16 +551,16 @@ const bracketedSeconds = produceNck1DocxMaterialization({
   paperId: fixture.paperId,
   documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'metadata' }).sourceDocuments,
 })
-assert.equal(bracketedSeconds.disposition, 'needs_agent_review')
-assert(bracketedSeconds.review.required.some((item) =>
+assert.equal(bracketedSeconds.disposition, 'ready_for_verification')
+assert(bracketedSeconds.review.notes.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
 const unlabelledDuration = produceNck1DocxMaterialization({
   paperId: fixture.paperId,
   documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'duration' }).sourceDocuments,
 })
-assert.equal(unlabelledDuration.disposition, 'needs_agent_review')
-assert(unlabelledDuration.review.required.some((item) =>
+assert.equal(unlabelledDuration.disposition, 'ready_for_verification')
+assert(unlabelledDuration.review.notes.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
 // Metadata labels and repeated pause/replay instructions look like speaker labels but must not
@@ -567,8 +570,8 @@ for (const listeningSeconds of ['note', 'compound', 'instructions', 'replay']) {
     paperId: fixture.paperId,
     documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds }).sourceDocuments,
   })
-  assert.equal(labelledDuration.disposition, 'needs_agent_review', listeningSeconds)
-  assert(labelledDuration.review.required.some((item) =>
+  assert.equal(labelledDuration.disposition, 'ready_for_verification', listeningSeconds)
+  assert(labelledDuration.review.notes.some((item) =>
     item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'), listeningSeconds)
 }
 
@@ -674,8 +677,9 @@ for (const writingShape of ['bare', 'typed', 'typedNoSection', 'chineseLabel', '
 }
 for (const writingShape of ['bareScoringFirst', 'typedScoringOnly', 'missingSection']) {
   const result = produceWith({ writingShape })
-  assert.equal(result.disposition, 'needs_agent_review', writingShape)
-  assert(result.review.required.some((item) =>
+  assert.equal(result.disposition, 'ready_for_verification', writingShape)
+  assert.deepEqual(result.materialization.issues, [])
+  assert(result.review.notes.some((item) =>
     item.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'), writingShape)
   assert.equal(writingSample(result, 'application-writing'), null, writingShape)
 }
@@ -701,7 +705,7 @@ const separatedContinuation = produceWith({ transformXml: xml => xml.replace(
   '第二节：读后续写（满分25分）</w:t></w:r></w:p>',
   '第二节：读后续写（满分25分）</w:t></w:r></w:p><w:p><w:r><w:t>A separate sample.</w:t></w:r></w:p><w:p><w:r><w:t>读后续写</w:t></w:r></w:p>',
 ) })
-assert(separatedContinuation.review.required.some(item =>
+assert(separatedContinuation.review.notes.some(item =>
   item.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
 const noWritingPartTitle = produceWith({ writingShape: 'typedNoSection', transformXml: xml => xml.replace(
   '读后续写:</w:t></w:r></w:p>',
