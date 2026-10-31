@@ -2310,19 +2310,15 @@ export function produceNck1MaterializationFromStructures({
         listeningSource,
       })
   const listening = listeningResult.materialization
-  // These recognition-only fields are optional. Keep their source/reason in
+  // Writing samples are optional. Keep their source/reason in
   // review, outside the blocking materialization/admission issue channel.
-  const notes = carrierIssues(issues.filter(issue => [
-    'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
-    'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED',
-  ].includes(issue.code)), codePrefix).map(issue => ({
+  const notes = carrierIssues(issues.filter(issue =>
+    issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'), codePrefix).map(issue => ({
     ...issue,
-    message: `${issue.path === 'listening.timing' ? 'Listening duration/speed'
-      : `Writing ${Object.keys(officialWritingSamples).filter(task => officialWritingSamples[task] === null).join('/')} officialModelAnswer`} left empty: ${issue.message}`,
+    message: `Writing ${Object.keys(officialWritingSamples).filter(task => officialWritingSamples[task] === null).join('/')} officialModelAnswer left empty: ${issue.message}`,
   }))
   for (let index = issues.length - 1; index >= 0; index--) {
-    if (['NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
-      'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'].includes(issues[index].code)) issues.splice(index, 1)
+    if (issues[index].code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS') issues.splice(index, 1)
   }
   const materialization = {
     schemaVersion: groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))

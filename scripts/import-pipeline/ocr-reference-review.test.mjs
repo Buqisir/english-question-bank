@@ -644,6 +644,21 @@ test('lifecycle scope errors leave unknown writing tasks empty in producer and a
   assert.equal(result.groups[1].essays.state, 'captured')
 })
 
+test('admission shares repeated-part degradation while preserving continuation scoring figures', () => {
+  const input = scoringFiguresFixture({ writingHeading: ['第四部分 写作', '第一节'] })
+  const page = input.confirmation.documents[1].pages[2], proof = input.evidence.documents[1].pages[2]
+  page.visualClassifications = []
+  proof.regions = proof.regions.filter(region => region.kind !== 'visual')
+  page.orderedItems.at(-1).text = proof.observations.at(-1).text = '第四部分 写作\n第一节'
+  reseal(input)
+  const sidecar = captureScoringReferences(input)
+  assert.equal(sidecar.groups[0].essays.state, 'not_supplied')
+  assert.equal(sidecar.groups[0].scoring.state, 'not_supplied')
+  assert.equal(sidecar.groups[1].essays.state, 'captured')
+  assert.equal(sidecar.groups[1].scoring.state, 'captured')
+  assert.doesNotThrow(() => assertSourceReferenceAdmission({ ...input, sidecar }))
+})
+
 test('v22 ends a captured sample at adjacent reading answer pair and retains a later rubric', () => {
   const input = fixture([
     [...heading, line('The last part came', .3), line('true.', .33), line('【A篇】', .4),

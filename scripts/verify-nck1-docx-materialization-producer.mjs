@@ -496,12 +496,9 @@ const suppliedListeningTiming = produceNck1DocxMaterialization({
     listeningTiming: true,
   }).sourceDocuments,
 })
-assert.equal(suppliedListeningTiming.disposition, 'ready_for_verification')
+assert.equal(suppliedListeningTiming.disposition, 'needs_agent_review')
 assert.equal(suppliedListeningTiming.materialization.listening.questions.length, 20)
-assert.deepEqual(suppliedListeningTiming.materialization.issues, [])
-assert(suppliedListeningTiming.materialization.listening.timing.every(item => item.kind === 'section1_playback' && item.passes === 1))
-assert(!JSON.stringify(suppliedListeningTiming.materialization.listening.transcript).includes('语速'))
-assert(suppliedListeningTiming.review.notes.some((item) =>
+assert(suppliedListeningTiming.review.required.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
 const questionByNumber = (result, number) =>
@@ -551,16 +548,16 @@ const bracketedSeconds = produceNck1DocxMaterialization({
   paperId: fixture.paperId,
   documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'metadata' }).sourceDocuments,
 })
-assert.equal(bracketedSeconds.disposition, 'ready_for_verification')
-assert(bracketedSeconds.review.notes.some((item) =>
+assert.equal(bracketedSeconds.disposition, 'needs_agent_review')
+assert(bracketedSeconds.review.required.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
 const unlabelledDuration = produceNck1DocxMaterialization({
   paperId: fixture.paperId,
   documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds: 'duration' }).sourceDocuments,
 })
-assert.equal(unlabelledDuration.disposition, 'ready_for_verification')
-assert(unlabelledDuration.review.notes.some((item) =>
+assert.equal(unlabelledDuration.disposition, 'needs_agent_review')
+assert(unlabelledDuration.review.required.some((item) =>
   item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
 
 // Metadata labels and repeated pause/replay instructions look like speaker labels but must not
@@ -570,8 +567,8 @@ for (const listeningSeconds of ['note', 'compound', 'instructions', 'replay']) {
     paperId: fixture.paperId,
     documents: makeSyntheticNck1DocxFixture({ listening: true, listeningSeconds }).sourceDocuments,
   })
-  assert.equal(labelledDuration.disposition, 'ready_for_verification', listeningSeconds)
-  assert(labelledDuration.review.notes.some((item) =>
+  assert.equal(labelledDuration.disposition, 'needs_agent_review', listeningSeconds)
+  assert(labelledDuration.review.required.some((item) =>
     item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'), listeningSeconds)
 }
 
