@@ -2679,17 +2679,11 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         const pointer = blockPath.replace(/\[(\d+)\]/gu, '/$1').replaceAll('.', '/')
         const derived = derivedBlocks.get(block.blockId)
         if (!derived) throw new Error('OCR emphasis targets a source instruction without a rich-text paragraph')
-        let inlines = null
-        try {
-          inlines = apply(block.source, block.content.map((item, index) => ({
-            text: item.text, pointer: `${pointer}/content/${index}/text`,
-          })), derived.inlines, block.blockId, derivedGroup)
-        } catch (error) {
-          if (!warnings) throw error
-          // Emphasis on an unsupported target drops the marks, not the text.
-          warnings.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_DROPPED',
-            error.message, pointer))
-        }
+        // A mapping failure on a body paragraph the input already consumes
+        // stays blocking: dropping the underline could hide a referenced word.
+        const inlines = apply(block.source, block.content.map((item, index) => ({
+          text: item.text, pointer: `${pointer}/content/${index}/text`,
+        })), derived.inlines, block.blockId, derivedGroup)
         if (inlines) derived.inlines = inlines
       }
       for (const [index, question] of group.questions.entries()) {
@@ -2993,9 +2987,9 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
         input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
         ['4', '5'].includes(resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version),
         [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure, pendingMeasurements,
-        // Only the authority this input currently selects may soften dropped
-        // emphasis to warnings; historical replays keep the hard issue.
-        nck1MaterializationAuthorityForInput(rawInput).manifestDigest === authorityRef.manifestDigest
+        // Only the current authority may soften dropped emphasis to warnings;
+        // replays under any historical authority keep the hard issue.
+        authorityRef.manifestDigest === nck1InImageOptionLabelsV2AuthorityRef.manifestDigest
           ? derivationWarnings : null)
     }
   }
