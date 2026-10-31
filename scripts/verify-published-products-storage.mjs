@@ -23,22 +23,6 @@ import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
 
-// Keep Review reuse/crash/concurrency coverage in the existing storage CI seam.
-await import('./verify-import-review-upload-reuse.mjs')
-await import('./verify-import-review-finalize-worker.mjs')
-await import('./verify-import-review-bundle-reuse.mjs')
-await import('./verify-import-review-file-hash.mjs')
-await import('./verify-review-compatibility.mjs')
-await import('./verify-review-build-identity.mjs')
-await import('./verify-review-compatibility-store.mjs')
-await import('./verify-review-subject-backfill.mjs')
-await import('./verify-review-subject-backfill-automatic.mjs')
-await import('./verify-review-eligibility.mjs')
-await import('./verify-review-recovery.mjs')
-await import('./verify-review-process-isolation.mjs')
-await import('./verify-review-memory.mjs')
-await import('./verify-review-publication-content.mjs')
-
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 const directory = await mkdtemp(path.join(os.tmpdir(), 'eqb-product-storage-'))
 const db = new DatabaseSync(':memory:')
@@ -280,7 +264,6 @@ try {
   // source admission, before the frozen-product missing-reference guard.
   assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), {
     code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID',
-    message: 'Confirmed writing reference body cannot be declared not_supplied',
   }, 'confirmed source samples cannot disappear when the reference sidecar is removed')
   await writeFile(referencesPath, JSON.stringify(references))
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))

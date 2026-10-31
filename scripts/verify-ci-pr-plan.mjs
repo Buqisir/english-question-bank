@@ -43,8 +43,35 @@ assert.equal(parseRiskAdvice(block({ ...suggestion, reason: '##[set-output]x $(e
   'reason remains data, never shell or instructions')
 
 const change = (...paths) => ({ status: 'M', oldMode: '100644', newMode: '100644', paths })
+const reviewEntryPaths = [
+  'import-ops/lib/probe.mjs',
+  'import-ops/public/owner-review.js',
+  'scripts/import-pipeline/canonical-consumption-print-payload.mjs',
+  'scripts/import-pipeline/ocr-source-references-version.mjs',
+  'server/paper-import-ai/paragraphSummaries.mjs',
+  'server/router/index.mjs',
+  'scripts/import-pipeline/review.mjs',
+  'server/answer-renderer.mjs',
+  'server/paper-import/analyzedPackage.mjs',
+  'server/paper-import/sourceReferences.mjs',
+  'server/paper-import/sourceReferencePublication.mjs',
+  'server/paper-import/sourceReferenceSemantics.mjs',
+  'server/paper-import/pdfProductSet.mjs',
+  'server/paper-import/spellingReview.mjs',
+]
 for (const [files, pack] of [
+  ...reviewEntryPaths.map(file => [[file], 'all']),
   [['README.md'], 'ui'],
+  [['docs/agents/testing-cadence.md'], 'ui'],
+  [['docs/product/example.md'], 'ui'],
+  [['DESIGN.md', 'PRODUCT.md'], 'ui'],
+  [['app/src/features/paper-browse/paperBrowsePage.css'], 'feature'],
+  [['app/src/features/draft-paper/DraftPaperWorkbench.css'], 'feature'],
+  [['app/src/shared-ui/papersurface/PaperSurface.tsx'], 'all'],
+  [['shared/paper-canonical/schema.mjs'], 'all'],
+  [['server/print-renderer.mjs'], 'all'],
+  [['server/paper-import/frozenProducts.mjs'], 'all'],
+  [['scripts/import-pipeline/fast-import.mjs'], 'feature'],
   [['app/src/shared-ui/tokens.css'], 'ui'],
   [['app/src/concierge/conciergeSearch.ts'], 'feature'],
   [['test-fixtures/paper-import/example.json'], 'paper-data'],
@@ -68,7 +95,7 @@ for (const [files, pack] of [
   [['scripts/amp-orb-deploy.mjs'], 'all'],
   [['.github/workflows/verify.yml'], 'all'],
   [['AGENTS.md'], 'all'],
-  [['docs/agents/new-rule.md'], 'all'],
+  [['docs/agents/new-rule.md'], 'ui'],
   [['scripts/ci-pr-plan.mjs'], 'all'],
   [['scripts/lib/ampOrbCIPolicy.mjs'], 'all'],
   [['scripts/verify-ci.mjs'], 'all'],
@@ -225,6 +252,38 @@ for (const script of [
   for (const [pack, scripts] of Object.entries(registry.packs)) {
     if (pack !== 'all') assert(!scripts.includes(script), `${script}: exclude from ${pack}`)
   }
+}
+// Splitting the old storage wrapper retains every child exactly once in Full
+// and keeps storage/Review regressions off ordinary feature and UI changes.
+const storageChildren = [
+  'scripts/verify-published-products-storage.mjs',
+  'scripts/verify-import-review-upload-reuse.mjs',
+  'scripts/verify-import-review-finalize-worker.mjs',
+  'scripts/verify-import-review-bundle-reuse.mjs',
+  'scripts/verify-import-review-file-hash.mjs',
+  'scripts/verify-review-compatibility.mjs',
+  'scripts/verify-review-build-identity.mjs',
+  'scripts/verify-review-compatibility-store.mjs',
+  'scripts/verify-review-subject-backfill.mjs',
+  'scripts/verify-review-subject-backfill-automatic.mjs',
+  'scripts/verify-review-eligibility.mjs',
+  'scripts/verify-review-recovery.mjs',
+  'scripts/verify-review-process-isolation.mjs',
+  'scripts/verify-review-memory.mjs',
+  'scripts/verify-review-publication-content.mjs',
+]
+for (const script of storageChildren) {
+  assert.equal(registry.packs.all.filter(entry => entry === script).length, 1)
+  assert(registry.packs.security.includes(script), `${script}: storage/Review coverage`)
+  for (const pack of ['ui', 'feature', 'paper', 'paper-data', 'import-paper']) {
+    assert(!registry.packs[pack].includes(script), `${script}: exclude from ${pack}`)
+  }
+}
+for (const file of reviewEntryPaths) {
+  const plan = JSON.parse(execFileSync(process.execPath,
+    ['scripts/verify-ci.mjs', '--plan-json', '--changed-file', file], { encoding: 'utf8' }))
+  assert.equal(plan.pack, 'security', file)
+  for (const script of storageChildren) assert(plan.scripts.includes(script), `${file}: retain ${script}`)
 }
 for (const pack of Object.keys(registry.packs)) {
   const plan = (lane, shard = 'all') => JSON.parse(execFileSync(process.execPath,

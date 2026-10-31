@@ -20,8 +20,11 @@ process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
 const { makeReviewRoot } = await import('./verify-universal-nck1-publish.mjs')
 if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
-const temporaryRoot = realpathSync(tmpdir())
-const root = mkdtempSync(path.join(temporaryRoot, 'eqb-review-auto-backfill-'))
+const root = mkdtempSync(path.join(realpathSync(tmpdir()), 'eqb-review-auto-backfill-'))
+// Observe only this verifier's workers, including the API's inherited workspace.
+const temporaryRoot = root
+const previousTmpdir = process.env.TMPDIR
+process.env.TMPDIR = temporaryRoot
 const repository = path.resolve(import.meta.dirname, '..')
 const dbPath = path.join(root, 'review.sqlite'), filesRoot = path.join(root, 'files')
 const dbRun = (file, fn) => {
@@ -279,5 +282,7 @@ try {
   console.log('PASS changed original evidence retries once; subjects/attempts remain append-only and original revision/preview/approval rows stay unchanged')
 } finally {
   if (api && api.exitCode === null) { api.kill('SIGKILL'); await exit }
+  if (previousTmpdir === undefined) delete process.env.TMPDIR
+  else process.env.TMPDIR = previousTmpdir
   rmSync(root, { recursive: true, force: true })
 }
