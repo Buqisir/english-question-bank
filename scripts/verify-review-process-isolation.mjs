@@ -16,6 +16,9 @@ import { killReviewProcessTree } from '../server/import-review/reviewProcessTree
 import { reviewCompatibilityLockDiagnostics } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-review-process-'))
+// Parallel Review verifiers must not share the workspace cleanup assertion.
+const previousTmpdir = process.env.TMPDIR
+process.env.TMPDIR = root
 const server = createServer((_request, response) => response.end('alive'))
 try {
   let invoked = 0
@@ -120,5 +123,7 @@ try {
   delete process.env.REVIEW_TEST_PID
   delete process.env.EQB_REVIEW_COMPATIBILITY_AUTORUN
   await new Promise(resolve => server.close(resolve))
+  if (previousTmpdir === undefined) delete process.env.TMPDIR
+  else process.env.TMPDIR = previousTmpdir
   rmSync(root, { recursive: true, force: true })
 }
