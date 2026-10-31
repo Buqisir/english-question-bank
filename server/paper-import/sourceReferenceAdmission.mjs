@@ -358,7 +358,12 @@ function assertSourceReferenceContent({
     explanationFigures.has(sourceReferenceFigureIdentity(reference)) && reference.sourceRegionId === figure.sourceRegionId))) {
     reject('An excluded explanation figure cannot also appear in writing references')
   }
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected, { producerVersion, materialization, roleDeclarations: roleDeclarations(confirmation) })
+  // writingStates already projects task degradation, and the complete producer
+  // baseline checks the resulting groups. These auxiliary scope passes must
+  // use that same lifecycle degradation path instead of rethrowing its errors.
+  const scopeOptions = { producerVersion, materialization, roleDeclarations: roleDeclarations(confirmation),
+    onScopeError: () => {} }
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, answerIds, allExpected, scopeOptions)
   const expected = allExpected.filter(reference => !explanationFigures.has(sourceReferenceFigureIdentity(reference))
     && (!objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
@@ -370,7 +375,7 @@ function assertSourceReferenceContent({
   const paragraphs = sidecar.groups.flatMap(group => group.essays.entries.flatMap(entry =>
     entry.paragraphs.map(paragraph => ({ group, entry, paragraph }))))
   const illustratedDocuments = new Set(allExpected.map(reference => reference.source.documentId))
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion, materialization, roleDeclarations: roleDeclarations(confirmation) })
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, answerIds, scopeOptions)
   const pictureItems = new Set(allExpected.flatMap(reference => reference.itemIds))
   const sourceOrder = new Map(), sourceOwners = new Map()
   for (const document of confirmation.documents) {

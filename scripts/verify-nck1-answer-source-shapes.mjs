@@ -102,6 +102,20 @@ function assertRejected(produced, documents, code) {
   assert(imported.issues.length > 0)
 }
 
+function assertWritingSamplesUnavailable(produced, documents, blockingCode = null) {
+  // Only optional samples degrade. Any independent question-content blocker
+  // must still reject the Candidate instead of being hidden by the soft note.
+  if (blockingCode) assertRejected(produced, documents, blockingCode)
+  else assertReady(produced, documents, 'DETAIL_TOKEN_MUST_NOT_LEAK')
+  assert.deepEqual(produced.materialization.groups.filter(group => group.writingTask)
+    .map(group => group.writingTask.officialModelAnswer), [null, null])
+  assert(produced.review.notes.some(issue =>
+    issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+  assert(!produced.review.required.some(issue =>
+    issue.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
+  assert.deepEqual(answerValues(produced), answerValues(keyOnlyDocxResult))
+}
+
 const detailedDocx = makeSyntheticNck1DocxFixture()
 const keyOnlyDocx = makeSyntheticNck1DocxFixture({ answerShape: 'key_only' })
 const detailedDocxResult = produceNck1DocxMaterialization({
@@ -160,9 +174,9 @@ const unlabelledScoringFirst = makeSyntheticNck1DocxFixture({
   transformXml: xml => xml.replace('第一节：应用文（满分15分）',
     '第一节（满分15分）</w:t></w:r></w:p><w:p><w:r><w:t>一、本题总分为15分，按5个档次给分。'),
 })
-assertRejected(produceNck1DocxMaterialization({
+assertWritingSamplesUnavailable(produceNck1DocxMaterialization({
   paperId: unlabelledScoringFirst.paperId, documents: unlabelledScoringFirst.sourceDocuments,
-}), unlabelledScoringFirst.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+}), unlabelledScoringFirst.sourceDocuments)
 
 const multilineDocx = makeSyntheticNck1DocxFixture({ answerShape: 'key_only', multilineAnswers: true })
 const multilineDocxResult = produceNck1DocxMaterialization({
@@ -316,7 +330,7 @@ for (const [between, accepted] of [['第一节（满分15分）', true], ['Some 
   })
   const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
   if (accepted) assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
-  else assertRejected(result, fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+  else assertWritingSamplesUnavailable(result, fixture.sourceDocuments)
 }
 
 // The key's Chinese commentary after a sample is not sample text; Chinese version labels still are.
@@ -418,9 +432,9 @@ for (const scoringMention of ['评分时可参考 Version one 的结构。', 'Ve
     transformXml: xml => xml.replace('第一节：应用文（满分15分）',
       `第一节：应用文（满分15分）</w:t></w:r></w:p>${broadcastParagraph('一、评分原则')}<w:p><w:r><w:t>${scoringMention}`),
   })
-  assertRejected(produceNck1DocxMaterialization({
+  assertWritingSamplesUnavailable(produceNck1DocxMaterialization({
     paperId: fixture.paperId, documents: fixture.sourceDocuments,
-  }), fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+  }), fixture.sourceDocuments)
 }
 // A version label cannot erase an essay title, salutation or sentence already
 // present before it, including the review's exact two-drafts example.
@@ -436,9 +450,9 @@ for (const label of ['Version one:', 'Version 1:', '一、Version one:', '(一) 
         [opening, 'Our club compared two drafts for the final announcement.', label]
           .map(broadcastParagraph).join('')),
     })
-    assertRejected(produceNck1DocxMaterialization({
+    assertWritingSamplesUnavailable(produceNck1DocxMaterialization({
       paperId: fixture.paperId, documents: fixture.sourceDocuments,
-    }), fixture.sourceDocuments, 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS')
+    }), fixture.sourceDocuments, 'NCK1_DOCX_WRITING_SKELETON_AMBIGUOUS')
   }
 }
 // Equal text in an earlier sample is not proof of ownership of this count.

@@ -674,8 +674,9 @@ for (const writingShape of ['bare', 'typed', 'typedNoSection', 'chineseLabel', '
 }
 for (const writingShape of ['bareScoringFirst', 'typedScoringOnly', 'missingSection']) {
   const result = produceWith({ writingShape })
-  assert.equal(result.disposition, 'needs_agent_review', writingShape)
-  assert(result.review.required.some((item) =>
+  assert.equal(result.disposition, 'ready_for_verification', writingShape)
+  assert.deepEqual(result.materialization.issues, [])
+  assert(result.review.notes.some((item) =>
     item.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'), writingShape)
   assert.equal(writingSample(result, 'application-writing'), null, writingShape)
 }
@@ -701,7 +702,7 @@ const separatedContinuation = produceWith({ transformXml: xml => xml.replace(
   '第二节：读后续写（满分25分）</w:t></w:r></w:p>',
   '第二节：读后续写（满分25分）</w:t></w:r></w:p><w:p><w:r><w:t>A separate sample.</w:t></w:r></w:p><w:p><w:r><w:t>读后续写</w:t></w:r></w:p>',
 ) })
-assert(separatedContinuation.review.required.some(item =>
+assert(separatedContinuation.review.notes.some(item =>
   item.code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS'))
 const noWritingPartTitle = produceWith({ writingShape: 'typedNoSection', transformXml: xml => xml.replace(
   '读后续写:</w:t></w:r></w:p>',
