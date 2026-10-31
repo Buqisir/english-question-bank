@@ -1,5 +1,11 @@
 # launch-deploy — first-provision runbook
 
+> **历史，不再执行。** 本文的首次开通、旧重部署、bootstrap、
+> `reviewed-persistence`、`update-host-config`、TAT/barrier 流程仅留作历史证据。
+> 日常部署只看 [AGENTS.md 的部署章节](../../../AGENTS.md#owner-mac-deployment)
+> 和 `scripts/local-deploy.sh`：`scripts/local-deploy.sh deploy --owner-said-deploy-latest`。
+> 入口自动读取生产版本并计算 code-only 路径摘要；真实迁移仍需单独明确范围。
+
 > Current deployment control plane: follow
 > [controlled SSH maintenance](../controlled-ssh-maintenance/plan.md).
 > The first-provision/TAT/bootstrap/barrier procedures below are historical,
@@ -10,6 +16,9 @@
 > reconciliation, health and agreed recovery share one authorization. Historical
 > per-step approvals below are not current rules. A code-only Goal excludes
 > entry/DB/R2 changes; never use the legacy in-place redeploy.
+
+<details>
+<summary>历史首次开通与退役部署流程（不再执行）</summary>
 
 Ordered, one-time manual steps to bring `eqbank.cc` up on a fresh server.
 Everything after first provision is `scripts/deploy.sh` (redeploy) and, once
@@ -188,6 +197,9 @@ curl -s https://eqbank.cc/api/health
 
 ## Redeploys
 
+> **历史，不再执行。** 本节的 `deploy.sh` / `deploy-remote.sh` 与下列旧 CLI
+> 不再作为日常入口；现行命令见 `AGENTS.md` 的部署章节 / `scripts/local-deploy.sh`。
+
 After first provision, use `scripts/deploy.sh` (fetch/update → install → build →
 restart → health smoke) for every subsequent code update. It's idempotent
 and safe to re-run.
@@ -206,7 +218,7 @@ webhook outage, pinned SSH trust, staged immutable releases, atomic activation,
 and automatic rollback. Both checks must be successful GitHub Actions checks
 from the same workflow run; `verify (manual)` and `e2e (manual)` do not qualify.
 
-The repository exposes:
+Historical repository CLI (retired names below are not executable instructions):
 
 ```bash
 node scripts/amp-orb-deploy.mjs plan
@@ -321,7 +333,10 @@ legacy baseline operator as an advancement mechanism. Use the maintenance
 decision table below; later authenticated API writes are not actions performed
 or authorized by any deployment command.
 
-| Candidate diff | Required sequence after merge and authoritative CI |
+> **历史决策表，不再执行。** 下表记录退役维护命令之间的先后关系，
+> 不用于决定今天的操作；现行命令见 `AGENTS.md` 的部署章节 / `scripts/local-deploy.sh`。
+
+| Historical candidate diff | Historical sequence (retired) |
 | --- | --- |
 | no protected path | `preflight`, then ordinary `deploy` |
 | only versioned controller/unit/Caddy | `update-host-config`, then ordinary `deploy` |
@@ -357,7 +372,10 @@ The stable root dispatcher detects this active transaction and runs its private
 copy of the previous controller module, so interruption after pointer switch
 does not delegate rollback to unproven new controller code.
 
-### One-time Tencent S2 maintenance-controller installation
+### Historical one-time Tencent S2 maintenance-controller installation
+
+> **历史，不再执行。** 以下 TAT、bootstrap、barrier 和 finalize 步骤保留为证据，
+> 不构成当前操作指令；现行命令见 `AGENTS.md` 的部署章节 / `scripts/local-deploy.sh`。
 
 The current Tencent host was bootstrapped before the versioned controller
 layout existed. After this maintenance implementation is merged and its exact
@@ -805,6 +823,8 @@ Repository readiness still grants no production authority. Before cutover:
 The first real Orb deployment then needs a separate direct Owner authorization.
 Thereafter the Owner's normal daily instruction is only `部署最新版`; no Mac or
 handwritten SHA is involved.
+
+</details>
 
 ## Backup + content operations
 

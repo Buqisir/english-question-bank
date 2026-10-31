@@ -1,5 +1,11 @@
 # Controlled SSH maintenance migration
 
+> **日常入口：** 现行命令见 [AGENTS.md 的部署章节](../../../AGENTS.md#owner-mac-deployment)
+> / `scripts/local-deploy.sh`：`scripts/local-deploy.sh deploy --owner-said-deploy-latest`。
+> 文末「Historical entry migration」及其折叠内容是**历史，不再执行**；
+> 退役的 bootstrap/TAT/barrier/install/status 不是日常部署步骤。
+> 下方单次 controller host upgrade 是专门维护记录，不属于普通网站部署。
+
 ## Incident repair: single daily deployment command
 
 The Owner superseded the daily transaction-bound protocol below after the
@@ -12,9 +18,15 @@ maintenance command names are not daily deployment operations.
 
 `deploy --owner-said-deploy-latest` still resolves and rechecks exact current
 main against natural Hosted verify/e2e authority. A protected-path difference
-is a review trigger, not proof of a database mutation. For a reviewed code-only
-delta, add `--reviewed-code-only-digest <protected-path-digest>`; the host
-recomputes that digest against its current release before preparation. No SQL
+is a review trigger, not proof of a database mutation. Without a manual
+classification flag, the local entry reads the production SHA through the
+existing read-only preflight and automatically calculates the code-only digest
+from the protected paths between that SHA and target main. It uses the existing
+SHA-256 algorithm (sorted paths joined by LF, including a terminal LF).
+An empty protected diff stays ordinary deployment; a `data/sql` diff refuses
+automatic code-only classification. Explicit `--reviewed-code-only-digest`
+and `--reviewed-migration-digest` remain compatible and skip automatic evidence
+collection. The host recomputes the digest against its current release before preparation. No SQL
 text heuristic is used. Candidate startup runs on disposable online SQLite
 copies with a private network and read-only filesystem outside its temporary
 directory; those copies are not an offline cross-database recovery point.
@@ -302,6 +314,12 @@ authorized merely by this document.
 
 ## Historical entry migration
 
+> **历史，不再执行。** 以下安装、UUID status 和 TAT 流程仅为历史证据。
+> 现行命令见 `AGENTS.md` 的部署章节 / `scripts/local-deploy.sh`。
+
+<details>
+<summary>历史 entry migration 设计与命令（已退役，不再执行）</summary>
+
 The remainder records the superseded migration design, not current commands or
 additional authorization steps. Do not execute its retired install/status route.
 
@@ -477,3 +495,5 @@ operation or roll back after subsequent work. An ordinary website deployment is
 then the existing one-command `deploy --owner-said-deploy-latest`; actual
 persistence or host-file changes retain their explicit reviewed commands. No
 generic recovery command or multi-stage bootstrap activation is introduced.
+
+</details>

@@ -994,6 +994,63 @@ await deployLatestRelease({
   },
 })
 
+// Automatic digest coverage: all dependencies below are offline fixtures.
+for (const paths of [[], ['server/vocabulary/vocabularyStore.mjs', 'server/api.mjs']]) {
+  const order = []
+  await deployLatestRelease({
+    argv: ['deploy', '--owner-said-deploy-latest'],
+    resolveCandidate: async () => candidate,
+    revalidateCandidate: async () => { order.push('recheck') },
+    readProductionSha: async () => { order.push('preflight'); return oldSha },
+    readChangedPaths: async (previous, target, protectedPaths) => {
+      assert(previous === oldSha && target === newSha && protectedPaths === EQB_PERSISTENCE_AUTHORITY_PATHS,
+        'automatic digest compares production to the exact candidate using the existing protected paths')
+      order.push('diff')
+      return paths
+    },
+    invokeController: async (sha, classification, digest) => {
+      assert(sha === newSha && classification === (paths.length ? 'code-only' : undefined)
+        && digest === (paths.length ? createHash('sha256').update(`${[...paths].sort().join('\n')}\n`).digest('hex') : undefined),
+      'automatic digest preserves sorted paths, terminal LF and unclassified empty diff')
+      order.push('deploy')
+      return controllerReceipt()
+    },
+  })
+  assert(order.join(',') === 'recheck,preflight,diff,recheck,deploy',
+    'automatic classification rechecks authority after read-only evidence and before mutation')
+}
+for (const [productionSha, paths, message] of [
+  [oldSha, ['data/sql/schema.sql'], 'migration scope'],
+  ['invalid', [], 'production SHA'],
+  [oldSha, ['app/src/App.tsx'], 'changed-path evidence'],
+  [oldSha, ['server/api.mjs', 'server/api.mjs'], 'duplicates'],
+]) {
+  let invoked = false
+  let rejected = false
+  try {
+    await deployLatestRelease({
+      argv: ['deploy', '--owner-said-deploy-latest'],
+      resolveCandidate: async () => candidate,
+      revalidateCandidate: async () => {},
+      readProductionSha: async () => productionSha,
+      readChangedPaths: async () => paths,
+      invokeController: async () => { invoked = true; return controllerReceipt() },
+    })
+  } catch (error) { rejected = error.message.includes(message) }
+  assert(rejected && !invoked, 'SQL scope or invalid automatic evidence stops before deployment')
+}
+await deployLatestRelease({
+  argv: ['deploy', '--owner-said-deploy-latest', '--reviewed-code-only-digest', 'a'.repeat(64)],
+  resolveCandidate: async () => candidate,
+  revalidateCandidate: async () => {},
+  readProductionSha: async () => { throw new Error('manual override must skip preflight') },
+  readChangedPaths: async () => { throw new Error('manual override must skip diff') },
+  invokeController: async (sha, classification, digest) => {
+    assert(classification === 'code-only' && digest === 'a'.repeat(64), 'manual classification remains unchanged')
+    return controllerReceipt({ targetSha: sha })
+  },
+})
+
 let staleInvoked = false
 assert(
   await (async () => {
@@ -1526,6 +1583,8 @@ await deployLatestRelease({
   argv: ['deploy', '--owner-said-deploy-latest', '--reviewed-migration-digest', persistenceDigest],
   resolveCandidate: async () => candidate,
   revalidateCandidate: async () => {},
+  readProductionSha: async () => { throw new Error('explicit migration must skip automatic preflight') },
+  readChangedPaths: async () => { throw new Error('explicit migration must skip automatic diff') },
   async invokeController(sha, classification, digest) {
     assert(sha === newSha && classification === 'migrate' && digest === persistenceDigest,
       'CLI carries reviewed migration classification and digest to the exact controller target')

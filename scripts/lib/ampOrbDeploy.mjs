@@ -2131,6 +2131,8 @@ export async function deployLatestRelease({
   argv,
   resolveCandidate,
   revalidateCandidate,
+  readProductionSha,
+  readChangedPaths,
   invokeController,
 } = {}) {
   requireDeployLatestAuthorization(argv)
@@ -2146,14 +2148,35 @@ export async function deployLatestRelease({
   ].includes(value))
   if (classificationFlags.length > 1) throw new Error('Choose one reviewed deployment classification')
   const classificationFlag = classificationFlags[0]
-  const digest = classificationFlag ? argv[argv.indexOf(classificationFlag) + 1] : undefined
+  let digest = classificationFlag ? argv[argv.indexOf(classificationFlag) + 1] : undefined
   if (classificationFlag && !/^[a-f0-9]{64}$/u.test(digest || '')) {
     throw new Error('Reviewed deployment classification requires an exact protected-path digest')
   }
-  const classification = classificationFlag
+  let classification = classificationFlag
     ? (classificationFlag === '--reviewed-code-only-digest' ? 'code-only' : 'migrate') : undefined
   const candidate = await resolveCandidate()
   await revalidateCandidate(candidate)
+  if (!classificationFlag && (readProductionSha || readChangedPaths)) {
+    if (typeof readProductionSha !== 'function' || typeof readChangedPaths !== 'function') {
+      throw new Error('Automatic deployment classification dependencies are missing')
+    }
+    const productionSha = assertSha(await readProductionSha(), 'production SHA')
+    const changedPaths = await readChangedPaths(productionSha, candidate.sha, EQB_PERSISTENCE_AUTHORITY_PATHS)
+    if (!Array.isArray(changedPaths) || changedPaths.some(filePath =>
+      typeof filePath !== 'string' || !EQB_PERSISTENCE_AUTHORITY_PATHS.some(protectedPath =>
+        filePath === protectedPath || filePath.startsWith(`${protectedPath}/`)))) {
+      throw new Error('Deployment protected changed-path evidence is invalid')
+    }
+    // SQL changes need explicit migration scope; never infer it from SQL text.
+    if (changedPaths.some(filePath => filePath === 'data/sql' || filePath.startsWith('data/sql/'))) {
+      throw new Error('SQL changes require separately reviewed migration scope; automatic code-only classification refused')
+    }
+    if (changedPaths.length > 0) {
+      classification = 'code-only'
+      digest = deploymentChangedPathDigest(changedPaths)
+    }
+    await revalidateCandidate(candidate)
+  }
   const parseReceipt = classification === 'migrate'
     ? parseReviewedPersistenceControllerOutput : parseDeploymentControllerOutput
   const receipt = parseReceipt(
