@@ -1043,6 +1043,23 @@ for (const [productionSha, paths, message] of [
   }
   assert(rejected && !invoked, 'undeclared protected changes list paths and stop before deployment, as does invalid evidence')
 }
+{
+  let invoked = false
+  let rejected = false
+  try {
+    await deployLatestRelease({
+      argv: ['deploy', '--owner-said-deploy-latest', '--migration'],
+      resolveCandidate: async () => candidate,
+      revalidateCandidate: async () => {},
+      readProductionSha: async () => newSha,
+      readChangedPaths: async () => [],
+      invokeController: async () => { invoked = true; return controllerReceipt() },
+    })
+  } catch (error) {
+    rejected = error.message.includes('先对账，用保留的原摘要通过 --reviewed-migration-digest 进入恢复')
+  }
+  assert(rejected && !invoked, 'empty migration diff refuses downgrade and points to retained-digest recovery')
+}
 await deployLatestRelease({
   argv: ['deploy', '--owner-said-deploy-latest', '--reviewed-code-only-digest', 'a'.repeat(64)],
   resolveCandidate: async () => candidate,

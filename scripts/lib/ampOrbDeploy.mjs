@@ -2174,6 +2174,9 @@ export async function deployLatestRelease({
         throw new Error(`请判断是否含迁移，然后加 --code-only 或 --migration。变化的保护路径：\n${changedPaths.join('\n')}`)
       }
     } else {
+      if (classification === 'migrate') {
+        throw new Error('迁移保护路径差异为空：先对账，用保留的原摘要通过 --reviewed-migration-digest 进入恢复')
+      }
       classification = undefined
     }
     await revalidateCandidate(candidate)
