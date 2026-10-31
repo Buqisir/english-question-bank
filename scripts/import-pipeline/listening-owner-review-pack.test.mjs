@@ -324,6 +324,30 @@ test('rejects source-directory/symlink output, bad selections, changed audio and
   } finally { rmSync(f.temp, { recursive: true, force: true }) }
 })
 
+test('printed count does not discard complete audio readings; incomplete bounded evidence stays unsegmented', () => {
+  const f = fixture()
+  try {
+    const file = path.join(f.attempt, 'rule-result.json')
+    put(file, { groups: [{ ...f.group, expectedReadings: 1 }] })
+    const m = buildReviewPack(f)
+    assert.equal(m.segments[0].expectedReadings, 1, 'retain the printed count')
+    assert.deepEqual(m.segments[0].readings.map(r => r.reading), [1, 2])
+    const words = f.group.observedWindows[0].words.filter(w => w.startSeconds >= 8)
+    put(file, { groups: [{ ...f.group, orderEvidence: { afterSeconds: 1, beforeSeconds: 14 },
+      observedWindows: [{ words, evidencePaths: [] }] }] })
+    const output = path.join(f.temp, 'window-pack')
+    const fallback = buildReviewPack({ ...f, output }).segments[0].readings
+    assert.equal(fallback.length, 1)
+    assert.equal(fallback[0].reading, null)
+    assert.equal(fallback[0].status, 'unsegmented')
+    assert.deepEqual(fallback[0].clips.map(c => [c.kind, c.sourceStartSeconds, c.sourceEndSeconds]),
+      [['window', 1, 14]])
+    const html = readFileSync(path.join(output, 'index.html'), 'utf8')
+    assert.ok(html.includes('未分遍'))
+    assert.ok(!html.includes('第 null 遍'))
+  } finally { rmSync(f.temp, { recursive: true, force: true }) }
+})
+
 test('one-reading source stays one reading; ASR silence absorption retains raw edges and signal reconciliation', () => {
   const f = fixture()
   try {
