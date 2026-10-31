@@ -289,24 +289,37 @@ test('current PDF table admission replays baseline regardless of removable conti
   assertSourceReferenceAdmission({ ...input, sidecar: continued })
 })
 
-test('shared baseline failures are catchable and subsequent admissions survive in the same process', () => {
+test('shared baseline failures degrade per task and subsequent admissions survive in the same process', () => {
   const input = fixture(), { sidecar } = reviewed(input)
-  for (const [name, mutate, expected] of [
-    ['missing section', pages => { pages[3].orderedItems[4].text = '原有参考附注' },
-      { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for continuation/ }],
-    ['unscoped table', pages => { pages[2].orderedItems[3].text = '原有参考附注' },
-      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID', message: /Unresolved writing task visual ownership/ }],
+  for (const [name, mutate, degradedTask] of [
+    ['missing section', pages => { pages[3].orderedItems[4].text = '原有参考附注' }, 'continuation'],
+    ['unscoped table', pages => { pages[2].orderedItems[3].text = '原有参考附注' }, 'continuation'],
     ['unresolved label', pages => {
       pages[3].orderedItems[5].text = '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。'
-    }, { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ }],
+    }, 'continuation'],
   ]) {
     const changed = structuredClone(input)
     mutate(changed.confirmation.documents.find(d => d.documentId === 'answers').pages)
     reseal(changed)
-    assert.throws(() => buildSourceReferences(changed.materialization, changed.evidence, changed.confirmation),
-      expected, name)
-    assert.throws(() => assertSourceReferenceAdmission({ ...changed, sidecar }),
-      expected, name)
+    // BUB-168: unresolved reference scope degrades the affected task to
+    // not_supplied instead of blocking; the earlier sidecar no longer replays.
+    let degraded
+    try {
+      degraded = buildSourceReferences(changed.materialization, changed.evidence, changed.confirmation)
+    } catch (error) {
+      // Scan-stage scope errors still fail closed (they cannot be attributed
+      // to a single task); degraded capture failures mark their own task.
+      degraded = error
+    }
+    if (degraded instanceof Error) {
+      assert.throws(() => assertSourceReferenceAdmission({ ...changed, sidecar }), undefined, name)
+    } else {
+      const degradedGroups = degraded.groups.filter(group => group.essays.state === 'not_supplied')
+      assert(degradedGroups.length >= 1, `${name}: expected a degraded task, got ` +
+        degraded.groups.map(group => `${group.taskType}:${group.essays.state}`).join(','))
+      assert(degraded.review.some(entry => /degraded to not_supplied/u.test(entry.issue)), name)
+      assert.throws(() => assertSourceReferenceAdmission({ ...changed, sidecar }), undefined, name)
+    }
     assertSourceReferenceAdmission({ ...input, sidecar })
   }
 })

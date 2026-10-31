@@ -98,7 +98,7 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
     const file = verifiedFile(pdf, baseDirectory)
     const info = execFileSync('pdfinfo', [file], { encoding: 'utf8' })
     const actualPages = Number(info.match(/^Pages:\s+(\d+)/m)?.[1])
-    const atMost = longPaper || (products && (id !== 'economy8' || economyPageLimit === 9))
+    const atMost = longPaper || (products && (id !== 'economy8' || economyPageLimit >= 9))
     if (!Number.isInteger(actualPages) || actualPages < 1 || (pages !== null && (atMost ? actualPages > pages : actualPages !== pages))) {
       fail(`${id} page count differs from edition`)
     }

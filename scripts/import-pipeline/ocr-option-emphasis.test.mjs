@@ -6,7 +6,7 @@ import { makeSyntheticNck1OcrFixture } from '../../test-fixtures/paper-import/nc
 import { produceNck1OcrMaterialization } from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { deriveNck1MaterializationBundle, withNck1MaterializationSourceCache } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
-import { nck1ListeningSourceDecisionAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
+import { nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { buildNck1ReviewConsumption, buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { makeOptionEmphasisMediaFixture, writeOptionEmphasisMediaReviewFixture } from '../../test-fixtures/paper-import/nck1-ocr-evidence-v1/option-emphasis-media.mjs'
 import { materializeNck1CanonicalRequest, admitLiveConfirmedNck1MaterializationImport, isLiveConfirmedNck1MaterializationAdmission } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
@@ -90,6 +90,64 @@ test('OCR body and option splits use their authority typography version while pr
       assert.equal(inlines.filter(node => node.marks?.includes(mark)).map(node => node.text).join(''), text.slice(start, end))
     }
   }
+})
+test('a consumed body emphasis mapping failure stays blocking under the current authority', async () => {
+  const f = await makeSyntheticNck1OcrFixture()
+  const confirmation = structuredClone(f.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
+  const body = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.text === 'A passage keeps one small promise.')
+  assert(body)
+  body.text = 'A passage keeps one small promise.'
+  body.sourceEmphasis = [{ start: 2, end: 9, marks: ['underline'] }]
+  const produced = produceNck1OcrMaterialization({ paperId: f.paperId, documents: f.sourceDocuments,
+    evidence: f.evidence, confirmation })
+  assert.equal(produced.disposition, 'ready_for_verification', JSON.stringify(produced.issues))
+  const encode = value => Buffer.from(JSON.stringify(value))
+  const input = { kind: 'nck1-source-materialization',
+    materializationBytes: encode(produced.materialization),
+    documents: f.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })),
+    media: produced.mediaFiles || [], ocrSourceBytes: { evidenceBytes: encode(f.evidence), confirmationBytes: encode(confirmation) } }
+  // Mutating the confirmed text after production makes the materialized body
+  // text differ from the marked paragraph: this entered the consumption path
+  // and must keep blocking instead of silently dropping the underline.
+  const mismatched = structuredClone(confirmation)
+  const target = mismatched.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.itemId === body.itemId)
+  target.text = 'A passage keeps one small promise differently.'
+  const derived = deriveNck1MaterializationBundle({ ...input,
+    ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(mismatched) } },
+    nck1InImageOptionLabelsV2AuthorityRef)
+  assert(derived.issues.some(issue => issue.code === 'MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED'
+    && /does not match the exact materialized text/u.test(issue.message)), JSON.stringify(derived.issues))
+  assert.equal((derived.warnings || []).length, 0)
+})
+test('unmatched emphasis under a historical authority stays a hard issue, not a drop', async () => {
+  const f = await makeSyntheticNck1OcrFixture()
+  const confirmation = structuredClone(f.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
+  // Emphasis on a paragraph no canonical surface consumes (the passage letter
+  // heading): current authority drops it with a warning; replaying the same
+  // bytes under the input-selected historical authority must keep failing.
+  const heading = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.text === 'A' && item.itemId.endsWith(':item-5'))
+  assert(heading)
+  heading.sourceEmphasis = [{ start: 0, end: 1, marks: ['bold'] }]
+  const produced = produceNck1OcrMaterialization({ paperId: f.paperId, documents: f.sourceDocuments,
+    evidence: f.evidence, confirmation })
+  assert.equal(produced.disposition, 'ready_for_verification', JSON.stringify(produced.issues))
+  const encode = value => Buffer.from(JSON.stringify(value))
+  const materialization = { ...produced.materialization, schemaVersion: 'nck1-source-materialization-v11' }
+  const input = { kind: 'nck1-source-materialization', materializationBytes: encode(materialization),
+    documents: f.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })),
+    media: produced.mediaFiles || [], ocrSourceBytes: { evidenceBytes: encode(f.evidence), confirmationBytes: encode(confirmation) } }
+  const historical = deriveNck1MaterializationBundle(input, nck1OcrOptionEmphasisAuthorityRef)
+  assert(historical.issues.some(issue => issue.code === 'MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED'),
+    JSON.stringify(historical.issues))
+  const current = deriveNck1MaterializationBundle(input, nck1InImageOptionLabelsV2AuthorityRef)
+  assert.deepEqual(current.issues, [])
+  assert(current.warnings?.some(warning => warning.code === 'MATERIALIZATION_SOURCE_EMPHASIS_DROPPED'),
+    JSON.stringify(current.warnings))
 })
 test('public v11 option emphasis preserves non-default media through capture, Review and publication readback', async () => {
   const f = await makeOptionEmphasisMediaFixture()

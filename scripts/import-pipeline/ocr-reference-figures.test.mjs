@@ -78,8 +78,11 @@ test('non-writing headings and explanatory suffixes cannot open a reference sect
     const items = f.confirmation.documents[0].pages[0].orderedItems
     items[1].text = text
     items.splice(2, 1)
-    assert.throws(() => capture(f),
-      { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ }, text)
+    // BUB-168: the unmatched task degrades to not_supplied rather than
+    // blocking the paper; detection of the non-writing heading is unchanged.
+    const result = capture(f)
+    assert.equal(result.groups[0].essays.state, 'not_supplied', text)
+    assert(result.review.some(r => /degraded to not_supplied/u.test(r.issue)), text)
   }
 })
 

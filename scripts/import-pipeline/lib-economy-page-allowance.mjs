@@ -13,13 +13,14 @@ export function importLargePageLimits(value = {}) {
 }
 
 export function largePageLimitArgs(value) {
-  return Object.entries(importLargePageLimits(value)).flatMap(([key, limit]) => limit === (key === 'largeCompletePageLimit' ? 13 : 11)
+  return Object.entries(importLargePageLimits(value)).flatMap(([key, limit]) =>
+    (key === 'largeCompletePageLimit' ? [13, 14] : [11, 12]).includes(limit)
     ? [key === 'largeCompletePageLimit' ? '--large-complete-page-limit' : '--large-no-listening-page-limit', String(limit)] : [])
 }
 
 export function importEconomyPageLimit(paperId, requested) {
   if (requested === undefined || requested === null) return 8
-  if (![8, 9].includes(requested)) throw new Error('省纸页数只接受 8 或 9')
+  if (![8, 9, 10].includes(requested)) throw new Error('省纸页数只接受 8、9 或 10')
   return requested
 }
 

@@ -381,16 +381,16 @@ async function paginationQa(paperId) {
   const pageLimitOption = option('--economy-page-limit')
   const largeLimitOption = option(edition === 'largeComplete' ? '--large-complete-page-limit' : '--large-no-listening-page-limit')
   for (const [flag, selected, value] of [
-    ['--large-complete-page-limit', 'largeComplete', '13'],
-    ['--large-no-listening-page-limit', 'largeNoListening', '11'],
-  ]) if (option(flag) !== null && (edition !== selected || option(flag) !== value)) fail(`${flag} requires --edition ${selected} and value ${value}`)
+    ['--large-complete-page-limit', 'largeComplete', ['13', '14']],
+    ['--large-no-listening-page-limit', 'largeNoListening', ['11', '12']],
+  ]) if (option(flag) !== null && (edition !== selected || !value.includes(option(flag)))) fail(`${flag} requires --edition ${selected} and value ${value.join(' or ')}`)
   const productLayoutOption = option('--product-layout')
   const product = STUDENT_PRODUCT_EDITIONS.includes(edition)
-  if (pageLimitOption !== null && (edition !== 'economy8' || pageLimitOption !== '9')) {
-    fail('--economy-page-limit supports only the explicitly permitted economy8 nine-page ceiling')
+  if (pageLimitOption !== null && (edition !== 'economy8' || !['9', '10'].includes(pageLimitOption))) {
+    fail('--economy-page-limit supports only the explicitly permitted economy8 nine- or ten-page ceiling')
   }
-  if (productLayoutOption !== null && (pageLimitOption !== '9' || breakOption === null)) {
-    fail('--product-layout requires --edition economy8 --economy-page-limit 9 --break-slots')
+  if (productLayoutOption !== null && (!['9', '10'].includes(pageLimitOption) || breakOption === null)) {
+    fail('--product-layout requires --edition economy8 --economy-page-limit 9|10 --break-slots')
   }
   if (product && coverOption !== null) fail('New student products retain the title and omit administrative notices; --cover-gaps is not supported')
   const explicitEdit = breakOption !== null || coverOption !== null
@@ -421,7 +421,7 @@ async function paginationQa(paperId) {
       entry.familyContractId === 'listening')
     const listeningCount = projection.paginationSlotBindings.filter((entry) =>
       entry.familyContractId === 'listening').length
-    const economyPageLimit = pageLimitOption === '9' ? 9 : economyPageLimitForPlan(projection.paginationPlan)
+    const economyPageLimit = ['9', '10'].includes(pageLimitOption) ? Number(pageLimitOption) : economyPageLimitForPlan(projection.paginationPlan)
     const pageLimits = { ...productPageLimitsForPlan(projection.paginationPlan), economyPageLimit,
       ...(largeLimitOption !== null ? { [`${edition}PageLimit`]: Number(largeLimitOption) } : {}) }
     const selectedPlanVersion = productPlanVersion({
@@ -448,7 +448,10 @@ async function paginationQa(paperId) {
       candidatePlan = {
         schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5', 'paper-pagination-plan-v6'].includes(projection.paginationPlan?.schemaVersion) ? selectedPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
           : projection.paginationPlan?.schemaVersion || 'paper-pagination-plan-v1',
-        ...productPlanAuthorization(selectedPlanVersion),
+        ...productPlanAuthorization(selectedPlanVersion, {
+          ...(projection.paginationPlan?.editions || {}),
+          [edition]: { targetPages: policy.targetPages },
+        }),
         paperId: projection.paperId,
         sourceDigest: projection.sourceDigest,
         candidateDigest: projection.candidateDigest,
@@ -495,14 +498,15 @@ async function paginationQa(paperId) {
       allowSplitOptionBank: candidatePlan.editions[edition].allowSplitOptionBank ?? false,
       ...(product ? { layout: rendered.layout } : {}),
     }
+    const planEditions = { ...(candidatePlan?.editions || {}), [edition]: selectedEdition }
     const plan = validatePaperPaginationPlan({
       schemaVersion: product || ['paper-pagination-plan-v4', 'paper-pagination-plan-v5', 'paper-pagination-plan-v6'].includes(candidatePlan?.schemaVersion) ? selectedPlanVersion : edition.startsWith('long') ? 'paper-pagination-plan-v2'
         : candidatePlan?.schemaVersion || 'paper-pagination-plan-v1',
-      ...productPlanAuthorization(selectedPlanVersion),
+      ...productPlanAuthorization(selectedPlanVersion, planEditions),
       paperId: projection.paperId,
       sourceDigest: projection.sourceDigest,
       candidateDigest: projection.candidateDigest,
-      editions: { ...(candidatePlan?.editions || {}), [edition]: selectedEdition },
+      editions: planEditions,
     }, {
       paperId: projection.paperId,
       sourceDigest: projection.sourceDigest,
@@ -525,7 +529,7 @@ async function paginationQa(paperId) {
       searchedCandidates: rendered.searchedCandidates,
       ...(rendered.timing ? { timing: finishPaginationTiming(rendered.timing) } : {}),
       selectedPlan: selectedEdition,
-      ...productPlanAuthorization(selectedPlanVersion),
+      ...productPlanAuthorization(selectedPlanVersion, planEditions),
       groups: rendered.inspection.map(({ id, type, pages, optionBankPages }) => ({
         groupId: id,
         slotId: slotByGroup.get(id),

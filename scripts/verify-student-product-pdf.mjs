@@ -308,7 +308,12 @@ for (const [edition, ceiling] of [['largeComplete', 13], ['largeNoListening', 11
     if (version.endsWith('v5')) legacy.editions = { ...legacy.editions, economy8: ninePlan.editions.economy8 }
     assert.throws(() => validatePaperPaginationPlan(legacy, extendedIdentity), /policy/)
   }
-  for (const targetPages of [ceiling - 2, ceiling + 1]) assert.throws(() =>
+  // BUB-168: one tier above the +1 ceiling (14/12) now validates; anything
+  // outside the 12–14 / 10–12 tier windows still fails closed.
+  assert.deepEqual(validatePaperPaginationPlan({ ...extended,
+    editions: { [edition]: { ...entry, targetPages: ceiling + 1 } } }, extendedIdentity).editions[edition].targetPages,
+    ceiling + 1)
+  for (const targetPages of [ceiling - 2, ceiling + 2]) assert.throws(() =>
     validatePaperPaginationPlan({ ...extended, editions: { [edition]: { ...entry, targetPages } } }, extendedIdentity))
   for (const authorization of [undefined, { ...LARGE_PAGE_LIMIT_AUTHORIZATION, basis: 'unknown' }]) {
     assert.throws(() => validatePaperPaginationPlan({ ...extended, pageLimitAuthorization: authorization }, extendedIdentity))
@@ -320,7 +325,9 @@ for (const [edition, ceiling] of [['largeComplete', 13], ['largeNoListening', 11
     else await assert.rejects(() => replay({ [`${edition}PageLimit`]: ceiling }), { code: 'PAPER_FIXED_PAGE_IMPOSSIBLE' })
     if (pages >= ceiling) await assert.rejects(() => replay({}), { code: 'PAPER_FIXED_PAGE_IMPOSSIBLE' })
   }
-  assert.throws(() => studentProductPolicy(edition, 2, { [`${edition}PageLimit`]: ceiling + 1 }))
+  // +1 over the ceiling is the accepted BUB-168 tier; +2 over stays rejected.
+  assert.equal(studentProductPolicy(edition, 2, { [`${edition}PageLimit`]: ceiling + 1 }).targetPages, ceiling + 1)
+  assert.throws(() => studentProductPolicy(edition, 2, { [`${edition}PageLimit`]: ceiling + 2 }))
 }
 assert.equal(JSON.stringify(ninePlan), historicalBytes)
 assert.deepEqual(productPageLimitsForPlan(null), { largeCompletePageLimit: 12, largeNoListeningPageLimit: 10, economyPageLimit: 8 })
@@ -341,7 +348,7 @@ for (const changed of [
   { ...manifest, schemaVersion: 'paper-pdf-products-v1' },
   { ...manifest, pageLimitAuthorization: undefined },
   { ...manifest, pageLimits: undefined },
-  { ...manifest, pageLimits: { ...manifest.pageLimits, largeCompletePageLimit: 14 } },
+  { ...manifest, pageLimits: { ...manifest.pageLimits, largeCompletePageLimit: 15 } },
   { ...manifest, pageLimits: { ...manifest.pageLimits, largeCompletePageLimit: 12 } },
   { ...manifest, pageLimits: { ...manifest.pageLimits, largeNoListeningPageLimit: 10 } },
   { ...manifest, pageLimits: { ...manifest.pageLimits, economyPageLimit: 8 } },
@@ -357,8 +364,8 @@ assert.throws(() => readFrozen(absentManifest, { config: {}, listeningCount: 2 }
 assert.deepEqual(importLargePageLimits(), { largeCompletePageLimit: 12, largeNoListeningPageLimit: 10 })
 assert.deepEqual(largePageLimitArgs({ largeCompletePageLimit: 13, largeNoListeningPageLimit: 11 }),
   ['--large-complete-page-limit', '13', '--large-no-listening-page-limit', '11'])
-for (const value of [null, 14, '13']) assert.throws(() => studentProductPolicy('largeComplete', 2, { largeCompletePageLimit: value }))
-assert.throws(() => importLargePageLimits({ largeNoListeningPageLimit: 12 }))
+for (const value of [null, 15, '13']) assert.throws(() => studentProductPolicy('largeComplete', 2, { largeCompletePageLimit: value }))
+assert.throws(() => importLargePageLimits({ largeNoListeningPageLimit: 13 }))
 
 const initialized = await renderExplicitStudentProductPdf(html, {
   edition: 'economy8', economyPageLimit: 9, layout: nineLayout, plannedBreakGroupIds: ['continuation'],

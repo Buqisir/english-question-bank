@@ -6,6 +6,7 @@ import { makeSyntheticNck1OcrFixture } from '../../test-fixtures/paper-import/nc
 import { produceNck1OcrMaterialization } from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { resolveListeningSourceDecision } from '../../server/paper-import/listeningSourceDecision.mjs'
+import { listeningTextMarkerNumber } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { nck1ParagraphJoinAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -179,6 +180,20 @@ test('bounded author decisions replay through public OCR import/compile and reje
   splitChineseCue.roles.splice(2, 1, { ...chinese, fragments: [firstCueFragment] }, { ...chinese, fragments: [secondCueFragment] })
   assert.doesNotThrow(() => resolveListeningSourceDecision({ ...replayContext, decision: splitChineseCue }),
     'adjacent Chinese exclusions must be checked as the complete original sentence')
+  // A speech turn ending on English punctuation before an inline cue is a
+  // complete turn: "M: I see. Let me give you a hand. （停顿5秒）" (BUB-168).
+  const englishBoundary = structuredClone(replayContext)
+  const boundaryItem = englishBoundary.confirmation.documents[1].pages.flatMap(p => p.orderedItems).find(i => i.itemId === mixed.itemId)
+  const boundarySource = englishBoundary.resolved.structures.get(options.documentId).body.find(i => i.text === boundaryItem.text)
+  boundaryItem.text = 'M: I see. Let me give you a hand. （停顿5秒）'
+  boundarySource.text = boundaryItem.text
+  const englishCut = boundaryItem.text.indexOf('（停顿')
+  englishBoundary.decision.roles[1].fragments[0] = { itemId: mixed.itemId, start: 0, end: englishCut, text: boundaryItem.text.slice(0, englishCut) }
+  englishBoundary.decision.roles[2].fragments[0] = { itemId: mixed.itemId, start: englishCut, end: boundaryItem.text.length, text: boundaryItem.text.slice(englishCut) }
+  englishBoundary.confirmationBytes = encode(englishBoundary.confirmation)
+  englishBoundary.decision.confirmationSha256 = sha256(englishBoundary.confirmationBytes)
+  assert.doesNotThrow(() => resolveListeningSourceDecision(englishBoundary),
+    'an inline Chinese cue after an English sentence end is a valid exclusion')
   for (const change of [
     d => { d.roles[1].fragments[0].end-- ; d.roles[1].fragments[0].text = d.roles[1].fragments[0].text.slice(0, -1) },
     d => { d.roles[2].fragments[0].start-- ; d.roles[2].fragments[0].text = mixed.text.slice(cut - 1) },
@@ -273,4 +288,12 @@ test('bounded author decisions replay through public OCR import/compile and reje
   await assert.rejects(authorListeningSource({ command: 'apply', paperId: f.paperId, paperDir: paper, plan,
     output, confirmed: true }), /new/u)
   assert(existsSync(output))
+})
+
+test('Text markers tolerate inner whitespace inside the parens (BUB-168)', () => {
+  for (const [text, expected] of [
+    ['Text 1', 1], ['(Text 1)', 1], ['( Text 1 )', 1], ['(  Text 3  )', 3],
+    ['（Text 5）', 5], ['（ Text 7 ）', 7], ['(Text 1):', 1], ['Text 10', 10],
+    ['(Speech 1)', null], ['Text', null],
+  ]) assert.equal(listeningTextMarkerNumber(text), expected, text)
 })

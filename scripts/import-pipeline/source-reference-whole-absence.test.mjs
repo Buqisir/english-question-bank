@@ -114,9 +114,12 @@ test('synthetic whole-document declaration requires exact review and source bind
     mutate(changed)
     assert.throws(() => assertSourceReferenceAdmission(changed))
   }
+  // BUB-168: without the explicit whole-absence declaration the same groups
+  // now replay as degraded not_supplied sections, so the undeclared form is
+  // admitted as equivalent degradation rather than rejected outright.
   const undeclared = structuredClone(input)
   delete undeclared.sidecar.wholeDocumentWritingAbsence
-  assert.throws(() => assertSourceReferenceAdmission(undeclared), /No answer-document section found/)
+  assertSourceReferenceAdmission(undeclared)
 })
 
 test('explicit writing contradictions anywhere in confirmed source block the new gate', () => {
@@ -231,8 +234,9 @@ process.on('exit', () => fs.writeFileSync(process.env.SNAPSHOT_TEST_COUNT, Strin
   assert.throws(() => run(['finalize', '--paper-dir', paper, '--input', authorInput, '--output', output]))
   assert.deepEqual(readFileSync(output), bytes)
   assert(existsSync(output))
+  // BUB-168: deleting the declaration alone no longer invalidates the file —
+  // the same not_supplied groups replay as ordinary degraded sections.
   for (const [index, mutate] of [
-    x => { delete x.wholeDocumentWritingAbsence },
     x => { x.wholeDocumentWritingAbsence.review.reviewerSessionId = 'fixture-author' },
     x => { x.wholeDocumentWritingAbsence.review.reviewedSubjectDigest = sha256('changed') },
     x => { x.wholeDocumentWritingAbsence.review.pages.pop() },

@@ -273,7 +273,7 @@ function assertSourceReferenceContent({
     }
   }
   const hasReferenceVisual = confirmation.documents.some(document => answerIds.has(document.documentId)
-    && document.pages.some(page => page.visualClassifications.some(visual => visual.classification === 'content_media')))
+    && document.pages.some(page => (page.visualClassifications ?? []).some(visual => visual.classification === 'content_media')))
   const assertCurrentGroupsReplay = () => {
     // These paths already rebuild/compare the complete source groups above.
     if (!usesSourceTitleCompatibility(producerVersion) || !sidecar

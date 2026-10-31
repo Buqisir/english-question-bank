@@ -34,7 +34,7 @@ function isScoringLabel(sourceText, scoringTask, producerVersion) {
 // admission alike. Only explicit source headings and scoring labels authorize
 // capture. A nearby Writing Task or a caller's declared entry is insufficient.
 export function sourceReferenceScoringScopes(confirmation, answerIds,
-  { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization = { groups: [] } } = {}) {
+  { onWritingStart, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization = { groups: [] }, onScopeError } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const scopes = new Map()
   const alternateAnswerScope = resolveAlternateAnswerScope(materialization, confirmation, { producerVersion })
@@ -48,7 +48,7 @@ export function sourceReferenceScoringScopes(confirmation, answerIds,
     // labels. Existing scoring termination/reopening rules remain authoritative.
     const lifecycle = sourceReferenceWritingLifecycle(items, {
       materialization: usesGivenTitleWritingSamples(producerVersion) ? materialization : { groups: [] },
-      alternateAnswerScope,
+      alternateAnswerScope, onScopeError,
       answerDocument: { role: materialization.documents?.find(source =>
         source.documentId === document.documentId)?.role ?? 'official_answers' }, producerVersion,
     })
@@ -189,11 +189,11 @@ export const sourceReferenceFigureIdentity = figure =>
 // The visual resolver must already have proved crop/observation closure.
 // No heading alone can authorize this new path: consume every confirmed word.
 export function sourceReferenceObjectiveFigures(confirmation, answerIds, figures,
-  { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization } = {}) {
+  { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, materialization, onScopeError } = {}) {
   const objective = new Set()
   const starts = new Map()
   sourceReferenceScoringScopes(confirmation, answerIds, {
-    producerVersion, materialization,
+    producerVersion, materialization, onScopeError,
     onWritingStart: (documentId, itemId) => starts.set(documentId, itemId),
   })
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {

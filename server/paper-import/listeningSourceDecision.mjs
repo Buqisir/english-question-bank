@@ -94,7 +94,9 @@ export function resolveListeningSourceDecision(context) {
         || markers.some(marker => marker.index === found.index)
         || fragment.end > found.item.text.length || found.item.text.slice(fragment.start, fragment.end) !== fragment.text
         || splitsSurrogate(found.item.text, fragment.start) || splitsSurrogate(found.item.text, fragment.end)) fail('fragment crosses a source boundary, marker, surrogate or exact text')
-      if (found.index < previous[0] || found.index === previous[0] && fragment.start < previous[1]) fail('overlapping or unordered roles')
+      if (found.index < previous[0] || found.index === previous[0] && fragment.start < previous[1]) {
+        fail(`overlapping or unordered roles: fragment ${fragment.itemId}[${fragment.start}:${fragment.end}] resolves to body index ${found.index} after prior fragment at body index ${previous[0]} ending at ${previous[1]}`)
+      }
       if (previousFragment && !(found.index === previousFragment.index && fragment.start === previousFragment.end
         || found.index === previousFragment.index + 1 && previousFragment.end === body[previousFragment.index].text.length && fragment.start === 0)) fail('role skips an intervening source item')
       previous = [found.index, fragment.end]
@@ -152,10 +154,14 @@ export function resolveListeningSourceDecision(context) {
     }
     for (const { start, end } of excluded) {
       const original = body[index].text, text = original.slice(start, end)
+      // A speech turn can end on English punctuation before an inline cue:
+      // "M: I see. Let me give you a hand. （停顿5秒）". Trailing quotes or
+      // closing brackets after the sentence mark still count as ended.
+      const sentenceEnd = /[.!?。！？][”’"'）)\]】}」』》〉]*$/u
       if (!permitsExclusionLetters(text, start, original)
         || start !== 0 && end !== original.length
-        || start !== 0 && !/[。！？]$/u.test(original.slice(0, start).trimEnd())
-        || end !== original.length && !/[。！？]$/u.test(text.trimEnd())
+        || start !== 0 && !sentenceEnd.test(original.slice(0, start).trimEnd())
+        || end !== original.length && !sentenceEnd.test(text.trimEnd())
         || !listeningCue(text)) {
         fail('mixed-item exclusions require a complete Chinese broadcast sentence at an item edge')
       }

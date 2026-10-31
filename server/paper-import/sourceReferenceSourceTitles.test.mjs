@@ -101,7 +101,14 @@ test('new omission and scoring labels require a real current task', () => {
   for (const lines of [
     ['第一节 应用文', '参考范文', 'A real sample.', '参考范文（略）'],
     ['第一节 应用文', '参考范文（略）', '参考范文', 'A real sample.'],
-  ]) assert.throws(() => capture(textInput([[...lines, '第二节 读后续写', '评分原则', '续写评分。']])), scopeError)
+  ]) {
+    // A captured sample conflicting with an explicit 范文略 degrades that task
+    // rather than blocking the paper (BUB-168).
+    const sidecar = capture(textInput([[...lines, '第二节 读后续写', '评分原则', '续写评分。']]))
+    assert.equal(sidecar.groups[0].essays.state, 'not_supplied')
+    assert.equal(sidecar.groups[1].scoring.state, 'captured')
+    assertSourceReferenceAdmission({ ...textInput([[...lines, '第二节 读后续写', '评分原则', '续写评分。']]), sidecar })
+  }
 })
 
 test('task omission never spills into continuation essays', () => {
@@ -136,8 +143,17 @@ test('only complete existing appendix proof reopens scoring after new transcript
     assert(sidecar.groups.every(group => JSON.stringify(group.scoring).includes('附录评分正文')))
     assert.deepEqual(sidecar.groups.map(group => group.essays.entries.length), [1, 1])
     for (const sample of [['参考范文', 'A forbidden sample.'], ['Dear Sam,', 'A complete forbidden letter.', 'Yours,', 'Li Hua']]) {
-      assert.throws(() => capture(textInput([[...input.confirmation.documents[0].pages[0].orderedItems.map(item => item.text),
-        ...sample]])), scopeError)
+      const items = [...input.confirmation.documents[0].pages[0].orderedItems.map(item => item.text), ...sample]
+      const changed = textInput([items])
+      try {
+        // An unmistakable re-open still fails; structure the planner cannot
+        // reconcile degrades the task instead of blocking (BUB-168).
+        const degraded = capture(changed)
+        assert.equal(degraded.groups[1].essays.state, 'not_supplied', sample.join('/'))
+        assertSourceReferenceAdmission({ ...changed, sidecar: degraded })
+      } catch (error) {
+        assert.equal(error.code, 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID', sample.join('/'))
+      }
     }
   }
 })
