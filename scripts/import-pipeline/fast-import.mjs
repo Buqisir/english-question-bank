@@ -1265,7 +1265,8 @@ export function assertReferenceProductsReady(ctx) {
 }
 
 // Stage overrides keep the orchestration testable without launching rendering or Review writes.
-export async function finish(ctx, args, { referenceStages = {} } = {}) {
+export async function finish(ctx, args, { referenceStages = {}, readStatus } = {}) {
+  if (args.includes('--feedback-fix')) await feedbackFix(ctx, args, readStatus)
   // Check Candidate-only local evidence before any state/log or product write.
   if (!referencesCurrent(ctx)) {
     assertReferencesMutable(ctx)
@@ -1361,6 +1362,14 @@ export async function finish(ctx, args, { referenceStages = {} } = {}) {
 // The Candidate upload. Under the batch submission rule it runs only after PDF QA found nothing
 // blocking; `--resolves` carries Owner issues fixed by this revision.
 export async function submit(ctx, args) {
+  const resolves = option(args, '--resolves')
+  if (ctx.state.data.feedbackFix) {
+    const supplied = new Set(String(resolves || '').split(',').map(id => id.trim()).filter(Boolean))
+    const expected = ctx.state.data.feedbackFix.issues
+    if (supplied.size !== expected.length || expected.some(id => !supplied.has(id))) {
+      fail(`feedback-fix 要求 --resolves 恰好覆盖：${expected.join(',')}`)
+    }
+  }
   assertReferenceProductsReady(ctx)
   // Always re-read before a possibly cached push step; no preview/submit bypass.
   const gate = assertImportSubmissionReady(ctx.paperDir)
@@ -1377,11 +1386,14 @@ export async function submit(ctx, args) {
   }
   if (localPreview && !target.local) fail('preview-local 只允许已绑定的 loopback Review，禁止访问生产')
   if (!ctx.state.steps['pdf-qa']?.finishedAt) fail('先运行 finish，并在 PDF 目检后再送审')
-  const resolves = option(args, '--resolves')
   const pushed = await step(ctx, localPreview ? 'local-preview' : 'push', async () => {
     const result = await run(ctx, localPreview ? 'local-preview' : 'push', cli('review.mjs', 'push', ctx.paperId, ...(resolves ? ['--resolves', resolves] : [])), { review: true })
     return { revisionId: result.revisionId, state: result.state ?? result.status ?? null, target: target.local ? 'local' : target.origin }
   })
+  if (!localPreview && ctx.state.data.feedbackFix) {
+    delete ctx.state.data.feedbackFix
+    save(ctx)
+  }
   const qa = path.join(ctx.work, 'handoff/qa')
   const screen = await step(ctx, localPreview ? 'local-screen' : 'screen', async () => {
     try {
@@ -1537,6 +1549,44 @@ function redoFrom(ctx, name) {
   save(ctx)
 }
 
+async function feedbackFix(ctx, args, readStatus) {
+  const name = option(args, '--redo-from')
+  const issues = [...new Set(String(option(args, '--feedback-fix') || '').split(',').map(id => id.trim()).filter(Boolean))]
+  if (!STEP_ORDER.includes(name) || !issues.length || issues.some(id => id.startsWith('--'))) {
+    fail('feedback-fix 需要 <issueId[,issueId]> 和 --redo-from <步骤>')
+  }
+  const push = ctx.state.steps.push
+  if (push?.startedAt && !push.finishedAt && !reconciledPush(ctx)) {
+    fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: 未完成的 push 须先只读对账')
+  }
+  if (Object.entries(ctx.state.background).some(([key, job]) => key.startsWith('pagination-') && alive(job.pid))) fail('feedback-fix：分页仍在运行')
+  if (!readStatus && target.local) fail('feedback-fix 需要生产 Review 绑定')
+  const raw = await (readStatus || (() => {
+    const result = spawnSync(process.execPath, cli('review.mjs', 'status', ctx.paperId, '--raw-response'),
+      { cwd: root, env: reviewEnv, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
+    if (result.error || result.status !== 0 || result.signal) fail(`feedback-fix：Review status 失败 ${result.error?.message || result.stderr || ''}`)
+    return result.stdout
+  }))()
+  const status = JSON.parse(raw)
+  const baseRevisionId = ctx.state.data.candidateRevisionId || push?.result?.revisionId || ctx.state.data.revisionId
+  if (!baseRevisionId || status.paperId !== ctx.paperId || status.latest?.state !== 'changes_requested'
+    || status.latest.id !== baseRevisionId || status.latestRevisionId !== baseRevisionId
+    || !Array.isArray(status.issues) || issues.some(id => !status.issues.some(issue =>
+      issue.id === id && issue.paperId === ctx.paperId && ['open', 'fixed_pending_review'].includes(issue.state)))) {
+    fail('feedback-fix：最新修订须为本地送审的 changes_requested，issue 须属于该卷且未解决')
+  }
+  // Keep the complete old state, including submission markers, before clearing the local binding.
+  archive(ctx, ctx.statePath, 'feedback-fix-')
+  for (const file of ['evidence.json', '校正报告与预处理完成表.md']) archive(ctx, path.join(ctx.work, 'handoff', file))
+  const qa = path.join(ctx.work, 'handoff/qa')
+  if (existsSync(qa)) for (const file of readdirSync(qa).filter(file => file.startsWith('screen-tile-'))) archive(ctx, path.join(qa, file))
+  for (const step of ['push', 'screen', 'local-preview', 'local-screen', 'report', 'preprocessing-report']) delete ctx.state.steps[step]
+  for (const field of ['candidateRevisionId', 'revisionId', 'localReport', 'status']) delete ctx.state.data[field]
+  ctx.state.data.feedbackFix = { baseRevisionId, issues, at: new Date().toISOString() }
+  save(ctx)
+  await requestedRedo(ctx, name)
+}
+
 export async function requestedRedo(ctx, name) {
   // An explicit redo must not erase submission evidence before finish sees it.
   if (STEP_ORDER.includes(name) && (!referencesCurrent(ctx)
@@ -1641,6 +1691,7 @@ export async function invalidateExplanationFigureDownstream(paperId, expectedMat
 const [command, paperId, ...args] = process.argv.slice(2)
 if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
   const ctx = context(paperId)
+  if (args.includes('--feedback-fix') && command !== 'finish') fail('--feedback-fix 仅用于 finish')
   if (args.includes('--ocr-generation-plan') && (command !== 'after-proofread' || args.includes('--redo-from'))) {
     fail('--ocr-generation-plan 仅用于 after-proofread，不能与 --redo-from 合用')
   }
@@ -1654,7 +1705,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
     || (existsSync(operationPath) && !readJson(operationPath).completedAt)) && !['status', 'reconcile-ocr-generation'].includes(command)) {
     fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 新代操作未闭合；仅可只读 status 对账，禁止重放或 redo')
   }
-  if (option(args, '--redo-from')) await requestedRedo(ctx, option(args, '--redo-from'))
+  if (option(args, '--redo-from') && !args.includes('--feedback-fix')) await requestedRedo(ctx, option(args, '--redo-from'))
   if (command === 'prep') await prep(ctx, args)
   else if (command === 'after-proofread') await afterProofread(ctx, args)
   else if (command === 'plan-ocr-generation') {
