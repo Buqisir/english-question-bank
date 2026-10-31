@@ -68,12 +68,16 @@ export function nck1OcrProducerVersion(confirmation) {
     ? 'nck1-ocr-materialization-producer-v31' : NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION
 }
 
-export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null, producerVersion = nck1OcrProducerVersion(confirmation) } = {}) {
+export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null, producerVersion = nck1OcrProducerVersion(confirmation),
+  writingRoleDeclarations = null } = {}) {
   return digestJson({
     producerVersion,
     sourceSetDigest: nck1OcrSourceSetDigest(documents),
     evidenceDigest: evidence?.evidenceDigest || null,
     confirmationDigest: confirmation ? digestJson(confirmation) : null,
+    // Declarations change the producer output; an input bearing none keeps the
+    // exact historical digest so retained receipts and caches stay valid.
+    ...(writingRoleDeclarations?.length ? { writingRoleDeclarations } : {}),
   })
 }
 
@@ -82,6 +86,7 @@ export function produceNck1OcrMaterialization({
   documents,
   evidence = null,
   confirmation = null,
+  writingRoleDeclarations = null,
 }) {
   if (!/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(paperId || '')) {
     throw new TypeError('NCK1 OCR materialization requires one valid paperId')
@@ -224,7 +229,8 @@ export function produceNck1OcrMaterialization({
     codePrefix: 'NCK1_OCR',
     producerVersion: nck1OcrProducerVersion(confirmation),
     reviewSchemaVersion: 'nck1-ocr-materialization-review-v1',
-    sourceDigest: nck1OcrProducerSourceDigest(documents, { evidence, confirmation }),
+    sourceDigest: nck1OcrProducerSourceDigest(documents, { evidence, confirmation, writingRoleDeclarations }),
+    writingRoleDeclarations,
   })
   produced.materialization.issues = produced.materialization.issues.map((item) =>
     closeIssueSource(item, question || documents[0]))
