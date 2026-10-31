@@ -149,7 +149,21 @@ function locate(group, streams, pauses, durationSeconds) {
     text = text.slice(0, span.start) + projection.text.slice(span.start, span.end) + text.slice(span.end)
   }
   const heads = anchors(streams, text, low, high, 'head'), tails = anchors(streams, text, low, high, 'tail')
-  if (!Number.isInteger(group.expectedReadings) || group.expectedReadings < 1 || heads.length !== group.expectedReadings) {
+  // The retained count describes the printed instruction, which may differ
+  // from the recording. Complete extra readings are useful for review; fewer
+  // matches cannot prove that a reading is absent.
+  const complete = heads.length > group.expectedReadings && tails.length === heads.length && heads.every((head, i) =>
+    tails.filter(t => t.end > head.end && t.end <= (heads[i + 1]?.start ?? high)).length === 1)
+  if (!Number.isInteger(group.expectedReadings) || group.expectedReadings < 1
+      || (heads.length !== group.expectedReadings && !complete)) {
+    // A neighbor-bounded envelope is useful for listening, but proves no count
+    // or word edges. Never label this fallback as an individual reading.
+    if (Number.isFinite(group.orderEvidence?.afterSeconds) && Number.isFinite(group.orderEvidence?.beforeSeconds)
+        && low >= 0 && high > low && high <= durationSeconds) {
+      return [{ reading: null, status: 'unsegmented', startSeconds: low, endSeconds: high,
+        signalEvidence: { orderEvidence: group.orderEvidence },
+        clips: [{ kind: 'window', sourceStartSeconds: low, sourceEndSeconds: high }] }]
+    }
     fail('REVIEW_PACK_READING_COUNT_AMBIGUOUS', `${group.segmentId}: expected ${group.expectedReadings}, found ${heads.length}`)
   }
   return heads.map((head, i) => {
@@ -177,12 +191,13 @@ function page(segments) {
   for (const e of segments) {
     body += `<section><h2>${esc(e.paperName)} · ${esc(e.segmentId)}</h2>`
     for (const r of e.readings) {
-      body += `<article><h3>第 ${r.reading} 遍</h3><div class="sentences"><small>应听首句</small><p>${esc(e.expectedFirstSentence)}</p><small>应听末句</small><p>${esc(e.expectedLastSentence)}</p></div><div class="players">`
+      const readingLabel = r.status === 'unsegmented' ? '整段 · 未分遍（遍数不确定，按相邻段时间窗听核）' : `第 ${r.reading} 遍`
+      body += `<article><h3>${readingLabel}</h3><div class="sentences"><small>应听首句</small><p>${esc(e.expectedFirstSentence)}</p><small>应听末句</small><p>${esc(e.expectedLastSentence)}</p></div><div class="players">`
       for (const c of r.clips) {
-        const label = c.kind === 'exact' ? '精确剪辑' : '上下文 · 前后各多 3 秒'
-        body += `<div><strong>${label}</strong><audio controls preload="metadata" aria-label="${esc(e.paperName + ' ' + e.segmentId + ' 第 ' + r.reading + ' 遍 ' + label)}" data-start="${c.sourceStartSeconds}" src="${esc(c.clipPath)}"></audio><div class="clock">片段内 0.00 秒 · 整录音 ${c.sourceStartSeconds.toFixed(2)} 秒</div><small>整录音 ${c.sourceStartSeconds.toFixed(3)}–${c.sourceEndSeconds.toFixed(3)} 秒</small></div>`
+        const label = c.kind === 'window' ? '整段时间窗' : c.kind === 'exact' ? '精确剪辑' : '上下文 · 前后各多 3 秒'
+        body += `<div><strong>${label}</strong><audio controls preload="metadata" aria-label="${esc(e.paperName + ' ' + e.segmentId + ' ' + readingLabel + ' ' + label)}" data-start="${c.sourceStartSeconds}" src="${esc(c.clipPath)}"></audio><div class="clock">片段内 0.00 秒 · 整录音 ${c.sourceStartSeconds.toFixed(2)} 秒</div><small>整录音 ${c.sourceStartSeconds.toFixed(3)}–${c.sourceEndSeconds.toFixed(3)} 秒</small></div>`
       }
-      body += `</div><p>回复示例：${esc(e.paperName)} ${esc(e.segmentId)} 第 ${r.reading} 遍：首尾完整／开头缺 __／结尾缺 __／多了报题；正文差异 __</p></article>`
+      body += `</div><p>回复示例：${esc(e.paperName)} ${esc(e.segmentId)} ${readingLabel}：首尾完整／开头缺 __／结尾缺 __／多了报题；正文差异 __</p></article>`
     }
     body += `<details><summary>查看完整官方原文</summary><pre>${esc(e.sourceText)}</pre></details></section>`
   }
@@ -274,7 +289,7 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
   mkdirSync(output)
   mkdirSync(path.join(output, 'clips'))
   for (const e of segments) for (const r of e.readings) for (const c of r.clips) {
-    c.clipPath = `clips/${e.paperId}-${e.segmentId}-r${r.reading}-${c.kind}.mp3`
+    c.clipPath = `clips/${e.paperId}-${e.segmentId}-r${r.reading ?? 'all'}-${c.kind}.mp3`
     const dest = path.join(output, c.clipPath)
     c.requestedDurationSeconds = round(c.sourceEndSeconds - c.sourceStartSeconds)
     execFileSync('ffmpeg', ['-nostdin', '-v', 'error', '-n', '-ss', String(c.sourceStartSeconds),
