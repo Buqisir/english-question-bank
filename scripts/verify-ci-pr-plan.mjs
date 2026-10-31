@@ -43,7 +43,18 @@ assert.equal(parseRiskAdvice(block({ ...suggestion, reason: '##[set-output]x $(e
   'reason remains data, never shell or instructions')
 
 const change = (...paths) => ({ status: 'M', oldMode: '100644', newMode: '100644', paths })
+const reviewEntryPaths = [
+  'scripts/import-pipeline/review.mjs',
+  'server/answer-renderer.mjs',
+  'server/paper-import/analyzedPackage.mjs',
+  'server/paper-import/sourceReferences.mjs',
+  'server/paper-import/sourceReferencePublication.mjs',
+  'server/paper-import/sourceReferenceSemantics.mjs',
+  'server/paper-import/pdfProductSet.mjs',
+  'server/paper-import/spellingReview.mjs',
+]
 for (const [files, pack] of [
+  ...reviewEntryPaths.map(file => [[file], 'all']),
   [['README.md'], 'ui'],
   [['docs/agents/testing-cadence.md'], 'ui'],
   [['docs/product/example.md'], 'ui'],
@@ -261,6 +272,12 @@ for (const script of storageChildren) {
   for (const pack of ['ui', 'feature', 'paper', 'paper-data', 'import-paper']) {
     assert(!registry.packs[pack].includes(script), `${script}: exclude from ${pack}`)
   }
+}
+for (const file of reviewEntryPaths) {
+  const plan = JSON.parse(execFileSync(process.execPath,
+    ['scripts/verify-ci.mjs', '--plan-json', '--changed-file', file], { encoding: 'utf8' }))
+  assert.equal(plan.pack, 'security', file)
+  for (const script of storageChildren) assert(plan.scripts.includes(script), `${file}: retain ${script}`)
 }
 for (const pack of Object.keys(registry.packs)) {
   const plan = (lane, shard = 'all') => JSON.parse(execFileSync(process.execPath,
