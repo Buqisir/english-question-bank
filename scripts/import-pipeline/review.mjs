@@ -789,9 +789,22 @@ async function cleanupPlan(paperId) {
 
 function ocrGenerationContext(paperId, projection = buildNck1OcrReviewProjection(paperDirectory(paperId))) {
   const inputPath = path.join(root, 'imports/ocr-proofread', paperId, 'proofread-input.json')
+  const declarationPath = path.join(paperDirectory(paperId), 'ocr-revision-declaration.json')
   return { paperId, origin: origin(), projection,
+    ...(existsSync(declarationPath) ? {
+      confirmationRevision: JSON.parse(readFileSync(declarationPath, 'utf8')),
+      bundleManifest: ocrBundleInput(paperId, projection),
+    } : {}),
     proofreadInput: JSON.parse(readFileSync(inputPath, 'utf8')),
     readRemote: pathname => api(pathname) }
+}
+
+function ocrBundleInput(paperId, projection) {
+  return { schemaVersion: 'web-import-ocr-review-bundle-v1',
+    paperId: projection.paperId, paperName: projection.paperName,
+    sourceSetDigest: projection.sourceSetDigest, evidenceDigest: projection.evidenceDigest,
+    reviewStructureDigest: projection.reviewStructureDigest, producerBuildId: producerBuildId(),
+    files: fileDescriptors(paperDirectory(paperId), ocrReviewBundleFilePaths(paperDirectory(paperId))) }
 }
 
 async function inspectOcrGeneration(paperId, check = false) {
@@ -818,16 +831,13 @@ async function pushOcrReview(paperId) {
   const generation = planPath ? await checkOcrGenerationPlan(
     JSON.parse(readFileSync(path.resolve(planPath), 'utf8')), ocrGenerationContext(paperId, projection),
   ) : null
+  if (!generation && existsSync(path.join(paperDir, 'ocr-revision-declaration.json'))) {
+    fail('OCR text revision requires --ocr-generation-plan')
+  }
   const input = {
-    schemaVersion: 'web-import-ocr-review-bundle-v1',
-    paperId: projection.paperId,
-    paperName: projection.paperName,
+    ...ocrBundleInput(paperId, projection),
     ...(generation ? { expectedBaseRevisionId: generation.expectedBaseRevisionId } : {}),
-    sourceSetDigest: projection.sourceSetDigest,
-    evidenceDigest: projection.evidenceDigest,
-    reviewStructureDigest: projection.reviewStructureDigest,
-    producerBuildId: producerBuildId(),
-    files: fileDescriptors(paperDir, ocrReviewBundleFilePaths(paperDir)),
+    ...(generation?.confirmationRevision ? { confirmationRevision: generation.confirmationRevision } : {}),
   }
   const manifest = { ...input, bundleDigest: ocrReviewBundleDigest(input) }
   const finalized = await uploadReviewBundle(paperDir, manifest)

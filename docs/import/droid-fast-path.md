@@ -123,7 +123,7 @@ node scripts/import-pipeline/fast-import.mjs plan-ocr-generation <id> \
 
 检查计划中的 paperId、Review origin、expectedBaseRevisionId、旧 bundle/evidence/receipt/confirmation
 摘要、原 sourceSet、新 evidence/structure/proofread-input 摘要及理由。计划不上传、不确认修订。
-新旧 evidence 相同、源字节改变、远端状态不明、存在任何 Candidate 或并发上传时均拒绝。
+源字节改变、远端状态不明、存在任何 Candidate 或并发上传时均拒绝；新旧 evidence 相同须带文字更正声明。
 显式执行审查后的计划：
 
 ```sh
@@ -139,6 +139,12 @@ Canonical 确认和第二轮作者稿，重建全部下游；旧听核 attempt �
 失败、断连或崩溃后先用 `review.mjs status <id>` 只读对账；不得删除锁、手填 fast state 或重放上传。
 已送审或已发布卷使用已有明确修订事务，不属于本入口。未选择本模式的请求不增加 manifest 字段、
 不迁移、不重封，历史 digest 与普通 resume 行为保持不变。
+
+同 evidence 的纯文字修订：在 `scripts/import-pipeline/papers/<id>/ocr-revision-declaration.json`
+写 `{baseRevisionId,baseConfirmationDigest,entries:[{page,itemId,before,after,basis}]}`；before/after 必须是条目全文。
+保留旧回执及同一 evidence，先跑 `ocr-proofread.mjs compile <id>`，它只克隆旧确认并替换声明文字。
+再跑 `review.mjs plan-ocr-generation <id> --reason "原页文字更正" --output <plan.json>`，
+然后 `fast-import.mjs after-proofread <id> --ocr-generation-plan <plan.json>`，接原有 finish/submit；已有 Candidate 仍拒绝。
 
 ## 批量编排（batch-run.mjs）
 

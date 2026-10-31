@@ -47,7 +47,60 @@ export function finalizeInventory(directory, revision, projection = null) {
     .sort()
 }
 
-export function ocrConfirmationComputation(projection, input, reviewerKind) {
+function revisionInvalid(message) {
+  throw Object.assign(new Error(message), { code: 'IMPORT_REVIEW_OCR_GENERATION_INVALID', status: 409 })
+}
+
+export function validateOcrConfirmationRevision(value) {
+  if (!value || typeof value.baseRevisionId !== 'string' || !value.baseRevisionId.trim()
+    || !/^sha256:[a-f0-9]{64}$/u.test(value.baseConfirmationDigest || '')
+    || !Array.isArray(value.entries) || !value.entries.length) revisionInvalid('Invalid OCR text revision declaration')
+  const seen = new Set()
+  for (const entry of value.entries) {
+    if (!Number.isInteger(entry?.page) || entry.page < 1
+      || typeof entry.itemId !== 'string' || !entry.itemId.trim() || seen.has(entry.itemId)
+      || typeof entry.before !== 'string' || typeof entry.after !== 'string' || !entry.after.trim()
+      || entry.before === entry.after || typeof entry.basis !== 'string' || !entry.basis.trim()) {
+      revisionInvalid('OCR revision entries require unique items, exact before/after text and source basis')
+    }
+    seen.add(entry.itemId)
+  }
+  return structuredClone(value)
+}
+
+// Derive from the immutable original receipt, including after its revision is superseded.
+export function deriveOcrConfirmationRevision(manifest, base) {
+  const declaration = validateOcrConfirmationRevision(manifest.confirmationRevision)
+  const receipt = base?.approval, confirmation = receipt?.confirmation
+  if (declaration.baseRevisionId !== manifest.expectedBaseRevisionId || base?.id !== declaration.baseRevisionId
+    || receipt?.schemaVersion !== 'web-import-ocr-review-confirmation-v1' || !receipt.confirmationId
+    || receipt.revisionId !== base.id || receipt.bundleDigest !== base.bundleDigest
+    || !confirmation?.confirmed || digestJson(confirmation) !== declaration.baseConfirmationDigest
+    || [receipt, confirmation, base.manifest].some(value => value?.paperId !== manifest.paperId
+      || value.sourceSetDigest !== manifest.sourceSetDigest || value.evidenceDigest !== manifest.evidenceDigest)) {
+    revisionInvalid('OCR text revision does not match its original confirmation receipt')
+  }
+  const expected = structuredClone(confirmation)
+  for (const entry of declaration.entries) {
+    const matches = expected.documents.flatMap(document => document.pages
+      .flatMap(page => page.orderedItems.map(item => ({ page: page.page, item }))))
+      .filter(({ item }) => item.itemId === entry.itemId)
+    if (matches.length !== 1 || matches[0].page !== entry.page || matches[0].item.text !== entry.before) {
+      revisionInvalid('OCR revision before text or page does not match the confirmed item')
+    }
+    matches[0].item.text = entry.after
+  }
+  return expected
+}
+
+export function assertOcrConfirmationRevision(confirmation, expected) {
+  if (expected && digestJson(confirmation) !== digestJson(expected)) {
+    revisionInvalid('OCR confirmation must contain exactly the declared text replacements')
+  }
+}
+
+export function ocrConfirmationComputation(projection, input, reviewerKind, expectedConfirmation = null) {
+  assertOcrConfirmationRevision(input?.confirmation, expectedConfirmation)
   const confirmation = validateNck1OcrReviewConfirmation(projection, input?.confirmation)
   const correctionReport = reviewerKind === 'import_agent'
     ? buildAgentOcrCorrectionReport(projection, confirmation, input?.correctionNotes)
