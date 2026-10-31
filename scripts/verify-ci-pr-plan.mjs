@@ -44,6 +44,12 @@ assert.equal(parseRiskAdvice(block({ ...suggestion, reason: '##[set-output]x $(e
 
 const change = (...paths) => ({ status: 'M', oldMode: '100644', newMode: '100644', paths })
 const reviewEntryPaths = [
+  'import-ops/lib/probe.mjs',
+  'import-ops/public/owner-review.js',
+  'scripts/import-pipeline/canonical-consumption-print-payload.mjs',
+  'scripts/import-pipeline/ocr-source-references-version.mjs',
+  'server/paper-import-ai/paragraphSummaries.mjs',
+  'server/router/index.mjs',
   'scripts/import-pipeline/review.mjs',
   'server/answer-renderer.mjs',
   'server/paper-import/analyzedPackage.mjs',
