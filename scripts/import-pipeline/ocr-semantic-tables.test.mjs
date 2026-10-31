@@ -223,6 +223,21 @@ for (const [label, rows] of [
     && /objective answer table.*retained in source evidence/u.test(item.issue)))
 })
 
+function assertUnscopedTableDegraded(input) {
+  const before = structuredClone(input)
+  const result = buildSourceReferences(...input)
+  // An unrecognized, unowned table remains source evidence. Neither writing
+  // task can claim it or guess a sample/rubric from the surrounding text.
+  assert.deepEqual(result.groups.map(group => [group.essays.state, group.scoring.state]),
+    [['not_supplied', 'not_supplied'], ['not_supplied', 'not_supplied']])
+  assert(result.groups.every(group => !group.essays.entries.length && !group.scoring.entries.length))
+  assert(result.review.some(entry =>
+    /Source table source-answers-page-1-objective has no writing-task scope/u.test(entry.issue)))
+  assert(!result.review.some(entry => entry.tableId === 'source-answers-page-1-objective'
+    && /objective answer table.*retained in source evidence/u.test(entry.issue)))
+  assert.deepEqual(input, before, 'unrecognized source table and all answer text stay unchanged')
+}
+
 for (const [label, rows] of [
   ['odd row count', [['题号', '21', '22'], ['答案', 'C', 'B'], ['题号', '23', '24']]],
   ['decreasing numbers within a pair', [['题号', '22', '21'], ['答案', 'C', 'B']]],
@@ -252,26 +267,14 @@ for (const [label, rows] of [
     ['第四档', '10–12', '内容完整。'], ['第三档', '7–9', '语言基本连贯。']]],
 ]) test(`a table with ${label} is not excluded as an objective answer grid`, () => {
   const input = objectiveAnswerTableFixture(rows)
-  const before = structuredClone(input)
-  const script = `import { buildSourceReferences } from ${JSON.stringify(new URL('./ocr-proofread.mjs', import.meta.url).href)};
-    buildSourceReferences(...JSON.parse(process.argv[1]));`
-  const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, JSON.stringify(input)],
-    { encoding: 'utf8' })
-  assert.equal(result.status, 1)
-  assert.match(result.stderr, /Source table .* has no writing-task scope/u)
-  assert.deepEqual(input, before)
+  assertUnscopedTableDegraded(input)
 })
 
-test('tables resembling answer grids without exact labels, increasing numbers and choice letters still fail closed', () => {
+test('tables resembling answer grids without exact labels, increasing numbers and choice letters leave references empty', () => {
   for (const [index, text] of [[0, '档次'], [1, '21–25'], [2, '21'], [3, '参考答案'], [4, '内容完整']]) {
     const input = objectiveAnswerTableFixture()
     input[2].documents[0].pages[0].orderedItems[index].text = text
-    const script = `import { buildSourceReferences } from ${JSON.stringify(new URL('./ocr-proofread.mjs', import.meta.url).href)};
-      buildSourceReferences(...JSON.parse(process.argv[1]));`
-    const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, JSON.stringify(input)],
-      { encoding: 'utf8' })
-    assert.equal(result.status, 1, text)
-    assert.match(result.stderr, /Source table .* has no writing-task scope/u)
+    assertUnscopedTableDegraded(input)
   }
 })
 
