@@ -2987,10 +2987,9 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
         input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
         ['4', '5'].includes(resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version),
         [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure, pendingMeasurements,
-        // Only the current authority may soften dropped emphasis to warnings;
-        // replays under any historical authority keep the hard issue.
-        authorityRef.manifestDigest === nck1InImageOptionLabelsV2AuthorityRef.manifestDigest
-          ? derivationWarnings : null)
+        // Every accepted authority may soften dropped emphasis to warnings;
+        // emphasis outside any consumer's surface loses its style only.
+        derivationWarnings)
     }
   }
   if (pendingMeasurements.size) {

@@ -122,13 +122,14 @@ test('a consumed body emphasis mapping failure stays blocking under the current 
     && /does not match the exact materialized text/u.test(issue.message)), JSON.stringify(derived.issues))
   assert.equal((derived.warnings || []).length, 0)
 })
-test('unmatched emphasis under a historical authority stays a hard issue, not a drop', async () => {
+test('unmatched emphasis under a historical authority drops with a reviewable warning', async () => {
   const f = await makeSyntheticNck1OcrFixture()
   const confirmation = structuredClone(f.confirmation)
   confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
   // Emphasis on a paragraph no canonical surface consumes (the passage letter
-  // heading): current authority drops it with a warning; replaying the same
-  // bytes under the input-selected historical authority must keep failing.
+  // heading): every accepted authority now drops it with the same reviewable
+  // MATERIALIZATION_SOURCE_EMPHASIS_DROPPED warning, so imported bundles whose
+  // materialization was sealed under v10 still admit.
   const heading = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
     .find(item => item.text === 'A' && item.itemId.endsWith(':item-5'))
   assert(heading)
@@ -142,8 +143,9 @@ test('unmatched emphasis under a historical authority stays a hard issue, not a 
     documents: f.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })),
     media: produced.mediaFiles || [], ocrSourceBytes: { evidenceBytes: encode(f.evidence), confirmationBytes: encode(confirmation) } }
   const historical = deriveNck1MaterializationBundle(input, nck1OcrOptionEmphasisAuthorityRef)
-  assert(historical.issues.some(issue => issue.code === 'MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED'),
-    JSON.stringify(historical.issues))
+  assert.deepEqual(historical.issues, [])
+  assert(historical.warnings?.some(warning => warning.code === 'MATERIALIZATION_SOURCE_EMPHASIS_DROPPED'),
+    JSON.stringify(historical.warnings))
   const current = deriveNck1MaterializationBundle(input, nck1InImageOptionLabelsV2AuthorityRef)
   assert.deepEqual(current.issues, [])
   assert(current.warnings?.some(warning => warning.code === 'MATERIALIZATION_SOURCE_EMPHASIS_DROPPED'),
