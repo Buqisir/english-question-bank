@@ -51,10 +51,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
 
   function feedbackHtml(paper) {
     if (expanded !== paper.paperId || expandedKind !== 'feedback' || !detail) return ''
-    const threadId = detail.discussionThreadId
-    const threadLink = /^T-[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(threadId || '')
-      ? `<a href="https://ampcode.com/threads/${threadId}" target="_blank" rel="noopener noreferrer">提交后由 Agent 自动处理</a>`
-      : '提交后由 Agent 自动处理'
+    const threadLink = '提交后由 Agent 自动处理'
     const issues = detail.issues.filter(issue => ['open', 'fixed_pending_review'].includes(issue.state))
     return `<div class="owner-review-feedback">
       ${issues.length ? `<ul>${issues.map(issue => `<li>
