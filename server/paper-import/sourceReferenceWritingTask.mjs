@@ -267,7 +267,7 @@ function isObjectiveAnswerGrid(rows) {
 
 // Pure source-item preparation, including confirmed tables, figures and furniture.
 export function prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
-  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, referenceSourceDocuments } = {}) {
+  { paperName = materialization.paperName, producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, referenceSourceDocuments, onScopeError } = {}) {
   assertSourceReferenceProducerVersion(producerVersion)
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
   const sourceDocuments = usesAlternateAnswerScope(producerVersion)
@@ -288,7 +288,7 @@ export function prepareSourceReferenceWritingItems(materialization, evidence, co
   const sourceOrder = new WeakMap()
   const lineFacts = new WeakMap()
   const referenceFigures = []
-  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]), { producerVersion, materialization })
+  const scoringScopes = sourceReferenceScoringScopes(confirmation, new Set([answerDocument.documentId]), { producerVersion, materialization, onScopeError })
   const factsFor = line => {
     if (!lineFacts.has(line)) lineFacts.set(line, computeLineFacts(line))
     return lineFacts.get(line)
@@ -417,7 +417,7 @@ export function sourceReferenceWritingLifecycle(lines, {
   materialization, answerDocument, factsFor = computeLineFacts, scoringScopes = new Map(),
   titleFurniture = new WeakSet(), edgeTexts = new Map(), review: sourceReview = [],
   producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
-  alternateAnswerScope = null,
+  alternateAnswerScope = null, onScopeError = null,
 }) {
   assertSourceReferenceProducerVersion(producerVersion)
   const { matchesLineRole, firstLineRole } = sourceReferenceLineRoles(producerVersion)
@@ -726,7 +726,19 @@ export function sourceReferenceWritingLifecycle(lines, {
     } else if (scope.current && (!scoringAppendix || scoringScopes.get(line.itemId))) appendLine(line)
   }
   for (const section of sections.values()) {
-    Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization))
+    try {
+      Object.assign(section, planReferenceCapture(section, factsFor, producerVersion, scoringScopes, materialization))
+    } catch (error) {
+      // Soft-reference degradation: callers may collect a section failure and
+      // degrade only that task's essays/scoring instead of blocking the paper.
+      // Without a callback the behavior stays fail-closed.
+      if (!onScopeError || producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+        || error?.code !== 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID') throw error
+      section.captureError = error
+      section.sectionLines = section.sectionLines ?? applicationLetterReferenceLines(section, factsFor, producerVersion)
+      section.steps = section.steps ?? []
+      onScopeError({ taskType: section.taskType, error, section })
+    }
     for (const step of section.steps) if (step.line.itemId) {
       if (section.repeatedTask) step.state.repeatedTask = true
       items.set(step.line.itemId, step.state)
@@ -1034,21 +1046,34 @@ export function sourceReferenceEssayTaskStates(confirmation, answerIds, material
     ? nck1ReferenceOcrSourceDocuments(materialization.documents, confirmation, options?.referenceSourceDocuments) : materialization.documents
   const documents = sourceDocuments.filter(document => answerIds.has(document.documentId))
   const taskTypes = new Set()
+  const degradedTasks = new Set()
+  // Mirror the producer's soft degradation: a section whose capture planning
+  // fails marks its task degraded rather than aborting the lifecycle.
+  const onScopeError = info => degradedTasks.add(info.taskType)
   for (const document of documents) {
-    const source = prepareSourceReferenceWritingItems({ ...materialization, documents: [document] }, evidence, confirmation, options)
-    const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
+    const source = prepareSourceReferenceWritingItems({ ...materialization, documents: [document] }, evidence, confirmation,
+      { ...options, onScopeError })
+    const lifecycle = sourceReferenceWritingLifecycle(source.lines, { ...source, onScopeError })
     for (const taskType of lifecycle.sections.keys()) taskTypes.add(taskType)
+    for (const [taskType, section] of lifecycle.sections) {
+      if (section.captureError) degradedTasks.add(taskType)
+    }
     for (const [itemId, state] of lifecycle.items) states.set(itemId, state)
   }
   if (documents.length && usesExplicitWritingTitles(options?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION)) {
-    const missing = (materialization.groups ?? []).filter(group => group.writingTask && !taskTypes.has(group.writingTask.taskType))
+    const missing = (materialization.groups ?? []).filter(group =>
+      group.writingTask && !taskTypes.has(group.writingTask.taskType) && !degradedTasks.has(group.writingTask.taskType))
     if (missing.length && options?.sidecar?.wholeDocumentWritingAbsence) {
       wholeDocumentAbsenceSubject({ sidecar: options.sidecar, materialization, sourceInput: options.sourceInput,
         sourceDigest: options.sourceDigest, candidateDigest: options.candidateDigest })
       return states
     }
     for (const group of materialization.groups ?? []) {
-      if (group.writingTask && !taskTypes.has(group.writingTask.taskType)) {
+      if (group.writingTask && !taskTypes.has(group.writingTask.taskType)
+        && !degradedTasks.has(group.writingTask.taskType)) {
+        // Current producer: a wholly unrecognized task degrades like a failed
+        // section; historical authorities keep the hard failure.
+        if ((options?.producerVersion ?? OCR_SOURCE_REFERENCES_PRODUCER_VERSION) === OCR_SOURCE_REFERENCES_PRODUCER_VERSION) continue
         scopeError(`No answer-document section found for ${group.writingTask.taskType}`)
       }
     }

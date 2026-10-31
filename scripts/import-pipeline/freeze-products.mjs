@@ -12,7 +12,7 @@ import { renderReviewPdfProduct } from '../../server/import-review/reviewPaginat
 import { PRODUCT_MANIFEST, productInputDigest, readFrozenProducts } from '../../server/paper-import/frozenProducts.mjs'
 import { ABSENT_BY_EXAM_DESIGN, NO_LISTENING_PRODUCT_SCHEMA, productFiles, sourceProductEditions } from '../../server/paper-import/pdfProductSet.mjs'
 import { productPageLimitsForPlan } from '../../server/paper-import/paginationPlan.mjs'
-import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
+import { LARGE_PAGE_LIMIT_AUTHORIZATION, EXTENDED_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 
@@ -83,7 +83,9 @@ async function freeze(args) {
   if (currentInputDigest(rootDir, projection) !== inputDigest) throw new Error(`生成期间输入改变；保留失败产物 ${staging}`)
   const noListening = projection.config.listening === ABSENT_BY_EXAM_DESIGN
   const manifest = { schemaVersion: extendedLarge ? 'paper-pdf-products-v4' : noListening ? NO_LISTENING_PRODUCT_SCHEMA : economyPageLimit === 9 ? 'paper-pdf-products-v2' : 'paper-pdf-products-v1',
-    ...(extendedLarge ? { pageLimits, pageLimitAuthorization: LARGE_PAGE_LIMIT_AUTHORIZATION,
+    ...(extendedLarge ? { pageLimits, pageLimitAuthorization: (pageLimits.largeCompletePageLimit === 14
+      || pageLimits.largeNoListeningPageLimit === 12 || pageLimits.economyPageLimit === 10
+        ? EXTENDED_PAGE_LIMIT_AUTHORIZATION : LARGE_PAGE_LIMIT_AUTHORIZATION),
       ...(noListening ? { listening: ABSENT_BY_EXAM_DESIGN } : {}) } : noListening ? { listening: ABSENT_BY_EXAM_DESIGN, economyPageLimit } : economyPageLimit === 9 ? { economyPageLimit } : {}), paperId: projection.paperId,
     paperName: projection.paperName, examDate, inputDigest, files }
   writeFileSync(path.join(staging, PRODUCT_MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'wx' })

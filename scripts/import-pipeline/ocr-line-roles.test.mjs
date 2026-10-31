@@ -41,7 +41,9 @@ test('only known bracketed sample titles can authorize essays; unknown ranges bl
   }
   for (const text of ['【答案补充】', '[答案补充]', '【未知范文标题】', '一、【答案另见后页】']) {
     assert.equal(firstLineRole('entry-kind', computeLineFacts({ text })), null, text)
-    assert.throws(() => checkWritingRoleFixture([text]), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    // Unknown bracketed content no longer blocks; the task degrades to
+    // not_supplied with a review annotation (BUB-168).
+    assert(checkWritingRoleFixture([text]).groups.some(group => group.essays.state === 'not_supplied'), text)
   }
 })
 

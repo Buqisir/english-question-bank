@@ -126,7 +126,7 @@ export function applyPlannedGroupBreaks(html, groupIds) {
 }
 
 function applyFixedCover(html, { targetPages, omitCover, coverGapsPt }) {
-  if (![8, 10, 12].includes(targetPages)) throw new Error('targetPages must be 8, 10 or 12')
+  if (![8, 9, 10, 11, 12, 13, 14].includes(targetPages)) throw new Error('targetPages must be 8–14')
   if (omitCover) return html.replace('</head>', '<style data-pdf-omit-cover>.canonical-paper-opening{display:none}</style></head>')
   if (coverGapsPt) {
     const lift = coverGapsPt[0] < 0 ? `margin-top:${coverGapsPt[0]}pt;` : ''
@@ -496,10 +496,10 @@ export async function searchFixedPagePdf(html, {
   rejectOverflowCandidates = false, balanceWhitespace = false,
   requiredBreakGroupIds = [],
 }) {
-  if (![8, 10, 12].includes(targetPages) && !([9, 11, 13].includes(targetPages) && atMost === true)) {
-    throw new Error('targetPages must be 8, 10 or 12, or an explicit 9, 11 or 13-page ceiling')
+  if (![8, 10, 12].includes(targetPages) && !([9, 10, 11, 12, 13, 14].includes(targetPages) && atMost === true)) {
+    throw new Error('targetPages must be 8, 10 or 12, or an explicit 9–14-page ceiling')
   }
-  const preferWholeGroups = targetPages === 8 || targetPages === 9 || html.includes('data-pdf-omit-cover')
+  const preferWholeGroups = targetPages <= 10 || html.includes('data-pdf-omit-cover')
   const renderPlan = async (breaks) => {
     try { return await render(applyPlannedGroupBreaks(html, breaks), { inspect: inspectGroups }) } catch (error) {
       if (rejectOverflowCandidates && error.code === 'PAPER_LAYOUT_OVERFLOW') return null

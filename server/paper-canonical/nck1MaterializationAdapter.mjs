@@ -2481,7 +2481,7 @@ function validateOcrMediaConsumption(raw, resolved, confirmation, evidence, expe
   return topTrims
 }
 
-function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues, writingEmphasis = false, optionEmphasis = false, authorityRef, closure, pendingMeasurements = new Map()) {
+function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceBytes, review, issues, writingEmphasis = false, optionEmphasis = false, authorityRef, closure, pendingMeasurements = new Map(), warnings = null) {
   try {
     const ruleVersion = sourceEmphasisRuleVersion(closure)
     let restoredParagraphs = []
@@ -2679,9 +2679,17 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         const pointer = blockPath.replace(/\[(\d+)\]/gu, '/$1').replaceAll('.', '/')
         const derived = derivedBlocks.get(block.blockId)
         if (!derived) throw new Error('OCR emphasis targets a source instruction without a rich-text paragraph')
-        const inlines = apply(block.source, block.content.map((item, index) => ({
-          text: item.text, pointer: `${pointer}/content/${index}/text`,
-        })), derived.inlines, block.blockId, derivedGroup)
+        let inlines = null
+        try {
+          inlines = apply(block.source, block.content.map((item, index) => ({
+            text: item.text, pointer: `${pointer}/content/${index}/text`,
+          })), derived.inlines, block.blockId, derivedGroup)
+        } catch (error) {
+          if (!warnings) throw error
+          // Emphasis on an unsupported target drops the marks, not the text.
+          warnings.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_DROPPED',
+            error.message, pointer))
+        }
         if (inlines) derived.inlines = inlines
       }
       for (const [index, question] of group.questions.entries()) {
@@ -2724,7 +2732,18 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         if (inlines) derived.stem = inlines
       }
     }
-    if (consumed.size !== marked.size) throw new Error('OCR source emphasis has an unmatched or unsupported target')
+    if (consumed.size !== marked.size) {
+      // OCR emphasis no surface consumes (e.g. bolded seven-choices subheads or
+      // answer-document marks) loses the style only; the text stays literal and
+      // each dropped mark is reported for review instead of blocking.
+      if (!warnings) throw new Error('OCR source emphasis has an unmatched or unsupported target')
+      for (const [key, paragraph] of marked) {
+        if (consumed.has(key)) continue
+        warnings.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_DROPPED',
+          'OCR source emphasis has an unmatched or unsupported target',
+          `ocrSourceEmphasis[${key.slice(0, 12)}…] ${JSON.stringify(paragraph.sourceIndex)}`))
+      }
+    }
     // Join after source emphasis and editorial mapping. The two original text
     // segments retain their inline IDs, exact report pointers and source spans.
     for (const { join, blocks, confirmedItems } of paragraphJoins) {
@@ -2943,6 +2962,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     }
   }
   const derivationIssues = []
+  const derivationWarnings = []
   const source = deriveNck1SemanticSource(
     materialization,
     validation.documentsById,
@@ -2972,7 +2992,11 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
       appendOcrReadingSourceEmphasis(source, rawMaterialization, validation.documentsById, input.ocrSourceBytes,
         input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
         ['4', '5'].includes(resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version),
-        [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure, pendingMeasurements)
+        [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure, pendingMeasurements,
+        // Only the authority this input currently selects may soften dropped
+        // emphasis to warnings; historical replays keep the hard issue.
+        nck1MaterializationAuthorityForInput(rawInput).manifestDigest === authorityRef.manifestDigest
+          ? derivationWarnings : null)
     }
   }
   if (pendingMeasurements.size) {
@@ -2986,6 +3010,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
       source,
       request: null,
       issues: derivationIssues,
+      warnings: derivationWarnings,
     }
   }
   return {
@@ -2994,6 +3019,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     materialization,
     materializationDigest: digestNck1SourceMaterialization(materialization, options),
     source,
+    warnings: derivationWarnings,
     request: {
       authority: authorityRef,
       evidence: {

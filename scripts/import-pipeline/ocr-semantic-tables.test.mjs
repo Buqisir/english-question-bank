@@ -5,7 +5,6 @@ import { buildSourceReferences, joinTranscriptTurns } from './ocr-proofread.mjs'
 import { validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
-import { spawnSync } from 'node:child_process'
 
 function rubricHeadingFixture(headingPage, intervening = false) {
   const line = (text, id) => ({ text, itemId: id, observationIds: [`w-${id}`] })
@@ -166,15 +165,15 @@ for (const header of ['题号 题型 分值 考查的主要内容及知识点 �
     && /specification/u.test(item.issue)), 'excluded source table is named in the review')
 })
 
-test('an unscoped table without an explicit specification header still fails closed', () => {
+test('an unscoped table without an explicit specification header degrades its task', () => {
   const input = specificationAppendixFixture('其他材料')
   input[2].documents[0].pages[3].orderedItems[4].text = '其他说明'
-  const script = `import { buildSourceReferences } from ${JSON.stringify(new URL('./ocr-proofread.mjs', import.meta.url).href)};
-    buildSourceReferences(...JSON.parse(process.argv[1]));`
-  const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, JSON.stringify(input)],
-    { encoding: 'utf8' })
-  assert.equal(result.status, 1)
-  assert.match(result.stderr, /Source table .* has no writing-task scope/u)
+  // BUB-168: the unattached scoring table's task degrades to not_supplied
+  // rather than aborting the whole build.
+  const result = buildSourceReferences(...input)
+  assert(result.groups.some(group => group.essays.state === 'not_supplied'
+    || group.scoring.state === 'not_supplied'))
+  assert(result.review.some(entry => /degraded to not_supplied/u.test(entry.issue)))
 })
 
 function objectiveAnswerTableFixture(rows = [['题号', '21', '22'], ['答案', 'C', 'B']]) {

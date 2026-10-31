@@ -32,7 +32,7 @@ const WRITING_SCORE_AFTER_GLOSS = new RegExp(
 // Sources print "Text 6（第6题为主旨题）"; NFKC folds full-width brackets.
 // Zhenhai also prints "Text 8 打听一位画家（第10题为推断题）".
 // Match the whole marker, keeping its Chinese title/note out of speech.
-const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(Text\s*(\d{1,2})\))\s*(?:\((?=[^()]*\p{Script=Han})[^()]+\)\s*|(?=[^()\n]*\p{Script=Han})[\p{Script=Han}A-Za-z0-9\s()、，,]+)?[:：]?$/iu
+const LISTENING_TEXT_MARKER = /^(?:Text\s*(\d{1,2})|\(\s*Text\s*(\d{1,2})\s*\))\s*(?:\((?=[^()]*\p{Script=Han})[^()]+\)\s*|(?=[^()\n]*\p{Script=Han})[\p{Script=Han}A-Za-z0-9\s()、，,]+)?[:：]?$/iu
 // English samples never open a paragraph with Chinese; such a paragraph is the key's own
 // commentary (【审题重点】, 主题语境：…). Chinese version labels still separate alternatives.
 const WRITING_SAMPLE_COMMENTARY = /^(?:【|(?!(?:参考)?范文|考场作文)\p{Script=Han})/u

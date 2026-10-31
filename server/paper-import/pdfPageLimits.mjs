@@ -4,20 +4,25 @@ export const DEFAULT_PRODUCT_PAGE_LIMITS = Object.freeze({
 export const LARGE_PAGE_LIMIT_AUTHORIZATION = Object.freeze({
   authorizedBy: 'Owner', authorizedOn: '2026-10-24', basis: 'BUB-138',
 })
+// BUB-168: one further +2 ceiling tier beyond the BUB-138 +1 allowance.
+export const EXTENDED_PAGE_LIMIT_AUTHORIZATION = Object.freeze({
+  authorizedBy: 'Owner', authorizedOn: '2026-10-24', basis: 'BUB-168',
+})
+const PAGE_LIMIT_AUTHORIZATIONS = [LARGE_PAGE_LIMIT_AUTHORIZATION, EXTENDED_PAGE_LIMIT_AUTHORIZATION]
 
 export function validateProductPageLimits(options) {
   for (const [key, baseline] of Object.entries(DEFAULT_PRODUCT_PAGE_LIMITS)) {
-    if (![baseline, baseline + 1].includes(options[key] === undefined ? baseline : options[key])) {
-      throw new Error(`${key} only accepts ${baseline} or an explicit ${baseline + 1} ceiling`)
+    if (![baseline, baseline + 1, baseline + 2].includes(options[key] === undefined ? baseline : options[key])) {
+      throw new Error(`${key} only accepts ${baseline} or an explicit ${baseline + 1} or ${baseline + 2} ceiling`)
     }
   }
   return { ...DEFAULT_PRODUCT_PAGE_LIMITS, ...options }
 }
 
 export function validatePageLimitAuthorization(value) {
-  if (!value || Object.keys(value).sort().join() !== Object.keys(LARGE_PAGE_LIMIT_AUTHORIZATION).sort().join()
-    || Object.entries(LARGE_PAGE_LIMIT_AUTHORIZATION).some(([key, expected]) => value[key] !== expected)) {
-    throw new Error('Page limit authorization must identify Owner 2026-10-24 BUB-138')
+  if (!value || !PAGE_LIMIT_AUTHORIZATIONS.some(expected => Object.keys(value).sort().join() === Object.keys(expected).sort().join()
+    && Object.entries(expected).every(([key, v]) => value[key] === v))) {
+    throw new Error('Page limit authorization must identify Owner 2026-10-24 BUB-138 or BUB-168')
   }
 }
 

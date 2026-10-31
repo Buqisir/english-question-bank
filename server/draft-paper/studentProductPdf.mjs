@@ -18,7 +18,7 @@ export function studentProductPolicy(edition, listeningCount, { economyPageLimit
   }
   return { targetPages: edition === 'economy8' ? economyPageLimit : edition === 'largeComplete' ? largeCompletePageLimit : largeNoListeningPageLimit,
     includeListening: edition === 'largeComplete', omitCover: false,
-    atMost: edition !== 'economy8' || economyPageLimit === 9 }
+    atMost: edition !== 'economy8' || economyPageLimit >= 9 }
 }
 
 export function validateStudentProductLayout(layout, edition) {
@@ -112,7 +112,7 @@ function acceptableWriting(result, html) {
 }
 
 function impossible(edition, searchedCandidates, economyPageLimit = 8) {
-  const economy = economyPageLimit === 9 ? '九页上限省纸版（五号）' : '八页省纸版（小四及五号）'
+  const economy = economyPageLimit === 9 ? '九页上限省纸版（五号）' : economyPageLimit === 10 ? '十页上限省纸版（五号）' : '八页省纸版（小四及五号）'
   return Object.assign(new Error(`未在有界搜索内找到合格的${edition === 'economy8' ? economy : '大字版'}；未删改正文或裁切答题框`), {
     code: 'PAPER_FIXED_PAGE_IMPOSSIBLE', searchedCandidates,
   })
@@ -148,7 +148,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
   const accept = result => acceptableWriting(result, html)
   const withinPages = result => policy.atMost ? result.pageCount <= policy.targetPages : result.pageCount === policy.targetPages
   const timed = timedCandidateRender(render, { edition, accepts: result => withinPages(result) && accept(result) })
-  const fontSizes = edition === 'economy8' ? economyPageLimit === 9 ? [10.5] : [12, 10.5] : [12]
+  const fontSizes = edition === 'economy8' ? economyPageLimit >= 9 ? [10.5] : [12, 10.5] : [12]
   const layoutFor = (fontSizePt, figureLayout, application, continuation, coverLift = false) => ({
     profile: coverLift ? coverLiftProfile : edition === 'economy8' ? economyProfile : STUDENT_PRODUCT_PROFILE, fontSizePt, figureLayout,
     answerBoxHeightsMm: { application, continuation } })
@@ -284,8 +284,8 @@ export async function renderExplicitStudentProductPdf(html, {
   edition, layout, plannedBreakGroupIds, render, economyPageLimit = 8, largeCompletePageLimit = 12, largeNoListeningPageLimit = 10, restoreAnswerBoxes = false,
 }) {
   const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
-  if (edition === 'economy8' && economyPageLimit === 9 && layout.fontSizePt !== 10.5) {
-    throw new Error('九页上限省纸版须保持10.5pt正文及18pt行距')
+  if (edition === 'economy8' && economyPageLimit >= 9 && layout.fontSizePt !== 10.5) {
+    throw new Error('扩展页上限省纸版须保持10.5pt正文及18pt行距')
   }
   let searchedCandidates = 0
   const timed = timedCandidateRender(render, { edition, accepts: result => accept(result) })

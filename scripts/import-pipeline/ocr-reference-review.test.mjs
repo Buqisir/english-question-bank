@@ -186,11 +186,22 @@ test('v21 protects samples after explicit and named task headings across repeate
     }
     const input = writingFixture([heading, 'Original application.', '第一节', 'Unlabeled application.', '第二节'], ['application'])
     assert.throws(() => prepareSourceReferenceWritingItems(...input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    // The current producer degrades the unrecognized repeated section instead
+    // of blocking; admission replays the same degraded baseline (BUB-168).
+    const degraded = buildSourceReferences(...input)
+    assert.equal(degraded.groups[0].essays.state, 'not_supplied')
+    assert(degraded.review.some(entry => /degraded to not_supplied/u.test(entry.issue)))
     const sourceInput = { documents: [], ocrSourceBytes: {
       evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
     } }
-    assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }),
-      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    // Admission still fails closed when degraded evidence locators cannot be
+    // proven against exact source bytes.
+    assert.throws(() => assertSourceReferenceAdmission({ sidecar: { schemaVersion: 'source-references-v1',
+      paperId: input[0].paperId, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+      sourceDigest: sha256('a'), candidateDigest: sha256('b'), materializationDigest: digestJson(input[0]),
+      groups: degraded.groups }, materialization: input[0], sourceInput,
+      sourceDigest: sha256('a'), candidateDigest: sha256('b') }),
+      { code: 'SOURCE_REFERENCES_SOURCE_BYTES_CHANGED' })
     const part = writingFixture([heading, 'Original application.', '第四部分 写作\n第一节',
       '参考范文', 'Another application.'], ['application'])
     assert.throws(() => prepareSourceReferenceWritingItems(...part), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
@@ -207,15 +218,24 @@ test('v21 retains a complete unlabeled letter when a later bare section supplies
     [['Dear Sam,', 'Our class meets tomorrow.', 'Yours,', 'Alex'], ['Another original application.']])
 })
 
-test('v21 rejects unlabeled content after a repeated bare section in producer and admission', () => {
+test('v21 degrades unlabeled content after a repeated bare section to not_supplied', () => {
   const input = writingFixture(['第四部分 写作', '第一节', '参考范文', 'First original sample.',
     '第一节', 'Unlabeled new sample.', '第二节'], ['application'])
   assert.throws(() => prepareSourceReferenceWritingItems(...input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  // Current producer: degrade the unlabeled repeat instead of blocking the
+  // paper; admission accepts the matching degraded sidecar (BUB-168).
+  const degraded = buildSourceReferences(...input)
+  assert.equal(degraded.groups[0].essays.state, 'not_supplied')
+  assert(degraded.review.some(entry => /degraded to not_supplied/u.test(entry.issue)))
   const sourceInput = { documents: [], ocrSourceBytes: {
     evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
   } }
-  assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }),
-    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => assertSourceReferenceAdmission({ sidecar: { schemaVersion: 'source-references-v1',
+    paperId: input[0].paperId, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION,
+    sourceDigest: sha256('a'), candidateDigest: sha256('b'), materializationDigest: digestJson(input[0]),
+    groups: degraded.groups }, materialization: input[0], sourceInput,
+    sourceDigest: sha256('a'), candidateDigest: sha256('b') }),
+    { code: 'SOURCE_REFERENCES_SOURCE_BYTES_CHANGED' })
 })
 
 for (const writingHeading of [['第四部分 写作', '第一节'], ['应用文参考范文'], ['应用文']]) {
@@ -561,11 +581,13 @@ test('sealed v17 replay requires the exact receipt digest and source identity', 
     { code: 'SOURCE_REFERENCES_BINDING_STALE' })
   assert.deepEqual(historical, original)
   // The same ranges cannot claim current semantics; no external override can
-  // reinterpret a bound sidecar as the caller's preferred version.
+  // reinterpret a bound sidecar as the caller's preferred version. The exact
+  // rejection moved to sealed figure/scoring replay once soft-scope errors
+  // degrade (BUB-168), but admission still refuses the mismatched claim.
   assert.throws(() => assertSourceReferenceAdmission({ ...input,
     sidecar: { ...historical, producerVersion: OCR_SOURCE_REFERENCES_PRODUCER_VERSION },
     producerVersion: LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION }),
-  { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  /Scoring figure requires its exact confirmed scoring label|SOURCE_REFERENCE_WRITING_SCOPE_INVALID/u)
   const prepared = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation)
   const boundary = prepared.lines.find(line => line.text === '解析')
   const state = sourceReferenceWritingLifecycle(prepared.lines, prepared).items.get(boundary.itemId)
@@ -753,8 +775,11 @@ test('given-title article survives independent admission and cannot be forged as
   application.writingTask.givenSkeleton[0].text = 'A Different Task Title'
   const retitled = { ...sidecar, materializationDigest: digestJson(input.materialization) }
   input.sourceInput.materializationBytes = Buffer.from(JSON.stringify(input.materialization))
+  // The retitled task no longer matches its confirmed source range; under the
+  // current producer the replay degrades that task, so the sealed sidecar is
+  // rejected for content drift rather than the old scope error (BUB-168).
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: retitled }),
-    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    /preserve every confirmed sample|SOURCE_REFERENCE_WRITING_SCOPE_INVALID/u)
 })
 
 test('given-title article entry rejects unrelated titles, copied prompts, missing body and cross-explanation ownership', () => {
@@ -883,9 +908,18 @@ test('unresolved nonempty sample ranges fail capture and admission instead of cl
       evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
     } }
     assert.throws(() => lifeFor(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
-    assert.throws(() => assertSourceReferenceAdmission({ sidecar, materialization: input[0], sourceInput,
-      sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest }),
-    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    // Current producer degrades the unresolved range to not_supplied instead
+    // of blocking (BUB-168); the pre-degradation sidecar no longer replays.
+    const degraded = buildSourceReferences(...input)
+    assert.equal(degraded.groups[0].essays.state, 'not_supplied')
+    assert(degraded.review.some(entry => /degraded to not_supplied/u.test(entry.issue)))
+    // A sidecar captured under supplied content still cannot claim its sample
+    // once the degraded replay loses it; an explicit-略 absence replays the
+    // same not_supplied shape and is admitted as equivalent honest absence.
+    const admit = () => assertSourceReferenceAdmission({ sidecar, materialization: input[0], sourceInput,
+      sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest })
+    if (supplied) assert.throws(admit, /preserve every confirmed sample/u)
+    else admit()
   }
 })
 
@@ -916,11 +950,17 @@ test('task ranges reject unresolved content without requiring a sample label', t
       evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
     } }
     assert.throws(() => lifeFor(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
-    assert.throws(() => buildSourceReferences(...input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
-    for (const value of [sidecar, null]) assert.throws(() => assertSourceReferenceAdmission({
-      sidecar: value, materialization: input[0], sourceInput,
+    // The current producer degrades unresolved task content to not_supplied
+    // rather than blocking the paper (BUB-168).
+    const degraded = buildSourceReferences(...input)
+    assert.equal(degraded.groups[0].essays.state, 'not_supplied', title)
+    assert(degraded.review.some(entry => /degraded to not_supplied/u.test(entry.issue)), title)
+    // The retained explicit-略 sidecar and the degraded baseline are the same
+    // not_supplied shape; admission accepts the equivalent honest absence.
+    assertSourceReferenceAdmission({
+      sidecar, materialization: input[0], sourceInput,
       sourceDigest: sidecar.sourceDigest, candidateDigest: sidecar.candidateDigest,
-    }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' }, title)
+    })
   }
 })
 
@@ -943,9 +983,8 @@ test('task-adjacent tables need explicit scoring ownership, including inline sco
   page.orderedItems[0].text = '应用文写作（满分15分）'
   proof.observations[0].text = page.orderedItems[0].text
   reseal(input)
-  assert.throws(() => captureScoringReferences(input), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
-  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: null }),
-    { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  assert.throws(() => captureScoringReferences(input), /essay anchor|writing-task scope/u)
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: null }))
   for (const title of ['应用文（满分15分）', '读后续写（满分25分）']) {
     const prepared = prepareSourceReferenceWritingItems(...writingFixture([title, 'Source table cell.']))
     prepared.lines[1].table = { kind: 'table', rows: [[{ text: 'Source table cell.' }]] }
@@ -988,8 +1027,11 @@ test('admission rejects fake absence for new task headings and missing source ta
     const sourceInput = { documents: [], ocrSourceBytes: {
       evidenceBytes: Buffer.from(JSON.stringify(input[1])), confirmationBytes: Buffer.from(JSON.stringify(input[2])),
     } }
+    // Unresolved scopes now degrade to not_supplied at the producer; a null
+    // sidecar still cannot claim absence over confirmed capture states
+    // (BUB-168 moved the rejection from scope to essay coverage).
     assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0], sourceInput }),
-      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+      { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
   }
   const input = writingFixture(['应用文参考范文：', 'A confirmed sample.'], ['application'])
   assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization: input[0],

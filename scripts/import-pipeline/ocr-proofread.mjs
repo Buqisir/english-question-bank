@@ -1172,9 +1172,16 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   if (retainedImages && !referenceSourceDocuments) {
     referenceSourceDocuments = resolveReferenceSourceDocuments(materialization, sourceDocuments, referenceSourceManifest)
   }
+  // Unrecognized writing-reference structure degrades that task to
+  // not_supplied with a review annotation instead of blocking the paper.
+  // Producer and admission share this path, so the replayed baseline agrees.
+  const degraded = new Map()
+  const degrade = info => {
+    degraded.set(info.taskType, { reason: info.error?.message || String(info.error), itemId: info.error?.itemId ?? null })
+  }
   const source = prepareSourceReferenceWritingItems(materialization, evidence, confirmation,
-    { paperName, producerVersion, referenceSourceDocuments })
-  const lifecycle = sourceReferenceWritingLifecycle(source.lines, source)
+    { paperName, producerVersion, referenceSourceDocuments, onScopeError: degrade })
+  const lifecycle = sourceReferenceWritingLifecycle(source.lines, { ...source, onScopeError: degrade })
   const alternateAnswerScope = bindAlternateAnswerScope(source.alternateAnswerScope, evidence, confirmation, sourceInput?.ocrSourceBytes)
   if (alternateAnswerScope && absenceSidecar?.wholeDocumentWritingAbsence) {
     throw new Error('Alternate scope cannot combine with whole-document writing absence')
@@ -1197,10 +1204,39 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   let hasScoringFigures = false
   const structuredScoring = pages.some(page =>
     page.visualClassifications?.some(visual => visual.classification === 'semantic_table'))
+  // Degraded sections keep the exact not_supplied shape (state/entries/evidence
+  // only): schemas are additionalProperties:false and admission replays the
+  // group bytes, so the annotation lives only in the review channel.
+  const degradedSection = (taskType, reason, itemId) => {
+    review.push({ taskType, ...(itemId ? { itemId } : {}),
+      issue: `writing references degraded to not_supplied: ${reason}` })
+    const evidence = absenceDocuments
+      ? absenceDocuments.flatMap(document => Array.from({ length: document.pageCount }, (_, index) => ({
+        documentSha256: document.sha256, locator: { kind: 'page_region',
+          documentId: document.documentId, page: index + 1, region: { ...FULL_PAGE } },
+      })))
+      : pages.map((page) => ({ documentSha256,
+        locator: { kind: 'page_region', documentId: answerDocument.documentId, page: page.page, region: { ...FULL_PAGE } } }))
+    const section = { state: 'not_supplied', entries: [], evidence }
+    return { essays: structuredClone(section), scoring: structuredClone(section) }
+  }
+  // Soft degradation applies to the current producer only; historical
+  // authorities keep their exact recorded behavior.
+  const softDegrade = producerVersion === OCR_SOURCE_REFERENCES_PRODUCER_VERSION
   const groups = materialization.groups.filter((group) => group.writingTask).map((group) => {
     const taskType = group.writingTask.taskType
     const section = sections.get(taskType)
-    if (!section) fail(`No answer-document section found for ${taskType}`)
+    const degradedInfo = degraded.get(taskType)
+    if (degradedInfo || section?.captureError) {
+      const info = degradedInfo ?? { reason: section.captureError.message }
+      if (!softDegrade) throw section.captureError ?? new Error(info.reason)
+      return { groupId: group.groupId, taskType, ...degradedSection(taskType, info.reason, info.itemId) }
+    }
+    if (!section) {
+      if (!softDegrade) fail(`No answer-document section found for ${taskType}`)
+      return { groupId: group.groupId, taskType,
+        ...degradedSection(taskType, `No answer-document section found for ${taskType}`) }
+    }
     // The signature ends only the admitted model answer. Explicit scoring may
     // follow, but questions, speech and prompts terminate both capture lanes.
     const { sectionLines, sampleTitles } = section
@@ -1324,7 +1360,9 @@ export function buildSourceReferences(materialization, evidence, confirmation,
       previousLocation = decision.location.after
     }
     if (section.awaitingSourceLabel) {
-      fail('Unresolved continuation reference after reprinted prompt; confirm the source sample label or explicit omission')
+      if (!softDegrade) fail('Unresolved continuation reference after reprinted prompt; confirm the source sample label or explicit omission')
+      return { groupId: group.groupId, taskType, ...degradedSection(taskType,
+        'Unresolved continuation reference after reprinted prompt; confirm the source sample label or explicit omission') }
     }
     flush()
     const section_ = (kind) => {
@@ -1400,7 +1438,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     }
     return { groupId: group.groupId, taskType, essays: section_('essays'), scoring: section_('scoring') }
   })
-  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures, { producerVersion, materialization })
+  const objectiveFigures = sourceReferenceObjectiveFigures(confirmation, new Set([answerDocument.documentId]), referenceFigures, { producerVersion, materialization, onScopeError: degrade })
   const excludedFigures = referenceFigures.filter(figure =>
     !assignedFigures.has(figure) && (objectiveFigures.has(sourceReferenceFigureIdentity(figure))
       || explanationFigures.has(sourceReferenceFigureIdentity(figure))))

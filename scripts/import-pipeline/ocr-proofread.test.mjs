@@ -759,13 +759,21 @@ test('bare sections reject incomplete letters, non-writing material and unbounde
       .map(heading => ['65. growing', heading, '第一节', ...letter]),
   ]
   for (const texts of cases) {
-    assert.throws(() => referencesFixture(texts, ['application'], { lastQuestion: 65 }),
-      { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ }, JSON.stringify(texts))
+    // BUB-168: an unresolvable writing section degrades to not_supplied with a
+    // review annotation instead of blocking the paper (current producer only).
+    const result = referencesFixture(texts, ['application'], { lastQuestion: 65 })
+    assert.equal(result.groups[0].essays.state, 'not_supplied', JSON.stringify(texts))
+    assert.equal(result.groups[0].scoring.state, 'not_supplied', JSON.stringify(texts))
+    assert(result.review.some(r => /degraded to not_supplied/u.test(r.issue)), JSON.stringify(texts))
   }
-  assert.throws(() => referencesFixture(['65. growing', '第一节', ...letter], ['application'],
-    { lastQuestion: 65, role: 'question_and_answers' }), { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ })
-  assert.throws(() => referencesFixture(['65. growing', '第一节', ...letter], ['application']),
-    { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ })
+  for (const result of [
+    referencesFixture(['65. growing', '第一节', ...letter], ['application'],
+      { lastQuestion: 65, role: 'question_and_answers' }),
+    referencesFixture(['65. growing', '第一节', ...letter], ['application']),
+  ]) {
+    assert.equal(result.groups[0].essays.state, 'not_supplied')
+    assert.equal(result.groups[0].scoring.state, 'not_supplied')
+  }
 })
 
 test('Arabic-numbered Chinese story commentary does not become an unlabeled reference', () => {
@@ -963,12 +971,15 @@ test('confirmed bare fourth-part omission captures absence without inventing a m
   }
 })
 
-test('an unconfirmed missing writing section still fails closed', t => {
+test('an unconfirmed missing writing section degrades to not_supplied', t => {
   for (const texts of [
     ['第四部分', '听力部分原文'], ['第四部分', 'A mystery sample.'],
     ['第三部分', '（略）', '听力部分原文'], ['略', '听力部分原文'],
   ]) {
-    assert.throws(() => referencesFixture(texts, ['application', 'continuation']), { code: 'OCR_PROOFREAD_INVALID', message: /No answer-document section found for application/ })
+    const result = referencesFixture(texts, ['application', 'continuation'])
+    const application = result.groups.find(g => g.taskType === 'application')
+    assert.equal(application.essays.state, 'not_supplied', JSON.stringify(texts))
+    assert(result.review.some(r => r.taskType === 'application' && /degraded to not_supplied/u.test(r.issue)))
   }
 })
 
@@ -994,12 +1005,14 @@ test('reprinted continuation prompt and givens stay outside samples until an exp
   assert.equal(legitimate.groups[0].scoring.entries[0].paragraphs[0].text, '（中文评分正文）')
 })
 
-test('an unlabeled sample after a reprinted prompt requires confirmation instead of claiming absence', t => {
+test('an unlabeled sample after a reprinted prompt degrades to not_supplied', t => {
   for (const ending of [[], ['听力原文'], ['（五）样卷'], ['4. 评分细则', '按内容给分。']]) {
-    assert.throws(() => referencesFixture(['第二节 读后续写',
+    const result = referencesFixture(['第二节 读后续写',
       '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
-      'An original story.', 'Paragraph 1:', 'The neighbors joined the cleanup.', ...ending]),
-    { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ })
+      'An original story.', 'Paragraph 1:', 'The neighbors joined the cleanup.', ...ending])
+    assert.equal(result.groups[0].essays.state, 'not_supplied')
+    assert.equal(result.groups[0].scoring.state, 'not_supplied')
+    assert(result.review.some(r => /degraded to not_supplied/u.test(r.issue)))
   }
   const omitted = referencesFixture(['第二节 读后续写',
     '阅读下面短文，根据所给情节进行续写，使之构成一个完整的故事。',
@@ -1039,7 +1052,9 @@ test('v23 recognizes an unlabeled continuation only with both ordered given star
     ['Mary paused at the gate. __', '__', second],
     [first, "Slowly, the baby's cries softened. __", '__'],
     ['Mary paused at the gate. Paragraph 2:', second]]) {
-    assert.throws(() => referencesFixture([...prompt, ...body], ['continuation'], { starters }), { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ })
+    const result = referencesFixture([...prompt, ...body], ['continuation'], { starters })
+    assert.equal(result.groups[0].essays.state, 'not_supplied', JSON.stringify(body))
+    assert(result.review.some(r => /degraded to not_supplied/u.test(r.issue)), JSON.stringify(body))
   }
   assert.throws(() => referencesFixture([...prompt, first, second], ['continuation'],
     { starters, producerVersion: 'ocr-source-references-producer-v22' }), { code: 'OCR_PROOFREAD_INVALID', message: /Unresolved continuation reference/ })
@@ -1062,8 +1077,12 @@ test('parenthesized Chinese glosses retain English prose and unresolved nonempty
   }
   for (const text of ['（中文指导）后续说明', '(中文指导)后续说明', '（幼苗 and roots）',
     '（一）幼苗 and planted it beside the gate.', '（1）借助 AI 学习。', '（中文 AI 指导', '（注释）“…”']) {
-    assert.throws(() => referencesFixture(['第二节 读后续写', '参考范文', text]),
-      { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID', message: /Unresolved (nonempty writing task range|mixed-language source sample text)/ })
+    // Unresolved Chinese-only ranges degrade to not_supplied rather than
+    // blocking the paper (BUB-168); the detection itself is unchanged.
+    const result = referencesFixture(['第二节 读后续写', '参考范文', text])
+    assert.equal(result.groups[0].essays.state, 'not_supplied', text)
+    assert.equal(result.groups[0].scoring.state, 'not_supplied', text)
+    assert(result.review.some(r => /degraded to not_supplied/u.test(r.issue)), text)
   }
 })
 
@@ -1191,7 +1210,12 @@ test('task scoring headings require resolved notes before separately labelled of
     '读后续写评分细则：', '一、.参考范文', labels[2], 'Rae found a packet of seeds.',
     '范文分析', '这是一段中文讲解。', labels[3], 'A new leaf appeared by the window.',
     '二、评分原则（采取双评）', '1. 本题总分为25分。']
-  assert.throws(() => referencesFixture(texts, ['application', 'continuation']), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+  // Without the resolved 审题重点 note the application task degrades to
+  // not_supplied while the resolvable continuation still captures (BUB-168).
+  const degraded = referencesFixture(texts, ['application', 'continuation'])
+  assert.equal(degraded.groups[0].essays.state, 'not_supplied')
+  assert.equal(degraded.groups[1].essays.state, 'captured')
+  assert(degraded.review.some(r => /degraded to not_supplied/u.test(r.issue)))
   texts.splice(3, 0, '【审题重点】')
   const result = referencesFixture(texts, ['application', 'continuation'])
   const essays = result.groups.flatMap(group => group.essays.entries)

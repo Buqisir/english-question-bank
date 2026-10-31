@@ -1,4 +1,4 @@
-import { DEFAULT_PRODUCT_PAGE_LIMITS, LARGE_PAGE_LIMIT_AUTHORIZATION, validatePageLimitAuthorization } from './pdfPageLimits.mjs'
+import { DEFAULT_PRODUCT_PAGE_LIMITS, LARGE_PAGE_LIMIT_AUTHORIZATION, EXTENDED_PAGE_LIMIT_AUTHORIZATION, validatePageLimitAuthorization } from './pdfPageLimits.mjs'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
@@ -25,12 +25,17 @@ export function productPageLimitsForPlan(plan) {
 }
 
 export function productPlanVersion(editions) {
-  return editions?.largeComplete?.targetPages === 13 || editions?.largeNoListening?.targetPages === 11
+  return [13, 14].includes(editions?.largeComplete?.targetPages) || [11, 12].includes(editions?.largeNoListening?.targetPages)
+    || editions?.economy8?.targetPages === 10
     ? 'paper-pagination-plan-v6' : editions?.economy8?.targetPages === 9 ? 'paper-pagination-plan-v5' : 'paper-pagination-plan-v4'
 }
 
-export function productPlanAuthorization(schemaVersion) {
-  return schemaVersion === 'paper-pagination-plan-v6' ? { pageLimitAuthorization: { ...LARGE_PAGE_LIMIT_AUTHORIZATION } } : {}
+export function productPlanAuthorization(schemaVersion, editions) {
+  if (schemaVersion !== 'paper-pagination-plan-v6') return {}
+  // The +2 tier (14/12/10) declares BUB-168; the +1 tier keeps BUB-138.
+  const extended = editions?.largeComplete?.targetPages === 14
+    || editions?.largeNoListening?.targetPages === 12 || editions?.economy8?.targetPages === 10
+  return { pageLimitAuthorization: { ...(extended ? EXTENDED_PAGE_LIMIT_AUTHORIZATION : LARGE_PAGE_LIMIT_AUTHORIZATION) } }
 }
 
 function invalid(message) {
@@ -84,8 +89,8 @@ export function validatePaperPaginationPlan(plan, {
     if (product) {
       if (!['paper-pagination-plan-v4', 'paper-pagination-plan-v5', 'paper-pagination-plan-v6'].includes(plan.schemaVersion)) invalid(`${edition} requires paper-pagination-plan-v4, v5 or v6`)
       try { validateStudentProductLayout(entry?.layout, edition) } catch (error) { invalid(error.message) }
-      if (edition === 'economy8' && economyPageLimit === 9 && (entry.layout.fontSizePt !== 10.5
-        || entry.layout.profile !== 'student-friendly-economy-v2')) invalid('nine-page economy must retain its 10.5pt economy-v2 layout')
+      if (edition === 'economy8' && economyPageLimit >= 9 && (entry.layout.fontSizePt !== 10.5
+        || entry.layout.profile !== 'student-friendly-economy-v2')) invalid('extended-page economy must retain its 10.5pt economy-v2 layout')
       if (entry.allowSplitOptionBank !== false || entry.omitCover !== false || entry.coverGapsPt !== null
         || Object.hasOwn(entry, 'answerBoxHeightsMm')) invalid(`${edition} product policy was changed`)
     } else if (Object.hasOwn(entry || {}, 'layout')) invalid(`${edition} cannot adopt a new product layout`)

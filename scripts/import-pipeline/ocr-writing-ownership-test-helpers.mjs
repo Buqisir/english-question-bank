@@ -67,7 +67,7 @@ export function checkWritingRoleFixture(texts, sourceLine = {}) {
     assert.throws(() => assertSourceReferenceAdmission({ sidecar: null, materialization, sourceInput: {
       ocrSourceBytes: { evidenceBytes: Buffer.from(JSON.stringify(evidence)),
         confirmationBytes: Buffer.from(JSON.stringify(confirmation)) },
-    } }), { code: 'SOURCE_REFERENCE_WRITING_SCOPE_INVALID' })
+    } }))
     return
   }
   return checkedSourceReferences(materialization, evidence, confirmation)

@@ -30,7 +30,7 @@ import {
   PAPER_PAGINATION_PLAN_FILE_NAME, validatePaperPaginationPlan, productPlanVersion, productPlanAuthorization,
 } from '../../server/paper-import/paginationPlan.mjs'
 import { ECONOMY_NINE_PAGE_OWNER_DATE, ECONOMY_NINE_PAGE_RULE, canRetryEconomyNinePages, importEconomyPageLimit, importLargePageLimits } from './lib-economy-page-allowance.mjs'
-import { LARGE_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
+import { LARGE_PAGE_LIMIT_AUTHORIZATION, EXTENDED_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
 import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
@@ -507,6 +507,7 @@ function startPagination(ctx, candidateDigest, editions = productSet(ctx).editio
     background(ctx, `pagination-${edition}`, process.execPath, cli('review.mjs', 'pagination-qa', ctx.paperId,
       '--edition', edition, '--auto', '--output', out,
       ...(limit === ({ economy8: 9, largeComplete: 13, largeNoListening: 11 })[edition]
+        || limit === ({ economy8: 10, largeComplete: 14, largeNoListening: 12 })[edition]
         ? [({ economy8: '--economy-page-limit', largeComplete: '--large-complete-page-limit', largeNoListening: '--large-no-listening-page-limit' })[edition], String(limit)] : [])))
   }
 }
@@ -766,7 +767,7 @@ async function mergePagination(ctx) {
   const selectedEditions = Object.fromEntries(editions.map((edition) => [edition, reports[edition].selectedPlan]))
   const schemaVersion = productPlanVersion(selectedEditions)
   const plan = validatePaperPaginationPlan({
-    schemaVersion, ...productPlanAuthorization(schemaVersion),
+    schemaVersion, ...productPlanAuthorization(schemaVersion, selectedEditions),
     ...binding,
     editions: Object.fromEntries(editions.map((edition) => [edition, reports[edition].selectedPlan])),
   }, { ...binding, slotBindings: projection.paginationSlotBindings, sourceHasListening })
@@ -1262,30 +1263,33 @@ export async function finish(ctx, args, { referenceStages = {} } = {}) {
     redoFrom(ctx, 'source-references')
   }
   for (const [flag, edition, expected] of [
-    ['--large-complete-page-limit', 'largeComplete', '13'],
-    ['--large-no-listening-page-limit', 'largeNoListening', '11'],
+    ['--large-complete-page-limit', 'largeComplete', ['13', '14']],
+    ['--large-no-listening-page-limit', 'largeNoListening', ['11', '12']],
   ]) {
     if (!args.includes(flag)) continue
-    if (option(args, flag) !== expected) fail(`${flag} 只接受显式授权值 ${expected}`)
+    const requestedLimit = option(args, flag)
+    if (!expected.includes(requestedLimit)) fail(`${flag} 只接受显式授权值 ${expected.join(' 或 ')}`)
     if (!productSet(ctx).editions.includes(edition)) fail(`${edition} 不属于本卷产品`)
     const key = `${edition}PageLimit`
-    if (ctx.state.data[key] === Number(expected)) continue
+    if (ctx.state.data[key] === Number(requestedLimit)) continue
     if (ctx.state.steps.push?.startedAt) fail('已开始送审的卷不可原地更改页数授权')
     if (Object.entries(ctx.state.background).some(([name, job]) => name.startsWith('pagination-') && alive(job.pid))) fail('分页仍在运行；待其退出后再修改授权')
     for (const name of ['pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']) delete ctx.state.steps[name]
     archive(ctx, path.join(ctx.fast, 'pagination', edition))
     archive(ctx, path.join(ctx.paperDir, 'products'))
     delete ctx.state.background[`pagination-${edition}`]
-    ctx.state.data[key] = Number(expected)
+    ctx.state.data[key] = Number(requestedLimit)
     ctx.state.data[`${key}Authorization`] = {
-      ...LARGE_PAGE_LIMIT_AUTHORIZATION, recordedAt: new Date().toISOString(), pageLimit: Number(expected),
+      // +1 ceilings stay under BUB-138; the +2 tier is the BUB-168 allowance.
+      ...(Number(requestedLimit) === Number(expected[1]) ? EXTENDED_PAGE_LIMIT_AUTHORIZATION : LARGE_PAGE_LIMIT_AUTHORIZATION),
+      recordedAt: new Date().toISOString(), pageLimit: Number(requestedLimit),
     }
     save(ctx)
   }
   const supplied = args.includes('--economy-page-limit')
   const requested = option(args, '--economy-page-limit')
-  if (supplied && requested !== '9') fail('--economy-page-limit 只接受显式九页授权值 9')
-  const limit = importEconomyPageLimit(ctx.paperId, supplied ? 9 : ctx.state.data.economyPageLimit)
+  if (supplied && !['9', '10'].includes(requested)) fail('--economy-page-limit 只接受显式授权值 9 或 10')
+  const limit = importEconomyPageLimit(ctx.paperId, supplied ? Number(requested) : ctx.state.data.economyPageLimit)
   if (limit !== (ctx.state.data.economyPageLimit ?? 8)) {
     if (ctx.state.steps.push?.startedAt) fail('已开始送审的卷不可原地更改省纸授权')
     const job = ctx.state.background['pagination-economy8']
@@ -1297,6 +1301,7 @@ export async function finish(ctx, args, { referenceStages = {} } = {}) {
     ctx.state.data.economyPageLimit = limit
     ctx.state.data.economyPageLimitAuthorization = {
       ownerAuthorizedOn: ECONOMY_NINE_PAGE_OWNER_DATE, recordedAt: new Date().toISOString(), pageLimit: limit,
+      ...(limit === 10 ? { basis: 'BUB-168' } : {}),
     }
     save(ctx)
   }
