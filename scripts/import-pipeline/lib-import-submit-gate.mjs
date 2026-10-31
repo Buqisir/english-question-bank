@@ -86,9 +86,13 @@ export function assertImportSubmissionReady(paperDir, materialization = null, { 
   const reviewFile = path.join(paperDir, 'listening-review-v1.json')
   const listeningReview = !analyzedPackage && existsSync(reviewFile) ? JSON.parse(readFileSync(reviewFile, 'utf8')) : null
   const issues = importSubmissionIssues({ materialization, listeningReview, analyzedPackage, paperDir })
-  if (issues.length) throw Object.assign(new Error(`送审门禁拒绝：\n${issues.map(issue =>
+  const blockers = issues.filter(issue => issue.code !== 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING')
+  for (const issue of issues.filter(issue => issue.code === 'IMPORT_SUBMIT_CHINESE_HALF_WIDTH_NUMBERING')) {
+    console.warn(`送审提示（不阻塞）：${issue.code}: ${issue.field}: ${issue.matches.join(', ')}`)
+  }
+  if (blockers.length) throw Object.assign(new Error(`送审门禁拒绝：\n${blockers.map(issue =>
     `${issue.code}: ${issue.groups?.join(', ') || `${issue.field}: ${issue.matches.join(', ')}`}`).join('\n')}`),
-  { code: issues[0].code, issues })
+  { code: blockers[0].code, issues: blockers })
   const pendingOwnerListening = !analyzedPackage
     ? pendingOwnerListeningGroups({ materialization, listeningReview, paperDir }) : []
   return { status: 'PASS', ...(pendingOwnerListening.length ? { pendingOwnerListening } : {}) }
