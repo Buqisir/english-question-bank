@@ -78,6 +78,10 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
 
 ### 辅助命令
 
+- 网页退回后在原 paperId 修复：`fast-import.mjs finish <id> --feedback-fix <issueId[,issueId]> --redo-from <步骤>`。
+  先只读确认生产最新 revision 正是本地送审的 `changes_requested`，且 issue 均未解决，再归档旧送审证据并重做。
+  PDF 目检后用 `submit <id> --resolves <同一组issueId>` 重送；缺少或多出 issue 均拒绝。
+  未完成或 UNKNOWN push 仍须先只读对账；重做中断后用普通 `finish <id>` 续跑。
 - `fast-import.mjs status <id>`：各步骤耗时与后台任务。
 - `fast-import.mjs asr-extra <id> --start <s> --end <s> --tag <名>`：错开窗口边界重转一段
   （开/关 VAD 各一遍），证据写成 `listening-review-evidence/{vad,novad}-<名>-window-NNN.json`。
