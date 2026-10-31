@@ -7,7 +7,7 @@ function failure(error) {
 }
 
 try {
-  const { directory, revision, operation, input, reviewerKind } = workerData
+  const { directory, revision, operation, input, reviewerKind, expectedConfirmation } = workerData
   const projection = finalizeProjection(directory, revision,
     operation === 'ocr-confirmation' ? { requireAnalyses: false } : undefined)
   if (operation === 'ocr-confirmation') {
@@ -21,7 +21,7 @@ try {
     let confirmed
     let confirmationError
     try {
-      confirmed = ocrConfirmationComputation(projection, input, reviewerKind)
+      confirmed = ocrConfirmationComputation(projection, input, reviewerKind, expectedConfirmation)
     } catch (error) {
       // Main-thread projection/paper/bundle identity checks keep their precedence.
       confirmationError = failure(error)

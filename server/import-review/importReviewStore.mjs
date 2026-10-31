@@ -23,7 +23,8 @@ import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mj
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
-import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation } from './finalizeComputation.mjs'
+import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation,
+  validateOcrConfirmationRevision, deriveOcrConfirmationRevision, assertOcrConfirmationRevision } from './finalizeComputation.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
 import { readReviewSubjectBackfillStatus } from './reviewSubjectBackfillStatus.mjs'
 import { checkedStoredReviewSubject } from './reviewCompatibilityWrite.mjs'
@@ -296,6 +297,7 @@ export function ocrReviewBundleDigest(input) {
     ...(Object.hasOwn(input, 'expectedBaseRevisionId')
       ? { expectedBaseRevisionId: input.expectedBaseRevisionId }
       : {}),
+    ...(Object.hasOwn(input, 'confirmationRevision') ? { confirmationRevision: input.confirmationRevision } : {}),
     sourceSetDigest: input.sourceSetDigest,
     evidenceDigest: input.evidenceDigest,
     reviewStructureDigest: input.reviewStructureDigest,
@@ -423,6 +425,8 @@ export function validateOcrReviewBundleManifest(input) {
     ...(Object.hasOwn(input, 'expectedBaseRevisionId')
       ? { expectedBaseRevisionId: requiredString(input.expectedBaseRevisionId, 'expectedBaseRevisionId', 100) }
       : {}),
+    ...(Object.hasOwn(input, 'confirmationRevision')
+      ? { confirmationRevision: validateOcrConfirmationRevision(input.confirmationRevision) } : {}),
     sourceSetDigest: requiredString(input.sourceSetDigest, 'sourceSetDigest', 160),
     evidenceDigest: requiredString(input.evidenceDigest, 'evidenceDigest', 160),
     reviewStructureDigest: requiredString(
@@ -433,6 +437,9 @@ export function validateOcrReviewBundleManifest(input) {
     producerBuildId: requiredString(input.producerBuildId, 'producerBuildId', 200),
     files,
     resolvesIssueIds: [],
+  }
+  if (manifest.confirmationRevision && manifest.confirmationRevision.baseRevisionId !== manifest.expectedBaseRevisionId) {
+    throw storeError('IMPORT_REVIEW_OCR_GENERATION_INVALID', 'OCR declaration must bind the explicit base revision')
   }
   for (const digest of [
     manifest.sourceSetDigest,
@@ -972,11 +979,12 @@ export function createImportReviewStore({
       || !base || base.reviewKind !== 'ocr'
       || (completedSame ? base.state !== 'superseded' : base.state !== 'approved')
       || base.manifest.sourceSetDigest !== manifest.sourceSetDigest
-      || base.manifest.evidenceDigest === manifest.evidenceDigest
+      || (base.manifest.evidenceDigest === manifest.evidenceDigest && !manifest.confirmationRevision)
       || revisions.some(item => item.id !== ownRevisionId && item.id !== base.id && item.state !== 'superseded')) {
       throw storeError('IMPORT_REVIEW_OCR_GENERATION_INVALID',
         'Explicit OCR generation requires an approved OCR base, unchanged sources, new evidence and no Candidate or competing operation')
     }
+    if (manifest.confirmationRevision) deriveOcrConfirmationRevision(manifest, base)
   }
 
   function createRevision(rawManifest, { actor = 'internal' } = {}) {
@@ -2379,6 +2387,7 @@ export function createImportReviewStore({
       await assertStoredRevisionFilesAsync(revision)
       const prepared = await runFinalizeWorker(revisionDirectory(revisionId), revision, {
         operation: 'ocr-confirmation', input, reviewerKind,
+        expectedConfirmation: expectedOcrConfirmation(revision),
       })
       assertProjectionIdentity(prepared.projection, revision)
       assertOcrConfirmationIdentity(paperId, revision, input)
@@ -2405,9 +2414,18 @@ export function createImportReviewStore({
     }
   }
 
+  function expectedOcrConfirmation(revision) {
+    return revision.manifest.confirmationRevision
+      ? deriveOcrConfirmationRevision(revision.manifest, getRevision(revision.manifest.expectedBaseRevisionId))
+      : null
+  }
+
   function commitOcrConfirmation(paperId, revisionId, input, actor, reviewerKind, revision, projection, prepared = null) {
     assertOcrConfirmationIdentity(paperId, revision, input)
-    const { confirmation, correctionReport } = prepared || ocrConfirmationComputation(projection, input, reviewerKind)
+    const expected = expectedOcrConfirmation(revision)
+    assertOcrConfirmationRevision(input?.confirmation, expected)
+    const { confirmation, correctionReport } = prepared || ocrConfirmationComputation(projection, input, reviewerKind, expected)
+    assertOcrConfirmationRevision(confirmation, expected)
     const confirmedAt = nowIso()
     return withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
@@ -2459,6 +2477,7 @@ export function createImportReviewStore({
           confirmedBy: requiredString(actor, 'actor', 200),
           reviewerKind,
           ...(correctionReport ? { correctionReport, candidateReportRequired: true } : {}),
+          ...(current.manifest.confirmationRevision ? { confirmationRevision: current.manifest.confirmationRevision } : {}),
           confirmation,
         }
         db.prepare(`

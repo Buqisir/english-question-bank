@@ -1202,8 +1202,11 @@ export async function reconcileOcrGeneration(ctx, failurePath, { readStatus, ori
       || !status.revisions.some(revision => revision?.id === status.latestRevisionId)
       || status.revisions.some(revision => !revision || revision.paperId !== ctx.paperId || !revision.id
         || !revision.manifest || typeof revision.candidateDigest !== 'string'
-        || [revision.candidateDigest, revision.evidenceDigest, revision.manifest.candidateDigest,
-          revision.manifest.evidenceDigest].includes(plan.evidenceDigest))) fail('UNKNOWN: Review status 不完整或已有新修订')
+        || (plan.confirmationRevision
+          ? !/^sha256:[a-f0-9]{64}$/u.test(plan.bundleDigest || '')
+            || typeof revision.bundleDigest !== 'string' || revision.bundleDigest === plan.bundleDigest
+          : [revision.candidateDigest, revision.evidenceDigest, revision.manifest.candidateDigest,
+            revision.manifest.evidenceDigest].includes(plan.evidenceDigest)))) fail('UNKNOWN: Review status 不完整或已有新修订')
     if (!readFileSync(operationPath).equals(operationBytes) || !readFileSync(failurePath).equals(bytes)) fail('UNKNOWN: 对账期间证据发生变化')
     const now = new Date().toISOString()
     writeJson(operationPath, { ...op, rejectedAt: now, rejection: { status: failure.httpStatus,
