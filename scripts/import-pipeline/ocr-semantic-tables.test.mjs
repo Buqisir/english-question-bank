@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import { test } from 'node:test'
 import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { buildSourceReferences, joinTranscriptTurns } from './ocr-proofread.mjs'
