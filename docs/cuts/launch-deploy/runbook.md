@@ -4,7 +4,8 @@
 > `reviewed-persistence`、`update-host-config`、TAT/barrier 流程仅留作历史证据。
 > 日常部署只看 [AGENTS.md 的部署章节](../../../AGENTS.md#owner-mac-deployment)
 > 和 `scripts/local-deploy.sh`：`scripts/local-deploy.sh deploy --owner-said-deploy-latest`。
-> 入口自动读取生产版本并计算 code-only 路径摘要；真实迁移仍需单独明确范围。
+> 保护路径有变化时，先判断是否含迁移，再加 `--code-only` 或 `--migration`；
+> 入口只自动计算摘要，不判断类别。未声明类别会列出变化路径并拒绝部署。
 
 > Current deployment control plane: follow
 > [controlled SSH maintenance](../controlled-ssh-maintenance/plan.md).

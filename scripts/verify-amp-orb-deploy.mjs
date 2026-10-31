@@ -998,7 +998,7 @@ await deployLatestRelease({
 for (const paths of [[], ['server/vocabulary/vocabularyStore.mjs', 'server/api.mjs']]) {
   const order = []
   await deployLatestRelease({
-    argv: ['deploy', '--owner-said-deploy-latest'],
+    argv: ['deploy', '--owner-said-deploy-latest', ...(paths.length ? ['--code-only'] : [])],
     resolveCandidate: async () => candidate,
     revalidateCandidate: async () => { order.push('recheck') },
     readProductionSha: async () => { order.push('preflight'); return oldSha },
@@ -1017,10 +1017,11 @@ for (const paths of [[], ['server/vocabulary/vocabularyStore.mjs', 'server/api.m
     },
   })
   assert(order.join(',') === 'recheck,preflight,diff,recheck,deploy',
-    'automatic classification rechecks authority after read-only evidence and before mutation')
+    'automatic digest rechecks authority after read-only evidence and before mutation')
 }
 for (const [productionSha, paths, message] of [
-  [oldSha, ['data/sql/schema.sql'], 'migration scope'],
+  [oldSha, ['data/sql/schema.sql'], '请判断是否含迁移，然后加 --code-only 或 --migration'],
+  [oldSha, ['server/source-intake/sourceIntakeStore.mjs'], '请判断是否含迁移，然后加 --code-only 或 --migration'],
   ['invalid', [], 'production SHA'],
   [oldSha, ['app/src/App.tsx'], 'changed-path evidence'],
   [oldSha, ['server/api.mjs', 'server/api.mjs'], 'duplicates'],
@@ -1036,8 +1037,11 @@ for (const [productionSha, paths, message] of [
       readChangedPaths: async () => paths,
       invokeController: async () => { invoked = true; return controllerReceipt() },
     })
-  } catch (error) { rejected = error.message.includes(message) }
-  assert(rejected && !invoked, 'SQL scope or invalid automatic evidence stops before deployment')
+  } catch (error) {
+    rejected = error.message.includes(message)
+      && (!message.startsWith('请判断') || paths.every(filePath => error.message.includes(filePath)))
+  }
+  assert(rejected && !invoked, 'undeclared protected changes list paths and stop before deployment, as does invalid evidence')
 }
 await deployLatestRelease({
   argv: ['deploy', '--owner-said-deploy-latest', '--reviewed-code-only-digest', 'a'.repeat(64)],
@@ -1588,6 +1592,18 @@ await deployLatestRelease({
   async invokeController(sha, classification, digest) {
     assert(sha === newSha && classification === 'migrate' && digest === persistenceDigest,
       'CLI carries reviewed migration classification and digest to the exact controller target')
+    return reviewedPersistenceOutput()
+  },
+})
+await deployLatestRelease({
+  argv: ['deploy', '--owner-said-deploy-latest', '--migration'],
+  resolveCandidate: async () => candidate,
+  revalidateCandidate: async () => {},
+  readProductionSha: async () => oldSha,
+  readChangedPaths: async () => persistencePaths,
+  invokeController: async (sha, classification, digest) => {
+    assert(sha === newSha && classification === 'migrate' && digest === persistenceDigest,
+      'explicit migration flag computes the existing digest and selects the migration receipt')
     return reviewedPersistenceOutput()
   },
 })

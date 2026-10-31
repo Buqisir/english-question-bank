@@ -18,20 +18,24 @@ maintenance command names are not daily deployment operations.
 
 `deploy --owner-said-deploy-latest` still resolves and rechecks exact current
 main against natural Hosted verify/e2e authority. A protected-path difference
-is a review trigger, not proof of a database mutation. Without a manual
-classification flag, the local entry reads the production SHA through the
-existing read-only preflight and automatically calculates the code-only digest
-from the protected paths between that SHA and target main. It uses the existing
-SHA-256 algorithm (sorted paths joined by LF, including a terminal LF).
-An empty protected diff stays ordinary deployment; a `data/sql` diff refuses
-automatic code-only classification. Explicit `--reviewed-code-only-digest`
-and `--reviewed-migration-digest` remain compatible and skip automatic evidence
-collection. The host recomputes the digest against its current release before preparation. No SQL
+is a review trigger, not proof of a database mutation. The local entry reads
+the production SHA through the existing read-only preflight and compares the
+protected paths between that SHA and target main. For a nonempty protected diff,
+the caller must determine whether it includes migration (including JavaScript
+migrations) and declare `--code-only` or `--migration`. The entry calculates only
+the digest, using the existing SHA-256 algorithm (sorted paths joined by LF,
+including a terminal LF); it never infers the classification. Without a declared
+classification, it lists the changed protected paths and refuses deployment.
+An empty protected diff stays ordinary deployment. Explicit
+`--reviewed-code-only-digest` and `--reviewed-migration-digest` remain compatible
+and skip automatic evidence collection. The host recomputes the digest against
+its current release before preparation. No SQL
 text heuristic is used. Candidate startup runs on disposable online SQLite
 copies with a private network and read-only filesystem outside its temporary
 directory; those copies are not an offline cross-database recovery point.
 
 Actual schema/data mutation uses the same deploy command with
+`--migration` (automatic digest) or the compatible
 `--reviewed-migration-digest <protected-path-digest>`, retaining the existing
 offline three-database backup/ensure boundary. This is explicit migration scope,
 not a declaration that all changes to an API/store file require migration.
