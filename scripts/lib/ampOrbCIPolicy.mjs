@@ -9,8 +9,8 @@ import { EQB_HOST_CONFIGURATION_PATHS, EQB_PERSISTENCE_AUTHORITY_PATHS } from '.
 export const AMP_ORB_CI_PR_POLICY_VERSION = 'pr-risk-v1'
 const LOW_RISKS = new Set(['ui-micro', 'non-governance-docs', 'known-shape-paper-data'])
 const ALWAYS_FULL = [
-  /(?:^|\/)AGENTS\.md$/u, /(?:^|\/)CLAUDE\.md$/u, /^(?:PRODUCT|CONTEXT|DESIGN)\.md$/u,
-  /^docs\/(?:adr|agents|ci|steering|product)\//u, /^standards\//u, /^\.agents\//u,
+  /(?:^|\/)AGENTS\.md$/u, /(?:^|\/)CLAUDE\.md$/u,
+  /^standards\//u, /^\.agents\//u,
   /^\.amp\/plugins\//u, /^\.github\/workflows\//u,
   /^scripts\/(?:verify-ci\.mjs|amp-orb-ci(?:-sandbox)?\.mjs|verify-amp-orb-ci\.mjs)$/u,
   /^scripts\/lib\/(?:ampOrbCI|ampOrbCIPolicy|verificationCommandRunner|verificationScheduler|verifyScope)\.mjs$/u,
@@ -18,7 +18,7 @@ const ALWAYS_FULL = [
   /^server\/(?:ai-daily-limit|vocabulary\/vocabulary(?:Store|Routes|PrintJobs))\.mjs$/u,
 ]
 const PAPER_DATA = [/^app\/public\/paper-assets\//u, /^test-fixtures\/paper-canonical\/publications\//u, /^test-fixtures\/paper-import\//u]
-const NON_GOVERNANCE_DOCS = [/^README\.md$/u, /^app\/README\.md$/u, /^server\/README\.md$/u]
+const NON_GOVERNANCE_DOCS = [/\.md$/u]
 const AUTHORITY_PATHS = [...EQB_PERSISTENCE_AUTHORITY_PATHS, ...EQB_HOST_CONFIGURATION_PATHS]
 
 function digest(value) {

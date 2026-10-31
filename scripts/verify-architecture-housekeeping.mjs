@@ -172,9 +172,9 @@ function routeFor(...changedFiles) {
 for (const [changedFile, expectedRisk, expectedPack] of [
   ['app/src/shared-ui/tokens.css', 'ui-micro', 'ui'],
   ['app/src/concierge/ConciergeDesk.css', 'ordinary-local-feature', 'feature'],
-  ['app/src/features/draft-paper/DraftPaperWorkbench.css', 'shared-renderer-contract', 'paper'],
+  ['app/src/features/draft-paper/DraftPaperWorkbench.css', 'ordinary-local-feature', 'feature'],
   ['app/src/shared-ui/papersurface/PaperSurface.css', 'shared-renderer-contract', 'paper'],
-  ['app/src/features/paper-browse/paperBrowsePage.css', 'shared-renderer-contract', 'paper'],
+  ['app/src/features/paper-browse/paperBrowsePage.css', 'ordinary-local-feature', 'feature'],
   ['app/src/shared-ui/Button.tsx', 'ordinary-local-feature', 'feature'],
   ['app/public/paper-assets/paper-new/latest/paper-asset.json', 'known-shape-paper-data', 'paper-data'],
   ['server/services/questionBankSteward.mjs', 'ordinary-local-feature', 'feature'],

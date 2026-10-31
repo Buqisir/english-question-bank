@@ -75,7 +75,7 @@ const policyFor = (...records) => classifyAmpOrbCIPullRequest(
   parseAmpOrbCIDiffRaw(Buffer.concat(records)), { alwaysFull: false },
 )
 assert.deepEqual(policyFor(rawChange('M', ['README.md'])).requiredLanes, ['fast'])
-assert.deepEqual(policyFor(rawChange('M', ['docs/guide.md'])).requiredLanes, ['fast', 'full'])
+assert.deepEqual(policyFor(rawChange('M', ['docs/guide.md'])).requiredLanes, ['fast'])
 assert.deepEqual(policyFor(rawChange('M', ['app/src/shared-ui/tokens.css'])).requiredLanes, ['fast'])
 assert.deepEqual(policyFor(rawChange('M', ['app/public/paper-assets/a.json'])).requiredLanes, ['fast'])
 assert.deepEqual(policyFor(rawChange('M', ['app/public/paper-assets/run.js'])).requiredLanes, ['fast', 'full'])

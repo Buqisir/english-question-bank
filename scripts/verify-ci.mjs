@@ -36,6 +36,25 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 
+// Storage/Review checks are independent registry entries so Full can shard them.
+const storageScripts = [
+  'scripts/verify-published-products-storage.mjs',
+  'scripts/verify-import-review-upload-reuse.mjs',
+  'scripts/verify-import-review-finalize-worker.mjs',
+  'scripts/verify-import-review-bundle-reuse.mjs',
+  'scripts/verify-import-review-file-hash.mjs',
+  'scripts/verify-review-compatibility.mjs',
+  'scripts/verify-review-build-identity.mjs',
+  'scripts/verify-review-compatibility-store.mjs',
+  'scripts/verify-review-subject-backfill.mjs',
+  'scripts/verify-review-subject-backfill-automatic.mjs',
+  'scripts/verify-review-eligibility.mjs',
+  'scripts/verify-review-recovery.mjs',
+  'scripts/verify-review-process-isolation.mjs',
+  'scripts/verify-review-memory.mjs',
+  'scripts/verify-review-publication-content.mjs',
+]
+
 const registry = {
   preflight: [
     { command: 'git', args: ['diff', '--check'], label: 'git diff --check' },
@@ -50,7 +69,7 @@ const registry = {
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-import-pagination-qa.mjs',
   'scripts/verify-student-product-pdf.mjs',
-  'scripts/verify-published-products-storage.mjs',
+  ...storageScripts,
   'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-paper-header-title.mjs',
@@ -261,6 +280,7 @@ const paperDataScripts = [
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
 ]
 const securityScripts = [
+  ...storageScripts,
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',
   'scripts/verify-scoped-publication.mjs',
@@ -283,7 +303,7 @@ const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
 )
 const paperScripts = uniqueRegistered(
   [
-    ...registry.scripts.filter((script) => paperScriptPattern.test(script)),
+    ...registry.scripts.filter((script) => paperScriptPattern.test(script) && !storageScripts.includes(script)),
     'scripts/verify-source-reference-scoring-v4.mjs',
     'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
     'scripts/verify-universal-nck1-publish.mjs',
@@ -326,6 +346,9 @@ const featureScripts = uniqueRegistered([
       && (sentenceAnalysisScripts.includes(script)
         || (!paperScripts.includes(script) && !securityScripts.includes(script))),
   ),
+  // Screen-only workbench styles still exercise their existing page guards.
+  'scripts/verify-paper-browse.mjs',
+  'scripts/verify-draft-workbench-visual-unify.mjs',
   // Signal staging is an import-pipeline feature as well as a Paper input.
   'scripts/verify-listening-signal.mjs',
   // The shared HTTP client also remains covered for ordinary feature changes.
@@ -474,6 +497,26 @@ function changedPlan(files) {
     'server/user-data/',
     'server/my-space/',
     'server/import-review/',
+    // Review eligibility/publication checks also consume these entrypoints.
+    'import-ops/lib/probe.mjs',
+    'import-ops/public/owner-review.js',
+    'scripts/import-pipeline/canonical-consumption-print-payload.mjs',
+    'scripts/import-pipeline/ocr-source-references-version.mjs',
+    'server/paper-import-ai/paragraphSummaries.mjs',
+    'server/router/index.mjs',
+    'scripts/import-pipeline/review.mjs',
+    'server/answer-renderer.mjs',
+    'server/paper-import/analyzedPackage.mjs',
+    'server/paper-import/sourceReferences.mjs',
+    'server/paper-import/sourceReferencePublication.mjs',
+    'server/paper-import/sourceReferenceSemantics.mjs',
+    'server/paper-import/pdfProductSet.mjs',
+    'server/paper-import/spellingReview.mjs',
+    'server/paper-import/blobStore.mjs',
+    'server/paper-import/frozenProducts.mjs',
+    'server/paper-import/paperStorageMount.mjs',
+    'server/paper-import/publisher.mjs',
+    'server/paper-import/storage.mjs',
     'server/ai-daily-limit.mjs',
     'server/vocabulary/vocabularyStore.mjs',
     'server/vocabulary/vocabularyRoutes.mjs',
@@ -512,6 +555,12 @@ function changedPlan(files) {
       return [/\/verify-/.test(file) ? 'paper' : 'feature']
     }
     if (touchesAny([file], securityPatterns)) return ['security']
+    // These page styles are screen chrome; shared PaperSurface/print styles
+    // and all rendering/data modules below retain the Paper boundary.
+    if ([
+      'app/src/features/paper-browse/paperBrowsePage.css',
+      'app/src/features/draft-paper/DraftPaperWorkbench.css',
+    ].includes(file)) return ['feature']
     if (touchesAny([file], paperPatterns)) return ['paper']
     if (touchesAny([file], paperDataPatterns)) return ['paper-data']
     if (touchesAny([file], uiMicroPatterns)) return ['ui']
