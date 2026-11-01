@@ -424,12 +424,6 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     documents,
     ...producerInputs,
   })
-  // The raw producer stays receipt-bound. This local post-pass closes presentation before
-  // a ready OCR materialization leaves this job; independent presentation runs are idempotent.
-  const presented = producer === OCR_PRODUCER && produced.disposition === 'ready_for_verification'
-    && produced.materialization.listening?.state === 'captured'
-    ? restoreOcrSourcePresentation({ materialization: produced.materialization, ...producerInputs })
-    : produced.materialization
   const mediaById = new Map(produced.materialization.media.map((media) => [
     media.mediaId,
     media,
@@ -472,6 +466,12 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     listeningSourcePartitionDigest: digestJson(produced.review.listeningSourcePartition),
     mediaFiles,
   })
+  // Retain receipt-bound raw output before presentation can fail, so the Agent can
+  // declare missing instructions and retry through the cache or presentation CLI.
+  const presented = producer === OCR_PRODUCER && produced.disposition === 'ready_for_verification'
+    && produced.materialization.listening?.state === 'captured'
+    ? restoreOcrSourcePresentation({ materialization: produced.materialization, ...producerInputs })
+    : produced.materialization
   const presentationChanged = digestJson(presented) !== digestJson(produced.materialization)
   if (presentationChanged) atomicJson(outputPath, presented)
   return {

@@ -1608,14 +1608,16 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       'Listening material ranges do not cover Questions 6-20 exactly once',
       sourceRef(questionDocumentId))
   }
-  const firstMarkerIndex = answerBody.findIndex((item) =>
+  const firstMarkerIndex = listeningSource?.markers?.[0]?.index ?? answerBody.findIndex((item) =>
     item.kind === 'paragraph' && LISTENING_TEXT_MARKER.test(normalized(item.text)))
   const headingIndexes = listeningSource?.heading >= 0 ? [listeningSource.heading] : answerBody.flatMap((item, index) =>
     index < firstMarkerIndex
       && item.kind === 'paragraph' && LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
       ? [index]
       : [])
-  const markers = answerBody.flatMap((item, index) => {
+  const markers = listeningSource?.markers
+    ? listeningSource.markers.map(marker => ({ ...marker, item: answerBody[marker.index] }))
+    : answerBody.flatMap((item, index) => {
     const match = item.kind === 'paragraph'
       ? LISTENING_TEXT_MARKER.exec(normalized(item.text))
       : null

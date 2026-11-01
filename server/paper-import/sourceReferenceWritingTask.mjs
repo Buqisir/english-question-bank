@@ -837,7 +837,8 @@ function planReferenceCapture(section, factsFor, producerVersion, scoringScopes,
   // this application task. The later headings retain their inline body bytes
   // as ordinary scoring paragraphs instead of losing text at the colon.
   const scoringPoints = explicitTitles && taskType === 'application'
-    ? sectionLines.filter(line => applicationScoringPoint(line.text)) : []
+    ? sectionLines.filter(line => !roleDeclarations.excluded.has(line.itemId)
+      && applicationScoringPoint(line.text)) : []
   if (scoringPoints.length && (scoringPoints.length !== 4
     || scoringPoints.some((line, index) => applicationScoringPoint(line.text) !== index + 1))) {
     scopeError('Unresolved application scoring sequence: require ordered 内容要点 / 语言 / 阅卷原则 / 阅卷标准')

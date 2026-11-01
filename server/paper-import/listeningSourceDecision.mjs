@@ -77,9 +77,14 @@ export function resolveListeningSourceDecision(context) {
     return found.index
   }
   const heading = address(decision.heading, -1), start = address(decision.start), end = address(decision.end, body.length)
-  const markers = body.flatMap((item, index) => item.kind === 'paragraph' && markerNumber(item.text) !== null
+  const markers = decision.markers ? decision.markers.map(marker => {
+    const index = address(marker)
+    if (items.get(marker.itemId).source.page !== marker.page) fail('marker page differs from the confirmed item')
+    return { index, number: marker.number }
+  }) : body.flatMap((item, index) => item.kind === 'paragraph' && markerNumber(item.text) !== null
     ? [{ index, number: markerNumber(item.text) }] : [])
-  if (markers.length !== 10 || markers.some((marker, index) => marker.number !== index + 1)) fail('requires one unique ordered Text 1–10 run')
+  if (markers.length !== 10 || markers.some((marker, index) => marker.number !== index + 1
+    || index > 0 && marker.index <= markers[index - 1].index)) fail('requires one unique ordered Text 1–10 run')
   const first = markers[0].index, last = markers[9].index
   if (!(start <= first && start >= 0 && end > last && end <= body.length)
     || heading >= 0 && (heading + 1 !== start || heading >= first)) fail('heading/start/end cross the ordered Text run')
@@ -178,5 +183,6 @@ export function resolveListeningSourceDecision(context) {
   })
   positions.set(body.length, projected.length)
   return { body: projected, heading: heading < 0 ? -1 : positions.get(heading),
+    ...(decision.markers ? { markers: markers.map(marker => ({ ...marker, index: positions.get(marker.index) })) } : {}),
     start: positions.get(start), end: positions.get(end) }
 }

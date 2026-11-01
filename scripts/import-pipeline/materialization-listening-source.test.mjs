@@ -288,6 +288,36 @@ test('bounded author decisions replay through public OCR import/compile and reje
   await assert.rejects(authorListeningSource({ command: 'apply', paperId: f.paperId, paperDir: paper, plan,
     output, confirmed: true }), /new/u)
   assert(existsSync(output))
+
+  await t.test('declared exact Text addresses drive plan, apply and public replay without marker recognition', () => {
+    const corrected = structuredClone(confirmation), markers = []
+    for (const page of corrected.documents[1].pages) for (const item of page.orderedItems) {
+      const number = listeningTextMarkerNumber(item.text)
+      if (number === null) continue
+      item.text = `Text ${number}: (Q${number} 04:03~04:20)`
+      markers.push({ number, itemId: item.itemId, page: page.page, text: item.text })
+    }
+    assert.equal(markers.length, 10)
+    const raw = produceNck1OcrMaterialization({ paperId: f.paperId, documents: f.sourceDocuments, evidence: f.evidence, confirmation: corrected })
+    assert(raw.materialization.issues.some(i => /LISTENING_TRANSCRIPT_AMBIGUOUS/u.test(i.code)))
+    const authoredInput = { ...input, materializationBytes: encode(raw.materialization),
+      ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(corrected) } }
+    const receiptBytes = encode({ ...receipt, confirmation: corrected })
+    const declared = { ...options, markers }
+    const plan = planMaterializationListeningSource(authoredInput, receiptBytes, declared)
+    const applied = applyMaterializationListeningSourcePlan(authoredInput, receiptBytes, plan, { confirmed: true })
+    assert.deepEqual(applied.materialization.listeningSourceDecision.markers, markers)
+    assert.deepEqual(applied.materialization.listening.transcript, successor.materialization.listening.transcript)
+    assert.deepEqual(applied.publicReplay.issues, [])
+    assert(applied.publicReplay.compiled)
+    for (const change of [
+      m => { m[0].text += ' altered' }, m => { m[0].page++ },
+      m => { m[1].itemId = m[0].itemId }, m => { m.reverse() }, m => { m.pop() },
+    ]) {
+      const invalid = structuredClone(markers); change(invalid)
+      assert.throws(() => planMaterializationListeningSource(authoredInput, receiptBytes, { ...options, markers: invalid }))
+    }
+  })
 })
 
 test('Text markers tolerate inner whitespace inside the parens (BUB-168)', () => {
