@@ -1089,8 +1089,17 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       const a = await t.client()
       const started = Date.now()
       const running = a.call(shipMessage)
-      const checkpoint = await t.checkpoint('executor-before-begin', running, { flow: 'control', transport: 'ipc' })
-      assert.equal(checkpoint.stage, 'executor-before-begin')
+      let checkpoint
+      if (action === 'oom') {
+        // The heap cap can abort module loading before the injected checkpoint.
+        // Both timings must still prove WORKER_OOM and no publication writes.
+        await running
+        const file = `${t.marker}.executor-before-begin`
+        checkpoint = existsSync(file) ? JSON.parse(readFileSync(file)) : null
+      } else {
+        checkpoint = await t.checkpoint('executor-before-begin', running, { flow: 'control', transport: 'ipc' })
+      }
+      if (checkpoint) assert.equal(checkpoint.stage, 'executor-before-begin')
       if (action === 'native') {
         await until(() => existsSync(`${t.marker}.native`), 'native child actually blocked')
         const identity = await reviewProcessIdentity(Number(readFileSync(`${t.marker}.native`, 'utf8')))
@@ -1103,7 +1112,13 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal(row.state, 'unknown')
       assert.equal(t.promotions().length, 0)
       assert.ok(existsSync(path.join(t.directory, 'locks/promotion/reservation.json')))
-      assert.equal(checkpoint.pid, row.worker_pid)
+      if (checkpoint) assert.equal(checkpoint.pid, row.worker_pid)
+      if (action === 'oom') {
+        assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT COUNT(*) n FROM paper_asset_versions')[0].n, 0)
+        assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT COUNT(*) n FROM sources')[0].n, 0)
+        assert.deepEqual(readdirSync(t.env.QUESTION_BANK_PAPER_ASSET_ROOT), [])
+        assert.ok(Date.now() - started < 40000, 'OOM escaped bounded deadline')
+      }
       if (action === 'out-of-order') {
         assert.equal(checkpoint.operationId, row.id)
         assert.equal(checkpoint.nonceHash, row.launch_nonce_hash,
