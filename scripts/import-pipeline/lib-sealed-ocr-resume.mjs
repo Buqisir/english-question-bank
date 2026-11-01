@@ -58,6 +58,8 @@ export async function reuseSealedOcrConfirmation({ paperId, paperDir, proofreadI
   const supersededByCandidate = revision?.state === 'superseded' && status.revisions?.some(item =>
     item.paperId === paperId && item.reviewKind === 'candidate' && item.finalizedAt
     && item.state !== 'uploading' && item.revisionNumber > revision.revisionNumber)
+    && !status.revisions.some(item => item.paperId === paperId && item.reviewKind === 'ocr'
+      && item.finalizedAt && item.revisionNumber > revision.revisionNumber)
   if (!revision || revision.paperId !== paperId || revision.reviewKind !== 'ocr'
     || (revision.state !== 'approved' && !supersededByCandidate) || !revision.finalizedAt
     || revision.bundleDigest !== receipt.bundleDigest || revision.manifest?.paperId !== paperId

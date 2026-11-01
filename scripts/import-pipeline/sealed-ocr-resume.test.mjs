@@ -66,6 +66,16 @@ test('sealed OCR resumes an interrupted fast step using only exact approved remo
       await assert.rejects(run, /Sealed OCR differs/)
       status = { revisions: [revision] }
     })
+    await t.test('a newer finalized OCR followed by a candidate prevents reuse of the older OCR', async () => {
+      const firstOcr = { ...revision, state: 'superseded', revisionNumber: 1 }
+      const secondOcr = { ...firstOcr, id: 'ocr-generation-2', revisionNumber: 2,
+        finalizedAt: '2026-10-25T00:00:00Z' }
+      const candidate = { id: 'rev-candidate', paperId, reviewKind: 'candidate',
+        revisionNumber: 3, state: 'changes_requested', finalizedAt: '2026-10-26T00:00:00Z' }
+      status = { revisions: [candidate, secondOcr, firstOcr] }
+      await assert.rejects(run, /Sealed OCR differs/)
+      status = { revisions: [revision] }
+    })
     for (const key of ['sourceSetDigest', 'evidenceDigest']) {
       const original = projection[key]
       projection[key] = `sha256:${'c'.repeat(64)}`
