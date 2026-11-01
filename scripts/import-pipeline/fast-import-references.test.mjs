@@ -486,20 +486,26 @@ test('failed status and wrong paper status remain blocked', async t => {
   await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
 })
 
-test('Candidate finalized after push prevents reconciliation', async t => {
+for (const finalizedAt of [oldTime, '2026-01-01T00:01:00Z']) test(`Candidate finalized at ${finalizedAt} prevents reconciliation`, async t => {
   fakeReviewOrigin(t)
   const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
-  const status = fakeStatus(ctx, [{ id: 'rev-finalized', state: 'awaiting_review', finalizedAt: '2026-01-01T00:01:00Z' }])
+  const status = fakeStatus(ctx, [{ id: 'rev-finalized', state: 'awaiting_review', finalizedAt }])
   await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => status }), /RECONCILIATION_REQUIRED/)
   await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
 })
 
-test('Candidate finalized before push also prevents reconciliation', async t => {
+test('409 failure with a historical finalized Candidate and an uploading Candidate permits reconciliation', async t => {
   fakeReviewOrigin(t)
-  const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx)
-  const status = fakeStatus(ctx, [{ id: 'rev-previous', state: 'approved', finalizedAt: '2025-12-31T23:59:00Z' }])
-  await assert.rejects(() => reconcilePush(ctx, file, { readStatus: async () => status }), /RECONCILIATION_REQUIRED/)
-  await assert.rejects(() => requestedRedo(ctx, 'source-references'), { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+  const { ctx } = fixture(t, 'old-version'), file = failedPush(ctx, undefined, '409 REVIEW_CONFLICT rejected')
+  const status = fakeStatus(ctx, [
+    { id: 'rev-previous', state: 'changes_requested', finalizedAt: '2025-12-31T23:59:00Z' },
+    { id: 'rev-uploading', state: 'uploading', finalizedAt: null },
+  ])
+  const result = await reconcilePush(ctx, file, { readStatus: async () => status })
+  assert.equal(result.failure.httpStatus, 409)
+  assert.deepEqual(result.observation.candidates, [{ id: 'rev-uploading', state: 'uploading', finalizedAt: null }])
+  assert.deepEqual(JSON.parse(readFileSync(result.receipt)).observation, result.observation)
+  await requestedRedo(ctx, 'source-references')
 })
 
 test('a prior HTTP 500 cannot reconcile a later network-failed attempt', async t => {

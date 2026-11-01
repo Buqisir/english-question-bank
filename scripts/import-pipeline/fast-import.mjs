@@ -1067,6 +1067,7 @@ function statusObservation(raw, paperId, startedAt) {
     }
     const finalized = Date.parse(revision.finalizedAt)
     if (!Number.isFinite(finalized)) fail('UNKNOWN: Candidate 缺少有效 finalizedAt')
+    if (finalized < started) continue
     fail('SOURCE_REFERENCES_RECONCILIATION_REQUIRED: 已存在 finalize 的 Candidate')
   }
   return { latestRevisionId: status.latestRevisionId, latest: status.latest && {
