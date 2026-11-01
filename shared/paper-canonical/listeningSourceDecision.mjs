@@ -9,7 +9,8 @@ export const listeningDecisionFailure = message => { throw new Error(`Listening 
 export function validateListeningSourceDecision(value) {
   const fail = listeningDecisionFailure
   if (!exactKeys(value, ['schemaVersion', 'documentId', 'sourceSetDigest', 'evidenceDigest',
-    'confirmationSha256', 'heading', 'start', 'end', 'roles', 'sourceReview'])
+    'confirmationSha256', 'heading', 'start', 'end', 'roles', 'sourceReview',
+    ...(Object.hasOwn(value ?? {}, 'markers') ? ['markers'] : [])])
     || value.schemaVersion !== LISTENING_SOURCE_DECISION_VERSION || !nonempty(value.documentId)
     || ![value.sourceSetDigest, value.evidenceDigest, value.confirmationSha256].every(digest)
     || !exactKeys(value.sourceReview, ['reviewedBy', 'originalPagesReviewed', 'allSpeechRetained', 'reason'])
@@ -21,6 +22,12 @@ export function validateListeningSourceDecision(value) {
     if (!exactKeys(address, ['itemId', 'text']) || !nonempty(address.itemId) || !nonempty(address.text)) {
       fail(`${key} needs one complete source item`)
     }
+  }
+  if (Object.hasOwn(value, 'markers')) {
+    if (!Array.isArray(value.markers) || value.markers.length !== 10
+      || value.markers.some((marker, index) => !exactKeys(marker, ['number', 'itemId', 'page', 'text'])
+        || marker.number !== index + 1 || !nonempty(marker.itemId) || !nonempty(marker.text)
+        || !Number.isInteger(marker.page) || marker.page < 1)) fail('invalid declared Text 1–10 markers')
   }
   for (const role of value.roles) {
     if (!exactKeys(role, ['role', 'nextTextNumber', 'questionNumbers', 'fragments'])

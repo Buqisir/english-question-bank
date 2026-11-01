@@ -64,6 +64,7 @@ function makePlan(ctx, options) {
     sourceSetDigest: ctx.evidence.sourceSetDigest, evidenceDigest: ctx.evidence.evidenceDigest,
     confirmationSha256: ctx.binding.confirmationSha256,
     heading: address(headingItemId), start: address(startItemId), end: address(endItemId),
+    ...(Object.hasOwn(options, 'markers') ? { markers: structuredClone(options.markers) } : {}),
     roles: roles.map(role => ({ role: role.role, nextTextNumber: role.nextTextNumber ?? null,
       questionNumbers: role.questionNumbers ?? [], fragments: role.fragments.map(fragment => {
         const item = items.get(fragment.itemId)
@@ -96,7 +97,8 @@ export function applyMaterializationListeningSourcePlan(input, receiptBytes, pla
   if (digestJson(body) !== planDigest) fail('invalid plan digest')
   const d = plan.decision
   const regenerated = makePlan(ctx, { documentId: d?.documentId, headingItemId: d?.heading?.itemId,
-    startItemId: d?.start?.itemId, endItemId: d?.end?.itemId, reason: d?.sourceReview?.reason, roles: d?.roles })
+    startItemId: d?.start?.itemId, endItemId: d?.end?.itemId, reason: d?.sourceReview?.reason, roles: d?.roles,
+    ...(Object.hasOwn(d ?? {}, 'markers') ? { markers: d.markers } : {}) })
   if (!same(plan, regenerated)) fail('plan differs from the bound original source')
   const materialization = structuredClone(ctx.materialization)
   if (!['nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(materialization.schemaVersion)) {

@@ -6,6 +6,7 @@ import { restoreOcrSourcePresentation } from './materialization-presentation.mjs
 import { inspectNck1Materialization, runNck1MaterializationJob } from './nck1-docx-materialize.mjs'
 import { nck1OcrProducerVersion, nck1OcrProducerSourceDigest } from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { makeSyntheticNck1OcrFixture } from '../../test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs'
 
 function fixture() {
   const texts = [
@@ -335,4 +336,56 @@ test('materialization job leaves retained output untouched when direction recove
   assert.throws(() => runNck1MaterializationJob(job), /No confirmed direction/u)
   assert.deepEqual(readFileSync(job.file('nck1-source-materialization-v1.json')), original)
   assert.equal(inspectNck1Materialization(job).outputState, 'producer_output_unchanged')
+})
+
+test('first-run presentation failure retains raw artifacts for a manual instruction and cached retry', async t => {
+  const f = await makeSyntheticNck1OcrFixture({ listening: true })
+  // Close the fixture's intentionally ambiguous listening example and inline cue.
+  for (const page of f.confirmation.documents[1].pages) {
+    for (const item of page.orderedItems) {
+      if (/例如|example only/u.test(item.text)) item.text = '（停顿5秒）'
+      if (item.text === '高三听力录音原文') item.text = '听力稿'
+      if (item.text.includes('Keep every word')) item.text = 'M: Keep every word.'
+    }
+  }
+  const question = f.confirmation.documents[0]
+  for (const item of question.pages.flatMap(page => page.orderedItems)) {
+    if (/^听第\s*6\s*段/u.test(item.text)) item.text = '听下面5段对话或独白。每段录音读两遍。回答第6至7题。'
+    if (/^阅读下面短文，从每题/u.test(item.text)) item.text += '选出可以填入空白处的最佳选项。'
+  }
+  const direction = question.pages.flatMap(page => page.orderedItems).find(item => /短文后的选项/u.test(item.text))
+  assert(direction)
+  direction.text = '从七个选项中选出五项，另有两项多余。'
+  const job = cachedJob(t)
+  const manifest = { ...f.manifest, documents: f.sourceDocuments.map(d => ({
+    ...d, bytes: undefined, path: `${d.documentId}.pdf`,
+  })), materializationPath: 'materialization/nck1-source-materialization-v1.json', mediaDirectory: 'materialization/media' }
+  for (const d of f.sourceDocuments) writeFileSync(path.join(job.paperDir, `${d.documentId}.pdf`), d.bytes)
+  for (const name of ['nck1-source-materialization-v1.json', 'nck1-ocr-materialization-review-v1.json',
+    'nck1-ocr-materialization-producer-receipt-v1.json']) rmSync(job.file(name))
+  writeFileSync(job.file('nck1-ocr-source-evidence-v1.json'), JSON.stringify(f.evidence))
+  writeFileSync(job.file('nck1-ocr-source-confirmation-v1.json'), JSON.stringify(f.confirmation))
+  const run = () => runNck1MaterializationJob({ paperDir: job.paperDir, manifest })
+  assert.throws(run, /No confirmed direction item matched: .*seven-choices/u)
+  const retained = ['nck1-ocr-materialization-review-v1.json', 'nck1-ocr-materialization-producer-receipt-v1.json']
+    .map(name => readFileSync(job.file(name)))
+  const file = job.file('nck1-source-materialization-v1.json'), raw = JSON.parse(readFileSync(file))
+  const instruction = (slotId, item) => {
+    const page = question.pages.find(page => page.orderedItems.includes(item))
+    const observation = f.evidence.documents[0].pages.find(p => p.page === page.page).observations
+      .find(o => o.observationId === item.observationIds[0])
+    return { slotId, text: item.text, source: { kind: 'page_region', documentId: question.documentId,
+      page: page.page, region: observation.region } }
+  }
+  const questionItems = question.pages.flatMap(page => page.orderedItems)
+  raw.sourcePresentation = { instructions: [
+    instruction('seven-choices', direction),
+    instruction('listening.short-dialogue', questionItems.find(i => /^听下面\s*5\s*段对话。/u.test(i.text))),
+    instruction('listening.long-form', questionItems.find(i => /^听下面5段对话或独白/u.test(i.text))),
+  ], listeningExample: null }
+  writeFileSync(file, JSON.stringify(raw))
+  assert.equal(run().cached, true)
+  assert.equal(JSON.parse(readFileSync(file)).sourcePresentation.instructions.find(i => i.slotId === 'seven-choices').text, direction.text)
+  retained.forEach((bytes, i) => assert.deepEqual(readFileSync(job.file(
+    ['nck1-ocr-materialization-review-v1.json', 'nck1-ocr-materialization-producer-receipt-v1.json'][i])), bytes))
 })

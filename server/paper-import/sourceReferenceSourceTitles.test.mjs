@@ -30,6 +30,18 @@ const assertDegraded = input => {
   assertSourceReferenceAdmission({ ...input, sidecar })
 }
 
+test('confirmed not-writing items cannot trigger the application scoring sequence', () => {
+  const input = textInput([['第一节 应用文', '评分原则', '应用文评分正文。',
+    '1. 内容要点：这是另一个评分表的条目。', '第二节 读后续写', '评分原则', '续写评分正文。']])
+  const item = input.confirmation.documents[0].pages[0].orderedItems[3]
+  assert.throws(() => prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation), scopeError)
+  const source = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation, {
+    writingRoleDeclarations: [{ itemId: item.itemId, page: 1, quote: item.text,
+      role: 'not-writing', reason: 'Reviewed original page; unrelated scoring table.' }],
+  })
+  assert.equal(sourceReferenceWritingLifecycle(source.lines, source).items.get(item.itemId).capturing, false)
+})
+
 test('Qingdao task omission keeps both rubrics and exact annotated label; transcript never enters scoring', () => {
   const input = textInput([qingdaoTexts]), before = structuredClone(input)
   const sidecar = capture(input)
