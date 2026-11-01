@@ -289,6 +289,27 @@ test('bounded author decisions replay through public OCR import/compile and reje
     output, confirmed: true }), /new/u)
   assert(existsSync(output))
 
+  await t.test('headingless declaration excludes an old title and 2025.8 before Text 1 (BUB-181)', () => {
+    const corrected = structuredClone(confirmation)
+    const sourceItems = corrected.documents[1].pages.flatMap(page => page.orderedItems)
+    sourceItems.find(item => item.itemId === heading.itemId).text = '英语听力原文'
+    sourceItems.find(item => item.itemId === example.itemId).text = '2025.8'
+    const raw = produceNck1OcrMaterialization({ paperId: f.paperId, documents: f.sourceDocuments,
+      evidence: f.evidence, confirmation: corrected })
+    assert(raw.materialization.issues.some(issue => /LISTENING_CUE_BOUNDARY_AMBIGUOUS/u.test(issue.code)))
+    const authoredInput = { ...input, materializationBytes: encode(raw.materialization),
+      ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(corrected) } }
+    const plan = planMaterializationListeningSource(authoredInput, encode({ ...receipt, confirmation: corrected }),
+      { ...options, headingItemId: undefined, startItemId: sourceItems.find(item => item.text === 'Text 1').itemId,
+        roles: options.roles.slice(1) })
+    const applied = applyMaterializationListeningSourcePlan(authoredInput,
+      encode({ ...receipt, confirmation: corrected }), plan, { confirmed: true })
+    assert.equal(plan.decision.heading, null)
+    assert.deepEqual(applied.materialization.listening.transcript, successor.materialization.listening.transcript)
+    assert.deepEqual(applied.publicReplay.issues, [])
+    assert(applied.publicReplay.compiled)
+  })
+
   await t.test('declared exact Text addresses drive plan, apply and public replay without marker recognition', () => {
     const corrected = structuredClone(confirmation), markers = []
     for (const page of corrected.documents[1].pages) for (const item of page.orderedItems) {
