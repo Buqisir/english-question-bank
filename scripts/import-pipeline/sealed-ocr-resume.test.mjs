@@ -5,7 +5,7 @@ import test from 'node:test'
 import { ocrReviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
 
-test('sealed OCR resumes an interrupted fast step using only exact approved remote and installed digests', async () => {
+test('sealed OCR resumes an interrupted fast step using only exact approved remote and installed digests', async t => {
   const scratch = path.resolve(import.meta.dirname, '../../.scratch')
   mkdirSync(scratch, { recursive: true })
   const paperDir = mkdtempSync(path.join(scratch, 'sealed-ocr-'))
@@ -44,6 +44,28 @@ test('sealed OCR resumes an interrupted fast step using only exact approved remo
     install()
     assert.deepEqual(await run(), { reused: true, revisionId: receipt.revisionId, confirmationId: receipt.confirmationId })
     assert.equal(gets.length, 2, 'sealed reuse needs only two read-only requests')
+    await t.test('superseded OCR requires a later finalized candidate of the same paper', async () => {
+      const superseded = { ...revision, state: 'superseded', revisionNumber: 1 }
+      const candidate = { id: 'rev-candidate', paperId, reviewKind: 'candidate',
+        revisionNumber: 2, state: 'changes_requested', finalizedAt: '2026-10-25T00:00:00Z' }
+      for (const later of [[], [{ ...candidate, revisionNumber: 0 }],
+        [{ ...candidate, paperId: 'other' }], [{ ...candidate, reviewKind: 'ocr' }],
+        [{ ...candidate, state: 'uploading', finalizedAt: null }]]) {
+        status = { revisions: [superseded, ...later] }
+        await assert.rejects(run, /Sealed OCR differs/)
+      }
+      status = { revisions: [candidate, superseded] }
+      assert.deepEqual(await run(), { reused: true, revisionId: receipt.revisionId, confirmationId: receipt.confirmationId })
+      status = { revisions: [candidate, { ...superseded, finalizedAt: null }] }
+      await assert.rejects(run, /Sealed OCR differs/)
+      for (const state of ['awaiting_review', 'changes_requested', 'uploading']) {
+        status = { revisions: [candidate, { ...superseded, state }] }
+        await assert.rejects(run, /Sealed OCR differs/)
+      }
+      status = { revisions: [candidate, { ...superseded, manifest: { ...manifest, evidenceDigest: 'sha256:drift' } }] }
+      await assert.rejects(run, /Sealed OCR differs/)
+      status = { revisions: [revision] }
+    })
     for (const key of ['sourceSetDigest', 'evidenceDigest']) {
       const original = projection[key]
       projection[key] = `sha256:${'c'.repeat(64)}`

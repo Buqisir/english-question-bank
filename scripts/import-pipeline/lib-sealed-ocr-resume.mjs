@@ -55,8 +55,11 @@ export async function reuseSealedOcrConfirmation({ paperId, paperDir, proofreadI
   const status = await readRemote(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`)
   const revision = status.revisions?.find(item => item.id === receipt.revisionId)
     || (status.latest?.id === receipt.revisionId ? status.latest : null)
+  const supersededByCandidate = revision?.state === 'superseded' && status.revisions?.some(item =>
+    item.paperId === paperId && item.reviewKind === 'candidate' && item.finalizedAt
+    && item.state !== 'uploading' && item.revisionNumber > revision.revisionNumber)
   if (!revision || revision.paperId !== paperId || revision.reviewKind !== 'ocr'
-    || revision.state !== 'approved' || !revision.finalizedAt
+    || (revision.state !== 'approved' && !supersededByCandidate) || !revision.finalizedAt
     || revision.bundleDigest !== receipt.bundleDigest || revision.manifest?.paperId !== paperId
     || ocrReviewBundleDigest(revision.manifest) !== receipt.bundleDigest) fail()
   const remote = await readRemote(`/api/import-agent-reviews/revisions/${encodeURIComponent(receipt.revisionId)}/ocr-confirmation`)
