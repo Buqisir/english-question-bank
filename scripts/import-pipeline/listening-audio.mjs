@@ -228,14 +228,16 @@ export function stageSignalListeningAudio({ paperDir, paperId, sourcePath }) {
   const result = readJson(path.join(workDir, 'candidates.json'), 'Signal segmentation')
   // Encode the SAME fully decoded PCM used for timing, not another MP3 seek clock.
   normalizePlayback(path.join(workDir, 'full.wav'), playbackPath)
+  const hasOverlap = result.candidates.some((candidate, index) =>
+    index > 0 && candidate.startSeconds < result.candidates[index - 1].endSeconds)
   const segments = {
     schemaVersion: 'listening-audio-segments-v1', paperId,
     originalAudioSha256: sha256(readFileSync(originalPath)),
     playbackAudioSha256: sha256(readFileSync(playbackPath)),
     durationSeconds: result.decodedDurationSeconds,
     contentValidation: 'not_performed',
-    state: result.candidates.length === 10 ? 'candidate_segments' : 'unsegmented',
-    candidates: result.candidates,
+    state: result.candidates.length === 10 && !hasOverlap ? 'candidate_segments' : 'unsegmented',
+    candidates: hasOverlap ? [] : result.candidates,
     method: result.method,
     decodeWarnings: result.decodeWarnings,
   }

@@ -1610,7 +1610,9 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const firstMarkerIndex = listeningSource?.markers?.[0]?.index ?? answerBody.findIndex((item) =>
     item.kind === 'paragraph' && LISTENING_TEXT_MARKER.test(normalized(item.text)))
-  const headingIndexes = listeningSource?.heading >= 0 ? [listeningSource.heading] : answerBody.flatMap((item, index) =>
+  const headingIndexes = listeningSource
+    ? (Number.isInteger(listeningSource.heading) && listeningSource.heading >= 0 ? [listeningSource.heading] : [])
+    : answerBody.flatMap((item, index) =>
     index < firstMarkerIndex
       && item.kind === 'paragraph' && LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))
       ? [index]

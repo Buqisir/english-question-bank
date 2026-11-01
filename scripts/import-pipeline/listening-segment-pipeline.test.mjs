@@ -9,6 +9,38 @@ import { loadListeningResult, writeListeningEvidence } from './lib-listening-evi
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import childProcess from 'node:child_process'
+import { syncBuiltinESMExports } from 'node:module'
+import { stageSignalListeningAudio } from './listening-audio.mjs'
+import { assertListeningAudioManifest } from '../../server/paper-import/listeningAudioEvidence.mjs'
+
+test('nested Zibo signal candidates stay unsegmented with original evidence retained (BUB-181)', t => {
+  const dir = mkdtempSync(path.join(process.env.TMPDIR || '/tmp', 'signal-overlap-'))
+  t.after(() => { t.mock.restoreAll(); syncBuiltinESMExports(); rmSync(dir, { recursive: true, force: true }) })
+  const candidates = [[1, 30], [50, 80], [100, 130], [200, 230], [328.683, 518.907],
+    [406.732, 491.246], [600, 650], [700, 750], [800, 850], [900, 950]]
+    .map(([startSeconds, endSeconds], i) => ({ candidate: i + 1, startSeconds, endSeconds }))
+  const work = path.join(dir, 'materialization/listening-audio/signal-work')
+  t.mock.method(childProcess, 'execFileSync', (command, args) => {
+    if (command === 'python3' && args[0].endsWith('segment-listening.py')) {
+      mkdirSync(work, { recursive: true })
+      writeFileSync(path.join(work, 'candidates.json'), JSON.stringify({
+        candidates, decodedDurationSeconds: 1000, method: 'fixture', decodeWarnings: [] }))
+    }
+    if (command === 'ffmpeg') writeFileSync(args.at(-1), 'synthetic playback')
+    return JSON.stringify({ streams: [{ codec_type: 'audio', codec_name: 'mp3' }], format: { duration: 1000 } })
+  })
+  t.mock.method(childProcess, 'spawnSync', () => ({ status: 0, stderr: '' }))
+  syncBuiltinESMExports()
+  writeFileSync(path.join(dir, 'source.mp3'), 'synthetic original')
+  writeFileSync(path.join(dir, 'universal-source-manifest.json'),
+    JSON.stringify({ schemaVersion: 'universal-nck1-source-manifest-v1', paperId: 'paper-synthetic' }))
+  const result = stageSignalListeningAudio({ paperDir: dir, paperId: 'paper-synthetic', sourcePath: path.join(dir, 'source.mp3') })
+  assert.equal(result.state, 'unsegmented')
+  const manifest = JSON.parse(readFileSync(path.join(dir, 'universal-source-manifest.json')))
+  assert.deepEqual(assertListeningAudioManifest(dir, manifest).segments.candidates, [])
+  assert.deepEqual(JSON.parse(readFileSync(path.join(work, 'candidates.json'))).candidates, candidates)
+})
 
 const hash = value => `sha256:${createHash('sha256').update(value).digest('hex')}`
 const fixture = JSON.parse(readFileSync(new URL('./fixtures/listening-apple-run-v2.json', import.meta.url), 'utf8'))
