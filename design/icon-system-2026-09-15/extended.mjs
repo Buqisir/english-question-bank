@@ -80,12 +80,12 @@ export const extended = {
   "zoom-in": {
     zh: "放大",
     lucide: null,
-    line: `<circle cx="11.08" cy="11.08" r="8.7"/><path d="M17.232 17.232L21.62 21.62"/><path data-stroke-small="2.05" stroke-width="2.4" d="M8.08 11.08H14.08 M11.08 8.08V14.08"/>`,
+    line: `<circle cx="11.08" cy="11.08" r="8.7"/><path d="M17.232 17.232L21.62 21.62"/><path d="M8.08 11.08H14.08 M11.08 8.08V14.08"/>`,
   },
   "zoom-out": {
     zh: "缩小",
     lucide: null,
-    line: `<circle cx="11.08" cy="11.08" r="8.7"/><path d="M17.232 17.232L21.62 21.62"/><path data-stroke-small="2.05" stroke-width="2.4" d="M8.08 11.08H14.08"/>`,
+    line: `<circle cx="11.08" cy="11.08" r="8.7"/><path d="M17.232 17.232L21.62 21.62"/><path d="M8.08 11.08H14.08"/>`,
   },
   "clock": {
     zh: "用时",

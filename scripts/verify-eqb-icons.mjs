@@ -146,7 +146,8 @@ try {
           failures.push(`sliders/${sample.size}: B+ requires two light compound frames and two tinted counters, not vertical pills`)
         } else {
           for (const [i, frame] of frames.entries()) {
-            const [cx, cy] = i === 0 ? [15.25, 7] : [8.75, 17]
+            // 第 6 组 SL2：两只拨片各向中间挪 1.25，短边轨道 1.85 → 3.1。
+            const [cx, cy] = i === 0 ? [14, 7] : [10, 17]
             const box = frame.getBBox()
             const hole = counters[i].getBBox()
             if (Math.abs(box.width - 9) > 0.01 || Math.abs(box.height - 6.4) > 0.01 || Math.abs(box.x + box.width / 2 - cx) > 0.01 || Math.abs(box.y + box.height / 2 - cy) > 0.01) failures.push(`sliders/${sample.size}: retain B+'s horizontal envelope and unchanged handle centers`)
@@ -326,6 +327,23 @@ try {
         const box = line.querySelector('path').getBBox()
         if (Math.abs(box.x - 8.8) > 0.01 || Math.abs(box.width - 6.4) > 0.01) failures.push(`close-circle/${sample.size}: retain ① enlarged cross`)
         line.remove()
+      }
+      if (['search', 'zoom-in', 'zoom-out', 'dictionary-lookup', 'reading-analysis'].includes(sample.name)) {
+        // 第 6 组：搜索、放大、缩小、查词、阅读解析是同一只镜（G2 收 0.99 后），镜内符号不另设线宽。
+        const lens = parse(sample.line).querySelector('circle')
+        if (!lens || Math.abs(+lens.getAttribute('cx') - 11.089) > 0.01 || Math.abs(+lens.getAttribute('cy') - 11.089) > 0.01 || Math.abs(+lens.getAttribute('r') - 8.613) > 0.01) failures.push(`${sample.name}/${sample.size}: share the search lens (11.089, r 8.613)`)
+        if (/data-stroke-small/.test(sample.line) || parse(sample.line).querySelectorAll('[stroke-width]').length) failures.push(`${sample.name}/${sample.size}: one pen — no local stroke widths inside the lens`)
+        if (sample.name === 'reading-analysis' && parse(sample.line).querySelectorAll('path').length !== 2) failures.push(`reading-analysis/${sample.size}: R3 is lens + handle + two text lines, no paper`)
+      }
+      if (sample.name === 'link') {
+        // 第 6 组 G4：两段内钩沿原方向收 0.5，与对面链环留缝。
+        const ends = [...parse(sample.line).querySelectorAll('path')].map((path) => path.getAttribute('d').trim().split(/\s+/).slice(-2).join(' '))
+        if (ends.join('|') !== 'L11.204 5.116|L12.796 18.884') failures.push(`link/${sample.size}: retain the shortened inner hooks (${ends})`)
+      }
+      if (sample.name === 'log-out') {
+        // 第 6 组 L1：门沿透视往回收 40%，上沿门角落在 y 3.075。
+        const door = parse(sample.line).querySelector('path').getAttribute('d')
+        if (!/C13\.195 3\.495 11\.835 3\.355 9\.114 3\.075/.test(door)) failures.push(`log-out/${sample.size}: retain L1's softened door perspective`)
       }
     }
     return failures
