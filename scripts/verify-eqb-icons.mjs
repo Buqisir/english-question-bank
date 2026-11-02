@@ -345,6 +345,16 @@ try {
         const door = parse(sample.line).querySelector('path').getAttribute('d')
         if (!/C13\.195 3\.495 11\.835 3\.355 9\.114 3\.075/.test(door)) failures.push(`log-out/${sample.size}: retain L1's softened door perspective`)
       }
+      if (sample.name === 'scissors') {
+        // 第 6 组 B：H4.2 骨架，刀刃是沿刃脊的一笔（不再是实心叶子），刃尖再长 1；旋转已写进坐标。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        if (paths.length !== 6 || svgEl.querySelector('g[transform], [fill="currentColor"]')) failures.push(`scissors/${sample.size}: B — two rings, two shanks, two stroked blades; no solid blades or transforms`)
+        else {
+          const tips = paths.slice(4).map((path) => path.getPointAtLength(path.getTotalLength()))
+          if (tips.some((tip) => Math.abs(tip.y - 3.568) > 0.01) || Math.abs(tips[0].x + tips[1].x - 23.726) > 0.01) failures.push(`scissors/${sample.size}: retain B's longer, mirrored blade tips`)
+        }
+      }
     }
     return failures
   }, samples)
