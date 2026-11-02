@@ -293,6 +293,40 @@ try {
         }
         line.remove()
       }
+      if (sample.name === 'bell' || sample.name === 'bell-off') {
+        document.body.appendChild(line)
+        // 第 5 组 ②「下摆外撇」：铃身两侧最后一段外撇落到铃口，不回到直落的拱门。
+        const body = line.querySelector('path')
+        const d = body.getAttribute('d')
+        if (!/^M\s*4\.248\s+16\.514\s*C/.test(d)) failures.push(`${sample.name}/${sample.size}: bell body must start with the flared lower-left curve on the rim`)
+        if (sample.name === 'bell-off') {
+          // B3「斜杠下移」：45° 斜杠与隐藏同长，左下平移避开右下角；后面的铃在交叉处断开，缝 ≥ 1.5（2.75 审计档按线宽差放宽，同复制）。
+          const paths = [...line.querySelectorAll('path')]
+          const slash = paths[paths.length - 1]
+          const start = slash.getPointAtLength(0)
+          const end = slash.getPointAtLength(slash.getTotalLength())
+          if (Math.abs(start.y - start.x - 3.6) > 0.01 || Math.abs(end.y - end.x - 3.6) > 0.01 || Math.abs(end.x - start.x - 14.43) > 0.02) failures.push(`bell-off/${sample.size}: retain B3's shifted 45-degree slash`)
+          let gap = Infinity
+          for (const path of paths.slice(0, -1)) {
+            const n = 200
+            for (let i = 0; i <= n; i++) {
+              const p = path.getPointAtLength(path.getTotalLength() * i / n)
+              gap = Math.min(gap, Math.abs(p.x - p.y + 3.6) / Math.SQRT2 - sample.stroke)
+            }
+          }
+          if (gap < 1.5 - (sample.stroke - 2.25) - 0.02) failures.push(`bell-off/${sample.size}: G9 — the bell must break where the slash crosses (${gap})`)
+          const lastBack = paths[paths.length - 2]
+          if (!lastBack || Math.abs(lastBack.getBBox().x + lastBack.getBBox().width - 20.892) > 0.01) failures.push(`bell-off/${sample.size}: keep the bell's lower-right corner and rim tip`)
+        }
+        line.remove()
+      }
+      if (sample.name === 'close-circle') {
+        document.body.appendChild(line)
+        // 第 5 组 ①：叉离圈与「已通过」的勾同缝（约 2.47），不回到小一号的叉。
+        const box = line.querySelector('path').getBBox()
+        if (Math.abs(box.x - 8.8) > 0.01 || Math.abs(box.width - 6.4) > 0.01) failures.push(`close-circle/${sample.size}: retain ① enlarged cross`)
+        line.remove()
+      }
     }
     return failures
   }, samples)

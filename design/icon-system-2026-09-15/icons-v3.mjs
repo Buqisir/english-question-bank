@@ -562,7 +562,10 @@ const G2 = {
   'question-group': 0.935, document: 0.935, 'file-search': 0.935, table: 0.935,
   // 第 3 组「词与阅读」（Owner 2026-11-02）：偏小的放到同档。
   'vocabulary-notebook': 1.018, 'book-open': 1.056,
+  // 第 5 组「状态与提示」（Owner 2026-11-02）：[k, 原中心]——放大时把偏下的墨迹一起摆正到画布中心。
+  // 锁定 / 解锁成对同一变换；警告、通知已顶到边距，面积不到同档是形状决定的。
+  lock: [1.078, [12, 12.525]], unlock: [1.078, [12, 12.525]], 'alert-triangle': [1.07, [12, 12.385]], bell: [1.14, [12, 11.64]],
 }
 const merged = { ...generic, ...domain, ...extended }
-for (const [name, k] of Object.entries(G2)) merged[name] = sized(k, merged[name])
+for (const [name, v] of Object.entries(G2)) merged[name] = Array.isArray(v) ? sized(v[0], merged[name], v[1]) : sized(v, merged[name])
 export const all = merged
