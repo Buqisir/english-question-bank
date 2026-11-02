@@ -24,7 +24,11 @@ const markupOf = (icon) => icon.line
   .replace(/class="dot"/g, 'fill="currentColor" stroke="none"')
   .replace(/class="joint"/g, 'fill="currentColor" stroke="none"')
 
-const jobs = Object.entries(v3.all).map(([name, icon]) => ({ name, markup: markupOf(icon), stroke: icon.strokeWidth ?? STROKE }))
+const candIdx = process.argv.indexOf('--candidates')
+const { readFile } = await import('node:fs/promises')
+const jobs = candIdx !== -1
+  ? Object.entries(JSON.parse(await readFile(process.argv[candIdx + 1], 'utf8'))).map(([name, markup]) => ({ name, markup, stroke: STROKE }))
+  : Object.entries(v3.all).map(([name, icon]) => ({ name, markup: markupOf(icon), stroke: icon.strokeWidth ?? STROKE }))
 
 const require = createRequire(join(root, 'app/package.json'))
 const { chromium } = require('playwright')
