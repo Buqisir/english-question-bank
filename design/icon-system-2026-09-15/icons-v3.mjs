@@ -377,11 +377,11 @@ export const generic = {
     line: `<path d="M12 3 C12.65 8.1 15 10.5 19.45 11.3 C15 12.1 12.8 14.8 12 20.7 C11.2 14.8 9 12.1 4.55 11.3 C9 10.5 11.35 8.1 12 3 Z"/>`,
     fillShape: `<path d="M12 3 C12.65 8.1 15 10.5 19.45 11.3 C15 12.1 12.8 14.8 12 20.7 C11.2 14.8 9 12.1 4.55 11.3 C9 10.5 11.35 8.1 12 3 Z"/>`,
   },
-  // 翻译（Owner 定稿 2026-09-22）：一行正文 + 下面一个「文」——「把卷面上这一行译成中文」。
-  //   正文行是卷面原语；文 = 点（dot）+ 横 + 撇捺，撇捺带弧度、捺比撇长落得低，是楷体手势不是几何叉。
+  // 翻译 Y2a（Owner 2026-11-02，第 3 组）：借通用「左上文、右下 A」，用本套的笔重画。
+  //   「文」= 横 + 竖点 + 撇 + 捺，撇捺都从横上长出来，没有悬空的起笔；A 用描边，实心 A 是「词」的家族部件，不借。
   translate: {
     zh: '翻译',
-    line: `<path d="M3.5 5h17"/>${dot(12, 10.25, 1.5)}<path d="M8.25 13h7.5"/><path d="M14.4 14.6C13 17.4 10.9 19.2 8.5 20.5"/><path d="M9.6 14.6C11 17.4 13.1 19.2 16 20.5"/>`,
+    line: `<path d="M3 6.25H12.5"/><path d="M7.75 3.25V6.25"/><path d="M10.6 6.25C9.6 9.7 7.4 12.2 3.5 13.6"/><path d="M4.6 6.25C6 9.5 8 11.9 10.9 13.4"/><path d="M12.75 21 L16.75 11 L20.75 21"/><path d="M14.2 17.5H19.3"/>`,
   },
   'grid-2x2': {
     zh: '趣味练习',
@@ -484,7 +484,7 @@ export const domain = {
   'sentence-analysis': {
     zh: '句法解析',
     lucide: null,
-    line: `<path data-stroke-small="2" stroke-width="2.4" d="M4.85 16.5 V17.25 Q4.85 19 6.6 19 H17.75 Q19.5 19 19.5 17.25 V16.5 M12 19 V16.5"/><path d="M4.75 .6 C3.95 .05 3.05 -.15 2.25 .05 C.9 .25 .15 1.05 .15 2.2 C.15 3.35 .95 3.85 2.2 4.2 L3 4.42 Q3.8 4.65 3.8 5.3 Q3.8 6.1 2.55 6.1 Q1.25 6.1 .55 5.35 L0 6.65 Q1.05 7.5 2.65 7.5 C4.25 7.5 5.15 6.6 5.15 5.2 C5.15 3.95 4.45 3.3 3.05 2.9 L2.25 2.67 Q1.5 2.45 1.5 1.98 Q1.5 1.25 2.55 1.25 Q3.5 1.25 4.15 1.8 Z" transform="translate(2.25 4) scale(1 1.2)" fill="currentColor" fill-rule="evenodd" stroke="none"/><path d="M0 0 H1.6 L3 5.4 L4.4 0 H6 L3.9 7.5 H2.1 Z" transform="translate(9 4) scale(1 1.2)" fill="currentColor" fill-rule="evenodd" stroke="none"/><path d="M2.75 0 C.9 0 0 1.35 0 3.75 C0 6.15 .9 7.5 2.75 7.5 C4.6 7.5 5.5 6.15 5.5 3.75 C5.5 1.35 4.6 0 2.75 0 Z M2.75 1.45 C3.65 1.45 3.95 2.2 3.95 3.75 C3.95 5.3 3.65 6.05 2.75 6.05 C1.85 6.05 1.55 5.3 1.55 3.75 C1.55 2.2 1.85 1.45 2.75 1.45 Z" transform="translate(16.75 4) scale(1 1.2)" fill="currentColor" fill-rule="evenodd" stroke="none"/>`,
+    line: `<path d="M4.85 16.5 V17.25 Q4.85 19 6.6 19 H17.75 Q19.5 19 19.5 17.25 V16.5 M12 19 V16.5"/><path d="M4.75 .6 C3.95 .05 3.05 -.15 2.25 .05 C.9 .25 .15 1.05 .15 2.2 C.15 3.35 .95 3.85 2.2 4.2 L3 4.42 Q3.8 4.65 3.8 5.3 Q3.8 6.1 2.55 6.1 Q1.25 6.1 .55 5.35 L0 6.65 Q1.05 7.5 2.65 7.5 C4.25 7.5 5.15 6.6 5.15 5.2 C5.15 3.95 4.45 3.3 3.05 2.9 L2.25 2.67 Q1.5 2.45 1.5 1.98 Q1.5 1.25 2.55 1.25 Q3.5 1.25 4.15 1.8 Z" transform="translate(2.25 4) scale(1 1.2)" fill="currentColor" fill-rule="evenodd" stroke="none"/><path d="M0 0 H1.6 L3 5.4 L4.4 0 H6 L3.9 7.5 H2.1 Z" transform="translate(9 4) scale(1 1.2)" fill="currentColor" fill-rule="evenodd" stroke="none"/><path d="M2.75 0 C.9 0 0 1.35 0 3.75 C0 6.15 .9 7.5 2.75 7.5 C4.6 7.5 5.5 6.15 5.5 3.75 C5.5 1.35 4.6 0 2.75 0 Z M2.75 1.45 C3.65 1.45 3.95 2.2 3.95 3.75 C3.95 5.3 3.65 6.05 2.75 6.05 C1.85 6.05 1.55 5.3 1.55 3.75 C1.55 2.2 1.85 1.45 2.75 1.45 Z" transform="translate(16.75 4) scale(1 1.2)" fill="currentColor" fill-rule="evenodd" stroke="none"/>`,
     fillShape: '',
   },
   // 查词 D：词在镜中；镜面承载词头，独立于通用书本与普通搜索。
@@ -510,10 +510,11 @@ export const domain = {
     line: `<path d="M19.5 16.25V3.5H7Q4.5 3.5 4.5 6V18.5Q4.5 20.5 7 20.5H19.5"/><path d="M4.5 18.5Q4.5 16.75 7 16.75H13.5C16.5 16.75 18 16.55 19.5 16.25"/><path d="M8.25 13.5L11.3 6.5H12.7L15.75 13.5H14.15L13.5 11.9H10.5L9.85 13.5ZM11.04 10.55H12.96L12 8.1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>`,
     fillShape: `<path d="M19.5 16.25V3.5H7Q4.5 3.5 4.5 6V18.5Q4.5 16.75 7 16.75H13.5C16.5 16.75 18 16.55 19.5 16.25Z"/>`,
   },
-  // 单词卡 D4.1：Owner 采用轻叠成面；后卡上下沿同向微斜，前卡与实心 A 保留选稿。
-  card: { zh: '单词卡', lucide: 'book-open-check', line: `<path d="M8 7.25L5.25 6.7C4.03 6.456 3.219 6.935 3.15 8.35L2.75 16.5C2.69 17.72 3.05 18.357 4.5 18.647L8.763932 19.5"/><rect x="8" y="3.5" width="13.25" height="17" rx="3"/><g transform="translate(2.625 2) scale(1)"><path d="M8.25 13.5L11.3 6.5H12.7L15.75 13.5H14.15L13.5 11.9H10.5L9.85 13.5ZM11.04 10.55H12.96L12 8.1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/></g>`, fillShape: `<rect x="8" y="3.5" width="13.25" height="17" rx="3"/>` },
-  // 过生词 E：Owner 采用圈出一词；轻微偏心的圈注、右上开口和实心 A 保留选稿。
-  'book-marked': { zh: '过生词', lucide: 'book-marked', line: `<path d="M18.2 4.6C14.8 2.2 8.3 2.6 5.25 6.1C2.2 9.6 3.1 17.2 7.2 20C11.4 22.7 18.5 20.6 20.25 16.6C21.5 13.7 21 10.8 19.8 8.75"/><g transform="translate(0 2)"><path d="M8.25 13.5L11.3 6.5H12.7L15.75 13.5H14.15L13.5 11.9H10.5L9.85 13.5ZM11.04 10.55H12.96L12 8.1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/></g>`, fillShape: `<path d="M18.2 4.6C14.8 2.2 8.3 2.6 5.25 6.1C2.2 9.6 3.1 17.2 7.2 20C11.4 22.7 18.5 20.6 20.25 16.6C21.5 13.7 21 10.8 19.8 8.75Z"/>` },
+  // 单词卡 K2（Owner 2026-11-02，第 3 组）：一张横卡 + 实心 A。真实单词卡是横的；不叠就没有 G9 遮挡，也不和「复制」撞。宽高比收到横形上限 1.2。
+  card: { zh: '单词卡', lucide: 'book-open-check', line: `<rect x="2.875" y="4.575" width="18.25" height="14.85" rx="3.7"/><path d="M8.25 15L11.3 8H12.7L15.75 15H14.15L13.5 13.4H10.5L9.85 15ZM11.04 12.05H12.96L12 9.6Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>`, fillShape: `<rect x="2.875" y="4.575" width="18.25" height="14.85" rx="3.7"/>` },
+  // 过生词 G1「收下」（Owner 2026-11-02，第 3 组）：它也是「不认识，收下」按钮和「生词会依次收在这里」的图标，核心动作是收。
+  //   实心 A 落进与下载、上传同一只托盘（托盘 = 生词组）；开放符号，不按 G2 对齐面积。
+  'book-marked': { zh: '过生词', lucide: 'book-marked', line: `<path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25"/><path d="M6.938 15.825L11.055 6.375H12.945L17.063 15.825H14.902L14.025 13.665H9.975L9.098 15.825ZM10.704 11.843H13.296L12 8.535Z" fill="currentColor" fill-rule="evenodd" stroke="none"/>`, fillShape: `<path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25"/>` },
   // 剪刀 H4.2：Owner 采用圆头展开刃；双柄与实心刀腹保持选稿，淡底只落在指环。
   scissors: {
     zh: '剪入 / 已剪入',
@@ -527,7 +528,8 @@ export const domain = {
 export const passage = {
   // 阅读理解：一本摊开的书（Owner 选 B）。顶栏「篇章」改用 papers，避免同形。
   // 右页只放得下一个选中点：短行两头离书脊和页边都不足 1.5（craft-rules R4 下限）。
-  reading: { zh: '阅读理解', color: '#4199E3', line: `${bookOpen}${point(16.25, 11)}`, fillShape: bookOpenFill },
+  // 第 3 组（Owner 2026-11-02）：和「打开书本」一起按 G2 放大（×1.045，同档 336）。
+  reading: sized(1.045, { zh: '阅读理解', color: '#4199E3', line: `${bookOpen}${point(16.25, 11)}`, fillShape: bookOpenFill }),
   // 上下两行离药丸空各一个描边。
   cloze: { zh: '完形填空', color: '#A07DE5', line: `<path d="M4 4.75h16M15 12h5M4 19.25h10.5"/>${rr(4, 9.25, 7, 5.5, 2.75)}`, fillShape: rr(4, 9.25, 7, 5.5, 2.75) },
   // 七选五（Owner 定 B 归位）：上下两行正文夹着「一句话的位置」，位置上只剩左边一小截，一支箭头从右边把句子送回去。
@@ -557,6 +559,8 @@ export { extended }
 const G2 = {
   paper: 0.972, 'paper-student': 0.972, 'paper-check': 0.972, 'paper-download': 0.972, papers: 0.972, 'page-break': 0.972,
   'question-group': 0.935, document: 0.935, 'file-search': 0.935, table: 0.935,
+  // 第 3 组「词与阅读」（Owner 2026-11-02）：偏小的放到同档。
+  'vocabulary-notebook': 1.018, 'book-open': 1.056,
 }
 const merged = { ...generic, ...domain, ...extended }
 for (const [name, k] of Object.entries(G2)) merged[name] = sized(k, merged[name])

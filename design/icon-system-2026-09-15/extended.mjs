@@ -67,7 +67,8 @@ export const extended = {
     lucide: null,
     line: `<path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z"/><circle cx="11.6" cy="11.8" r="3"/><path d="M13.8 14L16.1 16.3"/>`,
   },
-  "notebook": { zh: "笔记", lucide: null, line: "<path d=\"M6.5 5.2H17.5Q20.5 5.2 20.5 8.2V18.2Q20.5 21.2 17.5 21.2H6.5Q3.5 21.2 3.5 18.2V8.2Q3.5 5.2 6.5 5.2Z\"/><path d=\"M8 2.8V7.2M16 2.8V7.2\"/><path d=\"M8 12H16M8 16.5H12.8\"/>" },
+  // 笔记 N2（Owner 2026-11-02，第 3 组）：线圈本，两个环穿过左边，和「日期」顶上的两环分开。
+  "notebook": { zh: "笔记", lucide: null, line: "<rect x=\"5.625\" y=\"3.075\" width=\"14.28\" height=\"17.85\" rx=\"3.57\"/><path d=\"M3.585 8.94 H7.41 M3.585 15.06 H7.41\"/><path d=\"M11.235 8.94 H16.08 M11.235 13.02 H14.55\"/>", fillShape: "<rect x=\"5.625\" y=\"3.075\" width=\"14.28\" height=\"17.85\" rx=\"3.57\"/>" },
   "list": { zh: "列表", lucide: null, line: "<circle class=\"dot\" cx=\"4\" cy=\"6.5\" r=\"1.2\"/><circle class=\"dot\" cx=\"4\" cy=\"12\" r=\"1.2\"/><circle class=\"dot\" cx=\"4\" cy=\"17.5\" r=\"1.2\"/><path d=\"M9 6.5H20M9 12H20M9 17.5H15.5\"/>" },
   // Owner selected B: equal-height solid numerals and a gently shorter second row.
   "list-ordered": { zh: "编号列表", lucide: null, line: "<path d=\"M4.1 4.2 L5.9 3 H7.1 V9 H5.55 V4.9 L4.85 5.35 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M3.55 16.45 C3.55 15.1 4.4 14.5 5.75 14.5 C7.1 14.5 7.9 15.25 7.9 16.4 C7.9 17.3 7.38 17.87 6.5 18.58 L5.68 19.25 H8 V20.5 H3.55 V19.35 L5.74 17.49 C6.26 17.05 6.43 16.75 6.43 16.4 C6.43 15.97 6.13 15.68 5.7 15.68 C5.25 15.68 5 15.97 5 16.45 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M12 6 H21 M12 17.5 H19.5\"/>" },
