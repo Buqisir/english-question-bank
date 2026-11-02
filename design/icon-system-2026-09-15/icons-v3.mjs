@@ -194,7 +194,8 @@ export const generic = {
   'arrow-up': { zh: '上移', lucide: 'arrow-up', line: `<path d="M12 20V4"/><path d="M6.5 9.5 12 4 17.5 9.5"/>` },
   'arrow-down': { zh: '下移', lucide: 'arrow-down', line: `<path d="M12 4v16"/><path d="M6.5 14.5 12 20 17.5 14.5"/>` },
   // Owner 2026-09-30 选定 B：两端箭翼横纵各收 0.5，横杆、箭尖与 45° 方向保持。
-  'arrow-left-right': { zh: '交换', lucide: 'arrow-left-right', line: `<path d="M3.5 12h17"/><path d="M7.5 8 L3.5 12 L7.5 16 M16.5 8 L20.5 12 L16.5 16"/>` },
+  // 第 7 组（Owner 2026-11-02）①：翼 4 → 4.75，和单向箭头（5.5）并排时是一家；杆长不动。
+  'arrow-left-right': { zh: '交换', lucide: 'arrow-left-right', line: `<path d="M3.5 12h17"/><path d="M8.25 7.25 L3.5 12 L8.25 16.75 M15.75 7.25 L20.5 12 L15.75 16.75"/>` },
   // Owner 2026-09-27 选定：宽度 13 不变，高度 6.5 → 6，外框中心不动，折角稍平。
   'chevron-down': { zh: '展开', lucide: 'chevron-down', line: `<path d="M5.5 9.25 12 15.25 18.5 9.25"/>` },
   // Owner 同日逐枚确认：与展开镜像配对。

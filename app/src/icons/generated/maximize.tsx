@@ -1,14 +1,11 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
-import { EqbIcon, eqbDisplayStrokeScale, type EqbIconProps } from '../EqbIcon'
+import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 
-export function Maximize({ size = 24, variant = 'line', ...props }: EqbIconProps) {
-  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
-  const isSmall = Number.isFinite(numericSize) && numericSize < 24
-  const displayScale = eqbDisplayStrokeScale(size)
+export function Maximize({ variant = 'line', ...props }: EqbIconProps) {
   return (
-    <EqbIcon size={size} {...props}>
+    <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M2.4 12 C2.4 7.475 2.4 5.212 3.806 3.806 C5.212 2.4 7.475 2.4 12 2.4 C16.525 2.4 18.788 2.4 20.194 3.806 C21.6 5.212 21.6 7.475 21.6 12 C21.6 16.525 21.6 18.788 20.194 20.194 C18.788 21.6 16.525 21.6 12 21.6 C7.475 21.6 5.212 21.6 3.806 20.194 C2.4 18.788 2.4 16.525 2.4 12 Z" /><path strokeWidth={isSmall ? 2 : 2.25 * displayScale} d="M14.35 6.7 H17.3 V9.65 M17.3 6.7 L13.4 10.6" /><path strokeWidth={isSmall ? 2 : 2.25 * displayScale} d="M9.65 17.3 H6.7 V14.35 M6.7 17.3 L10.6 13.4" /></> : <><path d="M2.4 12 C2.4 7.475 2.4 5.212 3.806 3.806 C5.212 2.4 7.475 2.4 12 2.4 C16.525 2.4 18.788 2.4 20.194 3.806 C21.6 5.212 21.6 7.475 21.6 12 C21.6 16.525 21.6 18.788 20.194 20.194 C18.788 21.6 16.525 21.6 12 21.6 C7.475 21.6 5.212 21.6 3.806 20.194 C2.4 18.788 2.4 16.525 2.4 12 Z" /><path strokeWidth={isSmall ? 2 : 2.25 * displayScale} d="M14.35 6.7 H17.3 V9.65 M17.3 6.7 L13.4 10.6" /><path strokeWidth={isSmall ? 2 : 2.25 * displayScale} d="M9.65 17.3 H6.7 V14.35 M6.7 17.3 L10.6 13.4" /></>}
+      {variant === 'fill' ? <><path d="M3.504 12 C3.504 7.995 3.504 5.993 4.748 4.748 C5.993 3.504 7.995 3.504 12 3.504 C16.005 3.504 18.007 3.504 19.252 4.748 C20.496 5.993 20.496 7.995 20.496 12 C20.496 16.005 20.496 18.007 19.252 19.252 C18.007 20.496 16.005 20.496 12 20.496 C7.995 20.496 5.993 20.496 4.748 19.252 C3.504 18.007 3.504 16.005 3.504 12 Z" /><path d="M13.89 7.5 H16.501 V10.11 M16.501 7.5 L13.326 10.674" /><path d="M10.11 16.5 H7.499 V13.89 M7.499 16.5 L10.674 13.326" /></> : <><path d="M3.504 12 C3.504 7.995 3.504 5.993 4.748 4.748 C5.993 3.504 7.995 3.504 12 3.504 C16.005 3.504 18.007 3.504 19.252 4.748 C20.496 5.993 20.496 7.995 20.496 12 C20.496 16.005 20.496 18.007 19.252 19.252 C18.007 20.496 16.005 20.496 12 20.496 C7.995 20.496 5.993 20.496 4.748 19.252 C3.504 18.007 3.504 16.005 3.504 12 Z" /><path d="M13.89 7.5 H16.501 V10.11 M16.501 7.5 L13.326 10.674" /><path d="M10.11 16.5 H7.499 V13.89 M7.499 16.5 L10.674 13.326" /></>}
     </EqbIcon>
   )
 }

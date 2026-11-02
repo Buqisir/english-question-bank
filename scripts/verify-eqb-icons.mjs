@@ -345,6 +345,23 @@ try {
         const door = parse(sample.line).querySelector('path').getAttribute('d')
         if (!/C13\.195 3\.495 11\.835 3\.355 9\.114 3\.075/.test(door)) failures.push(`log-out/${sample.size}: retain L1's softened door perspective`)
       }
+      if (sample.name === 'maximize' || sample.name === 'minimize') {
+        // 第 7 组：框按 G2 收 0.885；框内箭头同一支笔，离框角、两支之间守 G4 1.5（2.75 审计档按线宽差放宽）。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        if (paths.length !== 3 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small]').length || !paths[0].getAttribute('d').startsWith('M3.504 12')) failures.push(`${sample.name}/${sample.size}: G2 frame and one pen inside`)
+        else {
+          document.body.appendChild(svgEl)
+          const pts = paths.map((path) => Array.from({ length: 400 }, (_, i) => path.getPointAtLength(path.getTotalLength() * i / 399)))
+          const near = (a, b) => { let m = Infinity; for (const p of a) for (const q of b) m = Math.min(m, Math.hypot(p.x - q.x, p.y - q.y)); return m }
+          const gap = Math.min(near(pts[0], pts[1]), near(pts[0], pts[2]), near(pts[1], pts[2])) - sample.stroke
+          if (gap < 1.5 - Math.max(0, sample.stroke - 2.25) - 0.02) failures.push(`${sample.name}/${sample.size}: G4 — inner arrows crowd the frame or each other (${gap})`)
+          svgEl.remove()
+        }
+      }
+      if (sample.name === 'arrow-left-right' && !sample.line.includes('M8.25 7.25 L3.5 12 L8.25 16.75 M15.75 7.25 L20.5 12 L15.75 16.75')) failures.push(`arrow-left-right/${sample.size}: ① wings 4.75`)
+      if (sample.name === 'corner-down-right' && !sample.line.includes('M8.75 15.125L4.5 10.875L8.75 6.625')) failures.push(`corner-down-right/${sample.size}: ② centred reply arrow`)
+      if (sample.name === 'move' && /<g/.test(sample.line.replace(/^<svg[^>]*>/, ''))) failures.push(`move/${sample.size}: translations baked into coordinates`)
       if (sample.name === 'scissors') {
         // 第 6 组 B：H4.2 骨架，刀刃是沿刃脊的一笔（不再是实心叶子），刃尖再长 1；旋转已写进坐标。
         const svgEl = parse(sample.line)
@@ -407,7 +424,9 @@ try {
         if (stroke === 2.25) assert.ok(icon.holes.every((hole) => hole.width >= 2.25), `printer/${stroke}: a counter closed up`)
       }
       if (!repaired.has(icon.name)) continue
-      assert.ok(icon.gap === null || icon.gap >= 1.5, `${icon.name}/${stroke}: gap ${icon.gap}`)
+      // 第 7 组：全屏 / 退出全屏的框内箭头改为同一支笔，2.75 审计档按线宽差放宽（同复制、关闭通知）。
+      const gapFloor = ['maximize', 'minimize'].includes(icon.name) ? 1.5 - Math.max(0, stroke - 2.25) - 0.02 : 1.5
+      assert.ok(icon.gap === null || icon.gap >= gapFloor, `${icon.name}/${stroke}: gap ${icon.gap}`)
       assert.ok(icon.holes.filter((hole) => hole.area > 1).every((hole) => hole.width >= 2.25), `${icon.name}/${stroke}: narrow hole`)
     }
     console.log(`PASS ${icons.length} unique measurements at stroke ${stroke}, including 57 extended; 18 repaired glyphs meet gap/hole floors`)
