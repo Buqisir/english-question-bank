@@ -171,31 +171,40 @@ try {
         line.remove()
       }
       if (sample.name === 'headphones') {
-        // 第 4 组 H2「斜耳罩」：一道开放头梁 + 两块实心内倾耳罩；头梁直落，从耳罩顶边插进去，不从外侧勾回。
+        // 第 4 组 R3「缝底封圆」：N2 现版的头梁勾进内倾实心耳罩；缝放宽，缝底用整半圆封住，不收成针尖。
         document.body.appendChild(line)
-        const [band, ...pads] = line.querySelectorAll('path')
-        if (line.children.length !== 3 || pads.length !== 2 || pads.some((pad) => pad.getAttribute('fill') !== 'currentColor' || pad.getAttribute('stroke') !== 'none')) {
-          failures.push(`headphones/${sample.size}: H2 has one band and two solid pads`)
+        const [band, ...solids] = line.querySelectorAll('path')
+        const pads = solids.filter((p) => !p.dataset.part), seals = solids.filter((p) => p.dataset.part === 'seal')
+        if (line.children.length !== 5 || pads.length !== 2 || seals.length !== 2 || solids.some((p) => p.getAttribute('fill') !== 'currentColor' || p.getAttribute('stroke') !== 'none')) {
+          failures.push(`headphones/${sample.size}: R3 has one band, two solid pads and two seals`)
         } else {
           if (band.hasAttribute('stroke-width') || /[zZ]/.test(band.getAttribute('d'))) failures.push(`headphones/${sample.size}: band is open and follows the size-tier stroke`)
-          if (sample.fill === sample.line) failures.push(`headphones/${sample.size}: emphasis tints the dome under the band`)
+          if (sample.fill !== sample.line) failures.push(`headphones/${sample.size}: both states keep the same solid drawing`)
           const at = (shape, x, y) => shape.isPointInFill(new DOMPoint(x, y))
+          const ink = (x, y) => band.isPointInStroke(new DOMPoint(x, y)) || solids.some((p) => at(p, x, y))
           const centerAt = (pad, y) => {
             const xs = Array.from({ length: 481 }, (_, i) => i / 20).filter((x) => at(pad, x, y))
             return (Math.min(...xs) + Math.max(...xs)) / 2
           }
           for (const [i, pad] of pads.entries()) {
             const shift = (centerAt(pad, 20) - centerAt(pad, 15)) * (i === 0 ? 1 : -1)
-            if (shift < 0.6 || shift > 1.05) failures.push(`headphones/${sample.size}: both pads must lean inward gently (${shift})`)
+            if (shift < 0.7 || shift > 1.05) failures.push(`headphones/${sample.size}: both pads must lean inward gently (${shift})`)
             const end = band.getPointAtLength(i === 0 ? 0 : band.getTotalLength())
-            const box = pad.getBBox()
-            // 梁端藏在耳罩里、靠近顶边：没有从外侧绕下来的勾头。
-            if (!at(pad, end.x, end.y) || end.y > box.y + 2.5) failures.push(`headphones/${sample.size}: band must end inside the pad top, no side hook`)
+            if (!at(pad, end.x, end.y) && !at(seals[i], end.x, end.y)) failures.push(`headphones/${sample.size}: band hook must end inside the pad or its seal`)
           }
-          // 耳罩顶以下，头梁不得露在耳罩外。
-          const xs = Array.from({ length: 961 }, (_, i) => i / 40)
-          for (const y of [14, 16, 18, 20]) {
-            if (xs.some((x) => band.isPointInStroke(new DOMPoint(x, y)) && !at(pads[0], x, y) && !at(pads[1], x, y))) failures.push(`headphones/${sample.size}: band shows beside the pads at y=${y}`)
+          // 缝：上段是一道干净的缝（不再是 0.9 的发丝），下段被封死，不留针尖。
+          const xs = Array.from({ length: 481 }, (_, i) => i / 40)
+          const channel = (y) => {
+            const bandEdge = Math.max(...xs.filter((x) => x < 6 && band.isPointInStroke(new DOMPoint(x, y))))
+            const padEdge = Math.min(...xs.filter((x) => at(pads[0], x, y)))
+            return xs.filter((x) => x > bandEdge && x < padEdge && !ink(x, y)).length / 40
+          }
+          for (const y of [14, 15]) {
+            const gap = channel(y)
+            if (gap < 1.0 || gap > 1.9) failures.push(`headphones/${sample.size}: keep a clean side channel at y=${y} (${gap})`)
+          }
+          for (const y of [17.6, 18, 18.4]) {
+            if (channel(y) > 0) failures.push(`headphones/${sample.size}: seal the channel below the round bottom, no needle at y=${y}`)
           }
           for (let i = 0; i <= 100; i++) {
             for (const [left, right, reverse] of [[band, band, true], [pads[0], pads[1], false]]) {
