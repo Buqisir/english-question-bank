@@ -1,0 +1,468 @@
+<title>EQB 图标编辑器</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@600&display=swap">
+<style>
+/* Layout: one working table — stage + layers on the left, numeric controls and live size proofs on the right; stacks under 900px. */
+:root{
+  --bg:#f1f5f7; --surface:#fafcf8; --sunk:#e6edf0; --ink:#1b2b33; --muted:#5a6c75; --line:#d3dde2;
+  --action:#29424D; --action-ink:#ffffff; --ok:#2C6E56; --warn:#a4620f; --bad:#b0443a;
+  --guide:rgba(41,66,77,.10); --guide-strong:rgba(44,110,86,.45); --handle:#2f7fa8;
+  --f-ui:Inter,'PingFang SC','Noto Sans SC','Hiragino Sans GB',system-ui,sans-serif;
+  --f-num:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --f-title:'Noto Serif SC','Songti SC',serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12191d; --surface:#1a2328; --sunk:#222d33; --ink:#e6edf0; --muted:#a8b6be; --line:#33424a;
+  --action:#cfe0e6; --action-ink:#12191d; --ok:#7cc4a8; --warn:#e3a24f; --bad:#ec8a7f;
+  --guide:rgba(230,237,240,.10); --guide-strong:rgba(124,196,168,.5); --handle:#6fb6dc; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12191d; --surface:#1a2328; --sunk:#222d33; --ink:#e6edf0; --muted:#a8b6be; --line:#33424a;
+  --action:#cfe0e6; --action-ink:#12191d; --ok:#7cc4a8; --warn:#e3a24f; --bad:#ec8a7f;
+  --guide:rgba(230,237,240,.10); --guide-strong:rgba(124,196,168,.5); --handle:#6fb6dc; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 var(--f-ui)}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px;max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{margin:0;font:600 22px/1.2 var(--f-title);text-wrap:balance}
+.sub{color:var(--muted);font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select,input,textarea,button{font:inherit;color:inherit}
+select,input[type=number],input[type=text]{box-sizing:border-box;background:var(--surface);border:1px solid var(--line);border-radius:8px;height:34px;padding:0 10px;min-width:0}
+input[type=number]{font-family:var(--f-num);font-size:13px;width:100%}
+button{height:34px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer;white-space:nowrap}
+button:hover{border-color:var(--muted)}
+button.pri{background:var(--action);border-color:var(--action);color:var(--action-ink)}
+button:disabled{opacity:.45;cursor:default}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.stage:focus-visible{outline:2px solid var(--handle);outline-offset:2px}
+.main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.main{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel h2{margin:0;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+.stage{width:100%;max-width:560px;aspect-ratio:1;max-height:72vh;margin:0 auto;display:block;background:var(--bg);border-radius:12px;touch-action:none;color:var(--ink)}
+.stagewrap{display:flex;flex-direction:column;gap:8px}
+.hint{font-size:12px;color:var(--muted)}
+.toggles{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.toggles label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+.layers{display:flex;flex-wrap:wrap;gap:6px}
+.layers button{height:30px;font-size:13px}
+.layers button[aria-pressed="true"]{background:var(--action);border-color:var(--action);color:var(--action-ink)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field span{font-size:12px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.proofs{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.proof{display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--f-num);font-size:11px;color:var(--muted)}
+.proof svg{display:block;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:13px;font-weight:500}
+.chip.dark{background:#29424D;border-color:#29424D;color:#fff}
+.dot{width:44px;height:44px;border-radius:50%;background:#29424D;color:#fff;display:grid;place-items:center}
+.checks{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.ck{display:flex;gap:8px;align-items:baseline}
+.tag{font:600 11px var(--f-num);padding:1px 6px;border-radius:5px;border:1px solid currentColor}
+.ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+textarea{width:100%;min-height:96px;resize:vertical;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:12px/1.5 var(--f-num);box-sizing:border-box}
+details summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--muted)}
+details[open] summary{margin-bottom:10px}
+.toast{min-height:18px;font-size:12px;color:var(--ok)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>EQB 图标编辑器</h1>
+      <div class="sub">24 网格 · 设计线重 2.25 单位 · 改好后复制给 Claude 写回源文件。只改这里，不改产品。</div>
+    </div>
+    <div class="bar">
+      <label class="sr" for="pick">选择图标</label>
+      <select id="pick"></select>
+      <button id="undo" type="button" title="撤销（Ctrl/⌘ Z）">撤销</button>
+      <button id="redo" type="button" title="重做（Ctrl/⌘ Shift Z）">重做</button>
+      <button id="restore" type="button">恢复原稿</button>
+      <button id="copyClaude" class="pri" type="button">复制给 Claude</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <section class="panel" aria-label="画布">
+      <div class="stagewrap">
+        <svg id="stage" class="stage" viewBox="-1 -1 26 26" tabindex="0" aria-label="图标画布，方向键微移选中部分" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+          <g id="guides" stroke-linecap="butt"></g>
+          <g id="icon"></g>
+          <g id="overlay"></g>
+        </svg>
+        <div class="toggles">
+          <label><input id="gGrid" type="checkbox" checked> 网格</label>
+          <label><input id="gLive" type="checkbox" checked> 活区（边距 1.25）</label>
+          <label><input id="gKey" type="checkbox"> 基准形（圆 Ø19.25 / 方 17.25）</label>
+        </div>
+        <div class="hint">点一笔选中那个部件，点空白选整枚。拖动移动；拖角缩放；拖顶上小圆旋转（按住 Shift 每 15°）。方向键微移 0.25，Shift 加方向键 1。</div>
+      </div>
+      <h2>部件</h2>
+      <div id="layers" class="layers" role="group" aria-label="选择部件"></div>
+    </section>
+
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="panel" aria-label="变换">
+        <h2 id="selTitle">整枚</h2>
+        <div class="grid2">
+          <label class="field" for="tx"><span>移动 X（单位）</span><input id="tx" type="number" step="0.25"></label>
+          <label class="field" for="ty"><span>移动 Y（单位）</span><input id="ty" type="number" step="0.25"></label>
+          <label class="field" for="sx"><span>缩放 X（%）</span><input id="sx" type="number" step="1" min="5"></label>
+          <label class="field" for="sy"><span>缩放 Y（%）</span><input id="sy" type="number" step="1" min="5"></label>
+        </div>
+        <label class="row" style="font-size:13px;color:var(--muted)"><input id="lock" type="checkbox" checked> 锁定比例</label>
+        <div class="grid2">
+          <label class="field" for="rot"><span>旋转（°）</span><input id="rot" type="number" step="1"></label>
+          <label class="field" for="kx"><span>斜切 X（°）</span><input id="kx" type="number" step="1"></label>
+          <label class="field" for="ky"><span>斜切 Y（°）</span><input id="ky" type="number" step="1"></label>
+          <div class="field"><span>翻转</span><div class="row"><button id="fx" type="button">左右</button><button id="fy" type="button">上下</button></div></div>
+          <label class="field" for="px"><span>中心点 X</span><input id="px" type="number" step="0.25"></label>
+          <label class="field" for="py"><span>中心点 Y</span><input id="py" type="number" step="0.25"></label>
+        </div>
+        <div class="row"><button id="resetSel" type="button">还原这一部分</button></div>
+      </section>
+
+      <section class="panel" aria-label="实际尺寸">
+        <h2>实际尺寸 · 按产品线宽</h2>
+        <div id="proofs" class="proofs"></div>
+        <div class="chips">
+          <span class="chip"><span id="chipIcon"></span><span id="chipText">撤销</span></span>
+          <span class="chip dark"><span id="chipIcon2"></span><span id="chipText2">撤销</span></span>
+          <span class="dot" id="dotIcon"></span>
+          <label class="field" for="label" style="flex:1 1 140px"><span>按钮文字</span><input id="label" type="text" value="撤销"></label>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="自检">
+        <h2>骨架自检</h2>
+        <div id="checks" class="checks"></div>
+      </section>
+
+      <section class="panel">
+        <details id="advanced">
+          <summary>直接改选中部件的代码</summary>
+          <label class="sr" for="code">部件代码</label>
+          <textarea id="code" spellcheck="false"></textarea>
+          <div class="row" style="margin-top:8px"><button id="applyCode" type="button">应用</button><span id="codeMsg" class="hint"></span></div>
+        </details>
+        <details>
+          <summary>导入 SVG</summary>
+          <label class="sr" for="importText">粘贴 SVG</label>
+          <textarea id="importText" spellcheck="false" placeholder="粘贴整段 <svg>…</svg> 或里面的 <path …/>"></textarea>
+          <div class="row" style="margin-top:8px"><button id="importBtn" type="button">载入为新草稿</button><span id="importMsg" class="hint"></span></div>
+        </details>
+        <details open>
+          <summary>导出</summary>
+          <label class="sr" for="out">导出的 SVG</label>
+          <textarea id="out" readonly spellcheck="false"></textarea>
+          <div class="row" style="margin-top:8px"><button id="copySvg" type="button">复制 SVG</button><span id="toast" class="toast" role="status"></span></div>
+        </details>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+const LIB = [
+  ['RotateCcw · 现版', '撤销', '<path d="M4.24 12 A7.76 7.76 0 1 0 6.054 7.014"/><path d="M9.86968 8.39736 L6.054 7.014 L6.054 2.95984"/>'],
+  ['RotateCcw · A 收', '撤销', '<path d="M4 12 A8 8 0 1 0 5.07 8"/><path d="M8.16 7.17 L5.07 8 L4.24 4.91"/>'],
+  ['RotateCcw · B 展', '撤销', '<path d="M4 12.6 A8 8 0 1 0 8.24 5.54"/><path d="M10.93 6.62 L8.24 5.54 L8.85 2.7"/>'],
+  ['RotateCcw · C 提', '撤销', '<path d="M4.2 12 A7.8 7.8 0 1 0 7.87 5.39 Q6 6.55 4.83 6.4"/><path d="M6.72 8.86 L4.83 6.4 L7.29 4.51"/>'],
+  ['RotateCcw · D 让', '撤销', '<path d="M4.1 12 A7.9 7.9 0 1 0 10.63 4.22"/><path d="M7.89 7.41 L5.02 8.29 L4.15 5.42"/>'],
+  ['RotateCcw · E 落（撤销）', '撤销', '<path d="M4 9.5 H14.25 C17.3 9.5 19.75 11.9 19.75 14.75 C19.75 17.6 17.3 20 14.25 20 H10.5 Q9.1 20 8.4 20.8"/><path d="M8.5 5 L4 9.5 L8.5 14"/>'],
+  ['RotateCcw · F 托（重听）', '再听一遍', '<path d="M5.87 6.86 A8 8 0 1 0 18.13 6.86"/><path d="M17.86 9.95 L18.13 6.86 L21.22 7.13"/><path d="M9.9 9.9 V15.1 L14.4 12.5 Z"/>'],
+  ['Check 勾 · 现版', '认识', '<path d="M4.75 13.5 8.75 17.5L20 6.5"/>'],
+  ['Download 下载 · 现版', '下载资料', '<path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25"/><path d="M12 3.8 V12.9"/><path d="M8.5 9.4 L12 12.9 L15.5 9.4"/>'],
+  ['BookMarked 生词本 · 现版', '不认识，收下', '<path d="M18.2 4.6C14.8 2.2 8.3 2.6 5.25 6.1C2.2 9.6 3.1 17.2 7.2 20C11.4 22.7 18.5 20.6 20.25 16.6C21.5 13.7 21 10.8 19.8 8.75"/><g transform="translate(0 2)"><path d="M8.25 13.5L11.3 6.5H12.7L15.75 13.5H14.15L13.5 11.9H10.5L9.85 13.5ZM11.04 10.55H12.96L12 8.1Z" fill="currentColor" fill-rule="evenodd" stroke="none"/></g>'],
+  ['ChevronDown 展开 · 现版', '展开', '<path d="M5.5 9.25 12 15.25 18.5 9.25"/>'],
+  ['X 叉 · 现版', '答错', '<path d="M18.5 5.5 5.5 18.5"/><path d="M18.5 18.5 5.5 5.5"/>'],
+  ['Save 另存 · 现版', '另存为…', '<path d="M6.915 2.395 h9.887 l4.802 4.802 V17.085 a4.52 4.52 0 0 1 -4.52 4.52 h-10.17 a4.52 4.52 0 0 1 -4.52 -4.52 v-10.17 a4.52 4.52 0 0 1 4.52 -4.52 z"/><path stroke-width="2.05" d="M8.61 6.915 h6.78"/><path stroke-width="2.05" d="M6.915 21.605 v-5.270 a1.412 1.412 0 0 1 1.412 -1.412 h7.345 a1.412 1.412 0 0 1 1.412 1.412 v5.270"/>'],
+  ['Copy 复制 · 现版', '复制清单', '<path d="M4.32 16.359A3.094 3.094 0 0 1 2.428 13.508V6.205A4.112 4.112 0 0 1 6.54 2.093H13.62A2.987 2.987 0 0 1 16.358 3.886"/><path d="M11.166 7.476H18.158A3.414 3.414 0 0 1 21.572 10.89V18.687A3.22 3.22 0 0 1 18.352 21.907H10.972A3.22 3.22 0 0 1 7.752 18.687V10.89A3.414 3.414 0 0 1 11.166 7.476Z"/>'],
+  ['Eye 眼睛 · 现版', '查看答案', '<path d="M2.38 12 C2.38 10.62 2.789 10.155 3.606 9.226 C5.239 7.37 7.977 5.266 12 5.266 C16.023 5.266 18.761 7.37 20.394 9.226 C21.211 10.155 21.62 10.62 21.62 12 C21.62 13.212 21.211 13.62 20.394 14.438 C18.638 16.314 16.473 17.916 12 17.916 C7.527 17.916 5.362 16.314 3.606 14.438 C2.789 13.62 2.38 13.212 2.38 12 Z"/><circle cx="12" cy="12" r="2.645" fill="currentColor" stroke="none"/>'],
+  ['Paper 卷 · 现版', '整卷', '<path d="M7.25 2.75 H16.75 Q20 2.75 20 6 V14.9 C20 18.6 17.1 21.25 13.5 21.25 H7.25 Q4 21.25 4 18 V6 Q4 2.75 7.25 2.75 Z"/><path stroke-width="2.05" d="M20 14.9 H16.65 Q13.5 14.9 13.5 18.05 V21.25"/><path stroke-width="2.05" d="M8.3 7.6 H15.7 M8.3 11.75 H13.6"/>'],
+];
+const NS = 'http://www.w3.org/2000/svg';
+const ID = () => ({ tx: 0, ty: 0, sx: 1, sy: 1, rot: 0, kx: 0, ky: 0, fx: false, fy: false, px: 12, py: 12 });
+const $ = (id) => document.getElementById(id);
+const stage = $('stage'), iconG = $('icon'), overlay = $('overlay'), guides = $('guides');
+const r3 = (n) => Math.round(n * 1000) / 1000;
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)) } catch { return null } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch { /* storage unavailable: keep working in memory */ } },
+};
+
+let docs = store.get('eqb-icon-editor:v1') || {};
+let cur = null;          // { name, label, layers:[{markup, t}], whole:t }
+let sel = 'whole';       // 'whole' | layer index
+let past = [], future = [];
+let layerNodes = [];
+
+function parseMarkup(markup) {
+  const doc = new DOMParser().parseFromString(`<svg xmlns="${NS}">${markup}</svg>`, 'image/svg+xml');
+  if (doc.querySelector('parsererror')) throw new Error('SVG 语法有误');
+  const root = doc.documentElement;
+  const inner = root.querySelector('svg') && root.children.length === 1 && root.firstElementChild.tagName === 'svg' ? root.firstElementChild : root;
+  return [...inner.children].filter((n) => !['title', 'desc', 'defs', 'style'].includes(n.tagName));
+}
+const serialize = (node) => new XMLSerializer().serializeToString(node).replace(/ xmlns="[^"]*"/g, '');
+
+function fresh(name) {
+  const entry = LIB.find((e) => e[0] === name);
+  return { name, label: entry ? entry[1] : '撤销', layers: parseMarkup(entry ? entry[2] : '').map((n) => ({ markup: serialize(n), t: null })), whole: ID() };
+}
+const snapshot = () => JSON.stringify({ label: cur.label, layers: cur.layers, whole: cur.whole });
+function commit() { if (snapshot() === lastCommitted) return; past.push(lastCommitted); if (past.length > 120) past.shift(); future = []; lastCommitted = snapshot(); persist(); syncHistoryButtons() }
+let lastCommitted = '';
+function persist() { docs[cur.name] = JSON.parse(snapshot()); docs.__current = cur.name; store.set('eqb-icon-editor:v1', docs) }
+function syncHistoryButtons() { $('undo').disabled = !past.length; $('redo').disabled = !future.length }
+
+function tStr(t) {
+  const ident = !t.tx && !t.ty && t.sx === 1 && t.sy === 1 && !t.rot && !t.kx && !t.ky && !t.fx && !t.fy;
+  if (ident) return '';
+  const sx = t.sx * (t.fx ? -1 : 1), sy = t.sy * (t.fy ? -1 : 1);
+  const parts = [`translate(${r3(t.tx + t.px)} ${r3(t.ty + t.py)})`];
+  if (t.rot) parts.push(`rotate(${r3(t.rot)})`);
+  if (t.kx) parts.push(`skewX(${r3(t.kx)})`);
+  if (t.ky) parts.push(`skewY(${r3(t.ky)})`);
+  if (sx !== 1 || sy !== 1) parts.push(`scale(${r3(sx)} ${r3(sy)})`);
+  parts.push(`translate(${r3(-t.px)} ${r3(-t.py)})`);
+  return parts.join(' ');
+}
+
+function build() {
+  iconG.replaceChildren();
+  layerNodes = cur.layers.map((layer, i) => {
+    const g = document.createElementNS(NS, 'g');
+    g.dataset.layer = i;
+    for (const n of parseMarkup(layer.markup)) g.appendChild(document.importNode(n, true));
+    iconG.appendChild(g);
+    if (!layer.t) { const b = g.getBBox(); layer.t = { ...ID(), px: r3(b.x + b.width / 2), py: r3(b.y + b.height / 2) } }
+    return g;
+  });
+  if (sel !== 'whole' && sel >= layerNodes.length) sel = 'whole';
+  renderLayers();
+  render();
+}
+
+function render() {
+  const wt = tStr(cur.whole);
+  wt ? iconG.setAttribute('transform', wt) : iconG.removeAttribute('transform');
+  layerNodes.forEach((g, i) => { const s = tStr(cur.layers[i].t); s ? g.setAttribute('transform', s) : g.removeAttribute('transform') });
+  drawOverlay(); syncInputs(); renderProofs(); renderChecks(); renderExport();
+}
+
+const target = () => (sel === 'whole' ? iconG : layerNodes[sel]);
+const selT = () => (sel === 'whole' ? cur.whole : cur.layers[sel].t);
+const parentOf = () => (sel === 'whole' ? stage : iconG);
+
+function toRoot(el, x, y) { const p = stage.createSVGPoint(); p.x = x; p.y = y; return p.matrixTransform(stage.getScreenCTM().inverse().multiply(el.getScreenCTM())) }
+function clientTo(el, cx, cy) { const p = stage.createSVGPoint(); p.x = cx; p.y = cy; return p.matrixTransform(el.getScreenCTM().inverse()) }
+function rootBox(el) {
+  const b = el.getBBox();
+  if (!b.width && !b.height) return null;
+  const pts = [[b.x, b.y], [b.x + b.width, b.y], [b.x, b.y + b.height], [b.x + b.width, b.y + b.height]].map(([x, y]) => toRoot(el, x, y));
+  const xs = pts.map((p) => p.x), ys = pts.map((p) => p.y);
+  return { x0: Math.min(...xs), y0: Math.min(...ys), x1: Math.max(...xs), y1: Math.max(...ys) };
+}
+function pivotRoot() { const t = selT(); const p = parentOf(); return p === stage ? { x: t.px + t.tx, y: t.py + t.ty } : toRoot(iconG, t.px + t.tx, t.py + t.ty) }
+
+// Theme tokens go through style, since SVG presentation attributes do not resolve var().
+function el(tag, attrs) { const n = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) { if (typeof v === 'string' && v.startsWith('var(')) n.style.setProperty(k, v); else n.setAttribute(k, v) } return n }
+const isSolid = (m) => { const tags = m.match(/<(path|circle|rect|line|polyline|ellipse)\b[^>]*>/g) || []; return tags.length > 0 && tags.every((t) => /stroke="none"/.test(t)) };
+function drawGuides() {
+  guides.replaceChildren();
+  const g = guides;
+  g.appendChild(el('rect', { x: 0, y: 0, width: 24, height: 24, fill: 'var(--surface)', stroke: 'var(--line)', 'stroke-width': 0.05 }));
+  if ($('gGrid').checked) for (let i = 1; i < 24; i++) {
+    g.appendChild(el('line', { x1: i, y1: 0, x2: i, y2: 24, stroke: 'var(--guide)', 'stroke-width': i % 6 ? 0.03 : 0.06 }));
+    g.appendChild(el('line', { x1: 0, y1: i, x2: 24, y2: i, stroke: 'var(--guide)', 'stroke-width': i % 6 ? 0.03 : 0.06 }));
+  }
+  if ($('gLive').checked) g.appendChild(el('rect', { x: 1.25, y: 1.25, width: 21.5, height: 21.5, stroke: 'var(--guide-strong)', 'stroke-width': 0.06, 'stroke-dasharray': '0.3 0.25' }));
+  if ($('gKey').checked) {
+    g.appendChild(el('circle', { cx: 12, cy: 12, r: 9.625, stroke: 'var(--guide-strong)', 'stroke-width': 0.05 }));
+    g.appendChild(el('rect', { x: 3.375, y: 3.375, width: 17.25, height: 17.25, rx: 4.3, stroke: 'var(--guide-strong)', 'stroke-width': 0.05 }));
+  }
+}
+
+function drawOverlay() {
+  overlay.replaceChildren();
+  const b = rootBox(target());
+  if (!b) return;
+  const s = { stroke: 'var(--handle)', 'stroke-width': 0.06, fill: 'none', 'stroke-linecap': 'butt' };
+  overlay.appendChild(el('rect', { ...s, x: b.x0, y: b.y0, width: b.x1 - b.x0, height: b.y1 - b.y0, 'stroke-dasharray': '0.25 0.2', 'pointer-events': 'none' }));
+  const cx = (b.x0 + b.x1) / 2;
+  overlay.appendChild(el('line', { ...s, x1: cx, y1: b.y0, x2: cx, y2: b.y0 - 1.3, 'pointer-events': 'none' }));
+  overlay.appendChild(el('circle', { ...s, cx, cy: b.y0 - 1.5, r: 0.32, fill: 'var(--surface)', 'data-h': 'rot', style: 'cursor:grab' }));
+  for (const [x, y, sx, sy] of [[b.x0, b.y0, -1, -1], [b.x1, b.y0, 1, -1], [b.x0, b.y1, -1, 1], [b.x1, b.y1, 1, 1]])
+    overlay.appendChild(el('rect', { ...s, x: x - 0.25, y: y - 0.25, width: 0.5, height: 0.5, fill: 'var(--surface)', 'data-h': 'scale', style: `cursor:${sx === sy ? 'nwse' : 'nesw'}-resize` }));
+  const p = pivotRoot();
+  overlay.appendChild(el('circle', { ...s, cx: p.x, cy: p.y, r: 0.18, 'pointer-events': 'none' }));
+}
+
+const fields = ['tx', 'ty', 'sx', 'sy', 'rot', 'kx', 'ky', 'px', 'py'];
+function syncInputs() {
+  const t = selT();
+  const v = { tx: t.tx, ty: t.ty, sx: t.sx * 100, sy: t.sy * 100, rot: t.rot, kx: t.kx, ky: t.ky, px: t.px, py: t.py };
+  for (const f of fields) if (document.activeElement !== $(f)) $(f).value = r3(v[f]);
+  $('fx').setAttribute('aria-pressed', t.fx); $('fy').setAttribute('aria-pressed', t.fy);
+  $('selTitle').textContent = sel === 'whole' ? '整枚' : `部件 ${sel + 1}`;
+  $('code').value = sel === 'whole' ? '' : cur.layers[sel].markup;
+  $('code').disabled = $('applyCode').disabled = sel === 'whole';
+  $('codeMsg').textContent = sel === 'whole' ? '先在左边选一个部件' : '';
+}
+function readInput(f) {
+  const t = selT(); const n = parseFloat($(f).value); if (!Number.isFinite(n)) return;
+  if (f === 'sx' || f === 'sy') {
+    const v = Math.max(0.05, n / 100);
+    if ($('lock').checked) { const k = v / (f === 'sx' ? t.sx : t.sy); t.sx = r3(t.sx * k); t.sy = r3(t.sy * k) } else t[f] = v;
+  } else t[f] = n;
+  render();
+}
+
+function renderLayers() {
+  const box = $('layers'); box.replaceChildren();
+  const mk = (label, value) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-pressed', sel === value); b.onclick = () => { sel = value; renderLayers(); render() }; box.appendChild(b) };
+  mk('整枚', 'whole');
+  cur.layers.forEach((l, i) => { const tag = (l.markup.match(/^<(\w+)/) || [])[1] || '部件'; const solid = /fill="currentColor"/.test(l.markup); mk(`${i + 1} · ${tag === 'g' ? '组' : tag === 'path' ? '笔画' : tag === 'circle' ? '圆' : tag === 'rect' ? '矩形' : tag}${solid ? '（实心）' : ''}`, i) });
+}
+
+function exportInner() {
+  const body = cur.layers.map((l, i) => { const s = tStr(l.t); return s ? `<g transform="${s}">${l.markup}</g>` : l.markup }).join('');
+  const w = tStr(cur.whole);
+  return w ? `<g transform="${w}">${body}</g>` : body;
+}
+const svgOf = (inner, sw, size) => `<svg xmlns="${NS}" viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+const strokeFor = (size) => (size < 24 ? 2.25 : size < 32 ? 2 : 1.875);
+function renderProofs() {
+  const inner = exportInner();
+  $('proofs').innerHTML = [14, 16, 20, 24, 32].map((s) => `<div class="proof">${svgOf(inner, strokeFor(s), s)}<span>${s}px · 线 ${r3(strokeFor(s) * s / 24)}px</span></div>`).join('');
+  $('chipIcon').innerHTML = svgOf(inner, 2.25, 16); $('chipIcon2').innerHTML = svgOf(inner, 2.25, 16); $('dotIcon').innerHTML = svgOf(inner, 2, 24);
+  $('chipText').textContent = $('chipText2').textContent = cur.label;
+}
+function renderExport() { $('out').value = svgOf(exportInner(), 2.25, 24).replace(` width="24" height="24"`, '') }
+
+function renderChecks() {
+  const rows = [];
+  let box = null, solidOnly = true;
+  layerNodes.forEach((g, i) => { const b = rootBox(g); if (!b) return; if (!isSolid(cur.layers[i].markup)) solidOnly = false; box = box ? { x0: Math.min(box.x0, b.x0), y0: Math.min(box.y0, b.y0), x1: Math.max(box.x1, b.x1), y1: Math.max(box.y1, b.y1) } : b });
+  if (box) {
+    const half = solidOnly ? 0 : 1.125;
+    const m = Math.min(box.x0 - half, box.y0 - half, 24 - box.x1 - half, 24 - box.y1 - half);
+    const ink = Math.max(box.x1 - box.x0, box.y1 - box.y0) + half * 2;
+    rows.push([m >= 1.25 ? 'ok' : 'bad', m >= 1.25 ? 'PASS' : 'FAIL', `边距 ${r3(m)}（≥ 1.25）· 墨迹最大边 ${r3(ink)}（满格形 ≤ 21.5）`]);
+  }
+  const anyScale = [cur.whole, ...cur.layers.map((l) => l.t)].some((t) => t.sx !== 1 || t.sy !== 1 || t.kx || t.ky);
+  rows.push(anyScale ? ['warn', '注意', '缩放或斜切会让线变粗或变细；发回后写入源文件时会把形烘焙进路径，线宽回到 2.25'] : ['ok', 'PASS', '同一支笔：线宽未被缩放']);
+  rows.push(['warn', '复核', '净空与洞（≥ 1.5 / ≥ 1 个线宽）在发给 Claude 后用 measure-craft 量']);
+  $('checks').innerHTML = rows.map(([c, tag, txt]) => `<div class="ck"><span class="tag ${c}">${tag}</span><span>${txt}</span></div>`).join('');
+}
+
+// Pointer interaction
+let drag = null;
+stage.addEventListener('pointerdown', (e) => {
+  const h = e.target.closest('[data-h]');
+  if (!h) {
+    const lg = e.target.closest('[data-layer]');
+    const next = lg ? Number(lg.dataset.layer) : 'whole';
+    if (next !== sel) { sel = next; renderLayers(); render() }
+  }
+  const t = selT();
+  const pv = pivotRoot();
+  const startRoot = clientTo(stage, e.clientX, e.clientY);
+  drag = { mode: h ? h.dataset.h : 'move', start: { ...t }, pRoot: startRoot, pParent: clientTo(parentOf(), e.clientX, e.clientY), pv };
+  stage.setPointerCapture(e.pointerId);
+  e.preventDefault();
+});
+stage.addEventListener('pointermove', (e) => {
+  if (!drag) return;
+  const t = selT(), s = drag.start;
+  if (drag.mode === 'move') {
+    const p = clientTo(parentOf(), e.clientX, e.clientY);
+    let dx = p.x - drag.pParent.x, dy = p.y - drag.pParent.y;
+    const snap = e.shiftKey ? 1 : 0.125;
+    t.tx = r3(Math.round((s.tx + dx) / snap) * snap); t.ty = r3(Math.round((s.ty + dy) / snap) * snap);
+  } else {
+    const p = clientTo(stage, e.clientX, e.clientY);
+    const v0 = { x: drag.pRoot.x - drag.pv.x, y: drag.pRoot.y - drag.pv.y }, v = { x: p.x - drag.pv.x, y: p.y - drag.pv.y };
+    if (drag.mode === 'rot') {
+      let d = (Math.atan2(v.y, v.x) - Math.atan2(v0.y, v0.x)) * 180 / Math.PI;
+      let r = s.rot + d; if (e.shiftKey) r = Math.round(r / 15) * 15;
+      t.rot = r3(((r + 540) % 360) - 180);
+    } else {
+      if ($('lock').checked) { const f = Math.hypot(v.x, v.y) / Math.max(0.01, Math.hypot(v0.x, v0.y)); t.sx = r3(Math.max(0.05, s.sx * f)); t.sy = r3(Math.max(0.05, s.sy * f)) }
+      else { if (Math.abs(v0.x) > 0.2) t.sx = r3(Math.max(0.05, s.sx * Math.abs(v.x / v0.x))); if (Math.abs(v0.y) > 0.2) t.sy = r3(Math.max(0.05, s.sy * Math.abs(v.y / v0.y))) }
+    }
+  }
+  render();
+});
+const endDrag = () => { if (!drag) return; const changed = JSON.stringify(drag.start) !== JSON.stringify(selT()); drag = null; if (changed) commit() };
+stage.addEventListener('pointerup', endDrag); stage.addEventListener('pointercancel', endDrag);
+
+// Inputs
+for (const f of fields) { $(f).addEventListener('input', () => readInput(f)); $(f).addEventListener('change', () => { readInput(f); commit() }) }
+$('fx').onclick = () => { selT().fx = !selT().fx; render(); commit() };
+$('fy').onclick = () => { selT().fy = !selT().fy; render(); commit() };
+$('resetSel').onclick = () => { const t = selT(); Object.assign(t, { ...ID(), px: t.px, py: t.py }); render(); commit() };
+$('label').addEventListener('input', () => { cur.label = $('label').value || ' '; renderProofs() });
+$('label').addEventListener('change', commit);
+for (const id of ['gGrid', 'gLive', 'gKey']) $(id).addEventListener('change', drawGuides);
+
+function load(name) {
+  if (cur) persist();
+  const saved = docs[name];
+  cur = saved && saved.layers ? { name, label: saved.label, layers: saved.layers, whole: saved.whole } : fresh(name);
+  sel = 'whole'; past = []; future = [];
+  $('label').value = cur.label; $('pick').value = name;
+  build(); lastCommitted = snapshot(); persist(); syncHistoryButtons();
+}
+function restoreFrom(json) { const s = JSON.parse(json); cur.label = s.label; cur.layers = s.layers; cur.whole = s.whole; $('label').value = cur.label; build(); persist() }
+$('undo').onclick = () => { if (!past.length) return; future.push(lastCommitted); lastCommitted = past.pop(); restoreFrom(lastCommitted); syncHistoryButtons() };
+$('redo').onclick = () => { if (!future.length) return; past.push(lastCommitted); lastCommitted = future.pop(); restoreFrom(lastCommitted); syncHistoryButtons() };
+$('restore').onclick = () => { if (!LIB.find((e) => e[0] === cur.name)) return toast('导入的草稿没有原稿可恢复'); const f = fresh(cur.name); cur.layers = f.layers; cur.whole = f.whole; cur.label = f.label; $('label').value = cur.label; sel = 'whole'; build(); commit(); toast('已恢复原稿，可以撤销') };
+$('pick').addEventListener('change', () => load($('pick').value));
+
+$('applyCode').onclick = () => {
+  if (sel === 'whole') return;
+  try { const nodes = parseMarkup($('code').value.trim()); if (!nodes.length) throw new Error('没有可画的元素'); cur.layers[sel].markup = nodes.map(serialize).join(''); cur.layers[sel].t = null; build(); commit(); $('codeMsg').textContent = '已应用' }
+  catch (err) { $('codeMsg').textContent = `没应用：${err.message}` }
+};
+$('importBtn').onclick = () => {
+  try {
+    const nodes = parseMarkup($('importText').value.trim()); if (!nodes.length) throw new Error('没有找到 path / circle / rect');
+    let n = 1; while (docs[`草稿 ${n}`]) n++;
+    const name = `草稿 ${n}`;
+    docs[name] = { label: '撤销', layers: nodes.map((x) => ({ markup: serialize(x), t: null })), whole: ID() };
+    addOption(name); load(name); $('importMsg').textContent = `已载入为「${name}」`;
+  } catch (err) { $('importMsg').textContent = `没载入：${err.message}` }
+};
+
+function toast(msg) { $('toast').textContent = msg; clearTimeout(toast.t); toast.t = setTimeout(() => ($('toast').textContent = ''), 2600) }
+async function copy(text, okMsg) {
+  try { await navigator.clipboard.writeText(text); toast(okMsg) }
+  catch { $('out').value = text; $('out').focus(); $('out').select(); toast('浏览器不让直接复制，已选中下面的文字，按 Ctrl/⌘ C') }
+}
+$('copySvg').onclick = () => copy($('out').value, '已复制 SVG');
+$('copyClaude').onclick = () => copy(`EQB 图标编辑稿：${cur.name}（按钮文字：${cur.label}）\n${$('out').value}`, '已复制，可以直接粘贴给 Claude');
+
+// Keyboard: history shortcuts and nudging, never while typing in a field
+document.addEventListener('keydown', (e) => {
+  const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName);
+  if (typing) return;
+  const mod = e.metaKey || e.ctrlKey;
+  if (mod && e.key.toLowerCase() === 'z') { e.preventDefault(); (e.shiftKey ? $('redo') : $('undo')).click(); return }
+  if (mod && e.key.toLowerCase() === 'y') { e.preventDefault(); $('redo').click(); return }
+  if (document.activeElement !== stage) return;
+  const step = e.shiftKey ? 1 : 0.25, t = selT();
+  const d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key];
+  if (!d) return;
+  e.preventDefault(); t.tx = r3(t.tx + d[0]); t.ty = r3(t.ty + d[1]); render(); commit();
+});
+
+function addOption(name) { const o = document.createElement('option'); o.value = o.textContent = name; $('pick').appendChild(o) }
+for (const [name] of LIB) addOption(name);
+for (const name of Object.keys(docs)) if (name !== '__current' && !LIB.find((e) => e[0] === name)) addOption(name);
+drawGuides();
+load(docs.__current && (docs[docs.__current] || LIB.find((e) => e[0] === docs.__current)) ? docs.__current : LIB[0][0]);
+</script>
