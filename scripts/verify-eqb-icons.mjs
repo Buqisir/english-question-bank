@@ -59,7 +59,7 @@ try {
           failures.push(`play/${sample.size}: retain one closed triangle, without a gap or an extra mark`)
         } else {
           const box = outline.getBBox()
-          if (Math.abs(box.x - 3.342) > 0.01 || Math.abs(box.width - 18.278) > 0.03 || Math.abs(box.y + box.height / 2 - 12) > 0.01 || box.height < 19.2 || box.height > 19.4) failures.push(`play/${sample.size}: retain the original envelope and horizontal symmetry, not a squashed triangle`)
+          if (Math.abs(box.x - 3.429) > 0.01 || Math.abs(box.width - 18.095) > 0.03 || Math.abs(box.y + box.height / 2 - 12) > 0.01 || box.height < 19.0 || box.height > 19.2) failures.push(`play/${sample.size}: retain the original envelope and horizontal symmetry, not a squashed triangle`)
           const points = Array.from({ length: 2001 }, (_, i) => outline.getPointAtLength(outline.getTotalLength() * i / 2000))
           for (const y of [11, 13]) {
             const crossings = points.slice(1).flatMap((b, i) => {
@@ -74,7 +74,7 @@ try {
           // Rear crown remains broad. Uniformly tightening all three corners violates the selection.
           const rear = points.filter((p) => p.y < 12 && Math.abs(p.x - 4) < 0.025)
           const rearY = Math.min(...rear.map((p) => p.y))
-          if (rearY < 3.2 || rearY > 3.6) failures.push(`play/${sample.size}: preserve the rounded rear shoulder (${rearY})`)
+          if (rearY < 3.3 || rearY > 3.75) failures.push(`play/${sample.size}: preserve the rounded rear shoulder (${rearY})`)
           if (parse(sample.fill).querySelector('g path')?.getAttribute('d') !== d) failures.push(`play/${sample.size}: fill must follow the same selected contour`)
         }
         line.remove()
@@ -87,10 +87,9 @@ try {
         } else {
           const [left, right] = bars.map((bar) => bar.getBBox())
           const gap = right.x - left.x - left.width - sample.stroke
-          // B's selected drawing keeps ~10% of the ink height as a clear center gap at 24px.
-          // The incumbent's ~1.10 gap fails; merely spreading the old broad bars fails the width check.
-          if (gap < 2.1 || gap > 2.85 + displayRelief(sample.stroke) || left.width < 6.5 || left.width > 6.7) failures.push(`pause/${sample.size}: preserve B's clearer middle gap and slimmer bars (${gap})`)
-          if (Math.abs(left.width - right.width) > 0.01 || Math.abs(left.x + right.x + right.width - 24) > 0.01 || Math.abs(left.y - right.y) > 0.01 || Math.abs(left.height - right.height) > 0.01 || Math.abs(left.y - 2.38) > 0.01 || Math.abs(left.height - 19.24) > 0.01) failures.push(`pause/${sample.size}: equal, centered, parallel bars must retain their height`)
+          // 第 4 组 B「与播放同高」：中缝不动，两柱从 6.6 收到 5.1；旧的宽柱应当不过。
+          if (gap < 2.1 || gap > 2.85 + displayRelief(sample.stroke) || left.width < 5.0 || left.width > 5.2) failures.push(`pause/${sample.size}: preserve B's clearer middle gap and slimmer bars (${gap})`)
+          if (Math.abs(left.width - right.width) > 0.01 || Math.abs(left.x + right.x + right.width - 24) > 0.01 || Math.abs(left.y - right.y) > 0.01 || Math.abs(left.height - right.height) > 0.01 || Math.abs(left.y - 2.476) > 0.01 || Math.abs(left.height - 19.048) > 0.01) failures.push(`pause/${sample.size}: equal, centered, parallel bars must retain their height`)
           const backgrounds = [...parse(sample.fill).querySelectorAll('g path')]
           if (backgrounds.length !== 2 || backgrounds.some((path, i) => path.getAttribute('d') !== bars[i].getAttribute('d'))) failures.push(`pause/${sample.size}: tint the same two bars, never fill the center gap`)
         }
@@ -172,13 +171,14 @@ try {
         line.remove()
       }
       if (sample.name === 'headphones') {
+        // 第 4 组 H2「斜耳罩」：一道开放头梁 + 两块实心内倾耳罩；头梁直落，从耳罩顶边插进去，不从外侧勾回。
         document.body.appendChild(line)
         const [band, ...pads] = line.querySelectorAll('path')
         if (line.children.length !== 3 || pads.length !== 2 || pads.some((pad) => pad.getAttribute('fill') !== 'currentColor' || pad.getAttribute('stroke') !== 'none')) {
-          failures.push(`headphones/${sample.size}: N2 has one band and two solid pads, not the old hollow cups`)
+          failures.push(`headphones/${sample.size}: H2 has one band and two solid pads`)
         } else {
-          if (getComputedStyle(band).strokeWidth !== '2px' || /[zZ]/.test(band.getAttribute('d'))) failures.push(`headphones/${sample.size}: retain the lighter continuous open band`)
-          if (sample.fill !== sample.line) failures.push(`headphones/${sample.size}: both states keep solid pads without a tint layer`)
+          if (band.hasAttribute('stroke-width') || /[zZ]/.test(band.getAttribute('d'))) failures.push(`headphones/${sample.size}: band is open and follows the size-tier stroke`)
+          if (sample.fill === sample.line) failures.push(`headphones/${sample.size}: emphasis tints the dome under the band`)
           const at = (shape, x, y) => shape.isPointInFill(new DOMPoint(x, y))
           const centerAt = (pad, y) => {
             const xs = Array.from({ length: 481 }, (_, i) => i / 20).filter((x) => at(pad, x, y))
@@ -186,22 +186,17 @@ try {
           }
           for (const [i, pad] of pads.entries()) {
             const shift = (centerAt(pad, 20) - centerAt(pad, 15)) * (i === 0 ? 1 : -1)
-            if (shift < 0.7 || shift > 1.05) failures.push(`headphones/${sample.size}: both pads must lean inward gently (${shift})`)
+            if (shift < 0.6 || shift > 1.05) failures.push(`headphones/${sample.size}: both pads must lean inward gently (${shift})`)
             const end = band.getPointAtLength(i === 0 ? 0 : band.getTotalLength())
             const box = pad.getBBox()
-            if (!at(pad, end.x, end.y) || end.y < 18.9 || end.y > 19.6 || box.y < 12.5 || box.y > 13 || box.height < 9.3 || box.height > 9.9) failures.push(`headphones/${sample.size}: preserve the lower side support and free pad tops`)
+            // 梁端藏在耳罩里、靠近顶边：没有从外侧绕下来的勾头。
+            if (!at(pad, end.x, end.y) || end.y > box.y + 2.5) failures.push(`headphones/${sample.size}: band must end inside the pad top, no side hook`)
           }
-          // Probe the selected white channels, not the generic disconnected-component gap.
-          // Measure the narrowing channel before it intentionally meets the lower support.
-          for (const y of [14, 15, 16, 17]) {
-            const xs = Array.from({ length: 481 }, (_, i) => i / 40)
-            const bandEdge = Math.max(...xs.filter((x) => band.isPointInStroke(new DOMPoint(x, y))))
-            const padEdge = Math.min(...xs.filter((x) => at(pads[0], x, y)))
-            const gap = padEdge - bandEdge
-            if (gap < 0.85 || gap > 1.8) failures.push(`headphones/${sample.size}: preserve N2's side channel at y=${y} (${gap})`)
-            if (!at(pads[0], centerAt(pads[0], y), y) || !at(pads[1], centerAt(pads[1], y), y)) failures.push(`headphones/${sample.size}: pad interiors must stay solid`)
+          // 耳罩顶以下，头梁不得露在耳罩外。
+          const xs = Array.from({ length: 961 }, (_, i) => i / 40)
+          for (const y of [14, 16, 18, 20]) {
+            if (xs.some((x) => band.isPointInStroke(new DOMPoint(x, y)) && !at(pads[0], x, y) && !at(pads[1], x, y))) failures.push(`headphones/${sample.size}: band shows beside the pads at y=${y}`)
           }
-          // Compare contours with geometric tolerance, not hit tests exactly on ink edges.
           for (let i = 0; i <= 100; i++) {
             for (const [left, right, reverse] of [[band, band, true], [pads[0], pads[1], false]]) {
               const a = left.getPointAtLength(left.getTotalLength() * i / 100)
@@ -321,7 +316,8 @@ try {
       }
       if (icon.name === 'pause') {
         assert.equal(icon.holes.length, 2, `pause/${stroke}: keep a counter inside each bar`)
-        assert.ok(icon.holes.every((hole) => hole.width >= 3.7), `pause/${stroke}: widening the middle gap must not close the counters`)
+        // 第 4 组 B 收窄了柱子（与播放同高）：运行时最粗 2.25 档内洞约 3.0；2.75 审计档按线宽差放宽，同复制。
+        assert.ok(icon.holes.every((hole) => hole.width >= 2.75 - (stroke - 2.25)), `pause/${stroke}: slimmer bars must not close the counters`)
       }
       if (icon.name === 'volume') {
         assert.ok(icon.gap !== null && icon.gap >= 1.5, `volume/${stroke}: keep the sound arc separate`)
