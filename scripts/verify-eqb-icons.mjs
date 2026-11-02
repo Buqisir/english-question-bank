@@ -47,9 +47,8 @@ try {
       fill.querySelector('g[fill-opacity="0.16"]')?.remove()
       if (!line.children.length || line.innerHTML !== fill.innerHTML) failures.push(`${sample.name}/${sample.size}: fill lost line geometry`)
       for (const svg of [line, fill]) {
-        // Owner's Copy reference has constant line weight; other glyphs retain both tiers.
-        const expectedStroke = sample.name === 'copy' ? 2.25 : sample.stroke
-        if (svg.getAttribute('stroke-width') !== String(expectedStroke)) failures.push(`${sample.name}/${sample.size}: wrong stroke tier`)
+        // Every glyph, Copy included, follows the shared size tiers (Owner 2026-11-02: one pen for the whole set).
+        if (svg.getAttribute('stroke-width') !== String(sample.stroke)) failures.push(`${sample.name}/${sample.size}: wrong stroke tier`)
         if (sample.name in dots && svg.querySelectorAll('circle[fill="currentColor"][stroke="none"]').length !== dots[sample.name]) failures.push(`${sample.name}/${sample.size}: wrong semantic dot count`)
       }
       if (sample.name === 'play') {
@@ -248,31 +247,16 @@ try {
       }
       if (sample.name === 'printer') {
         document.body.appendChild(line)
-        const [input, body, paper] = line.querySelectorAll('path')
-        if (line.children.length !== 3 || !paper) {
-          failures.push(`printer/${sample.size}: retain rear paper, connected housing and bowed front paper only`)
+        // P2「上下对称三段」：上进纸、机身、下出纸，全同一支笔；淡底只给机身。
+        const [input, body, output] = line.querySelectorAll('path')
+        if (line.children.length !== 3 || !output) {
+          failures.push(`printer/${sample.size}: P2 keeps input tray, housing and output tray only`)
         } else {
-          if (getComputedStyle(paper).strokeWidth !== '1.4px' || getComputedStyle(body).strokeWidth !== `${sample.stroke}px`) failures.push(`printer/${sample.size}: preserve the selected lighter paper border and normal housing tier`)
-          for (const distance of [0, body.getTotalLength()]) {
-            const end = body.getPointAtLength(distance)
-            if (!paper.isPointInStroke(new DOMPoint(end.x, end.y))) failures.push(`printer/${sample.size}: do not restore the rejected shoulder gaps`)
-          }
-          const front = paper.getBBox()
-          const back = input.getBBox()
-          const housing = body.getBBox()
-          if (front.width - back.width < 1.5 || front.y >= housing.y + housing.height - 1) failures.push(`printer/${sample.size}: front paper must be wider than rear paper and emerge from inside the housing`)
-          const points = Array.from({ length: 1201 }, (_, i) => paper.getPointAtLength(paper.getTotalLength() * i / 1200))
-          const bottomAt = (x) => Math.max(...points.filter((p) => Math.abs(p.x - x) < 0.06).map((p) => p.y))
-          const bow = bottomAt(12) - (bottomAt(8) + bottomAt(16)) / 2
-          if (!Number.isFinite(bow) || bow < 0.2 || bow > 0.7) failures.push(`printer/${sample.size}: retain one shallow downward paper edge, not a flat base or a curled lip`)
-          const background = parse(sample.fill).querySelector('g path')
-          // The fill may shade the housing, but cannot spill onto the blank foreground sheet.
-          const probe = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-          probe.append(background.cloneNode())
-          document.body.append(probe)
-          const fillPath = probe.querySelector('path')
-          if (!fillPath.isPointInFill(new DOMPoint(12, 10)) || fillPath.isPointInFill(new DOMPoint(12, 14))) failures.push(`printer/${sample.size}: fill must stay behind the front paper`)
-          probe.remove()
+          if ([input, body, output].some((path) => getComputedStyle(path).strokeWidth !== `${sample.stroke}px`)) failures.push(`printer/${sample.size}: same pen for paper and housing`)
+          const top = input.getBBox()
+          const bottom = output.getBBox()
+          if (Math.abs(top.width - bottom.width) > 0.01 || Math.abs(top.x - bottom.x) > 0.01) failures.push(`printer/${sample.size}: input and output trays stay symmetric`)
+          if (parse(sample.fill).querySelector('g path')?.getAttribute('d') !== body.getAttribute('d')) failures.push(`printer/${sample.size}: fill must shade the housing only`)
         }
         line.remove()
       }
@@ -320,9 +304,10 @@ try {
     assert.deepEqual(icons.map((icon) => `${icon.name}.tsx`).sort(), files.slice().sort(), 'measure every effective generated glyph exactly once')
     assert.equal(icons.filter((icon) => icon.group === 'extended').length, 57)
     for (const icon of icons) {
-      assert.equal(icon.stroke, icon.name === 'copy' ? 2.25 : stroke)
-      // The selected reference has a tighter (~1.2-unit) gap. It must stay open, not be widened back to the rejected shape.
-      if (icon.name === 'copy') assert.ok(icon.gap !== null && icon.gap >= 1 && icon.gap <= 1.4, `copy/${stroke}: reference gap changed (${icon.gap})`)
+      assert.equal(icon.stroke, stroke)
+      // Copy is the G9 exemplar: the rear sheet stays open in front of the front sheet. The 1.5 floor holds at the
+      // 2.25 small tier; the legacy 2.75 audit tier is thicker than any runtime stroke (24px+ renders 2.0 / 1.875).
+      if (icon.name === 'copy') assert.ok(icon.gap !== null && icon.gap >= 1.5 - (stroke - 2.25), `copy/${stroke}: rear sheet crowds the front sheet (${icon.gap})`)
       if (icon.name === 'pencil') {
         const holes = icon.holes.filter((hole) => hole.area > 1)
         assert.equal(holes.length, 2, `pencil/${stroke}: retain the cap and barrel, no extra nib compartment`)
@@ -349,18 +334,17 @@ try {
         assert.ok(icon.gap >= 3.5, `sliders/${stroke}: preserve the whitespace between rails and handles`)
       }
       if (icon.name === 'printer') {
+        // P2 (Owner 2026-11-02): tray, housing and paper are three connected parts at the same pen weight.
         assert.equal(icon.gap, null, `printer/${stroke}: all three shapes must connect`)
-        // Foreground bottom centerline 22.295 + half of the selected 1.4 paper border.
-        assert.ok(Math.abs(icon.ink.y + icon.ink.h - 22.995) < 0.03, `printer/${stroke}: measurement must use the paper's own stroke, not the housing's`)
-        assert.equal(icon.holes.length, 3, `printer/${stroke}: keep the rear opening, housing opening and blank paper`)
-        assert.ok(icon.holes.find((hole) => hole.at[1] > 16)?.width >= 7.4, `printer/${stroke}: the paper face must not shrink under a falsely inherited thick stroke`)
+        assert.equal(icon.holes.length, 3, `printer/${stroke}: keep the tray, housing and paper counters`)
+        if (stroke === 2.25) assert.ok(icon.holes.every((hole) => hole.width >= 2.25), `printer/${stroke}: a counter closed up`)
       }
       if (!repaired.has(icon.name)) continue
       assert.ok(icon.gap === null || icon.gap >= 1.5, `${icon.name}/${stroke}: gap ${icon.gap}`)
       assert.ok(icon.holes.filter((hole) => hole.area > 1).every((hole) => hole.width >= 2.25), `${icon.name}/${stroke}: narrow hole`)
     }
     console.log(`PASS ${icons.length} unique measurements at stroke ${stroke}, including 57 extended; 18 repaired glyphs meet gap/hole floors`)
-    console.log(`PASS copy in size tier ${stroke}: fixed 2.25 stroke and reference gap preserved`)
+    console.log(`PASS copy in size tier ${stroke}: shared stroke tier and G9 gap preserved`)
   }
 } finally {
   await browser?.close()
