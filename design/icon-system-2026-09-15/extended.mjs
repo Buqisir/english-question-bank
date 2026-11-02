@@ -55,7 +55,7 @@ export const extended = {
   "document": {
     zh: "文档",
     lucide: null,
-    line: `<path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z"/><path data-stroke-small="2.05" stroke-width="2.4" d="M8.16 9.5H15.84 M8.16 14.5H12.16"/>`,
+    line: `<path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z"/><path d="M8.16 9.5H15.84 M8.16 14.5H12.16"/>`,
   },
   "folder": {
     zh: "文件夹",
@@ -66,7 +66,7 @@ export const extended = {
   "file-search": {
     zh: "在文档里找",
     lucide: null,
-    line: `<path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z"/><circle data-stroke-small="2.05" stroke-width="2.4" cx="11.6" cy="11.8" r="3"/><path data-stroke-small="2.05" stroke-width="2.4" d="M13.8 14L16.1 16.3"/>`,
+    line: `<path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z"/><circle cx="11.6" cy="11.8" r="3"/><path d="M13.8 14L16.1 16.3"/>`,
   },
   "notebook": { zh: "笔记", lucide: null, line: "<path d=\"M6.5 5.2H17.5Q20.5 5.2 20.5 8.2V18.2Q20.5 21.2 17.5 21.2H6.5Q3.5 21.2 3.5 18.2V8.2Q3.5 5.2 6.5 5.2Z\"/><path d=\"M8 2.8V7.2M16 2.8V7.2\"/><path d=\"M8 12H16M8 16.5H12.8\"/>" },
   "list": { zh: "列表", lucide: null, line: "<circle class=\"dot\" cx=\"4\" cy=\"6.5\" r=\"1.2\"/><circle class=\"dot\" cx=\"4\" cy=\"12\" r=\"1.2\"/><circle class=\"dot\" cx=\"4\" cy=\"17.5\" r=\"1.2\"/><path d=\"M9 6.5H20M9 12H20M9 17.5H15.5\"/>" },
@@ -75,7 +75,7 @@ export const extended = {
   "table": {
     zh: "表格",
     lucide: null,
-    line: `<path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z"/><path data-stroke-small="2" stroke-width="2.25" d="M3.5 8.8H20.5 M3.5 15.2H20.5 M10.4 2.75V21.25"/>`,
+    line: `<path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z"/><path d="M3.5 8.8H20.5 M3.5 15.2H20.5 M10.4 2.75V21.25"/>`,
   },
   "zoom-in": {
     zh: "放大",

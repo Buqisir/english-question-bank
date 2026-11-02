@@ -1,14 +1,11 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
-import { EqbIcon, eqbDisplayStrokeScale, type EqbIconProps } from '../EqbIcon'
+import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 
-export function Table({ size = 24, variant = 'line', ...props }: EqbIconProps) {
-  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
-  const isSmall = Number.isFinite(numericSize) && numericSize < 24
-  const displayScale = eqbDisplayStrokeScale(size)
+export function Table({ variant = 'line', ...props }: EqbIconProps) {
   return (
-    <EqbIcon size={size} {...props}>
+    <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z" /><path strokeWidth={isSmall ? 2 : 2.25 * displayScale} d="M3.5 8.8H20.5 M3.5 15.2H20.5 M10.4 2.75V21.25" /></> : <><path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z" /><path strokeWidth={isSmall ? 2 : 2.25 * displayScale} d="M3.5 8.8H20.5 M3.5 15.2H20.5 M10.4 2.75V21.25" /></>}
+      {variant === 'fill' ? <><path d="M7.091 3.351 H16.909 Q19.948 3.351 19.948 6.39 V17.61 Q19.948 20.649 16.909 20.649 H7.091 Q4.052 20.649 4.052 17.61 V6.39 Q4.052 3.351 7.091 3.351 Z" /><path d="M4.052 9.008 H19.948 M4.052 14.992 H19.948 M10.504 3.351 V20.649" /></> : <><path d="M7.091 3.351 H16.909 Q19.948 3.351 19.948 6.39 V17.61 Q19.948 20.649 16.909 20.649 H7.091 Q4.052 20.649 4.052 17.61 V6.39 Q4.052 3.351 7.091 3.351 Z" /><path d="M4.052 9.008 H19.948 M4.052 14.992 H19.948 M10.504 3.351 V20.649" /></>}
     </EqbIcon>
   )
 }

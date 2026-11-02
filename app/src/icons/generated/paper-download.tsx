@@ -1,14 +1,11 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
-import { EqbIcon, eqbDisplayStrokeScale, type EqbIconProps } from '../EqbIcon'
+import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 
-export function PaperDownload({ size = 24, variant = 'line', ...props }: EqbIconProps) {
-  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
-  const isSmall = Number.isFinite(numericSize) && numericSize < 24
-  const displayScale = eqbDisplayStrokeScale(size)
+export function PaperDownload({ variant = 'line', ...props }: EqbIconProps) {
   return (
-    <EqbIcon size={size} {...props}>
-      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M7.25 2.75 H16.75 Q20 2.75 20 6 V14.9 H16.65 Q13.5 14.9 13.5 18.05 V21.25 H7.25 Q4 21.25 4 18 V6 Q4 2.75 7.25 2.75 Z" /></g>}
-      {variant === 'fill' ? <><path d="M7.25 2.75 H16.75 Q20 2.75 20 6 V14.9 C20 18.6 17.1 21.25 13.5 21.25 H7.25 Q4 21.25 4 18 V6 Q4 2.75 7.25 2.75 Z" /><path strokeWidth={isSmall ? 2.05 : 2.4 * displayScale} d="M20 14.9 H16.65 Q13.5 14.9 13.5 18.05 V21.25" /><path strokeWidth={isSmall ? 2.05 : 2.4 * displayScale} d="M12 7 V12.25 M9 9.25 L12 12.25 L15 9.25" /></> : <><path d="M7.25 2.75 H16.75 Q20 2.75 20 6 V14.9 C20 18.6 17.1 21.25 13.5 21.25 H7.25 Q4 21.25 4 18 V6 Q4 2.75 7.25 2.75 Z" /><path strokeWidth={isSmall ? 2.05 : 2.4 * displayScale} d="M20 14.9 H16.65 Q13.5 14.9 13.5 18.05 V21.25" /><path strokeWidth={isSmall ? 2.05 : 2.4 * displayScale} d="M12 7 V12.25 M9 9.25 L12 12.25 L15 9.25" /></>}
+    <EqbIcon {...props}>
+      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z" /></g>}
+      {variant === 'fill' ? <><path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C19.776 18.415 16.957 20.991 13.458 20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z" /><path d="M19.776 14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991" /><path d="M12 7.14 V12.243 M9.084 9.327 L12 12.243 L14.916 9.327" /></> : <><path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C19.776 18.415 16.957 20.991 13.458 20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z" /><path d="M19.776 14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991" /><path d="M12 7.14 V12.243 M9.084 9.327 L12 12.243 L14.916 9.327" /></>}
     </EqbIcon>
   )
 }
