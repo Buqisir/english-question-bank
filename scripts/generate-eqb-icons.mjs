@@ -25,7 +25,7 @@ function jsxElements(markup) {
     const rendered = attributes
       .filter(([_, name]) => name !== 'class' && name !== 'data-stroke-small')
       .map(([_, name, value]) => name === 'stroke-width' && smallStroke !== undefined
-        ? `strokeWidth={isSmall ? ${Number(smallStroke)} : ${Number(value)}}`
+        ? `strokeWidth={isSmall ? ${Number(smallStroke)} : ${Number(value)} * displayScale}`
         : `${name === 'fill-opacity' ? 'fillOpacity' : name === 'stroke-width' ? 'strokeWidth' : name === 'fill-rule' ? 'fillRule' : name}="${value}"`)
     if (className === 'dot' || className === 'joint') rendered.push('fill="currentColor"', 'stroke="none"')
     return `<${tag}${rendered.length ? ` ${rendered.join(' ')}` : ''} />`
@@ -43,8 +43,9 @@ function componentSource(key, icon) {
   const localTiers = /data-stroke-small=/.test(icon.line + (icon.fillShape ?? ''))
   const sizeProp = localTiers ? 'size = 24, ' : ''
   const sizeAttr = localTiers ? ' size={size}' : ''
-  const sizeSetup = localTiers ? "  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)\n  const isSmall = Number.isFinite(numericSize) && numericSize < 24\n" : ''
-  return `${header}import { EqbIcon, type EqbIconProps } from '../EqbIcon'\n\nexport function ${name}({ ${sizeProp}variant = 'line', ...props }: EqbIconProps) {\n${sizeSetup}  return (\n    <EqbIcon${stroke}${sizeAttr} {...props}>\n      {variant === 'fill' && ${fillShape ? `<g fill="currentColor" fillOpacity={0.16} stroke="none">${fillShape}</g>` : 'null'}}\n      {variant === 'fill' ? <>${fillLine}</> : <>${line}</>}\n    </EqbIcon>\n  )\n}\n`
+  const sizeSetup = localTiers ? "  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)\n  const isSmall = Number.isFinite(numericSize) && numericSize < 24\n  const displayScale = eqbDisplayStrokeScale(size)\n" : ''
+  const imports = localTiers ? 'EqbIcon, eqbDisplayStrokeScale, type EqbIconProps' : 'EqbIcon, type EqbIconProps'
+  return `${header}import { ${imports} } from '../EqbIcon'\n\nexport function ${name}({ ${sizeProp}variant = 'line', ...props }: EqbIconProps) {\n${sizeSetup}  return (\n    <EqbIcon${stroke}${sizeAttr} {...props}>\n      {variant === 'fill' && ${fillShape ? `<g fill="currentColor" fillOpacity={0.16} stroke="none">${fillShape}</g>` : 'null'}}\n      {variant === 'fill' ? <>${fillLine}</> : <>${line}</>}\n    </EqbIcon>\n  )\n}\n`
 }
 
 await mkdir(outputDir, { recursive: true })

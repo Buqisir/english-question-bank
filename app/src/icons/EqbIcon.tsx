@@ -11,9 +11,22 @@ export type EqbIconProps = Omit<SVGProps<SVGSVGElement>, 'color'> & {
 
 type EqbIconBaseProps = Omit<EqbIconProps, 'variant'> & { children: ReactNode }
 
+// Inline tiers (< 24) keep 2.25 units so icons match adjacent text.
+// Display tiers thin out sub-linearly: 24 -> 2px, 32 -> 2.5px rendered
+// (Owner 2026-11-02, design/icon-system-v2-2026-11-02/spec.md §4.3).
+const LEGACY_DISPLAY_STROKE = 2.75
+
 function derivedStrokeWidth(size: number | string): number {
   const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
-  return Number.isFinite(numericSize) && numericSize < 24 ? 2.25 : 2.75
+  if (!Number.isFinite(numericSize) || numericSize < 24) return 2.25
+  return numericSize < 32 ? 2 : 1.875
+}
+
+// Local part strokes were authored against the old 2.75 display stroke; scale them with the main stroke.
+export function eqbDisplayStrokeScale(size: number | string): number {
+  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
+  if (!Number.isFinite(numericSize) || numericSize < 24) return 1
+  return derivedStrokeWidth(numericSize) / LEGACY_DISPLAY_STROKE
 }
 
 export function EqbIcon({

@@ -22,7 +22,7 @@ try {
   for (const file of files) {
     const module = await vite.ssrLoadModule(`/src/icons/generated/${file}`)
     const Icon = Object.values(module)[0]
-    for (const [size, stroke] of [[16, 2.25], [23, 2.25], [24, 2.75], [40, 2.75]]) {
+    for (const [size, stroke] of [[16, 2.25], [23, 2.25], [24, 2], [32, 1.875], [40, 1.875]]) {
       samples.push({ name: file.slice(0, -4), size, stroke,
         line: renderToStaticMarkup(createElement(Icon, { size, variant: 'line' })),
         fill: renderToStaticMarkup(createElement(Icon, { size, variant: 'fill' })),
@@ -34,6 +34,9 @@ try {
   const failures = await page.evaluate((samples) => {
     const failures = []
     const parser = new DOMParser()
+    // Display tiers (>= 24) use a stroke thinner than 2.25 since Owner 2026-11-02; geometry is unchanged,
+    // so the visible gap widens by exactly the stroke reduction. Upper bounds allow that, nothing more.
+    const displayRelief = (stroke) => Math.max(0, 2.25 - stroke)
     // Independent semantic expectations: these dots are the glyph, not decoration.
     // EyeOff B omits its pupil; ListMusic E2 uses an ear with no notehead.
     const dots = { ellipsis: 3, grip: 6, eye: 1, 'eye-off': 0, 'info-circle': 1, 'help-circle': 1, 'list-music': 0 }
@@ -87,7 +90,7 @@ try {
           const gap = right.x - left.x - left.width - sample.stroke
           // B's selected drawing keeps ~10% of the ink height as a clear center gap at 24px.
           // The incumbent's ~1.10 gap fails; merely spreading the old broad bars fails the width check.
-          if (gap < 2.1 || gap > 2.85 || left.width < 6.5 || left.width > 6.7) failures.push(`pause/${sample.size}: preserve B's clearer middle gap and slimmer bars (${gap})`)
+          if (gap < 2.1 || gap > 2.85 + displayRelief(sample.stroke) || left.width < 6.5 || left.width > 6.7) failures.push(`pause/${sample.size}: preserve B's clearer middle gap and slimmer bars (${gap})`)
           if (Math.abs(left.width - right.width) > 0.01 || Math.abs(left.x + right.x + right.width - 24) > 0.01 || Math.abs(left.y - right.y) > 0.01 || Math.abs(left.height - right.height) > 0.01 || Math.abs(left.y - 2.38) > 0.01 || Math.abs(left.height - 19.24) > 0.01) failures.push(`pause/${sample.size}: equal, centered, parallel bars must retain their height`)
           const backgrounds = [...parse(sample.fill).querySelectorAll('g path')]
           if (backgrounds.length !== 2 || backgrounds.some((path, i) => path.getAttribute('d') !== bars[i].getAttribute('d'))) failures.push(`pause/${sample.size}: tint the same two bars, never fill the center gap`)
@@ -127,7 +130,7 @@ try {
             const gap = Math.min(...points.map((point) => Math.hypot(point.x - end.x, point.y - end.y))) - sample.stroke
             // B's tight crossing clearance: ~1.08 at 24px, ~1.58 at the thin tier.
             // Reject both merged crossings and excessive fragmentation.
-            if (gap < 1 || gap > 1.7 || getComputedStyle(piece).strokeWidth !== `${sample.stroke}px`) failures.push(`shuffle/${sample.size}: keep the selected two-tier crossing clearance (${gap})`)
+            if (gap < 1 || gap > 1.7 + displayRelief(sample.stroke) || getComputedStyle(piece).strokeWidth !== `${sample.stroke}px`) failures.push(`shuffle/${sample.size}: keep the selected two-tier crossing clearance (${gap})`)
             piece.remove()
             return end
           })
@@ -291,7 +294,7 @@ try {
             const gap = Math.min(...points.map((p) => Math.abs(p.x - p.y) / Math.SQRT2)) - sample.stroke
             // B's tight reference clearance: ~0.65 at the thick tier, ~1.15 at the thin tier.
             // This is a documented single-glyph exception, not a global relaxation of R4.
-            if (gap < 0.6 || gap > 1.2) failures.push(`eye-off/${sample.size}: retain B's local clearance, not merged joints or widely separated fragments (${gap})`)
+            if (gap < 0.6 || gap > 1.2 + displayRelief(sample.stroke)) failures.push(`eye-off/${sample.size}: retain B's local clearance, not merged joints or widely separated fragments (${gap})`)
           }
           const boxes = arcs.map((arc) => arc.getBBox())
           const top = Math.min(...boxes.map((box) => box.y))
