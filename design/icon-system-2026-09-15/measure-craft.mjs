@@ -1,5 +1,8 @@
 // 量工艺：把 Solar Linear 与 EQB v3 放到同一把尺子上，量出「成熟图标库」的可检验数字。
 //   node design/icon-system-2026-09-15/measure-craft.mjs [--stroke 2.25|2.75] [--solar <icons.json>] [--map <solar map.mjs>] [--out craft-measurements.json]
+//   node design/icon-system-2026-09-15/measure-craft.mjs --candidates <candidates.json> [--stroke 2.25] [--out out.json]
+//     candidates.json = { "<name>": "<svg inner markup on the 24 grid>" }; measures only those and prints
+//     PASS/FAIL against the floors in design/icon-system-v2-2026-11-02/style.md (margin, gap, holes).
 // 在 Chromium 里用浏览器自己的几何（getBBox / getPointAtLength / Canvas Path2D）量，不自己解析曲线。
 // 量法（24 网格单位，中心线几何 + 描边宽度）：
 //   ink      墨迹外框（描边按半宽外扩）→ 宽、高、离画布边最小距离
@@ -22,6 +25,7 @@ const arg = (name) => {
 const solarPath = arg('--solar')
 const outPath = arg('--out') ?? join(here, 'craft-measurements.json')
 const mapPath = arg('--map')
+const candidatesPath = arg('--candidates')
 
 const solar = solarPath ? JSON.parse(await readFile(solarPath, 'utf8')) : { icons: {} }
 const v3 = await import(pathToFileURL(join(here, 'icons-v3.mjs')))
@@ -30,7 +34,7 @@ const solarMap = mapPath ? (await import(pathToFileURL(mapPath))).map : {}
 
 const SOLAR_STROKE = 1.5
 const EQB_STROKE = Number(arg('--stroke') ?? 2.25)
-if (![2.25, 2.75].includes(EQB_STROKE)) throw new Error('--stroke must be 2.25 or 2.75 (EqbIcon size tiers)')
+if (!candidatesPath && ![2.25, 2.75].includes(EQB_STROKE)) throw new Error('--stroke must be 2.25 or 2.75 (EqbIcon size tiers)')
 
 // v3 的 markup 靠根节点给描边；Solar 的 body 自带描边属性，只把 1.5 换成要量的宽度。
 const v3Markup = (markup, stroke) => {
@@ -44,11 +48,15 @@ const v3Markup = (markup, stroke) => {
 }
 
 const jobs = []
-for (const [name, icon] of Object.entries(solar.icons)) {
+const candidates = candidatesPath ? JSON.parse(await readFile(candidatesPath, 'utf8')) : null
+if (candidates) {
+  for (const [name, markup] of Object.entries(candidates)) jobs.push({ set: 'candidate', group: 'candidate', name, markup: v3Markup(markup, EQB_STROKE), stroke: EQB_STROKE })
+}
+for (const [name, icon] of Object.entries(candidates ? {} : solar.icons)) {
   if (name.endsWith('-linear')) jobs.push({ set: 'solar', name: name.slice(0, -7), markup: icon.body, stroke: SOLAR_STROKE })
 }
 // Same precedence and effective glyphs as the component generator, including extended overrides.
-for (const [name, icon] of Object.entries({ ...v3.all, ...v3.passage })) {
+for (const [name, icon] of Object.entries(candidates ? {} : { ...v3.all, ...v3.passage })) {
   const group = Object.hasOwn(v3.passage, name) ? 'passage'
     : Object.hasOwn(extended, name) ? 'extended'
       : Object.hasOwn(v3.domain, name) ? 'domain' : 'generic'
@@ -341,3 +349,20 @@ await browser.close()
 
 await writeFile(outPath, `${JSON.stringify({ solarSource: solarPath ? 'icons.json (@iconify-json/solar)' : null, solarStroke: SOLAR_STROKE, eqbStroke: EQB_STROKE, map: solarMap, icons: results })}\n`)
 console.log(`Measured ${results.length} icons → ${outPath}`)
+
+if (candidates) {
+  // Floors from style.md §骨架: margin >= 1.25, gap hard floor 1px at 16px (1.5 units), target >= 1 stroke,
+  // semantic holes (area > 1) at least 1 stroke wide.
+  let failed = 0
+  for (const r of results) {
+    const problems = []
+    if (r.ink && r.ink.margin < 1.25) problems.push(`margin ${r.ink.margin} < 1.25`)
+    if (r.gap !== null && r.gap < 1.5) problems.push(`gap ${r.gap} < 1.5 at ${r.gapAt}`)
+    const narrow = r.holes.filter((h) => h.area > 1 && h.width < r.stroke)
+    if (narrow.length) problems.push(`hole ${narrow.map((h) => h.width).join('/')} < ${r.stroke}`)
+    const note = r.gap !== null && r.gap >= 1.5 && r.gap < r.stroke ? ` (gap ${r.gap} below target ${r.stroke})` : ''
+    if (problems.length) failed += 1
+    console.log(`${problems.length ? 'FAIL' : 'PASS'} ${r.name}: margin ${r.ink?.margin} gap ${r.gap ?? '-'}${note}${problems.length ? ' — ' + problems.join('; ') : ''}`)
+  }
+  if (failed) process.exitCode = 1
+}
