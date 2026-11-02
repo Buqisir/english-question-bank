@@ -50,7 +50,8 @@ export const extended = {
     line: `<circle cx="12" cy="12" r="9.25"/><path d="M2.75 12H4.85 M19.15 12H21.25 M12 2.75V4.85 M12 19.15V21.25"/><path d="M10.08 12H13.92 M12 10.08V13.92"/>`,
   },
   // Owner selected D4.3: mid-size paperclip, two local stroke tiers, identical states.
-  "clipboard": { zh: "任务板", lucide: null, line: "<path d=\"M12.8 5H17.5Q20.5 5 20.5 8V17.5Q20.5 20.5 17.5 20.5H9Q6 20.5 6 17.5V9.75\"/><path data-stroke-small=\"2.1\" stroke-width=\"2.5\" transform=\"matrix(0.54299796 -0.3135 0.3135 0.54299796 3.492 4.601)\" d=\"M0 8V3.75C0 -1.25 7.5 -1.25 7.5 3.75V9.5C7.5 12 3.75 12 3.75 9.5V3.7\"/><path d=\"M13.5 12H16.25M11.5 16H16.25\"/>" },
+  // 任务板 A 夹板两行（Owner 2026-11-02）：与「单词复习」同一块板和顶夹，板 + 两行 = 任务；取代回形针别角。
+  "clipboard": { zh: "任务板", lucide: null, line: `<path d="M8.25 4.5 H8 A3.5 3.5 0 0 0 4.5 8 V18 A3.5 3.5 0 0 0 8 21.5 H16 A3.5 3.5 0 0 0 19.5 18 V8 A3.5 3.5 0 0 0 16 4.5 H15.75"/><rect x="8.25" y="2.5" width="7.5" height="4" rx="2"/><path d="M8.5 12 H15.5 M8.5 16.5 H12.5"/>`, fillShape: `<path d="M8.25 4.5 H8 A3.5 3.5 0 0 0 4.5 8 V18 A3.5 3.5 0 0 0 8 21.5 H16 A3.5 3.5 0 0 0 19.5 18 V8 A3.5 3.5 0 0 0 16 4.5 H15.75 A2 2 0 0 1 13.75 6.5 H10.25 A2 2 0 0 1 8.25 4.5 Z"/>` },
   // Owner selected B: shorten only the last line by 0.8.
   "document": {
     zh: "文档",

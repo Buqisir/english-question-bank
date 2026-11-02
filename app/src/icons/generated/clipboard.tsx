@@ -1,14 +1,11 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
-import { EqbIcon, eqbDisplayStrokeScale, type EqbIconProps } from '../EqbIcon'
+import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 
-export function Clipboard({ size = 24, variant = 'line', ...props }: EqbIconProps) {
-  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
-  const isSmall = Number.isFinite(numericSize) && numericSize < 24
-  const displayScale = eqbDisplayStrokeScale(size)
+export function Clipboard({ variant = 'line', ...props }: EqbIconProps) {
   return (
-    <EqbIcon size={size} {...props}>
-      {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M12.8 5H17.5Q20.5 5 20.5 8V17.5Q20.5 20.5 17.5 20.5H9Q6 20.5 6 17.5V9.75" /><path strokeWidth={isSmall ? 2.1 : 2.5 * displayScale} transform="matrix(0.54299796 -0.3135 0.3135 0.54299796 3.492 4.601)" d="M0 8V3.75C0 -1.25 7.5 -1.25 7.5 3.75V9.5C7.5 12 3.75 12 3.75 9.5V3.7" /><path d="M13.5 12H16.25M11.5 16H16.25" /></> : <><path d="M12.8 5H17.5Q20.5 5 20.5 8V17.5Q20.5 20.5 17.5 20.5H9Q6 20.5 6 17.5V9.75" /><path strokeWidth={isSmall ? 2.1 : 2.5 * displayScale} transform="matrix(0.54299796 -0.3135 0.3135 0.54299796 3.492 4.601)" d="M0 8V3.75C0 -1.25 7.5 -1.25 7.5 3.75V9.5C7.5 12 3.75 12 3.75 9.5V3.7" /><path d="M13.5 12H16.25M11.5 16H16.25" /></>}
+    <EqbIcon {...props}>
+      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M8.25 4.5 H8 A3.5 3.5 0 0 0 4.5 8 V18 A3.5 3.5 0 0 0 8 21.5 H16 A3.5 3.5 0 0 0 19.5 18 V8 A3.5 3.5 0 0 0 16 4.5 H15.75 A2 2 0 0 1 13.75 6.5 H10.25 A2 2 0 0 1 8.25 4.5 Z" /></g>}
+      {variant === 'fill' ? <><path d="M8.25 4.5 H8 A3.5 3.5 0 0 0 4.5 8 V18 A3.5 3.5 0 0 0 8 21.5 H16 A3.5 3.5 0 0 0 19.5 18 V8 A3.5 3.5 0 0 0 16 4.5 H15.75" /><rect x="8.25" y="2.5" width="7.5" height="4" rx="2" /><path d="M8.5 12 H15.5 M8.5 16.5 H12.5" /></> : <><path d="M8.25 4.5 H8 A3.5 3.5 0 0 0 4.5 8 V18 A3.5 3.5 0 0 0 8 21.5 H16 A3.5 3.5 0 0 0 19.5 18 V8 A3.5 3.5 0 0 0 16 4.5 H15.75" /><rect x="8.25" y="2.5" width="7.5" height="4" rx="2" /><path d="M8.5 12 H15.5 M8.5 16.5 H12.5" /></>}
     </EqbIcon>
   )
 }
