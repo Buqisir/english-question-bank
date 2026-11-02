@@ -166,14 +166,14 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
         {loadState === 'loading' && (
           <section className="vocabulary-practice-status" aria-live="polite">
-            <BookMarked size={34} aria-hidden="true" />
+            <BookMarked size={32} aria-hidden="true" />
             <h1>正在准备卡片…</h1>
           </section>
         )}
 
         {loadState === 'error' && (
           <section className="vocabulary-practice-status" role="alert">
-            <BookMarked size={34} aria-hidden="true" />
+            <BookMarked size={32} aria-hidden="true" />
             <h1>这组卡片没有加载成功</h1>
             <p>{loadError}</p>
             <button className="ghost-button" type="button" onClick={onBackToSet}>返回生词组</button>
@@ -196,7 +196,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
             </header>
 
             <div className="vocabulary-practice-modes" aria-label="趣味练习方式">
-              <span aria-current="page"><Grid2X2 size={17} aria-hidden="true" /><strong>翻牌消消乐</strong><small>当前练习</small></span>
+              <span aria-current="page"><Grid2X2 size={16} aria-hidden="true" /><strong>翻牌消消乐</strong><small>当前练习</small></span>
             </div>
 
             <section className="vocabulary-practice-board-section" aria-labelledby="vocabulary-match-board-title">
@@ -226,7 +226,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
                     >
                       <span className="vocabulary-match-card-inner">
                         <span className="vocabulary-match-card-back" aria-hidden="true">
-                          <BookMarked size={26} />
+                          <BookMarked size={32} />
                           <span>翻开</span>
                         </span>
                         <span className="vocabulary-match-card-face" aria-hidden="true">
@@ -237,7 +237,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
                           )}
                           <small>{card.kind === 'word' ? '英文' : '中文意思'}</small>
                           <strong>{card.label}</strong>
-                          {card.kind === 'word' && <Volume size={15} aria-hidden="true" />}
+                          {card.kind === 'word' && <Volume size={16} aria-hidden="true" />}
                         </span>
                       </span>
                     </button>
@@ -250,7 +250,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
               {roundComplete && (
                 <div className="vocabulary-practice-complete">
-                  <Check size={28} aria-hidden="true" />
+                  <Check size={32} aria-hidden="true" />
                   <div>
                     <h2>{allComplete ? '全部完成' : '本轮完成'}</h2>
                     <p>{allComplete ? `这组 ${vocabularySet.entryCount} 个生词已经全部配对。` : '下一轮会继续使用生词组中的后续单词。'}</p>

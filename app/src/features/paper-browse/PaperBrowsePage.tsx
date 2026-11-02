@@ -3551,7 +3551,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 })
               }}
             >
-              <RefreshCw aria-hidden="true" size={15} />
+              <RefreshCw aria-hidden="true" size={16} />
               {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
             </button>
             <span className="similar-cta-why">——从库里配同配方的相似题</span>
@@ -4255,7 +4255,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
           disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
         >
-          <BoardList size={15} />
+          <BoardList size={16} />
           <span>草稿卷 · {currentDraftGroupCount} 题组</span>
         </button>
       )}

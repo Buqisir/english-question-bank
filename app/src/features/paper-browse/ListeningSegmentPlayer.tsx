@@ -313,7 +313,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
           const next = RATES[index + step]
           if (next !== undefined) changeRate(next)
         }}>
-        <EqbIcon size={18} aria-hidden="true">
+        <EqbIcon size={20} aria-hidden="true">
           <path d="M4.5 17a8.1 8.1 0 1 1 15 0" />
           <g className="listening-player-needle"
             style={{ transform: `rotate(${NEEDLE_DEGREES[rate as (typeof RATES)[number]]}deg)` }}>

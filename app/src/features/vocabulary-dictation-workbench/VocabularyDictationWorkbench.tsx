@@ -111,7 +111,7 @@ function DownloadOption({ label, disabled = false, children, onDownload, onSaveA
         disabled={disabled}
         onClick={(event) => run(onSaveAs, event.currentTarget)}
       >
-        <Save size={13} aria-hidden="true" />另存为…
+        <Save size={12} aria-hidden="true" />另存为…
       </button>
     </div>
   )
@@ -966,7 +966,7 @@ export function VocabularyDictationWorkbench({
         {(message || error) && (
           <div className={error ? 'dictation-notice is-error' : 'dictation-notice'} role={error ? 'alert' : 'status'}>
             <span>{error || message}</span>
-            <button type="button" aria-label="关闭提示" onClick={() => { setError(''); setMessage('') }}><X size={15} /></button>
+            <button type="button" aria-label="关闭提示" onClick={() => { setError(''); setMessage('') }}><X size={16} /></button>
           </div>
         )}
 
@@ -1043,7 +1043,7 @@ export function VocabularyDictationWorkbench({
                     </span>
                   </label>
                 )
-              }) : <div className="dictation-empty-state"><Card size={28} /><h2>没有符合条件的词组</h2><p>换一个搜索词或日期范围。</p></div>}
+              }) : <div className="dictation-empty-state"><Card size={32} /><h2>没有符合条件的词组</h2><p>换一个搜索词或日期范围。</p></div>}
             </FluidHoverList>
 
             {library.total > library.pageSize && (
@@ -1067,7 +1067,7 @@ export function VocabularyDictationWorkbench({
                     <label><span>打印标题</span><input value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} /></label>
                     <label><span>听写标题</span><input value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} /></label>
                     <fieldset><legend>口音</legend><button type="button" className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
-                    <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={15} />打乱词序</label>
+                    <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={16} />打乱词序</label>
                   </div>
                 </details>
                 <div className="dictation-selection-actions">
@@ -1149,7 +1149,7 @@ export function VocabularyDictationWorkbench({
                     })}</div>
                   </section>
                 )
-              })}</div> : <div className="dictation-empty-state"><ListChecks size={28} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
+              })}</div> : <div className="dictation-empty-state"><ListChecks size={32} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
             </div>
 
             {selectedTasks.length > 0 && (
@@ -1161,7 +1161,7 @@ export function VocabularyDictationWorkbench({
                 <fieldset><legend>口音</legend><button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
                 <div className="dictation-batch-export-actions">
                   <button type="button" className="is-primary" disabled={busy} onClick={() => void exportSelectedTasksByDate()}><QrCode size={16} />合并导出听写纸</button>
-                  <button type="button" disabled={busy} onClick={() => void exportSelectedTasksByDate('save-as')}><Save size={15} />另存到文件夹…</button>
+                  <button type="button" disabled={busy} onClick={() => void exportSelectedTasksByDate('save-as')}><Save size={16} />另存到文件夹…</button>
                 </div>
                 <button type="button" onClick={() => setSelectedTaskIds([])}>取消选择</button>
               </aside>
@@ -1215,7 +1215,7 @@ export function VocabularyDictationWorkbench({
                   </details>
                 </article>
               )
-            }) : <div className="dictation-empty-state"><PaperCheck size={28} /><h2>{historyFilter === 'meaning' ? '还没有认词记录' : '还没有历史听写'}</h2><p>{historyFilter === 'meaning' ? '完成认词后会自动保留。' : '旧听写结果会只读保留在这里。'}</p></div>}
+            }) : <div className="dictation-empty-state"><PaperCheck size={32} /><h2>{historyFilter === 'meaning' ? '还没有认词记录' : '还没有历史听写'}</h2><p>{historyFilter === 'meaning' ? '完成认词后会自动保留。' : '旧听写结果会只读保留在这里。'}</p></div>}
           </section>
         )}
 
@@ -1231,22 +1231,22 @@ export function VocabularyDictationWorkbench({
             <div className="dictation-suggestion-control dictation-suggestion-control-row">
               {pausedReviewCount > 0 && <button type="button" aria-pressed={showPausedReview} onClick={() => setShowPausedReview((current) => !current)}>{showPausedReview ? '隐藏' : '显示'}已暂停（{pausedReviewCount}）</button>}
               <label>推荐下一轮 <input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
-              <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={15} />选出单词</button>
+              <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={16} />选出单词</button>
             </div>
 
             {suggestion.length > 0 && (
               <aside className="dictation-suggestion-panel">
                 <div><strong>推荐 {suggestion.length} 词</strong><span>确认名单后直接开始认词复习。</span></div>
                 <ol>{suggestion.map((entry) => <li key={entry.id}><span>{entry.headword}</span><small>{entry.reason}</small></li>)}</ol>
-                <div><button type="button" className="is-primary" onClick={() => startMeaningReview(suggestion)}><Eye size={15} />开始认词复习</button><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><QrCode size={15} />生成听写</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
+                <div><button type="button" className="is-primary" onClick={() => startMeaningReview(suggestion)}><Eye size={16} />开始认词复习</button><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><QrCode size={16} />生成听写</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
               </aside>
             )}
 
             {selectedReviewWords.length > 0 && (
               <div className="dictation-review-actions">
                 <span>已选 {selectedReviewWords.length} 词</span>
-                <button type="button" className="is-primary" onClick={() => startMeaningReview(selectedReviewWords)} disabled={busy}><Eye size={15} />开始认词复习</button>
-                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewWords)} disabled={busy}><QrCode size={15} />生成听写</button>
+                <button type="button" className="is-primary" onClick={() => startMeaningReview(selectedReviewWords)} disabled={busy}><Eye size={16} />开始认词复习</button>
+                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewWords)} disabled={busy}><QrCode size={16} />生成听写</button>
                 <button type="button" onClick={() => setSelectedReviewIds([])}>取消</button>
               </div>
             )}
@@ -1267,7 +1267,7 @@ export function VocabularyDictationWorkbench({
                     </div>
                 ))}
               </div>
-            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{reviewMode === 'all' ? '现在没有待复习单词' : '现在没有常错词'}</h2><p>认词时忘记的词会自动出现在这里。</p></div>}
+            ) : <div className="dictation-empty-state"><Check size={32} /><h2>{reviewMode === 'all' ? '现在没有待复习单词' : '现在没有常错词'}</h2><p>认词时忘记的词会自动出现在这里。</p></div>}
           </section>
         )}
       </main>

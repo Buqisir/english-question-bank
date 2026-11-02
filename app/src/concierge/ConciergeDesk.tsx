@@ -586,7 +586,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   aria-label="清除搜索"
                   title="清除搜索"
                 >
-                  <X size={15} aria-hidden="true" />
+                  <X size={16} aria-hidden="true" />
                 </button>
               )}
               <button

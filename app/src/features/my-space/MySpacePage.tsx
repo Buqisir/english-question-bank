@@ -367,7 +367,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
               {/* Future folder-management UI belongs here once its workflows are ready. */}
               <FluidHoverList as="div" axis="xy" itemSelector=".my-space-folder-button" className="my-space-folders" gapClick={false}>
                 <button type="button" className={`my-space-folder-button${!selectedFolderId ? ' is-selected' : ''}`} aria-pressed={!selectedFolderId} onClick={() => selectFolder(null)}>
-                  <Paper size={18} aria-hidden="true" /><span>全部文件</span>
+                  <Paper size={20} aria-hidden="true" /><span>全部文件</span>
                 </button>
                 <p className="my-space-rail-label">文件夹</p>
                 {folders.map((folder) => (
@@ -378,7 +378,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                     aria-pressed={selectedFolderId === folder.id}
                     onClick={() => selectFolder(folder.id)}
                   >
-                    <Archive size={18} aria-hidden="true" />
+                    <Archive size={20} aria-hidden="true" />
                     <span title={folder.name}>{folder.name}</span>
                     <span className="my-space-folder-count">{folder.artifactCount}</span>
                   </button>
@@ -430,7 +430,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                     const folderName = artifact.folderId ? folderNames.get(artifact.folderId) : null
                     return (
                       <article className="my-space-file-row" key={artifact.id}>
-                        <Paper className="my-space-file-icon" size={22} aria-hidden="true" />
+                        <Paper className="my-space-file-icon" size={24} aria-hidden="true" />
                         <div className="my-space-file-copy">
                           <h3 title={title}>{title}</h3>
                           <p>

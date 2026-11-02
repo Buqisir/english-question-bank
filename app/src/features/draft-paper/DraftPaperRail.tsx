@@ -288,7 +288,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
             <span className="draft-paper-rail-label">{label}</span>
             {/* ui-northstar: 拖拽把手移到行尾——它 hover 前不可见但仍占位，
                 留在行首会把小手和标题顶开一格。 */}
-            <Grip aria-hidden="true" className="draft-paper-rail-grip" size={13} />
+            <Grip aria-hidden="true" className="draft-paper-rail-grip" size={12} />
             {/* draft-desk-a scope note: the plan retires per-item action buttons from
                 the rail in favor of the paper-hover sticker (裁点1) — but a groupMissing
                 item never renders in the paper (server/draft-paper/draftPaperStore.mjs's

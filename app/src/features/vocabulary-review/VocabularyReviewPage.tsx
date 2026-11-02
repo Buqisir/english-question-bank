@@ -1519,7 +1519,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
         {programLoadState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-program-error-title">
-            <BookMarked size={34} aria-hidden="true" />
+            <BookMarked size={32} aria-hidden="true" />
             <h2 id="vocabulary-program-error-title">完整词库没有加载成功</h2>
             <p>这次不会退回 30 词校准样本继续判断，避免把正式进度记错。重新加载完整词库后再开始。</p>
             <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载完整词库</button>
@@ -1527,7 +1527,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </section>
         ) : studentsState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-student-error-title">
-            <BookMarked size={34} aria-hidden="true" />
+            <BookMarked size={32} aria-hidden="true" />
             <h2 id="vocabulary-student-error-title">学生档案没有加载成功</h2>
             <p>不会把不同学生的进度混在一起。重新加载档案后再继续过词。</p>
             <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载学生档案</button>
@@ -1565,7 +1565,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </div>
         ) : runState === 'setup' && vocabularySet ? (
           <section className="vocabulary-run-setup vocabulary-set-reopen" aria-labelledby="vocabulary-set-reopen-title">
-            <BookMarked size={34} aria-hidden="true" />
+            <BookMarked size={32} aria-hidden="true" />
             <h2 id="vocabulary-set-reopen-title">{vocabularySet.title}</h2>
             <p>这是一份内容固定的生词组，共 {vocabularySet.entryCount} 词。可以下载、重新分享或撤销原二维码链接。</p>
             {vocabularySetTitleControl}
@@ -1600,7 +1600,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </section>
         ) : runState === 'setup' || runState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-run-title">
-            <BookMarked size={34} aria-hidden="true" />
+            <BookMarked size={32} aria-hidden="true" />
             <h2 id="vocabulary-run-title">这轮准备收多少个生词？</h2>
             <p>
               {runId
@@ -1762,7 +1762,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                         onClick={playCurrentEntry}
                         title={`播放${reviewAccent === 'american' ? '美音' : '英音'}`}
                       >
-                        <Volume size={17} />
+                        <Volume size={16} />
                         {currentEntry.phonetics?.[reviewAccent] ?? currentEntry.phonetic}
                       </button>
                       <div className="vocabulary-core-meanings">
@@ -1819,22 +1819,22 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
                 <div className="vocabulary-decision-controls" aria-label="过词判断">
                   <button className="vocabulary-control vocabulary-control-back" type="button" onClick={undo} disabled={!reviewState.decisionOrder.length}>
-                    <RotateCcw size={19} />
+                    <RotateCcw size={20} />
                     <span>上一个</span>
                     <kbd>Delete</kbd>
                   </button>
                   <button className="vocabulary-control vocabulary-control-known" type="button" onClick={() => decide('known')} disabled={requestBusy}>
-                    <Check size={19} />
+                    <Check size={20} />
                     <span>认识</span>
                     <kbd>Enter</kbd>
                   </button>
                   <button className="vocabulary-control vocabulary-control-unfamiliar" type="button" onClick={() => decide('unfamiliar')} disabled={requestBusy}>
-                    <BookMarked size={19} />
+                    <BookMarked size={20} />
                     <span>不认识，收下</span>
                     <kbd>Shift</kbd>
                   </button>
                   <button className="vocabulary-control vocabulary-control-reveal" type="button" onClick={reveal} disabled={reviewState.revealed}>
-                    <Eye size={19} />
+                    <Eye size={20} />
                     <span>看提示</span>
                     <kbd>→</kbd>
                   </button>
@@ -1843,7 +1843,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               </>
             ) : (
               <div className="vocabulary-completion-state">
-                <BookMarked size={38} />
+                <BookMarked size={32} />
                 <h2>{completion === 'target-reached' ? `已收满${reviewState.targetUnfamiliarCount}个生词` : '当前词汇已过完'}</h2>
                 <p>
                   本轮共判断 {reviewState.decisionOrder.length} 词：认识 {knownCount} 词，收下 {unfamiliarEntries.length} 词。
@@ -1901,18 +1901,18 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               </ol>
             ) : (
               <div className="vocabulary-collection-empty">
-                <BookMarked size={22} />
+                <BookMarked size={24} />
                 <p>按 Shift 判断“不认识”，生词会依次收在这里。</p>
               </div>
             )}
 
             <div className="vocabulary-collection-actions">
               <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'}>
-                <CopyFeedbackIcon size={15} state={listClipboard.state} />
+                <CopyFeedbackIcon size={16} state={listClipboard.state} />
                 {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
               </button>
               <button className="ghost-button" type="button" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet || pdfDownloadBusy}>
-                <Download size={15} />
+                <Download size={16} />
                 {pdfDownloadBusy ? '生成中…' : '下载'}
               </button>
             </div>
