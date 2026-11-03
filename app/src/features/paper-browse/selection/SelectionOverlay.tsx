@@ -213,7 +213,7 @@ export function SelectionOverlay({
         <div className="paper-selection-card">
           <div className="paper-selection-card-header">
             <span className="paper-selection-card-kicker">
-              <Translate size={13} className="paper-selection-kicker-icon" />
+              <Translate size={12} className="paper-selection-kicker-icon" />
               {kicker}
             </span>
             <div className="paper-selection-card-actions">

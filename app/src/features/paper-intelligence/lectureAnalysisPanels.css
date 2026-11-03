@@ -667,6 +667,27 @@ button.pi-ps-analysis-distractor--selected {
   line-height: 1.6;
   margin: 8px 0 0;
 }
+/* Native ▸ marker → shared branch chevron (DisclosureIcon kind="branch",
+   quarter turn follows details[open]; icon-system motion-rules 第 4 轮 D4). */
+.pi-cloze-group-overview-summary,
+.pi-seven-group-overview-summary,
+.pi-gf-group-overview-summary,
+.pi-objective-teaching-section > summary,
+.pi-cloze-evidence-summary,
+.pi-gf-evidence-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pi-cloze-group-overview-summary::-webkit-details-marker,
+.pi-seven-group-overview-summary::-webkit-details-marker,
+.pi-gf-group-overview-summary::-webkit-details-marker,
+.pi-objective-teaching-section > summary::-webkit-details-marker,
+.pi-cloze-evidence-summary::-webkit-details-marker,
+.pi-gf-evidence-summary::-webkit-details-marker {
+  display: none;
+}
 .pi-objective-teaching {
   margin-bottom: 12px;
 }

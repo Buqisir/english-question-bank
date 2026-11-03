@@ -1111,7 +1111,7 @@ function App() {
             </div>
             <div className="library-header-actions">
               <div className="filter-bar-summary">
-                <QuestionGroup size={17} />
+                <QuestionGroup size={16} />
                 <strong>{questionGroups.length}</strong>
                 <span>个题组</span>
               </div>
@@ -1168,7 +1168,7 @@ function App() {
         aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
         disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
       >
-        <BoardList size={15} />
+        <BoardList size={16} />
         <span>
           草稿卷 · {currentDraftGroupCount} 题组
         </span>

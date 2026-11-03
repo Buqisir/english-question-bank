@@ -1,6 +1,6 @@
-import { useId, useState, type ReactNode } from 'react'
-import { ChevronDown, SentenceAnalysis, Volume, X } from '../../../icons'
-import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
+import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { SentenceAnalysis, X } from '../../../icons'
+import { CopyFeedbackIcon, DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import type {
   PaperDictionaryEntry,
@@ -9,7 +9,7 @@ import type {
   PaperDictionaryResponse,
   PaperDictionarySense,
 } from '../../../services/paperDictionary'
-import { playDictionaryAudio } from './dictionaryAudio'
+import { getDictionaryAudioSnapshot, playDictionaryAudio, subscribeDictionaryAudio } from './dictionaryAudio'
 
 export type DictionarySenseState =
   | { status: 'loading' }
@@ -97,6 +97,7 @@ function PronunciationRow({
   pronunciations: PaperDictionaryPronunciation[]
   onPlayError: (pronunciationId: string) => void
 }) {
+  const audio = useSyncExternalStore(subscribeDictionaryAudio, getDictionaryAudioSnapshot)
   if (pronunciations.length === 0) return null
   return (
     <span className="paper-dictionary-pronunciations">
@@ -116,6 +117,7 @@ function PronunciationRow({
                 type="button"
                 className="paper-dictionary-play"
                 aria-label={playLabel(surface, pronunciation)}
+                {...iconMotionInput}
                 onClick={() => {
                   void playDictionaryAudio(pronunciation.audio!.url, pronunciation.audio!.fallbackUrl).catch(() => {
                     onPlayError(pronunciation.pronunciationId)
@@ -123,7 +125,7 @@ function PronunciationRow({
                 }}
               >
                 {label ? <span className="paper-dictionary-dialect">{label}</span> : null}
-                <Volume size={14} />
+                <VolumeFeedbackIcon size={14} state={audio.key === pronunciation.audio.url ? audio.state : 'idle'} />
               </button>
             )
           })}
@@ -274,11 +276,12 @@ function PosBlock({
         <button
           type="button"
           className="paper-dictionary-more paper-dictionary-rare-toggle"
+          {...iconMotionInput}
           aria-expanded={rareOpen}
           onClick={() => setRareOpen((value) => !value)}
         >
           <span>{rareOpen ? '收起' : `更多义项 ${folded.length}`}</span>
-          <ChevronDown size={12} />
+          <DisclosureIcon size={12} expanded={rareOpen} />
         </button>
       ) : null}
     </section>
@@ -490,10 +493,11 @@ export function DictionaryCard({
         <button
           type="button"
           className="paper-dictionary-more paper-dictionary-detail-toggle"
+          {...iconMotionInput}
           aria-expanded={explainAll}
           onClick={() => setExplainAll((value) => !value)}
         >
-          <ChevronDown size={12} />
+          <DisclosureIcon size={12} expanded={explainAll} />
           <span>{explainAll ? '收起解释' : '详细解释'}</span>
         </button>
       ) : null}
@@ -504,12 +508,13 @@ export function DictionaryCard({
         <button
           type="button"
           className="paper-dictionary-more paper-dictionary-credits-toggle"
+          {...iconMotionInput}
           aria-expanded={creditsOpen}
           aria-controls={creditsId}
           onClick={() => setCreditsOpen((value) => !value)}
         >
           <span>署名与隐私</span>
-          <ChevronDown size={12} />
+          <DisclosureIcon size={12} expanded={creditsOpen} />
         </button>
         <div id={creditsId} className="paper-dictionary-credits-body" hidden={!creditsOpen}>
           <p className="paper-dictionary-attribution">

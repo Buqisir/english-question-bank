@@ -1914,7 +1914,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 placeholder="新建文件夹"
               />
               <button type="button" onClick={createFolderInDialog} disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}>
-                <FolderPlus size={15} /> 新建
+                <FolderPlus size={16} /> 新建
               </button>
             </div>
             {spaceStatus === 'loading' && <p className="draft-dialog-note">正在读取文件夹...</p>}

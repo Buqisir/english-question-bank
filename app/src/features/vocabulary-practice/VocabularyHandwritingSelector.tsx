@@ -110,7 +110,7 @@ export function VocabularyHandwritingSelector({
             <p>{title} · 保持原词序</p>
           </div>
           <button ref={closeButtonRef} type="button" aria-label="关闭练字单词选择" onClick={onCancel} disabled={busy}>
-            <X size={18} />
+            <X size={20} />
           </button>
         </header>
 

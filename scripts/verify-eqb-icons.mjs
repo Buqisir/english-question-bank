@@ -22,7 +22,7 @@ try {
   for (const file of files) {
     const module = await vite.ssrLoadModule(`/src/icons/generated/${file}`)
     const Icon = Object.values(module)[0]
-    for (const [size, stroke] of [[16, 2.25], [23, 2.25], [24, 2.75], [40, 2.75]]) {
+    for (const [size, stroke] of [[16, 2.25], [19, 2.25], [20, 2], [23, 2], [24, 1.75], [32, 1.5], [40, 1.5]]) {
       samples.push({ name: file.slice(0, -4), size, stroke,
         line: renderToStaticMarkup(createElement(Icon, { size, variant: 'line' })),
         fill: renderToStaticMarkup(createElement(Icon, { size, variant: 'fill' })),
@@ -34,9 +34,12 @@ try {
   const failures = await page.evaluate((samples) => {
     const failures = []
     const parser = new DOMParser()
+    // Tiers from 20px up use a stroke thinner than 2.25 (Owner 2026-11-03: 20 -> 2, 24 -> 1.75, 32+ -> 1.5); geometry is unchanged,
+    // so the visible gap widens by exactly the stroke reduction. Upper bounds allow that, nothing more.
+    const displayRelief = (stroke) => Math.max(0, 2.25 - stroke)
     // Independent semantic expectations: these dots are the glyph, not decoration.
     // EyeOff B omits its pupil; ListMusic E2 uses an ear with no notehead.
-    const dots = { ellipsis: 3, grip: 6, eye: 1, 'eye-off': 0, 'info-circle': 1, 'help-circle': 1, 'list-music': 0 }
+    const dots = { ellipsis: 3, grip: 6, eye: 1, 'eye-off': 0, 'info-circle': 1, 'help-circle': 1, 'alert-triangle': 1, 'list-music': 0 }
     for (const sample of samples) {
       const parse = (markup) => parser.parseFromString(markup, 'image/svg+xml').documentElement
       const line = parse(sample.line)
@@ -44,9 +47,8 @@ try {
       fill.querySelector('g[fill-opacity="0.16"]')?.remove()
       if (!line.children.length || line.innerHTML !== fill.innerHTML) failures.push(`${sample.name}/${sample.size}: fill lost line geometry`)
       for (const svg of [line, fill]) {
-        // Owner's Copy reference has constant line weight; other glyphs retain both tiers.
-        const expectedStroke = sample.name === 'copy' ? 2.25 : sample.stroke
-        if (svg.getAttribute('stroke-width') !== String(expectedStroke)) failures.push(`${sample.name}/${sample.size}: wrong stroke tier`)
+        // Every glyph, Copy included, follows the shared size tiers (Owner 2026-11-02: one pen for the whole set).
+        if (svg.getAttribute('stroke-width') !== String(sample.stroke)) failures.push(`${sample.name}/${sample.size}: wrong stroke tier`)
         if (sample.name in dots && svg.querySelectorAll('circle[fill="currentColor"][stroke="none"]').length !== dots[sample.name]) failures.push(`${sample.name}/${sample.size}: wrong semantic dot count`)
       }
       if (sample.name === 'play') {
@@ -57,7 +59,7 @@ try {
           failures.push(`play/${sample.size}: retain one closed triangle, without a gap or an extra mark`)
         } else {
           const box = outline.getBBox()
-          if (Math.abs(box.x - 3.342) > 0.01 || Math.abs(box.width - 18.278) > 0.03 || Math.abs(box.y + box.height / 2 - 12) > 0.01 || box.height < 19.2 || box.height > 19.4) failures.push(`play/${sample.size}: retain the original envelope and horizontal symmetry, not a squashed triangle`)
+          if (Math.abs(box.x - 3.429) > 0.01 || Math.abs(box.width - 18.095) > 0.03 || Math.abs(box.y + box.height / 2 - 12) > 0.01 || box.height < 19.0 || box.height > 19.2) failures.push(`play/${sample.size}: retain the original envelope and horizontal symmetry, not a squashed triangle`)
           const points = Array.from({ length: 2001 }, (_, i) => outline.getPointAtLength(outline.getTotalLength() * i / 2000))
           for (const y of [11, 13]) {
             const crossings = points.slice(1).flatMap((b, i) => {
@@ -72,7 +74,7 @@ try {
           // Rear crown remains broad. Uniformly tightening all three corners violates the selection.
           const rear = points.filter((p) => p.y < 12 && Math.abs(p.x - 4) < 0.025)
           const rearY = Math.min(...rear.map((p) => p.y))
-          if (rearY < 3.2 || rearY > 3.6) failures.push(`play/${sample.size}: preserve the rounded rear shoulder (${rearY})`)
+          if (rearY < 3.3 || rearY > 3.75) failures.push(`play/${sample.size}: preserve the rounded rear shoulder (${rearY})`)
           if (parse(sample.fill).querySelector('g path')?.getAttribute('d') !== d) failures.push(`play/${sample.size}: fill must follow the same selected contour`)
         }
         line.remove()
@@ -85,10 +87,9 @@ try {
         } else {
           const [left, right] = bars.map((bar) => bar.getBBox())
           const gap = right.x - left.x - left.width - sample.stroke
-          // B's selected drawing keeps ~10% of the ink height as a clear center gap at 24px.
-          // The incumbent's ~1.10 gap fails; merely spreading the old broad bars fails the width check.
-          if (gap < 2.1 || gap > 2.85 || left.width < 6.5 || left.width > 6.7) failures.push(`pause/${sample.size}: preserve B's clearer middle gap and slimmer bars (${gap})`)
-          if (Math.abs(left.width - right.width) > 0.01 || Math.abs(left.x + right.x + right.width - 24) > 0.01 || Math.abs(left.y - right.y) > 0.01 || Math.abs(left.height - right.height) > 0.01 || Math.abs(left.y - 2.38) > 0.01 || Math.abs(left.height - 19.24) > 0.01) failures.push(`pause/${sample.size}: equal, centered, parallel bars must retain their height`)
+          // 第 4 组 B「与播放同高」：中缝不动，两柱从 6.6 收到 5.1；旧的宽柱应当不过。
+          if (gap < 2.1 || gap > 2.85 + displayRelief(sample.stroke) || left.width < 5.0 || left.width > 5.2) failures.push(`pause/${sample.size}: preserve B's clearer middle gap and slimmer bars (${gap})`)
+          if (Math.abs(left.width - right.width) > 0.01 || Math.abs(left.x + right.x + right.width - 24) > 0.01 || Math.abs(left.y - right.y) > 0.01 || Math.abs(left.height - right.height) > 0.01 || Math.abs(left.y - 2.476) > 0.01 || Math.abs(left.height - 19.048) > 0.01) failures.push(`pause/${sample.size}: equal, centered, parallel bars must retain their height`)
           const backgrounds = [...parse(sample.fill).querySelectorAll('g path')]
           if (backgrounds.length !== 2 || backgrounds.some((path, i) => path.getAttribute('d') !== bars[i].getAttribute('d'))) failures.push(`pause/${sample.size}: tint the same two bars, never fill the center gap`)
         }
@@ -127,7 +128,7 @@ try {
             const gap = Math.min(...points.map((point) => Math.hypot(point.x - end.x, point.y - end.y))) - sample.stroke
             // B's tight crossing clearance: ~1.08 at 24px, ~1.58 at the thin tier.
             // Reject both merged crossings and excessive fragmentation.
-            if (gap < 1 || gap > 1.7 || getComputedStyle(piece).strokeWidth !== `${sample.stroke}px`) failures.push(`shuffle/${sample.size}: keep the selected two-tier crossing clearance (${gap})`)
+            if (gap < 1 || gap > 1.7 + displayRelief(sample.stroke) || getComputedStyle(piece).strokeWidth !== `${sample.stroke}px`) failures.push(`shuffle/${sample.size}: keep the selected two-tier crossing clearance (${gap})`)
             piece.remove()
             return end
           })
@@ -145,7 +146,8 @@ try {
           failures.push(`sliders/${sample.size}: B+ requires two light compound frames and two tinted counters, not vertical pills`)
         } else {
           for (const [i, frame] of frames.entries()) {
-            const [cx, cy] = i === 0 ? [15.25, 7] : [8.75, 17]
+            // 第 6 组 SL2：两只拨片各向中间挪 1.25，短边轨道 1.85 → 3.1。
+            const [cx, cy] = i === 0 ? [14, 7] : [10, 17]
             const box = frame.getBBox()
             const hole = counters[i].getBBox()
             if (Math.abs(box.width - 9) > 0.01 || Math.abs(box.height - 6.4) > 0.01 || Math.abs(box.x + box.width / 2 - cx) > 0.01 || Math.abs(box.y + box.height / 2 - cy) > 0.01) failures.push(`sliders/${sample.size}: retain B+'s horizontal envelope and unchanged handle centers`)
@@ -170,38 +172,29 @@ try {
         line.remove()
       }
       if (sample.name === 'headphones') {
+        // 全套合一 H2「内倾空心」（Owner 2026-11-03）：一条开口头梁 + 两只同一支笔的空心耳罩，耳罩向里倾，头梁落进耳罩外侧。
         document.body.appendChild(line)
-        const [band, ...pads] = line.querySelectorAll('path')
-        if (line.children.length !== 3 || pads.length !== 2 || pads.some((pad) => pad.getAttribute('fill') !== 'currentColor' || pad.getAttribute('stroke') !== 'none')) {
-          failures.push(`headphones/${sample.size}: N2 has one band and two solid pads, not the old hollow cups`)
+        const [band, ...cups] = line.querySelectorAll('path')
+        const tint = parse(sample.fill).querySelectorAll('g[fill-opacity="0.16"] path')
+        if (line.children.length !== 3 || cups.length !== 2 || [band, ...cups].some((p) => p.hasAttribute('fill') || p.hasAttribute('stroke-width'))) {
+          failures.push(`headphones/${sample.size}: H2 has one band and two hollow cups drawn with the shared pen`)
         } else {
-          if (getComputedStyle(band).strokeWidth !== '2px' || /[zZ]/.test(band.getAttribute('d'))) failures.push(`headphones/${sample.size}: retain the lighter continuous open band`)
-          if (sample.fill !== sample.line) failures.push(`headphones/${sample.size}: both states keep solid pads without a tint layer`)
-          const at = (shape, x, y) => shape.isPointInFill(new DOMPoint(x, y))
-          const centerAt = (pad, y) => {
-            const xs = Array.from({ length: 481 }, (_, i) => i / 20).filter((x) => at(pad, x, y))
-            return (Math.min(...xs) + Math.max(...xs)) / 2
+          if (/[zZ]/.test(band.getAttribute('d'))) failures.push(`headphones/${sample.size}: band stays open`)
+          if (cups.some((cup) => !/[zZ]\s*$/.test(cup.getAttribute('d')))) failures.push(`headphones/${sample.size}: each cup is a closed outline`)
+          if (tint.length !== 2) failures.push(`headphones/${sample.size}: the fill state tints only the two cups`)
+          const xs = Array.from({ length: 481 }, (_, i) => i / 20)
+          const centerAt = (cup, y) => {
+            const inside = xs.filter((x) => cup.isPointInFill(new DOMPoint(x, y)))
+            return (Math.min(...inside) + Math.max(...inside)) / 2
           }
-          for (const [i, pad] of pads.entries()) {
-            const shift = (centerAt(pad, 20) - centerAt(pad, 15)) * (i === 0 ? 1 : -1)
-            if (shift < 0.7 || shift > 1.05) failures.push(`headphones/${sample.size}: both pads must lean inward gently (${shift})`)
+          for (const [i, cup] of cups.entries()) {
+            const shift = (centerAt(cup, 19) - centerAt(cup, 15)) * (i === 0 ? 1 : -1)
+            if (shift < 0.4 || shift > 1.0) failures.push(`headphones/${sample.size}: both cups lean inward gently (${shift})`)
             const end = band.getPointAtLength(i === 0 ? 0 : band.getTotalLength())
-            const box = pad.getBBox()
-            if (!at(pad, end.x, end.y) || end.y < 18.9 || end.y > 19.6 || box.y < 12.5 || box.y > 13 || box.height < 9.3 || box.height > 9.9) failures.push(`headphones/${sample.size}: preserve the lower side support and free pad tops`)
+            if (!cup.isPointInStroke(end)) failures.push(`headphones/${sample.size}: band must land on the cup's outer side`)
           }
-          // Probe the selected white channels, not the generic disconnected-component gap.
-          // Measure the narrowing channel before it intentionally meets the lower support.
-          for (const y of [14, 15, 16, 17]) {
-            const xs = Array.from({ length: 481 }, (_, i) => i / 40)
-            const bandEdge = Math.max(...xs.filter((x) => band.isPointInStroke(new DOMPoint(x, y))))
-            const padEdge = Math.min(...xs.filter((x) => at(pads[0], x, y)))
-            const gap = padEdge - bandEdge
-            if (gap < 0.85 || gap > 1.8) failures.push(`headphones/${sample.size}: preserve N2's side channel at y=${y} (${gap})`)
-            if (!at(pads[0], centerAt(pads[0], y), y) || !at(pads[1], centerAt(pads[1], y), y)) failures.push(`headphones/${sample.size}: pad interiors must stay solid`)
-          }
-          // Compare contours with geometric tolerance, not hit tests exactly on ink edges.
           for (let i = 0; i <= 100; i++) {
-            for (const [left, right, reverse] of [[band, band, true], [pads[0], pads[1], false]]) {
+            for (const [left, right, reverse] of [[band, band, true], [cups[0], cups[1], false]]) {
               const a = left.getPointAtLength(left.getTotalLength() * i / 100)
               const b = right.getPointAtLength(right.getTotalLength() * (reverse ? 1 - i / 100 : i / 100))
               if (Math.abs(a.x + b.x - 24) > 0.02 || Math.abs(a.y - b.y) > 0.02) failures.push(`headphones/${sample.size}: preserve frontal mirror symmetry`)
@@ -209,6 +202,11 @@ try {
           }
         }
         line.remove()
+      }
+      if (sample.name === 'alert-triangle') {
+        // 全套合一 ③：三角闭合，感叹号整体收在三角里，点与「信息」同为实心点。
+        const [outline, bar] = line.querySelectorAll('path')
+        if (line.children.length !== 3 || !/[zZ]\s*$/.test(outline?.getAttribute('d') ?? '') || (outline.getAttribute('d').match(/[mM]/g) ?? []).length !== 1 || !bar) failures.push(`alert-triangle/${sample.size}: closed triangle, one bar and one dot`)
       }
       if (sample.name === 'trash') {
         document.body.appendChild(line)
@@ -245,31 +243,16 @@ try {
       }
       if (sample.name === 'printer') {
         document.body.appendChild(line)
-        const [input, body, paper] = line.querySelectorAll('path')
-        if (line.children.length !== 3 || !paper) {
-          failures.push(`printer/${sample.size}: retain rear paper, connected housing and bowed front paper only`)
+        // P2「上下对称三段」：上进纸、机身、下出纸，全同一支笔；淡底只给机身。
+        const [input, body, output] = line.querySelectorAll('path')
+        if (line.children.length !== 3 || !output) {
+          failures.push(`printer/${sample.size}: P2 keeps input tray, housing and output tray only`)
         } else {
-          if (getComputedStyle(paper).strokeWidth !== '1.4px' || getComputedStyle(body).strokeWidth !== `${sample.stroke}px`) failures.push(`printer/${sample.size}: preserve the selected lighter paper border and normal housing tier`)
-          for (const distance of [0, body.getTotalLength()]) {
-            const end = body.getPointAtLength(distance)
-            if (!paper.isPointInStroke(new DOMPoint(end.x, end.y))) failures.push(`printer/${sample.size}: do not restore the rejected shoulder gaps`)
-          }
-          const front = paper.getBBox()
-          const back = input.getBBox()
-          const housing = body.getBBox()
-          if (front.width - back.width < 1.5 || front.y >= housing.y + housing.height - 1) failures.push(`printer/${sample.size}: front paper must be wider than rear paper and emerge from inside the housing`)
-          const points = Array.from({ length: 1201 }, (_, i) => paper.getPointAtLength(paper.getTotalLength() * i / 1200))
-          const bottomAt = (x) => Math.max(...points.filter((p) => Math.abs(p.x - x) < 0.06).map((p) => p.y))
-          const bow = bottomAt(12) - (bottomAt(8) + bottomAt(16)) / 2
-          if (!Number.isFinite(bow) || bow < 0.2 || bow > 0.7) failures.push(`printer/${sample.size}: retain one shallow downward paper edge, not a flat base or a curled lip`)
-          const background = parse(sample.fill).querySelector('g path')
-          // The fill may shade the housing, but cannot spill onto the blank foreground sheet.
-          const probe = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-          probe.append(background.cloneNode())
-          document.body.append(probe)
-          const fillPath = probe.querySelector('path')
-          if (!fillPath.isPointInFill(new DOMPoint(12, 10)) || fillPath.isPointInFill(new DOMPoint(12, 14))) failures.push(`printer/${sample.size}: fill must stay behind the front paper`)
-          probe.remove()
+          if ([input, body, output].some((path) => getComputedStyle(path).strokeWidth !== `${sample.stroke}px`)) failures.push(`printer/${sample.size}: same pen for paper and housing`)
+          const top = input.getBBox()
+          const bottom = output.getBBox()
+          if (Math.abs(top.width - bottom.width) > 0.01 || Math.abs(top.x - bottom.x) > 0.01) failures.push(`printer/${sample.size}: input and output trays stay symmetric`)
+          if (parse(sample.fill).querySelector('g path')?.getAttribute('d') !== body.getAttribute('d')) failures.push(`printer/${sample.size}: fill must shade the housing only`)
         }
         line.remove()
       }
@@ -289,24 +272,128 @@ try {
             if (/[zZ]/.test(arc.getAttribute('d'))) failures.push(`eye-off/${sample.size}: do not reconnect the eyelid behind the slash`)
             const points = Array.from({ length: 201 }, (_, i) => arc.getPointAtLength(arc.getTotalLength() * i / 200))
             const gap = Math.min(...points.map((p) => Math.abs(p.x - p.y) / Math.SQRT2)) - sample.stroke
-            // B's tight reference clearance: ~0.65 at the thick tier, ~1.15 at the thin tier.
-            // This is a documented single-glyph exception, not a global relaxation of R4.
-            if (gap < 0.6 || gap > 1.2) failures.push(`eye-off/${sample.size}: retain B's local clearance, not merged joints or widely separated fragments (${gap})`)
+            // 全套合一第二轮 E1：B 的 1.15 紧缝特例取消，2.25 档回到 G4 ≥ 1.5；上限防止两瓣被削得过短。
+            if (gap < 1.48 || gap > 1.75 + displayRelief(sample.stroke)) failures.push(`eye-off/${sample.size}: lobes clear the slash by the G4 floor, not crowded or over-trimmed (${gap})`)
           }
           const boxes = arcs.map((arc) => arc.getBBox())
           const top = Math.min(...boxes.map((box) => box.y))
           const bottom = Math.max(...boxes.map((box) => box.y + box.height))
-          if (Math.abs(top - 5.266) > 0.02 || Math.abs(bottom - 18.397) > 0.02) failures.push(`eye-off/${sample.size}: retain B's reference profile, not the old tall Solar eye or over-shortened lower lid`)
+          // E1：与预览同一只眼眶（上 5.266、下 17.916）。
+          if (Math.abs(top - 5.266) > 0.02 || Math.abs(bottom - 17.916) > 0.02) failures.push(`eye-off/${sample.size}: share the preview eye's profile`)
           const backgrounds = [...parse(sample.fill).querySelectorAll('g path')]
           if (backgrounds.length !== 2 || backgrounds.some((path, i) => path.getAttribute('d').replace(/\s/g, '') !== `${arcs[i].getAttribute('d').replace(/\s/g, '')}Z`)) failures.push(`eye-off/${sample.size}: fill must close each visible lobe separately and preserve the diagonal clearance`)
         }
         line.remove()
       }
+      if (sample.name === 'bell' || sample.name === 'bell-off') {
+        document.body.appendChild(line)
+        // 第 5 组 ②「下摆外撇」：铃身两侧最后一段外撇落到铃口，不回到直落的拱门。
+        const body = line.querySelector('path')
+        const d = body.getAttribute('d')
+        if (!/^M\s*4\.248\s+16\.514\s*C/.test(d)) failures.push(`${sample.name}/${sample.size}: bell body must start with the flared lower-left curve on the rim`)
+        if (sample.name === 'bell-off') {
+          // B3「斜杠下移」：45° 斜杠与隐藏同长，左下平移避开右下角；后面的铃在交叉处断开，缝 ≥ 1.5（2.75 审计档按线宽差放宽，同复制）。
+          const paths = [...line.querySelectorAll('path')]
+          const slash = paths[paths.length - 1]
+          const start = slash.getPointAtLength(0)
+          const end = slash.getPointAtLength(slash.getTotalLength())
+          if (Math.abs(start.y - start.x - 3.6) > 0.01 || Math.abs(end.y - end.x - 3.6) > 0.01 || Math.abs(end.x - start.x - 14.43) > 0.02) failures.push(`bell-off/${sample.size}: retain B3's shifted 45-degree slash`)
+          let gap = Infinity
+          for (const path of paths.slice(0, -1)) {
+            const n = 200
+            for (let i = 0; i <= n; i++) {
+              const p = path.getPointAtLength(path.getTotalLength() * i / n)
+              gap = Math.min(gap, Math.abs(p.x - p.y + 3.6) / Math.SQRT2 - sample.stroke)
+            }
+          }
+          if (gap < 1.5 - (sample.stroke - 2.25) - 0.02) failures.push(`bell-off/${sample.size}: G9 — the bell must break where the slash crosses (${gap})`)
+          const lastBack = paths[paths.length - 2]
+          if (!lastBack || Math.abs(lastBack.getBBox().x + lastBack.getBBox().width - 20.892) > 0.01) failures.push(`bell-off/${sample.size}: keep the bell's lower-right corner and rim tip`)
+        }
+        line.remove()
+      }
+      if (sample.name === 'close-circle') {
+        document.body.appendChild(line)
+        // 第 5 组 ①：叉离圈与「已通过」的勾同缝（约 2.47），不回到小一号的叉。
+        const box = line.querySelector('path').getBBox()
+        if (Math.abs(box.x - 8.8) > 0.01 || Math.abs(box.width - 6.4) > 0.01) failures.push(`close-circle/${sample.size}: retain ① enlarged cross`)
+        line.remove()
+      }
+      if (['search', 'zoom-in', 'zoom-out', 'dictionary-lookup', 'reading-analysis'].includes(sample.name)) {
+        // 第 6 组：搜索、放大、缩小、查词、阅读解析是同一只镜（G2 收 0.99 后），镜内符号不另设线宽。
+        const lens = parse(sample.line).querySelector('circle')
+        if (!lens || Math.abs(+lens.getAttribute('cx') - 11.089) > 0.01 || Math.abs(+lens.getAttribute('cy') - 11.089) > 0.01 || Math.abs(+lens.getAttribute('r') - 8.613) > 0.01) failures.push(`${sample.name}/${sample.size}: share the search lens (11.089, r 8.613)`)
+        if (/data-stroke-small/.test(sample.line) || parse(sample.line).querySelectorAll('[stroke-width]').length) failures.push(`${sample.name}/${sample.size}: one pen — no local stroke widths inside the lens`)
+        if (sample.name === 'reading-analysis' && parse(sample.line).querySelectorAll('path').length !== 2) failures.push(`reading-analysis/${sample.size}: R3 is lens + handle + two text lines, no paper`)
+      }
+      if (sample.name === 'paper-lined') {
+        // 语义第三轮 ① L2（Owner 2026-11-03）：卷家族纸身 + 卷角 + 三条贴纸边的格线（纸下沿当第四线），G2 同纸家族 ×0.972。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        const lines = paths[2]?.getAttribute('d') ?? ''
+        if (paths.length !== 3 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small], [fill="currentColor"]').length || (lines.match(/M/g) ?? []).length !== 3) failures.push(`paper-lined/${sample.size}: paper, curl and three ruled lines in one pen`)
+        else if (!paths[0].getAttribute('d').startsWith('M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C')) failures.push(`paper-lined/${sample.size}: share the paper body`)
+      }
+      if (sample.name === 'word-bubble') {
+        // 语义第三轮 ② B2+（Owner 2026-11-03）：一只闭合圆气泡 + 与单词卡同形的实心 A，不用夹板、不加勾。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        const letter = paths.find((path) => path.getAttribute('fill') === 'currentColor')
+        if (paths.length !== 2 || !letter || !/[zZ]\s*$/.test(paths[0].getAttribute('d')) || (paths[0].getAttribute('d').match(/[mM]/g) ?? []).length !== 1 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small]').length) failures.push(`word-bubble/${sample.size}: one closed bubble and one solid A`)
+      }
+      if (sample.name === 'link') {
+        // 第 6 组 G4：两段内钩沿原方向收 0.5，与对面链环留缝。
+        const ends = [...parse(sample.line).querySelectorAll('path')].map((path) => path.getAttribute('d').trim().split(/\s+/).slice(-2).join(' '))
+        if (ends.join('|') !== 'L11.204 5.116|L12.796 18.884') failures.push(`link/${sample.size}: retain the shortened inner hooks (${ends})`)
+      }
+      if (sample.name === 'log-out') {
+        // 第 6 组 L1：门沿透视往回收 40%，上沿门角落在 y 3.075。
+        const door = parse(sample.line).querySelector('path').getAttribute('d')
+        if (!/C13\.195 3\.495 11\.835 3\.355 9\.114 3\.075/.test(door)) failures.push(`log-out/${sample.size}: retain L1's softened door perspective`)
+      }
+      if (sample.name === 'maximize' || sample.name === 'minimize') {
+        // 第 7 组：框按 G2 收 0.885；框内箭头同一支笔，离框角、两支之间守 G4 1.5（2.75 审计档按线宽差放宽）。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        if (paths.length !== 3 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small]').length || !paths[0].getAttribute('d').startsWith('M3.504 12')) failures.push(`${sample.name}/${sample.size}: G2 frame and one pen inside`)
+        else {
+          document.body.appendChild(svgEl)
+          const pts = paths.map((path) => Array.from({ length: 400 }, (_, i) => path.getPointAtLength(path.getTotalLength() * i / 399)))
+          const near = (a, b) => { let m = Infinity; for (const p of a) for (const q of b) m = Math.min(m, Math.hypot(p.x - q.x, p.y - q.y)); return m }
+          const gap = Math.min(near(pts[0], pts[1]), near(pts[0], pts[2]), near(pts[1], pts[2])) - sample.stroke
+          if (gap < 1.5 - Math.max(0, sample.stroke - 2.25) - 0.02) failures.push(`${sample.name}/${sample.size}: G4 — inner arrows crowd the frame or each other (${gap})`)
+          svgEl.remove()
+        }
+      }
+      if (sample.name === 'arrow-left-right' && !sample.line.includes('M8.25 7.25 L3.5 12 L8.25 16.75 M15.75 7.25 L20.5 12 L15.75 16.75')) failures.push(`arrow-left-right/${sample.size}: ① wings 4.75`)
+      if (sample.name === 'corner-down-right' && !sample.line.includes('M8.75 15.125L4.5 10.875L8.75 6.625')) failures.push(`corner-down-right/${sample.size}: ② centred reply arrow`)
+      // 第 8 组：人物按参考图重画——闭合圆顶身体 + 平底；添加 / 已批改 / 班级共用同一个前排人物。
+      if (['user', 'users', 'user-plus', 'user-check'].includes(sample.name) && !/A1\.1 1\.1 0 0 0 [\d.]+ 19\.4V18\.2/.test(sample.line.replace(/\s+/g, ' '))) failures.push(`${sample.name}/${sample.size}: closed flat-based body`)
+      if (['users', 'user-plus', 'user-check'].includes(sample.name) && !sample.line.includes('M4.1 20.5H13.1')) failures.push(`${sample.name}/${sample.size}: shared front person`)
+      // 第 9 组：听写清单同一支笔、方框 6.25；配色按 G2 放大 1.05 摆正。
+      if (sample.name === 'list-checks' && (/stroke-width=|data-stroke-small/.test(sample.line.replace(/^<svg[^>]*>/, '')) || (sample.line.match(/width="6.25" height="6.25"/g) ?? []).length !== 2)) failures.push(`list-checks/${sample.size}: one pen, 6.25 boxes`)
+      if (sample.name === 'palette' && !sample.line.includes('M10.628 4.262 C')) failures.push(`palette/${sample.size}: G2 ×1.05 about the ink centre`)
+      // 第 10 组之后全套同一支笔：任何字形内部都不再有局部线宽或嵌套变换。
+      if (/stroke-width=|<g /.test(sample.line.replace(/^<svg[^>]*>/, ''))) failures.push(`${sample.name}/${sample.size}: one pen — no local stroke widths or nested transforms`)
+      if (sample.name === 'key' && !sample.line.includes('M10.45 13.55 L20 4')) failures.push(`key/${sample.size}: ① diagonal key`)
+      if (sample.name === 'sparkles' && !sample.line.includes('M18.75 3 V6.5 M17 4.75 H20.5')) failures.push(`sparkles/${sample.size}: ② small twinkle`)
+      if (sample.name === 'presentation' && /fill="currentColor"/.test(sample.line)) failures.push(`presentation/${sample.size}: ③ outlined head`)
+      if (sample.name === 'move' && /<g/.test(sample.line.replace(/^<svg[^>]*>/, ''))) failures.push(`move/${sample.size}: translations baked into coordinates`)
+      if (sample.name === 'scissors') {
+        // 第 6 组 B：H4.2 骨架，刀刃是沿刃脊的一笔（不再是实心叶子），刃尖再长 1；旋转已写进坐标。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        if (paths.length !== 6 || svgEl.querySelector('g[transform], [fill="currentColor"]')) failures.push(`scissors/${sample.size}: B — two rings, two shanks, two stroked blades; no solid blades or transforms`)
+        else {
+          const tips = paths.slice(4).map((path) => path.getPointAtLength(path.getTotalLength()))
+          if (tips.some((tip) => Math.abs(tip.y - 3.568) > 0.01) || Math.abs(tips[0].x + tips[1].x - 23.726) > 0.01) failures.push(`scissors/${sample.size}: retain B's longer, mirrored blade tips`)
+        }
+      }
     }
     return failures
   }, samples)
   assert.deepEqual(failures, [])
-  console.log(`PASS ${files.length} components × 4 sizes × line/fill: geometry, semantic dots, stroke boundary`)
+  console.log(`PASS ${files.length} components × 7 sizes × line/fill: geometry, semantic dots, stroke boundary`)
 
   // The repaired extended glyphs must not regress at the thicker runtime tier.
   const repaired = new Set(['move', 'maximize', 'minimize', 'sort', 'alert-triangle', 'help-circle', 'share', 'document', 'calendar', 'user-plus', 'users', 'user-check', 'underline', 'palette', 'headphones', 'list-ordered', 'bookmark', 'crop'])
@@ -317,9 +404,10 @@ try {
     assert.deepEqual(icons.map((icon) => `${icon.name}.tsx`).sort(), files.slice().sort(), 'measure every effective generated glyph exactly once')
     assert.equal(icons.filter((icon) => icon.group === 'extended').length, 57)
     for (const icon of icons) {
-      assert.equal(icon.stroke, icon.name === 'copy' ? 2.25 : stroke)
-      // The selected reference has a tighter (~1.2-unit) gap. It must stay open, not be widened back to the rejected shape.
-      if (icon.name === 'copy') assert.ok(icon.gap !== null && icon.gap >= 1 && icon.gap <= 1.4, `copy/${stroke}: reference gap changed (${icon.gap})`)
+      assert.equal(icon.stroke, stroke)
+      // Copy is the G9 exemplar: the rear sheet stays open in front of the front sheet. The 1.5 floor holds at the
+      // 2.25 small tier; the legacy 2.75 audit tier is thicker than any runtime stroke (20px+ renders 2 / 1.75 / 1.5).
+      if (icon.name === 'copy') assert.ok(icon.gap !== null && icon.gap >= 1.5 - (stroke - 2.25), `copy/${stroke}: rear sheet crowds the front sheet (${icon.gap})`)
       if (icon.name === 'pencil') {
         const holes = icon.holes.filter((hole) => hole.area > 1)
         assert.equal(holes.length, 2, `pencil/${stroke}: retain the cap and barrel, no extra nib compartment`)
@@ -333,7 +421,8 @@ try {
       }
       if (icon.name === 'pause') {
         assert.equal(icon.holes.length, 2, `pause/${stroke}: keep a counter inside each bar`)
-        assert.ok(icon.holes.every((hole) => hole.width >= 3.7), `pause/${stroke}: widening the middle gap must not close the counters`)
+        // 第 4 组 B 收窄了柱子（与播放同高）：运行时最粗 2.25 档内洞约 3.0；2.75 审计档按线宽差放宽，同复制。
+        assert.ok(icon.holes.every((hole) => hole.width >= 2.75 - (stroke - 2.25)), `pause/${stroke}: slimmer bars must not close the counters`)
       }
       if (icon.name === 'volume') {
         assert.ok(icon.gap !== null && icon.gap >= 1.5, `volume/${stroke}: keep the sound arc separate`)
@@ -346,18 +435,21 @@ try {
         assert.ok(icon.gap >= 3.5, `sliders/${stroke}: preserve the whitespace between rails and handles`)
       }
       if (icon.name === 'printer') {
+        // P2 (Owner 2026-11-02): tray, housing and paper are three connected parts at the same pen weight.
         assert.equal(icon.gap, null, `printer/${stroke}: all three shapes must connect`)
-        // Foreground bottom centerline 22.295 + half of the selected 1.4 paper border.
-        assert.ok(Math.abs(icon.ink.y + icon.ink.h - 22.995) < 0.03, `printer/${stroke}: measurement must use the paper's own stroke, not the housing's`)
-        assert.equal(icon.holes.length, 3, `printer/${stroke}: keep the rear opening, housing opening and blank paper`)
-        assert.ok(icon.holes.find((hole) => hole.at[1] > 16)?.width >= 7.4, `printer/${stroke}: the paper face must not shrink under a falsely inherited thick stroke`)
+        assert.equal(icon.holes.length, 3, `printer/${stroke}: keep the tray, housing and paper counters`)
+        if (stroke === 2.25) assert.ok(icon.holes.every((hole) => hole.width >= 2.25), `printer/${stroke}: a counter closed up`)
       }
       if (!repaired.has(icon.name)) continue
-      assert.ok(icon.gap === null || icon.gap >= 1.5, `${icon.name}/${stroke}: gap ${icon.gap}`)
+      // 第 7 组：全屏 / 退出全屏的框内箭头改为同一支笔，2.75 审计档按线宽差放宽（同复制、关闭通知）。
+      // 第 8 组：人物（参考图版）头与身体中心距 3.75，同样只在 2.75 审计档按线宽差放宽。
+      // 全套合一 ③：警告三角闭合后感叹号在三角内，2.25 档最小缝 1.53；2.75 审计档同样按线宽差放宽。
+      const gapFloor = ['maximize', 'minimize', 'user', 'users', 'user-plus', 'user-check', 'alert-triangle'].includes(icon.name) ? 1.5 - Math.max(0, stroke - 2.25) - 0.02 : 1.5
+      assert.ok(icon.gap === null || icon.gap >= gapFloor, `${icon.name}/${stroke}: gap ${icon.gap}`)
       assert.ok(icon.holes.filter((hole) => hole.area > 1).every((hole) => hole.width >= 2.25), `${icon.name}/${stroke}: narrow hole`)
     }
     console.log(`PASS ${icons.length} unique measurements at stroke ${stroke}, including 57 extended; 18 repaired glyphs meet gap/hole floors`)
-    console.log(`PASS copy in size tier ${stroke}: fixed 2.25 stroke and reference gap preserved`)
+    console.log(`PASS copy in size tier ${stroke}: shared stroke tier and G9 gap preserved`)
   }
 } finally {
   await browser?.close()

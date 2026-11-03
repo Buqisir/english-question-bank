@@ -1,13 +1,11 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
 import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 
-export function FileSearch({ size = 24, variant = 'line', ...props }: EqbIconProps) {
-  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
-  const isSmall = Number.isFinite(numericSize) && numericSize < 24
+export function FileSearch({ variant = 'line', ...props }: EqbIconProps) {
   return (
-    <EqbIcon size={size} {...props}>
+    <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z" /><circle strokeWidth={isSmall ? 2.05 : 2.4} cx="11.6" cy="11.8" r="3" /><path strokeWidth={isSmall ? 2.05 : 2.4} d="M13.8 14L16.1 16.3" /></> : <><path d="M6.75 2.75 H17.25 Q20.5 2.75 20.5 6 V18 Q20.5 21.25 17.25 21.25 H6.75 Q3.5 21.25 3.5 18 V6 Q3.5 2.75 6.75 2.75 Z" /><circle strokeWidth={isSmall ? 2.05 : 2.4} cx="11.6" cy="11.8" r="3" /><path strokeWidth={isSmall ? 2.05 : 2.4} d="M13.8 14L16.1 16.3" /></>}
+      {variant === 'fill' ? <><path d="M7.091 3.351 H16.909 Q19.948 3.351 19.948 6.39 V17.61 Q19.948 20.649 16.909 20.649 H7.091 Q4.052 20.649 4.052 17.61 V6.39 Q4.052 3.351 7.091 3.351 Z" /><circle cx="11.626" cy="11.813" r="2.805" /><path d="M13.683 13.87 L15.834 16.021" /></> : <><path d="M7.091 3.351 H16.909 Q19.948 3.351 19.948 6.39 V17.61 Q19.948 20.649 16.909 20.649 H7.091 Q4.052 20.649 4.052 17.61 V6.39 Q4.052 3.351 7.091 3.351 Z" /><circle cx="11.626" cy="11.813" r="2.805" /><path d="M13.683 13.87 L15.834 16.021" /></>}
     </EqbIcon>
   )
 }

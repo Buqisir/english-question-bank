@@ -166,9 +166,11 @@ assert(
 // detail-page-redesign (2026-07-15): 加入草稿卷 moved from `.add-button` to
 // the new speed-look-head primary action `.peek-btn--primary`, still calling
 // onAddToBasket(selectedDetail), still unconditional (not isOwnerView-gated).
+// icon-motion round 4 (2026-11-03): the button may carry `{...iconMotionInput}`
+// (pointer vs keyboard motion source) between type and onClick.
 assert(
   '加入草稿卷 button stays visible to member (not gated by isOwnerView)',
-  /<button\s*\n\s*className="peek-btn peek-btn--primary"\s*\n\s*type="button"\s*\n\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(
+  /<button\s*\n\s*className="peek-btn peek-btn--primary"\s*\n\s*type="button"\s*\n(?:\s*\{\.\.\.iconMotionInput\}\s*\n)?\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(
     detailView,
   ),
 )

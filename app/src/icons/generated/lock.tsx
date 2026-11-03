@@ -5,7 +5,7 @@ export function Lock({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><rect x="4" y="10.6" width="16" height="10.6" rx="2.65" /><path d="M8.2 10.6V7.65a3.8 3.8 0 0 1 7.6 0V10.6" /><path d="M12 15.1v1.6" /></> : <><rect x="4" y="10.6" width="16" height="10.6" rx="2.65" /><path d="M8.2 10.6V7.65a3.8 3.8 0 0 1 7.6 0V10.6" /><path d="M12 15.1v1.6" /></>}
+      {variant === 'fill' ? <><rect x="3.376" y="9.925" width="17.248" height="11.427" rx="2.857" /><path d="M7.904 9.925 V6.745 a4.096 4.096 0 0 1 8.193 0 V9.925" /><path d="M12 14.776 v1.725" /></> : <><rect x="3.376" y="9.925" width="17.248" height="11.427" rx="2.857" /><path d="M7.904 9.925 V6.745 a4.096 4.096 0 0 1 8.193 0 V9.925" /><path d="M12 14.776 v1.725" /></>}
     </EqbIcon>
   )
 }

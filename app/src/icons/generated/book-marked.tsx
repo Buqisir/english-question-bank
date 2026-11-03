@@ -4,8 +4,8 @@ import { EqbIcon, type EqbIconProps } from '../EqbIcon'
 export function BookMarked({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
-      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M18.2 4.6C14.8 2.2 8.3 2.6 5.25 6.1C2.2 9.6 3.1 17.2 7.2 20C11.4 22.7 18.5 20.6 20.25 16.6C21.5 13.7 21 10.8 19.8 8.75Z" /></g>}
-      {variant === 'fill' ? <><path d="M18.2 4.6C14.8 2.2 8.3 2.6 5.25 6.1C2.2 9.6 3.1 17.2 7.2 20C11.4 22.7 18.5 20.6 20.25 16.6C21.5 13.7 21 10.8 19.8 8.75" /><g transform="translate(0 2)"><path d="M8.25 13.5L11.3 6.5H12.7L15.75 13.5H14.15L13.5 11.9H10.5L9.85 13.5ZM11.04 10.55H12.96L12 8.1Z" fill="currentColor" fillRule="evenodd" stroke="none" /></g></> : <><path d="M18.2 4.6C14.8 2.2 8.3 2.6 5.25 6.1C2.2 9.6 3.1 17.2 7.2 20C11.4 22.7 18.5 20.6 20.25 16.6C21.5 13.7 21 10.8 19.8 8.75" /><g transform="translate(0 2)"><path d="M8.25 13.5L11.3 6.5H12.7L15.75 13.5H14.15L13.5 11.9H10.5L9.85 13.5ZM11.04 10.55H12.96L12 8.1Z" fill="currentColor" fillRule="evenodd" stroke="none" /></g></>}
+      {variant === 'fill' && <g fill="currentColor" fillOpacity={0.16} stroke="none"><path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25" /></g>}
+      {variant === 'fill' ? <><path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25" /><path d="M6.938 15.825L11.055 6.375H12.945L17.063 15.825H14.902L14.025 13.665H9.975L9.098 15.825ZM10.704 11.843H13.296L12 8.535Z" fill="currentColor" fillRule="evenodd" stroke="none" /></> : <><path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25" /><path d="M6.938 15.825L11.055 6.375H12.945L17.063 15.825H14.902L14.025 13.665H9.975L9.098 15.825ZM10.704 11.843H13.296L12 8.535Z" fill="currentColor" fillRule="evenodd" stroke="none" /></>}
     </EqbIcon>
   )
 }

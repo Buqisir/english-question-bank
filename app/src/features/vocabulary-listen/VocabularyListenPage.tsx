@@ -4,6 +4,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ListMusic,
+  RefreshCw,
   RotateCcw,
   Volume,
 } from '../../icons'
@@ -50,11 +51,11 @@ function LoadState({ kind, onRetry }: { kind: 'loading' | 'missing' | 'revoked' 
   return (
     <main className="vocabulary-listen-message" aria-live="polite">
       <div>
-        <ListMusic size={30} aria-hidden="true" />
+        <ListMusic size={32} aria-hidden="true" />
         <h1>{content.title}</h1>
         <p>{content.detail}</p>
         {(kind === 'error' || kind === 'loading') && kind !== 'loading' && (
-          <button type="button" onClick={onRetry}><RotateCcw size={16} />重新加载</button>
+          <button type="button" onClick={onRetry}><RefreshCw size={16} />重新加载</button>
         )}
       </div>
     </main>
@@ -371,13 +372,13 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
           </div>
           <div className="vocabulary-listen-control-row">
             <button type="button" onClick={() => selectWord(Math.max(0, currentIndex - 1))} disabled={currentIndex === 0} aria-label="上一个单词">
-              <ChevronLeft size={22} />
+              <ChevronLeft size={24} />
             </button>
             <button className="vocabulary-listen-primary-control" type="button" onClick={status === 'error' ? retryAudio : togglePlayback} aria-label={status === 'playing' ? '暂停播放' : status === 'ended' ? '从头播放' : status === 'error' ? '重试当前单词音频' : status === 'paused' ? '继续播放' : '开始播放'}>
-              {status === 'ended' || status === 'error' ? <RotateCcw size={22} /> : <PlaybackIcon size={24} variant="fill" playing={status === 'playing'} />}
+              {status === 'ended' || status === 'error' ? <RotateCcw size={24} /> : <PlaybackIcon size={24} variant="fill" playing={status === 'playing'} />}
             </button>
             <button type="button" onClick={() => selectWord(Math.min(entries.length - 1, currentIndex + 1))} disabled={currentIndex === entries.length - 1} aria-label="下一个单词">
-              <ChevronRight size={22} />
+              <ChevronRight size={24} />
             </button>
           </div>
           <p className={status === 'error' ? 'is-error' : undefined}>{statusText}</p>
@@ -398,7 +399,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
               ))}
             </fieldset>
             <label>
-              <Volume size={17} aria-hidden="true" />
+              <Volume size={16} aria-hidden="true" />
               <span className="visually-hidden">音量</span>
               <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(event) => setVolume(Number(event.target.value))} aria-label="播放音量" />
             </label>
@@ -434,7 +435,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
           aria-label={status === 'playing' ? '暂停播放' : status === 'ended' ? '从头播放' : status === 'error' ? '重试当前单词音频' : '继续播放'}
         >
           {status === 'ended' || status === 'error'
-            ? <RotateCcw size={19} />
+            ? <RotateCcw size={20} />
             : <PlaybackIcon size={20} variant="fill" playing={status === 'playing'} />}
         </button>
         <button type="button" onClick={() => selectWord(Math.min(entries.length - 1, currentIndex + 1))} disabled={currentIndex === entries.length - 1} tabIndex={showStickyPlayer ? 0 : -1} aria-label="下一个单词"><ChevronRight size={20} /></button>

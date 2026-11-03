@@ -6,6 +6,8 @@ import type {
 } from './sevenChoicesSurfaceAdapter.ts'
 import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
+import { DisclosureIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 
 type Props = {
   overview: string
@@ -112,7 +114,7 @@ export function SevenChoicesAnalysisPanel({
       </div>
       {overview && (
         <details className="pi-seven-group-overview" open>
-          <summary className="pi-seven-group-overview-summary">文章简介</summary>
+          <summary className="pi-seven-group-overview-summary" {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />文章简介</summary>
           <p className="pi-seven-group-overview-text">{overview}</p>
         </details>
       )}

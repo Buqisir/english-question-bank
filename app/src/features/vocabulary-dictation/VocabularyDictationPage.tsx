@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Eye,
   ListMusic,
+  RefreshCw,
   RotateCcw,
   Volume,
 } from '../../icons'
@@ -55,10 +56,10 @@ function LoadState({ kind, onRetry }: { kind: 'loading' | 'missing' | 'revoked' 
   return (
     <main className="vocabulary-dictation-message" aria-live="polite">
       <div>
-        <ListMusic size={30} aria-hidden="true" />
+        <ListMusic size={32} aria-hidden="true" />
         <h1>{content.title}</h1>
         <p>{content.detail}</p>
-        {kind === 'error' && <button type="button" onClick={onRetry}><RotateCcw size={16} />重新加载</button>}
+        {kind === 'error' && <button type="button" onClick={onRetry}><RefreshCw size={16} />重新加载</button>}
       </div>
     </main>
   )
@@ -410,7 +411,7 @@ export function VocabularyDictationPage({
       <main className="vocabulary-dictation-shell">
         {resumePrompt ? (
           <section className="vocabulary-dictation-resume" aria-labelledby="dictation-resume-title">
-            <RotateCcw size={30} aria-hidden="true" />
+            <RotateCcw size={32} aria-hidden="true" />
             <h1 id="dictation-resume-title">继续上次听写？</h1>
             <p>{set.title} · 已到第 {currentIndex + 1} / {entries.length} 题</p>
             <div>
@@ -448,7 +449,7 @@ export function VocabularyDictationPage({
 
             <section className="vocabulary-dictation-controls" aria-label="自动听写控制">
               <div className="vocabulary-dictation-transport">
-                <button type="button" onClick={() => selectQuestion(Math.max(0, currentIndex - 1))} disabled={currentIndex === 0} aria-label="上一题"><ChevronLeft size={22} /></button>
+                <button type="button" onClick={() => selectQuestion(Math.max(0, currentIndex - 1))} disabled={currentIndex === 0} aria-label="上一题"><ChevronLeft size={24} /></button>
                 <button
                   type="button"
                   className="primary-control"
@@ -456,10 +457,10 @@ export function VocabularyDictationPage({
                   aria-label={['countdown', 'playing', 'waiting'].includes(status) ? '暂停听写' : status === 'error' ? '重试当前单词音频' : status === 'ended' ? '从头再听一遍' : status === 'paused' ? '继续听写' : '开始听写'}
                 >
                   {status === 'error' || status === 'ended'
-                    ? <RotateCcw size={22} />
+                    ? <RotateCcw size={24} />
                     : <PlaybackIcon size={24} variant="fill" playing={['countdown', 'playing', 'waiting'].includes(status)} />}
                 </button>
-                <button type="button" onClick={() => selectQuestion(Math.min(entries.length - 1, currentIndex + 1))} disabled={currentIndex === entries.length - 1} aria-label="下一题"><ChevronRight size={22} /></button>
+                <button type="button" onClick={() => selectQuestion(Math.min(entries.length - 1, currentIndex + 1))} disabled={currentIndex === entries.length - 1} aria-label="下一题"><ChevronRight size={24} /></button>
               </div>
 
               <button type="button" className="vocabulary-dictation-replay" onClick={replayCurrent} disabled={status === 'countdown'}>
@@ -522,7 +523,7 @@ export function VocabularyDictationPage({
                   </label>
                 </fieldset>
                 <label className="vocabulary-dictation-volume">
-                  <Volume size={17} aria-hidden="true" />
+                  <Volume size={16} aria-hidden="true" />
                   <span className="visually-hidden">音量</span>
                   <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(event) => setVolume(Number(event.target.value))} aria-label="播放音量" />
                 </label>
@@ -531,7 +532,7 @@ export function VocabularyDictationPage({
 
             {status === 'ended' && (
               <section className="vocabulary-dictation-complete" aria-labelledby="dictation-complete-title">
-                <Check size={28} aria-hidden="true" />
+                <Check size={32} aria-hidden="true" />
                 <div>
                   <h2 id="dictation-complete-title">本组听写完成</h2>
                   <p>可以从头再听一遍，或者核对本组答案。</p>

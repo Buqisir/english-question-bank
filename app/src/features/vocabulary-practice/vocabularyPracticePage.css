@@ -272,7 +272,7 @@
   font-size: 14px;
 }
 
-.vocabulary-match-card-face > svg {
+.vocabulary-match-card-face > .eqb-motion {
   color: var(--ink);
 }
 

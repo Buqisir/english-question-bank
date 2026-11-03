@@ -29,15 +29,15 @@ import { useEffect, useState, type CSSProperties, type MouseEvent, type ReactNod
 import {
   ArrowLeft,
   ReadingAnalysis,
-  Check,
   ChevronDown,
   ChevronUp,
   Eye,
   Papers,
   Pencil,
-  Plus,
   Trash,
 } from '../../icons'
+import { DraftAddIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult, TopicLabel } from '../../domain/questionBank'
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
@@ -568,6 +568,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             <button
               className="peek-btn peek-btn--primary"
               type="button"
+              {...iconMotionInput}
               onClick={() => onAddToBasket(selectedDetail)}
               disabled={selectedDetail.draftPaperButtonState === 'disabled'}
               aria-pressed={selectedDetail.draftPaperButtonState === 'in_current_draft' ? true : undefined}
@@ -577,11 +578,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   : undefined
               }
             >
-              {selectedDetail.draftPaperButtonState === 'in_current_draft' ? (
-                <Check size={16} />
-              ) : (
-                <Plus size={16} />
-              )}
+              <DraftAddIcon size={16} done={selectedDetail.draftPaperButtonState === 'in_current_draft'} />
               {selectedDetail.draftPaperButtonState === 'in_current_draft'
                 ? '已在草稿卷'
                 : selectedDetail.draftPaperButtonState === 'disabled'

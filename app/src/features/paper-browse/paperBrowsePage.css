@@ -717,6 +717,19 @@
   white-space: nowrap;
 }
 
+.paper-browse-gutter-add-label {
+  display: inline-grid;
+}
+
+.paper-browse-gutter-add-label > span {
+  grid-area: 1 / 1;
+}
+
+.paper-browse-gutter-add:not(.paper-browse-gutter-add--in-draft) .paper-browse-gutter-add-label-done,
+.paper-browse-gutter-add--in-draft .paper-browse-gutter-add-label-idle {
+  visibility: hidden;
+}
+
 .paper-browse-gutter-add:hover:not(:disabled) {
   background: var(--surface-strong, #E9ECE6);
 }

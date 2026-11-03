@@ -258,7 +258,7 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
             <h2>{entryMode === 'edit' ? '编辑题组' : '录入题组'}</h2>
           </div>
           <button className="icon-button" type="button" onClick={onClose} aria-label="关闭录题面板">
-            <X size={18} />
+            <X size={20} />
           </button>
         </div>
 
@@ -421,7 +421,7 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
                     onClick={() => removeEntryQuestion(index)}
                     aria-label={`删除小题 ${index + 1}`}
                   >
-                    <Trash size={15} />
+                    <Trash size={16} />
                   </button>
                 </div>
 

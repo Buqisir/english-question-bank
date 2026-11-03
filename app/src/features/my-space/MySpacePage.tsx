@@ -1,4 +1,5 @@
-import { Archive, Download, Ellipsis, Paper, Save, Trash } from '../../icons'
+import { Ellipsis, Folder, Paper, Save, Trash } from '../../icons'
+import { DownloadFeedbackIcon } from '../../icons/MotionIcons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import {
@@ -232,6 +233,8 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   const [loadState, setLoadState] = useState<LoadState>('loading')
   const [message, setMessage] = useState('')
   const [busyId, setBusyId] = useState<string | null>(null)
+  // 只给下载用：busyId 同时管删除，直接拿它驱动下载图标的话，删文件时下载图标也会动（D8）。
+  const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const [confirmTarget, setConfirmTarget] = useState<MySpaceArtifact | null>(null)
   const confirmPresence = useToastPresence(confirmTarget, 120)
 
@@ -278,11 +281,13 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
       })
       if (!target) return
       setBusyId(artifact.id)
+      setDownloadingId(artifact.id)
       await downloadMySpaceArtifact(artifact, target)
     } catch (error) {
       setMessage(describeError(mode === 'save-as' ? '另存为 PDF' : '下载 PDF', error))
     } finally {
       setBusyId(null)
+      setDownloadingId(null)
     }
   }
 
@@ -367,7 +372,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
               {/* Future folder-management UI belongs here once its workflows are ready. */}
               <FluidHoverList as="div" axis="xy" itemSelector=".my-space-folder-button" className="my-space-folders" gapClick={false}>
                 <button type="button" className={`my-space-folder-button${!selectedFolderId ? ' is-selected' : ''}`} aria-pressed={!selectedFolderId} onClick={() => selectFolder(null)}>
-                  <Paper size={18} aria-hidden="true" /><span>全部文件</span>
+                  <Paper size={20} aria-hidden="true" /><span>全部文件</span>
                 </button>
                 <p className="my-space-rail-label">文件夹</p>
                 {folders.map((folder) => (
@@ -378,7 +383,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                     aria-pressed={selectedFolderId === folder.id}
                     onClick={() => selectFolder(folder.id)}
                   >
-                    <Archive size={18} aria-hidden="true" />
+                    <Folder size={20} aria-hidden="true" />
                     <span title={folder.name}>{folder.name}</span>
                     <span className="my-space-folder-count">{folder.artifactCount}</span>
                   </button>
@@ -430,7 +435,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                     const folderName = artifact.folderId ? folderNames.get(artifact.folderId) : null
                     return (
                       <article className="my-space-file-row" key={artifact.id}>
-                        <Paper className="my-space-file-icon" size={22} aria-hidden="true" />
+                        <Paper className="my-space-file-icon" size={24} aria-hidden="true" />
                         <div className="my-space-file-copy">
                           <h3 title={title}>{title}</h3>
                           <p>
@@ -442,7 +447,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                         </div>
                         <div className="my-space-row-actions">
                           <button type="button" disabled={busyId === artifact.id} onClick={() => void downloadArtifact(artifact)}>
-                            <Download size={16} aria-hidden="true" /><span>下载</span>
+                            <DownloadFeedbackIcon size={16} working={downloadingId === artifact.id} /><span>下载</span>
                           </button>
                           <button type="button" onClick={() => openSourceDraft(artifact)}>打开原草稿</button>
                           <ArtifactMenu

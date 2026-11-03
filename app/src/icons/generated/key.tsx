@@ -5,7 +5,7 @@ export function Key({ variant = 'line', ...props }: EqbIconProps) {
   return (
     <EqbIcon {...props}>
       {variant === 'fill' && null}
-      {variant === 'fill' ? <><circle cx="8" cy="11" r="4" /><path d="M12 11h8.5M16.2 11v2.8M20.5 11v2" /></> : <><circle cx="8" cy="11" r="4" /><path d="M12 11h8.5M16.2 11v2.8M20.5 11v2" /></>}
+      {variant === 'fill' ? <><circle cx="7.6" cy="16.4" r="4" /><path d="M10.45 13.55 L20 4 M16.4 7.6 L18.9 10.1 M19.1 4.9 L20.6 6.4" /></> : <><circle cx="7.6" cy="16.4" r="4" /><path d="M10.45 13.55 L20 4 M16.4 7.6 L18.9 10.1 M19.1 4.9 L20.6 6.4" /></>}
     </EqbIcon>
   )
 }

@@ -1,12 +1,13 @@
 import {
   Card,
   Check,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Download,
   Eye,
   PaperCheck,
+  PaperLined,
+  PaperStudent,
   Link,
   ListChecks,
   PauseCircle,
@@ -18,7 +19,7 @@ import {
   Sparkles,
   X,
 } from '../../icons'
-import { PinFeedbackIcon } from '../../icons/MotionIcons'
+import { DisclosureIcon, DownloadFeedbackIcon, PinFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
@@ -111,7 +112,7 @@ function DownloadOption({ label, disabled = false, children, onDownload, onSaveA
         disabled={disabled}
         onClick={(event) => run(onSaveAs, event.currentTarget)}
       >
-        <Save size={13} aria-hidden="true" />另存为…
+        <Save size={12} aria-hidden="true" />另存为…
       </button>
     </div>
   )
@@ -257,6 +258,8 @@ export function VocabularyDictationWorkbench({
   const [collectionTitle, setCollectionTitle] = useState('')
   const [taskTitle, setTaskTitle] = useState(defaultTaskTitle)
   const [busy, setBusy] = useState(false)
+  // 只有拿到保存位置、真正开始生成文件后才算“正在下载”；选位置的对话框不算。
+  const [downloadingKey, setDownloadingKey] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [createdTasks, setCreatedTasks] = useState<VocabularyDictationTaskDto[]>([])
@@ -639,12 +642,14 @@ export function VocabularyDictationWorkbench({
         mimeType: kind === 'bundle' ? 'application/zip' : 'application/pdf',
       })
       if (!target) return
+      setDownloadingKey(`meaning:${record.id}`)
       if (kind === 'bundle') await downloadVocabularyMeaningRecallRecordMaterialsZip(record.id, accent, target)
       else await downloadVocabularyMeaningRecallRecordPdf(record.id, accent, kind, target, handwritingMode)
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '本轮错词资料下载失败。')
     } finally {
       setBusy(false)
+      setDownloadingKey('')
     }
   }
 
@@ -873,11 +878,13 @@ export function VocabularyDictationWorkbench({
       })
       if (!target) return
       setBusy(true)
+      setDownloadingKey(`task:${task.id}`)
       await downloadVocabularyDictationTaskPdf(task.id, kind, target)
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : mode === 'save-as' ? '听写资料另存为失败，请重试。' : '听写资料下载失败，请重试。')
     } finally {
       setBusy(false)
+      setDownloadingKey('')
     }
   }
 
@@ -892,12 +899,14 @@ export function VocabularyDictationWorkbench({
       })
       if (!target) return
       setBusy(true)
+      setDownloadingKey(`task:${task.id}`)
       await downloadVocabularyDictationTaskMaterialsZip([task.id], VOCABULARY_MATERIAL_KINDS, target)
       setMessage(target.kind === 'file' || target.kind === 'directory' ? '听写全套资料已保存。' : '听写全套资料已开始下载。')
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '听写全套资料生成失败。')
     } finally {
       setBusy(false)
+      setDownloadingKey('')
     }
   }
 
@@ -905,9 +914,9 @@ export function VocabularyDictationWorkbench({
     return (
       <>
         <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'cards')} onSaveAs={() => void downloadTaskMaterial(task, 'cards', 'save-as')}><Card size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</DownloadOption>
-        <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><Download size={14} />{publicHref ? '听写纸（含二维码）' : '听写纸'}</DownloadOption>
+        <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><PaperStudent size={14} />{publicHref ? '听写纸（含二维码）' : '听写纸'}</DownloadOption>
         <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'answer')} onSaveAs={() => void downloadTaskMaterial(task, 'answer', 'save-as')}><PaperCheck size={14} />教师答案</DownloadOption>
-        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'handwriting')} onSaveAs={() => void downloadTaskMaterial(task, 'handwriting', 'save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
+        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'handwriting')} onSaveAs={() => void downloadTaskMaterial(task, 'handwriting', 'save-as')}><PaperLined size={14} />衡水体练字纸</DownloadOption>
         <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadTaskBundle(task)} onSaveAs={() => void downloadTaskBundle(task, 'save-as')}><Download size={14} />下载全套（4份）</DownloadOption>
       </>
     )
@@ -966,7 +975,7 @@ export function VocabularyDictationWorkbench({
         {(message || error) && (
           <div className={error ? 'dictation-notice is-error' : 'dictation-notice'} role={error ? 'alert' : 'status'}>
             <span>{error || message}</span>
-            <button type="button" aria-label="关闭提示" onClick={() => { setError(''); setMessage('') }}><X size={15} /></button>
+            <button type="button" aria-label="关闭提示" onClick={() => { setError(''); setMessage('') }}><X size={16} /></button>
           </div>
         )}
 
@@ -993,7 +1002,7 @@ export function VocabularyDictationWorkbench({
                     <div className="dictation-created-actions">
                       {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link size={14} />打开听写</a>}
                       <details className="dictation-download-menu">
-                        <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                        <summary {...iconMotionInput}><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<DisclosureIcon size={14} /></summary>
                         <DownloadMenuItems>
                           {renderTaskDownloadOptions(task, publicHref)}
                         </DownloadMenuItems>
@@ -1043,7 +1052,7 @@ export function VocabularyDictationWorkbench({
                     </span>
                   </label>
                 )
-              }) : <div className="dictation-empty-state"><Card size={28} /><h2>没有符合条件的词组</h2><p>换一个搜索词或日期范围。</p></div>}
+              }) : <div className="dictation-empty-state"><Card size={32} /><h2>没有符合条件的词组</h2><p>换一个搜索词或日期范围。</p></div>}
             </FluidHoverList>
 
             {library.total > library.pageSize && (
@@ -1067,7 +1076,7 @@ export function VocabularyDictationWorkbench({
                     <label><span>打印标题</span><input value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} /></label>
                     <label><span>听写标题</span><input value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} /></label>
                     <fieldset><legend>口音</legend><button type="button" className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
-                    <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={15} />打乱词序</label>
+                    <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={16} />打乱词序</label>
                   </div>
                 </details>
                 <div className="dictation-selection-actions">
@@ -1137,7 +1146,7 @@ export function VocabularyDictationWorkbench({
                           <div>
                             {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link size={14} />打开听写</a>}
                             <details className="dictation-download-menu">
-                              <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                              <summary {...iconMotionInput}><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<DisclosureIcon size={14} /></summary>
                               <DownloadMenuItems>
                                 {renderTaskDownloadOptions(task, publicHref)}
                                 <button className="dictation-download-action" type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void toggleTaskShare(task) }}>{publicHref ? '撤销二维码' : <><QrCode size={14} />生成二维码</>}</button>
@@ -1149,7 +1158,7 @@ export function VocabularyDictationWorkbench({
                     })}</div>
                   </section>
                 )
-              })}</div> : <div className="dictation-empty-state"><ListChecks size={28} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
+              })}</div> : <div className="dictation-empty-state"><ListChecks size={32} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
             </div>
 
             {selectedTasks.length > 0 && (
@@ -1161,7 +1170,7 @@ export function VocabularyDictationWorkbench({
                 <fieldset><legend>口音</legend><button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
                 <div className="dictation-batch-export-actions">
                   <button type="button" className="is-primary" disabled={busy} onClick={() => void exportSelectedTasksByDate()}><QrCode size={16} />合并导出听写纸</button>
-                  <button type="button" disabled={busy} onClick={() => void exportSelectedTasksByDate('save-as')}><Save size={15} />另存到文件夹…</button>
+                  <button type="button" disabled={busy} onClick={() => void exportSelectedTasksByDate('save-as')}><Save size={16} />另存到文件夹…</button>
                 </div>
                 <button type="button" onClick={() => setSelectedTaskIds([])}>取消选择</button>
               </aside>
@@ -1187,13 +1196,13 @@ export function VocabularyDictationWorkbench({
                       {record.status !== 'void' && <button type="button" onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续' : '查看结果'}</button>}
                       {record.status === 'completed' && counts.wrong > 0 && (
                         <details className="dictation-download-menu">
-                          <summary><Download size={14} />下载本轮错词<ChevronDown size={14} /></summary>
+                          <summary {...iconMotionInput}><DownloadFeedbackIcon size={14} working={downloadingKey === `meaning:${record.id}`} />下载本轮错词<DisclosureIcon size={14} /></summary>
                           <DownloadMenuItems>
                             <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'cards', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'cards', 'save-as')}><Card size={14} />单词卡</DownloadOption>
-                            <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'dictation', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'dictation', 'save-as')}><Download size={14} />听写纸</DownloadOption>
+                            <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'dictation', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'dictation', 'save-as')}><PaperStudent size={14} />听写纸</DownloadOption>
                             <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'answer', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'answer', 'save-as')}><PaperCheck size={14} />教师答案</DownloadOption>
-                            <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
-                            <DownloadOption label="每词写1遍练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download', 'single')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as', 'single')}><Printer size={14} />练字纸（每词写1遍）</DownloadOption>
+                            <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as')}><PaperLined size={14} />衡水体练字纸</DownloadOption>
+                            <DownloadOption label="每词写1遍练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download', 'single')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as', 'single')}><PaperLined size={14} />练字纸（每词写1遍）</DownloadOption>
                             <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'bundle', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'bundle', 'save-as')}><Download size={14} />下载全套（4份）</DownloadOption>
                           </DownloadMenuItems>
                         </details>
@@ -1215,7 +1224,7 @@ export function VocabularyDictationWorkbench({
                   </details>
                 </article>
               )
-            }) : <div className="dictation-empty-state"><PaperCheck size={28} /><h2>{historyFilter === 'meaning' ? '还没有认词记录' : '还没有历史听写'}</h2><p>{historyFilter === 'meaning' ? '完成认词后会自动保留。' : '旧听写结果会只读保留在这里。'}</p></div>}
+            }) : <div className="dictation-empty-state"><PaperCheck size={32} /><h2>{historyFilter === 'meaning' ? '还没有认词记录' : '还没有历史听写'}</h2><p>{historyFilter === 'meaning' ? '完成认词后会自动保留。' : '旧听写结果会只读保留在这里。'}</p></div>}
           </section>
         )}
 
@@ -1231,22 +1240,22 @@ export function VocabularyDictationWorkbench({
             <div className="dictation-suggestion-control dictation-suggestion-control-row">
               {pausedReviewCount > 0 && <button type="button" aria-pressed={showPausedReview} onClick={() => setShowPausedReview((current) => !current)}>{showPausedReview ? '隐藏' : '显示'}已暂停（{pausedReviewCount}）</button>}
               <label>推荐下一轮 <input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
-              <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={15} />选出单词</button>
+              <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={16} />选出单词</button>
             </div>
 
             {suggestion.length > 0 && (
               <aside className="dictation-suggestion-panel">
                 <div><strong>推荐 {suggestion.length} 词</strong><span>确认名单后直接开始认词复习。</span></div>
                 <ol>{suggestion.map((entry) => <li key={entry.id}><span>{entry.headword}</span><small>{entry.reason}</small></li>)}</ol>
-                <div><button type="button" className="is-primary" onClick={() => startMeaningReview(suggestion)}><Eye size={15} />开始认词复习</button><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><QrCode size={15} />生成听写</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
+                <div><button type="button" className="is-primary" onClick={() => startMeaningReview(suggestion)}><Eye size={16} />开始认词复习</button><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><QrCode size={16} />生成听写</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
               </aside>
             )}
 
             {selectedReviewWords.length > 0 && (
               <div className="dictation-review-actions">
                 <span>已选 {selectedReviewWords.length} 词</span>
-                <button type="button" className="is-primary" onClick={() => startMeaningReview(selectedReviewWords)} disabled={busy}><Eye size={15} />开始认词复习</button>
-                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewWords)} disabled={busy}><QrCode size={15} />生成听写</button>
+                <button type="button" className="is-primary" onClick={() => startMeaningReview(selectedReviewWords)} disabled={busy}><Eye size={16} />开始认词复习</button>
+                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewWords)} disabled={busy}><QrCode size={16} />生成听写</button>
                 <button type="button" onClick={() => setSelectedReviewIds([])}>取消</button>
               </div>
             )}
@@ -1267,7 +1276,7 @@ export function VocabularyDictationWorkbench({
                     </div>
                 ))}
               </div>
-            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{reviewMode === 'all' ? '现在没有待复习单词' : '现在没有常错词'}</h2><p>认词时忘记的词会自动出现在这里。</p></div>}
+            ) : <div className="dictation-empty-state"><Check size={32} /><h2>{reviewMode === 'all' ? '现在没有待复习单词' : '现在没有常错词'}</h2><p>认词时忘记的词会自动出现在这里。</p></div>}
           </section>
         )}
       </main>

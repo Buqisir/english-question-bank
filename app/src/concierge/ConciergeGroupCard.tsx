@@ -13,7 +13,9 @@
  */
 
 import { type MouseEvent, type ReactNode } from 'react'
-import { ReadingAnalysis, Check, Paper, Papers, Plus } from '../icons'
+import { ReadingAnalysis, Paper, Papers } from '../icons'
+import { DraftAddIcon } from '../icons/MotionIcons'
+import { iconMotionInput } from '../icons/motionInput'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { buildTopicText, compactPassageTitle, compactSummary } from './passageText.ts'
 import { ConciergeGroupRowMenu, type ConciergeGroupRowMenuItem } from './ConciergeGroupRowMenu.tsx'
@@ -184,6 +186,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           <button
             type="button"
             className="concierge-group-row-icon concierge-action-add"
+            {...iconMotionInput}
             onClick={(event) => {
               event.stopPropagation()
               onAdd(group)
@@ -194,13 +197,10 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
             title={draftButtonTitle}
           >
             <span className="visually-hidden">{draftButtonLabel}</span>
-            {draftState === 'in_current_draft' ? (
-              <span className="concierge-group-row-icon-mark">
-                <Check size={16} aria-hidden="true" />
-              </span>
-            ) : (
-              <Plus size={16} aria-hidden="true" />
-            )}
+            {/* 同一个元素在两态之间切换，过渡才会播；圆底是“已在草稿卷”的按下态，直接到位。 */}
+            <span className={draftState === 'in_current_draft' ? 'concierge-group-row-icon-mark' : 'concierge-group-row-icon-glyph'}>
+              <DraftAddIcon size={16} done={draftState === 'in_current_draft'} />
+            </span>
           </button>
           <ConciergeGroupRowMenu items={menuItems} />
         </div>

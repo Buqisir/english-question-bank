@@ -57,7 +57,7 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { BoardList, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
+import { BoardList, Presentation, RefreshCw, Scissors } from '../../icons'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
@@ -90,7 +90,7 @@ import {
 } from '../../../../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
-import { DisclosureIcon } from '../../icons/MotionIcons'
+import { DisclosureIcon, DownloadFeedbackIcon, DraftAddIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
@@ -3122,6 +3122,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                     ? ' paper-browse-gutter-add--disabled'
                     : ''
                 }`}
+                {...iconMotionInput}
                 onClick={() => onAddGroupsToBasket([card])}
                 disabled={card.draftPaperButtonState === 'disabled'}
                 title={
@@ -3130,18 +3131,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                     : undefined
                 }
               >
-                {card.draftPaperButtonState === 'in_current_draft' ? (
-                  <>
-                    <Scissors size={16} variant="fill" />
-                    已剪入
-                  </>
-                ) : card.draftPaperButtonState === 'disabled' ? (
-                  <>暂不可组卷</>
-                ) : (
-                  <>
-                    <Plus size={16} aria-hidden="true" />
-                    加入
-                  </>
+                {card.draftPaperButtonState !== 'disabled' && (
+                  <DraftAddIcon size={16} cut done={card.draftPaperButtonState === 'in_current_draft'} />
+                )}
+                {card.draftPaperButtonState === 'disabled' ? '暂不可组卷' : (
+                  // 两段文字叠在同一格里，按钮按长的那段留宽，切换时不跳；不显示的那段 visibility: hidden，不进可访问名称。
+                  <span className="paper-browse-gutter-add-label">
+                    <span className="paper-browse-gutter-add-label-idle">剪入</span>
+                    <span className="paper-browse-gutter-add-label-done">已剪入</span>
+                  </span>
                 )}
               </button>
             </div>
@@ -3551,7 +3549,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 })
               }}
             >
-              <RefreshCw aria-hidden="true" size={15} />
+              <RefreshCw aria-hidden="true" size={16} />
               {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
             </button>
             <span className="similar-cta-why">——从库里配同配方的相似题</span>
@@ -4022,7 +4020,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         disabled={analysisPdfBusy || !pdfEdition}
         onClick={() => void downloadPaperProduct()}
       >
-        <PaperDownload size={16} />
+        <DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />
         {analysisPdfBusy ? '生成 PDF 中…' : '下载 PDF'}
       </button>
       {pdfProductsError && <span role="alert">{pdfProductsError}{' '}
@@ -4255,7 +4253,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
           disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
         >
-          <BoardList size={15} />
+          <BoardList size={16} />
           <span>草稿卷 · {currentDraftGroupCount} 题组</span>
         </button>
       )}

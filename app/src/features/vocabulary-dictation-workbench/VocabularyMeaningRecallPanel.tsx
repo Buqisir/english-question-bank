@@ -1,23 +1,25 @@
 import {
   Card,
   Check,
-  ChevronDown,
   Download,
   Eye,
   EyeOff,
   PaperCheck,
+  PaperLined,
+  PaperStudent,
   Play,
-  Printer,
   QrCode,
   RotateCcw,
   Save,
   Shuffle,
   Sparkles,
-  Volume,
   X,
 } from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { useAudioIconState } from '../../hooks/useAudioIconState'
+import { DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -115,6 +117,8 @@ export function VocabularyMeaningRecallPanel({
   const [suggestion, setSuggestion] = useState<VocabularyMeaningSuggestionDto[]>([])
   const [revealWrong, setRevealWrong] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [downloading, setDownloading] = useState(false)
+  const audioIcon = useAudioIconState()
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [error, setError] = useState('')
   const [dictationTitle, setDictationTitle] = useState('')
@@ -413,12 +417,14 @@ export function VocabularyMeaningRecallPanel({
         mimeType: kind === 'bundle' ? 'application/zip' : 'application/pdf',
       })
       if (!target) return
+      setDownloading(true)
       if (kind === 'bundle') await downloadVocabularyMeaningRecallRecordMaterialsZip(record.id, accent, target)
       else await downloadVocabularyMeaningRecallRecordPdf(record.id, accent, kind, target, handwritingMode)
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '本轮错词资料下载失败。')
     } finally {
       setBusy(false)
+      setDownloading(false)
     }
   }
 
@@ -426,7 +432,7 @@ export function VocabularyMeaningRecallPanel({
     audioRef.current?.pause()
     const audio = new Audio(getVocabularyAudioPath(entry, accent))
     audioRef.current = audio
-    void audio.play().catch(() => setError('这个词的音频暂时无法播放。'))
+    void audioIcon.play(audio).catch(() => setError('这个词的音频暂时无法播放。'))
   }
 
   async function editCompletedResult(entryId: string, result: 'correct' | 'wrong' | 'untested') {
@@ -480,15 +486,15 @@ export function VocabularyMeaningRecallPanel({
             <div className="meaning-recall-reveal">
               <span>{currentEntry.phonetics?.[accent] ?? currentEntry.phonetic}</span>
               <strong>{currentEntry.teachingSense}</strong>
-              <button type="button" onClick={() => playAudio(currentEntry)}><Volume size={17} />播放{accent === 'american' ? '美音' : '英音'}</button>
+              <button type="button" {...iconMotionInput} onClick={() => playAudio(currentEntry)}><VolumeFeedbackIcon size={16} state={audioIcon.state} />播放{accent === 'american' ? '美音' : '英音'}</button>
             </div>
           )}
         </div>
         <footer>
           <button type="button" onClick={undoPrevious} disabled={busy}><RotateCcw size={16} />撤销 <kbd>Delete</kbd></button>
           {!revealWrong ? <>
-            <button type="button" className="is-wrong" onClick={() => markCurrent('wrong')} disabled={busy}><X size={17} />答错 <kbd>Shift</kbd></button>
-            <button type="button" className="is-correct" onClick={() => markCurrent('correct')} disabled={busy}><Check size={17} />答对 <kbd>Enter</kbd></button>
+            <button type="button" className="is-wrong" onClick={() => markCurrent('wrong')} disabled={busy}><X size={16} />答错 <kbd>Shift</kbd></button>
+            <button type="button" className="is-correct" onClick={() => markCurrent('correct')} disabled={busy}><Check size={16} />答对 <kbd>Enter</kbd></button>
           </> : <button type="button" className="is-primary" onClick={continueAfterWrong} disabled={busy}>已讲清，继续 <kbd>Enter</kbd></button>}
         </footer>
       </section>
@@ -529,27 +535,27 @@ export function VocabularyMeaningRecallPanel({
             <button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => onAccentChange('british')}>英音</button>
           </fieldset>
           <details className="dictation-download-menu meaning-recall-download-menu">
-            <summary><Download size={16} />下载本轮错词<ChevronDown size={14} aria-hidden="true" /></summary>
+            <summary {...iconMotionInput}><DownloadFeedbackIcon size={16} working={downloading} />下载本轮错词<DisclosureIcon size={14} /></summary>
             <FluidHoverList as="div" className="dictation-download-items" axis="y" itemSelector=".dictation-download-option">
               {([
                 ['cards', '单词卡', <Card size={14} key="cards" />],
-                ['dictation', '听写纸', <Download size={14} key="dictation" />],
+                ['dictation', '听写纸', <PaperStudent size={14} key="dictation" />],
                 ['answer', '教师答案', <PaperCheck size={14} key="answer" />],
-                ['handwriting', '衡水体练字纸', <Printer size={14} key="handwriting" />],
+                ['handwriting', '衡水体练字纸', <PaperLined size={14} key="handwriting" />],
               ] as const).map(([kind, label, icon]) => (
                 <div className="dictation-download-option" key={kind}>
                   <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, kind, 'download')}>{icon}{label}</button>
-                  <button type="button" className="dictation-save-as-button" aria-label={`${label}另存为`} disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, kind, 'save-as')}><Save size={13} />另存为…</button>
+                  <button type="button" className="dictation-save-as-button" aria-label={`${label}另存为`} disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, kind, 'save-as')}><Save size={12} />另存为…</button>
                 </div>
               ))}
               <div className="dictation-download-option">
-                <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'download', 'single')}><Printer size={14} />练字纸（每词写1遍）</button>
-                <button type="button" className="dictation-save-as-button" aria-label="每词写1遍练字纸另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'save-as', 'single')}><Save size={13} />另存为…</button>
+                <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'download', 'single')}><PaperLined size={14} />练字纸（每词写1遍）</button>
+                <button type="button" className="dictation-save-as-button" aria-label="每词写1遍练字纸另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'save-as', 'single')}><Save size={12} />另存为…</button>
               </div>
               <div className="dictation-download-divider" />
               <div className="dictation-download-option">
                 <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'bundle', 'download')}><Download size={14} />下载全套（4份）</button>
-                <button type="button" className="dictation-save-as-button" aria-label="全套错词资料另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'bundle', 'save-as')}><Save size={13} />另存为…</button>
+                <button type="button" className="dictation-save-as-button" aria-label="全套错词资料另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'bundle', 'save-as')}><Save size={12} />另存为…</button>
               </div>
             </FluidHoverList>
           </details>
@@ -587,7 +593,7 @@ export function VocabularyMeaningRecallPanel({
           {!selectedSets.length && <span>不会改动原词组。</span>}
         </div>
         <label>抽 <input type="number" min="1" max="60" value={target} onChange={(event) => setTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
-        <fieldset><legend>顺序</legend><button type="button" className={orderMode === 'random' ? 'is-selected' : ''} onClick={() => setOrderMode('random')}><Shuffle size={15} />随机</button><button type="button" className={orderMode === 'source' ? 'is-selected' : ''} onClick={() => setOrderMode('source')}>原顺序</button></fieldset>
+        <fieldset><legend>顺序</legend><button type="button" className={orderMode === 'random' ? 'is-selected' : ''} onClick={() => setOrderMode('random')}><Shuffle size={16} />随机</button><button type="button" className={orderMode === 'source' ? 'is-selected' : ''} onClick={() => setOrderMode('source')}>原顺序</button></fieldset>
         {selectedSets.length
           ? <button type="button" className="is-primary" disabled={busy} onClick={() => void startRecall(selectedEntries.slice(0, target), selectedSets.map((set) => set.id))}><Eye size={16} />开始</button>
           : <button type="button" onClick={onNeedSets}><EyeOff size={16} />选择词组</button>}

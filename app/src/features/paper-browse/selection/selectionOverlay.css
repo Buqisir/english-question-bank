@@ -614,14 +614,6 @@
   margin-left: 22px;
 }
 
-.paper-dictionary-rare-toggle svg {
-  transition: transform var(--motion-fast) var(--ease-out);
-}
-
-.paper-dictionary-rare-toggle[aria-expanded="true"] svg {
-  transform: rotate(180deg);
-}
-
 .paper-dictionary-detail-toggle {
   margin-top: 12px;
 }
@@ -753,14 +745,6 @@
   font-size: var(--eqb-font-size-xs, 12px);
 }
 
-.paper-dictionary-credits-toggle svg {
-  transition: transform var(--motion-fast) var(--ease-out);
-}
-
-.paper-dictionary-credits-toggle[aria-expanded="true"] svg {
-  transform: rotate(180deg);
-}
-
 .paper-dictionary-credits-body {
   grid-column: 1 / -1;
 }
@@ -787,8 +771,6 @@
   .paper-selection-card,
   .paper-selection-spinner,
   .paper-selection-kicker-icon circle,
-  .paper-dictionary-credits-toggle svg,
-  .paper-dictionary-rare-toggle svg,
   .paper-sentence-analysis,
   .paper-sentence-analysis .sa-token,
   .paper-sentence-analysis .sa-gap,

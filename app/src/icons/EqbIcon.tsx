@@ -1,4 +1,5 @@
 import type { ReactNode, SVGProps } from 'react'
+import { derivedStrokeWidth } from './strokeTiers'
 
 export type EqbIconVariant = 'line' | 'fill'
 
@@ -10,11 +11,6 @@ export type EqbIconProps = Omit<SVGProps<SVGSVGElement>, 'color'> & {
 }
 
 type EqbIconBaseProps = Omit<EqbIconProps, 'variant'> & { children: ReactNode }
-
-function derivedStrokeWidth(size: number | string): number {
-  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
-  return Number.isFinite(numericSize) && numericSize < 24 ? 2.25 : 2.75
-}
 
 export function EqbIcon({
   size = 24,
