@@ -367,6 +367,11 @@ try {
       // 第 9 组：听写清单同一支笔、方框 6.25；配色按 G2 放大 1.05 摆正。
       if (sample.name === 'list-checks' && (/stroke-width=|data-stroke-small/.test(sample.line.replace(/^<svg[^>]*>/, '')) || (sample.line.match(/width="6.25" height="6.25"/g) ?? []).length !== 2)) failures.push(`list-checks/${sample.size}: one pen, 6.25 boxes`)
       if (sample.name === 'palette' && !sample.line.includes('M10.628 4.262 C')) failures.push(`palette/${sample.size}: G2 ×1.05 about the ink centre`)
+      // 第 10 组之后全套同一支笔：任何字形内部都不再有局部线宽或嵌套变换。
+      if (/stroke-width=|<g /.test(sample.line.replace(/^<svg[^>]*>/, ''))) failures.push(`${sample.name}/${sample.size}: one pen — no local stroke widths or nested transforms`)
+      if (sample.name === 'key' && !sample.line.includes('M10.45 13.55 L20 4')) failures.push(`key/${sample.size}: ① diagonal key`)
+      if (sample.name === 'sparkles' && !sample.line.includes('M18.75 3 V6.5 M17 4.75 H20.5')) failures.push(`sparkles/${sample.size}: ② small twinkle`)
+      if (sample.name === 'presentation' && /fill="currentColor"/.test(sample.line)) failures.push(`presentation/${sample.size}: ③ outlined head`)
       if (sample.name === 'move' && /<g/.test(sample.line.replace(/^<svg[^>]*>/, ''))) failures.push(`move/${sample.size}: translations baked into coordinates`)
       if (sample.name === 'scissors') {
         // 第 6 组 B：H4.2 骨架，刀刃是沿刃脊的一笔（不再是实心叶子），刃尖再长 1；旋转已写进坐标。
