@@ -39,7 +39,7 @@ try {
     const displayRelief = (stroke) => Math.max(0, 2.25 - stroke)
     // Independent semantic expectations: these dots are the glyph, not decoration.
     // EyeOff B omits its pupil; ListMusic E2 uses an ear with no notehead.
-    const dots = { ellipsis: 3, grip: 6, eye: 1, 'eye-off': 0, 'info-circle': 1, 'help-circle': 1, 'list-music': 0 }
+    const dots = { ellipsis: 3, grip: 6, eye: 1, 'eye-off': 0, 'info-circle': 1, 'help-circle': 1, 'alert-triangle': 1, 'list-music': 0 }
     for (const sample of samples) {
       const parse = (markup) => parser.parseFromString(markup, 'image/svg+xml').documentElement
       const line = parse(sample.line)
@@ -172,43 +172,29 @@ try {
         line.remove()
       }
       if (sample.name === 'headphones') {
-        // 第 4 组 R3「缝底封圆」：N2 现版的头梁勾进内倾实心耳罩；缝放宽，缝底用整半圆封住，不收成针尖。
+        // 全套合一 H2「内倾空心」（Owner 2026-11-03）：一条开口头梁 + 两只同一支笔的空心耳罩，耳罩向里倾，头梁落进耳罩外侧。
         document.body.appendChild(line)
-        const [band, ...solids] = line.querySelectorAll('path')
-        const pads = solids.filter((p) => !p.dataset.part), seals = solids.filter((p) => p.dataset.part === 'seal')
-        if (line.children.length !== 5 || pads.length !== 2 || seals.length !== 2 || solids.some((p) => p.getAttribute('fill') !== 'currentColor' || p.getAttribute('stroke') !== 'none')) {
-          failures.push(`headphones/${sample.size}: R3 has one band, two solid pads and two seals`)
+        const [band, ...cups] = line.querySelectorAll('path')
+        const tint = parse(sample.fill).querySelectorAll('g[fill-opacity="0.16"] path')
+        if (line.children.length !== 3 || cups.length !== 2 || [band, ...cups].some((p) => p.hasAttribute('fill') || p.hasAttribute('stroke-width'))) {
+          failures.push(`headphones/${sample.size}: H2 has one band and two hollow cups drawn with the shared pen`)
         } else {
-          if (band.hasAttribute('stroke-width') || /[zZ]/.test(band.getAttribute('d'))) failures.push(`headphones/${sample.size}: band is open and follows the size-tier stroke`)
-          if (sample.fill !== sample.line) failures.push(`headphones/${sample.size}: both states keep the same solid drawing`)
-          const at = (shape, x, y) => shape.isPointInFill(new DOMPoint(x, y))
-          const ink = (x, y) => band.isPointInStroke(new DOMPoint(x, y)) || solids.some((p) => at(p, x, y))
-          const centerAt = (pad, y) => {
-            const xs = Array.from({ length: 481 }, (_, i) => i / 20).filter((x) => at(pad, x, y))
-            return (Math.min(...xs) + Math.max(...xs)) / 2
+          if (/[zZ]/.test(band.getAttribute('d'))) failures.push(`headphones/${sample.size}: band stays open`)
+          if (cups.some((cup) => !/[zZ]\s*$/.test(cup.getAttribute('d')))) failures.push(`headphones/${sample.size}: each cup is a closed outline`)
+          if (tint.length !== 2) failures.push(`headphones/${sample.size}: the fill state tints only the two cups`)
+          const xs = Array.from({ length: 481 }, (_, i) => i / 20)
+          const centerAt = (cup, y) => {
+            const inside = xs.filter((x) => cup.isPointInFill(new DOMPoint(x, y)))
+            return (Math.min(...inside) + Math.max(...inside)) / 2
           }
-          for (const [i, pad] of pads.entries()) {
-            const shift = (centerAt(pad, 20) - centerAt(pad, 15)) * (i === 0 ? 1 : -1)
-            if (shift < 0.7 || shift > 1.05) failures.push(`headphones/${sample.size}: both pads must lean inward gently (${shift})`)
+          for (const [i, cup] of cups.entries()) {
+            const shift = (centerAt(cup, 19) - centerAt(cup, 15)) * (i === 0 ? 1 : -1)
+            if (shift < 0.4 || shift > 1.0) failures.push(`headphones/${sample.size}: both cups lean inward gently (${shift})`)
             const end = band.getPointAtLength(i === 0 ? 0 : band.getTotalLength())
-            if (!at(pad, end.x, end.y) && !at(seals[i], end.x, end.y)) failures.push(`headphones/${sample.size}: band hook must end inside the pad or its seal`)
-          }
-          // 缝：上段是一道干净的缝（不再是 0.9 的发丝），下段被封死，不留针尖。
-          const xs = Array.from({ length: 481 }, (_, i) => i / 40)
-          const channel = (y) => {
-            const bandEdge = Math.max(...xs.filter((x) => x < 6 && band.isPointInStroke(new DOMPoint(x, y))))
-            const padEdge = Math.min(...xs.filter((x) => at(pads[0], x, y)))
-            return xs.filter((x) => x > bandEdge && x < padEdge && !ink(x, y)).length / 40
-          }
-          for (const y of [14, 15]) {
-            const gap = channel(y)
-            if (gap < 1.0 || gap > 1.9) failures.push(`headphones/${sample.size}: keep a clean side channel at y=${y} (${gap})`)
-          }
-          for (const y of [17.6, 18, 18.4]) {
-            if (channel(y) > 0) failures.push(`headphones/${sample.size}: seal the channel below the round bottom, no needle at y=${y}`)
+            if (!cup.isPointInStroke(end)) failures.push(`headphones/${sample.size}: band must land on the cup's outer side`)
           }
           for (let i = 0; i <= 100; i++) {
-            for (const [left, right, reverse] of [[band, band, true], [pads[0], pads[1], false]]) {
+            for (const [left, right, reverse] of [[band, band, true], [cups[0], cups[1], false]]) {
               const a = left.getPointAtLength(left.getTotalLength() * i / 100)
               const b = right.getPointAtLength(right.getTotalLength() * (reverse ? 1 - i / 100 : i / 100))
               if (Math.abs(a.x + b.x - 24) > 0.02 || Math.abs(a.y - b.y) > 0.02) failures.push(`headphones/${sample.size}: preserve frontal mirror symmetry`)
@@ -216,6 +202,11 @@ try {
           }
         }
         line.remove()
+      }
+      if (sample.name === 'alert-triangle') {
+        // 全套合一 ③：三角闭合，感叹号整体收在三角里，点与「信息」同为实心点。
+        const [outline, bar] = line.querySelectorAll('path')
+        if (line.children.length !== 3 || !/[zZ]\s*$/.test(outline?.getAttribute('d') ?? '') || (outline.getAttribute('d').match(/[mM]/g) ?? []).length !== 1 || !bar) failures.push(`alert-triangle/${sample.size}: closed triangle, one bar and one dot`)
       }
       if (sample.name === 'trash') {
         document.body.appendChild(line)
@@ -437,7 +428,8 @@ try {
       if (!repaired.has(icon.name)) continue
       // 第 7 组：全屏 / 退出全屏的框内箭头改为同一支笔，2.75 审计档按线宽差放宽（同复制、关闭通知）。
       // 第 8 组：人物（参考图版）头与身体中心距 3.75，同样只在 2.75 审计档按线宽差放宽。
-      const gapFloor = ['maximize', 'minimize', 'user', 'users', 'user-plus', 'user-check'].includes(icon.name) ? 1.5 - Math.max(0, stroke - 2.25) - 0.02 : 1.5
+      // 全套合一 ③：警告三角闭合后感叹号在三角内，2.25 档最小缝 1.53；2.75 审计档同样按线宽差放宽。
+      const gapFloor = ['maximize', 'minimize', 'user', 'users', 'user-plus', 'user-check', 'alert-triangle'].includes(icon.name) ? 1.5 - Math.max(0, stroke - 2.25) - 0.02 : 1.5
       assert.ok(icon.gap === null || icon.gap >= gapFloor, `${icon.name}/${stroke}: gap ${icon.gap}`)
       assert.ok(icon.holes.filter((hole) => hole.area > 1).every((hole) => hole.width >= 2.25), `${icon.name}/${stroke}: narrow hole`)
     }
