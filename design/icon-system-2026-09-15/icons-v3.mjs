@@ -575,6 +575,8 @@ const G2 = {
   // 第 6 组「操作与导航」（Owner 2026-11-02）：搜索 / 放大 / 缩小 / 管理略超同档，以中心收 0.99；撤销、漏斗偏小且偏位，[k, 原中心] 放大并摆正。
   // 查词、阅读解析直接写成搜索收完后的同一只镜，不进本表。
   search: 0.99, 'zoom-in': 0.99, 'zoom-out': 0.99, settings: 0.99, 'rotate-ccw': [1.135, [12, 11.36]], filter: [1.09, [12, 12.11]],
+  // 第 8 组「人与时间」（Owner 2026-11-03）：日历外框超出同档，以中心收 0.904；时钟、历史、沙漏不动；人物是组合形，不进本表。
+  calendar: 0.904,
 }
 const merged = { ...generic, ...domain, ...extended }
 for (const [name, v] of Object.entries(G2)) merged[name] = Array.isArray(v) ? sized(v[0], merged[name], v[1]) : sized(v, merged[name])

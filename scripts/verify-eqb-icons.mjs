@@ -361,6 +361,9 @@ try {
       }
       if (sample.name === 'arrow-left-right' && !sample.line.includes('M8.25 7.25 L3.5 12 L8.25 16.75 M15.75 7.25 L20.5 12 L15.75 16.75')) failures.push(`arrow-left-right/${sample.size}: ① wings 4.75`)
       if (sample.name === 'corner-down-right' && !sample.line.includes('M8.75 15.125L4.5 10.875L8.75 6.625')) failures.push(`corner-down-right/${sample.size}: ② centred reply arrow`)
+      // 第 8 组：人物按参考图重画——闭合圆顶身体 + 平底；添加 / 已批改 / 班级共用同一个前排人物。
+      if (['user', 'users', 'user-plus', 'user-check'].includes(sample.name) && !/A1\.1 1\.1 0 0 0 [\d.]+ 19\.4V18\.2/.test(sample.line.replace(/\s+/g, ' '))) failures.push(`${sample.name}/${sample.size}: closed flat-based body`)
+      if (['users', 'user-plus', 'user-check'].includes(sample.name) && !sample.line.includes('M4.1 20.5H13.1')) failures.push(`${sample.name}/${sample.size}: shared front person`)
       if (sample.name === 'move' && /<g/.test(sample.line.replace(/^<svg[^>]*>/, ''))) failures.push(`move/${sample.size}: translations baked into coordinates`)
       if (sample.name === 'scissors') {
         // 第 6 组 B：H4.2 骨架，刀刃是沿刃脊的一笔（不再是实心叶子），刃尖再长 1；旋转已写进坐标。
@@ -425,7 +428,8 @@ try {
       }
       if (!repaired.has(icon.name)) continue
       // 第 7 组：全屏 / 退出全屏的框内箭头改为同一支笔，2.75 审计档按线宽差放宽（同复制、关闭通知）。
-      const gapFloor = ['maximize', 'minimize'].includes(icon.name) ? 1.5 - Math.max(0, stroke - 2.25) - 0.02 : 1.5
+      // 第 8 组：人物（参考图版）头与身体中心距 3.75，同样只在 2.75 审计档按线宽差放宽。
+      const gapFloor = ['maximize', 'minimize', 'user', 'users', 'user-plus', 'user-check'].includes(icon.name) ? 1.5 - Math.max(0, stroke - 2.25) - 0.02 : 1.5
       assert.ok(icon.gap === null || icon.gap >= gapFloor, `${icon.name}/${stroke}: gap ${icon.gap}`)
       assert.ok(icon.holes.filter((hole) => hole.area > 1).every((hole) => hole.width >= 2.25), `${icon.name}/${stroke}: narrow hole`)
     }
