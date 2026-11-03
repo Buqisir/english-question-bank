@@ -186,6 +186,10 @@ button[data-icon-motion='pointer']:active .eqb-motion-pin svg {
   .eqb-motion-copy:not([data-state='done']) .eqb-copy-paper {
     transition-delay: var(--motion-micro) !important;
   }
+  /* 平时勾的透明度是 0s 立即到位（揭示靠 transform），这里改成 80ms 淡入，曲线也要跟着换成 ease-out。 */
+  .eqb-motion-copy[data-state='done'] .eqb-reveal {
+    transition-timing-function: var(--ease-out) !important;
+  }
   .eqb-motion-check.is-revealing .eqb-reveal {
     animation: eqb-fade-in var(--motion-micro) var(--ease-out) both;
   }
