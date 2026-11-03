@@ -1,7 +1,6 @@
 import {
   Card,
   Check,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Download,
@@ -20,7 +19,7 @@ import {
   Sparkles,
   X,
 } from '../../icons'
-import { DownloadFeedbackIcon, PinFeedbackIcon } from '../../icons/MotionIcons'
+import { DisclosureIcon, DownloadFeedbackIcon, PinFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
@@ -1003,7 +1002,7 @@ export function VocabularyDictationWorkbench({
                     <div className="dictation-created-actions">
                       {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link size={14} />打开听写</a>}
                       <details className="dictation-download-menu">
-                        <summary><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                        <summary {...iconMotionInput}><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<DisclosureIcon size={14} /></summary>
                         <DownloadMenuItems>
                           {renderTaskDownloadOptions(task, publicHref)}
                         </DownloadMenuItems>
@@ -1147,7 +1146,7 @@ export function VocabularyDictationWorkbench({
                           <div>
                             {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link size={14} />打开听写</a>}
                             <details className="dictation-download-menu">
-                              <summary><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                              <summary {...iconMotionInput}><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<DisclosureIcon size={14} /></summary>
                               <DownloadMenuItems>
                                 {renderTaskDownloadOptions(task, publicHref)}
                                 <button className="dictation-download-action" type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void toggleTaskShare(task) }}>{publicHref ? '撤销二维码' : <><QrCode size={14} />生成二维码</>}</button>
@@ -1197,7 +1196,7 @@ export function VocabularyDictationWorkbench({
                       {record.status !== 'void' && <button type="button" onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续' : '查看结果'}</button>}
                       {record.status === 'completed' && counts.wrong > 0 && (
                         <details className="dictation-download-menu">
-                          <summary><DownloadFeedbackIcon size={14} working={downloadingKey === `meaning:${record.id}`} />下载本轮错词<ChevronDown size={14} /></summary>
+                          <summary {...iconMotionInput}><DownloadFeedbackIcon size={14} working={downloadingKey === `meaning:${record.id}`} />下载本轮错词<DisclosureIcon size={14} /></summary>
                           <DownloadMenuItems>
                             <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'cards', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'cards', 'save-as')}><Card size={14} />单词卡</DownloadOption>
                             <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'dictation', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'dictation', 'save-as')}><PaperStudent size={14} />听写纸</DownloadOption>

@@ -1,7 +1,6 @@
 import {
   Card,
   Check,
-  ChevronDown,
   Download,
   Eye,
   EyeOff,
@@ -19,7 +18,7 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { useAudioIconState } from '../../hooks/useAudioIconState'
-import { DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
+import { DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
@@ -536,7 +535,7 @@ export function VocabularyMeaningRecallPanel({
             <button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => onAccentChange('british')}>英音</button>
           </fieldset>
           <details className="dictation-download-menu meaning-recall-download-menu">
-            <summary><DownloadFeedbackIcon size={16} working={downloading} />下载本轮错词<ChevronDown size={14} aria-hidden="true" /></summary>
+            <summary {...iconMotionInput}><DownloadFeedbackIcon size={16} working={downloading} />下载本轮错词<DisclosureIcon size={14} /></summary>
             <FluidHoverList as="div" className="dictation-download-items" axis="y" itemSelector=".dictation-download-option">
               {([
                 ['cards', '单词卡', <Card size={14} key="cards" />],

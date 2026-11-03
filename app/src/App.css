@@ -1562,14 +1562,6 @@ button:disabled {
   color: var(--ink-strong);
 }
 
-.analysis-disclosure-chevron {
-  transition: transform var(--motion-base) var(--ease-out);
-}
-
-.analysis-disclosure-toggle[aria-expanded='true'] .analysis-disclosure-chevron {
-  transform: rotate(180deg);
-}
-
 .analysis-disclosure-body {
   display: grid;
   gap: 8px;
@@ -4777,7 +4769,6 @@ button:disabled {
     animation: none;
   }
 
-  .analysis-disclosure-chevron,
   .concierge-stage-inner,
   .concierge-thinking-toggle input[type='checkbox'],
   .concierge-thinking-toggle input[type='checkbox']::before,
@@ -5575,6 +5566,11 @@ button:disabled {
 .concierge-group-row-icon[aria-pressed='true'] {
   color: #FFFFFF;
   background: transparent;
+}
+
+.concierge-group-row-icon-glyph {
+  display: grid;
+  place-items: center;
 }
 
 .concierge-group-row-icon-mark {

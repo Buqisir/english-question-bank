@@ -40,7 +40,9 @@
  */
 
 import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
-import { ChevronDown, ChevronRight, ChevronUp, Paper } from '../icons'
+import { ChevronDown, Paper } from '../icons'
+import { DisclosureIcon } from '../icons/MotionIcons'
+import { iconMotionInput } from '../icons/motionInput'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { collectionDate } from './defaultFeed.ts'
 import { paperHeadline } from './paperHeadline.ts'
@@ -266,6 +268,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       // 屏幕阅读器才能区分同名不同年卷。
       aria-label={paper.year ? `${paper.year} 年 ${headline}` : headline}
       onClick={handleRowClick}
+      {...iconMotionInput}
     >
       <div className="concierge-paper-row-head">
       {variant !== 'feed' && (
@@ -289,7 +292,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           aria-label={expanded ? '收起来源卷' : '展开来源卷'}
           title={expanded ? '收起来源卷' : '展开来源卷'}
         >
-          {expanded ? <ChevronDown size={14} aria-hidden="true" /> : <ChevronRight size={14} aria-hidden="true" />}
+          <DisclosureIcon kind="branch" size={14} expanded={expanded} />
         </button>
         <div className="concierge-paper-anchor-text">
           {recentAddition ? (
@@ -373,9 +376,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           </span>
         ) : (
           <span className="concierge-row-expand-hint" aria-hidden="true">
-            {expanded
-              ? <>收起 <ChevronUp size={12} /></>
-              : <>展开题组 <ChevronDown size={12} /></>}
+            {expanded ? '收起' : '展开题组'} <DisclosureIcon size={12} expanded={expanded} />
           </span>
         )}
       </div>

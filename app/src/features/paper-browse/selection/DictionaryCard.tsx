@@ -1,6 +1,6 @@
 import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
-import { ChevronDown, SentenceAnalysis, X } from '../../../icons'
-import { CopyFeedbackIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
+import { SentenceAnalysis, X } from '../../../icons'
+import { CopyFeedbackIcon, DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import type {
   PaperDictionaryEntry,
@@ -276,11 +276,12 @@ function PosBlock({
         <button
           type="button"
           className="paper-dictionary-more paper-dictionary-rare-toggle"
+          {...iconMotionInput}
           aria-expanded={rareOpen}
           onClick={() => setRareOpen((value) => !value)}
         >
           <span>{rareOpen ? '收起' : `更多义项 ${folded.length}`}</span>
-          <ChevronDown size={12} />
+          <DisclosureIcon size={12} expanded={rareOpen} />
         </button>
       ) : null}
     </section>
@@ -492,10 +493,11 @@ export function DictionaryCard({
         <button
           type="button"
           className="paper-dictionary-more paper-dictionary-detail-toggle"
+          {...iconMotionInput}
           aria-expanded={explainAll}
           onClick={() => setExplainAll((value) => !value)}
         >
-          <ChevronDown size={12} />
+          <DisclosureIcon size={12} expanded={explainAll} />
           <span>{explainAll ? '收起解释' : '详细解释'}</span>
         </button>
       ) : null}
@@ -506,12 +508,13 @@ export function DictionaryCard({
         <button
           type="button"
           className="paper-dictionary-more paper-dictionary-credits-toggle"
+          {...iconMotionInput}
           aria-expanded={creditsOpen}
           aria-controls={creditsId}
           onClick={() => setCreditsOpen((value) => !value)}
         >
           <span>署名与隐私</span>
-          <ChevronDown size={12} />
+          <DisclosureIcon size={12} expanded={creditsOpen} />
         </button>
         <div id={creditsId} className="paper-dictionary-credits-body" hidden={!creditsOpen}>
           <p className="paper-dictionary-attribution">

@@ -19,7 +19,7 @@ import { SelectionOverlay } from '/src/features/paper-browse/selection/Selection
 import { ListeningSegmentPlayer } from '/src/features/paper-browse/ListeningSegmentPlayer.tsx';
 import { DictionaryCard } from '/src/features/paper-browse/selection/DictionaryCard.tsx';
 import { useClipboardCopy } from '/src/hooks/useClipboardCopy.ts';
-import { CheckRevealIcon, DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '/src/icons/MotionIcons.tsx';
+import { CheckRevealIcon, DisclosureIcon, DownloadFeedbackIcon, DraftAddIcon, VolumeFeedbackIcon } from '/src/icons/MotionIcons.tsx';
 import { useAudioIconState } from '/src/hooks/useAudioIconState.ts';
 import { NotebookAddButton } from '/src/features/vocabulary-notebook/NotebookAddButton.tsx';
 import { iconMotionInput } from '/src/icons/motionInput.ts';
@@ -44,6 +44,24 @@ function DownloadFixture() {
  const [working, setWorking] = useState(false);
  return h('button', { ...iconMotionInput, type:'button', id:'download-fixture', onClick:()=>setWorking(!working) }, h(DownloadFeedbackIcon, { working }), working ? '正在生成' : '下载');
 }
+function PaperDownloadFixture() {
+ const [working, setWorking] = useState(false);
+ return h('button', { ...iconMotionInput, type:'button', id:'paper-download-fixture', onClick:()=>setWorking(!working) }, h(DownloadFeedbackIcon, { working, icon:'paper' }), working ? '生成 PDF 中…' : '下载 PDF');
+}
+// 原生 details 的下拉菜单（与听写工作台同一写法：箭头不传 expanded，跟随 details[open]）和 B 类层级行。
+function DisclosureFixtures() {
+ const [branch, setBranch] = useState(false);
+ return h('div', { style:{ marginTop:24, display:'flex', gap:24 } },
+  h('details', { className:'dictation-download-menu', id:'menu-fixture' }, h('summary', { ...iconMotionInput }, '下载资料', h(DisclosureIcon, { size:14 })), h('p', null, '菜单内容')),
+  h('button', { ...iconMotionInput, type:'button', id:'branch-fixture', 'aria-expanded':branch, onClick:()=>setBranch(!branch) }, h(DisclosureIcon, { kind:'branch', size:14, expanded:branch }), '来源卷'));
+}
+// 加入草稿卷：window.setDraft[id] 模拟数据刷新带来的变化（不是用户在这个按钮上的操作）。
+window.setDraft = {};
+function DraftFixture({ id, cut = false, initial = false }) {
+ const [done, setDone] = useState(initial);
+ window.setDraft[id] = setDone;
+ return h('button', { ...iconMotionInput, type:'button', id, onClick:()=>setDone(!done) }, h(DraftAddIcon, { done, cut }), done ? (cut ? '已剪入' : '已在草稿卷') : '加入');
+}
 const notebookSegment = (selectedText) => ({ streamId:'s1', start:0, end:selectedText.length, selectedText });
 const newSegment = notebookSegment('fresh'), existingSegment = notebookSegment('known');
 function Fixture() {
@@ -63,7 +81,10 @@ function Fixture() {
   h('div', { style:{ marginTop:24 } }, h(DownloadFixture)),
   h('div', { id:'notebook-new', style:{ maxWidth:340, marginTop:24 } }, h(NotebookAddButton, { paperId:'p1', sourceRevision:'r1', segment:newSegment })),
   h('div', { id:'notebook-existing', style:{ maxWidth:340, marginTop:12 } }, h(NotebookAddButton, { paperId:'p1', sourceRevision:'r1', segment:existingSegment })),
-  h('span', { id:'static-check' }, h(CheckRevealIcon, { reveal:false }))
+  h('span', { id:'static-check' }, h(CheckRevealIcon, { reveal:false })),
+  h('div', { style:{ marginTop:24 } }, h(PaperDownloadFixture)),
+  h(DisclosureFixtures),
+  h('div', { style:{ marginTop:24, display:'flex', gap:12 } }, h(DraftFixture, { id:'draft-new' }), h(DraftFixture, { id:'draft-existing', initial:true }), h(DraftFixture, { id:'draft-cut', cut:true }))
  );
 }
 createRoot(document.getElementById('root')).render(h(Fixture));
@@ -264,6 +285,74 @@ try {
   assert.equal(await notebookNew.locator('.eqb-reveal-in').evaluate(n => getComputedStyle(n).animationName), 'eqb-reveal-counter')
   console.log('PASS notebook: reveal only on saving → added, static check when already added')
 
+  const flip = 'matrix3d(1, 0, 0, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)'
+  const isQuarterTurn = (t) => { const [a, b, c] = (t.match(/^matrix\((.*)\)$/)?.[1] ?? '').split(',').map(Number); return Math.abs(a) < 1e-6 && Math.abs(b - 1) < 1e-6 && Math.abs(c + 1) < 1e-6 }
+  await page.evaluate(() => { window.runs.length = 0 })
+  const menuSummary = page.locator('#menu-fixture > summary'), menuIcon = menuSummary.locator('.eqb-motion-disclosure')
+  assert.equal(await menuIcon.evaluate(n => getComputedStyle(n).transform), 'none', 'rest is transform none (pixel-identical to the static chevron)')
+  await menuSummary.click(); await page.waitForTimeout(250)
+  assert.equal(await page.locator('#menu-fixture').evaluate(n => n.open), true)
+  assert.equal(await menuIcon.evaluate(n => getComputedStyle(n).transform), flip, 'details[open] flips the chevron')
+  assert.ok(await page.evaluate(() => window.runs.some(r => r.property === 'transform' && r.class.includes('eqb-motion-disclosure'))), 'flip is a transition')
+  await menuSummary.click(); await page.waitForTimeout(250)
+  assert.equal(await menuIcon.evaluate(n => getComputedStyle(n).transform), 'none')
+  const credits = page.locator('#dictionary .paper-dictionary-credits-toggle')
+  await credits.click(); await page.waitForTimeout(250)
+  assert.equal(await credits.getAttribute('aria-expanded'), 'true')
+  assert.equal(await credits.locator('.eqb-motion-disclosure').evaluate(n => getComputedStyle(n).transform), flip, 'dictionary credits toggle flips')
+  await credits.click()
+  const branchButton = page.locator('#branch-fixture'), branchIcon = branchButton.locator('.eqb-motion-branch')
+  assert.equal(await branchIcon.evaluate(n => getComputedStyle(n).transform), 'none')
+  await branchButton.click(); await page.waitForTimeout(250)
+  assert.ok(isQuarterTurn(await branchIcon.evaluate(n => getComputedStyle(n).transform)), 'branch chevron turns 90° to point down')
+  assert.ok(await page.evaluate(() => window.runs.some(r => r.property === 'transform' && r.class.includes('eqb-motion-branch'))))
+  await branchButton.focus(); await page.keyboard.press('Enter')
+  assert.equal(await branchIcon.evaluate(n => getComputedStyle(n).transitionDuration), '0s', 'keyboard toggle is instant')
+  console.log('PASS disclosure: details-driven dropdown flip, dictionary toggle, branch 90°, rest none, instant keyboard')
+
+  const draftNew = page.locator('#draft-new'), draftExisting = page.locator('#draft-existing'), draftCut = page.locator('#draft-cut')
+  assert.equal(await draftExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).opacity), '1', 'already in draft shows the check')
+  assert.equal(await draftExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none')
+  assert.equal(await draftExisting.locator('.eqb-add-plus').evaluate(n => getComputedStyle(n).opacity), '0')
+  await page.evaluate(() => { window.runs.length = 0 })
+  await page.evaluate(() => window.setDraft['draft-new'](true))
+  await page.waitForTimeout(50)
+  assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none', 'data-driven change lands immediately')
+  assert.ok(await page.evaluate(() => !window.runs.some(r => (r.class || '').includes('eqb-reveal') || (r.class || '').includes('eqb-add-plus'))), 'no transition without a press on this button')
+  await page.evaluate(() => window.setDraft['draft-new'](false))
+  await page.waitForTimeout(50)
+  await draftNew.click()
+  await page.waitForTimeout(40)
+  const midReveal = await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform)
+  assert.notEqual(midReveal, 'none', 'check is mid-reveal after the press')
+  await page.waitForTimeout(400)
+  assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none')
+  assert.equal(await draftNew.locator('.eqb-add-plus').evaluate(n => getComputedStyle(n).opacity), '0')
+  await draftNew.click(); await page.waitForTimeout(300)
+  assert.equal(await draftNew.locator('.eqb-add-plus').evaluate(n => getComputedStyle(n).opacity), '1', 'rollback returns to the plus')
+  assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).opacity), '0')
+  await draftCut.click()
+  assert.equal(await draftCut.locator('.eqb-reveal').count(), 0, 'cut keeps scissors, no reveal')
+  await page.waitForTimeout(300)
+  assert.equal(await draftCut.locator('.eqb-add-cut').evaluate(n => getComputedStyle(n).opacity), '1')
+  assert.equal(await draftCut.locator('.eqb-add-cut svg').evaluate(n => getComputedStyle(n).transform), 'none')
+  await draftNew.focus(); await page.keyboard.press('Enter')
+  assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transitionDuration), '0s', 'keyboard add is instant')
+  await page.keyboard.press('Enter')
+  console.log('PASS add to draft: reveal only on this press, data changes land instantly, rollback, scissors fade, instant keyboard')
+
+  const paperDownload = page.locator('#paper-download-fixture')
+  const paperPaths = paperDownload.locator('svg > path')
+  await paperDownload.click(); await page.waitForTimeout(400)
+  assert.equal(await paperDownload.locator('.eqb-motion-download').getAttribute('data-loop'), 'on')
+  const paperAnims = await paperPaths.evaluateAll(nodes => nodes.map(n => ({ name:getComputedStyle(n).animationName, transform:getComputedStyle(n).transform })))
+  assert.equal(paperAnims.length, 3)
+  assert.deepEqual(paperAnims.map(a => a.name), ['none', 'none', 'eqb-download-pulse'], 'only the arrow pulses; outline and fold stay')
+  assert.ok(paperAnims.every(a => a.transform === 'none'), 'paper download never displaces')
+  await paperDownload.click(); await page.waitForTimeout(250)
+  assert.equal(await paperPaths.nth(2).evaluate(n => getComputedStyle(n).opacity), '1')
+  console.log('PASS paper download: arrow opacity pulse only, fold and outline still, settle on exit')
+
   await page.emulateMedia({ reducedMotion:'reduce' })
   await download.click(); await page.waitForTimeout(400)
   assert.equal(await arrow.first().evaluate(n => getComputedStyle(n).animationName), 'eqb-download-pulse')
@@ -279,6 +368,24 @@ try {
   assert.equal(await page.locator('#static-check .eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none')
   await page.emulateMedia({ reducedMotion:'no-preference' })
   console.log('PASS reduced motion: download pulse only, wave unchanged, no reveal displacement')
+
+  await page.emulateMedia({ reducedMotion:'reduce' })
+  await branchButton.click()
+  assert.equal(await branchIcon.evaluate(n => getComputedStyle(n).transitionProperty), 'opacity', 'reduced motion: chevron state lands without turning')
+  assert.ok(isQuarterTurn(await branchIcon.evaluate(n => getComputedStyle(n).transform)), 'expanded state is reached on the same frame')
+  await menuSummary.click()
+  assert.equal(await menuIcon.evaluate(n => getComputedStyle(n).transform), flip)
+  await menuSummary.click()
+  await draftNew.click()
+  assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none', 'reduced motion: check fades, no wipe')
+  await page.waitForTimeout(250)
+  assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).opacity), '1')
+  await draftNew.click()
+  await paperDownload.click(); await page.waitForTimeout(300)
+  assert.deepEqual(await paperPaths.evaluateAll(nodes => nodes.map(n => getComputedStyle(n).animationName)), ['none', 'none', 'eqb-download-pulse'])
+  await paperDownload.click()
+  await page.emulateMedia({ reducedMotion:'no-preference' })
+  console.log('PASS reduced motion: disclosure lands instantly, add-to-draft fades, paper download fold stays still')
 
   let pinResponse
   let pinned = false
@@ -345,7 +452,10 @@ try {
   await shareCopy.click()
   await page.evaluate(()=>window.copyRequests[1].reject(new Error('denied')))
   await page.getByRole('button',{name:'复制失败',exact:true}).waitFor()
-  console.log('PASS App vocabulary review: list success and public-link copy failure')
+  const reviewDownloads=page.locator('button:has(.eqb-motion-download)')
+  assert.ok(await reviewDownloads.count()>=1,'review download buttons use the download state icon')
+  assert.ok(await reviewDownloads.locator('.eqb-motion-download').evaluateAll(nodes=>nodes.every(n=>n.dataset.working==='false'&&!n.dataset.loop)))
+  console.log('PASS App vocabulary review: list success, public-link copy failure, download icon at rest')
 
   for(const route of ['listen','dictation']) {
     await page.goto(`${origin}/vocabulary/${route}/icon-motion`)

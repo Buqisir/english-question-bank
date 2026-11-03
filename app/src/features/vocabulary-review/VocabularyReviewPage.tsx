@@ -1,4 +1,4 @@
-import { CopyFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
+import { CopyFeedbackIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { iconMotionInput } from '../../icons/motionInput'
 import { useClipboardCopy } from '../../hooks/useClipboardCopy'
@@ -7,7 +7,6 @@ import {
   BookMarked,
   Check,
   BoardCheck,
-  Download,
   Eye,
   Grid2X2,
   RotateCcw,
@@ -1330,7 +1329,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         onClick={() => setDownloadMenuOpen((open) => !open)}
         disabled={pdfDownloadBusy}
       >
-        <Download size={16} />
+        <DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />
         {pdfDownloadBusy ? '正在生成…' : '下载'}
       </button>
       {downloadMenuOpen && (
@@ -1915,7 +1914,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
               </button>
               <button className="ghost-button" type="button" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet || pdfDownloadBusy}>
-                <Download size={16} />
+                <DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />
                 {pdfDownloadBusy ? '生成中…' : '下载'}
               </button>
             </div>

@@ -5,6 +5,10 @@ import { Play } from './generated/play'
 import { Pause } from './generated/pause'
 import { Pin } from './generated/pin'
 import { ChevronDown } from './generated/chevron-down'
+import { ChevronRight } from './generated/chevron-right'
+import { Plus } from './generated/plus'
+import { Scissors } from './generated/scissors'
+import { PaperDownload } from './generated/paper-download'
 import { Volume } from './generated/volume'
 import { Download } from './generated/download'
 import type { EqbIconProps } from './EqbIcon'
@@ -65,11 +69,14 @@ export function VolumeFeedbackIcon({ state, size = 16 }: MotionProps & { state: 
   </span>
 }
 
-export function DownloadFeedbackIcon({ working, size = 16 }: MotionProps & { working: boolean }) {
+// 下载生成中。icon='paper' 是带折角的试卷下载图标：折角就在箭头正下方，没有下压的行程，
+// 只让箭头（第 3 条路径）做透明度往复；折角和外框不动（D9）。
+export function DownloadFeedbackIcon({ working, size = 16, icon = 'download' }: MotionProps & { working: boolean, icon?: 'download' | 'paper' }) {
   const ref = useRef<HTMLSpanElement>(null)
-  useStateLoop(ref, working, 'svg > path:nth-of-type(n+2)', 160)
-  return <span ref={ref} className="eqb-motion eqb-motion-download" data-working={working} style={{ width: size, height: size }} aria-hidden="true">
-    <Download size={size} />
+  const paper = icon === 'paper'
+  useStateLoop(ref, working, paper ? 'svg > path:nth-of-type(3)' : 'svg > path:nth-of-type(n+2)', 160)
+  return <span ref={ref} className={paper ? 'eqb-motion eqb-motion-download is-paper' : 'eqb-motion eqb-motion-download'} data-working={working} style={{ width: size, height: size }} aria-hidden="true">
+    {paper ? <PaperDownload size={size} /> : <Download size={size} />}
   </span>
 }
 
@@ -81,9 +88,25 @@ export function PlaybackIcon({ playing, size = 16, variant = 'line' }: MotionPro
   </span>
 }
 
-export function DisclosureIcon({ expanded, size = 16 }: MotionProps & { expanded: boolean }) {
-  return <span className="eqb-motion eqb-motion-disclosure" data-expanded={expanded} style={{ width: size, height: size }} aria-hidden="true">
-    <ChevronDown size={size} />
+// 展开 / 收起。A 类（内容在下面展开、下拉菜单）：朝下的箭头上下翻转成朝上。
+// B 类（层级行、分节折叠）：朝右的箭头顺时针转 90° 到朝下。
+// 不传 expanded 时由外层 <details open> 决定（见 motionIcons.css），用于原生 details 的 summary。
+export function DisclosureIcon({ expanded, size = 16, kind = 'flip' }: MotionProps & { expanded?: boolean, kind?: 'flip' | 'branch' }) {
+  const branch = kind === 'branch'
+  return <span className={branch ? 'eqb-motion eqb-motion-branch' : 'eqb-motion eqb-motion-disclosure'} data-expanded={expanded} style={{ width: size, height: size }} aria-hidden="true">
+    {branch ? <ChevronRight size={size} /> : <ChevronDown size={size} />}
+  </span>
+}
+
+// 加入草稿卷：加号 → 勾（D6）。cut 是试卷浏览的“已剪入”：加号 → 实心剪刀，只做淡入淡出（D7）。
+// 过渡只在用户按过的那个按钮里播放（[data-icon-motion='pointer']，见 motionInput）；
+// 列表加载、切换草稿卷等数据变化直接到位，不播。
+export function DraftAddIcon({ done, size = 16, cut = false }: MotionProps & { done: boolean, cut?: boolean }) {
+  return <span className={cut ? 'eqb-motion eqb-motion-add is-cut' : 'eqb-motion eqb-motion-add'} data-state={done ? 'done' : 'idle'} style={{ width: size, height: size }} aria-hidden="true">
+    <span className="eqb-add-plus"><Plus size={size} /></span>
+    {cut
+      ? <span className="eqb-add-cut"><Scissors size={size} variant="fill" /></span>
+      : <span className="eqb-reveal"><span className="eqb-reveal-in"><Check size={size} /></span></span>}
   </span>
 }
 
