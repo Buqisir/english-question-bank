@@ -98,15 +98,13 @@ export function DisclosureIcon({ expanded, size = 16, kind = 'flip' }: MotionPro
   </span>
 }
 
-// 加入草稿卷：加号 → 勾（D6）。cut 是试卷浏览的“已剪入”：加号 → 实心剪刀，只做淡入淡出（D7）。
+// 加入草稿卷：加号 → 勾（D6）。cut 是试卷浏览的“剪入 → 已剪入”：线条剪刀 → 勾，过渡与 D6 相同（D7 修订）。
 // 过渡只在用户按过的那个按钮里播放（[data-icon-motion='pointer']，见 motionInput）；
 // 列表加载、切换草稿卷等数据变化直接到位，不播。
 export function DraftAddIcon({ done, size = 16, cut = false }: MotionProps & { done: boolean, cut?: boolean }) {
   return <span className={cut ? 'eqb-motion eqb-motion-add is-cut' : 'eqb-motion eqb-motion-add'} data-state={done ? 'done' : 'idle'} style={{ width: size, height: size }} aria-hidden="true">
-    <span className="eqb-add-plus"><Plus size={size} /></span>
-    {cut
-      ? <span className="eqb-add-cut"><Scissors size={size} variant="fill" /></span>
-      : <span className="eqb-reveal"><span className="eqb-reveal-in"><Check size={size} /></span></span>}
+    <span className="eqb-add-plus">{cut ? <Scissors size={size} /> : <Plus size={size} />}</span>
+    <span className="eqb-reveal"><span className="eqb-reveal-in"><Check size={size} /></span></span>
   </span>
 }
 

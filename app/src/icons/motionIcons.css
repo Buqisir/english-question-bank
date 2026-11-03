@@ -108,7 +108,7 @@
 
 /* 加入草稿卷：加号 80ms 退场，同时勾自左向右揭示 240ms（与复制、生词本同一套）。
    乐观更新失败回滚时：勾 80ms 淡出，加号从 60ms 起 100ms 淡入。
-   is-cut（试卷浏览“已剪入”）：剪刀是这一页的隐喻，不做揭示，只做先后淡入淡出（D7）。 */
+   is-cut（试卷浏览“剪入 → 已剪入”）：前态换成线条剪刀，其余与上面完全相同（D7 修订：原先加号 → 实心剪刀先后淡入淡出，中间有空帧）。 */
 .eqb-add-plus {
   opacity: 1;
   transition: opacity var(--eqb-return-fade) var(--ease-out) var(--eqb-return-delay);
@@ -134,14 +134,6 @@
 .eqb-motion-add[data-state='done'] .eqb-reveal-in {
   transform: none;
   transition: transform var(--eqb-reveal) var(--ease-reveal);
-}
-.eqb-add-cut {
-  opacity: 0;
-  transition: opacity var(--motion-micro) var(--ease-out);
-}
-.eqb-motion-add[data-state='done'] .eqb-add-cut {
-  opacity: 1;
-  transition: opacity var(--eqb-return-fade) var(--ease-out) var(--eqb-return-delay);
 }
 
 .eqb-play-half {
@@ -239,7 +231,7 @@ button[data-icon-motion='pointer']:active .eqb-motion-pin svg {
   .eqb-motion-copy[data-state='done'] .eqb-reveal, .eqb-motion-add[data-state='done'] .eqb-reveal {
     transition-timing-function: var(--ease-out) !important;
   }
-  .eqb-motion-add:not([data-state='done']) .eqb-add-plus, .eqb-motion-add[data-state='done'] .eqb-add-cut {
+  .eqb-motion-add:not([data-state='done']) .eqb-add-plus {
     transition-delay: var(--motion-micro) !important;
   }
   .eqb-motion-check.is-revealing .eqb-reveal {

@@ -3134,9 +3134,13 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 {card.draftPaperButtonState !== 'disabled' && (
                   <DraftAddIcon size={16} cut done={card.draftPaperButtonState === 'in_current_draft'} />
                 )}
-                {card.draftPaperButtonState === 'in_current_draft'
-                  ? '已剪入'
-                  : card.draftPaperButtonState === 'disabled' ? '暂不可组卷' : '加入'}
+                {card.draftPaperButtonState === 'disabled' ? '暂不可组卷' : (
+                  // 两段文字叠在同一格里，按钮按长的那段留宽，切换时不跳；不显示的那段 visibility: hidden，不进可访问名称。
+                  <span className="paper-browse-gutter-add-label">
+                    <span className="paper-browse-gutter-add-label-idle">剪入</span>
+                    <span className="paper-browse-gutter-add-label-done">已剪入</span>
+                  </span>
+                )}
               </button>
             </div>
           )}

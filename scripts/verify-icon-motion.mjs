@@ -68,7 +68,7 @@ window.setDraft = {};
 function DraftFixture({ id, cut = false, initial = false }) {
  const [done, setDone] = useState(initial);
  window.setDraft[id] = setDone;
- return h('button', { ...iconMotionInput, type:'button', id, onClick:()=>setDone(!done) }, h(DraftAddIcon, { done, cut }), done ? (cut ? '已剪入' : '已在草稿卷') : '加入');
+ return h('button', { ...iconMotionInput, type:'button', id, onClick:()=>setDone(!done) }, h(DraftAddIcon, { done, cut }), done ? (cut ? '已剪入' : '已在草稿卷') : (cut ? '剪入' : '加入'));
 }
 const notebookSegment = (selectedText) => ({ streamId:'s1', start:0, end:selectedText.length, selectedText });
 const newSegment = notebookSegment('fresh'), existingSegment = notebookSegment('known');
@@ -383,15 +383,21 @@ try {
   await draftNew.click(); await page.waitForTimeout(300)
   assert.equal(await draftNew.locator('.eqb-add-plus').evaluate(n => getComputedStyle(n).opacity), '1', 'rollback returns to the plus')
   assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).opacity), '0')
-  await draftCut.click()
-  assert.equal(await draftCut.locator('.eqb-reveal').count(), 0, 'cut keeps scissors, no reveal')
-  await page.waitForTimeout(300)
-  assert.equal(await draftCut.locator('.eqb-add-cut').evaluate(n => getComputedStyle(n).opacity), '1')
-  assert.equal(await draftCut.locator('.eqb-add-cut svg').evaluate(n => getComputedStyle(n).transform), 'none')
+  // 试卷浏览“剪入 → 已剪入”：前态是线条剪刀（6 条路径、无填充），其余与加号 → 勾同一套。
+  assert.equal(await draftCut.locator('.eqb-add-plus svg > path').count(), 6, 'cut starts from the scissors')
+  assert.equal(await draftCut.locator('.eqb-add-plus svg g').count(), 0, 'line scissors, no fill tint')
+  await draftCut.click(); await page.waitForTimeout(40)
+  assert.notEqual(await draftCut.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none', 'cut: check is mid-reveal')
+  await page.waitForTimeout(400)
+  assert.equal(await draftCut.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none')
+  assert.equal(await draftCut.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).opacity), '1')
+  assert.equal(await draftCut.locator('.eqb-add-plus').evaluate(n => getComputedStyle(n).opacity), '0', 'scissors gone once cut')
+  await draftCut.click(); await page.waitForTimeout(300)
+  assert.equal(await draftCut.locator('.eqb-add-plus').evaluate(n => getComputedStyle(n).opacity), '1', 'cut rollback returns to the scissors')
   await draftNew.focus(); await page.keyboard.press('Enter')
   assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transitionDuration), '0s', 'keyboard add is instant')
   await page.keyboard.press('Enter')
-  console.log('PASS add to draft: reveal only on this press, data changes land instantly, rollback, scissors fade, instant keyboard')
+  console.log('PASS add to draft: reveal only on this press, data changes land instantly, rollback, scissors → check, instant keyboard')
 
   const paperDownload = page.locator('#paper-download-fixture')
   const paperPaths = paperDownload.locator('svg > path')
