@@ -22,7 +22,7 @@ try {
   for (const file of files) {
     const module = await vite.ssrLoadModule(`/src/icons/generated/${file}`)
     const Icon = Object.values(module)[0]
-    for (const [size, stroke] of [[16, 2.25], [23, 2.25], [24, 2], [32, 1.875], [40, 1.875]]) {
+    for (const [size, stroke] of [[16, 2.25], [19, 2.25], [20, 2], [23, 2], [24, 1.75], [32, 1.5], [40, 1.5]]) {
       samples.push({ name: file.slice(0, -4), size, stroke,
         line: renderToStaticMarkup(createElement(Icon, { size, variant: 'line' })),
         fill: renderToStaticMarkup(createElement(Icon, { size, variant: 'fill' })),
@@ -34,7 +34,7 @@ try {
   const failures = await page.evaluate((samples) => {
     const failures = []
     const parser = new DOMParser()
-    // Display tiers (>= 24) use a stroke thinner than 2.25 since Owner 2026-11-02; geometry is unchanged,
+    // Tiers from 20px up use a stroke thinner than 2.25 (Owner 2026-11-03: 20 -> 2, 24 -> 1.75, 32+ -> 1.5); geometry is unchanged,
     // so the visible gap widens by exactly the stroke reduction. Upper bounds allow that, nothing more.
     const displayRelief = (stroke) => Math.max(0, 2.25 - stroke)
     // Independent semantic expectations: these dots are the glyph, not decoration.
@@ -379,7 +379,7 @@ try {
     return failures
   }, samples)
   assert.deepEqual(failures, [])
-  console.log(`PASS ${files.length} components × 4 sizes × line/fill: geometry, semantic dots, stroke boundary`)
+  console.log(`PASS ${files.length} components × 7 sizes × line/fill: geometry, semantic dots, stroke boundary`)
 
   // The repaired extended glyphs must not regress at the thicker runtime tier.
   const repaired = new Set(['move', 'maximize', 'minimize', 'sort', 'alert-triangle', 'help-circle', 'share', 'document', 'calendar', 'user-plus', 'users', 'user-check', 'underline', 'palette', 'headphones', 'list-ordered', 'bookmark', 'crop'])
@@ -392,7 +392,7 @@ try {
     for (const icon of icons) {
       assert.equal(icon.stroke, stroke)
       // Copy is the G9 exemplar: the rear sheet stays open in front of the front sheet. The 1.5 floor holds at the
-      // 2.25 small tier; the legacy 2.75 audit tier is thicker than any runtime stroke (24px+ renders 2.0 / 1.875).
+      // 2.25 small tier; the legacy 2.75 audit tier is thicker than any runtime stroke (20px+ renders 2 / 1.75 / 1.5).
       if (icon.name === 'copy') assert.ok(icon.gap !== null && icon.gap >= 1.5 - (stroke - 2.25), `copy/${stroke}: rear sheet crowds the front sheet (${icon.gap})`)
       if (icon.name === 'pencil') {
         const holes = icon.holes.filter((hole) => hole.area > 1)
