@@ -272,14 +272,14 @@ try {
             if (/[zZ]/.test(arc.getAttribute('d'))) failures.push(`eye-off/${sample.size}: do not reconnect the eyelid behind the slash`)
             const points = Array.from({ length: 201 }, (_, i) => arc.getPointAtLength(arc.getTotalLength() * i / 200))
             const gap = Math.min(...points.map((p) => Math.abs(p.x - p.y) / Math.SQRT2)) - sample.stroke
-            // B's tight reference clearance: ~0.65 at the thick tier, ~1.15 at the thin tier.
-            // This is a documented single-glyph exception, not a global relaxation of R4.
-            if (gap < 0.6 || gap > 1.2 + displayRelief(sample.stroke)) failures.push(`eye-off/${sample.size}: retain B's local clearance, not merged joints or widely separated fragments (${gap})`)
+            // 全套合一第二轮 E1：B 的 1.15 紧缝特例取消，2.25 档回到 G4 ≥ 1.5；上限防止两瓣被削得过短。
+            if (gap < 1.48 || gap > 1.75 + displayRelief(sample.stroke)) failures.push(`eye-off/${sample.size}: lobes clear the slash by the G4 floor, not crowded or over-trimmed (${gap})`)
           }
           const boxes = arcs.map((arc) => arc.getBBox())
           const top = Math.min(...boxes.map((box) => box.y))
           const bottom = Math.max(...boxes.map((box) => box.y + box.height))
-          if (Math.abs(top - 5.266) > 0.02 || Math.abs(bottom - 18.397) > 0.02) failures.push(`eye-off/${sample.size}: retain B's reference profile, not the old tall Solar eye or over-shortened lower lid`)
+          // E1：与预览同一只眼眶（上 5.266、下 17.916）。
+          if (Math.abs(top - 5.266) > 0.02 || Math.abs(bottom - 17.916) > 0.02) failures.push(`eye-off/${sample.size}: share the preview eye's profile`)
           const backgrounds = [...parse(sample.fill).querySelectorAll('g path')]
           if (backgrounds.length !== 2 || backgrounds.some((path, i) => path.getAttribute('d').replace(/\s/g, '') !== `${arcs[i].getAttribute('d').replace(/\s/g, '')}Z`)) failures.push(`eye-off/${sample.size}: fill must close each visible lobe separately and preserve the diagonal clearance`)
         }
