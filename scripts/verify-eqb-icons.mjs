@@ -364,6 +364,9 @@ try {
       // 第 8 组：人物按参考图重画——闭合圆顶身体 + 平底；添加 / 已批改 / 班级共用同一个前排人物。
       if (['user', 'users', 'user-plus', 'user-check'].includes(sample.name) && !/A1\.1 1\.1 0 0 0 [\d.]+ 19\.4V18\.2/.test(sample.line.replace(/\s+/g, ' '))) failures.push(`${sample.name}/${sample.size}: closed flat-based body`)
       if (['users', 'user-plus', 'user-check'].includes(sample.name) && !sample.line.includes('M4.1 20.5H13.1')) failures.push(`${sample.name}/${sample.size}: shared front person`)
+      // 第 9 组：听写清单同一支笔、方框 6.25；配色按 G2 放大 1.05 摆正。
+      if (sample.name === 'list-checks' && (/stroke-width=|data-stroke-small/.test(sample.line.replace(/^<svg[^>]*>/, '')) || (sample.line.match(/width="6.25" height="6.25"/g) ?? []).length !== 2)) failures.push(`list-checks/${sample.size}: one pen, 6.25 boxes`)
+      if (sample.name === 'palette' && !sample.line.includes('M10.628 4.262 C')) failures.push(`palette/${sample.size}: G2 ×1.05 about the ink centre`)
       if (sample.name === 'move' && /<g/.test(sample.line.replace(/^<svg[^>]*>/, ''))) failures.push(`move/${sample.size}: translations baked into coordinates`)
       if (sample.name === 'scissors') {
         // 第 6 组 B：H4.2 骨架，刀刃是沿刃脊的一笔（不再是实心叶子），刃尖再长 1；旋转已写进坐标。

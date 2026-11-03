@@ -403,10 +403,11 @@ export const generic = {
     line: `<path d="M6.25 8.5 C6.25 4.6 8.4 2.75 12.15 2.75 C16.55 2.75 18.6 5.15 18.6 9.4 C18.6 12.65 17.6 13.7 15.7 15.45 C14.6 16.5 14 18.2 13.3 19.45 C12.75 20.65 11.95 21.25 10.9 21.25 C8.55 21.25 6.85 19.7 6.85 17.65"/><path d="M10.45 9 C10.45 7.75 11.2 7.1 12.55 7.1 C13.85 7.1 14.75 8.1 14.75 9.4 C14.75 11.05 13.65 11.9 12.15 12.1 L11.55 14.7"/>`,
   },
   // 听写清单：Owner 选 C 留白待写。空格与词行相对，末行稍短。
+  // 第 9 组（Owner 2026-11-03）：同一支笔（去掉局部线宽）；① 方框 5.5 → 6.25（上下两框守 G4 1.5），词行右端与编号列表同为 21 / 19.5。
   'list-checks': {
     zh: '听写清单',
     lucide: 'list-todo',
-    line: `<rect data-stroke-small="2.1" stroke-width="2.5" x="3.25" y="4.25" width="5.5" height="5.5" rx="1.4"/><rect data-stroke-small="2.1" stroke-width="2.5" x="3.25" y="14.25" width="5.5" height="5.5" rx="1.4"/><path d="M13.25 7 H20.75 M13.25 17 H18.75"/>`,
+    line: `<rect x="2.75" y="3.875" width="6.25" height="6.25" rx="1.6"/><rect x="2.75" y="13.875" width="6.25" height="6.25" rx="1.6"/><path d="M13.25 7 H21 M13.25 17 H19.5"/>`,
   },
   // 讲评：Owner 选 D3。保留圆肩、闭合上半身和肩侧抬手，不混入 D4 的收腰。
   presentation: {
@@ -577,6 +578,8 @@ const G2 = {
   search: 0.99, 'zoom-in': 0.99, 'zoom-out': 0.99, settings: 0.99, 'rotate-ccw': [1.135, [12, 11.36]], filter: [1.09, [12, 12.11]],
   // 第 8 组「人与时间」（Owner 2026-11-03）：日历外框超出同档，以中心收 0.904；时钟、历史、沙漏不动；人物是组合形，不进本表。
   calendar: 0.904,
+  // 第 9 组「编辑与排版」（Owner 2026-11-03）：调色板偏小且偏右下，以墨迹中心放大 1.05 摆正；左右已到 1.25 边距，差的是形状决定的。
+  palette: [1.05, [12.107, 12.27]],
 }
 const merged = { ...generic, ...domain, ...extended }
 for (const [name, v] of Object.entries(G2)) merged[name] = Array.isArray(v) ? sized(v[0], merged[name], v[1]) : sized(v, merged[name])
