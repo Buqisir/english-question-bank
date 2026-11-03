@@ -44,8 +44,9 @@ function componentSource(key, icon) {
   const sizeProp = localTiers ? 'size = 24, ' : ''
   const sizeAttr = localTiers ? ' size={size}' : ''
   const sizeSetup = localTiers ? "  const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)\n  const isSmall = Number.isFinite(numericSize) && numericSize < 24\n  const displayScale = eqbDisplayStrokeScale(size)\n  const inlineScale = eqbInlineStrokeScale(size)\n" : ''
-  const imports = localTiers ? 'EqbIcon, eqbDisplayStrokeScale, eqbInlineStrokeScale, type EqbIconProps' : 'EqbIcon, type EqbIconProps'
-  return `${header}import { ${imports} } from '../EqbIcon'\n\nexport function ${name}({ ${sizeProp}variant = 'line', ...props }: EqbIconProps) {\n${sizeSetup}  return (\n    <EqbIcon${stroke}${sizeAttr} {...props}>\n      {variant === 'fill' && ${fillShape ? `<g fill="currentColor" fillOpacity={0.16} stroke="none">${fillShape}</g>` : 'null'}}\n      {variant === 'fill' ? <>${fillLine}</> : <>${line}</>}\n    </EqbIcon>\n  )\n}\n`
+  const imports = 'EqbIcon, type EqbIconProps'
+  const tierImport = localTiers ? "import { eqbDisplayStrokeScale, eqbInlineStrokeScale } from '../strokeTiers'\n" : ''
+  return `${header}import { ${imports} } from '../EqbIcon'\n${tierImport}\nexport function ${name}({ ${sizeProp}variant = 'line', ...props }: EqbIconProps) {\n${sizeSetup}  return (\n    <EqbIcon${stroke}${sizeAttr} {...props}>\n      {variant === 'fill' && ${fillShape ? `<g fill="currentColor" fillOpacity={0.16} stroke="none">${fillShape}</g>` : 'null'}}\n      {variant === 'fill' ? <>${fillLine}</> : <>${line}</>}\n    </EqbIcon>\n  )\n}\n`
 }
 
 await mkdir(outputDir, { recursive: true })

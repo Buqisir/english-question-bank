@@ -1,5 +1,6 @@
 // Generated file — do not edit. Run `pnpm -C app icons:generate` instead.
-import { EqbIcon, eqbDisplayStrokeScale, eqbInlineStrokeScale, type EqbIconProps } from '../EqbIcon'
+import { EqbIcon, type EqbIconProps } from '../EqbIcon'
+import { eqbDisplayStrokeScale, eqbInlineStrokeScale } from '../strokeTiers'
 
 export function Grid2X2({ size = 24, variant = 'line', ...props }: EqbIconProps) {
   const numericSize = typeof size === 'number' ? size : Number.parseFloat(size)
