@@ -338,6 +338,30 @@ try {
   assert.equal(await lectureIcon.evaluate(n => getComputedStyle(n).transform), 'none')
   console.log('PASS lecture sections: native marker replaced by branch chevron, details-driven 90°, instant keyboard')
 
+  // 全站“按下图标缩到 0.85”已撤掉（不绑定状态、只缩图标不缩按钮、会叠在状态动作上）：按住时图标保持原样。
+  // 无头 Chromium 的合成鼠标不进 :active，这里用 DevTools 强制按钮/summary 处于 :active，直接检验样式表里已无“按下缩图标”规则。
+  const cdp = await page.context().newCDPSession(page)
+  await cdp.send('DOM.enable'); await cdp.send('CSS.enable')
+  await page.addStyleTag({ content:':where(button, summary):active { --press-probe: held; }' })
+  const { root } = await cdp.send('DOM.getDocument', { depth:-1 })
+  for (const sel of ['#lecture-fixture details > summary', '#branch-fixture', '#download-fixture', '#draft-new']) {
+    const { nodeId } = await cdp.send('DOM.querySelector', { nodeId:root.nodeId, selector:sel })
+    const before = await page.locator(sel).first().evaluate((n) => [...n.querySelectorAll('.eqb-icon')].map((i) => getComputedStyle(i).transform))
+    await cdp.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses:['active'] })
+    const pressed = await page.locator(sel).first().evaluate((n) => ({
+      active: getComputedStyle(n).getPropertyValue('--press-probe').trim() === 'held',
+      transforms: [...n.querySelectorAll('.eqb-icon')].map((i) => getComputedStyle(i).transform),
+      running: document.getAnimations().filter((a) => a.effect.target.classList?.contains('eqb-icon') && n.contains(a.effect.target)).length,
+    }))
+    await cdp.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses:[] })
+    assert.equal(pressed.active, true, `${sel} is forced :active`)
+    assert.ok(pressed.transforms.length > 0, `${sel} has an icon`)
+    assert.deepEqual(pressed.transforms, before, `${sel}: icon keeps its size while pressed`)
+    assert.equal(pressed.running, 0, `${sel}: no press transition on the icon`)
+  }
+  await cdp.detach()
+  console.log('PASS press: icons inside held buttons stay unscaled (global icon tap removed)')
+
   const draftNew = page.locator('#draft-new'), draftExisting = page.locator('#draft-existing'), draftCut = page.locator('#draft-cut')
   assert.equal(await draftExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).opacity), '1', 'already in draft shows the check')
   assert.equal(await draftExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none')

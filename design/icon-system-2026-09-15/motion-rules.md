@@ -120,3 +120,16 @@ Owner 在评审页（v2 样板，两轮盲审）后确认：「①②③ 都做�
 - 盘点里列的 `pi-owner-meta`（▸ / ▾ 伪元素）和 `.pi-reading-group-overview` 目前没有任何组件渲染，只剩样式。这次不改也不删，等有消费者时再接同一个箭头。
 - 验证：`verify-icon-motion` 新增一段，渲染真实的 `ObjectiveTeachingContent` 并加载 `lectureAnalysisPanels.css`。检查三个 summary 都是 flex 且 list-style 为 none（不会出现两个箭头），收起时 transform 为 none，点击后转 90° 且是过渡，键盘回车立即到位；减少动态下只剩 opacity、直接到位。共 18 段 PASS，截图 `output/playwright/icon-motion/lecture-sections.png`。
 - 未验证：七选五 / 完形 / 语法填空真实讲评页（需要登录与分析数据）里的“文章简介”和“证据定位”没在浏览器里点过；它们与验证页是同一组件、同一份 CSS 规则。
+
+### 撤掉全站“按下图标缩小”
+
+- 原来 `App.css` 里有一条全站规则：`button / [role=button] / a[href] / summary / label` 按下（`:active`）时，里面的 `.eqb-icon` 缩到 0.85，用 `--ease-spring`（带过冲）回弹。它是 b6951946（2026-10-26）顺手加的，不属于本系统的任何一轮决定。
+- 撤掉的理由：
+  1. 不对应任何状态，违反“动作只绑定真实状态变化”；
+  2. 只缩图标、不缩按钮，按钮本身没有反馈，图标在框里“跳一下”；
+  3. 会叠加在状态动作上（展开箭头转向、加入草稿卷揭示、下载箭头往复），同一下点击出现两种动作；
+  4. 本身已有整钮按压缩放的组件（登录提交、听力播放 / 触发 / 倍速、试卷选择的分析 / 操作 / 重试，0.92–0.97，至少 7 处）里会二次缩小；
+  5. 空格键按住也会触发 `:active`，违反“键盘触发立即到位”。
+- 处理：删掉这条规则和只被它使用的 `--ease-spring` 令牌。上面那些组件自己的整钮按压缩放保留，不在这次范围内。
+- 验证：`verify-icon-motion` 新增一段，用 DevTools 把 summary、B 类按钮、下载按钮、加入草稿卷按钮强制成 `:active`（无头 Chromium 的合成鼠标不进入 `:active`，另加一条探针样式确认强制生效），检查图标 transform 与按下前相同、没有过渡在跑。把旧规则放回去这一段会失败。共 19 段 PASS；`verify-motion-tokens` 76 项 PASS；构建 PASS。
+- 未验证：真实页面里手指 / 鼠标按下的观感没有在真机上看过；未运行全量回归（Owner 尚未 Ship）。
