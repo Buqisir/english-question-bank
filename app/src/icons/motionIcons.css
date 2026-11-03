@@ -1,4 +1,16 @@
 .eqb-motion {
+  /* 只在状态图标里用的两条曲线，写死在组件里，不进全局 token（K5）。 */
+  --ease-sine: cubic-bezier(0.37, 0, 0.63, 1);
+  --ease-reveal: cubic-bezier(0.33, 1, 0.68, 1);
+  --eqb-instant: 0s;
+  --eqb-grace: 100ms;
+  --eqb-reveal: 240ms;
+  --eqb-return-fade: 100ms;
+  --eqb-return-delay: 60ms;
+  --eqb-wave-cycle: 640ms;
+  --eqb-press-cycle: 1000ms;
+  --eqb-press-cap: 5100ms;
+  --eqb-pulse-cycle: 1200ms;
   display: inline-grid;
   position: relative;
   flex: none;
@@ -13,39 +25,81 @@
   overflow: visible;
 }
 
+/* 完成（复制 → 勾、加入生词本）：原图标 80ms 退场，同时勾自左向右揭示 240ms。
+   揭示用两个反向的 transform（窗口右移、内容左移），勾的几何不动，只动 transform / opacity。
+   恢复是先后进行：勾 80ms 淡出，纸从 60ms 起 100ms 淡入，避免两者叠成“带斜杠的复制图标”。
+   等待态不做表现：剪贴板写入实测 p95 < 1ms。 */
 .eqb-copy-paper {
   opacity: 1;
-  transition: opacity var(--motion-micro) var(--ease-out);
-}
-.eqb-copy-paper svg > path:first-of-type {
-  transition: opacity var(--motion-fast) var(--ease-out);
-}
-.eqb-copy-paper svg > path:last-of-type {
-  transform: translate(0, 0);
-  transition: transform var(--motion-base) var(--ease-out);
-}
-.eqb-motion-copy[data-state='pending'] .eqb-copy-paper svg > path:first-of-type {
-  opacity: .55;
-}
-.eqb-motion-copy[data-state='pending'] .eqb-copy-paper svg > path:last-of-type {
-  transform: translate(1.2px, 1.2px);
+  transition: opacity var(--eqb-return-fade) var(--ease-out) var(--eqb-return-delay);
 }
 .eqb-motion-copy[data-state='done'] .eqb-copy-paper {
   opacity: 0;
+  transition: opacity var(--motion-micro) var(--ease-out);
 }
-.eqb-motion-copy[data-state='done'] .eqb-copy-paper svg > path:last-of-type {
-  transform: translate(2.1px, 2.1px);
+.eqb-reveal {
+  overflow: hidden;
 }
-.eqb-copy-check {
+.eqb-reveal-in {
+  display: block;
+}
+.eqb-motion-copy .eqb-reveal {
   opacity: 0;
-  clip-path: inset(-10% 110% -10% -10%);
-  transition: opacity var(--motion-micro) var(--ease-out), clip-path var(--motion-slow) var(--ease-in-out);
+  transform: translateX(-86%);
+  transition: opacity var(--motion-micro) var(--ease-out), transform var(--eqb-instant) linear var(--motion-micro);
 }
-.eqb-motion-copy[data-state='done'] .eqb-copy-check {
+.eqb-motion-copy .eqb-reveal-in {
+  transform: translateX(86%);
+  transition: transform var(--eqb-instant) linear var(--motion-micro);
+}
+.eqb-motion-copy[data-state='done'] .eqb-reveal {
   opacity: 1;
-  clip-path: inset(-10% -10% -10% -10%);
-  transition-delay: var(--motion-micro), 0ms;
+  transform: none;
+  transition: opacity var(--eqb-instant) linear, transform var(--eqb-reveal) var(--ease-reveal);
 }
+.eqb-motion-copy[data-state='done'] .eqb-reveal-in {
+  transform: none;
+  transition: transform var(--eqb-reveal) var(--ease-reveal);
+}
+.eqb-motion-check.is-revealing .eqb-reveal {
+  animation: eqb-reveal-window var(--eqb-reveal) var(--ease-reveal) both;
+}
+.eqb-motion-check.is-revealing .eqb-reveal-in {
+  animation: eqb-reveal-counter var(--eqb-reveal) var(--ease-reveal) both;
+}
+@keyframes eqb-reveal-window { from { transform: translateX(-86%); } }
+@keyframes eqb-reveal-counter { from { transform: translateX(86%); } }
+@keyframes eqb-fade-in { from { opacity: 0; } }
+
+/* 发音：喇叭不动；声波一层表达状态。超过 100ms 还没声音才降到 .35（等待）；
+   playing 事件到达后在 1 和 .6 之间往复，直到 ended / pause / error。只改透明度。 */
+.eqb-motion-volume svg > path:last-of-type {
+  opacity: 1;
+  transition: opacity var(--motion-fast) var(--ease-out);
+}
+.eqb-motion-volume[data-state='waiting'] svg > path:last-of-type {
+  opacity: .35;
+  transition-delay: var(--eqb-grace);
+}
+.eqb-motion-volume[data-loop='on'] svg > path:last-of-type {
+  animation: eqb-volume-wave var(--eqb-wave-cycle) var(--ease-sine) infinite;
+}
+@keyframes eqb-volume-wave { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+
+/* 下载生成中：托盘不动；箭头（杆和头）往托盘里压 3 个单位再回来，1 秒一次，最多 5 次；
+   之后改为不位移的透明度往复，持续到结束（K6 b）。 */
+.eqb-motion-download svg > path:nth-of-type(n+2) {
+  transform-box: view-box;
+}
+.eqb-motion-download[data-loop='on'] svg > path:nth-of-type(n+2) {
+  animation: eqb-download-press var(--eqb-press-cycle) linear var(--eqb-grace) 5, eqb-download-pulse var(--eqb-pulse-cycle) var(--ease-sine) var(--eqb-press-cap) infinite;
+}
+@keyframes eqb-download-press {
+  0% { transform: translateY(0); animation-timing-function: var(--ease-sine); }
+  40% { transform: translateY(3px); animation-timing-function: var(--ease-sine); }
+  80%, 100% { transform: translateY(0); }
+}
+@keyframes eqb-download-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
 
 .eqb-play-half {
   opacity: 1;
@@ -121,10 +175,32 @@ button[data-icon-motion='pointer']:active .eqb-motion-pin svg {
     transition-duration: var(--motion-micro) !important;
     transition-delay: 0ms !important;
   }
-  .eqb-copy-paper svg > path, .eqb-motion-playback .eqb-play-half, .eqb-motion-playback .eqb-pause-bars path, .eqb-motion-pin svg {
+  .eqb-copy-paper svg > path, .eqb-motion-playback .eqb-play-half, .eqb-motion-playback .eqb-pause-bars path, .eqb-motion-pin svg,
+  .eqb-motion .eqb-reveal, .eqb-motion .eqb-reveal-in, .eqb-motion-download svg > path {
     transform: none !important;
   }
+  /* 等待的宽限期和恢复的先后顺序是时间安排，不是运动，保留。 */
+  .eqb-motion-volume[data-state='waiting'] svg > path:last-of-type {
+    transition-delay: var(--eqb-grace) !important;
+  }
+  .eqb-motion-copy:not([data-state='done']) .eqb-copy-paper {
+    transition-delay: var(--motion-micro) !important;
+  }
+  .eqb-motion-check.is-revealing .eqb-reveal {
+    animation: eqb-fade-in var(--motion-micro) var(--ease-out) both;
+  }
+  .eqb-motion-check.is-revealing .eqb-reveal-in {
+    animation: none;
+  }
+  /* 下载：不位移；从一开始就是透明度往复（声波本来就只改透明度，保持不变）。 */
+  .eqb-motion-download[data-loop='on'] svg > path:nth-of-type(n+2) {
+    animation: eqb-download-pulse var(--eqb-pulse-cycle) var(--ease-sine) var(--eqb-grace) infinite;
+  }
 }
+/* 键盘触发：状态立即到位，不播过渡和一次性揭示；和真实进行中状态绑定的循环照常（它是状态，不是装饰）。 */
 [data-icon-motion='instant'] .eqb-motion, [data-icon-motion='instant'] .eqb-motion * {
   transition: none !important;
+}
+[data-icon-motion='instant'] .eqb-motion-check .eqb-reveal, [data-icon-motion='instant'] .eqb-motion-check .eqb-reveal-in {
+  animation: none !important;
 }

@@ -1,6 +1,9 @@
 import { ArrowLeft, ArrowRight, Card, Check, Grid2X2, RotateCcw, Volume } from '../../icons'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
+import { useAudioIconState } from '../../hooks/useAudioIconState'
+import { VolumeFeedbackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import type { VocabularySetDto } from '../../services/vocabulary'
 import { getVocabularySet } from '../../services/vocabulary'
 import {
@@ -37,6 +40,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
   const [accent, setAccent] = useState<VocabularyAudioAccent>(readVocabularyAudioAccent)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const audioRequestRef = useRef(0)
+  const audioIcon = useAudioIconState()
   const matchTimerRef = useRef<number | null>(null)
   const boardRef = useRef<HTMLDivElement | null>(null)
   const completionActionRef = useRef<HTMLButtonElement | null>(null)
@@ -102,7 +106,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
     audio.currentTime = 0
     audio.src = getVocabularyAudioPath(entry, accent)
     audio.load()
-    void audio.play().catch(() => {
+    void audioIcon.play(audio, entryId).catch(() => {
       if (audioRequestRef.current !== requestId) return
       setAudioError(`${accent === 'american' ? '美音' : '英音'}暂时无法播放，可以继续配对。`)
     })
@@ -213,6 +217,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
                       key={card.id}
                       className={`vocabulary-match-card${revealed ? ' is-revealed' : ''}${confirmingMatch ? ' is-confirming-match' : ''}${matched ? ' is-matched' : ''}${longLabel ? ' has-long-label' : ''}`}
                       type="button"
+                      {...iconMotionInput}
                       data-card-id={card.id}
                       data-card-kind={card.kind}
                       data-card-status={card.status}
@@ -237,7 +242,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
                           )}
                           <small>{card.kind === 'word' ? '英文' : '中文意思'}</small>
                           <strong>{card.label}</strong>
-                          {card.kind === 'word' && <Volume size={16} aria-hidden="true" />}
+                          {card.kind === 'word' && <VolumeFeedbackIcon size={16} state={audioIcon.stateFor(card.entryId)} />}
                         </span>
                       </span>
                     </button>

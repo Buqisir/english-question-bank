@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Check } from '../../icons'
+import { CheckRevealIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import { addNotebookContext, enrichNotebookContext, fetchNotebookSelectionState } from '../../services/vocabularyNotebook.ts'
 
 type Segment = { streamId: string; start: number; end: number; selectedText: string }
@@ -15,11 +16,14 @@ export function NotebookAddButton({
 }) {
   const [state, setState] = useState<'checking' | 'not-added' | 'entry-exists' | 'occurrence-exists' | 'saving' | 'failed'>('checking')
   const [note, setNote] = useState('')
+  // 只有本次点击“正在加入 → 已加入”才揭示勾；进来时就已加入的，直接显示静态勾。
+  const [justAdded, setJustAdded] = useState(false)
 
   useEffect(() => {
     const controller = new AbortController()
     setState('checking')
     setNote('')
+    setJustAdded(false)
     fetchNotebookSelectionState({
       paperId,
       sourceRevision,
@@ -43,6 +47,7 @@ export function NotebookAddButton({
         segments: [segment],
       })
       setState('occurrence-exists')
+      setJustAdded(true)
       const channel = new BroadcastChannel('eqb-vocabulary-notebook')
       channel.postMessage({ type: 'changed' })
       channel.close()
@@ -67,10 +72,11 @@ export function NotebookAddButton({
       <button
         type="button"
         className="paper-dictionary-more"
+        {...iconMotionInput}
         disabled={state === 'checking' || state === 'saving' || state === 'occurrence-exists'}
         onClick={() => { if (state !== 'occurrence-exists') void add() }}
       >
-        {state === 'occurrence-exists' ? <Check size={14} aria-hidden="true" /> : null}
+        {state === 'occurrence-exists' ? <CheckRevealIcon size={14} reveal={justAdded} /> : null}
         {label}
       </button>
       {note ? <p className="paper-dictionary-note">{note}</p> : null}

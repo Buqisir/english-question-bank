@@ -14,11 +14,13 @@ import {
   Save,
   Shuffle,
   Sparkles,
-  Volume,
   X,
 } from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { useAudioIconState } from '../../hooks/useAudioIconState'
+import { DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -116,6 +118,8 @@ export function VocabularyMeaningRecallPanel({
   const [suggestion, setSuggestion] = useState<VocabularyMeaningSuggestionDto[]>([])
   const [revealWrong, setRevealWrong] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [downloading, setDownloading] = useState(false)
+  const audioIcon = useAudioIconState()
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [error, setError] = useState('')
   const [dictationTitle, setDictationTitle] = useState('')
@@ -414,12 +418,14 @@ export function VocabularyMeaningRecallPanel({
         mimeType: kind === 'bundle' ? 'application/zip' : 'application/pdf',
       })
       if (!target) return
+      setDownloading(true)
       if (kind === 'bundle') await downloadVocabularyMeaningRecallRecordMaterialsZip(record.id, accent, target)
       else await downloadVocabularyMeaningRecallRecordPdf(record.id, accent, kind, target, handwritingMode)
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '本轮错词资料下载失败。')
     } finally {
       setBusy(false)
+      setDownloading(false)
     }
   }
 
@@ -427,7 +433,7 @@ export function VocabularyMeaningRecallPanel({
     audioRef.current?.pause()
     const audio = new Audio(getVocabularyAudioPath(entry, accent))
     audioRef.current = audio
-    void audio.play().catch(() => setError('这个词的音频暂时无法播放。'))
+    void audioIcon.play(audio).catch(() => setError('这个词的音频暂时无法播放。'))
   }
 
   async function editCompletedResult(entryId: string, result: 'correct' | 'wrong' | 'untested') {
@@ -481,7 +487,7 @@ export function VocabularyMeaningRecallPanel({
             <div className="meaning-recall-reveal">
               <span>{currentEntry.phonetics?.[accent] ?? currentEntry.phonetic}</span>
               <strong>{currentEntry.teachingSense}</strong>
-              <button type="button" onClick={() => playAudio(currentEntry)}><Volume size={16} />播放{accent === 'american' ? '美音' : '英音'}</button>
+              <button type="button" {...iconMotionInput} onClick={() => playAudio(currentEntry)}><VolumeFeedbackIcon size={16} state={audioIcon.state} />播放{accent === 'american' ? '美音' : '英音'}</button>
             </div>
           )}
         </div>
@@ -530,7 +536,7 @@ export function VocabularyMeaningRecallPanel({
             <button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => onAccentChange('british')}>英音</button>
           </fieldset>
           <details className="dictation-download-menu meaning-recall-download-menu">
-            <summary><Download size={16} />下载本轮错词<ChevronDown size={14} aria-hidden="true" /></summary>
+            <summary><DownloadFeedbackIcon size={16} working={downloading} />下载本轮错词<ChevronDown size={14} aria-hidden="true" /></summary>
             <FluidHoverList as="div" className="dictation-download-items" axis="y" itemSelector=".dictation-download-option">
               {([
                 ['cards', '单词卡', <Card size={14} key="cards" />],

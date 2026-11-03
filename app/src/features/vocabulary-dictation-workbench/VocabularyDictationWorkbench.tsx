@@ -20,7 +20,7 @@ import {
   Sparkles,
   X,
 } from '../../icons'
-import { PinFeedbackIcon } from '../../icons/MotionIcons'
+import { DownloadFeedbackIcon, PinFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
@@ -259,6 +259,8 @@ export function VocabularyDictationWorkbench({
   const [collectionTitle, setCollectionTitle] = useState('')
   const [taskTitle, setTaskTitle] = useState(defaultTaskTitle)
   const [busy, setBusy] = useState(false)
+  // 只有拿到保存位置、真正开始生成文件后才算“正在下载”；选位置的对话框不算。
+  const [downloadingKey, setDownloadingKey] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [createdTasks, setCreatedTasks] = useState<VocabularyDictationTaskDto[]>([])
@@ -641,12 +643,14 @@ export function VocabularyDictationWorkbench({
         mimeType: kind === 'bundle' ? 'application/zip' : 'application/pdf',
       })
       if (!target) return
+      setDownloadingKey(`meaning:${record.id}`)
       if (kind === 'bundle') await downloadVocabularyMeaningRecallRecordMaterialsZip(record.id, accent, target)
       else await downloadVocabularyMeaningRecallRecordPdf(record.id, accent, kind, target, handwritingMode)
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '本轮错词资料下载失败。')
     } finally {
       setBusy(false)
+      setDownloadingKey('')
     }
   }
 
@@ -875,11 +879,13 @@ export function VocabularyDictationWorkbench({
       })
       if (!target) return
       setBusy(true)
+      setDownloadingKey(`task:${task.id}`)
       await downloadVocabularyDictationTaskPdf(task.id, kind, target)
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : mode === 'save-as' ? '听写资料另存为失败，请重试。' : '听写资料下载失败，请重试。')
     } finally {
       setBusy(false)
+      setDownloadingKey('')
     }
   }
 
@@ -894,12 +900,14 @@ export function VocabularyDictationWorkbench({
       })
       if (!target) return
       setBusy(true)
+      setDownloadingKey(`task:${task.id}`)
       await downloadVocabularyDictationTaskMaterialsZip([task.id], VOCABULARY_MATERIAL_KINDS, target)
       setMessage(target.kind === 'file' || target.kind === 'directory' ? '听写全套资料已保存。' : '听写全套资料已开始下载。')
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '听写全套资料生成失败。')
     } finally {
       setBusy(false)
+      setDownloadingKey('')
     }
   }
 
@@ -995,7 +1003,7 @@ export function VocabularyDictationWorkbench({
                     <div className="dictation-created-actions">
                       {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link size={14} />打开听写</a>}
                       <details className="dictation-download-menu">
-                        <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                        <summary><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
                         <DownloadMenuItems>
                           {renderTaskDownloadOptions(task, publicHref)}
                         </DownloadMenuItems>
@@ -1139,7 +1147,7 @@ export function VocabularyDictationWorkbench({
                           <div>
                             {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link size={14} />打开听写</a>}
                             <details className="dictation-download-menu">
-                              <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                              <summary><DownloadFeedbackIcon size={14} working={downloadingKey === `task:${task.id}`} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
                               <DownloadMenuItems>
                                 {renderTaskDownloadOptions(task, publicHref)}
                                 <button className="dictation-download-action" type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void toggleTaskShare(task) }}>{publicHref ? '撤销二维码' : <><QrCode size={14} />生成二维码</>}</button>
@@ -1189,7 +1197,7 @@ export function VocabularyDictationWorkbench({
                       {record.status !== 'void' && <button type="button" onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续' : '查看结果'}</button>}
                       {record.status === 'completed' && counts.wrong > 0 && (
                         <details className="dictation-download-menu">
-                          <summary><Download size={14} />下载本轮错词<ChevronDown size={14} /></summary>
+                          <summary><DownloadFeedbackIcon size={14} working={downloadingKey === `meaning:${record.id}`} />下载本轮错词<ChevronDown size={14} /></summary>
                           <DownloadMenuItems>
                             <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'cards', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'cards', 'save-as')}><Card size={14} />单词卡</DownloadOption>
                             <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'dictation', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'dictation', 'save-as')}><PaperStudent size={14} />听写纸</DownloadOption>

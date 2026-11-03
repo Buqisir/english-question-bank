@@ -1,4 +1,5 @@
-import { CopyFeedbackIcon } from '../../icons/MotionIcons'
+import { CopyFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
+import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { iconMotionInput } from '../../icons/motionInput'
 import { useClipboardCopy } from '../../hooks/useClipboardCopy'
 import {
@@ -11,7 +12,6 @@ import {
   Grid2X2,
   RotateCcw,
   Save,
-  Volume,
   WordBubble,
 } from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -499,6 +499,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [progressUpdateError, setProgressUpdateError] = useState('')
   const [progressReplaceRequired, setProgressReplaceRequired] = useState(false)
   const reviewAudioRef = useRef<HTMLAudioElement | null>(null)
+  const audioIcon = useAudioIconState()
+  const playAudioIcon = audioIcon.play
   const downloadMenuRef = useRef<HTMLDivElement | null>(null)
   const progressCurrentRef = useRef<HTMLDivElement | null>(null)
   const shiftKeyCandidateRef = useRef(false)
@@ -576,11 +578,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     reviewAudioRef.current?.pause()
     const audio = new Audio(getVocabularyAudioPath(entry, reviewAccent))
     reviewAudioRef.current = audio
-    void audio.play().catch(() => {
+    void playAudioIcon(audio, entry.id).catch(() => {
       if (reviewAudioRef.current !== audio || !reportError) return
       setRequestError(`${reviewAccent === 'american' ? '美音' : '英音'}暂时无法播放，请稍后重试。`)
     })
-  }, [reviewAccent])
+  }, [playAudioIcon, reviewAccent])
 
   const applyRun = useCallback((run: VocabularyReviewRunDto, options: { activate?: boolean } = {}) => {
     if (!activeStudentId || run.studentId !== activeStudentId) return
@@ -1747,7 +1749,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   <h2>{currentEntry.headword}</h2>
                   <span>{currentEntry.partOfSpeech}</span>
                   <button className="vocabulary-word-replay" type="button" onClick={playCurrentEntry} aria-label={`重播 ${currentEntry.headword} 的${reviewAccent === 'american' ? '美音' : '英音'}`}>
-                    <Volume size={16} aria-hidden="true" />
+                    <VolumeFeedbackIcon size={16} state={audioIcon.stateFor(currentEntry.id)} />
                     <span>重播</span>
                     <kbd>空格</kbd>
                   </button>
@@ -1763,7 +1765,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                         onClick={playCurrentEntry}
                         title={`播放${reviewAccent === 'american' ? '美音' : '英音'}`}
                       >
-                        <Volume size={16} />
+                        <VolumeFeedbackIcon size={16} state={audioIcon.stateFor(currentEntry.id)} />
                         {currentEntry.phonetics?.[reviewAccent] ?? currentEntry.phonetic}
                       </button>
                       <div className="vocabulary-core-meanings">

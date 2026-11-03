@@ -710,11 +710,11 @@
   color: var(--eqb-color-text);
 }
 
-.dictation-download-menu > summary svg:last-child {
+.dictation-download-menu > summary > svg:last-child {
   transition: transform var(--motion-fast) var(--ease-out);
 }
 
-.dictation-download-menu[open] > summary svg:last-child {
+.dictation-download-menu[open] > summary > svg:last-child {
   transform: rotate(180deg);
 }
 

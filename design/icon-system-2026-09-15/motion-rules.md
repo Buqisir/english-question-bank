@@ -8,7 +8,7 @@
 
 | 状态 | 本轮样板 | 现有真实入口与驱动 |
 | --- | --- | --- |
-| Copy → Check | 前纸相对后纸向右下抽出 1.2 个 viewBox 单位，160ms；后纸淡至 0.55。成功后前纸继续至 2.1，纸组淡出 80ms，勾由左向右揭示 220ms | SelectionOverlay.tsx 的 clipboard.writeText 成功后才显示勾；约 1800ms 后恢复 |
+| Copy → Check | ~~前纸抽出 1.2 单位作为等待态~~（2026-11 K3 删除）。成功时纸张 80ms 淡出，同时勾自左向右揭示 240ms `cubic-bezier(.33,1,.68,1)`，0ms 起；恢复先后进行：勾 80ms 淡出，纸从 60ms 起 100ms 淡入 | SelectionOverlay.tsx 等 `useClipboardCopy` 消费者；clipboard.writeText 成功后才显示勾；约 1800ms 后恢复 |
 | Play ↔ Pause | 三角形分为两片轻轻向外，160ms；暂停双条从中间分开，位移 160ms、显现 120ms，两者一起延迟 40ms。反向时双条收拢、三角形归位；直接改变当前目标 | ListeningSegmentPlayer.tsx 的 onPlay / onPause / onEnded / onError 驱动 |
 | 展开 ↔ 收起 | Chevron 上下翻转 180°，160ms；摘要轻移 2px 并揭示，与方向变化同步，预留内容位置 | PaperBrowsePage.tsx 的 readingOverviewOpen 与 aria-expanded 同步；产品现已采用上下翻转；摘要展开轻移与淡入，收起立即隐藏，避免退出文字滞留或占位 |
 | 未标重点 ↔ 重点 | 以针尖 (12,21) 为支点，按下时纵向轻压至 0.955，80ms，松开后 160ms 归位；选中填充延迟 80ms 后以 160ms 淡至 0.16 | VocabularyDictationWorkbench.tsx 的 toggleFlag 保存并刷新数据成功后驱动；产品现已接入；等待期间按钮禁用，失败保留旧状态 |
@@ -18,11 +18,11 @@
 ## 节奏与边界
 
 - 复用 `app/src/index.css` 的 `--motion-micro:80ms`、`--motion-fast:120ms`、`--motion-base:160ms`、`--motion-slow:220ms`、`--ease-out:cubic-bezier(0.23,1,0.32,1)` 和 `--ease-in-out:cubic-bezier(0.77,0,0.175,1)`。样板内复制这些已核对的 token 以便独立演示；正式页面直接使用全局 token，无需安装动画库。
-- 状态切换用 CSS transition，以 transform / opacity 为主；复制勾和摘要揭示使用 clip-path。快速再次触发从当前视觉值返回，不排队，不依赖动画结束才改变业务状态。
+- 状态切换用 CSS transition，以 transform / opacity 为主；摘要揭示使用 clip-path；复制勾和生词本勾改用两个反向 transform 揭示（2026-11 K4）。快速再次触发从当前视觉值返回，不排队，不依赖动画结束才改变业务状态。
 - 固定图标占位并为最长按钮文字留出宽度。正文、周围按钮和阅读内容不随小图标变化移动。
 - 键盘激活立即显示状态，不执行装饰过渡；减少动态效果时取消位移、旋转和加载转动，保留轻淡入与状态文字。
 - 失败应保留可重试操作与错误说明。样板等待 220ms 仅用于展示异步顺序，不能复制成产品成功定时器；成功反馈停留 1800ms 后恢复。耗时很短的复制无需强制显示加载圈或人为拖延成功。
-- 不为119枚图标普遍添加动效，不给高频工具增加弹跳、自动循环或无意义旋转。全屏/退出全屏目前未查到产品使用点，不宣称已接入全屏行为。
+- 不为119枚图标普遍添加动效，不给高频工具增加弹跳或无意义旋转。循环只允许绑定真实进行中状态，规则见下节 K1；没有归属状态的循环一律不做。全屏/退出全屏目前未查到产品使用点，不宣称已接入全屏行为。
 
 ## 样板与验证
 
@@ -42,3 +42,41 @@
 - `scripts/verify-icon-motion.mjs` 验证真实 React 组件与 App 路由，HTTP/剪贴板结果使用可控测试数据；这不证明线上环境或真实保存服务已经部署。本轮只做本地提交，不推送、合并或部署。
 
 产品专项验证：`node scripts/verify-icon-motion.mjs` PASS（真实组件、App 路由、受控接口数据）；`node scripts/verify-paper-selection-browser.mjs` PASS 22；`node scripts/verify-motion-tokens.mjs` PASS 70；`node scripts/verify-eqb-icons.mjs` PASS；`pnpm -C app build` PASS。新增组件/hook lint PASS；两个选区原文件仍有 HEAD 已存在的 lint 错误，本次未拓展修复。全量 `verify:changed` 未通过并中断，详见工艺记录末节；不宣称全量回归完成。
+
+## 2026-11 状态动效深化（做深不做大）
+
+Owner 在评审页（v2 样板，两轮盲审）后确认：「①②③ 都做；K1–K5 按建议；K6 b，K7 a，K8 a」。只加深三个已有语义的状态，不扩大到其他图标，不新增状态，不引入外部图库的图形、配色或运行时。
+
+### 规则
+
+- **K1 循环**：只允许绑定真实进行中状态的循环。带位移的循环最多 5 秒，之后只保留透明度；没有归属状态的循环禁止。循环结束从当前视觉值回到静止（读计算值后用单个 offset-0 关键帧回落），不跳变。
+- **K2 键盘**：键盘触发时过渡和一次性揭示立即到位；与进行中状态绑定的循环照常运行（它表达状态，不是装饰），结束时不做回落。
+- **K3 复制等待态**：删除。剪贴板写入实测 p95 < 1ms，等待态没有表现；`data-state="pending"` 仍保留给按钮禁用逻辑。
+- **K4 揭示**：复制勾与生词本勾用“窗口右移 + 内容左移”两个 transform，不用 clip-path。
+- **K5 时长**：这些时长只写在 `app/src/icons/motionIcons.css` 的 `.eqb-motion` 作用域变量里，不进全局 token。
+- **K6 b**：下载按压 5 次（5100ms）后切到透明度往复 1↔.45，1200ms 一次，直到结束。
+- **K7 a**：揭示 240ms，`cubic-bezier(.33,1,.68,1)`，0ms 起。
+- **K8 a**：发音保持单层声波，不加第二道弧。
+
+### 三个状态
+
+| 状态 | 表现 | 减少动态效果 | 驱动 |
+| --- | --- | --- | --- |
+| ① 发音 | 喇叭不动。点击后 100ms 宽限期内仍无声音，声波降至 .35（等待）；`playing` 事件到达后声波 1↔.6 往复，640ms 一次（sine），直到 ended / pause / error；回到静止 120ms | 相同（本来只改透明度） | 真实音频事件：`useAudioIconState`（`app/src/hooks/useAudioIconState.ts`）或查词卡的 `dictionaryAudio` 模块状态；`play()` 被拒绝回到 idle；换源前旧的 pause 事件在 `audio.paused === false` 时忽略 |
+| ② 下载生成中 | 托盘不动；箭头（杆和头）下压 3 个 viewBox 单位再回来，1000ms 一次（下 400ms、上 400ms、停 200ms，sine），100ms 宽限后开始，5 次；之后按 K6 b 改为透明度往复；结束从当前值 160ms 回落 | 从一开始就是透明度往复，无位移 | 拿到保存位置、真正开始生成后才算；选位置的对话框不算；`finally` 中结束 |
+| ③ 完成 | 复制与加入生词本：原图标 80ms 淡出，勾按 K7 a 揭示；复制恢复先后进行（勾 80ms 淡出，纸从 60ms 起 100ms 淡入），避免叠成“带斜杠的复制图标” | 80ms 淡入代替揭示 | 复制：剪贴板成功；生词本：只有本次“正在加入 → 已加入”才揭示，进来时已加入的显示静态勾 |
+
+### 组件与产品入口
+
+- `VolumeFeedbackIcon`（`state: idle | waiting | playing`）：查词卡发音（`DictionaryCard.tsx`）、认词面板播放（`VocabularyMeaningRecallPanel.tsx`）、复习页重播与音标按钮（`VocabularyReviewPage.tsx`，按词条 id 区分）、翻牌消消乐英文卡（`VocabularyPracticePage.tsx`，按词条 id 区分）。音量滑块旁的标签图标、口音说明图标保持静态。
+- `DownloadFeedbackIcon`（`working`）：认词面板下载菜单、听写工作台的任务“下载资料”（两处）与“下载本轮错词”菜单（按 `task:<id>` / `meaning:<id>` 区分）。复习页、我的空间里的下载入口不在本轮范围。
+- `CheckRevealIcon`（`reveal`）：`NotebookAddButton.tsx`。
+- `CopyFeedbackIcon`：原有消费者不变，CSS 按 K3/K4/K7 更新。
+- 包含图标的控件使用 `iconMotionInput` 标记输入方式。两处原有选择器改为只选直接子元素：`.dictation-download-menu > summary > svg:last-child`（只转 Chevron）、`.vocabulary-match-card-face > .eqb-motion`。
+
+### 验证
+
+`node scripts/verify-icon-motion.mjs` PASS 13 段（新增：发音宽限/等待/播放循环/暂停回落/播放被拒；下载托盘静止、5 次按压后转透明度、回落、键盘立即结束；生词本只在加入完成时揭示、已加入为静态勾；减少动态效果下下载只有透明度、声波照常、揭示无位移）。脚本支持 `EQB_CHROMIUM=<chromium 路径>` 指定浏览器。`node scripts/verify-motion-tokens.mjs` PASS 76；`pnpm -C app build` PASS；改动文件 lint 与基线相同（无新增问题，既有 set-state-in-effect 等未处理）。`verify-eqb-icons.mjs` 在本环境因 Playwright 浏览器版本缺失无法启动，基线同样失败；本轮未改任何图标几何。
+
+未验证：真实课堂网络下的音频等待时长、真实设备（低端平板、手机）上的帧率、学生对三种状态的理解测试、生产环境 PDF 生成的实际耗时分布。未运行全量回归（Owner 尚未 Ship）。
+

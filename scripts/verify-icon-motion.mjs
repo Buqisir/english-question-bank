@@ -19,7 +19,9 @@ import { SelectionOverlay } from '/src/features/paper-browse/selection/Selection
 import { ListeningSegmentPlayer } from '/src/features/paper-browse/ListeningSegmentPlayer.tsx';
 import { DictionaryCard } from '/src/features/paper-browse/selection/DictionaryCard.tsx';
 import { useClipboardCopy } from '/src/hooks/useClipboardCopy.ts';
-import { DisclosureIcon } from '/src/icons/MotionIcons.tsx';
+import { CheckRevealIcon, DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '/src/icons/MotionIcons.tsx';
+import { useAudioIconState } from '/src/hooks/useAudioIconState.ts';
+import { NotebookAddButton } from '/src/features/vocabulary-notebook/NotebookAddButton.tsx';
 import { iconMotionInput } from '/src/icons/motionInput.ts';
 import '/src/index.css';
 import '/src/App.css';
@@ -31,6 +33,19 @@ window.copyRequests = [];
 Object.defineProperty(navigator, 'clipboard', { value: { writeText(text) {
   return new Promise((resolve, reject) => window.copyRequests.push({ text, resolve, reject }));
 } } });
+function AudioFixture() {
+ const audioIcon = useAudioIconState();
+ const play = (src) => { const audio = new Audio(src); window.motionAudio = audio; audioIcon.play(audio, src).catch(() => {}); };
+ return h('div', { id:'volume-fixture', style:{ marginTop:24 } },
+  h('button', { ...iconMotionInput, type:'button', id:'volume-slow', onClick:()=>play('/slow.wav') }, h(VolumeFeedbackIcon, { state:audioIcon.stateFor('/slow.wav') }), '慢速发音'),
+  h('button', { ...iconMotionInput, type:'button', id:'volume-missing', onClick:()=>play('/missing.wav') }, h(VolumeFeedbackIcon, { state:audioIcon.stateFor('/missing.wav') }), '无效发音'));
+}
+function DownloadFixture() {
+ const [working, setWorking] = useState(false);
+ return h('button', { ...iconMotionInput, type:'button', id:'download-fixture', onClick:()=>setWorking(!working) }, h(DownloadFeedbackIcon, { working }), working ? '正在生成' : '下载');
+}
+const notebookSegment = (selectedText) => ({ streamId:'s1', start:0, end:selectedText.length, selectedText });
+const newSegment = notebookSegment('fresh'), existingSegment = notebookSegment('known');
 function Fixture() {
  const [open, setOpen] = useState(false);
  const clipboard = useClipboardCopy();
@@ -43,7 +58,12 @@ function Fixture() {
   h('div', {id:'dictionary', style:{maxWidth:340, marginTop:32}}, h(DictionaryCard, {
    surface:'word', lookup:'ready', result:null, lookupError:'', playErrorId:'', sense:{status:'ok',text:'词'}, onRetrySense(){}, onPlayError(){},
    copied:clipboard.copied, copyState:clipboard.state, copyError:clipboard.error, onCopy:()=>clipboard.copy('word')
-  }))
+  })),
+  h(AudioFixture),
+  h('div', { style:{ marginTop:24 } }, h(DownloadFixture)),
+  h('div', { id:'notebook-new', style:{ maxWidth:340, marginTop:24 } }, h(NotebookAddButton, { paperId:'p1', sourceRevision:'r1', segment:newSegment })),
+  h('div', { id:'notebook-existing', style:{ maxWidth:340, marginTop:12 } }, h(NotebookAddButton, { paperId:'p1', sourceRevision:'r1', segment:existingSegment })),
+  h('span', { id:'static-check' }, h(CheckRevealIcon, { reveal:false }))
  );
 }
 createRoot(document.getElementById('root')).render(h(Fixture));
@@ -91,11 +111,27 @@ let browser
 try {
   await vite.listen()
   const origin = `http://127.0.0.1:${vite.httpServer.address().port}`
-  browser = await chromium.launch()
+  browser = await chromium.launch(process.env.EQB_CHROMIUM ? { executablePath:process.env.EQB_CHROMIUM } : {})
   const page = await browser.newPage({ viewport:{width:1100,height:1000} })
   const errors = []
   page.on('pageerror', error => { errors.push(error.message); console.error(error.message) })
   await page.route('**/fixture.wav', route => route.fulfill({ contentType:'audio/wav', body:audio }))
+  let releaseSlowAudio
+  await page.route('**/slow.wav', async route => {
+    await new Promise(resolve => { releaseSlowAudio = resolve })
+    await route.fulfill({ contentType:'audio/wav', body:audio })
+  })
+  await page.route('**/missing.wav', route => route.fulfill({ status:404, body:'' }))
+  let notebookAdd
+  await page.route('**/api/vocabulary-notebook/**', async route => {
+    const pathname = new URL(route.request().url()).pathname
+    if (pathname.endsWith('/selection-state')) {
+      const known = route.request().postDataJSON().segments[0].selectedText === 'known'
+      return route.fulfill({ json:{ state: known ? 'occurrence-exists' : 'not-added', contextId:null, entryId:null } })
+    }
+    if (pathname.endsWith('/contexts')) { notebookAdd = route; return }
+    return route.fulfill({ json:{ saved:true } })
+  })
   await page.goto(`${origin}/__icon-motion/`)
   const copy = page.getByRole('button',{name:'复制译文', exact:true})
   await copy.waitFor()
@@ -108,6 +144,9 @@ try {
   await copy.click()
   assert.equal(await copy.isDisabled(), true)
   assert.equal(await copy.locator('.eqb-motion-copy').getAttribute('data-state'), 'pending')
+  // K3：等待态没有表现，纸张保持静止、不透明。
+  assert.ok(await copy.locator('.eqb-copy-paper svg > path').evaluateAll(nodes => nodes.every(n => getComputedStyle(n).transform === 'none')))
+  assert.equal(await copy.locator('.eqb-copy-paper').evaluate(n => getComputedStyle(n).opacity), '1')
   await page.waitForFunction(() => window.copyRequests.length === 1)
   await page.evaluate(() => window.copyRequests[0].reject(new Error('denied')))
   await page.getByRole('alert').filter({hasText:'复制未成功'}).waitFor()
@@ -116,14 +155,14 @@ try {
   await page.waitForTimeout(100)
   await page.evaluate(() => window.copyRequests[1].resolve())
   await page.waitForFunction(() => document.querySelector('.eqb-motion-copy').dataset.state === 'done')
-  await page.waitForFunction(() => getComputedStyle(document.querySelector('.eqb-copy-check')).opacity==='1', null, { timeout:1500 })
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('.eqb-motion-copy .eqb-reveal')).opacity==='1', null, { timeout:1500 })
   assert.ok(await page.evaluate(() => window.runs.some(r=>r.property==='transform')))
   await page.screenshot({path:path.join(evidence,'copy-success.png')})
   await page.waitForFunction(() => document.querySelector('.eqb-motion-copy').dataset.state === 'idle')
   await copy.focus(); await page.keyboard.press('Enter')
   await page.waitForFunction(() => window.copyRequests.length === 3)
   await page.evaluate(() => window.copyRequests[2].resolve())
-  assert.ok(await copy.locator('.eqb-copy-check').evaluate(n=>getComputedStyle(n).transitionDuration==='0s'))
+  assert.ok(await copy.locator('.eqb-reveal').evaluate(n=>getComputedStyle(n).transitionDuration==='0s'))
   console.log('PASS translation copy: pending, actual success, failure, reset and keyboard')
 
   const dictionaryCopy=page.locator('#dictionary button[aria-label="复制词条"]')
@@ -164,6 +203,82 @@ try {
   await page.waitForFunction(()=>document.querySelector('.listening-player .eqb-motion-playback')?.dataset.playing==='true')
   assert.ok(await transport.locator('.eqb-pause-bars path').evaluateAll(nodes=>nodes.every(n=>getComputedStyle(n).transform==='none')))
   console.log('PASS disclosure direction, reduced motion and instant keyboard transition')
+
+  await page.emulateMedia({ reducedMotion:'no-preference' })
+  const slow = page.locator('#volume-slow'), slowWave = slow.locator('svg > path:last-of-type'), slowSpeaker = slow.locator('svg > path:first-of-type')
+  const slowIcon = slow.locator('.eqb-motion-volume')
+  await slow.click()
+  assert.equal(await slowIcon.getAttribute('data-state'), 'waiting')
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('#volume-slow svg > path:last-of-type')).opacity === '0.35', null, { timeout:1000 })
+  assert.equal(await slowIcon.getAttribute('data-loop'), null, 'no loop before the playing event')
+  releaseSlowAudio()
+  await page.waitForFunction(() => document.querySelector('#volume-slow .eqb-motion-volume').dataset.state === 'playing')
+  assert.equal(await slowIcon.getAttribute('data-loop'), 'on')
+  assert.equal(await slowWave.evaluate(n => getComputedStyle(n).animationName), 'eqb-volume-wave')
+  assert.equal(await slowSpeaker.evaluate(n => getComputedStyle(n).animationName), 'none', 'speaker body stays still')
+  await page.waitForTimeout(200)
+  await page.evaluate(() => window.motionAudio.pause())
+  await page.waitForFunction(() => document.querySelector('#volume-slow .eqb-motion-volume').dataset.state === 'idle')
+  assert.equal(await slowIcon.getAttribute('data-loop'), null)
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('#volume-slow svg > path:last-of-type')).opacity === '1', null, { timeout:600 })
+  const missing = page.locator('#volume-missing .eqb-motion-volume')
+  await page.locator('#volume-missing').click()
+  await page.waitForFunction(() => document.querySelector('#volume-missing .eqb-motion-volume').dataset.state === 'idle', null, { timeout:3000 })
+  assert.equal(await missing.getAttribute('data-loop'), null, 'rejected play never loops')
+  console.log('PASS pronunciation: grace then waiting, loop only after playing, settle on pause, rejected play returns to rest')
+
+  const download = page.locator('#download-fixture'), arrow = download.locator('svg > path:nth-of-type(n+2)'), tray = download.locator('svg > path:first-of-type')
+  await download.click()
+  await page.waitForTimeout(500)
+  assert.equal(await download.locator('.eqb-motion-download').getAttribute('data-loop'), 'on')
+  assert.ok(await arrow.evaluateAll(nodes => nodes.every(n => getComputedStyle(n).transform !== 'none')), 'arrow presses down')
+  assert.equal(await tray.evaluate(n => getComputedStyle(n).transform), 'none', 'tray stays still')
+  const timing = await arrow.first().evaluate(n => n.getAnimations().map(a => ({ name:a.animationName, iterations:a.effect.getComputedTiming().iterations, delay:a.effect.getComputedTiming().delay })))
+  assert.deepEqual(timing.map(t => t.name), ['eqb-download-press', 'eqb-download-pulse'])
+  assert.equal(timing[0].iterations, 5, 'press capped at 5 cycles')
+  assert.equal(timing[1].delay, 5100, 'opacity pulse takes over after the press cap')
+  assert.equal(timing[1].iterations, Infinity)
+  await download.click()
+  assert.equal(await download.locator('.eqb-motion-download').getAttribute('data-loop'), null)
+  assert.ok(await arrow.first().evaluate(n => n.getAnimations().length === 1), 'exit settles from the current value')
+  await page.waitForTimeout(250)
+  assert.ok(await arrow.evaluateAll(nodes => nodes.every(n => getComputedStyle(n).transform === 'none' && getComputedStyle(n).opacity === '1')))
+  await download.click(); await page.waitForTimeout(300)
+  await download.focus(); await page.keyboard.press('Enter')
+  assert.ok(await arrow.first().evaluate(n => n.getAnimations().length === 0), 'keyboard exit is instant')
+  console.log('PASS download: tray still, 5-cycle press then opacity pulse, settle on exit, instant keyboard exit')
+
+  const notebookNew = page.locator('#notebook-new button'), notebookExisting = page.locator('#notebook-existing button')
+  await notebookExisting.filter({ hasText:'已加入生词本' }).waitFor()
+  assert.equal(await notebookExisting.locator('.eqb-motion-check').getAttribute('class'), 'eqb-motion eqb-motion-check', 'already added shows a static check')
+  assert.equal(await notebookExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).animationName), 'none')
+  await notebookNew.filter({ hasText:'加入生词本' }).waitFor()
+  await notebookNew.click()
+  await notebookNew.filter({ hasText:'正在加入' }).waitFor()
+  assert.equal(await notebookNew.locator('.eqb-motion-check').count(), 0)
+  while (!notebookAdd) await new Promise(resolve => setTimeout(resolve, 10))
+  await notebookAdd.fulfill({ json:{ created:true, contextId:'c1', entryId:'e1', state:'occurrence-exists' } })
+  await notebookNew.filter({ hasText:'已加入生词本' }).waitFor()
+  assert.ok((await notebookNew.locator('.eqb-motion-check').getAttribute('class')).includes('is-revealing'))
+  assert.equal(await notebookNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).animationName), 'eqb-reveal-window')
+  assert.equal(await notebookNew.locator('.eqb-reveal-in').evaluate(n => getComputedStyle(n).animationName), 'eqb-reveal-counter')
+  console.log('PASS notebook: reveal only on saving → added, static check when already added')
+
+  await page.emulateMedia({ reducedMotion:'reduce' })
+  await download.click(); await page.waitForTimeout(400)
+  assert.equal(await arrow.first().evaluate(n => getComputedStyle(n).animationName), 'eqb-download-pulse')
+  assert.ok(await arrow.evaluateAll(nodes => nodes.every(n => getComputedStyle(n).transform === 'none')), 'no displacement under reduced motion')
+  await download.click()
+  releaseSlowAudio = null
+  await slow.click()
+  while (!releaseSlowAudio) await new Promise(resolve => setTimeout(resolve, 10))
+  releaseSlowAudio()
+  await page.waitForFunction(() => document.querySelector('#volume-slow .eqb-motion-volume').dataset.state === 'playing')
+  assert.equal(await slowWave.evaluate(n => getComputedStyle(n).animationName), 'eqb-volume-wave', 'opacity-only wave keeps running')
+  await page.evaluate(() => window.motionAudio.pause())
+  assert.equal(await page.locator('#static-check .eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none')
+  await page.emulateMedia({ reducedMotion:'no-preference' })
+  console.log('PASS reduced motion: download pulse only, wave unchanged, no reveal displacement')
 
   let pinResponse
   let pinned = false
