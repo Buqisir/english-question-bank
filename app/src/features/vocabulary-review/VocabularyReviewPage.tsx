@@ -12,6 +12,7 @@ import {
   RotateCcw,
   Save,
   Volume,
+  WordBubble,
 } from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
@@ -1590,7 +1591,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <Grid2X2 size={16} />趣味练习
               </button>
               <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench(vocabularySet.id)}>
-                <BoardCheck size={16} />看词说义
+                <WordBubble size={16} />看词说义
               </button>
               <button className="ghost-button" type="button" onClick={closeVocabularySet}>返回</button>
             </div>

@@ -1,4 +1,4 @@
-import { Archive, Download, Ellipsis, Paper, Save, Trash } from '../../icons'
+import { Download, Ellipsis, Folder, Paper, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import {
@@ -378,7 +378,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                     aria-pressed={selectedFolderId === folder.id}
                     onClick={() => selectFolder(folder.id)}
                   >
-                    <Archive size={20} aria-hidden="true" />
+                    <Folder size={20} aria-hidden="true" />
                     <span title={folder.name}>{folder.name}</span>
                     <span className="my-space-folder-count">{folder.artifactCount}</span>
                   </button>

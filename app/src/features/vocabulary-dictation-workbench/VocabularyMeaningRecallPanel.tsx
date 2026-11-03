@@ -6,8 +6,9 @@ import {
   Eye,
   EyeOff,
   PaperCheck,
+  PaperLined,
+  PaperStudent,
   Play,
-  Printer,
   QrCode,
   RotateCcw,
   Save,
@@ -533,9 +534,9 @@ export function VocabularyMeaningRecallPanel({
             <FluidHoverList as="div" className="dictation-download-items" axis="y" itemSelector=".dictation-download-option">
               {([
                 ['cards', '单词卡', <Card size={14} key="cards" />],
-                ['dictation', '听写纸', <Download size={14} key="dictation" />],
+                ['dictation', '听写纸', <PaperStudent size={14} key="dictation" />],
                 ['answer', '教师答案', <PaperCheck size={14} key="answer" />],
-                ['handwriting', '衡水体练字纸', <Printer size={14} key="handwriting" />],
+                ['handwriting', '衡水体练字纸', <PaperLined size={14} key="handwriting" />],
               ] as const).map(([kind, label, icon]) => (
                 <div className="dictation-download-option" key={kind}>
                   <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, kind, 'download')}>{icon}{label}</button>
@@ -543,7 +544,7 @@ export function VocabularyMeaningRecallPanel({
                 </div>
               ))}
               <div className="dictation-download-option">
-                <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'download', 'single')}><Printer size={14} />练字纸（每词写1遍）</button>
+                <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'download', 'single')}><PaperLined size={14} />练字纸（每词写1遍）</button>
                 <button type="button" className="dictation-save-as-button" aria-label="每词写1遍练字纸另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'save-as', 'single')}><Save size={12} />另存为…</button>
               </div>
               <div className="dictation-download-divider" />

@@ -7,6 +7,8 @@ import {
   Download,
   Eye,
   PaperCheck,
+  PaperLined,
+  PaperStudent,
   Link,
   ListChecks,
   PauseCircle,
@@ -905,9 +907,9 @@ export function VocabularyDictationWorkbench({
     return (
       <>
         <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'cards')} onSaveAs={() => void downloadTaskMaterial(task, 'cards', 'save-as')}><Card size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</DownloadOption>
-        <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><Download size={14} />{publicHref ? '听写纸（含二维码）' : '听写纸'}</DownloadOption>
+        <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><PaperStudent size={14} />{publicHref ? '听写纸（含二维码）' : '听写纸'}</DownloadOption>
         <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'answer')} onSaveAs={() => void downloadTaskMaterial(task, 'answer', 'save-as')}><PaperCheck size={14} />教师答案</DownloadOption>
-        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'handwriting')} onSaveAs={() => void downloadTaskMaterial(task, 'handwriting', 'save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
+        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'handwriting')} onSaveAs={() => void downloadTaskMaterial(task, 'handwriting', 'save-as')}><PaperLined size={14} />衡水体练字纸</DownloadOption>
         <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadTaskBundle(task)} onSaveAs={() => void downloadTaskBundle(task, 'save-as')}><Download size={14} />下载全套（4份）</DownloadOption>
       </>
     )
@@ -1190,10 +1192,10 @@ export function VocabularyDictationWorkbench({
                           <summary><Download size={14} />下载本轮错词<ChevronDown size={14} /></summary>
                           <DownloadMenuItems>
                             <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'cards', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'cards', 'save-as')}><Card size={14} />单词卡</DownloadOption>
-                            <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'dictation', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'dictation', 'save-as')}><Download size={14} />听写纸</DownloadOption>
+                            <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'dictation', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'dictation', 'save-as')}><PaperStudent size={14} />听写纸</DownloadOption>
                             <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'answer', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'answer', 'save-as')}><PaperCheck size={14} />教师答案</DownloadOption>
-                            <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
-                            <DownloadOption label="每词写1遍练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download', 'single')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as', 'single')}><Printer size={14} />练字纸（每词写1遍）</DownloadOption>
+                            <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as')}><PaperLined size={14} />衡水体练字纸</DownloadOption>
+                            <DownloadOption label="每词写1遍练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download', 'single')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as', 'single')}><PaperLined size={14} />练字纸（每词写1遍）</DownloadOption>
                             <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'bundle', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'bundle', 'save-as')}><Download size={14} />下载全套（4份）</DownloadOption>
                           </DownloadMenuItems>
                         </details>

@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, BookMarked, Check, Grid2X2, RotateCcw, Volume } from '../../icons'
+import { ArrowLeft, ArrowRight, Card, Check, Grid2X2, RotateCcw, Volume } from '../../icons'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetDto } from '../../services/vocabulary'
@@ -166,14 +166,14 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
         {loadState === 'loading' && (
           <section className="vocabulary-practice-status" aria-live="polite">
-            <BookMarked size={32} aria-hidden="true" />
+            <Card size={32} aria-hidden="true" />
             <h1>正在准备卡片…</h1>
           </section>
         )}
 
         {loadState === 'error' && (
           <section className="vocabulary-practice-status" role="alert">
-            <BookMarked size={32} aria-hidden="true" />
+            <Card size={32} aria-hidden="true" />
             <h1>这组卡片没有加载成功</h1>
             <p>{loadError}</p>
             <button className="ghost-button" type="button" onClick={onBackToSet}>返回生词组</button>
@@ -226,7 +226,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
                     >
                       <span className="vocabulary-match-card-inner">
                         <span className="vocabulary-match-card-back" aria-hidden="true">
-                          <BookMarked size={32} />
+                          <Card size={32} />
                           <span>翻开</span>
                         </span>
                         <span className="vocabulary-match-card-face" aria-hidden="true">

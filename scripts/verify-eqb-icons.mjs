@@ -326,6 +326,21 @@ try {
         if (/data-stroke-small/.test(sample.line) || parse(sample.line).querySelectorAll('[stroke-width]').length) failures.push(`${sample.name}/${sample.size}: one pen — no local stroke widths inside the lens`)
         if (sample.name === 'reading-analysis' && parse(sample.line).querySelectorAll('path').length !== 2) failures.push(`reading-analysis/${sample.size}: R3 is lens + handle + two text lines, no paper`)
       }
+      if (sample.name === 'paper-lined') {
+        // 语义第三轮 ① L2（Owner 2026-11-03）：卷家族纸身 + 卷角 + 三条贴纸边的格线（纸下沿当第四线），G2 同纸家族 ×0.972。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        const lines = paths[2]?.getAttribute('d') ?? ''
+        if (paths.length !== 3 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small], [fill="currentColor"]').length || (lines.match(/M/g) ?? []).length !== 3) failures.push(`paper-lined/${sample.size}: paper, curl and three ruled lines in one pen`)
+        else if (!paths[0].getAttribute('d').startsWith('M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C')) failures.push(`paper-lined/${sample.size}: share the paper body`)
+      }
+      if (sample.name === 'word-bubble') {
+        // 语义第三轮 ② B2+（Owner 2026-11-03）：一只闭合圆气泡 + 与单词卡同形的实心 A，不用夹板、不加勾。
+        const svgEl = parse(sample.line)
+        const paths = [...svgEl.querySelectorAll('path')]
+        const letter = paths.find((path) => path.getAttribute('fill') === 'currentColor')
+        if (paths.length !== 2 || !letter || !/[zZ]\s*$/.test(paths[0].getAttribute('d')) || (paths[0].getAttribute('d').match(/[mM]/g) ?? []).length !== 1 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small]').length) failures.push(`word-bubble/${sample.size}: one closed bubble and one solid A`)
+      }
       if (sample.name === 'link') {
         // 第 6 组 G4：两段内钩沿原方向收 0.5，与对面链环留缝。
         const ends = [...parse(sample.line).querySelectorAll('path')].map((path) => path.getAttribute('d').trim().split(/\s+/).slice(-2).join(' '))
