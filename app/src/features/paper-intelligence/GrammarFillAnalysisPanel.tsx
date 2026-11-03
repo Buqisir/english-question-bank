@@ -25,6 +25,8 @@ import type {
 } from './grammarFillAnalysisSurfaceAdapter.ts'
 import { ROLE_LABELS } from './grammarFillAnalysisSurfaceAdapter.ts'
 import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
+import { DisclosureIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 
 export type GrammarFillAnalysisPanelProps = {
   /** The blank currently focused (null = none selected yet). */
@@ -48,7 +50,7 @@ export function GrammarFillAnalysisPanel({
         // Same intro-collapse behavior as ClozeAnalysisPanel: open in the
         // empty state, one collapsed line once a blank is focused.
         <details className="pi-gf-group-overview" open={!hasActiveQuestion}>
-          <summary className="pi-gf-group-overview-summary">文章简介</summary>
+          <summary className="pi-gf-group-overview-summary" {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />文章简介</summary>
           <p className="pi-gf-group-overview-text">{groupView.overview}</p>
         </details>
       )}
@@ -107,7 +109,7 @@ export function GrammarFillAnalysisPanel({
               value is the click-to-highlight interaction. */}
           {analysis.evidenceRows.length > 0 && (
             <details className="pi-gf-evidence-fold" key={`ev-${analysis.questionId}`}>
-              <summary className="pi-gf-evidence-summary">证据定位</summary>
+              <summary className="pi-gf-evidence-summary" {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />证据定位</summary>
               <div className="pi-gf-evidence-block">
                 {analysis.evidenceRows.map((row) => (
                     <button

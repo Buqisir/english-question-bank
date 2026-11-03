@@ -22,6 +22,8 @@ import type {
   ClozeGroupView,
 } from './clozeAnalysisSurfaceAdapter.ts'
 import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
+import { DisclosureIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 
 export type ClozeAnalysisPanelProps = {
   /** The blank currently focused (null = none selected yet). */
@@ -46,7 +48,7 @@ export function ClozeAnalysisPanel({
         // read-the-arc moment), auto-collapses to one line once a blank is
         // selected so per-blank reading never re-scrolls through it.
         <details className="pi-cloze-group-overview" open={!hasActiveQuestion}>
-          <summary className="pi-cloze-group-overview-summary">文章简介</summary>
+          <summary className="pi-cloze-group-overview-summary" {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />文章简介</summary>
           <p className="pi-cloze-group-overview-text">{groupView.overview}</p>
           {groupView.affectiveArc && (
             <p className="pi-cloze-group-arc">{groupView.affectiveArc}</p>
@@ -115,7 +117,7 @@ export function ClozeAnalysisPanel({
               key resets the open state when focus moves to another blank. */}
           {analysis.evidenceRows.length > 0 && (
             <details className="pi-cloze-evidence-fold" key={`ev-${analysis.questionId}`}>
-              <summary className="pi-cloze-evidence-summary">证据定位</summary>
+              <summary className="pi-cloze-evidence-summary" {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />证据定位</summary>
               <div className="pi-cloze-evidence-block">
                 {analysis.evidenceRows.map((row) =>
                     row.isOptionSide ? (

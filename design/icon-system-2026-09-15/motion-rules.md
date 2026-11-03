@@ -112,3 +112,11 @@ Owner 在评审页（v2 样板，两轮盲审）后确认：「①②③ 都做�
 `node scripts/verify-icon-motion.mjs` PASS 17 段（新增：details 驱动的下拉箭头翻转、查词卡署名开关、B 类转 90°、静止为 none、键盘立即到位；加入草稿卷只在本按钮按下时揭示、数据变化直接到位、回滚、剪刀淡入、键盘立即；试卷下载只有箭头透明度往复、外框和折角不动；减少动态下展开直接到位、加入草稿卷淡入、试卷下载折角不动；复习页下载按钮使用下载状态图标）。原型逐帧检查：所有动作离边 ≥1.33（要求 ≥1.25），只动 transform / opacity；回到静止后与同位置静态图标逐像素一致；A 类展开终帧几何与静态朝上箭头一致，像素有抗锯齿级差异（最大 29/255）。`pnpm -C app build` PASS；改动文件 lint 与基线相同（28 个既有问题，无新增）。
 
 未验证：选题台、题组详情、试卷浏览、我的空间这些需要登录数据的真实页面没有在浏览器里点过（组件与 CSS 在验证页上覆盖）；加入草稿卷后台确认与各处 PDF 生成的真实耗时；真实设备帧率。未运行全量回归（Owner 尚未 Ship）。
+
+### D4（单独一批）：讲评面板的浏览器自带三角
+
+- 范围：七选五 / 完形 / 语法填空的“文章简介”，课文讲解的“篇章结构 / 全文译文 / 长难句解析”，完形 / 语法填空的“证据定位”，一共 8 处 `<summary>`。都换成 `DisclosureIcon kind="branch"`（12px，放在文字前，即原来三角的位置），不传 `expanded`，跟随 `details[open]` 转 90°；`summary` 带 `iconMotionInput`，键盘开合立即到位。
+- 自带三角用 `list-style: none` 和 `::-webkit-details-marker` 隐藏；`summary` 改为 `display: flex; gap: 4px`，与文字居中对齐。文字、颜色、点击区域不变。
+- 盘点里列的 `pi-owner-meta`（▸ / ▾ 伪元素）和 `.pi-reading-group-overview` 目前没有任何组件渲染，只剩样式。这次不改也不删，等有消费者时再接同一个箭头。
+- 验证：`verify-icon-motion` 新增一段，渲染真实的 `ObjectiveTeachingContent` 并加载 `lectureAnalysisPanels.css`。检查三个 summary 都是 flex 且 list-style 为 none（不会出现两个箭头），收起时 transform 为 none，点击后转 90° 且是过渡，键盘回车立即到位；减少动态下只剩 opacity、直接到位。共 18 段 PASS，截图 `output/playwright/icon-motion/lecture-sections.png`。
+- 未验证：七选五 / 完形 / 语法填空真实讲评页（需要登录与分析数据）里的“文章简介”和“证据定位”没在浏览器里点过；它们与验证页是同一组件、同一份 CSS 规则。

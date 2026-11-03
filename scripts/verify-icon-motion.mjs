@@ -23,10 +23,12 @@ import { CheckRevealIcon, DisclosureIcon, DownloadFeedbackIcon, DraftAddIcon, Vo
 import { useAudioIconState } from '/src/hooks/useAudioIconState.ts';
 import { NotebookAddButton } from '/src/features/vocabulary-notebook/NotebookAddButton.tsx';
 import { iconMotionInput } from '/src/icons/motionInput.ts';
+import { ObjectiveTeachingContent } from '/src/features/paper-intelligence/ObjectiveTeachingContent.tsx';
 import '/src/index.css';
 import '/src/App.css';
 import '/src/features/paper-browse/paperBrowsePage.css';
 import '/src/features/paper-browse/selection/selectionOverlay.css';
+import '/src/features/paper-intelligence/lectureAnalysisPanels.css';
 const h = React.createElement;
 const range = document.createRange(); range.selectNodeContents(document.getElementById('sentence'));
 window.copyRequests = [];
@@ -55,6 +57,12 @@ function DisclosureFixtures() {
   h('details', { className:'dictation-download-menu', id:'menu-fixture' }, h('summary', { ...iconMotionInput }, '下载资料', h(DisclosureIcon, { size:14 })), h('p', null, '菜单内容')),
   h('button', { ...iconMotionInput, type:'button', id:'branch-fixture', 'aria-expanded':branch, onClick:()=>setBranch(!branch) }, h(DisclosureIcon, { kind:'branch', size:14, expanded:branch }), '来源卷'));
 }
+// 讲解面板的真实折叠段（篇章结构 / 全文译文 / 长难句解析）：原生 details，B 类箭头跟随 details[open]。
+const lectureContent = {
+ discourseSummary:'先提出问题，再分两层回答。', discourseItems:[{ id:'d1', label:'第一段', summary:'提出问题', functionText:'引出话题' }],
+ translationParagraphs:[{ paragraphId:'p1', segments:[{ text:'这是一段译文。', questionNos:[], kinds:[] }] }],
+ longSentences:[{ sentenceId:'s1', segments:[{ text:'What matters is ', underlined:false }, { text:'how we respond', underlined:true }], questionNos:['21'], analysisZh:'主语从句。', translationZh:'重要的是我们如何回应。' }],
+};
 // 加入草稿卷：window.setDraft[id] 模拟数据刷新带来的变化（不是用户在这个按钮上的操作）。
 window.setDraft = {};
 function DraftFixture({ id, cut = false, initial = false }) {
@@ -84,6 +92,7 @@ function Fixture() {
   h('span', { id:'static-check' }, h(CheckRevealIcon, { reveal:false })),
   h('div', { style:{ marginTop:24 } }, h(PaperDownloadFixture)),
   h(DisclosureFixtures),
+  h('div', { id:'lecture-fixture', style:{ maxWidth:420, marginTop:24 } }, h(ObjectiveTeachingContent, { content:lectureContent })),
   h('div', { style:{ marginTop:24, display:'flex', gap:12 } }, h(DraftFixture, { id:'draft-new' }), h(DraftFixture, { id:'draft-existing', initial:true }), h(DraftFixture, { id:'draft-cut', cut:true }))
  );
 }
@@ -310,6 +319,25 @@ try {
   assert.equal(await branchIcon.evaluate(n => getComputedStyle(n).transitionDuration), '0s', 'keyboard toggle is instant')
   console.log('PASS disclosure: details-driven dropdown flip, dictionary toggle, branch 90°, rest none, instant keyboard')
 
+  const lectureSummaries = page.locator('#lecture-fixture details > summary')
+  assert.equal(await lectureSummaries.count(), 3)
+  for (const summary of await lectureSummaries.all()) {
+    assert.deepEqual(await summary.evaluate(n => [getComputedStyle(n).display, getComputedStyle(n).listStyleType]), ['flex', 'none'], 'native marker is replaced, not doubled')
+    assert.equal(await summary.locator('.eqb-motion-branch').evaluate(n => getComputedStyle(n).transform), 'none', 'collapsed lecture section points right')
+  }
+  const lectureSummary = lectureSummaries.first(), lectureIcon = lectureSummary.locator('.eqb-motion-branch')
+  await page.evaluate(() => { window.runs.length = 0 })
+  await lectureSummary.click(); await page.waitForTimeout(250)
+  assert.equal(await lectureSummary.evaluate(n => n.parentElement.open), true)
+  assert.ok(isQuarterTurn(await lectureIcon.evaluate(n => getComputedStyle(n).transform)), 'details[open] turns the lecture chevron 90°')
+  assert.ok(await page.evaluate(() => window.runs.some(r => r.property === 'transform' && r.class.includes('eqb-motion-branch'))), 'turn is a transition')
+  await page.locator('#lecture-fixture').screenshot({ path:path.join(evidence,'lecture-sections.png') })
+  await lectureSummary.focus(); await page.keyboard.press('Enter')
+  assert.equal(await lectureSummary.evaluate(n => n.parentElement.open), false)
+  assert.equal(await lectureIcon.evaluate(n => getComputedStyle(n).transitionDuration), '0s', 'keyboard toggle is instant')
+  assert.equal(await lectureIcon.evaluate(n => getComputedStyle(n).transform), 'none')
+  console.log('PASS lecture sections: native marker replaced by branch chevron, details-driven 90°, instant keyboard')
+
   const draftNew = page.locator('#draft-new'), draftExisting = page.locator('#draft-existing'), draftCut = page.locator('#draft-cut')
   assert.equal(await draftExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).opacity), '1', 'already in draft shows the check')
   assert.equal(await draftExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none')
@@ -376,6 +404,10 @@ try {
   await menuSummary.click()
   assert.equal(await menuIcon.evaluate(n => getComputedStyle(n).transform), flip)
   await menuSummary.click()
+  await lectureSummary.click()
+  assert.equal(await lectureIcon.evaluate(n => getComputedStyle(n).transitionProperty), 'opacity', 'reduced motion: lecture chevron lands without turning')
+  assert.ok(isQuarterTurn(await lectureIcon.evaluate(n => getComputedStyle(n).transform)))
+  await lectureSummary.click()
   await draftNew.click()
   assert.equal(await draftNew.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).transform), 'none', 'reduced motion: check fades, no wipe')
   await page.waitForTimeout(250)

@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
+import { DisclosureIcon } from '../../icons/MotionIcons'
+import { iconMotionInput } from '../../icons/motionInput'
 
 export function ObjectiveTeachingContent({ content }: { content: ObjectiveTeachingView | null }): ReactNode {
   if (!content) return null
@@ -7,7 +9,7 @@ export function ObjectiveTeachingContent({ content }: { content: ObjectiveTeachi
     <div className="pi-objective-teaching">
       {(content.discourseSummary || content.discourseItems.length > 0) && (
         <details className="pi-objective-teaching-section">
-          <summary>篇章结构</summary>
+          <summary {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />篇章结构</summary>
           <div className="pi-objective-discourse">
             {content.discourseSummary && <p>{content.discourseSummary}</p>}
             {content.discourseItems.map((item) => (
@@ -18,7 +20,7 @@ export function ObjectiveTeachingContent({ content }: { content: ObjectiveTeachi
       )}
       {content.translationParagraphs.length > 0 && (
         <details className="pi-objective-teaching-section">
-          <summary>全文译文</summary>
+          <summary {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />全文译文</summary>
           <div className="pi-objective-translation">
             {content.translationParagraphs.map((paragraph) => (
               <p key={paragraph.paragraphId} data-translation-paragraph-id={paragraph.paragraphId}>
@@ -39,7 +41,7 @@ export function ObjectiveTeachingContent({ content }: { content: ObjectiveTeachi
       )}
       {content.longSentences.length > 0 && (
         <details className="pi-objective-teaching-section">
-          <summary>长难句解析</summary>
+          <summary {...iconMotionInput}><DisclosureIcon kind="branch" size={12} />长难句解析</summary>
           <div className="pi-objective-long-sentences">
             {content.longSentences.map((sentence) => (
               <article key={sentence.sentenceId} data-selected-sentence-id={sentence.sentenceId}>
