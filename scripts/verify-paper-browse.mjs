@@ -2138,9 +2138,10 @@ assert(
   'the quote-bar removal, selected connector socket, or semantic socket colors are missing',
 )
 assert(
+  // icon-system v2 (2026-11-02): sizes collapse to six tiers, so 15 → 16.
   '85. the similar CTA uses the shared EQB icon system instead of an Emoji glyph',
   /import\s*\{[^}]*RefreshCw[^}]*\}\s*from\s*['"]\.\.\/\.\.\/icons['"]/.test(pageSrc) &&
-    /<RefreshCw\s+aria-hidden="true"\s+size=\{15\}\s*\/>/.test(pageSrc) &&
+    /<RefreshCw\s+aria-hidden="true"\s+size=\{16\}\s*\/>/.test(pageSrc) &&
     !pageSrc.includes('🔁'),
   'the similar CTA is missing its EQB RefreshCw icon or still contains the retired Emoji glyph',
 )

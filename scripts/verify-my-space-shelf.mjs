@@ -50,7 +50,8 @@ assert('no global total is fabricated beside the all-files rail entry', !/全部
 assert('artifacts remain grouped into newest-first month sections', tsx.includes('my-space-month-group') && tsx.includes('b.localeCompare(a)'))
 assert('row metadata preserves folder, page count, date, and student label', tsx.includes('folderNames.get') && tsx.includes('artifact.pageCount || 1') && tsx.includes('dateLabel') && tsx.includes('artifact.sourceDraftStudentLabel'))
 
-assert('download and original draft remain visible row actions', tsx.includes('<Download size={16}') && tsx.includes('打开原草稿'))
+// icon-motion K1–K8 (2026-11-03): the row download uses the stateful DownloadFeedbackIcon.
+assert('download and original draft remain visible row actions', tsx.includes('<DownloadFeedbackIcon size={16}') && tsx.includes('打开原草稿'))
 assert('save-as remains connected to the existing download path', tsx.includes("downloadArtifact(artifact, 'save-as')"))
 assert('ellipsis menu exposes exactly save-as and delete as menu item buttons', (tsx.match(/<button[^>]*[\s\S]{0,160}?role="menuitem"/g) || []).length === 2 && tsx.includes('另存为…') && tsx.includes('删除文件'))
 assert('row and menu FluidHoverList instances disable gap clicks', (tsx.match(/gapClick=\{false\}/g) || []).length >= 3)
