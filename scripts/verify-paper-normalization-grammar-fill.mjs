@@ -37,7 +37,7 @@ function deepFreeze(value) {
 }
 
 function loadProofInput({ paperId, sha256 }) {
-  const relativePath = `app/public/paper-assets/${paperId}/latest/paper-asset.json`
+  const relativePath = `${paperId === 'paper-960d0f8d' ? 'app/public/paper-assets' : 'test-fixtures/retired-paper-assets'}/${paperId}/latest/paper-asset.json`
   const buffer = readFileSync(path.join(rootDir, relativePath))
   assert.equal(
     createHash('sha256').update(buffer).digest('hex'),

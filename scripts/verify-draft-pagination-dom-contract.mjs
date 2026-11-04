@@ -160,7 +160,7 @@ async function main() {
   assert('applyPaginationDomContract throws when pageCount does not match the actual .pagedjs_page count', threwOnBadPageCount)
 
   // ─── 3. SW-A: figure image actually loads through renderPaginatedPaper ───
-  const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
+  const paperAssetsDir = path.join(rootDir, 'test-fixtures/retired-paper-assets')
   const assetPath = path.join(paperAssetsDir, 'paper-2026-i', 'latest', 'paper-asset.json')
   const asset = JSON.parse(readFileSync(assetPath, 'utf8'))
   const figureGroupId = 'group-2026-i-reading-a'

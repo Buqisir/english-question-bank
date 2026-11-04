@@ -91,7 +91,7 @@ const frozenPaperIds = JSON.parse(
 function findAnalysisFiles() {
   return frozenPaperIds
     .map((paperId) => path.join(
-      paperAssetsDir,
+      paperId === 'paper-960d0f8d' ? paperAssetsDir : path.join(rootDir, 'test-fixtures/retired-paper-assets'),
       paperId,
       'latest',
       'analyses',

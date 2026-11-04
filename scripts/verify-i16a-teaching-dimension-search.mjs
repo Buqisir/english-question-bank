@@ -32,12 +32,13 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const paperAssetsDir = path.join(rootDir, 'app/public/paper-assets')
+const paperAssetRoots = [paperAssetsDir, path.join(rootDir, 'test-fixtures/retired-paper-assets')]
 
 // jslk moved out of the served paper-assets path (fixture-move cut) to
 // test-fixtures/paper-assets/. The teaching-facet index still needs jslk in
 // its scan corpus for Req 4/5's "declared group but no analysis file stays
 // absent" assertions, so splice a temp dir: every real paper under
-// app/public/paper-assets/ plus jslk from its new home. buildIndex()'s
+// both paper-asset roots plus jslk from its new home. buildIndex()'s
 // top-level scan calls entry.isDirectory() on each paperAssetsDir child,
 // which lies for symlinked entries (Dirent type reflects the symlink, not
 // its target), so each paper gets a *real* directory here with its contents
@@ -53,9 +54,11 @@ function spliceCorpusPaper(sourceDir, paperId) {
     symlinkSync(path.join(sourceDir, child), path.join(targetDir, child))
   }
 }
-for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
-  if (!entry.isDirectory()) continue
-  spliceCorpusPaper(path.join(paperAssetsDir, entry.name), entry.name)
+for (const assetRoot of paperAssetRoots) {
+  for (const entry of readdirSync(assetRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+    spliceCorpusPaper(path.join(assetRoot, entry.name), entry.name)
+  }
 }
 spliceCorpusPaper(
   path.join(rootDir, 'test-fixtures/paper-assets/paper-2024-jslk-english'),

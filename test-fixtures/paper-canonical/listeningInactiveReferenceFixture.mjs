@@ -46,7 +46,7 @@ export function makeListeningInactiveReferenceFixture() {
   const source = stabilizeCanonicalMapping(canonicalMapping)
   const questionsBytes = readHashBoundBytes(
     new URL(
-      '../../app/public/paper-assets/paper-2026-i/latest/listening/questions.json',
+      '../retired-paper-assets/paper-2026-i/latest/listening/questions.json',
       import.meta.url,
     ),
     reference.questions,
@@ -54,7 +54,7 @@ export function makeListeningInactiveReferenceFixture() {
   )
   const answersBytes = readHashBoundBytes(
     new URL(
-      '../../app/public/paper-assets/paper-2026-i/latest/listening/answers.json',
+      '../retired-paper-assets/paper-2026-i/latest/listening/answers.json',
       import.meta.url,
     ),
     reference.answers,
@@ -62,7 +62,7 @@ export function makeListeningInactiveReferenceFixture() {
   )
   const transcriptBytes = readHashBoundBytes(
     new URL(
-      '../../app/public/paper-assets/paper-2026-i/latest/listening/transcript.json',
+      '../retired-paper-assets/paper-2026-i/latest/listening/transcript.json',
       import.meta.url,
     ),
     reference.transcript,

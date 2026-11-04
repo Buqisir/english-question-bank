@@ -86,6 +86,10 @@ try {
     recursive: true,
   })
 
+  cpSync(path.join(repoRoot, 'test-fixtures/retired-paper-assets'), targetAssetsRoot, {
+    recursive: true,
+  })
+
   const sentinelPath = path.join(
     targetAssetsRoot,
     'paper-2026-i',

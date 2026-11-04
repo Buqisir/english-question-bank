@@ -15,14 +15,14 @@ import { createExportImplementation } from '../server/exports/exportImplementati
 import { projectContinuationAnalysisDisplay } from '../shared/writing/continuationAnalysis.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
+const paperAssetsDir = path.join(rootDir, 'test-fixtures', 'retired-paper-assets')
 const source = loadCompanionAnalysisSource({
   paperAssetsDir,
   paperId: 'paper-2025-i',
 })
 const html = buildCompanionAnalysisHtml(source)
 const historicalContinuationSource = loadCompanionAnalysisSource({
-  paperAssetsDir,
+  paperAssetsDir: path.join(rootDir, 'app/public/paper-assets'),
   paperId: 'paper-mock-gd-2026-m1',
 })
 const historicalContinuationHtml = buildCompanionAnalysisHtml(historicalContinuationSource)

@@ -341,7 +341,8 @@ for (const item of benchmark.cases) {
 
   const baseDir = path.join(
     rootDir,
-    'app/public/paper-assets',
+    item.paperId === 'paper-960d0f8d' || item.paperId.startsWith('paper-mock-')
+      ? 'app/public/paper-assets' : 'test-fixtures/retired-paper-assets',
     item.paperId,
     'latest',
   )

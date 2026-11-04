@@ -56,7 +56,7 @@ export const applicationWritingReferenceHashes = references
 export function makeApplicationWritingReferenceFixture(paperId) {
   const hashes = references[paperId]
   if (!hashes) throw new Error(`Unknown Application Writing reference paper ${paperId}`)
-  const assetBaseUrl = new URL(`../../app/public/paper-assets/${paperId}/latest/`, import.meta.url)
+  const assetBaseUrl = new URL(`../retired-paper-assets/${paperId}/latest/`, import.meta.url)
   const captureBytes = readHashBoundBytes(new URL(`evidence/${hashes.captureFile}`, import.meta.url), hashes.capture)
   const transcriptionBytes = readHashBoundBytes(new URL(`evidence/${hashes.transcriptionFile}`, import.meta.url), hashes.transcription)
   const importMeta = readHashBoundBytes(new URL('import-meta.json', assetBaseUrl), hashes.importMeta)

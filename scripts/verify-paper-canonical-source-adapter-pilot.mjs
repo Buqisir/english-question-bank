@@ -736,17 +736,17 @@ function buildEvidence({ beforeState }) {
   }
   const historicalByteBindings = [
     assertMatchingBytes(
-      'app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json',
       'test-fixtures/paper-import/paper-2026-i-canonical-pilot/paper-asset.json',
       'paper asset',
     ),
     assertMatchingBytes(
-      'app/public/paper-assets/paper-2026-i/latest/answer-key.json',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/answer-key.json',
       'test-fixtures/paper-import/paper-2026-i-canonical-pilot/answer-key.json',
       'official answer lead',
     ),
     assertMatchingBytes(
-      'app/public/paper-assets/paper-2026-i/latest/import-meta.json',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/import-meta.json',
       'test-fixtures/paper-import/paper-2026-i-canonical-pilot/import-meta.json',
       'source provenance',
     ),

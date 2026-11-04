@@ -10,7 +10,7 @@ import { createImportReviewRoutes } from '../server/import-review/importReviewRo
 import { runRoutes } from '../server/router/index.mjs'
 
 const source = loadCompanionAnalysisSource({
-  paperAssetsDir: new URL('../app/public/paper-assets', import.meta.url).pathname,
+  paperAssetsDir: new URL('../test-fixtures/retired-paper-assets', import.meta.url).pathname,
   paperId: 'paper-2025-i',
 })
 const fixture = structuredClone(source)

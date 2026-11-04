@@ -90,7 +90,11 @@ function repositoryFile(relativePath) {
   if (typeof relativePath !== 'string' || relativePath.length === 0 || relativePath.includes('..')) {
     fail(`unsafe committed path ${String(relativePath)}`)
   }
-  const absolutePath = resolve(repositoryRoot, relativePath)
+  const committedPath = relativePath.startsWith('app/public/paper-assets/paper-20')
+    || relativePath.startsWith('app/public/paper-assets/paper-zj-20')
+    ? relativePath.replace('app/public/paper-assets/', 'test-fixtures/retired-paper-assets/')
+    : relativePath
+  const absolutePath = resolve(repositoryRoot, committedPath)
   if (!absolutePath.startsWith(`${repositoryRoot}${sep}`)) fail(`committed path escapes the repository: ${relativePath}`)
   return new Uint8Array(readFileSync(absolutePath))
 }

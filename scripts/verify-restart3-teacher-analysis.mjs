@@ -132,13 +132,13 @@ const { loadGroupAnalysisTexts } = await import(
   path.join(rootDir, 'server', 'draft-paper', 'analysisText.mjs')
 )
 
-const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
+const paperAssetsDir = path.join(rootDir, 'test-fixtures', 'retired-paper-assets')
 const zjPaperId = 'paper-zj-2026-jan'
 const zjAssetPath = path.join(paperAssetsDir, zjPaperId, 'latest', 'paper-asset.json')
 assert('paper-zj-2026-jan fixture asset exists', existsSync(zjAssetPath))
 
 if (existsSync(zjAssetPath)) {
-  const zjAsset = readJson(`app/public/paper-assets/${zjPaperId}/latest/paper-asset.json`)
+  const zjAsset = readJson(`test-fixtures/retired-paper-assets/${zjPaperId}/latest/paper-asset.json`)
 
   function detailForGroup(groupId, groupType) {
     const group = zjAsset.content.groups[groupId]
@@ -193,7 +193,7 @@ assert(
 )
 
 if (existsSync(jiaAssetPath)) {
-  const jiaAsset = readJson('app/public/paper-assets/paper-2024-jia/latest/paper-asset.json')
+  const jiaAsset = readJson('test-fixtures/retired-paper-assets/paper-2024-jia/latest/paper-asset.json')
   const jiaReadingGroupId = Object.keys(jiaAsset.content.groups).find(
     (groupId) => jiaAsset.content.groups[groupId].groupType === 'reading',
   )

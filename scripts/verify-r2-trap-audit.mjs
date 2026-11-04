@@ -75,7 +75,12 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
-const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
+const paperAssetRoots = ['app/public/paper-assets', 'test-fixtures/retired-paper-assets']
+  .map((dir) => path.join(rootDir, dir))
+function paperPath(paperId, ...parts) {
+  const assetRoot = paperAssetRoots.find((dir) => existsSync(path.join(dir, paperId)))
+  return path.join(assetRoot || paperAssetRoots[0], paperId, ...parts)
+}
 const cutDir = path.join(rootDir, 'docs', 'cuts', 'r2-trap-audit')
 const findingsPath = path.join(cutDir, 'scan-findings.json')
 const reportPath = path.join(cutDir, 'scan-report.md')
@@ -124,7 +129,7 @@ function isAdjudicated(finding) {
 const rawLiveFindings = []
 let liveTotalTraps = 0
 for (const paperId of listPaperIds()) {
-  const analysisPath = path.join(paperAssetsDir, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  const analysisPath = paperPath(paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
   if (!existsSync(analysisPath)) continue
   const analysis = readJson(analysisPath)
   for (const [questionId, question] of Object.entries(analysis.questions || {})) {
@@ -182,7 +187,7 @@ const LEGAL_LEVELS = new Set(['badge', 'row'])
 const LEGAL_REASONS = new Set(Object.values(CHECK_IDS))
 
 for (const finding of rawLiveFindings) {
-  const analysisPath = path.join(paperAssetsDir, finding.paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  const analysisPath = paperPath(finding.paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
   const analysis = readJson(analysisPath)
   const option = analysis.questions?.[finding.questionId]?.optionAnalysis?.find((item) => item.label === finding.optionLabel)
   const suspension = option?.trap?.suspension
@@ -247,7 +252,7 @@ const recastTargets = [
 ]
 
 for (const target of recastTargets) {
-  const analysisPath = path.join(paperAssetsDir, target.paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  const analysisPath = paperPath(target.paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
   const analysis = readJson(analysisPath)
   const option = analysis.questions?.[target.questionId]?.optionAnalysis?.find((item) => item.label === target.optionLabel)
   const trap = option?.trap
@@ -266,7 +271,7 @@ for (const target of recastTargets) {
 
 let liveSuspensionCount = 0
 for (const paperId of listPaperIds()) {
-  const analysisPath = path.join(paperAssetsDir, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  const analysisPath = paperPath(paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
   if (!existsSync(analysisPath)) continue
   const analysis = readJson(analysisPath)
   for (const question of Object.values(analysis.questions || {})) {
@@ -482,8 +487,8 @@ function buildFixtureAnalysis(groupId, questionId) {
 {
   const paperId = 'paper-2023-i'
   const questionId = 'q-2023-i-025'
-  const assetPath = path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json')
-  const analysisPath = path.join(paperAssetsDir, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  const assetPath = paperPath(paperId, 'latest', 'paper-asset.json')
+  const analysisPath = paperPath(paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
   if (existsSync(assetPath) && existsSync(analysisPath)) {
     const asset = readJson(assetPath)
     const analysis = readJson(analysisPath)

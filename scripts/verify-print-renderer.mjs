@@ -385,7 +385,7 @@ console.log('\nTest 5: Vivliostyle CLI smoke test')
 console.log('\nTest 8: Real paper-2026-i asset payload — behavioral blank count (PA F2)')
 {
   const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
-  const assetPath = path.join(rootDir, 'app/public/paper-assets/paper-2026-i/latest/paper-asset.json')
+  const assetPath = path.join(rootDir, 'test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json')
 
   if (!existsSync(assetPath)) {
     console.log('  ⊘ SKIP: paper-2026-i asset not found at ' + assetPath)

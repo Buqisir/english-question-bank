@@ -11,9 +11,9 @@ const proofs = [
   {
     paperId: 'paper-2026-i',
     groupId: 'group-2026-i-grammar-fill',
-    assetPath: '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+    assetPath: '../test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json',
     analysisPath:
-      '../app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json',
+      '../test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json',
     hintedQuestionId: 'q-2026-i-056',
     hintedBlankId: 'blank-2026-i-056',
     hintedQuestionNo: '56',

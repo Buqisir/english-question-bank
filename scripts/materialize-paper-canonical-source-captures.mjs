@@ -7,6 +7,17 @@ import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 
+async function sourceBytes(relativePath) {
+  const servedPrefix = 'app/public/paper-assets/'
+  const retiredPath = relativePath.startsWith(servedPrefix)
+    ? path.join(rootDir, 'test-fixtures/retired-paper-assets', relativePath.slice(servedPrefix.length))
+    : null
+  const sourcePath = retiredPath && await pathExists(retiredPath)
+    ? retiredPath
+    : path.join(rootDir, relativePath)
+  return readFile(sourcePath)
+}
+
 const manifestRelativePath = 'docs/cuts/paper-canonical-unification/migration/manifest-v1.json'
 const ledgerRelativePath = 'docs/cuts/paper-canonical-unification/migration/ledger-v1.json'
 const materializerVersion = 'ticket-26-source-materialization-v1'
@@ -348,7 +359,7 @@ async function figureSourceRefsForPaper(paper) {
     figureInventoryRole,
     `latest_${roleToken(figureInventoryRole)}`,
   )
-  const inventoryBytes = await readFile(path.join(rootDir, inventoryRef.path))
+  const inventoryBytes = await sourceBytes(inventoryRef.path)
   if (inventoryBytes.byteLength !== inventoryRef.byteLength || sha256(inventoryBytes) !== inventoryRef.expectedDigest) {
     fail(`${paper.paperId} frozen figure inventory bytes drift from the manifest`)
   }
@@ -448,7 +459,7 @@ async function buildMaterialization(batch) {
     const documents = []
     const sourceRefs = await sourceRefsForPaper(paper)
     for (const sourceRef of sourceRefs) {
-      const bytes = await readFile(path.join(rootDir, sourceRef.path))
+      const bytes = await sourceBytes(sourceRef.path)
       documents.push({ sourceRef, ...makeSourceDocument(paper.paperId, sourceRef, bytes) })
     }
     const capture = makeCapture(paper, documents)
