@@ -2,7 +2,7 @@
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'
-import { existsSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
@@ -184,42 +184,82 @@ try {
   await new Promise(resolve => reservation.listen(0, '127.0.0.1', resolve))
   const port = reservation.address().port
   await new Promise(resolve => reservation.close(resolve))
-  const workspaces = new Set(readdirSync(temporaryRoot).filter(name => name.startsWith('eqb-review-job-')))
-  let log = ''
-  api = spawn(process.execPath, ['server/api.mjs'], { cwd: repository, env: {
-    ...process.env, NODE_ENV: 'production', QUESTION_BANK_API_PORT: String(port),
-    QUESTION_BANK_DB: bankPath, USER_DATA_DB: path.join(root, 'users.sqlite'),
-    QUESTION_BANK_IMPORT_OPS_DB: dbPath, QUESTION_BANK_IMPORT_OPS_ROOT: filesRoot,
-    QUESTION_BANK_PAPER_ASSET_ROOT: path.join(root, 'assets'),
-    QUESTION_BANK_USER_SPACE_ROOT: path.join(root, 'user-space'),
-  }, stdio: ['ignore', 'pipe', 'pipe'] })
-  api.stdout.on('data', bytes => { log += bytes })
-  api.stderr.on('data', bytes => { log += bytes })
-  const exit = new Promise(resolve => api.once('exit', (code, signal) => resolve({ code, signal })))
+  // Keep the active-batch shutdown coverage through the existing explicit
+  // scheduler option, enabled only in this copied runtime (as in backfill QA).
+  symlinkSync(path.join(repository, 'data'), path.join(release, 'data'), 'dir')
+  const schedulerApi = path.join(release, 'server/api.mjs')
+  const apiSource = readFileSync(schedulerApi, 'utf8')
+  const schedulerCall = 'startReviewCompatibilityWorker(compatibilityStore, {'
+  assert(apiSource.includes(schedulerCall))
+  writeFileSync(schedulerApi, apiSource.replace(schedulerCall, `${schedulerCall} enabled: true,`))
   const leader = path.join(process.env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT, 'leader')
-  let activeWorkspace
-  for (let attempt = 0; attempt < 1500; attempt++) {
-    assert.equal(api.exitCode, null, log)
-    activeWorkspace = readdirSync(temporaryRoot).find(name => name.startsWith('eqb-review-job-') && !workspaces.has(name))
-    if (activeWorkspace && existsSync(leader) && JSON.parse(readFileSync(leader)).pid === api.pid) break
-    activeWorkspace = null
-    await yieldFor(10)
+  for (const enabled of [false, true]) {
+    const workspaces = new Set(readdirSync(root).filter(name => name.startsWith('eqb-review-job-')))
+    let log = ''
+    api = spawn(process.execPath, ['server/api.mjs'], { cwd: enabled ? release : repository, env: {
+      ...process.env, NODE_ENV: 'production', TMPDIR: root, QUESTION_BANK_API_PORT: String(port),
+      EQB_REVIEW_COMPATIBILITY_AUTORUN: '1', EQB_REVIEW_SUBJECT_BACKFILL: '0',
+      QUESTION_BANK_DB: bankPath, USER_DATA_DB: path.join(root, 'users.sqlite'),
+      QUESTION_BANK_IMPORT_OPS_DB: dbPath, QUESTION_BANK_IMPORT_OPS_ROOT: filesRoot,
+      QUESTION_BANK_PAPER_ASSET_ROOT: path.join(root, 'assets'),
+      QUESTION_BANK_USER_SPACE_ROOT: path.join(root, 'user-space'),
+    }, stdio: ['ignore', 'pipe', 'pipe'] })
+    api.stdout.on('data', bytes => { log += bytes })
+    api.stderr.on('data', bytes => { log += bytes })
+    const exit = new Promise(resolve => api.once('exit', (code, signal) => resolve({ code, signal })))
+    let activeWorkspace
+    const newWorkspace = () => readdirSync(root).find(name => name.startsWith('eqb-review-job-') && !workspaces.has(name))
+    if (enabled) {
+      for (let attempt = 0; attempt < 1500; attempt++) {
+        assert.equal(api.exitCode, null, log)
+        activeWorkspace = newWorkspace()
+        if (activeWorkspace && existsSync(leader) && JSON.parse(readFileSync(leader)).pid === api.pid) break
+        activeWorkspace = null
+        await yieldFor(10)
+      }
+      assert(activeWorkspace, `No explicitly enabled API compatibility batch observed: ${log}`)
+    } else {
+      for (let attempt = 0; attempt < 1500 && !log.includes('API listening'); attempt++) {
+        assert.equal(api.exitCode, null, log)
+        await yieldFor(10)
+      }
+      assert(log.includes('API listening'), log)
+      // Observe the initial tick/yield window; startup must leave the review
+      // unchecked even when the legacy emergency switch permits scheduling.
+      for (let attempt = 0; attempt < 500; attempt++) {
+        assert.equal(api.exitCode, null, log)
+        assert.equal(newWorkspace(), undefined, 'default API must not create a compatibility batch')
+        assert.equal(existsSync(leader), false, 'default API must not acquire a compatibility leader')
+        await yieldFor(10)
+      }
+      const unchanged = new DatabaseSync(dbPath, { readOnly: true })
+      try {
+        assert.equal(unchanged.prepare('SELECT count(*) n FROM review_compatibility WHERE revision_id=?')
+          .get(fixture.revision.id).n, 0)
+        assert.equal(unchanged.prepare('SELECT state FROM import_review_revisions WHERE id=?')
+          .get(fixture.revision.id).state, fixture.revision.state)
+      } finally { unchanged.close() }
+      const unchecked = store.compatibilityForRevision(fixture.revision.id)
+      assert.equal(unchecked.result, 'pending')
+      assert.equal(unchecked.reasonCode, 'NOT_CHECKED')
+      assert.equal(unchecked.pending, true)
+      console.log('PASS default API startup creates no compatibility batch and leaves Review unchecked without changing its state')
+    }
+    let deadline
+    const started = performance.now()
+    try {
+      api.kill('SIGTERM')
+      const result = await Promise.race([exit, new Promise((_, reject) => {
+        deadline = setTimeout(() => reject(new Error(`Active-batch shutdown exceeded 15s: ${log}`)), 15_000)
+      })])
+      assert.deepEqual(result, { code: 0, signal: null }, log)
+      assert.equal(existsSync(leader), false)
+      if (activeWorkspace) assert.equal(existsSync(path.join(root, activeWorkspace)), false)
+      console.log(JSON.stringify({ check: enabled ? 'api-active-batch-SIGTERM' : 'api-default-SIGTERM',
+        shutdownMs: performance.now() - started, leaderReleased: true, workspaceRemoved: true, ...result }))
+    } finally { clearTimeout(deadline) }
   }
-  assert(activeWorkspace, `No active API compatibility batch observed: ${log}`)
-  let deadline
-  const started = performance.now()
-  try {
-    api.kill('SIGTERM')
-    const result = await Promise.race([exit, new Promise((_, reject) => {
-      deadline = setTimeout(() => reject(new Error(`Active-batch shutdown exceeded 15s: ${log}`)), 15_000)
-    })])
-    assert.deepEqual(result, { code: 0, signal: null }, log)
-    assert.equal(existsSync(leader), false)
-    assert.equal(existsSync(path.join(temporaryRoot, activeWorkspace)), false)
-    console.log(JSON.stringify({ check: 'api-active-batch-SIGTERM', shutdownMs: performance.now() - started,
-      leaderReleased: true, workspaceRemoved: true, ...result }))
-  } finally { clearTimeout(deadline) }
-  console.log('PASS cold list/scan, shared target, pending denial, asynchronous development invalidation and active API shutdown')
+  console.log('PASS cold list/scan, shared target, pending denial, asynchronous development invalidation and explicitly enabled active API shutdown')
 } finally {
   if (api && api.exitCode === null) api.kill('SIGKILL')
   rmSync(root, { recursive: true, force: true })

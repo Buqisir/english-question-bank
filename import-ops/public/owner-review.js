@@ -7,6 +7,19 @@ const labels = {
   publishing: '发布中', published: '已发布', failed: '发布失败',
 }
 
+const differenceLabel = (pointer, content) => {
+  const parts = String(pointer).split('/').map(part => part.replaceAll('~1', '/').replaceAll('~0', '~'))
+  const field = [...parts].reverse().find(part => part && !/^\d+$/.test(part))
+  const name = { text: '正文', stem: '题干', answer: '答案', answerKey: '答案', options: '选项',
+    title: '标题', questions: '题目', analysis: '解析' }[field] || field
+  const question = parts.map(part => content?.questions?.[part]).find(Boolean)
+  const group = parts.map(part => content?.groups?.[part]).find(Boolean)
+  const numbers = question ? [question.questionNo]
+    : (group?.questionIds || []).map(id => content?.questions?.[id]?.questionNo)
+  const known = numbers.filter(Number.isSafeInteger)
+  return `${known.length ? `第 ${known.join('、')} 题 · ` : ''}字段：${name}（${pointer}）`
+}
+
 export const isReviewCompatible = compatibility => {
   if (compatibility?.result === 'different') return false
   if (compatibility?.result === 'equal') return !compatibility.pending
@@ -40,6 +53,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
   let expanded = null
   let expandedKind = 'feedback'
   let detail = null
+  const publicationBlocks = new Map()
   const drafts = new Map()
   const draftKey = paper => JSON.stringify([paper.paperId, paper.latestRevisionId, paper.bundleDigest])
   const uncertain = new Set()
@@ -113,14 +127,15 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
   function rowHtml(paper) {
     const state = paper.promotionState || paper.state
     const pending = uncertain.has(paper.paperId)
-    const canPublish = !busy && fresh && !pending && isReviewCompatible(paper.compatibility)
+    const block = publicationBlocks.get(draftKey(paper))
+    const canPublish = !busy && fresh && !pending
       && !paper.promotionState && paper.unresolvedCount === 0
       && ['awaiting_review', 'changes_requested', 'approved'].includes(paper.state)
     const frozen = Boolean(paper.promotionState)
     const hint = pending ? '请求结果待核实，请刷新状态；不要重复提交。'
       : state === 'publishing' ? '服务器正在处理。如长时间未完成，请在 Amp 核实，不要重试。'
       : state === 'failed' ? '请在 Amp 核实失败原因，保留原发布记录。'
-      : !isReviewCompatible(paper.compatibility) ? reviewCompatibilityMessage(paper.compatibility)
+      : block ? block.message
       : paper.unresolvedCount ? `${paper.unresolvedCount} 条反馈尚未确认解决。` : ''
     return `<li class="owner-review-item" data-review-paper="${escapeHtml(paper.paperId)}">
       <div class="owner-review-row">
@@ -138,6 +153,8 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
         </div>
       </div>
       ${hint ? `<p class="owner-review-hint">${escapeHtml(hint)}</p>` : ''}
+      ${block?.differences?.length ? `<ul>${block.differences.map(pointer => `<li>${escapeHtml(differenceLabel(pointer, block.content))}</li>`).join('')}</ul>` : ''}
+      ${block?.differencesTruncated ? '<p>差异较多，仅显示部分位置</p>' : ''}
       ${feedbackHtml(paper)}
       ${mediaHtml(paper)}
     </li>`
@@ -258,10 +275,9 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
 
   async function mutate(paper, url, body, successMessage, method = 'POST') {
     if (busy || !fresh || uncertain.has(paper.paperId)) return
-    if (body.intent === 'publish' && !isReviewCompatible(paper.compatibility)) return
     busy = true
     error = ''
-    notice = method === 'POST' && body.intent === 'publish' ? '正在发布，请勿重复提交…' : '正在保存…'
+    notice = method === 'POST' && body.intent === 'publish' ? '正在核验这份卷并发布，请勿重复提交…' : '正在保存…'
     render()
     try {
       await request(url, { method, headers, body: JSON.stringify(body) })
@@ -270,9 +286,17 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
       notice = successMessage
       await load()
     } catch (failure) {
-      uncertain.add(paper.paperId)
       notice = ''
-      error = `操作结果需核实：${failure.message}。先刷新状态，不要重复提交；若仍在发布中或失败，请回 Amp 处理。`
+      if (failure.code === 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED' && failure.compatibility) {
+        const asset = failure.compatibility.result === 'different'
+          ? await request(`/api/import-review-preview/revisions/${encodeURIComponent(paper.latestRevisionId)}/asset/paper-asset.json`,
+            { cache: 'no-store' }).catch(() => null) : null
+        publicationBlocks.set(draftKey(paper), { ...failure.compatibility, message: failure.message, content: asset?.content })
+        error = ''
+      } else {
+        uncertain.add(paper.paperId)
+        error = `操作结果需核实：${failure.message}。先刷新状态，不要重复提交；若仍在发布中或失败，请回 Amp 处理。`
+      }
       busy = false
       render()
     }

@@ -13,11 +13,12 @@ import { writeFixtureJson } from './faults.mjs'
 const hook = new URL('./hook.mjs', import.meta.url).pathname
 const driver = new URL('./api.mjs', import.meta.url)
 // Budgets describe the work preceding a checkpoint, not its stage name.
-// Full publication/recovery retains the existing 45s cap; harness IPC is 60s.
-// CI seed publication took about 14s; failing late checkpoints were still
-// running at 20s. Records below retain evidence of where the extra time goes.
-const checkpointBudgets = { control: 20_000, publication: 45_000, recovery: 45_000 }
-const publicationStages = ['before-publisher', 'after-bank-commit',
+// Publication now also resolves the current target before supervisor launch.
+// The retained v4 C timeout reached before-publisher at 49.5s while reusing
+// equal; allow cold identity/preparation as well as the original publish work.
+// IPC/HTTP must outlive checkpoints and the deliberately gated ACK.
+const checkpointBudgets = { control: 20_000, publication: 90_000, recovery: 90_000 }
+const publicationStages = ['before-compatibility', 'compatibility-input', 'after-compatibility', 'before-publisher', 'after-bank-commit',
   'before-mark-published', 'after-mark-published', 'before-worker-ipc']
 const publicationRecords = Object.fromEntries(publicationStages.map(stage => [stage, 'record']))
 const safeTail = value => String(value).replace(/(bearer\s+)\S+/gi, '$1<redacted>')
@@ -71,7 +72,7 @@ function query(file, sql, parameters = []) {
   const db = new DatabaseSync(file, { readOnly: true })
   try { return db.prepare(sql).all(...parameters) } finally { db.close() }
 }
-async function until(predicate, label, timeout = 20_000) {
+export async function until(predicate, label, timeout = 20_000) {
   const end = Date.now() + timeout
   while (Date.now() < end) {
     try { const value = await predicate(); if (value) return value } catch {}
@@ -109,7 +110,7 @@ function api(env) {
       calls.push(record)
       if (calls.length > 8) calls.shift()
       return new Promise(resolve => {
-        const timer = setTimeout(() => { pending.delete(requestId); resolve({ type: 'timeout', stderr }) }, 60_000)
+        const timer = setTimeout(() => { pending.delete(requestId); resolve({ type: 'timeout', stderr }) }, 120_000)
         pending.set(requestId, value => { clearTimeout(timer); resolve(value) })
         child.send({ ...message, requestId }, error => {
           if (error) { clearTimeout(timer); pending.delete(requestId); resolve({ type: 'exited' }) }
@@ -201,7 +202,10 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         const closed = path.join(directory, 'locks', `.promotion-closed-${row.host_slot_token}`, 'reservation.json')
         const file = existsSync(reserved) ? reserved : closed
         assert.ok(existsSync(file), 'exact slot evidence must exist')
-        const receipt = JSON.parse(readFileSync(file))
+        // reservation.json is the immutable first owner; retry handoffs move
+        // active.json while preserving the original evidence in this directory.
+        const active = path.join(path.dirname(file), 'active.json')
+        const receipt = JSON.parse(readFileSync(existsSync(active) ? active : file))
         assert.equal(receipt.token, row.host_slot_token)
         assert.equal(receipt.operationId, row.id)
         assert.equal(receipt.dbIdentity, dbPath)
@@ -209,7 +213,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       },
       plan(value) {
         const control = path.join(directory, 'fault-plan.json')
-        writeFixtureJson(control, { ...publicationRecords, ...value })
+        writeFixtureJson(control, { ...publicationRecords, 'supervisor-unknown-before-disconnect': 'pause', ...value })
         env.NODE_OPTIONS = `--import=${hook}`
         env.EQB_PROMOTION_FAULT_STAGE = 'plan'
         env.EQB_PROMOTION_FAULT_CONTROL = control
@@ -234,7 +238,8 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       checkpoint: (stage, pendingCall, options) => waitCheckpoint(marker, label, stage, pendingCall, options),
       async deadSupervisor(row) {
         const identity = { bootId: row.owner_boot_id, pid: row.supervisor_pid, startId: row.supervisor_start_id }
-        await until(async () => await matchingReviewProcess(identity) === 'dead', 'exact supervisor death')
+        await until(async () => await matchingReviewProcess(identity) === 'dead'
+          && (await reviewProcessGroupMembers(identity.pid)).length === 0, 'exact supervisor/group death')
         assert.deepEqual(await reviewProcessGroupMembers(identity.pid), [])
       },
       async deadWorker(row) {
@@ -242,6 +247,26 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         assert.equal(await matchingReviewProcess({ bootId: row.owner_boot_id,
           pid: row.worker_pid, startId: row.worker_start_id }), 'dead', 'supervisor returned with its exact worker alive')
         assert.deepEqual(await reviewProcessGroupMembers(row.process_group_id), [], 'supervisor returned with native descendants alive')
+      },
+      async recoveryReady(client, row, outcome = 'recoverable') {
+        assert.ok(row.promotion_id, 'linked promotion required for exact recovery')
+        assert.ok(['recoverable', 'completed'].includes(outcome))
+        await context.deadSupervisor(row)
+        const reply = await until(async () => {
+          const observed = await client.call({ type: 'reconcile' })
+          return observed.result?.[outcome] === row.id ? observed : false
+        }, `exact ${row.id} ${outcome} reconciliation`, checkpointBudgets.recovery)
+        await context.deadWorker(row)
+        const current = context.rows().find(value => value.id === row.id)
+        assert.equal(current.state, outcome === 'recoverable' ? 'unknown' : 'completed')
+        // Linked UNKNOWN is retained until an explicit retry atomically hands
+        // off this exact reservation. A published receipt closes it in inspect.
+        assert.equal(context.slot(row), outcome === 'recoverable' ? 'reserved' : 'closed')
+        context.proof.recoveryReadiness ||= []
+        context.proof.recoveryReadiness.push({ operationId: row.id,
+          supervisorPid: row.supervisor_pid, workerPid: row.worker_pid, outcome,
+          exactGroupsDead: true, slot: context.slot(row) })
+        return reply
       },
     }
     try {
@@ -405,7 +430,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       const listening = await a.call({ type: 'http-listen' })
       assert.ok(listening.result?.port, JSON.stringify(listening))
       const request = () => fetch(`http://127.0.0.1:${listening.result.port}/promotion`, {
-        method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(60_000),
+        method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(120_000),
       }).then(async response => ({ status: response.status, body: await response.json() }))
       const running = request()
       running.catch(() => {})
@@ -413,6 +438,14 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       // A reply/rejection before either marker is an unexpected early terminal.
       const ack = await t.checkpoint('supervisor-ack-before-recheck', running, { flow: 'publication', transport: 'http' })
       const apiAck = await t.checkpoint('api-after-ack', running, { flow: 'publication', transport: 'http' })
+      const stages = publicationStages.flatMap(stage => {
+        const file = `${t.marker}.${stage}`
+        if (!existsSync(file)) return []
+        const { at, result } = JSON.parse(readFileSync(file))
+        return [{ stage, at, ...(result ? { result } : {}) }]
+      })
+      console.log(`PROMOTION_CHECKPOINT_TIMING ${JSON.stringify(stages.map(value =>
+        ({ ...value, elapsedMs: value.at - stages[0].at, at: undefined })))}`)
       const original = t.rows()[0]
       assert.equal(ack.pid, original.supervisor_pid)
       assert.equal(apiAck.pid, a.child.pid)
@@ -447,7 +480,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     const listening = await a.call({ type: 'http-listen' })
     assert.ok(listening.result?.port, JSON.stringify(listening))
     const request = () => fetch(`http://127.0.0.1:${listening.result.port}/promotion`, {
-      method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(60_000),
+      method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(120_000),
     }).then(async response => ({ status: response.status, body: await response.json() }))
     const running = request()
     running.catch(() => {})
@@ -903,6 +936,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal((await orphan).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       assert.equal(t.promotions().find(row => row.paper_id === owner.paperId).state, 'published')
       const b = await t.client({ faults: false })
+      await t.recoveryReady(b, orphanRow, 'completed')
       const retried = await b.call(retryMessage)
       assert.equal(retried.result?.status, 'published', JSON.stringify(retried))
       assert.equal(retried.result.promotion.paperId, ship.paperId)
@@ -971,12 +1005,13 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       t.plan({ 'after-archive': 'block' })
       const a = await t.client()
       const originalRequest = a.call(shipMessage)
-      const checkpoint = await t.checkpoint('after-archive', originalRequest, { flow: 'control', transport: 'ipc' })
+      const checkpoint = await t.checkpoint('after-archive', originalRequest, { flow: 'publication', transport: 'ipc' })
       process.kill(checkpoint.pid, 'SIGKILL')
       assert.equal((await originalRequest).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       const original = t.rows()[0]
       assert.ok(original.promotion_id)
       await t.deadWorker(original)
+      await t.recoveryReady(a, original)
       t.plan({ 'retry-after-handoff': 'gate' })
       const interruptedRetry = a.call(retryMessage)
       await t.checkpoint('retry-after-handoff', interruptedRetry, { flow: 'control', transport: 'ipc' })
@@ -1003,7 +1038,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'before-archive', 'block', async t => {
       const a = await t.client(), b = await t.client({ faults: false })
       const running = a.call(shipMessage)
-      await t.checkpoint('before-archive', running, { flow: 'control', transport: 'ipc' })
+      await t.checkpoint('before-archive', running, { flow: 'publication', transport: 'ipc' })
       const operationId = t.rows()[0].id
       const duplicate = await b.call(shipMessage)
       assert.equal(duplicate.code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
@@ -1023,13 +1058,58 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal((await running).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       assert.equal(t.promotions().length, 1)
     })
-  // Launch/archive controls precede publication. Preparation and durable output
-  // checkpoints traverse the real publisher; classify this flow explicitly.
+  await trial('SIGKILL after rollback cleanup can terminate pending promotion and compare on explicit retry',
+    'after-version-rename', 'block', async t => {
+      const a = await t.client()
+      const first = a.call(shipMessage)
+      const prepared = await t.checkpoint('after-version-rename', first, { flow: 'publication', transport: 'ipc' })
+      const original = t.promotions()[0]
+      const paperDir = path.join(t.env.QUESTION_BANK_PAPER_ASSET_ROOT, ship.paperId)
+      const journal = path.join(paperDir, '.latest-swap.json')
+      const versionDir = path.join(paperDir, 'versions', original.version_name)
+      assert.ok(existsSync(journal))
+      assert.ok(existsSync(versionDir))
+      process.kill(prepared.pid, 'SIGKILL')
+      assert.equal((await first).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
+      await t.recoveryReady(a, t.rows().at(-1))
+      const review = new DatabaseSync(t.dbPath)
+      try { review.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(ship.revisionId) }
+      finally { review.close() }
+      t.plan({ 'after-promotion-rollback': 'block' })
+      const recovering = a.call(retryMessage)
+      const rolledBack = await t.checkpoint('after-promotion-rollback', recovering, { flow: 'recovery', transport: 'ipc' })
+      assert.equal(existsSync(journal), false)
+      assert.equal(existsSync(versionDir), false)
+      assert.equal(t.promotions()[0].state, 'publishing')
+      process.kill(rolledBack.pid, 'SIGKILL')
+      assert.equal((await recovering).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
+      await t.recoveryReady(a, t.rows().at(-1))
+      t.plan({})
+      const stopped = await a.call(retryMessage)
+      assert.equal(stopped.result?.status, 'failed', JSON.stringify(stopped))
+      assert.equal(t.promotions()[0].id, original.id)
+      assert.equal(t.promotions()[0].state, 'failed')
+      assert.equal(t.rows().at(-1).state, 'rejected')
+      assert.equal(query(t.dbPath, 'SELECT count(*) n FROM import_review_shipping_guards')[0].n, 0)
+      assert.equal(t.slot(t.rows().at(-1)), 'closed')
+      const retried = await a.call(retryMessage)
+      assert.equal(retried.result?.status, 'published', JSON.stringify(retried))
+      assert.equal(retried.result.promotion.promotionId, original.id)
+      assert.equal(retried.result.promotion.assetVersion, original.asset_version)
+      assert.equal(query(t.dbPath, 'SELECT result FROM review_compatibility WHERE revision_id=?',
+        [ship.revisionId])[0].result, 'equal')
+      assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT count(*) n FROM paper_asset_versions')[0].n, 1)
+      assert.equal(t.rows().at(-1).state, 'completed')
+      assert.ok(t.rows().every(row => ['completed', 'rejected'].includes(row.state)))
+      await t.deadWorker(t.rows().at(-1))
+    })
+  // Archive checkpoints already include full content preparation. Only launch
+  // and begin controls use the short budget.
   const killCheckpoints = [
     ...['after-host-slot', 'after-job-before-fork', 'api-before-go', 'supervisor-ready', 'supervisor-before-go',
-      'begin-before-commit', 'begin-after-commit', 'before-archive', 'after-archive']
+      'begin-before-commit', 'begin-after-commit']
       .map(stage => ({ stage, flow: 'control' })),
-    ...['before-on-prepared', 'after-target-binding', 'after-on-prepared', 'after-version-rename', 'after-latest-swap',
+    ...['before-archive', 'after-archive', 'before-on-prepared', 'after-target-binding', 'after-on-prepared', 'after-version-rename', 'after-latest-swap',
       'after-bank-commit', 'before-mark-published', 'after-mark-published', 'before-worker-ipc']
       .map(stage => ({ stage, flow: 'publication' })),
   ]
@@ -1054,30 +1134,29 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       const answer = await result
       assert.ok(['error', 'exited'].includes(answer.type))
       const b = await t.client({ faults: false })
-      const reconciliation = await b.call({ type: 'reconcile' })
       const rows = t.rows()
       if (stage === 'after-host-slot') {
+        const reconciliation = await b.call({ type: 'reconcile' })
         assert.equal(rows.length, 0)
         assert.equal(reconciliation.result.blocked, 'FILE_WITHOUT_OPERATION')
       } else {
         assert.equal(rows.length, 1)
         const row = rows[0]
         if (['after-mark-published', 'before-worker-ipc'].includes(stage)) {
-          const recovered = reconciliation.result?.completed ? reconciliation : await until(async () => {
-            const reply = await b.call({ type: 'reconcile' })
-            return reply.result?.completed ? reply : false
-          }, 'published receipt reconciliation', checkpointBudgets.recovery)
+          const recovered = await t.recoveryReady(b, row, 'completed')
           assert.equal(recovered.invalidations, 1)
           assert.equal(t.rows()[0].state, 'completed')
         } else if (t.promotions().length) {
           assert.equal(row.state, 'unknown')
           const promotion = t.promotions()[0]
+          await t.recoveryReady(b, row)
           const retry = await b.call(retryMessage)
           assert.equal(retry.type, 'result', JSON.stringify(retry))
           assert.equal(retry.result.promotion.promotionId, promotion.id)
           assert.equal(retry.result.promotion.assetVersion, promotion.asset_version || 1)
           assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT COUNT(*) n FROM paper_asset_versions')[0].n, 1)
         } else {
+          await b.call({ type: 'reconcile' })
           assert.ok(['reserved', 'unknown', 'rejected'].includes(row.state))
           assert.equal(t.promotions().length, 0)
         }
@@ -1146,7 +1225,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'before-archive', 'pause', async t => {
       const a = await t.client()
       const running = a.call(shipMessage)
-      await t.checkpoint('before-archive', running, { flow: 'control', transport: 'ipc' })
+      await t.checkpoint('before-archive', running, { flow: 'publication', transport: 'ipc' })
       const row = t.rows()[0]
       a.child.kill('SIGKILL')
       assert.equal(await matchingReviewProcess({ bootId: row.owner_boot_id, pid: row.supervisor_pid, startId: row.supervisor_start_id }), 'live')

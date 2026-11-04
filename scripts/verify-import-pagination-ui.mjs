@@ -56,12 +56,20 @@ const server = createServer(async (request, response) => {
     const input = JSON.parse(body)
     assert.equal(request.headers['x-eqb-csrf'], 'owner-review')
     if (url.pathname.endsWith('/publish')) {
-      assert.equal(paper.compatibility.result, 'equal')
       assert.equal(input.intent, 'publish')
       assert.equal(input.bundleDigest, initial.bundleDigest)
       assert.equal(input.rendererBuildId, initial.rendererBuildId)
       assert(url.pathname.includes(`/revisions/${revisionId}/`))
       publishCount += 1
+      if (['different', 'unknown'].includes(paper.compatibility?.result)) {
+        const different = paper.compatibility.result === 'different'
+        return send(response, { code: 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED',
+          error: different ? '预览内容有变化，未发布。' : '本次核验未完成，未发布。请稍后重试。',
+          retryable: !different, compatibility: { ...paper.compatibility,
+            differences: different ? ['/consumer/paperAsset/content/questions/question~1a/stem',
+              '/consumer/paperAsset/content/groups/group-a/title'] : [] } }, 'application/json', different ? 409 : 503)
+      }
+      paper.compatibility = { result: 'equal', pending: false }
       paper.promotionState = 'publishing'
       if (dropPublishResponse) { response.destroy(); return }
       if (!process.argv.includes('--serve')) await new Promise(resolve => { releasePublish = resolve })
@@ -83,6 +91,10 @@ const server = createServer(async (request, response) => {
     }
   }
   const pdfUrl = `/api/import-review-preview/revisions/${revisionId}/pdf`
+  if (url.pathname.endsWith('/asset/paper-asset.json')) return send(response, { content: {
+    questions: { 'question/a': { questionId: 'question/a', questionNo: 21 } },
+    groups: { 'group-a': { groupId: 'group-a', questionIds: ['question/a'] } },
+  } })
   if (url.pathname === pdfUrl) {
     if (url.searchParams.has('download')) response.setHeader('content-disposition', 'attachment; filename="frozen-review.pdf"')
     return send(response, productPdfBytes(1, 'economy8'), 'application/pdf')
@@ -166,7 +178,7 @@ if (process.argv.includes('--serve')) {
     await page.getByRole('status').filter({ hasText: '反馈已更新' }).waitFor()
     assert.equal(await publish.isEnabled(), true)
     await publish.click()
-    await page.getByText('正在发布，请勿重复提交…', { exact: true }).waitFor()
+    await page.getByText('正在核验这份卷并发布，请勿重复提交…', { exact: true }).waitFor()
     assert.equal(await publish.isDisabled(), true)
     await page.screenshot({ path: path.join(artifactDir, 'publishing.png') })
     releasePublish()
@@ -175,12 +187,6 @@ if (process.argv.includes('--serve')) {
     assert.equal(await publish.count(), 0)
     assert.equal(await row.getByRole('link', { name: '查看已发布' }).count(), 1)
     await page.screenshot({ path: path.join(artifactDir, 'published.png') })
-    const messages = {
-      pending: '正在核验预览版本…', equal: '',
-      backfill_pending: '正在核验预览版本…',
-      different: '预览内容有变化，请在 Droid 中核验后重新送审',
-      unknown: '无法核验原预览版本，请在 Droid 中核验后重新送审（缺少原预览记录）',
-    }
     for (const result of ['pending', 'equal', 'different', 'unknown', 'backfill_pending']) {
       const backfillPending = result === 'backfill_pending'
       paper = { ...initial, state: 'approved', rendererStale: result === 'equal',
@@ -188,11 +194,9 @@ if (process.argv.includes('--serve')) {
           reasonCode: backfillPending ? 'BACKFILL_PENDING' : 'MISSING_BASELINE' } }
       await page.reload()
       await row.getByText('已批准', { exact: true }).waitFor()
-      assert.equal(await publish.isEnabled(), result === 'equal')
-      if (messages[result]) await row.getByText(messages[result], { exact: true }).waitFor()
-      else assert.equal(await row.locator('.owner-review-hint').count(), 0)
-      if (backfillPending) assert.equal(await row.getByText(/重新送审/).count(), 0,
-        'backfill pending shows verification in progress without asking for resubmission')
+      assert.equal(await publish.isEnabled(), true)
+      assert.equal(await row.locator('.owner-review-hint').count(), 0,
+        'compatibility hints appear only after an attempted publication is rejected')
       const [frozenScreen] = await Promise.all([
         page.waitForEvent('popup'), row.getByRole('link', { name: initial.paperName }).click(),
       ])
@@ -205,17 +209,32 @@ if (process.argv.includes('--serve')) {
       assert.deepEqual(readFileSync(downloadPath), productPdfBytes(1, 'economy8'))
       await frozenScreen.close()
       await page.screenshot({ path: path.join(artifactDir, `${result}.png`) })
+      await publish.click()
+      if (['different', 'unknown', 'backfill_pending'].includes(result)) {
+        await row.locator('.owner-review-hint').waitFor()
+        assert.equal(await row.getByText('已发布', { exact: true }).count(), 0)
+        if (result === 'different') {
+          await row.getByText('第 21 题 · 字段：题干', { exact: false }).waitFor()
+          await row.getByText('第 21 题 · 字段：标题', { exact: false }).waitFor()
+          await page.screenshot({ path: path.join(artifactDir, 'different-blocked.png') })
+        }
+        assert.equal(await publish.isEnabled(), true, 'a definite pre-publication rejection permits an explicit retry')
+      } else {
+        await page.getByText('正在核验这份卷并发布，请勿重复提交…', { exact: true }).waitFor()
+        releasePublish()
+        await row.getByText('已发布', { exact: true }).waitFor()
+      }
     }
-    assert.equal(publishCount, 1, 'blocked compatibility states never issue a publication')
+    assert.equal(publishCount, 6, 'each explicit click requests verification of only the selected revision')
     paper = { ...initial, compatibility: { result: 'unknown', reasonCode: 'MISSING_BASELINE',
       fallback: true, guard: 'legacy_renderer', eligible: true, legacyRendererStale: false } }
     await page.reload()
-    assert.equal(await publish.isEnabled(), true, 'explicit matching-renderer fallback enables Owner publish')
+    assert.equal(await publish.isEnabled(), true, 'unknown does not disable the on-demand publication action')
     assert.equal(await row.locator('.owner-review-hint').count(), 0)
     paper = { ...initial, compatibility: undefined }
     await page.reload()
     await row.waitFor()
-    assert.equal(await publish.isDisabled(), true, 'missing compatibility never falls back to rendererStale')
+    assert.equal(await publish.isEnabled(), true, 'missing compatibility defers checking until publication')
     paper = { ...initial }
     dropPublishResponse = true
     await page.reload()
@@ -246,7 +265,7 @@ if (process.argv.includes('--serve')) {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
     await page.screenshot({ path: path.join(artifactDir, 'mobile.png') })
     assert.deepEqual(errors, [])
-    console.log('PASS compact Owner list: four compatibility states and unknown/BACKFILL_PENDING preserve approval and frozen PDF downloads; backfill waits without resubmission or publication; exact Screen link, return/fix, publish, failed, response-loss and mobile states')
+    console.log('PASS compact Owner list: compatibility never disables frozen approval; explicit publication checks one revision, rejects different/unknown with fields and question numbers; frozen PDF, response-loss and mobile states remain intact')
   } finally {
     releasePublish?.()
     await browser?.close()

@@ -19,7 +19,7 @@ export async function runReviewCompatibilityWorker(input, {
   timeoutMs = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).deadlineMs,
   heapMb = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).heapMb,
   rssMb = (input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET).rssMb,
-  signal, leaderLease,
+  signal, leaderLease, promotionToken = null,
 } = {}) {
   const budget = input.mode === 'backfill' ? REVIEW_BACKFILL_WORKER_BUDGET : REVIEW_WORKER_BUDGET
   if (!leaderLease) await reconcileDeadReviewCompatibilityLeader()
@@ -48,7 +48,7 @@ export async function runReviewCompatibilityWorker(input, {
   try {
     if (!validReviewCompatibilityLease(lease)) return unknown('LEADER_BUSY')
     if (running.has(lease)) return unknown('LEADER_BUSY')
-    if (reviewCompatibilityBusy()) return unknown('ACTIVITY_PENDING')
+    if (reviewCompatibilityBusy({ promotionToken })) return unknown('ACTIVITY_PENDING')
     running.add(lease)
     ownsRunning = true
     if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || timeoutMs > budget.deadlineMs
@@ -173,8 +173,8 @@ export async function runReviewCompatibilityBatch(store, { dryRun = false, signa
 // D calls this once from the API's lifecycle. Startup and periodic scans are
 // asynchronous; requests never wait for compilation. Each process may own a
 // timer, but only the host leader is allowed to scan/compute a batch.
-export function startReviewCompatibilityWorker(store, { onError = () => {}, backfillStore = null } = {}) {
-  if (!reviewCompatibilityAutorunEnabled()) return { async stop() {} }
+export function startReviewCompatibilityWorker(store, { onError = () => {}, backfillStore = null, enabled = false } = {}) {
+  if (!enabled || !reviewCompatibilityAutorunEnabled()) return { async stop() {} }
   const controller = new AbortController()
   let timer
   let active

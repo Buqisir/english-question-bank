@@ -1,5 +1,4 @@
 import { bindClipboardButtons } from './clipboard.js'
-import { isReviewCompatible, reviewCompatibilityMessage as compatibilityMessage } from './owner-review.js'
 
 const root = document.querySelector('#app')
 
@@ -77,10 +76,6 @@ function shortDigest(value) {
   return text.length > 24 ? `${text.slice(0, 16)}…${text.slice(-8)}` : text
 }
 
-function reviewCompatibilityMessage() {
-  return compatibilityMessage(state.detail?.compatibility)
-}
-
 function copyButton(value, name, label = '复制') {
   return `<button class="copy-button" type="button" data-copy-text="${escapeHtml(value)}" data-copy-name="${escapeHtml(name)}" aria-label="复制${escapeHtml(name)}">${escapeHtml(label)}</button>`
 }
@@ -111,7 +106,7 @@ async function request(pathname, init) {
   const response = await fetch(pathname, init)
   const body = await response.json().catch(() => ({}))
   if (!response.ok) {
-    throw new Error(body.error || `请求失败（${response.status}）`)
+    throw Object.assign(new Error(body.error || `请求失败（${response.status}）`), body)
   }
   return body
 }
@@ -454,7 +449,6 @@ function leftRailHtml() {
           <h3>${escapeHtml(state.detail.paperName)}</h3>
           <p class="paper-meta">${latest ? `R${escapeHtml(latest.revisionNumber)} · ${escapeHtml(stateLabels[latest.state] || latest.state)}` : '等待提交'}</p>
           ${isOcrReview() ? '<p class="muted">Agent 正在校对原文，无需逐项确认。</p>' : ''}
-          ${!isOcrReview() && !isReviewCompatible(state.detail.compatibility) ? `<p class="boundary-note">${reviewCompatibilityMessage()}</p>` : ''}
         </section>
         ${isOcrReview() ? '' : `<details class="rail-section structure-section">
           <summary><h3>卷面结构</h3><span class="paper-meta">${escapeHtml((state.detail.visibleStructure || []).length)} 项</span></summary>
@@ -891,7 +885,6 @@ function approvalHtml() {
       <h2>已批准当前 revision</h2>
       <div class="approval-box">
         ${status('approved')}
-        ${!isReviewCompatible(state.detail.compatibility) ? `<p class="boundary-note">${reviewCompatibilityMessage()}</p>` : ''}
         <p class="digest">${escapeHtml(latest.approval.approvalId)}</p>
         ${externalListeningReview?.schemaVersion === 'external-listening-owner-review-v1' ? `
           <p class="muted">外部听力真人播放核验已绑定：原文一致、全部段落/题目/答案对应、实际内容适合且安全。</p>
@@ -903,7 +896,6 @@ function approvalHtml() {
     </section>`
   }
   const blocked = state.detail.unresolvedCount > 0
-    || !isReviewCompatible(state.detail.compatibility)
     || !['awaiting_review', 'changes_requested'].includes(latest.state)
   const publicPaper = state.detail.importProfile === 'public-paper-v1'
   return `<section class="rail-section">
@@ -917,7 +909,7 @@ function approvalHtml() {
           : '我已检查 Screen 与 PDF，认可当前版本。'}</span>
       </label>
       <button class="button button--primary" id="approve-revision" type="button" disabled>认可这个 revision</button>
-      ${blocked ? `<p class="field-help">${!isReviewCompatible(state.detail.compatibility) ? reviewCompatibilityMessage() : '先处理所有待处理和待验证问题。'}</p>` : ''}
+      ${blocked ? '<p class="field-help">先处理所有待处理和待验证问题。</p>' : ''}
       <p class="boundary-note">认可不是部署授权；后台永远不提供上线按钮。</p>
     </div>
   </section>`
@@ -1509,11 +1501,10 @@ function bind() {
   const approvalButton = document.querySelector('#approve-revision')
   const updateApprovalButton = () => {
     approvalButton.disabled = !approvalCheck.checked || approvalCheck.disabled
-      || !isReviewCompatible(state.detail?.compatibility)
   }
   approvalCheck?.addEventListener('change', updateApprovalButton)
   approvalButton?.addEventListener('click', async () => {
-    if (!approvalCheck?.checked || approvalCheck.disabled || !isReviewCompatible(state.detail?.compatibility)) return
+    if (!approvalCheck?.checked || approvalCheck.disabled) return
     approvalButton.disabled = true
     try {
       await request(

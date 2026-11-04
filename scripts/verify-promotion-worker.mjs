@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
-import { copyFileSync, mkdtempSync, mkdirSync, readFileSync, rmSync, statfsSync } from 'node:fs'
+import { copyFileSync, mkdtempSync, mkdirSync, readFileSync, rmSync, statfsSync, writeFileSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -9,13 +9,15 @@ import { DatabaseSync } from 'node:sqlite'
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { createPromotionWorkerService } from '../server/import-review/runPromotionWorker.mjs'
 import { createPromotionOperationStore, ensurePromotionOperationShape } from '../server/import-review/promotionOperationStore.mjs'
+import { inspectPromotionReservation } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 import { reviewProcessIdentity, matchingReviewProcess, reviewProcessGroupMembers } from '../server/import-review/reviewProcessTree.mjs'
 import { freezeReviewFixture, finalizeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
-import { verifyPromotionWorkerMatrix } from '../test-fixtures/promotion-worker/verify.mjs'
+import { until, verifyPromotionWorkerMatrix } from '../test-fixtures/promotion-worker/verify.mjs'
 import { verifyProcessExitSampling } from '../test-fixtures/promotion-worker/process-exit-sampling.mjs'
 
-await verifyProcessExitSampling()
+const onDemandOnly = process.argv.includes('--on-demand-only')
+if (!onDemandOnly) await verifyProcessExitSampling()
 const disk = statfsSync(tmpdir())
 assert.ok(disk.bavail * disk.bsize >= 10_000_000_000, 'DISK_STOP_BELOW_10_GB')
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-promotion-worker-'))
@@ -72,9 +74,65 @@ try {
   mkdirSync(process.env.QUESTION_BANK_PAPER_ASSET_ROOT)
   let invalidations = 0
   service = createPromotionWorkerService({ getStore: () => store, afterPublish() { invalidations++ } })
+  {
+    const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id IN (?, ?, ?)')
+      .run(reviewed.revision.id, second.revision.id, third.revision.id)
+    reviewDb.close()
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
+    const approval = store.approveRevision(third.manifest.paperId, third.revision.id,
+      { bundleDigest: third.revision.bundleDigest }, 'synthetic-owner')
+    assert.equal(approval.revisionId, third.revision.id)
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
+    console.log('PASS pending compatibility allows exact-revision approval without computing a target result')
+    assert.deepEqual(store.agentPaperStatus(third.manifest.paperId).approval, approval)
+    const pendingRequest = { requestId: `publication-request-${randomUUID()}`,
+      revisionId: third.revision.id, secretHash: sha256('pending-capability'), ttlSeconds: 3600 }
+    store.registerPublicationRequest(third.manifest.paperId, pendingRequest, 'synthetic-agent')
+    assert.equal(store.registerPublicationRequest(third.manifest.paperId, pendingRequest, 'synthetic-agent').state, 'pending')
+    assert.equal(store.grantPublicationRequest(pendingRequest.requestId, 'synthetic-owner').state, 'granted')
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
+    console.log('PASS pending preserves exact Agent approval and permits exact delegation registration/replay/grant')
+    const missingDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    missingDb.prepare('DELETE FROM review_subject WHERE revision_id=?').run(third.revision.id)
+    missingDb.close()
+    await assert.rejects(service.promote(third.manifest.paperId,
+      { ...approval, intent: 'ship' }, 'synthetic-ship'), error => {
+      assert.equal(error.compatibility.result, 'unknown')
+      assert.equal(error.compatibility.reasonCode, 'MISSING_BASELINE')
+      assert.equal(error.retryable, true)
+      assert.equal(error.status, 503)
+      return true
+    })
+    assert.equal(store.latestPromotion(third.manifest.paperId), null)
+    console.log('PASS unknown rejects publication with an explicit retryable result')
+    const changedFile = path.join(store.revisionDirectory(second.revision.id), 'config.json')
+    const originalFile = readFileSync(changedFile)
+    writeFileSync(changedFile, `${originalFile.toString('utf8')}\n`)
+    await assert.rejects(service.promote(second.manifest.paperId,
+      { ...second.approval, intent: 'ship' }, 'synthetic-ship'), error => {
+      assert.equal(error.code, 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED')
+      assert.equal(error.compatibility.result, 'different')
+      assert.ok(error.compatibility.differences.some(pointer => pointer.includes('config.json')),
+        JSON.stringify(error.compatibility))
+      assert.equal(error.retryable, false)
+      return true
+    })
+    assert.equal(store.latestPromotion(second.manifest.paperId), null)
+    const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
+    try {
+      const table = bank.prepare("SELECT 1 FROM sqlite_master WHERE name='paper_asset_versions'").get()
+      assert.equal(table ? bank.prepare('SELECT count(*) n FROM paper_asset_versions WHERE paper_id=?')
+        .get(second.manifest.paperId).n : 0, 0)
+    } finally { bank.close() }
+    writeFileSync(changedFile, originalFile)
+    console.log('PASS on-demand different returns structured locations without a promotion or published version')
+  }
   const result = await service.promote(reviewed.manifest.paperId, { ...reviewed.approval, intent: 'ship' }, 'synthetic-ship')
   assert.equal(result.status, 'published')
   assert.equal(invalidations, 1)
+  assert.equal(store.compatibilityForRevision(reviewed.revision.id).result, 'equal')
+  console.log('PASS on-demand equal continues through the original publisher')
   const operations = createPromotionOperationStore({ dbPath: process.env.QUESTION_BANK_IMPORT_OPS_DB })
   const operation = operations.get(result.operationId)
   assert.equal(operation.state, 'completed')
@@ -88,7 +146,106 @@ try {
   assert.equal(replay.operationId, result.operationId)
   assert.equal(invalidations, 1)
   console.log('PASS promotion executes through independent supervisor/executor, durable receipt, cache invalidation and exact replay')
-  await verifyPromotionWorkerMatrix({ root, seedDb, ship: reviewed.approval,
+  {
+    // Recreate the durable state of a legacy writer lost after bank commit but
+    // before marking Review published, with no operation association.
+    const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    try {
+      reviewDb.prepare('DELETE FROM import_review_promotion_operations WHERE promotion_id=?').run(result.promotion.promotionId)
+      reviewDb.prepare("UPDATE import_review_promotions SET state='publishing', published_at=NULL WHERE id=?")
+        .run(result.promotion.promotionId)
+      reviewDb.prepare(`INSERT INTO import_review_shipping_guards
+        (id,paper_id,revision_id,approval_id,acquired_by,acquired_at) VALUES (?,?,?,?,?,?)`)
+        .run(result.promotion.guardId, reviewed.manifest.paperId, reviewed.revision.id,
+          reviewed.approval.approvalId, 'legacy-ship', new Date().toISOString())
+      reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(reviewed.revision.id)
+    } finally { reviewDb.close() }
+    const recovered = await service.promote(reviewed.manifest.paperId,
+      { ...store.agentPaperStatus(reviewed.manifest.paperId).approval, intent: 'retry_ship' }, 'synthetic-ship')
+    assert.equal(recovered.status, 'idempotent')
+    assert.equal(recovered.promotion.promotionId, result.promotion.promotionId)
+    assert.equal(recovered.promotion.assetVersion, result.promotion.assetVersion)
+    assert.equal(operations.get(recovered.operationId).state, 'completed')
+    assert.equal(store.compatibilityForRevision(reviewed.revision.id).pending, true)
+    const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
+    try { assert.equal(bank.prepare('SELECT count(*) n FROM paper_asset_versions').get().n, 1) }
+    finally { bank.close() }
+    console.log('PASS legacy unlinked publishing reconciles exact committed target before pending compatibility without a new version')
+  }
+  {
+    // Keep the original frozen baseline and simulate a deployed target whose
+    // compatibility has not been checked, with an interrupted pre-write legacy attempt.
+    const seed = new DatabaseSync(seedDb, { readOnly: true })
+    const subject = seed.prepare('SELECT * FROM review_subject WHERE revision_id=?').get(third.revision.id)
+    seed.close()
+    assert.ok(subject, 'the legacy retry fixture must retain its original frozen baseline')
+    const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    try {
+      reviewDb.prepare(`INSERT INTO review_subject (${Object.keys(subject).join(',')})
+        VALUES (${Object.keys(subject).map(() => '?').join(',')})`).run(...Object.values(subject))
+      reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(third.revision.id)
+      assert.deepEqual(reviewDb.prepare('SELECT * FROM review_subject WHERE revision_id=?').get(third.revision.id), subject)
+    } finally { reviewDb.close() }
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
+    const approval = store.agentPaperStatus(third.manifest.paperId).approval
+    const legacy = store.beginPromotion(third.manifest.paperId, { ...approval, intent: 'ship' }, 'legacy-ship')
+    const journal = path.join(process.env.QUESTION_BANK_PAPER_ASSET_ROOT, third.manifest.paperId, '.latest-swap.json')
+    mkdirSync(path.dirname(journal), { recursive: true })
+    writeFileSync(journal, '{}')
+    // UNKNOWN may reach the API before its supervisor disconnects. Force that
+    // legitimate interval instead of depending on the host's exit timing.
+    const faultEnv = {
+      NODE_OPTIONS: `${process.env.NODE_OPTIONS || ''} --import=${new URL('../test-fixtures/promotion-worker/hook.mjs', import.meta.url).pathname}`,
+      EQB_PROMOTION_FAULT_STAGE: 'supervisor-unknown-before-disconnect',
+      EQB_PROMOTION_FAULT_ACTION: 'pause',
+      EQB_PROMOTION_FAULT_MARKER: path.join(root, 'legacy-unknown-exit.json'),
+    }
+    const savedEnv = Object.fromEntries(Object.keys(faultEnv).map(key => [key, process.env[key]]))
+    Object.assign(process.env, faultEnv)
+    try {
+      await assert.rejects(service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship'),
+        { code: 'IMPORT_REVIEW_PROMOTION_UNKNOWN' })
+    } finally {
+      for (const [key, value] of Object.entries(savedEnv)) {
+        if (value === undefined) delete process.env[key]
+        else process.env[key] = value
+      }
+    }
+    assert.equal(readFileSync(journal, 'utf8'), '{}')
+    assert.equal(store.latestPromotion(third.manifest.paperId).state, 'publishing')
+    assert.equal(operations.unresolved().length, 1)
+    assert.equal(operations.unresolved()[0].state, 'unknown')
+    console.log('PASS ambiguous legacy journal retains publishing, evidence and the unresolved operation')
+    const interrupted = operations.unresolved()[0]
+    // UNKNOWN intentionally retains the reservation. Reconcile must prove the
+    // exact old process trees are dead before this fixture attempts a handoff.
+    await until(async () => (await service.reconcile()).recoverable === interrupted.id,
+      'ambiguous legacy supervisor exit and explicit recovery readiness')
+    assert.equal(inspectPromotionReservation().state, 'reserved')
+    assert.equal(inspectPromotionReservation().operationId, interrupted.id)
+    assert.equal(readFileSync(journal, 'utf8'), '{}')
+    // Remove only the synthetic ambiguous evidence to exercise proven no-write recovery.
+    rmSync(journal)
+    const stopped = await service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship')
+    assert.equal(stopped.status, 'failed')
+    assert.equal(operations.get(stopped.operationId).state, 'rejected')
+    assert.deepEqual(operations.unresolved(), [])
+    assert.equal(store.latestPromotion(third.manifest.paperId).promotionId, legacy.promotion.promotionId)
+    assert.equal(store.latestPromotion(third.manifest.paperId).state, 'failed')
+    const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
+    try { assert.equal(bank.prepare('SELECT count(*) n FROM paper_asset_versions').get().n, 1) }
+    finally { bank.close() }
+    console.log('PASS proven uncommitted legacy recovery terminates without a write and releases its guard and operation slot')
+    const retried = await service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship')
+    assert.equal(retried.status, 'published')
+    assert.equal(retried.promotion.promotionId, legacy.promotion.promotionId)
+    assert.equal(retried.promotion.assetVersion, 1)
+    assert.equal(store.compatibilityForRevision(third.revision.id).result, 'equal')
+    assert.equal(operations.get(retried.operationId).state, 'completed')
+    assert.deepEqual(operations.unresolved(), [])
+    console.log('PASS subsequent explicit retry compares equal and publishes the same promotion as v1')
+  }
+  if (!onDemandOnly) await verifyPromotionWorkerMatrix({ root, seedDb, ship: reviewed.approval,
     scoped: { paperId: second.manifest.paperId, requestId, secretHash },
     owner: { paperId: third.manifest.paperId, revisionId: third.revision.id, intent: 'publish',
       bundleDigest: third.revision.bundleDigest, rendererBuildId: third.revision.rendererBuildId } })

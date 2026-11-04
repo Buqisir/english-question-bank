@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { setTimeout as yieldFor } from 'node:timers/promises'
 import { realpathSync } from 'node:fs'
 import { promotionBootstrap, forkPromotionProcess } from './promotionBootstrap.mjs'
+import { createReviewCompatibilityStore } from './reviewCompatibilityStore.mjs'
 import { createPromotionOperationStore, promotionOperationError, PROMOTION_PROTOCOL } from './promotionOperationStore.mjs'
 import { acquireReviewCompatibilityLeader, inspectPromotionReservation, reservePromotionSlot,
   releasePromotionSlot, reviewCompatibilityBusy, readPromotionSlotProcess,
@@ -13,6 +14,7 @@ import { reviewProcessIdentity, matchingReviewProcess, reviewProcessGroupMembers
 export function createPromotionWorkerService({ getStore, afterPublish }) {
   const config = promotionBootstrap()
   const operations = createPromotionOperationStore({ dbPath: config.reviewDbPath })
+  const compatibilityStore = createReviewCompatibilityStore({ dbPath: config.reviewDbPath, filesRoot: config.filesRoot })
   const invalidated = new Set()
   let recovery, recoveryTimer
   function invalidate(outcome) {
@@ -33,6 +35,7 @@ export function createPromotionWorkerService({ getStore, afterPublish }) {
       throw Object.assign(new Error(row.outcome?.error || '发布请求已拒绝'), {
         code: row.outcome?.reasonCode || 'IMPORT_REVIEW_PROMOTION_REJECTED',
         status: row.outcome?.status || 409, operationId: row.id,
+        compatibility: row.outcome?.compatibility, retryable: row.outcome?.retryable,
       })
     }
     throw promotionOperationError('UNKNOWN', row.id)
@@ -204,6 +207,7 @@ export function createPromotionWorkerService({ getStore, afterPublish }) {
     let duplicate = operations.find(mode, actor, expected)
     const resubmitRejected = duplicate?.state === 'rejected'
       && (mode === 'retry_ship' || duplicate.outcome?.reasonCode === 'NOT_BEGUN'
+        || (duplicate.outcome?.compatibility && !duplicate.promotion_id)
         || (mode === 'owner_publish' && !duplicate.promotion_id))
     if (duplicate && duplicate.state !== 'unknown' && !resubmitRejected) return currentResult(duplicate)
     if (duplicate?.state === 'unknown' && mode !== 'retry_ship') return currentResult(duplicate)
@@ -257,6 +261,45 @@ export function createPromotionWorkerService({ getStore, afterPublish }) {
         nonce, slotToken: slot.token, owner, releaseIdentity: config.releaseIdentity,
         deadlineAt: new Date(Date.now() + config.deadlineMs).toISOString(),
         legacyPromotionId: mode === 'retry_ship' ? prior?.promotionId : null, replacesOperationId })
+      // Keep the host reservation through comparison and supervisor handoff.
+      // Interrupted publishing, including legacy rows without an operation,
+      // first reconciles its exact target. The publisher guards any new write.
+      const recoveringPublishing = mode === 'retry_ship' && prior?.state === 'publishing'
+        && prior.revisionId === expected.revisionId && prior.approvalId === expected.approvalId
+      if (!replacesOperationId && !recoveringPublishing) {
+        let compatibility
+        try {
+          await compatibilityStore.ready()
+          compatibility = compatibilityStore.get(expected.revisionId)
+          if (compatibility.result !== 'equal' || compatibility.pending) {
+            const checked = await compatibilityStore.checkRevision(expected.revisionId, {
+              leaderLease: leader.lease, promotionToken: slot.token,
+            })
+            compatibility = checked.committed ? compatibilityStore.get(expected.revisionId)
+              : { result: 'unknown', reasonCode: checked.reasonCode || 'NOT_CHECKED' }
+          }
+        } catch (failure) {
+          compatibility = { result: 'unknown', reasonCode: failure.code || 'COMPUTATION_FAILED' }
+        }
+        if (compatibility.result !== 'equal' || compatibility.pending) {
+          const different = compatibility.result === 'different'
+          // Keep bounded IPC/operation receipts; full evidence stays in SQLite.
+          let size = 0
+          const differences = (compatibility.differences || []).filter(pointer => {
+            size += Buffer.byteLength(JSON.stringify(pointer)) + 1
+            return size <= 10_000
+          })
+          const outcome = { reasonCode: 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED',
+            status: different ? 409 : 503, retryable: !different,
+            error: different ? '预览内容有变化，未发布。请核对差异后重新送审。'
+              : '本次核验未完成，未发布。请稍后重试。',
+            compatibility: { ...compatibility, differences,
+              differencesTruncated: differences.length < (compatibility.differences || []).length } }
+          operations.finish(row.id, 'rejected', outcome)
+          releasePromotionSlot(slot.token)
+          return currentResult(operations.get(row.id))
+        }
+      }
     } catch (error) {
       // This live stack proves no fork was attempted. A crash before this
       // cleanup instead preserves file-without-DB evidence for recovery.

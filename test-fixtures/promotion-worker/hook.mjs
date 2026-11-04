@@ -5,6 +5,8 @@ const replacements = {
     ["    findSimilar: (db, input) =>", "    __promotionFixtureRawIndex: getRawIndex,\n    findSimilar: (db, input) =>"],
   ],
   '/server/import-review/runPromotionWorker.mjs': [
+    ["          await compatibilityStore.ready()", "          __promotionFault('before-compatibility');\n          await compatibilityStore.ready()"],
+    ["        if (compatibility.result !== 'equal' || compatibility.pending) {", "        __promotionFault('after-compatibility', { result: compatibility.result });\n        if (compatibility.result !== 'equal' || compatibility.pending) {"],
     ["      row = operations.reserve(", "      __promotionFault('after-host-slot');\n      row = operations.reserve("],
     ["    return supervise(row, nonce)", "    __promotionFault('after-job-before-fork');\n    await __promotionAsyncFault('live-reserve-before-fork');\n    return supervise(row, nonce)"],
     ["phase = 'running'; send('go')", "phase = 'running'; __promotionFault('api-before-go'); send('go'); __promotionFault('api-after-go', { phase, result })"],
@@ -19,6 +21,8 @@ const replacements = {
       "        __promotionFault('supervisor-ack-before-recheck');\n        operations.acknowledge(row.id, outcome)"],
     ["  send(canRelease ? 'outcome' : 'unknown'", "  if (canRelease) __promotionFault('supervisor-before-outcome');\n  send(canRelease ? 'outcome' : 'unknown'"],
     ["  if (canRelease && process.connected) {", "  if (canRelease) __promotionFault('supervisor-after-outcome');\n  if (canRelease && process.connected) {"],
+    ["  } else if (process.connected) {\n    phase = 'done'",
+      "  } else if (process.connected) {\n    __promotionFault('supervisor-unknown-before-disconnect');\n    phase = 'done'"],
     ["      phase = 'launch'\n      send('ready')", "      phase = 'launch'\n      __promotionFault('supervisor-ready');\n      send('ready')"],
     ["      phase = 'running'\n      executor.send(", "      phase = 'running'\n      __promotionFault('supervisor-before-go');\n      executor.send("],
   ],
@@ -33,6 +37,8 @@ const replacements = {
       "        linkPromotionOperation(db, operation, promotion)\n        if(operation)__promotionFault('begin-before-commit');\n        db.exec('COMMIT');\n        if(operation)__promotionFault('begin-after-commit')"],
   ],
   '/server/import-review/singlePaperPromotion.mjs': [
+    ["          uncommitted = recovery.recovered === true",
+      "          uncommitted = recovery.recovered === true;\n          if (uncommitted) __promotionFault('after-promotion-rollback')"],
     ["              return write()", "              __promotionFault('guard-write-lock');\n              return write()"],
     ["          return archiveReviewFiles(", "          __promotionFault('before-archive');\n          return archiveReviewFiles("],
     [".then(storage => execute(paperId, begun, storage, binding))", ".then(storage => { __promotionFault('after-archive'); return execute(paperId, begun, storage, binding) })"],

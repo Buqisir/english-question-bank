@@ -23,13 +23,20 @@ const server = createServer((_request, response) => response.end('alive'))
 try {
   let invoked = 0
   process.env.EQB_REVIEW_COMPATIBILITY_AUTORUN = '0'
-  const scheduler = startReviewCompatibilityWorker({ ready() { invoked++ } },
-    { backfillStore: { runBatch() { invoked++ } } })
-  await yieldFor(50)
-  await scheduler.stop()
+  for (const options of [{}, { enabled: true }]) {
+    const scheduler = startReviewCompatibilityWorker({ ready() { invoked++ } },
+      { ...options, backfillStore: { runBatch() { invoked++ } } })
+    await yieldFor(50)
+    await scheduler.stop()
+  }
   assert.equal(invoked, 0)
   delete process.env.EQB_REVIEW_COMPATIBILITY_AUTORUN
-  console.log('PASS automatic scheduling is enabled by default and starts neither worker when disabled')
+  const defaultScheduler = startReviewCompatibilityWorker({ ready() { invoked++ } },
+    { backfillStore: { runBatch() { invoked++ } } })
+  await yieldFor(50)
+  await defaultScheduler.stop()
+  assert.equal(invoked, 0)
+  console.log('PASS scheduling defaults off; emergency switch also blocks explicit scheduling')
 
   const quickWorker = path.join(root, 'quick-worker.mjs')
   writeFileSync(quickWorker, `process.once('message',()=> {

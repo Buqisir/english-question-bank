@@ -144,9 +144,11 @@ export function reviewCompatibilityLockDiagnostics() {
     activities: readdirSync(root).filter(name => name.startsWith('activity-'))
       .map(name => inspect(path.join(root, name), 'activity')) }
 }
-export function reviewCompatibilityBusy() {
+export function reviewCompatibilityBusy({ promotionToken = null } = {}) {
   const root = initialize()
-  if (inspectPromotionReservation().state !== 'missing') return true
+  const reservation = inspectPromotionReservation()
+  if (reservation.state !== 'missing'
+    && !(reservation.state === 'reserved' && promotionToken === reservation.token)) return true
   let busy = false
   for (const name of readdirSync(root).filter(name => name.startsWith('activity-'))) {
     const file = path.join(root, name)
