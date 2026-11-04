@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict'
-import { mkdtempSync, rmSync } from 'node:fs'
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { test } from 'node:test'
+import { makeFixture } from '../../scripts/verify-nck1-source-materialization.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { createImportReviewRoutes } from '../import-review/importReviewRoutes.mjs'
 import { runRoutes } from '../router/index.mjs'
 import { createSearchSidecarStore, ensureSearchSidecarDatabaseShape, searchSidecarGenerationInput } from './searchSidecars.mjs'
@@ -73,21 +75,43 @@ test('sidecar store replaces one exact binding, retains other revisions, and rej
   assert.deepEqual(store.get(input).payload, updated)
 })
 
-function routeHarness(t) {
+function routeHarness(t, materialization = null) {
   const sidecars = temporaryStore(t)
+  const directory = mkdtempSync(path.join(tmpdir(), 'eqb-search-input-'))
+  t.after(() => rmSync(directory, { recursive: true, force: true }))
+  const file = { path: materialization ? 'materialization.json' : 'compilation.json',
+    role: materialization ? 'materialization' : 'compilation' }
+  const bytes = Buffer.from(JSON.stringify(materialization || projection.compilation))
+  Object.assign(file, { sha256: sha256(bytes), byteLength: bytes.length })
+  const filePath = path.join(directory, file.path)
+  writeFileSync(filePath, bytes)
+  const sealedRevision = { ...revision, state: 'awaiting_review', rendererBuildId: 'old-renderer',
+    manifest: { files: [file] } }
   let reads = 0
   const routes = createImportReviewRoutes({
     agentToken: 'agent-test-token', searchSidecars: sidecars,
     getStore: () => ({
-      projectionForRevision(id) {
+      getRevision(id) {
         reads++
         assert.equal(id, revision.id)
-        return { revision, projection }
+        return sealedRevision
+      },
+      verifiedFileForRead(id, relativePath) {
+        assert.equal(id, revision.id)
+        assert.equal(relativePath, file.path)
+        const current = readFileSync(filePath)
+        if (sha256(current) !== file.sha256 || current.length !== file.byteLength) {
+          throw Object.assign(new Error('Sealed digest mismatch'), { status: 409, code: 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH' })
+        }
+        return { revision: sealedRevision, file, filePath }
+      },
+      projectionForRevision() {
+        throw Object.assign(new Error('Renderer is stale'), { status: 409, code: 'IMPORT_REVIEW_RENDERER_STALE' })
       },
     }),
   })
   return {
-    sidecars, get reads() { return reads },
+    sidecars, filePath, get reads() { return reads },
     async invoke(method, suffix, { body, headers = {}, session = null } = {}) {
       let captured
       const url = new URL(`/api/import-agent-reviews/revisions/${revision.id}/${suffix}`, 'http://test')
@@ -136,4 +160,39 @@ test('PUT requires agent authentication, exact binding and transcript ownership 
   const result = await harness.invoke('PUT', 'search-sidecar', { session, body })
   assert.equal(result.status, 200)
   assert.deepEqual(harness.sidecars.get(input).payload, payload)
+})
+
+test('stale renderer uses sealed materialization text and canonical listening ownership for PUT and readback', async t => {
+  const raw = makeFixture({ listening: true })
+  raw.paperId = revision.paperId
+  const harness = routeHarness(t, raw)
+  const session = { accountKind: 'import_agent', username: 'agent' }
+  const result = await harness.invoke('GET', 'search-sidecar-input', { session })
+  assert.equal(result.status, 200)
+  assert.equal(result.body.groups.length, raw.groups.length)
+  assert.equal(result.body.groups[0].groupId, raw.groups[0].groupId)
+  assert.ok(result.body.groups[0].text.includes(raw.groups[0].blocks[0].content[0].text))
+  assert.equal(result.body.segments.length, 10)
+  assert.deepEqual(result.body.segments[0], {
+    groupId: `group:${revision.paperId}:listening.short-dialogue`, segmentId: 'text:1',
+    questionIds: ['question:listening:1'], transcript: 'Short listening transcript 1.',
+  })
+  assert.deepEqual(result.body.segments[5], {
+    groupId: `group:${revision.paperId}:listening.long-form`, segmentId: 'text:6',
+    questionIds: [6, 7, 8].map(number => `question:listening:${number}`),
+    transcript: 'Long listening transcript 6.',
+  })
+  assert.equal((await harness.invoke('GET', 'search-sidecar')).status, 401)
+  assert.equal((await harness.invoke('GET', 'search-sidecar', { session })).status, 404)
+  const body = { ...result.body, groups: [], segments: [{
+    ...payload.segments[0], ...result.body.segments[5],
+  }] }
+  assert.equal((await harness.invoke('PUT', 'search-sidecar', { session, body })).status, 200)
+  const readback = await harness.invoke('GET', 'search-sidecar', { session })
+  assert.equal(readback.status, 200)
+  assert.deepEqual(readback.body.payload, { groups: body.groups, segments: body.segments })
+  writeFileSync(harness.filePath, '{}')
+  const changed = await harness.invoke('GET', 'search-sidecar-input', { session })
+  assert.equal(changed.status, 409)
+  assert.equal(changed.body.code, 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH')
 })

@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+
 export function ensureSearchSidecarDatabaseShape(db) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS paper_search_sidecars (
@@ -18,8 +20,49 @@ function sourceText(value) {
   return Object.values(value).map(sourceText).join('') + (value.kind === 'paragraph' ? '\n' : '')
 }
 
-export function searchSidecarGenerationInput({ revision, projection }) {
-  const groups = projection.compilation.artifacts.canonicalPaper.questionGroups
+export function sealedSearchSidecarGenerationInput(store, revisionId) {
+  const revision = store.getRevision(revisionId)
+  if (!revision || revision.state === 'uploading') {
+    throw Object.assign(new Error('Finalized revision not found'), { status: 404, code: 'IMPORT_REVIEW_NOT_FOUND' })
+  }
+  if (revision.reviewKind !== 'candidate') {
+    throw Object.assign(new Error('A Candidate revision is required'), { status: 409, code: 'IMPORT_REVIEW_CANDIDATE_REQUIRED' })
+  }
+  const files = revision.manifest.files
+  const read = file => JSON.parse(readFileSync(store.verifiedFileForRead(revisionId, file.path).filePath, 'utf8'))
+  const canonical = files.find(file => ['canonical_paper', 'compilation'].includes(file.role)
+    || ['canonical-paper.json', 'compilation.json'].includes(file.path))
+  if (canonical) {
+    const sealed = read(canonical)
+    return searchSidecarGenerationInput({ revision, canonicalPaper: sealed.artifacts?.canonicalPaper
+      || sealed.compilation?.artifacts?.canonicalPaper || sealed })
+  }
+  const file = files.find(file => file.role === 'materialization')
+  if (!file) {
+    throw Object.assign(new Error('Sealed Source Materialization is missing'), { status: 404, code: 'IMPORT_REVIEW_NOT_FOUND' })
+  }
+  const materialization = read(file)
+  return {
+    paperId: revision.paperId, sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
+    groups: materialization.groups.filter(group => group.family !== 'listening').map(group => ({
+      groupId: group.groupId, text: sourceText(group.blocks).trim(),
+    })),
+    // These are the same slot and question identities used by appendListeningGroups.
+    segments: [
+      { slotId: 'listening.short-dialogue', from: 1, to: 5 },
+      { slotId: 'listening.long-form', from: 6, to: 20 },
+    ].flatMap(({ slotId, from, to }) => (materialization.listening?.transcript || [])
+      .filter(segment => segment.questionNumbers.some(number => number >= from && number <= to))
+      .map(segment => ({
+        groupId: `group:${revision.paperId}:${slotId}`, segmentId: segment.segmentId,
+        questionIds: segment.questionNumbers.map(number => `question:listening:${number}`),
+        transcript: segment.text,
+      }))),
+  }
+}
+
+export function searchSidecarGenerationInput({ revision, projection, canonicalPaper = projection?.compilation.artifacts.canonicalPaper }) {
+  const groups = canonicalPaper.questionGroups
   return {
     paperId: revision.paperId,
     sourceDigest: revision.sourceDigest,

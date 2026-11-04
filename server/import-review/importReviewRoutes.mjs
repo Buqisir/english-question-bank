@@ -7,7 +7,7 @@ import path from 'node:path'
 
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
-import { searchSidecarGenerationInput } from '../search/searchSidecars.mjs'
+import { sealedSearchSidecarGenerationInput } from '../search/searchSidecars.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
 import { buildCompanionAnalysisHtml } from '../exports/companionAnalysisRenderer.mjs'
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
@@ -390,15 +390,23 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     if (!agentIdentity(request, context, agentToken)) {
       context.sendJson(response, 401, { error: 'agent_auth_required' }); return
     }
-    const input = searchSidecarGenerationInput(candidateProjectionForRevision(store, decodeURIComponent(match[1])))
+    const input = sealedSearchSidecarGenerationInput(store, decodeURIComponent(match[1]))
     context.sendJson(response, 200, input)
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/search-sidecar$/, route(({ request, response, context, match }) => {
+    if (!agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' }); return
+    }
+    const sidecar = searchSidecars.get(sealedSearchSidecarGenerationInput(store, decodeURIComponent(match[1])))
+    context.sendJson(response, sidecar ? 200 : 404, sidecar || { error: 'search_sidecar_not_found' })
   })))
 
   routes.push(defineRoute('PUT', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/search-sidecar$/, route(async ({ request, response, context, match }) => {
     if (!agentIdentity(request, context, agentToken)) {
       context.sendJson(response, 401, { error: 'agent_auth_required' }); return
     }
-    const input = searchSidecarGenerationInput(candidateProjectionForRevision(store, decodeURIComponent(match[1])))
+    const input = sealedSearchSidecarGenerationInput(store, decodeURIComponent(match[1]))
     const body = await context.readJsonBody(request)
     if (['paperId', 'sourceDigest', 'candidateDigest'].some(key => body?.[key] !== input[key])) {
       throw reviewError('SEARCH_SIDECAR_BINDING_MISMATCH', 'Sidecar binding differs from the revision', 409)
