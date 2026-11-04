@@ -2183,8 +2183,8 @@ export function produceNck1MaterializationFromStructures({
 }) {
   const body = questionStructure.body
   const answerBody = answerStructure.body
-  if (answerBody.some(item => item.kind === 'table' && item.rows.some(row =>
-    row.cells.some(cell => cell.columnSpan !== 1 || cell.verticalMerge != null || (cell.rowSpan ?? 1) !== 1)))) {
+  if (answerBody.some(item => item.kind === 'table' && item.rows?.some(row =>
+    row.cells?.some(cell => cell.columnSpan !== 1 || cell.verticalMerge != null || (cell.rowSpan ?? 1) !== 1)))) {
     addIssue(issues, 'NCK1_DOCX_ANSWER_TABLE_REVIEW_REQUIRED', 'documents.official_answers',
       '评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理', sourceRef(answer?.documentId))
   }
