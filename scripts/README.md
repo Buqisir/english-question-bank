@@ -4,6 +4,7 @@
 
 | Verifier | Distinct failure caught |
 | --- | --- |
+| `verify-agent-api.mjs` | Agent Bearer 认证、Owner 令牌管理与已发布试卷只读边界失效 |
 | `verify-import-review-upload-reuse.mjs` | 私有上传重复使用与重试丢失原字节 |
 | `verify-import-review-finalize-worker.mjs` | 封存 worker 阻塞主线程或错误接纳 |
 | `verify-import-review-bundle-reuse.mjs` | 重复 bundle 创建错误 revision |
