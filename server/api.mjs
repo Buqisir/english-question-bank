@@ -39,6 +39,7 @@ import { createAgentRoutes } from './agent-api/agentRoutes.mjs'
 import { createAgentAuthGate, ensureAgentTokenShape } from './agent-api/agentTokens.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { listCanonicalPaperCatalog } from './search/canonicalPaperCatalog.mjs'
+import { createSearchSidecarStore, ensureSearchSidecarDatabaseShape } from './search/searchSidecars.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 import { createSimilarQuestionsStore, createSimilarQuestionsRoutes } from './search/similarQuestions.mjs'
 import { createListeningMaterialProjectionRoutes } from './search/listeningMaterialProjection.mjs'
@@ -501,6 +502,7 @@ const serverRoutes = [
   ...createPaperCanonicalConsumerRoutes(),
   ...createImportReviewRoutes({
     getStore: getImportReviewStore,
+    searchSidecars: createSearchSidecarStore({ openDatabase }),
     getBlobStore: configuredBlobStore,
     agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',
     shipToken: process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '',
@@ -881,6 +883,7 @@ function ensureDatabaseShape() {
       db.exec('ALTER TABLE paper_sets ADD COLUMN layout_json TEXT')
     }
     ensurePaperImportDatabaseShape(db)
+    ensureSearchSidecarDatabaseShape(db)
   } finally {
     db.close()
   }

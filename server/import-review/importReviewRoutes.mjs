@@ -7,6 +7,7 @@ import path from 'node:path'
 
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
+import { searchSidecarGenerationInput } from '../search/searchSidecars.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
 import { buildCompanionAnalysisHtml } from '../exports/companionAnalysisRenderer.mjs'
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
@@ -251,6 +252,7 @@ export function publicPaperReviewDetail(store, paperId) {
 
 export function createImportReviewRoutes({
   getStore,
+  searchSidecars = null,
   getBlobStore = null,
   agentToken,
   shipToken,
@@ -382,6 +384,26 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       return
     }
     context.sendJson(response, 200, store.agentPaperStatus(decodeURIComponent(match[1])))
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/search-sidecar-input$/, route(({ request, response, context, match }) => {
+    if (!agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' }); return
+    }
+    const input = searchSidecarGenerationInput(candidateProjectionForRevision(store, decodeURIComponent(match[1])))
+    context.sendJson(response, 200, input)
+  })))
+
+  routes.push(defineRoute('PUT', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/search-sidecar$/, route(async ({ request, response, context, match }) => {
+    if (!agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' }); return
+    }
+    const input = searchSidecarGenerationInput(candidateProjectionForRevision(store, decodeURIComponent(match[1])))
+    const body = await context.readJsonBody(request)
+    if (['paperId', 'sourceDigest', 'candidateDigest'].some(key => body?.[key] !== input[key])) {
+      throw reviewError('SEARCH_SIDECAR_BINDING_MISMATCH', 'Sidecar binding differs from the revision', 409)
+    }
+    context.sendJson(response, 200, searchSidecars.upsert(input, { groups: body.groups, segments: body.segments }))
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/promotions$/, route(async ({

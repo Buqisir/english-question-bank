@@ -1757,6 +1757,26 @@ async function redeemPublication(paperId) {
   console.log(JSON.stringify({ ...result, backupBoundary: 'Production R2 backup remains asynchronous and is not part of this receipt.' }, null, 2))
 }
 
+async function searchSidecar(command, paperId) {
+  const revisionId = option('--revision')
+  if (!revisionId) fail(`${command} requires --revision`)
+  const base = `/api/import-agent-reviews/revisions/${encodeURIComponent(revisionId)}`
+  const input = await api(`${base}/search-sidecar-input`)
+  if (input.paperId !== paperId) fail('Revision belongs to another paper')
+  if (command === 'search-sidecar-input') {
+    const json = `${JSON.stringify(input, null, 2)}\n`
+    if (option('--output')) writeFileSync(path.resolve(option('--output')), json)
+    else process.stdout.write(json)
+    return
+  }
+  const inputPath = option('--input')
+  if (!inputPath) fail('upload-search-sidecar requires --input')
+  const body = requiredJson(path.resolve(inputPath), 'search sidecar')
+  console.log(JSON.stringify(await api(`${base}/search-sidecar`, {
+    method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body),
+  }), null, 2))
+}
+
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (!['promote', 'request-publication', 'publication-status', 'redeem-publication'].includes(command)) assertNotNck1SourceOnly(paperId, command)
@@ -1772,6 +1792,7 @@ async function main() {
     }
   }
   if (command === 'push') await pushRevision(paperId)
+  else if (['search-sidecar-input', 'upload-search-sidecar'].includes(command)) await searchSidecar(command, paperId)
   else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) listeningInstructionCorrection(paperId, command)
   else if (['prepare-listening-review', 'finalize-listening-review', 'verify-listening-review'].includes(command)) listeningReview(paperId, command)
   else if (command === 'pagination-qa') await paginationQa(paperId)
@@ -1805,6 +1826,7 @@ async function main() {
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--with-teaching-analyses] [--resolves issue-1,issue-2] | '
+      + 'search-sidecar-input <paperId> --revision rev-id [--output input.json] | upload-search-sidecar <paperId> --revision rev-id --input sidecar.json | '
       + 'prepare-listening-review <paperId> --output <request.json> | finalize-listening-review <paperId> --input <review.json> | verify-listening-review <paperId> | '
       + 'prepare-listening-instruction-correction <paperId> --slot <listening slot> --count 1|2 --output <request.json> | finalize-listening-instruction-correction <paperId> --input <correction.json> | verify-listening-instruction-correction <paperId> | '
       + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--large-complete-page-limit 13 | --large-no-listening-page-limit 11 (Owner 2026-10-24 BUB-138)] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
