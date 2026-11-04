@@ -1,3 +1,4 @@
+import zhejiang from '../../standards/paper-canonical/profiles/zhejiang-legacy-v16.json' with { type: 'json' }
 import { resolveInImageOptionLabels } from './inImageOptionLabels.mjs'
 import { resolveCrossPageParagraphJoins } from './crossPageParagraphJoin.mjs'
 import { validateListeningSourceDecision } from './listeningSourceDecision.mjs'
@@ -13,6 +14,41 @@ import {
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
 import { writingNoticeGroups, writingWordCount, writingNoticeWordCountsAgree } from './applicationWritingDisplay.mjs'
 import { SOURCE_INSTRUCTION_SLOTS, validSourceExample } from './sourcePresentation.mjs'
+
+export const zhejiangLegacyProfile = zhejiang
+export const zhejiangLegacyBinding = Object.freeze({
+  profileId: zhejiang.profileId, version: zhejiang.version, sha256: digestJson(zhejiang),
+})
+
+export function importFormatBinding(profileId = 'nck1') {
+  if (profileId === 'nck1') return null
+  if (profileId !== zhejiang.profileId) throw new Error(`Unsupported import profile: ${profileId}`)
+  return zhejiangLegacyBinding
+}
+
+export function materializationSlotSpecs(profileId) {
+  if (profileId !== zhejiang.profileId) throw new Error(`Unsupported materialization profile: ${profileId}`)
+  return zhejiang.parts.flatMap(part => part.sections.flatMap(section => section.slots))
+    .filter(slot => slot.familyContractRef.id !== 'listening')
+    .map(slot => [
+      ({ 'reading.seven-choices': 'seven-choices', 'language.cloze': 'cloze',
+        'language.grammar-fill': 'grammar-fill' })[slot.slotId] ?? slot.slotId,
+      slot.familyContractRef.id,
+      slot.numberingRule.start ?? null, slot.numberingRule.end ?? null,
+    ])
+}
+
+export function profileHeadingSpecs(profile = zhejiang) {
+  return profile.parts.flatMap(part => part.sections.flatMap((section, index) => {
+    const slotId = section.slots[0].slotId
+    return [
+      ...(index === 0 ? [{ slotId, instructionId: part.titleInstructionRef, score: part.score }] : []),
+      { slotId, instructionId: section.titleInstructionRef, score: section.score,
+        count: section.slots.reduce((sum, slot) => sum + slot.questionCardinality.count, 0),
+        points: section.slots[0].scoringRule.points },
+    ]
+  }))
+}
 
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION =
   'nck1-source-materialization-v1'
@@ -697,8 +733,10 @@ function validateWritingBlocks(blocks, task, family, path, issues, allowMultiple
   }
 }
 
-function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false, allowGivenBlockRefs = false, allowMultipleApplicationNotices = false, inImageQuestionIds = new Set()) {
-  if (!Array.isArray(groups) || groups.length !== slots.length) {
+function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false, allowDrawingArea = false, allowStemFigures = false, allowGivenBlockRefs = false, allowMultipleApplicationNotices = false, inImageQuestionIds = new Set(), slotSpecs = null) {
+  const activeSlots = slotSpecs ?? slots
+  const slotById = new Map(activeSlots.map(slot => [slot[0], slot]))
+  if (!Array.isArray(groups) || groups.length !== activeSlots.length) {
     issues.push(issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'NCK1 requires exactly nine active groups'))
     return { questionIds: new Map(), ids: new Set() }
   }
@@ -774,7 +812,7 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
       issues.push(issue('MATERIALIZATION_OPTION_BANK_FORBIDDEN', `${path}.optionBank`, 'Only Seven Choices owns an option bank'))
     }
   }
-  for (const [slotId] of slots) {
+  for (const [slotId] of activeSlots) {
     if (!groupBySlot.has(slotId)) issues.push(issue('MATERIALIZATION_SLOT_MISSING', '$.groups', `Missing NCK1 slot ${slotId}`))
   }
   return { questionIds, ids }
@@ -792,7 +830,7 @@ export function validateNck1ProducerGroups(value) {
 }
 
 function validateAnswers(answers, questionIds, documents, issues) {
-  if (!Array.isArray(answers) || answers.length !== 45) {
+  if (!Array.isArray(answers) || answers.length !== questionIds.size) {
     issues.push(issue('MATERIALIZATION_ANSWERS_INCOMPLETE', '$.answers', 'Official answers must cover canonical questions 21-65 exactly once'))
     return
   }
@@ -804,8 +842,6 @@ function validateAnswers(answers, questionIds, documents, issues) {
       || !exactKeys(answer, ['questionId', 'canonicalNumber', 'value', 'authority'])
       || questionIds.get(answer.questionId)?.number !== answer.canonicalNumber
       || !Number.isInteger(answer.canonicalNumber)
-      || answer.canonicalNumber < 21
-      || answer.canonicalNumber > 65
       || seenNumbers.has(answer.canonicalNumber)
       || !nonEmptyString(answer.value)
       || (
@@ -823,7 +859,7 @@ function validateAnswers(answers, questionIds, documents, issues) {
     seenNumbers.add(answer.canonicalNumber)
     validateLocator(answer.authority, `${path}.authority`, documents, issues)
   }
-  for (let number = 21; number <= 65; number += 1) {
+  for (const { number } of questionIds.values()) {
     if (!seenNumbers.has(number)) issues.push(issue('MATERIALIZATION_ANSWER_MISSING', '$.answers', `Missing official answer ${number}`))
   }
 }
@@ -1217,7 +1253,38 @@ export function validateNck1SourceMaterialization(value, { allowMultipleApplicat
 
 // This context is derived only from successfully resolved v13 decisions. Public
 // callers cannot grant a question or a legacy envelope the new measurement path.
-function validateMaterialization(value, { allowMultipleApplicationNotices = false } = {}, inImageQuestionIds = new Set()) {
+function validateMaterialization(value, { allowMultipleApplicationNotices = false, profileId = 'nck1', slotSpecs = null } = {}, inImageQuestionIds = new Set()) {
+  if (value?.schemaVersion === 'nck1-source-materialization-v14') {
+    if (value.profileId !== 'zhejiang-legacy') return [issue('MATERIALIZATION_ROOT_INVALID', '$.profileId', 'Legacy v14 binds zhejiang-legacy')]
+    const issues = []
+    const documents = new Map((value.documents || []).map(document => [document.documentId, document]))
+    const presentation = value.sourcePresentation
+    const specs = profileHeadingSpecs()
+    if (!isRecordValue(presentation) || !exactKeys(presentation, ['instructions', 'listeningExample', 'headings', 'opening'])
+      || !Array.isArray(presentation.headings) || presentation.headings.length !== specs.length
+      || !isRecordValue(presentation.opening) || !exactKeys(presentation.opening, ['title', 'notices', 'transferNotice', 'source'])
+      || !nonEmptyString(presentation.opening.title) || !nonEmptyString(presentation.opening.transferNotice)
+      || !Array.isArray(presentation.opening.notices) || presentation.opening.notices.some(text => !nonEmptyString(text))) {
+      return [issue('MATERIALIZATION_SOURCE_PRESENTATION_INVALID', '$.sourcePresentation', 'Legacy source needs exact headings and its own opening')]
+    }
+    for (const [index, spec] of specs.entries()) {
+      const entry = presentation.headings[index]
+      if (!isRecordValue(entry) || !exactKeys(entry, ['slotId', 'instructionId', 'text', 'source'])
+        || entry.slotId !== spec.slotId || entry.instructionId !== spec.instructionId || !nonEmptyString(entry.text)) {
+        issues.push(issue('MATERIALIZATION_SOURCE_PRESENTATION_INVALID', '$.sourcePresentation.headings', 'Headings must bind the selected profile in source order'))
+      } else validateLocator(entry.source, '$.sourcePresentation.headings.source', documents, issues)
+    }
+    validateLocator(presentation.opening.source, '$.sourcePresentation.opening.source', documents, issues)
+    for (const question of [...(value.groups || []).flatMap(group => group.questions || [])]) {
+      if (question.sourceNumber !== question.canonicalNumber) issues.push(issue('MATERIALIZATION_SOURCE_NUMBER_MISMATCH', '$.groups', 'Legacy question numbers must match the original source'))
+    }
+    if (value.listening?.state !== 'captured') issues.push(issue('MATERIALIZATION_LISTENING_INCOMPLETE', '$.listening', 'This profile requires all listening questions'))
+    const { headings, opening, ...original } = presentation
+    const legacy = { ...value, schemaVersion: Object.hasOwn(value, 'inImageOptionLabels') && value.inImageOptionLabels.some(item => item.schemaVersion === 'reading-in-image-option-labels-v2')
+      ? 'nck1-source-materialization-v13' : Object.hasOwn(value, 'paragraphJoins') ? 'nck1-source-materialization-v12' : 'nck1-source-materialization-v11', sourcePresentation: original }
+    return [...issues, ...validateMaterialization(legacy, { allowMultipleApplicationNotices, profileId: value.profileId,
+      slotSpecs: materializationSlotSpecs(value.profileId) }, inImageQuestionIds)]
+  }
   if (value?.schemaVersion === 'nck1-source-materialization-v13') {
     const issues = []
     // Prove v2 against its actual envelope. Only unrelated legacy fields are
@@ -1236,7 +1303,7 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
     try { resolveCrossPageParagraphJoins(value) }
     catch (error) { issues.push(issue('MATERIALIZATION_PARAGRAPH_JOIN_INVALID', '$.paragraphJoins', error.message)) }
     const { inImageOptionLabels, paragraphJoins, ...fields } = value
-    return [...issues, ...validateMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices }, inImageQuestionIds)]
+    return [...issues, ...validateMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices, profileId, slotSpecs }, inImageQuestionIds)]
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v12') {
     // Validate relations against their real envelope before reusing the older
@@ -1249,14 +1316,14 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
       issues.push(issue('MATERIALIZATION_PARAGRAPH_JOIN_INVALID', '$.paragraphJoins', error.message))
     }
     const { paragraphJoins, ...fields } = value
-    return [...issues, ...validateMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices }, inImageQuestionIds)]
+    return [...issues, ...validateMaterialization({ ...fields, schemaVersion: 'nck1-source-materialization-v11' }, { allowMultipleApplicationNotices, profileId, slotSpecs }, inImageQuestionIds)]
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v11') {
     const legacy = { ...value, schemaVersion: Object.hasOwn(value, 'listeningSourceDecision')
       ? 'nck1-source-materialization-v10' : Object.hasOwn(value, 'inImageOptionLabels')
         ? 'nck1-source-materialization-v9' : Object.hasOwn(value, 'paragraphJoins')
           ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7' }
-    return validateMaterialization(legacy, { allowMultipleApplicationNotices }, inImageQuestionIds)
+    return validateMaterialization(legacy, { allowMultipleApplicationNotices, profileId, slotSpecs }, inImageQuestionIds)
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v10') {
     const { listeningSourceDecision, ...legacy } = value
@@ -1264,7 +1331,7 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
       ? 'nck1-source-materialization-v9'
       : Object.hasOwn(legacy, 'paragraphJoins')
         ? 'nck1-source-materialization-v8' : 'nck1-source-materialization-v7'
-    const issues = validateMaterialization(legacy, { allowMultipleApplicationNotices }, inImageQuestionIds)
+    const issues = validateMaterialization(legacy, { allowMultipleApplicationNotices, profileId, slotSpecs }, inImageQuestionIds)
     try { validateListeningSourceDecision(listeningSourceDecision) }
     catch (error) { issues.push(issue('MATERIALIZATION_LISTENING_SOURCE_DECISION_INVALID', '$.listeningSourceDecision', error.message)) }
     return issues
@@ -1300,7 +1367,7 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9,
     ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
-    || value.profileId !== 'nck1'
+    || value.profileId !== profileId
   ) {
     return [issue('MATERIALIZATION_ROOT_INVALID', '$', 'Materialization root is closed and bound to one NCK1 paper')]
   }
@@ -1371,7 +1438,7 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V4, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V5, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
     [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V6, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion),
-    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion), allowMultipleApplicationNotices, inImageQuestionIds)
+    [NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V7, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V8, NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V9].includes(value.schemaVersion), allowMultipleApplicationNotices, inImageQuestionIds, slotSpecs)
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   for (const group of Array.isArray(value.groups) ? value.groups : []) {

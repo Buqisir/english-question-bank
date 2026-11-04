@@ -1,3 +1,4 @@
+import { zhejiangLegacyProfile } from './nck1SourceMaterialization.mjs'
 import profile from '../../standards/paper-canonical/profiles/nck1-v16.json' with { type: 'json' }
 
 const instructions = profile.instructions
@@ -47,18 +48,19 @@ export function projectListeningGroupPresentation(group) {
   const short = group.questions[0]?.questionNo <= 5
   const source = group.sourcePresentation
   return Object.freeze({
-    partHeading: short ? instruction('part.listening') : null,
-    transferNotice: short ? listeningOpening.transferNotice : null,
-    sectionHeading: instruction(short
+    partHeading: short ? source?.headings?.find(entry => entry.instructionId === 'part.listening')?.text ?? instruction('part.listening') : null,
+    transferNotice: short ? source?.opening?.transferNotice ?? listeningOpening.transferNotice : null,
+    sectionHeading: source?.headings?.find(entry => entry.instructionId === (short
+      ? 'section.listening.short-dialogue' : 'section.listening.long-form'))?.text ?? instruction(short
       ? 'section.listening.short-dialogue'
       : 'section.listening.long-form')
       .replace(/^(第[一二]节)\s*/u, '$1 ')
       .replace(/\s*(\d+(?:\.\d+)?)\s*/gu, ' $1 '),
-    instruction: source?.instruction.text ?? (short
+    instruction: source?.instruction?.text ?? (short
       ? section1Instruction(group.firstSectionPlayback ?? 'twice_default')
       : instruction('listening.long-form.prompt')),
     example: !short ? null : source
-      ? (source.example.state === 'provided' ? source.example : null)
+      ? (source.example?.state === 'provided' ? source.example : null)
       : Object.freeze({
       stem: 'How much is the shirt?',
       options: Object.freeze([
@@ -76,11 +78,14 @@ export function projectListeningGroupPresentation(group) {
 }
 
 export function ownsCompletePaperOpening(consumption, renderedGroupIds) {
-  if (!Array.isArray(renderedGroupIds) || ![9, 11].includes(renderedGroupIds.length)) return false
+  const legacy = consumption?.authorityRef?.manifestVersion === '82'
+    && consumption.profileRef?.profileId === 'zhejiang-legacy' && consumption.profileRef.profileVersion === '16'
+  if (!Array.isArray(renderedGroupIds) || !(legacy ? [8, 10] : [9, 11]).includes(renderedGroupIds.length)) return false
   const occurrences = consumption?.selections?.flatMap((selection) =>
     selection?.mode === 'canonical' ? selection.projectedOccurrences ?? [] : [])
     .filter((occurrence) => renderedGroupIds.includes(occurrence.groupId)) ?? []
-  const expectedSlots = [
+  const expectedSlots = legacy ? zhejiangLegacyProfile.parts.flatMap(part => part.sections.flatMap(section => section.slots))
+    .filter(slot => renderedGroupIds.length === 10 || slot.familyContractRef.id !== 'listening').map(slot => slot.slotId) : [
     ...(renderedGroupIds.length === 11 ? ['listening.short-dialogue', 'listening.long-form'] : []),
     'reading.a', 'reading.b', 'reading.c', 'reading.d',
     'reading.seven-choices', 'language.cloze', 'language.grammar-fill',
@@ -91,4 +96,12 @@ export function ownsCompletePaperOpening(consumption, renderedGroupIds) {
   if (expectedSlots.some((slotId, index) => slots.get(slotId)?.groupId !== renderedGroupIds[index])) return false
   const paperIds = new Set(occurrences.map((occurrence) => occurrence.paperId ?? consumption.paperId))
   return paperIds.size === 1 && !paperIds.has(undefined)
+}
+
+export function paperOpeningForConsumption(consumption) {
+  if (consumption?.authorityRef?.manifestVersion !== '82' || consumption.profileRef?.profileId !== 'zhejiang-legacy') return listeningOpening
+  const opening = consumption.selections.flatMap(selection => selection.mode === 'canonical' ? selection.projectedOccurrences : [])
+    .find(occurrence => occurrence.sourcePresentation?.opening)?.sourcePresentation.opening
+  if (!opening) throw new Error('Legacy paper requires its source opening')
+  return opening
 }

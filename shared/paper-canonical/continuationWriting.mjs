@@ -225,7 +225,8 @@ export function validateContinuationWritingContract({
       issues.push(issue('CONTINUATION_STARTERS_INCOMPLETE', 'incomplete_source', '$.variant.starterProvision', 'The two-starter contract requires reviewed starter evidence'))
     } else if (provision.starters.length === 3) {
       issues.push(issue('CONTINUATION_STARTER_BOUNDARY_AMBIGUOUS', 'needs_review', '$.variant.starterProvision.starters', 'Three entries can mix source starters with response-like supplement content and may not be sliced'))
-    } else if (provision.starters.length !== 2 || profileId !== 'nck1') {
+    } else if (provision.starters.length !== 2 || (profileId !== 'nck1'
+      && !(profileId === 'zhejiang-legacy' && authorityRef?.manifestVersion === '82'))) {
       issues.push(issue('CONTINUATION_PROFILE_CARDINALITY_UNSUPPORTED', 'unsupported', '$.variant.starterProvision.starters', 'The selected Profile and starter cardinality do not match the two-starter contract'))
     } else {
       const starterIds = new Set()

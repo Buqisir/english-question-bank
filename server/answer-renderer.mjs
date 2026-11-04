@@ -1,4 +1,4 @@
-import { authorityAdmitsMultipleWritingNotices } from '../shared/paper-canonical/authority.mjs'
+import { authorityAdmitsMultipleWritingNotices, resolveCanonicalAuthority } from '../shared/paper-canonical/authority.mjs'
 import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
@@ -113,11 +113,77 @@ ${paragraphs.join('\n')}
   return `<section data-answer-section="${kind}" data-group-id="${escapeHtml(group.groupId)}">${joinedHeading ? '' : heading}${content}</section>`
 }
 
+function legacyAnswerSections({ canonicalPlan, materialization, authorityRef, sourceReferences,
+  sourceDigest, candidateDigest, includeScoring }) {
+  if (!canonicalPlan || canonicalPlan.paperId !== materialization.paperId
+    || digestJson(canonicalPlan.authorityRef) !== digestJson(authorityRef)) {
+    throw new Error('Legacy answer booklet requires the same-version Canonical Plan')
+  }
+  const resolved = resolveCanonicalAuthority(canonicalPlan.authorityRef)
+  const profile = resolved.ok && resolved.closure.profiles.get(canonicalPlan.profileRef.profileId)
+  if (!profile || profile.profileId !== materialization.profileId
+    || profile.version !== canonicalPlan.profileRef.profileVersion
+    || digestJson(profile) !== canonicalPlan.profileRef.profileDigest) throw new Error('Answer Plan profile is stale')
+  const headings = new Map(materialization.sourcePresentation.headings.map(entry => [entry.instructionId, entry.text]))
+  const title = id => textHtml(headings.get(id) ?? profile.instructions[id].text)
+  const answersById = new Map([
+    ...materialization.answers.map(answer => [answer.questionId, answer]),
+    ...materialization.listening.answers.map(answer => [`question:listening:${answer.canonicalNumber}`, answer]),
+  ])
+  const groupsById = new Map(materialization.groups.map(group => [group.groupId, group]))
+  const referencesById = new Map(sourceReferences.groups.map(group => [group.groupId, group]))
+  const namespace = [materialization.paperId, sourceDigest, candidateDigest]
+  let keys = '', references = ''
+  for (const part of profile.parts) {
+    if (part.partId === 'writing') {
+      references += `<h2>${title(part.titleInstructionRef)}</h2>`
+      const writing = part.sections.map(section => {
+        const slot = section.slots[0]
+        const binding = canonicalPlan.slotBindings.find(binding => binding.slotId === slot.slotId && binding.state === 'bound')
+        const group = groupsById.get(binding?.groupRef.groupId)
+        const reference = referencesById.get(group?.groupId)
+        if (!group || !reference) throw new Error('Answer writing reference is not bound to the Plan')
+        return { section, group, reference }
+      })
+      references += writing.map(({ section, group, reference }) => referenceSection(reference, 'essays',
+        group.writingTask.starters, headings.get(section.titleInstructionRef) ?? profile.instructions[section.titleInstructionRef].text,
+        namespace)).join('\n')
+      if (includeScoring) references += writing.map(({ reference }) =>
+        referenceSection(reference, 'scoring', [], null, namespace)).join('\n')
+      continue
+    }
+    const sections = part.sections.map(section => {
+      const ranges = []
+      let grammar = false
+      for (const slot of section.slots) {
+        const binding = canonicalPlan.slotBindings.find(binding => binding.slotId === slot.slotId && binding.state === 'bound')
+        const assignments = canonicalPlan.numberingAssignments.filter(assignment => assignment.slotId === slot.slotId)
+        if (!binding || assignments.length !== slot.questionCardinality.count
+          || assignments.some(assignment => assignment.groupId !== binding.groupRef.groupId)) {
+          throw new Error('Answer question range is not bound to the Plan')
+        }
+        const selected = assignments.map(assignment => {
+          const answer = answersById.get(assignment.questionId)
+          if (!answer || answer.canonicalNumber !== assignment.canonicalNumber) throw new Error('Official answer identity differs from the Plan')
+          return { ...answer, canonicalNumber: assignment.canonicalNumber }
+        })
+        grammar = slot.familyContractRef.id === 'grammar-fill'
+        for (let index = 0; index < selected.length; index += 5) ranges.push(selected.slice(index, index + 5))
+      }
+      return `<h3 class="key-section">${title(section.titleInstructionRef)}</h3>\n`
+        + (grammar ? keyTable(ranges.flat(), 5) : rangeTable(ranges))
+    }).join('\n')
+    keys += `<section data-answer-section="keys"><h2>${title(part.titleInstructionRef)}</h2>\n${sections}</section>`
+  }
+  return { keys, references }
+}
+
 // Independent source-reference booklet. It never reads teacher HTML or analyses.
 // Owner accepted reference-v2; source approval is a separate boundary.
 export function buildAnswerOnlyHtml({
   paperName, materialization, sourceReferences, sourceDigest, candidateDigest,
   includeScoring = false, sourceDocuments = null, sourceInput = null, authorityRef = null,
+  canonicalPlan = null,
 }) {
   if (typeof paperName !== 'string' || !paperName.trim()) throw new Error('Owner-provided paper name is required')
   assertAnswerSource(materialization, sourceInput, authorityRef)
@@ -127,7 +193,7 @@ export function buildAnswerOnlyHtml({
   const slice = (first, last) => answers.filter(answer => answer.canonicalNumber >= first && answer.canonicalNumber <= last)
   const listeningAnswers = listening.state === 'captured'
     ? [...listening.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber) : []
-  const keys = `${listening.state === 'captured' ? `<section data-answer-section="keys">
+  let keys = materialization.profileId === 'zhejiang-legacy' ? '' : `${listening.state === 'captured' ? `<section data-answer-section="keys">
 <h2>第一部分　听力（共两节，满分30分）</h2>
 ${rangeTable([0, 5, 10, 15].map(start => listeningAnswers.slice(start, start + 5)))}</section>` : ''}
 <section data-answer-section="keys"><h2>第二部分　阅读理解（共两节，满分50分）</h2>
@@ -142,11 +208,15 @@ ${rangeTable([[41, 45], [46, 50], [51, 55]].map(([first, last]) => slice(first, 
 ${keyTable(slice(56, 65), 5)}</section>`
   const referencesByGroup = new Map(sourceReferences.groups.map(group => [group.groupId, group]))
   const groups = materialization.groups.filter(group => group.writingTask)
-  const references = `<h2>第四部分　写作（共两节，满分40分）</h2>`
+  let references = materialization.profileId === 'zhejiang-legacy' ? '' : `<h2>第四部分　写作（共两节，满分40分）</h2>`
     + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters,
       null, [materialization.paperId, sourceDigest, candidateDigest])).join('\n')
     + (includeScoring ? groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'scoring', [], null,
       [materialization.paperId, sourceDigest, candidateDigest])).join('\n') : '')
+  if (materialization.profileId === 'zhejiang-legacy') {
+    ;({ keys, references } = legacyAnswerSections({ canonicalPlan, materialization, authorityRef,
+      sourceReferences, sourceDigest, candidateDigest, includeScoring }))
+  }
   const transcripts = listening.state === 'captured'
     ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${listening.transcript.map((segment, index) =>
       `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,

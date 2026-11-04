@@ -14,6 +14,7 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { readExamDate } from '../../shared/examDate.mjs'
+import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 
 import {
   compileNck1MaterializationCandidatePreview,
@@ -395,7 +396,12 @@ function initializeCompleteSourceSet({
   month,
   sources,
   imageSources,
+  profileId = 'nck1',
 }) {
+  const formatProfileBinding = importFormatBinding(profileId)
+  if (formatProfileBinding && (imageSources.length || sources.some(source => mediaTypeFor(source.sourcePath) !== 'application/pdf'))) {
+    fail('zhejiang-legacy 本期只接收先转换的 PDF，再走 OCR')
+  }
   validateSourceInputs({ paperId, paperName, provenance, sources, imageSources })
   const examDate = readExamDate({ year, month }, { required: true })
   const environment = runImportEnvironmentPreflight()
@@ -410,7 +416,8 @@ function initializeCompleteSourceSet({
   const manifest = {
     schemaVersion: 'universal-nck1-source-manifest-v1',
     paperId,
-    profileId: 'nck1',
+    profileId,
+    ...(formatProfileBinding ? { formatProfileBinding } : {}),
     provenance: { paperName, source: provenance, ...examDate },
     documents,
     materializationPath: 'materialization/nck1-source-materialization-v1.json',
@@ -425,6 +432,7 @@ function initializeCompleteSourceSet({
   writeFileSync(configPath, `${JSON.stringify({
     paperId,
     format: 'universal-nck1',
+    ...(formatProfileBinding ? { formatProfileBinding } : {}),
     importProfile: 'public-paper-v1',
     pdfProductsRequired: true,
     spellingReview: TEXT_REVIEW_POLICY,
@@ -452,6 +460,7 @@ function initialize() {
     month: Number(value('--month')),
     sources,
     imageSources,
+    profileId: value('--profile') || 'nck1',
   })
 }
 

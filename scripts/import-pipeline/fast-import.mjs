@@ -40,6 +40,7 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-
 import { sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
 import { retainOwnerListening } from './lib-finish-owner-listening.mjs'
+import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -352,6 +353,21 @@ async function prep(ctx, args) {
   const separator = args.indexOf('--')
   const initArgs = separator === -1 ? [] : args.slice(separator + 1)
   const own = separator === -1 ? args : args.slice(0, separator)
+  const profileId = option(own, '--profile') || 'nck1'
+  const formatProfileBinding = importFormatBinding(profileId)
+  const configPath = path.join(ctx.paperDir, 'config.json')
+  if (existsSync(configPath)
+    && stableStringify(readJson(configPath).formatProfileBinding ?? null) !== stableStringify(formatProfileBinding)) {
+    fail('已有任务的 profile 与本次 --profile 不同；拒绝覆盖或续跑')
+  }
+  if (ctx.state.data.formatProfileBinding !== undefined
+    && stableStringify(ctx.state.data.formatProfileBinding) !== stableStringify(formatProfileBinding)) {
+    fail('任务绑定的 profile 版本不同；拒绝续跑')
+  }
+  if (formatProfileBinding) {
+    ctx.state.data.formatProfileBinding = formatProfileBinding
+    save(ctx)
+  }
   const audio = option(own, '--audio')
   const declaration = option(own, '--listening')
   // Validate before init writes anything; absence of audio is never a declaration.
@@ -360,7 +376,8 @@ async function prep(ctx, args) {
   await step(ctx, 'init', async () => {
     if (existsSync(path.join(ctx.paperDir, 'config.json'))) return { existing: true }
     if (!initArgs.length) fail('新卷需要在 -- 之后给出 universal-nck1 init 参数')
-    await run(ctx, 'init', cli('universal-nck1.mjs', 'init', ctx.paperId, ...initArgs))
+    await run(ctx, 'init', cli('universal-nck1.mjs', 'init', ctx.paperId, ...initArgs,
+      ...(formatProfileBinding ? ['--profile', profileId] : [])))
     return { initialized: true }
   })
   await step(ctx, 'source-listening', () => {

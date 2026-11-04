@@ -15,6 +15,7 @@ import { loadReferenceOcrSourceBytes } from '../../server/paper-import/nck1OcrSo
 import { wholeDocumentAbsenceSubject, WHOLE_DOCUMENT_ABSENCE_KIND } from '../../server/paper-import/sourceReferenceWholeDocumentAbsence.mjs'
 import { prepareSourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { buildAnswerOnlyHtml } from '../../server/answer-renderer.mjs'
+import { compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { renderPaginatedPaper } from '../../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 
@@ -134,6 +135,8 @@ try {
       if (existsSync(output)) throw new Error('QA output must be a new directory; preserve previous evidence')
       const includeScoring = process.argv.includes('--include-scoring')
       const html = buildAnswerOnlyHtml({ ...binding, sourceReferences,
+        ...(loaded.materialization.profileId === 'zhejiang-legacy'
+          ? { canonicalPlan: compileNck1MaterializationCandidatePreview(imported.candidate).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
         paperName: loaded.config.provenance.paperName, includeScoring })
       mkdirSync(output, { recursive: true })
       activeQaOutput = output

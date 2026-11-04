@@ -1,8 +1,8 @@
+import { materializationSlotSpecs, profileHeadingSpecs, validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { answerGridPairs as parseAnswerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { execFileSync } from 'node:child_process'
 
 import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
-import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { WRITING_SAMPLE_LABEL } from './sourceReferenceWritingRules.mjs'
@@ -631,8 +631,8 @@ function readMcqQuestions({ paperId, body, from, to, rangeStart, rangeEnd, famil
   }))
 }
 
-function readingGroups({ paperId, body, firstStart, secondStart, documentId, issues }) {
-  const letters = ['A', 'B', 'C', 'D'].map((letter) => exactPosition(
+function readingGroups({ paperId, body, firstStart, secondStart, documentId, issues, specs = SLOT_SPECS }) {
+  const letters = specs.map((_, index) => String.fromCharCode(65 + index)).map((letter) => exactPosition(
     body,
     new RegExp(`^${letter}$`, 'u'),
     `sections.reading.${letter.toLowerCase()}`,
@@ -640,7 +640,7 @@ function readingGroups({ paperId, body, firstStart, secondStart, documentId, iss
     documentId,
     [firstStart + 1, secondStart],
   ))
-  return SLOT_SPECS.map(([slotId, family, from, to], slotIndex) => {
+  return specs.map(([slotId, family, from, to], slotIndex) => {
     const start = letters[slotIndex]
     const end = letters[slotIndex + 1] ?? secondStart
     if (start === null || end === null) return emptyGroup(paperId, slotId, family)
@@ -725,7 +725,7 @@ function blankGroup({ paperId, slotId, family, items, from, to, documentId, issu
   return group(paperId, slotId, family, blocks, questions, optionBank)
 }
 
-function sevenChoices({ paperId, body, start, end, documentId, issues }) {
+function sevenChoices({ paperId, body, start, end, documentId, issues, from = 36, to = 40 }) {
   const meaningful = body.slice(start + 1, end).filter((item) =>
     item.kind !== 'paragraph' || normalized(item.text))
   let bankStart = -1
@@ -748,34 +748,34 @@ function sevenChoices({ paperId, body, start, end, documentId, issues }) {
   const bodyItems = meaningful.slice(1, bankStart)
   return blankGroup({
     paperId, slotId: 'seven-choices', family: 'seven-choices',
-    items: bodyItems, from: 36, to: 40, documentId, issues, optionBank: bank,
+    items: bodyItems, from, to, documentId, issues, optionBank: bank,
   })
 }
 
-function clozeGroup({ paperId, body, start, end, documentId, issues }) {
-  const q41 = questionPosition(body, 41, start + 1, end)
+function clozeGroup({ paperId, body, start, end, documentId, issues, from = 41, to = 55 }) {
+  const q41 = questionPosition(body, from, start + 1, end)
   if (q41 === null) {
     addIssue(issues, 'NCK1_DOCX_QUESTION_SEQUENCE_INCOMPLETE', 'groups.cloze',
-      'Expected Cloze Questions 41-55', sourceRef(documentId))
+      `Expected Cloze Questions ${from}-${to}`, sourceRef(documentId))
     return emptyGroup(paperId, 'cloze', 'cloze')
   }
   const passageItems = body.slice(start + 2, q41)
     .map((item) => ({ ...item, text: item.textWithNumberedBlanks ?? item.text }))
   const matches = blankMatches(passageItems)
   const questions = readMcqQuestions({
-    paperId, body, from: 41, to: 55, rangeStart: q41, rangeEnd: end,
+    paperId, body, from, to, rangeStart: q41, rangeEnd: end,
     family: 'cloze', documentId, issues,
   })
-  if (matches.length !== 15 || matches.some((match, index) => match.sourceNumber !== 41 + index)) {
+  if (matches.length !== to - from + 1 || matches.some((match, index) => match.sourceNumber !== from + index)) {
     addIssue(issues, 'NCK1_DOCX_BLANK_SEQUENCE_INCOMPLETE', 'groups.cloze.blocks',
-      'Expected source blanks 41-55 exactly once in order', sourceRef(documentId))
+      `Expected source blanks ${from}-${to} exactly once in order`, sourceRef(documentId))
   }
   const blanks = new Map(matches.map((match, index) => [
-    match.sourceNumber, `blank:${paperId}:${41 + index}`,
+    match.sourceNumber, `blank:${paperId}:${from + index}`,
   ]))
   for (const [index, question] of questions.entries()) {
     if (matches[index]) {
-      question.blankId = `blank:${paperId}:${41 + index}`
+      question.blankId = `blank:${paperId}:${from + index}`
     }
   }
   const blocks = contentBlocks(passageItems, {
@@ -994,14 +994,14 @@ function writingAnswerSectionHeading(text) {
   return NUMBERED_WRITING_ANSWER_SECTION.test(text) || BARE_WRITING_ANSWER_SECTION.test(text)
 }
 
-export function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
+export function parseOfficialAnswers(answerBody, answerDocumentId, issues, { first = 21, last = 65, lastChoice = 55 } = {}) {
   const answers = new Map()
   const locate = (item) => sourceLocator(answerDocumentId, item.kind === 'table'
     ? item.source || { kind: 'docx_part', documentId: answerDocumentId, part: 'word/document.xml', selector: item.selector }
     : item.sourceIndex)
   const at = (item) => sourceRef(answerDocumentId, item.kind === 'table' ? item.source || null : item.sourceIndex)
   const add = (number, value, item) => {
-    if (number < 1 || number > 65) return
+    if (number < 1 || number > last) return
     const previous = answers.get(number)
     const cleaned = String(value).trim()
     if (!cleaned || INLINE_ANSWER_DETAIL.test(cleaned)) {
@@ -1047,8 +1047,8 @@ export function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
     }
     if (line.explanationHeading) {
       const activeAnswersComplete = Array.from(
-        { length: 45 },
-        (_, offset) => answers.has(offset + 21),
+        { length: last - first + 1 },
+        (_, offset) => answers.has(offset + first),
       ).every(Boolean)
       if (activeAnswersComplete) break
       continue
@@ -1091,8 +1091,8 @@ export function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       const number = Number(match[1])
       const rawValue = trimEdgeSpaces(match[2])
       // Numbers past 65 are writing parts or explanation items, never answers.
-      if (!normalized(rawValue) || number < 1 || number > 65) continue
-      if (number <= 55) {
+      if (!normalized(rawValue) || number < 1 || number > last) continue
+      if (number <= lastChoice) {
         const label = /^([A-G])(?=$|[\s.．、,，;；。:：)）【])/u.exec(normalized(rawValue))?.[1]
         if (label) add(number, label, item)
         continue
@@ -1455,9 +1455,9 @@ export function parseOfficialWritingSamples(answerBody, answerDocumentId, issues
   return officialWritingSamples(answerBody, answerDocumentId, issues, [], writingRoleDeclarations)
 }
 
-function activeAnswers(paperId, answerMap, issues, answerDocumentId) {
+function activeAnswers(paperId, answerMap, issues, answerDocumentId, { first = 21, last = 65 } = {}) {
   const answers = []
-  for (let number = 21; number <= 65; number += 1) {
+  for (let number = first; number <= last; number += 1) {
     const parsed = answerMap.get(number)
     if (!parsed) {
       addIssue(issues, 'NCK1_DOCX_ANSWER_MISSING', `answers.${number}`,
@@ -2162,6 +2162,50 @@ function carrierIssues(issues, codePrefix) {
   }))
 }
 
+function legacySourcePresentation({ body, positions, question, issues }) {
+  const { readingStart, languageStart, writingStart, readingFirst, readingSecond,
+    languageFirst, languageSecond, writingFirst, writingSecond } = positions
+  const listeningStart = exactPosition(body, /^第一部分\s*听力/u, 'sections.listening', issues, question.documentId)
+  const short = exactPosition(body, /^第一节/u, 'sections.listening.first', issues,
+    question.documentId, [listeningStart + 1, readingStart])
+  const long = exactPosition(body, /^第二节/u, 'sections.listening.second', issues,
+    question.documentId, [listeningStart + 1, readingStart])
+  const indexes = [listeningStart, short, long, readingStart, readingFirst, readingSecond,
+    languageStart, languageFirst, languageSecond, writingStart, writingFirst, writingSecond]
+  const located = index => ({
+    text: body[index]?.text ?? '',
+    source: sourceLocator(question.documentId, body[index]?.sourceIndex),
+  })
+  const headings = profileHeadingSpecs().map((spec, index) => {
+    const entry = located(indexes[index])
+    const text = normalized(entry.text).replace(/\s+/gu, '')
+    const total = Number(/满分(\d+(?:\.\d+)?)分/u.exec(text)?.[1])
+    const count = /共(\d+)小题/u.exec(text)?.[1]
+    const points = /每小题(\d+(?:\.\d+)?)分/u.exec(text)?.[1]
+    if (total !== spec.score || (count !== undefined && Number(count) !== spec.count)
+      || (points !== undefined && Number(points) !== spec.points)) {
+      addIssue(issues, 'NCK1_OCR_PROFILE_SCORE_MISMATCH', spec.instructionId,
+        'Source heading disagrees with the explicitly selected profile; retain source text and review the profile', entry.source)
+    }
+    return { slotId: spec.slotId, instructionId: spec.instructionId, ...entry }
+  })
+  const directions = [
+    ['listening.short-dialogue', short + 1, questionPosition(body, 1, short + 1, long)],
+    ['listening.long-form', long + 1, long + 2],
+    ['reading.a', readingFirst + 1, readingFirst + 2],
+    ['seven-choices', readingSecond + 1, readingSecond + 2],
+    ['cloze', languageFirst + 1, languageFirst + 2],
+    ['grammar-fill', languageSecond + 1, languageSecond + 2],
+  ].map(([slotId, start, end]) => ({ slotId, ...located(start),
+    text: body.slice(start, end).map(item => item.text ?? '').filter(Boolean).join('\n') }))
+  const preamble = body.slice(0, listeningStart).filter(item => item.text?.trim())
+  return { instructions: directions, headings,
+    listeningExample: { state: 'not_supplied', source: located(short).source },
+    opening: { title: preamble[0]?.text ?? '', notices: preamble.slice(1).map(item => item.text),
+      transferNotice: body.slice(listeningStart + 1, short).map(item => item.text ?? '').filter(Boolean).join('\n'),
+      source: located(listeningStart).source } }
+}
+
 export function produceNck1MaterializationFromStructures({
   paperId,
   documents,
@@ -2180,7 +2224,14 @@ export function produceNck1MaterializationFromStructures({
   mediaFiles = [],
   listeningSource = null,
   writingRoleDeclarations = null,
+  profileId = 'nck1',
 }) {
+  const legacy = profileId !== 'nck1'
+  const specs = legacy ? materializationSlotSpecs(profileId) : null
+  const range = id => { const slot = specs.find(slot => slot[0] === id); return { from: slot[2], to: slot[3] } }
+  const answerRange = legacy ? { first: Math.min(...specs.filter(slot => slot[2] !== null).map(slot => slot[2])),
+    last: Math.max(...specs.filter(slot => slot[3] !== null).map(slot => slot[3])),
+    lastChoice: range('grammar-fill').from - 1 } : undefined
   const body = questionStructure.body
   const answerBody = answerStructure.body
   if (answerBody.some(item => item.kind === 'table' && item.rows?.some(row =>
@@ -2227,19 +2278,23 @@ export function produceNck1MaterializationFromStructures({
     .every((position) => position !== null)) {
     groups = readingGroups({
       paperId, body, firstStart: readingFirst, secondStart: readingSecond,
+      ...(legacy ? { specs: specs.filter(slot => slot[1] === 'reading') } : {}),
       documentId: question.documentId, issues,
     })
     groups.push(sevenChoices({
       paperId, body, start: readingSecond, end: languageStart,
+      ...(legacy ? range('seven-choices') : {}),
       documentId: question.documentId, issues,
     }))
     groups.push(clozeGroup({
       paperId, body, start: languageFirst, end: languageSecond,
+      ...(legacy ? range('cloze') : {}),
       documentId: question.documentId, issues,
     }))
     groups.push(blankGroup({
       paperId, slotId: 'grammar-fill', family: 'grammar-fill',
-      items: body.slice(languageSecond + 2, writingStart), from: 56, to: 65,
+      items: body.slice(languageSecond + 2, writingStart),
+      ...(legacy ? range('grammar-fill') : { from: 56, to: 65 }),
       documentId: question.documentId, issues,
     }))
     groups.push(writingGroup({
@@ -2257,8 +2312,8 @@ export function produceNck1MaterializationFromStructures({
       issues,
     }))
   }
-  const answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues)
-  const answers = activeAnswers(paperId, answerMap, issues, answer?.documentId)
+  const answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues, answerRange)
+  const answers = activeAnswers(paperId, answerMap, issues, answer?.documentId, answerRange)
   const tables = groups.flatMap((candidate) => candidate.blocks.filter((block) => block.kind === 'table'))
   if (
     tables.some((table) => table.source.kind !== 'page_region')
@@ -2343,13 +2398,13 @@ export function produceNck1MaterializationFromStructures({
     if (issues[index].code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS') issues.splice(index, 1)
   }
   const materialization = {
-    schemaVersion: groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
+    schemaVersion: legacy ? 'nck1-source-materialization-v14' : groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
       ? 'nck1-source-materialization-v3'
       : selectedMedia.length > 0
       ? 'nck1-source-materialization-v2'
       : 'nck1-source-materialization-v1',
     paperId,
-    profileId: 'nck1',
+    profileId,
     documents: documents.map(documentRecord),
     groups,
     answers,
@@ -2357,6 +2412,15 @@ export function produceNck1MaterializationFromStructures({
     sourceCoverage,
     listening,
     issues: carrierIssues(issues, codePrefix),
+  }
+  if (legacy && groups.length) {
+    materialization.sourcePresentation = legacySourcePresentation({ body, positions: { readingStart, languageStart, writingStart,
+      readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond },
+      question, issues })
+    for (const group of groups) for (const question of group.questions) {
+      if (question.sourceNumber !== question.canonicalNumber) addIssue(issues, `${codePrefix}_SOURCE_NUMBER_MISMATCH`,
+        `questions.${question.canonicalNumber}`, 'Legacy source numbering must be retained exactly', question.source)
+    }
   }
   if (issues.length === 0) {
     for (const invalid of validateNck1SourceMaterialization(materialization)) {

@@ -30,7 +30,7 @@ function projectProfileInstruction(profile, instructionId) {
 
 function projectSlotInstruction(profile, instructionId, group) {
   const instruction = projectProfileInstruction(profile, instructionId)
-  if (group?.sourcePresentation?.instruction.instructionId === instructionId) {
+  if (group?.sourcePresentation?.instruction?.instructionId === instructionId) {
     return { ...instruction, text: group.sourcePresentation.instruction.text }
   }
   return group?.variant?.sourceInstruction?.instructionId === instructionId
@@ -203,8 +203,9 @@ function assertCanonicalPackage(canonicalPackage) {
     )
     if (groupIssues.length > 0) throw projectionError('Canonical Group is schema-invalid', groupIssues)
     if (group.sourcePresentation !== undefined
-      && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(closure.authorityRef.manifestVersion)
-        || !sourcePresentationMatchesCapture(group.sourcePresentation, sourceCapture))) {
+      && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(closure.authorityRef.manifestVersion)
+        || !sourcePresentationMatchesCapture(group.sourcePresentation, sourceCapture)
+      || ((group.sourcePresentation.headings || group.sourcePresentation.opening) && closure.authorityRef.manifestVersion !== '82'))) {
       throw projectionError('Source presentation does not match captured source observations', [])
     }
     if (group.identity.paperId !== plan.paperId || groupById.has(group.identity.groupId)) throw projectionError('Groups must belong to one paper and have unique identities', [])
@@ -230,7 +231,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(closure.authorityRef.manifestVersion),
+          ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -392,7 +393,14 @@ function assertCanonicalPackage(canonicalPackage) {
  * semantic stream, never source markers, profile guessing, or sidecar paths.
  */
 export function projectCanonicalPaper(canonicalPackage) {
-  const { closure, profile, groupById } = assertCanonicalPackage(canonicalPackage)
+  const { closure, profile: boundProfile, groupById } = assertCanonicalPackage(canonicalPackage)
+  const profile = { ...boundProfile, instructions: { ...boundProfile.instructions } }
+  for (const group of groupById.values()) for (const heading of group.sourcePresentation?.headings || []) {
+    if (closure.authorityRef.manifestVersion !== '82' || !profile.instructions[heading.instructionId]) {
+      throw projectionError('Source headings require the legacy profile successor', [])
+    }
+    profile.instructions[heading.instructionId] = { ...profile.instructions[heading.instructionId], text: heading.text }
+  }
   const plan = canonicalPackage.plan
   const numberingByGroup = new Map()
   for (const assignment of plan.numberingAssignments) {
@@ -432,7 +440,7 @@ export function projectCanonicalPaper(canonicalPackage) {
         }
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(closure.authorityRef.manifestVersion)
+              ...(['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,
@@ -482,14 +490,14 @@ export function projectCanonicalPaper(canonicalPackage) {
                 number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,
                 stem: cloneJson(question.stem),
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
-                ...(['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(plan.authorityRef.manifestVersion)
+                ...(['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(plan.authorityRef.manifestVersion)
                   ? {}
                   : { correctOptionId: question.correctOptionId }),
               })),
               // v51 public consumption needs only coverage identities. Full
               // transcript/answers stay in source authority and Owner Review.
               transcriptSegments: group.variant.transcriptSegments.map((segment) =>
-                ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(plan.authorityRef.manifestVersion)
+                ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(plan.authorityRef.manifestVersion)
                   ? { segmentId: segment.segmentId, questionIds: cloneJson(segment.questionIds) }
                   : cloneJson(segment)),
               anchors: {

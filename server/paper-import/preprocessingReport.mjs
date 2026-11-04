@@ -79,7 +79,16 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
   const pdfs = evidence.pdfs ?? []
   if (!Array.isArray(pdfs) || new Set(pdfs.map(pdf => pdf.edition)).size !== pdfs.length
     || pdfs.some(pdf => !expectedEditions.some(([id]) => id === pdf.edition))) fail('invalid or duplicate PDF editions')
-  if ((longPaper || products) && new Set(pdfs.map(pdf => pdf.sha256)).size !== pdfs.length) {
+  const plan = projection.compilation?.artifacts?.canonicalPaper?.paperPlan
+  const noListening = pdfs.find(pdf => pdf.edition === 'largeNoListening')
+  const economy = pdfs.find(pdf => pdf.edition === 'economy8')
+  const sameLegacyNaturalPages = fourProducts && pdfs.length === 4
+    && plan?.authorityRef.manifestVersion === '82'
+    && plan.profileRef.profileId === 'zhejiang-legacy' && plan.profileRef.profileVersion === '16'
+    && noListening?.sha256 === economy?.sha256
+    && new Set(pdfs.map(pdf => pdf.sha256)).size === pdfs.length - 1
+  if ((longPaper || products) && new Set(pdfs.map(pdf => pdf.sha256)).size !== pdfs.length
+    && !sameLegacyNaturalPages) {
     fail('long-paper editions must have distinct PDF bytes')
   }
   if ((longPaper || products) && pdfs.length === expectedEditions.length) {
@@ -98,6 +107,9 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
     const file = verifiedFile(pdf, baseDirectory)
     const info = execFileSync('pdfinfo', [file], { encoding: 'utf8' })
     const actualPages = Number(info.match(/^Pages:\s+(\d+)/m)?.[1])
+    if (sameLegacyNaturalPages && ['largeNoListening', 'economy8'].includes(id) && actualPages !== 8) {
+      fail('identical legacy no-listening/economy products require eight natural pages')
+    }
     const atMost = longPaper || (products && (id !== 'economy8' || economyPageLimit >= 9))
     if (!Number.isInteger(actualPages) || actualPages < 1 || (pages !== null && (atMost ? actualPages > pages : actualPages !== pages))) {
       fail(`${id} page count differs from edition`)

@@ -3,6 +3,8 @@ export type ListeningPresentationGroup = {
   readonly firstSectionPlayback?: 'once_explicit' | 'twice_default'
   readonly sourcePresentation?: {
     readonly instruction: { readonly text: string }
+    readonly headings?: ReadonlyArray<{ readonly instructionId: string; readonly text: string }>
+    readonly opening?: { readonly transferNotice: string }
     readonly example?: { readonly state: 'not_supplied' }
       | ({ readonly state: 'provided' } & NonNullable<ListeningPresentation['example']>)
   }
@@ -32,4 +34,5 @@ export const listeningOpening: {
 export function listeningSegmentCue(segment: ListeningPresentationGroup['segments'][number], ordinal: number, questions: ListeningPresentationGroup['questions']): string
 export function projectListeningGroupPresentation(group: ListeningPresentationGroup): ListeningPresentation
 export function ownsCompletePaperOpening(consumption: unknown, renderedGroupIds: ReadonlyArray<string>): boolean
+export function paperOpeningForConsumption(consumption: unknown): typeof listeningOpening
 export function mockPaperCoverName(sourceType: unknown, paperName: unknown, headerTitle?: unknown): string | null

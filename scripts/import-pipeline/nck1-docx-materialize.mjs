@@ -36,6 +36,7 @@ import {
 } from '../../server/paper-import/nck1ImageSourceBundle.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { restoreOcrSourcePresentation } from './materialization-presentation.mjs'
+import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 
 const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
 export const NCK1_MATERIALIZATION_BINDING_MISMATCH = 'NCK1_MATERIALIZATION_BINDING_MISMATCH'
@@ -171,6 +172,15 @@ function loadDocuments(paperDir, manifest) {
 }
 
 function selectProducer(paperDir, documents) {
+  const configPath = path.join(paperDir, 'config.json')
+  const config = existsSync(configPath) ? JSON.parse(readFileSync(configPath, 'utf8')) : {}
+  if (config.formatProfileBinding) {
+    if (digestJson(config.formatProfileBinding) !== digestJson(importFormatBinding(config.formatProfileBinding.profileId))
+      || documents.some(document => document.mediaType !== 'application/pdf')) {
+      throw new Error('Legacy profile requires its exact version binding and PDF OCR sources')
+    }
+    return OCR_PRODUCER
+  }
   const allPdf = documents.length > 0
     && documents.every((document) => document.mediaType === 'application/pdf')
   const sourceDocuments = documents.filter((document) => !document.renditionOf)
@@ -199,6 +209,13 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   const documents = loadDocuments(paperDir, manifest)
   const producer = selectProducer(paperDir, documents)
   const producerInputs = producer.loadInputs?.(paperDir) || {}
+  if (manifest.profileId !== 'nck1' && manifest.profileId !== undefined) {
+    const binding = importFormatBinding(manifest.profileId)
+    if (producer !== OCR_PRODUCER || digestJson(manifest.formatProfileBinding) !== digestJson(binding)) {
+      throw new Error('Legacy source manifest profile/version is not bound to the OCR route')
+    }
+    producerInputs.profileId = manifest.profileId
+  }
   const producerVersion = producer === OCR_PRODUCER ? nck1OcrProducerVersion(producerInputs.confirmation) : producer.version
   const outputPath = path.join(paperDir, manifest.materializationPath)
   const directory = path.dirname(outputPath)
@@ -355,6 +372,13 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   const documents = loadDocuments(paperDir, manifest)
   const producer = selectProducer(paperDir, documents)
   const producerInputs = producer.loadInputs?.(paperDir) || {}
+  if (manifest.profileId !== 'nck1' && manifest.profileId !== undefined) {
+    const binding = importFormatBinding(manifest.profileId)
+    if (producer !== OCR_PRODUCER || digestJson(manifest.formatProfileBinding) !== digestJson(binding)) {
+      throw new Error('Legacy source manifest profile/version is not bound to the OCR route')
+    }
+    producerInputs.profileId = manifest.profileId
+  }
   const producerVersion = producer === OCR_PRODUCER ? nck1OcrProducerVersion(producerInputs.confirmation) : producer.version
   const sourceDigest = producer.sourceDigest(documents, producerInputs)
   const outputPath = path.join(paperDir, manifest.materializationPath)
