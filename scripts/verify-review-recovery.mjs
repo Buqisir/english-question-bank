@@ -56,7 +56,7 @@ try {
       },
       commit: async () => ({ committed: false }),
     }
-    const worker = startReviewCompatibilityWorker(schedulingStore, { onError: failed,
+    const worker = startReviewCompatibilityWorker(schedulingStore, { enabled: true, onError: failed,
       backfillStore: idleBackfill ? { runBatch: async () => ({ results: [] }) } : null })
     let deadline
     try {
@@ -192,13 +192,9 @@ try {
       assert.equal(store.listPapers()[0].rendererStale, !allowed)
       const approve = () => store.approveRevision(revision.paperId, revision.id,
         { bundleDigest: revision.bundleDigest }, 'recovery-owner')
-      if (allowed) {
-        legitimateApproval = approve()
-        assert.equal(legitimateApproval.revisionId, revision.id)
-      } else {
-        assert.throws(approve, { code: 'IMPORT_REVIEW_RENDERER_STALE' })
-        dbRun(dbPath, db => db.prepare("UPDATE import_review_revisions SET state='approved',approval_receipt_json=? WHERE id=?")
-          .run(JSON.stringify(legitimateApproval), revision.id))
+      legitimateApproval = approve()
+      assert.equal(legitimateApproval.revisionId, revision.id)
+      if (!allowed) {
         assert.throws(() => store.beginPromotion(revision.paperId, { ...legitimateApproval, intent: 'ship' }, 'owner'),
           { code: 'IMPORT_REVIEW_RENDERER_STALE' })
       }
@@ -208,7 +204,7 @@ try {
         assert.equal(context.subject === null, result === 'unknown')
       }
       if (result === 'unknown') assert.equal(dbRun(dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject').get().n), 0)
-      pass(`${result}/${reasonCode}, rendererStale=${stale}: approval=${allowed}, no manufactured baseline`)
+      pass(`${result}/${reasonCode}, rendererStale=${stale}: frozen approval allowed, direct publication guard=${allowed}, no manufactured baseline`)
     }
   }
   const conflictPath = path.join(root, 'different-conflict.sqlite')
@@ -223,7 +219,8 @@ try {
   const conflictStore = createImportReviewStore({ dbPath: conflictPath, filesRoot, rendererBuildId: revision.rendererBuildId })
   assert.equal(conflictStore.compatibilityForRevision(revision.id).result, 'different')
   assert.equal(conflictStore.listPapers()[0].compatibility.result, 'different')
-  assert.throws(() => conflictStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner'),
+  const conflictApproval = conflictStore.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner')
+  assert.throws(() => conflictStore.beginPromotion(revision.paperId, { ...conflictApproval, intent: 'ship' }, 'owner'),
     { code: 'IMPORT_REVIEW_RENDERER_STALE' })
   pass('a retained definitive different cannot fall back even after a later unknown integrity-conflict attempt')
   const recoveredPath = path.join(root, 'different-recovered.sqlite')
@@ -265,9 +262,10 @@ try {
     const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: revision.rendererBuildId })
     assert.equal(store.compatibilityForRevision(revision.id).reasonCode, 'RETAINED_CONTENT_DIFFERENT')
     assert.equal(store.listPapers()[0].compatibility.reasonCode, 'RETAINED_CONTENT_DIFFERENT')
-    assert.throws(() => store.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner'),
+    const frozenApproval = store.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner')
+    assert.throws(() => store.beginPromotion(revision.paperId, { ...frozenApproval, intent: 'ship' }, 'owner'),
       { code: 'IMPORT_REVIEW_RENDERER_STALE' })
-    pass(`${kind} cannot supersede a retained cross-target difference through detail, list or approve`)
+    pass(`${kind} cannot supersede a retained cross-target difference for publication; frozen approval is independent`)
   }
   // Actual empty subject/missing attempt and cold identity states.
   const emptyPath = path.join(root, 'missing.sqlite')
@@ -300,9 +298,16 @@ try {
     })
     const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: revision.rendererBuildId })
     const service = serviceFor(store, directory)
-    const result = await service.promoteOwner(revision.paperId, revision.id, {
+    const publish = () => service.promoteOwner(revision.paperId, revision.id, {
       intent: 'publish', bundleDigest: revision.bundleDigest, rendererBuildId: revision.rendererBuildId,
     }, 'owner')
+    if (state === 'missing_preview') {
+      await assert.rejects(async () => publish(), { code: 'IMPORT_REVIEW_PREVIEW_NOT_PREPARED' })
+      assert.equal(store.latestPromotion(revision.paperId), null)
+      pass('missing original preview blocks approval/publication without reconstructing reviewed content')
+      continue
+    }
+    const result = await publish()
     assert.equal(result.status, 'published')
     assert.equal((await service.promote(revision.paperId, { ...store.getRevision(revision.id).approval, intent: 'retry_ship' }, 'owner')).status, 'idempotent')
     assert.equal(dbRun(dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_subject').get().n), 0)
@@ -506,10 +511,14 @@ try {
     } finally { clearTimeout(deadline) }
   }
   assert.equal(dbRun(migration, db => db.prepare('SELECT subject_json FROM review_subject_legacy_v1').get().subject_json), '{"preserved":true}')
-  pass('real HTTP API exposes durable legacy migration status, keeps workers enabled, shuts down cleanly and preserves legacy bytes')
+  pass('real HTTP API exposes durable legacy migration status without scheduling work, shuts down cleanly and preserves legacy bytes')
 
   const release = makeReviewRelease(path.join(root, 'identity-release'))
   symlinkSync(path.resolve(import.meta.dirname, '../data'), path.join(release, 'data'), 'dir')
+  const schedulerApi = path.join(release, 'server/api.mjs')
+  writeFileSync(schedulerApi, readFileSync(schedulerApi, 'utf8').replace(
+    'startReviewCompatibilityWorker(compatibilityStore, {',
+    'startReviewCompatibilityWorker(compatibilityStore, { enabled: true,'))
   const comparisonFile = path.join(release, 'server/import-review/reviewCompatibilityWorker.mjs')
   const originalWorker = readFileSync(comparisonFile)
   // Exercise the actual HTTP API while a disposable comparison child exceeds
@@ -588,7 +597,7 @@ try {
         : 'REVIEW_TARGET_IDENTITY_UNAVAILABLE', reasonCode: 'WORKER_EXIT' })
   `))
   // Preserve a valid promotion, then inject a difference in another target.
-  // Both identity-unavailable modes must reject all three public mutation seams.
+  // Identity failure must preserve frozen approval and block publication/writer.
   const differenceCases = []
   for (const mode of ['cold', 'timeout']) {
     const dbPath = path.join(root, `retained-${mode}.sqlite`)
@@ -623,14 +632,15 @@ try {
       assert.equal(value.result,'different'); assert.equal(value.eligible,false); assert.equal(value.fallback,false);
     }
     assert.throws(()=>store.approveRevision(revision.paperId,revision.id,{bundleDigest:revision.bundleDigest},'owner'),
-      {code:'IMPORT_REVIEW_RENDERER_STALE'});
+      {code:'IMPORT_REVIEW_REVISION_NOT_REVIEWABLE'});
+    assert.deepEqual(store.getRevision(revision.id).approval,c.approval);
     assert.throws(()=>store.beginPromotion(revision.paperId,{...c.approval,intent:'ship'},'owner'),
       {code:'IMPORT_REVIEW_RENDERER_STALE'});
     let wrote=false;
     assert.throws(()=>writerStore.withPromotionContentGuard(revision.paperId,c.begun.promotion.promotionId,
       c.begun.contentBinding,()=>{wrote=true}),{code:'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'});
     assert.equal(wrote,false);
-    console.log('PASS retained different + '+c.mode+': approve, promotion and final writer denied despite old equal');
+    console.log('PASS retained different + '+c.mode+': approval preserved, promotion and final writer denied despite old equal');
   `
   // The injected identity failure uses the same unavailable code/reason as a deadline.
   writeFileSync(workerFile, readFileSync(workerFile, 'utf8').replace("reasonCode: 'WORKER_EXIT'", "reasonCode: 'WORKER_TIMEOUT'"))

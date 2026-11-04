@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import { createServer } from 'node:http'
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -47,6 +47,7 @@ try {
   const module = async name => import(pathToFileURL(path.join(release, `server/import-review/${name}.mjs`)).href)
   const { createImportReviewStore: createReleaseStore } = await module('importReviewStore')
   const { createReviewCompatibilityStore } = await module('reviewCompatibilityStore')
+  const releaseIdentity = (await module('reviewBuildIdentity')).reviewBuildIdentityProvider()
   let renderer = 'historical-original-renderer'
   const output = path.join(root, 'guards')
   const dbPath = path.join(output, 'review.sqlite')
@@ -99,11 +100,18 @@ try {
   pass('frontend-only deployment retains current content eligibility')
   const parser = path.join(release, 'scripts/import-pipeline/lib.mjs')
   writeFileSync(parser, `${readFileSync(parser)}\n// Same output, new server target.\n`)
-  await yieldFor(30)
+  await releaseIdentity.fresh()
   const compatibility = createReviewCompatibilityStore({ dbPath, filesRoot })
   const blockedEntrances = () => {
+    // Approval accepts the frozen review independently of current-code status.
+    const approvalPath = path.join(root, `approval-${randomUUID()}.sqlite`)
+    copyFileSync(dbPath, approvalPath)
+    dbRun(approvalPath, db => db.prepare(
+      "UPDATE import_review_revisions SET state='awaiting_review', approval_receipt_json=NULL WHERE id=?").run(revision.id))
+    const approvalStore = createReleaseStore({ dbPath: approvalPath, filesRoot, rendererBuildId: () => renderer })
+    assert.equal(approvalStore.approveRevision(revision.paperId, revision.id,
+      { bundleDigest: revision.bundleDigest }, 'owner').revisionId, revision.id)
     for (const operation of [
-      () => store.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner'),
       () => store.registerPublicationRequest(revision.paperId, requestInput('blocked'), 'agent'),
       () => store.grantPublicationRequest(pending.requestId, 'owner'),
       () => store.beginPromotion(revision.paperId, { ...approval, intent: 'ship' }, 'owner'),
@@ -121,7 +129,7 @@ try {
   }
   assert.equal(store.compatibilityForRevision(revision.id).result, 'pending')
   blockedEntrances()
-  pass('pending blocks all eight mutation/live entrances before any guard or promotion insert; original evidence stays readable')
+  pass('pending permits approval of frozen review; direct publication/live guards still require compatibility')
   assertOpsNext('wait_for_content_check')
   const routes = createImportReviewRoutes({ getStore: () => store, buildPrintHtml() { throw new Error('Must not derive pending content') } })
   async function readRoute(suffix) {
@@ -160,7 +168,6 @@ try {
   assert.equal(store.compatibilityForRevision(revision.id).reasonCode, 'MISSING_BASELINE')
   assert.equal(store.listPapers()[0].compatibility.result, 'unknown')
   for (const operation of [
-    () => store.approveRevision(revision.paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'owner'),
     () => store.beginPromotion(revision.paperId, { ...approval, intent: 'ship' }, 'owner'),
     () => store.acquireShippingGuard(revision.paperId, approval, 'ship-agent'),
   ]) assert.throws(operation, error => error.compatibility?.reasonCode === 'MISSING_BASELINE')
@@ -176,15 +183,15 @@ try {
   const projectionSource = readFileSync(projectionFile, 'utf8')
   writeFileSync(projectionFile, projectionSource.replace('  reviewBundleInventories.set(projection,',
     '  projection.consumption.fixtureAdditionalContent = true;\n  reviewBundleInventories.set(projection,'))
-  await yieldFor(30)
+  await releaseIdentity.fresh()
   assert.equal(store.compatibilityForRevision(revision.id).result, 'pending')
   const different = await compatibility.checkRevision(revision.id)
   assert.equal(different.comparison.result, 'different', JSON.stringify(different.comparison))
   blockedEntrances()
-  pass('a new target cannot reuse old equal; actual complete-payload difference blocks every entrance')
+  pass('a new target cannot reuse old equal; content differences block publication while frozen review can be approved')
   assertOpsNext('inspect_content_difference')
   writeFileSync(projectionFile, projectionSource)
-  await yieldFor(30)
+  await releaseIdentity.fresh()
   dbRun(dbPath, db => db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject'))
   const missing = await compatibility.checkRevision(revision.id)
   assert.equal(missing.comparison.result, 'unknown')
@@ -343,12 +350,13 @@ try {
     })
     assert.equal(response.status, 200, apiLog)
     status = await response.json()
-    if (status.compatibility.result === 'equal') break
+    if (status.compatibility.result === 'pending') break
     await yieldFor(250)
   }
-  assert.equal(status.compatibility.result, 'equal', apiLog)
-  assert.equal(status.approval.approvalId, apiFixture.approval.approvalId)
-  assert.equal(status.approval.rendererBuildId, apiFixture.approval.rendererBuildId)
+  await yieldFor(500)
+  assert.equal(status.compatibility.result, 'pending', apiLog)
+  assert.equal(dbRun(apiFixture.dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_compatibility').get().n), 0)
+  assert.equal(apiFixture.store.getRevision(apiFixture.revision.id).approval.approvalId, apiFixture.approval.approvalId)
   const exited = new Promise((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error('API shutdown timed out')), 10_000)
     api.once('exit', (code, signal) => { clearTimeout(timer); resolve({ code, signal }) })
@@ -356,7 +364,7 @@ try {
   api.kill('SIGTERM')
   assert.deepEqual(await exited, { code: 0, signal: null })
   assert.equal(existsSync(path.join(process.env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT, 'leader')), false)
-  pass('real API startup automatically checks pending work; HTTP exposes equal; SIGTERM stops worker and releases host leader')
+  pass('real API startup leaves pending revisions unchecked; frozen approval is preserved; SIGTERM releases host leader')
   console.log(`PASS ${checks} review eligibility checks`)
 } finally {
   if (api && api.exitCode === null) api.kill('SIGTERM')

@@ -147,15 +147,15 @@ try {
     'a legacy fixture without frozen products retains its original preview but cannot derive live content')
   assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).eligible, false)
   assert.equal(asyncCase.store.listPapers()[0].compatibility.eligible, false)
-  assert.throws(() => asyncCase.store.approveRevision(asyncResult.paperId, asyncResult.id,
-    { bundleDigest: asyncResult.bundleDigest }, 'owner'),
-  { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' })
+  const frozenApproval = asyncCase.store.approveRevision(asyncResult.paperId, asyncResult.id,
+    { bundleDigest: asyncResult.bundleDigest }, 'owner')
+  assert.equal(frozenApproval.revisionId, asyncResult.id)
   assert.throws(() => asyncCase.store.registerPublicationRequest(asyncResult.paperId, {
     revisionId: asyncResult.id, requestId: 'publication-request-00000000-0000-4000-8000-000000000001',
     secretHash: sha256('missing-products'),
   }, 'agent'), { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' })
-  assert.equal(asyncCase.store.getRevision(asyncResult.id).approval, null,
-    'missing frozen products cannot acquire approval through renderer fallback')
+  assert.equal(asyncCase.store.getRevision(asyncResult.id).approval.approvalId, frozenApproval.approvalId,
+    'unknown compatibility allows frozen review approval while publication remains guarded')
   const evidenceDb = new DatabaseSync(asyncCase.dbPath)
   try {
     const evidence = evidenceDb.prepare('SELECT evidence_json FROM review_compatibility WHERE revision_id=?')

@@ -7,12 +7,17 @@ const labels = {
   publishing: '发布中', published: '已发布', failed: '发布失败',
 }
 
-const differenceLabel = pointer => {
+const differenceLabel = (pointer, content) => {
   const parts = String(pointer).split('/').map(part => part.replaceAll('~1', '/').replaceAll('~0', '~'))
   const field = [...parts].reverse().find(part => part && !/^\d+$/.test(part))
-  const name = { text: '正文', answer: '答案', answerKey: '答案', options: '选项',
+  const name = { text: '正文', stem: '题干', answer: '答案', answerKey: '答案', options: '选项',
     title: '标题', questions: '题目', analysis: '解析' }[field] || field
-  return `字段：${name}（${pointer}）`
+  const question = parts.map(part => content?.questions?.[part]).find(Boolean)
+  const group = parts.map(part => content?.groups?.[part]).find(Boolean)
+  const numbers = question ? [question.questionNo]
+    : (group?.questionIds || []).map(id => content?.questions?.[id]?.questionNo)
+  const known = numbers.filter(Number.isSafeInteger)
+  return `${known.length ? `第 ${known.join('、')} 题 · ` : ''}字段：${name}（${pointer}）`
 }
 
 export const isReviewCompatible = compatibility => {
@@ -148,7 +153,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
         </div>
       </div>
       ${hint ? `<p class="owner-review-hint">${escapeHtml(hint)}</p>` : ''}
-      ${block?.differences?.length ? `<ul>${block.differences.map(pointer => `<li>${escapeHtml(differenceLabel(pointer))}</li>`).join('')}</ul>` : ''}
+      ${block?.differences?.length ? `<ul>${block.differences.map(pointer => `<li>${escapeHtml(differenceLabel(pointer, block.content))}</li>`).join('')}</ul>` : ''}
       ${block?.differencesTruncated ? '<p>差异较多，仅显示部分位置</p>' : ''}
       ${feedbackHtml(paper)}
       ${mediaHtml(paper)}
@@ -283,7 +288,10 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
     } catch (failure) {
       notice = ''
       if (failure.code === 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED' && failure.compatibility) {
-        publicationBlocks.set(draftKey(paper), { ...failure.compatibility, message: failure.message })
+        const asset = failure.compatibility.result === 'different'
+          ? await request(`/api/import-review-preview/revisions/${encodeURIComponent(paper.latestRevisionId)}/asset/paper-asset.json`,
+            { cache: 'no-store' }).catch(() => null) : null
+        publicationBlocks.set(draftKey(paper), { ...failure.compatibility, message: failure.message, content: asset?.content })
         error = ''
       } else {
         uncertain.add(paper.paperId)

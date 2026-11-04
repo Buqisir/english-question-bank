@@ -2,7 +2,7 @@
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, truncateSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, symlinkSync, truncateSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { createServer } from 'node:http'
 import path from 'node:path'
@@ -14,6 +14,7 @@ import { captureReviewCompatibilitySnapshot } from '../server/import-review/revi
 import { finalizeReviewFixture, freezeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
 import { saveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 import { beginReviewActivity, reviewCompatibilityLockDiagnostics } from '../server/import-review/reviewCompatibilityScheduling.mjs'
+import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -26,6 +27,12 @@ const temporaryRoot = root
 const previousTmpdir = process.env.TMPDIR
 process.env.TMPDIR = temporaryRoot
 const repository = path.resolve(import.meta.dirname, '..')
+const schedulingRelease = makeReviewRelease(path.join(root, 'scheduler-release'))
+symlinkSync(path.join(repository, 'data'), path.join(schedulingRelease, 'data'), 'dir')
+const schedulerApi = path.join(schedulingRelease, 'server/api.mjs')
+writeFileSync(schedulerApi, readFileSync(schedulerApi, 'utf8').replace(
+  'startReviewCompatibilityWorker(compatibilityStore, {',
+  'startReviewCompatibilityWorker(compatibilityStore, { enabled: true,'))
 const dbPath = path.join(root, 'review.sqlite'), filesRoot = path.join(root, 'files')
 const dbRun = (file, fn) => {
   const db = new DatabaseSync(file)
@@ -51,7 +58,7 @@ async function until(check, description, timeout = 60_000) {
   }))
   throw new Error(`Timed out: ${description}\n${JSON.stringify({ ...evidence, locks: reviewCompatibilityLockDiagnostics() })}\n${log}`)
 }
-async function startApi(enabled) {
+async function startApi(enabled, schedule = true) {
   const reservation = createServer()
   await new Promise(resolve => reservation.listen(0, '127.0.0.1', resolve))
   const port = reservation.address().port
@@ -63,7 +70,7 @@ async function startApi(enabled) {
     QUESTION_BANK_PAPER_ASSET_ROOT: path.join(root, 'assets'), QUESTION_BANK_USER_SPACE_ROOT: path.join(root, 'user-space') }
   if (enabled) delete env.EQB_REVIEW_SUBJECT_BACKFILL
   else env.EQB_REVIEW_SUBJECT_BACKFILL = '0'
-  api = spawn(process.execPath, ['server/api.mjs'], { cwd: repository, env, stdio: ['ignore', 'pipe', 'pipe'] })
+  api = spawn(process.execPath, ['server/api.mjs'], { cwd: schedule ? schedulingRelease : repository, env, stdio: ['ignore', 'pipe', 'pipe'] })
   api.stdout.on('data', bytes => { log += bytes })
   api.stderr.on('data', bytes => { log += bytes })
   exit = new Promise(resolve => api.once('exit', (code, signal) => resolve({ code, signal })))
@@ -125,7 +132,7 @@ try {
   }
 
   // Exercise the same async compute -> short CAS boundary as the API worker.
-  // Matching-renderer approval uses the legacy guard without equal. A direct
+  // Frozen-preview approval works without equal or matching renderer. A direct
   // old-writer receipt change also must not be overwritten by an in-flight job.
   const casPath = path.join(root, 'cas.sqlite')
   copyFileSync(dbPath, casPath)
@@ -219,6 +226,13 @@ try {
   // before copying its unexpected bytes into the worker workspace.
   truncateSync(badFile, REVIEW_BACKFILL_BUDGET.maxFileBytes + 1)
   dbRun(path.join(root, 'bank.sqlite'), db => db.exec(readFileSync(path.join(repository, 'data/sql/schema.sql'), 'utf8')))
+  await startApi(true, false)
+  await until(() => log.includes('API listening'), 'default API ready without scheduling')
+  await yieldFor(500)
+  assert.equal(query(db => db.prepare('SELECT COUNT(*) n FROM review_compatibility').get().n), 0)
+  assert.equal(query(db => db.prepare('SELECT COUNT(*) n FROM review_subject_backfill').get().n), 0)
+  await stopApi()
+  console.log('PASS default API startup schedules neither compatibility comparison nor backfill')
   await startApi(false)
   await until(() => query(db => db.prepare("SELECT 1 FROM sqlite_master WHERE name='review_compatibility'").get()
     && db.prepare('SELECT COUNT(*) n FROM review_compatibility').get().n === 2), 'disabled API completes normal missing-baseline scan')
@@ -267,7 +281,7 @@ try {
   assert.equal(count(), 2)
   assert.equal(log.includes('"event":"review-subject-backfill"'), false)
   assert.equal(originalRows(), oldRows)
-  console.log('PASS real API startup recovers historical listening evidence to equal; tampering is visible in probe; restart neither retries nor duplicates unchanged outcomes')
+  console.log('PASS explicitly enabled API scheduler recovers historical listening evidence to equal; tampering is visible in probe; restart neither retries nor duplicates unchanged outcomes')
 
   writeFileSync(badFile, originalPdf)
   await startApi(true)
