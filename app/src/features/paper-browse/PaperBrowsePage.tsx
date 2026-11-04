@@ -184,6 +184,7 @@ import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import {
   paperOpeningForConsumption,
+  coverNoticesCarrySourceNumbers,
   mockPaperCoverName,
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
@@ -1918,7 +1919,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           })
           continue
         }
-        canonicalWritingPart = null
+        canonicalWritingPart = canonicalConsumption && selectedFamilyContractIdForGroup({
+          consumption: canonicalConsumption, groupId: block.groupId,
+        }) === 'error-correction' ? parts.at(-1) ?? null : null
         const questionNos = group.questionIds
           .map((qid) => asset.content.questions[qid]?.questionNo)
           .filter((no): no is number => typeof no === 'number')
@@ -4171,8 +4174,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 )}
                 <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
                 <div className="canonical-paper-cover-notices" data-canonical-cover-notices="">
-                  {listeningOpening.notices.length > 0 && <strong>注意事项：</strong>}
-                  <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>
+                  {listeningOpening.notices.length > 0 && !coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening) && <strong>注意事项：</strong>}
+                  {coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening)
+                    ? listeningOpening.notices.map((notice) => <p key={notice}>{notice}</p>)
+                    : <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>}
                 </div>
               </header>
             )}

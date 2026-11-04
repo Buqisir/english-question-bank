@@ -108,3 +108,8 @@ export function paperOpeningForConsumption(consumption) {
   if (!opening) throw new Error('Legacy paper requires its source opening')
   return opening
 }
+
+export function coverNoticesCarrySourceNumbers(consumption, opening) {
+  return consumption?.profileRef?.profileId === 'national-legacy'
+    && opening.notices.some(notice => /^\s*\d+[.．、]/u.test(notice))
+}

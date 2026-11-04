@@ -543,6 +543,14 @@ export function createDraftPaperStore({
     exportItems,
     canonicalConsumption,
   ) {
+    const applicationGroupIds = new Set(
+      canonicalConsumption.selections.find(
+        (selection) =>
+          selection.familyContractId === 'application-writing'
+          && selection.mode === 'canonical',
+      )?.groupIds || [],
+    )
+    if (!exportItems.some(item => applicationGroupIds.has(item.detail.id))) return new Set()
     const reject = (message) => {
       const error = new Error(message)
       error.code = 'CANONICAL_CONSUMPTION_REJECTED'
@@ -585,13 +593,6 @@ export function createDraftPaperStore({
       reject,
       label: 'Canonical visible page-break source',
     })
-    const applicationGroupIds = new Set(
-      canonicalConsumption.selections.find(
-        (selection) =>
-          selection.familyContractId === 'application-writing'
-          && selection.mode === 'canonical',
-      )?.groupIds || [],
-    )
     return new Set(source.asset.content.blocks.flatMap((block, index, blocks) => {
       if (
         block.type !== 'group'

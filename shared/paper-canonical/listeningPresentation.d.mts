@@ -35,4 +35,5 @@ export function listeningSegmentCue(segment: ListeningPresentationGroup['segment
 export function projectListeningGroupPresentation(group: ListeningPresentationGroup): ListeningPresentation
 export function ownsCompletePaperOpening(consumption: unknown, renderedGroupIds: ReadonlyArray<string>): boolean
 export function paperOpeningForConsumption(consumption: unknown): typeof listeningOpening
+export function coverNoticesCarrySourceNumbers(consumption: unknown, opening: typeof listeningOpening): boolean
 export function mockPaperCoverName(sourceType: unknown, paperName: unknown, headerTitle?: unknown): string | null

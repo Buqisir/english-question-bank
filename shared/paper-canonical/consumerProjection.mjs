@@ -1900,6 +1900,11 @@ export function projectCanonicalWritingChrome({
       === target.canonicalGroup.paperChrome.part.partId,
   )
   const targetPart = target.canonicalGroup.paperChrome.part
+  const structure = consumption.visibleStructure ?? []
+  const partStart = structure.findIndex(node => node.kind === 'part' && node.partId === targetPart.partId)
+  const groupIndex = structure.findIndex(node => node.kind === 'group' && node.groupId === groupId)
+  const correctionOwnsPart = partStart >= 0 && structure.slice(partStart + 1, groupIndex).some(node =>
+    node.kind === 'group' && node.familyContractId === 'error-correction' && orderedGroupIds.includes(node.groupId))
   if (
     samePart.length === 0
     || samePart.some(
@@ -1933,6 +1938,7 @@ export function projectCanonicalWritingChrome({
 
   return Object.freeze({
     part: samePart[0].groupId === groupId
+      && !correctionOwnsPart
       && targetPart.renderPolicy === 'render'
       ? structuredClone(targetPart)
       : null,

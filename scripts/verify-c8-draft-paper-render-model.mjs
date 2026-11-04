@@ -1,8 +1,17 @@
 #!/usr/bin/env node
-import { readFileSync } from 'node:fs'
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { DatabaseSync } from 'node:sqlite'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
+import { createCanonicalConsumerRuntime, canonicalSourceConsumptionForGroup } from '../server/paper-canonical/consumerRuntime.mjs'
+import { admitCanonicalPaperImport, recordCanonicalPublicationCurrent } from '../server/paper-canonical/publication.mjs'
+import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
+import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -330,6 +339,107 @@ assert('workbench has no explanation export label', !workbench.includes('解析�
 // undo only reverts this draft's removal, so "删除" over-claimed destruction).
 assert('undo toast reads 题组已移出 (not 题组已删除)', workbench.includes('<span>题组已移出</span>') && !workbench.includes('题组已删除'))
 
+// The public runtime must classify correction before validating its source.
+const correctionRuntime = createCanonicalConsumerRuntime({ rootDir, db: null })
+let correctionRejected = false
+try {
+  correctionRuntime.resolveForItems({ consumerId: 'print_pdf', items: [
+    { detail: { id: 'correction', groupType: 'errorCorrection', paperId: '../invalid' } },
+  ] })
+} catch (error) {
+  correctionRejected = error.diagnostics?.[0]?.code === 'CANONICAL_SOURCE_PAPER_ID_UNAVAILABLE'
+}
+assert('correction participates in Canonical source admission', correctionRejected)
+
+// Optional real-paper acceptance uses the exact local import, without adding
+// copyrighted source material to the repository or modifying a live Publication.
+const nationalPaper = process.argv[process.argv.indexOf('--national-legacy-paper') + 1]
+if (process.argv.includes('--national-legacy-paper')) {
+  const temporary = mkdtempSync(path.join(tmpdir(), 'eqb-correction-draft-'))
+  const db = new DatabaseSync(':memory:')
+  try {
+    const loaded = loadNck1ReviewSource(path.resolve(nationalPaper))
+    const imported = importCanonicalCandidate(loaded.sourceInput)
+    if (!imported.candidate) throw new Error(JSON.stringify(imported.issues))
+    const candidate = imported.candidate
+    const request = materializeNck1CanonicalRequest(loaded.sourceInput, { schemaVersion: 'teacher-confirmation-v1',
+      confirmed: true, sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest }).request
+    const audio = loaded.manifest.attachments.find(a => a.role === 'listening_audio_playback')
+    const admission = admitCanonicalPaperImport({ request, sourceAssetVersion: 1,
+      sourceAsset: loaded.sourceInput.materializationBytes, listeningAudioBytes: readFileSync(path.join(nationalPaper, audio.path)) })
+    if (!admission.ok) throw new Error(JSON.stringify(admission.diagnostics))
+    const { sealed } = admission
+    const ref = { paperId: loaded.materialization.paperId, versionName: 'v1', sourceAssetVersion: 1,
+      publicationDigest: sealed.manifest.publicationDigest }
+    const version = path.join(temporary, ref.paperId, 'versions/v1')
+    const files = { ...sealed.artifacts, ...sealed.sourceEvidence, 'paper-asset.json': sealed.sourceAsset,
+      [`canonical/canonical-paper-publication-v${sealed.manifest.authority.manifestVersion}.json`]: JSON.stringify(sealed.manifest) }
+    for (const [relative, bytes] of Object.entries(files)) {
+      const target = path.join(version, relative)
+      mkdirSync(path.dirname(target), { recursive: true })
+      writeFileSync(target, bytes)
+    }
+    const latest = path.join(temporary, ref.paperId, 'latest/canonical-paper-publication-ref-v1.json')
+    mkdirSync(path.dirname(latest), { recursive: true })
+    writeFileSync(latest, JSON.stringify(ref))
+    recordCanonicalPublicationCurrent(db, ref)
+    const confirmedRoot = path.join(rootDir, 'test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store')
+    const otherPaper = 'paper-2026-i'
+    cpSync(path.join(confirmedRoot, otherPaper), path.join(temporary, otherPaper), { recursive: true })
+    const confirmedDb = new DatabaseSync(path.join(confirmedRoot, 'publication.sqlite'), { readOnly: true })
+    try {
+      for (const row of confirmedDb.prepare('SELECT * FROM canonical_paper_publications WHERE paper_id = ?').all(otherPaper)) {
+        db.prepare(`INSERT INTO canonical_paper_publications
+          (paper_id, version_name, source_asset_version, publication_digest, is_current, created_at)
+          VALUES (?, ?, ?, ?, ?, ?)`).run(row.paper_id, row.version_name, row.source_asset_version,
+          row.publication_digest, row.is_current, row.created_at)
+      }
+    } finally { confirmedDb.close() }
+    const runtime = createCanonicalConsumerRuntime({ rootDir: temporary, db })
+    const details = new Map()
+    for (const [paperId, family] of [[loaded.materialization.paperId, 'error-correction'], [otherPaper, 'reading']]) {
+      const consumption = runtime.load({ paperId, consumerId: 'print_pdf' })
+      const groupId = consumption.selections.find(s => s.familyContractId === family).groupIds[0]
+      const group = projectCanonicalConsumerGroup({ consumption, groupId, familyContractId: family })
+      details.set(groupId, { id: groupId, paperId, title: groupId, groupType: group.groupType,
+        passage: { materialText: '', summary: '' }, questions: group.questions.map(q => ({
+          id: q.questionId, questionNo: q.questionNo, stem: q.stem || '', options: q.options || [],
+          answer: 'official-wrong→official-right', explanation: '', note: '' })) })
+    }
+    const store = createDraftPaperStore({ rootDir, exportDir: temporary, paperAssetsDir: temporary,
+      getQuestionGroupDetail: id => details.get(id), selectQuestionGroupCards: () => [],
+      groupTypeLabels: { errorCorrection: '短文改错', reading: '阅读理解' },
+      isGroupPrintReady: () => ({ ok: true }), resolveCanonicalConsumption: runtime.resolveForItems,
+      openDatabase: () => ({ close() {} }) })
+    for (const [label, ids] of [['correction-only', [[...details.keys()][0]]],
+      ['cross-paper correction + reading', [...details.keys()]]]) {
+      try {
+        const consumption = runtime.resolveForItems({ consumerId: 'print_pdf', items: ids.map(id => ({ detail: details.get(id) })) })
+        assert(`${label}: correction keeps its source Publication`, Boolean(consumption)
+          && canonicalSourceConsumptionForGroup(consumption, ids[0])?.paperId === loaded.materialization.paperId)
+        if (ids.length === 2) assert(`${label}: both source bindings survive`, consumption?.composition?.sources.length === 2)
+        const result = await store.getAssemblyPaperProduct({ title: label, edition: 'largeNoListening',
+          items: ids.map(questionGroupId => ({ questionGroupId })) })
+        assert(`${label}: student PDF export succeeds`, Buffer.from(result.pdfBytes).subarray(0, 5).toString() === '%PDF-')
+        assert(`${label}: source correction appears`, result.paginatedHtml.includes('My father often took me'))
+        const originalAnswers = loaded.materialization.answers.filter(a => a.questionId.includes('error-correction'))
+        assert(`${label}: student version excludes correction answers`, !result.paginatedHtml.includes('official-wrong')
+          && originalAnswers.length === 10 && originalAnswers.every(a => !result.paginatedHtml.includes(a.value)))
+        if (process.argv.includes('--output-dir')) {
+          const output = path.resolve(process.argv[process.argv.indexOf('--output-dir') + 1])
+          mkdirSync(output, { recursive: true })
+          const stem = ids.length === 1 ? 'correction-only' : 'cross-paper'
+          writeFileSync(path.join(output, `${stem}.pdf`), result.pdfBytes)
+          writeFileSync(path.join(output, `${stem}.paginated.html`), result.paginatedHtml)
+        }
+      } catch (error) { assert(`${label}: student PDF export succeeds`, false, error.stack) }
+    }
+  } finally {
+    await closeChromiumPool()
+    db.close()
+    rmSync(temporary, { recursive: true, force: true })
+  }
+}
 if (failed > 0) {
   console.error(`\nC8 draft paper render model verify FAILED: ${passed} passed, ${failed} failed`)
   process.exit(1)

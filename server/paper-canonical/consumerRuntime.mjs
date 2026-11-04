@@ -16,6 +16,7 @@ const FAMILY_BY_GROUP_TYPE = new Map([
   ['sevenChoices', 'seven-choices'],
   ['seven_choices', 'seven-choices'],
   ['reading', 'reading'],
+  ['errorCorrection', 'error-correction'],
 ])
 const SAFE_PAPER_ID = /^[a-z0-9][a-z0-9._-]{0,127}$/
 const sourceConsumptionsByComposite = new WeakMap()
