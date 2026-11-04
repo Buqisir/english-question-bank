@@ -150,10 +150,11 @@ try {
   const frozenApproval = asyncCase.store.approveRevision(asyncResult.paperId, asyncResult.id,
     { bundleDigest: asyncResult.bundleDigest }, 'owner')
   assert.equal(frozenApproval.revisionId, asyncResult.id)
-  assert.throws(() => asyncCase.store.registerPublicationRequest(asyncResult.paperId, {
+  const frozenRequest = asyncCase.store.registerPublicationRequest(asyncResult.paperId, {
     revisionId: asyncResult.id, requestId: 'publication-request-00000000-0000-4000-8000-000000000001',
     secretHash: sha256('missing-products'),
-  }, 'agent'), { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' })
+  }, 'agent')
+  assert.equal(asyncCase.store.grantPublicationRequest(frozenRequest.requestId, 'owner').state, 'granted')
   assert.equal(asyncCase.store.getRevision(asyncResult.id).approval.approvalId, frozenApproval.approvalId,
     'unknown compatibility allows frozen review approval while publication remains guarded')
   const evidenceDb = new DatabaseSync(asyncCase.dbPath)

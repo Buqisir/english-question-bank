@@ -2866,8 +2866,6 @@ export function createImportReviewStore({
           const same = existing.paper_id === paperId && existing.revision_id === revisionId
             && existing.secret_hash === secretHash && existing.requested_by === requestedBy
           if (!same) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_CONFLICT', 'Request ID is already bound to another capability or target', 409)
-          const revision = revisionRow(db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(revisionId))
-          assertReviewCompatible(db, revision)
           const result = publicationRequestRow(db, existing)
           db.exec('COMMIT')
           return result
@@ -2879,7 +2877,6 @@ export function createImportReviewStore({
         if (!revision || revision.reviewKind !== 'candidate' || !['awaiting_review', 'approved'].includes(revision.state)) {
           throw storeError('IMPORT_REVIEW_REVISION_NOT_REVIEWABLE', 'Publication request requires the finalized awaiting-review or approved Candidate')
         }
-        assertReviewCompatible(db, revision)
         if (Number(db.prepare("SELECT COUNT(*) count FROM import_review_issues WHERE paper_id = ? AND state IN ('open','fixed_pending_review')").get(paperId).count)) {
           throw storeError('IMPORT_REVIEW_ISSUES_UNRESOLVED', 'Unresolved issues block publication delegation')
         }
@@ -2925,7 +2922,7 @@ export function createImportReviewStore({
         if (row.state !== 'pending') throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_PENDING', 'Publication request is not pending')
         if (Date.parse(row.expires_at) <= Date.now()) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_EXPIRED', 'Publication request expired', 410)
         const revision = revisionRow(db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(row.revision_id))
-        assertCurrentApprovedRevision(db, row.paper_id, revision.approval)
+        assertCurrentApprovedRevision(db, row.paper_id, revision.approval, { reconciliation: true })
         if (revision.rendererBuildId !== row.renderer_build_id || revision.bundleDigest !== row.bundle_digest
           || revision.sourceDigest !== row.source_digest || revision.candidateDigest !== row.candidate_digest
           || revision.visibleStructureDigest !== row.visible_structure_digest
@@ -3349,7 +3346,6 @@ export function createImportReviewStore({
       unresolvedCount: detail.unresolvedCount,
       approval: detail.latest?.reviewKind === 'candidate'
         && detail.latest.state === 'approved'
-        && !detail.rendererStale
         ? detail.latest.approval
         : null,
       ocrConfirmation: detail.latest?.reviewKind === 'ocr'

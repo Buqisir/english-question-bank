@@ -262,8 +262,11 @@ export function createPromotionWorkerService({ getStore, afterPublish }) {
         deadlineAt: new Date(Date.now() + config.deadlineMs).toISOString(),
         legacyPromotionId: mode === 'retry_ship' ? prior?.promotionId : null, replacesOperationId })
       // Keep the host reservation through comparison and supervisor handoff.
-      // Interrupted publishing uses its existing recovery guard, never replay it.
-      if (!replacesOperationId) {
+      // Interrupted publishing, including legacy rows without an operation,
+      // first reconciles its exact target. The publisher guards any new write.
+      const recoveringPublishing = mode === 'retry_ship' && prior?.state === 'publishing'
+        && prior.revisionId === expected.revisionId && prior.approvalId === expected.approvalId
+      if (!replacesOperationId && !recoveringPublishing) {
         let compatibility
         try {
           await compatibilityStore.ready()

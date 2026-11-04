@@ -84,6 +84,14 @@ try {
     assert.equal(approval.revisionId, third.revision.id)
     assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
     console.log('PASS pending compatibility allows exact-revision approval without computing a target result')
+    assert.deepEqual(store.agentPaperStatus(third.manifest.paperId).approval, approval)
+    const pendingRequest = { requestId: `publication-request-${randomUUID()}`,
+      revisionId: third.revision.id, secretHash: sha256('pending-capability'), ttlSeconds: 3600 }
+    store.registerPublicationRequest(third.manifest.paperId, pendingRequest, 'synthetic-agent')
+    assert.equal(store.registerPublicationRequest(third.manifest.paperId, pendingRequest, 'synthetic-agent').state, 'pending')
+    assert.equal(store.grantPublicationRequest(pendingRequest.requestId, 'synthetic-owner').state, 'granted')
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
+    console.log('PASS pending preserves exact Agent approval and permits exact delegation registration/replay/grant')
     const missingDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
     missingDb.prepare('DELETE FROM review_subject WHERE revision_id=?').run(third.revision.id)
     missingDb.close()
@@ -97,7 +105,8 @@ try {
     assert.equal(store.latestPromotion(third.manifest.paperId), null)
     console.log('PASS unknown rejects publication with an explicit retryable result')
     const changedFile = path.join(store.revisionDirectory(second.revision.id), 'config.json')
-    writeFileSync(changedFile, `${readFileSync(changedFile, 'utf8')}\n`)
+    const originalFile = readFileSync(changedFile)
+    writeFileSync(changedFile, `${originalFile.toString('utf8')}\n`)
     await assert.rejects(service.promote(second.manifest.paperId,
       { ...second.approval, intent: 'ship' }, 'synthetic-ship'), error => {
       assert.equal(error.code, 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED')
@@ -114,6 +123,7 @@ try {
       assert.equal(table ? bank.prepare('SELECT count(*) n FROM paper_asset_versions WHERE paper_id=?')
         .get(second.manifest.paperId).n : 0, 0)
     } finally { bank.close() }
+    writeFileSync(changedFile, originalFile)
     console.log('PASS on-demand different returns structured locations without a promotion or published version')
   }
   const result = await service.promote(reviewed.manifest.paperId, { ...reviewed.approval, intent: 'ship' }, 'synthetic-ship')
@@ -134,6 +144,43 @@ try {
   assert.equal(replay.operationId, result.operationId)
   assert.equal(invalidations, 1)
   console.log('PASS promotion executes through independent supervisor/executor, durable receipt, cache invalidation and exact replay')
+  {
+    // Recreate the durable state of a legacy writer lost after bank commit but
+    // before marking Review published, with no operation association.
+    const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    try {
+      reviewDb.prepare('DELETE FROM import_review_promotion_operations WHERE promotion_id=?').run(result.promotion.promotionId)
+      reviewDb.prepare("UPDATE import_review_promotions SET state='publishing', published_at=NULL WHERE id=?")
+        .run(result.promotion.promotionId)
+      reviewDb.prepare(`INSERT INTO import_review_shipping_guards
+        (id,paper_id,revision_id,approval_id,acquired_by,acquired_at) VALUES (?,?,?,?,?,?)`)
+        .run(result.promotion.guardId, reviewed.manifest.paperId, reviewed.revision.id,
+          reviewed.approval.approvalId, 'legacy-ship', new Date().toISOString())
+      reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(reviewed.revision.id)
+    } finally { reviewDb.close() }
+    const recovered = await service.promote(reviewed.manifest.paperId,
+      { ...store.agentPaperStatus(reviewed.manifest.paperId).approval, intent: 'retry_ship' }, 'synthetic-ship')
+    assert.equal(recovered.status, 'idempotent')
+    assert.equal(recovered.promotion.promotionId, result.promotion.promotionId)
+    assert.equal(recovered.promotion.assetVersion, result.promotion.assetVersion)
+    assert.equal(operations.get(recovered.operationId).state, 'completed')
+    assert.equal(store.compatibilityForRevision(reviewed.revision.id).pending, true)
+    const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
+    try { assert.equal(bank.prepare('SELECT count(*) n FROM paper_asset_versions').get().n, 1) }
+    finally { bank.close() }
+    console.log('PASS legacy unlinked publishing reconciles exact committed target before pending compatibility without a new version')
+  }
+  {
+    const approval = store.agentPaperStatus(third.manifest.paperId).approval
+    const legacy = store.beginPromotion(third.manifest.paperId, { ...approval, intent: 'ship' }, 'legacy-ship')
+    await assert.rejects(service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship'))
+    assert.equal(store.latestPromotion(third.manifest.paperId).promotionId, legacy.promotion.promotionId)
+    assert.equal(store.latestPromotion(third.manifest.paperId).state, 'publishing')
+    const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
+    try { assert.equal(bank.prepare('SELECT count(*) n FROM paper_asset_versions').get().n, 1) }
+    finally { bank.close() }
+    console.log('PASS uncommitted legacy recovery cannot use renderer fallback to write without current equal')
+  }
   if (!onDemandOnly) await verifyPromotionWorkerMatrix({ root, seedDb, ship: reviewed.approval,
     scoped: { paperId: second.manifest.paperId, requestId, secretHash },
     owner: { paperId: third.manifest.paperId, revisionId: third.revision.id, intent: 'publish',

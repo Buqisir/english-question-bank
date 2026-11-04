@@ -386,7 +386,12 @@ export function createSinglePaperPromotionService({
         }
         // Reconciliation cannot authorize a new write. Require current content
         // eligibility before running any current projection or compiler.
-        store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, () => {})
+        store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, ({ subject, compatibility }) => {
+          if (begun.requireCurrentEqual && !subject) {
+            throw Object.assign(promotionError('IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED',
+              '本次核验未完成，未发布。请稍后重试。', 503), { compatibility, retryable: true })
+          }
+        })
         const { context, binding, archiveRequired, packageData, canonicalRequest, profileIdentity } = preparePromotionContent({
           store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage,
         })
@@ -522,15 +527,18 @@ export function createSinglePaperPromotionService({
       // Both calls are synchronous until the durable guard is acquired. The
       // store rechecks latest revision, content compatibility, approval and issues in its
       // transaction, including races with another process.
-      return execute(paperId, store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor, operation))
+      return execute(paperId, { ...store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor, operation),
+        requireCurrentEqual: Boolean(operation) })
     },
     promote(paperId, input, actor, operation = null) {
       const store = getStore()
-      return execute(paperId, store.beginPromotion(paperId, input, actor, operation))
+      return execute(paperId, { ...store.beginPromotion(paperId, input, actor, operation),
+        requireCurrentEqual: Boolean(operation) })
     },
     promoteScoped(paperId, requestId, secretHash, actor, operation = null) {
       const store = getStore()
-      return execute(paperId, store.beginScopedPromotion(paperId, requestId, secretHash, actor, operation))
+      return execute(paperId, { ...store.beginScopedPromotion(paperId, requestId, secretHash, actor, operation),
+        requireCurrentEqual: Boolean(operation) })
     },
   }
 }

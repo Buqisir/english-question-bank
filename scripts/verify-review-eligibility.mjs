@@ -111,9 +111,12 @@ try {
     const approvalStore = createReleaseStore({ dbPath: approvalPath, filesRoot, rendererBuildId: () => renderer })
     assert.equal(approvalStore.approveRevision(revision.paperId, revision.id,
       { bundleDigest: revision.bundleDigest }, 'owner').revisionId, revision.id)
+    assert.deepEqual(store.agentPaperStatus(revision.paperId).approval, approval)
+    const delegated = requestInput('current-target-pending')
+    assert.equal(store.registerPublicationRequest(revision.paperId, delegated, 'agent').state, 'pending')
+    assert.equal(store.registerPublicationRequest(revision.paperId, delegated, 'agent').state, 'pending')
+    assert.equal(store.grantPublicationRequest(delegated.requestId, 'owner').state, 'granted')
     for (const operation of [
-      () => store.registerPublicationRequest(revision.paperId, requestInput('blocked'), 'agent'),
-      () => store.grantPublicationRequest(pending.requestId, 'owner'),
       () => store.beginPromotion(revision.paperId, { ...approval, intent: 'ship' }, 'owner'),
       () => store.beginScopedPromotion(revision.paperId, granted.requestId, sha256('granted'), 'agent'),
       () => store.acquireShippingGuard(revision.paperId, approval, 'ship-agent'),
@@ -122,14 +125,14 @@ try {
     ]) assert.throws(operation, { code: 'IMPORT_REVIEW_RENDERER_STALE' })
     assert.equal(dbRun(dbPath, db => db.prepare('SELECT count(*) n FROM import_review_shipping_guards').get().n), 0)
     assert.equal(dbRun(dbPath, db => db.prepare('SELECT count(*) n FROM import_review_promotions').get().n), 0)
-    assert.equal(store.agentPaperStatus(revision.paperId).approval, null)
     assert.equal(JSON.stringify(store.getRevision(revision.id)), originalRevision)
     assert.equal(JSON.stringify(store.productPreviewForRevision(revision.id).preview), originalPreview)
     store.prepareProductPreview(revision.id)
   }
   assert.equal(store.compatibilityForRevision(revision.id).result, 'pending')
+  assert.equal(store.grantPublicationRequest(pending.requestId, 'owner').state, 'granted')
   blockedEntrances()
-  pass('pending permits approval of frozen review; direct publication/live guards still require compatibility')
+  pass('pending preserves Agent approval and exact delegation; direct publication/live guards still require compatibility')
   assertOpsNext('wait_for_content_check')
   const routes = createImportReviewRoutes({ getStore: () => store, buildPrintHtml() { throw new Error('Must not derive pending content') } })
   async function readRoute(suffix) {

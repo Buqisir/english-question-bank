@@ -5,6 +5,8 @@ const replacements = {
     ["    findSimilar: (db, input) =>", "    __promotionFixtureRawIndex: getRawIndex,\n    findSimilar: (db, input) =>"],
   ],
   '/server/import-review/runPromotionWorker.mjs': [
+    ["          await compatibilityStore.ready()", "          __promotionFault('before-compatibility');\n          await compatibilityStore.ready()"],
+    ["        if (compatibility.result !== 'equal' || compatibility.pending) {", "        __promotionFault('after-compatibility', { result: compatibility.result });\n        if (compatibility.result !== 'equal' || compatibility.pending) {"],
     ["      row = operations.reserve(", "      __promotionFault('after-host-slot');\n      row = operations.reserve("],
     ["    return supervise(row, nonce)", "    __promotionFault('after-job-before-fork');\n    await __promotionAsyncFault('live-reserve-before-fork');\n    return supervise(row, nonce)"],
     ["phase = 'running'; send('go')", "phase = 'running'; __promotionFault('api-before-go'); send('go'); __promotionFault('api-after-go', { phase, result })"],

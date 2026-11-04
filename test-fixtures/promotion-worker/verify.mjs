@@ -13,11 +13,12 @@ import { writeFixtureJson } from './faults.mjs'
 const hook = new URL('./hook.mjs', import.meta.url).pathname
 const driver = new URL('./api.mjs', import.meta.url)
 // Budgets describe the work preceding a checkpoint, not its stage name.
-// Full publication/recovery retains the existing 45s cap; harness IPC is 60s.
-// CI seed publication took about 14s; failing late checkpoints were still
-// running at 20s. Records below retain evidence of where the extra time goes.
-const checkpointBudgets = { control: 20_000, publication: 45_000, recovery: 45_000 }
-const publicationStages = ['before-publisher', 'after-bank-commit',
+// Publication now also resolves the current target before supervisor launch.
+// The retained v4 C timeout reached before-publisher at 49.5s while reusing
+// equal; allow cold identity/preparation as well as the original publish work.
+// IPC/HTTP must outlive checkpoints and the deliberately gated ACK.
+const checkpointBudgets = { control: 20_000, publication: 90_000, recovery: 90_000 }
+const publicationStages = ['before-compatibility', 'compatibility-input', 'after-compatibility', 'before-publisher', 'after-bank-commit',
   'before-mark-published', 'after-mark-published', 'before-worker-ipc']
 const publicationRecords = Object.fromEntries(publicationStages.map(stage => [stage, 'record']))
 const safeTail = value => String(value).replace(/(bearer\s+)\S+/gi, '$1<redacted>')
@@ -109,7 +110,7 @@ function api(env) {
       calls.push(record)
       if (calls.length > 8) calls.shift()
       return new Promise(resolve => {
-        const timer = setTimeout(() => { pending.delete(requestId); resolve({ type: 'timeout', stderr }) }, 60_000)
+        const timer = setTimeout(() => { pending.delete(requestId); resolve({ type: 'timeout', stderr }) }, 120_000)
         pending.set(requestId, value => { clearTimeout(timer); resolve(value) })
         child.send({ ...message, requestId }, error => {
           if (error) { clearTimeout(timer); pending.delete(requestId); resolve({ type: 'exited' }) }
@@ -405,7 +406,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       const listening = await a.call({ type: 'http-listen' })
       assert.ok(listening.result?.port, JSON.stringify(listening))
       const request = () => fetch(`http://127.0.0.1:${listening.result.port}/promotion`, {
-        method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(60_000),
+        method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(120_000),
       }).then(async response => ({ status: response.status, body: await response.json() }))
       const running = request()
       running.catch(() => {})
@@ -413,6 +414,14 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       // A reply/rejection before either marker is an unexpected early terminal.
       const ack = await t.checkpoint('supervisor-ack-before-recheck', running, { flow: 'publication', transport: 'http' })
       const apiAck = await t.checkpoint('api-after-ack', running, { flow: 'publication', transport: 'http' })
+      const stages = publicationStages.flatMap(stage => {
+        const file = `${t.marker}.${stage}`
+        if (!existsSync(file)) return []
+        const { at, result } = JSON.parse(readFileSync(file))
+        return [{ stage, at, ...(result ? { result } : {}) }]
+      })
+      console.log(`PROMOTION_CHECKPOINT_TIMING ${JSON.stringify(stages.map(value =>
+        ({ ...value, elapsedMs: value.at - stages[0].at, at: undefined })))}`)
       const original = t.rows()[0]
       assert.equal(ack.pid, original.supervisor_pid)
       assert.equal(apiAck.pid, a.child.pid)
@@ -447,7 +456,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     const listening = await a.call({ type: 'http-listen' })
     assert.ok(listening.result?.port, JSON.stringify(listening))
     const request = () => fetch(`http://127.0.0.1:${listening.result.port}/promotion`, {
-      method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(60_000),
+      method: 'POST', body: JSON.stringify(shipMessage), signal: AbortSignal.timeout(120_000),
     }).then(async response => ({ status: response.status, body: await response.json() }))
     const running = request()
     running.catch(() => {})
@@ -971,7 +980,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       t.plan({ 'after-archive': 'block' })
       const a = await t.client()
       const originalRequest = a.call(shipMessage)
-      const checkpoint = await t.checkpoint('after-archive', originalRequest, { flow: 'control', transport: 'ipc' })
+      const checkpoint = await t.checkpoint('after-archive', originalRequest, { flow: 'publication', transport: 'ipc' })
       process.kill(checkpoint.pid, 'SIGKILL')
       assert.equal((await originalRequest).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       const original = t.rows()[0]
@@ -1003,7 +1012,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'before-archive', 'block', async t => {
       const a = await t.client(), b = await t.client({ faults: false })
       const running = a.call(shipMessage)
-      await t.checkpoint('before-archive', running, { flow: 'control', transport: 'ipc' })
+      await t.checkpoint('before-archive', running, { flow: 'publication', transport: 'ipc' })
       const operationId = t.rows()[0].id
       const duplicate = await b.call(shipMessage)
       assert.equal(duplicate.code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
@@ -1023,13 +1032,13 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal((await running).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       assert.equal(t.promotions().length, 1)
     })
-  // Launch/archive controls precede publication. Preparation and durable output
-  // checkpoints traverse the real publisher; classify this flow explicitly.
+  // Archive checkpoints already include full content preparation. Only launch
+  // and begin controls use the short budget.
   const killCheckpoints = [
     ...['after-host-slot', 'after-job-before-fork', 'api-before-go', 'supervisor-ready', 'supervisor-before-go',
-      'begin-before-commit', 'begin-after-commit', 'before-archive', 'after-archive']
+      'begin-before-commit', 'begin-after-commit']
       .map(stage => ({ stage, flow: 'control' })),
-    ...['before-on-prepared', 'after-target-binding', 'after-on-prepared', 'after-version-rename', 'after-latest-swap',
+    ...['before-archive', 'after-archive', 'before-on-prepared', 'after-target-binding', 'after-on-prepared', 'after-version-rename', 'after-latest-swap',
       'after-bank-commit', 'before-mark-published', 'after-mark-published', 'before-worker-ipc']
       .map(stage => ({ stage, flow: 'publication' })),
   ]
@@ -1146,7 +1155,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
     'before-archive', 'pause', async t => {
       const a = await t.client()
       const running = a.call(shipMessage)
-      await t.checkpoint('before-archive', running, { flow: 'control', transport: 'ipc' })
+      await t.checkpoint('before-archive', running, { flow: 'publication', transport: 'ipc' })
       const row = t.rows()[0]
       a.child.kill('SIGKILL')
       assert.equal(await matchingReviewProcess({ bootId: row.owner_boot_id, pid: row.supervisor_pid, startId: row.supervisor_start_id }), 'live')
