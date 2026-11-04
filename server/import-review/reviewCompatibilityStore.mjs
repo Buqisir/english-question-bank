@@ -43,6 +43,7 @@ function compatibilityFromRows(revision, subject, rows) {
     if (row.result === 'equal' && !baseline) throw error('BASELINE_UNTRUSTED')
     return { result: row.result, reasonCode: row.reason_code, pending: false, attemptNo: row.attempt_no,
       subjectDigest: row.subject_digest, targetBuildId: row.target_build_id,
+      differences: JSON.parse(row.evidence_json).differences || [],
       comparatorVersion: row.comparator_version, checkedAt: row.checked_at }
   } catch { return { result: 'unknown', reasonCode: 'BASELINE_UNTRUSTED', pending: false } }
 }

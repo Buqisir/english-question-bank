@@ -2206,7 +2206,6 @@ export function createImportReviewStore({
             'OCR review must be confirmed before a Candidate revision can be approved',
           )
         }
-        const approvalCompatibility = assertReviewCompatible(db, revision)
         if (request && (request.renderer_build_id !== revision.rendererBuildId || request.bundle_digest !== revision.bundleDigest)) {
           throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request identity changed')
         }
@@ -2214,7 +2213,7 @@ export function createImportReviewStore({
           if (revision.approval?.approvalId !== request.approval_id) {
             throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request approval changed')
           }
-          assertCurrentApprovedRevision(db, paperId, revision.approval)
+          assertCurrentApprovedRevision(db, paperId, revision.approval, { reconciliation: true })
           db.exec('COMMIT')
           return revision.approval
         }
@@ -2239,23 +2238,18 @@ export function createImportReviewStore({
           throw storeError('IMPORT_REVIEW_ISSUES_UNRESOLVED', 'Unresolved issues block approval')
         }
         assertStoredRevisionFiles(revision, db)
-        let baseline, consumer, legacyProjection
-        if (approvalCompatibility.fallback) {
-          // Exact pre-BUB-90 approval validation: renderer match plus the sealed
-          // projection identity and listening rules. Do not manufacture a subject.
-          legacyProjection = projectStoredRevision(revision, {
-            reviewKind: revision.reviewKind, requireAnalyses: !revision.manifest.importProfile,
-            expectedCandidateDigest: revision.candidateDigest,
-          })
-          assertProjectionIdentity(legacyProjection, revision)
-        } else {
-          baseline = checkedStoredReviewSubject(db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
-          consumer = baseline.subject.components.consumer
+        // Approval binds the immutable preview the Owner actually reviewed.
+        // Current-code equivalence is checked only when publishing.
+        const { preview: consumer } = productPreviewForRevision(revision.id)
+        const baseline = checkedStoredReviewSubject(db.prepare(
+          'SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
+        if (baseline && (baseline.subject.bundleDigest !== revision.bundleDigest
+          || baseline.subject.sourceRendererBuildId !== revision.rendererBuildId
+          || baseline.row.consumer_digest !== digestJson(consumer))) {
+          throw storeError('BASELINE_UNTRUSTED', 'Original subject and stored preview disagree')
         }
         const audio = consumer?.consumption.listeningAudio
-        const externalAudio = legacyProjection
-          ? legacyProjection.listeningReview?.audio?.state === 'included_in_candidate_review'
-          : consumer.paperAsset.sources.provenance?.kind === 'external_analyzed_package' && Boolean(audio)
+        const externalAudio = consumer.paperAsset.sources.provenance?.kind === 'external_analyzed_package' && Boolean(audio)
         let externalListeningReview = null
         if (externalAudio) {
           if (input?.externalListeningReview !== undefined) {
@@ -2265,15 +2259,15 @@ export function createImportReviewStore({
               400,
             )
           }
-          let listening = legacyProjection?.materialization.listening
-          for (const file of baseline?.subject.components.sidecar || []) {
-            if (!file.jsonDigest) continue
+          let listening
+          for (const file of baseline?.subject.components.sidecar || revision.manifest.files) {
+            if (baseline ? !file.jsonDigest : !file.path.endsWith('.json')) continue
             const bytes = readFileSync(resolveReviewFile(revisionDirectory(revision.id), file.path))
             if (sha256(bytes) !== file.sha256 || bytes.byteLength !== file.byteLength) {
               throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Original listening evidence changed')
             }
             const json = JSON.parse(bytes)
-            if (digestJson(json) !== file.jsonDigest) {
+            if (file.jsonDigest && digestJson(json) !== file.jsonDigest) {
               throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Original listening JSON changed')
             }
             if (Array.isArray(json?.listening?.transcript) && Array.isArray(json?.listening?.questions)
@@ -2290,10 +2284,10 @@ export function createImportReviewStore({
               answerCount: listening.answers.length,
             },
             audio: {
-              sha256: legacyProjection ? legacyProjection.listeningReview.audio.playbackAudioSha256 : audio.sha256,
-              byteLength: legacyProjection ? legacyProjection.listeningAudioBytes.byteLength : audio.byteLength,
-              mediaType: legacyProjection ? legacyProjection.listeningReview.audio.mediaType : audio.mediaType,
-              durationSeconds: legacyProjection ? legacyProjection.listeningReview.audio.durationSeconds : audio.durationSeconds,
+              sha256: audio.sha256,
+              byteLength: audio.byteLength,
+              mediaType: audio.mediaType,
+              durationSeconds: audio.durationSeconds,
             },
             reviewedAt: approvedAt,
             reviewedBy: actor,

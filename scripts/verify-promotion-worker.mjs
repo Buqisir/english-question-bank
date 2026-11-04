@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
-import { copyFileSync, mkdtempSync, mkdirSync, readFileSync, rmSync, statfsSync } from 'node:fs'
+import { copyFileSync, mkdtempSync, mkdirSync, readFileSync, rmSync, statfsSync, writeFileSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -15,7 +15,8 @@ import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { verifyPromotionWorkerMatrix } from '../test-fixtures/promotion-worker/verify.mjs'
 import { verifyProcessExitSampling } from '../test-fixtures/promotion-worker/process-exit-sampling.mjs'
 
-await verifyProcessExitSampling()
+const onDemandOnly = process.argv.includes('--on-demand-only')
+if (!onDemandOnly) await verifyProcessExitSampling()
 const disk = statfsSync(tmpdir())
 assert.ok(disk.bavail * disk.bsize >= 10_000_000_000, 'DISK_STOP_BELOW_10_GB')
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-promotion-worker-'))
@@ -72,9 +73,54 @@ try {
   mkdirSync(process.env.QUESTION_BANK_PAPER_ASSET_ROOT)
   let invalidations = 0
   service = createPromotionWorkerService({ getStore: () => store, afterPublish() { invalidations++ } })
+  {
+    const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id IN (?, ?, ?)')
+      .run(reviewed.revision.id, second.revision.id, third.revision.id)
+    reviewDb.close()
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
+    const approval = store.approveRevision(third.manifest.paperId, third.revision.id,
+      { bundleDigest: third.revision.bundleDigest }, 'synthetic-owner')
+    assert.equal(approval.revisionId, third.revision.id)
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
+    console.log('PASS pending compatibility allows exact-revision approval without computing a target result')
+    const missingDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    missingDb.prepare('DELETE FROM review_subject WHERE revision_id=?').run(third.revision.id)
+    missingDb.close()
+    await assert.rejects(service.promote(third.manifest.paperId,
+      { ...approval, intent: 'ship' }, 'synthetic-ship'), error => {
+      assert.equal(error.compatibility.result, 'unknown')
+      assert.equal(error.retryable, true)
+      assert.equal(error.status, 503)
+      return true
+    })
+    assert.equal(store.latestPromotion(third.manifest.paperId), null)
+    console.log('PASS unknown rejects publication with an explicit retryable result')
+    const changedFile = path.join(store.revisionDirectory(second.revision.id), 'config.json')
+    writeFileSync(changedFile, `${readFileSync(changedFile, 'utf8')}\n`)
+    await assert.rejects(service.promote(second.manifest.paperId,
+      { ...second.approval, intent: 'ship' }, 'synthetic-ship'), error => {
+      assert.equal(error.code, 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED')
+      assert.equal(error.compatibility.result, 'different')
+      assert.ok(error.compatibility.differences.some(pointer => pointer.includes('config.json')),
+        JSON.stringify(error.compatibility))
+      assert.equal(error.retryable, false)
+      return true
+    })
+    assert.equal(store.latestPromotion(second.manifest.paperId), null)
+    const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
+    try {
+      const table = bank.prepare("SELECT 1 FROM sqlite_master WHERE name='paper_asset_versions'").get()
+      assert.equal(table ? bank.prepare('SELECT count(*) n FROM paper_asset_versions WHERE paper_id=?')
+        .get(second.manifest.paperId).n : 0, 0)
+    } finally { bank.close() }
+    console.log('PASS on-demand different returns structured locations without a promotion or published version')
+  }
   const result = await service.promote(reviewed.manifest.paperId, { ...reviewed.approval, intent: 'ship' }, 'synthetic-ship')
   assert.equal(result.status, 'published')
   assert.equal(invalidations, 1)
+  assert.equal(store.compatibilityForRevision(reviewed.revision.id).result, 'equal')
+  console.log('PASS on-demand equal continues through the original publisher')
   const operations = createPromotionOperationStore({ dbPath: process.env.QUESTION_BANK_IMPORT_OPS_DB })
   const operation = operations.get(result.operationId)
   assert.equal(operation.state, 'completed')
@@ -88,7 +134,7 @@ try {
   assert.equal(replay.operationId, result.operationId)
   assert.equal(invalidations, 1)
   console.log('PASS promotion executes through independent supervisor/executor, durable receipt, cache invalidation and exact replay')
-  await verifyPromotionWorkerMatrix({ root, seedDb, ship: reviewed.approval,
+  if (!onDemandOnly) await verifyPromotionWorkerMatrix({ root, seedDb, ship: reviewed.approval,
     scoped: { paperId: second.manifest.paperId, requestId, secretHash },
     owner: { paperId: third.manifest.paperId, revisionId: third.revision.id, intent: 'publish',
       bundleDigest: third.revision.bundleDigest, rendererBuildId: third.revision.rendererBuildId } })
