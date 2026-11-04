@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useModalDialog } from '../../components/useModalDialog'
 import { errorFromResponse } from '../../services/httpClient'
 
-type AgentToken = { id: string; name: string; scope: 'published' | 'test'; createdAt: string; revokedAt: string | null; lastUsedAt: string | null }
+type AgentToken = { id: string; name: string; createdAt: string; revokedAt: string | null; lastUsedAt: string | null }
 const endpoint = '/api/admin/agent-tokens'
 async function request(path = '', body?: object) {
   const response = await fetch(endpoint + path, body ? {
@@ -15,7 +15,6 @@ async function request(path = '', body?: object) {
 export function AgentTokens() {
   const [tokens, setTokens] = useState<AgentToken[]>([])
   const [name, setName] = useState('')
-  const [scope, setScope] = useState<AgentToken['scope']>('published')
   const [secret, setSecret] = useState('')
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
@@ -39,20 +38,17 @@ export function AgentTokens() {
   }
   return <section className="agent-tokens" aria-labelledby="agent-tokens-heading">
     <h2 id="agent-tokens-heading">Agent 口令</h2>
-    <p>正式范围只读已发布卷；测试范围另含待审卷。两种范围都包含答案。</p>
+    <p>口令可只读访问已发布卷，包含来源答案。</p>
     <form onSubmit={event => {
       event.preventDefault()
       void mutate(async () => {
-        const created = await request('', { name, scope })
+        const created = await request('', { name })
         setSecret(created.token); setName('')
         const { token: _token, ...item } = created
         setTokens(current => [item, ...current])
       })
     }}>
       <label>名称<input required maxLength={100} value={name} onChange={event => setName(event.target.value)} placeholder="例如：组卷 Agent" /></label>
-      <label>范围<select value={scope} onChange={event => setScope(event.target.value as AgentToken['scope'])}>
-        <option value="published">正式</option><option value="test">测试</option>
-      </select></label>
       <button className="ghost-button" type="submit" disabled={busy || !name.trim()}>{busy ? '保存中…' : '新建口令'}</button>
     </form>
     {secret && <div className="agent-token-secret">
@@ -68,7 +64,7 @@ export function AgentTokens() {
     <p role="status">{notice}</p>
     {loading ? <p>加载中…</p> : tokens.length === 0 ? <p>还没有口令。填写名称并新建口令即可开始。</p> :
       <ul>{tokens.map(item => <li key={item.id}>
-        <div><strong>{item.name}</strong><span>{item.scope === 'test' ? '测试' : '正式'} · {item.revokedAt ? '已作废' : '有效'}</span>
+        <div><strong>{item.name}</strong><span>{item.revokedAt ? '已作废' : '有效'}</span>
           <small>创建于 {new Date(item.createdAt).toLocaleDateString()} · {item.lastUsedAt ? `最近使用 ${new Date(item.lastUsedAt).toLocaleString()}` : '尚未使用'}</small></div>
         {!item.revokedAt && <button type="button" className="ghost-button" disabled={busy} onClick={() => setRevoking(item)}>作废口令</button>}
       </li>)}</ul>}

@@ -2,7 +2,7 @@ import { defineRoute } from '../router/index.mjs'
 import { createAgentToken, listAgentTokens, revokeAgentToken } from './agentTokens.mjs'
 import { agentGroup, groupPreview, listAgentPapers, matchesPaper, paperSummary } from './agentCatalog.mjs'
 
-export function createAgentRoutes({ getReviewStore }) {
+export function createAgentRoutes() {
   const admin = (method, pattern, action) => defineRoute(method, pattern, async input => {
     const { context, response } = input
     // Unlike existing bootstrap-open tools, token administration always needs a
@@ -18,7 +18,7 @@ export function createAgentRoutes({ getReviewStore }) {
   }, { ownerOnly: true })
   const read = (pattern, action) => defineRoute('GET', pattern, input => {
     if (!input.context.agent) { input.context.sendJson(input.response, 401, { error: 'not_authenticated' }); return }
-    const papers = listAgentPapers(input.context, getReviewStore)
+    const papers = listAgentPapers(input.context)
     action(input, papers)
   })
   const notFound = ({ context, response }) => context.sendJson(response, 404, { error: 'not_found' })
@@ -34,9 +34,7 @@ export function createAgentRoutes({ getReviewStore }) {
     read(/^\/api\/agent\/v1\/papers$/, ({ context, response, url }, papers) =>
       context.sendJson(response, 200, { papers: papers.filter(paper => matchesPaper(paper, url.searchParams)).map(paperSummary) })),
     read(/^\/api\/agent\/v1\/papers\/([^/]+)$/, (input, papers) => {
-      const revision = input.url.searchParams.get('revision')
-      const paper = papers.find(paper => paper.paperId === decodeURIComponent(input.match[1])
-        && (!revision || paper.revision === revision))
+      const paper = papers.find(paper => paper.paperId === decodeURIComponent(input.match[1]))
       if (!paper) return notFound(input)
       input.context.sendJson(input.response, 200, { ...paperSummary(paper), groups: paper.groupIds.map(id => agentGroup(paper, id)) })
     }),
@@ -50,18 +48,16 @@ export function createAgentRoutes({ getReviewStore }) {
       const groups = papers.filter(paper => matchesPaper(paper, params)).flatMap(paper => paper.groupIds.map(id => {
         const group = agentGroup(paper, id)
         return { groupId: id, paperId: paper.paperId, paperTitle: paper.title, year: paper.year, type: paper.type,
-          status: paper.status, ...(paper.revision ? { revision: paper.revision } : {}),
           section: group.section, questionCount: group.questions.length, preview: groupPreview(group) }
       })).filter(group => !params.has('section') || group.section === params.get('section'))
       context.sendJson(response, 200, { groups: groups.slice(offset, offset + limit), total: groups.length, limit, offset })
     }),
     read(/^\/api\/agent\/v1\/groups\/([^/]+)$/, (input, papers) => {
       const id = decodeURIComponent(input.match[1])
-      const revision = input.url.searchParams.get('revision')
-      const paper = papers.find(paper => paper.groupIds.includes(id) && (!revision || paper.revision === revision))
+      const paper = papers.find(paper => paper.groupIds.includes(id))
       if (!paper) return notFound(input)
       input.context.sendJson(input.response, 200, { ...agentGroup(paper, id), paperId: paper.paperId,
-        paperTitle: paper.title, status: paper.status, ...(paper.revision ? { revision: paper.revision } : {}) })
+        paperTitle: paper.title })
     }),
   ]
 }

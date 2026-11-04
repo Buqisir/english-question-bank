@@ -61,7 +61,7 @@
 .agent-tokens p, .agent-token-dialog p { color: var(--eqb-color-text-muted); line-height: 1.5; }
 .agent-tokens form, .agent-token-dialog > div { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
 .agent-tokens label { display: grid; gap: 8px; }
-.agent-tokens input, .agent-tokens select {
+.agent-tokens input {
   box-sizing: border-box;
   max-width: 100%;
   font: inherit;
@@ -81,7 +81,7 @@
 .agent-token-secret code { display: block; margin-bottom: 12px; overflow-wrap: anywhere; user-select: all; }
 .agent-token-dialog { box-sizing: border-box; width: min(440px, calc(100% - 32px)); padding: 24px; border: 1px solid var(--eqb-color-border); border-radius: 12px; color: var(--eqb-color-text); background: var(--eqb-color-paper); font-size: 13px; overflow-wrap: anywhere; }
 .agent-token-dialog::backdrop { background: color-mix(in srgb, var(--eqb-color-text) 32%, transparent); }
-.agent-tokens button:focus-visible, .agent-tokens input:focus-visible, .agent-tokens select:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
+.agent-tokens button:focus-visible, .agent-tokens input:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
 @media (max-width: 560px) {
   .agent-tokens form { align-items: stretch; }
   .agent-tokens label:first-child { flex-basis: 100%; }

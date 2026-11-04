@@ -3,16 +3,16 @@ import { readFileSync } from 'node:fs'
 import { listCanonicalPaperCatalog } from '../search/canonicalPaperCatalog.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 
-function paperEntry(paperId, asset, meta, status, revision) {
+function paperEntry(paperId, asset, meta) {
   return {
     paperId, title: meta?.paperName || asset.paper.title, year: meta?.year ?? null,
     type: ({ '真题': 'real', '高考真题': 'real', '模拟题': 'mock', '模拟': 'mock', real: 'real', mock: 'mock' })[meta?.sourceType] ?? null,
-    status, ...(revision ? { revision } : {}), asset,
+    asset,
     groupIds: asset.content.blocks.filter(block => block.type === 'group').map(block => block.groupId),
   }
 }
 
-export function listAgentPapers(context, getReviewStore) {
+export function listAgentPapers(context) {
   const db = context.openDatabase({ readOnly: true })
   let published
   try { published = listCanonicalPaperCatalog({ db, rootDir: context.paperAssetsDir }) }
@@ -21,17 +21,9 @@ export function listAgentPapers(context, getReviewStore) {
     const { baseDir } = resolvePaperAssetReadPaths(context.paperAssetsDir, paperId)
     let meta
     try { meta = JSON.parse(readFileSync(path.join(baseDir, 'import-meta.json'), 'utf8')).paper } catch { /* Unknown metadata stays null. */ }
-    return paperEntry(paperId, asset, meta, 'published')
+    return paperEntry(paperId, asset, meta)
   })
-  if (context.agent.scope === 'test') {
-    for (const { revision, preview, provenance } of getReviewStore().listAgentReviewPreviews()) {
-      papers.push(paperEntry(revision.paperId, preview.paperAsset, {
-        paperName: provenance.paperName, year: provenance.year, sourceType: provenance.sourceType,
-      }, 'awaiting_review', revision.id))
-    }
-  }
-  return papers.sort((a, b) => a.paperId.localeCompare(b.paperId)
-    || Number(a.status !== 'published') - Number(b.status !== 'published'))
+  return papers.sort((a, b) => a.paperId.localeCompare(b.paperId))
 }
 
 export function paperSummary(paper) {

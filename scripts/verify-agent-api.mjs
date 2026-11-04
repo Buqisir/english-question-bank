@@ -87,36 +87,26 @@ async function expectStatus(route, options, status) {
   assert.equal(result.status, status, `${route}: ${JSON.stringify(result.data)}`)
   return result.data
 }
-let revision
-let publishedRevision
 function seedReview() {
   const db = new DatabaseSync(reviewPath)
   const timestamp = new Date().toISOString()
-  for (const paperId of [publishedId, pendingId]) {
-  db.prepare(`INSERT INTO import_review_papers (paper_id, paper_name, created_at, updated_at)
-    VALUES (?, '待审测试卷', ?, ?)`).run(paperId, timestamp, timestamp)
-  for (let number = 1; number <= 2; number++) {
-    const id = `rev-${randomUUID()}`
-    if (paperId === pendingId) revision = id
-    else publishedRevision = id
-    const config = { paperId, provenance: { year: 2026, sourceType: paperId === pendingId ? '模拟题' : '真题', paperName: '待审测试卷' } }
-    const bytes = Buffer.from(JSON.stringify(config))
-    jsonFile(path.join(files, id, 'config.json'), config)
-    const manifest = { schemaVersion: 'web-import-review-bundle-v1', paperId, paperName: '待审测试卷',
-      files: [{ path: 'config.json', sha256: sha256(bytes), byteLength: bytes.length, mediaType: 'application/json', role: 'config' }] }
-    db.prepare(`INSERT INTO import_review_revisions
-      (id,paper_id,revision_number,state,source_digest,candidate_digest,visible_structure_digest,bundle_digest,
-       producer_build_id,renderer_build_id,manifest_json,created_at,finalized_at,updated_at)
-      VALUES (?, ?, ?, 'awaiting_review', 'source', 'candidate', 'visible', 'bundle', 'fixture', 'fixture', ?, ?, ?, ?)`)
-      .run(id, paperId, number, JSON.stringify(manifest), timestamp, timestamp, timestamp)
-    const preview = { paperAsset: assetFor(paperId) }
-    db.prepare(`INSERT INTO import_review_product_previews
-      (revision_id,bundle_digest,renderer_build_id,payload_digest,payload_json) VALUES (?, 'bundle', 'fixture', ?, ?)`)
-      .run(id, digestJson(preview), JSON.stringify(preview))
-  }
-  db.prepare('UPDATE import_review_papers SET latest_revision_id = ? WHERE paper_id = ?')
-    .run(paperId === pendingId ? revision : publishedRevision, paperId)
-  }
+  const id = `rev-${randomUUID()}`
+  const config = { paperId: pendingId, provenance: { year: 2026, sourceType: '模拟题', paperName: '待审测试卷' } }
+  const bytes = Buffer.from(JSON.stringify(config))
+  jsonFile(path.join(files, id, 'config.json'), config)
+  const manifest = { schemaVersion: 'web-import-review-bundle-v1', paperId: pendingId, paperName: '待审测试卷',
+    files: [{ path: 'config.json', sha256: sha256(bytes), byteLength: bytes.length, mediaType: 'application/json', role: 'config' }] }
+  db.prepare(`INSERT INTO import_review_papers (paper_id, paper_name, latest_revision_id, created_at, updated_at)
+    VALUES (?, '待审测试卷', ?, ?, ?)`).run(pendingId, id, timestamp, timestamp)
+  db.prepare(`INSERT INTO import_review_revisions
+    (id,paper_id,revision_number,state,source_digest,candidate_digest,visible_structure_digest,bundle_digest,
+     producer_build_id,renderer_build_id,manifest_json,created_at,finalized_at,updated_at)
+    VALUES (?, ?, 1, 'awaiting_review', 'source', 'candidate', 'visible', 'bundle', 'fixture', 'fixture', ?, ?, ?, ?)`)
+    .run(id, pendingId, JSON.stringify(manifest), timestamp, timestamp, timestamp)
+  const preview = { paperAsset: assetFor(pendingId) }
+  db.prepare(`INSERT INTO import_review_product_previews
+    (revision_id,bundle_digest,renderer_build_id,payload_digest,payload_json) VALUES (?, 'bundle', 'fixture', ?, ?)`)
+    .run(id, digestJson(preview), JSON.stringify(preview))
   db.close()
 }
 
@@ -143,76 +133,69 @@ try {
   await expectStatus(`${api}/papers`, { cookie: ownerCookie }, 401)
   await expectStatus('/api/draft-papers', {}, 401)
   await expectStatus('/api/draft-papers', { cookie: ownerCookie }, 200)
-  for (const [route, method, body] of [[admin, 'GET'], [admin, 'POST', { name: 'denied', scope: 'test' }], [`${admin}/missing/revoke`, 'POST', {}]]) {
+  for (const [route, method, body] of [[admin, 'GET'], [admin, 'POST', { name: 'denied' }], [`${admin}/missing/revoke`, 'POST', {}]]) {
     await expectStatus(route, { cookie: memberCookie, method, body }, 403)
   }
   await expectStatus(admin, {}, 401)
   console.log('PASS Bearer-only authentication, Owner management, existing session gate')
 
-  const published = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '正式', scope: 'published' } }, 201)
-  const test = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '测试', scope: 'test' } }, 201)
-  assert.match(test.token, /^eqb_agent_[A-Za-z0-9_-]{43}$/)
-  await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '', scope: 'test' } }, 400)
-  await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: 'invalid', scope: 'all' } }, 400)
+  const credential = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '组卷 Agent' } }, 201)
+  assert.match(credential.token, /^eqb_agent_[A-Za-z0-9_-]{43}$/)
+  await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '' } }, 400)
   const tokenRows = await expectStatus(admin, { cookie: ownerCookie }, 200)
-  assert(!JSON.stringify(tokenRows).includes(test.token))
-  assert(tokenRows.tokens.every(row => !('token_hash' in row) && !('token' in row)))
+  assert(!JSON.stringify(tokenRows).includes(credential.token))
+  assert(tokenRows.tokens.every(row => !('token_hash' in row) && !('token' in row) && !('scope' in row)))
   const tokenDb = new DatabaseSync(userPath, { readOnly: true })
-  assert.equal(tokenDb.prepare('SELECT token_hash FROM agent_tokens WHERE id = ?').get(test.id).token_hash, sha256(test.token).replace(/^sha256:/, ''))
+  assert.equal(tokenDb.prepare('SELECT token_hash FROM agent_tokens WHERE id = ?').get(credential.id).token_hash, sha256(credential.token).replace(/^sha256:/, ''))
+  assert(!tokenDb.prepare('PRAGMA table_info(agent_tokens)').all().some(column => column.name === 'scope'))
   tokenDb.close()
-  await expectStatus(`${api}/papers`, { token: test.token, method: 'POST', body: {} }, 405)
-  await expectStatus(`${api}/papers`, { token: test.token, method: 'OPTIONS' }, 405)
-  await expectStatus('/api/draft-papers', { token: test.token }, 401)
-  console.log('PASS token creation, digest-only storage, redaction, GET-only scope')
+  await expectStatus(`${api}/papers`, { token: credential.token, method: 'POST', body: {} }, 405)
+  await expectStatus(`${api}/papers`, { token: credential.token, method: 'OPTIONS' }, 405)
+  await expectStatus('/api/draft-papers', { token: credential.token }, 401)
+  console.log('PASS token creation, digest-only storage, redaction, GET-only access')
 
-  const list = await expectStatus(`${api}/papers`, { token: published.token }, 200)
+  const list = await expectStatus(`${api}/papers`, { token: credential.token }, 200)
   assert.deepEqual(list.papers.map(item => item.paperId), [publishedId])
   assert.equal(list.papers[0].title, '正式测试卷')
   assert.equal(list.papers[0].type, 'real')
-  await expectStatus(`${api}/papers/${pendingId}`, { token: published.token }, 404)
-  await expectStatus(`${api}/groups/group-${pendingId}`, { token: published.token }, 404)
-  await expectStatus(`${api}/papers/${pendingId}?revision=${revision}`, { token: published.token }, 404)
-  const testList = await expectStatus(`${api}/papers?type=mock&year=2026`, { token: test.token }, 200)
-  assert.equal(testList.papers.length, 1)
-  assert.equal(testList.papers[0].status, 'awaiting_review')
-  assert.equal(testList.papers[0].revision, revision)
-  const detail = await expectStatus(`${api}/papers/${pendingId}?revision=${revision}`, { token: test.token }, 200)
+  assert(!('status' in list.papers[0]) && !('revision' in list.papers[0]))
+  await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 404)
+  await expectStatus(`${api}/groups/group-${pendingId}`, { token: credential.token }, 404)
+  assert.equal((await expectStatus(`${api}/papers?type=mock&year=2026`, { token: credential.token }, 200)).papers.length, 0)
+  const filtered = await expectStatus(`${api}/papers?type=real&year=2026`, { token: credential.token }, 200)
+  assert.equal(filtered.papers.length, 1)
+  const detail = await expectStatus(`${api}/papers/${publishedId}`, { token: credential.token }, 200)
   assert.equal(detail.groups[0].questions[0].answer, 'A')
   assert.equal(detail.groups[0].questions[0].number, 21)
   assert.deepEqual(detail.groups[0].questions[0].options[0], { label: 'A', content: 'A lesson.' })
   assert.equal(detail.groups[0].passage.paragraphs[0].text, 'A teacher prepares a lesson.')
-  const groups = await expectStatus(`${api}/groups?section=${encodeURIComponent('阅读理解')}&type=mock&year=2026&limit=1&offset=0`, { token: test.token }, 200)
+  assert(!('status' in detail) && !('revision' in detail))
+  const groups = await expectStatus(`${api}/groups?section=${encodeURIComponent('阅读理解')}&type=real&year=2026&limit=1&offset=0`, { token: credential.token }, 200)
   assert.equal(groups.total, 1)
   assert.equal(groups.groups[0].preview, 'A teacher prepares a lesson.')
-  const group = await expectStatus(`${api}/groups/group-${pendingId}`, { token: test.token }, 200)
+  assert(!('status' in groups.groups[0]) && !('revision' in groups.groups[0]))
+  const group = await expectStatus(`${api}/groups/group-${publishedId}`, { token: credential.token }, 200)
   assert.equal(group.questions[0].answer, 'A')
-  assert.equal(group.status, 'awaiting_review')
-  const pubDetail = await expectStatus(`${api}/papers/${publishedId}`, { token: published.token }, 200)
-  assert.equal(pubDetail.groups[0].questions[0].answer, 'A')
-  assert.equal((await expectStatus(`${api}/papers/${publishedId}`, { token: test.token }, 200)).status, 'published')
-  assert.equal((await expectStatus(`${api}/groups/group-${publishedId}`, { token: test.token }, 200)).status, 'published')
-  assert.equal((await expectStatus(`${api}/papers/${publishedId}?revision=${publishedRevision}`, { token: test.token }, 200)).status, 'awaiting_review')
-  await expectStatus(`${api}/papers/${publishedId}?revision=${publishedRevision}`, { token: published.token }, 404)
-  await expectStatus(`${api}/groups/group-${publishedId}?revision=${publishedRevision}`, { token: published.token }, 404)
-  await expectStatus(`${api}/groups?limit=-1`, { token: test.token }, 400)
-  console.log('PASS publication isolation, latest pending revision, provenance, filters, passage/options/answers')
-  console.log('EXAMPLES', JSON.stringify({ papers: testList, paper: detail, groups, group }))
+  assert(!('status' in group) && !('revision' in group))
+  await expectStatus(`${api}/groups?limit=-1`, { token: credential.token }, 400)
+  console.log('PASS published-only catalog, pending-only detail 404, provenance, filters, passage/options/answers')
+  console.log('EXAMPLES', JSON.stringify({ papers: filtered, paper: detail, groups, group }))
 
-  const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流', scope: 'published' } }, 201)
+  const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流' } }, 201)
   for (let count = 0; count < 120; count++) await expectStatus(`${api}/papers`, { token: rate.token }, 200)
   const limited = await req(`${api}/papers`, { token: rate.token })
   assert.equal(limited.status, 429)
   assert(Number(limited.headers.get('retry-after')) > 0)
   assert((await expectStatus(admin, { cookie: ownerCookie }, 200)).tokens.find(row => row.id === rate.id).lastUsedAt)
-  await expectStatus(`${admin}/${test.id}/revoke`, { cookie: ownerCookie, method: 'POST', body: {} }, 200)
-  await expectStatus(`${api}/papers`, { token: test.token }, 401)
+  await expectStatus(`${admin}/${credential.id}/revoke`, { cookie: ownerCookie, method: 'POST', body: {} }, 200)
+  await expectStatus(`${api}/papers`, { token: credential.token }, 401)
   await expectStatus('/api/draft-papers', { cookie: ownerCookie }, 200)
   console.log('PASS 120/min limit, activity timestamp, immediate revocation, unchanged sessions')
   const bootstrap = new DatabaseSync(userPath)
   bootstrap.exec('DELETE FROM users')
   bootstrap.close()
   await expectStatus(`${api}/papers`, {}, 401)
-  await expectStatus(admin, { method: 'POST', body: { name: 'denied', scope: 'test' } }, 403)
+  await expectStatus(admin, { method: 'POST', body: { name: 'denied' } }, 403)
   await expectStatus('/api/draft-papers', {}, 200)
   console.log('PASS empty-user bootstrap cannot bypass Agent or token-management authentication')
 } catch (error) {
