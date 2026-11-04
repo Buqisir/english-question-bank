@@ -137,7 +137,7 @@ function legacyAnswerSections({ canonicalPlan, materialization, authorityRef, so
   for (const part of profile.parts) {
     if (part.partId === 'writing') {
       references += `<h2>${title(part.titleInstructionRef)}</h2>`
-      const writing = part.sections.map(section => {
+      const writing = part.sections.filter(section => section.slots[0].familyContractRef.id !== 'error-correction').map(section => {
         const slot = section.slots[0]
         const binding = canonicalPlan.slotBindings.find(binding => binding.slotId === slot.slotId && binding.state === 'bound')
         const group = groupsById.get(binding?.groupRef.groupId)
@@ -145,6 +145,17 @@ function legacyAnswerSections({ canonicalPlan, materialization, authorityRef, so
         if (!group || !reference) throw new Error('Answer writing reference is not bound to the Plan')
         return { section, group, reference }
       })
+      for (const section of part.sections.filter(section => section.slots[0].familyContractRef.id === 'error-correction')) {
+        const binding = canonicalPlan.slotBindings.find(binding => binding.slotId === section.slots[0].slotId && binding.state === 'bound')
+        const group = groupsById.get(binding?.groupRef.groupId)
+        if (!group || group.questions.length !== 10) throw new Error('Correction answers are not bound to the Plan')
+        references += `<section data-answer-section="error-correction"><h3>${title(section.titleInstructionRef)}</h3>`
+          + group.questions.map(question => {
+            const answer = answersById.get(question.questionId)
+            if (!answer || answer.canonicalNumber !== question.sourceNumber) throw new Error('Correction answer identity differs')
+            return `<p data-correction-question-id="${escapeHtml(question.questionId)}">${question.sourceNumber === null ? '' : `${question.sourceNumber}. `}${textHtml(answer.value)}</p>`
+          }).join('') + '</section>'
+      }
       references += writing.map(({ section, group, reference }) => referenceSection(reference, 'essays',
         group.writingTask.starters, headings.get(section.titleInstructionRef) ?? profile.instructions[section.titleInstructionRef].text,
         namespace)).join('\n')
@@ -193,7 +204,7 @@ export function buildAnswerOnlyHtml({
   const slice = (first, last) => answers.filter(answer => answer.canonicalNumber >= first && answer.canonicalNumber <= last)
   const listeningAnswers = listening.state === 'captured'
     ? [...listening.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber) : []
-  let keys = materialization.profileId === 'zhejiang-legacy' ? '' : `${listening.state === 'captured' ? `<section data-answer-section="keys">
+  let keys = ['zhejiang-legacy', 'national-legacy'].includes(materialization.profileId) ? '' : `${listening.state === 'captured' ? `<section data-answer-section="keys">
 <h2>第一部分　听力（共两节，满分30分）</h2>
 ${rangeTable([0, 5, 10, 15].map(start => listeningAnswers.slice(start, start + 5)))}</section>` : ''}
 <section data-answer-section="keys"><h2>第二部分　阅读理解（共两节，满分50分）</h2>
@@ -208,12 +219,12 @@ ${rangeTable([[41, 45], [46, 50], [51, 55]].map(([first, last]) => slice(first, 
 ${keyTable(slice(56, 65), 5)}</section>`
   const referencesByGroup = new Map(sourceReferences.groups.map(group => [group.groupId, group]))
   const groups = materialization.groups.filter(group => group.writingTask)
-  let references = materialization.profileId === 'zhejiang-legacy' ? '' : `<h2>第四部分　写作（共两节，满分40分）</h2>`
+  let references = ['zhejiang-legacy', 'national-legacy'].includes(materialization.profileId) ? '' : `<h2>第四部分　写作（共两节，满分40分）</h2>`
     + groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'essays', group.writingTask.starters,
       null, [materialization.paperId, sourceDigest, candidateDigest])).join('\n')
     + (includeScoring ? groups.map(group => referenceSection(referencesByGroup.get(group.groupId), 'scoring', [], null,
       [materialization.paperId, sourceDigest, candidateDigest])).join('\n') : '')
-  if (materialization.profileId === 'zhejiang-legacy') {
+  if (['zhejiang-legacy', 'national-legacy'].includes(materialization.profileId)) {
     ;({ keys, references } = legacyAnswerSections({ canonicalPlan, materialization, authorityRef,
       sourceReferences, sourceDigest, candidateDigest, includeScoring }))
   }
@@ -268,6 +279,14 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
       : group.questions.map(question => question.questionId)
     if (!Array.isArray(detail.questions) || !expectedIds.length || detail.questions.length !== expectedIds.length
       || detail.questions.some((question, i) => question.id !== expectedIds[i])) throw new Error('题组问题与精确答案源不一致')
+    if (group?.family === 'error-correction') {
+      return `<section data-answer-section="error-correction"><h2>短文改错</h2>`
+        + group.questions.map(question => {
+          const answer = byId.get(question.questionId)
+          if (!answer) throw new Error('Correction source answer is missing')
+          return `<p>${question.sourceNumber === null ? '' : `${question.sourceNumber}. `}${textHtml(answer.value)}</p>`
+        }).join('') + '</section>'
+    }
     if (!Number.isSafeInteger(number + detail.questions.length - 1)) throw new Error('最终题号超出安全整数范围')
     const selected = detail.questions.map(question => {
       const answer = byId.get(question.id)

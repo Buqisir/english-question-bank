@@ -184,6 +184,7 @@ import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import {
   paperOpeningForConsumption,
+  coverNoticesCarrySourceNumbers,
   mockPaperCoverName,
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
@@ -237,6 +238,7 @@ type GroupModel =
         }>
       }
     }
+  | { kind: 'errorCorrection'; paragraphs: Array<{ paragraphId: string; nodes: Array<{ type: 'text'; text: string }> }> }
   | { kind: 'unsupported'; groupType: string }
   | { kind: 'error'; message: string }
 
@@ -536,6 +538,7 @@ function canonicalRailLabel(
     'reading.seven-choices': '七选五',
     'language.cloze': '完形',
     'language.grammar-fill': '语法',
+    'writing.short-error-correction': '短文改错',
     'writing.application': '应用文',
     'writing.continuation': '续写',
   }
@@ -1265,7 +1268,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             continue
           }
           try {
-            if (group.groupType === 'listening') {
+            if (selectedFamilyContractIdForGroup({ consumption: canonicalConsumption, groupId: block.groupId }) === 'error-correction') {
+              const correction = projectCanonicalConsumerGroup({ consumption: canonicalConsumption,
+                groupId: block.groupId, familyContractId: 'error-correction' }) as { paragraphs: Extract<GroupModel, { kind: 'errorCorrection' }>['paragraphs'] }
+              models[block.groupId] = { kind: 'errorCorrection', paragraphs: correction.paragraphs }
+            } else if (group.groupType === 'listening') {
               const selectedModel = selectedModels.get(block.groupId)
               if (!selectedModel) throw new Error('听力消费计划不完整')
               models[block.groupId] = selectedModel
@@ -1912,7 +1919,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           })
           continue
         }
-        canonicalWritingPart = null
+        canonicalWritingPart = canonicalConsumption && selectedFamilyContractIdForGroup({
+          consumption: canonicalConsumption, groupId: block.groupId,
+        }) === 'error-correction' ? parts.at(-1) ?? null : null
         const questionNos = group.questionIds
           .map((qid) => asset.content.questions[qid]?.questionNo)
           .filter((no): no is number => typeof no === 'number')
@@ -2454,6 +2463,13 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     if (entry.kind === 'error') {
       return <div className="paper-browse-placeholder">该题组暂不可预览：{entry.message}</div>
     }
+    if (entry.kind === 'errorCorrection') return (
+      <div className="canonical-error-correction" data-canonical-group-id={groupId}>
+        {entry.paragraphs.map(paragraph => <p key={paragraph.paragraphId} data-canonical-paragraph-id={paragraph.paragraphId}>
+          {paragraph.nodes.map(node => node.text).join('')}
+        </p>)}
+      </div>
+    )
     if (entry.kind === 'unsupported') {
       return (
         <div className="paper-browse-placeholder">
@@ -4158,8 +4174,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 )}
                 <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
                 <div className="canonical-paper-cover-notices" data-canonical-cover-notices="">
-                  {listeningOpening.notices.length > 0 && <strong>注意事项：</strong>}
-                  <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>
+                  {listeningOpening.notices.length > 0 && !coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening) && <strong>注意事项：</strong>}
+                  {coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening)
+                    ? listeningOpening.notices.map((notice) => <p key={notice}>{notice}</p>)
+                    : <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>}
                 </div>
               </header>
             )}

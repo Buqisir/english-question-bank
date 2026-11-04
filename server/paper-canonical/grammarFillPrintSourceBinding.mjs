@@ -57,7 +57,7 @@ export function loadCanonicalGrammarFillPrintChrome({
       candidate.familyContractId === 'grammar-fill'
       && candidate.mode === 'canonical',
   )
-  if (!selection) return null
+  if (!selection || !exportItems.some(item => selection.groupIds.includes(item.detail.id))) return null
   const isDraftComposition =
     canonicalConsumption?.composition?.kind === 'draft-paper'
   const publicGroupIdentity = grammarFillRhythm.publicArtifactOracle

@@ -109,6 +109,8 @@ const stringArrays = new Set(['material', 'starters'])
 
 export function enumerateSpellingTargets(materialization) {
   const targets = []
+  const correctionIds = new Set(materialization.groups?.filter(group => group.family === 'error-correction')
+    .flatMap(group => group.questions?.map(question => question.questionId) ?? []))
   function add(text, jsonPointer, sourceLocator) {
     if (typeof text === 'string' && /[A-Za-z]{2}/.test(text)) {
       targets.push({ jsonPointer, before: text, sourceLocator: sourceLocator ?? null })
@@ -120,6 +122,8 @@ export function enumerateSpellingTargets(materialization) {
       return
     }
     if (!node || typeof node !== 'object') return
+    // Exam errors are intentional task content, excluded from editorial overlays.
+    if (node.family === 'error-correction') return
     const source = node.source ?? node.authority ?? inheritedSource
     for (const [key, value] of Object.entries(node)) {
       const child = `${pointer}/${key}`
@@ -130,7 +134,9 @@ export function enumerateSpellingTargets(materialization) {
     }
   }
   function answers(entries, pointer) {
-    entries.forEach((answer, index) => add(answer.value, `${pointer}/${index}/value`, answer.authority))
+    entries.forEach((answer, index) => {
+      if (!correctionIds.has(answer.questionId)) add(answer.value, `${pointer}/${index}/value`, answer.authority)
+    })
   }
   walk(materialization.groups, '/groups')
   answers(materialization.answers ?? [], '/answers')
@@ -155,6 +161,14 @@ export function prepareSpellingReview(materializationBytes, policy = SPELLING_RE
 export function applySpellingReview(materializationBytes, reportBytes) {
   const original = JSON.parse(new TextDecoder().decode(materializationBytes))
   const report = JSON.parse(new TextDecoder().decode(reportBytes))
+  const correctionIds = new Set(original.groups?.filter(group => group.family === 'error-correction')
+    .flatMap(group => group.questions?.map(question => question.questionId) ?? []))
+  if (report.targets?.some(target => {
+    const match = /^\/groups\/(\d+)\//u.exec(target.jsonPointer ?? '')
+    const answer = /^\/answers\/(\d+)\/value$/u.exec(target.jsonPointer ?? '')
+    return match && original.groups?.[Number(match[1])]?.family === 'error-correction'
+      || answer && correctionIds.has(original.answers?.[Number(answer[1])]?.questionId)
+  })) fail('error-correction source text is immutable')
   const targets = enumerateSpellingTargets(original)
   if (!exactKeys(report, ['schemaVersion', 'materializationSha256', 'reviewedBy', 'reviewedAt', 'targets'])
     || !reviewPolicies.includes(report.schemaVersion)

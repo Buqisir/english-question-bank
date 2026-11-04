@@ -1,4 +1,5 @@
 @import '../../../../shared/papersurface/paperLayout.css';
+@import '../../../../shared/papersurface/errorCorrectionLayout.css';
 
 /**
  * PaperBrowsePage — layout CSS (刀B v1 → flow-panel 刀 1: 一页两姿态).

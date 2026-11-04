@@ -1,4 +1,4 @@
-import { materializationSlotSpecs, profileHeadingSpecs, validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { nationalLegacyProfile, materializationSlotSpecs, profileHeadingSpecs, validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { answerGridPairs as parseAnswerGridPairs, answerLineCells } from './objectiveAnswerGrid.mjs'
 import { execFileSync } from 'node:child_process'
 
@@ -2162,7 +2162,7 @@ function carrierIssues(issues, codePrefix) {
   }))
 }
 
-function legacySourcePresentation({ body, positions, question, issues }) {
+function legacySourcePresentation({ body, positions, question, issues, profileId }) {
   const { readingStart, languageStart, writingStart, readingFirst, readingSecond,
     languageFirst, languageSecond, writingFirst, writingSecond } = positions
   const listeningStart = exactPosition(body, /^第一部分\s*听力/u, 'sections.listening', issues, question.documentId)
@@ -2176,7 +2176,7 @@ function legacySourcePresentation({ body, positions, question, issues }) {
     text: body[index]?.text ?? '',
     source: sourceLocator(question.documentId, body[index]?.sourceIndex),
   })
-  const headings = profileHeadingSpecs().map((spec, index) => {
+  const headings = profileHeadingSpecs(profileId === 'national-legacy' ? nationalLegacyProfile : undefined).map((spec, index) => {
     const entry = located(indexes[index])
     const text = normalized(entry.text).replace(/\s+/gu, '')
     const total = Number(/满分(\d+(?:\.\d+)?)分/u.exec(text)?.[1])
@@ -2206,6 +2206,38 @@ function legacySourcePresentation({ body, positions, question, issues }) {
       source: located(listeningStart).source } }
 }
 
+function errorCorrectionGroup({ paperId, items, answerBody, documentId, answerDocumentId, issues }) {
+  const slotId = 'writing.short-error-correction'
+  const blocks = contentBlocks(items.filter(item => item.kind !== 'paragraph' || normalized(item.text)), {
+    paperId, slotId, documentId, issues, role: 'body', blanks: new Map(),
+  })
+  const start = answerBody.findIndex(item => /短文改错/u.test(item.text ?? ''))
+  const end = answerBody.findIndex((item, index) => index > start && /第二节.*书面表达/u.test(item.text ?? ''))
+  const selected = []
+  let collecting = false
+  for (const item of answerBody.slice(start + 1, end < 0 ? undefined : end)) {
+    for (let line of (item.text ?? '').split('\n')) {
+      if (/【答案】|^答案[:：]/u.test(line)) { collecting = true; line = line.replace(/^.*?(?:【答案】|答案[:：])/u, '') }
+      if (/【解析】|【详解】|^解析[:：]/u.test(line)) collecting = false
+      if (!collecting || !line.trim()) continue
+      const match = /^\s*(?:(\d+)[.．、]\s*)?(.+?)\s*$/u.exec(line)
+      if (match) selected.push({ sourceNumber: match[1] ? Number(match[1]) : null, value: match[2],
+        authority: sourceLocator(answerDocumentId, item.sourceIndex) })
+    }
+  }
+  if (selected.length !== 10) addIssue(issues, 'NCK1_OCR_ERROR_CORRECTION_ANSWERS_INCOMPLETE',
+    'answers.error-correction', `Expected ten literal official corrections, found ${selected.length}`, sourceRef(answerDocumentId))
+  const questions = selected.map((answer, index) => ({
+    questionId: `question:${paperId}:error-correction:${index + 1}`,
+    sourceNumber: answer.sourceNumber, canonicalNumber: answer.sourceNumber,
+    stem: '', options: [], blankId: null, prompt: null,
+    source: blocks[0]?.source ?? sourceLocator(documentId, items[0]?.sourceIndex),
+  }))
+  return { group: group(paperId, slotId, 'error-correction', blocks, questions, [], null),
+    answers: selected.map((answer, index) => ({ questionId: questions[index].questionId,
+      canonicalNumber: answer.sourceNumber, value: answer.value, authority: answer.authority })) }
+}
+
 export function produceNck1MaterializationFromStructures({
   paperId,
   documents,
@@ -2226,9 +2258,10 @@ export function produceNck1MaterializationFromStructures({
   writingRoleDeclarations = null,
   profileId = 'nck1',
 }) {
+  const national = profileId === 'national-legacy'
   const legacy = profileId !== 'nck1'
   const specs = legacy ? materializationSlotSpecs(profileId) : null
-  const range = id => { const slot = specs.find(slot => slot[0] === id); return { from: slot[2], to: slot[3] } }
+  const range = (id, slots = specs) => { const slot = slots.find(slot => slot[0] === id); return { from: slot[2], to: slot[3] } }
   const answerRange = legacy ? { first: Math.min(...specs.filter(slot => slot[2] !== null).map(slot => slot[2])),
     last: Math.max(...specs.filter(slot => slot[3] !== null).map(slot => slot[3])),
     lastChoice: range('grammar-fill').from - 1 } : undefined
@@ -2266,37 +2299,80 @@ export function produceNck1MaterializationFromStructures({
     body, /^第二节/u, 'sections.writing.second', issues, question?.documentId,
     [writingStart + 1, body.length],
   )
-  const officialWritingSamples = parseOfficialWritingSamples(
+  const writtenNumberOffset = national && readingFirst !== null && readingSecond !== null
+    && questionPositions(body, 1, readingFirst + 1, readingSecond).length === 1 ? 20 : 0
+  const sourceSpecs = writtenNumberOffset
+    ? specs.map(([slotId, family, from, to]) => [slotId, family,
+        from === null ? null : from - writtenNumberOffset,
+        to === null ? null : to - writtenNumberOffset])
+    : specs
+  const officialWritingSamples = national ? { application: null, continuation: null } : parseOfficialWritingSamples(
     answerBody,
     answer?.documentId,
     issues,
     writingRoleDeclarations,
   )
+  let correction = null
   let groups = []
   if (question && answer && coverage
     && [readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond]
     .every((position) => position !== null)) {
     groups = readingGroups({
       paperId, body, firstStart: readingFirst, secondStart: readingSecond,
-      ...(legacy ? { specs: specs.filter(slot => slot[1] === 'reading') } : {}),
+      ...(legacy ? { specs: sourceSpecs.filter(slot => slot[1] === 'reading') } : {}),
       documentId: question.documentId, issues,
     })
     groups.push(sevenChoices({
       paperId, body, start: readingSecond, end: languageStart,
-      ...(legacy ? range('seven-choices') : {}),
+      ...(legacy ? range('seven-choices', sourceSpecs) : {}),
       documentId: question.documentId, issues,
     }))
     groups.push(clozeGroup({
       paperId, body, start: languageFirst, end: languageSecond,
-      ...(legacy ? range('cloze') : {}),
+      ...(legacy ? range('cloze', sourceSpecs) : {}),
       documentId: question.documentId, issues,
     }))
     groups.push(blankGroup({
       paperId, slotId: 'grammar-fill', family: 'grammar-fill',
       items: body.slice(languageSecond + 2, writingStart),
-      ...(legacy ? range('grammar-fill') : { from: 56, to: 65 }),
+      ...(legacy ? range('grammar-fill', sourceSpecs) : { from: 56, to: 65 }),
       documentId: question.documentId, issues,
     }))
+    if (writtenNumberOffset) {
+      const writtenQuestions = groups.flatMap(group => group.questions)
+      if (writtenQuestions.length !== 50 || writtenQuestions.some((question, index) =>
+        question.canonicalNumber !== index + 1 || question.sourceNumber !== index + 1)) {
+        addIssue(issues, 'NCK1_DOCX_SOURCE_NUMBER_MISMATCH', 'groups',
+          'National written renumbering requires all source Questions 1-50 exactly in order', sourceRef(question.documentId))
+      } else {
+        const blankIds = new Map()
+        for (const question of writtenQuestions) {
+          question.canonicalNumber += writtenNumberOffset
+          question.questionId = `question:${paperId}:${question.canonicalNumber}`
+          if (question.blankId !== null) {
+            const blankId = `blank:${paperId}:${question.canonicalNumber}`
+            blankIds.set(question.blankId, blankId)
+            question.blankId = blankId
+          }
+        }
+        const rebindBlanks = node => {
+          if (!node || typeof node !== 'object') return
+          if (node.kind === 'blank_ref' && blankIds.has(node.blankId)) node.blankId = blankIds.get(node.blankId)
+          else for (const value of Object.values(node)) rebindBlanks(value)
+        }
+        for (const group of groups) rebindBlanks(group.blocks)
+      }
+    }
+    if (national) {
+      correction = errorCorrectionGroup({ paperId, items: body.slice(writingFirst + 1, writingSecond),
+        answerBody, documentId: question.documentId, answerDocumentId: answer.documentId, issues })
+      groups.push(correction.group)
+      const writing = writingGroup({ paperId, slotId: 'writing.application', family: 'application-writing',
+        items: body.slice(writingSecond + 1), documentId: question.documentId, officialModelAnswer: null, issues })
+      if (writing.writingTask?.wordCountTarget !== 100) addIssue(issues, 'NCK1_OCR_PROFILE_WORD_COUNT_MISMATCH',
+        'writing.application', 'National legacy source must declare 100 words', sourceRef(question.documentId))
+      groups.push(writing)
+    } else {
     groups.push(writingGroup({
       paperId, slotId: 'writing.application', family: 'application-writing',
       items: body.slice(writingFirst + 1, writingSecond),
@@ -2311,9 +2387,42 @@ export function produceNck1MaterializationFromStructures({
       officialModelAnswer: officialWritingSamples.continuation,
       issues,
     }))
+    }
   }
-  const answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues, answerRange)
+  let answerMap
+  let listeningAnswerMap
+  if (writtenNumberOffset) {
+    const answerReadingStart = exactPosition(answerBody, /^第二部分\s*阅读/u,
+      'answers.sections.reading', issues, answer?.documentId)
+    const answerWritingStart = exactPosition(answerBody, /^第四部分\s*写作/u,
+      'answers.sections.writing', issues, answer?.documentId)
+    const answerListeningStart = answerReadingStart === null ? null : exactPosition(
+      answerBody, /^第一部分\s*听力/u, 'answers.sections.listening', issues, answer?.documentId,
+      [0, answerReadingStart],
+    )
+    const writtenAnswerBody = answerReadingStart !== null && answerWritingStart !== null
+      && answerReadingStart < answerWritingStart
+      ? answerBody.slice(answerReadingStart + 1, answerWritingStart) : []
+    if (answerReadingStart !== null && answerWritingStart !== null && answerReadingStart >= answerWritingStart) {
+      addIssue(issues, 'NCK1_DOCX_SECTION_AMBIGUOUS', 'answers.sections.writing',
+        'The official written answer section must run from Part Two reading to Part Four writing',
+        sourceRef(answer?.documentId))
+    }
+    const sourceAnswerRange = { first: answerRange.first - writtenNumberOffset,
+      last: answerRange.last - writtenNumberOffset, lastChoice: answerRange.lastChoice - writtenNumberOffset }
+    answerMap = new Map([...parseOfficialAnswers(writtenAnswerBody, answer?.documentId, issues, sourceAnswerRange)]
+      .map(([number, answer]) => [number + writtenNumberOffset, answer]))
+    listeningAnswerMap = parseOfficialAnswers(
+      answerListeningStart !== null && answerReadingStart !== null
+        ? answerBody.slice(answerListeningStart + 1, answerReadingStart) : [],
+      answer?.documentId, issues, { first: 1, last: 20, lastChoice: 20 },
+    )
+  } else {
+    answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues, answerRange)
+    listeningAnswerMap = answerMap
+  }
   const answers = activeAnswers(paperId, answerMap, issues, answer?.documentId, answerRange)
+  if (correction) answers.push(...correction.answers)
   const tables = groups.flatMap((candidate) => candidate.blocks.filter((block) => block.kind === 'table'))
   if (
     tables.some((table) => table.source.kind !== 'page_region')
@@ -2381,7 +2490,7 @@ export function produceNck1MaterializationFromStructures({
         },
       }
     : listeningMaterialization({
-        paperId, questionBody: body, readingStart, answerBody, answerMap,
+        paperId, questionBody: body, readingStart, answerBody, answerMap: listeningAnswerMap,
         questionDocumentId: question.documentId, answerDocumentId: answer.documentId,
         coverageDocumentId: sourceCoverage.documentId, issues,
         listeningSource,
@@ -2398,7 +2507,7 @@ export function produceNck1MaterializationFromStructures({
     if (issues[index].code === 'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS') issues.splice(index, 1)
   }
   const materialization = {
-    schemaVersion: legacy ? 'nck1-source-materialization-v14' : groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
+    schemaVersion: national ? 'nck1-source-materialization-v15' : legacy ? 'nck1-source-materialization-v14' : groups.some(group => group.questions.some(question => question.options.some(option => option.figure)))
       ? 'nck1-source-materialization-v3'
       : selectedMedia.length > 0
       ? 'nck1-source-materialization-v2'
@@ -2416,10 +2525,21 @@ export function produceNck1MaterializationFromStructures({
   if (legacy && groups.length) {
     materialization.sourcePresentation = legacySourcePresentation({ body, positions: { readingStart, languageStart, writingStart,
       readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond },
-      question, issues })
+      question, issues, profileId })
+    if (national) {
+      const writtenQuestions = groups.filter(group => group.family !== 'error-correction').flatMap(group => group.questions)
+      if (writtenQuestions.length !== 50 || writtenQuestions.some((question, index) =>
+        question.canonicalNumber !== index + 21 || question.sourceNumber !== question.canonicalNumber - writtenNumberOffset)) {
+        addIssue(issues, `${codePrefix}_SOURCE_NUMBER_MISMATCH`, 'groups',
+          'National written Questions must map source 1-50 to 21-70, or retain source 21-70 throughout',
+          sourceRef(question.documentId))
+      }
+    }
     for (const group of groups) for (const question of group.questions) {
-      if (question.sourceNumber !== question.canonicalNumber) addIssue(issues, `${codePrefix}_SOURCE_NUMBER_MISMATCH`,
-        `questions.${question.canonicalNumber}`, 'Legacy source numbering must be retained exactly', question.source)
+      if ((!national || group.family === 'error-correction') && question.sourceNumber !== question.canonicalNumber) {
+        addIssue(issues, `${codePrefix}_SOURCE_NUMBER_MISMATCH`,
+          `questions.${question.canonicalNumber}`, 'Legacy source numbering must be retained exactly', question.source)
+      }
     }
   }
   if (issues.length === 0) {
@@ -2428,6 +2548,7 @@ export function produceNck1MaterializationFromStructures({
     }
     materialization.issues = carrierIssues(issues, codePrefix)
   }
+  if (national) materialization.issues = carrierIssues(issues, codePrefix)
   const listeningSourcePartition = {
     schemaVersion: 'nck1-listening-source-partition-v1',
     paperId,

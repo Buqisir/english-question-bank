@@ -343,6 +343,10 @@ function proofreadPlan(ctx, workers) {
       `按 scripts/import-pipeline/ocr-proofread-rules.md，对照 imports/ocr-proofread/${ctx.paperId}/pages/<页键>.png 原图，`,
       `逐页修改 imports/ocr-proofread/${ctx.paperId}/drafts/<页键>.json；再按规则“顺带记录”一节写`,
       `imports/ocr-proofread/${ctx.paperId}/source-flags/${keys[0]}.json（pages 填 ${JSON.stringify(keys)}）。`,
+      ...(ctx.state.data.formatProfileBinding?.profileId === 'national-legacy' ? [
+        `全国旧卷 answers 用稳定题目 ID 作键：听力 listening:1 至 listening:20；笔试 question:${ctx.paperId}:21 至 :70；改错 question:${ctx.paperId}:error-correction:1 至 :10。`,
+        'OCR 草稿保留原始题号；笔试若从 1 重新编号，答案 ID 对应正式题号加 20。改错保持原答案标签或无标签，不编造 71–80。',
+      ] : []),
       `自检：PATH="${path.dirname(process.execPath)}:$PATH" node scripts/import-pipeline/ocr-proofread.mjs compile ${ctx.paperId} --pages ${keys.join(',')}`,
       '只写上述文件，不联网，不运行其他写命令。完成后按规则“完成后回报”简短回报。',
     ].join('\n'),
@@ -464,9 +468,11 @@ function answerCheck(ctx, verified) {
   const expected = [...(materialization.listening?.answers || []), ...(materialization.answers || [])]
   const transcribed = Object.assign({}, ...readFlags(ctx).map((flag) => flag.answers || {}))
   const entries = expected.map((answer) => ({
+    ...(materialization.profileId === 'national-legacy' ? { questionId: answer.questionId ?? `listening:${answer.canonicalNumber}` } : {}),
     number: answer.canonicalNumber,
     answerKey: answer.value,
-    transcribed: transcribed[String(answer.canonicalNumber)] ?? null,
+    transcribed: transcribed[materialization.profileId === 'national-legacy'
+      ? answer.questionId ?? `listening:${answer.canonicalNumber}` : String(answer.canonicalNumber)] ?? null,
   }))
   const missing = entries.filter((entry) => entry.transcribed === null).map((entry) => entry.number)
   const mismatches = entries.filter((entry) => entry.transcribed !== null
@@ -1342,6 +1348,12 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
   })
   if (hasListening(ctx)) await step(ctx, 'listening-review', () => installListening(ctx))
   await step(ctx, 'ocr-correction-report', async () => {
+    const reportFile = path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json')
+    if (ctx.state.data.formatProfileBinding?.profileId === 'national-legacy' && existsSync(reportFile)) {
+      // Retain source-authored entries only after the existing exact-bound projection validates them.
+      buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+      return { entries: readJson(reportFile).entries.length, retained: true }
+    }
     const entries = await run(ctx, 'report-entries', cli('ocr-proofread.mjs', 'report-entries', ctx.paperId))
     archive(ctx, path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json'))
     await run(ctx, 'finalize-ocr-report', cli('review.mjs', 'finalize-ocr-correction-report', ctx.paperId,

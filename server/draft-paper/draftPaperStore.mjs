@@ -543,6 +543,14 @@ export function createDraftPaperStore({
     exportItems,
     canonicalConsumption,
   ) {
+    const applicationGroupIds = new Set(
+      canonicalConsumption.selections.find(
+        (selection) =>
+          selection.familyContractId === 'application-writing'
+          && selection.mode === 'canonical',
+      )?.groupIds || [],
+    )
+    if (!exportItems.some(item => applicationGroupIds.has(item.detail.id))) return new Set()
     const reject = (message) => {
       const error = new Error(message)
       error.code = 'CANONICAL_CONSUMPTION_REJECTED'
@@ -585,13 +593,6 @@ export function createDraftPaperStore({
       reject,
       label: 'Canonical visible page-break source',
     })
-    const applicationGroupIds = new Set(
-      canonicalConsumption.selections.find(
-        (selection) =>
-          selection.familyContractId === 'application-writing'
-          && selection.mode === 'canonical',
-      )?.groupIds || [],
-    )
     return new Set(source.asset.content.blocks.flatMap((block, index, blocks) => {
       if (
         block.type !== 'group'
@@ -1697,11 +1698,14 @@ export function createDraftPaperStore({
       let rendered
       if (edition === 'answerOnly') {
         const paperName = draftPaper.title || '未命名英语练习卷'
-        const wholePaper = selected.length === 11
-          && (draftPaper.questionNumberStart ?? 1) === 1
+        const fullSource = sourceByPaper.size === 1 ? [...sourceByPaper.values()][0] : null
+        const sourceGroupCount = fullSource ? fullSource.materialization.groups.length
+          + (fullSource.materialization.listening.state === 'captured' ? 2 : 0) : 0
+        const wholePaper = (draftPaper.questionNumberStart ?? 1) === 1
+          && selected.length === sourceGroupCount
           && ownsCompletePaperOpening(canonicalConsumption, selected.map(item => item.groupId))
-        const html = wholePaper && sourceByPaper.size === 1 && [...sourceByPaper.values()][0]
-          ? buildAnswerOnlyHtml({ ...[...sourceByPaper.values()][0], paperName })
+        const html = wholePaper && fullSource
+          ? buildAnswerOnlyHtml({ ...fullSource, paperName })
           : buildAssembledAnswerOnlyHtml({ paperName, questionNumberStart: draftPaper.questionNumberStart ?? 1,
             items: exportItems.map(item => {
               const consumption = canonicalSourceConsumptionForGroup(canonicalConsumption, item.detail.id)

@@ -13,13 +13,14 @@ import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
 import { validateMediaPresentation } from './mediaPresentation.mjs'
 import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
-import { digestJson, sha256, stableStringify } from './stable.mjs'
+import { digestJson, exactKeys, sha256, stableStringify } from './stable.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
   'cloze',
   'grammar-fill',
+  'error-correction',
   'seven-choices',
   'reading',
   'application-writing',
@@ -51,7 +52,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(input.consumption.authorityRef?.manifestVersion)
+  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -1399,16 +1400,17 @@ function selectOccurrence(input) {
   }
   const authorityRef = consumption?.authorityRef
   const requiresOccurrenceIntegrity =
-    familyContractId === 'listening'
+    familyContractId === 'error-correction'
+    || familyContractId === 'listening'
     || familyContractId === 'cloze'
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1482,10 +1484,34 @@ export function projectCanonicalConsumerGroup(input) {
     throw rejected(`Canonical occurrence ${groupId} belongs to another family`)
   }
   if (occurrence.sourcePresentation !== undefined
-    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(input.consumption.authorityRef?.manifestVersion)
+    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(input.consumption.authorityRef?.manifestVersion)
       || !validCanonicalSourcePresentation(occurrence.sourcePresentation)
-      || ((occurrence.sourcePresentation.headings || occurrence.sourcePresentation.opening) && input.consumption.authorityRef?.manifestVersion !== '82'))) {
+      || ((occurrence.sourcePresentation.headings || occurrence.sourcePresentation.opening) && !['82', '83'].includes(input.consumption.authorityRef?.manifestVersion)))) {
     throw rejected(`Canonical occurrence ${groupId} has invalid source presentation`)
+  }
+  if (familyContractId === 'error-correction') {
+    if (input.consumption.authorityRef?.manifestVersion !== '83'
+      || occurrence.blanks?.length !== 0 || occurrence.numbering?.length !== 0
+      || occurrence.errorCorrectionQuestions?.length !== 10
+      || new Set(occurrence.errorCorrectionQuestions.map(question => question.questionId)).size !== 10
+      || occurrence.errorCorrectionQuestions.some(question =>
+        !exactKeys(question, ['questionId', 'sourceNumber'])
+        || typeof question.questionId !== 'string' || !question.questionId
+        || !(question.sourceNumber === null || Number.isInteger(question.sourceNumber) && question.sourceNumber > 0))) {
+      throw rejected(`Correction occurrence ${groupId} has invalid identities`)
+    }
+    const paragraphs = occurrence.content.blocks.map(block => {
+      if (block.kind !== 'paragraph' || !Array.isArray(block.inlines)
+        || block.inlines.some(node => node.kind !== 'text' || typeof node.text !== 'string' || node.marks?.length)) {
+        throw rejected('Correction text must preserve plain source paragraphs without blanks')
+      }
+      return { paragraphId: block.nodeId, nodes: block.inlines.map(node => ({ type: 'text', text: node.text })) }
+    })
+    const semantic = { paperId: input.consumption.paperId, groupId, familyContractId, paragraphs,
+      questions: occurrence.errorCorrectionQuestions.map(question => ({
+        questionId: question.questionId, questionNo: question.sourceNumber, options: [],
+      })) }
+    return Object.freeze({ groupType: 'errorCorrection', ...semantic, semanticSignature: digestJson(semantic) })
   }
   if (familyContractId === 'reading') {
     return projectReadingConsumerGroup(input, occurrence)
@@ -1560,7 +1586,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,
@@ -1874,6 +1900,11 @@ export function projectCanonicalWritingChrome({
       === target.canonicalGroup.paperChrome.part.partId,
   )
   const targetPart = target.canonicalGroup.paperChrome.part
+  const structure = consumption.visibleStructure ?? []
+  const partStart = structure.findIndex(node => node.kind === 'part' && node.partId === targetPart.partId)
+  const groupIndex = structure.findIndex(node => node.kind === 'group' && node.groupId === groupId)
+  const correctionOwnsPart = partStart >= 0 && structure.slice(partStart + 1, groupIndex).some(node =>
+    node.kind === 'group' && node.familyContractId === 'error-correction' && orderedGroupIds.includes(node.groupId))
   if (
     samePart.length === 0
     || samePart.some(
@@ -1907,6 +1938,7 @@ export function projectCanonicalWritingChrome({
 
   return Object.freeze({
     part: samePart[0].groupId === groupId
+      && !correctionOwnsPart
       && targetPart.renderPolicy === 'render'
       ? structuredClone(targetPart)
       : null,
