@@ -225,6 +225,7 @@ const registry = {
   'scripts/verify-error-copy-mainline.mjs',
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',
+  'scripts/verify-agent-api.mjs',
   'scripts/verify-ops-mcp.mjs',
   'scripts/verify-owner-gate.mjs',
   'scripts/verify-user-scope.mjs',
@@ -280,6 +281,7 @@ const paperDataScripts = [
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
 ]
 const securityScripts = [
+  'scripts/verify-agent-api.mjs',
   ...storageScripts,
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',

@@ -1,4 +1,5 @@
 import { Tag } from '../../icons'
+import { AgentTokens } from './AgentTokens'
 import type { BackfillTopicLabelsResult } from '../../services/questionGroups'
 import './adminWorkbench.css'
 
@@ -52,6 +53,7 @@ export function AdminWorkbench({
           {backfillError ? `${backfillError} 可再试一次。` : null}
         </p>
       </section>
+      <AgentTokens />
     </main>
   )
 }

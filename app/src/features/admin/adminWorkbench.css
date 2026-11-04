@@ -51,3 +51,39 @@
   line-height: 1.5;
   margin: 0;
 }
+
+.agent-tokens {
+  margin-top: 32px;
+  color: var(--eqb-color-text);
+  font-size: 13px;
+}
+.agent-tokens h2, .agent-token-dialog h2 { font-size: 14px; margin: 0 0 8px; }
+.agent-tokens p, .agent-token-dialog p { color: var(--eqb-color-text-muted); line-height: 1.5; }
+.agent-tokens form, .agent-token-dialog > div { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
+.agent-tokens label { display: grid; gap: 8px; }
+.agent-tokens input, .agent-tokens select {
+  box-sizing: border-box;
+  max-width: 100%;
+  font: inherit;
+  padding: 8px 12px;
+  border: 1px solid var(--eqb-color-border);
+  border-radius: 8px;
+  color: var(--eqb-color-text);
+  background: var(--eqb-color-paper);
+}
+.agent-tokens input::placeholder { color: var(--eqb-color-text-muted); }
+.agent-tokens ul { list-style: none; padding: 0; margin: 16px 0 0; }
+.agent-tokens li { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--eqb-color-border-subtle); }
+.agent-tokens li > div { min-width: 0; overflow-wrap: anywhere; }
+.agent-tokens li span { margin-left: 8px; color: var(--eqb-color-text-muted); }
+.agent-tokens li small { display: block; margin-top: 4px; font-size: 12px; color: var(--eqb-color-text-muted); }
+.agent-token-secret { margin-top: 16px; padding: 16px; background: var(--eqb-color-paper); border: 1px solid var(--eqb-color-border); border-radius: 12px; }
+.agent-token-secret code { display: block; margin-bottom: 12px; overflow-wrap: anywhere; user-select: all; }
+.agent-token-dialog { box-sizing: border-box; width: min(440px, calc(100% - 32px)); padding: 24px; border: 1px solid var(--eqb-color-border); border-radius: 12px; color: var(--eqb-color-text); background: var(--eqb-color-paper); font-size: 13px; overflow-wrap: anywhere; }
+.agent-token-dialog::backdrop { background: color-mix(in srgb, var(--eqb-color-text) 32%, transparent); }
+.agent-tokens button:focus-visible, .agent-tokens input:focus-visible, .agent-tokens select:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
+@media (max-width: 560px) {
+  .agent-tokens form { align-items: stretch; }
+  .agent-tokens label:first-child { flex-basis: 100%; }
+  .agent-tokens li { flex-wrap: wrap; }
+}

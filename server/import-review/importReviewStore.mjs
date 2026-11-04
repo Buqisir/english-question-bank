@@ -1778,6 +1778,37 @@ export function createImportReviewStore({
     return { revision, preview, compatibility: withDb(false, db => compatibilityFor(db, revision)) }
   }
 
+  // Agent discovery reads the retained preview, never re-compiles historical
+  // Candidates or computes compatibility. Check its existing identity binding
+  // and read only the small sealed config for provenance.
+  function listAgentReviewPreviews() {
+    const rows = withDb(false, db => db.prepare(`SELECT r.*, p.payload_json,
+      p.payload_digest, p.bundle_digest AS preview_bundle_digest,
+      p.renderer_build_id AS preview_renderer_build_id
+      FROM import_review_revisions r
+      LEFT JOIN import_review_product_previews p ON p.revision_id = r.id
+      WHERE r.state = 'awaiting_review'
+      ORDER BY r.paper_id, r.revision_number DESC`).all())
+    const seen = new Set()
+    const results = []
+    for (const row of rows) {
+      const revision = revisionRow(row)
+      if (revision.reviewKind !== 'candidate' || seen.has(revision.paperId)) continue
+      seen.add(revision.paperId)
+      if (!row.payload_json) throw storeError('IMPORT_REVIEW_PREVIEW_NOT_PREPARED', 'Original preview evidence is missing')
+      const preview = JSON.parse(row.payload_json)
+      if (row.preview_bundle_digest !== revision.bundleDigest
+        || row.preview_renderer_build_id !== revision.rendererBuildId
+        || digestJson(preview) !== row.payload_digest) {
+        throw storeError('IMPORT_REVIEW_PREVIEW_IDENTITY_INVALID', 'Stored preview identity differs from the finalized revision')
+      }
+      const { filePath } = verifiedFileForRead(revision.id, 'config.json')
+      const { provenance } = JSON.parse(readFileSync(filePath, 'utf8'))
+      results.push({ revision, preview, provenance })
+    }
+    return results
+  }
+
   function originalReviewEvidenceForRevision(revisionId) {
     const { revision, preview } = productPreviewForRevision(revisionId)
     const baseline = withDb(false, db => checkedStoredReviewSubject(db.prepare(
@@ -3556,6 +3587,7 @@ export function createImportReviewStore({
     paperDetail,
     prepareProductPreview,
     productPreviewForRevision,
+    listAgentReviewPreviews,
     originalReviewEvidenceForRevision,
     projectionForRevision,
     publishedReview,
